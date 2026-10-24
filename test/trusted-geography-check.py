@@ -140,6 +140,36 @@ class TrustedCheckControls(unittest.TestCase):
         self.assertEqual(report['validation_scope'], 'selected-native-map-cells')
         self.assertNotIn('checkpoint', report)
 
+    def test_real_main_keeps_accepted_withdrawal_result(self):
+        # Only the child result is controlled. The real main, trusted checkout,
+        # joint result handling, gate status and output publication all execute.
+        bank = {'path': 'bank.json', 'bytes': 123, 'sha256': 'c' * 64}
+        other = {**bank, 'sha256': 'd' * 64}
+        changes = [{'row': 2, 'start': 3, 'end': 6, 'previous_owner': 'A', 'candidate_owner': None}]
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'validated-native-map-transition',
+                  'candidate_code_executed': False, 'lost_or_reassigned_cells': 3, 'intervals': changes,
+                  'changes': changes, 'added_cells': 0, 'removed_cells': 3, 'reassigned_cells': 0, 'affected_rows': 1,
+                  'baseline_selection': {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': bank},
+                  'candidate_selection': {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': other},
+                  'checkpoint_custody': {'accepted_bank': bank, 'candidate_bank': other},
+                  'native_row_scope': {'compared_rows': 8, 'changed_rows': [2], 'added_cells': 0, 'representation_migration': False}}
+        self.f.write('data/ownership-selection.json', native['baseline_selection'])
+        entry = self.f.repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'
+        entry.write_text('const native=' + json.dumps(native) + '; native.checkpoint_custody.baseline_commit=process.argv[4];'
+                         'process.stdout.write(JSON.stringify({kind:"trusted-selected-joint-comparison-v1",candidate_code_executed:false,'
+                         'mode:"accepted-final-map-comparison-v1",native,derived_checkpoint:null}));')
+        self.f.baseline = self.f.commit('controlled-accepted-child-boundary')
+        self.f.write('data/ownership-selection.json', native['candidate_selection'])
+        candidate = self.f.commit('withdrawn-map')
+        result, report = self.f.run(candidate)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(report['status'], 'validated-native-map-transition')
+        self.assertEqual(report['gate_status'], 'passed')
+        self.assertEqual(report['selected_native_report']['lost_or_reassigned_cells'], 3)
+        self.assertEqual(report['regressions'], 0)
+        self.assertFalse(report['source_approval'])
+        self.assertNotIn('checkpoint', report)
+
     def test_fatal_git_child_preserves_original_stderr_without_publishing_a_report(self):
         result, report = self.f.run('f' * 40)
         self.assertEqual(result.returncode, 1)
@@ -508,7 +538,7 @@ def receipt_run(directory):
 
 
 
-class UnchangedSelectedApplicabilityControls(unittest.TestCase):
+class FinalBankRunnerControls(unittest.TestCase):
     def setUp(self):
         import importlib.util
         from unittest import mock
@@ -521,44 +551,9 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
                       'baseline_commit': self.baseline, 'candidate_commit': self.candidate,
                       'trusted_reader_policy_commit': self.baseline, 'candidate_code_executed': False}
 
-    def test_same_commit_never_shortcuts_genuine_baseline_proof(self):
-        with self.mock.patch.object(self.g, 'run_applicability_collector') as child:
-            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.baseline))
-            child.assert_not_called()
 
-    def test_helper_accepts_only_bound_success_and_falls_back_on_unknown(self):
-        values = [self.proof, {**self.proof, 'status': 'full-check-required'},
-                  {**self.proof, 'baseline_commit': self.candidate},
-                  {**self.proof, 'candidate_commit': self.baseline},
-                  {**self.proof, 'candidate_code_executed': True},
-                  {**self.proof, 'trusted_reader_policy_commit': self.candidate}, [], 'malformed']
-        for value in values:
-            raw = json.dumps(value).encode()
-            with self.subTest(value=value), self.mock.patch.object(self.g, 'run_applicability_collector',
-                    return_value=subprocess.CompletedProcess([], 0, raw, b'')):
-                result = self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate)
-                self.assertEqual(result, self.proof if value == self.proof else None)
 
-    def test_helper_failures_and_malformed_output_preserve_full_validation(self):
-        for output in [subprocess.CompletedProcess([], 1, json.dumps(self.proof).encode(), b''),
-                       subprocess.CompletedProcess([], 0, b'x' * (2 * 1024 * 1024 + 1), b''),
-                       subprocess.CompletedProcess([], 0, b'{', b'')]:
-            with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=output):
-                self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
-        for error in [OSError('missing'), subprocess.TimeoutExpired('node', 60)]:
-            with self.mock.patch.object(self.g, 'run_applicability_collector', side_effect=error):
-                self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
 
-    def test_large_complete_applicability_output_retains_its_exact_binding(self):
-        proof = {**self.proof, 'immutable_descriptors': [{'path': 'exact-retained-path', 'note': 'x' * (3 * 1024 * 1024)}]}
-        raw = json.dumps(proof).encode()
-        with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
-                subprocess.CompletedProcess([], 0, raw, b'')):
-            self.assertEqual(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate), proof)
-        proof['candidate_commit'] = self.baseline
-        with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
-                subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'')):
-            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
 
     def test_large_prefetch_summary_keeps_completion_truth_and_owned_cleanup(self):
         import io
@@ -581,142 +576,13 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
             kill.assert_called_once_with(child.pid, self.g.signal.SIGKILL)
             self.assertEqual(child.communicate.call_args_list, [self.mock.call(timeout=120), self.mock.call(timeout=5)])
 
-    def test_decline_diagnostic_preserves_safe_category_and_operation_only(self):
-        import io
-        reason = 'immutable-object-unavailable:merge-base:' + self.baseline + ':secret-value'
-        proof = {**self.proof, 'status': 'full-check-required', 'reason': reason}
-        stream = io.StringIO()
-        with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
-                subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'secret stderr')), \
-             self.mock.patch.object(self.g.sys, 'stderr', stream):
-            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
-        diagnostic = json.loads(stream.getvalue())['geography_applicability']
-        self.assertEqual(diagnostic, {'status': 'full-check-required', 'reason': 'collector-declined',
-                         'collector_reason': 'immutable-object-unavailable', 'operation': 'merge-base'})
-        self.assertNotIn('secret', stream.getvalue())
-        self.assertNotIn(self.baseline, stream.getvalue())
 
-    def test_decline_diagnostics_bound_unknown_text_timeout_and_invalid_binding(self):
-        import io
-        cases = [({**self.proof, 'status': 'full-check-required', 'reason': 'secret-' * 10000}, 'collector-declined'),
-                 ({**self.proof, 'baseline_commit': self.candidate}, 'collector-binding-invalid')]
-        for proof, expected in cases:
-            stream = io.StringIO()
-            with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
-                    subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'secret stderr')), \
-                 self.mock.patch.object(self.g.sys, 'stderr', stream):
-                self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
-            self.assertEqual(json.loads(stream.getvalue())['geography_applicability']['reason'], expected)
-            self.assertLess(len(stream.getvalue()), 256)
-            self.assertNotIn('secret', stream.getvalue())
-        stream = io.StringIO()
-        with self.mock.patch.object(self.g, 'run_applicability_collector',
-                                   side_effect=subprocess.TimeoutExpired('secret-command', 120)), \
-             self.mock.patch.object(self.g.sys, 'stderr', stream):
-            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
-        self.assertEqual(json.loads(stream.getvalue())['geography_applicability']['reason'], 'collector-timeout')
-        self.assertNotIn('secret', stream.getvalue())
 
-    def test_metadata_default_uses_outer_job_deadline_and_still_reaps_owned_group(self):
-        child = self.mock.Mock(pid=123456, returncode=0)
-        child.communicate.return_value = (json.dumps(self.proof).encode(), b'')
-        with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child), \
-             self.mock.patch.object(self.g.os, 'killpg') as kill:
-            self.assertEqual(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate), self.proof)
-        self.assertEqual(child.communicate.call_args_list, [self.mock.call(timeout=None), self.mock.call(timeout=5)])
-        kill.assert_called_once_with(child.pid, self.g.signal.SIGKILL)
 
-    def test_metadata_timeout_reaps_owned_git_group_before_fallback(self):
-        child = self.mock.Mock(pid=123456, returncode=-9)
-        child.communicate.side_effect = [subprocess.TimeoutExpired('node', 60), (b'', b'')]
-        with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child) as start, \
-             self.mock.patch.object(self.g.os, 'killpg') as kill:
-            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
-            self.assertTrue(start.call_args.kwargs['start_new_session'])
-            kill.assert_called_once_with(child.pid, self.g.signal.SIGKILL)
-            self.assertEqual(child.communicate.call_args.kwargs['timeout'], 5)
 
-    def test_failed_owned_group_cleanup_blocks_instead_of_resuming_full_checks(self):
-        child = self.mock.Mock(pid=123456, returncode=0)
-        child.communicate.return_value = (json.dumps(self.proof).encode(), b'')
-        with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child), \
-             self.mock.patch.object(self.g.os, 'killpg', side_effect=PermissionError('cannot reap')):
-            with self.assertRaisesRegex(RuntimeError, 'Cannot terminate owned applicability'):
-                self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate)
 
-    def test_positive_identity_precedes_prefetch_and_scientific_checks(self):
-        g = self.g
-        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
-             self.mock.patch.object(g, 'inventory', return_value=['same']), \
-             self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=self.proof), \
-             self.mock.patch.object(g, 'prefetch_declared_inputs', side_effect=AssertionError('prefetch ran')), \
-             self.mock.patch.object(g.subprocess, 'check_output', side_effect=AssertionError('science ran')):
-            result = g.inspect(ROOT, self.baseline, self.candidate, prefetch=True)
-        self.assertEqual(result['status'], 'not-applicable')
-        self.assertIs(result['unchanged_selected_inputs'], self.proof)
-        self.assertNotIn('selected_native_report', result)
-        self.assertNotIn('selected_continuous_report', result)
 
-    def test_software_identity_uses_actual_executing_commit_and_never_runs_science_or_mints_checkpoint(self):
-        proof = {**self.proof, 'trusted_reader_policy_commit': self.candidate}
-        g = self.g
-        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='actual-inventory'), \
-             self.mock.patch.object(g, 'inventory', return_value=['same']), \
-             self.mock.patch.object(g, 'run_applicability_collector', return_value=
-                subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'')) as child, \
-             self.mock.patch.object(g, 'prefetch_declared_inputs', side_effect=AssertionError('prefetch ran')), \
-             self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('checkpoint ran')), \
-             self.mock.patch.object(g.subprocess, 'check_output', side_effect=AssertionError('science ran')):
-            result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate,
-                               prefetch=True, checkpoint_destination=ROOT / 'must-not-create')
-        self.assertEqual(result['status'], 'not-applicable')
-        self.assertEqual(result['unchanged_selected_inputs'], proof)
-        self.assertEqual(result['trusted_code_commit'], self.candidate)
-        self.assertEqual(result['trusted_code_inventory_sha256'], 'actual-inventory')
-        self.assertTrue(result['candidate_code_executed'])
-        self.assertEqual(child.call_args.args[0][-3:], [self.baseline, self.candidate, self.candidate])
-        self.assertNotIn('checkpoint', result)
-        self.assertNotIn('selected_native_report', result)
-        with self.mock.patch.object(g, 'run_applicability_collector', return_value=
-                subprocess.CompletedProcess([], 0, json.dumps(self.proof).encode(), b'')):
-            self.assertIsNone(g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate,
-                                                       code_commit=self.candidate))
 
-    def test_changed_selected_inputs_retain_the_existing_native_validation_route(self):
-        g = self.g
-        for version in [1, 2]:
-            with self.subTest(selector_version=version):
-                selection = {'version': version}
-                if version == 2:
-                    selection['kind'] = 'selected-final-native-bank-v2'
-                native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
-                          'candidate_code_executed': version == 2, 'lost_or_reassigned_cells': 0,
-                          'intervals': [], 'candidate_selection': selection}
-                with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
-                     self.mock.patch.object(g, 'inventory', return_value=['same raw world']), \
-                     self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=None), \
-                     self.mock.patch.object(g, 'git', return_value=b'selected'), \
-                     self.mock.patch.object(g, 'read', return_value=json.dumps(selection).encode()) as selector, \
-                     self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
-                     self.mock.patch.object(g, 'prefetch_declared_inputs') as prefetch, \
-                     self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(native).encode()) as checker:
-                    result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate, prefetch=True)
-                selector.assert_called_once_with(ROOT, self.baseline, 'data/ownership-selection.json')
-                if version == 1:
-                    prefetch.assert_called_once_with(ROOT, self.baseline, self.candidate)
-                else:
-                    prefetch.assert_not_called()
-                checker.assert_called_once()
-                command = checker.call_args.args[0]
-                self.assertEqual(command[1:3], ['--input-type=module', '--eval'])
-                self.assertIn('inspectSelectedAcquired', command[3])
-                self.assertEqual(command[4:], [(ROOT / 'scripts/check-effective-geographic-regression.mjs').as_uri(),
-                                               str(ROOT), self.baseline, self.candidate, sys.executable])
-                self.assertEqual(result['selected_native_report'], native)
-                self.assertEqual(result['trusted_code_commit'], self.candidate)
-                self.assertEqual(result['status'], 'no-new-native-loss')
-                self.assertNotIn('unchanged_selected_inputs', result)
-                self.assertNotIn('checkpoint', result)
 
     def test_final_bank_summary_never_labels_changed_or_incomplete_bindings_unchanged(self):
         import copy
@@ -732,7 +598,6 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
             g = self.g
             with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='actual-inventory'), \
                  self.mock.patch.object(g, 'inventory', return_value=['same']), \
-                 self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=None), \
                  self.mock.patch.object(g, 'git', return_value=b'selected'), \
                  self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
                  self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(value).encode()):
@@ -755,12 +620,37 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
             with self.subTest(changed=changed), self.assertRaises(ValueError):
                 inspect({**native, **changed})
 
+    def test_transition_accounting_refuses_inconsistent_scope_and_unaccepted_code(self):
+        import copy
+        bank = {'path': 'bank.json', 'bytes': 123, 'sha256': 'c' * 64}
+        selection = {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': bank}
+        change = {'row': 2, 'start': 3, 'end': 6, 'previous_owner': 'A', 'candidate_owner': None}
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'validated-native-map-transition',
+                  'candidate_code_executed': False, 'lost_or_reassigned_cells': 3, 'intervals': [change], 'changes': [change],
+                  'added_cells': 0, 'removed_cells': 3, 'reassigned_cells': 0, 'affected_rows': 1,
+                  'baseline_selection': selection, 'candidate_selection': selection,
+                  'checkpoint_custody': {'baseline_commit': self.baseline, 'accepted_bank': bank, 'candidate_bank': bank},
+                  'native_row_scope': {'compared_rows': 8, 'changed_rows': [2], 'added_cells': 0, 'representation_migration': False}}
+        self.assertTrue(self.g.valid_final_transition(native, self.baseline))
+        for key, value in [('removed_cells', 0), ('lost_or_reassigned_cells', 0), ('intervals', []), ('changes', [change, change]),
+                           ('native_row_scope', {'compared_rows': 8}), ('checkpoint_custody', {}), ('affected_rows', 2)]:
+            with self.subTest(key=key):
+                changed = copy.deepcopy(native); changed[key] = value
+                self.assertFalse(self.g.valid_final_transition(changed, self.baseline))
+        software = {**native, 'candidate_code_executed': True}
+        g = self.g
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='actual-inventory'), \
+             self.mock.patch.object(g, 'inventory', return_value=['same']), \
+             self.mock.patch.object(g, 'git', return_value=b'selected'), \
+             self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(software).encode()):
+            with self.assertRaisesRegex(ValueError, 'exact accepted comparison'):
+                g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate)
+
     def test_changed_raw_inputs_never_consult_selected_shortcut(self):
         g = self.g
         with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
              self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]), \
              self.mock.patch.object(g, 'git', return_value=b'') as selected_inventory, \
-             self.mock.patch.object(g, 'unchanged_selected_inputs', side_effect=AssertionError('shortcut consulted')), \
              self.mock.patch.object(g.importlib.util, 'spec_from_file_location', side_effect=RuntimeError('full-check-reached')):
             with self.assertRaisesRegex(RuntimeError, 'full-check-reached'):
                 g.inspect(ROOT, self.baseline, self.candidate, prefetch=True)

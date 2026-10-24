@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {withDatedGeometry} from '../src/temporal.js';
 import {nativeDisplayContext} from '../src/native-location-context.js';
 import {locationInventoryChanged,boundaryFootprintsChanged} from '../src/pixel-metadata.js';
 import {NATIVE_METHOD} from '../src/ownership-method.js';
@@ -20,7 +21,7 @@ function fixture({replacement=false}={}){
  const loadSnapshot=async next=>({boundaries:next===2020&&!replacement?[{location_id:'A',geometry:{type:'Polygon',coordinates:[[[0,0],[2,0],[2,1],[0,1],[0,0]]]}}]:[],states:[],attributes:[]});
  const prepareNativeLocationContext=(input,{signal})=>new Promise(resolve=>pending.push({input,signal,resolve:()=>resolve({grid:{method:NATIVE_METHOD},context:nativeDisplayContext(input.referenceFeatures,input.features)})}));
  const factory=new Function('$','referenceData','resolveTemporal','loadSnapshot','ensureGeometry','prepareNativeLocationContext','nativeDisplayContext',
-  'locationInventoryChanged','boundaryFootprintsChanged','NATIVE_METHOD','renders','rebuilds',`
+  'locationInventoryChanged','boundaryFootprintsChanged','NATIVE_METHOD','renders','rebuilds','withDatedGeometry',`
   let data=referenceData,year=2026,temporal,desiredYear,timer,controller,parents=new Map(),features=new Map(),polities,states=new Map(),boundaries=new Map();
   const formatYear=y=>String(y),yearToTick=y=>y;
   const resolveAttributes=()=>new Map();
@@ -30,7 +31,7 @@ function fixture({replacement=false}={}){
   ${body}
   return {loadYear,getState:()=>({year,data,boundaries})};`);
  const app=factory($,referenceData,resolveTemporal,loadSnapshot,async()=>{geometryReads++;},prepareNativeLocationContext,nativeDisplayContext,
-  locationInventoryChanged,boundaryFootprintsChanged,NATIVE_METHOD,renders,rebuilds);
+  locationInventoryChanged,boundaryFootprintsChanged,NATIVE_METHOD,renders,rebuilds,withDatedGeometry);
  return {...app,referenceData,renders,rebuilds,pending,nodes,getGeometryReads:()=>geometryReads};
 }
 test('actual year-selection code retains coherent old date until changed native grid is ready',async()=>{

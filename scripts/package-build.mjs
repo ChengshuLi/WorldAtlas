@@ -4,7 +4,8 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {loadPackageInputs, validatePackageInputs, containsPackagePath} from './package-inputs.mjs';
+import {inventoryPackageOutput} from './package-output-artifact.mjs';
+import {loadPackageInputs, validatePackageInputs, containsPackagePath, materializedPackageInputs} from './package-inputs.mjs';
 import {issueCurrentExecution,requireCurrentExecution,currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 
 // One explicit startup policy for package production and selected consumers.
@@ -147,7 +148,7 @@ export function inspectPackageInputs(root, definition) {
 }
 
 export function inspectPackageExecutionInputs(root, definition, kind = 'cloudflare') {
-  if (!['static', 'hosted', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
+  if (!['static', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
   const errors = [];let files = [];
   try {
     files=currentExecutionClosure(root,`scripts/build-${kind}-inner.mjs`);
@@ -227,7 +228,7 @@ export function requirePackagePreflight(report) {
 }
 
 
-const entries = {static: 'scripts/build-static-inner.mjs', hosted: 'scripts/build-hosted-inner.mjs', cloudflare: 'scripts/build-cloudflare-inner.mjs'};
+const entries = {static: 'scripts/build-static-inner.mjs', cloudflare: 'scripts/build-cloudflare-inner.mjs'};
 const repository = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
 async function copyOrdinary(source, destination, inventory, relative) {
@@ -314,7 +315,7 @@ export function assertCloudflareStaticAssets(root) {
 
 export function assertPackageStage(directory = repository) {
   const expected = process.env.WORLDATLAS_PACKAGE_STAGE;
-  if (!expected || path.resolve(expected) !== path.resolve(directory)) throw Error('Private builder requires a declared input image; use build:static, build:hosted or build:cloudflare');
+  if (!expected || path.resolve(expected) !== path.resolve(directory)) throw Error('Private builder requires a declared input image; use build:static or build:cloudflare');
 }
 
 // The programmatic injection is for synthetic boundary tests only. Ordinary
@@ -336,6 +337,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
   try {
     const pythonSource=containsPackagePath(definition.inputs,'scripts/package-python-runtime.py')?packagePythonSourceDescriptor(root,readiness.inputs?.head):null;
     const inventory = await materializePackageInputs({source: root, destination: stage, definition});
+    const inputFilesSha256=sha(JSON.stringify(materializedPackageInputs(stage,definition)));
     await fs.symlink(dependencies, path.join(stage, 'node_modules'), 'dir');
     let env = {...process.env, WORLDATLAS_PACKAGE_STAGE: stage};
     const pythonExecution=containsPackagePath(definition.inputs,'scripts/package-python-runtime.py')?createPackagePythonExecution(stage,{python:readiness.runtime?.python?.executable,sourceHelper:pythonSource,env}):null;
@@ -368,6 +370,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     pythonExecution?.verify();
     if(currentExecution)requireCurrentExecution(currentExecution);
     if(kind==='cloudflare')assertCloudflareStaticAssets(stage);
+    const previewOutputSha256=fsSync.existsSync(path.join(stage,'dist'))?sha(JSON.stringify(inventoryPackageOutput(stage,{preview:true}))):undefined;
     // Only explicit generated outputs return to the caller. Source archives and
     // unpublished research never get copied back or altered by this wrapper.
     for (const output of definition.generated_outputs) {
@@ -385,7 +388,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
       await fs.rm(target, {recursive: true, force: true});
       await fs.rename(temporary, target);
     }
-    const receipt = {version: 1, kind, input_definition_sha256: createHash('sha256').update(await fs.readFile(path.join(stage, '.github/package-inputs.json'))).digest('hex'), source_files: inventory.length,
+    const receipt = {version: 1, kind, input_definition_sha256: createHash('sha256').update(await fs.readFile(path.join(stage, '.github/package-inputs.json'))).digest('hex'), input_files_sha256: inputFilesSha256, preview_output_sha256: previewOutputSha256, source_files: inventory.length,
       source_bytes: inventory.reduce((sum, row) => sum + row.bytes, 0), input_paths: definition.inputs,
       boundary: 'Build source contains only declared inputs and the installed dependencies; unpublished inputs are absent. This is not an OS security sandbox.'};
     if(currentExecution)receipt.current_context_execution=currentExecution;

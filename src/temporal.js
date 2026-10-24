@@ -32,3 +32,13 @@ export function resolveTemporal(reference,year,examples=false){
   });
   return {units,features,entities,history:available,links:catalog.links.filter(r=>!r.is_example||examples)};
 }
+
+// A dated geometry replaces reference coverage, not merely its display polygon.
+// Unchanged geometry keeps its authenticated finished/native context. A genuinely
+// different dated shape must not inherit modern final or legacy additive gains.
+export function withDatedGeometry(feature, geometry) {
+  if (geometry === undefined || geometry === feature.geometry ||
+      JSON.stringify(geometry) === JSON.stringify(feature.geometry)) return feature;
+  const {finishedFootprint, additiveFootprint, ...dated} = feature;
+  return {...dated, geometry};
+}

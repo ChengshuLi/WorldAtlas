@@ -98,3 +98,35 @@ test('same retained geometry object with a new additive ledger recomputes native
  assert.equal(result.grid.reference_footprints_sha256,base.footprints_sha256);
  assert.equal(result.grid.effective_footprint_sha256,undefined);
 });
+
+test('dated caller replaces final coverage, preserves other owners, and restores reference E without carrying gains',async()=>{
+ const {withDatedGeometry}=await import('../src/temporal.js');
+ const {footprintValueSha256,finishedReleaseFootprintDigest,mergeUnassignedNativeIntervals,effectiveNativeRuntimeIndex}=await import('../src/effective-footprint.js');
+ const current=reference.map(feature=>({...feature,finishedFootprint:{version:1,kind:'complete-native-footprint-v1',reference_geometry_sha256:footprintValueSha256(feature.geometry),geometry:{type:'MultiPolygon',coordinates:[feature.geometry.coordinates]},native_rows:[],native_bounds:null}})),[x,y]=projectCell(3,.5).map(Math.floor),[bx,by]=projectCell(3.5,.5).map(Math.floor);
+ current[0].finishedFootprint.native_rows=[{y,runs:[[x,x+1]]}];current[0].finishedFootprint.native_bounds=[3,.4,3.1,.6];
+ current[1].finishedFootprint.native_rows=[{y:by,runs:[[bx,bx+1]]}];current[1].finishedFootprint.native_bounds=[3.5,.4,3.6,.6];
+ const referenceRelease={id:'geography:fixture',footprints_sha256:base.footprints_sha256,hierarchy_sha256:'a'.repeat(64)};
+ const patched=mergeUnassignedNativeIntervals(base,[{y,runs:[[x,x+1,1],[bx,bx+1,8192]]}],{owners:new Set([1,8192,67108863]),allowed:new Set([1,8192])});
+ const finalBase={...base,rows:patched.rows,runs:patched.runs,footprints_sha256:finishedReleaseFootprintDigest(referenceRelease,current),
+  effective_footprint_domain:'worldatlas-final-native-footprints:v1',additive_base_reference:referenceRelease};
+ const original=JSON.stringify(current),replacement={type:'Polygon',coordinates:[ring(0,0,.2,.2)]};
+ assert.throws(()=>effectiveNativeRuntimeIndex([{...current[0],geometry:replacement}]),/reference geometry/);
+ assert.equal(withDatedGeometry(current[0],undefined),current[0]);
+ assert.equal(withDatedGeometry(current[0],structuredClone(current[0].geometry)),current[0]);
+ const dated=current.map(f=>withDatedGeometry(f,f.id==='A'?replacement:undefined));
+ assert.equal(dated[0].finishedFootprint,undefined);assert.equal(dated[1],current[1]);
+ const result=await compileNativeLocationContext({referenceFeatures:current,features:dated,base:finalBase,latitudes});
+ assert.equal(pickOwnership(result.grid,x,y),0,'reference-only native gain must not follow dated geometry');
+ assert.equal(pickOwnership(result.grid,bx,by),2,'unrelated finished native coverage stays exact');
+ const removed=await compileNativeLocationContext({referenceFeatures:current,features:current.slice(1),base:finalBase,latitudes});
+ assert.equal(pickOwnership(removed.grid,x,y),0);assert.equal(pickOwnership(removed.grid,bx,by),1);
+ const returned=await compileNativeLocationContext({referenceFeatures:current,features:current.map(f=>withDatedGeometry(f,undefined)),base:finalBase,latitudes});
+ assert.equal(returned.accounting.recomputedRows,0);assert.equal(pickOwnership(returned.grid,x,y),1);assert.equal(pickOwnership(returned.grid,bx,by),2);
+ assert.equal(JSON.stringify(current),original);
+ const legacy={...reference[0],additiveFootprint:{retained:'not transferred'}};
+ assert.equal(withDatedGeometry(legacy,replacement).additiveFootprint,undefined);
+ // Both actual UI construction sites must use the shared replacement boundary.
+ const main=fs.readFileSync(new URL('../src/main.js',import.meta.url),'utf8');
+ assert.match(main,/data\.features\.map\(f=>withDatedGeometry\(f,boundaries\.get\(f\.id\)\?\.geometry\)\)/);
+ assert.match(main,/resolved\.features\.map\(f=>withDatedGeometry\(f,nextBoundaries\.get\(f\.id\)\?\.geometry\)\)/);
+});

@@ -4,7 +4,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {diagnoseMapCell} from '../src/map-cell-diagnosis.js';
 import {diagnoseCells, measureCellFeatures, sourceFeatureId, sourceTransitions} from '../scripts/diagnose-map-cell.mjs';
-import {mapCellSelectionFixture} from './fixtures/map-cell-selection.mjs';
+import {mapCellSelectionFixture, finalMapCellSelectionFixture} from './fixtures/map-cell-selection.mjs';
 import {nativeRowLatitudes} from '../src/native-grid.js';
 
 const blank = () => ({effectiveOwner: {index: 0, id: null}, physicalEvidence: [],
@@ -201,4 +201,49 @@ test('actual diagnostic rejects foreign native sidecars and unauthenticated or m
   f.write('data/geography/fixture.json', {type: 'FeatureCollection', features: drift}); const altered = f.commit();
   f.projection.source_updates[0].after = f.pin('data/geography/fixture.json', altered);
   await assert.rejects(run(f.project()), /geometry|Geometry/);
+});
+
+test('actual diagnostic CLI reads final E and finished context without historical repair operands', async t => {
+  const f = await finalMapCellSelectionFixture(t), addition = await f.emit();
+  const command = fileURLToPath(new URL('../scripts/diagnose-map-cell.mjs', import.meta.url));
+  const cli = spawnSync(process.execPath, [command, '--repo', f.repo, '--commit', addition.commit,
+    ...f.cells.flatMap(c => ['--cell', `${c.x},${c.y}`]), '--consumed', 'data/geography/fixture.json'], {encoding: 'utf8'});
+  assert.equal(cli.status, 0, cli.stderr);
+  const current = JSON.parse(cli.stdout);
+  for (const report of current.reports) {
+    assert.equal(report.effectiveOwner.id, 'A'); assert.equal(report.effectiveOwner.province_id, 'Q');
+    assert.equal(report.lineage.native.first_owner, 1); assert.equal(report.lineage.selected.first_owner, 1);
+    assert.equal(report.lineage.selected.coverage, 'complete-current-finished-context');
+    assert.equal(report.diagnosis.location_status, 'currently-assigned');
+  }
+  assert.equal(current.reports[1].lineage.consumed[0].first_owner, 0, 'Original source does not pretend to contain the finished native overlay');
+  assert.equal(current.reports[1].lineage.selected.matches[0].tags.parent_id, 'Q');
+  assert.equal(f.git('status', '--porcelain'), '');
+  const reassigned = await f.emit(2), moved = await diagnoseCells({repo: f.repo, commit: reassigned.commit, cells: f.cells});
+  assert.equal(moved.reports[0].effectiveOwner.id, 'A'); assert.equal(moved.reports[1].effectiveOwner.id, 'B');
+  assert.equal(moved.reports[1].lineage.selected.first_owner, 2);
+  const withdrawn = await f.emit(0), removed = await diagnoseCells({repo: f.repo, commit: withdrawn.commit, cells: f.cells});
+  assert.equal(removed.reports[0].effectiveOwner.id, 'A'); assert.equal(removed.reports[1].effectiveOwner.index, 0);
+  assert.equal(removed.reports[1].lineage.selected.first_owner, 0);
+});
+
+test('final diagnostic retains independent word/context mismatch and whole projection/member refusal', async t => {
+  const f = await finalMapCellSelectionFixture(t), mismatch = await f.emit(1, {wordOwner: 2});
+  const run = commit => diagnoseCells({repo: f.repo, commit, cells: f.cells});
+  const measured = await run(mismatch.commit);
+  assert.equal(measured.reports[1].effectiveOwner.id, 'B'); assert.equal(measured.reports[1].lineage.selected.first_owner, 1);
+  assert.equal(measured.reports[1].diagnosis.kind, 'native-grid-selection-mismatch');
+  assert.equal(measured.reports[1].diagnosis.location_status, 'unresolved');
+  const foreign = await f.emit(1, {wordOwner: 4});
+  await assert.rejects(run(foreign.commit), /Final native owner is outside the selected roster/);
+  const valid = await f.emit(), bankRoot = 'data/canonical-grid/current-startup/';
+  f.write(bankRoot + valid.index.pixelMap.parts.find(p => p.kind === 'runs').path, Buffer.from('different words'));
+  await assert.rejects(run(f.commit()), /Whole immutable input differs|whole identity differs/);
+  f.git('reset', '--hard', valid.commit);
+  const index = structuredClone(valid.index); delete index.referenceMetadata;
+  f.write('data/ownership-selection.json', {...valid.selection, prepared_bank: f.plain(bankRoot + 'index.json', index)});
+  await assert.rejects(run(f.commit()), /Final bank projection identity differs/);
+  f.git('reset', '--hard', valid.commit);
+  f.write('inputs/projection.json', {...f.projection, reference: {...f.projection.reference, id: f.projection.reference.id.slice(0, -1) + 'X'}});
+  await assert.rejects(run(f.commit()), /Whole immutable input differs/);
 });

@@ -113,6 +113,13 @@ a canonical cell; all membership tests use its center and the pinned native
 latitude bytes, never regenerated inverse-projection latitudes. Output goes to
 stdout. The command reads immutable Git inputs, including sparse-checkout inputs.
 Use a current checkout for the executable reader and an exact revision for data.
+For the final-bank profile, ownership comes directly from the authenticated current
+E words. Selected membership is measured from its finished geometry and native
+intervals, joined to the complete current source roster and reference projection.
+Original/consumed source geometries remain lineage evidence, not an alternative
+map. Historical repair registries and the `change_evidence` hook are not read by
+this diagnostic; an unchanged, reassigned or withdrawn cell is read as it exists
+in that exact final bank. Historical v1 revisions retain their explicit reader.
 
 Optional repeated `--original`, `--consumed`, and `--physical` arguments name
 existing committed GeoJSON files (plain or gzip). They do not create a new evidence

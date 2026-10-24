@@ -7,7 +7,7 @@ import {createAcquisition, githubTree} from './geography-prefetch.mjs';
 
 const demand = (value, message) => { if (!value) throw Error(message); };
 const oid = value => /^[a-f0-9]{40}$/.test(value ?? '');
-export function createRoutingMetadataAcquisition({repo, baseline, execute = execFileSync,
+export function createRoutingMetadataAcquisition({repo, execute = execFileSync,
   loadTree = githubTree, token = process.env.GH_TOKEN}) {
   const env = {...Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_'))),
     GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1',
@@ -17,7 +17,7 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
       {env, maxBuffer: Infinity, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}).toString().trim(); }
     catch { throw Error('routing-metadata-tree-unavailable'); }
   };
-  const trees = new Map(), planned = new Map(); let index;
+  const trees = new Map(), planned = new Map();
   const stats = {tree_metadata_bytes: 0, tree_metadata_requests: 0, discovery_batches: 0};
   function tree(root, recursive) {
     demand(oid(root), 'routing-metadata-invalid-tree');
@@ -45,25 +45,13 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
       if (error.message !== 'routing-metadata-tree-unavailable') throw error;
       original = await acquisition.resolvePath(version, name);
     }
-    // Immutable identity is still bound to the exact original (commit,path).
-    // The baseline inventory is only an authenticated OID-to-size index, shared
-    // by retained historical aliases; it never chooses a different body.
-    index ??= tree(git(['rev-parse', baseline + '^{tree}']), true).then(rows => {
-      const result = new Map();
-      for (const row of rows.filter(row => row.type === 'blob')) {
-        demand(!result.has(row.sha) || result.get(row.sha) === row.size, 'routing-metadata-conflicting-size');
-        result.set(row.sha, row.size);
-      }
-      return result;
-    });
-    let size = (await index).get(original.git_blob_oid);
-    if (size === undefined) {
-      const directory = path.posix.dirname(name);
-      const root = original.tree_oid ?? git(['rev-parse', directory === '.' ? version + '^{tree}' : version + ':' + directory]);
-      const rows = await tree(root, false), row = rows.find(row => row.path === path.posix.basename(name));
-      demand(row && row.type === 'blob' && row.mode === original.mode && row.sha === original.git_blob_oid, 'routing-metadata-remote-identity');
-      size = row.size;
-    }
+    // Read only the directory containing this exact original input. An unrelated
+    // repository-wide inventory is neither a size authority nor a dependency.
+    const directory = path.posix.dirname(name);
+    const root = original.tree_oid ?? git(['rev-parse', directory === '.' ? version + '^{tree}' : version + ':' + directory]);
+    const rows = await tree(root, false), row = rows.find(row => row.path === path.posix.basename(name));
+    demand(row && row.type === 'blob' && row.mode === original.mode && row.sha === original.git_blob_oid, 'routing-metadata-remote-identity');
+    const size = row.size;
     // The exact remote size remains bound to the original Git identity before
     // acquisition; finite larger routing metadata is not a different input role.
     demand(Number.isSafeInteger(size) && size > 0, 'invalid-metadata-length');

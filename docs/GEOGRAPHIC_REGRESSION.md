@@ -148,9 +148,8 @@ not physical source approval. Whole decoded part cohorts are discarded before
 the next genuine bounded acquisition; metadata, row tables, runtime and live
 representations count toward the complete phase.
 
-Selected repair validation is map-cell scoped. Both warm checkpoint reuse and
-cold fallback require complete native conservation and source-supported target
-identity. Every new component must produce its own actual current-gap-to-target
+Selected repair validation is map-cell scoped. Accepted and proposed final banks undergo complete native comparison and
+source-supported qualification of newly positive destinations. Every new component must produce its own actual current-gap-to-target
 cell witness. Continuous polygon overlap and sub-cell gaps are outside this
 scope; the wrapper does not run the polygon detector or import Shapely for a
 selected comparison. The raw detector remains available for nonselected source
@@ -194,24 +193,13 @@ does not establish global hydrology or approve administrative ownership. Existin
 identity, crosswalk, regional certificate, content and publication requirements
 remain in force.
 
-### Selected checkpoint identity and source support
+### Final-bank identity and source support
 
-An accepted checkpoint retains the complete stable owner/index/parent roster,
-whole source identities and actual native result. Append-only transitions derive
-the next complete certificate arithmetically from unchanged accepted base rows
-and actual literal additions. New target geometry is still projected from its
-pinned source body and independently joined to the approved target; unchanged
-neighbors are not projected for a polygon-only overlap check.
-
-A committed `additive_release` sidecar binds the exact runtime envelope, complete
-ledger/delta/owner assets and append-only original authority registry. Each
-authority retains its issued source/native requests, preimage, publications,
-operating receipts and executed code/runtime/input provenance. Existing records,
-including historical zero-cell components, cannot be omitted or rewritten.
-
-The current joint producer emits four native checkpoint products. See
-[accepted checkpoint handoff](ACCEPTED_SELECTED_CHECKPOINTS.md). Original polygon
-reports stay archived; they are not a second active acceptance format.
+The current joint consumer compares complete final words and context directly.
+It does not emit checkpoint products or replay a cumulative ledger. Original
+source membership, native contract, fixed compatibility roster and newly positive
+source/target evidence remain independently bound. Historical checkpoint reports
+and receipts remain readable; see [historical evidence](ACCEPTED_SELECTED_CHECKPOINTS.md).
 
 The optional `artifact_consumption` selection binds an ordinary whole qualified
 product certificate and an independently registered whole review API capture.
@@ -252,8 +240,7 @@ qualification nor approves source facts, selection activation or deployment.
 The normal PR and combined-tree package checks target Cloudflare through literal
 `npm run build:cloudflare` workflow commands. This target is immutable workflow
 content, so an unbound repository variable cannot change the target after a
-successful proof. The separate deployment-budget workflow keeps the explicit
-Site builder and its existing reserve gate. The historical `Build hosted assets`
+successful proof. The latest-main Site builder and Site-only budget commands are retired. The historical `Build hosted assets`
 step name remains for the unchanged integration-proof contract; it does not
 claim a live-host migration or deployment. The earlier mutable package-profile
 routing draft was superseded before publication.
@@ -327,12 +314,11 @@ candidates and group by source and containing assets; do not rescan all 262,166
 latitudes separately for each global inventory component. Visibility is an
 execution prerequisite, not source/target approval.
 
-At the actual requested baseline-to-candidate native comparison, both the cold
-and checkpoint paths refuse new zero-cell primitives. Each new positive
+At the actual requested baseline-to-candidate native comparison, the final-bank
+comparison refuses new zero-cell primitives. Each new positive
 primitive must have a literal native sample changing from owner zero to its
 approved target in the actual complete before/after rows. A positive total or
-an unrelated sibling's cell is insufficient. Existing accepted zero-cell rows
-and historical checkpoint traversal are preserved unchanged. The result's
+an unrelated sibling's cell is insufficient. Historical evidence remains immutable, but checkpoint traversal is retired. The result's
 `repair_visibility` lists the new components and exact cell witnesses.
 
 Current rebind validation authenticates the original executed code, request,

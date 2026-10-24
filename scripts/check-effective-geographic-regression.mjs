@@ -12,7 +12,7 @@ import {isDeepStrictEqual} from 'node:util';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
 import {repairComponentKey,nativeOnlyComponent} from '../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {readSelectedAdditive,readSelectedAdditiveAcquired,selectedAdditiveRows,compareVersionedRepairLedgers,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {readSelectedAdditive,selectedAdditiveRows,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
 import {finalBankSelection,scientificNativeSelection} from '../src/reference-metadata.js';
 
@@ -704,6 +704,7 @@ export function validateArtifactSourceMetadata(certificate,code,qualification,{e
   }
   for(const p of code.critical_files)critical(p,shared);
   demand(!cloudflareProfile||entryProfiles,'Cloudflare requires explicit entry-specific source custody');
+  // These are immutable historical certificate roles, not latest-main build dependencies.
   const allowed=['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs',...(entryProfiles?['scripts/run-integration-tests.mjs']:[]),...(cloudflareProfile?['scripts/build-cloudflare-inner.mjs']:[])];
   demand(same(Object.keys(code.entry_roles??{}).sort(),allowed.toSorted()),'Missing/foreign actual entry profile');
   if(entryProfiles)demand(same(Object.keys(code.entry_critical_files??{}).sort(),allowed.toSorted()),'Missing/foreign entry-specific source custody');
@@ -843,9 +844,6 @@ function finishSelection(snapshot,additive) {
 }
 export function loadSelection(reader) {
   const snapshot=beginSelection(reader);return snapshot?finishSelection(snapshot,readSelectedAdditive(snapshot)):null;
-}
-async function loadSelectionAcquired(reader) {
-  const snapshot=beginSelection(reader);return snapshot?finishSelection(snapshot,await readSelectedAdditiveAcquired(snapshot)):null;
 }
 
 function asset(snapshot,pin) {
@@ -1213,86 +1211,18 @@ export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}
   return {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode,gitExecPath};
 }
 
-function usesFinalProfile(bootstrap){return [bootstrap.beforeReader,bootstrap.afterReader].some(reader=>
-  reader.treeRoute('data/ownership-selection.json')&&reader.json('data/ownership-selection.json')?.version===2);}
-export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
-  const bootstrap=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
-  demand(!usesFinalProfile(bootstrap),'Current final ownership requires the acquired accepted-checkpoint reader');
-  return compareSelected(bootstrap,baseline,candidate,loadSelection(bootstrap.beforeReader),loadSelection(bootstrap.afterReader));
-}
 export async function inspectSelectedAcquired(repo,baseline,candidate,{parentRuntimePath}={}) {
   const bootstrap=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
-  if(usesFinalProfile(bootstrap)){
-    const {JOINT_CODE,inspectSelectedFinalBank}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
-    bootstrap.executionCode=selectedExecutionCode(JOINT_CODE);
-    return inspectSelectedFinalBank(repo,baseline,candidate,bootstrap);
-  }
-  return compareSelected(bootstrap,baseline,candidate,await loadSelectionAcquired(bootstrap.beforeReader),await loadSelectionAcquired(bootstrap.afterReader));
-}
-function compareSelected({beforeReader,afterReader,runtime,callerRuntime,identities,executionCode},baseline,candidate,before,after) {
-  if(!before&&!after)return {version:1,status:'legacy-selection',limits:['Legacy raw polygon gate remains applicable.']};
-  demand(before&&after,'Selected native ownership removed or introduced without comparable migration');
-  const a=before.manifest,b=after.manifest;
-  const visibilityCandidates=newVisibleRepairCandidates(before.additive?.normalized_rows??[],after.additive?.normalized_rows??[]);
-  const visibilityWitnesses=new Map();let visibilityLatitudes;
-  if(visibilityCandidates.length){
-    const pin=a.native_latitudes;
-    demand(pin?.root==='repository'&&pin.decoded_bytes===a.size*8,'Missing normative visibility latitude input');
-    let version=pin.commit;try{beforeReader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=baseline;}
-    visibilityLatitudes=decodeVisibilityLatitudes(beforeReader.read(pin.path,{version,expected:pin.sha256}),pin,a.size);
-  }
-  // A changed transport body with an unchanged declared selected member must
-  // still authenticate against its independently pinned whole container hash.
-  for(const snapshot of [before,after])if(snapshot.image)for(const part of snapshot.image.index.parts){const name=(snapshot.image instanceof NativeAssetImage?snapshot.image.directory:NS)+'/'+part.path,own=snapshot.reader.inventory.get(snapshot.reader.version+':'+name),other=(snapshot===before?afterReader:beforeReader).inventory.get((snapshot===before?candidate:baseline)+':'+name);if(!other||own.git_blob_oid!==other.git_blob_oid){const encoded=snapshot.reader.read(name,{expected:part.sha256});const body=ordinaryGzip(encoded,part.decoded_bytes);demand(body.length===part.decoded_bytes&&sha(body)===part.decoded_sha256,'Changed selected whole transport body differs');}}
-  demand(a.size===b.size&&a.version===b.version&&a.method===b.method&&a.coordinateBits===b.coordinateBits&&same(a.native_latitudes,b.native_latitudes),'Changed native grid/domain requires independent migration');
-  demand(same(before.owners.map(p=>[p.index,p.id,p.province_id,p.province_index]),after.owners.map(p=>[p.index,p.id,p.province_id,p.province_index])),'Original stable owner/parent indices rebound');
-  const rows=loadNativeRowTable;
-  const oldRows=rows(before),newRows=rows(after);
-  const runs=snapshot=>snapshot.manifest.parts.filter(p=>p.kind==='runs');
-  const oldParts=runs(before),newParts=runs(after);
-  let offset=0;for(let y=0;y<a.size;y++){demand(oldRows[y*2]===offset,'Baseline row partition incomplete');offset+=oldRows[y*2+1];}demand(offset*2===a.runWords,'Baseline rows omitted runs');
-  offset=0;for(let y=0;y<b.size;y++){demand(newRows[y*2]===offset,'Candidate row partition incomplete');offset+=newRows[y*2+1];}demand(offset*2===b.runWords,'Candidate rows omitted runs');
-  const bodyChanged=(p,snapshot,other)=>{const ownPath=path.posix.join(path.posix.dirname(scientificNativeSelection(snapshot.selection).manifest_path),p.path),otherPath=path.posix.join(path.posix.dirname(scientificNativeSelection(other.selection).manifest_path),p.path),own=snapshot.reader.inventory.get(snapshot.reader.version+':'+ownPath),prior=other.reader.inventory.get(other.reader.version+':'+otherPath);return !!own!==!!prior||!!own&&(own.mode!==prior.mode||own.git_blob_oid!==prior.git_blob_oid);};
-  const changed=oldParts.filter(p=>!newParts.some(q=>same(p,q))||bodyChanged(p,before,after)).concat(newParts.filter(p=>!oldParts.some(q=>same(p,q))||bodyChanged(p,after,before)));
-  const additiveRows=new Set([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].map(r=>r.y));
-  let additiveConservation=null;if(before.additive){demand(after.additive,'Previously selected additive repair ledger removed');additiveConservation=compareVersionedRepairLedgers(before.additive.ledger,after.additive.ledger,{beforeRegistry:before.additive.registry,afterRegistry:after.additive.registry});}
-  const affected=[];for(let y=0;y<a.size;y++){const spans=[[oldRows[y*2]*2,(oldRows[y*2]+oldRows[y*2+1])*2],[newRows[y*2]*2,(newRows[y*2]+newRows[y*2+1])*2]];if(additiveRows.has(y)||oldRows[y*2]!==newRows[y*2]||oldRows[y*2+1]!==newRows[y*2+1]||spans.some(([s,e])=>changed.some(p=>s<p.offset+p.words&&p.offset<e)))affected.push(y);}
-  // Group consecutive rows with identical whole-part rosters. Every affected
-  // row appears exactly once, including rows with no intervals on either side.
-  const phases=[];let lostCells=0;const losses=[];
-  const groups=[];let pending=[],pendingKey='';
-  const rosterKey=y=>JSON.stringify([nativeParts(before,oldRows,y).map(p=>p.path),nativeParts(after,newRows,y).map(p=>p.path)]);
-  for(const y of affected){const key=rosterKey(y);if(pending.length&&key!==pendingKey){groups.push(pending);pending=[];}pending.push(y);pendingKey=key;}
-  if(pending.length)groups.push(pending);
-  let checkedRows=0;
-  for(const group of groups){
-    // This frame returns compact complete intervals and custody only. All whole
-    // baseline native/transport buffers are out of scope before candidate opens.
-    const previous=acquireNativeRows(before,oldRows,group);validateNativeRowCarry(previous,before,group);
-    const next=acquireNativeRows(after,newRows,group,{carry:previous});
-    validateNativeRowCarry(previous,before,group);validateNativeRowCarry(next,after,group);
-    const visibilityBefore=[],visibilityAfter=[];
-    for(let k=0;k<group.length;k++){
-      const y=group[k],oldBase=projectedRow(previous,k),newBase=projectedRow(next,k),old=before.additive?selectedAdditiveRows(before.additive,y,oldBase):oldBase,current=after.additive?selectedAdditiveRows(after.additive,y,newBase):newBase;
-      if(visibilityCandidates.length){visibilityBefore.push({y,runs:old});visibilityAfter.push({y,runs:current});}
-      for(const loss of compareIntervals(old,current,{row:y,ownersBefore:before.owners,ownersAfter:after.owners})){
-        lostCells+=loss.end-loss.start;losses.push(loss);
-      }checkedRows++;
-    }
-    if(visibilityCandidates.length){
-      const pending=visibilityCandidates.filter(row=>!visibilityWitnesses.has(repairComponentKey(row)));
-      for(const witness of repairVisibilityWitnesses({candidates:pending,size:a.size,latitudes:visibilityLatitudes,beforeRows:visibilityBefore,afterRows:visibilityAfter}))
-        if(witness)visibilityWitnesses.set(repairComponentKey(witness),witness);
-    }
-    phases.push({first_row:group[0],last_row:group.at(-1),rows:group.length,baseline:previous.custody,candidate:next.custody});
-  }
-  demand(checkedRows===affected.length&&groups.flat().every((y,i)=>y===affected[i]),'Incomplete affected native row comparison');
-  demand(visibilityCandidates.every(row=>visibilityWitnesses.has(repairComponentKey(row))),'New gap repair has no actual changed map-cell witness');
-  return {version:1,method:'selected-native-owner-conservation-v1',repair_visibility:{new_components:visibilityCandidates.length,witnesses:[...visibilityWitnesses.values()]},status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
+  demand([bootstrap.beforeReader,bootstrap.afterReader].every(reader=>
+    reader.treeRoute('data/ownership-selection.json')&&reader.json('data/ownership-selection.json')?.version===2),
+    'Current comparison requires accepted and proposed final-map version 2');
+  const {JOINT_CODE,inspectSelectedFinalBank}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
+  bootstrap.executionCode=selectedExecutionCode(JOINT_CODE);
+  return inspectSelectedFinalBank(repo,baseline,candidate,bootstrap);
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
-  console.error('Use python -I -B scripts/run-geographic-check.py --baseline BASE --candidate CANDIDATE --out REPORT; inspectSelected remains a library cold consumer.');
+  console.error('Use python -I -B scripts/run-geographic-check.py --baseline BASE --candidate CANDIDATE --out REPORT; current comparison uses the acquired final-bank reader.');
   process.exitCode = 1;
 }
 

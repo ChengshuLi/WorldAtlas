@@ -11,15 +11,14 @@ import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 import {admitPackageInputTransition,preparedStartupPackageTransition} from '../scripts/package-inputs.mjs';
 import {trustedFixture,appendNativeAuthority,referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
 import {selectedDataSelection} from '../scripts/integration-profile.mjs';
-import {oldBank} from './fixtures/final-bank.mjs';
+import {oldBank,initialFinalBank,compareFinal} from './fixtures/final-bank.mjs';
 import {pinReader,composeAuthorities,finalizeDelivery,prepareFinalizedStartupOwnership,publishFinalizedDelivery} from '../scripts/prepare-delivery-handoff.mjs';
 const bank='data/canonical-grid/current-startup/';
 async function prepare(t,options={}){
- const f=await trustedFixture(t,{nativeAppend:true,finalBank:true,...options}),seed=await f.api.qualifyCheckpoint({reader:f.reader});
- const old=await oldBank(f,seed.state);f.api.releaseCheckpoint(seed.state);
- f.save('.github/package-inputs.json',{version:1,description:'Actual finalizer fixture',inputs:['.github/package-inputs.json','data/ownership-selection.json',f.selection.manifest_path,bank,
-  f.selection.additive_release.path,...['runtime_envelope'].map(k=>f.sidecar[k].path),...['ledger','patch'].map(k=>f.sidecar.logical_asset_map[k].path)],optional_inputs:[],verification_paths:[],generated_outputs:['dist/']});
- f.bankCommit=f.commit();const reader=new f.native.ImmutableReader(f.root,f.bankCommit),before=await f.api.qualifyCheckpoint({reader});assert.equal(before.available,true);
+ const f=await trustedFixture(t,{nativeAppend:true,finalBank:true,...options});
+ const old=await initialFinalBank(f);
+ f.save('.github/package-inputs.json',{version:1,description:'Actual finalizer fixture',inputs:['.github/package-inputs.json','data/ownership-selection.json',f.selection.manifest_path,bank],optional_inputs:[],verification_paths:[],generated_outputs:['dist/']});
+ f.bankCommit=f.commit();const reader=new f.native.ImmutableReader(f.root,f.bankCommit),before=undefined;
  return {f,old,reader,before};
 }
 async function finalize(f,commit,extra={},destination='coordination/engineering/final-bank-test/finalized'){
@@ -28,26 +27,10 @@ async function finalize(f,commit,extra={},destination='coordination/engineering/
  publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize',fixture:true});
  return {outputs,selection:JSON.parse(outputs['ownership-selection.json']),index:JSON.parse(outputs['startup-ownership.json'])};
 }
-test('existing finalizer migrates accepted E without reading old ledger/patch and adopts with explicit resume',async t=>{
- const {f,old,reader,before}=await prepare(t),normal=pinReader(f.root),read=normal.read;
- const forbidden=new Set([f.sidecar.logical_asset_map.ledger.path,f.sidecar.logical_asset_map.patch.path,f.sidecar.authority_registry.path]);
- const actual={...normal,read(pin){assert(!forbidden.has(pin.path),'Historical repairs are not final-bank preparation operands');return read(pin);}};
- const config={version:2,selector:{commit:f.bankCommit,path:'data/ownership-selection.json'},package_inputs:{commit:f.bankCommit,path:'.github/package-inputs.json'}};
- assert.throws(()=>finalizeDelivery({...config,accepted_checkpoint:{obsolete:true}},actual),/Exact final-bank preparation config/);
- const outputs=finalizeDelivery(config,actual);assert.throws(()=>publishFinalizedDelivery(f.root,'early',outputs,{}),/finished startup bank/);
- await prepareFinalizedStartupOwnership(outputs);const selection=JSON.parse(outputs['ownership-selection.json']);assert.equal(selection.version,2);assert.equal(selection.additive_release,undefined);
- publishFinalizedDelivery(f.root,'coordination/engineering/final-bank-test/finalized',outputs,{phase:'finalize'});publishFinalizedDelivery(f.root,'coordination/engineering/final-bank-test/finalized',outputs,{phase:'finalize'},true);
- const commit=f.commit(),transition=await f.api.qualifyTransition({state:before.state,reader:new f.native.ImmutableReader(f.root,commit,{invocation:reader.invocation})});
- assert.equal(transition.available,true);assert.equal(transition.changedNativeRows.length,0);assert.equal(transition.candidate.version,2);
- assert.deepEqual(JSON.parse(outputs['startup-ownership.json']).compatibility_files,old.index.compatibility_files);
- const inputs=JSON.parse(outputs['package-inputs.json']).inputs;for(const name of forbidden)assert(!inputs.includes(name));
- for(const p of old.index.compatibility_files)assert(fs.existsSync(path.join(f.root,bank,p.path)));
- assert.throws(()=>finalizeDelivery({...config,change_evidence:f.pin('data/registry.json',f.bankCommit)},normal),/migration cannot change/);f.api.releaseCheckpoint(transition.candidate);
-});
 test('existing finalizer prepares only a new native append and preserves its next unchanged transition',async t=>{
  const {f,reader,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();
- const first=await f.api.qualifyTransition({state:before.state,reader:new f.native.ImmutableReader(f.root,at,{invocation:reader.invocation})});assert.equal(first.available,true);
- const added=await appendNativeAuthority(f,{owner:1,name:'coordination/engineering/next-only',completedConstructor:true});
+ await compareFinal(f,f.bankCommit,at);
+ const added=await appendNativeAuthority(f,{membershipPath:'data/source.json',owner:1,name:'coordination/engineering/next-only',completedConstructor:true});
  f.save('data/ownership-selection.json',migration.selection);
  const source=pinReader(f.root),binding=source.json(added.entry.source_authority);
  const composed=await composeAuthorities({version:2,selector:f.pin('data/ownership-selection.json',at),authorities:[{rule_preimage:added.entry.rule_preimage,source_authority:added.entry.source_authority,ledger:added.entry.completed_constructor,native_patch:binding.native_patch}]},source);
@@ -79,6 +62,28 @@ test('existing finalizer prepares only a new native append and preserves its nex
  const diagnostics={},planning={api,repo:'fixture/repo',branch:'codex/final-bank',files,baseline,authored,metadataDiagnostics:diagnostics};
  const planned=await selectedDataSelection(planning);assert.equal(planned?.test_selection,'selected-data',JSON.stringify(diagnostics));assert.equal(planned.expectations_path,expectedPath);
  assert(!requested.includes(f.sidecar.authority_registry.git_blob_oid),'No old registry traversal');
+ // A withdrawal restores the prior complete bank without making the previous
+ // authority registry a current metadata operand. Use the actual emitted bank
+ // descriptors on both sides, and derive the complete changed-file vector.
+ const withdrawn={entries:new Map(authored.entries)};
+ for(const name of [...withdrawn.entries.keys()])if(name.startsWith(bank))withdrawn.entries.delete(name);
+ for(const [name,row]of baseline.entries)if(name.startsWith(bank))withdrawn.entries.set(name,row);
+ withdrawn.entries.set('data/ownership-selection.json',baseline.entries.get('data/ownership-selection.json'));
+ withdrawn.entries.set('.github/package-inputs.json',baseline.entries.get('.github/package-inputs.json'));
+ const withdrawalExpected=Buffer.from(JSON.stringify({version:2,kind:'selected-final-bank-consumer-v2',bank:migration.selection.prepared_bank,reference:migration.selection.reference}));
+ const expectedOid=execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],{input:withdrawalExpected,encoding:'utf8'}).trim();
+ const withdrawalExpectedPath='coordination/engineering/final-bank-test/withdrawal-planner/selected-delivery-expectations.json';
+ withdrawn.entries.set(withdrawalExpectedPath,{path:withdrawalExpectedPath,mode:'100644',type:'blob',sha:expectedOid,size:withdrawalExpected.length});
+ const withdrawalFiles=[...new Set([...authored.entries.keys(),...withdrawn.entries.keys()])]
+  .filter(name=>authored.entries.get(name)?.sha!==withdrawn.entries.get(name)?.sha)
+  .map(filename=>({filename,status:!authored.entries.has(filename)?'added':!withdrawn.entries.has(filename)?'removed':'modified'}));
+ const withdrawalRequests=[],withdrawalDiagnostics={};
+ const withdrawalPlan=await selectedDataSelection({...planning,baseline:authored,authored:withdrawn,files:withdrawalFiles,
+  metadataDiagnostics:withdrawalDiagnostics,api:async route=>{withdrawalRequests.push(route);return api(route);}});
+ assert.equal(withdrawalPlan?.test_selection,'selected-data',JSON.stringify(withdrawalDiagnostics));
+ assert(!withdrawalRequests.some(route=>route.endsWith(hook.git_blob_oid)||route.endsWith(f.sidecar.authority_registry.git_blob_oid)),
+  'Withdrawal planning does not traverse either previous repair registry');
+
  assert.equal(await selectedDataSelection({...planning,files:[...files,{filename:'coordination/engineering/unbound/new.json',status:'added'}]}),null,'Unbound changes retain full integration');
 
  const refresh=(source,name,body)=>{source.files=source.files.filter(row=>row.path!==name);source.files.push({path:name,mode:'100644',oid:createHash('sha1').update(`blob ${body.length}\0`).update(body).digest('hex'),bytes:body.length});};
@@ -88,17 +93,15 @@ test('existing finalizer prepares only a new native append and preserves its nex
  const changedSelector=Buffer.from(JSON.stringify(tampered.selection));refresh(tampered,bank+'index.json',changedIndex);refresh(tampered,'data/ownership-selection.json',changedSelector);
  assert.throws(()=>preparedStartupPackageTransition(packageBefore,tampered,{...preparedStartup,afterIndex:changedIndex,afterSelection:changedSelector}),/changes compatibility/,'A coherent candidate cannot retire a promised v1 URL');
  assert.throws(()=>admitPackageInputTransition({...packageBefore,selection:f.selection},packageAfter,{preparedStartup}),/genuine full capture/);
- const admitted=await f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.root,next,{invocation:reader.invocation})});
- assert.equal(admitted.available,true);assert.deepEqual(admitted.changedNativeRows,[added.y]);
+ const admitted=await compareFinal(f,at,next);assert.deepEqual(admitted.native_row_scope.changed_rows,[added.y]);
  const stable=await finalize(f,next,{},'coordination/engineering/final-bank-test/unchanged-finalized'),same=f.commit();assert.deepEqual(stable.index,result.index);
- const unchanged=await f.api.qualifyTransition({state:admitted.candidate,reader:new f.native.ImmutableReader(f.root,same,{invocation:reader.invocation})});
- assert.equal(unchanged.available,true);assert.deepEqual(unchanged.changedNativeRows,[]);f.api.releaseCheckpoint(unchanged.candidate);
+ const unchanged=await compareFinal(f,next,same);assert.deepEqual(unchanged.native_row_scope.changed_rows,[]);
 });
 
 test('actual final-bank copier and emitted consumer require no historical repair files',async t=>{
  const {f,old,before}=await prepare(t),result=await finalize(f,f.bankCommit);f.commit();
  const {packagePreparedStartupOwnership}=await import('../scripts/package-startup-ownership.mjs');
- const {checkEmittedSelectedDelivery}=await import('../scripts/selected-delivery-smoke.mjs');
+ const {checkEmittedSelectedDelivery,runSelectedDeliverySmoke}=await import('../scripts/selected-delivery-smoke.mjs');
  const emitted=path.join(f.root,'dist/client'),features=old.features.map(({additiveFootprint,...feature})=>feature);
  const copied=await packagePreparedStartupOwnership({manifest:f.manifest,manifestSha:f.selection.sha256,source:path.join(f.root,bank),destination:emitted,
   selected:{finalBank:result.selection.prepared_bank,reference_release:result.selection.reference,base:f.envelope.base_reference},features});
@@ -109,6 +112,16 @@ test('actual final-bank copier and emitted consumer require no historical repair
  const options={root:f.root,emittedDirectory:emitted},report=await checkEmittedSelectedDelivery(options);
  assert.equal(report.kind,'actual-emitted-final-bank-consumer');assert.equal(report.complete_row_words,old.ownership.rows.length);assert(report.occupied_controls_picked_and_sampled>0);
  assert(report.inputs.every(pin=>!hidden.includes(pin.path)&&!pin.path.startsWith('additive-repairs/')));
+ const expectationsPath=path.join(f.root,'expectations.json'),outputPath=path.join(f.root,'smoke-report.json');
+ fs.writeFileSync(expectationsPath,result.outputs['selected-delivery-expectations.json']);
+ const cliReport=await runSelectedDeliverySmoke({...options,expectationsPath,outputPath});
+ assert.equal(cliReport.kind,'actual-emitted-final-bank-consumer');
+ const receipt=fs.readFileSync(outputPath);
+ await assert.rejects(runSelectedDeliverySmoke({...options,expectationsPath,outputPath}),/exists|already|collision/i);
+ assert.deepEqual(fs.readFileSync(outputPath),receipt);
+ fs.unlinkSync(outputPath);fs.symlinkSync('missing-target',outputPath);
+ await assert.rejects(runSelectedDeliverySmoke({...options,expectationsPath,outputPath}),/exists|ordinary|symlink|collision/i);
+ fs.unlinkSync(outputPath);
  const whole=fs.readFileSync(path.join(emitted,copied.preparedOwnership.context_parts[0].path));
  fs.writeFileSync(path.join(emitted,copied.preparedOwnership.context_parts[0].path),Buffer.from('wrong'));
  await assert.rejects(checkEmittedSelectedDelivery(options),/identity differs|length|size|bytes|hash|file budget/i);
@@ -117,24 +130,7 @@ test('actual final-bank copier and emitted consumer require no historical repair
  await assert.rejects(checkEmittedSelectedDelivery(options),/historical repair envelope/);
  fs.writeFileSync(path.join(emitted,'atlas-geography.json'),JSON.stringify({...atlas,pixelMap:{...atlas.pixelMap,runWords:atlas.pixelMap.runWords+2}}));
  await assert.rejects(checkEmittedSelectedDelivery(options),/words descriptor/);
- f.api.releaseCheckpoint(before.state);
-});
 
-
-test('one-time migration retires only authenticated historical declarations, preserving independent/current roles',async t=>{
- const {f,before}=await prepare(t,{packageRoles:true});
- const definition=JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')));
- const historical=['original/rule.json','original/binding.json','original/native-request.json','original/source-publication.json','accepted-rebind/request.json'];
- f.save('data/unrelated.json',{retained:true});definition.inputs.push(...historical,'data/registry.json','data/world-index.json','data/unrelated.json');
- definition.verification_paths.push('original/source-publication.json');f.save('.github/package-inputs.json',definition);const commit=f.commit();
- const result=await finalize(f,commit),inputs=JSON.parse(result.outputs['package-inputs.json']).inputs;
- for(const name of historical)assert(!inputs.includes(name),name);
- assert(!inputs.includes('data/registry.json'));
- for(const name of ['data/world-index.json','data/unrelated.json',bank])assert(inputs.includes(name),name);
- assert.deepEqual(JSON.parse(result.outputs['package-inputs.json']).verification_paths,definition.verification_paths,'Verification custody remains exact outside website inputs');
- for(const name of historical)assert(fs.existsSync(path.join(f.root,name)),'Historical source remains in Git/worktree');
- const expectations=JSON.parse(result.outputs['selected-delivery-expectations.json']);assert.deepEqual(expectations.bank,result.selection.prepared_bank);
- f.api.releaseCheckpoint(before.state);
 });
 
 
@@ -147,15 +143,14 @@ test('final-bank reference-only authoring retains words and uses the existing co
    envelope:json(sidecar.runtime_envelope.commit,sidecar.runtime_envelope.path)};
  const sourceNames=['data/ownership-selection.json','data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json','data/geographic-releases/releases.json.gz'];
  for(const name of sourceNames)f.save(name,read(original.selected,name));
- await oldBank(f,original.state);f.save('.github/package-inputs.json',{version:1,description:'Reference-only final-bank fixture',inputs:['.github/package-inputs.json','data/ownership-selection.json',f.selection.manifest_path,bank,
+ await initialFinalBank(f,original.state);f.save('.github/package-inputs.json',{version:1,description:'Reference-only final-bank fixture',inputs:['.github/package-inputs.json','data/ownership-selection.json',f.selection.manifest_path,bank,
   selected.additive_release.path,sidecar.runtime_envelope.path,sidecar.logical_asset_map.ledger.path,sidecar.logical_asset_map.patch.path],optional_inputs:[],verification_paths:[],generated_outputs:['dist/']});
- const bankCommit=f.commit(),reader=new f.native.ImmutableReader(f.root,bankCommit),before=await f.api.qualifyCheckpoint({reader});assert.equal(before.available,true);
- const migration=await finalize(f,bankCommit),at=f.commit(),first=await f.api.qualifyTransition({state:before.state,reader:new f.native.ImmutableReader(f.root,at,{invocation:reader.invocation})});assert.equal(first.available,true);
+ const bankCommit=f.commit(),reader=new f.native.ImmutableReader(f.root,bankCommit);
+ const migration=await finalize(f,bankCommit),at=f.commit();await compareFinal(f,bankCommit,at);
  for(const name of sourceNames.filter(name=>name!=='data/ownership-selection.json'))f.save(name,read(original.candidate,name));
  const projection=original.projection;f.save('inputs/projection.json',projection);const proposed=f.commit(),pin=f.pin('inputs/projection.json',proposed);
  const result=await finalize(f,at,{reference_projection:pin},'coordination/engineering/final-bank-test/reference-finalized'),candidate=f.commit();
- const next=await f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.root,candidate,{invocation:reader.invocation})});
- assert.equal(next.available,true);assert.deepEqual(next.changedNativeRows,[]);assert(next.changedIds.length>0);
+ const next=await compareFinal(f,at,candidate);assert.deepEqual(next.native_row_scope.changed_rows,[]);assert(next.changed_ids.length>0);
  const directBefore=new f.native.ImmutableReader(f.root,at);
  const direct=await f.api.compareAcceptedFinalBank({beforeReader:directBefore,afterReader:new f.native.ImmutableReader(f.root,candidate,{invocation:directBefore.invocation})});
  assert.equal(direct.native_row_scope.added_cells,0);assert(direct.changed_ids.length>0);
@@ -186,7 +181,7 @@ test('final-bank reference-only authoring retains words and uses the existing co
  // The real database publication stamps generated reference revisions on its
  // catalog rows. The bank preserves source properties, not those DB defaults.
  const {packagePreparedStartupOwnership}=await import('../scripts/package-startup-ownership.mjs');
- const {checkEmittedSelectedDelivery}=await import('../scripts/selected-delivery-smoke.mjs');
+ const {checkEmittedSelectedDelivery,runSelectedDeliverySmoke}=await import('../scripts/selected-delivery-smoke.mjs');
  const revision='a'.repeat(64),referenceMetadata={...again.index.referenceMetadata,application_reference_revision:revision};
  const features=again.index.preparedOwnership.context_parts.flatMap(pin=>JSON.parse(gunzipSync(fs.readFileSync(path.join(f.root,bank,pin.path)))))
   .map(({finishedFootprint,...feature})=>({...feature,properties:{...feature.properties,metadata:{...feature.properties.metadata,reference_revision:revision}}}));
@@ -248,12 +243,12 @@ test('final-bank reference-only authoring retains words and uses the existing co
   const warm=run();assert.equal(warm.status,0,warm.stderr);assert.deepEqual(JSON.parse(warm.stdout),report);
   t.diagnostic('Cold reference imported '+required.length+' exact metadata/current-bank blobs; '+unnecessary.length+' unrelated native/history/compatibility blobs remain absent.');
  });
- f.api.releaseCheckpoint(next.candidate);f.api.releaseCheckpoint(original.state);
+
 });
 
 
 test('final-to-final preparation retains cold sparse compatibility bodies and exact resume without acquisition',async t=>{
- const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();
  const active=new Set([...migration.index.pixelMap.parts,...migration.index.preparedOwnership.context_parts].map(p=>p.path));
  const fixed=migration.index.compatibility_files.find(p=>!active.has(p.path)&&p.path.endsWith('startup-runs-999.bin.gz'));assert(fixed);
  const name=bank+fixed.path,oid=f.git('rev-parse',at+':'+name).toString().trim();
@@ -287,7 +282,7 @@ test('final-to-final preparation retains cold sparse compatibility bodies and ex
 
 
 test('retained final compatibility keeps canonical preflight, committed identity and recheck guards',async t=>{
- const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();
  const fixed=migration.index.compatibility_files.find(p=>p.path.endsWith('startup-runs-999.bin.gz'));assert(fixed);
  const name=bank+fixed.path,file=path.join(f.root,name),original=fs.readFileSync(file),reader=pinReader(f.root);
  const outputs=finalizeDelivery({version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'}},reader);
@@ -332,7 +327,7 @@ test('retained final compatibility keeps canonical preflight, committed identity
 });
 
 test('compatibility roles that also serve current E retain complete body acquisition',async t=>{
- const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit);f.api.releaseCheckpoint(before.state);
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit);
  const part=migration.index.pixelMap.parts.find(p=>!migration.index.compatibility_files.some(c=>c.path===p.path));assert(part);
  const pin=migration.index.files.find(p=>p.path===part.path);migration.index.compatibility_files.push(pin);
  const raw=Buffer.from(JSON.stringify(migration.index)),selection={...migration.selection,prepared_bank:{...migration.selection.prepared_bank,bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')}};
@@ -344,8 +339,8 @@ test('compatibility roles that also serve current E retain complete body acquisi
 
 
 test('finalizer retires exact sparse current-bank preimages through normal staging and resume',async t=>{
- const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
- const added=await appendNativeAuthority(f,{owner:1,name:'coordination/engineering/sparse-retirement',completedConstructor:true});
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();
+ const added=await appendNativeAuthority(f,{membershipPath:'data/source.json',owner:1,name:'coordination/engineering/sparse-retirement',completedConstructor:true});
  f.save('data/ownership-selection.json',migration.selection);f.save('coordination/engineering/sparse-retirement/registry.json',{version:1,kind:'retained-rule-authority-registry-v1',entries:[added.entry]});
  const source=f.commit(),hook=f.pin('coordination/engineering/sparse-retirement/registry.json',source);
  const retired=[migration.index.preparedOwnership.context_parts[0].path,migration.index.pixelMap.parts.find(p=>p.kind==='runs').path].map(p=>bank+p);
@@ -375,8 +370,8 @@ test('finalizer retires exact sparse current-bank preimages through normal stagi
 
 
 test('retiring current-bank paths refuse non-sparse loss, staged replacements and changed index custody',async t=>{
- const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
- const added=await appendNativeAuthority(f,{owner:1,name:'coordination/engineering/retirement-guards',completedConstructor:true});
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();
+ const added=await appendNativeAuthority(f,{membershipPath:'data/source.json',owner:1,name:'coordination/engineering/retirement-guards',completedConstructor:true});
  f.save('data/ownership-selection.json',migration.selection);f.save('coordination/engineering/retirement-guards/registry.json',{version:1,kind:'retained-rule-authority-registry-v1',entries:[added.entry]});
  const source=f.commit(),hook=f.pin('coordination/engineering/retirement-guards/registry.json',source);
  const name=bank+migration.index.preparedOwnership.context_parts[0].path,file=path.join(f.root,name),original=fs.readFileSync(file),oid=f.git('rev-parse',source+':'+name).toString().trim();
@@ -415,8 +410,8 @@ test('retiring current-bank paths refuse non-sparse loss, staged replacements an
 
 
 test('finalizer derives complete sparse output preimages without a caller input list',async t=>{
- const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
- const added=await appendNativeAuthority(f,{owner:1,name:'coordination/engineering/automatic-preimages',completedConstructor:true});
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();
+ const added=await appendNativeAuthority(f,{membershipPath:'data/source.json',owner:1,name:'coordination/engineering/automatic-preimages',completedConstructor:true});
  f.save('data/ownership-selection.json',migration.selection);f.save('coordination/engineering/automatic-preimages/registry.json',{version:1,kind:'retained-rule-authority-registry-v1',entries:[added.entry]});
  const source=f.commit(),hook=f.pin('coordination/engineering/automatic-preimages/registry.json',source);
  execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:f.root,input:'/*\n!/data/\n!/.github/package-inputs.json\n',stdio:'pipe'});
@@ -449,7 +444,7 @@ test('finalizer derives complete sparse output preimages without a caller input 
 
 
 test('automatic sparse preimages refuse deleted, staged, edited and racing canonical state',async t=>{
- const {f,before}=await prepare(t);f.api.releaseCheckpoint(before.state);
+ const {f,before}=await prepare(t);
  const normal=pinReader(f.root),calls=[];let duringMaterialization=false;
  const reader={...normal,git(...args){if(args[0]==='sparse-checkout')calls.push(args);const result=normal.git(...args);
   if(duringMaterialization&&args[0]==='sparse-checkout')f.git('update-index','--add','--cacheinfo',`100644,${bad},${name}`);return result;}};
@@ -485,7 +480,7 @@ test('automatic sparse preimages refuse deleted, staged, edited and racing canon
 
 
 test('normal finalize CLI automatically materializes its sparse canonical preimages',async t=>{
- const {f,before}=await prepare(t);f.api.releaseCheckpoint(before.state);
+ const {f,before}=await prepare(t);
  const config='coordination/engineering/final-bank-test/automatic-cli.json',destination='.cache/delivery-handoff/automatic-cli';
  f.save(config,{version:2,selector:{commit:f.bankCommit,path:'data/ownership-selection.json'},package_inputs:{commit:f.bankCommit,path:'.github/package-inputs.json'}});
  execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:f.root,input:'/*\n!/data/\n!/.github/package-inputs.json\n',stdio:'pipe'});
@@ -498,4 +493,35 @@ test('normal finalize CLI automatically materializes its sparse canonical preima
  assert.deepEqual(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),fs.readFileSync(path.join(f.root,destination,'ownership-selection.json')));
  run(['--resume']);f.git('add','-A');const committed=f.commit();
  assert.deepEqual(f.git('ls-tree','-r','--name-only',committed,'--',bank).toString().trim().split('\n').sort(),[bank+'index.json',...index.files.map(p=>bank+p.path)].sort());
+});
+
+test('actual finalizer CLI adopts a proposed withdrawal bank through the ordinary writer and exact resume',async t=>{
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();
+ const added=await appendNativeAuthority(f,{membershipPath:'data/source.json',owner:1,name:'withdrawal-source',completedConstructor:true});
+ f.save('data/ownership-selection.json',migration.selection);
+ f.save('withdrawal-source/only.json',{version:1,kind:'retained-rule-authority-registry-v1',entries:[added.entry]});
+ const issued=f.commit(),hook=f.pin('withdrawal-source/only.json',issued);
+ await finalize(f,at,{change_evidence:hook},'coordination/engineering/final-bank-test/positive');const current=f.commit();
+ const config={version:2,selector:{commit:current,path:'data/ownership-selection.json'},
+  package_inputs:{commit:current,path:'.github/package-inputs.json'},proposed_selector:{commit:at,path:'data/ownership-selection.json'}};
+ f.save('.cache/delivery-handoff/withdrawal-config.json',config);
+ const command=fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs',import.meta.url));
+ const args=[command,'finalize','.cache/delivery-handoff/withdrawal-config.json','coordination/engineering/final-bank-test/withdrawal'];
+ const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
+ const actual=spawnSync(process.execPath,args,{cwd:f.root,env,encoding:'utf8'});assert.equal(actual.status,0,actual.stderr);
+ assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.root,'data/ownership-selection.json'))),migration.selection);
+ const resumed=spawnSync(process.execPath,[...args,'--resume'],{cwd:f.root,env,encoding:'utf8'});assert.equal(resumed.status,0,resumed.stderr);
+ const candidate=f.commit(),beforeReader=new f.native.ImmutableReader(f.root,current),afterReader=new f.native.ImmutableReader(f.root,candidate,{invocation:beforeReader.invocation});
+ const report=await f.api.compareAcceptedFinalBank({beforeReader,afterReader});
+ assert.equal(report.status,'validated-native-map-transition');assert.equal(report.removed_cells,1);assert.equal(report.reassigned_cells,0);
+ assert.equal(report.repair_visibility.new_components,0);
+ assert(!report.input_inventory.some(p=>p.path.startsWith('withdrawal-source/')),'Withdrawal never reopens the positive source constructor');
+ const source=pinReader(f.root);
+ assert.throws(()=>finalizeDelivery({...config,change_evidence:hook},source),/already carries its complete/);
+});
+
+test('retired version-1 finalization and composition refuse before reading any operand',async()=>{
+ const reader=new Proxy({}, {get(){throw Error('Retired route read an operand');}});
+ assert.throws(()=>finalizeDelivery({version:1},reader),/requires final-map version 2/);
+ await assert.rejects(composeAuthorities({version:1},reader),/requires final-map version 2/);
 });

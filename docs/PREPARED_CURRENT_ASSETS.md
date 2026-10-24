@@ -80,8 +80,12 @@ word and complete context with the selected whole bank, including decoded stream
 hashes. They do not consume the old ledger, patch, registry or repair envelope.
 The one-time accepted-code migration proves unchanged words against the actual
 accepted E and deterministic finished polygon/ring/interval conversion. Later
-joint comparisons prove every unchanged cell and context value and admit only
-new, disjoint, unassigned-before cells with their qualified owners. Unsupported
+joint comparisons read the accepted and proposed final banks directly, prove the
+exact native-overlay additions, withdrawals and transfers against their complete
+finished contexts, and preserve every unrelated cell and context value. Newly
+positive destinations require completed source/method qualification; withdrawals
+require substantive exact-scope review, not a positive constructor. Original
+polygon coverage and N retain their separate explicit migration contract. Unsupported
 native/source-base changes refuse rather than silently using historical replay.
 
 The first migration must follow delivery of its support code and receive its own

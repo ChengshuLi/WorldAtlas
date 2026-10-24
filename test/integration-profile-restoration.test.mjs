@@ -69,11 +69,15 @@ test('actual runner marker',()=>{
   const expectations='coordination/engineering/fixture/selected-delivery-expectations.json';
   if(selected){
     const pin=(name,value)=>{const bytes=Buffer.from(JSON.stringify(value));write(name,bytes);return {path:name,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};};
-    const member={component_id:'component',target_id:'target',disposition:'assigned',geometry_sha256:'a'.repeat(64)};
-    const ledger=pin('coordination/engineering/fixture/ledger.json',{version:2,kind:'native-additive-repair-ledger-v2',rows:[{...member,native_cells:1}]});
-    const side=pin('coordination/engineering/fixture/sidecar.json',{logical_asset_map:{ledger}});
-    pin('data/ownership-selection.json',{artifact_consumption:{},additive_release:side});
-    pin(expectations,{version:1,selected_ledger_sha256:ledger.sha256,cumulative_native_cells:1,cohorts:[{original_batch_id:'original',component_ids:['component'],members:[member]}]});
+    // Shell routing fixture only: real emitted bank verification is covered by
+    // final-bank-finalizer. No cumulative ledger or replay selector is supported.
+    const reference={id:'geography:fixture',footprints_sha256:'a'.repeat(64),hierarchy_sha256:'b'.repeat(64)};
+    const bank=pin('data/canonical-grid/current-startup/index.json',{version:2,fixture_only:true});
+    const native_selection={version:1,method:'native-linear-evenodd-first-owner-v1',
+      manifest_path:'data/native/manifest.json',sha256:'c'.repeat(64),release_id:reference.id,
+      selected_geography:{kind:'complete-world-index-with-exact-encoded-overrides'}};
+    pin('data/ownership-selection.json',{version:2,kind:'selected-final-native-bank-v2',native_selection,prepared_bank:bank,reference});
+    pin(expectations,{version:2,kind:'selected-final-bank-consumer-v2',bank,reference});
     write('dist/client/atlas-geography.json','{}');fs.mkdirSync(path.join(root,'.cache'));
     write('scripts/selected-delivery-smoke.mjs',smokeBody??`import fs from 'node:fs';import assert from 'node:assert/strict';
 export async function runSelectedDeliverySmoke({root,expectationsPath,emittedDirectory,outputPath}){

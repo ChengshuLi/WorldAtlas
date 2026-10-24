@@ -28,6 +28,7 @@ import * as L from '/node_modules/leaflet/dist/leaflet-src.esm.js';
 import {PixelLayer as GPU} from '/src/pixel-layer.js';import {PixelCanvasLayer} from '/src/pixel-canvas-layer.js';
 import {prepareNativeLocationContext as prepareRealContext} from '/src/native-context-client.js';
 import {nativeDisplayContext} from '/src/native-location-context.js';
+import {withDatedGeometry} from '/src/temporal.js';
 import {locationInventoryChanged,boundaryFootprintsChanged} from '/src/pixel-metadata.js';
 import {NATIVE_METHOD} from '/src/ownership-method.js';import {GRID_ZOOM} from '/src/pixel-grid.js';
 const original=${JSON.stringify(features)},events=[],nodes=new Map(),colors={A:'#447744',B:'#774444',C:'#444477',D:'#884488'};

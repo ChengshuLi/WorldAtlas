@@ -3,7 +3,6 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
-import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
 export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
@@ -221,17 +220,16 @@ const FOCUSED_TEST_FAMILIES = [
   'immutable-git-blobs', 'local-workspace',
   // Immutable reader, original-authority, checkpoint and wrapper consumers.
   // Scientific kernels and packaged/rendered output remain full regression.
-  'accepted-(?:checkpoint-qualification|joint-transport)', 'additive-gap-repair',
+  'additive-gap-repair',
   'administrative-original-hashes', 'component-authority-identity', 'current-rebind-product-custody',
   'effective-geographic-regression', 'evidence-byte-bounds', 'fiji-canonical-reproduction',
-  'geographic-(?:checkpoint-products|regression)', 'geography-prefetch',
+  'geographic-regression', 'geography-prefetch',
   'immutable-reader-read', 'installed-runtime-identity', 'map-cell-diagnosis',
-  'native-(?:additions-order|checkpoint-consumer|word-store|stream-custody|interval-stream|interval-projection)', 'canonical-value-hash', 'parallel-geography-comparison',
-  'selected-native-witness',
-  'qualification-exclusion-prefilter', 'selected-checkpoint', 'final-bank-(?:checkpoint|finalizer)',
-  'selected-joint-(?:check|entry|package-boundary)', 'selected-metadata-wiring',
+  'native-(?:additions-order|word-store|stream-custody|interval-stream|interval-projection)', 'canonical-value-hash', 'parallel-geography-comparison',
+  'qualification-exclusion-prefilter', 'final-bank-(?:checkpoint|finalizer)',
+  'selected-joint-check',
   'source-target-native-diagnostic', 'supported-programs', 'trusted-geography-check',
-  'unchanged-selected-geography', 'visible-gap-eligibility',
+  'visible-gap-eligibility',
   'native-(?:authority-entry|diagnostic-entry|witness-authority|regression-inputs)',
   'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards',
   'sierra-leone-physical-review-controls', 'held-cell-exception-evidence-controls', 'held-row-contact-reconstruction-controls'
@@ -267,9 +265,6 @@ export function integrationNeedsBrowser(profile, shard, testSelection = 'complet
 export function prepareIntegrationTests(files) {
   if (files.some(name=>PACKAGED_ASSET_TESTS.includes(name)) && !fs.existsSync('dist/client/atlas-geography.json')) {
     throw Error('Packaged-asset regression requires the actual hosted build; missing dist/client/atlas-geography.json');
-  }
-  if (files.includes('test/stage-site-migrations.test.mjs')) {
-    compileHostedMigrations({input:'drizzle', output:'dist/drizzle'});
   }
 }
 

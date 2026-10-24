@@ -5,7 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {loadPackageInputs, validatePackageInputs, containsPackagePath, safePackagePath, PACKAGE_PRODUCER_KIND, admitPackageInputTransition} from './package-inputs.mjs';
+import {loadPackageInputs, validatePackageInputs, containsPackagePath, safePackagePath, materializedPackageInputs, PACKAGE_PRODUCER_KIND, admitPackageInputTransition} from './package-inputs.mjs';
 
 export {PACKAGE_PRODUCER_KIND, inertSelectedPackageInput, admitPackageInputTransition} from './package-inputs.mjs';
 
@@ -64,22 +64,24 @@ function streamedOrdinaryFile(root, relative) {
   return {path: relative, bytes, sha256: digest.digest('hex')};
 }
 
-export function inventoryPackageOutput(root) {
+export function inventoryPackageOutput(root,{preview=false}={}) {
   const result = []; let total = 0;
   const visit = relative => {
+    if(preview&&relative==='dist/drizzle')return; // Independent migration-test output is not served atlas data.
     const directory = ordinary(root, relative, true);
     for (const name of fs.readdirSync(directory).sort()) {
       const child = relative + '/' + name, stat = fs.lstatSync(path.join(root, child));
       need(!stat.isSymbolicLink(), 'Output links are not ordinary retained package files');
       if (stat.isDirectory()) visit(child);
       else {
-        need(stat.isFile() && result.length < PACKAGE_OUTPUT_LIMITS.files, 'Unsupported or excessive output inventory');
+        need(stat.isFile() && (preview || result.length < PACKAGE_OUTPUT_LIMITS.files), 'Unsupported or excessive output inventory');
         const row = streamedPackageFile(root, child); total += row.bytes;
         need(Number.isSafeInteger(total),'Package output total is not an exact integer');result.push(row);
       }
     }
   };
   ordinary(root, 'dist', true);
+  if(preview){visit(fs.existsSync(path.join(root,'dist/client'))?'dist/client':'dist');return {files:result,bytes:total};}
   need(fs.readdirSync(path.join(root, 'dist')).every(name=>['client','cloudflare','drizzle'].includes(name)), 'Exact Cloudflare output roots required');
   // The regression runner may separately compile dist/drizzle for migration
   // tests. It is not Cloudflare output and is never retained or assembled.
@@ -154,31 +156,7 @@ export function resolvePackagePythonExecutable(expectedSha256) {
 export function snapshotPackageOutputSource(root = process.cwd()) {
   root = fs.realpathSync(root);
   const definition = loadPackageInputs(root), files = committedPackageInputs(root, definition);
-  // Match the actual image the full builder will copy, including directory
-  // members and optional absence. Git diff alone misses untracked input files.
-  const actual=[];
-  const visit=name=>{
-    const file=ordinary(root,name),stat=fs.lstatSync(file);
-    const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
-    const digest=createHash('sha1').update(`blob ${stat.size}\0`),buffer=Buffer.alloc(1048576);
-    let bytes=0;
-    try { for(;;){const count=fs.readSync(fd,buffer,0,buffer.length,null);if(!count)break;bytes+=count;digest.update(buffer.subarray(0,count));} }
-    finally {fs.closeSync(fd);}
-    need(bytes===stat.size,'Source member changed while inventorying');
-    actual.push({path:name,mode:stat.mode&0o111?'100755':'100644',oid:digest.digest('hex')});
-  };
-  const walk=name=>{
-    ordinary(root,name,true);
-    for(const part of fs.readdirSync(path.join(root,name))){
-      const child=name+'/'+part,stat=fs.lstatSync(path.join(root,child));
-      if(stat.isDirectory()&&!stat.isSymbolicLink())walk(child);else visit(child);
-    }
-  };
-  for(const input of definition.inputs){
-    if(!fs.existsSync(path.join(root,input))){need(definition.optional_inputs.includes(input),'Required original input absent');continue;}
-    if(input.endsWith('/'))walk(input.slice(0,-1));else visit(input);
-  }
-  actual.sort((a,b)=>a.path.localeCompare(b.path,'en'));
+  const actual=materializedPackageInputs(root,definition);
   need(same(actual,files),'Actual original source image differs from complete immutable inventory');
   const head = git(root, ['rev-parse','HEAD']).trim(), tree = git(root, ['rev-parse','HEAD^{tree}']).trim();
   return {head, tree, input_definition_sha256: sha(fs.readFileSync(path.join(root, '.github/package-inputs.json'))),

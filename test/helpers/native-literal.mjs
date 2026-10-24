@@ -7,19 +7,3 @@ export function nativeLiteral(value) {
   }
   return value;
 }
-
-// A live disk-backed state requires explicit release, including in a test that
-// fails before reaching its normal release assertion. Keep production authority
-// checks intact and tolerate only a session already released by the test.
-export function checkpointTestAPI(t,api) {
-  const track=fn=>async (...args)=>{
-    const result=await fn(...args);
-    if(result.available)t.after(()=>{
-      try{api.releaseCheckpoint(result.state);}catch(error){
-        if(!/Checkpoint already released or foreign/.test(error.message))throw error;
-      }
-    });
-    return result;
-  };
-  return {...api,qualifyCheckpoint:track(api.qualifyCheckpoint),qualifyAcceptedCheckpoint:track(api.qualifyAcceptedCheckpoint)};
-}
