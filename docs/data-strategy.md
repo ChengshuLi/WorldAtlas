@@ -16,9 +16,15 @@ Population covers all fixed-footprint residents, including rural areas and villa
 
 ## Storage and delivery
 
-Original evidence stays in R2; Neon stores references, dates, checksums, editable research/PostGIS polygons, and separate generated hierarchy, affiliation, population, and attribute tables. Code generates the R2 cell-location grid; no manual patches. GitHub holds code, schemas, docs, and task issues. One workflow owner handles research through delivery; geography work may later parallelize across 10–20+ Luna workers. No research-only PR; the user merges code/schema/doc PRs.
+1. **Original evidence:** R2 stores source files; Neon tracks references, dates, and checksums.
+2. **Editable research:** Neon/PostGIS stores researched boundaries and source-backed drafts.
+3. **Generated app data:** code derives hierarchy, affiliation, population, and attribute tables in Neon plus the canonical cell-location grid in R2. No manual copies or patches.
 
-A geography-apply operation submits a researched parent subdivision, source references, and base revision. Validate IDs, hierarchy, and complete affected-parent geometry without gaps, overlaps, or outside areas; reject stale/conflicting edits. Intermediate parents need not wait for worldwide completion. Generate the grid from accepted geography when publishable. Serialize publication: upload a versioned R2 grid, recheck revisions, then transactionally commit matching results and grid reference in Neon. The app reads matching revisions; failures leave the prior published version intact. No extra publisher, queue, or handoff.
+Workers submit parent-bounded subdivision drafts, source references, and a base revision through one geography-apply workflow. Drafts can be saved for correction. Validate IDs, hierarchy, and complete affected-parent coverage (no gaps, overlaps, or geometry outside the parent); reject stale/conflicting edits against affected records and dependent parent boundaries, allowing unrelated areas to proceed concurrently. Intermediate stages need not wait for worldwide completion. Only validated, user-approved proposal versions feed next-level work or publication.
+
+Review proposals on a visual map: parent outline, labeled/color-coded children, zoom/pan, selectable sources and rationale, flagged issues/inhabited-island exceptions, and shape/cell-resolution previews where available—not vertex lists. The user approves or requests corrections to a specific version.
+
+Derive generated data from approved research. Serialize grid publication: upload a versioned R2 grid, recheck dependent revisions, then transactionally commit matching Neon results and grid reference. Draft saving is separate from publication; failures leave the prior published version intact, and the app reads matching revisions. No extra publisher, queue, or handoff. GitHub holds code, schemas, docs, and task issues; one workflow owner carries research through delivery, with future geography work parallelized across 10–20+ Luna workers. No research-only PR; the user merges code/schema/doc PRs.
 
 ## Deferred to the next PR
 
