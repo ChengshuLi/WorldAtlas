@@ -4,7 +4,7 @@ These attributes belong to each fixed location at a selected time. They do not c
 
 ## 1. Population
 
-Store one total for everyone within the fixed location boundary, including urban, suburban, and rural residents, regardless of rank. The location is the smallest unit; there are no separate settlement entities or settlement-population records. Estimates are encouraged when defensible: record their basis and provenance, and present them as estimates. Use zero when direct evidence or a justified estimate supports no inhabitants. Use unknown only when even an estimate cannot be justified.
+Store one total for everyone within the fixed location boundary, including urban, suburban, and rural residents, regardless of rank. The location is the smallest unit. Estimates are encouraged when defensible: record their basis and provenance, and present them as estimates. Use zero when direct evidence or a justified estimate supports no inhabitants. Use unknown only when even an estimate cannot be justified.
 
 ## 2. Location rank
 
