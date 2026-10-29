@@ -4,7 +4,7 @@
 
 Flat 2D display; fixed, time-agnostic hierarchy: location → province → area → region → subcontinent → continent. Use recent reliable administrative footprints; prefer current, allow 2025/2024 or older, and record varying source dates. No common reference date or mandatory 2026 coverage. Freeze footprints across history; only political control changes. Use equirectangular (Plate Carrée): equal longitude and latitude steps, with the standard parallel at the equator.
 
-Complete geography before researching 20+ historical attributes per location. Start with six continents excluding Antarctica; user approves each level before parallel workers subdivide it (17 subcontinents is illustrative). Before approval, verify proposed partitions preserve intended whole lower-level administrative units; revise proposals if not. Every in-scope cell is water or exactly one location. Crop Antarctica at nominal 60°S from the 16,384 × 8,192 (134,217,728-cell) full-world reference grid; at original latitude spacing, this yields about 6,827 rows. Exact row-edge rounding/final height and northern extent remain open. Investigate source gaps/overlaps; state clear approximation rules/consequences.
+Complete geography before researching 20+ historical attributes per location. Start with six continents excluding Antarctica; user approves each level before parallel workers subdivide it (17 subcontinents is illustrative). Before approval, verify proposed partitions preserve intended whole lower-level administrative units; revise proposals if not. Every in-scope cell is water or exactly one location. Crop Antarctica at nominal 60°S, keep 90°N (no northern crop), and preserve the 0.02197265625° latitude step. Rounding to the nearest full row makes the 16,384 × 8,192 reference grid 16,384 × 6,827 (111,853,568 cells), with southern edge 60.00732421875°S. Investigate source gaps/overlaps; state clear approximation rules/consequences.
 
 Use source polygons/coordinates; a city's point is not its area. Map cells to the location with the largest area share; locations to the entity with the largest controlled area at the date. Cells inherit location affiliation even where another entity controls a smaller portion. Effective control assigns one entity per location/date; no claims records. Joint administration uses a documented lead or, where comparable evidence distinguishes, greater responsibility/resources. Resolve remaining ties by stable location/entity ID order; record rationale as arbitrary, not historical fact or a substitute for missing evidence. Never invent an unsupported controller.
 
@@ -18,7 +18,7 @@ A shared apply command validates and transactionally commits research/derived wr
 
 ## Open design questions
 
-- Map layout/coverage, exact row-edge rounding/final height, northern extent, and land/water/coast/lake/river treatment.
+- Map layout/coverage and land/water/coast/lake/river treatment.
 - Location granularity and boundary dataset choices, resolved during hierarchy work.
 - Attribute definitions, time/date conventions, schemas, grid format/partitioning, and matching-revision app loading.
 - Apply-command interface and validation.
