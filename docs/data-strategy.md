@@ -10,6 +10,8 @@ Use source polygons/coordinates; a city's point is not its area. Map cells to th
 
 Population includes all fixed-footprint inhabitants at each date, including rural areas and villages. Encourage estimates/inference when records are sparse; label and record basis/assumptions, leaving values unknown only without a defensible estimate. Never present estimates as observed counts or double-count overlapping sources. Store estimate status/source/basis; show details on demand to keep UI clean.
 
+All land remains assigned to locations; sparse areas may use larger locations and proportionate historical research, with no impassable class. Distinguish supported zero population, not-applicable resident attributes for genuinely uninhabited periods, and values unknown for lack of evidence. Do not infer uninhabited status from sparse records, lack of permanent settlements, or present-day population; consider historical and seasonal habitation where relevant.
+
 ## Storage and delivery
 
 R2 stores original evidence of any size; Neon tracks references, dates, and checksums, without duplicate copies. Neon also holds editable research with PostGIS polygons and separate generated tables for hierarchy, affiliation, population, and attributes. Code generates the cell-to-location grid in R2; never patch generated data. GitHub holds code, schemas, and docs; issues track task completion. One worker owns research through validation, fixes, and delivery. Research may later parallelize across 10–20+ Luna agents. No research-only PR; user merges code/schema/doc PRs.
