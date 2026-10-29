@@ -20,7 +20,11 @@ Original evidence stays in R2; Neon stores references, dates, checksums, editabl
 
 A shared apply command validates and transactionally writes research/derived data with per-location locks and revision checks. Serialize grid corrections: rebuild from latest inputs, upload R2 grid, recheck sources, then commit geometry/results/pointer in Neon. The app reads matching revisions. R2 and Neon are not atomic; no publisher, queue, or handoff.
 
+## Deferred to the next PR
+
+Per-location attribute definitions, time/date conventions, and schemas.
+
 ## Open design questions
 
-- Map layout.
-- Attribute definitions, time/date conventions, schemas, grid format/partitioning, app loading, and apply-command interface/validation.
+- Grid storage format/partitioning.
+- Geography apply-command interface and validation.
