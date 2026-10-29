@@ -12,7 +12,7 @@ Use equal equirectangular steps of 0.02197265625°. The 16,384 × 8,192 full-wor
 
 1. **Evidence:** R2 stores original sources of any size; Neon tracks references, dates, and checksums without duplicate copies.
 2. **Editable geography:** Neon/PostGIS stores stable numeric ID, name, level, parent, polygon, and (for locations) land/water type. Versioned parent proposals retain sources, reasoning, and review status. River records store stable ID, name, line, and sources.
-3. **Generated geography:** code derives approved hierarchy/names and app data in Neon, river display/selection data, and the canonical cell-ID grid in R2. No manual copies or patches.
+3. **Generated geography:** code derives approved hierarchy/names, app tables, and river display/selection data in Neon; R2 stores the canonical cell-ID grid. No manual copies or patches.
 
 One geography-apply workflow accepts parent-bounded drafts, sources, and a base revision. Incomplete/invalid drafts may be saved for correction but cannot be approved or published. Validate IDs, hierarchy, and complete affected-parent coverage (no gaps, overlaps, or geometry outside it). Check conflicts only against affected records and relevant parent boundaries so separate areas proceed concurrently; intermediate levels need no worldwide completion.
 
