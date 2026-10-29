@@ -8,7 +8,7 @@ Complete geography before researching 20+ historical attributes per location. Be
 
 Every included cell belongs to one six-level location: land or non-river water. Land-continent groups include nearby seas, island waters, and lakes; Pacific, Atlantic, Indian, and Arctic groups cover remaining waters. Oceania may include broad remote-island waters; large seas may split; Chukchi is Arctic. Non-river waters are named selectable locations. River-data overlays are selectable lines, cross locations without changing ownership, and retain minimum screen width. Small lakes/islands may disappear; no lake overlay.
 
-For mixed cells, choose land or water by total covered area, then the location with greatest overlap within the winning type; stable location IDs break location ties. Exact land/water ties remain open. Use a 16,384 × 8,192 full-world reference grid, equirectangular step 0.02197265625°, crop Antarctica at nominal 60°S, and retain 90°N. Row alignment yields 16,384 × 6,827 cells (111,853,568), with southern edge 60.00732421875°S. Investigate source gaps and overlaps; state approximation rules and consequences.
+For mixed cells, choose land or water by total covered area (land wins exact ties), then the location with greatest overlap within the winning type; stable location IDs break location ties. Use a 16,384 × 8,192 full-world reference grid, equirectangular step 0.02197265625°, crop Antarctica at nominal 60°S, and retain 90°N. Row alignment yields 16,384 × 6,827 cells (111,853,568), with southern edge 60.00732421875°S. Investigate source gaps and overlaps; state approximation rules and consequences.
 
 Political affiliation is effective control: assign one entity per location/date by greatest controlled area when evidence supports it; cells inherit it. No claims records. Joint administration uses a documented lead or, with comparable evidence, greater responsibility/resources. Stable entity IDs break remaining ties as a model rule, not historical fact. Never invent a controller.
 
@@ -22,5 +22,5 @@ A shared apply command validates and transactionally writes research/derived dat
 
 ## Open design questions
 
-- Exact land/water tie rule for mixed cells; map layout.
+- Map layout.
 - Attribute definitions, time/date conventions, schemas, grid format/partitioning, app loading, and apply-command interface/validation.
