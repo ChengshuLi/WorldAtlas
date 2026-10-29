@@ -4,7 +4,7 @@
 
 Flat 2D display; fixed, time-agnostic hierarchy: location → province → area → region → subcontinent → continent. Use recent reliable administrative footprints; prefer current, allow 2025/2024 or older, and record varying source dates. No common reference date or mandatory 2026 coverage. Freeze footprints across history; only political control changes.
 
-Complete geography before researching 20+ historical attributes per location. Start with six continents excluding Antarctica; user approves each level before parallel workers subdivide it (17 subcontinents is illustrative). Before approval, verify proposed partitions preserve intended whole lower-level administrative units; revise proposals if not. Every in-scope cell is water or exactly one location. Investigate source gaps/overlaps; state clear approximation rules/consequences. Antarctica's land is not implicitly water.
+Complete geography before researching 20+ historical attributes per location. Start with six continents excluding Antarctica; user approves each level before parallel workers subdivide it (17 subcontinents is illustrative). Before approval, verify proposed partitions preserve intended whole lower-level administrative units; revise proposals if not. Every in-scope cell is water or exactly one location. The starting grid is 16,384 × 8,192 (134,217,728 map cells). Investigate source gaps/overlaps; state clear approximation rules/consequences. Antarctica's land is not implicitly water.
 
 Use source polygons/coordinates; a city's point is not its area. Map cells to the location with the largest area share; locations to the entity with the largest controlled area at the date. Cells inherit location affiliation even where another entity controls a smaller portion. Effective control assigns one entity per location/date; no claims records. Joint administration uses a documented lead or, where comparable evidence distinguishes, greater responsibility/resources. Resolve remaining ties by stable location/entity ID order; record rationale as arbitrary, not historical fact or a substitute for missing evidence. Never invent an unsupported controller.
 
@@ -18,7 +18,7 @@ A shared apply command validates and transactionally commits research/derived wr
 
 ## Open design questions
 
-- Map layout/projection, coverage, cell resolution, Antarctica, and land/water/coasts/lakes/rivers.
+- Map projection/layout, geographic coverage and latitude range, and Antarctica’s land/water/coast/lake/river representation.
 - Location granularity and boundary dataset choices, resolved during hierarchy work.
 - Attribute definitions, time/date conventions, schemas, grid format/partitioning, and matching-revision app loading.
 - Apply-command interface and validation.
