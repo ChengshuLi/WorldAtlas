@@ -10,7 +10,7 @@ Use source polygons/coordinates; a city's point is not its area. Map cells to th
 
 Population includes all fixed-footprint inhabitants at each date, including rural areas and villages. Encourage estimates/inference when records are sparse; label and record basis/assumptions, leaving values unknown only without a defensible estimate. Never present estimates as observed counts or double-count overlapping sources. Store estimate status/source/basis; show details on demand to keep UI clean.
 
-All land remains assigned to locations; sparse areas may use larger locations and proportionate historical research, with no impassable class. These describe attribute values, not location or cell types: population 0 requires evidence of no inhabitants; resident-only attributes (such as religion) are not applicable during genuinely uninhabited periods; unknown means evidence is insufficient, not zero. Do not infer uninhabited status from sparse records, lack of permanent settlements, or present-day population alone; consider historical and seasonal habitation.
+All land remains assigned to locations; sparse areas may use larger locations and proportionate historical research, with no impassable class. Use educated estimates for attributes wherever justified; leave values unknown only when no defensible estimate exists. These describe attribute values, not location/cell types: population 0 requires evidence of no inhabitants; resident-only attributes are not applicable only during genuinely uninhabited periods; unknown means insufficient evidence, not zero. Do not infer uninhabited status from sparse records, lack of permanent settlements, or present-day population alone; consider historical and seasonal habitation.
 
 ## Storage and delivery
 
