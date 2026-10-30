@@ -4,7 +4,7 @@ Location attributes 1–10 apply to each fixed location at a selected time and d
 
 ## Shared location-attribute applicability
 
-Each location attribute declares whether it applies to land, water, or both. Attributes 1–10, including political controller, apply to land locations; water locations display Not applicable. The database rejects assignments to inapplicable types; display Not applicable separately from Unknown, which means insufficient evidence. Choose applicability individually for later attributes.
+Each location attribute declares whether it applies to land, water, or both. Attributes 1–10, including political controller, apply to land locations; water locations display Not applicable. The database rejects assignments to inapplicable types; display Not applicable separately from Unknown, which means insufficient evidence. For attributes 8–10, population zero means Not applicable. Choose applicability individually for later attributes.
 
 ## 1. Population
 
@@ -44,7 +44,7 @@ For joint administration, use a documented administrative lead; otherwise, when 
 
 ## 8. GDP per person
 
-Annual economic output per resident for the fixed location and selected year, in constant 2021 international dollars using GDP purchasing-power parity (GDP-PPP). Use supported figures or justified estimates, record the basis, and convert older source measures only with a documented compatible conversion. Use Unknown when no estimate is justified and not-applicable when population is zero.
+Annual economic output per resident for the fixed location and selected year, in constant 2021 international dollars using GDP purchasing-power parity (GDP-PPP). Use supported figures or justified estimates, record the basis, and convert older source measures only with a documented compatible conversion. Use Unknown when no estimate is justified.
 
 ## 9. Total GDP
 
@@ -52,7 +52,7 @@ For inhabited locations with positive population, display total GDP as GDP per p
 
 ## 10. Median purchasing power
 
-Annual person-weighted median disposable household income after taxes and transfers, adjusted for household size and prices. Express it in constant 2021 international dollars using consumption PPP. This represents typical resident purchasing power. Record evidence or estimate basis; use Unknown when no estimate is justified and not-applicable for an uninhabited location.
+Annual person-weighted median disposable household income after taxes and transfers, adjusted for household size and prices. Express it in constant 2021 international dollars using consumption PPP. This represents typical resident purchasing power. Record evidence or estimate basis; use Unknown when no estimate is justified.
 
 Record sources and estimate basis for these values. Other attributes remain for later discussion.
 
