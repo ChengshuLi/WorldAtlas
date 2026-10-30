@@ -369,8 +369,6 @@ def main(source, output):
             "Sea of Okhotsk",
             "Persian Gulf",
             "Gulf of Oman",
-            "Bay of Bengal",
-            "Arabian Sea",
             "Andaman Sea",
             "Java Sea",
             "Sulu Sea",

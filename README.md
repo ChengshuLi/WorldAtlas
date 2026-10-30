@@ -53,11 +53,14 @@ cell so omitted coastlines cannot be nearer. Separate continent-specific searche
 independently verify the result. Basin entrance gates exclude the Atlantic,
 Marmara and Suez Canal; land assignments and water outside the basin are preserved.
 
-`scripts/refine_socotra_buffer.py PRIOR_NATIVE_DIR OUTPUT_DIR` bounds the Gulf
-of Aden shared-water area at its entrances and uses nearest mainland coasts
-inside it. Socotra and adjacent islands retain shoreline-following 100-km buffers;
-African extensions beyond those buffers outside the gulf become Indian Ocean.
-This pass preserves the distant Asian Arabian Sea grouping pending its review.
+`scripts/rebuild_northern_indian.py PRIOR_NATIVE_DIR OUTPUT_DIR` applies one rule
+across the Arabian Sea, Bay of Bengal and adjoining waters: retain bounded Aden,
+Persian/Oman and Andaman waters; elsewhere assign the nearest coastal continent
+within 100 km, including islands, and Indian Ocean beyond. Aden is shared by
+mainland coast proximity with local coastal-buffer priority. Native connected
+water masks exclude inland lakes and unrelated seas. Independent per-continent
+queries verify every revised sea cell. The Andaman western island-arc boundary
+uses the source marine outline; its southern entrance follows named capes.
 
 Source archives, generated grids, research notes, and review metadata belong in
 R2/Neon rather than Git. Use an immutable review prefix for each candidate and
