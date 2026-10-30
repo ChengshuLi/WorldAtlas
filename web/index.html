@@ -287,7 +287,7 @@
         </details>
       </aside>
       <main id="map">
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" tabindex="0" aria-label="World map"></canvas>
         <div class="tools">
           <button id="in" aria-label="Zoom in">+</button
           ><button id="out" aria-label="Zoom out">−</button
@@ -372,7 +372,7 @@
         constrainView();
         renderer.draw({ scale, ox, oy, dpr, selected });
         $("#status").textContent =
-          `${meta.width.toLocaleString()} × ${meta.height.toLocaleString()} cells · ${scale.toFixed(2)} screen px/cell · full native map loaded · drag to pan, scroll or +/− to zoom · not approved`;
+          `${meta.width.toLocaleString()} × ${meta.height.toLocaleString()} cells · ${scale.toFixed(2)} screen px/cell · full native map loaded · WASD or drag to pan · +/− or scroll to zoom · not approved`;
       }
       function zoom(f, x = map.clientWidth / 2, y = map.clientHeight / 2) {
         if (!renderer) return;
@@ -400,6 +400,7 @@
       }
       canvas.addEventListener("pointerdown", (e) => {
         if (!renderer) return;
+        canvas.focus({ preventScroll: true });
         canvas.setPointerCapture(e.pointerId);
         drag = {
           id: e.pointerId,
@@ -460,6 +461,28 @@
       canvas.addEventListener('webglcontextlost', (e) => {
         e.preventDefault(); renderer = null;
         $('#status').textContent = 'Graphics context lost. Reload to restore the map.';
+      });
+      function keyboardAction(event) {
+        if (event.defaultPrevented || event.isComposing || event.ctrlKey || event.metaKey || event.altKey) return null;
+        if (event.target?.closest?.('input,textarea,select,[contenteditable]:not([contenteditable="false"]),[role="textbox"]')) return null;
+        const key = event.key.toLowerCase();
+        return ({ '+':'in', '=':'in', '-':'out', '_':'out', w:'north', a:'west', s:'south', d:'east' })[key] || null;
+      }
+      window.addEventListener('keydown', (event) => {
+        if (!renderer) return;
+        const action = keyboardAction(event);
+        if (!action) return;
+        event.preventDefault();
+        if (action === 'in') zoom(2);
+        else if (action === 'out') zoom(0.5);
+        else {
+          const step = event.repeat ? 32 : Math.min(map.clientWidth,map.clientHeight) * 0.15;
+          if (action === 'north') oy += step;
+          if (action === 'south') oy -= step;
+          if (action === 'west') ox += step;
+          if (action === 'east') ox -= step;
+          constrainView(); requestDraw();
+        }
       });
       new ResizeObserver(size).observe(map);
       try {
