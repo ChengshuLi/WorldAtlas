@@ -24,3 +24,12 @@ test('canvas renders exactly the loaded native cell at each screen pixel',()=>{
   }
  }
 });
+import {gridLinePixels} from '../web/local-grid.js';
+test('fractional zoom and offsets retain screen-aligned lines in both axes',()=>{
+ for(const scale of [9,9.1,10.5,17.37,36]) for(const offset of [-42.72,.11,-.5]) {
+  const lines=gridLinePixels(offset,scale,800,65536);
+  assert.ok(lines.length>=Math.floor(800/scale)-1);
+  assert.ok(lines.every(Number.isInteger));
+  for(let i=1;i<lines.length;i++) assert.ok(Math.abs(lines[i]-lines[i-1]-scale)<1.01);
+ }
+});

@@ -59,6 +59,16 @@ export function renderPixels(meta, data, width, height, scale, ox, oy) {
   }
   return pixels;
 }
+export function gridLinePixels(offset, scale, extent, worldSize) {
+  const result=[];
+  const first=Math.max(0,Math.floor(-offset/scale));
+  const last=Math.min(worldSize,Math.ceil((extent-offset)/scale));
+  for(let cell=first;cell<=last;cell++) {
+    const pixel=Math.floor(offset+cell*scale);
+    if(pixel>=0 && pixel<extent) result.push(pixel);
+  }
+  return result;
+}
 function canvasRenderer(canvas, meta, data) {
   const ctx = canvas.getContext('2d', {alpha:false});
   if (!ctx) throw Error('No supported map rendering context');
@@ -69,10 +79,10 @@ function canvasRenderer(canvas, meta, data) {
     ctx.setTransform(dpr,0,0,dpr,0,0);
     const w=canvas.width/dpr,h=canvas.height/dpr;
     if(scale>=9){
-      ctx.strokeStyle='#ffffff38';ctx.lineWidth=.5;ctx.beginPath();
-      for(let x=Math.max(0,Math.floor(-ox/scale));x<=Math.min(meta.width,(w-ox)/scale);x++){ctx.moveTo(ox+x*scale,0);ctx.lineTo(ox+x*scale,h);}
-      for(let y=Math.max(0,Math.floor(-oy/scale));y<=Math.min(meta.height,(h-oy)/scale);y++){ctx.moveTo(0,oy+y*scale);ctx.lineTo(w,oy+y*scale);}
-      ctx.stroke();
+      ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle='#ffffff66';
+      for(const x of gridLinePixels(ox*dpr,scale*dpr,canvas.width,meta.width)) ctx.fillRect(x,0,1,canvas.height);
+      for(const y of gridLinePixels(oy*dpr,scale*dpr,canvas.height,meta.height)) ctx.fillRect(0,y,canvas.width,1);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
     }
     if(selected){ctx.strokeStyle='#182c3c';ctx.lineWidth=2;ctx.strokeRect(ox+selected.x*scale,oy+selected.y*scale,Math.max(scale,3),Math.max(scale,3));}
   }};
@@ -115,7 +125,12 @@ export function createRenderer(canvas, meta, data) {
     }
     uint value = runWord(lo * 2 + 1);
     vec3 rgb = uPalette[int(value)];
-    if (uCssScale >= 9.0 && min(fract(position.x),fract(position.y)) < 0.5/uCssScale) rgb=mix(rgb,vec3(1.0),0.22);
+    if (uCssScale >= 9.0) {
+      vec2 nearestBoundary=floor(position+0.5);
+      vec2 linePixel=floor(uOffset+nearestBoundary*uScale)+0.5;
+      vec2 distanceToLine=abs(screen-linePixel);
+      if(min(distanceToLine.x,distanceToLine.y)<0.51) rgb=mix(rgb,vec3(1.0),0.4);
+    }
     if (uSelected.x >= 0) {
       float ratio=uScale/uCssScale;
       vec2 q=screen-(uOffset+vec2(uSelected)*uScale);
