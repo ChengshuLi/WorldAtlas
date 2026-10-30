@@ -46,6 +46,13 @@ is credited to OpenStreetMap contributors; its Gulf extension is an editorial
 separator through water. Shared Philippine, Banda, and Arafura waters use the
 nearest corrected coastline, with nearby-water priority within 100 km.
 
+`scripts/audit_mediterranean.py PRIOR_NATIVE_DIR OUTPUT_DIR` audits all connected
+Mediterranean water cells at native resolution against the nearest coastal land
+cell on a sphere, including islands. Its padded coast search is checked for every
+cell so omitted coastlines cannot be nearer. Separate continent-specific searches
+independently verify the result. Basin entrance gates exclude the Atlantic,
+Marmara and Suez Canal; land assignments and water outside the basin are preserved.
+
 Source archives, generated grids, research notes, and review metadata belong in
 R2/Neon rather than Git. Use an immutable review prefix for each candidate and
 publish the root index only after its referenced assets exist. The draft remains
