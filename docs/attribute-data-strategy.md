@@ -6,11 +6,17 @@ Location attributes may be time-dependent or time-agnostic. Political-entity gov
 
 Names are time-agnostic. Each unit in the six-level geographic hierarchy has one fixed display name based on a current reference name set during geography research. Each political entity has one familiar conventional name, including extinct entities. A change in government type leaves the entity’s fixed name and stable ID in place.
 
+## Shared attribute definitions
+
+Every location and political-entity attribute, whether time-dependent or time-agnostic, uses a shared definition with a stable attribute ID, display name, meaning, value type, applicability, and time behavior. Categorical values reference shared category IDs, names, and definitions. Numeric values specify units and value rules.
+
 ## Shared location-attribute applicability
 
-Each location attribute declares whether it applies to land, water, or both. Time-dependent location attributes 1–13, including political controller, apply to land. Among time-agnostic attributes, Topography and Climate apply to land, while Water type applies to water. Water locations show Not applicable for land-only attributes; attributes 8–10 also show Not applicable when population is zero. The database rejects incompatible assignments, and the UI distinguishes Not applicable from Unknown (insufficient evidence). Later attributes declare applicability individually.
+Each location attribute declares whether it applies to land, water, or both. Time-dependent location attributes 1–14, including political controller and port functions, apply to land. Among time-agnostic attributes, Topography and Climate apply to land, while Water type applies to water. Water locations show Not applicable for land-only attributes; attributes 8–10 also show Not applicable when population is zero. The database rejects incompatible assignments, and the UI distinguishes Not applicable from Unknown (insufficient evidence). Later attributes declare applicability individually.
 
 ## Time-dependent location attributes
+
+For each time-dependent location value, record its sources and estimate basis.
 
 ### 1. Population
 
@@ -85,7 +91,9 @@ Assign one primary category to the whole land location at the selected time:
 - **No vegetation:** essentially bare rock, sand, or permanent ice.
 - **Unknown.**
 
-Record sources and estimate basis for these time-dependent values; other attributes remain for later discussion.
+### 14. Port functions
+
+For each land location and selected time, record the set of active functions: Maritime, River, and Lake. Multiple functions may apply to one location. None means evidence or a justified estimate supports no active port function; Unknown means no defensible conclusion. Base each function on evidence of actual operation at that time. A maritime port may lie upriver. Record functions for the whole location.
 
 ## Time-agnostic location attributes
 
@@ -115,7 +123,21 @@ Use all 30 classes. Quantitative definitions govern classification; display fami
 
 Sources: [GloH2O Köppen–Geiger maps](https://www.gloh2o.org/koppen/) and [Beck et al. (2023)](https://www.nature.com/articles/s41597-023-02549-6).
 
+## Derived geographic relationships
+
+After geography is finalized, derive adjacency from map-cell assignments and recompute it when geography changes. Two locations are neighbors when their cells share an edge. Store neighboring location IDs for every land and water location; corner contact alone is not adjacency.
+
+Derive land-location access links from neighboring locations and finalized river overlays. Link lakes by neighboring Lake location IDs; derive a coastal-access Yes/No flag, if useful, from adjacent marine-water locations. Keep lake access separate from coastal access. Link rivers by river IDs where finalized river paths intersect or follow a location boundary. Rivers remain selectable overlays, not locations. These links represent geographic access.
+
 ## Political-entity attributes
+
+### Shared entity record and identity
+
+Each entity has a stable ID and start and end year; leave the end open for an entity that still exists. Controller references must fall within the entity’s lifetime. Identity follows political-state continuity: a change in ruler or government type alone leaves the ID unchanged, while distinct political states have distinct IDs even when they share a civilization or territory.
+
+### Subordination relationship
+
+Record subordinate and overlord entity IDs, start and end year, and evidence or estimate basis when one political entity holds superior political authority over another that retains its own government. The overlord relationship does not replace the local controller assigned to a location.
 
 ### Primary government type
 
@@ -131,3 +153,5 @@ Store one primary type per political entity and time; locations receive it throu
 - **Personalist dictatorship:** governing power is centered on an individual leader.
 
 When categories overlap, select the best-fitting type as primary.
+
+Historical range, year and BCE convention, interval boundaries, and values between research dates remain open for discussion.
