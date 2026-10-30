@@ -66,7 +66,7 @@ Record significant infectious diseases and outbreaks affecting a location and pe
 
 ### 12. Annual infectious-disease deaths
 
-For each location and year, record annual resident deaths by disease identity; each count may be Unknown. Also record the combined count of unique people who died from the diseases covered by that list. Consolidate overlapping reports within each disease and account for overlap across diseases; the combined count is not a raw sum. Use a supported count or justified estimate, otherwise mark the combined count Unknown while retaining individual estimates. Record sources, coverage, and overlap reasoning. Calculate percentages using Population (#1). This attribute covers infectious-disease deaths, not all-cause mortality; individual death registries are unnecessary.
+For each location and year, record annual resident deaths from the infectious diseases and outbreaks listed for that location and period in #11, using the same disease and outbreak identities. Research or estimate mortality separately; disease presence does not determine a death count, and mortality may be Unknown even when presence is known. Each disease count may be Unknown. Also record the combined count of unique people who died from those listed diseases. Consolidate overlapping reports within each disease and account for overlap across diseases; the combined count is not a raw sum. Use a supported count or justified estimate, otherwise mark the combined count Unknown while retaining individual estimates. Record sources, coverage, and overlap reasoning. Calculate percentages using Population (#1). This attribute covers infectious-disease deaths, not all-cause mortality; individual death registries are unnecessary.
 
 ### 13. Vegetation
 
