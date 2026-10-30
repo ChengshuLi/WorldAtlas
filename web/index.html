@@ -368,18 +368,35 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         requestDraw();
       }
+      function minimumScale() {
+        return Math.max(
+          map.clientWidth / meta.width,
+          map.clientHeight / meta.height,
+        );
+      }
+      function constrainView() {
+        if (!meta || !map.clientWidth || !map.clientHeight) return;
+        const minimum = minimumScale();
+        if (scale < minimum) {
+          const cx = (map.clientWidth / 2 - ox) / scale,
+            cy = (map.clientHeight / 2 - oy) / scale;
+          scale = minimum;
+          ox = map.clientWidth / 2 - cx * scale;
+          oy = map.clientHeight / 2 - cy * scale;
+        }
+        ox = Math.min(0, Math.max(map.clientWidth - meta.width * scale, ox));
+        oy = Math.min(0, Math.max(map.clientHeight - meta.height * scale, oy));
+      }
       function fit() {
-        scale =
-          Math.min(
-            map.clientWidth / meta.width,
-            map.clientHeight / meta.height,
-          ) * 0.96;
+        scale = minimumScale();
         ox = (map.clientWidth - meta.width * scale) / 2;
         oy = (map.clientHeight - meta.height * scale) / 2;
+        constrainView();
         requestDraw();
       }
       function draw() {
         if (!meta) return;
+        constrainView();
         const w = map.clientWidth,
           h = map.clientHeight;
         ctx.clearRect(0, 0, w, h);
@@ -464,10 +481,12 @@
           `${meta.width.toLocaleString()} × ${meta.height.toLocaleString()} cells · ${scale.toFixed(2)} screen px/cell · drag to pan, scroll or +/− to zoom · not approved`;
       }
       function zoom(f, x = map.clientWidth / 2, y = map.clientHeight / 2) {
-        const ns = Math.max(0.005, Math.min(36, scale * f));
+        if (!meta) return;
+        const ns = Math.max(minimumScale(), Math.min(36, scale * f));
         ox = x - ((x - ox) * ns) / scale;
         oy = y - ((y - oy) * ns) / scale;
         scale = ns;
+        constrainView();
         requestDraw();
       }
       function pick(px, py) {
