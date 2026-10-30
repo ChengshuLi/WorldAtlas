@@ -38,9 +38,9 @@ The percentage of residents aged 15 or older who can read and write a simple eve
 
 ## 7. Political controller
 
-For each land location and time, record the effective controlling political entity by ID, based on control evidence or a justified estimate. States and local communities, tribes, or councils may be entities. Use Unknown when no controller can be established. Population alone does not establish control.
+For each land location and time, record the effective controlling entity by ID; when control is divided, choose the entity controlling the greatest area within the fixed boundary. States and local communities, tribes, or councils may be entities. Use Unknown when no controller is supported by evidence or a justified estimate. Population alone does not establish control.
 
-For joint administration, use a documented administrative lead; otherwise, when comparable evidence supports it, use the entity with greater responsibility and resources. A stable entity ID breaks any remaining tie. At population zero, a location may have a controller, NoController, or Unknown. With positive population, record a controller or Unknown. NoController means evidence supports that no entity controls the location, not missing research.
+For joint administration, use a documented administrative lead; otherwise, when comparable evidence supports it, use the entity with greater responsibility and resources. A stable entity ID breaks any remaining tie. At population zero, a location may have a controller, NoController, or Unknown. With positive population, record a controller or Unknown. NoController means direct evidence or a justified estimate supports that no entity controls the location; Unknown means evidence is insufficient.
 
 ## 8. GDP per person
 
@@ -62,13 +62,13 @@ Record sources and estimate basis for these values. Other attributes remain for 
 
 Store one primary type per political entity and time; locations receive it through their controller. Choose the category that best describes the entity’s governing arrangement, even where descriptions overlap. Use Unknown when no classification is justified.
 
-- **Monarchy:** governing authority is inherited through a ruling house.
+- **Monarchy:** government organized around a monarch.
 - **Republic:** political authority is exercised through civic institutions and public offices.
 - **Theocracy:** religious authorities or institutions hold governing power.
 - **Steppe horde:** a mobile steppe confederation organized around military and kinship leadership.
 - **Tribal polity:** political authority is organized through tribal communities and leadership.
 - **Military government:** military authorities directly govern.
-- **One-party state:** governing authority is organized through one political party.
+- **One-party state:** one ruling party monopolizes political power.
 - **Personalist dictatorship:** governing power is centered on an individual leader.
 
 A government may fit more than one description; store one primary type without imposing a fixed priority among categories.
