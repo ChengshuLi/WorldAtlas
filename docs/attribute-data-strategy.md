@@ -12,21 +12,21 @@ Classify the whole location at the selected time as Uninhabited, Rural, Town, Ci
 
 ## Shared rules for attributes 3–5
 
-At the selected time, each records the resident category with the largest population share; that share need not exceed half. Use evidence or a justified educated estimate. Use Unknown only when no primary category can be justified, and Not applicable when population is zero. Record sources and estimate basis.
+For each attribute, record the resident category with the largest population share at the selected time. The share need not exceed half. Use evidence or a justified educated estimate. Use Unknown only when no primary category can be justified, and Not applicable when population is zero. Record sources and estimate basis.
 
 Optional share breakdowns use the same structure for all three: **complete** accounts for the population, **partial** records some shares, and **unavailable** means no shares can be justified. A partial or unavailable breakdown may not show which category is largest; a defensible estimate may still support a primary category. Retain supported or estimated shares with their basis.
 
 ## 3. Primary culture
 
-The resident cultural group.
+The category is the resident cultural group.
 
 ## 4. Primary religion
 
-The resident religious affiliation. Unaffiliated is a valid category.
+The category is the resident religious affiliation; Unaffiliated is valid.
 
 ## 5. Primary spoken language
 
-The residents’ main everyday or home language. For multilingual residents, assign each person to the language they use most in everyday/home life when estimating shares.
+The category is the residents’ main everyday or home language. For multilingual residents, assign each person to the language they use most in everyday/home life when estimating shares.
 
 ## 6. Adult literacy rate
 
