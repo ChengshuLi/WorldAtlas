@@ -37,9 +37,49 @@ export async function loadLocalGrid(meta, base) {
   validateGrid(meta, rows, runs);
   return { rows, runs };
 }
+// Canvas fallback renders the same fully loaded native runs, never an overview.
+export function renderPixels(meta, data, width, height, scale, ox, oy) {
+  const pixels = new Uint32Array(width * height);
+  const colors = meta.palette.map(rgb => (255 << 24 | rgb[2] << 16 | rgb[1] << 8 | rgb[0]) >>> 0);
+  let previousY = -999;
+  for (let py = 0; py < height; py++) {
+    const y = Math.floor((py + 0.5 - oy) / scale), offset = py * width;
+    if (y === previousY && py > 0) { pixels.copyWithin(offset, offset - width, offset); continue; }
+    previousY = y;
+    if (y < 0 || y >= meta.height) { pixels.fill(0xfff2ece6, offset, offset + width); continue; }
+    const left = Math.floor((0.5 - ox) / scale);
+    let lo = data.rows[y], hi = data.rows[y + 1];
+    while (lo < hi) { const mid = (lo + hi) >>> 1; if (data.runs[mid * 2] <= left) lo = mid + 1; else hi = mid; }
+    let start = Math.max(0, Math.ceil(ox - 0.5));
+    for (let r = lo; r < data.rows[y + 1] && start < width; r++) {
+      const end = Math.min(width, Math.max(0, Math.ceil(ox + data.runs[r * 2] * scale - 0.5)));
+      if (end > start) pixels.fill(colors[data.runs[r * 2 + 1]], offset + start, offset + end);
+      start = end;
+    }
+  }
+  return pixels;
+}
+function canvasRenderer(canvas, meta, data) {
+  const ctx = canvas.getContext('2d', {alpha:false});
+  if (!ctx) throw Error('No supported map rendering context');
+  return { draw({scale,ox,oy,dpr,selected}) {
+    const pixels = renderPixels(meta,data,canvas.width,canvas.height,scale*dpr,ox*dpr,oy*dpr);
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.putImageData(new ImageData(new Uint8ClampedArray(pixels.buffer),canvas.width,canvas.height),0,0);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const w=canvas.width/dpr,h=canvas.height/dpr;
+    if(scale>=9){
+      ctx.strokeStyle='#ffffff38';ctx.lineWidth=.5;ctx.beginPath();
+      for(let x=Math.max(0,Math.floor(-ox/scale));x<=Math.min(meta.width,(w-ox)/scale);x++){ctx.moveTo(ox+x*scale,0);ctx.lineTo(ox+x*scale,h);}
+      for(let y=Math.max(0,Math.floor(-oy/scale));y<=Math.min(meta.height,(h-oy)/scale);y++){ctx.moveTo(0,oy+y*scale);ctx.lineTo(w,oy+y*scale);}
+      ctx.stroke();
+    }
+    if(selected){ctx.strokeStyle='#182c3c';ctx.lineWidth=2;ctx.strokeRect(ox+selected.x*scale,oy+selected.y*scale,Math.max(scale,3),Math.max(scale,3));}
+  }};
+}
 export function createRenderer(canvas, meta, data) {
   const gl = canvas.getContext('webgl2', { alpha: false, antialias: false, depth: false, stencil: false });
-  if (!gl) throw Error('This viewer requires WebGL 2. Please enable hardware acceleration.');
+  if (!gl) return canvasRenderer(canvas, meta, data);
   const vertex = `#version 300 es
   void main() {
     vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));

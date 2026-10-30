@@ -28,6 +28,8 @@ def build(folder):
     for name,raw in [('rows',rows),('runs',runs)]:
         (folder/f'{name}.u32.gz').write_bytes(gzip.compress(raw,compresslevel=6,mtime=0))
     meta['local_grid']={'encoding':'row-runs-u32-pairs-v1','rows':'rows.u32.gz','runs':'runs.u32.gz','run_count':count,'rows_sha256':hashlib.sha256(rows).hexdigest(),'runs_sha256':hashlib.sha256(runs).hexdigest(),'decoded_bytes':len(rows)+len(runs),'compressed_bytes':sum((folder/f'{s}.u32.gz').stat().st_size for s in ['rows','runs'])}
+    meta['display_encoding']='row-runs-u32-pairs-v1'
+    for key in ['tile_pack','tile_pack_sha256','tile_size']:meta.pop(key,None)
     (folder/'proposal-full.json').write_text(json.dumps({k:v for k,v in meta.items() if k!='tiles'},separators=(',',':'))+'\n')
     print(json.dumps(meta['local_grid'],indent=2))
 if __name__=='__main__':build(Path(sys.argv[1]))
