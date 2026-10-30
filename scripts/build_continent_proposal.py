@@ -295,6 +295,8 @@ def land_records(source, maldives=None):
                 group = 4
             if attr["ADMIN"] == "Spain" and x < -12 and y < 31:
                 group = 1
+            if attr["ADMIN"] == "Spain" and -6 <= x <= -2 and 35 <= y <= 35.95:
+                group = 1
             if attr["GEOUNIT"] == "Madeira":
                 group = 1
             if attr["GEOUNIT"] == "Greenland":
