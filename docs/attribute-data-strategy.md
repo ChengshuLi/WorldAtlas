@@ -2,6 +2,10 @@
 
 Location attributes may be time-dependent or time-agnostic. Political-entity government type is stored per entity and time; locations receive it through their controller.
 
+## Names and identity
+
+Names are time-agnostic. Each unit in the six-level geographic hierarchy has one fixed display name based on a current reference name set during geography research. Each political entity has one familiar conventional name, including extinct entities. A change in government type leaves the entity’s fixed name and stable ID in place.
+
 ## Shared location-attribute applicability
 
 Each location attribute declares whether it applies to land, water, or both. Time-dependent location attributes 1–13, including political controller, apply to land. Among time-agnostic attributes, Topography and Climate apply to land, while Water type applies to water. Water locations show Not applicable for land-only attributes; attributes 8–10 also show Not applicable when population is zero. The database rejects incompatible assignments, and the UI distinguishes Not applicable from Unknown (insufficient evidence). Later attributes declare applicability individually.
