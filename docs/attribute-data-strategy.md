@@ -4,13 +4,11 @@ These attributes belong to each fixed location at a selected time. They do not c
 
 ## 1. Population
 
-Store one total for everyone within the fixed location boundary, including urban, suburban, and rural residents, regardless of rank. The location is the smallest unit. Estimates are encouraged when defensible: record their basis and provenance, and present them as estimates. Use zero when direct evidence or a justified estimate supports no inhabitants. Use unknown only when even an estimate cannot be justified.
+Total residents within the location’s fixed boundary at the selected time, including all urban, suburban, and rural residents. Use supported counts or justified educated estimates, including zero; record the basis. Use Unknown only when no estimate is justified.
 
 ## 2. Location rank
 
-Give the whole location one rank at a time: **Uninhabited, Rural, Town, City, or Unknown**. Uninhabited corresponds to population zero, whether directly evidenced or estimated. Rural means inhabited and non-urban, including nomadic populations. Town and City describe historical character and role, with no population cutoffs. Their geographic area may include urban, suburban, and nearby rural map cells, all included in the location population. A City may have fewer residents than a Rural location. Rank can change over time while the location boundary stays fixed.
-
-Use Unknown only when no rank can be justified. Unknown population does not require Unknown rank when historical character supports a classification.
+Classify the whole location at the selected time as Uninhabited, Rural, Town, City, or Unknown, based on its historical character. Uninhabited means population zero; Rural covers inhabited non-urban locations, including nomadic populations. Town and City may include suburban and rural cells. Rank is not determined by total population: a City may have fewer residents than a Rural location. Unknown population does not require Unknown rank; use Unknown rank only when no classification can be justified.
 
 ## 3. Primary culture
 
