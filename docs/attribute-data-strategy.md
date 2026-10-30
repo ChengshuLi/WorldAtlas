@@ -44,17 +44,17 @@ For each land location and time, record the effective controlling entity by ID; 
 
 For joint administration, use a documented administrative lead. If none is documented, choose the entity with greater responsibility and resources when comparable evidence supports that distinction; use a stable entity ID to break remaining ties. At population zero, a location may have a controller, NoController, or Unknown. For populated locations, assign a supported controller or use Unknown. NoController means direct evidence or a justified estimate supports that no entity controls the location; Unknown means evidence is insufficient.
 
+### Shared rules for attributes 8–9
+
+Research both measures for the fixed location and selected year, using independently researched Population (#1). For compatible definitions, boundaries, and units, derive Total GDP as GDP per person × Population, or GDP per person as Total GDP ÷ Population. When both measures are supported by evidence or justified estimates, use the higher-confidence one and derive the other; when one is supportable, derive its counterpart; when neither is supportable, mark both Unknown. Retain all source evidence and the selection rationale.
+
 ### 8. GDP per person
 
-Annual economic output per resident for the fixed location and selected year, in constant 2021 international dollars using GDP purchasing-power parity (GDP-PPP). Use supported figures or justified estimates, record the basis, and convert older source measures only with a documented compatible conversion. Use Unknown when no estimate is justified.
+Annual economic output per resident for the fixed location and selected year, in constant 2021 international dollars using GDP purchasing-power parity (GDP-PPP). Record source and estimate basis; document a compatible conversion when using older source measures.
 
 ### 9. Total GDP
 
 Annual total economic output for the fixed location and selected year, in constant 2021 international dollars using GDP-PPP.
-
-### Shared GDP calculation for attributes 8–9
-
-Research both values, using selected population as an independently established input. For the same location, year, and boundary, with compatible definitions and units, calculate total GDP = GDP per person × population, or GDP per person = total GDP ÷ population. If both are supported by evidence or justified estimates, choose the higher-confidence value and derive the other. If only one is supportable, derive its counterpart; if neither is supportable, mark both Unknown. Retain all source evidence and the selection rationale.
 
 ### 10. Median purchasing power
 
