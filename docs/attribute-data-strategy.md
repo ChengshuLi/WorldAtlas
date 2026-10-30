@@ -1,10 +1,14 @@
 # Time-dependent attributes
 
-These attributes belong to each fixed location at a selected time. They do not change the geography.
+Location attributes 1–10 apply to each fixed location at a selected time and do not change the geography. Political-entity attributes are stored per entity and linked through the location’s controller.
+
+## Shared location-attribute applicability
+
+Each location attribute declares whether it applies to land, water, or both. Attributes 1–10, including political controller, apply to land locations; water locations display Not applicable. The database rejects assignments to inapplicable types; display Not applicable separately from Unknown, which means insufficient evidence. Choose applicability individually for later attributes.
 
 ## 1. Population
 
-Total residents within the location’s fixed boundary at the selected time, including all urban, suburban, and rural residents. Use supported counts or justified educated estimates, including zero; record the basis. Use Unknown only when no estimate is justified.
+Total residents within the location’s fixed boundary at the selected time, including all urban, suburban, and rural residents. Use supported counts or justified educated estimates, including zero; record the basis. Use Unknown only when no estimate is justified. Population is an independently researched input. Other attributes may use it, but it is never derived from them or changed to reconcile GDP or share data.
 
 ## 2. Location rank
 
@@ -32,4 +36,39 @@ The category is the residents’ main everyday or home language. For multilingua
 
 The percentage of residents aged 15 or older who can read and write a simple everyday statement with understanding, in any language, at the selected time. Use supported figures or a justified educated estimate, and record the basis. Use Unknown only when no estimate is justified; use not-applicable for an uninhabited location.
 
+## 7. Political controller
+
+For each land location and time, record the effective controlling political entity by ID, based on control evidence or a justified estimate. States and local communities, tribes, or councils may be entities. Use Unknown when no controller can be established. Population alone does not establish control.
+
+For joint administration, use a documented administrative lead; otherwise, when comparable evidence supports it, use the entity with greater responsibility and resources. A stable entity ID breaks any remaining tie. At population zero, a location may have a controller, NoController, or Unknown. With positive population, record a controller or Unknown. NoController means evidence supports that no entity controls the location, not missing research.
+
+## 8. GDP per person
+
+Annual economic output per resident for the fixed location and selected year, in constant 2021 international dollars using GDP purchasing-power parity (GDP-PPP). Use supported figures or justified estimates, record the basis, and convert older source measures only with a documented compatible conversion. Use Unknown when no estimate is justified and not-applicable when population is zero.
+
+## 9. Total GDP
+
+For inhabited locations with positive population, display total GDP as GDP per person multiplied by selected population for the same location, year, and units. Retain directly reported total GDP as evidence, including to estimate GDP per person when definitions are compatible. When reported totals and per-person figures conflict, compare dates, boundaries, definitions, and units; choose the better-supported GDP evidence, keep population fixed, and record the rationale. GDP evidence never determines population.
+
+## 10. Median purchasing power
+
+Annual person-weighted median disposable household income after taxes and transfers, adjusted for household size and prices. Express it in constant 2021 international dollars using consumption PPP. This represents typical resident purchasing power. Record evidence or estimate basis; use Unknown when no estimate is justified and not-applicable for an uninhabited location.
+
 Record sources and estimate basis for these values. Other attributes remain for later discussion.
+
+## Political-entity attributes
+
+### Primary government type
+
+Store one primary type per political entity and time; locations receive it through their controller. Choose the category that best describes the entity’s governing arrangement, even where descriptions overlap. Use Unknown when no classification is justified.
+
+- **Monarchy:** governing authority is inherited through a ruling house.
+- **Republic:** political authority is exercised through civic institutions and public offices.
+- **Theocracy:** religious authorities or institutions hold governing power.
+- **Steppe horde:** a mobile steppe confederation organized around military and kinship leadership.
+- **Tribal polity:** political authority is organized through tribal communities and leadership.
+- **Military government:** military authorities directly govern.
+- **One-party state:** governing authority is organized through one political party.
+- **Personalist dictatorship:** governing power is centered on an individual leader.
+
+A government may fit more than one description; store one primary type without imposing a fixed priority among categories.
