@@ -8,7 +8,7 @@ Total residents within the location’s fixed boundary at the selected time, inc
 
 ## 2. Location rank
 
-Classify the whole location at the selected time as Uninhabited, Rural, Town, City, or Unknown, based on its historical character. Uninhabited means population zero; Rural covers inhabited non-urban locations, including nomadic populations. Town and City may include suburban and rural cells. Rank is not determined by total population: a City may have fewer residents than a Rural location. Unknown population does not require Unknown rank; use Unknown rank only when no classification can be justified.
+Classify the whole location at the selected time as Uninhabited, Rural, Town, City, or Unknown, based on its historical character. Uninhabited means population zero; Rural covers inhabited non-urban locations, including nomadic populations. A location ranked Town or City may contain suburban areas or countryside within its boundary. Rank is not determined by total population: a City may have fewer residents than a Rural location. Unknown population does not require Unknown rank; use Unknown rank only when no classification can be justified.
 
 ## 3. Primary culture
 
