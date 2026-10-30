@@ -149,7 +149,7 @@ Research both measures for the same location, year, and fixed boundary, using in
 
 14. **Port functions:** For each land location and selected time, record the set of active functions: Maritime, River, and Lake; multiple may apply. None means evidence or a justified estimate supports no active port function; Unknown means no defensible conclusion. Base functions on actual operation at that time. A maritime port may lie upriver. Record functions for the whole location.
 
-15. **Notable production:** List locally significant goods actually produced within the location at the selected time, using the shared product catalog. Multiple goods may apply; examples include agricultural products, extracted materials, livestock, fish, and timber. Record sources and estimate basis. None means evidence or a justified estimate supports no notable production; Unknown means available research cannot establish it.
+15. **Notable production:** List locally significant goods actually produced within the location at the selected time, including raw materials, processed goods, and manufactured goods, using the shared product catalog. Multiple goods may apply; examples include wheat, iron ore, livestock, fish, timber, textiles, porcelain, and steel. Production may use imported inputs; trade alone does not establish local production. Record sources and estimate basis. None means evidence or a justified estimate supports no notable production; Unknown means available research cannot establish it.
 
 #### Time-agnostic location attributes
 
