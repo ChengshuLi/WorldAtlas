@@ -37,7 +37,7 @@ Use a flat equirectangular (Plate Carrée) map with equal longitude and latitude
 
 Start with six land continents, excluding Antarctica, plus ocean groups. Every cell within the chosen map coverage belongs to exactly one land or non-river-water location. Land-continent groups include nearby seas, island-region waters, and lakes; ocean groups cover remaining ocean waters. Broad waters may be grouped with relevant continents, and large seas may be shared by adjacent groups. Non-river-water locations are named and selectable. Small lakes and islands may not resolve at this scale. Flag inhabited islands too small to resolve during the first continent review and assess whether a higher resolution is warranted.
 
-Every land cell belongs to an ordinary location. Research sparse areas in proportion to their significance; larger locations are acceptable. User-approved subdivisions fully cover their parent cells without gaps, overlaps, or cells outside the parent. Check lower-level administrative boundaries for compatibility before approving a higher-level division. Investigate source-polygon gaps and overlaps, and document any approximation rule and its consequences.
+Every land cell belongs to an ordinary location. Research sparse areas in proportion to their significance; locations have no imposed maximum size. User-approved subdivisions fully cover their parent cells without gaps, overlaps, or cells outside the parent. Check lower-level administrative boundaries for compatibility before approving a higher-level division. Investigate source-polygon gaps and overlaps, and document any approximation rule and its consequences.
 
 Assign a cell’s land or water type by the greatest total covered area; land wins an exact tie. Within the winning type, assign the location with the greatest overlap; stable location IDs break remaining ties.
 
@@ -50,8 +50,6 @@ One geography workflow accepts parent-bounded proposals, sources, and a base rev
 Rasterize each proposal to actual map cells at the chosen resolution, using IDs for that hierarchy level. Level previews are transient; only the final location grid is canonical. At every level, the user reviews and approves the rendered cell map, not polygons or vertices: show the approved parent-cell boundary and labeled, color-coded child cells, with zoom/pan, selectable sources and rationale, and highlighted issues or inhabited-island exceptions. Each child partition covers the approved parent cells exactly once. A parent change requires renewed cell-map approval.
 
 After all locations are finalized, complete a dedicated river-data and map-review pass before historical attribute research. Rivers are selectable line overlays with names and details, practical hit tolerance, and minimum visible width. River overlays preserve underlying cell location IDs. Store river IDs, names, source lines, and geographic access links.
-
-The app loads and reuses one compressed grid, with local cell picking by ID and pan/zoom redraws. Render the browser map using viewer-device WebGL/GPU. Keep rivers, labels, highlights, and details as generic separate overlays loaded as needed. Verify desktop and mobile responsiveness during implementation.
 
 ## Research and review
 
@@ -67,7 +65,7 @@ Every attribute—location or political entity, time-dependent or time-agnostic�
 
 Use whole years from 3000 BC through the current reference year, 2026. Display BC/AD dates with no year zero; interval start and end years are inclusive, so a period ending in 1600 is followed by one beginning in 1601. Represent approximate dates with a best-estimate year and preserve uncertainty in the evidence. Values may be intervals or point estimates; an annual record for every year is not required. For years between researched dates, use the best educated estimate with a method appropriate to the attribute.
 
-Each location attribute declares land, water, or both applicability. Time-dependent location attributes 1–15, including political control, port functions, and production, apply to land. Among time-agnostic attributes, Topography and Climate apply to land; Water type applies to water. Water locations show Not applicable for land-only attributes. Population-dependent attributes 8–10 are Not applicable when population is zero. The app distinguishes Not applicable from Unknown.
+Each location attribute declares land, water, or both applicability. Time-dependent location attributes 1–15, including political control, port functions, and production, apply to land. Among time-agnostic attributes, Topography and Climate apply to land; Water type applies to water. The database rejects assignments that conflict with declared applicability. Water locations show Not applicable for land-only attributes. Population-dependent attributes 8–10 are Not applicable when population is zero. The app distinguishes Not applicable from Unknown.
 
 Use one fixed display name per geographic unit based on a current reference name chosen during geography research. Each political entity has one familiar conventional name, including extinct entities. Names are time-agnostic; government-type changes leave political-entity names and IDs in place.
 
