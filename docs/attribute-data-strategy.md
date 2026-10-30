@@ -48,7 +48,11 @@ Annual economic output per resident for the fixed location and selected year, in
 
 ## 9. Total GDP
 
-For inhabited locations with positive population, display total GDP as GDP per person multiplied by selected population for the same location, year, and units. Retain directly reported total GDP as evidence, including to estimate GDP per person when definitions are compatible. When reported totals and per-person figures conflict, compare dates, boundaries, definitions, and units; choose the better-supported GDP evidence, keep population fixed, and record the rationale. GDP evidence never determines population.
+Annual total economic output for the fixed location and selected year, in constant 2021 international dollars using GDP-PPP.
+
+## Shared GDP calculation for attributes 8–9
+
+Use selected population as an independently established input. For the same location, year, and boundary, with compatible definitions and units, multiply GDP per person by population to calculate total GDP, or divide total GDP by population to calculate GDP per person. When both measures have evidence, choose the higher-confidence measure and calculate the other. Retain all source claims and the selection rationale.
 
 ## 10. Median purchasing power
 
