@@ -227,18 +227,8 @@ def land_records(source, maldives=None):
     # Only applies to transcontinental Eurasian source units; never reaches
     # negative-longitude Chukotka across the date line.
     europe_side = Polygon([(-30, 90), *seam, (-30, 39)])
-    sinai = Polygon(
-        [
-            (32.3, 31.5),
-            (32.3, 30.7),
-            (32.6, 30),
-            (32.6, 29.8),
-            (34, 27),
-            (36, 27),
-            (36, 33),
-            (32.3, 33),
-        ]
-    )
+    from correct_suez import SINAI
+    sinai = Polygon(SINAI)
     records = []
     island_groups = {
         "French Southern and Antarctic Lands": 1,
@@ -286,6 +276,14 @@ def land_records(source, maldives=None):
             if attr["ADMIN"] == "Yemen" and 51 < x < 55 and 11 < y < 13.5:
                 group = 1
             if attr["ADMIN"] == "Indonesia" and x >= 130 and y < 0:
+                group = 6
+            # Reviewed Papuan offshore groups north of the equator.
+            if attr["ADMIN"] == "Indonesia" and (
+                (134.1 <= x <= 134.5 and .65 <= y <= 1.1)
+                or (130.7 <= x <= 131.4 and .15 <= y <= 1.25)
+            ):
+                group = 6
+            if attr["ADMIN"] == "Japan" and 153.7 <= x <= 154.2 and 24.1 <= y <= 24.5:
                 group = 6
             if attr["ADMIN"] in {"Cyprus", "Northern Cyprus"}:
                 group = 2

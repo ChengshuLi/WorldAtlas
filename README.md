@@ -22,7 +22,7 @@ not an authoritative definition of continent or maritime boundaries. It checks
 polygon intersection areas at land-boundary cells, resolves date-line assignments,
 preserves inland lakes, and records source limitations in its output.
 
-Run with Python, NumPy, SciPy, Shapely, Rasterio, pyshp, and Pillow:
+Run with Python, NumPy, SciPy, Shapely, Rasterio, pyshp, Matplotlib, and Pillow:
 
 ```
 python scripts/build_continent_proposal.py SOURCES_DIR OUTPUT_DIR
@@ -37,6 +37,14 @@ the surrounding continent, retaining open-ocean boundaries and intentional islan
 groups. Heard–McDonald is grouped with Kerguelen in Africa. Pass `--maldives`
 with the pinned OneMap island GeoJSON to replace the generalized Maldives coast;
 retain its license and attribution. Generation is banded and does not allocate the whole grid.
+
+`scripts/refine_review_regions.py PRIOR_NATIVE_DIR SOURCES_DIR OUTPUT_DIR` applies
+reviewed island affiliations and regional sea corrections directly to native row runs.
+It preserves the land mask, records changed-cell counts, and uses the mapped main
+Suez Canal alignment in `data/geography/suez-canal.geojson`. The canal alignment
+is credited to OpenStreetMap contributors; its Gulf extension is an editorial
+separator through water. Shared Philippine, Banda, and Arafura waters use the
+nearest corrected coastline, with nearby-water priority within 100 km.
 
 Source archives, generated grids, research notes, and review metadata belong in
 R2/Neon rather than Git. Use an immutable review prefix for each candidate and
