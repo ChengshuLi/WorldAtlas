@@ -2,37 +2,44 @@
 
 ## Contents
 
-- [Architecture and data lifecycle](#architecture-and-data-lifecycle)
-- [Geography](#geography)
-  - [Research, cell review, and rivers](#geography-research-cell-review-and-rivers)
+- [1. General](#1-general)
+  - [Architecture and data lifecycle](#architecture-and-data-lifecycle)
+- [2. Geography](#2-geography)
+  - [Geographic framework and grid](#geographic-framework-and-grid)
+  - [Research, cell review, publication, and rivers](#research-cell-review-publication-and-rivers)
   - [Derived geographic relationships](#derived-geographic-relationships)
   - [Map rendering](#map-rendering)
-- [Historical data](#historical-data)
-  - [Shared data rules](#shared-data-rules)
-  - [Research and review](#research-and-review)
-  - [Catalogs and quantities](#catalogs-and-quantities)
-- [Political entities](#political-entities)
-- [Location attributes](#location-attributes)
-  - [Time-dependent](#time-dependent-location-attributes)
-  - [Time-agnostic](#time-agnostic-location-attributes)
-- [Trade relationships](#trade-relationships)
-- [App presentation](#app-presentation)
+- [3. History research](#3-history-research)
+  - [A. General history research](#a-general-history-research)
+    - [Shared data rules](#shared-data-rules)
+    - [Research and review](#research-and-review)
+    - [Catalogs and quantities](#catalogs-and-quantities)
+  - [B. Location attributes](#b-location-attributes)
+    - [Time-dependent location attributes](#time-dependent-location-attributes)
+    - [Time-agnostic location attributes](#time-agnostic-location-attributes)
+  - [C. Political entities](#c-political-entities)
+  - [D. Trade relationships](#d-trade-relationships)
+  - [E. App representation](#e-app-representation)
 
-## Architecture and data lifecycle
+## 1. General
+
+### Architecture and data lifecycle
 
 Geography and historical attributes use three logical responsibilities:
 
-1. **Evidence** retains original sources, conflicting claims, and their links to conclusions. Store original files in R2; Neon tracks references, dates, and checksums without duplicating source files.
-2. **Research** stores versioned geometry, values, reasoning, provenance, and review state. Geography uses editable Neon/PostGIS records. Historical research and published values may share versioned tables.
-3. **Published data** exposes only accepted records to the app. Geography outputs include approved hierarchy and metadata in Neon and the canonical cell-ID grid in R2. For history, an accepted-record view or pointer selects published values from research history.
+1. **Evidence** retains original sources, conflicting claims, and their links to conclusions. Store original files of any size in R2; Neon tracks references, dates, and checksums without duplicating source files.
+2. **Research** stores versioned geometry, values, reasoning, provenance, and review state.
+3. **Published data** exposes only accepted records to the app.
 
 These are logical roles, not a requirement for three separate databases or duplicate copies. Drafts stay out of the app. Keep the accepted revision visible until a replacement is validated, reviewed, and accepted; make acceptance and app visibility atomic.
 
-Editable geography records in Neon/PostGIS use stable numeric IDs, names, hierarchy levels and parents, and source polygons; locations also record land or water type. Code derives approved hierarchy, app tables, river display/selection data, and the canonical cell grid. GitHub tracks code, schemas, documentation, and task issues; the user merges pull requests.
+GitHub tracks code, schemas, documentation, and task issues; the user merges pull requests.
 
-## Geography
+## 2. Geography
 
-Use a flat equirectangular (Plate Carrée) map with equal longitude and latitude steps. The fixed geographic hierarchy is **location → province → area → region → subcontinent → continent**. Use reasonably recent reliable administrative boundaries, older where necessary; record source dates and allow different reference dates by location. Freeze chosen footprints across history. Use one fixed, current-reference display name for each unit.
+### Geographic framework and grid
+
+Use a flat, 2D equirectangular (Plate Carrée) map with equal longitude and latitude steps. The fixed, time-agnostic geographic hierarchy is **location → province → area → region → subcontinent → continent**. Use reasonably recent reliable administrative boundaries, older where necessary; record source dates and allow different reference dates by location, with no common reference year. Freeze chosen footprints across history. Use one fixed, current-reference display name for each unit.
 
 Start with six land continents, excluding Antarctica, plus ocean groups. Every cell within the chosen map coverage belongs to exactly one land or non-river-water location. Land-continent groups include nearby seas, island-region waters, and lakes; ocean groups cover remaining ocean waters. Broad waters may be grouped with relevant continents, and large seas may be shared by adjacent groups. Non-river-water locations are named and selectable. Small lakes and islands may not resolve at this scale. Flag inhabited islands too small to resolve during the first continent review and assess whether a higher resolution is warranted.
 
@@ -42,9 +49,13 @@ Assign a cell’s land or water type by the greatest total covered area; land wi
 
 Use equal equirectangular steps of 0.02197265625°. The full-world reference grid is 16,384 × 8,192; crop at nominal 60°S while retaining 90°N. Row alignment gives a final grid of 16,384 × 6,827 cells (111,853,568), with a southern edge of 60.00732421875°S. Store one canonical, losslessly compressed grid, initially unpartitioned. Each unsigned 16-bit value is the numeric location ID itself; reserve 0 during construction, leaving 65,535 usable values, and widen to 32-bit if needed. Every published cell is assigned. Compression size is unmeasured.
 
-### Geography research, cell review, and rivers
+Editable geography records in Neon/PostGIS use stable numeric IDs, names, hierarchy levels and parents, and source polygons; locations also record land or water type. Code derives approved hierarchy, app tables, river display/selection data, and the canonical cell grid. Approved hierarchy and metadata are in Neon; the canonical cell-ID grid is in R2.
 
-Generate candidate cell assignments from polygons and research inputs. Save parent-bounded proposals with sources and a base revision; incomplete or invalid drafts may be retained for correction. Validate IDs, hierarchy, source-geometry usability, and the partition against approved parent cells: every parent cell is assigned once, with no gaps, overlaps, or cells outside the parent. Investigate source-polygon gaps and overlaps. Check conflicts only against affected records and relevant parent boundaries so separate areas can proceed concurrently; intermediate levels do not require worldwide completion.
+### Research, cell review, publication, and rivers
+
+Generate candidate cell assignments from polygons and research inputs. Save parent-bounded proposal versions with sources, reasoning, review status, and a base revision; incomplete or invalid drafts may be retained for correction. Validate IDs, hierarchy, source-geometry usability, and the partition against approved parent cells: every parent cell is assigned once, with no gaps, overlaps, or cells outside the parent. Investigate source-polygon gaps and overlaps. Check conflicts only against affected records and relevant parent boundaries so separate areas can proceed concurrently; intermediate levels do not require worldwide completion.
+
+Each geography-research scope has one accountable owner from research through validation and delivery; separate areas can proceed concurrently.
 
 Rasterize each proposal to actual map cells at the chosen resolution, using IDs for that hierarchy level. These previews are transient; only the final location grid is canonical. At every level, the user reviews and approves the rendered cell map, not polygons or vertices: show the approved parent-cell boundary and labeled, color-coded child cells, with zoom/pan, selectable sources and rationale, and highlighted issues or inhabited-island exceptions. Only valid, user-approved proposals feed the next level or publication. A change to an approved parent requires renewed cell-map approval.
 
@@ -62,19 +73,21 @@ For land locations, derive lake access from neighboring locations classified as 
 
 Load and reuse the single compressed grid with local cell picking by ID, viewer-device WebGL/GPU rendering, and pan/zoom redraws. Keep rivers, labels, highlights, and details as generic overlays loaded as needed. Use readable geographic names and familiar climate class names. Verify desktop and mobile responsiveness during implementation.
 
-## Historical data
+## 3. History research
 
-### Shared data rules
+### A. General history research
+
+#### Shared data rules
 
 Every attribute—location or political entity, time-dependent or time-agnostic—has a shared definition with a stable ID, display name, meaning, value type, applicability, and time behavior. Categorical values reference shared category IDs, names, and definitions; numeric values specify units and value rules. Keep numeric zero, **None** (supported absence), **Unknown** (insufficient evidence), and **Not applicable** (the attribute does not apply) distinct.
 
 Use whole years from 3000 BC through the current reference year, 2026. Display BC/AD dates with no year zero; interval start and end years are inclusive, so a period ending in 1600 is followed by one beginning in 1601. Represent approximate dates with a best-estimate year and preserve uncertainty in the evidence. Values may be intervals or point estimates; an annual record for every year is not required. For years between researched dates, use the best educated estimate with a method appropriate to the attribute.
 
-Each location attribute declares land, water, or both applicability. Time-dependent location attributes 1–15, including political control, port functions, and production, apply to land. Among time-agnostic attributes, Topography and Climate apply to land; Water type applies to water. The database rejects assignments that conflict with declared applicability. Water locations show Not applicable for land-only attributes. Population-dependent attributes 8–10 are Not applicable when population is zero. The app distinguishes Not applicable from Unknown.
+Each location attribute declares land, water, or both applicability. Time-dependent location attributes 1–15, including political control, port functions, and production, apply to land. Among time-agnostic attributes, Topography and Climate apply to land; Water type applies to water. The database rejects assignments that conflict with declared applicability. Water locations show Not applicable for land-only attributes. Population-dependent attributes 8–10 are Not applicable when population is zero. The app distinguishes Not applicable from Unknown. Each newly added attribute declares its applicability individually.
 
-Use one fixed display name per geographic unit based on a current reference name chosen during geography research. Each political entity has one familiar conventional name, including extinct entities. Names are time-agnostic; government-type changes leave political-entity names and IDs in place.
+Historical research and published values may share versioned tables. An accepted-record view or pointer selects published values from research history.
 
-### Research and review
+#### Research and review
 
 Complete geography, including its river pass, before historical attribute research. Afterward, independent research scopes can proceed in parallel, with dependencies enforced only where relevant. Use multiple Luna-class research agents with an independent 6.1-Sol-level reviewer; scale the ratio to workload rather than fixing it. Scope batches by locations or entities, attributes, years, sources, values, and reasoning. Each batch has one accountable owner through validation and delivery.
 
@@ -82,7 +95,7 @@ Automatic checks cover IDs, applicability, units and value ranges, share constra
 
 Before accepting overlapping-year updates to the same subject and attribute, compare and reconcile them with the current accepted revision. Preserve version history, provenance, and original claims. Geography remains user-approved through its cell-map workflow.
 
-### Catalogs and quantities
+#### Catalogs and quantities
 
 Catalogs grow alongside research. Researchers reuse stable IDs or propose additions as findings emerge. The independent reviewer checks duplicates, overlaps, subtypes, useful granularity, and consistent definitions across the affected catalog. Granularity is chosen for each catalog, not by one universal ranking. The reviewer owns editorial changes and their audit scope; routine product-catalog decisions are handled editorially, with uncertain cases escalated to the user. A catalog entry may be reviewed with research that references it, reconciling concurrent duplicate proposals together.
 
@@ -92,44 +105,21 @@ Production and trade use one product catalog with stable IDs, display names, and
 
 Qualitative production and trade records are the foundation; add quantities when supported. Each quantity specifies product, amount, unit, and measurement year or period, distinguishing annual output from a shipment or multi-year total. Prefer product-specific units; convert only when justified, retaining the original measurement and conversion or estimate basis. Unknown means no defensible quantity, not zero. Trade quantities refer to a specified year within the connection’s active period.
 
-## Political entities
-
-Each political entity has a stable ID, one fixed familiar conventional name, and start and end year; leave the end open for an entity that still exists. Controller references must fall within the entity’s lifetime. Identity follows political-state continuity: a change in ruler or government type alone leaves its ID and name in place; distinct political states have distinct IDs even when they share a civilization or territory.
-
-### Subordination relationship
-
-Record subordinate and overlord entity IDs, start and end year, and evidence or estimate basis when one entity holds superior political authority over another that retains its own government. An alliance or tribute alone does not establish subordination. An overlord relationship does not replace the local controller assigned to a location.
-
-### Primary government type
-
-Store one primary type per political entity and time; locations receive it through their controller. Choose the best-fitting category for the governing arrangement, using Unknown when no classification is justified.
-
-- **Monarchy:** government organized around a monarch.
-- **Republic:** political authority exercised through civic institutions and public offices.
-- **Theocracy:** religious authorities or institutions hold governing power.
-- **Steppe horde:** a mobile steppe confederation organized around military and kinship leadership.
-- **Tribal polity:** political authority organized through tribal communities and leadership.
-- **Military government:** military authorities directly govern.
-- **One-party state:** one ruling party monopolizes political power.
-- **Personalist dictatorship:** governing power is centered on an individual leader.
-
-When descriptions overlap, select the best-fitting type as primary.
-
-## Location attributes
+### B. Location attributes
 
 All time-dependent location values retain their sources and estimate basis.
 
-### Time-dependent location attributes
+#### Time-dependent location attributes
 
-1. **Population:** Total residents within the fixed location boundary at the selected time, including urban, suburban, and rural residents. Use supported counts or justified educated estimates, including zero. Population is researched independently and remains a fixed input to other calculations; it is not inferred from other attributes or adjusted to reconcile them. Use Unknown when no estimate is justified.
+1. **Population:** Total residents within the fixed location boundary at the selected time, including urban, suburban, and rural residents. Use supported counts or justified educated estimates, including zero, without double-counting residents. Population is researched independently and remains a fixed input to other calculations; it is not inferred from other attributes or adjusted to reconcile them. Use Unknown when no estimate is justified.
 
 2. **Location rank:** Classify the whole location as Uninhabited, Rural, Town, City, or Unknown according to historical character. Uninhabited means population zero; use it only when supported by evidence or a justified estimate. Sparse records, lack of permanent settlement, and present-day population alone do not establish uninhabited status; consider historical and seasonal habitation. Rural covers inhabited non-urban locations, including nomadic populations. A Town or City may include suburban areas and countryside. Rank is independent of total population.
 
-#### Shared rules for attributes 3–5
+##### Shared rules for attributes 3–5
 
 Record the resident category with the largest population share at the selected time; that share may be below half. Use evidence or a justified estimate. Use Unknown only when no primary category can be justified, and Not applicable when population is zero. Record sources and estimate basis.
 
-Optional share breakdowns use one structure: **complete** accounts for the population, **partial** records some shares, and **unavailable** means no shares can be justified. A defensible estimate may establish the primary category when a breakdown is partial or unavailable. Retain supported or estimated shares with their basis.
+Optional share breakdowns use one structure: **complete** accounts for the population, **partial** records some shares, and **unavailable** means no shares can be justified. A partial breakdown alone need not establish the largest category; a separately justified primary category may still be assigned, including from a defensible estimate when the breakdown is partial or unavailable. Retain supported or estimated shares with their basis.
 
 3. **Primary culture:** The resident cultural group.
 
@@ -143,7 +133,7 @@ Optional share breakdowns use one structure: **complete** accounts for the popul
 
    For joint administration, use a documented administrative lead; otherwise, when comparable evidence supports it, use the entity with greater responsibility and resources. A stable entity ID breaks remaining ties. At population zero, record a controller, NoController, or Unknown. With positive population, record a supported controller or Unknown. NoController requires evidence or a justified estimate of no control; Unknown means evidence is insufficient.
 
-#### Shared rules for attributes 8–9
+##### Shared rules for attributes 8–9
 
 Research both measures for the same location, year, and fixed boundary, using independently researched Population (#1). When definitions and units are compatible, derive Total GDP as GDP per person × Population or GDP per person as Total GDP ÷ Population. If both measures are supportable, use the higher-confidence value and derive the other; if one is supportable, derive its counterpart; if neither is supportable, mark both Unknown. Retain all source evidence and the selection rationale.
 
@@ -151,7 +141,7 @@ Research both measures for the same location, year, and fixed boundary, using in
 
 9. **Total GDP:** Annual total economic output for the fixed location and selected year, in constant 2021 international dollars using GDP-PPP.
 
-10. **Median purchasing power:** Annual person-weighted median disposable household income after taxes and transfers, adjusted for household size and prices. Express in constant 2021 international dollars using consumption PPP; record evidence and estimate basis. Use Unknown when no estimate is justified.
+10. **Median purchasing power:** Annual person-weighted median disposable household income after taxes and transfers, adjusted for household size and prices. This represents typical resident purchasing power. Express in constant 2021 international dollars using consumption PPP; record evidence and estimate basis. Use Unknown when no estimate is justified.
 
 11. **Infectious diseases and outbreaks:** Record significant infectious diseases and outbreaks affecting a location and period; several may occur concurrently. Use shared disease and outbreak identities. A disease may be endemic and also have an outbreak. Record presence or absence from evidence or a justified estimate; mortality is researched separately and may be Unknown even when presence is known. Use Unknown when research cannot justify a value.
 
@@ -163,7 +153,7 @@ Research both measures for the same location, year, and fixed boundary, using in
 
 15. **Notable production:** List locally significant goods actually produced within the location at the selected time, using the shared product catalog. Multiple goods may apply; examples include agricultural products, extracted materials, livestock, fish, and timber. Record sources and estimate basis. None means evidence or a justified estimate supports no notable production; Unknown means available research cannot establish it.
 
-### Time-agnostic location attributes
+#### Time-agnostic location attributes
 
 1. **Topography:** One primary category for the whole land location: Flatland, Hills, Mountains, Plateau, or Unknown.
 
@@ -183,13 +173,36 @@ Research both measures for the same location, year, and fixed boundary, using in
 
    Sources: [GloH2O Köppen–Geiger maps](https://www.gloh2o.org/koppen/) and [Beck et al. (2023)](https://www.nature.com/articles/s41597-023-02549-6).
 
-## Trade relationships
+### C. Political entities
+
+Each political entity has a stable ID and one fixed familiar conventional name, including extinct entities; its name is time-agnostic. Record start and end year, leaving the end open for an entity that still exists. Controller references must fall within the entity’s lifetime. Identity follows political-state continuity: a change in ruler or government type alone leaves the entity’s ID and name in place. Distinct political states have distinct IDs even when they share a civilization or territory.
+
+#### Subordination relationship
+
+Record subordinate and overlord entity IDs, start and end year, and evidence or estimate basis when one entity holds superior political authority over another that retains its own government. An alliance or tribute alone does not establish subordination. An overlord relationship does not replace the local controller assigned to a location.
+
+#### Primary government type
+
+Store one primary type per political entity and time; locations receive it through their controller. Choose the best-fitting category for the governing arrangement, using Unknown when no classification is justified.
+
+- **Monarchy:** government organized around a monarch.
+- **Republic:** political authority exercised through civic institutions and public offices.
+- **Theocracy:** religious authorities or institutions hold governing power.
+- **Steppe horde:** a mobile steppe confederation organized around military and kinship leadership.
+- **Tribal polity:** political authority organized through tribal communities and leadership.
+- **Military government:** military authorities directly govern.
+- **One-party state:** one ruling party monopolizes political power.
+- **Personalist dictatorship:** governing power is centered on an individual leader.
+
+When descriptions overlap, select the best-fitting type as primary.
+
+### D. Trade relationships
 
 Record significant directed connections between existing geographic units (location, province, area, region, subcontinent, or continent) or political entities. Endpoints may use different levels. Record from/to endpoints, active year or inclusive year span, one or more shared product IDs, transport by land, river, sea, or a known combination, and evidence or estimate basis. A location may trade goods it does not produce locally.
 
 Keep each connection at the geographic level supported by its evidence. A regional record does not imply known flows for contained locations. Retain sources whose coverage does not sufficiently match an endpoint as evidence without assigning an exact endpoint quantity. Do not sum regional totals together with contained detailed flows.
 
-## App presentation
+### E. App representation
 
 Map and detail views use the same accepted data for the selected year. Time-dependent values follow that year; time-agnostic attributes remain fixed. Present estimates much like evidence-backed values in the clean primary view; show provenance, estimate basis, and uncertainty in details on demand.
 
