@@ -2,20 +2,23 @@
 
 ## Contents
 
-- [Data architecture and publication](#data-architecture-and-publication)
+- [Architecture and data lifecycle](#architecture-and-data-lifecycle)
 - [Geography](#geography)
-- [Research and review](#research-and-review)
-- [Shared data rules](#shared-data-rules)
-- [Catalogs and quantities](#catalogs-and-quantities)
+  - [Research, cell review, and rivers](#geography-research-cell-review-and-rivers)
+  - [Derived geographic relationships](#derived-geographic-relationships)
+  - [Map rendering](#map-rendering)
+- [Historical data](#historical-data)
+  - [Shared data rules](#shared-data-rules)
+  - [Research and review](#research-and-review)
+  - [Catalogs and quantities](#catalogs-and-quantities)
+- [Political entities](#political-entities)
 - [Location attributes](#location-attributes)
   - [Time-dependent](#time-dependent-location-attributes)
   - [Time-agnostic](#time-agnostic-location-attributes)
-  - [Derived geographic relationships](#derived-geographic-relationships)
-- [Political entities](#political-entities)
 - [Trade relationships](#trade-relationships)
 - [App presentation](#app-presentation)
 
-## Data architecture and publication
+## Architecture and data lifecycle
 
 Geography and historical attributes use three logical responsibilities:
 
@@ -26,10 +29,6 @@ Geography and historical attributes use three logical responsibilities:
 These are logical roles, not a requirement for three separate databases or duplicate copies. Drafts stay out of the app. Keep the accepted revision visible until a replacement is validated, reviewed, and accepted; make acceptance and app visibility atomic.
 
 Editable geography records in Neon/PostGIS use stable numeric IDs, names, hierarchy levels and parents, and source polygons; locations also record land or water type. Code derives approved hierarchy, app tables, river display/selection data, and the canonical cell grid. GitHub tracks code, schemas, documentation, and task issues; the user merges pull requests.
-
-For geography, polygons and research inputs generate candidate cell assignments before review. The user approves exact cells top-down at every hierarchy level; child levels partition approved parent cells. Changes to approved assignments return for renewed cell review. Generate the matching location-ID grid and metadata from approved assignments.
-
-Serialize shared-grid publication: derive from approved geography, upload a versioned grid to R2, recheck relevant revisions, then transactionally commit matching Neon results and the grid reference. Failed publication leaves the previous revision active; the app reads matching revisions.
 
 ## Geography
 
@@ -45,21 +44,27 @@ Use equal equirectangular steps of 0.02197265625°. The full-world reference gri
 
 ### Geography research, cell review, and rivers
 
-One geography workflow accepts parent-bounded proposals, sources, and a base revision. Incomplete or invalid drafts may be saved for correction, but only valid user-approved proposals feed the next level or publication. Validate IDs, hierarchy, and source-geometry usability; investigate source-polygon gaps and overlaps. Validate every proposal against its approved parent cells: each parent cell is assigned once, with no missing, multiply assigned, or outside cells. Check conflicts only against affected records and parent boundaries so separate areas can proceed concurrently; intermediate levels do not require worldwide completion.
+Generate candidate cell assignments from polygons and research inputs. Save parent-bounded proposals with sources and a base revision; incomplete or invalid drafts may be retained for correction. Validate IDs, hierarchy, source-geometry usability, and the partition against approved parent cells: every parent cell is assigned once, with no gaps, overlaps, or cells outside the parent. Investigate source-polygon gaps and overlaps. Check conflicts only against affected records and relevant parent boundaries so separate areas can proceed concurrently; intermediate levels do not require worldwide completion.
 
-Rasterize each proposal to actual map cells at the chosen resolution, using IDs for that hierarchy level. Level previews are transient; only the final location grid is canonical. At every level, the user reviews and approves the rendered cell map, not polygons or vertices: show the approved parent-cell boundary and labeled, color-coded child cells, with zoom/pan, selectable sources and rationale, and highlighted issues or inhabited-island exceptions. Each child partition covers the approved parent cells exactly once. A parent change requires renewed cell-map approval.
+Rasterize each proposal to actual map cells at the chosen resolution, using IDs for that hierarchy level. These previews are transient; only the final location grid is canonical. At every level, the user reviews and approves the rendered cell map, not polygons or vertices: show the approved parent-cell boundary and labeled, color-coded child cells, with zoom/pan, selectable sources and rationale, and highlighted issues or inhabited-island exceptions. Only valid, user-approved proposals feed the next level or publication. A change to an approved parent requires renewed cell-map approval.
+
+Serialize shared-grid publication: derive from approved geography, upload a versioned grid to R2, recheck relevant revisions, then transactionally commit matching Neon results and the grid reference. Failed publication leaves the previous revision active; the app reads matching revisions.
 
 After all locations are finalized, complete a dedicated river-data and map-review pass before historical attribute research. Rivers are selectable line overlays with names and details, practical hit tolerance, and minimum visible width. River overlays preserve underlying cell location IDs. Store river IDs, names, source lines, and geographic access links.
 
-## Research and review
+### Derived geographic relationships
 
-Complete geography, including its river pass, before historical attribute research. Afterward, independent research scopes can proceed in parallel, with dependencies enforced only where relevant. Use multiple Luna-class research agents with an independent 6.1-Sol-level reviewer; scale the ratio to workload rather than fixing it. Scope batches by locations or entities, attributes, years, sources, values, and reasoning. Each batch has one accountable owner through validation and delivery.
+After geography is finalized, derive adjacency from map cells and recompute it when geography changes. Two locations are neighbors when their cells share an edge. Store neighboring location IDs for every land and water location.
 
-Automatic checks cover IDs, applicability, units and value ranges, share constraints, conflicting intervals, and cross-attribute dependencies. The reviewer evaluates sources, estimates, and historical interpretation, then accepts a batch or requests corrections. Attribute work does not require routine user approval. Escalate uncertain judgments to the user with a concise issue, options, and recommendation; pause only dependent work while unrelated scopes continue.
+For land locations, derive lake access from neighboring locations classified as Lake, and coastal access from neighboring marine-water locations; a derived Yes/No coastal flag may be useful. Keep lake and coastal access separate. Derive river access from finalized river paths intersecting or following location boundaries, linking river IDs to all nearby locations with geographic access. Rivers remain selectable overlays, not locations; location cell IDs remain intact beneath them. These links describe geographic access only.
 
-Before accepting overlapping-year updates to the same subject and attribute, compare and reconcile them with the current accepted revision. Preserve version history, provenance, and original claims. Geography remains user-approved through its cell-map workflow.
+### Map rendering
 
-## Shared data rules
+Load and reuse the single compressed grid with local cell picking by ID, viewer-device WebGL/GPU rendering, and pan/zoom redraws. Keep rivers, labels, highlights, and details as generic overlays loaded as needed. Use readable geographic names and familiar climate class names. Verify desktop and mobile responsiveness during implementation.
+
+## Historical data
+
+### Shared data rules
 
 Every attribute—location or political entity, time-dependent or time-agnostic—has a shared definition with a stable ID, display name, meaning, value type, applicability, and time behavior. Categorical values reference shared category IDs, names, and definitions; numeric values specify units and value rules. Keep numeric zero, **None** (supported absence), **Unknown** (insufficient evidence), and **Not applicable** (the attribute does not apply) distinct.
 
@@ -69,7 +74,15 @@ Each location attribute declares land, water, or both applicability. Time-depend
 
 Use one fixed display name per geographic unit based on a current reference name chosen during geography research. Each political entity has one familiar conventional name, including extinct entities. Names are time-agnostic; government-type changes leave political-entity names and IDs in place.
 
-## Catalogs and quantities
+### Research and review
+
+Complete geography, including its river pass, before historical attribute research. Afterward, independent research scopes can proceed in parallel, with dependencies enforced only where relevant. Use multiple Luna-class research agents with an independent 6.1-Sol-level reviewer; scale the ratio to workload rather than fixing it. Scope batches by locations or entities, attributes, years, sources, values, and reasoning. Each batch has one accountable owner through validation and delivery.
+
+Automatic checks cover IDs, applicability, units and value ranges, share constraints, conflicting intervals, and cross-attribute dependencies. The reviewer evaluates sources, estimates, and historical interpretation, then accepts a batch or requests corrections. Attribute work does not require routine user approval. Escalate uncertain judgments to the user with a concise issue, options, and recommendation; pause only dependent work while unrelated scopes continue.
+
+Before accepting overlapping-year updates to the same subject and attribute, compare and reconcile them with the current accepted revision. Preserve version history, provenance, and original claims. Geography remains user-approved through its cell-map workflow.
+
+### Catalogs and quantities
 
 Catalogs grow alongside research. Researchers reuse stable IDs or propose additions as findings emerge. The independent reviewer checks duplicates, overlaps, subtypes, useful granularity, and consistent definitions across the affected catalog. Granularity is chosen for each catalog, not by one universal ranking. The reviewer owns editorial changes and their audit scope; routine product-catalog decisions are handled editorially, with uncertain cases escalated to the user. A catalog entry may be reviewed with research that references it, reconciling concurrent duplicate proposals together.
 
@@ -78,6 +91,29 @@ Keep source detail in Evidence. Nonsemantic renames retain IDs. Duplicate merges
 Production and trade use one product catalog with stable IDs, display names, and definitions. Its granularity is curated editorially and may expand as research identifies notable goods.
 
 Qualitative production and trade records are the foundation; add quantities when supported. Each quantity specifies product, amount, unit, and measurement year or period, distinguishing annual output from a shipment or multi-year total. Prefer product-specific units; convert only when justified, retaining the original measurement and conversion or estimate basis. Unknown means no defensible quantity, not zero. Trade quantities refer to a specified year within the connection’s active period.
+
+## Political entities
+
+Each political entity has a stable ID, one fixed familiar conventional name, and start and end year; leave the end open for an entity that still exists. Controller references must fall within the entity’s lifetime. Identity follows political-state continuity: a change in ruler or government type alone leaves its ID and name in place; distinct political states have distinct IDs even when they share a civilization or territory.
+
+### Subordination relationship
+
+Record subordinate and overlord entity IDs, start and end year, and evidence or estimate basis when one entity holds superior political authority over another that retains its own government. An alliance or tribute alone does not establish subordination. An overlord relationship does not replace the local controller assigned to a location.
+
+### Primary government type
+
+Store one primary type per political entity and time; locations receive it through their controller. Choose the best-fitting category for the governing arrangement, using Unknown when no classification is justified.
+
+- **Monarchy:** government organized around a monarch.
+- **Republic:** political authority exercised through civic institutions and public offices.
+- **Theocracy:** religious authorities or institutions hold governing power.
+- **Steppe horde:** a mobile steppe confederation organized around military and kinship leadership.
+- **Tribal polity:** political authority organized through tribal communities and leadership.
+- **Military government:** military authorities directly govern.
+- **One-party state:** one ruling party monopolizes political power.
+- **Personalist dictatorship:** governing power is centered on an individual leader.
+
+When descriptions overlap, select the best-fitting type as primary.
 
 ## Location attributes
 
@@ -147,35 +183,6 @@ Research both measures for the same location, year, and fixed boundary, using in
 
    Sources: [GloH2O Köppen–Geiger maps](https://www.gloh2o.org/koppen/) and [Beck et al. (2023)](https://www.nature.com/articles/s41597-023-02549-6).
 
-### Derived geographic relationships
-
-After geography is finalized, derive adjacency from map cells and recompute it when geography changes. Two locations are neighbors when their cells share an edge. Store neighboring location IDs for every land and water location.
-
-For land locations, derive lake access from neighboring locations classified as Lake, and coastal access from neighboring marine-water locations; a derived Yes/No coastal flag may be useful. Keep lake and coastal access separate. Derive river access from finalized river paths intersecting or following location boundaries, linking river IDs to all nearby locations with geographic access. Rivers remain selectable overlays, not locations; location cell IDs remain intact beneath them. These links describe geographic access only.
-
-## Political entities
-
-Each political entity has a stable ID, one fixed familiar conventional name, and start and end year; leave the end open for an entity that still exists. Controller references must fall within the entity’s lifetime. Identity follows political-state continuity: a change in ruler or government type alone leaves its ID and name in place; distinct political states have distinct IDs even when they share a civilization or territory.
-
-### Subordination relationship
-
-Record subordinate and overlord entity IDs, start and end year, and evidence or estimate basis when one entity holds superior political authority over another that retains its own government. An alliance or tribute alone does not establish subordination. An overlord relationship does not replace the local controller assigned to a location.
-
-### Primary government type
-
-Store one primary type per political entity and time; locations receive it through their controller. Choose the best-fitting category for the governing arrangement, using Unknown when no classification is justified.
-
-- **Monarchy:** government organized around a monarch.
-- **Republic:** political authority exercised through civic institutions and public offices.
-- **Theocracy:** religious authorities or institutions hold governing power.
-- **Steppe horde:** a mobile steppe confederation organized around military and kinship leadership.
-- **Tribal polity:** political authority organized through tribal communities and leadership.
-- **Military government:** military authorities directly govern.
-- **One-party state:** one ruling party monopolizes political power.
-- **Personalist dictatorship:** governing power is centered on an individual leader.
-
-When descriptions overlap, select the best-fitting type as primary.
-
 ## Trade relationships
 
 Record significant directed connections between existing geographic units (location, province, area, region, subcontinent, or continent) or political entities. Endpoints may use different levels. Record from/to endpoints, active year or inclusive year span, one or more shared product IDs, transport by land, river, sea, or a known combination, and evidence or estimate basis. A location may trade goods it does not produce locally.
@@ -185,7 +192,5 @@ Keep each connection at the geographic level supported by its evidence. A region
 ## App presentation
 
 Map and detail views use the same accepted data for the selected year. Time-dependent values follow that year; time-agnostic attributes remain fixed. Present estimates much like evidence-backed values in the clean primary view; show provenance, estimate basis, and uncertainty in details on demand.
-
-Load and reuse the single compressed grid with local cell picking by ID, viewer-device WebGL/GPU rendering, and pan/zoom redraws. Keep rivers, labels, highlights, and details as generic overlays loaded as needed. Use readable geographic names and familiar climate class names. Verify desktop and mobile responsiveness during implementation.
 
 Detailed database schema, indexes, and mode-specific UI behavior remain for later design.
