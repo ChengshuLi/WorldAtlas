@@ -52,7 +52,7 @@ Annual total economic output for the fixed location and selected year, in consta
 
 ## Shared GDP calculation for attributes 8–9
 
-Use selected population as an independently established input. For the same location, year, and boundary, with compatible definitions and units, multiply GDP per person by population to calculate total GDP, or divide total GDP by population to calculate GDP per person. When both measures have evidence, choose the higher-confidence measure and calculate the other. Retain all source claims and the selection rationale.
+Research both values, using selected population as an independently established input. For the same location, year, and boundary, with compatible definitions and units, calculate total GDP = GDP per person × population, or GDP per person = total GDP ÷ population. If both are supported by evidence or justified estimates, choose the higher-confidence value and derive the other. If only one is supportable, derive its counterpart; if neither is supportable, mark both Unknown. Retain all source evidence and the selection rationale.
 
 ## 10. Median purchasing power
 
