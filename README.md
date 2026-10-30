@@ -8,10 +8,12 @@ The settled project contract is in [the data strategy](docs/data-strategy.md).
 R2 bucket. Evidence objects are not publicly routed. The root page is a draft review
 surface, not an accepted geography release.
 
-The viewer loads one compressed native-resolution display grid. Its low four bits
-contain the proposed continent ID; bit 4 distinguishes reference-source land for
-display. Selection uses the exact cell ID locally. The smaller overview image is
-only a display aid. Rendered detail tiles are generated in the browser.
+The viewer loads a lightweight overview and native 512×512 display chunks on demand.
+The low four bits contain the proposed continent ID; bit 4 distinguishes source land.
+Uniform chunks are represented by one value; other chunks are independently gzip
+compressed inside a range-readable pack, with per-chunk SHA-256 validation. Selection
+uses exact native cells, never the overview. Browser rendering uses a bounded detail
+cache and at most four concurrent chunk downloads.
 
 `scripts/build_continent_proposal.py` builds the initial research draft from pinned
 Natural Earth archives. It includes explicit, reviewable atlas conventions; it is
@@ -25,6 +27,11 @@ Run with Python, NumPy, SciPy, Shapely, Rasterio, pyshp, and Pillow:
 python scripts/build_continent_proposal.py SOURCES_DIR OUTPUT_DIR
 python scripts/audit_small_islands.py SOURCES_DIR OUTPUT_DIR
 ```
+
+`scripts/build_review_tiles.py SOURCES_DIR PRIOR_DRAFT_DIR OUTPUT_DIR` creates the
+65,536-column center-sampled review version. It re-rasterizes source land at native
+resolution while retaining the prior draft's marine grouping footprints, which remain
+explicitly provisional. Generation is banded and does not allocate the whole grid.
 
 Source archives, generated grids, research notes, and review metadata belong in
 R2/Neon rather than Git. Use an immutable review prefix for each candidate and

@@ -189,8 +189,7 @@ def write_grid_assets(grid, land, output):
     return raw_hash, palette, hashlib.sha256(display.tobytes()).hexdigest()
 
 
-def main(source, output):
-    output.mkdir(parents=True, exist_ok=True)
+def land_records(source):
     # Explicit approximate convention line, requiring review at the continental seam.
     # Longitude/latitude vertices trace Urals, Ural River and Greater Caucasus.
     seam = [
@@ -300,6 +299,12 @@ def main(source, output):
                 group = 4
             records.append((poly, group))
     records = [(g, i) for g, i in records if not g.is_empty]
+    return records, island_groups, seam
+
+
+def main(source, output):
+    output.mkdir(parents=True, exist_ok=True)
+    records, island_groups, seam = land_records(source)
     land, boundary_audit = majority_land(records)
     with gzip.open(output / "source-land-groups.u8.gz", "wb") as handle:
         handle.write(land.tobytes())

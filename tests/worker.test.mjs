@@ -60,3 +60,21 @@ test("review assets keep their stored media type and support HEAD", async () => 
   assert.equal(response.headers.get("Content-Encoding"), null);
   assert.equal(await response.text(), "");
 });
+
+test('packed chunks return exact range metadata and forward bounded reads', async () => {
+  let options;
+  const rangeEnv={ATLAS:{head:async()=>({size:100}),get:async(key,o)=>{
+    options=o; return {body:new Uint8Array([1,2,3]),size:100,httpEtag:'"pack"',writeHttpMetadata:h=>h.set('Content-Type','application/octet-stream')};
+  }}};
+  const result=await worker.fetch(new Request('https://atlas.example/review/test.pack',{headers:{Range:'bytes=10-12'}}),rangeEnv);
+  assert.equal(result.status,206);
+  assert.equal(result.headers.get('Content-Range'),'bytes 10-12/100');
+  assert.deepEqual(options,{range:{offset:10,length:3}});
+  assert.deepEqual([...new Uint8Array(await result.arrayBuffer())],[1,2,3]);
+});
+test('invalid, multi-part and outside ranges are rejected', async () => {
+  for(const range of ['bytes=-20','bytes=20-10','bytes=0-1,3-4','bytes=0-99999999','bytes=99-101']){
+    const result=await worker.fetch(new Request('https://atlas.example/review/test.pack',{headers:{Range:range}}),{ATLAS:{head:async()=>({size:100}),get:async()=>{throw Error('must not read')}}});
+    assert.equal(result.status,416);
+  }
+});

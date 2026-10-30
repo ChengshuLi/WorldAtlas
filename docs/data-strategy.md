@@ -45,9 +45,9 @@ Start with six land continents, excluding Antarctica, plus ocean groups. Every c
 
 Every land cell belongs to an ordinary location. Research sparse areas in proportion to their significance; locations have no imposed maximum size. User-approved subdivisions fully cover their parent cells without gaps, overlaps, or cells outside the parent. Check lower-level administrative boundaries for compatibility before approving a higher-level division. Investigate source-polygon gaps and overlaps, and document any approximation rule and its consequences.
 
-Assign a cell’s land or water type by the greatest total covered area; land wins an exact tie. Within the winning type, assign the location with the greatest overlap; stable location IDs break remaining ties.
+Classify and assign each cell by its center point: use the land or water location containing that point. Stable numeric location IDs break exact shared-boundary ties. Investigate source gaps and overlaps rather than treating them as valid geography. Flag important inhabited islands that still have no land-cell centers for explicit review.
 
-Use equal equirectangular steps of 0.02197265625°. The full-world reference grid is 16,384 × 8,192; crop at nominal 60°S while retaining 90°N. Row alignment gives a final grid of 16,384 × 6,827 cells (111,853,568), with a southern edge of 60.00732421875°S. Store one canonical, losslessly compressed grid, initially unpartitioned. Each unsigned 16-bit value is the numeric location ID itself; reserve 0 during construction, leaving 65,535 usable values, and widen to 32-bit if needed. Every published cell is assigned. Compression size is unmeasured.
+Use equal equirectangular steps of 0.0054931640625°. The full-world reference grid is 65,536 × 32,768; crop at nominal 60°S while retaining 90°N. Row alignment gives a final grid of 65,536 × 27,307 cells (1,789,591,552), with a southern edge of 60.0018310546875°S. Store one canonical, losslessly compressed logical grid with independently readable chunks for bounded-memory generation and loading. Each unsigned 16-bit value is the numeric location ID itself; reserve 0 during construction, leaving 65,535 usable values, and widen to 32-bit if needed. Every published cell is assigned. Compression size depends on the final geography.
 
 Editable geography records in Neon/PostGIS use stable numeric IDs, names, hierarchy levels and parents, and source polygons; locations also record land or water type. Code derives approved hierarchy, app tables, river display/selection data, and the canonical cell grid. Approved hierarchy and metadata are in Neon; the canonical cell-ID grid is in R2.
 
@@ -71,7 +71,7 @@ For land locations, derive lake access from neighboring locations classified as 
 
 ### Map rendering
 
-Load and reuse the single compressed grid with local cell picking by ID, viewer-device WebGL/GPU rendering, and pan/zoom redraws. Keep rivers, labels, highlights, and details as generic overlays loaded as needed. Use readable geographic names and familiar climate class names. Verify desktop and mobile responsiveness during implementation.
+Present one continuous world map. Load a lightweight overview and fetch native-resolution grid chunks on demand, with a bounded cache rather than decompressing the whole world on the viewer’s device. Local cell picking uses the exact native ID, fetching the relevant chunk if necessary; overview images never determine selection. Use viewer-device WebGL/GPU rendering and pan/zoom redraws. Chunking changes storage and loading, not the uniform grid or geographic hierarchy. Keep rivers, labels, highlights, and details as generic overlays loaded as needed. Use readable geographic names and familiar climate class names. Verify desktop and mobile responsiveness during implementation.
 
 ## 3. History research
 

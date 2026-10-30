@@ -335,30 +335,63 @@
           });
         }
       };
+      let activeLoads = 0;
+      const loadQueue = [];
+      function pumpLoads() {
+        while (activeLoads < 4 && loadQueue.length) {
+          const job = loadQueue.shift();
+          activeLoads++;
+          job().finally(() => { activeLoads--; pumpLoads(); });
+        }
+      }
       function tile(x, y) {
         const key = x + "," + y;
+        if (!meta.tiles && !cells) return { loaded: false };
         if (tiles.has(key)) return tiles.get(key);
-        if (!cells) return { loaded: false };
-        const w = Math.min(512, meta.width - x * 512),
-          h = Math.min(512, meta.height - y * 512),
-          c = document.createElement("canvas");
-        c.width = w;
-        c.height = h;
-        const tctx = c.getContext("2d"),
-          image = tctx.createImageData(w, h);
-        for (let r = 0; r < h; r++)
-          for (let col = 0; col < w; col++) {
-            const value = cells[(y * 512 + r) * meta.width + x * 512 + col],
-              rgb = meta.palette[value],
-              i = (r * w + col) * 4;
-            image.data[i] = rgb[0];
-            image.data[i + 1] = rgb[1];
-            image.data[i + 2] = rgb[2];
-            image.data[i + 3] = 255;
-          }
-        tctx.putImageData(image, 0, 0);
-        const t = { image: c, loaded: true };
+        const size = meta.tile_size || 512,
+          w = Math.min(size, meta.width - x * size),
+          h = Math.min(size, meta.height - y * size),
+          entry = meta.tiles?.[key],
+          t = { loaded: false, data: null, image: null };
         tiles.set(key, t);
+        t.ready = new Promise((resolve) => {
+          loadQueue.push(async () => {
+            try {
+              if (entry && 'value' in entry) {
+                t.data = new Uint8Array(w * h).fill(entry.value);
+              } else if (entry) {
+                const response = await fetch(new URL(meta.tile_pack, base), {
+                  headers: { Range: `bytes=${entry.offset}-${entry.offset + entry.length - 1}` },
+                });
+                if (response.status !== 206) throw Error('Native tile range could not load');
+                const compressed = await response.arrayBuffer();
+                if (compressed.byteLength !== entry.length) throw Error('Tile length mismatch');
+                const stream = new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'));
+                t.data = new Uint8Array(await new Response(stream).arrayBuffer());
+                const digest = await crypto.subtle.digest('SHA-256', t.data);
+                const hex = [...new Uint8Array(digest)].map(v => v.toString(16).padStart(2, '0')).join('');
+                if (hex !== entry.sha256) throw Error('Tile checksum mismatch');
+              } else if (cells) {
+                t.data = new Uint8Array(w * h);
+                for (let r = 0; r < h; r++)
+                  t.data.set(cells.subarray((y * size + r) * meta.width + x * size, (y * size + r) * meta.width + x * size + w), r * w);
+              } else throw Error('Native tile unavailable');
+              if (t.data.length !== w * h) throw Error('Tile dimensions mismatch');
+              const c = document.createElement('canvas');
+              c.width = w; c.height = h;
+              const tctx = c.getContext('2d'), image = tctx.createImageData(w, h);
+              for (let i = 0; i < t.data.length; i++) {
+                const rgb = meta.palette[t.data[i]];
+                image.data.set([rgb[0], rgb[1], rgb[2], 255], i * 4);
+              }
+              tctx.putImageData(image, 0, 0);
+              t.image = c; t.loaded = true;
+            } catch (error) {
+              t.error = error.message;
+            } finally { resolve(t); requestDraw(); }
+          });
+          pumpLoads();
+        });
         return t;
       }
       function size() {
@@ -455,7 +488,7 @@
           }
           ctx.stroke();
         }
-        if (tiles.size > 120) {
+        if (tiles.size > 48) {
           for (const [key] of tiles) {
             const [x, y] = key.split(",").map(Number);
             if (
@@ -496,15 +529,27 @@
         selected = { x, y };
         readSelection(x, y);
       }
-      function readSelection(x, y) {
+      async function readSelection(x, y) {
         if (selected?.x !== x || selected?.y !== y) return;
         $("#coordinates").textContent =
           `Cell ${x}, ${y} · ${(90 - (y + 0.5) * meta.step).toFixed(5)}°, ${(-180 + (x + 0.5) * meta.step).toFixed(5)}°`;
-        if (!cells) {
-          $("#selection").textContent = "Loading exact cells…";
-          return;
+        let value;
+        if (meta.tiles) {
+          const size = meta.tile_size, tx = Math.floor(x / size), ty = Math.floor(y / size);
+          const entry = meta.tiles[tx + ',' + ty];
+          if ('value' in entry) value = entry.value;
+          else {
+            $("#selection").textContent = "Loading exact cell…";
+            const t = await tile(tx, ty).ready;
+            if (selected?.x !== x || selected?.y !== y) return;
+            if (!t.loaded) { $("#selection").textContent = t.error; return; }
+            value = t.data[(y % size) * entry.width + x % size];
+          }
+        } else {
+          if (!cells) { $("#selection").textContent = "Loading exact cells…"; return; }
+          value = cells[y * meta.width + x];
         }
-        const id = cells[y * meta.width + x] & 15;
+        const id = value & 15;
         $("#selection").textContent =
           meta.groups.find((g) => g.id === id)?.name || "Unrecognized cell";
         requestDraw();
@@ -597,6 +642,7 @@
         overview.onload = requestDraw;
         overview.src = new URL("overview.png", base);
         fit();
+        if (!meta.tiles) {
         const response = await fetch(new URL("display-cells.u8.gz", base));
         if (!response.ok) throw Error("Cell grid could not load");
         const stream = response.body.pipeThrough(
@@ -605,6 +651,7 @@
         cells = new Uint8Array(await new Response(stream).arrayBuffer());
         if (cells.length !== meta.width * meta.height)
           throw Error("Cell grid dimensions do not match");
+        }
         if (selected) readSelection(selected.x, selected.y);
         requestDraw();
       } catch (e) {
