@@ -2,6 +2,14 @@
 
 Location attributes may be time-dependent or time-agnostic. Political-entity government type is stored per entity and time; locations receive it through their controller.
 
+## Data lifecycle
+
+Geography and historical attributes use three logical layers: **Evidence** retains original sources and conflicting claims with links to conclusions; **Research** stores versioned values, reasoning, and review history; **Published data** exposes accepted records to the app. These are logical responsibilities, not a requirement for three separate databases or duplicate copies. Research and published data may share versioned tables, with an accepted-record view or pointer controlling app visibility.
+
+Geographic polygons and research inputs generate candidate cell assignments. The user approves exact map cells at every hierarchy level, top-down; child levels partition approved parent cells. Corrections to approved assignments return for renewed cell review. Generate the matching location-ID grid and metadata and publish them as one accepted revision.
+
+Drafts stay out of the app. Keep the current accepted revision visible until its replacement is validated, reviewed, and accepted; make acceptance and app visibility atomic.
+
 ## Names and identity
 
 Names are time-agnostic. Each unit in the six-level geographic hierarchy has one fixed display name based on a current reference name set during geography research. Each political entity has one familiar conventional name, including extinct entities. A change in government type leaves the entity’s fixed name and stable ID in place.
@@ -10,19 +18,31 @@ Names are time-agnostic. Each unit in the six-level geographic hierarchy has one
 
 Every location and political-entity attribute, whether time-dependent or time-agnostic, uses a shared definition with a stable attribute ID, display name, meaning, value type, applicability, and time behavior. Categorical values reference shared category IDs, names, and definitions. Numeric values specify units and value rules.
 
+Keep numeric zero, None (supported absence), Unknown (insufficient evidence), and Not applicable (the attribute does not apply) distinct.
+
 ## Shared time handling
 
-Use whole years from 3000 BC through the current reference year, 2026. Display BC/AD dates with no year zero; interval start and end years are inclusive, so a period ending in 1600 is followed by one beginning in 1601. Represent approximate dates with a best-estimate year and preserve uncertainty in the evidence. For values between research dates, use the best educated estimate for the attribute.
+Use whole years from 3000 BC through the current reference year, 2026. Display BC/AD dates with no year zero; interval start and end years are inclusive, so a period ending in 1600 is followed by one beginning in 1601. Represent approximate dates with a best-estimate year and preserve uncertainty in the evidence. Values may be intervals or point estimates; an annual record for every year is not required. For years between researched dates, use the best educated estimate with a method appropriate to the attribute.
 
 ## Shared location-attribute applicability
 
 Each location attribute declares whether it applies to land, water, or both. Time-dependent location attributes 1–15, including political controller, port functions, and production, apply to land. Among time-agnostic attributes, Topography and Climate apply to land, while Water type applies to water. Water locations show Not applicable for land-only attributes; attributes 8–10 also show Not applicable when population is zero. The database rejects incompatible assignments, and the UI distinguishes Not applicable from Unknown (insufficient evidence). Later attributes declare applicability individually.
 
-## Shared product catalog and quantities
+## Research and review
 
-Production and trade use one product catalog with stable IDs, display names, and definitions. Curate its granularity and expand it as research identifies notable products.
+Complete the geographic hierarchy and final river review before historical attribute research. Afterward, independent research scopes can proceed in parallel, with dependencies enforced only where relevant. Use multiple Luna-class research agents with an independent 6.1-Sol-level reviewer; scale the ratio to workload rather than fixing it. Scope batches by locations or entities, attributes, years, sources, values, and reasoning.
 
-Qualitative production and trade records are the foundation; add quantities when supported. Each quantity specifies product, amount, unit, and measurement year or period, distinguishing annual output from a shipment or multi-year total. Prefer product-specific units; convert only when justified, retaining the original measurement and conversion or estimate basis. Unknown means no defensible quantity, not zero. Trade quantities refer to a specified year within the connection’s period.
+Automatic checks cover IDs, applicability, units and value ranges, share constraints, conflicting intervals, and cross-attribute dependencies. The reviewer evaluates evidence, estimates, and historical interpretation, then accepts a batch or requests corrections. Attribute work does not require routine user approval; send uncertain judgments to the user with a concise issue, options, and recommendation. Pause only dependent work while unrelated scopes continue.
+
+Before accepting updates for overlapping years of the same subject and attribute, compare and reconcile them with the current accepted revision. Preserve version history, provenance, and original claims. Geography remains user-approved under its existing cell-map workflow.
+
+## Catalogs and quantities
+
+Catalogs grow alongside research. Researchers reuse stable IDs or propose additions as findings emerge. The independent reviewer checks duplicates, overlaps, subtypes, useful granularity, and consistent definitions across the affected catalog. The reviewer owns editorial changes and determines their audit scope. Product granularity is curated editorially and may expand as notable goods are found; the reviewer handles routine changes and escalates uncertain cases. A catalog entry may be reviewed with the research that references it, reconciling concurrent duplicate proposals together.
+
+Keep source detail in Evidence. Nonsemantic renames retain IDs. Duplicate merges reconcile references and conflicts; substantive merges, splits, or definition changes are reviewed with affected records and dependencies. Keep the accepted version until a coherent update is ready. A split does not force narrower values than the evidence supports; usually audit the affected scope, widening it when needed.
+
+Production and trade use one product catalog with stable IDs, display names, and definitions. Qualitative records are the foundation; add quantities when supported. Each quantity specifies product, amount, unit, and measurement year or period, distinguishing annual output from a shipment or multi-year total. Prefer product-specific units; convert only when justified, retaining the original measurement and conversion or estimate basis. Unknown means no defensible quantity, not zero. Trade quantities refer to a specified year within the connection’s period.
 
 ## Time-dependent location attributes
 
@@ -170,8 +190,12 @@ When categories overlap, select the best-fitting type as primary.
 
 ## Time-dependent trade relationships
 
-Record significant directed connections between existing geographic units (location, province, area, region, subcontinent, or continent) or political entities. Endpoints may use different levels. Record from/to endpoints, active year or inclusive year span, one or more shared product IDs, transport by land, river, sea, or a known combination, and the evidence or estimate basis. These connections describe notable trade; a location may trade goods it does not produce locally. The UI shows connections for a selected year and lets users inspect a selected endpoint’s partners and products.
+Record significant directed connections between existing geographic units (location, province, area, region, subcontinent, or continent) or political entities. Endpoints may use different levels. Record from/to endpoints, active year or inclusive year span, one or more shared product IDs, transport by land, river, sea, or a known combination, and the evidence or estimate basis. These connections describe notable trade; a location may trade goods it does not produce locally.
 
 Keep each connection at the geographic level supported by its evidence. A regional record does not imply known flows for its contained locations. Retain sources whose coverage does not sufficiently match an endpoint as evidence without assigning an exact endpoint quantity. Avoid summing regional totals together with contained detailed flows.
 
-Database storage and implementation-level schema, detailed research/review, validation and publication workflows, and trade-map UI details remain for later discussion. Existing geography UI decisions are unchanged.
+## App presentation and remaining design
+
+Map and detail views use the same accepted data for the selected year. Time-dependent values follow that year; time-agnostic attributes remain fixed. Present estimates much like evidence-backed values in the clean primary view; show provenance, estimate basis, and uncertainty in details on demand. Trade and political relationship overlays appear in their respective map modes, not by default. The trade map lets users inspect a selected year and an endpoint’s partners and products.
+
+Detailed database schema, indexes, and per-map-mode UI remain for later design. Existing geography UI decisions are unchanged.
