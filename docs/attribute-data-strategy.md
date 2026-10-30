@@ -10,9 +10,19 @@ Names are time-agnostic. Each unit in the six-level geographic hierarchy has one
 
 Every location and political-entity attribute, whether time-dependent or time-agnostic, uses a shared definition with a stable attribute ID, display name, meaning, value type, applicability, and time behavior. Categorical values reference shared category IDs, names, and definitions. Numeric values specify units and value rules.
 
+## Shared time handling
+
+Use whole years from 3000 BC through the current reference year, 2026. Display BC/AD dates with no year zero; interval start and end years are inclusive, so a period ending in 1600 is followed by one beginning in 1601. Represent approximate dates with a best-estimate year and preserve uncertainty in the evidence. For values between research dates, use the best educated estimate for the attribute.
+
 ## Shared location-attribute applicability
 
-Each location attribute declares whether it applies to land, water, or both. Time-dependent location attributes 1–14, including political controller and port functions, apply to land. Among time-agnostic attributes, Topography and Climate apply to land, while Water type applies to water. Water locations show Not applicable for land-only attributes; attributes 8–10 also show Not applicable when population is zero. The database rejects incompatible assignments, and the UI distinguishes Not applicable from Unknown (insufficient evidence). Later attributes declare applicability individually.
+Each location attribute declares whether it applies to land, water, or both. Time-dependent location attributes 1–15, including political controller, port functions, and production, apply to land. Among time-agnostic attributes, Topography and Climate apply to land, while Water type applies to water. Water locations show Not applicable for land-only attributes; attributes 8–10 also show Not applicable when population is zero. The database rejects incompatible assignments, and the UI distinguishes Not applicable from Unknown (insufficient evidence). Later attributes declare applicability individually.
+
+## Shared product catalog and quantities
+
+Production and trade use one product catalog with stable IDs, display names, and definitions. Curate its granularity and expand it as research identifies notable products.
+
+Qualitative production and trade records are the foundation; add quantities when supported. Each quantity specifies product, amount, unit, and measurement year or period, distinguishing annual output from a shipment or multi-year total. Prefer product-specific units; convert only when justified, retaining the original measurement and conversion or estimate basis. Unknown means no defensible quantity, not zero. Trade quantities refer to a specified year within the connection’s period.
 
 ## Time-dependent location attributes
 
@@ -95,6 +105,10 @@ Assign one primary category to the whole land location at the selected time:
 
 For each land location and selected time, record the set of active functions: Maritime, River, and Lake. Multiple functions may apply to one location. None means evidence or a justified estimate supports no active port function; Unknown means no defensible conclusion. Base each function on evidence of actual operation at that time. A maritime port may lie upriver. Record functions for the whole location.
 
+### 15. Notable production
+
+List the locally significant goods actually produced within the location at the selected time, using the shared product catalog. Multiple goods may apply; examples include agricultural products, extracted materials, livestock, fish, and timber. Record sources and estimate basis. None means evidence or a justified estimate supports no notable production; Unknown means the available research cannot establish it.
+
 ## Time-agnostic location attributes
 
 ### 1. Topography
@@ -154,4 +168,10 @@ Store one primary type per political entity and time; locations receive it throu
 
 When categories overlap, select the best-fitting type as primary.
 
-Historical range, year and BCE convention, interval boundaries, and values between research dates remain open for discussion.
+## Time-dependent trade relationships
+
+Record significant directed connections between existing geographic units (location, province, area, region, subcontinent, or continent) or political entities. Endpoints may use different levels. Record from/to endpoints, active year or inclusive year span, one or more shared product IDs, transport by land, river, sea, or a known combination, and the evidence or estimate basis. These connections describe notable trade; a location may trade goods it does not produce locally. The UI shows connections for a selected year and lets users inspect a selected endpoint’s partners and products.
+
+Keep each connection at the geographic level supported by its evidence. A regional record does not imply known flows for its contained locations. Retain sources whose coverage does not sufficiently match an endpoint as evidence without assigning an exact endpoint quantity. Avoid summing regional totals together with contained detailed flows.
+
+Database storage and implementation-level schema, detailed research/review, validation and publication workflows, and trade-map UI details remain for later discussion. Existing geography UI decisions are unchanged.
