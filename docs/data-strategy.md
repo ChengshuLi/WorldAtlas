@@ -14,7 +14,6 @@
     - [Shared data rules](#shared-data-rules)
     - [Research and review](#research-and-review)
     - [Catalogs](#catalogs)
-    - [Production and trade quantities](#production-and-trade-quantities)
   - [B. Location attributes](#b-location-attributes)
     - [Time-dependent location attributes](#time-dependent-location-attributes)
     - [Time-agnostic location attributes](#time-agnostic-location-attributes)
@@ -80,7 +79,7 @@ Load and reuse the single compressed grid with local cell picking by ID, viewer-
 
 #### Shared data rules
 
-Every attribute—location or political entity, time-dependent or time-agnostic—has a shared definition with a stable ID, display name, meaning, value type, applicability, and time behavior. Categorical values reference shared category IDs, names, and definitions; numeric values specify units and value rules. Keep numeric zero, **None** (supported absence), **Unknown** (insufficient evidence), and **Not applicable** (the attribute does not apply) distinct.
+Every attribute—location or political entity, time-dependent or time-agnostic—has a shared definition with a stable ID, display name, meaning, value type, applicability, and time behavior. Categorical values reference shared category IDs, names, and definitions. Numeric values include population and disease-death counts, rates, percentages, GDP, and other economic values. Each attribute specifies its own units, time basis, evidence or estimation rules, and any allowed derivations or conversions. Keep numeric zero, **None** (supported absence), **Unknown** (insufficient evidence), and **Not applicable** (the attribute does not apply) distinct.
 
 Use whole years from 3000 BC through the current reference year, 2026. Display BC/AD dates with no year zero; interval start and end years are inclusive, so a period ending in 1600 is followed by one beginning in 1601. Represent approximate dates with a best-estimate year and preserve uncertainty in the evidence. Values may be intervals or point estimates; an annual record for every year is not required. For years between researched dates, use the best educated estimate with a method appropriate to the attribute.
 
@@ -98,15 +97,11 @@ Before accepting overlapping-year updates to the same subject and attribute, com
 
 #### Catalogs
 
-Catalogs are shared lists of eligible discrete values; every entry has a stable ID, display name, and definition. Grow catalogs through research for cultures, religions (including Unaffiliated), spoken languages, infectious diseases, and products. Notable production and trade use the same product catalog. Political entities also grow through research and follow the same stable-ID and review principles, while their richer time-bounded records are defined separately under C. Fixed option sets—including location rank, Topography, Water type, vegetation, port functions, and the 30 Climate classes—are defined by their attributes rather than expanded as research catalogs.
+Catalogs are shared lists of eligible discrete values; every entry has a stable ID, display name, and definition. Grow catalogs through research for cultures, religions (including Unaffiliated), spoken languages, infectious diseases, and products. Political entities also grow through research and follow the same stable-ID and review principles, while their richer time-bounded records are defined separately under C. Fixed option sets—including location rank, Topography, Water type, vegetation, port functions, and the 30 Climate classes—are defined by their attributes rather than expanded as research catalogs.
 
 Researchers reuse IDs or propose additions as findings emerge. The independent reviewer checks duplicates, overlaps, subtypes, useful granularity, and consistent definitions across the affected catalog. Granularity is chosen for each catalog, not by one universal ranking. The reviewer owns editorial changes and their audit scope; uncertain cases are escalated to the user. A catalog entry may be reviewed with research that references it, reconciling concurrent duplicate proposals together.
 
 Keep source detail in Evidence. Nonsemantic renames retain IDs. Duplicate merges reconcile references and conflicts; substantive merges, splits, or definition changes are reviewed with affected records and dependencies. Keep the accepted version until a coherent update is ready. A split does not require narrower values than the evidence supports; usually audit the affected scope, widening it when needed.
-
-#### Production and trade quantities
-
-Production and trade reference the same product catalog by stable ID; it may expand as research identifies notable goods. Qualitative production and trade records are the foundation; add quantities when supported. Each quantity specifies product, amount, unit, and measurement year or period, distinguishing annual output from a shipment or multi-year total. Prefer product-specific units; convert only when justified, retaining the original measurement and conversion or estimate basis. Unknown means no defensible quantity, not zero. Trade quantities refer to a specified year within the connection’s active period.
 
 ### B. Location attributes
 
@@ -200,6 +195,8 @@ Store one primary type per political entity and time; locations receive it throu
 When descriptions overlap, select the best-fitting type as primary.
 
 ### D. Trade relationships
+
+Notable production (#15) and trade reference the same product catalog by stable ID; it may expand as research identifies notable goods. Qualitative production and trade records are the foundation; add product quantities when supported. Each quantity specifies product, amount, unit, and measurement year or period, distinguishing annual output from a shipment or multi-year total. Prefer product-specific units; convert only when justified, retaining the original measurement and conversion or estimate basis. Unknown means no defensible quantity, not zero. Trade quantities refer to a specified year within the connection’s active period.
 
 Record significant directed connections between existing geographic units (location, province, area, region, subcontinent, or continent) or political entities. Endpoints may use different levels. Record from/to endpoints, active year or inclusive year span, one or more shared product IDs, transport by land, river, sea, or a known combination, and evidence or estimate basis. A location may trade goods it does not produce locally.
 
