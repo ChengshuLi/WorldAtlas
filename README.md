@@ -8,12 +8,13 @@ The settled project contract is in [the data strategy](docs/data-strategy.md).
 R2 bucket. Evidence objects are not publicly routed. The root page is a draft review
 surface, not an accepted geography release.
 
-The viewer loads a lightweight overview and native 512×512 display chunks on demand.
+The viewer loads and verifies the entire native grid up front as lossless row runs.
 The low four bits contain the proposed continent ID; bit 4 distinguishes source land.
-Uniform chunks are represented by one value; other chunks are independently gzip
-compressed inside a range-readable pack, with per-chunk SHA-256 validation. Selection
-uses exact native cells, never the overview. Browser rendering uses a bounded detail
-cache and at most four concurrent chunk downloads.
+WebGL renders directly from the compact run representation at every zoom, and local
+picking uses the same data. There are no overview substitutions or detail downloads
+during navigation. Controls remain disabled until the complete map is ready.
+`scripts/build_local_grid.py DRAFT_DIR` builds and hashes the local-rendering assets
+from the generation chunks; chunking is an offline generation detail only.
 
 `scripts/build_continent_proposal.py` builds the initial research draft from pinned
 Natural Earth archives. It includes explicit, reviewable atlas conventions; it is
@@ -31,7 +32,11 @@ python scripts/audit_small_islands.py SOURCES_DIR OUTPUT_DIR
 `scripts/build_review_tiles.py SOURCES_DIR PRIOR_DRAFT_DIR OUTPUT_DIR` creates the
 65,536-column center-sampled review version. It re-rasterizes source land at native
 resolution while retaining the prior draft's marine grouping footprints, which remain
-explicitly provisional. Generation is banded and does not allocate the whole grid.
+explicitly provisional. Enclosed ocean-code artifacts are audited and assigned to
+the surrounding continent, retaining open-ocean boundaries and intentional island
+groups. Heard–McDonald is grouped with Kerguelen in Africa. Pass `--maldives`
+with the pinned OneMap island GeoJSON to replace the generalized Maldives coast;
+retain its license and attribution. Generation is banded and does not allocate the whole grid.
 
 Source archives, generated grids, research notes, and review metadata belong in
 R2/Neon rather than Git. Use an immutable review prefix for each candidate and

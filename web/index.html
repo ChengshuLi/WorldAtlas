@@ -282,6 +282,7 @@
               >Proposal metadata and full rules</a
             >
           </p>
+          <p>Maldives island data: <a href="https://geomatics.gov.mv/nationalmapping.php">Geomatics Department, Ministry of Infrastructure, Housing and Urban Development, Maldives</a>, used under its <a href="https://readme.onemap.mv/pdf/Data%20Usage%20License.pdf">Data Usage License</a>. No official endorsement is implied.</p>
           <p id="hash"></p>
         </details>
       </aside>
@@ -309,20 +310,19 @@
       </main>
     </div>
     <script type="module">
+      import { loadLocalGrid, cellValue, createRenderer } from './local-grid.js';
       const canvas = document.querySelector("#canvas"),
-        ctx = canvas.getContext("2d"),
         map = document.querySelector("#map");
       const $ = (s) => document.querySelector(s);
       let meta,
-        overview,
+        renderer,
+        nativeGrid,
         scale = 1,
         ox = 0,
         oy = 0,
         dpr = 1,
-        tiles = new Map(),
         drag = null,
-        selected = null,
-        cells = null;
+        selected = null;
       let drawPending = false;
       const palette = new Map(),
         base = new URL("./", document.baseURI);
@@ -335,70 +335,10 @@
           });
         }
       };
-      let activeLoads = 0;
-      const loadQueue = [];
-      function pumpLoads() {
-        while (activeLoads < 4 && loadQueue.length) {
-          const job = loadQueue.shift();
-          activeLoads++;
-          job().finally(() => { activeLoads--; pumpLoads(); });
-        }
-      }
-      function tile(x, y) {
-        const key = x + "," + y;
-        if (!meta.tiles && !cells) return { loaded: false };
-        if (tiles.has(key)) return tiles.get(key);
-        const size = meta.tile_size || 512,
-          w = Math.min(size, meta.width - x * size),
-          h = Math.min(size, meta.height - y * size),
-          entry = meta.tiles?.[key],
-          t = { loaded: false, data: null, image: null };
-        tiles.set(key, t);
-        t.ready = new Promise((resolve) => {
-          loadQueue.push(async () => {
-            try {
-              if (entry && 'value' in entry) {
-                t.data = new Uint8Array(w * h).fill(entry.value);
-              } else if (entry) {
-                const response = await fetch(new URL(meta.tile_pack, base), {
-                  headers: { Range: `bytes=${entry.offset}-${entry.offset + entry.length - 1}` },
-                });
-                if (response.status !== 206) throw Error('Native tile range could not load');
-                const compressed = await response.arrayBuffer();
-                if (compressed.byteLength !== entry.length) throw Error('Tile length mismatch');
-                const stream = new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'));
-                t.data = new Uint8Array(await new Response(stream).arrayBuffer());
-                const digest = await crypto.subtle.digest('SHA-256', t.data);
-                const hex = [...new Uint8Array(digest)].map(v => v.toString(16).padStart(2, '0')).join('');
-                if (hex !== entry.sha256) throw Error('Tile checksum mismatch');
-              } else if (cells) {
-                t.data = new Uint8Array(w * h);
-                for (let r = 0; r < h; r++)
-                  t.data.set(cells.subarray((y * size + r) * meta.width + x * size, (y * size + r) * meta.width + x * size + w), r * w);
-              } else throw Error('Native tile unavailable');
-              if (t.data.length !== w * h) throw Error('Tile dimensions mismatch');
-              const c = document.createElement('canvas');
-              c.width = w; c.height = h;
-              const tctx = c.getContext('2d'), image = tctx.createImageData(w, h);
-              for (let i = 0; i < t.data.length; i++) {
-                const rgb = meta.palette[t.data[i]];
-                image.data.set([rgb[0], rgb[1], rgb[2], 255], i * 4);
-              }
-              tctx.putImageData(image, 0, 0);
-              t.image = c; t.loaded = true;
-            } catch (error) {
-              t.error = error.message;
-            } finally { resolve(t); requestDraw(); }
-          });
-          pumpLoads();
-        });
-        return t;
-      }
       function size() {
         dpr = Math.min(devicePixelRatio || 1, 2);
         canvas.width = Math.round(map.clientWidth * dpr);
         canvas.height = Math.round(map.clientHeight * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         requestDraw();
       }
       function minimumScale() {
@@ -428,93 +368,14 @@
         requestDraw();
       }
       function draw() {
-        if (!meta) return;
+        if (!renderer) return;
         constrainView();
-        const w = map.clientWidth,
-          h = map.clientHeight;
-        ctx.clearRect(0, 0, w, h);
-        ctx.imageSmoothingEnabled = false;
-        if (overview?.complete)
-          ctx.drawImage(
-            overview,
-            ox,
-            oy,
-            meta.width * scale,
-            meta.height * scale,
-          );
-        if (scale >= 0.4) {
-          const x0 = Math.max(0, Math.floor(-ox / scale / 512)),
-            y0 = Math.max(0, Math.floor(-oy / scale / 512)),
-            x1 = Math.min(
-              Math.ceil(meta.width / 512) - 1,
-              Math.floor((w - ox) / scale / 512),
-            ),
-            y1 = Math.min(
-              Math.ceil(meta.height / 512) - 1,
-              Math.floor((h - oy) / scale / 512),
-            );
-          for (let y = y0; y <= y1; y++)
-            for (let x = x0; x <= x1; x++) {
-              const t = tile(x, y);
-              if (t.loaded)
-                ctx.drawImage(
-                  t.image,
-                  ox + x * 512 * scale,
-                  oy + y * 512 * scale,
-                  t.image.width * scale,
-                  t.image.height * scale,
-                );
-            }
-        }
-        if (scale >= 9) {
-          ctx.strokeStyle = "#ffffff38";
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          for (
-            let x = Math.max(0, Math.floor(-ox / scale));
-            x <= Math.min(meta.width, (w - ox) / scale);
-            x++
-          ) {
-            ctx.moveTo(ox + x * scale, Math.max(0, oy));
-            ctx.lineTo(ox + x * scale, Math.min(h, oy + meta.height * scale));
-          }
-          for (
-            let y = Math.max(0, Math.floor(-oy / scale));
-            y <= Math.min(meta.height, (h - oy) / scale);
-            y++
-          ) {
-            ctx.moveTo(Math.max(0, ox), oy + y * scale);
-            ctx.lineTo(Math.min(w, ox + meta.width * scale), oy + y * scale);
-          }
-          ctx.stroke();
-        }
-        if (tiles.size > 48) {
-          for (const [key] of tiles) {
-            const [x, y] = key.split(",").map(Number);
-            if (
-              ox + (x + 1) * 512 * scale < 0 ||
-              oy + (y + 1) * 512 * scale < 0 ||
-              ox + x * 512 * scale > w ||
-              oy + y * 512 * scale > h
-            )
-              tiles.delete(key);
-          }
-        }
-        if (selected) {
-          ctx.strokeStyle = "#182c3c";
-          ctx.lineWidth = 2;
-          ctx.strokeRect(
-            ox + selected.x * scale,
-            oy + selected.y * scale,
-            Math.max(scale, 3),
-            Math.max(scale, 3),
-          );
-        }
+        renderer.draw({ scale, ox, oy, dpr, selected });
         $("#status").textContent =
-          `${meta.width.toLocaleString()} × ${meta.height.toLocaleString()} cells · ${scale.toFixed(2)} screen px/cell · drag to pan, scroll or +/− to zoom · not approved`;
+          `${meta.width.toLocaleString()} × ${meta.height.toLocaleString()} cells · ${scale.toFixed(2)} screen px/cell · full native map loaded · drag to pan, scroll or +/− to zoom · not approved`;
       }
       function zoom(f, x = map.clientWidth / 2, y = map.clientHeight / 2) {
-        if (!meta) return;
+        if (!renderer) return;
         const ns = Math.max(minimumScale(), Math.min(36, scale * f));
         ox = x - ((x - ox) * ns) / scale;
         oy = y - ((y - oy) * ns) / scale;
@@ -529,32 +390,16 @@
         selected = { x, y };
         readSelection(x, y);
       }
-      async function readSelection(x, y) {
-        if (selected?.x !== x || selected?.y !== y) return;
+      function readSelection(x, y) {
+        if (!nativeGrid || selected?.x !== x || selected?.y !== y) return;
         $("#coordinates").textContent =
           `Cell ${x}, ${y} · ${(90 - (y + 0.5) * meta.step).toFixed(5)}°, ${(-180 + (x + 0.5) * meta.step).toFixed(5)}°`;
-        let value;
-        if (meta.tiles) {
-          const size = meta.tile_size, tx = Math.floor(x / size), ty = Math.floor(y / size);
-          const entry = meta.tiles[tx + ',' + ty];
-          if ('value' in entry) value = entry.value;
-          else {
-            $("#selection").textContent = "Loading exact cell…";
-            const t = await tile(tx, ty).ready;
-            if (selected?.x !== x || selected?.y !== y) return;
-            if (!t.loaded) { $("#selection").textContent = t.error; return; }
-            value = t.data[(y % size) * entry.width + x % size];
-          }
-        } else {
-          if (!cells) { $("#selection").textContent = "Loading exact cells…"; return; }
-          value = cells[y * meta.width + x];
-        }
-        const id = value & 15;
-        $("#selection").textContent =
-          meta.groups.find((g) => g.id === id)?.name || "Unrecognized cell";
+        const id = cellValue(nativeGrid.rows, nativeGrid.runs, x, y) & 15;
+        $("#selection").textContent = meta.groups.find(g => g.id === id)?.name || 'Unrecognized cell';
         requestDraw();
       }
       canvas.addEventListener("pointerdown", (e) => {
+        if (!renderer) return;
         canvas.setPointerCapture(e.pointerId);
         drag = {
           id: e.pointerId,
@@ -611,6 +456,11 @@
         oy = map.clientHeight / 2 - ((90 - p[1]) / meta.step) * scale;
         requestDraw();
       };
+      for (const control of document.querySelectorAll('#in,#out,#fit,#jump')) control.disabled = true;
+      canvas.addEventListener('webglcontextlost', (e) => {
+        e.preventDefault(); renderer = null;
+        $('#status').textContent = 'Graphics context lost. Reload to restore the map.';
+      });
       new ResizeObserver(size).observe(map);
       try {
         const r = await fetch(new URL("proposal.json", base));
@@ -638,22 +488,11 @@
         }
         $("#hash").textContent =
           "Cell-grid SHA-256: " + meta.sha256_uncompressed;
-        overview = new Image();
-        overview.onload = requestDraw;
-        overview.src = new URL("overview.png", base);
-        fit();
-        if (!meta.tiles) {
-        const response = await fetch(new URL("display-cells.u8.gz", base));
-        if (!response.ok) throw Error("Cell grid could not load");
-        const stream = response.body.pipeThrough(
-          new DecompressionStream("gzip"),
-        );
-        cells = new Uint8Array(await new Response(stream).arrayBuffer());
-        if (cells.length !== meta.width * meta.height)
-          throw Error("Cell grid dimensions do not match");
-        }
-        if (selected) readSelection(selected.x, selected.y);
-        requestDraw();
+        $("#status").textContent = 'Loading and verifying the full-resolution map…';
+        nativeGrid = await loadLocalGrid(meta, base);
+        renderer = createRenderer(canvas, meta, nativeGrid);
+        for (const control of document.querySelectorAll('#in,#out,#fit,#jump')) control.disabled = false;
+        size(); fit();
       } catch (e) {
         $("#status").textContent = e.message;
         $("#status").classList.add("error");

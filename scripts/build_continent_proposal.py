@@ -189,7 +189,7 @@ def write_grid_assets(grid, land, output):
     return raw_hash, palette, hashlib.sha256(display.tobytes()).hexdigest()
 
 
-def land_records(source):
+def land_records(source, maldives=None):
     # Explicit approximate convention line, requiring review at the continental seam.
     # Longitude/latitude vertices trace Urals, Ural River and Greater Caucasus.
     seam = [
@@ -243,7 +243,7 @@ def land_records(source):
     island_groups = {
         "French Southern and Antarctic Lands": 1,
         "Seychelles": 1,
-        "Heard Island and McDonald Islands": 6,
+        "Heard Island and McDonald Islands": 1,
         "Saint Helena": 1,
         "Reunion": 1,
         "Mauritius": 1,
@@ -254,6 +254,8 @@ def land_records(source):
         "Clipperton Island": 4,
     }
     for attr, geom in features(source, "ne_10m_admin_0_map_units"):
+        if maldives is not None and attr["ADMIN"] == "Maldives":
+            continue
         if attr["CONTINENT"] == "Antarctica":
             continue
         continent = next((i for i, n in GROUPS.items() if n == attr["CONTINENT"]), None)
@@ -281,6 +283,8 @@ def land_records(source):
             if attr["ADMIN"] == "Egypt":
                 records += [(poly.difference(sinai), 1), (poly.intersection(sinai), 2)]
                 continue
+            if attr["ADMIN"] == "Yemen" and 51 < x < 55 and 11 < y < 13.5:
+                group = 1
             if attr["ADMIN"] == "Indonesia" and x >= 130 and y < 0:
                 group = 6
             if attr["ADMIN"] in {"Cyprus", "Northern Cyprus"}:
@@ -298,6 +302,9 @@ def land_records(source):
             if attr["GEOUNIT"] == "Greenland":
                 group = 4
             records.append((poly, group))
+    if maldives is not None:
+        for feature in json.loads(maldives.read_text())["features"]:
+            records.append((make_valid(shape(feature["geometry"])), 2))
     records = [(g, i) for g, i in records if not g.is_empty]
     return records, island_groups, seam
 
