@@ -10,17 +10,17 @@ Each location attribute declares whether it applies to land, water, or both. Tim
 
 ### 1. Population
 
-Total residents within the location’s fixed boundary at the selected time, including all urban, suburban, and rural residents. Use supported counts or justified educated estimates, including zero; record the basis. Use Unknown only when no estimate is justified. Population is an independently researched input. Other attributes may use it, but it is never derived from them or changed to reconcile GDP or share data.
+Total residents within the location’s fixed boundary at the selected time, including all urban, suburban, and rural residents. Use supported counts or justified educated estimates, including zero; record the basis. Use Unknown only when no estimate is justified. Research population independently and treat it as a fixed input when deriving or reconciling other values.
 
 ### 2. Location rank
 
-Classify the whole location at the selected time as Uninhabited, Rural, Town, City, or Unknown, based on its historical character. Uninhabited means population zero; Rural covers inhabited non-urban locations, including nomadic populations. A location ranked Town or City may contain suburban areas or countryside within its boundary. Rank is not determined by total population: a City may have fewer residents than a Rural location. Unknown population does not require Unknown rank; use Unknown rank only when no classification can be justified.
+Classify the whole location at the selected time as Uninhabited, Rural, Town, City, or Unknown, based on its historical character. Uninhabited means population zero; Rural covers inhabited non-urban locations, including nomadic populations. A location ranked Town or City may contain suburban areas or countryside within its boundary. Assign rank independently from population when historical character supports it; use Unknown rank when no classification can be justified.
 
 ### Shared rules for attributes 3–5
 
-For each attribute, record the resident category with the largest population share at the selected time. The share need not exceed half. Use evidence or a justified educated estimate. Use Unknown only when no primary category can be justified, and Not applicable when population is zero. Record sources and estimate basis.
+For each attribute, record the resident category with the largest population share at the selected time, including when that share is below half. Use evidence or a justified educated estimate. Use Unknown only when no primary category can be justified, and Not applicable when population is zero. Record sources and estimate basis.
 
-Optional share breakdowns use the same structure for all three: **complete** accounts for the population, **partial** records some shares, and **unavailable** means no shares can be justified. A partial or unavailable breakdown may not show which category is largest; a defensible estimate may still support a primary category. Retain supported or estimated shares with their basis.
+Optional share breakdowns use the same structure for all three: **complete** accounts for the population, **partial** records some shares, and **unavailable** means no shares can be justified. A defensible estimate may establish a primary category even when the share breakdown is partial or unavailable. Retain supported or estimated shares with their basis.
 
 ### 3. Primary culture
 
@@ -40,9 +40,9 @@ The percentage of residents aged 15 or older who can read and write a simple eve
 
 ### 7. Political controller
 
-For each land location and time, record the effective controlling entity by ID; when control is divided, choose the entity controlling the greatest area within the fixed boundary. States and local communities, tribes, or councils may be entities. Use Unknown when no controller is supported by evidence or a justified estimate. Population alone does not establish control.
+For each land location and time, record the effective controlling entity by ID; when control is divided, choose the entity controlling the greatest area within the fixed boundary. States and local communities, tribes, or councils may be entities. Determine control from evidence about effective authority; use Unknown when no controller is supported by evidence or a justified estimate.
 
-For joint administration, use a documented administrative lead; otherwise, when comparable evidence supports it, use the entity with greater responsibility and resources. A stable entity ID breaks any remaining tie. At population zero, a location may have a controller, NoController, or Unknown. With positive population, record a controller or Unknown. NoController means direct evidence or a justified estimate supports that no entity controls the location; Unknown means evidence is insufficient.
+For joint administration, use a documented administrative lead. If none is documented, choose the entity with greater responsibility and resources when comparable evidence supports that distinction; use a stable entity ID to break remaining ties. At population zero, a location may have a controller, NoController, or Unknown. For populated locations, assign a supported controller or use Unknown. NoController means direct evidence or a justified estimate supports that no entity controls the location; Unknown means evidence is insufficient.
 
 ### 8. GDP per person
 
@@ -62,11 +62,11 @@ Annual person-weighted median disposable household income after taxes and transf
 
 ### 11. Infectious diseases and outbreaks
 
-Record significant infectious diseases and outbreaks affecting a location and period; several may occur concurrently. Link disease and outbreak records with shared identities. Endemic disease and an outbreak can overlap. Disease presence may be known while deaths remain Unknown. Use evidence or a justified estimate, with its basis; report absence only when supported, and use Unknown when research is missing.
+Record significant infectious diseases and outbreaks affecting a location and period; several may occur concurrently. Link disease and outbreak records with shared identities. A disease may be endemic and also have an outbreak. Record presence or absence using evidence or a justified estimate; mortality is researched separately and may be Unknown even when disease presence is known. Record source and estimate basis; use Unknown when research cannot justify a value.
 
 ### 12. Annual infectious-disease deaths
 
-For each location and year, record annual resident deaths from the infectious diseases and outbreaks listed for that location and period in #11, using the same disease and outbreak identities. Research or estimate mortality separately; disease presence does not determine a death count, and mortality may be Unknown even when presence is known. Each disease count may be Unknown. Also record the combined count of unique people who died from those listed diseases. Consolidate overlapping reports within each disease and account for overlap across diseases; the combined count is not a raw sum. Use a supported count or justified estimate, otherwise mark the combined count Unknown while retaining individual estimates. Record sources, coverage, and overlap reasoning. Calculate percentages using Population (#1). This attribute covers infectious-disease deaths, not all-cause mortality; individual death registries are unnecessary.
+For each location and year, record annual resident deaths from the infectious diseases and outbreaks listed for that location and period in #11, using the same disease and outbreak identities. Research or estimate mortality separately from disease presence. Each disease count may be Unknown. Also record the combined count of unique people who died from those listed diseases, counting each person once after resolving duplicate reports within diseases and overlap across diseases. Use a supported count or justified estimate; mark the combined count Unknown when none is justified, while retaining individual estimates. Record sources, coverage, and overlap reasoning. Calculate percentages using Population (#1). Scope: infectious-disease deaths.
 
 ### 13. Vegetation
 
@@ -97,7 +97,7 @@ Use one primary type for each water location, based on its local setting: Open o
 
 Climate is a fixed present-day reference layer across the historical timeline. Use the published GloH2O Köppen–Geiger V3 historical raster for 1991–2020 as the working baseline; record its version and reference period. After geography is finalized, overlay the raster and assign each land location its largest-area class, checking coverage and coasts. This PR records the design; data import follows geography completion.
 
-Retain all 30 classes without rarity-based merging. Quantitative definitions govern classification; familiar names are displayed while the underlying codes are retained. Five broad climate families may be derived for display. Unknown is separate from the classes.
+Use all 30 classes. Quantitative definitions govern classification; display familiar names while retaining underlying codes. Five broad climate families may be derived for display. Unknown is a separate value.
 
 - **Tropical:** Af — Tropical rainforest; Am — Tropical monsoon; Aw — Tropical savanna.
 - **Dry:** BWh — Hot desert; BWk — Cold desert; BSh — Hot semi-arid; BSk — Cold semi-arid.
@@ -115,7 +115,7 @@ Sources: [GloH2O Köppen–Geiger maps](https://www.gloh2o.org/koppen/) and [Bec
 
 ### Primary government type
 
-Store one primary type per political entity and time; locations receive it through their controller. Choose the category that best describes the entity’s governing arrangement, even where descriptions overlap. Use Unknown when no classification is justified.
+Store one primary type per political entity and time; locations receive it through their controller. Choose the best-fitting category for the entity’s governing arrangement, using Unknown when no classification is justified.
 
 - **Monarchy:** government organized around a monarch.
 - **Republic:** political authority is exercised through civic institutions and public offices.
@@ -126,4 +126,4 @@ Store one primary type per political entity and time; locations receive it throu
 - **One-party state:** one ruling party monopolizes political power.
 - **Personalist dictatorship:** governing power is centered on an individual leader.
 
-A government may fit more than one description; store one primary type without imposing a fixed priority among categories.
+When categories overlap, select the best-fitting type as primary.
