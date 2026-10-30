@@ -10,19 +10,23 @@ Total residents within the location’s fixed boundary at the selected time, inc
 
 Classify the whole location at the selected time as Uninhabited, Rural, Town, City, or Unknown, based on its historical character. Uninhabited means population zero; Rural covers inhabited non-urban locations, including nomadic populations. A location ranked Town or City may contain suburban areas or countryside within its boundary. Rank is not determined by total population: a City may have fewer residents than a Rural location. Unknown population does not require Unknown rank; use Unknown rank only when no classification can be justified.
 
+## Shared rules for attributes 3–5
+
+At the selected time, each records the resident category with the largest population share; that share need not exceed half. Use evidence or a justified educated estimate. Use Unknown only when no primary category can be justified, and Not applicable when population is zero. Record sources and estimate basis.
+
+Optional share breakdowns use the same structure for all three: **complete** accounts for the population, **partial** records some shares, and **unavailable** means no shares can be justified. A partial or unavailable breakdown may not show which category is largest; a defensible estimate may still support a primary category. Retain supported or estimated shares with their basis.
+
 ## 3. Primary culture
 
-Record the resident culture with the largest population share at that time; it need not exceed half the population. Determine it from resident evidence or a defensible estimate. Use Unknown when no primary culture can be justified and not-applicable when population is zero.
-
-Retain supported or estimated culture shares without inventing percentages. A breakdown is **complete** when it accounts for the population, **partial** when only some shares are known, or **unavailable** when no shares can be justified. A defensible estimate may identify the primary culture even when the breakdown is partial or unavailable; store the primary culture separately from breakdown completeness.
+The resident cultural group.
 
 ## 4. Primary religion
 
-Record the religion with the largest resident share at the selected time; a plurality qualifies. Use evidence or a defensible estimate. **Unaffiliated** is a valid category; use Unknown when no religion can be justified and not-applicable when population is zero. Use the same optional share breakdown and complete/partial/unavailable labels as for Primary culture.
+The resident religious affiliation. Unaffiliated is a valid category.
 
 ## 5. Primary spoken language
 
-Record the everyday or home language used by the largest resident share at the selected time. For multilingual residents, use their main everyday/home language to estimate shares consistently. Use the same optional share breakdown and complete/partial/unavailable labels as for Primary culture. Use Unknown when no primary language can be justified and not-applicable when population is zero.
+The residents’ main everyday or home language. For multilingual residents, assign each person to the language they use most in everyday/home life when estimating shares.
 
 ## 6. Adult literacy rate
 
