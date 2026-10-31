@@ -103,8 +103,22 @@ Ocean repair passes preserve every land cell. The subsequent
 Yamal/Arctic landmasses and nearest mainland for unnamed offshore components.
 It preserves the land/water mask and updates existing continental waters only
 where their nearest represented shore changed affiliation. This supersedes the
-initial Russian-island longitude shortcut; the detailed Ural ridge farther south
-remains provisional and separately reviewable. Shared new sea cells use the nearest
+initial Russian-island longitude shortcut; the following `refine_eurasia_boundary.py PRIOR REFERENCE OUTPUT` pass follows
+BasinATLAS watershed geometry through the Urals and Greater Caucasus and the
+OpenStreetMap Ural River main stream. It preserves every land/water cell and ocean
+label, while updating Europe/Asia land and affected nearest-shore water affiliations.
+The northern Ural lowland continuation and short Black/Caspian coastal connectors
+are explicit editorial segments. This is a geographic convention, not a unique
+internationally mandated boundary; northern watershed data are coarser.
+
+Reproduce the reference with `build_eurasia_boundary_reference.py BASIN_SUBSET
+OSM_RIVER OUTPUT`, then `snap_eurasia_coasts.py PRIOR REFERENCE OUTPUT`.
+The immutable evidence retains the selected BasinATLAS features, the OSM main-stream
+geometry, source identifiers, licenses and the final route. Watershed geometry is
+from [BasinATLAS v1.0](https://doi.org/10.6084/m9.figshare.9890531), Linke et al.
+(2019), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); river data are
+© [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), ODbL,
+relation 214415. The derivative route retains these attributions. Shared new sea cells use the nearest
 represented coast. Open named embayments are explicitly distinguished from
 bounded waters; names alone do not imply continental assignment. The reference
 sources are [IHO Sea Areas v3](https://doi.org/10.14284/323),

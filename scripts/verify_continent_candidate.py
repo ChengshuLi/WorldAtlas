@@ -20,6 +20,10 @@ newchecks=[(44995,3731,18),(44948,3723,18),(44941,3691,18),(44971,3678,18),(4496
 for x,y,e in newchecks:assert at(x,y)==e,(x,y,e,at(x,y))
 for lo,la,e in [(-55,62,10),(-55,58,7),(-10,50,7),(121,39,2),(107,20,2),(99,4,2),(-125,45,8)]:assert geo(lo,la)&15==e,(lo,la,geo(lo,la),e)
 print('PASS',len(newchecks),'new user coordinates; ocean/bounded basin controls')
+if 'eurasia_boundary_audit' in m:
+ for x,y,e in [(43680,6024,19),(40871,8636,19),(41599,8854,19),(42121,7069,18),(42798,6972,18),(42210,7806,19),(42221,7806,18),(43508,6662,19),(43526,6662,18),(40864,8651,18),(41074,8670,19),(41622,8987,18),(39998,8449,18),(39882,8355,18),(39561,8211,19),(44825,3916,19)]:
+  assert at(x,y)==e,(x,y,e,at(x,y))
+ print('PASS 16 Eurasian river/watershed controls')
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
 orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
@@ -27,6 +31,8 @@ changed=0;land_changed=0
 for y in range(m['height']):
  a=v[r[y]:r[y+1]];b=oruns[orows[y]:orows[y+1]];aa=np.repeat(a[:,1],np.diff(np.r_[0,a[:,0]])).astype('uint8');bb=np.repeat(b[:,1],np.diff(np.r_[0,b[:,0]])).astype('uint8')
  assert np.array_equal(aa>=16,bb>=16)
+ if 'eurasia_boundary_audit' in m:
+  ocean=np.isin(bb,[7,8,9,10]);assert np.array_equal(aa[ocean],bb[ocean])
  land_changed+=int(np.count_nonzero((aa!=bb)&(bb>=16)))
  if not args.allow_land_affiliation_changes:assert np.array_equal(aa[bb>=16],bb[bb>=16])
  changed+=int(np.count_nonzero(aa!=bb))
