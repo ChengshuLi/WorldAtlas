@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>WorldAtlas · Continent review</title>
+    <base href="__ASSET_BASE__" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: #182c3c;
+        background: #edf2f4;
+        font:
+          14px system-ui,
+          sans-serif;
+      }
+      header {
+        height: 66px;
+        padding: 12px 22px;
+        background: #fff;
+        border-bottom: 1px solid #d5dfe5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      h1 {
+        font-size: 19px;
+        margin: 0;
+      }
+      header small {
+        color: #617481;
+      }
+      button,
+      select {
+        font: inherit;
+        border: 1px solid #bccbd4;
+        border-radius: 7px;
+        background: #fff;
+        padding: 7px 10px;
+        color: #182c3c;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #e9f1f5;
+      }
+      .badge {
+        background: #fff2cf;
+        color: #7b5711;
+        border-radius: 5px;
+        font-size: 11px;
+        padding: 5px 8px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        height: calc(100dvh - 66px);
+      }
+      aside {
+        overflow: auto;
+        background: #fff;
+        border-right: 1px solid #d5dfe5;
+        padding: 18px;
+      }
+      h2 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #617481;
+        margin: 0 0 12px;
+      }
+      .legend {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .legend button {
+        border: 0;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        width: 100%;
+        padding: 8px 4px;
+      }
+      .swatch {
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        border-radius: 3px;
+        flex: none;
+      }
+      .count {
+        font-size: 11px;
+        color: #687b88;
+        margin-left: auto;
+      }
+      .info {
+        border-top: 1px solid #e1e7eb;
+        margin-top: 18px;
+        padding-top: 16px;
+        line-height: 1.5;
+      }
+      .muted {
+        color: #617481;
+        font-size: 12px;
+      }
+      #map {
+        position: relative;
+        overflow: hidden;
+        background: #dce5eb;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+        cursor: grab;
+      }
+      canvas:active {
+        cursor: grabbing;
+      }
+      .tools {
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        max-width: calc(100% - 28px);
+      }
+      .status {
+        position: absolute;
+        bottom: 14px;
+        left: 14px;
+        right: 14px;
+        padding: 9px 12px;
+        background: #ffffffed;
+        border-radius: 7px;
+        font-size: 12px;
+        box-shadow: 0 2px 10px #1232;
+      }
+      .selection {
+        font-size: 17px;
+        font-weight: 650;
+        margin-bottom: 5px;
+      }
+      .error {
+        color: #ad3434;
+      }
+      details {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-top: 12px;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+      a {
+        color: #216c98;
+      }
+      #tip {
+        display: none;
+        position: absolute;
+        pointer-events: none;
+        background: #173344;
+        color: white;
+        border-radius: 4px;
+        padding: 5px 8px;
+        font-size: 12px;
+      }
+      .mobile-toggle {
+        display: none;
+      }
+      @media (max-width: 720px) {
+        h1 {
+          font-size: 16px;
+        }
+        h1 span {
+          display: block;
+          font-size: 13px;
+        }
+        header {
+          padding: 10px 12px;
+          height: 60px;
+        }
+        .layout {
+          height: calc(100dvh - 60px);
+          grid-template-columns: 1fr;
+        }
+        aside {
+          display: none;
+          position: absolute;
+          z-index: 3;
+          top: 60px;
+          bottom: 0;
+          width: 260px;
+          box-shadow: 3px 0 15px #1233;
+        }
+        aside.open {
+          display: block;
+        }
+        .mobile-toggle {
+          display: inline-block;
+        }
+        header small {
+          display: none;
+        }
+        .tools {
+          top: 10px;
+          left: 10px;
+        }
+        .tools select {
+          max-width: 175px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>
+          WorldAtlas
+          <span style="font-weight: 400; color: #6b7d88"
+            >/ Continent review</span
+          >
+        </h1>
+        <small>Native map cells · fixed geography · versioned proposal</small>
+      </div>
+      <div>
+        <span class="badge">DRAFT · NOT APPROVED</span>
+        <button class="mobile-toggle" id="sidebar">Details</button>
+      </div>
+    </header>
+    <div class="layout">
+      <aside id="aside">
+        <h2>Continent-level groups</h2>
+        <div id="legend" class="legend"></div>
+        <div class="info">
+          <div id="selection" class="selection">Select a map cell</div>
+          <div id="coordinates" class="muted">
+            Zoom to inspect exact cell boundaries.
+          </div>
+        </div>
+        <div class="info muted">
+          Stronger shades show source land; lighter shades show waters assigned
+          to a land-continent group. Color identifies the top-level group, not
+          political ownership.
+        </div>
+        <details open>
+          <summary>Review status and caveats</summary>
+          <ul id="caveats"></ul>
+        </details>
+        <details>
+          <summary>Sources and method</summary>
+          <p>
+            Natural Earth land and map units, with explicit atlas grouping
+            choices. Physical-label polygons are generalized and are not legal
+            boundaries. The Europe–Asia divide follows the Ural River and
+            watershed references, with documented coastal continuations.
+            River data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors (ODbL)</a>;
+            watershed geometry: <a href="https://doi.org/10.6084/m9.figshare.9890531">Linke et al., BasinATLAS v1.0</a>
+            (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), adapted for this atlas. Selected ridge continuations follow
+            <a href="https://sashamaps.net/resources/europe-asia-boundary/">Alexandr Trubetskoy’s published tracing</a>,
+            checked against <a href="https://registry.opendata.aws/copernicus-dem/">Copernicus GLO-90 elevation</a>.
+          </p>
+          <p>
+            <a
+              href="https://www.naturalearthdata.com/downloads/10m-physical-vectors/"
+              >Natural Earth</a
+            >
+            ·
+            <a href="https://oceanservice.noaa.gov/facts/howmanyoceans.html"
+              >NOAA oceans</a
+            >
+          </p>
+          <p>
+            <a id="metadata" href="proposal.json"
+              >Proposal metadata and full rules</a
+            >
+          </p>
+          <p>Maldives island data: <a href="https://geomatics.gov.mv/nationalmapping.php">Geomatics Department, Ministry of Infrastructure, Housing and Urban Development, Maldives</a>, used under its <a href="https://readme.onemap.mv/pdf/Data%20Usage%20License.pdf">Data Usage License</a>. No official endorsement is implied.</p>
+          <p>Suez Canal alignment: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. <a href="suez-canal.geojson">Source alignment</a>.</p>
+          <p>Selected sea limits: <a href="https://doi.org/10.14284/323">Flanders Marine Institute (2018), IHO Sea Areas v3</a>, adapted to the cell grid; <a href="https://www.marineregions.org/disclaimer.php">Marine Regions current CC-BY terms</a>. Entrance references also use IHO S-23 and NGA Sailing Directions. These are geographic atlas boundaries, not legal maritime limits.</p>
+          <p id="hash"></p>
+        </details>
+      </aside>
+      <main id="map">
+        <canvas id="canvas" tabindex="0" aria-label="World map"></canvas>
+        <div class="tools">
+          <button id="in" aria-label="Zoom in">+</button
+          ><button id="out" aria-label="Zoom out">−</button
+          ><button id="fit">World</button
+          ><select id="jump" aria-label="Review area">
+            <option value="">Jump to boundary…</option>
+            <option value="eurasia">Europe / Asia</option>
+            <option value="suez">Suez / Red Sea</option>
+            <option value="oceania">Asia / Oceania</option>
+            <option value="arctic">Chukchi / Bering</option>
+            <option value="med">Mediterranean</option>
+            <option value="caribbean">Caribbean</option>
+            <option value="islands">Pacific islands</option>
+            <option value="tuvalu">Tuvalu</option>
+            <option value="tokelau">Tokelau</option>
+          </select>
+        </div>
+        <div id="tip"></div>
+        <div id="status" class="status">Loading the proposal…</div>
+      </main>
+    </div>
+    <script type="module">
+      import { loadLocalGrid, cellValue, createRenderer, wrapColumn } from './local-grid.js?v=3';
+      const canvas = document.querySelector("#canvas"),
+        map = document.querySelector("#map");
+      const $ = (s) => document.querySelector(s);
+      let meta,
+        renderer,
+        nativeGrid,
+        scale = 1,
+        ox = 0,
+        oy = 0,
+        dpr = 1,
+        drag = null,
+        selected = null;
+      let drawPending = false;
+      const palette = new Map(),
+        base = new URL("./", document.baseURI);
+      const requestDraw = () => {
+        if (!drawPending) {
+          drawPending = true;
+          requestAnimationFrame(() => {
+            drawPending = false;
+            draw();
+          });
+        }
+      };
+      function size() {
+        dpr = Math.min(devicePixelRatio || 1, 2);
+        canvas.width = Math.round(map.clientWidth * dpr);
+        canvas.height = Math.round(map.clientHeight * dpr);
+        requestDraw();
+      }
+      function minimumScale() {
+        return Math.max(
+          map.clientWidth / meta.width,
+          map.clientHeight / meta.height,
+        );
+      }
+      function constrainView() {
+        if (!meta || !map.clientWidth || !map.clientHeight) return;
+        const minimum = minimumScale();
+        if (scale < minimum) {
+          const cx = (map.clientWidth / 2 - ox) / scale,
+            cy = (map.clientHeight / 2 - oy) / scale;
+          scale = minimum;
+          ox = map.clientWidth / 2 - cx * scale;
+          oy = map.clientHeight / 2 - cy * scale;
+        }
+        const period = meta.width * scale;
+        ox %= period;
+        if (ox > 0) ox -= period;
+        oy = Math.min(0, Math.max(map.clientHeight - meta.height * scale, oy));
+      }
+      function fit() {
+        scale = minimumScale();
+        ox = (map.clientWidth - meta.width * scale) / 2;
+        oy = (map.clientHeight - meta.height * scale) / 2;
+        constrainView();
+        requestDraw();
+      }
+      function draw() {
+        if (!renderer) return;
+        constrainView();
+        renderer.draw({ scale, ox, oy, dpr, selected });
+        $("#status").textContent =
+          `${meta.width.toLocaleString()} × ${meta.height.toLocaleString()} cells · ${scale.toFixed(2)} screen px/cell · full native map loaded · WASD or drag to pan (wraps horizontally) · +/− or scroll to zoom · not approved`;
+      }
+      function zoom(f, x = map.clientWidth / 2, y = map.clientHeight / 2) {
+        if (!renderer) return;
+        const ns = Math.max(minimumScale(), Math.min(36, scale * f));
+        ox = x - ((x - ox) * ns) / scale;
+        oy = y - ((y - oy) * ns) / scale;
+        scale = ns;
+        constrainView();
+        requestDraw();
+      }
+      function pick(px, py) {
+        const x = wrapColumn(Math.floor((px - ox) / scale), meta.width),
+          y = Math.floor((py - oy) / scale);
+        if (y < 0 || y >= meta.height) return;
+        selected = { x, y };
+        readSelection(x, y);
+      }
+      function readSelection(x, y) {
+        if (!nativeGrid || selected?.x !== x || selected?.y !== y) return;
+        $("#coordinates").textContent =
+          `Cell ${x}, ${y} · ${(90 - (y + 0.5) * meta.step).toFixed(5)}°, ${(-180 + (x + 0.5) * meta.step).toFixed(5)}°`;
+        const id = cellValue(nativeGrid.rows, nativeGrid.runs, x, y) & 15;
+        $("#selection").textContent = meta.groups.find(g => g.id === id)?.name || 'Unrecognized cell';
+        requestDraw();
+      }
+      canvas.addEventListener("pointerdown", (e) => {
+        if (!renderer) return;
+        canvas.focus({ preventScroll: true });
+        canvas.setPointerCapture(e.pointerId);
+        drag = {
+          id: e.pointerId,
+          x: e.offsetX,
+          y: e.offsetY,
+          ox,
+          oy,
+          moved: 0,
+        };
+      });
+      canvas.addEventListener("pointermove", (e) => {
+        if (!drag || drag.id !== e.pointerId) return;
+        let dx = e.offsetX - drag.x,
+          dy = e.offsetY - drag.y;
+        drag.moved = Math.max(drag.moved, Math.hypot(dx, dy));
+        ox = drag.ox + dx;
+        oy = drag.oy + dy;
+        requestDraw();
+      });
+      canvas.addEventListener("pointerup", (e) => {
+        if (drag?.id === e.pointerId && drag.moved < 5)
+          pick(e.offsetX, e.offsetY);
+        drag = null;
+      });
+      canvas.addEventListener("pointercancel", () => (drag = null));
+      canvas.addEventListener(
+        "wheel",
+        (e) => {
+          e.preventDefault();
+          zoom(Math.exp(-e.deltaY * 0.002), e.offsetX, e.offsetY);
+        },
+        { passive: false },
+      );
+      $("#in").onclick = () => zoom(2);
+      $("#out").onclick = () => zoom(0.5);
+      $("#fit").onclick = fit;
+      $("#sidebar").onclick = () => $("#aside").classList.toggle("open");
+      $("#jump").onchange = (e) => {
+        const points = {
+          eurasia: [55, 55, 0.6],
+          suez: [33, 29, 2],
+          oceania: [132, -5, 0.6],
+          arctic: [-170, 66, 0.6],
+          med: [18, 36, 0.6],
+          caribbean: [-75, 18, 0.6],
+          islands: [179, -8, 0.35],
+          tuvalu: [179.2, -8.5, 9],
+          tokelau: [-171.8, -9.2, 9],
+        };
+        const p = points[e.target.value];
+        if (!p) return;
+        scale = p[2];
+        ox = map.clientWidth / 2 - ((p[0] + 180) / meta.step) * scale;
+        oy = map.clientHeight / 2 - ((90 - p[1]) / meta.step) * scale;
+        requestDraw();
+      };
+      for (const control of document.querySelectorAll('#in,#out,#fit,#jump')) control.disabled = true;
+      canvas.addEventListener('webglcontextlost', (e) => {
+        e.preventDefault(); renderer = null;
+        $('#status').textContent = 'Graphics context lost. Reload to restore the map.';
+      });
+      function keyboardAction(event) {
+        if (event.defaultPrevented || event.isComposing || event.ctrlKey || event.metaKey || event.altKey) return null;
+        if (event.target?.closest?.('input,textarea,select,[contenteditable]:not([contenteditable="false"]),[role="textbox"]')) return null;
+        const key = event.key.toLowerCase();
+        return ({ '+':'in', '=':'in', '-':'out', '_':'out', w:'north', a:'west', s:'south', d:'east' })[key] || null;
+      }
+      window.addEventListener('keydown', (event) => {
+        if (!renderer) return;
+        const action = keyboardAction(event);
+        if (!action) return;
+        event.preventDefault();
+        if (action === 'in') zoom(2);
+        else if (action === 'out') zoom(0.5);
+        else {
+          const step = event.repeat ? 32 : Math.min(map.clientWidth,map.clientHeight) * 0.15;
+          if (action === 'north') oy += step;
+          if (action === 'south') oy -= step;
+          if (action === 'west') ox += step;
+          if (action === 'east') ox -= step;
+          constrainView(); requestDraw();
+        }
+      });
+      new ResizeObserver(size).observe(map);
+      try {
+        const r = await fetch(new URL("proposal.json", base));
+        if (!r.ok) throw Error("Proposal not available");
+        meta = await r.json();
+        for (let i = 1; i <= 10; i++) {
+          palette.set(meta.palette[i].join(","), i);
+          palette.set(meta.palette[i + 16].join(","), i);
+        }
+        for (const g of meta.groups) {
+          const b = document.createElement("button");
+          b.innerHTML = `<span class="swatch" style="background:${g.color}"></span>${g.name}<span class="count">${((100 * g.cells) / (meta.width * meta.height)).toFixed(1)}%</span>`;
+          b.onclick = () => {
+            $("#selection").textContent = g.name;
+            $("#coordinates").textContent =
+              g.cells.toLocaleString() +
+              " cells (share of grid cells, not surface area)";
+          };
+          $("#legend").append(b);
+        }
+        for (const text of meta.caveats) {
+          const li = document.createElement("li");
+          li.textContent = text;
+          $("#caveats").append(li);
+        }
+        $("#hash").textContent =
+          "Cell-grid SHA-256: " + meta.sha256_uncompressed;
+        $("#status").textContent = 'Loading and verifying the full-resolution map…';
+        nativeGrid = await loadLocalGrid(meta, base);
+        renderer = createRenderer(canvas, meta, nativeGrid);
+        for (const control of document.querySelectorAll('#in,#out,#fit,#jump')) control.disabled = false;
+        size(); fit();
+      } catch (e) {
+        $("#status").textContent = e.message;
+        $("#status").classList.add("error");
+      }
+    </script>
+  </body>
+</html>
