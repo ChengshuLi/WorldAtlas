@@ -22,4 +22,13 @@ class PublishedSeaLimitsTests(unittest.TestCase):
         parts=[MultiPolygon([ring]),box(1,1,2,3)]
         def draw(g):return rasterize([(mapping(g),1)],out_shape=(4,4),transform=from_origin(0,4,1,1),dtype='uint8')
         np.testing.assert_array_equal(draw(GeometryCollection(parts)),draw(unary_union(parts)))
+    def test_strip_clipping_preserves_center_sampling(self):
+        g=Polygon([(-2,-2),(7,-1),(8,9),(1,8)],holes=[[(2,2),(5,2),(5,5),(2,5)]])
+        tf=from_origin(0,8,1,1)
+        expected=rasterize([(mapping(g),1)],out_shape=(8,8),transform=tf,dtype='uint8')
+        strips=[]
+        for y in range(0,8,2):
+            clipped=g.intersection(box(0,6-y,8,8-y))
+            strips.append(rasterize([(mapping(clipped),1)],out_shape=(2,8),transform=from_origin(0,8-y,1,1),dtype='uint8'))
+        np.testing.assert_array_equal(np.vstack(strips),expected)
 if __name__=='__main__':unittest.main()

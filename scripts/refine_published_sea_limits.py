@@ -51,16 +51,21 @@ def build(parent,output,source,references,coasts,proposal_id):
     for rule in rules:
         name=rule['name'];members=set(rule.get('old_members',[name]));old=unary_union([marine[n] for n in members]);g=new[name]
         ob,nb=old.bounds,g.bounds;we,so,ea,no=min(ob[0],nb[0]),min(ob[1],nb[1]),max(ob[2],nb[2]),max(ob[3],nb[3])
-        old_mapped,new_mapped=mapping(old),mapping(g)
         if name=='Bering Sea':no=min(no,60) # The northern gateway is separately verified.
         x0=max(0,int((we+180)/s)-1);x1=min(w,int((ea+180)/s)+2);y0=max(0,int((90-no)/s)-1);y1=min(h,int((90-so)/s)+2)
         xs=np.arange(x0,x1);lo=-180+(xs+.5)*s;others=[new.get(n,z) for n,z in marine.items() if n in active and n not in members and z.intersects(box(we,so,ea,no))]
         removed=set();added={}
         for y in range(y0,y1,64):
             end=min(y+64,y1);a=np.array([row(yy)[xs] for yy in range(y,end)]);tf=from_origin(-180+x0*s,90-y*s,s,s)
+            window=box(-180+x0*s,90-end*s,-180+x1*s,90-y*s)
+            def clipped(z):
+                # Keep full precision while bounding GDAL's geometry copies to
+                # this strip. Large coastal polygons otherwise exhaust memory.
+                part=z.intersection(window)
+                return [(mapping(part),1)] if not part.is_empty else []
             def mask(shapes):
                 return rasterize(shapes,out_shape=a.shape,transform=tf,dtype='uint8')>0 if shapes else np.zeros_like(a,dtype=bool)
-            om=mask([(old_mapped,1)]);nm=mask([(new_mapped,1)]);other=mask([(mapping(z),1) for z in others if z.bounds[3]>=90-end*s and z.bounds[1]<=90-y*s])
+            om=mask(clipped(old));nm=mask(clipped(g));other=mask([part for z in others if z.bounds[3]>=90-end*s and z.bounds[1]<=90-y*s for part in clipped(z)])
             take=(a>=7)&(a<=10)&nm;drop=(a>=1)&(a<=6)&om&~nm&~other;rr,cc=np.where(take|drop)
             if not len(rr):continue
             q=xyz(lo[cc],90-(y+rr+.5)*s);d,ix=tree.query(q,workers=4);far=d>limit;rr,cc,ix=rr[far],cc[far],ix[far]

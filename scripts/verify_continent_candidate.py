@@ -47,7 +47,8 @@ if 'asia_oceania_refinement' in m:
 
 if 'verified_sea_boundary_refinement' in m:
  assert at(55336,12077)==8
- archipelago=any(b['name']=='Southeast Asian archipelago seas' for b in m.get('published_sea_limits_refinement',{}).get('boundaries',[]))
+ batches=m.get('published_sea_limits_batches',[])+[m.get('published_sea_limits_refinement',{})]
+ archipelago=any(b['name']=='Southeast Asian archipelago seas' for batch in batches for b in batch.get('boundaries',[]))
  assert at(56416,16385)==(6 if archipelago else 8)
  assert at(2102,4399)==10
  assert m['verified_sea_boundary_refinement']['ocean_fallback_cells_fixed']==190
