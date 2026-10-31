@@ -83,9 +83,20 @@ The final basin-coverage sequence also applies:
 4. `repair_arctic_basins.py PRIOR OUTPUT IHO_ARCTIC_GEOJSON_GZ` assigns complete
    northern parent-ocean areas. Davis Strait is Arctic north of 60°N; Norwegian
    Sea remains Atlantic, with Greenland and Barents seas Arctic.
-5. `close_enclosed_ocean_components.py PRIOR OUTPUT` checks four-edge ocean
+5. `audit_ocean_connectivity.py PRIOR MASK.npy --ocean-code CODE` separately
+   checks each ocean label. Resolve inconsistent labels against their containing
+   parent basin; legitimate separated marginal basins require an explicit reason.
+   `repair_ocean_parent_components.py` requires every changed center to be covered
+   by the independently supplied parent-basin reference and pins the topology mask.
+6. `close_enclosed_ocean_components.py PRIOR OUTPUT` checks four-edge ocean
    connectivity with longitude wrapping. Enclosed components surrounded by one
    continent inherit that continent; ambiguous components are reported.
+
+Project boundary conventions take priority over generic source areas: the
+Bering gateway follows Cape Dezhnev–Cape Prince of Wales, and the Nordic divider
+ends at North Cape rather than extending an artificial Atlantic line eastward.
+The Arctic Baffin/Davis basin can be disconnected from the main Arctic label by
+continental classifications of the Canadian passages; this alone is not an error.
 
 All passes preserve every land cell. Shared new sea cells use the nearest
 represented coast. Open named embayments are explicitly distinguished from

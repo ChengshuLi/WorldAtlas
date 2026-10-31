@@ -9,6 +9,7 @@ import numpy as np
 from rasterio.features import rasterize
 from rasterio.transform import from_origin
 from arctic_atlantic_boundary import arctic_side
+from bering_strait_boundary import north_of_strait
 
 def build(parent,output,source):
  output.mkdir(parents=True,exist_ok=True);m=json.loads((parent/'proposal.json').read_text());w,h,step=m['width'],m['height'],m['step'];rows=np.frombuffer(gzip.decompress((parent/'rows.u32.gz').read_bytes()),'<u4');runs=np.frombuffer(gzip.decompress((parent/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
@@ -29,6 +30,10 @@ def build(parent,output,source):
    codes=np.zeros_like(a);n=min(end,north_height)-y
    if n>0:codes[:n]=northern[y:y+n]
    use=(a>=7)&(a<=10)&(codes>0);a[use]=codes[use]
+   # Project gateway convention has priority over the older IHO sea-area
+   # Arctic-Circle boundary. Scope ends inland on either side of the strait.
+   bering=(lon[None,:]>=-172)&(lon[None,:]<=-164)&(lat[:,None]>=64)&(lat[:,None]<=68)&np.isin(a,[8,10])
+   rr,cc=np.where(bering);a[rr,cc]=np.where(north_of_strait(lon[cc],lat[rr]),10,8)
    # The chosen northern Atlantic boundary across Davis Strait is 60N.
    # This covers residual source/coastline seams without splitting inner bays.
    west=(lon[None,:]>=-100)&(lon[None,:]<-45)&(lat[:,None]>=55)&np.isin(a,[7,10])
@@ -46,9 +51,9 @@ def build(parent,output,source):
   if y%2048==0:print('rows',end,'changed',sum(transitions.values()),flush=True)
  assert base.hexdigest()==m['sha256_uncompressed'];rb=np.array(offsets,dtype='<u4').tobytes();vb=b''.join(chunks)
  for name,raw in [('rows',rb),('runs',vb)]:(output/f'{name}.u32.gz').write_bytes(gzip.compress(raw,compresslevel=6,mtime=0))
- m.update(proposal_id='continent-20261031-v15',sha256_uncompressed=sha.hexdigest(),display_sha256_uncompressed=display.hexdigest());m['local_grid'].update(run_count=total,rows_sha256=hashlib.sha256(rb).hexdigest(),runs_sha256=hashlib.sha256(vb).hexdigest(),decoded_bytes=len(rb)+len(vb),compressed_bytes=sum((output/f'{x}.u32.gz').stat().st_size for x in ['rows','runs']))
+ m.update(proposal_id='continent-20261031-v16',sha256_uncompressed=sha.hexdigest(),display_sha256_uncompressed=display.hexdigest());m['local_grid'].update(run_count=total,rows_sha256=hashlib.sha256(rb).hexdigest(),runs_sha256=hashlib.sha256(vb).hexdigest(),decoded_bytes=len(rb)+len(vb),compressed_bytes=sum((output/f'{x}.u32.gz').stat().st_size for x in ['rows','runs']))
  for g in m['groups']:g['cells']=int(counts[g['id']])
- audit={'source':src['citation'],'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'changed_ocean_cells':sum(transitions.values()),'transitions':transitions,'land_cells_changed':0,'continental_water_cells_changed':0,'convention':'Complete IHO ocean/marginal-sea areas; Davis Strait 60N; Norwegian Sea Atlantic and Greenland/Barents Arctic using continuous named-cape divider. No global Arctic-Circle fallback.'}
+ audit={'source':src['citation'],'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'changed_ocean_cells':sum(transitions.values()),'transitions':transitions,'land_cells_changed':0,'continental_water_cells_changed':0,'convention':'Complete IHO ocean/marginal-sea areas; Davis Strait 60N; Norwegian Sea Atlantic and Greenland/Barents Arctic using continuous named-cape divider. Bering gateway uses the Cape Dezhnev–Cape Prince of Wales great circle with priority over the older IHO Arctic-Circle sea limit. No global Arctic-Circle fallback.'}
  m['arctic_parent_audit']=audit;(output/'proposal.json').write_text(json.dumps(m,separators=(',',':'))+'\n');(output/'arctic-parent-audit.json').write_text(json.dumps(audit,indent=2)+'\n');print(json.dumps(audit),flush=True)
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('parent',type=Path);p.add_argument('output',type=Path);p.add_argument('source',type=Path);v=p.parse_args();build(v.parent,v.output,v.source)

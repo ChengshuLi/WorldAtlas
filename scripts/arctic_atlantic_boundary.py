@@ -10,8 +10,7 @@ ANCHORS=[
  ('Jan Mayen North Cape',-(7+58/60),71+9/60+35/3600),
  ('Sorkapp',16+37/60,76+28/60),('Bear Island North Cape',19.10,74.50),
  ('Bear Island Cape Bull',19+5/60,74+21/60),
- ('North Cape Norway',25+47/60+4/3600,71+10/60+21/3600),
- ('Norway interior',26,69),('Eurasia interior',30,68),('East closure',50,68)]
+ ('North Cape Norway',25+47/60+4/3600,71+10/60+21/3600)]
 
 def boundary_curve():
     result=[]
@@ -25,5 +24,8 @@ def boundary_curve():
     # sorting creates a single-valued ocean divider without changing that island.
     return np.array(sorted(result))
 CURVE=boundary_curve()
-def arctic_side(lon,lat):return lat>=np.interp(lon,CURVE[:,0],CURVE[:,1])
+def arctic_side(lon,lat):
+    # East of North Cape there is no Atlantic opening. Interior closure points
+    # must never extend an artificial Atlantic boundary across the Barents coast.
+    return (lon>=25+47/60+4/3600)|(lat>=np.interp(lon,CURVE[:,0],CURVE[:,1]))
 SOURCES=['https://iho.int/uploads/user/pubs/standards/s-23/S-23_Ed3_1953_EN.pdf','https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/seaname/details/96','https://www.government.is/library/04-Legislation/Act%20No%2041%201979%20as%20amended%20by%20Act%20No%2058%202017%20and%20Act%20No%2044%202018.pdf']

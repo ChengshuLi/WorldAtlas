@@ -11,7 +11,7 @@ def build(parent,output):
         r=runs[rows[y]:rows[y+1]];return np.repeat(r[:,1],np.diff(np.r_[0,r[:,0]])).astype('uint8')
     x0,x1=int(135/step),int(230/step)+1;y0,y1=int(5/step),int(32/step)+1
     a=np.array([decode(y)[x0:x1] for y in range(y0,y1)]);old=a.copy();lon=-180+(x0+np.arange(a.shape[1])+.5)*step;lat=90-(y0+np.arange(a.shape[0])+.5)*step
-    basin=np.isin(a,[7,10]);boundary=np.interp(lon,CURVE[:,0],CURVE[:,1]);target=np.where(lat[:,None]>=boundary[None,:],10,7).astype('uint8');a[basin]=target[basin]
+    basin=np.isin(a,[7,10]);boundary=np.interp(lon,CURVE[:,0],CURVE[:,1]);target=np.where(arctic_side(lon[None,:],lat[:,None]),10,7).astype('uint8');a[basin]=target[basin]
     assert np.array_equal(a[~basin],old[~basin])
     # Land and all continental coastal/bounded-sea cells are unchanged.
     assert np.array_equal(a[a>=16],old[old>=16])
