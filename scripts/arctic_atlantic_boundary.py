@@ -25,7 +25,16 @@ def boundary_curve():
     return np.array(sorted(result))
 CURVE=boundary_curve()
 def arctic_side(lon,lat):
-    # East of North Cape there is no Atlantic opening. Interior closure points
-    # must never extend an artificial Atlantic boundary across the Barents coast.
-    return (lon>=25+47/60+4/3600)|(lat>=np.interp(lon,CURVE[:,0],CURVE[:,1]))
+    # Solve each great-circle plane directly. Polyline interpolation can put a
+    # cell center on the wrong side even when its geometric error is <1 metre.
+    lon=np.asarray(lon);lat=np.asarray(lat);boundary=np.interp(lon,CURVE[:,0],CURVE[:,1])
+    for (_,x1,y1),(_,x2,y2) in zip(ANCHORS,ANCHORS[1:]):
+        if x2<=x1:continue  # Interior westward segment through Bear Island.
+        def vec(x,y):
+            x,y=np.deg2rad([x,y]);return np.array([np.cos(y)*np.cos(x),np.cos(y)*np.sin(x),np.sin(y)])
+        normal=np.cross(vec(x1,y1),vec(x2,y2));ll=np.deg2rad(lon)
+        exact=np.rad2deg(np.arctan(-(normal[0]*np.cos(ll)+normal[1]*np.sin(ll))/normal[2]))
+        boundary=np.where((lon>=x1)&(lon<=x2),exact,boundary)
+    return (lon>=25+47/60+4/3600)|(lat>=boundary)
+
 SOURCES=['https://iho.int/uploads/user/pubs/standards/s-23/S-23_Ed3_1953_EN.pdf','https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/seaname/details/96','https://www.government.is/library/04-Legislation/Act%20No%2041%201979%20as%20amended%20by%20Act%20No%2058%202017%20and%20Act%20No%2044%202018.pdf']

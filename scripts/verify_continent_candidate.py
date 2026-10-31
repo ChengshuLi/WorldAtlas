@@ -28,16 +28,25 @@ if 'turkish_straits_audit' in m:
  for x,y,e in [(37576,9074,18),(37626,9039,18),(37649,9047,18),(38055,8905,19),(37790,8991,18),(37512,9134,18),(37482,9071,19)]:
   assert at(x,y)==e,(x,y,e,at(x,y))
  print('PASS 7 Turkish strait/island controls')
+if 'independent_review_repairs' in m:
+ for x,y,e in [(44998,3876,19),(44998,3875,19),(45024,3862,19),(45019,3861,19),(35061,9920,17),(35109,9855,19),(34948,9686,19),(41604,8729,3),(2013,4407,4),(1985,4436,2),(35831,2490,7),(36376,2901,7)]:
+  assert at(x,y)==e,(x,y,e,at(x,y))
+ print('PASS 12 independent-review regression cells')
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
 orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
-changed=0;land_changed=0
+changed=0;land_changed=0;ocean_changed=0
 for y in range(m['height']):
  a=v[r[y]:r[y+1]];b=oruns[orows[y]:orows[y+1]];aa=np.repeat(a[:,1],np.diff(np.r_[0,a[:,0]])).astype('uint8');bb=np.repeat(b[:,1],np.diff(np.r_[0,b[:,0]])).astype('uint8')
  assert np.array_equal(aa>=16,bb>=16)
- if 'eurasia_boundary_audit' in m:
+ if 'eurasia_boundary_audit' in m and 'independent_review_repairs' not in m:
   ocean=np.isin(bb,[7,8,9,10]);assert np.array_equal(aa[ocean],bb[ocean])
  land_changed+=int(np.count_nonzero((aa!=bb)&(bb>=16)))
  if not args.allow_land_affiliation_changes:assert np.array_equal(aa[bb>=16],bb[bb>=16])
  changed+=int(np.count_nonzero(aa!=bb))
+ ocean_changed+=int(np.count_nonzero((aa!=bb)&np.isin(bb,[7,8,9,10])))
 print('PASS whole-world land/water mask unchanged; land affiliation changes:',land_changed,'water affiliation changes:',changed-land_changed)
+
+if m['proposal_id']=='continent-20261031-v20' and json.loads((oldp/'proposal.json').read_text())['proposal_id']=='continent-20261031-v19':
+ assert ocean_changed==2,ocean_changed
+ print('PASS exactly two ocean-label precision corrections')

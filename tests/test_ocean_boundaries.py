@@ -1,4 +1,5 @@
 import unittest,sys
+import numpy as np
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from bering_strait_boundary import north_of_strait
@@ -13,4 +14,13 @@ class OceanBoundaryTest(unittest.TestCase):
   self.assertTrue(arctic_side(40,68))
  def test_norwegian_sea_stays_atlantic(self):
   self.assertFalse(arctic_side(5,68))
+
+class TestExactArcPrecision(unittest.TestCase):
+    def test_reported_submetre_centers(self):
+        from arctic_atlantic_boundary import arctic_side
+        for x,y in [(35831,2490),(36376,2901)]:
+            lon=-180+(x+.5)*360/65536
+            lat=90-(y+.5)*360/65536
+            self.assertFalse(bool(arctic_side(np.array([lon]),np.array([lat]))[0]))
+
 if __name__=='__main__':unittest.main()
