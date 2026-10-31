@@ -311,7 +311,7 @@
       </main>
     </div>
     <script type="module">
-      import { loadLocalGrid, cellValue, createRenderer } from './local-grid.js?v=2';
+      import { loadLocalGrid, cellValue, createRenderer, wrapColumn } from './local-grid.js?v=3';
       const canvas = document.querySelector("#canvas"),
         map = document.querySelector("#map");
       const $ = (s) => document.querySelector(s);
@@ -358,7 +358,9 @@
           ox = map.clientWidth / 2 - cx * scale;
           oy = map.clientHeight / 2 - cy * scale;
         }
-        ox = Math.min(0, Math.max(map.clientWidth - meta.width * scale, ox));
+        const period = meta.width * scale;
+        ox %= period;
+        if (ox > 0) ox -= period;
         oy = Math.min(0, Math.max(map.clientHeight - meta.height * scale, oy));
       }
       function fit() {
@@ -373,7 +375,7 @@
         constrainView();
         renderer.draw({ scale, ox, oy, dpr, selected });
         $("#status").textContent =
-          `${meta.width.toLocaleString()} × ${meta.height.toLocaleString()} cells · ${scale.toFixed(2)} screen px/cell · full native map loaded · WASD or drag to pan · +/− or scroll to zoom · not approved`;
+          `${meta.width.toLocaleString()} × ${meta.height.toLocaleString()} cells · ${scale.toFixed(2)} screen px/cell · full native map loaded · WASD or drag to pan (wraps horizontally) · +/− or scroll to zoom · not approved`;
       }
       function zoom(f, x = map.clientWidth / 2, y = map.clientHeight / 2) {
         if (!renderer) return;
@@ -385,9 +387,9 @@
         requestDraw();
       }
       function pick(px, py) {
-        const x = Math.floor((px - ox) / scale),
+        const x = wrapColumn(Math.floor((px - ox) / scale), meta.width),
           y = Math.floor((py - oy) / scale);
-        if (x < 0 || y < 0 || x >= meta.width || y >= meta.height) return;
+        if (y < 0 || y >= meta.height) return;
         selected = { x, y };
         readSelection(x, y);
       }

@@ -73,6 +73,32 @@ follow the named Orkney/Shetland capes and 61°N; open Biscay, Atlantic approach
 and Arctic coasts use the uniform buffer. The distance does not depict legal
 territorial waters. Earlier regional scripts are retained as research provenance.
 
+The final basin-coverage sequence also applies:
+
+1. `refine_english_channel.py` clips the western mouth to the corrected IHO
+   Île Vierge–Land’s End line.
+2. `refine_arctic_atlantic.py` applies the continuous named-cape Nordic divider.
+3. `repair_sea_family_coverage.py PRIOR OUTPUT SHELIKOF_GEOJSON` includes the
+   constituent bays, sounds, and passages listed in `sea_families.py`.
+4. `repair_arctic_basins.py PRIOR OUTPUT IHO_ARCTIC_GEOJSON_GZ` assigns complete
+   northern parent-ocean areas. Davis Strait is Arctic north of 60°N; Norwegian
+   Sea remains Atlantic, with Greenland and Barents seas Arctic.
+5. `close_enclosed_ocean_components.py PRIOR OUTPUT` checks four-edge ocean
+   connectivity with longitude wrapping. Enclosed components surrounded by one
+   continent inherit that continent; ambiguous components are reported.
+
+All passes preserve every land cell. Shared new sea cells use the nearest
+represented coast. Open named embayments are explicitly distinguished from
+bounded waters; names alone do not imply continental assignment. The reference
+sources are [IHO Sea Areas v3](https://doi.org/10.14284/323),
+[Natural Earth marine labels](https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-physical-labels/),
+and the [NOAA Shelikof Strait coastal zone](https://api.weather.gov/zones/forecast/PKZ738).
+The latter supplies a geographic passage footprint, not a legal maritime limit.
+
+The viewer wraps horizontally across the dateline. Rendering and picking use
+modulo world columns, including repeated wraps, while vertical panning stays
+clamped. All native cells remain loaded throughout navigation.
+
 Source archives, generated grids, research notes, and review metadata belong in
 R2/Neon rather than Git. Use an immutable review prefix for each candidate and
 publish the root index only after its referenced assets exist. The draft remains

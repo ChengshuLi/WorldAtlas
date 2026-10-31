@@ -33,3 +33,26 @@ test('fractional zoom and offsets retain screen-aligned lines in both axes',()=>
   for(let i=1;i<lines.length;i++) assert.ok(Math.abs(lines[i]-lines[i-1]-scale)<1.01);
  }
 });
+import {wrapColumn} from '../web/local-grid.js';
+test('wraps columns across both directions and multiple worlds',()=>{
+ assert.equal(wrapColumn(-1,65536),65535);assert.equal(wrapColumn(65536,65536),0);assert.equal(wrapColumn(65536*7+19,65536),19);
+});
+test('canvas renders wrapped native cells without blank horizontal margins',()=>{
+ const palette=Array.from({length:32},(_,i)=>[i,0,0]);const meta={width:6,height:2,palette},data={rows:new Uint32Array([0,3,4]),runs:new Uint32Array([2,2,3,18,6,9,6,1])};
+ for(const scale of [.7,2,3.1])for(const ox of [-101,-12,-11.9,-2.6,0,9,101]){
+  const w=31,h=2,pixels=renderPixels(meta,data,w,h,scale,ox,0);
+  for(let py=0;py<h;py++)for(let px=0;px<w;px++){
+   const x=wrapColumn(Math.floor((px+.5-ox)/scale),meta.width),y=Math.floor((py+.5)/scale);
+   if(y<meta.height)assert.equal(pixels[py*w+px]&255,cellValue(data.rows,data.runs,x,y));
+  }
+ }
+});
+test('wrapped rendering and picking agree at floating-point run boundaries',()=>{
+ const meta={width:6,height:2,palette:Array.from({length:32},(_,i)=>[i,0,0])},data={rows:new Uint32Array([0,3,4]),runs:new Uint32Array([2,2,3,18,6,9,6,1])};
+ for(let i=1;i<4000;i++){
+  const scale=.01+(i*37%3600)/100,ox=(i*13.37%1000)-500,sy=Math.floor(.5/scale);
+  if(sy>=2)continue;
+  const pixels=renderPixels(meta,data,101,1,scale,ox,0);
+  for(let x=0;x<101;x++)assert.equal(pixels[x]&255,cellValue(data.rows,data.runs,wrapColumn(Math.floor((x+.5-ox)/scale),6),sy));
+ }
+});

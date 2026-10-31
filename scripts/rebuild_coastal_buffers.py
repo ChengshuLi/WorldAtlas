@@ -14,6 +14,9 @@ from refine_socotra_buffer import gulf_gates
 from rebuild_northern_indian import oman_side,malacca_side
 from refine_review_regions import ATLANTIC
 from north_sea_limits import NORTH_SEA
+from english_channel_limits import channel_side
+from arctic_atlantic_boundary import arctic_side
+from sea_families import child_rules
 
 BUFFER_KM=22.224
 SOURCE=Path(__file__).resolve().parents[2]/'worldatlas-continent-review/sources'
@@ -57,6 +60,8 @@ def build(parent,output,open_runs_path):
     protected_names -= {'Arabian Sea','Bay of Bengal','Bay of Biscay','Mediterranean Sea','Gulf of Aden','Gulf of Oman','Persian Gulf','North Sea'}
     protected_names |= {'Sea of Marmara','Bosporus','Dardanelles','Gulf of Bothnia','Gulf of Finland','Gulf of Riga','Skagerrak','Kattegat','Øresund','Bristol Channel','Inner Seas','Waddenzee','Stettiner Haff','Mecklenburger Bucht'}
     for name in ['Gulf of Bothnia','Gulf of Finland','Gulf of Riga','Skagerrak','Kattegat','Øresund','Bristol Channel','Inner Seas','Waddenzee','Stettiner Haff','Mecklenburger Bucht']:fixed[name]=3
+    for name,rule in child_rules().items():
+        protected_names.add(name);fixed[name]=rule['group']
     oceans={'Arctic Ocean':10,'North Atlantic Ocean':7,'South Atlantic Ocean':7,'North Pacific Ocean':8,'South Pacific Ocean':8,'INDIAN OCEAN':9}
     arctic={'Chukchi Sea','Beaufort Sea','East Siberian Sea','Laptev Sea','Kara Sea','Barents Sea','Greenland Sea','Lincoln Sea'}
     marine=[]
@@ -74,9 +79,13 @@ def build(parent,output,open_runs_path):
             rr,cc=np.where((lat[:,None]>=50)&(lat[:,None]<=61)&(longitudes[None,:]>=-4)&(longitudes[None,:]<=12))
             inside=NORTH_SEA.contains_points(np.column_stack((longitudes[cc],lat[rr])))
             protected[rr[inside],cc[inside]]=3
-        # The Andaman/Malacca entrance uses its actual named cape line.
-        if lat[-1]<8 and lat[0]>5:
-            xx=longitudes[None,:];yy=lat[:,None];bad=(xx>=95.4333)&(xx<=100)&(yy>=5.6555)&(yy<=8)&~malacca_side(xx,yy);protected[bad]=0
+        # Source label geometry extends beyond the corrected English Channel limit.
+        if lat[-1]<=51.2 and lat[0]>=48.3:
+            english=[(geom,1) for name,geom,b in marine if name=='English Channel']
+            em=rasterize(english,out_shape=a.shape,transform=transform,fill=0,dtype='uint8')>0
+            overlap=[(geom,1) for name,geom,b in marine if name in {'North Sea','Bristol Channel','Irish Sea'} and b[3]>=lat[-1]-step and b[1]<=lat[0]+step]
+            other=rasterize(overlap,out_shape=a.shape,transform=transform,fill=0,dtype='uint8')>0 if overlap else np.zeros_like(em)
+            protected[em&~other&~channel_side(longitudes[None,:],lat[:,None])]=0
         for sx,sy,mask in specials:
             ay=max(y,sy);by=min(end,sy+mask.shape[0])
             if ay<by:
@@ -111,6 +120,10 @@ def build(parent,output,open_runs_path):
             q=xyz(longitudes[cc],lat[rr]);d,ii=tree.query(q,distance_upper_bound=limit,workers=4);hit=np.isfinite(d);a[rr[hit],cc[hit]]=groups[ii[hit]];coastal_cells+=int(hit.sum())
             # The KD query certifies all candidates outside the radius are ocean.
             assert np.all(a[rr[~hit],cc[~hit]]>=7)
+        # Final parent-ocean assignment is one continuous documented divider.
+        nordic=water&np.isin(a,[7,10])&(longitudes[None,:]>=-45)&(longitudes[None,:]<=50)&(lat[:,None]>=58)&(lat[:,None]<=85)
+        rr,cc=np.where(nordic)
+        a[rr,cc]=np.where(arctic_side(longitudes[cc],lat[rr]),10,7)
         assert np.array_equal(a[~water],old[~water]);assert np.array_equal(a>=16,old>=16)
         changed+=int(np.count_nonzero(a!=old));examined+=int(ordinary.sum());np.add.at(transitions,((old[water]&15),(a[water]&15)),1)
         for j in range(end-y):

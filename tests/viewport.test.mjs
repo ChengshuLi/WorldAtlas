@@ -12,12 +12,12 @@ function run(width, height, code) {
 function covered(s) {
   const eps = 1e-8;
   assert.ok(s.ox <= eps && s.oy <= eps);
-  assert.ok(s.ox + s.meta.width * s.scale >= s.map.clientWidth - eps);
+  assert.ok(s.ox > -s.meta.width * s.scale - eps);
   assert.ok(s.oy + s.meta.height * s.scale >= s.map.clientHeight - eps);
 }
 for (const [width, height] of [[1200, 700], [390, 800], [2400, 500]]) {
   test(`world reset fills ${width}×${height} without blank margins`, () => covered(run(width, height, 'fit();')));
-  test(`zoom-out and off-world pan are clamped for ${width}×${height}`, () => {
+  test(`zoom-out is clamped and horizontal pan wraps for ${width}×${height}`, () => {
     covered(run(width, height, 'scale=.005; ox=100000; oy=-100000; constrainView();'));
     covered(run(width, height, 'scale=9; ox=-999999; oy=999999; constrainView();'));
   });

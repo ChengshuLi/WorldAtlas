@@ -1,0 +1,30 @@
+"""Native regression coordinates, checksums, coverage and unchanged-land proof."""
+import json,gzip,hashlib,numpy as np
+from pathlib import Path
+import argparse
+parser=argparse.ArgumentParser();parser.add_argument('candidate',type=Path);parser.add_argument('baseline',type=Path);args=parser.parse_args()
+p=args.candidate;m=json.loads((p/'proposal.json').read_text());rb=gzip.decompress((p/'rows.u32.gz').read_bytes());vb=gzip.decompress((p/'runs.u32.gz').read_bytes());r=np.frombuffer(rb,'<u4');v=np.frombuffer(vb,'<u4').reshape(-1,2)
+assert hashlib.sha256(rb).hexdigest()==m['local_grid']['rows_sha256'];assert hashlib.sha256(vb).hexdigest()==m['local_grid']['runs_sha256'];assert len(r)==m['height']+1
+for y in range(m['height']):
+ a=v[r[y]:r[y+1]];assert a[-1,0]==65536;assert (np.diff(a[:,0].astype('int64'))>0).all()
+def at(x,y):
+ a=v[r[y]:r[y+1]];return int(a[np.searchsorted(a[:,0],x,side='right'),1])
+def geo(lo,la):return at(int((lo+180)*65536/360),int((90-la)*65536/360))
+islands=[(57221,16246),(56662,16190),(56646,15829),(56761,15843),(56838,15418),(57259,15028),(57291,14912),(57920,14648),(58350,14605),(59126,13925),(59202,13809),(59301,13614),(59283,13403),(59310,13084),(59287,12964),(59148,12643),(60793,11958)]
+checks=[(x,y,22) for x,y in islands]+[(20348,12119,7),(20360,10732,7),(20394,8581,7),(59610,25043,8),(42953,13885,9),(43243,13816,9),(38875,11304,17),(38745,11045,18),(38729,11018,18),(38719,10994,18),(38702,10932,18),(38645,10703,1),(38944,11372,17),(33117,9486,3),(33869,9331,1),(30280,5902,7),(31630,7944,7)]
+for x,y,e in checks:assert at(x,y)==e,(x,y,e,at(x,y))
+for lo,la,e in [(2,60.9,3),(2,61.3,7),(4,55,3),(20,57,3),(-5,53,3),(-3,50,3),(37,65,3),(40,75,10),(80,76,10),(65,15,9),(88,14,9),(96,11,2)]:assert geo(lo,la)&15==e,(lo,la,geo(lo,la),e)
+print('PASS rows, hashes,',len(checks),'reported regressions and bounded/open sea examples')
+
+newchecks=[(18140,4450,4),(3116,4292,4),(20603,5497,4),(20776,4994,4),(4953,5585,4),(4677,5848,4),(4663,5851,4),(4638,5856,4),(3458,5915,4),(2883,4756,4),(15501,12715,4),(16755,13395,4),(35206,4085,3)]
+for x,y,e in newchecks:assert at(x,y)==e,(x,y,e,at(x,y))
+for lo,la,e in [(-55,62,10),(-55,58,7),(-10,50,7),(121,39,2),(107,20,2),(99,4,2),(-125,45,8)]:assert geo(lo,la)&15==e,(lo,la,geo(lo,la),e)
+print('PASS',len(newchecks),'new user coordinates; ocean/bounded basin controls')
+# Independently compare complete land assignments from v14 and final candidate.
+oldp=args.baseline
+orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
+changed=0
+for y in range(m['height']):
+ a=v[r[y]:r[y+1]];b=oruns[orows[y]:orows[y+1]];aa=np.repeat(a[:,1],np.diff(np.r_[0,a[:,0]])).astype('uint8');bb=np.repeat(b[:,1],np.diff(np.r_[0,b[:,0]])).astype('uint8')
+ assert np.array_equal(aa>=16,bb>=16);assert np.array_equal(aa[bb>=16],bb[bb>=16]);changed+=int(np.count_nonzero(aa!=bb))
+print('PASS whole-world land unchanged; water changes:',changed)
