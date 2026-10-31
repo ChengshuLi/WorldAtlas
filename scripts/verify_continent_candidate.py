@@ -37,6 +37,14 @@ if 'verified_connector_refinement' in m:
   assert at(x,y)==e,(x,y,e,at(x,y))
  assert hashlib.sha256((p/'eurasia-boundary-reference.geojson').read_bytes()).hexdigest()==m['verified_connector_refinement']['reference_sha256']
  print('PASS 16 connector/review controls and current reference checksum')
+
+if 'asia_oceania_refinement' in m:
+ for x,y,e in [(56342,16948,18),(56688,17749,18),(56989,17385,18),(56404,16598,22),(56411,16466,22),(57234,17512,22),(56597,17476,2),(1994,4406,18),(2018,4413,20),(2102,4399,10),(1968,4451,2)]:
+  assert at(x,y)==e,(x,y,e,at(x,y))
+ for lo,la in [(135,15),(130,20),(140,25)]:assert geo(lo,la)==8,(lo,la,geo(lo,la))
+ assert hashlib.sha256((p/'asia-oceania-reference.geojson').read_bytes()).hexdigest()==m['asia_oceania_refinement']['reference_sha256']
+ print('PASS 14 Asia/Oceania, Philippine open-water and Bering controls')
+
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
 orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)

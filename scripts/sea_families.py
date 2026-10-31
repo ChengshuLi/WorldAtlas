@@ -54,7 +54,7 @@ def child_rules():
     return result
 
 # These must not acquire whole-sea continental coverage just because named.
-OPEN_WATERS={'Arabian Sea','Bay of Bengal','Bay of Biscay','Gulf of Alaska',
+OPEN_WATERS={'Philippine Sea','Arabian Sea','Bay of Bengal','Bay of Biscay','Gulf of Alaska',
  'Norwegian Sea','Greenland Sea','Barents Sea','Kara Sea','Laptev Sea','East Siberian Sea',
  'Chukchi Sea','Beaufort Sea','Lincoln Sea','Baffin Bay','Davis Strait','Labrador Sea',
  'Denmark Strait','Sargasso Sea','Gulf of Guinea','Bight of Benin','Bight of Biafra',
