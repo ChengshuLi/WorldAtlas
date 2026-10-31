@@ -1,10 +1,15 @@
-import json,unittest
+import json,unittest,sys
+import numpy as np
 from pathlib import Path
 from shapely.geometry import shape,Point
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'scripts'))
+from refine_asia_oceania import open_ocean_baseline
 class AsiaOceaniaReferences(unittest.TestCase):
  def setUp(self):
   self.ref=json.loads((ROOT/'data/references/asia-oceania-reference.geojson').read_text());self.geoms={f['properties']['name']:shape(f['geometry']) for f in self.ref['features']}
+ def test_ocean_fallback_preserves_verified_parent(self):
+  self.assertEqual(open_ocean_baseline(np.array([8,8,9,2,6]),np.array([False,False,False,False,True])).tolist(),[8,8,9,8,9])
  def test_valid_sea_geometries(self):
   self.assertTrue(all(g.is_valid for g in self.geoms.values()))
  def test_philippine_open_water(self):

@@ -9,6 +9,11 @@ from rasterio.transform import from_origin
 from shapely.geometry import shape,mapping
 from correct_suez import xyz
 
+def open_ocean_baseline(previous,removed_timor):
+ result=np.where((previous>=7)&(previous<=10),previous,8).astype('uint8')
+ result[removed_timor]=9
+ return result
+
 def build(parent,output,reference,source,scope_bounds=(120,-14.5,158,35.5)):
  output.mkdir(parents=True,exist_ok=True);m=json.loads((parent/'proposal.json').read_text());s=m['step'];w=m['width'];h=m['height'];rows=np.frombuffer(gzip.decompress((parent/'rows.u32.gz').read_bytes()),'<u4');runs=np.frombuffer(gzip.decompress((parent/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
  def decode(y,x0=0,x1=w):
@@ -26,12 +31,13 @@ def build(parent,output,reference,source,scope_bounds=(120,-14.5,158,35.5)):
  del edge,rr,cc
  # Stream source masks in small bands; do not retain full-region mask copies.
  names={'Banda Sea','Arafura Sea','Timor Sea','Molucca Sea','Ceram Sea','Halmahera Sea','Selat Dampier','Gulf of Buli','Gulf of Kau','Savu Sea','Flores Sea','Celebes Sea','Makassar Strait'}
- replacements={f['properties']['name']:f['geometry'] for f in ref['features']};originals=[];geoms=[];philippine=[]
+ replacements={f['properties']['name']:f['geometry'] for f in ref['features']};originals=[];geoms=[];philippine=[];timor=[]
  for sr in shapefile.Reader(str(source/'ne_10m_geography_marine_polys/ne_10m_geography_marine_polys.shp')).iterShapeRecords():
   n=sr.record.as_dict()['name'];g=sr.shape.__geo_interface__;b=sr.shape.bbox
   if n in names or n=='Philippine Sea':originals.append((g,b))
   if n in names:geoms.append((replacements.get(n,g),b))
   if n=='Philippine Sea':philippine.append((g,b))
+  if n=='Timor Sea':timor.append((g,b))
  limit=2*np.sin(22.224/(2*6371.0088));auditcount=0;mismatches=0;changes=0;transitions={};phi_count=0
  def mask(items,start,end):
   shapes=[(g,1) for g,b in items if b[3]>=la[end-1]-.2 and b[1]<=la[start]+.2]
@@ -50,7 +56,8 @@ def build(parent,output,reference,source,scope_bounds=(120,-14.5,158,35.5)):
   rr,cc=np.where(target)
   if not len(rr):continue
   q=xyz(lo[cc],la[start+rr]);bound=bounded[rr,cc];phi_count+=int(np.count_nonzero(phi[rr,cc]))
-  new=np.where((la[start+rr]<0)&(lo[cc]<130),9,8).astype('uint8')
+  removed_timor=mask(timor,start,end)[rr,cc]&~bound
+  new=open_ocean_baseline(original[rr,cc],removed_timor)
   expected=new.copy()
   for is_bound in (False,True):
    sel=bound==is_bound

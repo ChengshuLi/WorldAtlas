@@ -45,6 +45,13 @@ if 'asia_oceania_refinement' in m:
  assert hashlib.sha256((p/'asia-oceania-reference.geojson').read_bytes()).hexdigest()==m['asia_oceania_refinement']['reference_sha256']
  print('PASS 14 Asia/Oceania, Philippine open-water and Bering controls')
 
+if 'verified_sea_boundary_refinement' in m:
+ assert at(55336,12077)==8
+ assert at(56416,16385)==8
+ assert at(2102,4399)==10
+ assert m['verified_sea_boundary_refinement']['ocean_fallback_cells_fixed']==190
+ print('PASS reported East China Sea/Raja Ampat regressions and Bering preservation')
+
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
 orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
