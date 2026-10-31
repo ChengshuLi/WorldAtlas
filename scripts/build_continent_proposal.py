@@ -382,7 +382,6 @@ def main(source, output):
             "North Sea",
             "Irish Sea",
             "English Channel",
-            "Bay of Biscay",
             "White Sea",
         ],
         4: [
@@ -445,7 +444,7 @@ def main(source, output):
         base[source_ocean > 0] = source_ocean[source_ocean > 0]
         overrides = seas[start:end]
         land_part = land[start:end]
-        threshold = 100 / (111 * STEP * np.maximum(np.cos(np.deg2rad(lat)), 0.01))
+        threshold = 22.224 / (111 * STEP * np.maximum(np.cos(np.deg2rad(lat)), 0.01))
         query_mask = (land_part == 0) & (
             ((pixel_distance[start:end] <= threshold) & (base != 10))
             | (overrides == 99)
@@ -455,9 +454,9 @@ def main(source, output):
         distance = 2 * 6371.0088 * np.arcsin(np.minimum(distance / 2, 1))
         nearest = np.zeros(base.shape, dtype="uint8")
         nearest[rows, cols] = shore_groups[index]
-        # 100 km is an editorial review proposal, NOT territorial waters or an EEZ.
+        # 22.224 km is a geographic convention, NOT territorial waters or an EEZ.
         near = np.zeros(base.shape, dtype=bool)
-        near[rows, cols] = distance <= 100
+        near[rows, cols] = distance <= 22.224
         near &= base != 10
         base[near] = nearest[near]
         base[(overrides > 0) & (overrides != 99)] = overrides[
@@ -479,41 +478,6 @@ def main(source, output):
         _, nearest_index = tree.query(xyz(lr, lc), workers=2)
         grid[lr, lc] = shore_groups[nearest_index]
     del lake_mask
-    # Preserve island-region waters around source islands that have no majority
-    # land cell. This does NOT invent land cells or resolve their resolution issue.
-    tiny_islands = []
-    for geom, code in records:
-        for island in parts(geom):
-            if island.area >= 4 * STEP**2:
-                continue
-            p = island.representative_point()
-            if not (-60 <= p.y < 90):
-                continue
-            tiny_islands.append((p.x, p.y, code))
-    for longitude, latitude, code in tiny_islands:
-        cy, cx = int((90 - latitude) / STEP), int((longitude + 180) / STEP)
-        dy = int(np.ceil(0.91 / STEP)) + 1
-        dx = int(np.ceil(0.91 / (STEP * max(np.cos(np.deg2rad(latitude)), 0.05)))) + 1
-        rows = np.arange(max(0, cy - dy), min(H, cy + dy + 1))
-        cols = np.arange(cx - dx, cx + dx + 1) % W
-        rr, cc = np.meshgrid(rows, cols, indexing="ij")
-        point = np.array(
-            [
-                np.cos(np.deg2rad(latitude)) * np.cos(np.deg2rad(longitude)),
-                np.cos(np.deg2rad(latitude)) * np.sin(np.deg2rad(longitude)),
-                np.sin(np.deg2rad(latitude)),
-            ]
-        )
-        chord = np.linalg.norm(xyz(rr.ravel(), cc.ravel()) - point, axis=1).reshape(
-            rr.shape
-        )
-        values = grid[rr, cc]
-        chosen = (
-            (chord <= 2 * np.sin(100 / (2 * 6371.0088)))
-            & (values >= 7)
-            & (values != 10)
-        )
-        grid[rr[chosen], cc[chosen]] = code
     fill_connected_seas(grid, land)
     apply_ocean_meridians(grid)
     raw_hash, palette, display_hash = write_grid_assets(grid, land, output)
@@ -537,7 +501,7 @@ def main(source, output):
         "caveats": [
             "Transcontinental seams use approximate convention lines and need lower-level compatibility checks.",
             "Marine label polygons are generalized; no claim of precise IHO boundaries.",
-            "100-km near-shore grouping and shared-sea nearest-shore allocation are editorial proposals.",
+            "22.224-km near-shore grouping and shared-sea nearest-shore allocation are editorial proposals.",
             "Small inhabited-island exceptions are not yet fully audited.",
         ],
         "island_groups": island_groups,

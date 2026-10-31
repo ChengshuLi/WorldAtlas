@@ -62,6 +62,17 @@ water masks exclude inland lakes and unrelated seas. Independent per-continent
 queries verify every revised sea cell. The Andaman western island-arc boundary
 uses the source marine outline; its southern entrance follows named capes.
 
+The final worldwide coastal pass is `scripts/rebuild_coastal_buffers.py
+PRIOR_NATIVE_DIR OUTPUT_DIR OPEN_WATER_RUNS.npy`. Generate its topology input with
+`scripts/classify_water_connectivity.py PRIOR_NATIVE_DIR OPEN_WATER_RUNS.npy`.
+This final pass supersedes historical 100-km regional buffers: ordinary open
+coasts receive exactly 12 nautical miles (22.224 km), from represented native
+coastal land cells on a sphere. Inland waters and documented bounded/shared seas
+are retained. Islands missing from the grid create no buffer. North Sea limits
+follow the named Orkney/Shetland capes and 61°N; open Biscay, Atlantic approaches,
+and Arctic coasts use the uniform buffer. The distance does not depict legal
+territorial waters. Earlier regional scripts are retained as research provenance.
+
 Source archives, generated grids, research notes, and review metadata belong in
 R2/Neon rather than Git. Use an immutable review prefix for each candidate and
 publish the root index only after its referenced assets exist. The draft remains
