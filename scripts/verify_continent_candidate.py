@@ -47,10 +47,16 @@ if 'asia_oceania_refinement' in m:
 
 if 'verified_sea_boundary_refinement' in m:
  assert at(55336,12077)==8
- assert at(56416,16385)==8
+ archipelago=any(b['name']=='Southeast Asian archipelago seas' for b in m.get('published_sea_limits_refinement',{}).get('boundaries',[]))
+ assert at(56416,16385)==(6 if archipelago else 8)
  assert at(2102,4399)==10
  assert m['verified_sea_boundary_refinement']['ocean_fallback_cells_fixed']==190
  print('PASS reported East China Sea/Raja Ampat regressions and Bering preservation')
+
+if 'australasian_open_water_refinement' in m:
+ for lo,la,e in [(160,-40,8),(130,-36,9),(146,-40,6),(174.5,-41.3,6),(146.8,-47,9),(147.1,-47,8)]:
+  assert geo(lo,la)==e,(lo,la,geo(lo,la),e)
+ print('PASS Tasman/Bight open-water controls, retained straits, and Tasmania ocean meridian')
 
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
