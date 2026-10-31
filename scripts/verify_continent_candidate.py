@@ -24,6 +24,10 @@ if 'eurasia_boundary_audit' in m:
  for x,y,e in [(43680,6024,19),(40871,8636,19),(41599,8854,19),(42121,7069,18),(42798,6972,18),(42210,7806,19),(42221,7806,18),(43508,6662,19),(43526,6662,18),(40864,8651,18),(41074,8670,19),(41622,8987,18),(39998,8449,18),(39882,8355,18),(39561,8211,19),(44825,3916,19)]:
   assert at(x,y)==e,(x,y,e,at(x,y))
  print('PASS 16 Eurasian river/watershed controls')
+if 'turkish_straits_audit' in m:
+ for x,y,e in [(37576,9074,18),(37626,9039,18),(37649,9047,18),(38055,8905,19),(37790,8991,18),(37512,9134,18),(37482,9071,19)]:
+  assert at(x,y)==e,(x,y,e,at(x,y))
+ print('PASS 7 Turkish strait/island controls')
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
 orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)

@@ -118,7 +118,14 @@ geometry, source identifiers, licenses and the final route. Watershed geometry i
 from [BasinATLAS v1.0](https://doi.org/10.6084/m9.figshare.9890531), Linke et al.
 (2019), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); river data are
 © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), ODbL,
-relation 214415. The derivative route retains these attributions. Shared new sea cells use the nearest
+relation 214415. The derivative route retains these attributions. The `repair_turkish_straits.py PRIOR OUTPUT` pass follows complete native Thracian
+and Anatolian banks rather than cutting the straits with straight segments.
+Marmara Island, Paşalimanı and Bozcaada are Asian; Gökçeada remains European.
+Shared Black Sea–Marmara–Aegean waters are recomputed from the corrected native
+coasts, with independent distance checks and a proof that no change reaches the
+audit window's edge. Missing islands remain for the separate source audit.
+
+Shared new sea cells use the nearest
 represented coast. Open named embayments are explicitly distinguished from
 bounded waters; names alone do not imply continental assignment. The reference
 sources are [IHO Sea Areas v3](https://doi.org/10.14284/323),
