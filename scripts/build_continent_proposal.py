@@ -320,6 +320,13 @@ def main(source, output):
     output.mkdir(parents=True, exist_ok=True)
     records, island_groups, seam = land_records(source)
     land, boundary_audit = majority_land(records)
+    # Administrative land polygons include inland water. Remove lake interiors
+    # before extracting coasts; polygon holes retain the lake's islands.
+    lake_shapes = [(g, 1) for _, g in features(source, "ne_10m_lakes")]
+    lake_mask = rasterize(
+        lake_shapes, out_shape=(H, W), transform=TRANSFORM, fill=0, dtype="uint8"
+    )
+    land[lake_mask > 0] = 0
     with gzip.open(output / "source-land-groups.u8.gz", "wb") as handle:
         handle.write(land.tobytes())
     print("Land source raster complete", flush=True)
@@ -476,10 +483,6 @@ def main(source, output):
             print(f"Rows {end}/{H}", flush=True)
     # Inland lakes inherit surrounding continental geography, even if wider than
     # the coastal-water envelope. They never become open-ocean pockets.
-    lake_shapes = [(g, 1) for _, g in features(source, "ne_10m_lakes")]
-    lake_mask = rasterize(
-        lake_shapes, out_shape=(H, W), transform=TRANSFORM, fill=0, dtype="uint8"
-    )
     lr, lc = np.where((lake_mask > 0) & (land == 0))
     if len(lr):
         _, nearest_index = tree.query(xyz(lr, lc), workers=2)

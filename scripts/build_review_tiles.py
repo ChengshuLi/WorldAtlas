@@ -17,7 +17,7 @@ from shapely import STRtree
 from shapely.geometry import box
 from shapely.affinity import scale as scale_geometry
 from shapely.ops import unary_union
-from build_continent_proposal import land_records, parts
+from build_continent_proposal import land_records, parts, features
 from clean_ocean_pockets import clean_ocean_pockets
 
 W, H, TILE = 65536, 27307, 512
@@ -34,6 +34,8 @@ def build(source, parent, output, proposal_id="continent-20261030-v6", maldives=
     records = [(p, code) for geom, code in records for p in parts(geom)]
     geometries = [p for p, _ in records]
     tree = STRtree(geometries)
+    lakes = [g for _, g in features(source, 'ne_10m_lakes')]
+    lake_tree = STRtree(lakes)
     socotra = unary_union([g for g, code in records if code == 1 and 51 < g.representative_point().x < 55 and 11 < g.representative_point().y < 13.5])
     # Local equirectangular distance approximation for this small, low-latitude envelope.
     factor = math.cos(math.radians(12.5))
@@ -64,6 +66,10 @@ def build(source, parent, output, proposal_id="continent-20261030-v6", maldives=
                 # Lower stable group ID wins overlapping source centers.
                 selected=sorted((records[i] for i in candidates),key=lambda v:v[1],reverse=True)
                 land=rasterize(selected,out_shape=(height,width),transform=from_origin(-180+x0*STEP,90-y0*STEP,STEP,STEP),dtype='uint8',all_touched=False) if selected else np.zeros((height,width),dtype='uint8')
+                lake_candidates=lake_tree.query(window,predicate='intersects')
+                if len(lake_candidates):
+                    lake_mask=rasterize([(lakes[i],1) for i in lake_candidates],out_shape=(height,width),transform=from_origin(-180+x0*STEP,90-y0*STEP,STEP,STEP),dtype='uint8',all_touched=False)
+                    land[lake_mask>0]=0
                 tile=band[:,x0:x0+width]
                 tile[land>0]=land[land>0]
                 tile[land>0]+=16

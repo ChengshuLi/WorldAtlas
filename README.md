@@ -32,7 +32,9 @@ python scripts/audit_small_islands.py SOURCES_DIR OUTPUT_DIR
 `scripts/build_review_tiles.py SOURCES_DIR PRIOR_DRAFT_DIR OUTPUT_DIR` creates the
 65,536-column center-sampled review version. It re-rasterizes source land at native
 resolution while retaining the prior draft's marine grouping footprints, which remain
-explicitly provisional. Enclosed ocean-code artifacts are audited and assigned to
+explicitly provisional. Lake interiors are removed from the land mask at cell centers;
+polygon holes retain lake islands. `scripts/refine_inland_water_mask.py` applies the
+same correction to an existing row-run grid without changing continent IDs. Enclosed ocean-code artifacts are audited and assigned to
 the surrounding continent, retaining open-ocean boundaries and intentional island
 groups. Heard–McDonald is grouped with Kerguelen in Africa. Pass `--maldives`
 with the pinned OneMap island GeoJSON to replace the generalized Maldives coast;

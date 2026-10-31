@@ -2,7 +2,7 @@
 import json,gzip,hashlib,numpy as np
 from pathlib import Path
 import argparse
-parser=argparse.ArgumentParser();parser.add_argument('candidate',type=Path);parser.add_argument('baseline',type=Path);parser.add_argument('--allow-land-affiliation-changes',action='store_true');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('candidate',type=Path);parser.add_argument('baseline',type=Path);parser.add_argument('--allow-land-affiliation-changes',action='store_true');parser.add_argument('--allow-inland-water-mask-changes',action='store_true');args=parser.parse_args()
 p=args.candidate;m=json.loads((p/'proposal.json').read_text());rb=gzip.decompress((p/'rows.u32.gz').read_bytes());vb=gzip.decompress((p/'runs.u32.gz').read_bytes());r=np.frombuffer(rb,'<u4');v=np.frombuffer(vb,'<u4').reshape(-1,2)
 assert hashlib.sha256(rb).hexdigest()==m['local_grid']['rows_sha256'];assert hashlib.sha256(vb).hexdigest()==m['local_grid']['runs_sha256'];assert len(r)==m['height']+1
 for y in range(m['height']):
@@ -55,17 +55,24 @@ if 'verified_sea_boundary_refinement' in m:
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
 orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
-changed=0;land_changed=0;ocean_changed=0
+changed=0;land_changed=0;ocean_changed=0;mask_changed=0
 for y in range(m['height']):
  a=v[r[y]:r[y+1]];b=oruns[orows[y]:orows[y+1]];aa=np.repeat(a[:,1],np.diff(np.r_[0,a[:,0]])).astype('uint8');bb=np.repeat(b[:,1],np.diff(np.r_[0,b[:,0]])).astype('uint8')
- assert np.array_equal(aa>=16,bb>=16)
+ if args.allow_inland_water_mask_changes:
+  flipped=(aa>=16)!=(bb>=16);assert np.all((bb[flipped]>=16)&(aa[flipped]==(bb[flipped]&15)));mask_changed+=int(flipped.sum())
+ else:assert np.array_equal(aa>=16,bb>=16)
  if 'eurasia_boundary_audit' in m and 'independent_review_repairs' not in m:
   ocean=np.isin(bb,[7,8,9,10]);assert np.array_equal(aa[ocean],bb[ocean])
  land_changed+=int(np.count_nonzero((aa!=bb)&(bb>=16)))
- if not args.allow_land_affiliation_changes:assert np.array_equal(aa[bb>=16],bb[bb>=16])
+ if not args.allow_land_affiliation_changes:
+  if args.allow_inland_water_mask_changes:assert np.array_equal(aa[bb>=16]&15,bb[bb>=16]&15)
+  else:assert np.array_equal(aa[bb>=16],bb[bb>=16])
  changed+=int(np.count_nonzero(aa!=bb))
  ocean_changed+=int(np.count_nonzero((aa!=bb)&np.isin(bb,[7,8,9,10])))
-print('PASS whole-world land/water mask unchanged; land affiliation changes:',land_changed,'water affiliation changes:',changed-land_changed)
+if args.allow_inland_water_mask_changes:
+ assert mask_changed==m['inland_water_mask_refinement']['land_to_inland_water_cells']
+ print('PASS only declared land-to-inland-water mask changes:',mask_changed,'land affiliation changes:',land_changed-mask_changed,'water affiliation changes:',changed-land_changed)
+else:print('PASS whole-world land/water mask unchanged; land affiliation changes:',land_changed,'water affiliation changes:',changed-land_changed)
 
 if m['proposal_id']=='continent-20261031-v20' and json.loads((oldp/'proposal.json').read_text())['proposal_id']=='continent-20261031-v19':
  assert ocean_changed==2,ocean_changed
