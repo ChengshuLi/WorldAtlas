@@ -229,6 +229,8 @@ def land_records(source, maldives=None):
     europe_side = Polygon([(-30, 90), *seam, (-30, 39)])
     from correct_suez import SINAI
     sinai = Polygon(SINAI)
+    named_regions = {a['NAME_EN']: g for a, g in features(source, 'ne_10m_geography_regions_polys')
+                     if a.get('NAME_EN') in {'Yamal Peninsula', 'Franz Josef Land', 'Novaya Zemlya'}}
     records = []
     island_groups = {
         "French Southern and Antarctic Lands": 1,
@@ -255,9 +257,14 @@ def land_records(source, maldives=None):
             group = island_groups.get(attr["GEOUNIT"], continent)
             if group is None:
                 raise ValueError("Unreviewed continent tag: " + attr["GEOUNIT"])
-            if attr["ADMIN"] == "Russia" and y > 70 and 35 < x < 75:
-                records.append((poly, 3))
-                continue
+            if attr["ADMIN"] == "Russia":
+                if any(named_regions[n].covers(point) for n in ['Franz Josef Land','Novaya Zemlya']):
+                    records.append((poly,3));continue
+                # The complete named Yamal peninsula is Asian; do not cut its
+                # western coast with the provisional Ural longitude segments.
+                yamal=poly.intersection(named_regions['Yamal Peninsula'])
+                if not yamal.is_empty:
+                    records.append((yamal,2));poly=poly.difference(yamal)
             if attr["ADMIN"] in {
                 "Russia",
                 "Kazakhstan",

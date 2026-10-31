@@ -2,7 +2,7 @@
 import json,gzip,hashlib,numpy as np
 from pathlib import Path
 import argparse
-parser=argparse.ArgumentParser();parser.add_argument('candidate',type=Path);parser.add_argument('baseline',type=Path);args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('candidate',type=Path);parser.add_argument('baseline',type=Path);parser.add_argument('--allow-land-affiliation-changes',action='store_true');args=parser.parse_args()
 p=args.candidate;m=json.loads((p/'proposal.json').read_text());rb=gzip.decompress((p/'rows.u32.gz').read_bytes());vb=gzip.decompress((p/'runs.u32.gz').read_bytes());r=np.frombuffer(rb,'<u4');v=np.frombuffer(vb,'<u4').reshape(-1,2)
 assert hashlib.sha256(rb).hexdigest()==m['local_grid']['rows_sha256'];assert hashlib.sha256(vb).hexdigest()==m['local_grid']['runs_sha256'];assert len(r)==m['height']+1
 for y in range(m['height']):
@@ -16,15 +16,18 @@ for x,y,e in checks:assert at(x,y)==e,(x,y,e,at(x,y))
 for lo,la,e in [(2,60.9,3),(2,61.3,7),(4,55,3),(20,57,3),(-5,53,3),(-3,50,3),(37,65,3),(40,75,10),(80,76,10),(65,15,9),(88,14,9),(96,11,2)]:assert geo(lo,la)&15==e,(lo,la,geo(lo,la),e)
 print('PASS rows, hashes,',len(checks),'reported regressions and bounded/open sea examples')
 
-newchecks=[(2134,4359,10),(41262,4131,10),(58556,8662,8),(18140,4450,4),(3116,4292,4),(20603,5497,4),(20776,4994,4),(4953,5585,4),(4677,5848,4),(4663,5851,4),(4638,5856,4),(3458,5915,4),(2883,4756,4),(15501,12715,4),(16755,13395,4),(35206,4085,3)]
+newchecks=[(44995,3731,18),(44948,3723,18),(44941,3691,18),(44971,3678,18),(44965,3635,18),(44913,3560,18),(44964,3447,18),(44934,3371,2),(45602,3027,18),(46332,3088,18),(46558,3007,18),(46736,1903,18),(2134,4359,10),(41262,4131,10),(58556,8662,8),(18140,4450,4),(3116,4292,4),(20603,5497,4),(20776,4994,4),(4953,5585,4),(4677,5848,4),(4663,5851,4),(4638,5856,4),(3458,5915,4),(2883,4756,4),(15501,12715,4),(16755,13395,4),(35206,4085,3)]
 for x,y,e in newchecks:assert at(x,y)==e,(x,y,e,at(x,y))
 for lo,la,e in [(-55,62,10),(-55,58,7),(-10,50,7),(121,39,2),(107,20,2),(99,4,2),(-125,45,8)]:assert geo(lo,la)&15==e,(lo,la,geo(lo,la),e)
 print('PASS',len(newchecks),'new user coordinates; ocean/bounded basin controls')
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
 orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
-changed=0
+changed=0;land_changed=0
 for y in range(m['height']):
  a=v[r[y]:r[y+1]];b=oruns[orows[y]:orows[y+1]];aa=np.repeat(a[:,1],np.diff(np.r_[0,a[:,0]])).astype('uint8');bb=np.repeat(b[:,1],np.diff(np.r_[0,b[:,0]])).astype('uint8')
- assert np.array_equal(aa>=16,bb>=16);assert np.array_equal(aa[bb>=16],bb[bb>=16]);changed+=int(np.count_nonzero(aa!=bb))
-print('PASS whole-world land unchanged; water changes:',changed)
+ assert np.array_equal(aa>=16,bb>=16)
+ land_changed+=int(np.count_nonzero((aa!=bb)&(bb>=16)))
+ if not args.allow_land_affiliation_changes:assert np.array_equal(aa[bb>=16],bb[bb>=16])
+ changed+=int(np.count_nonzero(aa!=bb))
+print('PASS whole-world land/water mask unchanged; land affiliation changes:',land_changed,'water affiliation changes:',changed-land_changed)

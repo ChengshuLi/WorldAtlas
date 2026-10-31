@@ -98,7 +98,13 @@ ends at North Cape rather than extending an artificial Atlantic line eastward.
 The Arctic Baffin/Davis basin can be disconnected from the main Arctic label by
 continental classifications of the Canadian passages; this alone is not an error.
 
-All passes preserve every land cell. Shared new sea cells use the nearest
+Ocean repair passes preserve every land cell. The subsequent
+`repair_northern_eurasia.py PRIOR OUTPUT` corrects land affiliations using named
+Yamal/Arctic landmasses and nearest mainland for unnamed offshore components.
+It preserves the land/water mask and updates existing continental waters only
+where their nearest represented shore changed affiliation. This supersedes the
+initial Russian-island longitude shortcut; the detailed Ural ridge farther south
+remains provisional and separately reviewable. Shared new sea cells use the nearest
 represented coast. Open named embayments are explicitly distinguished from
 bounded waters; names alone do not imply continental assignment. The reference
 sources are [IHO Sea Areas v3](https://doi.org/10.14284/323),
