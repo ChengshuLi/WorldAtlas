@@ -104,7 +104,18 @@ function canvasRenderer(canvas, meta, data) {
     }
   }};
 }
+export function gridFitsTexture(maxSize, rowWords, runWords) {
+  const width = Math.min(4096, maxSize);
+  return width > 0 && Math.ceil(rowWords / width) <= maxSize && Math.ceil(runWords / width) <= maxSize;
+}
 export function createRenderer(canvas, meta, data) {
+  // Check capacity before binding the display canvas to WebGL: a canvas cannot
+  // switch to a 2D context afterward. Low-capacity GPUs use the same RLE data.
+  const probe = typeof OffscreenCanvas !== 'undefined' ? new OffscreenCanvas(1, 1) : document.createElement('canvas');
+  const probeGL = probe.getContext('webgl2');
+  const fits = probeGL && gridFitsTexture(probeGL.getParameter(probeGL.MAX_TEXTURE_SIZE), data.rows.length, data.runs.length);
+  if (probeGL) probeGL.getExtension('WEBGL_lose_context')?.loseContext();
+  if (!fits) return canvasRenderer(canvas, meta, data);
   const gl = canvas.getContext('webgl2', { alpha: false, antialias: false, depth: false, stencil: false });
   if (!gl) return canvasRenderer(canvas, meta, data);
   const vertex = `#version 300 es

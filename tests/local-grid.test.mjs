@@ -56,3 +56,24 @@ test('wrapped rendering and picking agree at floating-point run boundaries',()=>
   for(let x=0;x<101;x++)assert.equal(pixels[x]&255,cellValue(data.rows,data.runs,wrapColumn(Math.floor((x+.5-ox)/scale),6),sy));
  }
 });
+
+test('131072-column grid preserves endpoints, mid-world runs and wrapping',()=>{
+ const meta={width:131072,height:1,local_grid:{run_count:3}};
+ const rows=new Uint32Array([0,3]);
+ const runs=new Uint32Array([65536,2,131071,18,131072,9]);
+ validateGrid(meta,rows,runs);
+ assert.equal(cellValue(rows,runs,65535,0),2);
+ assert.equal(cellValue(rows,runs,65536,0),18);
+ assert.equal(cellValue(rows,runs,131070,0),18);
+ assert.equal(cellValue(rows,runs,131071,0),9);
+ assert.equal(wrapColumn(-1,131072),131071);
+ assert.equal(wrapColumn(131072,131072),0);
+});
+
+import {gridFitsTexture} from '../web/local-grid.js';
+test('higher-resolution run data selects fallback before a low-capacity GPU upload',()=>{
+ assert.equal(gridFitsTexture(2048,54615,2987749*2),false);
+ assert.equal(gridFitsTexture(4096,54615,2987749*2),true);
+ assert.equal(gridFitsTexture(2048,27308,1486000*2),true);
+ assert.equal(gridFitsTexture(0,2,2),false);
+});

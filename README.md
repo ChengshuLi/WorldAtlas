@@ -16,6 +16,27 @@ during navigation. Controls remain disabled until the complete map is ready.
 `scripts/build_local_grid.py DRAFT_DIR` builds and hashes the local-rendering assets
 from the generation chunks; chunking is an offline generation detail only.
 
+## Current resolution upgrade
+
+The approved target is 131,072 columns with center sampling only. The public
+review remains at its published version until the complete replacement passes QA.
+`scripts/refine_grid_resolution.py` builds the new physical land mask from pinned
+coastlines and explicit source replacements, using bounded row bands. This output
+is an intermediate candidate: ordinary coastal water must be recomputed at
+22.224 km from represented coastlines, and retained shared seas must be checked
+against the corrected continental land assignments before publication.
+
+Use `scripts/native_grid.py` to read the lossless grid. Run endpoints are exclusive;
+raw values 17–22 are land, while 1–10 are water. A continental ID alone does not
+imply land. The viewer checks GPU capacity and falls back to Canvas when necessary.
+Source-positive land is never enlarged to force an island into a cell.
+
+## Earlier generation and review tools
+
+The tools below describe the draft's provenance. Their historical 65,536-column
+and 100 km settings are not the current approved resolution or ordinary coastal
+band. Later reviewed stages supersede earlier regional rules.
+
 `scripts/build_continent_proposal.py` builds the initial research draft from pinned
 Natural Earth archives. It includes explicit, reviewable atlas conventions; it is
 not an authoritative definition of continent or maritime boundaries. It checks
