@@ -26,7 +26,7 @@ def contained_cells(g,w,h,s):
 
 def build(parent, output, sources, coasts, marine_source, proposal_id):
     output.mkdir(parents=True, exist_ok=False)
-    m=json.loads((parent/'proposal.json').read_text());w,h,s=m['width'],m['height'],m['step']
+    m=json.loads((parent/'proposal.json').read_text());w,h,s=m['width'],m['height'],m['step'];base_proposal_id=m['proposal_id']
     rb=gzip.decompress((parent/'rows.u32.gz').read_bytes());vb=gzip.decompress((parent/'runs.u32.gz').read_bytes())
     R=np.frombuffer(rb,'<u4');V=np.frombuffer(vb,'<u4').reshape(-1,2)
     @lru_cache(maxsize=16)
@@ -98,7 +98,11 @@ def build(parent, output, sources, coasts, marine_source, proposal_id):
     m.update(proposal_id=proposal_id,sha256_uncompressed=sha.hexdigest(),display_sha256_uncompressed=display.hexdigest())
     m['local_grid'].update(run_count=count,rows_sha256=hashlib.sha256(rb).hexdigest(),runs_sha256=hashlib.sha256(vb).hexdigest(),decoded_bytes=len(rb)+len(vb),compressed_bytes=sum((output/f'{n}.u32.gz').stat().st_size for n in ['rows','runs']))
     for g in m['groups']:g['cells']=int(groups[g['id']])
-    audit={'source_sha256':hashlib.sha256(source_bytes).hexdigest(),'islands':records,'added_land_cells':len(land),'changed_water_cells':len(water_changes),'rule':'Unchanged center sampling. No dilation or forced cells. Existing land unchanged. Water changes only where new land is the nearest coast, within22.224km or an existing shared sea.'}
+    audit={'proposal_id':proposal_id,'base_proposal_id':base_proposal_id,'source_sha256':hashlib.sha256(source_bytes).hexdigest(),'islands':records,'added_land_cells':len(land),'changed_water_cells':len(water_changes),'rule':'Unchanged center sampling. No dilation or forced cells. Existing land unchanged. Water changes only where new land is the nearest coast, within 22.224 km or an existing shared sea.'}
+    if 'important_island_source_additions' in m:
+        previous=m['important_island_source_additions'];previous.setdefault('proposal_id',base_proposal_id)
+        if previous.get('published_source_file'):previous.setdefault('published_source_uri','/review/'+base_proposal_id+'/'+previous['published_source_file'])
+        m.setdefault('important_island_source_batches',[]).append(previous)
     m['important_island_source_additions']=audit
     (output/'proposal.json').write_text(json.dumps(m,separators=(',',':'))+'\n')
     (output/'important-island-source-audit.json').write_text(json.dumps(audit,indent=2)+'\n')
