@@ -28,10 +28,15 @@ if 'turkish_straits_audit' in m:
  for x,y,e in [(37576,9074,18),(37626,9039,18),(37649,9047,18),(38055,8905,19),(37790,8991,18),(37512,9134,18),(37482,9071,19)]:
   assert at(x,y)==e,(x,y,e,at(x,y))
  print('PASS 7 Turkish strait/island controls')
-if 'independent_review_repairs' in m:
+if 'independent_review_repairs' in m and 'verified_connector_refinement' not in m:
  for x,y,e in [(44998,3876,19),(44998,3875,19),(45024,3862,19),(45019,3861,19),(35061,9920,17),(35109,9855,19),(34948,9686,19),(41604,8729,3),(2013,4407,4),(1985,4436,2),(35831,2490,7),(36376,2901,7)]:
   assert at(x,y)==e,(x,y,e,at(x,y))
  print('PASS 12 independent-review regression cells')
+if 'verified_connector_refinement' in m:
+ for x,y,e in [(44998,3876,18),(44998,3875,18),(44999,3876,18),(44830,3919,19),(45019,3861,19),(45024,3862,19),(39616,8242,18),(39561,8211,19),(35061,9920,17),(35109,9855,19),(34948,9686,19),(41604,8729,3),(2013,4407,4),(1985,4436,2),(35831,2490,7),(36376,2901,7)]:
+  assert at(x,y)==e,(x,y,e,at(x,y))
+ assert hashlib.sha256((p/'eurasia-boundary-reference.geojson').read_bytes()).hexdigest()==m['verified_connector_refinement']['reference_sha256']
+ print('PASS 16 connector/review controls and current reference checksum')
 # Independently compare complete land assignments from v14 and final candidate.
 oldp=args.baseline
 orows=np.frombuffer(gzip.decompress((oldp/'rows.u32.gz').read_bytes()),'<u4');oruns=np.frombuffer(gzip.decompress((oldp/'runs.u32.gz').read_bytes()),'<u4').reshape(-1,2)
@@ -50,3 +55,7 @@ print('PASS whole-world land/water mask unchanged; land affiliation changes:',la
 if m['proposal_id']=='continent-20261031-v20' and json.loads((oldp/'proposal.json').read_text())['proposal_id']=='continent-20261031-v19':
  assert ocean_changed==2,ocean_changed
  print('PASS exactly two ocean-label precision corrections')
+
+if m['proposal_id']=='continent-20261031-v21' and json.loads((oldp/'proposal.json').read_text())['proposal_id']=='continent-20261031-v20':
+ assert ocean_changed==0,ocean_changed
+ print('PASS ocean labels unchanged')
