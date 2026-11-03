@@ -179,3 +179,36 @@ The source contains `__ASSET_BASE__` in `web/index.html`; replace it with the ex
 versioned `/review/.../` prefix when generating a published index. The display grid
 is gzip data and must be served as `application/gzip`, without a `Content-Encoding`
 header, because the browser explicitly decompresses it.
+
+## Entity registry and staged stable-ID grid
+
+`migrations/002_entity_registry.sql` defines stable entity identities and revisioned
+names, levels, parents, V7 review-code bindings, and R2 artifact references.
+`003_v7_draft_entity_seed.sql` supplies the existing ten V7 groups as **draft**
+records. Africa's land and water review codes bind to the same entity. The
+migration and seed are files for review; they do not apply themselves or approve
+geography. Colors and the historic V7 land/water codes remain presentation data,
+not entity IDs. The revisioned schema permits the remaining hierarchy to be added
+without changing the legend code.
+
+To prepare a local V7 review bundle with a registry exported from Neon, export one
+revision using `scripts/export_entity_registry.sql`, for example with `psql -X -A
+-t -v revision=REVISION -f scripts/export_entity_registry.sql > registry.json`,
+then set `WORLDATLAS_ENTITY_REGISTRY_EXPORT` to that file when running
+`scripts/build_full_v7_ui_bundle.py`. The builder validates the snapshot and
+bindings. With no export, it derives an explicitly draft, deterministic bootstrap
+from the existing V7 categories. This fallback is for local review, not evidence
+of database acceptance or publication. The V7 viewer retains its original review
+codes, colors, and separate land/water styling while displaying registry names.
+
+For a staged continent-ID grid, first prepare proposal metadata with
+`node scripts/prepare_entity_metadata.mjs proposal.json prepared.json --registry
+registry.json`, then run `python scripts/build_entity_grid.py prepared.json
+rows.u32le runs.u32le NEW_OUTPUT_DIR` on the matching uncompressed V7 row offsets
+and run pairs. It writes a new lossless u32 row-run grid and a checksummed manifest;
+adjacent land and water runs for the same entity may merge. The source physical
+mask and review-code grid must be retained independently for rendering and review.
+The manifest pins the registry and bindings as well as the input and output streams.
+This conversion stages files only: uploading them to R2 and atomically activating a
+matching accepted Neon revision require the separate reviewed publication process.
+The final canonical grid will use location IDs after the lower hierarchy is approved.

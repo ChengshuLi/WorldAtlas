@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build an isolated, immutable V7 full-recompute UI/release-prep bundle."""
 from __future__ import annotations
-import copy, gzip, hashlib, json, os, re, shutil, sys
+import copy, gzip, hashlib, json, os, re, shutil, subprocess, sys
 from pathlib import Path
 import numpy as np
 HERE=Path(__file__).resolve().parent
@@ -10,6 +10,7 @@ TMP_ROOT=Path(os.environ.get('WORLDATLAS_TMP_ROOT', '/tmp'))
 OUTPUT_ROOT=Path(os.environ.get('WORLDATLAS_OUTPUT_ROOT', str(HERE)))
 sys.path.insert(0,str(HERE))
 sys.path.insert(1,str(ROOT/'audit/shared-output-safety-20261103/integration-copies/patched-v4'))
+from entity_registry_ui import wire_registry_ui
 from exclusive_outputs import (create_run_directory, create_binary_exclusive, create_gzip_exclusive, create_text_exclusive, write_json_exclusive)
 
 OLD=TMP_ROOT/'v7-bay-ocean-stage-20261103/index-v7-stage'
@@ -30,8 +31,6 @@ CLOSED=ROOT/'audit/full-water-rebuild-20261103/closed-water-assignments-final-pr
 V6CHECK=ROOT/'audit/v6-nearestshore-v7-verification-20261103/final-v7-candidate-check-20261103T082814.491051Z-7239445ae11b/summary.json'
 PHYS='660ac7608f72b447c95eb8820979951fe589f25c70303efe732b374049127017'
 W,H=131072,54614
-CONT=[(1,'Africa'),(2,'Asia'),(3,'Europe'),(4,'North America'),(5,'South America'),(6,'Oceania')]
-CODE_NAME={1:'Africa',2:'Asia',3:'Europe',4:'North America',5:'South America',6:'Oceania',7:'Atlantic Ocean',8:'Pacific Ocean',9:'Indian Ocean',10:'Arctic Ocean',17:'Africa',18:'Asia',19:'Europe',20:'North America',21:'South America',22:'Oceania'}
 
 def sha(path):
  h=hashlib.sha256()
@@ -71,9 +70,25 @@ def main():
  if sha(OCEAN_CUT)!='37d31b535dbdd49195363177235d116cd1da85a8a1f2ca0ab1fff0f627a19330':raise ValueError('Ocean barrier file hash changed')
  if named.get('status') not in ('passed','complete','ready'): print('named manifest status:',named.get('status'))
  src_layers={str(x['source_id']):x for x in named['source_layers']}
- old_groups={g['id']:g for g in oldp['exceptions']};old_members={m['id']:(g,m) for g in oldp['exceptions'] for m in g['members']}
+ original_water_names={c['name']:c['id'] for c in oldp['categories'] if c['physical_class']=='water'}
  old_rules={x['id']:copy.deepcopy(x) for x in oldp['rule_records']}
+ # Identity and hierarchy are supplied by a Neon export when provided. The
+ # fallback is a deterministic, explicitly draft snapshot of the old V7 data.
+ args=['node',str(HERE/'prepare_entity_metadata.mjs'),'--stdin']
+ if os.environ.get('WORLDATLAS_ENTITY_REGISTRY_EXPORT'):
+  args.extend(['--registry',os.environ['WORLDATLAS_ENTITY_REGISTRY_EXPORT']])
+ oldp=json.loads(subprocess.run(args,input=json.dumps(oldp),check=True,capture_output=True,text=True).stdout)
  cats={int(c['id']):c for c in oldp['categories']}
+ code_name={code:c['name'] for code,c in cats.items()}
+ # Historical group destinations are names in the source bundle. Resolve those
+ # exact labels through their original code before applying a registry rename.
+ for group in oldp['exceptions']:
+  if group['destination'] in original_water_names:
+   group['destination']=code_name[original_water_names[group['destination']]]
+ old_groups={g['id']:g for g in oldp['exceptions']};old_members={m['id']:(g,m) for g in oldp['exceptions'] for m in g['members']}
+ land_ids={c['entity_id'] for c in cats.values() if c['physical_class']=='land'}
+ continents=sorted((c['id'],c['name']) for c in cats.values() if c['physical_class']=='water' and c['entity_id'] in land_ids)
+
  stage=create_run_directory(OUTPUT_ROOT,'candidate-v7-full-ui')
  data=stage/'data';ui=stage/'ui';span_dir=data/'exception-spans'/'v2-v7-diff'; grids=data/'grids'/'v7'
  for p in [data,ui,span_dir,grids]:p.mkdir(parents=True,exist_ok=False)
@@ -139,13 +154,13 @@ def main():
    sid=sm.group(1);record=src_layers.get(sid)
    if not record:raise ValueError(f'No final source-layer record for SeaVoX member {mid}')
    source_name=record['source_name'];participants=record.get('participants',[]);shared=(len(participants)>1)
-   destination='nearest_revised_shoreline' if shared else CODE_NAME[target]
+   destination='nearest_revised_shoreline' if shared else code_name[target]
    ruleid=record.get('assignment_output',{}).get('rule_id') or next(iter(ridset))
-   m['name']=source_name+(f' — {CODE_NAME[target]} portion' if shared else '')
+   m['name']=source_name+(f' — {code_name[target]} portion' if shared else '')
    m.update({'physical_class':'water','continent_id':target,'display_item_id':f'{mid}@{target}','target_code':target,'source_id':sid,'assignment_method':record.get('assignment_method')})
    uri=f'https://www.marineregions.org/gazetteer.php?p=details&id={sid}'
    evidence=[{'name':f'SeaVoX v19 / Marine Regions record {sid}: {source_name}','uri':uri,'sha256':record['full_source_geometry'].get('source_geometry_file_sha256')}]
-   reason=(f'{source_name} is a named SeaVoX v19 basin. The current full-source physical-water mask is assigned among its approved participant continents by nearest final assigned shoreline.' if shared else f'{source_name} is a named SeaVoX v19 basin assigned directly to its one approved continent participant, code {target} ({CODE_NAME[target]}).')
+   reason=(f'{source_name} is a named SeaVoX v19 basin. The current full-source physical-water mask is assigned among its approved participant continents by nearest final assigned shoreline.' if shared else f'{source_name} is a named SeaVoX v19 basin assigned directly to its one approved continent participant, code {target} ({code_name[target]}).')
    groupid=f'named-basin:seavox-v19-{sid}'
    title=f'{source_name} · SeaVoX v19'
    for rr in ridset:add_rule(rr,'Approved named-basin assignment by participant policy',evidence=evidence,detail=record.get('assignment_method'))
@@ -157,31 +172,31 @@ def main():
    evidence=[{'name':'Geoscience Australia Topographic Base Map / Appendix E, Other Oceans & Sea Names, feature 413 (Gulf of Carpentaria)','uri':'https://services.ga.gov.au/gis/rest/services/Topographic_Base_Map/MapServer/517','sha256':'24b75ee6e8dbd5ff64c84e35b4d9707e4dbf15c60e40f6289a31e3b6cc0040b9'}]
    for rr in ridset:add_rule(rr,'Gulf of Carpentaria attribution from Geoscience Australia feature 413','water-assignment',evidence,detail='Generalized cartographic footprint (approximately 1:50M–1:5M), not a legal or navigation limit.')
    m.update({'name':'Gulf of Carpentaria','physical_class':'water','continent_id':6,'display_item_id':f'{mid}@6','target_code':6,'source_id':'413'})
-   g={'id':'ga-topographic-base-map:other-waters:gulf-carpentaria-413','type':'continental-water-22.224km','title':'Gulf of Carpentaria · Geoscience Australia feature 413','reason':'The full generalized national Geoscience Australia polygon identifies the Gulf of Carpentaria. The polygon is a cartographic attribution footprint (approximately 1:50M–1:5M), not a legal or navigation boundary. The displayed spans show only V2→V7 assignment changes within the full recomputed layer.','destination':'Oceania','review_reason':'named-basin-assigned-to-continent','ruleIds':ridset,'extent':copy.deepcopy(ref['extent']),'source_evidence':evidence,'assignment_method':'whole-source cartographic attribution'}
+   g={'id':'ga-topographic-base-map:other-waters:gulf-carpentaria-413','type':'continental-water-22.224km','title':'Gulf of Carpentaria · Geoscience Australia feature 413','reason':'The full generalized national Geoscience Australia polygon identifies the Gulf of Carpentaria. The polygon is a cartographic attribution footprint (approximately 1:50M–1:5M), not a legal or navigation boundary. The displayed spans show only V2→V7 assignment changes within the full recomputed layer.','destination':code_name[6],'review_reason':'named-basin-assigned-to-continent','ruleIds':ridset,'extent':copy.deepcopy(ref['extent']),'source_evidence':evidence,'assignment_method':'whole-source cartographic attribution'}
    put_group(g,mid,m);continue
   # The ocean source/target deltas are generic consequences of a fresh global seeded partition.
   if mid.startswith('ocean-repartition-v2-'):
-   source=sorted(x['sources']);target=int(x['target']);labels=[f'V2 prior water code {c}: {CODE_NAME[c]}' for c in source]
-   name=f"{' / '.join(labels)} → {CODE_NAME[target]} (full ocean repartition)"
+   source=sorted(x['sources']);target=int(x['target']);labels=[f'V2 prior water code {c}: {code_name[c]}' for c in source]
+   name=f"{' / '.join(labels)} → {code_name[target]} (full ocean repartition)"
    m.update({'name':name,'physical_class':'water','source_assignment_codes':source,'target_ocean_code':target,'source_coordinates':ocean_coords,'boundary_method':'fresh-ocean-seed-floodfill-v1','source_evidence':ocean_evidence})
    m.pop('continent_id',None);m.pop('display_item_id',None)
    evidence=ocean_evidence
    for rr in ridset:add_rule(rr,'Fresh four-ocean seed-floodfill partition with source-defined barriers','ocean-partition',evidence,detail='Generic V2-to-V7 source/target attribution only; changed cells are not attributed to one individual arc.')
-   g={'id':mid,'type':'ocean-boundary-correction','title':name,'reason':'The ocean classes were rebuilt from physical marine water using four verified ocean seeds and a complete source-defined boundary network. This is a generic V2-to-V7 source/target assignment ledger; the previous V2 ocean partition is not claimed to follow any one arc, so no changed cell is attributed to an individual boundary.','destination':CODE_NAME[target],'review_reason':'ocean-boundary-correction','ruleIds':ridset,'extent':copy.deepcopy(ref['extent']),'source_ocean_codes':source,'source_ocean_labels':labels,'target_ocean_code':target,'target_ocean_label':CODE_NAME[target],'source_coordinates':ocean_coords,'boundary_method':'fresh-ocean-seed-floodfill-v1','source_evidence':evidence}
+   g={'id':mid,'type':'ocean-boundary-correction','title':name,'reason':'The ocean classes were rebuilt from physical marine water using four verified ocean seeds and a complete source-defined boundary network. This is a generic V2-to-V7 source/target assignment ledger; the previous V2 ocean partition is not claimed to follow any one arc, so no changed cell is attributed to an individual boundary.','destination':code_name[target],'review_reason':'ocean-boundary-correction','ruleIds':ridset,'extent':copy.deepcopy(ref['extent']),'source_ocean_codes':source,'source_ocean_labels':labels,'target_ocean_code':target,'target_ocean_label':code_name[target],'source_coordinates':ocean_coords,'boundary_method':'fresh-ocean-seed-floodfill-v1','source_evidence':evidence}
    put_group(g,mid,m);continue
   # Fresh coastal distance band: one target class per member.
   if mid.startswith('coastal-water-nearest-final-land-category-'):
-   target=int(mid.rsplit('-',1)[1]);name=f'Coastal water assigned to {CODE_NAME[target]}';evidence=[{'name':'Pinned OSM-derived physical-water mask and final V6 land donor classes','uri':'urn:worldatlas:physical-mask:osm-physical-baseline-660ac760','sha256':PHYS},{'name':'Full fresh 22.224 km coastal-band assignment manifest','uri':'urn:worldatlas:source-file:audit/full-coastal-band-regen-20261103/global-full-coastal-water-assignments-20261103.json','sha256':sha(COAST)}]
+   target=int(mid.rsplit('-',1)[1]);name=f'Coastal water assigned to {code_name[target]}';evidence=[{'name':'Pinned OSM-derived physical-water mask and final V6 land donor classes','uri':'urn:worldatlas:physical-mask:osm-physical-baseline-660ac760','sha256':PHYS},{'name':'Full fresh 22.224 km coastal-band assignment manifest','uri':'urn:worldatlas:source-file:audit/full-coastal-band-regen-20261103/global-full-coastal-water-assignments-20261103.json','sha256':sha(COAST)}]
    rid='coastal-band-nearest-final-land-22.224km';add_rule(rid,'Fresh 22.224 km coastal band to nearest final land category','water-assignment',evidence,detail='All physical-water cells in the supported band were recomputed from final V6 land; no prior V6 water class was inherited.')
    m.update({'name':name,'physical_class':'water','continent_id':target,'display_item_id':f'{mid}@{target}','target_code':target})
-   g={'id':mid,'type':'continental-water-22.224km','title':'Fresh coastal water assignment · '+CODE_NAME[target],'reason':'All physical-water cells in the supported 22.224 km coastal band were freshly assigned to the nearest final V6 land category. The donor is final land geometry; old V6 water labels are ignored.','destination':CODE_NAME[target],'review_reason':'ordinary-nearshore-band','ruleIds':ridset or [rid],'extent':copy.deepcopy(ref['extent']),'source_evidence':evidence,'boundary_method':'spherical nearest-final-land distance, full coastal-band rebuild'}
+   g={'id':mid,'type':'continental-water-22.224km','title':'Fresh coastal water assignment · '+code_name[target],'reason':'All physical-water cells in the supported 22.224 km coastal band were freshly assigned to the nearest final V6 land category. The donor is final land geometry; old V6 water labels are ignored.','destination':code_name[target],'review_reason':'ordinary-nearshore-band','ruleIds':ridset or [rid],'extent':copy.deepcopy(ref['extent']),'source_evidence':evidence,'boundary_method':'spherical nearest-final-land distance, full coastal-band rebuild'}
    put_group(g,mid,m);continue
   # Unseeded, genuinely closed components: assigned to adjacent final shoreline policy.
   if mid.startswith('closed-water-pocket-'):
    target=int(mid.rsplit('-',1)[1]);is_nearest='-nearest-' in mid;rid=next(iter(ridset));evidence=[{'name':'Final-prefill closed-water component classification and independent interval QA','uri':'urn:worldatlas:source-file:audit/full-water-rebuild-20261103/closed-water-assignments-final-prefill-selfadj-classindex-progress-20261103T0815Z/','sha256':'99bf3b8eb755f09aabef94a43aa6ecb30285a42e3554fbed27c3ce0557fd638b'}]
    add_rule(rid,'Closed residual water pocket assignment against final continental shoreline','water-assignment',evidence,detail='Classifications apply only after full ocean flood fill; components isolated only by source barriers remain ocean-assigned.')
-   m.update({'name':f'Closed water pocket assigned to {CODE_NAME[target]}','physical_class':'water','continent_id':target,'display_item_id':f'{mid}@{target}','target_code':target})
-   g={'id':mid,'type':'enclosed-ocean-pocket','title':('Nearest final shore' if is_nearest else 'Direct final-shore adjacency')+' · '+CODE_NAME[target],'reason':('This closed residual physical-water component touched multiple final continental-water classes and was assigned per cell to the nearest final shoreline among its actual participants.' if is_nearest else 'This closed residual physical-water component had exactly one final continental-shore class on its boundary and was assigned directly to that continent. Components separated only by ocean source barriers are not reclassified as continental pockets.'),'destination':CODE_NAME[target],'review_reason':'enclosed-ocean-pocket-filled','ruleIds':ridset,'extent':copy.deepcopy(ref['extent']),'source_evidence':evidence}
+   m.update({'name':f'Closed water pocket assigned to {code_name[target]}','physical_class':'water','continent_id':target,'display_item_id':f'{mid}@{target}','target_code':target})
+   g={'id':mid,'type':'enclosed-ocean-pocket','title':('Nearest final shore' if is_nearest else 'Direct final-shore adjacency')+' · '+code_name[target],'reason':('This closed residual physical-water component touched multiple final continental-water classes and was assigned per cell to the nearest final shoreline among its actual participants.' if is_nearest else 'This closed residual physical-water component had exactly one final continental-shore class on its boundary and was assigned directly to that continent. Components separated only by ocean source barriers are not reclassified as continental pockets.'),'destination':code_name[target],'review_reason':'enclosed-ocean-pocket-filled','ruleIds':ridset,'extent':copy.deepcopy(ref['extent']),'source_evidence':evidence}
    put_group(g,mid,m);continue
   # All other current water members must have an existing source-backed definition.
   if not old:raise ValueError(f'Unclassified new water member {mid}')
@@ -219,27 +234,27 @@ def main():
  # Calculate exact legend counts directly from the immutable V2 and staged V7 RLE sources.
  legend={'schema_version':'worldatlas-legend-counts-v1','method':'exact-assignment-rle-run-width-sums','width':W,'height':H,'versions':{'v2':{'rows_sha256':sha(V2Y),'runs_sha256':sha(V2R),'counts':rle_counts(V2Y,V2R)},'v7':{'rows_sha256':sha(V7Y),'runs_sha256':sha(V7R),'counts':rle_counts(V7Y,V7R)}}}
  # Exact source/list inventory. Every current water member is represented exactly once.
- continent_items={cid:[] for cid,_ in CONT};ocean_items=[];water_members=[m for g in exceptions if g['type']!='island-convention' for m in g['members']]
+ continent_items={cid:[] for cid,_ in continents};ocean_items=[];water_members=[m for g in exceptions if g['type']!='island-convention' for m in g['members']]
  group_for={m['id']:g for g in exceptions for m in g['members']}
  if len(water_members)!=len([x for x in members.values() if x['target']<=10]):raise ValueError('water exception member inventory mismatch')
  display_spans=0;water_cells=0
  for m in water_members:
   mid=m['id'];x=members[mid];g=group_for[mid];target=int(x['target']);payload=x['payload'];span=m['span_file'];cells=int(m['changed_cells']);water_cells+=cells;display_spans+=len(payload['spans'])
   if g['type']=='ocean-boundary-correction':
-   src_codes=sorted(x['sources']);src_labels=[f'V2 prior water code {c}: {CODE_NAME[c]}' for c in src_codes];tgt=target
-   ocean_items.append({'id':f'{mid}@ocean','source_member_id':mid,'source_group_id':g['id'],'name':m['name'],'source_title':g['title'],'source_destination':g['destination'],'changed_cells':cells,'review_reason':'ocean-boundary-correction','source_ocean_codes':src_codes,'target_ocean_code':tgt,'source_ocean_labels':src_labels,'target_ocean_label':CODE_NAME[tgt],'source_ocean_code':src_codes[0] if len(src_codes)==1 else None,'source_ocean_label':' / '.join(src_labels),'source_assignment_codes':src_codes,'source_assignment_labels':src_labels,'source_assignment_label':' / '.join(src_labels),'source_coordinates':ocean_coords,'boundary_method':'fresh-ocean-seed-floodfill-v1','source_evidence':ocean_evidence,'justification':g['reason'],'span_file':copy.deepcopy(span)})
+   src_codes=sorted(x['sources']);src_labels=[f'V2 prior water code {c}: {code_name[c]}' for c in src_codes];tgt=target
+   ocean_items.append({'id':f'{mid}@ocean','source_member_id':mid,'source_group_id':g['id'],'name':m['name'],'source_title':g['title'],'source_destination':g['destination'],'changed_cells':cells,'review_reason':'ocean-boundary-correction','source_ocean_codes':src_codes,'target_ocean_code':tgt,'source_ocean_labels':src_labels,'target_ocean_label':code_name[tgt],'source_ocean_code':src_codes[0] if len(src_codes)==1 else None,'source_ocean_label':' / '.join(src_labels),'source_assignment_codes':src_codes,'source_assignment_labels':src_labels,'source_assignment_label':' / '.join(src_labels),'source_coordinates':ocean_coords,'boundary_method':'fresh-ocean-seed-floodfill-v1','source_evidence':ocean_evidence,'justification':g['reason'],'span_file':copy.deepcopy(span)})
   else:
    reason=('ordinary-nearshore-band' if g.get('review_reason')=='ordinary-nearshore-band' else 'enclosed-ocean-pocket-filled' if g['type']=='enclosed-ocean-pocket' else 'shared-basin-nearest-shore' if g.get('destination')=='nearest_revised_shoreline' else 'named-basin-assigned-to-continent')
-   item={'id':f'{mid}@{target}','source_member_id':mid,'source_group_id':g['id'],'name':m['name'],'source_title':g['title'],'source_destination':g['destination'],'continent_id':target,'continent':CODE_NAME[target],'changed_cells':cells,'review_reason':reason,'span_file':copy.deepcopy(span)}
+   item={'id':f'{mid}@{target}','source_member_id':mid,'source_group_id':g['id'],'name':m['name'],'source_title':g['title'],'source_destination':g['destination'],'continent_id':target,'continent':code_name[target],'changed_cells':cells,'review_reason':reason,'span_file':copy.deepcopy(span)}
    if g.get('source_evidence'):item['source_evidence']=g['source_evidence']
    if g.get('assignment_method'):item['assignment_method']=g['assignment_method']
    if g.get('boundary_method'):item['boundary_method']=g['boundary_method']
    continent_items[target].append(item)
  if water_cells!=sum(m['member']['changed_cells'] for m in members.values() if m['target']<=10):raise ValueError('water display cell count mismatch')
- pres={'schema_version':'worldatlas-water-presentation-v1','continents':[{'continent_id':cid,'continent':name,'items':sorted(continent_items[cid],key=lambda x:(x['name'].casefold(),x['source_member_id']))} for cid,name in CONT],'ocean_items':sorted(ocean_items,key=lambda x:(x['name'].casefold(),x['source_member_id'])),'validation':{'status':'passed','method':'exact-member-interval-union-and-actual-candidate-rle','method_detail':'All 136 water members are copied from the closed V2→V7 diff-member index; member span hashes, transition counts and total changed cells are checked. The full-grid compositor/5089-cell QA provide actual candidate-RLE verification.','source_members':len(water_members),'source_cells':water_cells,'displayed_cells':water_cells},'totals':{'source_members':len(water_members),'display_items':len(water_members),'source_cells':water_cells,'display_cells':water_cells,'spans':display_spans},'source':{'candidate_version_key':'v7','candidate_runs_sha256':sha(V7R),'physical_mask_sha256':PHYS,'exception_index_sha256':sha_bytes(canonical(exceptions))}}
+ pres={'schema_version':'worldatlas-water-presentation-v1','continents':[{'continent_id':cid,'continent':name,'items':sorted(continent_items[cid],key=lambda x:(x['name'].casefold(),x['source_member_id']))} for cid,name in continents],'ocean_items':sorted(ocean_items,key=lambda x:(x['name'].casefold(),x['source_member_id'])),'validation':{'status':'passed','method':'exact-member-interval-union-and-actual-candidate-rle','method_detail':'All 136 water members are copied from the closed V2→V7 diff-member index; member span hashes, transition counts and total changed cells are checked. The full-grid compositor/5089-cell QA provide actual candidate-RLE verification.','source_members':len(water_members),'source_cells':water_cells,'displayed_cells':water_cells},'totals':{'source_members':len(water_members),'display_items':len(water_members),'source_cells':water_cells,'display_cells':water_cells,'spans':display_spans},'source':{'candidate_version_key':'v7','candidate_runs_sha256':sha(V7R),'physical_mask_sha256':PHYS,'exception_index_sha256':sha_bytes(canonical(exceptions))}}
  # Generate full accounting proof from final closed raw grid + exact attribution.
  physloc=oldp['physical_mask']['local_grid'];physacct=read(OLD/'accounting.json')['physical_mask']
- account={'schema_version':'worldatlas-review-accounting-v1','status':'passed','created_by':'worldatlas-v7-full-water-rebuild-composer','width':W,'height':H,'changed_cells':idx['changed_cells'],'attributed_cells':sum(m['changed_cells'] for g in exceptions for m in g['members']),'exception_groups':len(exceptions),'exception_members':sum(len(g['members']) for g in exceptions),'exception_index_sha256':sha_bytes(canonical(exceptions)),'semantics_sha256':sha_bytes(canonical({'width':W,'height':H,'categories':proposal['categories'],'rule_records':rule_records,'physical_mask':{'id':proposal['physical_mask']['id'],'mask_sha256':PHYS,'land_values':proposal['physical_mask']['land_values'],'water_values':proposal['physical_mask']['water_values']}})),'physical_mask_sha256':PHYS,'physical_mask_invariance':'passed','physical_mask_invariance_method':'Full-water composer used physical code-1 eligibility, preserved final V6 land classes 17–22 and asserted physical mask unchanged; V2→V7 diff membership sums exactly to the full-grid diff count.','physical_mask':physacct,'versions':{'v2':{'rows_sha256':sha(V2Y),'runs_sha256':sha(V2R)},'v7':{'rows_sha256':sha(V7Y),'runs_sha256':sha(V7R)}}}
+ account={'schema_version':'worldatlas-review-accounting-v1','status':'passed','created_by':'worldatlas-v7-full-water-rebuild-composer','width':W,'height':H,'changed_cells':idx['changed_cells'],'attributed_cells':sum(m['changed_cells'] for g in exceptions for m in g['members']),'exception_groups':len(exceptions),'exception_members':sum(len(g['members']) for g in exceptions),'exception_index_sha256':sha_bytes(canonical(exceptions)),'semantics_sha256':sha_bytes(canonical({'width':W,'height':H,'categories':proposal['categories'],'entity_registry':proposal['entity_registry'],'rule_records':rule_records,'physical_mask':{'id':proposal['physical_mask']['id'],'mask_sha256':PHYS,'land_values':proposal['physical_mask']['land_values'],'water_values':proposal['physical_mask']['water_values']}})),'physical_mask_sha256':PHYS,'physical_mask_invariance':'passed','physical_mask_invariance_method':'Full-water composer used physical code-1 eligibility, preserved final V6 land classes 17–22 and asserted physical mask unchanged; V2→V7 diff membership sums exactly to the full-grid diff count.','physical_mask':physacct,'versions':{'v2':{'rows_sha256':sha(V2Y),'runs_sha256':sha(V2R)},'v7':{'rows_sha256':sha(V7Y),'runs_sha256':sha(V7R)}}}
  if account['changed_cells']!=account['attributed_cells']:raise ValueError('attribution accounting mismatch')
  proposal['accounting']={'url':'accounting.json','sha256':sha_bytes((json.dumps(account,ensure_ascii=False,indent=2)+'\n').encode())}
  # The UI resolves the accounting reference against its own folder.
@@ -264,12 +279,15 @@ def main():
  if oldleaf not in refs:raise ValueError('unable to extend List 2 refs with source evidence')
  refs=refs.replace(oldleaf,newleaf)
  # ocean reference justification uses explicit generic method description already present on the presentation leaf.
+ app,refs=wire_registry_ui(app,refs)
+ for name in ('entity-registry.js','v7-entity-adapter.js','legend-model.js'):
+  copy_raw(HERE.parent/'web'/name,ui/name)
  write_bytes(ui/'app.js',app.encode());write_bytes(ui/'review-references.js',refs.encode())
  app_hash=sha_bytes(app.encode());html=html.replace('data-data-base="../osm-v7-ocean-boundaries-preview-data-20261103/"','data-data-base="../data/"').replace('../osm-v7-ocean-boundaries-preview-data-20261103/INPUT_SCHEMA.md','../data/INPUT_SCHEMA.md').replace('../osm-v7-ocean-boundaries-preview-data-20261103/sources.json','../data/sources.json').replace('V7 ocean-boundaries','V7 full-water').replace('V7 · reviewed','V7 · full water rebuild').replace('V7 ocean-boundary and Cenderawasih Bay update','V7 full water reassignment').replace('V7 assignments','V7 full water assignments').replace('List 2 · continental water beyond 22.224 km','List 2 · continental and ocean water')
  html=re.sub(r'<script type="module" src="[^"]+"></script>',f'<script type="module" src="./app.js?v={app_hash}"></script>',html)
  write_bytes(ui/'index.html',html.encode())
  # JS generator produces canonical compact reason buckets and the separate Ocean boundaries subsection.
- node_script=f"import fs from 'node:fs';const s=fs.readFileSync({json.dumps(str(ui/'review-references.js'))},'utf8');const m=await import('data:text/javascript;base64,'+Buffer.from(s).toString('base64'));const meta=JSON.parse(fs.readFileSync({json.dumps(str(ui/'proposal.json'))}));const pres=JSON.parse(fs.readFileSync({json.dumps(str(ui/'water-presentation.json'))}));const refs=m.buildReferenceIndex(meta,pres,pres.source);console.log(JSON.stringify(refs));"
+ node_script=f"import fs from 'node:fs';const m=await import({json.dumps((ui/'review-references.js').resolve().as_uri())});const meta=JSON.parse(fs.readFileSync({json.dumps(str(ui/'proposal.json'))}));const pres=JSON.parse(fs.readFileSync({json.dumps(str(ui/'water-presentation.json'))}));const refs=m.buildReferenceIndex(meta,pres,pres.source);console.log(JSON.stringify(refs));"
  proc=subprocess.run(['node','--input-type=module','-e',node_script],check=True,capture_output=True,text=True)
  write_bytes(ui/'review-references.json',(proc.stdout.strip()+'\n').encode())
  # A simple UI-local input schema and sources inventory.
@@ -300,5 +318,4 @@ def main():
  print(json.dumps({'stage':str(stage),'manifest_sha256':sha(stage/'manifest.json'),'summary':composition_summary,'file_count':len(all_files),'exception_sha256':manifest['exception_index_sha256'],'accounting_sha256':manifest['accounting_sha256'],'refs':{'lists':len(refs_out['lists']),'list2_continents':len(refs_out['lists'][1]['continents']),'ocean_items':len(refs_out['lists'][1].get('ocean_boundaries',{}).get('items',[]))}},indent=2))
 
 if __name__=='__main__':
- import subprocess
  main()
