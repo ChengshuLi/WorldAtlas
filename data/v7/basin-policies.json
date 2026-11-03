@@ -1,0 +1,1069 @@
+{
+  "schema": "worldatlas-v7-basin-policy-v1",
+  "status": "incomplete-rebuild-decisions",
+  "provenance": {
+    "historical_inventory_sha256": "0c81fa450db730f9c9f882c70b223ff34e2ddb26a93afbcbce77424b3fbe696d",
+    "historical_inventory_scope": "91 SeaVoX decisions recorded for the V7 candidate. Source geometry hashes are leads, not a verified complete source package.",
+    "amendment": "SeaVoX 24063 selected for Gulf of Carpentaria; the older alternative is not an active source."
+  },
+  "named_basins": [
+    {
+      "source_id": "24017",
+      "source_name": "HUDSON STRAIT",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "c54f10f82d230c0a8c33621f4dfcaf2aab2fecaa064a7602402fdacd499732f7"
+      ]
+    },
+    {
+      "source_id": "24018",
+      "source_name": "HUDSON BAY",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "0649798967d0ea552bb7b9eb03563667e551aeebc700a46a345931282096deb1"
+      ]
+    },
+    {
+      "source_id": "24019",
+      "source_name": "DAVIS STRAIT",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "f87710c496fbaeeebb2e41cddd0e77de84cbd9a64f451d626bd24a9bac2f1166"
+      ]
+    },
+    {
+      "source_id": "24020",
+      "source_name": "WHITE SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "81c6189eff42daf95367387ea3192adb2dee3ac68ac1002ea1006366381630a2"
+      ]
+    },
+    {
+      "source_id": "24022",
+      "source_name": "CHUKCHI SEA — Asia nearest shore",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "cff5bb54c64d5d1a420feede39edf600c1f669658e6e9fe2d1aa3c340f4c3764"
+      ]
+    },
+    {
+      "source_id": "24028",
+      "source_name": "NORTHWESTERN PASSAGES",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "3993bc64a18dc47ac7827662463dbb0c1269d42278079407492765615ec5c18d"
+      ]
+    },
+    {
+      "source_id": "24030",
+      "source_name": "BAFFIN BAY",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "a7247d4c7c9f03fdfe8e43a601d90e6966b6a15cb33f2e4616e03aa2034a09b1"
+      ]
+    },
+    {
+      "source_id": "24038",
+      "source_name": "RIO DE LA PLATA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        5
+      ],
+      "known_source_geometry_sha256": [
+        "60814be9b15488b10fef2387e0686f8140affa933f18be5e5f6b4c123737a9e1"
+      ]
+    },
+    {
+      "source_id": "24042",
+      "source_name": "CARIBBEAN SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        4,
+        5
+      ],
+      "known_source_geometry_sha256": [
+        "1b2f1c6b19ecbe13ecd2c713c782524af900ce93e859fe60cfcfdea12c679ca5"
+      ]
+    },
+    {
+      "source_id": "24043",
+      "source_name": "STRAITS OF FLORIDA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "f310ed55c12cdaaa604ced7a3edbe21db0fc726dc2c1c72d5d472e1bdba3c3bd"
+      ]
+    },
+    {
+      "source_id": "24044",
+      "source_name": "GULF OF MEXICO",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "2af89d46f129b2c37071cb7de6be7e9095b17f7eb6eea65cfa44193b0e1db3c9"
+      ]
+    },
+    {
+      "source_id": "24045",
+      "source_name": "BAY OF FUNDY",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "1f401bddff75b633d054f7f62a09b0547eb05ff0560bd05c4009bb30b8aa10ac"
+      ]
+    },
+    {
+      "source_id": "24048",
+      "source_name": "GULF OF ST. LAWRENCE",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "f14b159c8ee6022d6a9720fc4f24ede23503e57d449d0cc58cdba736d84f92ed"
+      ]
+    },
+    {
+      "source_id": "24049",
+      "source_name": "SKAGERRAK",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "4bf3628b3f989e270778c7e1668862aceace22fe3dd2080100da95aae8b62a50"
+      ]
+    },
+    {
+      "source_id": "24051",
+      "source_name": "BOTHNIAN SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "999e56a781ca3a20b0272f000c10ce925a33a84613b61ffa95c439122e6bdf7e"
+      ]
+    },
+    {
+      "source_id": "24052",
+      "source_name": "GULF OF FINLAND",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "6d0e148f08334831a575c0d8d3446f4d6e9fe9197a71622b7878c80a861d7b44"
+      ]
+    },
+    {
+      "source_id": "24053",
+      "source_name": "CENTRAL BALTIC SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "5ff7589994e80c122c0164943ee31eb44bf4396e7413b133fa7b79c0a81d1efc"
+      ]
+    },
+    {
+      "source_id": "24054",
+      "source_name": "GULF OF RIGA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "2f4ffa2c3f5cf1ff14d0457ab32f7cf16ce31fef8cc34132464381e5dbe3dbac"
+      ]
+    },
+    {
+      "source_id": "24055",
+      "source_name": "KATTEGAT",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "7e7f39cfd203140dfd84defb912e8507e31744c7279d143fcf7f178015ff3305"
+      ]
+    },
+    {
+      "source_id": "24060",
+      "source_name": "BAY OF BOTHNIA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "b19a00e24ec60b2aa08b2a9cb8a2c6f752fffa5def95cdc746f80888f52f692c"
+      ]
+    },
+    {
+      "source_id": "24064",
+      "source_name": "MOZAMBIQUE CHANNEL",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        1
+      ],
+      "known_source_geometry_sha256": [
+        "59fe703ef106f3430750d38a48b1e9f12cff239347f04079b9b3588cd7672d4b"
+      ]
+    },
+    {
+      "source_id": "24065",
+      "source_name": "ARAFURA SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "ada44ae245193e3fe3ebc6263933703f6dfc31a761d330b94962f2932d91eea3"
+      ]
+    },
+    {
+      "source_id": "24066",
+      "source_name": "TIMOR SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "57f9c8f34b808afe032603d3bd0335bc8ee578a386bf3c32c2ace01e8e46a3c1"
+      ]
+    },
+    {
+      "source_id": "24068",
+      "source_name": "PALK STRAIT AND PALK BAY",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "8060eb5c1456524d2e73a661f92429b42bccfa8ed1003187bc452219173db8b5"
+      ]
+    },
+    {
+      "source_id": "24071",
+      "source_name": "GULF OF ADEN",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        1,
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "6117ae509c405855a210bae1a2fd3f6bfcfdad7933ffb1c5ecc8af729f346bba"
+      ]
+    },
+    {
+      "source_id": "24072",
+      "source_name": "ANDAMAN SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "ae376f0392c594cff86d4b6e4e316590f44674e4f812c4a01840d5894f2965b2"
+      ]
+    },
+    {
+      "source_id": "24075",
+      "source_name": "GULF OF OMAN",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "ce4a049e1c2d3e2e1b5c9a7ae859ad8f6b16250d18673f5654296dca627a7813"
+      ]
+    },
+    {
+      "source_id": "24077",
+      "source_name": "RED SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        1,
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "017cd5edb2c9908efe0bfd1a418dac16d9bceecb66fe1cdf40f8a39c5b3bed08"
+      ]
+    },
+    {
+      "source_id": "24080",
+      "source_name": "PERSIAN GULF",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "f5547a58ecbbe4e5ea222c36c2edd16e03d482cc65059f714d3a63cc4230cb1a"
+      ]
+    },
+    {
+      "source_id": "24082",
+      "source_name": "ALBORAN SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        1,
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "cdb3a3dfcb81f4ac6bae368b1e1e21ff066d02eac4ec0940f16b695dae0d5523"
+      ]
+    },
+    {
+      "source_id": "24083",
+      "source_name": "MEDITERRANEAN SEA, EASTERN BASIN",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        1,
+        2,
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "40de0b17a4b888051fa8d0d63da8d1fd2ff35cf3364a5c5039055823c4248b0e"
+      ]
+    },
+    {
+      "source_id": "24084",
+      "source_name": "STRAIT OF SICILY",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        1,
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "da69a56b1526e7a095146a928f7467791e5b8f337729b98afaeca9bf3e2ca674"
+      ]
+    },
+    {
+      "source_id": "24085",
+      "source_name": "IONIAN SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "65a70d8a6d194ccc49a78843d932c235ed59b0d7d283c63662a7b136ef8b79c6"
+      ]
+    },
+    {
+      "source_id": "24086",
+      "source_name": "AEGEAN SEA → Asia",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "e3a602530a9faed9228c1ca8cb9b0fd591eb2e6abb0f0301130b57c63220ba3e"
+      ]
+    },
+    {
+      "source_id": "24087",
+      "source_name": "SEA OF MARMARA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "8ddebffe9e7eb17f58c4a094e31b54134de5cd354867d9b2509647b2351dcdb7"
+      ]
+    },
+    {
+      "source_id": "24088",
+      "source_name": "BALEARIC SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "76d2112db773f7637daad9b8629ffa7e6aefd34a2697a96624bf04300a07c04e"
+      ]
+    },
+    {
+      "source_id": "24089",
+      "source_name": "TYRRHENIAN SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        1,
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "3c10805b3807260bc0a66241fff7d4ea633e2b7e96872f0dd25c0ef743a6c33a"
+      ]
+    },
+    {
+      "source_id": "24090",
+      "source_name": "MEDITERRANEAN SEA, WESTERN BASIN",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        1,
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "0ec8ee49e90a24830b868a4d145d508879fe616b23cbada0b82889eb2b87afae"
+      ]
+    },
+    {
+      "source_id": "24091",
+      "source_name": "LIGURIAN SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "70fc0804c60e222ffd5787c44982829b08ff59e941fe4370d2c1cf9e5a1c4319"
+      ]
+    },
+    {
+      "source_id": "24092",
+      "source_name": "ADRIATIC SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "3b95b322cac885b50745c377c0c2a2e1cdd875dec62f7a14c1b79d707e4582e0"
+      ]
+    },
+    {
+      "source_id": "24093",
+      "source_name": "BLACK SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "ef48dfab671ce45d29633211b964196cf457666fb22d867245774886ee5702e7"
+      ]
+    },
+    {
+      "source_id": "24094",
+      "source_name": "SEA OF AZOV",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "5c1c03265490bea41ecbb1aebf94d0d6187ab8c432b62d242f6a1791b65725d0"
+      ]
+    },
+    {
+      "source_id": "24095",
+      "source_name": "BASS STRAIT",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "9aec4d928defc58bff0b3b3a2ff34401d21ebf72898b5acc050876d07cf12091"
+      ]
+    },
+    {
+      "source_id": "24097",
+      "source_name": "CORAL SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "fddc0af75cb9b9f605b28f4a8bde7c8b9fdcefe88e76c6e270b5513da241439d"
+      ]
+    },
+    {
+      "source_id": "24098",
+      "source_name": "TORRES STRAIT",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "696bbd82038e2a0e5baf183b997b00c762e8ccc0d9656e4f7b768f9298ba02d4"
+      ]
+    },
+    {
+      "source_id": "24099",
+      "source_name": "GULF OF PAPUA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "d2e8eee474062b6834914761ac3841159bf723c962dcf54dbbd3d7abb91f755d"
+      ]
+    },
+    {
+      "source_id": "24100",
+      "source_name": "SOLOMON SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "34bdf22b7a84801fe56e33adff8c74d2328b37e7c5c86c465516ed2042821a48"
+      ]
+    },
+    {
+      "source_id": "24101",
+      "source_name": "BISMARCK SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "b00402df02b460dfc375f90a79d417a71371a12586f598958ce005d737d61fb1"
+      ]
+    },
+    {
+      "source_id": "24104",
+      "source_name": "GULF OF PANAMA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "ddfd40a0018c5f1bef46ebd9eef7b92f27ef1c7f9846d6db594fcf0174f74dd3"
+      ]
+    },
+    {
+      "source_id": "24105",
+      "source_name": "TAI-WAN STRAIT",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "575874cc5d3c0e50bdd8f4e910400e31d2bec03306f40a155632f1c4551c8c4f"
+      ]
+    },
+    {
+      "source_id": "24106",
+      "source_name": "GULF OF CALIFORNIA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "12568e1e51225a4994614d2d1c6428034ce7418181d639bbae0dae2eb4c046f7"
+      ]
+    },
+    {
+      "source_id": "24107",
+      "source_name": "EAST CHINA SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "bd9a72216044b4398abfba54fc47735adc957aafa872772cfe32f2210fb019f5"
+      ]
+    },
+    {
+      "source_id": "24110",
+      "source_name": "YELLOW SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "d09f63ee5bc130429b15639ccbc5f462b10087d286d31356e849432ed9d39ed7"
+      ]
+    },
+    {
+      "source_id": "24111",
+      "source_name": "BO HAI",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "d436f21132dfdf71b162d68a7c838fbd20d72f323c3898b3bfb4a3891f6e18cc"
+      ]
+    },
+    {
+      "source_id": "24112",
+      "source_name": "LIAODONG WAN",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "368f48bf36663398f51d2a0303faef728d9d9c5283c59090a24b6fc4c07e006e"
+      ]
+    },
+    {
+      "source_id": "24113",
+      "source_name": "JAPAN SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "aa576bd41b1ea606192ac02c6dbf19ff7b8c024d53527e08e74d0c0b3db78472"
+      ]
+    },
+    {
+      "source_id": "24114",
+      "source_name": "TATARSKIY PROLIV",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "27618d2a7a721d719b691b11774cab1c3b52eab76658bdffb02449e1e1df82fb"
+      ]
+    },
+    {
+      "source_id": "24119",
+      "source_name": "BERING SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "b3eae942f05c1a2489cd1d4de77855841c2d7a679e5fdc9b3ae499fd22bfe17c"
+      ]
+    },
+    {
+      "source_id": "24120",
+      "source_name": "SEA OF OKHOTSK",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "1014c902ed491823daba8f30a85d625f784f7dac2d95b1e7dfbc2cf9c896bc9e"
+      ]
+    },
+    {
+      "source_id": "24121",
+      "source_name": "ANADYRSKIY ZALIV",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "079802a42daf450972e9019f1185d40dee2de7b6e60aed3667d497ee50a0341d"
+      ]
+    },
+    {
+      "source_id": "24122",
+      "source_name": "BERING STRAIT — Asia portion",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        4
+      ],
+      "known_source_geometry_sha256": [
+        "37f68a251d468e0080576928a76a4b097226a6de98576de415cf0ea7bda9e6c7"
+      ]
+    },
+    {
+      "source_id": "24123",
+      "source_name": "SELAT SUMBA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "7a4dd6be2870337e84a6a65c37bb51345313d0b415342530d33fe517fe90fdd4"
+      ]
+    },
+    {
+      "source_id": "24124",
+      "source_name": "SAWU SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "7036a181da2d09b08ee8a0b558c65738978c3b198c1bd25ab5cb88aa18b25240"
+      ]
+    },
+    {
+      "source_id": "24125",
+      "source_name": "BALI SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "0b0d3723f06add13ed677931ebb77aff4a5b208883170dc0f9e568154fe75fdb"
+      ]
+    },
+    {
+      "source_id": "24126",
+      "source_name": "FLORES SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "9c75343b3d04c3d7c4203b8fb8cbfd4684d377b6958d016d60cc92a3da571986"
+      ]
+    },
+    {
+      "source_id": "24127",
+      "source_name": "SELAT SUNDA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "b5ab9de94e34c980497fd581f130caf6edf2141a807194c7e7a70cd72b101466"
+      ]
+    },
+    {
+      "source_id": "24128",
+      "source_name": "ARU SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "8b7eae0797f3636eeacbbfdae6cb52bd98e5e703450003deb9d6d85244fbadb2"
+      ]
+    },
+    {
+      "source_id": "24129",
+      "source_name": "TELUK BONE",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "6806e5b561211cb5d32c9c567516defc5a8b51b8e495dbbde34d47a501b0d129"
+      ]
+    },
+    {
+      "source_id": "24130",
+      "source_name": "JAWA SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "d7a1c251f37a0d9cfa1d6f60f4296af646d9ff0e0f4dbdb28bc0f9c220df4d55"
+      ]
+    },
+    {
+      "source_id": "24132",
+      "source_name": "CERAM SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "504ecfc71d2bb054309a2fc7f8aebe64450a922b5a981785c135bcc31c513c6d"
+      ]
+    },
+    {
+      "source_id": "24133",
+      "source_name": "BANDA SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "6edcc6bf2b5670fb2322ab55b6d590fbae2b65f7031d66ac17f5e616b96c8dc0"
+      ]
+    },
+    {
+      "source_id": "24134",
+      "source_name": "TELUK TOMINI",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "a156b2b103f1df787de53d72b3e3f935a0407466475874f202f57fcbdb73f472"
+      ]
+    },
+    {
+      "source_id": "24135",
+      "source_name": "SELAT MAKASAR",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "bf0914d8e09a5ea392833bfa97b1e963e25da73fcbafc67aae8f2fb54cfcb086"
+      ]
+    },
+    {
+      "source_id": "24136",
+      "source_name": "HALMAHERA SEA",
+      "assignment_policy": "shared_nearest_assigned_shore",
+      "participant_water_codes": [
+        2,
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "3565933947426a3771a600b5fdf320968d873439fdf8744505696949b4661cc0"
+      ]
+    },
+    {
+      "source_id": "24137",
+      "source_name": "MOLUCCA SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "ba1a1d4ae6448292f610a403e2ec42a7cdc64d9642edc852f9e87e3ca25dbef6"
+      ]
+    },
+    {
+      "source_id": "24138",
+      "source_name": "NATUNA SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "7e38693bb3a92807c61aba6bf4b80b6460f1fc4f472f6299f4a72a8114431df0"
+      ]
+    },
+    {
+      "source_id": "24139",
+      "source_name": "CELEBES SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "d8ab6e034a1ee8cd033ad9b147021f4444bdcfbbf5f024c8184a52a5eec14351"
+      ]
+    },
+    {
+      "source_id": "24140",
+      "source_name": "MALACCA STRAIT",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "d50f8cb8ab3836117a290a3e67fdcab57b72a0a7a94f41357c8905ff70ab0026"
+      ]
+    },
+    {
+      "source_id": "24141",
+      "source_name": "SULU SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "6ca9c9733346898fcaa8a66bbb42990f911217eee8338ef64e7bd723fc95c26d"
+      ]
+    },
+    {
+      "source_id": "24142",
+      "source_name": "GULF OF THAILAND",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "47e73f3351bfb91afe7c2f042da7634a085ae6d5d2275861a769140951723c50"
+      ]
+    },
+    {
+      "source_id": "24143",
+      "source_name": "GULF OF TONKIN",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "b403989bd03b705940580e124adcc9bde56ab44978d06570c8b3a2e7d503e9b2"
+      ]
+    },
+    {
+      "source_id": "24144",
+      "source_name": "SOUTH CHINA AND EASTERN ARCHIPELAGIC SEAS",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        2
+      ],
+      "known_source_geometry_sha256": [
+        "848c2901cd6b5a3ae47417946117bfc9609114e5c57bb1b40a4d3622a0e1deba"
+      ]
+    },
+    {
+      "source_id": "24164",
+      "source_name": "GREAT BARRIER REEF (COASTAL WATERS)",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "ff7bf40e3ab0c8d3c21fe78c086d033cd9b6edf02805ac6b76b7009655a6f872"
+      ]
+    },
+    {
+      "source_id": "24177",
+      "source_name": "NORTH SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "feafeb8ecff76e5afe19424b51b80ec30ae3817b37a0ab9b0d2972181c91d8ab"
+      ]
+    },
+    {
+      "source_id": "24196",
+      "source_name": "DOVER STRAIT",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "46c86295757ec3a8d6a2862f05e5798d6f5f19a44c8489479eae2dc7687d9224"
+      ]
+    },
+    {
+      "source_id": "24199",
+      "source_name": "ENGLISH CHANNEL",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "aff8b94b662ca5b10b00867fd8d756ea02f87b0ddc17e03f46161d170edcd1bf"
+      ]
+    },
+    {
+      "source_id": "24205",
+      "source_name": "LYME BAY",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "39a239834961138e7edf46ba055ed0c748ff9d7bacd174e0c7feb297e5d69403"
+      ]
+    },
+    {
+      "source_id": "24212",
+      "source_name": "IRISH SEA",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "b87aa992e951f6436b29729699be1a434a7dd985723b687dcdd1598f61553a59"
+      ]
+    },
+    {
+      "source_id": "24213",
+      "source_name": "CARDIGAN BAY",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "e6f14ffd9e8a39b705db68fed9927193411687b0c68f34a611f1149a23910dbc"
+      ]
+    },
+    {
+      "source_id": "24223",
+      "source_name": "LIVERPOOL BAY",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "13ebd5e438bb313e8b1692d482452105fb6670e18f879afea45e8affb146d244"
+      ]
+    },
+    {
+      "source_id": "24228",
+      "source_name": "SOLWAY FIRTH",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        3
+      ],
+      "known_source_geometry_sha256": [
+        "8a9b1270172cc02213b4b648469b4ac0c4212f49d0644dbdc9190df4726cec06"
+      ]
+    },
+    {
+      "source_id": "24063",
+      "source_name": "Gulf of Carpentaria",
+      "assignment_policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "known_source_geometry_sha256": [
+        "b89a7db7c67ca4e6ab7194cb9e734e7c30ab313956983d9f4bccea9495c62ddd"
+      ],
+      "status": "candidate geometry checked; full rebuild not yet performed",
+      "source_dataset": "BODC/VLIZ SeaVoX v19 (2023), CC BY 4.0",
+      "source_doi": "https://doi.org/10.14284/590",
+      "source_url": "https://geo.vliz.be/geoserver/MarineRegions/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=MarineRegions%3Aseavox_v19&outputFormat=application%2Fjson&CQL_FILTER=mrgid_sr%3D24063",
+      "raw_source_file_sha256": "75f1170a597e32051145541c894c8b2d829d2aa6ce416602e875755401aafd83",
+      "candidate_physical_water_mask_sha256": "bd6a8cb0af3c5777a1ba9b4f80229c67e50b82a2bf164cee31a0e384c7b3e652",
+      "candidate_mask_water_cells": 3582499,
+      "measured_named_basin_overlap_cells": 0,
+      "candidate_assignment_sha256": "cea9870a696168836e0bba5f4e0f0ba47d1a3113921bce5127320ccf3ce96306"
+    }
+  ],
+  "custom_basins": [
+    {
+      "source_id": "teluk-cenderawasih-water-to-oceania-v2",
+      "name": "Cenderawasih Bay",
+      "policy": "single_continent_named_basin",
+      "participant_water_codes": [
+        6
+      ],
+      "historical_geometry_sha256": "3d0ab7262d561cbaf150aa3800a5dd3b722f6b9464ac8f29817a8265edb7ec1b",
+      "status": "historical candidate; source and derivation require independent verification"
+    }
+  ],
+  "unresolved": [
+    "Independently reproduce the SeaVoX 24063 mask, its zero named-basin overlap, and the complete class-grid comparison before accepting a rebuild.",
+    "Preserve and verify full source geometry and derived Cenderawasih closure.",
+    "Reconstruct physical and final-land grids from original sources and reviewed decisions."
+  ]
+}

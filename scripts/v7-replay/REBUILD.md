@@ -1,0 +1,20 @@
+# Rebuilding the V7 candidate
+
+The target is the historical V7 land/water partition with SeaVoX v19 feature 24063 as the Gulf of Carpentaria source. This checkout is **not yet a complete raw-source rebuild**. Do not publish a result or claim exact reproduction until the gaps below are closed and the full comparison passes.
+
+## Recovered pieces
+
+- `data/v7/basin-policies.json` records the 91 historical SeaVoX participant decisions and the selected Gulf source, plus Cenderawasih. It is a review aid, not a complete source manifest. The Gulf mask and zero-overlap measurements must be independently reproduced.
+- `build_prefill.py --plan PLAN --input-root INPUTS --out NEW_DIR` is a portable candidate for the coast and named-basin prefill stage. It verifies RLE, manifest and tile hashes, creates a new output outside the inputs, assigns only supported codes 1–6 to water, leaves residual water 0, and copies land codes 17–22 from the reviewed land grid. Its small synthetic test does not establish historical equivalence.
+- `compose_full_water_grid.py` composes separately generated coastal, basin, ocean and closed-water layers over the physical and reviewed land grids. It is a replay candidate and its plan refers to historic intermediate grids. See `README.md` in this directory.
+- `web/v7/` contains the preserved staged V7 candidate UI source, pinned by the focused test against its runtime-QA record. The builder uses it directly rather than a missing temporary UI directory. The V6 `local-grid.js` and `review-model.js` imported by that source still point to hosted modules; the checked-in candidates have not been compared byte-for-byte with those hosted modules. The builder also requires separately preserved proposal, accounting, grid and attribution data. It still uses the historical Gulf attribution and fails closed unless `WORLDATLAS_HISTORICAL_V7_REPLAY=1` is explicitly set for historical replay; it cannot produce the selected SeaVoX-attributed bundle yet. No live equivalence is asserted.
+
+## Required work before a clean rebuild
+
+1. Recover and authenticate original physical geography inputs, the exact source versions and software environment, and all reviewed decisions needed to regenerate the physical mask and final V6 land labels. Coastal v2 and v3 source variants are still missing. Replacing them requires an independently validated equivalent.
+2. Generate full-source masks for all selected named basins at cell centers, including the Cenderawasih closure, and verify the complete overlap policy. Reproduce the SeaVoX Gulf source and its mask from the URL and hashes in the policy file. The selected Gulf has no measured overlap with other named-basin masks. A fresh full-grid build and attribution comparison remain necessary.
+3. Port and verify the source-barrier generator, named-basin orchestration, land-provenance extraction, ocean-output adapter, and V2-difference indexer. Some recovered candidates hard-code workspace paths or write at import time and must not be run unchanged. Pin every source, rule, generated layer, and dependency before execution.
+4. Run in a fresh isolated directory; verify input hashes, source attribution, global coverage, physical-mask and land-label invariance, conflicts, connectivity, and row/run validity. Compare scientific output against the retained historical V7 grid and separately account for the selected Gulf source and attribution. The old V7 hashes are a historical baseline, not proof of the amended result.
+5. Verify UI paths, checksums, accounting, interaction and browser behavior on the completed bundle. The saved V7 runtime QA was static-only; browser testing was blocked and no publication occurred.
+
+`requirements-candidate.txt` pins NumPy and SciPy versions used for the focused synthetic tests, not a proven production environment. Those tests used Python 3.12.14; the available GDAL was 3.10.3 and Node was 24.22.1. Other upstream geospatial dependencies and historical versions remain unverified. Store large sources and outputs in versioned external storage, with hashes and source licenses; keep executable code and compact reviewed decisions in Git.

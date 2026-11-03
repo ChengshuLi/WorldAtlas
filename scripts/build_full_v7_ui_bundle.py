@@ -62,6 +62,10 @@ def rle_counts(rows_path,runs_path):
  return {str(k):v for k,v in sorted(counts.items())}
 
 def main():
+ # This source reconstructs the historical GA-attributed candidate only.
+ # The selected SeaVoX Gulf source requires a new attribution index and bundle.
+ if os.environ.get('WORLDATLAS_HISTORICAL_V7_REPLAY') != '1':
+  raise ValueError('Historical V7 UI builder uses superseded Gulf attribution; set WORLDATLAS_HISTORICAL_V7_REPLAY=1 only for historical replay')
  for p,expected in [(V2Y,'f254d5ace508252f1a250d72e62073093b9ad8d0e1a6a6a66e6db96aa7f70a7f'),(V2R,'1ea99e7823944d2510681c2e257e0db62b3fdfc8009c34abeb7222b3f6f5aef2'),(V6ROWS,'ffd10cd2731668ef210d175bc54dcf65586e4d1aa39e1fc6e1cf505aea5d3e0f'),(V6RUNS,'e22efa18aa85b975484fbda661f160620739f70b3e110f4d385292df13c3b342'),(V7Y,'acc7a8f3d3ebfba3fea688154e93d3a1b577b9b6e6d2db4a6e1a16b32d9ece68'),(V7R,'73819432f0e45ae52a4288985eaa570b3ab22cd20f68ade95f8adc17ace9a90c')]:
   if sha(p)!=expected:raise ValueError(f'Pinned source hash mismatch: {p}')
  idx=read(DIFF_INDEX);comp=read(COMPOSITION);named=read(NAMED);barrier=read(OCEAN_BARR);oldp=read(OLD/'proposal.json');
@@ -259,26 +263,12 @@ def main():
  proposal['accounting']={'url':'accounting.json','sha256':sha_bytes((json.dumps(account,ensure_ascii=False,indent=2)+'\n').encode())}
  # The UI resolves the accounting reference against its own folder.
  write_json(ui/'accounting.json',account);write_json(data/'accounting.json',account);write_json(data/'legend-counts.json',legend);write_json(ui/'proposal.json',proposal);write_json(ui/'water-presentation.json',pres)
- # Copy source-facing code and patch only the new generic fill schema, preserving existing V6/V2 validators.
- app=(OLD/'ui/app.js').read_text();refs=(OLD/'ui/review-references.js').read_text();html=(OLD/'ui/index.html').read_text()
- old_cond="!Array.isArray(item.source_ocean_codes)||!item.source_ocean_codes.length||!Array.isArray(item.source_ocean_labels)||item.source_ocean_labels.length!==item.source_ocean_codes.length"
- if old_cond not in app:raise ValueError('unable to find app ocean validator guard')
- app=app.replace(old_cond,"!Array.isArray(item.source_ocean_codes)||!item.source_ocean_codes.length||!Array.isArray(item.source_ocean_labels)||item.source_ocean_labels.length!==item.source_ocean_codes.length")
- # Change ocean validation range to branch on the generic recomputation method.
- app=app.replace("item.source_ocean_codes.some(c=>!Number.isInteger(c)||![7,8,9,10].includes(c)||c===item.target_ocean_code)","item.source_ocean_codes.some(c=>!Number.isInteger(c)||(item.boundary_method==='fresh-ocean-seed-floodfill-v1'?![1,2,3,4,5,6,7,8,9,10].includes(c):![7,8,9,10].includes(c))||c===item.target_ocean_code)")
- # Replace the target/source category assertion and route-specific validator with source-type-aware logic.
- oldcat="if(!targetCategory||targetCategory.physical_class!=='water'||targetCategory.name!==item.target_ocean_label||sourceCategories.some((c,i)=>!c||c.physical_class!=='water'||c.name!==item.source_ocean_labels[i])||item.source_ocean_label!==item.source_ocean_labels.join(' / ')||(item.source_ocean_codes.length===1?item.source_ocean_code!==item.source_ocean_codes[0]:item.source_ocean_code!==null))throw Error('Ocean-boundary ocean label/code mismatch');const coords=item.source_coordinates;const validPoint=p=>p&&Number.isFinite(p.lon)&&Number.isFinite(p.lat)&&p.lon>=-180&&p.lon<=180&&p.lat>=-90&&p.lat<=90;const cropMethod='extend-existing-meridian-partition-through-cropped-edge';if(item.boundary_method===cropMethod){if(!Array.isArray(coords.meridian_longitudes)||coords.meridian_longitudes.length!==3||coords.meridian_longitudes.some(x=>!Number.isFinite(x)||x< -180||x>180))throw Error('Invalid crop-edge meridian coordinates');}else if(!/wgs.?84.*geodesic/i.test(item.boundary_method)||!Array.isArray(coords.endpoints)||coords.endpoints.length!==2||coords.endpoints.some(p=>!validPoint(p)))throw Error('Ocean arcs require two valid WGS84 geodesic endpoints');seenItems.add(item.id);"
- newcat="if(!targetCategory||targetCategory.physical_class!=='water'||targetCategory.name!==item.target_ocean_label||sourceCategories.some((c,i)=>!c||c.physical_class!=='water'||(item.boundary_method==='fresh-ocean-seed-floodfill-v1'?item.source_ocean_labels[i]!==`V2 prior water code ${item.source_ocean_codes[i]}: ${c.name}`:c.name!==item.source_ocean_labels[i]))||(item.boundary_method==='fresh-ocean-seed-floodfill-v1'?item.source_ocean_label!==item.source_ocean_labels.join(' / '):item.source_ocean_label!==item.source_ocean_labels.join(' / '))||(item.source_ocean_codes.length===1?item.source_ocean_code!==item.source_ocean_codes[0]:item.source_ocean_code!==null))throw Error('Ocean-boundary ocean label/code mismatch');const coords=item.source_coordinates;const validPoint=p=>p&&Number.isFinite(p.longitude_deg)&&Number.isFinite(p.latitude_deg)&&p.longitude_deg>=-180&&p.longitude_deg<=180&&p.latitude_deg>=-90&&p.latitude_deg<=90;const cropMethod='extend-existing-meridian-partition-through-cropped-edge';if(item.boundary_method==='fresh-ocean-seed-floodfill-v1'){if(!Array.isArray(coords.seed_points)||coords.seed_points.length!==4||coords.seed_points.some(p=>!validPoint(p)||![7,8,9,10].includes(p.ocean_code))||!coords.barrier_network_manifest||!/^([a-f0-9]{64})$/.test(coords.barrier_network_sha256||'')||!/^([a-f0-9]{64})$/.test(coords.barrier_edge_file_sha256||'')||!Array.isArray(coords.boundary_route_ids)||coords.boundary_route_ids.length!==9)throw Error('Invalid fresh ocean seed/barrier metadata');}else if(item.boundary_method===cropMethod){if(!Array.isArray(coords.meridian_longitudes)||coords.meridian_longitudes.length!==3||coords.meridian_longitudes.some(x=>!Number.isFinite(x)||x< -180||x>180))throw Error('Invalid crop-edge meridian coordinates');}else if(!/wgs.?84.*geodesic/i.test(item.boundary_method)||!Array.isArray(coords.endpoints)||coords.endpoints.length!==2||coords.endpoints.some(p=>!p||!Number.isFinite(p.lon)||!Number.isFinite(p.lat)||p.lon< -180||p.lon>180||p.lat< -90||p.lat>90))throw Error('Ocean arcs require two valid WGS84 geodesic endpoints');seenItems.add(item.id);"
- if oldcat not in app:raise ValueError('unable to find exact app ocean route validator')
- app=app.replace(oldcat,newcat)
- # Make the ocean-boundaries subsection description honest for whole-partition recomputation.
- app=app.replace("<p>Source-backed boundaries between named oceans. Each item shows the source endpoints, coordinates and geodesic method.</p>","<p>Global ocean-boundary assignments. Fresh seed-fill items show prior and target labels plus the complete source-barrier network; they are not attributed to any one boundary arc.</p>")
- # Preserve source citations/justification on List-2 reference leaves.
- oldleaf="justification:`${source.group.reason} Source group: ${source.group.title} → ${source.group.destination}.`,letter,reference:ref"
- newleaf="justification:`${source.group.reason} Source group: ${source.group.title} → ${source.group.destination}.`,source_evidence:source.group.source_evidence||[],source_policy:source.group.assignment_method||'',letter,reference:ref"
- if oldleaf not in refs:raise ValueError('unable to extend List 2 refs with source evidence')
- refs=refs.replace(oldleaf,newleaf)
- # ocean reference justification uses explicit generic method description already present on the presentation leaf.
+ # The preserved V7 candidate contains the water-schema patches already.
+ # Keep data/proposal inputs separate from executable UI source.
+ source_ui=HERE.parent/'web'/'v7'
+ app=(source_ui/'app.js').read_text()
+ refs=(source_ui/'review-references.js').read_text()
+ html=(source_ui/'index.html').read_text()
  app,refs=wire_registry_ui(app,refs)
  for name in ('entity-registry.js','v7-entity-adapter.js','legend-model.js'):
   copy_raw(HERE.parent/'web'/name,ui/name)

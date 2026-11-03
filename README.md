@@ -195,8 +195,11 @@ To prepare a local V7 review bundle with a registry exported from Neon, export o
 revision using `scripts/export_entity_registry.sql`, for example with `psql -X -A
 -t -v revision=REVISION -f scripts/export_entity_registry.sql > registry.json`,
 then set `WORLDATLAS_ENTITY_REGISTRY_EXPORT` to that file when running
-`scripts/build_full_v7_ui_bundle.py`. The builder validates the snapshot and
-bindings. With no export, it derives an explicitly draft, deterministic bootstrap
+`scripts/build_full_v7_ui_bundle.py`. This is a historical-only builder: it
+requires `WORLDATLAS_HISTORICAL_V7_REPLAY=1` because it still uses superseded
+Gulf attribution. It cannot produce the selected SeaVoX Gulf bundle yet. See
+[the rebuild notes](scripts/v7-replay/REBUILD.md) for the remaining gaps. The
+builder validates the snapshot and bindings. With no export, it derives an explicitly draft, deterministic bootstrap
 from the existing V7 categories. This fallback is for local review, not evidence
 of database acceptance or publication. The V7 viewer retains its original review
 codes, colors, and separate land/water styling while displaying registry names.
