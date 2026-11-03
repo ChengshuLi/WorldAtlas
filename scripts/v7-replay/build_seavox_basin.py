@@ -49,6 +49,32 @@ def validate_source(path, source_sha, geometry_sha, feature_id):
 
 
 
+def validate_extraction(manifest_path, expected_manifest_sha, archive, geometry, snapshot, basin, source, policy_sha):
+    if digest(manifest_path) != expected_manifest_sha:
+        raise ValueError('extraction manifest hash mismatch')
+    manifest = json.loads(manifest_path.read_text())
+    rev = snapshot['decision_revision']
+    if (manifest.get('schema') != 'worldatlas-seavox-archive-extraction-v1'
+            or manifest.get('decision_id') != basin['id']
+            or manifest.get('decision_snapshot_sha256') != policy_sha
+            or manifest.get('decision_revision') != rev['id']
+            or manifest.get('entity_revision') != rev['entity_revision']
+            or manifest.get('source_id') != basin['source_id']
+            or manifest.get('source_version') != basin['source_version']
+            or str(manifest.get('source_feature_id')) != str(basin['source_feature_id'])
+            or manifest.get('archive_sha256') != source['sha256']
+            or manifest.get('geometry_sha256') != basin['geometry_sha256']):
+        raise ValueError('extraction manifest does not match selected decision')
+    name = manifest.get('feature_file')
+    if not isinstance(name, str) or (manifest_path.parent / name).resolve() != geometry:
+        raise ValueError('extraction manifest feature path mismatch')
+    if digest(archive) != source['sha256']:
+        raise ValueError('source archive hash mismatch')
+    if digest(geometry) != manifest.get('feature_file_sha256'):
+        raise ValueError('extracted feature file hash mismatch')
+    return manifest
+
+
 def selected_basin(snapshot, decision_id):
     basin = find_basin(snapshot, decision_id)
     if basin.get('assignment_method') != 'single_continent_named_basin':
@@ -101,6 +127,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--input-root', type=Path, required=True)
     ap.add_argument('--geometry', type=Path, required=True); ap.add_argument('--decision-id', required=True)
+    ap.add_argument('--archive', type=Path); ap.add_argument('--extraction-manifest', type=Path)
+    ap.add_argument('--extraction-manifest-sha256')
     ap.add_argument('--policy', type=Path, required=True); ap.add_argument('--policy-sha256', required=True)
     ap.add_argument('--rows', type=Path, required=True); ap.add_argument('--rows-sha256', required=True)
     ap.add_argument('--runs', type=Path, required=True); ap.add_argument('--runs-sha256', required=True)
@@ -111,13 +139,24 @@ def main():
         raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
     root = args.input_root.resolve(); out = args.out.resolve()
     geometry, rows_path, runs_path, policy_path = args.geometry.resolve(), args.rows.resolve(), args.runs.resolve(), args.policy.resolve()
-    if not root.is_dir() or any(not p.is_relative_to(root) for p in (geometry, rows_path, runs_path, policy_path)):
+    extraction_args = (args.archive, args.extraction_manifest, args.extraction_manifest_sha256)
+    if any(extraction_args) and not all(extraction_args):
+        raise ValueError('archive, extraction manifest and its hash must be provided together')
+    archive = args.archive.resolve() if args.archive else None
+    extraction_path = args.extraction_manifest.resolve() if args.extraction_manifest else None
+    input_paths = [geometry, rows_path, runs_path, policy_path] + ([archive, extraction_path] if archive else [])
+    if not root.is_dir() or any(not p.is_relative_to(root) for p in input_paths):
         raise ValueError('all inputs must be inside an existing input root')
     if out.is_relative_to(root) or root.is_relative_to(out):
         raise ValueError('output must be outside input root')
     snapshot = read_snapshot(policy_path, args.policy_sha256)
     basin, source, water_code = selected_basin(snapshot, args.decision_id)
-    feature = validate_source(geometry, source['sha256'], basin['geometry_sha256'], basin['source_feature_id'])
+    if archive:
+        extraction = validate_extraction(extraction_path, args.extraction_manifest_sha256, archive, geometry, snapshot, basin, source, args.policy_sha256)
+        feature_sha = extraction['feature_file_sha256']
+    else:
+        feature_sha = source['sha256']  # The selected source itself is GeoJSON.
+    feature = validate_source(geometry, feature_sha, basin['geometry_sha256'], basin['source_feature_id'])
     decision_revision = snapshot['decision_revision']['id']; entity_revision = snapshot['decision_revision']['entity_revision']
     member_id = str(basin['id'])
     if digest(rows_path) != args.rows_sha256 or digest(runs_path) != args.runs_sha256:
@@ -153,7 +192,8 @@ def main():
     manifest = {'schema':'worldatlas-full-water-assignment-tiles-v1', 'status':'completed_unverified_candidate_not_published',
                 'grid':{'width':W,'height':H,'angular_step_deg':STEP,'row_convention':'north-to-south; cell centers; half-open [start,end) x spans'},
                 'coverage':{'complete':True,'meaning':'all physical-water centers inside the selected SeaVoX Gulf polygon'},
-                'source':{'decision_id':args.decision_id,'assignment_method':basin['assignment_method'],'source_id':basin['source_id'],'source_version':basin['source_version'],'source_feature_id':str(basin['source_feature_id']),'source_file_sha256':source['sha256'],'canonical_geometry_sha256':basin['geometry_sha256'],
+                'source':{'decision_id':args.decision_id,'assignment_method':basin['assignment_method'],'source_id':basin['source_id'],'source_version':basin['source_version'],'source_feature_id':str(basin['source_feature_id']),'source_file_sha256':source['sha256'],'extraction_manifest_sha256':args.extraction_manifest_sha256,
+                          'extracted_feature_sha256':feature_sha,'canonical_geometry_sha256':basin['geometry_sha256'],
                           'physical_rows_sha256':args.rows_sha256,'physical_runs_sha256':args.runs_sha256,'policy_sha256':args.policy_sha256,'decision_revision':decision_revision,'entity_revision':entity_revision},
                 'physical_water_cells':cells,'span_count':spans_count,'row_count':row_count,
                 'tiles':[{'core_rows':[0,H],'core_cols':[0,W],'span_file':{'path':assignment.name,'sha256':digest(assignment)}}]}

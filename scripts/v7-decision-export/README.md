@@ -1,0 +1,25 @@
+# Review prototype: decision export
+
+This prototype reads the candidate `atlas` schema from migrations 002, 004, 005 and 008. It does not install migrations, write to Neon, accept revisions, lock builds, authenticate reviewers, or verify R2 files. It requires Python 3 and psycopg 3, a `SELECT`-only database role with access only to this catalog, and a verified TLS server certificate. Set standard libpq connection environment variables securely; the CLI uses `sslmode=verify-full` and does not print a connection string. Never put secrets on the command line. The Python connection must be in autocommit mode so `BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY` starts the intended transaction; the export always rolls it back.
+
+Before a build can be trusted, a trusted authority must independently approve both revisions and all decision data, verify each selected source object by content hash, review the build inputs and grid/code/software pins, and protect write privileges, the approval process, and the trusted digest. A local file or database status alone is not proof. This prototype assumes a trustworthy DB endpoint and SELECT role. A database owner can bypass schema protections; an attacker controlling both the database and trusted pin defeats this check. Schema and role hardening, independent pin custody, software dependency deployment, and a live-Postgres integration test are outstanding. Actual Neon review-branch schema differs from saved migration 004; reconcile migration history and adapt/test on an isolated branch before use.
+
+## Workflow
+
+1. Set all pins and source inputs on a **draft** build, referencing a matching **accepted** decision and entity revision. `--prepare-candidate` reads a consistent snapshot and prints an **unverified** candidate hash. It writes an exclusive output file. The candidate is evidence for review, not a build authorization.
+2. In a separately authorized review/locking workflow, inspect and approve the candidate and source objects, store its SHA-256 in the build record, and lock the build. Preserve that digest through an independent trusted channel. This exporter performs none of these steps. Any change to included data between candidate and build makes verification fail.
+3. `--expected-sha256 DIGEST` reads a **locked** build and its accepted revisions under one repeatable-read, read-only transaction. It checks that the independently trusted digest equals both the database build pin and the exact canonical bytes; any mismatch fails without writing an output. The output file is created exclusively. Recompute and verify the trusted digest at every build entry point; consumers must never use an unverified candidate.
+
+```
+python export_snapshot.py --build-id BUILD --prepare-candidate --out candidate.json
+python export_snapshot.py --build-id BUILD --expected-sha256 TRUSTED_HEX_DIGEST --out snapshot.json
+python -m unittest -v test_export_snapshot
+```
+
+## Serialization `worldatlas-canonical-json-v1`
+
+The hashed bytes are the UTF-8/ASCII output of Python `json.dumps` with `sort_keys=True`, `ensure_ascii=True`, compact comma/colon separators and one final LF. Ordered table rows are sorted in Python by their identity keys, independent of database collation; route points are sorted by ordinal, and JSON array order is retained. Exact Postgres `numeric` coordinates and fractional JSON numbers are normalized decimal strings, no exponent, insignificant zeroes removed, and negative zero normalized to `0`; JSON integers remain integers. Binary floating-point is rejected. Object keys and values, including evidence and policies, are hashed. No hash field is included in the payload, avoiding a circular hash. Changing this serialization requires a new version, new digest and explicit review.
+
+The payload includes revision/review identity and evidence, full decision features and endpoint/route records, affiliations, seeds, basin participants/tie rules, category bindings and entity hierarchy, policies, selected source identities and storage locations, build inputs, physical grid, code and software pins. Raw object bytes must still be independently checked against their source hashes. All JSON fractional values become strings, so policy authors and consumers must agree on exact-number representation. The v7 consumer currently supports only water category codes 1–6. Precedence must cover exactly the generated layer IDs; unknown policy kinds fail closed. The ocean runner's proposed `ocean_fill` policy requires migration 008 and a compatible consumer, and other routes/policy methods are rejected unless supported.
+
+The included unit tests use a fake database connection and synthetic fixtures. They check read-only transaction framing, exact serialization, review and hash checks, tampering and precedence rejection; they do not validate PostgreSQL SQL execution, actual transaction isolation, production schema, source bytes or geographic correctness. Test against a disposable PostgreSQL database and real concurrent transactions before any production use.

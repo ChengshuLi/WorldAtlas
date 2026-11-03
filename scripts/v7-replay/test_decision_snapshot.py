@@ -42,6 +42,7 @@ class DecisionSnapshotTest(unittest.TestCase):
         with patch.object(sys,'argv',argv):
             with self.assertRaisesRegex(ValueError,'authenticated Neon revision verification'): build_prefill.main()
         argv=['basin','--input-root','/tmp','--geometry','/tmp/g','--decision-id','b1',
+              '--archive','/tmp/a','--extraction-manifest','/tmp/m','--extraction-manifest-sha256','f'*64,
               '--policy','/tmp/p','--policy-sha256','c'*64,'--rows','/tmp/r','--rows-sha256','d'*64,
               '--runs','/tmp/u','--runs-sha256','e'*64,'--out','/tmp/o']
         with patch.object(sys,'argv',argv):
