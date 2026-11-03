@@ -17,3 +17,7 @@ This is an isolated, configurable prototype, not the recovered historical builde
 3. The historical builder and its geometry repair/invalidity policy, boundary-on-cell-center behavior, antimeridian handling, GDAL and dependent library versions, rasterization options and any processing simplifications are unknown. This prototype rejects invalid geometry, assumes input polygons already correctly handle the antimeridian and uses the GDAL default polygon rasterization (`ALL_TOUCHED` off). Boundary tie behavior must be characterized before calling it equivalent to an ideal point-in-polygon center test or the historical builder.
 4. Full-grid runtime, memory, disk requirements and the result against preserved raw physical row/run files have **not** been established. The saved mask combines marine and inland water and cannot by itself establish water-source decomposition.
 5. This builds **only** physical land versus water. It does not reconstruct continent assignments, reviewed island or mainland-cut decisions, or later V2-to-V7 land changes. Those require independently pinned, reviewed geographic decisions and further verification.
+
+## Overture water shard candidate
+
+`overture/` contains a separate, configurable GeoParquet-to-water-mask experiment. It processes one hash-pinned shard at a time, records the selection policy and runtime, and reports invalid inputs. It does not aggregate shards, build the complete physical mask, assign continents, or establish historical equivalence. See its README before use.

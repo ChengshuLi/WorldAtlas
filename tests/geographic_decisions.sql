@@ -1,4 +1,6 @@
--- Run only in a disposable namespace after 001–005. Synthetic writes roll back.
+-- Run in a disposable database after 001–006 and before 010. Synthetic writes roll back.
+-- Migration 010 intentionally blocks the acceptance transition tested below;
+-- use decision_acceptance_gate.sql after installing that later gate.
 DO $$ BEGIN
  BEGIN
   INSERT INTO atlas.source_assets(source_id,version,title,kind,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance)
