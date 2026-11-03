@@ -268,6 +268,27 @@ def v2_diff_identity(rule, member, from_code, to_code):
     return rule, member
 
 
+def open_validated_rle(rows_path: Path, runs_path: Path, name: str):
+    """Validate the RLE envelope before rows are read or narrowed to uint8."""
+    if rows_path.stat().st_size != (H + 1) * 4 or runs_path.stat().st_size % 8:
+        raise ValueError(f'{name} invalid RLE size')
+    rows = np.memmap(rows_path, dtype='<u4', mode='r')
+    runs = np.memmap(runs_path, dtype='<u4', mode='r')
+    if (int(rows[0]) != 0 or int(rows[-1]) != len(runs) // 2
+            or np.any(rows[1:] <= rows[:-1])):
+        raise ValueError(f'{name} invalid RLE offsets')
+    return rows, runs
+
+
+def validate_rle_row(ends, values, name: str, row: int):
+    if (not len(ends) or int(ends[0]) == 0 or int(ends[-1]) != W
+            or np.any(ends[1:] <= ends[:-1])):
+        raise ValueError(f'{name} invalid RLE endpoints on row {row}')
+    allowed = (1, 17) if name == 'physical' else tuple(range(1, 11)) + tuple(range(17, 23))
+    if np.any(~np.isin(values, allowed)):
+        raise ValueError(f'{name} invalid RLE code on row {row}')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--plan', required=True, help='JSON plan with V2/V6/physical RLE paths and water/land layer manifests')
@@ -290,7 +311,7 @@ def main():
         ent = plan['rle_inputs'][key]; rp = resolve_input(ent['rows_path'], plan_path.parent, input_root); up = resolve_input(ent['runs_path'], plan_path.parent, input_root)
         if sha256(rp) != ent['rows_sha256'] or sha256(up) != ent['runs_sha256']:
             raise ValueError(f'{key} RLE hash mismatch')
-        rles[key] = (np.memmap(rp, dtype='<u4', mode='r'), np.memmap(up, dtype='<u4', mode='r'))
+        rles[key] = open_validated_rle(rp, up, key)
     layers=[]
     for ent in plan.get('water_layers', []):
         mp, m = read_pinned_manifest(ent, plan_path, input_root); m['_tiles'] = m['tiles'];
@@ -312,7 +333,8 @@ def main():
         for y in range(y0,y1):
             pe,pv = rle_row(pr,pu,y); v6e,v6v = rle_row(v6r,v6u,y); v2e,v2v = rle_row(v2r,v2u,y)
             pe=np.asarray(pe,dtype=np.uint32);pv=np.asarray(pv,dtype=np.uint32);v6e=np.asarray(v6e,dtype=np.uint32);v6v=np.asarray(v6v,dtype=np.uint32);v2e=np.asarray(v2e,dtype=np.uint32);v2v=np.asarray(v2v,dtype=np.uint32)
-            if int(pe[-1]) != W or int(v6e[-1]) != W or int(v2e[-1]) != W: raise ValueError(f'bad RLE row width y={y}')
+            for name, ends, values in (('physical', pe, pv), ('v2', v2e, v2v), ('v6', v6e, v6v)):
+                validate_rle_row(ends, values, name, y)
             candidate_spans=[]
             for ent,cur in cursors:
                 ss=cur.take(y)

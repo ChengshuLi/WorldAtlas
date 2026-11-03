@@ -2,6 +2,8 @@ import contextlib
 import hashlib
 import io
 import json
+import shutil
+import subprocess
 from pathlib import Path
 import sys
 import tempfile
@@ -63,6 +65,31 @@ class ExtractTest(unittest.TestCase):
     def test_snapshot_must_explicitly_be_test_only(self):
         args=[x for x in self.args if x!='--allow-unverified-snapshot']
         with self.assertRaisesRegex(ValueError,'not implemented'): self.run_main(args)
+
+
+class ExtractGdalIntegrationTest(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('ogr2ogr'), 'GDAL ogr2ogr is required')
+    def test_real_archive_extracts_exact_selected_feature(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            source = root/'source.geojson'
+            source.write_text(json.dumps({'type':'FeatureCollection','features':[
+                {'type':'Feature','properties':{'mrgid_sr':'24063'},
+                 'geometry':{'type':'Polygon','coordinates':[[[1,1],[2,1],[1,2],[1,1]]]}},
+                {'type':'Feature','properties':{'mrgid_sr':'24064'},
+                 'geometry':{'type':'Polygon','coordinates':[[[3,3],[4,3],[3,4],[3,3]]]}}]}))
+            shape = root/'shape'
+            subprocess.run(['ogr2ogr','-f','ESRI Shapefile',str(shape),str(source)], check=True, capture_output=True)
+            archive = root/'source.zip'
+            with zipfile.ZipFile(archive, 'w') as z:
+                for component in shape.iterdir():
+                    z.write(component, component.name)
+            mod.validate_archive(archive, mod.digest(archive))
+            feature = mod.extract_feature(archive, '24063')
+            self.assertEqual(str(feature['properties']['mrgid_sr']), '24063')
+            self.assertEqual(feature['geometry']['type'], 'Polygon')
+            with self.assertRaisesRegex(ValueError, 'exactly one matching'):
+                mod.extract_feature(archive, '99999')
 
 
 if __name__ == '__main__': unittest.main()

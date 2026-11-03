@@ -72,6 +72,30 @@ def validate(doc):
     sources = {(s['source_id'], s['version']): s for s in doc['sources']}
     must(len(sources) == len(doc['sources']) and bool(sources), 'source identities must be unique and nonempty')
     must(all(HEX.fullmatch(s['sha256']) for s in doc['sources']), 'invalid source digest')
+    # Pin every selected source's transitive provenance, including parent bytes
+    # and dependency edges, not just the directly selected object.
+    lineage = {(s['source_id'], s['version']): s for s in doc['source_lineage_assets']}
+    must(len(lineage) == len(doc['source_lineage_assets']) and set(sources).issubset(lineage), 'invalid source lineage assets')
+    must(all(HEX.fullmatch(s['sha256']) for s in lineage.values()), 'invalid lineage digest')
+    must(all(all(sources[k][field] == lineage[k][field] for field in ('sha256','size_bytes','r2_bucket','r2_key')) for k in sources), 'selected source lineage mismatch')
+    parents = {key: set() for key in lineage}
+    edges = set()
+    for dep in doc['source_lineage_dependencies']:
+        child = (dep['source_id'], dep['version'])
+        parent = (dep['parent_source_id'], dep['parent_version'])
+        edge = (child, parent)
+        must(child in lineage and parent in lineage and child != parent and edge not in edges and
+             isinstance(dep['relationship'], str) and bool(dep['relationship'].strip()), 'invalid source lineage dependency')
+        edges.add(edge); parents[child].add(parent)
+    visited, active = set(), set()
+    def visit(node):
+        must(node not in active, 'source lineage cycle')
+        if node in visited: return
+        active.add(node)
+        for parent in parents[node]: visit(parent)
+        active.remove(node); visited.add(node)
+    for node in sources: visit(node)
+    must(visited == set(lineage), 'unreachable source lineage asset')
     must(all((f['source_id'], f['source_version']) in sources and HEX.fullmatch(f['geometry_sha256'])
              for f in doc['features']), 'feature source not selected or invalid geometry digest')
     basins = doc['basins']; ids = [b['id'] for b in basins]
@@ -179,6 +203,21 @@ def export(conn, build_id, expected_sha256=None, *, prepare_candidate=False):
         sources = query(cur, '''SELECT DISTINCT a.source_id,a.version,a.sha256,a.size_bytes,a.r2_bucket,a.r2_key
  FROM atlas.source_build_inputs i JOIN atlas.source_assets a ON a.source_id=i.source_id AND a.version=i.version
  WHERE i.build_id=%s ORDER BY a.source_id,a.version''', (build_id,))
+        # The transitive closure is read in this same MVCC snapshot. UNION makes
+        # the query finite even if a privileged writer introduced a cycle.
+        lineage_assets = query(cur, '''WITH RECURSIVE lineage(source_id,version) AS (
+ SELECT source_id,version FROM atlas.source_build_inputs WHERE build_id=%s
+ UNION SELECT d.parent_source_id,d.parent_version FROM atlas.source_asset_dependencies d
+ JOIN lineage l ON (d.source_id,d.version)=(l.source_id,l.version))
+ SELECT a.source_id,a.version,a.title,a.kind,a.provider,a.source_uri,a.license_name,a.license_uri,
+ a.attribution,a.r2_bucket,a.r2_key,a.sha256,a.size_bytes,a.provenance::text
+ FROM lineage l JOIN atlas.source_assets a USING (source_id,version)''', (build_id,))
+        lineage_deps = query(cur, '''WITH RECURSIVE lineage(source_id,version) AS (
+ SELECT source_id,version FROM atlas.source_build_inputs WHERE build_id=%s
+ UNION SELECT d.parent_source_id,d.parent_version FROM atlas.source_asset_dependencies d
+ JOIN lineage l ON (d.source_id,d.version)=(l.source_id,l.version))
+ SELECT d.source_id,d.version,d.parent_source_id,d.parent_version,d.relationship
+ FROM atlas.source_asset_dependencies d JOIN lineage l ON (d.source_id,d.version)=(l.source_id,l.version)''', (build_id,))
         inputs = query(cur, '''SELECT source_id,version,stage,role FROM atlas.source_build_inputs WHERE build_id=%s ORDER BY source_id,version,stage,role''', (build_id,))
         entities = query(cur, '''SELECT id,name,level,parent_id,physical_class FROM atlas.geographic_entities WHERE revision=%s ORDER BY id''', (e,))
         bindings = query(cur, '''SELECT code,entity_id,physical_class FROM atlas.review_category_bindings WHERE revision=%s ORDER BY code''', (e,))
@@ -196,13 +235,14 @@ def export(conn, build_id, expected_sha256=None, *, prepare_candidate=False):
         ocean_policies = query(cur, """SELECT policy_id AS id,'ocean_fill' AS kind,definition::text,evidence::text FROM atlas.decision_ocean_fill_policies WHERE revision=%s ORDER BY policy_id""", (d,))
         policies += ocean_policies
         # Do not rely on the database's locale-dependent text ordering.
-        for rows, keys in ((sources,('source_id','version')), (inputs,('source_id','version','stage','role')),
+        for rows, keys in ((sources,('source_id','version')), (lineage_assets,('source_id','version')),
+                           (lineage_deps,('source_id','version','parent_source_id','parent_version')), (inputs,('source_id','version','stage','role')),
                            (entities,('id',)), (bindings,('code',)), (features,('feature_id',)),
                            (endpoints,('endpoint_id',)), (routes,('route_id',)), (route_points,('route_id','ordinal')),
                            (basins,('id',)), (parts,('basin_id','entity_id')), (affiliations,('affiliation_id',)),
                            (seeds,('seed_id',)), (policies,('id',))):
             rows.sort(key=lambda row: tuple(row[k] for k in keys))
-        for rows, fields in ((features,['evidence']), (endpoints,['derivation','evidence']), (routes,['parameters','evidence']), (basins,['tie_rules','evidence']), (affiliations,['evidence']), (seeds,['evidence']), (policies,['definition','evidence'])):
+        for rows, fields in ((lineage_assets,['provenance']), (features,['evidence']), (endpoints,['derivation','evidence']), (routes,['parameters','evidence']), (basins,['tie_rules','evidence']), (affiliations,['evidence']), (seeds,['evidence']), (policies,['definition','evidence'])):
             for row in rows:
                 for field in fields: row[field] = parse_json(row[field])
         for endpoint in endpoints:
@@ -216,7 +256,7 @@ def export(conn, build_id, expected_sha256=None, *, prepare_candidate=False):
                'entity_revision':{'id':e,'status':b['entity_status'],'reviewed_by':b['entity_reviewer'],'reviewed_at':b['entity_reviewed_at']},
                'build':{'id':build_id,'physical_grid_revision':b['physical_grid_revision'],'physical_grid_sha256':b['physical_grid_sha256'],
                         'code_revision':b['code_revision'],'git_paths':parse_json(b['git_paths']),'software_versions':parse_json(b['software_versions'])},
-               'sources':sources,'source_inputs':inputs,'entities':entities,'category_bindings':bindings,'features':features,
+               'sources':sources,'source_lineage_assets':lineage_assets,'source_lineage_dependencies':lineage_deps,'source_inputs':inputs,'entities':entities,'category_bindings':bindings,'features':features,
                'endpoints':endpoints,'routes':routes,'basins':basins,'affiliations':affiliations,'ocean_seeds':seeds,'policies':policies}
         validate(doc)
         payload = canonical_bytes(doc)

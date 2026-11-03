@@ -13,6 +13,11 @@ class Cursor:
     def execute(self, sql, params=None):
         self.calls.append((sql, params))
         if sql.startswith('BEGIN') or sql == 'ROLLBACK': return
+        if sql.startswith('WITH RECURSIVE lineage'):
+            index = 15 if 'FROM lineage l JOIN atlas.source_assets' in sql else 16
+            data=self.data[index]; names=list(data[0]) if data else []
+            self.description=[(k,) for k in names]; self.rows=[tuple(row[k] for k in names) for row in data]
+            return
         keys=['FROM atlas.source_builds b','FROM atlas.source_build_inputs i JOIN','FROM atlas.source_build_inputs WHERE',
               'FROM atlas.geographic_entities WHERE','FROM atlas.review_category_bindings WHERE','FROM atlas.decision_features WHERE',
               'FROM atlas.decision_endpoints WHERE','FROM atlas.decision_routes WHERE','FROM atlas.decision_route_points WHERE',
@@ -42,7 +47,8 @@ def sample():
     return [[build],[source],[{'source_id':'s1','version':'v1','stage':'stage','role':'role'}],[{'id':10,'name':'A','level':'location','parent_id':None,'physical_class':'water'},{'id':11,'name':'B','level':'location','parent_id':None,'physical_class':'water'}],
             [{'code':1,'entity_id':10,'physical_class':'water'},{'code':2,'entity_id':11,'physical_class':'water'}],
             [feature],[{'endpoint_id':'x','name':'X','longitude':'-0.000','latitude':'3.1400','derivation':'{}','evidence':'{}'}],[],[],[basin],
-            [{'basin_id':'b1','entity_id':10},{'basin_id':'b1','entity_id':11}],[],[],[prec,coast],[]]
+            [{'basin_id':'b1','entity_id':10},{'basin_id':'b1','entity_id':11}],[],[],[prec,coast],[],
+            [{**source,'title':'Source','kind':'raw','provider':'Provider','source_uri':'https://example.test/source','license_name':'License','license_uri':'https://example.test/license','attribution':'Attribution','provenance':'{}'}],[]]
 
 class ExportTest(unittest.TestCase):
     def candidate(self, data): return export(Conn(data),'build',prepare_candidate=True)
@@ -60,7 +66,7 @@ class ExportTest(unittest.TestCase):
         with self.assertRaises(ValueError): self.candidate(d)
         d=sample(); digest=hashlib.sha256(self.candidate(d)).hexdigest(); d[0][0].update(status='locked',decision_snapshot_sha256='f'*64)
         with self.assertRaisesRegex(ValueError,'build pin'): export(Conn(d),'build',digest)
-        d=sample(); d[-2][0]['definition']=json.dumps({'priorities':{'coastal-band':2,'named-b1':1},'allowed_overrides':[{'winner':'named-b1','loser':'coastal-band'}]})
+        d=sample(); d[13][0]['definition']=json.dumps({'priorities':{'coastal-band':2,'named-b1':1},'allowed_overrides':[{'winner':'named-b1','loser':'coastal-band'}]})
         with self.assertRaisesRegex(ValueError,'override'): self.candidate(d)
     def test_order_independence_and_failed_transaction_closes(self):
         data=sample(); expected=self.candidate(data); shuffled=copy.deepcopy(data)
@@ -72,11 +78,11 @@ class ExportTest(unittest.TestCase):
 
     def test_ocean_policy_requires_known_routes_and_seed(self):
         data=sample()
-        data[-1].append({'id':'ocean','kind':'ocean_fill','definition':json.dumps({'connectivity':4,'wrap_longitude':True,
+        data[14].append({'id':'ocean','kind':'ocean_fill','definition':json.dumps({'connectivity':4,'wrap_longitude':True,
             'barrier_tie_rule':'left-of-oriented-route','route_ids':['missing'],'seed_ids':['missing'],
             'unseeded_policy':'report-only'}),'evidence':'{}'})
         with self.assertRaisesRegex(ValueError,'ocean fill references'): self.candidate(data)
-        data[-1][0]['definition']=json.dumps({'connectivity':4,'wrap_longitude':True,
+        data[14][0]['definition']=json.dumps({'connectivity':4,'wrap_longitude':True,
             'barrier_tie_rule':'left-of-oriented-route','route_ids':['r1'],'seed_ids':['s1'],
             'unseeded_policy':'report-only'})
         data[6].append({'endpoint_id':'y','name':'Y','longitude':'20','latitude':'30','derivation':'{}','evidence':'{}'})
@@ -98,6 +104,22 @@ class ExportTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'invalid basin participants'): self.candidate(data)
         data[9][0]['assignment_method']='unknown'
         with self.assertRaisesRegex(ValueError,'unsupported basin method'): self.candidate(data)
+
+    def test_lineage_pinned_and_validated(self):
+        data=sample()
+        parent={**data[15][0], 'source_id':'parent', 'sha256':'b'*64, 'r2_key':'parent-key'}
+        data[15].append(parent)
+        data[16].append({'source_id':'s1','version':'v1','parent_source_id':'parent','parent_version':'v1','relationship':'derived from'})
+        payload=self.candidate(data)
+        digest=hashlib.sha256(payload).hexdigest()
+        locked=copy.deepcopy(data); locked[0][0].update(status='locked',decision_snapshot_sha256=digest)
+        self.assertEqual(export(Conn(locked),'build',digest),payload)
+        locked[15][1]['provenance']='{"tampered":true}'
+        with self.assertRaisesRegex(ValueError,'snapshot digest mismatch'): export(Conn(locked),'build',digest)
+        bad=copy.deepcopy(data); bad[16].append({'source_id':'parent','version':'v1','parent_source_id':'s1','parent_version':'v1','relationship':'cycle'})
+        with self.assertRaisesRegex(ValueError,'lineage cycle'): self.candidate(bad)
+        bad=copy.deepcopy(data); bad[16].clear()
+        with self.assertRaisesRegex(ValueError,'unreachable source lineage'): self.candidate(bad)
 
     def test_exact_serialization(self):
         self.assertEqual(parse_json('{"x":1.2300,"y":1,"z":1e-8}'), {'x':'1.23','y':1,'z':'0.00000001'})
