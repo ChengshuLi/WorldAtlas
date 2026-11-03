@@ -8,7 +8,7 @@ The ocean fill script, partition core, RLE input module, and the repository's `s
 
 ## Recovery limitations
 
-The scripts retain their original assumptions about directory layout, inputs, software dependencies, and run identifiers. Some import other modules not yet included in this directory. Do not run them against existing output directories: intermediate and final output files must not be overwritten. Use a new run directory for every run or retry.
+The scripts retain their original assumptions about directory layout, inputs, software dependencies, and run identifiers. Some import other modules not yet included in this directory. Do not import or run these archival scripts as-is: some create directories at import time or write fixed output and cache paths. Intermediate and final output files must not be overwritten. Before any execution, make the code use a new run directory for every run or retry, including caches, and verify exclusive output handling.
 
 The full V7 source dependency chain, pinned input locations, environment versions, and an isolated end-to-end rebuild have not yet been verified. The V7 release-builder accounting-file fix has a focused test, but a complete build from this checkout has not been run. Generated maps and large inputs are stored separately, not in this repository.
 
