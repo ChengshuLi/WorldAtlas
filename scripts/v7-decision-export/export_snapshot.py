@@ -87,6 +87,8 @@ def validate(doc):
         must(child in lineage and parent in lineage and child != parent and edge not in edges and
              isinstance(dep['relationship'], str) and bool(dep['relationship'].strip()), 'invalid source lineage dependency')
         edges.add(edge); parents[child].add(parent)
+    must(all(s['kind'] in ('raw','derived') for s in lineage.values()), 'invalid source kind')
+    must(all(s['kind'] != 'derived' or parents[key] for key, s in lineage.items()), 'derived source missing lineage')
     visited, active = set(), set()
     def visit(node):
         must(node not in active, 'source lineage cycle')

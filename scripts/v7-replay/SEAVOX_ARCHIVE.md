@@ -10,7 +10,7 @@ The adapter only extracts a geometry; it does not rasterize, create assignments,
 
 ## Selected archive and comparison evidence (2026-11-03)
 
-The selected local 92-feature SeaVoX v19 subset ZIP has SHA-256 `53a8209108721f9472b6e8f42c53cb5796f788570c8a315e26362b98f8a3cf97`. It is a derived selection, not a byte-for-byte copy of the provider's complete download. The candidate uses this archive; do not substitute the earlier feature GeoJSON under the same source pin. Gulf feature `24063`, extracted with GDAL 3.10.3 at 15 decimal places, has canonical geometry SHA-256 `fd50f0dc4673c62d5f508681c6d49fa5994802f0bae8fadbaf037175fffc8e22`. Geometry hashes are representation-specific.
+A provisional local 92-feature SeaVoX v19 subset ZIP has SHA-256 `53a8209108721f9472b6e8f42c53cb5796f788570c8a315e26362b98f8a3cf97`. It is a derived selection, not a byte-for-byte copy of the provider's complete download. The candidate uses this archive pending investigation of the complete official v19 archive; do not substitute the earlier feature GeoJSON under the same source pin. Gulf feature `24063`, extracted with GDAL 3.10.3 at 15 decimal places, has canonical geometry SHA-256 `fd50f0dc4673c62d5f508681c6d49fa5994802f0bae8fadbaf037175fffc8e22`. Geometry hashes are representation-specific.
 
 The 92 archive feature IDs matched the 92 selected source IDs. Relative to recovered historical source geometries, 49 matched exactly under the ring-normalized comparison; another 40 matched the tested ring sequences within 1.1e-7 degrees. Three (`24019`, `24030`, `24022`) did not pass that comparison. The comparison did not independently verify hole-to-shell grouping. These results do not establish historical geometry identity, and selecting this archive does not make it an equivalent historical source.
 
@@ -18,5 +18,7 @@ A test-only Gulf rasterization over the retained physical-water grid selected 3,
 
 - Archive only: `(37507,115259)`, `(37794,115259)`, `(37795,115259)`, `(37904,117087)`, `(37925,115404)`, `(37933,117087)`, `(37964,117087)`, `(38180,117087)`, `(38740,115725)`.
 - Earlier GeoJSON only: `(37641,117134)`, `(37641,117140)`, `(38264,114975)`, `(38695,116996)`.
+
+A further test rerasterized 42 non-Gulf features with different geometry against the retained physical-water mask: 217 archive-only and 224 historical-only cells, totaling 441 per-basin changes. Seven features had no cell changes. With the Gulf, the total is 454 per-basin differences, not a count of distinct cells or final-label changes. Hole-to-shell grouping remains unverified even for the 49 ring-normalized exact matches.
 
 This comparison is source-footprint evidence, not a complete rebuild or final-label comparison. Preserve the archive, earlier source and comparison artifacts; regenerate all selected masks and validate their overlap and downstream composition before publication.

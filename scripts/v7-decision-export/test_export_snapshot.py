@@ -107,7 +107,9 @@ class ExportTest(unittest.TestCase):
 
     def test_lineage_pinned_and_validated(self):
         data=sample()
-        parent={**data[15][0], 'source_id':'parent', 'sha256':'b'*64, 'r2_key':'parent-key'}
+        data[15][0]['kind']='derived'
+        with self.assertRaisesRegex(ValueError,'derived source missing lineage'): self.candidate(data)
+        parent={**data[15][0], 'kind':'raw', 'source_id':'parent', 'sha256':'b'*64, 'r2_key':'parent-key'}
         data[15].append(parent)
         data[16].append({'source_id':'s1','version':'v1','parent_source_id':'parent','parent_version':'v1','relationship':'derived from'})
         payload=self.candidate(data)
@@ -118,7 +120,7 @@ class ExportTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'snapshot digest mismatch'): export(Conn(locked),'build',digest)
         bad=copy.deepcopy(data); bad[16].append({'source_id':'parent','version':'v1','parent_source_id':'s1','parent_version':'v1','relationship':'cycle'})
         with self.assertRaisesRegex(ValueError,'lineage cycle'): self.candidate(bad)
-        bad=copy.deepcopy(data); bad[16].clear()
+        bad=copy.deepcopy(data); bad[16].clear(); bad[15][0]['kind']='raw'
         with self.assertRaisesRegex(ValueError,'unreachable source lineage'): self.candidate(bad)
 
     def test_exact_serialization(self):
