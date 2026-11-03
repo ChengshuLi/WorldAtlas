@@ -18,6 +18,7 @@ import zipfile
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from exclusive_outputs import create_directory_exclusive, write_json_exclusive, create_text_exclusive
 from decision_snapshot import read_snapshot, find_basin, find_source
+from seavox_properties import feature_id as read_feature_id
 
 
 def digest(path):
@@ -58,7 +59,7 @@ def extract_feature(archive, feature_id):
            '-lco', 'COORDINATE_PRECISION=15']
     data = json.loads(subprocess.run(cmd, check=True, capture_output=True).stdout)
     features = data.get('features', []) if data.get('type') == 'FeatureCollection' else []
-    if len(features) != 1 or str(features[0].get('properties', {}).get('mrgid_sr')) != feature_id:
+    if len(features) != 1 or read_feature_id(features[0].get('properties')) != feature_id:
         raise ValueError('archive must contain exactly one matching SeaVoX feature')
     feature = features[0]
     if feature.get('geometry', {}).get('type') not in ('Polygon', 'MultiPolygon'):

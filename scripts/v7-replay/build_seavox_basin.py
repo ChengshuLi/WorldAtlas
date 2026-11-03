@@ -17,6 +17,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from exclusive_outputs import create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, write_json_exclusive
 from decision_snapshot import read_snapshot, participant_water_codes, find_basin, find_source
+from seavox_properties import feature_id as read_feature_id
 
 W, H = 131072, 54614
 STEP = 360.0 / W
@@ -35,8 +36,7 @@ def validate_source(path, source_sha, geometry_sha, feature_id):
         raise ValueError('source file hash mismatch')
     doc = json.loads(path.read_text())
     features = doc.get('features', []) if doc.get('type') == 'FeatureCollection' else []
-    features = [f for f in features if str(f.get('properties', {}).get('mrgid_sr')) == str(feature_id)]
-    if len(features) != 1:
+    if len(features) != 1 or read_feature_id(features[0].get('properties')) != str(feature_id):
         raise ValueError('expected exactly one selected SeaVoX feature')
     feature = features[0]
     geom = feature.get('geometry')

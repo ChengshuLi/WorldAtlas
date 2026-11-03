@@ -52,5 +52,19 @@ class BasinTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'geometry hash'): validate_source(path,fsha,'0'*64,'123')
             with self.assertRaisesRegex(ValueError,'selected SeaVoX feature'): validate_source(path,fsha,gsha,'999')
 
+    def test_original_uppercase_field_and_reject_extra_features(self):
+        geom={'type':'Polygon','coordinates':[[[1,1],[2,1],[1,2],[1,1]]]}
+        feature={'type':'Feature','properties':{'MRGID_SR':'123'},'geometry':geom}
+        obj={'type':'FeatureCollection','features':[feature]}
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'source.json'; path.write_text(json.dumps(obj))
+            fsha=hashlib.sha256(path.read_bytes()).hexdigest()
+            gsha=hashlib.sha256(json.dumps(geom,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+            self.assertEqual(validate_source(path,fsha,gsha,'123'),feature)
+            obj['features'].append({'type':'Feature','properties':{'MRGID_SR':'999'},'geometry':geom})
+            path.write_text(json.dumps(obj));fsha=hashlib.sha256(path.read_bytes()).hexdigest()
+            with self.assertRaisesRegex(ValueError,'exactly one selected'):
+                validate_source(path,fsha,gsha,'123')
+
 
 if __name__ == '__main__': unittest.main()

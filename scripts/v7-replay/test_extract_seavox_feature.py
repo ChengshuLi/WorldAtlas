@@ -12,6 +12,7 @@ from unittest.mock import patch
 import zipfile
 
 import extract_seavox_feature as mod
+from seavox_properties import feature_id
 
 
 class ExtractTest(unittest.TestCase):
@@ -59,6 +60,14 @@ class ExtractTest(unittest.TestCase):
         with zipfile.ZipFile(unsafe,'w') as z: z.writestr('../x.shp','bad')
         with self.assertRaisesRegex(ValueError,'unsafe'): mod.validate_archive(unsafe,mod.digest(unsafe))
 
+    def test_original_and_wfs_field_name_case(self):
+        self.assertEqual(feature_id({'MRGID_SR':'24063'}), '24063')
+        self.assertEqual(feature_id({'mrgid_sr':'24063'}), '24063')
+        with self.assertRaisesRegex(ValueError, 'unambiguous'):
+            feature_id({'MRGID_SR':'24063', 'mrgid_sr':'24063'})
+        with self.assertRaisesRegex(ValueError, 'unambiguous'):
+            feature_id({})
+
     def test_feature_filter_rejects_sql(self):
         with self.assertRaisesRegex(ValueError,'digits only'): mod.extract_feature(self.archive,"1' OR 1=1")
 
@@ -74,9 +83,9 @@ class ExtractGdalIntegrationTest(unittest.TestCase):
             root = Path(d)
             source = root/'source.geojson'
             source.write_text(json.dumps({'type':'FeatureCollection','features':[
-                {'type':'Feature','properties':{'mrgid_sr':'24063'},
+                {'type':'Feature','properties':{'MRGID_SR':'24063'},
                  'geometry':{'type':'Polygon','coordinates':[[[1,1],[2,1],[1,2],[1,1]]]}},
-                {'type':'Feature','properties':{'mrgid_sr':'24064'},
+                {'type':'Feature','properties':{'MRGID_SR':'24064'},
                  'geometry':{'type':'Polygon','coordinates':[[[3,3],[4,3],[3,4],[3,3]]]}}]}))
             shape = root/'shape'
             subprocess.run(['ogr2ogr','-f','ESRI Shapefile',str(shape),str(source)], check=True, capture_output=True)
@@ -86,7 +95,7 @@ class ExtractGdalIntegrationTest(unittest.TestCase):
                     z.write(component, component.name)
             mod.validate_archive(archive, mod.digest(archive))
             feature = mod.extract_feature(archive, '24063')
-            self.assertEqual(str(feature['properties']['mrgid_sr']), '24063')
+            self.assertEqual(feature_id(feature['properties']), '24063')
             self.assertEqual(feature['geometry']['type'], 'Polygon')
             with self.assertRaisesRegex(ValueError, 'exactly one matching'):
                 mod.extract_feature(archive, '99999')
