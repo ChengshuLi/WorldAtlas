@@ -6,19 +6,21 @@ from pathlib import Path
 import numpy as np
 HERE=Path(__file__).resolve().parent
 ROOT=Path(os.environ.get('WORLDATLAS_WORK_ROOT', '/workspace/scratch/127991fc8b8e'))
+TMP_ROOT=Path(os.environ.get('WORLDATLAS_TMP_ROOT', '/tmp'))
+OUTPUT_ROOT=Path(os.environ.get('WORLDATLAS_OUTPUT_ROOT', str(HERE)))
 sys.path.insert(0,str(HERE))
 sys.path.insert(1,str(ROOT/'audit/shared-output-safety-20261103/integration-copies/patched-v4'))
 from exclusive_outputs import (create_run_directory, create_binary_exclusive, create_gzip_exclusive, create_text_exclusive, write_json_exclusive)
 
-OLD=Path('/tmp/v7-bay-ocean-stage-20261103/index-v7-stage')
+OLD=TMP_ROOT/'v7-bay-ocean-stage-20261103/index-v7-stage'
 INDEX_DIR=ROOT/'audit/shared-output-safety-20261103/integration-copies/patched-v4/v7-diff-index-20261103T082811.290449Z-ed719fdf044e/index'
 DIFF_INDEX=INDEX_DIR/'v2-diff-member-index.json'
 COMPOSE=ROOT/'audit/shared-output-safety-20261103/integration-copies/patched-v4/v7-final-compose-20261103T082102.578143Z-e18f85758434/grid'
 COMPOSITION=COMPOSE/'composition-audit.json'
 V2Y=ROOT/'recovered-tmp/worldatlas-v5-recovery/raw/v2-rows.u32'
 V2R=ROOT/'recovered-tmp/worldatlas-v5-recovery/raw/v2-runs.u32'
-V6ROWS=Path('/tmp/v6-aegean-final-publication-20261103/final-candidate-grid-root-approved-v3/rows.u32le')
-V6RUNS=Path('/tmp/v6-aegean-final-publication-20261103/final-candidate-grid-root-approved-v3/runs.u32le')
+V6ROWS=TMP_ROOT/'v6-aegean-final-publication-20261103/final-candidate-grid-root-approved-v3/rows.u32le'
+V6RUNS=TMP_ROOT/'v6-aegean-final-publication-20261103/final-candidate-grid-root-approved-v3/runs.u32le'
 V7Y=COMPOSE/'rows.u32le'; V7R=COMPOSE/'runs.u32le'
 NAMED=ROOT/'audit/full-water-rebuild-20261103/final-artifacts/named-basin-source-manifest-20261103T075524.865327Z-fb75144ed60c/named-basin-source-assignments-manifest.json'
 OCEAN_BARR=ROOT/'audit/ocean-interfaces-20261103/fresh-water-partition/source-barriers/barrier_manifest.json'
@@ -72,7 +74,7 @@ def main():
  old_groups={g['id']:g for g in oldp['exceptions']};old_members={m['id']:(g,m) for g in oldp['exceptions'] for m in g['members']}
  old_rules={x['id']:copy.deepcopy(x) for x in oldp['rule_records']}
  cats={int(c['id']):c for c in oldp['categories']}
- stage=create_run_directory(HERE,'candidate-v7-full-ui')
+ stage=create_run_directory(OUTPUT_ROOT,'candidate-v7-full-ui')
  data=stage/'data';ui=stage/'ui';span_dir=data/'exception-spans'/'v2-v7-diff'; grids=data/'grids'/'v7'
  for p in [data,ui,span_dir,grids]:p.mkdir(parents=True,exist_ok=False)
  # Copy each immutable indexed member payload to a never-reused local data key.
