@@ -17,6 +17,13 @@ class V7BasinPoliciesTest(unittest.TestCase):
         self.assertEqual(gulf['measured_named_basin_overlap_cells'], 0)
         self.assertEqual(len(gulf['raw_source_file_sha256']), 64)
         self.assertTrue(policy['unresolved'])
+        self.assertEqual(policy['custom_basins'], [])
+        excluded = policy['excluded_named_basins'][0]
+        self.assertEqual(excluded['source_id'], 'teluk-cenderawasih-water-to-oceania-v2')
+        result = excluded['local_candidate']
+        self.assertEqual(result['coastal_oceania_cells'] + result['enclosed_oceania_cells'] + result['pacific_cells'], result['former_named_cells'])
+        self.assertEqual(result['candidate_total_v2_to_v7_changed_cells'], 435432577 - result['pacific_cells'])
+        self.assertIn('full recomposition pending', excluded['replacement_status'])
         for record in records:
             self.assertTrue(record['participant_water_codes'])
             self.assertTrue(all(1 <= n <= 6 for n in record['participant_water_codes']))

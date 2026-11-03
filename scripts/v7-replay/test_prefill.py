@@ -46,7 +46,7 @@ class PrefillTests(unittest.TestCase):
                     'grid': {'width': 4, 'height': 2}, 'rle_inputs': rles, 'water_layers': [layer]}
             pp = put('plan.json', json.dumps(plan).encode())
             out = base / 'output'
-            argv = ['build_prefill', '--plan', str(pp), '--input-root', str(root), '--out', str(out)]
+            argv = ['build_prefill', '--allow-unverified-snapshot', '--plan', str(pp), '--input-root', str(root), '--out', str(out)]
             with patch.object(c, 'W', 4), patch.object(c, 'H', 2), patch.object(c, 'GRID', {'width': 4, 'height': 2}), patch.object(sys, 'argv', argv), contextlib.redirect_stdout(io.StringIO()):
                 prefill.main()
                 self.assertEqual(np.fromfile(out / 'prefill-rows.u32le', dtype='<u4').tolist(), [0, 2, 3])

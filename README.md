@@ -143,7 +143,7 @@ from [BasinATLAS v1.0](https://doi.org/10.6084/m9.figshare.9890531), Linke et al
 © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), ODbL,
 relation 214415. The derivative route retains these attributions. The `repair_turkish_straits.py PRIOR OUTPUT` pass follows complete native Thracian
 and Anatolian banks rather than cutting the straits with straight segments.
-Marmara Island, Paşalimanı and Bozcaada are Asian; Gökçeada remains European.
+This historical pass assigned Marmara Island, Paşalimanı and Bozcaada to Asia and Gökçeada to Europe. The final reviewed V7 decision assigns Gökçeada to Asia, superseding this historical pass.
 Shared Black Sea–Marmara–Aegean waters are recomputed from the corrected native
 coasts, with independent distance checks and a proof that no change reaches the
 audit window's edge. Missing islands remain for the separate source audit.

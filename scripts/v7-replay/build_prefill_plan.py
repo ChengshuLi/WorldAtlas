@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+"""Assemble a pinned prefill plan from the selected basin policies and fresh inputs."""
+from __future__ import annotations
+import argparse
+import json
+import os
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from exclusive_outputs import write_json_exclusive
+from decision_snapshot import read_snapshot, participant_water_codes, find_source
+import compose_full_water_grid as c
+
+
+def input_path(value, config_path, root):
+    path = Path(value)
+    if not path.is_absolute():
+        path = config_path.parent / path
+    path = path.resolve()
+    if not path.is_relative_to(root) or not path.is_file():
+        raise ValueError(f'input missing or outside input root: {path}')
+    return path
+
+
+def layer_precedence(policy, layer_ids):
+    records = [p for p in policy.get('policies', []) if p.get('kind') == 'layer_precedence']
+    if len(records) != 1 or not isinstance(records[0].get('definition'), dict):
+        raise ValueError('exactly one layer precedence decision is required')
+    definition = records[0]['definition']; priorities = definition.get('priorities'); overrides = definition.get('allowed_overrides')
+    if (not isinstance(priorities, dict) or set(priorities) != set(layer_ids)
+            or any(type(p) is not int for p in priorities.values())):
+        raise ValueError('precedence priorities must exactly cover the selected layers')
+    if not isinstance(overrides, list):
+        raise ValueError('explicit allowed overrides are required')
+    result = {layer: [] for layer in layer_ids}; seen = set()
+    for rule in overrides:
+        if not isinstance(rule, dict) or set(rule) != {'winner', 'loser'}:
+            raise ValueError('invalid allowed override')
+        winner, loser = rule['winner'], rule['loser']
+        if (not isinstance(winner, str) or not isinstance(loser, str) or winner not in priorities
+                or loser not in priorities or priorities[winner] <= priorities[loser] or (winner, loser) in seen):
+            raise ValueError('invalid allowed override')
+        seen.add((winner, loser)); result[winner].append(loser)
+    return priorities, result
+
+
+def coastline_policy(policy):
+    records = [p for p in policy.get('policies', []) if p.get('kind') == 'coastline_assignment']
+    if len(records) != 1 or not isinstance(records[0].get('id'), str) or not records[0]['id'].strip():
+        raise ValueError('exactly one identified coastline assignment decision is required')
+    definition = records[0].get('definition')
+    if (not isinstance(definition, dict) or not isinstance(definition.get('source_id'), str)
+            or not definition['source_id'] or not isinstance(definition.get('source_version'), str)
+            or not definition['source_version'] or not isinstance(definition.get('method'), str)
+            or not definition['method'] or not isinstance(definition.get('parameters'), dict)):
+        raise ValueError('invalid coastline assignment decision')
+    return records[0], find_source(policy, definition)
+
+
+def assemble(config, config_path, root, policy, policy_path, out):
+    revision = policy.get('decision_revision', {})
+    if (policy.get('schema') != 'worldatlas-geography-decision-export-v1' or policy.get('source') != 'neon-export'
+            or revision.get('status') != 'accepted' or not revision.get('id') or not revision.get('entity_revision')):
+        raise ValueError('an accepted, revisioned Neon decision export is required')
+    selected = policy.get('basins', [])
+    by_id = {str(row['id']): row for row in selected}
+    expected = set(by_id)
+    if not expected or len(expected) != len(selected):
+        raise ValueError('invalid selected basin set')
+    incoming = config.get('basins', [])
+    provided = [str(row['decision_id']) for row in incoming]
+    if len(provided) != len(set(provided)) or set(provided) != expected:
+        raise ValueError('basin input IDs must exactly match selected decisions')
+    def rel(path):
+        return os.path.relpath(path, out.parent)
+    rles = {}
+    for key in ('physical', 'v6'):
+        source = config['rle_inputs'][key]
+        rows = input_path(source['rows_path'], config_path, root)
+        runs = input_path(source['runs_path'], config_path, root)
+        if c.sha256(rows) != source['rows_sha256'] or c.sha256(runs) != source['runs_sha256']:
+            raise ValueError(f'{key} grid hash mismatch')
+        rles[key] = {'rows_path':rel(rows), 'runs_path':rel(runs), 'rows_sha256':source['rows_sha256'], 'runs_sha256':source['runs_sha256']}
+        if source.get('physical_mask_sha256'):
+            rles[key]['physical_mask_sha256'] = source['physical_mask_sha256']
+    def validate_manifest(rec):
+        path = input_path(rec['manifest_path'], config_path, root)
+        if c.sha256(path) != rec['manifest_sha256']:
+            raise ValueError(f'manifest hash mismatch: {path}')
+        manifest = c.read_manifest(path, root)
+        if manifest.get('coverage', {}).get('complete') is not True:
+            raise ValueError(f'manifest does not declare complete coverage: {path}')
+        return path, manifest
+    coast = config['coastal_band']
+    coast_path, coast_manifest = validate_manifest(coast)
+    coast_source = coast_manifest.get('source', {}); physical = rles['physical']
+    coast_decision, coast_catalog = coastline_policy(policy); coast_definition = coast_decision['definition']
+    if (coast_source.get('decision_id') != coast_decision['id']
+            or coast_source.get('source_id') != coast_definition['source_id']
+            or coast_source.get('source_version') != coast_definition['source_version']
+            or coast_source.get('source_file_sha256') != coast_catalog['sha256']
+            or coast_source.get('assignment_method') != coast_definition['method']
+            or coast_source.get('parameters') != coast_definition['parameters']):
+        raise ValueError('coastal manifest source or assignment decision mismatch')
+    if (coast_source.get('decision_revision') != revision['id']
+            or coast_source.get('entity_revision') != revision['entity_revision']
+            or coast_source.get('policy_sha256') != c.sha256(policy_path)
+            or coast_source.get('physical_rows_sha256') != physical['rows_sha256']
+            or coast_source.get('physical_runs_sha256') != physical['runs_sha256']):
+        raise ValueError('coastal manifest decision or physical grid mismatch')
+    layer_ids = ['coastal-band'] + [f'named-{sid}' for sid in sorted(expected)]
+    priorities, overrides = layer_precedence(policy, layer_ids)
+    layers = [{'layer_id':'coastal-band','manifest_path':rel(coast_path),'manifest_sha256':coast['manifest_sha256'],'priority':priorities['coastal-band'],'overrides':overrides['coastal-band']}]
+    for entry in sorted(incoming, key=lambda x: str(x['decision_id'])):
+        sid = str(entry['decision_id']); path, manifest = validate_manifest(entry)
+        basin = by_id[sid]; source = manifest.get('source', {}); physical = rles['physical']
+        expected_source = find_source(policy, basin)
+        if (source.get('decision_id') != sid or not basin.get('assignment_method')
+                or source.get('assignment_method') != basin['assignment_method']
+                or source.get('source_id') != basin.get('source_id')
+                or source.get('source_version') != basin.get('source_version')
+                or str(source.get('source_feature_id')) != str(basin.get('source_feature_id'))
+                or source.get('source_file_sha256') != expected_source['sha256']):
+            raise ValueError(f'manifest source does not match selected decision: {sid}')
+        if not basin.get('geometry_sha256') or source.get('canonical_geometry_sha256') != basin['geometry_sha256']:
+            raise ValueError(f'manifest source geometry is not pinned by decision: {sid}')
+        if (source.get('policy_sha256') != c.sha256(policy_path) or source.get('decision_revision') != revision['id']
+                or source.get('entity_revision') != revision['entity_revision']):
+            raise ValueError(f'manifest decision snapshot mismatch: {sid}')
+        if source.get('physical_rows_sha256') != physical['rows_sha256'] or source.get('physical_runs_sha256') != physical['runs_sha256']:
+            raise ValueError(f'manifest physical grid mismatch: {sid}')
+        allowed = participant_water_codes(policy, basin)
+        layer_id = f'named-{sid}'
+        layers.append({'layer_id':layer_id,'manifest_path':rel(path),'manifest_sha256':entry['manifest_sha256'],
+                       'priority':priorities[layer_id],'overrides':overrides[layer_id],'allowed_codes':allowed})
+    return {'schema':'worldatlas-v7-full-grid-composition-plan-v1', 'status':'fresh-prefill-unverified-test-candidate',
+            'purpose':'Fresh selected named basins and coast, with residual marine water code 0.',
+            'grid':{'width':c.W,'height':c.H}, 'rle_inputs':rles, 'water_layers':layers,
+            'decision_snapshot_sha256':c.sha256(policy_path), 'decision_revision':revision['id'], 'entity_revision':revision['entity_revision'],
+            'precedence':'As specified by the revisioned layer-precedence decision; undeclared overlaps fail.'}
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--input-root', type=Path, required=True); ap.add_argument('--inputs', type=Path, required=True)
+    ap.add_argument('--policy', type=Path, required=True); ap.add_argument('--policy-sha256', required=True)
+    ap.add_argument('--allow-unverified-snapshot', action='store_true', help='test only: Neon acceptance cannot yet be authenticated by this tool')
+    ap.add_argument('--out', type=Path, required=True)
+    args = ap.parse_args()
+    if not args.allow_unverified_snapshot:
+        raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
+    root=args.input_root.resolve(); config_path=args.inputs.resolve(); policy_path=args.policy.resolve(); out=args.out.resolve()
+    if not root.is_dir() or not config_path.is_relative_to(root):
+        raise ValueError('input configuration must be inside the input root')
+    if out.is_relative_to(root) or root.is_relative_to(out):
+        raise ValueError('plan must be outside the input root')
+    policy=read_snapshot(policy_path,args.policy_sha256)
+    config=json.loads(config_path.read_text())
+    plan=assemble(config,config_path,root,policy,policy_path,out)
+    write_json_exclusive(out,plan,indent=2)
+    print(json.dumps({'plan':str(out),'sha256':c.sha256(out),'layers':len(plan['water_layers'])}))
+
+
+if __name__ == '__main__':
+    main()

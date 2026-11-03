@@ -1,8 +1,9 @@
 """Classify complete strait banks and islands, then refresh shared sea ownership.
 
 The native water channels separate Thrace from Anatolia. No coastline or island
-is created. Gokceada stays European; Bozcaada and the southern Marmara islands
-are Asian geographic groupings. Every ocean label remains unchanged.
+is created. This historical pass assigns Gokceada to Europe and Bozcaada and
+the southern Marmara islands to Asia. The final reviewed V7 decision supersedes
+the Gokceada assignment and places it in Asia. Every ocean label remains unchanged.
 """
 import argparse,gzip,hashlib,json
 from pathlib import Path

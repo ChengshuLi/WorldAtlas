@@ -14,11 +14,12 @@ import compose_full_water_grid as c
 
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--plan',required=True);ap.add_argument('--input-root',required=True);ap.add_argument('--out',required=True);a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--plan',required=True);ap.add_argument('--input-root',required=True);ap.add_argument('--out',required=True)
+ ap.add_argument('--allow-unverified-snapshot',action='store_true',help='test only: Neon acceptance cannot yet be authenticated by this tool');a=ap.parse_args()
+ if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
  root=Path(a.input_root).resolve()
  if not root.is_dir():raise ValueError('input root must exist')
  plan_path=Path(a.plan).resolve()
- if not plan_path.is_relative_to(root):raise ValueError('plan must be inside input root')
  plan=json.loads(plan_path.read_text())
  if plan.get('schema')!='worldatlas-v7-full-grid-composition-plan-v1':raise ValueError('wrong plan schema')
  out=Path(a.out).resolve()
@@ -54,6 +55,8 @@ def main():
     ss=cur.take(y)
     for s in ss:
      if s[3]>6:raise ValueError(f"prefill layers may only assign water code 1–6, got {s[3]} on row {y}")
+     if 'allowed_codes' in ent and s[3] not in ent['allowed_codes']:
+      raise ValueError(f"assignment code not allowed by selected basin policy on row {y}: {s[3]}")
     spans.extend(c.add_layer_identity(ss,int(ent['priority']),str(ent.get('layer_id',ent['manifest_path'])),set(ent.get('overrides',[]))))
    ass,conflicts=c.choose_assignments(spans,y,pe,pv)
    overlap_cells+=sum(b-a for a,b in {(a,b) for a,b,_,_ in conflicts})
@@ -83,7 +86,9 @@ def main():
    vals=codes[idx].astype('<u4');ends_out=ends[nxt-1].astype('<u4');rf.write(np.column_stack((ends_out,vals)).astype('<u4').ravel().tobytes())
    runs_written+=len(vals);yf.write(np.asarray([runs_written],dtype='<u4').tobytes())
  report={'schema':'worldatlas-v7-prefill-class-rle-audit-v1','status':'staged-not-published','grid':c.GRID,
-  'source_plan_sha256':c.sha256(plan_path),'physical_mask_sha256':plan['rle_inputs']['physical'].get('physical_mask_sha256'),
+  'source_plan_sha256':c.sha256(plan_path),'decision_snapshot_sha256':plan.get('decision_snapshot_sha256'),
+  'decision_revision':plan.get('decision_revision'),'entity_revision':plan.get('entity_revision'),
+  'physical_mask_sha256':plan['rle_inputs']['physical'].get('physical_mask_sha256'),
   'layer_manifests':[{'layer_id':x.get('layer_id'),'manifest_sha256':c.sha256(c.resolve_input(x['manifest_path'],plan_path.parent,root)),'priority':x['priority']} for x,_ in layers],
   'output':{'rows_path':rawr.name,'runs_path':rawu.name,'rows_sha256':c.sha256(rawr),'runs_sha256':c.sha256(rawu),'run_count':runs_written},
   'prefill_class_cells_by_code':counts,'physical_land_cells':land_cells,'assigned_continental_water_cells':assigned_cells,

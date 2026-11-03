@@ -1,10 +1,11 @@
 {
   "schema": "worldatlas-v7-basin-policy-v1",
-  "status": "incomplete-rebuild-decisions",
+  "status": "interim-migration-evidence-not-active",
   "provenance": {
     "historical_inventory_sha256": "0c81fa450db730f9c9f882c70b223ff34e2ddb26a93afbcbce77424b3fbe696d",
     "historical_inventory_scope": "91 SeaVoX decisions recorded for the V7 candidate. Source geometry hashes are leads, not a verified complete source package.",
-    "amendment": "SeaVoX 24063 selected for Gulf of Carpentaria; the older alternative is not an active source."
+    "amendment": "SeaVoX 24063 is selected for Gulf of Carpentaria. Cenderawasih is not selected as a named continent sea; its replacement assignments are under verification.",
+    "migration_notice": "Geographic decisions belong in versioned Neon. This historical extraction is retained only until its migration is validated; it is not an accepted build input."
   },
   "named_basins": [
     {
@@ -1049,21 +1050,26 @@
       "candidate_assignment_sha256": "cea9870a696168836e0bba5f4e0f0ba47d1a3113921bce5127320ccf3ce96306"
     }
   ],
-  "custom_basins": [
-    {
-      "source_id": "teluk-cenderawasih-water-to-oceania-v2",
-      "name": "Cenderawasih Bay",
-      "policy": "single_continent_named_basin",
-      "participant_water_codes": [
-        6
-      ],
-      "historical_geometry_sha256": "3d0ab7262d561cbaf150aa3800a5dd3b722f6b9464ac8f29817a8265edb7ec1b",
-      "status": "historical candidate; source and derivation require independent verification"
-    }
-  ],
+  "custom_basins": [],
   "unresolved": [
     "Independently reproduce the SeaVoX 24063 mask, its zero named-basin overlap, and the complete class-grid comparison before accepting a rebuild.",
-    "Preserve and verify full source geometry and derived Cenderawasih closure.",
+    "Verify the Cenderawasih replacement assignments and global change count with a complete recomposition.",
     "Reconstruct physical and final-land grids from original sources and reviewed decisions."
+  ],
+  "excluded_named_basins": [
+    {
+      "source_id": "teluk-cenderawasih-water-to-oceania-v2",
+      "reason": "Removed as a continent sea by user decision",
+      "replacement_status": "local candidate analysis; full recomposition pending",
+      "local_candidate": {
+        "former_named_cells": 529026,
+        "coastal_oceania_cells": 362834,
+        "enclosed_oceania_cells": 2,
+        "pacific_cells": 166190,
+        "source_barrier_edges_in_window": 0,
+        "candidate_total_v2_to_v7_changed_cells": 435266387,
+        "analysis_sha256": "cd505978a05818cdb877731b0c0dd42f677ea894fddab7a21a81b3f58d1bb560"
+      }
+    }
   ]
 }

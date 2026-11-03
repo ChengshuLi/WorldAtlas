@@ -35,24 +35,24 @@ BEGIN
   IF NEW.parent_id IS NOT NULL THEN
     SELECT level INTO parent_level FROM atlas.geographic_entities
       WHERE revision = NEW.revision AND id = NEW.parent_id;
-    IF parent_level IS DISTINCT FROM CASE NEW.level
+    IF parent_level IS DISTINCT FROM (CASE NEW.level
       WHEN 'subcontinent' THEN 'continent' WHEN 'region' THEN 'subcontinent'
       WHEN 'area' THEN 'region' WHEN 'province' THEN 'area'
-      WHEN 'location' THEN 'province' END THEN
+      WHEN 'location' THEN 'province' END) THEN
       RAISE EXCEPTION 'invalid parent level for entity %', NEW.id;
     END IF;
   END IF;
   -- A parent's level change must not invalidate existing children.
   IF EXISTS (SELECT 1 FROM atlas.geographic_entities c
     WHERE c.revision = NEW.revision AND c.parent_id = NEW.id
-      AND NEW.level IS DISTINCT FROM CASE c.level
+      AND NEW.level IS DISTINCT FROM (CASE c.level
         WHEN 'subcontinent' THEN 'continent' WHEN 'region' THEN 'subcontinent'
         WHEN 'area' THEN 'region' WHEN 'province' THEN 'area'
-        WHEN 'location' THEN 'province' END) THEN
+        WHEN 'location' THEN 'province' END)) THEN
     RAISE EXCEPTION 'invalid child level for entity %', NEW.id;
   END IF;
   RETURN NULL;
-END $$;
+END; $$;
 CREATE CONSTRAINT TRIGGER geographic_entity_parent_check
   AFTER INSERT OR UPDATE ON atlas.geographic_entities
   DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_entity_parent();
