@@ -7,18 +7,28 @@ import hashlib
 import json
 
 
-def read_snapshot(path, expected_sha256):
+def validate_revision(data, allow_draft=False):
+    revision = data.get('decision_revision', {})
+    entity = data.get('entity_revision', {})
+    valid_ids = (isinstance(revision.get('id'), str) and revision['id'].strip()
+                 and isinstance(revision.get('entity_revision'), str) and revision['entity_revision'].strip())
+    accepted = (data.get('schema') == 'worldatlas-geography-decision-export-v1'
+                and revision.get('status') == 'accepted' and entity.get('status') == 'accepted'
+                and entity.get('id') == revision.get('entity_revision'))
+    draft = (allow_draft and data.get('schema') == 'worldatlas-geography-decision-draft-evidence-v1'
+             and revision.get('status') == 'draft' and entity.get('status') == 'draft'
+             and entity.get('id') == revision.get('entity_revision'))
+    if data.get('source') != 'neon-export' or not valid_ids or not (accepted or draft):
+        raise ValueError('an accepted or explicitly opted-in draft revisioned Neon decision export is required')
+    return revision
+
+
+def read_snapshot(path, expected_sha256, allow_draft=False):
     raw = path.read_bytes()
     if hashlib.sha256(raw).hexdigest() != expected_sha256:
         raise ValueError('decision snapshot hash mismatch')
     data = json.loads(raw)
-    revision = data.get('decision_revision', {})
-    if (data.get('schema') != 'worldatlas-geography-decision-export-v1'
-            or data.get('source') != 'neon-export'
-            or revision.get('status') != 'accepted'
-            or not isinstance(revision.get('id'), str) or not revision['id'].strip()
-            or not isinstance(revision.get('entity_revision'), str) or not revision['entity_revision'].strip()):
-        raise ValueError('an accepted, revisioned Neon decision export is required')
+    validate_revision(data, allow_draft=allow_draft)
     return data
 
 

@@ -61,12 +61,13 @@ def endpoint_coordinate(endpoint, axis):
         raise ValueError('invalid endpoint coordinate') from e
 
 
-def load_config(snapshot,width,height):
+def load_config(snapshot,width,height,allow_draft=False,software_versions=None):
     rev=snapshot.get('decision_revision',{}); erev=snapshot.get('entity_revision',{})
-    if (snapshot.get('schema')!='worldatlas-geography-decision-export-v1' or snapshot.get('source')!='neon-export'
-        or rev.get('status')!='accepted' or not rev.get('id') or not rev.get('entity_revision')
-        or erev.get('id')!=rev['entity_revision'] or erev.get('status')!='accepted'):
-        raise ValueError('accepted matching decision/entity revisions required; export is still unverified')
+    accepted=(snapshot.get('schema')=='worldatlas-geography-decision-export-v1' and rev.get('status')=='accepted' and erev.get('status')=='accepted')
+    draft=(allow_draft and snapshot.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and rev.get('status')=='draft' and erev.get('status')=='draft')
+    if (snapshot.get('source')!='neon-export' or not (accepted or draft) or not rev.get('id') or not rev.get('entity_revision')
+        or erev.get('id')!=rev['entity_revision']):
+        raise ValueError('accepted or explicitly opted-in draft matching decision/entity revisions required; export is still unverified')
     policies=[p for p in snapshot.get('policies',[]) if p.get('kind')=='ocean_fill']
     if len(policies)!=1:raise ValueError('one ocean_fill policy is required')
     policy=policies[0].get('definition',{})
@@ -104,7 +105,7 @@ def load_config(snapshot,width,height):
                 from pyproj import Geod
             except ImportError as e:raise ValueError('wgs84_geodesic requires pinned pyproj and PROJ') from e
             import pyproj
-            versions=snapshot.get('build',{}).get('software_versions',{})
+            versions=software_versions if software_versions is not None else snapshot.get('build',{}).get('software_versions',{})
             if versions.get('pyproj')!=pyproj.__version__ or versions.get('proj')!=pyproj.proj_version_str:
                 raise ValueError('WGS84 route requires matching pinned pyproj and PROJ versions')
             geod=Geod(ellps='WGS84'); dense=[]
@@ -159,8 +160,8 @@ def export_layer(partition,out,width,height,metadata,inputs,tile_height=256):
     write_json_exclusive(out/'ocean-layer-manifest.json',manifest,indent=2)
     return manifest
 
-def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_runs,out,width,height,inputs,tile_height=256):
-    policy,paths,seeds,metadata=load_config(snapshot,width,height)
+def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_runs,out,width,height,inputs,tile_height=256,allow_draft=False,software_versions=None,pre_finalize=None):
+    policy,paths,seeds,metadata=load_config(snapshot,width,height,allow_draft,software_versions)
     if tile_height<=0:raise ValueError('tile height must be positive')
     create_directory_exclusive(out)
     cuts=rasterize_barriers(paths,width,height)
@@ -182,6 +183,7 @@ def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_
         eligible,classes=make_prefill_adapters(physical,prefill,width,height)
         part=floodfill_run_graph(eligible,width,height,cuts,seeds,out/'partition',manifest_inputs=pins,
              unassigned_policy='report-only; do not assign unseeded components automatically',classification_rows=classes,seed_metadata=metadata)
+    if pre_finalize: pre_finalize()
     export_layer(out/'partition',out,width,height,metadata,pins,tile_height)
     write_json_exclusive(out/'run-summary.json',{'status':'unverified-candidate-not-published','snapshot_sha256':snapshot_hash,
       'unseeded_cell_count':part['unseeded_cell_count'],'assigned_cells_total':part['assigned_cells_total'],
@@ -191,6 +193,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('snapshot','snapshot-sha256','physical-rows','physical-runs','prefill-dir','prefill-plan','out'):p.add_argument('--'+name,required=True)
     p.add_argument('--allow-unverified-snapshot',action='store_true');p.add_argument('--tile-height',type=int,default=256)
+    p.add_argument('--allow-draft-snapshot',action='store_true');p.add_argument('--candidate-build');p.add_argument('--candidate-build-sha256')
     a=p.parse_args()
     if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon export is not verified by this runner; explicit test-only flag required')
     if not HEX.fullmatch(a.snapshot_sha256) or sha(a.snapshot)!=a.snapshot_sha256:raise ValueError('snapshot hash mismatch')
@@ -200,18 +203,46 @@ def main():
     if any(s==out or s.is_relative_to(out) or (s.is_dir() and out.is_relative_to(s)) for s in sources):raise ValueError('output must be separate from all inputs')
     if audit.get('source_plan_sha256')!=sha(a.prefill_plan) or audit.get('decision_snapshot_sha256')!=a.snapshot_sha256:raise ValueError('prefill audit plan/snapshot mismatch')
     if audit.get('decision_revision')!=snapshot.get('decision_revision',{}).get('id') or audit.get('entity_revision')!=snapshot.get('decision_revision',{}).get('entity_revision'):raise ValueError('prefill revision mismatch')
-    if audit.get('physical_mask_sha256')!=snapshot.get('build',{}).get('physical_grid_sha256') or not HEX.fullmatch(str(audit.get('physical_mask_sha256',''))):raise ValueError('physical grid revision pin mismatch')
+    status=snapshot.get('decision_revision',{}).get('status')
+    candidate=None
+    if status=='draft':
+        if not a.allow_draft_snapshot or not a.candidate_build or not a.candidate_build_sha256:
+            raise ValueError('draft run requires explicit opt-in and a pinned candidate build manifest')
+        if not HEX.fullmatch(a.candidate_build_sha256) or sha(a.candidate_build)!=a.candidate_build_sha256:
+            raise ValueError('candidate build manifest hash mismatch')
+        candidate=json.loads(Path(a.candidate_build).read_text())
+        if (candidate.get('schema')!='worldatlas-direct-candidate-build-v1' or candidate.get('status')!='unverified-research-not-published'
+            or candidate.get('decision_snapshot_sha256')!=a.snapshot_sha256
+            or candidate.get('decision_revision')!=snapshot.get('decision_revision',{}).get('id')
+            or candidate.get('entity_revision')!=snapshot.get('decision_revision',{}).get('entity_revision')
+            or candidate.get('physical_rows_sha256')!=sha(a.physical_rows)
+            or candidate.get('physical_runs_sha256')!=sha(a.physical_runs)
+            or candidate.get('physical_mask_sha256')!=audit.get('physical_mask_sha256')):
+            raise ValueError('candidate build does not bind snapshot and physical grid')
+    elif a.candidate_build or a.candidate_build_sha256:
+        raise ValueError('candidate build manifest is only for draft research')
+    expected_mask=candidate.get('physical_mask_sha256') if candidate else snapshot.get('build',{}).get('physical_grid_sha256')
+    if audit.get('physical_mask_sha256')!=expected_mask or not HEX.fullmatch(str(expected_mask or '')):raise ValueError('physical grid revision pin mismatch')
     if (plan.get('decision_snapshot_sha256')!=a.snapshot_sha256 or plan.get('decision_revision')!=audit['decision_revision']
         or plan.get('entity_revision')!=audit['entity_revision']):raise ValueError('prefill plan decision binding mismatch')
     pr=plan['rle_inputs']['physical']; grid=plan['grid']; width,height=grid['width'],grid['height']
     if pr.get('physical_mask_sha256')!=audit['physical_mask_sha256']:raise ValueError('prefill plan physical mask binding mismatch')
     if (width,height)!=(131072,54614):raise ValueError('unexpected production grid')
+    if candidate and (candidate.get('grid',{}).get('width')!=width or candidate.get('grid',{}).get('height')!=height):raise ValueError('candidate build grid mismatch')
     if sha(a.physical_rows)!=pr['rows_sha256'] or sha(a.physical_runs)!=pr['runs_sha256']:raise ValueError('physical file hash mismatch')
     output=audit['output'];rr=prefill/output['rows_path'];ru=prefill/output['runs_path']
     if not rr.resolve().is_relative_to(prefill) or not ru.resolve().is_relative_to(prefill) or sha(rr)!=output['rows_sha256'] or sha(ru)!=output['runs_sha256']:raise ValueError('prefill RLE path or hash mismatch')
     pins={'physical_rows_sha256':pr['rows_sha256'],'physical_runs_sha256':pr['runs_sha256'],'physical_mask_sha256':audit['physical_mask_sha256'],
           'prefill_rows_sha256':output['rows_sha256'],'prefill_runs_sha256':output['runs_sha256'],'prefill_audit_sha256':sha(prefill/'prefill-audit.json')}
-    run(snapshot,a.snapshot_sha256,a.physical_rows,a.physical_runs,rr,ru,out,width,height,pins,a.tile_height)
+    if candidate:pins['candidate_build_sha256']=a.candidate_build_sha256
+    def verify_unchanged():
+        checks=[(a.snapshot,a.snapshot_sha256),(a.prefill_plan,audit['source_plan_sha256']),
+                (a.physical_rows,pr['rows_sha256']),(a.physical_runs,pr['runs_sha256']),
+                (rr,output['rows_sha256']),(ru,output['runs_sha256']),
+                (prefill/'prefill-audit.json',pins['prefill_audit_sha256'])]
+        if candidate:checks.append((a.candidate_build,a.candidate_build_sha256))
+        if any(sha(path)!=expected for path,expected in checks):raise ValueError('input changed during ocean fill')
+    run(snapshot,a.snapshot_sha256,a.physical_rows,a.physical_runs,rr,ru,out,width,height,pins,a.tile_height,allow_draft=a.allow_draft_snapshot,software_versions=candidate.get('software_versions',{}) if candidate else None,pre_finalize=verify_unchanged)
     print(json.dumps({'status':'candidate-only','output':str(out),'summary_sha256':sha(out/'run-summary.json')}))
 
 if __name__=='__main__':main()

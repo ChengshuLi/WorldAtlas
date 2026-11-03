@@ -95,7 +95,7 @@ def validate_reference(ref, width, height):
 def compare_row(values, ref_runs, width):
     ends = ref_runs[:, 0]
     codes = ref_runs[:, 1]
-    if not len(ends) or ends[-1] != width or np.any(ends[1:] <= ends[:-1]) or np.any(~np.isin(codes, [1, 17])):
+    if not len(ends) or ends[0] == 0 or ends[-1] != width or np.any(ends[1:] <= ends[:-1]) or np.any(~np.isin(codes, [1, 17])):
         raise ValueError('invalid reference row')
     actual_ends = np.flatnonzero(np.r_[values[1:] != values[:-1], True]) + 1
     cuts = np.unique(np.r_[0, ends, actual_ends])

@@ -15,6 +15,7 @@ class DecisionSnapshotTest(unittest.TestCase):
     def test_hash_and_revision_are_required(self):
         base={'schema':'worldatlas-geography-decision-export-v1','source':'neon-export',
               'decision_revision':{'id':'d1','status':'accepted','entity_revision':'e1'},
+              'entity_revision':{'id':'e1','status':'accepted'},
               'category_bindings':[{'entity_id':101,'code':6,'physical_class':'water'}]}
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp)/'snapshot.json';p.write_text(json.dumps(base));h=hashlib.sha256(p.read_bytes()).hexdigest()
@@ -26,6 +27,33 @@ class DecisionSnapshotTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'revisioned Neon'): read_snapshot(p,h)
             with self.assertRaisesRegex(ValueError,'unique V7 water binding'):
                 participant_water_codes(data,{'participant_entity_ids':[102]})
+
+    def test_draft_requires_explicit_opt_in_and_matching_revisions(self):
+        base={'schema':'worldatlas-geography-decision-draft-evidence-v1','source':'neon-export',
+              'decision_revision':{'id':'d1','status':'draft','entity_revision':'e1'},
+              'entity_revision':{'id':'e1','status':'draft'}}
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp)/'draft.json'
+            def save(value):
+                p.write_text(json.dumps(value)); return hashlib.sha256(p.read_bytes()).hexdigest()
+            h=save(base)
+            with self.assertRaisesRegex(ValueError,'revisioned Neon'): read_snapshot(p,h)
+            self.assertEqual(read_snapshot(p,h,allow_draft=True),base)
+            bad={**base,'entity_revision':{'id':'e1','status':'accepted'}};h=save(bad)
+            with self.assertRaisesRegex(ValueError,'revisioned Neon'): read_snapshot(p,h,allow_draft=True)
+            bad={**base,'schema':'worldatlas-geography-decision-export-v1',
+                 'decision_revision':{'id':'d1','status':'accepted','entity_revision':'e1'}};h=save(bad)
+            with self.assertRaisesRegex(ValueError,'revisioned Neon'): read_snapshot(p,h,allow_draft=True)
+
+    def test_draft_plan_requires_explicit_opt_in(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); plan=root/'plan.json'
+            plan.write_text(json.dumps({'schema':'worldatlas-v7-full-grid-composition-plan-v1',
+                                        'decision_revision_status':'draft'}))
+            argv=['prefill','--allow-unverified-snapshot','--plan',str(plan),'--input-root',str(root),'--out',str(root/'out')]
+            with patch.object(sys,'argv',argv):
+                with self.assertRaisesRegex(ValueError,'draft plan requires'): build_prefill.main()
+            self.assertFalse((root/'out').exists())
 
     def test_source_pin_must_be_a_sha256(self):
         basin={'source_id':'s','source_version':'v'}

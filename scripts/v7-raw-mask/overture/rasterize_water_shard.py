@@ -12,6 +12,7 @@ import hashlib
 import json
 import math
 import os
+import shutil
 from pathlib import Path
 import sys
 
@@ -63,6 +64,9 @@ def run(source, expected, output, config_path, batch_size=8192):
     grid = cfg['grid']; policy = cfg['policy']
     width, height, west, north, step = (grid[k] for k in ('width','height','west','north','step'))
     tile = cfg.get('tile_size', 1024)
+    reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
+    if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
+        raise ValueError('invalid free-space reserve')
     if (not isinstance(width,int) or isinstance(width,bool) or width <= 0 or
         not isinstance(height,int) or isinstance(height,bool) or height <= 0 or
         not isinstance(tile,int) or isinstance(tile,bool) or not 1 <= tile <= 4096 or
@@ -88,6 +92,8 @@ def run(source, expected, output, config_path, batch_size=8192):
     # explicitly null CRS rather than silently assume longitude/latitude.
     if 'crs' in geo['columns']['geometry']:
         raise ValueError('explicit CRS requires independent review; expected GeoParquet default OGC:CRS84')
+    if shutil.disk_usage(output.parent).free < reserve:
+        raise ValueError('free disk below configured reserve')
     os.mkdir(output)
     out = Path(output)
     raster = gdal.GetDriverByName('GTiff').Create(str(out/'water.tif'), width, height, 1,
@@ -103,6 +109,8 @@ def run(source, expected, output, config_path, batch_size=8192):
     # is a monotone union (the mask is initialized to zero and burns only 1).
     for batch_no, batch in enumerate(pf.iter_batches(batch_size=batch_size,
             columns=['id', 'subtype', 'class', 'sources', 'geometry'], use_threads=False)):
+        if shutil.disk_usage(out).free < reserve:
+            raise ValueError('free disk below configured reserve; partial output preserved')
         tiles = {}
         for item in batch.to_pylist():
             counts['rows'] += 1

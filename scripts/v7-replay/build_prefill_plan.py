@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from exclusive_outputs import write_json_exclusive
-from decision_snapshot import read_snapshot, participant_water_codes, find_source
+from decision_snapshot import read_snapshot, validate_revision, participant_water_codes, find_source
 import compose_full_water_grid as c
 
 
@@ -57,12 +57,42 @@ def coastline_policy(policy):
     return records[0], find_source(policy, definition)
 
 
-def assemble(config, config_path, root, policy, policy_path, out):
-    revision = policy.get('decision_revision', {})
-    if (policy.get('schema') != 'worldatlas-geography-decision-export-v1' or policy.get('source') != 'neon-export'
-            or revision.get('status') != 'accepted' or not revision.get('id') or not revision.get('entity_revision')):
-        raise ValueError('an accepted, revisioned Neon decision export is required')
+def validate_land_report(report, report_path, physical, land, snapshot_hash, revision):
+    """Bind an unverified research land RLE to this physical grid and snapshot."""
+    comp = report.get('compiler_report', {})
+    pins = comp.get('input_sha256', {})
+    verified = report.get('component_verification', {})
+    digest = lambda value: isinstance(value, str) and len(value) == 64 and all(ch in '0123456789abcdef' for ch in value)
+    if (not all(digest(verified.get(k)) for k in ('builder_source_sha256', 'builder_binary_sha256', 'rows_sha256', 'runs_sha256'))
+            or not verified.get('compiler_version') or not verified.get('builder_output')
+            or verified.get('rows_sha256') != pins.get('component_rows')
+            or verified.get('runs_sha256') != pins.get('component_runs')
+            or report.get('schema') != 'direct-neon-land-build-report-v1'
+            or report.get('status') != 'unverified-research-not-published'
+            or report.get('snapshot_sha256') != snapshot_hash
+            or report.get('decision_revision') != revision.get('id')
+            or report.get('decision_revision_asserted_status') != revision.get('status')
+            or report.get('entity_revision') != revision.get('entity_revision')
+            or comp.get('schema') != 'land-decision-compiler-prototype-report-v1'
+            or pins.get('physical_rows') != physical['rows_sha256']
+            or pins.get('physical_runs') != physical['runs_sha256']
+            or comp.get('output_rows_sha256') != land['rows_sha256']
+            or comp.get('output_runs_sha256') != land['runs_sha256']):
+        raise ValueError('direct land report does not bind this snapshot and physical grid')
+    if (land['resolved_rows'] != (report_path.parent / 'land/rows.u32le').resolve()
+            or land['resolved_runs'] != (report_path.parent / 'land/runs.u32le').resolve()):
+        raise ValueError('direct land outputs do not match report location')
+
+
+def assemble(config, config_path, root, policy, policy_path, out, allow_draft=False, allow_research_shore=False):
+    revision = validate_revision(policy, allow_draft=allow_draft)
     selected = policy.get('basins', [])
+    methods = {row.get('assignment_method') for row in selected}
+    if methods - {'single_continent_named_basin', 'shared_nearest_assigned_shore'}:
+        raise ValueError('unsupported basin assignment method or tie rules')
+    shared = 'shared_nearest_assigned_shore' in methods
+    if shared and (not allow_research_shore or revision['status'] != 'draft'):
+        raise ValueError('shared shoreline metric requires explicit draft research opt-in')
     by_id = {str(row['id']): row for row in selected}
     expected = set(by_id)
     if not expected or len(expected) != len(selected):
@@ -74,7 +104,10 @@ def assemble(config, config_path, root, policy, policy_path, out):
     def rel(path):
         return os.path.relpath(path, out.parent)
     rles = {}
-    for key in ('physical', 'v6'):
+    land_key = 'land' if 'land' in config['rle_inputs'] else 'v6'
+    if set(config['rle_inputs']) != {'physical', land_key}:
+        raise ValueError('exactly one direct land or historical v6 grid is required')
+    for key in ('physical', land_key):
         source = config['rle_inputs'][key]
         rows = input_path(source['rows_path'], config_path, root)
         runs = input_path(source['runs_path'], config_path, root)
@@ -83,6 +116,19 @@ def assemble(config, config_path, root, policy, policy_path, out):
         rles[key] = {'rows_path':rel(rows), 'runs_path':rel(runs), 'rows_sha256':source['rows_sha256'], 'runs_sha256':source['runs_sha256']}
         if source.get('physical_mask_sha256'):
             rles[key]['physical_mask_sha256'] = source['physical_mask_sha256']
+    if shared and land_key != 'land':
+        raise ValueError('shared basins require direct decision-derived land')
+    if land_key == 'land':
+        source = config['rle_inputs']['land']
+        report_path = input_path(source['report_path'], config_path, root)
+        if c.sha256(report_path) != source['report_sha256']:
+            raise ValueError('direct land report hash mismatch')
+        land = {**rles['land'], 'resolved_rows':input_path(source['rows_path'], config_path, root),
+                'resolved_runs':input_path(source['runs_path'], config_path, root)}
+        validate_land_report(json.loads(report_path.read_text()), report_path, rles['physical'],
+                             land, c.sha256(policy_path), revision)
+        rles['land']['report_path'] = rel(report_path)
+        rles['land']['report_sha256'] = source['report_sha256']
     def validate_manifest(rec):
         path = input_path(rec['manifest_path'], config_path, root)
         if c.sha256(path) != rec['manifest_sha256']:
@@ -130,13 +176,32 @@ def assemble(config, config_path, root, policy, policy_path, out):
         if source.get('physical_rows_sha256') != physical['rows_sha256'] or source.get('physical_runs_sha256') != physical['runs_sha256']:
             raise ValueError(f'manifest physical grid mismatch: {sid}')
         allowed = participant_water_codes(policy, basin)
+        if basin['assignment_method'] == 'shared_nearest_assigned_shore':
+            from shared_nearest import selected_rules
+            selected_rules(policy, basin)  # Validate participant bindings and exact tie policy.
+            audit = manifest.get('nearest_assignment_audit') or {}
+            count = manifest.get('physical_water_cells')
+            certified, exact = audit.get('certified_bound_cells'), audit.get('exact_distance_cells')
+            hashes = (manifest.get('algorithm_sha256'), audit.get('shared_nearest_sha256'), audit.get('spherical_shore_sha256'))
+            valid_hash = lambda value: isinstance(value, str) and len(value) == 64 and all(ch in '0123456789abcdef' for ch in value)
+            if (source.get('land_rows_sha256') != rles['land']['rows_sha256']
+                    or source.get('land_runs_sha256') != rles['land']['runs_sha256']
+                    or source.get('decision_status') != revision['status']
+                    or source.get('tie_rules') != basin.get('tie_rules')
+                    or audit.get('shore_method') != 'spherical-grid-edge-v1 (research, not an approved decision)'
+                    or type(count) is not int or count < 0 or type(certified) is not int or certified < 0
+                    or type(exact) is not int or exact < 0 or certified + exact != count
+                    or not all(valid_hash(x) for x in hashes)):
+                raise ValueError(f'shared basin research method or land binding mismatch: {sid}')
         layer_id = f'named-{sid}'
         layers.append({'layer_id':layer_id,'manifest_path':rel(path),'manifest_sha256':entry['manifest_sha256'],
                        'priority':priorities[layer_id],'overrides':overrides[layer_id],'allowed_codes':allowed})
     return {'schema':'worldatlas-v7-full-grid-composition-plan-v1', 'status':'fresh-prefill-unverified-test-candidate',
             'purpose':'Fresh selected named basins and coast, with residual marine water code 0.',
+            'land_input_kind':'direct-research' if land_key == 'land' else 'historical-v6-replay',
+            'research_shore_method': 'spherical-grid-edge-v1' if shared else None,
             'grid':{'width':c.W,'height':c.H}, 'rle_inputs':rles, 'water_layers':layers,
-            'decision_snapshot_sha256':c.sha256(policy_path), 'decision_revision':revision['id'], 'entity_revision':revision['entity_revision'],
+            'decision_snapshot_sha256':c.sha256(policy_path), 'decision_revision':revision['id'], 'decision_revision_status':revision['status'], 'entity_revision':revision['entity_revision'],
             'precedence':'As specified by the revisioned layer-precedence decision; undeclared overlaps fail.'}
 
 
@@ -145,6 +210,8 @@ def main():
     ap.add_argument('--input-root', type=Path, required=True); ap.add_argument('--inputs', type=Path, required=True)
     ap.add_argument('--policy', type=Path, required=True); ap.add_argument('--policy-sha256', required=True)
     ap.add_argument('--allow-unverified-snapshot', action='store_true', help='test only: Neon acceptance cannot yet be authenticated by this tool')
+    ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow explicitly draft Neon evidence')
+    ap.add_argument('--allow-research-shore', action='store_true', help='research only: allow the unapproved spherical grid-edge shore method')
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args()
     if not args.allow_unverified_snapshot:
@@ -154,9 +221,9 @@ def main():
         raise ValueError('input configuration must be inside the input root')
     if out.is_relative_to(root) or root.is_relative_to(out):
         raise ValueError('plan must be outside the input root')
-    policy=read_snapshot(policy_path,args.policy_sha256)
+    policy=read_snapshot(policy_path,args.policy_sha256,allow_draft=args.allow_draft_snapshot)
     config=json.loads(config_path.read_text())
-    plan=assemble(config,config_path,root,policy,policy_path,out)
+    plan=assemble(config,config_path,root,policy,policy_path,out,allow_draft=args.allow_draft_snapshot,allow_research_shore=args.allow_research_shore)
     write_json_exclusive(out,plan,indent=2)
     print(json.dumps({'plan':str(out),'sha256':c.sha256(out),'layers':len(plan['water_layers'])}))
 

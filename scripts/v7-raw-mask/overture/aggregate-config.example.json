@@ -1,0 +1,37 @@
+{
+  "schema": "water-union-comparison-v1",
+  "grid": {
+    "width": 131072,
+    "height": 54614,
+    "west": -180,
+    "north": 90,
+    "step": 0.00274658203125
+  },
+  "selection_notes": "REPLACE: source release, complete shard list, source pins and selection.",
+  "shard_count": 2,
+  "minimum_free_bytes": 2147483648,
+  "shards": [
+    {
+      "path": "/ABSOLUTE/SHARD-1/water.tif",
+      "sha256": "REPLACE",
+      "status": "candidate-only",
+      "report": {
+        "path": "/ABSOLUTE/SHARD-1/report.json",
+        "sha256": "REPLACE"
+      }
+    },
+    {
+      "path": "/ABSOLUTE/SHARD-2/water.tif",
+      "sha256": "REPLACE",
+      "status": "candidate-only",
+      "report": {
+        "path": "/ABSOLUTE/SHARD-2/report.json",
+        "sha256": "REPLACE"
+      }
+    }
+  ],
+  "source_manifest": {
+    "path": "/ABSOLUTE/INPUT/verified-manifest.json",
+    "sha256": "REPLACE"
+  }
+}

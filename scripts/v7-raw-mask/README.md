@@ -1,3 +1,5 @@
+For the reference-optional direct physical stage, see [DIRECT.md](DIRECT.md).
+
 # Experimental raw-to-physical mask builder
 
 This is an isolated, configurable prototype, not the recovered historical builder and not a deployable replacement. It rasterizes selected EPSG:4326 polygon datasets in order: OSM-style land burns physical code 17 onto a code-1 water background, then selected inland-water polygons burn code 1. Outputs use little-endian uint32 row offsets and `(exclusive end column, physical code)` runs. The example grid is the V7/V2 grid: 131,072 × 54,614, west −180°, north 90°, step 360/131,072°; rows proceed north to south. The intended test is a full-grid comparison with the preserved physical mask, never a claim inferred from source names alone.

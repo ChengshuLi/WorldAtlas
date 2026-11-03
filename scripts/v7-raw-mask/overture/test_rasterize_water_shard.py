@@ -65,6 +65,13 @@ class WaterShardTests(unittest.TestCase):
         self.assertEqual(report['status'],'incomplete-input-issues')
         self.assertEqual(json.loads((out/'invalid-feature-ids.json').read_text()), ['lake'])
 
+    def test_free_space_guard(self):
+        p,digest=self.fixture();cfg=json.loads(self.config.read_text());cfg['minimum_free_bytes']=1 << 60
+        self.config.write_text(json.dumps(cfg));out=self.path/'no-space'
+        with self.assertRaisesRegex(ValueError,'free disk below configured reserve'):
+            build.run(p,digest,out,self.config)
+        self.assertFalse(out.exists())
+
     def test_integrity_and_collision(self):
         p,digest = self.fixture()
         with self.assertRaises(ValueError): build.run(p, '0'*64, self.path/'bad',self.config)

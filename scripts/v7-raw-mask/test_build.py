@@ -64,6 +64,8 @@ class BuilderTest(unittest.TestCase):
         self.assertFalse((self.d/'bad').exists())
         with self.assertRaisesRegex(ValueError,'invalid reference row'):
             compare_row(np.array([1,17]),np.array([[1,1]],dtype=np.uint32),2)
+        with self.assertRaisesRegex(ValueError,'invalid reference row'):
+            compare_row(np.array([1,17]),np.array([[0,1],[2,17]],dtype=np.uint32),2)
     def test_invalid_geometry_rejected(self):
         bad=self.d/'bad.geojson'
         geojson(bad,[({}, {'type':'Polygon','coordinates':[[[0,0],[1,1],[1,0],[0,1],[0,0]]]})])

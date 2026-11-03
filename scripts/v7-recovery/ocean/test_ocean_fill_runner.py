@@ -30,6 +30,13 @@ class OceanRunnerTests(unittest.TestCase):
   with self.assertRaises(ValueError):r.load_config(s,8,4)
   s=self.snapshot();s['policies'][0]['definition']['route_ids'].append('missing')
   with self.assertRaisesRegex(ValueError,'unknown route'):r.load_config(s,8,4)
+ def test_draft_needs_explicit_opt_in(self):
+  s=self.snapshot();s['schema']='worldatlas-geography-decision-draft-evidence-v1'
+  s['decision_revision']['status']='draft';s['entity_revision']['status']='draft'
+  with self.assertRaisesRegex(ValueError,'explicitly opted-in'):r.load_config(s,8,4)
+  self.assertEqual(len(r.load_config(s,8,4,allow_draft=True)[2]),4)
+  s['entity_revision']['status']='accepted'
+  with self.assertRaisesRegex(ValueError,'matching'):r.load_config(s,8,4,allow_draft=True)
  def test_unseeded_component_reported_not_assigned(self):
   s=self.snapshot();s['endpoints']=[];s['routes']=[]
   for i,lon in enumerate((-108,-36,36,108)):

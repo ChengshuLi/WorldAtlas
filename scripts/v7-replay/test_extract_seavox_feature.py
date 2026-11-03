@@ -27,6 +27,7 @@ class ExtractTest(unittest.TestCase):
         self.sha = mod.digest(self.archive)
         snapshot = {'schema':'worldatlas-geography-decision-export-v1','source':'neon-export',
                     'decision_revision':{'id':'r1','entity_revision':'e1','status':'accepted'},
+                    'entity_revision':{'id':'e1','status':'accepted'},
                     'basins':[{'id':'gulf','source_id':'seavox','source_version':'v19','source_feature_id':'24063',
                                'geometry_sha256':mod.canonical_hash(self.geometry)}],
                     'sources':[{'source_id':'seavox','version':'v19','sha256':self.sha}]}

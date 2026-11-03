@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build a portable candidate 0–6/17–22 prefill RLE for the ocean seed-fill engine.
 
-Inputs are only physical mask, final V6 land, and completed approved continent-water
-layers (named basins + supported coast). No V2 or V6 water label is read.
+Inputs are a physical mask, either decision-derived research land or historical V6 land,
+and continent-water layers. No V2 or V6 water label is read.
 """
 from __future__ import annotations
 import argparse,json,sys
@@ -11,28 +11,44 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from exclusive_outputs import create_binary_exclusive, create_directory_exclusive, write_json_exclusive
 import numpy as np
 import compose_full_water_grid as c
+from build_prefill_plan import validate_land_report
 
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--plan',required=True);ap.add_argument('--input-root',required=True);ap.add_argument('--out',required=True)
- ap.add_argument('--allow-unverified-snapshot',action='store_true',help='test only: Neon acceptance cannot yet be authenticated by this tool');a=ap.parse_args()
+ ap.add_argument('--allow-unverified-snapshot',action='store_true',help='test only: Neon acceptance cannot yet be authenticated by this tool')
+ ap.add_argument('--allow-draft-snapshot',action='store_true',help='research only: allow a draft plan')
+ ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved shore method');a=ap.parse_args()
  if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
  root=Path(a.input_root).resolve()
  if not root.is_dir():raise ValueError('input root must exist')
  plan_path=Path(a.plan).resolve()
  plan=json.loads(plan_path.read_text())
  if plan.get('schema')!='worldatlas-v7-full-grid-composition-plan-v1':raise ValueError('wrong plan schema')
+ if plan.get('decision_revision_status')=='draft' and not a.allow_draft_snapshot:raise ValueError('draft plan requires explicit research opt-in')
+ if plan.get('research_shore_method') and (plan['research_shore_method']!='spherical-grid-edge-v1' or not a.allow_research_shore):raise ValueError('research shore method requires explicit opt-in')
  out=Path(a.out).resolve()
  if out.is_relative_to(root) or root.is_relative_to(out):raise ValueError('output must be outside the input tree')
  if plan.get('grid',{}).get('width')!=c.W or plan.get('grid',{}).get('height')!=c.H:raise ValueError('plan grid mismatch')
  rles={}
- for key in ('physical','v6'):
+ land_key='land' if 'land' in plan['rle_inputs'] else 'v6'
+ if land_key=='land' and (plan.get('land_input_kind')!='direct-research' or plan.get('decision_revision_status') not in ('draft','accepted')):raise ValueError('direct land input kind or revision status mismatch')
+ if set(plan['rle_inputs'])!={'physical',land_key}:raise ValueError('exactly one direct land or historical v6 grid is required')
+ for key in ('physical',land_key):
   ent=plan['rle_inputs'][key];rp=c.resolve_input(ent['rows_path'],plan_path.parent,root);up=c.resolve_input(ent['runs_path'],plan_path.parent,root)
   if c.sha256(rp)!=ent['rows_sha256'] or c.sha256(up)!=ent['runs_sha256']:raise ValueError(f'{key} input RLE hash mismatch')
   rows=np.memmap(rp,dtype='<u4',mode='r');runs=np.memmap(up,dtype='<u4',mode='r')
   if len(rows)!=c.H+1 or len(runs)%2 or int(rows[0])!=0 or int(rows[-1])!=len(runs)//2 or np.any(rows[1:]<=rows[:-1]):
    raise ValueError(f'{key} invalid RLE offsets or size')
   rles[key]=(rows,runs)
+ if land_key=='land':
+  ent=plan['rle_inputs']['land'];report_path=c.resolve_input(ent['report_path'],plan_path.parent,root)
+  if c.sha256(report_path)!=ent['report_sha256']:raise ValueError('direct land report hash mismatch')
+  physical=plan['rle_inputs']['physical']
+  land={**ent,'resolved_rows':c.resolve_input(ent['rows_path'],plan_path.parent,root),'resolved_runs':c.resolve_input(ent['runs_path'],plan_path.parent,root)}
+  report=json.loads(report_path.read_text())
+  revision={'id':plan.get('decision_revision'),'entity_revision':plan.get('entity_revision'),'status':plan.get('decision_revision_status')}
+  validate_land_report(report,report_path,physical,land,plan.get('decision_snapshot_sha256'),revision)
  layers=[]
  for ent in plan.get('water_layers',[]):
   mp,m=c.read_pinned_manifest(ent,plan_path,root);m['_tiles']=m['tiles']
@@ -40,12 +56,12 @@ def main():
   layers.append((ent,m))
  create_directory_exclusive(out)
  cursors=[(ent,c.RowCursor(m,0,c.H,'water')) for ent,m in layers]
- pr,pu=rles['physical'];v6r,v6u=rles['v6'];rawr=out/'prefill-rows.u32le';rawu=out/'prefill-runs.u32le'
+ pr,pu=rles['physical'];landr,landu=rles[land_key];rawr=out/'prefill-rows.u32le';rawu=out/'prefill-runs.u32le'
  counts={str(k):0 for k in range(23)};runs_written=0;overlap_cells=0;assigned_cells=0;residual_cells=0;land_cells=0
  with create_binary_exclusive(rawr) as yf,create_binary_exclusive(rawu) as rf:
   yf.write(np.asarray([0],dtype='<u4').tobytes())
   for y in range(c.H):
-   pe,pv=c.rle_row(pr,pu,y);ve,vv=c.rle_row(v6r,v6u,y)
+   pe,pv=c.rle_row(pr,pu,y);ve,vv=c.rle_row(landr,landu,y)
    pe=np.asarray(pe,dtype=np.uint32);pv=np.asarray(pv,dtype=np.uint32);ve=np.asarray(ve,dtype=np.uint32);vv=np.asarray(vv,dtype=np.uint32)
    if (int(pe[-1])!=c.W or int(ve[-1])!=c.W or np.any(pe[1:]<=pe[:-1])
        or np.any(ve[1:]<=ve[:-1]) or int(pe[0])==0 or int(ve[0])==0):
@@ -74,6 +90,7 @@ def main():
      if not 17<=land[j]<=22:raise ValueError(f'unassigned final land row={y} x={x}:{z} code={land[j]}')
      codes[j]=land[j];land_cells+=z-x
     elif phys[j]==1:
+     if land_key=='land' and land[j]!=1:raise ValueError(f'direct land grid disagrees with physical water row={y} x={x}:{z} code={land[j]}')
      if assignment is None:codes[j]=0;residual_cells+=z-x
      else:
       code=int(assignment[2]);
@@ -87,6 +104,7 @@ def main():
    runs_written+=len(vals);yf.write(np.asarray([runs_written],dtype='<u4').tobytes())
  report={'schema':'worldatlas-v7-prefill-class-rle-audit-v1','status':'staged-not-published','grid':c.GRID,
   'source_plan_sha256':c.sha256(plan_path),'decision_snapshot_sha256':plan.get('decision_snapshot_sha256'),
+  'land_input_kind':plan.get('land_input_kind','historical-v6-replay'),'research_shore_method':plan.get('research_shore_method'),
   'decision_revision':plan.get('decision_revision'),'entity_revision':plan.get('entity_revision'),
   'physical_mask_sha256':plan['rle_inputs']['physical'].get('physical_mask_sha256'),
   'layer_manifests':[{'layer_id':x.get('layer_id'),'manifest_sha256':c.sha256(c.resolve_input(x['manifest_path'],plan_path.parent,root)),'priority':x['priority']} for x,_ in layers],

@@ -1,3 +1,5 @@
+For the direct research path and its remaining blockers, see [DIRECT.md](DIRECT.md).
+
 # V7 composition replay candidate
 
 This is a proposed portable replay of the V7 final-grid composition, not a proven recreation of the historical run. It starts from the preserved V2/physical/V6 grids and prepared water layers; it does not regenerate those layers from original geography sources.

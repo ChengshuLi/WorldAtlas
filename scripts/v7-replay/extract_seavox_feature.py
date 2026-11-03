@@ -76,6 +76,7 @@ def main():
     p.add_argument('--policy', type=Path); p.add_argument('--policy-sha256'); p.add_argument('--decision-id')
     p.add_argument('--out', type=Path, help='new directory outside input root, required in build mode')
     p.add_argument('--allow-unverified-snapshot', action='store_true', help='test only; snapshot acceptance is not authenticated here')
+    p.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow explicitly draft Neon evidence')
     args = p.parse_args()
     root = args.input_root.resolve(); archive = args.archive.resolve()
     if not root.is_dir() or not archive.is_relative_to(root):
@@ -95,7 +96,7 @@ def main():
     policy = args.policy.resolve(); out = args.out.resolve()
     if not policy.is_relative_to(root) or out.is_relative_to(root) or root.is_relative_to(out):
         raise ValueError('policy must be inside input root and output outside it')
-    snapshot = read_snapshot(policy, args.policy_sha256)
+    snapshot = read_snapshot(policy, args.policy_sha256, allow_draft=args.allow_draft_snapshot)
     basin = find_basin(snapshot, args.decision_id); source = find_source(snapshot, basin)
     if not basin.get('source_feature_id') or not basin.get('geometry_sha256'):
         raise ValueError('decision must bind a feature ID and geometry hash')
