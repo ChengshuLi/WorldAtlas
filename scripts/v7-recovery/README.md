@@ -21,3 +21,5 @@ The coastal manifest identifies three source versions: v2, v3 and v4. The saved 
 The final composition and V2-difference outputs have input/output provenance, but their exact executable versions have not been established. Do not describe a candidate script as the version used without further evidence.
 
 The V6 UI dependency files in this directory are local candidates. Their bytes have not been compared with the separately hosted V6 modules used by the published V7 page.
+
+The shipped metadata also cites an independent closed-water QA file by hash, but that file was not found at its recorded path or in the V7 archives checked. This is an evidence gap; the builder does not read that file as an input.
