@@ -29,3 +29,7 @@ The output report pins the physical and land streams, land report, code, and com
 ## Separate coastal comparison
 
 `compare_coastal.py CONFIG NEW_REPORT.json` compares one completed coastal candidate tile against pinned preserved V2 reference runs. It counts matching and differing continental-water codes, candidate band versus reference ocean, reference-band cells absent from the candidate, and physical land/water differences. It does not fill the open ocean or make the tile globally complete. The comparison reads V2 only after candidate generation. Copy `compare-coast-config.example.json`; run `python -m unittest -v test_compare_coastal` for a synthetic tile comparison.
+
+## Explicit exploratory water routes
+
+`build_water_route.py CONFIG NEW_OUTPUT_DIR` finds a deterministic four-neighbor water-cell path within explicitly supplied bounds and endpoints on the pinned physical grid. These coordinates are a caller-selected research hypothesis, not a recovered or approved continent boundary. It does not choose endpoints or infer a closure. The path report pins the inputs, code and route; the program is little-endian only, caps window cells, and defaults to a 2 GiB free-space reserve. It checks the reserve at stage boundaries and while writing the window, but other processes can consume space between checks. Run `python -m unittest -v test_build_water_route` for small path, blockage and safety tests.
