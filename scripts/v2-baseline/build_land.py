@@ -60,7 +60,7 @@ def build(cfgpath,out):
     n.require(phys.get('status')=='candidate-only' and phys.get('grid')==g and physical_output.get('rows.u32le')==cfg['physical_rows']['sha256'] and physical_output.get('runs.u32le')==cfg['physical_runs']['sha256'],'physical report mismatch')
     seed=json.loads(Path(cfg['seed_provenance']['path']).read_bytes());sg=seed.get('grid',{})
     if seed.get('schema')=='direct-region-seed-research-report-v1':
-        n.require(seed.get('status')=='unreviewed-research-not-published' and sg==g and seed.get('output_rows_sha256')==cfg['mainland_rows']['sha256'] and seed.get('output_runs_sha256')==cfg['mainland_runs']['sha256'],'seed provenance mismatch')
+        n.require(seed.get('status')=='unreviewed-research-not-published' and sg==g and seed.get('grid_crs')=='EPSG:4326' and seed.get('output_rows_sha256')==cfg['mainland_rows']['sha256'] and seed.get('output_runs_sha256')==cfg['mainland_runs']['sha256'],'seed provenance mismatch')
         seed_components=(seed.get('component_rows_sha256'),seed.get('component_runs_sha256'))
     else:
         n.require(seed.get('schema')=='direct-mainland-regions-research-v1' and seed.get('status')=='local-research-not-approved-or-published' and sg=={k:g[k] for k in ('width','height','step')} and seed.get('outputs',{}).get('rows_sha256')==cfg['mainland_rows']['sha256'] and seed.get('outputs',{}).get('runs_sha256')==cfg['mainland_runs']['sha256'],'seed provenance mismatch')
