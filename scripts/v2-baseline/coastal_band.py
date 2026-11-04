@@ -32,7 +32,7 @@ def pin(spec):
  if sha(p)!=spec['sha256']:raise ValueError('input hash mismatch: '+str(p))
  return p
 
-def build(config_path,output):
+def build(config_path,output,*,_verified_inputs=None):
  config_path=Path(config_path).resolve();raw=config_path.read_bytes();cfg=json.loads(raw)
  required={'schema','grid','physical_rows','physical_runs','land_rows','land_runs','land_report','core','pad_degrees'}
  if not required<=set(cfg)<=required|{'max_shore_segments','chunk','minimum_free_bytes'} or cfg['schema']!='simple-v2-coastal-band-v1':raise ValueError('invalid config')
@@ -43,7 +43,11 @@ def build(config_path,output):
  if not isinstance(box,list) or len(box)!=4 or any(type(v) is not int for v in box):raise ValueError('invalid core')
  x0,x1,y0,y1=box
  if not (0<=x0<x1<=w and 0<=y0<y1<=h) or type(chunk) is not int or not 1<=chunk<=50000 or type(limit) is not int or limit<1 or type(pad) not in (int,float) or not math.isfinite(pad) or pad<=0:raise ValueError('invalid tile/resource settings')
- names=('physical_rows','physical_runs','land_rows','land_runs','land_report');pins={k:pin(cfg[k]) for k in names}
+ names=('physical_rows','physical_runs','land_rows','land_runs','land_report')
+ if _verified_inputs is None:pins={k:pin(cfg[k]) for k in names}
+ else:
+  if set(_verified_inputs)!=set(names) or any(cfg[k]!=_verified_inputs[k]['spec'] or Path(cfg[k]['path']).resolve()!=Path(_verified_inputs[k]['path']) for k in names):raise ValueError('batch input specifications differ')
+  pins={k:Path(_verified_inputs[k]['path']) for k in names}
  land_report=json.loads(pins['land_report'].read_bytes())
  if (land_report.get('schema')!='simple-v2-land-report-v1' or land_report.get('status')!='research-not-published' or land_report.get('grid')!=g or any(land_report.get('inputs',{}).get(k)!=cfg[k] for k in ('physical_rows','physical_runs')) or land_report.get('output_rows_sha256')!=cfg['land_rows']['sha256'] or land_report.get('output_runs_sha256')!=cfg['land_runs']['sha256']):raise ValueError('land report does not bind physical and land inputs')
  out=Path(output).resolve();inputs=[config_path,*pins.values()]
@@ -74,7 +78,8 @@ def build(config_path,output):
       if records and records[-1]['end']==start and records[-1]['code']==code:records[-1]['end']=end
       else:records.append({'start':start,'end':end,'code':code})
    if records:spans+=len(records);f.write(json.dumps({'row':y,'spans':records},separators=(',',':'))+'\n')
- for k in names:pin(cfg[k])
+ if _verified_inputs is None:
+  for k in names:pin(cfg[k])
  if config_path.read_bytes()!=raw or any(sha(v)!=code_hashes[k] for k,v in code_paths.items()):raise ValueError('input or code changed during build')
  report={'schema':'simple-v2-coastal-tile-report-v1','status':'research-partial-not-published','config_sha256':hashlib.sha256(raw).hexdigest(),'grid':g,'core':box,'inputs':{k:cfg[k] for k in names},'span_file':{'path':span_path.name,'sha256':sha(span_path)},'physical_water_cells':water,'assigned_cells':cells,'unassigned_water_cells':water-cells,'span_count':spans,'bounded_cells':bounded,'exact_cells':exact,'code_sha256':code_hashes,'method':'12 nautical miles inclusive; spherical distance to physical-grid land/water edge; lowest continent code wins ties within 0.00001 metres','limitations':'Partial candidate: open water beyond 12 nm is unassigned. Historical coastline, distance and tie conventions are unverified. No V2 labels or named-water exceptions used.'}
  write_json_exclusive(out/'report.json',report,indent=2);return report
