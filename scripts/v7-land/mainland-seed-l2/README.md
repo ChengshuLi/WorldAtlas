@@ -1,0 +1,39 @@
+# Stage 2 mainland seed (research implementation)
+
+This producer constructs a continent-labeled mainland seed from the accepted
+stage-1 physical grid, current-generation mainland witness resolutions, and
+selected versioned geography decisions. It does not consume V2 or V7 label
+rasters and does not apply List 1 or island exceptions. The separate geodesic
+driver must validate the selected Neon export, rerun witness resolution, and
+independently verify full physical/component coverage before accepting output.
+The generated seed report remains explicitly diagnostic until those checks pass.
+
+`seed_producer.run(request, work, output, guard)` consumes a pinned
+`worldatlas-stage2-seed-request-v1` request. `inputs` pins the decision snapshot,
+witness resolution, physical and component rows/runs, physical report, component
+manifest, water-closure checker and contract, and reviewed rasterizer source.
+A terminal-aware route additionally requires a pinned `terminal_checker` input;
+only the independently reviewed allowlisted code is executable. Work and output
+are fresh, disjoint directories. The caller supplies a guardian and a current
+resource budget. The water placeholder is zero; seed land uses the continent
+codes provided by the pinned category and rule decisions.
+
+Every selected region is an explicitly ordered ring of stored L2 boundaries and
+physical-water closure routes. Geographic connectors without a physical closure
+proof are not supported by this builder. A terminal-aware closure references
+selected boundary IDs plus their exact start/end vertices, is checked against the
+pinned physical mask, and may touch land only under the checker's explicit
+terminal policy. The separate ring builder checks exact joins, simple polygon
+validity and region witnesses. Its rasterizer assigns every cell of a selected
+mainland root by region membership rather than leaving flood-fill residuals;
+per-rule and per-category populations are verified and reported.
+
+The selected export interface, final endpoint-aware checker, and actual closure
+routes must be validated and versioned before a real run. A sourced L2 boundary
+is a geographic decision; citation and byte pins do not establish that every
+historical V2/V7 rasterization detail or upstream source is recovered. No prior
+candidate, checkpoint, or historical changed-cell ledger supplies seed labels.
+
+Run focused local tests from this directory with:
+
+    OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /usr/bin/python3 -m unittest discover -p 'test_*.py'
