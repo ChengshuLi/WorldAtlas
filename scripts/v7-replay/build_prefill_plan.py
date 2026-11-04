@@ -66,34 +66,99 @@ def coastline_policy(policy):
     return records[0], find_source(policy, definition)
 
 
-def validate_land_report(report, report_path, physical, land, snapshot_hash, revision):
-    """Bind an unverified research land RLE to this physical grid and snapshot."""
-    comp = report.get('compiler_report', {})
-    pins = comp.get('input_sha256', {})
-    verified = report.get('component_verification', {})
+def canonical_physical_grid():
+    return {'width':c.W, 'height':c.H, 'step':360.0/c.W, 'west':-180, 'north':90}
+
+
+def validate_land_report(report, report_path, physical, land, snapshot_hash, revision, input_root=None):
+    """Bind research land output to its physical grid and snapshot.
+
+    The same-run manifest path is a research lineage assertion, not independent
+    connectivity verification or authentication of source provenance.
+    """
     digest = lambda value: isinstance(value, str) and len(value) == 64 and all(ch in '0123456789abcdef' for ch in value)
+    stream = report.get('schema') == 'single-generation-direct-land-report-v1'
+    if stream:
+        if input_root is None: raise ValueError('input root required for streaming land lineage')
+        root = Path(input_root).resolve(); base = report_path.parent.resolve()
+        nested_path = (base/'assignment/report.json').resolve(); manifest_path = (base/'manifests/components.json').resolve()
+        request_path = (base/'request.json').resolve()
+        if any(not path.is_relative_to(root) for path in (nested_path,manifest_path,request_path)):
+            raise ValueError('streaming land lineage escapes input root')
+        code_hashes=report.get('code_sha256',{})
+        if (not isinstance(code_hashes,dict) or set(code_hashes) != {'runner','compiler','stream_backend','shared_backend'} or not all(digest(x) for x in code_hashes.values())
+                or report.get('status') != 'unverified-research-not-published' or report.get('component_generations') != 1
+                or report.get('snapshot_sha256') != snapshot_hash
+                or report.get('output_rows_sha256') != land['rows_sha256'] or report.get('output_runs_sha256') != land['runs_sha256']
+                or c.sha256(nested_path) != report.get('land_report_sha256')
+                or c.sha256(manifest_path) != report.get('component_manifest_sha256')
+                or c.sha256(request_path) != report.get('request_sha256')):
+            raise ValueError('streaming land orchestration report mismatch')
+        nested=json.loads(nested_path.read_text());manifest=json.loads(manifest_path.read_text());request=json.loads(request_path.read_text())
+        gen=nested.get('component_generation',{});mpins=manifest.get('pins',{});physical_report=manifest.get('physical_report',{})
+        physical_report_path=Path(physical_report.get('path','')).resolve()
+        if not physical_report_path.is_relative_to(root) or not physical_report_path.is_file():
+            raise ValueError('streaming physical report escapes input root or is missing')
+        if (not digest(physical_report.get('sha256')) or c.sha256(physical_report_path) != physical_report['sha256']
+                or physical_report != request.get('physical_report')
+                or physical_report['sha256'] != report.get('physical_report_sha256')
+                or physical_report['sha256'] != gen.get('physical_report_sha256')):
+            raise ValueError('streaming physical report pin mismatch')
+        for entry in (mpins.get('component_rows',{}),mpins.get('component_runs',{}),manifest.get('builder_binary',{})):
+            artifact=Path(entry.get('path','')).resolve()
+            if (not artifact.is_relative_to(root) or not artifact.is_file() or not digest(entry.get('sha256'))
+                    or c.sha256(artifact) != entry['sha256']):
+                raise ValueError('streaming component artifact missing, outside input root or hash mismatch')
+        physical_doc=json.loads(physical_report_path.read_text()); output=physical_doc.get('physical_output_sha256',physical_doc.get('output_sha256',{}))
+        kind='raw-pipeline-report' if all(k in physical_doc for k in ('physical_output_sha256','source_manifest','land_config','water_config','stage_reports')) else 'compose-report'
+        if (physical_doc.get('status') != 'candidate-only' or physical_doc.get('grid') != manifest.get('grid')
+                or manifest.get('grid') != canonical_physical_grid()
+                or output.get('rows.u32le') != physical['rows_sha256'] or output.get('runs.u32le') != physical['runs_sha256']
+                or report.get('physical_report_kind') != kind or gen.get('physical_report_kind') != kind or manifest.get('physical_report_kind') != kind
+                or manifest.get('schema') != 'single-generation-component-manifest-v1' or manifest.get('status') != 'complete-research'
+                or gen.get('method') != 'single-generation-manifest' or gen.get('manifest_sha256') != report.get('component_manifest_sha256')
+                or gen.get('builder_source_sha256') != manifest.get('component_source_sha256')
+                or gen.get('builder_binary_sha256') != manifest.get('builder_binary_sha256')
+                or gen.get('compiler_version') != manifest.get('compiler_version') or gen.get('builder_output') != manifest.get('builder_output')
+                or request.get('snapshot',{}).get('sha256') != snapshot_hash or request.get('grid') != manifest.get('grid')
+                or request.get('component_source_sha256') != gen.get('builder_source_sha256')
+                or gen.get('rows_sha256') != mpins.get('component_rows',{}).get('sha256')
+                or gen.get('runs_sha256') != mpins.get('component_runs',{}).get('sha256')
+                or any(request.get(k,{}).get('sha256') != physical[k.replace('physical_','')+'_sha256'] for k in ('physical_rows','physical_runs'))
+                or any(mpins.get(k,{}).get('sha256') != physical[k.replace('physical_','')+'_sha256'] for k in ('physical_rows','physical_runs'))
+                or (physical.get('physical_mask_sha256') and output.get('physical-dry.tif') != physical['physical_mask_sha256'])):
+            raise ValueError('streaming land manifest does not bind physical grid and snapshot')
+        verified=gen; report=nested; expected_schema='direct-neon-land-stream-build-report-v1'; compiler_schema='land-streaming-research-report-v1'
+        expected_rows=(base/'assignment/land/rows.u32le').resolve();expected_runs=(base/'assignment/land/runs.u32le').resolve()
+    else:
+        config_path=(report_path.parent/'config.json').resolve()
+        if input_root is None or not config_path.is_relative_to(Path(input_root).resolve()) or not config_path.is_file():
+            raise ValueError('direct land configuration missing or outside input root')
+        if c.sha256(config_path) != report.get('config_sha256'):
+            raise ValueError('direct land configuration hash mismatch')
+        config=json.loads(config_path.read_text())
+        if (config.get('grid') != canonical_physical_grid() or config.get('snapshot',{}).get('sha256') != snapshot_hash
+                or config.get('physical_rows',{}).get('sha256') != physical['rows_sha256']
+                or config.get('physical_runs',{}).get('sha256') != physical['runs_sha256']):
+            raise ValueError('direct land configuration grid or input mismatch')
+        verified=report.get('component_verification',{});expected_schema='direct-neon-land-build-report-v1';compiler_schema='land-decision-compiler-prototype-report-v1'
+        expected_rows=(report_path.parent/'land/rows.u32le').resolve();expected_runs=(report_path.parent/'land/runs.u32le').resolve()
+    comp = report.get('compiler_report', {}); pins = comp.get('input_sha256', {})
     if (not all(digest(verified.get(k)) for k in ('builder_source_sha256', 'builder_binary_sha256', 'rows_sha256', 'runs_sha256'))
             or not verified.get('compiler_version') or not verified.get('builder_output')
-            or verified.get('rows_sha256') != pins.get('component_rows')
-            or verified.get('runs_sha256') != pins.get('component_runs')
-            or report.get('schema') != 'direct-neon-land-build-report-v1'
-            or report.get('status') != 'unverified-research-not-published'
-            or report.get('snapshot_sha256') != snapshot_hash
-            or report.get('decision_revision') != revision.get('id')
-            or report.get('decision_revision_asserted_status') != revision.get('status')
-            or report.get('entity_revision') != revision.get('entity_revision')
-            or comp.get('schema') != 'land-decision-compiler-prototype-report-v1'
-            or pins.get('physical_rows') != physical['rows_sha256']
-            or pins.get('physical_runs') != physical['runs_sha256']
-            or comp.get('output_rows_sha256') != land['rows_sha256']
+            or verified.get('rows_sha256') != pins.get('component_rows') or verified.get('runs_sha256') != pins.get('component_runs')
+            or report.get('schema') != expected_schema or report.get('status') != 'unverified-research-not-published'
+            or report.get('snapshot_sha256') != snapshot_hash or report.get('decision_revision') != revision.get('id')
+            or report.get('decision_revision_asserted_status') != revision.get('status') or report.get('entity_revision') != revision.get('entity_revision')
+            or comp.get('schema') != compiler_schema or pins.get('physical_rows') != physical['rows_sha256']
+            or pins.get('physical_runs') != physical['runs_sha256'] or comp.get('output_rows_sha256') != land['rows_sha256']
             or comp.get('output_runs_sha256') != land['runs_sha256']):
         raise ValueError('direct land report does not bind this snapshot and physical grid')
-    if (land['resolved_rows'] != (report_path.parent / 'land/rows.u32le').resolve()
-            or land['resolved_runs'] != (report_path.parent / 'land/runs.u32le').resolve()):
+    if land['resolved_rows'] != expected_rows or land['resolved_runs'] != expected_runs:
         raise ValueError('direct land outputs do not match report location')
 
 
-def assemble(config, config_path, root, policy, policy_path, out, allow_draft=False, allow_research_shore=False):
+def assemble(config, config_path, root, policy, policy_path, out, allow_draft=False, allow_research_shore=False, allow_historical_v6=False):
     revision = validate_revision(policy, allow_draft=allow_draft)
     selected = policy.get('basins', [])
     methods = {row.get('assignment_method') for row in selected}
@@ -116,6 +181,8 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
     land_key = 'land' if 'land' in config['rle_inputs'] else 'v6'
     if set(config['rle_inputs']) != {'physical', land_key}:
         raise ValueError('exactly one direct land or historical v6 grid is required')
+    if land_key == 'v6' and not allow_historical_v6:
+        raise ValueError('historical V6 replay requires explicit opt-in')
     for key in ('physical', land_key):
         source = config['rle_inputs'][key]
         rows = input_path(source['rows_path'], config_path, root)
@@ -135,7 +202,7 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
         land = {**rles['land'], 'resolved_rows':input_path(source['rows_path'], config_path, root),
                 'resolved_runs':input_path(source['runs_path'], config_path, root)}
         validate_land_report(json.loads(report_path.read_text()), report_path, rles['physical'],
-                             land, c.sha256(policy_path), revision)
+                             land, c.sha256(policy_path), revision, root)
         rles['land']['report_path'] = rel(report_path)
         rles['land']['report_sha256'] = source['report_sha256']
     def validate_manifest(rec):
@@ -221,6 +288,7 @@ def main():
     ap.add_argument('--allow-unverified-snapshot', action='store_true', help='test only: Neon acceptance cannot yet be authenticated by this tool')
     ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow explicitly draft Neon evidence')
     ap.add_argument('--allow-research-shore', action='store_true', help='research only: allow the unapproved spherical grid-edge shore method')
+    ap.add_argument('--allow-historical-v6', action='store_true', help='historical replay only: permit the V6 land grid')
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args()
     if not args.allow_unverified_snapshot:
@@ -232,7 +300,7 @@ def main():
         raise ValueError('plan must be outside the input root')
     policy=read_snapshot(policy_path,args.policy_sha256,allow_draft=args.allow_draft_snapshot)
     config=json.loads(config_path.read_text())
-    plan=assemble(config,config_path,root,policy,policy_path,out,allow_draft=args.allow_draft_snapshot,allow_research_shore=args.allow_research_shore)
+    plan=assemble(config,config_path,root,policy,policy_path,out,allow_draft=args.allow_draft_snapshot,allow_research_shore=args.allow_research_shore,allow_historical_v6=args.allow_historical_v6)
     write_json_exclusive(out,plan,indent=2)
     print(json.dumps({'plan':str(out),'sha256':c.sha256(out),'layers':len(plan['water_layers'])}))
 

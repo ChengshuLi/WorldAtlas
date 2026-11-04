@@ -196,7 +196,7 @@ def resolve_witness_rules(witnesses, grid, cfg, rr, runs, component_source_hash,
         summaries.append({'witness_rule_id':rid,'selected_components':len(roots),'mask_bound':True})
 
 
-def prepare(config_path, output, allow_unverified_snapshot=False):
+def prepare(config_path, output, allow_unverified_snapshot=False, component_manifest=None):
     require(allow_unverified_snapshot, 'snapshot authentication is not implemented; research requires --allow-unverified-snapshot')
     cfg_bytes = Path(config_path).read_bytes()
     cfg = json.loads(cfg_bytes)
@@ -262,21 +262,45 @@ def prepare(config_path, output, allow_unverified_snapshot=False):
     ids = [a.get('affiliation_id') for a in land] + [r.get('rule_id') for r in witnesses]
     require(all(text(x) for x in ids) and len(set(ids)) == len(ids), 'duplicate or invalid land decision ID')
     os.mkdir(out)
-    # Recompute components from the pinned physical mask, and demand exact
-    # byte equality. Footprint alone does not prove the claimed connectivity.
     component_source = Path(__file__).resolve().parent.parent/'build_components.cpp'
     component_source_hash = assign_land.sha(component_source)
-    binary = out/'component-builder'
-    build = subprocess.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',str(component_source),'-o',str(binary)], capture_output=True, text=True)
-    require(build.returncode == 0, f'component builder compilation failed: {build.stderr[-3000:]}')
-    regenerated_rows=out/'verified-component-rows.u32le'
-    regenerated_runs=out/'verified-component-runs.u32le'
-    process=subprocess.run([str(binary),str(w),str(h),cfg['physical_rows']['path'],cfg['physical_runs']['path'],str(regenerated_rows),str(regenerated_runs)], capture_output=True, text=True)
-    require(process.returncode == 0, f'component regeneration failed: {process.stderr[-3000:]}')
-    require(assign_land.sha(regenerated_rows) == cfg['component_rows']['sha256'] and
-            assign_land.sha(regenerated_runs) == cfg['component_runs']['sha256'], 'component connectivity does not match physical mask')
-    require(assign_land.sha(component_source) == component_source_hash, 'component builder changed during run')
-    compiler_version = subprocess.run(['g++','--version'],capture_output=True,text=True,check=True).stdout.splitlines()[0]
+    if component_manifest is None:
+        # Recompute components from the pinned physical mask, and demand exact
+        # byte equality. Footprint alone does not prove the claimed connectivity.
+        component_source = Path(__file__).resolve().parent.parent/'build_components.cpp'
+        component_source_hash = assign_land.sha(component_source)
+        binary = out/'component-builder'
+        build = subprocess.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',str(component_source),'-o',str(binary)], capture_output=True, text=True)
+        require(build.returncode == 0, f'component builder compilation failed: {build.stderr[-3000:]}')
+        regenerated_rows=out/'verified-component-rows.u32le'
+        regenerated_runs=out/'verified-component-runs.u32le'
+        process=subprocess.run([str(binary),str(w),str(h),cfg['physical_rows']['path'],cfg['physical_runs']['path'],str(regenerated_rows),str(regenerated_runs)], capture_output=True, text=True)
+        require(process.returncode == 0, f'component regeneration failed: {process.stderr[-3000:]}')
+        require(assign_land.sha(regenerated_rows) == cfg['component_rows']['sha256'] and
+                assign_land.sha(regenerated_runs) == cfg['component_runs']['sha256'], 'component connectivity does not match physical mask')
+        require(assign_land.sha(component_source) == component_source_hash, 'component builder changed during run')
+        compiler_version = subprocess.run(['g++','--version'],capture_output=True,text=True,check=True).stdout.splitlines()[0]
+    else:
+        # Same-orchestrator manifest: bind the one generated component stream,
+        # rather than silently calling it an independent recomputation.
+        manifest_bytes=Path(component_manifest).read_bytes(); manifest=json.loads(manifest_bytes)
+        require(manifest.get('schema')=='single-generation-component-manifest-v1' and manifest.get('status')=='complete-research', 'invalid component manifest')
+        require(manifest.get('component_source_sha256')==component_source_hash and manifest.get('grid')==grid, 'component manifest source or grid mismatch')
+        for key in ('physical_rows','physical_runs','component_rows','component_runs'):
+            require(manifest.get('pins',{}).get(key)==cfg[key], f'component manifest pin mismatch: {key}')
+        for entry in manifest['pins'].values(): pin(entry)
+        physical_report_path=pin(manifest.get('physical_report'))
+        physical_report=json.loads(physical_report_path.read_bytes())
+        physical_output=physical_report.get('physical_output_sha256',physical_report.get('output_sha256',{}))
+        require(physical_report.get('status')=='candidate-only' and physical_report.get('grid')==grid and
+                physical_output.get('rows.u32le')==cfg['physical_rows']['sha256'] and
+                physical_output.get('runs.u32le')==cfg['physical_runs']['sha256'], 'physical report does not bind grid and output streams')
+        observed_kind='raw-pipeline-report' if all(k in physical_report for k in ('physical_output_sha256','source_manifest','land_config','water_config','stage_reports')) else 'compose-report'
+        require(manifest.get('physical_report_kind')==observed_kind, 'physical report kind mismatch')
+        builder_path=pin(manifest.get('builder_binary'))
+        require(manifest['builder_binary']['sha256']==manifest.get('builder_binary_sha256') and
+                all(Path(cfg[k]['path']).resolve().parent==builder_path.resolve().parent for k in ('component_rows','component_runs')), 'component builder binary/path mismatch')
+        require(text(manifest.get('compiler_version')) and text(manifest.get('builder_output')), 'missing component generation evidence')
     geomdir = out/'geometry'; geomdir.mkdir()
     cache = {}; claims = {}; partitions = {}; summaries = []
     resolve_witness_rules(witnesses, grid, cfg, rr, runs, component_source_hash, bindings, claims, partitions, summaries)
@@ -345,18 +369,35 @@ def prepare(config_path, output, allow_unverified_snapshot=False):
                 'provenance_note':'UNVERIFIED snapshot, research output only; see direct build report', 'grid':grid,
                 **{k:cfg[k] for k in ('physical_rows','physical_runs','component_rows','component_runs')}, 'strip_rows':strip, 'rules':rules}
     cpath=out/'compiler-config.json'; cpath.write_text(json.dumps(compiler,sort_keys=True,separators=(',',':'))+'\n')
-    report=assign_land.build(cpath,out/'land')
+    if component_manifest is None:
+        report=assign_land.build(cpath,out/'land')
+    else:
+        import assign_land_stream
+        report=assign_land_stream.build(cpath,out/'land')
     # Check all originally pinned bytes after output has finished.
     for spec in pins: pin(spec)
     require(Path(config_path).read_bytes() == cfg_bytes, 'config changed during run')
-    result={'schema':'direct-neon-land-build-report-v1','status':'unverified-research-not-published',
-            'decision_revision':rev['id'],'decision_revision_asserted_status':rev['status'],'entity_revision':erev['id'],
-            'snapshot_sha256':cfg['snapshot']['sha256'],'config_sha256':hashlib.sha256(cfg_bytes).hexdigest(),
-            'program_sha256':assign_land.sha(__file__), 'component_verification':{'builder_source_sha256':component_source_hash,
-            'builder_binary_sha256':assign_land.sha(binary),'compiler_version':compiler_version,'builder_output':process.stdout.strip(),
-            'rows_sha256':assign_land.sha(regenerated_rows),'runs_sha256':assign_land.sha(regenerated_runs)},
-            'compiler_report':report,'decision_summary':summaries,
-            'limitation':'Snapshot authenticity, decision completeness and geographic review are not proved. No prior continent grid was read. Water code 1 is only a placeholder.'}
+    if component_manifest is None:
+        result={'schema':'direct-neon-land-build-report-v1','status':'unverified-research-not-published',
+                'decision_revision':rev['id'],'decision_revision_asserted_status':rev['status'],'entity_revision':erev['id'],
+                'snapshot_sha256':cfg['snapshot']['sha256'],'config_sha256':hashlib.sha256(cfg_bytes).hexdigest(),
+                'program_sha256':assign_land.sha(__file__), 'component_verification':{'builder_source_sha256':component_source_hash,
+                'builder_binary_sha256':assign_land.sha(binary),'compiler_version':compiler_version,'builder_output':process.stdout.strip(),
+                'rows_sha256':assign_land.sha(regenerated_rows),'runs_sha256':assign_land.sha(regenerated_runs)},
+                'compiler_report':report,'decision_summary':summaries,
+                'limitation':'Snapshot authenticity, decision completeness and geographic review are not proved. No prior continent grid was read. Water code 1 is only a placeholder.'}
+    else:
+        require(Path(component_manifest).read_bytes()==manifest_bytes, 'component manifest changed during run')
+        pin(manifest['builder_binary']);pin(manifest['physical_report'])
+        result={'schema':'direct-neon-land-stream-build-report-v1','status':'unverified-research-not-published',
+                'decision_revision':rev['id'],'decision_revision_asserted_status':rev['status'],'entity_revision':erev['id'],
+                'snapshot_sha256':cfg['snapshot']['sha256'],'config_sha256':hashlib.sha256(cfg_bytes).hexdigest(),
+                'program_sha256':assign_land.sha(__file__), 'component_generation':{'method':'single-generation-manifest',
+                'manifest_sha256':hashlib.sha256(manifest_bytes).hexdigest(),'physical_report_sha256':manifest['physical_report']['sha256'],'physical_report_kind':manifest['physical_report_kind'],'builder_source_sha256':component_source_hash,
+                'builder_binary_sha256':manifest['builder_binary_sha256'],'compiler_version':manifest['compiler_version'],
+                'builder_output':manifest['builder_output'],'rows_sha256':cfg['component_rows']['sha256'],'runs_sha256':cfg['component_runs']['sha256']},
+                'compiler_report':report,'decision_summary':summaries,
+                'limitation':'Snapshot authenticity, decision completeness and geographic review are not proved. Component generation was verified in the same orchestration, not independently rerun. No prior continent grid was read. Water code 1 is only a placeholder.'}
     (out/'config.json').write_bytes(cfg_bytes)
     (out/'report.json').write_text(json.dumps(result,indent=2)+'\n')
     return result

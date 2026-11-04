@@ -18,7 +18,8 @@ def main():
  ap=argparse.ArgumentParser();ap.add_argument('--plan',required=True);ap.add_argument('--input-root',required=True);ap.add_argument('--out',required=True)
  ap.add_argument('--allow-unverified-snapshot',action='store_true',help='test only: Neon acceptance cannot yet be authenticated by this tool')
  ap.add_argument('--allow-draft-snapshot',action='store_true',help='research only: allow a draft plan')
- ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved shore method');a=ap.parse_args()
+ ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved shore method')
+ ap.add_argument('--allow-historical-v6',action='store_true',help='historical replay only: permit V6 land');a=ap.parse_args()
  if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
  root=Path(a.input_root).resolve()
  if not root.is_dir():raise ValueError('input root must exist')
@@ -32,6 +33,7 @@ def main():
  if plan.get('grid',{}).get('width')!=c.W or plan.get('grid',{}).get('height')!=c.H:raise ValueError('plan grid mismatch')
  rles={}
  land_key='land' if 'land' in plan['rle_inputs'] else 'v6'
+ if land_key=='v6' and not a.allow_historical_v6:raise ValueError('historical V6 replay requires explicit opt-in')
  if land_key=='land' and (plan.get('land_input_kind')!='direct-research' or plan.get('decision_revision_status') not in ('draft','accepted')):raise ValueError('direct land input kind or revision status mismatch')
  if set(plan['rle_inputs'])!={'physical',land_key}:raise ValueError('exactly one direct land or historical v6 grid is required')
  for key in ('physical',land_key):
@@ -48,7 +50,7 @@ def main():
   land={**ent,'resolved_rows':c.resolve_input(ent['rows_path'],plan_path.parent,root),'resolved_runs':c.resolve_input(ent['runs_path'],plan_path.parent,root)}
   report=json.loads(report_path.read_text())
   revision={'id':plan.get('decision_revision'),'entity_revision':plan.get('entity_revision'),'status':plan.get('decision_revision_status')}
-  validate_land_report(report,report_path,physical,land,plan.get('decision_snapshot_sha256'),revision)
+  validate_land_report(report,report_path,physical,land,plan.get('decision_snapshot_sha256'),revision,root)
  layers=[]
  for ent in plan.get('water_layers',[]):
   mp,m=c.read_pinned_manifest(ent,plan_path,root);m['_tiles']=m['tiles']
