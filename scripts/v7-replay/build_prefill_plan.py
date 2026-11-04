@@ -90,6 +90,9 @@ def validate_land_report(report, report_path, physical, land, snapshot_hash, rev
     The same-run manifest path is a research lineage assertion, not independent
     connectivity verification or authentication of source provenance.
     """
+    if report.get('schema') == 'single-generation-nearest-report-v1':
+        from nearest_land_lineage import validate_nearest_land_report
+        return validate_nearest_land_report(report,report_path,physical,land,snapshot_hash,revision,input_root,canonical_physical_grid())
     digest = lambda value: isinstance(value, str) and len(value) == 64 and all(ch in '0123456789abcdef' for ch in value)
     stream = report.get('schema') == 'single-generation-direct-land-report-v1'
     if stream:
