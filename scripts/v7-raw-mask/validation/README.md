@@ -1,0 +1,14 @@
+# Physical-mask difference diagnostic
+
+This optional validation checks changed physical land/water cell centers against the new OSM land polygons and tests whether uniform integer- or sub-cell shifts reduce differences in a selected region. It reads a derived historical **land/water** mask, not historical continent labels. It is not a pipeline input and does not change the candidate map.
+
+Copy `config.example.json`, replace each `/path/to/...` with the corresponding local file, and keep or update every SHA-256 pin to match the exact inputs being studied. Pin the complete shapefile including `.shp`, `.shx`, `.dbf`, `.prj` and any present `.cpg`, `.qix`, `.sbn` or `.sbx` sidecars. The mismatch JSONL has `row`, `start`, `end`, `reference`, and `candidate`; spans are half-open and class codes are 1 for water and 17 for land. Run:
+
+```
+/usr/bin/python3 cell_diagnostics.py /path/to/config.json > /path/to/report.json
+/usr/bin/python3 -m unittest -v test_cell_diagnostics
+```
+
+One analysis of the pinned files found all 674 changed cell centers consistent with the new polygons: 305 changed from water to land and lay strictly inside, while 369 changed from land to water and lay outside. For the Hudson Strait study window, the unshifted alignment had 593 differences across 90,496 cells and was best among the tested integer, quarter-cell and half-cell shifts; the next-best sub-cell offset had 622 differences. The new-polygon raster at zero offset matched the new mask within that window.
+
+These checks make a simple uniform offset less likely; they do **not** prove why the historical and current masks differ. The historical mask is a derived raster, and the historical OSM vector snapshot was unavailable. Source edits, vector versions and historical processing remain confounded. The user has accepted the 674-cell difference for this reconstruction. No result from this diagnostic is a geographic approval or a substitute for end-to-end validation.

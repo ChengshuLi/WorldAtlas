@@ -1,0 +1,56 @@
+{
+  "grid": {
+    "width": 131072,
+    "height": 54614,
+    "west": -180,
+    "north": 90,
+    "step": 0.00274658203125
+  },
+  "study_bbox": [
+    -72,
+    62,
+    -70,
+    64
+  ],
+  "inputs": {
+    "mismatch": {
+      "path": "/path/to/mismatch-spans.jsonl",
+      "sha256": "1e1cd342f153f5a28e35c386dd658fd78f8abc2a7e3089d1243d55b984bd63c6"
+    },
+    "historical_land_mask": {
+      "path": "/path/to/physical-land-mask.tif",
+      "sha256": "62603d07cb5b6f68872df3ff2edb6a973bd1eccfe09de6aa1607f9ccb5a29a6b"
+    },
+    "new_land_mask": {
+      "path": "/path/to/land.tif",
+      "sha256": "f7e3ca1067aed2814ce641f813da6d807b6d18eaffa0a42cac2782c699671463"
+    },
+    "new_land_files": [
+      {
+        "path": "/path/to/land_polygons.shp",
+        "sha256": "e2258f3e849f8101cd44cea0f7c6e1ae5b476ef11f84e053af8a29f6cb82ffc3"
+      },
+      {
+        "path": "/path/to/README.txt",
+        "sha256": "74110e12dbabadd52c5dab496d764691f0bd052ebc0c61e5c01469238be6191c"
+      },
+      {
+        "path": "/path/to/land_polygons.dbf",
+        "sha256": "860656edf73e247ee949e1f62af4eeb87b9db45ad9ad21504ce316bfebaa75e6"
+      },
+      {
+        "path": "/path/to/land_polygons.cpg",
+        "sha256": "146d6789ffe033a5297c1ad046e6a62ee35319b86b021444f05b6ea2aa8a1f4a"
+      },
+      {
+        "path": "/path/to/land_polygons.shx",
+        "sha256": "b894349c1be3de80bbd244196ee268f78f87cb77b599065cb1f0914e972df390"
+      },
+      {
+        "path": "/path/to/land_polygons.prj",
+        "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+      }
+    ],
+    "new_land_dataset": "/path/to/land_polygons.shp"
+  }
+}
