@@ -70,6 +70,7 @@ class ClustersTest(unittest.TestCase):
             db = sqlite3.connect(root / 'out ?#/clusters.sqlite')
             self.assertEqual(sorted(row[0] for row in db.execute('SELECT cells FROM clusters')), [1,1,3])
             self.assertEqual(sum(b-a for a,b in db.execute('SELECT start,end FROM resolved')), 5)
+            self.assertEqual(db.execute('SELECT row,start,end,reference,candidate_physical FROM physical_differences ORDER BY start').fetchall(), [(3,0,1,17,1),(3,1,2,1,17)])
             self.assertEqual(cluster.digest(root / 'out ?#/clusters.sqlite'), report['database_sha256'])
             db.close()
             index_dir = root / 'index'; index_dir.mkdir()
@@ -119,6 +120,15 @@ class ClustersTest(unittest.TestCase):
             rep=Path(cfg['provenance']['candidate_report']['path']);j=json.loads(rep.read_text());j['decision_snapshot_sha256']=pin(snap)['sha256'];rep.write_text(json.dumps(j));cfg['provenance']['candidate_report']=pin(rep)
             config.write_text(json.dumps(cfg));result=cluster.build(config,root/'dynamic')
             self.assertEqual(result['counts']['mismatch'],5);self.assertEqual(result['clusters'],3)
+
+    def test_no_mismatches_yields_complete_empty_result(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);w,h=8,4
+            data=[[17]*w for _ in range(h)];cr,cu=write_rle(root/'candidate',data);rr,ru=write_rle(root/'reference',data);pr,pu=write_rle(root/'physical',data)
+            inp=root/'inputs';inp.mkdir();cfg={'schema':'list1-land-clusters-config-v1','grid':{'width':w,'height':h,'step':45,'west':-180,'north':90},'candidate_rows':cr,'candidate_runs':cu,'reference_rows':rr,'reference_runs':ru,'physical_rows':pr,'physical_runs':pu,'provenance':{},'minimum_free_bytes':0}
+            reports(inp,cfg);path=inp/'config';path.write_text(json.dumps(cfg));result=cluster.build(path,root/'out')
+            self.assertEqual((result['clusters'],result['counts']['mismatch']),(0,0))
+            db=sqlite3.connect(root/'out/clusters.sqlite');self.assertEqual(db.execute('select count(*) from resolved').fetchone()[0],0);db.close()
 
     def test_randomized_against_dense_bfs(self):
         import random

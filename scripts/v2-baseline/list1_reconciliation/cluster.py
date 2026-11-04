@@ -182,6 +182,7 @@ def build(config_path, output):
         db.executescript('''PRAGMA journal_mode=DELETE; PRAGMA synchronous=FULL;
             CREATE TABLE parent (id INTEGER PRIMARY KEY, parent INTEGER NOT NULL);
             CREATE TABLE spans (row INTEGER NOT NULL, start INTEGER NOT NULL, end INTEGER NOT NULL, reference INTEGER NOT NULL, candidate INTEGER NOT NULL, label INTEGER NOT NULL);
+            CREATE TABLE physical_differences (row INTEGER NOT NULL, start INTEGER NOT NULL, end INTEGER NOT NULL, reference INTEGER NOT NULL, candidate_physical INTEGER NOT NULL);
             CREATE TABLE clusters (root INTEGER PRIMARY KEY, cluster_id TEXT NOT NULL UNIQUE, cells INTEGER NOT NULL, first_row INTEGER NOT NULL, first_col INTEGER NOT NULL, min_row INTEGER NOT NULL, max_row INTEGER NOT NULL, min_col INTEGER NOT NULL, max_col INTEGER NOT NULL, membership_sha256 TEXT NOT NULL);
         ''')
         uf = Components(db)
@@ -206,6 +207,9 @@ def build(config_path, output):
             counts['matching'] += int(lengths[shared & (c == r)].sum())
             counts['candidate_land_reference_water'] += int(lengths[candidate_land & ~reference_land].sum())
             counts['candidate_water_reference_land'] += int(lengths[(c == UNCLASSIFIED_WATER) & reference_land].sum())
+            physical_differing = candidate_land != reference_land
+            db.executemany('INSERT INTO physical_differences VALUES (?,?,?,?,?)',
+                ((y,int(a),int(b),int(ref),int(phys)) for a,b,ref,phys in zip(starts[physical_differing],ends[physical_differing],r[physical_differing],p[physical_differing])))
             differing = shared & (c != r)
             counts['mismatch'] += int(lengths[differing].sum())
             # One provisional label per horizontally connected run, independent of transition.
@@ -279,6 +283,9 @@ def build(config_path, output):
         total, nclusters = db.execute('SELECT COALESCE(SUM(cells),0),COUNT(*) FROM clusters').fetchone()
         if total != counts['mismatch']:
             raise ValueError('mismatch cluster accounting failure')
+        physical_total = db.execute('SELECT COALESCE(SUM(end-start),0) FROM physical_differences').fetchone()[0]
+        if physical_total != counts['candidate_land_reference_water'] + counts['candidate_water_reference_land']:
+            raise ValueError('physical difference accounting failure')
         db.execute('DROP TABLE spans')
         db.execute('DROP TABLE parent')
         db.commit()
