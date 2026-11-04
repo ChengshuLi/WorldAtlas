@@ -68,7 +68,7 @@ def build(cfgpath,out):
     source=HERE.parent/'v7-land'/'build_components.cpp';code_paths=[Path(__file__).resolve(),source,Path(n.__file__),Path(tile_index.__file__),KERNEL/'distance_kernel.cpp'];code_hashes={p.name:n.sha(p) for p in code_paths}
     manifest=None;component_files=[]
     if 'component_manifest' in cfg:
-        mp=Path(cfg['component_manifest']['path']).resolve();manifest=json.loads(mp.read_bytes());base=mp.parent
+        manifest_path=Path(cfg['component_manifest']['path']).resolve();manifest=json.loads(manifest_path.read_bytes());base=manifest_path.parent
         n.require(manifest.get('schema')=='simple-v2-components-report-v1' and manifest.get('status')=='research-not-published' and manifest.get('grid')==g and manifest.get('inputs')=={k:cfg[k] for k in ('physical_rows','physical_runs','physical_report')} and manifest.get('component_source_sha256')==code_hashes['build_components.cpp'] and isinstance(manifest.get('builder_output'),str) and bool(manifest['builder_output']) and isinstance(manifest.get('compiler_version'),str) and bool(manifest['compiler_version']),'component manifest mismatch')
         component_rows=base/'rows.u32le';component_runs=base/'runs.u32le';binary=base/'component-builder';component_files=[component_rows,component_runs,binary]
         n.require(all(p.is_file() for p in component_files) and n.sha(component_rows)==manifest.get('rows_sha256') and n.sha(component_runs)==manifest.get('runs_sha256') and n.sha(binary)==manifest.get('builder_binary_sha256'),'component artifact mismatch')

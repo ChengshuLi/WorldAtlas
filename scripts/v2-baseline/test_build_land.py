@@ -53,7 +53,7 @@ class TestBuild(unittest.TestCase):
  def test_same_run_components_match_independent_and_reject_tampering(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d);path,cfg=self.fixture(p);component_config=p/'config'/'components.json';component_config.write_text(json.dumps({'schema':'simple-v2-components-v1','grid':cfg['grid'],'physical_rows':cfg['physical_rows'],'physical_runs':cfg['physical_runs'],'physical_report':cfg['physical_report'],'minimum_free_bytes':0}));component_out=p/'components';build_components.build(component_config,component_out)
-   independent=build_land.build(path,p/'independent');cfg['component_manifest']=pin(component_out/'report.json');path.write_text(json.dumps(cfg));reused=build_land.build(path,p/'reused')
+   independent=build_land.build(path,p/'independent');cfg['component_manifest']=pin(component_out/'report.json');cfg['workers']=4;path.write_text(json.dumps(cfg));reused=build_land.build(path,p/'reused')
    self.assertEqual(reused['component_generation'],'pinned-component-manifest');self.assertEqual(independent['component_generation'],'independent-recompute');self.assertEqual((p/'independent/rows.u32le').read_bytes(),(p/'reused/rows.u32le').read_bytes());self.assertEqual((p/'independent/runs.u32le').read_bytes(),(p/'reused/runs.u32le').read_bytes())
    with (component_out/'runs.u32le').open('ab') as f:f.write(b'\0')
    with self.assertRaisesRegex(ValueError,'component artifact mismatch'):build_land.build(path,p/'bad')
