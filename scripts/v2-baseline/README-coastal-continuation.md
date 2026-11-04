@@ -1,0 +1,14 @@
+# Continue a partial coastal run with a changed halo
+
+This workflow applies only to the **partial research 12-nautical-mile band**. It does not assign open oceans or establish historical V2 implementation. The existing adaptive coastal engine and exact certification remain unchanged. A smaller search halo is permitted only when the classifier certifies that omitted shoreline cannot affect the result; otherwise the tile fails rather than guessing. Other configuration changes are rejected. A changed halo is not evidence of historical correctness.
+
+1. Preserve the stopped source run, its original config, and its `identity.json`. Copy the config to a new path and change only `pad_degrees`. For the documented failed tile 921, 0.5° passed the certificate with the existing one-million-segment cap; other tiles may still fail and require further analysis. Never overwrite the source output or alter its identity.
+2. Compute the SHA-256 of the source `identity.json` and run:
+
+   `/usr/bin/python3 migrate_coastal_partial.py OLD_CONFIG NEW_CONFIG SOURCE_DIR OLD_IDENTITY_SHA256 NEW_OUTPUT_DIR`
+
+   The tool locks the source run exclusively, verifies the old identity and all source code and input pins, validates each completed tile config, report, gzip spans and counts, then copies and rehashes each file. It writes `migration.json` only after all checks pass. The manifest identifies the source identity, old and new configs, migration code, both halo values and each copied tile's hashes. An interrupted or failed copy has no completion manifest and must not be resumed as a valid migration; preserve that incomplete directory and use a new destination.
+3. Run `/usr/bin/python3 build_coastal_continuation.py NEW_CONFIG NEW_OUTPUT_DIR`. It checks the manifest and code identity, revalidates imported tiles, and continues with new-halo tiles. Completed tile reports retain their individual config hashes and successful certificates. As in the original runner, a lock prevents concurrent writes, output is checkpointed per tile, a 2 GiB free-space reserve is the default, and `--max-tiles N` permits a controlled pause. Re-run the same command to resume after a pause or recoverable interruption. No automatic RAM reserve is enforced; monitor memory separately. Other processes or a single operation can cross the disk reserve between checks.
+4. A batch `report.json` appears only after the full grid tessellation is verified. The migration hash in that report links the two sets of per-tile configurations. Continue with the separate comparison only after completion. The preserved V2 grid is comparison input, never a build input.
+
+Tests: `/usr/bin/python3 -m unittest -q test_coastal_continuation`. They exercise unchanged-source copying, lock and code checks, corruption rejection, an interrupted copy, resumption, and full synthetic coverage. These checks establish operational consistency, not historical or geographic correctness.
