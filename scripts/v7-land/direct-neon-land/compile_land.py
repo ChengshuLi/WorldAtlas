@@ -196,8 +196,9 @@ def resolve_witness_rules(witnesses, grid, cfg, rr, runs, component_source_hash,
         summaries.append({'witness_rule_id':rid,'selected_components':len(roots),'mask_bound':True})
 
 
-def prepare(config_path, output, allow_unverified_snapshot=False, component_manifest=None):
+def prepare(config_path, output, allow_unverified_snapshot=False, component_manifest=None, resolve_only=False):
     require(allow_unverified_snapshot, 'snapshot authentication is not implemented; research requires --allow-unverified-snapshot')
+    program_hash = assign_land.sha(__file__); shared_hash = assign_land.sha(assign_land.__file__)
     cfg_bytes = Path(config_path).read_bytes()
     cfg = json.loads(cfg_bytes)
     obj(cfg, ('schema','snapshot','grid','physical_rows','physical_runs','component_rows','component_runs','source_files'), ('strip_rows',), 'config')
@@ -369,6 +370,37 @@ def prepare(config_path, output, allow_unverified_snapshot=False, component_mani
                 'provenance_note':'UNVERIFIED snapshot, research output only; see direct build report', 'grid':grid,
                 **{k:cfg[k] for k in ('physical_rows','physical_runs','component_rows','component_runs')}, 'strip_rows':strip, 'rules':rules}
     cpath=out/'compiler-config.json'; cpath.write_text(json.dumps(compiler,sort_keys=True,separators=(',',':'))+'\n')
+    if resolve_only:
+        # An explicit-resolution artifact is not a complete land grid. All
+        # normal snapshot, source, physical and component checks have already
+        # run; recheck immutable inputs before publishing this partial result.
+        for spec in pins: pin(spec)
+        for rule in rules:
+            if rule['kind']=='polygon_partition':
+                for part in rule['parts']: pin(part['geometry'])
+        require(Path(config_path).read_bytes()==cfg_bytes, 'config changed during resolution')
+        require(assign_land.sha(__file__)==program_hash and assign_land.sha(assign_land.__file__)==shared_hash and
+                assign_land.sha(component_source)==component_source_hash, 'code changed during resolution')
+        if component_manifest is not None:
+            require(Path(component_manifest).read_bytes()==manifest_bytes, 'component manifest changed during resolution')
+            pin(manifest['builder_binary']);pin(manifest['physical_report'])
+        else:
+            require(assign_land.sha(regenerated_rows)==cfg['component_rows']['sha256'] and
+                    assign_land.sha(regenerated_runs)==cfg['component_runs']['sha256'], 'regenerated components changed during resolution')
+        partial={'schema':'direct-land-explicit-resolution-v1','status':'research-partial-no-land-grid',
+                 'decision_revision':rev['id'],'decision_revision_asserted_status':rev['status'],'entity_revision':erev['id'],
+                 'snapshot_sha256':cfg['snapshot']['sha256'],'config_sha256':hashlib.sha256(cfg_bytes).hexdigest(),
+                 'compiler_config_path':str(cpath),'compiler_config_sha256':assign_land.sha(cpath),
+                 'program_sha256':program_hash,'shared_backend_sha256':shared_hash,'component_source_sha256':component_source_hash,
+                 'gdal_version':gdal.VersionInfo('--version'),'numpy_version':np.__version__,
+                 'component_generation_method':'single-generation-manifest' if component_manifest is not None else 'independent-recompute',
+                 'component_manifest_path':str(Path(component_manifest).resolve()) if component_manifest is not None else None,
+                 'component_manifest_sha256':hashlib.sha256(manifest_bytes).hexdigest() if component_manifest is not None else None,
+                 'input_pins':{k:cfg[k] for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs')},
+                 'source_files':cfg['source_files'],'grid':grid,'explicit_root_count':len(rules),'decision_summary':summaries,
+                 'limitation':'Explicit claims and partitions only. Coverage, fallback decisions and final geography are not established; no land grid was emitted.'}
+        (out/'resolution-report.json').write_text(json.dumps(partial,indent=2)+'\n')
+        return partial
     if component_manifest is None:
         report=assign_land.build(cpath,out/'land')
     else:

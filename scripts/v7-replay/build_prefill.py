@@ -11,7 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from exclusive_outputs import create_binary_exclusive, create_directory_exclusive, write_json_exclusive
 import numpy as np
 import compose_full_water_grid as c
-from build_prefill_plan import validate_land_report
+from build_prefill_plan import validate_land_report, validate_physical_report
 
 
 def main():
@@ -43,6 +43,10 @@ def main():
   if len(rows)!=c.H+1 or len(runs)%2 or int(rows[0])!=0 or int(rows[-1])!=len(runs)//2 or np.any(rows[1:]<=rows[:-1]):
    raise ValueError(f'{key} invalid RLE offsets or size')
   rles[key]=(rows,runs)
+ if 'report_path' in plan['rle_inputs']['physical']:
+  pent=plan['rle_inputs']['physical'];ppath=c.resolve_input(pent['report_path'],plan_path.parent,root)
+  if c.sha256(ppath)!=pent['report_sha256']:raise ValueError('physical report hash mismatch')
+  validate_physical_report(json.loads(ppath.read_text()),pent)
  if land_key=='land':
   ent=plan['rle_inputs']['land'];report_path=c.resolve_input(ent['report_path'],plan_path.parent,root)
   if c.sha256(report_path)!=ent['report_sha256']:raise ValueError('direct land report hash mismatch')

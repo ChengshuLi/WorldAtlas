@@ -70,10 +70,13 @@ def crop_bounds(bounds, width, height, step, pad_degrees):
     return xa,xb,max(0,y0-pad),min(height,y1+pad)
 
 
-def edges_for_crop(physical, land, bounds, width, height, step, land_codes):
-    x0,x1,y0,y1=bounds; parts=[]; w=x1-x0
+def edges_for_crop(physical, land, bounds, width, height, step, land_codes, max_segments=None):
+    x0,x1,y0,y1=bounds; parts=[]; w=x1-x0; segment_count=0
+    if max_segments is not None and (type(max_segments) is not int or max_segments<=0): raise ValueError('invalid segment limit')
     def add(lat0,lon0,lat1,lon1,kind,cats):
-        n=len(cats)
+        nonlocal segment_count
+        n=len(cats);segment_count+=n
+        if max_segments is not None and segment_count>max_segments:raise ValueError('shore segment limit exceeded; reduce tile or split component')
         if n: parts.append(tuple(np.asarray(v,dtype=(np.uint8 if i in (4,5) else np.float64))
                                  for i,v in enumerate((lat0,lon0,lat1,lon1,np.full(n,kind),cats))))
     prevp=prevl=None

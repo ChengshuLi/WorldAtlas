@@ -42,6 +42,9 @@ class OneGeneration(unittest.TestCase):
         from unittest.mock import patch
         with patch.object(planner,'canonical_physical_grid',return_value=self.f.cfg['grid']):
             planner.validate_land_report(report,report_path,phys,land,snapshot_sha,revision,self.f.base)
+        partial={**report,'schema':'single-generation-land-resolution-report-v1'}
+        with patch.object(planner,'canonical_physical_grid',return_value=self.f.cfg['grid']):
+            with self.assertRaises(ValueError):planner.validate_land_report(partial,report_path,phys,land,snapshot_sha,revision,self.f.base)
         bad_report={**report,'code_sha256':{**report['code_sha256'],'runner':'invalid'}}
         with patch.object(planner,'canonical_physical_grid',return_value=self.f.cfg['grid']):
             with self.assertRaisesRegex(ValueError,'orchestration report mismatch'):
@@ -64,6 +67,11 @@ class OneGeneration(unittest.TestCase):
         rows=self.out/'assignment/land/rows.u32le';runs=self.out/'assignment/land/runs.u32le'
         land={'resolved_rows':rows.resolve(),'resolved_runs':runs.resolve(),'rows_sha256':single.compiler.assign_land.sha(rows),'runs_sha256':single.compiler.assign_land.sha(runs)}
         revision=self.f.snap['decision_revision'];snapshot_sha=self.f.cfg['snapshot']['sha256']
+        forged={**report,'code_sha256':{**report['code_sha256'],'compiler':'f'*64}}
+        from unittest.mock import patch
+        with patch.object(planner,'canonical_physical_grid',return_value=self.f.cfg['grid']):
+            with self.assertRaisesRegex(ValueError,'manifest does not bind'):
+                planner.validate_land_report(forged,report_path,phys,land,snapshot_sha,revision,self.f.base)
         component=self.out/'components/runs.u32le';original=component.read_bytes();component.write_bytes(original+b'x')
         from unittest.mock import patch
         with patch.object(planner,'canonical_physical_grid',return_value=self.f.cfg['grid']):
@@ -76,6 +84,22 @@ class OneGeneration(unittest.TestCase):
         with patch.object(planner,'canonical_physical_grid',return_value=self.f.cfg['grid']):
             with self.assertRaisesRegex(ValueError,'does not bind'):
                 planner.validate_land_report(report,report_path,phys,land,snapshot_sha,revision,self.f.base)
+
+    def test_prefill_rejects_builder_scalar_pin_disagreement(self):
+        single.run(self.request(),self.out,True)
+        replay=HERE.parents[1]/'v7-replay';sys.path.insert(0,str(replay))
+        import build_prefill_plan as planner
+        report_path=self.out/'report.json';report=json.loads(report_path.read_text())
+        phys={'rows_sha256':self.f.cfg['physical_rows']['sha256'],'runs_sha256':self.f.cfg['physical_runs']['sha256']}
+        rows=self.out/'assignment/land/rows.u32le';runs=self.out/'assignment/land/runs.u32le'
+        land={'resolved_rows':rows.resolve(),'resolved_runs':runs.resolve(),'rows_sha256':single.compiler.assign_land.sha(rows),'runs_sha256':single.compiler.assign_land.sha(runs)}
+        manifest=self.out/'manifests/components.json';md=json.loads(manifest.read_text());md['builder_binary_sha256']='f'*64;manifest.write_text(json.dumps(md))
+        nested=self.out/'assignment/report.json';nd=json.loads(nested.read_text());nd['component_generation']['builder_binary_sha256']='f'*64;nd['component_generation']['manifest_sha256']=single.compiler.assign_land.sha(manifest);nested.write_text(json.dumps(nd))
+        report['component_manifest_sha256']=single.compiler.assign_land.sha(manifest);report['land_report_sha256']=single.compiler.assign_land.sha(nested)
+        from unittest.mock import patch
+        with patch.object(planner,'canonical_physical_grid',return_value=self.f.cfg['grid']):
+            with self.assertRaisesRegex(ValueError,'manifest does not bind'):
+                planner.validate_land_report(report,report_path,phys,land,self.f.cfg['snapshot']['sha256'],self.f.snap['decision_revision'],self.f.base)
 
     def test_incomplete_fails_without_completion_report(self):
         self.f.snap['affiliations'].pop();self.f.refresh_snapshot()
@@ -120,6 +144,18 @@ class OneGeneration(unittest.TestCase):
         self.assertEqual(called.call_count,1);self.assertEqual(called.call_args.args[0],snapshot_pin)
         self.assertFalse(self.out.exists())
 
+    def test_resolve_only_emits_pinned_partial_not_land(self):
+        self.f.snap['affiliations'].pop();self.f.refresh_snapshot()
+        r=single.run(self.request(),self.out,True,resolve_only=True)
+        self.assertEqual(r['schema'],'single-generation-land-resolution-report-v1');self.assertEqual(r['status'],'research-partial-no-land-grid')
+        self.assertEqual(r['component_generations'],1);self.assertEqual(r['explicit_root_count'],1);self.assertEqual(r['decision_revision_asserted_status'],'draft')
+        self.assertEqual(r['resolution_report_sha256'],single.compiler.assign_land.sha(self.out/'assignment/resolution-report.json'))
+        self.assertEqual(r['compiler_config_sha256'],single.compiler.assign_land.sha(self.out/'assignment/compiler-config.json'))
+        self.assertFalse((self.out/'report.json').exists());self.assertFalse((self.out/'assignment/land').exists())
+    def test_resolve_only_rejects_unselected_before_generation(self):
+        self.f.snap['affiliations'][0]['evidence']['execution_status']='research_only_not_selected';self.f.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'unselected or unknown land affiliation'):single.run(self.request(),self.out,True,resolve_only=True)
+        self.assertFalse(self.out.exists())
     def test_component_source_mismatch_fails(self):
         p=self.request();r=json.loads(p.read_bytes());r['component_source_sha256']='0'*64;p.write_text(json.dumps(r))
         with self.assertRaisesRegex(ValueError,'source hash mismatch'):single.run(p,self.out,True)

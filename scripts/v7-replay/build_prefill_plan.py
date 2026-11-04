@@ -58,6 +58,12 @@ def coastline_policy(policy):
         raise ValueError('exactly one identified coastline assignment decision is required')
     require_selected_policy(policy, records[0])
     definition = records[0].get('definition')
+    if isinstance(definition, dict) and definition.get('method') == 'nearest_final_shore_band_v1':
+        if policy.get('decision_revision',{}).get('status') != 'draft':
+            raise ValueError('derived coastline method is draft research only')
+        import coastal_core
+        coastal_core.policy(policy, allow_selected_research=True)
+        return records[0], None
     if (not isinstance(definition, dict) or not isinstance(definition.get('source_id'), str)
             or not definition['source_id'] or not isinstance(definition.get('source_version'), str)
             or not definition['source_version'] or not isinstance(definition.get('method'), str)
@@ -68,6 +74,14 @@ def coastline_policy(policy):
 
 def canonical_physical_grid():
     return {'width':c.W, 'height':c.H, 'step':360.0/c.W, 'west':-180, 'north':90}
+
+
+def validate_physical_report(report, physical):
+    output=report.get('physical_output_sha256',report.get('output_sha256',{}))
+    if (report.get('status') != 'candidate-only' or report.get('grid') != canonical_physical_grid()
+            or output.get('rows.u32le') != physical['rows_sha256'] or output.get('runs.u32le') != physical['runs_sha256']
+            or (physical.get('physical_mask_sha256') and output.get('physical-dry.tif') != physical['physical_mask_sha256'])):
+        raise ValueError('physical report does not bind the canonical grid and streams')
 
 
 def validate_land_report(report, report_path, physical, land, snapshot_hash, revision, input_root=None):
@@ -119,6 +133,9 @@ def validate_land_report(report, report_path, physical, land, snapshot_hash, rev
                 or gen.get('method') != 'single-generation-manifest' or gen.get('manifest_sha256') != report.get('component_manifest_sha256')
                 or gen.get('builder_source_sha256') != manifest.get('component_source_sha256')
                 or gen.get('builder_binary_sha256') != manifest.get('builder_binary_sha256')
+                or manifest.get('builder_binary',{}).get('sha256') != manifest.get('builder_binary_sha256')
+                or code_hashes.get('compiler') != nested.get('program_sha256')
+                or code_hashes.get('stream_backend') != nested.get('compiler_report',{}).get('program_sha256')
                 or gen.get('compiler_version') != manifest.get('compiler_version') or gen.get('builder_output') != manifest.get('builder_output')
                 or request.get('snapshot',{}).get('sha256') != snapshot_hash or request.get('grid') != manifest.get('grid')
                 or request.get('component_source_sha256') != gen.get('builder_source_sha256')
@@ -137,6 +154,12 @@ def validate_land_report(report, report_path, physical, land, snapshot_hash, rev
         if c.sha256(config_path) != report.get('config_sha256'):
             raise ValueError('direct land configuration hash mismatch')
         config=json.loads(config_path.read_text())
+        verified=report.get('component_verification',{})
+        for name,key in (('component-builder','builder_binary_sha256'),('verified-component-rows.u32le','rows_sha256'),('verified-component-runs.u32le','runs_sha256')):
+            artifact=(report_path.parent/name).resolve()
+            if (not artifact.is_relative_to(Path(input_root).resolve()) or not artifact.is_file()
+                    or not digest(verified.get(key)) or c.sha256(artifact) != verified[key]):
+                raise ValueError('independent component artifact missing, outside input root or hash mismatch')
         if (config.get('grid') != canonical_physical_grid() or config.get('snapshot',{}).get('sha256') != snapshot_hash
                 or config.get('physical_rows',{}).get('sha256') != physical['rows_sha256']
                 or config.get('physical_runs',{}).get('sha256') != physical['runs_sha256']):
@@ -217,7 +240,21 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
     coast_path, coast_manifest = validate_manifest(coast)
     coast_source = coast_manifest.get('source', {}); physical = rles['physical']
     coast_decision, coast_catalog = coastline_policy(policy); coast_definition = coast_decision['definition']
-    if (coast_source.get('decision_id') != coast_decision['id']
+    if coast_catalog is None:
+        if land_key != 'land': raise ValueError('derived coastline requires direct land')
+        physical_source=config['rle_inputs']['physical']
+        physical_report_path=input_path(physical_source['report_path'],config_path,root)
+        if c.sha256(physical_report_path)!=physical_source['report_sha256']:
+            raise ValueError('physical report hash mismatch')
+        validate_physical_report(json.loads(physical_report_path.read_text()),physical)
+        physical['report_path']=rel(physical_report_path);physical['report_sha256']=physical_source['report_sha256']
+        if (coast_source.get('decision_id') != coast_decision['id'] or coast_source.get('policy_definition') != coast_definition
+                or coast_source.get('physical_report_sha256') != physical['report_sha256']
+                or coast_source.get('land_rows_sha256') != rles['land']['rows_sha256']
+                or coast_source.get('land_runs_sha256') != rles['land']['runs_sha256']
+                or coast_source.get('land_report_sha256') != rles['land']['report_sha256']):
+            raise ValueError('derived coastal manifest policy or land/physical lineage mismatch')
+    elif (coast_source.get('decision_id') != coast_decision['id']
             or coast_source.get('source_id') != coast_definition['source_id']
             or coast_source.get('source_version') != coast_definition['source_version']
             or coast_source.get('source_file_sha256') != coast_catalog['sha256']

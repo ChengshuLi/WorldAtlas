@@ -17,7 +17,7 @@ def code_hashes():
         'stream_backend':here/'assign_land_stream.py','shared_backend':here.parent/'assign_land.py'}.items()}
 
 
-def run(request_path,output,allow=False):
+def run(request_path,output,allow=False,resolve_only=False):
     compiler.require(allow,'explicit unverified research mode required')
     initial_code_hashes=code_hashes()
     raw=Path(request_path).read_bytes();r=json.loads(raw)
@@ -69,10 +69,23 @@ def run(request_path,output,allow=False):
     mpath=manifests/'components.json';mpath.write_text(json.dumps(manifest,sort_keys=True,separators=(',',':'))+'\n')
     config={'schema':'direct-neon-land-build-v1','snapshot':r['snapshot'],'grid':g,**cpins,'source_files':r['source_files'],'strip_rows':r.get('strip_rows',128)}
     config_path=configs/'land.json';config_path.write_text(json.dumps(config,sort_keys=True,separators=(',',':'))+'\n')
-    result=compiler.prepare(config_path,output/'assignment',True,mpath)
+    result=compiler.prepare(config_path,output/'assignment',True,mpath,resolve_only=resolve_only)
     compiler.require(Path(request_path).read_bytes()==raw,'request changed during run')
     for item in pins:compiler.pin(item)
     compiler.require(code_hashes()==initial_code_hashes,'code changed during run')
+    if resolve_only:
+        report={'schema':'single-generation-land-resolution-report-v1','status':'research-partial-no-land-grid',
+                'request_sha256':hashlib.sha256(raw).hexdigest(),'snapshot_sha256':r['snapshot']['sha256'],
+                'decision_revision':result['decision_revision'],'decision_revision_asserted_status':result['decision_revision_asserted_status'],'entity_revision':result['entity_revision'],
+                'component_manifest_sha256':compiler.assign_land.sha(mpath),
+                'resolution_report_sha256':compiler.assign_land.sha(output/'assignment/resolution-report.json'),
+                'compiler_config_sha256':result['compiler_config_sha256'],'physical_report_sha256':r['physical_report']['sha256'],
+                'physical_report_kind':lineage_kind,'code_sha256':initial_code_hashes,'component_generations':1,
+                'explicit_root_count':result['explicit_root_count'],
+                'limitation':'Research partial: no fallback, completeness check, accepted snapshot or land grid is implied.'}
+        (output/'request.json').write_bytes(raw)
+        (output/'resolution-report.json').write_text(json.dumps(report,indent=2)+'\n')
+        return report
     report={'schema':'single-generation-direct-land-report-v1','status':'unverified-research-not-published','request_sha256':hashlib.sha256(raw).hexdigest(),
             'component_manifest_sha256':compiler.assign_land.sha(mpath),'land_report_sha256':compiler.assign_land.sha(output/'assignment/report.json'),
             'snapshot_sha256':r['snapshot']['sha256'],'code_sha256':initial_code_hashes,'physical_report_sha256':r['physical_report']['sha256'],'physical_report_kind':lineage_kind,'component_generations':1,
@@ -81,6 +94,6 @@ def run(request_path,output,allow=False):
     (output/'request.json').write_bytes(raw);(output/'report.json').write_text(json.dumps(report,indent=2)+'\n');return report
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('request',type=Path);p.add_argument('output',type=Path);p.add_argument('--allow-unverified-snapshot',action='store_true');a=p.parse_args()
-    try:print(json.dumps(run(a.request,a.output,a.allow_unverified_snapshot),indent=2))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('request',type=Path);p.add_argument('output',type=Path);p.add_argument('--allow-unverified-snapshot',action='store_true');p.add_argument('--resolve-only',action='store_true',help='research partial: emit explicit rules, no land grid');a=p.parse_args()
+    try:print(json.dumps(run(a.request,a.output,a.allow_unverified_snapshot,a.resolve_only),indent=2))
     except Exception as e:print(f'error: {e}',file=sys.stderr);raise SystemExit(1)

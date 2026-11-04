@@ -90,13 +90,16 @@ class PrefillPlanTest(unittest.TestCase):
                 lr.write_bytes(rows);lu.write_bytes(np.array([4,1,4,18],dtype='<u4').tobytes())
                 report={'schema':'direct-neon-land-build-report-v1','status':'unverified-research-not-published',
                     'snapshot_sha256':policy_hash,'decision_revision':'d1','decision_revision_asserted_status':'accepted',
-                    'entity_revision':'e1','component_verification':{'builder_source_sha256':'a'*64,'builder_binary_sha256':'b'*64,
-                        'compiler_version':'test','builder_output':'test','rows_sha256':'c'*64,'runs_sha256':'d'*64},
+                    'entity_revision':'e1','component_verification':{'builder_source_sha256':'a'*64,
+                        'compiler_version':'test','builder_output':'test'},
                     'compiler_report':{'schema':'land-decision-compiler-prototype-report-v1',
                         'input_sha256':{'physical_rows':rles['physical']['rows_sha256'],
-                                        'physical_runs':rles['physical']['runs_sha256'],
-                                        'component_rows':'c'*64,'component_runs':'d'*64},
+                                        'physical_runs':rles['physical']['runs_sha256']},
                         'output_rows_sha256':sha(lr),'output_runs_sha256':sha(lu)}}
+                for name,key in (('component-builder','builder_binary_sha256'),('verified-component-rows.u32le','rows_sha256'),('verified-component-runs.u32le','runs_sha256')):
+                    path=ld/name;path.write_bytes(name.encode());report['component_verification'][key]=sha(path)
+                report['compiler_report']['input_sha256']['component_rows']=report['component_verification']['rows_sha256']
+                report['compiler_report']['input_sha256']['component_runs']=report['component_verification']['runs_sha256']
                 land_config={'grid':{'width':4,'height':2,'step':90.0,'west':-180,'north':90},
                     'snapshot':{'sha256':policy_hash},'physical_rows':{'sha256':rles['physical']['rows_sha256']},
                     'physical_runs':{'sha256':rles['physical']['runs_sha256']}}
