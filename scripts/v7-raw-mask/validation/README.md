@@ -16,3 +16,5 @@ These checks make a simple uniform offset less likely; they do **not** prove why
 ## Water-selection comparison
 
 `compare_water_selection.py MANIFEST MANIFEST_SHA256 --workers 4` scans the hash-pinned Overture water shards and counts how many records the old source/class filter and current subtype-only filter select, including additions and removals. It verifies each source hash and checks size and modification time again after scanning. This compares feature predicates only; it does not inspect geometry validity, rasterize, or compare resulting cells. Use the exact raw-source manifest and appropriate worker and I/O limits.
+
+For the pinned 32-shard `2026-10-21.0` manifest with SHA-256 `96f5abd11155fb73763a96efb200c0f99fbbabd4bd10fa1005d7837b3eb3938c`, a hash-verified scan counted 66,814,038 records. Both predicates selected 66,494,085 records, with zero additions, zero removals and zero missing subtypes. This establishes identical feature selection for those bytes, not a fresh global rasterization or cell-for-cell comparison.
