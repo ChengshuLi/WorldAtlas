@@ -1,5 +1,5 @@
 {
-  "schema": "water-shard-candidate-v1",
+  "schema": "water-shard-candidate-v2",
   "grid": {
     "width": 131072,
     "height": 54614,
@@ -8,23 +8,9 @@
     "step": 0.00274658203125
   },
   "tile_size": 1024,
-  "selection_notes": "Provisional candidate policy. It is not established as the historical source selection. Review before use.",
+  "selection_notes": "Overture inland water: exclude ocean and physical subtypes; use polygon geometries.",
   "policy": {
-    "exclude_subtypes": [
-      "ocean",
-      "physical"
-    ],
-    "exclude_classes": [
-      "ocean",
-      "sea"
-    ],
-    "source_datasets": [
-      "OpenStreetMap"
-    ],
-    "source_properties": [
-      "",
-      "geometry"
-    ]
+    "method": "overture-inland-subtype-v1"
   },
   "minimum_free_bytes": 2147483648
 }

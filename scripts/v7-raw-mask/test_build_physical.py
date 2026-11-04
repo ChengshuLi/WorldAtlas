@@ -21,8 +21,8 @@ class PipelineTests(unittest.TestCase):
         land_cfg={'schema':'land-raster-candidate-v1','grid':self.grid,'selection_notes':'synthetic','strip_rows':2,'minimum_free_bytes':0,
                   'land':[{'dataset':str(land),'where':None,'files':[{'path':str(land),'sha256':b.sha(land)}]}]}
         self.land_cfg=self.config_dir/'land.json';self.land_cfg.write_text(json.dumps(land_cfg))
-        water_cfg={'schema':'water-shard-candidate-v1','grid':self.grid,'tile_size':4,'minimum_free_bytes':0,'selection_notes':'synthetic',
-                   'policy':{'exclude_subtypes':['ocean','physical'],'exclude_classes':['ocean','sea'],'source_datasets':['OpenStreetMap'],'source_properties':['','geometry']}}
+        water_cfg={'schema':'water-shard-candidate-v2','grid':self.grid,'tile_size':4,'minimum_free_bytes':0,'selection_notes':'synthetic',
+                   'policy':{'method':'overture-inland-subtype-v1'}}
         self.water_cfg=self.config_dir/'water.json';self.water_cfg.write_text(json.dumps(water_cfg))
         geom=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))').ExportToWkb())
         rows=[{'id':'lake','subtype':'lake','class':'lake','sources':[{'property':'','dataset':'OpenStreetMap'}],'geometry':geom}]

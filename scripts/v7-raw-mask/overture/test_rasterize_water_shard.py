@@ -13,10 +13,9 @@ class WaterShardTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(); self.path = Path(self.tmp.name)
         self.inputs=self.path/'inputs';self.inputs.mkdir()
-        cfg={'schema':'water-shard-candidate-v1', 'grid':{'width':32,'height':16,'west':-180,'north':90,'step':11.25},
+        cfg={'schema':'water-shard-candidate-v2', 'grid':{'width':32,'height':16,'west':-180,'north':90,'step':11.25},
              'tile_size':4, 'selection_notes':'synthetic test',
-             'policy':{'exclude_subtypes':['ocean','physical'],'exclude_classes':['ocean','sea'],
-                       'source_datasets':['OpenStreetMap'],'source_properties':['','geometry']}}
+             'policy':{'method':'overture-inland-subtype-v1'}}
         self.config=self.inputs/'config.json';self.config.write_text(json.dumps(cfg))
     def tearDown(self):
         self.tmp.cleanup()
@@ -28,7 +27,7 @@ class WaterShardTests(unittest.TestCase):
           {'id':'lake', 'subtype':'lake','class':'lake','sources':osm,'geometry':polygon},
           {'id':'ocean', 'subtype':'ocean','class':'ocean','sources':osm,'geometry':polygon},
           {'id':'label', 'subtype':'physical','class':'bay','sources':osm,'geometry':polygon},
-          {'id':'other', 'subtype':'lake','class':'lake','sources':alt,'geometry':polygon},
+          {'id':'other', 'subtype':'lake','class':'sea','sources':alt,'geometry':polygon},
           {'id':'line', 'subtype':'river','class':'river','sources':osm,'geometry':wkt('LINESTRING (-170 80,-120 40)')},
           {'id':'pool', 'subtype':'human_made','class':'swimming_pool','sources':osm,'geometry':polygon}]
         table = pa.Table.from_pylist(rows).replace_schema_metadata({b'geo':json.dumps({'primary_column':'geometry','columns':{'geometry':{'encoding':'WKB'}}}).encode()})
@@ -39,10 +38,10 @@ class WaterShardTests(unittest.TestCase):
         for n in (1, 10):
             out = self.path/f'o{n}'; build.run(p,digest,out,self.config,n)
             report = json.loads((out/'report.json').read_text())
-            self.assertEqual(report['counts']['polygons'],2)
+            self.assertEqual(report['counts']['polygons'],3)
             self.assertEqual(report['counts']['excluded_classification'],2)
             self.assertEqual(report['counts']['non_polygon'],1)
-            self.assertEqual(report['counts']['no_selected_geometry_provenance'],1)
+            self.assertNotIn('no_selected_geometry_provenance',report['counts'])
             self.assertEqual(report['status'],'candidate-only')
         a = gdal.Open(str(self.path/'o1/water.tif')).ReadAsArray()
         b = gdal.Open(str(self.path/'o10/water.tif')).ReadAsArray()
@@ -53,6 +52,17 @@ class WaterShardTests(unittest.TestCase):
         feat = ogr.Feature(layer.GetLayerDefn()); feat.SetGeometry(ogr.CreateGeometryFromWkt('POLYGON ((-170 80,-120 80,-120 40,-170 40,-170 80))')); layer.CreateFeature(feat)
         gdal.RasterizeLayer(target,[1],layer,burn_values=[1])
         np.testing.assert_array_equal(a,target.ReadAsArray())
+    def test_subtype_only_accepts_without_sources_or_class(self):
+        polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-170 80,-120 80,-120 40,-170 40,-170 80))').ExportToWkb())
+        rows=[{'id':'valid','subtype':'lake','geometry':polygon},{'id':'ocean','subtype':'ocean','geometry':polygon}, {'id':'label','subtype':'physical','geometry':polygon}]
+        table=pa.Table.from_pylist(rows).replace_schema_metadata({b'geo':json.dumps({'primary_column':'geometry','columns':{'geometry':{'encoding':'WKB'}}}).encode()})
+        p=self.inputs/'minimal.parquet';pq.write_table(table,p);out=self.path/'minimal-output';build.run(p,hashlib.sha256(p.read_bytes()).hexdigest(),out,self.config)
+        report=json.loads((out/'report.json').read_text());self.assertEqual(report['counts']['polygons'],1);self.assertEqual(report['counts']['excluded_classification'],2)
+        self.assertEqual(build.selected('lake'),None);self.assertEqual(build.selected(None),'missing_classification');self.assertEqual(build.selected(''),'missing_classification')
+    def test_old_policy_rejected_instead_of_silently_reinterpreted(self):
+        p,digest=self.fixture();cfg=json.loads(self.config.read_text());cfg['schema']='water-shard-candidate-v1';self.config.write_text(json.dumps(cfg));out=self.path/'old-policy'
+        with self.assertRaisesRegex(ValueError,'supported configuration'):build.run(p,digest,out,self.config)
+        self.assertFalse(out.exists())
     def test_invalid_geometry_is_reported_and_not_claimed_complete(self):
         p,_ = self.fixture()
         table = pq.read_table(p).to_pylist()

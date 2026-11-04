@@ -37,16 +37,12 @@ def sha256(path):
     return h.hexdigest()
 
 
-def selected(subtype, water_class, sources, policy):
-    """Return an exclusion reason or None. Do not inspect optional OSM tags."""
-    if subtype is None:
+def selected(subtype):
+    """Use Overture's inland-water subtype classification, not source tags."""
+    if not isinstance(subtype,str) or not subtype.strip():
         return 'missing_classification'
-    if subtype in policy['exclude_subtypes'] or water_class in policy['exclude_classes']:
+    if subtype in ('ocean','physical'):
         return 'excluded_classification'
-    # Require a configured source for the feature as a whole or its geometry.
-    if not any(s and s.get('dataset') in policy['source_datasets'] and
-               s.get('property') in policy['source_properties'] for s in (sources or [])):
-        return 'no_selected_geometry_provenance'
     return None
 
 
@@ -59,7 +55,7 @@ def run(source, expected, output, config_path, batch_size=8192):
         raise ValueError('output must be outside input directories and must not contain inputs')
     config_bytes = config_path.read_bytes()
     cfg = json.loads(config_bytes)
-    if cfg.get('schema') != 'water-shard-candidate-v1' or not cfg.get('selection_notes'):
+    if cfg.get('schema') != 'water-shard-candidate-v2' or not cfg.get('selection_notes'):
         raise ValueError('explicit supported configuration and selection notes required')
     grid = cfg['grid']; policy = cfg['policy']
     width, height, west, north, step = (grid[k] for k in ('width','height','west','north','step'))
@@ -74,11 +70,8 @@ def run(source, expected, output, config_path, batch_size=8192):
         step <= 0 or west < -180 or west+width*step > 180.0000001 or
         north > 90 or north-height*step < -90.0000001):
         raise ValueError('invalid grid or tile size')
-    for key in ('exclude_subtypes','exclude_classes','source_datasets','source_properties'):
-        if not isinstance(policy.get(key),list) or not all(isinstance(x,str) for x in policy[key]):
-            raise ValueError('policy lists must be explicitly provided as strings')
-    if not policy['source_datasets'] or not policy['source_properties']:
-        raise ValueError('explicit provenance selection required')
+    if policy != {'method':'overture-inland-subtype-v1'}:
+        raise ValueError('explicit Overture inland subtype policy required')
     if not 1 <= batch_size <= 100000:
         raise ValueError('batch size out of range')
     if len(expected) != 64 or sha256(source) != expected.lower():
@@ -108,13 +101,13 @@ def run(source, expected, output, config_path, batch_size=8192):
     # A feature's raster burn is identical across batches because the operation
     # is a monotone union (the mask is initialized to zero and burns only 1).
     for batch_no, batch in enumerate(pf.iter_batches(batch_size=batch_size,
-            columns=['id', 'subtype', 'class', 'sources', 'geometry'], use_threads=False)):
+            columns=['id', 'subtype', 'geometry'], use_threads=False)):
         if shutil.disk_usage(out).free < reserve:
             raise ValueError('free disk below configured reserve; partial output preserved')
         tiles = {}
         for item in batch.to_pylist():
             counts['rows'] += 1
-            reason = selected(item['subtype'], item['class'], item['sources'], policy)
+            reason = selected(item['subtype'])
             if reason:
                 counts[reason] += 1
                 continue
