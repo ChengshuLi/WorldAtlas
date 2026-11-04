@@ -74,6 +74,10 @@ def main(cfg):
         if raster.RasterXSize!=W or raster.RasterYSize!=H:raise ValueError('raster dimensions differ from grid')
         expected=(west,step,0,north,0,-step)
         if any(abs(a-b)>1e-12 for a,b in zip(raster.GetGeoTransform(),expected)):raise ValueError('raster transform differs from grid')
+    for point in pts:
+        old_cell=old_ds.ReadAsArray(point['column'],point['row'],1,1);new_cell=new_ds.ReadAsArray(point['column'],point['row'],1,1)
+        if old_cell is None or new_cell is None or int(old_cell[0,0]) not in (0,1) or int(new_cell[0,0]) not in (0,1): raise ValueError('mismatch mask cell must be binary')
+        if (17 if int(old_cell[0,0]) else 1)!=point['reference'] or (17 if int(new_cell[0,0]) else 1)!=point['candidate']: raise ValueError('mismatch span does not match pinned masks')
     old=old_ds.ReadAsArray(x0,y0,w,h);new=new_ds.ReadAsArray(x0,y0,w,h)
     if old is None or new is None or np.any(~np.isin(old,[0,1])) or np.any(~np.isin(new,[0,1])): raise ValueError('land masks must be binary')
     r=3;reference=old[r:-r,r:-r];current=new[r:-r,r:-r]
