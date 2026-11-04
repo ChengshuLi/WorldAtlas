@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 import build_land
 import build_seed
+import build_components
 
 def pin(p):return {'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
 def rle(grid,path):
@@ -43,11 +44,20 @@ class TestBuild(unittest.TestCase):
    for code,x in zip(range(17,23),(1,6,11,16,21,26)):
     hit=row[(row[:,0]<=x)&(x<row[:,1])];self.assertEqual(len(hit),1);rules.append({'component_id':int(hit[0,2]),'region_id':None,'inside_code':code,'outside_code':code})
    sc={'schema':'direct-region-seed-research-v1','grid':{**cfg['grid'],'crs':'EPSG:4326'},'component_rows':pin(cr),'component_runs':pin(cu),'regions':[],'rules':rules,'evidence':[],'strip_rows':2,'reserve_bytes':0};sp=p/'config'/'seed-config.json';sp.write_text(json.dumps(sc));seed_out=p/'seed-output';build_seed.build(sp,seed_out)
-   cfg['mainland_rows']=pin(seed_out/'rows.u32le');cfg['mainland_runs']=pin(seed_out/'runs.u32le');cfg['seed_provenance']=pin(seed_out/'report.json');path.write_text(json.dumps(cfg));result=build_land.build(path,p/'out');self.assertEqual(result['island_components'],1)
+   component_config=p/'config'/'components.json';component_config.write_text(json.dumps({'schema':'simple-v2-components-v1','grid':cfg['grid'],'physical_rows':cfg['physical_rows'],'physical_runs':cfg['physical_runs'],'physical_report':cfg['physical_report'],'minimum_free_bytes':0}));component_out=p/'components';build_components.build(component_config,component_out)
+   cfg['mainland_rows']=pin(seed_out/'rows.u32le');cfg['mainland_runs']=pin(seed_out/'runs.u32le');cfg['seed_provenance']=pin(seed_out/'report.json');cfg['component_manifest']=pin(component_out/'report.json');path.write_text(json.dumps(cfg));result=build_land.build(path,p/'out');self.assertEqual(result['island_components'],1);self.assertEqual(result['component_generation'],'pinned-component-manifest')
  def test_portable_seed_report_contract(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d);path,cfg=self.fixture(p);seed=Path(cfg['seed_provenance']['path']);old=json.loads(seed.read_text())
    seed.write_text(json.dumps({'schema':'direct-region-seed-research-report-v1','status':'unreviewed-research-not-published','grid':cfg['grid'],'grid_crs':'EPSG:4326','component_rows_sha256':old['inputs']['physical_component_rows_sha256'],'component_runs_sha256':old['inputs']['physical_component_runs_sha256'],'output_rows_sha256':cfg['mainland_rows']['sha256'],'output_runs_sha256':cfg['mainland_runs']['sha256']}));cfg['seed_provenance']=pin(seed);path.write_text(json.dumps(cfg));result=build_land.build(path,p/'out');self.assertEqual(result['status'],'research-not-published')
+ def test_same_run_components_match_independent_and_reject_tampering(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d);path,cfg=self.fixture(p);component_config=p/'config'/'components.json';component_config.write_text(json.dumps({'schema':'simple-v2-components-v1','grid':cfg['grid'],'physical_rows':cfg['physical_rows'],'physical_runs':cfg['physical_runs'],'physical_report':cfg['physical_report'],'minimum_free_bytes':0}));component_out=p/'components';build_components.build(component_config,component_out)
+   independent=build_land.build(path,p/'independent');cfg['component_manifest']=pin(component_out/'report.json');path.write_text(json.dumps(cfg));reused=build_land.build(path,p/'reused')
+   self.assertEqual(reused['component_generation'],'pinned-component-manifest');self.assertEqual(independent['component_generation'],'independent-recompute');self.assertEqual((p/'independent/rows.u32le').read_bytes(),(p/'reused/rows.u32le').read_bytes());self.assertEqual((p/'independent/runs.u32le').read_bytes(),(p/'reused/runs.u32le').read_bytes())
+   with (component_out/'runs.u32le').open('ab') as f:f.write(b'\0')
+   with self.assertRaisesRegex(ValueError,'component artifact mismatch'):build_land.build(path,p/'bad')
+   self.assertFalse((p/'bad').exists())
  def test_disk_guard_and_report_binding(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d);path,cfg=self.fixture(p);cfg['minimum_free_bytes']=1<<60;path.write_text(json.dumps(cfg))

@@ -48,13 +48,13 @@ def write_rle(out, cr, co, mr, mo, assignments, h, w, reserve):
 def build(cfgpath,out):
     started=time.time(); raw=Path(cfgpath).read_bytes();cfg=json.loads(raw)
     expected={'schema','grid','physical_rows','physical_runs','mainland_rows','mainland_runs','physical_report','seed_provenance'}
-    n.require(expected<=set(cfg)<=expected|{'workers','chunk_columns','tolerance_metres','minimum_free_bytes'},'invalid config')
+    n.require(expected<=set(cfg)<=expected|{'workers','chunk_columns','tolerance_metres','minimum_free_bytes','component_manifest'},'invalid config')
     n.require(cfg['schema']=='simple-v2-land-v1','unknown schema');g=cfg['grid'];w=g['width'];h=g['height'];step=g['step'];north=g['north']
     n.require(set(g)=={'width','height','step','west','north'} and w>0 and h>0 and g['west']==-180 and abs(w*step-360)<1e-8 and north<=90 and north-h*step>=-90-1e-8,'invalid grid')
     workers=cfg.get('workers',1);chunk=cfg.get('chunk_columns',128);tol=cfg.get('tolerance_metres',1e-5)
     n.require(type(workers)==int and 1<=workers<=8 and type(chunk)==int and 1<=chunk<=1024 and 0<=tol<=1,'invalid controls')
     reserve=cfg.get('minimum_free_bytes',2*(1<<30));n.require(type(reserve) is int and reserve>=0,'invalid disk reserve')
-    input_keys=('physical_rows','physical_runs','mainland_rows','mainland_runs','physical_report','seed_provenance')
+    input_keys=('physical_rows','physical_runs','mainland_rows','mainland_runs','physical_report','seed_provenance')+(('component_manifest',) if 'component_manifest' in cfg else ())
     for k in input_keys:pin(cfg[k])
     phys=json.loads(Path(cfg['physical_report']['path']).read_bytes());physical_output=phys.get('physical_output_sha256',phys.get('output_sha256',{}))
     n.require(phys.get('status')=='candidate-only' and phys.get('grid')==g and physical_output.get('rows.u32le')==cfg['physical_rows']['sha256'] and physical_output.get('runs.u32le')==cfg['physical_runs']['sha256'],'physical report mismatch')
@@ -65,16 +65,25 @@ def build(cfgpath,out):
     else:
         n.require(seed.get('schema')=='direct-mainland-regions-research-v1' and seed.get('status')=='local-research-not-approved-or-published' and sg=={k:g[k] for k in ('width','height','step')} and seed.get('outputs',{}).get('rows_sha256')==cfg['mainland_rows']['sha256'] and seed.get('outputs',{}).get('runs_sha256')==cfg['mainland_runs']['sha256'],'seed provenance mismatch')
         seed_components=(seed.get('inputs',{}).get('physical_component_rows_sha256'),seed.get('inputs',{}).get('physical_component_runs_sha256'))
-    out=Path(out).resolve();inputs=[Path(cfgpath).resolve()]+[Path(cfg[k]['path']).resolve() for k in input_keys]
+    source=HERE.parent/'v7-land'/'build_components.cpp';code_paths=[Path(__file__).resolve(),source,Path(n.__file__),Path(tile_index.__file__),KERNEL/'distance_kernel.cpp'];code_hashes={p.name:n.sha(p) for p in code_paths}
+    manifest=None;component_files=[]
+    if 'component_manifest' in cfg:
+        mp=Path(cfg['component_manifest']['path']).resolve();manifest=json.loads(mp.read_bytes());base=mp.parent
+        n.require(manifest.get('schema')=='simple-v2-components-report-v1' and manifest.get('status')=='research-not-published' and manifest.get('grid')==g and manifest.get('inputs')=={k:cfg[k] for k in ('physical_rows','physical_runs','physical_report')} and manifest.get('component_source_sha256')==code_hashes['build_components.cpp'] and isinstance(manifest.get('builder_output'),str) and bool(manifest['builder_output']) and isinstance(manifest.get('compiler_version'),str) and bool(manifest['compiler_version']),'component manifest mismatch')
+        component_rows=base/'rows.u32le';component_runs=base/'runs.u32le';binary=base/'component-builder';component_files=[component_rows,component_runs,binary]
+        n.require(all(p.is_file() for p in component_files) and n.sha(component_rows)==manifest.get('rows_sha256') and n.sha(component_runs)==manifest.get('runs_sha256') and n.sha(binary)==manifest.get('builder_binary_sha256'),'component artifact mismatch')
+        n.require(seed_components==(manifest['rows_sha256'],manifest['runs_sha256']),'seed component provenance mismatch')
+    out=Path(out).resolve();inputs=[Path(cfgpath).resolve()]+[Path(cfg[k]['path']).resolve() for k in input_keys]+component_files+code_paths
     n.require(not out.exists() and all(not p.is_relative_to(out) and not out.is_relative_to(p.parent) for p in inputs),'output must be new and outside input directories')
     n.require(shutil.disk_usage(out.parent).free>=reserve,'free disk below configured reserve');out.mkdir(mode=0o700)
-    binary=out/'component-builder';source=HERE.parent/'v7-land'/'build_components.cpp'
-    code_paths=[Path(__file__).resolve(),source,Path(n.__file__),Path(tile_index.__file__),KERNEL/'distance_kernel.cpp'];code_hashes={p.name:n.sha(p) for p in code_paths}
-    subprocess.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',str(source),'-o',str(binary)],check=True)
-    proc=subprocess.run([str(binary),str(w),str(h),cfg['physical_rows']['path'],cfg['physical_runs']['path'],str(out/'component-rows.u32le'),str(out/'component-runs.u32le')],check=True,capture_output=True,text=True)
+    if manifest is None:
+        binary=out/'component-builder';component_rows=out/'component-rows.u32le';component_runs=out/'component-runs.u32le'
+        subprocess.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',str(source),'-o',str(binary)],check=True)
+        proc=subprocess.run([str(binary),str(w),str(h),cfg['physical_rows']['path'],cfg['physical_runs']['path'],str(component_rows),str(component_runs)],check=True,capture_output=True,text=True);builder_output=proc.stdout.strip();compiler_version=subprocess.run(['g++','--version'],capture_output=True,text=True,check=True).stdout.splitlines()[0]
+        n.require(seed_components==(n.sha(component_rows),n.sha(component_runs)),'seed component provenance mismatch')
+    else:builder_output=manifest['builder_output'];compiler_version=manifest['compiler_version']
     n.require(shutil.disk_usage(out).free>=reserve,'free disk below configured reserve')
-    n.require(seed_components==(n.sha(out/'component-rows.u32le'),n.sha(out/'component-runs.u32le')),'seed component provenance mismatch')
-    cr=n.rows_mem(out/'component-runs.u32le',h,3);co=n.read_offsets(out/'component-rows.u32le',h,cr)
+    cr=n.rows_mem(component_runs,h,3);co=n.read_offsets(component_rows,h,cr)
     mr=n.rows_mem(cfg['mainland_runs']['path'],h,2);mo=n.read_offsets(cfg['mainland_rows']['path'],h,mr)
     roots=set(); seen=set(); codes=set()
     # Nonzero seed intervals must each lie wholly within physical component runs.
@@ -120,9 +129,10 @@ def build(cfgpath,out):
         if len(win)>1:ties.append({'component_id':root,'candidates':win,'distance_metres':minimum})
     n.require(shutil.disk_usage(out).free>=reserve,'free disk below configured reserve')
     write_rle(out,cr,co,mr,mo,assignments,h,w,reserve)
-    for k in ('physical_rows','physical_runs','mainland_rows','mainland_runs','physical_report','seed_provenance'):pin(cfg[k])
-    n.require(Path(cfgpath).read_bytes()==raw,'config changed')
-    report={'schema':'simple-v2-land-report-v1','status':'research-not-published','config_sha256':hashlib.sha256(raw).hexdigest(),'inputs':{k:cfg[k] for k in ('physical_rows','physical_runs','mainland_rows','mainland_runs','physical_report','seed_provenance')},'grid':g,'component_builder':proc.stdout.strip(),'component_builder_binary_sha256':n.sha(binary),'distance_kernel_binary_sha256':n.sha(index.dir/'distance-kernel.so'),'compiler_version':subprocess.run(['g++','--version'],capture_output=True,text=True,check=True).stdout.splitlines()[0],'seeded_roots':sorted(roots),'island_components':len(assignments),'ties':ties,'output_rows_sha256':n.sha(out/'rows.u32le'),'output_runs_sha256':n.sha(out/'runs.u32le'),'code_sha256':code_hashes,'elapsed_seconds':time.time()-started,'method':'wrapped 4-neighbor physical land components; each unseeded component assigned by minimum spherical cell-center distance to seeded mainland; tolerance ties choose lowest code; no named exceptions','caveat':'Mainland seed and input physical grid must be source-derived. Mainland-cell center distance approximates coastline shore distance; exact historical V2 cut and tie conventions are unverified. No historical continent assignment input.'}
+    for k in input_keys:pin(cfg[k])
+    if manifest is not None:n.require(n.sha(component_rows)==manifest['rows_sha256'] and n.sha(component_runs)==manifest['runs_sha256'] and n.sha(binary)==manifest['builder_binary_sha256'],'component artifact changed')
+    n.require(Path(cfgpath).read_bytes()==raw and {p.name:n.sha(p) for p in code_paths}==code_hashes,'config or code changed')
+    report={'schema':'simple-v2-land-report-v1','status':'research-not-published','config_sha256':hashlib.sha256(raw).hexdigest(),'inputs':{k:cfg[k] for k in input_keys},'grid':g,'component_generation':'pinned-component-manifest' if manifest is not None else 'independent-recompute','component_builder':builder_output,'component_builder_binary_sha256':n.sha(binary),'distance_kernel_binary_sha256':n.sha(index.dir/'distance-kernel.so'),'compiler_version':compiler_version,'seeded_roots':sorted(roots),'island_components':len(assignments),'ties':ties,'output_rows_sha256':n.sha(out/'rows.u32le'),'output_runs_sha256':n.sha(out/'runs.u32le'),'code_sha256':code_hashes,'elapsed_seconds':time.time()-started,'method':'wrapped 4-neighbor physical land components; each unseeded component assigned by minimum spherical cell-center distance to seeded mainland; tolerance ties choose lowest code; no named exceptions','caveat':'Mainland seed and input physical grid must be source-derived. Mainland-cell center distance approximates coastline shore distance; exact historical V2 cut and tie conventions are unverified. No historical continent assignment input.'}
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');return report
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('config');p.add_argument('output');a=p.parse_args()
