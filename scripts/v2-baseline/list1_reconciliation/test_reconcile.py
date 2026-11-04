@@ -38,6 +38,38 @@ class ReconcileTest(unittest.TestCase):
             self.assertEqual(sum(x['unresolved_cells'] for x in lines),2)
             self.assertEqual(sum(x['decision_ids']==['aff1'] for x in lines),1)
 
+    def test_randomized_dense_accounting(self):
+        import random
+        random.seed(71)
+        for case in range(30):
+            with tempfile.TemporaryDirectory() as d:
+                root=Path(d);w,h=8,4
+                base=[[random.choice([0,17,18,19]) for _ in range(w)] for _ in range(h)]
+                ref=[[random.choice([1,17,18,19]) for _ in range(w)] for _ in range(h)]
+                post=[[1 if base[y][x]==0 else random.choice([17,18,19]) for x in range(w)] for y in range(h)]
+                physical=[[1 if n==0 else 17 for n in row] for row in base]
+                cr,cu=write_rle(root/'candidate',base);rr,ru=write_rle(root/'reference',ref);pr,pu=write_rle(root/'physical',physical)
+                inp=root/'inputs';inp.mkdir()
+                orig={'schema':'list1-land-clusters-config-v1','grid':{'width':w,'height':h,'step':45,'west':-180,'north':90},'candidate_rows':cr,'candidate_runs':cu,'reference_rows':rr,'reference_runs':ru,'physical_rows':pr,'physical_runs':pu,'provenance':{},'minimum_free_bytes':0}
+                fixtures.reports(inp,orig);oc=inp/'config';oc.write_text(json.dumps(orig));initial=cluster.build(oc,root/'initial')
+                ar,au=write_rle(root/'post',post); snap=inp/'post-snapshot';snap.write_text(Path(orig['provenance']['decision_snapshot']['path']).read_text())
+                report=inp/'post-report';report.write_text(json.dumps({'schema':'direct-neon-land-stream-build-report-v1','status':'unverified-research-not-published','snapshot_sha256':pin(snap)['sha256'],'decision_revision':'d','entity_revision':'e','decision_revision_asserted_status':'draft','decision_summary':[],'compiler_report':{'output_rows_sha256':ar['sha256'],'output_runs_sha256':au['sha256'],'input_sha256':{'physical_rows':pr['sha256'],'physical_runs':pu['sha256']}}}))
+                render=inp/'render';render.write_text(json.dumps({'schema':'worldatlas-new-list1-draft-v1','status':'research-not-published','decision_revision':'d','snapshot_sha256':pin(snap)['sha256'],'build_report_sha256':pin(report)['sha256'],'entries':[]}))
+                links=inp/'links';links.write_text(json.dumps({'schema':'list1-cluster-links-v1','comparison_sha256':initial['comparison_sha256'],'links':[]}))
+                pc=inp/'post-config';pc.write_text(json.dumps({'schema':'list1-land-reconciliation-config-v1','post_rows':ar,'post_runs':au,'post_report':pin(report),'post_snapshot':pin(snap),'list1_render':pin(render),'cluster_links':pin(links),'minimum_free_bytes':0}))
+                got=reconcile.reconcile(root/'initial',oc,pc,root/'out')['counts']
+                expected={'initial_mismatches':0,'explained_cells':0,'unresolved_cells':0,'extra_changed_shared_land_cells':0,'post_mismatches':0}
+                for y in range(h):
+                    for x in range(w):
+                        a,b,c=base[y][x],ref[y][x],post[y][x]
+                        if a==0 or b==1:continue
+                        if a!=b:
+                            expected['initial_mismatches']+=1
+                            expected['explained_cells' if c==b else 'unresolved_cells']+=1
+                        elif c!=b:expected['extra_changed_shared_land_cells']+=1
+                        if c!=b:expected['post_mismatches']+=1
+                self.assertEqual(got,expected,f'case {case}')
+
     def test_numerical_success_does_not_hide_missing_attribution(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);original,config=self.fixture(root);cfg=json.loads(config.read_text())
