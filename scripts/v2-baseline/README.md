@@ -33,3 +33,17 @@ The output report pins the physical and land streams, land report, code, and com
 ## Explicit exploratory water routes
 
 `build_water_route.py CONFIG NEW_OUTPUT_DIR` finds a deterministic four-neighbor water-cell path within explicitly supplied bounds and endpoints on the pinned physical grid. These coordinates are a caller-selected research hypothesis, not a recovered or approved continent boundary. It does not choose endpoints or infer a closure. The path report pins the inputs, code and route; the program is little-endian only, caps window cells, and defaults to a 2 GiB free-space reserve. It checks the reserve at stage boundaries and while writing the window, but other processes can consume space between checks. Run `python -m unittest -v test_build_water_route` for small path, blockage and safety tests.
+
+## Explicit exploratory region construction
+
+`build_regions.py CONFIG NEW_OUTPUT_DIR` assembles caller-specified segments into one GeoJSON polygon per region for `build_seed.py`. Segment order, direction, source feature IDs, water-route bounds/endpoints and explicit connector coordinates are **caller choices**. Nothing in the tool selects or approves a historical V2 boundary. The example is a synthetic rectangle, not a geographic policy.
+
+A segment is one of:
+
+- `{"kind":"points","coordinates":[[lon,lat], ...]}` for explicit connectors or closures.
+- `{"kind":"feature","file":{"path":"...","sha256":"..."},"id_property":"...","id_value":"...","reverse":false}` for one uniquely identified WGS84 GeoJSON LineString.
+- `{"kind":"water-route","report":{"path":"...","sha256":"..."},"reverse":false}` for a completed `build_water_route.py` result. Its route is rehashed, checked for four-neighbor adjacency and rechecked against the pinned physical-water cells. All routes in one build must bind the same physical streams.
+
+Segments must connect and close explicitly. The default endpoint tolerance is zero; a nonzero tolerance up to 0.000001 degrees is a caller choice recorded in the report. Self-intersecting polygons, on-boundary witnesses, invalid coordinates, unsplit antimeridian edges, input changes, mixed physical grids, and inadequate disk reserve fail. Optional evidence files are hash-pinned but are not proof that a polygon follows a source line or that a connector is geographically or historically correct. Outputs and reports remain unreviewed research, with no V2 label inputs. Run `python -m unittest -v test_build_regions` for synthetic assembly, route and failure tests.
+
+As a reproducibility check, the route builder was run on the pinned physical streams (`6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468` rows and `1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7` runs) over the explicitly chosen Black Sea/Aegean window `[73910, 79736, 16019, 20389]`, from cell `[79122, 16419]` to `[74274, 20024]`. It visited 9,206,375 water cells, produced an 8,812-cell route, and byte-matched the earlier saved path (SHA-256 `56de96333e36d72645c3645935fdc3ae37b77f5da7b49b63755b093bcd7faa32`). This validates that one configured route is reproducible, not that its endpoints, closure, or geography are the historical V2 choice.
