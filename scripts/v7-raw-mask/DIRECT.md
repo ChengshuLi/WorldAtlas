@@ -6,7 +6,7 @@ Grid for this project: width 131072, height 54614, west -180°, north 90°, step
 
 ## Orchestrated run
 
-`build_physical.py PIPELINE_CONFIG NEW_OUTPUT_DIRECTORY` wires the four stages below from hash-pinned input configs and the complete raw shard manifest. Copy `pipeline-config.example.json` and replace all placeholders. References are optional; the same stage isolation, hash checks and free-space reserve apply. The pipeline report records the generated hashes. Run `python -m unittest -v test_build_physical.py` for the small raw-source end-to-end test.
+`build_physical.py PIPELINE_CONFIG NEW_OUTPUT_DIRECTORY` wires the four stages below from hash-pinned input configs and the complete raw shard manifest. Copy `pipeline-config.example.json` and replace all placeholders. References are optional; the same stage isolation, hash checks and free-space reserve apply. `max_parallel_shards` sets a bounded worker count from 1 to 32 (default 1); choose it for the machine’s memory, I/O and disk headroom. Each worker checks the reserve, but concurrent writes can cross it between checks, so leave additional headroom. The pipeline report records the generated hashes. Run `python -m unittest -v test_build_physical.py` for the small raw-source end-to-end test.
 
 ## Reproducible steps
 
@@ -24,3 +24,8 @@ Requires Python 3, NumPy, GDAL/OGR Python bindings with GEOS, the GeoTIFF, Memor
 `python -m unittest -v test_rasterize_land.py test_compose_physical.py`, then from `overture/`: `python -m unittest -v test_aggregate_compare.py test_rasterize_water_shard.py`
 
 Synthetic tests cover polygon rasterization, source/digest checks, geometry and output isolation, stripe/batch behavior, report/manifest lineage, incomplete or inconsistent water shards, optional reference-free and reference-checked composition, run encoding and nonbinary masks. They do not establish real-world source correctness. Keep memory/disk limits appropriate for the full grid.
+
+
+## Shard concurrency baseline
+
+On 2026-11-04, two runs processed the first 20,000 rows from each of two real Overture shards on the full grid. Serial elapsed times were 2.526 and 3.641 seconds; two workers took 1.315 and 1.561 seconds. Sampled combined RSS was about 159–160 MiB serial and 305–309 MiB with two workers. Each corresponding mask matched byte-for-byte. Run order was reversed for the repeat, but cache and external load were uncontrolled. These small subsets are not a complete release or a full-pipeline throughput guarantee; use explicit worker limits and benchmark the real workload.

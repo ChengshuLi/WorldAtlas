@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Wire pinned raw land and water sources into a candidate physical grid."""
 import hashlib
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import os
 from pathlib import Path
@@ -41,6 +42,9 @@ def run(manifest_path, output):
     if cfg.get('schema') != 'raw-physical-pipeline-v1' or not cfg.get('selection_notes'):
         raise ValueError('explicit pipeline schema and selection notes required')
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
+    workers = cfg.get('max_parallel_shards', 1)
+    if type(workers) is not int or not 1 <= workers <= 32:
+        raise ValueError('max_parallel_shards must be an integer from 1 to 32')
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
     land_path, land_bytes, land_cfg = read_pin(cfg['land_config'])
@@ -89,15 +93,26 @@ def run(manifest_path, output):
     land_report = json.loads((output / 'land/report.json').read_bytes())
     if land_report.get('status') != 'candidate-only':
         raise ValueError('land raster is incomplete')
-    shards = []
-    for i, (path, digest) in enumerate(raw):
+    def build_shard(item):
+        i, (path, digest) = item
         destination = output / 'shards' / f'{i:05d}'
         run_stage('overture/rasterize_water_shard.py', path, digest, water_path, destination)
         report_path = destination / 'report.json'; report = json.loads(report_path.read_bytes())
         if report.get('status') != 'candidate-only':
             raise ValueError(f'incomplete water shard: {path}')
-        shards.append({'path':str(destination / 'water.tif'), 'sha256':report['output_sha256'],
-                       'status':report['status'], 'report':{'path':str(report_path), 'sha256':sha(report_path)}})
+        return {'path':str(destination / 'water.tif'), 'sha256':report['output_sha256'],
+                'status':report['status'], 'report':{'path':str(report_path), 'sha256':sha(report_path)}}
+    # Independent child outputs are kept in manifest order. On failure,
+    # cancel work not yet started; running children finish and remain auditable.
+    shards = [None] * len(raw)
+    with ThreadPoolExecutor(max_workers=min(workers, len(raw))) as pool:
+        futures = {pool.submit(build_shard, item): item[0] for item in enumerate(raw)}
+        try:
+            for future in as_completed(futures):
+                shards[futures[future]] = future.result()
+        except Exception:
+            for future in futures: future.cancel()
+            raise
     union_cfg = {'schema':'water-union-comparison-v1','grid':grid,'selection_notes':cfg['selection_notes'],
                  'minimum_free_bytes':reserve,'source_manifest':cfg['source_manifest'],'shard_count':len(shards),'shards':shards}
     if cfg.get('water_reference'): union_cfg['reference'] = cfg['water_reference']
@@ -120,7 +135,7 @@ def run(manifest_path, output):
     physical = json.loads((output / 'physical/report.json').read_bytes())
     report = {'status':'candidate-only','configuration_sha256':hashlib.sha256(data).hexdigest(),
               'grid':grid,'source_manifest':cfg['source_manifest'],'land_config':cfg['land_config'],
-              'water_config':cfg['water_config'],'shard_count':len(shards),'script_sha256':scripts,
+              'water_config':cfg['water_config'],'shard_count':len(shards),'max_parallel_shards':workers,'script_sha256':scripts,
               'stage_reports':{key:{'path':str(output / key / 'report.json'),'sha256':sha(output / key / 'report.json')}
                                for key in ('land','union','physical')},
               'physical_output_sha256':physical['output_sha256'],

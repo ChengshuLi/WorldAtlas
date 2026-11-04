@@ -53,6 +53,32 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(json.loads((out_ref/'union/report.json').read_text())['mismatch_spans'],0)
         self.assertEqual(json.loads((out_ref/'physical/report.json').read_text())['mismatch_spans'],0)
         self.assertEqual(b.sha(out_ref/'physical/runs.u32le'),b.sha(runpath))
+    def test_parallel_shards_match_serial_and_bad_worker_count_fails(self):
+        first=self.raw/'water.parquet';table=pq.read_table(first);row=table.to_pylist()[0];row['id']='second-lake'
+        second=self.raw/'second.parquet';pq.write_table(pa.Table.from_pylist([row]).replace_schema_metadata(table.schema.metadata),second)
+        source=Path(self.cfg['source_manifest']['path']);source.write_text(json.dumps({'file_count':2,'files':[
+            {'path':first.name,'sha256':b.sha(first)},{'path':second.name,'sha256':b.sha(second)}]}))
+        self.cfg['source_manifest']['sha256']=b.sha(source)
+        self.cfg['max_parallel_shards']=0;self.config.write_text(json.dumps(self.cfg))
+        with self.assertRaisesRegex(ValueError,'max_parallel_shards'):b.run(self.config,self.root/'bad-workers')
+        self.assertFalse((self.root/'bad-workers').exists())
+        self.cfg['max_parallel_shards']=1;self.config.write_text(json.dumps(self.cfg));serial=self.root/'serial';b.run(self.config,serial)
+        self.cfg['max_parallel_shards']=2;self.config.write_text(json.dumps(self.cfg));parallel=self.root/'parallel';b.run(self.config,parallel)
+        self.assertEqual(b.sha(serial/'physical/rows.u32le'),b.sha(parallel/'physical/rows.u32le'))
+        self.assertEqual(b.sha(serial/'physical/runs.u32le'),b.sha(parallel/'physical/runs.u32le'))
+        self.assertEqual(b.sha(serial/'union/water-union.tif'),b.sha(parallel/'union/water-union.tif'))
+        self.assertEqual(json.loads((parallel/'report.json').read_text())['max_parallel_shards'],2)
+
+    def test_parallel_incomplete_shard_fails_before_union(self):
+        first=self.raw/'water.parquet';table=pq.read_table(first);row=table.to_pylist()[0];row['id']='bad';row['subtype']=None
+        bad=self.raw/'bad.parquet';pq.write_table(pa.Table.from_pylist([row]).replace_schema_metadata(table.schema.metadata),bad)
+        source=Path(self.cfg['source_manifest']['path']);source.write_text(json.dumps({'file_count':2,'files':[
+            {'path':first.name,'sha256':b.sha(first)},{'path':bad.name,'sha256':b.sha(bad)}]}))
+        self.cfg['source_manifest']['sha256']=b.sha(source);self.cfg['max_parallel_shards']=2
+        self.config.write_text(json.dumps(self.cfg));out=self.root/'parallel-incomplete'
+        with self.assertRaisesRegex(ValueError,'incomplete water shard'):b.run(self.config,out)
+        self.assertFalse((out/'union').exists());self.assertFalse((out/'report.json').exists())
+
     def test_incomplete_water_cannot_publish_pipeline_report(self):
         shard=self.raw/'water.parquet';table=pq.read_table(shard);rows=table.to_pylist()
         item=dict(rows[0]);item['id']='unclassified';item['subtype']=None;rows.append(item)
