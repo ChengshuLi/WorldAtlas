@@ -10,11 +10,13 @@ import sqlite3
 import shutil
 import sys
 from pathlib import Path
+import cluster
 from cluster import digest
 
 
 def match(cluster_directory, index_path, expected_index_sha, output, minimum_free_bytes=2*1024**3):
     if type(minimum_free_bytes) is not int or minimum_free_bytes < 0: raise ValueError('invalid minimum free space')
+    code_sha, dependency_sha = digest(__file__), digest(cluster.__file__)
     cluster_directory, index_path, output = Path(cluster_directory).resolve(), Path(index_path).resolve(), Path(output).resolve()
     report_path = cluster_directory / 'report.json'
     report_raw = report_path.read_bytes()
@@ -64,12 +66,13 @@ def match(cluster_directory, index_path, expected_index_sha, output, minimum_fre
         leads.commit()
         check_space()
         with (output / 'matches.jsonl').open('x') as f:
-            for root, cluster_id, cells in db.execute('SELECT root,cluster_id,cells FROM clusters ORDER BY cluster_id'):
+            for number, (root, cluster_id, cells) in enumerate(db.execute('SELECT root,cluster_id,cells FROM clusters ORDER BY cluster_id')):
+                if number % 1000 == 0: check_space()
                 candidates = [{'old_item_id': item, 'name': items_by_id[item].get('name'), 'reference': items_by_id[item].get('reference'), 'overlap_with_historical_changed_extent_cells': overlap} for item, overlap in leads.execute('SELECT item_id,overlap_cells FROM leads WHERE root=? ORDER BY item_id', (root,))]
                 f.write(json.dumps({'cluster_id': cluster_id, 'cells': cells, 'old_list1_candidates': candidates, 'status': 'unresolved-evidence-review-required'}, sort_keys=True) + '\n')
-        if digest(database) != report['database_sha256'] or digest(index_path) != expected_index_sha or report_path.read_bytes() != report_raw:
+        if digest(database) != report['database_sha256'] or digest(index_path) != expected_index_sha or report_path.read_bytes() != report_raw or digest(__file__) != code_sha or digest(cluster.__file__) != dependency_sha:
             raise ValueError('input changed during matching')
-        result = {'schema': 'old-list1-cluster-discovery-report-v1', 'status': 'diagnostic-only', 'comparison_sha256': report['comparison_sha256'], 'clusters': report['clusters'], 'historical_index_sha256': expected_index_sha, 'cluster_report_sha256': hashlib.sha256(report_raw).hexdigest(), 'matches_sha256': digest(output / 'matches.jsonl'), 'code_sha256': digest(__file__), 'limitations': ['Historical changed-land extents are incomplete discovery hints, not source boundaries.', 'A hit is not a verified geographic match; no hit does not establish absence.', 'Inspect old items and their cited source evidence before researching or selecting new decisions.']}
+        result = {'schema': 'old-list1-cluster-discovery-report-v1', 'status': 'diagnostic-only', 'comparison_sha256': report['comparison_sha256'], 'clusters': report['clusters'], 'historical_index_sha256': expected_index_sha, 'cluster_report_sha256': hashlib.sha256(report_raw).hexdigest(), 'matches_sha256': digest(output / 'matches.jsonl'), 'code_sha256': code_sha, 'cluster_code_sha256': dependency_sha, 'limitations': ['Historical changed-land extents are incomplete discovery hints, not source boundaries.', 'A hit is not a verified geographic match; no hit does not establish absence.', 'Inspect old items and their cited source evidence before researching or selecting new decisions.']}
         with (output / 'report.json').open('x') as f:
             json.dump(result, f, sort_keys=True, indent=2)
             f.write('\n')

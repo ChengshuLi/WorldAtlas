@@ -108,6 +108,18 @@ class ClustersTest(unittest.TestCase):
             with self.assertRaisesRegex(OSError,'free disk space'):cluster.build(config,root/'bad-space')
             self.assertFalse((root/'bad-space/report.json').exists())
 
+    def test_category_ids_come_from_snapshot_not_numeric_range(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d); config=self.setup_case(root); cfg=json.loads(config.read_text())
+            for key in ('candidate_runs','reference_runs'):
+                path=Path(cfg[key]['path']); values=np.fromfile(path,dtype='<u4').reshape(-1,2); values[:,1][values[:,1]==18]=3; values.tofile(path);cfg[key]=pin(path)
+            directory=config.parent;reports(directory,cfg)
+            snap=Path(cfg['provenance']['decision_snapshot']['path']);j=json.loads(snap.read_text());next(x for x in j['category_bindings'] if x['code']==18)['code']=3;snap.write_text(json.dumps(j));cfg['provenance']['decision_snapshot']=pin(snap)
+            man=Path(cfg['provenance']['reference_manifest']['path']);j=json.loads(man.read_text());next(x for x in j['categories'] if x['id']==18)['id']=3;man.write_text(json.dumps(j));cfg['provenance']['reference_manifest']=pin(man)
+            rep=Path(cfg['provenance']['candidate_report']['path']);j=json.loads(rep.read_text());j['decision_snapshot_sha256']=pin(snap)['sha256'];rep.write_text(json.dumps(j));cfg['provenance']['candidate_report']=pin(rep)
+            config.write_text(json.dumps(cfg));result=cluster.build(config,root/'dynamic')
+            self.assertEqual(result['counts']['mismatch'],5);self.assertEqual(result['clusters'],3)
+
     def test_randomized_against_dense_bfs(self):
         import random
         from collections import deque
