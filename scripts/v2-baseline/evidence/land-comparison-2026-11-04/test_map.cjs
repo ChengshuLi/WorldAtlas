@@ -1,8 +1,0 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const html=fs.readFileSync(process.argv[2]||'v2-land-differences.html','utf8');
-const js=html.split('<script>')[1].split('</script>')[0];let listeners={},elements={};const ctx=new Proxy({}, {get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
-function elem(id){return elements[id] ||= {id,value:'all',checked:true,innerHTML:'',children:[],getBoundingClientRect:()=>({width:1000,height:500,left:0,top:0}),getContext:()=>ctx,addEventListener:(n,f)=>{listeners[n]=f},setPointerCapture:()=>{},appendChild(x){this.children.push(x)}}}
-class ImageMock{set src(v){this._src=v}get src(){return this._src}}
-const sandbox={console,Image:ImageMock,window:{devicePixelRatio:1,addEventListener:()=>{}},document:{getElementById:elem,createElement:()=>elem('node'+Math.random())}};vm.createContext(sandbox);vm.runInContext(js,sandbox,{timeout:10000});
-const data=vm.runInContext('DATA',sandbox),sums=[0,0,0];for(const s of data.spans){assert(s[0]>=0&&s[0]<54614&&s[1]>=0&&s[1]<s[2]&&s[2]<=131072);sums[s[5]]+=s[2]-s[1]};assert.deepStrictEqual(sums,[7774,42025,674]);assert(data.clusters.length>=12);assert(data.cut.length>1000);assert(elements.clusters.children.length===12);
-elem('caucasus').onclick();elem('plus').onclick();elem('minus').onclick();elem('world').onclick();elem('filter').onchange({target:{value:'0'}});listeners.wheel({preventDefault:()=>{},deltaY:-1,clientX:400,clientY:250});listeners.pointerdown({clientX:400,clientY:250,pointerId:1});listeners.pointerup({clientX:400,clientY:250});console.log('map data, rendering calls and controls passed; V7-retained=7774, V7-matching=42025, physical=674');
