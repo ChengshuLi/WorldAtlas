@@ -43,6 +43,9 @@ class DiagnosticTest(unittest.TestCase):
  def test_span_labels_must_match_masks(self):
   p=self.root/'mismatch.jsonl';rows=[json.loads(line) for line in p.read_text().splitlines()];rows[0]['reference'],rows[0]['candidate']=rows[0]['candidate'],rows[0]['reference'];p.write_text(''.join(json.dumps(row)+'\n' for row in rows));self.config['inputs']['mismatch']=pin(p);self.save()
   with self.assertRaisesRegex(ValueError,'does not match pinned masks'):self.run_diagnostic()
+ def test_duplicate_span_rejected(self):
+  p=self.root/'mismatch.jsonl';first=p.read_text().splitlines()[0];p.write_text(first+'\n'+first+'\n');self.config['inputs']['mismatch']=pin(p);self.save()
+  with self.assertRaisesRegex(ValueError,'overlap or are out of order'):self.run_diagnostic()
  def test_missing_sidecar_and_bad_span_rejected(self):
   self.config['inputs']['new_land_files']=self.config['inputs']['new_land_files'][:-1];self.save()
   with self.assertRaisesRegex(ValueError,'required shapefile sidecar'):self.run_diagnostic()

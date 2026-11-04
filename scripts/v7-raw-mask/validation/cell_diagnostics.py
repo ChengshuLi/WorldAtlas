@@ -32,10 +32,13 @@ def main(cfg):
     bb=c['study_bbox']
     if not isinstance(bb,list) or len(bb)!=4 or any(type(v) not in (int,float) or not math.isfinite(v) for v in bb) or bb[0]>=bb[2] or bb[1]>=bb[3]: raise ValueError('invalid study bbox')
     pts=[]; bins=collections.defaultdict(list)
+    previous=None
     with open(mismatch) as mismatch_file:
         for line in mismatch_file:
             d=json.loads(line)
             if (any(type(d.get(k)) is not int for k in ('row','start','end','reference','candidate')) or not 0<=d['row']<H or not 0<=d['start']<d['end']<=W or d['reference'] not in (1,17) or d['candidate'] not in (1,17) or d['reference']==d['candidate']): raise ValueError('invalid mismatch span')
+            if previous is not None and (d['row']<previous[0] or (d['row']==previous[0] and d['start']<previous[1])): raise ValueError('mismatch spans overlap or are out of order')
+            previous=(d['row'],d['end'])
             for x in range(d['start'],d['end']):
                 y=d['row']; lon=west+(x+.5)*step;lat=north-(y+.5)*step
                 q=ogr.Geometry(ogr.wkbPoint);q.AddPoint_2D(lon,lat)
