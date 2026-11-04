@@ -9,10 +9,16 @@ import build_coastal_tile as grid_io
 import exclusive_outputs as output_io
 from exclusive_outputs import write_json_exclusive
 
-def compare(config_path,output):
+def compare(config_path,output,*,_verified_shared=None):
  config_path=Path(config_path).resolve();raw=config_path.read_bytes();cfg=json.loads(raw)
  if set(cfg)!={'schema','tile_report','reference_rows','reference_runs'} or cfg['schema']!='simple-v2-coastal-comparison-v1':raise ValueError('invalid comparison config')
- names=('tile_report','reference_rows','reference_runs');paths={k:band.pin(cfg[k]) for k in names};report=json.loads(paths['tile_report'].read_bytes())
+ names=('tile_report','reference_rows','reference_runs');paths={'tile_report':band.pin(cfg['tile_report'])}
+ if _verified_shared is None:
+  paths.update({k:band.pin(cfg[k]) for k in ('reference_rows','reference_runs')})
+ else:
+  if set(_verified_shared)!={'reference_rows','reference_runs','physical_rows','physical_runs'} or any(cfg[k]!=_verified_shared[k]['spec'] or Path(cfg[k]['path']).resolve()!=Path(_verified_shared[k]['path']) for k in ('reference_rows','reference_runs')):raise ValueError('batch reference specifications differ')
+  paths.update({k:Path(_verified_shared[k]['path']) for k in ('reference_rows','reference_runs')})
+ report=json.loads(paths['tile_report'].read_bytes())
  if report.get('schema')!='simple-v2-coastal-tile-report-v1' or report.get('status')!='research-partial-not-published':raise ValueError('invalid partial tile report')
  g=report['grid'];w,h=g['width'],g['height'];box=report['core']
  if set(g)!={'width','height','west','north','step'} or type(w) is not int or type(h) is not int or w<1 or h<1 or g['west']!=-180 or g['north']!=90 or type(g['step']) not in (int,float) or not math.isfinite(g['step']) or g['step']!=360/w or g['north']-h*g['step'] < -90-1e-8 or not isinstance(box,list) or len(box)!=4 or any(type(v) is not int for v in box):raise ValueError('invalid grid or core')
@@ -20,7 +26,11 @@ def compare(config_path,output):
  if not (0<=x0<x1<=w and 0<=y0<y1<=h):raise ValueError('invalid core')
  source=report['span_file'];span=(paths['tile_report'].parent/source['path']).resolve()
  if not span.is_relative_to(paths['tile_report'].parent) or band.sha(span)!=source['sha256']:raise ValueError('span hash/path mismatch')
- physical={k:band.pin(report['inputs'][k]) for k in ('physical_rows','physical_runs')};inputs=[config_path,*paths.values(),span,*physical.values()];output=Path(output).resolve()
+ if _verified_shared is None:physical={k:band.pin(report['inputs'][k]) for k in ('physical_rows','physical_runs')}
+ else:
+  if any(report['inputs'][k]!=_verified_shared[k]['spec'] or Path(report['inputs'][k]['path']).resolve()!=Path(_verified_shared[k]['path']) for k in ('physical_rows','physical_runs')):raise ValueError('batch physical specifications differ')
+  physical={k:Path(_verified_shared[k]['path']) for k in ('physical_rows','physical_runs')}
+ inputs=[config_path,*paths.values(),span,*physical.values()];output=Path(output).resolve()
  if output.exists() or any(p==output or p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs):raise ValueError('output must be new and outside input directories')
  code_paths={'compare':Path(__file__).resolve(),'band_io':Path(band.__file__).resolve(),'grid_io':Path(grid_io.__file__).resolve(),'output_io':Path(output_io.__file__).resolve(),'shore':Path(band.core.shore.__file__).resolve(),'core':Path(band.core.__file__).resolve()};code={k:band.sha(v) for k,v in code_paths.items()}
  pr,pu=grid_io.open_grid(physical['physical_rows'],physical['physical_runs'],w,h);rr,ru=grid_io.open_grid(paths['reference_rows'],paths['reference_runs'],w,h);counts={'matched_continental_water':0,'different_continent_water':0,'candidate_band_reference_ocean':0,'candidate_band_reference_land':0,'reference_band_missing_from_candidate':0,'candidate_land_reference_water':0,'candidate_water_reference_land':0};seen_cells=seen_spans=0
@@ -52,8 +62,10 @@ def compare(config_path,output):
    counts['candidate_water_reference_land']+=int(np.count_nonzero((p==1)&ref_land))
   if current is not None:raise ValueError('extra tile rows')
  if seen_cells!=report.get('assigned_cells') or seen_spans!=report.get('span_count'):raise ValueError('tile count mismatch')
- for k in names:band.pin(cfg[k])
- for k in ('physical_rows','physical_runs'):band.pin(report['inputs'][k])
+ band.pin(cfg['tile_report'])
+ if _verified_shared is None:
+  for k in ('reference_rows','reference_runs'):band.pin(cfg[k])
+  for k in ('physical_rows','physical_runs'):band.pin(report['inputs'][k])
  if band.sha(span)!=source['sha256'] or config_path.read_bytes()!=raw or any(band.sha(p)!=code[k] for k,p in code_paths.items()):raise ValueError('input or code changed')
  result={'schema':'simple-v2-coastal-comparison-report-v1','status':'research-validation-only','config_sha256':hashlib.sha256(raw).hexdigest(),'grid':g,'core':box,'tile_report_sha256':cfg['tile_report']['sha256'],'inputs':cfg,'code_sha256':code,'candidate_band_cells':seen_cells,'counts':counts,'limitation':'Partial tile comparison only. Preserved V2 is validation input, never a build input. Open ocean assignment and geographic correctness remain unresolved.'};write_json_exclusive(output,result,indent=2);return result
 if __name__=='__main__':
