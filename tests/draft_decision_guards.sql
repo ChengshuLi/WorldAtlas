@@ -1,0 +1,56 @@
+-- Rollback-only synthetic checks for witness and water-policy draft schema.
+-- Requires migrations 002, 005, 008, 023, 028, 030, 031 and an existing
+-- entity registry revision containing entity 3, supplied below. Run on a test
+-- branch. The deliberately raised sentinel rolls back every synthetic row.
+DO $$
+DECLARE
+ rev constant text := 'test-draft-guards-rollback-20261104';
+ erev constant text := 'v7-category-bootstrap-v1';
+ caught boolean;
+BEGIN
+ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM atlas.geographic_entities WHERE revision=erev AND id=3) THEN
+   RAISE EXCEPTION 'test requires entity 3 in registry %', erev;
+  END IF;
+  INSERT INTO atlas.decision_revisions(revision,entity_revision,status,evidence) VALUES (rev,erev,'draft','{}');
+  INSERT INTO atlas.decision_land_component_witness_rules(revision,rule_id,entity_revision,entity_id,method,selector,evidence)
+   VALUES (rev,'valid',erev,3,'component_witness_list_v1','{}','{"execution_status":"selected_for_research"}');
+  INSERT INTO atlas.decision_water_assignment_policies(revision,policy_id,kind,definition,evidence)
+   VALUES (rev,'valid','closed_water_assignment','{}','{"execution_status":"research_only_not_selected"}');
+  INSERT INTO atlas.decision_ocean_fill_policies(revision,policy_id,definition,evidence)
+   VALUES (rev,'valid','{}','{"execution_status":"research_only_not_selected"}');
+  caught:=false;
+  BEGIN INSERT INTO atlas.decision_land_component_witness_rules(revision,rule_id,entity_revision,entity_id,method,selector,evidence)
+   VALUES(rev,'missing',erev,3,'component_witness_list_v1','{}','{}'); EXCEPTION WHEN check_violation THEN caught:=true; END;
+  IF NOT caught THEN RAISE EXCEPTION 'missing witness selection allowed'; END IF;
+  caught:=false;
+  BEGIN INSERT INTO atlas.decision_land_component_witness_rules(revision,rule_id,entity_revision,entity_id,method,selector,evidence)
+   VALUES(rev,'unknown',erev,3,'component_witness_list_v1','{}','{"execution_status":"unknown"}'); EXCEPTION WHEN check_violation THEN caught:=true; END;
+  IF NOT caught THEN RAISE EXCEPTION 'unknown witness selection allowed'; END IF;
+  caught:=false;
+  BEGIN INSERT INTO atlas.decision_land_component_witness_rules(revision,rule_id,entity_revision,entity_id,method,selector,evidence)
+   VALUES(rev,'bad-entity',erev,-9223372036854775807,'component_witness_list_v1','{}','{"execution_status":"selected_for_research"}'); EXCEPTION WHEN foreign_key_violation THEN caught:=true; END;
+  IF NOT caught THEN RAISE EXCEPTION 'orphan witness entity allowed'; END IF;
+  caught:=false;
+  BEGIN INSERT INTO atlas.decision_water_assignment_policies(revision,policy_id,kind,definition,evidence)
+   VALUES(rev,'missing','closed_water_assignment','{}','{}'); EXCEPTION WHEN check_violation THEN caught:=true; END;
+  IF NOT caught THEN RAISE EXCEPTION 'missing water selection allowed'; END IF;
+  caught:=false;
+  BEGIN INSERT INTO atlas.decision_ocean_fill_policies(revision,policy_id,definition,evidence)
+   VALUES(rev,'unknown','{}','{"execution_status":"unknown"}'); EXCEPTION WHEN check_violation THEN caught:=true; END;
+  IF NOT caught THEN RAISE EXCEPTION 'unknown ocean selection allowed'; END IF;
+  UPDATE atlas.decision_revisions SET status='rejected' WHERE revision=rev;
+  caught:=false;
+  BEGIN UPDATE atlas.decision_land_component_witness_rules SET evidence='{"execution_status":"selected_for_research"}' WHERE revision=rev AND rule_id='valid';
+   EXCEPTION WHEN raise_exception THEN IF SQLERRM LIKE '%closed decision rows are immutable%' THEN caught:=true; ELSE RAISE; END IF; END;
+  IF NOT caught THEN RAISE EXCEPTION 'closed revision witness update allowed'; END IF;
+  caught:=false;
+  BEGIN INSERT INTO atlas.decision_water_assignment_policies(revision,policy_id,kind,definition,evidence)
+   VALUES(rev,'closed','closed_water_assignment','{}','{"execution_status":"selected_for_research"}');
+   EXCEPTION WHEN raise_exception THEN IF SQLERRM LIKE '%closed decision rows are immutable%' THEN caught:=true; ELSE RAISE; END IF; END;
+  IF NOT caught THEN RAISE EXCEPTION 'closed revision water insert allowed'; END IF;
+  RAISE EXCEPTION '__draft_guards_success_rollback__';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM <> '__draft_guards_success_rollback__' THEN RAISE; END IF;
+ END;
+END $$;
