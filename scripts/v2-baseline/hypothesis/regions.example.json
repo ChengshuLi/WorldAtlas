@@ -1,0 +1,308 @@
+{
+  "schema": "simple-v2-regions-v1",
+  "grid": {
+    "width": 131072,
+    "height": 54614,
+    "west": -180,
+    "north": 90,
+    "step": 0.00274658203125
+  },
+  "regions": [
+    {
+      "id": "Europe",
+      "segments": [
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              -30,
+              90
+            ],
+            [
+              65.99899291992188,
+              90
+            ]
+          ]
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              65.99899291992188,
+              90
+            ],
+            [
+              65.99899291992188,
+              70.00076293945312
+            ]
+          ]
+        },
+        {
+          "kind": "water-route",
+          "report": {
+            "path": "/path/to/arctic-route/report.json",
+            "sha256": "REPLACE"
+          },
+          "reverse": true
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              67.15805053710938,
+              68.73458862304688
+            ],
+            [
+              67.15777335267806,
+              68.73268913299547
+            ]
+          ]
+        },
+        {
+          "kind": "feature",
+          "file": {
+            "path": "/path/to/v5-europe-asia-sourcecut-candidate.geojson",
+            "sha256": "b0401ee291aff8b6b5fdaabb4501e7321cbf6c8e9eba9be19cdca6e7ab846382"
+          },
+          "id_property": "cut_id",
+          "id_value": "ural_kara_coast_to_caspian",
+          "reverse": false
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              51.5316205,
+              46.8307054
+            ],
+            [
+              50.5,
+              46.2
+            ]
+          ]
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              50.5,
+              46.2
+            ],
+            [
+              49.3,
+              45.3
+            ],
+            [
+              48.8,
+              44.3
+            ]
+          ]
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              48.8,
+              44.3
+            ],
+            [
+              49.32003183830255,
+              40.92445307089294
+            ]
+          ]
+        },
+        {
+          "kind": "feature",
+          "file": {
+            "path": "/path/to/v5-europe-asia-sourcecut-candidate.geojson",
+            "sha256": "b0401ee291aff8b6b5fdaabb4501e7321cbf6c8e9eba9be19cdca6e7ab846382"
+          },
+          "id_property": "cut_id",
+          "id_value": "caucasus_blacksea_anapa_to_caspian",
+          "reverse": true
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              37.31730061393096,
+              44.903966887846714
+            ],
+            [
+              37.316436767578125,
+              44.902496337890625
+            ]
+          ]
+        },
+        {
+          "kind": "water-route",
+          "report": {
+            "path": "/path/to/water-route/report.json",
+            "sha256": "REPLACE"
+          },
+          "reverse": false
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              24.001007080078125,
+              35.001068115234375
+            ],
+            [
+              24.001007080078125,
+              33.5
+            ]
+          ]
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              24.001007080078125,
+              33.5
+            ],
+            [
+              -30,
+              33.5
+            ],
+            [
+              -30,
+              90
+            ]
+          ]
+        }
+      ],
+      "witnesses": [
+        {
+          "lon": 2.47842902664,
+          "lat": 48.8090362616,
+          "inside": true
+        },
+        {
+          "lon": 116.326721268,
+          "lat": 39.9248428735,
+          "inside": false
+        },
+        {
+          "lon": 27,
+          "lat": 41,
+          "inside": true
+        },
+        {
+          "lon": 30,
+          "lat": 40,
+          "inside": false
+        }
+      ]
+    },
+    {
+      "id": "North_America",
+      "segments": [
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              -180,
+              90
+            ],
+            [
+              -180,
+              7.0509361
+            ]
+          ]
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              -180,
+              7.0509361
+            ],
+            [
+              -78.0364058,
+              7.0509361
+            ]
+          ]
+        },
+        {
+          "kind": "feature",
+          "file": {
+            "path": "/path/to/v5-europe-asia-sourcecut-candidate.geojson",
+            "sha256": "b0401ee291aff8b6b5fdaabb4501e7321cbf6c8e9eba9be19cdca6e7ab846382"
+          },
+          "id_property": "cut_id",
+          "id_value": "panama_colombia_osm_admin_boundary",
+          "reverse": false
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              -77.2998825,
+              8.8878762
+            ],
+            [
+              -77.30117797851562,
+              8.886566162109375
+            ]
+          ]
+        },
+        {
+          "kind": "water-route",
+          "report": {
+            "path": "/path/to/caribbean-route/report.json",
+            "sha256": "REPLACE"
+          },
+          "reverse": false
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              -64.99923706054688,
+              15.000457763671875
+            ],
+            [
+              -30,
+              15.000457763671875
+            ]
+          ]
+        },
+        {
+          "kind": "points",
+          "coordinates": [
+            [
+              -30,
+              15.000457763671875
+            ],
+            [
+              -30,
+              90
+            ],
+            [
+              -180,
+              90
+            ]
+          ]
+        }
+      ],
+      "witnesses": [
+        {
+          "lon": -79.4413147673,
+          "lat": 9.06267069615,
+          "inside": true
+        },
+        {
+          "lon": -74.0931168302,
+          "lat": 4.5802522049,
+          "inside": false
+        }
+      ]
+    }
+  ],
+  "evidence": [],
+  "join_tolerance_degrees": 0,
+  "max_route_cells": 2000000,
+  "minimum_free_bytes": 2147483648
+}
