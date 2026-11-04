@@ -54,10 +54,14 @@ def parse_snapshot(raw):
     entity_ids = {row['id'] for row in doc['entities']}; unique(doc['entities'], ('id',)); unique(doc['category_bindings'], ('code',))
     if any(x['entity_id'] not in entity_ids for x in doc['category_bindings']): raise ValueError('orphan category binding')
     unique(doc['basins'], ('id',)); unique(doc['affiliations'], ('affiliation_id',)); unique(doc['ocean_seeds'], ('seed_id',)); unique(doc['policies'], ('id',))
+    if any(p.get('kind') in ('coastline_assignment','closed_water_assignment','ocean_fill') and (not isinstance(p.get('evidence'),dict) or p['evidence'].get('execution_status') not in ('selected_for_research','research_only_not_selected')) for p in doc['policies']): raise ValueError('invalid draft water policy selection')
     for basin in doc['basins']:
         f = feature_by_id.get(basin['feature_id'])
         if f is None or any(basin[k] != f[k] for k in ('source_id','source_version','source_feature_id','geometry_sha256')) or not set(basin['participant_entity_ids']).issubset(entity_ids): raise ValueError('invalid basin reference')
     if any((a['feature_id'],) not in fk or a['entity_id'] not in entity_ids for a in doc['affiliations']): raise ValueError('orphan affiliation')
+    if any(a.get('scope') == 'land' and (not isinstance(a.get('evidence'),dict) or a['evidence'].get('execution_status') not in ('selected_for_research','research_only_not_selected')) for a in doc['affiliations']): raise ValueError('invalid draft land affiliation selection')
+    unique(doc['land_component_witness_rules'], ('rule_id',))
+    if any(w['entity_id'] not in entity_ids or w['method'] != 'component_witness_list_v1' or not isinstance(w['selector'], dict) or not isinstance(w['evidence'], dict) or w['evidence'].get('execution_status') not in ('selected_for_research','research_only_not_selected') for w in doc['land_component_witness_rules']): raise ValueError('invalid land witness rule')
     endpoints = {x['endpoint_id'] for x in doc['endpoints']}; unique(doc['endpoints'], ('endpoint_id',)); unique(doc['routes'], ('route_id',))
     if any(p['endpoint_id'] not in endpoints for r in doc['routes'] for p in r['points']): raise ValueError('orphan route point')
     if any(s['endpoint_id'] not in endpoints or s['entity_id'] not in entity_ids for s in doc['ocean_seeds']): raise ValueError('orphan ocean seed')
@@ -79,14 +83,19 @@ def parse_snapshot(raw):
     for endpoint in doc['endpoints']:
         for field in ('longitude','latitude'):
             value = endpoint[field]
-            if type(value) not in (int, Decimal): raise ValueError('invalid endpoint coordinate')
-            endpoint[field] = exact(Decimal(value))
+            if type(value) not in (int, Decimal, str): raise ValueError('invalid endpoint coordinate')
+            try:
+                number = Decimal(value)
+                if not number.is_finite() or abs(number) > (180 if field == 'longitude' else 90): raise ValueError('invalid endpoint coordinate')
+                endpoint[field] = exact(number)
+            except ArithmeticError:
+                raise ValueError('invalid endpoint coordinate') from None
     # Sort outside the server locale so a repeated equivalent export is stable.
     for key, fields in (('sources',('source_id','version')),('source_lineage_assets',('source_id','version')),
         ('source_lineage_dependencies',('source_id','version','parent_source_id','parent_version')),
         ('entities',('id',)),('category_bindings',('code',)),('features',('feature_id',)),
         ('endpoints',('endpoint_id',)),('routes',('route_id',)),('basins',('id',)),
-        ('affiliations',('affiliation_id',)),('ocean_seeds',('seed_id',)),('policies',('id',))):
+        ('affiliations',('affiliation_id',)),('land_component_witness_rules',('rule_id',)),('ocean_seeds',('seed_id',)),('policies',('id',))):
         doc[key].sort(key=lambda row: tuple(row[k] for k in fields))
     for route in doc['routes']: route['points'].sort(key=lambda point: point['ordinal'])
     for basin in doc['basins']: basin['participant_entity_ids'].sort()

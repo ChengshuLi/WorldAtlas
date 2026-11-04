@@ -14,6 +14,8 @@ def data(path, values):
     np.asarray(values,dtype='<u4').tofile(path)
     return pin(path)
 
+def sha_file(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+
 def pin(path):
     return {'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
 
@@ -42,6 +44,7 @@ class DirectLand(unittest.TestCase):
           'features':[{'feature_id':f['properties']['id'],'source_id':'source','source_version':'v1','source_feature_id':f['properties']['id'],'geometry_sha256':c.geometry_hash(f['geometry'])} for f in self.features],
           'entities':[{'id':101},{'id':102},{'id':103}],
           'category_bindings':[{'entity_id':101,'physical_class':'land','code':17},{'entity_id':102,'physical_class':'land','code':18},{'entity_id':103,'physical_class':'land','code':19}],
+          'land_component_witness_rules':[],
           'affiliations':[self.aff('a','left',101,'component_partition_v1',{'component_witness':{'lon':'-2.5','lat':'1.5'}}),
                           self.aff('b','middle',102,'component_partition_v1',{'component_witness':{'lon':'-2.5','lat':'1.5'}}),
                           self.aff('c','whole',103,'component_intersection_v1',{'additional_feature_ids':[],'include_witnesses':[],'exclude_witnesses':[]})]}
@@ -52,7 +55,7 @@ class DirectLand(unittest.TestCase):
     def tearDown(self): self.t.cleanup()
     def aff(self,aid,feature,entity,method,selector):
         return {'affiliation_id':aid,'feature_id':feature,'entity_id':entity,'relationship':'affiliation','scope':'land',
-                'method':method,'rationale':'synthetic only','evidence':{'selector':selector}}
+                'method':method,'rationale':'synthetic only','evidence':{'execution_status':'selected_for_research','selector':selector}}
     def write_source(self): self.source.write_text(json.dumps({'type':'FeatureCollection','features':self.features}))
     def write_snapshot(self): self.snapfile.write_text(json.dumps(self.snap))
     def refresh_snapshot(self): self.write_snapshot(); self.cfg['snapshot']=pin(self.snapfile)
@@ -67,6 +70,17 @@ class DirectLand(unittest.TestCase):
         self.assertEqual(np.fromfile(self.out/'land/runs.u32le',dtype='<u4').tolist(),[1,17,2,18,3,1,5,19,6,1]*2)
         self.assertEqual(r['compiler_report']['input_sha256']['physical_rows'],self.cfg['physical_rows']['sha256'])
         self.assertEqual(r['compiler_report']['output_runs_sha256'],pin(self.out/'land/runs.u32le')['sha256'])
+    def test_draft_requires_explicit_witness_rule_list(self):
+        del self.snap['land_component_witness_rules'];self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'must include land witness rules'):self.run_build()
+        self.assertFalse(self.out.exists())
+    def test_unselected_draft_affiliation_fails_closed(self):
+        for marker in ('research_only_not_selected','unknown',None):
+            if marker is None:self.snap['affiliations'][0]['evidence'].pop('execution_status',None)
+            else:self.snap['affiliations'][0]['evidence']['execution_status']=marker
+            self.refresh_snapshot()
+            with self.assertRaisesRegex(ValueError,'affiliations require explicit research selection'):self.run_build()
+            self.assertFalse(self.out.exists())
     def test_no_implicit_snapshot_authentication(self):
         with self.assertRaisesRegex(ValueError,'authentication'): self.run_build(False)
         self.assertFalse((self.out/'report.json').exists())
@@ -171,6 +185,67 @@ class DirectLand(unittest.TestCase):
         p=self.d/'config.json';p.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError,'nested in an input directory'): c.prepare(p,self.d/'new-output',True)
         self.assertFalse((self.d/'new-output').exists())
+    def setup_witness_rule(self):
+        self.snap['affiliations'].pop()
+        verification={'grid_width':6,'grid_height':2,'grid_step':'1','grid_west':'-3','grid_north':'2',
+          **{key+'_sha256':self.cfg[key]['sha256'] for key in ('physical_rows','physical_runs','component_rows','component_runs')},
+          'component_algorithm_sha256':sha_file(HERE.parent/'build_components.cpp')}
+        rule={'rule_id':'w','entity_id':103,'method':'component_witness_list_v1',
+              'selector':{'witnesses':[{'lon':'0.5','lat':'1.5'}],'verification':verification},
+              'evidence':{'execution_status':'selected_for_research','source_files_evidence_only':[{'citation':'synthetic-source','file_sha256':'a'*64,'geometry_sha256':'b'*64}]}}
+        self.snap['land_component_witness_rules']=[rule]
+        return rule
+    def test_mask_bound_witness_rule(self):
+        self.setup_witness_rule();self.refresh_snapshot();r=self.run_build()
+        self.assertEqual(np.fromfile(self.out/'land/runs.u32le',dtype='<u4').tolist(),[1,17,2,18,3,1,5,19,6,1]*2)
+        self.assertTrue(r['decision_summary'][0]['mask_bound'])
+    def test_partial_witness_rules_fail_global_completeness(self):
+        self.setup_witness_rule();self.snap['affiliations']=[];self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'unassigned component'):self.run_build()
+        self.assertFalse((self.out/'report.json').exists())
+    def test_unselected_or_unmarked_witness_rules_fail_closed(self):
+        rule=self.setup_witness_rule()
+        for marker in ('research_only_not_selected', 'unknown', None):
+            if marker is None: rule['evidence'].pop('execution_status',None)
+            else: rule['evidence']['execution_status']=marker
+            self.refresh_snapshot()
+            with self.assertRaisesRegex(ValueError,'explicit research selection'):self.run_build()
+            self.assertFalse(self.out.exists())
+    def test_witness_resolver_rejects_unselected_direct_call(self):
+        rule=self.setup_witness_rule();rule['evidence']['execution_status']='research_only_not_selected'
+        with self.assertRaisesRegex(ValueError,'explicit research selection'):
+            c.resolve_witness_rules([rule],{},self.cfg,None,None,'',[],{}, {},[])
+    def test_witness_rules_reject_accepted_snapshot(self):
+        self.setup_witness_rule()
+        self.snap['schema']='worldatlas-geography-decision-export-v1'
+        self.snap['decision_revision']['status']='accepted';self.snap['entity_revision']['status']='accepted'
+        self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'witness rules are draft research only'):self.run_build()
+        self.assertFalse(self.out.exists())
+    def test_witness_rule_rejects_changed_physical_pin(self):
+        rule=self.setup_witness_rule();rule['selector']['verification']['physical_runs_sha256']='0'*64;self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'physical_runs pin mismatch'):self.run_build()
+    def test_witness_rule_rejects_shifted_georeference(self):
+        rule=self.setup_witness_rule();rule['selector']['verification']['grid_west']='-4';self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'georeferencing mismatch'):self.run_build()
+    def test_witness_rule_rejects_duplicate_component(self):
+        rule=self.setup_witness_rule();rule['selector']['witnesses'].append({'lon':'1.5','lat':'1.5'});self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'duplicate witness component'):self.run_build()
+    def test_witness_rule_rejects_no_evidence(self):
+        rule=self.setup_witness_rule();rule['evidence']={'execution_status':'selected_for_research'};self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'source citations and evidence hashes'):self.run_build()
+    def test_witness_rule_accepts_document_evidence(self):
+        rule=self.setup_witness_rule();rule['evidence']={'execution_status':'selected_for_research','source_documents_evidence_only':[{'citation':'named island decision','file_sha256':'c'*64}]};self.refresh_snapshot()
+        self.assertTrue(self.run_build()['decision_summary'][0]['mask_bound'])
+    def test_witness_rule_rejects_bad_document_hash(self):
+        rule=self.setup_witness_rule();rule['evidence']={'execution_status':'selected_for_research','source_documents_evidence_only':[{'citation':'named island decision','file_sha256':'bad'}]};self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'source citations and evidence hashes'):self.run_build()
+    def test_witness_rule_rejects_mixed_bad_evidence(self):
+        rule=self.setup_witness_rule();rule['evidence']['source_documents_evidence_only']=[{'citation':'bad','file_sha256':'broken'}];self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'source citations and evidence hashes'):self.run_build()
+    def test_witness_rule_rejects_conflict(self):
+        rule=self.setup_witness_rule();rule['selector']['witnesses']=[{'lon':'-2.5','lat':'1.5'}];self.refresh_snapshot()
+        with self.assertRaisesRegex(ValueError,'partition conflicts with component claim'):self.run_build()
     def test_decimal_witness_required(self):
         self.snap['affiliations'][0]['evidence']['selector']['component_witness']['lon']=-2.5;self.refresh_snapshot()
         with self.assertRaisesRegex(ValueError,'decimal strings'): self.run_build()

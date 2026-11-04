@@ -16,7 +16,7 @@ def sample():
       'features':[{'feature_id':'f','source_id':'source','source_version':'v1','source_feature_id':'x','geometry_sha256':D}],
       'endpoints':[{'endpoint_id':'p','longitude':1.5,'latitude':0}], 'routes':[],
       'basins':[{'id':'b','feature_id':'f','source_id':'source','source_version':'v1','source_feature_id':'x','geometry_sha256':D,'participant_entity_ids':[1]}],
-      'affiliations':[], 'ocean_seeds':[], 'policies':[]}
+      'affiliations':[], 'land_component_witness_rules':[], 'ocean_seeds':[], 'policies':[]}
 
 def read(doc): return parse_snapshot(json.dumps(doc))
 class Cursor:
@@ -50,8 +50,25 @@ class DraftExportTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'feature'): read(d)
         d=sample(); d['basins'][0]['geometry_sha256']='b'*64
         with self.assertRaisesRegex(ValueError,'basin'): read(d)
+        d=sample(); d['land_component_witness_rules']=[{'rule_id':'w','entity_id':999,'method':'component_witness_list_v1','selector':{},'evidence':{}}]
+        with self.assertRaisesRegex(ValueError,'land witness'): read(d)
+        d=sample(); d['land_component_witness_rules']=[{'rule_id':'w','entity_id':1,'method':'component_witness_list_v1','selector':{},'evidence':{}}]
+        with self.assertRaisesRegex(ValueError,'land witness'): read(d)
+        d['land_component_witness_rules'][0]['evidence']={'execution_status':'research_only_not_selected'}
+        self.assertEqual(read(d)['land_component_witness_rules'][0]['evidence']['execution_status'],'research_only_not_selected')
         d=sample(); d['affiliations']=[{'affiliation_id':'a','feature_id':'missing','entity_id':1}]
         with self.assertRaisesRegex(ValueError,'affiliation'): read(d)
+        d=sample();d['affiliations']=[{'affiliation_id':'a','feature_id':'f','entity_id':1,'scope':'land','evidence':{}}]
+        with self.assertRaisesRegex(ValueError,'affiliation selection'):read(d)
+        d['affiliations'][0]['evidence']={'execution_status':'selected_for_research'}
+        self.assertEqual(read(d)['affiliations'][0]['evidence']['execution_status'],'selected_for_research')
+        d=sample();d['policies']=[{'id':'coast','kind':'coastline_assignment','evidence':{}}]
+        with self.assertRaisesRegex(ValueError,'water policy selection'):read(d)
+        d['policies'][0]['evidence']={'execution_status':'research_only_not_selected'}
+        self.assertEqual(read(d)['policies'][0]['evidence']['execution_status'],'research_only_not_selected')
+        d['policies'][0]['kind']='ocean_fill';self.assertEqual(read(d)['policies'][0]['evidence']['execution_status'],'research_only_not_selected')
+        d['policies'][0]['evidence']={}
+        with self.assertRaisesRegex(ValueError,'water policy selection'):read(d)
         d=sample(); parent={**d['source_lineage_assets'][0], 'source_id':'parent'}; d['source_lineage_assets'].append(parent)
         d['source_lineage_dependencies']=[{'source_id':'source','version':'v1','parent_source_id':'parent','parent_version':'v1'}, {'source_id':'parent','version':'v1','parent_source_id':'source','parent_version':'v1'}]
         with self.assertRaisesRegex(ValueError,'cycle'): read(d)
@@ -62,6 +79,7 @@ class DraftExportTest(unittest.TestCase):
         result=read(d); self.assertEqual(result['endpoints'][0]['latitude'],'-2.125'); self.assertEqual(result['endpoints'][1]['longitude'],'1.5')
         shuffled=copy.deepcopy(d); shuffled['endpoints'].reverse()
         self.assertEqual(canonical_bytes(read(d)), canonical_bytes(read(shuffled)))
+        raw=canonical_bytes(read(d)); self.assertEqual(canonical_bytes(parse_snapshot(raw)),raw)
     def test_database_sql_is_select_only_and_scoped(self):
         sql=(Path(__file__).parent/'query.sql').read_text()
         self.assertTrue(sql.startswith('WITH RECURSIVE')); self.assertIn('%(revision)s',sql)

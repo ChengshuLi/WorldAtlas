@@ -22,10 +22,18 @@ def input_path(value, config_path, root):
     return path
 
 
+def require_selected_policy(policy, record):
+    if policy.get('decision_revision', {}).get('status') == 'draft':
+        evidence = record.get('evidence')
+        if not isinstance(evidence, dict) or evidence.get('execution_status') != 'selected_for_research':
+            raise ValueError('draft policy requires explicit research selection')
+
+
 def layer_precedence(policy, layer_ids):
     records = [p for p in policy.get('policies', []) if p.get('kind') == 'layer_precedence']
     if len(records) != 1 or not isinstance(records[0].get('definition'), dict):
         raise ValueError('exactly one layer precedence decision is required')
+    require_selected_policy(policy, records[0])
     definition = records[0]['definition']; priorities = definition.get('priorities'); overrides = definition.get('allowed_overrides')
     if (not isinstance(priorities, dict) or set(priorities) != set(layer_ids)
             or any(type(p) is not int for p in priorities.values())):
@@ -48,6 +56,7 @@ def coastline_policy(policy):
     records = [p for p in policy.get('policies', []) if p.get('kind') == 'coastline_assignment']
     if len(records) != 1 or not isinstance(records[0].get('id'), str) or not records[0]['id'].strip():
         raise ValueError('exactly one identified coastline assignment decision is required')
+    require_selected_policy(policy, records[0])
     definition = records[0].get('definition')
     if (not isinstance(definition, dict) or not isinstance(definition.get('source_id'), str)
             or not definition['source_id'] or not isinstance(definition.get('source_version'), str)

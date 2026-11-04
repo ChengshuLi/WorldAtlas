@@ -33,8 +33,12 @@ class OceanRunnerTests(unittest.TestCase):
  def test_draft_needs_explicit_opt_in(self):
   s=self.snapshot();s['schema']='worldatlas-geography-decision-draft-evidence-v1'
   s['decision_revision']['status']='draft';s['entity_revision']['status']='draft'
+  s['policies'][0]['evidence']={'execution_status':'selected_for_research'}
   with self.assertRaisesRegex(ValueError,'explicitly opted-in'):r.load_config(s,8,4)
   self.assertEqual(len(r.load_config(s,8,4,allow_draft=True)[2]),4)
+  s['policies'][0]['evidence']['execution_status']='research_only_not_selected'
+  with self.assertRaisesRegex(ValueError,'policy requires explicit research selection'):r.load_config(s,8,4,allow_draft=True)
+  s['policies'][0]['evidence']['execution_status']='selected_for_research'
   s['entity_revision']['status']='accepted'
   with self.assertRaisesRegex(ValueError,'matching'):r.load_config(s,8,4,allow_draft=True)
  def test_unseeded_component_reported_not_assigned(self):

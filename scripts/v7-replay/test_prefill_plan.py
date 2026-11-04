@@ -109,6 +109,7 @@ class PrefillPlanTest(unittest.TestCase):
                 # A shared basin requires the exact draft tie rules and the same direct land grid.
                 draft=json.loads(json.dumps(policy));draft['schema']='worldatlas-geography-decision-draft-evidence-v1'
                 draft['decision_revision']['status']='draft';draft['entity_revision']['status']='draft'
+                for record in draft['policies']:record['evidence']={'execution_status':'selected_for_research'}
                 draft['category_bindings'] += [{'entity_id':102,'code':5,'physical_class':'water'},
                     {'entity_id':101,'code':22,'physical_class':'land'},{'entity_id':102,'code':21,'physical_class':'land'}]
                 tie={'method':'within_minimum_distance_tolerance','tie_break':'first_entity_in_priority_order',
@@ -133,6 +134,9 @@ class PrefillPlanTest(unittest.TestCase):
                     'basins':[{'decision_id':'b1','manifest_path':dbp.name,'manifest_sha256':sha(dbp)}]}
                 with self.assertRaisesRegex(ValueError,'research opt-in'):
                     plans.assemble(draft_cfg,config_path,root,draft,draft_path,base/'draft-plan',allow_draft=True)
+                bad_policy=json.loads(json.dumps(draft));bad_policy['policies'][1]['evidence']['execution_status']='research_only_not_selected'
+                with self.assertRaisesRegex(ValueError,'policy requires explicit research selection'):
+                    plans.assemble(draft_cfg,config_path,root,bad_policy,draft_path,base/'bad-policy',allow_draft=True,allow_research_shore=True)
                 draft_plan=plans.assemble(draft_cfg,config_path,root,draft,draft_path,base/'draft-plan',allow_draft=True,allow_research_shore=True)
                 self.assertEqual(draft_plan['research_shore_method'],'spherical-grid-edge-v1')
                 db['source']['tie_rules']={**tie,'tolerance_metres':'0.1'};dbp.write_text(json.dumps(db))

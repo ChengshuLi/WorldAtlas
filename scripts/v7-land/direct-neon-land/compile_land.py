@@ -147,6 +147,55 @@ def witness_root(witness, grid, rr, runs):
     return int(found[0,2])
 
 
+def require_selected_for_research(records, label):
+    require(all(isinstance(row,dict) and isinstance(row.get('evidence'),dict)
+                and row['evidence'].get('execution_status') == 'selected_for_research'
+                for row in records), f'{label} require explicit research selection; unselected or unknown candidates cannot be executed')
+
+
+def resolve_witness_rules(witnesses, grid, cfg, rr, runs, component_source_hash, bindings, claims, partitions, summaries):
+    require_selected_for_research(witnesses, 'witness rules')
+    w,h,step,west,north = (grid[k] for k in ('width','height','step','west','north'))
+    for rule in sorted(witnesses, key=lambda r:r.get('rule_id','')):
+        rid=rule['rule_id']; selector=rule.get('selector'); evidence=rule.get('evidence')
+        require(rule.get('method')=='component_witness_list_v1' and type(rule.get('entity_id')) is int, 'unsupported witness rule')
+        obj(selector, ('witnesses','verification'), name='witness selector')
+        verification=selector['verification']
+        obj(verification, ('grid_width','grid_height','grid_step','grid_west','grid_north','physical_rows_sha256','physical_runs_sha256',
+                           'component_rows_sha256','component_runs_sha256','component_algorithm_sha256'), name='witness verification')
+        require(type(verification['grid_width']) is int and type(verification['grid_height']) is int and
+                verification['grid_width']==w and verification['grid_height']==h, 'witness grid dimensions mismatch')
+        try:
+            for key,value in (('grid_step',step),('grid_west',west),('grid_north',north)):
+                raw=verification[key]
+                require(isinstance(raw,str) and text(raw) and Decimal(raw).is_finite() and Decimal(raw)==Decimal(str(value)), 'witness grid georeferencing mismatch')
+        except InvalidOperation:
+            raise ValueError('invalid witness grid georeferencing') from None
+        for key in ('physical_rows','physical_runs','component_rows','component_runs'):
+            require(verification[key+'_sha256']==cfg[key]['sha256'], f'witness {key} pin mismatch')
+        require(verification['component_algorithm_sha256']==component_source_hash, 'witness component algorithm pin mismatch')
+        require(isinstance(evidence,dict), 'witness rules require source citations and evidence hashes')
+        source_evidence=evidence.get('source_files_evidence_only',[])
+        document_evidence=evidence.get('source_documents_evidence_only',[])
+        def digest(value): return isinstance(value,str) and len(value)==64 and all(c in '0123456789abcdef' for c in value)
+        require(isinstance(source_evidence,list) and isinstance(document_evidence,list) and bool(source_evidence or document_evidence) and
+                all(isinstance(x,dict) and text(x.get('citation')) and digest(x.get('file_sha256')) and digest(x.get('geometry_sha256'))
+                    for x in source_evidence) and
+                all(isinstance(x,dict) and text(x.get('citation')) and digest(x.get('file_sha256')) for x in document_evidence),
+                'witness rules require source citations and evidence hashes')
+        citations = [x['citation'] for x in source_evidence+document_evidence]
+        values=selector['witnesses'];require(isinstance(values,list) and bool(values), 'witness list must be nonempty')
+        roots=[witness_root(x,grid,rr,runs) for x in values]
+        require(len(set(roots))==len(roots), 'duplicate witness component')
+        match=[b for b in bindings if b.get('entity_id')==rule['entity_id'] and b.get('physical_class')=='land']
+        require(len(match)==1, 'land entity requires one category binding')
+        for root in roots:
+            require(root not in claims and root not in partitions, f'conflicting component claim {root}')
+            claims[root]={'rule_id':f'{rid}:component:{root}', 'source_evidence':citations,
+                          'component_id':root,'kind':'whole_component','code':match[0]['code']}
+        summaries.append({'witness_rule_id':rid,'selected_components':len(roots),'mask_bound':True})
+
+
 def prepare(config_path, output, allow_unverified_snapshot=False):
     require(allow_unverified_snapshot, 'snapshot authentication is not implemented; research requires --allow-unverified-snapshot')
     cfg_bytes = Path(config_path).read_bytes()
@@ -201,8 +250,17 @@ def prepare(config_path, output, allow_unverified_snapshot=False):
     require(len(rr)==h+1 and len(runs)%3==0 and rr[0]==0 and rr[-1]==len(runs)//3 and np.all(rr[1:]>=rr[:-1]), 'invalid component stream')
     runs = runs.reshape(-1,3)
     land = [a for a in snapshot.get('affiliations',[]) if a.get('scope') == 'land']
-    require(bool(land), 'snapshot has no land affiliations')
-    require(len({a.get('affiliation_id') for a in land}) == len(land), 'duplicate affiliation ID')
+    if schema == 'worldatlas-geography-decision-draft-evidence-v1':
+        require_selected_for_research(land, 'draft land affiliations')
+    if schema == 'worldatlas-geography-decision-draft-evidence-v1':
+        require('land_component_witness_rules' in snapshot, 'draft snapshot must include land witness rules')
+    witnesses = snapshot.get('land_component_witness_rules', [])
+    require(isinstance(witnesses, list), 'invalid land witness rules')
+    require(not witnesses or schema == 'worldatlas-geography-decision-draft-evidence-v1', 'witness rules are draft research only')
+    require_selected_for_research(witnesses, 'witness rules')
+    require(bool(land) or bool(witnesses), 'snapshot has no land affiliations or witness rules')
+    ids = [a.get('affiliation_id') for a in land] + [r.get('rule_id') for r in witnesses]
+    require(all(text(x) for x in ids) and len(set(ids)) == len(ids), 'duplicate or invalid land decision ID')
     os.mkdir(out)
     # Recompute components from the pinned physical mask, and demand exact
     # byte equality. Footprint alone does not prove the claimed connectivity.
@@ -221,6 +279,7 @@ def prepare(config_path, output, allow_unverified_snapshot=False):
     compiler_version = subprocess.run(['g++','--version'],capture_output=True,text=True,check=True).stdout.splitlines()[0]
     geomdir = out/'geometry'; geomdir.mkdir()
     cache = {}; claims = {}; partitions = {}; summaries = []
+    resolve_witness_rules(witnesses, grid, cfg, rr, runs, component_source_hash, bindings, claims, partitions, summaries)
     for aff in sorted(land, key=lambda a:a.get('affiliation_id','')):
         aid = aff.get('affiliation_id'); method = aff.get('method')
         require(text(aid) and aff.get('relationship') == 'affiliation' and text(aff.get('rationale')) and

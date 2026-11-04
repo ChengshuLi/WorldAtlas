@@ -70,6 +70,8 @@ def load_config(snapshot,width,height,allow_draft=False,software_versions=None):
         raise ValueError('accepted or explicitly opted-in draft matching decision/entity revisions required; export is still unverified')
     policies=[p for p in snapshot.get('policies',[]) if p.get('kind')=='ocean_fill']
     if len(policies)!=1:raise ValueError('one ocean_fill policy is required')
+    if draft and (not isinstance(policies[0].get('evidence'),dict) or policies[0]['evidence'].get('execution_status')!='selected_for_research'):
+        raise ValueError('draft ocean policy requires explicit research selection')
     policy=policies[0].get('definition',{})
     if (policy.get('connectivity')!=4 or type(policy.get('wrap_longitude')) is not bool
         or policy.get('barrier_tie_rule')!='left-of-oriented-route' or policy.get('unseeded_policy')!='report-only'):
