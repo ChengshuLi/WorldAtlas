@@ -33,7 +33,8 @@ def screen(dem,dem_sha,basins,line,west,east,offsets,spacing):
     with open(dem,'rb') as f:
         if digest_file(f)!=dem_sha:raise ValueError('crop checksum mismatch')
     with rasterio.open(dem) as ds:
-        z=ds.read(1).astype('float64');valid=np.isfinite(z);trans=ds.transform;crs=ds.crs
+        z=ds.read(1).astype('float64');valid=np.isfinite(z)&(ds.read_masks(1)!=0);trans=ds.transform;crs=ds.crs
+        if ds.nodata is not None and np.isfinite(ds.nodata):valid &= z!=ds.nodata
         if crs is None or trans.a<=0 or trans.e>=0 or abs(trans.a+trans.e)>1e-9 or trans.b or trans.d:raise ValueError('expected square north-up metric grid')
         bounds=transform_bounds(crs,'EPSG:4326',*ds.bounds,densify_pts=21)
     west=set(west);east=set(east)
@@ -42,7 +43,7 @@ def screen(dem,dem_sha,basins,line,west,east,offsets,spacing):
     for archive,sha,shp in basins:features.extend(checked_shapes(archive,sha,shp,bounds))
     if not features:raise ValueError('no source basins overlap crop')
     geoms=[x[0] for x in features];tree=STRtree(geoms);root_ids=[x[1] for x in features]
-    roots,_,_=drainage(z,valid,trans.a);h,w=z.shape;outlet_ids=np.unique(roots[roots>=0]);to_geo=Transformer.from_crs(crs,4326,always_xy=True).transform;to_metric=Transformer.from_crs(4326,crs,always_xy=True).transform
+    roots,_,_=drainage(z,valid,trans,crs);h,w=z.shape;outlet_ids=np.unique(roots[roots>=0]);to_geo=Transformer.from_crs(crs,4326,always_xy=True).transform;to_metric=Transformer.from_crs(4326,crs,always_xy=True).transform
     classifications=np.zeros(h*w,dtype=np.uint8);outlet_stats={'west':0,'east':0,'unknown':0,'conflict':0}
     for index in outlet_ids:
         row,col=divmod(int(index),w);x,y=rasterio.transform.xy(trans,row,col);point=Point(*to_geo(x,y));hits={root_ids[i] for i in tree.query(point) if geoms[i].covers(point)}
@@ -74,3 +75,4 @@ if __name__=='__main__':
     result=screen(a.dem,a.dem_sha,a.basin,json.load(open(a.line)),a.west_root,a.east_root,a.offset,a.spacing)
     with open(a.output,'x') as f:json.dump(result,f)
     print(json.dumps(result))
+

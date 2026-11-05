@@ -36,7 +36,7 @@ def basin_labels(source, source_sha, mask, mask_sha, basins, bounds, roots, reso
     features=[]
     for archive,expected,shp in basins:features.extend(checked_shapes(archive,expected,shp,bounds))
     geoms=[f[0] for f in features];basin_ids=[f[1] for f in features];tree=STRtree(geoms)
-    flow,_,_=drainage(z.astype('float64'),valid,resolution);outlets=np.unique(flow[flow>=0]);classes=np.zeros(width*height,dtype=np.uint8)
+    flow,_,_=drainage(z.astype('float64'),valid,t,crs);outlets=np.unique(flow[flow>=0]);classes=np.zeros(width*height,dtype=np.uint8)
     for k in outlets:
         r,c=divmod(int(k),width);x,y=xy(t,r,c);point=Point(*tgeo.transform(x,y));hit={basin_ids[i] for i in tree.query(point) if geoms[i].covers(point)}
         matches={index+1 for index,root in enumerate(roots) if root in hit}
@@ -90,3 +90,4 @@ if __name__=='__main__':
     result.update({'source_sha256':a.source_sha,'mask_sha256':a.mask_sha,'bounds':a.bounds,'root_order':a.root,'resolution_m':a.resolution,'unclassified_valid':unknown,'status':'exploratory, not approved','caveats':['4-neighbor interfaces can meet at a grid corner; not a surveyed divide.','Nearest-node straight joins are not terrain- or source-validated.','Not a global optimum over all endpoint pairs within a component.','HydroBASINS outlet crosswalk and D8 depend on source and model.']})
     with open(a.output,'x') as f:json.dump(result,f)
     print(json.dumps({k:v for k,v in result.items() if k!='coordinates'}))
+

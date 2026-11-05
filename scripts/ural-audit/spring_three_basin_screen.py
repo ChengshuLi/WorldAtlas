@@ -46,7 +46,7 @@ def run(source, source_sha, source_mask, mask_sha, basins, bounds, route_point, 
     features=[]
     for archive,expected,shp in basins: features.extend(checked_shapes(archive,expected,shp,bounds))
     geoms=[f[0] for f in features]; ids=[f[1] for f in features]; tree=STRtree(geoms)
-    flow,_,_=drainage(z.astype('float64'),valid,resolution); outlets=np.unique(flow[flow>=0]); classes=np.zeros(height*width,dtype=np.uint8); status={'unmatched':0,'conflict':0}
+    flow,_,_=drainage(z.astype('float64'),valid,transform,crs); outlets=np.unique(flow[flow>=0]); classes=np.zeros(height*width,dtype=np.uint8); status={'unmatched':0,'conflict':0}
     for k in outlets:
         row,col=divmod(int(k),width); x,y=xy(transform,row,col); point=Point(*to_geo.transform(x,y))
         hit={ids[i] for i in tree.query(point) if geoms[i].covers(point)}; matches={index+1 for index,root in enumerate(roots) if root in hit}
@@ -65,3 +65,4 @@ if __name__=='__main__':
     result=run(a.source,a.source_sha,a.mask,a.mask_sha,a.basin,a.bounds,a.point,a.root,a.resolution)
     with open(a.output,'x') as f:json.dump(result,f,indent=2)
     print(json.dumps(result))
+
