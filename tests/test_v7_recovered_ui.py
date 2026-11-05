@@ -1,22 +1,14 @@
 import hashlib
-import os
 import unittest
 from pathlib import Path
-from unittest.mock import patch
 
 from scripts.entity_registry_ui import wire_registry_ui
-from scripts import build_full_v7_ui_bundle as builder
 
 ROOT = Path(__file__).resolve().parents[1]
 UI = ROOT / 'web' / 'v7'
 
 
 class RecoveredV7UITest(unittest.TestCase):
-    def test_historical_builder_fails_closed(self):
-        with patch.dict(os.environ, {'WORLDATLAS_HISTORICAL_V7_REPLAY': ''}):
-            with self.assertRaisesRegex(ValueError, 'superseded Gulf attribution'):
-                builder.main()
-
     def test_candidate_sources_and_real_registry_wiring(self):
         # Hashes from the preserved staged-candidate runtime QA record.
         expected = {

@@ -54,18 +54,9 @@ registry snapshot. The schema migration does not publish or approve geography. C
 not entity IDs. The revisioned schema permits the remaining hierarchy to be added
 without changing the legend code.
 
-To prepare a local V7 review bundle with a registry exported from Neon, export one
-revision using `scripts/export_entity_registry.sql`, for example with `psql -X -A
--t -v revision=REVISION -f scripts/export_entity_registry.sql > registry.json`,
-then set `WORLDATLAS_ENTITY_REGISTRY_EXPORT` to that file when running
-`scripts/build_full_v7_ui_bundle.py`. This is a historical-only builder: it
-requires `WORLDATLAS_HISTORICAL_V7_REPLAY=1` because it still uses superseded
-Gulf attribution. It cannot produce the selected SeaVoX Gulf bundle yet. See
-[the rebuild notes](scripts/v7-replay/REBUILD.md) for the remaining gaps. The
-builder validates the snapshot and bindings. With no export, it derives an explicitly draft, deterministic bootstrap
-from the existing V7 categories. This fallback is for local review, not evidence
-of database acceptance or publication. The V7 viewer retains its original review
-codes, colors, and separate land/water styling while displaying registry names.
+Export a registry revision from Neon using `scripts/export_entity_registry.sql`,
+for example with `psql -X -A -t -v revision=REVISION -f scripts/export_entity_registry.sql > registry.json`. Use the same registry revision
+as the decision snapshot and review-code bindings.
 
 For a staged continent-ID grid, first prepare proposal metadata with
 `node scripts/prepare_entity_metadata.mjs proposal.json prepared.json --registry
