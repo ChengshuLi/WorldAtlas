@@ -7,3 +7,11 @@ The 1941 Indiana University L-37-125 sheet, based on 1907–1909 surveying, cove
 The preview shows the lines near the mapped Abin drainage and labeled 896.3 m summit. The coordinate overlay is only a frame-corner approximation that assumes WGS84; the sheet's datum, image deformation, independent controls and residual errors have not been verified. Its map marks and confluence crossings cannot be used to infer a precise watershed or validate either join. Their intersection was built into the candidate and is not independent evidence. No boundary or cell labels have been changed.
 
 Obtain a controlled, sufficiently legible georeference of this western sheet and the adjoining sheet, or comparable independent detailed headwater mapping, to assess the two joins. The image and candidate are research evidence, not inputs to the selected pipeline; this note does not assert current R2 custody or a reuse license.
+
+## Printed-grid sensitivity
+
+The sheet's margins label a 2 km projected grid. A provisional local fit using six approximate vertical and five horizontal grid-line positions near the join has in-sample residuals up to 7.9 and 9.6 image pixels respectively. These are fit residuals, not independent validation. The numerical positions and reproduction are in `west_iu_grid_preview.py`.
+
+If the printed grid is interpreted as zone 7 on a Bessel 1841 ellipsoid, with no established datum transformation to WGS84, the western join falls about 23 pixels from the previous frame-corner fit (roughly 100 m at the local printed grid scale). Repeating the same simplistic comparison with a Krasovsky ellipsoid shifts the point about 161 pixels from the corner fit (roughly 680 m). This large datum sensitivity explains why a later SK-42 assumption cannot simply be imposed on the 1941 sheet. An historical discussion describes Pulkovo 1932 using Bessel 1841, but it does not establish this sheet's actual coordinate reference or local datum transformation: https://s3.eu-west-2.amazonaws.com/redatlas/Mugnier2007.pdf.
+
+This check makes the plausible Bessel preview more consistent with the original corner fit; it does not independently locate the watershed, establish an accuracy bound, or validate the candidate join. A documented sheet datum and independent ground controls are needed before drawing such conclusions.
