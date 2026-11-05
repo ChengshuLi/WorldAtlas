@@ -7,8 +7,10 @@ steepest descent. Equal-height flats follow the flood parent. `trace_to_seeds`
 propagates two supplied seed labels upstream; unknown outlets and cycles are
 unresolved, not assigned to the nearest seed.
 
-The caller must supply aligned WGS84 raster arrays and an unrotated north-up
-affine transform. Apply original quality masks before calling, construct seed
+The caller must supply aligned raster arrays, an unrotated north-up affine
+transform, and an explicit CRS argument resolving to EPSG:4326. The function
+rejects projected CRSs, non-finite affine coefficients, and extents outside
+longitude/latitude bounds. Apply original quality masks before calling, construct seed
 masks from validated sources, and handle overlaps as unresolved. All crop edges
 and valid cells adjacent to invalid data are artificial outlets. Source DSM
 artifacts, depression filling, sparse or incorrect seed streams, flow direction,
