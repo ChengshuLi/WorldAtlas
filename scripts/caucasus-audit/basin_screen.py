@@ -1,6 +1,6 @@
 """Research-only normal-offset comparison against HydroBASINS polygons.
 
-Inputs and projected CRS are supplied by the user. Distinct modeled terminals
+Distances and perpendicular offsets use WGS84 geodesics. Distinct modeled terminals
 do not prove a particular watershed. Do not publish input or output data as code.
 """
 import argparse
@@ -9,7 +9,7 @@ import math
 from collections import Counter
 
 import shapefile
-from pyproj import CRS, Transformer
+from geodesic_line import GeodesicLine, GEOD
 from shapely.geometry import LineString, Point, shape
 from shapely.strtree import STRtree
 
@@ -26,9 +26,6 @@ def terminal(records, key):
 
 
 def run(args):
-    crs = CRS.from_epsg(args.epsg)
-    if not crs.is_projected or any(axis.unit_conversion_factor != 1 for axis in crs.axis_info):
-        raise ValueError('--epsg must identify a projected CRS in metres')
     reader = shapefile.Reader(args.basins)
     fields = [f[0] for f in reader.fields[1:]]
     records = {}
@@ -36,11 +33,7 @@ def run(args):
         record = dict(zip(fields, row))
         records[record['HYBAS_ID']] = record
     coords = json.load(open(args.line, encoding='utf-8'))['coordinates']
-    forward = Transformer.from_crs(4326, args.epsg, always_xy=True)
-    reverse = Transformer.from_crs(args.epsg, 4326, always_xy=True)
-    line = LineString([forward.transform(*point) for point in coords])
-    if line.is_empty or not line.is_valid or line.length == 0:
-        raise ValueError('line must be a valid nonempty LineString')
+    line = GeodesicLine(coords)
     xmin, ymin, xmax, ymax = args.bounds
     sxmin, symin, sxmax, symax = args.source_bounds
     features = []
@@ -64,23 +57,19 @@ def run(args):
     counts = {distance: Counter() for distance in args.offset}
     for station in range(math.floor(line.length / args.spacing) + 1):
         position = station * args.spacing
-        point = line.interpolate(position)
-        lon, lat = reverse.transform(point.x, point.y)
+        lon, lat = line.point(position)
         if not xmin <= lon <= xmax or not ymin <= lat <= ymax:
             continue
-        before = line.interpolate(max(0, position - args.normal_half_window))
-        after = line.interpolate(min(line.length, position + args.normal_half_window))
-        dx, dy = after.x - before.x, after.y - before.y
-        scale = math.hypot(dx, dy)
-        if not scale:
+        before = line.point(max(0, position - args.normal_half_window))
+        after = line.point(min(line.length, position + args.normal_half_window))
+        azimuth, _, separation = GEOD.inv(*before, *after)
+        if not math.isfinite(separation) or separation <= 0:
             for count in counts.values():
                 count['undefined_normal'] += 1
             continue
         for distance, count in counts.items():
-            left = reverse.transform(point.x - distance * dy / scale,
-                                     point.y + distance * dx / scale)
-            right = reverse.transform(point.x + distance * dy / scale,
-                                      point.y - distance * dx / scale)
+            left = GEOD.fwd(lon, lat, azimuth-90, distance)[:2]
+            right = GEOD.fwd(lon, lat, azimuth+90, distance)[:2]
             if any(not (sxmin <= x <= sxmax and symin <= y <= symax)
                    for x, y in (left, right)):
                 raise ValueError('an offset lies outside --source-bounds')
@@ -107,7 +96,6 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--line', required=True, help='GeoJSON LineString geometry')
     parser.add_argument('--basins', required=True, help='HydroBASINS shapefile')
-    parser.add_argument('--epsg', type=int, required=True, help='local projected CRS')
     parser.add_argument('--bounds', nargs=4, type=float, required=True,
                         metavar=('WEST', 'SOUTH', 'EAST', 'NORTH'))
     parser.add_argument('--source-bounds', nargs=4, type=float, required=True,
