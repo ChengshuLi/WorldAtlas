@@ -71,3 +71,21 @@ A bounded run against the real Linux/GDAL region and seed builders and independe
 `caucasus_stage2_validation.validate` is a prototype integration point for the frozen stage-2 validator. It independently reruns the raw-source reconstruction and effective-snapshot derivation, requires the seed report to reference the original pinned snapshot, and then calls the existing selected-seed validator with the effective view. It verifies its six source-derivation code files and raw/source inputs both before and after validation and returns a separate source-validation trace. The orchestrator must authenticate the request and independently trusted code pins, pin compatible runtime/library versions, and bind that trace to its final provenance; this adapter does not do those tasks by itself.
 
 The production orchestrator does not currently call this adapter. Tests use mocks to check that a stale snapshot is rejected before validation, the independent validator receives the derived view, and incomplete code pins fail; they do not establish full real-seed integration. Ten local focused tests pass. No actual map or seed build was initiated.
+
+
+## Bounded strict-validator result
+
+A fresh macOS replay regenerated the compact recipe and derived line from the pinned raw source readbacks and the selected guide; the output bytes exactly matched the handoff. `test_caucasus_real_contract_adapter.py` then ran the actual stage-2 `contracts.validate_selected_seed_decisions` through the independent adapter with those source bytes and derived line. Three tests passed, including rejection of a stale boundary trace. The region, route, closure proof, component groups and seed trace were synthetic; the test did not execute a seed compiler, validate a real closure, or create a map. It did not claim historic V7 equivalence.
+
+Run from `scripts/caucasus-audit` with the pinned stage-2 code directory and the four source fixture paths:
+
+```sh
+CAUCASUS_SELECTED=/path/to/selected-caucasus.geojson \
+CAUCASUS_RECIPE=/path/to/compact.json \
+CAUCASUS_HYDRO=/path/to/hybas.zip \
+CAUCASUS_AUTHOR=/path/to/asia_europe_border.geojson \
+PYTHONPATH=".:../v7-land/research-mixed-runtime/stage2-geodesic-20261104" \
+python -m unittest -v test_caucasus_real_contract_adapter
+```
+
+Separately, the Linux builder's real GDAL region-builder fixture passed as recorded in [BOUNDED-GDAL-HANDOFF.md](BOUNDED-GDAL-HANDOFF.md). Neither bounded result integrates the wrapper and report into the frozen orchestrator or proves real land-cell output. The real builder must reproduce source-to-line independently in its environment, review the integration and pin code and runtime before the selected workflow is used. No recipe was written to Neon.
