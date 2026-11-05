@@ -9,6 +9,36 @@ from spring_connector_graph import basin_labels
 from terrain_basin_screen import digest_file
 
 G=Geod(ellps='WGS84')
+SEARCH_CUSHION_M=.001  # Tested floating-point margin, not a formal proof.
+
+def closest_sampled_pair(selected,interface):
+    """WGS84 nearest sampled pair, using ECEF chord only as a lower bound."""
+    s=np.asarray(selected,dtype=float);q=np.asarray(interface,dtype=float)
+    if (s.ndim!=2 or q.ndim!=2 or s.shape[1:]!=(2,) or q.shape[1:]!=(2,) or not len(s) or not len(q)
+            or not np.isfinite(s).all() or not np.isfinite(q).all()
+            or np.any(np.abs(s[:,0])>180) or np.any(np.abs(q[:,0])>180)
+            or np.any(np.abs(s[:,1])>90) or np.any(np.abs(q[:,1])>90)):
+        raise ValueError('invalid sampled geographic points')
+    ecef=Transformer.from_crs(4979,4978,always_xy=True)
+    def xyz(points):return np.column_stack(ecef.transform(points[:,0],points[:,1],np.zeros(len(points))))
+    sxyz=xyz(s);qxyz=xyz(q)
+    if not np.isfinite(sxyz).all() or not np.isfinite(qxyz).all():raise ValueError('invalid ECEF samples')
+    tree=cKDTree(sxyz);_,first=tree.query(qxyz,k=1,workers=1);first=np.asarray(first,dtype=np.int64)
+    _,_,initial=G.inv(q[:,0],q[:,1],s[first,0],s[first,1]);initial=np.asarray(initial)
+    if not np.isfinite(initial).all() or np.any(initial<0):raise ValueError('invalid WGS84 sample distances')
+    i=int(np.argmin(initial));best=(float(initial[i]),i,int(first[i]))
+    for i,point in enumerate(qxyz):
+        # A straight ECEF chord cannot exceed the surface geodesic. Any pair
+        # capable of improving the incumbent must lie within this chord ball.
+        radius=np.nextafter(best[0]+SEARCH_CUSHION_M,math.inf)
+        ids=tree.query_ball_point(point,radius,workers=1)
+        if not ids:continue
+        ids=np.asarray(sorted(ids),dtype=np.int64)
+        _,_,dist=G.inv(np.full(len(ids),q[i,0]),np.full(len(ids),q[i,1]),s[ids,0],s[ids,1]);dist=np.asarray(dist)
+        if not np.isfinite(dist).all() or np.any(dist<0):raise ValueError('invalid WGS84 sample distances')
+        k=int(np.argmin(dist));candidate=(float(dist[k]),i,int(ids[k]))
+        if candidate<best:best=candidate
+    return best
 
 
 def densify(line,step):
@@ -37,16 +67,8 @@ def sampled_gap(labels,t,to_geo,retained,bounds,step):
     for a,b in edges:
         x=to_geo.transform(*(t*(a[1],a[0])));y=to_geo.transform(*(t*(b[1],b[0])));interface.extend(densify([x,y],step))
     if not interface:raise ValueError('modeled interface absent')
-    ecef=Transformer.from_crs(4979,4978,always_xy=True)
-    def xyz(points):
-        v=np.asarray(points);return np.column_stack(ecef.transform(v[:,0],v[:,1],np.zeros(len(v))))
-    tree=cKDTree(xyz(selected));_,indexes=tree.query(xyz(interface),k=min(8,len(selected)))
-    indexes=np.asarray(indexes).reshape(len(interface),-1);candidates=[]
-    for i,near in enumerate(indexes):
-        for j in near:
-            d=G.inv(*interface[i],*selected[int(j)])[2];candidates.append((d,i,int(j)))
-    d,i,j=min(candidates)
-    return {'retained_point':list(selected[j]),'interface_point':list(interface[i]),'sampled_gap_wgs84_m':d,'sample_step_m':step,'retained_samples':len(selected),'interface_samples':len(interface),'method':'sample each line in longitude/latitude, preselect nearest WGS84 ECEF candidates, measure final gaps with WGS84 inverse geodesic','caveat':'Sampled estimate, not an exact continuous geodesic minimum. Source and modeled lines are approximate; not a route approval.'}
+    d,i,j=closest_sampled_pair(selected,interface)
+    return {'retained_point':list(selected[j]),'interface_point':list(interface[i]),'sampled_gap_wgs84_m':d,'sample_step_m':step,'retained_samples':len(selected),'interface_samples':len(interface),'method':'sample coordinate-linear lines; use an ECEF chord lower bound to retain potentially closer pairs and WGS84 inverse geodesics for final ranking','caveat':'Sampled estimate, not an exact continuous geodesic minimum; sample step is a target, not a proven maximum spacing. The 1 mm floating-point search cushion is an engineering guard, not a formal proof. Source and modeled lines are approximate; not a route approval.'}
 
 
 if __name__=='__main__':
@@ -55,6 +77,7 @@ if __name__=='__main__':
     with open(a.retained,'rb') as f:
         if digest_file(f)!=a.retained_sha:raise ValueError('retained excerpt hash mismatch')
     labels,t,geo,unknown=basin_labels(a.source,a.source_sha,a.mask,a.mask_sha,a.basin,a.bounds,a.root,a.resolution)
-    result=sampled_gap(labels,t,geo,json.load(open(a.retained)),a.bounds,a.step);result.update({'source_sha256':a.source_sha,'retained_sha256':a.retained_sha,'bounds':a.bounds,'root_order':a.root,'unclassified_valid':unknown,'status':'preliminary: underlying D8 geographic-distance conversion pending'})
+    result=sampled_gap(labels,t,geo,json.load(open(a.retained)),a.bounds,a.step);result.update({'source_sha256':a.source_sha,'retained_sha256':a.retained_sha,'bounds':a.bounds,'root_order':a.root,'unclassified_valid':unknown,'status':'preliminary WGS84 sampled research; not approved'})
     with open(a.output,'x') as f:json.dump(result,f,indent=2)
     print(json.dumps(result))
+
