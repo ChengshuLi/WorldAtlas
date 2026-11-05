@@ -38,16 +38,19 @@ def verify_config(config, guard=lambda: None):
 
 def run_seed(config, request, request_sha256, producer_dir, producer_sha256,
              work, output, gate_report, guard=lambda: None):
+    if not (sys.flags.isolated and sys.flags.no_site):
+        raise ValueError('Caucasus seed binding requires isolated no-site Python')
     verify_config(config, guard)
     if digest(request) != request_sha256:
         raise ValueError('seed request pin mismatch')
     validate_direct_request(request)
-    # Isolated mode ignores PYTHONPATH and user site. Explicitly add only the
-    # pinned gate directory for its sibling imports; -I otherwise omits it.
-    bootstrap = ("import pathlib,runpy,sys; p=sys.argv.pop(1); "
-                 "sys.path.insert(0,str(pathlib.Path(p).resolve().parent)); "
+    # The isolated outer caller must authenticate its explicit dependency paths.
+    # Carry them into the no-site child without processing .pth files.
+    bootstrap = ("import json,runpy,sys; paths=json.loads(sys.argv[1]); "
+                 "sys.path[:0]=paths; p=sys.argv[2]; sys.argv=sys.argv[2:]; "
                  "runpy.run_path(p,run_name='__main__')")
-    cmd = [sys.executable, '-I', '-c', bootstrap, str(HERE / 'caucasus_seed_gate.py'),
+    cmd = [sys.executable, '-I', '-S', '-B', '-c', bootstrap,
+           json.dumps([str(HERE), *sys.path]), str(HERE / 'caucasus_seed_gate.py'),
            '--request', str(request), '--request-sha256', request_sha256,
            '--recipe', config['recipe']['path'], '--recipe-sha256', config['recipe']['sha256'],
            '--hydro', config['hydro']['path'], '--author', config['author']['path'],

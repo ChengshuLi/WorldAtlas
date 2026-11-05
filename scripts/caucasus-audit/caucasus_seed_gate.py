@@ -105,7 +105,14 @@ def check(request_path, recipe, recipe_sha, hydro, author):
         directory = Path(directory)
         guide, output = directory / 'selected.json', directory / 'reconstructed.json'
         guide.write_text(json.dumps(boundary['geometry'], sort_keys=True, separators=(',', ':'), allow_nan=False))
-        command = [sys.executable, '-I', str(HERE / 'caucasus_source_assembly.py'), '--decisions', str(recipe),
+        if sys.flags.isolated and sys.flags.no_site:
+            boot = ("import json,runpy,sys; sys.path[:0]=json.loads(sys.argv[1]); "
+                    "p=sys.argv[2]; sys.argv=sys.argv[2:]; runpy.run_path(p,run_name='__main__')")
+            command = [sys.executable, '-I', '-S', '-B', '-c', boot, json.dumps(sys.path),
+                       str(HERE / 'caucasus_source_assembly.py')]
+        else:
+            command = [sys.executable, '-I', str(HERE / 'caucasus_source_assembly.py')]
+        command += ['--decisions', str(recipe),
                    '--decisions-sha256', recipe_sha, '--hydro-zip', str(hydro), '--author', str(author),
                    '--selected', str(guide), '--output', str(output)]
         p = subprocess.run(command, check=True, text=True, capture_output=True)

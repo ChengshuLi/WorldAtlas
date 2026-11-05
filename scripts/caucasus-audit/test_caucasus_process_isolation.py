@@ -15,6 +15,16 @@ import caucasus_stage2_binding as binding
 
 
 class ProcessIsolation(unittest.TestCase):
+    def test_binding_rejects_caller_with_site_enabled(self):
+        script = ("import sys; sys.path.insert(0, sys.argv[1]); "
+                  "import caucasus_stage2_binding as b; "
+                  "b.run_seed({},'request','x','producer','x','work','output','report')")
+        result = subprocess.run([sys.executable, '-I', '-c', script,
+                                 str(Path(binding.__file__).resolve().parent)],
+                                text=True, capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('requires isolated no-site Python', result.stderr)
+
     def test_assembler_children_ignore_python_environment_and_user_site(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -25,11 +35,11 @@ class ProcessIsolation(unittest.TestCase):
             # Fake only the selectors, retaining real subprocess startup and the
             # actual assembler. Both child processes must enter isolated mode.
             (root / 'caucasus_compact_selectors.py').write_text(
-                "import json,sys\nassert sys.flags.isolated and not sys.flags.no_site\n"
+                "import json,sys\nassert sys.flags.isolated and sys.flags.no_site == %r\n" % bool(sys.flags.no_site) +
                 "assert %r not in sys.path\n" % str(hostile) +
                 "open(sys.argv[sys.argv.index('--output')+1],'w').write('{}')\n")
             (root / 'caucasus_selector_replay.py').write_text(
-                "import json,sys\nassert sys.flags.isolated and not sys.flags.no_site\n"
+                "import json,sys\nassert sys.flags.isolated and sys.flags.no_site == %r\n" % bool(sys.flags.no_site) +
                 "assert %r not in sys.path\n" % str(hostile) +
                 "json.dump({'comparison': {'possible_changed_centers':0,"
                 "'maximum_wgs84_vertex_displacement_m':0}, 'geometry':{},"
@@ -56,7 +66,7 @@ class ProcessIsolation(unittest.TestCase):
             root = Path(tmp)
             (root / 'sibling_fixture.py').write_text('VALUE = 42\n')
             (root / 'caucasus_seed_gate.py').write_text(
-                "import sibling_fixture,sys\nassert sys.flags.isolated\nassert sibling_fixture.VALUE == 42\n")
+                "import sibling_fixture,sys\nassert sys.flags.isolated and sys.flags.no_site\nassert sibling_fixture.VALUE == 42\n")
             request = root / 'request'
             request.write_text('{}')
             with patch.object(binding, 'HERE', root), patch.object(binding, 'verify_config'), \

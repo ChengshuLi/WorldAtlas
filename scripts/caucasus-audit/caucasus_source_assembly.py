@@ -26,6 +26,14 @@ def sha(path):
     return digest.hexdigest()
 
 
+def isolated_command(script):
+    if sys.flags.isolated and sys.flags.no_site:
+        boot = ("import json,runpy,sys; sys.path[:0]=json.loads(sys.argv[1]); "
+                "p=sys.argv[2]; sys.argv=sys.argv[2:]; runpy.run_path(p,run_name='__main__')")
+        return [sys.executable, '-I', '-S', '-B', '-c', boot, json.dumps(sys.path), str(script)]
+    return [sys.executable, '-I', str(script)]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('decisions', 'decisions-sha256', 'hydro-zip', 'author', 'selected', 'output'):
@@ -50,9 +58,9 @@ def main():
                     dest.write(block)
         recipe = tmp / 'expanded.json'
         result = tmp / 'replay.json'
-        subprocess.run([sys.executable, '-I', str(HERE / 'caucasus_compact_selectors.py'), 'expand', '--input', a.decisions,
+        subprocess.run(isolated_command(HERE / 'caucasus_compact_selectors.py') + ['expand', '--input', a.decisions,
                         '--input-sha256', a.decisions_sha256, '--output', str(recipe)], check=True)
-        subprocess.run([sys.executable, '-I', str(HERE / 'caucasus_selector_replay.py'), '--recipe', str(recipe),
+        subprocess.run(isolated_command(HERE / 'caucasus_selector_replay.py') + ['--recipe', str(recipe),
                         '--recipe-sha256', sha(recipe), '--shp', str(shp), '--author', a.author,
                         '--compare', a.selected, '--output', str(result)], check=True)
         value = json.loads(result.read_text(encoding='utf-8'))
