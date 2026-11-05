@@ -8,8 +8,8 @@ import argparse,hashlib,importlib.util,json,os,sys,shutil,tempfile
 from pathlib import Path
 import decision_contract,writer
 HERE=Path(__file__).resolve().parent
-POINT=HERE.parent/'worldatlas-pr4-resume/scripts/v7-land/point-component-prototype'
-STAGE2=HERE.parent/'stage2-geodesic-20261104'
+POINT=HERE.parent/'point-component-prototype'
+STAGE2=HERE.parents[1]/'v7-recovery'/'land'/'stage2-geodesic-20261104'
 
 def need(v,m):
  if not v: raise ValueError(m)
