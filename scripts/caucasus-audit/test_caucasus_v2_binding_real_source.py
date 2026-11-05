@@ -155,6 +155,19 @@ class RealSourceDirectFixture(unittest.TestCase):
             self.assertEqual(proof['contract_sha256'], inputs['closure_contract']['sha256'])
             self.assertEqual(proof['status'], 'valid')
             self.assertEqual(actual['execution']['mode'], 'direct')
+            # Exercise the validation binding against the actual seed and gate
+            # reports. The callback is a narrow probe, not the core validator.
+            def probe(view, seed, groups, entity_codes, metric, guard):
+                self.assertEqual(view, effective)
+                self.assertEqual(seed, actual)
+                self.assertEqual(view['seed_regions'][0]['geometry_sha256'],
+                                 actual['region_traces'][0]['geometry_sha256'])
+                return 'probe-accepted'
+            result, binding_trace = binding.validate_seed(
+                cfg, fixture.path, request_sha, gate_report, PRODUCER_SHA,
+                probe, actual, {}, {}, None)
+            self.assertEqual(result, 'probe-accepted')
+            self.assertEqual(binding_trace['schema'], 'caucasus-stage2-binding-v1')
             print('FIXTURE_RESULT', json.dumps({'snapshot_sha256': inputs['snapshot']['sha256'],
                 'request_sha256': request_sha, 'derived_geometry_sha256': boundary_trace['geometry_sha256'],
                 'checker_sha256': CHECKER_SHA, 'contract_sha256': inputs['closure_contract']['sha256'],
