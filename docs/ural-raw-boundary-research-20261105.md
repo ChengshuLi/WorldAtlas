@@ -109,8 +109,10 @@ map rebuild or existing active-boundary change was performed for this work.
 `scripts/v7-land/mainland-seed-l2/ural_seed_source.py` is a standalone,
 fail-closed integration candidate. Its `bind(boundaries, catalog, pin)` expects
 the normalized boundaries and catalog from the authenticated fresh global
-snapshot's `boundary_records`, plus four existing directories named
-`recipe_dir`, `inputs_dir`, `helpers_dir` and `work_parent`. The directories
+snapshot's `boundary_records`, the fresh snapshot path and SHA-256, plus four
+existing directories named `recipe_dir`, `inputs_dir`, `helpers_dir` and
+`work_parent`. It independently parses the pinned fresh snapshot and checks
+that the caller's selected Ural record and source catalog agree. The directories
 must be disjoint from the work parent. The inputs include all seven linked
 sources, the reassembled raw ArcticDEM tiles, and `review_snapshot.json`: the
 separately pinned earlier Neon export used only as the structured route
@@ -121,8 +123,9 @@ compares every resulting coordinate with the selected Ural line. Its trace
 records the selector snapshot and code pins. It leaves the selected geometry,
 routes, region hash and global snapshot untouched.
 
-Six bounded tests exercise rejection of missing sources, a forged tile hash, modified recipe
-or selector, a changed output and an unselected boundary. A real raw-input
+Eight bounded tests exercise rejection of missing sources, a forged tile hash,
+modified recipe or selector, a changed output, a stale fresh-snapshot record,
+a changing fresh snapshot and an unselected boundary. A real raw-input
 replay passed with the seven read-only Neon source records and reproduced the
 selected line; the combined snapshot used for this test was synthetic. The
 recipe run and the separate GDAL region/closure test used different Python

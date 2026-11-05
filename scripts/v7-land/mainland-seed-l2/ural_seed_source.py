@@ -13,6 +13,7 @@ import sys
 import tempfile
 
 from regions import URAL_CONSTRUCTION_INPUTS, geometry_hash, points
+from export_adapter import boundary_records, load_pinned_snapshot
 
 BOUNDARY = 'ural_kara_coast_to_caspian'
 GEOMETRY_SHA256 = '68390aa6ce5352226777adde3979315e1de85ca26d662c4b1c32610d1d73da66'
@@ -40,15 +41,19 @@ def sha(path):
 def bind(boundaries,catalog,pin):
  """Replay the pinned recipe and require equality to the selected boundary.
 
- pin names four existing directories: recipe_dir, inputs_dir, helpers_dir,
- and work_parent. Inputs include raw R2 readbacks and review_snapshot.json.
- The pinned runner independently validates their expected content.
+ pin names the fresh snapshot and its hash, plus four existing directories:
+ recipe_dir, inputs_dir, helpers_dir, and work_parent. Inputs include raw R2
+ readbacks and the separately pinned historical selector snapshot. The caller
+ must authenticate the fresh export; the gate independently parses its bytes.
  """
  key=('boundary',BOUNDARY)
  if key not in boundaries:
   if pin is not None:raise ValueError('Ural inputs supplied without selected boundary')
   return boundaries,None
- if not isinstance(pin,dict) or set(pin)!={'recipe_dir','inputs_dir','helpers_dir','work_parent'}:raise ValueError('selected Ural boundary requires pinned recipe inputs')
+ if not isinstance(pin,dict) or set(pin)!={'recipe_dir','inputs_dir','helpers_dir','work_parent','snapshot','snapshot_sha256'}:raise ValueError('selected Ural boundary requires pinned recipe inputs')
+ fresh=load_pinned_snapshot(pin['snapshot'],pin['snapshot_sha256'],lambda:None)
+ _,_,fresh_boundaries,fresh_catalog=boundary_records(fresh)
+ if fresh_boundaries.get(key)!=boundaries[key]:raise ValueError('Ural selected record differs from pinned fresh snapshot')
  rec=boundaries[key]
  selected={'type':'LineString','coordinates':[[float(x),float(y)] for x,y in points(rec.get('geometry'))]}
  if rec.get('geometry_sha256')!=GEOMETRY_SHA256 or geometry_hash(selected)!=GEOMETRY_SHA256:raise ValueError('selected Ural geometry mismatch')
@@ -61,6 +66,7 @@ def bind(boundaries,catalog,pin):
   seen.add(rel);sid,digest,tile=URAL_CONSTRUCTION_INPUTS[rel]
   source=catalog.get((ref.get('source_id'),ref.get('version')))
   if ref.get('source_id')!=sid or not isinstance(source,dict) or source.get('kind')!='raw' or source.get('sha256')!=digest:raise ValueError('Ural source catalog mismatch')
+  if fresh_catalog.get((ref.get('source_id'),ref.get('version')))!=source:raise ValueError('Ural catalog differs from pinned fresh snapshot')
   if tile and (source.get('representation')!='manifest_of_raw_parts' or source.get('full_tile_sha256')!=tile):raise ValueError('Ural raw-tile manifest mismatch')
  if seen!=set(URAL_CONSTRUCTION_INPUTS):raise ValueError('Ural construction source set mismatch')
  recipe=Path(pin['recipe_dir']).resolve(strict=True);inputs=Path(pin['inputs_dir']).resolve(strict=True)
@@ -87,8 +93,9 @@ def bind(boundaries,catalog,pin):
   if geometry_hash(geom)!=GEOMETRY_SHA256 or geom!=selected:raise ValueError('Ural raw recipe differs from selected boundary')
   if capture_code()!=captured or any((private/name).read_bytes()!=raw for name,raw in captured.items()):raise ValueError('Ural recipe code changed during replay')
   if sha(inputs/'review_snapshot.json')!=RECIPE_SNAPSHOT_SHA256:raise ValueError('Ural selector snapshot changed')
+  if sha(pin['snapshot'])!=pin['snapshot_sha256']:raise ValueError('fresh selected snapshot changed during Ural replay')
   trace={'boundary_id':BOUNDARY,'geometry_sha256':GEOMETRY_SHA256,'geometry_file_sha256':hashlib.sha256(raw).hexdigest(),
-         'selector_snapshot_sha256':RECIPE_SNAPSHOT_SHA256,'recipe_code_sha256':dict(RECIPE_CODE),
+         'selected_snapshot_sha256':pin['snapshot_sha256'],'selector_snapshot_sha256':RECIPE_SNAPSHOT_SHA256,'recipe_code_sha256':dict(RECIPE_CODE),
          'source_count':len(seen),'method':'raw-hydrobasins-arcticdem-copernicus-osm-and-neon-selector-v1',
          'limitations':['The structured selector has incomplete historical lineage.','Modeled terrain, mapped spring and delta choices are not survey certification.']}
  return boundaries,trace
