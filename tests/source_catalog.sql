@@ -3,6 +3,10 @@
 DO $$
 BEGIN
   BEGIN
+    INSERT INTO atlas.entity_registry_revisions(revision,status) VALUES ('__source_catalog_test_registry','draft');
+    INSERT INTO atlas.geographic_entity_ids(id) VALUES (1) ON CONFLICT DO NOTHING;
+    INSERT INTO atlas.geographic_entities(revision,id,name,level,parent_id)
+      VALUES ('__source_catalog_test_registry',1,'Synthetic parent','continent',NULL);
     INSERT INTO atlas.source_assets
       (source_id, version, title, kind, provider, source_uri, license_name,
        license_uri, attribution, r2_bucket, r2_key, sha256, size_bytes, provenance)
@@ -36,13 +40,13 @@ BEGIN
     END;
     BEGIN
       INSERT INTO atlas.source_builds (build_id, entity_revision, code_revision, status)
-        VALUES ('__test_locked', 'v7-category-bootstrap-v1', 'test', 'locked');
+        VALUES ('__test_locked', '__source_catalog_test_registry', 'test', 'locked');
       RAISE EXCEPTION 'direct lock accepted';
     EXCEPTION WHEN raise_exception THEN
       IF SQLERRM <> 'create a build as draft first' THEN RAISE; END IF;
     END;
     INSERT INTO atlas.source_builds (build_id, entity_revision, code_revision)
-      VALUES ('__test_build', 'v7-category-bootstrap-v1', 'test');
+      VALUES ('__test_build', '__source_catalog_test_registry', 'test');
     BEGIN
       INSERT INTO atlas.source_asset_dependencies VALUES ('__test_b','1','__test_c','1','derived_from');
     BEGIN
@@ -68,7 +72,7 @@ BEGIN
       RAISE EXCEPTION 'missing input accepted';
     EXCEPTION WHEN foreign_key_violation THEN NULL; END;
     INSERT INTO atlas.source_build_inputs VALUES ('__test_build','__test_b','1','raw','mask');
-    INSERT INTO atlas.source_entity_links VALUES ('__test_a','1','v7-category-bootstrap-v1',1,'supports');
+    INSERT INTO atlas.source_entity_links VALUES ('__test_a','1','__source_catalog_test_registry',1,'supports');
     INSERT INTO atlas.source_asset_dependencies VALUES ('__test_b','1','__test_c','1','derived_from');
     BEGIN
       INSERT INTO atlas.source_asset_dependencies VALUES ('__test_c','1','__test_b','1','derived_from');

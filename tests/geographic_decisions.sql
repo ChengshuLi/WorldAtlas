@@ -3,35 +3,41 @@
 -- use decision_acceptance_gate.sql after installing that later gate.
 DO $$ BEGIN
  BEGIN
+  INSERT INTO atlas.entity_registry_revisions(revision,status) VALUES ('__decision_test_registry','draft');
+  INSERT INTO atlas.geographic_entity_ids(id) VALUES (7),(8),(9) ON CONFLICT DO NOTHING;
+  INSERT INTO atlas.geographic_entities(revision,id,name,level,parent_id)
+    SELECT '__decision_test_registry', n, 'Synthetic entity ' || n, 'continent', NULL FROM generate_series(7,9) n;
+  INSERT INTO atlas.review_category_bindings(revision,code,entity_id,physical_class)
+    SELECT '__decision_test_registry', n, n, 'water' FROM generate_series(7,9) n;
   INSERT INTO atlas.source_assets(source_id,version,title,kind,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance)
     VALUES ('__s','1','test','raw','test','test','test','test','test','test','__decision_test',repeat('a',64),1,'{}');
-  INSERT INTO atlas.decision_revisions(revision,entity_revision,evidence) VALUES ('__d','v7-category-bootstrap-v1','{}');
+  INSERT INTO atlas.decision_revisions(revision,entity_revision,evidence) VALUES ('__d','__decision_test_registry','{}');
   INSERT INTO atlas.decision_features VALUES ('__d','f','__s','1','raw-f',repeat('b',64),'{}');
   INSERT INTO atlas.decision_basins VALUES ('__d','b','f','shared_nearest_assigned_shore','{}','{}');
-  INSERT INTO atlas.decision_basin_participants VALUES ('__d','b','v7-category-bootstrap-v1',7);
+  INSERT INTO atlas.decision_basin_participants VALUES ('__d','b','__decision_test_registry',7);
   BEGIN
    UPDATE atlas.decision_revisions SET status='accepted',reviewed_by='test',reviewed_at=now() WHERE revision='__d';
    RAISE EXCEPTION 'accepted with draft registry';
   EXCEPTION WHEN raise_exception THEN IF SQLERRM <> 'accepted decisions require an accepted entity registry' THEN RAISE; END IF; END;
-  UPDATE atlas.entity_registry_revisions SET status='accepted',reviewed_by='test',reviewed_at=now() WHERE revision='v7-category-bootstrap-v1';
+  UPDATE atlas.entity_registry_revisions SET status='accepted',reviewed_by='test',reviewed_at=now() WHERE revision='__decision_test_registry';
   BEGIN
    UPDATE atlas.decision_revisions SET status='accepted',reviewed_by='test',reviewed_at=now() WHERE revision='__d';
    RAISE EXCEPTION 'accepted with one participant';
   EXCEPTION WHEN raise_exception THEN IF SQLERRM <> 'basin has too few participants for its method' THEN RAISE; END IF; END;
-  INSERT INTO atlas.decision_basin_participants VALUES ('__d','b','v7-category-bootstrap-v1',8);
+  INSERT INTO atlas.decision_basin_participants VALUES ('__d','b','__decision_test_registry',8);
   INSERT INTO atlas.decision_basins VALUES ('__d','single','f','single_continent_named_basin','{}','{}');
-  INSERT INTO atlas.decision_basin_participants VALUES ('__d','single','v7-category-bootstrap-v1',9);
+  INSERT INTO atlas.decision_basin_participants VALUES ('__d','single','__decision_test_registry',9);
   UPDATE atlas.decision_revisions SET status='accepted',reviewed_by='test',reviewed_at=now() WHERE revision='__d';
   BEGIN
    DELETE FROM atlas.decision_basin_participants WHERE revision='__d' AND entity_id=8;
    RAISE EXCEPTION 'accepted rows changed';
   EXCEPTION WHEN raise_exception THEN IF SQLERRM <> 'closed decision rows are immutable' THEN RAISE; END IF; END;
   BEGIN
-   UPDATE atlas.review_category_bindings SET code=100 WHERE revision='v7-category-bootstrap-v1' AND code=7;
+   UPDATE atlas.review_category_bindings SET code=100 WHERE revision='__decision_test_registry' AND code=7;
    RAISE EXCEPTION 'accepted entity binding changed';
   EXCEPTION WHEN raise_exception THEN IF SQLERRM <> 'closed entity rows are immutable' THEN RAISE; END IF; END;
   INSERT INTO atlas.source_builds(build_id,entity_revision,code_revision,decision_revision,decision_snapshot_sha256,physical_grid_revision,physical_grid_sha256,software_versions)
-  VALUES ('__b','v7-category-bootstrap-v1','test','__d',repeat('c',64),'grid-1',repeat('d',64),'{}');
+  VALUES ('__b','__decision_test_registry','test','__d',repeat('c',64),'grid-1',repeat('d',64),'{}');
   INSERT INTO atlas.source_build_inputs VALUES ('__b','__s','1','raw','basin');
   BEGIN
    UPDATE atlas.source_builds SET decision_snapshot_sha256=NULL, status='locked' WHERE build_id='__b';

@@ -5,13 +5,14 @@
 DO $$
 DECLARE
  rev constant text := 'test-draft-guards-rollback-20261104';
- erev constant text := 'v7-category-bootstrap-v1';
+ erev constant text := '__draft_guard_test_registry';
  caught boolean;
 BEGIN
  BEGIN
-  IF NOT EXISTS (SELECT 1 FROM atlas.geographic_entities WHERE revision=erev AND id=3) THEN
-   RAISE EXCEPTION 'test requires entity 3 in registry %', erev;
-  END IF;
+  INSERT INTO atlas.entity_registry_revisions(revision,status) VALUES (erev,'draft');
+  INSERT INTO atlas.geographic_entity_ids(id) VALUES (3) ON CONFLICT DO NOTHING;
+  INSERT INTO atlas.geographic_entities(revision,id,name,level,parent_id)
+   VALUES (erev,3,'Synthetic parent','continent',NULL);
   INSERT INTO atlas.decision_revisions(revision,entity_revision,status,evidence) VALUES (rev,erev,'draft','{}');
   INSERT INTO atlas.decision_land_component_witness_rules(revision,rule_id,entity_revision,entity_id,method,selector,evidence)
    VALUES (rev,'valid',erev,3,'component_witness_list_v1','{}','{"execution_status":"selected_for_research"}');

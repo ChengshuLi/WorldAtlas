@@ -49,10 +49,8 @@ header, because the browser explicitly decompresses it.
 
 `migrations/002_entity_registry.sql` defines stable entity identities and revisioned
 names, levels, parents, V7 review-code bindings, and R2 artifact references.
-`003_v7_draft_entity_seed.sql` supplies the existing ten V7 groups as **draft**
-records. Africa's land and water review codes bind to the same entity. The
-migration and seed are files for review; they do not apply themselves or approve
-geography. Colors and the historic V7 land/water codes remain presentation data,
+Geographic entities and review-code bindings are supplied by a versioned Neon
+registry snapshot. The schema migration does not publish or approve geography. Colors and the historic V7 land/water codes remain presentation data,
 not entity IDs. The revisioned schema permits the remaining hierarchy to be added
 without changing the legend code.
 
