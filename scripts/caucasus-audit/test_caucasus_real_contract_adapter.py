@@ -89,6 +89,12 @@ class RealContractAdapterTest(unittest.TestCase):
             request_sha = gate.digest(request)
             kwargs = dict(request_path=request, request_sha256=request_sha, recipe=os.environ['CAUCASUS_RECIPE'], recipe_sha256=recipe_sha, hydro=os.environ['CAUCASUS_HYDRO'], author=os.environ['CAUCASUS_AUTHOR'])
             effective, source_trace = derive_verified(**kwargs)
+            gate_trace = source_trace['source_gate']
+            self.assertEqual(gate_trace['selected_guide'], {'boundary_id': gate.BOUNDARY,
+                             'geometry_sha256': b['geometry_sha256'], 'role': 'guide_and_preservation_guard'})
+            self.assertEqual(gate_trace['reconstruction_inputs'], [
+                {'source_id': key[0], 'version': key[1], 'sha256': sha, 'role': 'raw_reconstruction_input'}
+                for key, sha in gate.SOURCE_PINS.items()])
             derived = effective['mainland_boundaries'][0]
             traces[0]['geometry_sha256'] = derived['geometry_sha256']
             x.seed['region_traces'][0]['geometry_sha256'] = effective['seed_regions'][0]['geometry_sha256']

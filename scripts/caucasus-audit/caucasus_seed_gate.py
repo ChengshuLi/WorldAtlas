@@ -117,6 +117,11 @@ def check(request_path, recipe, recipe_sha, hydro, author):
     return {'schema': 'caucasus-source-seed-gate-v1', 'snapshot_sha256': snapshot_pin['sha256'],
             'selected_geometry_sha256': boundary['geometry_sha256'], 'recipe_sha256': recipe_sha,
             'source_sha256': list(source_before), 'assembly': report,
+            'reconstruction_inputs': [{'source_id': key[0], 'version': key[1], 'sha256': expected,
+                                       'role': 'raw_reconstruction_input'}
+                                      for key, expected in SOURCE_PINS.items()],
+            'selected_guide': {'boundary_id': BOUNDARY, 'geometry_sha256': boundary['geometry_sha256'],
+                               'role': 'guide_and_preservation_guard'},
             'limitations': 'caller authenticates export; source comparisons do not prove watershed correctness'}, derived
 
 
