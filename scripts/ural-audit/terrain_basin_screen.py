@@ -52,17 +52,20 @@ def screen(dem,dem_sha,basins,line,west,east,offsets,spacing):
         elif hase:classifications[index]=2;outlet_stats['east']+=1
         else:outlet_stats['unknown']+=1
     labels=np.zeros((h,w),dtype=np.uint8);ok=roots>=0;labels[ok]=classifications[roots[ok]]
-    route=LineString([to_metric(*p) for p in line]);station_distances=np.arange(0,route.length+0.001,spacing);counts={str(o):{} for o in offsets}
+    route=LineString([to_metric(*p) for p in line]);station_distances=np.arange(0,route.length+0.001,spacing);counts={str(o):{} for o in offsets};details=[]
     for dist in station_distances:
         mid=route.interpolate(dist);l=route.interpolate(max(0,dist-5));r=route.interpolate(min(route.length,dist+5));dx=r.x-l.x;dy=r.y-l.y;norm=np.hypot(dx,dy)
         if norm==0:raise ValueError('undefined tangent')
+        station={'distance_m':float(dist),'point_lonlat':list(to_geo(mid.x,mid.y)),'pairs':{}}
         for off in offsets:
             pair=[]
             for sign in (-1,1):
                 x=mid.x-sign*off*dy/norm;y=mid.y+sign*off*dx/norm;row,col=rasterio.transform.rowcol(trans,x,y)
-                pair.append(int(labels[row,col]) if 0<=row<h and 0<=col<w else 0)
+                pair.append(int(labels[row,col]) if 0<=row<h and 0<=col<w else -1)
             key='-'.join(map(str,pair));c=counts[str(off)];c[key]=c.get(key,0)+1
-    return {'dem_sha256':dem_sha,'shape':[h,w],'valid_cells':int(valid.sum()),'unrouted_valid_cells':int(np.count_nonzero(valid&(roots<0))),'outlets':outlet_stats,'label_cell_counts':{'west':int((labels==1).sum()),'east':int((labels==2).sum()),'unknown_valid':int((valid&(labels==0)).sum())},'line_length_m':route.length,'stations':len(station_distances),'offset_pair_counts':counts,'note':'Local DSM D8 and basin-root model; unknown includes masked or other-root outlets. No boundary selection is implied.'}
+            station['pairs'][str(off)]=pair
+        details.append(station)
+    return {'dem_sha256':dem_sha,'shape':[h,w],'valid_cells':int(valid.sum()),'unrouted_valid_cells':int(np.count_nonzero(valid&(roots<0))),'outlets':outlet_stats,'label_cell_counts':{'west':int((labels==1).sum()),'east':int((labels==2).sum()),'unknown_valid':int((valid&(labels==0)).sum())},'line_length_m':route.length,'stations':len(station_distances),'offset_pair_counts':counts,'station_details':details,'note':'Local DSM D8 and basin-root model; pair labels -1=outside crop, 0=masked or unclassified, 1=west group, 2=east group. No boundary selection is implied.'}
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--dem',required=True);p.add_argument('--dem-sha',required=True);p.add_argument('--basin',nargs=3,action='append',required=True,metavar=('ZIP','SHA','SHP'));p.add_argument('--line',required=True);p.add_argument('--west-root',type=int,action='append',required=True);p.add_argument('--east-root',type=int,action='append',required=True);p.add_argument('--offset',type=float,action='append',required=True);p.add_argument('--spacing',type=float,default=250);p.add_argument('--output',required=True)
