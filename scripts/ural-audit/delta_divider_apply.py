@@ -36,14 +36,14 @@ def sides(line, bounds, europe_witness, asia_witness):
 def update_row(old, physical, xs, lat, europe, asia, bounds, codec):
     w, s, e, n = bounds
     ec, ac, lands = codec['europe_code'], codec['asia_code'], codec['land_codes']
-    # Fail closed for a center on a scope edge, including tiny arithmetic
-    # differences in deriving centers from the grid origin and step.
+    # Retain the reviewed tolerance for arithmetic near a scope edge.
     tol = 1e-12
     x_in = (xs >= w - tol) & (xs <= e + tol)
     y_in = s - tol <= lat <= n + tol
     edge = y_in & (((np.abs(xs - w) <= tol) | (np.abs(xs - e) <= tol)) |
                    (x_in & (abs(lat - s) <= tol or abs(lat - n) <= tol)))
-    if np.any(edge & (physical == 17)): raise ValueError('land center on scope boundary')
+    if np.any(edge & ((physical == 17) | np.isin(old, lands))):
+        raise ValueError('land center on scope boundary')
     inside = (xs > w) & (xs < e) & (lat > s) & (lat < n)
     ep = contains_xy(europe, xs, lat) & inside
     ap = contains_xy(asia, xs, lat) & inside
@@ -53,7 +53,10 @@ def update_row(old, physical, xs, lat, europe, asia, bounds, codec):
     new = old.copy()
     new[allowed & ep] = ec
     new[allowed & ap] = ac
-    return new, {'land_centers': int(np.count_nonzero(inside & (physical == 17))),
+    other = inside & (physical == 17) & ~np.isin(old, (ec, ac))
+    labels, label_counts = np.unique(old[other], return_counts=True)
+    return new, {'other_land_labels_by_code': {str(int(k)): int(v) for k,v in zip(labels, label_counts)},
+                 'land_centers': int(np.count_nonzero(inside & (physical == 17))),
                  'other_land_labels': int(np.count_nonzero(inside & (physical == 17) & ~np.isin(old, (ec, ac)))),
                  'europe_to_asia': int(np.count_nonzero((old == ec) & (new == ac))),
                  'asia_to_europe': int(np.count_nonzero((old == ac) & (new == ec)))}
@@ -73,6 +76,7 @@ def apply(candidate_rows, candidate_runs, physical_rows, physical_runs, line, cf
     y0, y1 = max(0, int((north - n) // step)), min(height, int((north - s) // step) + 1)
     all_x = np.arange(width, dtype=np.int64); scope_x = all_x[x0:x1]; lons = west + (scope_x + .5) * step
     offsets = np.zeros(height + 1, dtype='<u4'); totals = dict.fromkeys(('land_centers','other_land_labels','europe_to_asia','asia_to_europe'), 0)
+    totals['other_land_labels_by_code'] = {}
     with open(out_runs, 'xb') as out:
         for y in range(height):
             row = candidate_runs[candidate_rows[y]:candidate_rows[y+1]]
@@ -83,7 +87,9 @@ def apply(candidate_rows, candidate_runs, physical_rows, physical_runs, line, cf
                 old_scope = row[np.searchsorted(row[:, 0], scope_x, side='right'), 1]
                 physical = pro[np.searchsorted(pro[:, 0], scope_x, side='right'), 1]
                 new_scope, counts = update_row(old_scope, physical, lons, north - (y + .5) * step, europe, asia, bounds, cfg)
-                for key in totals: totals[key] += counts[key]
+                for key in ('land_centers','other_land_labels','europe_to_asia','asia_to_europe'): totals[key] += counts[key]
+                for code, count in counts['other_land_labels_by_code'].items():
+                    totals['other_land_labels_by_code'][code] = totals['other_land_labels_by_code'].get(code, 0) + count
                 if np.any(old_scope != new_scope):
                     values = row[np.searchsorted(row[:, 0], all_x, side='right'), 1].copy()
                     values[x0:x1] = new_scope
@@ -108,7 +114,8 @@ def main():
     counts = apply(*arrays, line, cfg, outputs[0], outputs[1])
     report = {'schema':'ural-delta-divider-apply-v1','status':'research-candidate','config':cfg,'counts':counts,
               'output_sha256':{'rows':sha(outputs[0]),'runs':sha(outputs[1])},
-              'limitations':['Assignment is bounded by config scope and selected divider; ties on the divider fail.', 'Other continental labels and water are preserved.', 'Current-candidate status must be verified independently before integration.']}
+              'preserved_other_land_labels_require_review': bool(counts['other_land_labels']),
+              'limitations':['Assignment is bounded by config scope and selected divider; land centers on divider or scope boundary fail.', 'Other continental labels and water are preserved.', 'Current-candidate status must be verified independently before integration.']}
     with open(outputs[2], 'x') as f: json.dump(report,f,sort_keys=True,indent=2)
     print(json.dumps(report))
 
