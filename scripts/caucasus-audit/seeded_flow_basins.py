@@ -6,16 +6,24 @@ not a boundary-selection tool.
 """
 from collections import Counter
 import numpy as np
-from pyproj import Geod
+from pyproj import Geod, CRS
 from priority_flood import priority_flood
 
 GEOD=Geod(ellps='WGS84')
 
 
-def flow_graph(elevation,valid,transform):
-    if not hasattr(transform,'a') or transform.b or transform.d or transform.a<=0 or transform.e>=0:
-        raise ValueError('north-up unrotated WGS84 raster transform required')
+def flow_graph(elevation,valid,transform,crs):
+    try:
+        crs_value=CRS.from_user_input(crs)
+    except Exception as exc:
+        raise ValueError('explicit EPSG:4326 raster CRS required') from exc
+    if crs_value.to_epsg()!=4326:
+        raise ValueError('explicit EPSG:4326 raster CRS required')
+    if not hasattr(transform,'a') or not all(np.isfinite(v) for v in (transform.a,transform.b,transform.c,transform.d,transform.e,transform.f)) or transform.b or transform.d or transform.a<=0 or transform.e>=0:
+        raise ValueError('finite north-up unrotated WGS84 raster transform required')
     z=np.asarray(elevation,dtype=float);valid=np.asarray(valid,dtype=bool)
+    if z.ndim!=2 or not (-180<=transform.c<=180 and -180<=transform.c+z.shape[1]*transform.a<=180 and -90<=transform.f<=90 and -90<=transform.f+z.shape[0]*transform.e<=90):
+        raise ValueError('WGS84 raster extent outside longitude/latitude bounds')
     filled,parent=priority_flood(z,valid);h,w=z.shape
     rows,cols=np.indices((h,w));lon=transform.c+(cols+.5)*transform.a;lat=transform.f+(rows+.5)*transform.e
     best=np.zeros((h,w));nxt=np.array(parent,copy=True)
