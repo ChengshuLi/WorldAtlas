@@ -59,11 +59,13 @@ A fresh macOS run re-extracted the pinned HydroBASINS SHP and regenerated the ed
 For a bounded Linux replay, check whether the Shapely-capable Python also has pyshp, pyproj and SciPy. If it does, run the source assembly in that Python and the GDAL region fixture in the GDAL-capable Python; verify the same intermediate hashes between processes. If any dependency is absent, name the exact package and Python environment instead of substituting a received derived file as source reproduction.
 
 
-## Optional isolated Linux dependency handoff
+## Unused dependency handoff
+
+The user directed that this dependency handoff not be installed or used. It is recorded here only for provenance; the Mac replay and Linux GDAL fixture are separate evidence and must not be described as one same-environment run.
 
 A private Library archive `caucasus-linux-py312-dependencies.tar.gz` (ID `libfile_eb456da65e9081919f91287c738aea83`, SHA-256 `662d35a3948aa3969e199db06e4bae0198e4c487376953dc1f8205cbb7f6408a`) contains:
 
 * Pure-Python PyShp 2.4.2 `shapefile.py`, SHA-256 `f936765fc0627158310b72975d5f30b3a761973683c6d2753a13aa066f37d74b`, with its MIT license. The file was copied from the local installed distribution and compared byte-for-byte with the [upstream 2.4.2 release source](https://github.com/GeospatialPython/pyshp/blob/158be67/shapefile.py).
 * The [official PyPI PyProj 3.7.2](https://pypi.org/project/pyproj/3.7.2/#files) CPython 3.12 manylinux x86-64 wheel, SHA-256 `1edc34266c0c23ced85f95a1ee8b47c9035eae6aca5b6b340327250e8e281630`, matching PyPI's published hash. It requires Linux x86-64, CPython 3.12 and glibc ≥2.28; verify compatibility before use. The wheel includes its license.
 
-The archive's README describes an offline, temporary target-directory setup and requires checking `certifi`, Shapely and SciPy separately. Do not install into a system interpreter. This was not tested on the Linux builder, and PyProj 3.7.2 differs from the macOS replay's 3.2.1; differing PROJ/GEOS versions may change numeric output. Recompute and compare all recipe and output hashes rather than presuming equivalence. No package is a raw map source or a selected Neon input.
+The archive was not used, and no installation should be attempted. This was not tested on the Linux builder, and PyProj 3.7.2 differs from the macOS replay's 3.2.1; differing PROJ/GEOS versions may change numeric output. Recompute and compare all recipe and output hashes rather than presuming equivalence. No package is a raw map source or a selected Neon input.
