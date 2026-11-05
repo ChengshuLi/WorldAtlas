@@ -4,7 +4,7 @@ These files preserve selected WorldAtlas V7 processing and audit source. They ar
 
 ## Provenance
 
-The preserved partition core, RLE input module, and the repository's `scripts/exclusive_outputs.py` match the hashes recorded when the final ocean-fill run launched. The shore-audit and coastal scripts are preserved to retain source and dependencies; their inclusion here does not establish that this directory alone reproduces the published result.
+The preserved partition core, RLE input module, and the repository's `scripts/exclusive_outputs.py` match the hashes recorded when the final ocean-fill run launched.
 
 ## Recovery limitations
 
@@ -16,7 +16,7 @@ Before attempting a rebuild, identify and verify the actual inputs and remaining
 
 ## Known source gaps
 
-The coastal manifest identifies three source versions: v2, v3 and v4. The saved coastal builder matches v4; v2 and v3 were not found in the workspace and temporary files searched. Some tiles used each version. Their absence does not affect the already generated V7 map, but it prevents an exact source-level reproduction until they are recovered or independently replaced and validated.
+The historical coastal manifest identifies three source versions: v2, v3 and v4. Some tiles used each version, and exact source-level reproduction is not established. Those historical water scripts are outside the current land-only work.
 
 The final composition and V2-difference outputs have input/output provenance, but their exact executable versions have not been established. Do not describe a candidate script as the version used without further evidence.
 
