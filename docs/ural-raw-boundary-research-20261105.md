@@ -40,11 +40,15 @@ The northern construction was rerun with all four cut edges checked against the
 raw source and the complete geometry was reproduced byte-for-byte. The line is
 simple and joins the existing water-closure endpoints. These checks do not make
 it an approved or pipeline-ready boundary. The Kara endpoint's direct 22.13 m
-connector is a documented construction rather than a surveyed shoreline.
+connector is a documented construction rather than a surveyed shoreline. An
+exact rational grid-contact check of its decimal coordinates touches one land
+cell (89987, 7743), while the adjoining first exterior-closure segment touches
+that land cell and the neighboring water cell (89987, 7742). This is a local
+physical-mask check, not a surveyed shoreline or a full closure validation.
 
 Remaining work: package and test the entire deterministic construction,
 including source and intermediate checks; substantiate the principal-headwater
-and terrain choices to the required standard; verify physical contact of the
-new Kara connector; and persist the supported structured result and accurate
+and terrain choices to the required standard; validate the complete Kara
+closure under the intended terminal policy; and persist the supported structured result and accurate
 source relationships in Neon. Raw assets belong in R2. No map rebuild or
 active-boundary change was performed for this experiment.
