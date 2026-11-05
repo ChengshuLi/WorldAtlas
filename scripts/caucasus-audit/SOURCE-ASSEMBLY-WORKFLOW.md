@@ -89,3 +89,6 @@ python -m unittest -v test_caucasus_real_contract_adapter
 ```
 
 Separately, the Linux builder's real GDAL region-builder fixture passed as recorded in [BOUNDED-GDAL-HANDOFF.md](BOUNDED-GDAL-HANDOFF.md). Neither bounded result integrates the wrapper and report into the frozen orchestrator or proves real land-cell output. The real builder must reproduce source-to-line independently in its environment, review the integration and pin code and runtime before the selected workflow is used. No recipe was written to Neon.
+
+
+The source-and-validator fixture also confirms that the current strict validator rejects the derived seed trace when presented with the unchanged selected view; it accepts that trace only against the independently reconstructed effective view. The latest local focused run passed 35 tests. These are still bounded, synthetic-closure tests. In accordance with the user's instruction, do not install or use the separate dependency handoff and do not describe the Mac replay and Linux GDAL fixture as a single-environment run.
