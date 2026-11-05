@@ -158,3 +158,18 @@ export, source custody, physical inputs and supplied contract. The contract
 used in the screen was assembled for research, and the physical report does not
 independently establish original producer execution. This check does not invoke
 the complete seed producer or the outer stage-2 runtime and does not build a map.
+
+## Core-side source binding
+
+`panama_core_validation.validate_panama_source` is a separately callable,
+research-stage check for the direct core. Given an authenticated selected
+snapshot, the seed report and the archive pin from the same request, it checks
+the selected raw-source catalog and supporting relationship, independently
+reassembles the archive, compares the selected line and producer source trace,
+and requires the selected North America region and seed trace to consume the
+complete line. Run `python3 -m unittest -v test_panama_core_validation` from
+`scripts/v7-land/mainland-seed-l2` for the bounded positive and rejection tests.
+The outer integrator must explicitly call and pin this module and its frozen
+assembler dependencies in both core and resume identity; it is not yet wired
+into the active outer runtime. It complements, rather than replaces, closure,
+physical-lineage, region and full seed validation.
