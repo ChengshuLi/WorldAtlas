@@ -15,6 +15,7 @@ import contracts
 import test_contracts_qualified
 import caucasus_stage2_validation as adapter
 import caucasus_seed_gate as gate
+import caucasus_stage2_binding as binding
 from caucasus_effective_snapshot import derive_verified, geomhash
 
 
@@ -87,7 +88,7 @@ class RealContractAdapterTest(unittest.TestCase):
             request.write_text(json.dumps({'inputs': {'snapshot': {'path': str(snapshot), 'sha256': gate.digest(snapshot)}}}, sort_keys=True, separators=(',', ':')))
             request_sha = gate.digest(request)
             kwargs = dict(request_path=request, request_sha256=request_sha, recipe=os.environ['CAUCASUS_RECIPE'], recipe_sha256=recipe_sha, hydro=os.environ['CAUCASUS_HYDRO'], author=os.environ['CAUCASUS_AUTHOR'])
-            effective, _ = derive_verified(**kwargs)
+            effective, source_trace = derive_verified(**kwargs)
             derived = effective['mainland_boundaries'][0]
             traces[0]['geometry_sha256'] = derived['geometry_sha256']
             x.seed['region_traces'][0]['geometry_sha256'] = effective['seed_regions'][0]['geometry_sha256']
@@ -98,6 +99,18 @@ class RealContractAdapterTest(unittest.TestCase):
                 contracts.validate_selected_seed_decisions(x.snapshot, x.seed, x.groups, x.codes, x.metric)
             pins = {n: adapter.digest(adapter.HERE / n) for n in adapter.CODE}
             result, _ = adapter.validate(contracts.validate_selected_seed_decisions, x.seed, x.groups, x.codes, x.metric, code_sha256=pins, **kwargs)
+            self.assertEqual(result, x.snapshot['land_baseline_policy'])
+            producer_sha = 'e' * 64
+            report = dict(source_trace['source_gate'], request_sha256=request_sha,
+                          seed_producer_executed=True, seed_producer_sha256=producer_sha,
+                          seed_worker_sha256=None, effective_snapshot=source_trace['effective_snapshot'])
+            cfg = {'recipe': {'path': str(kwargs['recipe']), 'sha256': recipe_sha},
+                   'hydro': {'path': str(kwargs['hydro']), 'sha256': gate.SOURCE_PINS[next(iter(gate.SOURCE_PINS))]},
+                   'author': {'path': str(kwargs['author']), 'sha256': list(gate.SOURCE_PINS.values())[1]},
+                   'code_sha256': {n: gate.digest(binding.HERE / n) for n in binding.CODE}}
+            result, _ = binding.validate_seed(cfg, request, request_sha, report, producer_sha,
+                                              contracts.validate_selected_seed_decisions, x.seed,
+                                              x.groups, x.codes, x.metric)
             self.assertEqual(result, x.snapshot['land_baseline_policy'])
 
 
