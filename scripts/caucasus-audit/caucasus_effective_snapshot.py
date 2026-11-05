@@ -37,6 +37,12 @@ def derive(snapshot, derived_geometry, gate_report, original_snapshot_sha256):
         raise ValueError('derived line changes a closure endpoint')
     effective = copy.deepcopy(snapshot)
     before = {('boundary', b['boundary_id']): b for b in snapshot['mainland_boundaries']}
+    if len(before) != len(snapshot['mainland_boundaries']):
+        raise ValueError('duplicate boundary identity')
+    if len({r['route_id'] for r in snapshot['routes']}) != len(snapshot['routes']):
+        raise ValueError('duplicate route identity')
+    if len({r['region_id'] for r in snapshot['seed_regions']}) != len(snapshot['seed_regions']):
+        raise ValueError('duplicate region identity')
     before.update({('route', r['route_id']): r for r in snapshot['routes']})
     after = {('boundary', b['boundary_id']): b for b in effective['mainland_boundaries']}
     after.update({('route', r['route_id']): r for r in effective['routes']})
