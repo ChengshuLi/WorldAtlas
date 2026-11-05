@@ -4,7 +4,7 @@ These files preserve selected WorldAtlas V7 processing and audit source. They ar
 
 ## Provenance
 
-The preserved partition core, RLE input module, and the repository's `scripts/exclusive_outputs.py` match the hashes recorded when the final ocean-fill run launched. The closed-water classifier matches the hash in the final closed-water audit. The shore-audit and coastal scripts are preserved to retain source and dependencies; their inclusion here does not establish that this directory alone reproduces the published result.
+The preserved partition core, RLE input module, and the repository's `scripts/exclusive_outputs.py` match the hashes recorded when the final ocean-fill run launched. The shore-audit and coastal scripts are preserved to retain source and dependencies; their inclusion here does not establish that this directory alone reproduces the published result.
 
 ## Recovery limitations
 
