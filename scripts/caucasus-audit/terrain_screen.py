@@ -4,7 +4,8 @@ import argparse
 import json
 import math
 from pathlib import Path
-from osgeo import gdal, osr
+from osgeo import gdal
+from geodesic_tools import METHOD, offset_point, require_samples, transformer
 
 OFFSETS = (-1000, -500, -250, -100, 0, 100, 250, 500, 1000)
 
@@ -74,41 +75,20 @@ def sample_point(tiles, longitude, latitude, require_stack=False):
             'height_m': value if valid else None, 'mask': quality, 'stack': stack_count}
 
 
-def transformer(epsg):
-    geographic = osr.SpatialReference()
-    geographic.ImportFromEPSG(4326)
-    geographic.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    projected = osr.SpatialReference()
-    projected.ImportFromEPSG(epsg)
-    if not projected.IsProjected() or abs(projected.GetLinearUnits() - 1.0) > 1e-9:
-        raise ValueError('offset CRS must be projected and measured in metres')
-    projected.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    return osr.CoordinateTransformation(geographic, projected), osr.CoordinateTransformation(projected, geographic)
-
-
-def screen(features, vertices, tiles, section, epsg, require_stack=False):
-    forward, reverse = transformer(epsg)
-    output = []
+def screen(document, vertices, tiles, section, start, end, epsg, require_stack=False):
+    features=require_samples(document,epsg,vertices,section,start,end)
+    forward,reverse=transformer(epsg)
+    output=[]
     for feature in features:
-        properties = feature['properties']
-        if properties['section'] != section:
-            continue
-        lon, lat = feature['geometry']['coordinates']
-        x, y = forward.TransformPoint(lon, lat)[:2]
-        idx = properties['source_edge_index']
-        ax, ay = forward.TransformPoint(*vertices[idx])[:2]
-        bx, by = forward.TransformPoint(*vertices[idx + 1])[:2]
-        dx, dy = bx - ax, by - ay
-        norm = math.hypot(dx, dy)
-        if not norm:
-            raise ValueError(f'zero-length source edge at index {idx}')
-        dx, dy = dx / norm, dy / norm
-        offsets = {}
+        properties=feature['properties']
+        if properties['section']!=section:continue
+        lon,lat=feature['geometry']['coordinates'];idx=properties['source_edge_index']
+        if type(idx) is not int or not 0<=idx<len(vertices)-1:raise ValueError('invalid source edge index')
+        offsets={}
         for offset in OFFSETS:
-            lon2, lat2 = reverse.TransformPoint(x - dy * offset, y + dx * offset)[:2]
-            offsets[str(offset)] = sample_point(tiles, lon2, lat2, require_stack)
-        output.append({'distance_m': properties['distance_along_section_m'],
-                       'coordinates': [lon, lat], 'offsets': offsets})
+            lon2,lat2=offset_point((lon,lat),vertices[idx],vertices[idx+1],offset,forward,reverse)
+            offsets[str(offset)]=sample_point(tiles,lon2,lat2,require_stack)
+        output.append({'distance_m':properties['distance_along_section_m'],'coordinates':[lon,lat],'offsets':offsets})
     return output
 
 
@@ -128,16 +108,18 @@ def main():
     parser.add_argument('--tile', action='append', required=True, help='NddEddd:DSM.tiff:MSK.tiff[:STK.tiff]; repeat for each tile')
     parser.add_argument('--require-stack', action='store_true', help='Require original STK > 0 at every included pixel')
     parser.add_argument('--section', type=int, required=True)
-    parser.add_argument('--epsg', type=int, required=True, help='Suitable local projected CRS for metric offsets')
+    parser.add_argument('--start-vertex',type=int,required=True)
+    parser.add_argument('--end-vertex',type=int,required=True)
+    parser.add_argument('--epsg',type=int,required=True,help='Projection defining the original source-line geometry')
     parser.add_argument('--output', required=True)
     args = parser.parse_args()
-    features = json.loads(Path(args.samples).read_text())['features']
+    document = json.loads(Path(args.samples).read_text())
     line = json.loads(Path(args.line).read_text())
     if line.get('type') != 'LineString':
         raise ValueError('line must be a GeoJSON LineString geometry')
-    results = screen(features, line['coordinates'], read_tiles(args.tile), args.section, args.epsg, args.require_stack)
+    results = screen(document, line['coordinates'], read_tiles(args.tile), args.section, args.start_vertex, args.end_vertex, args.epsg, args.require_stack)
     output = {'method': 'Point samples and nearest raster pixels, not proof of watershed or continuous alignment. Mask 0 only; surface model may include vegetation and buildings.',
-              'section': args.section, 'projected_epsg': args.epsg, 'require_stack': args.require_stack,
+              'section': args.section, 'distance_method': METHOD, 'source_geometry_epsg': args.epsg, 'source_line_sha256':document['source_line_sha256'], 'start_vertex':document['start_vertex'], 'end_vertex':document['end_vertex'], 'require_stack': args.require_stack,
               'summary': {str(d): summary(results, d) for d in (250, 500, 1000)}, 'samples': results}
     Path(args.output).write_text(json.dumps(output, indent=2) + '\n')
 

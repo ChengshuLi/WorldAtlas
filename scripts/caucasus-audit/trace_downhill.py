@@ -5,22 +5,34 @@ See README for assumptions, limitations and input format. Requires GDAL and NumP
 """
 import argparse
 from collections import deque
+from functools import lru_cache
 import json
 import math
 from pathlib import Path
 
 import numpy as np
 from osgeo import gdal, ogr, osr
+from geodesic_tools import GEOD, METHOD, line_sha256
 
 
-def trace(z, valid, start, dx, dy, flat_limit=0, max_steps=10000):
+def trace(z, valid, start, transform, flat_limit=0, max_steps=10000):
     """Return pixel path and stopping reason; never route uphill.
 
     A cell touching invalid or cropped data cannot be resolved conservatively.
     If enabled, a bounded, equal-height component is explored and the nearest
-    downhill exit is selected, with slope as secondary criterion.
+    downhill exit is selected by fewest grid steps, with WGS84 slope as secondary criterion.
     """
     height, width = z.shape
+    if len(transform)!=6 or any(not math.isfinite(x) for x in transform) or transform[2]!=0 or transform[4]!=0 or transform[1]<=0 or transform[5]>=0:
+        raise ValueError('north-up geographic transform required')
+    @lru_cache(maxsize=8192)
+    def step_distance(row, dr, dc):
+        lat=transform[3]+(row+.5)*transform[5]
+        other=transform[3]+(row+dr+.5)*transform[5]
+        if not (-90<=lat<=90 and -90<=other<=90):raise ValueError('pixel latitude outside WGS84')
+        _,_,metres=GEOD.inv(0,lat,dc*transform[1],other)
+        if not math.isfinite(metres) or metres<=0:raise ValueError('invalid geodesic neighbor distance')
+        return metres
     r, c = start
     if not (0 <= r < height and 0 <= c < width and valid[r, c]):
         return [], 'invalid_start'
@@ -48,7 +60,7 @@ def trace(z, valid, start, dx, dy, flat_limit=0, max_steps=10000):
                         uncertain = True
                         continue
                     value = int(z[nr, nc])
-                    distance = math.hypot(dr * dy, dc * dx)
+                    distance = step_distance(rr,dr,dc)
                     if value < elevation:
                         exits.append((depth[(rr, cc)], -(elevation - value) / distance, rr, cc, nr, nc))
                     elif flat_limit and value == elevation and (nr, nc) not in previous:
@@ -144,6 +156,9 @@ def main():
     p.add_argument('--flat-limit', type=int, default=0, help='0: stop at flats; positive: maximum connected flat cells')
     p.add_argument('--median-window', type=int, default=1, help='odd pixel window for sensitivity check; 1 means no filter')
     p.add_argument('--crop-radius-pixels', type=int, help='read a bounded square around each profile center')
+    p.add_argument('--section',type=int,required=True)
+    p.add_argument('--start-vertex',type=int,required=True)
+    p.add_argument('--end-vertex',type=int,required=True)
     p.add_argument('--output', required=True)
     args = p.parse_args()
     if args.flat_limit < 0:
@@ -160,7 +175,8 @@ def main():
         raise ValueError('line must be a GeoJSON LineString')
     results = []
     profile_data = json.loads(Path(args.profiles).read_text())
-    profiles = profile_data['samples'] if isinstance(profile_data, dict) else profile_data
+    if not isinstance(profile_data,dict) or profile_data.get('distance_method')!=METHOD or profile_data.get('source_line_sha256')!=line_sha256(line_data['coordinates']) or profile_data.get('section')!=args.section or profile_data.get('start_vertex')!=args.start_vertex or profile_data.get('end_vertex')!=args.end_vertex or not 0<=args.start_vertex<args.end_vertex<len(line_data['coordinates']):raise ValueError('matching WGS84 source-line profile required')
+    profiles=profile_data['samples']
     for profile in profiles:
         results_for_profile = {}
         by_offset = {s['offset_m']: s for s in profile['samples']}
@@ -180,8 +196,7 @@ def main():
             else:
                 z, valid, gt = tiles[tile]
             c, r = int((lon - gt[0]) / gt[1]), int((lat - gt[3]) / gt[5])
-            path, status = trace(z, valid, (r, c), 30.87 * math.cos(math.radians(lat)), 30.87,
-                                 flat_limit=args.flat_limit)
+            path, status = trace(z, valid, (r, c), gt, flat_limit=args.flat_limit)
             coordinates = [[gt[0] + (cc + .5)*gt[1], gt[3] + (rr + .5)*gt[5]] for rr, cc in path]
             obj = {'status': status, 'path': coordinates, 'start_height_m': int(z[r,c]) if path else None}
             if len(path) > 1:
@@ -200,7 +215,7 @@ def main():
             merge = next(((lookup[tuple(point)], j, point) for j,point in enumerate(b)
                           if tuple(point) in lookup), None)
             pairs[str(offset)] = {'merged': merge is not None, 'merge': merge}
-        results.append({'section': profile.get('section'), 'distance_m': profile.get('distance_m'),
+        results.append({'distance_method': METHOD, 'section': profile.get('section'), 'distance_m': profile.get('distance_m'),
                         'center': profile.get('center'), 'routes': results_for_profile, 'pairs': pairs})
     Path(args.output).write_text(json.dumps(results, indent=2))
 

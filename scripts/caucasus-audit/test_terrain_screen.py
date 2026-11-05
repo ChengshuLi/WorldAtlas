@@ -2,6 +2,9 @@ import unittest
 import numpy as np
 from osgeo import gdal, osr
 import terrain_screen as module
+import sample_line
+from geodesic_tools import GEOD
+from unittest.mock import patch
 
 
 class ScreenTest(unittest.TestCase):
@@ -15,6 +18,31 @@ class ScreenTest(unittest.TestCase):
     def test_reject_geographic_offset_crs(self):
         with self.assertRaises(ValueError):
             module.transformer(4326)
+
+    def test_offsets_are_wgs84_and_old_samples_fail(self):
+        line=[[1,1],[1.01,1]];doc=sample_line.generate(line,0,1,7,500,32631)
+        def dummy(tiles,lon,lat,require_stack=False):
+            return {'status':'valid_mask_0','longitude':lon,'latitude':lat,'height_m':100}
+        with patch.object(module,'sample_point',side_effect=dummy):
+            result=module.screen(doc,line,{},7,0,1,32631)
+        center=result[0]['coordinates']
+        for offset in (-1000,-500,100,500,1000):
+            sample=result[0]['offsets'][str(offset)]
+            self.assertAlmostEqual(GEOD.inv(*center,sample['longitude'],sample['latitude'])[2],abs(offset),delta=1e-5)
+        with self.assertRaisesRegex(ValueError,'regenerate'):
+            module.screen({'type':'FeatureCollection','features':doc['features']},line,{},7,0,1,32631)
+        with self.assertRaisesRegex(ValueError,'regenerate'):
+            module.screen(doc,line,{},7,0,1,32632)
+
+    def test_earlier_edge_change_or_section_bounds_reject_stale_samples(self):
+        line=[[1,1],[1.01,1],[1.02,1]]
+        doc=sample_line.generate(line,0,2,7,1500,32631)
+        self.assertEqual(doc['features'][1]['properties']['source_edge_index'],1)
+        changed=[[.99,1],*line[1:]]
+        with self.assertRaisesRegex(ValueError,'regenerate'):
+            module.screen(doc,changed,{},7,0,2,32631)
+        with self.assertRaisesRegex(ValueError,'section bounds'):
+            module.screen(doc,line,{},7,1,2,32631)
 
     def test_raster_index_and_mask(self):
         driver = gdal.GetDriverByName('MEM')
