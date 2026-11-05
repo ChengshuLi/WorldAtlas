@@ -6,6 +6,7 @@ resolution are synthetic. The frozen executable allowlist is used unchanged.
 No production data is changed and no map is built.
 """
 import copy
+import functools
 import hashlib
 import importlib.util
 import json
@@ -30,6 +31,7 @@ FIXTURE_SHA = '8d4158b13e9100c4de2ff7f7697c97d71d17ed4a2f7edfd3d09c0df126e78a5d'
 @unittest.skipUnless(all(os.getenv(x) for x in REQUIRED), 'real source and direct fixture paths required')
 class CombinedSourceStrictCoreFixture(unittest.TestCase):
     def test_both_sources_direct_producer_and_strict_core(self):
+        self.assertEqual(gate.digest(contracts.__file__), 'f703e5edcb0f67cc908aa0812e5b194b480ea2916c017464e51d1bfa0066c7f1')
         direct = Path(os.environ['DIRECT_SEED_DIR']).resolve(strict=True)
         self.assertEqual(gate.digest(direct / 'seed_producer.py'), PRODUCER_SHA)
         self.assertEqual(gate.digest(direct / 'test_seed_producer.py'), FIXTURE_SHA)
@@ -175,9 +177,8 @@ class CombinedSourceStrictCoreFixture(unittest.TestCase):
                 'physical_rows_sha256':prows['sha256'], 'physical_runs_sha256':pruns['sha256'],
                 'physical_report_sha256':gate.digest(report)})
             for selected_route in snap['routes']:
-                selected_route['provenance'].update({'physical_rows_sha256':prows['sha256'], 'physical_runs_sha256':pruns['sha256'],
-                    'physical_report_sha256':gate.digest(report), 'contract_sha256':inputs['closure_contract']['sha256'],
-                    'checker_sha256':inputs['closure_checker']['sha256']})
+                selected_route['provenance'].update({'physical_rows_sha256':'1'*64, 'physical_runs_sha256':'2'*64,
+                    'physical_report_sha256':'3'*64, 'contract_sha256':'4'*64, 'checker_sha256':'5'*64})
             sp.write_text(json.dumps(snap));inputs['snapshot'] = peer.pin(sp)
             resolution['snapshot_sha256'] = inputs['snapshot']['sha256'];rp.write_text(json.dumps(resolution));inputs['resolution'] = peer.pin(rp)
             fixture.req['grid'] = grid
@@ -212,19 +213,44 @@ class CombinedSourceStrictCoreFixture(unittest.TestCase):
             self.assertEqual(actual['execution']['mode'], 'direct')
             groups = {g['group_id']:g for g in resolution['groups']}
             entity_codes = {i:i+16 for i in range(1,7)}
+            # Stored route provenance describes the old proof; the actual
+            # generated proofs bind different current checker/contract bytes.
+            with self.assertRaisesRegex(ValueError, 'route source/provenance mismatch'):
+                binding.validate_seed(cfg, fixture.path, request_sha, gate_report, PRODUCER_SHA,
+                    contracts.validate_selected_seed_decisions, actual, groups, entity_codes, metric)
+            fresh_validator = functools.partial(contracts.validate_selected_seed_decisions, fresh_closure_proofs=True)
             result, binding_trace = binding.validate_seed(
                 cfg, fixture.path, request_sha, gate_report, PRODUCER_SHA,
-                contracts.validate_selected_seed_decisions, actual, groups, entity_codes, metric)
+                fresh_validator, actual, groups, entity_codes, metric)
             self.assertEqual(result, policy)
+            for region_trace in actual['region_traces']:
+                provenance = next(t['route_provenance'] for t in region_trace['input_trace'] if t['kind'] == 'route')
+                self.assertNotEqual(provenance['checker_sha256'], inputs['closure_checker']['sha256'])
+                self.assertNotEqual(provenance['contract_sha256'], inputs['closure_contract']['sha256'])
+            for key, message in (('checker_sha256', 'water closure checker mismatch'), ('contract_sha256', 'closure proof mismatch')):
+                altered = copy.deepcopy(actual)
+                altered_proof = next(t['closure_proof'] for t in altered['region_traces'][1]['input_trace'] if t['kind'] == 'route')
+                altered_proof[key] = '0' * 64
+                with self.assertRaisesRegex(ValueError, message):
+                    fresh_validator(effective, altered, groups, entity_codes, metric)
+            altered_history = copy.deepcopy(actual)
+            altered_route = next(t for t in altered_history['region_traces'][0]['input_trace'] if t['kind'] == 'route')
+            altered_route['route_provenance']['contract_sha256'] = '0' * 64
+            with self.assertRaisesRegex(ValueError, 'route provenance mismatch'):
+                fresh_validator(effective, altered_history, groups, entity_codes, metric)
+            forged_gate = dict(gate_report, seed_producer_sha256='0' * 64)
+            with self.assertRaisesRegex(ValueError, 'seed gate and independently derived view differ'):
+                binding.validate_seed(cfg, fixture.path, request_sha, forged_gate, PRODUCER_SHA,
+                                      fresh_validator, actual, groups, entity_codes, metric)
             forged_core = copy.deepcopy(actual)
             panama_region = next(x for x in forged_core['region_traces'] if x['region_id'] == 'north_america_mainland_region_v1')
             panama_region['input_trace'][0]['geometry_sha256'] = '0' * 64
             with self.assertRaisesRegex(ValueError, 'geometry hash mismatch'):
-                contracts.validate_selected_seed_decisions(effective, forged_core, groups, entity_codes, metric)
+                fresh_validator(effective, forged_core, groups, entity_codes, metric)
             stale_view = copy.deepcopy(effective)
             stale_view['routes'][0]['provenance']['contract_sha256'] = 'f' * 64
             with self.assertRaisesRegex(ValueError, 'route provenance mismatch'):
-                contracts.validate_selected_seed_decisions(stale_view, actual, groups, entity_codes, metric)
+                fresh_validator(stale_view, actual, groups, entity_codes, metric)
             panama_trace = validate_panama_source(snap, inputs['snapshot']['sha256'], actual, inputs['panama_osm_archive'])
             self.assertEqual(panama_trace['geometry_sha256'], panama_hash)
             self.assertEqual(panama_trace['vertices'], 5254)

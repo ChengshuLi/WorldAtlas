@@ -5,10 +5,14 @@ Panama OSM archive, real Caucasus HydroBASINS and author sources and compact
 recipe, the `caucasus_stage2_binding.run_seed` subprocess, the frozen direct-v2
 seed producer and the real v2 water checker. The generated gate and seed
 reports then pass through `caucasus_stage2_binding.validate_seed` with the
-actual strict `contracts.validate_selected_seed_decisions` callback, followed
+disabled WIP fresh-proof `contracts.validate_selected_seed_decisions` callback, followed
 by an independent `panama_core_validation.validate_panama_source` replay.
-A forged Panama source trace and region geometry are rejected, as is stale
-route-contract provenance. Both region closure proofs are checked.
+Historical route physical, contract and checker pins deliberately differ from
+the new synthetic proof pins. The default historical validator rejects this;
+the explicitly selected fresh-proof mode accepts it. Forged fresh checker and
+contract proofs, changed historical route trace provenance, a forged gate
+producer pin, and a forged Panama source trace or region geometry all reject.
+Both region closure proofs are checked.
 The producer uses its literal executable allowlist, without test-time patching.
 
 The snapshot, source-catalog metadata, 720×360 half-degree grid, physical mask,
@@ -16,15 +20,20 @@ components, witnesses and both closure routes are synthetic. The grid contains
 only eight synthetic land cells; it is not a reconstructed production map.
 The fixture does **not** invoke the outer orchestrator, use the selected Neon
 export, establish actual physical producer lineage, prove the historical
-construction of either line or certify the watershed. The synthetic closure
-provenance pins match the new checker and contract; it does not test migration
-from historical selected provenance to fresh proofs.
+construction of either line or certify the watershed. The WIP crosswalk is not
+the active PR4 core. A real caller must authenticate the direct seed path
+before selecting fresh-proof mode; this test does not authenticate that caller.
 
-Run from `scripts/caucasus-audit`, using the same raw paths described in
-`CAUCASUS-DIRECT-V2-FIXTURE.md`, plus the cataloged Panama archive:
+Apply only the `runtime/contracts.py` portion of the disabled
+`direct-stage2-work-in-progress/work-in-progress.patch` to a scratch copy of
+the baseline runtime contract. Verify the resulting `contracts.py` SHA-256 is
+`f703e5edcb0f67cc908aa0812e5b194b480ea2916c017464e51d1bfa0066c7f1`.
+Run from `scripts/caucasus-audit`, using that scratch directory and the same
+raw paths described in `CAUCASUS-DIRECT-V2-FIXTURE.md`, plus the cataloged
+Panama archive:
 
 ```sh
-PYTHONPATH=/path/to/scripts/v7-land/research-mixed-runtime/stage2-geodesic-20261104 \
+PYTHONPATH=/path/to/scratch-runtime \
 DIRECT_SEED_DIR=/path/to/scripts/v7-land/mainland-seed-l2 \
 CAUCASUS_SELECTED=/path/to/caucasus-line.json \
 CAUCASUS_RECIPE=/path/to/compact-recipe.json \
