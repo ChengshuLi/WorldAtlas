@@ -16,7 +16,8 @@ static U read32(std::istream& in) {
 }
 static U number(const char* s) {
  std::string v(s); size_t n=0; unsigned long long x=std::stoull(v,&n);
- if(n!=v.size()||x>std::numeric_limits<U>::max()) throw std::runtime_error("bad integer");return U(x);
+ if(n!=v.size()||x>std::numeric_limits<U>::max()) throw std::runtime_error("bad integer");
+ return U(x);
 }
 struct Segment {U start,end,value; bool present;};
 class Rows {
