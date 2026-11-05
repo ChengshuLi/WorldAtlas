@@ -8,7 +8,7 @@ from rasterio.features import rasterize
 from scipy.ndimage import uniform_filter, minimum_filter
 from shapely.geometry import LineString,Point,mapping
 from shapely.ops import transform
-from pyproj import Transformer
+from geodesic_line import GeodesicLine, GEOD
 
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--selected',required=True,help='WGS84 GeoJSON LineString geometry')
@@ -16,23 +16,17 @@ parser.add_argument('--candidate',required=True,help='WGS84 GeoJSON LineString g
 parser.add_argument('--dsm',required=True)
 parser.add_argument('--mask',required=True)
 parser.add_argument('--stack',required=True)
-parser.add_argument('--epsg',type=int,required=True,help='suitable local projected metre CRS')
 parser.add_argument('--output-dir',required=True,help='new directory for private research output')
 parser.add_argument('--radius-pixels',type=int,default=60)
 args=parser.parse_args()
 if args.radius_pixels<10:parser.error('radius must be at least 10 pixels')
-from pyproj import CRS
-crs=CRS.from_epsg(args.epsg)
-if not crs.is_projected or any(axis.unit_conversion_factor!=1 for axis in crs.axis_info):parser.error('CRS must be projected in metres')
 output=Path(args.output_dir)
 output.mkdir(parents=False,exist_ok=False)
 geo=json.load(open(args.selected))
 candidate=json.load(open(args.candidate))
 if geo.get('type')!='LineString' or candidate.get('type')!='LineString' or len(candidate.get('coordinates',[]))<2:
     parser.error('both inputs must be GeoJSON LineString geometries')
-f=Transformer.from_crs(4326,args.epsg,always_xy=True)
-inv=Transformer.from_crs(args.epsg,4326,always_xy=True)
-selected=transform(f.transform,LineString(geo['coordinates']))
+selected=GeodesicLine(geo['coordinates'])
 with rasterio.open(args.dsm) as ds, rasterio.open(args.mask) as ms, rasterio.open(args.stack) as st:
     if ds.transform!=ms.transform or ds.transform!=st.transform or ds.shape!=ms.shape or ds.shape!=st.shape or ds.crs!=ms.crs or ds.crs!=st.crs or not ds.crs or ds.crs.to_epsg()!=4326:raise ValueError('aligned WGS84 DSM/MSK/STK tiles required')
     if abs(ds.transform.a-1/3600)>1e-10 or abs(ds.transform.e+1/3600)>1e-10 or ds.transform.b!=0 or ds.transform.d!=0:raise ValueError('original north-up 1-arcsecond grid required')
@@ -60,14 +54,15 @@ with rasterio.open(args.dsm) as ds, rasterio.open(args.mask) as ms, rasterio.ope
                 if cost!=distances[p]:continue
                 if targets[p]:break
                 row,col=p
-                x,y=f.transform(*rasterio.transform.xy(aff,row,col))
+                x,y=rasterio.transform.xy(aff,row,col)
                 for dr in (-1,0,1):
                     for dc in (-1,0,1):
                         if not (dr or dc):continue
                         nr,nc=row+dr,col+dc
                         if not (0<=nr<z.shape[0] and 0<=nc<z.shape[1] and valid[nr,nc]):continue
-                        xx,yy=f.transform(*rasterio.transform.xy(aff,nr,nc))
-                        edge=math.hypot(xx-x,yy-y)
+                        xx,yy=rasterio.transform.xy(aff,nr,nc)
+                        _,_,edge=GEOD.inv(x,y,xx,yy)
+                        if not math.isfinite(edge) or edge<=0:raise ValueError("invalid WGS84 pixel distance")
                         # TPI below surrounding 9x9 mean adds cost; capped.
                         edge*=1+penalty*min(3,max(0,-tpi[nr,nc])/10)
                         new=cost+edge; q=(nr,nc)
@@ -78,10 +73,10 @@ with rasterio.open(args.dsm) as ds, rasterio.open(args.mask) as ms, rasterio.ope
             while path[-1]!=source:path.append(prev[path[-1]])
             path.reverse()
             coords=[rasterio.transform.xy(aff,row,col) for row,col in path]
-            projected=transform(f.transform,LineString(coords))
-            target=Point(projected.coords[-1]); along=selected.project(target)
-            distance=target.distance(selected)
+            lengths=[GEOD.inv(*a,*b)[2] for a,b in zip(coords,coords[1:])]
+            closest=selected.closest(coords[-1])
+            along=closest['station_m'];distance=closest['distance_m']
             high=sum(1 for row,col in path if tpi[row,col]>0)
             result={'type':'LineString','coordinates':coords}
             with (output / ('join-%s-penalty%d.json'%(label,penalty))).open('x') as out:json.dump(result,out)
-            print(label,'penalty',penalty,'pixels',len(path),'length_m',round(projected.length,1),'end_offset_m',round(distance,1),'selected_station_m',round(along,1),'positive_tpi',high,'/',len(path),flush=True)
+            print(label,'penalty',penalty,'pixels',len(path),'length_m',round(sum(lengths),1),'end_offset_m',round(distance,1),'selected_station_m',round(along,1),'closest_ambiguous',closest['ambiguous'],'positive_tpi',high,'/',len(path),flush=True)
