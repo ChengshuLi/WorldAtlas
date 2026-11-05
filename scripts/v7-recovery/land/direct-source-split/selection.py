@@ -21,7 +21,8 @@ def unique(items, key, identity):
 
 
 def selected_cut(snapshot, witness_report, snapshot_sha, component_hashes, rule_id, boundary_id, grid):
-    need(snapshot.get('source') == 'neon-export', 'snapshot is not a Neon export')
+    need(snapshot.get('source') == 'neon-export' and snapshot.get('schema') == 'worldatlas-geography-decision-draft-evidence-v1'
+         and snapshot.get('serialization') == 'worldatlas-canonical-json-v1', 'snapshot is not a canonical Neon draft export')
     revision = snapshot.get('decision_revision', {})
     entity_revision = snapshot.get('entity_revision', {})
     need(revision.get('status') == entity_revision.get('status') == 'draft'
@@ -47,6 +48,29 @@ def selected_cut(snapshot, witness_report, snapshot_sha, component_hashes, rule_
     need(boundary.get('method') == 'stored_linestring_v1' and boundary.get('coordinate_reference') == 'OGC:CRS84'
          and boundary.get('geometry_hash_method') == 'binary64-sorted-compact-geojson-v1',
          'unsupported boundary representation')
+    provenance=boundary.get('provenance');refs=provenance.get('source_refs') if isinstance(provenance,dict) else None
+    need(isinstance(refs,list) and refs and len(refs)<=1000 and provenance.get('lineage_status') in ('complete','incomplete'), 'boundary source lineage missing')
+    def index_sources(items):
+        need(isinstance(items,list), 'source catalog missing');out={}
+        for item in items:
+            need(isinstance(item,dict) and all(isinstance(item.get(k),str) and item[k] for k in ('source_id','version')), 'invalid source identity')
+            key=(item['source_id'],item['version']);need(key not in out,'duplicate source identity');out[key]=item
+        return out
+    sources=index_sources(snapshot.get('sources'));assets=index_sources(snapshot.get('source_lineage_assets'))
+    deps=snapshot.get('source_lineage_dependencies');need(isinstance(deps,list) and all(isinstance(x,dict) and all(isinstance(x.get(k),str) and x[k] for k in ('source_id','version')) for x in deps),'invalid source dependencies')
+    derived={(x['source_id'],x['version']) for x in deps};seen=set()
+    for ref in refs:
+        need(isinstance(ref,dict) and set(ref)=={'source_id','version'},'invalid source reference')
+        key=(ref['source_id'],ref['version']);src=sources.get(key);asset=assets.get(key)
+        need(key not in seen and key not in derived and isinstance(src,dict) and isinstance(asset,dict),'missing or derived source reference');seen.add(key)
+        digest=src.get('sha256');metadata=asset.get('provenance')
+        need(isinstance(digest,str) and len(digest)==64 and all(c in '0123456789abcdef' for c in digest)
+             and all(src.get(k)==asset.get(k) for k in ('sha256','r2_bucket','r2_key','size_bytes'))
+             and isinstance(src.get('r2_bucket'),str) and bool(src['r2_bucket']) and isinstance(src.get('r2_key'),str) and bool(src['r2_key'])
+             and type(src.get('size_bytes')) is int and src['size_bytes']>0 and asset.get('kind')=='raw'
+             and isinstance(asset.get('provider'),str) and bool(asset['provider']) and isinstance(asset.get('source_uri'),str) and bool(asset['source_uri'])
+             and isinstance(metadata,dict) and metadata.get('representation')=='provider_original' and isinstance(metadata.get('origin'),str) and bool(metadata['origin']),
+             'source reference is not a pinned original R2 asset')
     geometry = boundary.get('geometry', {})
     coords = geometry.get('coordinates') if isinstance(geometry,dict) and set(geometry)=={'type','coordinates'} and geometry.get('type') == 'LineString' else None
     need(isinstance(coords, list) and 2 <= len(coords) <= 100000, 'invalid source line')
@@ -85,4 +109,4 @@ def selected_cut(snapshot, witness_report, snapshot_sha, component_hashes, rule_
          'invalid split bindings or witnesses')
     return {'line': line, 'inside_code': codes[0], 'outside_code': codes[1],
             'component': group['component_id_current_generation_only'], 'witnesses': region['witnesses'],
-            'boundary_sha256': boundary['geometry_sha256']}
+            'boundary_sha256': boundary['geometry_sha256'], 'boundary_lineage_status': provenance['lineage_status']}

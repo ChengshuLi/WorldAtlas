@@ -35,9 +35,19 @@ def digest(path, guard):
     return h.hexdigest()
 
 
+def strict_json(raw):
+    def unique(pairs):
+        result={}
+        for key,value in pairs:
+            need(key not in result,'duplicate JSON key');result[key]=value
+        return result
+    def nonfinite(value):raise ValueError('nonfinite JSON number')
+    return json.loads(raw,object_pairs_hook=unique,parse_constant=nonfinite)
+
+
 def run(request, output):
     require_guardian();started=time.monotonic(); request=Path(request).resolve(strict=True); out=Path(output).resolve()
-    raw=request.read_bytes(); need(len(raw)<=1<<20,'request too large'); cfg=json.loads(raw)
+    need(request.stat().st_size<=1<<20,'request too large');raw=request.read_bytes();need(len(raw)<=1<<20,'request too large');cfg=strict_json(raw)
     need(set(cfg)=={'schema','grid','inputs','rule_id','boundary_id','limits'} and cfg['schema']=='direct-source-split-request-v1','invalid request')
     grid=cfg['grid']; need(set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int
          and 0<grid['width']<=1000000 and 0<grid['height']<=1000000 and grid['west']==-180 and grid['north']==90
@@ -66,7 +76,7 @@ def run(request, output):
     codehash={p.name:digest(p,guard) for p in codepaths}
     for name in ('snapshot','witness'):
         need(paths[name].stat().st_size<=16<<20,'evidence document too large: '+name)
-    snapshot=json.loads(paths['snapshot'].read_bytes());witness=json.loads(paths['witness'].read_bytes())
+    snapshot=strict_json(paths['snapshot'].read_bytes());witness=strict_json(paths['witness'].read_bytes())
     info=selected_cut(snapshot,witness,inputs['snapshot']['sha256'],{k:inputs[k]['sha256'] for k in ('component_rows','component_runs')},cfg['rule_id'],cfg['boundary_id'],grid)
     line=info['line'];need(len(line)<=100000,'boundary vertex limit');w,h,step=grid['width'],grid['height'],grid['step'];root=info['component']
     components=TripleRows(paths['component_rows'],paths['component_runs'],h)
@@ -125,7 +135,7 @@ def run(request, output):
     need({p.name:digest(p,guard) for p in graphpaths}==graphhash,'intermediate graph changed')
     for name,p in paths.items():need(digest(p,guard)==inputs[name]['sha256'],'input changed: '+name)
     need(request.read_bytes()==raw and {p.name:digest(p,guard) for p in codepaths}==codehash,'request or code changed')
-    report={'schema':'direct-source-split-report-v1','status':'experimental-not-selected','publishable':False,'input_sha256':{k:v['sha256'] for k,v in inputs.items()},'request_sha256':hashlib.sha256(raw).hexdigest(),'code_sha256':codehash,'boundary_sha256':info['boundary_sha256'],'grid':grid,'component_id_current_generation_only':root,'selected_cells':result['selected_cells'],'residual_cells':residual,'direct_rows_sha256':digest(out/'direct-rows.u32le',guard),'direct_spans_sha256':digest(out/'direct-spans.u32le',guard),'elapsed_seconds':time.monotonic()-started,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'limitations':['Nearest-segment residual side is experimental, not proven generally.','Requires independent full-output equality and end-to-end benchmark before any switch.','Pinned snapshots are not authenticated by hashes.']}
+    report={'schema':'direct-source-split-report-v1','status':'experimental-not-selected','publishable':False,'input_sha256':{k:v['sha256'] for k,v in inputs.items()},'request_sha256':hashlib.sha256(raw).hexdigest(),'code_sha256':codehash,'boundary_sha256':info['boundary_sha256'],'boundary_lineage_status':info['boundary_lineage_status'],'grid':grid,'component_id_current_generation_only':root,'selected_cells':result['selected_cells'],'residual_cells':residual,'direct_rows_sha256':digest(out/'direct-rows.u32le',guard),'direct_spans_sha256':digest(out/'direct-spans.u32le',guard),'elapsed_seconds':time.monotonic()-started,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'limitations':['Nearest-segment residual side is experimental, not proven generally.','Requires independent full-output equality and end-to-end benchmark before any switch.','Pinned snapshots are not authenticated by hashes.']}
     pending=out/'report.pending';final=out/'report.json';linked=False
     try:
         fd=os.open(out,os.O_RDONLY|os.O_DIRECTORY)

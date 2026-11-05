@@ -7,6 +7,13 @@ from boundary import select_witnesses, reject_center_hits, reject_terminal_near_
 from partition_core import rasterize_barriers
 from cut_graph import partition
 
+def add_synthetic_catalog(snapshot):
+ snapshot.update({'schema':'worldatlas-geography-decision-draft-evidence-v1','serialization':'worldatlas-canonical-json-v1'})
+ source={'source_id':'source','version':'test','sha256':'a'*64,'r2_bucket':'test-bucket','r2_key':'synthetic','size_bytes':1}
+ snapshot['sources']=[source];snapshot['source_lineage_assets']=[{**source,'kind':'raw','provider':'test','source_uri':'synthetic:test','provenance':{'representation':'provider_original','origin':'synthetic'}}];snapshot['source_lineage_dependencies']=[]
+ snapshot['mainland_boundaries'][0]['provenance']={'source_refs':[{'source_id':'source','version':'test'}],'lineage_status':'incomplete'}
+ return snapshot
+
 class DirectCoreTest(unittest.TestCase):
  def fixture(self):
   line={'type':'LineString','coordinates':[[0.0,-2.0],[0.0,2.0]]}
@@ -18,7 +25,7 @@ class DirectCoreTest(unittest.TestCase):
    'category_bindings':[{'entity_id':1,'physical_class':'land','code':31},{'entity_id':2,'physical_class':'land','code':32}]}
   grid={'width':4,'height':4,'west':-2,'north':2,'step':1};pins={'component_rows':'a'*64,'component_runs':'b'*64}
   w={'schema':'mainland-witness-resolution-v1','status':'selected-research-identity-claims-not-mainland-proof','snapshot_sha256':'c'*64,'decision_revision':'d','entity_revision':'e','grid':grid,'input_sha256':pins,'groups':[{'group_id':'g','role':'mainland','component_id_current_generation_only':7,'target_entity_ids':[1,2]}]}
-  return snapshot,w,pins,grid
+  add_synthetic_catalog(snapshot);return snapshot,w,pins,grid
  def select(self,s,w,p,g):return selected_cut(s,w,'c'*64,p,'r','b',g)
  def test_selected_and_dynamic_codes(self):
   s,w,p,g=self.fixture();result=self.select(s,w,p,g);self.assertEqual((result['inside_code'],result['outside_code'],result['component']),(31,32,7))
@@ -32,6 +39,10 @@ class DirectCoreTest(unittest.TestCase):
    with self.assertRaises(ValueError):self.select(x,w,p,g)
   x=copy.deepcopy(s);x['seed_regions'][0]['segments'].append({'kind':'boundary','id':'other','start':0,'end':2,'reverse':False})
   with self.assertRaisesRegex(ValueError,'exactly one'):self.select(x,w,p,g)
+  x=copy.deepcopy(s);x['source_lineage_dependencies'].append({'source_id':'source','version':'test'})
+  with self.assertRaisesRegex(ValueError,'derived source'):self.select(x,w,p,g)
+  x=copy.deepcopy(s);x['source_lineage_assets'][0]['r2_key']='tampered'
+  with self.assertRaisesRegex(ValueError,'R2 asset'):self.select(x,w,p,g)
   w=copy.deepcopy(w);w['input_sha256']['component_runs']='x'*64
   with self.assertRaisesRegex(ValueError,'lineage'):self.select(s,w,p,g)
  def test_ambiguity_and_cut_endpoints_fail_closed(self):
@@ -104,6 +115,10 @@ class DirectCoreTest(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'does not touch'):resolve_fragments({1:[(0,0)]},cuts,[[0,-2],[0,2]],-2,2,1,4,4,lambda x,y:True,side_codes=(31,32))
 
 class DriverTest(unittest.TestCase):
+ def test_strict_json_rejects_duplicate_and_nonfinite(self):
+  import run_direct
+  with self.assertRaisesRegex(ValueError,'duplicate JSON key'):run_direct.strict_json('{"a":1,"a":2}')
+  with self.assertRaisesRegex(ValueError,'nonfinite JSON number'):run_direct.strict_json('{"a":NaN}')
  def test_synthetic_fresh_build_and_tamper_rejection(self):
   import builtins, io
   from unittest.mock import patch
@@ -115,7 +130,7 @@ class DriverTest(unittest.TestCase):
    grid={'width':8,'height':4,'west':-180,'north':90,'step':45}
    line={'type':'LineString','coordinates':[[0.0,90.0],[0.0,-90.0]]};lh=hashlib.sha256(json.dumps(line,sort_keys=True,separators=(',',':')).encode()).hexdigest()
    snap={'source':'neon-export','decision_revision':{'id':'d','status':'draft','entity_revision':'e'},'entity_revision':{'id':'e','status':'draft'},'mainland_component_rules':[{'rule_id':'r','region_id':'z','group_id':'g','inside_entity_id':1,'outside_entity_id':2,'execution_status':'selected_for_research','decision_revision':'d'}], 'seed_regions':[{'region_id':'z','execution_status':'selected_for_research','decision_revision':'d','segments':[{'kind':'boundary','id':'b','start':0,'end':2,'reverse':False}],'witnesses':[{'lon':-22.5,'lat':22.5,'inside':True},{'lon':22.5,'lat':22.5,'inside':False}]}], 'mainland_boundaries':[{'boundary_id':'b','execution_status':'selected_for_research','decision_revision':'d','method':'stored_linestring_v1','coordinate_reference':'OGC:CRS84','geometry_hash_method':'binary64-sorted-compact-geojson-v1','geometry_sha256':lh,'geometry':line}], 'category_bindings':[{'entity_id':1,'physical_class':'land','code':31},{'entity_id':2,'physical_class':'land','code':32}]}
-   sp=inp/'snapshot';sp.write_text(json.dumps(snap));witness={'schema':'mainland-witness-resolution-v1','status':'selected-research-identity-claims-not-mainland-proof','snapshot_sha256':sha(sp),'decision_revision':'d','entity_revision':'e','grid':grid,'input_sha256':{'component_rows':sha(rows),'component_runs':sha(spans)},'groups':[{'group_id':'g','role':'mainland','component_id_current_generation_only':7,'target_entity_ids':[1,2]}]};wp=inp/'witness';wp.write_text(json.dumps(witness))
+   add_synthetic_catalog(snap);sp=inp/'snapshot';sp.write_text(json.dumps(snap));witness={'schema':'mainland-witness-resolution-v1','status':'selected-research-identity-claims-not-mainland-proof','snapshot_sha256':sha(sp),'decision_revision':'d','entity_revision':'e','grid':grid,'input_sha256':{'component_rows':sha(rows),'component_runs':sha(spans)},'groups':[{'group_id':'g','role':'mainland','component_id_current_generation_only':7,'target_entity_ids':[1,2]}]};wp=inp/'witness';wp.write_text(json.dumps(witness))
    pins={k:{'path':str(v),'sha256':sha(v)} for k,v in {'snapshot':sp,'witness':wp,'component_rows':rows,'component_runs':spans}.items()}
    cfg={'schema':'direct-source-split-request-v1','grid':grid,'inputs':pins,'rule_id':'r','boundary_id':'b','limits':{'minimum_memory_kib':1887437,'minimum_free_bytes':2*1024**3,'max_rss_kib':870400,'max_nodes':100,'max_raster_work':10000,'max_residual_cells':10,'max_residual_segment_tests':100}};request=inp/'request';request.write_text(json.dumps(cfg))
    original_open=builtins.open

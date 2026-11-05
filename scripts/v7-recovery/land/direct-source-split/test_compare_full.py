@@ -14,6 +14,9 @@ class CompareTest(unittest.TestCase):
    self.assertFalse((root/'out').exists())
  def test_direct_comparison_requires_guardian(self):
   with self.assertRaisesRegex(ValueError,'monitored guardian'):compare_full.run('/not-a-request','/not-an-output')
+ def test_strict_json_rejects_duplicate_and_nonfinite(self):
+  with self.assertRaisesRegex(ValueError,'duplicate JSON key'):compare_full.strict_json('{"a":1,"a":2}')
+  with self.assertRaisesRegex(ValueError,'nonfinite JSON number'):compare_full.strict_json('{"a":NaN}')
  def test_different_segmentation_equal_cells(self):
   a=np.array([[2,1],[5,1]],dtype='<u4');b=np.array([[5,1]],dtype='<u4');self.assertEqual(compare_full.compare_row(a,b,5),(5,[]))
  def test_random_rows_against_dense_reference(self):

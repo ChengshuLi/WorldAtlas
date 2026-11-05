@@ -27,6 +27,14 @@ def require_guardian():
  except (OSError,ValueError):valid=False
  need(valid and os.getppid()==parent,'monitored guardian required')
 
+def strict_json(raw):
+ def unique(pairs):
+  result={}
+  for key,value in pairs:need(key not in result,'duplicate JSON key');result[key]=value
+  return result
+ def nonfinite(value):raise ValueError('nonfinite JSON number')
+ return json.loads(raw,object_pairs_hook=unique,parse_constant=nonfinite)
+
 class Rows:
  def __init__(self,rows,runs,height,width):
   self.a=np.fromfile(rows,dtype='<u4');self.fd=os.open(runs,os.O_RDONLY);self.width=width
@@ -52,7 +60,7 @@ def compare_row(a,b,width):
 
 
 def run(request,output):
- require_guardian();started=time.monotonic();request=Path(request).resolve(strict=True);out=Path(output).resolve();raw=request.read_bytes();need(len(raw)<=1<<20,'request too large');cfg=json.loads(raw)
+ require_guardian();started=time.monotonic();request=Path(request).resolve(strict=True);out=Path(output).resolve();need(request.stat().st_size<=1<<20,'request too large');raw=request.read_bytes();need(len(raw)<=1<<20,'request too large');cfg=strict_json(raw)
  need(set(cfg)=={'schema','grid','inputs','limits'} and cfg['schema']=='full-grid-comparison-request-v1','invalid request');g=cfg['grid']
  need(set(g)=={'width','height'} and all(type(g[k]) is int and 0<g[k]<=1000000 for k in g),'invalid grid');w,h=g['width'],g['height']
  lim=cfg['limits'];need(set(lim)=={'minimum_memory_kib','minimum_free_bytes','max_rss_kib'} and all(type(v) is int and v>0 for v in lim.values()) and lim['minimum_memory_kib']>=1887437 and lim['minimum_free_bytes']>=2*1024**3 and lim['max_rss_kib']<=870400,'invalid resource limits')
