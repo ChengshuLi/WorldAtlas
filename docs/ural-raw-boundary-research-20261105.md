@@ -49,13 +49,13 @@ connector is a documented construction rather than a surveyed shoreline. An
 exact rational grid-contact check of its decimal coordinates touches one land
 cell (89987, 7743), while the adjoining first exterior-closure segment touches
 that land cell and the neighboring water cell (89987, 7742). This is a local
-physical-mask check, not a surveyed shoreline. A separate rational all-touched
-research check scanned both complete European water closures against the new
-line and the pinned stage-1 physical mask. Both passed the terminal-cell
-policy: the exterior closure visited 78,908 cells with only its Kara terminal
-land cell touched, and the Caspian closure visited 3,161 cells with only its
-Caucasus terminal land cell touched. This does not replace the pipeline's
-formal proof or establish geographic authority.
+physical-mask check, not a surveyed shoreline. The current terminal-closure
+checker generated valid proofs bound to this exact boundary, the selected
+Caucasus geometry and the pinned stage-1 mask. The exterior closure visited
+78,908 cells with only its Kara terminal land cell touched; the Caspian closure
+visited 3,161 cells with only its Caucasus terminal land cell touched. Both
+directions needed for the European ring were checked. These proofs establish
+physical terminal contact under the recorded policy, not geographic authority.
 
 The structured geometry and seven source relationships are stored in Neon
 project `wild-cherry-46472487`, branch `br-shy-mountain-arsff6zb`, database
@@ -89,9 +89,17 @@ The clean run used Python 3.9.6, NumPy 2.0.2, rasterio 1.4.3 / GDAL 3.9.3,
 pyproj 3.6.1, Shapely 2.0.7 and Numba 0.60.0. Byte hashes may depend on the
 toolchain; a different toolchain must be validated rather than silently accepted.
 
-Remaining integration: represent the actual construction-source relationships
-in the seed adapter's current source-role contract, generate candidate-bound
-formal closure proofs, and combine this research boundary with the other
-required region decisions. The modeled spring and terrain choices remain
-qualified geographic decisions, not survey claims. No map rebuild or existing
-active-boundary change was performed for this work.
+The seed source-role contract now recognizes the seven exact construction
+inputs and keeps each ArcticDEM manifest hash separate from its reassembled
+raw-tile hash. A real GDAL assembly with both fresh terminal proofs, all seven
+citations and the existing region witnesses passed on a synthetic combined
+snapshot; its Europe-region geometry hash is
+`ec7a63e269e4ca10793e0463b2db0190d685af2ac425bc51cff40b0f65899b3c`.
+The candidate-bound proofs and test scope are recorded on the Neon boundary.
+The integration test does not itself select a complete global decision revision.
+
+Remaining integration is to incorporate the candidate into a fresh, complete
+combined revision with the other current boundary and region decisions, then
+revalidate the selected source and physical-mask pins. The modeled spring and
+terrain choices remain qualified geographic decisions, not survey claims. No
+map rebuild or existing active-boundary change was performed for this work.
