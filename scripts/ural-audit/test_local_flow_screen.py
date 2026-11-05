@@ -19,5 +19,8 @@ class FlowScreenTest(unittest.TestCase):
             out=run(ds,mask,(0,0,0.02,0.02),100,(0.004,0.01),(0.016,0.01),'EPSG:3857')
             self.assertEqual(out['excluded'],0)
             self.assertEqual(out['same_outlet'],19)
+            bent=run(ds,mask,(0,0,0.02,0.02),100,(0.004,0.01),(0.016,0.01),'EPSG:3857',[(0.004,0.01),(0.01,0.011),(0.016,0.01)])
+            self.assertEqual(bent['excluded'],0)
+            with self.assertRaises(ValueError):run(ds,mask,(0,0,0.02,0.02),100,(0.004,0.01),(0.016,0.01),'EPSG:3857',[(0,0),(0.016,0.01)])
 
 if __name__ == '__main__': unittest.main()
