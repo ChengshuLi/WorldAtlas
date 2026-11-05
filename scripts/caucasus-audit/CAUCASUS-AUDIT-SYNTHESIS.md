@@ -79,3 +79,12 @@ The earlier audit placed explicitly unselected, temporary research in draft Neon
 ## Reproducibility and scope
 
 See SEGMENT-REVIEW-20261105.md and JVARI-MAPPED-CHANNEL.md for details, hashes, data sources and tests; EAST-1978-GRID-AND-FEATURE.md and EAST-IMAGERY-AND-YATUKH-LEAD.md cover the eastern historical lead. The WGS84 diagnostic code preserves coordinate-linear source edges when measuring geodesic distances. Previous projection-based distances and older candidate counts have been superseded where rechecked. Earlier snapshots are not live data and should not be added to obtain a current global unresolved count.
+
+
+### Current OSM Anapa check and selected-line topology (2026-11-05)
+
+A read-only check of the live OpenStreetMap pages shows [Anapka water way 38631288](https://www.openstreetmap.org/way/38631288) remains at version 20 with `natural=water` and `water=river`, and [coastline way 1067095312](https://www.openstreetmap.org/way/1067095312) remains at version 1. The coastline's two previously identified control nodes currently have the same coordinates as the archived extract: [1886667466](https://www.openstreetmap.org/node/1886667466) is 37.3173269 E, 44.9040503 N and [7645343510](https://www.openstreetmap.org/node/7645343510) is 37.3170533 E, 44.9031821 N. Thus the stored endpoint's previously checked correspondence to that current coordinate-linear coast segment remains supported.
+
+A way version does not change merely because one of its member nodes moves. The live check did not inspect all 286 current Anapka water-way nodes, so the previously measured ~65.02 m crossing remains a result for the archived 2026-11-05 extract, not a freshly recomputed intersection against every current node. The live OSM versions and nodes are mapped data, not independent field confirmation. The regional hydrological assessment cited above shows the mouth can vary and does not supply a continuous replacement ridge or its joins. The specific missing input is a geographically controlled, dated mapping or field survey of the Anapka mouth, its upstream channel and the intended natural divide from coast to a verified inland join, with the intended dated shoreline/land mask.
+
+As a separate topology check, Shapely reports the 2,292-position locally hash-verified selected LineString is valid and simple, open, and has no repeated coordinate positions. This checks coordinate topology only; it does not validate drainage, historic lineage or the region polygon's external closure. No selected geometry or labels were changed.
