@@ -7,3 +7,9 @@ A [western topographic account](https://viktor-dnk.ru/toponymy/caucasus/) descri
 A [hydrology publication](https://www.cawater-info.net/library/rus/wm-kazakhsatn-01-2018.pdf) describes Qusarçay receiving glacier meltwater from the Shahdag and Bazarduzu area and identifies Bumçay and Dəmiraparançay among the mountain rivers of the southern-slope system (printed pages 19–20). It does not independently identify the unnamed headwater mapped at the disputed crossing or locate the divide through the terrain gap.
 
 [Hydrography90m](https://essd.copernicus.org/articles/14/4525/2022/) uses MERIT Hydro, whose elevation and hydrological corrections share SRTM, JAXA AW3D and OpenStreetMap inputs with other evidence considered here. Agreement would not be independent validation. Its [dataset license](https://raw.githubusercontent.com/glowabio/hydrographr/main/README.txt) is CC BY-NC 4.0; no dataset is incorporated by this note.
+
+## Historical maps
+
+Indiana University provides [L-37-125, Gelendzhik](https://digitalcollections.iu.edu/concern/images/8049hg215), a 1941 topographic sheet with 20 m contours based on older surveys. It covers part of the western alternative, including Papay and the western continuation, but ends at 38.5°E, west of the compared selected-line slice and the first identified intersection. The adjoining L-37-126 sheet is needed to investigate the junction. The sheet requires georeferencing and validation against control points before quantitative use.
+
+The university also provides [K-38-108](https://digitalcollections.iu.edu/concern/images/1v53m704b), a 1936 sheet including the eastern headwaters. Its 250 m contour interval is too coarse by itself to certify the proposed narrow gap and exact crossing. Neither historical map has yet been used to trace or select a replacement; glacial changes, mapping scale, datum and registration need consideration.
