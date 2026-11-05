@@ -14,9 +14,11 @@ def main(path):
     if hashlib.sha256(data).hexdigest() != EXPECTED:
         raise ValueError('wrong OSM input')
     root = ET.fromstring(data)
-    # Visual estimate of the triangle marked 896.3 m, crop origin (5900,2150).
-    symbol = (632, 690)
-    for identifier in ('13276920139', '785474093'):
+    # Approximate symbol centres in crop coordinates, not surveyed controls.
+    candidates = [('13276920139', (632, 690), 'unnamed 896.3 m symbol'),
+                  ('785474093', (632, 690), 'unnamed 896.3 m symbol'),
+                  ('544448880', (1410, 933), 'named Thab 903.5 m triangle')]
+    for identifier, symbol, label in candidates:
         n = root.find("node[@id='" + identifier + "']")
         if n is None:
             raise ValueError('expected peak missing')
@@ -24,7 +26,7 @@ def main(path):
         x = 670.5 + (lon - 38.0) * 9391.5 / .5 - 5900
         y = 902.9 + (44 + 40/60 - lat) * 8903.1 / (20/60) - 2150
         tags = {t.get('k'): t.get('v') for t in n.findall('tag')}
-        print(json.dumps({'node': identifier, 'lon': lon, 'lat': lat,
+        print(json.dumps({'node': identifier, 'lon': lon, 'lat': lat, 'historic_symbol': label,
                           'ele_tag_m': tags.get('ele'), 'pixel': [x, y],
                           'separation_from_estimated_symbol_pixels': math.hypot(x-symbol[0], y-symbol[1]),
                           'warning': 'Approximate frame fit and unverified feature identity; not a control.'}, sort_keys=True))
