@@ -134,3 +134,27 @@ live selected Neon line. This confirms the raw-to-structured geometry relation;
 it does not show that a new direct outer run has consumed the source. The latter
 remains gated on integrating the direct request, source pin, closure and core
 validation with the frozen producer. No map rebuild was run.
+
+## Bounded selected-region integration check
+
+The selected live Neon export was passed through the frozen producer's boundary
+adapter, OSM archive binding, region worker and v2 terminal closure checker,
+using the selected physical rows, runs and candidate report. The assembled
+North America region matched its selected geometry SHA-256
+`c39566a9cf530bbeaac273c0697758b6657c37f397cc4196d1795d94c827f90b`,
+and all six selected region witnesses passed. The reversed closure traversed
+198,846 water cells, including both endpoints. A builder independently read the
+selected OSM archive from R2 and verified its cataloged size and SHA-256.
+
+Reproduce this bounded check from `scripts/v7-land/mainland-seed-l2` with an
+authenticated combined Neon export and the pinned files:
+
+    python3 audit_selected_panama_region.py --snapshot SNAPSHOT --snapshot-sha256 SNAPSHOT_SHA256 --archive OSM_ARCHIVE --physical-dir PHYSICAL_DIR --contract CLOSURE_CONTRACT --contract-sha256 CONTRACT_SHA256
+
+`PHYSICAL_DIR` contains `rows.u32le`, `runs.u32le` and `report.json`. The audit
+checks the 14-file source freeze, selected source and physical pins, region
+geometry, witness checks and closure proof. The caller must authenticate the
+export, source custody, physical inputs and supplied contract. The contract
+used in the screen was assembled for research, and the physical report does not
+independently establish original producer execution. This check does not invoke
+the complete seed producer or the outer stage-2 runtime and does not build a map.
