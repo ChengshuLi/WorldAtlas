@@ -1,0 +1,9 @@
+# Preliminary Abin western-join map check
+
+The 1941 Indiana University L-37-125 sheet, based on 1907–1909 surveying, covers the western join of the **second Abin splice** at 38.31791666666666 E, 44.59583333333336 N. The earlier description that the join lay east of 38.5 E referred to an older studied candidate and must not be applied to this newer western endpoint. The new candidate's eastern join lies on adjoining L-37-126; neither sheet alone establishes both joins. Source: https://digitalcollections.iu.edu/concern/images/8049hg215.
+
+`west_iu_join_preview.py` draws a crop with the selected line in red, the hypothetical candidate in blue, and the candidate's start in white. It checks SHA-256 of the local sheet (`f51b6448d3717ad5e84dfaf145728e1f785d7a4907e94a84a9785d60b78bb635`), selected source file (`081f5909935023255cf9f0b13f06102aaa97cc19a15715b6cabb9964b7a20f25`) and unselected candidate (`f9e4e5da1687f3ffb118e0b621705fe2e6b43a5dc2abbc323699cb56fbf8dcb9`).
+
+The preview shows the lines near the mapped Abin drainage and labeled 896.3 m summit. The coordinate overlay is only a frame-corner approximation that assumes WGS84; the sheet's datum, image deformation, independent controls and residual errors have not been verified. Its map marks and confluence crossings cannot be used to infer a precise watershed or validate either join. Their intersection was built into the candidate and is not independent evidence. No boundary or cell labels have been changed.
+
+Obtain a controlled, sufficiently legible georeference of this western sheet and the adjoining sheet, or comparable independent detailed headwater mapping, to assess the two joins. The image and candidate are research evidence, not inputs to the selected pipeline; this note does not assert current R2 custody or a reuse license.
