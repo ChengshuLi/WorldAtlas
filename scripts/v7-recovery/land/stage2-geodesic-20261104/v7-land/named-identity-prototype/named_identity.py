@@ -48,6 +48,17 @@ def check(source,point_geometry,island_identity,spec):
     need(polygon.Contains(point),'point must be strictly inside identity polygon')
     return {'method':spec['method'],'identity_feature_id':fid,'identity_feature_name':name,'identity_feature_class':cls,'identity_geometry_sha256':spec['identity_geometry_sha256'],'strict_contains':True,'identity_source_crs':crs,'gdal_version':gdal.VersionInfo('--version'),'geos_version':'.'.join(map(str,(ogr.GetGEOSVersionMajor(),ogr.GetGEOSVersionMinor(),ogr.GetGEOSVersionMicro()))),'limitation':'Generalized identity label only; not a physical boundary, exclusive island roster, or proof about the whole physical component.'}
 
+def process_peak_rss_kib():
+    """Linux peak for this exec image; ru_maxrss may include pre-exec memory."""
+    with open('/proc/self/status') as f:status=f.read(65537)
+    need(len(status)<=65536,'process status too large')
+    lines=[line for line in status.splitlines() if line.startswith('VmHWM:')]
+    need(len(lines)==1,'missing or duplicate VmHWM')
+    match=re.fullmatch(r'VmHWM:\s+([0-9]+)\s+kB\s*',lines[0])
+    need(match is not None,'invalid VmHWM')
+    value=int(match.group(1));need(value>0,'invalid VmHWM')
+    return value
+
 def worker():
     """Internal isolated entry point. No decision, map or source is written."""
     import resource,sys
@@ -62,7 +73,7 @@ def worker():
     with open(path,'rb') as f:
         for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
     need(h.hexdigest()==expected,'identity source changed during worker run')
-    print(json.dumps({'schema':'named-identity-worker-v1','result':result,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss},sort_keys=True))
+    print(json.dumps({'schema':'named-identity-worker-v2','result':result,'peak_rss_kib':process_peak_rss_kib(),'peak_rss_source':'linux-proc-self-status-VmHWM-kib','rusage_peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss},sort_keys=True))
 if __name__=='__main__':
     try:worker()
     except Exception as e:

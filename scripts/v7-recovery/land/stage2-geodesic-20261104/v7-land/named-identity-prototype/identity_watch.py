@@ -25,7 +25,7 @@ def run(checker_bytes,request,available):
         child.stdin.write(payload);child.stdin.close()
         while child.poll() is None:
             mem=available();minimum=min(minimum,mem);rss=child_rss(child.pid);peak_observed=max(peak_observed,rss or 0)
-            if rss is not None and rss>RSS_CAP_KIB:reason='child RSS cap exceeded';break
+            if rss is not None and rss>RSS_CAP_KIB:reason=f'child RSS cap exceeded: sampled_rss_kib={rss}, cap_kib={RSS_CAP_KIB}';break
             if time.monotonic()-started>TIMEOUT_SECONDS:reason='identity worker timed out';break
             time.sleep(POLL_SECONDS)
         if reason:
@@ -36,8 +36,10 @@ def run(checker_bytes,request,available):
         final_available=available();minimum=min(minimum,final_available)
         out=child.stdout.read(65537);err=child.stderr.read(65537);need(len(out)<=65536 and len(err)<=65536,'identity worker output too large')
         need(child.returncode==0,'identity worker failed: '+err.decode('utf-8','replace')[:500])
-        result=json.loads(out);peak=result.get('peak_rss_kib');need(result.get('schema')=='named-identity-worker-v1' and type(peak) is int and 0<peak<=RSS_CAP_KIB,'worker peak RSS invalid or over cap')
-        return {'result':result['result'],'memory_monitor':{'host_floor_kib':None,'initial_available_kib':initial,'minimum_sampled_available_kib':minimum,'rss_cap_kib':RSS_CAP_KIB,'maximum_sampled_rss_kib':peak_observed,'worker_reported_peak_rss_kib':peak,'poll_seconds':POLL_SECONDS,'limitation':'Host memory is sampled without an enforced floor; sampling may miss brief dips. Worker-reported RSS is a process high-water mark.'}}
+        result=json.loads(out);peak=result.get('peak_rss_kib');rusage_peak=result.get('rusage_peak_rss_kib')
+        need(result.get('schema')=='named-identity-worker-v2' and result.get('peak_rss_source')=='linux-proc-self-status-VmHWM-kib' and type(peak) is int and peak>0 and type(rusage_peak) is int and rusage_peak>0,'worker peak RSS invalid or missing metric')
+        need(peak<=RSS_CAP_KIB,f'worker peak RSS over cap: VmHWM_kib={peak}, sampled_peak_kib={peak_observed}, rusage_peak_kib={rusage_peak}, cap_kib={RSS_CAP_KIB}')
+        return {'result':result['result'],'memory_monitor':{'host_floor_kib':None,'initial_available_kib':initial,'minimum_sampled_available_kib':minimum,'rss_cap_kib':RSS_CAP_KIB,'maximum_sampled_rss_kib':peak_observed,'worker_reported_peak_rss_kib':peak,'worker_reported_peak_rss_source':result['peak_rss_source'],'worker_rusage_peak_rss_kib':rusage_peak,'poll_seconds':POLL_SECONDS,'limitation':'Host memory is sampled without an enforced floor; sampling may miss brief dips. Worker peak uses post-exec Linux VmHWM; ru_maxrss is diagnostic and may include pre-exec memory. VmRSS/VmHWM use kernel RSS accounting, which may be approximate.'}}
     finally:
         if child.poll() is None:child.kill();child.wait()
         for f in (child.stdin,child.stdout,child.stderr):
