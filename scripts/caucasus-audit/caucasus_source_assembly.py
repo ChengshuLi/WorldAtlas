@@ -30,6 +30,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('decisions', 'decisions-sha256', 'hydro-zip', 'author', 'selected', 'output'):
         parser.add_argument('--' + name, required=True)
+    parser.add_argument('--feature-id', help='wrap as a FeatureCollection for build_regions.py')
     a = parser.parse_args()
     if sha(a.decisions) != a.decisions_sha256:
         raise ValueError('decision bytes do not match the pinned digest')
@@ -58,9 +59,17 @@ def main():
         c = value['comparison']
         if c['possible_changed_centers'] != 0 or c['maximum_wgs84_vertex_displacement_m'] > 0.0002:
             raise ValueError('reconstruction does not satisfy preservation guard')
-        # Preserve a GeoJSON-only output usable by the existing line consumer.
+        # build_regions.py consumes a pinned FeatureCollection feature selector.
+        geometry = value['geometry']
+        if a.feature_id is not None:
+            if not a.feature_id.strip():
+                raise ValueError('feature ID must not be empty')
+            output_value = {'type': 'FeatureCollection', 'features': [{
+                'type': 'Feature', 'properties': {'cut_id': a.feature_id}, 'geometry': geometry}]}
+        else:
+            output_value = geometry
         with open(a.output, 'x', encoding='utf-8') as out:
-            json.dump(value['geometry'], out, sort_keys=True, separators=(',', ':'), allow_nan=False)
+            json.dump(output_value, out, sort_keys=True, separators=(',', ':'), allow_nan=False)
         print(json.dumps({'output_sha256': sha(a.output), 'geometry_sha256': value['geometry_sha256'],
                           'comparison': c}, sort_keys=True))
 
