@@ -44,6 +44,33 @@ class EffectiveSnapshotTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'duplicate region'):
             derive(self.snapshot, self.derived, self.gate, 'b' * 64)
 
+    def test_global_ural_change_requires_updated_region_and_is_preserved(self):
+        # A global revision can replace another boundary in the same closed
+        # region. The Caucasus adapter must accept its new region hash and must
+        # not restore or modify the other selected boundary.
+        ural = {'boundary_id': 'ural', 'geometry': {'type': 'LineString',
+                'coordinates': [[1.0, 1.0], [1.5, 1.2], [0.0, 1.0]]}}
+        ural['geometry_sha256'] = geomhash(ural['geometry'])
+        self.snapshot['mainland_boundaries'].append(ural)
+        region = self.snapshot['seed_regions'][0]
+        region['segments'].insert(1, {'kind': 'boundary', 'id': 'ural',
+                                      'start': 0, 'end': 3, 'reverse': False})
+        self.snapshot['routes'][0]['geometry']['coordinates'] = [[0, 1], [0, 0]]
+        region['segments'][2]['end'] = 2
+        with self.assertRaisesRegex(ValueError, 'region digest'):
+            derive(self.snapshot, self.derived, self.gate, 'b' * 64)
+        records = {('boundary', b['boundary_id']): b for b in self.snapshot['mainland_boundaries']}
+        records.update({('route', r['route_id']): r for r in self.snapshot['routes']})
+        region['geometry_sha256'] = assembled_region_hash(region, records)
+        saved = copy.deepcopy(self.snapshot)
+        effective, trace = derive(self.snapshot, self.derived, self.gate, 'b' * 64)
+        self.assertEqual(effective['mainland_boundaries'][1], ural)
+        self.assertEqual(self.snapshot, saved)
+        self.assertEqual(trace['regions'][0]['selected_sha256'], region['geometry_sha256'])
+        records[('boundary', BOUNDARY)] = effective['mainland_boundaries'][0]
+        self.assertEqual(effective['seed_regions'][0]['geometry_sha256'],
+                         assembled_region_hash(region, records))
+
 
 if __name__ == '__main__':
     unittest.main()
