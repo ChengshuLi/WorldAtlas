@@ -2,6 +2,7 @@ import hashlib
 import json
 import tempfile
 import unittest
+import sys
 from pathlib import Path
 from unittest.mock import patch
 
@@ -64,6 +65,48 @@ class SourceGateTest(unittest.TestCase):
         records[('route', 'r')]['geometry']['coordinates'][0] = [2, 1]
         with self.assertRaisesRegex(ValueError, 'join'):
             gate.assembled_region_hash(decision, records)
+
+    def test_worker_guard_reaches_producer_and_effective_snapshot(self):
+        producer = self.root / 'seed_producer.py'
+        producer.write_text("from pathlib import Path\ndef load_pinned_snapshot(path, digest, guard):\n    guard()\n    return {'original': True}\n"
+                            "def run(request, work, output, guard):\n    guard()\n    value = load_pinned_snapshot('x', 'pin', guard)\n    Path(output).write_text(value['view'])\n")
+        worker = self.root / 'seed_worker.py'
+        worker.write_text("import sys\nimport seed_producer\n"
+                          "def main():\n"
+                          "    def guard():\n        with open(sys.argv[2], 'a') as f: f.write('g')\n"
+                          "    seed_producer.run(sys.argv[1], sys.argv[2], sys.argv[3], guard)\n")
+        report = {}
+        with patch('caucasus_effective_snapshot.derive', return_value=({'view': 'effective'}, {'derived': True})):
+            gate.run_guarded_worker(self.root, gate.digest(producer), gate.digest(worker),
+                                    self.request, self.root / 'guards', self.root / 'out', {}, report)
+        self.assertEqual((self.root / 'guards').read_text(), 'gg')
+        self.assertEqual((self.root / 'out').read_text(), 'effective')
+        self.assertEqual(report['effective_snapshot'], {'derived': True})
+        self.assertNotIn('seed_producer', sys.modules)
+
+    def test_worker_digest_checked_before_import(self):
+        producer = self.root / 'seed_producer.py'
+        producer.write_text('raise RuntimeError("must not import")\n')
+        worker = self.root / 'seed_worker.py'
+        worker.write_text('raise RuntimeError("must not import")\n')
+        with self.assertRaisesRegex(ValueError, 'digest mismatch'):
+            gate.run_guarded_worker(self.root, gate.digest(producer), '0' * 64,
+                                    self.request, self.root / 'work', self.root / 'out', {}, {})
+
+    def test_worker_guard_failure_stops_producer(self):
+        producer = self.root / 'seed_producer.py'
+        producer.write_text("def load_pinned_snapshot(*args): return {}\n"
+                            "def run(request, work, output, guard):\n    guard()\n    open(output, 'w').close()\n")
+        worker = self.root / 'seed_worker.py'
+        worker.write_text("import sys\nimport seed_producer\n"
+                          "def main():\n"
+                          "    def guard(): raise RuntimeError('resource floor reached')\n"
+                          "    seed_producer.run(sys.argv[1], sys.argv[2], sys.argv[3], guard)\n")
+        with self.assertRaisesRegex(RuntimeError, 'resource floor reached'):
+            gate.run_guarded_worker(self.root, gate.digest(producer), gate.digest(worker),
+                                    self.request, self.root / 'work', self.root / 'out', {}, {})
+        self.assertFalse((self.root / 'out').exists())
+        self.assertNotIn('seed_producer', sys.modules)
 
 
 if __name__ == '__main__':

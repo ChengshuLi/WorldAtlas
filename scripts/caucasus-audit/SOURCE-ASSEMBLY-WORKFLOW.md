@@ -92,3 +92,8 @@ Separately, the Linux builder's real GDAL region-builder fixture passed as recor
 
 
 The source-and-validator fixture also confirms that the current strict validator rejects the derived seed trace when presented with the unchanged selected view; it accepts that trace only against the independently reconstructed effective view. The latest local focused run passed 35 tests. These are still bounded, synthetic-closure tests. In accordance with the user's instruction, do not install or use the separate dependency handoff and do not describe the Mac replay and Linux GDAL fixture as a single-environment run.
+
+
+## Worker resource guard
+
+The source gate's optional seed execution now invokes the pinned seed worker, which supplies its normal memory and disk guard to the producer. Pass `--worker-sha256` together with the producer pin and other worker arguments. The caller remains responsible for the process-group guardian, trusted code/input pins and binding the gate report to orchestrator provenance and resume checks. This is a tested prototype seam; it is not connected to the stage-2 orchestrator and has not run the real seed pipeline.
