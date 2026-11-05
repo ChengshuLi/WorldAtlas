@@ -16,7 +16,7 @@ GEOD = Geod(ellps='WGS84')
 def trace(values, valid, affine, start, max_steps=1500):
     if values.ndim != 2 or valid.shape != values.shape or max_steps < 1:
         raise ValueError('invalid raster dimensions or step limit')
-    if affine.b or affine.d:
+    if affine.b or affine.d or affine.a<=0 or affine.e>=0:
         raise ValueError('north-up, unrotated raster required')
     row, col = (int(v) for v in start)
     height, width = values.shape
