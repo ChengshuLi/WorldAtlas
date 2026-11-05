@@ -15,6 +15,10 @@ class LineTests(unittest.TestCase):
         line=GeodesicLine([(179.9,0),(-179.9,0)])
         v=line.closest((180,.01));self.assertAlmostEqual(v['distance_m'],1105.7428,delta=.05)
         self.assertEqual(line.side((180,.01),v['station_m']),'left')
+    def test_equal_nearest_edges_are_flagged(self):
+        line=GeodesicLine([(-.01,0),(-.01,.02),(.01,.02),(.01,0)])
+        self.assertTrue(line.closest((0,.005))["ambiguous"])
+
     def test_zero_length_rejected(self):
         with self.assertRaises(ValueError):GeodesicLine([(0,0),(0,0)])
 
