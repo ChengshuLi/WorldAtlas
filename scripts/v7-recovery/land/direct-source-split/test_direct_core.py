@@ -27,6 +27,24 @@ class DirectCoreTest(unittest.TestCase):
   w={'schema':'mainland-witness-resolution-v1','status':'selected-research-identity-claims-not-mainland-proof','snapshot_sha256':'c'*64,'decision_revision':'d','entity_revision':'e','grid':grid,'input_sha256':pins,'groups':[{'group_id':'g','role':'mainland','component_id_current_generation_only':7,'target_entity_ids':[1,2]}]}
   add_synthetic_catalog(snapshot);return snapshot,w,pins,grid
  def select(self,s,w,p,g):return selected_cut(s,w,'c'*64,p,'r','b',g)
+ def test_component_reader_bounds_offsets_before_allocation(self):
+  import struct
+  from boundary import TripleRows
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d);(p/'rows').write_bytes(b'\0'*24);(p/'runs').write_bytes(b'')
+   with self.assertRaisesRegex(ValueError,'offset file size'):TripleRows(p/'rows',p/'runs',4,max_width=8)
+   (p/'rows').write_bytes(struct.pack('<5I',0,9,9,9,9));(p/'runs').write_bytes(struct.pack('<27I',*([0,1,7]*9)))
+   with self.assertRaisesRegex(ValueError,'span count exceeds width'):TripleRows(p/'rows',p/'runs',4,max_width=8)
+ def test_bounded_documents_reject_oversized_before_parse(self):
+  import run_direct
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'document';p.write_bytes(b'x'*5)
+   with self.assertRaisesRegex(ValueError,'document too large'):run_direct.bounded(p,4)
+   from types import SimpleNamespace
+   from unittest.mock import patch
+   with patch.object(run_direct.os,'fstat',return_value=SimpleNamespace(st_size=4)):
+    with self.assertRaisesRegex(ValueError,'document too large'):run_direct.bounded(p,4)
+   p.write_bytes(b'1234');self.assertEqual(run_direct.bounded(p,4),b'1234')
  def test_selected_and_dynamic_codes(self):
   s,w,p,g=self.fixture();result=self.select(s,w,p,g);self.assertEqual((result['inside_code'],result['outside_code'],result['component']),(31,32,7))
   seeds,checks,codes=select_witnesses(result['witnesses'],lambda lon,lat:(int(lon+2),int(2-lat)),lambda x,y:True,result['line'],31,32)

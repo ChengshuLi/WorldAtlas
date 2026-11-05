@@ -17,11 +17,16 @@ def nearest_side(lon,lat,coords):
 
 class TripleRows:
  """Read checked uint32 triple rows with bounded per-row memory."""
- def __init__(self,rows_path,spans_path,height):
-  self.offsets=np.fromfile(rows_path,dtype='<u4')
+ def __init__(self,rows_path,spans_path,height,*,max_width=None):
+  need(type(height) is int and height>0 and (max_width is None or type(max_width) is int and max_width>0),'invalid row bounds')
+  with open(rows_path,'rb',buffering=0) as f:
+   need(os.fstat(f.fileno()).st_size==(height+1)*4,'invalid triple offset file size')
+   self.offsets=np.fromfile(f,dtype='<u4',count=height+1)
+   need(len(self.offsets)==height+1 and f.read(1)==b'' and os.fstat(f.fileno()).st_size==(height+1)*4,'triple offset file changed or truncated')
   self.fd=os.open(spans_path,os.O_RDONLY)
   try:
-   need(len(self.offsets)==height+1 and self.offsets[0]==0 and np.all(self.offsets[1:]>=self.offsets[:-1]),'invalid triple row offsets')
+   need(self.offsets[0]==0 and np.all(self.offsets[1:]>=self.offsets[:-1]),'invalid triple row offsets')
+   need(max_width is None or np.all(self.offsets[1:]-self.offsets[:-1]<=max_width),'triple row span count exceeds width')
    need(os.fstat(self.fd).st_size==int(self.offsets[-1])*12,'invalid triple stream size')
   except BaseException:
    os.close(self.fd);self.fd=None;raise
