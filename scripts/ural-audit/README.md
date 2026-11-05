@@ -144,3 +144,10 @@ A WGS84-stationed elevation cross-section screen tested 19 stations along each p
 A separate WGS84-stationed basin-pair check preliminarily found both sides of all 19 mountain-join stations in the modeled Volga group and both sides of all 19 spring-join stations in the modeled Ural group, for both DSMs and both routes at 100 m offsets. Those basin labels used the **previous projected-neighbor D8 implementation** and must be rerun after its ongoing WGS84 conversion. Same-root labels do not rule out smaller drainage divides. Preliminary results are explicitly marked in Neon under `spring_join_basin_geodesic_stations_preliminary_20261105`.
 
 Copernicus-derived results were produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.
+
+
+## Historical headwater map
+
+A [historical 1:100,000 topographic sheet N-40-47](https://mapn40.narod.ru/map1/in40047.html), whose margin states terrain as of 1983 and edition 1990, depicts Kruglaya Sopka and surrounding contours, marshy ground and small headwater channels. It supports treating the headwater area as geographically complex. The scan is not georeferenced: an approximate frame-based overlay only located the general area and has unquantified scan, projection, datum and registration errors. It cannot validate either connector, identify the exact present-day OSM source, or support precise distance measurements.
+
+The used map is preserved and readback-verified in R2; its exact key, SHA-256 and limitations are in Neon under `spring_historical_topographic_sheet_20261105`. No map-derived geometry was selected.
