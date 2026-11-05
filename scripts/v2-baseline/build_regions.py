@@ -12,6 +12,23 @@ import shared_nearest as shore
 import exclusive_outputs as xo
 ogr.UseExceptions()
 
+def witness_boundary_ambiguous(geom, lon, lat):
+ """Reject an axis-aligned numeric uncertainty box touching the boundary.
+
+ This is a coordinate precision guard, not a geographic-distance measure.
+ The square contains the former coordinate-space epsilon disk, so it never
+ weakens the previous near-boundary rejection (and can reject extra corners).
+ """
+ if any(isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v) for v in (lon,lat)):raise ValueError('invalid witness coordinates')
+ epsilon=1e-12
+ left=math.nextafter(lon-epsilon,-math.inf);right=math.nextafter(lon+epsilon,math.inf)
+ bottom=math.nextafter(lat-epsilon,-math.inf);top=math.nextafter(lat+epsilon,math.inf)
+ ring=ogr.Geometry(ogr.wkbLinearRing)
+ for x,y in ((left,bottom),(right,bottom),(right,top),(left,top),(left,bottom)):
+  ring.AddPoint_2D(x,y)
+ box=ogr.Geometry(ogr.wkbPolygon);box.AddGeometry(ring)
+ return bool(geom.Boundary().Intersects(box))
+
 def build(config_path,output):
  config_path=Path(config_path).resolve();raw=config_path.read_bytes();cfg=json.loads(raw);required={'schema','grid','regions','evidence'}
  if not required<=set(cfg)<=required|{'join_tolerance_degrees','max_route_cells','minimum_free_bytes'} or cfg['schema']!='simple-v2-regions-v1':raise ValueError('invalid region config')
@@ -81,7 +98,7 @@ def build(config_path,output):
   for witness in region['witnesses']:
    if not isinstance(witness,dict) or set(witness)!={'lon','lat','inside'} or type(witness['inside']) is not bool:raise ValueError('invalid witness')
    lon,lat=coordinate([witness['lon'],witness['lat']]);point=ogr.Geometry(ogr.wkbPoint);point.AddPoint_2D(lon,lat)
-   if geom.Boundary().Distance(point)<1e-12 or bool(geom.Contains(point))!=witness['inside']:raise ValueError('witness fails')
+   if witness_boundary_ambiguous(geom,lon,lat) or bool(geom.Contains(point))!=witness['inside']:raise ValueError('witness fails')
   regions.append((region['id'],geometry))
  out=Path(output).resolve();code_paths={'builder':Path(__file__).resolve(),'band_io':Path(band.__file__).resolve(),'grid_io':Path(grid_io.__file__).resolve(),'shore':Path(shore.__file__).resolve(),'output_io':Path(xo.__file__).resolve()};code={k:band.sha(v) for k,v in code_paths.items()}
  if out.exists() or any(out==p or out in p.parents or p.parent in out.parents for p in [config_path,*paths,*code_paths.values()]):raise ValueError('output must be new and outside input directories')

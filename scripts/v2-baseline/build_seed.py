@@ -7,6 +7,23 @@ from osgeo import gdal,ogr,osr
 gdal.UseExceptions();ogr.UseExceptions()
 HERE=Path(__file__).resolve().parent
 
+def witness_boundary_ambiguous(geom, lon, lat):
+ """Reject an axis-aligned numeric uncertainty box touching the boundary.
+
+ This is a coordinate precision guard, not a geographic-distance measure.
+ The square contains the former coordinate-space epsilon disk, so it never
+ weakens the previous near-boundary rejection (and can reject extra corners).
+ """
+ if any(isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v) for v in (lon,lat)):raise ValueError('invalid witness coordinates')
+ epsilon=1e-12
+ left=math.nextafter(lon-epsilon,-math.inf);right=math.nextafter(lon+epsilon,math.inf)
+ bottom=math.nextafter(lat-epsilon,-math.inf);top=math.nextafter(lat+epsilon,math.inf)
+ ring=ogr.Geometry(ogr.wkbLinearRing)
+ for x,y in ((left,bottom),(right,bottom),(right,top),(left,top),(left,bottom)):
+  ring.AddPoint_2D(x,y)
+ box=ogr.Geometry(ogr.wkbPolygon);box.AddGeometry(ring)
+ return bool(geom.Boundary().Intersects(box))
+
 def sha(p):
  h=hashlib.sha256()
  with p.open('rb') as f:
@@ -53,7 +70,7 @@ def build(config,output):
   for witness in region['witnesses']:
    if set(witness)!={'lon','lat','inside'} or type(witness['inside']) is not bool:raise ValueError('invalid witness')
    p=ogr.Geometry(ogr.wkbPoint);p.AddPoint_2D(witness['lon'],witness['lat'])
-   if geom.Boundary().Distance(p)<1e-12 or bool(geom.Contains(p))!=witness['inside']:raise ValueError('witness fails')
+   if witness_boundary_ambiguous(geom,witness['lon'],witness['lat']) or bool(geom.Contains(p))!=witness['inside']:raise ValueError('witness fails')
   regionids[region['id']]=1<<i;datasets.append(ds);layers.append(layer)
  seen=set();rules=[]
  for rule in c['rules']:
