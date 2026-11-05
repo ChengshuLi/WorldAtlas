@@ -3,7 +3,7 @@
   "files": {
     "build_stage2.py": {
       "base_sha256": "bb95e0c636c350035997bc712463ccf7cbe0d1ba5523f160b363635c9c78b4a8",
-      "candidate_sha256": "511dd9771aef83059a46dfb0720c81287e6db525bca25c726aac622f22b0582d"
+      "candidate_sha256": "79d2d723ecb0fc7ee36647843cca311d4b3098b71179799fc5ba4997530055b6"
     },
     "contracts.py": {
       "base_sha256": "ed2f78031508d8202358c9b9698f1446128855986d1c2ffcdb35a2f30a6d53d9",
@@ -11,7 +11,7 @@
     },
     "direct_seed.py": {
       "base_sha256": null,
-      "candidate_sha256": "60b9d7af9a1befa52591766e264e1be7f4c392d4e0756f69166cb6cbe29fb1c4"
+      "candidate_sha256": "79dff028d83d9fdba6170ccec80d7b9d54ac9ba13ae134683d9b35217cfd0654"
     },
     "hint-producer/run_diagnostic.py": {
       "base_sha256": "6479fe230172e54726e11d8a52a5408c943b0df20d1a955c310bdd267e15f8d4",
@@ -19,11 +19,19 @@
     },
     "orchestrate_stage2.py": {
       "base_sha256": "b71e4af5dac459b7024e8378238ff23076d602828421771641ebf725e210da12",
-      "candidate_sha256": "c6974496c4cfc48c1bb46cb5cd6359819fc9cbccf14b6a4bc5bd8b5d42e25e43"
+      "candidate_sha256": "7a1ecc659c91e21d9f1d620d097b971aafc9497cc1f64fa0202fa7312c5603d3"
     },
     "test_verify_seed_index_direct.py": {
       "base_sha256": null,
       "candidate_sha256": "cb1742bd7c0626aa339eb727584d7469a75c1de427d9535f948952f6d044b405"
+    },
+    "tests/test_caucasus_directory.py": {
+      "base_sha256": null,
+      "candidate_sha256": "5a79885cc91fd194eae2e7df9296be4d2dedf0ac81d136dbfc7f639b6886f1db"
+    },
+    "tests/test_caucasus_invocation_wiring.py": {
+      "base_sha256": null,
+      "candidate_sha256": "09f26137ad6c0b15bd94af00e5cdcb7558556f74814838062468d0d0b73ee3aa"
     },
     "tests/test_direct_candidate.py": {
       "base_sha256": null,
@@ -67,15 +75,15 @@
     },
     "tests/test_fresh_outer_gating.py": {
       "base_sha256": null,
-      "candidate_sha256": "f2b4638f930b7f1fd7c417c2d36018d4ed295853c653e92800705b4e32cfe8ed"
+      "candidate_sha256": "fb99fbaaa0ac9c496eb26d307c19bbc6b0ab37ce32900e5183e6c763d5bfc07e"
     },
     "tests/test_outer_seed_tamper.py": {
       "base_sha256": null,
-      "candidate_sha256": "802716f2b9d5b072ec7ffee5d49b3fd5ac377b1020d732f16eb44657b72cdbe9"
+      "candidate_sha256": "edcd1aeb3bea8b23340a8344811547240caf07ddfa29659eefea4f3715aa5a16"
     },
     "tests/test_real_unpatched_freeze.py": {
       "base_sha256": null,
-      "candidate_sha256": "743c2c0e05b033abf0ab7794ca4e666958303fffbf2252e374042f8b90211b76"
+      "candidate_sha256": "825ad808c278e691c7f82f3d9e38c39cc9587417d7f8be9cd62558b5f2e449de"
     },
     "v7-land/named-identity-prototype/identity_watch.py": {
       "base_sha256": "73b0cc98e62ec5b206a9b76fd9eb6414fa2f869d8678f3c6d705983cff8718ae",
