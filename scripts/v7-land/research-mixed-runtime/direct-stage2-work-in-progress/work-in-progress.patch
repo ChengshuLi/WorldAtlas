@@ -1,0 +1,1209 @@
+--- a/runtime/build_stage2.py
++++ b/runtime/build_stage2.py
+@@ -4,7 +4,7 @@
+ Research-only: selected seed/region provenance and topology must be authenticated
+ independently. Hints are performance suggestions, never final assignments.
+ """
+-import argparse,hashlib,importlib.util,json,os,resource,subprocess,time,uuid
++import argparse,hashlib,importlib.util,json,os,subprocess,sys,time,uuid
+ from pathlib import Path
+ import numpy as np,pyproj,scipy
+ import atomic_move,baseline_runner,checkpoints,contracts,engine,preflight,verify_inputs,verify_physical_lineage,witness_compare
+@@ -14,7 +14,24 @@
+ 
+ HERE=Path(__file__).resolve().parent
+ CODE_NAMES=('witness_compare.py','build_stage2.py','contracts.py','atomic_move.py','baseline_runner.py','certificate.py','checkpoints.py','engine.py','exact_index.py','point_prototype.py','preflight.py','run_pair.py','verify_inputs.py','verify_physical_lineage.py','verify_seed_index.cpp','write_land_stream.py','v7-land/mainland-witness-prototype/resolve_mainland.py','v7-land/point-component-prototype/resolve.py','v7-land/named-identity-prototype/named_identity.py','v7-land/named-identity-prototype/identity_watch.py')
+-INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','hint_monitor','tile_manifest','representatives'}
++INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'}
++CAUCASUS_DIR=HERE.parents[2]/'caucasus-audit'
++CAUCASUS_CODE=('caucasus_stage2_validation.py','caucasus_effective_snapshot.py','caucasus_seed_gate.py','caucasus_source_assembly.py','caucasus_compact_selectors.py','caucasus_selector_replay.py','caucasus_stage2_binding.py')
++
++def caucasus_binding(config,guard):
++ need(isinstance(config,dict) and set(config)=={'recipe','hydro','author','code_sha256'},'invalid Caucasus config')
++ pins=config['code_sha256'];need(isinstance(pins,dict) and set(pins)==set(CAUCASUS_CODE),'incomplete Caucasus code pins')
++ for name in CAUCASUS_CODE:
++  need(isinstance(pins[name],str) and contracts.HEX.fullmatch(pins[name]) and verify_inputs.sha_file(CAUCASUS_DIR/name,guard)==pins[name],'Caucasus code mismatch')
++  module=sys.modules.get(name[:-3])
++  if module is not None:need(Path(module.__file__).resolve()==(CAUCASUS_DIR/name).resolve(),'unexpected loaded Caucasus dependency')
++ for name in ('recipe','hydro','author'):pin(config[name],guard)
++ path=str(CAUCASUS_DIR.resolve())
++ if path not in sys.path:sys.path.insert(0,path)
++ import caucasus_stage2_binding as binding
++ need(Path(binding.__file__).resolve()==CAUCASUS_DIR/'caucasus_stage2_binding.py','unexpected Caucasus module')
++ binding.verify_config(config,guard)
++ return binding
+ 
+ def need(x,msg):
+  if not x:raise ValueError(msg)
+@@ -25,18 +42,22 @@
+ 
+ def validate_controls(c):
+  keys={'minimum_memory_kib','minimum_free_bytes','chunk_columns','checkpoint_seconds','tile_cache_bytes','numerical_guard_metres','block_records'}
+- need(isinstance(c,dict) and set(c)==keys and type(c['minimum_memory_kib']) is int and c['minimum_memory_kib']>=0 and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>0 and type(c['chunk_columns']) is int and 1<=c['chunk_columns']<=1024 and type(c['block_records']) is int and 1<=c['block_records']<=100000 and type(c['checkpoint_seconds']) in (int,float) and 0<c['checkpoint_seconds']<=3600 and type(c['tile_cache_bytes']) is int and 1024<=c['tile_cache_bytes']<=64*1024*1024 and type(c['numerical_guard_metres']) in (int,float) and c['numerical_guard_metres']>=1000,'invalid resource/algorithm controls')
++ need(isinstance(c,dict) and set(c)==keys and type(c['minimum_memory_kib']) is int and c['minimum_memory_kib']==0 and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>0 and type(c['chunk_columns']) is int and 1<=c['chunk_columns']<=1024 and type(c['block_records']) is int and 1<=c['block_records']<=100000 and type(c['checkpoint_seconds']) in (int,float) and 0<c['checkpoint_seconds']<=3600 and type(c['tile_cache_bytes']) is int and 1024<=c['tile_cache_bytes']<=64*1024*1024 and type(c['numerical_guard_metres']) in (int,float) and c['numerical_guard_metres']>=1000,'invalid resource/algorithm controls')
+ 
+ def disjoint(cfg,config_path,work,output):
+- specs=list(cfg['inputs'].values())+list(cfg['seed_code_files'].values())+list(cfg['resolution_code_files'].values())+list(cfg['hint_code_files'].values())+[cfg['hint_watchdog_code'],cfg['orchestration']['derived_manifest'],cfg['orchestration']['physical_lineage_report']]+([cfg['orchestration']['seed_handoff_attestation']] if cfg['orchestration']['seed_handoff_attestation'] else [])+list((cfg['orchestration']['seed_handoff_context'] or {}).values())
++ specs=list(cfg['inputs'].values())+list(cfg['seed_code_files'].values())+list(cfg['resolution_code_files'].values())+list(cfg['hint_code_files'].values())+[cfg['orchestration']['derived_manifest'],cfg['orchestration']['physical_lineage_report']]+([cfg['orchestration']['seed_handoff_attestation']] if cfg['orchestration']['seed_handoff_attestation'] else [])+list((cfg['orchestration']['seed_handoff_context'] or {}).values())
++ if cfg.get('caucasus_binding'):
++  cb=cfg['caucasus_binding'];specs += [cb['request'],cb['report']]+[cb['config'][k] for k in ('recipe','hydro','author')]
+  dirs={Path(x['path']).resolve().parent for x in specs}|{HERE,config_path.parent,Path(cfg['tile_directory']).resolve()}
++ if cfg.get('caucasus_binding'):dirs.add(CAUCASUS_DIR.resolve())
+  for t in (work,output):need(all(not t.is_relative_to(d) and not d.is_relative_to(t) for d in dirs),'work/output overlaps input or code')
+  need(all(not (work.parent/(work.name+'.lock')).is_relative_to(d) for d in dirs),'lock overlaps input')
+ 
+ def load_config(path):
+  raw=verify_inputs.bounded_bytes(path,1<<20);cfg=json.loads(raw)
+- keys={'schema','grid','inputs','seed_code_files','resolution_code_files','hint_code_files','hint_watchdog_code','tile_directory','policy_id','policy_version','controls','orchestration'}
+- need(set(cfg)==keys and cfg['schema']=='stage2-source-geodesic-v1' and isinstance(cfg['inputs'],dict) and set(cfg['inputs'])==INPUTS,'invalid stage-2 config or unsupported historical inputs')
++ keys={'schema','grid','inputs','seed_code_files','resolution_code_files','hint_code_files','tile_directory','policy_id','policy_version','controls','orchestration'}
++ need(set(cfg) in (keys,keys|{'caucasus_binding'}) and cfg['schema']=='stage2-source-geodesic-v1' and isinstance(cfg['inputs'],dict) and set(cfg['inputs'])==INPUTS,'invalid stage-2 config or unsupported historical inputs')
++ if 'caucasus_binding' in cfg:need(isinstance(cfg['caucasus_binding'],dict) and set(cfg['caucasus_binding'])=={'config','request','report'},'invalid Caucasus binding')
+  for k in ('seed_code_files','resolution_code_files','hint_code_files'):need(isinstance(cfg[k],dict) and bool(cfg[k]) and all(isinstance(x,str) and x and '/' not in x for x in cfg[k]),'invalid code file pins')
+  need(set(cfg['hint_code_files'])=={'hints.py','run_diagnostic.py'} and isinstance(cfg['tile_directory'],str) and isinstance(cfg['policy_id'],str) and cfg['policy_id'] and isinstance(cfg['policy_version'],str) and cfg['policy_version'],'invalid hint code or policy')
+  o=cfg['orchestration'];need(isinstance(o,dict) and set(o)=={'outer_config_sha256','orchestrator_sha256','derived_manifest','physical_lineage_report','seed_handoff_attestation','seed_handoff_context'} and all(isinstance(o.get(k),str) and contracts.HEX.fullmatch(o[k]) for k in ('outer_config_sha256','orchestrator_sha256')),'missing fresh-orchestration provenance')
+@@ -59,12 +80,12 @@
+  code_files={}
+  for field in ('seed_code_files','resolution_code_files','hint_code_files'):
+   code_files[field]={name:pin(v,guard) for name,v in cfg[field].items()}
+- watchdog=pin(cfg['hint_watchdog_code'],guard);derived_path=pin(cfg['orchestration']['derived_manifest'],guard);derived=read_json(derived_path,guard);need(derived.get('schema')=='stage2-fresh-derived-v1' and derived.get('outer_config_sha256')==cfg['orchestration']['outer_config_sha256'] and derived.get('orchestrator_sha256')==cfg['orchestration']['orchestrator_sha256'] and all(derived.get('artifacts',{}).get(k)==inp[k] for k in ('resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','hint_monitor','tile_manifest','representatives')),'derived manifest mismatch');disjoint(cfg,cp,work,output)
++ derived_path=pin(cfg['orchestration']['derived_manifest'],guard);derived=read_json(derived_path,guard);need(derived.get('schema')=='stage2-fresh-derived-v1' and derived.get('outer_config_sha256')==cfg['orchestration']['outer_config_sha256'] and derived.get('orchestrator_sha256')==cfg['orchestration']['orchestrator_sha256'] and all(derived.get('artifacts',{}).get(k)==inp[k] for k in ('resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives')),'derived manifest mismatch');disjoint(cfg,cp,work,output)
+  handoff_pin=cfg['orchestration']['seed_handoff_attestation'];handoff_ctx=cfg['orchestration']['seed_handoff_context'];need((handoff_pin is None and handoff_ctx is None) or (isinstance(handoff_ctx,dict) and handoff_ctx.get('attestation')==handoff_pin),'seed handoff context mismatch');handoff_path=pin(handoff_pin,guard) if handoff_pin else None;handoff_att=read_json(handoff_path,guard) if handoff_path else None;handoff_refs=[handoff_att[k] for k in ('request','monitor','report','seed_rows','seed_runs')] if handoff_att else [];[pin(x,guard) for x in list((handoff_ctx or {}).values())+handoff_refs];need(derived.get('seed_handoff_attestation')==handoff_pin,'seed handoff binding mismatch');lineage_path=pin(cfg['orchestration']['physical_lineage_report'],guard);lineage=verify_physical_lineage.validate_combined(read_json(paths['decision_snapshot'],guard),pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard);need(read_json(lineage_path,guard)==lineage,'physical lineage report mismatch')
+  if not resume:work.mkdir(mode=0o700)
+  need(os.stat(work).st_dev==os.stat(output.parent).st_dev,'atomic output requires same filesystem')
+  code={n:verify_inputs.sha_file(HERE/n,guard) for n in CODE_NAMES};source_code={field:{n:cfg[field][n]['sha256'] for n in cfg[field]} for field in code_files}
+- request={'schema':'stage2-source-geodesic-work-v1','config_sha256':hashlib.sha256(raw).hexdigest(),'input_sha256':pins,'code_sha256':code,'dependency_sha256':source_code,'hint_watchdog_sha256':cfg['hint_watchdog_code']['sha256'],'runtime':{'numpy':np.__version__,'scipy':scipy.__version__,'pyproj':pyproj.__version__,'proj':pyproj.proj_version_str},'output_path':str(output)}
++ request={'schema':'stage2-source-geodesic-work-v1','config_sha256':hashlib.sha256(raw).hexdigest(),'input_sha256':pins,'code_sha256':code,'dependency_sha256':source_code,'runtime':{'numpy':np.__version__,'scipy':scipy.__version__,'pyproj':pyproj.__version__,'proj':pyproj.proj_version_str},'output_path':str(output)}
+  rp=work/'request.json'
+  if resume:need(rp.is_file() and read_json(rp,guard)==request,'work request mismatch; historic checkpoints are not accepted')
+  else:
+@@ -89,10 +110,17 @@
+  else:
+   fresh=resolver.resolve(rr);fresh['request_sha256']=pins['resolution_request'];need(fresh==resolution,'fresh witness re-resolution differs from consumed report')
+  seed=read_json(paths['seed_report'],guard);seed_roots=contracts.seed_report(seed,g,pins,rev,ent,groups,entity_codes,source_code['seed_code_files'])
+- hint=read_json(paths['hint_report'],guard);monitor=read_json(paths['hint_monitor'],guard);count=contracts.hints_report(hint,monitor,g,pins,rev,ent,metric,seed_roots,source_code['hint_code_files'],cfg['hint_watchdog_code']['sha256'])
++ hint=read_json(paths['hint_report'],guard);count=contracts.hints_report(hint,g,pins,rev,ent,metric,seed_roots,source_code['hint_code_files'])
+  # The exact snapshot rules/region trace and land-policy crosswalk is still
+  # validated by a required separate contract routine, never inferred from V7.
+- land_policy=contracts.validate_selected_seed_decisions(snap,seed,groups,entity_codes,metric,guard=guard)
++ cb=cfg.get('caucasus_binding')
++ if cb:
++  need(derived.get('caucasus_binding')==cb and cb['request']['sha256']==derived.get('seed_request_sha256'),'Caucasus manifest binding mismatch')
++  binding=caucasus_binding(cb['config'],guard);binding_request=pin(cb['request'],guard);gate=read_json(pin(cb['report'],guard),guard)
++  land_policy,binding_trace=binding.validate_seed(cb['config'],binding_request,cb['request']['sha256'],gate,source_code['seed_code_files']['seed_producer.py'],contracts.validate_selected_seed_decisions,seed,groups,entity_codes,metric,guard=guard)
++ else:
++  need(not derived.get('caucasus_binding'),'unexpected Caucasus binding')
++  land_policy=contracts.validate_selected_seed_decisions(snap,seed,groups,entity_codes,metric,guard=guard);binding_trace=None
+  tolerance=contracts.policy_tolerance_metres(land_policy)
+  need(paths['hint_roots'].stat().st_size==count*4 and paths['hint_codes'].stat().st_size==count,'hint array size mismatch')
+  roots=np.frombuffer(verify_inputs.bounded_bytes(paths['hint_roots'],count*4,guard),dtype='<u4').copy();hints=np.frombuffer(verify_inputs.bounded_bytes(paths['hint_codes'],count,guard),dtype='u1').copy()
+@@ -102,7 +130,7 @@
+  builddir=work/('verifier-build-'+uuid.uuid4().hex);builddir.mkdir();copy=builddir/src.name;copy.write_bytes(src_bytes);binary=builddir/'verifier'
+  subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(copy),'-lcrypto','-o',str(binary)],check=True)
+  need(verify_inputs.sha_file(src,guard)==code[src.name] and verify_inputs.sha_file(copy,guard)==code[src.name],'verifier changed during compilation');guard()
+- v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024',str(ctrl['minimum_memory_kib'])],check=True,capture_output=True,text=True);tilecheck=json.loads(v.stdout);need(tilecheck.get('status')=='verified','seed/tile verification failed')
++ v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);tilecheck=json.loads(v.stdout);need(tilecheck.get('status')=='verified','seed/tile verification failed')
+  spec=verify_inputs.manifest(paths['tile_manifest'],w,h,1024,guard);rep_bytes=verify_inputs.bounded_bytes(paths['representatives'],min(128<<20,len(spec)*6*32*20),guard);rep=np.frombuffer(rep_bytes,dtype='<u4');need(len(rep)%5==0,'invalid representative shape');rep=rep.reshape(-1,5)
+  tiles=verify_inputs.verify_representatives(cfg['tile_directory'],paths['tile_manifest'],rep,w,h,guard=guard);need(len(tiles)==tilecheck['tiles'],'tile set mismatch')
+  run_count=paths['component_runs'].stat().st_size//12;co=engine.offsets(paths['component_rows'],h,run_count)
+@@ -118,10 +146,12 @@
+  for v in inp.values():pin(v,guard)
+  for field in code_files:
+   for v in cfg[field].values():pin(v,guard)
+- pin(cfg['hint_watchdog_code'],guard);pin(cfg['orchestration']['derived_manifest'],guard);pin(cfg['orchestration']['physical_lineage_report'],guard);[pin(x,guard) for x in list((handoff_ctx or {}).values())+handoff_refs];need(verify_physical_lineage.validate_combined(read_json(paths['decision_snapshot'],guard),pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard)==lineage,'physical lineage changed');need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and {n:verify_inputs.sha_file(HERE/n,guard) for n in CODE_NAMES}==code,'input or code changed')
+- v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024',str(ctrl['minimum_memory_kib'])],check=True,capture_output=True,text=True);need(json.loads(v.stdout).get('status')=='verified','seed/tile recheck failed')
++ pin(cfg['orchestration']['derived_manifest'],guard);pin(cfg['orchestration']['physical_lineage_report'],guard);[pin(x,guard) for x in list((handoff_ctx or {}).values())+handoff_refs];need(verify_physical_lineage.validate_combined(read_json(paths['decision_snapshot'],guard),pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard)==lineage,'physical lineage changed');need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and {n:verify_inputs.sha_file(HERE/n,guard) for n in CODE_NAMES}==code,'input or code changed')
++ v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);need(json.loads(v.stdout).get('status')=='verified','seed/tile recheck failed')
++ if cb:caucasus_binding(cb['config'],guard);pin(cb['request'],guard);pin(cb['report'],guard)
+  os.replace(partial/'report.json',partial/'writer-report.json')
+- report={'schema':'stage2-source-geodesic-report-v1','status':'stage2-research-awaiting-monitor','publishable':False,'monitor_required':True,'orchestration':cfg['orchestration'],'config_sha256':hashlib.sha256(raw).hexdigest(),'grid':g,'decision_snapshot_sha256':pins['decision_snapshot'],'decision_revision':rev,'entity_revision':ent,'distance_policy':metric,'land_baseline_policy':land_policy,'seed_report_sha256':pins['seed_report'],'resolution_report_sha256':pins['resolution_report'],'hint_report_sha256':pins['hint_report'],'hint_monitor_sha256':pins['hint_monitor'],'inputs_sha256':pins,'categories':categories,'code_sha256':code,'dependency_sha256':source_code,'runtime':request['runtime'],'physical_coverage':coverage,'physical_lineage_report_sha256':cfg['orchestration']['physical_lineage_report']['sha256'],'physical_lineage_status':lineage['status'],'tile_verification':tilecheck,'certified_components':result['certified_count'],'exact_search_components':result['exact_count'],'exact_queries':result['exact_queries'],'ties':result['ties'],'checkpoint_sha256':verify_inputs.sha_file(work/'checkpoint.npz',guard),'output_rows_sha256':writer['rows_sha256'],'output_runs_sha256':writer['runs_sha256'],'elapsed_seconds':time.monotonic()-start,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'method':'WGS84 ellipsoidal minimum over physical component and selected mainland cell centers; no island overrides or water assignment','limitations':['Research only; selected source and component provenance require independent authentication.','The numerical bound guard is tested but not a formal proof for all floating-point operations.','Source-only hints are performance suggestions and never accepted without certificate or exact search.']}
++ report={'schema':'stage2-source-geodesic-report-v1','status':'stage2-research-complete','publishable':False,'monitor_required':False,'orchestration':cfg['orchestration'],'config_sha256':hashlib.sha256(raw).hexdigest(),'grid':g,'decision_snapshot_sha256':pins['decision_snapshot'],'decision_revision':rev,'entity_revision':ent,'distance_policy':metric,'land_baseline_policy':land_policy,'seed_report_sha256':pins['seed_report'],'resolution_report_sha256':pins['resolution_report'],'hint_report_sha256':pins['hint_report'],'inputs_sha256':pins,'categories':categories,'code_sha256':code,'dependency_sha256':source_code,'runtime':request['runtime'],'physical_coverage':coverage,'physical_lineage_report_sha256':cfg['orchestration']['physical_lineage_report']['sha256'],'physical_lineage_status':lineage['status'],'tile_verification':tilecheck,'certified_components':result['certified_count'],'exact_search_components':result['exact_count'],'exact_queries':result['exact_queries'],'ties':result['ties'],'checkpoint_sha256':verify_inputs.sha_file(work/'checkpoint.npz',guard),'output_rows_sha256':writer['rows_sha256'],'output_runs_sha256':writer['runs_sha256'],'elapsed_seconds':time.monotonic()-start,'method':'WGS84 ellipsoidal minimum over physical component and selected mainland cell centers; no island overrides or water assignment','limitations':['Research only; selected source and component provenance require independent authentication.','The numerical bound guard is tested but not a formal proof for all floating-point operations.','Source-only hints are performance suggestions and never accepted without certificate or exact search.','This runtime does not launch a supervisor or impose a process-memory cap; external execution constraints are not assessed.']}
++ if cb:report['caucasus_binding']={'config':cb,'validation':binding_trace}
+  if handoff_pin:report['limitations'].append('The separately monitored seed handoff has a post-run readback attestation; its generic watchdog does not cryptographically bind the command it observed.')
+  with open(partial/'report.json','x') as f:json.dump(report,f,sort_keys=True,indent=2,allow_nan=False);f.write('\n');f.flush();os.fsync(f.fileno())
+  guard();fd=os.open(partial,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+@@ -133,4 +163,4 @@
+  return report
+ 
+ if __name__=='__main__':
+- raise SystemExit('run only through the monitored fresh-source orchestrator')
++ raise SystemExit('run only through the direct fresh-source orchestrator')
+--- a/runtime/contracts.py
++++ b/runtime/contracts.py
+@@ -56,12 +56,12 @@
+  for t in traces:need(isinstance(t,dict) and t.get('revision_id')==revision and text(t.get('region_id')) and isinstance(t.get('geometry_sha256'),str) and HEX.fullmatch(t['geometry_sha256']) and isinstance(t.get('input_trace'),list) and t['input_trace'] and text(t.get('method')),'invalid region trace')
+  return expected_roots
+ 
+-def hints_report(report,monitor,grid,pins,revision,entity_revision,metric,seed_roots,hint_code_hashes,watchdog_hash):
++def hints_report(report,grid,pins,revision,entity_revision,metric,seed_roots,hint_code_hashes):
+  need(report.get('schema')=='source-only-hints-diagnostic-report-v1' and report.get('status')=='diagnostic-not-independently-authenticated' and report.get('publishable') is False and report.get('synthetic_fixture') is not True,'invalid hints report')
+  need(report.get('grid')==grid and report.get('decision_revision')==revision and report.get('entity_revision')==entity_revision and report.get('distance_policy')==metric and report.get('seed_roots')==seed_roots,'hints policy/revision mismatch')
+  for k in ('physical_rows','physical_runs','component_rows','component_runs','seed_rows','seed_runs','representatives','tile_manifest','resolution_report','decision_snapshot','component_manifest'):need(report.get('inputs_sha256',{}).get(k)==pins[k],'stale hint input: '+k)
+  need(report.get('roots_sha256')==pins['hint_roots'] and report.get('hints_sha256')==pins['hint_codes'] and type(report.get('root_count')) is int and 0<report['root_count']<2**32 and report.get('code_sha256')==hint_code_hashes,'hints artifact/code mismatch')
+- need(monitor.get('schema')=='source-only-hints-watchdog-v1' and monitor.get('status')=='sampled-complete' and monitor.get('diagnostic_report_sha256')==pins['hint_report'] and monitor.get('watchdog_sha256')==watchdog_hash and type(monitor.get('samples')) is int and monitor['samples']>0 and type(monitor.get('minimum_available_kib')) is int and type(monitor.get('minimum_memory_kib')) is int and monitor['minimum_available_kib']>=monitor['minimum_memory_kib']>=0 and type(monitor.get('peak_child_rss_kib')) is int and type(monitor.get('maximum_child_rss_kib')) is int and 0<monitor['peak_child_rss_kib']<=monitor['maximum_child_rss_kib'],'hint watchdog incomplete or mismatched')
++
+  return report['root_count']
+ 
+ def policy_tolerance_metres(policy):
+@@ -98,7 +98,7 @@
+ 
+ 
+ 
+-def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=lambda:None):
++def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=lambda:None,*,fresh_closure_proofs=False):
+  """Provisional strict v1 crosswalk; execution remains gated externally.
+ 
+  Verify selected policy, component rules, geometry traces, source citations and
+@@ -183,7 +183,13 @@
+     need(all(isinstance(x,dict) and x.get('decision_revision')==rev and x.get('execution_status')=='selected_for_research' and text(x.get('source_id')) and text(x.get('source_version')) for x in selected_sources),'invalid selected physical source');selected_keys={(x['source_id'],x['source_version']) for x in selected_sources};need(bool(selected_keys) and len(refs)==len(selected_keys) and {(x['source_id'],x['version']) for x in refs}==selected_keys,'route source selection mismatch');cit=[]
+     for ref in refs:
+      key=(ref['source_id'],ref['version']);src=source_by.get(key);asset=asset_by.get(key);need(isinstance(src,dict) and isinstance(asset,dict) and key not in derived and asset.get('kind')=='raw' and all(src.get(k)==asset.get(k) for k in ('sha256','r2_bucket','r2_key','size_bytes')) and isinstance(src.get('sha256'),str) and HEX.fullmatch(src['sha256']) and text(src.get('r2_bucket')) and text(src.get('r2_key')) and type(src.get('size_bytes')) is int and src['size_bytes']>0 and isinstance(asset.get('provenance'),dict) and text(asset['provenance'].get('origin')),'invalid route source custody');cit.append({'source_id':key[0],'version':key[1],'sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'origin':asset['provenance']['origin']})
+-    need(trace.get('source_citations')==cit and all(prov.get(k+'_sha256')==pins.get(k) for k in ('physical_rows','physical_runs','physical_report')) and prov.get('contract_sha256')==pins.get('closure_contract') and prov.get('checker_sha256')==pins.get('terminal_checker' if method=='physical_terminal_closure_v1' else 'closure_checker'),'route source/provenance mismatch')
++    # Historical route metadata remains the exact selected record in the trace.
++    # A fresh proof may use newly pinned checker/contract bytes, but the caller
++    # must bind this mode to the actual authenticated direct-seed invocation.
++    historic=('physical_rows_sha256','physical_runs_sha256','physical_report_sha256','contract_sha256','checker_sha256')
++    need(type(fresh_closure_proofs) is bool and trace.get('source_citations')==cit and all(isinstance(prov.get(k),str) and HEX.fullmatch(prov[k]) for k in historic),'route source/provenance mismatch')
++    if not fresh_closure_proofs:
++     need(all(prov.get(k+'_sha256')==pins.get(k) for k in ('physical_rows','physical_runs','physical_report')) and prov.get('contract_sha256')==pins.get('closure_contract') and prov.get('checker_sha256')==pins.get('terminal_checker' if method=='physical_terminal_closure_v1' else 'closure_checker'),'route source/provenance mismatch')
+     need(isinstance(proof,dict) and proof.get('status')=='valid' and proof.get('geometry_sha256')==geomhash(selected) and proof.get('physical_rows_sha256')==pins.get('physical_rows') and proof.get('physical_runs_sha256')==pins.get('physical_runs') and proof.get('physical_report_sha256')==pins.get('physical_report') and proof.get('contract_sha256')==pins.get('closure_contract'),'closure proof mismatch')
+     if method=='physical_water_closure_v1':need(proof.get('schema')=='physical-water-closure-proof-v1' and proof.get('checker_sha256')==pins.get('closure_checker'),'water closure checker mismatch')
+     else:
+--- a/runtime/hint-producer/run_diagnostic.py
++++ b/runtime/hint-producer/run_diagnostic.py
+@@ -25,17 +25,16 @@
+  return h.hexdigest()
+ def run(config_path,out_path):
+  cp=Path(config_path).resolve();out=Path(out_path).resolve(); raw=bounded(cp,1048576);cfg=json.loads(raw)
+- need(set(cfg)=={'schema','grid','codes','inputs','decision_revision','entity_revision','policy_id','policy_version','minimum_memory_kib','minimum_free_bytes'} and cfg['schema']=='source-only-hints-diagnostic-request-v1','bad request')
++ need(set(cfg)=={'schema','grid','codes','inputs','decision_revision','entity_revision','policy_id','policy_version','minimum_free_bytes'} and cfg['schema']=='source-only-hints-diagnostic-request-v1','bad request')
+  inp=cfg['inputs'];need(isinstance(inp,dict) and set(inp)==NAMES,'bad inputs')
+  paths={};
+  for k,v in inp.items():
+   need(isinstance(v,dict) and set(v)=={'path','sha256'} and isinstance(v['sha256'],str) and len(v['sha256'])==64,'bad pin');paths[k]=Path(v['path']).resolve()
+  need(out.parent.is_dir() and not out.exists(),'output must be fresh')
+  for p in [cp,*paths.values(),Path(__file__).resolve(),Path(hints.__file__).resolve()]: need(not p.is_relative_to(out) and not out.is_relative_to(p.parent),'output overlaps input/code directory')
+- mem=cfg['minimum_memory_kib'];disk=cfg['minimum_free_bytes'];need(type(mem)==int and mem>=0 and type(disk)==int and disk>0,'resource floors required')
++ disk=cfg['minimum_free_bytes'];need(type(disk)==int and disk>0,'disk floor required')
+  def guard():
+-  with open('/proc/meminfo') as f: av=next((int(s.split()[1]) for s in f if s.startswith('MemAvailable:')),None)
+-  if av is None or av<mem or shutil.disk_usage(out.parent).free<disk:raise RuntimeError('resource floor reached')
++  if shutil.disk_usage(out.parent).free<disk:raise RuntimeError('disk floor reached')
+  guard(); start=time.monotonic(); code_before={p.name:digest(p,guard) for p in (Path(hints.__file__),Path(__file__))}
+  for k in sorted(paths):need(paths[k].is_file() and digest(paths[k],guard)==inp[k]['sha256'],'input hash mismatch: '+k)
+  grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','step','west','north'} and type(grid['width']) is int and 1<=grid['width']<=1000000 and type(grid['height']) is int and 1<=grid['height']<=1000000 and grid['west']==-180,'bad grid')
+--- a/runtime/orchestrate_stage2.py
++++ b/runtime/orchestrate_stage2.py
+@@ -1,11 +1,11 @@
+ #!/usr/bin/env python3
+-"""Stage 2 fresh-source orchestration under the supervising guardian.
++"""Stage 2 direct orchestration using an already verified seed handoff.
+ 
+ A fresh same-run seed or the separately monitored, independently checked seed
+ handoff may be used. Hints are regenerated and no historical assignment or
+ checkpoint is accepted. All outputs remain research-only.
+ """
+-import argparse,hashlib,importlib.util,json,os,subprocess,sys
++import argparse,hashlib,importlib.util,json,os,subprocess,sys,tempfile
+ from pathlib import Path
+ import build_seed_tiles,build_stage2,checkpoints,contracts,verify_inputs
+ import representatives,verify_physical_lineage,witness_compare
+@@ -13,7 +13,7 @@
+ HERE=Path(__file__).resolve().parent
+ BASE_INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','closure_checker','terminal_checker','closure_contract','seed_builder','seed_kernel'}
+ SEED_NAMES=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','guarded_exec.py','guarded_raster_exec.py')
+-HINT_NAMES=('hints.py','run_diagnostic.py','watch_diagnostic.py')
++HINT_NAMES=('hints.py','run_diagnostic.py')
+ # Reviewed candidate seed and worker hashes; input and scientific checks remain independent.
+ REVIEWED_SEED_FREEZE={'seed_producer.py': '116d43c4b7d510ef16e02a20deaee83ad7424f34e527037dd23e4db68aa1f416', 'export_adapter.py': 'b13d2a5868542cf2946b25c495a12d1aa793470ec55f8744a4af9f96630213f9', 'seed_rules.py': '0e98f77341b8f297b434d46250f2e8e9f615e6a3764cad176fe3cdf40c52f342', 'region_client.py': '9f5c51269abe890ba2db71c8ea91c600f002ea2f1fb6331739c0d84cb5dbc795', 'region_worker.py': '25d888715984a6ba4ed04a154af5980a114f24599baa670ebcc0a2b993b63314', 'regions.py': 'd8cf1c7629321e603c64bd96671498aab4ff78b6921d36b0a735e00a9b7705b0', 'closure_client.py': 'bc976967797ae67c99ab1aff712c25636ab1b3f01f7c7a558c59b530b573fb1b', 'guarded_exec.py': '31bd7364765a2b8c181956cf275fabd6ae764207574f984d7b90c26b1474e7f3', 'guarded_raster_exec.py': '0179c973476ec172bbd2deed4e6e449edffaea8bc77cd3b96296f3ec9e6f7e89'}
+ REVIEWED_SEED_WORKER_SHA256='5c178ae0f1d5e0878c2b8902aba7a54b86f01b4c85fe9e6833d0c9f2ae83e24d'
+@@ -47,31 +47,85 @@
+  return {n:verify_inputs.sha_file(HERE/n,guard) for n in names}
+ def load_config(path):
+  raw=verify_inputs.bounded_bytes(path,1<<20);obj=json.loads(raw)
+- keys={'schema','grid','inputs','policy_id','policy_version','controls','seed_controls','hint_max_rss_kib'}
+- need(isinstance(obj,dict) and set(obj) in (keys,keys|{'seed_handoff'}) and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs'])==BASE_INPUTS,'invalid fresh orchestration config or historical input')
++ keys={'schema','grid','inputs','policy_id','policy_version','controls','seed_controls','seed_handoff'}
++ need(isinstance(obj,dict) and set(obj)==keys and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs'])==BASE_INPUTS,'invalid fresh orchestration config or historical input')
+  if 'seed_handoff' in obj:need(isinstance(obj['seed_handoff'],dict) and set(obj['seed_handoff'])=={'attestation','seed_watchdog_code','seed_guardian_code','witness_report','witness_monitor','witness_watchdog_code','witness_guardian_code','component_report','component_monitor','component_watchdog_code','component_guardian_code','component_config','component_driver_code','witness_config','witness_driver_code'},'invalid monitored seed handoff')
+  build_stage2.validate_controls(obj['controls'])
+  s=obj['seed_controls'];need(isinstance(s,dict) and set(s)=={'timeout_seconds','strip_rows','max_group_rss_kib'} and type(s['timeout_seconds']) in (int,float) and 0<s['timeout_seconds']<=1800 and type(s['strip_rows']) is int and 1<=s['strip_rows']<=64 and type(s['max_group_rss_kib']) is int and 262144<=s['max_group_rss_kib']<=786432,'invalid seed controls')
+- need(type(obj['hint_max_rss_kib']) is int and obj['hint_max_rss_kib']>0 and all(isinstance(obj[k],str) and obj[k] for k in ('policy_id','policy_version')),'invalid hint/policy controls')
++ need(obj['controls']['minimum_memory_kib']==0 and all(isinstance(obj[k],str) and obj[k] for k in ('policy_id','policy_version')),'direct mode requires no host memory floor')
+  return raw,obj
++
++def direct_seed_request(grid, inputs, strip_rows):
++ # Construction only. The executable path remains disabled until the v2 code
++ # freeze, fresh proof binding and current selected-source checks are reviewed.
++ required={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','terminal_checker','closure_contract','seed_builder','seed_kernel'}
++ optional={'panama_osm_archive'}
++ need(isinstance(inputs,dict) and required<=set(inputs) and set(inputs)<=required|optional,'invalid direct seed input set')
++ need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'},'invalid direct seed grid')
++ need(type(strip_rows) is int and strip_rows>0,'invalid direct seed strip rows')
++ for pin in inputs.values():
++  need(isinstance(pin,dict) and set(pin)=={'path','sha256'} and isinstance(pin['path'],str) and pin['path'] and isinstance(pin['sha256'],str) and len(pin['sha256'])==64 and all(x in '0123456789abcdef' for x in pin['sha256']),'invalid direct seed input pin')
++ return {'schema':'worldatlas-stage2-seed-direct-request-v2','grid':grid,'inputs':inputs,'controls':{'strip_rows':strip_rows}}
++
++# Separately reviewed from the historical v1 seed handoff. This function is
++# not yet wired into run(); it imposes no process supervisor or memory cap.
++DIRECT_SEED_FREEZE = {'seed_producer.py': '48d5719ca263ac28f9433c729d413207f069caa23fb72513d647ed26edd42b35', 'export_adapter.py': 'b13d2a5868542cf2946b25c495a12d1aa793470ec55f8744a4af9f96630213f9', 'seed_rules.py': '0e98f77341b8f297b434d46250f2e8e9f615e6a3764cad176fe3cdf40c52f342', 'region_client.py': '1deb45ca74f48439543eac5955cf1e3544d1248aba94e709e240e883801c7321', 'region_worker.py': '677bbe574abc79973af4834220ee615ce8d049db1fe2be75eac875c8897db136', 'regions.py': 'd8cf1c7629321e603c64bd96671498aab4ff78b6921d36b0a735e00a9b7705b0', 'closure_client.py': '51007b2f0e8e4244974ef1b698ee47dcee8739f0a2d5ce04c56bd9c1fe92c1e6', 'panama_seed_source.py': 'f6edea70f22993241acbffcfd1d02eefaf7a9e60b00925e8afdfb5963b781655', 'osm_source_handoff.py': 'ef6bc620e447f38be3524bcebeba6b1fe309ab2a4ea7f507ccf38c3ef4d30add', 'assemble_osm_ways.py': 'b1edf136b05109dcfb080158f58dffe9f910c6c30b3a654721478453b64270e2', 'rasterizer/build_seed.py': '8b59d9212064ed7fcdde37ca9ad53a8b1544c0b2abad4b1e2ac3c30e49b193a1', 'rasterizer/seed_kernel.cpp': '1543a7014f84eb5969b073435d463e838922c186d996ec9dcb0f68133ac15fa8', 'closure-checkers/validate_water_closure_v2.py': '5b01e11908293df6f941adbc391d4c9e7709f49c1b8ad60d46be0558d66ca6b3', 'closure-checkers/validate_terminal_closure.py': '08fd855bddd47dd2152ae0ac0fabd1e23e1d75db9e337a0af3a840a6787e1cb2'}
++DIRECT_SEED_REPORTED = ('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','panama_seed_source.py','osm_source_handoff.py','assemble_osm_ways.py')
++
++def invoke_direct_seed(request, work, output, guard=lambda: None):
++ directory=HERE/'seed-producer-direct';request=Path(request).resolve(strict=True);work=Path(work).resolve();output=Path(output).resolve()
++ def unique(pairs):
++  d={}
++  for k,v in pairs:
++   need(k not in d,'duplicate JSON key');d[k]=v
++  return d
++ def invalid_constant(value):raise ValueError('non-finite JSON constant')
++ def read_json(raw):return json.loads(raw,object_pairs_hook=unique,parse_constant=invalid_constant)
++ def code_check():
++  for name,expected in DIRECT_SEED_FREEZE.items():
++   need(verify_inputs.sha_file(directory/name,guard)==expected,'direct seed code changed: '+name)
++ def inputs_check(q):
++  for spec in q['inputs'].values():
++   need(Path(spec['path']).is_absolute(),'direct seed input path must be absolute')
++   build_stage2.pin(spec,guard)
++ raw=verify_inputs.bounded_bytes(request,1<<20,guard);q=read_json(raw)
++ need(q==direct_seed_request(q.get('grid'),q.get('inputs'),q.get('controls',{}).get('strip_rows')),'invalid direct seed request')
++ for key,name in (('seed_builder','rasterizer/build_seed.py'),('seed_kernel','rasterizer/seed_kernel.cpp'),('closure_checker','closure-checkers/validate_water_closure_v2.py'),('terminal_checker','closure-checkers/validate_terminal_closure.py')):
++  need(q['inputs'][key]['sha256']==DIRECT_SEED_FREEZE[name],'unreviewed direct seed executable: '+key)
++ code_check();inputs_check(q)
++ need(not work.exists() and not output.exists() and work.parent.is_dir() and output.parent.is_dir(),'direct seed work/output already exists or parent missing')
++ spec=importlib.util.find_spec('osgeo');need(spec is not None and spec.origin,'GDAL Python package unavailable')
++ gdal_root=str(Path(spec.origin).resolve().parent.parent)
++ started=False
++ try:
++  # Execute a verified private copy under isolated Python. Child subprocesses
++  # inherit a clean Python environment; system GDAL remains an external input.
++  with tempfile.TemporaryDirectory(prefix='.direct-seed-code-',dir=work.parent) as temp:
++   snap=Path(temp)
++   for name,expected in DIRECT_SEED_FREEZE.items():
++    data=verify_inputs.bounded_bytes(directory/name,1<<20,guard);need(hashlib.sha256(data).hexdigest()==expected,'direct seed code changed during capture: '+name)
++    dest=snap/name;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data)
++   boot="import importlib.util,sys\np=sys.argv[1]\nsys.path[:0]=[p,sys.argv[2]]\nnames="+repr(tuple(n[:-3] for n in DIRECT_SEED_REPORTED if n.endswith('.py')))+"\nif any(n in sys.modules for n in names): raise RuntimeError('seed module already loaded')\ns=importlib.util.spec_from_file_location('seed_producer',p+'/seed_producer.py')\nm=importlib.util.module_from_spec(s)\nsys.modules['seed_producer']=m\ns.loader.exec_module(m)\nm.run(*sys.argv[3:])"
++   env={k:v for k,v in os.environ.items() if not k.upper().startswith('PYTHON')};env['PYTHONNOUSERSITE']='1'
++   started=True
++   subprocess.run([sys.executable,'-I','-S','-c',boot,str(snap),gdal_root,str(request),str(work),str(output)],cwd=snap,env=env,check=True)
++   for name,expected in DIRECT_SEED_FREEZE.items():need(verify_inputs.sha_file(snap/name,guard)==expected,'captured direct seed code changed: '+name)
++  report_path=output/'report.json';report_raw=verify_inputs.bounded_bytes(report_path,16<<20,guard);report=read_json(report_raw)
++  expected_code={n:DIRECT_SEED_FREEZE[n] for n in DIRECT_SEED_REPORTED};expected_code.update({'rasterizer':DIRECT_SEED_FREEZE['rasterizer/build_seed.py'],'rasterizer_kernel':DIRECT_SEED_FREEZE['rasterizer/seed_kernel.cpp']})
++  need(report.get('schema')=='worldatlas-stage2-mainland-seed-report-v1' and report.get('status')=='diagnostic-seed-pending-independent-provenance' and report.get('publishable') is False and report.get('execution')=={'mode':'direct','strip_rows':q['controls']['strip_rows']} and report.get('grid')==q['grid'] and report.get('request_sha256')==hashlib.sha256(raw).hexdigest() and report.get('input_sha256')=={k:v['sha256'] for k,v in q['inputs'].items()} and report.get('code_sha256')==expected_code,'direct seed report binding mismatch')
++  for field,key in (('decision_snapshot_sha256','snapshot'),('resolution_report_sha256','resolution'),('physical_rows_sha256','physical_rows'),('physical_runs_sha256','physical_runs'),('physical_report_sha256','physical_report'),('component_rows_sha256','component_rows'),('component_runs_sha256','component_runs'),('component_manifest_sha256','component_manifest')):need(report.get(field)==q['inputs'][key]['sha256'],'direct seed named input mismatch: '+field)
++  for key,name in (('seed_rows_sha256','rows.u32le'),('seed_runs_sha256','runs.u32le'),('rasterizer_report_sha256','rasterizer-report.json')):need(report.get(key)==verify_inputs.sha_file(output/name,guard),'direct seed output mismatch')
++  code_check();inputs_check(q);need(verify_inputs.bounded_bytes(request,1<<20,guard)==raw and verify_inputs.bounded_bytes(report_path,16<<20,guard)==report_raw,'direct seed request or report changed')
++  return report
++ except Exception as exc:
++  if started and (work.exists() or output.exists()):raise RuntimeError('direct seed work or output may exist; inspect it before retrying') from exc
++  raise
+ 
+ def seed_monitor_floor_matches(monitor, seed_controls):
+  # A null floor means the outer monitor observed memory but did not enforce a floor.
+  return ('memory_floor_kib' in monitor and
+          (monitor['memory_floor_kib'] is None or
+           (type(monitor['memory_floor_kib']) is int and monitor['memory_floor_kib']==seed_controls['memory_floor_kib'])))
+-
+-def require_closure_floor(contract,controls):
+- resources=contract.get('resources') if isinstance(contract,dict) else None
+- need(isinstance(resources,dict) and type(resources.get('memory_floor_kib')) is int and resources['memory_floor_kib']>0 and controls['minimum_memory_kib']>=resources['memory_floor_kib'],'monitor memory floor is below closure checker contract')
+-
+-def require_guardian():
+- parent=os.getppid();need(parent==os.getpgrp(),'stage-2 guardian/monitor required')
+- try:
+-  argv=Path(f'/proc/{parent}/cmdline').read_bytes().split(b'\0')
+-  valid=len(argv)>=3 and Path(os.fsdecode(argv[1])).resolve()==(HERE/'guardian.py').resolve()
+- except (OSError,ValueError):valid=False
+- need(valid and os.getppid()==parent,'stage-2 guardian/monitor required')
+ 
+ def validate_seed_handoff(cfg,code,guard):
+  h=cfg['seed_handoff'];paths={k:build_stage2.pin(v,guard) for k,v in h.items()}
+@@ -93,19 +147,21 @@
+  return a,q,report,ap
+ 
+ def run(config_path,work_dir,output_dir,resume=False):
+- require_guardian()
+  cp,work,out=map(lambda p:Path(p).resolve(),(config_path,work_dir,output_dir));raw,cfg=load_config(cp);c=cfg['controls']
+  need(work.parent.is_dir() and out.parent.is_dir() and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'invalid work/output')
+  guard=lambda:checkpoints.guard(work.parent,c['minimum_memory_kib'],c['minimum_free_bytes']);guard()
+  paths={k:build_stage2.pin(v,guard) for k,v in cfg['inputs'].items()};handoff_paths={k:build_stage2.pin(v,guard) for k,v in cfg.get('seed_handoff',{}).items()}
+- for p in [cp,HERE,*paths.values(),*handoff_paths.values()]:
++ ccfg=cfg.get('caucasus_source');binding=build_stage2.caucasus_binding(ccfg,guard) if ccfg else None
++ caucasus_paths=[build_stage2.pin(ccfg[k],guard) for k in ('recipe','hydro','author')] if ccfg else []
++ for p in [cp,HERE,*paths.values(),*handoff_paths.values(),*caucasus_paths]:
+   d=p if p==HERE else p.parent
+   need(all(not t.is_relative_to(d) and not d.is_relative_to(t) for t in (work,out)),'work/output overlaps code or input')
++ if binding:
++  d=build_stage2.CAUCASUS_DIR.resolve();need(all(not t.is_relative_to(d) and not d.is_relative_to(t) for t in (work,out)),'work/output overlaps Caucasus code')
+  code=code_hashes(guard);require_reviewed_seed(code)
+  need(SELECTED_POLICY_CROSSWALK_READY,'selected land-policy crosswalk not yet implemented')
+  grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int and 1<grid['width']<=1000000 and 0<grid['height']<=1000000 and grid['west']==-180 and grid['north']==90 and grid['step']==360/grid['width'] and 90-grid['height']*grid['step']>=-90-1e-8,'invalid global grid')
+  closure_contract=json.loads(verify_inputs.bounded_bytes(paths['closure_contract'],65536,guard))
+- if 'seed_handoff' not in cfg:require_closure_floor(closure_contract,c)
+  snapshot=json.loads(verify_inputs.bounded_bytes(paths['decision_snapshot'],16<<20,guard));rev=snapshot.get('decision_revision',{}).get('id');entity=snapshot.get('entity_revision',{}).get('id');contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
+  pins={k:v['sha256'] for k,v in cfg['inputs'].items()};lineage=verify_physical_lineage.validate_combined(snapshot,pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard);manifest=json.loads(verify_inputs.bounded_bytes(paths['component_manifest'],16<<20,guard));contracts.component_manifest(manifest,grid,pins)
+  physical=json.loads(verify_inputs.bounded_bytes(paths['physical_report'],16<<20,guard));po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==grid and po.get('rows.u32le')==pins['physical_rows'] and po.get('runs.u32le')==pins['physical_runs'],'physical report mismatch')
+@@ -134,8 +190,6 @@
+   need(comparison['old_request_sha256']==pins['resolution_request'] and comparison['old_report_sha256']==handoff[0]['resolution_sha256'],'original witness binding mismatch')
+   os.link(original,rout);fd=os.open(rout.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+   recheck={'request':pin(new_req_path,guard),'report':pin(new_report_path,guard),'comparison':comparison}
+- else:
+-  subprocess.run([sys.executable,str(HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py'),str(rr),str(rout)],check=True)
+  resolution=json.loads(verify_inputs.bounded_bytes(rout,16<<20,guard));snapshot=json.loads(verify_inputs.bounded_bytes(paths['decision_snapshot'],16<<20,guard));rev=snapshot['decision_revision']['id'];entity=snapshot['entity_revision']['id'];metric,categories,_=contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
+  rp=pin(rout,guard);si={}
+  for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel')):si[dst]=cfg['inputs'][src]
+@@ -147,13 +201,13 @@
+   for src,dst in (('report','report.json'),('seed_rows','rows.u32le'),('seed_runs','runs.u32le')):os.link(ap[src],seedout/dst)
+   for d in (seedrequest.parent,seedout,seedout.parent):
+    fd=os.open(d,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+- else:
+-  si['resolution']=rp;sr={'schema':'worldatlas-stage2-seed-request-v1','grid':cfg['grid'],'inputs':si,'controls':{'memory_floor_kib':c['minimum_memory_kib'],'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}};write_json(seedrequest,sr)
+-  subprocess.run([sys.executable,str(HERE/'seed-producer'/'seed_worker.py'),str(seedrequest),str(seedwork),str(seedout)],check=True);seed=json.loads(verify_inputs.bounded_bytes(seedout/'report.json',16<<20,guard))
+  srows=pin(seedout/'rows.u32le',guard);sruns=pin(seedout/'runs.u32le',guard)
+  # Verify selected rules, source/region traces and tie policy before using seed.
+  groups={g['group_id']:g for g in resolution['groups']};entity_codes={b['entity_id']:b['code'] for b in snapshot['category_bindings'] if b['physical_class']=='land'}
+- contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=guard)
++ if binding:
++  gate=json.loads(verify_inputs.bounded_bytes(work/'derived'/'caucasus-gate.json',16<<20,guard))
++  binding.validate_seed(ccfg,seedrequest,verify_inputs.sha_file(seedrequest,guard),gate,code['seed-producer/seed_producer.py'],contracts.validate_selected_seed_decisions,seed,groups,entity_codes,metric,guard=guard)
++ else:contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=guard)
+  tileout=work/'tiles-parent'/'tiles';g=cfg['grid'];tile=build_seed_tiles.build(srows['path'],sruns['path'],srows['sha256'],sruns['sha256'],g['width'],g['height'],tileout,memory_floor_kib=c['minimum_memory_kib'],disk_floor_bytes=c['minimum_free_bytes'])
+  reps=work/'reps'/'representatives.u32le';representatives.build(tileout,tileout/'manifest.txt',tile['manifest_sha256'],reps,work/'reps'/'report.json',width=g['width'],height=g['height'],memory_floor_kib=c['minimum_memory_kib'],disk_floor_bytes=c['minimum_free_bytes'])
+  # A separately compiled complete seed/tile verifier must precede hints. The
+@@ -163,19 +217,21 @@
+  with open(source_copy,'xb') as f:f.write(source_data);f.flush();os.fsync(f.fileno())
+  binary=work/'requests'/'tile-verifier';subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(source_copy),'-lcrypto','-o',str(binary)],check=True)
+  need(verify_inputs.sha_file(source,guard)==code['verify_seed_index.cpp'] and verify_inputs.sha_file(source_copy,guard)==code['verify_seed_index.cpp'],'verifier source changed during compilation')
+- guard();check=subprocess.run([str(binary),srows['path'],sruns['path'],str(tileout),str(g['width']),str(g['height']),'1024',str(c['minimum_memory_kib'])],capture_output=True,text=True,check=True)
++ guard();check=subprocess.run([str(binary),srows['path'],sruns['path'],str(tileout),str(g['width']),str(g['height']),'1024'],capture_output=True,text=True,check=True)
+  need(json.loads(check.stdout).get('status')=='verified','fresh seed/tile verification failed')
+  import numpy as np
+  rdata=verify_inputs.bounded_bytes(reps,128<<20,guard);need(len(rdata)%20==0,'bad representative data');arr=np.frombuffer(rdata,dtype='<u4').reshape(-1,5)
+  verify_inputs.verify_representatives(tileout,tileout/'manifest.txt',arr,g['width'],g['height'],guard=guard)
+  hi={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hi.update({'seed_rows':srows,'seed_runs':sruns,'resolution_report':rp,'representatives':pin(reps,guard),'tile_manifest':pin(tileout/'manifest.txt',guard)})
+- hr={'schema':'source-only-hints-diagnostic-request-v1','grid':g,'codes':sorted(categories),'inputs':hi,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_memory_kib':c['minimum_memory_kib'],'minimum_free_bytes':c['minimum_free_bytes']}
++ hr={'schema':'source-only-hints-diagnostic-request-v1','grid':g,'codes':sorted(categories),'inputs':hi,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']}
+  hreq=work/'requests'/'hints.json';write_json(hreq,hr);hout=work/'hints-parent'/'hints'
+- subprocess.run([sys.executable,str(HERE/'hint-producer'/'watch_diagnostic.py'),str(hreq),str(hout),str(cfg['hint_max_rss_kib'])],check=True)
+- artifacts={'resolution_report':rp,'seed_rows':srows,'seed_runs':sruns,'seed_report':pin(seedout/'report.json',guard),'tile_manifest':pin(tileout/'manifest.txt',guard),'representatives':pin(reps,guard),'hint_roots':pin(hout/'roots.u32le',guard),'hint_codes':pin(hout/'hints.u8',guard),'hint_report':pin(hout/'report.json',guard),'hint_monitor':pin(hout/'monitor.json',guard)}
++ subprocess.run([sys.executable,str(HERE/'hint-producer'/'run_diagnostic.py'),str(hreq),str(hout)],check=True)
++ artifacts={'resolution_report':rp,'seed_rows':srows,'seed_runs':sruns,'seed_report':pin(seedout/'report.json',guard),'tile_manifest':pin(tileout/'manifest.txt',guard),'representatives':pin(reps,guard),'hint_roots':pin(hout/'roots.u32le',guard),'hint_codes':pin(hout/'hints.u8',guard),'hint_report':pin(hout/'report.json',guard)}
+  for spec in cfg['inputs'].values():build_stage2.pin(spec,guard)
++ if binding:binding.verify_config(ccfg,guard)
+  need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
+  marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'artifacts':artifacts,'seed_request_sha256':verify_inputs.sha_file(seedrequest,guard),'hint_request_sha256':verify_inputs.sha_file(hreq,guard),'seed_tile_verification':json.loads(check.stdout),'physical_lineage_report':pin(work/'lineage'/'report.json',guard),'seed_handoff_attestation':cfg['seed_handoff']['attestation'] if handoff else None,'witness_recheck':recheck,'tile_directory':str(tileout),'code_sha256':code}
++ if binding:marker['caucasus_binding']={'config':ccfg,'request':pin(seedrequest,guard),'report':pin(work/'derived'/'caucasus-gate.json',guard)}
+  write_json(work/'derived'/'manifest.json',marker)
+  return finish_from_marker(cfg,raw,work,out,code,guard,False)
+ 
+@@ -185,9 +241,14 @@
+  snapshot=json.loads(verify_inputs.bounded_bytes(cfg['inputs']['decision_snapshot']['path'],16<<20,guard));lineage=verify_physical_lineage.validate_combined(snapshot,cfg['inputs']['decision_snapshot']['sha256'],cfg['inputs']['physical_lineage_request']['path'],cfg['inputs']['physical_report']['sha256'],cfg['inputs']['physical_rows']['sha256'],cfg['inputs']['physical_runs']['sha256'],cfg['grid'],guard);lineage_pin=marker.get('physical_lineage_report');need(isinstance(lineage_pin,dict) and Path(lineage_pin.get('path','')).resolve()==work/'lineage'/'report.json' and json.loads(verify_inputs.bounded_bytes(build_stage2.pin(lineage_pin,guard),16<<20,guard))==lineage,'physical lineage resume mismatch')
+  handoff=validate_seed_handoff(cfg,code,guard) if 'seed_handoff' in cfg else None
+  need(marker.get('seed_handoff_attestation')==(cfg['seed_handoff']['attestation'] if handoff else None),'seed handoff marker mismatch')
+- artifacts=marker.get('artifacts');names={'resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','hint_monitor','tile_manifest','representatives'}
++ cb=marker.get('caucasus_binding');ccfg=cfg.get('caucasus_source')
++ if ccfg:
++  need(isinstance(cb,dict) and set(cb)=={'config','request','report'} and cb['config']==ccfg and Path(cb['request'].get('path','')).resolve()==work/'requests'/'seed.json' and Path(cb['report'].get('path','')).resolve()==work/'derived'/'caucasus-gate.json','Caucasus resume binding mismatch')
++  build_stage2.caucasus_binding(ccfg,guard);build_stage2.pin(cb['request'],guard);build_stage2.pin(cb['report'],guard)
++ else:need(cb is None,'unexpected Caucasus resume binding')
++ artifacts=marker.get('artifacts');names={'resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'}
+  need(isinstance(artifacts,dict) and set(artifacts)==names,'incomplete derived artifacts')
+- expected={'resolution_report':work/'resolution'/'report.json','seed_rows':work/'seed-work-parent'/'output'/'rows.u32le','seed_runs':work/'seed-work-parent'/'output'/'runs.u32le','seed_report':work/'seed-work-parent'/'output'/'report.json','hint_roots':work/'hints-parent'/'hints'/'roots.u32le','hint_codes':work/'hints-parent'/'hints'/'hints.u8','hint_report':work/'hints-parent'/'hints'/'report.json','hint_monitor':work/'hints-parent'/'hints'/'monitor.json','tile_manifest':work/'tiles-parent'/'tiles'/'manifest.txt','representatives':work/'reps'/'representatives.u32le'}
++ expected={'resolution_report':work/'resolution'/'report.json','seed_rows':work/'seed-work-parent'/'output'/'rows.u32le','seed_runs':work/'seed-work-parent'/'output'/'runs.u32le','seed_report':work/'seed-work-parent'/'output'/'report.json','hint_roots':work/'hints-parent'/'hints'/'roots.u32le','hint_codes':work/'hints-parent'/'hints'/'hints.u8','hint_report':work/'hints-parent'/'hints'/'report.json','tile_manifest':work/'tiles-parent'/'tiles'/'manifest.txt','representatives':work/'reps'/'representatives.u32le'}
+  need(all(Path(artifacts[k].get('path','')).resolve()==v for k,v in expected.items()),'derived artifact path is not fresh work output')
+  for p in artifacts.values():build_stage2.pin(p,guard)
+  recheck=marker.get('witness_recheck')
+@@ -204,14 +265,15 @@
+  c=cfg['controls'];need(expected_seed['resolution']['sha256']==artifacts['resolution_report']['sha256'] and sr.get('schema')=='worldatlas-stage2-seed-request-v1' and sr.get('grid')==cfg['grid'] and sr.get('inputs')==expected_seed and (sr.get('controls')==handoff[1]['controls'] if handoff else sr.get('controls')=={'memory_floor_kib':c['minimum_memory_kib'],'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}),'seed request linkage mismatch')
+  hint_inputs={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hint_inputs.update({k:artifacts[k] for k in ('seed_rows','seed_runs','resolution_report','representatives','tile_manifest')})
+  rev=snap.get('decision_revision',{}).get('id');entity=snap.get('entity_revision',{}).get('id');_,categories,_=contracts.snap_policy(snap,rev,entity,cfg['policy_id'],cfg['policy_version'])
+- need(hr=={'schema':'source-only-hints-diagnostic-request-v1','grid':cfg['grid'],'codes':sorted(categories),'inputs':hint_inputs,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_memory_kib':c['minimum_memory_kib'],'minimum_free_bytes':c['minimum_free_bytes']},'hint request linkage mismatch')
++ need(hr=={'schema':'source-only-hints-diagnostic-request-v1','grid':cfg['grid'],'codes':sorted(categories),'inputs':hint_inputs,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']},'hint request linkage mismatch')
+  seed_report=json.loads(verify_inputs.bounded_bytes(artifacts['seed_report']['path'],16<<20,guard));hint_report=json.loads(verify_inputs.bounded_bytes(artifacts['hint_report']['path'],16<<20,guard));need(seed_report.get('request_sha256')==marker['seed_request_sha256'] and seed_report.get('input_sha256')=={k:v['sha256'] for k,v in expected_seed.items()} and hint_report.get('request_sha256')==marker['hint_request_sha256'],'request/report provenance mismatch')
+  tiles=work/'tiles-parent'/'tiles';need(marker.get('tile_directory')==str(tiles) and tiles.is_dir() and marker.get('seed_tile_verification',{}).get('status')=='verified','tile verification binding mismatch')
+  inputs={k:v for k,v in cfg['inputs'].items() if k in build_stage2.INPUTS};inputs.update(artifacts)
+  need(set(inputs)==build_stage2.INPUTS,'core input mapping mismatch')
+  seed_files={n:pin(HERE/'seed-producer'/n,guard) for n in SEED_NAMES};seed_files.update({'rasterizer':cfg['inputs']['seed_builder'],'rasterizer_kernel':cfg['inputs']['seed_kernel']})
+  resolver_files={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py','identity_watch':'v7-land/named-identity-prototype/identity_watch.py'}
+- core={'schema':'stage2-source-geodesic-v1','grid':cfg['grid'],'inputs':inputs,'seed_code_files':seed_files,'resolution_code_files':{k:pin(HERE/v,guard) for k,v in resolver_files.items()},'hint_code_files':{n:pin(HERE/'hint-producer'/n,guard) for n in ('hints.py','run_diagnostic.py')},'hint_watchdog_code':pin(HERE/'hint-producer'/'watch_diagnostic.py',guard),'tile_directory':str(tiles),'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'controls':cfg['controls'],'orchestration':{'outer_config_sha256':outer,'orchestrator_sha256':code['orchestrate_stage2.py'],'derived_manifest':marker_pin,'physical_lineage_report':lineage_pin,'seed_handoff_attestation':cfg['seed_handoff']['attestation'] if handoff else None,'seed_handoff_context':cfg.get('seed_handoff')}}
++ core={'schema':'stage2-source-geodesic-v1','grid':cfg['grid'],'inputs':inputs,'seed_code_files':seed_files,'resolution_code_files':{k:pin(HERE/v,guard) for k,v in resolver_files.items()},'hint_code_files':{n:pin(HERE/'hint-producer'/n,guard) for n in ('hints.py','run_diagnostic.py')},'tile_directory':str(tiles),'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'controls':cfg['controls'],'orchestration':{'outer_config_sha256':outer,'orchestrator_sha256':code['orchestrate_stage2.py'],'derived_manifest':marker_pin,'physical_lineage_report':lineage_pin,'seed_handoff_attestation':cfg['seed_handoff']['attestation'] if handoff else None,'seed_handoff_context':cfg.get('seed_handoff')}}
++ if cb:core['caucasus_binding']=cb
+  cp=work/'core-requests'/'config.json'
+  core_work=work/'core'
+  if cp.exists():need(resume and json.loads(verify_inputs.bounded_bytes(cp,1<<20,guard))==core,'core resume config mismatch')
+@@ -224,3 +286,4 @@
+  try:
+   run(a.config,a.work,a.output,a.resume)
+  except Exception as exc:print('error: '+str(exc),file=sys.stderr);raise SystemExit(1)
++
+--- /dev/null
++++ b/runtime/test_verify_seed_index_direct.py
+@@ -0,0 +1,35 @@
++import tempfile,subprocess,struct,pathlib,unittest
++HERE=pathlib.Path(__file__).resolve().parent
++class Verify(unittest.TestCase):
++ @classmethod
++ def setUpClass(cls):
++  cls.tmpbin=tempfile.TemporaryDirectory();cls.addClassCleanup(cls.tmpbin.cleanup);cls.bin=str(pathlib.Path(cls.tmpbin.name)/'verifier');subprocess.run(['g++','-O2','-std=c++17','-Wall','-Wextra','-Werror',str(HERE/'verify_seed_index.cpp'),'-lcrypto','-o',cls.bin],check=True)
++ def setUp(self):
++  self.tmp=tempfile.TemporaryDirectory();self.d=pathlib.Path(self.tmp.name);self.tiles=self.d/'tiles';self.tiles.mkdir();rows=[[(2,0),(6,18),(16,0)],[(4,17),(12,0),(16,20)]]+[[(16,0)] for _ in range(6)];offs=[0];run=[];parts={}
++  for y,seq in enumerate(rows):
++   a=0
++   for b,code in seq:
++    run.append((b,code))
++    if code:
++     x=a
++     while x<b:
++      z=min(b,(x//4+1)*4);p=(y//4,x//4);parts.setdefault(p,[]).append((y,x,z,code));x=z
++    a=b
++   offs.append(len(run))
++  (self.d/'rows').write_bytes(b''.join(struct.pack('<I',x) for x in offs));(self.d/'runs').write_bytes(b''.join(struct.pack('<II',*x) for x in run))
++  for (y,x),z in parts.items():(self.tiles/f'{y:05}-{x:05}.bin').write_bytes(b''.join(struct.pack('<IIII',*v) for v in z))
++ def tearDown(self):self.tmp.cleanup()
++ def runv(self):
++  return subprocess.run([self.bin,str(self.d/'rows'),str(self.d/'runs'),str(self.tiles),'16','8','4'],capture_output=True,text=True)
++ def test_valid(self):
++  r=self.runv();self.assertEqual(r.returncode,0,r.stderr);self.assertIn('"status":"verified"',r.stdout)
++ def test_legacy_memory_floor_argument_is_rejected(self):
++  r=subprocess.run([self.bin,str(self.d/'rows'),str(self.d/'runs'),str(self.tiles),'16','8','4','0'],capture_output=True,text=True)
++  self.assertNotEqual(r.returncode,0);self.assertIn('usage',r.stderr)
++ def test_corruption(self):
++  f=next(self.tiles.glob('*.bin'));z=bytearray(f.read_bytes());z[-1]^=1;f.write_bytes(z);r=self.runv();self.assertNotEqual(r.returncode,0);self.assertIn('mismatch',r.stderr)
++ def test_missing(self):
++  next(self.tiles.glob('*.bin')).unlink();self.assertNotEqual(self.runv().returncode,0)
++ def test_extra(self):
++  (self.tiles/'00001-00002.bin').write_bytes(b'1234');self.assertNotEqual(self.runv().returncode,0)
++if __name__=='__main__':unittest.main()
+--- a/runtime/v7-land/named-identity-prototype/identity_watch.py
++++ b/runtime/v7-land/named-identity-prototype/identity_watch.py
+@@ -1,46 +1,20 @@
+-"""Independent same-namespace child RSS and host MemAvailable watchdog."""
+-import json,os,subprocess,time
+-RSS_CAP_KIB=192*1024
+-POLL_SECONDS=.05
+-TIMEOUT_SECONDS=120
++"""Direct, pinned identity-source adapter. No supervisor or memory limit."""
++import hashlib,json,types
+ 
+-def need(v,msg):
+-    if not v:raise ValueError(msg)
+-def child_rss(pid):
+-    try:
+-        with open(f'/proc/{pid}/status') as f:
+-            for line in f:
+-                if line.startswith('VmRSS:'):return int(line.split()[1])
+-    except FileNotFoundError:return None
+-    return None
+-
+-def run(checker_bytes,request,available):
+-    need(isinstance(checker_bytes,bytes) and len(checker_bytes)<=8*1024*1024,'invalid checker code')
+-    payload=json.dumps(request,sort_keys=True,separators=(',',':')).encode();need(len(payload)<=65536,'worker request too large')
+-    initial=available()
+-    env=dict(os.environ,OPENBLAS_NUM_THREADS='1',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1')
+-    child=subprocess.Popen(['/usr/bin/python3','-I','-c',checker_bytes.decode('utf-8')],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env)
+-    minimum=initial;peak_observed=0;started=time.monotonic();reason=None
+-    try:
+-        child.stdin.write(payload);child.stdin.close()
+-        while child.poll() is None:
+-            mem=available();minimum=min(minimum,mem);rss=child_rss(child.pid);peak_observed=max(peak_observed,rss or 0)
+-            if rss is not None and rss>RSS_CAP_KIB:reason=f'child RSS cap exceeded: sampled_rss_kib={rss}, cap_kib={RSS_CAP_KIB}';break
+-            if time.monotonic()-started>TIMEOUT_SECONDS:reason='identity worker timed out';break
+-            time.sleep(POLL_SECONDS)
+-        if reason:
+-            child.terminate()
+-            try:child.wait(timeout=3)
+-            except subprocess.TimeoutExpired:child.kill();child.wait()
+-            raise ValueError(reason)
+-        final_available=available();minimum=min(minimum,final_available)
+-        out=child.stdout.read(65537);err=child.stderr.read(65537);need(len(out)<=65536 and len(err)<=65536,'identity worker output too large')
+-        need(child.returncode==0,'identity worker failed: '+err.decode('utf-8','replace')[:500])
+-        result=json.loads(out);peak=result.get('peak_rss_kib');rusage_peak=result.get('rusage_peak_rss_kib')
+-        need(result.get('schema')=='named-identity-worker-v2' and result.get('peak_rss_source')=='linux-proc-self-status-VmHWM-kib' and type(peak) is int and peak>0 and type(rusage_peak) is int and rusage_peak>0,'worker peak RSS invalid or missing metric')
+-        need(peak<=RSS_CAP_KIB,f'worker peak RSS over cap: VmHWM_kib={peak}, sampled_peak_kib={peak_observed}, rusage_peak_kib={rusage_peak}, cap_kib={RSS_CAP_KIB}')
+-        return {'result':result['result'],'memory_monitor':{'host_floor_kib':None,'initial_available_kib':initial,'minimum_sampled_available_kib':minimum,'rss_cap_kib':RSS_CAP_KIB,'maximum_sampled_rss_kib':peak_observed,'worker_reported_peak_rss_kib':peak,'worker_reported_peak_rss_source':result['peak_rss_source'],'worker_rusage_peak_rss_kib':rusage_peak,'poll_seconds':POLL_SECONDS,'limitation':'Host memory is sampled without an enforced floor; sampling may miss brief dips. Worker peak uses post-exec Linux VmHWM; ru_maxrss is diagnostic and may include pre-exec memory. VmRSS/VmHWM use kernel RSS accounting, which may be approximate.'}}
+-    finally:
+-        if child.poll() is None:child.kill();child.wait()
+-        for f in (child.stdin,child.stdout,child.stderr):
+-            if f and not f.closed:f.close()
++def run(checker_bytes,request,available=None):
++    if not isinstance(checker_bytes,bytes) or len(checker_bytes)>8*1024*1024:
++        raise ValueError('invalid checker code')
++    if not isinstance(request,dict) or set(request)!={'identity_path','identity_sha256','point_geometry','island_identity','spec'}:
++        raise ValueError('invalid identity request')
++    path=request['identity_path'];expected=request['identity_sha256']
++    with open(path,'rb') as f:raw=f.read(8*1024*1024+1)
++    if len(raw)>8*1024*1024 or hashlib.sha256(raw).hexdigest()!=expected:
++        raise ValueError('identity source pin mismatch')
++    module=types.ModuleType('pinned_named_identity_direct')
++    exec(compile(checker_bytes,'<pinned-named-identity>','exec'),module.__dict__)
++    result=module.check(json.loads(raw),request['point_geometry'],request['island_identity'],request['spec'])
++    h=hashlib.sha256()
++    with open(path,'rb') as f:
++        for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
++    if h.hexdigest()!=expected:raise ValueError('identity source changed during check')
++    return {'result':result,'memory_monitor':{'mode':'direct-in-process','runtime_supervisor':'not-launched','runtime_memory_limit':'not-imposed','external_constraints':'not-assessed'}}
+--- a/runtime/v7-land/named-identity-prototype/named_identity.py
++++ b/runtime/v7-land/named-identity-prototype/named_identity.py
+@@ -48,34 +48,3 @@
+     need(polygon.Contains(point),'point must be strictly inside identity polygon')
+     return {'method':spec['method'],'identity_feature_id':fid,'identity_feature_name':name,'identity_feature_class':cls,'identity_geometry_sha256':spec['identity_geometry_sha256'],'strict_contains':True,'identity_source_crs':crs,'gdal_version':gdal.VersionInfo('--version'),'geos_version':'.'.join(map(str,(ogr.GetGEOSVersionMajor(),ogr.GetGEOSVersionMinor(),ogr.GetGEOSVersionMicro()))),'limitation':'Generalized identity label only; not a physical boundary, exclusive island roster, or proof about the whole physical component.'}
+ 
+-def process_peak_rss_kib():
+-    """Linux peak for this exec image; ru_maxrss may include pre-exec memory."""
+-    with open('/proc/self/status') as f:status=f.read(65537)
+-    need(len(status)<=65536,'process status too large')
+-    lines=[line for line in status.splitlines() if line.startswith('VmHWM:')]
+-    need(len(lines)==1,'missing or duplicate VmHWM')
+-    match=re.fullmatch(r'VmHWM:\s+([0-9]+)\s+kB\s*',lines[0])
+-    need(match is not None,'invalid VmHWM')
+-    value=int(match.group(1));need(value>0,'invalid VmHWM')
+-    return value
+-
+-def worker():
+-    """Internal isolated entry point. No decision, map or source is written."""
+-    import resource,sys
+-    limit=1536*1024*1024
+-    resource.setrlimit(resource.RLIMIT_AS,(limit,limit))
+-    request=sys.stdin.buffer.read(65537);need(len(request)<=65536,'worker request too large');r=json.loads(request)
+-    path=r['identity_path'];expected=r['identity_sha256']
+-    with open(path,'rb') as f:raw=f.read(8*1024*1024+1)
+-    need(len(raw)<=8*1024*1024 and hashlib.sha256(raw).hexdigest()==expected,'identity source pin mismatch')
+-    result=check(json.loads(raw),r['point_geometry'],r['island_identity'],r['spec'])
+-    h=hashlib.sha256()
+-    with open(path,'rb') as f:
+-        for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
+-    need(h.hexdigest()==expected,'identity source changed during worker run')
+-    print(json.dumps({'schema':'named-identity-worker-v2','result':result,'peak_rss_kib':process_peak_rss_kib(),'peak_rss_source':'linux-proc-self-status-VmHWM-kib','rusage_peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss},sort_keys=True))
+-if __name__=='__main__':
+-    try:worker()
+-    except Exception as e:
+-        import sys
+-        print(type(e).__name__+': '+str(e),file=sys.stderr);raise SystemExit(1)
+--- a/runtime/validate_stage2_candidate.py
++++ b/runtime/validate_stage2_candidate.py
+@@ -1,4 +1,4 @@
+-"""Verify completed, monitored stage-2 land candidate before V7 comparison.
++"""Verify a direct-run stage-2 land candidate before V7 comparison.
+ 
+ Research diagnostic only. Hashes establish artifact identity, not independent
+ Neon authentication or scientific correctness. This does not construct List 1.
+@@ -7,21 +7,21 @@
+ from pathlib import Path
+ import contracts,verify_inputs,build_stage2,orchestrate_stage2,verify_physical_lineage
+ 
+-def validate(pins,approved_code,approved_max_rss_kib,guard=lambda:None):
+- names={'report','monitor','derived_manifest','outer_config','rows','runs','snapshot','physical_rows','physical_runs','physical_report','physical_lineage_request','physical_lineage_report'}
++def validate(pins,approved_code,guard=lambda:None):
++ names={'report','derived_manifest','outer_config','rows','runs','snapshot','physical_rows','physical_runs','physical_report','physical_lineage_request','physical_lineage_report'}
+  contracts.need(isinstance(pins,dict) and set(pins)==names,'exact candidate inputs required')
+  paths={}
+  for name,spec in pins.items():
+   contracts.need(isinstance(spec,dict) and set(spec)=={'path','sha256'} and isinstance(spec['sha256'],str) and contracts.HEX.fullmatch(spec['sha256']),'invalid input pin')
+   p=Path(spec['path']).resolve(strict=True);contracts.need(p.is_file() and verify_inputs.sha_file(p,guard)==spec['sha256'],'candidate hash mismatch: '+name);paths[name]=p
+  def read(name):return json.loads(verify_inputs.bounded_bytes(paths[name],16<<20,guard))
+- report=read('report');monitor=read('monitor');derived=read('derived_manifest');outer=read('outer_config');snapshot=read('snapshot');physical=read('physical_report');lineage=read('physical_lineage_report')
+- contracts.need(isinstance(approved_code,dict) and set(approved_code)=={'orchestrator','core','watchdog','guardian','core_files','dependency_files','orchestration_files'} and all(isinstance(approved_code.get(k),str) and contracts.HEX.fullmatch(approved_code[k]) for k in ('orchestrator','core','watchdog','guardian')) and all(isinstance(approved_code.get(k),dict) and approved_code[k] for k in ('core_files','dependency_files','orchestration_files')),'complete approved code pins required')
++ report=read('report');derived=read('derived_manifest');outer=read('outer_config');snapshot=read('snapshot');physical=read('physical_report');lineage=read('physical_lineage_report')
++ contracts.need(isinstance(approved_code,dict) and set(approved_code)=={'orchestrator','core','core_files','dependency_files','orchestration_files'} and all(isinstance(approved_code.get(k),str) and contracts.HEX.fullmatch(approved_code[k]) for k in ('orchestrator','core')) and all(isinstance(approved_code.get(k),dict) and approved_code[k] for k in ('core_files','dependency_files','orchestration_files')),'complete approved code pins required')
+  expected_dependencies={'seed_code_files':set(orchestrate_stage2.SEED_NAMES)|{'rasterizer','rasterizer_kernel'},'resolution_code_files':{'resolver','helper','named_identity','identity_watch'},'hint_code_files':{'hints.py','run_diagnostic.py'}}
+  expected_orchestration={'orchestrate_stage2.py','representatives.py','build_seed_tiles.py','seed-producer/seed_worker.py'}|{'seed-producer/'+x for x in orchestrate_stage2.SEED_NAMES}|{'hint-producer/'+x for x in orchestrate_stage2.HINT_NAMES}|set(build_stage2.CODE_NAMES)
+  valid_digest=lambda x:isinstance(x,str) and contracts.HEX.fullmatch(x) is not None
+  dep=approved_code['dependency_files'];contracts.need(set(approved_code['core_files'])==set(build_stage2.CODE_NAMES) and all(valid_digest(x) for x in approved_code['core_files'].values()) and set(approved_code['orchestration_files'])==expected_orchestration and all(valid_digest(x) for x in approved_code['orchestration_files'].values()) and set(dep)==set(expected_dependencies) and all(isinstance(dep[k],dict) and set(dep[k])==names and all(valid_digest(x) for x in dep[k].values()) for k,names in expected_dependencies.items()),'incomplete approved code closure')
+- contracts.need(report.get('schema')=='stage2-source-geodesic-report-v1' and report.get('status')=='stage2-research-awaiting-monitor' and report.get('publishable') is False and report.get('monitor_required') is True,'completed research candidate required')
++ contracts.need(report.get('schema')=='stage2-source-geodesic-report-v1' and report.get('status')=='stage2-research-complete' and report.get('publishable') is False and report.get('monitor_required') is False,'completed research candidate required')
+  for k,n in (('output_rows_sha256','rows'),('output_runs_sha256','runs'),('decision_snapshot_sha256','snapshot')):contracts.need(report.get(k)==pins[n]['sha256'],'candidate report mismatch: '+k)
+  for n in ('physical_rows','physical_runs','physical_report','physical_lineage_request'):contracts.need(report.get('inputs_sha256',{}).get(n)==pins[n]['sha256'],'candidate input mismatch: '+n)
+  grid=report.get('grid');outputs=physical.get('physical_output_sha256',physical.get('output_sha256',{}))
+@@ -35,11 +35,10 @@
+  contracts.need(report.get('categories')=={str(k):v for k,v in categories.items()},'category report mismatch')
+  orchfiles=approved_code['orchestration_files'];corefiles=approved_code['core_files'];resolver_paths={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py','identity_watch':'v7-land/named-identity-prototype/identity_watch.py'}
+  contracts.need(all(orchfiles[k]==v for k,v in corefiles.items()) and all(orchfiles['seed-producer/'+k]==dep['seed_code_files'][k] for k in orchestrate_stage2.SEED_NAMES) and all(orchfiles['hint-producer/'+k]==v for k,v in dep['hint_code_files'].items()) and all(orchfiles[path]==dep['resolution_code_files'][k] for k,path in resolver_paths.items()),'approved code closure inconsistent')
+- artifacts=derived.get('artifacts');expected_artifacts={'resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','hint_monitor','tile_manifest','representatives'}
++ artifacts=derived.get('artifacts');expected_artifacts={'resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'}
+  contracts.need(isinstance(artifacts,dict) and set(artifacts)==expected_artifacts and all(isinstance(artifacts[k],dict) and artifacts[k].get('sha256')==report.get('inputs_sha256',{}).get(k) and valid_digest(artifacts[k].get('sha256')) for k in expected_artifacts),'derived artifact/report mismatch')
+- for k in ('resolution_report','seed_report','hint_report','hint_monitor'):contracts.need(report.get(k+'_sha256')==artifacts[k]['sha256'],'derived report mismatch: '+k)
++ for k in ('resolution_report','seed_report','hint_report'):contracts.need(report.get(k+'_sha256')==artifacts[k]['sha256'],'derived report mismatch: '+k)
++ contracts.need(isinstance(outer.get('controls'),dict) and outer['controls'].get('minimum_memory_kib')==0 and 'hint_max_rss_kib' not in outer and isinstance(outer.get('seed_handoff'),dict),'direct configuration required')
+  orch=report.get('orchestration',{});contracts.need(isinstance(orch,dict) and orch.get('outer_config_sha256')==pins['outer_config']['sha256'] and outer.get('schema')=='stage2-fresh-orchestration-v1' and orch.get('orchestrator_sha256')==approved_code['orchestrator'] and orch.get('derived_manifest',{}).get('sha256')==pins['derived_manifest']['sha256'] and report.get('code_sha256')==approved_code['core_files'] and approved_code['core_files'].get('build_stage2.py')==approved_code['core'] and report.get('dependency_sha256')==approved_code['dependency_files'] and derived.get('schema')=='stage2-fresh-derived-v1' and derived.get('outer_config_sha256')==orch.get('outer_config_sha256') and derived.get('orchestrator_sha256')==approved_code['orchestrator'] and derived.get('code_sha256')==approved_code['orchestration_files'] and approved_code['orchestration_files'].get('orchestrate_stage2.py')==approved_code['orchestrator'],'candidate code/derivation mismatch')
+- contracts.need(monitor.get('schema')=='stage2-geodesic-watchdog-v1' and monitor.get('status')=='sampled-complete' and monitor.get('report_sha256')==pins['report']['sha256'] and monitor.get('config_sha256')==orch.get('outer_config_sha256') and all(monitor.get(k+'_sha256')==approved_code[k] for k in ('watchdog','guardian','core')) and monitor.get('driver_sha256')==approved_code['orchestrator'],'monitor/report/code mismatch')
+- contracts.need(type(approved_max_rss_kib) is int and approved_max_rss_kib>0 and isinstance(outer.get('controls'),dict) and monitor.get('minimum_memory_kib')==outer['controls'].get('minimum_memory_kib') and monitor.get('maximum_process_group_rss_kib')==approved_max_rss_kib and type(monitor.get('samples')) is int and monitor['samples']>0 and type(monitor.get('minimum_available_kib')) is int and type(monitor.get('minimum_memory_kib')) is int and monitor['minimum_available_kib']>=monitor['minimum_memory_kib']>=0 and type(monitor.get('peak_process_group_rss_kib')) is int and type(monitor.get('maximum_process_group_rss_kib')) is int and 0<monitor['peak_process_group_rss_kib']<=monitor['maximum_process_group_rss_kib'] and type(monitor.get('sample_interval_seconds')) in (int,float) and 0<monitor['sample_interval_seconds']<=.1,'resource monitor incomplete')
+  for spec in pins.values():contracts.need(verify_inputs.sha_file(spec['path'],guard)==spec['sha256'],'candidate changed during validation')
+- return {'schema':'stage2-candidate-validation-v1','status':'diagnostic-candidate-bound','report_sha256':pins['report']['sha256'],'monitor_sha256':pins['monitor']['sha256'],'grid':grid,'decision_revision':rev,'entity_revision':entity,'output_rows_sha256':pins['rows']['sha256'],'output_runs_sha256':pins['runs']['sha256'],'physical_rows_sha256':pins['physical_rows']['sha256'],'physical_runs_sha256':pins['physical_runs']['sha256'],'limitations':['Hashes do not authenticate the Neon export or independently prove source geography.','The downstream comparator must validate complete RLE/physical coverage.','Physical-mask differences from V7 must be counted separately.','Research candidate only; no List 1 decision or public release is implied.']}
++ return {'schema':'stage2-candidate-validation-v1','status':'diagnostic-candidate-bound','report_sha256':pins['report']['sha256'],'grid':grid,'decision_revision':rev,'entity_revision':entity,'output_rows_sha256':pins['rows']['sha256'],'output_runs_sha256':pins['runs']['sha256'],'physical_rows_sha256':pins['physical_rows']['sha256'],'physical_runs_sha256':pins['physical_runs']['sha256'],'limitations':['No supervisor or memory limit was used; hashes alone do not prove execution or authenticate the Neon export or source geography.','The downstream comparator must validate complete RLE/physical coverage.','Physical-mask differences from V7 must be counted separately.','Research candidate only; no List 1 decision or public release is implied.']}
+--- a/runtime/verify_seed_index.cpp
++++ b/runtime/verify_seed_index.cpp
+@@ -14,13 +14,12 @@
+ #include <stdexcept>
+ namespace fs=std::filesystem;
+ void need(bool x,const char*m){if(!x)throw std::runtime_error(m);}
+-uint64_t available_kib(){std::ifstream f("/proc/meminfo");std::string k,u;uint64_t v;while(f>>k>>v>>u)if(k=="MemAvailable:")return v;throw std::runtime_error("missing MemAvailable");}
+ struct State{EVP_MD_CTX*ctx=nullptr;uint64_t records=0;};
+ int main(int argc,char**argv){try{
+- need(argc==8,"usage: verify rows runs tile_dir W H tile_size floor_KiB");const std::string rows=argv[1],runs=argv[2],dir=argv[3];const uint32_t W=std::stoul(argv[4]),H=std::stoul(argv[5]),T=std::stoul(argv[6]);const uint64_t floor=std::stoull(argv[7]);need(W>0&&H>0&&T>0,"bad dimensions");uint64_t low=available_kib();auto guard=[&](){auto x=available_kib();low=std::min(low,x);need(x>=floor,"memory guard");};guard();
+- FILE*rf=fopen(rows.c_str(),"rb");FILE*sf=fopen(runs.c_str(),"rb");need(rf&&sf,"cannot open input");std::vector<uint32_t> off(H+1);need(fread(off.data(),4,H+1,rf)==H+1&&fgetc(rf)==EOF&&off[0]==0,"bad offsets");fclose(rf);const uint32_t NX=(W+T-1)/T,NY=(H+T-1)/T;std::vector<State> st((size_t)NX*NY);uint64_t records=0;for(uint32_t y=0;y<H;y++){if(y%128==0)guard();need(off[y]<=off[y+1],"nonmonotone offsets");uint32_t start=0,prev=~0u;for(uint32_t i=off[y];i<off[y+1];i++){uint32_t data[2];need(fread(data,4,2,sf)==2,"short runs");uint32_t end=data[0],code=data[1];need(start<end&&end<=W&&code<=22&&(code==0||code>=17)&&code!=prev,"bad seed row");if(code){for(uint32_t x=start;x<end;){uint32_t tx=x/T,z=std::min(end,(tx+1)*T);auto&s=st[(size_t)(y/T)*NX+tx];if(!s.ctx){s.ctx=EVP_MD_CTX_new();need(s.ctx&&EVP_DigestInit_ex(s.ctx,EVP_sha256(),nullptr)==1,"sha init failure");}uint32_t rec[4]={y,x,z,code};need(EVP_DigestUpdate(s.ctx,rec,sizeof rec)==1,"sha update failure");s.records++;records++;x=z;}}start=end;prev=code;}need(start==W,"incomplete row");}need(fgetc(sf)==EOF,"extra runs");fclose(sf);
+- std::vector<unsigned char> buf(65536);uint64_t tiles=0;for(uint32_t ty=0;ty<NY;ty++)for(uint32_t tx=0;tx<NX;tx++){auto&s=st[(size_t)ty*NX+tx];char name[64];snprintf(name,sizeof name,"%05u-%05u.bin",ty,tx);fs::path path=fs::path(dir)/name;if(!s.ctx){need(!fs::exists(path),"unexpected tile file");continue;}if(tiles%16==0)guard();need(fs::is_regular_file(path)&&fs::file_size(path)==s.records*16,"missing tile or size mismatch");unsigned char expected[EVP_MAX_MD_SIZE],actual[EVP_MAX_MD_SIZE];unsigned int en=0,an=0;need(EVP_DigestFinal_ex(s.ctx,expected,&en)==1&&en==32,"sha finalize");EVP_MD_CTX_free(s.ctx);EVP_MD_CTX*act=EVP_MD_CTX_new();need(act&&EVP_DigestInit_ex(act,EVP_sha256(),nullptr)==1,"actual init");FILE*fp=fopen(path.c_str(),"rb");need(fp,"tile open");size_t n;while((n=fread(buf.data(),1,buf.size(),fp))>0)need(EVP_DigestUpdate(act,buf.data(),n)==1,"actual update");need(feof(fp),"tile read");fclose(fp);need(EVP_DigestFinal_ex(act,actual,&an)==1&&an==32&&std::equal(expected,expected+32,actual),"tile bytes mismatch");EVP_MD_CTX_free(act);tiles++;}
++ need(argc==7,"usage: verify rows runs tile_dir W H tile_size");const std::string rows=argv[1],runs=argv[2],dir=argv[3];const uint32_t W=std::stoul(argv[4]),H=std::stoul(argv[5]),T=std::stoul(argv[6]);need(W>0&&H>0&&T>0,"bad dimensions");
++ FILE*rf=fopen(rows.c_str(),"rb");FILE*sf=fopen(runs.c_str(),"rb");need(rf&&sf,"cannot open input");std::vector<uint32_t> off(H+1);need(fread(off.data(),4,H+1,rf)==H+1&&fgetc(rf)==EOF&&off[0]==0,"bad offsets");fclose(rf);const uint32_t NX=(W+T-1)/T,NY=(H+T-1)/T;std::vector<State> st((size_t)NX*NY);uint64_t records=0;for(uint32_t y=0;y<H;y++){need(off[y]<=off[y+1],"nonmonotone offsets");uint32_t start=0,prev=~0u;for(uint32_t i=off[y];i<off[y+1];i++){uint32_t data[2];need(fread(data,4,2,sf)==2,"short runs");uint32_t end=data[0],code=data[1];need(start<end&&end<=W&&code<=22&&(code==0||code>=17)&&code!=prev,"bad seed row");if(code){for(uint32_t x=start;x<end;){uint32_t tx=x/T,z=std::min(end,(tx+1)*T);auto&s=st[(size_t)(y/T)*NX+tx];if(!s.ctx){s.ctx=EVP_MD_CTX_new();need(s.ctx&&EVP_DigestInit_ex(s.ctx,EVP_sha256(),nullptr)==1,"sha init failure");}uint32_t rec[4]={y,x,z,code};need(EVP_DigestUpdate(s.ctx,rec,sizeof rec)==1,"sha update failure");s.records++;records++;x=z;}}start=end;prev=code;}need(start==W,"incomplete row");}need(fgetc(sf)==EOF,"extra runs");fclose(sf);
++ std::vector<unsigned char> buf(65536);uint64_t tiles=0;for(uint32_t ty=0;ty<NY;ty++)for(uint32_t tx=0;tx<NX;tx++){auto&s=st[(size_t)ty*NX+tx];char name[64];snprintf(name,sizeof name,"%05u-%05u.bin",ty,tx);fs::path path=fs::path(dir)/name;if(!s.ctx){need(!fs::exists(path),"unexpected tile file");continue;}need(fs::is_regular_file(path)&&fs::file_size(path)==s.records*16,"missing tile or size mismatch");unsigned char expected[EVP_MAX_MD_SIZE],actual[EVP_MAX_MD_SIZE];unsigned int en=0,an=0;need(EVP_DigestFinal_ex(s.ctx,expected,&en)==1&&en==32,"sha finalize");EVP_MD_CTX_free(s.ctx);EVP_MD_CTX*act=EVP_MD_CTX_new();need(act&&EVP_DigestInit_ex(act,EVP_sha256(),nullptr)==1,"actual init");FILE*fp=fopen(path.c_str(),"rb");need(fp,"tile open");size_t n;while((n=fread(buf.data(),1,buf.size(),fp))>0)need(EVP_DigestUpdate(act,buf.data(),n)==1,"actual update");need(feof(fp),"tile read");fclose(fp);need(EVP_DigestFinal_ex(act,actual,&an)==1&&an==32&&std::equal(expected,expected+32,actual),"tile bytes mismatch");EVP_MD_CTX_free(act);tiles++;}
+  for(auto&e:fs::directory_iterator(dir)){auto n=e.path().filename().string();if(e.path().extension()==".bin"){unsigned ty,tx;char extra;need(sscanf(n.c_str(),"%5u-%5u.bin%c",&ty,&tx,&extra)==2&&ty<NY&&tx<NX&&st[(size_t)ty*NX+tx].records>0,"unlisted bin");}}
+- std::cout<<"{\"status\":\"verified\",\"tiles\":"<<tiles<<",\"tile_records\":"<<records<<",\"min_mem_available_kib\":"<<low<<"}"<<std::endl;
++ std::cout<<"{\"status\":\"verified\",\"tiles\":"<<tiles<<",\"tile_records\":"<<records<<"}"<<std::endl;
+  return 0;
+ }catch(const std::exception&e){std::cerr<<"error: "<<e.what()<<std::endl;return 1;}}
+--- /dev/null
++++ b/tests/test_direct_candidate.py
+@@ -0,0 +1,55 @@
++import copy,hashlib,json,tempfile,unittest
++from unittest import mock
++from pathlib import Path
++import validate_stage2_candidate as v
++import build_stage2,orchestrate_stage2
++class CandidateTests(unittest.TestCase):
++ def setUp(self):
++  self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);self.d=Path(self.t.name);self.pins={}
++  for k in ('rows','runs','physical_rows','physical_runs','physical_lineage_request'):(self.d/k).write_bytes(k.encode());self.pin(k)
++  grid={'width':8,'height':4,'west':-180,'north':90,'step':45};metric={'policy_id':'wgs','version':'1','decision_revision':'d','execution_status':'selected_for_research','algorithm':'wgs84_ellipsoidal_geodesic_inverse','units':'metres','semi_major_axis_m':'6378137','inverse_flattening':'298.257223563'};policy={'policy_id':'p','version':'1','decision_revision':'d','execution_status':'selected_for_research','distance_policy_id':'wgs','distance_policy_version':'1','tie_tolerance_metres':'0.00001','island_overrides':'none','connectivity':'four_neighbor_longitude_wrapped','aggregation':'minimum_over_component_and_mainland_cells','endpoints':'physical_land_cell_centers','tie':'lowest_category_code','grid':grid,'physical_rows_sha256':self.pins['physical_rows']['sha256'],'physical_runs_sha256':self.pins['physical_runs']['sha256'],'physical_report_sha256':'PLACEHOLDER'};self.code={k:format(i+1,'064x') for i,k in enumerate(('orchestrator','core'))}
++  snapshot={'schema':'worldatlas-geography-decision-draft-evidence-v1','source':'neon-export','decision_revision':{'id':'d','entity_revision':'e','status':'draft'},'entity_revision':{'id':'e','status':'draft'},'entities':[{'id':i,'name':'c'+str(i),'level':'continent'} for i in range(6)],'category_bindings':[{'entity_id':i,'code':i+17,'physical_class':'land'} for i in range(6)],'distance_policies':[metric],'land_baseline_policy':policy};self.write('snapshot',snapshot)
++  self.write('physical_report',{'status':'candidate-only','grid':grid,'output_sha256':{'rows.u32le':self.pins['physical_rows']['sha256'],'runs.u32le':self.pins['physical_runs']['sha256']}})
++  policy['physical_report_sha256']=self.pins['physical_report']['sha256'];snapshot['land_baseline_policy']=policy;self.write('snapshot',snapshot)
++  self.code.update({'core_files':{k:('0'*64 if k!='build_stage2.py' else self.code['core']) for k in build_stage2.CODE_NAMES},'dependency_files':{'seed_code_files':{k:'1'*64 for k in set(orchestrate_stage2.SEED_NAMES)|{'rasterizer','rasterizer_kernel'}},'resolution_code_files':{k:'2'*64 for k in ('resolver','helper','named_identity','identity_watch')},'hint_code_files':{k:'3'*64 for k in ('hints.py','run_diagnostic.py')}},'orchestration_files':{k:('4'*64 if k!='orchestrate_stage2.py' else self.code['orchestrator']) for k in {'orchestrate_stage2.py','representatives.py','build_seed_tiles.py','seed-producer/seed_worker.py'}|{'seed-producer/'+x for x in orchestrate_stage2.SEED_NAMES}|{'hint-producer/'+x for x in orchestrate_stage2.HINT_NAMES}|set(build_stage2.CODE_NAMES)}})
++  self.code['orchestration_files'].update(self.code['core_files'])
++  self.code['orchestration_files'].update({'seed-producer/'+k:v for k,v in self.code['dependency_files']['seed_code_files'].items() if k in orchestrate_stage2.SEED_NAMES})
++  self.code['orchestration_files'].update({'hint-producer/'+k:v for k,v in self.code['dependency_files']['hint_code_files'].items()})
++  resolver={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py','identity_watch':'v7-land/named-identity-prototype/identity_watch.py'}
++  for k,path in resolver.items():self.code['core_files'][path]=self.code['dependency_files']['resolution_code_files'][k];self.code['orchestration_files'][path]=self.code['dependency_files']['resolution_code_files'][k]
++  self.write('outer_config',{'schema':'stage2-fresh-orchestration-v1','controls':{'minimum_memory_kib':0,'minimum_free_bytes':1},'seed_handoff':{}})
++  self.artifacts={k:{'path':'/unused/'+k,'sha256':format(i+20,'064x')} for i,k in enumerate(('resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'))}
++  self.lineage={'schema':'stage1-lineage-and-selection-validation-v1','status':'selected-sources-match-reported-lineage'};self.write('physical_lineage_report',self.lineage)
++  patcher=mock.patch.object(v.verify_physical_lineage,'validate_combined',return_value=self.lineage);patcher.start();self.addCleanup(patcher.stop)
++  self.write('derived_manifest',{'physical_lineage_report':self.pins['physical_lineage_report'],'schema':'stage2-fresh-derived-v1','outer_config_sha256':self.pins['outer_config']['sha256'],'orchestrator_sha256':self.code['orchestrator'],'code_sha256':self.code['orchestration_files'],'artifacts':self.artifacts})
++  self.report={'schema':'stage2-source-geodesic-report-v1','status':'stage2-research-complete','publishable':False,'monitor_required':False,'output_rows_sha256':self.pins['rows']['sha256'],'output_runs_sha256':self.pins['runs']['sha256'],'physical_lineage_report_sha256':self.pins['physical_lineage_report']['sha256'],'physical_lineage_status':'selected-sources-match-reported-lineage','decision_snapshot_sha256':self.pins['snapshot']['sha256'],'inputs_sha256':{**{k:self.pins[k]['sha256'] for k in ('physical_rows','physical_runs','physical_report','physical_lineage_request')},**{k:x['sha256'] for k,x in self.artifacts.items()}},**{k+'_sha256':self.artifacts[k]['sha256'] for k in ('resolution_report','seed_report','hint_report')},'grid':grid,'decision_revision':'d','entity_revision':'e','distance_policy':metric,'land_baseline_policy':policy,'categories':{str(17+i):'c'+str(i) for i in range(6)},'code_sha256':self.code['core_files'],'dependency_sha256':self.code['dependency_files'],'orchestration':{'outer_config_sha256':self.pins['outer_config']['sha256'],'orchestrator_sha256':self.code['orchestrator'],'derived_manifest':self.pins['derived_manifest'],'physical_lineage_report':self.pins['physical_lineage_report']}};self.write('report',self.report)
++ def pin(self,k):p=self.d/k;self.pins[k]={'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
++ def write(self,k,obj):(self.d/k).write_text(json.dumps(obj));self.pin(k)
++ def test_valid_direct_and_tampered_report(self):
++  self.assertEqual(v.validate(self.pins,self.code)['status'],'diagnostic-candidate-bound')
++  (self.d/'report').write_text('tampered')
++  with self.assertRaisesRegex(ValueError,'hash mismatch'):v.validate(self.pins,self.code)
++ def test_rejects_nonzero_memory_floor_even_if_rehashed(self):
++  outer=json.loads((self.d/'outer_config').read_text());outer['controls']['minimum_memory_kib']=1;self.write('outer_config',outer)
++  derived=json.loads((self.d/'derived_manifest').read_text());derived['outer_config_sha256']=self.pins['outer_config']['sha256'];self.write('derived_manifest',derived)
++  self.report['orchestration']['outer_config_sha256']=self.pins['outer_config']['sha256'];self.report['orchestration']['derived_manifest']=self.pins['derived_manifest'];self.write('report',self.report)
++  with self.assertRaisesRegex(ValueError,'direct configuration'):v.validate(self.pins,self.code)
++ def test_refuses_changed_physical_mask(self):
++  (self.d/'physical_rows').write_text('tampered')
++  with self.assertRaisesRegex(ValueError,'hash mismatch'):v.validate(self.pins,self.code)
++ def test_rejects_forged_selected_policy(self):
++  self.report['land_baseline_policy']={**self.report['land_baseline_policy'],'execution_status':'unselected'};self.write('report',self.report)
++  with self.assertRaisesRegex(ValueError,'selected policy'):v.validate(self.pins,self.code)
++ def test_incomplete_or_inconsistent_code_closure_fails(self):
++  bad=copy.deepcopy(self.code);bad['core_files'].pop('certificate.py')
++  with self.assertRaisesRegex(ValueError,'incomplete approved code closure'):v.validate(self.pins,bad)
++  bad=copy.deepcopy(self.code);bad['orchestration_files']['certificate.py']='f'*64
++  with self.assertRaisesRegex(ValueError,'code closure inconsistent'):v.validate(self.pins,bad)
++ def test_simple_policy_semantics_required(self):
++  snapshot=json.loads((self.d/'snapshot').read_bytes());snapshot['land_baseline_policy'].pop('connectivity');self.write('snapshot',snapshot)
++  self.report['decision_snapshot_sha256']=self.pins['snapshot']['sha256'];self.report['land_baseline_policy']=snapshot['land_baseline_policy'];self.write('report',self.report)
++  with self.assertRaisesRegex(ValueError,'land policy mismatch: connectivity'):v.validate(self.pins,self.code)
++ def test_derived_artifact_and_sample_interval_tampering(self):
++  derived=json.loads((self.d/'derived_manifest').read_bytes());derived['artifacts']['seed_rows']['sha256']='f'*64;self.write('derived_manifest',derived);self.report['orchestration']['derived_manifest']=self.pins['derived_manifest'];self.write('report',self.report)
++  with self.assertRaisesRegex(ValueError,'derived artifact/report mismatch'):v.validate(self.pins,self.code)
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_direct_contracts.py
+@@ -0,0 +1,121 @@
++import copy,unittest
++import contracts as c
++
++class ContractsTests(unittest.TestCase):
++ def setUp(self):
++  self.rev='d';self.ent='e';self.grid={'width':8,'height':4,'west':-180,'north':90,'step':45}
++  self.metric={'policy_id':'wgs','version':'1','decision_revision':'d','execution_status':'selected_for_research','algorithm':'wgs84_ellipsoidal_geodesic_inverse','units':'metres','semi_major_axis_m':'6378137','inverse_flattening':'298.257223563'}
++  self.snapshot={'schema':'worldatlas-geography-decision-draft-evidence-v1','source':'neon-export','decision_revision':{'id':'d','entity_revision':'e','status':'draft'},'entity_revision':{'id':'e','status':'draft'},'distance_policies':[self.metric], 'entities':[{'id':i,'name':'c'+str(i),'level':'continent'} for i in range(6)],'category_bindings':[{'entity_id':i,'code':17+i,'physical_class':'land'} for i in range(6)]}
++  names=('physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_report','seed_rows','seed_runs','resolution_report','decision_snapshot','hint_roots','hint_codes','hint_report','representatives','tile_manifest');self.pins={k:str(i).zfill(64) for i,k in enumerate(names)}
++  self.groups=[{'group_id':'g','role':'mainland','target_entity_ids':[0,1],'component_id_current_generation_only':7},{'group_id':'s','role':'sentinel','target_entity_ids':[],'component_id_current_generation_only':9}]
++  self.res={'schema':'mainland-witness-resolution-v1','status':'selected-research-identity-claims-not-mainland-proof','publishable':False,'grid':self.grid,'decision_revision':'d','entity_revision':'e','snapshot_sha256':self.pins['decision_snapshot'],'component_manifest_sha256':self.pins['component_manifest'],'input_sha256':{x:self.pins[x] for x in ('physical_rows','physical_runs','component_rows','component_runs')},'groups':self.groups}
++  self.man={'schema':'single-generation-component-manifest-v1','status':'complete-research','grid':self.grid,'pins':{x:{'sha256':self.pins[x]} for x in ('physical_rows','physical_runs','component_rows','component_runs')},'component_source_sha256':self.pins['component_source'],'builder_binary_sha256':self.pins['component_builder_binary'],'builder_binary':{'sha256':self.pins['component_builder_binary']},'physical_report':{'sha256':self.pins['physical_report']},'compiler_version':'c','builder_output':'ok'}
++  self.seed={'schema':'worldatlas-stage2-mainland-seed-report-v1','status':'diagnostic-seed-pending-independent-provenance','publishable':False,'grid':self.grid,'decision_snapshot_sha256':self.pins['decision_snapshot'],'resolution_report_sha256':self.pins['resolution_report'],'decision_revision':'d','entity_revision':'e',**{x+'_sha256':self.pins[x] for x in ('physical_rows','physical_runs','component_rows','component_runs','seed_rows','seed_runs')},'component_manifest_sha256':self.pins['component_manifest'],'physical_report_sha256':self.pins['physical_report'],'physical_code_contract':{'water':1,'land':17},'seed_roots':[7],'code_sha256':{'seed.py':'a'*64},'seed_rules':[{'rule_id':'r','group_id':'g','component_id_current_generation_only':7,'region_id':'z','inside_entity_id':0,'outside_entity_id':1,'inside_code':17,'outside_code':18}],'region_traces':[{'revision_id':'d','region_id':'z','geometry_sha256':'f'*64,'input_trace':[{'route_id':'x'}],'method':'v1'}]}
++  self.hints={'schema':'source-only-hints-diagnostic-report-v1','status':'diagnostic-not-independently-authenticated','publishable':False,'grid':self.grid,'decision_revision':'d','entity_revision':'e','distance_policy':self.metric,'seed_roots':[7],'inputs_sha256':{k:self.pins[k] for k in ('physical_rows','physical_runs','component_rows','component_runs','seed_rows','seed_runs','representatives','tile_manifest','resolution_report','decision_snapshot','component_manifest')},'roots_sha256':self.pins['hint_roots'],'hints_sha256':self.pins['hint_codes'],'root_count':3,'code_sha256':{'hints.py':'b'*64,'run_diagnostic.py':'c'*64}}
++  self.monitor={'schema':'source-only-hints-watchdog-v1','status':'sampled-complete','diagnostic_report_sha256':self.pins['hint_report'],'watchdog_sha256':'d'*64,'samples':10,'minimum_available_kib':100,'minimum_memory_kib':90,'peak_child_rss_kib':20,'maximum_child_rss_kib':40}
++ def test_selected_seed_crosswalk_rejects_incomplete_policy(self):
++  with self.assertRaisesRegex(ValueError,'missing selected simple land policy'):c.validate_selected_seed_decisions(self.snapshot,self.seed,{}, {},self.metric)
++ def test_policy_tolerance_decimal_and_invalid(self):
++  self.assertEqual(c.policy_tolerance_metres({'tie_tolerance_metres':'0.00001'}),.00001)
++  for x in (None,True,'NaN','Infinity','-0.1','1e9999','1e-9999'):
++   with self.assertRaisesRegex(ValueError,'tie tolerance'):c.policy_tolerance_metres({'tie_tolerance_metres':x})
++ def test_valid_chain(self):
++  metric,codes,entity=c.snap_policy(self.snapshot,'d','e','wgs','1');groups=c.resolution_roots(self.res,self.grid,self.pins,'d','e');c.component_manifest(self.man,self.grid,self.pins);roots=c.seed_report(self.seed,self.grid,self.pins,'d','e',groups,entity,{'seed.py':'a'*64});n=c.hints_report(self.hints,self.grid,self.pins,'d','e',metric,roots,{'hints.py':'b'*64,'run_diagnostic.py':'c'*64});self.assertEqual((roots,n),([7],3))
++ def test_snapshot_rejects_nonselected_and_wrong_metric(self):
++  self.metric['execution_status']='proposed_not_selected'
++  with self.assertRaisesRegex(ValueError,'selected distance'):c.snap_policy(self.snapshot,'d','e','wgs','1')
++  self.metric['execution_status']='selected_for_research';self.metric['inverse_flattening']='300'
++  with self.assertRaisesRegex(ValueError,'unsupported geodesic'):c.snap_policy(self.snapshot,'d','e','wgs','1')
++ def test_rejected_or_stale_roots_fail(self):
++  self.res['input_sha256']['component_runs']='f'*64
++  with self.assertRaisesRegex(ValueError,'stale resolution'):c.resolution_roots(self.res,self.grid,self.pins,'d','e')
++  self.res['input_sha256']['component_runs']=self.pins['component_runs'];self.groups[1]['component_id_current_generation_only']=7
++  with self.assertRaisesRegex(ValueError,'invalid group root'):c.resolution_roots(self.res,self.grid,self.pins,'d','e')
++ def test_seed_old_or_mismatched_fails(self):
++  groups=c.resolution_roots(self.res,self.grid,self.pins,'d','e');self.seed['schema']='simple-v2-land-report-v1'
++  with self.assertRaisesRegex(ValueError,'stage-2 seed'):c.seed_report(self.seed,self.grid,self.pins,'d','e',groups,{0:17,1:18},{'seed.py':'a'*64})
++  self.seed['schema']='worldatlas-stage2-mainland-seed-report-v1';self.seed['seed_rules'][0]['outside_code']=19
++  with self.assertRaisesRegex(ValueError,'entity/code'):c.seed_report(self.seed,self.grid,self.pins,'d','e',groups,{0:17,1:18},{'seed.py':'a'*64})
++ def test_seed_grid_mismatch_rejected(self):
++  groups=c.resolution_roots(self.res,self.grid,self.pins,'d','e');self.seed['grid']={**self.grid,'width':16}
++  with self.assertRaisesRegex(ValueError,'matching grid'):c.seed_report(self.seed,self.grid,self.pins,'d','e',groups,{0:17,1:18},{'seed.py':'a'*64})
++ def test_hints_not_final_and_watchdog_required(self):
++  self.hints['inputs_sha256']['seed_rows']='f'*64
++  with self.assertRaisesRegex(ValueError,'stale hint input'):c.hints_report(self.hints,self.grid,self.pins,'d','e',self.metric,[7],{'hints.py':'b'*64,'run_diagnostic.py':'c'*64})
++  self.hints['inputs_sha256']['seed_rows']=self.pins['seed_rows'];self.hints['roots_sha256']='0'*64
++  with self.assertRaisesRegex(ValueError,'hints artifact'):c.hints_report(self.hints,self.grid,self.pins,'d','e',self.metric,[7],{'hints.py':'b'*64,'run_diagnostic.py':'c'*64})
++
++class CrosswalkTests(unittest.TestCase):
++ def setUp(self):
++  ContractsTests.setUp(self)
++  import hashlib,json
++  def gh(p):return hashlib.sha256(json.dumps({'type':'LineString','coordinates':p},sort_keys=True,separators=(',',':')).encode()).hexdigest()
++  line=[[-1.0,0.0],[1.0,0.0]];route=[[1.0,0.0],[0.0,1.0],[-1.0,0.0]];lg=gh(line);rg=gh(route);polygon_hash=hashlib.sha256(json.dumps({'type':'Polygon','coordinates':[[*line,*route[1:]]]},sort_keys=True,separators=(',',':')).encode()).hexdigest();self.groups={};rules=[];result=[]
++  for i,(a,b,region) in enumerate([(0,1,'z'),(2,2,None),(3,3,None),(4,4,None),(5,5,None)]):
++   gid='g'+str(i);rid='r'+str(i);root=10+i;self.groups[gid]={'group_id':gid,'role':'mainland','target_entity_ids':sorted({a,b}),'component_id_current_generation_only':root};rules.append({'rule_id':rid,'decision_revision':'d','execution_status':'selected_for_research','group_id':gid,'region_id':region,'inside_entity_id':a,'outside_entity_id':b});result.append({'rule_id':rid,'group_id':gid,'component_id_current_generation_only':root,'region_id':region,'inside_entity_id':a,'outside_entity_id':b,'inside_code':17+a,'outside_code':17+b})
++  pins={x:format(i+1,'064x') for i,x in enumerate(('physical_rows','physical_runs','physical_report','closure_contract','closure_checker','terminal_checker'))}
++  proof={'schema':'physical-water-closure-proof-v1','status':'valid','geometry_sha256':rg,'physical_rows_sha256':pins['physical_rows'],'physical_runs_sha256':pins['physical_runs'],'physical_report_sha256':pins['physical_report'],'contract_sha256':pins['closure_contract'],'checker_sha256':pins['closure_checker']}
++  common={'decision_revision':'d','execution_status':'selected_for_research','coordinate_reference':'OGC:CRS84','geometry_hash_method':'binary64-sorted-compact-geojson-v1'}
++  boundary={'boundary_id':'b',**common,'method':'stored_linestring_v1','geometry':{'type':'LineString','coordinates':line},'geometry_sha256':lg,'provenance':{'source_refs':[{'source_id':'s','version':'1'}],'source_relationships':[{'source_id':'s','version':'1','relationship':'construction_input'}],'lineage_status':'incomplete'}};rte={'route_id':'q',**common,'route_type':'stored_linestring_v1','role':'water_closure','closure_method':'physical_water_closure_v1','geometry':{'type':'LineString','coordinates':route},'geometry_sha256':rg}
++  segs=[{'kind':'boundary','id':'b','start':0,'end':2,'reverse':False},{'kind':'route','id':'q','start':0,'end':3,'reverse':False}];self.snapshot.update({'mainland_component_rules':rules,'mainland_boundaries':[boundary],'routes':[rte],'seed_regions':[{'region_id':'z','decision_revision':'d','execution_status':'selected_for_research','geometry_hash_method':'binary64-sorted-compact-geojson-v1','geometry_sha256':polygon_hash,'segments':segs}],'sources':[{'source_id':'s','version':'1','sha256':'a'*64,'r2_bucket':'raw','r2_key':'s','size_bytes':100}],'source_lineage_assets':[{'source_id':'s','version':'1','sha256':'a'*64,'r2_bucket':'raw','r2_key':'s','size_bytes':100,'kind':'raw','provider':'provider','source_uri':'https://example.org','provenance':{'representation':'provider_original','origin':'provider'}}],'source_lineage_dependencies':[]})
++  self.snapshot['land_baseline_policy']={'policy_id':'l','version':'1','decision_revision':'d','execution_status':'selected_for_research','distance_policy_id':'wgs','distance_policy_version':'1','connectivity':'four_neighbor_longitude_wrapped','aggregation':'minimum_over_component_and_mainland_cells','endpoints':'physical_land_cell_centers','tie':'lowest_category_code','tie_tolerance_metres':'0.00001','island_overrides':'none','grid':self.grid,'physical_rows_sha256':pins['physical_rows'],'physical_runs_sha256':pins['physical_runs'],'physical_report_sha256':pins['physical_report'],'mainland_rule_ids':[r['rule_id'] for r in rules],'region_ids':['z'],'boundary_ids':['b'],'route_ids':['q']}
++  prov={'lineage_status':'incomplete','source_refs':[{'source_id':'s','version':'1'}],**{k+'_sha256':pins[k] for k in ('physical_rows','physical_runs','physical_report')},'contract_sha256':pins['closure_contract'],'checker_sha256':pins['closure_checker']};self.snapshot['routes'][0]['provenance']=prov;self.snapshot['stage1_source_inputs']=[{'source_id':'s','source_version':'1','decision_revision':'d','execution_status':'selected_for_research'}]
++  traces=[{**segs[0],'geometry_sha256':lg,'lineage_status':'incomplete','source_citations':[{'source_id':'s','version':'1','relationship':'construction_input','role':'construction_input','sha256':'a'*64,'bucket':'raw','key':'s'}],'closure_proof':None,'route_provenance':None},{**segs[1],'geometry_sha256':rg,'lineage_status':'incomplete','route_provenance':prov,'source_citations':[{'source_id':'s','version':'1','sha256':'a'*64,'bucket':'raw','key':'s','origin':'provider'}],'closure_proof':proof}]
++  self.seed={'grid':self.grid,'physical_rows_sha256':pins['physical_rows'],'physical_runs_sha256':pins['physical_runs'],'physical_report_sha256':pins['physical_report'],'seed_rules':result,'input_sha256':pins,'region_traces':[{'region_id':'z','revision_id':'d','geometry_sha256':polygon_hash,'input_trace':traces}]};self.codes={i:17+i for i in range(6)}
++ def check(self):return c.validate_selected_seed_decisions(self.snapshot,self.seed,self.groups,self.codes,self.metric)
++ def test_full_crosswalk_and_tampers(self):
++  self.assertEqual(self.check(),self.snapshot['land_baseline_policy'])
++  for obj,key,bad in [(self.snapshot['land_baseline_policy'],'distance_policy_version','forged'),(self.seed['seed_rules'][0],'inside_code',22),(self.seed['region_traces'][0]['input_trace'][0],'geometry_sha256','0'*64),(self.seed['region_traces'][0]['input_trace'][1]['closure_proof'],'checker_sha256','0'*64),(self.snapshot['source_lineage_assets'][0],'kind','derived'),(self.snapshot['land_baseline_policy'],'connectivity','unwrapped')]:
++   old=obj[key];obj[key]=bad
++   with self.assertRaises(ValueError):self.check()
++   obj[key]=old
++ def test_boundary_cannot_claim_route_provenance(self):
++  self.seed['region_traces'][0]['input_trace'][0]['route_provenance']={'forged':True}
++  with self.assertRaisesRegex(ValueError,'invalid boundary provenance'):self.check()
++ def test_qualified_support_is_not_construction(self):
++  b=self.snapshot['mainland_boundaries'][0];t=self.seed['region_traces'][0]['input_trace'][0]['source_citations'][0];relation='local_geographic_comparison_not_terrain_or_construction_proof';b['provenance']['source_relationships'][0]['relationship']=relation;t['relationship']=relation;t['role']='supporting_research_evidence';self.assertTrue(self.check())
++  t['role']='construction_input'
++  with self.assertRaisesRegex(ValueError,'boundary citations mismatch'):self.check()
++ def test_source_relationships_missing_unknown_or_incomplete_fail(self):
++  b=self.snapshot['mainland_boundaries'][0]['provenance'];b['source_relationships'][0]['relationship']='unreviewed'
++  with self.assertRaisesRegex(ValueError,'unsupported'):self.check()
++  b['source_relationships'][0]['relationship']='local_geographic_comparison_not_terrain_or_construction_proof';b['lineage_status']='complete';self.seed['region_traces'][0]['input_trace'][0]['lineage_status']='complete'
++  with self.assertRaisesRegex(ValueError,'boundary lineage'):self.check()
++ def test_empty_physical_source_set_fails(self):
++  self.snapshot['stage1_source_inputs']=[];self.snapshot['routes'][0]['provenance']['source_refs']=[]
++  with self.assertRaisesRegex(ValueError,'route source selection'):self.check()
++ def test_zero_physical_asset_size_fails(self):
++  src=dict(self.snapshot['sources'][0]);asset=copy.deepcopy(self.snapshot['source_lineage_assets'][0]);src.update(source_id='route-asset',size_bytes=0);asset.update(source_id='route-asset',size_bytes=0);self.snapshot['sources'].append(src);self.snapshot['source_lineage_assets'].append(asset)
++  self.snapshot['stage1_source_inputs']=[{'source_id':'route-asset','source_version':'1','decision_revision':'d','execution_status':'selected_for_research'}];self.snapshot['routes'][0]['provenance']['source_refs']=[{'source_id':'route-asset','version':'1'}]
++  with self.assertRaisesRegex(ValueError,'invalid route source custody'):self.check()
++ def test_jointly_forged_route_physical_pins_fail(self):
++  pins=self.seed['input_sha256'];route=self.snapshot['routes'][0]['provenance'];proof=self.seed['region_traces'][0]['input_trace'][1]['closure_proof']
++  for key in ('physical_rows','physical_runs','physical_report'):
++   pins[key]='f'*64;route[key+'_sha256']='f'*64;proof[key+'_sha256']='f'*64
++  with self.assertRaisesRegex(ValueError,'proof physical pins differ'):self.check()
++ def test_forged_physical_report_pin_fails(self):
++  proof=self.seed['region_traces'][0]['input_trace'][1]['closure_proof'];proof['physical_report_sha256']='0'*64
++  with self.assertRaisesRegex(ValueError,'closure proof mismatch'):self.check()
++ def test_decimal_string_policy_grid_matches_numeric(self):
++  self.snapshot['land_baseline_policy']['grid']={'width':8,'height':4,'west':'-180','north':'90','step':'45'};self.assertTrue(self.check())
++  self.snapshot['land_baseline_policy']['grid']['step']='44.9'
++  with self.assertRaisesRegex(ValueError,'invalid selected policy grid'):self.check()
++ def test_resource_guard_interrupts_crosswalk(self):
++  calls=[]
++  def guard():
++   calls.append(1)
++   if len(calls)==3:raise RuntimeError('resource floor')
++  with self.assertRaisesRegex(RuntimeError,'resource floor'):c.validate_selected_seed_decisions(self.snapshot,self.seed,self.groups,self.codes,self.metric,guard=guard)
++ def test_forged_matching_region_hash_fails(self):
++  self.snapshot['seed_regions'][0]['geometry_sha256']='f'*64;self.seed['region_traces'][0]['geometry_sha256']='f'*64
++  with self.assertRaisesRegex(ValueError,'polygon hash/closure'):self.check()
++ def test_disconnected_selected_slices_fail(self):
++  self.snapshot['seed_regions'][0]['segments'][1]['start']=1;self.seed['region_traces'][0]['input_trace'][1]['start']=1
++  with self.assertRaisesRegex(ValueError,'do not join'):self.check()
++ def test_terminal_proof_and_reverse_terminals(self):
++  import hashlib,json
++  route=self.snapshot['routes'][0];route['closure_method']='physical_terminal_closure_v1';route['provenance']['checker_sha256']=self.seed['input_sha256']['terminal_checker'];route['start_terminal']={'boundary_id':'b','endpoint':'end'};route['end_terminal']={'boundary_id':'b','endpoint':'start'}
++  p=self.seed['region_traces'][0]['input_trace'][1]['closure_proof'];p.update({'schema':'physical-terminal-closure-proof-v1','checker_sha256':self.seed['input_sha256']['terminal_checker'],'support_checker_sha256':self.seed['input_sha256']['closure_checker'],'no_land_land_edge_touched':True,'start_geometry_sha256':self.snapshot['mainland_boundaries'][0]['geometry_sha256'],'end_geometry_sha256':self.snapshot['mainland_boundaries'][0]['geometry_sha256'],'start_endpoint':'end','end_endpoint':'start'})
++  self.assertTrue(self.check());p['no_land_land_edge_touched']=False
++  with self.assertRaisesRegex(ValueError,'terminal closure checker'):self.check()
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_direct_hint_cli.py
+@@ -0,0 +1,48 @@
++import hashlib,json,struct,tempfile,unittest
++from unittest import mock
++import os
++from pathlib import Path
++import run_diagnostic
++
++def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
++def ints(p,v):p.write_bytes(struct.pack('<'+'I'*len(v),*v))
++class CLITests(unittest.TestCase):
++ def setUp(self):
++  self.t=tempfile.TemporaryDirectory();self.p=Path(self.t.name);self.i=self.p/'inputs';self.i.mkdir();(self.p/'out').mkdir()
++  for name in run_diagnostic.NAMES:(self.i/name).write_bytes(b'dummy')
++  ints(self.i/'component_rows',[0,2,4,5]);ints(self.i/'component_runs',[0,2,9,7,8,1,2,4,9,4,6,2,7,8,1]);ints(self.i/'representatives',[0,0,0,0,17,0,0,1,4,18]);(self.i/'tile_manifest').write_text('0 0 2 3 '+('0'*64)+'\n')
++  self.grid=dict(width=8,height=3,step=45,west=-180,north=90)
++  snapshot=dict(schema='worldatlas-geography-decision-draft-evidence-v1',source='neon-export',decision_revision=dict(id='d',entity_revision='e',status='draft'),entity_revision=dict(id='e',status='draft'),distance_policies=[dict(policy_id='worldatlas-wgs84-geodesic',version='1',decision_revision='d',execution_status='selected_for_research',algorithm='wgs84_ellipsoidal_geodesic_inverse',units='metres',semi_major_axis_m='6378137',inverse_flattening='298.257223563')],category_bindings=[dict(code=17,physical_class='land'),dict(code=18,physical_class='land')]);(self.i/'decision_snapshot').write_text(json.dumps(snapshot))
++  hashes={k:sha(self.i/k) for k in ('physical_rows','physical_runs','component_rows','component_runs')}
++  report=dict(schema='mainland-witness-resolution-v1',status='selected-research-identity-claims-not-mainland-proof',publishable=False,grid=self.grid,input_sha256=hashes,snapshot_sha256=sha(self.i/'decision_snapshot'),component_manifest_sha256=sha(self.i/'component_manifest'),decision_revision='d',entity_revision='e',groups=[dict(group_id='g',role='mainland',target_entity_ids=['asia'],component_id_current_generation_only=9)])
++  (self.i/'resolution_report').write_text(json.dumps(report))
++  self.config=dict(schema='source-only-hints-diagnostic-request-v1',grid=self.grid,codes=[17,18],inputs={k:{'path':str(self.i/k),'sha256':sha(self.i/k)} for k in run_diagnostic.NAMES},decision_revision='d',entity_revision='e',policy_id='worldatlas-wgs84-geodesic',policy_version='1',minimum_free_bytes=1)
++  self.req=self.i/'request';self.req.write_text(json.dumps(self.config))
++ def tearDown(self):self.t.cleanup()
++ def test_complete_and_no_overwrite(self):
++  out=self.p/'out'/'a';r=run_diagnostic.run(self.req,out)
++  self.assertEqual(r['root_count'],2);self.assertEqual(r['status'],'diagnostic-not-independently-authenticated');self.assertEqual((out/'roots.u32le').read_bytes(),struct.pack('<II',1,2));self.assertEqual((out/'hints.u8').read_bytes(),bytes([17,18]));self.assertTrue((out/'report.json').is_file())
++  with self.assertRaisesRegex(ValueError,'fresh'):run_diagnostic.run(self.req,out)
++ def test_changed_input_fails_before_output(self):
++  (self.i/'component_runs').write_bytes(b'corrupt');out=self.p/'out'/'b'
++  with self.assertRaisesRegex(ValueError,'hash mismatch'):run_diagnostic.run(self.req,out)
++  self.assertFalse(out.exists())
++ def test_unselected_policy_fails_closed(self):
++  p=self.i/'decision_snapshot';snap=json.loads(p.read_text());snap['distance_policies'][0]['execution_status']='proposed_not_selected';p.write_text(json.dumps(snap));self.config['inputs']['decision_snapshot']['sha256']=sha(p)
++  q=self.i/'resolution_report';r=json.loads(q.read_text());r['snapshot_sha256']=sha(p);q.write_text(json.dumps(r));self.config['inputs']['resolution_report']['sha256']=sha(q);self.req.write_text(json.dumps(self.config))
++  with self.assertRaisesRegex(ValueError,'selected WGS84'):run_diagnostic.run(self.req,self.p/'out'/'bad-policy')
++ def test_link_uncertainty_is_explicit(self):
++  out=self.p/'out'/'uncertain';real=os.link
++  def link_then_error(a,b):real(a,b);raise OSError('simulated uncertain link')
++  with mock.patch.object(run_diagnostic.os,'link',side_effect=link_then_error):
++   with self.assertRaisesRegex(RuntimeError,'may exist'):run_diagnostic.run(self.req,out)
++  self.assertTrue((out/'report.json').exists())
++ def test_foreign_policy_revision_rejected(self):
++  p=self.i/'decision_snapshot';snap=json.loads(p.read_text());snap['distance_policies'][0]['decision_revision']='foreign';p.write_text(json.dumps(snap));self.config['inputs']['decision_snapshot']['sha256']=sha(p)
++  q=self.i/'resolution_report';r=json.loads(q.read_text());r['snapshot_sha256']=sha(p);q.write_text(json.dumps(r));self.config['inputs']['resolution_report']['sha256']=sha(q);self.req.write_text(json.dumps(self.config))
++  with self.assertRaisesRegex(ValueError,'policy revision'):run_diagnostic.run(self.req,self.p/'out'/'bad-revision')
++ def test_legacy_memory_floor_rejected_before_output(self):
++  self.config['minimum_memory_kib']=1;self.req.write_text(json.dumps(self.config));out=self.p/'out'/'c'
++  with self.assertRaisesRegex(ValueError,'bad request'):run_diagnostic.run(self.req,out)
++  self.assertFalse(out.exists())
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_direct_hint_subprocess.py
+@@ -0,0 +1,12 @@
++import json,os,subprocess,sys,unittest
++from pathlib import Path
++from test_direct_hint_cli import CLITests
++class DirectHintInvocation(CLITests):
++ def test_direct_command_and_failed_input(self):
++  runner=Path(__file__).resolve().parent/'runtime/hint-producer/run_diagnostic.py';out=self.p/'out'/'direct'
++  proc=subprocess.run([sys.executable,str(runner),str(self.req),str(out)],capture_output=True,text=True,env=dict(os.environ,OPENBLAS_NUM_THREADS='1'),check=True)
++  obj=json.loads(proc.stdout);self.assertEqual(obj['root_count'],2);self.assertTrue((out/'report.json').exists());self.assertFalse((out/'monitor.json').exists())
++  (self.i/'component_runs').write_bytes(b'corrupt');bad=self.p/'out'/'bad'
++  p=subprocess.run([sys.executable,str(runner),str(self.req),str(bad)],capture_output=True,text=True,env=dict(os.environ,OPENBLAS_NUM_THREADS='1'))
++  self.assertNotEqual(p.returncode,0);self.assertFalse(bad.exists())
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_direct_identity.py
+@@ -0,0 +1,23 @@
++import hashlib,importlib.util,json,tempfile,unittest
++from pathlib import Path
++HERE=Path(__file__).resolve().parent
++BASE=HERE/'runtime/v7-land/named-identity-prototype'
++def load(name,path):
++ spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
++adapter=load('direct_identity_adapter',BASE/'identity_watch.py');old=load('old_identity',HERE.parent/'stage2-rss-runtime-20261105/v7-land/named-identity-prototype/named_identity.py')
++class DirectIdentity(unittest.TestCase):
++ def setUp(self):
++  self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);self.p=Path(self.t.name)/'source.json';self.g={'type':'Polygon','coordinates':[[[0,0],[2,0],[2,2],[0,2],[0,0]]]};self.feature={'type':'Feature','properties':{'id':'1','name':'Island','class':'island'},'geometry':self.g};self.data={'type':'FeatureCollection','features':[self.feature]};self.p.write_text(json.dumps(self.data));self.code=(BASE/'named_identity.py').read_bytes();self.r={'identity_path':str(self.p),'identity_sha256':hashlib.sha256(self.p.read_bytes()).hexdigest(),'point_geometry':{'type':'Point','coordinates':[1,1]},'island_identity':'Island','spec':{'method':'raw_named_polygon_contains_point_v1','identity_feature_id':'1','identity_id_property':'id','identity_name_property':'name','identity_class_property':'class','identity_class_value':'island','identity_geometry_sha256':old.geom_hash(self.g)}}
++ def test_real_gdal_equal_old_core_without_memory_callback(self):
++  def forbidden():raise AssertionError('memory callback must not be used')
++  a=adapter.run(self.code,self.r,forbidden);b=old.check(self.data,self.r['point_geometry'],self.r['island_identity'],self.r['spec']);self.assertEqual(a['result'],b);self.assertEqual(a['memory_monitor'],{'mode':'direct-in-process','runtime_supervisor':'not-launched','runtime_memory_limit':'not-imposed','external_constraints':'not-assessed'})
++ def test_wrong_source_hash_fails(self):
++  self.r['identity_sha256']='0'*64
++  with self.assertRaisesRegex(ValueError,'pin mismatch'):adapter.run(self.code,self.r)
++ def test_boundary_point_fails(self):
++  self.r['point_geometry']={'type':'Point','coordinates':[0,1]}
++  with self.assertRaisesRegex(ValueError,'strictly inside'):adapter.run(self.code,self.r)
++ def test_source_mutation_during_check_fails(self):
++  code=b"def check(source,point,name,spec):\n from pathlib import Path\n Path("+repr(str(self.p)).encode()+b").write_text('{}')\n return {}\n"
++  with self.assertRaisesRegex(ValueError,'changed during check'):adapter.run(code,self.r)
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_direct_outer.py
+@@ -0,0 +1,20 @@
++import json,tempfile,unittest
++from pathlib import Path
++import orchestrate_stage2 as o
++class Outer(unittest.TestCase):
++ def setUp(self):
++  self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);self.p=Path(self.t.name)/'config.json';self.c=json.loads(Path('qualified-stage2-outer-20261105/config.json').read_text());self.c.pop('hint_max_rss_kib');self.c['controls']['minimum_memory_kib']=0
++ def load(self):self.p.write_text(json.dumps(self.c));return o.load_config(self.p)
++ def test_accepts_reused_seed_direct_and_no_guardian(self):
++  _,a=self.load();self.assertEqual(a['controls']['minimum_memory_kib'],0);self.assertIn('seed_handoff',a)
++  self.assertFalse(hasattr(o,'require_guardian'))
++ def test_rejects_host_memory_floor(self):
++  self.c['controls']['minimum_memory_kib']=1
++  with self.assertRaises(ValueError):self.load()
++ def test_rejects_legacy_hint_limit(self):
++  self.c['hint_max_rss_kib']=1
++  with self.assertRaises(ValueError):self.load()
++ def test_rejects_fresh_seed_until_direct_seed_is_implemented(self):
++  del self.c['seed_handoff']
++  with self.assertRaises(ValueError):self.load()
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_direct_resume.py
+@@ -0,0 +1,17 @@
++import unittest
++from test_baseline_runner import Runner
++class DirectResume(Runner):
++ def test_direct_failure_resume_matches_full_result(self):
++  expected=self.runit();self.cp.unlink();calls=[0]
++  def fail():
++   calls[0]+=1
++   if calls[0]>9:raise RuntimeError('injected failure')
++  with self.assertRaisesRegex(RuntimeError,'injected failure'):self.runit(guard=fail)
++  self.assertTrue(self.cp.exists())
++  got=self.runit(True)
++  self.assertEqual(got['codes'].tolist(),expected['codes'].tolist())
++  self.assertEqual(got['roots'].tolist(),expected['roots'].tolist())
++  self.assertEqual(got['exact_queries'],expected['exact_queries'])
++  self.identity={'test':'changed'}
++  with self.assertRaisesRegex(ValueError,'identity'):self.runit(True)
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_direct_seed_request.py
+@@ -0,0 +1,27 @@
++import copy,unittest
++import orchestrate_stage2 as o
++class DirectSeedRequest(unittest.TestCase):
++ def setUp(self):
++  self.i={k:{'path':'/p/'+k,'sha256':'a'*64} for k in ('snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','terminal_checker','closure_contract','seed_builder','seed_kernel')}
++  self.g={'width':8,'height':4,'west':-180,'north':90,'step':45}
++ def test_exact_v2_and_optional_sources(self):
++  i=copy.deepcopy(self.i);i['terminal_checker']={'path':'/p/terminal','sha256':'b'*64};i['panama_osm_archive']={'path':'/p/osm','sha256':'c'*64}
++  q=o.direct_seed_request(self.g,i,4);self.assertEqual(q,{'schema':'worldatlas-stage2-seed-direct-request-v2','grid':self.g,'inputs':i,'controls':{'strip_rows':4}})
++ def test_reject_missing_extra_and_invalid_pins(self):
++  i=copy.deepcopy(self.i);del i['resolution']
++  with self.assertRaises(ValueError):o.direct_seed_request(self.g,i,4)
++  i=copy.deepcopy(self.i);i['worker']={'path':'/p','sha256':'a'*64}
++  with self.assertRaises(ValueError):o.direct_seed_request(self.g,i,4)
++  i=copy.deepcopy(self.i);i['snapshot']['sha256']='x'*64
++  with self.assertRaises(ValueError):o.direct_seed_request(self.g,i,4)
++ def test_no_supervisor_or_process_memory_controls(self):
++  q=o.direct_seed_request(self.g,self.i,4);self.assertEqual(set(q['controls']),{'strip_rows'})
++  for n in (0,-1,True,1.5):
++   with self.assertRaises(ValueError):o.direct_seed_request(self.g,self.i,n)
++ def test_still_rejects_fresh_outer_config(self):
++  # The helper alone does not enable execution or bypass the unresolved gates.
++  from test_direct_outer import Outer
++  t=Outer('test_rejects_fresh_seed_until_direct_seed_is_implemented');t.setUp()
++  try:t.test_rejects_fresh_seed_until_direct_seed_is_implemented()
++  finally:t.doCleanups()
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_fresh_closure_binding.py
+@@ -0,0 +1,50 @@
++"""Bounded research tests; fresh mode is not wired to an executable path."""
++import copy, unittest
++import contracts as c
++from test_direct_contracts import CrosswalkTests
++
++class FreshClosure(CrosswalkTests):
++ def fresh(self):
++  return c.validate_selected_seed_decisions(self.snapshot,self.seed,self.groups,self.codes,self.metric,fresh_closure_proofs=True)
++ def change_historic_checker_and_contract(self):
++  prov=self.snapshot['routes'][0]['provenance']
++  prov['checker_sha256']='b'*64; prov['contract_sha256']='c'*64
++  # The seed trace must preserve the selected historical provenance exactly.
++  self.seed['region_traces'][0]['input_trace'][1]['route_provenance']=copy.deepcopy(prov)
++ def test_new_proof_does_not_rewrite_history(self):
++  self.change_historic_checker_and_contract()
++  with self.assertRaisesRegex(ValueError,'route source/provenance'):self.check()
++  self.assertTrue(self.fresh())
++ def test_fresh_proof_still_binds_new_inputs(self):
++  self.change_historic_checker_and_contract()
++  proof=self.seed['region_traces'][0]['input_trace'][1]['closure_proof']
++  for key in ('checker_sha256','contract_sha256','physical_rows_sha256','physical_runs_sha256','physical_report_sha256','geometry_sha256'):
++   old=proof[key];proof[key]='0'*64
++   with self.assertRaises(ValueError):self.fresh()
++   proof[key]=old
++ def test_trace_must_preserve_selected_historical_record(self):
++  self.change_historic_checker_and_contract()
++  self.seed['region_traces'][0]['input_trace'][1]['route_provenance']['checker_sha256']='d'*64
++  with self.assertRaisesRegex(ValueError,'route provenance'):self.fresh()
++ def test_historical_physical_pins_are_not_relabelled(self):
++  prov=self.snapshot['routes'][0]['provenance']
++  for key in ('physical_rows_sha256','physical_runs_sha256','physical_report_sha256'):prov[key]='e'*64
++  self.seed['region_traces'][0]['input_trace'][1]['route_provenance']=copy.deepcopy(prov)
++  with self.assertRaisesRegex(ValueError,'route source/provenance'):self.check()
++  self.assertTrue(self.fresh())
++ def test_fresh_terminal_support_and_endpoints_fail_closed(self):
++  route=self.snapshot['routes'][0];route['closure_method']='physical_terminal_closure_v1';route['start_terminal']={'boundary_id':'b','endpoint':'end'};route['end_terminal']={'boundary_id':'b','endpoint':'start'}
++  prov=route['provenance'];prov['checker_sha256']='b'*64;prov['contract_sha256']='c'*64
++  trace=self.seed['region_traces'][0]['input_trace'][1];trace['route_provenance']=copy.deepcopy(prov);proof=trace['closure_proof'];pins=self.seed['input_sha256']
++  proof.update({'schema':'physical-terminal-closure-proof-v1','checker_sha256':pins['terminal_checker'],'support_checker_sha256':pins['closure_checker'],'no_land_land_edge_touched':True,'start_geometry_sha256':self.snapshot['mainland_boundaries'][0]['geometry_sha256'],'end_geometry_sha256':self.snapshot['mainland_boundaries'][0]['geometry_sha256'],'start_endpoint':'end','end_endpoint':'start'})
++  self.assertTrue(self.fresh())
++  for key,bad in (('support_checker_sha256','0'*64),('start_endpoint','start'),('end_geometry_sha256','0'*64),('no_land_land_edge_touched',False)):
++   old=proof[key];proof[key]=bad
++   with self.assertRaises(ValueError):self.fresh()
++   proof[key]=old
++ def test_historic_digest_must_be_well_formed(self):
++  self.change_historic_checker_and_contract()
++  self.snapshot['routes'][0]['provenance']['checker_sha256']='not-a-hash'
++  self.seed['region_traces'][0]['input_trace'][1]['route_provenance']['checker_sha256']='not-a-hash'
++  with self.assertRaisesRegex(ValueError,'route source/provenance'):self.fresh()
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_real_unpatched_freeze.py
+@@ -0,0 +1,96 @@
++"""Exercise the actual unmodified v2 executable pins on a bounded fixture."""
++import contextlib, hashlib, json, os, pathlib, subprocess, sys, unittest
++from unittest import mock
++import seed_producer, test_seed_producer
++HERE=pathlib.Path(__file__).resolve().parent
++class UnpatchedFreeze(unittest.TestCase):
++ def test_actual_pins_and_real_osm_fixture(self):
++  files={'seed_builder':HERE/'rasterizer/build_seed.py','seed_kernel':HERE/'rasterizer/seed_kernel.cpp','closure_checker':HERE/'closure-checkers/validate_water_closure_v2.py'}
++  for k,p in files.items():self.assertEqual(seed_producer.TRUSTED_CODE[k],hashlib.sha256(p.read_bytes()).hexdigest())
++  p=HERE/'closure-checkers/validate_terminal_closure.py'
++  self.assertEqual(seed_producer.TRUSTED_TERMINAL_CHECKER,hashlib.sha256(p.read_bytes()).hexdigest())
++  case=test_seed_producer.Producer('test_real_panama_archive_and_water_checker_on_synthetic_grid');case.setUp()
++  try:
++   # The inherited fixture normally overrides pins. Suppress that override so
++   # the producer validates the actual checked-in candidate constants instead.
++   with mock.patch.object(test_seed_producer.patch,'dict',lambda *a,**k:contextlib.nullcontext()):
++    case.test_real_panama_archive_and_water_checker_on_synthetic_grid()
++  finally:case.doCleanups()
++ def test_direct_subprocess_real_osm_fixture(self):
++  case=test_seed_producer.Producer('test_real_panama_archive_and_water_checker_on_synthetic_grid');case.setUp()
++  def invoke(request,work,output):
++   subprocess.run([sys.executable,'-c','import seed_producer,sys; seed_producer.run(*sys.argv[1:])',str(request),str(work),str(output)],cwd=HERE,check=True)
++   return json.loads((pathlib.Path(output)/'report.json').read_text())
++  try:
++   with mock.patch.object(test_seed_producer.patch,'dict',lambda *a,**k:contextlib.nullcontext()),mock.patch.object(test_seed_producer,'run',invoke):
++    case.test_real_panama_archive_and_water_checker_on_synthetic_grid()
++  finally:case.doCleanups()
++ def test_direct_terminal_checker_real_osm_fixture(self):
++  case=test_seed_producer.Producer('test_real_panama_archive_and_water_checker_on_synthetic_grid');case.setUp()
++  def invoke(request,work,output):
++   request=pathlib.Path(request);q=json.loads(request.read_text());snapshot=pathlib.Path(q['inputs']['snapshot']['path']);data=json.loads(snapshot.read_text())
++   boundary=data['mainland_boundaries'][0]['boundary_id'];route=data['routes'][0]
++   route['closure_method']='physical_terminal_closure_v1'
++   route['start_terminal']={'boundary_id':boundary,'endpoint':'end'};route['end_terminal']={'boundary_id':boundary,'endpoint':'start'}
++   snapshot.write_text(json.dumps(data));q['inputs']['snapshot']=test_seed_producer.pin(snapshot)
++   resolution=pathlib.Path(q['inputs']['resolution']['path']);r=json.loads(resolution.read_text());r['snapshot_sha256']=q['inputs']['snapshot']['sha256'];resolution.write_text(json.dumps(r));q['inputs']['resolution']=test_seed_producer.pin(resolution)
++   q['inputs']['terminal_checker']=test_seed_producer.pin(HERE/'closure-checkers/validate_terminal_closure.py');request.write_text(json.dumps(q))
++   subprocess.run([sys.executable,'-c','import seed_producer,sys; seed_producer.run(*sys.argv[1:])',str(request),str(work),str(output)],cwd=HERE,check=True)
++   result=json.loads((pathlib.Path(output)/'report.json').read_text());proof=next(x['closure_proof'] for x in result['region_traces'][0]['input_trace'] if x['kind']=='route')
++   self.assertEqual(proof['schema'],'physical-terminal-closure-proof-v1');self.assertEqual(proof['checker_sha256'],q['inputs']['terminal_checker']['sha256']);self.assertEqual(proof['support_checker_sha256'],q['inputs']['closure_checker']['sha256']);return result
++  # The reused fixture asserts the water checker hash; for this variant the
++  # direct terminal checker is expected. All other fixture assertions remain.
++  original_assert=case.assertEqual
++  terminal=seed_producer.TRUSTED_TERMINAL_CHECKER;water=seed_producer.TRUSTED_CODE['closure_checker']
++  def compare(a,b,*args,**kwargs):
++   if a==terminal and b==water:return original_assert(a,terminal,*args,**kwargs)
++   return original_assert(a,b,*args,**kwargs)
++  case.assertEqual=compare
++  try:
++   with mock.patch.object(test_seed_producer.patch,'dict',lambda *a,**k:contextlib.nullcontext()),mock.patch.object(test_seed_producer,'run',invoke):
++    case.test_real_panama_archive_and_water_checker_on_synthetic_grid()
++  finally:case.doCleanups()
++ def test_unwired_outer_helper_direct_invocation(self):
++  import orchestrate_stage2 as outer
++  case=test_seed_producer.Producer('test_real_panama_archive_and_water_checker_on_synthetic_grid');case.setUp()
++  def invoke(request,work,output):
++   request=pathlib.Path(request);q=json.loads(request.read_text());q['inputs']['terminal_checker']=test_seed_producer.pin(HERE/'closure-checkers/validate_terminal_closure.py');request.write_text(json.dumps(q))
++   return outer.invoke_direct_seed(request,work,output)
++  try:
++   with mock.patch.object(test_seed_producer.patch,'dict',lambda *a,**k:contextlib.nullcontext()),mock.patch.object(test_seed_producer,'run',invoke):
++    case.test_real_panama_archive_and_water_checker_on_synthetic_grid()
++  finally:case.doCleanups()
++ def test_unwired_outer_helper_ignores_pythonpath_sitecustomize(self):
++  import orchestrate_stage2 as outer
++  case=test_seed_producer.Producer('test_real_panama_archive_and_water_checker_on_synthetic_grid');case.setUp()
++  evil=case.d/'evil';evil.mkdir();sentinel=case.d/'sitecustomize-ran'
++  (evil/'sitecustomize.py').write_text('from pathlib import Path\nPath('+repr(str(sentinel))+').write_text("injected")\nimport sys,types\nsys.modules["seed_producer"]=types.ModuleType("seed_producer")\n')
++  previous=os.environ.get('PYTHONPATH');os.environ['PYTHONPATH']=str(evil)
++  def invoke(request,work,output):
++   request=pathlib.Path(request);q=json.loads(request.read_text());q['inputs']['terminal_checker']=test_seed_producer.pin(HERE/'closure-checkers/validate_terminal_closure.py');request.write_text(json.dumps(q))
++   return outer.invoke_direct_seed(request,work,output)
++  try:
++   with mock.patch.object(test_seed_producer.patch,'dict',lambda *a,**k:contextlib.nullcontext()),mock.patch.object(test_seed_producer,'run',invoke):
++    case.test_real_panama_archive_and_water_checker_on_synthetic_grid()
++   self.assertFalse(sentinel.exists())
++  finally:
++   if previous is None:os.environ.pop('PYTHONPATH',None)
++   else:os.environ['PYTHONPATH']=previous
++   case.doCleanups()
++ def test_unwired_outer_helper_rejects_code_tamper_before_work(self):
++  import orchestrate_stage2 as outer
++  case=test_seed_producer.Producer('test_runs_from_selected_structured_inputs');case.setUp()
++  try:
++   q=case.req;q['inputs']['terminal_checker']=test_seed_producer.pin(HERE/'closure-checkers/validate_terminal_closure.py');q['inputs']['closure_checker']=test_seed_producer.pin(HERE/'closure-checkers/validate_water_closure_v2.py');case.path.write_text(json.dumps(q))
++   with mock.patch.dict(outer.DIRECT_SEED_FREEZE,{'regions.py':'0'*64}):
++    with self.assertRaisesRegex(ValueError,'direct seed code changed'):outer.invoke_direct_seed(case.path,case.work,case.output)
++   self.assertFalse(case.work.exists());self.assertFalse(case.output.exists())
++  finally:case.doCleanups()
++ def test_unreviewed_checker_rejected_without_override(self):
++  case=test_seed_producer.Producer('test_runs_from_selected_structured_inputs');case.setUp()
++  try:
++   with self.assertRaisesRegex(ValueError,'unreviewed executable code'):
++    seed_producer.run(case.path,case.work,case.output)
++   self.assertFalse(case.work.exists());self.assertFalse(case.output.exists())
++  finally:case.doCleanups()
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_outer_seed_tamper.py
+@@ -0,0 +1,55 @@
++"""Bounded unit checks of the unwired direct invocation's revalidation."""
++import hashlib,json,pathlib,unittest
++from unittest import mock
++import orchestrate_stage2 as outer
++import test_seed_producer as fixtures
++HERE=pathlib.Path(__file__).resolve().parent
++class OuterSeedTamper(unittest.TestCase):
++ def setUp(self):
++  self.case=fixtures.Producer('test_runs_from_selected_structured_inputs');self.case.setUp();self.addCleanup(self.case.doCleanups)
++  self.q=self.case.req
++  for k,name in (('closure_checker','closure-checkers/validate_water_closure_v2.py'),('terminal_checker','closure-checkers/validate_terminal_closure.py')):self.q['inputs'][k]=fixtures.pin(HERE/name)
++  self.case.path.write_text(json.dumps(self.q));self.mode=None
++ def fake_run(self,cmd,**kwargs):
++  out=pathlib.Path(cmd[-1]);out.mkdir();rows=b'row fixture';runs=b'run fixture';(out/'rows.u32le').write_bytes(rows);(out/'runs.u32le').write_bytes(runs)
++  raw=self.case.path.read_bytes();code={n:outer.DIRECT_SEED_FREEZE[n] for n in outer.DIRECT_SEED_REPORTED};code.update({'rasterizer':outer.DIRECT_SEED_FREEZE['rasterizer/build_seed.py'],'rasterizer_kernel':outer.DIRECT_SEED_FREEZE['rasterizer/seed_kernel.cpp']})
++  h=lambda b:hashlib.sha256(b).hexdigest()
++  raster=b'rasterizer report';(out/'rasterizer-report.json').write_bytes(raster)
++  report={'schema':'worldatlas-stage2-mainland-seed-report-v1','status':'diagnostic-seed-pending-independent-provenance','publishable':False,'grid':self.q['grid'],'execution':{'mode':'direct','strip_rows':self.q['controls']['strip_rows']},'request_sha256':h(raw),'input_sha256':{k:v['sha256'] for k,v in self.q['inputs'].items()},'code_sha256':code,'seed_rows_sha256':h(rows),'seed_runs_sha256':h(runs),'rasterizer_report_sha256':h(raster)}
++  for field,key in (('decision_snapshot_sha256','snapshot'),('resolution_report_sha256','resolution'),('physical_rows_sha256','physical_rows'),('physical_runs_sha256','physical_runs'),('physical_report_sha256','physical_report'),('component_rows_sha256','component_rows'),('component_runs_sha256','component_runs'),('component_manifest_sha256','component_manifest')):report[field]=self.q['inputs'][key]['sha256']
++  if self.mode=='report':report['code_sha256']['seed_producer.py']='0'*64
++  if self.mode=='output':(out/'runs.u32le').write_bytes(b'tampered')
++  (out/'report.json').write_text(json.dumps(report))
++  if self.mode=='request':self.case.path.write_bytes(raw+b' ')
++  if self.mode=='input':pathlib.Path(self.q['inputs']['snapshot']['path']).write_text('{}')
++  return mock.Mock(returncode=0)
++ def invoke(self):
++  with mock.patch.object(outer.subprocess,'run',side_effect=self.fake_run):return outer.invoke_direct_seed(self.case.path,self.case.work,self.case.output)
++ def test_synthetic_matching_result(self):self.assertEqual(self.invoke()['execution']['mode'],'direct')
++ def test_reject_relative_input_before_start(self):
++  self.q['inputs']['snapshot']['path']='relative.json';self.case.path.write_text(json.dumps(self.q))
++  with self.assertRaisesRegex(ValueError,'input path must be absolute'):self.invoke()
++  self.assertFalse(self.case.work.exists());self.assertFalse(self.case.output.exists())
++ def test_reject_duplicate_json_before_start(self):
++  raw=self.case.path.read_text();self.case.path.write_text(raw[:-1]+', "schema": "duplicate"}')
++  with self.assertRaisesRegex(ValueError,'duplicate JSON key'):self.invoke()
++  self.assertFalse(self.case.work.exists());self.assertFalse(self.case.output.exists())
++ def test_reject_changed_request(self):
++  self.mode='request'
++  with self.assertRaisesRegex(RuntimeError,'inspect it before retrying') as e:self.invoke()
++  self.assertIn('request or report changed',str(e.exception.__cause__))
++ def test_reject_changed_input(self):
++  self.mode='input'
++  with self.assertRaisesRegex(RuntimeError,'inspect it before retrying') as e:self.invoke()
++  self.assertIn('input hash mismatch',str(e.exception.__cause__))
++ def test_reject_forged_report_code(self):
++  self.mode='report'
++  with self.assertRaisesRegex(RuntimeError,'inspect it before retrying') as e:self.invoke()
++  self.assertIn('report binding mismatch',str(e.exception.__cause__))
++ def test_reject_tampered_output(self):
++  self.mode='output'
++  with self.assertRaisesRegex(RuntimeError,'inspect it before retrying') as e:self.invoke()
++  self.assertIn('output mismatch',str(e.exception.__cause__))
++  self.assertTrue(self.case.output.exists())
++  with self.assertRaisesRegex(ValueError,'already exists'):self.invoke()
++if __name__=='__main__':unittest.main()

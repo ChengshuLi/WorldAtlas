@@ -1,0 +1,85 @@
+{
+  "baseline": "stage2-rss-runtime-20261105",
+  "files": {
+    "build_stage2.py": {
+      "base_sha256": "bb95e0c636c350035997bc712463ccf7cbe0d1ba5523f160b363635c9c78b4a8",
+      "candidate_sha256": "b0121052afe0cb8a35faf743e6c6625c81304801501151995fffae1c2d60d64d"
+    },
+    "contracts.py": {
+      "base_sha256": "ed2f78031508d8202358c9b9698f1446128855986d1c2ffcdb35a2f30a6d53d9",
+      "candidate_sha256": "f703e5edcb0f67cc908aa0812e5b194b480ea2916c017464e51d1bfa0066c7f1"
+    },
+    "hint-producer/run_diagnostic.py": {
+      "base_sha256": "6479fe230172e54726e11d8a52a5408c943b0df20d1a955c310bdd267e15f8d4",
+      "candidate_sha256": "7e5b8b420ae58067ea8cbda6a9cad17d87b36818ee3492673dfbf6a2c1c3d9db"
+    },
+    "orchestrate_stage2.py": {
+      "base_sha256": "b71e4af5dac459b7024e8378238ff23076d602828421771641ebf725e210da12",
+      "candidate_sha256": "a6917a305d1fbd4e6b6b54e56c2fc24bcea0d3da10a0bdd20e950b28ad40cfbe"
+    },
+    "test_verify_seed_index_direct.py": {
+      "base_sha256": null,
+      "candidate_sha256": "cb1742bd7c0626aa339eb727584d7469a75c1de427d9535f948952f6d044b405"
+    },
+    "tests/test_direct_candidate.py": {
+      "base_sha256": null,
+      "candidate_sha256": "be19b2648ef94603334a324c2d4bf1ca9f5031ef5add9d1ef915dedab9c4163e"
+    },
+    "tests/test_direct_contracts.py": {
+      "base_sha256": null,
+      "candidate_sha256": "3e17fee2444a40034eb4ff396fcd5e36bed93be9934cbbbf851e3a0723f2ac49"
+    },
+    "tests/test_direct_hint_cli.py": {
+      "base_sha256": null,
+      "candidate_sha256": "6b9e1882e2550779c0b330a7d27a985939c81ec5547cb9796f933dcb4368aa5e"
+    },
+    "tests/test_direct_hint_subprocess.py": {
+      "base_sha256": null,
+      "candidate_sha256": "c891681072be5e17f0cd30a7933f9fd44079437067c6a0b85f11b2a801ce931a"
+    },
+    "tests/test_direct_identity.py": {
+      "base_sha256": null,
+      "candidate_sha256": "78cdcc651fd98ecaed6fa0c2fef025a6b6bdb80f36c8669520c9dd84f74f18d5"
+    },
+    "tests/test_direct_outer.py": {
+      "base_sha256": null,
+      "candidate_sha256": "3c67ee14fb677428c6f4fb7d5d45a731df8e11d69d73aa6ec5f1d8b563f99d4a"
+    },
+    "tests/test_direct_resume.py": {
+      "base_sha256": null,
+      "candidate_sha256": "43f49f2b09fc1a3a517a461583a2673d69f96ff5db22882804c7e459130c1257"
+    },
+    "tests/test_direct_seed_request.py": {
+      "base_sha256": null,
+      "candidate_sha256": "1661414cea5aa1f81669b42f7d1dc6b5ac046d15d057805829c4a2e02518acd2"
+    },
+    "tests/test_fresh_closure_binding.py": {
+      "base_sha256": null,
+      "candidate_sha256": "115757d4e32e03a6764b1108c6995e7cc76e9bde13144136457fd244ac9138c9"
+    },
+    "tests/test_outer_seed_tamper.py": {
+      "base_sha256": null,
+      "candidate_sha256": "85f060f5f330eb980c743de0e8280a8c336747dfd6cee9dbdeddc1bd3ec9f7c7"
+    },
+    "tests/test_real_unpatched_freeze.py": {
+      "base_sha256": null,
+      "candidate_sha256": "9d9887dc90f5507e711a6b3c0d50309184c5643b03d330b456e1f48e92e5a642"
+    },
+    "v7-land/named-identity-prototype/identity_watch.py": {
+      "base_sha256": "73b0cc98e62ec5b206a9b76fd9eb6414fa2f869d8678f3c6d705983cff8718ae",
+      "candidate_sha256": "ddf6412e1dac40fc9a5748dccbe2e2a77855e88dfb96384bdd7eb3d47438ee5e"
+    },
+    "v7-land/named-identity-prototype/named_identity.py": {
+      "base_sha256": "1afb8265fda78d02085295e7b7e73caedaff6d796201b53408c1b14b45c9e4a2",
+      "candidate_sha256": "d06b3f709bf2c4c2a1bcb8b8bfe13c3b089b7bf8bc691f9e769d12c516697fa5"
+    },
+    "validate_stage2_candidate.py": {
+      "base_sha256": "7ef9f17089dd58cb369731c29b954073fea0d07b705ee8ca3078c2272602882e",
+      "candidate_sha256": "d535590bca3d1a008060e7d95ad3e1340ca597cfd8b24ec1f52e9874291b5e58"
+    },
+    "verify_seed_index.cpp": {
+      "base_sha256": "6b8cbe131b2c277d1ba1e30641d81e4acea605dea8850131b1b42b9e6ecd87f8",
+      "candidate_sha256": "086e0c87e4e99cc64c605afd43ff1f9575b72b537430583c8aa7c84e13474a06"
+    }
+  }
+}
