@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 GT=(-.015,.01,0,.015,0,-.01)
-from trace_downhill import trace, filter_surface
+from trace_downhill import trace, filter_surface, trace_record
 
 class TraceTests(unittest.TestCase):
     def test_downhill_and_pit(self):
@@ -39,6 +39,11 @@ class TraceTests(unittest.TestCase):
         z=np.full((3,3),3000,dtype=int);z[1,1]=2000;z[0,1]=1005;z[1,2]=1000
         path,status=trace(z,np.ones_like(z,bool),(1,1),GT)
         self.assertEqual(path[:2],[(1,1),(0,1)])
+
+    def test_output_uses_validated_top_level_section(self):
+        result=trace_record({'distance_m':500,'center':[1,1]},7,{}, {})
+        self.assertEqual(result['section'],7)
+        self.assertEqual(result['distance_method'],'wgs84-ellipsoidal-geodesic-v1')
 
     def test_invalid_start(self):
         z=np.ones((3,3),int);valid=np.ones((3,3),bool);valid[1,1]=False

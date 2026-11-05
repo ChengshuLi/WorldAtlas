@@ -147,6 +147,12 @@ def open_tile(spec, median_window=1, center=None, crop_radius=None):
     return z, valid, gt
 
 
+def trace_record(profile, section, routes, pairs):
+    """Use the already validated document section for every emitted record."""
+    return {'distance_method':METHOD,'section':section,'distance_m':profile.get('distance_m'),
+            'center':profile.get('center'),'routes':routes,'pairs':pairs}
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--profiles', required=True, help='profile JSON produced by ridge_candidates.py')
@@ -215,8 +221,7 @@ def main():
             merge = next(((lookup[tuple(point)], j, point) for j,point in enumerate(b)
                           if tuple(point) in lookup), None)
             pairs[str(offset)] = {'merged': merge is not None, 'merge': merge}
-        results.append({'distance_method': METHOD, 'section': profile.get('section'), 'distance_m': profile.get('distance_m'),
-                        'center': profile.get('center'), 'routes': results_for_profile, 'pairs': pairs})
+        results.append(trace_record(profile,args.section,results_for_profile,pairs))
     Path(args.output).write_text(json.dumps(results, indent=2))
 
 
