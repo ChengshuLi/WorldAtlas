@@ -6,6 +6,9 @@ an authoritative watershed, named-outlet mapping, or boundary-selection tool.
 import heapq
 import math
 import numpy as np
+from pyproj import Geod
+
+GEOD=Geod(ellps="WGS84")
 from scipy.ndimage import minimum_filter
 
 
@@ -37,12 +40,12 @@ def priority_flood(elevation, valid):
     return filled,parent
 
 
-def trace(filled,valid,parent,start,dx_metres,dy_metres):
+def trace(filled,valid,parent,start,transform):
     z=np.asarray(filled);valid=np.asarray(valid,dtype=bool);parent=np.asarray(parent)
     if z.ndim!=2 or z.shape!=valid.shape or z.shape!=parent.shape:
         raise ValueError('matching two-dimensional arrays required')
-    if not math.isfinite(dx_metres) or not math.isfinite(dy_metres) or min(dx_metres,dy_metres)<=0:
-        raise ValueError('positive finite pixel distances required')
+    if not hasattr(transform, 'a') or transform.b or transform.d:
+        raise ValueError('WGS84 unrotated raster transform required')
     height,width=z.shape;row,col=start
     if not(0<=row<height and 0<=col<width and valid[row,col]):return [],'invalid_start'
     path=[];seen=set()
@@ -57,7 +60,11 @@ def trace(filled,valid,parent,start,dx_metres,dy_metres):
                 if not(dr or dc):continue
                 nr,nc=row+dr,col+dc
                 if not(0<=nr<height and 0<=nc<width and valid[nr,nc]):continue
-                slope=(z[row,col]-z[nr,nc])/math.hypot(dc*dx_metres,dr*dy_metres)
+                lon,lat=transform*(col+.5,row+.5)
+                lon2,lat2=transform*(nc+.5,nr+.5)
+                _,_,distance=GEOD.inv(lon,lat,lon2,lat2)
+                if not math.isfinite(distance) or distance<=0:raise ValueError("invalid WGS84 pixel distance")
+                slope=(z[row,col]-z[nr,nc])/distance
                 if slope>best:best=slope;target=(nr,nc)
         if target is None:
             index=int(parent[row,col])
