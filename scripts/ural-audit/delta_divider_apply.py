@@ -12,7 +12,7 @@ import numpy as np
 from shapely import contains_xy
 from shapely.geometry import LineString, Point, box
 from shapely.ops import split
-from delta_side_screen import read_grid
+from grid_io import read_grid
 
 
 def sha(path):
@@ -33,35 +33,37 @@ def sides(line, bounds, europe_witness, asia_witness):
     return e[0], a[0]
 
 
-def update_row(old, physical, xs, lat, europe, asia, bounds):
+def update_row(old, physical, xs, lat, europe, asia, bounds, codec):
     w, s, e, n = bounds
+    ec, ac, lands = codec['europe_code'], codec['asia_code'], codec['land_codes']
     inside = (xs > w) & (xs < e) & (lat > s) & (lat < n)
     ep = contains_xy(europe, xs, lat) & inside
     ap = contains_xy(asia, xs, lat) & inside
     if np.any(inside & ~(ep | ap) & (physical == 17)): raise ValueError('land center on divider or scope boundary')
-    if np.any(inside & ((physical == 17) != (old >= 17))): raise ValueError('candidate and physical land masks differ in scope')
-    allowed = inside & (physical == 17) & np.isin(old, (18, 19))
+    if np.any(inside & ((physical == 17) != np.isin(old, lands))): raise ValueError('candidate and physical land masks differ in scope')
+    allowed = inside & (physical == 17) & np.isin(old, (ec, ac))
     new = old.copy()
-    new[allowed & ep] = 19
-    new[allowed & ap] = 18
+    new[allowed & ep] = ec
+    new[allowed & ap] = ac
     return new, {'land_centers': int(np.count_nonzero(inside & (physical == 17))),
-                 'other_land_labels': int(np.count_nonzero(inside & (physical == 17) & ~np.isin(old, (18, 19)))),
-                 'europe_to_asia': int(np.count_nonzero((old == 19) & (new == 18))),
-                 'asia_to_europe': int(np.count_nonzero((old == 18) & (new == 19)))}
+                 'other_land_labels': int(np.count_nonzero(inside & (physical == 17) & ~np.isin(old, (ec, ac)))),
+                 'europe_to_asia': int(np.count_nonzero((old == ec) & (new == ac))),
+                 'asia_to_europe': int(np.count_nonzero((old == ac) & (new == ec)))}
 
 
 def apply(candidate_rows, candidate_runs, physical_rows, physical_runs, line, cfg, out_rows, out_runs):
     width, height, step = cfg['width'], cfg['height'], cfg['step_degrees']
+    west, north = cfg['west'], cfg['north']
     for rows, runs in ((candidate_rows, candidate_runs), (physical_rows, physical_runs)):
         if len(rows) != height + 1 or rows[0] != 0 or rows[-1] * 2 != len(runs) or np.any(rows[1:] <= rows[:-1]):
             raise ValueError('invalid grid row index')
     candidate_runs, physical_runs = candidate_runs.reshape(-1, 2), physical_runs.reshape(-1, 2)
     bounds = cfg['bounds']; europe, asia = sides(line, bounds, cfg['europe_witness'], cfg['asia_witness'])
     w, s, e, n = bounds
-    if not (-180 <= w < e <= 180 and 90 - height * step <= s < n <= 90): raise ValueError('scope outside grid')
-    x0, x1 = max(0, int((w + 180) // step)), min(width, int((e + 180) // step) + 1)
-    y0, y1 = max(0, int((90 - n) // step)), min(height, int((90 - s) // step) + 1)
-    all_x = np.arange(width, dtype=np.int64); scope_x = all_x[x0:x1]; lons = -180 + (scope_x + .5) * step
+    if not (west <= w < e <= west + width * step and north - height * step <= s < n <= north): raise ValueError('scope outside grid')
+    x0, x1 = max(0, int((w - west) // step)), min(width, int((e - west) // step) + 1)
+    y0, y1 = max(0, int((north - n) // step)), min(height, int((north - s) // step) + 1)
+    all_x = np.arange(width, dtype=np.int64); scope_x = all_x[x0:x1]; lons = west + (scope_x + .5) * step
     offsets = np.zeros(height + 1, dtype='<u4'); totals = dict.fromkeys(('land_centers','other_land_labels','europe_to_asia','asia_to_europe'), 0)
     with open(out_runs, 'xb') as out:
         for y in range(height):
@@ -72,7 +74,7 @@ def apply(candidate_rows, candidate_runs, physical_rows, physical_runs, line, cf
                 if pro[-1, 0] != width or np.any(pro[1:, 0] <= pro[:-1, 0]): raise ValueError('invalid physical RLE row')
                 old_scope = row[np.searchsorted(row[:, 0], scope_x, side='right'), 1]
                 physical = pro[np.searchsorted(pro[:, 0], scope_x, side='right'), 1]
-                new_scope, counts = update_row(old_scope, physical, lons, 90 - (y + .5) * step, europe, asia, bounds)
+                new_scope, counts = update_row(old_scope, physical, lons, north - (y + .5) * step, europe, asia, bounds, cfg)
                 for key in totals: totals[key] += counts[key]
                 if np.any(old_scope != new_scope):
                     values = row[np.searchsorted(row[:, 0], all_x, side='right'), 1].copy()
