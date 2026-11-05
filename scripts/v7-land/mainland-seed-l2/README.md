@@ -47,3 +47,12 @@ requires at least one such input. Incomplete lineage remains explicitly reported
 Pins and stated relationships do not verify provider bytes, prove historical
 construction, or establish geographic correctness. Unknown relationships fail
 closed and need review. This research classification does not alter geometry.
+
+Closure routes retain selected stage-1 source citations and their stated
+provenance. The seed worker validates the returned closure proof against the
+physical report hash as well as the rows, runs and checker contract. Terminal
+closures require the allowlisted terminal checker. The full geodesic
+orchestrator remains gated until its seed freeze and validator receive an
+independent real-GDAL review; this does not authorize changing frozen hashes
+without verification. The rasterizer source freeze pins the witness guard;
+its coordinate uncertainty box is not a geographic distance measure.

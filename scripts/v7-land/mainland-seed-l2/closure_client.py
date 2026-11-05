@@ -12,12 +12,12 @@ def sha(path,guard):
    h.update(b)
  return h.hexdigest()
 class ClosureChecker:
- def __init__(self,checker_path,checker_sha256,physical_dir,physical_rows_sha256,physical_runs_sha256,contract_path,contract_sha256,work_parent,guard,timeout_seconds=1800,terminal_checker_path=None,terminal_checker_sha256=None):
-  self.checker=Path(checker_path).resolve(strict=True);self.expected=checker_sha256;self.physical=Path(physical_dir).resolve(strict=True);self.rows=physical_rows_sha256;self.runs=physical_runs_sha256;self.contract=Path(contract_path).resolve(strict=True);self.contract_sha=contract_sha256;self.work=Path(work_parent).resolve(strict=True);self.guard=guard;self.timeout=timeout_seconds
+ def __init__(self,checker_path,checker_sha256,physical_dir,physical_rows_sha256,physical_runs_sha256,contract_path,contract_sha256,work_parent,guard,timeout_seconds=1800,terminal_checker_path=None,terminal_checker_sha256=None,physical_report_sha256=None):
+  self.checker=Path(checker_path).resolve(strict=True);self.expected=checker_sha256;self.physical=Path(physical_dir).resolve(strict=True);self.rows=physical_rows_sha256;self.runs=physical_runs_sha256;self.report=physical_report_sha256;self.contract=Path(contract_path).resolve(strict=True);self.contract_sha=contract_sha256;self.work=Path(work_parent).resolve(strict=True);self.guard=guard;self.timeout=timeout_seconds
   self.terminal_checker=Path(terminal_checker_path).resolve(strict=True) if terminal_checker_path else None;self.terminal_expected=terminal_checker_sha256
   if bool(self.terminal_checker)!=bool(self.terminal_expected):raise ValueError('incomplete terminal checker pin')
   self.wrapper=Path(__file__).resolve().parent/'guarded_exec.py'
-  if not callable(guard) or not self.wrapper.is_file() or not self.physical.is_dir() or not self.work.is_dir() or not 0<timeout_seconds<=1800 or any(len(x)!=64 for x in (checker_sha256,physical_rows_sha256,physical_runs_sha256,contract_sha256)):raise ValueError('invalid closure checker configuration')
+  if not callable(guard) or not self.wrapper.is_file() or not self.physical.is_dir() or not self.work.is_dir() or not 0<timeout_seconds<=1800 or not isinstance(physical_report_sha256,str) or any(len(x)!=64 for x in (checker_sha256,physical_rows_sha256,physical_runs_sha256,physical_report_sha256,contract_sha256)):raise ValueError('invalid closure checker configuration')
   if self.terminal_checker and (self.work==self.terminal_checker.parent or self.work in self.terminal_checker.parents or self.terminal_checker.parent in self.work.parents):raise ValueError('closure work directory overlaps terminal checker')
   if self.work==self.physical or self.work in self.physical.parents or self.physical in self.work.parents or self.work==self.checker.parent or self.work in self.checker.parents or self.checker.parent in self.work.parents or self.work==self.contract.parent or self.work in self.contract.parents or self.contract.parent in self.work.parents:raise ValueError('closure work directory overlaps inputs')
  def _terminal(self,selected,terminals):
@@ -50,7 +50,7 @@ class ClosureChecker:
      with open(proof,'rb') as f:raw=f.read((1<<20)+1)
      if len(raw)>1<<20:raise ValueError('terminal proof exceeds bound')
      result=json.loads(raw)
-     if result.get('schema')!='physical-terminal-closure-proof-v1' or result.get('status')!='valid' or result.get('geometry_sha256')!=expected_geom or result.get('physical_rows_sha256')!=self.rows or result.get('physical_runs_sha256')!=self.runs or result.get('checker_sha256')!=self.terminal_expected or result.get('support_checker_sha256')!=self.expected or result.get('contract_sha256')!=self.contract_sha or result.get('no_land_land_edge_touched') is not True:raise ValueError('terminal proof pin mismatch')
+     if result.get('schema')!='physical-terminal-closure-proof-v1' or result.get('status')!='valid' or result.get('geometry_sha256')!=expected_geom or result.get('physical_rows_sha256')!=self.rows or result.get('physical_runs_sha256')!=self.runs or result.get('physical_report_sha256')!=self.report or result.get('checker_sha256')!=self.terminal_expected or result.get('support_checker_sha256')!=self.expected or result.get('contract_sha256')!=self.contract_sha or result.get('no_land_land_edge_touched') is not True:raise ValueError('terminal proof pin mismatch')
      for side,ref in zip(('start','end'),terminals):
       if result.get(side+'_geometry_sha256')!=ref['geometry_sha256'] or result.get(side+'_endpoint')!=ref['endpoint']:raise ValueError('terminal proof reference mismatch')
      if sha(self.terminal_checker,self.guard)!=self.terminal_expected or sha(self.checker,self.guard)!=self.expected or sha(self.contract,self.guard)!=self.contract_sha or sha(d/'terminal.py',self.guard)!=self.terminal_expected or sha(d/'validate_water_closure_v2.py',self.guard)!=self.expected or sha(self.wrapper,self.guard)!=wrapper_sha or any(path.read_bytes()!=data for path,data in captured_inputs.items()):raise ValueError('terminal checker or inputs changed during execution')
@@ -84,7 +84,7 @@ class ClosureChecker:
      with open(proof,'rb') as f:proof_bytes=f.read((1<<20)+1)
      if len(proof_bytes)>1<<20:raise ValueError('invalid closure proof size')
      result=json.loads(proof_bytes)
-     if result.get('schema')!='physical-water-closure-proof-v1' or result.get('status')!='valid' or result.get('geometry_sha256')!=expected_geom or result.get('physical_rows_sha256')!=self.rows or result.get('physical_runs_sha256')!=self.runs or result.get('checker_sha256')!=self.expected or result.get('contract_sha256')!=self.contract_sha:raise ValueError('closure proof pin mismatch')
+     if result.get('schema')!='physical-water-closure-proof-v1' or result.get('status')!='valid' or result.get('geometry_sha256')!=expected_geom or result.get('physical_rows_sha256')!=self.rows or result.get('physical_runs_sha256')!=self.runs or result.get('physical_report_sha256')!=self.report or result.get('checker_sha256')!=self.expected or result.get('contract_sha256')!=self.contract_sha:raise ValueError('closure proof pin mismatch')
      if sha(self.checker,self.guard)!=self.expected or sha(captured,self.guard)!=self.expected or sha(self.contract,self.guard)!=self.contract_sha or sha(self.wrapper,self.guard)!=wrapper_sha or geometry.read_bytes()!=geometry_bytes:raise ValueError('closure checker, contract or geometry changed during execution')
      return result
     finally:

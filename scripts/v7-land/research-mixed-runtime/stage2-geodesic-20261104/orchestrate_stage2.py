@@ -17,7 +17,9 @@ HINT_NAMES=('hints.py','run_diagnostic.py','watch_diagnostic.py')
 # Independently reviewed seed producer freeze 053159ed…; this does not
 # authenticate the selected Neon export or enable the remaining crosswalk.
 REVIEWED_SEED_FREEZE={'seed_producer.py': 'dec3d48e891d6fbb9dc910fbdfea33b85d3b3cb4ff1945bf71d105e2377b3a0d', 'export_adapter.py': '2ade004c620acccb52ab70d1702f08a760c91f3a78328c97f5610111cbd0f598', 'seed_rules.py': '0e98f77341b8f297b434d46250f2e8e9f615e6a3764cad176fe3cdf40c52f342', 'region_client.py': '9f5c51269abe890ba2db71c8ea91c600f002ea2f1fb6331739c0d84cb5dbc795', 'region_worker.py': 'd0bc835bdc7cf4e76750ceab72d756050a25bb010d9f73fb9c1b6b54d0b032ee', 'regions.py': '7a4e47a3c8e8bd21c72a8aa5a318e043df784e642943c0fe00c229625b581f22', 'closure_client.py': '9e5439bdfaf4228ca01a4e3d533c8436c4afc6e5e0a29e65fd0c28fdd3c80dbf', 'guarded_exec.py': '31bd7364765a2b8c181956cf275fabd6ae764207574f984d7b90c26b1474e7f3', 'guarded_raster_exec.py': '0179c973476ec172bbd2deed4e6e449edffaea8bc77cd3b96296f3ec9e6f7e89'}
-SEED_FREEZE_CURRENT=True  # Reviewed freeze matches the selected v6 adapter.
+# Candidate only: do not promote to REVIEWED_SEED_FREEZE until independently reviewed.
+CANDIDATE_SEED_FREEZE={'seed_producer.py': '116d43c4b7d510ef16e02a20deaee83ad7424f34e527037dd23e4db68aa1f416', 'export_adapter.py': 'b13d2a5868542cf2946b25c495a12d1aa793470ec55f8744a4af9f96630213f9', 'seed_rules.py': '0e98f77341b8f297b434d46250f2e8e9f615e6a3764cad176fe3cdf40c52f342', 'region_client.py': '9f5c51269abe890ba2db71c8ea91c600f002ea2f1fb6331739c0d84cb5dbc795', 'region_worker.py': '25d888715984a6ba4ed04a154af5980a114f24599baa670ebcc0a2b993b63314', 'regions.py': 'd8cf1c7629321e603c64bd96671498aab4ff78b6921d36b0a735e00a9b7705b0', 'closure_client.py': 'bc976967797ae67c99ab1aff712c25636ab1b3f01f7c7a558c59b530b573fb1b', 'guarded_exec.py': '31bd7364765a2b8c181956cf275fabd6ae764207574f984d7b90c26b1474e7f3', 'guarded_raster_exec.py': '0179c973476ec172bbd2deed4e6e449edffaea8bc77cd3b96296f3ec9e6f7e89'}
+SEED_FREEZE_CURRENT=False  # Qualified source/closure changes await independent real-GDAL review.
 SELECTED_POLICY_CROSSWALK_READY=True
 
 def need(v,msg):

@@ -14,7 +14,7 @@ from region_client import execute as build_region
 from closure_client import sha
 BASE=Path(__file__).resolve().parent
 CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','guarded_exec.py','guarded_raster_exec.py')
-TRUSTED_CODE={'seed_builder':'d6dd107e46024b08915e31aa2a47d8a93e0a5bb52c5d11d1ae601e71a0de2579','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'1d5e2a978870e05cf7f1f2c57389f65ffbc1c1a5de11056b5d5196b1a80b6f01'}
+TRUSTED_CODE={'seed_builder':'b90d613cc269195ea58cf491ad424d7d4a923e8c686410ef98e391a7f757beaa','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'1d5e2a978870e05cf7f1f2c57389f65ffbc1c1a5de11056b5d5196b1a80b6f01'}
 TRUSTED_TERMINAL_CHECKER='347aaa7f5414c2f3ac5826082a3b5b5c645558be1471f1ff3cc4b55eb206d8f7'
 INPUTS={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','closure_contract','seed_builder','seed_kernel'}
 def bounded_json(pin,guard,limit=16<<20):
@@ -69,7 +69,9 @@ def run(request_path,work_dir,output_dir,guard):
  if shutil.disk_usage(work.parent).free<controls['disk_reserve_bytes']:raise RuntimeError('disk reserve reached')
  snapshot=load_pinned_snapshot(inp['snapshot']['path'],inp['snapshot']['sha256'],guard);resolution=bounded_json(inp['resolution'],guard);rev,entity,boundaries,source_catalog=boundary_records(snapshot)
  if resolution.get('grid')!=grid or resolution.get('component_manifest_sha256')!=inp['component_manifest']['sha256'] or any(resolution.get('input_sha256',{}).get(k)!=inp[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')):raise ValueError('witness resolution input mismatch')
- regions,records=selected_regions(snapshot,rev,boundaries);rules=compile_rules(snapshot,resolution,inp['snapshot']['sha256'],[r['region_id'] for r in regions])
+ regions,records=selected_regions(snapshot,rev,boundaries)
+ if any(r.get('closure_method')=='physical_terminal_closure_v1' for r in records.values() if r['kind']=='route') and 'terminal_checker' not in inp:raise ValueError('terminal checker required for selected routes')
+ rules=compile_rules(snapshot,resolution,inp['snapshot']['sha256'],[r['region_id'] for r in regions])
  report=bounded_json(inp['physical_report'],guard);outputs=report.get('physical_output_sha256',report.get('output_sha256',{}))
  if report.get('status') not in ('candidate-only','stage1-complete') or report.get('grid')!=grid or outputs.get('rows.u32le')!=inp['physical_rows']['sha256'] or outputs.get('runs.u32le')!=inp['physical_runs']['sha256']:raise ValueError('physical report mismatch')
  contract=bounded_json(inp['closure_contract'],guard);physical=contract.get('physical',{});cg=contract.get('grid',{})
@@ -83,7 +85,7 @@ def run(request_path,work_dir,output_dir,guard):
   with open(inp[key]['path'],'rb') as f:data=f.read((1<<20)+1)
   if len(data)>1<<20 or hashlib.sha256(data).hexdigest()!=inp[key]['sha256']:raise ValueError('rasterizer source mismatch')
   (codework/name).write_bytes(data)
- closure={'checker_path':inp['closure_checker']['path'],'checker_sha256':inp['closure_checker']['sha256'],'physical_dir':str(Path(inp['physical_rows']['path']).resolve().parent),'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'contract_path':inp['closure_contract']['path'],'contract_sha256':inp['closure_contract']['sha256'],'timeout_seconds':controls['timeout_seconds']}
+ closure={'checker_path':inp['closure_checker']['path'],'checker_sha256':inp['closure_checker']['sha256'],'physical_dir':str(Path(inp['physical_rows']['path']).resolve().parent),'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'physical_report_sha256':inp['physical_report']['sha256'],'contract_path':inp['closure_contract']['path'],'contract_sha256':inp['closure_contract']['sha256'],'timeout_seconds':controls['timeout_seconds']}
  if 'terminal_checker' in inp:closure.update({'terminal_checker_path':inp['terminal_checker']['path'],'terminal_checker_sha256':inp['terminal_checker']['sha256']})
  if Path(inp['physical_runs']['path']).resolve().parent!=Path(closure['physical_dir']):raise ValueError('physical files must be colocated')
  source_list=[{'source_id':k[0],'version':k[1],**v} for k,v in source_catalog.items()];region_configs=[];region_traces=[]

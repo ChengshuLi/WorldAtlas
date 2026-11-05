@@ -34,8 +34,8 @@ def points(g):
  if any(abs(a[0]-b[0])>180 for a,b in zip(out,out[1:])):raise ValueError('antimeridian crossing unsupported')
  return out
 
-def assemble(revision_id,records,decision,source_catalog,closure_checker,*,physical_rows_sha256,physical_runs_sha256,checker_sha256,closure_contract_sha256,guard,terminal_checker_sha256=None):
- if not isinstance(revision_id,str) or not revision_id or not isinstance(decision,dict) or set(decision)!={'region_id','revision_id','execution_status','segments','geometry_sha256','geometry_hash_method','witnesses'} or decision['geometry_hash_method']!='binary64-sorted-compact-geojson-v1' or decision['revision_id']!=revision_id or decision['execution_status']!='selected_for_research' or not isinstance(decision['region_id'],str) or not decision['region_id'] or not isinstance(decision['segments'],list) or not decision['segments'] or len(decision['segments'])>1000 or not callable(closure_checker) or not callable(guard) or any(not re.fullmatch('[0-9a-f]{64}',str(x)) for x in (physical_rows_sha256,physical_runs_sha256,checker_sha256,closure_contract_sha256)):raise ValueError('invalid selected region decision')
+def assemble(revision_id,records,decision,source_catalog,closure_checker,*,physical_rows_sha256,physical_runs_sha256,physical_report_sha256,checker_sha256,closure_contract_sha256,guard,terminal_checker_sha256=None):
+ if not isinstance(revision_id,str) or not revision_id or not isinstance(decision,dict) or set(decision)!={'region_id','revision_id','execution_status','segments','geometry_sha256','geometry_hash_method','witnesses'} or decision['geometry_hash_method']!='binary64-sorted-compact-geojson-v1' or decision['revision_id']!=revision_id or decision['execution_status']!='selected_for_research' or not isinstance(decision['region_id'],str) or not decision['region_id'] or not isinstance(decision['segments'],list) or not decision['segments'] or len(decision['segments'])>1000 or not callable(closure_checker) or not callable(guard) or any(not re.fullmatch('[0-9a-f]{64}',str(x)) for x in (physical_rows_sha256,physical_runs_sha256,physical_report_sha256,checker_sha256,closure_contract_sha256)):raise ValueError('invalid selected region decision')
  ring=[];trace=[];used=set();total_vertices=0
  for item in decision['segments']:
   guard()
@@ -59,8 +59,14 @@ def assemble(revision_id,records,decision,source_catalog,closure_checker,*,physi
     if not isinstance(source,dict) or source.get('kind')!='raw' or not re.fullmatch('[0-9a-f]{64}',str(source.get('sha256'))) or not source.get('bucket') or not source.get('key'):raise ValueError('boundary citation not a pinned raw source')
     citations.append({'source_id':ref['source_id'],'version':ref['version'],'relationship':ref['relationship'],'role':ref['role'],'sha256':source['sha256'],'bucket':source['bucket'],'key':source['key']})
   else:
-   role=record.get('role')
+   role=record.get('role');prov=record.get('provenance')
    if role!='water_closure':raise ValueError('route requires physical closure proof')
+   if not isinstance(prov,dict) or prov.get('lineage_status') not in ('complete','incomplete') or not isinstance(prov.get('source_refs'),list):raise ValueError('closure provenance missing')
+   for ref in prov['source_refs']:
+    if not isinstance(ref,dict) or set(ref)!={'source_id','version'}:raise ValueError('invalid closure source citation')
+    source=source_catalog.get((ref['source_id'],ref['version']))
+    if not isinstance(source,dict) or source.get('kind')!='raw' or not re.fullmatch('[0-9a-f]{64}',str(source.get('sha256'))) or not source.get('bucket') or not source.get('key') or not isinstance(source.get('origin'),str) or not source['origin']:raise ValueError('closure citation not pinned raw source')
+    citations.append({'source_id':ref['source_id'],'version':ref['version'],'sha256':source['sha256'],'bucket':source['bucket'],'key':source['key'],'origin':source['origin']})
   selected=pts[a:b];selected=selected[::-1] if item['reverse'] else selected
   if ring and ring[-1]!=selected[0]:raise ValueError('L2 segments do not connect exactly')
   if item['kind']=='route':
@@ -86,12 +92,12 @@ def assemble(revision_id,records,decision,source_catalog,closure_checker,*,physi
     if not isinstance(proof,dict) or proof.get('start_geometry_sha256')!=refs[0]['geometry_sha256'] or proof.get('end_geometry_sha256')!=refs[1]['geometry_sha256'] or proof.get('start_endpoint')!=refs[0]['endpoint'] or proof.get('end_endpoint')!=refs[1]['endpoint'] or proof.get('no_land_land_edge_touched') is not True:raise ValueError('terminal closure proof mismatch')
    else:raise ValueError('unsupported closure method')
    selected_line={'type':'LineString','coordinates':[[float(x),float(y)] for x,y in selected]}
-   if not isinstance(proof,dict) or proof.get('schema')!=expected_schema or proof.get('status')!='valid' or proof.get('geometry_sha256')!=geometry_hash(selected_line) or proof.get('physical_rows_sha256')!=physical_rows_sha256 or proof.get('physical_runs_sha256')!=physical_runs_sha256 or proof.get('contract_sha256')!=closure_contract_sha256 or proof.get('checker_sha256')!=(terminal_checker_sha256 if method=='physical_terminal_closure_v1' else checker_sha256):raise ValueError('water closure not validated against geometry, physical mask and checker pins')
+   if not isinstance(proof,dict) or proof.get('schema')!=expected_schema or proof.get('status')!='valid' or proof.get('geometry_sha256')!=geometry_hash(selected_line) or proof.get('physical_rows_sha256')!=physical_rows_sha256 or proof.get('physical_runs_sha256')!=physical_runs_sha256 or proof.get('physical_report_sha256')!=physical_report_sha256 or proof.get('contract_sha256')!=closure_contract_sha256 or proof.get('checker_sha256')!=(terminal_checker_sha256 if method=='physical_terminal_closure_v1' else checker_sha256):raise ValueError('water closure not validated against geometry, physical mask and checker pins')
   else:proof=None
   total_vertices+=len(selected)
   if total_vertices>250000:raise ValueError('region vertex limit exceeded')
   ring.extend(selected if not ring else selected[1:]);used.add(key)
-  trace.append({'kind':item['kind'],'id':item['id'],'geometry_sha256':record['geometry_sha256'],'start':a,'end':b,'reverse':item['reverse'],'lineage_status':record.get('lineage_status'),'source_citations':citations,'closure_proof':proof})
+  trace.append({'kind':item['kind'],'id':item['id'],'geometry_sha256':record['geometry_sha256'],'start':a,'end':b,'reverse':item['reverse'],'lineage_status':record.get('lineage_status'),'source_citations':citations,'closure_proof':proof,'route_provenance':record.get('provenance') if item['kind']=='route' else None})
  if len(ring)<4 or ring[0]!=ring[-1]:raise ValueError('region ring is not explicitly closed')
  if any(abs(a[0]-b[0])>180 for a,b in zip(ring,ring[1:])):raise ValueError('antimeridian crossing unsupported')
  guard();geom={'type':'Polygon','coordinates':[[[float(x),float(y)] for x,y in ring]]};g=ogr.CreateGeometryFromJson(json.dumps(geom))

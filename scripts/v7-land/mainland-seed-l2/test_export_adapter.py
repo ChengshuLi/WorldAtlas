@@ -59,10 +59,18 @@ class Export(unittest.TestCase):
 class Routes(unittest.TestCase):
  def setUp(self):
   from regions import geometry_hash
-  self.g={'type':'LineString','coordinates':[['0','0'],['1','1']]};h=geometry_hash({'type':'LineString','coordinates':[[0.,0.],[1.,1.]]});self.s={'routes':[{'route_id':'c','decision_revision':'r','execution_status':'selected_for_research','route_type':'stored_linestring_v1','role':'water_closure','closure_method':'physical_water_closure_v1','coordinate_reference':'OGC:CRS84','geometry_hash_method':'binary64-sorted-compact-geojson-v1','geometry_sha256':h,'geometry':self.g}]}
+  self.g={'type':'LineString','coordinates':[['0','0'],['1','1']]};h=geometry_hash({'type':'LineString','coordinates':[[0.,0.],[1.,1.]]});self.s={'stage1_source_inputs':[{'source_id':'raw','source_version':'1','decision_revision':'r','execution_status':'selected_for_research'}],'routes':[{'provenance':{'lineage_status':'incomplete','source_refs':[{'source_id':'raw','version':'1'}]},'route_id':'c','decision_revision':'r','execution_status':'selected_for_research','route_type':'stored_linestring_v1','role':'water_closure','closure_method':'physical_water_closure_v1','coordinate_reference':'OGC:CRS84','geometry_hash_method':'binary64-sorted-compact-geojson-v1','geometry_sha256':h,'geometry':self.g}]}
  def test_selected_route(self):
   from export_adapter import route_records
   self.assertEqual(route_records(self.s,'r',['c'])[('route','c')]['role'],'water_closure')
+ def test_missing_selected_physical_source_rejected(self):
+  from export_adapter import route_records
+  self.s['stage1_source_inputs']=[]
+  with self.assertRaisesRegex(ValueError,'closure source selection'):route_records(self.s,'r',['c'])
+ def test_forged_route_reference_rejected(self):
+  from export_adapter import route_records
+  self.s['routes'][0]['provenance']['source_refs'][0]['version']='stale'
+  with self.assertRaisesRegex(ValueError,'closure source selection'):route_records(self.s,'r',['c'])
  def test_old_ocean_method_not_inferred(self):
   from export_adapter import route_records
   self.s['routes'][0]['route_type']='wgs84_geodesic'
