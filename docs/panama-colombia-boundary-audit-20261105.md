@@ -117,3 +117,20 @@ The old and new checker and contract hashes differ, and the prior report's
 encoding-evidence hash is not an independent execution record for the original
 physical mask. The new proof remains a research screen under the limitations
 above, not a promoted or final-generation proof.
+
+## Selected-input recheck
+
+A subsequent read-only query of the `continent-review-v1` Neon branch confirms
+that the research baseline selects the same physical rows, runs and report
+hashes used in the screen above. It also selects the full 5,254-vertex Panama
+line, followed by all 14,541 closure vertices in reverse. The selected closure
+references the start and end of that Panama line and retains its original
+checker and contract provenance; a v2 check must be attributed separately.
+
+The selected line's linked source catalog identifies the R2 OSM way/full bundle
+and exact archive hash documented above. Re-running the assembler on the
+retained hash-matching local bundle reproduced every coordinate returned by the
+live selected Neon line. This confirms the raw-to-structured geometry relation;
+it does not show that a new direct outer run has consumed the source. The latter
+remains gated on integrating the direct request, source pin, closure and core
+validation with the frozen producer. No map rebuild was run.
