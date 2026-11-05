@@ -31,7 +31,7 @@ class SourceGateTest(unittest.TestCase):
         self.snapshot.write_text('{}')
         with patch.object(gate.subprocess, 'run') as run:
             with self.assertRaisesRegex(ValueError, 'input pin'):
-                gate.check(self.request, 'not-read', '0' * 64, 'not-read', 'not-read')
+                gate.check(self.request, 'not-read', '0' * 64, 'not-read', '0' * 64, 'not-read', 'not-read')
             run.assert_not_called()
 
     def test_missing_source_reference_rejected_before_assembly(self):
@@ -42,7 +42,7 @@ class SourceGateTest(unittest.TestCase):
         self.request.write_text(json.dumps(request))
         with patch.object(gate.subprocess, 'run') as run:
             with self.assertRaisesRegex(ValueError, 'source reference'):
-                gate.check(self.request, 'not-read', '0' * 64, 'not-read', 'not-read')
+                gate.check(self.request, 'not-read', '0' * 64, 'not-read', '0' * 64, 'not-read', 'not-read')
             run.assert_not_called()
 
     def test_recipe_must_be_in_selected_snapshot(self):
@@ -50,7 +50,7 @@ class SourceGateTest(unittest.TestCase):
         recipe.write_text('{}')
         with patch.object(gate.subprocess, 'run') as run:
             with self.assertRaisesRegex(ValueError, 'lacks pinned source assembly'):
-                gate.check(self.request, recipe, gate.digest(recipe), 'not-read', 'not-read')
+                gate.check(self.request, recipe, gate.digest(recipe), 'not-read', '0' * 64, 'not-read', 'not-read')
             run.assert_not_called()
 
 
