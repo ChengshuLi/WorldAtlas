@@ -1,8 +1,10 @@
-"""WGS84 polyline distances with bounded one-dimensional closest-point search.
+"""WGS84 distances to a coordinate-linear WGS84 GeoJSON LineString.
 
-Edges are shortest WGS84 geodesics. Long edges are split to <=10 km before
-bounded minimization. This numerical search is not a formal global proof; do
-not make an exact-threshold decision without accounting for 0.02 m tolerance.
+Input edges retain coordinate-linear geometry; they are NOT replaced by geodesic
+arcs. Distances use WGS84 inverse geodesics. Edges are split into at most 1 km
+chords for numerical stationing and bounded closest-point search. This is not a
+formal global proof; treat distances within 0.02 m of a threshold as uncertain.
+Uncut antimeridian-spanning input is rejected: split it before use.
 """
 import math
 from pyproj import Geod
@@ -10,7 +12,7 @@ from scipy.optimize import minimize_scalar
 
 GEOD=Geod(ellps='WGS84')
 SEARCH_TOLERANCE_M=0.02
-MAX_SEARCH_SEGMENT_M=10000.0
+MAX_SEARCH_SEGMENT_M=1000.0
 
 
 def distance(a,b):
@@ -19,44 +21,45 @@ def distance(a,b):
     return d
 
 
+def interpolate(a,b,t):
+    return (a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t)
+
+
 class GeodesicLine:
     def __init__(self,coords):
         self.segments=[];station=0.0
         if len(coords)<2:raise ValueError('line needs two points')
         for a,b in zip(coords,coords[1:]):
-            azi,_,length=GEOD.inv(a[0],a[1],b[0],b[1])
-            if not math.isfinite(length):raise ValueError('invalid coordinates')
+            if abs(b[0]-a[0])>180:raise ValueError('split antimeridian-spanning edges before use')
+            length=distance(a,b)
             if length==0:continue
             n=max(1,math.ceil(length/MAX_SEARCH_SEGMENT_M))
             for i in range(n):
-                start=GEOD.fwd(a[0],a[1],azi,length*i/n)[:2] if i else tuple(a)
-                end=GEOD.fwd(a[0],a[1],azi,length*(i+1)/n)[:2] if i+1<n else tuple(b)
-                segazi,_,seglen=GEOD.inv(*start,*end)
-                midpoint=GEOD.fwd(*start,segazi,seglen/2)[:2]
-                self.segments.append((start,segazi,seglen,station,midpoint))
+                start=interpolate(a,b,i/n);end=interpolate(a,b,(i+1)/n)
+                seglen=distance(start,end);midpoint=interpolate(start,end,.5)
+                self.segments.append((start,end,seglen,station,midpoint))
                 station+=seglen
         if not self.segments:raise ValueError('zero-length line')
         self.length=station
 
     def point(self,station):
         station=max(0,min(self.length,station))
-        for a,azi,length,base,midpoint in self.segments:
+        for a,b,length,base,midpoint in self.segments:
             if station<=base+length:
-                return GEOD.fwd(*a,azi,max(0,station-base))[:2]
-        a,azi,length,base,midpoint=self.segments[-1]
-        return GEOD.fwd(*a,azi,length)[:2]
+                return interpolate(a,b,max(0,min(1,(station-base)/length)))
+        return self.segments[-1][1]
 
     def closest(self,point):
         best=None;candidates=[]
-        ranked=sorted((max(0,distance(midpoint,point)-length/2),base,(a,azi,length)) for a,azi,length,base,midpoint in self.segments)
-        for lower,base,(a,azi,length) in ranked:
+        # A meridian-plus-parallel route bounds geodesic distance to every
+        # point on each coordinate-linear subsegment, including near poles.
+        ranked=sorted((max(0,distance(midpoint,point)-111700*(abs(b[0]-a[0])+abs(b[1]-a[1]))/2),base,(a,b,length)) for a,b,length,base,midpoint in self.segments)
+        for lower,base,(a,b,length) in ranked:
             if best is not None and lower>best[0]+SEARCH_TOLERANCE_M:break
-            def evaluate(offset):
-                q=GEOD.fwd(*a,azi,offset)[:2]
-                return distance(q,point)
-            opt=minimize_scalar(evaluate,bounds=(0,length),method='bounded',options={'xatol':0.002})
-            for offset,d in ((0,evaluate(0)),(length,evaluate(length)),(float(opt.x),float(opt.fun))):
-                candidate=(d,base+offset);candidates.append(candidate)
+            def evaluate(t):return distance(interpolate(a,b,t),point)
+            opt=minimize_scalar(evaluate,bounds=(0,1),method='bounded',options={'xatol':min(.001/length,.0001)})
+            for t,d in ((0,evaluate(0)),(1,evaluate(1)),(float(opt.x),float(opt.fun))):
+                candidate=(d,base+t*length);candidates.append(candidate)
                 if best is None or candidate<best:best=candidate
         ambiguous=any(d<=best[0]+SEARCH_TOLERANCE_M and abs(s-best[1])>1 for d,s in candidates)
         return {'distance_m':best[0],'station_m':best[1],'point':self.point(best[1]),'ambiguous':ambiguous}
