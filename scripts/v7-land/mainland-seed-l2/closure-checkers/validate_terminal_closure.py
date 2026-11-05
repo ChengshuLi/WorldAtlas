@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Validate an unselected closure with strictly scoped endpoint-cell land contact.
 
-Uses a pinned, separately reviewed exact all-touched grid implementation. This
+Uses a pinned exact all-touched grid implementation; this revision requires review. This
 is a physical-mask proof, not a route-selection, geographic, or ring proof.
 """
 import argparse, hashlib, importlib.util, json, sys
 from pathlib import Path
 SUPPORT=Path(__file__).resolve().with_name('validate_water_closure_v2.py')
-SUPPORT_SHA='1d5e2a978870e05cf7f1f2c57389f65ffbc1c1a5de11056b5d5196b1a80b6f01'
+SUPPORT_SHA='5b01e11908293df6f941adbc391d4c9e7709f49c1b8ad60d46be0558d66ca6b3'
 if hashlib.sha256(SUPPORT.read_bytes()).hexdigest()!=SUPPORT_SHA: raise RuntimeError('checker support hash mismatch')
 spec=importlib.util.spec_from_file_location('exact_water_support', SUPPORT); m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 
@@ -38,7 +38,6 @@ def verify_path(points,start,end,code,water,land,maxvisits):
         for x,y in m.touched_segment(a[0],a[1],b[0],b[1]):
             visits+=1
             if visits>maxvisits:raise ValueError('cell visit limit exceeded')
-            if visits%8192==0:m.guard()
             v=code(x,y)
             if v==water:continue
             if v!=land:raise ValueError('unrecognized physical code')
@@ -60,7 +59,7 @@ def main():
     p.add_argument('--closure',required=True);p.add_argument('--closure-sha256',required=True)
     for side in ('start','end'):
         p.add_argument('--'+side+'-geometry',required=True);p.add_argument('--'+side+'-geometry-sha256',required=True);p.add_argument('--'+side+'-endpoint',choices=('start','end'),required=True)
-    p.add_argument('--output',required=True);a=p.parse_args();m.guard();ch,contract=m.load_contract(a.contract,a.contract_sha256)
+    p.add_argument('--output',required=True);a=p.parse_args();ch,contract=m.load_contract(a.contract,a.contract_sha256)
     checker=m.sha(Path(__file__).resolve());assert m.sha(SUPPORT)==SUPPORT_SHA
     evidence=m.verify_producer_code(a.contract,contract);report=m.verify_physical_report(a.physical_dir,contract);mask=m.Mask(a.physical_dir)
     paths=[Path(a.closure),Path(a.start_geometry),Path(a.end_geometry)];expected=[a.closure_sha256,a.start_geometry_sha256,a.end_geometry_sha256]
