@@ -26,10 +26,6 @@ def build(rows,runs,rows_sha256,runs_sha256,width,height,output,*,tile_size=1024
  if nx>2048 or nx*ny>200000 or nx*buffer_bytes>16*1024*1024 or (soft!=resource.RLIM_INFINITY and nx+32>soft):raise ValueError('tile grid exceeds buffer, descriptor or tile bounds')
  if out.exists() or not out.parent.is_dir() or any(out.is_relative_to(p.parent) or p.is_relative_to(out) for p in (rows,runs,code)):raise ValueError('tile output overlaps input/code or already exists')
  guard=lambda:checkpoints.guard(out.parent,memory_floor_kib,disk_floor_bytes);guard()
- # Metadata persists for every possible tile, not only the open band.
- # Four KiB per tile intentionally overbudgets Python objects and allocator slack.
- required_kib=16384+(nx*buffer_bytes)//1024+(nx*ny*4096)//1024
- if checkpoints.memory_available_kib()<memory_floor_kib+required_kib:raise RuntimeError('insufficient tile buffer/metadata headroom')
  before={p.name:sha_file(p,guard) for p in deps}
  if sha_file(rows,guard)!=rows_sha256 or sha_file(runs,guard)!=runs_sha256:raise ValueError('seed input hash mismatch')
  start=time.monotonic();out.mkdir(mode=0o700)

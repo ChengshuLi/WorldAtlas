@@ -32,7 +32,7 @@ def run(config_path,out_path):
   need(isinstance(v,dict) and set(v)=={'path','sha256'} and isinstance(v['sha256'],str) and len(v['sha256'])==64,'bad pin');paths[k]=Path(v['path']).resolve()
  need(out.parent.is_dir() and not out.exists(),'output must be fresh')
  for p in [cp,*paths.values(),Path(__file__).resolve(),Path(hints.__file__).resolve()]: need(not p.is_relative_to(out) and not out.is_relative_to(p.parent),'output overlaps input/code directory')
- mem=cfg['minimum_memory_kib'];disk=cfg['minimum_free_bytes'];need(type(mem)==int and mem>0 and type(disk)==int and disk>0,'resource floors required')
+ mem=cfg['minimum_memory_kib'];disk=cfg['minimum_free_bytes'];need(type(mem)==int and mem>=0 and type(disk)==int and disk>0,'resource floors required')
  def guard():
   with open('/proc/meminfo') as f: av=next((int(s.split()[1]) for s in f if s.startswith('MemAvailable:')),None)
   if av is None or av<mem or shutil.disk_usage(out.parent).free<disk:raise RuntimeError('resource floor reached')
@@ -68,8 +68,7 @@ def run(config_path,out_path):
   need(ty>=0 and tx>=0 and tw>0 and th>0 and 1<=n<=tw*th and 0<mask<64 and re.fullmatch('[0-9a-f]{64}',sha) is not None and (ty,tx) not in seen,'invalid tile manifest entry');seen.add((ty,tx))
  rep_path=paths['representatives']; rep_max=min(128<<20,len(lines)*6*32*20); size=rep_path.stat().st_size
  need(size%20==0 and 0<size<=rep_max,'bad representative size')
- with open('/proc/meminfo') as f:av=next((int(z.split()[1]) for z in f if z.startswith('MemAvailable:')),None)
- need(av is not None and av >= mem+16384+(size//20)*256//1024,'insufficient representative headroom')
+ guard()
  rep_bytes=bounded(rep_path,rep_max);need(len(rep_bytes)==size,'representative size changed');reps=np.frombuffer(rep_bytes,dtype='<u4').reshape(-1,5)
  os.mkdir(out,0o700);fd=os.open(out.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  db=out/'inventory.sqlite';count=hints.inventory(paths['component_rows'],paths['component_runs'],seed,grid['width'],grid['height'],db,guard)

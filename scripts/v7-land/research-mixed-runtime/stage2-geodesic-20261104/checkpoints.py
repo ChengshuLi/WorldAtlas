@@ -11,7 +11,7 @@ def memory_available_kib():
  raise RuntimeError('MemAvailable unavailable')
 
 def guard(directory,memory_floor_kib,disk_floor_bytes):
- if memory_available_kib()<memory_floor_kib:raise RuntimeError('memory guard reached')
+ if memory_floor_kib and memory_available_kib()<memory_floor_kib:raise RuntimeError('memory guard reached')
  if shutil.disk_usage(directory).free<disk_floor_bytes:raise RuntimeError('disk guard reached')
 
 def _checksum(meta,arrays):

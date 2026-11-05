@@ -29,6 +29,12 @@ class CandidateTests(unittest.TestCase):
  def test_valid_and_stale_monitor(self):
   self.assertEqual(v.validate(self.pins,self.code,30)['status'],'diagnostic-candidate-bound');self.monitor['report_sha256']='0'*64;self.write('monitor',self.monitor)
   with self.assertRaisesRegex(ValueError,'monitor/report'):v.validate(self.pins,self.code,30)
+ def test_zero_memory_floor(self):
+  outer=json.loads((self.d/'outer_config').read_text());outer['controls']['minimum_memory_kib']=0;self.write('outer_config',outer)
+  derived=json.loads((self.d/'derived_manifest').read_text());derived['outer_config_sha256']=self.pins['outer_config']['sha256'];self.write('derived_manifest',derived)
+  self.report['orchestration']['outer_config_sha256']=self.pins['outer_config']['sha256'];self.report['orchestration']['derived_manifest']=self.pins['derived_manifest'];self.write('report',self.report)
+  self.monitor['config_sha256']=self.pins['outer_config']['sha256'];self.monitor['report_sha256']=self.pins['report']['sha256'];self.monitor['minimum_memory_kib']=0;self.monitor['minimum_available_kib']=0;self.write('monitor',self.monitor)
+  self.assertEqual(v.validate(self.pins,self.code,30)['status'],'diagnostic-candidate-bound')
  def test_refuses_changed_physical_mask(self):
   (self.d/'physical_rows').write_text('tampered')
   with self.assertRaisesRegex(ValueError,'hash mismatch'):v.validate(self.pins,self.code,30)

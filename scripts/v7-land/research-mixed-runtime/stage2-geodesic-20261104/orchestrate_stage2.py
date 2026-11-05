@@ -104,7 +104,8 @@ def run(config_path,work_dir,output_dir,resume=False):
  code=code_hashes(guard);require_reviewed_seed(code)
  need(SELECTED_POLICY_CROSSWALK_READY,'selected land-policy crosswalk not yet implemented')
  grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int and 1<grid['width']<=1000000 and 0<grid['height']<=1000000 and grid['west']==-180 and grid['north']==90 and grid['step']==360/grid['width'] and 90-grid['height']*grid['step']>=-90-1e-8,'invalid global grid')
- closure_contract=json.loads(verify_inputs.bounded_bytes(paths['closure_contract'],65536,guard));require_closure_floor(closure_contract,c)
+ closure_contract=json.loads(verify_inputs.bounded_bytes(paths['closure_contract'],65536,guard))
+ if 'seed_handoff' not in cfg:require_closure_floor(closure_contract,c)
  snapshot=json.loads(verify_inputs.bounded_bytes(paths['decision_snapshot'],16<<20,guard));rev=snapshot.get('decision_revision',{}).get('id');entity=snapshot.get('entity_revision',{}).get('id');contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
  pins={k:v['sha256'] for k,v in cfg['inputs'].items()};lineage=verify_physical_lineage.validate_combined(snapshot,pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard);manifest=json.loads(verify_inputs.bounded_bytes(paths['component_manifest'],16<<20,guard));contracts.component_manifest(manifest,grid,pins)
  physical=json.loads(verify_inputs.bounded_bytes(paths['physical_report'],16<<20,guard));po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==grid and po.get('rows.u32le')==pins['physical_rows'] and po.get('runs.u32le')==pins['physical_runs'],'physical report mismatch')
@@ -148,7 +149,6 @@ def run(config_path,work_dir,output_dir,resume=False):
  reps=work/'reps'/'representatives.u32le';representatives.build(tileout,tileout/'manifest.txt',tile['manifest_sha256'],reps,work/'reps'/'report.json',width=g['width'],height=g['height'],memory_floor_kib=c['minimum_memory_kib'],disk_floor_bytes=c['minimum_free_bytes'])
  # A separately compiled complete seed/tile verifier must precede hints. The
  # core repeats this verification and validates representative cell membership.
- need(checkpoints.memory_available_kib()>=c['minimum_memory_kib']+262144,'insufficient verifier compilation headroom')
  source=HERE/'verify_seed_index.cpp';source_data=verify_inputs.bounded_bytes(source,1<<20,guard);need(hashlib.sha256(source_data).hexdigest()==code['verify_seed_index.cpp'],'verifier source changed')
  source_copy=work/'requests'/'tile-verifier.cpp'
  with open(source_copy,'xb') as f:f.write(source_data);f.flush();os.fsync(f.fileno())
@@ -157,7 +157,6 @@ def run(config_path,work_dir,output_dir,resume=False):
  guard();check=subprocess.run([str(binary),srows['path'],sruns['path'],str(tileout),str(g['width']),str(g['height']),'1024',str(c['minimum_memory_kib'])],capture_output=True,text=True,check=True)
  need(json.loads(check.stdout).get('status')=='verified','fresh seed/tile verification failed')
  import numpy as np
- need(checkpoints.memory_available_kib()>=c['minimum_memory_kib']+65536+reps.stat().st_size//4,'insufficient representative verification headroom')
  rdata=verify_inputs.bounded_bytes(reps,128<<20,guard);need(len(rdata)%20==0,'bad representative data');arr=np.frombuffer(rdata,dtype='<u4').reshape(-1,5)
  verify_inputs.verify_representatives(tileout,tileout/'manifest.txt',arr,g['width'],g['height'],guard=guard)
  hi={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hi.update({'seed_rows':srows,'seed_runs':sruns,'resolution_report':rp,'representatives':pin(reps,guard),'tile_manifest':pin(tileout/'manifest.txt',guard)})

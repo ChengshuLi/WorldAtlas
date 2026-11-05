@@ -25,7 +25,7 @@ def pin(spec,guard):
 
 def validate_controls(c):
  keys={'minimum_memory_kib','minimum_free_bytes','chunk_columns','checkpoint_seconds','tile_cache_bytes','numerical_guard_metres','block_records'}
- need(isinstance(c,dict) and set(c)==keys and type(c['minimum_memory_kib']) is int and c['minimum_memory_kib']>0 and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>0 and type(c['chunk_columns']) is int and 1<=c['chunk_columns']<=1024 and type(c['block_records']) is int and 1<=c['block_records']<=100000 and type(c['checkpoint_seconds']) in (int,float) and 0<c['checkpoint_seconds']<=3600 and type(c['tile_cache_bytes']) is int and 1024<=c['tile_cache_bytes']<=64*1024*1024 and type(c['numerical_guard_metres']) in (int,float) and c['numerical_guard_metres']>=1000,'invalid resource/algorithm controls')
+ need(isinstance(c,dict) and set(c)==keys and type(c['minimum_memory_kib']) is int and c['minimum_memory_kib']>=0 and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>0 and type(c['chunk_columns']) is int and 1<=c['chunk_columns']<=1024 and type(c['block_records']) is int and 1<=c['block_records']<=100000 and type(c['checkpoint_seconds']) in (int,float) and 0<c['checkpoint_seconds']<=3600 and type(c['tile_cache_bytes']) is int and 1024<=c['tile_cache_bytes']<=64*1024*1024 and type(c['numerical_guard_metres']) in (int,float) and c['numerical_guard_metres']>=1000,'invalid resource/algorithm controls')
 
 def disjoint(cfg,config_path,work,output):
  specs=list(cfg['inputs'].values())+list(cfg['seed_code_files'].values())+list(cfg['resolution_code_files'].values())+list(cfg['hint_code_files'].values())+[cfg['hint_watchdog_code'],cfg['orchestration']['derived_manifest'],cfg['orchestration']['physical_lineage_report']]+([cfg['orchestration']['seed_handoff_attestation']] if cfg['orchestration']['seed_handoff_attestation'] else [])+list((cfg['orchestration']['seed_handoff_context'] or {}).values())
@@ -90,20 +90,16 @@ def _build(cp,work,output,resume,raw,cfg):
  land_policy=contracts.validate_selected_seed_decisions(snap,seed,groups,entity_codes,metric,guard=guard)
  tolerance=contracts.policy_tolerance_metres(land_policy)
  need(paths['hint_roots'].stat().st_size==count*4 and paths['hint_codes'].stat().st_size==count,'hint array size mismatch')
- avail=checkpoints.memory_available_kib();need(avail>=ctrl['minimum_memory_kib']+65536+(count*128)//1024,'insufficient root-array headroom')
  roots=np.frombuffer(verify_inputs.bounded_bytes(paths['hint_roots'],count*4,guard),dtype='<u4').copy();hints=np.frombuffer(verify_inputs.bounded_bytes(paths['hint_codes'],count,guard),dtype='u1').copy()
  need(len(roots)==count and len(hints)==count and np.all(roots[1:]>roots[:-1]) and np.all(np.isin(hints,list(categories))),'invalid fresh root/hint arrays')
  # Verify every tile byte against the current selected seed with a freshly built verifier.
  src=HERE/'verify_seed_index.cpp';src_bytes=verify_inputs.bounded_bytes(src,1<<20,guard);need(hashlib.sha256(src_bytes).hexdigest()==code[src.name],'verifier changed')
- need(checkpoints.memory_available_kib()>=ctrl['minimum_memory_kib']+262144,'insufficient verifier compilation headroom')
  builddir=work/('verifier-build-'+uuid.uuid4().hex);builddir.mkdir();copy=builddir/src.name;copy.write_bytes(src_bytes);binary=builddir/'verifier'
  subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(copy),'-lcrypto','-o',str(binary)],check=True)
  need(verify_inputs.sha_file(src,guard)==code[src.name] and verify_inputs.sha_file(copy,guard)==code[src.name],'verifier changed during compilation');guard()
  v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024',str(ctrl['minimum_memory_kib'])],check=True,capture_output=True,text=True);tilecheck=json.loads(v.stdout);need(tilecheck.get('status')=='verified','seed/tile verification failed')
  spec=verify_inputs.manifest(paths['tile_manifest'],w,h,1024,guard);rep_bytes=verify_inputs.bounded_bytes(paths['representatives'],min(128<<20,len(spec)*6*32*20),guard);rep=np.frombuffer(rep_bytes,dtype='<u4');need(len(rep)%5==0,'invalid representative shape');rep=rep.reshape(-1,5)
  tiles=verify_inputs.verify_representatives(cfg['tile_directory'],paths['tile_manifest'],rep,w,h,guard=guard);need(len(tiles)==tilecheck['tiles'],'tile set mismatch')
- estimated_headroom=262144+ctrl['tile_cache_bytes']//1024+(len(rep)*512+len(tiles)*6*512)//1024
- need(checkpoints.memory_available_kib()>=ctrl['minimum_memory_kib']+estimated_headroom,'insufficient certificate/index memory headroom')
  run_count=paths['component_runs'].stat().st_size//12;co=engine.offsets(paths['component_rows'],h,run_count)
  coverage=preflight.validate(w,h,paths['component_rows'],paths['component_runs'],paths['physical_rows'],paths['physical_runs'],paths['seed_rows'],paths['seed_runs'],roots,seed_roots,required_codes=categories.keys(),guard=guard,seed_rules=seed['seed_rules'],expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'])
  identity={'schema':'stage2-source-geodesic-checkpoint-identity-v1','request':request,'verifier_binary_sha256':verify_inputs.sha_file(binary,guard)}

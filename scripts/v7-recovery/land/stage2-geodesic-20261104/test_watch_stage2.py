@@ -12,6 +12,9 @@ class WatchTests(unittest.TestCase):
  def test_complete_monitor_is_last_and_bound_to_report(self):
   self.driver_code("time.sleep(.15);h=lambda p:__import__('hashlib').sha256(open(p,'rb').read()).hexdigest();os.makedirs(os.path.join(sys.argv[2],'core-requests'));os.makedirs(os.path.join(sys.argv[2],'derived'));m=os.path.join(sys.argv[2],'derived','manifest.json');open(m,'w').write('{}');prov={'outer_config_sha256':h(sys.argv[1]),'orchestrator_sha256':h(__file__),'derived_manifest':{'path':m,'sha256':h(m)}};cp=os.path.join(sys.argv[2],'core-requests','config.json');json.dump({'orchestration':prov},open(cp,'w'));os.mkdir(sys.argv[3]);json.dump({'schema':'stage2-source-geodesic-report-v1','status':'stage2-research-awaiting-monitor','publishable':False,'monitor_required':True,'config_sha256':h(cp),'code_sha256':{'build_stage2.py':h(os.path.join(os.path.dirname(__file__),'build_stage2.py'))},'orchestration':prov},open(os.path.join(sys.argv[3],'report.json'),'w'));time.sleep(.15)")
   result=self.launch();self.assertEqual(result['status'],'sampled-complete');self.assertGreater(result['samples'],0);self.assertEqual(result['report_sha256'],hashlib.sha256((self.out/'report.json').read_bytes()).hexdigest());self.assertTrue((self.out/'monitor.json').exists())
+ def test_zero_memory_floor(self):
+  self.cfg.write_text(json.dumps({'controls':{'minimum_memory_kib':0,'minimum_free_bytes':1}}))
+  self.test_complete_monitor_is_last_and_bound_to_report()
  def test_rss_limit_kills_group_and_no_marker(self):
   self.driver_code('time.sleep(2)')
   with self.assertRaisesRegex(RuntimeError,'RSS limit'):self.launch(1)

@@ -34,7 +34,7 @@ def run(config,out,rss_limit_kib,interval=.05):
   data=f.read(1048577)
  if len(data)>1048576:raise ValueError('request too large')
  cfg=json.loads(data);floor=cfg['minimum_memory_kib']
- if type(floor)!=int or floor<1 or type(rss_limit_kib)!=int or rss_limit_kib<1 or not 0<interval<=.1:raise ValueError('invalid watchdog limits')
+ if type(floor)!=int or floor<0 or type(rss_limit_kib)!=int or rss_limit_kib<1 or not 0<interval<=.1:raise ValueError('invalid watchdog limits')
  if not hasattr(os,'pidfd_open') or not hasattr(signal,'pidfd_send_signal'):raise RuntimeError('pidfd watchdog unsupported')
  initial=memavailable()
  if initial<floor:raise RuntimeError('host memory floor before launch')

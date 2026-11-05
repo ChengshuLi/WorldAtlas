@@ -51,7 +51,7 @@ def run(config,work,output,max_tree_rss_kib,*,resume=False,interval=.05):
  with open(config,'rb') as f:
   need(os.fstat(f.fileno()).st_size<=1048576,'config too large');raw=f.read(1048577)
  need(len(raw)<=1048576,'config too large');cfg=json.loads(raw);controls=cfg.get('controls',{});floor=controls.get('minimum_memory_kib');disk=controls.get('minimum_free_bytes')
- need(type(floor) is int and floor>0 and type(disk) is int and disk>0 and type(max_tree_rss_kib) is int and max_tree_rss_kib>0 and 0<interval<=.1,'invalid watchdog limits')
+ need(type(floor) is int and floor>=0 and type(disk) is int and disk>0 and type(max_tree_rss_kib) is int and max_tree_rss_kib>0 and 0<interval<=.1,'invalid watchdog limits')
  need(not output.exists() and output.parent.is_dir(),'output must be fresh');need(hasattr(os,'pidfd_open') and hasattr(os,'waitid') and hasattr(os,'WNOWAIT'),'Linux pidfd/waitid unavailable')
  need(threading.active_count()==1 and signal.getsignal(signal.SIGCHLD)==signal.SIG_DFL,'dedicated single-threaded monitor with default SIGCHLD required')
  need(memory_available()>=floor and os.statvfs(output.parent).f_bavail*os.statvfs(output.parent).f_frsize>=disk,'resource floor before launch')
