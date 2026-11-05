@@ -104,3 +104,16 @@ the original configuration and independent producer-code or execution record.
 The existing `verify_physical_lineage.validate_combined` checks reported-chain
 and selected-source consistency; it explicitly does not rerasterize or prove
 which program produced the mask.
+
+The selected region consumes the closure in **reverse**. A further run of the
+v2 terminal checker used that exact orientation (canonical geometry SHA-256
+`43845a84151c9debfca819d1f73975a6c9f5ba9c6ab75dc03303db4a0c676a16`)
+and bound its start to the boundary's end and its end to the boundary's start.
+It again visited 198,846 cells, all water. Its physical pins, encoding-evidence
+hash, endpoint coordinates, terminal policy and complete contact result match
+those recorded in the earlier qualified seed report (SHA-256
+`8e2062312b1988af8eb4cd1a7fcba5b0f42fb765adc05b7cec4fa8a78a1cff77`).
+The old and new checker and contract hashes differ, and the prior report's
+encoding-evidence hash is not an independent execution record for the original
+physical mask. The new proof remains a research screen under the limitations
+above, not a promoted or final-generation proof.
