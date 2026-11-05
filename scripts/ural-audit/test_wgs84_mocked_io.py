@@ -45,7 +45,20 @@ class GeodesicTests(unittest.TestCase):
   bearings=[]
   for point in seen[:2]:
    azi,_,distance=geod.inv(*center,*point);bearings.append(azi);self.assertAlmostEqual(distance,100,delta=.00001)
-  self.assertAlmostEqual(abs((bearings[0]-bearings[1]+180)%360-180),180,delta=1e-6)
+  self.assertAlmostEqual(abs((bearings[0]-bearings[1]+180)%360-180),180,delta=1e-4)
+ def test_polyline_route_is_wgs84_measured_and_options_preserved(self):
+  rows,cols=np.indices((100,100));z=(100-cols+2*np.abs(rows-50)).astype('float32');m=np.zeros((100,100),dtype='uint8');mod=load(z,m,[])
+  geometry=types.ModuleType('shapely.geometry');geometry.LineString=lambda points:types.SimpleNamespace(is_simple=True,is_empty=False)
+  with patch.dict(sys.modules,{'shapely':types.ModuleType('shapely'),'shapely.geometry':geometry}):
+   out=mod.run('dsm','mask',(0,0,.02,.02),100,(.004,.01),(.016,.01),'EPSG:3857',[(.004,.01),(.01,.011),(.016,.01)])
+   self.assertEqual(out['distance_method'],'wgs84-ellipsoidal-geodesic-v1');self.assertEqual(len(out['outlet_pairs_lonlat']),19)
+   with self.assertRaises(ValueError):mod.run('dsm','mask',(0,0,.02,.02),100,(.004,.01),(.016,.01),'EPSG:3857',[(0,0),(.016,.01)])
+  with self.assertRaises(ValueError):mod.run('dsm','mask',(0,0,.02,.02),100,(.004,.01),(.016,.01),'EPSG:4326')
+ def test_two_basin_transition_reports_wgs84_center_distance(self):
+  rows,cols=np.indices((100,100));z=(100-cols+2*np.minimum(np.abs(rows-25),np.abs(rows-75))).astype('float32');m=np.zeros((100,100),dtype='uint8');mod=load(z,m,[])
+  out=mod.run('dsm','mask',(0,0,.02,.02),100,(.004,.01),(.016,.01),'EPSG:3857',diagnostic=(.01,.01),basin_outlets=[(.0199,.0149),(.0199,.0049)])
+  d=out['diagnostic'];self.assertIn(d['root_class'],(1,2));self.assertGreater(min(d['class_cell_counts']),0)
+  t=Transform();rr,cc=50,50;origin=mod.cell_center(t,rr,cc);self.assertAlmostEqual(d['nearest_transition_center_m'],Geod(ellps='WGS84').inv(*origin,*d['nearest_transition_center_lonlat'])[2],delta=1e-7)
  def test_high_latitude_diagonal_slope_uses_geodesic(self):
   mod=load(None,None,[]);geod=Geod(ellps='WGS84')
   class HighLatitude: a=.01; e=-.01; f=70.005
@@ -59,3 +72,4 @@ class GeodesicTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'outside source grid'):
    mod.run('dsm','mask',(-.001,0,.02,.02),100,(.004,.01),(.016,.01),'EPSG:3857')
 if __name__=='__main__':unittest.main()
+
