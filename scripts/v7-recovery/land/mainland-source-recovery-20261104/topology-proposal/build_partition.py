@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
-"""Draft cut-partition for physical Eurasia and Americas; no prior label grid.
+"""Reusable interval partition for bounded research validation.
 
-Nodes are split physical component RLE intervals. Four-neighbor adjacency is
-blocked by pinned source-cut edges; seeded connected roots get candidate labels.
-Unseeded roots are emitted separately, never guessed. Output is sparse
-(start,end,code) triples, little-endian u32 with u32 row offsets.
+The old topology-specific command and embedded source observations were retired.
+This function accepts caller-supplied inputs and makes no geographic decision.
 """
-import bisect, hashlib, json, struct, sys, time
+import bisect, struct, sys
 from array import array
 from collections import Counter
 from pathlib import Path
 import numpy as np
-from build_candidate import BASE, OUT, CR, CU, PINS, sha, W, H
-sys.path.insert(0,str(BASE/'audit/ocean-interfaces-20261103/fresh-water-partition'))
-from partition_core import CutEdges, split_eligible, _DSU
-
-CODE={'Europe':19,'Asia':18,'North America':20,'South America':21}
-SELECTED={650207,459650}
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'audit/ocean-interfaces-20261103/fresh-water-partition'))
+from partition_core import _DSU, split_eligible
 
 def partition(rows, width, height, cuts, seeds, output):
     """rows(y) -> sorted disjoint eligible intervals. Output must not exist."""
@@ -71,29 +65,7 @@ def partition(rows, width, height, cuts, seeds, output):
         np.asarray(values,dtype='<u4').tofile(output/filename)
     return {'selected_cells':cells,'node_count':len(dsu.parent),'seed_roots':{str(code):root for root,code in seedroots.items()},'cells_by_code':dict(counts),'residual_cells':sum(residual.values()),'residual_components':dict(residual),'partition_spans':spans,'residual_spans':resspans}
 
-def main():
-    started=time.time(); proposal=OUT/'topology-proposal.json'; p=json.loads(proposal.read_bytes()); proposal_hash=sha(proposal)
-    for path,h in PINS.items():
-        if sha(path)!=h:raise ValueError('input pin mismatch '+str(path))
-    cuts=CutEdges()
-    for r in p['routes']:
-        path=Path(r['edge_file'])
-        if sha(path)!=r['edge_sha256']:raise ValueError('edge pin mismatch '+str(path))
-        c=CutEdges.read_u32le(path)
-        for y,xx in c.horizontal.items():cuts.horizontal[y].update(xx)
-        for y,xx in c.vertical.items():cuts.vertical[y].update(xx)
-        cuts.wrap.update(c.wrap)
-    offsets=np.memmap(CR,dtype='<u4',mode='r'); runs=np.memmap(CU,dtype='<u4',mode='r').reshape(-1,3)
-    if len(offsets)!=H+1 or offsets[0]!=0 or offsets[-1]!=len(runs) or np.any(offsets[1:]<offsets[:-1]):raise ValueError('invalid component rows')
-    def rows(y):
-        row=runs[offsets[y]:offsets[y+1]]; return [(int(a),int(b)) for a,b,_ in row[np.isin(row[:,2],list(SELECTED))]]
-    seeds={CODE[s['side']]:(s['grid_x'],s['grid_y']) for s in p['seed_proposals'] if s['side'] in CODE}
-    out=OUT/'partition-draft-20261104'; result=partition(rows,W,H,cuts,seeds,out)
-    for path,h in PINS.items():
-        if sha(path)!=h:raise ValueError('input changed '+str(path))
-    if sha(proposal)!=proposal_hash:raise ValueError('proposal changed')
-    for r in p['routes']:
-        if sha(Path(r['edge_file']))!=r['edge_sha256']:raise ValueError('edge file changed')
-    result.update({'schema':'mainland-source-cut-partition-draft-v1','status':'local-unreviewed-not-production','grid':{'width':W,'height':H},'component_ids':sorted(SELECTED),'proposal_sha256':proposal_hash,'pins':p['pins'],'witnesses':[s for s in p['seed_proposals'] if s['side'] in CODE], 'outputs':{name:{'sha256':sha(out/name),'bytes':(out/name).stat().st_size} for name in ['partition-spans.u32le','partition-rows.u32le','residual-spans.u32le','residual-rows.u32le']},'elapsed_seconds':time.time()-started,'caveat':'Exploratory four-neighbor graph and left-oriented line tie; seed continent names and shore closure are draft policy. Unseeded components are not assigned. This is not evidence of reviewed decisions or production readiness; no V2/V6 continent grid is read.'})
-    (out/'report.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
-if __name__=='__main__':main()
+
+if __name__ == '__main__':
+    raise SystemExit('Retired topology-specific CLI; use externally sourced decisions.')
+

@@ -63,12 +63,12 @@ class OceanRunnerTests(unittest.TestCase):
   _,paths,_,_=r.load_config(s,8,4)
   self.assertGreater(len(paths[0]),100);self.assertEqual(paths[0][0],(2.0,0.0));self.assertEqual(paths[0][-1],(2.0,4.0))
  def test_exact_rational_endpoint_matches_rounded_decimal(self):
-  e={'longitude':'-24.538888888888889','latitude':'65.504166666666667',
-     'derivation':{'method':'source_dms_exact_rational','longitude_fraction':[-4417,180],'latitude_fraction':[15721,240]}}
-  self.assertEqual(r.endpoint_coordinate(e,'longitude'),float(-4417/180))
-  e['longitude']='-24.538888888888';
+  e={'longitude':'-0.333333333333333333','latitude':'1.166666666666666667',
+     'derivation':{'method':'source_dms_exact_rational','longitude_fraction':[-1,3],'latitude_fraction':[7,6]}}
+  self.assertEqual(r.endpoint_coordinate(e,'longitude'),float(-1/3))
+  e['longitude']='-0.333333333333';
   with self.assertRaisesRegex(ValueError,'disagrees'):r.endpoint_coordinate(e,'longitude')
-  e['longitude']='-24.538888888888889';e['derivation']['longitude_fraction']=[1,0]
+  e['longitude']='-0.333333333333333333';e['derivation']['longitude_fraction']=[1,0]
   with self.assertRaisesRegex(ValueError,'invalid exact'):r.endpoint_coordinate(e,'longitude')
 
  def test_requires_explicit_snapshot_opt_in(self):
@@ -78,3 +78,4 @@ class OceanRunnerTests(unittest.TestCase):
   with patch.object(sys,'argv',argv):
    with self.assertRaisesRegex(ValueError,'explicit test-only flag'):r.main()
 if __name__=='__main__':unittest.main()
+
