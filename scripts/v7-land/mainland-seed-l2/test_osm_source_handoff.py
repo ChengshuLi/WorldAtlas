@@ -3,12 +3,34 @@ import json
 import tempfile
 import unittest
 import zipfile
+import warnings
 from pathlib import Path
 
 from osm_source_handoff import verified_geometry
 
 
 class HandoffTest(unittest.TestCase):
+    def reject_archive(self, entries, message):
+        with tempfile.TemporaryDirectory() as tmp:
+            archive = Path(tmp) / 'bad.zip'
+            with warnings.catch_warnings():
+                warnings.simplefilter('ignore', UserWarning)
+                with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as z:
+                    for name, data in entries:
+                        z.writestr(name, data)
+            digest = hashlib.sha256(archive.read_bytes()).hexdigest()
+            with self.assertRaisesRegex(ValueError, message):
+                verified_geometry(archive, digest, '0' * 64)
+
+    def test_rejects_path_traversal(self):
+        self.reject_archive([('../escape', b'x')], 'unsafe archive names')
+
+    def test_rejects_duplicate_names(self):
+        self.reject_archive([('same', b'a'), ('same', b'b')], 'duplicate or unsafe')
+
+    def test_rejects_oversized_member(self):
+        self.reject_archive([('large', b'x' * ((4 << 20) + 1))], 'expanded size limit')
+
     def test_selected_geometry_and_pin(self):
         with tempfile.TemporaryDirectory() as tmp:
             archive = Path(tmp) / 'source.zip'
@@ -32,3 +54,4 @@ class HandoffTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
