@@ -103,3 +103,37 @@ combined revision with the other current boundary and region decisions, then
 revalidate the selected source and physical-mask pins. The modeled spring and
 terrain choices remain qualified geographic decisions, not survey claims. No
 map rebuild or existing active-boundary change was performed for this work.
+
+## Source replay gate for a fresh selected snapshot
+
+`scripts/v7-land/mainland-seed-l2/ural_seed_source.py` is a standalone,
+fail-closed integration candidate. Its `bind(boundaries, catalog, pin)` expects
+the normalized boundaries and catalog from the authenticated fresh global
+snapshot's `boundary_records`, plus four existing directories named
+`recipe_dir`, `inputs_dir`, `helpers_dir` and `work_parent`. The directories
+must be disjoint from the work parent. The inputs include all seven linked
+sources, the reassembled raw ArcticDEM tiles, and `review_snapshot.json`: the
+separately pinned earlier Neon export used only as the structured route
+selector. The gate checks the seven source identities and roles, manifest and
+raw-tile hashes, selected binary64 geometry, and ten pinned recipe scripts;
+it captures those scripts in a private work directory, runs the recipe, then
+compares every resulting coordinate with the selected Ural line. Its trace
+records the selector snapshot and code pins. It leaves the selected geometry,
+routes, region hash and global snapshot untouched.
+
+Six bounded tests exercise rejection of missing sources, a forged tile hash, modified recipe
+or selector, a changed output and an unselected boundary. A real raw-input
+replay passed with the seven read-only Neon source records and reproduced the
+selected line; the combined snapshot used for this test was synthetic. The
+recipe run and the separate GDAL region/closure test used different Python
+environments, so these results are not a single-environment outer-pipeline
+test.
+
+The direct seed producer does **not** yet invoke this gate. Its next reviewed
+integration must pass authenticated fresh snapshot records and explicit source
+directories, pin the gate and recipe code, require replay when selecting this
+Ural boundary, and carry the replay trace into the seed report and independent
+validator. The producer's frozen code list, source-freeze manifest and outer
+allowlist must be updated together. After Caucasus and Panama selections are
+finalized, recompute the affected Europe region hash and closure bindings from
+those exact lines; never reuse a synthetic combined snapshot as a Neon export.
