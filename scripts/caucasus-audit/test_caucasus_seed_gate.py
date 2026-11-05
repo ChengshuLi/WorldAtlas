@@ -129,6 +129,42 @@ class SourceGateTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'direct seed v2 request required'):
                 gate.validate_direct_request(self.request)
 
+    def test_direct_producer_receives_ural_request_and_original_snapshot(self):
+        # The producer owns Ural input validation. The Caucasus wrapper must
+        # pass its request through unchanged and derive from the original pin.
+        ural = {'recipe_dir': '/recipe', 'inputs_dir': '/inputs',
+                'helpers_dir': '/helpers', 'work_parent': '/work',
+                'inventories': {'inputs': {'path': '/inputs', 'sha256': '1' * 64},
+                                'recipe': {'path': '/recipe', 'sha256': '2' * 64},
+                                'helpers': {'path': '/helpers', 'sha256': '3' * 64}},
+                'python': {'path': '/python', 'sha256': '4' * 64},
+                'dependency_dirs': [{'path': '/deps', 'sha256': '5' * 64}]}
+        request = {'schema': 'worldatlas-stage2-seed-direct-request-v2',
+                   'controls': {'strip_rows': 8}, 'ural_source': ural,
+                   'inputs': {'snapshot': {'path': '/original', 'sha256': '6' * 64}}}
+        self.request.write_text(json.dumps(request, sort_keys=True))
+        before = self.request.read_bytes()
+        producer = self.root / 'seed_producer.py'
+        producer.write_text(
+            'import json\nfrom pathlib import Path\n'
+            'def load_pinned_snapshot(path, digest, guard):\n'
+            '    assert path == "/original" and digest == "6" * 64\n'
+            '    return {"original": True}\n'
+            'def run(request, work, output):\n'
+            '    q = json.loads(Path(request).read_bytes())\n'
+            '    assert q["ural_source"] == ' + repr(ural) + '\n'
+            '    pin = q["inputs"]["snapshot"]\n'
+            '    value = load_pinned_snapshot(pin["path"], pin["sha256"], lambda: None)\n'
+            '    Path(output).write_text(value["view"])\n')
+        report = {}
+        with patch('caucasus_effective_snapshot.derive', return_value=({'view': 'effective'}, {'derived': True})) as derive:
+            gate.run_producer(self.root, gate.digest(producer), self.request,
+                              self.root / 'work', self.root / 'out', {}, report)
+        self.assertEqual(self.request.read_bytes(), before)
+        self.assertEqual((self.root / 'out').read_text(), 'effective')
+        self.assertEqual(derive.call_args.args[0], {'original': True})
+        self.assertEqual(derive.call_args.args[3], '6' * 64)
+
 
 if __name__ == '__main__':
     unittest.main()
