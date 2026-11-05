@@ -3,11 +3,15 @@
   "files": {
     "build_stage2.py": {
       "base_sha256": "bb95e0c636c350035997bc712463ccf7cbe0d1ba5523f160b363635c9c78b4a8",
-      "candidate_sha256": "b0121052afe0cb8a35faf743e6c6625c81304801501151995fffae1c2d60d64d"
+      "candidate_sha256": "511dd9771aef83059a46dfb0720c81287e6db525bca25c726aac622f22b0582d"
     },
     "contracts.py": {
       "base_sha256": "ed2f78031508d8202358c9b9698f1446128855986d1c2ffcdb35a2f30a6d53d9",
       "candidate_sha256": "f703e5edcb0f67cc908aa0812e5b194b480ea2916c017464e51d1bfa0066c7f1"
+    },
+    "direct_seed.py": {
+      "base_sha256": null,
+      "candidate_sha256": "60b9d7af9a1befa52591766e264e1be7f4c392d4e0756f69166cb6cbe29fb1c4"
     },
     "hint-producer/run_diagnostic.py": {
       "base_sha256": "6479fe230172e54726e11d8a52a5408c943b0df20d1a955c310bdd267e15f8d4",
@@ -15,7 +19,7 @@
     },
     "orchestrate_stage2.py": {
       "base_sha256": "b71e4af5dac459b7024e8378238ff23076d602828421771641ebf725e210da12",
-      "candidate_sha256": "a6917a305d1fbd4e6b6b54e56c2fc24bcea0d3da10a0bdd20e950b28ad40cfbe"
+      "candidate_sha256": "c6974496c4cfc48c1bb46cb5cd6359819fc9cbccf14b6a4bc5bd8b5d42e25e43"
     },
     "test_verify_seed_index_direct.py": {
       "base_sha256": null,
@@ -28,6 +32,10 @@
     "tests/test_direct_contracts.py": {
       "base_sha256": null,
       "candidate_sha256": "3e17fee2444a40034eb4ff396fcd5e36bed93be9934cbbbf851e3a0723f2ac49"
+    },
+    "tests/test_direct_core_binding.py": {
+      "base_sha256": null,
+      "candidate_sha256": "13a7376ac34841485e6e7cd8f6b444e96619ab3470c691e94cb65f21179a4150"
     },
     "tests/test_direct_hint_cli.py": {
       "base_sha256": null,
@@ -57,13 +65,17 @@
       "base_sha256": null,
       "candidate_sha256": "115757d4e32e03a6764b1108c6995e7cc76e9bde13144136457fd244ac9138c9"
     },
+    "tests/test_fresh_outer_gating.py": {
+      "base_sha256": null,
+      "candidate_sha256": "f2b4638f930b7f1fd7c417c2d36018d4ed295853c653e92800705b4e32cfe8ed"
+    },
     "tests/test_outer_seed_tamper.py": {
       "base_sha256": null,
-      "candidate_sha256": "85f060f5f330eb980c743de0e8280a8c336747dfd6cee9dbdeddc1bd3ec9f7c7"
+      "candidate_sha256": "802716f2b9d5b072ec7ffee5d49b3fd5ac377b1020d732f16eb44657b72cdbe9"
     },
     "tests/test_real_unpatched_freeze.py": {
       "base_sha256": null,
-      "candidate_sha256": "9d9887dc90f5507e711a6b3c0d50309184c5643b03d330b456e1f48e92e5a642"
+      "candidate_sha256": "743c2c0e05b033abf0ab7794ca4e666958303fffbf2252e374042f8b90211b76"
     },
     "v7-land/named-identity-prototype/identity_watch.py": {
       "base_sha256": "73b0cc98e62ec5b206a9b76fd9eb6414fa2f869d8678f3c6d705983cff8718ae",
