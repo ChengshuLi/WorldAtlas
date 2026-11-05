@@ -1,6 +1,6 @@
-import unittest
+import gzip,hashlib,os,tempfile,unittest
 import numpy as np
-from delta_side_screen import screen
+from delta_side_screen import screen,read_grid
 
 class SideScreenTest(unittest.TestCase):
     def test_reports_both_wrong_sides(self):
@@ -13,5 +13,14 @@ class SideScreenTest(unittest.TestCase):
         self.assertEqual(summary['unassigned_land_centers'],0)
         self.assertEqual(found['asia_labeled_europe'][0]['x'],9)
         self.assertEqual(found['europe_labeled_asia'][0]['x'],0)
+
+    def test_raw_and_gzip_grid_hashes(self):
+        with tempfile.TemporaryDirectory() as d:
+            b=np.array([1,2,3],dtype='<u4').tobytes();h=hashlib.sha256(b).hexdigest()
+            raw=os.path.join(d,'rows.u32le');gz=raw+'.gz'
+            with open(raw,'wb') as f:f.write(b)
+            with gzip.open(gz,'wb') as f:f.write(b)
+            np.testing.assert_array_equal(read_grid(raw,h),read_grid(gz,h))
+            with self.assertRaises(ValueError):read_grid(raw,'0'*64)
 
 if __name__=='__main__': unittest.main()
