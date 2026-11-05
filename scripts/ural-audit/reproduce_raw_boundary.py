@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+"""Reproduce the Ural research boundary in a fresh staging directory.
+
+The input directory contains the reassembled pinned ArcticDEM tiles, EU/SI
+HydroBASINS ZIPs and extracted shapefiles, Copernicus tile, OSM capture and
+Neon export, under the names used below. Helpers are the pinned audited files
+from PR4. Only local derived files are written; nothing is published.
+"""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+HELPERS = {'terrain_basin_screen.py': '4b5acd6a6d0039b125bc9299b2f1007cf2432903762a49def9ee54fc4263a731',
+           'priority_d8.py': 'b7e8deef7289a1cd5cf38c16270e6ab32dd04c3141f0589a8ff364605497fc24',
+           'spring_connector_graph.py': 'be147977fa1102b2578146a17724188f22de3a26c1f6e2f34061c9f093169579',
+           'spring_triple_route.py': 'fe1acd1d9e7bc7d83120f5b8244d6454594fa166b75d58f953f566a5c2fbf287',
+           'projected_route.py': '3cd363d478be84697c269a42463af6c50a3cd2fa659e3c443ee92393ed45703c'}
+INPUTS = ['ural-arctic-gap00.tif', 'ural-arctic-gap02a.tif', 'ural-arctic-gap02b.tif',
+          'ural-hydro-eu.zip', 'ural-hydro-si.zip', 'ural-hydro-eu', 'ural-hydro-si',
+          'ural-copernicus-dem.tif', 'ural-river-r2.osm', 'review_snapshot.json']
+SCRIPTS = ['construct_arctic_gap_paths.py', 'construct_cop_spring_flow.py',
+           'trace_gap_raw_crossings.py', 'check_raw_chord_coverage.py',
+           'verify_raw_north_candidate.py', 'assemble_raw_backed_candidate.py']
+OUTPUT_SHA = 'c7e8476d10d0ab95da6dc717e0b5aa3852d967a9c1a19ea6932a460b0a31a2d4'
+
+
+def sha(path):
+    h = hashlib.sha256()
+    with path.open('rb') as f:
+        for block in iter(lambda: f.read(1048576), b''):
+            h.update(block)
+    return h.hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--inputs', type=Path, required=True)
+    parser.add_argument('--helpers', type=Path, required=True)
+    parser.add_argument('--workdir', type=Path, required=True)
+    a = parser.parse_args()
+    inputs, helpers, work = a.inputs.resolve(), a.helpers.resolve(), a.workdir.resolve()
+    scripts = Path(__file__).resolve().parent
+    if work.exists():
+        raise FileExistsError('workdir must not exist: ' + str(work))
+    for name in INPUTS:
+        if not (inputs / name).exists():
+            raise FileNotFoundError(inputs / name)
+    for name, expected in HELPERS.items():
+        if sha(helpers / name) != expected:
+            raise ValueError('helper hash mismatch: ' + name)
+    work.mkdir(parents=True)
+    for name in INPUTS:
+        (work / name).symlink_to(inputs / name, target_is_directory=(inputs / name).is_dir())
+    (work / 'landed-1b494125').symlink_to(helpers, target_is_directory=True)
+    for name in SCRIPTS:
+        # These audited research scripts use /tmp paths; confine every output
+        # to this new workdir while retaining their pinned input checks.
+        code = (scripts / name).read_text().replace('/tmp/', str(work) + '/')
+        (work / name).write_text(code)
+    shutil.copyfile(scripts / 'reconstruct_hybrid_osm.py', work / 'ural-reconstruct-hybrid.py')
+
+    def run(script, *args, output=None):
+        result = subprocess.run([sys.executable, str(script), *map(str, args)], cwd=work,
+                                check=True, stdout=subprocess.PIPE)
+        if output:
+            (work / output).write_bytes(result.stdout)
+
+    run(scripts / 'extract_watershed_selector.py', '--snapshot', work / 'review_snapshot.json',
+        '--selector', work / 'ural-watershed-first4954.json',
+        '--template', work / 'ural-raw-chord-template.json', output='selector.log')
+    run(scripts / 'reproduce_arctic_gap_rasters.py', '--source-dir', work, '--output-dir', work,
+        output='rasters.log')
+    for script, output in [('construct_arctic_gap_paths.py', 'gaps.log'),
+                           ('construct_cop_spring_flow.py', 'ural-spring-cop-flow-reproduced.jsonl'),
+                           ('trace_gap_raw_crossings.py', 'ural-gap-raw-edge-crossings.jsonl'),
+                           ('check_raw_chord_coverage.py', 'ural-raw-chord-coverage.json'),
+                           ('verify_raw_north_candidate.py', 'north.log'),
+                           ('assemble_raw_backed_candidate.py', 'boundary.log')]:
+        run(work / script, output=output)
+    output = work / 'ural-raw-backed-continuous-cop-only.geometry.json'
+    if sha(output) != OUTPUT_SHA:
+        raise ValueError('reproduced boundary file hash mismatch')
+    for name, expected in HELPERS.items():
+        if sha(helpers / name) != expected:
+            raise ValueError('helper changed during construction: ' + name)
+    print(json.dumps({'geometry': str(output), 'file_sha256': OUTPUT_SHA,
+                      'canonical_geometry_sha256': '68390aa6ce5352226777adde3979315e1de85ca26d662c4b1c32610d1d73da66',
+                      'status': 'research-selected; no map built'}, sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()
