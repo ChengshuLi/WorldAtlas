@@ -1,4 +1,4 @@
-import tempfile,pathlib,unittest,hashlib,json,struct,zipfile
+import tempfile,pathlib,unittest,hashlib,json,struct,zipfile,os
 from unittest.mock import patch
 import seed_producer
 from regions import geometry_hash
@@ -52,6 +52,67 @@ p={'schema':'physical-water-closure-proof-v1','status':'valid','geometry_sha256'
   self.req['inputs']['panama_osm_archive']=pin(archive);self.path.write_text(json.dumps(self.req))
   with patch.dict(seed_producer.TRUSTED_CODE,{k:self.req['inputs'][k]['sha256'] for k in ('closure_checker','seed_builder','seed_kernel')}):result=run(self.path,self.work,self.output)
   self.assertEqual(result['panama_source_trace']['archive_sha256'],sha(archive));self.assertEqual(result['panama_source_trace']['vertices'],3)
+ def test_real_water_closure_checker_with_synthetic_grid(self):
+  # The closure is entirely in the western water cell; the selected boundary
+  # encloses one land-cell centre. No historical or production mask is implied.
+  sp=pathlib.Path(self.req['inputs']['snapshot']['path']);s=json.loads(sp.read_text())
+  line={'type':'LineString','coordinates':[['-140','10'],['-85','10'],['-85','40'],['-140','40']]}
+  route={'type':'LineString','coordinates':[['-140','40'],['-140','10']]}
+  h=lambda g:geometry_hash({'type':'LineString','coordinates':[[float(x),float(y)] for x,y in g['coordinates']]})
+  s['mainland_boundaries'][0]['geometry']=line;s['mainland_boundaries'][0]['geometry_sha256']=h(line)
+  s['routes'][0]['geometry']=route;s['routes'][0]['geometry_sha256']=h(route)
+  s['seed_regions'][0]['segments'][0]['end']=4;s['seed_regions'][0]['segments'][1]['end']=2
+  s['seed_regions'][0]['geometry_sha256']=geometry_hash({'type':'Polygon','coordinates':[[[-140.,10.],[-85.,10.],[-85.,40.],[-140.,40.],[-140.,10.]]]})
+  sp.write_text(json.dumps(s));self.req['inputs']['snapshot']=pin(sp)
+  rp=pathlib.Path(self.req['inputs']['resolution']['path']);r=json.loads(rp.read_text());r['snapshot_sha256']=sha(sp);rp.write_text(json.dumps(r));self.req['inputs']['resolution']=pin(rp)
+  contract_path=pathlib.Path(self.req['inputs']['closure_contract']['path']);contract=json.loads(contract_path.read_text())
+  evidence=contract_path.parent/'producer.py';evidence.write_text('synthetic physical encoding evidence\n')
+  contract['physical'].update({'encoding_evidence_sha256':sha(evidence),'producer_code_path':'producer.py'})
+  contract['resources']={'max_cell_visits':100};contract_path.write_text(json.dumps(contract));self.req['inputs']['closure_contract']=pin(contract_path)
+  checker=HERE/'closure-checkers'/'validate_water_closure_v2.py';self.req['inputs']['closure_checker']=pin(checker);self.path.write_text(json.dumps(self.req))
+  with patch.dict(seed_producer.TRUSTED_CODE,{k:self.req['inputs'][k]['sha256'] for k in ('closure_checker','seed_builder','seed_kernel')}):result=run(self.path,self.work,self.output)
+  proof=next(x['closure_proof'] for x in result['region_traces'][0]['input_trace'] if x['kind']=='route')
+  self.assertEqual(proof['checker_sha256'],sha(checker));self.assertEqual(proof['contract_sha256'],sha(contract_path));self.assertEqual(proof['status'],'valid')
+ def test_real_panama_archive_and_water_checker_on_synthetic_grid(self):
+  # The archived source and selected line hash are real. The grid, land cells,
+  # closure, region decision, source catalog and snapshot are test fixtures.
+  from panama_seed_source import BOUNDARY,SOURCE
+  from osm_source_handoff import verified_geometry
+  archive=os.environ.get('PANAMA_REAL_OSM_ARCHIVE')
+  if not archive:self.skipTest('set PANAMA_REAL_OSM_ARCHIVE to the pinned OSM bundle')
+  archive=pathlib.Path(archive);archive_sha='04fe1adb295e93d78ee029b48351d2b0380d69ac631b47c909dffd538bbaf6c1';line_sha='cfbfbb514d0f6efff1c0c803ae5f0f0835225015568747bb8b1164f3bb6d0e17'
+  self.assertEqual(sha(archive),archive_sha);line=verified_geometry(archive,archive_sha,line_sha)
+  self.grid={'width':40,'height':40,'west':-79,'north':10,'step':0.1};land={(10,20):10,(24,20):10,(2,30):20,(4,30):30,(6,30):40,(8,30):50}
+  cr=[[(x,x+1,root) for (x,y0),root in sorted(land.items()) if y0==y] for y in range(40)]
+  pr=[]
+  for y in range(40):
+   vals=[17 if (x,y) in land else 1 for x in range(40)];runs=[]
+   for x in range(1,41):
+    if x==40 or vals[x]!=vals[x-1]:runs.append((x,vals[x-1]))
+   pr.append(runs)
+  self.crows,self.cruns=pair(self.src,'component',cr,'component');prows,pruns=pair(self.mask,'physical',pr,'pair')
+  (self.mask/'rows.u32le').write_bytes(pathlib.Path(prows['path']).read_bytes());(self.mask/'runs.u32le').write_bytes(pathlib.Path(pruns['path']).read_bytes())
+  self.prows=pin(self.mask/'rows.u32le');self.pruns=pin(self.mask/'runs.u32le')
+  report=self.mask/'report.json';report.write_text(json.dumps({'status':'candidate-only','grid':self.grid,'output_sha256':{'rows.u32le':self.prows['sha256'],'runs.u32le':self.pruns['sha256']}}))
+  si=self.req['inputs'];si.update({'physical_rows':self.prows,'physical_runs':self.pruns,'physical_report':pin(report),'component_rows':self.crows,'component_runs':self.cruns,'panama_osm_archive':pin(archive)})
+  sp=pathlib.Path(si['snapshot']['path']);s=json.loads(sp.read_text());first=line['coordinates'][0];last=line['coordinates'][-1]
+  route={'type':'LineString','coordinates':[last,[-76.0,last[1]],[-76.0,first[1]],first]};polygon={'type':'Polygon','coordinates':[line['coordinates']+route['coordinates'][1:]]}
+  source={'source_id':SOURCE[0],'version':SOURCE[1],'sha256':archive_sha,'r2_bucket':'worldatlas','r2_key':'sources/osm/panama-colombia/way-full-20261105-04fe1adb295e.zip','size_bytes':archive.stat().st_size}
+  s['sources'].append(source);s['source_lineage_assets'].append({**source,'kind':'raw','provider':'OSM','source_uri':'https://www.openstreetmap.org/','provenance':{'origin':'fixture source catalog','representation':'provider_original_bundle'}})
+  b=s['mainland_boundaries'][0];b.update({'boundary_id':BOUNDARY,'geometry':line,'geometry_sha256':line_sha});b['provenance']['source_refs'].append({'source_id':SOURCE[0],'version':SOURCE[1]});b['provenance']['source_relationships'].append({'source_id':SOURCE[0],'version':SOURCE[1],'relationship':'supporting_geographic_evidence_not_complete_construction_lineage'})
+  s['routes'][0]['geometry']=route;s['routes'][0]['geometry_sha256']=geometry_hash(route)
+  reg=s['seed_regions'][0];reg['geometry_sha256']=geometry_hash(polygon);reg['segments'][0].update({'id':BOUNDARY,'end':len(line['coordinates'])});reg['segments'][1]['end']=4;reg['witnesses']=[{'lon':'-76.55','lat':'7.95','inside':True}];s['land_baseline_policy']['boundary_ids']=[BOUNDARY]
+  sp.write_text(json.dumps(s));si['snapshot']=pin(sp)
+  rp=pathlib.Path(si['resolution']['path']);r=json.loads(rp.read_text());r.update({'snapshot_sha256':sha(sp),'grid':self.grid,'input_sha256':{k:si[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')}});rp.write_text(json.dumps(r));si['resolution']=pin(rp)
+  cp=pathlib.Path(si['closure_contract']['path']);contract=json.loads(cp.read_text());evidence=cp.parent/'producer.py';evidence.write_text('synthetic physical encoding evidence\n')
+  contract['grid']={'crs':'EPSG:4326','width':40,'height':40,'west':-79,'north':10,'step_numerator':1,'step_denominator':10}
+  contract['physical'].update({'rows_sha256':self.prows['sha256'],'runs_sha256':self.pruns['sha256'],'report_sha256':sha(report),'encoding_evidence_sha256':sha(evidence),'producer_code_path':'producer.py'});contract['resources']={'max_cell_visits':1000};cp.write_text(json.dumps(contract));si['closure_contract']=pin(cp)
+  checker=HERE/'closure-checkers'/'validate_water_closure_v2.py';si['closure_checker']=pin(checker);self.req['grid']=self.grid;self.path.write_text(json.dumps(self.req))
+  with patch.dict(seed_producer.TRUSTED_CODE,{k:si[k]['sha256'] for k in ('closure_checker','seed_builder','seed_kernel')}):result=run(self.path,self.work,self.output)
+  proof=next(x['closure_proof'] for x in result['region_traces'][0]['input_trace'] if x['kind']=='route')
+  self.assertEqual(proof['checker_sha256'],sha(checker));self.assertEqual(proof['contract_sha256'],sha(cp));self.assertEqual(proof['status'],'valid')
+  self.assertEqual(result['seed_rows_sha256'],'5ee0ad8006045053a855c3537d965c97a5462c487a981aae5d8006499d05d833');self.assertEqual(result['seed_runs_sha256'],'31cc273033778187d959ca17ea096a2316dea110e177a88038493ff69d3a6ea0')
+  self.assertEqual(result['panama_source_trace']['archive_sha256'],archive_sha);self.assertEqual(result['panama_source_trace']['geometry_sha256'],line_sha);self.assertEqual(result['panama_source_trace']['vertices'],5254)
  def test_empty_partition_rejected(self):
   p=pathlib.Path(self.req['inputs']['snapshot']['path']);s=json.loads(p.read_text());line={'type':'LineString','coordinates':[['-135','0'],['-45','0'],['-45','45']]};route={'type':'LineString','coordinates':[['-45','45'],['-135','45'],['-135','0']]};h=lambda g:geometry_hash({'type':'LineString','coordinates':[[float(x),float(y)] for x,y in g['coordinates']]});s['mainland_boundaries'][0]['geometry']=line;s['mainland_boundaries'][0]['geometry_sha256']=h(line);s['routes'][0]['geometry']=route;s['routes'][0]['geometry_sha256']=h(route);s['seed_regions'][0]['geometry_sha256']=geometry_hash({'type':'Polygon','coordinates':[[[-135.,0.],[-45.,0.],[-45.,45.],[-135.,45.],[-135.,0.]]]});p.write_text(json.dumps(s));self.req['inputs']['snapshot']=pin(p);rp=pathlib.Path(self.req['inputs']['resolution']['path']);r=json.loads(rp.read_text());r['snapshot_sha256']=sha(p);rp.write_text(json.dumps(r));self.req['inputs']['resolution']=pin(rp);self.path.write_text(json.dumps(self.req))
   with patch.dict(seed_producer.TRUSTED_CODE,{k:self.req['inputs'][k]['sha256'] for k in ('closure_checker','seed_builder','seed_kernel')}):

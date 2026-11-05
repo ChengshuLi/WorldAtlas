@@ -78,3 +78,19 @@ are deliberately not added to the existing executable allowlist or source freeze
 until independent verification. Historical closure proof hashes are not claims
 about the new checker: the integration must rerun the closure proofs against the
 v2 contract and preserve the original selected snapshot and independent replay.
+
+The optional bounded real-source integration fixture can be run with the
+archived Panama bundle (SHA-256
+`04fe1adb295e93d78ee029b48351d2b0380d69ac631b47c909dffd538bbaf6c1`):
+
+    PANAMA_REAL_OSM_ARCHIVE=/path/to/bundle.zip python3 -m unittest -v test_seed_producer.Producer.test_real_panama_archive_and_water_checker_on_synthetic_grid
+
+It reconstructs the 5,254-position selected line and runs the real direct
+producer and water-closure checker. Its decision snapshot, source-catalog
+metadata, closure, physical mask and component grid are synthetic; it does
+not verify a selected production export or production closure. With GDAL
+3.10.3 its expected synthetic rows and runs SHA-256 are respectively
+`5ee0ad8006045053a855c3537d965c97a5462c487a981aae5d8006499d05d833`
+and `31cc273033778187d959ca17ea096a2316dea110e177a88038493ff69d3a6ea0`.
+The test replaces executable allowlist values in memory for its fixture only;
+it does not promote the candidate source freeze.
