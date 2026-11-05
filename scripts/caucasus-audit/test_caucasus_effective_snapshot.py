@@ -39,6 +39,11 @@ class EffectiveSnapshotTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'region digest'):
             derive(self.snapshot, self.derived, self.gate, 'b' * 64)
 
+    def test_duplicate_region_id_is_rejected(self):
+        self.snapshot['seed_regions'].append(copy.deepcopy(self.snapshot['seed_regions'][0]))
+        with self.assertRaisesRegex(ValueError, 'duplicate region'):
+            derive(self.snapshot, self.derived, self.gate, 'b' * 64)
+
 
 if __name__ == '__main__':
     unittest.main()
