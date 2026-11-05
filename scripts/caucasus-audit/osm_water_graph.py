@@ -47,6 +47,8 @@ class WaterGraph:
             if abs(d-way_distance)<=tol:return {'status':'way_threshold_ambiguous','names':()}
             if len(candidates)>1 and candidates[1][0]-d<=2*tol:
                 return {'status':'way_tie_ambiguous','names':()}
+            if result['ambiguous']:
+                return {'status':'way_geometry_ambiguous','way_id':way,'names':()}
             node_candidates=sorted((distance(self.nodes[n],point),n) for n in ids)
             nd,node=node_candidates[0]
             if abs(nd-node_distance)<=tol:return {'status':'node_threshold_ambiguous','way_id':way,'names':()}
