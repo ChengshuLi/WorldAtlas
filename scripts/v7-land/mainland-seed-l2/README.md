@@ -37,3 +37,13 @@ candidate, checkpoint, or historical changed-cell ledger supplies seed labels.
 Run focused local tests from this directory with:
 
     OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /usr/bin/python3 -m unittest discover -p 'test_*.py'
+
+The selected exporter records each boundary-source relationship alongside the
+source ID/version. The adapter permits only reviewed relationships. Citations
+marked supporting research remain supporting evidence in region traces and are
+not represented as original construction inputs. A construction input must be a
+pinned provider-original raw asset with documented origin; complete lineage
+requires at least one such input. Incomplete lineage remains explicitly reported.
+Pins and stated relationships do not verify provider bytes, prove historical
+construction, or establish geographic correctness. Unknown relationships fail
+closed and need review. This research classification does not alter geometry.
