@@ -34,6 +34,26 @@ def verify_bering_source_paths(files,others,corroboration):
  for f in others:
   p=Path(f['path']).resolve(strict=True)
   if p in paths:need(all(paths[p].get(k)==f.get(k) for k in ('source_id','version','sha256','size_bytes')),'source path identity conflict')
+def positive_extent_features(claim):
+ """Pair positive features with positive intersections, separately verifying a source exclusion."""
+ features=claim['source_features'];counts=claim['intersection']['per_feature_root_inside_cells']
+ if claim['method']=='component_containment_excluding_source_v1':
+  need(len(features)==2 and len(counts)==1 and features[0]['feature_id']!=features[1]['feature_id'],'invalid source-negative feature counts')
+  negative=claim['source_negative_intersection']['per_feature_root_inside_cells'];filt=claim['source_negative_filter'];contain=claim['containment'];need(len(negative)==1 and isinstance(negative[0],dict) and isinstance(counts[0],dict),'invalid source-negative intersection')
+  def valid_counts(d):
+   return all(isinstance(k,str) and k.isascii() and k.isdigit() and str(int(k))==k and int(k)<0xffffffff and type(v) is int and v>0 for k,v in d.items())
+  neg=negative[0];pos=counts[0];need(valid_counts(neg) and valid_counts(pos),'invalid source-negative cell counts')
+  partial=contain['excluded_partial_components'];need(isinstance(partial,list) and contain['policy']=='all-source-cell-centers-v1' and contain.get('stage')=='positive_full_center_before_exclusion','invalid positive containment report')
+  partial_ids=[]
+  for item in partial:
+   root=item['component_id_evidence_only'];inside=item['inside_cells'];whole=item['whole_cells'];need(type(root) is int and 0<=root<0xffffffff and type(inside) is int and type(whole) is int and 0<inside<whole and pos.get(str(root))==inside,'invalid partial containment root');partial_ids.append(root)
+  need(len(set(partial_ids))==len(partial_ids) and contain['excluded_partial_count']==len(partial_ids) and contain['excluded_partial_cells']==sum(x['whole_cells'] for x in partial),'invalid partial containment summary')
+  full={int(k) for k in pos}-set(partial_ids);negative_ids={int(k) for k in neg};selected=claim['component_ids'];excluded=filt['excluded_roots'];need(all(type(k) is int and 0<=k<0xffffffff for k in selected+excluded),'invalid source-negative roots')
+  need(selected==sorted(full-negative_ids) and filt['selected_roots']==selected and excluded==sorted(full&negative_ids) and filt['selected_count']==len(selected) and filt['excluded_count']==len(excluded) and filt['negative_roots_outside_positive']==len(negative_ids-full),'source-negative filter partition mismatch')
+  need(contain['selected_count']==len(full) and contain['selected_cells']==sum(pos[str(k)] for k in full),'invalid full-containment summary')
+  return features[:1],counts
+ need(len(counts)==len(features),'polygon feature counts mismatch');return features,counts
+
 def claims_for(compiled,snapshot,resolution):
  aff={x['affiliation_id']:x for x in snapshot['affiliations']};bindings={b['entity_id']:b['code'] for b in snapshot['category_bindings'] if b.get('physical_class')=='land'}
  need(resolution.get('schema')=='source-point-component-report-v1' and resolution.get('status')=='research-only-not-a-build' and resolution.get('revision')==compiled['revision'] and resolution.get('entity_revision')==compiled['entity_revision'],'point resolution identity mismatch')
@@ -92,10 +112,10 @@ def run(config_path):
  stats=result['affiliation_statistics'];need(set(stats)==set(compiled['affiliation_ids']) and all(v['applied_cells']>0 for v in stats.values()),'selected claim absent from output')
  extents={}
  for claim in poly_resolution['claims']:
-  aid=claim['affiliation_id'];root_stats=result['polygon_root_statistics'][aid];per_feature=claim['intersection']['per_feature_root_inside_cells'];need(len(per_feature)==len(claim['source_features']),'polygon feature counts mismatch');extents[aid]={}
+  aid=claim['affiliation_id'];root_stats=result['polygon_root_statistics'][aid];positive_features,per_feature=positive_extent_features(claim);extents[aid]={}
   for root in claim['component_ids']:
    key=str(root);whole=root_stats.get(key,{}).get('applied_cells');need(type(whole) is int and whole>0,'polygon root not observed in output');per=[]
-   for feature,counts in zip(claim['source_features'],per_feature):
+   for feature,counts in zip(positive_features,per_feature):
     inside=counts.get(key,0);need(type(inside) is int and 0<=inside<=whole,'polygon inside/whole count mismatch');per.append({'feature_id':feature['feature_id'],'inside_cells':inside,'outside_cells':whole-inside})
    extents[aid][key]={'whole_component_cells':whole,'per_feature':per}
  bering_extents={}
