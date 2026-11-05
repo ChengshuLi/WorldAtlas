@@ -7,7 +7,7 @@ closure contract is pinned but is not represented as independently reviewed.
 import argparse, hashlib, json, tempfile
 from pathlib import Path
 from export_adapter import boundary_records, load_pinned_snapshot, selected_regions
-from panama_seed_source import SOURCE, bind
+from panama_seed_source import BOUNDARY, SOURCE, bind
 from region_client import execute
 from regions import geometry_hash
 
@@ -31,6 +31,17 @@ def checked_freeze():
         if sha(HERE / name) != digest: raise ValueError('source-freeze mismatch: ' + name)
     if len(pins) != 14: raise ValueError('incomplete source-freeze manifest')
     return pins
+
+def require_panama_region_usage(decision, source_trace, region_report):
+    """Bind the reconstructed line to this region's selected and executed segment."""
+    expected = {'kind': 'boundary', 'id': BOUNDARY, 'start': 0,
+                'end': source_trace['vertices'], 'reverse': False}
+    segments = [x for x in decision['segments'] if x.get('kind') == 'boundary' and x.get('id') == BOUNDARY]
+    traces = [x for x in region_report['input_trace'] if x.get('kind') == 'boundary' and x.get('id') == BOUNDARY]
+    if len(segments) != 1 or segments[0] != expected or len(traces) != 1:
+        raise ValueError('selected region does not consume the full Panama boundary')
+    if any(traces[0].get(k) != v for k, v in expected.items()) or traces[0].get('geometry_sha256') != source_trace['geometry_sha256']:
+        raise ValueError('executed Panama segment differs from source-derived boundary')
 
 def audit(snapshot_path, snapshot_sha256, archive, physical_dir, contract, contract_sha256):
     pins = checked_freeze()
@@ -63,6 +74,7 @@ def audit(snapshot_path, snapshot_sha256, archive, physical_dir, contract, contr
     worker_pins = {k: pins[k] for k in ('region_worker.py', 'regions.py', 'closure_client.py')}
     if result['code_sha256'] != worker_pins or geometry_hash(result['geometry']) != decision['geometry_sha256']:
         raise ValueError('region execution or geometry mismatch')
+    require_panama_region_usage(decision, source_trace, result['report'])
     route = [t for t in result['report']['input_trace'] if t['id'] == 'americas_exterior_closure_v1']
     if len(route) != 1 or route[0]['closure_proof']['status'] != 'valid': raise ValueError('selected Americas closure not validated')
     if sha(snapshot_path) != snapshot_sha256 or sha(archive) != archive_pin['sha256'] or sha(contract) != contract_sha256 or checked_freeze() != pins:
