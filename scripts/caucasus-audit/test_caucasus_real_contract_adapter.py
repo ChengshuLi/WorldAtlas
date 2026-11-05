@@ -92,6 +92,10 @@ class RealContractAdapterTest(unittest.TestCase):
             traces[0]['geometry_sha256'] = derived['geometry_sha256']
             x.seed['region_traces'][0]['geometry_sha256'] = effective['seed_regions'][0]['geometry_sha256']
             x.seed['decision_snapshot_sha256'] = gate.digest(snapshot)
+            # The current frozen validator must not accept derived seed traces
+            # against the unchanged selected view.
+            with self.assertRaisesRegex(ValueError, 'region decision/trace mismatch'):
+                contracts.validate_selected_seed_decisions(x.snapshot, x.seed, x.groups, x.codes, x.metric)
             pins = {n: adapter.digest(adapter.HERE / n) for n in adapter.CODE}
             result, _ = adapter.validate(contracts.validate_selected_seed_decisions, x.seed, x.groups, x.codes, x.metric, code_sha256=pins, **kwargs)
             self.assertEqual(result, x.snapshot['land_baseline_policy'])
