@@ -1,0 +1,5 @@
+# Draft153 historical code-pin custody
+
+These two code files preserve exact SHA-256 pins used by the draft153 research build. This is an isolated historical overlay, not a current production release or a replacement of newer PR4 code. The point extractor supports a bounded larger GeoNames ZIP with streamed, bounded records and duplicate rejection; its associated resolver and other dependencies must be assembled and hash-verified separately. The stage2 validator checks pinned candidate lineage and likewise requires the matching stage2 runtime and configuration. Neither file by itself proves source provenance, map correctness, completeness or publication readiness.
+
+The tests are synthetic; no raw source or geographic selection data are included. From the appropriate reviewed runtime roots, run `test_large_geonames` and `test_validate_stage2_candidate`, then revalidate all code, source and build pins. This preserves the historical bytes independently of the newer mirror-evidence and territorial overlays.
