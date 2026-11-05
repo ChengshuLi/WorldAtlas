@@ -1,4 +1,4 @@
-import hashlib,json,tempfile,unittest
+import hashlib,json,os,sys,tempfile,unittest
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -12,6 +12,8 @@ class UralGate(unittest.TestCase):
   self.recipe=root/'recipe';self.inputs=root/'inputs';self.helpers=root/'helpers';self.work=root/'work'
   for p in (self.recipe,self.inputs,self.helpers,self.work):p.mkdir()
   (self.recipe/'reproduce_raw_boundary.py').write_text('reviewed test runner\n')
+  (self.helpers/'helper.py').write_text('reviewed helper\n');self.helper_sha=hashlib.sha256((self.helpers/'helper.py').read_bytes()).hexdigest()
+  self.deps=root/'deps';self.deps.mkdir();(self.deps/'module.py').write_text('trusted dependency\n')
   (self.inputs/'review_snapshot.json').write_text('verified selector\n')
   (root/'fresh.json').write_text('authenticated selected snapshot\n');self.freshsha=hashlib.sha256((root/'fresh.json').read_bytes()).hexdigest()
   self.codehash=hashlib.sha256((self.recipe/'reproduce_raw_boundary.py').read_bytes()).hexdigest()
@@ -23,8 +25,8 @@ class UralGate(unittest.TestCase):
    self.catalog[(sid,'v1')]={'kind':'raw','sha256':digest}
    if tile:self.catalog[(sid,'v1')].update(representation='manifest_of_raw_parts',full_tile_sha256=tile)
   self.boundaries={('boundary',gate.BOUNDARY):{'revision_id':'r','geometry':{'type':'LineString','coordinates':[['0','0'],['1','1']]},'geometry_sha256':self.geomsha,'qualified_source_refs':refs}}
-  self.pin={'recipe_dir':str(self.recipe),'inputs_dir':str(self.inputs),'helpers_dir':str(self.helpers),'work_parent':str(self.work),'snapshot':str(root/'fresh.json'),'snapshot_sha256':self.freshsha}
-  self.patches=[patch.object(gate,'GEOMETRY_SHA256',self.geomsha),patch.object(gate,'RECIPE_SNAPSHOT_SHA256',self.snapsha),patch.object(gate,'RECIPE_CODE',{'reproduce_raw_boundary.py':self.codehash}),patch.object(gate,'load_pinned_snapshot',return_value={}),patch.object(gate,'boundary_records',side_effect=lambda _:('r','e',self.boundaries,self.catalog)),patch.object(gate.subprocess,'run',side_effect=self.runner)]
+  python=Path(sys.executable).resolve();self.pin={'recipe_dir':str(self.recipe),'inputs_dir':str(self.inputs),'helpers_dir':str(self.helpers),'work_parent':str(self.work),'snapshot':str(root/'fresh.json'),'snapshot_sha256':self.freshsha,'python':{'path':str(python),'sha256':gate.sha(python)},'dependency_dirs':[{'path':str(self.deps),'sha256':gate.dependency_tree_sha256(self.deps)}]}
+  self.patches=[patch.object(gate,'GEOMETRY_SHA256',self.geomsha),patch.object(gate,'RECIPE_SNAPSHOT_SHA256',self.snapsha),patch.object(gate,'RECIPE_CODE',{'reproduce_raw_boundary.py':self.codehash}),patch.object(gate,'HELPERS',{'helper.py':(self.helper_sha,)}),patch.object(gate,'isolated_caller',return_value=True),patch.object(gate,'load_pinned_snapshot',return_value={}),patch.object(gate,'boundary_records',side_effect=lambda _:('r','e',self.boundaries,self.catalog)),patch.object(gate.subprocess,'run',side_effect=self.runner)]
   for p in self.patches:p.start()
   self.addCleanup(self.tmp.cleanup)
   for p in self.patches:self.addCleanup(p.stop)
@@ -38,6 +40,17 @@ class UralGate(unittest.TestCase):
  def test_missing_reference_rejected(self):
   self.boundaries[('boundary',gate.BOUNDARY)]['qualified_source_refs'].pop()
   with self.assertRaisesRegex(ValueError,'source set'):gate.bind(self.boundaries,self.catalog,self.pin)
+ def test_qualified_supporting_citation_is_preserved_without_becoming_construction(self):
+  ref={'source_id':'support','version':'1','relationship':'local_geographic_comparison_not_terrain_or_construction_proof','role':'supporting_research_evidence'}
+  self.catalog[('support','1')]={'kind':'raw','sha256':'c'*64}
+  self.boundaries[('boundary',gate.BOUNDARY)]['qualified_source_refs'].append(ref)
+  _,trace=gate.bind(self.boundaries,self.catalog,self.pin)
+  self.assertEqual(len(trace['sources']),7);self.assertEqual(trace['supporting_citations'][0]['source_id'],'support')
+  ref['role']='construction_input'
+  with self.assertRaisesRegex(ValueError,'source set'):gate.bind(self.boundaries,self.catalog,self.pin)
+ def test_duplicate_source_reference_rejected(self):
+  refs=self.boundaries[('boundary',gate.BOUNDARY)]['qualified_source_refs'];refs.append(dict(refs[0]))
+  with self.assertRaisesRegex(ValueError,'duplicate Ural source'):gate.bind(self.boundaries,self.catalog,self.pin)
  def test_manifest_tile_spoof_rejected(self):
   ref=next(x for x in self.boundaries[('boundary',gate.BOUNDARY)]['qualified_source_refs'] if 'manifest' in x['relationship'])
   self.catalog[(ref['source_id'],ref['version'])]['full_tile_sha256']='f'*64
@@ -60,6 +73,30 @@ class UralGate(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'code pin'):gate.bind(self.boundaries,self.catalog,self.pin)
   (self.recipe/'reproduce_raw_boundary.py').write_text('reviewed test runner\n');(self.inputs/'review_snapshot.json').write_text('changed')
   with self.assertRaisesRegex(ValueError,'selector snapshot'):gate.bind(self.boundaries,self.catalog,self.pin)
+ def test_modified_helper_and_dependency_are_rejected(self):
+  (self.helpers/'helper.py').write_text('tampered')
+  with self.assertRaisesRegex(ValueError,'helper pin'):gate.bind(self.boundaries,self.catalog,self.pin)
+  (self.helpers/'helper.py').write_text('reviewed helper\n');(self.deps/'module.py').write_text('tampered')
+  with self.assertRaisesRegex(ValueError,'dependency tree pin'):gate.bind(self.boundaries,self.catalog,self.pin)
+ def test_helper_changed_during_replay_is_rejected(self):
+  def change(cmd,**kwargs):
+   result=self.runner(cmd,**kwargs);Path(cmd[cmd.index('--helpers')+1],'helper.py').write_text('tampered');return result
+  with patch.object(gate.subprocess,'run',side_effect=change):
+   with self.assertRaisesRegex(ValueError,'helper changed during replay'):gate.bind(self.boundaries,self.catalog,self.pin)
+ def test_dependency_changed_during_replay_is_rejected(self):
+  def change(cmd,**kwargs):
+   result=self.runner(cmd,**kwargs);Path(cmd[cmd.index('--dependency-dir')+1],'module.py').write_text('tampered');return result
+  with patch.object(gate.subprocess,'run',side_effect=change):
+   with self.assertRaisesRegex(ValueError,'Python runtime changed'):gate.bind(self.boundaries,self.catalog,self.pin)
+ def test_hostile_python_environment_is_not_forwarded(self):
+  with patch.dict(os.environ,{'PYTHONPATH':'/hostile','PYTHONHOME':'/hostile','LD_PRELOAD':'/hostile'},clear=False):
+   with patch.object(gate.subprocess,'run',side_effect=self.runner) as call:gate.bind(self.boundaries,self.catalog,self.pin)
+  cmd=call.call_args.args[0];env=call.call_args.kwargs['env']
+  self.assertEqual(cmd[1:4],['-I','-S','-B'])
+  self.assertFalse({'PYTHONPATH','PYTHONHOME','LD_PRELOAD'} & set(env))
+ def test_nonisolated_outer_caller_is_rejected(self):
+  with patch.object(gate,'isolated_caller',return_value=False):
+   with self.assertRaisesRegex(ValueError,'isolated no-site'):gate.bind(self.boundaries,self.catalog,self.pin)
  def test_source_replay_difference_rejected(self):
   self.geom={'type':'LineString','coordinates':[[0.,0.],[2.,2.]]}
   with self.assertRaisesRegex(ValueError,'differs from selected'):gate.bind(self.boundaries,self.catalog,self.pin)

@@ -9,6 +9,7 @@ from PR4. Only local derived files are written; nothing is published.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -31,6 +32,9 @@ SCRIPTS = ['construct_arctic_gap_paths.py', 'construct_cop_spring_flow.py',
            'trace_gap_raw_crossings.py', 'check_raw_chord_coverage.py',
            'verify_raw_north_candidate.py', 'assemble_raw_backed_candidate.py']
 OUTPUT_SHA = 'c7e8476d10d0ab95da6dc717e0b5aa3852d967a9c1a19ea6932a460b0a31a2d4'
+BOOTSTRAP = ("import json,runpy,sys; paths=json.loads(sys.argv[1]); "
+             "script=sys.argv[2]; sys.argv=sys.argv[2:]; "
+             "sys.path[:0]=paths; runpy.run_path(script,run_name='__main__')")
 
 
 def sha(path):
@@ -46,9 +50,18 @@ def main():
     parser.add_argument('--inputs', type=Path, required=True)
     parser.add_argument('--helpers', type=Path, required=True)
     parser.add_argument('--workdir', type=Path, required=True)
+    parser.add_argument('--dependency-dir', type=Path, action='append', required=True)
+    parser.add_argument('--python-sha256', required=True)
     a = parser.parse_args()
     inputs, helpers, work = a.inputs.resolve(), a.helpers.resolve(), a.workdir.resolve()
     scripts = Path(__file__).resolve().parent
+    dependency_dirs = [str(p.resolve(strict=True)) for p in a.dependency_dir]
+    if not all(Path(p).is_dir() for p in dependency_dirs) or sha(Path(sys.executable)) != a.python_sha256:
+        raise ValueError('invalid dependency directory or Python executable pin')
+    runtime_home = work / 'runtime-home'
+    clean_env = {'PATH': os.defpath, 'LC_ALL': 'C', 'HOME': str(runtime_home),
+                 'XDG_CONFIG_HOME': str(runtime_home), 'XDG_CACHE_HOME': str(runtime_home), 'OPENBLAS_NUM_THREADS': '1',
+                 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1', 'NUMEXPR_NUM_THREADS': '1'}
     if work.exists():
         raise FileExistsError('workdir must not exist: ' + str(work))
     for name in INPUTS:
@@ -60,19 +73,31 @@ def main():
         if observed[name] not in (expected, PR4_HELPERS[name]):
             raise ValueError('helper hash mismatch: ' + name)
     work.mkdir(parents=True)
+    runtime_home.mkdir()
     for name in INPUTS:
         (work / name).symlink_to(inputs / name, target_is_directory=(inputs / name).is_dir())
     (work / 'landed-1b494125').symlink_to(helpers, target_is_directory=True)
+    staged_code = {}
     for name in SCRIPTS:
         # These audited research scripts use /tmp paths; confine every output
         # to this new workdir while retaining their pinned input checks.
         code = (scripts / name).read_text().replace('/tmp/', str(work) + '/')
-        (work / name).write_text(code)
+        data = code.encode('utf-8')
+        (work / name).write_bytes(data)
+        staged_code[work / name] = data
     shutil.copyfile(scripts / 'reconstruct_hybrid_osm.py', work / 'ural-reconstruct-hybrid.py')
+    staged_code[work / 'ural-reconstruct-hybrid.py'] = (scripts / 'reconstruct_hybrid_osm.py').read_bytes()
+
+    def verify_staged():
+        if any(path.read_bytes() != data for path, data in staged_code.items()):
+            raise ValueError('staged Ural recipe code changed during construction')
 
     def run(script, *args, output=None):
-        result = subprocess.run([sys.executable, str(script), *map(str, args)], cwd=work,
-                                check=True, stdout=subprocess.PIPE)
+        verify_staged()
+        result = subprocess.run([sys.executable, '-I', '-S', '-B', '-c', BOOTSTRAP,
+                                 json.dumps(dependency_dirs), str(script), *map(str, args)],
+                                cwd=work, env=clean_env, check=True, stdout=subprocess.PIPE)
+        verify_staged()
         if output:
             (work / output).write_bytes(result.stdout)
 
@@ -94,6 +119,8 @@ def main():
     for name, expected in observed.items():
         if sha(helpers / name) != expected:
             raise ValueError('helper changed during construction: ' + name)
+    if sha(Path(sys.executable)) != a.python_sha256:
+        raise ValueError('Python executable changed during construction')
     print(json.dumps({'geometry': str(output), 'file_sha256': OUTPUT_SHA,
                       'canonical_geometry_sha256': '68390aa6ce5352226777adde3979315e1de85ca26d662c4b1c32610d1d73da66',
                       'status': 'research-selected; no map built'}, sort_keys=True))

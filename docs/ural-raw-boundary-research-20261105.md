@@ -73,18 +73,11 @@ export into one input directory. Name the reassembled ArcticDEM tiles
 use `ural-hydro-eu.zip`, `ural-hydro-si.zip` and the matching extracted
 `ural-hydro-eu` and `ural-hydro-si` shapefile directories; name the remaining
 files `ural-copernicus-dem.tif`, `ural-river-r2.osm`, and
-`review_snapshot.json`. Run:
-
-```sh
-python scripts/ural-audit/reproduce_raw_boundary.py \
-  --inputs /path/to/inputs --helpers /path/to/pinned-helpers \
-  --workdir /path/to/new-empty-workdir
-```
-
-The work directory must not already exist. The runner checks helper and source
-hashes, writes only local intermediates and logs, and checks the final geometry
-file hash. Its five helper hashes are pinned in the runner; use the audited
-Ural helper versions at PR4 commit `1b494125152ae343ee48efc84b3696140c4ae82c`.
+`review_snapshot.json`. The source replay gate described below invokes the
+runner in an isolated Python process. The runner writes only local intermediates
+and logs and checks the final geometry file hash. Its five helper hashes are
+pinned in the runner and gate; use the audited Ural helper versions at PR4
+commit `1b494125152ae343ee48efc84b3696140c4ae82c`.
 The clean run used Python 3.9.6, NumPy 2.0.2, rasterio 1.4.3 / GDAL 3.9.3,
 pyproj 3.6.1, Shapely 2.0.7 and Numba 0.60.0. Byte hashes may depend on the
 toolchain; a different toolchain must be validated rather than silently accepted.
@@ -111,29 +104,46 @@ fail-closed integration candidate. Its `bind(boundaries, catalog, pin)` expects
 the normalized boundaries and catalog from the authenticated fresh global
 snapshot's `boundary_records`, the fresh snapshot path and SHA-256, plus four
 existing directories named `recipe_dir`, `inputs_dir`, `helpers_dir` and
-`work_parent`. It independently parses the pinned fresh snapshot and checks
+`work_parent`, an explicitly pinned Python executable, and an ordered list of
+dependency directories and their `dependency_tree_sha256` digests. It independently parses the pinned fresh snapshot and checks
 that the caller's selected Ural record and source catalog agree. The directories
 must be disjoint from the work parent. The inputs include all seven linked
 sources, the reassembled raw ArcticDEM tiles, and `review_snapshot.json`: the
 separately pinned earlier Neon export used only as the structured route
-selector. The gate checks the seven source identities and roles, manifest and
+selector. The gate checks all seven required construction identities and roles;
+additional independently validated supporting citations are allowed and stay
+separately qualified. It checks manifest and
 raw-tile hashes, selected binary64 geometry, and ten pinned recipe scripts;
-it captures those scripts in a private work directory, runs the recipe, then
-compares every resulting coordinate with the selected Ural line. It returns
+it captures those scripts, all five pinned helpers, and the pinned dependency
+trees in a private work directory. It invokes the pinned Python executable with
+`-I -S -B` and a minimal environment; all nested Python subprocesses do the
+same, with explicit captured dependency paths. This prevents inherited
+`PYTHONPATH`, `PYTHONHOME`, `.pth` processing and `sitecustomize` startup from
+modifying the replay. The gate requires its outer caller to run with isolated,
+no-site Python as well. The caller must independently authorize and pin its
+runtime and dependency tree digests. Python's standard library and operating
+system native libraries remain part of that trusted host runtime. It compares
+every resulting coordinate with the selected Ural line and returns
 the unchanged normalized boundaries and a verified trace, not a derived view.
 The trace binds the fresh revision and snapshot, earlier selector snapshot,
-raw-source and manifest/tile hashes, gate and recipe code hashes, and selected
+raw-source and manifest/tile hashes, gate, recipe and helper code hashes, Python
+binary and dependency-tree hashes, and selected
 and derived geometry hashes. `verify_trace` reruns the complete replay and
 compares the trace; core and resume consumers must call it independently. It leaves the selected geometry,
 routes, region hash and global snapshot untouched.
 
-Twelve bounded tests exercise rejection of missing sources, a forged tile hash,
+Nineteen bounded tests exercise rejection of missing sources, a forged tile hash,
 modified recipe or selector, a changed output, selected line or revision, a
-stale fresh-snapshot record, a changing fresh snapshot and an unselected boundary.
+stale fresh-snapshot record, a changing fresh snapshot, modified helpers or
+dependency trees, a nonisolated caller and an unselected boundary. Properly
+qualified supporting citations may accompany the seven required construction
+roles and are separately traced.
 A real raw-input replay passed with the seven read-only Neon source records and
 reproduced the selected line; a separate replay with a deliberately corrupted
-gap-00 tile failed at the raw-source hash check. The combined snapshot used for
-these tests was synthetic. The
+gap-00 tile failed at the raw-source hash check, and a modified real helper was
+rejected. A full replay with hostile `PYTHONPATH`, `PYTHONHOME`, `LD_PRELOAD` and
+`sitecustomize` settings passed; the hostile startup marker did not execute.
+The combined snapshot used for these tests was synthetic. The
 recipe run and the separate GDAL region/closure test used different Python
 environments, so these results are not a single-environment outer-pipeline
 test.
@@ -142,7 +152,13 @@ The direct seed producer does **not** yet invoke this gate. Its next reviewed
 integration must pass authenticated fresh snapshot records and explicit source
 directories, pin the gate and recipe code, require replay when selecting this
 Ural boundary, and carry the replay trace into the seed report and independent
-validator. The producer's frozen code list, source-freeze manifest and outer
+validator. If a Caucasus wrapper supplies an in-memory effective view, the
+gate must still independently load the original selected export, compare that
+export's Ural record and its seven source catalog entries to the effective
+view, and bind the original snapshot hash. The Caucasus validator must
+separately prove that only its intended line and derived region hashes changed.
+Core and resume must independently rerun the same Ural gate and compare its
+complete trace before accepting publication. The producer's frozen code list, source-freeze manifest and outer
 allowlist must be updated together. After Caucasus and Panama selections are
 finalized, recompute the affected Europe region hash and closure bindings from
 those exact lines; never reuse a synthetic combined snapshot as a Neon export.
