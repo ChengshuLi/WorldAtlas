@@ -75,7 +75,7 @@ if __name__=='__main__':
     with open(a.retained,'rb') as f:
         if digest_file(f)!=a.retained_sha:raise ValueError('retained-line excerpt checksum mismatch')
     labels,t,geo,unknown=basin_labels(a.source,a.source_sha,a.mask,a.mask_sha,a.basin,a.bounds,a.root,a.resolution)
-    result=route(labels,t,geo,json.load(open(a.retained)),a.river);result.update({'source_sha256':a.source_sha,'retained_sha256':a.retained_sha,'bounds':a.bounds,'roots':a.root,'unclassified_valid':unknown,'caveats':['Preliminary: projected-neighbor D8 conversion pending.','Grid-corner connectivity is not surveyed geography.','The spring-end straight join requires evidence.','Candidate preserves source-line geometry only to the recorded intersection.']})
+    result=route(labels,t,geo,json.load(open(a.retained)),a.river);result.update({'source_sha256':a.source_sha,'retained_sha256':a.retained_sha,'bounds':a.bounds,'roots':a.root,'unclassified_valid':unknown,'caveats':['Preliminary: local WGS84 D8 basin model is not surveyed geography.','Grid-corner connectivity is not surveyed geography.','The spring-end straight join requires evidence.','Candidate preserves source-line geometry only to the recorded intersection.']})
     with open(a.output,'x') as f:json.dump(result,f)
     summary={k:v for k,v in result.items() if k!='candidate'}
     if 'candidate' in result:summary['candidate']={k:v for k,v in result['candidate'].items() if k!='coordinates'}
