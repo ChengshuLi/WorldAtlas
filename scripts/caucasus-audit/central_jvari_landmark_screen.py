@@ -14,10 +14,10 @@ for name, p in landmarks.items():
     print(name, p, line.closest(p))
 station = line.closest(landmarks['Jvari-site'])['station_m']
 geod = Geod(ellps='WGS84')
-with rasterio.open('central-jvari-cop30-dem.tif') as ds:
+with rasterio.open('central-jvari-cop30-dem.tif') as ds, rasterio.open('central-jvari-cop30-EDM.tif') as edm, rasterio.open('central-jvari-cop30-FLM.tif') as flm, rasterio.open('central-jvari-cop30-WBM.tif') as wbm:
     for shift in (-1000,-500,0,500,1000):
         p=line.point(station+shift)
         a=line.point(station+shift-20);b=line.point(station+shift+20)
         az=geod.inv(*a,*b)[0]
         points=[geod.fwd(*p,az-90,250)[:2],p,geod.fwd(*p,az+90,250)[:2]]
-        print('station_delta_m',shift,'lonlat',p,'left_center_right_m',[float(v[0]) for v in ds.sample(points)])
+        print('station_delta_m',shift,'lonlat',p,'left_center_right_m',[float(v[0]) for v in ds.sample(points)],'EDM_FLM_WBM',[[int(next(mask.sample([q]))[0]) for mask in (edm,flm,wbm)] for q in points])
