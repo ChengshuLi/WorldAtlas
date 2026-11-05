@@ -27,7 +27,7 @@ class JoinProposalTest(unittest.TestCase):
             command=[sys.executable,str(SCRIPT),'--selected',str(root/'selected.json'),
                      '--candidate',str(root/'candidate.json'),'--dsm',str(root/'dsm.tif'),
                      '--mask',str(root/'mask.tif'),'--stack',str(root/'stack.tif'),
-                     '--epsg','32631','--radius-pixels','10','--output-dir',str(root/'out')]
+                     '--radius-pixels','10','--output-dir',str(root/'out')]
             result=subprocess.run(command,capture_output=True,text=True,timeout=60)
             self.assertEqual(result.returncode,0,result.stderr)
             self.assertEqual(len(list((root/'out').glob('*.json'))),6)
