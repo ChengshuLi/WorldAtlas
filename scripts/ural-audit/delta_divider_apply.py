@@ -36,6 +36,14 @@ def sides(line, bounds, europe_witness, asia_witness):
 def update_row(old, physical, xs, lat, europe, asia, bounds, codec):
     w, s, e, n = bounds
     ec, ac, lands = codec['europe_code'], codec['asia_code'], codec['land_codes']
+    # Fail closed for a center on a scope edge, including tiny arithmetic
+    # differences in deriving centers from the grid origin and step.
+    tol = 1e-12
+    x_in = (xs >= w - tol) & (xs <= e + tol)
+    y_in = s - tol <= lat <= n + tol
+    edge = y_in & (((np.abs(xs - w) <= tol) | (np.abs(xs - e) <= tol)) |
+                   (x_in & (abs(lat - s) <= tol or abs(lat - n) <= tol)))
+    if np.any(edge & (physical == 17)): raise ValueError('land center on scope boundary')
     inside = (xs > w) & (xs < e) & (lat > s) & (lat < n)
     ep = contains_xy(europe, xs, lat) & inside
     ap = contains_xy(asia, xs, lat) & inside

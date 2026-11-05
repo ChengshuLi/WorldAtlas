@@ -3,6 +3,16 @@ import numpy as np
 from delta_divider_apply import apply
 
 class GridOriginTests(unittest.TestCase):
+    def test_scope_edge_land_fails_in_complete_grid_apply(self):
+        cfg={'width':4,'height':4,'step_degrees':1,'west':0,'north':4,
+             'land_codes':[18,19], 'asia_code':18, 'europe_code':19,
+             'bounds':[.5,.5,3.5,3.5], 'europe_witness':[1,2], 'asia_witness':[3,2]}
+        rows=np.arange(5,dtype='<u4')
+        runs=np.array([[4,18]]*4,dtype='<u4').reshape(-1)
+        phys=np.array([[4,17]]*4,dtype='<u4').reshape(-1)
+        with tempfile.TemporaryDirectory() as d, self.assertRaisesRegex(ValueError,'scope boundary'):
+            apply(rows,runs,rows,phys,[[2,4],[2,0]],cfg,os.path.join(d,'rows'),os.path.join(d,'runs'))
+
     def test_shifted_origin_and_scoped_application(self):
         cfg={'width':4,'height':4,'step_degrees':1,'west':10,'north':14,'land_codes':[17,18,19,20,21,22],'asia_code':18,'europe_code':19,
              'bounds':[10.1,10.1,13.9,13.9], 'europe_witness':[10.5,12], 'asia_witness':[13.5,12]}

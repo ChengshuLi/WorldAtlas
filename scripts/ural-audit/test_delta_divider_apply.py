@@ -24,6 +24,18 @@ class DividerApplyTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'land center on divider'):
             update_row(np.array([19]), np.array([17]), np.array([2.]), 1, e, a, bounds, CODEC)
 
+    def test_scope_boundary_land_is_rejected_and_water_is_preserved(self):
+        bounds = (0, 0, 4, 2)
+        europe, asia = sides([(2, -1), (2, 3)], bounds, (1, 1), (3, 1))
+        for x, y in [(0, 1), (4, 1), (1, 0), (3, 2),
+                     (0, 0), (4, 0), (0, 2), (4, 2), (1e-13, 1)]:
+            with self.subTest(x=x, y=y), self.assertRaisesRegex(ValueError, 'scope boundary'):
+                update_row(np.array([18]), np.array([17]), np.array([x]), y, europe, asia, bounds, CODEC)
+        new, counts = update_row(np.array([0]), np.array([1]), np.array([0.]), 1,
+                                 europe, asia, bounds, CODEC)
+        self.assertEqual(new.tolist(), [0])
+        self.assertEqual(counts['land_centers'], 0)
+
 
 if __name__ == '__main__': unittest.main()
 
