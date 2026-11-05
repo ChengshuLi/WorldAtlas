@@ -55,3 +55,7 @@ capture the coordinate source, implement and validate its assembly, connect it
 to the selected-line workflow and run the actual selected export and seed
 against the current physical generation. A matching line hash alone does not
 establish closure validity or end-to-end land assignment. No geography changed.
+
+## Follow-up capture
+
+A subsequent capture of 33 current OSM way/full responses reconstructs the selected line exactly: 5,254 vertices and the canonical geometry hash above. The current way node memberships match the queried historical way versions, and both historical country relations contain all 33 ways. This is current coordinate evidence, not proof of historical node versions. The checked assembler and archive verifier are in `scripts/v7-land/mainland-seed-l2/`; five bounded tests passed. The locally prepared source archive has not yet been uploaded to R2 or linked in Neon. The verifier is not yet wired into the selected seed producer. No map rebuild was run.
