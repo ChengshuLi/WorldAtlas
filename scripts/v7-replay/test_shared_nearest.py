@@ -32,7 +32,7 @@ class SharedTest(unittest.TestCase):
         # Symmetrical two-cell shores with a center water cell.
         p=np.ones((6,12),dtype=np.uint8); p[2,4]=p[2,6]=17
         l=np.zeros_like(p); l[2,4]=17; l[2,6]=18
-        edges=s.edges_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
+        edges=s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
         indexes=s.make_indexes(edges,pairs)
         result,cert,exact=s.classify(np.array([15.]),np.array([-15.]),(0,12,0,6),12,6,30,pairs,t,indexes)
         self.assertEqual(result.tolist(),[2]); self.assertEqual((cert,exact),(0,1))
@@ -45,7 +45,7 @@ class SharedTest(unittest.TestCase):
         l=np.zeros_like(p); l[2,0]=17; l[2,4]=18
         self.assertEqual(s.crop(*rle(p),2,-1,2,12).tolist(),[1,17,1])
         pairs,t=s.selected_rules(snapshot(),basin())
-        edges=s.edges_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
+        edges=s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
         codes,cert,exact=s.classify(np.array([15.,15.]),np.array([165.,-45.]),(0,12,0,6),12,6,30,pairs,t,s.make_indexes(edges,pairs))
         self.assertEqual(codes.tolist(),[1,2]);self.assertEqual(cert+exact,2)
 
@@ -65,23 +65,23 @@ class SharedTest(unittest.TestCase):
         p=np.ones((6,12),dtype=np.uint8);p[2,4]=p[2,6]=17
         l=np.zeros_like(p);l[2,4]=17;l[2,6]=18
         pairs,t=s.selected_rules(snapshot(),basin())
-        bounds=(3,8,1,5); edges=s.edges_for_crop(rle(p),rle(l),bounds,12,6,30,[17,18]);idx=s.make_indexes(edges,pairs)
+        bounds=(3,8,1,5); edges=s.centers_for_crop(rle(p),rle(l),bounds,12,6,30,[17,18]);idx=s.make_indexes(edges,pairs)
         # Exactly on a crop boundary cannot prove omitted shore irrelevance.
-        with self.assertRaisesRegex(ValueError,'increase pad'):
+        with self.assertRaisesRegex(ValueError,'increase halo'):
             s.classify(np.array([15.]),np.array([-90.]),bounds,12,6,30,pairs,t,idx)
 
     def test_missing_shore_and_bad_physical_fails(self):
         p=np.ones((6,12),dtype=np.uint8);p[2,4]=17;l=np.zeros_like(p);l[2,4]=17
         pairs,_=s.selected_rules(snapshot(),basin())
-        edges=s.edges_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
+        edges=s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
         with self.assertRaisesRegex(ValueError,'no shoreline'):s.make_indexes(edges,pairs)
         l[2,4]=0
-        with self.assertRaisesRegex(ValueError,'invalid'):s.edges_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
+        with self.assertRaisesRegex(ValueError,'invalid'):s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
         # Never narrow untrusted uint32 values before physical/land validation.
         p=p.astype(np.uint32);l=l.astype(np.uint32);l[2,4]=273
-        with self.assertRaisesRegex(ValueError,'invalid'):s.edges_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
+        with self.assertRaisesRegex(ValueError,'invalid'):s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
         l[2,4]=17;p[2,5]=257
-        with self.assertRaisesRegex(ValueError,'invalid'):s.edges_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
+        with self.assertRaisesRegex(ValueError,'invalid'):s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
 
 
 class FullBuilderTest(unittest.TestCase):
@@ -114,7 +114,7 @@ class FullBuilderTest(unittest.TestCase):
                     '--land-rows-sha256',h(root/'land-rows'),'--land-runs',str(root/'land-runs'),
                     '--land-runs-sha256',h(root/'land-runs'),'--shore-pad-degrees','180',
                     '--out',str(out),'--allow-unverified-snapshot','--allow-draft-snapshot',
-                    '--research-shore-method','spherical-grid-edge-v1']
+                    '--research-shore-method','wgs84-coastal-4neighbor-center-v2']
                 m.main()
             finally: m.W,m.H,m.STEP,sys.argv=old
             with gzip.open(out/'basin-assignment.jsonl.gz','rt') as f: record=json.loads(f.readline())

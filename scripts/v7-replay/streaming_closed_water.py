@@ -11,8 +11,6 @@ import numpy as np
 import closed_water_core as core
 import partition_json_stream
 from partition_json_stream import read_partition
-import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from exclusive_outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
 
 
@@ -182,7 +180,7 @@ def mark_cut_contacts(db,path,width,height,batch_size=4096):
   raise ValueError('independent barrier scan contradicts partition')
 
 
-def assign_components(db,physical,land,width,height,pairs,tolerance,pad,max_shore_segments,chunk,pending_file):
+def assign_components(db,physical,land,width,height,pairs,tolerance,pad,max_coastal_centers,chunk,pending_file):
  step=360/width;last=-1;pending_cells=assigned_cells=0;pending_count=direct_count=mixed_count=0
  # Page by stable root key to avoid retaining all components or modifying an active cursor.
  cache_key=None;edges=indexes=None
@@ -207,7 +205,7 @@ def assign_components(db,physical,land,width,height,pairs,tolerance,pad,max_shor
     if key!=cache_key:
      # Release the prior tree before constructing a different one.
      edges=indexes=None;cache_key=None
-     edges=core.shore.edges_for_crop(physical,land,crop,width,height,step,[p[1] for p in participants],max_segments=max_shore_segments)
+     edges=core.shore.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in participants],max_centers=max_coastal_centers)
      indexes=core.shore.make_indexes(edges,participants);cache_key=key
     source=db.execute('SELECT y,a,b FROM spans WHERE root=? ORDER BY y,a',(root,));produced=0;staged=[]
     while True:
@@ -247,12 +245,12 @@ def write_assignments(db,path,decision_id,width,height):
 
 
 def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_rows,component_spans,barrier_edges,
-        out,width,height,pad,inputs,*,allow_selected_research=False,cache_kib=32768,max_shore_segments=1000000,
+        out,width,height,pad,inputs,*,allow_selected_research=False,cache_kib=32768,max_coastal_centers=1000000,
         chunk=5000,verify_inputs=None):
- if chunk<=0 or max_shore_segments<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid resource or halo limit')
+ if chunk<=0 or max_coastal_centers<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid resource or halo limit')
  decision,pairs,tolerance=core.policy(snapshot,allow_selected_research=allow_selected_research)
  code_paths={'streaming_closed_water':Path(__file__),'partition_json_stream':Path(partition_json_stream.__file__),
-             'closed_water_core':Path(core.__file__),'shared_nearest':Path(core.shore.__file__),'spherical_shore':Path(core.shore.geom.__file__)}
+             'closed_water_core':Path(core.__file__),'shared_nearest':Path(core.shore.__file__)}
  code_pins={name:sha(path) for name,path in code_paths.items()}
  out=Path(out);create_directory_exclusive(out);db=open_database(out/'work.sqlite3',cache_kib)
  try:
@@ -260,7 +258,7 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
   cells,nspans=ingest_spans(db,component_rows,component_spans,width,height,meta)
   classify_boundaries(db,physical,prefill,width,height,pairs)
   mark_cut_contacts(db,barrier_edges,width,height)
-  stats=assign_components(db,physical,land,width,height,pairs,tolerance,pad,max_shore_segments,chunk,out/'pending-components.jsonl.gz')
+  stats=assign_components(db,physical,land,width,height,pairs,tolerance,pad,max_coastal_centers,chunk,out/'pending-components.jsonl.gz')
   count,output_spans=write_assignments(db,out/'closed-water-assignments.jsonl.gz',decision['id'],width,height)
   if count!=stats['assigned_cells'] or count+stats['pending_cells']!=cells:raise ValueError('closed-water cell conservation failed')
   db.commit();db.close();db=None
@@ -274,7 +272,7 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
     **stats,'input_span_count':nspans,'span_count':output_spans,
     'pending_file':{'path':'pending-components.jsonl.gz','sha256':sha(out/'pending-components.jsonl.gz')},
     'work_database':{'path':'work.sqlite3','sha256':sha(out/'work.sqlite3'),'purpose':'disk-backed row/component and mixed-output index'},
-    'resource_limits':{'sqlite_cache_kib':cache_kib,'shore_segments':max_shore_segments,'classification_chunk':chunk},
+    'resource_limits':{'sqlite_cache_kib':cache_kib,'coastal_centers':max_coastal_centers,'classification_chunk':chunk},
     'algorithm_sha256':code_pins['streaming_closed_water'],'code_sha256':code_pins,
     'tiles':[{'core_rows':[0,height],'core_cols':[0,width],'span_file':{'path':'closed-water-assignments.jsonl.gz','sha256':sha(out/'closed-water-assignments.jsonl.gz')}}]}
   write_json_exclusive(out/'manifest.json',manifest,indent=2)

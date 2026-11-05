@@ -5,11 +5,11 @@ from pathlib import Path
 import numpy as np
 HERE=Path(__file__).resolve().parent;sys.path.insert(0,str(HERE.parent/'v7-replay'));sys.path.insert(0,str(HERE.parent))
 import build_coastal_tile as grid_io
-import coastal_band as band_io
+import file_integrity as band_io
 import exclusive_outputs as output_io
 from build_coastal_tile import open_grid
 from exclusive_outputs import write_json_exclusive
-from coastal_band import pin,sha
+from file_integrity import pin,sha
 
 def compare(config_path,output):
  config_path=Path(config_path).resolve();raw=config_path.read_bytes();cfg=json.loads(raw)

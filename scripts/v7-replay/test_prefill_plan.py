@@ -11,6 +11,9 @@ def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 
 
 class PrefillPlanTest(unittest.TestCase):
+    def test_retired_spherical_report_rejected(self):
+        with self.assertRaisesRegex(ValueError,'retired spherical'):
+            plans.validate_land_report({'schema':'single-generation-nearest-report-v1'},Path('unused'),{},{},'unused',{},None)
     def test_selected_layers_connect_to_prefill(self):
         with tempfile.TemporaryDirectory() as tmp:
             base=Path(tmp); root=base/'inputs'; root.mkdir()
@@ -142,8 +145,8 @@ class PrefillPlanTest(unittest.TestCase):
                     'assignment_method':'shared_nearest_assigned_shore','decision_status':'draft','tie_rules':tie,
                     'land_rows_sha256':sha(lr),'land_runs_sha256':sha(lu)})
                 db['physical_water_cells']=2;db['algorithm_sha256']='a'*64
-                db['nearest_assignment_audit']={'shore_method':'spherical-grid-edge-v1 (research, not an approved decision)',
-                    'certified_bound_cells':1,'exact_distance_cells':1,'shared_nearest_sha256':'b'*64,'spherical_shore_sha256':'c'*64}
+                db['nearest_assignment_audit']={'shore_method':'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)',
+                    'certified_bound_cells':1,'exact_distance_cells':1,'shared_nearest_sha256':'b'*64,'shore_geometry_sha256':'c'*64}
                 dbp=root/'draft-basin.json';dbp.write_text(json.dumps(db))
                 draft_cfg={**config,'rle_inputs':{'physical':rles['physical'],'land':draft_land},
                     'coastal_band':{'manifest_path':dcp.name,'manifest_sha256':sha(dcp)},
@@ -154,7 +157,7 @@ class PrefillPlanTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError,'policy requires explicit research selection'):
                     plans.assemble(draft_cfg,config_path,root,bad_policy,draft_path,base/'bad-policy',allow_draft=True,allow_research_shore=True)
                 draft_plan=plans.assemble(draft_cfg,config_path,root,draft,draft_path,base/'draft-plan',allow_draft=True,allow_research_shore=True)
-                self.assertEqual(draft_plan['research_shore_method'],'spherical-grid-edge-v1')
+                self.assertEqual(draft_plan['research_shore_method'],'wgs84-coastal-4neighbor-center-v2')
                 db['source']['tie_rules']={**tie,'tolerance_metres':'0.1'};dbp.write_text(json.dumps(db))
                 draft_cfg['basins'][0]['manifest_sha256']=sha(dbp)
                 with self.assertRaisesRegex(ValueError,'research method or land binding mismatch'):

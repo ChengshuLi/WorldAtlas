@@ -1,7 +1,7 @@
 import json,tempfile,unittest
 from pathlib import Path
 import build_components
-import test_build_land as fixture_module
+import fixture_land as fixture_module
 
 class ComponentsTest(unittest.TestCase):
  def fixture(self,root):

@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 from osgeo import ogr
 HERE=Path(__file__).resolve().parent;sys.path.insert(0,str(HERE.parent/'v7-replay'));sys.path.insert(0,str(HERE.parent))
-import coastal_band as band
+import file_integrity as band
 import build_coastal_tile as grid_io
 import shared_nearest as shore
 import exclusive_outputs as xo

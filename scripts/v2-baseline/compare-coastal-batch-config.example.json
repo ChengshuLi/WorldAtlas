@@ -1,8 +1,0 @@
-{
-  "schema": "simple-v2-coastal-comparison-batch-v1",
-  "candidate_batch": {"path": "/path/to/coastal-batch/report.json", "sha256": "REPLACE"},
-  "reference_rows": {"path": "/path/to/reference/rows.u32le", "sha256": "REPLACE"},
-  "reference_runs": {"path": "/path/to/reference/runs.u32le", "sha256": "REPLACE"},
-  "workers": 1,
-  "minimum_free_bytes": 2147483648
-}

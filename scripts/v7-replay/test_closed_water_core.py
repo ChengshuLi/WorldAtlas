@@ -8,11 +8,11 @@ from test_coastal_core import snap
 def policy_snapshot():
  s=snap();tie=s['policies'][0]['definition']['tie_rules']
  s['policies']=[{'id':'test-closed','kind':'closed_water_assignment','evidence':{'execution_status':'selected_for_research'},'definition':{
-  'method':'closed_water_component_v1','boundary_participants':'adjacent_final_water_or_assigned_land',
-  'distance':'spherical_segment','earth_radius_metres':'6371008.8','latitude_grid_edge_contacts':'report_only',
+  'method':'closed_water_component_v2','boundary_participants':'adjacent_final_water_or_assigned_land',
+  'distance':'wgs84_ellipsoidal_center_to_center','ellipsoid':'WGS84','latitude_grid_edge_contacts':'report_only',
   'multiple_participants':'nearest_assigned_land_shore','no_participants':'report_only','one_participant':'direct_fill',
   'source_cut_contacts':'retain_ocean_parent_source_cut_review','tie_rules':tie,'unresolved_zero_neighbors':'report_only',
-  'shore_geometry':'physical_land_water_grid_edges'}}]
+  'shore_geometry':'physical_coastal_land_cell_centers_4_neighbor_v1'}}]
  return s
 
 

@@ -151,8 +151,8 @@ def main():
     ap.add_argument('--land-rows', type=Path); ap.add_argument('--land-rows-sha256')
     ap.add_argument('--land-runs', type=Path); ap.add_argument('--land-runs-sha256')
     ap.add_argument('--shore-pad-degrees', type=float, default=8.0)
-    ap.add_argument('--research-shore-method', choices=['spherical-grid-edge-v1'],
-                    help='draft research only: use the recovered spherical grid-edge shoreline method')
+    ap.add_argument('--research-shore-method', choices=['wgs84-coastal-4neighbor-center-v2'],
+                    help='draft research only: use the WGS84 ellipsoidal four-neighbor coastal land-cell-center method')
     ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow a correctly labeled draft decision and entity revision')
     ap.add_argument('--allow-unverified-snapshot', action='store_true', help='test only: Neon acceptance cannot yet be authenticated by this tool')
     ap.add_argument('--out', type=Path, required=True, help='new output directory outside input root')
@@ -180,7 +180,7 @@ def main():
     is_shared = basin['assignment_method'] == 'shared_nearest_assigned_shore'
     if is_shared and not land_rows_path: raise ValueError('shared basin requires pinned final-land RLEs')
     if is_shared and (not args.allow_draft_snapshot or snapshot['decision_revision']['status'] != 'draft'
-                      or args.research_shore_method != 'spherical-grid-edge-v1'):
+                      or args.research_shore_method != 'wgs84-coastal-4neighbor-center-v2'):
         raise ValueError('shared shoreline distance method is not a versioned decision; explicit draft research method is required')
     if archive:
         extraction = validate_extraction(extraction_path, args.extraction_manifest_sha256, archive, geometry, snapshot, basin, source, args.policy_sha256)
@@ -204,7 +204,7 @@ def main():
             raise ValueError('invalid land RLE offsets')
         pairs, tolerance = selection
         shore_bounds = shared.crop_bounds((x0,x1,y0,y1), W, H, STEP, args.shore_pad_degrees)
-        edges = shared.edges_for_crop((rows,runs), (lr,lu), shore_bounds, W, H, STEP, [p[1] for p in pairs])
+        edges = shared.centers_for_crop((rows,runs), (lr,lu), shore_bounds, W, H, STEP, [p[1] for p in pairs])
         indexes = shared.make_indexes(edges, pairs)
     create_directory_exclusive(out)
     feature_path = out/'source.geojson'; raster_path = out/'source-mask.dat'
@@ -246,7 +246,7 @@ def main():
                     cuts=np.r_[0,np.flatnonzero(np.diff(codes)!=0)+1,len(codes)]
                     for i,j in zip(cuts[:-1],cuts[1:]):
                         q={'start':start+int(i),'end':start+int(j),'code':int(codes[i]),
-                           'rule_id':'research-named-basin-nearest-final-shore-v1','member_id':member_id}
+                           'rule_id':'research-named-basin-nearest-final-center-v2','member_id':member_id}
                         if records and records[-1]['end']==q['start'] and records[-1]['code']==q['code']:
                             records[-1]['end']=q['end']
                         else: records.append(q)
@@ -277,10 +277,10 @@ def main():
                                  'geometry_validity':'OGR/GEOS ST_IsValid and ST_IsEmpty checked',
                                  'bounds_columns_rows':[x0,x1,y0,y1]},
                 'algorithm_sha256':digest(Path(__file__)),
-                'nearest_assignment_audit': {'shore_method':'spherical-grid-edge-v1 (research, not an approved decision)', 'shore_crop':shore_bounds,'shore_segment_count':len(edges['mids']),
+                'nearest_assignment_audit': {'shore_method':'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)', 'shore_crop':shore_bounds,'coastal_center_count':len(edges['mids']),
                     'certified_bound_cells':certified,'exact_distance_cells':exact,
                     'shared_nearest_sha256':digest(Path(shared.__file__)),
-                    'spherical_shore_sha256':digest(Path(shared.geom.__file__))} if is_shared else None,
+                    'shore_geometry_sha256':digest(Path(shared.__file__))} if is_shared else None,
                 'tiles':[{'core_rows':[0,H],'core_cols':[0,W],'span_file':{'path':assignment.name,'sha256':digest(assignment)}}]}
     write_json_exclusive(out/'manifest.json', manifest, indent=2)
     print(json.dumps({'cells':cells,'spans':spans_count,'rows':row_count,'assignment_sha256':digest(assignment)}))

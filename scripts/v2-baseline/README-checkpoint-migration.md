@@ -1,7 +1,0 @@
-# Legacy land checkpoint migration
-
-`migrate_land_checkpoint.py OLD_CHECKPOINT OLD_SCRIPT NEW_SCRIPT NEW_CHECKPOINT` converts the legacy checkpoint's numeric-key checksum to the corrected JSON-key checksum. It reads and checks the old script hash embedded in the checkpoint, verifies the legacy checksum, preserves the component distances and cursor, and writes a new file and a `.migration.json` evidence sidecar. It never overwrites the original. The input must be a stable snapshot, not a file being modified in place.
-
-**Review the old and new scripts for semantic equivalence before migration.** This utility checks their hashes and encoding, but cannot prove the new script computes the same algorithm. Resume will also verify the config, grid, pinned inputs, component streams, code hashes, row cursor and query counts. Keep the original checkpoint and scripts until the resumed output has passed its validation. An interrupted migration can leave a partial destination or sidecar: verify the complete sidecar's status and destination SHA-256 before use, and use a new destination for any retry. The converted checkpoint is research recovery only, not approved geography.
-
-Run the portable synthetic checks with `python -m unittest -v test_migrate_land_checkpoint`. They cover numeric-key ordering, data preservation, corruption, wrong old script and no-overwrite. They do not include the private source checkpoint or prove full-scale output correctness.

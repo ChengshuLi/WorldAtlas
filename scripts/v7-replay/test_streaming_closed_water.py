@@ -1,4 +1,4 @@
-import gzip,hashlib,json,sqlite3,struct,tempfile,unittest
+import contextlib,gzip,hashlib,json,sqlite3,struct,tempfile,unittest
 from pathlib import Path
 import numpy as np
 import streaming_closed_water as s
@@ -36,13 +36,13 @@ class StreamingTest(unittest.TestCase):
  def test_streamed_direct_mixed_and_cut(self):
   m=self.run_stage();self.assertEqual((m['assigned_cells'],m['pending_cells']),(2,1));self.assertEqual(m['status'],'partial')
   with gzip.open(self.root/'out/closed-water-assignments.jsonl.gz','rt') as f:z=json.loads(f.readline())
-  self.assertEqual([(x['start'],x['end'],x['code']) for x in z['spans']],[(5,6,2),(10,11,1)])
+  self.assertEqual([(x['start'],x['end'],x['code']) for x in z['spans']],[(5,6,1),(10,11,1)])
   with gzip.open(self.root/'out/pending-components.jsonl.gz','rt') as f:pending=json.loads(f.readline())
   self.assertEqual(pending['reason'],'pending-source-cut-contact')
   self.assertEqual(sha(self.root/'out/work.sqlite3'),m['work_database']['sha256'])
  def test_work_index_keeps_component_decisions(self):
   m=self.run_stage('indexed')
-  with sqlite3.connect(self.root/'indexed/work.sqlite3') as db:
+  with contextlib.closing(sqlite3.connect(self.root/'indexed/work.sqlite3')) as db:
    self.assertEqual(db.execute('SELECT count(*) FROM spans').fetchone()[0],3)
    methods=dict(db.execute('SELECT root,method FROM components'))
    self.assertEqual(methods,{1:'mixed',2:'direct',3:'pending-source-cut-contact'})

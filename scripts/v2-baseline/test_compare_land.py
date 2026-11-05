@@ -2,7 +2,7 @@ import json,tempfile,unittest
 from pathlib import Path
 import numpy as np
 import compare_land
-from test_build_land import pin,rle
+from fixture_land import pin,rle
 class ComparisonTest(unittest.TestCase):
  def test_runwise_confusion_and_tampering(self):
   with tempfile.TemporaryDirectory() as d:

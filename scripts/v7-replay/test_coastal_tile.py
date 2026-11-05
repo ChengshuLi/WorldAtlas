@@ -42,7 +42,7 @@ class TileTest(unittest.TestCase):
  def test_shore_segment_limit(self):
   s,p,l=self.fixture()
   with tempfile.TemporaryDirectory() as d:
-   with self.assertRaisesRegex(ValueError,'segment limit'):b.run(s,'a'*64,p,l,Path(d)/'out',360,180,[3,9,89,90],180,{},allow_selected_research=True,max_shore_segments=1)
+   with self.assertRaisesRegex(ValueError,'center limit'):b.run(s,'a'*64,p,l,Path(d)/'out',360,180,[3,9,89,90],180,{},allow_selected_research=True,max_coastal_centers=1)
  def test_missing_policy_or_bad_core_fails(self):
   s,p,l=self.fixture();s['policies']=[]
   with tempfile.TemporaryDirectory() as d:

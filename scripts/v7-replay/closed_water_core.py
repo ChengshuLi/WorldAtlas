@@ -17,22 +17,19 @@ def policy(snapshot, *, allow_selected_research=False):
     if (not allow_selected_research or snapshot.get('decision_revision',{}).get('status')!='draft'
             or decision.get('evidence',{}).get('execution_status')!='selected_for_research'):
         raise ValueError('selected draft closed-water policy and explicit research opt-in required')
-    expected={'method','boundary_participants','distance','earth_radius_metres','latitude_grid_edge_contacts',
+    expected={'method','boundary_participants','distance','ellipsoid','latitude_grid_edge_contacts',
               'multiple_participants','no_participants','one_participant','source_cut_contacts',
               'tie_rules','unresolved_zero_neighbors','shore_geometry'}
-    if not isinstance(d,dict) or set(d)!=expected or d.get('method')!='closed_water_component_v1':
+    if not isinstance(d,dict) or set(d)!=expected or d.get('method')!='closed_water_component_v2':
         raise ValueError('unsupported closed-water policy')
     p=d
     if (p['boundary_participants']!='adjacent_final_water_or_assigned_land'
         or p['latitude_grid_edge_contacts']!='report_only' or p['unresolved_zero_neighbors']!='report_only'
         or p['source_cut_contacts']!='retain_ocean_parent_source_cut_review'
         or p['one_participant']!='direct_fill' or p['multiple_participants']!='nearest_assigned_land_shore'
-        or p['no_participants']!='report_only' or p['shore_geometry']!='physical_land_water_grid_edges'
-        or p['distance']!='spherical_segment' or isinstance(p['earth_radius_metres'],bool)):
+        or p['no_participants']!='report_only' or p['shore_geometry']!='physical_coastal_land_cell_centers_4_neighbor_v1'
+        or p['distance']!='wgs84_ellipsoidal_center_to_center' or p['ellipsoid']!='WGS84'):
         raise ValueError('unsupported closed-water safety or geometry rule')
-    try:radius=float(p['earth_radius_metres'])
-    except (ValueError,TypeError):raise ValueError('invalid sphere radius') from None
-    if not math.isfinite(radius) or radius!=shore.geom.R:raise ValueError('unsupported sphere radius')
     tie=p['tie_rules']; ids=tie.get('priority_entity_ids') if isinstance(tie,dict) else None
     fake={'assignment_method':'shared_nearest_assigned_shore','participant_entity_ids':ids,'tie_rules':tie}
     pairs,tol=shore.selected_rules(snapshot,fake)

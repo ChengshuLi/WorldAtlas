@@ -4,7 +4,7 @@ import argparse,hashlib,json,math,shutil,subprocess,sys
 from pathlib import Path
 HERE=Path(__file__).resolve().parent;sys.path.insert(0,str(HERE.parent))
 import exclusive_outputs as xo
-from coastal_band import pin,sha
+from file_integrity import pin,sha
 
 def build(config_path,output):
  config_path=Path(config_path).resolve();raw=config_path.read_bytes();c=json.loads(raw);required={'schema','grid','physical_rows','physical_runs','physical_report'}
@@ -13,7 +13,7 @@ def build(config_path,output):
  if (set(g)!={'width','height','west','north','step'} or type(w) is not int or type(h) is not int or w<1 or h<1 or g['west']!=-180 or type(g['north']) not in (int,float) or not math.isfinite(g['north']) or g['north']>90 or type(step) not in (int,float) or not math.isfinite(step) or step<=0 or abs(w*step-360)>1e-8 or g['north']-h*step < -90-1e-8 or type(reserve) is not int or reserve<0):raise ValueError('invalid grid or disk reserve')
  keys=('physical_rows','physical_runs','physical_report');pins={k:pin(c[k]) for k in keys};physical=json.loads(pins['physical_report'].read_bytes());outputs=physical.get('physical_output_sha256',physical.get('output_sha256',{}))
  if physical.get('status')!='candidate-only' or physical.get('grid')!=g or outputs.get('rows.u32le')!=c['physical_rows']['sha256'] or outputs.get('runs.u32le')!=c['physical_runs']['sha256']:raise ValueError('physical report mismatch')
- out=Path(output).resolve();source=HERE.parent/'v7-land'/'build_components.cpp';code_paths={'builder':Path(__file__).resolve(),'component_source':source,'pin_io':HERE/'coastal_band.py','output_io':Path(xo.__file__).resolve()};code={k:sha(v) for k,v in code_paths.items()}
+ out=Path(output).resolve();source=HERE.parent/'v7-land'/'build_components.cpp';code_paths={'builder':Path(__file__).resolve(),'component_source':source,'pin_io':HERE/'file_integrity.py','output_io':Path(xo.__file__).resolve()};code={k:sha(v) for k,v in code_paths.items()}
  if out.exists() or any(out==p or out in p.parents or p.parent in out.parents for p in [config_path,*pins.values(),*code_paths.values()]):raise ValueError('output must be new and outside input directories')
  if shutil.disk_usage(out.parent).free<reserve:raise ValueError('free disk below configured reserve')
  xo.create_directory_exclusive(out);binary=out/'component-builder';built=subprocess.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',str(source),'-o',str(binary)],capture_output=True,text=True)

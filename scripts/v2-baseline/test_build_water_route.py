@@ -2,7 +2,7 @@ import json,tempfile,unittest
 from pathlib import Path
 import numpy as np
 import build_water_route as route
-from test_build_land import rle
+from fixture_land import rle
 
 class WaterRouteTest(unittest.TestCase):
  def fixture(self,root,blocked=False):

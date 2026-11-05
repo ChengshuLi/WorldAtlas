@@ -2,7 +2,7 @@ import json,tempfile,unittest
 from pathlib import Path
 import numpy as np
 import build_regions,build_water_route
-from test_build_land import pin,rle
+from fixture_land import pin,rle
 
 class RegionTest(unittest.TestCase):
  def setUp(self):

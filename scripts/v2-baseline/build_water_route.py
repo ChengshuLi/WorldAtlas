@@ -7,8 +7,8 @@ HERE=Path(__file__).resolve().parent;sys.path.insert(0,str(HERE.parent/'v7-repla
 import build_coastal_tile as io
 import shared_nearest as shore
 import exclusive_outputs as xo
-import coastal_band as band_io
-from coastal_band import pin,sha
+import file_integrity as band_io
+from file_integrity import pin,sha
 
 def build(config_path,output):
  config_path=Path(config_path).resolve();raw=config_path.read_bytes();c=json.loads(raw);required={'schema','grid','physical_rows','physical_runs','bounds','start','end'}

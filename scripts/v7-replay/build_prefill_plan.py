@@ -58,7 +58,7 @@ def coastline_policy(policy):
         raise ValueError('exactly one identified coastline assignment decision is required')
     require_selected_policy(policy, records[0])
     definition = records[0].get('definition')
-    if isinstance(definition, dict) and definition.get('method') == 'nearest_final_shore_band_v1':
+    if isinstance(definition, dict) and definition.get('method') == 'nearest_final_shore_band_v2':
         if policy.get('decision_revision',{}).get('status') != 'draft':
             raise ValueError('derived coastline method is draft research only')
         import coastal_core
@@ -91,8 +91,7 @@ def validate_land_report(report, report_path, physical, land, snapshot_hash, rev
     connectivity verification or authentication of source provenance.
     """
     if report.get('schema') == 'single-generation-nearest-report-v1':
-        from nearest_land_lineage import validate_nearest_land_report
-        return validate_nearest_land_report(report,report_path,physical,land,snapshot_hash,revision,input_root,canonical_physical_grid())
+        raise ValueError('retired spherical nearest-land reports cannot drive new builds')
     digest = lambda value: isinstance(value, str) and len(value) == 64 and all(ch in '0123456789abcdef' for ch in value)
     stream = report.get('schema') == 'single-generation-direct-land-report-v1'
     if stream:
@@ -298,13 +297,13 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
             audit = manifest.get('nearest_assignment_audit') or {}
             count = manifest.get('physical_water_cells')
             certified, exact = audit.get('certified_bound_cells'), audit.get('exact_distance_cells')
-            hashes = (manifest.get('algorithm_sha256'), audit.get('shared_nearest_sha256'), audit.get('spherical_shore_sha256'))
+            hashes = (manifest.get('algorithm_sha256'), audit.get('shared_nearest_sha256'), audit.get('shore_geometry_sha256'))
             valid_hash = lambda value: isinstance(value, str) and len(value) == 64 and all(ch in '0123456789abcdef' for ch in value)
             if (source.get('land_rows_sha256') != rles['land']['rows_sha256']
                     or source.get('land_runs_sha256') != rles['land']['runs_sha256']
                     or source.get('decision_status') != revision['status']
                     or source.get('tie_rules') != basin.get('tie_rules')
-                    or audit.get('shore_method') != 'spherical-grid-edge-v1 (research, not an approved decision)'
+                    or audit.get('shore_method') != 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
                     or type(count) is not int or count < 0 or type(certified) is not int or certified < 0
                     or type(exact) is not int or exact < 0 or certified + exact != count
                     or not all(valid_hash(x) for x in hashes)):
@@ -315,7 +314,7 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
     return {'schema':'worldatlas-v7-full-grid-composition-plan-v1', 'status':'fresh-prefill-unverified-test-candidate',
             'purpose':'Fresh selected named basins and coast, with residual marine water code 0.',
             'land_input_kind':'direct-research' if land_key == 'land' else 'historical-v6-replay',
-            'research_shore_method': 'spherical-grid-edge-v1' if shared else None,
+            'research_shore_method': 'wgs84-coastal-4neighbor-center-v2' if shared else None,
             'grid':{'width':c.W,'height':c.H}, 'rle_inputs':rles, 'water_layers':layers,
             'decision_snapshot_sha256':c.sha256(policy_path), 'decision_revision':revision['id'], 'decision_revision_status':revision['status'], 'entity_revision':revision['entity_revision'],
             'precedence':'As specified by the revisioned layer-precedence decision; undeclared overlaps fail.'}
@@ -327,7 +326,7 @@ def main():
     ap.add_argument('--policy', type=Path, required=True); ap.add_argument('--policy-sha256', required=True)
     ap.add_argument('--allow-unverified-snapshot', action='store_true', help='test only: Neon acceptance cannot yet be authenticated by this tool')
     ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow explicitly draft Neon evidence')
-    ap.add_argument('--allow-research-shore', action='store_true', help='research only: allow the unapproved spherical grid-edge shore method')
+    ap.add_argument('--allow-research-shore', action='store_true', help='research only: allow the unapproved WGS84 coastal land-cell-center method')
     ap.add_argument('--allow-historical-v6', action='store_true', help='historical replay only: permit the V6 land grid')
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args()

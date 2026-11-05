@@ -9,8 +9,8 @@ def snap(priority=(2,1,3,4,5,6)):
             'category_bindings':[{'entity_id':i,'physical_class':k,'code':i+(16 if k=='land' else 0)}
                                 for i in range(1,7) for k in ('land','water')],
             'policies':[{'id':'test-coast','kind':'coastline_assignment','evidence':{'execution_status':'selected_for_research'},
-               'definition':{'method':'nearest_final_shore_band_v1','band_metres':'60000','band_tolerance_metres':'0.000001',
-                'shore_geometry':'physical_land_water_grid_edges','distance':'spherical_segment','earth_radius_metres':'6371008.8',
+               'definition':{'method':'nearest_final_shore_band_v2','band_metres':'120000','band_tolerance_metres':'0.000001',
+                'shore_geometry':'physical_coastal_land_cell_centers_4_neighbor_v1','distance':'wgs84_ellipsoidal_center_to_center','ellipsoid':'WGS84',
                 'land_input':'final_decision_assigned_land','water_input':'physical_water',
                 'tie_rules':{'method':'within_minimum_distance_tolerance','tolerance_metres':'0.00001',
                 'tie_break':'first_entity_in_priority_order','priority_entity_ids':list(priority)}}}]}
@@ -21,7 +21,7 @@ class CoastalTest(unittest.TestCase):
         self.p=np.ones((180,360),dtype=np.uint32);self.l=np.zeros((180,360),dtype=np.uint32)
         self.p[89,4]=self.p[89,6]=17;self.l[89,4]=17;self.l[89,6]=18
         self.bounds=(0,360,0,180);_,self.pairs,self.tol,self.band,self.btol=c.policy(snap(),allow_selected_research=True)
-        self.edges=c.shore.edges_for_crop(rle(self.p),rle(self.l),self.bounds,360,180,1,[17,18,19,20,21,22])
+        self.edges=c.shore.centers_for_crop(rle(self.p),rle(self.l),self.bounds,360,180,1,[17,18,19,20,21,22])
         self.idx=c.index_present(self.edges,self.pairs)
     def test_band_and_entity_tie(self):
         # Row 89, midpoint x5 and distant x8. Two shores are equidistant to x5.
@@ -34,7 +34,7 @@ class CoastalTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'opt-in'):c.policy(snap())
         x=snap();x['policies']=[]
         with self.assertRaisesRegex(ValueError,'policy'):c.policy(x,allow_selected_research=True)
-        x=snap();x['policies'][0]['definition']['distance']='other'
+        x=snap();x['policies'][0]['definition']['distance']='spherical_segment'
         with self.assertRaisesRegex(ValueError,'distance'):c.policy(x,allow_selected_research=True)
         x=snap();x['policies'][0]['definition']['tie_rules']['priority_entity_ids']=[1,2]
         with self.assertRaises(ValueError):c.policy(x,allow_selected_research=True)
