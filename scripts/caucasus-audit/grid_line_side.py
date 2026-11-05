@@ -1,4 +1,4 @@
-"""Screen grid-difference centers against an oriented WGS84 geodesic line.
+"""Screen grid-difference centers against an oriented coordinate-linear WGS84 GeoJSON line.
 
 Numerical nearest-edge search has 0.02 m decision tolerance. A near-line center
 is reported as 'on'; closest-segment ties can make side ambiguous. This is a
