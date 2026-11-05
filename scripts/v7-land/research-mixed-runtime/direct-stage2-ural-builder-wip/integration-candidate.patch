@@ -1,0 +1,1186 @@
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,13 @@
+ # Combined direct stage-2 integration: work in progress
+ 
+-Current status: see `INTEGRATION-STATUS.md` for the later bounded tests and
++Current status: see `handoff/STATUS.md` for the latest candidate and its limits.
++`v2-runtime-freeze.sha256` is a historical 14-file baseline, not the current
++Ural candidate. `ural-runtime-freeze-candidate.sha256` lists the current 17
++pins enforced by `runtime/direct_seed.py`; it is unreviewed as an executable
++freeze. The paragraphs below and `INTEGRATION-STATUS.md` describe historical
++stages, not the current code.
++
++Historical status: see `INTEGRATION-STATUS.md` for earlier bounded tests and
+ local wiring. This README describes the earlier reuse-only merge below; in the
+ current scratch code, fresh direct and Caucasus calls have been wired behind
+ disabled execution gates, not validated as a complete outer pipeline.
+--- a/caucasus-audit/caucasus_seed_gate.py
++++ b/caucasus-audit/caucasus_seed_gate.py
+@@ -105,7 +105,14 @@
+         directory = Path(directory)
+         guide, output = directory / 'selected.json', directory / 'reconstructed.json'
+         guide.write_text(json.dumps(boundary['geometry'], sort_keys=True, separators=(',', ':'), allow_nan=False))
+-        command = [sys.executable, '-I', str(HERE / 'caucasus_source_assembly.py'), '--decisions', str(recipe),
++        if sys.flags.isolated and sys.flags.no_site:
++            boot = ("import json,runpy,sys; sys.path[:0]=json.loads(sys.argv[1]); "
++                    "p=sys.argv[2]; sys.argv=sys.argv[2:]; runpy.run_path(p,run_name='__main__')")
++            command = [sys.executable, '-I', '-S', '-B', '-c', boot, json.dumps(sys.path),
++                       str(HERE / 'caucasus_source_assembly.py')]
++        else:
++            command = [sys.executable, '-I', str(HERE / 'caucasus_source_assembly.py')]
++        command += ['--decisions', str(recipe),
+                    '--decisions-sha256', recipe_sha, '--hydro-zip', str(hydro), '--author', str(author),
+                    '--selected', str(guide), '--output', str(output)]
+         p = subprocess.run(command, check=True, text=True, capture_output=True)
+--- a/caucasus-audit/caucasus_source_assembly.py
++++ b/caucasus-audit/caucasus_source_assembly.py
+@@ -26,6 +26,14 @@
+     return digest.hexdigest()
+ 
+ 
++def isolated_command(script):
++    if sys.flags.isolated and sys.flags.no_site:
++        boot = ("import json,runpy,sys; sys.path[:0]=json.loads(sys.argv[1]); "
++                "p=sys.argv[2]; sys.argv=sys.argv[2:]; runpy.run_path(p,run_name='__main__')")
++        return [sys.executable, '-I', '-S', '-B', '-c', boot, json.dumps(sys.path), str(script)]
++    return [sys.executable, '-I', str(script)]
++
++
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     for name in ('decisions', 'decisions-sha256', 'hydro-zip', 'author', 'selected', 'output'):
+@@ -50,9 +58,9 @@
+                     dest.write(block)
+         recipe = tmp / 'expanded.json'
+         result = tmp / 'replay.json'
+-        subprocess.run([sys.executable, '-I', str(HERE / 'caucasus_compact_selectors.py'), 'expand', '--input', a.decisions,
++        subprocess.run(isolated_command(HERE / 'caucasus_compact_selectors.py') + ['expand', '--input', a.decisions,
+                         '--input-sha256', a.decisions_sha256, '--output', str(recipe)], check=True)
+-        subprocess.run([sys.executable, '-I', str(HERE / 'caucasus_selector_replay.py'), '--recipe', str(recipe),
++        subprocess.run(isolated_command(HERE / 'caucasus_selector_replay.py') + ['--recipe', str(recipe),
+                         '--recipe-sha256', sha(recipe), '--shp', str(shp), '--author', a.author,
+                         '--compare', a.selected, '--output', str(result)], check=True)
+         value = json.loads(result.read_text(encoding='utf-8'))
+--- a/caucasus-audit/caucasus_stage2_binding.py
++++ b/caucasus-audit/caucasus_stage2_binding.py
+@@ -38,16 +38,19 @@
+ 
+ def run_seed(config, request, request_sha256, producer_dir, producer_sha256,
+              work, output, gate_report, guard=lambda: None):
++    if not (sys.flags.isolated and sys.flags.no_site):
++        raise ValueError('Caucasus seed binding requires isolated no-site Python')
+     verify_config(config, guard)
+     if digest(request) != request_sha256:
+         raise ValueError('seed request pin mismatch')
+     validate_direct_request(request)
+-    # Isolated mode ignores PYTHONPATH and user site. Explicitly add only the
+-    # pinned gate directory for its sibling imports; -I otherwise omits it.
+-    bootstrap = ("import pathlib,runpy,sys; p=sys.argv.pop(1); "
+-                 "sys.path.insert(0,str(pathlib.Path(p).resolve().parent)); "
++    # The isolated outer caller must authenticate its explicit dependency paths.
++    # Carry them into the no-site child without processing .pth files.
++    bootstrap = ("import json,runpy,sys; paths=json.loads(sys.argv[1]); "
++                 "sys.path[:0]=paths; p=sys.argv[2]; sys.argv=sys.argv[2:]; "
+                  "runpy.run_path(p,run_name='__main__')")
+-    cmd = [sys.executable, '-I', '-c', bootstrap, str(HERE / 'caucasus_seed_gate.py'),
++    cmd = [sys.executable, '-I', '-S', '-B', '-c', bootstrap,
++           json.dumps([str(HERE), *sys.path]), str(HERE / 'caucasus_seed_gate.py'),
+            '--request', str(request), '--request-sha256', request_sha256,
+            '--recipe', config['recipe']['path'], '--recipe-sha256', config['recipe']['sha256'],
+            '--hydro', config['hydro']['path'], '--author', config['author']['path'],
+--- /dev/null
++++ b/caucasus-audit/test_caucasus_process_isolation.py
+@@ -0,0 +1,80 @@
++"""Bounded checks for isolation of the Caucasus assembly subprocesses."""
++import json
++import os
++import subprocess
++import sys
++import tempfile
++import unittest
++import zipfile
++from pathlib import Path
++from unittest.mock import patch
++
++import caucasus_seed_gate as gate
++import caucasus_source_assembly as assembly
++import caucasus_stage2_binding as binding
++
++
++class ProcessIsolation(unittest.TestCase):
++    def test_binding_rejects_caller_with_site_enabled(self):
++        script = ("import sys; sys.path.insert(0, sys.argv[1]); "
++                  "import caucasus_stage2_binding as b; "
++                  "b.run_seed({},'request','x','producer','x','work','output','report')")
++        result = subprocess.run([sys.executable, '-I', '-c', script,
++                                 str(Path(binding.__file__).resolve().parent)],
++                                text=True, capture_output=True)
++        self.assertNotEqual(result.returncode, 0)
++        self.assertIn('requires isolated no-site Python', result.stderr)
++
++    def test_assembler_children_ignore_python_environment_and_user_site(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            hostile = root / 'hostile'
++            hostile.mkdir()
++            marker = root / 'startup-ran'
++            (hostile / 'sitecustomize.py').write_text('open(%r,"w").write("ran")\n' % str(marker))
++            # Fake only the selectors, retaining real subprocess startup and the
++            # actual assembler. Both child processes must enter isolated mode.
++            (root / 'caucasus_compact_selectors.py').write_text(
++                "import json,sys\nassert sys.flags.isolated and sys.flags.no_site == %r\n" % bool(sys.flags.no_site) +
++                "assert %r not in sys.path\n" % str(hostile) +
++                "open(sys.argv[sys.argv.index('--output')+1],'w').write('{}')\n")
++            (root / 'caucasus_selector_replay.py').write_text(
++                "import json,sys\nassert sys.flags.isolated and sys.flags.no_site == %r\n" % bool(sys.flags.no_site) +
++                "assert %r not in sys.path\n" % str(hostile) +
++                "json.dump({'comparison': {'possible_changed_centers':0,"
++                "'maximum_wgs84_vertex_displacement_m':0}, 'geometry':{},"
++                "'geometry_sha256':'test'},open(sys.argv[sys.argv.index('--output')+1],'w'))\n")
++            hydro = root / 'hydro.zip'
++            with zipfile.ZipFile(hydro, 'w') as archive:
++                archive.writestr('hybas_eu_lev12_v1c.shp', b'fixture')
++            author, recipe, selected, output = (root / n for n in ('author', 'recipe', 'selected', 'output'))
++            for path in (author, recipe, selected):
++                path.write_text('{}')
++            args = ['assembler', '--decisions', str(recipe), '--decisions-sha256', assembly.sha(recipe),
++                    '--hydro-zip', str(hydro), '--author', str(author), '--selected', str(selected),
++                    '--output', str(output)]
++            env = {'PYTHONPATH': str(hostile), 'PYTHONUSERBASE': str(hostile)}
++            with patch.object(assembly, 'HERE', root), patch.object(assembly, 'HYDRO_ZIP_SHA', assembly.sha(hydro)), \
++                 patch.object(assembly, 'AUTHOR_SHA', assembly.sha(author)), patch.object(sys, 'argv', args), \
++                 patch.dict(os.environ, env):
++                assembly.main()
++            self.assertEqual(json.loads(output.read_text()), {})
++            self.assertFalse(marker.exists())
++
++    def test_binding_bootstrap_uses_isolation_and_pinned_sibling_path(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            (root / 'sibling_fixture.py').write_text('VALUE = 42\n')
++            (root / 'caucasus_seed_gate.py').write_text(
++                "import sibling_fixture,sys\nassert sys.flags.isolated and sys.flags.no_site\nassert sibling_fixture.VALUE == 42\n")
++            request = root / 'request'
++            request.write_text('{}')
++            with patch.object(binding, 'HERE', root), patch.object(binding, 'verify_config'), \
++                 patch.object(binding, 'validate_direct_request'):
++                pin = {'path': 'unused', 'sha256': '0' * 64}
++                binding.run_seed({'recipe': pin, 'hydro': pin, 'author': pin}, request,
++                                 gate.digest(request), root, '0' * 64, root, root, root / 'report')
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- a/runtime/build_stage2.py
++++ b/runtime/build_stage2.py
+@@ -71,10 +71,11 @@
+  need(report==seed and q['grid']==grid and q['inputs']['panama_osm_archive']==db['panama_osm_archive'] and outer['inputs'].get('panama_osm_archive')==db['panama_osm_archive'],'direct seed report/archive mismatch')
+  expected={dst:outer['inputs'][src] for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel'),('panama_osm_archive','panama_osm_archive'))}
+  expected['resolution']=cfg['inputs']['resolution_report']
+- need(q==direct_seed.request(grid,expected,outer['seed_controls']['strip_rows']) and outer['seed_controls']==q['controls'],'direct seed/outer request mismatch')
++ need(q==direct_seed.request(grid,expected,outer['seed_controls']['strip_rows'],outer.get('ural_source')) and outer['seed_controls']==q['controls'],'direct seed/outer request mismatch')
+  for seed_key,core_key in (('snapshot','decision_snapshot'),('resolution','resolution_report'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest')):need(q['inputs'][seed_key]['sha256']==pins[core_key],'direct seed/core input mismatch: '+seed_key)
+  need(q['inputs']['seed_builder']==cfg['seed_code_files']['rasterizer'] and q['inputs']['seed_kernel']==cfg['seed_code_files']['rasterizer_kernel'],'direct seed rasterizer mismatch')
+  direct_seed.verify_panama_source(request_path,paths['seed_report'].parent,guard)
++ direct_seed.verify_ural_source(request_path,paths['seed_report'].parent,guard)
+  need(verify_inputs.bounded_bytes(outer_path,1<<20,guard)==outer_raw,'direct outer config changed')
+  return q
+ 
+@@ -82,12 +83,21 @@
+  keys={'minimum_memory_kib','minimum_free_bytes','chunk_columns','checkpoint_seconds','tile_cache_bytes','numerical_guard_metres','block_records'}
+  need(isinstance(c,dict) and set(c)==keys and type(c['minimum_memory_kib']) is int and c['minimum_memory_kib']==0 and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>0 and type(c['chunk_columns']) is int and 1<=c['chunk_columns']<=1024 and type(c['block_records']) is int and 1<=c['block_records']<=100000 and type(c['checkpoint_seconds']) in (int,float) and 0<c['checkpoint_seconds']<=3600 and type(c['tile_cache_bytes']) is int and 1024<=c['tile_cache_bytes']<=64*1024*1024 and type(c['numerical_guard_metres']) in (int,float) and c['numerical_guard_metres']>=1000,'invalid resource/algorithm controls')
+ 
+-def disjoint(cfg,config_path,work,output):
++def prelock_ural_disjoint(outer,request,work,output):
++ need(isinstance(outer,dict) and isinstance(request,dict),'invalid outer or seed request')
++ need(('ural_source' in outer)==('ural_source' in request) and outer.get('ural_source')==request.get('ural_source'),'Ural outer/request pre-lock mismatch')
++ if 'ural_source' in request:
++  direct_seed.require_disjoint_ural(request['ural_source'],work,output,[work.parent/(work.name+'.lock')])
++
++def disjoint(cfg,config_path,work,output,guard=lambda:None):
+  specs=list(cfg['inputs'].values())+list(cfg['seed_code_files'].values())+list(cfg['resolution_code_files'].values())+list(cfg['hint_code_files'].values())+[cfg['orchestration']['derived_manifest'],cfg['orchestration']['physical_lineage_report']]+([cfg['orchestration']['seed_handoff_attestation']] if cfg['orchestration']['seed_handoff_attestation'] else [])+list((cfg['orchestration']['seed_handoff_context'] or {}).values())
+  if cfg.get('caucasus_binding'):
+   cb=cfg['caucasus_binding'];specs += [cb['request'],cb['report']]+[cb['config'][k] for k in ('recipe','hydro','author')]
+  if cfg.get('direct_seed_binding'):
+   db=cfg['direct_seed_binding'];specs += [db['request'],db['panama_osm_archive'],db['outer_config']]
++  outer=direct_seed.read_json(verify_inputs.bounded_bytes(pin(db['outer_config'],guard),1<<20,guard))
++  request=direct_seed.read_json(verify_inputs.bounded_bytes(pin(db['request'],guard),1<<20,guard))
++  prelock_ural_disjoint(outer,request,work,output)
+  dirs={Path(x['path']).resolve().parent for x in specs}|{HERE,config_path.parent,Path(cfg['tile_directory']).resolve()}
+  if cfg.get('caucasus_binding'):dirs.add(caucasus_directory())
+  for t in (work,output):need(all(not t.is_relative_to(d) and not d.is_relative_to(t) for d in dirs),'work/output overlaps input or code')
+@@ -121,7 +131,7 @@
+  code_files={}
+  for field in ('seed_code_files','resolution_code_files','hint_code_files'):
+   code_files[field]={name:pin(v,guard) for name,v in cfg[field].items()}
+- derived_path=pin(cfg['orchestration']['derived_manifest'],guard);derived=read_json(derived_path,guard);need(derived.get('schema')=='stage2-fresh-derived-v1' and derived.get('outer_config_sha256')==cfg['orchestration']['outer_config_sha256'] and derived.get('orchestrator_sha256')==cfg['orchestration']['orchestrator_sha256'] and all(derived.get('artifacts',{}).get(k)==inp[k] for k in ('resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives')),'derived manifest mismatch');disjoint(cfg,cp,work,output)
++ derived_path=pin(cfg['orchestration']['derived_manifest'],guard);derived=read_json(derived_path,guard);need(derived.get('schema')=='stage2-fresh-derived-v1' and derived.get('outer_config_sha256')==cfg['orchestration']['outer_config_sha256'] and derived.get('orchestrator_sha256')==cfg['orchestration']['orchestrator_sha256'] and all(derived.get('artifacts',{}).get(k)==inp[k] for k in ('resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives')),'derived manifest mismatch');disjoint(cfg,cp,work,output,guard)
+  handoff_pin=cfg['orchestration']['seed_handoff_attestation'];handoff_ctx=cfg['orchestration']['seed_handoff_context'];need((handoff_pin is None and handoff_ctx is None) or (isinstance(handoff_ctx,dict) and handoff_ctx.get('attestation')==handoff_pin),'seed handoff context mismatch');handoff_path=pin(handoff_pin,guard) if handoff_pin else None;handoff_att=read_json(handoff_path,guard) if handoff_path else None;handoff_refs=[handoff_att[k] for k in ('request','monitor','report','seed_rows','seed_runs')] if handoff_att else [];[pin(x,guard) for x in list((handoff_ctx or {}).values())+handoff_refs];need(derived.get('seed_handoff_attestation')==handoff_pin,'seed handoff binding mismatch');lineage_path=pin(cfg['orchestration']['physical_lineage_report'],guard);lineage=verify_physical_lineage.validate_combined(read_json(paths['decision_snapshot'],guard),pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard);need(read_json(lineage_path,guard)==lineage,'physical lineage report mismatch')
+  db=cfg.get('direct_seed_binding');validate_seed_mode(handoff_pin,db,derived)
+  if not resume:work.mkdir(mode=0o700)
+--- a/runtime/direct_seed.py
++++ b/runtime/direct_seed.py
+@@ -3,10 +3,12 @@
+ from pathlib import Path
+ import verify_inputs
+ HERE=Path(__file__).resolve().parent
+-DIRECT_SEED_FREEZE = {'seed_producer.py': '48d5719ca263ac28f9433c729d413207f069caa23fb72513d647ed26edd42b35', 'export_adapter.py': 'b13d2a5868542cf2946b25c495a12d1aa793470ec55f8744a4af9f96630213f9', 'seed_rules.py': '0e98f77341b8f297b434d46250f2e8e9f615e6a3764cad176fe3cdf40c52f342', 'region_client.py': '1deb45ca74f48439543eac5955cf1e3544d1248aba94e709e240e883801c7321', 'region_worker.py': '677bbe574abc79973af4834220ee615ce8d049db1fe2be75eac875c8897db136', 'regions.py': 'd8cf1c7629321e603c64bd96671498aab4ff78b6921d36b0a735e00a9b7705b0', 'closure_client.py': '51007b2f0e8e4244974ef1b698ee47dcee8739f0a2d5ce04c56bd9c1fe92c1e6', 'panama_seed_source.py': 'f6edea70f22993241acbffcfd1d02eefaf7a9e60b00925e8afdfb5963b781655', 'osm_source_handoff.py': 'ef6bc620e447f38be3524bcebeba6b1fe309ab2a4ea7f507ccf38c3ef4d30add', 'assemble_osm_ways.py': 'b1edf136b05109dcfb080158f58dffe9f910c6c30b3a654721478453b64270e2', 'rasterizer/build_seed.py': '8b59d9212064ed7fcdde37ca9ad53a8b1544c0b2abad4b1e2ac3c30e49b193a1', 'rasterizer/seed_kernel.cpp': '1543a7014f84eb5969b073435d463e838922c186d996ec9dcb0f68133ac15fa8', 'closure-checkers/validate_water_closure_v2.py': '5b01e11908293df6f941adbc391d4c9e7709f49c1b8ad60d46be0558d66ca6b3', 'closure-checkers/validate_terminal_closure.py': '08fd855bddd47dd2152ae0ac0fabd1e23e1d75db9e337a0af3a840a6787e1cb2'}
++DIRECT_SEED_FREEZE = {'seed_producer.py': '6a1e69411b25c67948c7b741b6330dc9e335c0b00688bad3a5bbc52247f151d3', 'export_adapter.py': 'e2874d45df5dff9e3a300f7e93f1fb1d1730196766d36dca14f0c629c62533c3', 'seed_rules.py': '0e98f77341b8f297b434d46250f2e8e9f615e6a3764cad176fe3cdf40c52f342', 'region_client.py': '1deb45ca74f48439543eac5955cf1e3544d1248aba94e709e240e883801c7321', 'region_worker.py': '3d7f14ba3df538fd35e40509e576faaf9b844ec3e4dbb3e8a8c8ddee062d5706', 'regions.py': 'd54df44cecddd76a9aae660112375b934700051d09b6facb6de0a9646a70c011', 'closure_client.py': '51007b2f0e8e4244974ef1b698ee47dcee8739f0a2d5ce04c56bd9c1fe92c1e6', 'panama_seed_source.py': 'f6edea70f22993241acbffcfd1d02eefaf7a9e60b00925e8afdfb5963b781655', 'osm_source_handoff.py': 'ef6bc620e447f38be3524bcebeba6b1fe309ab2a4ea7f507ccf38c3ef4d30add', 'assemble_osm_ways.py': 'b1edf136b05109dcfb080158f58dffe9f910c6c30b3a654721478453b64270e2', 'rasterizer/build_seed.py': '8b59d9212064ed7fcdde37ca9ad53a8b1544c0b2abad4b1e2ac3c30e49b193a1', 'rasterizer/seed_kernel.cpp': '1543a7014f84eb5969b073435d463e838922c186d996ec9dcb0f68133ac15fa8', 'closure-checkers/validate_water_closure_v2.py': '5b01e11908293df6f941adbc391d4c9e7709f49c1b8ad60d46be0558d66ca6b3', 'closure-checkers/validate_terminal_closure.py': '08fd855bddd47dd2152ae0ac0fabd1e23e1d75db9e337a0af3a840a6787e1cb2'}
++DIRECT_SEED_FREEZE['ural_seed_source.py']='073a57da44a2ad330ac38e0068144f1e00ac9bd3e51dce3c43531e10b6cb28ea'
++DIRECT_SEED_FREEZE['ural_producer_config.py']='9c041415e7a21723c7ceed887c647c4884d749e12a94f7b6ccc920d38912f3c9'
+ # The separately reviewed core source validator is an additional pinned dependency.
+ DIRECT_SEED_FREEZE['panama_core_validation.py']='c87ea27314b8db533e52fa2daf8ae98b2df1de3c9a4b0884d4efcbc874d9253a'
+-DIRECT_SEED_REPORTED = ('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','panama_seed_source.py','osm_source_handoff.py','assemble_osm_ways.py')
++DIRECT_SEED_REPORTED = ('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','panama_seed_source.py','osm_source_handoff.py','assemble_osm_ways.py','ural_seed_source.py','ural_producer_config.py')
+ def need(v,msg):
+  if not v:raise ValueError(msg)
+ def unique(pairs):
+@@ -16,14 +18,46 @@
+  return d
+ def invalid_constant(value):raise ValueError('non-finite JSON constant')
+ def read_json(raw):return json.loads(raw,object_pairs_hook=unique,parse_constant=invalid_constant)
+-def request(grid,inputs,strip_rows):
++def validate_ural_config(config):
++ keys={'recipe_dir','inputs_dir','helpers_dir','work_parent','inventories','python','dependency_dirs'}
++ need(isinstance(config,dict) and set(config)==keys,'invalid Ural configuration')
++ def absolute(p):return isinstance(p,str) and bool(p) and Path(p).is_absolute()
++ def digest(s):return isinstance(s,str) and len(s)==64 and all(c in '0123456789abcdef' for c in s)
++ def pin(p):return isinstance(p,dict) and set(p)=={'path','sha256'} and absolute(p['path']) and digest(p['sha256'])
++ for name in ('recipe_dir','inputs_dir','helpers_dir','work_parent'):need(absolute(config[name]),'Ural paths must be absolute')
++ need(pin(config['python']),'invalid Ural Python pin')
++ deps=config['dependency_dirs'];need(isinstance(deps,list) and 1<=len(deps)<=8 and all(pin(p) for p in deps),'invalid Ural dependency pins')
++ inventories=config['inventories'];names={'recipe_dir','inputs_dir','helpers_dir'}
++ need(isinstance(inventories,dict) and set(inventories)==names,'invalid Ural inventories')
++ for inventory in inventories.values():
++  need(isinstance(inventory,dict) and 1<=len(inventory)<=10000,'invalid Ural inventory')
++  for path,sha in inventory.items():
++   need(isinstance(path,str) and bool(path) and not path.startswith('/') and all(x not in ('','.','..') for x in path.split('/')) and digest(sha),'invalid Ural inventory item')
++ return config
++
++def ural_paths(config):
++ validate_ural_config(config)
++ dirs=[Path(config[k]).resolve(strict=True) for k in ('recipe_dir','inputs_dir','helpers_dir','work_parent')]
++ dirs.extend(Path(x['path']).resolve(strict=True) for x in config['dependency_dirs'])
++ executable=Path(config['python']['path']).resolve(strict=True)
++ need(all(p.is_dir() for p in dirs) and executable.is_file(),'invalid Ural source paths')
++ return [*dirs,executable]
++
++def require_disjoint_ural(config,work,output,extra_paths=()):
++ targets=[work,output,*(Path(x).resolve() for x in extra_paths)]
++ for p in ural_paths(config):
++  need(all(not t.is_relative_to(p) and not p.is_relative_to(t) for t in targets),'work/output overlaps Ural source or runtime')
++
++def request(grid,inputs,strip_rows,ural_source=None):
+  required={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','terminal_checker','closure_contract','seed_builder','seed_kernel'}
+  optional={'panama_osm_archive'}
+  need(isinstance(inputs,dict) and required<=set(inputs) and set(inputs)<=required|optional,'invalid direct seed input set')
+  need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'},'invalid direct seed grid')
+  need(type(strip_rows) is int and strip_rows>0,'invalid direct seed strip rows')
+  for p in inputs.values():need(isinstance(p,dict) and set(p)=={'path','sha256'} and isinstance(p['path'],str) and p['path'] and isinstance(p['sha256'],str) and len(p['sha256'])==64 and all(x in '0123456789abcdef' for x in p['sha256']),'invalid direct seed input pin')
+- return {'schema':'worldatlas-stage2-seed-direct-request-v2','grid':grid,'inputs':inputs,'controls':{'strip_rows':strip_rows}}
++ result={'schema':'worldatlas-stage2-seed-direct-request-v2','grid':grid,'inputs':inputs,'controls':{'strip_rows':strip_rows}}
++ if ural_source is not None:result['ural_source']=validate_ural_config(ural_source)
++ return result
+ def code_check(guard):
+  directory=HERE/'seed-producer-direct'
+  for name,expected in DIRECT_SEED_FREEZE.items():need(verify_inputs.sha_file(directory/name,guard)==expected,'direct seed code changed: '+name)
+@@ -33,7 +67,7 @@
+   need(verify_inputs.sha_file(spec['path'],guard)==spec['sha256'],'input hash mismatch: '+spec['path'])
+ def load_request(path,guard):
+  raw=verify_inputs.bounded_bytes(path,1<<20,guard);q=read_json(raw)
+- need(q==request(q.get('grid'),q.get('inputs'),q.get('controls',{}).get('strip_rows')),'invalid direct seed request')
++ need(q==request(q.get('grid'),q.get('inputs'),q.get('controls',{}).get('strip_rows'),q.get('ural_source')),'invalid direct seed request')
+  for key,name in (('seed_builder','rasterizer/build_seed.py'),('seed_kernel','rasterizer/seed_kernel.cpp'),('closure_checker','closure-checkers/validate_water_closure_v2.py'),('terminal_checker','closure-checkers/validate_terminal_closure.py')):need(q['inputs'][key]['sha256']==DIRECT_SEED_FREEZE[name],'unreviewed direct seed executable: '+key)
+  return raw,q
+ def verify_result(request_path,output,guard=lambda:None):
+@@ -103,7 +137,10 @@
+  need('panama_osm_archive' in q['inputs'],'selected Panama archive missing')
+  spec=importlib.util.find_spec('osgeo');need(spec is not None and spec.origin,'GDAL Python package unavailable');gdal_root=str(Path(spec.origin).resolve().parent.parent)
+  directory=HERE/'seed-producer-direct';code_check(guard);inputs_check(q,guard)
+- with tempfile.TemporaryDirectory(prefix='.direct-panama-source-') as temp:
++ # Keep capture outside all replay inputs even when TMPDIR points into them.
++ capture_parent=Path(output).resolve(strict=True).parent
++ if q.get('ural_source') is not None:require_disjoint_ural(q['ural_source'],capture_parent,Path(output).resolve())
++ with tempfile.TemporaryDirectory(prefix='.direct-panama-source-',dir=capture_parent) as temp:
+   snap=Path(temp)
+   for name,expected in DIRECT_SEED_FREEZE.items():
+    data=verify_inputs.bounded_bytes(directory/name,1<<20,guard);need(hashlib.sha256(data).hexdigest()==expected,'direct seed code changed during capture: '+name);dest=snap/name;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data)
+@@ -116,3 +153,60 @@
+  need(trace is not None and trace==report.get('panama_source_trace'),'Panama source trace mismatch')
+  code_check(guard);inputs_check(q,guard);need(verify_inputs.bounded_bytes(request_path,1<<20,guard)==raw,'direct seed request changed')
+  return trace
++
++def verify_ural_source(request_path,output,guard=lambda:None):
++ """Replay the complete pinned Ural source contract in a no-site subprocess.
++
++ This is a consistency check, not scientific validation or proof of the
++ historical physical-mask producer. The caller authenticates the snapshot.
++ """
++ request_path=Path(request_path).resolve(strict=True);output=Path(output).resolve(strict=True)
++ raw,q=load_request(request_path,guard);q2,report=verify_result(request_path,output,guard)
++ need(q==q2,'Ural source request mismatch')
++ config=q.get('ural_source');expected=report.get('ural_source_trace')
++ if config is None:
++  need(expected is None,'unexpected Ural trace without source request')
++  snapshot=read_json(verify_inputs.bounded_bytes(q['inputs']['snapshot']['path'],16<<20,guard))
++  boundaries=snapshot.get('mainland_boundaries') if isinstance(snapshot,dict) else None
++  need(isinstance(boundaries,list) and all(isinstance(x,dict) for x in boundaries),'invalid selected boundary records')
++  need(not any(x.get('boundary_id')=='ural_kara_coast_to_caspian' for x in boundaries),'selected Ural boundary requires source replay')
++  inputs_check(q,guard)
++  return None
++ need(isinstance(expected,dict),'missing Ural source trace')
++ spec=importlib.util.find_spec('osgeo');need(spec is not None and spec.origin,'GDAL Python package unavailable')
++ gdal_root=str(Path(spec.origin).resolve().parent.parent)
++ directory=HERE/'seed-producer-direct';code_check(guard);inputs_check(q,guard)
++ # A system temporary directory may itself be a pinned replay input or the
++ # Ural work parent. Capture next to the seed output only after proving that
++ # parent is disjoint from all replay paths and runtime dependencies.
++ capture_parent=output.parent
++ require_disjoint_ural(config,capture_parent,output)
++ with tempfile.TemporaryDirectory(prefix='.direct-ural-source-',dir=capture_parent) as temp:
++  snap=Path(temp)
++  for name,digest in DIRECT_SEED_FREEZE.items():
++   data=verify_inputs.bounded_bytes(directory/name,1<<20,guard);need(hashlib.sha256(data).hexdigest()==digest,'direct seed code changed during capture: '+name)
++   dest=snap/name;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data)
++  boot="""import json,sys
++from pathlib import Path
++p=sys.argv[1];sys.path[:0]=[p,sys.argv[2]]
++from closure_client import sha
++from export_adapter import load_pinned_snapshot,boundary_records
++from ural_producer_config import prepare,validate_ural_relationship_scope
++from ural_seed_source import verify_trace
++q=json.load(open(sys.argv[3]));report=json.load(open(sys.argv[4]));out=Path(sys.argv[5]).resolve()
++inputs=q['inputs'];sources={Path(x['path']).resolve().parent for x in inputs.values()}|{Path(sys.argv[3]).resolve().parent,Path(p).resolve()}
++pin,check=prepare(q['ural_source'],inputs['snapshot'],[out/'__no_work__',out,*sources],sha,lambda:None)
++snapshot=load_pinned_snapshot(inputs['snapshot']['path'],inputs['snapshot']['sha256'],lambda:None)
++_,_,boundaries,catalog=boundary_records(snapshot);validate_ural_relationship_scope(boundaries)
++trace=verify_trace(boundaries,catalog,pin,report['ural_source_trace']);check()
++print(json.dumps(trace,sort_keys=True,allow_nan=False))
++"""
++  env={k:v for k,v in os.environ.items() if not k.upper().startswith('PYTHON')};env['PYTHONNOUSERSITE']='1'
++  result=subprocess.run([sys.executable,'-I','-S','-B','-c',boot,str(snap),gdal_root,str(request_path),str(output/'report.json'),str(output)],cwd=snap,env=env,check=False,capture_output=True,text=True)
++  need(result.returncode==0,'Ural source replay rejected: '+result.stderr[-4096:])
++  need(len(result.stdout.encode('utf-8'))<=1<<20,'Ural source trace too large');trace=read_json(result.stdout)
++  for name,digest in DIRECT_SEED_FREEZE.items():need(verify_inputs.sha_file(snap/name,guard)==digest,'captured direct seed code changed: '+name)
++ need(trace==expected,'Ural source trace mismatch')
++ code_check(guard);inputs_check(q,guard);need(verify_inputs.bounded_bytes(request_path,1<<20,guard)==raw,'direct seed request changed')
++ q3,report3=verify_result(request_path,output,guard);need(q3==q and report3==report,'Ural request or report changed during replay')
++ return trace
+--- a/runtime/orchestrate_stage2.py
++++ b/runtime/orchestrate_stage2.py
+@@ -22,6 +22,7 @@
+ # Explicitly disabled until independent review of the complete fresh call path.
+ FRESH_DIRECT_EXECUTION_ENABLED=False
+ CAUCASUS_DIRECT_GATE_ENABLED=False
++URAL_DIRECT_GATE_ENABLED=False
+ 
+ def need(v,msg):
+  if not v:raise ValueError(msg)
+@@ -55,7 +56,11 @@
+ def load_config(path):
+  raw=verify_inputs.bounded_bytes(path,1<<20);obj=json.loads(raw)
+  keys={'schema','grid','inputs','policy_id','policy_version','controls','seed_controls'}
+- need(isinstance(obj,dict) and set(obj) in (keys,keys|{'seed_handoff'},keys|{'caucasus_source'}) and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict),'invalid fresh orchestration config or historical input')
++ need(isinstance(obj,dict) and keys<=set(obj) and set(obj)<=keys|{'seed_handoff','caucasus_source','ural_source'} and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict),'invalid fresh orchestration config or historical input')
++ need('seed_handoff' not in obj or not ({'caucasus_source','ural_source'} & set(obj)),'source gates require fresh mode')
++ if 'ural_source' in obj:
++  from direct_seed import validate_ural_config
++  validate_ural_config(obj['ural_source'])
+  fresh='seed_handoff' not in obj
+  need(set(obj['inputs'])==(BASE_INPUTS|{'panama_osm_archive'} if fresh else BASE_INPUTS),'invalid mode-specific inputs')
+  if 'caucasus_source' in obj:need(isinstance(obj['caucasus_source'],dict) and set(obj['caucasus_source'])=={'recipe','hydro','author','code_sha256'},'invalid Caucasus source configuration')
+@@ -99,10 +104,12 @@
+  cp,work,out=map(lambda p:Path(p).resolve(),(config_path,work_dir,output_dir));raw,cfg=load_config(cp);c=cfg['controls'];fresh='seed_handoff' not in cfg
+  if fresh:need(FRESH_DIRECT_EXECUTION_ENABLED,'fresh direct execution awaits independent review')
+  if fresh and 'caucasus_source' in cfg:need(CAUCASUS_DIRECT_GATE_ENABLED,'Caucasus direct gate wiring awaits independent review')
++ if fresh and 'ural_source' in cfg:need(URAL_DIRECT_GATE_ENABLED,'Ural direct gate wiring awaits independent review')
+  if fresh:
+   import direct_seed
+   direct_seed.check_runtime('caucasus_source' in cfg)
+  need(work.parent.is_dir() and out.parent.is_dir() and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'invalid work/output')
++ if 'ural_source' in cfg:direct_seed.require_disjoint_ural(cfg['ural_source'],work,out)
+  guard=lambda:checkpoints.guard(work.parent,c['minimum_memory_kib'],c['minimum_free_bytes']);guard()
+  paths={k:build_stage2.pin(v,guard) for k,v in cfg['inputs'].items()};handoff_paths={k:build_stage2.pin(v,guard) for k,v in cfg.get('seed_handoff',{}).items()}
+  ccfg=cfg.get('caucasus_source');binding=build_stage2.caucasus_binding(ccfg,guard) if ccfg else None
+@@ -157,7 +164,7 @@
+   for d in (seedrequest.parent,seedout,seedout.parent):
+    fd=os.open(d,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+  else:
+-  si['resolution']=rp;si['panama_osm_archive']=cfg['inputs']['panama_osm_archive'];sr=direct_seed_request(cfg['grid'],si,cfg['seed_controls']['strip_rows']);write_json(seedrequest,sr)
++  si['resolution']=rp;si['panama_osm_archive']=cfg['inputs']['panama_osm_archive'];sr=direct_seed_request(cfg['grid'],si,cfg['seed_controls']['strip_rows'],cfg.get('ural_source'));write_json(seedrequest,sr)
+   gate={'config':ccfg,'directory':str(build_stage2.caucasus_directory()),'report':str(work/'derived'/'caucasus-gate.json')} if binding else None
+   seed=invoke_direct_seed(seedrequest,seedwork,seedout,guard,caucasus=gate)
+   import direct_seed
+@@ -230,11 +237,12 @@
+   need(not marker.get('direct_seed_binding') and expected_seed['resolution']['sha256']==artifacts['resolution_report']['sha256'] and sr.get('schema')=='worldatlas-stage2-seed-request-v1' and sr.get('grid')==cfg['grid'] and sr.get('inputs')==expected_seed and sr.get('controls')==handoff[1]['controls'],'seed request linkage mismatch')
+  else:
+   expected_seed['panama_osm_archive']=cfg['inputs']['panama_osm_archive'];db=marker.get('direct_seed_binding')
+-  need(isinstance(db,dict) and set(db)=={'request','panama_osm_archive','outer_config'} and db['panama_osm_archive']==cfg['inputs']['panama_osm_archive'] and verify_inputs.bounded_bytes(build_stage2.pin(db['outer_config'],guard),1<<20,guard)==raw and Path(db['request'].get('path','')).resolve()==seedreq and db['request']['sha256']==marker['seed_request_sha256'] and sr==direct_seed_request(cfg['grid'],expected_seed,cfg['seed_controls']['strip_rows']),'direct seed linkage mismatch')
++  need(isinstance(db,dict) and set(db)=={'request','panama_osm_archive','outer_config'} and db['panama_osm_archive']==cfg['inputs']['panama_osm_archive'] and verify_inputs.bounded_bytes(build_stage2.pin(db['outer_config'],guard),1<<20,guard)==raw and Path(db['request'].get('path','')).resolve()==seedreq and db['request']['sha256']==marker['seed_request_sha256'] and sr==direct_seed_request(cfg['grid'],expected_seed,cfg['seed_controls']['strip_rows'],cfg.get('ural_source')),'direct seed linkage mismatch')
+   import direct_seed
+   _,verified_seed=direct_seed.verify_result(seedreq,work/'seed-work-parent'/'output',guard)
+   need(verified_seed==json.loads(verify_inputs.bounded_bytes(artifacts['seed_report']['path'],16<<20,guard)),'direct seed readback differs')
+   direct_seed.verify_panama_source(seedreq,work/'seed-work-parent'/'output',guard)
++  direct_seed.verify_ural_source(seedreq,work/'seed-work-parent'/'output',guard)
+  hint_inputs={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hint_inputs.update({k:artifacts[k] for k in ('seed_rows','seed_runs','resolution_report','representatives','tile_manifest')})
+  rev=snap.get('decision_revision',{}).get('id');entity=snap.get('entity_revision',{}).get('id');_,categories,_=contracts.snap_policy(snap,rev,entity,cfg['policy_id'],cfg['policy_version'])
+  need(hr=={'schema':'source-only-hints-diagnostic-request-v1','grid':cfg['grid'],'codes':sorted(categories),'inputs':hint_inputs,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']},'hint request linkage mismatch')
+--- a/runtime/seed-producer-direct/export_adapter.py
++++ b/runtime/seed-producer-direct/export_adapter.py
+@@ -6,7 +6,30 @@
+ """
+ import hashlib,json,re
+ from pathlib import Path
+-from regions import points,geometry_hash,SUPPORTING_RELATIONSHIPS,CONSTRUCTION_RELATIONSHIP
++from regions import points,geometry_hash,SUPPORTING_RELATIONSHIPS,CONSTRUCTION_RELATIONSHIP,URAL_CONSTRUCTION_INPUTS,source_role
++
++URAL_MANIFEST_PARTS_SHA256={
++ 'manifest_of_raw_arcticdem_tile_used_for_gap00':'332f9fb280cd1985028c22c0108662cfa1b4946361066e08523a3ade8699d0a3',
++ 'manifest_of_first_raw_arcticdem_tile_used_for_gap02':'012c7bf6a5c9c059bfcc09ec06203f8b5601c5ae0d67d7add134bcbee4e58d03',
++ 'manifest_of_second_raw_arcticdem_tile_used_for_gap02':'2d549b0fd0218ff9a075c58738052e32b3976bb6b0e9b715ca1e1e452937f154'}
++
++def validate_ural_source(ref,src,lin,relationship):
++ expected=URAL_CONSTRUCTION_INPUTS[relationship]
++ if ref['source_id']!=expected[0] or src['sha256']!=expected[1]:raise ValueError('Ural construction source pin mismatch')
++ tile=expected[2]
++ if not tile:return None
++ p=lin.get('provenance');parts=p.get('parts') if isinstance(p,dict) else None
++ if not isinstance(p,dict) or p.get('full_tile_sha256')!=tile or not isinstance(parts,list) or not parts:raise ValueError('invalid Ural tile manifest')
++ prefix=src['r2_key'].removesuffix('manifest.json')
++ if prefix==src['r2_key'] or not prefix or type(p.get('full_tile_size_bytes')) is not int or p['full_tile_size_bytes']<=0:raise ValueError('invalid Ural tile manifest')
++ keys=[];total=0
++ for part in parts:
++  if not isinstance(part,dict) or set(part)!={'key','size','sha256'} or not isinstance(part['key'],str) or not re.fullmatch(re.escape(prefix)+r'part-[a-z]{2}',part['key']) or type(part['size']) is not int or part['size']<=0 or not re.fullmatch('[0-9a-f]{64}',str(part['sha256'])):raise ValueError('invalid Ural tile manifest part')
++  keys.append(part['key']);total+=part['size']
++ if keys!=sorted(set(keys)) or total!=p['full_tile_size_bytes']:raise ValueError('invalid Ural tile manifest ordering or size')
++ parts_hash=hashlib.sha256(json.dumps(parts,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
++ if parts_hash!=URAL_MANIFEST_PARTS_SHA256[relationship]:raise ValueError('Ural tile manifest parts pin mismatch')
++ return tile
+ 
+ def no_duplicates(pairs):
+  d={}
+@@ -61,7 +84,8 @@
+   for item in relationships:
+    if not isinstance(item,dict) or set(item)!={'source_id','version','relationship'}:raise ValueError('invalid boundary source relationship')
+    key=(item['source_id'],item['version']);relationship=item['relationship']
+-   if key in relmap or relationship not in SUPPORTING_RELATIONSHIPS|{CONSTRUCTION_RELATIONSHIP}:raise ValueError('duplicate or unsupported boundary source relationship')
++   if key in relmap:raise ValueError('duplicate boundary source relationship')
++   source_role(relationship)
+    relmap[key]=relationship
+   clean=[]; qualified=[]; construction_count=0
+   for ref in refs:
+@@ -73,7 +97,11 @@
+     prov=lin.get('provenance')
+     if not isinstance(prov,dict) or not isinstance(prov.get('origin'),str) or not prov['origin'] or prov.get('representation')!='provider_original':raise ValueError('construction source is not an identified provider original')
+     construction_count+=1
+-   clean.append(ref);qualified.append({**ref,'relationship':relationship,'role':'construction_input' if relationship==CONSTRUCTION_RELATIONSHIP else 'supporting_research_evidence'});source_out[key]={'kind':'raw','sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'size_bytes':src['size_bytes'],'origin':(lin.get('provenance') or {}).get('origin')}
++   tile=None
++   if relationship in URAL_CONSTRUCTION_INPUTS:
++    tile=validate_ural_source(ref,src,lin,relationship);construction_count+=1
++   clean.append(ref);qualified.append({**ref,'relationship':relationship,'role':source_role(relationship)});source_out[key]={'kind':'raw','sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'size_bytes':src['size_bytes'],'origin':(lin.get('provenance') or {}).get('origin')}
++   if tile:source_out[key].update(representation='manifest_of_raw_parts',full_tile_sha256=tile)
+   if set(relmap)!={(x['source_id'],x['version']) for x in clean} or len(clean)!=len(relmap):raise ValueError('boundary source relationship mismatch')
+   if status=='complete' and not construction_count:raise ValueError('complete lineage requires construction input')
+   normalized[('boundary',bid)]={'id':bid,'kind':'boundary','revision_id':rev['id'],'execution_status':'selected_for_research','geometry':geom,'geometry_sha256':r['geometry_sha256'],'geometry_hash_method':r['geometry_hash_method'],'source_refs':clean,'qualified_source_refs':qualified,'lineage_status':status,'provenance':p}
+--- a/runtime/seed-producer-direct/region_worker.py
++++ b/runtime/seed-producer-direct/region_worker.py
+@@ -1,22 +1,31 @@
+ """Isolated execution of one selected normalized Neon L2 mainland region."""
+-import hashlib,json,os,sys
++import hashlib,json,os,re,sys
+ from pathlib import Path
+ from regions import assemble
+ from closure_client import ClosureChecker
+ 
++def normalized_sources(items):
++ sources={}
++ for s in items:
++  if s.get('kind')!='raw':raise ValueError('non-raw source in normalized input')
++  key=(s['source_id'],s['version'])
++  if key in sources:raise ValueError('duplicate source ID/version')
++  out={'kind':s['kind'],'sha256':s['sha256'],'bucket':s['bucket'],'key':s['key'],'origin':s.get('origin')}
++  if 'representation' in s or 'full_tile_sha256' in s:
++   if s.get('representation')!='manifest_of_raw_parts' or not re.fullmatch('[0-9a-f]{64}',str(s.get('full_tile_sha256'))):raise ValueError('invalid raw-part manifest identity')
++   out.update(representation=s['representation'],full_tile_sha256=s['full_tile_sha256'])
++  sources[key]=out
++ return sources
++
+ def execute(request):
+  if request.get('schema')!='stage2-region-worker-direct-request-v2':raise ValueError('invalid region worker request')
+  guard=lambda:None
+- guard();records={};sources={}
++ guard();records={}
+  for r in request['records']:
+   key=(r['kind'],r['id'])
+   if key in records:raise ValueError('duplicate geometry ID')
+   records[key]=r
+- for s in request['sources']:
+-  if s.get('kind')!='raw':raise ValueError('non-raw source in normalized input')
+-  key=(s['source_id'],s['version'])
+-  if key in sources:raise ValueError('duplicate source ID/version')
+-  sources[key]={'kind':s['kind'],'sha256':s['sha256'],'bucket':s['bucket'],'key':s['key'],'origin':s.get('origin')}
++ sources=normalized_sources(request['sources'])
+  c=request['closure'];checker=ClosureChecker(c['checker_path'],c['checker_sha256'],c['physical_dir'],c['physical_rows_sha256'],c['physical_runs_sha256'],c['contract_path'],c['contract_sha256'],c['work_parent'],guard,c.get('terminal_checker_path'),c.get('terminal_checker_sha256'),c['physical_report_sha256'])
+  geom,report=assemble(request['revision_id'],records,request['decision'],sources,checker,physical_rows_sha256=c['physical_rows_sha256'],physical_runs_sha256=c['physical_runs_sha256'],physical_report_sha256=c['physical_report_sha256'],checker_sha256=c['checker_sha256'],closure_contract_sha256=c['contract_sha256'],guard=guard,terminal_checker_sha256=c.get('terminal_checker_sha256'))
+  return {'schema':'stage2-region-worker-result-v1','status':'selected-research-region','geometry':geom,'report':report,'limitations':['Caller must authenticate the selected Neon export, source catalog and revision.','Closure proof checks only physical-water coverage, not geographic authority or historical V2/V7 equivalence.']}
+--- a/runtime/seed-producer-direct/regions.py
++++ b/runtime/seed-producer-direct/regions.py
+@@ -12,6 +12,23 @@
+ # Deliberate allowlist: unknown relationships require a reviewed contract update.
+ SUPPORTING_RELATIONSHIPS = frozenset(['independent_original_terrain_research_not_watershed_or_construction_proof', 'independent_terrain_research_anapa_not_full_watershed_verification_or_construction', 'independent_terrain_research_east_not_watershed_verification_or_construction', 'independent_terrain_research_east_original_not_watershed_verification_or_construction', 'independent_terrain_research_sections_2_3_not_watershed_verification_or_construction', 'independent_terrain_research_west_original_not_watershed_verification_or_construction', 'research_comparison_evidence_not_independent_verification_or_proof_of_construction', 'secondary_terrain_points_not_independent_of_srtm_or_watershed_validation', 'srtm_cross_sensor_research_not_independent_hydrobasins_or_watershed_verification', 'supporting research evidence only; not production geometry selection', 'supporting_geographic_evidence_not_complete_construction_lineage', 'temporary research-only named-waterway corroboration; not a selected pipeline input', 'terrain_quality_mask_for_eastern_research', 'historical_relation_membership_support_not_complete_coordinate_lineage', 'historical_way_membership_support_not_complete_coordinate_lineage', 'companion_mask_for_independent_terrain_screen', 'current_mainstream_source_comparison_not_historical_bytes_or_terrain_proof', 'independent_terrain_screen_mask_zero_only_not_proof_of_divide', 'local_geographic_comparison_not_terrain_or_construction_proof'])
+ CONSTRUCTION_RELATIONSHIP = "construction_input"
++# Audited Ural workflow relationships bind each role to a specific source and
++# catalog hash. For chunked ArcticDEM, the third value pins the reassembled
++# provider tile; the catalog hash instead identifies the R2 manifest.
++URAL_CONSTRUCTION_INPUTS = {
++ 'raw_basin_edges_and_drainage_classes': ('hydrosheds-hydrobasins-europe-level12-standard', '21797d53e0792cae047d25f0c3cfb570c7ef43700ec962b35b2ac92467e29f03', None),
++ 'drainage_classes': ('hydrosheds-hydrobasins-siberia-level12-standard', '67ea00df7d14a397f8f78e5b1dc31dcca036018ccbcb36e007ce6854b91d71bd', None),
++ 'mapped_river_graph_and_spring_role': ('osm-ural-river-relation-214415-full', '89cef99ad92bb8acbd81da3f371a2244892ae71da49c99d4c478e9f111af56a0', None),
++ 'terrain_input_for_modeled_spring_connection': ('ural-copernicus-glo30-n54e059', 'd1d0a6b65e0fc19695f9414fd5bcece8a2f508a6f7790c70bb20677f20be3ef6', None),
++ 'manifest_of_raw_arcticdem_tile_used_for_gap00': ('ural-arcticdem-gap00', '667cca1c18e397c3e64b00961ecfe2fe9d7e791542dbaa3d0259eaf432d58bee', '0207e55aec04678895aa73ead434ff189eb0c0a3a8badf553a831821a13eabbd'),
++ 'manifest_of_first_raw_arcticdem_tile_used_for_gap02': ('ural-arcticdem-gap02a', 'e174e2f039dce3d36f206289554c22818cd6488408efe60ec8a07a3746d5800a', 'dab46d70f16e3c6ee397f342167458513e2d6697898b86a5a2c1e447a437987a'),
++ 'manifest_of_second_raw_arcticdem_tile_used_for_gap02': ('ural-arcticdem-gap02b', 'a32df2fd906bcf0f86eeed9c97dc7ff579345f692a331d41cbe8a58945548c51', '7a02a4d2ad464323c56bd953c7841369ff2183be243c0931e39b3894031549c3'),
++}
++
++def source_role(relationship):
++ if relationship==CONSTRUCTION_RELATIONSHIP or relationship in URAL_CONSTRUCTION_INPUTS:return 'construction_input'
++ if relationship in SUPPORTING_RELATIONSHIPS:return 'supporting_research_evidence'
++ raise ValueError('unsupported source relationship')
+ 
+ 
+ def geometry_hash(g):return hashlib.sha256(json.dumps(g,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+@@ -54,10 +71,17 @@
+    if not isinstance(refs,list) or not refs or status not in ('complete','incomplete'):raise ValueError('boundary provenance missing')
+    for ref in refs:
+     if not isinstance(ref,dict) or set(ref)!={'source_id','version','relationship','role'} or not isinstance(ref['relationship'],str) or not ref['relationship'] or ref['role'] not in ('construction_input','supporting_research_evidence'):raise ValueError('invalid boundary source citation')
+-    if ref['relationship'] not in SUPPORTING_RELATIONSHIPS|{CONSTRUCTION_RELATIONSHIP} or ref['role']!=('construction_input' if ref['relationship']==CONSTRUCTION_RELATIONSHIP else 'supporting_research_evidence'):raise ValueError('unsupported or inconsistent source role')
++    if ref['role']!=source_role(ref['relationship']):raise ValueError('unsupported or inconsistent source role')
+     source=source_catalog.get((ref['source_id'],ref['version']))
+     if not isinstance(source,dict) or source.get('kind')!='raw' or not re.fullmatch('[0-9a-f]{64}',str(source.get('sha256'))) or not source.get('bucket') or not source.get('key'):raise ValueError('boundary citation not a pinned raw source')
+-    citations.append({'source_id':ref['source_id'],'version':ref['version'],'relationship':ref['relationship'],'role':ref['role'],'sha256':source['sha256'],'bucket':source['bucket'],'key':source['key']})
++    citation={'source_id':ref['source_id'],'version':ref['version'],'relationship':ref['relationship'],'role':ref['role'],'sha256':source['sha256'],'bucket':source['bucket'],'key':source['key']}
++    expected=URAL_CONSTRUCTION_INPUTS.get(ref['relationship'])
++    if expected:
++     if ref['source_id']!=expected[0] or source['sha256']!=expected[1]:raise ValueError('Ural construction source pin mismatch')
++     if expected[2]:
++      if source.get('representation')!='manifest_of_raw_parts' or source.get('full_tile_sha256')!=expected[2]:raise ValueError('Ural tile manifest mismatch')
++      citation.update(representation='manifest_of_raw_parts',full_tile_sha256=expected[2])
++    citations.append(citation)
+   else:
+    role=record.get('role');prov=record.get('provenance')
+    if role!='water_closure':raise ValueError('route requires physical closure proof')
+--- a/runtime/seed-producer-direct/seed_producer.py
++++ b/runtime/seed-producer-direct/seed_producer.py
+@@ -13,8 +13,10 @@
+ from region_client import execute as build_region
+ from closure_client import sha
+ from panama_seed_source import bind as bind_panama_source
++from ural_seed_source import bind as bind_ural_source
++from ural_producer_config import prepare as prepare_ural_config, validate_ural_relationship_scope
+ BASE=Path(__file__).resolve().parent
+-CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','panama_seed_source.py','osm_source_handoff.py','assemble_osm_ways.py')
++CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','panama_seed_source.py','osm_source_handoff.py','assemble_osm_ways.py','ural_seed_source.py','ural_producer_config.py')
+ TRUSTED_CODE={'seed_builder':'8b59d9212064ed7fcdde37ca9ad53a8b1544c0b2abad4b1e2ac3c30e49b193a1','seed_kernel':'1543a7014f84eb5969b073435d463e838922c186d996ec9dcb0f68133ac15fa8','closure_checker':'5b01e11908293df6f941adbc391d4c9e7709f49c1b8ad60d46be0558d66ca6b3'}
+ TRUSTED_TERMINAL_CHECKER='08fd855bddd47dd2152ae0ac0fabd1e23e1d75db9e337a0af3a840a6787e1cb2'
+ INPUTS={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','closure_contract','seed_builder','seed_kernel'}
+@@ -60,7 +62,11 @@
+  sources={Path(p['path']).resolve().parent for p in inp.values()}|{BASE,request_path.parent}
+  for target in (work,output):
+   if any(target==d or target in d.parents or d in target.parents for d in sources):raise ValueError('seed work/output overlaps inputs')
++ code_hashes={name:sha(BASE/name,guard) for name in CODE};code_hashes['rasterizer']=inp['seed_builder']['sha256'];code_hashes['rasterizer_kernel']=inp['seed_kernel']['sha256']
++ ural_pin,check_ural_inputs=prepare_ural_config(req.get('ural_source'),inp['snapshot'],[work,output,*sources],sha,guard)
+  snapshot=load_pinned_snapshot(inp['snapshot']['path'],inp['snapshot']['sha256'],guard);resolution=bounded_json(inp['resolution'],guard);rev,entity,boundaries,source_catalog=boundary_records(snapshot)
++ validate_ural_relationship_scope(boundaries)
++ boundaries,ural_source_trace=bind_ural_source(boundaries,source_catalog,ural_pin)
+  if resolution.get('grid')!=grid or resolution.get('component_manifest_sha256')!=inp['component_manifest']['sha256'] or any(resolution.get('input_sha256',{}).get(k)!=inp[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')):raise ValueError('witness resolution input mismatch')
+  boundaries,panama_source_trace=bind_panama_source(boundaries,source_catalog,inp.get('panama_osm_archive'))
+  regions,records=selected_regions(snapshot,rev,boundaries)
+@@ -70,7 +76,6 @@
+  if report.get('status') not in ('candidate-only','stage1-complete') or report.get('grid')!=grid or outputs.get('rows.u32le')!=inp['physical_rows']['sha256'] or outputs.get('runs.u32le')!=inp['physical_runs']['sha256']:raise ValueError('physical report mismatch')
+  contract=bounded_json(inp['closure_contract'],guard);physical=contract.get('physical',{});cg=contract.get('grid',{})
+  if contract.get('schema')!='physical-water-closure-contract-v2' or physical.get('rows_sha256')!=inp['physical_rows']['sha256'] or physical.get('runs_sha256')!=inp['physical_runs']['sha256'] or physical.get('report_sha256')!=inp['physical_report']['sha256'] or physical.get('water_code')!=1 or physical.get('land_code')!=17 or cg.get('crs')!='EPSG:4326' or cg.get('width')!=grid['width'] or cg.get('height')!=grid['height'] or Fraction(str(cg.get('west')))!=Fraction(str(grid['west'])) or Fraction(str(cg.get('north')))!=Fraction(str(grid['north'])) or Fraction(cg.get('step_numerator'),cg.get('step_denominator'))!=Fraction(str(grid['step'])):raise ValueError('physical contract mismatch')
+- code_hashes={name:sha(BASE/name,guard) for name in CODE};code_hashes['rasterizer']=inp['seed_builder']['sha256'];code_hashes['rasterizer_kernel']=inp['seed_kernel']['sha256']
+  work.mkdir(mode=0o700)
+  if os.stat(work).st_dev!=os.stat(output.parent).st_dev:raise ValueError('seed output must share work filesystem')
+  rinput=work/'region-input';rinput.mkdir();regionwork=work/'region-work';regionwork.mkdir();codework=work/'rasterizer-code';codework.mkdir();seedout=work/'seed-output'
+@@ -104,12 +109,14 @@
+   if not isinstance(pop,dict) or type(pop.get('inside_cells')) is not int or type(pop.get('outside_cells')) is not int or pop['inside_cells']<=0 or (r['region_id'] is not None and pop['outside_cells']<=0):raise ValueError('empty mainland rule partition')
+  for pin in inp.values():
+   if sha(pin['path'],guard)!=pin['sha256']:raise ValueError('input changed during seed build')
++ if check_ural_inputs is not None:check_ural_inputs()
+  with open(request_path,'rb') as f:request_after=f.read((1<<20)+1)
+  if request_after!=raw or {name:sha(BASE/name,guard) for name in CODE}!={k:v for k,v in code_hashes.items() if k in CODE}:raise ValueError('request or producer code changed')
+  (seedout/'report.json').rename(seedout/'rasterizer-report.json')
+  rasterizer_report_sha=sha(seedout/'rasterizer-report.json',guard)
+  out={'schema':'worldatlas-stage2-mainland-seed-report-v1','status':'diagnostic-seed-pending-independent-provenance','publishable':False,'grid':grid,'decision_snapshot_sha256':inp['snapshot']['sha256'],'decision_revision':rev,'entity_revision':entity,'resolution_report_sha256':inp['resolution']['sha256'],'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'component_rows_sha256':inp['component_rows']['sha256'],'component_runs_sha256':inp['component_runs']['sha256'],'component_manifest_sha256':inp['component_manifest']['sha256'],'physical_report_sha256':inp['physical_report']['sha256'],'physical_code_contract':{'water':1,'land':17},'input_sha256':{k:v['sha256'] for k,v in inp.items()},'rasterizer_report_sha256':rasterizer_report_sha,'execution':{'mode':'direct','strip_rows':controls['strip_rows']},'seed_rows_sha256':rows,'seed_runs_sha256':runs,'seed_roots':sorted(r['component_id_current_generation_only'] for r in rules),'rule_population':populations,'category_cell_counts':counts,'region_traces':region_traces,'seed_rules':rules,'code_sha256':code_hashes,'request_sha256':hashlib.sha256(raw).hexdigest(),'limitations':['Caller must authenticate the Neon export and independently re-execute witness resolution and full physical/component coverage before accepting this seed.','Witnesses support component identity but do not prove absence of unintended bridges.','Stored boundary lineage and historical V2/V7 raster equivalence may be incomplete.','No island or List 1 overrides are applied.']}
+  out['panama_source_trace']=panama_source_trace
++ out['ural_source_trace']=ural_source_trace
+  with open(seedout/'report.json','x') as f:json.dump(out,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+  fd=os.open(seedout/'rasterizer-report.json',os.O_RDONLY);os.fsync(fd);os.close(fd);fd=os.open(seedout,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+  guard();publish_no_replace(seedout,output)
+--- /dev/null
++++ b/runtime/seed-producer-direct/ural_producer_config.py
+@@ -0,0 +1,94 @@
++"""Pin a complete Ural replay input tree for a direct research seed run.
++
++The pinned inventory covers every regular file under each replay directory.
++It is an additional check, not a replacement for the gate's source validation
++or independent review of executable and dependency integrity.
++"""
++import re
++from pathlib import Path
++
++_KEYS = ('recipe_dir', 'inputs_dir', 'helpers_dir')
++_DIGEST = re.compile(r'[0-9a-f]{64}\Z')
++
++def _overlap(a, b):
++ return a == b or a in b.parents or b in a.parents
++
++def prepare(config, snapshot_pin, protected, sha, guard):
++ if config is None:
++  return None, None
++ if not isinstance(config, dict) or set(config) != set(_KEYS) | {'work_parent', 'inventories', 'python', 'dependency_dirs'}:
++  raise ValueError('invalid Ural replay configuration')
++ inventories = config['inventories']
++ if not isinstance(inventories, dict) or set(inventories) != set(_KEYS):
++  raise ValueError('invalid Ural inventories')
++ paths = {}
++ for key in (*_KEYS, 'work_parent'):
++  if not isinstance(config[key], str) or not config[key]: raise ValueError('invalid Ural replay path')
++  path = Path(config[key]).resolve(strict=True)
++  if not path.is_dir(): raise ValueError('Ural replay path is not a directory')
++  paths[key] = path
++ python_pin=config['python']; dependencies=config['dependency_dirs']
++ def valid_pin(pin):
++  return isinstance(pin,dict) and set(pin)=={'path','sha256'} and isinstance(pin['path'],str) and bool(pin['path']) and isinstance(pin['sha256'],str) and bool(_DIGEST.fullmatch(pin['sha256']))
++ if not valid_pin(python_pin) or not isinstance(dependencies,list) or not 1<=len(dependencies)<=8 or not all(valid_pin(d) for d in dependencies):
++  raise ValueError('invalid Ural runtime pins')
++ executable=Path(python_pin['path']).resolve(strict=True)
++ if not executable.is_file(): raise ValueError('invalid Ural executable')
++ dep_paths=[Path(d['path']).resolve(strict=True) for d in dependencies]
++ if not all(p.is_dir() for p in dep_paths): raise ValueError('invalid Ural dependency directory')
++ # Explicitly disallow nesting among all replay paths, including scratch.
++ all_paths = list(paths.values())+dep_paths
++ if any(_overlap(a,b) for i,a in enumerate(all_paths) for b in all_paths[i+1:]):
++  raise ValueError('Ural replay paths overlap')
++ if any(_overlap(executable,p) for p in (paths['work_parent'],*protected[:2])):
++  raise ValueError('Ural executable overlaps work/output')
++ if any(_overlap(paths['work_parent'],p) for p in protected):
++  raise ValueError('Ural replay work overlaps seed paths')
++ # Seed work and output must not overlap any replay input path.
++ if any(_overlap(d,p) for d in [*(paths[k] for k in _KEYS),*dep_paths] for p in protected[:2]):
++  raise ValueError('seed work/output overlaps Ural inputs')
++ def check():
++  from ural_seed_source import dependency_tree_sha256
++  if sha(executable,guard)!=python_pin['sha256']: raise ValueError('Ural Python executable pin mismatch')
++  # The upstream tree-hash routine uses os.walk; explicitly surface scan
++  # errors rather than accepting an unreadable subtree as absent.
++  import os
++  def walk_error(error): raise error
++  for path in dep_paths:
++   for _ in os.walk(path,followlinks=False,onerror=walk_error): pass
++  if any(dependency_tree_sha256(path)!=pin['sha256'] for path,pin in zip(dep_paths,dependencies)): raise ValueError('Ural dependency tree pin mismatch')
++  for key in _KEYS:
++   expected=inventories[key]
++   if not isinstance(expected, dict) or not expected or len(expected)>10000:
++    raise ValueError('invalid Ural inventory')
++   for name,digest in expected.items():
++    if not isinstance(name,str) or not name or name.startswith('/') or any(x in ('','.','..') for x in name.split('/')) or not isinstance(digest,str) or not _DIGEST.fullmatch(digest):
++     raise ValueError('invalid Ural inventory entry')
++   actual={}
++   # Do not follow symlinks, including symlinked directories or special files.
++   import os
++   def walk_error(error): raise error
++   for root,dirs,files in os.walk(paths[key],followlinks=False,onerror=walk_error):
++    if any((Path(root)/d).is_symlink() for d in dirs): raise ValueError('Ural inventory contains symlink')
++    for name in files:
++     file=Path(root)/name
++     if file.is_symlink() or not file.is_file(): raise ValueError('Ural inventory contains non-regular file')
++     rel=file.relative_to(paths[key]).as_posix()
++     if rel not in expected: raise ValueError('Ural inventory has unexpected file')
++     actual[rel]=sha(file,guard)
++     if len(actual)>10000: raise ValueError('Ural inventory too large')
++   if actual!=expected: raise ValueError('Ural inventory mismatch')
++ check()
++ return {**{k:str(v) for k,v in paths.items()},'snapshot':snapshot_pin['path'],'snapshot_sha256':snapshot_pin['sha256'],'python':{'path':str(executable),'sha256':python_pin['sha256']},'dependency_dirs':[{'path':str(path),'sha256':pin['sha256']} for path,pin in zip(dep_paths,dependencies)]}, check
++
++
++def validate_ural_relationship_scope(boundaries):
++ # Role vocabulary is boundary-specific, even if the shared adapter recognizes
++ # these relationships globally. Check every selected boundary, not only those
++ # used by a particular region.
++ from regions import URAL_CONSTRUCTION_INPUTS
++ from ural_seed_source import BOUNDARY
++ for (kind, boundary_id), record in boundaries.items():
++  if kind == 'boundary' and boundary_id != BOUNDARY:
++   if any(ref.get('relationship') in URAL_CONSTRUCTION_INPUTS for ref in record.get('qualified_source_refs', [])):
++    raise ValueError('Ural construction relationship on non-Ural boundary')
+--- /dev/null
++++ b/runtime/seed-producer-direct/ural_seed_source.py
+@@ -0,0 +1,191 @@
++"""Bind a selected Ural boundary to the independently replayed raw recipe.
++
++The caller authenticates the fresh Neon snapshot and catalog. The recipe also
++requires its separately pinned earlier Neon selector snapshot; this is a
++structured input and does not assert historical construction provenance.
++No region hash, route, decision, or map is changed by this gate.
++"""
++import hashlib
++import json
++import os
++from pathlib import Path
++import re
++import shutil
++import stat
++import subprocess
++import sys
++import tempfile
++
++from regions import SUPPORTING_RELATIONSHIPS, URAL_CONSTRUCTION_INPUTS, geometry_hash, points
++from export_adapter import boundary_records, load_pinned_snapshot
++
++BOUNDARY = 'ural_kara_coast_to_caspian'
++GEOMETRY_SHA256 = '68390aa6ce5352226777adde3979315e1de85ca26d662c4b1c32610d1d73da66'
++RECIPE_SNAPSHOT_SHA256 = '615bc1aaa67d099ebd140dc172fd54885d66e82ef595a57a97e5a284f483f7cc'
++RECIPE_CODE = {
++ 'reproduce_raw_boundary.py':'c0c3736362a7c9bfc4c7526e1034543c63dafbb3cfcb9abab3be7046e277c561',
++ 'extract_watershed_selector.py':'802a78fb5690d800f1c7aca19806b6433a6361e8d48235fb7c0788baf0acbe79',
++ 'reproduce_arctic_gap_rasters.py':'944ed865fb2ff1ebc5f96a6f7cd451a1d94c4aecaffa7b54ffb157b4b4e5e9c5',
++ 'construct_arctic_gap_paths.py':'fba208929d37ac4ea17b2a80c2cfcc8c81fd5431aed2c55a9ec9a216aeb479ce',
++ 'construct_cop_spring_flow.py':'ed99aa6d9e8b982e5336b7b52a2dc2afcf15fdaed486f95d07b155fd74d24530',
++ 'trace_gap_raw_crossings.py':'2e632b3e64d3f7a88d7f06fd2b729da9f966406005bc0c64b6080f48ba49b25b',
++ 'check_raw_chord_coverage.py':'9f176d83b9783f95eb08959bf1a5f7711e064f827ccd0639389344f2c39b3dc1',
++ 'verify_raw_north_candidate.py':'ee6de46d4cbdb0e98d109a3d54db857cff8d0dc92cfb67c7e0c859b5e5842066',
++ 'assemble_raw_backed_candidate.py':'f64266f819744714a9b5081312be2f0d3b76d637339b194d7d50cc661ce6b443',
++ 'reconstruct_hybrid_osm.py':'da49e3b3e0c5155c39cf95967f5f0a1ac3d5f68d9d8f4429f840391e37de64bd'}
++HELPERS={
++ 'terrain_basin_screen.py':('26a81f00180f2007cf8fdf0af796662eeaa3b057a1665392207054855cf001df','4b5acd6a6d0039b125bc9299b2f1007cf2432903762a49def9ee54fc4263a731'),
++ 'priority_d8.py':('884ce9f0d84a193ba82fa85dbd10b2d0894c2b6e389a6df05099146f1db8dd79','b7e8deef7289a1cd5cf38c16270e6ab32dd04c3141f0589a8ff364605497fc24'),
++ 'spring_connector_graph.py':('86204b914bce4fdf0ee03f71d169acb8d10e301e562ae5e49ef6a48ac42211e5','be147977fa1102b2578146a17724188f22de3a26c1f6e2f34061c9f093169579'),
++ 'spring_triple_route.py':('a553215f79cd64d11d2e67998977ced8be5f878cb4a5acd8ee7650841da1da9f','fe1acd1d9e7bc7d83120f5b8244d6454594fa166b75d58f953f566a5c2fbf287'),
++ 'projected_route.py':('e3c9ac7465fc5f14e9442f206e9cc9301f2630f3446feea9802797dcb3fce4ef','3cd363d478be84697c269a42463af6c50a3cd2fa659e3c443ee92393ed45703c')}
++BOOTSTRAP=("import json,runpy,sys; paths=json.loads(sys.argv[1]); "
++           "script=sys.argv[2]; sys.argv=sys.argv[2:]; "
++           "sys.path[:0]=paths; runpy.run_path(script,run_name='__main__')")
++
++
++def sha(path):
++ h=hashlib.sha256()
++ with open(path,'rb') as f:
++  for block in iter(lambda:f.read(1048576),b''):h.update(block)
++ return h.hexdigest()
++
++
++def dependency_tree_sha256(root):
++ """Hash regular files and directories without following symlinks or .pth files."""
++ root=Path(root).resolve(strict=True)
++ if not root.is_dir():raise ValueError('dependency root must be a directory')
++ h=hashlib.sha256()
++ for directory,dirs,files in os.walk(root,followlinks=False):
++  dirs.sort();files.sort();base=Path(directory)
++  for name in dirs+files:
++   p=base/name;mode=p.lstat().st_mode;rel=p.relative_to(root).as_posix().encode('utf-8')
++   if stat.S_ISDIR(mode):kind=b'D';digest=b''
++   elif stat.S_ISREG(mode):kind=b'F';digest=bytes.fromhex(sha(p))
++   else:raise ValueError('dependency tree contains symlink or non-regular file')
++   h.update(kind+len(rel).to_bytes(8,'big')+rel+digest)
++ return h.hexdigest()
++
++
++def isolated_caller():
++ return sys.flags.isolated==1 and sys.flags.no_site==1
++
++
++def bind(boundaries,catalog,pin):
++ """Replay the pinned recipe and require equality to the selected boundary.
++
++ pin names the fresh snapshot and its hash, an explicitly pinned Python binary
++ and ordered dependency-directory tree hashes, plus four existing directories:
++ recipe_dir, inputs_dir, helpers_dir, and work_parent. Inputs include raw R2
++ readbacks and the separately pinned historical selector snapshot. The caller
++ must authenticate the fresh export; the gate independently parses its bytes.
++ """
++ key=('boundary',BOUNDARY)
++ if key not in boundaries:
++  if pin is not None:raise ValueError('Ural inputs supplied without selected boundary')
++  return boundaries,None
++ if not isolated_caller():raise ValueError('Ural gate requires an isolated no-site Python caller')
++ if not isinstance(pin,dict) or set(pin)!={'recipe_dir','inputs_dir','helpers_dir','work_parent','snapshot','snapshot_sha256','python','dependency_dirs'}:raise ValueError('selected Ural boundary requires pinned recipe inputs')
++ gate_path=Path(__file__).resolve();gate_sha=sha(gate_path)
++ fresh=load_pinned_snapshot(pin['snapshot'],pin['snapshot_sha256'],lambda:None)
++ fresh_revision,_,fresh_boundaries,fresh_catalog=boundary_records(fresh)
++ if fresh_boundaries.get(key)!=boundaries[key]:raise ValueError('Ural selected record differs from pinned fresh snapshot')
++ rec=boundaries[key]
++ if rec.get('revision_id')!=fresh_revision:raise ValueError('Ural selected revision mismatch')
++ selected={'type':'LineString','coordinates':[[float(x),float(y)] for x,y in points(rec.get('geometry'))]}
++ if rec.get('geometry_sha256')!=GEOMETRY_SHA256 or geometry_hash(selected)!=GEOMETRY_SHA256:raise ValueError('selected Ural geometry mismatch')
++ refs=rec.get('qualified_source_refs')
++ if not isinstance(refs,list) or len(refs)<len(URAL_CONSTRUCTION_INPUTS):raise ValueError('Ural construction source set mismatch')
++ seen=set();keys=set();source_pins=[];supporting=[]
++ for ref in refs:
++  rel=ref.get('relationship') if isinstance(ref,dict) else None
++  if not isinstance(ref,dict) or set(ref)!={'source_id','version','relationship','role'}:raise ValueError('invalid Ural source reference')
++  source_key=(ref['source_id'],ref['version'])
++  if source_key in keys:raise ValueError('duplicate Ural source reference')
++  keys.add(source_key)
++  source=catalog.get((ref.get('source_id'),ref.get('version')))
++  if not isinstance(source,dict) or source.get('kind')!='raw' or not re.fullmatch('[0-9a-f]{64}',str(source.get('sha256'))):raise ValueError('Ural source catalog mismatch')
++  if fresh_catalog.get((ref.get('source_id'),ref.get('version')))!=source:raise ValueError('Ural catalog differs from pinned fresh snapshot')
++  if rel in SUPPORTING_RELATIONSHIPS and ref.get('role')=='supporting_research_evidence':
++   supporting.append({'source_id':ref['source_id'],'version':ref['version'],'relationship':rel,'catalog_sha256':source['sha256']});continue
++  if rel not in URAL_CONSTRUCTION_INPUTS or rel in seen or ref.get('role')!='construction_input':raise ValueError('Ural construction source set mismatch')
++  seen.add(rel);sid,digest,tile=URAL_CONSTRUCTION_INPUTS[rel]
++  if ref.get('source_id')!=sid or source.get('sha256')!=digest:raise ValueError('Ural source catalog mismatch')
++  if tile and (source.get('representation')!='manifest_of_raw_parts' or source.get('full_tile_sha256')!=tile):raise ValueError('Ural raw-tile manifest mismatch')
++  entry={'source_id':sid,'version':ref['version'],'relationship':rel,'catalog_sha256':digest}
++  if tile:entry.update(representation='manifest_of_raw_parts',raw_tile_sha256=tile)
++  source_pins.append(entry)
++ if seen!=set(URAL_CONSTRUCTION_INPUTS):raise ValueError('Ural construction source set mismatch')
++ recipe=Path(pin['recipe_dir']).resolve(strict=True);inputs=Path(pin['inputs_dir']).resolve(strict=True)
++ helpers=Path(pin['helpers_dir']).resolve(strict=True);work=Path(pin['work_parent']).resolve(strict=True)
++ if not all(x.is_dir() for x in (recipe,inputs,helpers,work)):raise ValueError('Ural recipe paths must be directories')
++ if any(work==p or work in p.parents or p in work.parents for p in (recipe,inputs,helpers)):raise ValueError('Ural work overlaps inputs')
++ python_pin=pin['python'];deps=pin['dependency_dirs']
++ if not isinstance(python_pin,dict) or set(python_pin)!={'path','sha256'} or not isinstance(deps,list) or not 1<=len(deps)<=8:raise ValueError('invalid Ural Python runtime pin')
++ python=Path(python_pin['path']).resolve(strict=True)
++ if not python.is_file() or sha(python)!=python_pin['sha256']:raise ValueError('Ural Python executable pin mismatch')
++ dep_paths=[]
++ for d in deps:
++  if not isinstance(d,dict) or set(d)!={'path','sha256'}:raise ValueError('invalid Ural dependency pin')
++  path=Path(d['path']).resolve(strict=True)
++  if path in dep_paths or work==path or work in path.parents or path in work.parents:raise ValueError('invalid or overlapping Ural dependency path')
++  if dependency_tree_sha256(path)!=d['sha256']:raise ValueError('Ural dependency tree pin mismatch')
++  dep_paths.append(path)
++ def capture_code():
++  captured={}
++  for name,digest in RECIPE_CODE.items():
++   raw=(recipe/name).read_bytes()
++   if len(raw)>1024*1024 or hashlib.sha256(raw).hexdigest()!=digest:raise ValueError('Ural recipe code pin mismatch: '+name)
++   captured[name]=raw
++  return captured
++ captured=capture_code()
++ helper_bytes={}
++ for name,allowed in HELPERS.items():
++  raw=(helpers/name).read_bytes();digest=hashlib.sha256(raw).hexdigest()
++  if len(raw)>1024*1024 or digest not in allowed:raise ValueError('Ural helper pin mismatch: '+name)
++  helper_bytes[name]=raw
++ if sha(inputs/'review_snapshot.json')!=RECIPE_SNAPSHOT_SHA256:raise ValueError('Ural selector snapshot pin mismatch')
++ with tempfile.TemporaryDirectory(prefix='ural-replay-',dir=work) as temp:
++  private=Path(temp)/'recipe';private.mkdir();out=Path(temp)/'run'
++  for name,raw in captured.items():(private/name).write_bytes(raw)
++  private_helpers=Path(temp)/'helpers';private_helpers.mkdir()
++  for name,raw in helper_bytes.items():(private_helpers/name).write_bytes(raw)
++  private_deps=[]
++  for index,(path,d) in enumerate(zip(dep_paths,deps)):
++   dest=Path(temp)/('deps-'+str(index));shutil.copytree(path,dest,symlinks=True)
++   if dependency_tree_sha256(dest)!=d['sha256']:raise ValueError('Ural captured dependency tree mismatch')
++   private_deps.append(str(dest))
++  home=Path(temp)/'home';home.mkdir()
++  clean_env={'PATH':os.defpath,'LC_ALL':'C','HOME':str(home),'XDG_CONFIG_HOME':str(home),'XDG_CACHE_HOME':str(home),'OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1','NUMEXPR_NUM_THREADS':'1'}
++  cmd=[str(python),'-I','-S','-B','-c',BOOTSTRAP,json.dumps(private_deps),str(private/'reproduce_raw_boundary.py'),'--inputs',str(inputs),'--helpers',str(private_helpers),'--workdir',str(out),'--python-sha256',python_pin['sha256']]
++  for path in private_deps:cmd.extend(['--dependency-dir',path])
++  proc=subprocess.run(cmd,env=clean_env,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
++  if proc.returncode:raise ValueError('Ural raw recipe failed: '+proc.stderr[:4096].decode(errors='replace'))
++  derived=out/'ural-raw-backed-continuous-cop-only.geometry.json'
++  if not derived.is_file() or derived.stat().st_size>4*1024*1024:raise ValueError('invalid Ural recipe output')
++  raw=derived.read_bytes();geom=json.loads(raw)
++  if geometry_hash(geom)!=GEOMETRY_SHA256 or geom!=selected:raise ValueError('Ural raw recipe differs from selected boundary')
++  if capture_code()!=captured or any((private/name).read_bytes()!=raw for name,raw in captured.items()):raise ValueError('Ural recipe code changed during replay')
++  if any((helpers/name).read_bytes()!=raw or (private_helpers/name).read_bytes()!=raw for name,raw in helper_bytes.items()):raise ValueError('Ural helper changed during replay')
++  if sha(python)!=python_pin['sha256'] or any(dependency_tree_sha256(path)!=d['sha256'] or dependency_tree_sha256(Path(copy))!=d['sha256'] for path,d,copy in zip(dep_paths,deps,private_deps)):raise ValueError('Ural Python runtime changed during replay')
++  if sha(gate_path)!=gate_sha:raise ValueError('Ural gate code changed during replay')
++  if sha(inputs/'review_snapshot.json')!=RECIPE_SNAPSHOT_SHA256:raise ValueError('Ural selector snapshot changed')
++  if sha(pin['snapshot'])!=pin['snapshot_sha256']:raise ValueError('fresh selected snapshot changed during Ural replay')
++  trace={'schema':'ural-source-replay-trace-v1','status':'verified','boundary_id':BOUNDARY,'selected_revision':fresh_revision,
++         'selected_geometry_sha256':rec['geometry_sha256'],'derived_geometry_sha256':geometry_hash(geom),
++         'geometry_file_sha256':hashlib.sha256(raw).hexdigest(),
++         'selected_snapshot_sha256':pin['snapshot_sha256'],'selector_snapshot_sha256':RECIPE_SNAPSHOT_SHA256,'gate_code_sha256':gate_sha,'recipe_code_sha256':dict(RECIPE_CODE),
++         'helper_sha256':{name:hashlib.sha256(raw).hexdigest() for name,raw in sorted(helper_bytes.items())},
++         'python_sha256':python_pin['sha256'],'dependency_tree_sha256':[d['sha256'] for d in deps],
++         'sources':sorted(source_pins,key=lambda x:(x['source_id'],x['version'])),
++         'supporting_citations':sorted(supporting,key=lambda x:(x['source_id'],x['version'])),
++         'method':'raw-hydrobasins-arcticdem-copernicus-osm-and-neon-selector-v1',
++         'limitations':['The structured selector has incomplete historical lineage.','Modeled terrain, mapped spring and delta choices are not survey certification.','The outer caller, Python standard library and operating-system native libraries are part of the trusted runtime; the outer caller must pin its own code and dependencies.']}
++ return boundaries,trace
++
++
++def verify_trace(boundaries,catalog,pin,expected_trace):
++ """Independently replay inputs and compare the whole previously recorded trace."""
++ _,observed=bind(boundaries,catalog,pin)
++ if observed is None or observed!=expected_trace:raise ValueError('Ural source replay trace mismatch')
++ return observed
+--- /dev/null
++++ b/test_caucasus_nested_isolation.py
+@@ -0,0 +1,41 @@
++import json, sys, unittest
++from unittest.mock import patch
++from pathlib import Path
++from types import SimpleNamespace
++def setUpModule():
++ import importlib
++ global binding, gate_path, previous_modules
++ gate_path=str(Path(__file__).parent/'caucasus-audit');sys.path.insert(0,gate_path)
++ names=('caucasus_seed_gate','caucasus_effective_snapshot','caucasus_stage2_validation','caucasus_stage2_binding')
++ previous_modules={name:sys.modules.get(name) for name in names}
++ binding=importlib.import_module('caucasus_stage2_binding')
++
++def tearDownModule():
++ sys.path.remove(gate_path)
++ for name,old in previous_modules.items():
++  if old is None:sys.modules.pop(name,None)
++  else:sys.modules[name]=old
++
++class NestedIsolation(unittest.TestCase):
++ def test_nested_process_is_no_site_and_has_explicit_absolute_roots(self):
++  with patch.object(binding.sys,'flags',SimpleNamespace(isolated=1,no_site=1)), patch.object(binding.sys,'path',['/fixture/dependencies']), patch.object(binding,'verify_config'), patch.object(binding,'digest',return_value='a'*64), patch.object(binding,'validate_direct_request'), patch.object(binding.subprocess,'run') as run:
++   binding.run_seed({k:{'path':'/p','sha256':'a'*64} for k in ('recipe','hydro','author')},'request','a'*64,'producer','b'*64,'work','output','report')
++  cmd=run.call_args.args[0]
++  self.assertEqual(cmd[1:4],['-I','-S','-B'])
++  roots=json.loads(cmd[6]);self.assertEqual(roots,[str(binding.HERE),'/fixture/dependencies'])
++  self.assertIn('sys.path[:0]=paths',cmd[5])
++if __name__=='__main__':unittest.main()
++
++class NestedRealProcess(unittest.TestCase):
++ def test_no_site_child_and_hostile_pythonpath_not_loaded(self):
++  import os, tempfile
++  from unittest.mock import patch
++  with tempfile.TemporaryDirectory() as d:
++   root=Path(d); gate=root/'caucasus_seed_gate.py'; report=root/'report.json'; marker=root/'executed'
++   gate.write_text("import json,sys\nfrom pathlib import Path\np=Path(sys.argv[sys.argv.index('--report')+1])\np.write_text(json.dumps({'isolated':sys.flags.isolated,'no_site':sys.flags.no_site,'path':sys.path}))\n")
++   (root/'sitecustomize.py').write_text('open('+repr(str(marker))+', "w").write("bad")')
++   cfg={k:{'path':'/p','sha256':'a'*64} for k in ('recipe','hydro','author')}
++   # Simulate the authenticated no-site parent bootstrap, which owns sys.path.
++   with patch.object(binding.sys,'flags',SimpleNamespace(isolated=1,no_site=1)), patch.object(binding,'HERE',root), patch.object(binding,'verify_config'), patch.object(binding,'digest',return_value='a'*64), patch.object(binding,'validate_direct_request'), patch.dict(os.environ,{'PYTHONPATH':str(root),'PYTHONHOME':str(root)}):
++    binding.run_seed(cfg,'request','a'*64,'producer','b'*64,'work','output',report)
++   observed=json.loads(report.read_text());self.assertEqual((observed['isolated'],observed['no_site']),(1,1));self.assertFalse(marker.exists())
+--- a/test_direct_core_binding.py
++++ b/test_direct_core_binding.py
+@@ -18,7 +18,7 @@
+   self.q=direct_seed.request(self.grid,expected,2);self.request.write_text(json.dumps(self.q));self.db={'request':pin(self.request),'panama_osm_archive':inputs['panama_osm_archive'],'outer_config':self.outer_pin};self.derived={'seed_request_sha256':self.db['request']['sha256']};self.paths={'seed_report':self.report};self.seed={'ok':True}
+   self.pins={core:self.q['inputs'][seed]['sha256'] for seed,core in (('snapshot','decision_snapshot'),('resolution','resolution_report'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'))}
+  def check(self):
+-  with mock.patch.object(direct_seed,'verify_result',return_value=(self.q,self.seed)),mock.patch.object(direct_seed,'verify_panama_source',return_value={'verified':True}):return c.verify_direct_binding(self.db,self.derived,self.cfg,self.paths,self.pins,self.grid,self.seed,lambda:None)
++  with mock.patch.object(direct_seed,'verify_result',return_value=(self.q,self.seed)),mock.patch.object(direct_seed,'verify_panama_source',return_value={'verified':True}),mock.patch.object(direct_seed,'verify_ural_source',return_value=None):return c.verify_direct_binding(self.db,self.derived,self.cfg,self.paths,self.pins,self.grid,self.seed,lambda:None)
+  def test_exact_binding(self):self.assertEqual(self.check(),self.q)
+  def update_outer(self):
+   op=Path(self.outer_pin['path']);op.write_text(json.dumps(self.outer));self.outer_pin['sha256']=hashlib.sha256(op.read_bytes()).hexdigest();self.cfg['orchestration']['outer_config_sha256']=self.outer_pin['sha256']
+@@ -34,6 +34,15 @@
+  def test_accept_same_caucasus_binding(self):
+   self.outer['caucasus_source']={'recipe':'r'};self.update_outer();self.cfg['caucasus_binding']={'config':{'recipe':'r'}}
+   self.assertEqual(self.check(),self.q)
++ def test_ural_config_bound_to_outer_request(self):
++  config={k:'/ural/'+k for k in ('recipe_dir','inputs_dir','helpers_dir','work_parent')}
++  config.update(inventories={k:{'file':'a'*64} for k in ('recipe_dir','inputs_dir','helpers_dir')},python={'path':'/python','sha256':'b'*64},dependency_dirs=[{'path':'/deps','sha256':'c'*64}])
++  self.outer['ural_source']=config;self.update_outer()
++  self.q=direct_seed.request(self.grid,self.q['inputs'],2,config);self.request.write_text(json.dumps(self.q))
++  self.db['request']['sha256']=hashlib.sha256(self.request.read_bytes()).hexdigest();self.derived['seed_request_sha256']=self.db['request']['sha256']
++  self.assertEqual(self.check(),self.q)
++  self.q=copy.deepcopy(self.q);self.q['ural_source']['inventories']['inputs_dir']['file']='f'*64
++  with self.assertRaisesRegex(ValueError,'outer request mismatch'):self.check()
+  def test_reject_changed_contract(self):
+   self.q=copy.deepcopy(self.q);self.q['inputs']['closure_contract']['sha256']='0'*64
+   with self.assertRaisesRegex(ValueError,'outer request mismatch'):self.check()
+--- a/test_fresh_outer_gating.py
++++ b/test_fresh_outer_gating.py
+@@ -18,6 +18,13 @@
+   with mock.patch.object(outer,'FRESH_DIRECT_EXECUTION_ENABLED',True):
+    with self.assertRaisesRegex(ValueError,'Caucasus direct gate wiring awaits independent review'):outer.run(self.p,self.d/'work',self.d/'output')
+   self.assertFalse((self.d/'work').exists())
++ def test_ural_and_caucasus_are_recognized_but_ural_cannot_run(self):
++  self.cfg['caucasus_source']={'recipe':{},'hydro':{},'author':{},'code_sha256':{}}
++  self.cfg['ural_source']={k:'/ural/'+k for k in ('recipe_dir','inputs_dir','helpers_dir','work_parent')}
++  self.cfg['ural_source'].update(inventories={k:{'file':'a'*64} for k in ('recipe_dir','inputs_dir','helpers_dir')},python={'path':'/python','sha256':'b'*64},dependency_dirs=[{'path':'/deps','sha256':'c'*64}]);self.write()
++  with mock.patch.object(outer,'FRESH_DIRECT_EXECUTION_ENABLED',True),mock.patch.object(outer,'CAUCASUS_DIRECT_GATE_ENABLED',True):
++   with self.assertRaisesRegex(ValueError,'Ural direct gate wiring awaits independent review'):outer.run(self.p,self.d/'work',self.d/'output')
++  self.assertFalse((self.d/'work').exists());self.assertFalse((self.d/'output').exists())
+  def test_missing_runtime_dependency_fails_before_work(self):
+   self.cfg['caucasus_source']={'recipe':{},'hydro':{},'author':{},'code_sha256':{}};self.write()
+   with mock.patch.object(outer,'FRESH_DIRECT_EXECUTION_ENABLED',True),mock.patch.object(outer,'CAUCASUS_DIRECT_GATE_ENABLED',True),mock.patch('direct_seed.check_runtime',side_effect=ValueError('missing dependency')):
+--- /dev/null
++++ b/test_ural_replay_binding.py
+@@ -0,0 +1,101 @@
++import json,tempfile,unittest
++from pathlib import Path
++from types import SimpleNamespace
++from unittest import mock
++import direct_seed as d
++
++class ReplayBinding(unittest.TestCase):
++ def setUp(self):
++  self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name);self.output=self.root/'output';self.output.mkdir();self.request=self.root/'request.json';self.raw=b'{}';self.request.write_bytes(self.raw)
++  self.q={'ural_source':{'sample':True},'inputs':{}};self.trace={'schema':'ural-source-replay-trace-v1','status':'verified'};self.report={'ural_source_trace':self.trace}
++ def execute(self,stdout=None,rc=0):
++  result=SimpleNamespace(returncode=rc,stdout=json.dumps(self.trace) if stdout is None else stdout,stderr='replay failed')
++  with mock.patch.object(d,'load_request',return_value=(self.raw,self.q)),mock.patch.object(d,'verify_result',return_value=(self.q,self.report)),mock.patch.object(d,'code_check'),mock.patch.object(d,'inputs_check'),mock.patch.object(d,'require_disjoint_ural'),mock.patch.object(d.subprocess,'run',return_value=result) as run:
++   value=d.verify_ural_source(self.request,self.output)
++   return value,run.call_args
++ def test_isolated_replay_and_whole_trace(self):
++  value,call=self.execute();self.assertEqual(value,self.trace);self.assertEqual(call.args[0][1:4],['-I','-S','-B']);self.assertIn('verify_trace',call.args[0][5]);self.assertIn('check()',call.args[0][5])
++ def test_reject_altered_trace_and_failed_subprocess(self):
++  with self.assertRaisesRegex(ValueError,'trace mismatch'):self.execute(stdout='{}')
++  with self.assertRaisesRegex(ValueError,'replay rejected'):self.execute(rc=1)
++ def test_selected_boundary_cannot_omit_replay(self):
++  snapshot=self.root/'snapshot.json';snapshot.write_text(json.dumps({'mainland_boundaries':[{'boundary_id':'ural_kara_coast_to_caspian'}]}))
++  self.q.pop('ural_source');self.q['inputs']['snapshot']={'path':str(snapshot),'sha256':'a'*64};self.report['ural_source_trace']=None
++  with self.assertRaisesRegex(ValueError,'selected Ural boundary requires source replay'):self.execute()
++ def test_unselected_boundary_allows_no_replay(self):
++  snapshot=self.root/'snapshot.json';snapshot.write_text(json.dumps({'mainland_boundaries':[{'boundary_id':'other'}]}))
++  self.q.pop('ural_source');self.q['inputs']['snapshot']={'path':str(snapshot),'sha256':'a'*64};self.report['ural_source_trace']=None
++  value,call=self.execute();self.assertIsNone(value);self.assertIsNone(call)
++ def test_reject_trace_without_requested_gate(self):
++  self.q.pop('ural_source')
++  with self.assertRaisesRegex(ValueError,'unexpected Ural trace'):self.execute()
++if __name__=='__main__':unittest.main()
++
++class RealIsolatedReplayBootstrap(unittest.TestCase):
++ def test_child_runs_isolated_and_compares_entire_trace(self):
++  import hashlib,os
++  from unittest.mock import patch
++  with tempfile.TemporaryDirectory() as td:
++   root=Path(td);producer=root/'seed-producer-direct';producer.mkdir();output=root/'output';output.mkdir();request=root/'request';marker=root/'startup';hostile=root/'hostile';hostile.mkdir()
++   (hostile/'sitecustomize.py').write_text('open('+repr(str(marker))+',"w").write("bad")')
++   sources={
++    'closure_client.py':'def sha(path,guard): return "digest"\n',
++    'export_adapter.py':'def load_pinned_snapshot(path,digest,guard): return {}\ndef boundary_records(snapshot): return ("r","e",{}, {})\n',
++    'ural_producer_config.py':'def validate_ural_relationship_scope(x): pass\ndef prepare(config,snapshot,protected,sha,guard):\n assert config == {"fixture": True}\n return {}, lambda: None\n',
++    'ural_seed_source.py':'import sys\ndef verify_trace(boundaries,catalog,pin,expected):\n assert sys.flags.isolated and sys.flags.no_site and sys.flags.dont_write_bytecode\n assert expected == {"status":"verified"}\n return expected\n'}
++   freeze={}
++   for name,body in sources.items():
++    p=producer/name;p.write_text(body);freeze[name]=hashlib.sha256(p.read_bytes()).hexdigest()
++   trace={'status':'verified'};q={'ural_source':{'fixture':True},'inputs':{'snapshot':{'path':'/fixture','sha256':'a'*64}}};raw=json.dumps(q).encode();request.write_bytes(raw);report={'ural_source_trace':trace};(output/'report.json').write_text(json.dumps(report))
++   with patch.object(d,'HERE',root),patch.object(d,'DIRECT_SEED_FREEZE',freeze),patch.object(d,'load_request',return_value=(raw,q)),patch.object(d,'verify_result',return_value=(q,report)),patch.object(d,'code_check'),patch.object(d,'inputs_check'),patch.object(d,'require_disjoint_ural'),patch.dict(os.environ,{'PYTHONPATH':str(hostile),'PYTHONHOME':str(hostile)}):
++    self.assertEqual(d.verify_ural_source(request,output),trace)
++   self.assertFalse(marker.exists())
++
++class CaptureLocation(unittest.TestCase):
++ def test_ignores_default_temp_root_inside_ural_work_parent(self):
++  from unittest.mock import patch
++  with tempfile.TemporaryDirectory() as td:
++   root=Path(td);builder=root/'builder';builder.mkdir();output=builder/'output';output.mkdir();request=builder/'request.json';request.write_bytes(b'{}')
++   config={k:str(root/k) for k in ('recipe_dir','inputs_dir','helpers_dir','work_parent')}
++   for p in config.values():Path(p).mkdir()
++   dep=root/'deps';dep.mkdir();python=root/'python';python.write_text('python')
++   config.update(inventories={k:{'fixture':'a'*64} for k in ('recipe_dir','inputs_dir','helpers_dir')},python={'path':str(python),'sha256':'a'*64},dependency_dirs=[{'path':str(dep),'sha256':'b'*64}])
++   trace={'status':'verified'};q={'ural_source':config,'inputs':{}};report={'ural_source_trace':trace};raw=b'{}';seen=[]
++   def run(cmd,**kwargs):
++    seen.append(Path(kwargs['cwd']));self.assertEqual(seen[-1].parent,builder)
++    return SimpleNamespace(returncode=0,stdout=json.dumps(trace),stderr='')
++   with patch.object(d,'load_request',return_value=(raw,q)),patch.object(d,'verify_result',return_value=(q,report)),patch.object(d,'code_check'),patch.object(d,'inputs_check'),patch.object(d.subprocess,'run',side_effect=run),patch.object(tempfile,'tempdir',config['work_parent']):
++    self.assertEqual(d.verify_ural_source(request,output),trace)
++   self.assertEqual(len(seen),1)
++ def test_overlapping_capture_parent_rejected_before_subprocess(self):
++  from unittest.mock import patch
++  with tempfile.TemporaryDirectory() as td:
++   root=Path(td);output=root/'output';output.mkdir();request=root/'request';request.write_bytes(b'{}')
++   config={k:str(root/k) for k in ('recipe_dir','inputs_dir','helpers_dir','work_parent')}
++   for p in config.values():Path(p).mkdir()
++   dep=root/'deps';dep.mkdir();python=root/'python';python.write_text('python')
++   config.update(inventories={k:{'fixture':'a'*64} for k in ('recipe_dir','inputs_dir','helpers_dir')},python={'path':str(python),'sha256':'a'*64},dependency_dirs=[{'path':str(dep),'sha256':'b'*64}])
++   q={'ural_source':config,'inputs':{}};report={'ural_source_trace':{'status':'verified'}}
++   with patch.object(d,'load_request',return_value=(b'{}',q)),patch.object(d,'verify_result',return_value=(q,report)),patch.object(d,'code_check'),patch.object(d,'inputs_check'),patch.object(d.subprocess,'run') as run:
++    with self.assertRaisesRegex(ValueError,'overlaps Ural'):d.verify_ural_source(request,output)
++    run.assert_not_called()
++
++class RealCaptureContract(unittest.TestCase):
++ def test_real_producer_preparation_accepts_output_adjacent_capture(self):
++  import hashlib,sys
++  from ural_producer_config import prepare
++  from ural_seed_source import dependency_tree_sha256
++  def sha(path,guard):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++  with tempfile.TemporaryDirectory() as td:
++   root=Path(td);builder=root/'builder';builder.mkdir();work=root/'ural-work';work.mkdir()
++   config={'work_parent':str(work),'inventories':{}}
++   for k in ('recipe_dir','inputs_dir','helpers_dir'):
++    directory=root/k;directory.mkdir();f=directory/'fixture';f.write_text(k);config[k]=str(directory);config['inventories'][k]={'fixture':sha(f,None)}
++   dep=root/'deps';dep.mkdir();executable=Path(sys.executable).resolve()
++   config['python']={'path':str(executable),'sha256':sha(executable,None)}
++   config['dependency_dirs']=[{'path':str(dep),'sha256':dependency_tree_sha256(dep)}]
++   snapshot=builder/'snapshot';snapshot.write_text('{}');pin={'path':str(snapshot),'sha256':sha(snapshot,None)}
++   # A default temp root equal to the replay workspace used to make this fail.
++   with mock.patch.object(tempfile,'tempdir',str(work)),tempfile.TemporaryDirectory(prefix='.capture-',dir=builder) as capture:
++    value,check=prepare(config,pin,[builder/'seed-work',builder/'output',Path(capture)],sha,lambda:None)
++    check();self.assertEqual(value['work_parent'],str(work))
+--- /dev/null
++++ b/test_ural_request_contract.py
+@@ -0,0 +1,60 @@
++from pathlib import Path
++import copy, unittest
++import direct_seed
++
++class UralRequestContract(unittest.TestCase):
++ def setUp(self):
++  self.inputs={k:{'path':'/p/'+k,'sha256':'a'*64} for k in ('snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','terminal_checker','closure_contract','seed_builder','seed_kernel')}
++  self.grid={'width':8,'height':4,'west':-180,'north':90,'step':45}
++  self.config={k:'/ural/'+k for k in ('recipe_dir','inputs_dir','helpers_dir','work_parent')}
++  self.config.update(inventories={k:{'file':'a'*64} for k in ('recipe_dir','inputs_dir','helpers_dir')},python={'path':'/python','sha256':'b'*64},dependency_dirs=[{'path':'/deps','sha256':'c'*64}])
++ def test_request_roundtrip(self):
++  q=direct_seed.request(self.grid,self.inputs,4,self.config)
++  self.assertEqual(q['ural_source'],self.config)
++ def test_relative_paths_rejected(self):
++  for key in ('recipe_dir','inputs_dir','helpers_dir','work_parent'):
++   c=copy.deepcopy(self.config);c[key]='relative'
++   with self.subTest(key=key),self.assertRaises(ValueError):direct_seed.request(self.grid,self.inputs,4,c)
++  for key in ('python','dependency_dirs'):
++   c=copy.deepcopy(self.config);(c[key] if key=='python' else c[key][0])['path']='relative'
++   with self.subTest(key=key),self.assertRaises(ValueError):direct_seed.request(self.grid,self.inputs,4,c)
++ def test_ural_source_paths_disjoint_from_outer_work(self):
++  import tempfile
++  from pathlib import Path
++  with tempfile.TemporaryDirectory() as td:
++   root=Path(td);c=copy.deepcopy(self.config)
++   for name in ('recipe_dir','inputs_dir','helpers_dir','work_parent'):
++    path=root/name;path.mkdir();c[name]=str(path)
++   dep=root/'deps';dep.mkdir();c['dependency_dirs'][0]['path']=str(dep)
++   python=root/'python';python.write_bytes(b'python');c['python']['path']=str(python)
++   direct_seed.require_disjoint_ural(c,root/'work',root/'out')
++   with self.assertRaisesRegex(ValueError,'overlaps Ural'):
++    direct_seed.require_disjoint_ural(c,root/'work',root/'out',[dep/'lock'])
++   for path in (Path(c['recipe_dir'])/'work',Path(c['work_parent'])/'work',dep/'work',root):
++    with self.subTest(path=path),self.assertRaisesRegex(ValueError,'overlaps Ural'):
++     direct_seed.require_disjoint_ural(c,path,root/'out')
++ def test_malformed_inventory_and_dependency_rejected(self):
++  for name in ('../escape','/absolute','a//b','a/./b',''):
++   c=copy.deepcopy(self.config);c['inventories']['inputs_dir']={name:'a'*64}
++   with self.subTest(name=name),self.assertRaises(ValueError):direct_seed.request(self.grid,self.inputs,4,c)
++  c=copy.deepcopy(self.config);c['dependency_dirs']=[]
++  with self.assertRaises(ValueError):direct_seed.request(self.grid,self.inputs,4,c)
++  c=copy.deepcopy(self.config);c['inventories']['inputs_dir']['file']='g'*64
++  with self.assertRaises(ValueError):direct_seed.request(self.grid,self.inputs,4,c)
++if __name__=='__main__':unittest.main()
++
++class PrelockUral(unittest.TestCase):
++ def test_inconsistent_request_rejected_before_any_disjoint_check(self):
++  from unittest.mock import patch
++  import build_stage2 as core
++  with patch.object(direct_seed,'require_disjoint_ural') as protect:
++   with self.assertRaisesRegex(ValueError,'pre-lock mismatch'):
++    core.prelock_ural_disjoint({}, {'ural_source':{'wrong':'request'}},Path('/work'),Path('/out'))
++   protect.assert_not_called()
++ def test_matching_config_protects_core_lock(self):
++  from unittest.mock import patch
++  import build_stage2 as core
++  c={'fixture':True}
++  with patch.object(direct_seed,'require_disjoint_ural') as protect:
++   core.prelock_ural_disjoint({'ural_source':c},{'ural_source':c},Path('/work'),Path('/out'))
++   self.assertEqual(protect.call_args.args[3],[Path('/work.lock')])
+--- /dev/null
++++ b/ural-runtime-freeze-candidate.sha256
+@@ -0,0 +1,17 @@
++b1edf136b05109dcfb080158f58dffe9f910c6c30b3a654721478453b64270e2  assemble_osm_ways.py
++08fd855bddd47dd2152ae0ac0fabd1e23e1d75db9e337a0af3a840a6787e1cb2  closure-checkers/validate_terminal_closure.py
++5b01e11908293df6f941adbc391d4c9e7709f49c1b8ad60d46be0558d66ca6b3  closure-checkers/validate_water_closure_v2.py
++51007b2f0e8e4244974ef1b698ee47dcee8739f0a2d5ce04c56bd9c1fe92c1e6  closure_client.py
++e2874d45df5dff9e3a300f7e93f1fb1d1730196766d36dca14f0c629c62533c3  export_adapter.py
++ef6bc620e447f38be3524bcebeba6b1fe309ab2a4ea7f507ccf38c3ef4d30add  osm_source_handoff.py
++c87ea27314b8db533e52fa2daf8ae98b2df1de3c9a4b0884d4efcbc874d9253a  panama_core_validation.py
++f6edea70f22993241acbffcfd1d02eefaf7a9e60b00925e8afdfb5963b781655  panama_seed_source.py
++8b59d9212064ed7fcdde37ca9ad53a8b1544c0b2abad4b1e2ac3c30e49b193a1  rasterizer/build_seed.py
++1543a7014f84eb5969b073435d463e838922c186d996ec9dcb0f68133ac15fa8  rasterizer/seed_kernel.cpp
++1deb45ca74f48439543eac5955cf1e3544d1248aba94e709e240e883801c7321  region_client.py
++3d7f14ba3df538fd35e40509e576faaf9b844ec3e4dbb3e8a8c8ddee062d5706  region_worker.py
++d54df44cecddd76a9aae660112375b934700051d09b6facb6de0a9646a70c011  regions.py
++6a1e69411b25c67948c7b741b6330dc9e335c0b00688bad3a5bbc52247f151d3  seed_producer.py
++0e98f77341b8f297b434d46250f2e8e9f615e6a3764cad176fe3cdf40c52f342  seed_rules.py
++9c041415e7a21723c7ceed887c647c4884d749e12a94f7b6ccc920d38912f3c9  ural_producer_config.py
++073a57da44a2ad330ac38e0068144f1e00ac9bd3e51dce3c43531e10b6cb28ea  ural_seed_source.py
