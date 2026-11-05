@@ -5,7 +5,7 @@ from rasterio.windows import from_bounds
 from pyproj import Transformer
 from shapely.geometry import LineString
 
-def run(src, mask, bounds, off, a, b, crs, line=None):
+def run(src, mask, bounds, off, a, b, crs, line=None, diagnostic=None, basin_outlets=None):
     tx=Transformer.from_crs(4326,crs,always_xy=True)
     inv=Transformer.from_crs(crs,4326,always_xy=True)
     A=tx.transform(*a); B=tx.transform(*b)
@@ -64,7 +64,31 @@ def run(src, mask, bounds, off, a, b, crs, line=None):
         r1,c1=divmod(inds[0],w);r2,c2=divmod(inds[1],w)
         pairs.append(math.hypot((c1-c2)*dx,(r1-r2)*dy))
         outlets.append([list(rasterio.transform.xy(trans,r1,c1)),list(rasterio.transform.xy(trans,r2,c2))])
-    return {'bounds':bounds,'offset_m':off,'shape':[h,w], 'valid_fraction':round(float(valid.mean()),4),'excluded':excluded,'same_outlet':sum(x==0 for x in pairs),'within_500m':sum(x<=500 for x in pairs),'outlet_separation_m':[round(x) for x in pairs], 'outlet_pairs_lonlat':outlets}
+    result={'bounds':bounds,'offset_m':off,'shape':[h,w], 'valid_fraction':round(float(valid.mean()),4),'excluded':excluded,'same_outlet':sum(x==0 for x in pairs),'within_500m':sum(x<=500 for x in pairs),'outlet_separation_m':[round(x) for x in pairs], 'outlet_pairs_lonlat':outlets}
+    if diagnostic is not None:
+        if basin_outlets is None or len(basin_outlets)!=2:raise ValueError('two basin outlets required')
+        targets=[]
+        for p in basin_outlets:
+            rr,cc=rasterio.transform.rowcol(trans,*p)
+            if not (0<=rr<h and 0<=cc<w and valid[rr,cc] and np.isfinite(flood[rr,cc])):raise ValueError('invalid basin outlet')
+            targets.append(outlet(rr*w+cc))
+        if targets[0]==targets[1]:raise ValueError('basin outlets must be distinct')
+        roots=np.zeros((h,w),dtype=np.uint8)
+        for rr,cc in order:
+            root=outlet(rr*w+cc)
+            if root==targets[0]:roots[rr,cc]=1
+            elif root==targets[1]:roots[rr,cc]=2
+        # Cells on either side of a four-neighbor transition between the two selected roots.
+        edges=np.zeros_like(roots,dtype=bool)
+        v=(roots[1:,:]+roots[:-1,:]==3)&(roots[1:,:]*roots[:-1,:]==2);edges[1:,:]|=v;edges[:-1,:]|=v
+        v=(roots[:,1:]+roots[:,:-1]==3)&(roots[:,1:]*roots[:,:-1]==2);edges[:,1:]|=v;edges[:,:-1]|=v
+        rr,cc=rasterio.transform.rowcol(trans,*diagnostic)
+        if not (0<=rr<h and 0<=cc<w and valid[rr,cc]):raise ValueError('invalid diagnostic point')
+        ys,xs=np.where(edges)
+        if not len(xs):raise ValueError('no transition between selected outlets')
+        d=np.hypot((xs-cc)*dx,(ys-rr)*dy);i=int(np.argmin(d)); lon,lat=rasterio.transform.xy(trans,int(ys[i]),int(xs[i]))
+        result['diagnostic']={'point':diagnostic,'root_class':int(roots[rr,cc]),'class_cell_counts':[int(np.count_nonzero(roots==i)) for i in (1,2)],'other_or_unrouted_cells':int(np.count_nonzero(valid&(roots==0))),'nearest_transition_center_m':float(d[i]),'nearest_transition_center_lonlat':[lon,lat],'note':'Grid-center distance to a four-neighbor modeled outlet transition, not a surveyed divide or shortest safe connector.'}
+    return result
 
 if __name__ == '__main__':
     p=argparse.ArgumentParser(description='Experimental local D8 outlet comparison; not a watershed proof')
@@ -75,7 +99,10 @@ if __name__ == '__main__':
     p.add_argument('--line',help='optional JSON coordinate array; overrides the straight chord')
     p.add_argument('--crs',required=True,help='local metric projected CRS, e.g. EPSG code')
     p.add_argument('--offset',type=float,required=True,help='perpendicular distance in metres')
+    p.add_argument('--diagnostic-point',type=float,nargs=2,metavar=('LON','LAT'))
+    p.add_argument('--basin-outlets',type=float,nargs=4,metavar=('LON1','LAT1','LON2','LAT2'))
     a=p.parse_args()
     if a.offset <= 0: p.error('offset must be positive')
     route=json.load(open(a.line)) if a.line else None
-    print(json.dumps(run(a.dsm,a.mask,a.bounds,a.offset,a.start,a.end,a.crs,route)))
+    basin=[a.basin_outlets[:2],a.basin_outlets[2:]] if a.basin_outlets else None
+    print(json.dumps(run(a.dsm,a.mask,a.bounds,a.offset,a.start,a.end,a.crs,route,a.diagnostic_point,basin)))
