@@ -42,6 +42,31 @@ class Export(unittest.TestCase):
  def test_unknown_relationship_rejected(self):
   self.s['mainland_boundaries'][0]['provenance']['source_relationships'][0]['relationship']='unreviewed'
   with self.assertRaisesRegex(ValueError,'unsupported'):boundary_records(self.s)
+ def test_ural_raw_construction_role_is_bound_to_reviewed_source_and_hash(self):
+  from regions import URAL_CONSTRUCTION_INPUTS
+  relationship='raw_basin_edges_and_drainage_classes';source_id,digest,_=URAL_CONSTRUCTION_INPUTS[relationship]
+  src=self.s['sources'][0];lin=self.s['source_lineage_assets'][0];p=self.s['mainland_boundaries'][0]['provenance']
+  src.update(source_id=source_id,sha256=digest);lin.update(source_id=source_id,sha256=digest,provenance={})
+  p['source_refs'][0]['source_id']=source_id;p['source_relationships'][0].update(source_id=source_id,relationship=relationship)
+  _,_,b,_=boundary_records(self.s);self.assertEqual(b[('boundary','b')]['qualified_source_refs'][0]['role'],'construction_input')
+  src['sha256']=lin['sha256']='b'*64
+  with self.assertRaisesRegex(ValueError,'source pin mismatch'):boundary_records(self.s)
+ def test_ural_manifest_requires_bound_tile_and_valid_ordered_parts(self):
+  from regions import URAL_CONSTRUCTION_INPUTS
+  relationship='manifest_of_raw_arcticdem_tile_used_for_gap00';source_id,digest,tile=URAL_CONSTRUCTION_INPUTS[relationship]
+  src=self.s['sources'][0];lin=self.s['source_lineage_assets'][0];p=self.s['mainland_boundaries'][0]['provenance']
+  src.update(source_id=source_id,sha256=digest,r2_key='sources/tile/manifest.json');lin.update(source_id=source_id,sha256=digest,r2_key=src['r2_key'],provenance={'full_tile_sha256':tile,'full_tile_size_bytes':30,'parts':[{'key':'sources/tile/part-aa','size':10,'sha256':'1'*64},{'key':'sources/tile/part-ab','size':20,'sha256':'2'*64}]})
+  p['source_refs'][0]['source_id']=source_id;p['source_relationships'][0].update(source_id=source_id,relationship=relationship)
+  from unittest.mock import patch
+  parts_hash=hashlib.sha256(json.dumps(lin['provenance']['parts'],sort_keys=True,separators=(',',':')).encode()).hexdigest()
+  with patch.dict('export_adapter.URAL_MANIFEST_PARTS_SHA256',{relationship:parts_hash}):
+   _,_,b,c=boundary_records(self.s);self.assertEqual(b[('boundary','b')]['qualified_source_refs'][0]['role'],'construction_input');self.assertEqual(c[(source_id,'1')]['representation'],'manifest_of_raw_parts');self.assertEqual(c[(source_id,'1')]['full_tile_sha256'],tile)
+   lin['provenance']['parts'].reverse()
+   with self.assertRaisesRegex(ValueError,'ordering or size'):boundary_records(self.s)
+   lin['provenance']['parts'].reverse();lin['provenance']['parts'][0]['sha256']='3'*64
+   with self.assertRaisesRegex(ValueError,'parts pin mismatch'):boundary_records(self.s)
+   lin['provenance']['parts'][0]['sha256']='1'*64;lin['provenance']['full_tile_sha256']='f'*64
+   with self.assertRaisesRegex(ValueError,'tile manifest'):boundary_records(self.s)
  def test_relationship_set_mismatch_rejected(self):
   self.s['mainland_boundaries'][0]['provenance']['source_relationships'][0]['source_id']='different'
   with self.assertRaisesRegex(ValueError,'pinned raw R2'):boundary_records(self.s)

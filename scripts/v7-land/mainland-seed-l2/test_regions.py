@@ -17,6 +17,15 @@ class Regions(unittest.TestCase):
  def test_inconsistent_role_rejected(self):
   self.records[('boundary','east')]['qualified_source_refs'][0]['role']='supporting_research_evidence'
   with self.assertRaisesRegex(ValueError,'inconsistent source role'):self.runv()
+ def test_ural_manifest_citation_preserves_tile_and_manifest_distinction(self):
+  from regions import URAL_CONSTRUCTION_INPUTS
+  rel='manifest_of_raw_arcticdem_tile_used_for_gap00';sid,digest,tile=URAL_CONSTRUCTION_INPUTS[rel]
+  self.source[(sid,'1')]={'kind':'raw','sha256':digest,'bucket':'worldatlas','key':'sources/tile/manifest.json','representation':'manifest_of_raw_parts','full_tile_sha256':tile}
+  self.records[('boundary','east')]['qualified_source_refs']=[{'source_id':sid,'version':'1','relationship':rel,'role':'construction_input'}]
+  _,report=self.runv();citation=report['input_trace'][0]['source_citations'][0]
+  self.assertEqual(citation['sha256'],digest);self.assertEqual(citation['full_tile_sha256'],tile);self.assertEqual(citation['representation'],'manifest_of_raw_parts')
+  self.source[(sid,'1')]['full_tile_sha256']='f'*64
+  with self.assertRaisesRegex(ValueError,'tile manifest mismatch'):self.runv()
  def test_terminal_closure_bound_to_selected_boundary(self):
   rec=self.records[('route','closure')];rec['closure_method']='physical_terminal_closure_v1';rec['start_terminal']={'boundary_id':'east','endpoint':'end'};rec['end_terminal']={'boundary_id':'east','endpoint':'start'}
   def check(r,pts,refs):

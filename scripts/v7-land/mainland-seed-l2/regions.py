@@ -12,6 +12,23 @@ ogr.UseExceptions()
 # Deliberate allowlist: unknown relationships require a reviewed contract update.
 SUPPORTING_RELATIONSHIPS = frozenset(['independent_original_terrain_research_not_watershed_or_construction_proof', 'independent_terrain_research_anapa_not_full_watershed_verification_or_construction', 'independent_terrain_research_east_not_watershed_verification_or_construction', 'independent_terrain_research_east_original_not_watershed_verification_or_construction', 'independent_terrain_research_sections_2_3_not_watershed_verification_or_construction', 'independent_terrain_research_west_original_not_watershed_verification_or_construction', 'research_comparison_evidence_not_independent_verification_or_proof_of_construction', 'secondary_terrain_points_not_independent_of_srtm_or_watershed_validation', 'srtm_cross_sensor_research_not_independent_hydrobasins_or_watershed_verification', 'supporting research evidence only; not production geometry selection', 'supporting_geographic_evidence_not_complete_construction_lineage', 'temporary research-only named-waterway corroboration; not a selected pipeline input', 'terrain_quality_mask_for_eastern_research', 'historical_relation_membership_support_not_complete_coordinate_lineage', 'historical_way_membership_support_not_complete_coordinate_lineage', 'companion_mask_for_independent_terrain_screen', 'current_mainstream_source_comparison_not_historical_bytes_or_terrain_proof', 'independent_terrain_screen_mask_zero_only_not_proof_of_divide', 'local_geographic_comparison_not_terrain_or_construction_proof'])
 CONSTRUCTION_RELATIONSHIP = "construction_input"
+# Audited Ural workflow relationships bind each role to a specific source and
+# catalog hash. For chunked ArcticDEM, the third value pins the reassembled
+# provider tile; the catalog hash instead identifies the R2 manifest.
+URAL_CONSTRUCTION_INPUTS = {
+ 'raw_basin_edges_and_drainage_classes': ('hydrosheds-hydrobasins-europe-level12-standard', '21797d53e0792cae047d25f0c3cfb570c7ef43700ec962b35b2ac92467e29f03', None),
+ 'drainage_classes': ('hydrosheds-hydrobasins-siberia-level12-standard', '67ea00df7d14a397f8f78e5b1dc31dcca036018ccbcb36e007ce6854b91d71bd', None),
+ 'mapped_river_graph_and_spring_role': ('osm-ural-river-relation-214415-full', '89cef99ad92bb8acbd81da3f371a2244892ae71da49c99d4c478e9f111af56a0', None),
+ 'terrain_input_for_modeled_spring_connection': ('ural-copernicus-glo30-n54e059', 'd1d0a6b65e0fc19695f9414fd5bcece8a2f508a6f7790c70bb20677f20be3ef6', None),
+ 'manifest_of_raw_arcticdem_tile_used_for_gap00': ('ural-arcticdem-gap00', '667cca1c18e397c3e64b00961ecfe2fe9d7e791542dbaa3d0259eaf432d58bee', '0207e55aec04678895aa73ead434ff189eb0c0a3a8badf553a831821a13eabbd'),
+ 'manifest_of_first_raw_arcticdem_tile_used_for_gap02': ('ural-arcticdem-gap02a', 'e174e2f039dce3d36f206289554c22818cd6488408efe60ec8a07a3746d5800a', 'dab46d70f16e3c6ee397f342167458513e2d6697898b86a5a2c1e447a437987a'),
+ 'manifest_of_second_raw_arcticdem_tile_used_for_gap02': ('ural-arcticdem-gap02b', 'a32df2fd906bcf0f86eeed9c97dc7ff579345f692a331d41cbe8a58945548c51', '7a02a4d2ad464323c56bd953c7841369ff2183be243c0931e39b3894031549c3'),
+}
+
+def source_role(relationship):
+ if relationship==CONSTRUCTION_RELATIONSHIP or relationship in URAL_CONSTRUCTION_INPUTS:return 'construction_input'
+ if relationship in SUPPORTING_RELATIONSHIPS:return 'supporting_research_evidence'
+ raise ValueError('unsupported source relationship')
 
 
 def geometry_hash(g):return hashlib.sha256(json.dumps(g,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
@@ -54,10 +71,17 @@ def assemble(revision_id,records,decision,source_catalog,closure_checker,*,physi
    if not isinstance(refs,list) or not refs or status not in ('complete','incomplete'):raise ValueError('boundary provenance missing')
    for ref in refs:
     if not isinstance(ref,dict) or set(ref)!={'source_id','version','relationship','role'} or not isinstance(ref['relationship'],str) or not ref['relationship'] or ref['role'] not in ('construction_input','supporting_research_evidence'):raise ValueError('invalid boundary source citation')
-    if ref['relationship'] not in SUPPORTING_RELATIONSHIPS|{CONSTRUCTION_RELATIONSHIP} or ref['role']!=('construction_input' if ref['relationship']==CONSTRUCTION_RELATIONSHIP else 'supporting_research_evidence'):raise ValueError('unsupported or inconsistent source role')
+    if ref['role']!=source_role(ref['relationship']):raise ValueError('unsupported or inconsistent source role')
     source=source_catalog.get((ref['source_id'],ref['version']))
     if not isinstance(source,dict) or source.get('kind')!='raw' or not re.fullmatch('[0-9a-f]{64}',str(source.get('sha256'))) or not source.get('bucket') or not source.get('key'):raise ValueError('boundary citation not a pinned raw source')
-    citations.append({'source_id':ref['source_id'],'version':ref['version'],'relationship':ref['relationship'],'role':ref['role'],'sha256':source['sha256'],'bucket':source['bucket'],'key':source['key']})
+    citation={'source_id':ref['source_id'],'version':ref['version'],'relationship':ref['relationship'],'role':ref['role'],'sha256':source['sha256'],'bucket':source['bucket'],'key':source['key']}
+    expected=URAL_CONSTRUCTION_INPUTS.get(ref['relationship'])
+    if expected:
+     if ref['source_id']!=expected[0] or source['sha256']!=expected[1]:raise ValueError('Ural construction source pin mismatch')
+     if expected[2]:
+      if source.get('representation')!='manifest_of_raw_parts' or source.get('full_tile_sha256')!=expected[2]:raise ValueError('Ural tile manifest mismatch')
+      citation.update(representation='manifest_of_raw_parts',full_tile_sha256=expected[2])
+    citations.append(citation)
   else:
    role=record.get('role');prov=record.get('provenance')
    if role!='water_closure':raise ValueError('route requires physical closure proof')

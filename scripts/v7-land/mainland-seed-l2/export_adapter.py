@@ -6,7 +6,30 @@ No preview or prior assignment map is accepted as executable input.
 """
 import hashlib,json,re
 from pathlib import Path
-from regions import points,geometry_hash,SUPPORTING_RELATIONSHIPS,CONSTRUCTION_RELATIONSHIP
+from regions import points,geometry_hash,SUPPORTING_RELATIONSHIPS,CONSTRUCTION_RELATIONSHIP,URAL_CONSTRUCTION_INPUTS,source_role
+
+URAL_MANIFEST_PARTS_SHA256={
+ 'manifest_of_raw_arcticdem_tile_used_for_gap00':'332f9fb280cd1985028c22c0108662cfa1b4946361066e08523a3ade8699d0a3',
+ 'manifest_of_first_raw_arcticdem_tile_used_for_gap02':'012c7bf6a5c9c059bfcc09ec06203f8b5601c5ae0d67d7add134bcbee4e58d03',
+ 'manifest_of_second_raw_arcticdem_tile_used_for_gap02':'2d549b0fd0218ff9a075c58738052e32b3976bb6b0e9b715ca1e1e452937f154'}
+
+def validate_ural_source(ref,src,lin,relationship):
+ expected=URAL_CONSTRUCTION_INPUTS[relationship]
+ if ref['source_id']!=expected[0] or src['sha256']!=expected[1]:raise ValueError('Ural construction source pin mismatch')
+ tile=expected[2]
+ if not tile:return None
+ p=lin.get('provenance');parts=p.get('parts') if isinstance(p,dict) else None
+ if not isinstance(p,dict) or p.get('full_tile_sha256')!=tile or not isinstance(parts,list) or not parts:raise ValueError('invalid Ural tile manifest')
+ prefix=src['r2_key'].removesuffix('manifest.json')
+ if prefix==src['r2_key'] or not prefix or type(p.get('full_tile_size_bytes')) is not int or p['full_tile_size_bytes']<=0:raise ValueError('invalid Ural tile manifest')
+ keys=[];total=0
+ for part in parts:
+  if not isinstance(part,dict) or set(part)!={'key','size','sha256'} or not isinstance(part['key'],str) or not re.fullmatch(re.escape(prefix)+r'part-[a-z]{2}',part['key']) or type(part['size']) is not int or part['size']<=0 or not re.fullmatch('[0-9a-f]{64}',str(part['sha256'])):raise ValueError('invalid Ural tile manifest part')
+  keys.append(part['key']);total+=part['size']
+ if keys!=sorted(set(keys)) or total!=p['full_tile_size_bytes']:raise ValueError('invalid Ural tile manifest ordering or size')
+ parts_hash=hashlib.sha256(json.dumps(parts,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+ if parts_hash!=URAL_MANIFEST_PARTS_SHA256[relationship]:raise ValueError('Ural tile manifest parts pin mismatch')
+ return tile
 
 def no_duplicates(pairs):
  d={}
@@ -61,7 +84,8 @@ def boundary_records(snapshot):
   for item in relationships:
    if not isinstance(item,dict) or set(item)!={'source_id','version','relationship'}:raise ValueError('invalid boundary source relationship')
    key=(item['source_id'],item['version']);relationship=item['relationship']
-   if key in relmap or relationship not in SUPPORTING_RELATIONSHIPS|{CONSTRUCTION_RELATIONSHIP}:raise ValueError('duplicate or unsupported boundary source relationship')
+   if key in relmap:raise ValueError('duplicate boundary source relationship')
+   source_role(relationship)
    relmap[key]=relationship
   clean=[]; qualified=[]; construction_count=0
   for ref in refs:
@@ -73,7 +97,11 @@ def boundary_records(snapshot):
     prov=lin.get('provenance')
     if not isinstance(prov,dict) or not isinstance(prov.get('origin'),str) or not prov['origin'] or prov.get('representation')!='provider_original':raise ValueError('construction source is not an identified provider original')
     construction_count+=1
-   clean.append(ref);qualified.append({**ref,'relationship':relationship,'role':'construction_input' if relationship==CONSTRUCTION_RELATIONSHIP else 'supporting_research_evidence'});source_out[key]={'kind':'raw','sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'size_bytes':src['size_bytes'],'origin':(lin.get('provenance') or {}).get('origin')}
+   tile=None
+   if relationship in URAL_CONSTRUCTION_INPUTS:
+    tile=validate_ural_source(ref,src,lin,relationship);construction_count+=1
+   clean.append(ref);qualified.append({**ref,'relationship':relationship,'role':source_role(relationship)});source_out[key]={'kind':'raw','sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'size_bytes':src['size_bytes'],'origin':(lin.get('provenance') or {}).get('origin')}
+   if tile:source_out[key].update(representation='manifest_of_raw_parts',full_tile_sha256=tile)
   if set(relmap)!={(x['source_id'],x['version']) for x in clean} or len(clean)!=len(relmap):raise ValueError('boundary source relationship mismatch')
   if status=='complete' and not construction_count:raise ValueError('complete lineage requires construction input')
   normalized[('boundary',bid)]={'id':bid,'kind':'boundary','revision_id':rev['id'],'execution_status':'selected_for_research','geometry':geom,'geometry_sha256':r['geometry_sha256'],'geometry_hash_method':r['geometry_hash_method'],'source_refs':clean,'qualified_source_refs':qualified,'lineage_status':status,'provenance':p}
