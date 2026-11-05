@@ -111,13 +111,23 @@ class SourceGateTest(unittest.TestCase):
     def test_direct_producer_uses_effective_view_without_worker(self):
         producer = self.root / 'seed_producer.py'
         producer.write_text("from pathlib import Path\ndef load_pinned_snapshot(path, digest, guard):\n    return {'original': True}\n"
-                            "def run(request, work, output, guard):\n    guard()\n    value = load_pinned_snapshot('x', 'pin', guard)\n    Path(output).write_text(value['view'])\n")
+                            "def run(request, work, output):\n    guard = lambda: None\n    value = load_pinned_snapshot('x', 'pin', guard)\n    Path(output).write_text(value['view'])\n")
+        self.request.write_text(json.dumps({'schema': 'worldatlas-stage2-seed-direct-request-v2',
+                                            'controls': {'strip_rows': 8}}))
         report = {}
         with patch('caucasus_effective_snapshot.derive', return_value=({'view': 'effective'}, {'derived': True})):
             gate.run_producer(self.root, gate.digest(producer), self.request,
                               self.root / 'work', self.root / 'out', {}, report)
         self.assertEqual((self.root / 'out').read_text(), 'effective')
         self.assertEqual(report['effective_snapshot'], {'derived': True})
+
+    def test_direct_producer_rejects_legacy_or_invalid_controls(self):
+        for schema, controls in [('worldatlas-stage2-seed-request-v1', {'strip_rows': 8}),
+                                 ('worldatlas-stage2-seed-direct-request-v2', {'strip_rows': 0}),
+                                 ('worldatlas-stage2-seed-direct-request-v2', {'strip_rows': 8, 'memory_floor_kib': 0})]:
+            self.request.write_text(json.dumps({'schema': schema, 'controls': controls}))
+            with self.assertRaisesRegex(ValueError, 'direct seed v2 request required'):
+                gate.validate_direct_request(self.request)
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 import caucasus_stage2_validation as validation
-from caucasus_seed_gate import digest
+from caucasus_seed_gate import digest, validate_direct_request
 
 HERE = Path(__file__).resolve().parent
 CODE = validation.CODE + ('caucasus_stage2_binding.py',)
@@ -41,6 +41,7 @@ def run_seed(config, request, request_sha256, producer_dir, producer_sha256,
     verify_config(config, guard)
     if digest(request) != request_sha256:
         raise ValueError('seed request pin mismatch')
+    validate_direct_request(request)
     cmd = [sys.executable, str(HERE / 'caucasus_seed_gate.py'),
            '--request', str(request), '--request-sha256', request_sha256,
            '--recipe', config['recipe']['path'], '--recipe-sha256', config['recipe']['sha256'],

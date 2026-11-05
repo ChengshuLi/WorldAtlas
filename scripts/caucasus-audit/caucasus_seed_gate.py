@@ -171,6 +171,7 @@ def run_producer(producer_dir, producer_sha256, request, work, output, derived, 
     choosing a no-limit execution must also use a producer implementing that
     policy and bind its code and this gate into the execution provenance.
     """
+    validate_direct_request(request)
     producer_dir = Path(producer_dir).resolve(strict=True)
     producer_path = (producer_dir / 'seed_producer.py').resolve(strict=True)
     if digest(producer_path) != producer_sha256:
@@ -192,13 +193,23 @@ def run_producer(producer_dir, producer_sha256, request, work, output, derived, 
             report['effective_snapshot'] = trace
             return effective
         producer.load_pinned_snapshot = load_effective_snapshot
-        producer.run(request, work, output, lambda: None)
+        producer.run(request, work, output)
         if digest(producer_path) != producer_sha256:
             raise ValueError('seed producer changed during execution')
     finally:
         if producer is not None and 'original_load' in locals():
             producer.load_pinned_snapshot = original_load
         sys.path[:] = old_path
+
+
+def validate_direct_request(request):
+    """Require the direct v2 producer interface; the producer checks all pins."""
+    value = json.loads(Path(request).read_bytes())
+    controls = value.get('controls') if isinstance(value, dict) else None
+    if (not isinstance(value, dict) or value.get('schema') != 'worldatlas-stage2-seed-direct-request-v2'
+            or not isinstance(controls, dict) or set(controls) != {'strip_rows'}
+            or type(controls['strip_rows']) is not int or controls['strip_rows'] <= 0):
+        raise ValueError('direct seed v2 request required')
 
 
 def main():
@@ -217,6 +228,8 @@ def main():
         raise ValueError('seed producer requires directory, digest, work and output')
     if args.worker_sha256 and not all(run_args):
         raise ValueError('worker digest requires seed execution arguments')
+    if all(run_args) and not args.worker_sha256:
+        validate_direct_request(args.request)
     report, derived = check(args.request, args.recipe, args.recipe_sha256, args.hydro, args.author)
     report['request_sha256'] = args.request_sha256
     report['seed_producer_executed'] = False

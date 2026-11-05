@@ -18,7 +18,7 @@ class BindingTest(unittest.TestCase):
             binding.verify_config(cfg)
 
     def test_seed_command_executes_direct_producer(self):
-        with patch.object(binding, 'verify_config'), patch.object(binding, 'digest', return_value='e' * 64), patch.object(binding.subprocess, 'run') as run:
+        with patch.object(binding, 'verify_config'), patch.object(binding, 'validate_direct_request'), patch.object(binding, 'digest', return_value='e' * 64), patch.object(binding.subprocess, 'run') as run:
             binding.run_seed(self.config(), 'request', 'e' * 64, 'producer', 'f' * 64,
                              'work', 'output', 'gate')
         args = run.call_args[0][0]
