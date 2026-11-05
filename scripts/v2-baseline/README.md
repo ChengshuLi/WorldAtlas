@@ -54,7 +54,7 @@ For a complete grid tessellation of the **partial band**, `build_coastal_batch.p
 
 `compare_coastal_batch.py CONFIG NEW_OUTPUT_DIR` compares every tile from a completed coastal batch against the pinned V2 reference, using bounded concurrency and shared physical/reference pin checks instead of rehashing those streams per tile. It then verifies and aggregates the tile comparisons and checks complete tessellation. Its report is still a partial-band validation, not a completed ocean map. Worker count defaults to one and is capped at eight; output failures leave partial files but no completion report. Run `python -m unittest -v test_compare_coastal_batch` for serial/parallel parity, shared-hash count and failure checks.
 
-The `hypothesis/` directory records the explicit, unapproved V5-cut-based candidate configuration used in the local reproducibility check. Its source and closure choices are examples for review, not established V2 policy.
+Supply source and closure choices as caller-owned research inputs; example files do not establish V2 policy.
 
 ## Generate components once
 

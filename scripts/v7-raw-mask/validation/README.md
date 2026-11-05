@@ -2,7 +2,7 @@
 
 This optional validation checks changed physical land/water cell centers against the new OSM land polygons and tests whether uniform integer- or sub-cell shifts reduce differences in a selected region. It reads a derived historical **land/water** mask, not historical continent labels. It is not a pipeline input and does not change the candidate map.
 
-Copy `config.example.json`, replace each `/path/to/...` with the corresponding local file, and keep or update every SHA-256 pin to match the exact inputs being studied. Pin the complete shapefile including `.shp`, `.shx`, `.dbf`, `.prj` and any present `.cpg`, `.qix`, `.sbn` or `.sbx` sidecars. The mismatch JSONL has `row`, `start`, `end`, `reference`, and `candidate`; spans are half-open and class codes are 1 for water and 17 for land. Every listed cell is checked against both pinned masks. Run:
+Copy `config.example.json`, replace the sample study box, each `/path/to/...`, and each `REPLACE` SHA-256 pin with the values for the exact inputs being studied. Pin the complete shapefile including `.shp`, `.shx`, `.dbf`, `.prj` and any present `.cpg`, `.qix`, `.sbn` or `.sbx` sidecars. The mismatch JSONL has `row`, `start`, `end`, `reference`, and `candidate`; spans are half-open and class codes are 1 for water and 17 for land. Every listed cell is checked against both pinned masks. Run:
 
 ```
 /usr/bin/python3 cell_diagnostics.py /path/to/config.json > /path/to/report.json
