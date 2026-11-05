@@ -8,7 +8,7 @@ from shapely.ops import split, transform
 from pyproj import Transformer
 
 def read_grid(path, expected):
-    with gzip.open(path,'rb') as f: data=f.read()
+    with (gzip.open(path,'rb') if path.endswith('.gz') else open(path,'rb')) as f: data=f.read()
     if hashlib.sha256(data).hexdigest()!=expected: raise ValueError('uncompressed grid checksum mismatch')
     return np.frombuffer(data,dtype='<u4')
 
