@@ -109,3 +109,14 @@ The divider executable is a standalone post-processing step; it has **not** been
 After the main pipeline owner has integrated the rule, reproduced its result using the retained source inputs and recorded the new output, the five objects under `research/ural-delta-divider-20261105/draft82/` are temporary handoff artifacts eligible for cleanup. Their current compressed grid is about 48 MiB plus small metadata. The five `evidence/ural-audit-20261105/dem-crops/` TIFFs recorded under `northern_dem_reproduction_20261105` are derived intermediate crops, not raw sources; they are additional cleanup candidates only once their results are no longer needed and recreation from the archived ArcticDEM tiles, code and recorded crop settings has been verified. This is an inventory, not a deletion authorization.
 
 The downloaded ArcticDEM tiles, original OSM snapshots and the cited historical source documents remain used source evidence. Neon audit results and source crosswalks are used structured data; retain them while decisions rely on them. No objects or records were deleted by this inventory.
+
+
+## Additional spring terrain sensitivity
+
+The same local priority-flood/D8 screen was run with a separately acquired [Copernicus GLO-30 DSM](https://doi.org/10.5270/ESA-c5d3d65), using the same mapped endpoints, model window and 200 m offsets. At 19 paired stations, 18 pairs on the selected shortcut and eight on the exploratory ridge route reached the same local outlet. In the earlier AW3D30 run the corresponding results were 17 and five. On the Copernicus grid the nearest transition between the two chosen local outlet groups was approximately 557 m from the mapped Ural endpoint; the two products' nearest transition-cell centers were about 24 m apart.
+
+These are sensitivity checks, not a controlled ranking: the routes have different shapes and station locations; both runs use the same D8 algorithm and local-window outlet definitions. The local outlet groups correspond to inferred Volga and Ural drainage, both toward the Caspian, rather than an Ob division. Copernicus can use AW3D30 for local infill, so full source independence is unproved. The Copernicus source declares no nodata; its crop was finite, but no separate quality mask was applied. Neither DSM models a surveyed divide or authenticates a headwater. No new spring connector is selected.
+
+The used source tile is archived and readback verified in R2, with SHA-256 `d1d0a6b65e0fc19695f9414fd5bcece8a2f508a6f7790c70bb20677f20be3ef6`, cataloged in Neon as `ural-copernicus-glo30-n54e059 / 2026-11-05`. Complete structured model observations and caveats are in `spring_copernicus_d8_check_20261105`. No intermediate crop or diagnostic output was added to R2.
+
+Results produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.
