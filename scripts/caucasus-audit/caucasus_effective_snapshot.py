@@ -7,7 +7,8 @@ import copy
 import hashlib
 import json
 
-from caucasus_seed_gate import BOUNDARY, assembled_region_hash
+from pathlib import Path
+from caucasus_seed_gate import BOUNDARY, assembled_region_hash, check, digest, read_pinned
 
 
 def geomhash(value):
@@ -58,3 +59,24 @@ def derive(snapshot, derived_geometry, gate_report, original_snapshot_sha256):
                        'original_snapshot_sha256': original_snapshot_sha256,
                        'selected_geometry_sha256': boundary['geometry_sha256'],
                        'derived_geometry_sha256': new_hash, 'regions': changes}
+
+
+def derive_verified(request_path, request_sha256, recipe, recipe_sha256, hydro, author):
+    """Independently re-run source checks before deriving the effective view.
+
+    This routine must run in a trusted, pinned code environment. The caller
+    authenticates the request digest and binds this module and its dependencies
+    into the orchestrator's code and provenance contract.
+    """
+    if digest(request_path) != request_sha256:
+        raise ValueError('request digest mismatch')
+    gate_report, geometry = check(request_path, recipe, recipe_sha256, hydro, author)
+    request = json.loads(Path(request_path).read_bytes())
+    pin = request['inputs']['snapshot']
+    snapshot = read_pinned(pin)
+    effective, trace = derive(snapshot, geometry, gate_report, pin['sha256'])
+    if digest(request_path) != request_sha256:
+        raise ValueError('request changed during derivation')
+    return effective, {'schema': 'caucasus-verified-effective-view-v1',
+                       'request_sha256': request_sha256, 'source_gate': gate_report,
+                       'effective_snapshot': trace}
