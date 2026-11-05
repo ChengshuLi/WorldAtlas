@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify an archived OSM chain against a selected boundary before use."""
 import hashlib
+import io
 import json
 import tempfile
 import zipfile
@@ -11,10 +12,11 @@ from assemble_osm_ways import assemble
 
 def verified_geometry(archive, archive_sha256, selected_geometry_sha256):
     archive = Path(archive)
-    raw = archive.read_bytes()
+    with archive.open('rb') as f:
+        raw = f.read((16 << 20) + 1)
     if len(raw) > 16 << 20 or hashlib.sha256(raw).hexdigest() != archive_sha256:
         raise ValueError('source archive size or hash mismatch')
-    with zipfile.ZipFile(archive) as z, tempfile.TemporaryDirectory() as temp:
+    with zipfile.ZipFile(io.BytesIO(raw)) as z, tempfile.TemporaryDirectory() as temp:
         infos = z.infolist()
         names = [i.filename for i in infos]
         if len(names) != len(set(names)) or any(Path(n).name != n for n in names):
