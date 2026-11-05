@@ -51,15 +51,17 @@ def bind(boundaries,catalog,pin):
   if pin is not None:raise ValueError('Ural inputs supplied without selected boundary')
   return boundaries,None
  if not isinstance(pin,dict) or set(pin)!={'recipe_dir','inputs_dir','helpers_dir','work_parent','snapshot','snapshot_sha256'}:raise ValueError('selected Ural boundary requires pinned recipe inputs')
+ gate_path=Path(__file__).resolve();gate_sha=sha(gate_path)
  fresh=load_pinned_snapshot(pin['snapshot'],pin['snapshot_sha256'],lambda:None)
- _,_,fresh_boundaries,fresh_catalog=boundary_records(fresh)
+ fresh_revision,_,fresh_boundaries,fresh_catalog=boundary_records(fresh)
  if fresh_boundaries.get(key)!=boundaries[key]:raise ValueError('Ural selected record differs from pinned fresh snapshot')
  rec=boundaries[key]
+ if rec.get('revision_id')!=fresh_revision:raise ValueError('Ural selected revision mismatch')
  selected={'type':'LineString','coordinates':[[float(x),float(y)] for x,y in points(rec.get('geometry'))]}
  if rec.get('geometry_sha256')!=GEOMETRY_SHA256 or geometry_hash(selected)!=GEOMETRY_SHA256:raise ValueError('selected Ural geometry mismatch')
  refs=rec.get('qualified_source_refs')
  if not isinstance(refs,list) or len(refs)!=len(URAL_CONSTRUCTION_INPUTS):raise ValueError('Ural construction source set mismatch')
- seen=set()
+ seen=set();source_pins=[]
  for ref in refs:
   rel=ref.get('relationship') if isinstance(ref,dict) else None
   if rel not in URAL_CONSTRUCTION_INPUTS or rel in seen or ref.get('role')!='construction_input':raise ValueError('Ural construction source set mismatch')
@@ -68,6 +70,9 @@ def bind(boundaries,catalog,pin):
   if ref.get('source_id')!=sid or not isinstance(source,dict) or source.get('kind')!='raw' or source.get('sha256')!=digest:raise ValueError('Ural source catalog mismatch')
   if fresh_catalog.get((ref.get('source_id'),ref.get('version')))!=source:raise ValueError('Ural catalog differs from pinned fresh snapshot')
   if tile and (source.get('representation')!='manifest_of_raw_parts' or source.get('full_tile_sha256')!=tile):raise ValueError('Ural raw-tile manifest mismatch')
+  entry={'source_id':sid,'version':ref['version'],'relationship':rel,'catalog_sha256':digest}
+  if tile:entry.update(representation='manifest_of_raw_parts',raw_tile_sha256=tile)
+  source_pins.append(entry)
  if seen!=set(URAL_CONSTRUCTION_INPUTS):raise ValueError('Ural construction source set mismatch')
  recipe=Path(pin['recipe_dir']).resolve(strict=True);inputs=Path(pin['inputs_dir']).resolve(strict=True)
  helpers=Path(pin['helpers_dir']).resolve(strict=True);work=Path(pin['work_parent']).resolve(strict=True)
@@ -92,10 +97,21 @@ def bind(boundaries,catalog,pin):
   raw=derived.read_bytes();geom=json.loads(raw)
   if geometry_hash(geom)!=GEOMETRY_SHA256 or geom!=selected:raise ValueError('Ural raw recipe differs from selected boundary')
   if capture_code()!=captured or any((private/name).read_bytes()!=raw for name,raw in captured.items()):raise ValueError('Ural recipe code changed during replay')
+  if sha(gate_path)!=gate_sha:raise ValueError('Ural gate code changed during replay')
   if sha(inputs/'review_snapshot.json')!=RECIPE_SNAPSHOT_SHA256:raise ValueError('Ural selector snapshot changed')
   if sha(pin['snapshot'])!=pin['snapshot_sha256']:raise ValueError('fresh selected snapshot changed during Ural replay')
-  trace={'boundary_id':BOUNDARY,'geometry_sha256':GEOMETRY_SHA256,'geometry_file_sha256':hashlib.sha256(raw).hexdigest(),
-         'selected_snapshot_sha256':pin['snapshot_sha256'],'selector_snapshot_sha256':RECIPE_SNAPSHOT_SHA256,'recipe_code_sha256':dict(RECIPE_CODE),
-         'source_count':len(seen),'method':'raw-hydrobasins-arcticdem-copernicus-osm-and-neon-selector-v1',
+  trace={'schema':'ural-source-replay-trace-v1','status':'verified','boundary_id':BOUNDARY,'selected_revision':fresh_revision,
+         'selected_geometry_sha256':rec['geometry_sha256'],'derived_geometry_sha256':geometry_hash(geom),
+         'geometry_file_sha256':hashlib.sha256(raw).hexdigest(),
+         'selected_snapshot_sha256':pin['snapshot_sha256'],'selector_snapshot_sha256':RECIPE_SNAPSHOT_SHA256,'gate_code_sha256':gate_sha,'recipe_code_sha256':dict(RECIPE_CODE),
+         'sources':sorted(source_pins,key=lambda x:(x['source_id'],x['version'])),
+         'method':'raw-hydrobasins-arcticdem-copernicus-osm-and-neon-selector-v1',
          'limitations':['The structured selector has incomplete historical lineage.','Modeled terrain, mapped spring and delta choices are not survey certification.']}
  return boundaries,trace
+
+
+def verify_trace(boundaries,catalog,pin,expected_trace):
+ """Independently replay inputs and compare the whole previously recorded trace."""
+ _,observed=bind(boundaries,catalog,pin)
+ if observed is None or observed!=expected_trace:raise ValueError('Ural source replay trace mismatch')
+ return observed

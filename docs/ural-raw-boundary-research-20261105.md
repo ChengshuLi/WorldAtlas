@@ -119,15 +119,21 @@ separately pinned earlier Neon export used only as the structured route
 selector. The gate checks the seven source identities and roles, manifest and
 raw-tile hashes, selected binary64 geometry, and ten pinned recipe scripts;
 it captures those scripts in a private work directory, runs the recipe, then
-compares every resulting coordinate with the selected Ural line. Its trace
-records the selector snapshot and code pins. It leaves the selected geometry,
+compares every resulting coordinate with the selected Ural line. It returns
+the unchanged normalized boundaries and a verified trace, not a derived view.
+The trace binds the fresh revision and snapshot, earlier selector snapshot,
+raw-source and manifest/tile hashes, gate and recipe code hashes, and selected
+and derived geometry hashes. `verify_trace` reruns the complete replay and
+compares the trace; core and resume consumers must call it independently. It leaves the selected geometry,
 routes, region hash and global snapshot untouched.
 
-Eight bounded tests exercise rejection of missing sources, a forged tile hash,
-modified recipe or selector, a changed output, a stale fresh-snapshot record,
-a changing fresh snapshot and an unselected boundary. A real raw-input
-replay passed with the seven read-only Neon source records and reproduced the
-selected line; the combined snapshot used for this test was synthetic. The
+Twelve bounded tests exercise rejection of missing sources, a forged tile hash,
+modified recipe or selector, a changed output, selected line or revision, a
+stale fresh-snapshot record, a changing fresh snapshot and an unselected boundary.
+A real raw-input replay passed with the seven read-only Neon source records and
+reproduced the selected line; a separate replay with a deliberately corrupted
+gap-00 tile failed at the raw-source hash check. The combined snapshot used for
+these tests was synthetic. The
 recipe run and the separate GDAL region/closure test used different Python
 environments, so these results are not a single-environment outer-pipeline
 test.
