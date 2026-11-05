@@ -57,12 +57,13 @@ def sample_point(tiles, longitude, latitude):
     if key not in tiles:
         return {'status': 'missing_tile', 'tile': list(key)}
     dsm, mask = tiles[key]
-    value = raster_point(dsm, longitude, latitude)
     quality = raster_point(mask, longitude, latitude)
+    # Do not read or emit DSM heights for nonzero quality-mask cells.
+    value = raster_point(dsm, longitude, latitude) if quality == 0 else None
     valid = quality == 0 and value is not None and value != -9999
     return {'status': 'valid_mask_0' if valid else 'excluded_mask_or_nodata',
             'tile': list(key), 'longitude': longitude, 'latitude': latitude,
-            'height_m': value, 'mask': quality}
+            'height_m': value if valid else None, 'mask': quality}
 
 
 def transformer(epsg):

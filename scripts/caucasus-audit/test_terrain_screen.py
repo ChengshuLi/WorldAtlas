@@ -27,8 +27,10 @@ class ScreenTest(unittest.TestCase):
         tiles = {(50, 10): tuple(rasters)}
         self.assertEqual(module.sample_point(tiles, 10.1, 50.9)['height_m'], 20)
         self.assertEqual(module.sample_point(tiles, 10.6, 50.9)['status'], 'excluded_mask_or_nodata')
+        self.assertIsNone(module.sample_point(tiles, 10.6, 50.9)['height_m'])
         self.assertEqual(module.sample_point(tiles, 10.1, 50.1)['status'], 'excluded_mask_or_nodata')
         self.assertEqual(module.sample_point(tiles, 10.6, 50.1)['status'], 'excluded_mask_or_nodata')
+        self.assertIsNone(module.sample_point(tiles, 10.6, 50.1)['height_m'])
         self.assertEqual(module.sample_point(tiles, 11.1, 50.9)['status'], 'missing_tile')
 
 if __name__ == '__main__':
