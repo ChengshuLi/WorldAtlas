@@ -6,7 +6,7 @@ an authoritative watershed, named-outlet mapping, or boundary-selection tool.
 import heapq
 import math
 import numpy as np
-from pyproj import Geod
+from pyproj import Geod, CRS
 
 GEOD=Geod(ellps="WGS84")
 from scipy.ndimage import minimum_filter
@@ -40,13 +40,21 @@ def priority_flood(elevation, valid):
     return filled,parent
 
 
-def trace(filled,valid,parent,start,transform):
+def trace(filled,valid,parent,start,transform,crs):
     z=np.asarray(filled);valid=np.asarray(valid,dtype=bool);parent=np.asarray(parent)
     if z.ndim!=2 or z.shape!=valid.shape or z.shape!=parent.shape:
         raise ValueError('matching two-dimensional arrays required')
-    if not hasattr(transform, 'a') or transform.b or transform.d or transform.a<=0 or transform.e>=0:
-        raise ValueError('WGS84 unrotated raster transform required')
+    try:
+        crs_value=CRS.from_user_input(crs)
+    except Exception as exc:
+        raise ValueError('explicit EPSG:4326 raster CRS required') from exc
+    if crs_value.to_epsg()!=4326:
+        raise ValueError('explicit EPSG:4326 raster CRS required')
+    if not hasattr(transform, 'a') or not all(math.isfinite(v) for v in (transform.a,transform.b,transform.c,transform.d,transform.e,transform.f)) or transform.b or transform.d or transform.a<=0 or transform.e>=0:
+        raise ValueError('finite north-up unrotated WGS84 raster transform required')
     height,width=z.shape;row,col=start
+    if not (-180<=transform.c<=180 and -180<=transform.c+width*transform.a<=180 and -90<=transform.f<=90 and -90<=transform.f+height*transform.e<=90):
+        raise ValueError('WGS84 raster extent outside longitude/latitude bounds')
     if not(0<=row<height and 0<=col<width and valid[row,col]):return [],'invalid_start'
     path=[];seen=set()
     while len(path)<height*width:
