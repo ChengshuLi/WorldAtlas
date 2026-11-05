@@ -12,7 +12,9 @@ class SourceGateTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        sources = [{'source_id': k[0], 'version': k[1], 'sha256': v} for k, v in gate.SOURCE_PINS.items()]
+        sources = [{'source_id': k[0], 'version': k[1], 'sha256': v,
+                    'r2_bucket': gate.SOURCE_LOCATIONS[k][0], 'r2_key': gate.SOURCE_LOCATIONS[k][1],
+                    'size_bytes': gate.SOURCE_LOCATIONS[k][2]} for k, v in gate.SOURCE_PINS.items()]
         snapshot = {'schema': 'worldatlas-geography-decision-draft-evidence-v1', 'source': 'neon-export',
                     'sources': sources, 'mainland_boundaries': [{'boundary_id': gate.BOUNDARY,
                     'execution_status': 'selected_for_research', 'geometry': {}, 'geometry_sha256': '0' * 64,
