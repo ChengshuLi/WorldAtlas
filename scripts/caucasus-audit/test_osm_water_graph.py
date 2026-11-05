@@ -21,5 +21,10 @@ class WaterGraphTests(unittest.TestCase):
             p=Path(tmp)/'source.osm';p.write_text(OSM);g=WaterGraph(p)
             self.assertEqual(g.first_contact([(.0001,0)],5,5)['status'],'way_tie_ambiguous')
             self.assertEqual(g.first_contact([(.00005,0)],5,10)['status'],'node_tie_ambiguous')
+    def test_ambiguous_positions_on_same_way(self):
+        osm='''<osm><node id="1" lon="-.01" lat="0"/><node id="2" lon="-.01" lat=".02"/><node id="3" lon=".01" lat=".02"/><node id="4" lon=".01" lat="0"/><way id="1"><nd ref="1"/><nd ref="2"/><nd ref="3"/><nd ref="4"/><tag k="waterway" v="stream"/></way></osm>'''
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp)/'source.osm';p.write_text(osm);g=WaterGraph(p)
+            self.assertEqual(g.first_contact([(0,.005)],2000,3000)['status'],'way_geometry_ambiguous')
 
 if __name__=='__main__':unittest.main()
