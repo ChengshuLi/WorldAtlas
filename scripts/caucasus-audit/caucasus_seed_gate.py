@@ -42,7 +42,7 @@ def read_pinned(pin):
     return json.loads(Path(pin['path']).read_bytes())
 
 
-def check(request_path, recipe, recipe_sha, hydro, author):
+def check(request_path, recipe, recipe_sha, overrides, overrides_sha, hydro, author):
     request = json.loads(Path(request_path).read_bytes())
     snapshot_pin = request['inputs']['snapshot']
     snapshot = read_pinned(snapshot_pin)
@@ -72,6 +72,12 @@ def check(request_path, recipe, recipe_sha, hydro, author):
                                ensure_ascii=True, allow_nan=False).encode()
     if hashlib.sha256(stored_recipe).hexdigest() != recipe_sha:
         raise ValueError('snapshot recipe differs from pinned decision bytes')
+    if digest(overrides) != overrides_sha or decision.get('exact_overrides_sha256') != overrides_sha:
+        raise ValueError('preservation decision digest mismatch')
+    stored_overrides = json.dumps(decision.get('exact_overrides'), sort_keys=True, separators=(',', ':'),
+                                  ensure_ascii=True, allow_nan=False).encode()
+    if hashlib.sha256(stored_overrides).hexdigest() != overrides_sha:
+        raise ValueError('snapshot preservation decisions differ from pinned bytes')
     source_before = (digest(hydro), digest(author))
     if source_before != tuple(SOURCE_PINS.values()):
         raise ValueError('raw source digest mismatch')
@@ -81,21 +87,26 @@ def check(request_path, recipe, recipe_sha, hydro, author):
         guide.write_text(json.dumps(boundary['geometry'], sort_keys=True, separators=(',', ':'), allow_nan=False))
         command = [sys.executable, str(HERE / 'caucasus_source_assembly.py'), '--decisions', str(recipe),
                    '--decisions-sha256', recipe_sha, '--hydro-zip', str(hydro), '--author', str(author),
-                   '--selected', str(guide), '--output', str(output)]
+                   '--selected', str(guide), '--exact-overrides', str(overrides),
+                   '--exact-overrides-sha256', overrides_sha, '--output', str(output)]
         p = subprocess.run(command, check=True, text=True, capture_output=True)
         report = json.loads(p.stdout.strip().splitlines()[-1])
-    if digest(recipe) != recipe_sha_before or (digest(hydro), digest(author)) != source_before:
+        derived = json.loads(output.read_text(encoding='utf-8'))
+        if report['geometry_sha256'] != boundary['geometry_sha256']:
+            raise ValueError('derived geometry does not exactly match selected boundary hash')
+    if digest(recipe) != recipe_sha_before or digest(overrides) != overrides_sha or (digest(hydro), digest(author)) != source_before:
         raise ValueError('source or decisions changed during gate')
     read_pinned(snapshot_pin)
     return {'schema': 'caucasus-source-seed-gate-v1', 'snapshot_sha256': snapshot_pin['sha256'],
             'selected_geometry_sha256': boundary['geometry_sha256'], 'recipe_sha256': recipe_sha,
+            'exact_overrides_sha256': overrides_sha,
             'source_sha256': list(source_before), 'assembly': report,
-            'limitations': 'caller authenticates export; source comparisons do not prove watershed correctness'}
+            'limitations': 'caller authenticates export; source comparisons do not prove watershed correctness'}, derived
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    for name in ('request', 'request-sha256', 'recipe', 'recipe-sha256', 'hydro', 'author', 'report'):
+    for name in ('request', 'request-sha256', 'recipe', 'recipe-sha256', 'overrides', 'overrides-sha256', 'hydro', 'author', 'report'):
         p.add_argument('--' + name, required=True)
     for name in ('producer-dir', 'producer-sha256', 'work', 'output'):
         p.add_argument('--' + name)
@@ -107,7 +118,7 @@ def main():
     run_args = (args.producer_dir, args.producer_sha256, args.work, args.output)
     if any(run_args) and not all(run_args):
         raise ValueError('seed producer requires directory, digest, work and output')
-    report = check(args.request, args.recipe, args.recipe_sha256, args.hydro, args.author)
+    report, derived = check(args.request, args.recipe, args.recipe_sha256, args.overrides, args.overrides_sha256, args.hydro, args.author)
     report['request_sha256'] = args.request_sha256
     report['seed_producer_executed'] = False
     if all(run_args):
@@ -119,10 +130,19 @@ def main():
         spec = importlib.util.spec_from_file_location('caucasus_gated_seed_producer', producer_path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
+        original_boundary_records = module.boundary_records
+        def derived_boundary_records(snapshot):
+            rev, entity, records, sources = original_boundary_records(snapshot)
+            record = records.get(('boundary', BOUNDARY))
+            if not isinstance(record, dict) or record.get('geometry_sha256') != report['selected_geometry_sha256']:
+                raise ValueError('producer selected boundary changed after gate')
+            record['geometry'] = derived
+            return rev, entity, records, sources
+        module.boundary_records = derived_boundary_records
         module.run(args.request, args.work, args.output, lambda: None)
         if digest(producer_path) != args.producer_sha256 or digest(args.request) != args.request_sha256:
             raise ValueError('producer or request changed during execution')
-        if digest(args.recipe) != args.recipe_sha256 or (digest(args.hydro), digest(args.author)) != tuple(SOURCE_PINS.values()):
+        if digest(args.recipe) != args.recipe_sha256 or digest(args.overrides) != args.overrides_sha256 or (digest(args.hydro), digest(args.author)) != tuple(SOURCE_PINS.values()):
             raise ValueError('source or decisions changed during execution')
         report['seed_producer_executed'] = True
         report['seed_producer_sha256'] = args.producer_sha256
