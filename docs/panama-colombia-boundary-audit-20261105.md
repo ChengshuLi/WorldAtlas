@@ -88,3 +88,19 @@ therefore not be read as a claim of such review. The screen does not establish
 full-ring validity, original physical-source lineage, geographic authority,
 or any historical V7 result. The actual selected generation must re-run its
 closure verification against independently verified inputs.
+
+The same physical rows and runs hashes appear in the earlier
+`stage2-executable-pins-v1` runtime metadata for commit `267f7ef`. That is
+evidence of reuse in that earlier qualified candidate, not confirmation that
+the eventual direct-run outer request selects those inputs. The candidate
+physical report pins its configuration (`c215b7b201d4c6b8c7fc54bd3e3a6cf69032c4e2a01f79c123f9954e8ca88668`),
+land mask (`f7e3ca1067aed2814ce641f813da6d807b6d18eaffa0a42cac2782c699671463`)
+and water mask (`0b632fe6dfb44b07b7df51b4b0e2c823e04c4858d70a2a05033ee76a81`),
+but has no producer-code hash. Therefore the current `compose_physical.py`
+bytes cannot be authenticated as the original producer from this report alone.
+The builder must verify the actual selected snapshot, physical lineage request
+and all pinned report-chain inputs against the final outer request, and seek
+the original configuration and independent producer-code or execution record.
+The existing `verify_physical_lineage.validate_combined` checks reported-chain
+and selected-source consistency; it explicitly does not rerasterize or prove
+which program produced the mask.
