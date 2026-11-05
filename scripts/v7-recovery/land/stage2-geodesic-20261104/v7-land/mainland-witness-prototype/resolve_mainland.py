@@ -92,7 +92,6 @@ def resolve(req):
     roots={};claims=[]
     for wid,d in sorted(witnesses.items()):
         pf,ident=features[d['point_feature_id']],features[d['identity_feature_id']];pk=(pf['source_id'],pf['source_version']);ik=(ident['source_id'],ident['source_version']);need(pk!=ik,'point and identity sources must be distinct')
-        helper.need(helper.available_memory_kib()>=helper.MEMORY_FLOOR_KIB+224*1024,'insufficient memory headroom for source parsing')
         source=json.loads(helper.read_bounded(files[pk],'point source',1024*1024));need(source.get('type')=='FeatureCollection' and isinstance(source.get('features'),list),'invalid point source');point_crs=helper.source_crs(source)
         matches=[f for f in source['features'] if isinstance(f,dict) and isinstance(f.get('properties'),dict) and type(f['properties'].get(d['id_property'])) in (str,int) and str(f['properties'][d['id_property']])==pf['source_feature_id']]
         need(len(matches)==1,'point feature identity must be unique');f=matches[0];geom=f.get('geometry');need('crs' not in f and isinstance(geom,dict) and 'crs' not in geom and geom.get('type')=='Point' and isinstance(geom.get('coordinates'),list) and len(geom['coordinates'])==2 and f['properties'].get('name')==d['point_name'] and helper.geometry_sha(geom)==pf['geometry_sha256'],'point identity or geometry mismatch')

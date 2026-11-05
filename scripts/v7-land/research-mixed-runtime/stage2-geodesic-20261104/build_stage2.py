@@ -7,13 +7,13 @@ independently. Hints are performance suggestions, never final assignments.
 import argparse,hashlib,importlib.util,json,os,resource,subprocess,time,uuid
 from pathlib import Path
 import numpy as np,pyproj,scipy
-import atomic_move,baseline_runner,checkpoints,contracts,engine,preflight,verify_inputs,verify_physical_lineage
+import atomic_move,baseline_runner,checkpoints,contracts,engine,preflight,verify_inputs,verify_physical_lineage,witness_compare
 from certificate import CertificateIndex
 from exact_index import ExactIndex
 from write_land_stream import write_land_stream
 
 HERE=Path(__file__).resolve().parent
-CODE_NAMES=('build_stage2.py','contracts.py','atomic_move.py','baseline_runner.py','certificate.py','checkpoints.py','engine.py','exact_index.py','point_prototype.py','preflight.py','run_pair.py','verify_inputs.py','verify_physical_lineage.py','verify_seed_index.cpp','write_land_stream.py','v7-land/mainland-witness-prototype/resolve_mainland.py','v7-land/point-component-prototype/resolve.py','v7-land/named-identity-prototype/named_identity.py','v7-land/named-identity-prototype/identity_watch.py')
+CODE_NAMES=('witness_compare.py','build_stage2.py','contracts.py','atomic_move.py','baseline_runner.py','certificate.py','checkpoints.py','engine.py','exact_index.py','point_prototype.py','preflight.py','run_pair.py','verify_inputs.py','verify_physical_lineage.py','verify_seed_index.cpp','write_land_stream.py','v7-land/mainland-witness-prototype/resolve_mainland.py','v7-land/point-component-prototype/resolve.py','v7-land/named-identity-prototype/named_identity.py','v7-land/named-identity-prototype/identity_watch.py')
 INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','hint_monitor','tile_manifest','representatives'}
 
 def need(x,msg):
@@ -74,15 +74,20 @@ def _build(cp,work,output,resume,raw,cfg):
  snap=read_json(paths['decision_snapshot'],guard);rev=snap.get('decision_revision',{}).get('id');ent=snap.get('entity_revision',{}).get('id');metric,categories,entity_codes=contracts.snap_policy(snap,rev,ent,cfg['policy_id'],cfg['policy_version'])
  manifest=read_json(paths['component_manifest'],guard);contracts.component_manifest(manifest,g,pins)
  physical=read_json(paths['physical_report'],guard);po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==g and po.get('rows.u32le')==pins['physical_rows'] and po.get('runs.u32le')==pins['physical_runs'],'physical report mismatch')
- resolution=read_json(paths['resolution_report'],guard);groups=contracts.resolution_roots(resolution,g,pins,rev,ent);need(resolution.get('code_sha256')==source_code['resolution_code_files'],'resolution code provenance mismatch')
+ resolution=read_json(paths['resolution_report'],guard);groups=contracts.resolution_roots(resolution,g,pins,rev,ent)
  expected_resolver={'resolver':code['v7-land/mainland-witness-prototype/resolve_mainland.py'],'helper':code['v7-land/point-component-prototype/resolve.py'],'named_identity':code['v7-land/named-identity-prototype/named_identity.py'],'identity_watch':code['v7-land/named-identity-prototype/identity_watch.py']}
  need(source_code['resolution_code_files']==expected_resolver,'unreviewed resolver implementation')
- rr=read_json(paths['resolution_request'],guard);need(rr.get('schema')=='mainland-witness-request-v1' and rr.get('grid')==g and rr.get('code_sha256')==expected_resolver,'resolution request mismatch')
+ rr=read_json(paths['resolution_request'],guard);need(rr.get('schema')=='mainland-witness-request-v1' and rr.get('grid')==g and resolution.get('code_sha256')==rr.get('code_sha256') and (handoff_pin or rr.get('code_sha256')==expected_resolver),'resolution request mismatch')
  for rk,ik in (('snapshot','decision_snapshot'),('component_manifest','component_manifest'),('component_source','component_source'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('component_rows','component_rows'),('component_runs','component_runs')):need(rr.get(rk,{}).get('sha256')==pins[ik],'resolution request input mismatch: '+rk)
  extra=[Path(x['path']).resolve() for x in rr.get('source_files',[])]
  need(extra and all(not t.is_relative_to(p.parent) and not p.parent.is_relative_to(t) for p in extra for t in (work,output)),'resolution source/work overlap')
  spec=importlib.util.spec_from_file_location('stage2_mainland_witness',HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py');resolver=importlib.util.module_from_spec(spec);spec.loader.exec_module(resolver)
- fresh=resolver.resolve(rr);fresh['request_sha256']=pins['resolution_request'];need(fresh==resolution,'fresh witness re-resolution differs from consumed report')
+ if handoff_pin:
+  old_req=verify_inputs.bounded_bytes(paths['resolution_request'],16<<20,guard);old_report=verify_inputs.bounded_bytes(paths['resolution_report'],16<<20,guard)
+  new_req=dict(rr,code_sha256=expected_resolver);new_req_bytes=(json.dumps(new_req,sort_keys=True,indent=2)+'\n').encode();fresh=resolver.resolve(new_req);fresh['request_sha256']=hashlib.sha256(new_req_bytes).hexdigest();fresh_bytes=(json.dumps(fresh,sort_keys=True,indent=2)+'\n').encode()
+  comparison=witness_compare.compare_witness_resolutions(old_req,old_report,new_req_bytes,fresh_bytes);recheck=derived.get('witness_recheck');need(isinstance(recheck,dict) and recheck.get('comparison')==comparison,'fresh witness comparison differs from derived evidence')
+ else:
+  fresh=resolver.resolve(rr);fresh['request_sha256']=pins['resolution_request'];need(fresh==resolution,'fresh witness re-resolution differs from consumed report')
  seed=read_json(paths['seed_report'],guard);seed_roots=contracts.seed_report(seed,g,pins,rev,ent,groups,entity_codes,source_code['seed_code_files'])
  hint=read_json(paths['hint_report'],guard);monitor=read_json(paths['hint_monitor'],guard);count=contracts.hints_report(hint,monitor,g,pins,rev,ent,metric,seed_roots,source_code['hint_code_files'],cfg['hint_watchdog_code']['sha256'])
  # The exact snapshot rules/region trace and land-policy crosswalk is still

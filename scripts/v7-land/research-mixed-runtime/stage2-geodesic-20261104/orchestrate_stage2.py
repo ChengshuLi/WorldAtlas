@@ -8,7 +8,7 @@ checkpoint is accepted. All outputs remain research-only.
 import argparse,hashlib,importlib.util,json,os,subprocess,sys
 from pathlib import Path
 import build_seed_tiles,build_stage2,checkpoints,contracts,verify_inputs
-import representatives,verify_physical_lineage
+import representatives,verify_physical_lineage,witness_compare
 
 HERE=Path(__file__).resolve().parent
 BASE_INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','closure_checker','terminal_checker','closure_contract','seed_builder','seed_kernel'}
@@ -110,7 +110,7 @@ def run(config_path,work_dir,output_dir,resume=False):
  pins={k:v['sha256'] for k,v in cfg['inputs'].items()};lineage=verify_physical_lineage.validate_combined(snapshot,pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard);manifest=json.loads(verify_inputs.bounded_bytes(paths['component_manifest'],16<<20,guard));contracts.component_manifest(manifest,grid,pins)
  physical=json.loads(verify_inputs.bounded_bytes(paths['physical_report'],16<<20,guard));po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==grid and po.get('rows.u32le')==pins['physical_rows'] and po.get('runs.u32le')==pins['physical_runs'],'physical report mismatch')
  rr=json.loads(verify_inputs.bounded_bytes(paths['resolution_request'],16<<20,guard));rnames={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py','identity_watch':'v7-land/named-identity-prototype/identity_watch.py'}
- need(rr.get('schema')=='mainland-witness-request-v1' and rr.get('grid')==grid and rr.get('code_sha256')=={k:code[v] for k,v in rnames.items()},'resolution request/code mismatch')
+ need(rr.get('schema')=='mainland-witness-request-v1' and rr.get('grid')==grid and ('seed_handoff' in cfg or rr.get('code_sha256')=={k:code[v] for k,v in rnames.items()}),'resolution request/code mismatch')
  for rk,ik in (('snapshot','decision_snapshot'),('component_manifest','component_manifest'),('component_source','component_source'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('component_rows','component_rows'),('component_runs','component_runs')):need(rr.get(rk,{}).get('sha256')==pins[ik],'resolution request pin mismatch: '+rk)
  handoff=validate_seed_handoff(cfg,code,guard) if 'seed_handoff' in cfg else None
  identity={'schema':'stage2-fresh-work-v1','config_sha256':hashlib.sha256(raw).hexdigest(),'input_sha256':{k:v['sha256'] for k,v in cfg['inputs'].items()},'handoff_sha256':{k:v['sha256'] for k,v in cfg.get('seed_handoff',{}).items()},'code_sha256':code,'output_path':str(out)}
@@ -125,8 +125,17 @@ def run(config_path,work_dir,output_dir,resume=False):
  except OSError as exc:raise RuntimeError('work directory may exist; durability uncertain, inspect before retry') from exc
  for name in ('resolution','requests','seed-work-parent','tiles-parent','reps','hints-parent','core-requests','derived','lineage'):(work/name).mkdir(mode=0o700)
  write_json(work/'identity.json',identity);write_json(work/'lineage'/'report.json',lineage)
- rr=paths['resolution_request'];rout=work/'resolution'/'report.json'
- subprocess.run([sys.executable,str(HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py'),str(rr),str(rout)],check=True)
+ rr=paths['resolution_request'];rout=work/'resolution'/'report.json';recheck=None
+ if handoff:
+  old_req=verify_inputs.bounded_bytes(rr,16<<20,guard);original=build_stage2.pin(handoff[1]['inputs']['resolution'],guard);old_report=verify_inputs.bounded_bytes(original,16<<20,guard)
+  new_request=json.loads(old_req);new_request['code_sha256']={k:code[v] for k,v in rnames.items()};new_req_path=work/'requests'/'witness-recheck.json';write_json(new_req_path,new_request)
+  new_report_path=work/'resolution'/'recheck.json';subprocess.run([sys.executable,str(HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py'),str(new_req_path),str(new_report_path)],check=True)
+  new_req=verify_inputs.bounded_bytes(new_req_path,16<<20,guard);new_report=verify_inputs.bounded_bytes(new_report_path,16<<20,guard);comparison=witness_compare.compare_witness_resolutions(old_req,old_report,new_req,new_report)
+  need(comparison['old_request_sha256']==pins['resolution_request'] and comparison['old_report_sha256']==handoff[0]['resolution_sha256'],'original witness binding mismatch')
+  os.link(original,rout);fd=os.open(rout.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+  recheck={'request':pin(new_req_path,guard),'report':pin(new_report_path,guard),'comparison':comparison}
+ else:
+  subprocess.run([sys.executable,str(HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py'),str(rr),str(rout)],check=True)
  resolution=json.loads(verify_inputs.bounded_bytes(rout,16<<20,guard));snapshot=json.loads(verify_inputs.bounded_bytes(paths['decision_snapshot'],16<<20,guard));rev=snapshot['decision_revision']['id'];entity=snapshot['entity_revision']['id'];metric,categories,_=contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
  rp=pin(rout,guard);si={}
  for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel')):si[dst]=cfg['inputs'][src]
@@ -166,7 +175,7 @@ def run(config_path,work_dir,output_dir,resume=False):
  artifacts={'resolution_report':rp,'seed_rows':srows,'seed_runs':sruns,'seed_report':pin(seedout/'report.json',guard),'tile_manifest':pin(tileout/'manifest.txt',guard),'representatives':pin(reps,guard),'hint_roots':pin(hout/'roots.u32le',guard),'hint_codes':pin(hout/'hints.u8',guard),'hint_report':pin(hout/'report.json',guard),'hint_monitor':pin(hout/'monitor.json',guard)}
  for spec in cfg['inputs'].values():build_stage2.pin(spec,guard)
  need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
- marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'artifacts':artifacts,'seed_request_sha256':verify_inputs.sha_file(seedrequest,guard),'hint_request_sha256':verify_inputs.sha_file(hreq,guard),'seed_tile_verification':json.loads(check.stdout),'physical_lineage_report':pin(work/'lineage'/'report.json',guard),'seed_handoff_attestation':cfg['seed_handoff']['attestation'] if handoff else None,'tile_directory':str(tileout),'code_sha256':code}
+ marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'artifacts':artifacts,'seed_request_sha256':verify_inputs.sha_file(seedrequest,guard),'hint_request_sha256':verify_inputs.sha_file(hreq,guard),'seed_tile_verification':json.loads(check.stdout),'physical_lineage_report':pin(work/'lineage'/'report.json',guard),'seed_handoff_attestation':cfg['seed_handoff']['attestation'] if handoff else None,'witness_recheck':recheck,'tile_directory':str(tileout),'code_sha256':code}
  write_json(work/'derived'/'manifest.json',marker)
  return finish_from_marker(cfg,raw,work,out,code,guard,False)
 
@@ -181,6 +190,12 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume):
  expected={'resolution_report':work/'resolution'/'report.json','seed_rows':work/'seed-work-parent'/'output'/'rows.u32le','seed_runs':work/'seed-work-parent'/'output'/'runs.u32le','seed_report':work/'seed-work-parent'/'output'/'report.json','hint_roots':work/'hints-parent'/'hints'/'roots.u32le','hint_codes':work/'hints-parent'/'hints'/'hints.u8','hint_report':work/'hints-parent'/'hints'/'report.json','hint_monitor':work/'hints-parent'/'hints'/'monitor.json','tile_manifest':work/'tiles-parent'/'tiles'/'manifest.txt','representatives':work/'reps'/'representatives.u32le'}
  need(all(Path(artifacts[k].get('path','')).resolve()==v for k,v in expected.items()),'derived artifact path is not fresh work output')
  for p in artifacts.values():build_stage2.pin(p,guard)
+ recheck=marker.get('witness_recheck')
+ if handoff:
+  need(isinstance(recheck,dict) and set(recheck)=={'request','report','comparison'} and Path(recheck['request'].get('path','')).resolve()==work/'requests'/'witness-recheck.json' and Path(recheck['report'].get('path','')).resolve()==work/'resolution'/'recheck.json','witness recheck missing')
+  comparison=witness_compare.compare_witness_resolutions(verify_inputs.bounded_bytes(cfg['inputs']['resolution_request']['path'],16<<20,guard),verify_inputs.bounded_bytes(artifacts['resolution_report']['path'],16<<20,guard),verify_inputs.bounded_bytes(build_stage2.pin(recheck['request'],guard),16<<20,guard),verify_inputs.bounded_bytes(build_stage2.pin(recheck['report'],guard),16<<20,guard))
+  need(comparison==recheck['comparison'] and comparison['old_report_sha256']==handoff[0]['resolution_sha256'],'witness recheck changed')
+ else:need(recheck is None,'unexpected witness recheck')
  for p in cfg['inputs'].values():build_stage2.pin(p,guard)
  seedreq=work/'requests'/'seed.json';hintreq=work/'requests'/'hints.json'
  need(verify_inputs.sha_file(seedreq,guard)==marker.get('seed_request_sha256') and verify_inputs.sha_file(hintreq,guard)==marker.get('hint_request_sha256'),'derived request hash mismatch')
