@@ -27,7 +27,7 @@ with rasterio.open(paths[0]) as ds:
  else:valid &= (raw[0]==1)&(raw[1]==2)&(raw[2]==0)
  masks=[rasterize([(ways[k],1)],out_shape=z.shape,transform=aff,all_touched=True).astype(bool) for k in ('83809279','97503816')];seed=np.zeros(z.shape,dtype='uint8');seed[masks[0]&~masks[1]&valid]=1;seed[masks[1]&~masks[0]&valid]=2
  print('model',which,'shape',z.shape,'valid',valid.sum(),'seed_counts',[(seed==k).sum() for k in (1,2)],'overlap',(masks[0]&masks[1]).sum(),flush=True)
- filled,graph=flow_graph(z,valid,aff,ds.crs);labels,stats=trace_to_seeds(graph,valid,seed);print('label_counts',[(labels==k).sum() for k in (0,1,2,3)],'terminal_stats',stats,flush=True)
+ filled,graph=flow_graph(z,valid,aff,ds.crs);labels,stats=trace_to_seeds(graph,valid,seed);print('label_counts',[(labels==k).sum() for k in (0,1,2,3)],'terminal_stats',stats,flush=True);np.savez_compressed('jvari-seeded-'+which+'-research.npz',labels=labels,seeds=seed,affine=np.array(tuple(aff)))
  l=GeodesicLine(json.load(open('caucasus-line.json'))['coordinates']);s=l.closest((44.45511099459589,42.50809094740639))['station_m']
  for off in range(-1000,1001,100):
   p=l.point(s+off);a=l.point(s+off-20);b=l.point(s+off+20);az=GEOD.inv(*a,*b)[0];points=[GEOD.fwd(*p,az+d,250)[:2] for d in (-90,90)];res=[]
