@@ -13,10 +13,10 @@ class LoaderTests(unittest.TestCase):
   self.assertEqual(extract(self.f,self.pin,lambda:None)[1]['verified_identity_tags']['name'],'Test island');self.f['expected_identity_tags']['name']='Wrong'
   with self.assertRaisesRegex(ValueError,'identity tags mismatch'):extract(self.f,self.pin,lambda:None)
  def test_v4_checks_exact_alias_and_v3_rejects_it(self):
-  xml=self.xml.replace('<tag k="type" v="multipolygon"/>','<tag k="type" v="multipolygon"/><tag k="name" v="Pulau Kekeh"/><tag k="alt_name" v="Pulau Kekik"/><tag k="place" v="island"/>');self.p.write_text(xml);self.pin['size_bytes']=self.p.stat().st_size;self.pin['sha256']=hashlib.sha256(self.p.read_bytes()).hexdigest();self.f.update(extractor_version='osm-multipolygon-outer-v4',expected_identity_tags={'name':'Pulau Kekeh','alt_name':'Pulau Kekik','place':'island'})
-  self.assertEqual(extract(self.f,self.pin,lambda:None)[1]['verified_identity_tags']['alt_name'],'Pulau Kekik');self.f['expected_identity_tags']['alt_name']='Wrong'
+  xml=self.xml.replace('<tag k="type" v="multipolygon"/>','<tag k="type" v="multipolygon"/><tag k="name" v="ExampleIslandA"/><tag k="alt_name" v="ExampleIslandB"/><tag k="place" v="island"/>');self.p.write_text(xml);self.pin['size_bytes']=self.p.stat().st_size;self.pin['sha256']=hashlib.sha256(self.p.read_bytes()).hexdigest();self.f.update(extractor_version='osm-multipolygon-outer-v4',expected_identity_tags={'name':'ExampleIslandA','alt_name':'ExampleIslandB','place':'island'})
+  self.assertEqual(extract(self.f,self.pin,lambda:None)[1]['verified_identity_tags']['alt_name'],'ExampleIslandB');self.f['expected_identity_tags']['alt_name']='Wrong'
   with self.assertRaisesRegex(ValueError,'identity tags mismatch'):extract(self.f,self.pin,lambda:None)
-  self.f['extractor_version']='osm-multipolygon-outer-v3';self.f['expected_identity_tags']['alt_name']='Pulau Kekik'
+  self.f['extractor_version']='osm-multipolygon-outer-v3';self.f['expected_identity_tags']['alt_name']='ExampleIslandB'
   with self.assertRaisesRegex(ValueError,'identity tags mismatch'):extract(self.f,self.pin,lambda:None)
  def test_source_hash(self):
   self.pin['sha256']='0'*64
