@@ -46,13 +46,45 @@ orchestrator remains gated for independent review. The Panama direct cut-graph
 experiment in `scripts/v7-recovery/land/panama-direct-split-research-20261104/direct.py`
 is explicitly retired at its entry point and is not the selected workflow.
 
-The present source-to-map chain therefore starts at a saved structured line,
-not yet at a complete, pinned set of raw OSM inputs. The remaining work is to connect the verified assembler to the selected-line
-workflow and validate the handoff against the current physical generation. A matching line hash alone does not
-establish closure validity or end-to-end land assignment. No geography changed.
+The selected seed producer now verifies the pinned OSM archive against the
+saved structured line before region assembly. The outer orchestrator and
+current-generation physical inputs still need end-to-end integration and
+independent review. A matching line hash alone does not establish geographic
+correctness or complete land assignment. No geography changed.
 
 ## Follow-up capture
 
-A subsequent capture of 33 current OSM way/full responses reconstructs the selected line exactly: 5,254 vertices and the canonical geometry hash above. The current way node memberships match the queried historical way versions, and both historical country relations contain all 33 ways. This is current coordinate evidence, not proof of historical node versions. The checked assembler and archive verifier are in `scripts/v7-land/mainland-seed-l2/`; five bounded tests passed. The archive is stored at `worldatlas/sources/osm/panama-colombia/way-full-20261105-04fe1adb295e.zip` (SHA-256 `04fe1adb295e93d78ee029b48351d2b0380d69ac631b47c909dffd538bbaf6c1`, 110,336 bytes); authenticated R2 readback matched byte-for-byte. Neon catalogs it as `osm-panama-current-way-full-bundle` version `capture-20261105-04fe1adb295e` and links it to the selected boundary as supporting evidence. It is a ZIP of 33 unmodified provider responses and a manifest, not one provider-original response. The verifier is not yet wired into the selected seed producer. No map rebuild was run.
+A subsequent capture of 33 current OSM way/full responses reconstructs the selected line exactly: 5,254 vertices and the canonical geometry hash above. The current way node memberships match the queried historical way versions, and both historical country relations contain all 33 ways. This is current coordinate evidence, not proof of historical node versions. The checked assembler and archive verifier are in `scripts/v7-land/mainland-seed-l2/`; five bounded tests passed. The archive is stored at `worldatlas/sources/osm/panama-colombia/way-full-20261105-04fe1adb295e.zip` (SHA-256 `04fe1adb295e93d78ee029b48351d2b0380d69ac631b47c909dffd538bbaf6c1`, 110,336 bytes); authenticated R2 readback matched byte-for-byte. Neon catalogs it as `osm-panama-current-way-full-bundle` version `capture-20261105-04fe1adb295e` and links it to the selected boundary as supporting evidence. It is a ZIP of 33 unmodified provider responses and a manifest, not one provider-original response. The verifier is wired into the direct seed producer; its real-source test uses a synthetic grid and closure. No map rebuild was run.
 
 A read-only run of `scripts/v7-land/mainland-l2-draft/query-stage2-selected.sql` against the selected research revision returned the bundle once in `sources`, once in `source_lineage_assets`, and in the Panama boundary's source relationships. This verifies export availability; it does not mean the selected seed producer has consumed the archive.
+
+
+## Selected closure against the stage-1 research mask
+
+The exact water-only and terminal-aware checkers both accepted the selected
+`americas_exterior_closure_v1` line against the available November 3 stage-1
+research mask. Each checked 198,846 closed-cell visits, all water, including
+both terminal cells. The terminal checker bound the first and last closure
+points to the corresponding endpoints of the selected Panama line.
+
+The physical rows SHA-256 was
+`6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468`,
+the runs SHA-256 was
+`1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7`,
+and the candidate physical report SHA-256 was
+`8e8d7eb6514055a788c93055c825a0cfe103736c8221f21744f9e231ebcafa2e`.
+The route and line hashes are recorded above. The water checker SHA-256 was
+`5b01e11908293df6f941adbc391d4c9e7709f49c1b8ad60d46be0558d66ca6b3`,
+and the terminal checker SHA-256 was
+`08fd855bddd47dd2152ae0ac0fabd1e23e1d75db9e337a0af3a840a6787e1cb2`.
+
+This was a **research screen**, not an approved production closure proof. The
+physical report says candidate-only, and its use by the final selected outer
+request has not been established. The v2 closure contract was assembled for
+this screen; the pinned encoding-evidence file was taken from the current
+checkout and has not been established as the historical mask producer. The
+checker output's generic wording about an externally reviewed contract must
+therefore not be read as a claim of such review. The screen does not establish
+full-ring validity, original physical-source lineage, geographic authority,
+or any historical V7 result. The actual selected generation must re-run its
+closure verification against independently verified inputs.
