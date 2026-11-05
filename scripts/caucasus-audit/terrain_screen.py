@@ -34,36 +34,44 @@ def raster_point(ds, longitude, latitude):
 def read_tiles(specs):
     tiles = {}
     for spec in specs:
-        name, dsm_path, mask_path = spec.split(':', 2)
+        parts = spec.split(':', 3)
+        if len(parts) not in (3, 4):
+            raise ValueError('tile must be NddEddd:DSM:MSK[:STK]')
+        name, dsm_path, mask_path = parts[:3]
+        stack_path = parts[3] if len(parts) == 4 else None
         if len(name) != 7 or name[0] != 'N' or name[3] != 'E':
             raise ValueError('tile name must be NddEddd')
         key = (int(name[1:3]), int(name[4:7]))
         if key in tiles:
             raise ValueError('duplicate tile ' + name)
         dsm, mask = gdal.Open(dsm_path), gdal.Open(mask_path)
-        if dsm is None or mask is None:
-            raise ValueError('could not open both rasters for ' + name)
-        if (dsm.RasterXSize, dsm.RasterYSize, dsm.GetGeoTransform()) != (mask.RasterXSize, mask.RasterYSize, mask.GetGeoTransform()):
-            raise ValueError('DSM and mask grids differ for ' + name)
+        stack = gdal.Open(stack_path) if stack_path else None
+        if dsm is None or mask is None or (stack_path and stack is None):
+            raise ValueError('could not open requested rasters for ' + name)
+        for other in (mask, stack):
+            if other is not None and (dsm.RasterXSize, dsm.RasterYSize, dsm.GetGeoTransform()) != (other.RasterXSize, other.RasterYSize, other.GetGeoTransform()):
+                raise ValueError('source raster grids differ for ' + name)
         gt = dsm.GetGeoTransform()
         if not (abs(gt[0] - key[1]) < 1e-7 and abs(gt[3] - (key[0] + 1)) < 1e-7 and abs(gt[2]) < 1e-12 and abs(gt[4]) < 1e-12 and gt[1] > 0 and gt[5] < 0 and abs(gt[1] * dsm.RasterXSize - 1) < 1e-7 and abs(gt[5] * dsm.RasterYSize + 1) < 1e-7):
             raise ValueError('raster bounds do not match named 1-degree tile ' + name)
-        tiles[key] = (dsm, mask)
+        tiles[key] = (dsm, mask, stack)
     return tiles
 
 
-def sample_point(tiles, longitude, latitude):
+def sample_point(tiles, longitude, latitude, require_stack=False):
     key = (math.floor(latitude), math.floor(longitude))
     if key not in tiles:
         return {'status': 'missing_tile', 'tile': list(key)}
-    dsm, mask = tiles[key]
+    dsm, mask, stack = tiles[key]
     quality = raster_point(mask, longitude, latitude)
-    # Do not read or emit DSM heights for nonzero quality-mask cells.
-    value = raster_point(dsm, longitude, latitude) if quality == 0 else None
-    valid = quality == 0 and value is not None and value != -9999
-    return {'status': 'valid_mask_0' if valid else 'excluded_mask_or_nodata',
-            'tile': list(key), 'longitude': longitude, 'latitude': latitude,
-            'height_m': value if valid else None, 'mask': quality}
+    stack_count = raster_point(stack, longitude, latitude) if quality == 0 and stack is not None else None
+    # Check mask and, when requested, stack before reading any DSM height.
+    stack_ok = not require_stack or (stack_count is not None and stack_count > 0)
+    value = raster_point(dsm, longitude, latitude) if quality == 0 and stack_ok else None
+    valid = quality == 0 and stack_ok and value is not None and value != -9999
+    status = 'valid_mask_0' if valid else ('excluded_stack' if quality == 0 and not stack_ok else 'excluded_mask_or_nodata')
+    return {'status': status, 'tile': list(key), 'longitude': longitude, 'latitude': latitude,
+            'height_m': value if valid else None, 'mask': quality, 'stack': stack_count}
 
 
 def transformer(epsg):
@@ -78,7 +86,7 @@ def transformer(epsg):
     return osr.CoordinateTransformation(geographic, projected), osr.CoordinateTransformation(projected, geographic)
 
 
-def screen(features, vertices, tiles, section, epsg):
+def screen(features, vertices, tiles, section, epsg, require_stack=False):
     forward, reverse = transformer(epsg)
     output = []
     for feature in features:
@@ -98,7 +106,7 @@ def screen(features, vertices, tiles, section, epsg):
         offsets = {}
         for offset in OFFSETS:
             lon2, lat2 = reverse.TransformPoint(x - dy * offset, y + dx * offset)[:2]
-            offsets[str(offset)] = sample_point(tiles, lon2, lat2)
+            offsets[str(offset)] = sample_point(tiles, lon2, lat2, require_stack)
         output.append({'distance_m': properties['distance_along_section_m'],
                        'coordinates': [lon, lat], 'offsets': offsets})
     return output
@@ -117,7 +125,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--samples', required=True, help='Input GeoJSON point features with section and source_edge_index properties')
     parser.add_argument('--line', required=True, help='Input GeoJSON LineString geometry')
-    parser.add_argument('--tile', action='append', required=True, help='NddEddd:DSM.tiff:MSK.tiff; repeat for each tile')
+    parser.add_argument('--tile', action='append', required=True, help='NddEddd:DSM.tiff:MSK.tiff[:STK.tiff]; repeat for each tile')
+    parser.add_argument('--require-stack', action='store_true', help='Require original STK > 0 at every included pixel')
     parser.add_argument('--section', type=int, required=True)
     parser.add_argument('--epsg', type=int, required=True, help='Suitable local projected CRS for metric offsets')
     parser.add_argument('--output', required=True)
@@ -126,9 +135,9 @@ def main():
     line = json.loads(Path(args.line).read_text())
     if line.get('type') != 'LineString':
         raise ValueError('line must be a GeoJSON LineString geometry')
-    results = screen(features, line['coordinates'], read_tiles(args.tile), args.section, args.epsg)
+    results = screen(features, line['coordinates'], read_tiles(args.tile), args.section, args.epsg, args.require_stack)
     output = {'method': 'Point samples and nearest raster pixels, not proof of watershed or continuous alignment. Mask 0 only; surface model may include vegetation and buildings.',
-              'section': args.section, 'projected_epsg': args.epsg,
+              'section': args.section, 'projected_epsg': args.epsg, 'require_stack': args.require_stack,
               'summary': {str(d): summary(results, d) for d in (250, 500, 1000)}, 'samples': results}
     Path(args.output).write_text(json.dumps(output, indent=2) + '\n')
 

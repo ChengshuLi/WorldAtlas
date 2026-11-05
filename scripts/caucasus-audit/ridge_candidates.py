@@ -20,7 +20,7 @@ def profile_peaks(samples, min_prominence, min_spacing_cells):
 
 
 def profiles(features, line, section, minimum, maximum, epsg, tiles,
-             half_width, step, prominence, spacing):
+             half_width, step, prominence, spacing, require_stack=False):
     if half_width <= 0 or step <= 0 or half_width % step:
         raise ValueError('half-width must be a positive multiple of step')
     if prominence <= 0 or spacing <= 0:
@@ -46,7 +46,7 @@ def profiles(features, line, section, minimum, maximum, epsg, tiles,
         for offset in range(-half_width, half_width + 1, step):
             x2, y2 = x - dy * offset, y + dx * offset
             lon2, lat2 = reverse.TransformPoint(x2, y2)[:2]
-            samples.append({'offset_m': offset, **sample_point(tiles, lon2, lat2)})
+            samples.append({'offset_m': offset, **sample_point(tiles, lon2, lat2, require_stack)})
         peaks = profile_peaks(samples, prominence, math.ceil(spacing / step))
         nearest = min(peaks, key=lambda p: abs(p['offset_m'])) if peaks else None
         output.append({'distance_m': distance, 'center': [lon, lat],
@@ -60,6 +60,7 @@ def main():
     parser.add_argument('--samples', required=True)
     parser.add_argument('--line', required=True)
     parser.add_argument('--tile', action='append', required=True)
+    parser.add_argument('--require-stack', action='store_true')
     parser.add_argument('--section', type=int, required=True)
     parser.add_argument('--start-m', type=float, required=True)
     parser.add_argument('--end-m', type=float, required=True)
@@ -78,7 +79,7 @@ def main():
     features = json.loads(Path(a.samples).read_text())['features']
     result = profiles(features, line['coordinates'], a.section, a.start_m, a.end_m,
                       a.epsg, read_tiles(a.tile), a.half_width_m, a.step_m,
-                      a.prominence_m, a.peak_spacing_m)
+                      a.prominence_m, a.peak_spacing_m, a.require_stack)
     output = {'method': 'Interior profile peaks are local screening candidates, not connected ridges or proven watersheds. Full valid mask-0 window required.',
               'samples': result}
     Path(a.output).write_text(json.dumps(output, indent=2) + '\n')

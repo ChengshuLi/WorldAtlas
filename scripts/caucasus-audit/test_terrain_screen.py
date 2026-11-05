@@ -24,7 +24,7 @@ class ScreenTest(unittest.TestCase):
             ds.SetGeoTransform((10, .5, 0, 51, 0, -.5))
             ds.GetRasterBand(1).WriteArray(data)
             rasters.append(ds)
-        tiles = {(50, 10): tuple(rasters)}
+        tiles = {(50, 10): (*rasters, None)}
         self.assertEqual(module.sample_point(tiles, 10.1, 50.9)['height_m'], 20)
         self.assertEqual(module.sample_point(tiles, 10.6, 50.9)['status'], 'excluded_mask_or_nodata')
         self.assertIsNone(module.sample_point(tiles, 10.6, 50.9)['height_m'])
@@ -32,6 +32,15 @@ class ScreenTest(unittest.TestCase):
         self.assertEqual(module.sample_point(tiles, 10.6, 50.1)['status'], 'excluded_mask_or_nodata')
         self.assertIsNone(module.sample_point(tiles, 10.6, 50.1)['height_m'])
         self.assertEqual(module.sample_point(tiles, 11.1, 50.9)['status'], 'missing_tile')
+        self.assertEqual(module.sample_point(tiles, 10.1, 50.9, True)['status'], 'excluded_stack')
+        stack = driver.Create('', 2, 2, 1, gdal.GDT_Int16)
+        stack.SetGeoTransform((10, .5, 0, 51, 0, -.5))
+        stack.GetRasterBand(1).WriteArray(np.array([[0, 1], [1, 2]], dtype=np.int16))
+        with_stack = {(50, 10): (*rasters, stack)}
+        zero = module.sample_point(with_stack, 10.1, 50.9, True)
+        self.assertEqual(zero['status'], 'excluded_stack')
+        self.assertIsNone(zero['height_m'])
+        self.assertEqual(zero['stack'], 0)
 
 if __name__ == '__main__':
     unittest.main()
