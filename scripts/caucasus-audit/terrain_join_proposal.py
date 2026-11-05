@@ -6,8 +6,6 @@ import rasterio
 from rasterio.windows import Window, transform as window_transform
 from rasterio.features import rasterize
 from scipy.ndimage import uniform_filter, minimum_filter
-from shapely.geometry import LineString,Point,mapping
-from shapely.ops import transform
 from geodesic_line import GeodesicLine, GEOD
 
 parser=argparse.ArgumentParser(description=__doc__)
