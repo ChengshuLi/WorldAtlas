@@ -39,7 +39,7 @@ def canonical_records(records):
         raise ValueError('presentation records must contain only strings, arrays and objects')
     return (json.dumps(records,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf8')
 
-def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,manifest_source_pin_sha,input_dir,project,branch,database,code_revision):
+def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,input_dir,project,branch,database,code_revision):
     if not isinstance(code_revision,str) or len(code_revision)!=40 or any(c not in '0123456789abcdef' for c in code_revision):
         raise ValueError('invalid code revision')
     snapshot_raw=parity.bounded(snapshot_path, 8<<20)
@@ -57,6 +57,8 @@ def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,manifest_source
     manifest_raw=parity.bounded(manifest_path,1<<20)
     if parity.digest(manifest_raw)!=manifest_sha: raise ValueError('manifest hash mismatch')
     manifest=parity.strict_json(manifest_raw)
+    if not parity.equal_json(release.get('manifest'),manifest):
+        raise ValueError('Neon manifest does not match separately pinned manifest')
     if release.get('release_id')!=manifest.get('release_id'):
         raise ValueError('release ID mismatch')
     if release.get('code_revision')!=code_revision or manifest.get('code_revision')!=code_revision:
@@ -64,30 +66,15 @@ def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,manifest_source
     if manifest.get('schema')!='worldatlas-presentation-parity-manifest-v2' or not isinstance(manifest.get('sources'),dict) or set(manifest['sources'])!=set(ASSET_FILES):
         raise ValueError('manifest lacks exact source identities')
     check_code_pins(manifest)
-    if not isinstance(snapshot['assets'],dict) or set(snapshot['assets'])!=set(ASSET_FILES)|{'manifest'}:
+    if not isinstance(snapshot['assets'],dict) or set(snapshot['assets'])!=set(ASSET_FILES):
         raise ValueError('invalid source asset set')
-    manifest_asset=snapshot['assets']['manifest']
-    if not isinstance(manifest_asset,dict) or not valid_pin({k:manifest_asset.get(k) for k in PIN_KEYS}):
-        raise ValueError('invalid manifest source asset')
-    manifest_pin={k:manifest_asset[k] for k in PIN_KEYS}
-    pin_bytes=(json.dumps(manifest_pin,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf8')
-    if parity.digest(pin_bytes)!=manifest_source_pin_sha:
-        raise ValueError('manifest source identity pin mismatch')
-    if manifest_asset['source_id']!=release.get('manifest_source_id') or manifest_asset['version']!=release.get('manifest_source_version') or manifest_asset['sha256']!=manifest_sha or manifest_asset['size_bytes']!=len(manifest_raw):
-        raise ValueError('manifest source binding mismatch')
-    source_pins=release.get('source_pins')
-    if not isinstance(source_pins,dict) or set(source_pins)!=set(ASSET_FILES):
-        raise ValueError('invalid release source pins')
     for name,(filename,prefix) in ASSET_FILES.items():
         asset=snapshot['assets'][name]
-        pin=source_pins[name]
-        manifest_pin=manifest['sources'].get(name)
-        if not valid_pin(pin) or not valid_pin(manifest_pin):
+        pin=manifest['sources'].get(name)
+        if not valid_pin(pin):
             raise ValueError('invalid typed source pin: '+name)
         if not isinstance(asset,dict) or any(not parity.equal_json(asset.get(k),pin[k]) for k in PIN_KEYS):
             raise ValueError('asset row and release pin disagree: '+name)
-        if not parity.equal_json(manifest_pin,pin):
-            raise ValueError('manifest/source identity mismatch: '+name)
         if asset['source_id']!=release.get(prefix+'_source_id') or asset['version']!=release.get(prefix+'_source_version'):
             raise ValueError('asset foreign key mismatch: '+name)
         if not all(isinstance(asset[k],str) and asset[k] for k in ('source_id','version','r2_bucket','r2_key','sha256')) or type(asset['size_bytes']) is not int or asset['size_bytes']<0:
@@ -104,14 +91,14 @@ def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,manifest_source
     check_code_pins(manifest)
     result['status']='presentation-export-parity-verified-not-authenticated-or-deployed'
     result['neon_export_sha256']=snapshot_sha
-    result['limitations'].append('Origin is an assertion: the caller must independently authenticate the Neon query result, source-identity pin, R2 readbacks, and code revision.')
+    result['limitations'].append('Origin is an assertion: the caller must independently authenticate the Neon query result, expected manifest digest, existing R2 readbacks, and code revision. Neon-only storage is not an independent signature or protection from privileged changes.')
     result['limitations'].append('On-disk code hashes are integrity checks, not authentication of already executing Python or Node bytes.')
     return result
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
-    for name in ('snapshot','snapshot-sha256','manifest','manifest-sha256','manifest-source-pin-sha256','input-dir','project','branch','database','code-revision'):
+    for name in ('snapshot','snapshot-sha256','manifest','manifest-sha256','input-dir','project','branch','database','code-revision'):
         p.add_argument('--'+name,required=True)
     a=p.parse_args()
-    print(json.dumps(verify(a.snapshot,a.snapshot_sha256,a.manifest,a.manifest_sha256,a.manifest_source_pin_sha256,a.input_dir,a.project,a.branch,a.database,a.code_revision),sort_keys=True))
+    print(json.dumps(verify(a.snapshot,a.snapshot_sha256,a.manifest,a.manifest_sha256,a.input_dir,a.project,a.branch,a.database,a.code_revision),sort_keys=True))
 

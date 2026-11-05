@@ -29,9 +29,7 @@ class NeonExportTests(unittest.TestCase):
         self.manifest=self.root/'manifest'
         self.manifest.write_text(json.dumps(manifest))
         self.manifest_sha=hashlib.sha256(self.manifest.read_bytes()).hexdigest()
-        assets['manifest']={'source_id':'manifest','version':'v1','r2_bucket':'b','r2_key':'manifest-key','sha256':self.manifest_sha,'size_bytes':self.manifest.stat().st_size}
-        self.manifest_source_pin_sha=hashlib.sha256((json.dumps(assets['manifest'],ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()).hexdigest()
-        release={**cols,'release_id':'fictional','release_kind':'historical_review_presentation','manifest_source_id':'manifest','manifest_source_version':'v1','code_revision':'a'*40,'manifest_sha256':self.manifest_sha,'records_sha256':hashlib.sha256(rr).hexdigest(),'source_pins':pins,'records':records}
+        release={**cols,'release_id':'fictional','release_kind':'historical_review_presentation','manifest':json.loads(json.dumps(manifest)),'code_revision':'a'*40,'manifest_sha256':self.manifest_sha,'records_sha256':hashlib.sha256(rr).hexdigest(),'records':records}
         self.snapshot={'schema':'worldatlas-neon-presentation-export-v1','origin':{'project_id':'p','branch_id':'b','database':'d'},'release':release,'assets':assets}
         self.path=self.root/'snapshot'
         self.write_snapshot()
@@ -41,7 +39,7 @@ class NeonExportTests(unittest.TestCase):
         self.path.write_text(json.dumps(self.snapshot))
         self.snap_sha=hashlib.sha256(self.path.read_bytes()).hexdigest()
     def check(self):
-        return v.verify(self.path,self.snap_sha,self.manifest,self.manifest_sha,self.manifest_source_pin_sha,self.root,'p','b','d','a'*40)
+        return v.verify(self.path,self.snap_sha,self.manifest,self.manifest_sha,self.root,'p','b','d','a'*40)
     def test_matching_export(self):
         self.assertEqual(self.check()['status'],'presentation-export-parity-verified-not-authenticated-or-deployed')
     def test_wrong_origin_rejected(self):
@@ -55,15 +53,15 @@ class NeonExportTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'asset foreign key mismatch'):self.check()
     def test_changed_row_and_pin_still_fail_trusted_manifest(self):
         self.snapshot['assets']['proposal']['r2_key']='other'
-        self.snapshot['release']['source_pins']['proposal']['r2_key']='other'
+        self.snapshot['release']['manifest']['sources']['proposal']['r2_key']='other'
         self.write_snapshot()
-        with self.assertRaisesRegex(ValueError,'manifest/source identity mismatch'):self.check()
-    def test_wrong_manifest_asset_rejected(self):
-        self.snapshot['assets']['manifest']['size_bytes']+=1;self.write_snapshot()
-        with self.assertRaisesRegex(ValueError,'manifest source identity pin mismatch'):self.check()
+        with self.assertRaisesRegex(ValueError,'Neon manifest does not match'):self.check()
+    def test_changed_neon_manifest_rejected(self):
+        self.snapshot['release']['manifest']['release_id']='other';self.write_snapshot()
+        with self.assertRaisesRegex(ValueError,'Neon manifest does not match'):self.check()
     def test_manifest_key_swap_rejected(self):
-        self.snapshot['assets']['manifest']['r2_key']='other';self.write_snapshot()
-        with self.assertRaisesRegex(ValueError,'manifest source identity pin mismatch'):self.check()
+        self.snapshot['release']['manifest']['sources']['proposal']['r2_key']='other';self.write_snapshot()
+        with self.assertRaisesRegex(ValueError,'Neon manifest does not match'):self.check()
     def test_wrong_code_revision_rejected(self):
         self.snapshot['release']['code_revision']='b'*40;self.write_snapshot()
         with self.assertRaisesRegex(ValueError,'code revision mismatch'):self.check()
@@ -73,15 +71,12 @@ class NeonExportTests(unittest.TestCase):
         manifest['code_revision']=bad
         self.manifest.write_text(json.dumps(manifest))
         self.manifest_sha=hashlib.sha256(self.manifest.read_bytes()).hexdigest()
-        asset=self.snapshot['assets']['manifest']
-        asset['sha256']=self.manifest_sha
-        asset['size_bytes']=self.manifest.stat().st_size
-        self.manifest_source_pin_sha=hashlib.sha256((json.dumps(asset,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()).hexdigest()
+        self.snapshot['release']['manifest']=manifest
         self.snapshot['release']['manifest_sha256']=self.manifest_sha
         self.snapshot['release']['code_revision']=bad
         self.write_snapshot()
         with self.assertRaisesRegex(ValueError,'invalid code revision'):
-            v.verify(self.path,self.snap_sha,self.manifest,self.manifest_sha,self.manifest_source_pin_sha,self.root,'p','b','d',bad)
+            v.verify(self.path,self.snap_sha,self.manifest,self.manifest_sha,self.root,'p','b','d',bad)
     def test_modified_r2_readback_rejected(self):
         (self.root/'proposal.json').write_bytes(b'not-the-source')
         with self.assertRaisesRegex(ValueError,'R2 readback mismatch'):self.check()
@@ -92,15 +87,21 @@ class NeonExportTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'only strings'):v.canonical_records({'value':1})
         with self.assertRaisesRegex(ValueError,'only strings'):v.canonical_records({'value':True})
     def test_boolean_size_is_not_integer(self):
-        bad=dict(self.snapshot['release']['source_pins']['proposal'])
+        bad=dict(self.snapshot['release']['manifest']['sources']['proposal'])
         bad['size_bytes']=True
         self.assertFalse(v.valid_pin(bad))
-        self.snapshot['release']['source_pins']['proposal']=bad
+        manifest=json.loads(self.manifest.read_text())
+        manifest['sources']['proposal']=bad
+        self.manifest.write_text(json.dumps(manifest))
+        self.manifest_sha=hashlib.sha256(self.manifest.read_bytes()).hexdigest()
+        self.snapshot['release']['manifest']=manifest
+        self.snapshot['release']['manifest_sha256']=self.manifest_sha
+        self.snapshot['assets']['proposal']['size_bytes']=True
         self.write_snapshot()
         with self.assertRaisesRegex(ValueError,'invalid typed source pin'):self.check()
     def test_wrong_snapshot_hash_rejected(self):
         with self.assertRaisesRegex(ValueError,'Neon export hash mismatch'):
-            v.verify(self.path,'0'*64,self.manifest,self.manifest_sha,self.manifest_source_pin_sha,self.root,'p','b','d','a'*40)
+            v.verify(self.path,'0'*64,self.manifest,self.manifest_sha,self.root,'p','b','d','a'*40)
 
 if __name__=='__main__':unittest.main()
 
