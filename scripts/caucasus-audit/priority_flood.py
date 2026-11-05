@@ -44,7 +44,7 @@ def trace(filled,valid,parent,start,transform):
     z=np.asarray(filled);valid=np.asarray(valid,dtype=bool);parent=np.asarray(parent)
     if z.ndim!=2 or z.shape!=valid.shape or z.shape!=parent.shape:
         raise ValueError('matching two-dimensional arrays required')
-    if not hasattr(transform, 'a') or transform.b or transform.d:
+    if not hasattr(transform, 'a') or transform.b or transform.d or transform.a<=0 or transform.e>=0:
         raise ValueError('WGS84 unrotated raster transform required')
     height,width=z.shape;row,col=start
     if not(0<=row<height and 0<=col<width and valid[row,col]):return [],'invalid_start'
