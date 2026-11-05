@@ -19,6 +19,11 @@ HELPERS = {'terrain_basin_screen.py': '4b5acd6a6d0039b125bc9299b2f1007cf24329037
            'spring_connector_graph.py': 'be147977fa1102b2578146a17724188f22de3a26c1f6e2f34061c9f093169579',
            'spring_triple_route.py': 'fe1acd1d9e7bc7d83120f5b8244d6454594fa166b75d58f953f566a5c2fbf287',
            'projected_route.py': '3cd363d478be84697c269a42463af6c50a3cd2fa659e3c443ee92393ed45703c'}
+PR4_HELPERS = {'terrain_basin_screen.py': '26a81f00180f2007cf8fdf0af796662eeaa3b057a1665392207054855cf001df',
+               'priority_d8.py': '884ce9f0d84a193ba82fa85dbd10b2d0894c2b6e389a6df05099146f1db8dd79',
+               'spring_connector_graph.py': '86204b914bce4fdf0ee03f71d169acb8d10e301e562ae5e49ef6a48ac42211e5',
+               'spring_triple_route.py': 'a553215f79cd64d11d2e67998977ced8be5f878cb4a5acd8ee7650841da1da9f',
+               'projected_route.py': 'e3c9ac7465fc5f14e9442f206e9cc9301f2630f3446feea9802797dcb3fce4ef'}
 INPUTS = ['ural-arctic-gap00.tif', 'ural-arctic-gap02a.tif', 'ural-arctic-gap02b.tif',
           'ural-hydro-eu.zip', 'ural-hydro-si.zip', 'ural-hydro-eu', 'ural-hydro-si',
           'ural-copernicus-dem.tif', 'ural-river-r2.osm', 'review_snapshot.json']
@@ -49,8 +54,10 @@ def main():
     for name in INPUTS:
         if not (inputs / name).exists():
             raise FileNotFoundError(inputs / name)
+    observed = {}
     for name, expected in HELPERS.items():
-        if sha(helpers / name) != expected:
+        observed[name] = sha(helpers / name)
+        if observed[name] not in (expected, PR4_HELPERS[name]):
             raise ValueError('helper hash mismatch: ' + name)
     work.mkdir(parents=True)
     for name in INPUTS:
@@ -84,7 +91,7 @@ def main():
     output = work / 'ural-raw-backed-continuous-cop-only.geometry.json'
     if sha(output) != OUTPUT_SHA:
         raise ValueError('reproduced boundary file hash mismatch')
-    for name, expected in HELPERS.items():
+    for name, expected in observed.items():
         if sha(helpers / name) != expected:
             raise ValueError('helper changed during construction: ' + name)
     print(json.dumps({'geometry': str(output), 'file_sha256': OUTPUT_SHA,
