@@ -46,7 +46,7 @@
  
  def need(x,msg):
   if not x:raise ValueError(msg)
-@@ -23,20 +47,47 @@
+@@ -23,20 +47,49 @@
   need(isinstance(spec,dict) and set(spec)=={'path','sha256'} and isinstance(spec['path'],str) and isinstance(spec['sha256'],str) and contracts.HEX.fullmatch(spec['sha256']),'invalid file pin')
   p=Path(spec['path']).resolve();need(p.is_file() and verify_inputs.sha_file(p,guard)==spec['sha256'],'input hash mismatch: '+str(p));return p
  
@@ -58,6 +58,8 @@
 + need(db['outer_config']['sha256']==cfg['orchestration']['outer_config_sha256'],'direct outer config mismatch')
 + outer_raw=verify_inputs.bounded_bytes(outer_path,1<<20,guard);outer=direct_seed.read_json(outer_raw)
 + need(isinstance(outer,dict) and 'seed_handoff' not in outer and outer.get('grid')==grid and outer.get('policy_id')==cfg['policy_id'] and outer.get('policy_version')==cfg['policy_version'] and outer.get('controls')==cfg['controls'],'direct outer mode/config mismatch')
++ outer_caucasus=outer.get('caucasus_source');core_caucasus=cfg.get('caucasus_binding')
++ need((outer_caucasus is None and core_caucasus is None) or (isinstance(core_caucasus,dict) and core_caucasus.get('config')==outer_caucasus and outer_caucasus is not None),'Caucasus outer/core config mismatch')
 + need(db['request']['sha256']==derived.get('seed_request_sha256') and Path(request_path).resolve()==Path(cfg['orchestration']['derived_manifest']['path']).resolve().parent.parent/'requests'/'seed.json','direct seed request/marker mismatch')
 + q,report=direct_seed.verify_result(request_path,paths['seed_report'].parent,guard)
 + need(report==seed and q['grid']==grid and q['inputs']['panama_osm_archive']==db['panama_osm_archive'] and outer['inputs'].get('panama_osm_archive')==db['panama_osm_archive'],'direct seed report/archive mismatch')
@@ -98,7 +100,7 @@
   for k in ('seed_code_files','resolution_code_files','hint_code_files'):need(isinstance(cfg[k],dict) and bool(cfg[k]) and all(isinstance(x,str) and x and '/' not in x for x in cfg[k]),'invalid code file pins')
   need(set(cfg['hint_code_files'])=={'hints.py','run_diagnostic.py'} and isinstance(cfg['tile_directory'],str) and isinstance(cfg['policy_id'],str) and cfg['policy_id'] and isinstance(cfg['policy_version'],str) and cfg['policy_version'],'invalid hint code or policy')
   o=cfg['orchestration'];need(isinstance(o,dict) and set(o)=={'outer_config_sha256','orchestrator_sha256','derived_manifest','physical_lineage_report','seed_handoff_attestation','seed_handoff_context'} and all(isinstance(o.get(k),str) and contracts.HEX.fullmatch(o[k]) for k in ('outer_config_sha256','orchestrator_sha256')),'missing fresh-orchestration provenance')
-@@ -59,12 +110,13 @@
+@@ -59,12 +112,13 @@
   code_files={}
   for field in ('seed_code_files','resolution_code_files','hint_code_files'):
    code_files[field]={name:pin(v,guard) for name,v in cfg[field].items()}
@@ -114,7 +116,7 @@
   rp=work/'request.json'
   if resume:need(rp.is_file() and read_json(rp,guard)==request,'work request mismatch; historic checkpoints are not accepted')
   else:
-@@ -88,11 +140,21 @@
+@@ -88,11 +142,21 @@
    comparison=witness_compare.compare_witness_resolutions(old_req,old_report,new_req_bytes,fresh_bytes);recheck=derived.get('witness_recheck');need(isinstance(recheck,dict) and recheck.get('comparison')==comparison,'fresh witness comparison differs from derived evidence')
   else:
    fresh=resolver.resolve(rr);fresh['request_sha256']=pins['resolution_request'];need(fresh==resolution,'fresh witness re-resolution differs from consumed report')
@@ -139,7 +141,7 @@
   tolerance=contracts.policy_tolerance_metres(land_policy)
   need(paths['hint_roots'].stat().st_size==count*4 and paths['hint_codes'].stat().st_size==count,'hint array size mismatch')
   roots=np.frombuffer(verify_inputs.bounded_bytes(paths['hint_roots'],count*4,guard),dtype='<u4').copy();hints=np.frombuffer(verify_inputs.bounded_bytes(paths['hint_codes'],count,guard),dtype='u1').copy()
-@@ -102,7 +164,7 @@
+@@ -102,7 +166,7 @@
   builddir=work/('verifier-build-'+uuid.uuid4().hex);builddir.mkdir();copy=builddir/src.name;copy.write_bytes(src_bytes);binary=builddir/'verifier'
   subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(copy),'-lcrypto','-o',str(binary)],check=True)
   need(verify_inputs.sha_file(src,guard)==code[src.name] and verify_inputs.sha_file(copy,guard)==code[src.name],'verifier changed during compilation');guard()
@@ -148,7 +150,7 @@
   spec=verify_inputs.manifest(paths['tile_manifest'],w,h,1024,guard);rep_bytes=verify_inputs.bounded_bytes(paths['representatives'],min(128<<20,len(spec)*6*32*20),guard);rep=np.frombuffer(rep_bytes,dtype='<u4');need(len(rep)%5==0,'invalid representative shape');rep=rep.reshape(-1,5)
   tiles=verify_inputs.verify_representatives(cfg['tile_directory'],paths['tile_manifest'],rep,w,h,guard=guard);need(len(tiles)==tilecheck['tiles'],'tile set mismatch')
   run_count=paths['component_runs'].stat().st_size//12;co=engine.offsets(paths['component_rows'],h,run_count)
-@@ -118,10 +180,13 @@
+@@ -118,10 +182,13 @@
   for v in inp.values():pin(v,guard)
   for field in code_files:
    for v in cfg[field].values():pin(v,guard)
@@ -165,7 +167,7 @@
   if handoff_pin:report['limitations'].append('The separately monitored seed handoff has a post-run readback attestation; its generic watchdog does not cryptographically bind the command it observed.')
   with open(partial/'report.json','x') as f:json.dump(report,f,sort_keys=True,indent=2,allow_nan=False);f.write('\n');f.flush();os.fsync(f.fileno())
   guard();fd=os.open(partial,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
-@@ -133,4 +198,4 @@
+@@ -133,4 +200,4 @@
   return report
  
  if __name__=='__main__':
@@ -815,7 +817,7 @@
 + code_check(guard);inputs_check(q,guard);need(verify_inputs.bounded_bytes(request_path,1<<20,guard)==raw,'direct seed request changed')
 + return trace
 --- /dev/null
-+++ b/tests/test_direct_candidate.py
++++ b/test_direct_candidate.py
 @@ -0,0 +1,55 @@
 +import copy,hashlib,json,tempfile,unittest
 +from unittest import mock
@@ -873,7 +875,7 @@
 +  with self.assertRaisesRegex(ValueError,'derived artifact/report mismatch'):v.validate(self.pins,self.code)
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_direct_contracts.py
++++ b/test_direct_contracts.py
 @@ -0,0 +1,121 @@
 +import copy,unittest
 +import contracts as c
@@ -997,7 +999,7 @@
 +  with self.assertRaisesRegex(ValueError,'terminal closure checker'):self.check()
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_direct_hint_cli.py
++++ b/test_direct_hint_cli.py
 @@ -0,0 +1,48 @@
 +import hashlib,json,struct,tempfile,unittest
 +from unittest import mock
@@ -1048,7 +1050,7 @@
 +  self.assertFalse(out.exists())
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_direct_hint_subprocess.py
++++ b/test_direct_hint_subprocess.py
 @@ -0,0 +1,12 @@
 +import json,os,subprocess,sys,unittest
 +from pathlib import Path
@@ -1063,7 +1065,7 @@
 +  self.assertNotEqual(p.returncode,0);self.assertFalse(bad.exists())
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_direct_identity.py
++++ b/test_direct_identity.py
 @@ -0,0 +1,23 @@
 +import hashlib,importlib.util,json,tempfile,unittest
 +from pathlib import Path
@@ -1089,7 +1091,7 @@
 +  with self.assertRaisesRegex(ValueError,'changed during check'):adapter.run(code,self.r)
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_direct_outer.py
++++ b/test_direct_outer.py
 @@ -0,0 +1,20 @@
 +import json,tempfile,unittest
 +from pathlib import Path
@@ -1112,7 +1114,7 @@
 +  with self.assertRaises(ValueError):self.load()
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_direct_resume.py
++++ b/test_direct_resume.py
 @@ -0,0 +1,17 @@
 +import unittest
 +from test_baseline_runner import Runner
@@ -1132,7 +1134,7 @@
 +  with self.assertRaisesRegex(ValueError,'identity'):self.runit(True)
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_direct_seed_request.py
++++ b/test_direct_seed_request.py
 @@ -0,0 +1,27 @@
 +import copy,unittest
 +import orchestrate_stage2 as o
@@ -1162,7 +1164,7 @@
 +  finally:t.doCleanups()
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_fresh_closure_binding.py
++++ b/test_fresh_closure_binding.py
 @@ -0,0 +1,50 @@
 +"""Bounded research tests; fresh mode is not wired to an executable path."""
 +import copy, unittest
@@ -1215,7 +1217,7 @@
 +  with self.assertRaisesRegex(ValueError,'route source/provenance'):self.fresh()
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_fresh_outer_gating.py
++++ b/test_fresh_outer_gating.py
 @@ -0,0 +1,26 @@
 +"""The unreviewed fresh outer mode must fail before work or output."""
 +import copy,json,tempfile,unittest
@@ -1244,8 +1246,8 @@
 +  core.validate_seed_mode(None,binding,{'direct_seed_binding':binding});core.validate_seed_mode({'path':'/old'},None,{})
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_direct_core_binding.py
-@@ -0,0 +1,38 @@
++++ b/test_direct_core_binding.py
+@@ -0,0 +1,52 @@
 +"""Bounded direct seed/core linkage checks; no map execution."""
 +import copy,hashlib,json,tempfile,unittest
 +from pathlib import Path
@@ -1268,6 +1270,20 @@
 + def check(self):
 +  with mock.patch.object(direct_seed,'verify_result',return_value=(self.q,self.seed)),mock.patch.object(direct_seed,'verify_panama_source',return_value={'verified':True}):return c.verify_direct_binding(self.db,self.derived,self.cfg,self.paths,self.pins,self.grid,self.seed,lambda:None)
 + def test_exact_binding(self):self.assertEqual(self.check(),self.q)
++ def update_outer(self):
++  op=Path(self.outer_pin['path']);op.write_text(json.dumps(self.outer));self.outer_pin['sha256']=hashlib.sha256(op.read_bytes()).hexdigest();self.cfg['orchestration']['outer_config_sha256']=self.outer_pin['sha256']
++ def test_reject_omitted_caucasus_binding(self):
++  self.outer['caucasus_source']={'recipe':'r'};self.update_outer()
++  with self.assertRaisesRegex(ValueError,'Caucasus outer/core'):self.check()
++ def test_reject_injected_caucasus_binding(self):
++  self.cfg['caucasus_binding']={'config':{'recipe':'r'}}
++  with self.assertRaisesRegex(ValueError,'Caucasus outer/core'):self.check()
++ def test_reject_changed_caucasus_binding(self):
++  self.outer['caucasus_source']={'recipe':'r'};self.update_outer();self.cfg['caucasus_binding']={'config':{'recipe':'different'}}
++  with self.assertRaisesRegex(ValueError,'Caucasus outer/core'):self.check()
++ def test_accept_same_caucasus_binding(self):
++  self.outer['caucasus_source']={'recipe':'r'};self.update_outer();self.cfg['caucasus_binding']={'config':{'recipe':'r'}}
++  self.assertEqual(self.check(),self.q)
 + def test_reject_changed_contract(self):
 +  self.q=copy.deepcopy(self.q);self.q['inputs']['closure_contract']['sha256']='0'*64
 +  with self.assertRaisesRegex(ValueError,'outer request mismatch'):self.check()
@@ -1285,8 +1301,8 @@
 +  with self.assertRaisesRegex(ValueError,'outer config mismatch'):self.check()
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_caucasus_directory.py
-@@ -0,0 +1,21 @@
++++ b/test_caucasus_directory.py
+@@ -0,0 +1,23 @@
 +import tempfile,unittest
 +from pathlib import Path
 +from unittest import mock
@@ -1306,10 +1322,12 @@
 +   (runtime.parent/'caucasus-audit').mkdir();(self.root/'scripts'/'caucasus-audit').mkdir()
 +   with self.assertRaisesRegex(ValueError,'missing or ambiguous'):c.caucasus_directory()
 + def test_actual_scratch_layout(self):
-+  expected=Path('stage2-combined-direct-20261105/caucasus-audit').resolve();self.assertEqual(c.caucasus_directory(),expected)
++  expected=(c.HERE.parent/'caucasus-audit').resolve()
++  if not expected.is_dir():self.skipTest('sibling Caucasus source directory not assembled')
++  self.assertEqual(c.caucasus_directory(),expected)
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_real_unpatched_freeze.py
++++ b/runtime/seed-producer-direct/test_real_unpatched_freeze.py
 @@ -0,0 +1,131 @@
 +"""Exercise the actual unmodified v2 executable pins on a bounded fixture."""
 +import contextlib, hashlib, json, os, pathlib, subprocess, sys, unittest
@@ -1443,7 +1461,7 @@
 +  finally:case.doCleanups()
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_outer_seed_tamper.py
++++ b/runtime/seed-producer-direct/test_outer_seed_tamper.py
 @@ -0,0 +1,55 @@
 +"""Bounded unit checks of the unwired direct invocation's revalidation."""
 +import hashlib,json,pathlib,unittest
@@ -1501,7 +1519,7 @@
 +  with self.assertRaisesRegex(ValueError,'already exists'):self.invoke()
 +if __name__=='__main__':unittest.main()
 --- /dev/null
-+++ b/tests/test_caucasus_invocation_wiring.py
++++ b/runtime/seed-producer-direct/test_caucasus_invocation_wiring.py
 @@ -0,0 +1,37 @@
 +"""Bounded fake-process tests for the disabled Caucasus/direct seed wiring."""
 +import hashlib,json,pathlib,unittest

@@ -18,7 +18,9 @@ work path. The historical seed and its historical monitor artifacts remain
 distinct from the new v2 producer. A new direct seed must bind the selected
 snapshot, current witness and physical/component data, Panama archive,
 Caucasus source gate, current closure proofs, code and request hashes, and the
-same artifacts in resume and core identity. Historical route provenance must
+same artifacts in resume and core identity. The core now checks that the
+Caucasus configuration exactly matches the pinned outer configuration, and
+repeats that complete binding before publishing output. Historical route provenance must
 not be represented as a proof from a new checker. Physical-mask producer
 lineage and final production closure remain unverified.
 
@@ -31,3 +33,10 @@ alone does not assemble a working runtime: it needs the complete baseline,
 the v2 producer in a separate directory, the Panama core validator from PR4
 `56af1a0`, and the pinned Caucasus source-specific dependencies.
 No map or selected Neon data was produced by these bounded tests.
+
+For the bounded test paths, put top-level `test_*.py` files beside `runtime/`;
+copy the separately published seed source into `runtime/seed-producer-direct/`
+without overwriting its tests, and assemble the seven Caucasus modules in the
+sibling `caucasus-audit/` directory. Some historical-handoff tests also require
+their existing local qualified fixtures. These instructions do not enable the
+review gates or establish a complete reproducible production environment.
