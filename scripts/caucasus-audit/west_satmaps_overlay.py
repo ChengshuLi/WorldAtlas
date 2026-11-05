@@ -5,11 +5,32 @@ Pulkovo 1942 / Gauss-Kruger zone 7 grid. No independent ground controls or
 scan-deformation correction were applied. It is a research screen only.
 """
 import argparse
+import hashlib
 import json
 import numpy as np
 import rasterio
 from rasterio.windows import Window
 from pyproj import Transformer
+
+
+PINS = {'image': 'e78a58145a9b47c8f0dffab9855fbd6a8c04858586378feeff6bce2fdb5af1a2',
+        'source': '081f5909935023255cf9f0b13f06102aaa97cc19a15715b6cabb9964b7a20f25',
+        'candidate': 'f9e4e5da1687f3ffb118e0b621705fe2e6b43a5dc2abbc323699cb56fbf8dcb9'}
+
+
+def map_pixel(easting, northing):
+    # Locally measured grid lines: 7472/7474 km at x=1027/1187 and
+    # 4930/4932 km at y=1498/1341, near the eastern join.
+    return (1027 + (easting - 7472000) * 160 / 2000,
+            1498 + (4930000 - northing) * 157 / 2000)
+
+
+def file_hash(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as src:
+        for block in iter(lambda: src.read(1 << 20), b''):
+            h.update(block)
+    return h.hexdigest()
 
 
 def main():
@@ -19,6 +40,9 @@ def main():
     p.add_argument('--candidate', required=True)
     p.add_argument('--output', required=True)
     a = p.parse_args()
+    for key in PINS:
+        if file_hash(getattr(a, key)) != PINS[key]:
+            raise ValueError('input digest mismatch: ' + key)
     x0, y0, width, height = 650, 1050, 1000, 1000
     with rasterio.open(a.image) as src:
         if (src.width, src.height) != (3322, 3081):
@@ -29,8 +53,8 @@ def main():
     transformer = Transformer.from_crs('EPSG:4326', 'EPSG:28407', always_xy=True)
     def screen(point):
         e, n = transformer.transform(*point)
-        return (224 + (e - 7462000) * 159 / 2000 - x0,
-                406 + (4944000 - n) * 156 / 2000 - y0)
+        x, y = map_pixel(e, n)
+        return (x - x0, y - y0)
     def mark(x, y, color, radius=2):
         x, y = round(x), round(y)
         if 0 <= x < width and 0 <= y < height:
