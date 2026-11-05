@@ -32,7 +32,8 @@ def run(args):
     for row in reader.iterRecords():
         record = dict(zip(fields, row))
         records[record['HYBAS_ID']] = record
-    coords = json.load(open(args.line, encoding='utf-8'))['coordinates']
+    with open(args.line, encoding='utf-8') as stream:
+        coords = json.load(stream)['coordinates']
     line = GeodesicLine(coords)
     xmin, ymin, xmax, ymax = args.bounds
     sxmin, symin, sxmax, symax = args.source_bounds
