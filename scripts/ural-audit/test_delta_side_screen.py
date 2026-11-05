@@ -4,15 +4,19 @@ from delta_side_screen import screen,read_grid
 
 class SideScreenTest(unittest.TestCase):
     def test_reports_both_wrong_sides(self):
-        rows=np.array([0,2,4,8,10,12],dtype='uint32')
-        pairs=[(5,19),(10,18),(5,19),(10,18),(1,18),(5,19),(9,18),(10,19),(5,19),(10,18),(5,19),(10,18)]
+        width,height=3600,1800;rows=[0];pairs=[]
+        for y in range(height):
+            pairs.extend([(1799,19),(1800,18),(1801,19),(width,18)] if y==899 else [(1800,19),(width,18)])
+            rows.append(len(pairs))
+        rows=np.array(rows,dtype='uint32')
         runs=np.array(pairs,dtype='uint32').ravel()
-        summary,found=screen(rows,runs,[(0,85),(0,-85)],(-179,-70,179,70),(-100,0),(100,0),'EPSG:3857',10,5,36)
+        summary,found=screen(rows,runs,[(0,.3),(0,-.3)],(-.2,-.2,.2,.2),(-.15,0),(.15,0),'EPSG:3857',width,height,.1)
         self.assertEqual(summary['summary']['asia_labeled_europe']['count'],1)
         self.assertEqual(summary['summary']['europe_labeled_asia']['count'],1)
         self.assertEqual(summary['unassigned_land_centers'],0)
-        self.assertEqual(found['asia_labeled_europe'][0]['x'],9)
-        self.assertEqual(found['europe_labeled_asia'][0]['x'],0)
+        self.assertEqual(found['asia_labeled_europe'][0]['x'],1800)
+        self.assertEqual(found['europe_labeled_asia'][0]['x'],1799)
+        self.assertTrue(summary['summary']['asia_labeled_europe']['threshold_counts_are_numerical_estimates'])
 
     def test_raw_and_gzip_grid_hashes(self):
         with tempfile.TemporaryDirectory() as d:
@@ -24,3 +28,4 @@ class SideScreenTest(unittest.TestCase):
             with self.assertRaises(ValueError):read_grid(raw,'0'*64)
 
 if __name__=='__main__': unittest.main()
+

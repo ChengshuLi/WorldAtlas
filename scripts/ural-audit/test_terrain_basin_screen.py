@@ -2,9 +2,14 @@ import hashlib,os,tempfile,unittest,zipfile
 import numpy as np,rasterio,shapefile
 from rasterio.transform import from_origin
 from pyproj import Transformer
-from terrain_basin_screen import screen
+from terrain_basin_screen import screen, route_offset_pair
 
 class TerrainScreenTest(unittest.TestCase):
+    def test_offset_pair_preserves_right_then_left(self):
+        from pyproj import Geod
+        right,left=route_offset_pair(0,0,90,100)
+        self.assertLess(right[1],0);self.assertGreater(left[1],0)
+        for point in (right,left):self.assertAlmostEqual(Geod(ellps='WGS84').inv(0,0,*point)[2],100,delta=1e-6)
     def test_two_basin_synthetic_surface(self):
         with tempfile.TemporaryDirectory() as d:
             dem=os.path.join(d,'dem.tif');rr,cc=np.indices((100,100));z=(100-cc+2*np.minimum(abs(rr-25),abs(rr-75))).astype('float32')

@@ -8,6 +8,12 @@ from shapely.strtree import STRtree
 from pyproj import Transformer
 from rasterio.warp import transform_bounds
 from priority_d8 import drainage
+from projected_route import ProjectedRoute, GEOD
+
+def route_offset_pair(lon,lat,azimuth,offset):
+    """WGS84 right/left offsets, preserving the original pair order."""
+    if not all(np.isfinite(v) for v in (lon,lat,azimuth,offset)) or offset<=0:raise ValueError('invalid route offset')
+    return [GEOD.fwd(lon,lat,azimuth-90,sign*offset)[:2] for sign in (-1,1)]
 
 def digest_file(f):
     h=hashlib.sha256()
@@ -53,20 +59,22 @@ def screen(dem,dem_sha,basins,line,west,east,offsets,spacing):
         elif hase:classifications[index]=2;outlet_stats['east']+=1
         else:outlet_stats['unknown']+=1
     labels=np.zeros((h,w),dtype=np.uint8);ok=roots>=0;labels[ok]=classifications[roots[ok]]
-    route=LineString([to_metric(*p) for p in line]);station_distances=np.arange(0,route.length+0.001,spacing);counts={str(o):{} for o in offsets};details=[]
+    if not np.isfinite(spacing) or spacing<=0 or any(not np.isfinite(o) or o<=0 for o in offsets):raise ValueError('invalid station spacing or offset')
+    projected_line=LineString([to_metric(*p) for p in line])
+    if not projected_line.is_simple or projected_line.is_empty:raise ValueError('invalid route topology')
+    route=ProjectedRoute(line,crs);station_distances=np.arange(0,route.length+0.001,spacing);counts={str(o):{} for o in offsets};details=[]
     for dist in station_distances:
-        mid=route.interpolate(dist);l=route.interpolate(max(0,dist-5));r=route.interpolate(min(route.length,dist+5));dx=r.x-l.x;dy=r.y-l.y;norm=np.hypot(dx,dy)
-        if norm==0:raise ValueError('undefined tangent')
-        station={'distance_m':float(dist),'point_lonlat':list(to_geo(mid.x,mid.y)),'pairs':{}}
+        dist=min(float(dist),route.length);lon,lat,azimuth=route.point(dist)
+        station={'distance_m':dist,'point_lonlat':[lon,lat],'pairs':{}}
         for off in offsets:
             pair=[]
-            for sign in (-1,1):
-                x=mid.x-sign*off*dy/norm;y=mid.y+sign*off*dx/norm;row,col=rasterio.transform.rowcol(trans,x,y)
+            for offset_lon,offset_lat in route_offset_pair(lon,lat,azimuth,off):
+                x,y=to_metric(offset_lon,offset_lat);row,col=rasterio.transform.rowcol(trans,x,y)
                 pair.append(int(labels[row,col]) if 0<=row<h and 0<=col<w else -1)
             key='-'.join(map(str,pair));c=counts[str(off)];c[key]=c.get(key,0)+1
             station['pairs'][str(off)]=pair
         details.append(station)
-    return {'dem_sha256':dem_sha,'shape':[h,w],'valid_cells':int(valid.sum()),'unrouted_valid_cells':int(np.count_nonzero(valid&(roots<0))),'outlets':outlet_stats,'label_cell_counts':{'west':int((labels==1).sum()),'east':int((labels==2).sum()),'unknown_valid':int((valid&(labels==0)).sum())},'line_length_m':route.length,'stations':len(station_distances),'offset_pair_counts':counts,'station_details':details,'note':'Local DSM D8 and basin-root model; pair labels -1=outside crop, 0=masked or unclassified, 1=west group, 2=east group. No boundary selection is implied.'}
+    return {'dem_sha256':dem_sha,'shape':[h,w],'valid_cells':int(valid.sum()),'unrouted_valid_cells':int(np.count_nonzero(valid&(roots<0))),'outlets':outlet_stats,'label_cell_counts':{'west':int((labels==1).sum()),'east':int((labels==2).sum()),'unknown_valid':int((valid&(labels==0)).sum())},'line_length_m':route.length,'stations':len(station_distances),'offset_pair_counts':counts,'station_details':details,'distance_method':'WGS84 geodesic centers and offsets; WGS84 chord-sum approximation along projected-linear route','note':'Local DSM D8 and basin-root model; route length is approximated by WGS84 chords no longer than 100.01 m, with no formal error bound. Pair labels -1=outside crop, 0=masked or unclassified, 1=west group, 2=east group. No boundary selection is implied.'}
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--dem',required=True);p.add_argument('--dem-sha',required=True);p.add_argument('--basin',nargs=3,action='append',required=True,metavar=('ZIP','SHA','SHP'));p.add_argument('--line',required=True);p.add_argument('--west-root',type=int,action='append',required=True);p.add_argument('--east-root',type=int,action='append',required=True);p.add_argument('--offset',type=float,action='append',required=True);p.add_argument('--spacing',type=float,default=250);p.add_argument('--output',required=True)
