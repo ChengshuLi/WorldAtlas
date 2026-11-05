@@ -44,11 +44,17 @@ connector is a documented construction rather than a surveyed shoreline. An
 exact rational grid-contact check of its decimal coordinates touches one land
 cell (89987, 7743), while the adjoining first exterior-closure segment touches
 that land cell and the neighboring water cell (89987, 7742). This is a local
-physical-mask check, not a surveyed shoreline or a full closure validation.
+physical-mask check, not a surveyed shoreline. A separate rational all-touched
+research check scanned both complete European water closures against the new
+line and the pinned stage-1 physical mask. Both passed the terminal-cell
+policy: the exterior closure visited 78,908 cells with only its Kara terminal
+land cell touched, and the Caspian closure visited 3,161 cells with only its
+Caucasus terminal land cell touched. This does not replace the pipeline's
+formal proof or establish geographic authority.
 
 Remaining work: package and test the entire deterministic construction,
 including source and intermediate checks; substantiate the principal-headwater
-and terrain choices to the required standard; validate the complete Kara
-closure under the intended terminal policy; and persist the supported structured result and accurate
+and terrain choices to the required standard; generate the pipeline's bound
+closure proofs; and persist the supported structured result and accurate
 source relationships in Neon. Raw assets belong in R2. No map rebuild or
 active-boundary change was performed for this experiment.
