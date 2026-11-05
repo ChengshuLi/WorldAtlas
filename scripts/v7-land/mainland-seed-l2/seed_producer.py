@@ -29,6 +29,19 @@ def bounded_json(pin,guard,limit=16<<20):
    chunks.append(b);h.update(b)
  if h.hexdigest()!=pin['sha256']:raise ValueError('JSON pin mismatch')
  return json.loads(b''.join(chunks))
+def publish_no_replace(source,destination):
+ # Both operations atomically fail if destination exists. Never fall back to
+ # check-then-rename: that could overwrite an output created by another process.
+ libc=ctypes.CDLL(None,use_errno=True)
+ if sys.platform.startswith('linux') and hasattr(libc,'renameat2'):
+  rename=libc.renameat2;rename.argtypes=[ctypes.c_int,ctypes.c_char_p,ctypes.c_int,ctypes.c_char_p,ctypes.c_uint];rename.restype=ctypes.c_int
+  rc=rename(-100,os.fsencode(source),-100,os.fsencode(destination),1)
+ elif sys.platform=='darwin' and hasattr(libc,'renamex_np'):
+  rename=libc.renamex_np;rename.argtypes=[ctypes.c_char_p,ctypes.c_char_p,ctypes.c_uint];rename.restype=ctypes.c_int
+  rc=rename(os.fsencode(source),os.fsencode(destination),4)
+ else:raise NotImplementedError('atomic no-overwrite directory publication unavailable')
+ if rc:
+  error=ctypes.get_errno();raise OSError(error,os.strerror(error),str(destination))
 def run(request_path,work_dir,output_dir):
  # Compatibility callback for pure hashing/geometry helpers; no resource monitoring.
  guard=lambda:None
@@ -99,6 +112,5 @@ def run(request_path,work_dir,output_dir):
  out['panama_source_trace']=panama_source_trace
  with open(seedout/'report.json','x') as f:json.dump(out,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
  fd=os.open(seedout/'rasterizer-report.json',os.O_RDONLY);os.fsync(fd);os.close(fd);fd=os.open(seedout,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
- guard();libc=ctypes.CDLL(None,use_errno=True);rc=libc.renameat2(-100,os.fsencode(seedout),-100,os.fsencode(output),1)
- if rc:raise OSError(ctypes.get_errno(),os.strerror(ctypes.get_errno()))
+ guard();publish_no_replace(seedout,output)
  fd=os.open(output.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd);return out
