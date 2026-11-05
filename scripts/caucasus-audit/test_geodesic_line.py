@@ -11,10 +11,13 @@ class LineTests(unittest.TestCase):
     def test_endpoint_and_duplicate(self):
         line=GeodesicLine([(0,0),(0,0),(1,0)])
         v=line.closest((-1,0));self.assertEqual(v['station_m'],0)
-    def test_dateline_and_tie(self):
-        line=GeodesicLine([(179.9,0),(-179.9,0)])
-        v=line.closest((180,.01));self.assertAlmostEqual(v['distance_m'],1105.7428,delta=.05)
-        self.assertEqual(line.side((180,.01),v['station_m']),'left')
+    def test_preserves_coordinate_linear_geometry(self):
+        line=GeodesicLine([(-1,60),(1,60)])
+        lon,lat=line.point(line.length/2)
+        self.assertAlmostEqual(lon,0,places=7);self.assertAlmostEqual(lat,60,places=12)
+        self.assertLess(line.closest((0,60))["distance_m"],.02)
+    def test_uncut_antimeridian_rejected(self):
+        with self.assertRaises(ValueError):GeodesicLine([(179.9,0),(-179.9,0)])
     def test_equal_nearest_edges_are_flagged(self):
         line=GeodesicLine([(-.01,0),(-.01,.02),(.01,.02),(.01,0)])
         self.assertTrue(line.closest((0,.005))["ambiguous"])
