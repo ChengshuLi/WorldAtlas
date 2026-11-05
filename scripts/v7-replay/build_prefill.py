@@ -18,7 +18,7 @@ def main():
  ap=argparse.ArgumentParser();ap.add_argument('--plan',required=True);ap.add_argument('--input-root',required=True);ap.add_argument('--out',required=True)
  ap.add_argument('--allow-unverified-snapshot',action='store_true',help='test only: Neon acceptance cannot yet be authenticated by this tool')
  ap.add_argument('--allow-draft-snapshot',action='store_true',help='research only: allow a draft plan')
- ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved shore method')
+ ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved WGS84 coastal land-cell-center method')
  ap.add_argument('--allow-historical-v6',action='store_true',help='historical replay only: permit V6 land');a=ap.parse_args()
  if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
  root=Path(a.input_root).resolve()
@@ -27,7 +27,7 @@ def main():
  plan=json.loads(plan_path.read_text())
  if plan.get('schema')!='worldatlas-v7-full-grid-composition-plan-v1':raise ValueError('wrong plan schema')
  if plan.get('decision_revision_status')=='draft' and not a.allow_draft_snapshot:raise ValueError('draft plan requires explicit research opt-in')
- if plan.get('research_shore_method') and (plan['research_shore_method']!='spherical-grid-edge-v1' or not a.allow_research_shore):raise ValueError('research shore method requires explicit opt-in')
+ if plan.get('research_shore_method') is not None and (plan['research_shore_method']!='wgs84-coastal-4neighbor-center-v2' or not a.allow_research_shore):raise ValueError('WGS84 research shore method requires explicit opt-in; retired or unknown methods are rejected')
  out=Path(a.out).resolve()
  if out.is_relative_to(root) or root.is_relative_to(out):raise ValueError('output must be outside the input tree')
  if plan.get('grid',{}).get('width')!=c.W or plan.get('grid',{}).get('height')!=c.H:raise ValueError('plan grid mismatch')
@@ -58,6 +58,13 @@ def main():
  layers=[]
  for ent in plan.get('water_layers',[]):
   mp,m=c.read_pinned_manifest(ent,plan_path,root);m['_tiles']=m['tiles']
+  source=m.get('source') or {};nearest=m.get('nearest_assignment_audit')
+  if source.get('assignment_method')=='shared_nearest_assigned_shore' or nearest is not None:
+   if (source.get('assignment_method')!='shared_nearest_assigned_shore'
+       or plan.get('research_shore_method')!='wgs84-coastal-4neighbor-center-v2'
+       or not isinstance(nearest,dict)
+       or nearest.get('shore_method')!='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'):
+    raise ValueError('shared-shore manifest does not bind the WGS84 research method')
   if not isinstance(ent.get('priority'),int):raise ValueError(f"layer missing explicit priority: {ent}")
   layers.append((ent,m))
  create_directory_exclusive(out)
@@ -121,3 +128,4 @@ def main():
  write_json_exclusive(out/'prefill-audit.json',report)
  print(json.dumps(report,indent=2))
 if __name__=='__main__':main()
+

@@ -18,7 +18,7 @@ def main():
     ap.add_argument('--out', type=Path, required=True)
     ap.add_argument('--allow-unverified-snapshot', action='store_true')
     ap.add_argument('--allow-draft-snapshot', action='store_true')
-    ap.add_argument('--allow-research-shore', action='store_true')
+    ap.add_argument('--allow-research-shore', action='store_true', help='research only: allow the unapproved WGS84 coastal land-cell-center method')
     a = ap.parse_args()
     if not a.allow_unverified_snapshot:
         raise ValueError('snapshot authentication is not implemented; research opt-in required')
@@ -63,8 +63,20 @@ def main():
             or prefill_plan.get('research_shore_method') != audit.get('research_shore_method')):
         raise ValueError('prefill plan decision binding mismatch')
     method=prefill_plan.get('research_shore_method')
-    if method and (method!='spherical-grid-edge-v1' or not a.allow_research_shore):
-        raise ValueError('research shore method requires explicit opt-in')
+    if method is not None and (method!='wgs84-coastal-4neighbor-center-v2' or not a.allow_research_shore):
+        raise ValueError('WGS84 research shore method requires explicit opt-in; retired or unknown methods are rejected')
+    def validate_shore_manifest(manifest):
+        source=manifest.get('source') or {};nearest=manifest.get('nearest_assignment_audit')
+        if source.get('assignment_method')=='shared_nearest_assigned_shore' or nearest is not None:
+            if (source.get('assignment_method')!='shared_nearest_assigned_shore'
+                    or method!='wgs84-coastal-4neighbor-center-v2'
+                    or not a.allow_research_shore
+                    or not isinstance(nearest,dict)
+                    or nearest.get('shore_method')!='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'):
+                raise ValueError('shared-shore manifest does not bind the WGS84 research method')
+    for entry in prefill_plan.get('water_layers',[]):
+        _, prefill_manifest=c.read_pinned_manifest(entry,prefill_plan_path,root)
+        validate_shore_manifest(prefill_manifest)
     rows, runs = c.open_validated_rle(rows_path, runs_path, 'prefill')
     layers = []
     ids = set()
@@ -78,6 +90,7 @@ def main():
         ids.add(ident)
         _, manifest = c.read_pinned_manifest(entry, plan_path, root)
         source = manifest.get('source', {})
+        validate_shore_manifest(manifest)
         if (manifest.get('coverage', {}).get('complete') is not True
                 or source.get('prefill_rows_sha256') != spec['rows_sha256']
                 or source.get('prefill_runs_sha256') != spec['runs_sha256']
@@ -143,3 +156,4 @@ def main():
     print(json.dumps(report, indent=2))
 
 if __name__ == '__main__': main()
+

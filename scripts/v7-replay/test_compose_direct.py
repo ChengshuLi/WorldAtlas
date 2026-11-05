@@ -37,12 +37,48 @@ class DirectCompositionTest(unittest.TestCase):
                   'water_layers':[{'layer_id':'ocean','manifest_path':mp.name,'manifest_sha256':sha(mp),
                                    'priority':1,'overrides':[],'allowed_codes':[7]}]}
             pp=root/'final-plan.json';pp.write_text(json.dumps(plan))
-            def run(out, draft=True):
+            def run(out, draft=True, shore=False):
                 argv=['compose','--allow-unverified-snapshot','--plan',str(pp),'--input-root',str(root),'--out',str(out)]
                 if draft:argv.append('--allow-draft-snapshot')
+                if shore:argv.append('--allow-research-shore')
                 with patch.object(sys,'argv',argv),contextlib.redirect_stdout(io.StringIO()):direct.main()
+            def set_shore(method):
+                pre=json.loads(preplan.read_text());pre['research_shore_method']=method;preplan.write_text(json.dumps(pre))
+                au=json.loads(audit.read_text());au['source_plan_sha256']=sha(preplan);au['research_shore_method']=method;audit.write_text(json.dumps(au))
+                spec['plan_sha256']=sha(preplan);spec['audit_sha256']=sha(audit);pp.write_text(json.dumps(plan))
             with patch.object(c,'W',4),patch.object(c,'H',2),patch.object(c,'GRID',{'width':4,'height':2}):
                 with self.assertRaisesRegex(ValueError,'draft plan'):run(base/'no-draft',False)
+                for index,method in enumerate(('spherical-grid-edge-v1','',False)):
+                    set_shore(method)
+                    with self.assertRaisesRegex(ValueError,'retired or unknown'):run(base/f'bad-method-{index}',shore=True)
+                    self.assertFalse((base/f'bad-method-{index}').exists())
+                set_shore('wgs84-coastal-4neighbor-center-v2')
+                with self.assertRaisesRegex(ValueError,'explicit opt-in'):run(base/'no-shore-optin')
+                run(base/'wgs84-shore',shore=True)
+                self.assertTrue((base/'wgs84-shore/report.json').is_file())
+                set_shore(None)
+                manifest['source']['assignment_method']='shared_nearest_assigned_shore'
+                manifest['nearest_assignment_audit']={'shore_method':'spherical-grid-edge-v1'}
+                mp.write_text(json.dumps(manifest));plan['water_layers'][0]['manifest_sha256']=sha(mp);pp.write_text(json.dumps(plan))
+                with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'shared-no-tag',shore=True)
+                set_shore('wgs84-coastal-4neighbor-center-v2')
+                with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'shared-old-audit',shore=True)
+                manifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+                mp.write_text(json.dumps(manifest));plan['water_layers'][0]['manifest_sha256']=sha(mp);pp.write_text(json.dumps(plan))
+                run(base/'shared-wgs84',shore=True)
+                self.assertTrue((base/'shared-wgs84/report.json').is_file())
+                manifest['source'].pop('assignment_method');manifest.pop('nearest_assignment_audit')
+                mp.write_text(json.dumps(manifest));plan['water_layers'][0]['manifest_sha256']=sha(mp);set_shore(None)
+                premanifest={**manifest,'source':{**manifest['source'],'assignment_method':'shared_nearest_assigned_shore'},'nearest_assignment_audit':{'shore_method':'spherical-grid-edge-v1'}}
+                prem=put('pre-shared.json',json.dumps(premanifest).encode())
+                pre=json.loads(preplan.read_text());pre['water_layers']=[{'manifest_path':prem.name,'manifest_sha256':sha(prem)}];preplan.write_text(json.dumps(pre));set_shore(None)
+                with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'pre-shared-no-tag',shore=True)
+                set_shore('wgs84-coastal-4neighbor-center-v2')
+                with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'pre-shared-old-audit',shore=True)
+                premanifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)';prem.write_text(json.dumps(premanifest))
+                pre=json.loads(preplan.read_text());pre['water_layers'][0]['manifest_sha256']=sha(prem);preplan.write_text(json.dumps(pre));set_shore('wgs84-coastal-4neighbor-center-v2')
+                run(base/'pre-shared-wgs84',shore=True)
+                pre=json.loads(preplan.read_text());pre.pop('water_layers');preplan.write_text(json.dumps(pre));set_shore(None)
                 run(base/'out')
                 self.assertEqual(np.fromfile(base/'out/runs.u32le',dtype='<u4').tolist(),[1,2,4,7,4,18])
                 report=json.loads((base/'out/report.json').read_text());self.assertEqual(report['counts']['7'],3)
@@ -62,3 +98,4 @@ class DirectCompositionTest(unittest.TestCase):
                 self.assertFalse((base/'bad-revision').exists())
 
 if __name__=='__main__':unittest.main()
+

@@ -52,6 +52,28 @@ class PrefillTests(unittest.TestCase):
                 with patch.object(sys,'argv',no_history):
                     with self.assertRaisesRegex(ValueError,'historical V6 replay requires explicit opt-in'):prefill.main()
                 self.assertFalse(out.exists())
+                # Actual CLI gate: obsolete and unknown methods are rejected
+                # even with opt-in; the WGS84 method requires that opt-in.
+                for method in ('spherical-grid-edge-v1','',False):
+                    plan['research_shore_method']=method;pp.write_text(json.dumps(plan))
+                    with patch.object(sys,'argv',argv+['--allow-research-shore']):
+                        with self.assertRaisesRegex(ValueError,'retired or unknown'):prefill.main()
+                    self.assertFalse(out.exists())
+                manifest['source']={'assignment_method':'shared_nearest_assigned_shore'}
+                manifest['nearest_assignment_audit']={'shore_method':'spherical-grid-edge-v1'}
+                mp.write_text(json.dumps(manifest));layer['manifest_sha256']=digest(mp)
+                plan['research_shore_method']='wgs84-coastal-4neighbor-center-v2';pp.write_text(json.dumps(plan))
+                with self.assertRaisesRegex(ValueError,'explicit opt-in'):prefill.main()
+                with patch.object(sys,'argv',argv+['--allow-research-shore']):
+                    with self.assertRaisesRegex(ValueError,'does not bind'):prefill.main()
+                manifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+                mp.write_text(json.dumps(manifest));layer['manifest_sha256']=digest(mp);pp.write_text(json.dumps(plan))
+                with patch.object(sys,'argv',argv+['--allow-research-shore']):prefill.main()
+                self.assertTrue((out/'prefill-rows.u32le').exists())
+                import shutil
+                shutil.rmtree(out);plan.pop('research_shore_method');pp.write_text(json.dumps(plan))
+                with self.assertRaisesRegex(ValueError,'does not bind'):prefill.main()
+                manifest.pop('source');manifest.pop('nearest_assignment_audit');mp.write_text(json.dumps(manifest));layer['manifest_sha256']=digest(mp);pp.write_text(json.dumps(plan))
                 prefill.main()
                 self.assertEqual(np.fromfile(out / 'prefill-rows.u32le', dtype='<u4').tolist(), [0, 2, 3])
                 self.assertEqual(np.fromfile(out / 'prefill-runs.u32le', dtype='<u4').tolist(), [2, 2, 4, 0, 4, 18])
@@ -79,3 +101,4 @@ class PrefillTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
