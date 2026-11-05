@@ -18,3 +18,43 @@ class EvidenceTests(unittest.TestCase):
   self.s=orig;self.f.append({**self.f[0],'source_id':'extra'});self.assertRaises(ValueError,self.runv)
  def test_empty_links_allow_no_files(self):
   self.s['list1_entry_evidence_sources']=[];self.assertEqual(resolve(self.s,self.c,[],lambda:None),{'e':[]})
+
+class MirrorEvidenceTests(EvidenceTests):
+ def setUp(self):
+  super().setUp()
+  self.s['source_lineage_assets'][0]['provenance']={
+   'representation':'third_party_mirror_scan',
+   'scope':'Historical geographic context only',
+   'verification':'Mirror capture and private object readback match; original provider bytes are not authenticated.',
+   'limitations':['Not a surveyed coastline.','Redistribution terms are not established.']}
+  self.s['source_lineage_assets'][0].update(license_name='Unspecified',license_uri='https://example.org/archive')
+ def test_mirror_disclosed_and_not_a_selector(self):
+  x=self.runv()['e'][0]
+  self.assertEqual(x['source_representation'],'third_party_mirror_scan')
+  self.assertIn('does not establish',x['original_provider_bytes_limitation'])
+  self.assertEqual(x['source_provenance_limitations'],self.s['source_lineage_assets'][0]['provenance']['limitations'])
+  self.assertIn('not machine-verified',x['verification_limitation'])
+ def test_incomplete_or_unknown_mirror_provenance_fails(self):
+  orig=copy.deepcopy(self.s)
+  for field,value in [('scope',''),('verification',None),('limitations',[]),('limitations',[None]),('representation','third_party_mirror'),('representation',None)]:
+   self.s=copy.deepcopy(orig);self.s['source_lineage_assets'][0]['provenance'][field]=value
+   with self.subTest(field=field,value=value):self.assertRaises(ValueError,self.runv)
+ def test_mirror_bytes_and_role_still_pinned(self):
+  self.s['list1_entry_evidence_sources'][0]['role']='construction_source'
+  self.assertRaises(ValueError,self.runv)
+  self.s['list1_entry_evidence_sources'][0]['role']='geographic_membership_evidence'
+  self.s['source_lineage_assets'][0]['sha256']='a'*64
+  self.assertRaises(ValueError,self.runv)
+ def test_mirror_derived_dependencies_rejected(self):
+  self.s['source_lineage_dependencies']=[{'source_id':'article','version':'v1'}]
+  self.assertRaises(ValueError,self.runv)
+
+ def test_boolean_size_pin_rejected_for_asset_and_local(self):
+  self.p.write_bytes(b'x')
+  for k in ('sources','source_lineage_assets'):
+   self.s[k][0]['size_bytes']=1;self.s[k][0]['sha256']=hashlib.sha256(b'x').hexdigest()
+  self.f[0]['size_bytes']=1;self.f[0]['sha256']=hashlib.sha256(b'x').hexdigest()
+  for obj in (self.s['source_lineage_assets'][0],self.f[0]):
+   obj['size_bytes']=True
+   with self.subTest(pin=obj):self.assertRaises(ValueError,self.runv)
+   obj['size_bytes']=1

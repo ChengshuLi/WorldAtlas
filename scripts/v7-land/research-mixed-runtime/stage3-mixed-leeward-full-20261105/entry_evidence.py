@@ -25,10 +25,20 @@ def resolve(snapshot,compiled,files,guard):
   keys.add(uid);s=sources.get(k);a=assets.get(k);f=local.get(k)
   need(all(isinstance(x,dict) for x in (s,a,f)),'missing linked evidence source')
   need(set(f)=={'source_id','version','path','sha256','size_bytes','r2_bucket','r2_key'},'invalid evidence file pin')
+  need(all(type(x.get('size_bytes')) is int for x in (s,a,f)),'invalid evidence size pins')
   for field in ('sha256','size_bytes','r2_bucket','r2_key'):
    need(s.get(field)==a.get(field)==f.get(field),'evidence catalog pin mismatch')
-  need(a.get('kind')=='raw' and isinstance(a.get('provenance'),dict) and a['provenance'].get('representation')=='provider_original' and not any((d.get('source_id'),d.get('version'))==k for d in deps) and text(a.get('source_uri')) and text(a.get('provider')) and text(a.get('attribution')) and text(a.get('license_name')) and text(a.get('license_uri')) and isinstance(s['sha256'],str) and H.fullmatch(s['sha256']) and type(s['size_bytes']) is int and 0<s['size_bytes']<=64<<20 and text(s['r2_bucket']) and text(s['r2_key']),'invalid raw evidence metadata')
-  result[eid].append({'role':l['role'],'source_id':k[0],'source_version':k[1],'source_sha256':s['sha256'],'source_uri':a['source_uri'],'provider':a['provider'],'attribution':a['attribution'],'license_name':a['license_name'],'license_uri':a['license_uri'],'citation_section':l['citation_section'],'interpretation':l['interpretation'],'interpretation_status':'selected_interpretation','verification_limitation':'Source bytes are checked; cited section and interpretation are not machine-verified.','limitations':l['limitations']})
+  prov=a.get('provenance');need(isinstance(prov,dict),'invalid raw evidence metadata')
+  representation=prov.get('representation')
+  need(representation in ('provider_original','third_party_mirror_scan'),'invalid raw evidence metadata')
+  if representation=='third_party_mirror_scan':
+   limits=prov.get('limitations')
+   need(text(prov.get('scope')) and text(prov.get('verification')) and isinstance(limits,list) and 0<len(limits)<=100 and all(text(x) for x in limits),'invalid mirror provenance')
+  need(a.get('kind')=='raw' and not any((d.get('source_id'),d.get('version'))==k for d in deps) and text(a.get('source_uri')) and text(a.get('provider')) and text(a.get('attribution')) and text(a.get('license_name')) and text(a.get('license_uri')) and isinstance(s['sha256'],str) and H.fullmatch(s['sha256']) and type(s['size_bytes']) is int and 0<s['size_bytes']<=64<<20 and text(s['r2_bucket']) and text(s['r2_key']),'invalid raw evidence metadata')
+  item={'role':l['role'],'source_id':k[0],'source_version':k[1],'source_sha256':s['sha256'],'source_uri':a['source_uri'],'provider':a['provider'],'attribution':a['attribution'],'license_name':a['license_name'],'license_uri':a['license_uri'],'citation_section':l['citation_section'],'interpretation':l['interpretation'],'interpretation_status':'selected_interpretation','verification_limitation':'Source bytes are checked; cited section and interpretation are not machine-verified.','limitations':l['limitations']}
+  if representation=='third_party_mirror_scan':
+   item.update(source_representation=representation,source_provenance_scope=prov['scope'],source_provenance_verification_claim=prov['verification'],source_provenance_limitations=list(prov['limitations']),original_provider_bytes_limitation='The byte check does not establish that this third-party scan is identical to original-provider bytes.',license_limitation='The cataloged license URI does not itself establish redistribution rights.')
+  result[eid].append(item)
   used.add(k)
  need(set(local)==used,'unused or missing evidence file')
  for k in sorted(used):

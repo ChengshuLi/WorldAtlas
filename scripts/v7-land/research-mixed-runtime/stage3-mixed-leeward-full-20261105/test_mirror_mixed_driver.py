@@ -1,0 +1,9 @@
+import hashlib,json
+from pathlib import Path
+from test_mixed_driver import DriverTests, js
+
+class MirrorDriverTests(DriverTests):
+ def test_mirror_evidence_propagates_through_driver(self):
+  article=self.src/'article.xml';article.write_bytes(b'Raw scholarly article');sha=hashlib.sha256(article.read_bytes()).hexdigest();pin={'source_id':'article','version':'v1','sha256':sha,'size_bytes':article.stat().st_size,'r2_bucket':'bucket','r2_key':'article'}
+  reqpath=Path(self.cfg['point_request']['path']);req=json.loads(reqpath.read_text());sp=Path(req['snapshot']['path']);snap=json.loads(sp.read_text());snap['sources'].append(pin);snap['source_lineage_assets'].append({**pin,'kind':'raw','provenance':{'representation':'third_party_mirror_scan','scope':'Historical context','verification':'Readback verified; original bytes unknown','limitations':['Not a boundary source']},'source_uri':'https://example.org','provider':'Journal','attribution':'Author','license_name':'CC BY','license_uri':'https://example.org/license'});snap['list1_entry_evidence_sources']=[{'decision_revision':'r','entry_id':'ep','role':'geographic_membership_evidence','source_id':'article','source_version':'v1','citation_section':'Study area','interpretation':'Selected membership','limitations':['Human-reviewed, not proof']}];req['snapshot']=js(sp,snap);self.point['snapshot_sha256']=req['snapshot']['sha256'];self.cfg['point_request']=js(reqpath,req);self.cfg['evidence_source_files']=[{**pin,'path':str(article)}]
+  self.runv();r=json.loads((self.b/'out/report.json').read_text());e=r['policy']['entries']['ep']['geographic_membership_evidence'][0];self.assertEqual(e['interpretation_status'],'selected_interpretation');self.assertEqual(e['source_sha256'],sha);self.assertEqual(e['citation_section'],'Study area');self.assertEqual(e['source_representation'],'third_party_mirror_scan');self.assertIn('does not establish',e['original_provider_bytes_limitation'])
