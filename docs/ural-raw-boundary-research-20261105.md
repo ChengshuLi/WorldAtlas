@@ -121,7 +121,9 @@ same, with explicit captured dependency paths. This prevents inherited
 `PYTHONPATH`, `PYTHONHOME`, `.pth` processing and `sitecustomize` startup from
 modifying the replay. The gate requires its outer caller to run with isolated,
 no-site Python as well. The caller must independently authorize and pin its
-runtime and dependency tree digests. Python's standard library and operating
+runtime and dependency tree digests, and its launcher must sanitize native
+loader environment variables before the caller process starts; this gate cannot
+undo code already loaded into its own process. Python's standard library and operating
 system native libraries remain part of that trusted host runtime. It compares
 every resulting coordinate with the selected Ural line and returns
 the unchanged normalized boundaries and a verified trace, not a derived view.
