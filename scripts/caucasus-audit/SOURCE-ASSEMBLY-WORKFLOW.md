@@ -33,3 +33,10 @@ For the tested files, the result hash was `2f2f6c6777fe080fcbf13a526caad22b7b883
 ## Remaining integration
 
 The actual stage-2 pipeline currently consumes the saved line, not these source selectors. Complete an independently reviewed integration which consumes the decision recipe as structured input, verifies the raw R2 bytes and source catalog identities, retains selected geometry until validated, and runs the full native-grid compiler and V7-style map comparison. Reconcile the 128 submillimetre vertex deviations and obtain a real end-to-end grid result before selecting the reconstructed geometry. Only after the recipe becomes an actual pipeline input should it be persisted as structured Neon data under the project's data strategy; coordinate any snapshot and schema change with the pipeline owner. No alternate boundary or labels are selected here.
+
+
+## Feature output for the region builder
+
+Pass `--feature-id caucasus_blacksea_anapa_to_caspian` to emit a GeoJSON FeatureCollection instead of a bare LineString. The output has a single feature whose `cut_id` equals that value and is compatible in shape with the `feature` selector in `../v2-baseline/build_regions.py`: pin the generated file bytes, set `id_property` to `cut_id`, set `id_value` to the feature ID, and set the appropriate direction. Region construction still requires the other segments, a valid closure, a pinned physical grid where applicable, and witness checks. The local run produced feature-file SHA-256 `a022157d877d8ace9916aed63eda0b1014520e965fd1db54a3ef61ffaf090b2b`, with the same line geometry digest and guard comparison described above. The feature wrapper was checked, but the full region builder and land compiler were not run in this environment; do not call this a completed pipeline integration.
+
+The current project objective is a reproducible current pipeline, not recovering or matching the historical V7 implementation or its cells. Comparison with the saved selected line above is a guard for preserving the existing geography during this transition, not a requirement that the final geography match old V7.
