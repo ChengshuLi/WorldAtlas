@@ -40,3 +40,27 @@ without overwriting its tests, and assemble the seven Caucasus modules in the
 sibling `caucasus-audit/` directory. Some historical-handoff tests also require
 their existing local qualified fixtures. These instructions do not enable the
 review gates or establish a complete reproducible production environment.
+
+This later local snapshot additionally rejects altered or omitted Caucasus
+outer/core bindings and compiles verified Caucasus source bytes directly, rather
+than accepting shadow modules or cached bytecode. These changes have bounded
+unit tests; the real full outer and post-return source replay remain untested.
+
+This local successor additionally includes dependency preflight and the atomic
+no-replace portability change. Linux uses renameat2(RENAME_NOREPLACE); macOS
+uses renamex_np(RENAME_EXCL), with no unsafe fallback. Twenty-three bounded
+Linux/core tests and an independent review passed. A separate Darwin arm64
+syscall test verified success, EEXIST and ENOENT, but did not test this complete
+patch. The combined patch was reapplied to its listed baseline and all 30 file
+hashes matched. It remains local, unreviewed as a whole and unpublished; the
+separately denied invocation-helper review has not been admitted. The Ural
+source-gate candidate and newer Ural freeze updates are not included.
+The separate Caucasus gate code is not included in the patch. The local runtime
+now stages the PR4 d186571 isolation changes; the 158-test bounded suite passed
+against them. Actual-source replay under those exact pins is still needed.
+
+This later local snapshot includes the independently reviewed Ural core source
+crosswalk. It requires all seven construction roles exactly once; synthetic
+manifest tests and the combined 168-test bounded suite passed. It does not
+include the Ural replay gate or producer integration, which remain separate.
+This is not an end-to-end validation or a selected global revision.
