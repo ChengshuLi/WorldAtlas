@@ -17,3 +17,5 @@ limits; the separate direct-run refactor must remove them. This change adds no
 supervisor or memory limit and does not launch a map.
 
 The direct gate now requires `worldatlas-stage2-seed-direct-request-v2` with exactly the positive integer `strip_rows` control and calls `run(request, work, output)`. The currently frozen outer orchestrator still produces the older request; it must be adapted to the independently reviewed v2 producer and closure contract before this optional path can run. The candidate producer and checker allowlists have not been promoted, and a real-GDAL closure test remains outstanding.
+
+`test_caucasus_panama_v2_compatibility.py` exercises the hash-pinned Panama v2 source binder together with a synthetic Caucasus effective snapshot. It confirms that the original snapshot is unchanged, the Panama geometry retains its selected hash, and a changed Panama hash is rejected. Set `PANAMA_DIRECT_DIR` to the pinned `scripts/v7-land/mainland-seed-l2` directory. This test uses synthetic source data and does not run GDAL, seed rasterization, or a closure checker.
