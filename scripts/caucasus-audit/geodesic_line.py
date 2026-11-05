@@ -32,30 +32,34 @@ class GeodesicLine:
                 start=GEOD.fwd(a[0],a[1],azi,length*i/n)[:2] if i else tuple(a)
                 end=GEOD.fwd(a[0],a[1],azi,length*(i+1)/n)[:2] if i+1<n else tuple(b)
                 segazi,_,seglen=GEOD.inv(*start,*end)
-                self.segments.append((start,segazi,seglen,station))
+                midpoint=GEOD.fwd(*start,segazi,seglen/2)[:2]
+                self.segments.append((start,segazi,seglen,station,midpoint))
                 station+=seglen
         if not self.segments:raise ValueError('zero-length line')
         self.length=station
 
     def point(self,station):
         station=max(0,min(self.length,station))
-        for a,azi,length,base in self.segments:
+        for a,azi,length,base,midpoint in self.segments:
             if station<=base+length:
                 return GEOD.fwd(*a,azi,max(0,station-base))[:2]
-        a,azi,length,base=self.segments[-1]
+        a,azi,length,base,midpoint=self.segments[-1]
         return GEOD.fwd(*a,azi,length)[:2]
 
     def closest(self,point):
-        best=None
-        for a,azi,length,base in self.segments:
+        best=None;candidates=[]
+        ranked=sorted((max(0,distance(midpoint,point)-length/2),base,(a,azi,length)) for a,azi,length,base,midpoint in self.segments)
+        for lower,base,(a,azi,length) in ranked:
+            if best is not None and lower>best[0]+SEARCH_TOLERANCE_M:break
             def evaluate(offset):
                 q=GEOD.fwd(*a,azi,offset)[:2]
                 return distance(q,point)
             opt=minimize_scalar(evaluate,bounds=(0,length),method='bounded',options={'xatol':0.002})
             for offset,d in ((0,evaluate(0)),(length,evaluate(length)),(float(opt.x),float(opt.fun))):
-                candidate=(d,base+offset)
+                candidate=(d,base+offset);candidates.append(candidate)
                 if best is None or candidate<best:best=candidate
-        return {'distance_m':best[0],'station_m':best[1],'point':self.point(best[1])}
+        ambiguous=any(d<=best[0]+SEARCH_TOLERANCE_M and abs(s-best[1])>1 for d,s in candidates)
+        return {'distance_m':best[0],'station_m':best[1],'point':self.point(best[1]),'ambiguous':ambiguous}
 
     def side(self,point,station,radius=5):
         if radius<=0:raise ValueError('positive tangent radius required')
