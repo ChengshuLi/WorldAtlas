@@ -32,7 +32,7 @@ For the tested files, the result hash was `2f2f6c6777fe080fcbf13a526caad22b7b883
 
 ## Remaining integration
 
-The actual stage-2 pipeline currently consumes the saved line, not these source selectors. Complete an independently reviewed integration which consumes the decision recipe as structured input, verifies the raw R2 bytes and source catalog identities, retains selected geometry until validated, and runs the full native-grid compiler and V7-style map comparison. Reconcile the 128 submillimetre vertex deviations and obtain a real end-to-end grid result before selecting the reconstructed geometry. Only after the recipe becomes an actual pipeline input should it be persisted as structured Neon data under the project's data strategy; coordinate any snapshot and schema change with the pipeline owner. No alternate boundary or labels are selected here.
+The experimental stage-2 orchestrator now has an optional source-derived path, but the selected snapshot has no recipe and the path has not run through the real seed pipeline. The default continues to consume the stored line. Independently review and test the integration and its real closure before using the path. Coordinate a selected recipe and source references with the pipeline owner only when they are used. No alternate boundary or labels are selected here.
 
 
 ## Feature output for the region builder
@@ -48,20 +48,20 @@ The seed wrapper supplies the reconstructed source-derived line directly to the 
 
 The wrapper verifies the pinned selected Neon snapshot and raw-source catalog references, checks that the selected record contains the same compact recipe as the separately pinned input, reconstructs the line, and then injects it into the research seed producer in memory. Before replacing any region digest, it reconstructs the original ordered ring and verifies its selected hash. It then computes the hash for the same exact-join ring using the source-derived line. Existing region validation, closure checks, witnesses and raster checks must still run. The derived line has digest `2f2f6c6777fe080fcbf13a526caad22b7b883fc982d3ff0492b91e082d6f06b6`; the chosen endpoints are unchanged, while 128 positions differ from the selected guide by at most 0.155 mm.
 
-This is an in-memory runtime wrapper around frozen producer code: the producer's own digest and certificate do not attest the wrapper, recipe or raw source inputs. Its gate report, derived-region digests, wrapper and dependency pins must be incorporated into the trusted orchestrator contract and independently reviewed before any production use. The wrapper is not yet selected in the actual orchestrator.
+This is an in-memory runtime wrapper around frozen producer code: the producer's own digest and certificate do not attest the wrapper, recipe or raw source inputs. Its gate report, derived-region digests, wrapper and dependency pins must be incorporated into the trusted orchestrator contract and independently reviewed before any production use. The experimental orchestrator can invoke the wrapper when explicitly configured; this is not yet a selected or real-seed-tested workflow.
 
 The proposed selected structured input is `atlas.decision_mainland_boundaries.provenance.source_assembly_v1` on revision `v2-land-mainland-boundary-draft-1`, boundary `caucasus_blacksea_anapa_to_caspian`: schema `caucasus-source-assembly-v1`, compact recipe object and its canonical SHA-256, and source IDs and versions. The current Neon export includes boundary provenance. A later write must verify the selected geometry and catalog pins, preserve unrelated provenance and be coordinated with the actual integrated snapshot and reviewed code. **No recipe write has been made**, and this proposal does not authorize bypassing the earlier review denial.
 
 Four local unit tests pass, covering altered snapshots, missing source links, missing selected recipes and exact region joins/hash changes. A synthetic snapshot and a stub producer exercised the derived-line callback and a changed region digest. Neither is a test of the real Linux/GDAL region or seed builders. This Mac execution environment has no Linux/GDAL runtime; coordinate a bounded real-builder test with the existing cloud builder. No map rebuild has been initiated, per the user's instruction.
 
 
-## Shared effective snapshot and orchestrator gap
+## Shared effective snapshot and stage-2 integration
 
 The current prototype's `caucasus_effective_snapshot.derive` validates the selected line and the old region hashes, checks the unchanged closure endpoints, and returns a separate in-memory snapshot containing the source-derived line and recomputed affected region hashes. The seed wrapper uses this same function when loading the pinned original. The original snapshot and its digest are not rewritten. The helper alone does not authenticate the gate report or raw files; its caller must pin and independently verify the selected recipe, both raw R2 assets, assembly code, the gate result and the original snapshot.
 
 Seven local tests pass. A synthetic snapshot, actual pinned R2 readback files, and a stub seed producer exercised the shared effective snapshot; the stub observed the source-derived boundary and recomputed region digest. The gate report explicitly distinguishes the original snapshot hash from the derived boundary and region hashes.
 
-**Not integrated into the actual stage-2 orchestrator:** `orchestrate_stage2.py` freezes and attests its seed worker and producer; `contracts.validate_selected_seed_decisions` independently compares every seed trace and region hash with the original snapshot. Thus a seed containing the derived line must not be accepted by that validator as if it were the original stored geometry. The actual integration must add a reviewed and versioned source-derivation contract, pin raw inputs and all assembler/gate/helper code, recompute and validate the effective view independently for both seed production and seed-trace validation, and bind its report into the seed and final orchestrator provenance. It must preserve the original snapshot pin and fail closed on stale decisions or joins. It also needs selected recipe data in Neon only when this path is actually used.
+**Experimental integration:** the optional source configuration pins the raw inputs and assembler/gate/helper code, binds the request and gate report into the derived manifest and resume checks, and independently replays the derived view for the core strict validator. The original snapshot pin remains unchanged. The optional path rejects monitored seed handoffs and needs a selected recipe in Neon when actually used. It still needs independent review, a real Linux seed/closure test, and coordination with the direct-run refactor.
 
 A bounded run against the real Linux/GDAL region and seed builders and independent code review remain necessary. This Mac environment cannot perform that run and no real builder inputs were handed off here. No map rebuild was run.
 
@@ -70,7 +70,7 @@ A bounded run against the real Linux/GDAL region and seed builders and independe
 
 `caucasus_stage2_validation.validate` is a prototype integration point for the frozen stage-2 validator. It independently reruns the raw-source reconstruction and effective-snapshot derivation, requires the seed report to reference the original pinned snapshot, and then calls the existing selected-seed validator with the effective view. It verifies its six source-derivation code files and raw/source inputs both before and after validation and returns a separate source-validation trace. The orchestrator must authenticate the request and independently trusted code pins, pin compatible runtime/library versions, and bind that trace to its final provenance; this adapter does not do those tasks by itself.
 
-The production orchestrator does not currently call this adapter. Tests use mocks to check that a stale snapshot is rejected before validation, the independent validator receives the derived view, and incomplete code pins fail; they do not establish full real-seed integration. Ten local focused tests pass. No actual map or seed build was initiated.
+The experimental source-configured orchestrator now calls this adapter through `caucasus_stage2_binding.py`. Bounded tests include a pinned raw-source replay and synthetic closure, stale-trace rejection and call-site checks; they do not establish real-seed integration. No actual map or seed build was initiated.
 
 
 ## Bounded strict-validator result
@@ -88,7 +88,7 @@ PYTHONPATH=".:../v7-land/research-mixed-runtime/stage2-geodesic-20261104" \
 python -m unittest -v test_caucasus_real_contract_adapter
 ```
 
-Separately, the Linux builder's real GDAL region-builder fixture passed as recorded in [BOUNDED-GDAL-HANDOFF.md](BOUNDED-GDAL-HANDOFF.md). Neither bounded result integrates the wrapper and report into the frozen orchestrator or proves real land-cell output. The real builder must reproduce source-to-line independently in its environment, review the integration and pin code and runtime before the selected workflow is used. No recipe was written to Neon.
+Separately, the Linux builder's real GDAL region-builder fixture passed as recorded in [BOUNDED-GDAL-HANDOFF.md](BOUNDED-GDAL-HANDOFF.md). Neither bounded result exercises the newly wired orchestrator or proves real land-cell output. The real builder must reproduce source-to-line independently in its environment, review the integration and pin code and runtime before the selected workflow is used. No recipe was written to Neon.
 
 
 The source-and-validator fixture also confirms that the current strict validator rejects the derived seed trace when presented with the unchanged selected view; it accepts that trace only against the independently reconstructed effective view. The latest local focused run passed 35 tests. These are still bounded, synthetic-closure tests. In accordance with the user's instruction, do not install or use the separate dependency handoff and do not describe the Mac replay and Linux GDAL fixture as a single-environment run.
@@ -96,4 +96,4 @@ The source-and-validator fixture also confirms that the current strict validator
 
 ## Worker resource guard
 
-The source gate supports direct invocation of a pinned seed producer without adding a resource guard. An optional `--worker-sha256` invokes the pinned legacy worker and its resource checks instead. The producer itself may enforce resource limits: the currently frozen producer and orchestrator do, so they need an independently reviewed revision before a no-limit run. The caller must bind trusted code/input pins and the gate report into orchestrator provenance and resume checks. This remains a tested prototype seam, not an integrated real seed pipeline.
+The source gate supports direct invocation of a pinned seed producer without adding a resource guard. An optional `--worker-sha256` invokes the pinned legacy worker and its resource checks instead. The producer itself may enforce resource limits: the currently frozen producer and orchestrator do, so they need an independently reviewed revision before a no-limit run. The experimental orchestrator binds trusted code/input pins and the gate report into its provenance and resume checks. It remains untested with the real seed pipeline.
