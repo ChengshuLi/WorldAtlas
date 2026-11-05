@@ -4,7 +4,7 @@
 terrain analysis. `priority_flood(elevation, valid)` fills closed depressions
 from the edge of a supplied raster window and returns a filled surface and
 parent indices. The eight-neighbor `trace(...)` follows the steepest descent
-using user-supplied pixel distances and uses flood parents to route equal-height
+using WGS84 geodesic distances between raster-cell centers and uses flood parents to route equal-height
 flats. Arrays outside the mask must never be treated as terrain.
 
 Every valid window-edge pixel and every valid pixel neighboring invalid data is
@@ -17,5 +17,7 @@ grid spacing, conditioning and flat routing, and compared with independent
 drainage evidence. Source inputs, coordinates and results belong in the
 project's data stores, not this source directory.
 
-Requires NumPy and SciPy. Run the synthetic pit, invalid-neighbor and validation
+Pass the WGS84 unrotated raster affine transform as the final trace argument; the former fixed-distance interface is no longer supported. Ties follow iteration order.
+
+Requires NumPy, SciPy and pyproj. Run the synthetic pit, invalid-neighbor and validation
 tests with `python -m unittest discover -s scripts/caucasus-audit -p 'test_priority_flood.py'`.
