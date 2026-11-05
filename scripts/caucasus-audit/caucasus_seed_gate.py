@@ -164,6 +164,43 @@ def run_guarded_worker(producer_dir, producer_sha256, worker_sha256, request, wo
         sys.path[:], sys.argv[:] = old_path, old_argv
 
 
+def run_producer(producer_dir, producer_sha256, request, work, output, derived, report):
+    """Run a pinned producer with the derived view and no extra resource guard.
+
+    This does not change controls implemented by the producer itself. A caller
+    choosing a no-limit execution must also use a producer implementing that
+    policy and bind its code and this gate into the execution provenance.
+    """
+    producer_dir = Path(producer_dir).resolve(strict=True)
+    producer_path = (producer_dir / 'seed_producer.py').resolve(strict=True)
+    if digest(producer_path) != producer_sha256:
+        raise ValueError('seed producer digest mismatch')
+    if 'seed_producer' in sys.modules:
+        raise ValueError('seed producer already imported')
+    old_path = list(sys.path)
+    producer = None
+    try:
+        sys.path.insert(0, str(producer_dir))
+        spec = importlib.util.spec_from_file_location('caucasus_gated_seed_producer', producer_path)
+        producer = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(producer)
+        from caucasus_effective_snapshot import derive
+        original_load = producer.load_pinned_snapshot
+        def load_effective_snapshot(path, expected_sha256, guard):
+            original = original_load(path, expected_sha256, guard)
+            effective, trace = derive(original, derived, report, expected_sha256)
+            report['effective_snapshot'] = trace
+            return effective
+        producer.load_pinned_snapshot = load_effective_snapshot
+        producer.run(request, work, output, lambda: None)
+        if digest(producer_path) != producer_sha256:
+            raise ValueError('seed producer changed during execution')
+    finally:
+        if producer is not None and 'original_load' in locals():
+            producer.load_pinned_snapshot = original_load
+        sys.path[:] = old_path
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('request', 'request-sha256', 'recipe', 'recipe-sha256', 'hydro', 'author', 'report'):
@@ -175,15 +212,21 @@ def main():
         raise FileExistsError(args.report)
     if digest(args.request) != args.request_sha256:
         raise ValueError('request digest mismatch')
-    run_args = (args.producer_dir, args.producer_sha256, args.worker_sha256, args.work, args.output)
+    run_args = (args.producer_dir, args.producer_sha256, args.work, args.output)
     if any(run_args) and not all(run_args):
         raise ValueError('seed producer requires directory, digest, work and output')
+    if args.worker_sha256 and not all(run_args):
+        raise ValueError('worker digest requires seed execution arguments')
     report, derived = check(args.request, args.recipe, args.recipe_sha256, args.hydro, args.author)
     report['request_sha256'] = args.request_sha256
     report['seed_producer_executed'] = False
     if all(run_args):
-        run_guarded_worker(args.producer_dir, args.producer_sha256, args.worker_sha256,
-                           args.request, args.work, args.output, derived, report)
+        if args.worker_sha256:
+            run_guarded_worker(args.producer_dir, args.producer_sha256, args.worker_sha256,
+                               args.request, args.work, args.output, derived, report)
+        else:
+            run_producer(args.producer_dir, args.producer_sha256,
+                         args.request, args.work, args.output, derived, report)
         if digest(args.request) != args.request_sha256:
             raise ValueError('producer or request changed during execution')
         if digest(args.recipe) != args.recipe_sha256 or (digest(args.hydro), digest(args.author)) != tuple(SOURCE_PINS.values()):

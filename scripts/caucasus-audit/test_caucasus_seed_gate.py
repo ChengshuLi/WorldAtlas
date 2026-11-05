@@ -108,6 +108,17 @@ class SourceGateTest(unittest.TestCase):
         self.assertFalse((self.root / 'out').exists())
         self.assertNotIn('seed_producer', sys.modules)
 
+    def test_direct_producer_uses_effective_view_without_worker(self):
+        producer = self.root / 'seed_producer.py'
+        producer.write_text("from pathlib import Path\ndef load_pinned_snapshot(path, digest, guard):\n    return {'original': True}\n"
+                            "def run(request, work, output, guard):\n    guard()\n    value = load_pinned_snapshot('x', 'pin', guard)\n    Path(output).write_text(value['view'])\n")
+        report = {}
+        with patch('caucasus_effective_snapshot.derive', return_value=({'view': 'effective'}, {'derived': True})):
+            gate.run_producer(self.root, gate.digest(producer), self.request,
+                              self.root / 'work', self.root / 'out', {}, report)
+        self.assertEqual((self.root / 'out').read_text(), 'effective')
+        self.assertEqual(report['effective_snapshot'], {'derived': True})
+
 
 if __name__ == '__main__':
     unittest.main()

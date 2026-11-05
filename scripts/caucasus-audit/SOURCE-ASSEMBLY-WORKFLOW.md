@@ -96,4 +96,4 @@ The source-and-validator fixture also confirms that the current strict validator
 
 ## Worker resource guard
 
-The source gate's optional seed execution now invokes the pinned seed worker, which supplies its normal memory and disk guard to the producer. Pass `--worker-sha256` together with the producer pin and other worker arguments. The caller remains responsible for the process-group guardian, trusted code/input pins and binding the gate report to orchestrator provenance and resume checks. This is a tested prototype seam; it is not connected to the stage-2 orchestrator and has not run the real seed pipeline.
+The source gate supports direct invocation of a pinned seed producer without adding a resource guard. An optional `--worker-sha256` invokes the pinned legacy worker and its resource checks instead. The producer itself may enforce resource limits: the currently frozen producer and orchestrator do, so they need an independently reviewed revision before a no-limit run. The caller must bind trusted code/input pins and the gate report into orchestrator provenance and resume checks. This remains a tested prototype seam, not an integrated real seed pipeline.
