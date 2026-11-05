@@ -51,3 +51,26 @@ SciPy 1.17.1. Synthetic rows and runs SHA-256 were respectively
 `fa311f33642523204236c02d8f7d23309174347304e8412d76e126643480c9dc`
 and `e068228e97fa80bde0f7d937dc62e26c7ae36330604369c22459f1fea5079091`.
 No production data, selected Neon data or map was changed.
+
+## Isolated WIP direct invoker with both sources
+
+`test_combined_wip_direct_gate.py` uses the same bounded inputs and WIP core
+checks, but replaces the direct call to the Caucasus binding with the actual
+WIP `direct_seed.invoke(..., caucasus=...)`. That invoker captures and verifies
+its pinned seed and gate code, starts the real gate and frozen producer in its
+isolated Python subprocess, and returns the seed report. The WIP core direct
+binding, Panama source replay and strict fresh-proof callback then validate the
+result. The test confirms an ambient `PYTHONPATH` startup hook did not run and
+that a forged gate-code pin is rejected before work or output creation.
+
+Using the same scratch runtime and source environment described above, run:
+
+```sh
+python3 -m unittest -v test_combined_wip_direct_gate
+```
+
+The test passed 1/1 on macOS arm64, Python 3.11.18 and GDAL 3.10.3. Its
+synthetic rows and runs hashes match those above. The full outer orchestrator
+and its resume path were **not** invoked, the execution gates remain disabled,
+and the selected Neon data and production closure were not tested by this
+fixture. No map rebuild or Neon write occurred.
