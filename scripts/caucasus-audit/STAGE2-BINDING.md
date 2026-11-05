@@ -7,9 +7,11 @@ validation path passes the independently derived effective snapshot to the
 existing strict validator and requires the seed gate's report to match that
 derivation and the producer pin exactly.
 
-This helper does not launch a map, select a recipe in Neon, or implement the
-stage-2 orchestrator and resume contract. The orchestrator must bind its config,
-seed request, gate report and code pins into its identity and invoke the same
-independent validation in the core. A bounded Linux test with the real seed and
-region pipeline is still required. The existing frozen producer has resource
-limits; this helper adds no separate supervisor or memory limit.
+The stage-2 orchestrator optionally invokes this helper when configured with the
+source pins, and binds its config, seed request and gate report into the derived
+manifest and resume identity. The core independently replays and validates the
+same derivation. The option rejects pre-existing seed handoffs. A bounded Linux
+test with the real seed and region pipeline is still required, and the selected
+Neon recipe is not yet present. The existing frozen runtime still has resource
+limits; the separate direct-run refactor must remove them. This change adds no
+supervisor or memory limit and does not launch a map.

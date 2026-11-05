@@ -48,7 +48,8 @@ def code_hashes(guard):
 def load_config(path):
  raw=verify_inputs.bounded_bytes(path,1<<20);obj=json.loads(raw)
  keys={'schema','grid','inputs','policy_id','policy_version','controls','seed_controls','hint_max_rss_kib'}
- need(isinstance(obj,dict) and set(obj) in (keys,keys|{'seed_handoff'}) and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs'])==BASE_INPUTS,'invalid fresh orchestration config or historical input')
+ need(isinstance(obj,dict) and set(obj) in (keys,keys|{'seed_handoff'},keys|{'caucasus_source'}) and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs'])==BASE_INPUTS,'invalid fresh orchestration config or historical input')
+ if 'caucasus_source' in obj:need(isinstance(obj['caucasus_source'],dict) and set(obj['caucasus_source'])=={'recipe','hydro','author','code_sha256'},'invalid Caucasus source configuration')
  if 'seed_handoff' in obj:need(isinstance(obj['seed_handoff'],dict) and set(obj['seed_handoff'])=={'attestation','seed_watchdog_code','seed_guardian_code','witness_report','witness_monitor','witness_watchdog_code','witness_guardian_code','component_report','component_monitor','component_watchdog_code','component_guardian_code','component_config','component_driver_code','witness_config','witness_driver_code'},'invalid monitored seed handoff')
  build_stage2.validate_controls(obj['controls'])
  s=obj['seed_controls'];need(isinstance(s,dict) and set(s)=={'timeout_seconds','strip_rows','max_group_rss_kib'} and type(s['timeout_seconds']) in (int,float) and 0<s['timeout_seconds']<=1800 and type(s['strip_rows']) is int and 1<=s['strip_rows']<=64 and type(s['max_group_rss_kib']) is int and 262144<=s['max_group_rss_kib']<=786432,'invalid seed controls')
@@ -98,9 +99,13 @@ def run(config_path,work_dir,output_dir,resume=False):
  need(work.parent.is_dir() and out.parent.is_dir() and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'invalid work/output')
  guard=lambda:checkpoints.guard(work.parent,c['minimum_memory_kib'],c['minimum_free_bytes']);guard()
  paths={k:build_stage2.pin(v,guard) for k,v in cfg['inputs'].items()};handoff_paths={k:build_stage2.pin(v,guard) for k,v in cfg.get('seed_handoff',{}).items()}
- for p in [cp,HERE,*paths.values(),*handoff_paths.values()]:
+ ccfg=cfg.get('caucasus_source');binding=build_stage2.caucasus_binding(ccfg,guard) if ccfg else None
+ caucasus_paths=[build_stage2.pin(ccfg[k],guard) for k in ('recipe','hydro','author')] if ccfg else []
+ for p in [cp,HERE,*paths.values(),*handoff_paths.values(),*caucasus_paths]:
   d=p if p==HERE else p.parent
   need(all(not t.is_relative_to(d) and not d.is_relative_to(t) for t in (work,out)),'work/output overlaps code or input')
+ if binding:
+  d=build_stage2.CAUCASUS_DIR.resolve();need(all(not t.is_relative_to(d) and not d.is_relative_to(t) for t in (work,out)),'work/output overlaps Caucasus code')
  code=code_hashes(guard);require_reviewed_seed(code)
  need(SELECTED_POLICY_CROSSWALK_READY,'selected land-policy crosswalk not yet implemented')
  grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int and 1<grid['width']<=1000000 and 0<grid['height']<=1000000 and grid['west']==-180 and grid['north']==90 and grid['step']==360/grid['width'] and 90-grid['height']*grid['step']>=-90-1e-8,'invalid global grid')
@@ -149,11 +154,17 @@ def run(config_path,work_dir,output_dir,resume=False):
    fd=os.open(d,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  else:
   si['resolution']=rp;sr={'schema':'worldatlas-stage2-seed-request-v1','grid':cfg['grid'],'inputs':si,'controls':{'memory_floor_kib':c['minimum_memory_kib'],'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}};write_json(seedrequest,sr)
-  subprocess.run([sys.executable,str(HERE/'seed-producer'/'seed_worker.py'),str(seedrequest),str(seedwork),str(seedout)],check=True);seed=json.loads(verify_inputs.bounded_bytes(seedout/'report.json',16<<20,guard))
+  if binding:
+   binding.run_seed(ccfg,seedrequest,verify_inputs.sha_file(seedrequest,guard),HERE/'seed-producer',code['seed-producer/seed_producer.py'],seedwork,seedout,work/'derived'/'caucasus-gate.json',guard=guard)
+  else:subprocess.run([sys.executable,str(HERE/'seed-producer'/'seed_worker.py'),str(seedrequest),str(seedwork),str(seedout)],check=True)
+  seed=json.loads(verify_inputs.bounded_bytes(seedout/'report.json',16<<20,guard))
  srows=pin(seedout/'rows.u32le',guard);sruns=pin(seedout/'runs.u32le',guard)
  # Verify selected rules, source/region traces and tie policy before using seed.
  groups={g['group_id']:g for g in resolution['groups']};entity_codes={b['entity_id']:b['code'] for b in snapshot['category_bindings'] if b['physical_class']=='land'}
- contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=guard)
+ if binding:
+  gate=json.loads(verify_inputs.bounded_bytes(work/'derived'/'caucasus-gate.json',16<<20,guard))
+  binding.validate_seed(ccfg,seedrequest,verify_inputs.sha_file(seedrequest,guard),gate,code['seed-producer/seed_producer.py'],contracts.validate_selected_seed_decisions,seed,groups,entity_codes,metric,guard=guard)
+ else:contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=guard)
  tileout=work/'tiles-parent'/'tiles';g=cfg['grid'];tile=build_seed_tiles.build(srows['path'],sruns['path'],srows['sha256'],sruns['sha256'],g['width'],g['height'],tileout,memory_floor_kib=c['minimum_memory_kib'],disk_floor_bytes=c['minimum_free_bytes'])
  reps=work/'reps'/'representatives.u32le';representatives.build(tileout,tileout/'manifest.txt',tile['manifest_sha256'],reps,work/'reps'/'report.json',width=g['width'],height=g['height'],memory_floor_kib=c['minimum_memory_kib'],disk_floor_bytes=c['minimum_free_bytes'])
  # A separately compiled complete seed/tile verifier must precede hints. The
@@ -174,8 +185,10 @@ def run(config_path,work_dir,output_dir,resume=False):
  subprocess.run([sys.executable,str(HERE/'hint-producer'/'watch_diagnostic.py'),str(hreq),str(hout),str(cfg['hint_max_rss_kib'])],check=True)
  artifacts={'resolution_report':rp,'seed_rows':srows,'seed_runs':sruns,'seed_report':pin(seedout/'report.json',guard),'tile_manifest':pin(tileout/'manifest.txt',guard),'representatives':pin(reps,guard),'hint_roots':pin(hout/'roots.u32le',guard),'hint_codes':pin(hout/'hints.u8',guard),'hint_report':pin(hout/'report.json',guard),'hint_monitor':pin(hout/'monitor.json',guard)}
  for spec in cfg['inputs'].values():build_stage2.pin(spec,guard)
+ if binding:binding.verify_config(ccfg,guard)
  need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
  marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'artifacts':artifacts,'seed_request_sha256':verify_inputs.sha_file(seedrequest,guard),'hint_request_sha256':verify_inputs.sha_file(hreq,guard),'seed_tile_verification':json.loads(check.stdout),'physical_lineage_report':pin(work/'lineage'/'report.json',guard),'seed_handoff_attestation':cfg['seed_handoff']['attestation'] if handoff else None,'witness_recheck':recheck,'tile_directory':str(tileout),'code_sha256':code}
+ if binding:marker['caucasus_binding']={'config':ccfg,'request':pin(seedrequest,guard),'report':pin(work/'derived'/'caucasus-gate.json',guard)}
  write_json(work/'derived'/'manifest.json',marker)
  return finish_from_marker(cfg,raw,work,out,code,guard,False)
 
@@ -185,6 +198,11 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume):
  snapshot=json.loads(verify_inputs.bounded_bytes(cfg['inputs']['decision_snapshot']['path'],16<<20,guard));lineage=verify_physical_lineage.validate_combined(snapshot,cfg['inputs']['decision_snapshot']['sha256'],cfg['inputs']['physical_lineage_request']['path'],cfg['inputs']['physical_report']['sha256'],cfg['inputs']['physical_rows']['sha256'],cfg['inputs']['physical_runs']['sha256'],cfg['grid'],guard);lineage_pin=marker.get('physical_lineage_report');need(isinstance(lineage_pin,dict) and Path(lineage_pin.get('path','')).resolve()==work/'lineage'/'report.json' and json.loads(verify_inputs.bounded_bytes(build_stage2.pin(lineage_pin,guard),16<<20,guard))==lineage,'physical lineage resume mismatch')
  handoff=validate_seed_handoff(cfg,code,guard) if 'seed_handoff' in cfg else None
  need(marker.get('seed_handoff_attestation')==(cfg['seed_handoff']['attestation'] if handoff else None),'seed handoff marker mismatch')
+ cb=marker.get('caucasus_binding');ccfg=cfg.get('caucasus_source')
+ if ccfg:
+  need(isinstance(cb,dict) and set(cb)=={'config','request','report'} and cb['config']==ccfg and Path(cb['request'].get('path','')).resolve()==work/'requests'/'seed.json' and Path(cb['report'].get('path','')).resolve()==work/'derived'/'caucasus-gate.json','Caucasus resume binding mismatch')
+  build_stage2.caucasus_binding(ccfg,guard);build_stage2.pin(cb['request'],guard);build_stage2.pin(cb['report'],guard)
+ else:need(cb is None,'unexpected Caucasus resume binding')
  artifacts=marker.get('artifacts');names={'resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','hint_monitor','tile_manifest','representatives'}
  need(isinstance(artifacts,dict) and set(artifacts)==names,'incomplete derived artifacts')
  expected={'resolution_report':work/'resolution'/'report.json','seed_rows':work/'seed-work-parent'/'output'/'rows.u32le','seed_runs':work/'seed-work-parent'/'output'/'runs.u32le','seed_report':work/'seed-work-parent'/'output'/'report.json','hint_roots':work/'hints-parent'/'hints'/'roots.u32le','hint_codes':work/'hints-parent'/'hints'/'hints.u8','hint_report':work/'hints-parent'/'hints'/'report.json','hint_monitor':work/'hints-parent'/'hints'/'monitor.json','tile_manifest':work/'tiles-parent'/'tiles'/'manifest.txt','representatives':work/'reps'/'representatives.u32le'}
@@ -212,6 +230,7 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume):
  seed_files={n:pin(HERE/'seed-producer'/n,guard) for n in SEED_NAMES};seed_files.update({'rasterizer':cfg['inputs']['seed_builder'],'rasterizer_kernel':cfg['inputs']['seed_kernel']})
  resolver_files={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py','identity_watch':'v7-land/named-identity-prototype/identity_watch.py'}
  core={'schema':'stage2-source-geodesic-v1','grid':cfg['grid'],'inputs':inputs,'seed_code_files':seed_files,'resolution_code_files':{k:pin(HERE/v,guard) for k,v in resolver_files.items()},'hint_code_files':{n:pin(HERE/'hint-producer'/n,guard) for n in ('hints.py','run_diagnostic.py')},'hint_watchdog_code':pin(HERE/'hint-producer'/'watch_diagnostic.py',guard),'tile_directory':str(tiles),'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'controls':cfg['controls'],'orchestration':{'outer_config_sha256':outer,'orchestrator_sha256':code['orchestrate_stage2.py'],'derived_manifest':marker_pin,'physical_lineage_report':lineage_pin,'seed_handoff_attestation':cfg['seed_handoff']['attestation'] if handoff else None,'seed_handoff_context':cfg.get('seed_handoff')}}
+ if cb:core['caucasus_binding']=cb
  cp=work/'core-requests'/'config.json'
  core_work=work/'core'
  if cp.exists():need(resume and json.loads(verify_inputs.bounded_bytes(cp,1<<20,guard))==core,'core resume config mismatch')
@@ -224,3 +243,4 @@ if __name__=='__main__':
  try:
   run(a.config,a.work,a.output,a.resume)
  except Exception as exc:print('error: '+str(exc),file=sys.stderr);raise SystemExit(1)
+
