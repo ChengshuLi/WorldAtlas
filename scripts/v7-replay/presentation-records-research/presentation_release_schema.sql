@@ -12,6 +12,9 @@ CREATE TABLE atlas.review_presentation_releases (
   reference_source_version text NOT NULL,
   water_source_id text NOT NULL,
   water_source_version text NOT NULL,
+  manifest_source_id text NOT NULL,
+  manifest_source_version text NOT NULL,
+  code_revision text NOT NULL CHECK (code_revision ~ '^[0-9a-f]{40}$'),
   manifest_sha256 text NOT NULL CHECK (manifest_sha256 ~ '^[0-9a-f]{64}$'),
   records_sha256 text NOT NULL CHECK (records_sha256 ~ '^[0-9a-f]{64}$'),
   source_pins jsonb NOT NULL CHECK (jsonb_typeof(source_pins) = 'object'),
@@ -25,7 +28,8 @@ CREATE TABLE atlas.review_presentation_releases (
   created_at timestamptz NOT NULL DEFAULT now(),
   FOREIGN KEY (proposal_source_id,proposal_source_version) REFERENCES atlas.source_assets(source_id,version),
   FOREIGN KEY (reference_source_id,reference_source_version) REFERENCES atlas.source_assets(source_id,version),
-  FOREIGN KEY (water_source_id,water_source_version) REFERENCES atlas.source_assets(source_id,version)
+  FOREIGN KEY (water_source_id,water_source_version) REFERENCES atlas.source_assets(source_id,version),
+  FOREIGN KEY (manifest_source_id,manifest_source_version) REFERENCES atlas.source_assets(source_id,version)
 );
 
 -- Immutable release rows ensure a correction creates a distinct release.

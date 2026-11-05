@@ -8,6 +8,16 @@ import verify_presentation_release as parity
 
 ASSET_FILES={'proposal':('proposal.json','proposal'),'water_presentation':('water-presentation.json','water'),'references':('review-references.json','reference')}
 PIN_KEYS={'source_id','version','r2_bucket','r2_key','sha256','size_bytes'}
+CODE_FILES={'release_verifier':'verify_presentation_release.py','neon_verifier':'verify_neon_presentation_export.py','export_sql':'export_presentation_release.sql','schema_sql':'presentation_release_schema.sql'}
+
+def check_code_pins(manifest):
+    pins=manifest.get('code_pins')
+    if not isinstance(pins,dict) or set(pins)!=set(CODE_FILES):
+        raise ValueError('invalid verifier code pins')
+    here=Path(__file__).resolve().parent
+    for name,file in CODE_FILES.items():
+        if parity.digest(parity.bounded(here/file,1<<20))!=pins[name]:
+            raise ValueError('verifier code pin mismatch: '+name)
 
 def valid_pin(pin):
     return (isinstance(pin,dict) and set(pin)==PIN_KEYS
@@ -29,7 +39,9 @@ def canonical_records(records):
         raise ValueError('presentation records must contain only strings, arrays and objects')
     return (json.dumps(records,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf8')
 
-def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,input_dir,project,branch,database):
+def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,manifest_source_pin_sha,input_dir,project,branch,database,code_revision):
+    if not isinstance(code_revision,str) or len(code_revision)!=40 or any(c not in '0123456789abcdef' for c in code_revision):
+        raise ValueError('invalid code revision')
     snapshot_raw=parity.bounded(snapshot_path, 8<<20)
     if parity.digest(snapshot_raw)!=snapshot_sha: raise ValueError('Neon export hash mismatch')
     snapshot=parity.strict_json(snapshot_raw)
@@ -47,10 +59,22 @@ def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,input_dir,proje
     manifest=parity.strict_json(manifest_raw)
     if release.get('release_id')!=manifest.get('release_id'):
         raise ValueError('release ID mismatch')
+    if release.get('code_revision')!=code_revision or manifest.get('code_revision')!=code_revision:
+        raise ValueError('code revision mismatch')
     if manifest.get('schema')!='worldatlas-presentation-parity-manifest-v2' or not isinstance(manifest.get('sources'),dict) or set(manifest['sources'])!=set(ASSET_FILES):
         raise ValueError('manifest lacks exact source identities')
-    if not isinstance(snapshot['assets'],dict) or set(snapshot['assets'])!=set(ASSET_FILES):
+    check_code_pins(manifest)
+    if not isinstance(snapshot['assets'],dict) or set(snapshot['assets'])!=set(ASSET_FILES)|{'manifest'}:
         raise ValueError('invalid source asset set')
+    manifest_asset=snapshot['assets']['manifest']
+    if not isinstance(manifest_asset,dict) or not valid_pin({k:manifest_asset.get(k) for k in PIN_KEYS}):
+        raise ValueError('invalid manifest source asset')
+    manifest_pin={k:manifest_asset[k] for k in PIN_KEYS}
+    pin_bytes=(json.dumps(manifest_pin,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf8')
+    if parity.digest(pin_bytes)!=manifest_source_pin_sha:
+        raise ValueError('manifest source identity pin mismatch')
+    if manifest_asset['source_id']!=release.get('manifest_source_id') or manifest_asset['version']!=release.get('manifest_source_version') or manifest_asset['sha256']!=manifest_sha or manifest_asset['size_bytes']!=len(manifest_raw):
+        raise ValueError('manifest source binding mismatch')
     source_pins=release.get('source_pins')
     if not isinstance(source_pins,dict) or set(source_pins)!=set(ASSET_FILES):
         raise ValueError('invalid release source pins')
@@ -77,15 +101,17 @@ def verify(snapshot_path,snapshot_sha,manifest_path,manifest_sha,input_dir,proje
     if parity.bounded(Path(input_dir)/'presentation-records-local.json',8<<20)!=records_raw:
         raise ValueError('exported records bytes differ from Neon')
     result=parity.verify(manifest_path,manifest_sha,input_dir)
+    check_code_pins(manifest)
     result['status']='presentation-export-parity-verified-not-authenticated-or-deployed'
     result['neon_export_sha256']=snapshot_sha
-    result['limitations'].append('Origin is an assertion: the caller must independently authenticate the Neon query result and R2 readbacks.')
+    result['limitations'].append('Origin is an assertion: the caller must independently authenticate the Neon query result, source-identity pin, R2 readbacks, and code revision.')
+    result['limitations'].append('On-disk code hashes are integrity checks, not authentication of already executing Python or Node bytes.')
     return result
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
-    for name in ('snapshot','snapshot-sha256','manifest','manifest-sha256','input-dir','project','branch','database'):
+    for name in ('snapshot','snapshot-sha256','manifest','manifest-sha256','manifest-source-pin-sha256','input-dir','project','branch','database','code-revision'):
         p.add_argument('--'+name,required=True)
     a=p.parse_args()
-    print(json.dumps(verify(a.snapshot,a.snapshot_sha256,a.manifest,a.manifest_sha256,a.input_dir,a.project,a.branch,a.database),sort_keys=True))
+    print(json.dumps(verify(a.snapshot,a.snapshot_sha256,a.manifest,a.manifest_sha256,a.manifest_source_pin_sha256,a.input_dir,a.project,a.branch,a.database,a.code_revision),sort_keys=True))
 

@@ -150,7 +150,7 @@ def verify(manifest_path, expected_manifest_sha, input_dir):
         raise ValueError('manifest hash mismatch')
     manifest=strict_json(manifest_raw)
     valid_v1=set(manifest)=={'schema','release_id','assets'} and manifest.get('schema')=='worldatlas-presentation-parity-manifest-v1'
-    valid_v2=set(manifest)=={'schema','release_id','assets','sources'} and manifest.get('schema')=='worldatlas-presentation-parity-manifest-v2' and isinstance(manifest.get('sources'),dict)
+    valid_v2=set(manifest)=={'schema','release_id','assets','sources','code_pins','code_revision'} and manifest.get('schema')=='worldatlas-presentation-parity-manifest-v2' and isinstance(manifest.get('sources'),dict) and isinstance(manifest.get('code_pins'),dict) and isinstance(manifest.get('code_revision'),str) and len(manifest['code_revision'])==40 and all(c in '0123456789abcdef' for c in manifest['code_revision'])
     if not (valid_v1 or valid_v2) or not isinstance(manifest['release_id'],str) or not manifest['release_id']:
         raise ValueError('invalid manifest')
     assets=manifest['assets']
