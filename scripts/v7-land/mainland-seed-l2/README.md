@@ -17,8 +17,10 @@ witness resolution, physical and component rows/runs, physical report, component
 manifest, water-closure checker and contract, and reviewed rasterizer source.
 A terminal-aware route additionally requires a pinned `terminal_checker` input;
 only the independently reviewed allowlisted code is executable. Work and output
-are fresh, disjoint directories. The producer and closure clients run directly, without a process supervisor,
-memory floor, process-memory cap, or timeout. The water placeholder is zero; seed land uses the continent
+are fresh, disjoint directories. The producer and closure clients run directly. This runtime does not launch a
+supervisor or impose a memory floor, process-memory cap, or timeout. It does not
+assess constraints inherited from the execution environment, such as a cgroup,
+external supervisor, or operating-system limits. The water placeholder is zero; seed land uses the continent
 codes provided by the pinned category and rule decisions.
 
 When the Panama–Colombia boundary is selected, `inputs.panama_osm_archive`
