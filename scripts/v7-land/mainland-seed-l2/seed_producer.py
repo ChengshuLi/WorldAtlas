@@ -15,8 +15,8 @@ from closure_client import sha
 from panama_seed_source import bind as bind_panama_source
 BASE=Path(__file__).resolve().parent
 CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','panama_seed_source.py','osm_source_handoff.py','assemble_osm_ways.py')
-TRUSTED_CODE={'seed_builder':'b90d613cc269195ea58cf491ad424d7d4a923e8c686410ef98e391a7f757beaa','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'1d5e2a978870e05cf7f1f2c57389f65ffbc1c1a5de11056b5d5196b1a80b6f01'}
-TRUSTED_TERMINAL_CHECKER='347aaa7f5414c2f3ac5826082a3b5b5c645558be1471f1ff3cc4b55eb206d8f7'
+TRUSTED_CODE={'seed_builder':'8b59d9212064ed7fcdde37ca9ad53a8b1544c0b2abad4b1e2ac3c30e49b193a1','seed_kernel':'1543a7014f84eb5969b073435d463e838922c186d996ec9dcb0f68133ac15fa8','closure_checker':'5b01e11908293df6f941adbc391d4c9e7709f49c1b8ad60d46be0558d66ca6b3'}
+TRUSTED_TERMINAL_CHECKER='08fd855bddd47dd2152ae0ac0fabd1e23e1d75db9e337a0af3a840a6787e1cb2'
 INPUTS={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','closure_contract','seed_builder','seed_kernel'}
 def bounded_json(pin,guard,limit=16<<20):
  h=hashlib.sha256();chunks=[];n=0

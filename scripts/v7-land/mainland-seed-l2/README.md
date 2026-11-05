@@ -73,11 +73,11 @@ independent real-GDAL review; this does not authorize changing frozen hashes
 without verification. The rasterizer source freeze pins the witness guard;
 its coordinate uncertainty box is not a geographic distance measure.
 
-This is an unpromoted direct-run candidate. Its new checker and rasterizer bytes
-are deliberately not added to the existing executable allowlist or source freeze
-until independent verification. Historical closure proof hashes are not claims
-about the new checker: the integration must rerun the closure proofs against the
-v2 contract and preserve the original selected snapshot and independent replay.
+This is an unpromoted direct-run candidate. Its current executable hashes are
+recorded after bounded independent review; the full outer integration remains
+gated. Historical closure proof hashes are not claims about the new checker:
+the integration must rerun the closure proofs against the v2 contract and
+preserve the original selected snapshot and independent replay.
 
 The optional bounded real-source integration fixture can be run with the
 archived Panama bundle (SHA-256
@@ -94,3 +94,18 @@ not verify a selected production export or production closure. With GDAL
 and `31cc273033778187d959ca17ea096a2316dea110e177a88038493ff69d3a6ea0`.
 The test replaces executable allowlist values in memory for its fixture only;
 it does not promote the candidate source freeze.
+
+### Direct v2 executable pins
+
+The direct producer's executable allowlist and `source-freeze.sha256` pin the
+current direct-v2 producer and nine companion Python modules, the rasterizer
+and kernel, and the two closure checkers. The historical v1 seed
+handoff has a separate freeze and must not be relabeled with these hashes.
+`test_literal_freeze.py` checks the literal allowlist without the fixture's
+normal test-time override and rejects an unreviewed checker before output.
+With the pinned Panama OSM archive supplied through `PANAMA_REAL_OSM_ARCHIVE`,
+the bounded fixture uses the actual OSM line and water checker on a synthetic
+grid, mask, closure, catalog, and snapshot. It does not test a selected Neon
+snapshot, the full outer orchestrator, a production closure, or a map build.
+The freeze covers in-repository bytes, not Python, GDAL, compiler, native
+libraries, or process provenance. Fresh outer integration remains separate.
