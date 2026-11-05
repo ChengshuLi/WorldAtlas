@@ -146,37 +146,14 @@ def main():
         spec = importlib.util.spec_from_file_location('caucasus_gated_seed_producer', producer_path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
-        original_boundary_records = module.boundary_records
-        def derived_boundary_records(snapshot):
-            rev, entity, records, sources = original_boundary_records(snapshot)
-            record = records.get(('boundary', BOUNDARY))
-            if not isinstance(record, dict) or record.get('geometry_sha256') != report['selected_geometry_sha256']:
-                raise ValueError('producer selected boundary changed after gate')
-            record['geometry'] = derived
-            record['geometry_sha256'] = report['assembly']['geometry_sha256']
-            return rev, entity, records, sources
-        module.boundary_records = derived_boundary_records
-        original_selected_regions = module.selected_regions
-        def derived_selected_regions(snapshot, revision, records):
-            _, _, previous_boundaries, _ = original_boundary_records(snapshot)
-            previous, previous_records = original_selected_regions(snapshot, revision, previous_boundaries)
-            decisions, current_records = original_selected_regions(snapshot, revision, records)
-            if len(previous) != len(decisions):
-                raise ValueError('region selection changed')
-            changes = []
-            for old, current in zip(previous, decisions):
-                if old != current:
-                    raise ValueError('region decisions changed before derivation')
-                old_hash = assembled_region_hash(old, previous_records)
-                if old_hash != old['geometry_sha256']:
-                    raise ValueError('original selected region digest mismatch')
-                new_hash = assembled_region_hash(current, current_records)
-                if new_hash != old_hash:
-                    current['geometry_sha256'] = new_hash
-                    changes.append({'region_id': current['region_id'], 'selected_sha256': old_hash, 'derived_sha256': new_hash})
-            report['derived_region_hashes'] = changes
-            return decisions, current_records
-        module.selected_regions = derived_selected_regions
+        from caucasus_effective_snapshot import derive
+        original_load = module.load_pinned_snapshot
+        def load_effective_snapshot(path, expected_sha256, guard):
+            original = original_load(path, expected_sha256, guard)
+            effective, trace = derive(original, derived, report, expected_sha256)
+            report['effective_snapshot'] = trace
+            return effective
+        module.load_pinned_snapshot = load_effective_snapshot
         module.run(args.request, args.work, args.output, lambda: None)
         if digest(producer_path) != args.producer_sha256 or digest(args.request) != args.request_sha256:
             raise ValueError('producer or request changed during execution')
