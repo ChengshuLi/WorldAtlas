@@ -5,6 +5,78 @@ from satellite_geodesic import apply_satellites, run_lower_bound
 def summary(n): return {'total':n,'in_scope':n,'west':n,'east':0,'boundary':0,'outside_latitude':0}
 def fake_pair(y,a,b,yy,c,d,width,**kw): return (abs(a-c)*1000.0,{})
 class TestSatelliteGeodesic(unittest.TestCase):
+    def test_known_other_continent_competitor_conflicts(self):
+        from satellite_geodesic import apply_satellites
+        components={1:{'total':1,'in_scope':1},2:{'total':2,'in_scope':2}}
+        runs={1:[(1,183,184)],2:[(1,184,186)]}
+        result={'proposals':{1:{'code':18,'basis':'whole_component_line_side'}},
+                'review':{},'competitor_targets':{2:9}}
+        out=apply_satellites(result,components,runs,{},lambda *a,**k:(1000,None),
+                             width=360,north=2,max_satellite_cells=1,max_gap_m=120000,candidate_roots={1})
+        self.assertNotIn(1,out['proposals'])
+        self.assertEqual(out['review'][1],'conflicting_nearest_land_targets')
+        result['competitor_targets']={}
+        out=apply_satellites(result,components,runs,{},lambda *a,**k:(1000,None),
+                             width=360,north=2,max_satellite_cells=1,max_gap_m=120000,candidate_roots={1})
+        self.assertEqual(out['proposals'][1]['code'],18)
+
+    def test_source_group_target_and_provenance_precede_proximity(self):
+        components={1:summary(1),2:summary(3)}
+        runs={1:[(90,3,4)],2:[(90,0,3)]}
+        result={'proposals':{1:{'code':18,'basis':'inferred_source_extent_group_convention'},2:{'code':22,'basis':'selected_affiliation'}},'review':{},'regional_group_proposals':{1:['source']}}
+        anchor={2:{'code':22,'source_id':'islands','source_feature_id':'parent','source_version':'v1','source_sha256':'a'*64,'main_island_evidence':'source'}}
+        out=apply_satellites(result,components,runs,anchor,fake_pair,width=360000,north=.09,max_satellite_cells=1,max_gap_m=5000,candidate_roots={1},allow_unanchored_nearest=True)
+        self.assertNotIn(1,out['proposals'])
+        self.assertEqual(out['review'][1],'conflicting_group_and_anchor')
+        evidence=out['group_anchor_conflicts'][1]['competitors'][0]
+        self.assertEqual((evidence['root_current_generation_only'],evidence['code']),(2,22))
+        self.assertEqual(evidence['anchor']['source_id'],'islands')
+        self.assertEqual(out['regional_group_proposals'][1],['source'])
+        self.assertNotIn(1,out['satellites'])
+        anchor[2]['code']=18;result['proposals'][2]['code']=18
+        out=apply_satellites(result,components,runs,anchor,fake_pair,width=360000,north=.09,max_satellite_cells=1,max_gap_m=5000,candidate_roots={1},allow_unanchored_nearest=True)
+        self.assertEqual(out['proposals'][1],result['proposals'][1])
+
+    def test_inferred_satellite_cannot_be_an_anchor(self):
+        components={1:summary(1),2:summary(3)};runs={1:[(90,3,4)],2:[(90,0,3)]}
+        result={'proposals':{2:{'code':18,'basis':'source_anchored_nearest_main_island'}},'review':{}}
+        anchor={2:{'code':18,'source_id':'islands','source_feature_id':'parent','source_version':'v1','source_sha256':'a'*64,'main_island_evidence':'source'}}
+        with self.assertRaisesRegex(ValueError,'not an inferred satellite'):
+            apply_satellites(result,components,runs,anchor,fake_pair,width=360000,north=.09,max_satellite_cells=1,max_gap_m=5000,candidate_roots={1})
+
+    def test_prior_satellite_and_unanchored_evidence_survives_later_pass(self):
+        components={1:summary(1),2:summary(3)}; runs={1:[(90,3,4)],2:[(90,0,3)]}
+        result={'proposals':{2:{'code':18,'basis':'selected_affiliation'}},'review':{1:'conflicting_group_and_anchor'},'satellites':{'1':{'source_id':'earlier'}},'nearest_unanchored':{'1':{'roots_current_generation_only':[9]}}}
+        anchor={2:{'code':18,'source_id':'islands','source_feature_id':'parent','source_version':'v1','source_sha256':'a'*64,'main_island_evidence':'source'}}
+        out=apply_satellites(result,components,runs,anchor,fake_pair,width=360000,north=.09,max_satellite_cells=1,max_gap_m=5000,candidate_roots={1})
+        self.assertEqual(out['satellites'][1]['source_id'],'earlier')
+        self.assertEqual(out['nearest_unanchored'][1]['roots_current_generation_only'],[9])
+        self.assertEqual(out['review'][1],'conflicting_group_and_anchor')
+
+    def test_conflicts_from_earlier_passes_fail_closed(self):
+        components={1:summary(1),2:summary(3),3:summary(1),4:summary(1)}
+        runs={1:[(90,3,4)],2:[(90,0,3)],3:[(91,3,4)],4:[(92,3,4)]}
+        result={'proposals':{2:{'code':18,'basis':'selected_affiliation'}},'review':{1:'conflicting_regional_group_conventions',3:'conflicting_group_and_anchor',4:'future_unrecognized_hold'}}
+        anchor={2:{'code':18,'source_id':'islands','source_feature_id':'parent','source_version':'v1','source_sha256':'a'*64,'main_island_evidence':'source'}}
+        out=apply_satellites(result,components,runs,anchor,fake_pair,width=360000,north=.09,max_satellite_cells=1,max_gap_m=5000,candidate_roots={1,3,4},allow_unanchored_nearest=True)
+        for root in (1,3,4):
+            self.assertNotIn(root,out['proposals']);self.assertEqual(out['review'][root],result['review'][root])
+
+    def test_optional_direct_anchor_ignores_unknown_nearer_without_chaining(self):
+        components={1:summary(1),2:summary(5),3:summary(2),4:summary(1)}
+        runs={1:[(90,5,6)],2:[(90,0,5)],3:[(90,6,8)],4:[(90,9,10)]}
+        result={'proposals':{2:{'code':18,'basis':'selected_affiliation'}},'review':{1:'outside_line_latitude',4:'source_group_pending_review'}}
+        anchors={2:{'code':18,'source_id':'islands','source_feature_id':'parent','source_version':'v1','source_sha256':'a'*64,'main_island_evidence':'source'}}
+        kw=dict(width=360000,north=.09,max_satellite_cells=2,max_gap_m=10000,candidate_roots={1,4},allow_unanchored_nearest=True)
+        out=apply_satellites(result,components,runs,anchors,fake_pair,**kw)
+        self.assertEqual(out['proposals'][1]['code'],18)
+        self.assertEqual(out['satellites'][1]['parent_root_current_generation_only'],2)
+        self.assertTrue(out['satellites'][1]['nearer_unanchored_land'])
+        self.assertNotIn(4,out['proposals'])
+        result['competitor_targets']={3:22}
+        out=apply_satellites(result,components,runs,anchors,fake_pair,**kw)
+        self.assertNotIn(1,out['proposals']);self.assertEqual(out['review'][1],'conflicting_nearest_land_targets')
+
     def test_satellite_inherits_source_anchor_and_selected_wins(self):
         components={1:summary(1),2:summary(3),3:summary(1)}
         runs={1:[(90,3,4)],2:[(90,0,3)],3:[(91,3,4)]}

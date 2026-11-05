@@ -1,0 +1,984 @@
+{
+  "component_ids": [
+    11633085,
+    11636322,
+    11636662,
+    11640288,
+    11640853,
+    11641831,
+    11642547,
+    11643130,
+    11643288,
+    11643436,
+    11644706,
+    11653188,
+    11660959,
+    11671455,
+    11683862,
+    11684041,
+    11689120,
+    11694692,
+    11696126,
+    11700225,
+    12254172,
+    12273512,
+    12273756
+  ],
+  "inputs": {
+    "component_rows": "4beda178bfc7beeb2d30cbdfa5901a48f9a41bb82c69e534d4c8cddfdb09aea7",
+    "component_runs": "18d7f36fa22c5728662cdd40487bf684108da030c074fec6d22ac378d0df0961",
+    "physical_rows": "6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468",
+    "physical_runs": "1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7"
+  },
+  "intersection": [
+    {
+      "feature_id": "172620",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11633085": 16
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11633085
+      ]
+    },
+    {
+      "failure": "source polygon hits no land component",
+      "feature_id": "286337",
+      "roots": []
+    },
+    {
+      "feature_id": "286334",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 2,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          2
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11636322": 2,
+            "11636662": 14
+          }
+        ],
+        "selected_components": 2
+      },
+      "roots": [
+        11636322,
+        11636662
+      ]
+    },
+    {
+      "feature_id": "286332",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11640288": 7
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11640288
+      ]
+    },
+    {
+      "feature_id": "286331",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11640853": 8
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11640853
+      ]
+    },
+    {
+      "feature_id": "172615",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11641831": 3
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11641831
+      ]
+    },
+    {
+      "feature_id": "172612",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11642547": 7
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11642547
+      ]
+    },
+    {
+      "feature_id": "172611",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 3,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          3
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11643130": 14,
+            "11643288": 1,
+            "11643436": 2
+          }
+        ],
+        "selected_components": 3
+      },
+      "roots": [
+        11643130,
+        11643288,
+        11643436
+      ]
+    },
+    {
+      "feature_id": "286347",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11644706": 1
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11644706
+      ]
+    },
+    {
+      "feature_id": "286346",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11653188": 4
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11653188
+      ]
+    },
+    {
+      "feature_id": "286260",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11660959": 13
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11660959
+      ]
+    },
+    {
+      "feature_id": "139541",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11671455": 6
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11671455
+      ]
+    },
+    {
+      "feature_id": "139629",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11683862": 1
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11683862
+      ]
+    },
+    {
+      "feature_id": "139628",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11684041": 6
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11684041
+      ]
+    },
+    {
+      "feature_id": "139551",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11689120": 1
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11689120
+      ]
+    },
+    {
+      "feature_id": "139523",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11694692": 8
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11694692
+      ]
+    },
+    {
+      "feature_id": "139520",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11696126": 4
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11696126
+      ]
+    },
+    {
+      "feature_id": "28870",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "11700225": 1
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        11700225
+      ]
+    },
+    {
+      "feature_id": "330959",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 1,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          1
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "12254172": 5
+          }
+        ],
+        "selected_components": 1
+      },
+      "roots": [
+        12254172
+      ]
+    },
+    {
+      "feature_id": "108960",
+      "intersection": {
+        "excluded_components": 0,
+        "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+        "included_components": 0,
+        "intersected_components": 2,
+        "limitations": [
+          "Center-pixel rasterization follows GDAL behavior; source-polygon contact alone does not establish whole-component geographic identity.",
+          "Per-feature counts may overlap and must not be summed as a union.",
+          "Caller must independently authenticate input and rehash after execution."
+        ],
+        "method": "gdal-center-pixel-component-intersection-v1",
+        "per_feature_components": [
+          2
+        ],
+        "per_feature_root_inside_cells": [
+          {
+            "12273512": 1,
+            "12273756": 13
+          }
+        ],
+        "selected_components": 2
+      },
+      "roots": [
+        12273512,
+        12273756
+      ]
+    }
+  ],
+  "limitations": [
+    "Archive polygons have no source island names; point association is interpreted and not independent corroboration.",
+    "Any intersected component must be checked whole and compared against all current selected and pending claims before selection.",
+    "A named point does not establish a wider group or nearby unnamed components.",
+    "No map rebuilt or geographic decision selected."
+  ],
+  "point_hits": [
+    {
+      "containing_feature_ids": [
+        "172620"
+      ],
+      "coordinates": [
+        127.06083,
+        4.79889
+      ],
+      "geonames_id": "1644151",
+      "name": "Pulau Garat",
+      "root": 11633085
+    },
+    {
+      "containing_feature_ids": [
+        "286337"
+      ],
+      "coordinates": [
+        125.48993,
+        4.74608
+      ],
+      "geonames_id": "12533245",
+      "name": "Pulau Batubawaikang",
+      "root": 11636322
+    },
+    {
+      "containing_feature_ids": [
+        "286334"
+      ],
+      "coordinates": [
+        125.48389,
+        4.73528
+      ],
+      "geonames_id": "1651236",
+      "name": "Pulau Marore",
+      "root": 11636662
+    },
+    {
+      "containing_feature_ids": [
+        "286332"
+      ],
+      "coordinates": [
+        125.43333,
+        4.67056
+      ],
+      "geonames_id": "1635744",
+      "name": "Pulau Kawio",
+      "root": 11640288
+    },
+    {
+      "containing_feature_ids": [
+        "286331"
+      ],
+      "coordinates": [
+        125.43556,
+        4.65667
+      ],
+      "geonames_id": "1641748",
+      "name": "Pulau Kemboleng",
+      "root": 11640853
+    },
+    {
+      "containing_feature_ids": [
+        "172615"
+      ],
+      "coordinates": [
+        127.15806,
+        4.64222
+      ],
+      "geonames_id": "1643043",
+      "name": "Pulau Intata",
+      "root": 11641831
+    },
+    {
+      "containing_feature_ids": [
+        "172612"
+      ],
+      "coordinates": [
+        127.15944,
+        4.62667
+      ],
+      "geonames_id": "1642074",
+      "name": "Pulau Kakorotan",
+      "root": 11642547
+    },
+    {
+      "containing_feature_ids": [
+        "172611"
+      ],
+      "coordinates": [
+        127.1375,
+        4.61111
+      ],
+      "geonames_id": "1636642",
+      "name": "Pulau Mallo",
+      "root": 11643130
+    },
+    {
+      "containing_feature_ids": [
+        "286347"
+      ],
+      "coordinates": [
+        125.62944,
+        4.58972
+      ],
+      "geonames_id": "1651218",
+      "name": "Pulau Memanu",
+      "root": 11644706
+    },
+    {
+      "containing_feature_ids": [
+        "286346"
+      ],
+      "coordinates": [
+        125.69167,
+        4.43472
+      ],
+      "geonames_id": "1635829",
+      "name": "Pulau Matutuang",
+      "root": 11653188
+    },
+    {
+      "containing_feature_ids": [
+        "286260"
+      ],
+      "coordinates": [
+        125.32472,
+        4.23222
+      ],
+      "geonames_id": "1640901",
+      "name": "Pulau Kawaluso",
+      "root": 11660959
+    },
+    {
+      "containing_feature_ids": [
+        "139541"
+      ],
+      "coordinates": [
+        125.38833,
+        3.91111
+      ],
+      "geonames_id": "1637567",
+      "name": "Pulau Lipaeng",
+      "root": 11671455
+    },
+    {
+      "containing_feature_ids": [
+        "139629"
+      ],
+      "coordinates": [
+        125.65736,
+        3.53882
+      ],
+      "geonames_id": "6924114",
+      "name": "Pulau Enggahai Besar",
+      "root": 11683862
+    },
+    {
+      "containing_feature_ids": [
+        "139628"
+      ],
+      "coordinates": [
+        125.65833,
+        3.5325
+      ],
+      "geonames_id": "1649552",
+      "name": "Pulau Batuwingkong",
+      "root": 11684041
+    },
+    {
+      "containing_feature_ids": [
+        "139551"
+      ],
+      "coordinates": [
+        125.57274,
+        3.36632
+      ],
+      "geonames_id": "6923655",
+      "name": "Pulau Dakupang",
+      "root": 11689120
+    },
+    {
+      "containing_feature_ids": [
+        "139523"
+      ],
+      "coordinates": [
+        125.45194,
+        3.14472
+      ],
+      "geonames_id": "1636857",
+      "name": "Pulau Mahengetang",
+      "root": 11694692
+    },
+    {
+      "containing_feature_ids": [
+        "139520"
+      ],
+      "coordinates": [
+        125.47972,
+        3.09389
+      ],
+      "geonames_id": "1627195",
+      "name": "Pulau Siha",
+      "root": 11696126
+    },
+    {
+      "containing_feature_ids": [
+        "139520"
+      ],
+      "coordinates": [
+        125.4809,
+        3.0941
+      ],
+      "geonames_id": "6916030",
+      "name": "Pulau Apelabu",
+      "root": 11696126
+    },
+    {
+      "containing_feature_ids": [
+        "28870"
+      ],
+      "coordinates": [
+        125.4787,
+        2.9409
+      ],
+      "geonames_id": "12533229",
+      "name": "Pulau Batumalokong",
+      "root": 11700225
+    },
+    {
+      "containing_feature_ids": [
+        "330959"
+      ],
+      "coordinates": [
+        131.4524,
+        -7.8479
+      ],
+      "geonames_id": "1890696",
+      "name": "Pulau Kore",
+      "root": 12254172
+    },
+    {
+      "containing_feature_ids": [
+        "108960"
+      ],
+      "coordinates": [
+        128.50077,
+        -8.33582
+      ],
+      "geonames_id": "1635266",
+      "name": "Pulau Meatimiarang",
+      "root": 12273756
+    }
+  ],
+  "source_features": [
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "19f551f80e873f18c8d908be1e89fc4e4d4fe73c7b332eab80ff68caee58006f",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "172620",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 173
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "5ebadfb7bf765857acb84d0069176c6e7ccfc0b9ca4c03c2e993805fdd61f609",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "286337",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 32
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "892389bf98ed5a7232d519dc2646eb7d3d11fbde1463d271754509c0073e8f90",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "286334",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 650
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "f6980c77f8752fd8e45f45daa481f605edddbc507a7985a1e973102f8b0f29ee",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "286332",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 81
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "0f2a3edaa308a2436691f92f83dc7463b0a4813d5a67f906280f165ecf4d7140",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "286331",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 95
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "df0b5bfd2f3168be3cf0082c63cfd70235715313cbb5cd5b20215f254c33c44a",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "172615",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 120
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "4eb94eea44a2c03f65c1350e9f4217e8421be4e9bb22c42f5014ab2f81934c0b",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "172612",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 113
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "ed2cc37fd7081401d077a21853eef244244949db3006df0a274c367996ec119b",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "172611",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 267
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "2f965ff94a6252a48bd788f1ea4050cfd0e5419b2eba95f0e4f70296516aee34",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "286347",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 106
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "40a9979582506baf358bc83c814be7181ba2965be4cf811ac325b7191efb9b89",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "286346",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 191
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "d0cec7fb2ecfc78e594483716000d08c7117a33a803910ab5777903cb981b142",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "286260",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 161
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "12c6422dd4013a1affad1173f7ce02c9ec4dc9bc9afcee9d70238d83d1c9708c",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "139541",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 178
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "50502fff9d851aaf259c60b1a72ede0e8f13294ca6ffed79ba7bfadd54dd4c30",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "139629",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 26
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "aff676c67a8e53072958e9f30b6875a969b4a17370b758f97374bc7349b61fd6",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "139628",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 255
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "fa292f327253c4608738546abb8cac7dcf5a2cbfbcf0f2a3195f8eb0c9db1584",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "139551",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 49
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "e8239d1be417aecfad9e92b955e0f1ca59aeb90b430b75c10295f2c0db7cab52",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "139523",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 197
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "cbafe35190496fc281372dbed4d76ba9b1b0438c3fa1bb13287c7018e0b631f4",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "139520",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 313
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "3f92cbaa21a7e82081cf16fae75998a3fd0c5aed4ae6ff7bbcc2879efc0d67d0",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "28870",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 46
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "044b5ebbd1d263f7e8bc10ecfe2a94a8b0d0bd6a2c75a1312f37c067e72abea6",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "330959",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 182
+    },
+    {
+      "coordinate_reference": "EPSG:4326; longitude, latitude",
+      "geometry_sha256": "784bd952034c6a6ee85479986dd03a4f4272e89e2f9ade594f2ad5142bb656f6",
+      "limitation": "FID and geometry are specific to the exact archive bytes; source contact alone does not establish island membership.",
+      "source_feature_id": "108960",
+      "source_sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+      "vertices": 255
+    }
+  ],
+  "status": "source-feature-research-not-selection"
+}

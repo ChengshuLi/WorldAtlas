@@ -98,10 +98,10 @@ def resolve(components, selected, mainland_roots=(), pending_roots=()):
     including authoritative group membership. Any selected claim wins, even
     across endpoints. Conflicting claims are errors. Components entirely or
     partially outside the region or latitude extent are not newly classified.
-    Mainland witnesses are protected. group_checks maps each unclaimed in-scope root to either "clear" or
-    "unresolved" after a source-backed group-membership check. Unknown roots
-    fail closed. The caller must authenticate the check, pinned generation,
-    source group evidence, and full scan before invoking this function.
+    Mainland witnesses are protected. The caller supplies pending_roots for
+    documented unresolved group conflicts; those roots remain in review.
+    Other unclaimed whole components may receive a line-side proposal. The
+    caller must authenticate the generation, group evidence, and full scan.
     """
     _require(isinstance(components, dict) and isinstance(selected, dict), 'invalid inputs')
     _require(all(_root(r) for r in mainland_roots), 'invalid mainland root')

@@ -34,6 +34,13 @@ class TestReplayAdapter(unittest.TestCase):
         out=resolve_with_mixed_replay({1:c(w=3)},{'revision':'test'},{'snapshot':'test'},['report'],{7},module,pending)
         self.assertNotIn(1,out['proposals']);self.assertEqual(out['review'][1],'source_group_pending_review')
         self.assertEqual(out['pending_source_claims'][1],pending)
+    def test_pending_review_precedes_other_continent_claim(self):
+        module=MixedFixture({1:[{'code':9}]})
+        pending=[{'component_id':1,'source_id':'s','source_version':'v1','source_feature_id':'f','source_sha256':'a'*64,'review_reason':'conflict'}]
+        out=resolve_with_mixed_replay({1:c(w=3)},{'revision':'test'},{'snapshot':'test'},['report'],{7},module,pending)
+        self.assertEqual(out['review'][1],'source_group_pending_review')
+        self.assertNotIn(1,out['proposals'])
+
     def test_conflicting_replayed_claims_fail(self):
         module=MixedFixture({1:[{'code':18},{'code':22}]})
         with self.assertRaisesRegex(ValueError,'conflicting'): resolve_with_mixed_replay({1:c(w=1)},{'revision':'test'},{'snapshot':'test'},['report'],{7},module)

@@ -26,7 +26,8 @@ def run_lower_bound(y,a,b,yy,c,d,width,north):
 
 
 def apply_satellites(result, components, root_runs, anchors, exact_run_pair, *,
-                     width, north, max_satellite_cells, max_gap_m, candidate_roots, tie_m=1e-5):
+                     width, north, max_satellite_cells, max_gap_m, candidate_roots, tie_m=1e-5,
+                     allow_unanchored_nearest=False):
     """Apply main-island convention after explicit replay and initial line side.
 
     root_runs must include *all* components larger than the candidate that
@@ -35,8 +36,11 @@ def apply_satellites(result, components, root_runs, anchors, exact_run_pair, *,
     anchors maps generation-only roots to {code, source_id, source_feature_id},
     each resolved from a source-backed named island and already selected or
     unambiguously line-classified. Distances are exact minimum WGS84 center to
-    center over complete runs. If equally near land has different or unknown
-    target, remove the line proposal and report ambiguity. Existing selected
+    center over complete runs. A directly anchored island may override a
+    line-side default; a conflicting independently classified nearer land
+    component instead causes review. A source-group proposal keeps its
+    provenance and is held if its closest known competitor has another target.
+    Unknown nearer land is diagnostic. Existing selected
     affiliations and protected mainland always win. Split or touching components
     remain in review, but an otherwise complete component beyond an endpoint can
     inherit an independently established source anchor without extending the line.
@@ -49,7 +53,8 @@ def apply_satellites(result, components, root_runs, anchors, exact_run_pair, *,
     _require(type(width) is int and width>=2 and type(north) in (int,float) and math.isfinite(north) and -90<=north<=90 and
              type(max_satellite_cells) is int and max_satellite_cells>0 and
              type(max_gap_m) in (int,float) and math.isfinite(max_gap_m) and max_gap_m>0 and
-             type(tie_m) in (int,float) and math.isfinite(tie_m) and tie_m>=0, 'invalid satellite policy')
+             type(tie_m) in (int,float) and math.isfinite(tie_m) and tie_m>=0 and
+             type(allow_unanchored_nearest) is bool, 'invalid satellite policy')
     for root,runs in root_runs.items():
         _require(root in components and isinstance(runs,list) and runs, 'missing component runs')
         _require(all(isinstance(run,(tuple,list)) and len(run)==3 and all(type(v) is int for v in run) and
@@ -67,10 +72,15 @@ def apply_satellites(result, components, root_runs, anchors, exact_run_pair, *,
                  all(ch in '0123456789abcdef' for ch in a['source_sha256']) and
                  isinstance(a.get('main_island_evidence'),str) and a['main_island_evidence'], 'invalid source-backed main island')
         proposal=result['proposals'].get(root)
-        _require(proposal is not None and proposal['code']==a['code'], 'anchor target not established')
+        _require(proposal is not None and proposal['code']==a['code'] and
+                 proposal.get('basis') in ('selected_affiliation','whole_component_line_side','inferred_source_extent_group_convention'),
+                 'anchor target must be independently established, not an inferred satellite')
     potential_parents=set(root_runs)
     out={**result,'proposals':{k:dict(v) for k,v in result['proposals'].items()},
-         'review':dict(result['review']),'satellites':{},'nearest_unanchored':{}}
+         'review':dict(result['review']),
+         'satellites':{int(k):dict(v) for k,v in result.get('satellites',{}).items()},
+         'nearest_unanchored':{int(k):dict(v) for k,v in result.get('nearest_unanchored',{}).items()},
+         'group_anchor_conflicts':{int(k):dict(v) for k,v in result.get('group_anchor_conflicts',{}).items()}}
     _require(isinstance(candidate_roots,(set,frozenset)) and candidate_roots.issubset(root_runs), 'candidate runs missing')
     step=360/width
     rows={r:(v[0][0],v[-1][0]) for r,v in root_runs.items()}
@@ -84,7 +94,11 @@ def apply_satellites(result, components, root_runs, anchors, exact_run_pair, *,
         proposal=out['proposals'].get(root)
         if proposal and proposal['basis']=='selected_affiliation':
             continue
-        if out['review'].get(root) in ('protected_mainland','existing_other_continent','crosses_or_touches_line','source_group_pending_review'):
+        source_group=bool(proposal and proposal['basis']=='inferred_source_extent_group_convention')
+        # Only endpoint holds are eligible for source-anchored inheritance.
+        # Unknown or conflict review states fail closed, including conflicts
+        # raised by earlier group and satellite passes.
+        if root in out['review'] and out['review'][root]!='outside_line_latitude':
             continue
         # Partial-window components are not regional satellite decisions.
         if components[root]['in_scope'] != components[root]['total']:
@@ -120,9 +134,29 @@ def apply_satellites(result, components, root_runs, anchors, exact_run_pair, *,
         distances.sort(); minimum=distances[0][0]
         if minimum>max_gap_m:
             continue
+        if source_group:
+            # Source groups precede proximity. Never silently replace their
+            # target or source evidence; contradictory nearest known land is
+            # held for review rather than resolved by distance alone.
+            known=[(d,p,anchors[p]['code'] if p in anchors else
+                    result['proposals'].get(p,{}).get('code',result.get('competitor_targets',{}).get(p)))
+                   for d,p in distances]
+            known=[(d,p,code) for d,p,code in known if code is not None]
+            if known:
+                first=min(d for d,_,_ in known)
+                closest=[(d,p,code) for d,p,code in known if d<=first+tie_m]
+                if {code for _,_,code in closest}!={proposal['code']}:
+                    out['proposals'].pop(root,None)
+                    out['review'][root]='conflicting_group_and_anchor'
+                    out['group_anchor_conflicts'][root]={'group_target_code':proposal['code'],
+                        'competitors':[{'root_current_generation_only':p,'code':code,'distance_m':d,
+                          'anchor':dict(anchors[p]) if p in anchors else None,
+                          'proposal':dict(result['proposals'][p]) if p in result['proposals'] else None,
+                          'selected_claims':result.get('replayed_claims',{}).get(p,[])} for d,p,code in closest]}
+            continue
         nearest=[p for distance,p in distances if distance<=minimum+tie_m]
         targets={anchors[p]['code'] if p in anchors else
-                 result['proposals'].get(p,{}).get('code') for p in nearest}
+                 result['proposals'].get(p,{}).get('code', result.get('competitor_targets',{}).get(p)) for p in nearest}
         if any(p not in anchors for p in nearest):
             # Mere proximity to unnamed or unanchored land is not evidence that
             # the approved line-side target is wrong. Preserve it unless a
@@ -134,8 +168,37 @@ def apply_satellites(result, components, root_runs, anchors, exact_run_pair, *,
                     continue
                 out['proposals'].pop(root,None)
                 out['review'][root]='conflicting_nearest_land_targets'
-            # A component beyond the endpoints has no line-side target, and
-            # remains in its existing review state without extrapolation.
+                continue
+            if not allow_unanchored_nearest:
+                # Beyond the endpoints, the conservative default stays held.
+                continue
+            # Optional broad geographic convention: an unknown nearer land
+            # component is diagnostic, not proof that a nearby named main
+            # island is the wrong parent. Find the closest independently
+            # anchored main island directly, never through inferred satellites.
+            anchored=[(d,p) for d,p in distances if p in anchors and d<=max_gap_m]
+            if not anchored:
+                continue
+            anchored.sort(); anchor_distance=anchored[0][0]
+            anchor_nearest=[p for d,p in anchored if d<=anchor_distance+tie_m]
+            anchor_codes={anchors[p]['code'] for p in anchor_nearest}
+            known_near={anchors[p]['code'] if p in anchors else
+                        result['proposals'].get(p,{}).get('code',result.get('competitor_targets',{}).get(p))
+                        for d,p in distances if d<=anchor_distance+tie_m}-{None}
+            if len(anchor_codes)!=1 or known_near-anchor_codes:
+                out['proposals'].pop(root,None)
+                out['review'][root]='conflicting_nearest_land_targets'
+                continue
+            parent=min(anchor_nearest);code=anchors[parent]['code']
+            out['proposals'][root]={'code':code,'basis':'source_anchored_nearest_main_island'}
+            out['review'].pop(root,None)
+            out['satellites'][root]={'parent_root_current_generation_only':parent,
+                                     'distance_m':anchor_distance,'source_id':anchors[parent]['source_id'],
+                                     'source_feature_id':anchors[parent]['source_feature_id'],
+                                     'source_version':anchors[parent]['source_version'],
+                                     'source_sha256':anchors[parent]['source_sha256'],
+                                     'main_island_evidence':anchors[parent]['main_island_evidence'],
+                                     'nearer_unanchored_land':True}
             continue
         if len(targets)>1:
             out['proposals'].pop(root,None)

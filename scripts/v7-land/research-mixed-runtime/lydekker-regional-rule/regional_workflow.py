@@ -51,7 +51,7 @@ def buffered_bounds(bounds, distance_m):
 
 def research(row_spec, run_spec, grid, bounds, line_record, compiled, snapshot,
              reports, mainland_roots, mixed_claims, run_pair, anchors, *,
-             line_pin, max_satellite_cells, max_gap_m, tie_m=1e-5, pending_claims=(), anchor_source=None):
+             line_pin, max_satellite_cells, max_gap_m, pending_claims, tie_m=1e-5, anchor_source=None):
     """Compose validated inputs; return only generation-scoped proposals."""
     _require(isinstance(grid,dict) and type(grid.get('width')) is int and
              grid['width']>1 and grid.get('west') == -180 and
@@ -74,14 +74,19 @@ def research(row_spec, run_spec, grid, bounds, line_record, compiled, snapshot,
                                               buffered_initial['proposals'],max_satellite_cells=max_satellite_cells)
         anchors=discovered['anchors']
         anchor_statistics=discovered['statistics']
-    # Outside-window source anchors may compete but must never be returned as
-    # regional changes. Use only independently established buffered targets.
+    # Every independently classified outside-window competitor must be visible
+    # to the nearest-land diagnostic, not only named anchors. These proposals
+    # are context only and are removed from the regional result below.
     external_anchors=set(anchors)-set(region)
     _require(external_anchors.issubset(buffer), 'anchor outside competitor buffer')
-    initial['proposals'].update({r:buffered_initial['proposals'][r] for r in external_anchors
-                                 if r in buffered_initial['proposals']})
+    initial['proposals'].update({r:p for r,p in buffered_initial['proposals'].items()
+                                 if r not in region})
     initial['buffer_anchor_claims']={r:buffered_initial['replayed_claims'][r] for r in external_anchors
                                      if r in buffered_initial['replayed_claims']}
+    # Preserve known nonregional continent codes for proximity conflicts.
+    # Pending roots remain deliberately unknown despite historical claims.
+    initial['competitor_targets']={r:claims[0]['code'] for r,claims in buffered_initial['replayed_claims'].items()
+                                   if r not in buffered_initial['pending_source_claims']}
     runs=collect_runs(row_spec,run_spec,grid,{r:v['total'] for r,v in buffer.items()})
     components=dict(buffer); components.update(region)
     result=apply_satellites(initial,components,runs,anchors,run_pair,
@@ -91,6 +96,14 @@ def research(row_spec, run_spec, grid, bounds, line_record, compiled, snapshot,
     if boo_root is not None:
         _require(result['proposals'].get(boo_root,{}).get('code')==22 and boo_root not in result['review'],
                  'Boo result conflicts with requested Oceania side')
+    # Keep evidence for outside competitors involved in the diagnostic, not
+    # as selected regional decisions but as audit context for each conflict.
+    used_external={p for entry in result['nearest_unanchored'].values()
+                   for p in entry['roots_current_generation_only'] if p not in region}
+    result['external_competitor_context']={r:{
+        'target':initial['proposals'].get(r,{}).get('code',initial['competitor_targets'].get(r)),
+        'claims':buffered_initial['replayed_claims'].get(r,[]),
+        'review':buffered_initial['review'].get(r)} for r in used_external}
     result['proposals']={r:p for r,p in result['proposals'].items() if r in region}
     result['anchor_discovery']=anchor_statistics
     result['anchor_source']={k:anchor_source[k] for k in ('source_id','source_version','sha256','country')} if anchor_source else None

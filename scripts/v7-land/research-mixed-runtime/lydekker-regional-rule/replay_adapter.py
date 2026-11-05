@@ -43,7 +43,8 @@ def resolve_with_mixed_replay(components, compiled, snapshot, reports, mainland_
     candidates={root: summary for root,summary in components.items() if root not in other}
     result=resolve(candidates, selected, protected, set(pending))
     for root in other:
-        result['review'][root]='existing_other_continent'
+        result['review'][root]=('source_group_pending_review' if root in pending
+                                else 'existing_other_continent')
     result['replayed_claims']={root:claims for root,claims in replay.items() if root in components}
     result['pending_source_claims']={root:claims for root,claims in pending.items() if root in components}
     return result
