@@ -37,6 +37,14 @@ The selected historical physical land source itself is not recoverable from thes
 
 The raw OSM XML responses are in R2 and read-back SHA-256 verified: `sources/osm/anapa/anapa-mouth-20261105-26ae194b3234.osm` = `26ae194b32349dcca0c0c6f908cf7f9ad03cedcba06c933a921b4a35541f3b91`; `sources/osm/anapa/shingari-mouth-20261105-66c3c6a36802.osm` = `66c3c6a36802cf08e70d65c8119c285bf5f88c90b4c8e3320e0c96e352779515`. These small bounding-box extracts are research-only and © OpenStreetMap contributors, ODbL; feature timestamps are last-edit timestamps, not independently established survey dates.
 
+### Anapa inland drainage screen
+
+Three further OSM map API extracts, retrieved 2026-11-05, cover bboxes 37.32,44.875,37.36,44.900; 37.32,44.850,37.36,44.875; and 37.33,44.825,37.37,44.850 (west,south,east,north). Combined with the two coastal extracts above, `anapa_ridge_stream_screen.py` found 14 distinct complete OSM way/version pairs tagged river, stream, canal, ditch or drain and zero coordinate-linear intersections with the selected first 21 vertices or the author's final 65 vertices. This excludes polygons, so it does not negate the mapped Anapka polygon crossing documented above. These small boxes do not cover the complete routes or their headwaters; absence of a mapped way crossing is neither independent field evidence nor proof of a divide or safe join.
+
+A [municipal geography description](https://gorod-anapa.ru/page/index/107) locates Anapa at the transition between lowland and the mountainous Abrau Peninsula. The named-drainage references above establish Anapka and Shingar as distinct coastal systems but do not supply a georeferenced continuous headwater divide. A Stanford catalog entry for sheet L-37-111 was found, but access returned HTTP 403; no access restriction was bypassed. No source-supported complete replacement or defensible land-cell impact is established, so the selected line remains unchanged.
+
+The three new XML responses are archived together at R2 `sources/osm/anapa/ridge-extracts-20261105-6373fa267bda.zip`, SHA-256 `6373fa267bda3e3fb9c13f60f79814040339cf46e6df7afc87b0b3f5f647faad`, read-back verified. Individual north/middle/south SHA-256 hashes are respectively `6988a47d1f77f8463a00fcdcb4748d9234ab3069d5ec1efe5bf7186fbc1a4d57`, `a39a7cdc5d25760bde9621b35fbafd0b7ac1bbab24f87a0f351ea41a93aaadad`, and `ed9038dc9d914464cc12a943dd905e59505be52476fbd824d13360ad62a432f3`. © OpenStreetMap contributors, ODbL; these are research-only extracts.
+
 ## Concrete leads and decisions
 
 * **Western join:** The extended Abin alternative is geometrically constructible but relies on model-dependent joins and shared OSM seed assumptions. In the historical draft-93/V7 snapshot, one 113-center hypothesis contained 70 Asia-to-Europe and 38 Europe-to-Asia labels plus five ambiguous; this is an impact illustration, not a current mismatch count or approved change. Independent drainage and an accurately controlled local map are needed.
