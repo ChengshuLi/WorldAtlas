@@ -53,7 +53,7 @@ for i in unmatched:
     pt = Point(points[i]); edge = source_shapes[int(tree.nearest(pt))]
     closest = nearest_points(pt, edge)[1]
     metres = geod.inv(pt.x, pt.y, closest.x, closest.y)[2]
-    records.append({'index':i,'lon':pt.x,'lat':pt.y,'nearest_edge_wgs84_m':metres,
+    records.append({'index':i,'lon':pt.x,'lat':pt.y,'nearest_coordinate':[closest.x,closest.y],'nearest_edge_wgs84_m':metres,
                     'nearest_edge_angular_degrees': pt.distance(closest)})
 with open(args.output,'x',encoding='utf-8') as f:
     json.dump({'unmatched':len(records),'records':records},f,indent=2)
