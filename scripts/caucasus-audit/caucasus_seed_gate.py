@@ -20,6 +20,12 @@ SOURCE_PINS = {
     ('trubetskoy-europe-asia-boundary', 'commit-7aa03ec54a262e8e97e8273f60621c530ec4e998'):
         'c9d56b1291522573fbb8b0baa1a39cecfd192eda8f5e51650b24f562d13688e6',
 }
+SOURCE_LOCATIONS = {
+    ('hydrosheds-hydrobasins-europe-level12-standard', 'v1c-21797d53e079'):
+        ('worldatlas', 'sources/hydrosheds/hydrobasins/standard/europe/level-12/v1c/hybas_eu_lev12_v1c-21797d53e079.zip', 73934860),
+    ('trubetskoy-europe-asia-boundary', 'commit-7aa03ec54a262e8e97e8273f60621c530ec4e998'):
+        ('worldatlas', 'sources/trubetskoy/7aa03ec54a262e8e97e8273f60621c530ec4e998/asia_europe_border.geojson', 623503),
+}
 
 
 def digest(path):
@@ -52,7 +58,9 @@ def check(request_path, recipe, recipe_sha, hydro, author):
     refs = boundary['provenance']['source_refs']
     refset = {(r['source_id'], r['version']) for r in refs}
     for key, expected in SOURCE_PINS.items():
-        if key not in refset or key not in catalog or catalog[key].get('sha256') != expected:
+        source = catalog.get(key, {})
+        location = (source.get('r2_bucket'), source.get('r2_key'), source.get('size_bytes'))
+        if key not in refset or source.get('sha256') != expected or location != SOURCE_LOCATIONS[key]:
             raise ValueError('boundary source reference or source pin missing')
     recipe_sha_before = digest(recipe)
     if recipe_sha_before != recipe_sha:
