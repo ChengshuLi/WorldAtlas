@@ -93,3 +93,10 @@ The tested scope is `[51.3, 46.65, 52.2, 47.24]` (west, south, east, north), ext
 The new **research candidate** is available in R2 at `research/ural-delta-divider-20261105/draft82/`: `rows.u32le.gz`, `runs.u32le.gz`, `config.json`, `divider.json`, and `report.json`. All five objects passed remote readback and SHA-256 checks. Decompressed output row/run SHA-256 values are `da78a3772af41e6cd7c2cbfc9f76961c40caf81cf2c02667772a3106c29e2b72` and `c5f17373eb91b869c9ad417ade6774815d32d85cfd9ed1a06f78b199e4c7623d`. Full input and archive pins, validation counts, and limitations are in Neon under `delta_divider_applied_draft82_20261105`.
 
 Draft-82 is the latest verified candidate supplied to this audit, not proof that no newer concurrent candidate exists. Re-run the rule against the coordinator's current pinned candidate before integration; do not overwrite a concurrent build. The scope and side convention are explicit and do not establish correctness outside that scope. The northern mountain and spring connector geometry was not modified.
+
+
+## Spring monument coordinate cross-check
+
+The [Wikipedia article on the marked Ural spring](https://ru.wikipedia.org/wiki/%D0%98%D1%81%D1%82%D0%BE%D0%BA_%D1%80%D0%B5%D0%BA%D0%B8_%D0%A3%D1%80%D0%B0%D0%BB) gives a coordinate rounded to whole arcseconds. That point is approximately 6 m from OSM's Europe–Asia stele node 6181575286 and approximately 46 m from mapped unnamed stream way 529551223, which joins the named Ural at node 5143821457. It is approximately 1.09 km from the selected named-Ural starting node. The coordinate and mapped western tributary are consistent with Chibilyov's description of the marked spring feeding a western tributary, separate from the principal headwater.
+
+This is a geographic cross-check, not a surveyed identification: Wikipedia and OSM may share provenance, the coordinate is rounded, the mapped stream does not touch it, and the principal marsh is not independently located. It does not establish the precise mountain-to-headwater connection. The archived source HTML, SHA-256, calculations, OSM IDs and caveats are recorded in Neon under `spring_monument_crosswalk_20261105`.
