@@ -4,16 +4,7 @@ import numpy as np
 from selection import need
 
 def nearest_side(lon,lat,coords):
- # Longitude/latitude plane used for this local comparison, not a geodesic rule.
- best=float('inf'); signs=set();terminal=False
- for i,((ax,ay),(bx,by)) in enumerate(zip(coords,coords[1:])):
-  dx,dy=bx-ax,by-ay;ll=dx*dx+dy*dy
-  if not ll:continue
-  t=max(0.0,min(1.0,((lon-ax)*dx+(lat-ay)*dy)/ll)); ex=lon-(ax+t*dx);ey=lat-(ay+t*dy);d=ex*ex+ey*ey;cross=dx*(lat-ay)-dy*(lon-ax);sign=1 if cross>1e-15 else -1 if cross< -1e-15 else 0
-  at_terminal=(i==0 and t==0.0) or (i==len(coords)-2 and t==1.0)
-  if d<best-1e-16:best=d;signs={sign};terminal=at_terminal
-  elif abs(d-best)<=1e-16:signs.add(sign);terminal=terminal or at_terminal
- return (next(iter(signs)) if len(signs)==1 and 0 not in signs and not terminal else 0),math.sqrt(best)
+ raise RuntimeError('planar nearest-side method retired; a reviewed WGS84 replacement is required')
 
 class TripleRows:
  """Read checked uint32 triple rows with bounded per-row memory."""
@@ -123,3 +114,4 @@ def select_witnesses(witnesses, xy, eligible, line, inside_code, outside_code):
     positive = inside_code if next(iter(signs[True])) == 1 else outside_code
     negative = outside_code if positive == inside_code else inside_code
     return seeds, checks, (positive, negative)
+

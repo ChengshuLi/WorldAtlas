@@ -117,6 +117,7 @@ def resolve_fragments(groups,cuts,line,west,north,step,width,height,eligible,max
   need(touched,'disconnected fragment does not touch source cut');need(len(signs)==1,'fragment spans conflicting line sides');result[group]=side_codes[0] if next(iter(signs))>0 else side_codes[1]
  return result
 def main():
+ raise RuntimeError('planar nearest-side method retired; a reviewed WGS84 replacement is required')
  out=ROOT/'panama-direct-split-fresh-output-20261104';need(not out.exists(),'output exists')
  for p,h in PINS.items():need(sha(ROOT/p)==h,'input hash mismatch '+p)
  snap=json.loads((ROOT/'actual-neon-boundary-export-20261104/v6/snapshot.json').read_bytes());w=json.loads((ROOT/'fresh-witness-output-20261104/resolution.json').read_bytes());b=[x for x in snap['mainland_boundaries'] if x['boundary_id']=='panama_colombia_osm_admin_boundary' and x['execution_status']=='selected_for_research'];need(len(b)==1 and b[0]['geometry_sha256']=='cfbfbb514d0f6efff1c0c803ae5f0f0835225015568747bb8b1164f3bb6d0e17','selected boundary')
@@ -160,3 +161,4 @@ def main():
  report={'schema':'panama-direct-source-split-prototype-v1','status':'unselected-research','boundary_sha256':b[0]['geometry_sha256'],'snapshot_sha256':PINS['actual-neon-boundary-export-20261104/v6/snapshot.json'],'inputs_sha256':PINS,'component_id_current_generation_only':root,'runtime':{'gdal':gdal.VersionInfo('RELEASE_NAME'),'numpy':np.__version__},'graph':result,'witnesses':{'eligible_cells_by_code':{str(k):len(v) for k,v in witness_checks.items()},'unambiguous_orientation_by_code':{str(k):v for k,v in witness_oriented.items()}},'residual_cells_assigned_by_experimental_side':residual,'direct_rows_sha256':sha(out/'direct-rows.u32le'),'direct_spans_sha256':sha(out/'direct-spans.u32le'),'limitations':['Land-to-land cut-touching, internally consistent nearest-segment side is experimental, not a proven general partition.','Boundary-center and finite-endpoint ties must fail closed; no historical V7 input or closure is used.','External guard, independent input/coverage audit and whole-mainland comparison required.']}
  (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'spans':count,'residual':residual,'cells':result['selected_cells']}))
 if __name__=='__main__':main()
+

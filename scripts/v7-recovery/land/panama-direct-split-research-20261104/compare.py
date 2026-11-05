@@ -27,17 +27,10 @@ def prefix(end,codes,pos,target):
 def count_match(end,codes,start,stop,target):
  return int((prefix(end,codes,stop,target)-prefix(end,codes,start,target)).sum())
 def nearest_side(lon,lat,coords):
- # Longitude/latitude plane used for this local comparison, not a geodesic rule.
- best=float('inf'); signs=set();terminal=False
- for i,((ax,ay),(bx,by)) in enumerate(zip(coords,coords[1:])):
-  dx,dy=bx-ax,by-ay;ll=dx*dx+dy*dy
-  if not ll:continue
-  t=max(0.0,min(1.0,((lon-ax)*dx+(lat-ay)*dy)/ll)); ex=lon-(ax+t*dx);ey=lat-(ay+t*dy);d=ex*ex+ey*ey;cross=dx*(lat-ay)-dy*(lon-ax);sign=1 if cross>1e-15 else -1 if cross< -1e-15 else 0
-  at_terminal=(i==0 and t==0.0) or (i==len(coords)-2 and t==1.0)
-  if d<best-1e-16:best=d;signs={sign};terminal=at_terminal
-  elif abs(d-best)<=1e-16:signs.add(sign);terminal=terminal or at_terminal
- return (next(iter(signs)) if len(signs)==1 and 0 not in signs and not terminal else 0),math.sqrt(best)
+ raise RuntimeError('planar nearest-side method retired; a reviewed WGS84 replacement is required')
+
 def main():
+ raise RuntimeError('planar nearest-side method retired; a reviewed WGS84 replacement is required')
  need(not OUT.exists(),'output exists')
  for path,h in P.values():need(sha(ROOT/path)==h,'pin '+path)
  graph=read(P['graph_report'][0]);w=read(P['witness'][0]);b=read(P['stage2'][0]);src=read(P['source'][0]);sweep=read(P['sweep'][0]);need(sweep['status']=='passed-local-draft-only' and sweep['partition_report_sha256']==P['graph_report'][1],'sweep lineage')
@@ -74,3 +67,4 @@ def main():
  with open(OUT,'x') as f:json.dump(result,f,indent=2);f.write('\n')
  print(json.dumps(counts))
 if __name__=='__main__':main()
+

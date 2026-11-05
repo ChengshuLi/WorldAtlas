@@ -7,11 +7,10 @@ import run_direct, watch_direct
 class WatchTest(unittest.TestCase):
  def test_direct_run_requires_guardian(self):
   with self.assertRaisesRegex(ValueError,'monitored guardian'):run_direct.run('/not-a-request','/not-an-output')
- def test_watchdog_rejects_low_memory_before_launch(self):
+ def test_watchdog_rejects_retired_driver_before_launch(self):
   with tempfile.TemporaryDirectory() as t:
    root=Path(t);cfg=root/'request';cfg.write_text(json.dumps({'limits':{'minimum_memory_kib':1887437,'minimum_free_bytes':2*1024**3,'max_rss_kib':524288}}))
-   with patch.object(watch_direct,'memory_available',return_value=1887436):
-    with self.assertRaisesRegex(ValueError,'resource floor before launch'):watch_direct.run(cfg,root/'out',524288)
+   with self.assertRaisesRegex(RuntimeError,'planar nearest-side method retired'):watch_direct.run(cfg,root/'out',524288)
    self.assertFalse((root/'out').exists())
  def test_guardian_binds_process_group(self):
   with tempfile.TemporaryDirectory() as t:
@@ -28,3 +27,4 @@ class WatchTest(unittest.TestCase):
     os.close(cw)
     if proc.poll() is None:os.killpg(proc.pid,signal.SIGKILL);proc.wait()
 if __name__=='__main__':unittest.main()
+

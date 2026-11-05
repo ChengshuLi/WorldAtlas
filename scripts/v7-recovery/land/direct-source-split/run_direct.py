@@ -54,7 +54,9 @@ def strict_json(raw):
 
 
 def run(request, output):
-    require_guardian();started=time.monotonic(); request=Path(request).resolve(strict=True); out=Path(output).resolve()
+    require_guardian()
+    raise RuntimeError('planar nearest-side method retired; a reviewed WGS84 replacement is required')
+    started=time.monotonic(); request=Path(request).resolve(strict=True); out=Path(output).resolve()
     raw=bounded(request,1<<20);cfg=strict_json(raw)
     need(set(cfg)=={'schema','grid','inputs','rule_id','boundary_id','limits'} and cfg['schema']=='direct-source-split-request-v1','invalid request')
     grid=cfg['grid']; need(set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int
@@ -165,3 +167,4 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('request');p.add_argument('output');a=p.parse_args()
     try:print(json.dumps(run(a.request,a.output)))
     except Exception as e:raise SystemExit('error: '+str(e))
+

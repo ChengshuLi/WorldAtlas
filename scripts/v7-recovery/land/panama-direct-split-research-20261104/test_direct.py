@@ -53,9 +53,11 @@ class DirectTests(unittest.TestCase):
    reject_terminal_near_land([[1.5,1.5],[5,5]],6,6,eligible)
   with self.assertRaisesRegex(ValueError,'endpoint too close'):
    reject_terminal_near_land([[0,0],[2.5,1.5]],6,6,eligible)
+ @unittest.skip('retired planar nearest-side method; preserve historical synthetic fixture')
  def test_fragment_codes_are_caller_supplied(self):
   cuts=rasterize_barriers([[(2,0),(2,4)]],5,4)
   self.assertEqual(resolve_fragments({1:[(1,1)],2:[(2,1)]},cuts,[[2,4],[2,0]],0,4,1,5,4,lambda x,y:True,side_codes=(31,32)),{1:32,2:31})
+ @unittest.skip('retired planar nearest-side method; preserve historical synthetic fixture')
  def test_fragment_sides_and_disconnected_fail(self):
   cuts=rasterize_barriers([[(2,0),(2,4)]],5,4);line=[[2,4],[2,0]]
   self.assertEqual(resolve_fragments({7:[(1,1)],8:[(2,1)]},cuts,line,0,4,1,5,4,lambda x,y:True),{7:21,8:20})
@@ -66,23 +68,52 @@ class DirectTests(unittest.TestCase):
  def test_fragment_resource_cap(self):
   cuts=rasterize_barriers([[(2,0),(2,4)]],5,4)
   with self.assertRaisesRegex(ValueError,'resource cap'):resolve_fragments({1:[(1,0),(1,1)]},cuts,[[2,4],[2,0]],0,4,1,5,4,lambda x,y:True,max_cells=1)
+ @unittest.skip('retired planar nearest-side method; preserve historical synthetic fixture')
  def test_fragment_endpoint_is_unresolved(self):
   from partition_core import CutEdges
   cuts=CutEdges();cuts.add_h(0,1)
   with self.assertRaisesRegex(ValueError,'ambiguous residual side'):resolve_fragments({1:[(1,0)]},cuts,[[2,3],[2,1]],0,4,1,5,4,lambda x,y:True)
+ @unittest.skip('retired planar nearest-side method; preserve historical synthetic fixture')
  def test_horizontal_line_orients_both_sides(self):
   cuts=rasterize_barriers([[(0,2),(4,2)]],5,4)
   self.assertEqual(resolve_fragments({1:[(1,1)],2:[(1,2)]},cuts,[[0,2],[4,2]],0,4,1,5,4,lambda x,y:True),{1:20,2:21})
+ @unittest.skip('retired planar nearest-side method; preserve historical synthetic fixture')
  def test_bent_line(self):
   from partition_core import CutEdges
   cuts=CutEdges();cuts.add_v(2,3)
   result=resolve_fragments({1:[(3,2)]},cuts,[[1,4],[1,1],[4,1]],0,4,1,5,5,lambda x,y:True)
   self.assertEqual(result[1],20)
+ @unittest.skip('retired planar nearest-side method; preserve historical synthetic fixture')
  def test_fragment_opposed_nearest_segments_unresolved(self):
   from partition_core import CutEdges
   cuts=CutEdges();cuts.add_h(0,0)
   with self.assertRaisesRegex(ValueError,'ambiguous residual side'):resolve_fragments({1:[(0,0)]},cuts,[[-1,-1],[-1,1],[3,2],[1,-1],[1,1]],-.5,.5,1,5,5,lambda x,y:True)
+ @unittest.skip('retired planar nearest-side method; preserve historical synthetic fixture')
  def test_cut_center_and_endpoint_fail_closed(self):
   line=[[0,0],[0,10]]
   self.assertEqual(nearest_side(0,5,line)[0],0);self.assertEqual(nearest_side(1,11,line)[0],0)
+ def test_retired_entry_and_nearest_fail_before_output(self):
+  import direct
+  with self.assertRaisesRegex(RuntimeError,'planar nearest-side method retired'):nearest_side(0,0,[[0,0],[1,1]])
+  with self.assertRaisesRegex(RuntimeError,'planar nearest-side method retired'):direct.main()
+ def test_window_reader_dependencies_remain_importable(self):
+  import direct, window_reader_check as window
+  self.assertIs(window.TripleRows,direct.TripleRows)
+  self.assertIs(window.partition,direct.partition)
+  self.assertIs(window.rasterize_barriers,direct.rasterize_barriers)
+  with tempfile.TemporaryDirectory() as td:
+   p=Path(td);rows=p/'rows';spans=p/'spans'
+   np.array([0,1,2,3,4],dtype='<u4').tofile(rows)
+   np.array([[1,3,7]]*4,dtype='<u4').tofile(spans)
+   stream=window.TripleRows(rows,spans,4);mapped=np.memmap(spans,dtype='<u4',mode='r').reshape(-1,3)
+   def streamed(y):return [(int(a),int(b)) for a,b,k in stream.row(y) if k==7]
+   def mapped_row(y):
+    a,b=map(int,stream.offsets[y:y+2]);return [(int(x),int(z)) for x,z,k in mapped[a:b] if k==7]
+   cuts=window.rasterize_barriers([[(2,0),(2,4)]],5,4);seeds={20:(1,1),21:(2,1)}
+   one=window.partition(streamed,5,4,cuts,seeds,p/'stream');two=window.partition(mapped_row,5,4,cuts,seeds,p/'mapped')
+   self.assertEqual(one,two)
+   for name in ('nodes.u32le','partition-rows.u32le','partition-spans.u32le','residual-rows.u32le','residual-spans.u32le'):
+    self.assertEqual((p/'stream'/name).read_bytes(),(p/'mapped'/name).read_bytes())
+   stream.close()
 if __name__=='__main__':unittest.main()
+

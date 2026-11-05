@@ -47,6 +47,7 @@ def exited_unreaped(pid):
  return os.waitid(os.P_PID,pid,os.WEXITED|os.WNOHANG|os.WNOWAIT) is not None
 
 def run(config,output,max_tree_rss_kib,*,interval=.05):
+ raise RuntimeError('planar nearest-side method retired; a reviewed WGS84 replacement is required')
  config,output=map(lambda x:Path(x).resolve(),(config,output));driver=Path(__file__).with_name('run_direct.py').resolve();watcher=Path(__file__).resolve();guardian=Path(__file__).with_name('guardian.py').resolve()
  with open(config,'rb') as f:
   need(os.fstat(f.fileno()).st_size<=1048576,'config too large');raw=f.read(1048577)
@@ -140,3 +141,4 @@ if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('config');p.add_argument('output');p.add_argument('maximum_process_group_rss_kib',type=int);a=p.parse_args()
  try:print(json.dumps(run(a.config,a.output,a.maximum_process_group_rss_kib),sort_keys=True))
  except Exception as e:print('error: '+str(e),file=sys.stderr);raise SystemExit(1)
+

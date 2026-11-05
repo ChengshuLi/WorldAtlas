@@ -47,9 +47,8 @@ class DirectCoreTest(unittest.TestCase):
    p.write_bytes(b'1234');self.assertEqual(run_direct.bounded(p,4),b'1234')
  def test_selected_and_dynamic_codes(self):
   s,w,p,g=self.fixture();result=self.select(s,w,p,g);self.assertEqual((result['inside_code'],result['outside_code'],result['component']),(31,32,7))
-  seeds,checks,codes=select_witnesses(result['witnesses'],lambda lon,lat:(int(lon+2),int(2-lat)),lambda x,y:True,result['line'],31,32)
-  self.assertEqual(seeds,{31:(1,2),32:(3,2)});self.assertEqual(codes,(31,32))
-  reverse=list(reversed(result['line']));self.assertEqual(select_witnesses(result['witnesses'],lambda x,y:(int(x+2),int(2-y)),lambda x,y:True,reverse,31,32)[2],(32,31))
+  with self.assertRaisesRegex(RuntimeError,'planar nearest-side method retired'):
+   select_witnesses(result['witnesses'],lambda lon,lat:(int(lon+2),int(2-lat)),lambda x,y:True,result['line'],31,32)
  def test_line_hash_lineage_and_review_fail_closed(self):
   s,w,p,g=self.fixture()
   for mutate in (lambda x:x['mainland_boundaries'][0]['geometry']['coordinates'][0].__setitem__(0,1),lambda x:x['mainland_component_rules'][0].__setitem__('execution_status','draft'),lambda x:x['seed_regions'][0]['segments'][0].__setitem__('end',1)):
@@ -64,8 +63,8 @@ class DirectCoreTest(unittest.TestCase):
   w=copy.deepcopy(w);w['input_sha256']['component_runs']='x'*64
   with self.assertRaisesRegex(ValueError,'lineage'):self.select(s,w,p,g)
  def test_ambiguity_and_cut_endpoints_fail_closed(self):
-  with self.assertRaisesRegex(ValueError,'conflicting witness orientation'):
-   select_witnesses([{'lon':-1,'lat':0,'inside':True},{'lon':-0.5,'lat':0,'inside':False}],lambda x,y:(int(x+2),1),lambda x,y:True,[[0,-2],[0,2]],31,32)
+  with self.assertRaisesRegex(RuntimeError,'planar nearest-side method retired'):
+   select_witnesses([{'lon':-1,'lat':0,'inside':True},{'lon':1,'lat':0,'inside':False}],lambda x,y:(int(x+2),1),lambda x,y:True,[[0,-2],[0,2]],31,32)
   with self.assertRaisesRegex(ValueError,'cell center'):reject_center_hits([[1.5,0],[1.5,4]],4,4)
   with self.assertRaisesRegex(ValueError,'endpoint too close'):reject_terminal_near_land([[1.5,1.5],[4,4]],4,4,lambda x,y:(x,y)==(1,1))
  def test_boundary_raster_work_limit_and_guard(self):
@@ -130,37 +129,22 @@ class DirectCoreTest(unittest.TestCase):
     self.assertEqual({p for p,k in labelled.items() if k==31},components[0]);self.assertEqual({p for p,k in labelled.items() if k==32},components[1]);self.assertEqual(set(residual),land-components[0]-components[1])
  def test_residual_cannot_guess_disconnected_or_endpoint(self):
   cuts=rasterize_barriers([[(2,0),(2,4)]],4,4)
-  with self.assertRaisesRegex(ValueError,'does not touch'):resolve_fragments({1:[(0,0)]},cuts,[[0,-2],[0,2]],-2,2,1,4,4,lambda x,y:True,side_codes=(31,32))
+  with self.assertRaisesRegex(RuntimeError,'planar nearest-side method retired'):
+   resolve_fragments({1:[(0,0)]},cuts,[[0,-2],[0,2]],-2,2,1,4,4,lambda x,y:True,side_codes=(31,32))
 
 class DriverTest(unittest.TestCase):
  def test_strict_json_rejects_duplicate_and_nonfinite(self):
   import run_direct
   with self.assertRaisesRegex(ValueError,'duplicate JSON key'):run_direct.strict_json('{"a":1,"a":2}')
   with self.assertRaisesRegex(ValueError,'nonfinite JSON number'):run_direct.strict_json('{"a":NaN}')
- def test_synthetic_fresh_build_and_tamper_rejection(self):
-  import builtins, io
+ def test_retired_runner_fails_before_output(self):
   from unittest.mock import patch
   import run_direct
   with tempfile.TemporaryDirectory() as td:
-   root=Path(td);inp=root/'input';inp.mkdir()
-   rows=inp/'rows';spans=inp/'spans';np.array([0,0,1,2,2],dtype='<u4').tofile(rows);np.array([[3,5,7]]*2,dtype='<u4').tofile(spans)
-   sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-   grid={'width':8,'height':4,'west':-180,'north':90,'step':45}
-   line={'type':'LineString','coordinates':[[0.0,90.0],[0.0,-90.0]]};lh=hashlib.sha256(json.dumps(line,sort_keys=True,separators=(',',':')).encode()).hexdigest()
-   snap={'source':'neon-export','decision_revision':{'id':'d','status':'draft','entity_revision':'e'},'entity_revision':{'id':'e','status':'draft'},'mainland_component_rules':[{'rule_id':'r','region_id':'z','group_id':'g','inside_entity_id':1,'outside_entity_id':2,'execution_status':'selected_for_research','decision_revision':'d'}], 'seed_regions':[{'region_id':'z','execution_status':'selected_for_research','decision_revision':'d','segments':[{'kind':'boundary','id':'b','start':0,'end':2,'reverse':False}],'witnesses':[{'lon':-22.5,'lat':22.5,'inside':True},{'lon':22.5,'lat':22.5,'inside':False}]}], 'mainland_boundaries':[{'boundary_id':'b','execution_status':'selected_for_research','decision_revision':'d','method':'stored_linestring_v1','coordinate_reference':'OGC:CRS84','geometry_hash_method':'binary64-sorted-compact-geojson-v1','geometry_sha256':lh,'geometry':line}], 'category_bindings':[{'entity_id':1,'physical_class':'land','code':31},{'entity_id':2,'physical_class':'land','code':32}]}
-   add_synthetic_catalog(snap);sp=inp/'snapshot';sp.write_text(json.dumps(snap));witness={'schema':'mainland-witness-resolution-v1','status':'selected-research-identity-claims-not-mainland-proof','snapshot_sha256':sha(sp),'decision_revision':'d','entity_revision':'e','grid':grid,'input_sha256':{'component_rows':sha(rows),'component_runs':sha(spans)},'groups':[{'group_id':'g','role':'mainland','component_id_current_generation_only':7,'target_entity_ids':[1,2]}]};wp=inp/'witness';wp.write_text(json.dumps(witness))
-   pins={k:{'path':str(v),'sha256':sha(v)} for k,v in {'snapshot':sp,'witness':wp,'component_rows':rows,'component_runs':spans}.items()}
-   cfg={'schema':'direct-source-split-request-v1','grid':grid,'inputs':pins,'rule_id':'r','boundary_id':'b','limits':{'minimum_memory_kib':1887437,'minimum_free_bytes':2*1024**3,'max_rss_kib':870400,'max_nodes':100,'max_raster_work':10000,'max_residual_cells':10,'max_residual_segment_tests':100}};request=inp/'request';request.write_text(json.dumps(cfg))
-   original_open=builtins.open
-   def fake_open(path,*args,**kwargs):
-    if str(path)=='/proc/meminfo':return io.StringIO('MemAvailable: 4000000 kB\n')
-    return original_open(path,*args,**kwargs)
-   with patch('builtins.open',side_effect=fake_open), patch.object(run_direct,'require_guardian'):
-    result=run_direct.run(request,root/'out')
-    self.assertEqual(result['selected_cells'],4);self.assertEqual(result['residual_cells'],0);self.assertFalse(result['publishable'])
-    self.assertEqual(np.fromfile(root/'out/direct-spans.u32le',dtype='<u4').reshape(-1,3).tolist(),[[3,4,31],[4,5,32]]*2)
-    spans.write_bytes(b'tampered')
-    with self.assertRaisesRegex(ValueError,'input pin mismatch'):run_direct.run(request,root/'bad')
-    self.assertFalse((root/'bad').exists())
+   out=Path(td)/'out'
+   with patch.object(run_direct,'require_guardian'):
+    with self.assertRaisesRegex(RuntimeError,'planar nearest-side method retired'):run_direct.run('/not-read',out)
+   self.assertFalse(out.exists())
 
 if __name__ == '__main__':unittest.main()
+
