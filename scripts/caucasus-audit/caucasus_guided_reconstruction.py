@@ -86,7 +86,8 @@ changed_edges=0; tested_centers=0; possible=set()
 for i in range(len(candidate)-1):
     if candidate[i]==selected_coords[i] and candidate[i+1]==selected_coords[i+1]: continue
     changed_edges+=1
-    hull=MultiPoint([selected_coords[i],selected_coords[i+1],candidate[i],candidate[i+1]]).convex_hull
+    # Tiny angular envelope is numerical padding, not a reported distance.
+    hull=MultiPoint([selected_coords[i],selected_coords[i+1],candidate[i],candidate[i+1]]).convex_hull.buffer(1e-10)
     minx,miny,maxx,maxy=hull.bounds
     c0=max(0,math.ceil((minx-west)/step-.5));c1=min(width-1,math.floor((maxx-west)/step-.5))
     r0=max(0,math.ceil((north-maxy)/step-.5));r1=min(height-1,math.floor((north-miny)/step-.5))
