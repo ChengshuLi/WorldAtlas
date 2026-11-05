@@ -42,7 +42,12 @@ def run_seed(config, request, request_sha256, producer_dir, producer_sha256,
     if digest(request) != request_sha256:
         raise ValueError('seed request pin mismatch')
     validate_direct_request(request)
-    cmd = [sys.executable, str(HERE / 'caucasus_seed_gate.py'),
+    # Isolated mode ignores PYTHONPATH and user site. Explicitly add only the
+    # pinned gate directory for its sibling imports; -I otherwise omits it.
+    bootstrap = ("import pathlib,runpy,sys; p=sys.argv.pop(1); "
+                 "sys.path.insert(0,str(pathlib.Path(p).resolve().parent)); "
+                 "runpy.run_path(p,run_name='__main__')")
+    cmd = [sys.executable, '-I', '-c', bootstrap, str(HERE / 'caucasus_seed_gate.py'),
            '--request', str(request), '--request-sha256', request_sha256,
            '--recipe', config['recipe']['path'], '--recipe-sha256', config['recipe']['sha256'],
            '--hydro', config['hydro']['path'], '--author', config['author']['path'],

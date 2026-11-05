@@ -105,7 +105,7 @@ def check(request_path, recipe, recipe_sha, hydro, author):
         directory = Path(directory)
         guide, output = directory / 'selected.json', directory / 'reconstructed.json'
         guide.write_text(json.dumps(boundary['geometry'], sort_keys=True, separators=(',', ':'), allow_nan=False))
-        command = [sys.executable, str(HERE / 'caucasus_source_assembly.py'), '--decisions', str(recipe),
+        command = [sys.executable, '-I', str(HERE / 'caucasus_source_assembly.py'), '--decisions', str(recipe),
                    '--decisions-sha256', recipe_sha, '--hydro-zip', str(hydro), '--author', str(author),
                    '--selected', str(guide), '--output', str(output)]
         p = subprocess.run(command, check=True, text=True, capture_output=True)
