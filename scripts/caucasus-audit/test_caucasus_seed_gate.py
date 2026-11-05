@@ -31,7 +31,7 @@ class SourceGateTest(unittest.TestCase):
         self.snapshot.write_text('{}')
         with patch.object(gate.subprocess, 'run') as run:
             with self.assertRaisesRegex(ValueError, 'input pin'):
-                gate.check(self.request, 'not-read', '0' * 64, 'not-read', '0' * 64, 'not-read', 'not-read')
+                gate.check(self.request, 'not-read', '0' * 64, 'not-read', 'not-read')
             run.assert_not_called()
 
     def test_missing_source_reference_rejected_before_assembly(self):
@@ -42,7 +42,7 @@ class SourceGateTest(unittest.TestCase):
         self.request.write_text(json.dumps(request))
         with patch.object(gate.subprocess, 'run') as run:
             with self.assertRaisesRegex(ValueError, 'source reference'):
-                gate.check(self.request, 'not-read', '0' * 64, 'not-read', '0' * 64, 'not-read', 'not-read')
+                gate.check(self.request, 'not-read', '0' * 64, 'not-read', 'not-read')
             run.assert_not_called()
 
     def test_recipe_must_be_in_selected_snapshot(self):
@@ -50,8 +50,20 @@ class SourceGateTest(unittest.TestCase):
         recipe.write_text('{}')
         with patch.object(gate.subprocess, 'run') as run:
             with self.assertRaisesRegex(ValueError, 'lacks pinned source assembly'):
-                gate.check(self.request, recipe, gate.digest(recipe), 'not-read', '0' * 64, 'not-read', 'not-read')
+                gate.check(self.request, recipe, gate.digest(recipe), 'not-read', 'not-read')
             run.assert_not_called()
+
+    def test_region_hash_requires_exact_joins_and_changes_with_geometry(self):
+        decision = {'segments': [{'kind': 'boundary', 'id': 'x', 'start': 0, 'end': 3, 'reverse': False},
+                                 {'kind': 'route', 'id': 'r', 'start': 0, 'end': 3, 'reverse': False}]}
+        records = {('boundary', 'x'): {'geometry': {'coordinates': [[0, 0], [1, 0], [1, 1]]}},
+                   ('route', 'r'): {'geometry': {'coordinates': [[1, 1], [0, 1], [0, 0]]}}}
+        original = gate.assembled_region_hash(decision, records)
+        records[('boundary', 'x')]['geometry']['coordinates'][1] = [1.000001, 0]
+        self.assertNotEqual(original, gate.assembled_region_hash(decision, records))
+        records[('route', 'r')]['geometry']['coordinates'][0] = [2, 1]
+        with self.assertRaisesRegex(ValueError, 'join'):
+            gate.assembled_region_hash(decision, records)
 
 
 if __name__ == '__main__':
