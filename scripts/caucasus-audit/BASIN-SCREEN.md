@@ -2,7 +2,7 @@
 
 `basin_screen.py` is a research-only comparison of a supplied WGS84 GeoJSON
 LineString with a supplied HydroBASINS shapefile. It samples the line in a
-WGS84 geodesic distances, constructs perpendicular offsets, identifies
+WGS84 geodesic distances along the original coordinate-linear source geometry, constructs perpendicular offsets, identifies
 the uniquely containing polygons, and follows `NEXT_DOWN` to a terminal
 polygon. Missing polygons, overlaps, broken chains and cycles are reported as
 unresolved. Provide a source window large enough to contain all offset points;
