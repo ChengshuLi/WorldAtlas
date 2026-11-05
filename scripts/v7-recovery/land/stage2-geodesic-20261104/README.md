@@ -1,11 +1,11 @@
 # Fresh stage-2 geodesic prototype
 
-Research prototype. It produces no map unless the source-producer freeze and
-selected Neon land-policy crosswalk are both explicitly enabled after review.
-The terminal-aware seed-producer freeze was independently reviewed, but its
-route and citation schema predates the final Neon export; its gate is closed. The selected-policy crosswalk is a provisional prototype awaiting real Neon
-schema alignment and independent review; its gate remains closed. Existing inputs and historical checkpoints
-are not accepted as seeds, hints or assignments.
+Research prototype, not an accepted or publishable map build. The current code
+enables the seed-producer and selected-policy crosswalk checks: the orchestrator
+requires the exact reviewed seed-source freeze and a matching selected policy.
+Those checks and hash pins do not authenticate a Neon export or establish that
+the selected geography and crosswalk have completed independent review. Existing
+inputs and historical checkpoints are not accepted as seeds, hints or assignments.
 
 The intended sequence, in one guarded process group, is:
 
@@ -38,5 +38,10 @@ Run synthetic tests with:
     OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /usr/bin/python3 -m unittest discover -q
 
 Do not run production or publish the prototype based on these tests. The
-terminal-aware closure integration and selected-policy crosswalk must be
-independently reviewed against real selected Neon data before enabling the build.
+terminal-aware closure integration and selected-policy crosswalk require
+independent review against the real selected Neon data before an accepted build.
+
+The checkout-level `test_repository_dependencies` verifies that the current
+core, seed, closure, rasterizer and component-builder sources exist and match
+their recorded code hashes. It checks code integrity, not source-data custody,
+policy selection, live Neon access or geographic correctness.
