@@ -40,3 +40,11 @@ A subsequent run also passed the actual gate and seed reports into `caucasus_sta
 On macOS the pinned run passed 1/1 in 13.547 seconds using `contracts.py` SHA-256 `ed2f78031508d8202358c9b9698f1446128855986d1c2ffcdb35a2f30a6d53d9`. Derived boundary SHA-256 `2f2f6c6777fe080fcbf13a526caad22b7b883fc982d3ff0492b91e082d6f06b6`; synthetic seed rows `adc99df5e2487cc4f9a6830b043eaab54f01346069eea91ada916eb5454f2c4f` and runs `452dd3675976f8d7a69cb834e519eb85f898b90fc7fce74094f59181e7993b3b`. Use the source environment variables above, ensure the pinned strict stage-2 contract is importable, and run `python -m unittest -v test_caucasus_v2_core_real_source`.
 
 The fresh outer orchestrator and real production closure are still not exercised, and this result does not establish geographic accuracy. No map was built and no Neon record was changed.
+
+## Fresh closure with historical route provenance (unpromoted scratch)
+
+`test_caucasus_v2_fresh_closure.py` runs the real Caucasus source gate, frozen direct producer and real checker on a synthetic 80×40 global grid, then validates its actual gate and seed reports using a scratch `contracts.py` with the fresh-closure change from `scripts/v7-land/research-mixed-runtime/direct-stage2-work-in-progress/work-in-progress.patch`. The scratch contract SHA-256 is `f703e5edcb0f67cc908aa0812e5b194b480ea2916c017464e51d1bfa0066c7f1`; it is not the active PR4 contract. The selected synthetic route deliberately records different historical physical, contract and checker pins than the new proof.
+
+The default historical-mode validator rejected the mismatch. An explicitly supplied `functools.partial` with `fresh_closure_proofs=True` passed; a forged fresh proof and a forged gate producer pin were rejected. The run passed 1/1 in 17.165 seconds. This tests the callback behavior only: the outer/core caller must authenticate the direct seed binding before selecting fresh mode. It does not exercise the outer runtime, production physical closure or real selected Neon data, and does not authorize enabling the unpromoted patch.
+
+The separate Panama/Caucasus combined fixture in PR4 `83fe2e8` covers both real source archives against a synthetic grid and the active historical-mode core; the two fixtures are complementary.
