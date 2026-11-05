@@ -4,6 +4,7 @@ import json
 import math
 import sys
 import xml.etree.ElementTree as ET
+from pyproj import Geod
 
 EXPECTED = 'c447f5d1e7da385c7ca13b3d119d2c1b260b29315974a6f9b3db08f9c4fe35c8'
 
@@ -30,6 +31,16 @@ def main(path):
                           'ele_tag_m': tags.get('ele'), 'pixel': [x, y],
                           'separation_from_estimated_symbol_pixels': math.hypot(x-symbol[0], y-symbol[1]),
                           'warning': 'Approximate frame fit and unverified feature identity; not a control.'}, sort_keys=True))
+    # Public tourism website coordinates; origin and datum are not documented.
+    website = (38.352240, 44.584890)
+    node = (38.3522706, 44.5847407)
+    x = 670.5 + (website[0] - 38.0) * 9391.5 / .5 - 5900
+    y = 902.9 + (44 + 40/60 - website[1]) * 8903.1 / (20/60) - 2150
+    print(json.dumps({'website': 'https://budetinteresno.info/holms/thab.htm',
+                      'lon': website[0], 'lat': website[1],
+                      'distance_to_osm_wgs84_m': Geod(ellps='WGS84').inv(*website, *node)[2],
+                      'pixel': [x, y], 'separation_from_estimated_symbol_pixels': math.hypot(x-1410, y-933),
+                      'warning': 'Website coordinates have unspecified source and datum; independence unproven.'}, sort_keys=True))
 
 
 if __name__ == '__main__':
