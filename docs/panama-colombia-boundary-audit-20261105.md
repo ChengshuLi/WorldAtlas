@@ -23,11 +23,8 @@ The two linked catalog entries are provider-original OSM API responses:
 Their catalog provenance records full R2 readback verification. This audit
 read the catalog, not the objects themselves. Both are classified as
 supporting membership evidence; neither contains the node coordinates needed
-to rebuild the line. No Panama coordinate source appeared in the source
-catalog. Capture and retain the actual used provider-original coordinates,
-record and verify their bytes and source/version in the catalog, and implement
-and test a deterministic extraction and joining step before claiming complete
-raw-source-to-line reproducibility. Do not infer historical coordinate versions
+to rebuild the line. These membership files do not by themselves reconstruct the line. The current
+coordinate bundle described below supplies the missing source coordinates. Do not infer historical coordinate versions
 from historical way membership. Exact V7 reconstruction is not required.
 
 ## Land assignment
@@ -50,12 +47,10 @@ experiment in `scripts/v7-recovery/land/panama-direct-split-research-20261104/di
 is explicitly retired at its entry point and is not the selected workflow.
 
 The present source-to-map chain therefore starts at a saved structured line,
-not yet at a complete, pinned set of raw OSM inputs. The remaining work is to
-capture the coordinate source, implement and validate its assembly, connect it
-to the selected-line workflow and run the actual selected export and seed
-against the current physical generation. A matching line hash alone does not
+not yet at a complete, pinned set of raw OSM inputs. The remaining work is to connect the verified assembler to the selected-line
+workflow and validate the handoff against the current physical generation. A matching line hash alone does not
 establish closure validity or end-to-end land assignment. No geography changed.
 
 ## Follow-up capture
 
-A subsequent capture of 33 current OSM way/full responses reconstructs the selected line exactly: 5,254 vertices and the canonical geometry hash above. The current way node memberships match the queried historical way versions, and both historical country relations contain all 33 ways. This is current coordinate evidence, not proof of historical node versions. The checked assembler and archive verifier are in `scripts/v7-land/mainland-seed-l2/`; five bounded tests passed. The locally prepared source archive has not yet been uploaded to R2 or linked in Neon. The verifier is not yet wired into the selected seed producer. No map rebuild was run.
+A subsequent capture of 33 current OSM way/full responses reconstructs the selected line exactly: 5,254 vertices and the canonical geometry hash above. The current way node memberships match the queried historical way versions, and both historical country relations contain all 33 ways. This is current coordinate evidence, not proof of historical node versions. The checked assembler and archive verifier are in `scripts/v7-land/mainland-seed-l2/`; five bounded tests passed. The archive is stored at `worldatlas/sources/osm/panama-colombia/way-full-20261105-04fe1adb295e.zip` (SHA-256 `04fe1adb295e93d78ee029b48351d2b0380d69ac631b47c909dffd538bbaf6c1`, 110,336 bytes); authenticated R2 readback matched byte-for-byte. Neon catalogs it as `osm-panama-current-way-full-bundle` version `capture-20261105-04fe1adb295e` and links it to the selected boundary as supporting evidence. It is a ZIP of 33 unmodified provider responses and a manifest, not one provider-original response. The verifier is not yet wired into the selected seed producer. No map rebuild was run.
