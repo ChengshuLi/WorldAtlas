@@ -28,3 +28,11 @@ The additional crossing screen flagged further local intersections that still re
 ## Eastern terrain-profile follow-up
 
 A 500 m station screen of the three-proposal line covered 641 stations at 47–49.5 degrees E. Four locations had a center at least 10 m below both side samples at both 250 m and 500 m: approximately (47.16936, 41.50861), (47.43227, 41.27127), (47.74556, 41.19173), and (49.06595, 40.89166). Another 14 stations could not be evaluated with the available valid 3-by-3 samples. A low profile can be a mountain pass, so these are leads to check, not demonstrated boundary errors; no additional correction has yet been established. This is a surface-profile diagnostic, not a complete drainage trace.
+
+## Expanded Arthmos continuation and residual screen
+
+Extending the east-of-Jvari OSM and JAXA window to 44.82°E pulls the divider candidate through the two streams near 44.722°E. The longer cut replaces about 30.9 km of the current proposed route with 36.1 km, removes four crossings (ways 73017061, 73017252, 73026732 and 73027855) in a complete 680-way local extract, remains simple, and joins the proposed line at both ends. It changes 41 historical draft163 land centers. Candidate cut SHA-256 `a16266c4464126b80486e65ebb04c3f7b6ee3da9a24baab381556b6dfdf4ef61`.
+
+After adding that extended cut, remaining central mapped stream crossings in the screened windows are at approximately 39.989°E (two unnamed streams), 45.364°E (two unnamed streams), 45.813°E (two stream ways, one crossed twice), 46.610°E (Goredabor), and 46.868°E (Dakkichay). The current evidence does not yet identify a connected, source-supported alternative with defensible outlet seeds for these locations. They are open audit items, not proposed geometry changes. Nearby streams at the 40.475°E window are over 2 km from the terrain-flag point and are not treated as a direct pass crossing.
+
+The four eastern terrain flags likewise do not prove a divide error. The nearest mapped streams are 335 m, 265 m, 2.9 km and 1.6 km away; the first two deserve targeted headwater tracing. The station screen sampled 641 points, with four low-profile flags and 14 invalid sample neighborhoods. A line-only overview is saved as `caucasus-seg3-4-overview.png`; detailed local before/after images show the drainage and each cut.
