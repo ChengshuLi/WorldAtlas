@@ -41,4 +41,16 @@ class LiveDriverTests(unittest.TestCase):
   args,kw,calls=setup();args[5]['component_rows']['sha256']='z'*64
   with self.assertRaisesRegex(ValueError,'component pin'):resolve_live(*args,**kw)
   self.assertEqual(calls,[])
+class LiveWriterIntegration(unittest.TestCase):
+ def test_orchestration_to_real_overlay_blocks_region_bypass(self):
+  import importlib.util,os
+  from adapter import protected_region_rows,RULE
+  path=os.environ.get('OVERLAY_PATH')
+  if not path:self.skipTest('actual writer overlay unavailable')
+  spec=importlib.util.spec_from_file_location('actual_live_overlay',path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+  args,kw,calls=setup();b=resolve_live(*args,**kw)['writer_bridge'];stats={};changes=[]
+  raw=lambda row:[{'claim':{'affiliation_id':'other','entry_ids':['entry'],'code':22},'roots':{3,9},'spans':[(0,4)]}]
+  region=protected_region_rows(raw,b['blocked_region_roots'])(0)
+  out=m.overlay_row(4,[(0,4,17)],[(4,18)],[(0,1,1),(1,2,2),(2,3,3),(3,4,9)],b['component_claims'],region,stats,lambda *v:changes.append(v))
+  self.assertEqual(out,[(1,22),(4,18)]);self.assertEqual(stats[RULE]['applied_cells'],1);self.assertNotIn('other',stats);self.assertNotIn('pending',stats)
 if __name__=='__main__':unittest.main()
