@@ -42,9 +42,12 @@ def run(manifest_path, output):
     if cfg.get('schema') != 'raw-physical-pipeline-v1' or not cfg.get('selection_notes'):
         raise ValueError('explicit pipeline schema and selection notes required')
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    workers = cfg.get('max_parallel_shards', 1)
-    if type(workers) is not int or not 1 <= workers <= 32:
-        raise ValueError('max_parallel_shards must be an integer from 1 to 32')
+    # Two-way builds have exact parity on the PR4 real-shard sample. Keep the
+    # worker count configurable and profile full-source host/disk load before
+    # raising it further.
+    workers = cfg.get('max_parallel_shards', 2)
+    if type(workers) is not int or workers < 1:
+        raise ValueError('max_parallel_shards must be a positive integer')
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
     land_path, land_bytes, land_cfg = read_pin(cfg['land_config'])

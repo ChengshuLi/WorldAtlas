@@ -64,10 +64,25 @@ class PipelineTests(unittest.TestCase):
         self.assertFalse((self.root/'bad-workers').exists())
         self.cfg['max_parallel_shards']=1;self.config.write_text(json.dumps(self.cfg));serial=self.root/'serial';b.run(self.config,serial)
         self.cfg['max_parallel_shards']=2;self.config.write_text(json.dumps(self.cfg));parallel=self.root/'parallel';b.run(self.config,parallel)
+        self.assertEqual(b.sha(serial/'physical/physical-dry.tif'),b.sha(parallel/'physical/physical-dry.tif'))
         self.assertEqual(b.sha(serial/'physical/rows.u32le'),b.sha(parallel/'physical/rows.u32le'))
         self.assertEqual(b.sha(serial/'physical/runs.u32le'),b.sha(parallel/'physical/runs.u32le'))
         self.assertEqual(b.sha(serial/'union/water-union.tif'),b.sha(parallel/'union/water-union.tif'))
         self.assertEqual(json.loads((parallel/'report.json').read_text())['max_parallel_shards'],2)
+        self.cfg.pop('max_parallel_shards');self.config.write_text(json.dumps(self.cfg));defaulted=self.root/'default-parallel';b.run(self.config,defaulted)
+        self.assertEqual(b.sha(serial/'physical/physical-dry.tif'),b.sha(defaulted/'physical/physical-dry.tif'))
+        self.assertEqual(b.sha(serial/'physical/rows.u32le'),b.sha(defaulted/'physical/rows.u32le'))
+        self.assertEqual(b.sha(serial/'physical/runs.u32le'),b.sha(defaulted/'physical/runs.u32le'))
+        self.assertEqual(b.sha(serial/'union/water-union.tif'),b.sha(defaulted/'union/water-union.tif'))
+        self.assertEqual(json.loads((defaulted/'report.json').read_text())['max_parallel_shards'],2)
+        # No arbitrary worker ceiling: the actual pool is naturally limited by
+        # the number of independent shards, even when configuration is larger.
+        self.cfg['max_parallel_shards']=10000;self.config.write_text(json.dumps(self.cfg));oversized=self.root/'oversized-worker-setting';b.run(self.config,oversized)
+        self.assertEqual(b.sha(serial/'physical/physical-dry.tif'),b.sha(oversized/'physical/physical-dry.tif'))
+        self.assertEqual(b.sha(serial/'physical/rows.u32le'),b.sha(oversized/'physical/rows.u32le'))
+        self.assertEqual(b.sha(serial/'physical/runs.u32le'),b.sha(oversized/'physical/runs.u32le'))
+        self.assertEqual(b.sha(serial/'union/water-union.tif'),b.sha(oversized/'union/water-union.tif'))
+        self.assertEqual(json.loads((oversized/'report.json').read_text())['max_parallel_shards'],10000)
 
     def test_parallel_incomplete_shard_fails_before_union(self):
         first=self.raw/'water.parquet';table=pq.read_table(first);row=table.to_pylist()[0];row['id']='bad';row['subtype']=None

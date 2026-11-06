@@ -6,7 +6,7 @@ Grid for this project: width 131072, height 54614, west -180°, north 90°, step
 
 ## Orchestrated run
 
-`build_physical.py PIPELINE_CONFIG NEW_OUTPUT_DIRECTORY` wires the four stages below from hash-pinned input configs and the complete raw shard manifest. Copy `pipeline-config.example.json` and replace all placeholders. References are optional; the same stage isolation, hash checks and free-space reserve apply. `max_parallel_shards` sets a bounded worker count from 1 to 32 (default 1); choose it for the machine’s memory, I/O and disk headroom. Each worker checks the reserve, but concurrent writes can cross it between checks, so leave additional headroom. The pipeline report records the generated hashes. Run `python -m unittest -v test_build_physical.py` for the small raw-source end-to-end test.
+`build_physical.py PIPELINE_CONFIG NEW_OUTPUT_DIRECTORY` wires the four stages below from hash-pinned input configs and the complete raw shard manifest. Copy `pipeline-config.example.json` and replace all placeholders. References are optional; the same stage isolation, hash checks and free-space reserve apply. `max_parallel_shards` sets the requested number of concurrent water-shard workers (default 2); any positive integer is accepted, and the pool uses the smaller of that value and the shard count. The setting remains explicit in the configuration and pipeline report. Each worker checks the reserve, but concurrent writes can cross it between checks, so leave additional headroom. The pipeline report records the generated hashes. Run `python -m unittest -v test_build_physical.py` for the small raw-source end-to-end test.
 
 ## Reproducible steps
 
