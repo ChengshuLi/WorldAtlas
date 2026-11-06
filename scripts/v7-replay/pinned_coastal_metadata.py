@@ -1,32 +1,31 @@
-"""Same-descriptor bounded JSON verification for legacy direct-land research.
+"""Same-descriptor JSON verification for legacy direct-land research.
 
 Reject all other lineage schemas rather than downgrading their checks.
 """
 import hashlib,json,os,stat
 from pathlib import Path
-MAX_JSON=32*1024*1024
 
 def digest_ok(v):return isinstance(v,str) and len(v)==64 and all(c in '0123456789abcdef' for c in v)
 
-def pinned_bytes(path,expected,limit):
- if not digest_ok(expected) or type(limit)!=int or limit<1:raise ValueError('invalid metadata pin or cap')
+def pinned_bytes(path,expected):
+ if not digest_ok(expected):raise ValueError('invalid metadata pin')
  fd=os.open(path,os.O_RDONLY|getattr(os,'O_NOFOLLOW',0))
  try:
   before=os.fstat(fd)
-  if not stat.S_ISREG(before.st_mode) or before.st_size>limit:raise ValueError('metadata exceeds cap or is not regular')
+  if not stat.S_ISREG(before.st_mode):raise ValueError('metadata is not regular')
   chunks=[];total=0;h=hashlib.sha256()
   while True:
-   z=os.read(fd,min(1024*1024,limit+1-total))
+   z=os.read(fd,1024*1024)
    if not z:break
    total+=len(z)
-   if total>limit:raise ValueError('metadata exceeds cap')
+   if total>before.st_size:raise ValueError('metadata changed during read')
    chunks.append(z);h.update(z)
   after=os.fstat(fd)
   if total!=before.st_size or (before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns)!=(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns) or h.hexdigest()!=expected:raise ValueError('metadata changed or hash mismatch')
   return b''.join(chunks)
  finally:os.close(fd)
 
-def pinned_json(path,expected,limit=MAX_JSON):return json.loads(pinned_bytes(path,expected,limit))
+def pinned_json(path,expected):return json.loads(pinned_bytes(path,expected))
 
 def file_sha(path):
  h=hashlib.sha256()

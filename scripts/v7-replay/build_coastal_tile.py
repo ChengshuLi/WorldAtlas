@@ -83,7 +83,6 @@ def main():
     ap.add_argument('--pad-degrees',type=float,required=True);ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true')
     a=ap.parse_args()
     if not a.allow_unverified_snapshot:raise ValueError('unverified Neon snapshot requires explicit research opt-in')
-    if Path(a.snapshot).stat().st_size>16*1024*1024:raise ValueError('snapshot exceeds size limit')
     snap=read_snapshot(Path(a.snapshot),a.snapshot_sha256,allow_draft=a.allow_draft)
     paths=[(a.physical_rows,a.physical_rows_sha256),(a.physical_runs,a.physical_runs_sha256),
            (a.physical_report,a.physical_report_sha256),(a.land_rows,a.land_rows_sha256),(a.land_runs,a.land_runs_sha256),(a.land_report,a.land_report_sha256),(a.snapshot,a.snapshot_sha256)]

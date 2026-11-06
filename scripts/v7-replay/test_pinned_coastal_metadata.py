@@ -29,9 +29,9 @@ class PinnedMetadataTest(unittest.TestCase):
     with mock.patch.object(m.os,'read',side_effect=read):self.assertEqual(m.pinned_json(p,H(original)),{'a':1})
     self.assertTrue(changed[0]);self.assertEqual(p.read_bytes(),replacement)
     with self.assertRaisesRegex(ValueError,'hash mismatch'):m.pinned_json(p,H(original))
- def test_oversize_and_growth_are_bounded(self):
+ def test_large_input_and_growth_detection(self):
   p=self.root/'big';p.write_bytes(b'x'*9)
-  with self.assertRaisesRegex(ValueError,'cap'):m.pinned_bytes(p,H(p.read_bytes()),8)
+  self.assertEqual(m.pinned_bytes(p,H(p.read_bytes())),b'x'*9)
   p.write_bytes(b'12345678');real=os.read;ino=p.stat().st_ino;changed=[False]
   def read(fd,n):
    z=real(fd,n)
@@ -39,7 +39,7 @@ class PinnedMetadataTest(unittest.TestCase):
     with p.open('ab') as f:f.write(b'9')
     changed[0]=True
    return z
-  with mock.patch.object(m.os,'read',side_effect=read),self.assertRaisesRegex(ValueError,'cap|changed'):m.pinned_bytes(p,H(b'12345678'),8)
+  with mock.patch.object(m.os,'read',side_effect=read),self.assertRaisesRegex(ValueError,'changed'):m.pinned_bytes(p,H(b'12345678'))
  def test_config_hash_and_component_tamper_fail(self):
   self.cp.write_text(self.cp.read_text().replace('22.5','23.5'))
   with self.assertRaisesRegex(ValueError,'hash mismatch'):self.validate()

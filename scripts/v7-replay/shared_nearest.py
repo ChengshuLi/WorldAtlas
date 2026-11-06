@@ -153,7 +153,50 @@ def make_indexes(centers, pairs):
         indexes[land_code]=(part,cKDTree(part['mids']))
     return indexes
 
-def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,band=None,bandtol=0,max_candidates=100000):
+def exact_minimum_by_ordered_chord(point, lon, lat, data, tree):
+    """Exact WGS84 minimum with complete-input streaming for wide searches.
+
+    Small nearest-neighbor prefixes often prove the answer quickly. If not,
+    iterate over *every* shoreline center in ordinary blocks, using only a
+    conservative chord-derived WGS84 lower bound to avoid unnecessary inverse
+    calls. Block size changes temporary-array shape, never input coverage.
+    """
+    n=int(tree.n)
+    if n<=0: return math.inf
+    take=min(16,n); best=math.inf
+    while True:
+        request=min(n,take+1)
+        chords,ids=tree.query(point,k=request,workers=1)
+        chords=np.atleast_1d(chords); ids=np.atleast_1d(ids)
+        part=ids[:take]
+        if len(part):
+            ds=geodesic_distances(np.full(len(part),lon),np.full(len(part),lat),data['lon'][part],data['lat'][part])
+            if np.any(~np.isfinite(ds)):raise ValueError('invalid inverse geodesic')
+            best=min(best,float(np.min(ds)))
+        if take==n:return best
+        angle=2*math.asin(min(1.0,max(0.0,float(chords[take])/2)))
+        lower=max(0.0,MIN_RADIUS*angle-.001)
+        if lower>best+.000001:return best
+        if take>=4096:
+            # Visit every point, including all equal-chord ties. Use a generous
+            # floating-point margin; exact inverse distance decides the result.
+            for first in range(0,n,4096):
+                last=min(first+4096,n)
+                diff=data['mids'][first:last]-point
+                chord=np.sqrt(np.sum(diff*diff,axis=1))
+                # Chord <= central angle, even at the antipode. Avoid asin
+                # sensitivity near chord 2 and keep a conservative margin.
+                lower=np.maximum(0,MIN_RADIUS*chord-.01)
+                keep=np.flatnonzero(lower<=best+.000001)+first
+                if len(keep):
+                    ds=geodesic_distances(np.full(len(keep),lon),np.full(len(keep),lat),data['lon'][keep],data['lat'][keep])
+                    if np.any(~np.isfinite(ds)):raise ValueError('invalid inverse geodesic')
+                    best=min(best,float(np.min(ds)))
+            return best
+        take=min(n,take*2)
+
+
+def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,band=None,bandtol=0):
     """Certify WGS84 nearest coastal-cell-center assignments or fail closed.
 
     Spherical unit vectors only narrow the search using a conservative WGS84
@@ -162,7 +205,6 @@ def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,ba
     lat=np.asarray(lat,dtype=np.float64);lon=np.asarray(lon,dtype=np.float64)
     if lat.ndim!=1 or lon.shape!=lat.shape or np.any(~np.isfinite(lat)) or np.any(~np.isfinite(lon)) or np.any(np.abs(lat)>90) or np.any(np.abs(lon)>180):raise ValueError('invalid query coordinates')
     if not math.isfinite(tolerance) or tolerance<0 or (band is not None and (not math.isfinite(band) or band<0 or not math.isfinite(bandtol) or bandtol<0)):raise ValueError('invalid distances')
-    if type(max_candidates) is not int or max_candidates<1:raise ValueError('invalid candidate limit')
     x0,x1,y0,y1=bounds
     if any(type(z) is not int for z in (x0,x1,y0,y1,width,height)) or not (0<width and 0<height and 0<x1-x0<=width and 0<=y0<y1<=height and math.isfinite(step) and step>0):raise ValueError('invalid crop or grid')
     if abs(step*width-360)>1e-8:raise ValueError('step does not match world width')
@@ -198,17 +240,10 @@ def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,ba
     for i,(_,_,code) in enumerate(available):out[fast & (best==i) & (True if band is None else inside)]=code
     pending=np.flatnonzero(~fast)
     for q in pending:
-        distances=[];total=0
+        distances=[]
         for _,lc,_ in available:
             data,tree=indexes[lc]
-            rad=min(math.pi,(float(upper[q])+tolerance+.001)/MIN_RADIUS)
-            ids=tree.query_ball_point(points[q],np.nextafter(2*math.sin(rad/2),math.inf),workers=1)
-            total+=len(ids)
-            if total>max_candidates:raise RuntimeError('WGS84 candidate limit exceeded')
-            if not ids:distances.append(math.inf);continue
-            ds=geodesic_distances(np.full(len(ids),lon[q]),np.full(len(ids),lat[q]),data['lon'][ids],data['lat'][ids])
-            if np.any(~np.isfinite(ds)):raise ValueError('invalid inverse geodesic')
-            distances.append(float(np.min(ds)))
+            distances.append(exact_minimum_by_ordered_chord(points[q],float(lon[q]),float(lat[q]),data,tree))
         minimum=min(distances)
         if not math.isfinite(minimum):raise RuntimeError('no provable candidate shore')
         if band is not None and minimum>threshold:

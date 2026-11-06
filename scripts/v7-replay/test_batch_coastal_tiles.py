@@ -20,16 +20,17 @@ class BatchTest(unittest.TestCase):
   for x in result['tiles']:
    p=self.d/'batch'/('tile-%04d'%x['tile'])/'manifest.json';self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),x['manifest_sha256']);self.assertEqual(json.loads(p.read_bytes())['status'],'partial-unverified-research-not-published')
  def test_sealed_content_cannot_change(self):
-  fd,n=b.sealed_copy(self.paths['physical_runs'],self.pins['physical_runs'],1000);self.addCleanup(os.close,fd);self.assertEqual(fcntl.fcntl(fd,fcntl.F_GET_SEALS)&b.F_SEALS,b.F_SEALS)
+  fd,n=b.sealed_copy(self.paths['physical_runs'],self.pins['physical_runs']);self.addCleanup(os.close,fd);self.assertEqual(fcntl.fcntl(fd,fcntl.F_GET_SEALS)&b.F_SEALS,b.F_SEALS)
   with self.assertRaises(OSError):os.write(fd,b'x')
   with self.assertRaises(OSError):os.ftruncate(fd,0)
   with self.assertRaises(OSError):fcntl.fcntl(fd,fcntl.F_ADD_SEALS,0)
- def test_bad_hash_and_cap_fail_before_outputs(self):
+ def test_bad_hash_fails_before_outputs(self):
   self.pins['physical_runs']='0'*64
   with self.assertRaisesRegex(ValueError,'SHA-256 mismatch'):self.run_batch()
-  self.assertFalse((self.d/'batch').exists());self.pins['physical_runs']=hashlib.sha256(self.paths['physical_runs'].read_bytes()).hexdigest()
-  with self.assertRaisesRegex(ValueError,'byte cap'):self.run_batch(max_bytes=5)
   self.assertFalse((self.d/'batch').exists())
+ def test_large_plan_and_chunk_are_not_rejected(self):
+  plan={'tiles':[[x,x+1,0,1] for x in range(300)],'pad_degrees':181,'chunk':100001}
+  self.assertEqual(len(b.validate_plan(plan,300,1)),300)
  def test_plan_rejects_overlapping_or_invalid_tiles(self):
   self.plan['tiles']=[[7,10,3,5],[8,11,4,6]]
   with self.assertRaisesRegex(ValueError,'overlapping'):self.run_batch()
