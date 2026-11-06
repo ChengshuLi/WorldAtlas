@@ -19,11 +19,9 @@ def execute(request,work_parent,guard):
  for name in CODE:
   p=BASE/name
   data=p.read_bytes()
-  if len(data)>1<<20:raise ValueError('region code exceeds size limit')
   captured[name]=hashlib.sha256(data).hexdigest()
  req=dict(request);req['closure']={**c,'work_parent':str(work)}
  raw=json.dumps(req,sort_keys=True,allow_nan=False).encode()
- if len(raw)>16<<20:raise ValueError('region request exceeds size bound')
  import runpy
  old_path=list(sys.path)
  try:

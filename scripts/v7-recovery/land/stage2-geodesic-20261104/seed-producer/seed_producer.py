@@ -14,17 +14,15 @@ from region_client import execute as build_region
 from closure_client import sha
 BASE=Path(__file__).resolve().parent
 CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py')
-TRUSTED_CODE={'seed_builder':'b90d613cc269195ea58cf491ad424d7d4a923e8c686410ef98e391a7f757beaa','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'0ba02bafcfd54214af0b762edd194833eea1cbba7b1e391764b05c40ff0036ba'}
-TRUSTED_TERMINAL_CHECKER='9be9698f5d6bff5546eb192e78fa209fc4c9562f11d12b9efd5cbb94ef3db17b'
+TRUSTED_CODE={'seed_builder':'f28e06acaf6325ea8e5089ed51fbc8c860506153dc46c4d2ccdac29139ca1e66','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'1e796c7f9bc8843252398eed54093265581446c9f4cac10dcb3b4c424b6e1bd1'}
+TRUSTED_TERMINAL_CHECKER='fb0058f368f0db8ca07d1c9347aaf1192cb5b2fc20c3691e167623531f5570f1'
 INPUTS={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','closure_contract','seed_builder','seed_kernel'}
-def bounded_json(pin,guard,limit=16<<20):
- h=hashlib.sha256();chunks=[];n=0
+def bounded_json(pin,guard):
+ h=hashlib.sha256();chunks=[]
  with open(pin['path'],'rb') as f:
   while True:
    guard();b=f.read(1<<20)
    if not b:break
-   n+=len(b)
-   if n>limit:raise ValueError('JSON input exceeds bound')
    chunks.append(b);h.update(b)
  if h.hexdigest()!=pin['sha256']:raise ValueError('JSON pin mismatch')
  return json.loads(b''.join(chunks))
@@ -32,8 +30,7 @@ def run(request_path,work_dir,output_dir,guard):
  if not callable(guard):raise ValueError('resource guard required')
  request_path=Path(request_path).resolve(strict=True);work=Path(work_dir).resolve();output=Path(output_dir).resolve();guard()
  if work.exists() or output.exists() or not work.parent.is_dir() or not output.parent.is_dir() or work==output or work in output.parents or output in work.parents:raise ValueError('invalid work/output directory')
- with open(request_path,'rb') as f:raw=f.read((1<<20)+1)
- if len(raw)>1<<20:raise ValueError('request too large')
+ with open(request_path,'rb') as f:raw=f.read()
  req=json.loads(raw,object_pairs_hook=no_duplicates);inp=req.get('inputs');grid=req.get('grid');controls=req.get('controls')
  if req.get('schema')!='worldatlas-stage2-seed-request-v1' or not isinstance(inp,dict) or set(inp) not in (INPUTS,INPUTS|{'terminal_checker'}) or not isinstance(grid,dict) or set(grid)!={'width','height','west','north','step'} or not isinstance(controls,dict) or set(controls)!={'disk_reserve_bytes','strip_rows'}:raise ValueError('invalid seed request')
  if type(controls['disk_reserve_bytes']) is not int or controls['disk_reserve_bytes']<0  or type(controls['strip_rows']) is not int or not 1<=controls['strip_rows']<=64:raise ValueError('invalid seed controls')
@@ -69,8 +66,8 @@ def run(request_path,work_dir,output_dir,guard):
  rinput=work/'region-input';rinput.mkdir();regionwork=work/'region-work';regionwork.mkdir();codework=work/'rasterizer-code';codework.mkdir();seedout=work/'seed-output'
  # Execute only reviewed byte-pinned rasterizer source copies.
  for key,name in (('seed_builder','build_seed.py'),('seed_kernel','seed_kernel.cpp')):
-  with open(inp[key]['path'],'rb') as f:data=f.read((1<<20)+1)
-  if len(data)>1<<20 or hashlib.sha256(data).hexdigest()!=inp[key]['sha256']:raise ValueError('rasterizer source mismatch')
+  with open(inp[key]['path'],'rb') as f:data=f.read()
+  if hashlib.sha256(data).hexdigest()!=inp[key]['sha256']:raise ValueError('rasterizer source mismatch')
   (codework/name).write_bytes(data)
  closure={'checker_path':inp['closure_checker']['path'],'checker_sha256':inp['closure_checker']['sha256'],'physical_dir':str(Path(inp['physical_rows']['path']).resolve().parent),'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'contract_path':inp['closure_contract']['path'],'contract_sha256':inp['closure_contract']['sha256']}
  if 'terminal_checker' in inp:closure.update({'terminal_checker_path':inp['terminal_checker']['path'],'terminal_checker_sha256':inp['terminal_checker']['sha256']})
@@ -94,7 +91,7 @@ def run(request_path,work_dir,output_dir,guard):
   if not isinstance(pop,dict) or type(pop.get('inside_cells')) is not int or type(pop.get('outside_cells')) is not int or pop['inside_cells']<=0 or (r['region_id'] is not None and pop['outside_cells']<=0):raise ValueError('empty mainland rule partition')
  for pin in inp.values():
   if sha(pin['path'],guard)!=pin['sha256']:raise ValueError('input changed during seed build')
- with open(request_path,'rb') as f:request_after=f.read((1<<20)+1)
+ with open(request_path,'rb') as f:request_after=f.read()
  if request_after!=raw or {name:sha(BASE/name,guard) for name in CODE}!={k:v for k,v in code_hashes.items() if k in CODE}:raise ValueError('request or producer code changed')
  (seedout/'report.json').rename(seedout/'rasterizer-report.json')
  rasterizer_report_sha=sha(seedout/'rasterizer-report.json',guard)

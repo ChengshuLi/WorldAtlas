@@ -1,7 +1,7 @@
 """Resolve selected simple mainland partition rules to current ephemeral roots."""
 
-def unique(items,key,limit):
- if not isinstance(items,list) or len(items)>limit:raise ValueError('invalid or oversized decision list')
+def unique(items,key):
+ if not isinstance(items,list):raise ValueError('invalid decision list')
  out={}
  for x in items:
   if not isinstance(x,dict) or key not in x or x[key] in out:raise ValueError('duplicate or invalid decision ID')
@@ -17,7 +17,7 @@ def compile_rules(snapshot,resolution,snapshot_sha256,selected_region_ids):
  rule_ids=lp.get('mainland_rule_ids');region_ids=lp.get('region_ids')
  if not isinstance(rule_ids,list) or not rule_ids or len(rule_ids)!=len(set(rule_ids)) or not isinstance(region_ids,list) or len(region_ids)!=len(set(region_ids)) or set(region_ids)!=set(selected_region_ids):raise ValueError('invalid selected rule/region list')
  if not isinstance(resolution,dict) or resolution.get('schema')!='mainland-witness-resolution-v1' or resolution.get('status')!='selected-research-identity-claims-not-mainland-proof' or resolution.get('snapshot_sha256')!=snapshot_sha256 or resolution.get('decision_revision')!=rev.get('id') or resolution.get('entity_revision')!=entity_rev.get('id'):raise ValueError('witness resolution mismatch')
- groups=unique(resolution.get('groups'),'group_id',64);rules=unique(snapshot.get('mainland_component_rules'),'rule_id',64);entities=unique(snapshot.get('entities'),'id',10000)
+ groups=unique(resolution.get('groups'),'group_id');rules=unique(snapshot.get('mainland_component_rules'),'rule_id');entities=unique(snapshot.get('entities'),'id')
  bindings={}
  for b in snapshot.get('category_bindings',[]):
   if b.get('physical_class')!='land':continue

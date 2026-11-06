@@ -9,21 +9,14 @@ from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
 
-# Absolute safety ceilings remain outside the caller-controlled contract.
-MAX_ALLOWED_VISITS = 2000000
-MAX_DIMENSION = 1048576
-MAX_RUNS_PER_ROW = 131072
-MAX_CONTRACT_BYTES = 65536
+# Grid coordinates and row offsets use unsigned 32-bit integers.
+UINT32_MAX = (1 << 32) - 1
 WIDTH = HEIGHT = STEP = WEST = NORTH = ROWS = RUNS = WATER = LAND = None
-MAX_VISITS = MAX_ALLOWED_VISITS
-MAX_INPUT_BYTES = 2 * 1024 * 1024
-MAX_VERTICES = 100000
 
 
 def load_contract(path, expected_sha256):
-    global WIDTH, HEIGHT, STEP, WEST, NORTH, ROWS, RUNS, WATER, LAND, MAX_VISITS
-    with open(path, 'rb') as f: raw = f.read(MAX_CONTRACT_BYTES+1)
-    if len(raw) > MAX_CONTRACT_BYTES: raise ValueError('contract exceeds size limit')
+    global WIDTH, HEIGHT, STEP, WEST, NORTH, ROWS, RUNS, WATER, LAND
+    with open(path, 'rb') as f: raw = f.read()
     actual = hashlib.sha256(raw).hexdigest()
     if actual != expected_sha256: raise ValueError('contract hash mismatch')
     c = json.loads(raw, object_pairs_hook=no_duplicate_keys, parse_float=bounded_decimal,
@@ -35,7 +28,7 @@ def load_contract(path, expected_sha256):
     def integer(v, lower, upper, label):
         if type(v) is not int or not lower <= v <= upper: raise ValueError('invalid ' + label)
         return v
-    WIDTH=integer(g['width'],1,MAX_DIMENSION,'width'); HEIGHT=integer(g['height'],1,MAX_DIMENSION,'height')
+    WIDTH=integer(g['width'],1,UINT32_MAX,'width'); HEIGHT=integer(g['height'],1,UINT32_MAX,'height')
     numerator=integer(g['step_numerator'],1,360*(1<<30),'step numerator'); denominator=integer(g['step_denominator'],1,1<<30,'step denominator')
     STEP=Fraction(numerator,denominator)
     if not isinstance(g['west'],(int,Decimal)) or isinstance(g['west'],bool) or not isinstance(g['north'],(int,Decimal)) or isinstance(g['north'],bool): raise ValueError('invalid grid origin')
@@ -47,7 +40,8 @@ def load_contract(path, expected_sha256):
     if WATER == LAND: raise ValueError('water and land codes must differ')
     path=p['producer_code_path']
     if not isinstance(path,str) or not path or Path(path).is_absolute() or '..' in Path(path).parts: raise ValueError('invalid producer evidence path')
-    MAX_VISITS=integer(r['max_cell_visits'],1,MAX_ALLOWED_VISITS,'cell visit limit')
+    # Retain the historical field for contract compatibility; do not truncate checks.
+    if type(r['max_cell_visits']) is not int or r['max_cell_visits']<1: raise ValueError('invalid historical visit setting')
     return actual, c
 
 
@@ -104,8 +98,6 @@ def bounded_decimal(token):
 
 
 def geom_and_points(raw):
-    if len(raw) > MAX_INPUT_BYTES:
-        raise ValueError('geometry input exceeds size limit')
     ordinary = json.loads(raw, object_pairs_hook=no_duplicate_keys, parse_constant=lambda x: (_ for _ in ()).throw(ValueError('non-finite number')))
     exact = json.loads(raw, object_pairs_hook=no_duplicate_keys, parse_float=bounded_decimal, parse_int=int, parse_constant=lambda x: (_ for _ in ()).throw(ValueError('non-finite number')))
     def geometry(obj):
@@ -118,7 +110,7 @@ def geom_and_points(raw):
     g, e = geometry(ordinary), geometry(exact)
     digest = hashlib.sha256(json.dumps(g, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
     pts = e['coordinates']
-    if not isinstance(pts, list) or not 2 <= len(pts) <= MAX_VERTICES: raise ValueError('invalid vertex count')
+    if not isinstance(pts, list) or len(pts) < 2: raise ValueError('invalid vertex count')
     grid = []
     for p in pts:
         if not isinstance(p, list) or len(p) != 2 or any(isinstance(v, bool) or not isinstance(v,(int, Decimal)) for v in p): raise ValueError('coordinates must be finite 2D numbers')
@@ -136,7 +128,6 @@ def verify_producer_code(contract_path, contract):
     base=Path(contract_path).resolve().parent
     path=(base/contract['physical']['producer_code_path']).resolve()
     if not path.is_relative_to(base): raise ValueError('producer evidence escapes contract directory')
-    if path.stat().st_size > 4*1024*1024: raise ValueError('producer evidence exceeds size limit')
     if sha(path) != contract['physical']['encoding_evidence_sha256']: raise ValueError('producer evidence hash mismatch')
     return path
 
@@ -144,8 +135,7 @@ def verify_producer_code(contract_path, contract):
 def verify_physical_report(directory, contract):
     path=Path(directory)/'report.json'
     if sha(path) != contract['physical']['report_sha256']: raise ValueError('physical report hash mismatch')
-    with open(path,'rb') as f: raw=f.read(MAX_CONTRACT_BYTES+1)
-    if len(raw) > MAX_CONTRACT_BYTES: raise ValueError('physical report too large')
+    with open(path,'rb') as f: raw=f.read()
     report=json.loads(raw, object_pairs_hook=no_duplicate_keys, parse_float=bounded_decimal,
                       parse_constant=lambda x: (_ for _ in ()).throw(ValueError('non-finite number')))
     g=report['grid']; out=report['output_sha256']
@@ -171,7 +161,7 @@ class Mask:
         if not 0 <= x < WIDTH or not 0 <= y < HEIGHT: raise ValueError('segment touches grid edge')
         if y not in self.cache:
             lo, hi = self.rows[y:y+2]
-            if lo >= hi or hi > self.rows[-1] or hi-lo > min(WIDTH, MAX_RUNS_PER_ROW): raise ValueError('invalid row offsets')
+            if lo >= hi or hi > self.rows[-1] or hi-lo > WIDTH: raise ValueError('invalid row offsets')
             self.run.seek(lo*8); raw = self.run.read((hi-lo)*8)
             if len(raw) != (hi-lo)*8: raise ValueError('truncated row')
             pairs = list(struct.iter_unpack('<II', raw)); ends = [a for a,_ in pairs]; vals = [b for _,b in pairs]
@@ -192,8 +182,7 @@ def main():
     p.add_argument('--physical-dir',default='physical-direct-output-20261103')
     p.add_argument('--output',required=True,help='New output JSON path; no overwrite')
     a=p.parse_args(); contract_sha, contract = load_contract(a.contract,a.contract_sha256)
-    with open(a.geometry, 'rb') as f: raw=f.read(MAX_INPUT_BYTES+1)
-    if len(raw) > MAX_INPUT_BYTES: raise ValueError('geometry input exceeds size limit')
+    with open(a.geometry, 'rb') as f: raw=f.read()
     input_hash=hashlib.sha256(raw).hexdigest()
     geometry_hash, points=geom_and_points(raw)
     if geometry_hash != a.geometry_sha256: raise ValueError('selected geometry hash mismatch')
@@ -201,12 +190,11 @@ def main():
     for a0,b0 in zip(points,points[1:]):
         for x,y in touched_segment(a0[0],a0[1],b0[0],b0[1]):
             count+=1
-            if count > MAX_VISITS: raise ValueError('cell visit limit exceeded')
             code=mask.code(x,y)
             if code != WATER: raise ValueError(f'closure touches non-water cell x={x}, y={y}, code={code}')
     mask.verify_again()
     if sha(Path(__file__).resolve()) != checker_sha or sha(Path(a.geometry)) != input_hash or sha(Path(a.contract)) != contract_sha or sha(report_path) != contract['physical']['report_sha256'] or sha(evidence_path) != contract['physical']['encoding_evidence_sha256']: raise ValueError('checker or geometry changed during validation')
-    proof={'schema':'physical-water-closure-proof-v1','status':'valid', 'physical_rows_sha256':ROWS,'physical_runs_sha256':RUNS,'checker_sha256':checker_sha,'contract_sha256':contract_sha,'physical_report_sha256':contract['physical']['report_sha256'],'encoding_evidence_sha256':contract['physical']['encoding_evidence_sha256'],'geometry_sha256':geometry_hash,'input_file_sha256':input_hash,'grid':{k:(str(v) if isinstance(v,Decimal) else v) for k,v in contract['grid'].items()},'physical_code_contract':{'water':WATER,'land':LAND},'method':'exact-rational closed-cell all-touched; no GDAL; boundary and corner contacts included; no endpoint exceptions', 'geometry_hash_method':'SHA-256 of Python sorted-key compact UTF-8 JSON geometry, ensure_ascii=False, allow_nan=False', 'python_version':sys.version.split()[0],'vertices':len(points),'cell_visits':count,'max_cell_visits':MAX_VISITS,'warnings':['Grid, code semantics and resource settings derive from the externally reviewed hash-pinned contract.','Water-only raster proof does not establish selected-route authority, coastline closure, historical equivalence, topology, or continental labels.']}
+    proof={'schema':'physical-water-closure-proof-v1','status':'valid', 'physical_rows_sha256':ROWS,'physical_runs_sha256':RUNS,'checker_sha256':checker_sha,'contract_sha256':contract_sha,'physical_report_sha256':contract['physical']['report_sha256'],'encoding_evidence_sha256':contract['physical']['encoding_evidence_sha256'],'geometry_sha256':geometry_hash,'input_file_sha256':input_hash,'grid':{k:(str(v) if isinstance(v,Decimal) else v) for k,v in contract['grid'].items()},'physical_code_contract':{'water':WATER,'land':LAND},'method':'exact-rational closed-cell all-touched; no GDAL; boundary and corner contacts included; no endpoint exceptions', 'geometry_hash_method':'SHA-256 of Python sorted-key compact UTF-8 JSON geometry, ensure_ascii=False, allow_nan=False', 'python_version':sys.version.split()[0],'vertices':len(points),'cell_visits':count,'historical_max_cell_visits_not_enforced':contract['resources']['max_cell_visits'],'warnings':['Grid and code semantics derive from the externally reviewed hash-pinned contract; its historical visit setting is not enforced.','Water-only raster proof does not establish selected-route authority, coastline closure, historical equivalence, topology, or continental labels.']}
     with open(a.output,'x') as f: json.dump(proof,f,indent=2); f.write('\n')
     print(json.dumps(proof,indent=2))
 

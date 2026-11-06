@@ -39,7 +39,7 @@ def snap_policy(snapshot,revision,entity_revision,policy_id,policy_version, *, a
 def resolution_roots(report,grid,pins,revision,entity_revision):
  need(report.get('schema')=='mainland-witness-resolution-v1' and report.get('status')=='selected-research-identity-claims-not-mainland-proof' and report.get('publishable') is False,'invalid mainland resolution')
  for k,v in {'grid':grid,'decision_revision':revision,'entity_revision':entity_revision,'snapshot_sha256':pins['decision_snapshot'],'component_manifest_sha256':pins['component_manifest'],'input_sha256':{x:pins[x] for x in ('physical_rows','physical_runs','component_rows','component_runs')}}.items():need(report.get(k)==v,'stale resolution binding: '+k)
- groups=report.get('groups');need(isinstance(groups,list) and 1<=len(groups)<=64,'invalid mainland groups');out={};roots=set()
+ groups=report.get('groups');need(isinstance(groups,list) and len(groups)>=1,'invalid mainland groups');out={};roots=set()
  for g in groups:
   need(isinstance(g,dict) and text(g.get('group_id')) and g['group_id'] not in out and g.get('role') in ('mainland','sentinel'),'invalid mainland group')
   root=g.get('component_id_current_generation_only');targets=g.get('target_entity_ids');need(type(root) is int and 0<=root<2**32-1 and root not in roots and isinstance(targets,list) and len(set(targets))==len(targets) and (g['role']=='mainland')==bool(targets),'invalid group root or targets')
@@ -120,7 +120,7 @@ def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,gu
   x=policy.get(name);need(isinstance(x,list) and all(text(y) for y in x) and len(x)==len(set(x)),'invalid selected IDs: '+name);return x
  rule_ids=selected_ids('mainland_rule_ids');region_ids=selected_ids('region_ids');boundary_ids=selected_ids('boundary_ids');route_ids=selected_ids('route_ids');need(bool(rule_ids),'no selected mainland rules')
  def index(name,key):
-  rows=snapshot.get(name);need(isinstance(rows,list) and len(rows)<=10000,'invalid decision array: '+name);out={}
+  rows=snapshot.get(name);need(isinstance(rows,list),'invalid decision array: '+name);out={}
   for r in rows:need(isinstance(r,dict) and text(r.get(key)) and r[key] not in out,'duplicate/invalid '+name);out[r[key]]=r
   return out
  rules=index('mainland_component_rules','rule_id');regions=index('seed_regions','region_id');boundaries=index('mainland_boundaries','boundary_id');routes=index('routes','route_id')
@@ -147,7 +147,7 @@ def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,gu
  need(all(isinstance(x,dict) and text(x.get('source_id')) and text(x.get('version')) for x in dependencies),'invalid source dependency')
  derived={(x['source_id'],x['version']) for x in dependencies}
  def geom(g):
-  need(isinstance(g,dict) and set(g)=={'type','coordinates'} and g['type']=='LineString' and isinstance(g['coordinates'],list) and 2<=len(g['coordinates'])<=200000,'invalid stored geometry')
+  need(isinstance(g,dict) and set(g)=={'type','coordinates'} and g['type']=='LineString' and isinstance(g['coordinates'],list) and len(g['coordinates'])>=2,'invalid stored geometry')
   try:
    pts=[]
    for n,p in enumerate(g['coordinates']):
@@ -170,7 +170,7 @@ def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,gu
    kind,rid=segment['kind'],segment['id'];need(kind in ('boundary','route'),'unsupported selected geometry');record=(boundaries if kind=='boundary' else routes).get(rid);allowed=boundary_ids if kind=='boundary' else route_ids
    need(rid in allowed and isinstance(record,dict) and record.get('decision_revision')==rev and record.get('execution_status')=='selected_for_research' and record.get('geometry_hash_method')=='binary64-sorted-compact-geojson-v1','stale selected geometry');pts=geom(record.get('geometry'));need(geomhash(pts)==record.get('geometry_sha256')==trace.get('geometry_sha256'),'geometry hash mismatch')
    a,b=segment['start'],segment['end'];need(type(a) is int and type(b) is int and type(segment['reverse']) is bool and 0<=a<b<=len(pts) and b-a>=2,'invalid geometry slice');selected=pts[a:b];selected=selected[::-1] if segment['reverse'] else selected
-   need(not ring or ring[-1]==selected[0],'selected region segments do not join exactly');ring.extend(selected if not ring else selected[1:]);need(len(ring)<=250000,'selected region vertex limit exceeded')
+   need(not ring or ring[-1]==selected[0],'selected region segments do not join exactly');ring.extend(selected if not ring else selected[1:])
    if kind=='boundary':
     used_b.add(rid);need(record.get('method')=='stored_linestring_v1' and record.get('coordinate_reference')=='OGC:CRS84','unsupported boundary method');prov=record.get('provenance',{});refs=prov.get('source_refs');need(isinstance(refs,list) and refs and prov.get('lineage_status') in ('complete','incomplete') and trace.get('lineage_status')==prov['lineage_status'] and trace.get('closure_proof') is None and trace.get('route_provenance') is None,'invalid boundary provenance');cit=[]
     relationships=prov.get('source_relationships');need(isinstance(relationships,list) and len(relationships)==len(refs),'boundary source relationships missing');relmap={}

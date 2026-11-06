@@ -51,10 +51,10 @@ def check(source,point_geometry,island_identity,spec):
 def worker():
     """Internal isolated entry point. No decision, map or source is written."""
     import sys
-    request=sys.stdin.buffer.read(65537);need(len(request)<=65536,'worker request too large');r=json.loads(request)
+    request=sys.stdin.buffer.read();r=json.loads(request)
     path=r['identity_path'];expected=r['identity_sha256']
-    with open(path,'rb') as f:raw=f.read(8*1024*1024+1)
-    need(len(raw)<=8*1024*1024 and hashlib.sha256(raw).hexdigest()==expected,'identity source pin mismatch')
+    with open(path,'rb') as f:raw=f.read()
+    need(hashlib.sha256(raw).hexdigest()==expected,'identity source pin mismatch')
     result=check(json.loads(raw),r['point_geometry'],r['island_identity'],r['spec'])
     h=hashlib.sha256()
     with open(path,'rb') as f:

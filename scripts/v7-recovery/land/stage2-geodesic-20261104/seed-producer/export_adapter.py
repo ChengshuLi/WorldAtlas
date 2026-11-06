@@ -17,13 +17,11 @@ def no_duplicates(pairs):
 
 def load_pinned_snapshot(path,expected_sha256,guard):
  if not callable(guard):raise ValueError('resource guard required')
- h=hashlib.sha256();parts=[];size=0
+ h=hashlib.sha256();parts=[]
  with open(path,'rb') as f:
   while True:
    guard();b=f.read(1<<20)
    if not b:break
-   size+=len(b)
-   if size>16<<20:raise ValueError('snapshot exceeds size bound')
    parts.append(b);h.update(b)
  if h.hexdigest()!=expected_sha256:raise ValueError('snapshot pin mismatch')
  return json.loads(b''.join(parts),object_pairs_hook=no_duplicates,parse_constant=lambda _:(_ for _ in ()).throw(ValueError('nonfinite JSON')))
@@ -33,7 +31,7 @@ def boundary_records(snapshot):
  rev=snapshot.get('decision_revision');ent=snapshot.get('entity_revision')
  if not isinstance(rev,dict) or not isinstance(ent,dict) or rev.get('status')!='draft' or ent.get('status')!='draft' or not isinstance(rev.get('id'),str) or not rev['id'] or rev.get('entity_revision')!=ent.get('id'):raise ValueError('invalid decision/entity revision')
  sources=snapshot.get('sources');lineages=snapshot.get('source_lineage_assets');dependencies=snapshot.get('source_lineage_dependencies');items=snapshot.get('mainland_boundaries')
- if not isinstance(sources,list) or not isinstance(lineages,list) or not isinstance(dependencies,list) or not isinstance(items,list) or not items or len(items)>64:raise ValueError('missing or oversized source/boundary records')
+ if not isinstance(sources,list) or not isinstance(lineages,list) or not isinstance(dependencies,list) or not isinstance(items,list) or not items:raise ValueError('missing source/boundary records')
  def unique(xs):
   out={}
   for x in xs:
@@ -99,7 +97,7 @@ def route_records(snapshot,revision_id,selected_route_ids,source_out):
  catalog=index(sources);lineage=index(lineages);derived=set();selected_sources=set()
  if selected_route_ids:
   stage1=snapshot.get('stage1_source_inputs');ordinals={'physical_land':set(),'inland_water':set()}
-  if not isinstance(stage1,list) or not stage1 or len(stage1)>1000:raise ValueError('missing selected stage-1 source inputs')
+  if not isinstance(stage1,list) or not stage1:raise ValueError('missing selected stage-1 source inputs')
   for item in stage1:
    if not isinstance(item,dict) or item.get('decision_revision')!=revision_id or item.get('execution_status')!='selected_for_research' or item.get('role') not in ordinals or type(item.get('ordinal')) is not int or item['ordinal']<0 or item['ordinal'] in ordinals[item['role']] or not isinstance(item.get('source_id'),str) or not isinstance(item.get('source_version'),str):raise ValueError('invalid selected stage-1 source input')
    ordinals[item['role']].add(item['ordinal']);selected_sources.add((item['source_id'],item['source_version']))
@@ -107,7 +105,7 @@ def route_records(snapshot,revision_id,selected_route_ids,source_out):
  for dep in dependencies:
   if not isinstance(dep,dict) or not isinstance(dep.get('source_id'),str) or not isinstance(dep.get('version'),str):raise ValueError('invalid route source dependency')
   derived.add((dep['source_id'],dep['version']))
- if not isinstance(items,list) or len(items)>10000 or not isinstance(selected_route_ids,list) or len(selected_route_ids)!=len(set(selected_route_ids)):raise ValueError('invalid selected route list')
+ if not isinstance(items,list) or not isinstance(selected_route_ids,list) or len(selected_route_ids)!=len(set(selected_route_ids)):raise ValueError('invalid selected route list')
  byid={}
  for r in items:
   if not isinstance(r,dict) or not isinstance(r.get('route_id'),str) or r['route_id'] in byid:raise ValueError('duplicate or invalid route ID')
@@ -117,7 +115,7 @@ def route_records(snapshot,revision_id,selected_route_ids,source_out):
   r=byid.get(rid)
   if not r or r.get('decision_revision')!=revision_id or r.get('execution_status')!='selected_for_research' or r.get('route_type')!='stored_linestring_v1' or r.get('role')!='water_closure' or r.get('coordinate_reference')!='OGC:CRS84' or r.get('geometry_hash_method')!='binary64-sorted-compact-geojson-v1':raise ValueError('missing, stale or unsupported selected route')
   provenance=r.get('provenance');refs=provenance.get('source_refs') if isinstance(provenance,dict) else None
-  if not isinstance(refs,list) or not refs or len(refs)>1000:raise ValueError('route raw-source references missing')
+  if not isinstance(refs,list) or not refs:raise ValueError('route raw-source references missing')
   clean=[];seen=set()
   for ref in refs:
    if not isinstance(ref,dict) or set(ref)!={'source_id','version'}:raise ValueError('invalid route source reference')
@@ -142,7 +140,7 @@ def route_records(snapshot,revision_id,selected_route_ids,source_out):
 
 def selected_regions(snapshot,revision_id,normalized_boundaries,source_catalog):
  policy=snapshot.get('land_baseline_policy');items=snapshot.get('seed_regions')
- if not isinstance(policy,dict) or policy.get('execution_status')!='selected_for_research' or policy.get('decision_revision')!=revision_id or policy.get('island_overrides')!='none' or not isinstance(items,list) or len(items)>64:raise ValueError('missing simple baseline region policy')
+ if not isinstance(policy,dict) or policy.get('execution_status')!='selected_for_research' or policy.get('decision_revision')!=revision_id or policy.get('island_overrides')!='none' or not isinstance(items,list):raise ValueError('missing simple baseline region policy')
  ids=policy.get('region_ids');boundary_ids=policy.get('boundary_ids');route_ids=policy.get('route_ids')
  if any(not isinstance(x,list) or len(x)!=len(set(x)) for x in (ids,boundary_ids,route_ids)):raise ValueError('invalid selected geometry IDs')
  byid={}
@@ -153,7 +151,7 @@ def selected_regions(snapshot,revision_id,normalized_boundaries,source_catalog):
  routes=route_records(snapshot,revision_id,route_ids,source_catalog);out=[];used_b=set();used_r=set()
  for rid in ids:
   r=byid.get(rid);required={'region_id','decision_revision','execution_status','segments','geometry_sha256','geometry_hash_method','witnesses'}
-  if not r or set(r)!=required or r['decision_revision']!=revision_id or r['execution_status']!='selected_for_research' or r['geometry_hash_method']!='binary64-sorted-compact-geojson-v1' or not isinstance(r['segments'],list) or not r['segments'] or len(r['segments'])>1000 or not isinstance(r['witnesses'],list):raise ValueError('invalid selected region')
+  if not r or set(r)!=required or r['decision_revision']!=revision_id or r['execution_status']!='selected_for_research' or r['geometry_hash_method']!='binary64-sorted-compact-geojson-v1' or not isinstance(r['segments'],list) or not r['segments'] or not isinstance(r['witnesses'],list):raise ValueError('invalid selected region')
   for segment in r['segments']:
    if not isinstance(segment,dict) or set(segment)!={'kind','id','start','end','reverse'}:raise ValueError('invalid selected region segment')
    key=(segment['kind'],segment['id'])

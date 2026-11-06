@@ -1,4 +1,5 @@
-import importlib.util,unittest
+import importlib.util,itertools,unittest
+from unittest import mock
 from pathlib import Path
 from fractions import Fraction as F
 p=Path(__file__).with_name('validate_terminal_closure.py');s=importlib.util.spec_from_file_location('terminal',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
@@ -6,7 +7,7 @@ def pt(x,y):return (F(x),F(y),F(0))
 class TerminalClosure(unittest.TestCase):
  def call(self,points,lands):
   def code(x,y):return 17 if (x,y) in lands else 1
-  return m.verify_path(points,points[0],points[-1],code,1,17,100)
+  return m.verify_path(points,points[0],points[-1],code,1,17)
  def test_land_start_water_finish(self):
   p=[pt(F(1,2),F(1,2)),pt(F(3,2),F(1,2)),pt(F(5,2),F(1,2))];r=self.call(p,{(0,0)});self.assertEqual(r['terminal_land_cells_touched'],[[0,0]])
  def test_water_start_land_finish(self):
@@ -28,8 +29,12 @@ class TerminalClosure(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'boundary'):self.call(p,set())
  def test_reject_wrong_endpoint(self):
   p=[pt(F(1,2),F(1,2)),pt(F(3,2),F(1,2))]
-  with self.assertRaisesRegex(ValueError,'oriented'):m.verify_path(p,pt(F(1,4),F(1,2)),p[-1],lambda x,y:1,1,17,100)
- def test_reject_visits(self):
+  with self.assertRaisesRegex(ValueError,'oriented'):m.verify_path(p,pt(F(1,4),F(1,2)),p[-1],lambda x,y:1,1,17)
+ def test_all_cells_checked_without_visit_ceiling(self):
+  p=[pt(F(1,2),F(1,2)),pt(F(101,2),F(1,2))]
+  self.assertGreater(self.call(p,set())['cell_visits'],1)
+ def test_more_than_two_million_visits_are_checked(self):
   p=[pt(F(1,2),F(1,2)),pt(F(3,2),F(1,2))]
-  with self.assertRaisesRegex(ValueError,'visit limit'):m.verify_path(p,p[0],p[-1],lambda x,y:1,1,17,1)
+  with mock.patch.object(m.m,'touched_segment',return_value=itertools.repeat((0,0),2000001)):
+   self.assertEqual(self.call(p,set())['cell_visits'],2000001)
 if __name__=='__main__':unittest.main()

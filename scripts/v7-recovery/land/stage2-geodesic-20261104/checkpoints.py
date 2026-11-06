@@ -2,7 +2,6 @@
 import hashlib,json,math,os,shutil,uuid
 from pathlib import Path
 import numpy as np
-from verify_inputs import bounded_bytes
 
 def guard(directory,disk_floor_bytes):
  if shutil.disk_usage(directory).free<disk_floor_bytes:raise RuntimeError('disk guard reached')
@@ -30,17 +29,23 @@ def write(path,identity,phase,cursor,queries,arrays,disk_floor_bytes):
   if tmp.exists():tmp.unlink()
 
 def read(path,identity,expected_roots,guard=lambda:None):
- # Load a bounded immutable copy, reject ZIP bombs and forged NPY shapes before
- # NumPy can allocate. The total follows the known root count and fixed schema.
+ # Capture an immutable copy; reject compressed ZIPs and forged NPY shapes
+ # before NumPy loads the arrays. Array sizes derive from the expected roots.
  import io,zipfile
- n=len(expected_roots);raw=bounded_bytes(path,n*64+(2<<20),guard)
+ n=len(expected_roots);chunks=[]
+ with open(path,'rb') as stream:
+  while True:
+   guard();block=stream.read(1<<20)
+   if not block:break
+   chunks.append(block)
+ raw=b''.join(chunks)
  expected={'roots':(np.dtype('uint32'),(n,)),'hints':(np.dtype('uint8'),(n,)),'upper':(np.dtype('float64'),(n,)),'amb':(np.dtype('bool'),(n,)),'best':(np.dtype('float64'),(n,6))}
  with zipfile.ZipFile(io.BytesIO(raw)) as zf:
   names=zf.namelist()
   if len(names)!=6 or set(names)!={k+'.npy' for k in (*expected,'metadata')}:raise ValueError('bad checkpoint contents')
   for name in names:
    info=zf.getinfo(name)
-   if info.compress_type!=zipfile.ZIP_STORED or info.file_size>n*64+(1<<20):raise ValueError('checkpoint member exceeds bound')
+   if info.compress_type!=zipfile.ZIP_STORED:raise ValueError('compressed checkpoint member unsupported')
    with zf.open(info) as f:
     version=np.lib.format.read_magic(f)
     if version==(1,0):shape,fortran,dtype=np.lib.format.read_array_header_1_0(f)
@@ -48,8 +53,9 @@ def read(path,identity,expected_roots,guard=lambda:None):
     else:raise ValueError('unsupported NPY version')
     key=name[:-4]
     if key=='metadata':
-     if dtype!=np.dtype('uint8') or len(shape)!=1 or shape[0]>1<<20 or fortran:raise ValueError('bad checkpoint metadata shape')
+     if dtype!=np.dtype('uint8') or len(shape)!=1 or fortran:raise ValueError('bad checkpoint metadata shape')
     elif (dtype,shape)!=expected[key] or fortran:raise ValueError('bad checkpoint array shape')
+    if info.file_size!=f.tell()+math.prod(shape)*dtype.itemsize:raise ValueError('bad checkpoint member length')
  guard()
  with np.load(io.BytesIO(raw),allow_pickle=False) as z:
   if set(z.files)!={'metadata','roots','hints','upper','amb','best'}:raise ValueError('bad checkpoint contents')

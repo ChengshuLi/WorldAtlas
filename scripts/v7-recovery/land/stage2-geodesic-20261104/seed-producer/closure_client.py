@@ -42,7 +42,7 @@ class ClosureChecker:
    checker_copy=d/'terminal.py';support_copy=d/'validate_water_closure_v2.py'
    for source,target,digest in ((self.terminal_checker,checker_copy,self.terminal_expected),(self.checker,support_copy,self.expected)):
     data=source.read_bytes()
-    if len(data)>1<<20 or hashlib.sha256(data).hexdigest()!=digest:raise ValueError('captured terminal checker mismatch')
+    if hashlib.sha256(data).hexdigest()!=digest:raise ValueError('captured terminal checker mismatch')
     target.write_bytes(data)
    _run_checker(checker_copy,['--contract',self.contract,'--contract-sha256',self.contract_sha,'--closure',closure,'--closure-sha256',expected_geom,'--physical-dir',self.physical,*args,'--output',proof],log)
    result=json.loads(proof.read_bytes())
@@ -59,11 +59,10 @@ class ClosureChecker:
   with tempfile.TemporaryDirectory(prefix='closure-check-',dir=self.work) as t:
    d=Path(t);geometry=d/'geometry.json';proof=d/'proof.json';log=d/'checker.log';captured=d/'checker.py'
    geometry.write_text(json.dumps(geom,sort_keys=True,separators=(',',':'),allow_nan=False));geometry_bytes=geometry.read_bytes();source=self.checker.read_bytes()
-   if len(source)>1<<20 or hashlib.sha256(source).hexdigest()!=self.expected:raise ValueError('captured checker mismatch')
+   if hashlib.sha256(source).hexdigest()!=self.expected:raise ValueError('captured checker mismatch')
    captured.write_bytes(source);os.chmod(captured,0o500)
    _run_checker(captured,['--contract',self.contract,'--contract-sha256',self.contract_sha,'--geometry',geometry,'--geometry-sha256',expected_geom,'--physical-dir',self.physical,'--output',proof],log)
    proof_bytes=proof.read_bytes()
-   if len(proof_bytes)>1<<20:raise ValueError('invalid closure proof size')
    result=json.loads(proof_bytes)
    if result.get('schema')!='physical-water-closure-proof-v1' or result.get('status')!='valid' or result.get('geometry_sha256')!=expected_geom or result.get('physical_rows_sha256')!=self.rows or result.get('physical_runs_sha256')!=self.runs or result.get('checker_sha256')!=self.expected or result.get('contract_sha256')!=self.contract_sha:raise ValueError('closure proof pin mismatch')
    if sha(self.checker,self.guard)!=self.expected or sha(captured,self.guard)!=self.expected or sha(self.contract,self.guard)!=self.contract_sha or geometry.read_bytes()!=geometry_bytes:raise ValueError('closure checker, contract or geometry changed during execution')

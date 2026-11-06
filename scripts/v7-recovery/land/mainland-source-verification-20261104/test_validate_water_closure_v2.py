@@ -11,6 +11,15 @@ class Validation(unittest.TestCase):
  def test_vertical_edge(self): self.assertEqual(self.cells(1,F(1,4),1,F(7,4)), {(0,0),(1,0),(0,1),(1,1)})
  def test_horizontal_edge(self): self.assertEqual(self.cells(F(1,4),1,F(7,4),1), {(0,0),(1,0),(0,1),(1,1)})
  def test_reverse(self): self.assertEqual(self.cells(F(1,5),F(19,10),F(9,5),F(1,10)), self.cells(F(9,5),F(1,10),F(1,5),F(19,10)))
+ def test_large_geometry_keeps_semantic_checks(self):
+  raw=b'{"type":"LineString","coordinates":[[1,1],[2,2]]}'+b' '*((2<<20)+1)
+  digest,points=m.geom_and_points(raw);self.assertEqual(len(digest),64);self.assertEqual(len(points),2)
+  raw=b'{"type":"LineString","coordinates":[[1,1],[1,1]]}'+b' '*((2<<20)+1)
+  with self.assertRaisesRegex(ValueError,'zero-length'):m.geom_and_points(raw)
+ def test_large_line_vertex_count(self):
+  coords=[[i/100000,1] for i in range(100001)]
+  _,points=m.geom_and_points(json.dumps({'type':'LineString','coordinates':coords}).encode())
+  self.assertEqual(len(points),100001)
  def test_reject_180_cross(self):
   with self.assertRaisesRegex(ValueError,'dateline'): m.geom_and_points(json.dumps({'type':'LineString','coordinates':[[179,10],[-179,10]]}).encode())
  def test_reject_zero(self):
@@ -96,8 +105,10 @@ class ContractValidation(unittest.TestCase):
    with self.assertRaisesRegex(ValueError,'producer evidence hash'): m.verify_producer_code(contract,c)
    report['grid']['width']=3; report_bytes=json.dumps(report).encode(); (base/'report.json').write_bytes(report_bytes); c['physical']['report_sha256']=hashlib.sha256(report_bytes).hexdigest()
    with self.assertRaisesRegex(ValueError,'grid mismatch'): m.verify_physical_report(base,c)
- def test_reject_excess_visits(self):
+ def test_historical_visit_setting_is_not_a_ceiling(self):
   c=self.make();c['resources']['max_cell_visits']=2000001
-  with self.assertRaisesRegex(ValueError,'visit limit'): self.load(c)
+  self.load(c)
+  c['resources']['max_cell_visits']=0
+  with self.assertRaisesRegex(ValueError,'historical visit setting'):self.load(c)
 
 if __name__=='__main__': unittest.main()

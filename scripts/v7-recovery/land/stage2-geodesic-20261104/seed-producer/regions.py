@@ -22,7 +22,7 @@ def coord(v):
  return d
 
 def points(g):
- if not isinstance(g,dict) or set(g)!={'type','coordinates'} or g['type']!='LineString' or not isinstance(g['coordinates'],list) or not 2<=len(g['coordinates'])<=200000:raise ValueError('invalid L2 LineString')
+ if not isinstance(g,dict) or set(g)!={'type','coordinates'} or g['type']!='LineString' or not isinstance(g['coordinates'],list) or len(g['coordinates'])<2:raise ValueError('invalid L2 LineString')
  out=[]
  for p in g['coordinates']:
   if not isinstance(p,list) or len(p)!=2:raise ValueError('invalid coordinate pair')
@@ -34,8 +34,8 @@ def points(g):
  return out
 
 def assemble(revision_id,records,decision,source_catalog,closure_checker,*,physical_rows_sha256,physical_runs_sha256,checker_sha256,closure_contract_sha256,guard,terminal_checker_sha256=None):
- if not isinstance(revision_id,str) or not revision_id or not isinstance(decision,dict) or set(decision)!={'region_id','revision_id','execution_status','segments','geometry_sha256','geometry_hash_method','witnesses'} or decision['geometry_hash_method']!='binary64-sorted-compact-geojson-v1' or decision['revision_id']!=revision_id or decision['execution_status']!='selected_for_research' or not isinstance(decision['region_id'],str) or not decision['region_id'] or not isinstance(decision['segments'],list) or not decision['segments'] or len(decision['segments'])>1000 or not callable(closure_checker) or not callable(guard) or any(not re.fullmatch('[0-9a-f]{64}',str(x)) for x in (physical_rows_sha256,physical_runs_sha256,checker_sha256,closure_contract_sha256)):raise ValueError('invalid selected region decision')
- ring=[];trace=[];used=set();total_vertices=0
+ if not isinstance(revision_id,str) or not revision_id or not isinstance(decision,dict) or set(decision)!={'region_id','revision_id','execution_status','segments','geometry_sha256','geometry_hash_method','witnesses'} or decision['geometry_hash_method']!='binary64-sorted-compact-geojson-v1' or decision['revision_id']!=revision_id or decision['execution_status']!='selected_for_research' or not isinstance(decision['region_id'],str) or not decision['region_id'] or not isinstance(decision['segments'],list) or not decision['segments'] or not callable(closure_checker) or not callable(guard) or any(not re.fullmatch('[0-9a-f]{64}',str(x)) for x in (physical_rows_sha256,physical_runs_sha256,checker_sha256,closure_contract_sha256)):raise ValueError('invalid selected region decision')
+ ring=[];trace=[];used=set()
  for item in decision['segments']:
   guard()
   if not isinstance(item,dict) or set(item)!={'kind','id','start','end','reverse'} or item['kind'] not in ('boundary','route') or not isinstance(item['id'],str) or type(item['start']) is not int or type(item['end']) is not int or type(item['reverse']) is not bool:raise ValueError('invalid region segment selection')
@@ -94,8 +94,6 @@ def assemble(revision_id,records,decision,source_catalog,closure_checker,*,physi
    selected_line={'type':'LineString','coordinates':[[float(x),float(y)] for x,y in selected]}
    if not isinstance(proof,dict) or proof.get('schema')!=expected_schema or proof.get('status')!='valid' or proof.get('geometry_sha256')!=geometry_hash(selected_line) or proof.get('physical_rows_sha256')!=physical_rows_sha256 or proof.get('physical_runs_sha256')!=physical_runs_sha256 or proof.get('contract_sha256')!=closure_contract_sha256 or proof.get('checker_sha256')!=(terminal_checker_sha256 if method=='physical_terminal_closure_v1' else checker_sha256):raise ValueError('water closure not validated against geometry, physical mask and checker pins')
   else:proof=None
-  total_vertices+=len(selected)
-  if total_vertices>250000:raise ValueError('region vertex limit exceeded')
   ring.extend(selected if not ring else selected[1:]);used.add(key)
   trace.append({'kind':item['kind'],'id':item['id'],'geometry_sha256':record['geometry_sha256'],'start':a,'end':b,'reverse':item['reverse'],'lineage_status':record.get('lineage_status'),'source_citations':citations,'route_provenance':record.get('provenance') if item['kind']=='route' else None,'stored_proof_status':'hash_reference_not_loaded' if item['kind']=='route' else None,'closure_proof':proof})
  if len(ring)<4 or ring[0]!=ring[-1]:raise ValueError('region ring is not explicitly closed')

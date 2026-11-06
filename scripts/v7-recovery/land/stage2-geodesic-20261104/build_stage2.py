@@ -18,7 +18,16 @@ INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','c
 
 def need(x,msg):
  if not x:raise ValueError(msg)
-def read_json(path,guard,limit=16<<20):return json.loads(verify_inputs.bounded_bytes(path,limit,guard))
+def read_bytes(path,guard=lambda:None):
+ chunks=[]
+ with open(path,'rb') as f:
+  while True:
+   guard();block=f.read(1<<20)
+   if not block:break
+   chunks.append(block)
+ return b''.join(chunks)
+def read_json(path,guard):return json.loads(read_bytes(path,guard))
+def representative_byte_limit(tile_count):return tile_count*6*32*20
 def pin(spec,guard):
  need(isinstance(spec,dict) and set(spec)=={'path','sha256'} and isinstance(spec['path'],str) and isinstance(spec['sha256'],str) and contracts.HEX.fullmatch(spec['sha256']),'invalid file pin')
  p=Path(spec['path']).resolve();need(p.is_file() and verify_inputs.sha_file(p,guard)==spec['sha256'],'input hash mismatch: '+str(p));return p
@@ -34,7 +43,7 @@ def disjoint(cfg,config_path,work,output):
  need(all(not (work.parent/(work.name+'.lock')).is_relative_to(d) for d in dirs),'lock overlaps input')
 
 def load_config(path):
- raw=verify_inputs.bounded_bytes(path,1<<20);cfg=json.loads(raw)
+ raw=read_bytes(path);cfg=json.loads(raw)
  keys={'schema','grid','inputs','seed_code_files','resolution_code_files','hint_code_files','tile_directory','policy_id','policy_version','controls','orchestration'}
  need(set(cfg)==keys and cfg['schema']=='stage2-source-geodesic-v1' and isinstance(cfg['inputs'],dict) and set(cfg['inputs'])==INPUTS,'invalid stage-2 config or unsupported historical inputs')
  for k in ('seed_code_files','resolution_code_files','hint_code_files'):need(isinstance(cfg[k],dict) and bool(cfg[k]) and all(isinstance(x,str) and x and '/' not in x for x in cfg[k]),'invalid code file pins')
@@ -94,12 +103,12 @@ def _build(cp,work,output,resume,raw,cfg):
  roots=np.frombuffer(verify_inputs.bounded_bytes(paths['hint_roots'],count*4,guard),dtype='<u4').copy();hints=np.frombuffer(verify_inputs.bounded_bytes(paths['hint_codes'],count,guard),dtype='u1').copy()
  need(len(roots)==count and len(hints)==count and np.all(roots[1:]>roots[:-1]) and np.all(np.isin(hints,list(categories))),'invalid fresh root/hint arrays')
  # Verify every tile byte against the current selected seed with a freshly built verifier.
- src=HERE/'verify_seed_index.cpp';src_bytes=verify_inputs.bounded_bytes(src,1<<20,guard);need(hashlib.sha256(src_bytes).hexdigest()==code[src.name],'verifier changed')
+ src=HERE/'verify_seed_index.cpp';src_bytes=read_bytes(src,guard);need(hashlib.sha256(src_bytes).hexdigest()==code[src.name],'verifier changed')
  builddir=work/('verifier-build-'+uuid.uuid4().hex);builddir.mkdir();copy=builddir/src.name;copy.write_bytes(src_bytes);binary=builddir/'verifier'
  subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(copy),'-lcrypto','-o',str(binary)],check=True)
  need(verify_inputs.sha_file(src,guard)==code[src.name] and verify_inputs.sha_file(copy,guard)==code[src.name],'verifier changed during compilation');guard()
  v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);tilecheck=json.loads(v.stdout);need(tilecheck.get('status')=='verified','seed/tile verification failed')
- spec=verify_inputs.manifest(paths['tile_manifest'],w,h,1024,guard);rep_bytes=verify_inputs.bounded_bytes(paths['representatives'],min(128<<20,len(spec)*6*32*20),guard);rep=np.frombuffer(rep_bytes,dtype='<u4');need(len(rep)%5==0,'invalid representative shape');rep=rep.reshape(-1,5)
+ spec=verify_inputs.manifest(paths['tile_manifest'],w,h,1024,guard);rep_bytes=verify_inputs.bounded_bytes(paths['representatives'],representative_byte_limit(len(spec)),guard);rep=np.frombuffer(rep_bytes,dtype='<u4');need(len(rep)%5==0,'invalid representative shape');rep=rep.reshape(-1,5)
  tiles=verify_inputs.verify_representatives(cfg['tile_directory'],paths['tile_manifest'],rep,w,h,guard=guard);need(len(tiles)==tilecheck['tiles'],'tile set mismatch')
  run_count=paths['component_runs'].stat().st_size//12;co=engine.offsets(paths['component_rows'],h,run_count)
  coverage=preflight.validate(w,h,paths['component_rows'],paths['component_runs'],paths['physical_rows'],paths['physical_runs'],paths['seed_rows'],paths['seed_runs'],roots,seed_roots,required_codes=categories.keys(),guard=guard,seed_rules=seed['seed_rules'],expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'])
@@ -114,7 +123,7 @@ def _build(cp,work,output,resume,raw,cfg):
  for v in inp.values():pin(v,guard)
  for field in code_files:
   for v in cfg[field].values():pin(v,guard)
- pin(cfg['orchestration']['derived_manifest'],guard);pin(cfg['orchestration']['physical_lineage_report'],guard);need(verify_physical_lineage.validate_combined(read_json(paths['decision_snapshot'],guard),pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard)==lineage,'physical lineage changed');need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and {n:verify_inputs.sha_file(HERE/n,guard) for n in CODE_NAMES}==code,'input or code changed')
+ pin(cfg['orchestration']['derived_manifest'],guard);pin(cfg['orchestration']['physical_lineage_report'],guard);need(verify_physical_lineage.validate_combined(read_json(paths['decision_snapshot'],guard),pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard)==lineage,'physical lineage changed');need(read_bytes(cp,guard)==raw and {n:verify_inputs.sha_file(HERE/n,guard) for n in CODE_NAMES}==code,'input or code changed')
  v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);need(json.loads(v.stdout).get('status')=='verified','seed/tile recheck failed')
  os.replace(partial/'report.json',partial/'writer-report.json')
  provisional=cfg['orchestration']['provisional_only']

@@ -43,7 +43,7 @@ def code_hashes(guard):
  names=['orchestrate_stage2.py','representatives.py','build_seed_tiles.py']+[f'seed-producer/{x}' for x in SEED_NAMES]+[f'hint-producer/{x}' for x in HINT_NAMES]+list(build_stage2.CODE_NAMES)
  return {n:verify_inputs.sha_file(HERE/n,guard) for n in names}
 def load_config(path):
- raw=verify_inputs.bounded_bytes(path,1<<20);obj=json.loads(raw)
+ raw=build_stage2.read_bytes(path);obj=json.loads(raw)
  keys={'schema','grid','inputs','policy_id','policy_version','controls','seed_controls'}
  need(isinstance(obj,dict) and set(obj)==keys and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs'])==BASE_INPUTS,'invalid fresh orchestration config or historical input')
  build_stage2.validate_controls(obj['controls'])
@@ -69,17 +69,17 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
   need(SEED_FREEZE_CURRENT and REVIEWED_SEED_FREEZE is not None and seed_code==REVIEWED_SEED_FREEZE,'current reviewed seed producer freeze not installed')
  need(SELECTED_POLICY_CROSSWALK_READY,'selected land-policy crosswalk not yet implemented')
  grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int and 1<grid['width']<=1000000 and 0<grid['height']<=1000000 and grid['west']==-180 and grid['north']==90 and grid['step']==360/grid['width'] and 90-grid['height']*grid['step']>=-90-1e-8,'invalid global grid')
- closure_contract=json.loads(verify_inputs.bounded_bytes(paths['closure_contract'],65536,guard));need(closure_contract.get('schema')=='physical-water-closure-contract-v1' and closure_contract.get('physical',{}).get('rows_sha256')==cfg['inputs']['physical_rows']['sha256'] and closure_contract.get('physical',{}).get('runs_sha256')==cfg['inputs']['physical_runs']['sha256'] and closure_contract.get('physical',{}).get('report_sha256')==cfg['inputs']['physical_report']['sha256'],'physical closure contract/input mismatch')
- snapshot=json.loads(verify_inputs.bounded_bytes(paths['decision_snapshot'],16<<20,guard));rev=snapshot.get('decision_revision',{}).get('id');entity=snapshot.get('entity_revision',{}).get('id');contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
- pins={k:v['sha256'] for k,v in cfg['inputs'].items()};lineage=verify_physical_lineage.validate_combined(snapshot,pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard);manifest=json.loads(verify_inputs.bounded_bytes(paths['component_manifest'],16<<20,guard));contracts.component_manifest(manifest,grid,pins)
- physical=json.loads(verify_inputs.bounded_bytes(paths['physical_report'],16<<20,guard));po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==grid and po.get('rows.u32le')==pins['physical_rows'] and po.get('runs.u32le')==pins['physical_runs'],'physical report mismatch')
- rr=json.loads(verify_inputs.bounded_bytes(paths['resolution_request'],16<<20,guard));rnames={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py'}
+ closure_contract=json.loads(build_stage2.read_bytes(paths['closure_contract'],guard));need(closure_contract.get('schema')=='physical-water-closure-contract-v1' and closure_contract.get('physical',{}).get('rows_sha256')==cfg['inputs']['physical_rows']['sha256'] and closure_contract.get('physical',{}).get('runs_sha256')==cfg['inputs']['physical_runs']['sha256'] and closure_contract.get('physical',{}).get('report_sha256')==cfg['inputs']['physical_report']['sha256'],'physical closure contract/input mismatch')
+ snapshot=json.loads(build_stage2.read_bytes(paths['decision_snapshot'],guard));rev=snapshot.get('decision_revision',{}).get('id');entity=snapshot.get('entity_revision',{}).get('id');contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
+ pins={k:v['sha256'] for k,v in cfg['inputs'].items()};lineage=verify_physical_lineage.validate_combined(snapshot,pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard);manifest=json.loads(build_stage2.read_bytes(paths['component_manifest'],guard));contracts.component_manifest(manifest,grid,pins)
+ physical=json.loads(build_stage2.read_bytes(paths['physical_report'],guard));po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==grid and po.get('rows.u32le')==pins['physical_rows'] and po.get('runs.u32le')==pins['physical_runs'],'physical report mismatch')
+ rr=json.loads(build_stage2.read_bytes(paths['resolution_request'],guard));rnames={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py'}
  need(rr.get('schema')=='mainland-witness-request-v1' and rr.get('grid')==grid and rr.get('code_sha256')=={k:code[v] for k,v in rnames.items()},'resolution request/code mismatch')
  for rk,ik in (('snapshot','decision_snapshot'),('component_manifest','component_manifest'),('component_source','component_source'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('component_rows','component_rows'),('component_runs','component_runs')):need(rr.get(rk,{}).get('sha256')==pins[ik],'resolution request pin mismatch: '+rk)
  identity={'schema':'stage2-fresh-work-v1','config_sha256':hashlib.sha256(raw).hexdigest(),'input_sha256':{k:v['sha256'] for k,v in cfg['inputs'].items()},'code_sha256':code,'output_path':str(out),'provisional_only':provisional_only}
  need(not out.exists(),'output already exists')
  if resume:
-  need(work.is_dir() and json.loads(verify_inputs.bounded_bytes(work/'identity.json',16<<20,guard))==identity,'resume identity mismatch')
+  need(work.is_dir() and json.loads(build_stage2.read_bytes(work/'identity.json',guard))==identity,'resume identity mismatch')
   return finish_from_marker(cfg,raw,work,out,code,guard,True,provisional_only)
  need(not work.exists(),'fresh work already exists')
  work.mkdir(mode=0o700)
@@ -90,12 +90,12 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  write_json(work/'identity.json',identity);write_json(work/'lineage'/'report.json',lineage)
  rr=paths['resolution_request'];rout=work/'resolution'/'report.json'
  subprocess.run([sys.executable,str(HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py'),str(rr),str(rout)],check=True)
- resolution=json.loads(verify_inputs.bounded_bytes(rout,16<<20,guard));snapshot=json.loads(verify_inputs.bounded_bytes(paths['decision_snapshot'],16<<20,guard));rev=snapshot['decision_revision']['id'];entity=snapshot['entity_revision']['id'];metric,categories,_=contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
+ resolution=json.loads(build_stage2.read_bytes(rout,guard));snapshot=json.loads(build_stage2.read_bytes(paths['decision_snapshot'],guard));rev=snapshot['decision_revision']['id'];entity=snapshot['entity_revision']['id'];metric,categories,_=contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
  rp=pin(rout,guard);si={}
  for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel')):si[dst]=cfg['inputs'][src]
  seedrequest=work/'requests'/'seed.json';seedwork=work/'seed-work-parent'/'build';seedout=work/'seed-work-parent'/'output'
  sr={'schema':'worldatlas-stage2-seed-request-v1','grid':cfg['grid'],'inputs':si,'controls':{'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}};si['resolution']=rp;sr['inputs']=si;write_json(seedrequest,sr)
- subprocess.run([sys.executable,str(HERE/'seed-producer'/'seed_worker.py'),str(seedrequest),str(seedwork),str(seedout)],check=True);seed=json.loads(verify_inputs.bounded_bytes(seedout/'report.json',16<<20,guard))
+ subprocess.run([sys.executable,str(HERE/'seed-producer'/'seed_worker.py'),str(seedrequest),str(seedwork),str(seedout)],check=True);seed=json.loads(build_stage2.read_bytes(seedout/'report.json',guard))
  srows=pin(seedout/'rows.u32le',guard);sruns=pin(seedout/'runs.u32le',guard)
  # Verify selected rules, source/region traces and tie policy before using seed.
  groups={g['group_id']:g for g in resolution['groups']};entity_codes={b['entity_id']:b['code'] for b in snapshot['category_bindings'] if b['physical_class']=='land'}
@@ -105,7 +105,7 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  # A separately compiled complete seed/tile verifier must precede hints. The
  # core repeats this verification and validates representative cell membership.
 
- source=HERE/'verify_seed_index.cpp';source_data=verify_inputs.bounded_bytes(source,1<<20,guard);need(hashlib.sha256(source_data).hexdigest()==code['verify_seed_index.cpp'],'verifier source changed')
+ source=HERE/'verify_seed_index.cpp';source_data=build_stage2.read_bytes(source,guard);need(hashlib.sha256(source_data).hexdigest()==code['verify_seed_index.cpp'],'verifier source changed')
  source_copy=work/'requests'/'tile-verifier.cpp'
  with open(source_copy,'xb') as f:f.write(source_data);f.flush();os.fsync(f.fileno())
  binary=work/'requests'/'tile-verifier';subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(source_copy),'-lcrypto','-o',str(binary)],check=True)
@@ -114,7 +114,7 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  need(json.loads(check.stdout).get('status')=='verified','fresh seed/tile verification failed')
  import numpy as np
 
- rdata=verify_inputs.bounded_bytes(reps,128<<20,guard);need(len(rdata)%20==0,'bad representative data');arr=np.frombuffer(rdata,dtype='<u4').reshape(-1,5)
+ rdata=build_stage2.read_bytes(reps,guard);need(len(rdata)%20==0,'bad representative data');arr=np.frombuffer(rdata,dtype='<u4').reshape(-1,5)
  verify_inputs.verify_representatives(tileout,tileout/'manifest.txt',arr,g['width'],g['height'],guard=guard)
  hi={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hi.update({'seed_rows':srows,'seed_runs':sruns,'resolution_report':rp,'representatives':pin(reps,guard),'tile_manifest':pin(tileout/'manifest.txt',guard)})
  hr={'schema':'source-only-hints-diagnostic-request-v1','grid':g,'codes':sorted(categories),'inputs':hi,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']}
@@ -122,15 +122,15 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  subprocess.run([sys.executable,str(HERE/'hint-producer'/'run_diagnostic.py'),str(hreq),str(hout)],check=True)
  artifacts={'resolution_report':rp,'seed_rows':srows,'seed_runs':sruns,'seed_report':pin(seedout/'report.json',guard),'tile_manifest':pin(tileout/'manifest.txt',guard),'representatives':pin(reps,guard),'hint_roots':pin(hout/'roots.u32le',guard),'hint_codes':pin(hout/'hints.u8',guard),'hint_report':pin(hout/'report.json',guard)}
  for spec in cfg['inputs'].values():build_stage2.pin(spec,guard)
- need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
+ need(build_stage2.read_bytes(cp,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
  marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'artifacts':artifacts,'seed_request_sha256':verify_inputs.sha_file(seedrequest,guard),'hint_request_sha256':verify_inputs.sha_file(hreq,guard),'seed_tile_verification':json.loads(check.stdout),'physical_lineage_report':pin(work/'lineage'/'report.json',guard),'tile_directory':str(tileout),'code_sha256':code,'provisional_only':provisional_only}
  write_json(work/'derived'/'manifest.json',marker)
  return finish_from_marker(cfg,raw,work,out,code,guard,False,provisional_only)
 
 def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False):
- marker_path=work/'derived'/'manifest.json';marker_pin=pin(marker_path,guard);marker=json.loads(verify_inputs.bounded_bytes(marker_path,16<<20,guard));outer=hashlib.sha256(raw).hexdigest()
+ marker_path=work/'derived'/'manifest.json';marker_pin=pin(marker_path,guard);marker=json.loads(build_stage2.read_bytes(marker_path,guard));outer=hashlib.sha256(raw).hexdigest()
  need(marker.get('schema')=='stage2-fresh-derived-v1' and marker.get('outer_config_sha256')==outer and marker.get('orchestrator_sha256')==code['orchestrate_stage2.py'] and marker.get('code_sha256')==code and marker.get('provisional_only') is provisional_only,'derived manifest mismatch')
- snapshot=json.loads(verify_inputs.bounded_bytes(cfg['inputs']['decision_snapshot']['path'],16<<20,guard));lineage=verify_physical_lineage.validate_combined(snapshot,cfg['inputs']['decision_snapshot']['sha256'],cfg['inputs']['physical_lineage_request']['path'],cfg['inputs']['physical_report']['sha256'],cfg['inputs']['physical_rows']['sha256'],cfg['inputs']['physical_runs']['sha256'],cfg['grid'],guard);lineage_pin=marker.get('physical_lineage_report');need(isinstance(lineage_pin,dict) and Path(lineage_pin.get('path','')).resolve()==work/'lineage'/'report.json' and json.loads(verify_inputs.bounded_bytes(build_stage2.pin(lineage_pin,guard),16<<20,guard))==lineage,'physical lineage resume mismatch')
+ snapshot=json.loads(build_stage2.read_bytes(cfg['inputs']['decision_snapshot']['path'],guard));lineage=verify_physical_lineage.validate_combined(snapshot,cfg['inputs']['decision_snapshot']['sha256'],cfg['inputs']['physical_lineage_request']['path'],cfg['inputs']['physical_report']['sha256'],cfg['inputs']['physical_rows']['sha256'],cfg['inputs']['physical_runs']['sha256'],cfg['grid'],guard);lineage_pin=marker.get('physical_lineage_report');need(isinstance(lineage_pin,dict) and Path(lineage_pin.get('path','')).resolve()==work/'lineage'/'report.json' and json.loads(build_stage2.read_bytes(build_stage2.pin(lineage_pin,guard),guard))==lineage,'physical lineage resume mismatch')
 
  artifacts=marker.get('artifacts');names={'resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'}
  need(isinstance(artifacts,dict) and set(artifacts)==names,'incomplete derived artifacts')
@@ -140,13 +140,13 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False
  for p in cfg['inputs'].values():build_stage2.pin(p,guard)
  seedreq=work/'requests'/'seed.json';hintreq=work/'requests'/'hints.json'
  need(verify_inputs.sha_file(seedreq,guard)==marker.get('seed_request_sha256') and verify_inputs.sha_file(hintreq,guard)==marker.get('hint_request_sha256'),'derived request hash mismatch')
- sr=json.loads(verify_inputs.bounded_bytes(seedreq,1<<20,guard));hr=json.loads(verify_inputs.bounded_bytes(hintreq,1<<20,guard));snap=json.loads(verify_inputs.bounded_bytes(cfg['inputs']['decision_snapshot']['path'],16<<20,guard))
+ sr=json.loads(build_stage2.read_bytes(seedreq,guard));hr=json.loads(build_stage2.read_bytes(hintreq,guard));snap=json.loads(build_stage2.read_bytes(cfg['inputs']['decision_snapshot']['path'],guard))
  expected_seed={dst:cfg['inputs'][src] for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel'))};expected_seed['resolution']=artifacts['resolution_report']
  c=cfg['controls'];need(expected_seed['resolution']['sha256']==artifacts['resolution_report']['sha256'] and sr.get('schema')=='worldatlas-stage2-seed-request-v1' and sr.get('grid')==cfg['grid'] and sr.get('inputs')==expected_seed and sr.get('controls')=={'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']},'seed request linkage mismatch')
  hint_inputs={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hint_inputs.update({k:artifacts[k] for k in ('seed_rows','seed_runs','resolution_report','representatives','tile_manifest')})
  rev=snap.get('decision_revision',{}).get('id');entity=snap.get('entity_revision',{}).get('id');_,categories,_=contracts.snap_policy(snap,rev,entity,cfg['policy_id'],cfg['policy_version'])
  need(hr=={'schema':'source-only-hints-diagnostic-request-v1','grid':cfg['grid'],'codes':sorted(categories),'inputs':hint_inputs,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']},'hint request linkage mismatch')
- seed_report=json.loads(verify_inputs.bounded_bytes(artifacts['seed_report']['path'],16<<20,guard));hint_report=json.loads(verify_inputs.bounded_bytes(artifacts['hint_report']['path'],16<<20,guard));need(seed_report.get('request_sha256')==marker['seed_request_sha256'] and seed_report.get('input_sha256')=={k:v['sha256'] for k,v in expected_seed.items()} and hint_report.get('request_sha256')==marker['hint_request_sha256'],'request/report provenance mismatch')
+ seed_report=json.loads(build_stage2.read_bytes(artifacts['seed_report']['path'],guard));hint_report=json.loads(build_stage2.read_bytes(artifacts['hint_report']['path'],guard));need(seed_report.get('request_sha256')==marker['seed_request_sha256'] and seed_report.get('input_sha256')=={k:v['sha256'] for k,v in expected_seed.items()} and hint_report.get('request_sha256')==marker['hint_request_sha256'],'request/report provenance mismatch')
  tiles=work/'tiles-parent'/'tiles';need(marker.get('tile_directory')==str(tiles) and tiles.is_dir() and marker.get('seed_tile_verification',{}).get('status')=='verified','tile verification binding mismatch')
  inputs={k:v for k,v in cfg['inputs'].items() if k in build_stage2.INPUTS};inputs.update(artifacts)
  need(set(inputs)==build_stage2.INPUTS,'core input mapping mismatch')
@@ -155,7 +155,7 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False
  core={'schema':'stage2-source-geodesic-v1','grid':cfg['grid'],'inputs':inputs,'seed_code_files':seed_files,'resolution_code_files':{k:pin(HERE/v,guard) for k,v in resolver_files.items()},'hint_code_files':{n:pin(HERE/'hint-producer'/n,guard) for n in ('hints.py','run_diagnostic.py')},'tile_directory':str(tiles),'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'controls':cfg['controls'],'orchestration':{'outer_config_sha256':outer,'orchestrator_sha256':code['orchestrate_stage2.py'],'derived_manifest':marker_pin,'physical_lineage_report':lineage_pin,'provisional_only':provisional_only}}
  cp=work/'core-requests'/'config.json'
  core_work=work/'core'
- if cp.exists():need(resume and json.loads(verify_inputs.bounded_bytes(cp,1<<20,guard))==core,'core resume config mismatch')
+ if cp.exists():need(resume and json.loads(build_stage2.read_bytes(cp,guard))==core,'core resume config mismatch')
  else:
   need(not core_work.exists(),'core work exists without its config');write_json(cp,core)
  return build_stage2.build(cp,core_work,out,resume=resume and core_work.exists())

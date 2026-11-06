@@ -26,5 +26,5 @@ def create(output,inputs,grid,policy_id,policy_version,controls,seed_controls):
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('output');p.add_argument('spec',help='JSON with inputs, grid, policy_id, policy_version, controls, and seed_controls');a=p.parse_args()
  try:
-  spec=json.loads(verify_inputs.bounded_bytes(a.spec,1<<20));stage2.need(set(spec)=={'inputs','grid','policy_id','policy_version','controls','seed_controls'},'invalid config spec');print(json.dumps(create(a.output,**spec),sort_keys=True))
+  spec=json.loads(stage2.read_bytes(a.spec));stage2.need(set(spec)=={'inputs','grid','policy_id','policy_version','controls','seed_controls'},'invalid config spec');print(json.dumps(create(a.output,**spec),sort_keys=True))
  except Exception as exc:print('error: '+str(exc),file=__import__('sys').stderr);raise SystemExit(1)

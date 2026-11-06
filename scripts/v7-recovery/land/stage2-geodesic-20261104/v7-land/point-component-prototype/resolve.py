@@ -23,10 +23,8 @@ def digest(path):
 
     return h.hexdigest()
 
-def read_bounded(path, label, limit=8*1024*1024):
-    with open(path, 'rb') as f: data=f.read(limit+1)
-    need(len(data)<=limit, f'{label} exceeds bounded size')
-    return data
+def read_document(path, label):
+    return Path(path).read_bytes()
 
 def pinned(ref):
     need(isinstance(ref,dict) and text(ref.get('path')) and isinstance(ref.get('sha256'),str) and HEX.fullmatch(ref['sha256']), 'invalid file pin')
@@ -78,8 +76,15 @@ def lineage_specs(manifest):
     raise ValueError('unsupported component lineage report')
 
 def checkpoint_header(path):
-    with open(path,'rb') as f:prefix=f.read(65536)
-    i=prefix.find(b'"best":{');need(i>=0,'checkpoint header missing')
+    marker=b'"best":{';prefix=bytearray()
+    with open(path,'rb') as f:
+        while True:
+            block=f.read(65536)
+            if not block:break
+            prefix.extend(block);i=prefix.find(marker)
+            if i>=0:break
+        else:i=-1
+    i=prefix.find(marker);need(i>=0,'checkpoint header missing')
     try:obj=json.loads(prefix[:i]+b'"best":{}}}')
     except (ValueError,UnicodeDecodeError):raise ValueError('invalid checkpoint header') from None
     payload=obj.get('payload',{});need(payload.get('schema')=='simple-v2-query-checkpoint-v1' and isinstance(payload.get('identity'),dict),'invalid checkpoint identity')
@@ -98,11 +103,11 @@ def validate_lineage(manifest,req,grid):
         for k in ('physical_rows','physical_runs','component_rows','component_runs'):need(isinstance(inputs.get(k),dict) and inputs[k].get('sha256')==req[k]['sha256'],'baseline component stream pin mismatch')
         need(inputs.get('component_builder_source',{}).get('sha256')==req['component_source']['sha256'],'baseline component builder source mismatch')
         physical_report,builder,source,spherical_report,checkpoint=paths
-        sr=json.loads(read_bounded(spherical_report,'spherical report'));need(sr.get('schema')=='simple-v2-land-report-v1' and sr.get('status')=='research-not-published' and sr.get('grid')==grid and sr.get('component_generation')=='independent-recompute' and sr.get('checkpoint_sha256')==inputs['spherical_checkpoint']['sha256'] and sr.get('component_builder_binary_sha256')==inputs['component_builder_binary']['sha256'] and sr.get('code_sha256',{}).get('build_components.cpp')==req['component_source']['sha256'],'prior component build provenance mismatch')
+        sr=json.loads(read_document(spherical_report,'spherical report'));need(sr.get('schema')=='simple-v2-land-report-v1' and sr.get('status')=='research-not-published' and sr.get('grid')==grid and sr.get('component_generation')=='independent-recompute' and sr.get('checkpoint_sha256')==inputs['spherical_checkpoint']['sha256'] and sr.get('component_builder_binary_sha256')==inputs['component_builder_binary']['sha256'] and sr.get('code_sha256',{}).get('build_components.cpp')==req['component_source']['sha256'],'prior component build provenance mismatch')
         for k in ('physical_rows','physical_runs'):need(sr.get('inputs',{}).get(k,{}).get('sha256')==req[k]['sha256'],'prior physical stream mismatch')
         cp=checkpoint_header(checkpoint);ci=cp['identity'];need(cp.get('next_row')==grid['height'] and cp.get('queries')==sr.get('queries') and ci.get('grid')==grid and ci.get('config_sha256')==sr.get('config_sha256') and ci.get('component_rows_sha256')==req['component_rows']['sha256'] and ci.get('component_runs_sha256')==req['component_runs']['sha256'] and ci.get('code_sha256',{}).get('build_components.cpp')==req['component_source']['sha256'],'prior checkpoint component identity mismatch')
         mode='wgs84-report-with-prior-independent-component-build'
-    pp=json.loads(read_bounded(physical_report,'physical report'));outputs=pp.get('physical_output_sha256',pp.get('output_sha256',{}))
+    pp=json.loads(read_document(physical_report,'physical report'));outputs=pp.get('physical_output_sha256',pp.get('output_sha256',{}))
     need(pp.get('status')=='candidate-only' and pp.get('grid')==grid and outputs.get('rows.u32le')==req['physical_rows']['sha256'] and outputs.get('runs.u32le')==req['physical_runs']['sha256'], 'physical report does not bind inputs')
     return mode,specs,paths
 
@@ -112,15 +117,15 @@ def resolve(req):
     need(req.get('schema')=='point-component-request-v1', 'invalid request schema')
     refs={k:pinned(req[k]) for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')}
     g=req.get('grid');need(isinstance(g,dict) and type(g.get('width')) is int and type(g.get('height')) is int and g['width']>0 and g['height']>0, 'invalid grid')
-    manifest=json.loads(read_bounded(refs['component_manifest'],'component manifest'))
+    manifest=json.loads(read_document(refs['component_manifest'],'component manifest'))
     lineage_mode,lineage_pins,lineage_paths=validate_lineage(manifest,req,g)
     width,height=g['width'],g['height'];step=finite_decimal(g.get('step'));west=finite_decimal(g.get('west'));north=finite_decimal(g.get('north'))
     need(step>0 and west==Decimal(-180) and north==Decimal(90) and Decimal(width)*step==Decimal(360) and Decimal(height)*step<=Decimal(180), 'invalid global grid geometry')
     for k in ('physical_rows','component_rows'):need(refs[k].stat().st_size==(height+1)*4,'row file size mismatch')
     for k,m in (('physical_runs',8),('component_runs',12)):need(refs[k].stat().st_size%m==0,'run alignment error')
-    raw_snap=json.loads(read_bounded(refs['snapshot'],'snapshot'));snapshot_schema=raw_snap.get('schema');adapter_path=Path(__file__).with_name('adapter.py').resolve();adapter_hash=None
+    raw_snap=json.loads(read_document(refs['snapshot'],'snapshot'));snapshot_schema=raw_snap.get('schema');adapter_path=Path(__file__).with_name('adapter.py').resolve();adapter_hash=None
     if snapshot_schema=='worldatlas-geography-decision-draft-evidence-v1':
-        adapter_bytes=read_bounded(adapter_path,'adapter code');adapter_hash=hashlib.sha256(adapter_bytes).hexdigest();need(req.get('adapter_sha256')==adapter_hash,'adapter code pin mismatch')
+        adapter_bytes=read_document(adapter_path,'adapter code');adapter_hash=hashlib.sha256(adapter_bytes).hexdigest();need(req.get('adapter_sha256')==adapter_hash,'adapter code pin mismatch')
         module=types.ModuleType('point_component_adapter');exec(compile(adapter_bytes,str(adapter_path),'exec'),module.__dict__);snap=module.adapt(raw_snap)
     else:
         snap=raw_snap;need(snap.get('schema')=='point-component-decision-snapshot-v1' and snap.get('source')=='neon-export' and snap.get('status')=='draft' and text(snap.get('revision')), 'draft Neon export required')
@@ -148,17 +153,17 @@ def resolve(req):
         need(d.get('method') in ('source_point_component_v1','source_point_named_region_component_v1') and d.get('execution_status')=='selected_for_research' and type(d.get('entity_id')) is int and text(d.get('island_identity')) and text(d.get('point_name')) and d['entity_id'] in entity_map, 'unselected or malformed decision')
         pk=(d.get('point_source_id'),d.get('point_source_version'));ik=(d.get('identity_source_id'),d.get('identity_source_version'))
         need(pk in files and ik in files and pk!=ik and text(d.get('source_feature_id')) and text(d.get('id_property')) and isinstance(d.get('geometry_sha256'),str) and HEX.fullmatch(d['geometry_sha256']), 'missing point or identity evidence')
-        data=json.loads(read_bounded(files[pk],'point source',1024*1024));need(data.get('type')=='FeatureCollection' and isinstance(data.get('features'),list),'point source must be FeatureCollection');point_crs=source_crs(data)
+        data=json.loads(read_document(files[pk],'point source'));need(data.get('type')=='FeatureCollection' and isinstance(data.get('features'),list),'point source must be FeatureCollection');point_crs=source_crs(data)
         matches=[f for f in data['features'] if isinstance(f,dict) and isinstance(f.get('properties'),dict) and d['id_property'] in f['properties'] and f['properties'][d['id_property']] is not None and type(f['properties'][d['id_property']]) in (str,int) and str(f['properties'][d['id_property']])==d['source_feature_id']]
         need(len(matches)==1, 'point feature identity must be unique');f=matches[0];need('crs' not in f,'nested feature CRS unsupported');geom=f.get('geometry');need(isinstance(geom,dict) and 'crs' not in geom,'nested geometry CRS unsupported');need(geom.get('type')=='Point' and isinstance(geom.get('coordinates'),list) and len(geom['coordinates'])==2, '2D point required')
         need(geometry_sha(geom)==d['geometry_sha256'], 'point geometry hash mismatch'); need(f['properties'].get('name')==d['point_name'], 'point name mismatch')
         identity_check=None
         if d['method']=='source_point_named_region_component_v1':
             if named_module is None:
-                named_bytes=read_bounded(named_path,'named identity code');named_hash=hashlib.sha256(named_bytes).hexdigest();need(req.get('named_identity_sha256')==named_hash,'named identity code pin mismatch')
+                named_bytes=read_document(named_path,'named identity code');named_hash=hashlib.sha256(named_bytes).hexdigest();need(req.get('named_identity_sha256')==named_hash,'named identity code pin mismatch')
                 named_module=runpy.run_path(str(named_path))
             spec={'method':'raw_named_polygon_contains_point_v1','identity_feature_id':d.get('identity_source_feature_id'),'identity_id_property':d.get('identity_id_property'),'identity_name_property':d.get('identity_name_property'),'identity_class_property':d.get('identity_class_property'),'identity_class_value':d.get('identity_class_value'),'identity_geometry_sha256':d.get('identity_geometry_sha256')}
-            identity_source=json.loads(read_bounded(files[ik],'identity source',8*1024*1024))
+            identity_source=json.loads(read_document(files[ik],'identity source'))
             identity_check=named_module['check'](identity_source,geom,d['island_identity'],spec)
         lon,lat=map(finite_decimal,geom['coordinates']);need(-180<=lon<180 and -90<=lat<=90, 'point outside WGS84')
         gx=(lon-west)/step;gy=(north-lat)/step;need(gx!=gx.to_integral_value() and gy!=gy.to_integral_value(), 'point on grid boundary is ambiguous')
@@ -184,10 +189,10 @@ def resolve(req):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('request');p.add_argument('output');a=p.parse_args()
-    request_path=Path(a.request).resolve();request=read_bounded(request_path,'request')
-    req=json.loads(request);result=resolve(req);need(read_bounded(request_path,'request')==request,'request changed during resolution')
+    request_path=Path(a.request).resolve();request=read_document(request_path,'request')
+    req=json.loads(request);result=resolve(req);need(read_document(request_path,'request')==request,'request changed during resolution')
     result['request_sha256']=hashlib.sha256(request).hexdigest();out=Path(a.output).resolve()
-    manifest=json.loads(read_bounded(req['component_manifest']['path'],'component manifest'))
+    manifest=json.loads(read_document(req['component_manifest']['path'],'component manifest'))
     input_paths=[request_path,Path(__file__).resolve(),Path(__file__).with_name('adapter.py').resolve(),(Path(__file__).resolve().parent.parent/'named-identity-prototype'/'named_identity.py').resolve()]+[Path(req[k]['path']).resolve() for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')]+[Path(x['path']).resolve() for x in req['source_files']]+[Path(x['path']).resolve() for x in lineage_specs(manifest)]
     need(all(not out.is_relative_to(p.parent) for p in input_paths), 'output overlaps an input directory'); payload=(json.dumps(result,sort_keys=True,indent=2)+'\n').encode()
     tmp=None

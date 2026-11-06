@@ -81,11 +81,11 @@ class OrchestrationTests(unittest.TestCase):
   proc=subprocess.run(cmd,capture_output=True,text=True)
   self.assertNotEqual(proc.returncode,0);self.assertNotIn('guardian',proc.stderr)
   self.assertNotIn('require_guardian',Path(o.__file__).read_text())
- def test_seed_worker_rejects_oversize_request_before_json(self):
+ def test_seed_worker_accepts_oversize_request_through_json_validation(self):
   with tempfile.TemporaryDirectory() as d:
-   request=Path(d)/'request';request.write_bytes(b'x'*((1<<20)+1));worker=Path(o.__file__).parent/'seed-producer/seed_worker.py'
+   request=Path(d)/'request';request.write_bytes(b'{}'+b' '*((1<<20)+1));worker=Path(o.__file__).parent/'seed-producer/seed_worker.py'
    result=subprocess.run([sys.executable,str(worker),str(request),str(Path(d)/'work'),str(Path(d)/'out')],capture_output=True,text=True)
-   self.assertNotEqual(result.returncode,0);self.assertIn('seed request exceeds bound',result.stderr);self.assertFalse((Path(d)/'out').exists())
+   self.assertNotEqual(result.returncode,0);self.assertIn('controls',result.stderr);self.assertNotIn('exceeds bound',result.stderr);self.assertFalse((Path(d)/'out').exists())
  def test_json_sync_failure_is_uncertain(self):
   with tempfile.TemporaryDirectory() as d:
    path=Path(d)/'marker.json'

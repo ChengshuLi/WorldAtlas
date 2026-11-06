@@ -22,7 +22,6 @@ def execute(request,guard=lambda:None):
  return {'schema':'stage2-region-worker-result-v1','status':'selected-research-region','geometry':geom,'report':report,'limitations':['Caller must authenticate the selected Neon export, source catalog and revision.','Closure proof checks only physical-water coverage, not geographic authority or historical V2/V7 equivalence.']}
 if __name__=='__main__':
  if len(sys.argv)!=3:raise SystemExit('usage: region_worker.py REQUEST OUTPUT')
- with open(sys.argv[1],'rb') as f:raw=f.read((16<<20)+1)
- if len(raw)>16<<20:raise SystemExit('request exceeds size limit')
+ with open(sys.argv[1],'rb') as f:raw=f.read()
  result=execute(json.loads(raw))
  with open(sys.argv[2],'x') as f:json.dump(result,f,sort_keys=True,allow_nan=False,separators=(',',':'));f.write('\n');f.flush();os.fsync(f.fileno())

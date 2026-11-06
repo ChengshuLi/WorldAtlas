@@ -36,16 +36,16 @@ def resolve(req):
     grid=req.get('grid');need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'},'invalid grid')
     w,h=grid['width'],grid['height'];step=helper.finite_decimal(grid['step']);west=helper.finite_decimal(grid['west']);north=helper.finite_decimal(grid['north'])
     need(type(w) is int and type(h) is int and w>0 and h>0 and west==Decimal(-180) and north==Decimal(90) and step>0 and Decimal(w)*step==Decimal(360) and Decimal(h)*step<=Decimal(180),'invalid global grid')
-    manifest=json.loads(helper.read_bounded(refs['component_manifest'],'component manifest'))
+    manifest=json.loads(helper.read_document(refs['component_manifest'],'component manifest'))
     need(manifest.get('schema')=='single-generation-component-manifest-v1','current independent component generation required')
     mode,lineage_pins,lineage_paths=helper.validate_lineage(manifest,req,grid)
     for k in ('physical_rows','component_rows'):need(refs[k].stat().st_size==(h+1)*4,'row file size mismatch')
     for k,m in (('physical_runs',8),('component_runs',12)):need(refs[k].stat().st_size % m==0,'run alignment error')
-    snap=json.loads(helper.read_bounded(refs['snapshot'],'snapshot'))
+    snap=json.loads(helper.read_document(refs['snapshot'],'snapshot'))
     rev,entity_rev=snap.get('decision_revision',{}),snap.get('entity_revision',{})
     need(snap.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and snap.get('source')=='neon-export' and rev.get('status')=='draft' and entity_rev.get('status')=='draft' and text(rev.get('id')) and text(entity_rev.get('id')) and rev.get('entity_revision')==entity_rev.get('id'),'draft Neon revision required')
     groups=unique(snap.get('mainland_witness_groups'),'group_id');witnesses=unique(snap.get('mainland_witnesses'),'witness_id');relations=unique(snap.get('mainland_group_relations'),'relation_id');features=unique(snap.get('features'),'feature_id')
-    need(groups and witnesses and len(groups)<=64 and len(witnesses)<=512 and len(relations)<=2016,'empty or oversized selected groups, witnesses or relations')
+    need(groups and witnesses,'empty selected groups or witnesses')
     entities={}
     for e in snap.get('entities',[]):
         need(isinstance(e,dict) and type(e.get('id')) is int and e['id'] not in entities and text(e.get('name')),'invalid entity');entities[e['id']]=e
@@ -86,15 +86,15 @@ def resolve(req):
         need(all(text(a.get(k)) for k in ('source_uri','attribution','license_name','license_uri','provider','title','r2_bucket','r2_key','sha256')) and re.fullmatch('[0-9a-f]{64}',a['sha256']) and type(a.get('size_bytes')) is int and a['size_bytes']>0,'incomplete raw source metadata')
         need(all(s.get(k)==a.get(k) for k in ('sha256','r2_bucket','r2_key','size_bytes')) and file_specs[key].get('sha256')==a['sha256'] and not any(isinstance(d,dict) and (d.get('source_id'),d.get('version'))==key for d in deps),'source custody or lineage mismatch')
         files[key]=helper.pinned(file_specs[key]);need(files[key].stat().st_size==a['size_bytes'],'source size mismatch')
-    named_bytes=helper.read_bounded(NAMED,'named identity code');named=runpy.run_path(str(NAMED))
+    named_bytes=helper.read_document(NAMED,'named identity code');named=runpy.run_path(str(NAMED))
     roots={};claims=[]
     for wid,d in sorted(witnesses.items()):
         pf,ident=features[d['point_feature_id']],features[d['identity_feature_id']];pk=(pf['source_id'],pf['source_version']);ik=(ident['source_id'],ident['source_version']);need(pk!=ik,'point and identity sources must be distinct')
-        source=json.loads(helper.read_bounded(files[pk],'point source',1024*1024));need(source.get('type')=='FeatureCollection' and isinstance(source.get('features'),list),'invalid point source');point_crs=helper.source_crs(source)
+        source=json.loads(helper.read_document(files[pk],'point source'));need(source.get('type')=='FeatureCollection' and isinstance(source.get('features'),list),'invalid point source');point_crs=helper.source_crs(source)
         matches=[f for f in source['features'] if isinstance(f,dict) and isinstance(f.get('properties'),dict) and type(f['properties'].get(d['id_property'])) in (str,int) and str(f['properties'][d['id_property']])==pf['source_feature_id']]
         need(len(matches)==1,'point feature identity must be unique');f=matches[0];geom=f.get('geometry');need('crs' not in f and isinstance(geom,dict) and 'crs' not in geom and geom.get('type')=='Point' and isinstance(geom.get('coordinates'),list) and len(geom['coordinates'])==2 and f['properties'].get('name')==d['point_name'] and helper.geometry_sha(geom)==pf['geometry_sha256'],'point identity or geometry mismatch')
         checkspec={'method':'raw_named_polygon_contains_point_v1','identity_feature_id':ident['source_feature_id'],'identity_id_property':d['identity_id_property'],'identity_name_property':d['identity_name_property'],'identity_class_property':d['identity_class_property'],'identity_class_value':d['identity_class'],'identity_geometry_sha256':ident['geometry_sha256']}
-        identity_source=json.loads(helper.read_bounded(files[ik],'identity source',8*1024*1024));check=named['check'](identity_source,geom,d['identity_name'],checkspec)
+        identity_source=json.loads(helper.read_document(files[ik],'identity source'));check=named['check'](identity_source,geom,d['identity_name'],checkspec)
         lon,lat=map(helper.finite_decimal,geom['coordinates']);need(-180<=lon<180 and -90<=lat<=90,'point outside WGS84');gx=(lon-west)/step;gy=(north-lat)/step
         need(gx!=gx.to_integral_value() and gy!=gy.to_integral_value(),'point on grid boundary is ambiguous');x=int(gx.to_integral_value(rounding=ROUND_FLOOR));y=int(gy.to_integral_value(rounding=ROUND_FLOOR));radius=d['radius_cells'];need(0<=x<w and radius<=y<h-radius and 2*radius+1<=w,'witness neighborhood outside grid')
         observed=[];water=0;center=None
@@ -125,8 +125,8 @@ def resolve(req):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('request');p.add_argument('output');a=p.parse_args();path=Path(a.request).resolve();raw=helper.read_bounded(path,'request');req=json.loads(raw);result=resolve(req);need(helper.read_bounded(path,'request')==raw,'request changed');result['request_sha256']=hashlib.sha256(raw).hexdigest();out=Path(a.output).resolve()
-    manifest=json.loads(helper.read_bounded(req['component_manifest']['path'],'component manifest'))
+    p=argparse.ArgumentParser();p.add_argument('request');p.add_argument('output');a=p.parse_args();path=Path(a.request).resolve();raw=helper.read_document(path,'request');req=json.loads(raw);result=resolve(req);need(helper.read_document(path,'request')==raw,'request changed');result['request_sha256']=hashlib.sha256(raw).hexdigest();out=Path(a.output).resolve()
+    manifest=json.loads(helper.read_document(req['component_manifest']['path'],'component manifest'))
     input_paths=[path,*[Path(req[k]['path']).resolve() for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')],*[Path(x['path']).resolve() for x in req['source_files']],*[Path(x['path']).resolve() for x in helper.lineage_specs(manifest)],HELPER.resolve(),NAMED.resolve(),Path(__file__).resolve()]
     need(all(not out.is_relative_to(p.parent) for p in input_paths),'output overlaps input directory');payload=(json.dumps(result,sort_keys=True,indent=2)+'\n').encode();tmp=None
     linked=False

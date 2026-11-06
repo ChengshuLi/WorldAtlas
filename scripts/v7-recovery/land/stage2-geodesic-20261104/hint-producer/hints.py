@@ -160,7 +160,7 @@ def seed_roots_from_resolution(report, *, grid, input_sha256, snapshot_sha256,
     expected={'grid':grid,'input_sha256':input_sha256,'snapshot_sha256':snapshot_sha256,'component_manifest_sha256':component_manifest_sha256,'decision_revision':decision_revision,'entity_revision':entity_revision}
     if any(report.get(k)!=v for k,v in expected.items()): raise ValueError('stale or mismatched witness resolution')
     groups=report.get('groups')
-    if not isinstance(groups,list) or not groups or len(groups)>64: raise ValueError('invalid groups')
+    if not isinstance(groups,list) or not groups: raise ValueError('invalid groups')
     ids=set();all_roots=set();roots=[]
     for g in groups:
         if not isinstance(g,dict) or not isinstance(g.get('group_id'),str) or not g['group_id'] or g['group_id'] in ids or g.get('role') not in ('mainland','sentinel'): raise ValueError('invalid group')

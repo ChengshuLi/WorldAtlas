@@ -104,8 +104,7 @@ def build(config,output):
  for x in pins:pinned(x)
  if config.read_bytes()!=raw:raise ValueError('config changed')
  if any(sha(HERE/name)!=digest for name,digest in program_hashes.items()):raise ValueError('program changed during build')
- with open(out/'builder.log','rb') as lf:logbytes=lf.read(1048577)
- if len(logbytes)>1048576:raise ValueError('rasterizer log exceeds bound')
+ with open(out/'builder.log','rb') as lf:logbytes=lf.read()
  log=logbytes.decode('ascii')
  populations={};code_counts={}
  for line in log.splitlines():
