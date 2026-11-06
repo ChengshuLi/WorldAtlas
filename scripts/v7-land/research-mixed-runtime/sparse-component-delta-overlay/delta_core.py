@@ -1,5 +1,6 @@
 """Bounded RLE delta arithmetic; does not authenticate claims or establish geography."""
 from collections import defaultdict
+from bisect import bisect_left, bisect_right
 import numpy as np
 
 def need(x,msg):
@@ -43,10 +44,32 @@ def compare_delta(spans,targets,base_rows,base_runs,reference_rows,reference_run
   be,bv=row(base_rows,base_runs,y,width,set(land)|{0});re,rv=row(reference_rows,reference_runs,y,width,set(land)|set(water))
   for a,z,root in items:
    need(root in targets and 0<=a<z<=width,'bad selected span')
-   boundaries=np.unique(np.concatenate((np.array([a,z],dtype=np.uint32),be[(be>a)&(be<z)],re[(re>a)&(re<z)])))
-   starts=boundaries[:-1];length=(boundaries[1:]-starts).astype(np.int64);b=bv[np.searchsorted(be,starts,side='right')];r=rv[np.searchsorted(re,starts,side='right')]
-   need(np.all(np.isin(b,list(land))),'selected root overlaps candidate water');shared=np.isin(r,list(land));old=shared&(b!=r);new=shared&(targets[root]!=r)
-   vals={'affected_cells':int(length.sum()),'reference_water_cells':int(length[~shared].sum()),'old_mismatch':int(length[old].sum()),'new_mismatch':int(length[new].sum()),'new_mismatch_from_match':int(length[new&~old].sum()),'resolved_mismatch':int(length[old&~new].sum()),'unchanged_mismatch':int(length[old&new].sum())}
-   for k,v in vals.items():total[k]+=v;per[root][k]+=v
+   # The two ordered RLE streams need only be visited within this span. Avoid
+   # allocating full-row masks and sorted boundary arrays for every interval.
+   bi=bisect_right(be,a);ri=bisect_right(re,a);target=targets[root];vals=per[root]
+   # Large intervals are faster with vectorized reductions. Search first so we
+   # allocate only boundaries inside the selected span, not full-row masks.
+   bj=bisect_left(be,z);rj=bisect_left(re,z)
+   if bj-bi+rj-ri>128:
+    boundaries=np.unique(np.concatenate((np.array([a,z],dtype=np.uint32),be[bi:bj],re[ri:rj])))
+    starts=boundaries[:-1];length=(boundaries[1:]-starts).astype(np.int64);b=bv[np.searchsorted(be,starts,side='right')];r=rv[np.searchsorted(re,starts,side='right')]
+    need(np.all(np.isin(b,list(land))),'selected root overlaps candidate water');shared=np.isin(r,list(land));old=shared&(b!=r);new=shared&(target!=r)
+    changes={'affected_cells':int(length.sum()),'reference_water_cells':int(length[~shared].sum()),'old_mismatch':int(length[old].sum()),'new_mismatch':int(length[new].sum()),'new_mismatch_from_match':int(length[new&~old].sum()),'resolved_mismatch':int(length[old&~new].sum()),'unchanged_mismatch':int(length[old&new].sum())}
+    for k,v in changes.items():vals[k]+=v;total[k]+=v
+    continue
+   x=a
+   while x<z:
+    end=min(z,int(be[bi]),int(re[ri]));b=int(bv[bi]);r=int(rv[ri]);length=end-x
+    need(length>0,'bad row coverage/category');need(b in land,'selected root overlaps candidate water')
+    vals['affected_cells']+=length;total['affected_cells']+=length
+    if r in water:
+     vals['reference_water_cells']+=length;total['reference_water_cells']+=length
+    else:
+     old=b!=r;new=target!=r
+     for key,condition in (('old_mismatch',old),('new_mismatch',new),('new_mismatch_from_match',new and not old),('resolved_mismatch',old and not new),('unchanged_mismatch',old and new)):
+      if condition:vals[key]+=length;total[key]+=length
+    x=end
+    if x==int(be[bi]):bi+=1
+    if x==int(re[ri]):ri+=1
  need(total['old_mismatch']-total['resolved_mismatch']+total['new_mismatch_from_match']==total['new_mismatch'],'delta identity failed')
  return {'total':total,'roots':per}

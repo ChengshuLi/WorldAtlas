@@ -77,4 +77,28 @@ class RootZeroTests(unittest.TestCase):
   cr=np.array([0,1],dtype=np.uint32);cv=np.array([[0,5,0]],dtype=np.uint32);rows=np.array([0,1],dtype=np.uint32);candidate=np.array([[5,17]],dtype=np.uint32);reference=np.array([[5,18]],dtype=np.uint32)
   spans,counts=d.selected_spans(cr,cv,5,{0:18});self.assertEqual(counts,{0:5});result=d.compare_delta(spans,{0:18},rows,candidate,rows,reference,5,{17,18},{1});self.assertEqual((result['total']['old_mismatch'],result['total']['new_mismatch']),(5,0))
 
+
+class LargeSpanTests(unittest.TestCase):
+ def test_crosses_vectorized_threshold_and_exact_boundaries(self):
+  # Differently segmented streams, including adjacent identical labels, exercise
+  # both the small scalar path and the large vectorized path at exact endpoints.
+  width=600; rows=np.array([0,width],dtype=np.uint32)
+  ends=np.arange(1,width+1,dtype=np.uint32)
+  base_values=np.where(ends%3,17,18).astype(np.uint32)
+  ref_values=np.where(ends%5==0,1,np.where(ends%2,17,18)).astype(np.uint32)
+  base=np.column_stack((ends,base_values));ref=np.column_stack((ends,ref_values))
+  for a,z in ((0,1),(0,64),(0,65),(0,600),(1,599),(400,600)):
+   with self.subTest(a=a,z=z):
+    got=d.compare_delta({0:[(a,z,1)]},{1:18},rows,base,rows,ref,width,{17,18},{1})['total']
+    b=base_values[a:z];r=ref_values[a:z];shared=r!=1;old=shared&(b!=r);new=shared&(r!=18)
+    expected={'affected_cells':z-a,'reference_water_cells':int((~shared).sum()),'old_mismatch':int(old.sum()),'new_mismatch':int(new.sum()),'new_mismatch_from_match':int((new&~old).sum()),'resolved_mismatch':int((old&~new).sum()),'unchanged_mismatch':int((old&new).sum())}
+    self.assertEqual(got,expected)
+ def test_candidate_water_rejected_in_both_paths(self):
+  width=300;rows=np.array([0,width],dtype=np.uint32);ends=np.arange(1,width+1,dtype=np.uint32)
+  b=np.column_stack((ends,np.full(width,17,dtype=np.uint32)));b[100,1]=0
+  r=np.column_stack((ends,np.full(width,18,dtype=np.uint32)))
+  for a,z in ((100,101),(0,width)):
+   with self.subTest(a=a,z=z),self.assertRaisesRegex(ValueError,'candidate water'):
+    d.compare_delta({0:[(a,z,1)]},{1:17},rows,b,rows,r,width,{17,18},{1})
+
 if __name__=='__main__': unittest.main()

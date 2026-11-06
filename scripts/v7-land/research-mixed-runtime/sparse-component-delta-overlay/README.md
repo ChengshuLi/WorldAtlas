@@ -24,3 +24,22 @@ new mismatches, reference-water exclusion, malformed inputs and valid root zero.
 A separate, earlier exploratory variant was compared with pinned research data;
 this code freeze has not received an end-to-end live-data replay or production
 integration. No map build, publication or source validation is implied.
+
+## Comparison-loop performance
+
+The delta comparison walks short selected spans directly through the ordered
+candidate and reference runs, avoiding full-row boundary arrays per span.
+Larger spans use vectorized reductions over only the relevant run boundaries.
+Both paths retain the same row/category and candidate-water checks and the
+same full-component, per-root accounting. Selection and authentication duties
+are unchanged.
+
+A local, cache-warm exploratory benchmark on 2026-11-06 used 536 selected
+roots from the draft163 residual inventory: 882 affected rows, 1,134 spans,
+and 2,147 cells. Three paired comparison-only runs were 0.320–0.370 seconds
+before and 0.136–0.172 seconds after; all returned the same per-root results.
+This is a small historical diagnostic workload, not an end-to-end estimate.
+It excludes input authentication and does not replace a full-grid comparison,
+validate geography, or predict the time for large mainland components. Synthetic
+tests cover both short and large spans and compare their results to cell-wise
+counts. No new map was built for this benchmark.
