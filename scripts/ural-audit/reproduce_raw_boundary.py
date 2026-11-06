@@ -52,6 +52,8 @@ def main():
     parser.add_argument('--workdir', type=Path, required=True)
     parser.add_argument('--dependency-dir', type=Path, action='append', required=True)
     parser.add_argument('--python-sha256', required=True)
+    parser.add_argument('--reviewed-boundary', action='store_true',
+                        help='also apply the approved Kara and spring joins')
     a = parser.parse_args()
     inputs, helpers, work = a.inputs.resolve(), a.helpers.resolve(), a.workdir.resolve()
     scripts = Path(__file__).resolve().parent
@@ -67,6 +69,8 @@ def main():
     for name in INPUTS:
         if not (inputs / name).exists():
             raise FileNotFoundError(inputs / name)
+    if a.reviewed_boundary and not (inputs / 'ural-kara-coast.osm').is_file():
+        raise FileNotFoundError(inputs / 'ural-kara-coast.osm')
     observed = {}
     for name, expected in HELPERS.items():
         observed[name] = sha(helpers / name)
@@ -121,8 +125,27 @@ def main():
             raise ValueError('helper changed during construction: ' + name)
     if sha(Path(sys.executable)) != a.python_sha256:
         raise ValueError('Python executable changed during construction')
-    print(json.dumps({'geometry': str(output), 'file_sha256': OUTPUT_SHA,
-                      'canonical_geometry_sha256': '68390aa6ce5352226777adde3979315e1de85ca26d662c4b1c32610d1d73da66',
+    canonical_sha = '68390aa6ce5352226777adde3979315e1de85ca26d662c4b1c32610d1d73da66'
+    file_sha = OUTPUT_SHA
+    if a.reviewed_boundary:
+        coast = work / 'ural-kara-reviewed.geometry.json'
+        run(scripts / 'intersect_kara_coast.py', '--geometry', output,
+            '--geometry-sha256', canonical_sha, '--osm', inputs / 'ural-kara-coast.osm',
+            '--osm-sha256', '9fc94b2083810c9cc3f7c0fd4819a7b1cdbe7416b3074b9e29efa3c3ad0667ff',
+            '--coast-way', '28592677', '--output', coast,
+            '--report', work / 'ural-kara-reviewed.report.json', output='kara.log')
+        output = work / 'ural-reviewed.geometry.json'
+        run(scripts / 'geodesic_spring_join.py', '--geometry', coast,
+            '--geometry-sha256', 'f4943e118ebc42c746d52444e131818dc02828c15c04697294877914d895f9bb',
+            '--osm', inputs / 'ural-river-r2.osm',
+            '--osm-sha256', '89cef99ad92bb8acbd81da3f371a2244892ae71da49c99d4c478e9f111af56a0',
+            '--output', output, '--report', work / 'ural-spring-reviewed.report.json', output='spring.log')
+        file_sha = '904a5014d9ebad365c836dfa80bcabdc8fdac158b1ce0c06d277d657b5870d27'
+        canonical_sha = '746e6a85b05e40994e451e49e7df6333b8816dfe1d6624d9c20f9c669e953b32'
+        if sha(output) != file_sha:
+            raise ValueError('reviewed Ural boundary file hash mismatch')
+    print(json.dumps({'geometry': str(output), 'file_sha256': file_sha,
+                      'canonical_geometry_sha256': canonical_sha,
                       'status': 'research-selected; no map built'}, sort_keys=True))
 
 
