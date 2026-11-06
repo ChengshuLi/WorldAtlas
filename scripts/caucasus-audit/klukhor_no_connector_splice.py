@@ -1,0 +1,8 @@
+"""Construct unselected continuous JAXA basin-interface splice near Klukhor."""
+import json
+from shapely.geometry import LineString,Point,shape,mapping
+from shapely.ops import substring
+from geodesic_line import GeodesicLine
+src=LineString(json.load(open('caucasus-anapa-abin-combined-candidate.json'))['coordinates']);jaxa=shape(json.load(open('klukhor-jaxa-north-group-interface-research.json'))['features'][0]['geometry']);line=GeodesicLine(list(src.coords));ref=line.closest((41.8677666667,43.2442833333))['station_m'];cross=src.intersection(jaxa);pts=[p for p in getattr(cross,'geoms',[cross]) if p.geom_type=='Point'];ordered=sorted([(line.closest((p.x,p.y))['station_m'],p) for p in pts],key=lambda x:x[0]);before=[p for s,p in ordered if s<ref];after=[p for s,p in ordered if s>ref];a,b=before[0],after[0];i,j=src.project(a),src.project(b);u,v=jaxa.project(a),jaxa.project(b);pre=substring(src,0,i);old=substring(src,i,j);cut=substring(jaxa,u,v);post=substring(src,j,src.length);new=LineString(list(pre.coords)+list(cut.coords)[1:]+list(post.coords)[1:]);print('joins',tuple(a.coords)[0],tuple(b.coords)[0],'old_m',round(GeodesicLine(list(old.coords)).length),'new_m',round(GeodesicLine(list(cut.coords)).length),'simple',new.is_simple,cut.is_simple,'endpoints',new.coords[0]==src.coords[0] and new.coords[-1]==src.coords[-1]);
+if not new.is_simple or not cut.is_simple or i>=j:raise ValueError('invalid join')
+for f,g in [('klukhor-no-connector-old-research.json',old),('klukhor-no-connector-cut-research.json',cut),('klukhor-no-connector-full-research.json',new)]:json.dump(mapping(g),open(f,'w'))
