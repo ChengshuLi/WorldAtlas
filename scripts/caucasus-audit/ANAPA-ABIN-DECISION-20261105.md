@@ -130,3 +130,38 @@ This is a preferred correction candidate, not an independent survey or a
 selection in Neon. The changed coast endpoint requires new closure/region
 decisions before a complete global snapshot can use it. The current Neon
 boundary and recipe remain unchanged.
+
+## Abin raw-source replay (2026-11-06)
+
+The following existing WorldAtlas R2 objects were independently downloaded and
+verified by full SHA-256 readback:
+
+- `sources/osm/caucasus-west/broad-20261105-ada68ef47c11.osm`:
+  `ada68ef47c11ad4cfbdcd36cf369ca96e91072cfd406f2d28f2f16349dc4b72d`.
+- `sources/osm/caucasus-west/further-20261105-7152fe44f0da.osm`:
+  `7152fe44f0dae950965c06777e206a396f3b7938ee1fdc4d33dc0f96757e0033`.
+- `sources/osm/caucasus-west/ubin-20261105-2e2bbebd62e0.zip`:
+  `2e2bbebd62e0c5bbca7c2ca9ebc00bb263dec148d26c922db5cdc619764be216`.
+- `sources/osm/caucasus-west/khabl-20261105-42864b4776ee.zip`:
+  `42864b4776eecd500c639c72028ff2eec2b16f9454215d1c9a42acc194060e50`.
+- `sources/opentopography/srtm-gl1/n44e038/N44E038-1b7c92844482.tif`:
+  `1b7c928444828a5ff161a062c3eef789ef848b6f2bca8663ca8fae9b583e05bd`.
+
+`west_abin_merge_raw_osm.py` reads the four OSM objects, rejects conflicting
+object versions and reproduces the 108,537-object merged input byte for byte,
+SHA-256 `430a7eb2165a500c165ec752a7681ee81292b2d6ea0c6efdaf0292427e4dc1f9`.
+A changed raw extract was rejected before output. Re-running
+`west_stream_seeded_srtm_abin.py` with that merge and the R2 SRTM input
+reproduced the saved label, seed, affine and boundary arrays exactly. Removing
+an unrelated exploratory-line diagnostic from
+`west_seeded_divide_srtm_abin_inspect.py` did not change the result.
+Running it followed by `west_abin_build_splice_second.py` with the current
+selected research line (binary64 geometry SHA-256
+`9f4ae3bc778ebbcd0258a19868acf0fa655763f5e849361196160fb4289c0d52`)
+reproduced the candidate cut SHA-256
+`f9e4e5da1687f3ffb118e0b621705fe2e6b43a5dc2abbc323699cb56fbf8dcb9`
+and complete candidate SHA-256
+`55ff28e152ad22dff2d5c3389ab270e8b583bf48d2840210b418953e075832b7`.
+These are source reproducibility checks, not independent verification of flow
+or approval of a geographic change. The source line is an input to the join
+selection. The candidate is not selected in Neon.
