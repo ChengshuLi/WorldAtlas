@@ -1,4 +1,4 @@
-import hashlib,json,struct,subprocess,tempfile,unittest
+import builtins,errno,hashlib,json,struct,subprocess,tempfile,unittest
 from pathlib import Path
 from unittest import mock
 import build_seed_tiles as t
@@ -19,6 +19,56 @@ class TileTests(unittest.TestCase):
  def test_tiles_match_independent_verifier(self):
   report=self.runbuild();self.assertEqual(report['tile_count'],2);self.assertEqual(report['manifest_sha256'],pin(self.out/'manifest.txt'))
   p=subprocess.run([str(self.verifier),str(self.rows),str(self.runs),str(self.out),'8','4','4'],capture_output=True,text=True);self.assertEqual(p.returncode,0,p.stderr);self.assertEqual(json.loads(p.stdout)['status'],'verified')
+ def test_descriptor_exhaustion_reopens_tiles_and_preserves_verification(self):
+  real_open=builtins.open;injected=[]
+  def open_once(path,mode='r',*args,**kwargs):
+   if Path(path).name=='00000-00001.bin' and mode=='xb' and not injected:
+    injected.append(True);raise OSError(errno.EMFILE,'simulated descriptor exhaustion')
+   return real_open(path,mode,*args,**kwargs)
+  with mock.patch('builtins.open',side_effect=open_once):report=self.runbuild()
+  self.assertEqual(report['tile_count'],2);self.assertTrue(injected)
+  p=subprocess.run([str(self.verifier),str(self.rows),str(self.runs),str(self.out),'8','4','4'],capture_output=True,text=True)
+  self.assertEqual(p.returncode,0,p.stderr)
+ def test_reopen_tamper_fails_readback(self):
+  real_open=builtins.open;injected=[];tampered=[]
+  def open_tamper(path,mode='r',*args,**kwargs):
+   if Path(path).name=='00000-00001.bin' and mode=='xb' and not injected:
+    injected.append(True);raise OSError(errno.EMFILE,'simulated descriptor exhaustion')
+   if Path(path).name=='00000-00000.bin' and mode=='ab' and not tampered:
+    tampered.append(True)
+    with real_open(path,'ab') as f:f.write(b'bad')
+   return real_open(path,mode,*args,**kwargs)
+  with mock.patch('builtins.open',side_effect=open_tamper):
+   with self.assertRaisesRegex(ValueError,'tile readback mismatch'):self.runbuild()
+  self.assertTrue(tampered);self.assertFalse((self.out/'report.json').exists())
+ def test_verifier_rejects_noncanonical_tile_name(self):
+  self.runbuild();(self.out/'0-0.bin').write_bytes(b'extra')
+  p=subprocess.run([str(self.verifier),str(self.rows),str(self.runs),str(self.out),'8','4','4'],capture_output=True,text=True)
+  self.assertNotEqual(p.returncode,0);self.assertIn('noncanonical tile filename',p.stderr)
+ def test_large_tile_grid_is_not_rejected_before_input_validation(self):
+  with self.assertRaisesRegex(ValueError,'seed input hash mismatch'):
+   t.build(self.rows,self.runs,'0'*64,pin(self.runs),1000001,1000001,self.out,tile_size=1,disk_floor_bytes=0)
+  self.assertFalse(self.out.exists())
+ def test_six_digit_tile_index_verifies(self):
+  self.rows.write_bytes(packed('<I',[(0,),(2,)]));self.runs.write_bytes(packed('<II',[(100001,0),(100002,17)]))
+  report=t.build(self.rows,self.runs,pin(self.rows),pin(self.runs),100002,1,self.out,tile_size=1,disk_floor_bytes=0)
+  self.assertEqual(report['tile_count'],1);self.assertTrue((self.out/'00000-100001.bin').exists())
+  p=subprocess.run([str(self.verifier),str(self.rows),str(self.runs),str(self.out),'100002','1','1'],capture_output=True,text=True)
+  self.assertEqual(p.returncode,0,p.stderr)
+ def test_maximum_u32_tile_size_verifies_without_overflow(self):
+  report=t.build(self.rows,self.runs,pin(self.rows),pin(self.runs),8,4,self.out,tile_size=0xffffffff,disk_floor_bytes=0)
+  self.assertEqual(report['tile_count'],1)
+  p=subprocess.run([str(self.verifier),str(self.rows),str(self.runs),str(self.out),'8','4',str(0xffffffff)],capture_output=True,text=True)
+  self.assertEqual(p.returncode,0,p.stderr)
+ def test_tile_size_outside_u32_is_rejected(self):
+  with self.assertRaisesRegex(ValueError,'controls'):
+   t.build(self.rows,self.runs,pin(self.rows),pin(self.runs),8,4,self.out,tile_size=0x100000000,disk_floor_bytes=0)
+  self.assertFalse(self.out.exists())
+ def test_verifier_rejects_non_u32_dimensions(self):
+  self.runbuild()
+  for size in ('4294967296','-18446744073709551615','4x'):
+   p=subprocess.run([str(self.verifier),str(self.rows),str(self.runs),str(self.out),'8','4',size],capture_output=True,text=True)
+   self.assertNotEqual(p.returncode,0);self.assertIn('bad dimensions',p.stderr)
  def test_input_tamper_and_no_overwrite(self):
   with self.assertRaisesRegex(ValueError,'hash mismatch'):t.build(self.rows,self.runs,'0'*64,pin(self.runs),8,4,self.out,tile_size=4,disk_floor_bytes=0)
   self.assertFalse(self.out.exists());self.runbuild()

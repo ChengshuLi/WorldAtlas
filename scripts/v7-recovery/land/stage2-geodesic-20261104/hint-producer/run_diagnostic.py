@@ -34,7 +34,7 @@ def run(config_path,out_path):
   if shutil.disk_usage(out.parent).free<disk:raise RuntimeError('disk reserve reached')
  guard(); start=time.monotonic(); code_before={p.name:digest(p,guard) for p in (Path(hints.__file__),Path(__file__))}
  for k in sorted(paths):need(paths[k].is_file() and digest(paths[k],guard)==inp[k]['sha256'],'input hash mismatch: '+k)
- grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','step','west','north'} and type(grid['width']) is int and 1<=grid['width']<=1000000 and type(grid['height']) is int and 1<=grid['height']<=1000000 and grid['west']==-180,'bad grid')
+ grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','step','west','north'} and type(grid['width']) is int and 1<=grid['width']<=0xffffffff and type(grid['height']) is int and 1<=grid['height']<=0xffffffff and grid['west']==-180,'bad grid')
  snapshot_bytes=read_bytes(paths['decision_snapshot']);snap=json.loads(snapshot_bytes)
  need(snap.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and snap.get('source')=='neon-export','invalid snapshot')
  dr=snap.get('decision_revision',{});er=snap.get('entity_revision',{})
