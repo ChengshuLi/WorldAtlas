@@ -25,9 +25,7 @@ is a dated mapped feature and not necessarily the selected land input. At
 the candidate at all 22 stations at 100 and 250 m offsets, while the selected
 opening has different terminals at all 33 stations. Coastal basin aggregation
 can hide distinct local outlets. This conflict and the unverified local join
-prevent selecting the candidate as a proven watershed. The quality-screened
-JAXA original tile N044E037 is cataloged in R2 but was not accessible in this
-executor; a controlled terrain and drainage check is the next decisive step.
+prevent selecting the candidate as a proven watershed. The original JAXA tile N044E037 has now been read from R2 and checked as described below; it supports the candidate while leaving the local join unresolved.
 
 ## Abin: the second complete splice is the better model-supported candidate
 
@@ -53,3 +51,32 @@ selected, source-reproducible line.
 
 No Neon boundary was changed. These results are not a current grid comparison,
 production closure proof, or evidence that an omitted channel does not exist.
+
+## Anapa original JAXA terrain follow-up (2026-11-06)
+
+The original N044E037 ZIP was read from R2 and its SHA-256 matched the catalog:
+`2b08d3b51c904473e1d97928afea242974c8faf2eb7f890100b78e91011682fe`.
+The WGS84 script `anapa_original_terrain_screen.py` samples both opening
+segments every 100 m, using 5x5 DSM medians only where all 25 mask values are 0,
+all stack values positive and all heights valid. At 100 m normal offsets the
+candidate is center-high at 36 of 46 valid stations (8 invalid), versus 9 of
+79 valid stations (3 invalid) on the selected opening. At 250 m offsets it is
+center-high at 21 of 27 valid stations (27 invalid), versus 13 of 76 valid
+stations (6 invalid). These are samples of a surface, not independent drainage
+or proof of a divide, and offshore masking affects the comparison.
+
+Within the last 500 m before the inland join, the final two 100 m-offset and
+final four 250 m-offset valid candidate stations are slope-like rather than
+center-high. On the first 500 m of the retained continuation, three of six
+100 m-offset samples are slope-like or center-low, and at 250 m one is
+center-low and two are tied. This weakens the exact geometric join even as the
+candidate opening is preferred. The current selected boundary and Neon recipe
+are unchanged until a source-supported connection is constructed.
+
+Extracted DSM/MSK/STK SHA-256 values are respectively
+`0c69accedecf93f4bc25c6d097485b23923549cdaf5cd29ed5d8e66cecda1ae2`,
+`9f261145cd3b1e92cbc3cd7edc7a5c5dd6aae67c0de6e3191ca523f7abea6c2c`, and
+`1a45e271fb62180aa217e306ab210e936dcbf4a7925e0cef1331728de8ed0571`.
+The candidate and selected cut files used hash to
+`9f3b4a04cf08e1f03b881fd66ca2f133993a3e2cb8182e045dd8448740a75b59` and
+`a938b95f00723f2fd9cbe8d334f4f61ed6af70e5088e364c59ac402706900e8a`.
