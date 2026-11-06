@@ -28,6 +28,17 @@ are sampled distances, not certified minima. Control-point datum, placement
 accuracy and the relationship between administrative districts and the local
 natural divide are not established. Do not snap the boundary to these points.
 
+For gap-00, the historical [Q-40-143,144 topographic scan](https://maps.vlasenko.net/smtm100/q-40-143_144.jpg)
+was inspected against the selected 15 m terrain route using only an approximate
+fit to the printed geographic frame. In that coarse overlay the route lies near
+the mapped ridge and administrative boundary, with streams on either side.
+The fit has no independent accuracy estimate, and map age, datum, scale, scan
+distortion and symbol width preclude resolving the disputed southern join. The
+scan is supportive context, not proof that the particular route is correct.
+R2 readback SHA-256 is
+`7039a52411345fde731ad0ebcbc14a988ee4c4c32ef776429ba327db14387e06`;
+the scan's reuse status is not independently established.
+
 The previously obtained historic topographic image was also overlaid with the
 actual selected gap-02 terrain route. Visually it generally follows the mapped
 ridge, but its source provenance and registration need further independent
