@@ -19,6 +19,20 @@ class HookTests(unittest.TestCase):
   with patch.object(driver_hook,'modules_from_pins') as m:
    with self.assertRaisesRegex(ValueError,'snapshot'):driver_hook.prepare(self.cfg,{}, {},[],{}, {},set(),None,lambda:None,snapshot_sha256='c'*64)
    m.assert_not_called()
+ def test_real_driver_import_uses_exact_loaded_module_pins(self):
+  import os,subprocess,sys
+  root=Path.cwd();runtime=root/'stage3-coverage-index-runtime-20261105/group-label-multipolygon-prototype'
+  if not runtime.is_dir():self.skipTest('actual mixed runtime unavailable')
+  script="""
+import hashlib,importlib.util,json,sys
+from pathlib import Path
+R=Path.cwd();D=R/'regional-writer-integration-prep';W=R/'regional-lydekker-rule-work';T=R/'stage3-coverage-index-runtime-20261105/group-label-multipolygon-prototype';P=R/'pr4-mixed-runtime-preserve-20261105/scripts/v7-land/research-mixed-runtime/stage2-geodesic-20261104'
+sys.path[:0]=[str(T),str(D)];sp=importlib.util.spec_from_file_location('real_mixed_driver',T/'apply_selected_mixed.py');m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m)
+import driver_hook
+policy=json.loads((W/'selected-regional-policy.json').read_text());paths={n:W/(n+'.py') for n in ('regional_rule','component_scan','replay_adapter','geonames_anchors','satellite_geodesic','regional_workflow','regional_group_convention')};paths.update({n:D/(n+'.py') for n in ('source_groups','adapter','live_driver')});paths.update({n:P/(n+'.py') for n in ('point_prototype','run_pair')});paths.update({n:T/(n+'.py') for n in ('land_archive_source','polygon_intersection')});pins={n:{'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for n,p in paths.items()};mods=driver_hook.modules_from_pins(pins,policy,lambda:None);assert Path(mods['polygon_intersection'].__file__).resolve()==(T/'polygon_intersection.py').resolve()
+"""
+  run=subprocess.run([sys.executable,'-c',script],cwd=root,text=True,capture_output=True)
+  self.assertEqual(run.returncode,0,run.stderr)
  def test_changed_pinned_input_fails(self):
   self.line.write_text('{"changed":true}')
   with self.assertRaisesRegex(ValueError,'pin mismatch'):driver_hook.prepare(self.cfg,{}, {},[],{}, {},set(),None,lambda:None,snapshot_sha256='a'*64)
@@ -33,4 +47,26 @@ class HookTests(unittest.TestCase):
    self.assertIs(seen['reports'],reports);self.assertEqual(seen['snapshot_sha256'],'a'*64);self.assertEqual(seen['pending'],[]);self.assertEqual(out['blocked_region_roots'],[3,9]);self.assertTrue(out['provenance']['profiling_standin']);out['verify']()
    self.pending.write_text('[{}]')
    with self.assertRaisesRegex(ValueError,'changed during run'):out['verify']()
+class ActualDriverBlockTests(unittest.TestCase):
+ def test_real_driver_hook_block_wraps_actual_overlay(self):
+  import importlib.util,os,textwrap
+  from adapter import protected_region_rows
+  path=os.environ.get('OVERLAY_PATH')
+  if not path:self.skipTest('actual writer overlay unavailable')
+  spec=importlib.util.spec_from_file_location('driver_hook_overlay',path);overlay=importlib.util.module_from_spec(spec);spec.loader.exec_module(overlay)
+  src=(Path(__file__).parent/'apply_selected_mixed_regional.py').read_text()
+  block=src[src.index(' regional=None;regional_paths=[];region_rows=lambda y:[]'):src.index(' if requirements:',src.index(' regional=None;regional_paths=[];region_rows=lambda y:[]'))]
+  seen={}
+  def prepare(cfg,compiled,snapshot,reports,grid,inputs,mainland,mixed,guard,*,snapshot_sha256):
+   seen['reports']=reports;seen['snapshot']=snapshot_sha256
+   return {'component_claims':{2:[{'affiliation_id':'rule','entry_ids':['rule'],'code':18}]},'blocked_region_roots':[3,9],'wrap_region_rows':protected_region_rows,'provenance':{'decision_snapshot_sha256':'a'*64},'input_paths':[]}
+  ctx={'cfg':{'regional':{'hook':{},'request':{}}},'pinned':lambda spec:Path(__file__),'loadmodule':lambda name,path:NS(prepare=prepare),'compiled':{},'snapshot':{},'reports':[{'fresh':True}],'report':{'grid':{},'physical_coverage':{'seed_roots':[9]}},'req':{**{k:{} for k in ('physical_rows','physical_runs','component_rows','component_runs')},'snapshot':{'sha256':'a'*64}},'mixed_claims':None,'guard':lambda:None,'need':driver_hook.need,'Path':Path}
+  exec(compile(textwrap.dedent(block),'actual-driver-hook-block','exec'),ctx)
+  self.assertIs(seen['reports'],ctx['reports']);self.assertEqual(seen['snapshot'],'a'*64)
+  # Replace only the raw callback, then apply the exact wrapper selected by the driver.
+  raw=lambda y:[{'claim':{'affiliation_id':'other','entry_ids':['entry'],'code':22},'roots':{3,9},'spans':[(0,4)]}]
+  regions=ctx['regional']['wrap_region_rows'](raw,ctx['regional']['blocked_region_roots'])(0);stats={}
+  row=overlay.overlay_row(4,[(0,4,17)],[(4,18)],[(0,1,1),(1,2,2),(2,3,3),(3,4,9)],ctx['claims'],regions,stats,lambda *v:None)
+  self.assertEqual(row,[(4,18)]);self.assertNotIn('other',stats)
+  self.assertIn('component_claims=claims,mainland_roots=',src);self.assertIn('region_rows=region_rows,output=out',src)
 if __name__=='__main__':unittest.main()

@@ -13,6 +13,9 @@ from regional_group_convention import apply_groups
 from satellite_geodesic import apply_satellites
 from component_scan import scan,component_at
 from regional_rule import Line
+# Import the actual mixed driver first, reproducing its already-loaded modules.
+driverroot=R/'stage3-coverage-index-runtime-20261105/group-label-multipolygon-prototype'
+sys.path.insert(0,str(driverroot));driver_spec=importlib.util.spec_from_file_location('bounded_actual_mixed_driver',driverroot/'apply_selected_mixed.py');driver=importlib.util.module_from_spec(driver_spec);driver_spec.loader.exec_module(driver)
 import land_archive_source,polygon_intersection
 
 def H(p):
@@ -21,6 +24,7 @@ def H(p):
   for b in iter(lambda:f.read(8<<20),b''):h.update(b)
  return h.hexdigest()
 def J(p):return json.loads(Path(p).read_bytes())
+assert H(driverroot/'land_archive_source.py')=='58df321e63cd563a0c8a91dd89147e816f40155f2c23bac9cdd0ba61eb6abac9';assert H(driverroot/'polygon_intersection.py')=='391c7dee1b91dfa9c78ad087a46a9c9e9c8df778183ebc706b481e0286d110d5'
 P=R/'regional-lydekker-rule-work/selected-regional-policy.json';assert H(P)=='bbac2240a2af5f6653438ee8831dba31ab5addc6e8833225c714beb3809a69c3';policy=J(P)
 root=R/'aegean-archive-containment-integrated-20261105/group-label-multipolygon-prototype';assert H(root/'land_archive_source.py')=='58df321e63cd563a0c8a91dd89147e816f40155f2c23bac9cdd0ba61eb6abac9';assert H(root/'polygon_intersection.py')=='391c7dee1b91dfa9c78ad087a46a9c9e9c8df778183ebc706b481e0286d110d5'
 paths={'anu-west-new-guinea-lydekker-ch08':R/'lydekker-line-research-20261105/anu-official-r2-readback.pdf','nga-sailing-directions-pub164-project-copy':R/'indonesia-geonames-research-20261105/pub164-official-r2-readback.pdf','indonesia-big-national-gazetteer':R/'tanimbar-tandula-research-20261105/big-readback.pdf','geonames-country-id':R/'indonesia-geonames-research-20261105/r2-readback.zip','osm-land-polygons-split-4326':R/'v2-source-download-20261103-kKbO2t/osmdata-mirror-land-polygons-split-4326-20261103.zip','detik-talaud-mangupun':R/'indonesia-northern-arc-cluster-20261105/r2-detik.html'}
@@ -52,7 +56,7 @@ linefile=D/'hook-diagnostic-line.json';linefile.write_text(json.dumps(obs,sort_k
 pendingfile=D/'hook-diagnostic-pending.json';pendingfile.write_text('[]\n')
 policyfile=R/'regional-lydekker-rule-work/selected-regional-policy.json'
 paths2={name:R/'regional-lydekker-rule-work'/f'{name}.py' for name in ('regional_rule','component_scan','replay_adapter','geonames_anchors','satellite_geodesic','regional_workflow','regional_group_convention')}
-paths2.update({name:D/f'{name}.py' for name in ('source_groups','adapter','live_driver')});paths2.update({name:pair/f'{name}.py' for name in ('point_prototype','run_pair')});paths2.update({name:root/f'{name}.py' for name in ('land_archive_source','polygon_intersection')})
+paths2.update({name:D/f'{name}.py' for name in ('source_groups','adapter','live_driver')});paths2.update({name:pair/f'{name}.py' for name in ('point_prototype','run_pair')});paths2.update({name:driverroot/f'{name}.py' for name in ('land_archive_source','polygon_intersection')})
 code={name:{'path':str(path),'sha256':H(path)} for name,path in paths2.items()}
 def pin(p):return {'path':str(p),'sha256':H(p)}
 cfg={'policy':pin(policyfile),'policy_canonical_sha256':canonical_sha(policy),'line':pin(linefile),'pending':pin(pendingfile),'pending_inventory_complete':False,'profiling_standin':True,'sources':sources,'code':code}
