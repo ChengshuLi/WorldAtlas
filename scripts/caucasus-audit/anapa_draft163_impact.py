@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import unary_union, polygonize
+from geodesic_nearest import nearest_cell
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--physical-rows',required=True)
@@ -40,9 +41,9 @@ def nearest_water(p):
  for dr in range(-4,5):
   for dc in range(-4,5):
    q=(row+dr,col+dc)
-   if cls(q)==1: water.append((math.hypot(xy(q)[0]-p[0],xy(q)[1]-p[1]),q))
+   if cls(q)==1: water.append((q,*xy(q)))
  if not water: raise ValueError('no nearby water cell')
- return min(water)[1]
+ return nearest_cell(p, water)
 def path(start,end):
  # Exact 4-neighbor water path, restricted to a local coastal window.
  queue=[(0,start)]; dist={start:0}; previous={}
