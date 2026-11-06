@@ -93,10 +93,13 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
     entity_to_water={e:w for e,_,w in pairs};water_codes=list(water_to_entity);land_codes=list(land_to_entity)
     bits_by_code=np.zeros(23,dtype=np.uint32)
     for code,entity in {**water_to_entity,**land_to_entity}.items():bits_by_code[code]=1<<entity_to_water[entity]
+    allowed_physical=np.zeros(23,dtype=bool);allowed_physical[[1,17]]=True
+    allowed_land=np.zeros(23,dtype=bool);allowed_land[land_codes]=True
+    allowed_water=np.zeros(23,dtype=bool);allowed_water[[0,*water_codes]]=True
     @cache
     def classes(y):
         p=core.shore.crop(*physical,y,0,width,width);q=core.shore.crop(*prefill,y,0,width,width)
-        if np.any(~np.isin(p,[1,17])) or np.any((p==17)&~np.isin(q,land_codes)) or np.any((p==1)&~np.isin(q,[0,*water_codes])):
+        if np.any((p<0)|(p>=len(allowed_physical))) or np.any((q<0)|(q>=len(allowed_land))) or np.any(~allowed_physical[p]) or np.any((p==17)&~allowed_land[q]) or np.any((p==1)&~allowed_water[q]):
             raise ValueError(f'invalid physical/prefill relationship at row {y}')
         return p,q
     @cache
