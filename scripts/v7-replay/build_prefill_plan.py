@@ -304,6 +304,7 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
                     or source.get('decision_status') != revision['status']
                     or source.get('tie_rules') != basin.get('tie_rules')
                     or audit.get('shore_method') != 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+                    or any(key in audit for key in ('execution_method','interval_nearest_sha256','interval_certified_cells'))
                     or type(count) is not int or count < 0 or type(certified) is not int or certified < 0
                     or type(exact) is not int or exact < 0 or certified + exact != count
                     or not all(valid_hash(x) for x in hashes)):

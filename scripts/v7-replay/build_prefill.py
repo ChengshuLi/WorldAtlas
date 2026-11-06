@@ -63,7 +63,8 @@ def main():
    if (source.get('assignment_method')!='shared_nearest_assigned_shore'
        or plan.get('research_shore_method')!='wgs84-coastal-4neighbor-center-v2'
        or not isinstance(nearest,dict)
-       or nearest.get('shore_method')!='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'):
+       or nearest.get('shore_method')!='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+       or any(key in nearest for key in ('execution_method','interval_nearest_sha256','interval_certified_cells'))):
     raise ValueError('shared-shore manifest does not bind the WGS84 research method')
   if not isinstance(ent.get('priority'),int):raise ValueError(f"layer missing explicit priority: {ent}")
   layers.append((ent,m))

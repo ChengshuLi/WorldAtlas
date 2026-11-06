@@ -13,3 +13,11 @@ Run focused synthetic checks using the project's Python environment with NumPy, 
     python -m unittest -q test_wgs84_centers test_coastal_core test_closed_water_core test_streaming_closed_water test_coastal_tile test_shared_nearest test_seavox_basin test_coast_planner_integration test_prefill_plan
 
 The deprecated V2-baseline spherical coastal and land builders are retired rather than migrated. Other historical scripts and maps are not proof of compatibility. No real global water run is claimed.
+
+## Named-basin interval research mode
+
+For shared basins, `build_seavox_basin.py --research-interval` can certify an entire row interval when conservative midpoint WGS84 bounds prove a unique nearest participant for every cell. Unresolved intervals are recursively split and their leaves use the existing certified point classifier and streamed full-shore fallback. Direct, single-participant basins do not use this mode. The default point method is unchanged.
+
+Interval results have a distinct shore-method value, `execution_method`, source-code hash, helper-code hashes, runtime-library versions and certified-cell count. The interval path intersects the source raster with physical water by looking up RLE values only for source-mask cells; empty source cells do not need RLE lookup. The current planner, prefill and composition tools reject this new method and its interval markers until an interval-aware adapter is separately reviewed. Do not relabel an interval manifest to bypass that gate. Input, geometry, lineage, policy and independent source-coverage requirements remain unchanged.
+
+The interval bounds use a 1 cm floating-point cushion and avoid certifying near-antipodal queries. This is an engineering guard, not a formal proof for every NumPy, SciPy or libm implementation. Randomized, tie, polar, antimeridian and true streamed-fallback tests are included in `test_interval_nearest.py`. Broader real-data comparison is required before changing the default or allowing the method into prefill.

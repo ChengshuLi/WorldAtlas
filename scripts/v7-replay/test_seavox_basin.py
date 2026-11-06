@@ -22,6 +22,20 @@ class BasinTest(unittest.TestCase):
         self.assertEqual(contiguous_spans(np.array([False,True,True,False,True]),10),[(11,13),(14,15)])
         self.assertEqual(grid_bounds({'geometry':{'coordinates':[[[0,0],[45,45]]]}}),(65536,81920,16384,32768))
 
+    def test_sparse_source_intersection_matches_dense(self):
+        from build_seavox_basin import source_water_spans
+        rng=np.random.default_rng(83612)
+        for _ in range(500):
+            width=257;physical=rng.choice([1,17],width).astype('u4')
+            x0=int(rng.integers(0,width));x1=int(rng.integers(x0+1,width+1))
+            mask=rng.integers(0,4,x1-x0,dtype='u1')
+            stops=np.r_[np.flatnonzero(physical[1:]!=physical[:-1])+1,width].astype('u4')
+            values=physical[stops-1]
+            x=np.arange(x0,x1,dtype='u4')
+            expected=contiguous_spans((mask!=0)&(values[np.searchsorted(stops,x,side='right')]==1),x0)
+            self.assertEqual(source_water_spans(mask,x0,stops,values),expected)
+        self.assertEqual(source_water_spans(np.zeros(10,dtype='u1'),0,np.array([10]),np.array([1])),[])
+
     def test_extraction_binds_archive_and_feature_to_decision(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d); archive=root/'source.zip'; archive.write_bytes(b'archive')

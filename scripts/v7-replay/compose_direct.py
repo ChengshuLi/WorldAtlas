@@ -72,7 +72,8 @@ def main():
                     or method!='wgs84-coastal-4neighbor-center-v2'
                     or not a.allow_research_shore
                     or not isinstance(nearest,dict)
-                    or nearest.get('shore_method')!='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'):
+                    or nearest.get('shore_method')!='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+                    or any(key in nearest for key in ('execution_method','interval_nearest_sha256','interval_certified_cells'))):
                 raise ValueError('shared-shore manifest does not bind the WGS84 research method')
     for entry in prefill_plan.get('water_layers',[]):
         _, prefill_manifest=c.read_pinned_manifest(entry,prefill_plan_path,root)

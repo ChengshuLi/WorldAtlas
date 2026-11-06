@@ -9,16 +9,21 @@ import argparse
 import hashlib
 import json
 import math
+import platform
 from pathlib import Path
 import subprocess
 import sys
 
 import numpy as np
+import scipy
+import pyproj
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from exclusive_outputs import create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, write_json_exclusive, validate_fresh_output
+import exclusive_outputs, decision_snapshot, seavox_properties
 from decision_snapshot import read_snapshot, participant_water_codes, find_basin, find_source
 from seavox_properties import feature_id as read_feature_id
 import shared_nearest as shared
+import interval_nearest
 
 W, H = 131072, 54614
 STEP = 360.0 / W
@@ -144,6 +149,17 @@ def contiguous_spans(selected, x_offset=0):
     return [(int(g[0]) + x_offset, int(g[-1]) + x_offset + 1) for g in groups]
 
 
+
+def source_water_spans(mask, x_offset, ends, values):
+    """Intersect selected source cells with physical water without scanning RLE for empty cells."""
+    selected = np.flatnonzero(mask)
+    if not len(selected): return []
+    selected = selected[values[np.searchsorted(ends, selected+x_offset, side='right')] == 1]
+    if not len(selected): return []
+    cuts = np.r_[0, np.flatnonzero(np.diff(selected)>1)+1, len(selected)]
+    return [(int(selected[a])+x_offset, int(selected[b-1])+x_offset+1)
+            for a,b in zip(cuts[:-1], cuts[1:])]
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--input-root', type=Path, required=True)
@@ -156,6 +172,7 @@ def main():
     ap.add_argument('--land-rows', type=Path); ap.add_argument('--land-rows-sha256')
     ap.add_argument('--land-runs', type=Path); ap.add_argument('--land-runs-sha256')
     ap.add_argument('--shore-pad-degrees', type=float, default=8.0)
+    ap.add_argument('--research-interval', action='store_true', help='research only: use interval certificates; output requires a reviewed interval-aware prefill adapter')
     ap.add_argument('--research-shore-method', choices=['wgs84-coastal-4neighbor-center-v2'],
                     help='draft research only: use the WGS84 ellipsoidal four-neighbor coastal land-cell-center method')
     ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow a correctly labeled draft decision and entity revision')
@@ -164,6 +181,11 @@ def main():
     args = ap.parse_args()
     builder_code_sha = digest(Path(__file__))
     shared_code_sha = digest(Path(shared.__file__))
+    interval_code_sha = digest(Path(interval_nearest.__file__))
+    helpers = {'exclusive_outputs':exclusive_outputs,'decision_snapshot':decision_snapshot,'seavox_properties':seavox_properties}
+    helper_code_shas = {name:digest(Path(module.__file__)) for name,module in helpers.items()} if args.research_interval else {}
+    interval_software = {'python':platform.python_version(),'numpy':np.__version__,'scipy':scipy.__version__,
+                         'pyproj':pyproj.__version__,'proj':pyproj.proj_version_str} if args.research_interval else None
     if not args.allow_unverified_snapshot:
         raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
     root = args.input_root.resolve(); out = args.out.resolve()
@@ -184,6 +206,7 @@ def main():
     snapshot = read_snapshot(policy_path, args.policy_sha256, allow_draft=args.allow_draft_snapshot)
     basin, source, selection = selected_basin(snapshot, args.decision_id)
     is_shared = basin['assignment_method'] == 'shared_nearest_assigned_shore'
+    if args.research_interval and not is_shared: raise ValueError('interval research mode requires a shared basin')
     if is_shared and not land_rows_path: raise ValueError('shared basin requires pinned final-land RLEs')
     if is_shared and (not args.allow_draft_snapshot or snapshot['decision_revision']['status'] != 'draft'
                       or args.research_shore_method != 'wgs84-coastal-4neighbor-center-v2'):
@@ -244,37 +267,52 @@ def main():
             return wrapped_bounds.shore_blocks(shared,(rows,runs),(lr,lu),full_shore_bounds,W,H,STEP,code)
         classifier=wrapped_bounds.StreamedWrappedClassifier(shared.classify,streamed_shore_fallback.classify_one,shore_bounds,full_shore_bounds,W,H,STEP,pairs,tolerance,indexes,full_blocks)
     assignment = out/'basin-assignment.jsonl.gz'; cells = spans_count = row_count = 0
-    certified = exact = 0
+    certified = exact = interval_certified = 0
     with create_gzip_text_exclusive(assignment, encoding='utf8') as stream:
         for y in range(y0, y1):
             a, b = int(rows[y]), int(rows[y+1]); ends = runs[2*a:2*b:2]; values = runs[2*a+1:2*b:2]
             if not len(ends) or int(ends[0]) == 0 or int(ends[-1]) != W or np.any(ends[1:] <= ends[:-1]) or np.any(~np.isin(values,[1,17])):
                 raise ValueError(f'invalid physical grid row {y}')
-            x = np.arange(x0,x1,dtype='u4')
-            chosen = (raster[y-y0] != 0) & (values[np.searchsorted(ends,x,side='right')] == 1)
-            intervals = contiguous_spans(chosen, x0)
+            if is_shared and args.research_interval:
+                intervals = source_water_spans(raster[y-y0], x0, ends, values)
+            else:
+                x = np.arange(x0,x1,dtype='u4')
+                chosen = (raster[y-y0] != 0) & (values[np.searchsorted(ends,x,side='right')] == 1)
+                intervals = contiguous_spans(chosen, x0)
             if not intervals:
                 continue
-            records = []
-            for a,b in intervals:
-                if not is_shared:
-                    records.append({'start':a,'end':b,'code':selection,'rule_id':'research-named-basin-direct-continent-v1','member_id':member_id})
-                    continue
-                # Bound memory even for a long source span.
-                for start in range(a,b,5000):
-                    end=min(start+5000,b); xs=np.arange(start,end,dtype=np.float64)
-                    lat=np.full(len(xs),90-(y+.5)*STEP); lon=-180+(xs+.5)*STEP
-                    codes, ncert, nexact=classifier.classify(lat,lon)
-                    certified+=ncert; exact+=nexact
-                    cuts=np.r_[0,np.flatnonzero(np.diff(codes)!=0)+1,len(codes)]
-                    for i,j in zip(cuts[:-1],cuts[1:]):
-                        q={'start':start+int(i),'end':start+int(j),'code':int(codes[i]),
-                           'rule_id':'research-named-basin-nearest-final-center-v2','member_id':member_id}
-                        if records and records[-1]['end']==q['start'] and records[-1]['code']==q['code']:
-                            records[-1]['end']=q['end']
-                        else: records.append(q)
+            if is_shared and args.research_interval:
+                assigned, stats = interval_nearest.classify_row(
+                    y, intervals, shore_bounds, W, H, STEP, pairs, tolerance, indexes,
+                    point_classifier=classifier.classify)
+                certified += stats['bounded_cells']; exact += stats['exact_cells']
+                interval_certified += stats['certified_cells']
+                records = [{'start':a,'end':b,'code':code,
+                            'rule_id':'research-named-basin-nearest-final-center-v2',
+                            'member_id':member_id} for a,b,code in assigned]
+            elif is_shared:
+                records = []
+                for a,b in intervals:
+                    for start in range(a,b,5000):
+                        end=min(start+5000,b); xs=np.arange(start,end,dtype=np.float64)
+                        lat=np.full(len(xs),90-(y+.5)*STEP); lon=-180+(xs+.5)*STEP
+                        codes, ncert, nexact=classifier.classify(lat,lon)
+                        certified+=ncert; exact+=nexact
+                        cuts=np.r_[0,np.flatnonzero(np.diff(codes)!=0)+1,len(codes)]
+                        for i,j in zip(cuts[:-1],cuts[1:]):
+                            q={'start':start+int(i),'end':start+int(j),'code':int(codes[i]),
+                               'rule_id':'research-named-basin-nearest-final-center-v2','member_id':member_id}
+                            if records and records[-1]['end']==q['start'] and records[-1]['code']==q['code']:
+                                records[-1]['end']=q['end']
+                            else: records.append(q)
+            else:
+                records = [{'start':a,'end':b,'code':selection,
+                            'rule_id':'research-named-basin-direct-continent-v1',
+                            'member_id':member_id} for a,b in intervals]
             stream.write(json.dumps({'row':y,'spans':records},separators=(',', ':'))+'\n')
             cells += sum(b-a for a,b in intervals); spans_count += len(records); row_count += 1
+    if is_shared and (certified+exact != cells or interval_certified+classifier.narrow_cells+classifier.fallback_cells != cells):
+        raise ValueError('shared basin classification accounting mismatch')
     # A run that observed changing inputs is not a usable result.
     for path, expected in ((policy_path,args.policy_sha256),(geometry,feature_sha),
                            (rows_path,args.rows_sha256),(runs_path,args.runs_sha256)):
@@ -283,8 +321,11 @@ def main():
         raise ValueError('archive or extraction manifest changed during run')
     if is_shared and (digest(land_rows_path) != args.land_rows_sha256 or digest(land_runs_path) != args.land_runs_sha256):
         raise ValueError('land input changed during run')
-    if digest(Path(__file__))!=builder_code_sha or digest(Path(shared.__file__))!=shared_code_sha:
-        raise ValueError('builder or shared classifier code changed during run')
+    if (digest(Path(__file__))!=builder_code_sha or digest(Path(shared.__file__))!=shared_code_sha
+            or digest(Path(interval_nearest.__file__))!=interval_code_sha):
+        raise ValueError('builder or classifier code changed during run')
+    if any(digest(Path(helpers[name].__file__)) != pin for name,pin in helper_code_shas.items()):
+        raise ValueError('interval builder helper code changed during run')
     if is_shared and (digest(Path(wrapped_bounds.__file__))!=wrapped_code_sha or digest(Path(streamed_shore_fallback.__file__))!=fallback_code_sha):
         raise ValueError('wrapped classifier code changed during run')
     gdal_version = subprocess.run(['gdal_rasterize','--version'],check=True,capture_output=True,text=True).stdout.strip()
@@ -304,8 +345,9 @@ def main():
                                  'geometry_validity':'OGR/GEOS ST_IsValid and ST_IsEmpty checked',
                                  'bounds_columns_rows':[x0,x1,y0,y1]},
                 'algorithm_sha256':builder_code_sha,
-                'nearest_assignment_audit': {'shore_method':('wgs84-wrapped-certified-with-streamed-full-fallback-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'), 'shore_crop':shore_bounds,'coastal_center_count':len(edges['mids']),'coastal_center_count_scope':'indexed-shore-crop',
+                'nearest_assignment_audit': {'shore_method':(('wgs84-wrapped-center-interval-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-center-interval-v1 (research, not an approved decision)') if args.research_interval else ('wgs84-wrapped-certified-with-streamed-full-fallback-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)')), 'shore_crop':shore_bounds,'coastal_center_count':len(edges['mids']),'coastal_center_count_scope':'indexed-shore-crop',
                     **({'full_shore_crop':full_shore_bounds,'full_streamed_shore_count':'not-precomputed','index_optimization':'certified-wrapped-crop-with-streamed-full-shore-fallback','shore_order':'original-full-crop-row-column-order','wrapped_narrow_cells':classifier.narrow_cells,'wrapped_fallback_cells':classifier.fallback_cells,'wrapped_bounds_sha256':wrapped_code_sha,'streamed_fallback_sha256':fallback_code_sha} if shore_bounds!=full_shore_bounds else {}),
+                    **({'execution_method':'wgs84-center-row-interval-v1','interval_certified_cells':interval_certified,'interval_nearest_sha256':interval_code_sha,'helper_code_sha256':helper_code_shas,'software':interval_software} if args.research_interval else {}),
                     'certified_bound_cells':certified,'exact_distance_cells':exact,
                     'shared_nearest_sha256':shared_code_sha,
                     'shore_geometry_sha256':shared_code_sha} if is_shared else None,

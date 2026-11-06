@@ -67,6 +67,11 @@ class PrefillTests(unittest.TestCase):
                 with patch.object(sys,'argv',argv+['--allow-research-shore']):
                     with self.assertRaisesRegex(ValueError,'does not bind'):prefill.main()
                 manifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+                manifest['nearest_assignment_audit']['interval_nearest_sha256']='d'*64
+                mp.write_text(json.dumps(manifest));layer['manifest_sha256']=digest(mp);pp.write_text(json.dumps(plan))
+                with patch.object(sys,'argv',argv+['--allow-research-shore']):
+                    with self.assertRaisesRegex(ValueError,'does not bind'):prefill.main()
+                manifest['nearest_assignment_audit'].pop('interval_nearest_sha256')
                 mp.write_text(json.dumps(manifest));layer['manifest_sha256']=digest(mp);pp.write_text(json.dumps(plan))
                 with patch.object(sys,'argv',argv+['--allow-research-shore']):prefill.main()
                 self.assertTrue((out/'prefill-rows.u32le').exists())

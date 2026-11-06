@@ -158,6 +158,19 @@ class PrefillPlanTest(unittest.TestCase):
                     plans.assemble(draft_cfg,config_path,root,bad_policy,draft_path,base/'bad-policy',allow_draft=True,allow_research_shore=True)
                 draft_plan=plans.assemble(draft_cfg,config_path,root,draft,draft_path,base/'draft-plan',allow_draft=True,allow_research_shore=True)
                 self.assertEqual(draft_plan['research_shore_method'],'wgs84-coastal-4neighbor-center-v2')
+                # The base planner must not silently accept the new producer as the old one.
+                old_method=db['nearest_assignment_audit']['shore_method']
+                db['nearest_assignment_audit']['shore_method']='wgs84-coastal-center-interval-v1 (research, not an approved decision)'
+                db['nearest_assignment_audit']['execution_method']='wgs84-center-row-interval-v1'
+                db['nearest_assignment_audit']['interval_nearest_sha256']='d'*64
+                dbp.write_text(json.dumps(db));draft_cfg['basins'][0]['manifest_sha256']=sha(dbp)
+                with self.assertRaisesRegex(ValueError,'research method or land binding mismatch'):
+                    plans.assemble(draft_cfg,config_path,root,draft,draft_path,base/'interval-plan',allow_draft=True,allow_research_shore=True)
+                db['nearest_assignment_audit']['shore_method']=old_method
+                dbp.write_text(json.dumps(db));draft_cfg['basins'][0]['manifest_sha256']=sha(dbp)
+                with self.assertRaisesRegex(ValueError,'research method or land binding mismatch'):
+                    plans.assemble(draft_cfg,config_path,root,draft,draft_path,base/'relabeled-interval-plan',allow_draft=True,allow_research_shore=True)
+                db['nearest_assignment_audit'].pop('execution_method');db['nearest_assignment_audit'].pop('interval_nearest_sha256')
                 db['source']['tie_rules']={**tie,'tolerance_metres':'0.1'};dbp.write_text(json.dumps(db))
                 draft_cfg['basins'][0]['manifest_sha256']=sha(dbp)
                 with self.assertRaisesRegex(ValueError,'research method or land binding mismatch'):

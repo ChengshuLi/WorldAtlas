@@ -65,6 +65,11 @@ class DirectCompositionTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'shared-old-audit',shore=True)
                 manifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
                 mp.write_text(json.dumps(manifest));plan['water_layers'][0]['manifest_sha256']=sha(mp);pp.write_text(json.dumps(plan))
+                manifest['nearest_assignment_audit']['execution_method']='wgs84-center-row-interval-v1'
+                mp.write_text(json.dumps(manifest));plan['water_layers'][0]['manifest_sha256']=sha(mp);pp.write_text(json.dumps(plan))
+                with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'relabeled-interval',shore=True)
+                manifest['nearest_assignment_audit'].pop('execution_method')
+                mp.write_text(json.dumps(manifest));plan['water_layers'][0]['manifest_sha256']=sha(mp);pp.write_text(json.dumps(plan))
                 run(base/'shared-wgs84',shore=True)
                 self.assertTrue((base/'shared-wgs84/report.json').is_file())
                 manifest['source'].pop('assignment_method');manifest.pop('nearest_assignment_audit')

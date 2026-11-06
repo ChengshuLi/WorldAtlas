@@ -114,9 +114,30 @@ class FullBuilderTest(unittest.TestCase):
                     '--land-rows-sha256',h(root/'land-rows'),'--land-runs',str(root/'land-runs'),
                     '--land-runs-sha256',h(root/'land-runs'),'--shore-pad-degrees','180',
                     '--out',str(out),'--allow-unverified-snapshot','--allow-draft-snapshot',
-                    '--research-shore-method','wgs84-coastal-4neighbor-center-v2']
+                    '--research-shore-method','wgs84-coastal-4neighbor-center-v2','--research-interval']
                 m.main()
+                baseline_out=Path(d)/'baseline-out'
+                sys.argv=[str(baseline_out) if arg==str(out) else arg for arg in sys.argv if arg!='--research-interval']
+                m.main()
+                # A helper changed after processing must not produce a completed manifest.
+                from unittest.mock import patch
+                tamper_out=Path(d)/'tamper-out'; seen=[0]
+                sys.argv=[str(tamper_out) if arg==str(baseline_out) else arg for arg in sys.argv]+['--research-interval']
+                def changed_digest(path):
+                    if Path(path).resolve()==Path(m.exclusive_outputs.__file__).resolve():
+                        seen[0]+=1
+                        if seen[0]>1:return '0'*64
+                    return h(Path(path))
+                with patch.object(m,'digest',side_effect=changed_digest):
+                    with self.assertRaisesRegex(ValueError,'helper code changed'):
+                        m.main()
+                self.assertFalse((tamper_out/'manifest.json').exists())
             finally: m.W,m.H,m.STEP,sys.argv=old
+            with gzip.open(out/'basin-assignment.jsonl.gz','rb') as generated, gzip.open(baseline_out/'basin-assignment.jsonl.gz','rb') as reference:
+                self.assertEqual(generated.read(),reference.read())
+            baseline=json.loads((baseline_out/'manifest.json').read_text())
+            self.assertEqual(baseline['nearest_assignment_audit']['shore_method'],'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)')
+            self.assertNotIn('execution_method',baseline['nearest_assignment_audit'])
             with gzip.open(out/'basin-assignment.jsonl.gz','rt') as f: record=json.loads(f.readline())
             self.assertEqual(record['row'],2);self.assertEqual([(q['start'],q['end'],q['code']) for q in record['spans']],[(5,6,2)])
             manifest=json.loads((out/'manifest.json').read_text())
@@ -124,6 +145,13 @@ class FullBuilderTest(unittest.TestCase):
             self.assertEqual(manifest['source']['tie_rules'],b['tie_rules'])
             self.assertEqual(manifest['source']['land_runs_sha256'],h(root/'land-runs'))
             self.assertEqual(manifest['nearest_assignment_audit']['exact_distance_cells'],1)
+            audit=manifest['nearest_assignment_audit']
+            self.assertEqual(audit['shore_method'],'wgs84-coastal-center-interval-v1 (research, not an approved decision)')
+            self.assertEqual(audit['execution_method'],'wgs84-center-row-interval-v1')
+            self.assertEqual(audit['interval_nearest_sha256'],h(Path(m.interval_nearest.__file__)))
+            self.assertEqual(audit['helper_code_sha256'],{name:h(Path(module.__file__)) for name,module in [('exclusive_outputs',m.exclusive_outputs),('decision_snapshot',m.decision_snapshot),('seavox_properties',m.seavox_properties)]})
+            self.assertEqual(audit['software'],{'python':m.platform.python_version(),'numpy':m.np.__version__,'scipy':m.scipy.__version__,'pyproj':m.pyproj.__version__,'proj':m.pyproj.proj_version_str})
+            self.assertEqual(audit['certified_bound_cells']+audit['exact_distance_cells'],manifest['physical_water_cells'])
 
 
 class DirectBuilderRegression(unittest.TestCase):
