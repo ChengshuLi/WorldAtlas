@@ -1,0 +1,23 @@
+# Segment 3: Jvari and Klukhor candidate corrections
+
+Research candidates, not selected geography. Both are spliced into the already selected combined Anapa/Abin boundary and preserve its endpoints. The two proposals combined form a simple line, canonical GeoJSON SHA-256 `22a8027d647d42441dfd48e647249fcefdd3639e0b521dee2f732211892ce664`. No map was rebuilt.
+
+## Jvari
+
+A seeded JAXA v4.1 N042E044 drainage screen uses mapped upstream waters reaching OSM Bidara way 169427255 and White Aragvi way 515458205. The use of downstream ways rather than the first headwater segments expands the mapped drainage assigned to the two rivers. Mask 0 with positive stack and mask 48 (Copernicus-filled elevations) are included. A connected opposing-label interface provides an alternative between its nearest source-line intersections on opposite sides of the pass. It replaces 7,477 m with 10,738 m, is simple and joins at both ends. At 100 m station spacing and 100 m side offsets, the current line reports 3/75 expected basin pairs, while the candidate reports 108/108. The latter is a consistency check because the candidate follows this model's interface. Of 689 complete OSM river/stream ways in the two source extracts, the current segment intersects three and the candidate intersects none. The proposal lies about 100 m from the chosen mapped Jvari landmark versus 441 m for the current segment; geographic landmark coordinates are not a survey control. It encloses 40 land cell centers versus the existing line on the verified draft-163 stand-in mask, not a current-generation classification result. The terrain model and mapped waterways are not independent where OSM waterways seed the model.
+
+## Klukhor
+
+A JAXA N043E041 screen seeds mapped upstream waters reaching Northern Klukhor way 86306314 and Klychi way 86320040. The earlier first-headwater Klychi seed omitted connected downstream ways; using the downstream way expands the included OSM network. A continuous label interface intersects the selected boundary at multiple points. The proposed replacement follows it across the pass area, then uses a 341 m shortest valid-terrain grid connector to the current boundary. This bridge is a deliberate hypothesis through an unclassified area, not a modeled 1/2 interface. The candidate replaces 5,432 m with 7,608 m and the full line is simple. At 100 m station spacing and 100 m offsets, the current segment yields 16/55 expected pairs; the candidate yields 74/77, with three unresolved. Both cut segments intersect none of 380 complete mapped river/stream ways. In a 12-point nearest-position terrain comparison, bridge elevations average 62.3 m above the current route in JAXA and 64.3 m above in Copernicus; all sampled JAXA points pass the product-quality mask. This is a surface-elevation screen, not proof of drainage. The proposal encloses 14 draft-163 stand-in land centers. Assess the bridge separately from the directly classified interface.
+
+## Source and reproducibility
+
+Raw source files are local research inputs, not selected R2 assets. Do not add them to R2 unless the corresponding candidate becomes a pipeline input. The previously cataloged JAXA original archives are `N042E044.zip` SHA-256 `68d911703e76f008d705cf97c7a69ae5a5fc944629cd1b92c3f555951ca9e615` and `N043E041.zip` SHA-256 `0d9ccebeff94801fed821093b4130829db80bfec4e1f3347ad9726c3f4de2f1a`.
+
+OSM map responses retrieved 2026-11-05:
+
+- `https://api.openstreetmap.org/api/0.6/map?bbox=44.30,42.40,44.60,42.52`, SHA-256 `1187838bbd6b65066ed8496c220d4625435c87efdf61978108fc2cb30b6086e1`.
+- `https://api.openstreetmap.org/api/0.6/map?bbox=44.30,42.52,44.60,42.64`, SHA-256 `18f9da688f24d283c1cb53e1bd1f5e4ad32f3c0ecf1f61bd12270a632bd76778`.
+- `https://api.openstreetmap.org/api/0.6/map?bbox=41.75,43.17,42.00,43.35`, SHA-256 `192a455b47553a8bbebacc86dd2cf211c3bdd00ad5b5271916312e0bfa67d424`.
+
+`merge_jvari_map_research.py`, the two downstream-product scripts, `central_divide_extract.py`, the splice scripts and `central_compare_sampling.py` perform the model and checks. `klukhor_north_gap_trace.py` produces the separate exploratory bridge. These are bounded diagnostics, not a production source gate or approval. Physical mask hashes: rows `6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468`, runs `1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7`.
