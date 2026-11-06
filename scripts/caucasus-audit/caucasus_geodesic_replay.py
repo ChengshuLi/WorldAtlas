@@ -11,7 +11,8 @@ def run(name,*args):
  command=[sys.executable,str(HERE/name)]+[str(x) for x in args];print('running',name,flush=True);subprocess.run(command,check=True)
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def main():
- p=argparse.ArgumentParser();p.add_argument('--recipe',required=True);p.add_argument('--r2-readbacks',required=True);p.add_argument('--work-dir',required=True);p.add_argument('--output-dir',required=True);a=p.parse_args();recipe_path=Path(a.recipe).resolve();raw=Path(a.r2_readbacks).resolve();work=Path(a.work_dir).resolve();out=Path(a.output_dir).resolve();work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);recipe=json.loads(recipe_path.read_text())
+ p=argparse.ArgumentParser();p.add_argument('--recipe',required=True);p.add_argument('--recipe-sha256',required=True);p.add_argument('--r2-readbacks',required=True);p.add_argument('--work-dir',required=True);p.add_argument('--output-dir',required=True);a=p.parse_args();recipe_path=Path(a.recipe).resolve();raw=Path(a.r2_readbacks).resolve();work=Path(a.work_dir).resolve();out=Path(a.output_dir).resolve();work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);recipe=json.loads(recipe_path.read_text())
+ if digest(recipe_path)!=a.recipe_sha256:raise ValueError('selected Neon recipe hash mismatch')
  if recipe.get('schema')!='caucasus-approved-wgs84-recipe-v2':raise ValueError('unsupported recipe')
  stage=work/'sources';run('caucasus_geodesic_prepare.py','--recipe',recipe_path,'--r2-readbacks',raw,'--output',stage)
  selector=work/'selector.json';selector.write_text(json.dumps(recipe['base_selector'],sort_keys=True,separators=(',',':'),allow_nan=False));

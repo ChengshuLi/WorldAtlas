@@ -16,7 +16,7 @@ Use the current PR4 versions of the scripts in `scripts/caucasus-audit` and a Py
 
 ```
 python caucasus_geodesic_replay.py \
-  --recipe <recipe.json> --r2-readbacks <directory> \
+  --recipe <recipe.json> --recipe-sha256 <pinned-sha> --r2-readbacks <directory> \
   --work-dir <new-work-directory> --output-dir <new-output-directory>
 ```
 
