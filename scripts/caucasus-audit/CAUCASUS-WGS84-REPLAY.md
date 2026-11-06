@@ -27,3 +27,5 @@ The preparer verifies each source hash, verifies the OSM bundle members, rejects
 ## Verification of this revision
 
 The WGS84 source selector replay changed 142 of the 2,292 baseline guide coordinates by at most 0.000243 m. The raw-derived Abin drainage labels and cut matched the previously approved results exactly. All nine other source-derived model label arrays, seed arrays and transforms matched their earlier outputs exactly. The full line retains 10,084 vertices and has SHA-256 `3be87f6ec29be709a07c07c04ce62b6fb00e33f6b35020781a088be5b2d8e8b9`; 44 vertices differ from the previous selected line, by at most 0.000188 m. No native-grid center lay in the padded changed-edge envelopes. The regenerated Europe polygon is simple and valid, and all six stored witnesses pass.
+
+The complete replay was repeated using the recipe exported and hash-checked from Neon; its resulting geometry matched the first replay byte for byte. The selected Neon recipe pins PR4 code commit `a1ec3746753bb19467ae730dc3ab6b0f3ad327e2`. All 16 raw inputs were read back from R2 and matched their recipe hashes; all 16 have corresponding catalog records and boundary-source links.
