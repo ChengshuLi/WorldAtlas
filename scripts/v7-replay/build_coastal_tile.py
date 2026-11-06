@@ -4,6 +4,7 @@ import argparse,hashlib,json,math
 from pathlib import Path
 import numpy as np
 import coastal_core as core
+import coastal_block
 from decision_snapshot import read_snapshot
 from direct_lineage import validate_physical_report,validate_direct_land
 from exclusive_outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
@@ -27,7 +28,7 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
     x0,x1,y0,y1=box;step=360.0/width
     if not (0<=x0<x1<=width and 0<=y0<y1<=height) or chunk<=0:raise ValueError('invalid coastal tile')
     decision,pairs,tol,band,btol=core.policy(snapshot,allow_selected_research=allow_selected_research)
-    code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__)}
+    code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__),'accelerator':Path(coastal_block.__file__)}
     code_pins={name:sha(path) for name,path in code_paths.items()}
     crop=core.shore.crop_bounds(box,width,height,step,pad)
     try:edges=core.shore.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in pairs])
@@ -45,7 +46,7 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
             for start in range(0,len(selected),chunk):
                 xs=selected[start:start+chunk]+x0
                 lat=np.full(len(xs),90-(y+.5)*step);lon=-180+(xs+.5)*step
-                codes,stats=core.classify(lat,lon,crop,width,height,step,pairs,tol,band,btol,idx)
+                codes,stats=coastal_block.block_classify(lat,lon,crop,width,height,step,pairs,tol,band,btol,idx,return_stats=True)
                 bounded+=stats['bounded'];exact+=stats['exact']
                 keep=codes!=0; chosen_x=xs[keep]; chosen_codes=codes[keep]; cells+=int(keep.sum())
                 if len(chosen_x):
@@ -68,7 +69,7 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
               'exact_cells':exact,'coastal_centers':len(edges['mids']),
               'span_file':{'path':path.name,'sha256':sha(path)},'algorithm_sha256':code_pins['algorithm'],
               'core_sha256':code_pins['core'],'shore_sha256':code_pins['shore'],
-              'geometry_sha256':code_pins['geometry'],
+              'geometry_sha256':code_pins['geometry'],'accelerator_sha256':code_pins['accelerator'],
               'coverage':'candidate core only; independent global coverage and source semantics not yet verified'}
     write_json_exclusive(out/'manifest.json',manifest,indent=2)
     return manifest
@@ -108,3 +109,4 @@ def main():
     print(json.dumps({'status':m['status'],'assigned_cells':m['assigned_cells'],'output':str(out)}))
 
 if __name__=='__main__':main()
+

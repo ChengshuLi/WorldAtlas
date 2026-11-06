@@ -1,0 +1,5 @@
+# WGS84 coastal block certification
+
+`coastal_block.py` conservatively certifies a monotone row block as outside the coastal band or uniquely inside for one participant. It uses a spherical lower bound, an exact WGS84 midpoint-to-shore upper witness, a bound on distance from the midpoint to the block endpoints, and the crop-edge lower bound. Uncertified cells use the existing exact WGS84 classifier and its complete-input fallback. No distance, neighborhood, or resource cutoff is added.
+
+The source accelerator was independently reviewed and its research producer reproduced all 175 reference tile span streams byte-for-byte. This repository integration retains the PR branch's streamed WGS84 fallback and legacy snapshot/lineage plumbing, rather than replacing them with the research producer's separate versions. The integration is covered by focused coastal, tile, and sealed-batch tests; the 175-tile replay was performed on the research producer, not this port. Outputs remain research candidates pending source and geographic review.
