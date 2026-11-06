@@ -12,7 +12,7 @@ def packed(fmt,records):return b''.join(struct.pack(fmt,*r) for r in records)
 
 class ResolverTests(unittest.TestCase):
  def setUp(self):
-    self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);p=Path(self.t.name);self.p=p;self.out=tempfile.TemporaryDirectory();self.addCleanup(self.out.cleanup);self.outdir=Path(self.out.name);self.mem=patch.object(resolve,'available_memory_kib',return_value=4000000);self.mem.start();self.addCleanup(self.mem.stop)
+    self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);p=Path(self.t.name);self.p=p;self.out=tempfile.TemporaryDirectory();self.addCleanup(self.out.cleanup);self.outdir=Path(self.out.name)
     self.g={'width':8,'height':4,'west':'-180','north':'90','step':'45'}
     self.point={'type':'Feature','properties':{'id':'a','name':'Test place'},'geometry':{'type':'Point','coordinates':[-112.5,22.5]}}
     self.feature={'type':'FeatureCollection','features':[self.point]}
@@ -131,9 +131,6 @@ class ResolverTests(unittest.TestCase):
  def test_code_pin_mismatch(self):
     self.req['resolver_sha256']='0'*64
     with self.assertRaisesRegex(ValueError,'code pin'):resolve.resolve(self.req)
- def test_point_parse_requires_headroom(self):
-    with patch.object(resolve,'available_memory_kib',return_value=resolve.MEMORY_FLOOR_KIB+1000):
-     with self.assertRaisesRegex(ValueError,'headroom for point parsing'):resolve.resolve(self.req)
  def test_point_source_byte_cap(self):
     with (self.p/'point.json').open('wb') as f:f.truncate(1024*1024+1)
     self.pointpin={'path':str(self.p/'point.json'),'sha256':resolve.digest(self.p/'point.json')};self.sources[0]['sha256']=self.pointpin['sha256'];self.sources[0]['size_bytes']=1024*1024+1;self.req['source_files'][0].update(self.pointpin);self.save_snap()
@@ -159,9 +156,6 @@ class ResolverTests(unittest.TestCase):
     with patch.object(resolve,'resolve',side_effect=mutate), patch.object(sys,'argv',['resolve.py',request['path'],str(out)]):
      with self.assertRaisesRegex(ValueError,'request changed'):resolve.main()
     self.assertFalse(out.exists())
- def test_memory_floor(self):
-    with patch.object(resolve,'available_memory_kib',return_value=1000000):
-     with self.assertRaisesRegex(ValueError,'memory below safety floor'):resolve.resolve(self.req)
  def test_excessive_row_count_rejected_before_allocation(self):
     self.req['component_rows']=put(self.p/'cr',packed('<I',[(0,),(1000000,),(1000000,),(1000000,),(1000000,)]));self.manifest['pins']['component_rows']=self.req['component_rows'];self.req['component_manifest']=put(self.p/'manifest',self.manifest)
     with self.assertRaisesRegex(ValueError,'excessive run count'):resolve.resolve(self.req)

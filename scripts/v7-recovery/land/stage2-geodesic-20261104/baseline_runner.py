@@ -3,7 +3,7 @@ import math,time
 import numpy as np
 import checkpoints,engine
 
-def run(component_runs,co,roots,hints,seed_roots,width,cert_index,exact_index,checkpoint,identity,*,resume=False,chunk=1024,tolerance=1e-5,memory_floor_kib=0,disk_floor_bytes=0,checkpoint_seconds=60,block_records=100000,guard=lambda:None,progress=lambda *x:None):
+def run(component_runs,co,roots,hints,seed_roots,width,cert_index,exact_index,checkpoint,identity,*,resume=False,chunk=1024,tolerance=1e-5,disk_floor_bytes=0,checkpoint_seconds=60,block_records=100000,guard=lambda:None,progress=lambda *x:None):
  roots=np.asarray(roots,dtype=np.uint32);hints=np.asarray(hints,dtype=np.uint8);seed_roots=np.asarray(seed_roots,dtype=np.uint32);N=len(roots)
  if len(hints)!=N or not N or np.any(roots[1:]<=roots[:-1]) or np.any((hints<17)|(hints>22)) or not 1<=chunk<=1024 or checkpoint_seconds<0:raise ValueError('invalid runner inputs')
  # Always reconstruct the first physical query witness and exact WGS84 upper on
@@ -21,22 +21,22 @@ def run(component_runs,co,roots,hints,seed_roots,width,cert_index,exact_index,ch
   if phase=='complete' and cursor!=int(co[-1]):raise ValueError('incomplete final checkpoint')
  else:
   amb=np.zeros(N,dtype=bool);best=np.full((N,6),np.inf);best[np.arange(N),hints.astype(np.int64)-17]=upper;phase='cert';cursor=base=0
-  checkpoints.write(checkpoint,identity,phase,cursor,base,{'roots':roots,'hints':hints,'upper':upper,'amb':amb,'best':best},memory_floor_kib,disk_floor_bytes)
+  checkpoints.write(checkpoint,identity,phase,cursor,base,{'roots':roots,'hints':hints,'upper':upper,'amb':amb,'best':best},disk_floor_bytes)
  def arrays():return {'roots':roots,'hints':hints,'upper':upper,'amb':amb,'best':best}
  last=time.monotonic()
  if phase=='cert':
   def cert_progress(pos,count,_):
    nonlocal last
    if time.monotonic()-last>=checkpoint_seconds:
-    checkpoints.write(checkpoint,identity,'cert',pos,base+count,arrays(),memory_floor_kib,disk_floor_bytes);progress('cert',pos,base+count);last=time.monotonic()
+    checkpoints.write(checkpoint,identity,'cert',pos,base+count,arrays(),disk_floor_bytes);progress('cert',pos,base+count);last=time.monotonic()
   amb,count,cursor=engine.certificate_pass(component_runs,co,roots,seed_roots,cert_index,upper,hints,amb,cursor,chunk,tolerance,guard,cert_progress,block_records)
-  phase='exact';cursor=base=0;checkpoints.write(checkpoint,identity,phase,cursor,base,arrays(),memory_floor_kib,disk_floor_bytes);progress('exact',0,0);last=time.monotonic()
+  phase='exact';cursor=base=0;checkpoints.write(checkpoint,identity,phase,cursor,base,arrays(),disk_floor_bytes);progress('exact',0,0);last=time.monotonic()
  if phase=='exact':
   def exact_progress(pos,count,_):
    nonlocal last
    if time.monotonic()-last>=checkpoint_seconds:
-    checkpoints.write(checkpoint,identity,'exact',pos,base+count,arrays(),memory_floor_kib,disk_floor_bytes);progress('exact',pos,base+count);last=time.monotonic()
+    checkpoints.write(checkpoint,identity,'exact',pos,base+count,arrays(),disk_floor_bytes);progress('exact',pos,base+count);last=time.monotonic()
   best,count,cursor=engine.exact_pass(component_runs,co,roots,seed_roots,exact_index,hints,amb,best,cursor,chunk,tolerance,guard,exact_progress,min(block_records,256))
-  phase='complete';base+=count;checkpoints.write(checkpoint,identity,phase,cursor,base,arrays(),memory_floor_kib,disk_floor_bytes);progress('complete',cursor,base)
+  phase='complete';base+=count;checkpoints.write(checkpoint,identity,phase,cursor,base,arrays(),disk_floor_bytes);progress('complete',cursor,base)
  codes,ties=engine.finalize(hints,amb,best,tolerance,numerical_tie_guard_m=.0001)
  return {'roots':roots,'codes':codes,'ambiguous':amb,'ties':ties,'certified_count':int((~amb).sum()),'exact_count':int(amb.sum()),'exact_queries':base}

@@ -7,7 +7,7 @@ is a physical-mask proof, not a route-selection, geographic, or ring proof.
 import argparse, hashlib, importlib.util, json, sys
 from pathlib import Path
 SUPPORT=Path(__file__).resolve().with_name('validate_water_closure_v2.py')
-SUPPORT_SHA='1d5e2a978870e05cf7f1f2c57389f65ffbc1c1a5de11056b5d5196b1a80b6f01'
+SUPPORT_SHA='0ba02bafcfd54214af0b762edd194833eea1cbba7b1e391764b05c40ff0036ba'
 if hashlib.sha256(SUPPORT.read_bytes()).hexdigest()!=SUPPORT_SHA: raise RuntimeError('checker support hash mismatch')
 spec=importlib.util.spec_from_file_location('exact_water_support', SUPPORT); m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 

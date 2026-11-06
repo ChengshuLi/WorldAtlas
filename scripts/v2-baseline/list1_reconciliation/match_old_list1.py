@@ -15,9 +15,8 @@ import cluster
 from cluster import digest
 
 
-def match(cluster_directory, index_path, expected_index_sha, output, expected_report_sha, minimum_free_bytes=2*1024**3, minimum_memory_kib=0, expected_monitor_sha=None):
+def match(cluster_directory, index_path, expected_index_sha, output, expected_report_sha, minimum_free_bytes=2*1024**3):
     if type(minimum_free_bytes) is not int or minimum_free_bytes < 0: raise ValueError('invalid minimum free space')
-    if type(minimum_memory_kib) is not int or minimum_memory_kib < 0: raise ValueError('invalid minimum memory')
     if not isinstance(expected_report_sha,str) or len(expected_report_sha)!=64: raise ValueError('expected cluster report hash required')
     code_sha, dependency_sha = digest(__file__), digest(cluster.__file__)
     cluster_directory, index_path, output = Path(cluster_directory).resolve(), Path(index_path).resolve(), Path(output).resolve()
@@ -31,21 +30,6 @@ def match(cluster_directory, index_path, expected_index_sha, output, expected_re
     if hashlib.sha256(report_raw).hexdigest()!=expected_report_sha: raise ValueError('cluster report hash mismatch')
     report = json.loads(report_raw)
     database = cluster_directory / 'clusters.sqlite'
-    monitor_path=cluster_directory/'comparison-monitor.json'
-    monitor_raw=None
-    if expected_monitor_sha is not None:
-        monitor_raw=bounded_bytes(monitor_path)
-        if hashlib.sha256(monitor_raw).hexdigest()!=expected_monitor_sha:raise ValueError('comparison monitor hash mismatch')
-        monitor=json.loads(monitor_raw)
-        if (monitor.get('schema')!='list1-comparison-watchdog-v1' or monitor.get('status')!='sampled-complete'
-            or monitor.get('report_sha256')!=expected_report_sha or monitor.get('config_sha256')!=report.get('config_sha256')
-            or monitor.get('driver_sha256')!=report.get('code_sha256') or type(monitor.get('samples')) is not int or monitor['samples']<=0
-            or type(monitor.get('minimum_memory_kib')) is not int or type(monitor.get('minimum_available_kib')) is not int
-            or not monitor['minimum_available_kib']>=monitor['minimum_memory_kib']>0
-            or type(monitor.get('peak_process_group_rss_kib')) is not int or type(monitor.get('maximum_process_group_rss_kib')) is not int
-            or not 0<monitor['peak_process_group_rss_kib']<=monitor['maximum_process_group_rss_kib']
-            or type(monitor.get('sample_interval_seconds')) not in (int,float) or not 0<monitor['sample_interval_seconds']<=.1):
-            raise ValueError('comparison monitor binding or resource samples invalid')
     if report.get('schema') != 'list1-land-clusters-report-v1' or report.get('status') not in ('diagnostic-complete-not-an-override','diagnostic-complete-local-policy-unselected') or digest(database) != report['database_sha256']:
         raise ValueError('cluster report/database integrity failure')
     if digest(index_path) != expected_index_sha:
@@ -65,12 +49,6 @@ def match(cluster_directory, index_path, expected_index_sha, output, expected_re
     sync_dir(output.parent)
     def check_space():
         if shutil.disk_usage(output).free < minimum_free_bytes: raise OSError('free disk space below configured floor')
-        if minimum_memory_kib:
-            available=None
-            with open('/proc/meminfo') as f:
-                for line in f:
-                    if line.startswith('MemAvailable:'):available=int(line.split()[1]);break
-            if available is None or available<minimum_memory_kib: raise OSError('available memory below configured floor')
     check_space()
     # The source is opened read-only. A separate temporary SQLite DB holds leads so
     # the global population is not accumulated in memory.
@@ -126,11 +104,9 @@ def match(cluster_directory, index_path, expected_index_sha, output, expected_re
                 f.write(json.dumps({'cluster_id': cluster_id, 'cells': cells, 'old_list1_candidates': candidates, 'status': 'unresolved-evidence-review-required', 'baseline_policy_origin': report.get('baseline_policy_origin'), 'publishable': False}, sort_keys=True) + '\n')
             f.flush();os.fsync(f.fileno())
         sync_dir(output)
-        if digest(database) != report['database_sha256'] or digest(index_path) != expected_index_sha or bounded_bytes(report_path) != report_raw or (monitor_raw is not None and bounded_bytes(monitor_path)!=monitor_raw) or digest(__file__) != code_sha or digest(cluster.__file__) != dependency_sha:
+        if digest(database) != report['database_sha256'] or digest(index_path) != expected_index_sha or bounded_bytes(report_path) != report_raw or digest(__file__) != code_sha or digest(cluster.__file__) != dependency_sha:
             raise ValueError('input changed during matching')
-        result = {'schema': 'old-list1-cluster-discovery-report-v1', 'status': ('diagnostic-only-local-policy-unselected' if report.get('baseline_policy_origin') == 'local_unselected_research' else 'diagnostic-only'), 'publishable': False, 'comparison_sha256': report['comparison_sha256'], 'baseline_policy_origin': report.get('baseline_policy_origin'), 'clusters': report['clusters'], 'historical_index_sha256': expected_index_sha, 'cluster_report_sha256': hashlib.sha256(report_raw).hexdigest(), 'matches_sha256': digest(output / 'matches.jsonl'), 'code_sha256': code_sha, 'cluster_code_sha256': dependency_sha, 'limitations': ['Historical changed-land extents are incomplete discovery hints, not source boundaries.', 'A hit is not a verified geographic match; no hit does not establish absence.', 'Inspect old items and their cited source evidence before researching or selecting new decisions.', 'Resource floors are sampled; abrupt external disk or memory use can still exhaust capacity between checks.']}
-        result['comparison_monitor_sha256']=expected_monitor_sha
-        if monitor_raw is None:result['limitations'].append('No separate comparison monitor was supplied or verified.')
+        result = {'schema': 'old-list1-cluster-discovery-report-v1', 'status': ('diagnostic-only-local-policy-unselected' if report.get('baseline_policy_origin') == 'local_unselected_research' else 'diagnostic-only'), 'publishable': False, 'comparison_sha256': report['comparison_sha256'], 'baseline_policy_origin': report.get('baseline_policy_origin'), 'clusters': report['clusters'], 'historical_index_sha256': expected_index_sha, 'cluster_report_sha256': hashlib.sha256(report_raw).hexdigest(), 'matches_sha256': digest(output / 'matches.jsonl'), 'code_sha256': code_sha, 'cluster_code_sha256': dependency_sha, 'limitations': ['Historical changed-land extents are incomplete discovery hints, not source boundaries.', 'A hit is not a verified geographic match; no hit does not establish absence.', 'Inspect old items and their cited source evidence before researching or selecting new decisions.', 'Disk availability is checked during SQLite work; external disk use can still reduce capacity between checks.']}
         pending=output/'report.pending';final=output/'report.json'
         with pending.open('x') as f:
             json.dump(result, f, sort_keys=True, indent=2)
@@ -158,12 +134,10 @@ if __name__ == '__main__':
     ap.add_argument('old_list1_index_sha256')
     ap.add_argument('output_directory')
     ap.add_argument('--cluster-report-sha256',required=True)
-    ap.add_argument('--comparison-monitor-sha256')
     ap.add_argument('--minimum-free-bytes', type=int, default=2*1024**3)
-    ap.add_argument('--minimum-memory-kib',type=int,default=0)
     args = ap.parse_args()
     try:
-        print(json.dumps(match(args.cluster_directory, args.old_list1_index, args.old_list1_index_sha256, args.output_directory, args.cluster_report_sha256, args.minimum_free_bytes,args.minimum_memory_kib,args.comparison_monitor_sha256), indent=2))
+        print(json.dumps(match(args.cluster_directory, args.old_list1_index, args.old_list1_index_sha256, args.output_directory, args.cluster_report_sha256, args.minimum_free_bytes), indent=2))
     except Exception as exc:
         print('error: ' + str(exc), file=sys.stderr)
         raise SystemExit(1)

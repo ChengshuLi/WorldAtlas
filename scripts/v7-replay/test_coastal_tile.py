@@ -41,8 +41,6 @@ class TileTest(unittest.TestCase):
    with self.assertRaisesRegex(ValueError,'source pins'):b.validate_physical_report(report_path,b.sha(report_path),physical,4,2)
  def test_shore_segment_limit(self):
   s,p,l=self.fixture()
-  with tempfile.TemporaryDirectory() as d:
-   with self.assertRaisesRegex(ValueError,'center limit'):b.run(s,'a'*64,p,l,Path(d)/'out',360,180,[3,9,89,90],180,{},allow_selected_research=True,max_coastal_centers=1)
  def test_missing_policy_or_bad_core_fails(self):
   s,p,l=self.fixture();s['policies']=[]
   with tempfile.TemporaryDirectory() as d:

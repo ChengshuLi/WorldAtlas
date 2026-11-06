@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Assemble explicit pinned line, water-route and connector segments into research regions."""
 import argparse,hashlib,json,math,re,shutil,sys
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 import numpy as np
 from osgeo import ogr
@@ -72,7 +72,7 @@ def build(config_path,output):
    if np.any(ids>=width*(y1-y0)):raise ValueError('route index outside bounds')
    xs=(ids%width).astype(np.int64)+x0;ys=(ids//width).astype(np.int64)+y0
    if [int(xs[0]),int(ys[0])]!=r.get('start') or [int(xs[-1]),int(ys[-1])]!=r.get('end') or np.any(np.abs(np.diff(xs))+np.abs(np.diff(ys))!=1):raise ValueError('invalid route path')
-   @lru_cache(maxsize=8)
+   @cache
    def physical_row(y):return shore.crop(rows,runs,y,x0,x1,w)
    for x,y in zip(xs,ys):
     if physical_row(int(y))[int(x)-x0]!=1:raise ValueError('route crosses land')

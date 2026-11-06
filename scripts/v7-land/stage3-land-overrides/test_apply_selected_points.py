@@ -1,4 +1,5 @@
 import unittest
+import importlib.util,sys
 from apply_selected_points import claims_for, POINT, STAGE2
 class TestPointBinding(unittest.TestCase):
  def setUp(self):
@@ -15,4 +16,11 @@ class TestPointBinding(unittest.TestCase):
  def test_missing_claim(self):
   self.res['claims']=[]
   with self.assertRaisesRegex(ValueError,'count'):claims_for(self.comp,self.snap,self.res)
+ def test_candidate_validator_accepts_current_call_signature(self):
+  path=STAGE2/'validate_stage2_candidate.py'
+  sys.path.insert(0,str(STAGE2))
+  spec=importlib.util.spec_from_file_location('selected_points_stage2_validator',path)
+  validator=importlib.util.module_from_spec(spec);spec.loader.exec_module(validator)
+  with self.assertRaisesRegex(ValueError,'exact candidate inputs required'):
+   validator.validate({}, {}, lambda:None)
 if __name__=='__main__':unittest.main()

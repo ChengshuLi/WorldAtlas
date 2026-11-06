@@ -66,9 +66,7 @@ class ContractValidation(unittest.TestCase):
  def test_reject_equal_codes(self):
   c=self.make();c['physical']['land_code']=1
   with self.assertRaisesRegex(ValueError,'differ'): self.load(c)
- def test_reject_legacy_memory_floor(self):
-  c=self.make();c['resources']['memory_floor_kib']=1887437
-  with self.assertRaisesRegex(ValueError,'resource contract'): self.load(c)
+
  def test_reject_oversized_index_before_hash(self):
   import tempfile
   with tempfile.TemporaryDirectory() as d:

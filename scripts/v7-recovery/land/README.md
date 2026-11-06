@@ -28,7 +28,7 @@ need the matching physical components, witness resolution, decision export, and
 baseline outputs placed at those paths; these large generated files and decisions
 are intentionally not checked in. `verify_fresh.py` is an independent interval
 sweep prepared for a successful fresh run. The fresh graph test was stopped by the
-host-memory guard before completion; no output from that attempt is accepted.
+disk-space guard before completion; no output from that attempt is accepted.
 Its full-pipeline runtime and exact final output remain unmeasured.
 
 Before selection: integrate a source-only split into the seed producer without

@@ -15,17 +15,17 @@ def sync_dir(path):
  try:os.fsync(fd)
  finally:os.close(fd)
 
-def build(rows,runs,rows_sha256,runs_sha256,width,height,output,*,tile_size=1024,memory_floor_kib,disk_floor_bytes,buffer_bytes=65536):
+def build(rows,runs,rows_sha256,runs_sha256,width,height,output,*,tile_size=1024,disk_floor_bytes,buffer_bytes=65536):
  import checkpoints
  rows,runs,out=Path(rows).resolve(),Path(runs).resolve(),Path(output).resolve();code=Path(__file__).resolve();deps=[code,code.with_name('write_land_stream.py'),code.with_name('verify_inputs.py'),code.with_name('checkpoints.py')]
  if (type(width) is not int or type(height) is not int or not 1<=width<=1000000 or not 1<=height<=1000000
-     or type(tile_size) is not int or tile_size<1 or type(buffer_bytes) is not int or not 1024<=buffer_bytes<=262144
-     or type(memory_floor_kib) is not int or memory_floor_kib<0 or type(disk_floor_bytes) is not int or disk_floor_bytes<0):raise ValueError('invalid tile build controls')
+     or type(tile_size) is not int or tile_size<1 or type(buffer_bytes) is not int or buffer_bytes<1
+     or type(disk_floor_bytes) is not int or disk_floor_bytes<0):raise ValueError('invalid tile build controls')
  nx=(width+tile_size-1)//tile_size;ny=(height+tile_size-1)//tile_size
  soft,_=resource.getrlimit(resource.RLIMIT_NOFILE)
- if nx>2048 or nx*ny>200000 or nx*buffer_bytes>16*1024*1024 or (soft!=resource.RLIM_INFINITY and nx+32>soft):raise ValueError('tile grid exceeds buffer, descriptor or tile bounds')
+ if nx>2048 or nx*ny>200000 or (soft!=resource.RLIM_INFINITY and nx+32>soft):raise ValueError('tile grid exceeds descriptor or tile bounds')
  if out.exists() or not out.parent.is_dir() or any(out.is_relative_to(p.parent) or p.is_relative_to(out) for p in (rows,runs,code)):raise ValueError('tile output overlaps input/code or already exists')
- guard=lambda:checkpoints.guard(out.parent,memory_floor_kib,disk_floor_bytes);guard()
+ guard=lambda:checkpoints.guard(out.parent,disk_floor_bytes);guard()
  before={p.name:sha_file(p,guard) for p in deps}
  if sha_file(rows,guard)!=rows_sha256 or sha_file(runs,guard)!=runs_sha256:raise ValueError('seed input hash mismatch')
  start=time.monotonic();out.mkdir(mode=0o700)

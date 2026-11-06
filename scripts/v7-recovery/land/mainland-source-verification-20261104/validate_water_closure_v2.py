@@ -5,26 +5,23 @@ Coordinates are interpreted exactly as decimal GeoJSON degrees; the grid is EPSG
 A closed grid cell is touched even at a corner or along an edge. No GDAL is used.
 """
 import argparse, bisect, hashlib, json, os, re, struct, sys
-from collections import OrderedDict
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
 
 # Absolute safety ceilings remain outside the caller-controlled contract.
-MIN_MEMORY_FLOOR_KIB = 1887437
 MAX_ALLOWED_VISITS = 2000000
 MAX_DIMENSION = 1048576
 MAX_RUNS_PER_ROW = 131072
 MAX_CONTRACT_BYTES = 65536
 WIDTH = HEIGHT = STEP = WEST = NORTH = ROWS = RUNS = WATER = LAND = None
-MEMORY_FLOOR_KIB = MIN_MEMORY_FLOOR_KIB
 MAX_VISITS = MAX_ALLOWED_VISITS
 MAX_INPUT_BYTES = 2 * 1024 * 1024
 MAX_VERTICES = 100000
 
 
 def load_contract(path, expected_sha256):
-    global WIDTH, HEIGHT, STEP, WEST, NORTH, ROWS, RUNS, WATER, LAND, MEMORY_FLOOR_KIB, MAX_VISITS
+    global WIDTH, HEIGHT, STEP, WEST, NORTH, ROWS, RUNS, WATER, LAND, MAX_VISITS
     with open(path, 'rb') as f: raw = f.read(MAX_CONTRACT_BYTES+1)
     if len(raw) > MAX_CONTRACT_BYTES: raise ValueError('contract exceeds size limit')
     actual = hashlib.sha256(raw).hexdigest()
@@ -34,7 +31,7 @@ def load_contract(path, expected_sha256):
     if set(c) != {'schema','grid','physical','resources'} or c['schema'] != 'physical-water-closure-contract-v1': raise ValueError('unsupported contract')
     g, p, r = c['grid'], c['physical'], c['resources']
     if set(g) != {'crs','width','height','west','north','step_numerator','step_denominator'} or g['crs'] != 'EPSG:4326': raise ValueError('unsupported grid contract')
-    if set(p) != {'rows_sha256','runs_sha256','water_code','land_code','report_sha256','encoding_evidence_sha256','producer_code_path'} or set(r) != {'memory_floor_kib','max_cell_visits'}: raise ValueError('unsupported physical or resource contract')
+    if set(p) != {'rows_sha256','runs_sha256','water_code','land_code','report_sha256','encoding_evidence_sha256','producer_code_path'} or set(r) != {'max_cell_visits'}: raise ValueError('unsupported physical or resource contract')
     def integer(v, lower, upper, label):
         if type(v) is not int or not lower <= v <= upper: raise ValueError('invalid ' + label)
         return v
@@ -50,24 +47,14 @@ def load_contract(path, expected_sha256):
     if WATER == LAND: raise ValueError('water and land codes must differ')
     path=p['producer_code_path']
     if not isinstance(path,str) or not path or Path(path).is_absolute() or '..' in Path(path).parts: raise ValueError('invalid producer evidence path')
-    MEMORY_FLOOR_KIB=integer(r['memory_floor_kib'],MIN_MEMORY_FLOOR_KIB,1<<50,'memory floor')
     MAX_VISITS=integer(r['max_cell_visits'],1,MAX_ALLOWED_VISITS,'cell visit limit')
-    guard()
     return actual, c
-
-
-def guard():
-    with open('/proc/meminfo') as f:
-        avail = next(int(line.split()[1]) for line in f if line.startswith('MemAvailable:'))
-    if avail < MEMORY_FLOOR_KIB:
-        raise RuntimeError(f'memory floor breached: {avail} KiB')
 
 
 def sha(path):
     h = hashlib.sha256()
     with open(path, 'rb') as f:
         while True:
-            guard()
             b = f.read(1024 * 1024)
             if not b:
                 break
@@ -179,11 +166,10 @@ class Mask:
         self.rows = struct.unpack('<' + str(HEIGHT+1) + 'I', raw)
         self.run = self.runpath.open('rb')
         if self.rows[0] != 0 or self.rows[-1] * 8 != self.runpath.stat().st_size: raise ValueError('invalid run index endpoints')
-        self.cache = OrderedDict()
+        self.cache = {}
     def code(self, x, y):
         if not 0 <= x < WIDTH or not 0 <= y < HEIGHT: raise ValueError('segment touches grid edge')
         if y not in self.cache:
-            guard()
             lo, hi = self.rows[y:y+2]
             if lo >= hi or hi > self.rows[-1] or hi-lo > min(WIDTH, MAX_RUNS_PER_ROW): raise ValueError('invalid row offsets')
             self.run.seek(lo*8); raw = self.run.read((hi-lo)*8)
@@ -191,8 +177,6 @@ class Mask:
             pairs = list(struct.iter_unpack('<II', raw)); ends = [a for a,_ in pairs]; vals = [b for _,b in pairs]
             if ends[0] <= 0 or ends[-1] != WIDTH or any(a >= b for a,b in zip(ends,ends[1:])) or any(v not in (WATER,LAND) for v in vals): raise ValueError('invalid physical run values')
             self.cache[y] = ends, vals
-            if len(self.cache) > 4: self.cache.popitem(last=False)
-        self.cache.move_to_end(y)
         ends, vals = self.cache[y]
         return vals[bisect.bisect_right(ends,x)]
     def verify_again(self):
@@ -207,7 +191,7 @@ def main():
     p.add_argument('--geometry-sha256',required=True,help='Expected canonical sorted compact GeoJSON geometry hash')
     p.add_argument('--physical-dir',default='physical-direct-output-20261103')
     p.add_argument('--output',required=True,help='New output JSON path; no overwrite')
-    a=p.parse_args(); guard(); contract_sha, contract = load_contract(a.contract,a.contract_sha256)
+    a=p.parse_args(); contract_sha, contract = load_contract(a.contract,a.contract_sha256)
     with open(a.geometry, 'rb') as f: raw=f.read(MAX_INPUT_BYTES+1)
     if len(raw) > MAX_INPUT_BYTES: raise ValueError('geometry input exceeds size limit')
     input_hash=hashlib.sha256(raw).hexdigest()
@@ -218,7 +202,6 @@ def main():
         for x,y in touched_segment(a0[0],a0[1],b0[0],b0[1]):
             count+=1
             if count > MAX_VISITS: raise ValueError('cell visit limit exceeded')
-            if count%8192 == 0: guard()
             code=mask.code(x,y)
             if code != WATER: raise ValueError(f'closure touches non-water cell x={x}, y={y}, code={code}')
     mask.verify_again()

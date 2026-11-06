@@ -5,7 +5,6 @@ Coordinates are interpreted exactly as decimal GeoJSON degrees; the grid is EPSG
 A closed grid cell is touched even at a corner or along an edge. No GDAL is used.
 """
 import argparse, bisect, hashlib, json, os, re, struct, sys
-from collections import OrderedDict
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
@@ -167,7 +166,7 @@ class Mask:
         self.rows = struct.unpack('<' + str(HEIGHT+1) + 'I', raw)
         self.run = self.runpath.open('rb')
         if self.rows[0] != 0 or self.rows[-1] * 8 != self.runpath.stat().st_size: raise ValueError('invalid run index endpoints')
-        self.cache = OrderedDict()
+        self.cache = {}
     def code(self, x, y):
         if not 0 <= x < WIDTH or not 0 <= y < HEIGHT: raise ValueError('segment touches grid edge')
         if y not in self.cache:
@@ -178,8 +177,6 @@ class Mask:
             pairs = list(struct.iter_unpack('<II', raw)); ends = [a for a,_ in pairs]; vals = [b for _,b in pairs]
             if ends[0] <= 0 or ends[-1] != WIDTH or any(a >= b for a,b in zip(ends,ends[1:])) or any(v not in (WATER,LAND) for v in vals): raise ValueError('invalid physical run values')
             self.cache[y] = ends, vals
-            if len(self.cache) > 4: self.cache.popitem(last=False)
-        self.cache.move_to_end(y)
         ends, vals = self.cache[y]
         return vals[bisect.bisect_right(ends,x)]
     def verify_again(self):

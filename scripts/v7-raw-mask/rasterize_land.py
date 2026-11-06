@@ -12,7 +12,6 @@ from osgeo import gdal, osr
 from build import checked_files, open_layer, sha
 
 gdal.UseExceptions()
-gdal.SetCacheMax(64 * 1024 * 1024)
 
 
 def run(config_path, output):

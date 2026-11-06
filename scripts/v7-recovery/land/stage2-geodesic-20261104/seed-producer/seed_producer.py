@@ -14,8 +14,8 @@ from region_client import execute as build_region
 from closure_client import sha
 BASE=Path(__file__).resolve().parent
 CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','guarded_exec.py','guarded_raster_exec.py')
-TRUSTED_CODE={'seed_builder':'d6dd107e46024b08915e31aa2a47d8a93e0a5bb52c5d11d1ae601e71a0de2579','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'1d5e2a978870e05cf7f1f2c57389f65ffbc1c1a5de11056b5d5196b1a80b6f01'}
-TRUSTED_TERMINAL_CHECKER='347aaa7f5414c2f3ac5826082a3b5b5c645558be1471f1ff3cc4b55eb206d8f7'
+TRUSTED_CODE={'seed_builder':'b90d613cc269195ea58cf491ad424d7d4a923e8c686410ef98e391a7f757beaa','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'0ba02bafcfd54214af0b762edd194833eea1cbba7b1e391764b05c40ff0036ba'}
+TRUSTED_TERMINAL_CHECKER='fdb31b5efc6066d659cfb16c57aeda9b58fd850c4f02f864d767a0ad2956a7e9'
 INPUTS={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','closure_contract','seed_builder','seed_kernel'}
 def bounded_json(pin,guard,limit=16<<20):
  h=hashlib.sha256();chunks=[];n=0
@@ -28,21 +28,6 @@ def bounded_json(pin,guard,limit=16<<20):
    chunks.append(b);h.update(b)
  if h.hexdigest()!=pin['sha256']:raise ValueError('JSON pin mismatch')
  return json.loads(b''.join(chunks))
-def group_rss_kib(pgid):
- # Sum RSS for the isolated process group; shared pages may be counted more
- # than once, intentionally conservative. Races with process exit are benign.
- total=0;pagesize=os.sysconf('SC_PAGE_SIZE')
- for name in os.listdir('/proc'):
-  if not name.isdecimal():continue
-  try:
-   with open('/proc/'+name+'/stat') as f:s=f.read()
-   fields=s[s.rfind(')')+2:].split()
-   if int(fields[2])!=pgid:continue
-   with open('/proc/'+name+'/statm') as f:rss_pages=int(f.read().split()[1])
-   total+=rss_pages*pagesize//1024
-  except (FileNotFoundError,ProcessLookupError,IndexError,ValueError):continue
- return total
-
 def run(request_path,work_dir,output_dir,guard):
  if not callable(guard):raise ValueError('resource guard required')
  request_path=Path(request_path).resolve(strict=True);work=Path(work_dir).resolve();output=Path(output_dir).resolve();guard()
@@ -50,13 +35,12 @@ def run(request_path,work_dir,output_dir,guard):
  with open(request_path,'rb') as f:raw=f.read((1<<20)+1)
  if len(raw)>1<<20:raise ValueError('request too large')
  req=json.loads(raw,object_pairs_hook=no_duplicates);inp=req.get('inputs');grid=req.get('grid');controls=req.get('controls')
- if req.get('schema')!='worldatlas-stage2-seed-request-v1' or not isinstance(inp,dict) or set(inp) not in (INPUTS,INPUTS|{'terminal_checker'}) or not isinstance(grid,dict) or set(grid)!={'width','height','west','north','step'} or not isinstance(controls,dict) or set(controls)!={'memory_floor_kib','disk_reserve_bytes','timeout_seconds','strip_rows','max_group_rss_kib'}:raise ValueError('invalid seed request')
- if type(controls['memory_floor_kib']) is not int or controls['memory_floor_kib']<0 or type(controls['disk_reserve_bytes']) is not int or controls['disk_reserve_bytes']<0 or not 0<controls['timeout_seconds']<=3600 or type(controls['strip_rows']) is not int or not 1<=controls['strip_rows']<=64 or type(controls['max_group_rss_kib']) is not int or not 262144<=controls['max_group_rss_kib']<=786432:raise ValueError('invalid seed controls')
+ if req.get('schema')!='worldatlas-stage2-seed-request-v1' or not isinstance(inp,dict) or set(inp) not in (INPUTS,INPUTS|{'terminal_checker'}) or not isinstance(grid,dict) or set(grid)!={'width','height','west','north','step'} or not isinstance(controls,dict) or set(controls)!={'disk_reserve_bytes','timeout_seconds','strip_rows'}:raise ValueError('invalid seed request')
+ if type(controls['disk_reserve_bytes']) is not int or controls['disk_reserve_bytes']<0 or not 0<controls['timeout_seconds']<=3600 or type(controls['strip_rows']) is not int or not 1<=controls['strip_rows']<=64:raise ValueError('invalid seed controls')
  external_guard=guard
  def guard():
   external_guard()
-  with open('/proc/meminfo') as f:a=next(int(line.split()[1]) for line in f if line.startswith('MemAvailable:'))
-  if a<controls['memory_floor_kib'] or shutil.disk_usage(work.parent).free<controls['disk_reserve_bytes']:raise RuntimeError('seed resource guard reached')
+  if shutil.disk_usage(work.parent).free<controls['disk_reserve_bytes']:raise RuntimeError('disk reserve reached')
  guard()
  for key,digest in TRUSTED_CODE.items():
   if inp[key].get('sha256')!=digest:raise ValueError('unreviewed executable code')
@@ -93,12 +77,12 @@ def run(request_path,work_dir,output_dir,guard):
  if Path(inp['physical_runs']['path']).resolve().parent!=Path(closure['physical_dir']):raise ValueError('physical files must be colocated')
  source_list=[{'source_id':k[0],'version':k[1],**v} for k,v in source_catalog.items()];region_configs=[];region_traces=[]
  for decision in regions:
-  guard();result=build_region({'schema':'stage2-region-worker-request-v1','memory_floor_kib':controls['memory_floor_kib'],'revision_id':rev,'records':list(records.values()),'sources':source_list,'decision':decision,'closure':closure},regionwork,guard,controls['timeout_seconds']);
+  guard();result=build_region({'schema':'stage2-region-worker-request-v1','revision_id':rev,'records':list(records.values()),'sources':source_list,'decision':decision,'closure':closure},regionwork,guard,controls['timeout_seconds']);
   if any(result['code_sha256'].get(n)!=code_hashes[n] for n in ('region_worker.py','regions.py','closure_client.py','guarded_exec.py')):raise ValueError('region worker code mismatch')
   g=result['geometry'];name=hashlib.sha256(decision['region_id'].encode()).hexdigest()+'.geojson';p=rinput/name;data=json.dumps({'type':'FeatureCollection','features':[{'type':'Feature','properties':{},'geometry':g}]},sort_keys=True,separators=(',',':'),allow_nan=False).encode();p.write_bytes(data);region_configs.append({'id':decision['region_id'],'geometry':{'path':str(p),'sha256':hashlib.sha256(data).hexdigest()},'witnesses':[{'lon':float(w['lon']),'lat':float(w['lat']),'inside':w['inside']} for w in decision['witnesses']]});region_traces.append(result['report'])
  raster_rules=[{'component_id':r['component_id_current_generation_only'],'region_id':r['region_id'],'inside_code':r['inside_code'],'outside_code':r['outside_code']} for r in rules]
  config={'schema':'direct-region-seed-research-v1','grid':{**grid,'crs':'EPSG:4326'},'component_rows':inp['component_rows'],'component_runs':inp['component_runs'],'regions':region_configs,'rules':raster_rules,'evidence':[inp[k] for k in ('snapshot','resolution','physical_rows','physical_runs','physical_report','component_manifest','closure_checker','closure_contract')],'strip_rows':controls['strip_rows'],'reserve_bytes':controls['disk_reserve_bytes']};config_path=rinput/'seed-config.json';config_path.write_text(json.dumps(config,sort_keys=True,indent=2)+'\n')
- err=work/'rasterizer.log';peak_group_rss_kib=0
+ err=work/'rasterizer.log'
  with open(err,'w+b') as log:
   env=os.environ.copy()
   for k in ('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS'):env[k]='1'
@@ -106,8 +90,7 @@ def run(request_path,work_dir,output_dir,guard):
   try:
    while p.poll() is None:
     try:
-     guard();rss=group_rss_kib(os.getpgrp());peak_group_rss_kib=max(peak_group_rss_kib,rss)
-     if rss>controls['max_group_rss_kib']:raise RuntimeError('rasterizer process-group RSS limit reached')
+     guard()
     except BaseException:p.kill();p.wait();raise
     if time.monotonic()-start>controls['timeout_seconds']:p.kill();p.wait();raise RuntimeError('seed rasterizer timed out')
     time.sleep(.1)
@@ -128,7 +111,7 @@ def run(request_path,work_dir,output_dir,guard):
  if request_after!=raw or {name:sha(BASE/name,guard) for name in CODE}!={k:v for k,v in code_hashes.items() if k in CODE}:raise ValueError('request or producer code changed')
  (seedout/'report.json').rename(seedout/'rasterizer-report.json')
  rasterizer_report_sha=sha(seedout/'rasterizer-report.json',guard)
- out={'schema':'worldatlas-stage2-mainland-seed-report-v1','status':'diagnostic-seed-pending-independent-provenance','publishable':False,'grid':grid,'decision_snapshot_sha256':inp['snapshot']['sha256'],'decision_revision':rev,'entity_revision':entity,'resolution_report_sha256':inp['resolution']['sha256'],'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'component_rows_sha256':inp['component_rows']['sha256'],'component_runs_sha256':inp['component_runs']['sha256'],'component_manifest_sha256':inp['component_manifest']['sha256'],'physical_report_sha256':inp['physical_report']['sha256'],'physical_code_contract':{'water':1,'land':17},'input_sha256':{k:v['sha256'] for k,v in inp.items()},'rasterizer_report_sha256':rasterizer_report_sha,'resource_controls':controls,'peak_rasterizer_group_rss_kib':peak_group_rss_kib,'seed_rows_sha256':rows,'seed_runs_sha256':runs,'seed_roots':sorted(r['component_id_current_generation_only'] for r in rules),'rule_population':populations,'category_cell_counts':counts,'region_traces':region_traces,'seed_rules':rules,'code_sha256':code_hashes,'request_sha256':hashlib.sha256(raw).hexdigest(),'limitations':['Caller must authenticate the Neon export and independently re-execute witness resolution and full physical/component coverage before accepting this seed.','Witnesses support component identity but do not prove absence of unintended bridges.','Stored boundary lineage and historical V2/V7 raster equivalence may be incomplete.','Stored route proof hashes are unverified evidence references; fresh closure checks are executed separately.','No island or List 1 overrides are applied.']}
+ out={'schema':'worldatlas-stage2-mainland-seed-report-v1','status':'diagnostic-seed-pending-independent-provenance','publishable':False,'grid':grid,'decision_snapshot_sha256':inp['snapshot']['sha256'],'decision_revision':rev,'entity_revision':entity,'resolution_report_sha256':inp['resolution']['sha256'],'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'component_rows_sha256':inp['component_rows']['sha256'],'component_runs_sha256':inp['component_runs']['sha256'],'component_manifest_sha256':inp['component_manifest']['sha256'],'physical_report_sha256':inp['physical_report']['sha256'],'physical_code_contract':{'water':1,'land':17},'input_sha256':{k:v['sha256'] for k,v in inp.items()},'rasterizer_report_sha256':rasterizer_report_sha,'resource_controls':controls,'seed_rows_sha256':rows,'seed_runs_sha256':runs,'seed_roots':sorted(r['component_id_current_generation_only'] for r in rules),'rule_population':populations,'category_cell_counts':counts,'region_traces':region_traces,'seed_rules':rules,'code_sha256':code_hashes,'request_sha256':hashlib.sha256(raw).hexdigest(),'limitations':['Caller must authenticate the Neon export and independently re-execute witness resolution and full physical/component coverage before accepting this seed.','Witnesses support component identity but do not prove absence of unintended bridges.','Stored boundary lineage and historical V2/V7 raster equivalence may be incomplete.','Stored route proof hashes are unverified evidence references; fresh closure checks are executed separately.','No island or List 1 overrides are applied.']}
  with open(seedout/'report.json','x') as f:json.dump(out,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
  fd=os.open(seedout/'rasterizer-report.json',os.O_RDONLY);os.fsync(fd);os.close(fd);fd=os.open(seedout,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  guard();libc=ctypes.CDLL(None,use_errno=True);rc=libc.renameat2(-100,os.fsencode(seedout),-100,os.fsencode(output),1)

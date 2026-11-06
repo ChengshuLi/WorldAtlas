@@ -5,7 +5,7 @@ See README for assumptions, limitations and input format. Requires GDAL and NumP
 """
 import argparse
 from collections import deque
-from functools import lru_cache
+from functools import cache
 import json
 import math
 from pathlib import Path
@@ -25,7 +25,7 @@ def trace(z, valid, start, transform, flat_limit=0, max_steps=10000):
     height, width = z.shape
     if len(transform)!=6 or any(not math.isfinite(x) for x in transform) or transform[2]!=0 or transform[4]!=0 or transform[1]<=0 or transform[5]>=0:
         raise ValueError('north-up geographic transform required')
-    @lru_cache(maxsize=8192)
+    @cache
     def step_distance(row, dr, dc):
         lat=transform[3]+(row+.5)*transform[5]
         other=transform[3]+(row+dr+.5)*transform[5]

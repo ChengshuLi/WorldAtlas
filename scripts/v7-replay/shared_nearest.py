@@ -88,7 +88,7 @@ def crop_bounds(bounds, width, height, step, pad_degrees):
     return xa,xb,max(0,y0-pad),min(height,y1+pad)
 
 
-def centers_for_crop(physical, land, bounds, width, height, step, land_codes, max_centers=None):
+def centers_for_crop(physical, land, bounds, width, height, step, land_codes):
     """Index each included coastal land-cell center once, with full neighbors.
 
     Crops may cross the antimeridian. Land cell is coastal if any orthogonal
@@ -96,7 +96,6 @@ def centers_for_crop(physical, land, bounds, width, height, step, land_codes, ma
     """
     x0,x1,y0,y1=bounds
     if not (0<=y0<y1<=height and 0<x1-x0<=width and math.isfinite(step) and step>0):raise ValueError('invalid crop')
-    if max_centers is not None and (type(max_centers) is not int or max_centers<1):raise ValueError('invalid coastal center limit')
     latitudes=[];longitudes=[];categories=[];count=0
     for y in range(y0,y1):
         mid=crop(*physical,y,x0,x1,width)
@@ -115,7 +114,6 @@ def centers_for_crop(physical, land, bounds, width, height, step, land_codes, ma
                 wet|=pn==1
         ix=np.flatnonzero((mid==17)&np.isin(l,land_codes)&wet)
         count+=len(ix)
-        if max_centers is not None and count>max_centers:raise ValueError('coastal center limit exceeded')
         if len(ix):
             latitudes.append(np.full(len(ix),90-(y+.5)*step))
             longitudes.append(((-180+(x0+ix+.5)*step+180)%360)-180)

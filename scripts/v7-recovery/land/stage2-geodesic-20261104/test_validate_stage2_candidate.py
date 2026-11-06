@@ -17,46 +17,39 @@ class CandidateTests(unittest.TestCase):
   self.code['orchestration_files'].update({'hint-producer/'+k:v for k,v in self.code['dependency_files']['hint_code_files'].items()})
   resolver={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py','identity_watch':'v7-land/named-identity-prototype/identity_watch.py'}
   for k,path in resolver.items():self.code['core_files'][path]=self.code['dependency_files']['resolution_code_files'][k];self.code['orchestration_files'][path]=self.code['dependency_files']['resolution_code_files'][k]
-  self.write('outer_config',{'schema':'stage2-fresh-orchestration-v1','controls':{'minimum_memory_kib':90,'minimum_free_bytes':1}})
+  self.write('outer_config',{'schema':'stage2-fresh-orchestration-v1','controls':{'minimum_free_bytes':1}})
   self.artifacts={k:{'path':'/unused/'+k,'sha256':format(i+20,'064x')} for i,k in enumerate(('resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','hint_monitor','tile_manifest','representatives'))}
   self.lineage={'schema':'stage1-lineage-and-selection-validation-v1','status':'selected-sources-match-reported-lineage'};self.write('physical_lineage_report',self.lineage)
   patcher=mock.patch.object(v.verify_physical_lineage,'validate_combined',return_value=self.lineage);patcher.start();self.addCleanup(patcher.stop)
   self.write('derived_manifest',{'physical_lineage_report':self.pins['physical_lineage_report'],'schema':'stage2-fresh-derived-v1','outer_config_sha256':self.pins['outer_config']['sha256'],'orchestrator_sha256':self.code['orchestrator'],'code_sha256':self.code['orchestration_files'],'artifacts':self.artifacts})
   self.report={'schema':'stage2-source-geodesic-report-v1','status':'stage2-research-awaiting-monitor','publishable':False,'monitor_required':True,'output_rows_sha256':self.pins['rows']['sha256'],'output_runs_sha256':self.pins['runs']['sha256'],'physical_lineage_report_sha256':self.pins['physical_lineage_report']['sha256'],'physical_lineage_status':'selected-sources-match-reported-lineage','decision_snapshot_sha256':self.pins['snapshot']['sha256'],'inputs_sha256':{**{k:self.pins[k]['sha256'] for k in ('physical_rows','physical_runs','physical_report','physical_lineage_request')},**{k:x['sha256'] for k,x in self.artifacts.items()}},**{k+'_sha256':self.artifacts[k]['sha256'] for k in ('resolution_report','seed_report','hint_report','hint_monitor')},'grid':grid,'decision_revision':'d','entity_revision':'e','distance_policy':metric,'land_baseline_policy':policy,'categories':{str(17+i):'c'+str(i) for i in range(6)},'code_sha256':self.code['core_files'],'dependency_sha256':self.code['dependency_files'],'orchestration':{'outer_config_sha256':self.pins['outer_config']['sha256'],'orchestrator_sha256':self.code['orchestrator'],'derived_manifest':self.pins['derived_manifest'],'physical_lineage_report':self.pins['physical_lineage_report']}};self.write('report',self.report)
-  self.monitor={'schema':'stage2-geodesic-watchdog-v1','status':'sampled-complete','report_sha256':self.pins['report']['sha256'],'config_sha256':self.pins['outer_config']['sha256'],'driver_sha256':self.code['orchestrator'],**{k+'_sha256':self.code[k] for k in ('core','watchdog','guardian')},'samples':5,'minimum_available_kib':100,'minimum_memory_kib':90,'peak_process_group_rss_kib':20,'maximum_process_group_rss_kib':30,'sample_interval_seconds':.05};self.write('monitor',self.monitor)
+  self.monitor={'schema':'stage2-geodesic-watchdog-v1','status':'sampled-complete','report_sha256':self.pins['report']['sha256'],'config_sha256':self.pins['outer_config']['sha256'],'driver_sha256':self.code['orchestrator'],**{k+'_sha256':self.code[k] for k in ('core','watchdog','guardian')},'samples':5,'peak_process_group_rss_kib':20,'sample_interval_seconds':.05};self.write('monitor',self.monitor)
  def pin(self,k):p=self.d/k;self.pins[k]={'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
  def write(self,k,obj):(self.d/k).write_text(json.dumps(obj));self.pin(k)
  def test_valid_and_stale_monitor(self):
-  self.assertEqual(v.validate(self.pins,self.code,30)['status'],'diagnostic-candidate-bound');self.monitor['report_sha256']='0'*64;self.write('monitor',self.monitor)
-  with self.assertRaisesRegex(ValueError,'monitor/report'):v.validate(self.pins,self.code,30)
- def test_zero_memory_floor(self):
-  outer=json.loads((self.d/'outer_config').read_text());outer['controls']['minimum_memory_kib']=0;self.write('outer_config',outer)
-  derived=json.loads((self.d/'derived_manifest').read_text());derived['outer_config_sha256']=self.pins['outer_config']['sha256'];self.write('derived_manifest',derived)
-  self.report['orchestration']['outer_config_sha256']=self.pins['outer_config']['sha256'];self.report['orchestration']['derived_manifest']=self.pins['derived_manifest'];self.write('report',self.report)
-  self.monitor['config_sha256']=self.pins['outer_config']['sha256'];self.monitor['report_sha256']=self.pins['report']['sha256'];self.monitor['minimum_memory_kib']=0;self.monitor['minimum_available_kib']=0;self.write('monitor',self.monitor)
-  self.assertEqual(v.validate(self.pins,self.code,30)['status'],'diagnostic-candidate-bound')
+  self.assertEqual(v.validate(self.pins,self.code)['status'],'diagnostic-candidate-bound');self.monitor['report_sha256']='0'*64;self.write('monitor',self.monitor)
+  with self.assertRaisesRegex(ValueError,'monitor/report'):v.validate(self.pins,self.code)
  def test_refuses_changed_physical_mask(self):
   (self.d/'physical_rows').write_text('tampered')
-  with self.assertRaisesRegex(ValueError,'hash mismatch'):v.validate(self.pins,self.code,30)
+  with self.assertRaisesRegex(ValueError,'hash mismatch'):v.validate(self.pins,self.code)
  def test_rejects_forged_selected_policy(self):
   self.report['land_baseline_policy']={**self.report['land_baseline_policy'],'execution_status':'unselected'};self.write('report',self.report)
-  with self.assertRaisesRegex(ValueError,'selected policy'):v.validate(self.pins,self.code,30)
- def test_resource_thresholds_are_bound(self):
-  with self.assertRaisesRegex(ValueError,'resource monitor incomplete'):v.validate(self.pins,self.code,31)
-  self.monitor['minimum_memory_kib']=89;self.write('monitor',self.monitor)
-  with self.assertRaisesRegex(ValueError,'resource monitor incomplete'):v.validate(self.pins,self.code,30)
+  with self.assertRaisesRegex(ValueError,'selected policy'):v.validate(self.pins,self.code)
+ def test_monitor_samples_are_required(self):
+  self.monitor['samples']=0;self.write('monitor',self.monitor)
+  with self.assertRaisesRegex(ValueError,'resource monitor incomplete'):v.validate(self.pins,self.code)
  def test_incomplete_or_inconsistent_code_closure_fails(self):
   bad=copy.deepcopy(self.code);bad['core_files'].pop('certificate.py')
-  with self.assertRaisesRegex(ValueError,'incomplete approved code closure'):v.validate(self.pins,bad,30)
+  with self.assertRaisesRegex(ValueError,'incomplete approved code closure'):v.validate(self.pins,bad)
   bad=copy.deepcopy(self.code);bad['orchestration_files']['certificate.py']='f'*64
-  with self.assertRaisesRegex(ValueError,'code closure inconsistent'):v.validate(self.pins,bad,30)
+  with self.assertRaisesRegex(ValueError,'code closure inconsistent'):v.validate(self.pins,bad)
  def test_simple_policy_semantics_required(self):
   snapshot=json.loads((self.d/'snapshot').read_bytes());snapshot['land_baseline_policy'].pop('connectivity');self.write('snapshot',snapshot)
   self.report['decision_snapshot_sha256']=self.pins['snapshot']['sha256'];self.report['land_baseline_policy']=snapshot['land_baseline_policy'];self.write('report',self.report)
-  with self.assertRaisesRegex(ValueError,'land policy mismatch: connectivity'):v.validate(self.pins,self.code,30)
+  with self.assertRaisesRegex(ValueError,'land policy mismatch: connectivity'):v.validate(self.pins,self.code)
  def test_derived_artifact_and_sample_interval_tampering(self):
   derived=json.loads((self.d/'derived_manifest').read_bytes());derived['artifacts']['seed_rows']['sha256']='f'*64;self.write('derived_manifest',derived);self.report['orchestration']['derived_manifest']=self.pins['derived_manifest'];self.write('report',self.report)
-  with self.assertRaisesRegex(ValueError,'derived artifact/report mismatch'):v.validate(self.pins,self.code,30)
+  with self.assertRaisesRegex(ValueError,'derived artifact/report mismatch'):v.validate(self.pins,self.code)
   derived['artifacts']['seed_rows']['sha256']=self.artifacts['seed_rows']['sha256'];self.write('derived_manifest',derived);self.report['orchestration']['derived_manifest']=self.pins['derived_manifest'];self.write('report',self.report);self.monitor['report_sha256']=self.pins['report']['sha256'];self.monitor['sample_interval_seconds']=.2;self.write('monitor',self.monitor)
-  with self.assertRaisesRegex(ValueError,'resource monitor incomplete'):v.validate(self.pins,self.code,30)
+  with self.assertRaisesRegex(ValueError,'resource monitor incomplete'):v.validate(self.pins,self.code)
 if __name__=='__main__':unittest.main()

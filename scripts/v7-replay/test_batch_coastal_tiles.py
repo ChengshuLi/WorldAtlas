@@ -11,7 +11,7 @@ class BatchTest(unittest.TestCase):
   rows=(np.arange(9,dtype='<u4')*2).tobytes();physical=np.tile(np.array([8,17,16,1],dtype='<u4'),8).tobytes();land=np.tile(np.array([8,17,16,0],dtype='<u4'),8).tobytes();blobs={'physical_rows':rows,'physical_runs':physical,'land_rows':rows,'land_runs':land};self.paths={};self.pins={}
   for k,data in blobs.items():
    p=self.d/k;p.write_bytes(data);self.paths[k]=p;self.pins[k]=hashlib.sha256(data).hexdigest()
-  self.plan={'tiles':[[7,9,3,4],[7,9,4,5]],'pad_degrees':30,'chunk':10,'max_coastal_centers':1000};self.snapshot=snap();self.calls=0
+  self.plan={'tiles':[[7,9,3,4],[7,9,4,5]],'pad_degrees':30,'chunk':10};self.snapshot=snap();self.calls=0
  def check(self):self.calls+=1
  def run_batch(self,**kw):return b.run_batch(self.snapshot,'a'*64,self.paths,self.pins,self.plan,'b'*64,self.d/'batch',self.width,self.height,self.check,metadata_pins={'physical_report':'c'*64,'land_report':'d'*64},**kw)
  def test_end_to_end_two_tiles_and_single_completion(self):

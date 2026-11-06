@@ -17,7 +17,7 @@ def main():
            'prefill-plan','prefill-plan-sha256','partition-manifest','partition-manifest-sha256',
            'component-rows','component-rows-sha256','component-spans','component-spans-sha256','barrier-edges','barrier-edges-sha256','input-root','out'):
   ap.add_argument('--'+k,required=True)
- ap.add_argument('--pad-degrees',type=float,required=True);ap.add_argument('--sqlite-cache-kib',type=int,default=32768);ap.add_argument('--max-coastal-centers',type=int,default=1000000);ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true')
+ ap.add_argument('--pad-degrees',type=float,required=True);ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true')
  a=ap.parse_args()
  if not a.allow_unverified_snapshot:raise ValueError('unverified snapshot requires explicit research opt-in')
  pairs=[(getattr(a,k),getattr(a,k+'_sha256')) for k in ('snapshot','physical_rows','physical_runs','physical_report','land_rows','land_runs','land_report',
@@ -63,8 +63,7 @@ def main():
  result=stream.run(snapshot,a.snapshot_sha256,base.open_grid(a.physical_rows,a.physical_runs,width,height),
    base.open_grid(a.prefill_rows,a.prefill_runs,width,height),base.open_grid(a.land_rows,a.land_runs,width,height),
    partition_path,a.component_rows,a.component_spans,a.barrier_edges,out,width,height,a.pad_degrees,inputs,
-   verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy,
-   max_coastal_centers=a.max_coastal_centers,cache_kib=a.sqlite_cache_kib)
+   verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy)
  print(json.dumps({'status':result['status'],'assigned':result['assigned_cells'],'pending':result['pending_cells'],'output':str(out)}))
 
 if __name__=='__main__':main()

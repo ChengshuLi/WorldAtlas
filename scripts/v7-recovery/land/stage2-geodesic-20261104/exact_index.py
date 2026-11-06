@@ -5,7 +5,6 @@ verifying every tile against the pinned mainland RLE. A cache miss always
 rechecks file content; numerical guard is deliberately large, not a formal
 proof of every library rounding error.
 """
-from collections import OrderedDict
 from pathlib import Path
 import hashlib,math,sys
 import numpy as np
@@ -15,9 +14,9 @@ from certificate import _unit,M_MIN
 from verify_inputs import read_tile
 
 class ExactIndex:
- def __init__(self,directory,width,height,step,north,tiles,tile_cells=1024,guard_m=1000.,cache_bytes=32<<20,memory_floor_kib=0):
-  self.dir=Path(directory);self.w=width;self.h=height;self.step=step;self.north=north;self.C=tile_cells;self.guard=guard_m;self.cache_bytes=cache_bytes;self.memory_floor_kib=memory_floor_kib;self.cache=OrderedDict();self.cache_size=0
-  if width<2 or height<1 or abs(width*step-360)>1e-8 or tile_cells<1 or guard_m<1000 or cache_bytes<1024:raise ValueError('invalid config')
+ def __init__(self,directory,width,height,step,north,tiles,tile_cells=1024,guard_m=1000.):
+  self.dir=Path(directory);self.w=width;self.h=height;self.step=step;self.north=north;self.C=tile_cells;self.guard=guard_m;self.cache={}
+  if width<2 or height<1 or abs(width*step-360)>1e-8 or tile_cells<1 or guard_m<1000:raise ValueError('invalid config')
   self.records={};self.ids=[];pos=[];radius=[]
   for ty,tx,codes,count,sha in tiles:
    if (ty,tx) in self.records or count<=0 or not codes or len(sha)!=64 or any(c not in range(17,23) for c in codes):raise ValueError('invalid tile manifest')
@@ -26,24 +25,14 @@ class ExactIndex:
    self.records[(ty,tx)]=(set(codes),count,sha);self.ids.append((ty,tx));pos.append((north-(y0+y1)*step/2,-180+(x0+x1)*step/2));radius.append(((y1-y0)+(x1-x0))*step*math.pi/360)
   if not self.ids:raise ValueError('empty tile index')
   pos=np.asarray(pos);self.xyz=_unit(pos[:,0],pos[:,1]);self.tree=cKDTree(self.xyz);self.radii=np.asarray(radius);self.maxrad=float(self.radii.max())
- def _memory_guard(self):
-  if not self.memory_floor_kib:return
-  with open('/proc/meminfo') as f:
-   available=next((int(line.split()[1]) for line in f if line.startswith('MemAvailable:')),None)
-  if available is None or available<self.memory_floor_kib:raise RuntimeError('memory guard: '+str(available))
  def _load(self,key):
-  self._memory_guard()
   if key in self.cache:
-   x=self.cache.pop(key);self.cache[key]=x;return x
-  codes,count,sha=self.records[key];ty,tx=key;max_records=min(self.C,self.h-ty*self.C)*min(self.C,self.w-tx*self.C);raw=read_tile(self.dir/f'{ty:05d}-{tx:05d}.bin',count,max_records,self._memory_guard)
-  self._memory_guard()
+   return self.cache[key]
+  codes,count,sha=self.records[key];ty,tx=key;max_records=min(self.C,self.h-ty*self.C)*min(self.C,self.w-tx*self.C);raw=read_tile(self.dir/f'{ty:05d}-{tx:05d}.bin',count,max_records)
   if len(raw)!=count*16 or hashlib.sha256(raw).hexdigest()!=sha:raise ValueError('tile integrity failure')
   x=np.frombuffer(raw,dtype='<u4').reshape(-1,4)
   if len(x) and (np.any(x[:,0]>=self.h) or np.any(x[:,1]>=x[:,2]) or np.any(x[:,2]>self.w) or set(map(int,np.unique(x[:,3])))!=codes):raise ValueError('invalid tile data')
-  if x.nbytes<=self.cache_bytes:
-   while self.cache and self.cache_size+x.nbytes>self.cache_bytes:
-    _,old=self.cache.popitem(last=False);self.cache_size-=old.nbytes
-   self.cache[key]=x;self.cache_size+=x.nbytes
+  self.cache[key]=x
   return x
  def nearest_run(self,y,a,b,upper,tolerance=1e-5):
   if not (type(y) is int and type(a) is int and type(b) is int and 0<=y<self.h and 0<=a<b<=self.w and math.isfinite(upper) and upper>=0 and math.isfinite(tolerance) and tolerance>=0):raise ValueError('invalid query')

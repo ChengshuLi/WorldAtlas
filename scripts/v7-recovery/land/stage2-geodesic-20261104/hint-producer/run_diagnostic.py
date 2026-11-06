@@ -25,17 +25,16 @@ def digest(path,guard):
  return h.hexdigest()
 def run(config_path,out_path):
  cp=Path(config_path).resolve();out=Path(out_path).resolve(); raw=bounded(cp,1048576);cfg=json.loads(raw)
- need(set(cfg)=={'schema','grid','codes','inputs','decision_revision','entity_revision','policy_id','policy_version','minimum_memory_kib','minimum_free_bytes'} and cfg['schema']=='source-only-hints-diagnostic-request-v1','bad request')
+ need(set(cfg)=={'schema','grid','codes','inputs','decision_revision','entity_revision','policy_id','policy_version','minimum_free_bytes'} and cfg['schema']=='source-only-hints-diagnostic-request-v1','bad request')
  inp=cfg['inputs'];need(isinstance(inp,dict) and set(inp)==NAMES,'bad inputs')
  paths={};
  for k,v in inp.items():
   need(isinstance(v,dict) and set(v)=={'path','sha256'} and isinstance(v['sha256'],str) and len(v['sha256'])==64,'bad pin');paths[k]=Path(v['path']).resolve()
  need(out.parent.is_dir() and not out.exists(),'output must be fresh')
  for p in [cp,*paths.values(),Path(__file__).resolve(),Path(hints.__file__).resolve()]: need(not p.is_relative_to(out) and not out.is_relative_to(p.parent),'output overlaps input/code directory')
- mem=cfg['minimum_memory_kib'];disk=cfg['minimum_free_bytes'];need(type(mem)==int and mem>=0 and type(disk)==int and disk>0,'resource floors required')
+ disk=cfg['minimum_free_bytes'];need(type(disk)==int and disk>0,'invalid disk reserve')
  def guard():
-  with open('/proc/meminfo') as f: av=next((int(s.split()[1]) for s in f if s.startswith('MemAvailable:')),None)
-  if av is None or av<mem or shutil.disk_usage(out.parent).free<disk:raise RuntimeError('resource floor reached')
+  if shutil.disk_usage(out.parent).free<disk:raise RuntimeError('disk reserve reached')
  guard(); start=time.monotonic(); code_before={p.name:digest(p,guard) for p in (Path(hints.__file__),Path(__file__))}
  for k in sorted(paths):need(paths[k].is_file() and digest(paths[k],guard)==inp[k]['sha256'],'input hash mismatch: '+k)
  grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','step','west','north'} and type(grid['width']) is int and 1<=grid['width']<=1000000 and type(grid['height']) is int and 1<=grid['height']<=1000000 and grid['west']==-180,'bad grid')

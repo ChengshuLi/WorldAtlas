@@ -4,16 +4,11 @@ from pathlib import Path
 from regions import assemble
 from closure_client import ClosureChecker
 
-def available():
- with open('/proc/meminfo') as f:
-  for line in f:
-   if line.startswith('MemAvailable:'):return int(line.split()[1])
- raise RuntimeError('MemAvailable unavailable')
 def execute(request):
- if request.get('schema')!='stage2-region-worker-request-v1' or type(request.get('memory_floor_kib')) is not int or request['memory_floor_kib']<0:raise ValueError('invalid region worker request')
+ if request.get('schema')!='stage2-region-worker-request-v1':raise ValueError('invalid region worker request')
  def guard():
-  if available()<request['memory_floor_kib']:raise RuntimeError('memory guard reached')
- guard();records={};sources={}
+  return None
+ records={};sources={}
  for r in request['records']:
   key=(r['kind'],r['id'])
   if key in records:raise ValueError('duplicate geometry ID')

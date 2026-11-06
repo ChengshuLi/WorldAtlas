@@ -52,9 +52,9 @@ def sealed_copy(path,expected,max_bytes):
   if target is not None:os.close(target)
 
 def validate_plan(plan,width,height):
- if not isinstance(plan,dict) or set(plan)!={'tiles','pad_degrees','chunk','max_coastal_centers'}:raise ValueError('invalid batch plan keys')
- boxes=plan['tiles'];pad=plan['pad_degrees'];chunk=plan['chunk'];cap=plan['max_coastal_centers']
- if not isinstance(boxes,list) or not 1<=len(boxes)<=256 or type(chunk)!=int or not 1<=chunk<=100000 or type(cap)!=int or not 1<=cap<=1000000 or isinstance(pad,bool) or not isinstance(pad,(int,float)) or not math.isfinite(pad) or not 0<pad<=180:raise ValueError('invalid batch resource limits')
+ if not isinstance(plan,dict) or set(plan)!={'tiles','pad_degrees','chunk'}:raise ValueError('invalid batch plan keys')
+ boxes=plan['tiles'];pad=plan['pad_degrees'];chunk=plan['chunk']
+ if not isinstance(boxes,list) or not 1<=len(boxes)<=256 or type(chunk)!=int or not 1<=chunk<=100000 or isinstance(pad,bool) or not isinstance(pad,(int,float)) or not math.isfinite(pad) or not 0<pad<=180:raise ValueError('invalid batch resource limits')
  for i,b in enumerate(boxes):
   if not isinstance(b,list) or len(b)!=4 or any(type(v)!=int for v in b):raise ValueError('invalid tile bounds')
   x0,x1,y0,y1=b
@@ -88,7 +88,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
   inputs={k+'_sha256':pins[k] for k in names};inputs.update({k+'_sha256':v for k,v in metadata_pins.items()})
   for i,box in enumerate(boxes):
    dest=root/f'tile-{i:04d}'
-   manifest=tile.run(snapshot,snapshot_sha,physical,land,dest,width,height,box,plan['pad_degrees'],inputs,chunk=plan['chunk'],allow_selected_research=True,max_coastal_centers=plan['max_coastal_centers'])
+   manifest=tile.run(snapshot,snapshot_sha,physical,land,dest,width,height,box,plan['pad_degrees'],inputs,chunk=plan['chunk'],allow_selected_research=True)
    if any(manifest[k+'_sha256']!=v for k,v in code_pins.items()):raise ValueError('tile code pin changed within batch')
    manifests.append({'tile':i,'box':box,'manifest_sha256':sha(dest/'manifest.json')})
   check_metadata()

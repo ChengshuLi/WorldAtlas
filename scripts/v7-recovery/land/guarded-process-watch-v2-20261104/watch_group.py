@@ -10,11 +10,6 @@ from pathlib import Path
 
 def need(v,msg):
  if not v:raise ValueError(msg)
-def memory_available():
- with open('/proc/meminfo') as f:
-  for line in f:
-   if line.startswith('MemAvailable:'):return int(line.split()[1])
- raise RuntimeError('MemAvailable unavailable')
 def group_rss(pgid,on_retry=lambda known_rss:None):
  total=members=0
  with os.scandir('/proc') as entries:
@@ -44,23 +39,21 @@ def die_with_parent():
  if libc.prctl(1,signal.SIGKILL,0,0,0)!=0:raise OSError(ctypes.get_errno(),'PR_SET_PDEATHSIG failed')
  if os.getppid()!=original or original==1:raise RuntimeError('monitor parent already gone')
 
-def run(command,log_dir,disk_path,floor,disk_floor,max_rss,timeout,interval=.05):
+def run(command,log_dir,disk_path,disk_floor,timeout,interval=.05):
  die_with_parent();guardian=Path(__file__).with_name('guardian.py').resolve();selfpath=Path(__file__).resolve();log=Path(log_dir).resolve();diskpath=Path(disk_path).resolve()
  need(command and len(command)>=2 and log.parent.is_dir() and not log.exists(),'bad command or log directory')
- need(all(type(x) is int and x>0 for x in (floor,disk_floor,max_rss)) and 0<timeout<=86400 and 0<interval<=.1,'invalid guard limits')
+ need(type(disk_floor) is int and disk_floor>0 and 0<timeout<=86400 and 0<interval<=.1,'invalid guard limits')
  need(hasattr(os,'pidfd_open') and hasattr(os,'waitid') and hasattr(os,'WNOWAIT'),'Linux pidfd/waitid unavailable')
  need(threading.active_count()==1 and signal.getsignal(signal.SIGCHLD)==signal.SIG_DFL,'dedicated monitor required')
  def free():
   v=os.statvfs(diskpath);return v.f_bavail*v.f_frsize
- need(memory_available()>=floor and free()>=disk_floor,'resource floor before launch')
+ need(free()>=disk_floor,'disk reserve before launch')
  own_sha=digest(selfpath);guardian_sha=digest(guardian);log.mkdir(exist_ok=False);fd=os.open(log.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
- cr,cw=os.pipe();sr,sw=os.pipe();p=pidfd=None;reaped=finished=started=driver_started=False;start=time.monotonic();minimum=memory_available();maximum=samples=0;buffer=b''
+ cr,cw=os.pipe();sr,sw=os.pipe();p=pidfd=None;reaped=finished=started=driver_started=False;start=time.monotonic();maximum=samples=0;buffer=b''
  def retry_guard(known_rss):
-  nonlocal minimum,maximum
-  available=memory_available();minimum=min(minimum,available);maximum=max(maximum,known_rss)
-  if available<floor:raise RuntimeError('host memory floor')
+  nonlocal maximum
+  maximum=max(maximum,known_rss)
   if free()<disk_floor:raise RuntimeError('disk floor')
-  if known_rss>max_rss:raise RuntimeError('group RSS limit')
   if time.monotonic()-start>timeout:raise RuntimeError('time limit')
  try:
   with (log/'worker.log').open('xb') as worker:
@@ -68,11 +61,9 @@ def run(command,log_dir,disk_path,floor,disk_floor,max_rss,timeout,interval=.05)
    os.close(cr);cr=None;os.close(sw);sw=None;pidfd=os.pidfd_open(p.pid)
    while not finished:
     if exited_unreaped(p.pid):raise RuntimeError('guardian exited unexpectedly')
-    available=memory_available();rss,members=group_rss(p.pid,retry_guard);minimum=min(minimum,available);maximum=max(maximum,rss);samples+=1
+    rss,members=group_rss(p.pid,retry_guard);maximum=max(maximum,rss);samples+=1
     if not members:raise RuntimeError('guardian group unavailable')
-    if available<floor:raise RuntimeError('host memory floor')
     if free()<disk_floor:raise RuntimeError('disk floor')
-    if rss>max_rss:raise RuntimeError('group RSS limit')
     if time.monotonic()-start>timeout:raise RuntimeError('time limit')
     ready,_,_=select.select([sr],[],[],interval)
     if ready:
@@ -112,11 +103,11 @@ def run(command,log_dir,disk_path,floor,disk_floor,max_rss,timeout,interval=.05)
     except OSError:pass
   if uncertain:raise RuntimeError('guardian cleanup uncertain; inspect before retry')
  need(digest(selfpath)==own_sha and digest(guardian)==guardian_sha,'watchdog code changed')
- result={'schema':'sampled-process-group-watchdog-v1','status':'complete','watchdog_sha256':own_sha,'guardian_sha256':guardian_sha,'minimum_available_kib':minimum,'memory_floor_kib':floor,'peak_group_rss_kib':maximum,'group_rss_limit_kib':max_rss,'disk_floor_bytes':disk_floor,'timeout_seconds':timeout,'elapsed_seconds':round(time.monotonic()-start,3),'samples':samples,'sample_interval_seconds':interval,'limitations':['Sampling can miss short peaks; an unobservable process may delay an RSS sample by up to 0.25 seconds before failure. Escaped children and simultaneous monitor/guardian failure are not contained.','A successful guard is not scientific approval or input provenance.']}
+ result={'schema':'sampled-process-group-watchdog-v1','status':'complete','watchdog_sha256':own_sha,'guardian_sha256':guardian_sha,'peak_group_rss_kib':maximum,'disk_floor_bytes':disk_floor,'timeout_seconds':timeout,'elapsed_seconds':round(time.monotonic()-start,3),'samples':samples,'sample_interval_seconds':interval,'limitations':['RSS is observed but not capped; sampling can miss short peaks; an unobservable process may delay an RSS sample by up to 0.25 seconds before failure. Escaped children and simultaneous monitor/guardian failure are not contained.','A successful guard is not scientific approval or input provenance.']}
  with (log/'watchdog.json').open('x') as f:json.dump(result,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
  fd=os.open(log,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd);return result
 
 if __name__=='__main__':
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--log-dir',required=True);p.add_argument('--disk-path',required=True);p.add_argument('--floor-kib',type=int,required=True);p.add_argument('--disk-floor-bytes',type=int,required=True);p.add_argument('--group-rss-kib',type=int,required=True);p.add_argument('--timeout',type=float,required=True);p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args();cmd=a.command[1:] if a.command and a.command[0]=='--' else a.command
- try:print(json.dumps(run(cmd,a.log_dir,a.disk_path,a.floor_kib,a.disk_floor_bytes,a.group_rss_kib,a.timeout),sort_keys=True))
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--log-dir',required=True);p.add_argument('--disk-path',required=True);p.add_argument('--disk-floor-bytes',type=int,required=True);p.add_argument('--timeout',type=float,required=True);p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args();cmd=a.command[1:] if a.command and a.command[0]=='--' else a.command
+ try:print(json.dumps(run(cmd,a.log_dir,a.disk_path,a.disk_floor_bytes,a.timeout),sort_keys=True))
  except Exception as e:print('watchdog failure; inspect outputs before retry: '+str(e),file=sys.stderr);sys.exit(1)

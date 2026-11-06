@@ -23,14 +23,14 @@ def open_grid(rows_path,runs_path,width,height):
     return rows,runs
 
 
-def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chunk=5000,verify_inputs=None,allow_selected_research=False,max_coastal_centers=1000000):
+def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chunk=5000,verify_inputs=None,allow_selected_research=False):
     x0,x1,y0,y1=box;step=360.0/width
     if not (0<=x0<x1<=width and 0<=y0<y1<=height) or chunk<=0:raise ValueError('invalid coastal tile')
     decision,pairs,tol,band,btol=core.policy(snapshot,allow_selected_research=allow_selected_research)
     code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__)}
     code_pins={name:sha(path) for name,path in code_paths.items()}
     crop=core.shore.crop_bounds(box,width,height,step,pad)
-    try:edges=core.shore.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in pairs],max_centers=max_coastal_centers)
+    try:edges=core.shore.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in pairs])
     except ValueError as e:
         if str(e)!='no participant shorelines in crop':raise
         edges={'mids':np.empty((0,3))}
@@ -80,7 +80,7 @@ def main():
               'land-rows','land-rows-sha256','land-runs','land-runs-sha256','land-report','land-report-sha256','input-root','out'):
         ap.add_argument('--'+k,required=True)
     ap.add_argument('--core',nargs=4,type=int,required=True,metavar=('X0','X1','Y0','Y1'))
-    ap.add_argument('--pad-degrees',type=float,required=True);ap.add_argument('--max-coastal-centers',type=int,default=1000000);ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true')
+    ap.add_argument('--pad-degrees',type=float,required=True);ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true')
     a=ap.parse_args()
     if not a.allow_unverified_snapshot:raise ValueError('unverified Neon snapshot requires explicit research opt-in')
     if Path(a.snapshot).stat().st_size>16*1024*1024:raise ValueError('snapshot exceeds size limit')
@@ -105,7 +105,7 @@ def main():
         if any(sha(p)!=h for p,h in paths):raise ValueError('input changed during generation')
         check_lineage()
     m=run(snap,a.snapshot_sha256,open_grid(a.physical_rows,a.physical_runs,width,height),open_grid(a.land_rows,a.land_runs,width,height),
-          out,width,height,a.core,a.pad_degrees,inputs,verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy,max_coastal_centers=a.max_coastal_centers)
+          out,width,height,a.core,a.pad_degrees,inputs,verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy)
     print(json.dumps({'status':m['status'],'assigned_cells':m['assigned_cells'],'output':str(out)}))
 
 if __name__=='__main__':main()

@@ -24,8 +24,6 @@ from osgeo import gdal, ogr, osr
 
 gdal.UseExceptions()
 ogr.UseExceptions()
-# Avoid caching a significant fraction of the 7 GiB logical grid in RAM.
-gdal.SetCacheMax(64 * 1024 * 1024)
 
 POLYGON = (ogr.wkbPolygon, ogr.wkbMultiPolygon)
 
@@ -162,7 +160,7 @@ def run(source, expected, output, config_path, batch_size=8192):
             pass
         print(json.dumps({'rows': counts['rows'], 'polygons': counts['polygons'],
                           'invalid_polygon': counts['invalid_polygon'], 'rss':rss,
-                          'gdal_cache_bytes':gdal.GetCacheUsed()}), flush=True)
+                          'gdal_cache_used_bytes':gdal.GetCacheUsed()}), flush=True)
     raster.FlushCache(); raster = None
     if sha256(source) != expected.lower():
         raise ValueError('source changed during processing')

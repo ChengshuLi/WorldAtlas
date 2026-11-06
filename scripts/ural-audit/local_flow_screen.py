@@ -1,5 +1,5 @@
 import argparse, bisect, heapq, json, math
-from functools import lru_cache
+from functools import cache
 import numpy as np
 import rasterio
 from rasterio.windows import from_bounds
@@ -108,7 +108,7 @@ def run(src, mask, bounds, off, a, b, crs, line=None, diagnostic=None, basin_out
                     seen[nr,nc]=True; flood[nr,nc]=max(v,z[nr,nc]); parent[nr*w+nc]=r*w+c; heapq.heappush(heap,(flood[nr,nc],nr,nc))
     # Boundary outlet following steepest D8 drop on filled surface; flats follow flood parent.
     flow=parent.copy()
-    @lru_cache(maxsize=8192)
+    @cache
     def cached_neighbor_distance(row,dr,dc):
         return neighbor_distance(trans,row,dr,dc)
     for r,c in order:

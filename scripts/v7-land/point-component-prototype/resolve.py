@@ -9,32 +9,21 @@ from decimal import Decimal, InvalidOperation, ROUND_FLOOR
 from pathlib import Path
 
 HEX = re.compile(r'^[0-9a-f]{64}$')
-MEMORY_FLOOR_KIB = 1730151
 
 def need(ok, message):
     if not ok: raise ValueError(message)
 
 def text(x): return isinstance(x, str) and bool(x.strip())
 
-def available_memory_kib():
-    with open('/proc/meminfo') as f:
-        for line in f:
-            if line.startswith('MemAvailable:'):return int(line.split()[1])
-    raise ValueError('cannot determine available memory')
-
-def guard():
-    need(available_memory_kib()>=MEMORY_FLOOR_KIB, 'available memory below safety floor')
-
 def digest(path):
-    guard();h=hashlib.sha256();count=0
+    h=hashlib.sha256();count=0
     with open(path,'rb') as f:
         for block in iter(lambda:f.read(1024*1024),b''):
             h.update(block);count+=len(block)
-            if count%(8*1024*1024)==0:guard()
+
     return h.hexdigest()
 
 def read_bounded(path, label, limit=8*1024*1024):
-    guard()
     with open(path, 'rb') as f: data=f.read(limit+1)
     need(len(data)<=limit, f'{label} exceeds bounded size')
     return data
@@ -67,7 +56,6 @@ def readrow(rows_path,runs_path,y,width,kind):
     size=8 if kind=='physical' else 12
     with open(runs_path,'rb') as f:
         need(b>=a and b-a<=width and b*size<=os.fstat(f.fileno()).st_size, 'invalid row offsets or excessive run count')
-        guard()
         f.seek(a*size); data=f.read((b-a)*size)
     need(len(data)==(b-a)*size, 'run row truncated')
     vals=list(struct.iter_unpack('<II' if kind=='physical' else '<III',data))
@@ -90,7 +78,6 @@ def lineage_specs(manifest):
     raise ValueError('unsupported component lineage report')
 
 def checkpoint_header(path):
-    guard()
     with open(path,'rb') as f:prefix=f.read(65536)
     i=prefix.find(b'"best":{');need(i>=0,'checkpoint header missing')
     try:obj=json.loads(prefix[:i]+b'"best":{}}}')
@@ -161,12 +148,11 @@ def resolve(req):
         need(d.get('method') in ('source_point_component_v1','source_point_named_region_component_v1') and d.get('execution_status')=='selected_for_research' and type(d.get('entity_id')) is int and text(d.get('island_identity')) and text(d.get('point_name')) and d['entity_id'] in entity_map, 'unselected or malformed decision')
         pk=(d.get('point_source_id'),d.get('point_source_version'));ik=(d.get('identity_source_id'),d.get('identity_source_version'))
         need(pk in files and ik in files and pk!=ik and text(d.get('source_feature_id')) and text(d.get('id_property')) and isinstance(d.get('geometry_sha256'),str) and HEX.fullmatch(d['geometry_sha256']), 'missing point or identity evidence')
-        need(available_memory_kib()>=MEMORY_FLOOR_KIB+224*1024,'insufficient host memory headroom for point parsing')
-        data=json.loads(read_bounded(files[pk],'point source',1024*1024));need(available_memory_kib()>=MEMORY_FLOOR_KIB+224*1024,'insufficient host memory headroom after point parsing');need(data.get('type')=='FeatureCollection' and isinstance(data.get('features'),list),'point source must be FeatureCollection');point_crs=source_crs(data)
+        data=json.loads(read_bounded(files[pk],'point source',1024*1024));need(data.get('type')=='FeatureCollection' and isinstance(data.get('features'),list),'point source must be FeatureCollection');point_crs=source_crs(data)
         matches=[f for f in data['features'] if isinstance(f,dict) and isinstance(f.get('properties'),dict) and d['id_property'] in f['properties'] and f['properties'][d['id_property']] is not None and type(f['properties'][d['id_property']]) in (str,int) and str(f['properties'][d['id_property']])==d['source_feature_id']]
         need(len(matches)==1, 'point feature identity must be unique');f=matches[0];need('crs' not in f,'nested feature CRS unsupported');geom=f.get('geometry');need(isinstance(geom,dict) and 'crs' not in geom,'nested geometry CRS unsupported');need(geom.get('type')=='Point' and isinstance(geom.get('coordinates'),list) and len(geom['coordinates'])==2, '2D point required')
         need(geometry_sha(geom)==d['geometry_sha256'], 'point geometry hash mismatch'); need(f['properties'].get('name')==d['point_name'], 'point name mismatch')
-        identity_check=None;identity_memory_monitor=None
+        identity_check=None
         if d['method']=='source_point_named_region_component_v1':
             if watch_module is None:
                 named_bytes=read_bounded(named_path,'named identity code');named_hash=hashlib.sha256(named_bytes).hexdigest();need(req.get('named_identity_sha256')==named_hash,'named identity code pin mismatch')
@@ -174,7 +160,7 @@ def resolve(req):
                 watch_module=types.ModuleType('identity_watch');exec(compile(watch_bytes,str(watch_path),'exec'),watch_module.__dict__)
             spec={'method':'raw_named_polygon_contains_point_v1','identity_feature_id':d.get('identity_source_feature_id'),'identity_id_property':d.get('identity_id_property'),'identity_name_property':d.get('identity_name_property'),'identity_class_property':d.get('identity_class_property'),'identity_class_value':d.get('identity_class_value'),'identity_geometry_sha256':d.get('identity_geometry_sha256')}
             worker_request={'identity_path':str(files[ik]),'identity_sha256':source_map[ik]['sha256'],'point_geometry':geom,'island_identity':d['island_identity'],'spec':spec}
-            monitored=watch_module.run(named_bytes,worker_request,available_memory_kib);identity_check=monitored['result'];identity_memory_monitor=monitored['memory_monitor']
+            identity_check=watch_module.run(named_bytes,worker_request)
         lon,lat=map(finite_decimal,geom['coordinates']);need(-180<=lon<180 and -90<=lat<=90, 'point outside WGS84')
         gx=(lon-west)/step;gy=(north-lat)/step;need(gx!=gx.to_integral_value() and gy!=gy.to_integral_value(), 'point on grid boundary is ambiguous')
         x=int(gx.to_integral_value(rounding=ROUND_FLOOR));y=int(gy.to_integral_value(rounding=ROUND_FLOOR));need(0<=x<width and 0<=y<height,'point outside grid')
@@ -188,7 +174,7 @@ def resolve(req):
         land=[v for a,b,v in physical if a<=x<b];hits=[r for a,b,r in components if a<=x<b]
         need(land==[17] and len(hits)==1,'point must resolve to exactly one physical land component');root=hits[0]
         need(root not in seen_roots, 'multiple or conflicting claims for component');seen_roots[root]=d['affiliation_id']
-        claims.append({'affiliation_id':d['affiliation_id'],'method':d['method'],'entity_id':d['entity_id'],'entity_name':entity_map[d['entity_id']]['name'],'entity_code':entity_map[d['entity_id']].get('code'),'feature_id':d.get('feature_id'),'rationale':d.get('rationale'),'island_identity':d['island_identity'],'point_name':d['point_name'],'source_feature_id':d['source_feature_id'],'point_source':{'source_id':pk[0],'version':pk[1],'sha256':source_map[pk]['sha256'],'r2_bucket':source_map[pk]['r2_bucket'],'r2_key':source_map[pk]['r2_key'],'uri':source_map[pk]['uri'],'geometry_sha256':d['geometry_sha256']},'identity_source':{'source_id':ik[0],'version':ik[1],'sha256':source_map[ik]['sha256'],'r2_bucket':source_map[ik]['r2_bucket'],'r2_key':source_map[ik]['r2_key'],'uri':source_map[ik]['uri']},'identity_feature_id':d.get('identity_feature_id'),'identity_check':identity_check,'source_crs':{'point':point_crs,'identity':identity_check.get('identity_source_crs') if identity_check else None},'source_crs_scope':'collection_feature_geometry' if identity_check else None,'identity_memory_monitor':identity_memory_monitor,'grid_cell':{'x':x,'y':y},'component_id':root})
+        claims.append({'affiliation_id':d['affiliation_id'],'method':d['method'],'entity_id':d['entity_id'],'entity_name':entity_map[d['entity_id']]['name'],'entity_code':entity_map[d['entity_id']].get('code'),'feature_id':d.get('feature_id'),'rationale':d.get('rationale'),'island_identity':d['island_identity'],'point_name':d['point_name'],'source_feature_id':d['source_feature_id'],'point_source':{'source_id':pk[0],'version':pk[1],'sha256':source_map[pk]['sha256'],'r2_bucket':source_map[pk]['r2_bucket'],'r2_key':source_map[pk]['r2_key'],'uri':source_map[pk]['uri'],'geometry_sha256':d['geometry_sha256']},'identity_source':{'source_id':ik[0],'version':ik[1],'sha256':source_map[ik]['sha256'],'r2_bucket':source_map[ik]['r2_bucket'],'r2_key':source_map[ik]['r2_key'],'uri':source_map[ik]['uri']},'identity_feature_id':d.get('identity_feature_id'),'identity_check':identity_check,'source_crs':{'point':point_crs,'identity':identity_check.get('identity_source_crs') if identity_check else None},'source_crs_scope':'collection_feature_geometry' if identity_check else None,'grid_cell':{'x':x,'y':y},'component_id':root})
     for k in refs:need(digest(refs[k])==req[k]['sha256'], 'input changed during resolution')
     for spec,path in zip(lineage_pins,lineage_paths):need(digest(path)==spec['sha256'], 'component lineage changed during resolution')
     for key,p in files.items():need(digest(p)==source_map[key]['sha256'], 'source changed during resolution')

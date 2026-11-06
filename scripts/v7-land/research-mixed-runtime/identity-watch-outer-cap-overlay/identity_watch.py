@@ -1,6 +1,5 @@
-"""Independent same-namespace child RSS and host MemAvailable watchdog."""
+"""Run an identity worker and record observational memory telemetry."""
 import json,os,subprocess,time
-MARGIN_KIB=32*1024
 POLL_SECONDS=.05
 TIMEOUT_SECONDS=120
 
@@ -36,7 +35,7 @@ def run(checker_bytes,request,available):
         out=child.stdout.read(65537);err=child.stderr.read(65537);need(len(out)<=65536 and len(err)<=65536,'identity worker output too large')
         need(child.returncode==0,'identity worker failed: '+err.decode('utf-8','replace')[:500])
         result=json.loads(out);peak=result.get('peak_rss_kib');need(result.get('schema')=='named-identity-worker-v1' and type(peak) is int and peak>0,'worker peak RSS invalid')
-        return {'result':result['result'],'memory_monitor':{'host_floor_kib':None,'initial_available_kib':initial,'minimum_sampled_available_kib':minimum,'rss_cap_kib':None,'maximum_sampled_rss_kib':peak_observed,'worker_reported_peak_rss_kib':peak,'poll_seconds':POLL_SECONDS,'limitation':'Outer process-group watchdog enforces the memory limit; worker-reported ru_maxrss can include the parent pre-exec peak.'}}
+        return {'result':result['result'],'memory_monitor':{'host_floor_kib':None,'initial_available_kib':initial,'minimum_sampled_available_kib':minimum,'rss_cap_kib':None,'maximum_sampled_rss_kib':peak_observed,'worker_reported_peak_rss_kib':peak,'poll_seconds':POLL_SECONDS,'limitation':'RSS and host-memory samples are observational only; worker-reported ru_maxrss can include the parent pre-exec peak.'}}
     finally:
         if child.poll() is None:child.kill();child.wait()
         for f in (child.stdin,child.stdout,child.stderr):

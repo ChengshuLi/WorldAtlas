@@ -20,19 +20,9 @@ TRIPLE = struct.Struct('<III')
 MAX_U32 = (1 << 32) - 1
 
 
-def _available_kib():
-    with open('/proc/meminfo', encoding='ascii') as f:
-        for line in f:
-            if line.startswith('MemAvailable:'):
-                return int(line.split()[1])
-    raise RuntimeError('MemAvailable unavailable')
-
-
-def _guard(directory, disk_reserve_bytes, min_mem_available_kib, extra=0):
+def _guard(directory, disk_reserve_bytes, extra=0):
     if shutil.disk_usage(directory).free < disk_reserve_bytes + extra:
         raise RuntimeError('disk reserve guard')
-    if min_mem_available_kib and _available_kib() < min_mem_available_kib:
-        raise RuntimeError('memory guard')
 
 
 def _read_exact(f, n):
@@ -110,7 +100,7 @@ def _components(records, width):
 def write_land_stream(width, height, component_rows, component_runs,
                       physical_rows, physical_runs, mainland_rows, mainland_runs,
                       roots, codes, mainland_roots, output_dir, *,
-                      disk_reserve_bytes=1 << 30, min_mem_available_kib=1 << 20):
+                      disk_reserve_bytes=1 << 30):
     """Write rows.u32le, runs.u32le and an atomic report.json; return report.
 
     Run streams are consumed one row at a time, with at most one record per
@@ -119,7 +109,7 @@ def write_land_stream(width, height, component_rows, component_runs,
     """
     if type(width) is not int or not 0 < width <= MAX_U32 or type(height) is not int or not 0 < height <= MAX_U32:
         raise ValueError('invalid grid dimensions')
-    if type(disk_reserve_bytes) is not int or disk_reserve_bytes < 0 or type(min_mem_available_kib) is not int or min_mem_available_kib < 0:
+    if type(disk_reserve_bytes) is not int or disk_reserve_bytes < 0:
         raise ValueError('invalid resource guard')
     mr = tuple(mainland_roots)
     if not mr or any(type(x) is not int or not 0 <= x <= MAX_U32 for x in mr) or len(set(mr)) != len(mr):
@@ -136,7 +126,7 @@ def write_land_stream(width, height, component_rows, component_runs,
         raise ValueError('invalid input file lengths')
     n = rs // 4
     estimate = (2 * (cs // 12) + (ps // 8) + (ss // 8) + height) * 8 + 4 * (height + 1) + (n + 7) // 8 + 4096
-    _guard(out.parent, disk_reserve_bytes, min_mem_available_kib, estimate)
+    _guard(out.parent, disk_reserve_bytes, estimate)
     out.mkdir(exist_ok=False)
     sources = []
     maps = []
@@ -179,7 +169,7 @@ def write_land_stream(width, height, component_rows, component_runs,
         wr(rows_out, rh, U32.pack(0))
         total = 0; seen_count = 0; seeds_seen = set(); land_cells = 0
         for y in range(height):
-            _guard(out, disk_reserve_bytes, min_mem_available_kib)
+            _guard(out, disk_reserve_bytes)
             its = [iter(_components(sources[0].next(), width)),
                    iter(_full(sources[1].next(), width, {1, 17}, 'physical')),
                    iter(_full(sources[2].next(), width, {0, 17, 18, 19, 20, 21, 22}, 'mainland'))]
@@ -216,7 +206,7 @@ def write_land_stream(width, height, component_rows, component_runs,
         for source in sources: source.finish()
         if seeds_seen != seed_ids: raise ValueError('missing designated mainland roots')
         if seen_count != n: raise ValueError('unused assignment roots')
-        _guard(out, disk_reserve_bytes, min_mem_available_kib)
+        _guard(out, disk_reserve_bytes)
         for f in (rows_out, runs_out): f.flush(); os.fsync(f.fileno())
         report = {'schema': 'streamed-land-rle-research-v1', 'status': 'complete',
                   'width': width, 'height': height, 'runs': total,

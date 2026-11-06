@@ -10,7 +10,7 @@ class OrchestrationTests(unittest.TestCase):
   p=Path(root);ind=p/'inputs';ind.mkdir();pins={}
   for key in o.BASE_INPUTS:
    f=ind/(key+'.txt');f.write_text(key);pins[key]=o.pin(f,lambda:None)
-  cfg={'schema':'stage2-fresh-orchestration-v1','grid':{'width':8,'height':4,'west':-180,'north':90,'step':45},'inputs':pins,'policy_id':'wgs','policy_version':'1','controls':{'minimum_memory_kib':1,'minimum_free_bytes':1,'chunk_columns':16,'checkpoint_seconds':1,'tile_cache_bytes':1024,'numerical_guard_metres':1000,'block_records':100},'seed_controls':{'timeout_seconds':30,'strip_rows':1,'max_group_rss_kib':262144},'hint_max_rss_kib':262144}
+  cfg={'schema':'stage2-fresh-orchestration-v1','grid':{'width':8,'height':4,'west':-180,'north':90,'step':45},'inputs':pins,'policy_id':'wgs','policy_version':'1','controls':{'minimum_free_bytes':1,'chunk_columns':16,'checkpoint_seconds':1,'numerical_guard_metres':1000,'block_records':100},'seed_controls':{'timeout_seconds':30,'strip_rows':1}}
   cp=ind/'config.json';cp.write_text(json.dumps(cfg));return p,cp,cfg
  def test_rejected_historical_input(self):
   with tempfile.TemporaryDirectory() as d:
@@ -25,7 +25,8 @@ class OrchestrationTests(unittest.TestCase):
  def test_unimplemented_crosswalk_stops_before_work(self):
   with tempfile.TemporaryDirectory() as d:
    p,cp,cfg=self.fixture(d)
-   with mock.patch.object(o,'SEED_FREEZE_CURRENT',True),mock.patch.object(o,'SELECTED_POLICY_CROSSWALK_READY',False):
+   current={n:o.code_hashes(lambda:None)['seed-producer/'+n] for n in o.SEED_NAMES}
+   with mock.patch.object(o,'SEED_FREEZE_CURRENT',True),mock.patch.object(o,'REVIEWED_SEED_FREEZE',current),mock.patch.object(o,'SELECTED_POLICY_CROSSWALK_READY',False):
     with self.assertRaisesRegex(ValueError,'crosswalk not yet implemented'):o.run(cp,p/'work',p/'output')
    self.assertFalse((p/'work').exists())
  def test_core_handoff_binds_generated_artifacts_and_resume(self):
@@ -39,9 +40,9 @@ class OrchestrationTests(unittest.TestCase):
    for name,f in paths.items():f.write_text(name)
    artifacts={name:o.pin(f,lambda:None) for name,f in paths.items()}
    c=cfg['controls'];si={dst:cfg['inputs'][src] for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel'))};si['resolution']=artifacts['resolution_report']
-   sr={'schema':'worldatlas-stage2-seed-request-v1','grid':cfg['grid'],'inputs':si,'controls':{'memory_floor_kib':c['minimum_memory_kib'],'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}};sh=o.write_json(work/'requests/seed.json',sr)
+   sr={'schema':'worldatlas-stage2-seed-request-v1','grid':cfg['grid'],'inputs':si,'controls':{'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}};sh=o.write_json(work/'requests/seed.json',sr)
    hi={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hi.update({k:artifacts[k] for k in ('seed_rows','seed_runs','resolution_report','representatives','tile_manifest')})
-   hr={'schema':'source-only-hints-diagnostic-request-v1','grid':cfg['grid'],'codes':list(range(17,23)),'inputs':hi,'decision_revision':'d','entity_revision':'e','policy_id':'wgs','policy_version':'1','minimum_memory_kib':c['minimum_memory_kib'],'minimum_free_bytes':c['minimum_free_bytes']};hh=o.write_json(work/'requests/hints.json',hr)
+   hr={'schema':'source-only-hints-diagnostic-request-v1','grid':cfg['grid'],'codes':list(range(17,23)),'inputs':hi,'decision_revision':'d','entity_revision':'e','policy_id':'wgs','policy_version':'1','minimum_free_bytes':c['minimum_free_bytes']};hh=o.write_json(work/'requests/hints.json',hr)
    paths['seed_report'].write_text(json.dumps({'request_sha256':sh,'input_sha256':{k:v['sha256'] for k,v in si.items()}}));paths['hint_report'].write_text(json.dumps({'request_sha256':hh}));artifacts.update({k:o.pin(paths[k],lambda:None) for k in ('seed_report','hint_report')})
    lineage={'schema':'stage1-reported-lineage-validation-v1','status':'reported-lineage-verified-not-rerasterized'};o.write_json(work/'lineage/report.json',lineage)
    marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'code_sha256':code,'artifacts':artifacts,'tile_directory':str(tiles),'seed_tile_verification':{'status':'verified'},'seed_request_sha256':sh,'hint_request_sha256':hh,'physical_lineage_report':o.pin(work/'lineage/report.json',lambda:None)};o.write_json(work/'derived/manifest.json',marker)
@@ -86,9 +87,6 @@ class OrchestrationTests(unittest.TestCase):
    with mock.patch.object(o.os,'fsync',side_effect=OSError('fault')):
     with self.assertRaisesRegex(RuntimeError,'may exist; durability uncertain'):o.write_json(path,{'x':1})
    self.assertTrue(path.exists())
- def test_monitor_respects_closure_memory_floor(self):
-  o.require_closure_floor({'resources':{'memory_floor_kib':100}},{'minimum_memory_kib':100})
-  with self.assertRaisesRegex(ValueError,'below closure checker'):o.require_closure_floor({'resources':{'memory_floor_kib':100}},{'minimum_memory_kib':99})
  def test_partial_core_without_checkpoint_fails_closed(self):
   with tempfile.TemporaryDirectory() as d:
    work=Path(d);o.build_stage2.validate_resume_checkpoint(work,False)

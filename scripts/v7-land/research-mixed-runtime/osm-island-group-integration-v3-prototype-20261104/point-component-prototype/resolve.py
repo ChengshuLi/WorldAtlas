@@ -9,21 +9,14 @@ from decimal import Decimal, InvalidOperation, ROUND_FLOOR
 from pathlib import Path
 
 HEX = re.compile(r'^[0-9a-f]{64}$')
-MEMORY_FLOOR_KIB = 1730151
 
 def need(ok, message):
     if not ok: raise ValueError(message)
 
 def text(x): return isinstance(x, str) and bool(x.strip())
 
-def available_memory_kib():
-    with open('/proc/meminfo') as f:
-        for line in f:
-            if line.startswith('MemAvailable:'):return int(line.split()[1])
-    raise ValueError('cannot determine available memory')
-
 def guard():
-    need(available_memory_kib()>=MEMORY_FLOOR_KIB, 'available memory below safety floor')
+    return None
 
 def digest(path):
     guard();h=hashlib.sha256();count=0
@@ -161,7 +154,6 @@ def resolve(req):
         need(d.get('method') in ('source_point_component_v1','source_point_named_region_component_v1','raw_json_city_named_region_component_v1','osm_api_node_named_region_component_v1','osm_api_island_node_group_component_v1') and d.get('execution_status')=='selected_for_research' and type(d.get('entity_id')) is int and text(d.get('island_identity')) and text(d.get('point_name')) and d['entity_id'] in entity_map, 'unselected or malformed decision')
         pk=(d.get('point_source_id'),d.get('point_source_version'));ik=(d.get('identity_source_id'),d.get('identity_source_version'))
         need(pk in files and ik in files and pk!=ik and text(d.get('source_feature_id')) and text(d.get('id_property')) and isinstance(d.get('geometry_sha256'),str) and HEX.fullmatch(d['geometry_sha256']), 'missing point or identity evidence')
-        need(available_memory_kib()>=MEMORY_FLOOR_KIB+224*1024,'insufficient host memory headroom for point parsing')
         extraction=None;guideline_evidence=None;osm_extraction=None
         if d['method'] in ('osm_api_node_named_region_component_v1','osm_api_island_node_group_component_v1'):
             need(snapshot_schema in ('worldatlas-geography-decision-draft-evidence-v1','worldatlas-geography-decision-draft-evidence-v2','worldatlas-geography-decision-draft-evidence-v3'),'OSM node method requires combined Neon export');osm_path=code_path.with_name('osm_node_extract.py')
@@ -170,7 +162,6 @@ def resolve(req):
                 osm_module=types.ModuleType('osm_node_extract');exec(compile(osm_bytes,str(osm_path),'exec'),osm_module.__dict__)
             selection={'schema':d['extractor_version'],'node_id':d['source_feature_id'],'node_version':d['node_version'],'expected_tags':{'name':d['point_name'],'place':d['place_tag']},'source_crs':d['source_crs'],'point_geometry_sha256':d['geometry_sha256']}
             osm_extraction=osm_module.extract(read_bounded(files[pk],'OSM node source',256*1024),source_map[pk]['sha256'],selection);geom=osm_extraction['geometry'];point_crs=osm_extraction['source_crs']
-            need(available_memory_kib()>=MEMORY_FLOOR_KIB+224*1024,'insufficient host memory headroom after point parsing')
         elif d['method']=='raw_json_city_named_region_component_v1':
             need(snapshot_schema in ('worldatlas-geography-decision-draft-evidence-v1','worldatlas-geography-decision-draft-evidence-v2','worldatlas-geography-decision-draft-evidence-v3'),'raw city method requires combined Neon export')
             gk=(d.get('guideline_source_id'),d.get('guideline_source_version'));need(gk in files and gk!=pk and gk!=ik,'guideline source missing')
@@ -185,9 +176,8 @@ def resolve(req):
                 raw_module=types.ModuleType('raw_city_extract');exec(compile(raw_bytes,str(raw_path),'exec'),raw_module.__dict__)
             selection={'schema':d['extractor_version'],'record_id':d['source_feature_id'],'id_property':d['id_property'],'name_property':d['name_property'],'expected_name':d['point_name'],'longitude_property':d['longitude_property'],'latitude_property':d['latitude_property'],'source_crs_assertion':d['source_crs_assertion'],'point_geometry_sha256':d['geometry_sha256']}
             extraction=raw_module.extract(read_bounded(files[pk],'raw city source',1024*1024),source_map[pk]['sha256'],selection);geom=extraction['geometry'];point_crs=extraction['source_crs_assertion']
-            need(available_memory_kib()>=MEMORY_FLOOR_KIB+224*1024,'insufficient host memory headroom after point parsing')
         else:
-            data=json.loads(read_bounded(files[pk],'point source',1024*1024));need(available_memory_kib()>=MEMORY_FLOOR_KIB+224*1024,'insufficient host memory headroom after point parsing');need(data.get('type')=='FeatureCollection' and isinstance(data.get('features'),list),'point source must be FeatureCollection');point_crs=source_crs(data)
+            data=json.loads(read_bounded(files[pk],'point source',1024*1024));need(data.get('type')=='FeatureCollection' and isinstance(data.get('features'),list),'point source must be FeatureCollection');point_crs=source_crs(data)
             matches=[f for f in data['features'] if isinstance(f,dict) and isinstance(f.get('properties'),dict) and d['id_property'] in f['properties'] and f['properties'][d['id_property']] is not None and type(f['properties'][d['id_property']]) in (str,int) and str(f['properties'][d['id_property']])==d['source_feature_id']]
             need(len(matches)==1, 'point feature identity must be unique');f=matches[0];need('crs' not in f,'nested feature CRS unsupported');geom=f.get('geometry');need(isinstance(geom,dict) and 'crs' not in geom,'nested geometry CRS unsupported');need(geom.get('type')=='Point' and isinstance(geom.get('coordinates'),list) and len(geom['coordinates'])==2, '2D point required')
             need(geometry_sha(geom)==d['geometry_sha256'], 'point geometry hash mismatch'); need(f['properties'].get('name')==d['point_name'], 'point name mismatch')
@@ -199,7 +189,7 @@ def resolve(req):
                 watch_module=types.ModuleType('identity_watch');exec(compile(watch_bytes,str(watch_path),'exec'),watch_module.__dict__)
             spec={'method':'raw_named_polygon_contains_point_v1','identity_feature_id':d.get('identity_source_feature_id'),'identity_id_property':d.get('identity_id_property'),'identity_name_property':d.get('identity_name_property'),'identity_class_property':d.get('identity_class_property'),'identity_class_value':d.get('identity_class_value'),'identity_geometry_sha256':d.get('identity_geometry_sha256')}
             worker_request={'identity_path':str(files[ik]),'identity_sha256':source_map[ik]['sha256'],'point_geometry':geom,'island_identity':d['island_identity'],'spec':spec}
-            monitored=watch_module.run(named_bytes,worker_request,available_memory_kib);identity_check=monitored['result'];identity_memory_monitor=monitored['memory_monitor']
+            monitored=watch_module.run(named_bytes,worker_request,lambda:0);identity_check=monitored['result'];identity_memory_monitor=monitored['memory_monitor']
         lon,lat=map(finite_decimal,geom['coordinates']);need(-180<=lon<180 and -90<=lat<=90, 'point outside WGS84')
         gx=(lon-west)/step;gy=(north-lat)/step;need(gx!=gx.to_integral_value() and gy!=gy.to_integral_value(), 'point on grid boundary is ambiguous')
         x=int(gx.to_integral_value(rounding=ROUND_FLOOR));y=int(gy.to_integral_value(rounding=ROUND_FLOOR));need(0<=x<width and 0<=y<height,'point outside grid')

@@ -11,11 +11,6 @@ from pathlib import Path
 
 def need(v,msg):
  if not v:raise ValueError(msg)
-def memory_available():
- with open('/proc/meminfo') as f:
-  for line in f:
-   if line.startswith('MemAvailable:'):return int(line.split()[1])
- raise RuntimeError('MemAvailable unavailable')
 def group_rss(pgid):
  total=0;members=0
  with os.scandir('/proc') as entries:
@@ -46,15 +41,15 @@ def digest(path):
 def exited_unreaped(pid):
  return os.waitid(os.P_PID,pid,os.WEXITED|os.WNOHANG|os.WNOWAIT) is not None
 
-def run(config,work,output,max_tree_rss_kib,*,resume=False,interval=.05):
+def run(config,work,output,*,resume=False,interval=.05):
  config,work,output=map(lambda x:Path(x).resolve(),(config,work,output));driver=Path(__file__).with_name('run_witness.py').resolve();watcher=Path(__file__).resolve();guardian=Path(__file__).with_name('guardian.py').resolve()
  with open(config,'rb') as f:
   need(os.fstat(f.fileno()).st_size<=1048576,'config too large');raw=f.read(1048577)
- need(len(raw)<=1048576,'config too large');cfg=json.loads(raw);controls=cfg.get('controls',{});floor=controls.get('minimum_memory_kib');disk=controls.get('minimum_free_bytes')
- need(type(floor) is int and floor>0 and type(disk) is int and disk>0 and type(max_tree_rss_kib) is int and max_tree_rss_kib>0 and 0<interval<=.1,'invalid watchdog limits')
+ need(len(raw)<=1048576,'config too large');cfg=json.loads(raw);controls=cfg.get('controls',{});disk=controls.get('minimum_free_bytes')
+ need(type(disk) is int and disk>0 and 0<interval<=.1,'invalid watchdog limits')
  need(not output.exists() and output.parent.is_dir() and work.parent.is_dir() and os.stat(work.parent).st_dev==os.stat(output.parent).st_dev,'fresh output and same-filesystem work required');need(hasattr(os,'pidfd_open') and hasattr(os,'waitid') and hasattr(os,'WNOWAIT'),'Linux pidfd/waitid unavailable')
  need(threading.active_count()==1 and signal.getsignal(signal.SIGCHLD)==signal.SIG_DFL,'dedicated single-threaded monitor with default SIGCHLD required')
- need(memory_available()>=floor and os.statvfs(output.parent).f_bavail*os.statvfs(output.parent).f_frsize>=disk,'resource floor before launch')
+ need(os.statvfs(output.parent).f_bavail*os.statvfs(output.parent).f_frsize>=disk,'disk reserve before launch')
  self_sha=digest(watcher);guardian_sha=digest(guardian);driver_sha=digest(driver);config_sha=hashlib.sha256(raw).hexdigest();env=dict(os.environ,OPENBLAS_NUM_THREADS='1',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1')
  control_r,control_w=os.pipe();status_r,status_w=os.pipe();p=None;pidfd=None;finished=False;started=False;driver_started=False;normal=False;reaped=False
  try:
@@ -62,15 +57,13 @@ def run(config,work,output,max_tree_rss_kib,*,resume=False,interval=.05):
   p=subprocess.Popen([sys.executable,str(guardian),str(control_r),str(status_w),*cmd],start_new_session=True,pass_fds=(control_r,status_w),env=env,stdout=subprocess.DEVNULL,close_fds=True)
   os.close(control_r);control_r=None;os.close(status_w);status_w=None
   # All setup errors below kill the still-unreaped guardian group.
-  pidfd=os.pidfd_open(p.pid);minimum=memory_available();maximum=samples=0;buffer=b'';deadline=time.monotonic()+30
+  pidfd=os.pidfd_open(p.pid);maximum=samples=0;buffer=b'';deadline=time.monotonic()+30
   while not finished:
    if exited_unreaped(p.pid):raise RuntimeError('guardian exited unexpectedly; inspect output')
-   available=memory_available();rss,members=group_rss(p.pid);minimum=min(minimum,available);maximum=max(maximum,rss)
+   rss,members=group_rss(p.pid);maximum=max(maximum,rss)
    if not members:raise RuntimeError('live guardian group not observed')
    samples+=1
-   if available<floor:raise RuntimeError('host memory floor')
    if any(os.statvfs(p).f_bavail*os.statvfs(p).f_frsize<disk for p in (work.parent,output.parent)):raise RuntimeError('disk reserve floor')
-   if rss>max_tree_rss_kib:raise RuntimeError('process group RSS limit')
    ready,_,_=select.select([status_r],[],[],interval)
    if ready:
     chunk=os.read(status_r,4096)
@@ -124,8 +117,8 @@ def run(config,work,output,max_tree_rss_kib,*,resume=False,interval=.05):
  with open(report,'rb') as f:
   need(os.fstat(f.fileno()).st_size<=16*1024*1024,'stage-2 report too large');result_report=json.load(f)
  need(result_report.get('schema')=='fresh-mainland-witness-report-v1' and result_report.get('status')=='research-awaiting-monitor' and result_report.get('publishable') is False and result_report.get('config_sha256')==config_sha and result_report.get('driver_sha256')==driver_sha,'witness report does not bind watched driver/config')
- result={'schema':'fresh-mainland-witness-watchdog-v1','status':'sampled-complete','report_sha256':digest(report),'config_sha256':config_sha,'driver_sha256':driver_sha,'watchdog_sha256':self_sha,'guardian_sha256':guardian_sha,'minimum_available_kib':minimum,'minimum_memory_kib':floor,'peak_process_group_rss_kib':maximum,'maximum_process_group_rss_kib':max_tree_rss_kib,'samples':samples,'sample_interval_seconds':interval,'limitation':'Sampling can miss short-lived peaks; escaped children and simultaneous monitor/guardian failure are not contained. Independent scientific and provenance review remains required.'}
- need(memory_available()>=floor and os.statvfs(output).f_bavail*os.statvfs(output).f_frsize>=disk,'resource floor before monitor marker')
+ result={'schema':'fresh-mainland-witness-watchdog-v1','status':'sampled-complete','report_sha256':digest(report),'config_sha256':config_sha,'driver_sha256':driver_sha,'watchdog_sha256':self_sha,'guardian_sha256':guardian_sha,'peak_process_group_rss_kib':maximum,'samples':samples,'sample_interval_seconds':interval,'limitation':'RSS is observed but not capped; sampling can miss short-lived peaks; escaped children and simultaneous monitor/guardian failure are not contained. Independent scientific and provenance review remains required.'}
+ need(os.statvfs(output).f_bavail*os.statvfs(output).f_frsize>=disk,'disk reserve before monitor marker')
  tmp=output/'monitor.pending';final=output/'monitor.json';linked=False
  try:
   with open(tmp,'x') as f:json.dump(result,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
@@ -137,6 +130,6 @@ def run(config,work,output,max_tree_rss_kib,*,resume=False,interval=.05):
 
 if __name__=='__main__':
  import argparse
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('config');p.add_argument('work');p.add_argument('output');p.add_argument('maximum_process_group_rss_kib',type=int);p.add_argument('--resume',action='store_true');a=p.parse_args()
- try:print(json.dumps(run(a.config,a.work,a.output,a.maximum_process_group_rss_kib,resume=a.resume),sort_keys=True))
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('config');p.add_argument('work');p.add_argument('output');p.add_argument('--resume',action='store_true');a=p.parse_args()
+ try:print(json.dumps(run(a.config,a.work,a.output,resume=a.resume),sort_keys=True))
  except Exception as e:print('error: '+str(e),file=sys.stderr);raise SystemExit(1)

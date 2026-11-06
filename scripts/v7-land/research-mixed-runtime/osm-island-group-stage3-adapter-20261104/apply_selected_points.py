@@ -17,11 +17,6 @@ def need(v,m):
 def read(path,limit=16<<20):
  with open(path,'rb') as f:b=f.read(limit+1)
  need(len(b)<=limit,'input exceeds limit');return json.loads(b)
-def available():
- with open('/proc/meminfo') as f:
-  for line in f:
-   if line.startswith('MemAvailable:'):return int(line.split()[1])
- raise RuntimeError('memory unavailable')
 def loadmodule(name,path):
  spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 
@@ -49,15 +44,15 @@ def claims_for(compiled,snapshot,resolution):
 
 def run(config_path):
  with open(config_path,'rb') as f:cfg_bytes=f.read((2<<20)+1)
- need(len(cfg_bytes)<=2<<20,'config too large');cfg=json.loads(cfg_bytes);need(cfg.get('schema')=='stage3-selected-points-request-v1','bad request');floor=cfg['minimum_memory_kib'];need(type(floor) is int and floor>=1730151,'bad floor')
- def guard():need(available()>=floor,'memory floor reached')
+ need(len(cfg_bytes)<=2<<20,'config too large');cfg=json.loads(cfg_bytes);need(cfg.get('schema')=='stage3-selected-points-request-v1','bad request')
+ def guard():return None
  def pinned(s):
   need(isinstance(s,dict) and set(s)=={'path','sha256'},'bad pin');p=Path(s['path']).resolve(strict=True);need(p.is_file() and writer.sha(p,guard)==s['sha256'],'pin mismatch: '+str(p));return p
  guard();codes=cfg['code'];need(set(codes)=={'driver','writer','overlay','contract','resolver','validator','raw_city_extractor','osm_node_extractor','adapter','named_identity','identity_watch'},'missing trusted code pins')
  codepaths={'driver':Path(__file__).resolve(),'writer':HERE/'writer.py','overlay':HERE/'overlay.py','contract':HERE/'decision_contract.py','resolver':POINT/'resolve.py','validator':STAGE2/'validate_stage2_candidate.py','raw_city_extractor':POINT/'raw_city_extract.py','osm_node_extractor':POINT/'osm_node_extract.py','adapter':POINT/'adapter.py','named_identity':POINT.parent/'named-identity-prototype'/'named_identity.py','identity_watch':POINT.parent/'named-identity-prototype'/'identity_watch.py'}
  for k,p in codepaths.items():need(writer.sha(p,guard)==codes[k],'code mismatch: '+k)
  stage2=cfg['stage2'];approval=read(pinned(cfg['stage2_approval']));need(approval['validator_sha256']==codes['validator'],'validator approval mismatch')
- sys.path.insert(0,str(STAGE2));validator=loadmodule('stage2_candidate_validator',codepaths['validator']);validation=validator.validate(stage2,approval['approved_code'],approval['approved_max_rss_kib'],guard)
+ sys.path.insert(0,str(STAGE2));validator=loadmodule('stage2_candidate_validator',codepaths['validator']);validation=validator.validate(stage2,approval['approved_code'],guard)
  request_path=pinned(cfg['point_request']);req=read(request_path);snapshot_path=pinned(req['snapshot']);snapshot=read(snapshot_path);base=read(stage2['snapshot']['path']);report=read(stage2['report']['path'])
  pins={k:cfg['policy_pins'][k] for k in ('baseline_report_sha256','baseline_rows_sha256','baseline_runs_sha256','baseline_decision_snapshot_sha256','physical_rows_sha256','physical_runs_sha256','component_rows_sha256','component_runs_sha256')}
  expected={'baseline_report_sha256':stage2['report']['sha256'],'baseline_rows_sha256':stage2['rows']['sha256'],'baseline_runs_sha256':stage2['runs']['sha256'],'baseline_decision_snapshot_sha256':stage2['snapshot']['sha256'],**{k+'_sha256':req[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')}}

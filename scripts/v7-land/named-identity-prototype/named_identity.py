@@ -50,9 +50,7 @@ def check(source,point_geometry,island_identity,spec):
 
 def worker():
     """Internal isolated entry point. No decision, map or source is written."""
-    import resource,sys
-    limit=1536*1024*1024
-    resource.setrlimit(resource.RLIMIT_AS,(limit,limit))
+    import sys
     request=sys.stdin.buffer.read(65537);need(len(request)<=65536,'worker request too large');r=json.loads(request)
     path=r['identity_path'];expected=r['identity_sha256']
     with open(path,'rb') as f:raw=f.read(8*1024*1024+1)
@@ -62,7 +60,7 @@ def worker():
     with open(path,'rb') as f:
         for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
     need(h.hexdigest()==expected,'identity source changed during worker run')
-    print(json.dumps({'schema':'named-identity-worker-v1','result':result,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss},sort_keys=True))
+    print(json.dumps({'schema':'named-identity-worker-v1','result':result,},sort_keys=True))
 if __name__=='__main__':
     try:worker()
     except Exception as e:

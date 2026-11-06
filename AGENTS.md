@@ -9,3 +9,4 @@ For cloud workers and Codex chats managed by Potata:
 - Keep CI as simple and minimal as possible. Use only fast checks relevant to each change, and avoid unnecessary full rebuilds.
 - Prefer code and command-line tools. Use a browser only when absolutely necessary.
 - You may download ordinary public online sources and materials in any format without asking.
+- Do not add application-imposed memory caps or floors, or memory watchdogs that stop or reject work based on memory use or availability. Ordinary streaming batches, chunks, and normal file buffering that process the full input are allowed; they are not memory caps. Do not use bounded caches as RAM ceilings. Keep ordinary input/output validation and operating-system/environment constraints distinct.

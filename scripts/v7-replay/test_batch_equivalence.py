@@ -25,7 +25,7 @@ class BoundaryEquivalence(unittest.TestCase):
     if row:by[y]=row
    _,expected=ref.adjacency(by,rle(p),rle(q),w,h,pairs)
    with tempfile.TemporaryDirectory() as d:
-    db=stream.open_database(Path(d)/'work.sqlite',1024)
+    db=stream.open_database(Path(d)/'work.sqlite')
     try:
      db.executemany('INSERT INTO components(root,expected,reported_cut) VALUES(?,1,0)',[(r,) for r in allroots])
      db.executemany('INSERT INTO spans VALUES(?,?,?,?)',[(y,a,b,r) for y,rows in by.items() for a,b,r in rows])

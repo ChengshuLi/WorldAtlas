@@ -51,13 +51,11 @@ class IndependentCrosscheck(unittest.TestCase):
 
 class ContractValidation(unittest.TestCase):
  def make(self):
-  return {'schema':'physical-water-closure-contract-v1','grid':{'crs':'EPSG:4326','width':4,'height':3,'west':-2,'north':2,'step_numerator':1,'step_denominator':1},'physical':{'rows_sha256':'a'*64,'runs_sha256':'b'*64,'water_code':1,'land_code':17,'report_sha256':'c'*64,'encoding_evidence_sha256':'d'*64,'producer_code_path':'producer.py'},'resources':{'memory_floor_kib':1887437,'max_cell_visits':100}}
+  return {'schema':'physical-water-closure-contract-v1','grid':{'crs':'EPSG:4326','width':4,'height':3,'west':-2,'north':2,'step_numerator':1,'step_denominator':1},'physical':{'rows_sha256':'a'*64,'runs_sha256':'b'*64,'water_code':1,'land_code':17,'report_sha256':'c'*64,'encoding_evidence_sha256':'d'*64,'producer_code_path':'producer.py'},'resources':{'max_cell_visits':100}}
  def load(self,c,wrong=False):
   import hashlib,tempfile
   with tempfile.NamedTemporaryFile() as f:
    raw=json.dumps(c).encode();f.write(raw);f.flush();return m.load_contract(f.name,'0'*64 if wrong else hashlib.sha256(raw).hexdigest())
- def setUp(self): self.oldguard=m.guard; m.guard=lambda:None
- def tearDown(self): m.guard=self.oldguard
  def test_contract_valid_and_changes_grid(self):
   h,c=self.load(self.make());self.assertEqual((m.WIDTH,m.HEIGHT,m.WEST,m.NORTH,m.STEP),(4,3,F(-2),F(2),F(1)));self.assertEqual(len(h),64)
  def test_reject_bad_hash(self):
@@ -68,9 +66,6 @@ class ContractValidation(unittest.TestCase):
  def test_reject_equal_codes(self):
   c=self.make();c['physical']['land_code']=1
   with self.assertRaisesRegex(ValueError,'differ'): self.load(c)
- def test_reject_underfloor(self):
-  c=self.make();c['resources']['memory_floor_kib']=1
-  with self.assertRaisesRegex(ValueError,'memory floor'): self.load(c)
  def test_reject_oversized_index_before_hash(self):
   import tempfile
   with tempfile.TemporaryDirectory() as d:

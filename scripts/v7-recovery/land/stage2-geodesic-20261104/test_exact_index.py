@@ -11,7 +11,7 @@ class Exact(unittest.TestCase):
   manifest=[];ctiles=[]
   for (ty,tx),rows in sorted(tiles.items()):
    raw=np.asarray(rows,dtype='<u4').tobytes();(d/f'{ty:05d}-{tx:05d}.bin').write_bytes(raw);codes=sorted(set(x[3] for x in rows));manifest.append((ty,tx,codes,len(rows),hashlib.sha256(raw).hexdigest()));ctiles.append((ty,tx,codes))
-  idx=ExactIndex(d,w,w//2,360/w,90,manifest,tile_cells=C,cache_bytes=1024)
+  idx=ExactIndex(d,w,w//2,360/w,90,manifest,tile_cells=C)
   cert=CertificateIndex(w,w//2,360/w,90,ctiles,seeds,tile_cells=C)
   return t,idx,cert
  def oracle(self,runs,seeds,w,tol):
@@ -51,7 +51,7 @@ class Exact(unittest.TestCase):
     manifest=[];ctiles=[]
     for (ty,tx),rows in sorted(tiles.items()):
      raw=np.asarray(sorted(rows),dtype='<u4').tobytes();(pathlib.Path(d)/f'{ty:05d}-{tx:05d}.bin').write_bytes(raw);codes=sorted({r[3] for r in rows});manifest.append((ty,tx,codes,len(rows),hashlib.sha256(raw).hexdigest()));ctiles.append((ty,tx,codes))
-    idx=ExactIndex(d,w,w//2,360/w,90,manifest,tile_cells=C,cache_bytes=1024);cert=CertificateIndex(w,w//2,360/w,90,ctiles,seeds,tile_cells=C);hint=int(rng.integers(17,23));u,_=cert.witnesses([runs[0][0]],[runs[0][1]],[hint]);best={hint:float(u[0])}
+    idx=ExactIndex(d,w,w//2,360/w,90,manifest,tile_cells=C);cert=CertificateIndex(w,w//2,360/w,90,ctiles,seeds,tile_cells=C);hint=int(rng.integers(17,23));u,_=cert.witnesses([runs[0][0]],[runs[0][1]],[hint]);best={hint:float(u[0])}
     for y,a,b in runs:
      values,_=idx.nearest_run(y,a,b,min(best.values()),.00001)
      for c,v in values.items():best[c]=min(best.get(c,math.inf),v)

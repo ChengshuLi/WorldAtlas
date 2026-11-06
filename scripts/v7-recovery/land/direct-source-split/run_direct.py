@@ -62,18 +62,14 @@ def run(request, output):
     grid=cfg['grid']; need(set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int
          and 0<grid['width']<=1000000 and 0<grid['height']<=1000000 and grid['west']==-180 and grid['north']==90
          and grid['step']==360/grid['width'] and 90-grid['height']*grid['step']>=-90-1e-8,'invalid grid')
-    lim=cfg['limits']; need(set(lim)=={'minimum_memory_kib','minimum_free_bytes','max_rss_kib','max_nodes','max_raster_work','max_residual_cells','max_residual_segment_tests'}
-         and all(type(v) is int and v>0 for v in lim.values()) and lim['minimum_memory_kib']>=1887437
-         and lim['minimum_free_bytes']>=2*1024**3 and lim['max_rss_kib']<=870400
+    lim=cfg['limits']; need(set(lim)=={'minimum_free_bytes','max_nodes','max_raster_work','max_residual_cells','max_residual_segment_tests'}
+         and all(type(v) is int and v>0 for v in lim.values())
+         and lim['minimum_free_bytes']>=2*1024**3
          and lim['max_nodes']<=50000000 and lim['max_raster_work']<=5000000
          and lim['max_residual_cells']<=100000 and lim['max_residual_segment_tests']<=10000000,'invalid resource limits')
     need(not out.exists() and out.parent.is_dir(),'new output directory required')
     def guard():
-        with open('/proc/meminfo') as f:
-            available=next((int(x.split()[1]) for x in f if x.startswith('MemAvailable:')),None)
-        need(available is not None and available>=lim['minimum_memory_kib'],'memory floor reached')
         need(shutil.disk_usage(out.parent).free>=lim['minimum_free_bytes'],'disk floor reached')
-        need(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss<=lim['max_rss_kib'],'process RSS limit reached')
     guard(); inputs=cfg['inputs']; need(set(inputs)=={'snapshot','witness','component_rows','component_runs'},'invalid input set')
     paths={}
     for name,pin in inputs.items():

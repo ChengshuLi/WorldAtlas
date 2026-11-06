@@ -51,8 +51,6 @@ def check(source,point_geometry,island_identity,spec):
 def worker():
     """Internal isolated entry point. No decision, map or source is written."""
     import resource,sys
-    limit=1536*1024*1024
-    resource.setrlimit(resource.RLIMIT_AS,(limit,limit))
     request=sys.stdin.buffer.read(65537);need(len(request)<=65536,'worker request too large');r=json.loads(request)
     path=r['identity_path'];expected=r['identity_sha256']
     with open(path,'rb') as f:raw=f.read(8*1024*1024+1)

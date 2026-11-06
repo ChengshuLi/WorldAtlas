@@ -13,9 +13,7 @@ def main():
  if len(data)>1<<20:raise ValueError('seed request exceeds bound')
  cfg=json.loads(data);controls=cfg['controls']
  def guard():
-  with open('/proc/meminfo') as f:
-   available=next((int(x.split()[1]) for x in f if x.startswith('MemAvailable:')),None)
-  if available is None or available<controls['memory_floor_kib'] or shutil.disk_usage(work.parent).free<controls['disk_reserve_bytes']:raise RuntimeError('resource floor reached')
+  if shutil.disk_usage(work.parent).free<controls['disk_reserve_bytes']:raise RuntimeError('disk reserve reached')
  seed_producer.run(request,work,out,guard)
 if __name__=='__main__':
  try:main()

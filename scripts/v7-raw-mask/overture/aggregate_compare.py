@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 from osgeo import gdal,osr
 
-gdal.UseExceptions();gdal.SetCacheMax(64*1024*1024)
+gdal.UseExceptions()
 
 def sha(path):
     h=hashlib.sha256()

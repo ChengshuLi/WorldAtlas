@@ -4,14 +4,7 @@ from pathlib import Path
 import numpy as np
 from verify_inputs import bounded_bytes
 
-def memory_available_kib():
- with open('/proc/meminfo') as f:
-  for line in f:
-   if line.startswith('MemAvailable:'):return int(line.split()[1])
- raise RuntimeError('MemAvailable unavailable')
-
-def guard(directory,memory_floor_kib,disk_floor_bytes):
- if memory_floor_kib and memory_available_kib()<memory_floor_kib:raise RuntimeError('memory guard reached')
+def guard(directory,disk_floor_bytes):
  if shutil.disk_usage(directory).free<disk_floor_bytes:raise RuntimeError('disk guard reached')
 
 def _checksum(meta,arrays):
@@ -20,8 +13,8 @@ def _checksum(meta,arrays):
   a=np.ascontiguousarray(arrays[k]);h.update(k.encode());h.update(a.dtype.str.encode());h.update(json.dumps(a.shape,separators=(',',':')).encode());h.update(memoryview(a).cast('B'))
  return h.hexdigest()
 
-def write(path,identity,phase,cursor,queries,arrays,memory_floor_kib,disk_floor_bytes):
- p=Path(path);guard(p.parent,memory_floor_kib,disk_floor_bytes)
+def write(path,identity,phase,cursor,queries,arrays,disk_floor_bytes):
+ p=Path(path);guard(p.parent,disk_floor_bytes)
  if phase not in ('cert','exact','complete') or type(cursor) is not int or cursor<0 or type(queries) is not int or queries<0:raise ValueError('bad checkpoint cursor')
  if set(arrays)!={'roots','hints','upper','amb','best'}:raise ValueError('bad checkpoint arrays')
  meta={'schema':'wgs84-baseline-checkpoint-v1','identity':identity,'phase':phase,'cursor':cursor,'queries':queries};meta['state_sha256']=_checksum(meta,arrays);metadata=json.dumps(meta,sort_keys=True,separators=(',',':'),allow_nan=False)
@@ -29,7 +22,7 @@ def write(path,identity,phase,cursor,queries,arrays,memory_floor_kib,disk_floor_
  try:
   with open(tmp,'xb') as f:
    np.savez(f,metadata=np.frombuffer(metadata.encode(),dtype=np.uint8),**arrays);f.flush();os.fsync(f.fileno())
-  guard(p.parent,memory_floor_kib,disk_floor_bytes);os.replace(tmp,p)
+  guard(p.parent,disk_floor_bytes);os.replace(tmp,p)
   d=os.open(p.parent,os.O_RDONLY|os.O_DIRECTORY)
   try:os.fsync(d)
   finally:os.close(d)

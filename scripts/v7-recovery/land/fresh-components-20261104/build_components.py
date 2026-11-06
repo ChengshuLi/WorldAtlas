@@ -1,10 +1,10 @@
 #!/usr/bin/env /usr/bin/python3
 """Fresh accepted-physical connected components, guarded and data-only."""
-import argparse,hashlib,json,os,resource,shutil,subprocess,sys,time,uuid
+import argparse,hashlib,json,os,shutil,subprocess,sys,time,uuid
 from pathlib import Path
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/'stage2-geodesic-20261104'))
-import checkpoints,verify_inputs,atomic_move
+import verify_inputs,atomic_move
 from write_land_stream import _Rows,_full,_components,PAIR,TRIPLE
 REVIEWED_SOURCE_SHA256='2f4df94c6ca50ea66f43092a174962ce4fdd5e5c3137f55ca4f335964894515e'
 def need(v,msg):
@@ -48,17 +48,15 @@ def coverage(pr,ps,cr,cs,w,h,guard):
 def run(config_path,work_dir,output_dir):
  require_guardian();cp,work,out=map(lambda x:Path(x).resolve(),(config_path,work_dir,output_dir));raw=verify_inputs.bounded_bytes(cp,1<<20);cfg=json.loads(raw)
  need(set(cfg)=={'schema','grid','inputs','controls'} and cfg['schema']=='fresh-physical-components-v1' and set(cfg['inputs'])=={'physical_rows','physical_runs','physical_report','component_source'},'invalid component request')
- c=cfg['controls'];need(set(c)=={'minimum_memory_kib','minimum_free_bytes'} and type(c['minimum_memory_kib']) is int and c['minimum_memory_kib']>=1730151 and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>=2*1024**3,'invalid resource floor')
+ c=cfg['controls'];need(set(c)=={'minimum_free_bytes'} and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>=2*1024**3,'invalid disk reserve')
  g=cfg['grid'];need(isinstance(g,dict) and set(g)=={'width','height','west','north','step'} and type(g['width']) is int and type(g['height']) is int and 1<g['width']<=1000000 and 0<g['height']<=1000000 and g['west']==-180 and g['north']==90 and g['step']==360/g['width'] and 90-g['height']*g['step']>=-90-1e-8,'invalid grid')
  need(work.parent.is_dir() and out.parent.is_dir() and not work.exists() and not out.exists() and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'fresh work/output required')
  require_same_filesystem(work.parent,out.parent)
- guard=lambda:checkpoints.guard(work.parent,c['minimum_memory_kib'],c['minimum_free_bytes']);guard();paths={k:pin(v,guard) for k,v in cfg['inputs'].items()}
+ guard=lambda:need(shutil.disk_usage(work.parent).free>=c['minimum_free_bytes'],'disk guard reached');guard();paths={k:pin(v,guard) for k,v in cfg['inputs'].items()}
  for p in [cp,HERE,*paths.values()]:
   d=p if p==HERE else p.parent;need(all(not t.is_relative_to(d) and not d.is_relative_to(t) for t in (work,out)),'work/output overlaps code or inputs')
  need(cfg['inputs']['component_source']['sha256']==REVIEWED_SOURCE_SHA256,'unreviewed component builder source')
  physical=json.loads(verify_inputs.bounded_bytes(paths['physical_report'],16<<20,guard));po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==g and po.get('rows.u32le')==cfg['inputs']['physical_rows']['sha256'] and po.get('runs.u32le')==cfg['inputs']['physical_runs']['sha256'],'physical report mismatch')
- # Fixed reserve covers measured 629 MiB peak plus ~128 MiB headroom.
- need(checkpoints.memory_available_kib()>=c['minimum_memory_kib']+750*1024,'insufficient component-build headroom')
  output_upper_bytes=require_disk_headroom(work.parent,paths['physical_runs'],paths['physical_rows'],c['minimum_free_bytes'])
  work.mkdir(mode=0o700);sync_dir(work.parent);stage=work/'result.partial';stage.mkdir(mode=0o700);src=stage/'builder.cpp';binary=stage/'component-builder';data=verify_inputs.bounded_bytes(paths['component_source'],1<<20,guard);need(hashlib.sha256(data).hexdigest()==REVIEWED_SOURCE_SHA256,'source changed')
  with open(src,'xb') as f:f.write(data);f.flush();os.fsync(f.fileno())
@@ -71,7 +69,7 @@ def run(config_path,work_dir,output_dir):
  rsha=verify_inputs.sha_file(stage/'rows.u32le',guard);ssha=verify_inputs.sha_file(stage/'runs.u32le',guard);bsha=verify_inputs.sha_file(binary,guard);version=subprocess.run(['g++','--version'],check=True,capture_output=True,text=True).stdout.splitlines()[0]
  manifest={'schema':'single-generation-component-manifest-v1','status':'complete-research','grid':g,'component_source_sha256':REVIEWED_SOURCE_SHA256,'pins':{'physical_rows':cfg['inputs']['physical_rows'],'physical_runs':cfg['inputs']['physical_runs'],'component_rows':{'path':str(out/'rows.u32le'),'sha256':rsha},'component_runs':{'path':str(out/'runs.u32le'),'sha256':ssha}},'physical_report':cfg['inputs']['physical_report'],'builder_binary':{'path':str(out/'component-builder'),'sha256':bsha},'builder_binary_sha256':bsha,'compiler_version':version,'builder_output':output}
  with open(stage/'manifest.json','x') as f:json.dump(manifest,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
- report={'schema':'fresh-physical-components-report-v1','status':'research-awaiting-monitor','publishable':False,'config_sha256':hashlib.sha256(raw).hexdigest(),'driver_sha256':driver_sha,'support_sha256':support,'grid':g,'input_sha256':{k:v['sha256'] for k,v in cfg['inputs'].items()},'component_rows_sha256':rsha,'component_runs_sha256':ssha,'builder_binary_sha256':bsha,'manifest_sha256':verify_inputs.sha_file(stage/'manifest.json',guard),'land_cells':land,'builder_output':output,'output_upper_bound_bytes':output_upper_bytes,'elapsed_seconds':time.monotonic()-started,'peak_parent_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'limitations':['Physical component coverage was checked against the accepted mask; the mask source was not rerasterized.','Root IDs are ephemeral for this exact build; no continent assignment is made.','Sampling cannot guarantee detection of transient memory spikes.']}
+ report={'schema':'fresh-physical-components-report-v1','status':'research-awaiting-monitor','publishable':False,'config_sha256':hashlib.sha256(raw).hexdigest(),'driver_sha256':driver_sha,'support_sha256':support,'grid':g,'input_sha256':{k:v['sha256'] for k,v in cfg['inputs'].items()},'component_rows_sha256':rsha,'component_runs_sha256':ssha,'builder_binary_sha256':bsha,'manifest_sha256':verify_inputs.sha_file(stage/'manifest.json',guard),'land_cells':land,'builder_output':output,'output_upper_bound_bytes':output_upper_bytes,'elapsed_seconds':time.monotonic()-started,'limitations':['Physical component coverage was checked against the accepted mask; the mask source was not rerasterized.','Root IDs are ephemeral for this exact build; no continent assignment is made.','Memory use is not capped by this runner.']}
  with open(stage/'report.json','x') as f:json.dump(report,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
  for p in cfg['inputs'].values():pin(p,guard)
  need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and verify_inputs.sha_file(HERE/'build_components.py',guard)==driver_sha and {n:verify_inputs.sha_file(HERE.parent/'stage2-geodesic-20261104'/n,guard) for n in support}==support,'input or code changed');guard();sync_dir(stage);atomic_move.move_noreplace(stage,out)

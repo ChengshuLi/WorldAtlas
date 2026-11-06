@@ -5,10 +5,10 @@ import numpy as np
 from checkpoints import guard
 from verify_inputs import manifest,sha_file,read_tile
 REC=struct.Struct('<IIIII')
-def build(tile_dir,manifest_path,manifest_sha256,output,report,*,width,height,tile_size=1024,samples_per_category=32,memory_floor_kib=0,disk_floor_bytes=0):
+def build(tile_dir,manifest_path,manifest_sha256,output,report,*,width,height,tile_size=1024,samples_per_category=32,disk_floor_bytes=0):
  src=Path(tile_dir).resolve();mp=Path(manifest_path).resolve();out=Path(output).resolve();rp=Path(report).resolve()
  if not src.is_dir() or not out.parent.is_dir() or out==rp or out.is_relative_to(src) or rp.is_relative_to(src) or not (type(width) is int and width>0 and type(height) is int and height>0 and type(tile_size) is int and tile_size>0 and type(samples_per_category) is int and 1<=samples_per_category<=32):raise ValueError('invalid representative config')
- g=lambda:guard(out.parent,memory_floor_kib,disk_floor_bytes);g()
+ g=lambda:guard(out.parent,disk_floor_bytes);g()
  if sha_file(mp,g)!=manifest_sha256:raise ValueError('manifest pin mismatch')
  T=manifest(mp,width,height,tile_size,g);h=hashlib.sha256();n=0;per={c:0 for c in range(17,23)};start=time.monotonic()
  with open(out,'xb') as o:

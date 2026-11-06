@@ -30,7 +30,7 @@ class WriterTest(unittest.TestCase):
     def run_writer(self, **overrides):
         a,b = self.pair('c',self.comp); c,d = self.pair('p',self.phys); e,f = self.pair('s',self.seed)
         (self.p/'roots').write_bytes(U(*self.roots)); (self.p/'codes').write_bytes(bytes(self.codes))
-        params = dict(width=8,height=2,component_rows=a,component_runs=b,physical_rows=c,physical_runs=d,mainland_rows=e,mainland_runs=f,roots=self.p/'roots',codes=self.p/'codes',mainland_roots=[1,2,3,4],output_dir=self.p/'out',disk_reserve_bytes=0,min_mem_available_kib=0)
+        params = dict(width=8,height=2,component_rows=a,component_runs=b,physical_rows=c,physical_runs=d,mainland_rows=e,mainland_runs=f,roots=self.p/'roots',codes=self.p/'codes',mainland_roots=[1,2,3,4],output_dir=self.p/'out',disk_reserve_bytes=0)
         params.update(overrides)
         return write_land_stream(**params)
     def output(self):
@@ -116,8 +116,7 @@ class WriterTest(unittest.TestCase):
         with patch('write_land_stream.shutil.disk_usage') as usage:
             usage.return_value=type('D',(),{'free':0})()
             with self.assertRaisesRegex(RuntimeError,'disk'): self.run_writer()
-        with patch('write_land_stream._available_kib',return_value=10):
-            with self.assertRaisesRegex(RuntimeError,'memory'): self.run_writer(min_mem_available_kib=11)
-        self.assertFalse((self.p/'out').exists())
+        self.run_writer(output_dir=self.p/'without_memory_guard')
+        self.assertTrue((self.p/'without_memory_guard/report.json').exists())
 
 if __name__ == '__main__': unittest.main()

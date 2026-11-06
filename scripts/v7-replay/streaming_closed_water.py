@@ -1,11 +1,11 @@
-"""Disk-backed, bounded-memory unseeded-water candidate classifier.
+"""Disk-backed unseeded-water candidate classifier.
 
 Rows and component summaries are indexed in a fresh SQLite work file. The
-source partition and output are streamed. Memory scales with one grid row,
-fixed batches, SQLite cache and the capped shoreline index, not total spans.
+source partition and output are streamed. No application-imposed memory cap
+is enforced; actual memory use depends on inputs and algorithm workload.
 """
 import collections,hashlib,json,math,sqlite3,struct
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 import numpy as np
 import closed_water_core as core
@@ -21,10 +21,9 @@ def sha(path):
  return h.hexdigest()
 
 
-def open_database(path,cache_kib):
- if type(cache_kib) is not int or not 1024<=cache_kib<=262144:raise ValueError('invalid SQLite cache limit')
+def open_database(path):
  db=sqlite3.connect(path);db.execute('PRAGMA journal_mode=OFF');db.execute('PRAGMA synchronous=OFF')
- db.execute('PRAGMA temp_store=FILE');db.execute(f'PRAGMA cache_size=-{cache_kib}');db.execute('PRAGMA foreign_keys=ON')
+ db.execute('PRAGMA temp_store=FILE');db.execute('PRAGMA foreign_keys=ON')
  db.executescript('''
  CREATE TABLE components(root INTEGER PRIMARY KEY, expected INTEGER NOT NULL, reported_cut INTEGER NOT NULL,
    boundary_mask INTEGER NOT NULL DEFAULT 0, unknown INTEGER NOT NULL DEFAULT 0, crop_edge INTEGER NOT NULL DEFAULT 0,
@@ -94,13 +93,13 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
     entity_to_water={e:w for e,_,w in pairs};water_codes=list(water_to_entity);land_codes=list(land_to_entity)
     bits_by_code=np.zeros(23,dtype=np.uint32)
     for code,entity in {**water_to_entity,**land_to_entity}.items():bits_by_code[code]=1<<entity_to_water[entity]
-    @lru_cache(maxsize=3)
+    @cache
     def classes(y):
         p=core.shore.crop(*physical,y,0,width,width);q=core.shore.crop(*prefill,y,0,width,width)
         if np.any(~np.isin(p,[1,17])) or np.any((p==17)&~np.isin(q,land_codes)) or np.any((p==1)&~np.isin(q,[0,*water_codes])):
             raise ValueError(f'invalid physical/prefill relationship at row {y}')
         return p,q
-    @lru_cache(maxsize=3)
+    @cache
     def row_index(y):
         rows=db.execute('SELECT a,b,root FROM spans WHERE y=? ORDER BY a',(y,)).fetchall()
         if not rows:return None
@@ -153,7 +152,7 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
 
 def mark_cut_contacts(db,path,width,height,batch_size=4096):
  from bisect import bisect_right
- @lru_cache(maxsize=4)
+ @cache
  def row(y):
   spans=db.execute('SELECT a,b,root FROM spans WHERE y=? ORDER BY a',(y,)).fetchall()
   return ([z[0] for z in spans],spans)
@@ -180,7 +179,7 @@ def mark_cut_contacts(db,path,width,height,batch_size=4096):
   raise ValueError('independent barrier scan contradicts partition')
 
 
-def assign_components(db,physical,land,width,height,pairs,tolerance,pad,max_coastal_centers,chunk,pending_file):
+def assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,pending_file):
  step=360/width;last=-1;pending_cells=assigned_cells=0;pending_count=direct_count=mixed_count=0
  # Page by stable root key to avoid retaining all components or modifying an active cursor.
  cache_key=None;edges=indexes=None
@@ -205,7 +204,7 @@ def assign_components(db,physical,land,width,height,pairs,tolerance,pad,max_coas
     if key!=cache_key:
      # Release the prior tree before constructing a different one.
      edges=indexes=None;cache_key=None
-     edges=core.shore.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in participants],max_centers=max_coastal_centers)
+     edges=core.shore.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in participants])
      indexes=core.shore.make_indexes(edges,participants);cache_key=key
     source=db.execute('SELECT y,a,b FROM spans WHERE root=? ORDER BY y,a',(root,));produced=0;staged=[]
     while True:
@@ -245,20 +244,19 @@ def write_assignments(db,path,decision_id,width,height):
 
 
 def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_rows,component_spans,barrier_edges,
-        out,width,height,pad,inputs,*,allow_selected_research=False,cache_kib=32768,max_coastal_centers=1000000,
-        chunk=5000,verify_inputs=None):
- if chunk<=0 or max_coastal_centers<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid resource or halo limit')
+        out,width,height,pad,inputs,*,allow_selected_research=False,chunk=5000,verify_inputs=None):
+ if chunk<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid chunk or halo')
  decision,pairs,tolerance=core.policy(snapshot,allow_selected_research=allow_selected_research)
  code_paths={'streaming_closed_water':Path(__file__),'partition_json_stream':Path(partition_json_stream.__file__),
              'closed_water_core':Path(core.__file__),'shared_nearest':Path(core.shore.__file__)}
  code_pins={name:sha(path) for name,path in code_paths.items()}
- out=Path(out);create_directory_exclusive(out);db=open_database(out/'work.sqlite3',cache_kib)
+ out=Path(out);create_directory_exclusive(out);db=open_database(out/'work.sqlite3')
  try:
   meta=ingest_partition(db,partition_path,width,height,snapshot_sha,inputs,snapshot['decision_revision'])
   cells,nspans=ingest_spans(db,component_rows,component_spans,width,height,meta)
   classify_boundaries(db,physical,prefill,width,height,pairs)
   mark_cut_contacts(db,barrier_edges,width,height)
-  stats=assign_components(db,physical,land,width,height,pairs,tolerance,pad,max_coastal_centers,chunk,out/'pending-components.jsonl.gz')
+  stats=assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,out/'pending-components.jsonl.gz')
   count,output_spans=write_assignments(db,out/'closed-water-assignments.jsonl.gz',decision['id'],width,height)
   if count!=stats['assigned_cells'] or count+stats['pending_cells']!=cells:raise ValueError('closed-water cell conservation failed')
   db.commit();db.close();db=None
@@ -272,7 +270,7 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
     **stats,'input_span_count':nspans,'span_count':output_spans,
     'pending_file':{'path':'pending-components.jsonl.gz','sha256':sha(out/'pending-components.jsonl.gz')},
     'work_database':{'path':'work.sqlite3','sha256':sha(out/'work.sqlite3'),'purpose':'disk-backed row/component and mixed-output index'},
-    'resource_limits':{'sqlite_cache_kib':cache_kib,'coastal_centers':max_coastal_centers,'classification_chunk':chunk},
+    'algorithm_parameters':{'classification_chunk':chunk},
     'algorithm_sha256':code_pins['streaming_closed_water'],'code_sha256':code_pins,
     'tiles':[{'core_rows':[0,height],'core_cols':[0,width],'span_file':{'path':'closed-water-assignments.jsonl.gz','sha256':sha(out/'closed-water-assignments.jsonl.gz')}}]}
   write_json_exclusive(out/'manifest.json',manifest,indent=2)

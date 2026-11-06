@@ -19,8 +19,8 @@ class Verify(unittest.TestCase):
   (self.d/'rows').write_bytes(b''.join(struct.pack('<I',x) for x in offs));(self.d/'runs').write_bytes(b''.join(struct.pack('<II',*x) for x in run))
   for (y,x),z in parts.items():(self.tiles/f'{y:05}-{x:05}.bin').write_bytes(b''.join(struct.pack('<IIII',*v) for v in z))
  def tearDown(self):self.tmp.cleanup()
- def runv(self,floor='0'):
-  return subprocess.run([self.bin,str(self.d/'rows'),str(self.d/'runs'),str(self.tiles),'16','8','4',floor],capture_output=True,text=True)
+ def runv(self,*extra):
+  return subprocess.run([self.bin,str(self.d/'rows'),str(self.d/'runs'),str(self.tiles),'16','8','4',*extra],capture_output=True,text=True)
  def test_valid(self):
   r=self.runv();self.assertEqual(r.returncode,0,r.stderr);self.assertIn('"status":"verified"',r.stdout)
  def test_corruption(self):
@@ -29,6 +29,6 @@ class Verify(unittest.TestCase):
   next(self.tiles.glob('*.bin')).unlink();self.assertNotEqual(self.runv().returncode,0)
  def test_extra(self):
   (self.tiles/'00001-00002.bin').write_bytes(b'1234');self.assertNotEqual(self.runv().returncode,0)
- def test_memory_guard(self):
-  r=self.runv('999999999999');self.assertNotEqual(r.returncode,0);self.assertIn('memory guard',r.stderr)
+ def test_obsolete_memory_argument_is_rejected_as_usage(self):
+  r=self.runv('999999999999');self.assertNotEqual(r.returncode,0);self.assertIn('usage:',r.stderr)
 if __name__=='__main__':unittest.main()

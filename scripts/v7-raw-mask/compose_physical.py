@@ -4,9 +4,9 @@ import hashlib,json,math,os,shutil,sys
 from pathlib import Path
 import numpy as np
 from osgeo import gdal,osr
+gdal.UseExceptions()
 from build import sha,validate_reference,compare_row
 
-gdal.UseExceptions();gdal.SetCacheMax(64*1024*1024)
 
 def open_mask(spec,grid):
     path=Path(spec['path']).resolve()

@@ -48,8 +48,6 @@ def main():
  gs,rs,bs,cs=mm('gs',3),mm('rs',3),mm('bs',2),mm('cs',3);need(int(gr[-1])==len(gs) and int(rr[-1])==len(rs) and int(br[-1])==len(bs) and int(cr[-1])==len(cs),'offset sizes')
  counts={'graph_classified_cells':0,'graph_matching_stage2':0,'residual_cells':0,'residual_matching_stage2':0,'residual_ambiguous':0}; residual=[]
  for y in range(H):
-  if y%256==0:
-   avail=next(int(q.split()[1]) for q in Path('/proc/meminfo').read_text().splitlines() if q.startswith('MemAvailable:'));need(avail>=1887437,'host memory floor')
   base=bs[br[y]:br[y+1]].astype(np.int64); need(len(base)>0 and base[-1,0]==W and np.all(base[1:,0]>base[:-1,0]),'base row invalid'); ends=base[:,0];codes=base[:,1]
   a=gs[gr[y]:gr[y+1]].astype(np.int64);a=a[np.isin(a[:,2],[20,21])]
   for code in (20,21):

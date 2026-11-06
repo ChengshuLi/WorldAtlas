@@ -76,7 +76,7 @@ class ClustersTest(unittest.TestCase):
             index_dir = root / 'index'; index_dir.mkdir()
             index_path = index_dir / 'old.json'
             index_path.write_text(json.dumps({'schema':'old-list1-evidence-discovery-index-v1','grid':{'width':8,'height':4,'step':'45','west':'-180','north':'90'},'items':[{'old_item_id':'wrap','historical_changed_land_extent':{'x_start':7,'x_end':0,'y_start':0,'y_end':0}}, {'old_item_id':'none','historical_changed_land_extent':{'x_start':4,'x_end':4,'y_start':3,'y_end':3}}]}))
-            match_old_list1.match(root / 'out ?#', index_path, cluster.digest(index_path), root / 'matches')
+            match_old_list1.match(root / 'out ?#', index_path, cluster.digest(index_path), root / 'matches', cluster.digest(root / 'out ?#/report.json'))
             lines = [json.loads(x) for x in (root / 'matches/matches.jsonl').read_text().splitlines()]
             self.assertEqual(len(lines), 3)
             hits = [x for x in lines if x['old_list1_candidates']]
