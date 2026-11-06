@@ -24,3 +24,7 @@ Candidate cut file-byte SHA-256: Kurdul `1a498eb68d0b68d9a0c25aa1c425df3c3294eac
 - Bushuyka / Psikhashkha at the adjoining western edge: 3.4 km becomes 4.4 km, crossings ten to zero, 12 draft163 centers. SHA `02aab37e9711dbff5d2d5f57d8cd0fba3ecb4763e41c02bfed4972082d7e1b47`.
 
 The additional crossing screen flagged further local intersections that still require examination; this report does not claim that the central audit has resolved all of them. Mapped streams do not necessarily include every real stream, and the modeled interface is a terrain-derived estimate. The numeric station checks are not evidence independent of its seeds. Proposals require explicit selection and source-catalog integration before production use.
+
+## Eastern terrain-profile follow-up
+
+A 500 m station screen of the three-proposal line covered 641 stations at 47–49.5 degrees E. Four locations had a center at least 10 m below both side samples at both 250 m and 500 m: approximately (47.16936, 41.50861), (47.43227, 41.27127), (47.74556, 41.19173), and (49.06595, 40.89166). Another 14 stations could not be evaluated with the available valid 3-by-3 samples. A low profile can be a mountain pass, so these are leads to check, not demonstrated boundary errors; no additional correction has yet been established. This is a surface-profile diagnostic, not a complete drainage trace.
