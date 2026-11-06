@@ -7,7 +7,7 @@ Seeds here are sampled from a prior research graph solely for this regression.
 import hashlib,json,math,sys,time
 from pathlib import Path
 import numpy as np
-from direct import H,W,STEP,ROOT,TripleRows,need,sha,partition,rasterize_barriers
+from candidate_kernel import H,W,STEP,ROOT,TripleRows,need,sha,partition,rasterize_barriers
 PINS={'fresh-components-output-20261104/rows.u32le':'4beda178bfc7beeb2d30cbdfa5901a48f9a41bb82c69e534d4c8cddfdb09aea7','fresh-components-output-20261104/runs.u32le':'18d7f36fa22c5728662cdd40487bf684108da030c074fec6d22ac378d0df0961','actual-neon-boundary-export-20261104/v6/snapshot.json':'2de24700528fbf2d44acc4b67c17f6fe3b9bb594eba0add5c940e5d1cd569882','fresh-witness-output-20261104/resolution.json':'27ec973caf3eedb267e2c0277a710dceef04254075f81b689f5762d513d88ea5','mainland-source-recovery-20261104/topology-proposal/partition-draft-20261104/report.json':'35fcd1f6dcf3851bb62b5db6eb99bb0c378a81a6cc62963376315611daac186e'}
 X0,X1,Y0,Y1=37080,37480,29480,30250
 

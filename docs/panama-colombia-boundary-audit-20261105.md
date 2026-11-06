@@ -42,9 +42,7 @@ joins, closure proof, polygon validity and witnesses. `seed_producer.py` and
 the rasterizer use current physical components and the assembled region to
 assign mainland cell centers; see the adjacent README for the input contract.
 These are research-stage code and the README states that the complete
-orchestrator remains gated for independent review. The Panama direct cut-graph
-experiment in `scripts/v7-recovery/land/panama-direct-split-research-20261104/direct.py`
-is explicitly retired at its entry point and is not the selected workflow.
+orchestrator remains gated for independent review. The experimental Panama direct cut-graph runner and its planar nearest-side comparator were removed from PR4. The retained research reports describe an unselected historical prototype, not a WGS84 rerun and not the selected workflow.
 
 The selected seed producer now verifies the pinned OSM archive against the
 saved structured line before region assembly. The outer orchestrator and

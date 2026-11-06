@@ -13,15 +13,13 @@ integrated into the producer or the full pipeline. Do not publish its results.
   and closure-checker source dependencies.
 - `neon-mainland-regions-20261104/rasterizer/` contains the pinned research seed
   rasterizer and kernel used by the existing producer.
-- `panama-direct-split-research-20261104/` contains an experimental four-neighbor
-  source-line graph and generic fail-closed fragment-side checks. A prior graph
-  comparison found 515,685,972 of 515,685,972 Americas mainland cells matched the
-  current stage-2 mainland baseline, including ten fragment cells. A generic row
-  composition primitive is tested but not wired into the producer. This is not a
-  fresh end-to-end run, proof for other geometries, or historical V7 equivalence.
-- `mainland-source-recovery-20261104/` and `audit/` hold the research graph and
-  rasterization dependencies for that experiment. These are preserved alongside
-  it rather than replacing the separately maintained ocean implementation.
+- `panama-direct-split-research-20261104/` retains source-independent stream and
+  composition validation utilities. The unselected direct runner and planar
+  nearest-side comparator were removed; historic reports are not WGS84 results
+  and do not establish a selected boundary or current build parity.
+- `mainland-source-recovery-20261104/` and `audit/` hold separate research graph
+  and rasterization utilities; they do not replace the separately maintained
+  ocean implementation.
 
 The direct-split scripts retain workspace-relative names and pinned hashes. They
 need the matching physical components, witness resolution, decision export, and

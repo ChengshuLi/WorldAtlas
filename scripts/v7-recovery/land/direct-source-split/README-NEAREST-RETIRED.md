@@ -1,5 +1,5 @@
-# Nearest-side research paths disabled
+# Retired planar nearest-side experiments
 
-The experimental direct-source runner and old Panama direct runner/comparator are disabled before output because their former nearest-side selection used a planar longitude/latitude distance. Their `nearest_side` functions also fail closed if called directly. They are not part of the active WGS84 land pipeline, and no prior experimental result becomes a selected boundary by retaining these files.
+The direct-source and Panama nearest-side runners and their planar comparators have been removed. Their experimental outputs are not selected boundaries and must not be treated as WGS84 results.
 
-The old bounded window-reader and fresh-output verification utilities remain for research validation. Their graph/stream dependencies have not been retired until reviewed generic replacements are published and tested for parity. The generic full-grid comparator and compose utilities likewise remain independent. A future nearest-side method requires an independently reviewed WGS84 implementation, resource and ambiguity checks, and end-to-end validation before any runner is re-enabled. This change does not assert that those replacements or parity checks exist.
+The independent full-grid comparator, stream-reader checks, fresh-output verifier, and row-composition utilities remain available for research validation. They do not assign cells by nearest-side distance.

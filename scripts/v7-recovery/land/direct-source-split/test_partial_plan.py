@@ -1,11 +1,24 @@
 """Synthetic in-memory planner fixtures only."""
-import copy, unittest
-import test_direct_core as fixtures
+import copy, hashlib, json, unittest
 from partial_plan import plan
 
 class PartialPlanTest(unittest.TestCase):
  def fixture(self):
-  snapshot,witness,pins,grid=fixtures.DirectCoreTest().fixture()
+  line={'type':'LineString','coordinates':[[0.0,-2.0],[0.0,2.0]]}
+  h=hashlib.sha256(json.dumps(line,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+  snapshot={'source':'neon-export','decision_revision':{'id':'d','status':'draft','entity_revision':'e'},'entity_revision':{'id':'e','status':'draft'},
+   'mainland_component_rules':[{'rule_id':'r','region_id':'z','group_id':'g','inside_entity_id':1,'outside_entity_id':2,'execution_status':'selected_for_research','decision_revision':'d'}],
+   'seed_regions':[{'region_id':'z','execution_status':'selected_for_research','decision_revision':'d','segments':[{'kind':'boundary','id':'b','start':0,'end':2,'reverse':False}],'witnesses':[{'lon':-1,'lat':0,'inside':True},{'lon':1,'lat':0,'inside':False}]}],
+   'mainland_boundaries':[{'boundary_id':'b','execution_status':'selected_for_research','decision_revision':'d','method':'stored_linestring_v1','coordinate_reference':'OGC:CRS84','geometry_hash_method':'binary64-sorted-compact-geojson-v1','geometry_sha256':h,'geometry':line}],
+   'category_bindings':[{'entity_id':1,'physical_class':'land','code':31},{'entity_id':2,'physical_class':'land','code':32}]}
+  grid={'width':4,'height':4,'west':-2,'north':2,'step':1};pins={'component_rows':'a'*64,'component_runs':'b'*64}
+  witness={'schema':'mainland-witness-resolution-v1','status':'selected-research-identity-claims-not-mainland-proof','snapshot_sha256':'c'*64,'decision_revision':'d','entity_revision':'e','grid':grid,'input_sha256':pins,'groups':[{'group_id':'g','role':'mainland','component_id_current_generation_only':7,'target_entity_ids':[1,2]}]}
+  source={'source_id':'source','version':'test','sha256':'a'*64,'r2_bucket':'test-bucket','r2_key':'synthetic','size_bytes':1}
+  snapshot.update({'schema':'worldatlas-geography-decision-draft-evidence-v1','serialization':'worldatlas-canonical-json-v1','sources':[source],
+    'source_lineage_assets':[{**source,'kind':'raw','provider':'test','source_uri':'synthetic:test','provenance':{'representation':'provider_original','origin':'synthetic'}}],
+    'source_lineage_dependencies':[]})
+  snapshot['mainland_boundaries'][0]['provenance']={'source_refs':[{'source_id':'source','version':'test'}],'lineage_status':'incomplete'}
+  pins['component_rows']='a'*64
   snapshot['land_baseline_policy']={'region_ids':['z','other'],'boundary_ids':['b','q'],'route_ids':['target-closure'],'mainland_rule_ids':['r','r2']}
   snapshot['seed_regions'][0]['segments'].append({'kind':'route','id':'target-closure','start':0,'end':2,'reverse':False})
   snapshot['seed_regions'].append({'region_id':'other','segments':[{'kind':'boundary','id':'q','start':0,'end':2,'reverse':False}]})
