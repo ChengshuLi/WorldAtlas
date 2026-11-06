@@ -233,6 +233,8 @@ def main():
     if is_shared:
         try:
             edges = shared.centers_for_crop((rows,runs), (lr,lu), shore_bounds, W, H, STEP, [p[1] for p in pairs])
+            if shore_bounds!=full_shore_bounds:
+                edges=wrapped_bounds.baseline_shore_order(edges,full_shore_bounds,W,STEP)
             indexes = shared.make_indexes(edges, pairs)
         except ValueError as exc:
             if shore_bounds==full_shore_bounds or not (str(exc)=='no participant shorelines in crop' or str(exc).startswith('crop has no shoreline for participant land code ')):
@@ -303,7 +305,7 @@ def main():
                                  'bounds_columns_rows':[x0,x1,y0,y1]},
                 'algorithm_sha256':builder_code_sha,
                 'nearest_assignment_audit': {'shore_method':('wgs84-wrapped-certified-with-streamed-full-fallback-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'), 'shore_crop':shore_bounds,'coastal_center_count':len(edges['mids']),'coastal_center_count_scope':'indexed-shore-crop',
-                    **({'full_shore_crop':full_shore_bounds,'full_streamed_shore_count':'not-precomputed','index_optimization':'certified-wrapped-crop-with-streamed-full-shore-fallback','wrapped_narrow_cells':classifier.narrow_cells,'wrapped_fallback_cells':classifier.fallback_cells,'wrapped_bounds_sha256':wrapped_code_sha,'streamed_fallback_sha256':fallback_code_sha} if shore_bounds!=full_shore_bounds else {}),
+                    **({'full_shore_crop':full_shore_bounds,'full_streamed_shore_count':'not-precomputed','index_optimization':'certified-wrapped-crop-with-streamed-full-shore-fallback','shore_order':'original-full-crop-row-column-order','wrapped_narrow_cells':classifier.narrow_cells,'wrapped_fallback_cells':classifier.fallback_cells,'wrapped_bounds_sha256':wrapped_code_sha,'streamed_fallback_sha256':fallback_code_sha} if shore_bounds!=full_shore_bounds else {}),
                     'certified_bound_cells':certified,'exact_distance_cells':exact,
                     'shared_nearest_sha256':shared_code_sha,
                     'shore_geometry_sha256':shared_code_sha} if is_shared else None,

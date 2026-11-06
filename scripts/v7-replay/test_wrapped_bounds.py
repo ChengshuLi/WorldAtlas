@@ -28,6 +28,12 @@ class TestBounds(unittest.TestCase):
   c=w.StreamedWrappedClassifier(classify,stream,(33,39,6,12),(0,36,0,18),36,18,10,[],0,{'x':1},lambda code:())
   self.assertEqual(c.classify(np.array([0.]),np.array([0.]))[0].tolist(),[3]);self.assertEqual(c.classify(np.array([1.]),np.array([0.]))[0].tolist(),[4]);self.assertEqual(len(calls),1);self.assertEqual((c.narrow_cells,c.fallback_cells),(1,1))
   with self.assertRaisesRegex(ValueError,'invalid query'):c.classify(np.array([2.]),np.array([0.]))
+ def test_wrapped_order_matches_original_full_crop_order(self):
+  rng=np.random.default_rng(93);ph=np.where(rng.random((H,W))<.35,17,1).astype('u4');land=np.where(ph==17,rng.choice([18,20],size=(H,W)),0).astype('u4');P,L=rle(ph),rle(land);narrow=(34,38,2,16)
+  for full_bounds in ((0,W,2,16),(-3,3,2,16)):
+   full=s.centers_for_crop(P,L,full_bounds,W,H,STEP,[18,20]);cut=s.centers_for_crop(P,L,narrow,W,H,STEP,[18,20]);ordered=w.baseline_shore_order(cut,full_bounds,W,STEP)
+   col=np.rint((full['lon']+180)/STEP-.5).astype(np.int64)%W;subset=(col-narrow[0])%W<narrow[1]-narrow[0]
+   for key in ('lat','lon','category','mids'):self.assertTrue(np.array_equal(ordered[key],full[key][subset]),(full_bounds,key))
  def test_streamed_blocks_match_full_order_and_values(self):
   rng=np.random.default_rng(33);ph=np.where(rng.random((H,W))<.35,17,1).astype('u4');land=np.where(ph==17,rng.choice([18,20],size=(H,W)),0).astype('u4');P,L=rle(ph),rle(land)
   for bounds in ((0,W,0,H),(33,39,0,H)):

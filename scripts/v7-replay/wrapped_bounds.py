@@ -77,3 +77,13 @@ def shore_blocks(shared,physical,land,bounds,width,height,step,code,rows_per_chu
    yield shared.centers_for_crop(physical,land,(xa,xb,first,min(first+rows_per_chunk,yb)),width,height,step,[code])
   except ValueError as exc:
    if str(exc)!='no participant shorelines in crop':raise
+
+def baseline_shore_order(centers,full_bounds,width,step):
+ """Match full-crop row/column enumeration before constructing a wrapped tree."""
+ import numpy as np
+ lon=centers['lon'];lat=centers['lat']
+ if lon.shape!=lat.shape or lat.ndim!=1 or width<=0 or not math.isfinite(step) or step<=0:raise ValueError('invalid shoreline centers')
+ cols=np.rint((lon+180)/step-.5).astype(np.int64)%width
+ offset=(cols-full_bounds[0])%width
+ order=np.lexsort((offset,-lat))
+ return {key:value[order] for key,value in centers.items()}
