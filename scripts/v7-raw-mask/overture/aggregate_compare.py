@@ -24,6 +24,28 @@ def open_mask(entry,grid):
     if not actual.IsSame(expected):raise ValueError(f'CRS mismatch: {path}')
     return ds
 
+def union_mask(ds, water, y):
+    """Union a mask, skipping only GeoTIFF blocks guaranteed to read as zero."""
+    width=water.shape[1];rows=water.shape[0];band=ds.GetRasterBand(1)
+    nodata=band.GetNoDataValue()
+    if ds.RasterCount != 1:raise ValueError('candidate mask must have one band')
+    if (ds.GetDriver().ShortName != 'GTiff' or band.DataType != gdal.GDT_Byte or
+            nodata not in (None,0) or not hasattr(band,'GetDataCoverageStatus')):
+        windows=[(0,width)]
+    else:
+        block_width,_=band.GetBlockSize()
+        windows=[]
+        for x in range(0,width,block_width):
+            n=min(block_width,width-x)
+            flags,_=band.GetDataCoverageStatus(x,y,n,rows)
+            if flags != gdal.GDAL_DATA_COVERAGE_STATUS_EMPTY:
+                windows.append((x,n))
+    for x,n in windows:
+        arr=band.ReadAsArray(x,y,n,rows)
+        if np.any((arr != 0) & (arr != 1)):raise ValueError('nonbinary candidate input')
+        view=water[:,x:x+n]
+        np.bitwise_or(view,arr,out=view)
+
 def verify_lineage(cfg, grid):
     """Bind every raster and report to one complete, pinned raw-source manifest."""
     spec=cfg.get('source_manifest')
@@ -85,9 +107,7 @@ def run(config_path,output):
             if shutil.disk_usage(output).free<reserve:raise ValueError('free disk below configured reserve; partial output preserved')
             n=min(rows_per_block,h-y);water=np.zeros((n,w),dtype=np.uint8)
             for ds in masks:
-                arr=ds.ReadAsArray(0,y,w,n)
-                if np.any((arr != 0) & (arr != 1)):raise ValueError('nonbinary candidate input')
-                np.bitwise_or(water,arr,out=water)
+                union_mask(ds,water,y)
             old=ref.ReadAsArray(0,y,w,n) if ref else None
             if old is not None and np.any((old != 0) & (old != 1)):raise ValueError('nonbinary reference')
             candidate+=int(np.count_nonzero(water))

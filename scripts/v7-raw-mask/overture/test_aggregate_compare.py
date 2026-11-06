@@ -24,6 +24,30 @@ class AggregateTests(unittest.TestCase):
         p=self.inputs/(name+'.tif');ds=gdal.GetDriverByName('GTiff').Create(str(p),8,4,1,gdal.GDT_Byte)
         ds.SetGeoTransform((-180,45,0,90,0,-45));s=osr.SpatialReference();s.ImportFromEPSG(4326);ds.SetSpatialRef(s);ds.GetRasterBand(1).WriteArray(array);ds=None
         return {'path':str(p),'sha256':c.sha(p)}
+    def test_sparse_union_matches_full_read_across_block_boundaries(self):
+        path=self.inputs/'sparse.tif'
+        ds=gdal.GetDriverByName('GTiff').Create(str(path),64,48,1,gdal.GDT_Byte,
+            options=['TILED=YES','BLOCKXSIZE=16','BLOCKYSIZE=16','SPARSE_OK=YES'])
+        values=np.zeros((48,64),dtype=np.uint8);values[5:19,14:19]=1;values[36:40,50:55]=1
+        ds.GetRasterBand(1).WriteArray(values[5:19,14:19],14,5)
+        ds.GetRasterBand(1).WriteArray(values[36:40,50:55],50,36)
+        ds.FlushCache();ds=None;ds=gdal.Open(str(path))
+        expected=np.zeros_like(values);expected[:,3]=1;actual=expected.copy()
+        for y in range(0,48,7):c.union_mask(ds,actual[y:y+7],y)
+        np.bitwise_or(expected,values,out=expected)
+        np.testing.assert_array_equal(actual,expected)
+
+    def test_sparse_union_reads_nonzero_nodata_and_rejects_nonbinary(self):
+        path=self.inputs/'nodata.tif'
+        ds=gdal.GetDriverByName('GTiff').Create(str(path),32,16,1,gdal.GDT_Byte,
+            options=['TILED=YES','BLOCKXSIZE=16','BLOCKYSIZE=16','SPARSE_OK=YES'])
+        ds.GetRasterBand(1).SetNoDataValue(1);ds=None;ds=gdal.Open(str(path))
+        actual=np.zeros((16,32),dtype=np.uint8);c.union_mask(ds,actual,0)
+        np.testing.assert_array_equal(actual,ds.ReadAsArray());self.assertTrue(np.all(actual==1));ds=None
+        ds=gdal.Open(str(path),gdal.GA_Update);ds.GetRasterBand(1).WriteArray(np.array([[2]],dtype=np.uint8),0,0);ds=None
+        ds=gdal.Open(str(path));actual.fill(0)
+        with self.assertRaisesRegex(ValueError,'nonbinary'):c.union_mask(ds,actual,0)
+
     def test_exact_comparison(self):
         out=self.d/'out';c.run(self.config,out);r=json.loads((out/'report.json').read_text())
         self.assertEqual((r['candidate_water_cells'],r['reference_water_cells'],r['candidate_extra_cells'],r['candidate_missing_cells']),(4,4,1,1))
