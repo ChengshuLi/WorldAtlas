@@ -41,6 +41,11 @@ class CenterSearch(unittest.TestCase):
   bounds=(4,7,88,91);pair=[(1,17,1)];v=s.centers_for_crop(rle(p),rle(l),bounds,360,180,1,[17]);idx=s.make_indexes(v,pair)
   with self.assertRaisesRegex(ValueError,'outside crop'):
    s.classify([.5],[-170],bounds,360,180,1,pair,1e-5,idx)
+ def test_ignores_bad_land_codes_on_physical_water_cells(self):
+  p=np.ones((5,5),dtype=np.uint32);l=np.zeros_like(p)
+  p[2,2]=17;l[2,2]=17;l[2,3]=255
+  v=s.centers_for_crop(rle(p),rle(l),(0,5,0,5),5,5,72,[17])
+  self.assertEqual(list(zip(v['lat'],v['lon'])),[( -90.0,0.0)])
  def test_diagonal_contact_not_coastal(self):
   p=np.full((180,360),17,dtype=np.uint32);l=np.full_like(p,17)
   p[88,4]=1;l[88,4]=0

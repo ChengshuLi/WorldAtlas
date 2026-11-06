@@ -97,6 +97,9 @@ def centers_for_crop(physical, land, bounds, width, height, step, land_codes):
     x0,x1,y0,y1=bounds
     if not (0<=y0<y1<=height and 0<x1-x0<=width and math.isfinite(step) and step>0):raise ValueError('invalid crop')
     latitudes=[];longitudes=[];categories=[];count=0
+    allowed_physical=np.zeros(23,dtype=bool);allowed_physical[[1,17]]=True
+    allowed_land=np.zeros(23,dtype=bool);allowed_land[17:23]=True
+    selected_land=np.zeros(23,dtype=bool);selected_land[land_codes]=True
     for y in range(y0,y1):
         mid=crop(*physical,y,x0,x1,width)
         l=crop(*land,y,x0,x1,width)
@@ -105,14 +108,17 @@ def centers_for_crop(physical, land, bounds, width, height, step, land_codes):
             right=np.r_[mid[1:],crop(*physical,y,x1,x1+1,width)]
         else:left=np.roll(mid,1);right=np.roll(mid,-1)
         p=np.r_[left,mid,right]
-        if np.any(~np.isin(p,[1,17])) or np.any((mid==17)&~np.isin(l,range(17,23))):raise ValueError('invalid physical or land row')
+        if np.any((p<0)|(p>=23)) or np.any(~allowed_physical[p]):raise ValueError('invalid physical or land row')
+        land_safe=np.clip(l,0,22)
+        land_invalid=(l<0)|(l>=23)
+        if np.any((mid==17)&(land_invalid|~allowed_land[land_safe])):raise ValueError('invalid physical or land row')
         wet=(left==1)|(right==1)
         for ny in (y-1,y+1):
             if 0<=ny<height:
                 pn=crop(*physical,ny,x0,x1,width)
-                if np.any(~np.isin(pn,[1,17])):raise ValueError('invalid neighboring physical row')
+                if np.any((pn<0)|(pn>=23)) or np.any(~allowed_physical[pn]):raise ValueError('invalid neighboring physical row')
                 wet|=pn==1
-        ix=np.flatnonzero((mid==17)&np.isin(l,land_codes)&wet)
+        ix=np.flatnonzero((mid==17)&selected_land[land_safe]&wet)
         count+=len(ix)
         if len(ix):
             latitudes.append(np.full(len(ix),90-(y+.5)*step))
