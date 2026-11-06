@@ -73,10 +73,11 @@ def assemble(snapshot,snapshot_sha,entries,root,out,width,height,allow_selected_
       or any(type(x) is not int for x in cols+rows)):
    raise ValueError('tile metadata mismatch')
   lineage={k:m.get(k) for k in ('inputs','algorithm_sha256','core_sha256','shore_sha256','geometry_sha256')}
+  if 'accelerator_sha256' in m:lineage['accelerator_sha256']=m['accelerator_sha256']
   valid_sha=lambda v:isinstance(v,str) and len(v)==64 and all(c in '0123456789abcdef' for c in v)
   pins=lineage['inputs'];required_pins={'physical_rows_sha256','physical_runs_sha256','physical_report_sha256','land_rows_sha256','land_runs_sha256','land_report_sha256'}
   if (not isinstance(pins,dict) or set(pins)!=required_pins or not all(valid_sha(v) for v in pins.values())
-      or not all(valid_sha(lineage[k]) for k in ('algorithm_sha256','core_sha256','shore_sha256','geometry_sha256'))):
+      or not all(valid_sha(v) for k,v in lineage.items() if k!='inputs')):
    raise ValueError('tile lineage is incomplete')
   if baseline is None:baseline=lineage
   elif baseline!=lineage:raise ValueError('mixed coastal input lineage or algorithms')
@@ -110,3 +111,4 @@ def main():
  print(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'assigned_cells':result['assigned_cells']}))
 
 if __name__=='__main__':main()
+

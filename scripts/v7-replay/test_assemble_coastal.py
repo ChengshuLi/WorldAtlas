@@ -35,8 +35,18 @@ class AssemblyTest(unittest.TestCase):
   self.write(1,lambda m:m['inputs'].update(land_rows_sha256='b'*64))
   with (self.root/'0/tile.gz').open('ab') as f:f.write(b'x')
   with self.assertRaises((ValueError,OSError,EOFError)):self.call()
+ def test_accelerator_pins_are_carried_and_must_match(self):
+  self.write(0,lambda m:m.update(accelerator_sha256='1'*64));self.write(1,lambda m:m.update(accelerator_sha256='1'*64))
+  self.assertEqual(self.call()['algorithm_pins']['accelerator_sha256'],'1'*64)
+  self.write(1,lambda m:m.update(accelerator_sha256='2'*64))
+  with self.assertRaisesRegex(ValueError,'mixed'):self.call()
+  self.write(1,lambda m:m.pop('accelerator_sha256'))
+  with self.assertRaisesRegex(ValueError,'mixed'):self.call()
+  self.write(1,lambda m:m.update(accelerator_sha256='z'*64))
+  with self.assertRaisesRegex(ValueError,'incomplete'):self.call()
  def test_unselected_fails_even_with_optin(self):
   self.s['policies'][0]['evidence']['execution_status']='research_only_not_selected'
   with self.assertRaisesRegex(ValueError,'selected draft'):self.call()
 
 if __name__=='__main__':unittest.main()
+
