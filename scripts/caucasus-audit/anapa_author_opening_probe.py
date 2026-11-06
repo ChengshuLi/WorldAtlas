@@ -1,11 +1,11 @@
-"""Screen the author's coastal approach joined at the first selected-line intersection.
+"""Screen the author's coastal approach joined at a selected-line intersection.
 
 Research geometry only: does not establish flow direction or select a boundary.
 The OSM extracts are spatially incomplete; missing ways are reported.
 """
+import argparse
 import hashlib
 import json
-import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -18,7 +18,7 @@ def length(line):
     return Geod(ellps='WGS84').line_length(*zip(*line.coords))
 
 
-def main(selected_path, author_path, *extracts):
+def main(selected_path, author_path, extracts, join_index):
     selected = LineString(json.loads(Path(selected_path).read_bytes())['coordinates'])
     author = LineString(json.loads(Path(author_path).read_bytes())['features'][462]['geometry']['coordinates'])
     # Intersection with the archived OSM coastline; see CAUCASUS-AUDIT-SYNTHESIS.md.
@@ -30,7 +30,10 @@ def main(selected_path, author_path, *extracts):
     points = [p for p in points if p.geom_type == 'Point' and author.project(p) < author.project(coast)]
     if not points:
         raise ValueError('no intersection')
-    join = min(points, key=selected.project)
+    points.sort(key=selected.project)
+    if not 0 <= join_index < len(points):
+        raise ValueError('join index out of range')
+    join = points[join_index]
     candidate = substring(author, author.project(join), author.project(coast))
     candidate = LineString(list(candidate.coords)[::-1])
     old = substring(selected, 0, selected.project(join))
@@ -74,6 +77,7 @@ def main(selected_path, author_path, *extracts):
     inputs = [{'name': Path(p).name, 'sha256': hashlib.sha256(Path(p).read_bytes()).hexdigest()}
               for p in (selected_path, author_path, *extracts)]
     print(json.dumps({'selected_opening_m': length(old), 'candidate_opening_m': length(candidate),
+                      'join_index_zero_based': join_index,
                       'join': [join.x, join.y], 'coast': [coast.x, coast.y],
                       'source_sha256': inputs, 'mapped_coast_ways': sorted('/'.join(x) for x in coast_ways),
                       'candidate_simple': candidate.is_simple, 'full_line_simple': full.is_simple,
@@ -85,4 +89,11 @@ def main(selected_path, author_path, *extracts):
 
 
 if __name__ == '__main__':
-    main(*sys.argv[1:])
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--join-index', type=int, default=0,
+                   help='zero-based intersection order along selected line')
+    p.add_argument('selected')
+    p.add_argument('author')
+    p.add_argument('extracts', nargs='+')
+    a = p.parse_args()
+    main(a.selected, a.author, a.extracts, a.join_index)

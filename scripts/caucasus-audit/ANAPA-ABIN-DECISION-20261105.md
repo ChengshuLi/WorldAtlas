@@ -80,3 +80,53 @@ Extracted DSM/MSK/STK SHA-256 values are respectively
 The candidate and selected cut files used hash to
 `9f3b4a04cf08e1f03b881fd66ca2f133993a3e2cb8182e045dd8448740a75b59` and
 `a938b95f00723f2fd9cbe8d334f4f61ed6af70e5088e364c59ac402706900e8a`.
+
+## Improved Anapa join and raw-source assembly (2026-11-06)
+
+The fifth intersection in selected-line order, at 37.42406995874469 E,
+44.84168781056519 N, is a stronger candidate than the first intersection
+discussed above. The source-backed coastal opening is 11,809.93 m, replacing
+14,328.43 m of the selected opening. It joins the retained source exactly,
+has no other intersection with it, and yields a simple complete line.
+
+Quality-screened original JAXA at 100 m stations gives center-high profiles at
+70/111 valid candidate stations (8 invalid), versus 19/141 valid selected
+stations (3 invalid) at 100 m offsets. At 250 m offsets the counts are 80/92
+valid (27 invalid) versus 34/138 valid (6 invalid). At 250 m offsets, all six
+samples 100, 200 and 300 m on both sides of the proposed join are center-high.
+At 100 m offsets four of six are center-high and two are slope-like. This is
+surface evidence, not proof of drainage, and the high invalid counts near sea
+make aggregate comparisons conditional on valid samples.
+
+The union of seven dated OSM map-extract bounding boxes covers this candidate
+opening. Across 38 complete mapped water-way versions the candidate has no
+intersection; the selected line crosses the Anapka river-water polygon.
+OSM relations and unmapped/seasonal channels are not validated. Two additional
+public OSM map API responses were fetched for this research check: bbox
+37.36,44.825,37.44,44.86 SHA-256
+`429675ea1e2831833968dcef598806614612ce93fc7bb3bf14bb0f33502a791d`,
+and bbox 37.345,44.805,37.38,44.825 SHA-256
+`c59ad28b09c2f33d2043cc6480be04f4283d5e2fc73ebff4714d0a35125da338`.
+Their source is https://www.openstreetmap.org/copyright; they were used for
+screening and are not selected raw inputs.
+
+`caucasus_anapa_candidate_assembly.py` constructs the proposed complete line
+from the compact recipe currently stored in Neon, the archived HydroBASINS ZIP,
+the archived author GeoJSON and the archived OSM coastline extract. It selects
+author feature 462, coastline way 396539058 version 2, and the fifth source
+intersection, while checking input pins, source geometry, uniqueness and
+simplicity. The three raw R2 objects were independently read back and hashed:
+HydroBASINS `21797d53e0792cae047d25f0c3cfb570c7ef43700ec962b35b2ac92467e29f03`,
+author `c9d56b1291522573fbb8b0baa1a39cecfd192eda8f5e51650b24f562d13688e6`,
+and coastline extract `66c3c6a36802cf08e70d65c8119c285bf5f88c90b4e3320e0c96e352779515`.
+The last is R2 key `sources/osm/anapa/shingari-mouth-20261105-66c3c6a36802.osm`.
+The resulting 2,320-vertex candidate SHA-256 is
+`e3dd7f326c0247f4d9f4c4c61b7c31782a5fc1b9e850d164cf46e729cbb60929`.
+A modified coastline file was rejected before output. Execution requires an
+isolated no-site Python with explicitly supplied Shapely, PyProj and pyshp.
+Exact bytes are pinned and differing toolchains fail closed.
+
+This is a preferred correction candidate, not an independent survey or a
+selection in Neon. The changed coast endpoint requires new closure/region
+decisions before a complete global snapshot can use it. The current Neon
+boundary and recipe remain unchanged.
