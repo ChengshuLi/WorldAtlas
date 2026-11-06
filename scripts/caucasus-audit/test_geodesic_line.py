@@ -1,5 +1,5 @@
 import unittest
-from geodesic_line import GeodesicLine,distance,GEOD
+from geodesic_line import GeodesicLine,distance,GEOD,closest_line,closest_segment
 
 class LineTests(unittest.TestCase):
     def test_nearest_and_side(self):
@@ -21,6 +21,23 @@ class LineTests(unittest.TestCase):
     def test_equal_nearest_edges_are_flagged(self):
         line=GeodesicLine([(-.01,0),(-.01,.02),(.01,.02),(.01,0)])
         self.assertTrue(line.closest((0,.005))["ambiguous"])
+
+    def test_equal_nearest_source_lines_are_flagged(self):
+        lines=[GeodesicLine([(-.01,0),(.01,0)]),
+               GeodesicLine([(-.01,.01),(.01,.01)])]
+        result=closest_line(lines,(0,.005))
+        self.assertTrue(result['ambiguous'])
+        self.assertEqual(result['source_index'],0)
+
+    def test_shared_nearest_point_on_source_lines_is_not_ambiguous(self):
+        line=GeodesicLine([(-.01,0),(.01,0)])
+        result=closest_line([line,line],(0,.005))
+        self.assertFalse(result['ambiguous'])
+
+    def test_geodesic_segment_minimum_preserves_coordinate_linear_fraction(self):
+        result=closest_segment([(0,60),(2,60)],(1,60.01))
+        self.assertAlmostEqual(result['coordinate_fraction'],.5,places=7)
+        self.assertAlmostEqual(result['distance_m'],1114.1237,delta=.1)
 
     def test_zero_length_rejected(self):
         with self.assertRaises(ValueError):GeodesicLine([(0,0),(0,0)])

@@ -15,6 +15,19 @@ PR4 branch head when this handoff was prepared: `2bf97aab2afddde93e503802921bb20
 | caucasus_unmatched_edge_screen.py | `7ed358da98c50c9faaff09f5fd674b259d675b3887c7545faaeaf16c44838a0f` |
 | test_caucasus_gdal_handoff.py | `7bd3bf83d6c60b03894082e17d71983462edbb12724e61529815e5cade1afca5` |
 
+The table above is the historical handoff pin set at `2bf97aab`. The WGS84 follow-up updates these current code files (SHA-256):
+
+| Updated code file | SHA-256 |
+| --- | --- |
+| `geodesic_line.py` | `60a60f8f452cb0c0e0f9ed0e5021c97164c81c18ce072d3ef73968ab87ba44ae` |
+| `caucasus_author_transition_screen.py` | `59268fdf458c4714ced137d2abbd6a82fd4aafcf2dfd1077f94e9b1fb29758aa` |
+| `caucasus_endpoint_osm_screen.py` | `a238d2c467ae0c9c690cf6e1041d442745acfa04f9752d9754a587276682cff9` |
+| `caucasus_unmatched_edge_screen.py` | `9d88d697c067ff87748b7c211ace2921c06fad839c4e2d405ca5d11bd48147dc` |
+| `caucasus_selector_recipe.py` | `0e85648c4e20129ec3054a814acea3c25c63b7c3d61f773f20f07751fb5b9f13` |
+| `test_geodesic_line.py` | `5bca7da3371db0179e87e429da205ef0f430123c53e602d2981dc2bc695e6aaa` |
+
+The solver uses a 0.02 m numerical search/tie tolerance; results within that tolerance of a threshold are uncertain. The existing screen, selector, compact-recipe and derived-geometry hashes below are historical outputs for the pinned guide, not refreshed results for the current selected Neon geometry. This integration did not export or authenticate the current selected Neon geometry, and no resulting selector artifacts were regenerated. Do not treat those artifacts or their hashes as current. The reproduction commands and compact/derived-output pins below describe the historical run; recompute them after exporting and authenticating the intended Neon snapshot, and do not reuse the old pins as current expectations.
+
 Obtain and verify the provider source bytes already in R2:
 
 * `sources/hydrosheds/hydrobasins/standard/europe/level-12/v1c/hybas_eu_lev12_v1c-21797d53e079.zip`, SHA-256 `21797d53e0792cae047d25f0c3cfb570c7ef43700ec962b35b2ac92467e29f03`.

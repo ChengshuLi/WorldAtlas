@@ -2,9 +2,8 @@
 import argparse
 import json
 import xml.etree.ElementTree as ET
-from pyproj import Geod
 from shapely.geometry import LineString, Point
-from shapely.ops import nearest_points
+from geodesic_line import GeodesicLine
 
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('--line', required=True)
@@ -25,8 +24,9 @@ if tags.get('natural') != 'coastline':
     raise ValueError('specified way is not tagged coastline')
 refs = [nd.get('ref') for nd in way.findall('nd')]
 shape = LineString([nodes[ref] for ref in refs])
-near = nearest_points(point, shape)[1]
-distance = Geod(ellps='WGS84').inv(point.x, point.y, near.x, near.y)[2]
+closest = GeodesicLine(list(shape.coords)).closest((point.x, point.y))
+near = closest['point']
 print(json.dumps({'index': a.index, 'way': a.way, 'version': way.get('version'),
-                  'timestamp': way.get('timestamp'), 'nearest': [near.x,near.y],
-                  'wgs84_chord_m': distance}, indent=2))
+                  'timestamp': way.get('timestamp'), 'nearest': [near[0],near[1]],
+                  'wgs84_geodesic_line_distance_m': closest['distance_m'],
+                  'nearest_search_ambiguous': closest['ambiguous']}, indent=2))

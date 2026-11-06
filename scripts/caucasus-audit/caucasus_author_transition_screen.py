@@ -2,9 +2,8 @@
 import argparse
 import hashlib
 import json
-from pyproj import Geod
 from shapely.geometry import LineString, Point
-from shapely.ops import nearest_points
+from geodesic_line import GeodesicLine, GEOD
 
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('--selected', required=True)
@@ -23,16 +22,17 @@ if hashlib.sha256(raw).hexdigest() != 'c9d56b1291522573fbb8b0baa1a39cecfd192eda8
     raise ValueError('author source hash mismatch')
 author = json.loads(raw)['features'][463]['geometry']['coordinates']
 selected = line['coordinates']
-geod = Geod(ellps='WGS84')
 for index, author_index in [(1893, 0), (2291, 397)]:
     point = Point(selected[index])
     source_edge = LineString(author[author_index:author_index+2])
-    nearest = nearest_points(point, source_edge)[1]
+    closest = GeodesicLine(list(source_edge.coords)).closest((point.x, point.y))
+    nearest = Point(closest['point'])
     result = {'selected_index': index, 'author_edge_start': author_index,
-              'distance_to_angular_closest_wgs84_m': geod.inv(point.x, point.y, nearest.x, nearest.y)[2],
+              'distance_to_wgs84_line_minimum_m': closest['distance_m'],
+              'nearest_search_ambiguous': closest['ambiguous'],
               'author_edge_fraction_angular': source_edge.project(nearest, normalized=True)}
     selected_edge = LineString(selected[1893:1895] if index == 1893 else selected[2290:2292])
     for epsilon in [1e-9, 1e-8, 1e-7]:
         remaining = selected_edge.difference(source_edge.buffer(epsilon))
-        result['uncovered_m_at_angular_tolerance_' + str(epsilon)] = geod.geometry_length(remaining)
+        result['uncovered_m_at_angular_tolerance_' + str(epsilon)] = GEOD.geometry_length(remaining)
     print(json.dumps(result, indent=2))

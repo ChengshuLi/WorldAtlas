@@ -1,13 +1,16 @@
-"""Screen unmatched vertices against HydroBASINS coordinate-linear edges."""
+"""Screen unmatched vertices against a bounded HydroBASINS edge subset.
+
+The reported minimum is WGS84 distance to coordinate-linear edges within the
+local candidate subset; the bounding-box prefilter is a screen, not proof of a
+global nearest edge.
+"""
 import json
 import hashlib
 import argparse
 import shapefile
 from collections import defaultdict
-from pyproj import Geod
 from shapely.geometry import LineString, Point
-from shapely.ops import nearest_points
-from shapely.strtree import STRtree
+from geodesic_line import GeodesicLine, closest_line
 
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('--selected', required=True)
@@ -46,17 +49,18 @@ for geom in reader.iterShapes():
     for begin, end in zip(bounds, bounds[1:]):
         if end-begin >= 2:
             source_shapes.append(LineString(geom.points[begin:end]))
-tree = STRtree(source_shapes)
-geod = Geod(ellps='WGS84')
+source_lines = [GeodesicLine(list(shape.coords)) for shape in source_shapes]
 records = []
 for i in unmatched:
-    pt = Point(points[i]); edge = source_shapes[int(tree.nearest(pt))]
-    closest = nearest_points(pt, edge)[1]
-    metres = geod.inv(pt.x, pt.y, closest.x, closest.y)[2]
-    records.append({'index':i,'lon':pt.x,'lat':pt.y,'nearest_coordinate':[closest.x,closest.y],'nearest_edge_wgs84_m':metres,
-                    'nearest_edge_angular_degrees': pt.distance(closest)})
+    pt = Point(points[i])
+    closest = closest_line(source_lines, (pt.x, pt.y))
+    coordinate = closest['point']
+    records.append({'index':i,'lon':pt.x,'lat':pt.y,'nearest_coordinate':list(coordinate),
+                    'nearest_edge_wgs84_m':closest['distance_m'],
+                    'nearest_edge_numerically_ambiguous':closest['ambiguous'],
+                    'source_edge_index':closest['source_index']})
 with open(args.output,'x',encoding='utf-8') as f:
     json.dump({'unmatched':len(records),'records':records},f,indent=2)
 for threshold in [0.001,0.01,0.1,1,10,100,1000]:
-    print('nearest <=',threshold,'m:',sum(r['nearest_edge_wgs84_m'] <= threshold for r in records))
+    print('local WGS84 candidate distance <=',threshold,'m:',sum(r['nearest_edge_wgs84_m'] <= threshold for r in records))
 print('records',len(records),'first',records[:3],'last',records[-3:])

@@ -25,6 +25,23 @@ def interpolate(a,b,t):
     return (a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t)
 
 
+def coordinate_fraction(a,b,point):
+    """Recover the coordinate-linear parameter of a point on one source edge."""
+    dx=b[0]-a[0];dy=b[1]-a[1]
+    if dx==0 and dy==0:raise ValueError('zero-length coordinate edge')
+    t=(point[0]-a[0])/dx if abs(dx)>=abs(dy) else (point[1]-a[1])/dy
+    return max(0.0,min(1.0,t))
+
+
+def closest_segment(coords,point):
+    """Return an exact WGS84 minimum and coordinate-linear fraction on one edge."""
+    if len(coords)!=2:raise ValueError('one source edge required')
+    line=GeodesicLine(coords)
+    result=line.closest(point)
+    result['coordinate_fraction']=coordinate_fraction(coords[0],coords[1],result['point'])
+    return result
+
+
 class GeodesicLine:
     def __init__(self,coords):
         self.segments=[];station=0.0
@@ -71,3 +88,28 @@ class GeodesicLine:
         signed=math.sin(math.radians(toward-forward))
         if distance(p,point)<=SEARCH_TOLERANCE_M or abs(signed)<1e-12:return 'on'
         return 'right' if signed>0 else 'left'
+
+
+def closest_line(lines,point):
+    """Find the closest coordinate-linear source line by WGS84 distance.
+
+    Ties within the line solver's tolerance are marked ambiguous when the
+    candidate nearest points are more than one metre apart.
+    """
+    candidates=[]
+    for index,line in enumerate(lines):
+        result=line.closest(point)
+        candidates.append((result['distance_m'],index,result))
+    if not candidates:raise ValueError('no source lines')
+    candidates.sort(key=lambda item:(item[0],item[1]))
+    best=candidates[0]
+    bx,by=best[2]['point']
+    ambiguous=best[2]['ambiguous']
+    for distance_m,index,result in candidates[1:]:
+        if distance_m>best[0]+SEARCH_TOLERANCE_M:break
+        x,y=result['point']
+        if distance((bx,by),(x,y))>1.0:
+            ambiguous=True
+            break
+    return {'distance_m':best[0],'source_index':best[1],
+            'point':best[2]['point'],'ambiguous':ambiguous}

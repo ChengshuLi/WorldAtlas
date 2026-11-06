@@ -8,6 +8,7 @@ import json
 import shapefile
 from shapely.geometry import LineString, Point
 from shapely.strtree import STRtree
+from geodesic_line import closest_segment
 
 
 def sha(path):
@@ -48,16 +49,19 @@ if len(vertex_refs)!=1751:raise ValueError('missing exact source vertices')
 tree=STRtree(rings);edge_refs={}
 for i,r in interior.items():
     pt=Point(r['nearest_coordinate']);candidates=[]
-    for j in tree.query(pt.buffer(1e-8)):
+    # This broad local query only prunes; every edge ranking below uses the
+    # exact WGS84 minimum. The screen is intentionally bounded to the local
+    # source subset and is not a global-nearest search.
+    for j in tree.query(pt.buffer(.03)):
         shape_i,begin,coords=ring_meta[int(j)]
         for k,(u,v) in enumerate(zip(coords,coords[1:])):
-            seg=LineString([u,v]);dist=seg.distance(pt)
-            if dist<=1e-10:
-                t=seg.project(pt,normalized=True)
-                candidates.append((dist,shape_i,begin+k,t))
+            if u==v:continue
+            result=closest_segment([u,v],(pt.x,pt.y))
+            if result['distance_m']<=.001:
+                candidates.append((result['distance_m'],shape_i,begin+k,result['coordinate_fraction']))
     if not candidates:raise ValueError('no matching source segment for '+str(i))
     best=min(x[0] for x in candidates)
-    _,shape_i,point_i,t=min((x for x in candidates if x[0]<=best+1e-12),key=lambda x:(x[1],x[2]))
+    _,shape_i,point_i,t=min((x for x in candidates if x[0]<=best+1e-6),key=lambda x:(x[1],x[2]))
     edge_refs[i]=[shape_i,point_i,t]
 selectors=[]
 for i in range(1,1894):
