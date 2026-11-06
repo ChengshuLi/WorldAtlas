@@ -15,7 +15,7 @@ import sys
 
 import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from exclusive_outputs import create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, write_json_exclusive
+from exclusive_outputs import create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, write_json_exclusive, validate_fresh_output
 from decision_snapshot import read_snapshot, participant_water_codes, find_basin, find_source
 from seavox_properties import feature_id as read_feature_id
 import shared_nearest as shared
@@ -106,9 +106,14 @@ def selected_basin(snapshot, decision_id):
 def coordinate_pairs(coordinates):
     if isinstance(coordinates, (list, tuple)) and len(coordinates) >= 2 and all(isinstance(n, (int, float)) for n in coordinates[:2]):
         lon, lat = coordinates[:2]
-        if not (math.isfinite(lon) and math.isfinite(lat) and -180 <= lon <= 180 and -90 <= lat <= 90):
+        # SeaVoX/OGR serialization can overshoot the antimeridian by a few
+        # floating-point ulps. Clamp only a sub-nanodegree overshoot for
+        # computing grid bounds; source geometry bytes passed to GDAL remain
+        # exactly as pinned. Larger or non-finite coordinates still fail.
+        eps = 1e-10
+        if not (math.isfinite(lon) and math.isfinite(lat) and -180-eps <= lon <= 180+eps and -90-eps <= lat <= 90+eps):
             raise ValueError('invalid longitude or latitude')
-        yield lon, lat
+        yield max(-180.0, min(180.0, lon)), max(-90.0, min(90.0, lat))
     elif isinstance(coordinates, (list, tuple)):
         for child in coordinates:
             yield from coordinate_pairs(child)
@@ -155,8 +160,10 @@ def main():
                     help='draft research only: use the WGS84 ellipsoidal four-neighbor coastal land-cell-center method')
     ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow a correctly labeled draft decision and entity revision')
     ap.add_argument('--allow-unverified-snapshot', action='store_true', help='test only: Neon acceptance cannot yet be authenticated by this tool')
-    ap.add_argument('--out', type=Path, required=True, help='new output directory outside input root')
+    ap.add_argument('--out', type=Path, required=True, help='fresh output directory that does not contain inputs')
     args = ap.parse_args()
+    builder_code_sha = digest(Path(__file__))
+    shared_code_sha = digest(Path(shared.__file__))
     if not args.allow_unverified_snapshot:
         raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
     root = args.input_root.resolve(); out = args.out.resolve()
@@ -173,8 +180,7 @@ def main():
     input_paths = [geometry, rows_path, runs_path, policy_path] + ([archive, extraction_path] if archive else []) + ([land_rows_path, land_runs_path] if land_rows_path else [])
     if not root.is_dir() or any(not p.is_relative_to(root) for p in input_paths):
         raise ValueError('all inputs must be inside an existing input root')
-    if out.is_relative_to(root) or root.is_relative_to(out):
-        raise ValueError('output must be outside input root')
+    out=validate_fresh_output(root,args.out,tuple(input_paths))
     snapshot = read_snapshot(policy_path, args.policy_sha256, allow_draft=args.allow_draft_snapshot)
     basin, source, selection = selected_basin(snapshot, args.decision_id)
     is_shared = basin['assignment_method'] == 'shared_nearest_assigned_shore'
@@ -203,9 +209,13 @@ def main():
         if len(lr) != H+1 or len(lu)%2 or int(lr[0]) != 0 or int(lr[-1]) != len(lu)//2 or np.any(lr[1:] <= lr[:-1]):
             raise ValueError('invalid land RLE offsets')
         pairs, tolerance = selection
-        shore_bounds = shared.crop_bounds((x0,x1,y0,y1), W, H, STEP, args.shore_pad_degrees)
-        edges = shared.centers_for_crop((rows,runs), (lr,lu), shore_bounds, W, H, STEP, [p[1] for p in pairs])
-        indexes = shared.make_indexes(edges, pairs)
+        import wrapped_bounds, streamed_shore_fallback
+        wrapped_code_sha = digest(Path(wrapped_bounds.__file__))
+        fallback_code_sha = digest(Path(streamed_shore_fallback.__file__))
+        full_shore_bounds = shared.crop_bounds((x0,x1,y0,y1), W, H, STEP, args.shore_pad_degrees)
+        wrapped_source, windows = wrapped_bounds.wrapped_grid_bounds(feature,W,H,STEP)
+        shore_bounds = (shared.crop_bounds(wrapped_source,W,H,STEP,args.shore_pad_degrees)
+                        if len(windows)==2 and wrapped_source[1]-wrapped_source[0] < x1-x0 else full_shore_bounds)
     create_directory_exclusive(out)
     feature_path = out/'source.geojson'; raster_path = out/'source-mask.dat'
     with create_text_exclusive(feature_path) as f:
@@ -220,6 +230,17 @@ def main():
     # some GDAL builds. A separate update-mode burn is idempotent and tested.
     subprocess.run(['gdal_rasterize','-q','-burn','1',str(feature_path),str(raster_path)], check=True)
     raster = np.memmap(raster_path, dtype='u1', mode='r', shape=(y1-y0,x1-x0))
+    if is_shared:
+        try:
+            edges = shared.centers_for_crop((rows,runs), (lr,lu), shore_bounds, W, H, STEP, [p[1] for p in pairs])
+            indexes = shared.make_indexes(edges, pairs)
+        except ValueError as exc:
+            if shore_bounds==full_shore_bounds or not (str(exc)=='no participant shorelines in crop' or str(exc).startswith('crop has no shoreline for participant land code ')):
+                raise
+            edges={'mids':[]};indexes={}
+        def full_blocks(code):
+            return wrapped_bounds.shore_blocks(shared,(rows,runs),(lr,lu),full_shore_bounds,W,H,STEP,code)
+        classifier=wrapped_bounds.StreamedWrappedClassifier(shared.classify,streamed_shore_fallback.classify_one,shore_bounds,full_shore_bounds,W,H,STEP,pairs,tolerance,indexes,full_blocks)
     assignment = out/'basin-assignment.jsonl.gz'; cells = spans_count = row_count = 0
     certified = exact = 0
     with create_gzip_text_exclusive(assignment, encoding='utf8') as stream:
@@ -241,7 +262,7 @@ def main():
                 for start in range(a,b,5000):
                     end=min(start+5000,b); xs=np.arange(start,end,dtype=np.float64)
                     lat=np.full(len(xs),90-(y+.5)*STEP); lon=-180+(xs+.5)*STEP
-                    codes, ncert, nexact=shared.classify(lat,lon,shore_bounds,W,H,STEP,pairs,tolerance,indexes)
+                    codes, ncert, nexact=classifier.classify(lat,lon)
                     certified+=ncert; exact+=nexact
                     cuts=np.r_[0,np.flatnonzero(np.diff(codes)!=0)+1,len(codes)]
                     for i,j in zip(cuts[:-1],cuts[1:]):
@@ -260,6 +281,10 @@ def main():
         raise ValueError('archive or extraction manifest changed during run')
     if is_shared and (digest(land_rows_path) != args.land_rows_sha256 or digest(land_runs_path) != args.land_runs_sha256):
         raise ValueError('land input changed during run')
+    if digest(Path(__file__))!=builder_code_sha or digest(Path(shared.__file__))!=shared_code_sha:
+        raise ValueError('builder or shared classifier code changed during run')
+    if is_shared and (digest(Path(wrapped_bounds.__file__))!=wrapped_code_sha or digest(Path(streamed_shore_fallback.__file__))!=fallback_code_sha):
+        raise ValueError('wrapped classifier code changed during run')
     gdal_version = subprocess.run(['gdal_rasterize','--version'],check=True,capture_output=True,text=True).stdout.strip()
     manifest = {'schema':'worldatlas-full-water-assignment-tiles-v1', 'status':'completed_unverified_candidate_not_published',
                 'grid':{'width':W,'height':H,'angular_step_deg':STEP,'row_convention':'north-to-south; cell centers; half-open [start,end) x spans'},
@@ -276,11 +301,12 @@ def main():
                                  'method':'GDAL polygon center raster, ENVI create and update burn',
                                  'geometry_validity':'OGR/GEOS ST_IsValid and ST_IsEmpty checked',
                                  'bounds_columns_rows':[x0,x1,y0,y1]},
-                'algorithm_sha256':digest(Path(__file__)),
-                'nearest_assignment_audit': {'shore_method':'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)', 'shore_crop':shore_bounds,'coastal_center_count':len(edges['mids']),
+                'algorithm_sha256':builder_code_sha,
+                'nearest_assignment_audit': {'shore_method':('wgs84-wrapped-certified-with-streamed-full-fallback-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'), 'shore_crop':shore_bounds,'coastal_center_count':len(edges['mids']),'coastal_center_count_scope':'indexed-shore-crop',
+                    **({'full_shore_crop':full_shore_bounds,'full_streamed_shore_count':'not-precomputed','index_optimization':'certified-wrapped-crop-with-streamed-full-shore-fallback','wrapped_narrow_cells':classifier.narrow_cells,'wrapped_fallback_cells':classifier.fallback_cells,'wrapped_bounds_sha256':wrapped_code_sha,'streamed_fallback_sha256':fallback_code_sha} if shore_bounds!=full_shore_bounds else {}),
                     'certified_bound_cells':certified,'exact_distance_cells':exact,
-                    'shared_nearest_sha256':digest(Path(shared.__file__)),
-                    'shore_geometry_sha256':digest(Path(shared.__file__))} if is_shared else None,
+                    'shared_nearest_sha256':shared_code_sha,
+                    'shore_geometry_sha256':shared_code_sha} if is_shared else None,
                 'tiles':[{'core_rows':[0,H],'core_cols':[0,W],'span_file':{'path':assignment.name,'sha256':digest(assignment)}}]}
     write_json_exclusive(out/'manifest.json', manifest, indent=2)
     print(json.dumps({'cells':cells,'spans':spans_count,'rows':row_count,'assignment_sha256':digest(assignment)}))
