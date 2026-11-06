@@ -4,7 +4,7 @@ import argparse,hashlib,json,math
 from pathlib import Path
 import numpy as np
 import coastal_core as core
-import coastal_block
+import coastal_rect
 from decision_snapshot import read_snapshot
 from direct_lineage import validate_physical_report,validate_direct_land
 from exclusive_outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
@@ -28,10 +28,10 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
     x0,x1,y0,y1=box;step=360.0/width
     if not (0<=x0<x1<=width and 0<=y0<y1<=height) or chunk<=0:raise ValueError('invalid coastal tile')
     decision,pairs,tol,band,btol=core.policy(snapshot,allow_selected_research=allow_selected_research)
-    code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__),'accelerator':Path(coastal_block.__file__)}
+    code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__),'accelerator':Path(coastal_rect.__file__)}
     code_pins={name:sha(path) for name,path in code_paths.items()}
     crop=core.shore.crop_bounds(box,width,height,step,pad)
-    try:edges=core.shore.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in pairs])
+    try:edges=coastal_rect.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in pairs])
     except ValueError as e:
         if str(e)!='no participant shorelines in crop':raise
         edges={'mids':np.empty((0,3))}
@@ -39,25 +39,25 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
     create_directory_exclusive(out);out=Path(out);path=out/'coastal-assignments.jsonl.gz'
     cells=spans=bounded=exact=water=0
     with create_gzip_text_exclusive(path,encoding='utf8') as f:
-        for y in range(y0,y1):
-            p=core.shore.crop(*physical,y,x0,x1,width)
-            if np.any(~np.isin(p,[1,17])):raise ValueError('invalid physical tile values')
-            selected=np.flatnonzero(p==1);water+=len(selected);records=[]
-            for start in range(0,len(selected),chunk):
-                xs=selected[start:start+chunk]+x0
-                lat=np.full(len(xs),90-(y+.5)*step);lon=-180+(xs+.5)*step
-                codes,stats=coastal_block.block_classify(lat,lon,crop,width,height,step,pairs,tol,band,btol,idx,return_stats=True)
-                bounded+=stats['bounded'];exact+=stats['exact']
-                keep=codes!=0; chosen_x=xs[keep]; chosen_codes=codes[keep]; cells+=int(keep.sum())
-                if len(chosen_x):
+        for first_y in range(y0,y1,64):
+            last_y=min(first_y+64,y1);water_grid=np.empty((last_y-first_y,x1-x0),dtype=bool)
+            for i,y in enumerate(range(first_y,last_y)):
+                p=core.shore.crop(*physical,y,x0,x1,width)
+                if np.any(~np.isin(p,[1,17])):raise ValueError('invalid physical tile values')
+                water_grid[i]=p==1
+            water+=int(water_grid.sum())
+            codes,stats=coastal_rect.classify(water_grid,x0,first_y,crop,width,height,step,pairs,tol,band,btol,idx)
+            bounded+=stats['bounded'];exact+=stats['exact']
+            for i,y in enumerate(range(first_y,last_y)):
+                chosen=np.flatnonzero(water_grid[i]&(codes[i]!=0));chosen_codes=codes[i,chosen];chosen_x=chosen+x0;cells+=len(chosen);records=[]
+                if len(chosen):
                     cuts=np.r_[0,np.flatnonzero((np.diff(chosen_x)>1)|(chosen_codes[1:]!=chosen_codes[:-1]))+1,len(chosen_x)]
-                    for i,j in zip(cuts[:-1],cuts[1:]):
-                        start_x,end_x,code=int(chosen_x[i]),int(chosen_x[j-1])+1,int(chosen_codes[i])
-                        if records and records[-1]['end']==start_x and records[-1]['code']==code:records[-1]['end']=end_x
-                        else:records.append({'start':start_x,'end':end_x,'code':code,'rule_id':'coastal-nearest-final-center-v2',
-                                             'member_id':f'coastal-policy-{decision["id"]}-code-{code}'})
-            if records:
-                spans+=len(records);f.write(json.dumps({'row':y,'spans':records},separators=(',',':'))+'\n')
+                    for a,b in zip(cuts[:-1],cuts[1:]):
+                        start_x,end_x,code=int(chosen_x[a]),int(chosen_x[b-1])+1,int(chosen_codes[a])
+                        records.append({'start':start_x,'end':end_x,'code':code,'rule_id':'coastal-nearest-final-center-v2',
+                                        'member_id':f'coastal-policy-{decision["id"]}-code-{code}'})
+                if records:
+                    spans+=len(records);f.write(json.dumps({'row':y,'spans':records},separators=(',',':'))+'\n')
     if verify_inputs:verify_inputs()
     if any(sha(path)!=code_pins[name] for name,path in code_paths.items()):raise ValueError('algorithm changed during generation')
     manifest={'schema':'worldatlas-coastal-tile-candidate-v1','status':'partial-unverified-research-not-published',
