@@ -42,9 +42,8 @@ def run(manifest_path, output):
     if cfg.get('schema') != 'raw-physical-pipeline-v1' or not cfg.get('selection_notes'):
         raise ValueError('explicit pipeline schema and selection notes required')
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    # Two-way builds have exact parity on the PR4 real-shard sample. Keep the
-    # worker count configurable and profile full-source host/disk load before
-    # raising it further.
+    # Keep the worker count configurable; use complete-source profiles to
+    # balance CPU throughput against disk headroom for on-demand shard staging.
     workers = cfg.get('max_parallel_shards', 2)
     if type(workers) is not int or workers < 1:
         raise ValueError('max_parallel_shards must be a positive integer')
@@ -56,6 +55,14 @@ def run(manifest_path, output):
     grid = land_cfg['grid']
     if grid != water_cfg['grid']:
         raise ValueError('land and water grids differ')
+    batch_size = water_cfg.get('batch_size', 8192)
+    if type(batch_size) is not int or batch_size < 1:
+        raise ValueError('water batch_size must be a positive integer')
+    union_rows_per_block = cfg.get('union_rows_per_block', 128)
+    physical_rows_per_block = cfg.get('physical_rows_per_block', 128)
+    for value in (union_rows_per_block, physical_rows_per_block):
+        if type(value) is not int or value < 1:
+            raise ValueError('rows_per_block must be a positive integer')
     for stage in (land_cfg, water_cfg):
         if stage.get('minimum_free_bytes', 2 * (1 << 30)) < reserve:
             raise ValueError('stage free-space reserve is below pipeline reserve')
@@ -99,7 +106,7 @@ def run(manifest_path, output):
     def build_shard(item):
         i, (path, digest) = item
         destination = output / 'shards' / f'{i:05d}'
-        run_stage('overture/rasterize_water_shard.py', path, digest, water_path, destination)
+        run_stage('overture/rasterize_water_shard.py', path, digest, water_path, destination, '--batch-size', str(batch_size))
         report_path = destination / 'report.json'; report = json.loads(report_path.read_bytes())
         if report.get('status') != 'candidate-only':
             raise ValueError(f'incomplete water shard: {path}')
@@ -117,13 +124,15 @@ def run(manifest_path, output):
             for future in futures: future.cancel()
             raise
     union_cfg = {'schema':'water-union-comparison-v1','grid':grid,'selection_notes':cfg['selection_notes'],
-                 'minimum_free_bytes':reserve,'source_manifest':cfg['source_manifest'],'shard_count':len(shards),'shards':shards}
+                 'minimum_free_bytes':reserve,'source_manifest':cfg['source_manifest'],'shard_count':len(shards),
+                 'rows_per_block':union_rows_per_block,'shards':shards}
     if cfg.get('water_reference'): union_cfg['reference'] = cfg['water_reference']
     union_config = output / 'configs/union.json'; write_json(union_config, union_cfg)
     run_stage('overture/aggregate_compare.py', union_config, output / 'union')
     union_report = json.loads((output / 'union/report.json').read_bytes())
     compose_cfg = {'schema':'candidate-physical-composition-v1','grid':grid,'selection_notes':cfg['selection_notes'],
-                   'minimum_free_bytes':reserve,'land':{'path':str(output / 'land/land.tif'),'sha256':land_report['land_sha256']},
+                   'minimum_free_bytes':reserve,'rows_per_block':physical_rows_per_block,
+                   'land':{'path':str(output / 'land/land.tif'),'sha256':land_report['land_sha256']},
                    'water':{'path':str(output / 'union/water-union.tif'),'sha256':union_report['union_sha256']}}
     if cfg.get('physical_reference_mask'):
         compose_cfg['reference_mask'] = cfg['physical_reference_mask']
@@ -138,7 +147,9 @@ def run(manifest_path, output):
     physical = json.loads((output / 'physical/report.json').read_bytes())
     report = {'status':'candidate-only','configuration_sha256':hashlib.sha256(data).hexdigest(),
               'grid':grid,'source_manifest':cfg['source_manifest'],'land_config':cfg['land_config'],
-              'water_config':cfg['water_config'],'shard_count':len(shards),'max_parallel_shards':workers,'script_sha256':scripts,
+              'water_config':cfg['water_config'],'water_batch_size':batch_size,
+              'union_rows_per_block':union_rows_per_block,'physical_rows_per_block':physical_rows_per_block,
+              'shard_count':len(shards),'max_parallel_shards':workers,'script_sha256':scripts,
               'stage_reports':{key:{'path':str(output / key / 'report.json'),'sha256':sha(output / key / 'report.json')}
                                for key in ('land','union','physical')},
               'physical_output_sha256':physical['output_sha256'],

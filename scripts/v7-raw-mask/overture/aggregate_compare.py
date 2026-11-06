@@ -65,8 +65,10 @@ def run(config_path,output):
     if (not isinstance(w,int) or isinstance(w,bool) or w<=0 or not isinstance(h,int) or isinstance(h,bool) or h<=0 or
         not all(isinstance(x,(int,float)) and math.isfinite(x) for x in (west,north,step)) or step<=0 or west < -180 or west+w*step>180.0000001 or north>90 or north-h*step< -90.0000001):raise ValueError('invalid grid')
     shards=cfg['shards'];reference=cfg.get('reference'); reserve=cfg.get('minimum_free_bytes',2*(1<<30))
+    rows_per_block=cfg.get('rows_per_block',128)
     if not isinstance(shards,list) or not shards or cfg.get('shard_count')!=len(shards):raise ValueError('complete explicit shard list required')
     if not isinstance(reserve,int) or isinstance(reserve,bool) or reserve<0:raise ValueError('invalid free-space reserve')
+    if type(rows_per_block) is not int or rows_per_block<1:raise ValueError('invalid rows_per_block')
     if any(s.get('status')!='candidate-only' for s in shards):raise ValueError('incomplete shard cannot be aggregated')
     verify_lineage(cfg,grid)
     inputs=[config_path,Path(cfg['source_manifest']['path']).resolve()]+[Path(x['path']).resolve() for x in shards]+[Path(x['report']['path']).resolve() for x in shards]+([Path(reference['path']).resolve()] if reference else [])
@@ -79,9 +81,9 @@ def run(config_path,output):
     tif.SetGeoTransform((west,step,0,north,0,-step));s=osr.SpatialReference();s.ImportFromEPSG(4326);tif.SetSpatialRef(s)
     candidate=historic=extra=missing=spans=0
     with (output/'mismatch-spans.jsonl').open('x') as out:
-        for y in range(0,h,128):
+        for y in range(0,h,rows_per_block):
             if shutil.disk_usage(output).free<reserve:raise ValueError('free disk below configured reserve; partial output preserved')
-            n=min(128,h-y);water=np.zeros((n,w),dtype=np.uint8)
+            n=min(rows_per_block,h-y);water=np.zeros((n,w),dtype=np.uint8)
             for ds in masks:
                 arr=ds.ReadAsArray(0,y,w,n)
                 if np.any((arr != 0) & (arr != 1)):raise ValueError('nonbinary candidate input')
@@ -108,7 +110,8 @@ def run(config_path,output):
     if config_path.read_bytes()!=data:raise ValueError('configuration changed during comparison')
     verify_lineage(cfg,grid)
     report={'status':'candidate-only','configuration_sha256':hashlib.sha256(data).hexdigest(),
-            'grid':grid,'source_manifest':cfg['source_manifest'],'shard_count':len(shards),'shards':shards,
+            'grid':grid,'source_manifest':cfg['source_manifest'],'shard_count':len(shards),
+            'rows_per_block':rows_per_block,'shards':shards,
             'candidate_water_cells':candidate,'reference_water_cells':historic,'candidate_extra_cells':extra,'candidate_missing_cells':missing,
             'mismatch_spans':spans,'mismatch_spans_sha256':sha(output/'mismatch-spans.jsonl'),'union_sha256':sha(output/'water-union.tif'),
             'limitations':'Grid comparison only; provenance, source equivalence, and decisions require independent review.'}

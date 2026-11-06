@@ -52,6 +52,17 @@ class WaterShardTests(unittest.TestCase):
         feat = ogr.Feature(layer.GetLayerDefn()); feat.SetGeometry(ogr.CreateGeometryFromWkt('POLYGON ((-170 80,-120 80,-120 40,-170 40,-170 80))')); layer.CreateFeature(feat)
         gdal.RasterizeLayer(target,[1],layer,burn_values=[1])
         np.testing.assert_array_equal(a,target.ReadAsArray())
+    def test_batch_config_and_override(self):
+        p,digest=self.fixture();cfg=json.loads(self.config.read_text());cfg['batch_size']=2
+        self.config.write_text(json.dumps(cfg))
+        for name,override,expected in [('config',None,2),('override',3,3)]:
+            out=self.path/name;build.run(p,digest,out,self.config,override)
+            self.assertEqual(json.loads((out/'report.json').read_text())['batch_size'],expected)
+        cfg['batch_size']=True;self.config.write_text(json.dumps(cfg))
+        with self.assertRaisesRegex(ValueError,'positive integer'):
+            build.run(p,digest,self.path/'invalid-batch',self.config)
+        self.assertFalse((self.path/'invalid-batch').exists())
+
     def test_subtype_only_accepts_without_sources_or_class(self):
         polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-170 80,-120 80,-120 40,-170 40,-170 80))').ExportToWkb())
         rows=[{'id':'valid','subtype':'lake','geometry':polygon},{'id':'ocean','subtype':'ocean','geometry':polygon}, {'id':'label','subtype':'physical','geometry':polygon}]

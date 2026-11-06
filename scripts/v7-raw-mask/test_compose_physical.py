@@ -20,6 +20,23 @@ class ComposeTests(unittest.TestCase):
         self.cfg['reference_streams']={'rows':{'path':str(rp),'sha256':b.sha(rp)},'runs':{'path':str(up),'sha256':b.sha(up)}}
         self.p=self.inputs/'config.json';self.p.write_text(json.dumps(self.cfg))
     def tearDown(self):self.t.cleanup()
+    def test_vectorized_runs_match_row_encoder(self):
+        rng=np.random.default_rng(42)
+        for height,width in [(1,1),(4,8),(17,31),(3,128)]:
+            for mode in ('zero','one','random'):
+                if mode=='zero': codes=np.ones((height,width),dtype=np.uint8)
+                elif mode=='one': codes=np.full((height,width),17,dtype=np.uint8)
+                else: codes=np.where(rng.integers(0,2,(height,width)),17,1).astype(np.uint8)
+                path=self.d/'runs-test';offsets=[0]
+                with path.open('wb') as stream:
+                    for start in range(0,height,3):b.write_run_block(codes[start:start+3],stream,offsets,width)
+                pairs=np.fromfile(path,dtype='<u4').reshape(-1,2).tolist();expected=[];expected_offsets=[0]
+                for row in codes:
+                    ends=np.flatnonzero(np.r_[row[1:]!=row[:-1],True])
+                    expected.extend((int(end+1),int(row[end])) for end in ends)
+                    expected_offsets.append(len(expected))
+                self.assertEqual(pairs,[list(pair) for pair in expected]);self.assertEqual(offsets,expected_offsets)
+
     def test_compose_and_compare(self):
         out=self.d/'out';b.main(self.p,out);r=json.loads((out/'report.json').read_text())
         self.assertEqual((r['candidate_dry_cells'],r['historic_dry_cells'],r['candidate_extra_land_cells'],r['candidate_missing_land_cells']),(5,4,2,1))

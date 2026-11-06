@@ -14,5 +14,7 @@
     "path": "/ABSOLUTE/SOURCE/verified-manifest.json",
     "sha256": "REPLACE"
   },
-  "max_parallel_shards": 2
+  "max_parallel_shards": 3,
+  "union_rows_per_block": 512,
+  "physical_rows_per_block": 512
 }

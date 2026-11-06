@@ -44,7 +44,7 @@ def selected(subtype):
     return None
 
 
-def run(source, expected, output, config_path, batch_size=8192):
+def run(source, expected, output, config_path, batch_size=None):
     source = Path(source).resolve()
     config_path = Path(config_path).resolve()
     output = Path(output).resolve()
@@ -70,8 +70,10 @@ def run(source, expected, output, config_path, batch_size=8192):
         raise ValueError('invalid grid or tile size')
     if policy != {'method':'overture-inland-subtype-v1'}:
         raise ValueError('explicit Overture inland subtype policy required')
-    if not 1 <= batch_size <= 100000:
-        raise ValueError('batch size out of range')
+    if batch_size is None:
+        batch_size = cfg.get('batch_size', 8192)
+    if type(batch_size) is not int or batch_size < 1:
+        raise ValueError('batch size must be a positive integer')
     if len(expected) != 64 or sha256(source) != expected.lower():
         raise ValueError('source SHA-256 does not match expected digest')
     pf = pq.ParquetFile(source, pre_buffer=False)
@@ -128,7 +130,7 @@ def run(source, expected, output, config_path, batch_size=8192):
             if x0 <= x1 and y0 <= y1:
                 for ty in range(y0 // tile, y1 // tile + 1):
                     for tx in range(x0 // tile, x1 // tile + 1):
-                        tiles.setdefault((tx,ty), []).append(item['geometry'])
+                        tiles.setdefault((tx,ty), []).append(geom)
             counts['polygons'] += 1
         for (tx, ty), geometries in tiles.items():
             x, y = tx*tile, ty*tile
@@ -138,8 +140,11 @@ def run(source, expected, output, config_path, batch_size=8192):
             target.GetRasterBand(1).WriteArray(raster.GetRasterBand(1).ReadAsArray(x,y,w,h))
             ds = driver.CreateDataSource(''); layer = ds.CreateLayer('water', srs, ogr.wkbUnknown)
             definition = layer.GetLayerDefn()
-            for wkb in geometries:
-                feat = ogr.Feature(definition); feat.SetGeometry(ogr.CreateGeometryFromWkb(wkb)); layer.CreateFeature(feat)
+            for geometry in geometries:
+                # Reuse the already parsed and validated OGR object. SetGeometry
+                # clones it into each tile feature, avoiding repeated WKB parses
+                # for polygons that cross tile boundaries.
+                feat = ogr.Feature(definition); feat.SetGeometry(geometry); layer.CreateFeature(feat)
             gdal.RasterizeLayer(target, [1], layer, burn_values=[1])
             raster.GetRasterBand(1).WriteArray(target.ReadAsArray(), x, y)
             layer = None; ds = None; target = None
@@ -171,7 +176,7 @@ def run(source, expected, output, config_path, batch_size=8192):
     report = {'status': 'incomplete-input-issues' if invalid or counts['missing_classification'] else 'candidate-only',
        'source':str(source), 'source_sha256':expected.lower(), 'rows_in_source':pf.metadata.num_rows,
        'script_sha256':sha256(Path(__file__).resolve()),
-       'counts':dict(counts), 'invalid_feature_ids': 'invalid-feature-ids.json' if invalid else None,
+       'counts':dict(counts), 'batch_size':batch_size, 'invalid_feature_ids': 'invalid-feature-ids.json' if invalid else None,
        'policy': policy, 'selection_notes':cfg['selection_notes'],
        'configuration_sha256':hashlib.sha256(config_bytes).hexdigest(),
        'geometry_policy':'GEOS validity checked; invalid geometries excluded and IDs reported; no repair',
@@ -188,10 +193,8 @@ def run(source, expected, output, config_path, batch_size=8192):
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('source'); p.add_argument('sha256'); p.add_argument('config'); p.add_argument('new_output_directory')
-    p.add_argument('--batch-size', type=int, default=8192)
+    p.add_argument('--batch-size', type=int, default=None, help='override batch_size in config')
     a = p.parse_args()
-    if not 1 <= a.batch_size <= 100000:
-        p.error('batch size must be between 1 and 100000')
     try: run(a.source, a.sha256, a.new_output_directory, a.config, a.batch_size)
     except Exception as e:
         print(f'failed: {e}', file=sys.stderr); sys.exit(1)
