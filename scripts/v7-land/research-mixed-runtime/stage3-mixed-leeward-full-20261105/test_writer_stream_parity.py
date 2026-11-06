@@ -53,7 +53,7 @@ class WriterParity(unittest.TestCase):
                 grid={'width': width, 'height': height}, physical_rows=pr, physical_runs=ps,
                 component_rows=cr, component_runs=cs, baseline_rows=br, baseline_runs=bs,
                 component_claims={}, mainland_roots={999}, region_rows=lambda _y: [],
-                output=output, guard=lambda: None, disk_reserve_bytes=2 * 1024**3)
+                output=output, disk_reserve_bytes=2 * 1024**3)
             expected = {
                 'rows.u32le': b''.join(U.pack(2 * i) for i in range(height + 1)),
                 'runs.u32le': (PAIR.pack(1, 0) + PAIR.pack(width, 17)) * height,

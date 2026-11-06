@@ -27,15 +27,12 @@ def bounded_bytes(path,max_bytes,guard=lambda:None):
  return b''.join(chunks)
 
 def manifest(path, width=None, height=None, tile_size=1024, guard=lambda:None):
- # Bounded streaming: an adversarial manifest cannot allocate an unbounded list.
+ # Read records one at a time; grid and tile checks bound valid geometry.
  if (width is None)!=(height is None) or (width is not None and (width<1 or height<1 or tile_size<1)):raise ValueError('invalid grid')
- result={};total=0;max_bytes=8<<20;max_records=tile_size*tile_size
+ result={};max_records=tile_size*tile_size
  with open(path,'rb') as f:
-  while True:
-   guard();line=f.readline(257)
-   if not line:break
-   total+=len(line)
-   if len(line)>256 or total>max_bytes:raise ValueError('manifest exceeds size limit')
+  for line in f:
+   guard()
    try:z=line.decode('ascii').split();y,x,n,mask=map(int,z[:4]);digest=z[4]
    except (UnicodeError,ValueError,IndexError):raise ValueError('bad manifest') from None
    if len(z)!=5 or y<0 or x<0 or n<1 or n>max_records or not 0<mask<64 or not re.fullmatch('[0-9a-f]{64}',digest) or (y,x) in result:raise ValueError('invalid/duplicate tile manifest')

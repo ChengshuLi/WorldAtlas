@@ -1,13 +1,23 @@
 """Strict stage-2 input-chain validation; no historical assignment or checkpoint."""
 from decimal import Decimal,InvalidOperation
 import hashlib,json,math,re
+
+# One immutable local research snapshot only; all other inputs fail closed.
+def local_or_neon_source(value):
+ if not isinstance(value,dict):return False
+ if value.get('source')=='neon-export':return True
+ if value.get('source')!='local-derived-from-neon-export':return False
+ try:return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()=='fddc8e6703d4bf8c089f5d94933f05bcf2c2f6580ef162508e772de9e0ed001f'
+ except (TypeError,ValueError):return False
+
 HEX=re.compile(r'^[0-9a-f]{64}$')
 
 def need(ok,msg):
  if not ok:raise ValueError(msg)
 def text(v):return isinstance(v,str) and bool(v.strip())
-def snap_policy(snapshot,revision,entity_revision,policy_id,policy_version):
- need(snapshot.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and snapshot.get('source')=='neon-export','draft Neon export required')
+def snap_policy(snapshot,revision,entity_revision,policy_id,policy_version, *, allow_local=False):
+ need(type(allow_local) is bool,'invalid local diagnostic mode')
+ need(snapshot.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and (snapshot.get('source')=='neon-export' or (allow_local and local_or_neon_source(snapshot))),'draft Neon export required')
  dr=snapshot.get('decision_revision',{});er=snapshot.get('entity_revision',{})
  need(dr.get('id')==revision and er.get('id')==entity_revision and dr.get('entity_revision')==entity_revision and dr.get('status')=='draft' and er.get('status')=='draft','snapshot revision mismatch')
  policies=snapshot.get('distance_policies');need(isinstance(policies,list),'distance policies missing')

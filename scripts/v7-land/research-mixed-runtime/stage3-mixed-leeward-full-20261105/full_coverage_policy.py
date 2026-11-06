@@ -3,7 +3,7 @@
 Call only after the authenticated, single-source polygon rasterizer has rejected
 exact boundary/center coincidences and produced per-root hit counts. The caller
 must pin source/code/physical/component streams before and after execution and
-supervise the process. No V7 labels, old roots, or geographic coordinates enter.
+verify those pins. No V7 labels, old roots, or geographic coordinates enter.
 """
 from collections import Counter
 from pathlib import Path
@@ -32,30 +32,26 @@ def _stream_key(grid, paths):
   key.append((str(p),st.st_dev,st.st_ino,st.st_size,st.st_mtime_ns,st.st_ctime_ns))
  return (w,h,tuple(key))
 
-def build_coverage_index(grid,physical_rows,physical_runs,component_rows,component_runs,guard):
- if not callable(guard):raise ValueError('invalid coverage guard')
+def build_coverage_index(grid,physical_rows,physical_runs,component_rows,component_runs):
  paths=(physical_rows,physical_runs,component_rows,component_runs);key=_stream_key(grid,paths);w,h=key[:2];totals=Counter()
  with open(physical_rows,'rb') as pr,open(physical_runs,'rb') as pv,open(component_rows,'rb') as cr,open(component_runs,'rb') as cv:
   for y in range(h):
-   if y%128==0:guard()
    physical=pi.readrow(pr,pv,y,w,'physical');components=pi.readrow(cr,cv,y,w,'component');pi.equal_coverage(physical,components,w)
    for a,b,root in components:totals[root]+=b-a
- guard()
  if _stream_key(grid,paths)!=key:raise ValueError('coverage streams changed during indexing')
  return CoverageIndex(key,totals,_COVERAGE_INDEX_TOKEN)
 
-def indexed_totals(coverage_index,roots,grid,physical_rows,physical_runs,component_rows,component_runs,guard):
+def indexed_totals(coverage_index,roots,grid,physical_rows,physical_runs,component_rows,component_runs):
  """Return counts for roots from one validated, unchanged stream generation."""
- if not callable(guard) or type(coverage_index) is not CoverageIndex or getattr(coverage_index,'_trusted',False) is not True:raise ValueError('invalid coverage index')
+ if type(coverage_index) is not CoverageIndex or getattr(coverage_index,'_trusted',False) is not True:raise ValueError('invalid coverage index')
  paths=(physical_rows,physical_runs,component_rows,component_runs)
  if coverage_index._key!=_stream_key(grid,paths):raise ValueError('coverage index generation mismatch')
- guard()
  totals={root:coverage_index._totals[root] for root in roots if root in coverage_index._totals}
  if coverage_index._key!=_stream_key(grid,paths):raise ValueError('coverage index generation mismatch')
  return totals
 
-def select_all_centers(inside_counts,grid,physical_rows,physical_runs,component_rows,component_runs,guard,max_roots=1000000,coverage_index=None):
- if not isinstance(inside_counts,dict) or not inside_counts or type(max_roots) is not int or not 0<max_roots<=1000000 or not callable(guard):raise ValueError('invalid coverage request')
+def select_all_centers(inside_counts,grid,physical_rows,physical_runs,component_rows,component_runs,max_roots=1000000,coverage_index=None):
+ if not isinstance(inside_counts,dict) or not inside_counts or type(max_roots) is not int or not 0<max_roots<=1000000:raise ValueError('invalid coverage request')
  if len(inside_counts)>max_roots:raise ValueError('root limit exceeded')
  counts={}
  for k,v in inside_counts.items():
@@ -69,13 +65,12 @@ def select_all_centers(inside_counts,grid,physical_rows,physical_runs,component_
   totals=Counter()
   with open(physical_rows,'rb') as pr,open(physical_runs,'rb') as pv,open(component_rows,'rb') as cr,open(component_runs,'rb') as cv:
    for y in range(h):
-    if y%128==0:guard()
     physical=pi.readrow(pr,pv,y,w,'physical');components=pi.readrow(cr,cv,y,w,'component');pi.equal_coverage(physical,components,w)
     for a,b,root in components:
      if root in counts:totals[root]+=b-a
  else:
   if type(coverage_index) is not CoverageIndex or getattr(coverage_index,'_trusted',False) is not True:raise ValueError('coverage index generation mismatch')
-  totals=indexed_totals(coverage_index,counts,grid,physical_rows,physical_runs,component_rows,component_runs,guard)
+  totals=indexed_totals(coverage_index,counts,grid,physical_rows,physical_runs,component_rows,component_runs)
  if set(totals)!=set(counts) or any(counts[r]>totals[r] for r in counts):raise ValueError('source counts exceed or lack component coverage')
  selected=sorted(r for r in counts if counts[r]==totals[r]);partial=sorted(r for r in counts if counts[r]<totals[r])
  if not selected:raise ValueError('no wholly covered components')

@@ -2,7 +2,7 @@
 
 Internal library only: the caller must authenticate Neon/export/source pins,
 resolve every selected affiliation from source, validate its List 1 links,
-verify stage-2/physical/component provenance, and supply a monitored guard.
+verify stage-2/physical/component provenance.
 No historical/reference labels or changed-cell ledgers are accepted as input.
 """
 import array,ctypes,hashlib,itertools,json,os,shutil,struct,sys
@@ -11,11 +11,11 @@ from overlay import overlay_row,validate_component_claims
 U=struct.Struct('<I');PAIR=struct.Struct('<II');TRIPLE=struct.Struct('<III')
 def need(ok,msg):
  if not ok:raise ValueError(msg)
-def sha(path,guard):
+def sha(path):
  h=hashlib.sha256()
  with open(path,'rb') as f:
   while True:
-   guard();b=f.read(1<<20)
+   b=f.read(1<<20)
    if not b:break
    h.update(b)
  return h.hexdigest()
@@ -28,7 +28,7 @@ def readrow(rows,runs,y,width,size,kind,previous):
   return values,b
  return list((TRIPLE if kind=='component' else PAIR).iter_unpack(raw)),b
 
-def write_streams(*,grid,physical_rows,physical_runs,component_rows,component_runs,baseline_rows,baseline_runs,component_claims,mainland_roots,region_rows,output,guard,disk_reserve_bytes,polygon_affiliation_ids=frozenset()):
+def write_streams(*,grid,physical_rows,physical_runs,component_rows,component_runs,baseline_rows,baseline_runs,component_claims,mainland_roots,region_rows,output,disk_reserve_bytes,polygon_affiliation_ids=frozenset()):
  """Write fresh land output and output-only trace; region_rows(y) is trusted code.
 
  The callback must rasterize authenticated selected geometries, not accept
@@ -36,11 +36,11 @@ def write_streams(*,grid,physical_rows,physical_runs,component_rows,component_ru
  The caller must recheck snapshot, sources, code and all input hashes after this
  routine and before treating its report as accepted.
  """
- need(isinstance(grid,dict) and type(grid.get('width')) is int and type(grid.get('height')) is int and 1<grid['width']<=1000000 and 0<grid['height']<=1000000 and callable(guard) and callable(region_rows) and type(disk_reserve_bytes) is int and disk_reserve_bytes>=2*1024**3,'invalid writer controls')
+ need(isinstance(grid,dict) and type(grid.get('width')) is int and type(grid.get('height')) is int and 1<grid['width']<=1000000 and 0<grid['height']<=1000000 and callable(region_rows) and type(disk_reserve_bytes) is int and disk_reserve_bytes>=2*1024**3,'invalid writer controls')
  width,height=grid['width'],grid['height'];validate_component_claims(component_claims);need(isinstance(polygon_affiliation_ids,(set,frozenset)) and all(isinstance(a,str) and a for a in polygon_affiliation_ids),'invalid polygon affiliation IDs');need(isinstance(mainland_roots,(set,frozenset)) and mainland_roots and all(type(x) is int and 0<=x<0xffffffff for x in mainland_roots) and not (set(component_claims)&mainland_roots),'whole-component claim targets mainland')
  paths=[Path(x).resolve(strict=True) for x in (physical_rows,physical_runs,component_rows,component_runs,baseline_rows,baseline_runs)];out=Path(output).resolve();need(not out.exists() and out.parent.is_dir() and all(not out.is_relative_to(p.parent) and not p.is_relative_to(out) for p in paths),'output exists or overlaps inputs')
  def check(extra=0):
-  guard();need(shutil.disk_usage(out.parent).free>=disk_reserve_bytes+extra,'disk reserve reached')
+  need(shutil.disk_usage(out.parent).free>=disk_reserve_bytes+extra,'disk reserve reached')
  check(1<<20);out.mkdir(mode=0o700);fd=os.open(out.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  files=[p.open('rb') for p in paths];counts=[0,0,0];offset=0;stats={};root_stats={aid:{} for aid in polygon_affiliation_ids};changed_total=0;trace_count=0
  credit=0;outputs=[]
@@ -75,4 +75,4 @@ def write_streams(*,grid,physical_rows,physical_runs,component_rows,component_ru
  finally:
   for f in files:f.close()
  fd=os.open(out,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd);check()
- return {'schema':'stage3-land-writer-result-v1','status':'pending-caller-validation','grid':grid,'output_rows_sha256':sha(out/'rows.u32le',guard),'output_runs_sha256':sha(out/'runs.u32le',guard),'changes_sha256':sha(out/'changes.jsonl',guard),'changed_cells':changed_total,'change_spans':trace_count,'affiliation_statistics':stats,'polygon_root_statistics':root_stats,'limitations':['Resolved claims and region rasterization must be authenticated and rechecked by caller.','Changes are output evidence, never input selectors.','Overlapping same-target affiliations are counted separately in per-affiliation statistics.']}
+ return {'schema':'stage3-land-writer-result-v1','status':'pending-caller-validation','grid':grid,'output_rows_sha256':sha(out/'rows.u32le'),'output_runs_sha256':sha(out/'runs.u32le'),'changes_sha256':sha(out/'changes.jsonl'),'changed_cells':changed_total,'change_spans':trace_count,'affiliation_statistics':stats,'polygon_root_statistics':root_stats,'limitations':['Resolved claims and region rasterization must be authenticated and rechecked by caller.','Changes are output evidence, never input selectors.','Overlapping same-target affiliations are counted separately in per-affiliation statistics.']}

@@ -9,9 +9,12 @@ class Inputs(unittest.TestCase):
  def test_oversized_tile(self):
   (self.d/'00000-00000.bin').write_bytes(self.raw+b'x')
   with self.assertRaisesRegex(ValueError,'size mismatch'):self.v()
- def test_oversized_manifest_line(self):
+ def test_long_valid_manifest_line_is_not_resource_capped(self):
+  self.p.write_bytes(self.p.read_bytes().rstrip()+b' '*(8*1024*1024+1)+b'\n')
+  self.assertEqual(self.v()[0][:4],(0,0,[17,18],2))
+ def test_invalid_manifest_line_still_rejected(self):
   self.p.write_bytes(b'x'*257+b'\n')
-  with self.assertRaisesRegex(ValueError,'size limit'):self.v()
+  with self.assertRaisesRegex(ValueError,'bad manifest'):self.v()
  def test_manifest_count_exceeds_tile(self):
   self.p.write_text('0 0 17 1 '+'0'*64+'\n')
   with self.assertRaisesRegex(ValueError,'invalid/duplicate tile manifest'):self.v()

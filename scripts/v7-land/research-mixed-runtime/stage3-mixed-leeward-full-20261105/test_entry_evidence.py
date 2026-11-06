@@ -6,7 +6,7 @@ class EvidenceTests(unittest.TestCase):
   self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);self.p=Path(self.t.name)/'article';self.p.write_bytes(b'Human-reviewed text')
   pin={'source_id':'article','version':'v1','sha256':hashlib.sha256(self.p.read_bytes()).hexdigest(),'size_bytes':self.p.stat().st_size,'r2_bucket':'b','r2_key':'k'}
   self.s={'sources':[pin],'source_lineage_assets':[{**pin,'kind':'raw','provenance':{'representation':'provider_original'},'source_uri':'https://example.org/article','provider':'Journal','attribution':'Author','license_name':'CC BY','license_uri':'https://example.org/license'}], 'list1_entry_evidence_sources':[{'decision_revision':'r','entry_id':'e','role':'geographic_membership_evidence','source_id':'article','source_version':'v1','citation_section':'Study area','interpretation':'Yamdena is in Wallacea','limitations':['Human inference; not geometry']}]};self.s['source_lineage_dependencies']=[];self.c={'entry_ids':['e'],'revision':'r'};self.f=[{**pin,'path':str(self.p)}]
- def runv(self):return resolve(self.s,self.c,self.f,lambda:None)
+ def runv(self):return resolve(self.s,self.c,self.f)
  def test_trace_and_byte_authentication(self):
   x=self.runv()['e'][0];self.assertEqual(x['interpretation_status'],'selected_interpretation');self.assertEqual(x['citation_section'],'Study area');self.assertEqual(x['source_uri'],'https://example.org/article')
  def test_tampering_fails(self):
@@ -17,7 +17,21 @@ class EvidenceTests(unittest.TestCase):
    self.s=copy.deepcopy(orig);mutate(self.s);self.assertRaises(ValueError,self.runv)
   self.s=orig;self.f.append({**self.f[0],'source_id':'extra'});self.assertRaises(ValueError,self.runv)
  def test_empty_links_allow_no_files(self):
-  self.s['list1_entry_evidence_sources']=[];self.assertEqual(resolve(self.s,self.c,[],lambda:None),{'e':[]})
+  self.s['list1_entry_evidence_sources']=[];self.assertEqual(resolve(self.s,self.c,[]),{'e':[]})
+
+class CapturedEvidenceTests(EvidenceTests):
+ def test_recorded_representation_and_provenance_preserved(self):
+  for kind in ('official-repository capture','official-repository original','HTML source capture'):
+   provenance={'representation':kind,'verification':'Direct capture; private readback compared','reuse_terms':'Rights reserved; no redistribution asserted'};self.s['source_lineage_assets'][0]['provenance']=provenance
+   result=self.runv()['e'][0];self.assertEqual(result['source_representation'],kind);self.assertEqual(result['source_provenance_verification_claim'],provenance['verification']);self.assertEqual(result['source_reuse_terms_claim'],provenance['reuse_terms']);self.assertIn('not independently authenticated',result['source_provenance_limitation'])
+   for field in ('verification','reuse_terms'):
+    old=provenance.pop(field)
+    with self.assertRaisesRegex(ValueError,'captured-source provenance'):self.runv()
+    provenance[field]=old
+ def test_capture_still_rejects_wrong_bytes(self):
+  self.s['source_lineage_assets'][0]['provenance']={'representation':'HTML source capture','verification':'capture','reuse_terms':'terms'}
+  self.p.write_bytes(b'bad')
+  with self.assertRaises(ValueError):self.runv()
 
 class MirrorEvidenceTests(EvidenceTests):
  def setUp(self):

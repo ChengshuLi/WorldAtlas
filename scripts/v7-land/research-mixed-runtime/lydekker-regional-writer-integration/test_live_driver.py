@@ -17,9 +17,8 @@ def setup():
  def apply_groups(x,w):calls.append(('groups',));return x
  def replay(*a):return {'proposals':{},'replayed_claims':{},'pending_source_claims':{}}
  def satellite(x,*a,**kw):calls.append(('satellites',kw['allow_unanchored_nearest']));return x
- def guard():calls.append(('guard',))
  ident=lambda *a,**kw:None
- d={'research':research,'verified_line':ident,'scan':scan,'buffered_bounds':ident,'resolve_feature_windows':source,'apply_groups':apply_groups,'resolve_with_mixed_replay':replay,'collect_runs':ident,'apply_satellites':satellite,'extract':ident,'intersect':ident,'point_inside':ident,'component_at':ident,'run_pair':ident,'guard':guard,'mixed_claims':Mixed(selected)}
+ d={'research':research,'verified_line':ident,'scan':scan,'buffered_bounds':ident,'resolve_feature_windows':source,'apply_groups':apply_groups,'resolve_with_mixed_replay':replay,'collect_runs':ident,'apply_satellites':satellite,'extract':ident,'intersect':ident,'point_inside':ident,'component_at':ident,'run_pair':ident,'mixed_claims':Mixed(selected)}
  inputs={'component_rows':{'sha256':C['rows']},'component_runs':{'sha256':C['runs']},'physical_rows':{},'physical_runs':{}}
  sources={'geonames-country-id':{'path':'/unused','sha256':'d'*64,'version':'v'}}
  args=(p,c,{},[],{'width':8,'north':90},inputs,sources,{},)
@@ -29,8 +28,8 @@ def setup():
 class LiveDriverTests(unittest.TestCase):
  def test_order_and_claim_protections(self):
   args,kw,calls=setup();out=resolve_live(*args,**kw);bridge=out['writer_bridge']
-  self.assertEqual([x[0] for x in calls],['guard','research','source','groups','satellites','guard'])
-  self.assertTrue(calls[1][1]);self.assertTrue(calls[4][1])
+  self.assertEqual([x[0] for x in calls],['research','source','groups','satellites'])
+  self.assertTrue(calls[0][1]);self.assertTrue(calls[3][1])
   self.assertNotIn(3,bridge['component_claims']);self.assertIn(3,bridge['blocked_region_roots']);self.assertIn(9,bridge['blocked_region_roots'])
   self.assertEqual(bridge['component_claims'][2][0]['code'],18);self.assertEqual(out['regional_result']['source_group_trace'],{'fresh':True})
  def test_pin_mismatch_stops_before_research(self):

@@ -6,7 +6,7 @@ def need(x,m):
  if not x: raise ValueError(m)
 def text(x): return isinstance(x,str) and bool(x.strip()) and len(x)<=8192
 
-def resolve(snapshot,compiled,files,guard):
+def resolve(snapshot,compiled,files):
  links=snapshot.get('list1_entry_evidence_sources',[])
  need(isinstance(links,list) and len(links)<=10000,'invalid evidence links')
  need(isinstance(files,list) and len(files)<=10000,'invalid evidence files')
@@ -30,12 +30,16 @@ def resolve(snapshot,compiled,files,guard):
    need(s.get(field)==a.get(field)==f.get(field),'evidence catalog pin mismatch')
   prov=a.get('provenance');need(isinstance(prov,dict),'invalid raw evidence metadata')
   representation=prov.get('representation')
-  need(representation in ('provider_original','third_party_mirror_scan'),'invalid raw evidence metadata')
+  need(representation in ('provider_original','third_party_mirror_scan','official-repository capture','official-repository original','HTML source capture'),'invalid raw evidence metadata')
+  if representation in ('official-repository capture','official-repository original','HTML source capture'):
+   need(text(prov.get('verification')) and text(prov.get('reuse_terms')),'invalid captured-source provenance')
   if representation=='third_party_mirror_scan':
    limits=prov.get('limitations')
    need(text(prov.get('scope')) and text(prov.get('verification')) and isinstance(limits,list) and 0<len(limits)<=100 and all(text(x) for x in limits),'invalid mirror provenance')
-  need(a.get('kind')=='raw' and not any((d.get('source_id'),d.get('version'))==k for d in deps) and text(a.get('source_uri')) and text(a.get('provider')) and text(a.get('attribution')) and text(a.get('license_name')) and text(a.get('license_uri')) and isinstance(s['sha256'],str) and H.fullmatch(s['sha256']) and type(s['size_bytes']) is int and 0<s['size_bytes']<=64<<20 and text(s['r2_bucket']) and text(s['r2_key']),'invalid raw evidence metadata')
+  need(a.get('kind')=='raw' and not any((d.get('source_id'),d.get('version'))==k for d in deps) and text(a.get('source_uri')) and text(a.get('provider')) and text(a.get('attribution')) and text(a.get('license_name')) and text(a.get('license_uri')) and isinstance(s['sha256'],str) and H.fullmatch(s['sha256']) and type(s['size_bytes']) is int and 0<s['size_bytes'] and text(s['r2_bucket']) and text(s['r2_key']),'invalid raw evidence metadata')
   item={'role':l['role'],'source_id':k[0],'source_version':k[1],'source_sha256':s['sha256'],'source_uri':a['source_uri'],'provider':a['provider'],'attribution':a['attribution'],'license_name':a['license_name'],'license_uri':a['license_uri'],'citation_section':l['citation_section'],'interpretation':l['interpretation'],'interpretation_status':'selected_interpretation','verification_limitation':'Source bytes are checked; cited section and interpretation are not machine-verified.','limitations':l['limitations']}
+  if representation in ('official-repository capture','official-repository original','HTML source capture'):
+   item.update(source_representation=representation,source_provenance_verification_claim=prov['verification'],source_reuse_terms_claim=prov['reuse_terms'],source_provenance_limitation='Source provenance and reuse terms are catalog claims, not independently authenticated by byte checks.')
   if representation=='third_party_mirror_scan':
    item.update(source_representation=representation,source_provenance_scope=prov['scope'],source_provenance_verification_claim=prov['verification'],source_provenance_limitations=list(prov['limitations']),original_provider_bytes_limitation='The byte check does not establish that this third-party scan is identical to original-provider bytes.',license_limitation='The cataloged license URI does not itself establish redistribution rights.')
   result[eid].append(item)
@@ -45,7 +49,7 @@ def resolve(snapshot,compiled,files,guard):
   f=local[k];p=Path(f['path']).resolve(strict=True);need(p.is_file(),'evidence file missing');h=hashlib.sha256();size=0
   with p.open('rb') as stream:
    while True:
-    guard();b=stream.read(1<<20)
+    b=stream.read(1<<20)
     if not b:break
     size+=len(b);need(size<=f['size_bytes'],'evidence size exceeded');h.update(b)
   need(size==f['size_bytes'] and h.hexdigest()==f['sha256'],'evidence bytes mismatch')

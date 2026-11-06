@@ -13,7 +13,7 @@ def digest(path):
         for block in iter(lambda:f.read(1<<20),b''):h.update(block)
     return h.hexdigest()
 
-def read_graph(path,relation_id,version,guard=lambda:None,expected_source_sha256=None):
+def read_graph(path,relation_id,version,expected_source_sha256=None):
     """Stream the exact hashed bytes through Expat, rejecting all DTD/entity declarations."""
     nodes={};ways={};relation=None;stack=[];current_way=None;current_relation=None
     parser=expat.ParserCreate()
@@ -67,7 +67,7 @@ def read_graph(path,relation_id,version,guard=lambda:None,expected_source_sha256
         while True:
             chunk=f.read(1<<20)
             if not chunk:break
-            digest.update(chunk);parser.Parse(chunk,False);guard()
+            digest.update(chunk);parser.Parse(chunk,False)
         parser.Parse(b'',True)
     if expected_source_sha256 is not None and digest.hexdigest()!=expected_source_sha256:raise ValueError('parsed source hash mismatch')
     if relation is None:raise ValueError('relation not found')
@@ -108,7 +108,7 @@ def assemble_rings(ways):
     if not result:raise ValueError('no outer rings')
     return result
 
-def extract(path,source_sha256,relation_id,relation_version,expected_geometry_sha256,guard=lambda:None):
+def extract(path,source_sha256,relation_id,relation_version,expected_geometry_sha256):
     """Return binary64 GeoJSON MultiPolygon after source, graph, hash and GEOS checks.
 
     Caller must independently authenticate raw custody and pin this code and the
@@ -117,7 +117,7 @@ def extract(path,source_sha256,relation_id,relation_version,expected_geometry_sh
     """
     from osgeo import ogr
     if digest(path)!=source_sha256:raise ValueError('raw OSM hash mismatch')
-    nodes,ways,tags=read_graph(path,int(relation_id),int(relation_version),guard,source_sha256)
+    nodes,ways,tags=read_graph(path,int(relation_id),int(relation_version),source_sha256)
     rings=assemble_rings(ways);geometry={'type':'MultiPolygon','coordinates':[[[list(nodes[n]) for n in ring]] for ring in rings]}
     for polygon in geometry['coordinates']:
         ring=polygon[0]

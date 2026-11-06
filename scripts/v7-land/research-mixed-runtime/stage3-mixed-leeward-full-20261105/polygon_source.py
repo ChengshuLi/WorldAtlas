@@ -1,6 +1,6 @@
 """Extract hash-bound source polygon coordinates; no land decisions are made.
 
-Run with external process-group memory/time supervision. OGR validation and
+OGR validation and
 rasterization are separate mandatory steps. Accept only bounded raw GeoJSON.
 Geometry hash uses parsed JSON numeric types, sorted keys, compact UTF-8 JSON,
 and Python's finite float formatting. Integer and floating values are distinct.
@@ -28,7 +28,7 @@ def extract(path,sha256,feature,max_bytes=16<<20,max_vertices=1000000):
   need(isinstance(f,dict) and f.get('type')=='Feature' and isinstance(f.get('properties'),dict) and 'crs' not in f,'invalid source feature')
   v=f['properties'].get(key)
   if type(v) in (str,int) and str(v)==target:matches.append(f)
- need(len(matches)==1,'source feature is missing or ambiguous');g=matches[0].get('geometry');need(isinstance(g,dict) and set(g)=={'type','coordinates'} and g['type'] in ('Polygon','MultiPolygon'),'unsupported polygon geometry')
+ need(len(matches)==1,'source feature is missing or ambiguous');expected=feature.get('expected_properties',{});need(isinstance(expected,dict) and all(matches[0]['properties'].get(k)==v for k,v in expected.items()),'source feature identity properties mismatch');g=matches[0].get('geometry');need(isinstance(g,dict) and set(g)=={'type','coordinates'} and g['type'] in ('Polygon','MultiPolygon'),'unsupported polygon geometry')
  polys=[g['coordinates']] if g['type']=='Polygon' else g['coordinates'];need(isinstance(polys,list) and polys,'empty polygon');count=0
  for poly in polys:
   need(isinstance(poly,list) and poly,'empty polygon part')

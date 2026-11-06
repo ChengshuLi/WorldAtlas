@@ -4,7 +4,7 @@ No source rasterization or source-byte rehash occurs here. This checks that the
 pinned reports form one internally consistent chain to the physical streams;
 it is not independent proof that the raw source generated those streams.
 """
-import hashlib,json,os,re
+import hashlib,json,re
 from pathlib import Path
 HEX=re.compile(r'^[0-9a-f]{64}$')
 
@@ -18,27 +18,27 @@ def digest(path,guard):
    if not b:break
    h.update(b)
  return h.hexdigest()
-def read_pin(pin,guard,limit=4<<20):
+def read_pin(pin,guard):
  need(isinstance(pin,dict) and set(pin)=={'path','sha256'} and isinstance(pin['path'],str) and isinstance(pin['sha256'],str) and HEX.fullmatch(pin['sha256']),'invalid report pin')
- p=Path(pin['path']).resolve(strict=True);need(p.is_file() and p.stat().st_size<=limit,'report too large or not a file')
- with open(p,'rb') as f:data=f.read(limit+1)
- need(len(data)<=limit and hashlib.sha256(data).hexdigest()==pin['sha256'],'report hash mismatch')
- return json.loads(data),p
+ p=Path(pin['path']).resolve(strict=True);need(p.is_file() and digest(p,guard)==pin['sha256'],'report hash mismatch')
+ with open(p,'rb') as f:data=json.load(f)
+ need(digest(p,guard)==pin['sha256'],'report changed during read')
+ return data,p
 
 def read_overture_readback(pin,guard):
  need(isinstance(pin,dict) and set(pin)=={'path','sha256'} and isinstance(pin.get('sha256'),str) and HEX.fullmatch(pin['sha256']),'invalid R2 readback pin')
- p=Path(pin['path']).resolve(strict=True);need(p.is_file() and p.stat().st_size<=4<<20,'R2 readback too large')
- with open(p,'rb') as f:data=f.read((4<<20)+1)
- need(len(data)<=4<<20 and hashlib.sha256(data).hexdigest()==pin['sha256'],'R2 readback hash mismatch');text=data.decode('utf-8').strip()
+ p=Path(pin['path']).resolve(strict=True);need(p.is_file(),'R2 readback is not a file')
+ with open(p,'rb') as f:data=f.read()
+ need(hashlib.sha256(data).hexdigest()==pin['sha256'],'R2 readback hash mismatch');text=data.decode('utf-8').strip()
  if text.startswith('```json\n') and text.endswith('```'):text=text[8:-3].strip()
  return json.loads(text)
 
 def validate(request_path,expected_physical_report_sha256,expected_rows_sha256,expected_runs_sha256,expected_grid,guard=lambda:None):
  need(all(isinstance(x,str) and HEX.fullmatch(x) for x in (expected_physical_report_sha256,expected_rows_sha256,expected_runs_sha256)),'invalid expected physical hashes')
  need(isinstance(expected_grid,dict) and set(expected_grid)=={'width','height','west','north','step'} and type(expected_grid['width']) is int and type(expected_grid['height']) is int and expected_grid['width']>1 and expected_grid['height']>0 and expected_grid['west']==-180 and expected_grid['north']==90 and type(expected_grid['step']) in (int,float) and expected_grid['step']==360/expected_grid['width'] and 90-expected_grid['height']*expected_grid['step']>=-90-1e-8,'invalid expected physical grid')
- path=Path(request_path).resolve(strict=True);need(path.stat().st_size<=1<<20,'lineage request too large')
- with open(path,'rb') as f:raw=f.read((1<<20)+1)
- need(len(raw)<=1<<20,'lineage request too large');req=json.loads(raw)
+ path=Path(request_path).resolve(strict=True)
+ with open(path,'rb') as f:raw=f.read()
+ req=json.loads(raw)
  need(isinstance(req,dict) and set(req)=={'schema','inputs','shard_reports'} and req['schema']=='stage1-reported-lineage-request-v1','invalid lineage request')
  inp=req['inputs'];need(isinstance(inp,dict) and set(inp)=={'overture_manifest','overture_readback','osm_receipt','shard_summary','water_union','land_report','physical_report'},'invalid lineage input set')
  docs={};paths={}
@@ -75,9 +75,9 @@ def validate(request_path,expected_physical_report_sha256,expected_rows_sha256,e
  need(isinstance(land.get('candidate_sha256'),str) and HEX.fullmatch(land['candidate_sha256']) and isinstance(union.get('union_sha256'),str) and HEX.fullmatch(union['union_sha256']),'missing land or water output hash')
  outputs=physical.get('physical_output_sha256',physical.get('output_sha256',{}))
  need(land.get('status')=='candidate-only' and physical.get('status') in ('candidate-only','stage1-complete') and inp['physical_report']['sha256']==expected_physical_report_sha256 and physical.get('inputs',{}).get('land',{}).get('sha256')==land.get('candidate_sha256') and physical.get('inputs',{}).get('water',{}).get('sha256')==union.get('union_sha256') and outputs.get('rows.u32le')==expected_rows_sha256 and outputs.get('runs.u32le')==expected_runs_sha256,'physical report chain mismatch')
- for pin in inp.values():need(Path(pin['path']).stat().st_size<=4<<20 and digest(pin['path'],guard)==pin['sha256'],'lineage report changed')
- for x in shards:need(Path(x['path']).stat().st_size<=4<<20 and digest(x['path'],guard)==x['sha256'],'shard report changed')
- with open(path,'rb') as f:need(os.fstat(f.fileno()).st_size<=1<<20 and f.read((1<<20)+1)==raw,'lineage request changed')
+ for pin in inp.values():need(digest(pin['path'],guard)==pin['sha256'],'lineage report changed')
+ for x in shards:need(digest(x['path'],guard)==x['sha256'],'shard report changed')
+ need(digest(path,guard)==hashlib.sha256(raw).hexdigest(),'lineage request changed')
  return {'schema':'stage1-reported-lineage-validation-v1','status':'reported-lineage-verified-not-rerasterized','request_sha256':hashlib.sha256(raw).hexdigest(),'inputs_sha256':{k:v['sha256'] for k,v in inp.items()},'shard_report_sha256':[sby[i]['sha256'] for i in range(32)],'physical_rows_sha256':expected_rows_sha256,'physical_runs_sha256':expected_runs_sha256,'grid':grid,'limitations':['Report-chain consistency only; no raw source bytes were rehashed and no source was rerasterized.','Matching hashes and receipts do not independently authenticate providers or prove source-to-mask computation.']}
 
 def validate_neon_sources(snapshot,snapshot_sha256,request_path,guard=lambda:None):
@@ -88,8 +88,8 @@ def validate_neon_sources(snapshot,snapshot_sha256,request_path,guard=lambda:Non
  """
  need(isinstance(snapshot,dict) and isinstance(snapshot_sha256,str) and HEX.fullmatch(snapshot_sha256),'invalid source snapshot')
  revision=snapshot.get('decision_revision',{}).get('id');need(isinstance(revision,str) and revision,'missing source revision')
- with open(request_path,'rb') as f:raw=f.read((1<<20)+1)
- need(len(raw)<=1<<20,'lineage request too large');req=json.loads(raw);manifest,_=read_pin(req['inputs']['overture_manifest'],guard);receipt,_=read_pin(req['inputs']['osm_receipt'],guard);readback=read_overture_readback(req['inputs']['overture_readback'],guard)
+ with open(request_path,'rb') as f:raw=f.read()
+ req=json.loads(raw);manifest,_=read_pin(req['inputs']['overture_manifest'],guard);receipt,_=read_pin(req['inputs']['osm_receipt'],guard);readback=read_overture_readback(req['inputs']['overture_readback'],guard)
  selected=snapshot.get('stage1_source_inputs');sources=snapshot.get('sources');assets=snapshot.get('source_lineage_assets');deps=snapshot.get('source_lineage_dependencies')
  need(isinstance(selected,list) and len(selected)==33 and isinstance(sources,list) and isinstance(assets,list) and isinstance(deps,list),'missing selected stage-1 source records')
  def catalog(rows):

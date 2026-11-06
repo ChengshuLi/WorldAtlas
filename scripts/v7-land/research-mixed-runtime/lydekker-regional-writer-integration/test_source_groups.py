@@ -16,12 +16,12 @@ class SourceTests(unittest.TestCase):
   self.region={10:{'total':2,'in_scope':2},20:{'total':1,'in_scope':1},30:{'total':3,'in_scope':3}}
  def tearDown(self):self.tmp.cleanup()
  def resolve(self,*,partial=False,inside=True):
-  def extract(path,shp,source_sha,specs,guard):return [({'fid':s['source_feature_id']},{'source_feature_id':s['source_feature_id'],'geometry_sha256':s['geometry_sha256'],'source_sha256':source_sha}) for s in specs]
+  def extract(path,shp,source_sha,specs):return [({'fid':s['source_feature_id']},{'source_feature_id':s['source_feature_id'],'geometry_sha256':s['geometry_sha256'],'source_sha256':source_sha}) for s in specs]
   def intersect(geoms,grid,*args):
    fid=geoms[0]['fid'];return ([10,30],{'per_feature_root_inside_cells':[{'10':1 if partial else 2,'30':1}]}) if fid=='1' else ([20],{'per_feature_root_inside_cells':[{'20':1}]})
   def point_inside(g,x,y):return inside
   def component_at(rows,runs,grid,x,y):return 10 if x==2.5 else 20
-  return resolve_feature_windows(self.policy,self.region,{},self.inputs,self.sources,extract=extract,intersect=intersect,point_inside=point_inside,component_at=component_at,guard=lambda:None)
+  return resolve_feature_windows(self.policy,self.region,{},self.inputs,self.sources,extract=extract,intersect=intersect,point_inside=point_inside,component_at=component_at)
  def test_whole_feature_roots_and_named_anchors(self):
   out=self.resolve();self.assertEqual(set(out['windows'][0]['components']),{10,20});self.assertEqual(set(out['anchors']),{10,20});self.assertEqual(out['source_trace'][0]['partial_roots_current_generation_only'],[30])
  def test_partial_named_witness_fails_closed(self):
