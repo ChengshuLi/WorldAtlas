@@ -12,7 +12,6 @@ class ContractsTests(unittest.TestCase):
   self.man={'schema':'single-generation-component-manifest-v1','status':'complete-research','grid':self.grid,'pins':{x:{'sha256':self.pins[x]} for x in ('physical_rows','physical_runs','component_rows','component_runs')},'component_source_sha256':self.pins['component_source'],'builder_binary_sha256':self.pins['component_builder_binary'],'builder_binary':{'sha256':self.pins['component_builder_binary']},'physical_report':{'sha256':self.pins['physical_report']},'compiler_version':'c','builder_output':'ok'}
   self.seed={'schema':'worldatlas-stage2-mainland-seed-report-v1','status':'diagnostic-seed-pending-independent-provenance','publishable':False,'grid':self.grid,'decision_snapshot_sha256':self.pins['decision_snapshot'],'resolution_report_sha256':self.pins['resolution_report'],'decision_revision':'d','entity_revision':'e',**{x+'_sha256':self.pins[x] for x in ('physical_rows','physical_runs','component_rows','component_runs','seed_rows','seed_runs')},'component_manifest_sha256':self.pins['component_manifest'],'physical_report_sha256':self.pins['physical_report'],'physical_code_contract':{'water':1,'land':17},'seed_roots':[7],'code_sha256':{'seed.py':'a'*64},'seed_rules':[{'rule_id':'r','group_id':'g','component_id_current_generation_only':7,'region_id':'z','inside_entity_id':0,'outside_entity_id':1,'inside_code':17,'outside_code':18}],'region_traces':[{'revision_id':'d','region_id':'z','geometry_sha256':'f'*64,'input_trace':[{'route_id':'x'}],'method':'v1'}]}
   self.hints={'schema':'source-only-hints-diagnostic-report-v1','status':'diagnostic-not-independently-authenticated','publishable':False,'grid':self.grid,'decision_revision':'d','entity_revision':'e','distance_policy':self.metric,'seed_roots':[7],'inputs_sha256':{k:self.pins[k] for k in ('physical_rows','physical_runs','component_rows','component_runs','seed_rows','seed_runs','representatives','tile_manifest','resolution_report','decision_snapshot','component_manifest')},'roots_sha256':self.pins['hint_roots'],'hints_sha256':self.pins['hint_codes'],'root_count':3,'code_sha256':{'hints.py':'b'*64,'run_diagnostic.py':'c'*64}}
-  self.monitor={'schema':'source-only-hints-watchdog-v1','status':'sampled-complete','diagnostic_report_sha256':self.pins['hint_report'],'watchdog_sha256':'d'*64,'samples':10,'peak_child_rss_kib':20}
  def test_selected_seed_crosswalk_rejects_incomplete_policy(self):
   with self.assertRaisesRegex(ValueError,'missing selected simple land policy'):c.validate_selected_seed_decisions(self.snapshot,self.seed,{}, {},self.metric)
  def test_policy_tolerance_decimal_and_invalid(self):
@@ -20,7 +19,7 @@ class ContractsTests(unittest.TestCase):
   for x in (None,True,'NaN','Infinity','-0.1','1e9999','1e-9999'):
    with self.assertRaisesRegex(ValueError,'tie tolerance'):c.policy_tolerance_metres({'tie_tolerance_metres':x})
  def test_valid_chain(self):
-  metric,codes,entity=c.snap_policy(self.snapshot,'d','e','wgs','1');groups=c.resolution_roots(self.res,self.grid,self.pins,'d','e');c.component_manifest(self.man,self.grid,self.pins);roots=c.seed_report(self.seed,self.grid,self.pins,'d','e',groups,entity,{'seed.py':'a'*64});n=c.hints_report(self.hints,self.monitor,self.grid,self.pins,'d','e',metric,roots,{'hints.py':'b'*64,'run_diagnostic.py':'c'*64},'d'*64);self.assertEqual((roots,n),([7],3))
+  metric,codes,entity=c.snap_policy(self.snapshot,'d','e','wgs','1');groups=c.resolution_roots(self.res,self.grid,self.pins,'d','e');c.component_manifest(self.man,self.grid,self.pins);roots=c.seed_report(self.seed,self.grid,self.pins,'d','e',groups,entity,{'seed.py':'a'*64});n=c.hints_report(self.hints,self.grid,self.pins,'d','e',metric,roots,{'hints.py':'b'*64,'run_diagnostic.py':'c'*64});self.assertEqual((roots,n),([7],3))
  def test_snapshot_rejects_nonselected_and_wrong_metric(self):
   self.metric['execution_status']='proposed_not_selected'
   with self.assertRaisesRegex(ValueError,'selected distance'):c.snap_policy(self.snapshot,'d','e','wgs','1')
@@ -39,11 +38,11 @@ class ContractsTests(unittest.TestCase):
  def test_seed_grid_mismatch_rejected(self):
   groups=c.resolution_roots(self.res,self.grid,self.pins,'d','e');self.seed['grid']={**self.grid,'width':16}
   with self.assertRaisesRegex(ValueError,'matching grid'):c.seed_report(self.seed,self.grid,self.pins,'d','e',groups,{0:17,1:18},{'seed.py':'a'*64})
- def test_hints_not_final_and_watchdog_required(self):
+ def test_hints_not_final_and_source_pins_required(self):
   self.hints['inputs_sha256']['seed_rows']='f'*64
-  with self.assertRaisesRegex(ValueError,'stale hint input'):c.hints_report(self.hints,self.monitor,self.grid,self.pins,'d','e',self.metric,[7],{'hints.py':'b'*64,'run_diagnostic.py':'c'*64},'d'*64)
-  self.hints['inputs_sha256']['seed_rows']=self.pins['seed_rows'];self.monitor['samples']=0
-  with self.assertRaisesRegex(ValueError,'watchdog'):c.hints_report(self.hints,self.monitor,self.grid,self.pins,'d','e',self.metric,[7],{'hints.py':'b'*64,'run_diagnostic.py':'c'*64},'d'*64)
+  with self.assertRaisesRegex(ValueError,'stale hint input'):c.hints_report(self.hints,self.grid,self.pins,'d','e',self.metric,[7],{'hints.py':'b'*64,'run_diagnostic.py':'c'*64})
+  self.hints['inputs_sha256']['seed_rows']=self.pins['seed_rows'];self.hints['code_sha256']['run_diagnostic.py']='0'*64
+  with self.assertRaisesRegex(ValueError,'hints artifact/code mismatch'):c.hints_report(self.hints,self.grid,self.pins,'d','e',self.metric,[7],{'hints.py':'b'*64,'run_diagnostic.py':'c'*64})
 
 class CrosswalkTests(unittest.TestCase):
  def setUp(self):

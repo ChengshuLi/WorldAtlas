@@ -4,7 +4,7 @@
 Research prototype. Current component IDs are ephemeral output, never portable policy.
 This does not construct region boundaries, classify islands, or write a map or DB.
 """
-import argparse, bisect, hashlib, importlib.util, itertools, json, os, re, tempfile
+import argparse, bisect, hashlib, importlib.util, itertools, json, os, re, tempfile, runpy
 from decimal import Decimal, ROUND_FLOOR
 from pathlib import Path
 
@@ -12,7 +12,6 @@ HERE=Path(__file__).resolve().parent
 REPO=HERE.parent
 HELPER=REPO/'point-component-prototype'/'resolve.py'
 NAMED=REPO/'named-identity-prototype'/'named_identity.py'
-WATCH=REPO/'named-identity-prototype'/'identity_watch.py'
 spec=importlib.util.spec_from_file_location('point_component_helpers',HELPER)
 helper=importlib.util.module_from_spec(spec);spec.loader.exec_module(helper)
 need=helper.need
@@ -30,7 +29,7 @@ def unique(items,key):
 
 def resolve(req):
     need(req.get('schema')=='mainland-witness-request-v1','invalid request')
-    codepaths={'resolver':Path(__file__).resolve(),'helper':HELPER.resolve(),'named_identity':NAMED.resolve(),'identity_watch':WATCH.resolve()}
+    codepaths={'resolver':Path(__file__).resolve(),'helper':HELPER.resolve(),'named_identity':NAMED.resolve()}
     code={k:helper.digest(p) for k,p in codepaths.items()}
     need(req.get('code_sha256')==code,'code pin mismatch')
     refs={k:helper.pinned(req[k]) for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')}
@@ -87,8 +86,7 @@ def resolve(req):
         need(all(text(a.get(k)) for k in ('source_uri','attribution','license_name','license_uri','provider','title','r2_bucket','r2_key','sha256')) and re.fullmatch('[0-9a-f]{64}',a['sha256']) and type(a.get('size_bytes')) is int and a['size_bytes']>0,'incomplete raw source metadata')
         need(all(s.get(k)==a.get(k) for k in ('sha256','r2_bucket','r2_key','size_bytes')) and file_specs[key].get('sha256')==a['sha256'] and not any(isinstance(d,dict) and (d.get('source_id'),d.get('version'))==key for d in deps),'source custody or lineage mismatch')
         files[key]=helper.pinned(file_specs[key]);need(files[key].stat().st_size==a['size_bytes'],'source size mismatch')
-    wb=helper.read_bounded(WATCH,'identity watchdog code');watch=type('WitnessWatch',(),{})();exec(compile(wb,str(WATCH),'exec'),watch.__dict__)
-    named_bytes=helper.read_bounded(NAMED,'named identity code')
+    named_bytes=helper.read_bounded(NAMED,'named identity code');named=runpy.run_path(str(NAMED))
     roots={};claims=[]
     for wid,d in sorted(witnesses.items()):
         pf,ident=features[d['point_feature_id']],features[d['identity_feature_id']];pk=(pf['source_id'],pf['source_version']);ik=(ident['source_id'],ident['source_version']);need(pk!=ik,'point and identity sources must be distinct')
@@ -96,7 +94,7 @@ def resolve(req):
         matches=[f for f in source['features'] if isinstance(f,dict) and isinstance(f.get('properties'),dict) and type(f['properties'].get(d['id_property'])) in (str,int) and str(f['properties'][d['id_property']])==pf['source_feature_id']]
         need(len(matches)==1,'point feature identity must be unique');f=matches[0];geom=f.get('geometry');need('crs' not in f and isinstance(geom,dict) and 'crs' not in geom and geom.get('type')=='Point' and isinstance(geom.get('coordinates'),list) and len(geom['coordinates'])==2 and f['properties'].get('name')==d['point_name'] and helper.geometry_sha(geom)==pf['geometry_sha256'],'point identity or geometry mismatch')
         checkspec={'method':'raw_named_polygon_contains_point_v1','identity_feature_id':ident['source_feature_id'],'identity_id_property':d['identity_id_property'],'identity_name_property':d['identity_name_property'],'identity_class_property':d['identity_class_property'],'identity_class_value':d['identity_class'],'identity_geometry_sha256':ident['geometry_sha256']}
-        check=watch.run(named_bytes,{'identity_path':str(files[ik]),'identity_sha256':assets[ik]['sha256'],'point_geometry':geom,'island_identity':d['identity_name'],'spec':checkspec})
+        identity_source=json.loads(helper.read_bounded(files[ik],'identity source',8*1024*1024));check=named['check'](identity_source,geom,d['identity_name'],checkspec)
         lon,lat=map(helper.finite_decimal,geom['coordinates']);need(-180<=lon<180 and -90<=lat<=90,'point outside WGS84');gx=(lon-west)/step;gy=(north-lat)/step
         need(gx!=gx.to_integral_value() and gy!=gy.to_integral_value(),'point on grid boundary is ambiguous');x=int(gx.to_integral_value(rounding=ROUND_FLOOR));y=int(gy.to_integral_value(rounding=ROUND_FLOOR));radius=d['radius_cells'];need(0<=x<w and radius<=y<h-radius and 2*radius+1<=w,'witness neighborhood outside grid')
         observed=[];water=0;center=None
@@ -129,7 +127,7 @@ def resolve(req):
 def main():
     p=argparse.ArgumentParser();p.add_argument('request');p.add_argument('output');a=p.parse_args();path=Path(a.request).resolve();raw=helper.read_bounded(path,'request');req=json.loads(raw);result=resolve(req);need(helper.read_bounded(path,'request')==raw,'request changed');result['request_sha256']=hashlib.sha256(raw).hexdigest();out=Path(a.output).resolve()
     manifest=json.loads(helper.read_bounded(req['component_manifest']['path'],'component manifest'))
-    input_paths=[path,*[Path(req[k]['path']).resolve() for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')],*[Path(x['path']).resolve() for x in req['source_files']],*[Path(x['path']).resolve() for x in helper.lineage_specs(manifest)],HELPER.resolve(),NAMED.resolve(),WATCH.resolve(),Path(__file__).resolve()]
+    input_paths=[path,*[Path(req[k]['path']).resolve() for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')],*[Path(x['path']).resolve() for x in req['source_files']],*[Path(x['path']).resolve() for x in helper.lineage_specs(manifest)],HELPER.resolve(),NAMED.resolve(),Path(__file__).resolve()]
     need(all(not out.is_relative_to(p.parent) for p in input_paths),'output overlaps input directory');payload=(json.dumps(result,sort_keys=True,indent=2)+'\n').encode();tmp=None
     linked=False
     try:

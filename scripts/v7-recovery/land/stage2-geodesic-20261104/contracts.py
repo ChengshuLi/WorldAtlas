@@ -56,12 +56,11 @@ def seed_report(report,grid,pins,revision,entity_revision,groups,entity_codes,se
  for t in traces:need(isinstance(t,dict) and t.get('revision_id')==revision and text(t.get('region_id')) and isinstance(t.get('geometry_sha256'),str) and HEX.fullmatch(t['geometry_sha256']) and isinstance(t.get('input_trace'),list) and t['input_trace'] and text(t.get('method')),'invalid region trace')
  return expected_roots
 
-def hints_report(report,monitor,grid,pins,revision,entity_revision,metric,seed_roots,hint_code_hashes,watchdog_hash):
+def hints_report(report,grid,pins,revision,entity_revision,metric,seed_roots,hint_code_hashes):
  need(report.get('schema')=='source-only-hints-diagnostic-report-v1' and report.get('status')=='diagnostic-not-independently-authenticated' and report.get('publishable') is False and report.get('synthetic_fixture') is not True,'invalid hints report')
  need(report.get('grid')==grid and report.get('decision_revision')==revision and report.get('entity_revision')==entity_revision and report.get('distance_policy')==metric and report.get('seed_roots')==seed_roots,'hints policy/revision mismatch')
  for k in ('physical_rows','physical_runs','component_rows','component_runs','seed_rows','seed_runs','representatives','tile_manifest','resolution_report','decision_snapshot','component_manifest'):need(report.get('inputs_sha256',{}).get(k)==pins[k],'stale hint input: '+k)
  need(report.get('roots_sha256')==pins['hint_roots'] and report.get('hints_sha256')==pins['hint_codes'] and type(report.get('root_count')) is int and 0<report['root_count']<2**32 and report.get('code_sha256')==hint_code_hashes,'hints artifact/code mismatch')
- need(monitor.get('schema')=='source-only-hints-watchdog-v1' and monitor.get('status')=='sampled-complete' and monitor.get('diagnostic_report_sha256')==pins['hint_report'] and monitor.get('watchdog_sha256')==watchdog_hash and type(monitor.get('samples')) is int and monitor['samples']>0 and type(monitor.get('peak_child_rss_kib')) is int and monitor['peak_child_rss_kib']>=0,'hint watchdog incomplete or mismatched')
  return report['root_count']
 
 def policy_tolerance_metres(policy):

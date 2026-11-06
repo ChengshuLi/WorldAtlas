@@ -19,7 +19,7 @@ def create(output,inputs,grid,policy_id,policy_version,controls,seed_controls):
  # Validate the same strict shape before creating any output.
  stage2.need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int and 1<grid['width']<=1000000 and 0<grid['height']<=1000000 and grid['west']==-180 and grid['north']==90 and type(grid['step']) in (int,float) and grid['step']==360/grid['width'] and 90-grid['height']*grid['step']>=-90-1e-8,'invalid global grid')
  stage2.need(isinstance(policy_id,str) and policy_id and isinstance(policy_version,str) and policy_version,'invalid policy')
- stage2.need(isinstance(seed_controls,dict) and set(seed_controls)=={'timeout_seconds','strip_rows'} and type(seed_controls['timeout_seconds']) in (int,float) and 0<seed_controls['timeout_seconds']<=1800 and type(seed_controls['strip_rows']) is int and 1<=seed_controls['strip_rows']<=64,'invalid seed controls')
+ stage2.need(isinstance(seed_controls,dict) and set(seed_controls)=={'strip_rows'} and type(seed_controls['strip_rows']) is int and 1<=seed_controls['strip_rows']<=64,'invalid seed controls')
  for pin in pins.values():stage2.build_stage2.pin(pin,guard)
  digest=stage2.write_json(out,cfg);return {'schema':'stage2-fresh-config-receipt-v1','config_sha256':digest,'inputs_sha256':{k:v['sha256'] for k,v in pins.items()},'limitations':['Pinning files does not authenticate a Neon export or approve geographic decisions.','No work or map was created.']}
 

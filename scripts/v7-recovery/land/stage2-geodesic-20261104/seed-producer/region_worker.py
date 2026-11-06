@@ -4,10 +4,9 @@ from pathlib import Path
 from regions import assemble
 from closure_client import ClosureChecker
 
-def execute(request):
+def execute(request,guard=lambda:None):
  if request.get('schema')!='stage2-region-worker-request-v1':raise ValueError('invalid region worker request')
- def guard():
-  return None
+ if not callable(guard):raise ValueError('region guard required')
  records={};sources={}
  for r in request['records']:
   key=(r['kind'],r['id'])
@@ -18,7 +17,7 @@ def execute(request):
   key=(s['source_id'],s['version'])
   if key in sources:raise ValueError('duplicate source ID/version')
   sources[key]={'kind':s['kind'],'sha256':s['sha256'],'bucket':s['bucket'],'key':s['key'],'origin':s.get('origin')}
- c=request['closure'];checker=ClosureChecker(c['checker_path'],c['checker_sha256'],c['physical_dir'],c['physical_rows_sha256'],c['physical_runs_sha256'],c['contract_path'],c['contract_sha256'],c['work_parent'],guard,c['timeout_seconds'],c.get('terminal_checker_path'),c.get('terminal_checker_sha256'))
+ c=request['closure'];checker=ClosureChecker(c['checker_path'],c['checker_sha256'],c['physical_dir'],c['physical_rows_sha256'],c['physical_runs_sha256'],c['contract_path'],c['contract_sha256'],c['work_parent'],guard,c.get('terminal_checker_path'),c.get('terminal_checker_sha256'))
  geom,report=assemble(request['revision_id'],records,request['decision'],sources,checker,physical_rows_sha256=c['physical_rows_sha256'],physical_runs_sha256=c['physical_runs_sha256'],checker_sha256=c['checker_sha256'],closure_contract_sha256=c['contract_sha256'],guard=guard,terminal_checker_sha256=c.get('terminal_checker_sha256'))
  return {'schema':'stage2-region-worker-result-v1','status':'selected-research-region','geometry':geom,'report':report,'limitations':['Caller must authenticate the selected Neon export, source catalog and revision.','Closure proof checks only physical-water coverage, not geographic authority or historical V2/V7 equivalence.']}
 if __name__=='__main__':

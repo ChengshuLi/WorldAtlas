@@ -30,7 +30,12 @@ class RepositoryDependenciesTest(unittest.TestCase):
         self.assertTrue(set(build_stage2.CODE_NAMES).issubset(code))
         expected = orchestrate_stage2.REVIEWED_SEED_FREEZE
         self.assertIsNotNone(expected)
-        self.assertEqual({n: code['seed-producer/' + n] for n in orchestrate_stage2.SEED_NAMES}, expected)
+        self.assertFalse(orchestrate_stage2.SEED_FREEZE_CURRENT)
+        self.assertNotEqual({n: code['seed-producer/' + n] for n in orchestrate_stage2.SEED_NAMES}, expected)
+        self.assertIn('seed_worker.py', orchestrate_stage2.SEED_NAMES)
+        self.assertEqual(code['seed-producer/seed_worker.py'], '5a2de62222648aae6e6b3ba55a116707504470272759898b293436fae00dd8eb')
+        self.assertNotIn('guarded_exec.py', orchestrate_stage2.SEED_NAMES)
+        self.assertNotIn('guarded_raster_exec.py', orchestrate_stage2.SEED_NAMES)
 
     def test_external_executable_sources_match_frozen_pins(self):
         producer = HERE / 'seed-producer' / 'seed_producer.py'

@@ -4,7 +4,7 @@
 All geography, source selection, target, and island identity come from a pinned
 Neon-export candidate. This tool only reports claims, never writes a map or DB.
 """
-import argparse, hashlib, json, os, re, struct, tempfile, types
+import argparse, hashlib, json, os, re, struct, tempfile, types, runpy
 from decimal import Decimal, InvalidOperation, ROUND_FLOOR
 from pathlib import Path
 
@@ -141,8 +141,8 @@ def resolve(req):
     for key,s in source_map.items():
         need(text(s.get('uri')) and text(s.get('attribution')) and text(s.get('license')) and text(s.get('r2_bucket')) and text(s.get('r2_key')) and text(s.get('license_uri')) and text(s.get('provider')) and text(s.get('title')) and type(s.get('size_bytes')) is int and s['size_bytes']>0 and s.get('kind')=='raw' and isinstance(s.get('provenance'),dict) and s['provenance'].get('representation')=='provider_original' and isinstance(s.get('sha256'),str) and HEX.fullmatch(s['sha256']), 'incomplete or non-raw source metadata')
         a=asset_map[key];need(a.get('sha256')==s['sha256'],'source snapshot pin mismatch');files[key]=pinned(a);need(files[key].stat().st_size==s['size_bytes'], 'source size mismatch')
-    seen_ids=set();seen_roots={};claims=[];named_bytes=None;named_hash=None;watch_module=None;watch_hash=None
-    named_path=Path(__file__).resolve().parent.parent/'named-identity-prototype'/'named_identity.py';watch_path=named_path.with_name('identity_watch.py')
+    seen_ids=set();seen_roots={};claims=[];named_bytes=None;named_hash=None;named_module=None
+    named_path=Path(__file__).resolve().parent.parent/'named-identity-prototype'/'named_identity.py'
     for d in sorted(decisions,key=lambda v:v.get('affiliation_id','')):
         need(isinstance(d,dict) and text(d.get('affiliation_id')) and d['affiliation_id'] not in seen_ids, 'invalid or duplicate affiliation');seen_ids.add(d['affiliation_id'])
         need(d.get('method') in ('source_point_component_v1','source_point_named_region_component_v1') and d.get('execution_status')=='selected_for_research' and type(d.get('entity_id')) is int and text(d.get('island_identity')) and text(d.get('point_name')) and d['entity_id'] in entity_map, 'unselected or malformed decision')
@@ -154,13 +154,12 @@ def resolve(req):
         need(geometry_sha(geom)==d['geometry_sha256'], 'point geometry hash mismatch'); need(f['properties'].get('name')==d['point_name'], 'point name mismatch')
         identity_check=None
         if d['method']=='source_point_named_region_component_v1':
-            if watch_module is None:
+            if named_module is None:
                 named_bytes=read_bounded(named_path,'named identity code');named_hash=hashlib.sha256(named_bytes).hexdigest();need(req.get('named_identity_sha256')==named_hash,'named identity code pin mismatch')
-                watch_bytes=read_bounded(watch_path,'identity watchdog code');watch_hash=hashlib.sha256(watch_bytes).hexdigest();need(req.get('identity_watch_sha256')==watch_hash,'identity watchdog code pin mismatch')
-                watch_module=types.ModuleType('identity_watch');exec(compile(watch_bytes,str(watch_path),'exec'),watch_module.__dict__)
+                named_module=runpy.run_path(str(named_path))
             spec={'method':'raw_named_polygon_contains_point_v1','identity_feature_id':d.get('identity_source_feature_id'),'identity_id_property':d.get('identity_id_property'),'identity_name_property':d.get('identity_name_property'),'identity_class_property':d.get('identity_class_property'),'identity_class_value':d.get('identity_class_value'),'identity_geometry_sha256':d.get('identity_geometry_sha256')}
-            worker_request={'identity_path':str(files[ik]),'identity_sha256':source_map[ik]['sha256'],'point_geometry':geom,'island_identity':d['island_identity'],'spec':spec}
-            identity_check=watch_module.run(named_bytes,worker_request)
+            identity_source=json.loads(read_bounded(files[ik],'identity source',8*1024*1024))
+            identity_check=named_module['check'](identity_source,geom,d['island_identity'],spec)
         lon,lat=map(finite_decimal,geom['coordinates']);need(-180<=lon<180 and -90<=lat<=90, 'point outside WGS84')
         gx=(lon-west)/step;gy=(north-lat)/step;need(gx!=gx.to_integral_value() and gy!=gy.to_integral_value(), 'point on grid boundary is ambiguous')
         x=int(gx.to_integral_value(rounding=ROUND_FLOOR));y=int(gy.to_integral_value(rounding=ROUND_FLOOR));need(0<=x<width and 0<=y<height,'point outside grid')
@@ -180,8 +179,8 @@ def resolve(req):
     for key,p in files.items():need(digest(p)==source_map[key]['sha256'], 'source changed during resolution')
     need(digest(code_path)==code_hash, 'resolver code changed during resolution')
     if adapter_hash is not None:need(digest(adapter_path)==adapter_hash, 'adapter code changed during resolution')
-    if named_hash is not None:need(digest(named_path)==named_hash and digest(watch_path)==watch_hash, 'named identity code changed during resolution')
-    return {'schema':'source-point-component-report-v1','status':'research-only-not-a-build','revision':snap['revision'],'entity_revision':snap.get('entity_revision'),'snapshot_schema':snapshot_schema,'adapter_sha256':adapter_hash,'named_identity_sha256':named_hash,'identity_watch_sha256':watch_hash,'resolver_sha256':code_hash,'snapshot_sha256':req['snapshot']['sha256'],'component_manifest_sha256':req['component_manifest']['sha256'],'component_lineage_mode':lineage_mode,'component_source_sha256':req['component_source']['sha256'],'grid':g,'input_sha256':{k:req[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')},'claims':claims,'limitations':['The export and semantic island-identity assertion are not authenticated by hashes.','Whole-grid component topology and source attribution require independent validation.','This report is not a build result or permission to publish.']}
+    if named_hash is not None:need(digest(named_path)==named_hash, 'named identity code changed during resolution')
+    return {'schema':'source-point-component-report-v1','status':'research-only-not-a-build','revision':snap['revision'],'entity_revision':snap.get('entity_revision'),'snapshot_schema':snapshot_schema,'adapter_sha256':adapter_hash,'named_identity_sha256':named_hash,'resolver_sha256':code_hash,'snapshot_sha256':req['snapshot']['sha256'],'component_manifest_sha256':req['component_manifest']['sha256'],'component_lineage_mode':lineage_mode,'component_source_sha256':req['component_source']['sha256'],'grid':g,'input_sha256':{k:req[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')},'claims':claims,'limitations':['The export and semantic island-identity assertion are not authenticated by hashes.','Whole-grid component topology and source attribution require independent validation.','This report is not a build result or permission to publish.']}
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('request');p.add_argument('output');a=p.parse_args()
@@ -189,7 +188,7 @@ def main():
     req=json.loads(request);result=resolve(req);need(read_bounded(request_path,'request')==request,'request changed during resolution')
     result['request_sha256']=hashlib.sha256(request).hexdigest();out=Path(a.output).resolve()
     manifest=json.loads(read_bounded(req['component_manifest']['path'],'component manifest'))
-    input_paths=[request_path,Path(__file__).resolve(),Path(__file__).with_name('adapter.py').resolve(),(Path(__file__).resolve().parent.parent/'named-identity-prototype'/'named_identity.py').resolve(),(Path(__file__).resolve().parent.parent/'named-identity-prototype'/'identity_watch.py').resolve()]+[Path(req[k]['path']).resolve() for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')]+[Path(x['path']).resolve() for x in req['source_files']]+[Path(x['path']).resolve() for x in lineage_specs(manifest)]
+    input_paths=[request_path,Path(__file__).resolve(),Path(__file__).with_name('adapter.py').resolve(),(Path(__file__).resolve().parent.parent/'named-identity-prototype'/'named_identity.py').resolve()]+[Path(req[k]['path']).resolve() for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')]+[Path(x['path']).resolve() for x in req['source_files']]+[Path(x['path']).resolve() for x in lineage_specs(manifest)]
     need(all(not out.is_relative_to(p.parent) for p in input_paths), 'output overlaps an input directory'); payload=(json.dumps(result,sort_keys=True,indent=2)+'\n').encode()
     tmp=None
     try:

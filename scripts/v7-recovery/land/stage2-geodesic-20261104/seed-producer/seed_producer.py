@@ -4,7 +4,7 @@ The caller authenticates the pinned Neon export and independently resolves the
 current stage-1 component witnesses before invoking this producer. No historical
 continent map, prior assignment checkpoint, or List 1 override is accepted.
 """
-import hashlib,json,os,shutil,signal,subprocess,tempfile,time,ctypes
+import hashlib,json,os,shutil,signal,tempfile,time,ctypes,runpy
 from pathlib import Path
 from decimal import Decimal
 from fractions import Fraction
@@ -13,9 +13,9 @@ from seed_rules import compile_rules
 from region_client import execute as build_region
 from closure_client import sha
 BASE=Path(__file__).resolve().parent
-CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py','guarded_exec.py','guarded_raster_exec.py')
+CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py')
 TRUSTED_CODE={'seed_builder':'b90d613cc269195ea58cf491ad424d7d4a923e8c686410ef98e391a7f757beaa','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'0ba02bafcfd54214af0b762edd194833eea1cbba7b1e391764b05c40ff0036ba'}
-TRUSTED_TERMINAL_CHECKER='fdb31b5efc6066d659cfb16c57aeda9b58fd850c4f02f864d767a0ad2956a7e9'
+TRUSTED_TERMINAL_CHECKER='9be9698f5d6bff5546eb192e78fa209fc4c9562f11d12b9efd5cbb94ef3db17b'
 INPUTS={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','closure_contract','seed_builder','seed_kernel'}
 def bounded_json(pin,guard,limit=16<<20):
  h=hashlib.sha256();chunks=[];n=0
@@ -35,8 +35,8 @@ def run(request_path,work_dir,output_dir,guard):
  with open(request_path,'rb') as f:raw=f.read((1<<20)+1)
  if len(raw)>1<<20:raise ValueError('request too large')
  req=json.loads(raw,object_pairs_hook=no_duplicates);inp=req.get('inputs');grid=req.get('grid');controls=req.get('controls')
- if req.get('schema')!='worldatlas-stage2-seed-request-v1' or not isinstance(inp,dict) or set(inp) not in (INPUTS,INPUTS|{'terminal_checker'}) or not isinstance(grid,dict) or set(grid)!={'width','height','west','north','step'} or not isinstance(controls,dict) or set(controls)!={'disk_reserve_bytes','timeout_seconds','strip_rows'}:raise ValueError('invalid seed request')
- if type(controls['disk_reserve_bytes']) is not int or controls['disk_reserve_bytes']<0 or not 0<controls['timeout_seconds']<=3600 or type(controls['strip_rows']) is not int or not 1<=controls['strip_rows']<=64:raise ValueError('invalid seed controls')
+ if req.get('schema')!='worldatlas-stage2-seed-request-v1' or not isinstance(inp,dict) or set(inp) not in (INPUTS,INPUTS|{'terminal_checker'}) or not isinstance(grid,dict) or set(grid)!={'width','height','west','north','step'} or not isinstance(controls,dict) or set(controls)!={'disk_reserve_bytes','strip_rows'}:raise ValueError('invalid seed request')
+ if type(controls['disk_reserve_bytes']) is not int or controls['disk_reserve_bytes']<0  or type(controls['strip_rows']) is not int or not 1<=controls['strip_rows']<=64:raise ValueError('invalid seed controls')
  external_guard=guard
  def guard():
   external_guard()
@@ -72,31 +72,18 @@ def run(request_path,work_dir,output_dir,guard):
   with open(inp[key]['path'],'rb') as f:data=f.read((1<<20)+1)
   if len(data)>1<<20 or hashlib.sha256(data).hexdigest()!=inp[key]['sha256']:raise ValueError('rasterizer source mismatch')
   (codework/name).write_bytes(data)
- closure={'checker_path':inp['closure_checker']['path'],'checker_sha256':inp['closure_checker']['sha256'],'physical_dir':str(Path(inp['physical_rows']['path']).resolve().parent),'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'contract_path':inp['closure_contract']['path'],'contract_sha256':inp['closure_contract']['sha256'],'timeout_seconds':controls['timeout_seconds']}
+ closure={'checker_path':inp['closure_checker']['path'],'checker_sha256':inp['closure_checker']['sha256'],'physical_dir':str(Path(inp['physical_rows']['path']).resolve().parent),'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'contract_path':inp['closure_contract']['path'],'contract_sha256':inp['closure_contract']['sha256']}
  if 'terminal_checker' in inp:closure.update({'terminal_checker_path':inp['terminal_checker']['path'],'terminal_checker_sha256':inp['terminal_checker']['sha256']})
  if Path(inp['physical_runs']['path']).resolve().parent!=Path(closure['physical_dir']):raise ValueError('physical files must be colocated')
  source_list=[{'source_id':k[0],'version':k[1],**v} for k,v in source_catalog.items()];region_configs=[];region_traces=[]
  for decision in regions:
-  guard();result=build_region({'schema':'stage2-region-worker-request-v1','revision_id':rev,'records':list(records.values()),'sources':source_list,'decision':decision,'closure':closure},regionwork,guard,controls['timeout_seconds']);
-  if any(result['code_sha256'].get(n)!=code_hashes[n] for n in ('region_worker.py','regions.py','closure_client.py','guarded_exec.py')):raise ValueError('region worker code mismatch')
+  guard();result=build_region({'schema':'stage2-region-worker-request-v1','revision_id':rev,'records':list(records.values()),'sources':source_list,'decision':decision,'closure':closure},regionwork,guard);
+  if any(result['code_sha256'].get(n)!=code_hashes[n] for n in ('region_worker.py','regions.py','closure_client.py')):raise ValueError('region worker code mismatch')
   g=result['geometry'];name=hashlib.sha256(decision['region_id'].encode()).hexdigest()+'.geojson';p=rinput/name;data=json.dumps({'type':'FeatureCollection','features':[{'type':'Feature','properties':{},'geometry':g}]},sort_keys=True,separators=(',',':'),allow_nan=False).encode();p.write_bytes(data);region_configs.append({'id':decision['region_id'],'geometry':{'path':str(p),'sha256':hashlib.sha256(data).hexdigest()},'witnesses':[{'lon':float(w['lon']),'lat':float(w['lat']),'inside':w['inside']} for w in decision['witnesses']]});region_traces.append(result['report'])
  raster_rules=[{'component_id':r['component_id_current_generation_only'],'region_id':r['region_id'],'inside_code':r['inside_code'],'outside_code':r['outside_code']} for r in rules]
  config={'schema':'direct-region-seed-research-v1','grid':{**grid,'crs':'EPSG:4326'},'component_rows':inp['component_rows'],'component_runs':inp['component_runs'],'regions':region_configs,'rules':raster_rules,'evidence':[inp[k] for k in ('snapshot','resolution','physical_rows','physical_runs','physical_report','component_manifest','closure_checker','closure_contract')],'strip_rows':controls['strip_rows'],'reserve_bytes':controls['disk_reserve_bytes']};config_path=rinput/'seed-config.json';config_path.write_text(json.dumps(config,sort_keys=True,indent=2)+'\n')
- err=work/'rasterizer.log'
- with open(err,'w+b') as log:
-  env=os.environ.copy()
-  for k in ('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS'):env[k]='1'
-  p=subprocess.Popen(['/usr/bin/python3',str(BASE/'guarded_raster_exec.py'),str(os.getpid()),str(codework/'build_seed.py'),str(config_path),str(seedout)],stdout=log,stderr=log,env=env);start=time.monotonic()
-  try:
-   while p.poll() is None:
-    try:
-     guard()
-    except BaseException:p.kill();p.wait();raise
-    if time.monotonic()-start>controls['timeout_seconds']:p.kill();p.wait();raise RuntimeError('seed rasterizer timed out')
-    time.sleep(.1)
-   if p.returncode:log.seek(0);raise ValueError('seed rasterizer failed: '+log.read(4096).decode(errors='replace'))
-  finally:
-   if p.poll() is None:p.kill();p.wait()
+ raster_module=runpy.run_path(str(codework/'build_seed.py'))
+ raster=raster_module['build'](str(config_path),str(seedout))
  raster=bounded_json({'path':str(seedout/'report.json'),'sha256':sha(seedout/'report.json',guard)},guard)
  rows=sha(seedout/'rows.u32le',guard);runs=sha(seedout/'runs.u32le',guard)
  if raster.get('schema')!='direct-region-seed-research-report-v1' or raster.get('outputs_sha256')!={'rows':rows,'runs':runs} or raster.get('component_rows_sha256')!=inp['component_rows']['sha256'] or raster.get('component_runs_sha256')!=inp['component_runs']['sha256']:raise ValueError('seed rasterizer output mismatch')

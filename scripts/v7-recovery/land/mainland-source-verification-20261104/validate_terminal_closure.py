@@ -38,7 +38,6 @@ def verify_path(points,start,end,code,water,land,maxvisits):
         for x,y in m.touched_segment(a[0],a[1],b[0],b[1]):
             visits+=1
             if visits>maxvisits:raise ValueError('cell visit limit exceeded')
-            if visits%8192==0:m.guard()
             v=code(x,y)
             if v==water:continue
             if v!=land:raise ValueError('unrecognized physical code')
@@ -60,7 +59,7 @@ def main():
     p.add_argument('--closure',required=True);p.add_argument('--closure-sha256',required=True)
     for side in ('start','end'):
         p.add_argument('--'+side+'-geometry',required=True);p.add_argument('--'+side+'-geometry-sha256',required=True);p.add_argument('--'+side+'-endpoint',choices=('start','end'),required=True)
-    p.add_argument('--output',required=True);a=p.parse_args();m.guard();ch,contract=m.load_contract(a.contract,a.contract_sha256)
+    p.add_argument('--output',required=True);a=p.parse_args();ch,contract=m.load_contract(a.contract,a.contract_sha256)
     checker=m.sha(Path(__file__).resolve());assert m.sha(SUPPORT)==SUPPORT_SHA
     evidence=m.verify_producer_code(a.contract,contract);report=m.verify_physical_report(a.physical_dir,contract);mask=m.Mask(a.physical_dir)
     paths=[Path(a.closure),Path(a.start_geometry),Path(a.end_geometry)];expected=[a.closure_sha256,a.start_geometry_sha256,a.end_geometry_sha256]

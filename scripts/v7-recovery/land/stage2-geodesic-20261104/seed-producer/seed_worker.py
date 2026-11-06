@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Subprocess adapter; the outer process-group guardian monitors this worker."""
+"""Direct seed-producer adapter invoked by the stage-2 orchestrator."""
 import json,os,shutil,sys
 from pathlib import Path
 import seed_producer

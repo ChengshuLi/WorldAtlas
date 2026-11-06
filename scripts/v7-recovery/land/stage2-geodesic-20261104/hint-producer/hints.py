@@ -11,6 +11,12 @@ from scipy.spatial import cKDTree
 from pyproj import Geod
 
 U32=struct.Struct('<I')
+WGS84_A=6378137.0
+WGS84_F=1/298.257223563
+MIN_CURVATURE_RADIUS=WGS84_A*(1-WGS84_F*(2-WGS84_F))
+BOUND_CUSHION_M=0.001
+DISTANCE_BATCH=65536
+GEOD=Geod(a=WGS84_A,f=WGS84_F)
 
 def _offsets(path,height,record_bytes,run_path):
     expected=(height+1)*4
@@ -59,11 +65,63 @@ def inventory(rows,runs,seed_roots,width,height,db_path,guard=lambda:None):
 def _xyz(lat,lon):
     a=np.deg2rad(lat);b=np.deg2rad(lon);return np.column_stack((np.cos(a)*np.cos(b),np.cos(a)*np.sin(b),np.sin(a)))
 
+def _inverse_distances(lon1,lat1,lon2,lat2):
+    if len(lon1)==1:
+        return np.asarray([GEOD.inv(float(lon1[0]),float(lat1[0]),float(lon2[0]),float(lat2[0]))[2]],dtype=np.float64)
+    return np.asarray(GEOD.inv(lon1,lat1,lon2,lat2)[2],dtype=np.float64)
+
+def wgs84_nearest_distances(tree,latitudes,longitudes,query_lat,query_lon):
+    """Exact WGS84 minima after a conservative unit-sphere candidate search.
+
+    The unit-sphere tree is only a lower-bound index. Every representative
+    that can beat the incumbent ellipsoidal distance is evaluated with Geod.
+    """
+    qlat=np.asarray(query_lat,dtype=np.float64);qlon=np.asarray(query_lon,dtype=np.float64)
+    latitudes=np.asarray(latitudes,dtype=np.float64);longitudes=np.asarray(longitudes,dtype=np.float64)
+    if (qlat.ndim!=1 or qlon.shape!=qlat.shape or latitudes.ndim!=1
+            or longitudes.shape!=latitudes.shape or not len(latitudes)
+            or np.any(~np.isfinite(qlat)) or np.any(~np.isfinite(qlon))
+            or np.any(~np.isfinite(latitudes)) or np.any(~np.isfinite(longitudes))
+            or np.any(np.abs(qlat)>90) or np.any(np.abs(qlon)>180)
+            or np.any(np.abs(latitudes)>90) or np.any(np.abs(longitudes)>180)):
+        raise ValueError('invalid geodesic nearest inputs')
+    xyz=_xyz(qlat,qlon)
+    _,first=tree.query(xyz,k=1,workers=1)
+    first=np.asarray(first,dtype=np.int64)
+    upper=_inverse_distances(qlon,qlat,longitudes[first],latitudes[first])
+    if np.any(~np.isfinite(upper)) or np.any(upper<0):raise ValueError('invalid WGS84 upper bound')
+    angle=np.minimum(math.pi,(upper+BOUND_CUSHION_M)/MIN_CURVATURE_RADIUS)
+    radii=np.nextafter(2*np.sin(angle/2),math.inf)
+    result=np.empty(len(qlat),dtype=np.float64)
+    for q in range(len(result)):
+        ids=tree.query_ball_point(xyz[q],float(radii[q]),workers=1)
+        if int(first[q]) not in ids:ids.append(int(first[q]))
+        best=math.inf
+        for start in range(0,len(ids),DISTANCE_BATCH):
+            ix=np.asarray(ids[start:start+DISTANCE_BATCH],dtype=np.int64)
+            dist=_inverse_distances(np.full(len(ix),qlon[q]),np.full(len(ix),qlat[q]),longitudes[ix],latitudes[ix])
+            if np.any(~np.isfinite(dist)) or np.any(dist<0):raise ValueError('invalid WGS84 distance')
+            best=min(best,float(np.min(dist)))
+        if not math.isfinite(best):raise RuntimeError('no WGS84 hint candidate')
+        result[q]=best
+    return result
+
+def lowest_code_for_min_distance(distances,codes):
+    """Choose the lowest numeric code among exact minimum-distance ties."""
+    d=np.asarray(distances,dtype=np.float64);c=np.asarray(codes,dtype=np.uint16)
+    if d.ndim!=2 or d.shape[1]!=len(c) or not len(c) or len(set(map(int,c)))!=len(c):
+        raise ValueError('invalid hint distance matrix or codes')
+    if np.any(~np.isfinite(d)) or np.any(d<0):raise ValueError('invalid hint distances')
+    minima=d.min(axis=1,keepdims=True)
+    return np.min(np.where(d==minima,c[None,:],np.iinfo(np.uint16).max),axis=1).astype(np.uint8)
+
 def choose_hints(db_path,reps,width,height,step,north,codes,batch=8192,guard=lambda:None):
     """Select category of nearest sampled representative by WGS84 distance.
 
-    The caller MUST verify 5-field (tile_y,tile_x,row,col,code) records against the current seed RLE and hash-pinned tile index first. Per category, spherical-nearest sampled witness is used as a fast heuristic;
-    this need not be WGS84-nearest, because later search verifies every result.
+    The caller MUST verify 5-field (tile_y,tile_x,row,col,code) records against
+    the current seed RLE and hash-pinned tile index first. Unit-sphere indexing
+    only narrows candidates; all hint distances are WGS84 ellipsoidal minima.
+    Hints are not final labels and later search verifies every result.
     """
     codes=list(codes);r=np.asarray(reps)
     if not codes or len(set(codes))!=len(codes) or any(type(c)!=int or not 1<=c<=255 for c in codes): raise ValueError('invalid categories')
@@ -75,21 +133,19 @@ def choose_hints(db_path,reps,width,height,step,north,codes,batch=8192,guard=lam
     for c in codes:
         p=r[r[:,4]==c];lat=north-(p[:,2].astype(float)+.5)*step;lon=-180+(p[:,3].astype(float)+.5)*step
         coords[c]=(lat,lon);trees[c]=cKDTree(_xyz(lat,lon))
-    geod=Geod(ellps='WGS84');con=sqlite3.connect('file:'+quote(str(Path(db_path).resolve()),safe='/')+'?mode=ro',uri=True)
+    con=sqlite3.connect('file:'+quote(str(Path(db_path).resolve()),safe='/')+'?mode=ro',uri=True)
     try:
         cur=con.execute('SELECT id,y,x FROM roots ORDER BY id')
         while True:
             guard();chunk=cur.fetchmany(batch)
             if not chunk: break
             a=np.asarray(chunk,dtype=np.uint32);lat=north-(a[:,1].astype(float)+.5)*step;lon=-180+(a[:,2].astype(float)+.5)*step
-            xyz=_xyz(lat,lon);d=[]
+            d=[]
             for c in codes:
-                _,ix=trees[c].query(xyz,k=1,workers=1);plat,plon=coords[c]
-                dist=(np.asarray([geod.inv(float(lon[0]),float(lat[0]),float(plon[ix[0]]),float(plat[ix[0]]))[2]]) if len(lon)==1 else np.asarray(geod.inv(lon,lat,plon[ix],plat[ix])[2]));
-                if np.any(~np.isfinite(dist)) or np.any(dist<0): raise ValueError('invalid distance')
-                d.append(dist)
+                plat,plon=coords[c]
+                d.append(wgs84_nearest_distances(trees[c],plat,plon,lat,lon))
             # sorted codes and argmin yield deterministic lowest code on exact tie
-            chosen=np.asarray(codes,dtype=np.uint8)[np.argmin(np.stack(d,axis=1),axis=1)]
+            chosen=lowest_code_for_min_distance(np.stack(d,axis=1),codes)
             yield a[:,0],chosen
     finally: con.close()
 
