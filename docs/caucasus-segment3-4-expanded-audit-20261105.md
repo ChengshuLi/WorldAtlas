@@ -1,6 +1,6 @@
 # Caucasus expanded watershed audit (research, 2026-11-05)
 
-These are proposals, not selected Neon changes. The selected baseline includes the approved Anapa and Abin changes. We compared it with labeled interfaces from JAXA AW3D30 v4.1 elevation and mapped OSM river/stream networks. Terrain labels are seeded with those mapped networks; the station tests measure consistency with that same model, not independent validation. Segment numbering is analytical: the stored line itself is continuous.
+The user approved the nine proposed changes, and they are selected in the Neon research revision. The baseline includes the approved Anapa and Abin changes. We compared it with labeled interfaces from JAXA AW3D30 v4.1 elevation and mapped OSM river/stream networks. Terrain labels are seeded with those mapped networks; the station tests measure consistency with that same model, not independent validation. Segment numbering is analytical: the stored line itself is continuous.
 
 ## Eastern section (segment 4)
 
@@ -23,7 +23,7 @@ Candidate cut file-byte SHA-256: Kurdul `1a498eb68d0b68d9a0c25aa1c425df3c3294eac
 - Magana: 6.1 km becomes 7.9 km, crossings three to zero among 717 complete mapped ways, 20 draft163 centers. SHA `d6d262770bc0662a3dfe3bde29ef39b091c36999fc41baa3ffccd052e08108f2`.
 - Bushuyka / Psikhashkha at the adjoining western edge: 3.4 km becomes 4.4 km, crossings ten to zero, 12 draft163 centers. SHA `02aab37e9711dbff5d2d5f57d8cd0fba3ecb4763e41c02bfed4972082d7e1b47`.
 
-The additional crossing screen flagged further local intersections that still require examination; this report does not claim that the central audit has resolved all of them. Mapped streams do not necessarily include every real stream, and the modeled interface is a terrain-derived estimate. The numeric station checks are not evidence independent of its seeds. Proposals require explicit selection and source-catalog integration before production use.
+The additional crossing screen flagged further local intersections that still require examination; this report does not claim that the central audit has resolved all of them. Mapped streams do not necessarily include every real stream, and the modeled interface is a terrain-derived estimate. The numeric station checks are not evidence independent of its seeds. The selected line and its source bundle are recorded in the research revision. The source gate and actual-generation closure proofs require updates before production use.
 
 ## Eastern terrain-profile follow-up
 
@@ -43,4 +43,4 @@ The nine approved proposed cuts were recomposed in source order into one simple 
 
 The PR4 WGS84-distance follow-up was checked against the Anapa source assembly. Ranking the 56 exact intersections between the pinned baseline and author route by coordinate-linear station and by WGS84 geodesic station produced the identical order and identical fifth join at 37.42406995874469°E, 44.84168781056519°N. Reassembling the Anapa opening at that join produced the same 2,320 vertices and the same canonical geometry SHA-256 `e3dd7f326c0247f4d9f4c4c61b7c31782a5fc1b9e850d164cf46e729cbb60929`. Therefore the geodesic-distance change does not alter segment 1. The geodesic commits update nearest-point measurements and selector screens; the Anapa construction selects an exact topological intersection by order, so its coordinates are unchanged.
 
-The local proposed line and source materials have not been written to Neon/R2 as part of this recheck. The new central/eastern OSM response files are only in the local research bundle; the current session has no authenticated R2 upload tool/CLI. Do not claim the new proposals are source-cataloged or selected in Neon until those exact OSM raw bytes are preserved in R2 and referenced.
+The 41 raw OpenStreetMap API responses used by these proposals are bundled in R2 at `sources/osm/caucasus-approved/20261105/source-responses-116d078c59a6.zip`. Full R2 readback matched SHA-256 `116d078c59a6fc46786ec369450483d809c187bcaa632f01c5081c63f04e5706`; its manifest pins each original response. The user-approved line is selected in Neon research revision `v2-land-mainland-boundary-draft-1`, with source reference `osm-caucasus-approved-drainage` version `20261105-116d078c59a6`. The region hash is `405d89d68c65d5465bd54ab9c24d4ef3a8b162ab2c5fd4ff992d2927c4892e7f`; both historical closure proof claims require refresh before a map build. Neon geometry was read back and compared equal to the entire approved GeoJSON.
