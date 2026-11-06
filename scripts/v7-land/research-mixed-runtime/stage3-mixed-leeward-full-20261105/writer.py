@@ -5,7 +5,7 @@ resolve every selected affiliation from source, validate its List 1 links,
 verify stage-2/physical/component provenance, and supply a monitored guard.
 No historical/reference labels or changed-cell ledgers are accepted as input.
 """
-import ctypes,hashlib,json,os,shutil,struct
+import array,ctypes,hashlib,itertools,json,os,shutil,struct,sys
 from pathlib import Path
 from overlay import overlay_row,validate_component_claims
 U=struct.Struct('<I');PAIR=struct.Struct('<II');TRIPLE=struct.Struct('<III')
@@ -65,7 +65,10 @@ def write_streams(*,grid,physical_rows,physical_runs,component_rows,component_ru
     regions=region_rows(y);need(isinstance(regions,list) and all(isinstance(r,dict) and isinstance(r.get('roots'),(set,frozenset)) and not (r['roots']&mainland_roots) for r in regions),'region claim targets mainland')
     pairs=overlay_row(width,physical,baseline,components,component_claims,regions,stats,changed,root_stats)
     charge(len(pairs)*8+4)
-    for end,code in pairs:runs.write(PAIR.pack(end,code))
+    packed=array.array('I',itertools.chain.from_iterable(pairs))
+    need(packed.itemsize==4,'native uint32 packing unavailable')
+    if sys.byteorder!='little':packed.byteswap()
+    runs.write(packed)
     offset+=len(pairs);need(offset<=0xffffffff,'output run count exceeds uint32');rows.write(U.pack(offset))
    for f in (rows,runs,trace):f.flush();os.fsync(f.fileno())
   need(all(counts[i]==os.fstat(files[1+2*i].fileno()).st_size//(12 if i==1 else 8) for i in range(3)),'unreferenced trailing runs')

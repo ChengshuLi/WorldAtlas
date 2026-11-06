@@ -61,19 +61,22 @@ def overlay_row(width,physical,baseline,components,component_claims,region_claim
    need(bc==0,'baseline assigns land to physical water');need(ci==len(components) or components[ci][0]>=pb,'component overlaps physical water');emit(end,0)
   else:
    need(17<=bc<=22 and ci<len(components),'missing baseline land or component');ca,cb,root=components[ci];need(ca<=x<cb and ca>=pa and cb<=pb,'component and physical land disagree');end=min(end,cb)
-   claims=list(component_claims.get(root,[]))+[r['claim'] for r in active if root in r['roots']]
-   by_id={}
-   for claim in claims:
-    _claim(claim);aid=claim['affiliation_id']
-    need(aid not in by_id or by_id[aid]==claim,'inconsistent duplicate affiliation claim');by_id[aid]=claim
-   codes={v['code'] for v in by_id.values()};need(len(codes)<=1,'conflicting selected affiliation targets');new=next(iter(codes)) if codes else bc;n=end-x
-   for aid,claim in by_id.items():
-    counter=stats.setdefault(aid,{'applied_cells':0,'changed_cells':0,'from_codes':{}});counter['applied_cells']+=n;counter['changed_cells']+=n if new!=bc else 0;counter['from_codes'][str(bc)]=counter['from_codes'].get(str(bc),0)+n
-    if root_stats is not None and aid in root_stats:
-     per=root_stats[aid].setdefault(str(root),{'applied_cells':0,'changed_cells':0});per['applied_cells']+=n;per['changed_cells']+=n if new!=bc else 0
-   if new!=bc:
-    aids=tuple(sorted(by_id));entries=tuple(sorted({v for claim in by_id.values() for v in claim['entry_ids']}));need(aids and entries,'changed span has no traceable decision');emit_change(x,end,bc,new,aids,entries)
-   emit(end,new)
+   if root not in component_claims and not active:
+    emit(end,bc)
+   else:
+    claims=list(component_claims.get(root,[]))+[r['claim'] for r in active if root in r['roots']]
+    by_id={}
+    for claim in claims:
+     _claim(claim);aid=claim['affiliation_id']
+     need(aid not in by_id or by_id[aid]==claim,'inconsistent duplicate affiliation claim');by_id[aid]=claim
+    codes={v['code'] for v in by_id.values()};need(len(codes)<=1,'conflicting selected affiliation targets');new=next(iter(codes)) if codes else bc;n=end-x
+    for aid,claim in by_id.items():
+     counter=stats.setdefault(aid,{'applied_cells':0,'changed_cells':0,'from_codes':{}});counter['applied_cells']+=n;counter['changed_cells']+=n if new!=bc else 0;counter['from_codes'][str(bc)]=counter['from_codes'].get(str(bc),0)+n
+     if root_stats is not None and aid in root_stats:
+      per=root_stats[aid].setdefault(str(root),{'applied_cells':0,'changed_cells':0});per['applied_cells']+=n;per['changed_cells']+=n if new!=bc else 0
+    if new!=bc:
+     aids=tuple(sorted(by_id));entries=tuple(sorted({v for claim in by_id.values() for v in claim['entry_ids']}));need(aids and entries,'changed span has no traceable decision');emit_change(x,end,bc,new,aids,entries)
+    emit(end,new)
   need(end>x,'non-advancing overlay');x=end
   if x==pb:pi+=1
   if x==be:bi+=1
