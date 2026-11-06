@@ -13,6 +13,9 @@ import representatives,verify_physical_lineage
 HERE=Path(__file__).resolve().parent
 BASE_INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','closure_checker','terminal_checker','closure_contract','seed_builder','seed_kernel'}
 SEED_NAMES=('seed_worker.py','seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py')
+# The launcher is pinned in the orchestration identity, while the producer's
+# own report binds the actual producer modules and rasterizer separately.
+SEED_REPORT_NAMES=tuple(n for n in SEED_NAMES if n!='seed_worker.py')
 HINT_NAMES=('hints.py','run_diagnostic.py')
 # Historical seed producer pins, retained to reject the modified direct-run
 # implementation until a fresh independent review explicitly installs it.
@@ -147,7 +150,7 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False
  tiles=work/'tiles-parent'/'tiles';need(marker.get('tile_directory')==str(tiles) and tiles.is_dir() and marker.get('seed_tile_verification',{}).get('status')=='verified','tile verification binding mismatch')
  inputs={k:v for k,v in cfg['inputs'].items() if k in build_stage2.INPUTS};inputs.update(artifacts)
  need(set(inputs)==build_stage2.INPUTS,'core input mapping mismatch')
- seed_files={n:pin(HERE/'seed-producer'/n,guard) for n in SEED_NAMES};seed_files.update({'rasterizer':cfg['inputs']['seed_builder'],'rasterizer_kernel':cfg['inputs']['seed_kernel']})
+ seed_files={n:pin(HERE/'seed-producer'/n,guard) for n in SEED_REPORT_NAMES};seed_files.update({'rasterizer':cfg['inputs']['seed_builder'],'rasterizer_kernel':cfg['inputs']['seed_kernel']})
  resolver_files={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py'}
  core={'schema':'stage2-source-geodesic-v1','grid':cfg['grid'],'inputs':inputs,'seed_code_files':seed_files,'resolution_code_files':{k:pin(HERE/v,guard) for k,v in resolver_files.items()},'hint_code_files':{n:pin(HERE/'hint-producer'/n,guard) for n in ('hints.py','run_diagnostic.py')},'tile_directory':str(tiles),'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'controls':cfg['controls'],'orchestration':{'outer_config_sha256':outer,'orchestrator_sha256':code['orchestrate_stage2.py'],'derived_manifest':marker_pin,'physical_lineage_report':lineage_pin,'provisional_only':provisional_only}}
  cp=work/'core-requests'/'config.json'

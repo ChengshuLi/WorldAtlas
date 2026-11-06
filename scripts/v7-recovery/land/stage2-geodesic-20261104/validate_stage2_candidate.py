@@ -5,7 +5,7 @@ Neon authentication or scientific correctness. This does not construct List 1.
 """
 import json
 from pathlib import Path
-import contracts,verify_inputs,build_stage2,orchestrate_stage2,verify_physical_lineage
+import contracts,verify_inputs,build_stage2,orchestrate_stage2,verify_physical_lineage,ural_delta
 
 def validate(pins,approved_code,guard=lambda:None):
  names={'report','derived_manifest','outer_config','rows','runs','snapshot','physical_rows','physical_runs','physical_report','physical_lineage_request','physical_lineage_report'}
@@ -17,7 +17,7 @@ def validate(pins,approved_code,guard=lambda:None):
  def read(name):return json.loads(verify_inputs.bounded_bytes(paths[name],16<<20,guard))
  report=read('report');derived=read('derived_manifest');outer=read('outer_config');snapshot=read('snapshot');physical=read('physical_report');lineage=read('physical_lineage_report')
  contracts.need(isinstance(approved_code,dict) and set(approved_code)=={'orchestrator','core','core_files','dependency_files','orchestration_files'} and all(isinstance(approved_code.get(k),str) and contracts.HEX.fullmatch(approved_code[k]) for k in ('orchestrator','core')) and all(isinstance(approved_code.get(k),dict) and approved_code[k] for k in ('core_files','dependency_files','orchestration_files')),'complete approved code pins required')
- expected_dependencies={'seed_code_files':set(orchestrate_stage2.SEED_NAMES)|{'rasterizer','rasterizer_kernel'},'resolution_code_files':{'resolver','helper','named_identity',},'hint_code_files':{'hints.py','run_diagnostic.py'}}
+ expected_dependencies={'seed_code_files':set(orchestrate_stage2.SEED_REPORT_NAMES)|{'rasterizer','rasterizer_kernel'},'resolution_code_files':{'resolver','helper','named_identity',},'hint_code_files':{'hints.py','run_diagnostic.py'}}
  expected_orchestration={'orchestrate_stage2.py','representatives.py','build_seed_tiles.py','seed-producer/seed_worker.py'}|{'seed-producer/'+x for x in orchestrate_stage2.SEED_NAMES}|{'hint-producer/'+x for x in orchestrate_stage2.HINT_NAMES}|set(build_stage2.CODE_NAMES)
  valid_digest=lambda x:isinstance(x,str) and contracts.HEX.fullmatch(x) is not None
  dep=approved_code['dependency_files'];contracts.need(set(approved_code['core_files'])==set(build_stage2.CODE_NAMES) and all(valid_digest(x) for x in approved_code['core_files'].values()) and set(approved_code['orchestration_files'])==expected_orchestration and all(valid_digest(x) for x in approved_code['orchestration_files'].values()) and set(dep)==set(expected_dependencies) and all(isinstance(dep[k],dict) and set(dep[k])==names and all(valid_digest(x) for x in dep[k].values()) for k,names in expected_dependencies.items()),'incomplete approved code closure')
@@ -33,8 +33,17 @@ def validate(pins,approved_code,guard=lambda:None):
  contracts.need(report.get('physical_lineage_report_sha256')==pins['physical_lineage_report']['sha256'] and report.get('physical_lineage_status')=='selected-sources-match-reported-lineage' and derived.get('physical_lineage_report',{}).get('sha256')==pins['physical_lineage_report']['sha256'] and report.get('orchestration',{}).get('physical_lineage_report',{}).get('sha256')==pins['physical_lineage_report']['sha256'],'physical lineage report binding mismatch')
  verified=verify_physical_lineage.validate_combined(snapshot,pins['snapshot']['sha256'],paths['physical_lineage_request'],pins['physical_report']['sha256'],pins['physical_rows']['sha256'],pins['physical_runs']['sha256'],grid,guard);contracts.need(verified==lineage,'physical lineage verification mismatch')
  contracts.need(report.get('categories')=={str(k):v for k,v in categories.items()},'category report mismatch')
+ delta=ural_delta.compile_rule(snapshot,categories,grid);delta_report=report.get('ural_delta')
+ contracts.need(isinstance(delta_report,dict) and all(delta_report.get(k)==delta[v] for k,v in (
+  ('schema','schema'),('revision','revision'),('boundary_id','boundary_id'),
+  ('boundary_sha256','boundary_sha256'),('route_id','route_id'),
+  ('route_sha256','route_sha256'),('scope_bounds','scope_bounds'),
+  ('europe_code','europe_code'),('asia_code','asia_code'))) and
+  delta_report.get('status')=='applied-to-land-cell-centers','Ural delta report/selection mismatch')
+ counts=delta_report.get('counts')
+ contracts.need(isinstance(counts,dict) and set(counts)=={'land_centers','other_land_labels','europe_to_asia','asia_to_europe'} and all(type(counts[k]) is int and counts[k]>=0 for k in counts) and counts['land_centers']>0 and counts['other_land_labels']==0 and counts['europe_to_asia']+counts['asia_to_europe']<=counts['land_centers'],'invalid Ural delta counts')
  orchfiles=approved_code['orchestration_files'];corefiles=approved_code['core_files'];resolver_paths={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py'}
- contracts.need(all(orchfiles[k]==v for k,v in corefiles.items()) and all(orchfiles['seed-producer/'+k]==dep['seed_code_files'][k] for k in orchestrate_stage2.SEED_NAMES) and all(orchfiles['hint-producer/'+k]==v for k,v in dep['hint_code_files'].items()) and all(orchfiles[path]==dep['resolution_code_files'][k] for k,path in resolver_paths.items()),'approved code closure inconsistent')
+ contracts.need(all(orchfiles[k]==v for k,v in corefiles.items()) and all(orchfiles['seed-producer/'+k]==dep['seed_code_files'][k] for k in orchestrate_stage2.SEED_REPORT_NAMES) and all(orchfiles['hint-producer/'+k]==v for k,v in dep['hint_code_files'].items()) and all(orchfiles[path]==dep['resolution_code_files'][k] for k,path in resolver_paths.items()),'approved code closure inconsistent')
  artifacts=derived.get('artifacts');expected_artifacts={'resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'}
  contracts.need(isinstance(artifacts,dict) and set(artifacts)==expected_artifacts and all(isinstance(artifacts[k],dict) and artifacts[k].get('sha256')==report.get('inputs_sha256',{}).get(k) and valid_digest(artifacts[k].get('sha256')) for k in expected_artifacts),'derived artifact/report mismatch')
  for k in ('resolution_report','seed_report','hint_report'):contracts.need(report.get(k+'_sha256')==artifacts[k]['sha256'],'derived report mismatch: '+k)

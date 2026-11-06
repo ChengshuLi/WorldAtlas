@@ -39,15 +39,56 @@ def first_points(path,co,roots,seed_roots,width,guard=lambda:None):
  if last!=int(co[-1]) or set(map(int,seed_roots))!=seen_seed or np.any(ys<0) or np.any(ys>=len(co)-1):raise ValueError('incomplete component coverage')
  return ys,xs
 
+def oversized_run_queries(a,base,co,pos,index,chunk,max_queries):
+ """Stream one very long valid run without rejecting or dropping chunks."""
+ start=int(a[index,0]);end=int(a[index,1]);row=int(np.searchsorted(co,base+index,side='right')-1);root_position=int(pos[index])
+ while start<end:
+  n=min(max_queries,(end-start+chunk-1)//chunk)
+  starts=start+np.arange(n,dtype=np.int64)*chunk
+  ends=np.minimum(starts+chunk,end)
+  yield (np.full(n,row,dtype=np.int32),starts.astype(np.int32),ends.astype(np.int32),np.full(n,root_position,dtype=np.int64))
+  start=int(ends[-1])
+
 def expanded(a,base,co,roots,seed_roots,chunk=1024,max_queries=65536):
  if not (1<=chunk<=1024 and max_queries>=128):raise ValueError('invalid query chunk')
  if np.any(a[:,0]>=a[:,1]):raise ValueError('bad component interval')
  pos,match=positions(a[:,2],roots,seed_roots);idx=np.flatnonzero(match);last=0
  # Process entire input block; each yielded query group is bounded.
  while last<len(idx):
-  lengths=a[idx[last:],1].astype(np.int64)-a[idx[last:],0].astype(np.int64);counts=(lengths+chunk-1)//chunk;cum=np.cumsum(counts);n=max(1,int(np.searchsorted(cum,max_queries,side='right')));chosen=idx[last:last+n];cc=counts[:n]
-  if int(cc.sum())>max_queries:raise ValueError('one component run exceeds query cap')
+  lengths=a[idx[last:],1].astype(np.int64)-a[idx[last:],0].astype(np.int64);counts=(lengths+chunk-1)//chunk
+  if counts[0]>max_queries:
+   yield from oversized_run_queries(a,base,co,pos,int(idx[last]),chunk,max_queries);last+=1;continue
+  cum=np.cumsum(counts);n=max(1,int(np.searchsorted(cum,max_queries,side='right')));chosen=idx[last:last+n];cc=counts[:n]
   repeat=np.repeat(np.arange(n),cc);within=np.arange(len(repeat))-np.repeat(np.cumsum(cc)-cc,cc);start=a[chosen[repeat],0].astype(np.int64)+within*chunk;end=np.minimum(a[chosen[repeat],1].astype(np.int64),start+chunk);p=pos[chosen[repeat]];rows=np.searchsorted(co,base+chosen[repeat],side='right')-1
+  yield rows.astype(np.int32),start.astype(np.int32),end.astype(np.int32),p.astype(np.int64)
+  last+=n
+
+def expanded_ambiguous(a,base,co,roots,seed_roots,amb,chunk=1024,max_queries=65536):
+ """Expand only runs belonging to components that need exact search.
+
+ The exact pass still validates every label in each source block, but most
+ component runs are already certified. Filtering before chunk expansion avoids
+ allocating query arrays for those irrelevant runs.
+ """
+ if not (1<=chunk<=1024 and max_queries>=128):raise ValueError('invalid query chunk')
+ if np.any(a[:,0]>=a[:,1]):raise ValueError('bad component interval')
+ pos,match=positions(a[:,2],roots,seed_roots)
+ chosen=np.flatnonzero(match)
+ if len(chosen):chosen=chosen[np.asarray(amb,dtype=bool)[pos[chosen]]]
+ last=0
+ while last<len(chosen):
+  lengths=a[chosen[last:],1].astype(np.int64)-a[chosen[last:],0].astype(np.int64)
+  counts=(lengths+chunk-1)//chunk
+  if counts[0]>max_queries:
+   yield from oversized_run_queries(a,base,co,pos,int(chosen[last]),chunk,max_queries);last+=1;continue
+  cum=np.cumsum(counts);n=max(1,int(np.searchsorted(cum,max_queries,side='right')))
+  run_ix=chosen[last:last+n];cc=counts[:n]
+  repeat=np.repeat(np.arange(n),cc)
+  within=np.arange(len(repeat))-np.repeat(np.cumsum(cc)-cc,cc)
+  start=a[run_ix[repeat],0].astype(np.int64)+within*chunk
+  end=np.minimum(a[run_ix[repeat],1].astype(np.int64),start+chunk)
+  p=pos[run_ix[repeat]]
+  rows=np.searchsorted(co,base+run_ix[repeat],side='right')-1
   yield rows.astype(np.int32),start.astype(np.int32),end.astype(np.int32),p.astype(np.int64)
   last+=n
 
@@ -68,9 +109,8 @@ def exact_pass(path,co,roots,seed_roots,index,hints,amb,best,cursor=0,chunk=1024
  if np.any(~np.isfinite(best[np.arange(len(roots)),hints.astype(np.int64)-17])):raise ValueError('missing real upper witness')
  count=0;endcursor=cursor
  for off,a in blocks(path,cursor,block_records,guard):
-  for ys,xs,ends,pos in expanded(a,off,co,roots,seed_roots,chunk):
-   wanted=np.flatnonzero(amb[pos])
-   for i in wanted:
+  for ys,xs,ends,pos in expanded_ambiguous(a,off,co,roots,seed_roots,amb,chunk):
+   for i in range(len(pos)):
     guard();p=int(pos[i]);upper=float(np.min(best[p]));ds,_=index.nearest_run(int(ys[i]),int(xs[i]),int(ends[i]),upper,tolerance)
     for code,d in ds.items():
      if code not in range(17,23) or not np.isfinite(d) or d<0:raise ValueError('invalid exact distance')

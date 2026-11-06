@@ -19,7 +19,11 @@ The direct orchestration sequence is:
    search for every non-seed physical component; hints never become labels
    without one of those checks.
 5. Write the research output atomically after all source, tile, coverage and
-   output checks pass. Water assignment and List 1 overrides are excluded.
+   output checks pass. Within the recorded Ural-delta scope, land-cell centers
+   are assigned to Europe or Asia by which side of the selected Ural divider
+   they fall on. The rule is bound to the selected Ural boundary and Caspian
+   closure hashes, changes no geometry or physical mask, and leaves water and
+   all cells outside the scope unchanged. Other List 1 overrides are excluded.
 
 The producer freeze covers the invoked `seed_worker.py` entrypoint as well as
 all producer modules. A historical code fingerprint does not freeze a changed

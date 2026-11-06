@@ -9,7 +9,7 @@ from pathlib import Path
 import hashlib,math,sys
 import numpy as np
 from scipy.spatial import cKDTree
-from run_pair import run_pair
+from run_pair import run_pairs_batch
 from certificate import _unit,M_MIN
 from verify_inputs import read_tile
 
@@ -32,16 +32,34 @@ class ExactIndex:
   if len(raw)!=count*16 or hashlib.sha256(raw).hexdigest()!=sha:raise ValueError('tile integrity failure')
   x=np.frombuffer(raw,dtype='<u4').reshape(-1,4)
   if len(x) and (np.any(x[:,0]>=self.h) or np.any(x[:,1]>=x[:,2]) or np.any(x[:,2]>self.w) or set(map(int,np.unique(x[:,3])))!=codes):raise ValueError('invalid tile data')
+  # The complete pinned seed-tile index is small enough for normal host RAM;
+  # retain verified tiles so a global exact pass does not repeatedly reread
+  # and re-hash them as the component stream revisits nearby regions.
   self.cache[key]=x
   return x
  def nearest_run(self,y,a,b,upper,tolerance=1e-5):
   if not (type(y) is int and type(a) is int and type(b) is int and 0<=y<self.h and 0<=a<b<=self.w and math.isfinite(upper) and upper>=0 and math.isfinite(tolerance) and tolerance>=0):raise ValueError('invalid query')
   lat=self.north-(y+.5)*self.step;lon=-180+((a+b-1)/2+.5)*self.step;point=_unit(np.array([lat]),np.array([lon]))[0];qr=(b-a-1)*self.step*math.pi/360
   limit=(upper+tolerance+self.guard)/M_MIN+self.maxrad+qr
-  indices=range(len(self.ids)) if limit>=math.pi else self.tree.query_ball_point(point,2*math.sin(limit/2),eps=0,workers=1)
+  indices=np.arange(len(self.ids),dtype=np.int64) if limit>=math.pi else np.asarray(self.tree.query_ball_point(point,2*math.sin(limit/2),eps=0,workers=1),dtype=np.int64)
+  # Test the nearest tile center first. A real WGS84 result found early then
+  # tightens the conservative radius for the rest of this query. Do not sort
+  # the entire candidate set: most queries need only the first few tiles, so
+  # an O(k log k) ordering cost can exceed the distance work it avoids.
+  if len(indices)>1:
+   chords=np.linalg.norm(self.xyz[indices]-point,axis=1)
+   nearest=int(np.argmin(chords))
+   if nearest:
+    indices[[0,nearest]]=indices[[nearest,0]];chords[[0,nearest]]=chords[[nearest,0]]
+  else:
+   chords=np.linalg.norm(self.xyz[indices]-point,axis=1) if len(indices) else np.empty(0)
   out={};seen=0;tested=0
-  for i in indices:
-   c=float(np.linalg.norm(self.xyz[i]-point));lim=(upper+tolerance+self.guard)/M_MIN+self.radii[i]+qr
+  for i,c in zip(indices,chords):
+   # Distances above the best known component-to-continent witness cannot win
+   # or tie. Since M_MIN is a conservative WGS84 lower-bound radius, this
+   # tighter test only removes tiles that cannot affect the final label.
+   incumbent=min(upper,min(out.values(),default=upper))
+   lim=(incumbent+tolerance+self.guard)/M_MIN+self.radii[i]+qr
    if lim<math.pi and c>2*math.sin(lim/2):continue
    data=self._load(self.ids[i]);seen+=len(data)
    if not len(data):continue
@@ -49,8 +67,7 @@ class ExactIndex:
    aa=data[:,1].astype(np.int64);bb=data[:,2].astype(np.int64);gap=np.full(len(data),self.w,dtype=np.int64)
    for shift in (-self.w,0,self.w):gap=np.minimum(gap,np.maximum(0,np.maximum(aa+shift-(b-1),a-(bb-1+shift))))
    p1=math.radians(lat);p2=np.deg2rad(self.north-(data[:,0].astype(float)+.5)*self.step);dl=np.deg2rad(gap*self.step);dp=p2-p1;hav=np.sin(dp/2)**2+math.cos(p1)*np.cos(p2)*np.sin(dl/2)**2;angle=2*np.arcsin(np.sqrt(np.clip(hav,0,1)))
-   selected=np.flatnonzero(angle*M_MIN<=upper+tolerance+self.guard)
-   for j in selected:
-    yy,left,right,code=map(int,data[j]);d,_=run_pair(y,a,b,yy,left,right,self.w,north=self.north,incumbent=upper,tol=tolerance);tested+=1
-    if d is not None:out[code]=min(out.get(code,math.inf),d)
+   selected=np.flatnonzero(angle*M_MIN<=incumbent+tolerance+self.guard)
+   ds,count=run_pairs_batch(y,a,b,data[selected],self.w,north=self.north,incumbent=incumbent,tol=tolerance);tested+=count
+   for code,d in ds.items():out[code]=min(out.get(code,math.inf),d)
   return out,{'tiles':len(indices),'seed_runs_scanned':seen,'run_pairs_wgs84_tested':tested}

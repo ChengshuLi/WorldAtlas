@@ -10,6 +10,13 @@ class OrchestrationTests(unittest.TestCase):
    f=ind/(key+'.txt');f.write_text(key);pins[key]=o.pin(f,lambda:None)
   cfg={'schema':'stage2-fresh-orchestration-v1','grid':{'width':8,'height':4,'west':-180,'north':90,'step':45},'inputs':pins,'policy_id':'wgs','policy_version':'1','controls':{'minimum_free_bytes':1,'chunk_columns':16,'checkpoint_seconds':1,'numerical_guard_metres':1000,'block_records':100},'seed_controls':{'strip_rows':1}}
   cp=ind/'config.json';cp.write_text(json.dumps(cfg));return p,cp,cfg
+ def test_seed_launcher_is_identity_pinned_but_not_in_producer_report(self):
+  import ast
+  source=(o.HERE/'seed-producer'/'seed_producer.py').read_text();tree=ast.parse(source)
+  decl=next(n for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='CODE' for t in n.targets))
+  self.assertEqual(set(ast.literal_eval(decl.value)),set(o.SEED_REPORT_NAMES))
+  self.assertIn('seed_worker.py',o.SEED_NAMES);self.assertNotIn('seed_worker.py',o.SEED_REPORT_NAMES)
+  self.assertIn('seed-producer/seed_worker.py',o.code_hashes(lambda:None))
  def test_rejected_historical_input(self):
   with tempfile.TemporaryDirectory() as d:
    p,cp,cfg=self.fixture(d);cfg['inputs']['old_checkpoint']={'path':'/tmp/old','sha256':'0'*64};cp.write_text(json.dumps(cfg))
@@ -60,6 +67,7 @@ class OrchestrationTests(unittest.TestCase):
    with mock.patch.object(o.verify_physical_lineage,'validate_combined',return_value=lineage),mock.patch.object(o.build_stage2,'build',return_value={'ok':True}) as build:
     self.assertEqual(o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,False),{'ok':True})
     core=json.loads((work/'core-requests/config.json').read_bytes());self.assertEqual(core['inputs']['seed_rows'],artifacts['seed_rows']);self.assertEqual(core['orchestration']['outer_config_sha256'],hashlib.sha256(raw).hexdigest())
+    self.assertEqual(set(core['seed_code_files']),set(o.SEED_REPORT_NAMES)|{'rasterizer','rasterizer_kernel'});self.assertIn('seed-producer/seed_worker.py',marker['code_sha256'])
     o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,True);self.assertFalse(build.call_args.kwargs['resume'])
     (work/'core').mkdir();o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,True);self.assertTrue(build.call_args.kwargs['resume'])
     paths['seed_rows'].write_text('tampered')

@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from write_land_stream import write_land_stream
+from ural_delta import SCHEMA as URAL_DELTA_SCHEMA, split_scope
 
 U = lambda *v: struct.pack('<' + 'I' * len(v), *v)
 
@@ -45,6 +46,42 @@ class WriterTest(unittest.TestCase):
         self.assertEqual(r['rows_sha256'],hashlib.sha256((self.p/'out/rows.u32le').read_bytes()).hexdigest())
         self.assertEqual(r['runs_sha256'],hashlib.sha256((self.p/'out/runs.u32le').read_bytes()).hexdigest())
         self.assertFalse((self.p/'out/assignment-seen.partial').exists())
+    def test_ural_delta_overrides_seed_by_cell_center_side(self):
+        # A seeded mainland component is split across a synthetic divider.
+        # The writer must apply the bounded override at cell-center granularity.
+        self.seed[0] = [(2,19),(4,18),(8,0)]
+        bounds = [-130,30,40,80]
+        line, europe_ring, asia_ring = split_scope(
+            [[-50,90],[-60,40],[-130,40]], bounds, [-100,60], [20,60])
+        rule = {
+            'schema': URAL_DELTA_SCHEMA, 'revision': 'synthetic',
+            'boundary_id': 'ural_kara_coast_to_caspian', 'boundary_sha256': '0'*64,
+            'route_id': 'europe_caspian_closure_v1', 'route_sha256': '1'*64,
+            'scope_bounds': bounds, 'europe_witness': [-100,60], 'asia_witness': [20,60],
+            'europe_code': 19, 'asia_code': 18,
+            'grid': {'width': 8, 'height': 2, 'west': -180, 'north': 90, 'step': 45},
+            'line_scope_vertices': line, 'europe_ring': europe_ring, 'asia_ring': asia_ring,
+        }
+        result = self.run_writer(delta_rule=rule)
+        out = self.output()
+        row0 = [next(code for end,code in out[:5] if x < end) for x in range(8)]
+        self.assertEqual(row0[2], 19)
+        self.assertEqual(row0[3], 18)
+        self.assertEqual(result['ural_delta']['counts'], {
+            'land_centers': 3, 'other_land_labels': 0,
+            'europe_to_asia': 0, 'asia_to_europe': 1,
+        })
+        self.assertEqual(result['land_cells'], 13)
+    def test_ural_delta_rejects_land_cell_center_on_scope_edge(self):
+        self.seed[0] = [(4,19),(8,0)]
+        rule = {
+            'schema': URAL_DELTA_SCHEMA,
+            'scope_bounds': [-130, 30, 40, 67.5],
+            'europe_code': 19, 'asia_code': 18,
+            'grid': {'width': 8, 'height': 2, 'west': -180, 'north': 90, 'step': 45},
+        }
+        with self.assertRaisesRegex(ValueError, 'scope edge'):
+            self.run_writer(delta_rule=rule, output_dir=self.p/'edge')
     def test_adjacent_same_assignment_coalesces(self):
         self.comp[0] = [(0,2,1),(2,4,2),(5,6,10),(6,7,11)]
         self.run_writer()

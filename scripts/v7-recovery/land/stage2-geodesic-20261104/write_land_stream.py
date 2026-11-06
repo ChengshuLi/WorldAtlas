@@ -8,11 +8,13 @@ files are created in a new directory. A report exists only after success.
 """
 import hashlib
 import json
+import math
 import mmap
 import os
 from pathlib import Path
 import shutil
 import struct
+from ural_delta import SCHEMA as URAL_DELTA_SCHEMA, classify_cell
 
 U32 = struct.Struct('<I')
 PAIR = struct.Struct('<II')
@@ -100,7 +102,7 @@ def _components(records, width):
 def write_land_stream(width, height, component_rows, component_runs,
                       physical_rows, physical_runs, mainland_rows, mainland_runs,
                       roots, codes, mainland_roots, output_dir, *,
-                      disk_reserve_bytes=1 << 30):
+                      disk_reserve_bytes=1 << 30, delta_rule=None):
     """Write rows.u32le, runs.u32le and an atomic report.json; return report.
 
     Run streams are consumed one row at a time, with at most one record per
@@ -111,6 +113,30 @@ def write_land_stream(width, height, component_rows, component_runs,
         raise ValueError('invalid grid dimensions')
     if type(disk_reserve_bytes) is not int or disk_reserve_bytes < 0:
         raise ValueError('invalid resource guard')
+    delta_range = None
+    delta_totals = None
+    if delta_rule is not None:
+        grid = delta_rule.get('grid') if isinstance(delta_rule, dict) else None
+        if (delta_rule.get('schema') != URAL_DELTA_SCHEMA or not isinstance(grid, dict) or
+                set(grid) != {'width', 'height', 'west', 'north', 'step'} or
+                grid != {'width': width, 'height': height, 'west': -180, 'north': 90,
+                         'step': 360 / width}):
+            raise ValueError('invalid Ural delta rule or grid binding')
+        w, s, e, n = delta_rule.get('scope_bounds', (None, None, None, None))
+        if not all(type(v) in (int, float) for v in (w, s, e, n)) or not w < e or not s < n:
+            raise ValueError('invalid Ural delta scope')
+        step = grid['step']
+        # Include centers exactly on a scope edge so classify_cell fails closed
+        # rather than silently excluding an ambiguous boundary cell.
+        x0 = max(0, math.ceil((w - grid['west']) / step - 0.5 - 1e-12))
+        x1 = min(width, math.floor((e - grid['west']) / step - 0.5 + 1e-12) + 1)
+        y0 = max(0, math.ceil((grid['north'] - n) / step - 0.5 - 1e-12))
+        y1 = min(height, math.floor((grid['north'] - s) / step - 0.5 + 1e-12) + 1)
+        if x0 >= x1 or y0 >= y1:
+            raise ValueError('Ural delta scope has no grid centers')
+        delta_range = (x0, x1, y0, y1)
+        delta_totals = {'land_centers': 0, 'other_land_labels': 0,
+                        'europe_to_asia': 0, 'asia_to_europe': 0}
     mr = tuple(mainland_roots)
     if not mr or any(type(x) is not int or not 0 <= x <= MAX_U32 for x in mr) or len(set(mr)) != len(mr):
         raise ValueError('non-empty unique valid mainland roots required')
@@ -175,8 +201,18 @@ def write_land_stream(width, height, component_rows, component_runs,
                    iter(_full(sources[2].next(), width, {0, 17, 18, 19, 20, 21, 22}, 'mainland'))]
             current = [next(it) for it in its]
             x = 0; pending = None; pending_end = 0
+            delta_row_active = delta_range is not None and delta_range[2] <= y < delta_range[3]
+            lat = delta_rule['grid']['north'] - (y + 0.5) * delta_rule['grid']['step'] if delta_row_active else None
             while x < width:
                 end = min(v[1] for v in current)
+                # Only split the small Ural scope into cell-sized spans.
+                # All other rows and columns retain the original run stream.
+                if delta_row_active:
+                    dx0, dx1 = delta_range[0], delta_range[1]
+                    if x < dx0 < end:
+                        end = dx0
+                    elif dx0 <= x < dx1:
+                        end = min(end, x + 1)
                 root, physical, seed = (v[2] for v in current)
                 if (root is not None) != (physical == 17):
                     raise ValueError('physical/component coverage mismatch at row ' + str(y))
@@ -192,6 +228,20 @@ def write_land_stream(width, height, component_rows, component_runs,
                     byte, bit = divmod(i, 8)
                     if not seen[byte] & (1 << bit):
                         seen[byte] |= 1 << bit; seen_count += 1
+                if delta_row_active and delta_range[0] <= x < delta_range[1] and physical == 17:
+                    if code not in (delta_rule['europe_code'], delta_rule['asia_code']):
+                        delta_totals['other_land_labels'] += 1
+                        raise ValueError('non-Europe/Asia land label in Ural delta scope')
+                    lon = delta_rule['grid']['west'] + (x + 0.5) * delta_rule['grid']['step']
+                    side_code = classify_cell(delta_rule, lon, lat)
+                    if side_code is None:
+                        raise ValueError('land center fell outside active Ural delta scope')
+                    delta_totals['land_centers'] += 1
+                    if code == delta_rule['europe_code'] and side_code == delta_rule['asia_code']:
+                        delta_totals['europe_to_asia'] += 1
+                    elif code == delta_rule['asia_code'] and side_code == delta_rule['europe_code']:
+                        delta_totals['asia_to_europe'] += 1
+                    code = side_code
                 if code: land_cells += end - x
                 if pending is not None and code != pending:
                     wr(runs_out, dh, PAIR.pack(pending_end, pending)); total += 1
@@ -213,6 +263,20 @@ def write_land_stream(width, height, component_rows, component_runs,
                   'land_cells': land_cells, 'assigned_roots': seen_count,
                   'mainland_roots': sorted(seed_ids), 'rows_sha256': rh.hexdigest(),
                   'runs_sha256': dh.hexdigest()}
+        if delta_rule is not None:
+            report['ural_delta'] = {
+                'schema': URAL_DELTA_SCHEMA,
+                'revision': delta_rule['revision'],
+                'boundary_id': delta_rule['boundary_id'],
+                'boundary_sha256': delta_rule['boundary_sha256'],
+                'route_id': delta_rule['route_id'],
+                'route_sha256': delta_rule['route_sha256'],
+                'scope_bounds': delta_rule['scope_bounds'],
+                'europe_code': delta_rule['europe_code'],
+                'asia_code': delta_rule['asia_code'],
+                'counts': delta_totals,
+                'status': 'applied-to-land-cell-centers',
+            }
         if seen is not None: seen.flush(); seen.close(); maps.remove(seen)
         seen_f.close(); files.remove(seen_f)
         tmp = out / 'report.json.partial'

@@ -9,6 +9,10 @@ from decimal import Decimal,InvalidOperation
 from osgeo import ogr
 ogr.UseExceptions()
 
+SUPPORTING_RELATIONSHIPS = frozenset(['independent_original_terrain_research_not_watershed_or_construction_proof', 'independent_terrain_research_anapa_not_full_watershed_verification_or_construction', 'independent_terrain_research_east_not_watershed_verification_or_construction', 'independent_terrain_research_east_original_not_watershed_verification_or_construction', 'independent_terrain_research_sections_2_3_not_watershed_verification_or_construction', 'independent_terrain_research_west_original_not_watershed_verification_or_construction', 'research_comparison_evidence_not_independent_verification_or_proof_of_construction', 'secondary_terrain_points_not_independent_of_srtm_or_watershed_validation', 'srtm_cross_sensor_research_not_independent_hydrobasins_or_watershed_verification', 'supporting research evidence only; not production geometry selection', 'supporting_geographic_evidence_not_complete_construction_lineage', 'temporary research-only named-waterway corroboration; not a selected pipeline input', 'terrain_quality_mask_for_eastern_research', 'historical_relation_membership_support_not_complete_coordinate_lineage', 'historical_way_membership_support_not_complete_coordinate_lineage', 'companion_mask_for_independent_terrain_screen', 'current_mainstream_source_comparison_not_historical_bytes_or_terrain_proof', 'independent_terrain_screen_mask_zero_only_not_proof_of_divide', 'local_geographic_comparison_not_terrain_or_construction_proof'])
+CONSTRUCTION_RELATIONSHIP = "construction_input"
+
+
 def geometry_hash(g):return hashlib.sha256(json.dumps(g,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
 def coord(v):
  if isinstance(v,bool) or not isinstance(v,(int,float,str,Decimal)):raise ValueError('invalid coordinate')
@@ -45,13 +49,14 @@ def assemble(revision_id,records,decision,source_catalog,closure_checker,*,physi
   if not 0<=a<b<=len(pts) or b-a<2:raise ValueError('invalid L2 vertex slice')
   citations=[]
   if item['kind']=='boundary':
-   refs=record.get('source_refs');status=record.get('lineage_status')
+   refs=record.get('qualified_source_refs');status=record.get('lineage_status')
    if not isinstance(refs,list) or not refs or status not in ('complete','incomplete'):raise ValueError('boundary provenance missing')
    for ref in refs:
-    if not isinstance(ref,dict) or set(ref)!={'source_id','version'}:raise ValueError('invalid boundary source citation')
+    if not isinstance(ref,dict) or set(ref)!={'source_id','version','relationship','role'} or not isinstance(ref['relationship'],str) or not ref['relationship'] or ref['role'] not in ('construction_input','supporting_research_evidence'):raise ValueError('invalid boundary source citation')
+    if ref['relationship'] not in SUPPORTING_RELATIONSHIPS|{CONSTRUCTION_RELATIONSHIP} or ref['role']!=('construction_input' if ref['relationship']==CONSTRUCTION_RELATIONSHIP else 'supporting_research_evidence'):raise ValueError('unsupported or inconsistent source role')
     source=source_catalog.get((ref['source_id'],ref['version']))
     if not isinstance(source,dict) or source.get('kind')!='raw' or not re.fullmatch('[0-9a-f]{64}',str(source.get('sha256'))) or not source.get('bucket') or not source.get('key'):raise ValueError('boundary citation not a pinned raw source')
-    citations.append({'source_id':ref['source_id'],'version':ref['version'],'sha256':source['sha256'],'bucket':source['bucket'],'key':source['key'],'origin':source.get('origin')})
+    citations.append({'source_id':ref['source_id'],'version':ref['version'],'relationship':ref['relationship'],'role':ref['role'],'sha256':source['sha256'],'bucket':source['bucket'],'key':source['key']})
   else:
    role=record.get('role')
    if role!='water_closure':raise ValueError('route requires physical closure proof')
