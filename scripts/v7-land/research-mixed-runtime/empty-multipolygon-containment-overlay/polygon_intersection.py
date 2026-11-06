@@ -15,11 +15,33 @@ def need(v,m):
  if not v:raise ValueError(m)
 def ceil(x):return -((-x.numerator)//x.denominator)
 def reject_boundary_centers(geometry,grid,guard,max_visits=5000000):
- """Reject exact binary64 polygon-boundary/grid-center coincidence."""
+ """Reject exact binary64 polygon-boundary/grid-center coincidences.
+
+ For a non-horizontal edge, x at integer row y is (A*y+B)/D. Clip
+ y to the rows for which x is in the grid, then solve A*y+B == 0 mod D.
+ Integer arithmetic preserves the former exact Fraction scan, including its
+ visit limit and guard-call cadence through the first offending row.
+ """
  step=Fraction(str(grid['step']));west=Fraction(str(grid['west']));north=Fraction(str(grid['north']));w=grid['width'];h=grid['height'];visits=0
  need(type(w) is int and type(h) is int and w>0 and h>0 and west==-180 and north==90 and step==Fraction(360,w) and Fraction(float(step))==step and h*step<=180,'unsupported non-dyadic global grid')
  polys=[geometry['coordinates']] if geometry['type']=='Polygon' else geometry['coordinates']
  def pixel(p):return ((Fraction(p[0])-west)/step-Fraction(1,2),(north-Fraction(p[1]))/step-Fraction(1,2))
+ def cd(a,b):return -((-a)//b)  # b is positive
+ def first_hit(x0,y0,x1,y1,lo,hi):
+  slope=(x1-x0)/(y1-y0);intercept=x0-slope*y0
+  D=math.lcm(slope.denominator,intercept.denominator)
+  A=slope.numerator*(D//slope.denominator);B=intercept.numerator*(D//intercept.denominator)
+  # 0 <= A*y+B < D*w, clipped using integer inequalities.
+  if A>0:lo=max(lo,cd(-B,A));hi=min(hi,(D*w-1-B)//A)
+  elif A<0:
+   c=-A;lo=max(lo,cd(B-(D*w-1),c));hi=min(hi,B//c)
+  elif not 0<=B<D*w:return None
+  if hi<lo:return None
+  g=math.gcd(A,D)
+  if B%g:return None
+  period=D//g;residue=(-B//g*pow(A//g,-1,period))%period
+  y=residue+cd(lo-residue,period)*period
+  return y if y<=hi else None
  for poly in polys:
   for ring in poly:
    for a,b in zip(ring,ring[1:]):
@@ -28,10 +50,10 @@ def reject_boundary_centers(geometry,grid,guard,max_visits=5000000):
      if y0.denominator==1 and 0<=y0<h and max(0,ceil(min(x0,x1)))<=min(w-1,math.floor(max(x0,x1))):raise ValueError('polygon boundary crosses grid cell center')
      continue
     lo=max(0,ceil(min(y0,y1)));hi=min(h-1,math.floor(max(y0,y1)));visits+=max(0,hi-lo+1);need(visits<=max_visits,'boundary visit limit exceeded')
-    for y in range(lo,hi+1):
-     if (y-lo)%1024==0:guard()
-     x=x0+(x1-x0)*(y-y0)/(y1-y0)
-     need(not (x.denominator==1 and 0<=x<w),'polygon boundary crosses grid cell center')
+    hit=first_hit(x0,y0,x1,y1,lo,hi) if lo<=hi else None
+    # Preserve the original callback order even when it raises.
+    for y in range(lo,(hit if hit is not None else hi)+1,1024):guard()
+    need(hit is None,'polygon boundary crosses grid cell center')
  return visits
 def readrow(rows,runs,y,width,kind):
  rows.seek(y*4);b=rows.read(8);need(len(b)==8,'truncated row index');a,z=U.unpack(b);size=12 if kind=='component' else 8;need(a<=z and z-a<=width,'invalid row index');runs.seek(a*size);buf=runs.read((z-a)*size);need(len(buf)==(z-a)*size,'truncated row');return list((T if kind=='component' else P).iter_unpack(buf))

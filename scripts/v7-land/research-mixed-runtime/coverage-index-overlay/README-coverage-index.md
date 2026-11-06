@@ -13,9 +13,8 @@ matching reviewed dependencies; publishing this code does not deploy a map.
 The index is trusted in-process caching, not an adversarially immutable
 snapshot. Each use checks the resolved stream identities and file metadata;
 the outer resolver must authenticate input hashes before and after resolution.
-The caller must use an external process-group RSS guard, because index memory
-scales with the number of distinct roots. If those conditions cannot be met,
-use the existing non-indexed path. The index is not persisted across runs.
+Index memory scales with the number of distinct roots. Check capacity for the
+input before a direct run; the index is not persisted across runs.
 
 Synthetic tests check output and error parity and reject a changed generation.
 A bounded benchmark compared 12 representative queries over four sampled
@@ -34,11 +33,15 @@ old-versus-batched claim parity. These are tests, not a full map replay.
 
 The two coverage files replace the matching files in
 `group-label-multipolygon-prototype`; the two GeoNames files replace the
-matching files in `geonames-point-integration-20261105/point-component-prototype` (the historical runtime aliases this to `point-integration`). Do not apply
+matching files in `geonames-point-integration-20261105/point-component-prototype`
+(the historical runtime aliases this to `point-integration`). Do not apply
 those replacements to a different assembled resolver without checking for
-intervening geographic or interface changes. This tested combination requires
-`polygon_intersection.py` SHA-256
+intervening geographic or interface changes. The original tested combination
+used `polygon_intersection.py` SHA-256
 `391c7dee1b91dfa9c78ad087a46a9c9e9c8df778183ebc706b481e0286d110d5`.
+The exact arithmetic optimization subsequently tested with the same combined
+runtime has SHA-256
+`720c78051db0432ce8b8e4b9e94bab089e9a79efd1934fa0084fbac5d8890d2b`.
 
 The combined runtime's changed code SHA-256 values are:
 
@@ -49,8 +52,20 @@ The combined runtime's changed code SHA-256 values are:
 
 Refresh the parent configuration's code pins, the point request's resolver
 and extractor pins, and the point request's own parent hash. Continue to pin
-all other inputs and code, hash streams before and after resolution, and use a
-process-group RSS guard. A prior sampled benchmark showed equivalent output
+all other inputs and code, and hash streams before and after resolution. A
+prior sampled benchmark showed equivalent output
 for 12 coverage queries over 4,096 rows in 6.76 seconds unindexed versus
 0.905 seconds with index creation and queries. Host load, full-grid root
 counts and real decisions differ; do not treat this as a full-build speedup.
+
+## Exact boundary-center arithmetic
+
+The runtime's `polygon_intersection.py` solves the exact rational
+cell-center crossing as an integer congruence rather than scanning every
+intermediate row. It retains the old visit count, limit/error ordering, and
+guard callback cadence. The full affected polygon suite passed 927 tests;
+20,000 seeded synthetic cases and an independent 15,000-case extreme-float
+comparison matched the previous algorithm. On 25 Natural Earth features,
+all 486,390 candidate row visits matched and the check took 0.35 seconds
+versus 6.39 seconds on that shared host. This bounded timing is not an
+end-to-end build result.
