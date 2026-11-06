@@ -23,12 +23,20 @@ class RegionTest(unittest.TestCase):
   self.cfg['regions'][0]['witnesses']=[];self.cfg['evidence']=[{'path':str(self.path),'sha256':'0'*64}];self.save()
   with self.assertRaisesRegex(ValueError,'hash mismatch'):build_regions.build(self.path,self.root/'out')
  def test_water_route_segment_is_rechecked(self):
-  physical=self.root/'physical';physical.mkdir();rows,runs=rle(np.ones((18,36),dtype=np.uint32),physical);rc={'schema':'simple-v2-water-route-v1','grid':self.grid,'physical_rows':rows,'physical_runs':runs,'bounds':[0,8,0,8],'start':[2,5],'end':[4,5],'minimum_free_bytes':0};rpath=self.inputs/'route-config.json';rpath.write_text(json.dumps(rc));route_out=self.root/'route';build_water_route.build(rpath,route_out)
+  physical=self.root/'physical';physical.mkdir();rows,runs=rle(np.ones((18,36),dtype=np.uint32),physical);rc={'schema':'simple-v2-water-route-v2','grid':self.grid,'physical_rows':rows,'physical_runs':runs,'bounds':[0,8,0,8],'start':[2,5],'end':[4,5],'minimum_free_bytes':0};rpath=self.inputs/'route-config.json';rpath.write_text(json.dumps(rc));route_out=self.root/'route';build_water_route.build(rpath,route_out)
   self.cfg['regions'][0]={'id':'route-region','segments':[{'kind':'water-route','report':pin(route_out/'report.json'),'reverse':False},{'kind':'points','coordinates':[[-135,35],[-135,25],[-155,25],[-155,35]]}],'witnesses':[{'lon':-145,'lat':30,'inside':True}]};self.save();out=self.root/'out';self.assertEqual(build_regions.build(self.path,out)['status'],'unreviewed-research-not-published')
   with open(route_out/'route.u32le','ab') as f:f.write(b'\0\0\0\0')
   with self.assertRaisesRegex(ValueError,'hash mismatch'):build_regions.build(self.path,self.root/'bad')
+ def test_water_route_rejects_boolean_distance_report(self):
+  physical=self.root/'physical';physical.mkdir();rows,runs=rle(np.ones((18,36),dtype=np.uint32),physical)
+  rc={'schema':'simple-v2-water-route-v2','grid':self.grid,'physical_rows':rows,'physical_runs':runs,'bounds':[0,8,0,8],'start':[2,5],'end':[4,5],'minimum_free_bytes':0}
+  route_config=self.inputs/'route-config.json';route_config.write_text(json.dumps(rc));route_out=self.root/'route';build_water_route.build(route_config,route_out)
+  report=route_out/'report.json';doc=json.loads(report.read_text());doc['route']['distance_m']=False;report.write_text(json.dumps(doc))
+  self.cfg['regions'][0]={'id':'route','segments':[{'kind':'water-route','report':pin(report),'reverse':False},{'kind':'points','coordinates':[[-135,35],[-135,25],[-155,25],[-155,35]]}],'witnesses':[]};self.save()
+  with self.assertRaisesRegex(ValueError,'invalid WGS84-weighted route report'):build_regions.build(self.path,self.root/'bad')
+  self.assertFalse((self.root/'bad').exists())
  def test_route_cannot_cross_changed_physical_land(self):
-  physical=self.root/'physical';physical.mkdir();values=np.ones((18,36),dtype=np.uint32);rows,runs=rle(values,physical);rc={'schema':'simple-v2-water-route-v1','grid':self.grid,'physical_rows':rows,'physical_runs':runs,'bounds':[0,8,0,8],'start':[2,5],'end':[4,5],'minimum_free_bytes':0};rp=self.inputs/'route-config.json';rp.write_text(json.dumps(rc));route_out=self.root/'route';build_water_route.build(rp,route_out)
+  physical=self.root/'physical';physical.mkdir();values=np.ones((18,36),dtype=np.uint32);rows,runs=rle(values,physical);rc={'schema':'simple-v2-water-route-v2','grid':self.grid,'physical_rows':rows,'physical_runs':runs,'bounds':[0,8,0,8],'start':[2,5],'end':[4,5],'minimum_free_bytes':0};rp=self.inputs/'route-config.json';rp.write_text(json.dumps(rc));route_out=self.root/'route';build_water_route.build(rp,route_out)
   values[5,3]=17;rows,runs=rle(values,physical);report=route_out/'report.json';doc=json.loads(report.read_text());doc['physical_rows']=rows;doc['physical_runs']=runs;report.write_text(json.dumps(doc))
   self.cfg['regions'][0]={'id':'route','segments':[{'kind':'water-route','report':pin(report),'reverse':False},{'kind':'points','coordinates':[[-135,35],[-135,25],[-155,25],[-155,35]]}],'witnesses':[]};self.save()
   with self.assertRaisesRegex(ValueError,'crosses land'):build_regions.build(self.path,self.root/'bad')

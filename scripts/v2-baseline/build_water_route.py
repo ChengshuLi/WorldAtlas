@@ -12,7 +12,7 @@ from file_integrity import pin,sha
 
 def build(config_path,output):
  config_path=Path(config_path).resolve();raw=config_path.read_bytes();c=json.loads(raw);required={'schema','grid','physical_rows','physical_runs','bounds','start','end'}
- if not required<=set(c)<=required|{'max_window_cells','minimum_free_bytes'} or c['schema']!='simple-v2-water-route-v1' or sys.byteorder!='little':raise ValueError('invalid config or byte order')
+ if not required<=set(c)<=required|{'max_window_cells','minimum_free_bytes'} or c['schema']!='simple-v2-water-route-v2' or sys.byteorder!='little':raise ValueError('invalid config or byte order')
  g=c['grid'];w,h=g['width'],g['height'];step=g['step'];box=c['bounds'];start,end=c['start'],c['end'];limit=c.get('max_window_cells',30000000);reserve=c.get('minimum_free_bytes',2*(1<<30))
  if set(g)!={'width','height','west','north','step'} or type(w) is not int or type(h) is not int or w<1 or h<1 or g['west']!=-180 or g['north']!=90 or type(step) not in (int,float) or not math.isfinite(step) or step!=360/w or 90-h*step < -90-1e-8:raise ValueError('invalid grid')
  if not isinstance(box,list) or len(box)!=4 or any(type(v) is not int for v in box):raise ValueError('invalid bounds')
@@ -31,13 +31,32 @@ def build(config_path,output):
    if np.any(~np.isin(row,[1,17])):raise ValueError('invalid physical code')
    (row==17).astype(np.uint8).tofile(f)
  if shutil.disk_usage(out).free<reserve:raise ValueError('free disk below configured reserve')
+ # Each move is costed by the WGS84 inverse distance between adjacent cell
+ # centers. Integer micrometres make equal-cost path ties deterministic.
+ east_costs=np.empty(y1-y0,dtype='<u8');north_costs=np.empty(max(0,y1-y0-1),dtype='<u8')
+ def edge_cost(lon1,lat1,lon2,lat2):
+  value=float(shore.GEOD.inv(lon1,lat1,lon2,lat2)[2])
+  if not math.isfinite(value) or value<0:raise ValueError('invalid WGS84 grid-edge distance')
+  return max(1,int(round(value*1_000_000)))
+ for local_y,y in enumerate(range(y0,y1)):
+  lat=g['north']-(y+.5)*step;lon=g['west']+(x0+.5)*step
+  east_costs[local_y]=edge_cost(lon,lat,lon+step,lat) if x1-x0>1 else 1
+  if local_y<len(north_costs):
+   next_lat=g['north']+(y+1.5)*-step
+   north_costs[local_y]=edge_cost(lon,lat,lon,next_lat)
+ east_cost_path=out/'east-costs.u64le';north_cost_path=out/'north-costs.u64le'
+ with east_cost_path.open('xb') as f:east_costs.tofile(f)
+ with north_cost_path.open('xb') as f:north_costs.tofile(f)
  executable=out/'water-route';build_cmd=['g++','-O2','-std=c++17','-Wall','-Wextra','-Werror',str(HERE/'water_route.cpp'),'-o',str(executable)];subprocess.run(build_cmd,check=True,capture_output=True)
- args=[str(executable),str(mask),str(x1-x0),str(y1-y0),str(start[0]-x0),str(start[1]-y0),str(end[0]-x0),str(end[1]-y0),str(out/'route.u32le')];proc=subprocess.run(args,capture_output=True,text=True)
+ args=[str(executable),str(mask),str(x1-x0),str(y1-y0),str(start[0]-x0),str(start[1]-y0),str(end[0]-x0),str(end[1]-y0),str(east_cost_path),str(north_cost_path),str(out/'route.u32le')];proc=subprocess.run(args,capture_output=True,text=True)
  if proc.returncode:raise ValueError('water path failed: '+proc.stderr.strip())
  if shutil.disk_usage(out).free<reserve:raise ValueError('free disk below configured reserve')
  for k in pins:pin(c[k])
  if config_path.read_bytes()!=raw or any(sha(v)!=hashes[k] for k,v in code_paths.items()):raise ValueError('input or code changed')
- result={'schema':'simple-v2-water-route-report-v1','status':'unreviewed-research-not-published','grid':g,'bounds':box,'start':start,'end':end,'physical_rows':c['physical_rows'],'physical_runs':c['physical_runs'],'config_sha256':hashlib.sha256(raw).hexdigest(),'route':{'path':'route.u32le','sha256':sha(out/'route.u32le')},'mask_sha256':sha(mask),'code_sha256':hashes,'binary_sha256':sha(executable),'compiler_version':subprocess.run(['g++','--version'],capture_output=True,text=True,check=True).stdout.splitlines()[0],'builder_output':proc.stderr.strip(),'limitations':'Exploratory deterministic four-neighbor route within explicitly selected bounds; endpoints and closure policy are not verified historical decisions.'};xo.write_json_exclusive(out/'report.json',result,indent=2);return result
+ try:distance_um=int(proc.stdout.strip())
+ except ValueError:raise ValueError('water route did not report a valid WGS84 path length') from None
+ if distance_um<0:raise ValueError('water route reported a negative WGS84 path length')
+ result={'schema':'simple-v2-water-route-report-v2','status':'unreviewed-research-not-published','grid':g,'bounds':box,'start':start,'end':end,'physical_rows':c['physical_rows'],'physical_runs':c['physical_runs'],'config_sha256':hashlib.sha256(raw).hexdigest(),'route':{'path':'route.u32le','sha256':sha(out/'route.u32le'),'distance_m':distance_um/1_000_000,'metric':'WGS84 ellipsoidal cell-center edge distances; integer-micrometre weighted Dijkstra'},'mask_sha256':sha(mask),'edge_costs':{'east':{'path':east_cost_path.name,'sha256':sha(east_cost_path)},'north':{'path':north_cost_path.name,'sha256':sha(north_cost_path)}},'code_sha256':hashes,'binary_sha256':sha(executable),'compiler_version':subprocess.run(['g++','--version'],capture_output=True,text=True,check=True).stdout.splitlines()[0],'geodesic_software_versions':{'pyproj':__import__('pyproj').__version__,'proj':__import__('pyproj').proj_version_str},'builder_output':proc.stderr.strip(),'limitations':'Exploratory WGS84-weighted four-neighbor route within explicitly selected bounds; cell-center edges, endpoints and closure policy are not verified historical decisions.'};xo.write_json_exclusive(out/'report.json',result,indent=2);return result
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('config');p.add_argument('output');a=p.parse_args()
  try:print(json.dumps(build(a.config,a.output),indent=2))

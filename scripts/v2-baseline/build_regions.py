@@ -59,12 +59,24 @@ def build(config_path,output):
   elif kind=='water-route' and set(segment)=={'kind','report','reverse'}:
    if type(segment['reverse']) is not bool:raise ValueError('invalid route direction')
    rp=check(segment['report']);r=json.loads(rp.read_bytes());box=r.get('bounds')
-   if r.get('schema')!='simple-v2-water-route-report-v1' or r.get('status')!='unreviewed-research-not-published' or r.get('grid')!=g or not isinstance(box,list) or len(box)!=4:raise ValueError('invalid route report')
+   q=r.get('route',{});costs=r.get('edge_costs',{});versions=r.get('geodesic_software_versions',{})
+   if (r.get('schema')!='simple-v2-water-route-report-v2' or r.get('status')!='unreviewed-research-not-published' or
+       r.get('grid')!=g or not isinstance(box,list) or len(box)!=4 or
+       q.get('metric')!='WGS84 ellipsoidal cell-center edge distances; integer-micrometre weighted Dijkstra' or
+       type(q.get('distance_m')) not in (int,float) or not math.isfinite(q['distance_m']) or q['distance_m']<0 or
+       not isinstance(costs,dict) or set(costs)!={'east','north'} or
+       not isinstance(versions,dict) or not all(isinstance(versions.get(k),str) and versions[k] for k in ('pyproj','proj'))):
+    raise ValueError('invalid WGS84-weighted route report')
    x0,x1,y0,y1=box
    if any(type(v) is not int for v in box) or not (0<=x0<x1<=w and 0<=y0<y1<=h):raise ValueError('invalid route bounds')
-   q=r.get('route',{});route_path=(rp.parent/q.get('path','')).resolve()
+   route_path=(rp.parent/q.get('path','')).resolve()
    if not route_path.is_relative_to(rp.parent) or not route_path.is_file():raise ValueError('route path escapes report')
-   check({'path':str(route_path),'sha256':q.get('sha256')});pr=check(r['physical_rows']);pu=check(r['physical_runs']);current_physical=(r['physical_rows']['sha256'],r['physical_runs']['sha256'])
+   check({'path':str(route_path),'sha256':q.get('sha256')})
+   for cost in costs.values():
+    cost_path=(rp.parent/cost.get('path','')).resolve()
+    if not cost_path.is_relative_to(rp.parent):raise ValueError('edge-cost path escapes route report directory')
+    check({'path':str(cost_path),'sha256':cost.get('sha256')})
+   pr=check(r['physical_rows']);pu=check(r['physical_runs']);current_physical=(r['physical_rows']['sha256'],r['physical_runs']['sha256'])
    if route_physical is not None and route_physical!=current_physical:raise ValueError('routes use different physical grids')
    route_physical=current_physical;rows,runs=grid_io.open_grid(pr,pu,w,h)
    if route_path.stat().st_size%4 or not 0<route_path.stat().st_size//4<=limit:raise ValueError('invalid route size')
