@@ -21,6 +21,7 @@ import caucasus_stage2_binding as binding
 import contracts
 from caucasus_effective_snapshot import derive_verified, geomhash
 from shapely.geometry import Point, Polygon, LineString, box
+from geodesic_fixture import fixture_boundary_filter
 
 REQUIRED = ('CAUCASUS_SELECTED', 'CAUCASUS_RECIPE', 'CAUCASUS_HYDRO',
             'CAUCASUS_AUTHOR', 'DIRECT_SEED_DIR')
@@ -57,6 +58,7 @@ class RealSourceDirectFixture(unittest.TestCase):
             first, last = guide['coordinates'][0], guide['coordinates'][-1]
             route = {'type': 'LineString', 'coordinates': [last, [last[0], 34.0], [first[0], 34.0], first]}
             polygon = Polygon(guide['coordinates'] + route['coordinates'][1:])
+            near_boundary = fixture_boundary_filter(polygon.boundary)
             self.assertTrue(polygon.is_valid)
             inside, outside = [], []
             for y in range(40):
@@ -64,7 +66,7 @@ class RealSourceDirectFixture(unittest.TestCase):
                     point = Point(grid['west'] + (x + .5) * grid['step'], grid['north'] - (y + .5) * grid['step'])
                     cell = box(grid['west'] + x * grid['step'], grid['north'] - (y + 1) * grid['step'],
                                grid['west'] + (x + 1) * grid['step'], grid['north'] - y * grid['step'])
-                    if point.distance(polygon.boundary) < 1 or cell.intersects(LineString(route['coordinates'])):
+                    if near_boundary(point) or cell.intersects(LineString(route['coordinates'])):
                         continue
                     (inside if polygon.contains(point) else outside).append((x, y))
             self.assertTrue(inside and len(outside) >= 5)

@@ -17,6 +17,7 @@ from unittest.mock import patch
 import caucasus_seed_gate as gate
 from caucasus_effective_snapshot import derive_verified, geomhash
 from shapely.geometry import Point, Polygon
+from geodesic_fixture import fixture_boundary_filter
 
 REQUIRED = ('CAUCASUS_SELECTED', 'CAUCASUS_RECIPE', 'CAUCASUS_HYDRO',
             'CAUCASUS_AUTHOR', 'DIRECT_SEED_DIR')
@@ -51,12 +52,13 @@ class RealSourceDirectFixture(unittest.TestCase):
             first, last = guide['coordinates'][0], guide['coordinates'][-1]
             route = {'type': 'LineString', 'coordinates': [last, [last[0], 34.0], [first[0], 34.0], first]}
             polygon = Polygon(guide['coordinates'] + route['coordinates'][1:])
+            near_boundary = fixture_boundary_filter(polygon.boundary)
             self.assertTrue(polygon.is_valid)
             inside, outside = [], []
             for y in range(2, 30):
                 for x in range(2, 30):
                     point = Point(grid['west'] + (x + .5) * grid['step'], grid['north'] - (y + .5) * grid['step'])
-                    if point.distance(polygon.boundary) < 1:
+                    if near_boundary(point):
                         continue
                     (inside if polygon.contains(point) else outside).append((x, y))
             self.assertTrue(inside and len(outside) >= 5)
