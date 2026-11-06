@@ -69,6 +69,9 @@ def crop(rows, runs, y, x0, x1, width):
     first,last=int(rows[y]),int(rows[y+1]); ends=runs[2*first:2*last:2]; vals=runs[2*first+1:2*last:2]
     if not len(ends) or int(ends[0]) <= 0 or int(ends[-1]) != width or np.any(ends[1:] <= ends[:-1]):
         raise ValueError(f'invalid RLE row {y}')
+    if x0 == 0 and x1 == width:
+        lengths=np.diff(np.concatenate((np.array([0],dtype=ends.dtype),ends)))
+        return np.repeat(vals,lengths).astype(np.uint32,copy=False)
     result=np.empty(x1-x0, dtype=np.uint32); cur=0; x=x0
     while x < x1:
         xm=x%width; take=min(x1-x,width-xm); stop=xm+take
