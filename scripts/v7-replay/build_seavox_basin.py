@@ -174,7 +174,9 @@ def main():
     ap.add_argument('--land-rows', type=Path); ap.add_argument('--land-rows-sha256')
     ap.add_argument('--land-runs', type=Path); ap.add_argument('--land-runs-sha256')
     ap.add_argument('--shore-pad-degrees', type=float, default=8.0)
-    ap.add_argument('--research-interval', action='store_true', help='research only: use interval certificates; output requires a reviewed interval-aware prefill adapter')
+    engine = ap.add_mutually_exclusive_group()
+    engine.add_argument('--research-interval', action='store_true', help='compatibility option: exact row certificates are now the shared-basin default')
+    engine.add_argument('--pointwise-nearest', action='store_true', help='reference engine: classify every shared-basin water center independently')
     ap.add_argument('--research-shore-method', choices=['wgs84-coastal-4neighbor-center-v2'],
                     help='draft research only: use the WGS84 ellipsoidal four-neighbor coastal land-cell-center method')
     ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow a correctly labeled draft decision and entity revision')
@@ -185,9 +187,6 @@ def main():
     shared_code_sha = digest(Path(shared.__file__))
     interval_code_sha = digest(Path(interval_nearest.__file__))
     helpers = {'exclusive_outputs':exclusive_outputs,'decision_snapshot':decision_snapshot,'seavox_properties':seavox_properties}
-    helper_code_shas = {name:digest(Path(module.__file__)) for name,module in helpers.items()} if args.research_interval else {}
-    interval_software = {'python':platform.python_version(),'numpy':np.__version__,'scipy':scipy.__version__,
-                         'pyproj':pyproj.__version__,'proj':pyproj.proj_version_str} if args.research_interval else None
     if not args.allow_unverified_snapshot:
         raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
     root = args.input_root.resolve(); out = args.out.resolve()
@@ -209,6 +208,10 @@ def main():
     basin, source, selection = selected_basin(snapshot, args.decision_id)
     is_shared = basin['assignment_method'] == 'shared_nearest_assigned_shore'
     if args.research_interval and not is_shared: raise ValueError('interval research mode requires a shared basin')
+    use_interval = is_shared and not args.pointwise_nearest
+    helper_code_shas = {name:digest(Path(module.__file__)) for name,module in helpers.items()} if use_interval else {}
+    interval_software = {'python':platform.python_version(),'numpy':np.__version__,'scipy':scipy.__version__,
+                         'pyproj':pyproj.__version__,'proj':pyproj.proj_version_str} if use_interval else None
     if is_shared and not land_rows_path: raise ValueError('shared basin requires pinned final-land RLEs')
     if is_shared and (not args.allow_draft_snapshot or snapshot['decision_revision']['status'] != 'draft'
                       or args.research_shore_method != 'wgs84-coastal-4neighbor-center-v2'):
@@ -269,13 +272,13 @@ def main():
             return wrapped_bounds.shore_blocks(shared,(rows,runs),(lr,lu),full_shore_bounds,W,H,STEP,code)
         classifier=wrapped_bounds.StreamedWrappedClassifier(shared.classify,streamed_shore_fallback.classify_one,shore_bounds,full_shore_bounds,W,H,STEP,pairs,tolerance,indexes,full_blocks)
     assignment = out/'basin-assignment.jsonl.gz'; cells = spans_count = row_count = 0
-    certified = exact = interval_certified = 0
+    certified = exact = interval_certified = exact_interval_probes = interval_leaf_cells = 0
     with create_gzip_text_exclusive(assignment, encoding='utf8') as stream:
         for y in range(y0, y1):
             a, b = int(rows[y]), int(rows[y+1]); ends = runs[2*a:2*b:2]; values = runs[2*a+1:2*b:2]
             if not len(ends) or int(ends[0]) == 0 or int(ends[-1]) != W or np.any(ends[1:] <= ends[:-1]) or np.any(~np.isin(values,[1,17])):
                 raise ValueError(f'invalid physical grid row {y}')
-            if is_shared and args.research_interval:
+            if is_shared and use_interval:
                 intervals = source_water_spans(raster[y-y0], x0, ends, values)
             else:
                 x = np.arange(x0,x1,dtype='u4')
@@ -283,12 +286,14 @@ def main():
                 intervals = contiguous_spans(chosen, x0)
             if not intervals:
                 continue
-            if is_shared and args.research_interval:
+            if is_shared and use_interval:
                 assigned, stats = interval_nearest.classify_row(
                     y, intervals, shore_bounds, W, H, STEP, pairs, tolerance, indexes,
                     point_classifier=classifier.classify)
                 certified += stats['bounded_cells']; exact += stats['exact_cells']
                 interval_certified += stats['certified_cells']
+                exact_interval_probes += stats['exact_interval_probes']
+                interval_leaf_cells += stats['leaf_cells']
                 records = [{'start':a,'end':b,'code':code,
                             'rule_id':'research-named-basin-nearest-final-center-v2',
                             'member_id':member_id} for a,b,code in assigned]
@@ -347,9 +352,9 @@ def main():
                                  'geometry_validity':'OGR/GEOS ST_IsValid and ST_IsEmpty checked',
                                  'bounds_columns_rows':[x0,x1,y0,y1]},
                 'algorithm_sha256':builder_code_sha,
-                'nearest_assignment_audit': {'shore_method':(('wgs84-wrapped-center-interval-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-center-interval-v1 (research, not an approved decision)') if args.research_interval else ('wgs84-wrapped-certified-with-streamed-full-fallback-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)')), 'shore_crop':shore_bounds,'coastal_center_count':len(edges['mids']),'coastal_center_count_scope':'indexed-shore-crop',
+                'nearest_assignment_audit': {'shore_method':(('wgs84-wrapped-center-interval-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-center-interval-v1 (research, not an approved decision)') if use_interval else ('wgs84-wrapped-certified-with-streamed-full-fallback-v1 (research, not an approved decision)' if shore_bounds!=full_shore_bounds else 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)')), 'shore_crop':shore_bounds,'coastal_center_count':len(edges['mids']),'coastal_center_count_scope':'indexed-shore-crop',
                     **({'full_shore_crop':full_shore_bounds,'full_streamed_shore_count':'not-precomputed','index_optimization':'certified-wrapped-crop-with-streamed-full-shore-fallback','shore_order':'original-full-crop-row-column-order','wrapped_narrow_cells':classifier.narrow_cells,'wrapped_fallback_cells':classifier.fallback_cells,'wrapped_bounds_sha256':wrapped_code_sha,'streamed_fallback_sha256':fallback_code_sha} if shore_bounds!=full_shore_bounds else {}),
-                    **({'execution_method':'wgs84-center-row-interval-v1','interval_certified_cells':interval_certified,'interval_nearest_sha256':interval_code_sha,'helper_code_sha256':helper_code_shas,'software':interval_software} if args.research_interval else {}),
+                    **({'execution_method':'wgs84-center-row-interval-v1','interval_certified_cells':interval_certified,'exact_interval_probe_count':exact_interval_probes,'interval_leaf_cells':interval_leaf_cells,'interval_nearest_sha256':interval_code_sha,'helper_code_sha256':helper_code_shas,'software':interval_software} if use_interval else {}),
                     'certified_bound_cells':certified,'exact_distance_cells':exact,
                     'shared_nearest_sha256':shared_code_sha,
                     'shore_geometry_sha256':shared_code_sha} if is_shared else None,

@@ -114,15 +114,15 @@ class FullBuilderTest(unittest.TestCase):
                     '--land-rows-sha256',h(root/'land-rows'),'--land-runs',str(root/'land-runs'),
                     '--land-runs-sha256',h(root/'land-runs'),'--shore-pad-degrees','180',
                     '--out',str(out),'--allow-unverified-snapshot','--allow-draft-snapshot',
-                    '--research-shore-method','wgs84-coastal-4neighbor-center-v2','--research-interval']
+                    '--research-shore-method','wgs84-coastal-4neighbor-center-v2']
                 m.main()
                 baseline_out=Path(d)/'baseline-out'
-                sys.argv=[str(baseline_out) if arg==str(out) else arg for arg in sys.argv if arg!='--research-interval']
+                sys.argv=[str(baseline_out) if arg==str(out) else arg for arg in sys.argv]+['--pointwise-nearest']
                 m.main()
                 # A helper changed after processing must not produce a completed manifest.
                 from unittest.mock import patch
                 tamper_out=Path(d)/'tamper-out'; seen=[0]
-                sys.argv=[str(tamper_out) if arg==str(baseline_out) else arg for arg in sys.argv]+['--research-interval']
+                sys.argv=[str(tamper_out) if arg==str(baseline_out) else arg for arg in sys.argv if arg!='--pointwise-nearest']
                 def changed_digest(path):
                     if Path(path).resolve()==Path(m.exclusive_outputs.__file__).resolve():
                         seen[0]+=1

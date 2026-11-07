@@ -121,8 +121,10 @@ All `sources` are explicit `{path, sha256}` pins:
 
 `basin_workers` controls basin concurrency; one independent coastal task runs
 alongside that pool. These are execution tuning controls, not memory limits.
-The WGS84 point assignment is the normal basin engine. An interval/certificate
-engine is not enabled implicitly.
+Shared basins use exact WGS84 row-interval certificates by default, with complete
+point classification for unresolved centers. The standalone basin builder retains
+`--pointwise-nearest` as the reference engine. See [the certificate and full-input
+benchmark contract](../../docs/named-sea-intervals.md).
 
 ## Outputs and timing
 

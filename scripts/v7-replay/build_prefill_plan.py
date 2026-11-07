@@ -44,6 +44,10 @@ def validate_shared_audit(manifest):
         n=audit.get('interval_certified_cells');helpers=audit.get('helper_code_sha256')
         if audit.get('execution_method')!='wgs84-center-row-interval-v1' or not integer(n) or n>certified or not isinstance(helpers,dict) or not helpers:
             raise ValueError('interval-shore execution contract mismatch')
+        if ('interval_leaf_cells' in audit or 'exact_interval_probe_count' in audit) and (
+                not integer(audit.get('interval_leaf_cells')) or n+audit['interval_leaf_cells']!=count
+                or not integer(audit.get('exact_interval_probe_count'))):
+            raise ValueError('interval-shore probe accounting mismatch')
         hashes.extend([audit.get('interval_nearest_sha256'),*helpers.values()])
     elif any(k in audit for k in ('execution_method','interval_nearest_sha256','interval_certified_cells')):
         raise ValueError('unexpected interval-shore metadata')

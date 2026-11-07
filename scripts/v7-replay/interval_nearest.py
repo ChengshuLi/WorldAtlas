@@ -3,7 +3,8 @@
 A class distance is 1-Lipschitz in geodesic distance. At each interval's
 midpoint, prove the selected class beats each other and every omitted center by
 2*the maximum distance to a center of the interval. Otherwise split or use
-point classifier. Experimental floating point guard is NOT independently proven.
+point classifier. If spherical bounds overlap, exact WGS84 class minima at the
+midpoint can still certify an entire interval. No shoreline candidate is capped.
 """
 import math
 import numpy as np
@@ -41,7 +42,7 @@ def classify_row(y,intervals,bounds,width,height,step,pairs,tol,indexes,*,leaf=1
   z=np.asarray(result[0])
   if z.ndim!=1 or len(z)!=len(latitudes) or not np.issubdtype(z.dtype,np.integer) or np.any(~np.isin(z,[p[2] for p in pairs])):raise ValueError('invalid point codes')
   return z,int(bounded),int(exact)
- active=np.array(intervals,dtype=np.int64).reshape(-1,2);done=[];certified=split=leafcells=leafbounded=leafexact=0
+ active=np.array(intervals,dtype=np.int64).reshape(-1,2);done=[];certified=split=leafcells=leafbounded=leafexact=exactprobes=0
  if needs_full:
   for a,b in intervals:
    for st in range(a,b,5000):
@@ -57,6 +58,22 @@ def classify_row(y,intervals,bounds,width,height,step,pairs,tol,indexes,*,leaf=1
   lowers[np.arange(len(active)),best]=np.inf
   boundary=s.boundary_lower(lats,lon,bounds,width,height,step)
   good=(upper+2*extent+tol<lowers.min(axis=1))&(upper+2*extent+tol<boundary)
+  # The global spherical lower bound deliberately underestimates ellipsoidal
+  # distance. Subdivision alone cannot remove that gap, so otherwise a wide
+  # strip around each class boundary would devolve into exact point queries.
+  # Resolve complete class minima once at an unresolved interval midpoint;
+  # their 1-Lipschitz distance functions then provide much tighter bounds.
+  probe=np.flatnonzero((~good)&(active[:,1]-active[:,0]>leaf))
+  if len(probe):
+   distances=np.column_stack([s.exact_minima_by_ordered_chord(points[probe],lon[probe],lats[probe],*indexes[code]) for _,code,_ in pairs])
+   if np.any(~np.isfinite(distances)):raise RuntimeError('invalid exact interval distances')
+   winners=np.argmin(distances,axis=1);ii=np.arange(len(probe))
+   # The millimetre guard is in addition to the centimetre extent guard and
+   # strict tie tolerance; an uncertain certificate always subdivides/falls back.
+   exactupper=distances[ii,winners]+.001
+   exactlower=np.maximum(0,distances-.001);exactlower[ii,winners]=np.inf
+   proved=(exactupper+2*extent[probe]+tol<exactlower.min(axis=1))&(exactupper+2*extent[probe]+tol<boundary[probe])
+   chosen=probe[proved];good[chosen]=True;best[chosen]=winners[proved];exactprobes+=len(probe)
   for i in np.flatnonzero(good):
    a,b=map(int,active[i]);done.append((a,b,pairs[int(best[i])][2]));certified+=b-a
   todo=active[~good];small=todo[:,1]-todo[:,0]<=leaf
@@ -78,4 +95,4 @@ def classify_row(y,intervals,bounds,width,height,step,pairs,tol,indexes,*,leaf=1
   if merged and merged[-1][1]==a and merged[-1][2]==c:merged[-1]=(merged[-1][0],b,c)
   else:merged.append((a,b,c))
  if leafbounded+leafexact!=leafcells or certified+leafcells!=sum(b-a for a,b in intervals):raise RuntimeError('assignment accounting mismatch')
- return merged,{'certified_cells':certified,'leaf_cells':leafcells,'split_nodes':split,'bounded_cells':certified+leafbounded,'exact_cells':leafexact}
+ return merged,{'certified_cells':certified,'leaf_cells':leafcells,'split_nodes':split,'bounded_cells':certified+leafbounded,'exact_cells':leafexact,'exact_interval_probes':exactprobes}

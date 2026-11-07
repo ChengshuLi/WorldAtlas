@@ -1,8 +1,22 @@
 import unittest
+from unittest.mock import patch
 import numpy as np
 import shared_nearest as s
 import interval_nearest as x
 class Intervals(unittest.TestCase):
+ def test_exact_midpoint_minima_resolve_loose_spherical_bounds(self):
+  width=131072;height=54614;step=360/width;pairs=[('a',17,1),('b',18,2)]
+  lat=np.array([0.,0.]);lon=np.array([0.,.05]);cat=np.array([17,18],dtype='u1')
+  indexes=s.make_indexes({'lat':lat,'lon':lon,'mids':s.unit(lat,lon),'category':cat},pairs)
+  def loose(lats,lons,points,pairs,indexes):
+   return np.zeros((len(lats),2)),np.zeros(len(lats),dtype=int),np.full(len(lats),1e9)
+  source=[(72000,72100)];bounds=(0,width,0,height);row=30000
+  with patch.object(s,'nearest_class_bounds',side_effect=loose):
+   out,stats=x.classify_row(row,source,bounds,width,height,step,pairs,1e-5,indexes,leaf=1)
+  self.assertGreater(stats['exact_interval_probes'],0)
+  self.assertEqual(stats['certified_cells'],100)
+  self.assertEqual(stats['leaf_cells'],0)
+  self.assertEqual(out,[(72000,72100,2)])
  def test_global_random_and_seams(self):
   rng=np.random.default_rng(674); width=360;height=180;step=1.;pairs=[('a',17,1),('b',18,2),('c',19,3)]
   lat=rng.uniform(-89,89,600);lon=rng.uniform(-180,180,600);cat=np.tile([17,18,19],200).astype('u1')
