@@ -18,6 +18,14 @@ class RecoveryTests(unittest.TestCase):
    original=obj[key];obj[key]='0'*64
    with self.subTest(key=key),self.assertRaises(ValueError):self.runv()
    obj[key]=original
+ def test_fresh_handoff_requires_provisional_and_exact_bindings(self):
+  self.recovery.update(schema='stage2-fresh-provisional-handoff-v1',status='same-run-launcher-bound-by-derived-manifest')
+  self.recovery['core_config_sha256']=self.recovery.pop('corrected_core_config_sha256')
+  self.report.update(provisional_only=True,publishable=False);self.derived['provisional_only']=True;self.runv()
+  for obj,key,bad in ((self.report,'provisional_only',False),(self.report,'publishable',True),(self.derived,'provisional_only',False),(self.recovery,'core_config_sha256','0'*64)):
+   old=obj[key];obj[key]=bad
+   with self.assertRaises(ValueError):self.runv()
+   obj[key]=old
  def test_mutually_missing_digests_fail(self):
   for a,ka,b,kb in ((self.recovery,'corrected_core_config_sha256',self.report,'config_sha256'),(self.recovery,'seed_report_sha256',self.report,'seed_report_sha256'),(self.recovery['launcher'],'sha256',self.derived['code_sha256'],'seed-producer/seed_worker.py')):
    av=a.pop(ka);bv=b.pop(kb)
