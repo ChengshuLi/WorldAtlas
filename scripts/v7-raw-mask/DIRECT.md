@@ -53,3 +53,20 @@ These do not test a real R2 connection or establish source selection, global
 coverage, or equivalence to a published map. The exact local harness used in
 the 2026-11-07 physical rerun is retained under `research-run-provenance/` for
 provenance; its fixed environment paths make it non-portable.
+
+### Continue after interruption
+
+For a new output directory, `run_with_r2_staging.py` can copy completed land
+and water checkpoints from `--reuse-checkpoint`, leaving the original run
+untouched. Supply `--checkpoint-events`, `--checkpoint-land-report-sha256`,
+`--checkpoint-land-code-sha256` and `--checkpoint-land-shared-code-sha256`.
+It checks the land configuration, input sidecars, report and TIFF; each saved
+water report is checked against its source and config pins, current rasterizer
+hash, completion event and TIFF, then each copied file is rehashed. A present
+but invalid checkpoint stops the run; only absent stages are run anew. Failed
+partial R2 downloads must be preserved separately before restaging.
+
+The prior land report does not itself attest which code bytes executed. The
+land code hashes are operator-supplied assertions and matching them is not
+independent proof of the earlier process. Record that limitation and the exact
+wrapper, source, runtime and event pins in the resumed run's evidence.

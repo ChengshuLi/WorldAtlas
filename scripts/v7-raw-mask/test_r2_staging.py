@@ -76,5 +76,45 @@ class StagingTests(unittest.TestCase):
         cfg.write_text(json.dumps({'source_manifest':{'path':str(m),'sha256':module.sha(m)}}))
         with self.assertRaises(ValueError): module.manifest_entries(cfg)
 
+class CheckpointTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name); self.log = self.root/'logs'; self.log.mkdir()
+        self.check = self.root/'old'; (self.check/'land').mkdir(parents=True); (self.check/'shards'/'00000').mkdir(parents=True)
+        self.repo = self.root/'repo'; (self.repo/'overture').mkdir(parents=True)
+        for f, data in [('rasterize_land.py',b'land code'),('build.py',b'shared code'),('overture/rasterize_water_shard.py',b'water code')]:
+            (self.repo/f).write_bytes(data)
+        self.patch = mock.patch.object(module.physical, 'HERE', self.repo); self.patch.start(); self.addCleanup(self.patch.stop)
+        self.source=self.root/'raw'/'part'; self.source.parent.mkdir(); self.data=b'shard'; self.source_sha=hashlib.sha256(self.data).hexdigest()
+        self.landfile=self.root/'land.shp';self.landfile.write_bytes(b'land input')
+        self.landcfg=self.root/'land.json'; self.landcfg.write_text(json.dumps({'grid':{'width':8},'land':[{'files':[{'path':str(self.landfile),'sha256':module.sha(self.landfile)}]}]}))
+        self.watercfg=self.root/'water.json';self.watercfg.write_text(json.dumps({'grid':{'width':8},'policy':{'method':'x'},'batch_size':8}))
+        self.entry={'source_id':'s','sha256':self.source_sha,'size':len(self.data),'r2_bucket':'b','r2_key':'k'}
+        self.stager=module.Stager({self.source:self.entry},'wrangler',self.log);self.stager.original_stage=mock.Mock()
+        land=self.check/'land'; (land/'config.json').write_bytes(self.landcfg.read_bytes()); (land/'land.tif').write_bytes(b'land raster')
+        (land/'report.json').write_text(json.dumps({'status':'candidate-only','grid':{'width':8},'configuration_sha256':module.sha(self.landcfg),'land_sha256':module.sha(land/'land.tif')}))
+        shard=self.check/'shards'/'00000';(shard/'water.tif').write_bytes(b'water raster')
+        (shard/'report.json').write_text(json.dumps({'status':'candidate-only','source':str(self.source),'source_sha256':self.source_sha,'configuration_sha256':module.sha(self.watercfg),'script_sha256':module.sha(self.repo/'overture/rasterize_water_shard.py'),'grid':{'width':8},'policy':{'method':'x'},'batch_size':8,'output_sha256':module.sha(shard/'water.tif')}))
+        self.events=self.root/'events.jsonl';self.events.write_text(json.dumps({'event':'shard_complete','source_id':'s','source':str(self.source),'sha256':self.source_sha,'size':len(self.data),'output_sha256':module.sha(shard/'water.tif')})+'\n')
+        self.resume=module.CheckpointStager(self.stager,self.check,self.events,module.sha(land/'report.json'),module.sha(self.repo/'rasterize_land.py'),module.sha(self.repo/'build.py'))
+    def test_land_and_shard_reused_in_new_output(self):
+        dest=self.root/'new';(dest/'shards').mkdir(parents=True)
+        self.resume.run_stage('rasterize_land.py',self.landcfg,dest/'land')
+        self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,dest/'shards'/'00000','--batch-size','8')
+        self.stager.original_stage.assert_not_called()
+        self.assertEqual((dest/'land'/'land.tif').read_bytes(),b'land raster')
+        self.assertEqual((dest/'shards'/'00000'/'water.tif').read_bytes(),b'water raster')
+        self.assertEqual((self.check/'shards'/'00000'/'water.tif').read_bytes(),b'water raster')
+    def test_bad_shard_hash_fails_closed(self):
+        (self.check/'shards'/'00000'/'water.tif').write_bytes(b'tampered')
+        with self.assertRaises(ValueError): self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,self.root/'00000')
+    def test_bad_land_code_fails_closed(self):
+        (self.repo/'rasterize_land.py').write_bytes(b'changed')
+        with self.assertRaises(ValueError): self.resume.run_stage('rasterize_land.py',self.landcfg,self.root/'newland')
+    def test_missing_stage_runs_normally(self):
+        self.stager.run_stage=mock.Mock()
+        dest=self.root/'00001';self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,dest)
+        self.stager.run_stage.assert_called_once()
+
 
 if __name__ == '__main__': unittest.main()
