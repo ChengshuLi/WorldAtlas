@@ -10,6 +10,46 @@ from run_pair import run_pair
 
 
 class ExactIndexSpeedTests(unittest.TestCase):
+    def test_fine_leaves_preserve_all_cells_codes_and_exact_minimum(self):
+        width, height, tile_cells = 1024, 512, 256
+        records = [
+            (0, 0, 256, 17), (126, 70, 239, 18), (128, 120, 255, 19),
+            (255, 257, 510, 20), (300, 768, 1024, 21), (511, 0, 250, 22),
+        ]
+        groups = {}
+        for record in records:
+            y, a, b, code = record
+            groups.setdefault((y // tile_cells, a // tile_cells), []).append(record)
+        with tempfile.TemporaryDirectory() as td:
+            tiles = []
+            for (ty, tx), values in groups.items():
+                raw = b''.join(struct.pack('<IIII', *value) for value in values)
+                (Path(td) / f'{ty:05d}-{tx:05d}.bin').write_bytes(raw)
+                tiles.append((ty, tx, sorted({v[3] for v in values}), len(values),
+                              hashlib.sha256(raw).hexdigest()))
+            index = ExactIndex(td, width, height, 360 / width, 90, tiles,
+                               tile_cells=tile_cells)
+            certificate_tiles = index.certificate_tiles
+            self.assertGreater(len(certificate_tiles), len(tiles))
+            expected_cells = {(y, x, c) for y, a, b, c in records for x in range(a, b)}
+            actual_cells = set()
+            for i, (_, sy, ey, sx, ex, selected) in enumerate(index.leaves):
+                data = index._load_leaf(i)
+                self.assertEqual(set(map(int, data[:, 3])), set(certificate_tiles[i][2]))
+                for y, a, b, code in data:
+                    self.assertTrue(sy <= y < ey and sx <= a < b <= ex)
+                    actual_cells.update((int(y), x, int(code)) for x in range(int(a), int(b)))
+            self.assertEqual(actual_cells, expected_cells)
+            for query in [(0, 1010, 1024), (127, 112, 139), (260, 490, 530), (511, 300, 340)]:
+                expected = {}
+                for y, a, b, code in records:
+                    distance, _ = run_pair(*query, y, a, b, width, incumbent=math.inf)
+                    expected[code] = min(expected.get(code, math.inf), distance)
+                actual, _ = index.nearest_run(*query, max(expected.values()))
+                winner = min(expected, key=lambda c: (expected[c], c))
+                self.assertAlmostEqual(min(actual.values()), expected[winner], delta=1e-5)
+                self.assertEqual(min(actual, key=lambda c: (actual[c], c)), winner)
+
     def test_dynamic_bound_preserves_nearest_wgs84_category(self):
         width, height, step, north, tile_cells = 360, 180, 1.0, 90.0, 10
         # One authenticated seed run per continent at representative positions.

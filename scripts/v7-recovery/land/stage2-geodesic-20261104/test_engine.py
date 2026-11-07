@@ -7,6 +7,16 @@ class Traversal(unittest.TestCase):
   self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);p=pathlib.Path(self.t.name);self.r=p/'runs';self.o=p/'rows';np.asarray([[0,3,10],[5,9,1],[0,2,11],[4,10,10],[0,3,12]],dtype='<u4').tofile(self.r);np.asarray([0,2,3,4,5],dtype='<u4').tofile(self.o);self.co=engine.offsets(self.o,4,5);self.roots=np.array([10,11,12],dtype='u4');self.seed=np.array([1],dtype='u4')
  def test_first_points(self):
   y,x=engine.first_points(self.r,self.co,self.roots,self.seed,16);self.assertEqual(y.tolist(),[0,1,3]);self.assertEqual(x.tolist(),[0,0,0])
+ def test_real_witnesses_cover_later_runs_and_both_endpoints(self):
+  class Witness:
+   def witnesses(self,y,x,h):return (y-2)**2+(x.astype(float)-9)**2,None
+  upper=engine.component_witnesses(self.r,self.co,self.roots,self.seed,16,Witness(),np.array([17,18,19]))
+  self.assertEqual(upper.tolist(),[0.,65.,50.])
+ def test_nonfinite_or_missing_witnesses_fail_closed(self):
+  class Witness:
+   def witnesses(self,y,x,h):return np.full(len(y),np.inf),None
+  with self.assertRaisesRegex(ValueError,'invalid WGS84 witness'):
+   engine.component_witnesses(self.r,self.co,self.roots,self.seed,16,Witness(),np.array([17,18,19]))
  def test_all_runs_and_resume(self):
   a=np.zeros(3,dtype=bool);engine.certificate_pass(self.r,self.co,self.roots,self.seed,Fake(),[1,1,1],[17,18,19],a,chunk=2,block_records=2);self.assertEqual(a.tolist(),[True,False,False])
   b=np.zeros(3,dtype=bool);engine.certificate_pass(self.r,self.co,self.roots,self.seed,Fake(),[1,1,1],[17,18,19],b,cursor=2,chunk=2,block_records=2);self.assertEqual(b.tolist(),[True,False,False])

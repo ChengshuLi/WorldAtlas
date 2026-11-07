@@ -19,7 +19,7 @@ class Runner(unittest.TestCase):
   n=[0]
   def fail():
    n[0]+=1
-   if n[0]>9:raise RuntimeError('simulated interrupt')
+   if n[0]>9 and self.cp.exists():raise RuntimeError('simulated interrupt')
   with self.assertRaisesRegex(RuntimeError,'interrupt'):self.runit(guard=fail)
   self.assertTrue(self.cp.exists());a=self.runit(True);self.assertEqual(len(a['codes']),2)
  def test_identity_mismatch(self):

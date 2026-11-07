@@ -550,7 +550,7 @@ class Pipeline:
             'resources': {'max_cell_visits': 2000000}}
         inputs['closure_contract'] = pin(self.document('closure', closure))
         lineage = {'schema': 'stage1-raw-physical-lineage-request-v1', 'code_root': str(SCRIPTS / 'v7-raw-mask'), 'inputs': {
-            'pipeline_report': pin(self.out / 'physical' / 'report.json'),
+            'pipeline_report': pin(physical.parent / 'report.json'),
             'neon_selection': pin(self.sources['neon_selection']),
             'osm_receipt': pin(self.sources['osm_receipt'])}}
         inputs['physical_lineage_request'] = pin(self.document('physical-lineage', lineage))

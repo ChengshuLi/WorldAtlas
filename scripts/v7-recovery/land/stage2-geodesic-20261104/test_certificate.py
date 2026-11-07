@@ -1,4 +1,5 @@
 import unittest, math, numpy as np
+from unittest.mock import patch
 from certificate import CertificateIndex
 from pyproj import Geod
 G=Geod(ellps='WGS84')
@@ -35,4 +36,23 @@ class Cert(unittest.TestCase):
    self.check(seeds,runs,17+i%6,w)
  def test_bad_guard_fails_closed(self):
   with self.assertRaises(ValueError):CertificateIndex(360,180,1,90,[],[],tile_cells=1,numerical_guard_m=0)
+ def test_hierarchy_only_refines_queries_that_coarse_bounds_cannot_prove(self):
+  seeds=[(60,12,17),(60,60,18),(60,120,19),(60,180,20),(60,240,21),(60,300,22)]
+  fine=build(seeds)
+  tiles=[(y//16,x//16,[code]) for y,x,code in seeds]
+  coarse=CertificateIndex(360,180,1,90,tiles,seeds,tile_cells=16)
+  hierarchy=CertificateIndex(360,180,1,90,tiles,seeds,tile_cells=16,refinement=fine)
+  rows=np.full(30,60);starts=np.arange(1,31);ends=starts+1;hints=np.full(30,17)
+  upper=coarse.witnesses(rows,starts,hints)[0]
+  known=coarse.certify_runs(rows,starts,ends,upper,hints,.001)
+  refined=fine.certify_runs(rows,starts,ends,upper,hints,.001)
+  self.assertTrue(known.any());self.assertTrue((~known).any())
+  with patch.object(fine,'_certify_points',wraps=fine._certify_points) as search:
+   actual=hierarchy.certify_runs(rows,starts,ends,upper,hints,.001)
+   np.testing.assert_array_equal(actual,known|refined)
+   self.assertEqual(len(search.call_args.args[0]),int((~known).sum()))
+   candidates=search.call_args.args[-1]
+   self.assertLess(int(candidates.sum()),len(candidates)*5)
+  with self.assertRaisesRegex(ValueError,'invalid certificate refinement'):
+   CertificateIndex(720,360,.5,90,[],[],refinement=fine)
 if __name__=='__main__':unittest.main()

@@ -41,18 +41,27 @@ def inventory(rows,runs,seed_roots,width,height,db_path,guard=lambda:None):
     try:
         con.execute('CREATE TABLE roots (id INTEGER PRIMARY KEY, y INTEGER NOT NULL, x INTEGER NOT NULL)')
         o=_offsets(rows,height,12,runs)
+        if np.any(o[1:].astype(np.int64)-o[:-1].astype(np.int64)>width):raise ValueError('component row exceeds width')
+        seen=set();offset=0;last_row=-1;last_end=0
         with open(runs,'rb') as f:
-            for y in range(height):
-                guard(); n=int(o[y+1]-o[y]);
-                if n>width: raise ValueError('component row exceeds width')
-                raw=f.read(n*12)
-                if len(raw)!=n*12: raise ValueError('truncated component row')
+            while True:
+                guard();raw=f.read(100000*12)
+                if not raw:break
+                if len(raw)%12:raise ValueError('truncated component row')
                 a=np.frombuffer(raw,dtype='<u4').reshape(-1,3)
-                if n and (np.any(a[:,0]>=a[:,1]) or np.any(a[:,1]>width) or np.any(a[1:,0]<a[:-1,1]) or np.any(a[:,2]==2**32-1)): raise ValueError('invalid component row')
-                if n:
-                    ids,ix=np.unique(a[:,2],return_index=True)
-                    con.executemany('INSERT OR IGNORE INTO roots VALUES (?,?,?)',((int(root),y,int(a[j,0])) for root,j in zip(ids,ix)))
-                if y%1024==0: con.commit()
+                yy=np.searchsorted(o,offset+np.arange(len(a)),side='right')-1
+                if (np.any(a[:,0]>=a[:,1]) or np.any(a[:,1]>width) or np.any(a[:,2]==2**32-1)
+                        or np.any(yy>=height) or (yy[0]==last_row and a[0,0]<last_end)
+                        or np.any((yy[1:]==yy[:-1])&(a[1:,0]<a[:-1,1]))):raise ValueError('invalid component row')
+                ids,ix=np.unique(a[:,2],return_index=True)
+                fresh=np.fromiter((int(root) not in seen for root in ids),dtype=bool,count=len(ids))
+                ids=ids[fresh];ix=ix[fresh];seen.update(map(int,ids))
+                # Every root is inserted once, rather than attempting an SQLite
+                # primary-key insert for all of its later horizontal runs.
+                con.executemany('INSERT INTO roots VALUES (?,?,?)',
+                                ((int(root),int(yy[j]),int(a[j,0])) for root,j in zip(ids,ix)))
+                offset+=len(a);last_row=int(yy[-1]);last_end=int(a[-1,1]);con.commit()
+        if offset!=int(o[-1]):raise ValueError('truncated component stream')
         con.commit()
         con.execute('CREATE TABLE seed_roots (id INTEGER PRIMARY KEY)');con.executemany('INSERT INTO seed_roots VALUES (?)',((v,) for v in seeds))
         if con.execute('SELECT count(*) FROM seed_roots s LEFT JOIN roots r ON s.id=r.id WHERE r.id IS NULL').fetchone()[0]: raise ValueError('seed roots missing from physical components')
@@ -115,6 +124,58 @@ def lowest_code_for_min_distance(distances,codes):
     minima=d.min(axis=1,keepdims=True)
     return np.min(np.where(d==minima,c[None,:],np.iinfo(np.uint16).max),axis=1).astype(np.uint8)
 
+def wgs84_nearest_categories(tree,latitudes,longitudes,codes,query_lat,query_lon):
+    """Find the global WGS84 representative winner in one conservative search.
+
+    The winning category is the category of the globally nearest sample, so
+    computing six independent category minima is unnecessary. The nearest
+    spherical sample supplies only an ellipsoidal upper witness. Every sample
+    that can beat it is still checked with the same WGS84 inverse, including
+    exact ties, and the lowest category code wins those ties.
+    """
+    lat=np.asarray(latitudes,dtype=float);lon=np.asarray(longitudes,dtype=float)
+    qlat=np.asarray(query_lat,dtype=float);qlon=np.asarray(query_lon,dtype=float)
+    codes=np.asarray(codes)
+    if (lat.ndim!=1 or lon.shape!=lat.shape or codes.shape!=lat.shape or not len(lat)
+            or not np.issubdtype(codes.dtype,np.integer) or np.any((codes<1)|(codes>255))
+            or qlat.ndim!=1 or qlon.shape!=qlat.shape
+            or any(np.any(~np.isfinite(a)) for a in (lat,lon,qlat,qlon))
+            or np.any(np.abs(lat)>90) or np.any(np.abs(qlat)>90)
+            or np.any(np.abs(lon)>180) or np.any(np.abs(qlon)>180)):
+        raise ValueError('invalid geodesic nearest inputs')
+    if not len(qlat):return np.empty(0,dtype=np.uint8)
+    xyz=_xyz(qlat,qlon);_,first=tree.query(xyz,k=1,workers=1)
+    first=np.asarray(first,dtype=np.int64)
+    upper=_inverse_distances(qlon,qlat,lon[first],lat[first])
+    if np.any(~np.isfinite(upper)) or np.any(upper<0):raise ValueError('invalid WGS84 upper bound')
+    angle=np.minimum(math.pi,(upper+BOUND_CUSHION_M)/MIN_CURVATURE_RADIUS)
+    radii=np.nextafter(2*np.sin(angle/2),math.inf)
+    # Ordinary candidate batches keep large valid neighborhoods streaming;
+    # neither the number of samples nor the number of candidates is limited.
+    best=np.full(len(qlat),math.inf);chosen=np.full(len(qlat),256,dtype=np.uint16)
+    queries=[];samples=[];pending=0
+    def flush():
+        nonlocal pending
+        if not pending:return
+        qi=np.concatenate(queries);ix=np.concatenate(samples)
+        distances=_inverse_distances(qlon[qi],qlat[qi],lon[ix],lat[ix])
+        if np.any(~np.isfinite(distances)) or np.any(distances<0):raise ValueError('invalid WGS84 distance')
+        previous=best.copy();np.minimum.at(best,qi,distances)
+        chosen[best<previous]=256
+        tied=distances==best[qi]
+        np.minimum.at(chosen,qi[tied],codes[ix[tied]])
+        queries.clear();samples.clear();pending=0
+    for q in range(len(qlat)):
+        ids=tree.query_ball_point(xyz[q],float(radii[q]),workers=1)
+        if int(first[q]) not in ids:ids.append(int(first[q]))
+        for start in range(0,len(ids),DISTANCE_BATCH):
+            ix=np.asarray(ids[start:start+DISTANCE_BATCH],dtype=np.int64)
+            queries.append(np.full(len(ix),q,dtype=np.int64));samples.append(ix);pending+=len(ix)
+            if pending>=DISTANCE_BATCH:flush()
+    flush()
+    if np.any(chosen>255) or np.any(~np.isfinite(best)):raise RuntimeError('no WGS84 hint candidate')
+    return chosen.astype(np.uint8)
+
 def choose_hints(db_path,reps,width,height,step,north,codes,batch=8192,guard=lambda:None):
     """Select category of nearest sampled representative by WGS84 distance.
 
@@ -129,10 +190,8 @@ def choose_hints(db_path,reps,width,height,step,north,codes,batch=8192,guard=lam
     if not np.issubdtype(r.dtype,np.integer) or np.any(r<0): raise ValueError('invalid representatives')
     if not math.isfinite(step) or step<=0 or abs(width*step-360)>1e-8 or not -90<=north<=90 or north-height*step < -90-1e-8 or r.ndim!=2 or r.shape[1]!=5 or not len(r): raise ValueError('bad grid/reps')
     if np.any(r[:,2]>=height) or np.any(r[:,3]>=width) or set(map(int,r[:,4]))!=set(codes) or type(batch)!=int or not 1<=batch<=8192: raise ValueError('bad representatives')
-    trees={};coords={}
-    for c in codes:
-        p=r[r[:,4]==c];lat=north-(p[:,2].astype(float)+.5)*step;lon=-180+(p[:,3].astype(float)+.5)*step
-        coords[c]=(lat,lon);trees[c]=cKDTree(_xyz(lat,lon))
+    plat=north-(r[:,2].astype(float)+.5)*step;plon=-180+(r[:,3].astype(float)+.5)*step
+    tree=cKDTree(_xyz(plat,plon))
     con=sqlite3.connect('file:'+quote(str(Path(db_path).resolve()),safe='/')+'?mode=ro',uri=True)
     try:
         cur=con.execute('SELECT id,y,x FROM roots ORDER BY id')
@@ -140,12 +199,7 @@ def choose_hints(db_path,reps,width,height,step,north,codes,batch=8192,guard=lam
             guard();chunk=cur.fetchmany(batch)
             if not chunk: break
             a=np.asarray(chunk,dtype=np.uint32);lat=north-(a[:,1].astype(float)+.5)*step;lon=-180+(a[:,2].astype(float)+.5)*step
-            d=[]
-            for c in codes:
-                plat,plon=coords[c]
-                d.append(wgs84_nearest_distances(trees[c],plat,plon,lat,lon))
-            # sorted codes and argmin yield deterministic lowest code on exact tie
-            chosen=lowest_code_for_min_distance(np.stack(d,axis=1),codes)
+            chosen=wgs84_nearest_categories(tree,plat,plon,r[:,4],lat,lon)
             yield a[:,0],chosen
     finally: con.close()
 

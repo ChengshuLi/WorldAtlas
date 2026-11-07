@@ -6,11 +6,9 @@ import checkpoints,engine
 def run(component_runs,co,roots,hints,seed_roots,width,cert_index,exact_index,checkpoint,identity,*,resume=False,chunk=1024,tolerance=1e-5,disk_floor_bytes=0,checkpoint_seconds=60,block_records=100000,guard=lambda:None,progress=lambda *x:None):
  roots=np.asarray(roots,dtype=np.uint32);hints=np.asarray(hints,dtype=np.uint8);seed_roots=np.asarray(seed_roots,dtype=np.uint32);N=len(roots)
  if len(hints)!=N or not N or np.any(roots[1:]<=roots[:-1]) or np.any((hints<17)|(hints>22)) or not 1<=chunk<=1024 or checkpoint_seconds<0:raise ValueError('invalid runner inputs')
- # Always reconstruct the first physical query witness and exact WGS84 upper on
- # resume, preventing a checkpoint from silently replacing a real witness.
- y,x=engine.first_points(component_runs,co,roots,seed_roots,width,guard);upper=np.empty(N,dtype=float)
- for off in range(0,N,8192):
-  guard();z=min(N,off+8192);upper[off:z]=cert_index.witnesses(y[off:z],x[off:z],hints[off:z])[0]
+ # Reconstruct actual full-extent physical witnesses on resume too. A saved
+ # checkpoint cannot silently replace the current real WGS84 upper bounds.
+ upper=engine.component_witnesses(component_runs,co,roots,seed_roots,width,cert_index,hints,guard)
  if resume:
   meta,a=checkpoints.read(checkpoint,identity,roots,guard)
   if not np.array_equal(a['hints'],hints) or not np.array_equal(a['upper'],upper):raise ValueError('checkpoint witness mismatch')

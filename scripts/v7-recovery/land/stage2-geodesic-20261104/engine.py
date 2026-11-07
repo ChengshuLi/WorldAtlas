@@ -39,6 +39,34 @@ def first_points(path,co,roots,seed_roots,width,guard=lambda:None):
  if last!=int(co[-1]) or set(map(int,seed_roots))!=seen_seed or np.any(ys<0) or np.any(ys>=len(co)-1):raise ValueError('incomplete component coverage')
  return ys,xs
 
+def component_witnesses(path,co,roots,seed_roots,width,index,hints,guard=lambda:None):
+ """Tighten each component upper bound with actual cells across its extent.
+
+ A component's first northern cell can be far from its closest mainland.
+ Batched endpoint witnesses cost far less than proving a loose first-cell
+ bound against every run of a large island. These samples are upper bounds,
+ never decisions: both endpoints are actual component cells and every chosen
+ mainland representative has already been independently authenticated.
+ """
+ roots=np.asarray(roots,dtype=np.uint32);seed_roots=np.asarray(seed_roots,dtype=np.uint32);hints=np.asarray(hints,dtype=np.uint8)
+ if hints.shape!=roots.shape or np.any((hints<17)|(hints>22)):raise ValueError('invalid witness hints')
+ upper=np.full(len(roots),np.inf);seen_seed=set();last=0
+ for off,a in blocks(path,guard=guard):
+  if np.any(a[:,0]>=a[:,1]) or np.any(a[:,1]>width):raise ValueError('invalid component run')
+  pos,match=positions(a[:,2],roots,seed_roots);seen_seed.update(map(int,np.unique(a[~match,2])))
+  ix=np.flatnonzero(match);wide=ix[a[ix,1]-a[ix,0]>1]
+  chosen=np.r_[ix,wide];cols=np.r_[a[ix,0],a[wide,1]-1]
+  for start in range(0,len(chosen),8192):
+   guard();selected=chosen[start:start+8192];p=pos[selected]
+   rows=np.searchsorted(co,off+selected,side='right')-1
+   if np.any((rows<0)|(rows>=len(co)-1)):raise ValueError('invalid witness row')
+   distances,_=index.witnesses(rows,cols[start:start+8192],hints[p])
+   if np.asarray(distances).shape!=p.shape or np.any(~np.isfinite(distances)) or np.any(distances<0):raise ValueError('invalid WGS84 witness bound')
+   np.minimum.at(upper,p,distances)
+  last=off+len(a)
+ if last!=int(co[-1]) or set(map(int,seed_roots))!=seen_seed or np.any(~np.isfinite(upper)):raise ValueError('incomplete component witness coverage')
+ return upper
+
 def oversized_run_queries(a,base,co,pos,index,chunk,max_queries):
  """Stream one very long valid run without rejecting or dropping chunks."""
  start=int(a[index,0]);end=int(a[index,1]);row=int(np.searchsorted(co,base+index,side='right')-1);root_position=int(pos[index])
