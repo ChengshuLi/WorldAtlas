@@ -23,7 +23,9 @@ class CodeVersionTests(unittest.TestCase):
         self.scripts = self.repo / 'scripts'
         for name in ('v7-raw-mask/build_physical.py', 'v7-replay/validator.py',
                      'v7-pipeline/run_pipeline.py', 'v7-replay/streaming_closed_water.py',
-                     'v7-replay/build_closed_water.py', 'v7-recovery/ocean/ocean_fill_runner.py'):
+                     'v7-replay/compare_grids.py', 'v7-replay/unknown.py',
+                     'v7-recovery/ocean/split_lineage_compose.py',
+                     *sorted(versions.BEFORE_SPLIT_FINAL)):
             self.source(name, 'original\n')
         self.old = self.commit()
         self.run = self.root / 'run'
@@ -58,10 +60,11 @@ class CodeVersionTests(unittest.TestCase):
         return versions.upgrade(self.run, self.identity, identity or self.new_identity(),
                                 pin(self.original), self.old, self.repo, 0)
 
-    def completed(self, script, name='stage'):
+    def completed(self, script, name='stage', outputs=None):
         stage = self.run / 'checkpoints' / name
         stage.mkdir()
-        return write(stage / 'complete.json', {'invocation': {'code': pin(self.scripts / script)}})
+        return write(stage / 'complete.json', {'invocation': {'code': pin(self.scripts / script),
+                                                            'outputs': outputs or []}})
 
     def change_water(self):
         self.source('v7-replay/validator.py', 'corrected\n')
@@ -217,6 +220,118 @@ class CodeVersionTests(unittest.TestCase):
         self.commit()
         with self.assertRaisesRegex(ValueError, 'cannot reuse completed water'):
             self.upgrade()
+
+    def change_split_final(self):
+        self.source('v7-recovery/ocean/split_lineage_compose.py', 'split final correction\n')
+        self.source('v7-recovery/ocean/test_split_lineage_compose.py', 'test\n')
+        return self.commit()
+
+    def test_split_final_third_transition_preserves_all_prior_water_and_provenance(self):
+        self.change_water()
+        first, _ = self.upgrade()
+        previous, old_commit = self.new_identity(), self.git('rev-parse', 'HEAD')
+        self.source('v7-replay/streaming_closed_water.py', 'closed correction\n')
+        self.commit()
+        second, _ = versions.upgrade(self.run, previous, self.new_identity(), first,
+                                     old_commit, self.repo, 1)
+        previous, old_commit = self.new_identity(), self.git('rev-parse', 'HEAD')
+        receipts = []
+        for index, entry in enumerate(sorted(versions.BEFORE_SPLIT_FINAL)):
+            outputs = [str(self.run / 'baseline-final')] if entry.endswith('/compose_direct.py') else []
+            receipts.append(self.completed(entry, 'earlier-' + str(index), outputs))
+        batch = self.run / 'coast/batch-start.json'
+        batch.parent.mkdir();batch.write_text('{}\n')
+        immutable = [self.original, *receipts, self.run / 'timing-events.jsonl',
+                     Path(first['path']), Path(second['path']), batch]
+        before = [pin(path) for path in immutable]
+        self.change_split_final()
+        third, stale = versions.upgrade(self.run, previous, self.new_identity(), second,
+                                        old_commit, self.repo, 2)
+        self.assertEqual(stale, [])
+        self.assertEqual(before, [pin(path) for path in immutable])
+        identity, parent, _, count = versions.load(self.run, self.identity, self.repo)
+        self.assertEqual((identity, parent, count), (self.new_identity(), third, 3))
+
+    def test_split_final_upgrade_rejects_final_later_or_unknown_water_producers(self):
+        self.change_split_final()
+        for entry in ('v7-recovery/ocean/split_lineage_compose.py',
+                      'v7-replay/compare_grids.py', 'v7-replay/unknown.py',
+                      'v7-replay/compose_direct.py'):
+            with self.subTest(entry=entry):
+                receipt = self.completed(entry, outputs=[str(self.run / 'final')])
+                with self.assertRaisesRegex(ValueError, 'cannot reuse completed water'):
+                    self.upgrade()
+                receipt.unlink();receipt.parent.rmdir()
+
+    def test_split_final_plus_shared_or_other_leaf_water_change_is_rejected(self):
+        self.completed('v7-recovery/ocean/ocean_fill_runner.py')
+        self.change_split_final()
+        for entry in ('v7-recovery/ocean/split_lineage_ocean.py',
+                      'v7-recovery/ocean/partition_core.py',
+                      'v7-replay/streaming_closed_water.py'):
+            with self.subTest(entry=entry):
+                self.source(entry, 'shared or different leaf\n')
+                self.commit()
+                with self.assertRaisesRegex(ValueError, 'cannot reuse completed water'):
+                    self.upgrade()
+
+    def test_split_final_resume_preserves_failed_output_and_reuses_completed_water(self):
+        leaf = ('from pathlib import Path\nimport sys\n'
+                'p=Path(sys.argv[1]);p.mkdir();(p/"result").write_text("done")\n')
+        stages = [('ocean', 'v7-recovery/ocean/ocean_fill_runner.py'),
+                  ('closed', 'v7-replay/build_closed_water.py'),
+                  ('baseline-final', 'v7-replay/compose_direct.py'),
+                  ('updated-ocean', 'v7-recovery/ocean/split_lineage_ocean.py')]
+        split_final = 'v7-recovery/ocean/split_lineage_compose.py'
+        for _, entry in stages:
+            self.source(entry, leaf)
+        self.source(split_final, leaf.replace('"done"', '"partial"') + 'sys.exit(1)\n')
+        old_commit = self.commit()
+        sentinel = write(self.root / 'sentinel.json', {})
+        required = ('land_config water_config raw_manifest land_snapshot resolution_template '
+                    'regional_template water_snapshot seavox_archive coastal_plan neon_selection osm_receipt').split()
+        config = write(self.root / 'request.json', {'schema': 'worldatlas-end-to-end-pipeline-v1',
+            'research_only': True, 'input_root': str(self.root),
+            'sources': {key: pin(sentinel) for key in required}})
+        out = self.root / 'integration'
+        with patch.object(pipeline, 'REPO', self.repo), patch.object(pipeline, 'SCRIPTS', self.scripts):
+            first = pipeline.Pipeline(config, out, allow_provisional=True)
+            self.addCleanup(first.close)
+            for name, entry in stages:
+                first.command('water', name, entry, out / name, _outputs=[out / name])
+            with self.assertRaisesRegex(RuntimeError, 'failed'):
+                first.command('water', 'compose-split-final', split_final, out / 'final',
+                              _outputs=[out / 'final'])
+            first.close()
+            immutable = [out / 'run-identity.json',
+                         *(out / 'checkpoints').glob('*/complete.json')]
+            before = [pin(path) for path in immutable]
+            timing_prefix = (out / 'timing-events.jsonl').read_bytes()
+            self.source(split_final, leaf)
+            self.commit()
+            second = pipeline.Pipeline(config, out, allow_provisional=True, resume=True,
+                                       resume_code_from=old_commit, confirm_no_writers=True)
+            self.addCleanup(second.close)
+            with patch.object(pipeline.subprocess, 'Popen', side_effect=AssertionError('old water restarted')):
+                for name, entry in stages:
+                    self.assertFalse(second.command('water', name, entry, out / name,
+                                                    _outputs=[out / name]))
+            second.command('water', 'compose-split-final', split_final, out / 'final',
+                           _outputs=[out / 'final'])
+            self.assertEqual(before, [pin(path) for path in immutable])
+            self.assertTrue((out / 'timing-events.jsonl').read_bytes().startswith(timing_prefix))
+            preserved = list((out / 'preserved').glob('compose-split-final-*/0-final/result'))
+            self.assertEqual([p.read_text() for p in preserved], ['partial'])
+            self.assertEqual((out / 'final/result').read_text(), 'done')
+            self.assertTrue((out / 'logs/compose-split-final.log').is_file())
+            receipt = json.loads((out / 'checkpoints/compose-split-final/complete.json').read_bytes())
+            self.assertEqual(receipt['producer_code_version'], second.code_version)
+            self.assertNotEqual(receipt['producer_code_version'], before[0])
+            second.close()
+            third = pipeline.Pipeline(config, out, allow_provisional=True, resume=True)
+            self.addCleanup(third.close)
+            self.assertFalse(third.command('water', 'compose-split-final', split_final,
+                out / 'final', _outputs=[out / 'final']))
 
     def test_runner_upgrade_reuses_old_stage_and_binds_new_stage_to_new_version(self):
         leaf = 'from pathlib import Path\nimport sys\np=Path(sys.argv[1]);p.mkdir();(p/"result").write_text("done")\n'

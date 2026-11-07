@@ -32,6 +32,18 @@ BEFORE_CLOSED = frozenset({
     'v7-recovery/ocean/make_candidate_build.py',
     'v7-recovery/ocean/ocean_fill_runner.py',
 })
+# Split final composition is a leaf: no earlier producer imports it. Keep its
+# domain separate from the split ocean runner and all shared water helpers.
+SPLIT_FINAL_ONLY = frozenset({
+    'v7-recovery/ocean/split_lineage_compose.py',
+    'v7-recovery/ocean/test_split_lineage_compose.py',
+})
+BEFORE_SPLIT_FINAL = BEFORE_CLOSED | frozenset({
+    'v7-replay/build_closed_water.py',
+    'v7-replay/prepare_final_plan.py',
+    'v7-replay/compose_direct.py',
+    'v7-recovery/ocean/split_lineage_ocean.py',
+})
 
 
 def committed_code(repo, revision):
@@ -88,6 +100,7 @@ def validate_scope(delta, completed, scripts):
     """Conservative stage domains: shared/upstream code is never migrated."""
     water_changes = {name for name in delta if name.startswith(WATER)}
     closed_only = bool(water_changes) and water_changes <= CLOSED_ONLY
+    split_final_only = bool(water_changes) and water_changes <= SPLIT_FINAL_ONLY
     water = bool(water_changes)
     for name in delta:
         test = name.startswith('v7-pipeline/test_') and '/' not in name[len('v7-pipeline/'):]
@@ -98,10 +111,18 @@ def validate_scope(delta, completed, scripts):
         entry = Path(receipt['invocation']['code']['path']).relative_to(scripts).as_posix()
         if not entry.startswith(UPSTREAM + WATER):
             raise ValueError('code upgrade has an unsupported completed producer: ' + entry)
-        if water and entry.startswith(WATER) and not (closed_only and entry in BEFORE_CLOSED):
-            raise ValueError('water code upgrade cannot reuse completed water checkpoints')
-    # Closed-only changes cannot affect or invalidate a prior coastal batch.
-    return water and not closed_only
+        if water and entry.startswith(WATER):
+            allowed = ((closed_only and entry in BEFORE_CLOSED)
+                       or (split_final_only and entry in BEFORE_SPLIT_FINAL))
+            if split_final_only and entry == 'v7-replay/compose_direct.py':
+                # This entrypoint also composes a final non-split grid. Only
+                # the pipeline's earlier baseline output belongs to this domain.
+                root = Path(path).parent.parent.parent
+                allowed = receipt['invocation'].get('outputs') == [str(root / 'baseline-final')]
+            if not allowed:
+                raise ValueError('water code upgrade cannot reuse completed water checkpoints')
+    # Neither leaf-only domain affects an earlier coastal batch.
+    return water and not (closed_only or split_final_only)
 
 
 def load(root, original, repo):

@@ -42,7 +42,7 @@ class SplitComposeTest(unittest.TestCase):
    summary={'status':'unverified-candidate-not-published','snapshot_sha256':inp['decision_snapshot_sha256'],'barrier_sha256':inp['source_cut_edges_sha256'],'layer_manifest_sha256':s.ocean.sha(self.paths[label+'_layer_manifest'])}
    add(label+'_summary',write_json(p/'run-summary.json',summary))
   closed={'pending_cells':0,'coverage':{'complete':True},'source':{'decision_snapshot_sha256':s.ocean.sha(self.paths['prefill_snapshot']),'decision_revision':'base','entity_revision':'e','legacy_ocean_label_inheritance':False,'physical_rows_sha256':common['physical_rows_sha256'],'physical_runs_sha256':common['physical_runs_sha256'],'prefill_audit_sha256':common['prefill_audit_sha256'],'partition_manifest_sha256':s.ocean.sha(self.paths['old_partition']),'barrier_edges_sha256':s.ocean.sha(self.paths['old_barrier']),'prefill_rows_sha256':common['prefill_rows_sha256'],'prefill_runs_sha256':common['prefill_runs_sha256'],'component_rows_sha256':s.ocean.sha(self.paths['old_unseeded_rows']),'component_spans_sha256':s.ocean.sha(self.paths['old_unseeded_spans'])}}
-  add('closed_manifest',write_json(self.inp/'closed.json',closed))
+  (self.inp/'closed').mkdir();add('closed_manifest',write_json(self.inp/'closed/manifest.json',closed))
   plan={'decision_snapshot_sha256':s.ocean.sha(self.paths['prefill_snapshot']),'decision_revision':'base','prefill':{'plan_sha256':s.ocean.sha(self.paths['prefill_plan']),'audit_sha256':s.ocean.sha(self.paths['prefill_audit'])},'research_provenance':{'partition_manifest_sha256':s.ocean.sha(self.paths['old_partition'])},'water_layers':[{'layer_id':'ocean','manifest_sha256':s.ocean.sha(self.paths['old_layer_manifest'])},{'layer_id':'enclosed-water','manifest_sha256':s.ocean.sha(self.paths['closed_manifest'])}]}
   add('baseline_plan',write_json(self.inp/'plan.json',plan))
   report={'schema':'worldatlas-direct-final-audit-v1','status':'unverified-research-not-published','publishable':False,'decision_snapshot_sha256':s.ocean.sha(self.paths['prefill_snapshot']),'decision_revision':'base','entity_revision':'e','prefill_audit_sha256':common['prefill_audit_sha256'],'final_plan_sha256':s.ocean.sha(self.paths['baseline_plan']),'output':{'rows_sha256':s.ocean.sha(self.paths['baseline_rows']),'runs_sha256':s.ocean.sha(self.paths['baseline_runs'] )},'counts':{'7':8,'8':8,'9':8,'10':8}}
@@ -51,6 +51,29 @@ class SplitComposeTest(unittest.TestCase):
  def save_config(self):write_json(self.config,{'schema':'worldatlas-split-ocean-final-config-v1','inputs':{k:{'path':str(v),'sha256':s.ocean.sha(v)} for k,v in self.paths.items()}})
  def test_complete_split_composition(self):
   r=s.compose(self.config,self.out);self.assertEqual(r['changed_cells'],1);self.assertEqual(r['pair_counts'],{'7->10':1});self.assertEqual(r['counts']['7'],7);self.assertEqual(r['counts']['10'],9)
+ def test_pipeline_layout_allows_sibling_documents_without_changing_inputs(self):
+  before={p:s.ocean.sha(p) for p in [self.config,*self.paths.values()]}
+  out=self.inp/'final';r=s.compose(self.config,out)
+  self.assertEqual(r['changed_cells'],1);self.assertFalse(r['publishable'])
+  self.assertGreaterEqual(r['processing_elapsed_seconds'],0)
+  self.assertEqual(r['output']['runs_sha256'],s.ocean.sha(out/'runs.u32le'))
+  self.assertEqual(before,{p:s.ocean.sha(p) for p in before})
+ def test_output_cannot_overlap_any_pinned_file_or_contain_inputs(self):
+  for out in [self.config,*self.paths.values(),self.inp,self.inp.parent,self.paths['baseline_plan']/'final']:
+   with self.subTest(out=out),self.assertRaisesRegex(ValueError,'separate from inputs'):s.compose(self.config,out)
+ def test_output_cannot_be_nested_in_referenced_layer_directories(self):
+  for name in ('old_layer_manifest','new_layer_manifest','closed_manifest'):
+   out=self.paths[name].parent/'final'
+   with self.subTest(layer=name),self.assertRaisesRegex(ValueError,'separate from inputs'):s.compose(self.config,out)
+   self.assertFalse(out.exists())
+ def test_output_cannot_traverse_a_symlink(self):
+  alias=self.inp.parent/'alias';alias.symlink_to(self.inp,target_is_directory=True)
+  with self.assertRaisesRegex(ValueError,'separate from inputs'):s.compose(self.config,alias/'final')
+  self.assertFalse((self.inp/'final').exists())
+ def test_existing_output_is_never_overwritten(self):
+  self.out.mkdir();sentinel=self.out/'runs.u32le';sentinel.write_bytes(b'keep')
+  with self.assertRaises(FileExistsError):s.compose(self.config,self.out)
+  self.assertEqual(sentinel.read_bytes(),b'keep')
  def test_tampered_tile_rejected(self):
   (self.inp/'new/tile.jsonl').write_text('{}\n')
   with self.assertRaisesRegex(ValueError,'tile hash'):s.compose(self.config,self.out)

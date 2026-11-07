@@ -61,8 +61,11 @@ new scripts identity must match the current committed `HEAD`. The request,
 sources, runtime and paths must remain unchanged. Only runner control/test files
 and downstream `v7-replay`/ocean code may change. Upstream/shared producer changes
 and unknown completed producers are rejected. After any completed water checkpoint,
-only the closed-water file domain may change, and only explicitly listed earlier
-producers may be reused. Generated upstream requests must still be byte-identical.
+only a closed-water-only or split-final-only file domain may change, and only
+explicitly listed earlier producers may be reused. The split-final domain excludes
+the split-ocean runner and shared helpers; it permits a completed baseline grid,
+not a completed final grid or later verification. Generated upstream requests must
+still be byte-identical.
 
 An append-only `code-versions` chain records both commits, every changed code
 hash, unchanged checkpoint receipt pins and the timing-journal prefix. The

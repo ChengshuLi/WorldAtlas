@@ -5,7 +5,7 @@ The previous enclosed-water layer is reused only if all unseeded component
 cells, grouping and source-cut contacts remain identical. Every changed ocean
 cell is checked against the original full grid. Nothing is published.
 """
-import argparse, collections, gzip, hashlib, json, struct, time
+import argparse, collections, gzip, hashlib, json, os, struct, time
 from pathlib import Path
 import numpy as np
 import ocean_fill_runner as ocean
@@ -238,8 +238,13 @@ def compose(config_path, output):
     config_path=Path(config_path).resolve();raw=config_path.read_bytes();config=json.loads(raw);paths,hashes=read_pins(config)
     code_paths={'split_compose':Path(__file__).resolve(),'ocean_runner':Path(ocean.__file__).resolve(),'exclusive_outputs':Path(xo.__file__).resolve(),'split_ocean':Path(split.__file__).resolve()}
     code_hashes={k:ocean.sha(v) for k,v in code_paths.items()}
-    out=Path(output).resolve()
-    if any(out==p or p.is_relative_to(out) or out.is_relative_to(p.parent) for p in [config_path,*paths.values()]):
+    out=Path(os.path.abspath(output))
+    # Plans and candidate documents may be siblings of the fresh final output.
+    # Layer roots, unlike individual documents, also own relative tile files.
+    layer_roots=[paths[key].parent for key in ('old_layer_manifest','new_layer_manifest','closed_manifest')]
+    if (out!=out.resolve() or any(out==p or p.is_relative_to(out) or out.is_relative_to(p)
+            for p in [config_path,*paths.values()])
+            or any(out.is_relative_to(root) for root in layer_roots)):
         raise ValueError('output must be separate from inputs')
     report,old,new,w,h,component_count=validate_lineage(paths,hashes)
     br=np.memmap(paths['baseline_rows'],dtype='<u4',mode='r');bu=np.memmap(paths['baseline_runs'],dtype='<u4',mode='r').reshape(-1,2)
