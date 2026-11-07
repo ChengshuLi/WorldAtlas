@@ -556,15 +556,26 @@ class Pipeline:
         inputs['physical_lineage_request'] = pin(self.document('physical-lineage', lineage))
         return inputs
 
-    def basin(self, decision, physical, land, snapshot):
+    def extract_basins(self, snapshot):
+        extraction = self.out / 'extractions'
+        self.command('water', 'extract-basins', REPLAY + '/extract_seavox_features.py',
+                     archive=self.sources['seavox_archive'], input_root=self.root,
+                     **self.pinned_options('policy', snapshot), out=extraction,
+                     work_root=self.out / 'scratch', **self.flags())
+        return extraction
+
+    def basin(self, decision, physical, land, snapshot, extraction_root=None):
         ident = decision['id']
         if not isinstance(ident, str) or not ident or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789-_' for c in ident):
             raise ValueError('unsafe basin decision ID')
-        extraction = self.out / 'extractions' / ident
-        self.command('water', 'extract-' + ident, REPLAY + '/extract_seavox_feature.py',
-                     archive=self.sources['seavox_archive'], input_root=self.root,
-                     policy=snapshot, policy_sha256=sha(snapshot), decision_id=ident,
-                     out=extraction, **self.flags())
+        extraction = (extraction_root or self.out / 'extractions') / ident
+        # Keep the independently callable single-basin path for targeted work.
+        # Full runs extract and checkpoint the entire pinned selection once.
+        if extraction_root is None:
+            self.command('water', 'extract-' + ident, REPLAY + '/extract_seavox_feature.py',
+                         archive=self.sources['seavox_archive'], input_root=self.root,
+                         policy=snapshot, policy_sha256=sha(snapshot), decision_id=ident,
+                         out=extraction, **self.flags())
         out = self.out / 'basins' / ident
         options = {**self.pinned_options('rows', physical / 'rows.u32le'),
                    **self.pinned_options('runs', physical / 'runs.u32le'),
@@ -613,9 +624,10 @@ class Pipeline:
             workers = self.cfg.get('basin_workers', 1)
             if type(workers) is not int or workers < 1:
                 raise ValueError('basin_workers must be a positive integer')
+        extraction = self.extract_basins(snapshot) if decisions else None
         with ThreadPoolExecutor(max_workers=1) as coast_pool, ThreadPoolExecutor(max_workers=workers) as pool:
             coastal = coast_pool.submit(self.coast, physical, land, snapshot)
-            jobs = [pool.submit(self.basin, d, physical, land, snapshot) for d in decisions]
+            jobs = [pool.submit(self.basin, d, physical, land, snapshot, extraction) for d in decisions]
             try:
                 for completed in as_completed([coastal, *jobs]):
                     completed.result()

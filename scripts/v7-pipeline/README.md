@@ -120,7 +120,15 @@ All `sources` are explicit `{path, sha256}` pins:
   regression check, not proof that geographic decisions are correct.
 
 `basin_workers` controls basin concurrency; one independent coastal task runs
-alongside that pool. These are execution tuning controls, not memory limits.
+alongside that pool. Before those jobs, one SeaVoX extraction stage scans the
+pinned archive for the complete selected feature set. It validates every bound
+geometry and seals `extractions/batch-manifest.json`, retaining the identical
+canonical per-decision `source.geojson` and ordinary extraction manifest used by
+the basin builder. Completed batch checkpoints pin every emitted file; partial
+attempts are preserved and regenerated, never treated as a reusable cache.
+The standalone single-feature extraction CLI remains available for targeted work.
+See [the complete extraction replay contract](../../docs/seavox-extraction.md).
+These are execution tuning controls, not memory limits.
 Shared basins use exact WGS84 two-dimensional rectangle certificates by default,
 with complete point classification for unresolved centers. The standalone basin
 builder retains `--research-interval` and `--pointwise-nearest` as reference engines. See [the certificate and full-input

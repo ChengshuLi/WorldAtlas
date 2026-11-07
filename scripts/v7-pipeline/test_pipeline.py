@@ -213,7 +213,8 @@ class Fixture(unittest.TestCase):
         def cancel():
             original_cancel()
             released.set()
-        with patch.object(runner, 'coast', side_effect=coast), \
+        with patch.object(runner, 'extract_basins', return_value=runner.out / 'extractions'), \
+                patch.object(runner, 'coast', side_effect=coast), \
                 patch.object(runner, 'basin', side_effect=basin), \
                 patch.object(runner, 'cancel', side_effect=cancel):
             with self.assertRaisesRegex(ValueError, 'coastal failure'):
@@ -258,17 +259,18 @@ class Fixture(unittest.TestCase):
         original_command = runner.command
         def stop_after_extraction(*args, **kwargs):
             result = original_command(*args, **kwargs)
-            if args[1] == 'extract-tiny-sea':
+            if args[1] == 'extract-basins':
                 raise KeyboardInterrupt('simulated workspace interruption between stages')
             return result
         with patch.object(runner, 'command', side_effect=stop_after_extraction):
             with self.assertRaises(KeyboardInterrupt):
-                runner.basin(decision, physical, land, snapshot)
-        extraction_receipt = pipeline.pin(runner.out / 'checkpoints/extract-tiny-sea/complete.json')
+                runner.extract_basins(snapshot)
+        extraction_receipt = pipeline.pin(runner.out / 'checkpoints/extract-basins/complete.json')
         runner.close()
         runner = pipeline.Pipeline(runner.config_path, runner.out, allow_provisional=True, resume=True)
         self.addCleanup(runner.close)
-        result = runner.basin(decision, physical, land, snapshot)
+        extraction = runner.extract_basins(snapshot)
+        result = runner.basin(decision, physical, land, snapshot, extraction)
         self.assertEqual(extraction_receipt, pipeline.pin(extraction_receipt['path']))
         manifest = pipeline.read(result['manifest_path'])
         self.assertGreater(manifest['physical_water_cells'], 0)

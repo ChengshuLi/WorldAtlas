@@ -28,6 +28,7 @@ BEFORE_CLOSED = frozenset({
     'v7-replay/build_prefill_plan.py',
     'v7-replay/build_seavox_basin.py',
     'v7-replay/extract_seavox_feature.py',
+    'v7-replay/extract_seavox_features.py',
     'v7-replay/verify_basin_coverage.py',
     'v7-recovery/ocean/make_candidate_build.py',
     'v7-recovery/ocean/ocean_fill_runner.py',

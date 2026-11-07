@@ -50,22 +50,51 @@ def validate_archive(path, expected_sha256):
         return shapes[0]
 
 
-def extract_feature(archive, feature_id):
+def extract_features(archive, feature_ids, *, dataset=None):
+    """Select every requested feature in one archive scan, preserving OGR output."""
     # Restrict filter syntax: no user-provided SQL is passed through.
-    feature_id = str(feature_id)
-    if not re.fullmatch(r'[0-9]+', feature_id):
+    feature_ids = {str(value) for value in feature_ids}
+    if not feature_ids or any(not re.fullmatch(r'[0-9]+', value) for value in feature_ids):
         raise ValueError('SeaVoX feature ID must contain digits only')
-    cmd = ['ogr2ogr', '-f', 'GeoJSON', '/vsistdout/', '/vsizip/' + str(archive),
-           '-where', "mrgid_sr = '" + feature_id + "'", '-t_srs', 'EPSG:4326',
+    selected = sorted(feature_ids, key=lambda value: (int(value), value))
+    where = ("mrgid_sr = '" + selected[0] + "'" if len(selected) == 1 else
+             'mrgid_sr IN (' + ','.join("'" + value + "'" for value in selected) + ')')
+    source = str(dataset) if dataset is not None else '/vsizip/' + str(archive)
+    cmd = ['ogr2ogr', '-f', 'GeoJSON', '/vsistdout/', source,
+           '-where', where, '-t_srs', 'EPSG:4326',
            '-lco', 'COORDINATE_PRECISION=15']
     data = json.loads(subprocess.run(cmd, check=True, capture_output=True).stdout)
     features = data.get('features', []) if data.get('type') == 'FeatureCollection' else []
-    if len(features) != 1 or read_feature_id(features[0].get('properties')) != feature_id:
+    result = {}
+    for feature in features:
+        ident = read_feature_id(feature.get('properties'))
+        if ident not in feature_ids or ident in result:
+            raise ValueError('archive must contain exactly one matching SeaVoX feature per selected ID')
+        if feature.get('geometry', {}).get('type') not in ('Polygon', 'MultiPolygon'):
+            raise ValueError('selected feature must be a polygon')
+        result[ident] = feature
+    if result.keys() != feature_ids:
         raise ValueError('archive must contain exactly one matching SeaVoX feature')
-    feature = features[0]
-    if feature.get('geometry', {}).get('type') not in ('Polygon', 'MultiPolygon'):
-        raise ValueError('selected feature must be a polygon')
-    return feature
+    return result
+
+
+def extract_feature(archive, feature_id):
+    return extract_features(archive, [feature_id])[str(feature_id)]
+
+
+def write_extraction(out, feature, snapshot, policy_sha, basin, source, gdal_version):
+    """Write the same isolated feature/provenance contract for either producer."""
+    create_directory_exclusive(out)
+    feature_path = out/'source.geojson'
+    with create_text_exclusive(feature_path) as f:
+        json.dump({'type':'FeatureCollection','features':[feature]}, f, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
+    return {'schema':'worldatlas-seavox-archive-extraction-v1', 'status':'completed_unverified_candidate_not_published',
+            'decision_id':basin['id'], 'decision_snapshot_sha256':policy_sha,
+            'decision_revision':snapshot['decision_revision']['id'],
+            'entity_revision':snapshot['decision_revision']['entity_revision'], 'source_id':basin['source_id'],
+            'source_version':basin['source_version'], 'source_feature_id':str(basin['source_feature_id']),
+            'archive_sha256':source['sha256'], 'geometry_sha256':canonical_hash(feature['geometry']),
+            'feature_file':feature_path.name, 'feature_file_sha256':digest(feature_path), 'gdal_version':gdal_version}
 
 
 def main():
@@ -109,17 +138,7 @@ def main():
     if geometry_hash != basin['geometry_sha256']:
         raise ValueError('archive feature geometry does not match the selected decision: ' + geometry_hash)
     gdal_version = subprocess.run(['ogr2ogr', '--version'], check=True, capture_output=True, text=True).stdout.strip()
-    create_directory_exclusive(out)
-    feature_path = out/'source.geojson'
-    with create_text_exclusive(feature_path) as f:
-        json.dump({'type':'FeatureCollection','features':[feature]}, f, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
-    manifest = {'schema':'worldatlas-seavox-archive-extraction-v1', 'status':'completed_unverified_candidate_not_published',
-                'decision_id':args.decision_id, 'decision_snapshot_sha256':args.policy_sha256,
-                'decision_revision':snapshot['decision_revision']['id'],
-                'entity_revision':snapshot['decision_revision']['entity_revision'], 'source_id':basin['source_id'],
-                'source_version':basin['source_version'], 'source_feature_id':str(basin['source_feature_id']),
-                'archive_sha256':source['sha256'], 'geometry_sha256':geometry_hash, 'feature_file':feature_path.name,
-                'feature_file_sha256':digest(feature_path), 'gdal_version':gdal_version}
+    manifest = write_extraction(out, feature, snapshot, args.policy_sha256, basin, source, gdal_version)
     if digest(archive)!=source['sha256'] or digest(policy)!=args.policy_sha256:
         raise ValueError('source archive or policy changed during extraction')
     manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
