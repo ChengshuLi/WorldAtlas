@@ -50,3 +50,12 @@ Those two edges are not a complete construction graph.
 The Iceland ocean snapshot also references the IHO S-130 source. A fresh R2
 stream matched its Neon size and SHA-256; the absence of a source-asset foreign
 key alone is not evidence that this source is unused.
+
+A further 113 distinct source records named in the v24 land report passed
+fresh R2 byte-count and SHA-256 checks against the Neon catalog. They are
+listed separately in the custody report because a citation alone does not
+prove the computation read the source. The exact stage-2 land and effective
+water snapshots are also preserved in R2 and as queryable Neon JSON evidence;
+their full JSON values were compared. Their source-catalog references and
+embedded geometry links are recorded, with the water snapshot linked to its
+land base. These evidence records are not normalized or accepted revisions.

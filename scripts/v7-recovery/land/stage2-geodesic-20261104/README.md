@@ -59,3 +59,27 @@ The checkout-level `test_repository_dependencies` verifies that the current
 core, seed, closure, rasterizer and component-builder sources exist and match
 their recorded code hashes. It checks code integrity, not source-data custody,
 policy selection, live Neon access or geographic correctness.
+
+## Orchestrated physical-lineage evidence
+
+`verify_physical_lineage.validate_combined` still accepts the historical
+`stage1-reported-lineage-request-v1` unchanged. It also accepts the distinct
+`stage1-orchestrated-lineage-request-v1` for the 2026-11-07 interrupted and
+resumed physical run. The latter request contains a `code_root` and `inputs`
+with exact `{path, sha256}` pins for `pipeline_report`, `osm_receipt`,
+`neon_selection`, `initial_events`, `resume_events`, and `part18_receipt`.
+Those files must be preserved and re-pinned when moving environments. This
+adapter describes the specific run: 18 checkpointed shards, one separately
+prestaged shard 18, and 13 newly staged shards. It does not accept another
+resume pattern under that schema.
+
+The validator checks the orchestrator and stage reports, current producer code,
+source and configuration pins, all 32 shard reports and masks, union, physical
+streams, five OSM sidecars, checkpoint and download events, the part-18
+receipt, and selected raw Neon source metadata. It rechecks file hashes before
+returning. Its existing downstream status means the selected records match the
+reported lineage, not that the sources or providers are independently
+authenticated. It does not rerasterize the raw sources or prove geography. The
+old land report did not record a producer-code digest, so matching that code is
+an operator assertion, not proof of what executed. Preserve these limitations
+when using the report.
