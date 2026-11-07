@@ -30,3 +30,10 @@ Their hashes and report roles are in `pins.json`. They are provenance copies,
 not standalone entrypoints: imports, source and decision snapshots, manifests,
 and runtime inputs must also be reconstructed and validated. These pins do not
 establish completeness or permission to promote the candidate.
+
+The 2026-11-07 custody check in `r2-custody-20261107.json` records fresh
+R2 reads of 104 sources referenced by the retained water snapshot and land
+polygon-custody report, plus the physical OSM land archive and its five run
+sidecars. All matched the checked size and SHA-256 pins. The 32 Overture
+shards are verified separately by the physical rerun. This scoped check does
+not enumerate every source or decision and is not a geographic review.
