@@ -8,8 +8,35 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 import rasterize_water_shard as build
+import benchmark_water_shard as benchmark
+from water_native import WaterBatch
 
 class WaterShardTests(unittest.TestCase):
+    def test_arrow_policy_matches_python_for_whitespace_and_dictionary_strings(self):
+        values=['ocean','physical','lake',' ocean ','',None,*build.PYTHON_WHITESPACE,
+                '\x1c\x1d\x1e\x1f','\u2000\u3000','\u200blake','\u200b']
+        expected=[build.selected(v) for v in values]
+        for array in (pa.array(values),pa.array(values).dictionary_encode()):
+            eligible,missing,excluded=build.classifications(array)
+            self.assertEqual(eligible.tolist(),[reason is None for reason in expected])
+            self.assertEqual(missing,expected.count('missing_classification'))
+            self.assertEqual(excluded,expected.count('excluded_classification'))
+        self.assertEqual(build.classifications(pa.array([1,2,None]))[0].tolist(),[0,0,0])
+    def test_diagnostic_ids_cross_row_groups_and_preserve_requested_order(self):
+        p,_=self.fixture();table=pq.read_table(p);pq.write_table(table,p,row_group_size=2)
+        ids=build.SourceIds(pq.ParquetFile(p))
+        self.assertEqual(ids.get([5,0,2,5]),['pool','lake','label','pool'])
+        self.assertEqual(ids.get([]),[])
+    def test_benchmark_discards_only_proven_generated_copies_and_owned_source(self):
+        p,digest=self.fixture();out=self.path/'benchmark'
+        result=benchmark.run(p,digest,self.config,out,discard=True,discard_source=True)
+        self.assertEqual(result[0]['different_pixels'],0)
+        self.assertFalse(p.exists());self.assertTrue(self.config.exists())
+        for name in ('python','native'):
+            self.assertFalse((out/f'00-{name}'/'water.tif').exists())
+            self.assertTrue((out/f'00-{name}'/'report.json').exists())
+        report=json.loads((out/'benchmark.json').read_text())
+        self.assertEqual(report['discarded_owned_source']['sha256'],digest)
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(); self.path = Path(self.tmp.name)
         self.inputs=self.path/'inputs';self.inputs.mkdir()
@@ -52,6 +79,98 @@ class WaterShardTests(unittest.TestCase):
         feat = ogr.Feature(layer.GetLayerDefn()); feat.SetGeometry(ogr.CreateGeometryFromWkt('POLYGON ((-170 80,-120 80,-120 40,-170 40,-170 80))')); layer.CreateFeature(feat)
         gdal.RasterizeLayer(target,[1],layer,burn_values=[1])
         np.testing.assert_array_equal(a,target.ReadAsArray())
+    def test_native_matches_reference_with_holes_edges_and_nonpolygons(self):
+        p, _ = self.fixture()
+        table = pq.read_table(p)
+        rows = table.to_pylist()
+        geometries = [
+            'POLYGON ((-180 90,-180 45,-135 45,-135 90,-180 90))',
+            'POLYGON ((-174.375 84.375,-174.375 50.625,-140.625 50.625,-140.625 84.375,-174.375 84.375))',
+            'POLYGON ((-180 90,0 90,0 -45,-180 -45,-180 90),(-135 45,-135 0,-90 0,-90 45,-135 45))',
+            'MULTIPOLYGON (((-170 75,-160 75,-160 65,-170 65,-170 75)),((170 75,180 75,180 65,170 65,170 75)))',
+            'POLYGON Z ((-160 60 1,-150 60 2,-150 50 3,-160 50 4,-160 60 1))',
+            'POLYGON ((200 80,210 80,210 70,200 70,200 80))',
+            'POINT (0 0)', 'LINESTRING (-180 90,180 -45)',
+            'GEOMETRYCOLLECTION (POINT (0 0))',
+        ]
+        for i, wkt in enumerate(geometries):
+            rows.append({'id':str(i),'subtype':'lake','geometry':bytes(ogr.CreateGeometryFromWkt(wkt).ExportToWkb())})
+        rng = np.random.default_rng(714)
+        for i in range(100):
+            x,y = rng.uniform(-200,180),rng.uniform(-60,95)
+            w,h = rng.uniform(.001,80),rng.uniform(.001,60)
+            geom = ogr.CreateGeometryFromWkt(f'POLYGON (({x} {y},{x+w} {y},{x+w} {y-h},{x} {y-h},{x} {y}))')
+            rows.append({'id':f'random-{i}','subtype':'lake','geometry':bytes(geom.ExportToWkb())})
+        table = pa.Table.from_pylist(rows).replace_schema_metadata(table.schema.metadata)
+        pq.write_table(table,p);digest = build.sha256(p)
+        reports=[]
+        for engine in ('python','native'):
+            out=self.path/engine;build.run(p,digest,out,self.config,17,engine)
+            reports.append(json.loads((out/'report.json').read_text()))
+        self.assertEqual(reports[0]['counts'],reports[1]['counts'])
+        np.testing.assert_array_equal(gdal.Open(str(self.path/'python/water.tif')).ReadAsArray(),
+                                      gdal.Open(str(self.path/'native/water.tif')).ReadAsArray())
+        self.assertEqual(reports[0]['output_sha256'],reports[1]['output_sha256'])
+
+    def test_native_arrow_slices_large_offsets_and_validity_bitmap(self):
+        out=self.path/'kernel';out.mkdir();kernel=WaterBatch(out)
+        polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))').ExportToWkb())
+        for dtype in (pa.binary(),pa.large_binary()):
+            geometry=pa.array([polygon,None,polygon,None,polygon],type=dtype).slice(2,3)
+            raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
+            raster.SetGeoTransform((-180,45,0,90,0,-45))
+            status,failed=kernel.burn(raster,geometry,[1,0,1],[8,4,-180,90,45],4)
+            self.assertIsNone(failed);self.assertEqual(status.tolist(),[1,0,1])
+            self.assertEqual(int(raster.ReadAsArray().sum()),1)
+            status,failed=kernel.burn(raster,geometry,[1,1,1],[8,4,-180,90,45],4)
+            self.assertEqual(failed,1);self.assertEqual(status.tolist(),[1,5,0])
+
+    def test_hybrid_global_burn_matches_local_tiles_at_pixel_centers(self):
+        p,_=self.fixture();metadata=pq.read_schema(p).metadata
+        cfg=json.loads(self.config.read_text())
+        cfg['grid']={'width':64,'height':24,'west':-3.17,'north':2.13,'step':.1}
+        cfg['tile_size']=4;self.config.write_text(json.dumps(cfg));rows=[]
+        for column in (0,3,4,7,8,31,60):
+            x=-3.17+(column+.5)*.1
+            for edge in (np.nextafter(x,-np.inf),x,np.nextafter(x,np.inf)):
+                for y in (2.08,1.78,1.73):
+                    geom=ogr.CreateGeometryFromWkt(f'POLYGON (({edge} {y},{edge+.8} {y},{edge+.8} {y-1.6},{edge} {y-1.6},{edge} {y}))')
+                    rows.append({'id':str(len(rows)),'subtype':'lake','geometry':bytes(geom.ExportToWkb())})
+        pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata),p)
+        for engine in ('python','native'):
+            build.run(p,build.sha256(p),self.path/engine,self.config,19,engine)
+        np.testing.assert_array_equal(gdal.Open(str(self.path/'python/water.tif')).ReadAsArray(),
+                                      gdal.Open(str(self.path/'native/water.tif')).ReadAsArray())
+
+    def test_native_rejects_bad_and_empty_wkb_without_burning_batch(self):
+        out=self.path/'kernel';out.mkdir();kernel=WaterBatch(out)
+        polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))').ExportToWkb())
+        for bad in (b'',b'invalid',bytes(ogr.CreateGeometryFromWkt('POLYGON EMPTY').ExportToWkb())):
+            raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
+            raster.SetGeoTransform((-180,45,0,90,0,-45))
+            status,failed=kernel.burn(raster,pa.array([polygon,bad]),[1,1],[8,4,-180,90,45],4)
+            self.assertEqual(failed,1);self.assertEqual(status.tolist(),[1,2])
+            self.assertEqual(int(raster.ReadAsArray().sum()),0)
+
+    def test_native_methods_and_parallel_first_error_preserve_source_order(self):
+        polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,0 90,0 -45,-180 -45,-180 90))').ExportToWkb())
+        multipart=bytes(ogr.CreateGeometryFromWkt('MULTIPOLYGON (((-180 90,-135 90,-135 45,-180 45,-180 90)),((135 0,180 0,180 -45,135 -45,135 0)))').ExportToWkb())
+        results=[]
+        for method in ('hybrid','vector','tiled'):
+            out=self.path/method;out.mkdir();kernel=WaterBatch(out,method)
+            kernel.threads=4
+            raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
+            raster.SetGeoTransform((-180,45,0,90,0,-45))
+            status,failed=kernel.burn(raster,pa.array([polygon,multipart]*25),[1]*50,[8,4,-180,90,45],2)
+            self.assertIsNone(failed);self.assertEqual(status.tolist(),[1]*50)
+            results.append(raster.ReadAsArray())
+            # A later malformed row can finish earlier than a broad polygon.
+            # Diagnostics still report the first failure and nothing is burned.
+            raster.GetRasterBand(1).Fill(0)
+            status,failed=kernel.burn(raster,pa.array([polygon,None,polygon,b'bad',polygon]),[1]*5,[8,4,-180,90,45],2)
+            self.assertEqual(failed,1);self.assertEqual(status.tolist(),[1,5,0,0,0])
+            self.assertEqual(int(raster.ReadAsArray().sum()),0)
+        for result in results[1:]:np.testing.assert_array_equal(result,results[0])
     def test_batch_config_and_override(self):
         p,digest=self.fixture();cfg=json.loads(self.config.read_text());cfg['batch_size']=2
         self.config.write_text(json.dumps(cfg))

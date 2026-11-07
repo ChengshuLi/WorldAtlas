@@ -50,6 +50,30 @@ class OrchestratedLineageTests(unittest.TestCase):
  def check(self):return v.validate_combined(self.snapshot,'a'*64,str(self.reqpath),self.pr['sha256'],self.out['rows.u32le'],self.out['runs.u32le'],self.grid)
  def use_raw_physical_contract(self):
   self.req={'schema':'stage1-raw-physical-lineage-request-v1','inputs':{k:self.inputs[k] for k in ('pipeline_report','osm_receipt','neon_selection')},'code_root':str(self.code_root)};write(self.reqpath,self.req)
+ def use_native_kernel(self,wrong_source=False,method='hybrid'):
+  self.use_raw_physical_contract();pp=self.r/'output'/'report.json';pipe=json.loads(pp.read_text())
+  for name in ('overture/water_native.py','overture/water_native.cpp'):
+   pipe['script_sha256'][name]=blob(self.code_root/name,name.encode())['sha256']
+  ucp=self.r/'output'/'union'/'config.json';uc=json.loads(ucp.read_text())
+  for i,shard in enumerate(uc['shards']):
+   path=Path(shard['report']['path']);report=json.loads(path.read_text());binary=blob(path.parent/'water-native.so',b'native')
+   report.update({'rasterizer':'native','native_kernel':{'method':method,'source_sha256':pipe['script_sha256']['overture/water_native.cpp'],
+     'binding_sha256':pipe['script_sha256']['overture/water_native.py'],'binary_sha256':binary['sha256']}})
+   if wrong_source and i==5:report['native_kernel']['source_sha256']='0'*64
+   shard['report']=write(path,report)
+  ucpin=write(ucp,uc);urp=self.r/'output'/'union'/'report.json';union=json.loads(urp.read_text())
+  union.update({'configuration_sha256':ucpin['sha256'],'shards':uc['shards']});pipe['stage_reports']['union']=write(urp,union)
+  self.req['inputs']['pipeline_report']=write(pp,pipe);write(self.reqpath,self.req)
+ def test_native_kernel_report_chain_and_binary_tamper(self):
+  self.use_native_kernel();self.assertEqual(self.check()['method'],'raw-physical-report-chain-v1')
+  (self.r/'output'/'shards'/'00005'/'water-native.so').write_bytes(b'changed')
+  with self.assertRaisesRegex(ValueError,'native water kernel mismatch'):self.check()
+ def test_native_kernel_rehashed_wrong_source_rejected(self):
+  self.use_native_kernel(wrong_source=True)
+  with self.assertRaisesRegex(ValueError,'native water kernel mismatch'):self.check()
+ def test_native_kernel_method_must_match_pinned_water_config(self):
+  self.use_native_kernel(method='vector')
+  with self.assertRaisesRegex(ValueError,'native water kernel mismatch'):self.check()
  def test_raw_physical_valid_without_historical_checkpoint_events(self):
   self.use_raw_physical_contract();result=self.check()
   self.assertEqual(result['method'],'raw-physical-report-chain-v1');self.assertEqual(len(result['shard_report_sha256']),32)

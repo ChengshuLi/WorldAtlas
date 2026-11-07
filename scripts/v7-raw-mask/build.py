@@ -44,7 +44,7 @@ def checked_files(spec):
     return files
 
 
-def open_layer(spec):
+def open_layer(spec, *, feature_callback=None):
     ds = ogr.Open(spec['dataset'], 0)
     if ds is None:
         raise ValueError(f"cannot open dataset: {spec['dataset']}")
@@ -72,6 +72,8 @@ def open_layer(spec):
             raise ValueError(f'nonpolygon geometry at feature {feat.GetFID()}')
         if not geom.IsValid():
             raise ValueError(f'invalid geometry at feature {feat.GetFID()} (no repair performed)')
+        if feature_callback is not None:
+            feature_callback(feat, geom)
         count += 1
     layer.ResetReading()
     if not count:

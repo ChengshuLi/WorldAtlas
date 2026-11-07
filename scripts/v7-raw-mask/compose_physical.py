@@ -19,7 +19,7 @@ def open_mask(spec,grid):
     if not actual.IsSame(expected):raise ValueError(f'CRS mismatch: {path}')
     return ds
 
-def write_run_block(codes,runs,offsets,width):
+def write_run_block(codes,runs,offsets,width,*,binary=False):
     """Write row-major physical runs for a block of binary code rows."""
     row_count=codes.shape[0]
     row_index,left_column=np.nonzero(codes[:,1:]!=codes[:,:-1])
@@ -34,6 +34,9 @@ def write_run_block(codes,runs,offsets,width):
     terminal_slots=np.cumsum(run_counts,dtype=np.int64)-1
     pairs[terminal_slots,0]=width
     pairs[terminal_slots,1]=codes[:,-1]
+    if binary:
+        # Convert only emitted run values, not every cell of the full raster.
+        pairs[:,1]*=16;pairs[:,1]+=1
     next_offsets=np.cumsum(run_counts,dtype=np.uint64)+offsets[-1]
     if next_offsets[-1]>np.iinfo(np.uint32).max:
         raise ValueError('too many runs for u32 offsets')
@@ -69,22 +72,25 @@ def main(config_path,output):
         for y in range(0,h,rows_per_block):
             if shutil.disk_usage(out).free < reserve:raise ValueError('free disk below configured reserve; partial output preserved')
             n=min(rows_per_block,h-y); arrays=[ds.ReadAsArray(0,y,w,n) for ds in masks];land,water=arrays[:2];ref=arrays[2] if has_ref else None
-            if any(np.any((x!=0)&(x!=1)) for x in arrays):raise ValueError('nonbinary mask')
-            np.subtract(1,water,out=water);np.bitwise_and(land,water,out=land);dry=land
+            if any((np.max(x)>1 if x.dtype==np.uint8 else np.any((x!=0)&(x!=1))) for x in arrays):raise ValueError('nonbinary mask')
+            if land.dtype==water.dtype==np.uint8:
+                np.subtract(1,water,out=water);np.bitwise_and(land,water,out=land);dry=land
+            else:
+                # Binary masks from other GDAL types are supported as before.
+                dry=np.logical_and(land==1,water==0).astype(np.uint8)
             tif.GetRasterBand(1).WriteArray(dry,0,y)
             candidate_count+=int(np.count_nonzero(dry))
             if has_ref:
                 historic_count+=int(np.count_nonzero(ref))
                 extra+=int(np.count_nonzero((dry==1)&(ref==0)));missing+=int(np.count_nonzero((dry==0)&(ref==1)))
-            codes=np.where(dry,17,1).astype(np.uint8)
-            write_run_block(codes,runs,offsets,w)
+            write_run_block(dry,runs,offsets,w,binary=True)
             if has_ref:
                 for j in range(n):
                     i=y+j;historic_codes=np.where(ref[j],17,1).astype(np.uint8)
                     reference_runs=rv[int(rr[i]):int(rr[i+1])]
                     nbad,_=compare_row(historic_codes,reference_runs,w)
                     if nbad:raise ValueError(f'historic binary mask disagrees with historic physical stream at row {i}')
-                    spans=compare_row(codes[j],reference_runs,w)[1]
+                    spans=compare_row(np.where(dry[j],17,1).astype(np.uint8),reference_runs,w)[1]
                     for start,end,oldcode,newcode in spans:
                         diff.write(json.dumps({'row':i,'start':start,'end':end,'reference':oldcode,'candidate':newcode},separators=(',',':'))+'\n');spancount+=1
             progress={'rows_done':y+n,'candidate_dry_cells':candidate_count}

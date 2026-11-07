@@ -8,7 +8,7 @@ from pathlib import Path
 import shutil
 import sys
 
-from osgeo import gdal, osr
+from osgeo import gdal, ogr, osr
 from build import checked_files, open_layer, sha
 
 gdal.UseExceptions()
@@ -37,6 +37,9 @@ def run(config_path, output):
         raise ValueError('invalid strip_rows')
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
+    feature_index = cfg.get('feature_index', 'row-fids')
+    if feature_index not in ('row-fids', 'scan'):
+        raise ValueError('feature_index must be row-fids or scan')
     output = Path(output).resolve()
     paths = [config_path] + [Path(f['path']).resolve() for spec in specs for f in spec['files']]
     if len(set(paths)) != len(paths):
@@ -46,7 +49,23 @@ def run(config_path, output):
     # Validate all files, CRS, selection and geometries before creating outputs.
     for spec in specs:
         checked_files(spec)
-    opened = [open_layer(spec) for spec in specs]
+    opened=[];indexes=[]
+    for spec in specs:
+        rows=[[] for _ in range((height+strip-1)//strip)] if feature_index=='row-fids' else None
+        usable=True
+        def index_feature(feat, geometry):
+            nonlocal usable
+            fid=feat.GetFID()
+            if fid<0:usable=False;return
+            xmin,xmax,ymin,ymax=geometry.GetEnvelope()
+            if xmax<west or xmin>west+width*step:return
+            first=max(0,math.floor((north-ymax)/step))
+            last=min(height-1,math.floor((north-ymin)/step))
+            if first<=last:
+                for row in range(first//strip,last//strip+1):rows[row].append(fid)
+        item=open_layer(spec,feature_callback=index_feature if rows is not None else None)
+        opened.append(item)
+        indexes.append(rows if usable and item[1].TestCapability(ogr.OLCRandomRead) else None)
     feature_counts = [item[2] for item in opened]
     os.mkdir(output)
     ds = gdal.GetDriverByName('GTiff').Create(str(output / 'land.tif'), width, height, 1, gdal.GDT_Byte,
@@ -61,11 +80,25 @@ def run(config_path, output):
         n = min(strip, height - y); top = north - y * step
         mem = gdal.GetDriverByName('MEM').Create('', width, n, 1, gdal.GDT_Byte)
         mem.SetGeoTransform((west, step, 0, top, 0, -step))
-        for _, layer, _ in opened:
-            layer.SetSpatialFilterRect(west, top - n * step, west + width * step, top)
-            layer.ResetReading()
-            gdal.RasterizeLayer(mem, [1], layer, burn_values=[1])
-            layer.SetSpatialFilter(None)
+        for (_, layer, _), index in zip(opened,indexes):
+            if index is None:
+                layer.SetSpatialFilterRect(west, top - n * step, west + width * step, top)
+                layer.ResetReading()
+                gdal.RasterizeLayer(mem, [1], layer, burn_values=[1])
+                layer.SetSpatialFilter(None)
+            else:
+                # Preserve source order and coordinates. Envelope candidates may
+                # include a polygon that burns no pixels; GDAL clips it exactly.
+                vector=ogr.GetDriverByName('Memory').CreateDataSource('')
+                selected_layer=vector.CreateLayer('land',layer.GetSpatialRef(),ogr.wkbUnknown)
+                definition=selected_layer.GetLayerDefn()
+                for fid in index[y//strip]:
+                    source=layer.GetFeature(fid)
+                    if source is None:raise ValueError(f'indexed land feature missing: {fid}')
+                    feature=ogr.Feature(definition);feature.SetGeometry(source.GetGeometryRef())
+                    selected_layer.CreateFeature(feature)
+                gdal.RasterizeLayer(mem,[1],selected_layer,burn_values=[1])
+                selected_layer=None;vector=None
         values = mem.ReadAsArray(); land_cells += int(values.sum())
         ds.GetRasterBand(1).WriteArray(values, 0, y)
         print(json.dumps({'rows_done': y+n, 'land_cells': land_cells}), flush=True)
@@ -76,6 +109,8 @@ def run(config_path, output):
         raise ValueError('configuration changed during processing')
     report = {'status': 'candidate-only', 'configuration_sha256': hashlib.sha256(data).hexdigest(),
               'grid': grid, 'feature_counts': feature_counts,
+              'feature_index':feature_index,
+              'indexed_layers':[index is not None for index in indexes],
               'land_cells': land_cells, 'land_sha256': sha(output / 'land.tif'),
               'gdal': gdal.VersionInfo('--version'),
               'rasterization': 'GDAL default polygon rasterization, ALL_TOUCHED off',

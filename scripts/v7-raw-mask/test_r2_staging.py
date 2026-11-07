@@ -88,13 +88,13 @@ class CheckpointTests(unittest.TestCase):
         self.source=self.root/'raw'/'part'; self.source.parent.mkdir(); self.data=b'shard'; self.source_sha=hashlib.sha256(self.data).hexdigest()
         self.landfile=self.root/'land.shp';self.landfile.write_bytes(b'land input')
         self.landcfg=self.root/'land.json'; self.landcfg.write_text(json.dumps({'grid':{'width':8},'land':[{'files':[{'path':str(self.landfile),'sha256':module.sha(self.landfile)}]}]}))
-        self.watercfg=self.root/'water.json';self.watercfg.write_text(json.dumps({'grid':{'width':8},'policy':{'method':'x'},'batch_size':8}))
+        self.watercfg=self.root/'water.json';self.watercfg.write_text(json.dumps({'grid':{'width':8},'policy':{'method':'x'},'batch_size':8,'rasterizer':'python'}))
         self.entry={'source_id':'s','sha256':self.source_sha,'size':len(self.data),'r2_bucket':'b','r2_key':'k'}
         self.stager=module.Stager({self.source:self.entry},'wrangler',self.log);self.stager.original_stage=mock.Mock()
         land=self.check/'land'; (land/'config.json').write_bytes(self.landcfg.read_bytes()); (land/'land.tif').write_bytes(b'land raster')
         (land/'report.json').write_text(json.dumps({'status':'candidate-only','grid':{'width':8},'configuration_sha256':module.sha(self.landcfg),'land_sha256':module.sha(land/'land.tif')}))
         shard=self.check/'shards'/'00000';(shard/'water.tif').write_bytes(b'water raster')
-        (shard/'report.json').write_text(json.dumps({'status':'candidate-only','source':str(self.source),'source_sha256':self.source_sha,'configuration_sha256':module.sha(self.watercfg),'script_sha256':module.sha(self.repo/'overture/rasterize_water_shard.py'),'grid':{'width':8},'policy':{'method':'x'},'batch_size':8,'output_sha256':module.sha(shard/'water.tif')}))
+        (shard/'report.json').write_text(json.dumps({'status':'candidate-only','source':str(self.source),'source_sha256':self.source_sha,'configuration_sha256':module.sha(self.watercfg),'script_sha256':module.sha(self.repo/'overture/rasterize_water_shard.py'),'grid':{'width':8},'policy':{'method':'x'},'batch_size':8,'rasterizer':'python','native_kernel':None,'output_sha256':module.sha(shard/'water.tif')}))
         self.events=self.root/'events.jsonl';self.events.write_text(json.dumps({'event':'shard_complete','source_id':'s','source':str(self.source),'sha256':self.source_sha,'size':len(self.data),'output_sha256':module.sha(shard/'water.tif')})+'\n')
         self.resume=module.CheckpointStager(self.stager,self.check,self.events,module.sha(land/'report.json'),module.sha(self.repo/'rasterize_land.py'),module.sha(self.repo/'build.py'))
     def test_land_and_shard_reused_in_new_output(self):
@@ -108,6 +108,21 @@ class CheckpointTests(unittest.TestCase):
     def test_bad_shard_hash_fails_closed(self):
         (self.check/'shards'/'00000'/'water.tif').write_bytes(b'tampered')
         with self.assertRaises(ValueError): self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,self.root/'00000')
+    def test_native_checkpoint_copies_binary_and_requires_configured_method(self):
+        cfg=json.loads(self.watercfg.read_text());cfg['rasterizer']='native';self.watercfg.write_text(json.dumps(cfg))
+        shard=self.check/'shards'/'00000';report=json.loads((shard/'report.json').read_text())
+        for filename in ('water_native.cpp','water_native.py'):(self.repo/'overture'/filename).write_bytes(filename.encode())
+        (shard/'water-native.so').write_bytes(b'native binary')
+        report.update({'rasterizer':'native','configuration_sha256':module.sha(self.watercfg),'native_kernel':{
+            'method':'hybrid','source_sha256':module.sha(self.repo/'overture/water_native.cpp'),
+            'binding_sha256':module.sha(self.repo/'overture/water_native.py'),'binary_sha256':module.sha(shard/'water-native.so')}})
+        (shard/'report.json').write_text(json.dumps(report));dest=self.root/'native-copy'/'00000';dest.parent.mkdir()
+        self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,dest)
+        self.assertEqual((dest/'water-native.so').read_bytes(),b'native binary')
+        report['native_kernel']['method']='vector';(shard/'report.json').write_text(json.dumps(report))
+        wrong=self.root/'wrong-method'/'00000';wrong.parent.mkdir()
+        with self.assertRaisesRegex(ValueError,'native water checkpoint mismatch'):
+            self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,wrong)
     def test_bad_land_code_fails_closed(self):
         (self.repo/'rasterize_land.py').write_bytes(b'changed')
         with self.assertRaises(ValueError): self.resume.run_stage('rasterize_land.py',self.landcfg,self.root/'newland')

@@ -131,6 +131,10 @@ class PipelineTests(unittest.TestCase):
         out=self.root/'finished';b.run(self.config,out)
         (out/'shards/00000/water.tif').write_bytes(b'tampered')
         with self.assertRaisesRegex(ValueError,'completed shard checkpoint mismatch'):b.run(self.config,out,resume=True)
+    def test_completed_resume_revalidates_native_kernel_binary(self):
+        out=self.root/'finished-native';b.run(self.config,out)
+        (out/'shards/00000/water-native.so').write_bytes(b'tampered')
+        with self.assertRaisesRegex(ValueError,'native water kernel mismatch'):b.run(self.config,out,resume=True)
 
     def test_resume_quarantines_incomplete_unit(self):
         out=self.root/'partial';actual=b.run_stage

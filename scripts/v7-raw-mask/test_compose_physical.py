@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 from osgeo import gdal,osr
 import compose_physical as b
+import benchmark_physical as benchmark
 
 class ComposeTests(unittest.TestCase):
     def setUp(self):
@@ -36,6 +37,12 @@ class ComposeTests(unittest.TestCase):
                     expected.extend((int(end+1),int(row[end])) for end in ends)
                     expected_offsets.append(len(expected))
                 self.assertEqual(pairs,[list(pair) for pair in expected]);self.assertEqual(offsets,expected_offsets)
+                offsets=[0]
+                with path.open('wb') as stream:
+                    for start in range(0,height,3):
+                        b.write_run_block((codes[start:start+3]==17).astype(np.uint8),stream,offsets,width,binary=True)
+                self.assertEqual(np.fromfile(path,dtype='<u4').reshape(-1,2).tolist(),pairs)
+                self.assertEqual(offsets,expected_offsets)
 
     def test_compose_and_compare(self):
         out=self.d/'out';b.main(self.p,out);r=json.loads((out/'report.json').read_text())
@@ -44,6 +51,15 @@ class ComposeTests(unittest.TestCase):
         with self.assertRaises(FileExistsError):b.main(self.p,out)
         with self.assertRaises(ValueError):b.main(self.p,self.inputs/'nested')
         with self.assertRaises(ValueError):b.main(self.p,self.d)
+    def test_benchmark_discards_verified_stream_copies_but_preserves_inputs(self):
+        out=self.d/'benchmark';repo=Path(b.__file__).resolve().parents[2]
+        result=benchmark.run('compose',self.p,repo,out,1,True)
+        self.assertEqual(result['results'][0]['different_pixels'],0)
+        for name in ('baseline','candidate'):
+            for filename in ('physical-dry.tif','rows.u32le','runs.u32le'):
+                self.assertFalse((out/f'00-{name}'/filename).exists())
+            self.assertTrue((out/f'00-{name}'/'report.json').exists())
+        self.assertTrue(Path(self.cfg['land']['path']).exists())
     def test_without_reference(self):
         self.cfg.pop('reference_mask'); self.cfg.pop('reference_streams')
         self.p.write_text(json.dumps(self.cfg)); out=self.d/'no-reference'
@@ -61,6 +77,20 @@ class ComposeTests(unittest.TestCase):
         self.cfg.pop('reference_streams'); self.p.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError,'provided together'):b.main(self.p,self.d/'partial')
         self.assertFalse((self.d/'partial').exists())
+
+    def test_binary_float_and_signed_masks_keep_original_support(self):
+        for name,kind in [('land',gdal.GDT_Float32),('water',gdal.GDT_Int16)]:
+            old=gdal.Open(self.cfg[name]['path']);values=old.ReadAsArray();old=None
+            p=self.inputs/(name+'-typed.tif')
+            ds=gdal.GetDriverByName('GTiff').Create(str(p),8,4,1,kind)
+            ds.SetGeoTransform((-180,45,0,90,0,-45));sr=osr.SpatialReference();sr.ImportFromEPSG(4326)
+            ds.SetSpatialRef(sr);ds.GetRasterBand(1).WriteArray(values);ds=None
+            self.cfg[name]={'path':str(p),'sha256':b.sha(p)}
+        self.p.write_text(json.dumps(self.cfg));out=self.d/'typed'
+        b.main(self.p,out)
+        self.assertEqual(json.loads((out/'report.json').read_text())['candidate_dry_cells'],5)
+        self.assertEqual(np.fromfile(out/'runs.u32le',dtype='<u4').reshape(-1,2).tolist(),
+            [[1,1],[3,17],[8,1],[3,17],[8,1],[8,1],[8,1]])
 
     def test_rejects_negative_in_every_mask(self):
         for name in ('land','water','reference_mask'):

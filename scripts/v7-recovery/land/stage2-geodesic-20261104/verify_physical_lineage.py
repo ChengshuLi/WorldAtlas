@@ -148,7 +148,9 @@ def _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report
  need(pipe.get('status')=='candidate-only' and pipe.get('grid')==grid and pipe.get('shard_count')==32,'pipeline report mismatch')
  code_root=Path(req['code_root']).resolve(strict=True);need(code_root.is_dir(),'invalid code root')
  code=pipe.get('script_sha256');names={'build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/aggregate_compare.py','compose_physical.py'}
- need(isinstance(code,dict) and set(code)==names,'invalid pipeline code pins')
+ native_names={'overture/water_native.py','overture/water_native.cpp'}
+ need(isinstance(code,dict) and set(code) in (names,names|native_names),'invalid pipeline code pins')
+ names=set(code)
  for name in sorted(names):
   cp=(code_root/name).resolve(strict=True);need(cp.is_relative_to(code_root) and cp.is_file() and digest(cp,guard)==code[name],'pipeline code mismatch: '+name)
  pipeline_config,_=read_pin({'path':str(pp.parent/'pipeline-config.json'),'sha256':pipe['configuration_sha256']},guard)
@@ -194,6 +196,10 @@ def _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report
  for i,(item,sp) in enumerate(zip(files,union['shards'])):
   guard();source_id=item.get('source_id');live_row=liveby[('inland_water',i)];need(source_id==live_row['source_id'] and item.get('sha256')==live_row['sha256'] and str(item.get('size'))==str(live_row['size_bytes']) and item.get('r2_bucket')==live_row['r2_bucket'] and item.get('r2_key')==live_row['r2_key'],'source manifest/Neon mismatch')
   sr,_=read_pin(sp['report'],guard);need(sp.get('status')=='candidate-only' and sr.get('status')=='candidate-only' and sr.get('source_sha256')==item['sha256'] and Path(sr.get('source','')).name==Path(item['path']).name and sr.get('configuration_sha256')==pipe['water_config']['sha256'] and sr.get('script_sha256')==code['overture/rasterize_water_shard.py'] and sr.get('grid')==grid and sr.get('policy')==watercfg.get('policy') and sr.get('batch_size')==pipe.get('water_batch_size') and sr.get('output_sha256')==sp.get('sha256') and digest(sp['path'],guard)==sp['sha256'],'shard report/output mismatch: '+str(i))
+  if native_names<=names:need(sr.get('rasterizer')==watercfg.get('rasterizer','native'),'water rasterizer/config mismatch: '+str(i))
+  if sr.get('rasterizer')=='native':
+   kernel=sr.get('native_kernel',{});need(native_names<=names and kernel.get('method')==watercfg.get('native_method','hybrid') and kernel.get('source_sha256')==code['overture/water_native.cpp'] and kernel.get('binding_sha256')==code['overture/water_native.py'] and digest(Path(sp['path']).parent/'water-native.so',guard)==kernel.get('binary_sha256'),'native water kernel mismatch: '+str(i))
+  elif native_names<=names:need(sr.get('rasterizer')=='python' and sr.get('native_kernel') is None,'invalid water rasterizer: '+str(i))
   if not fresh and i<18:
    e=old.get(source_id,{});re=reused.get(source_id,{});need(e.get('sha256')==item['sha256'] and e.get('size')==item['size'] and Path(e.get('source','')).name==Path(item['path']).name and e.get('output_sha256')==sp['sha256'] and re.get('source_sha256')==item['sha256'] and re.get('output_sha256')==sp['sha256'] and re.get('report_sha256')==sp['report']['sha256'],'checkpoint event mismatch')
   elif not fresh:

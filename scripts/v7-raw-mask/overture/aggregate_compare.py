@@ -58,7 +58,7 @@ def verify_lineage(cfg, grid):
     expected=[f.get('sha256') for f in files]
     if any(not isinstance(v,str) or len(v)!=64 or any(ch not in '0123456789abcdef' for ch in v) for v in expected) or len(set(expected)) != len(expected):
         raise ValueError('source manifest hashes must be unique SHA-256 values')
-    seen=[]; policies=[]; scripts=[]
+    seen=[]; policies=[]; scripts=[];kernels=[]
     for shard in cfg['shards']:
         report=shard.get('report')
         if not isinstance(report,dict) or sha(report['path']) != report['sha256']:
@@ -72,6 +72,19 @@ def verify_lineage(cfg, grid):
                 not isinstance(row_count,int) or isinstance(row_count,bool) or row_count<0 or
                 row_count != doc.get('counts',{}).get('rows')):
             raise ValueError('incomplete or inconsistent shard report')
+        native=doc.get('native_kernel')
+        if doc.get('rasterizer') not in (None,'python','native'):raise ValueError('unknown water rasterizer')
+        if doc.get('rasterizer')=='native':
+            if (not isinstance(native,dict) or native.get('method') not in ('hybrid','vector','tiled') or
+                    any(not isinstance(native.get(k),str) or len(native[k])!=64 or
+                    any(ch not in '0123456789abcdef' for ch in native[k]) for k in
+                    ('source_sha256','binding_sha256','binary_sha256')) or
+                    sha(Path(report['path']).parent/'water-native.so')!=native['binary_sha256']):
+                raise ValueError('invalid native water kernel')
+            kernels.append((doc['rasterizer'],native['method'],native['source_sha256'],native['binding_sha256'],native.get('gdal')))
+        else:
+            if native is not None:raise ValueError('unexpected native water kernel')
+            kernels.append((doc.get('rasterizer','python'),))
         seen.append(doc.get('source_sha256')); policies.append(doc.get('policy')); scripts.append(doc.get('script_sha256'))
     if len(seen)!=len(expected) or set(seen)!=set(expected) or len(set(seen))!=len(seen):
         raise ValueError('shard reports do not cover the pinned source manifest exactly')
@@ -79,6 +92,7 @@ def verify_lineage(cfg, grid):
         raise ValueError('inconsistent shard selection policy')
     if any(p != scripts[0] for p in scripts):
         raise ValueError('inconsistent shard rasterizer')
+    if any(k != kernels[0] for k in kernels):raise ValueError('inconsistent native water kernels')
 
 def run(config_path,output):
     config_path=Path(config_path).resolve();data=config_path.read_bytes();cfg=json.loads(data);output=Path(output).resolve()

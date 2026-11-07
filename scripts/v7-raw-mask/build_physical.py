@@ -205,7 +205,20 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         raw.append((path, digest, entry))
     if len({x[0] for x in raw}) != len(raw) or len({x[1] for x in raw}) != len(raw):
         raise ValueError('raw source paths and hashes must be unique')
-    scripts = {name:sha(HERE / name) for name in ('build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/aggregate_compare.py','compose_physical.py')}
+    scripts = {name:sha(HERE / name) for name in ('build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/water_native.py','overture/water_native.cpp','overture/aggregate_compare.py','compose_physical.py')}
+    def check_kernel(report, directory):
+        engine = water_cfg.get('rasterizer', 'native')
+        if report.get('rasterizer') != engine:
+            raise ValueError('water rasterizer mismatch')
+        native = report.get('native_kernel')
+        if engine == 'native':
+            if (not isinstance(native,dict) or native.get('source_sha256') != scripts['overture/water_native.cpp']
+                or native.get('method') != water_cfg.get('native_method','hybrid')
+                or native.get('binding_sha256') != scripts['overture/water_native.py']
+                or native.get('binary_sha256') != sha(directory/'water-native.so')):
+                raise ValueError('native water kernel mismatch')
+        elif native is not None:
+            raise ValueError('unexpected native water kernel')
     output = Path(output).resolve()
     inputs = [manifest_path, land_path, water_path, source_path] + [x[0] for x in raw]
     if staging is not None:
@@ -249,6 +262,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
                     or sha(rp)!=sp.get('sha256') or sha(tif)!=entry.get('sha256') or entry.get('status')!='candidate-only'):
                     raise ValueError(f'completed shard checkpoint mismatch: {i}')
                 item=json.loads(rp.read_bytes())
+                check_kernel(item,directory)
                 if (item.get('source_sha256')!=digest or Path(item.get('source','')).name!=source.name
                     or item.get('configuration_sha256')!=cfg['water_config']['sha256'] or item.get('grid')!=grid
                     or item.get('script_sha256')!=scripts['overture/rasterize_water_shard.py'] or item.get('policy')!=water_cfg.get('policy')
@@ -298,6 +312,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         checkpoint=prior(f'shard-{i:05d}') if resume else None
         if checkpoint:
             report_path=destination/'report.json';report=json.loads(report_path.read_bytes())
+            check_kernel(report,destination)
             if (sha(report_path)!=checkpoint['report_sha256'] or sha(destination/'water.tif')!=checkpoint['output_sha256']
                 or report.get('status')!='candidate-only' or report.get('source_sha256')!=digest
                 or Path(report.get('source','')).name!=path.name or report.get('configuration_sha256')!=cfg['water_config']['sha256']
@@ -332,6 +347,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         unit_start=time.perf_counter()
         run_stage('overture/rasterize_water_shard.py', path, digest, water_path, destination, '--batch-size', str(batch_size))
         report_path = destination / 'report.json'; report = json.loads(report_path.read_bytes())
+        check_kernel(report,destination)
         if (report.get('status')!='candidate-only' or report.get('source_sha256')!=digest
             or report.get('configuration_sha256')!=cfg['water_config']['sha256']
             or report.get('output_sha256')!=sha(destination/'water.tif')):

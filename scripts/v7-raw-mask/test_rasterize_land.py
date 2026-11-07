@@ -21,6 +21,24 @@ class RasterizeLandTests(unittest.TestCase):
         report=json.loads((a/'report.json').read_text());self.assertEqual(report['land_cells'],6);self.assertEqual(report['feature_counts'],[1])
         self.cfg['strip_rows']=4;self.config.write_text(json.dumps(self.cfg));out=self.d/'all-rows';b.run(self.config,out)
         np.testing.assert_array_equal(gdal.Open(str(out/'land.tif')).ReadAsArray(),expected)
+        self.cfg['strip_rows']=1;self.cfg['feature_index']='scan';self.config.write_text(json.dumps(self.cfg))
+        out=self.d/'scan';b.run(self.config,out)
+        self.assertEqual(b.sha(a/'land.tif'),b.sha(out/'land.tif'))
+    def test_index_keeps_selection_and_exact_strip_boundary_polygons(self):
+        geometries=[
+            {'type':'Polygon','coordinates':[[[-180,90],[-90,90],[-90,-45],[-180,-45],[-180,90]],
+                [[-157.5,67.5],[-112.5,67.5],[-112.5,-22.5],[-157.5,-22.5],[-157.5,67.5]]]},
+            {'type':'Polygon','coordinates':[[[-45,45],[45,45],[45,0],[-45,0],[-45,45]]]},
+            {'type':'Polygon','coordinates':[[[180,90],[190,90],[190,80],[180,80],[180,90]]]},
+        ]
+        self.p.write_text(json.dumps({'type':'FeatureCollection','features':[
+            {'type':'Feature','properties':{'keep':i%2},'geometry':g} for i,g in enumerate(geometries)]}))
+        self.cfg['land'][0].update({'where':'keep = 0','files':[{'path':str(self.p),'sha256':b.sha(self.p)}]})
+        masks=[]
+        for engine in ('scan','row-fids'):
+            self.cfg['feature_index']=engine;self.config.write_text(json.dumps(self.cfg))
+            out=self.d/engine;b.run(self.config,out);masks.append(gdal.Open(str(out/'land.tif')).ReadAsArray())
+        np.testing.assert_array_equal(*masks)
     def test_rejects_bad_digest_and_output_collision(self):
         self.cfg['land'][0]['files'][0]['sha256']='0'*64;self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError,'digest mismatch'):b.run(self.config,self.d/'bad')
