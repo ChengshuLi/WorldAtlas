@@ -91,45 +91,67 @@ def crop_bounds(bounds, width, height, step, pad_degrees):
     return xa,xb,max(0,y0-pad),min(height,y1+pad)
 
 
-def centers_for_crop(physical, land, bounds, width, height, step, land_codes):
-    """Index each included coastal land-cell center once, with full neighbors.
+def _shore_spans(grid,y,x0,x1,width):
+ rows,runs=grid;first,last=int(rows[y]),int(rows[y+1]);ends=runs[2*first:2*last:2];vals=runs[2*first+1:2*last:2]
+ if not len(ends) or int(ends[0])<=0 or int(ends[-1])!=width or np.any(ends[1:]<=ends[:-1]):raise ValueError('invalid RLE row')
+ out_e=[];out_v=[];x=x0
+ while x<x1:
+  xm=x%width; take=min(x1-x,width-xm);stop=xm+take
+  i=int(np.searchsorted(ends,xm,side='right'));j=int(np.searchsorted(ends,stop,side='left'))+1
+  ee=np.minimum(ends[i:j].astype(np.int64),stop)-xm+x
+  out_e.extend(ee.tolist());out_v.extend(vals[i:j].tolist());x+=take
+ return np.asarray(out_e,dtype=np.int64),np.asarray(out_v,dtype=np.int64)
 
-    Crops may cross the antimeridian. Land cell is coastal if any orthogonal
-    neighbor is physical water; next-row and side halos avoid crop artifacts.
-    """
-    x0,x1,y0,y1=bounds
-    if not (0<=y0<y1<=height and 0<x1-x0<=width and math.isfinite(step) and step>0):raise ValueError('invalid crop')
-    latitudes=[];longitudes=[];categories=[];count=0
-    allowed_physical=np.zeros(23,dtype=bool);allowed_physical[[1,17]]=True
-    allowed_land=np.zeros(23,dtype=bool);allowed_land[17:23]=True
-    selected_land=np.zeros(23,dtype=bool);selected_land[land_codes]=True
-    for y in range(y0,y1):
-        mid=crop(*physical,y,x0,x1,width)
-        l=crop(*land,y,x0,x1,width)
-        if x1-x0<width:
-            left=np.r_[crop(*physical,y,x0-1,x0,width),mid[:-1]]
-            right=np.r_[mid[1:],crop(*physical,y,x1,x1+1,width)]
-        else:left=np.roll(mid,1);right=np.roll(mid,-1)
-        p=np.r_[left,mid,right]
-        if np.any((p<0)|(p>=23)) or np.any(~allowed_physical[p]):raise ValueError('invalid physical or land row')
-        land_safe=np.clip(l,0,22)
-        land_invalid=(l<0)|(l>=23)
-        if np.any((mid==17)&(land_invalid|~allowed_land[land_safe])):raise ValueError('invalid physical or land row')
-        wet=(left==1)|(right==1)
-        for ny in (y-1,y+1):
-            if 0<=ny<height:
-                pn=crop(*physical,ny,x0,x1,width)
-                if np.any((pn<0)|(pn>=23)) or np.any(~allowed_physical[pn]):raise ValueError('invalid neighboring physical row')
-                wet|=pn==1
-        ix=np.flatnonzero((mid==17)&selected_land[land_safe]&wet)
-        count+=len(ix)
-        if len(ix):
-            latitudes.append(np.full(len(ix),90-(y+.5)*step))
-            longitudes.append(((-180+(x0+ix+.5)*step+180)%360)-180)
-            categories.append(l[ix].astype(np.uint8))
-    if not count:raise ValueError('no participant shorelines in crop')
-    lat=np.concatenate(latitudes);lon=np.concatenate(longitudes);cat=np.concatenate(categories)
-    return {'mids':unit(lat,lon),'lat':lat,'lon':lon,'category':cat}
+def centers_for_crop(physical,land,bounds,width,height,step,land_codes):
+ """Extract exact four-neighbor coastal centers from RLE change positions.
+
+ Dense arrays are allocated only for coastal centers. Wrapped crops retain
+ original row/column order and use real physical neighbors beyond crop edges.
+ """
+ x0,x1,y0,y1=bounds
+ if not (0<=y0<y1<=height and 0<x1-x0<=width and math.isfinite(step) and step>0):raise ValueError('invalid crop')
+ selected=np.zeros(23,dtype=bool);selected[land_codes]=True
+ latitudes=[];longitudes=[];categories=[];count=0
+ # full-width crops cannot be extended in the original crop helper, but this
+ # span reader intentionally supports repeated wrapping for the side halo.
+ def pget(y):
+  e,v=_shore_spans(physical,y,x0-1,x1+1,width)
+  if np.any((v!=1)&(v!=17)):raise ValueError('invalid physical or land row')
+  return e,v
+ prev=pget(y0-1) if y0>0 else None;cur=pget(y0);nxt=pget(y0+1) if y0+1<height else None
+ for y in range(y0,y1):
+  le,lv=_shore_spans(land,y,x0,x1,width)
+  # Break at all changes in either adjacent physical row, current physical
+  # row, or land category. Side halo endpoints are clipped out.
+  breaks=[np.array([x0,x1]),le,cur[0]]
+  if prev is not None:breaks.append(prev[0])
+  if nxt is not None:breaks.append(nxt[0])
+  b=np.unique(np.concatenate(breaks));b=b[(b>=x0)&(b<=x1)];starts=b[:-1];ends=b[1:]
+  mv=cur[1][np.searchsorted(cur[0],starts,side='right')]
+  cats=lv[np.searchsorted(le,starts,side='right')]
+  bad=(mv==17)&((cats<17)|(cats>22))
+  if np.any(bad):raise ValueError('invalid physical or land row')
+  wet=np.zeros(len(starts),dtype=bool)
+  for row in (prev,nxt):
+   if row is not None:wet |= row[1][np.searchsorted(row[0],starts,side='right')]==1
+  chosen=(mv==17)&selected[np.clip(cats,0,22)]&wet
+  starts1=starts[chosen];ends1=ends[chosen]
+  xx=np.concatenate([np.arange(a,b,dtype=np.int64) for a,b in zip(starts1,ends1)]) if len(starts1) else np.empty(0,dtype=np.int64)
+  # Horizontal coast consists of the land cell on each wet/dry run boundary.
+  ce,cv=cur; t=np.flatnonzero(cv[:-1]!=cv[1:]);boundary=ce[t]
+  side=np.where(cv[t]==17,boundary-1,boundary);side=side[(side>=x0)&(side<x1)]
+  if len(side):
+   sc=lv[np.searchsorted(le,side,side='right')];side=side[selected[np.clip(sc,0,22)]]
+   xx=np.union1d(xx,side)
+  count+=len(xx)
+  if len(xx):
+   latitudes.append(np.full(len(xx),90-(y+.5)*step));longitudes.append(((-180+(xx+.5)*step+180)%360)-180)
+   categories.append(lv[np.searchsorted(le,xx,side='right')].astype(np.uint8))
+  prev,cur=cur,nxt
+  nxt=pget(y+2) if y+2<height and y+1<y1 else None
+ if not count:raise ValueError('no participant shorelines in crop')
+ lat=np.concatenate(latitudes);lon=np.concatenate(longitudes);cat=np.concatenate(categories)
+ return {'mids':unit(lat,lon),'lat':lat,'lon':lon,'category':cat}
 
 def boundary_lower(lat,lon,bounds,width,height,step):
     """Conservative distance to any shoreline omitted outside the crop."""
@@ -152,6 +174,40 @@ def make_indexes(centers, pairs):
         part={k:centers[k][mask] for k in ('mids','lat','lon','category')}
         indexes[land_code]=(part,cKDTree(part['mids']))
     return indexes
+
+def nearest_class_bounds(lat, lon, points, pairs, indexes, *, upper_limit=None):
+    """Lower bounds for all classes, one exact candidate upper bound per query.
+
+    The spherical-nearest class need not win on WGS84. It is only a candidate:
+    callers must prove its exact upper bound beats every competing lower bound
+    or fall back to complete exact minima. No inverse call is needed for a
+    competing class that has already been excluded by its lower bound.
+    """
+    count = len(points)
+    lower = np.empty((count, len(pairs)), dtype=np.float64)
+    targets_lon = np.empty_like(lower)
+    targets_lat = np.empty_like(lower)
+    for col, (_, code, _) in enumerate(pairs):
+        data, tree = indexes[code]
+        chord, ix = tree.query(points, k=1, workers=1)
+        angle = 2 * np.arcsin(np.clip(chord / 2, 0, 1))
+        # Chord itself stays a conservative angular bound near antipodes,
+        # where asin amplifies floating-point error.
+        lower[:, col] = np.maximum(0, MIN_RADIUS * np.where(chord < 1.99, angle, chord) - .001)
+        targets_lon[:, col] = data['lon'][ix]
+        targets_lat[:, col] = data['lat'][ix]
+    best = np.argmin(lower, axis=1)
+    rows = np.arange(count)
+    active = np.ones(count, dtype=bool) if upper_limit is None else lower[rows, best] <= upper_limit
+    upper = np.full(count, np.inf)
+    if np.any(active):
+        d = geodesic_distances(lon[active], lat[active],
+                               targets_lon[rows[active], best[active]],
+                               targets_lat[rows[active], best[active]])
+        if np.any(~np.isfinite(d)):
+            raise ValueError('invalid inverse geodesic')
+        upper[active] = d + .000001
+    return lower, best, upper
 
 def exact_minimum_by_ordered_chord(point, lon, lat, data, tree):
     """Exact WGS84 minimum with complete-input streaming for wide searches.
@@ -196,6 +252,46 @@ def exact_minimum_by_ordered_chord(point, lon, lat, data, tree):
         take=min(n,take*2)
 
 
+def exact_minima_by_ordered_chord(points, lon, lat, data, tree):
+    """Batch exact WGS84 minima, proving that every omitted center is farther.
+
+    Neighbor prefixes grow only for queries whose conservative lower bound
+    cannot prove the minimum. Wide unresolved searches still visit the entire
+    shore through the scalar streaming implementation; no candidate is capped.
+    """
+    count = len(points)
+    result = np.full(count, np.inf)
+    n = int(tree.n)
+    if not count or not n:
+        return result
+    active = np.arange(count)
+    take = min(1, n)
+    while len(active):
+        request = min(n, take + 1)
+        chords, ids = tree.query(points[active], k=request, workers=1)
+        chords = np.asarray(chords).reshape(len(active), request)
+        ids = np.asarray(ids).reshape(len(active), request)
+        candidates = ids[:, :take].ravel()
+        ds = geodesic_distances(np.repeat(lon[active], take),
+                                np.repeat(lat[active], take),
+                                data['lon'][candidates], data['lat'][candidates])
+        if np.any(~np.isfinite(ds)):
+            raise ValueError('invalid inverse geodesic')
+        result[active] = np.minimum(result[active], ds.reshape(-1, take).min(axis=1))
+        if take == n:
+            break
+        angle = 2 * np.arcsin(np.clip(chords[:, take] / 2, 0, 1))
+        next_chord = chords[:, take]
+        lower = np.maximum(0, MIN_RADIUS * np.where(next_chord < 1.99, angle, next_chord) - .001)
+        active = active[lower <= result[active] + .000001]
+        if take >= 4096:
+            for q in active:
+                result[q] = exact_minimum_by_ordered_chord(
+                    points[q], float(lon[q]), float(lat[q]), data, tree)
+            break
+        take = min(n, take * 2)
+    return result
+
 def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,band=None,bandtol=0):
     """Certify WGS84 nearest coastal-cell-center assignments or fail closed.
 
@@ -218,16 +314,8 @@ def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,ba
     if not available:
         if band is None or np.any(boundary<=band+bandtol):raise ValueError('crop cannot certify; increase halo')
         return np.zeros(len(lat),dtype=np.uint8),{'bounded':len(lat),'exact':0}
-    lows=[];highs=[]
-    for _,lc,_ in available:
-        data,tree=indexes[lc];chord,ix=tree.query(points,k=1,workers=1)
-        angle=2*np.arcsin(np.clip(chord/2,0,1))
-        lows.append(np.maximum(0,MIN_RADIUS*angle-.001))
-        d=geodesic_distances(lon,lat,data['lon'][ix],data['lat'][ix])
-        if np.any(~np.isfinite(d)):raise ValueError('invalid inverse geodesic')
-        highs.append(d+.000001)
-    lows=np.column_stack(lows);highs=np.column_stack(highs)
-    best=np.argmin(highs,axis=1);upper=highs[np.arange(len(lat)),best]
+    lows, best, upper = nearest_class_bounds(lat, lon, points, available, indexes,
+                                                   upper_limit=None if band is None else band+bandtol)
     others=lows.copy();others[np.arange(len(lat)),best]=np.inf
     unique=(upper+tolerance<others.min(axis=1))&(upper+tolerance<boundary)
     out=np.zeros(len(lat),dtype=np.uint8)
@@ -239,23 +327,31 @@ def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,ba
         fast=outside|inside
     for i,(_,_,code) in enumerate(available):out[fast & (best==i) & (True if band is None else inside)]=code
     pending=np.flatnonzero(~fast)
-    for q in pending:
-        distances=[]
-        for _,lc,_ in available:
-            data,tree=indexes[lc]
-            distances.append(exact_minimum_by_ordered_chord(points[q],float(lon[q]),float(lat[q]),data,tree))
-        minimum=min(distances)
-        if not math.isfinite(minimum):raise RuntimeError('no provable candidate shore')
-        if band is not None and minimum>threshold:
-            if boundary[q]<=threshold:raise ValueError('crop cannot certify coastal band; increase halo')
-            if abs(minimum-threshold)<=.0000001:raise RuntimeError('band threshold numerically ambiguous')
-            continue
-        if band is not None and abs(minimum-threshold)<=.0000001:raise RuntimeError('band threshold numerically ambiguous')
-        if minimum+tolerance+.000001>=boundary[q]:raise ValueError('crop cannot certify nearest shore; increase halo')
-        for i,d in enumerate(distances):
-            if math.isfinite(d) and abs((d-minimum)-tolerance)<=.0000001:raise RuntimeError('tie threshold numerically ambiguous')
-            if d<=minimum+tolerance:
-                out[q]=available[i][2];break
+    if len(pending):
+        distances = np.column_stack([
+            exact_minima_by_ordered_chord(points[pending], lon[pending],
+                                         lat[pending], *indexes[lc])
+            for _, lc, _ in available])
+        minimum = distances.min(axis=1)
+        if np.any(~np.isfinite(minimum)):
+            raise RuntimeError('no provable candidate shore')
+        inside = np.ones(len(pending), dtype=bool)
+        if band is not None:
+            if np.any(np.abs(minimum-threshold) <= .0000001):
+                raise RuntimeError('band threshold numerically ambiguous')
+            inside = minimum <= threshold
+            if np.any(~inside & (boundary[pending] <= threshold)):
+                raise ValueError('crop cannot certify coastal band; increase halo')
+        if np.any(inside & (minimum+tolerance+.000001 >= boundary[pending])):
+            raise ValueError('crop cannot certify nearest shore; increase halo')
+        candidates = distances[inside]
+        minima = minimum[inside]
+        if np.any(np.abs((candidates-minima[:, None])-tolerance) <= .0000001):
+            raise RuntimeError('tie threshold numerically ambiguous')
+        # argmax selects the first eligible entity in the versioned priority.
+        winners = np.argmax(candidates <= minima[:, None]+tolerance, axis=1)
+        codes = np.asarray([p[2] for p in available], dtype=np.uint8)
+        out[pending[inside]] = codes[winners]
     return out,{'bounded':int(fast.sum()),'exact':int(len(pending))}
 
 def classify(lat,lon,bounds,width,height,step,pairs,tolerance,indexes):
