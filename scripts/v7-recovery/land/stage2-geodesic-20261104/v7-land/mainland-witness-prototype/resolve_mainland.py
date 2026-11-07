@@ -16,6 +16,16 @@ spec=importlib.util.spec_from_file_location('point_component_helpers',HELPER)
 helper=importlib.util.module_from_spec(spec);spec.loader.exec_module(helper)
 need=helper.need
 
+
+# Exact local candidate is admissible only through an explicit diagnostic flag.
+def snapshot_source_allowed(snapshot, allow_local=False):
+ if type(allow_local) is not bool: raise ValueError('invalid local diagnostic mode')
+ if not isinstance(snapshot,dict): return False
+ if snapshot.get('source')=='neon-export': return True
+ if not allow_local or snapshot.get('source')!='local-derived-from-neon-export': return False
+ try: return hashlib.sha256(json.dumps(snapshot,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()=='fddc8e6703d4bf8c089f5d94933f05bcf2c2f6580ef162508e772de9e0ed001f'
+ except (TypeError,ValueError): return False
+
 def text(v): return isinstance(v,str) and bool(v.strip())
 
 def locate_component(components, starts, x):
@@ -27,7 +37,7 @@ def unique(items,key):
         need(isinstance(x,dict) and text(x.get(key)) and x[key] not in out,'missing or duplicate '+key);out[x[key]]=x
     return out
 
-def resolve(req):
+def resolve(req, *, allow_local=False):
     need(req.get('schema')=='mainland-witness-request-v1','invalid request')
     codepaths={'resolver':Path(__file__).resolve(),'helper':HELPER.resolve(),'named_identity':NAMED.resolve()}
     code={k:helper.digest(p) for k,p in codepaths.items()}
@@ -43,7 +53,7 @@ def resolve(req):
     for k,m in (('physical_runs',8),('component_runs',12)):need(refs[k].stat().st_size % m==0,'run alignment error')
     snap=json.loads(helper.read_document(refs['snapshot'],'snapshot'))
     rev,entity_rev=snap.get('decision_revision',{}),snap.get('entity_revision',{})
-    need(snap.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and snap.get('source')=='neon-export' and rev.get('status')=='draft' and entity_rev.get('status')=='draft' and text(rev.get('id')) and text(entity_rev.get('id')) and rev.get('entity_revision')==entity_rev.get('id'),'draft Neon revision required')
+    need(snap.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and snapshot_source_allowed(snap,allow_local) and rev.get('status')=='draft' and entity_rev.get('status')=='draft' and text(rev.get('id')) and text(entity_rev.get('id')) and rev.get('entity_revision')==entity_rev.get('id'),'draft Neon revision required')
     groups=unique(snap.get('mainland_witness_groups'),'group_id');witnesses=unique(snap.get('mainland_witnesses'),'witness_id');relations=unique(snap.get('mainland_group_relations'),'relation_id');features=unique(snap.get('features'),'feature_id')
     need(groups and witnesses,'empty selected groups or witnesses')
     entities={}
@@ -125,7 +135,7 @@ def resolve(req):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('request');p.add_argument('output');a=p.parse_args();path=Path(a.request).resolve();raw=helper.read_document(path,'request');req=json.loads(raw);result=resolve(req);need(helper.read_document(path,'request')==raw,'request changed');result['request_sha256']=hashlib.sha256(raw).hexdigest();out=Path(a.output).resolve()
+    p=argparse.ArgumentParser();p.add_argument('request');p.add_argument('output');p.add_argument('--allow-local-provisional',action='store_true');a=p.parse_args();path=Path(a.request).resolve();raw=helper.read_document(path,'request');req=json.loads(raw);result=resolve(req,allow_local=a.allow_local_provisional);need(helper.read_document(path,'request')==raw,'request changed');result['request_sha256']=hashlib.sha256(raw).hexdigest();out=Path(a.output).resolve()
     manifest=json.loads(helper.read_document(req['component_manifest']['path'],'component manifest'))
     input_paths=[path,*[Path(req[k]['path']).resolve() for k in ('snapshot','physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source')],*[Path(x['path']).resolve() for x in req['source_files']],*[Path(x['path']).resolve() for x in helper.lineage_specs(manifest)],HELPER.resolve(),NAMED.resolve(),Path(__file__).resolve()]
     need(all(not out.is_relative_to(p.parent) for p in input_paths),'output overlaps input directory');payload=(json.dumps(result,sort_keys=True,indent=2)+'\n').encode();tmp=None

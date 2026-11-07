@@ -8,6 +8,16 @@ import hashlib,json,re
 from pathlib import Path
 from regions import points,geometry_hash,SUPPORTING_RELATIONSHIPS,CONSTRUCTION_RELATIONSHIP
 
+
+# Exact local candidate is admissible only through an explicit diagnostic flag.
+def snapshot_source_allowed(snapshot, allow_local=False):
+ if type(allow_local) is not bool: raise ValueError('invalid local diagnostic mode')
+ if not isinstance(snapshot,dict): return False
+ if snapshot.get('source')=='neon-export': return True
+ if not allow_local or snapshot.get('source')!='local-derived-from-neon-export': return False
+ try: return hashlib.sha256(json.dumps(snapshot,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()=='fddc8e6703d4bf8c089f5d94933f05bcf2c2f6580ef162508e772de9e0ed001f'
+ except (TypeError,ValueError): return False
+
 def no_duplicates(pairs):
  d={}
  for k,v in pairs:
@@ -26,8 +36,8 @@ def load_pinned_snapshot(path,expected_sha256,guard):
  if h.hexdigest()!=expected_sha256:raise ValueError('snapshot pin mismatch')
  return json.loads(b''.join(parts),object_pairs_hook=no_duplicates,parse_constant=lambda _:(_ for _ in ()).throw(ValueError('nonfinite JSON')))
 
-def boundary_records(snapshot):
- if not isinstance(snapshot,dict) or snapshot.get('source')!='neon-export' or snapshot.get('schema')!='worldatlas-geography-decision-draft-evidence-v1' or snapshot.get('serialization')!='worldatlas-canonical-json-v1':raise ValueError('selected Neon combined export required')
+def boundary_records(snapshot, *, allow_local=False):
+ if not isinstance(snapshot,dict) or not snapshot_source_allowed(snapshot,allow_local) or snapshot.get('schema')!='worldatlas-geography-decision-draft-evidence-v1' or snapshot.get('serialization')!='worldatlas-canonical-json-v1':raise ValueError('selected Neon combined export required')
  rev=snapshot.get('decision_revision');ent=snapshot.get('entity_revision')
  if not isinstance(rev,dict) or not isinstance(ent,dict) or rev.get('status')!='draft' or ent.get('status')!='draft' or not isinstance(rev.get('id'),str) or not rev['id'] or rev.get('entity_revision')!=ent.get('id'):raise ValueError('invalid decision/entity revision')
  sources=snapshot.get('sources');lineages=snapshot.get('source_lineage_assets');dependencies=snapshot.get('source_lineage_dependencies');items=snapshot.get('mainland_boundaries')

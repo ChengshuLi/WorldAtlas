@@ -66,6 +66,22 @@ def seed_report(report,grid,pins,revision,entity_revision,groups,entity_codes,se
  for t in traces:need(isinstance(t,dict) and t.get('revision_id')==revision and text(t.get('region_id')) and isinstance(t.get('geometry_sha256'),str) and HEX.fullmatch(t['geometry_sha256']) and isinstance(t.get('input_trace'),list) and t['input_trace'] and text(t.get('method')),'invalid region trace')
  return expected_roots
 
+def provisional_reproof(snapshot,seed,pins,prior,grid):
+ """Bind a local research candidate to equal historical and fresh physical streams."""
+ need(snapshot.get('source')=='local-derived-from-neon-export' and local_or_neon_source(snapshot),'exact provisional snapshot required')
+ out=prior.get('physical_output_sha256',prior.get('output_sha256',{}))
+ need(prior.get('status') in ('candidate-only','stage1-complete') and prior.get('grid')==grid and out.get('rows.u32le')==pins['physical_rows'] and out.get('runs.u32le')==pins['physical_runs'],'historical physical report mismatch')
+ eq=seed.get('provisional_physical_equivalence');need(isinstance(eq,dict),'provisional equivalence missing')
+ for k,v in {'prior_report_sha256':pins['prior_physical_report'],'current_report_sha256':pins['physical_report'],'rows_sha256':pins['physical_rows'],'runs_sha256':pins['physical_runs'],'status':'equivalent-streams-fresh-proofs-provisional-only'}.items():need(eq.get(k)==v,'provisional equivalence mismatch: '+k)
+ selected=snapshot.get('land_baseline_policy',{}).get('route_ids');routes=snapshot.get('routes');need(isinstance(selected,list) and isinstance(routes,list),'selected routes missing')
+ routes={r.get('route_id'):r for r in routes if isinstance(r,dict)};need(all(r in routes for r in selected),'selected route missing')
+ historical={r:routes[r].get('provenance') for r in selected};need(eq.get('historical_route_provenance')==historical and eq.get('fresh_reproof_route_ids')==sorted(selected),'route equivalence mismatch')
+ for prov in historical.values():
+  need(isinstance(prov,dict) and prov.get('physical_report_sha256')==pins['prior_physical_report'] and prov.get('physical_rows_sha256')==pins['physical_rows'] and prov.get('physical_runs_sha256')==pins['physical_runs'],'historical route binding mismatch')
+ # validate_selected_seed_decisions independently checks every trace, geometry,
+ # source citation, current proof and current checker pin before output.
+ return True
+
 def hints_report(report,grid,pins,revision,entity_revision,metric,seed_roots,hint_code_hashes):
  need(report.get('schema')=='source-only-hints-diagnostic-report-v1' and report.get('status')=='diagnostic-not-independently-authenticated' and report.get('publishable') is False and report.get('synthetic_fixture') is not True,'invalid hints report')
  need(report.get('grid')==grid and report.get('decision_revision')==revision and report.get('entity_revision')==entity_revision and report.get('distance_policy')==metric and report.get('seed_roots')==seed_roots,'hints policy/revision mismatch')
@@ -107,7 +123,7 @@ CONSTRUCTION_RELATIONSHIP = "construction_input"
 
 
 
-def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=lambda:None):
+def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=lambda:None, *, provisional_equivalence=False):
  """Provisional strict v1 crosswalk; execution remains gated externally.
 
  Verify selected policy, component rules, geometry traces, source citations and
@@ -115,7 +131,7 @@ def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,gu
  """
  guard();rev=snapshot.get('decision_revision',{}).get('id');policy=snapshot.get('land_baseline_policy')
  validate_simple_policy(policy,rev,metric)
- need(grids_equal(policy['grid'],seed.get('grid')) and all(policy[k]==seed.get(k) for k in ('physical_rows_sha256','physical_runs_sha256','physical_report_sha256')),'selected policy physical/grid mismatch')
+ need(type(provisional_equivalence) is bool and grids_equal(policy['grid'],seed.get('grid')) and all(policy[k]==seed.get(k) for k in ('physical_rows_sha256','physical_runs_sha256')) and (policy['physical_report_sha256']==seed.get('physical_report_sha256') or (provisional_equivalence and policy['physical_report_sha256']==seed.get('provisional_physical_equivalence',{}).get('prior_report_sha256'))),'selected policy physical/grid mismatch')
  def selected_ids(name):
   x=policy.get(name);need(isinstance(x,list) and all(text(y) for y in x) and len(x)==len(set(x)),'invalid selected IDs: '+name);return x
  rule_ids=selected_ids('mainland_rule_ids');region_ids=selected_ids('region_ids');boundary_ids=selected_ids('boundary_ids');route_ids=selected_ids('route_ids');need(bool(rule_ids),'no selected mainland rules')
@@ -191,7 +207,7 @@ def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,gu
     selected_keys={(x.get('source_id'),x.get('source_version')) for x in selected_sources if isinstance(x,dict) and x.get('decision_revision')==rev and x.get('execution_status')=='selected_for_research'};need(len(refs)==len(selected_keys) and {(x['source_id'],x['version']) for x in refs}==selected_keys,'route source selection mismatch');cit=[]
     for ref in refs:
      key=(ref['source_id'],ref['version']);src=source_by.get(key);asset=asset_by.get(key);need(isinstance(src,dict) and isinstance(asset,dict) and key not in derived and asset.get('kind')=='raw' and all(src.get(k)==asset.get(k) for k in ('sha256','r2_bucket','r2_key','size_bytes')) and isinstance(src.get('sha256'),str) and HEX.fullmatch(src['sha256']) and text(src.get('r2_bucket')) and text(src.get('r2_key')) and isinstance(asset.get('provenance'),dict) and text(asset['provenance'].get('origin')),'invalid route source custody');cit.append({'source_id':key[0],'version':key[1],'sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'origin':asset['provenance']['origin']})
-    need(trace.get('source_citations')==cit and all(prov.get(k+'_sha256')==pins.get(k) for k in ('physical_rows','physical_runs','physical_report')) and prov.get('contract_sha256')==pins.get('closure_contract') and prov.get('checker_sha256')==pins.get('terminal_checker' if method=='physical_terminal_closure_v1' else 'closure_checker'),'route source/provenance mismatch')
+    need(trace.get('source_citations')==cit and all(prov.get(k+'_sha256')==pins.get(k) for k in ('physical_rows','physical_runs')) and ((prov.get('physical_report_sha256')==pins.get('physical_report') and prov.get('contract_sha256')==pins.get('closure_contract') and prov.get('checker_sha256')==pins.get('terminal_checker' if method=='physical_terminal_closure_v1' else 'closure_checker')) or (provisional_equivalence and prov.get('physical_report_sha256')==seed['provisional_physical_equivalence']['prior_report_sha256'] and seed['provisional_physical_equivalence']['historical_route_provenance'].get(rid)==prov)),'route source/provenance mismatch')
     need(isinstance(proof,dict) and proof.get('status')=='valid' and proof.get('geometry_sha256')==geomhash(selected) and proof.get('physical_rows_sha256')==pins.get('physical_rows') and proof.get('physical_runs_sha256')==pins.get('physical_runs') and proof.get('physical_report_sha256')==pins.get('physical_report') and proof.get('contract_sha256')==pins.get('closure_contract'),'closure proof mismatch')
     if method=='physical_water_closure_v1':need(proof.get('schema')=='physical-water-closure-proof-v1' and proof.get('checker_sha256')==pins.get('closure_checker'),'water closure checker mismatch')
     else:

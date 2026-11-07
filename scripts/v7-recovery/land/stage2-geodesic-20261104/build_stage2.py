@@ -45,11 +45,11 @@ def disjoint(cfg,config_path,work,output):
 def load_config(path):
  raw=read_bytes(path);cfg=json.loads(raw)
  keys={'schema','grid','inputs','seed_code_files','resolution_code_files','hint_code_files','tile_directory','policy_id','policy_version','controls','orchestration'}
- need(set(cfg)==keys and cfg['schema']=='stage2-source-geodesic-v1' and isinstance(cfg['inputs'],dict) and set(cfg['inputs'])==INPUTS,'invalid stage-2 config or unsupported historical inputs')
+ need(set(cfg)==keys and cfg['schema']=='stage2-source-geodesic-v1' and isinstance(cfg['inputs'],dict) and set(cfg['inputs']) in (INPUTS,INPUTS|{'prior_physical_report'}),'invalid stage-2 config or unsupported historical inputs')
  for k in ('seed_code_files','resolution_code_files','hint_code_files'):need(isinstance(cfg[k],dict) and bool(cfg[k]) and all(isinstance(x,str) and x and '/' not in x for x in cfg[k]),'invalid code file pins')
  need(set(cfg['hint_code_files'])=={'hints.py','run_diagnostic.py'} and isinstance(cfg['tile_directory'],str) and isinstance(cfg['policy_id'],str) and cfg['policy_id'] and isinstance(cfg['policy_version'],str) and cfg['policy_version'],'invalid hint code or policy')
  o=cfg['orchestration'];need(isinstance(o,dict) and set(o)=={'outer_config_sha256','orchestrator_sha256','derived_manifest','physical_lineage_report','provisional_only'} and type(o.get('provisional_only')) is bool and all(isinstance(o.get(k),str) and contracts.HEX.fullmatch(o[k]) for k in ('outer_config_sha256','orchestrator_sha256')),'missing fresh-orchestration provenance')
- validate_controls(cfg['controls']);return raw,cfg
+ need('prior_physical_report' not in cfg['inputs'] or o['provisional_only'],'prior physical report is provisional-only');validate_controls(cfg['controls']);return raw,cfg
 
 def build(config_path,work_dir,output_dir,resume=False):
  cp=Path(config_path).resolve();work=Path(work_dir).resolve();output=Path(output_dir).resolve();need(work.parent.is_dir() and output.parent.is_dir() and work!=output and not work.is_relative_to(output) and not output.is_relative_to(work),'invalid work/output')
@@ -80,7 +80,7 @@ def _build(cp,work,output,resume,raw,cfg):
   with open(rp,'x') as f:json.dump(request,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
   fd=os.open(work,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  g=cfg['grid'];need(isinstance(g,dict) and set(g)=={'width','height','west','north','step'} and type(g['width']) is int and type(g['height']) is int and g['width']>1 and g['height']>0 and g['west']==-180 and g['north']==90 and type(g['step']) in (int,float) and g['step']==360/g['width'] and 90-g['height']*g['step']>=-90-1e-8,'invalid global grid');w,h=g['width'],g['height']
- snap=read_json(paths['decision_snapshot'],guard);rev=snap.get('decision_revision',{}).get('id');ent=snap.get('entity_revision',{}).get('id');metric,categories,entity_codes=contracts.snap_policy(snap,rev,ent,cfg['policy_id'],cfg['policy_version'])
+ snap=read_json(paths['decision_snapshot'],guard);rev=snap.get('decision_revision',{}).get('id');ent=snap.get('entity_revision',{}).get('id');metric,categories,entity_codes=contracts.snap_policy(snap,rev,ent,cfg['policy_id'],cfg['policy_version'],allow_local=cfg['orchestration']['provisional_only']);need(snap.get('source')!='local-derived-from-neon-export' or (cfg['orchestration']['provisional_only'] and 'prior_physical_report' in paths),'local candidate requires provisional prior report')
  manifest=read_json(paths['component_manifest'],guard);contracts.component_manifest(manifest,g,pins)
  physical=read_json(paths['physical_report'],guard);po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==g and po.get('rows.u32le')==pins['physical_rows'] and po.get('runs.u32le')==pins['physical_runs'],'physical report mismatch')
  resolution=read_json(paths['resolution_report'],guard);groups=contracts.resolution_roots(resolution,g,pins,rev,ent);need(resolution.get('code_sha256')==source_code['resolution_code_files'],'resolution code provenance mismatch')
@@ -91,12 +91,14 @@ def _build(cp,work,output,resume,raw,cfg):
  extra=[Path(x['path']).resolve() for x in rr.get('source_files',[])]
  need(extra and all(not t.is_relative_to(p.parent) and not p.parent.is_relative_to(t) for p in extra for t in (work,output)),'resolution source/work overlap')
  spec=importlib.util.spec_from_file_location('stage2_mainland_witness',HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py');resolver=importlib.util.module_from_spec(spec);spec.loader.exec_module(resolver)
- fresh=resolver.resolve(rr);fresh['request_sha256']=pins['resolution_request'];need(fresh==resolution,'fresh witness re-resolution differs from consumed report')
+ fresh=resolver.resolve(rr,allow_local=True) if cfg['orchestration']['provisional_only'] else resolver.resolve(rr);fresh['request_sha256']=pins['resolution_request'];need(fresh==resolution,'fresh witness re-resolution differs from consumed report')
  seed=read_json(paths['seed_report'],guard);seed_roots=contracts.seed_report(seed,g,pins,rev,ent,groups,entity_codes,source_code['seed_code_files'])
+ equivalent=False
+ if snap.get('source')=='local-derived-from-neon-export':equivalent=contracts.provisional_reproof(snap,seed,pins,read_json(paths['prior_physical_report'],guard),g)
  hint=read_json(paths['hint_report'],guard);count=contracts.hints_report(hint,g,pins,rev,ent,metric,seed_roots,source_code['hint_code_files'])
  # The exact snapshot rules/region trace and land-policy crosswalk is still
  # validated by a required separate contract routine, never inferred from V7.
- land_policy=contracts.validate_selected_seed_decisions(snap,seed,groups,entity_codes,metric,guard=guard)
+ land_policy=contracts.validate_selected_seed_decisions(snap,seed,groups,entity_codes,metric,guard=guard,provisional_equivalence=equivalent)
  ural_rule=ural_delta.compile_rule(snap,categories,g)
  tolerance=contracts.policy_tolerance_metres(land_policy)
  need(paths['hint_roots'].stat().st_size==count*4 and paths['hint_codes'].stat().st_size==count,'hint array size mismatch')

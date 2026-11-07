@@ -70,3 +70,7 @@ The prior land report does not itself attest which code bytes executed. The
 land code hashes are operator-supplied assertions and matching them is not
 independent proof of the earlier process. Record that limitation and the exact
 wrapper, source, runtime and event pins in the resumed run's evidence.
+
+The 2026-11-07 upstream rerun checkpoint is documented in
+[`RERUN-20261107.md`](RERUN-20261107.md). Physical and component identity at
+that checkpoint is not a complete final-map equivalence result.

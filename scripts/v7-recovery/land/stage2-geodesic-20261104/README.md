@@ -83,3 +83,27 @@ authenticated. It does not rerasterize the raw sources or prove geography. The
 old land report did not record a producer-code digest, so matching that code is
 an operator assertion, not proof of what executed. Preserve these limitations
 when using the report.
+
+## Exact local snapshot in provisional mode
+
+`--provisional-only` may use the one explicitly allowlisted local-derived
+research snapshot whose canonical content digest is `fddc8e6703d4bf8c089f5d94933f05bcf2c2f6580ef162508e772de9e0ed001f`.
+The source label remains `local-derived-from-neon-export`. The orchestrator
+passes an explicit provisional flag through witness resolution, seed building,
+and hint generation, while the core checks the same provisional flag. A
+modified snapshot or an unflagged local snapshot is rejected. Normal mode
+continues to require the Neon-export path and its reviewed seed freeze; no
+local snapshot is promoted or presented as authenticated. Outputs remain
+research-only and cannot pass the normal candidate validator.
+
+For this local candidate, `inputs.prior_physical_report` is required. Its
+pinned prior report and the fresh physical report must identify the same grid,
+rows, and runs. The selected historical route provenance remains unchanged;
+trusted current checkers must freshly prove every selected closure against the
+fresh contract and streams before the seed rasterizer starts. The resulting
+seed report binds both report digests, the unchanged route provenance, and the
+new proofs. The independent core validates this equivalence and cross-checks
+every new proof, geometry and checker. This exception is available only to the
+explicitly provisional exact snapshot; normal-mode provenance gates remain in
+force. It establishes stream equivalence, not provider authentication or
+geographic correctness.

@@ -1,5 +1,16 @@
 """Resolve selected simple mainland partition rules to current ephemeral roots."""
 
+import hashlib,json
+
+# Exact local candidate is admissible only through an explicit diagnostic flag.
+def snapshot_source_allowed(snapshot, allow_local=False):
+ if type(allow_local) is not bool: raise ValueError('invalid local diagnostic mode')
+ if not isinstance(snapshot,dict): return False
+ if snapshot.get('source')=='neon-export': return True
+ if not allow_local or snapshot.get('source')!='local-derived-from-neon-export': return False
+ try: return hashlib.sha256(json.dumps(snapshot,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()=='fddc8e6703d4bf8c089f5d94933f05bcf2c2f6580ef162508e772de9e0ed001f'
+ except (TypeError,ValueError): return False
+
 def unique(items,key):
  if not isinstance(items,list):raise ValueError('invalid decision list')
  out={}
@@ -8,8 +19,8 @@ def unique(items,key):
   out[x[key]]=x
  return out
 
-def compile_rules(snapshot,resolution,snapshot_sha256,selected_region_ids):
- if not isinstance(snapshot,dict) or snapshot.get('source')!='neon-export' or snapshot.get('schema')!='worldatlas-geography-decision-draft-evidence-v1':raise ValueError('selected Neon export required')
+def compile_rules(snapshot,resolution,snapshot_sha256,selected_region_ids, *, allow_local=False):
+ if not isinstance(snapshot,dict) or not snapshot_source_allowed(snapshot,allow_local) or snapshot.get('schema')!='worldatlas-geography-decision-draft-evidence-v1':raise ValueError('selected Neon export required')
  rev=snapshot.get('decision_revision',{});entity_rev=snapshot.get('entity_revision',{})
  if rev.get('status')!='draft' or entity_rev.get('status')!='draft' or rev.get('entity_revision')!=entity_rev.get('id'):raise ValueError('invalid revision linkage')
  lp=snapshot.get('land_baseline_policy')

@@ -33,7 +33,7 @@ class RepositoryDependenciesTest(unittest.TestCase):
         self.assertFalse(orchestrate_stage2.SEED_FREEZE_CURRENT)
         self.assertNotEqual({n: code['seed-producer/' + n] for n in orchestrate_stage2.SEED_NAMES}, expected)
         self.assertIn('seed_worker.py', orchestrate_stage2.SEED_NAMES)
-        self.assertEqual(code['seed-producer/seed_worker.py'], '3a1401f2b3f715a7a2104986f2a9748692ebff3566f26e20ebc9fa2471a61bed')
+        self.assertEqual(code['seed-producer/seed_worker.py'], 'd6a2a53e907b17e7c023db92b639be1d94ac517ee5a18d40bb74d243ec5bb418')
         self.assertNotIn('guarded_exec.py', orchestrate_stage2.SEED_NAMES)
         self.assertNotIn('guarded_raster_exec.py', orchestrate_stage2.SEED_NAMES)
 
