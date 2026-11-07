@@ -22,7 +22,8 @@ class CodeVersionTests(unittest.TestCase):
         self.git('init', '-q')
         self.scripts = self.repo / 'scripts'
         for name in ('v7-raw-mask/build_physical.py', 'v7-replay/validator.py',
-                     'v7-pipeline/run_pipeline.py'):
+                     'v7-pipeline/run_pipeline.py', 'v7-replay/streaming_closed_water.py',
+                     'v7-replay/build_closed_water.py', 'v7-recovery/ocean/ocean_fill_runner.py'):
             self.source(name, 'original\n')
         self.old = self.commit()
         self.run = self.root / 'run'
@@ -57,8 +58,8 @@ class CodeVersionTests(unittest.TestCase):
         return versions.upgrade(self.run, self.identity, identity or self.new_identity(),
                                 pin(self.original), self.old, self.repo, 0)
 
-    def completed(self, script):
-        stage = self.run / 'checkpoints' / 'stage'
+    def completed(self, script, name='stage'):
+        stage = self.run / 'checkpoints' / name
         stage.mkdir()
         return write(stage / 'complete.json', {'invocation': {'code': pin(self.scripts / script)}})
 
@@ -178,6 +179,44 @@ class CodeVersionTests(unittest.TestCase):
         self.assertEqual(identity, self.new_identity())
         self.assertEqual(parent, second)
         self.assertEqual(count, 2)
+
+    def test_closed_only_upgrade_preserves_earlier_water_across_second_transition(self):
+        self.change_water()
+        first, _ = self.upgrade()
+        previous = self.new_identity()
+        old_commit = self.git('rev-parse', 'HEAD')
+        receipt = self.completed('v7-recovery/ocean/ocean_fill_runner.py')
+        before = [pin(self.original), pin(receipt), pin(self.run / 'timing-events.jsonl')]
+        self.source('v7-replay/streaming_closed_water.py', 'closed-only correction\n')
+        self.source('v7-replay/test_closed_water_row_lifetime.py', 'test\n')
+        self.commit()
+        second, stale = versions.upgrade(self.run, previous, self.new_identity(), first,
+                                         old_commit, self.repo, 1)
+        self.assertEqual(stale, [])
+        self.assertEqual(before, [pin(self.original), pin(receipt), pin(self.run / 'timing-events.jsonl')])
+        identity, parent, _, count = versions.load(self.run, self.identity, self.repo)
+        self.assertEqual((identity, parent, count), (self.new_identity(), second, 2))
+
+    def test_closed_only_upgrade_rejects_completed_closed_or_unknown_water_producer(self):
+        self.completed('v7-replay/build_closed_water.py')
+        self.source('v7-replay/streaming_closed_water.py', 'corrected\n')
+        self.commit()
+        with self.assertRaisesRegex(ValueError, 'cannot reuse completed water'):
+            self.upgrade()
+        (self.run / 'checkpoints/stage/complete.json').unlink()
+        self.source('v7-replay/unknown_producer.py', 'producer\n')
+        self.completed('v7-replay/unknown_producer.py', 'unknown')
+        self.commit()
+        with self.assertRaisesRegex(ValueError, 'cannot reuse completed water'):
+            self.upgrade()
+
+    def test_closed_upgrade_with_shared_water_change_is_rejected(self):
+        self.completed('v7-recovery/ocean/ocean_fill_runner.py')
+        self.source('v7-replay/streaming_closed_water.py', 'corrected\n')
+        self.source('v7-replay/validator.py', 'shared change\n')
+        self.commit()
+        with self.assertRaisesRegex(ValueError, 'cannot reuse completed water'):
+            self.upgrade()
 
     def test_runner_upgrade_reuses_old_stage_and_binds_new_stage_to_new_version(self):
         leaf = 'from pathlib import Path\nimport sys\np=Path(sys.argv[1]);p.mkdir();(p/"result").write_text("done")\n'

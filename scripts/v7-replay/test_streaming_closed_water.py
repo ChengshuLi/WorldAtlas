@@ -42,6 +42,10 @@ class StreamingTest(unittest.TestCase):
   self.assertEqual(sha(self.root/'out/work.sqlite3'),m['work_database']['sha256'])
  def test_work_index_keeps_component_decisions(self):
   m=self.run_stage('indexed')
+  timings=m['processing_stage_elapsed_seconds']
+  self.assertEqual(set(timings),{'ingest_partition','ingest_spans','classify_boundaries','mark_cut_contacts','assign_components','write_assignments'})
+  self.assertTrue(all(elapsed>=0 for elapsed in timings.values()))
+  self.assertGreaterEqual(m['processing_elapsed_seconds'],sum(timings.values()))
   with contextlib.closing(sqlite3.connect(self.root/'indexed/work.sqlite3')) as db:
    self.assertEqual(db.execute('SELECT count(*) FROM spans').fetchone()[0],3)
    methods=dict(db.execute('SELECT root,method FROM components'))

@@ -5,7 +5,6 @@ source partition and output are streamed. No application-imposed memory cap
 is enforced; actual memory use depends on inputs and algorithm workload.
 """
 import collections,hashlib,json,math,sqlite3,struct
-from functools import cache
 import time
 from pathlib import Path
 import numpy as np
@@ -89,7 +88,7 @@ def ingest_spans(db,rows_path,spans_path,width,height,meta,batch_size=4096):
 
 
 def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096):
-    """Batch boundary checks by row; fixed-size point chunks bound memory."""
+    """Stream the three-row boundary stencil and batch its point checks."""
     water_to_entity={w:e for e,_,w in pairs};land_to_entity={l:e for e,l,_ in pairs}
     entity_to_water={e:w for e,_,w in pairs};water_codes=list(water_to_entity);land_codes=list(land_to_entity)
     bits_by_code=np.zeros(23,dtype=np.uint32)
@@ -97,25 +96,26 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
     allowed_physical=np.zeros(23,dtype=bool);allowed_physical[[1,17]]=True
     allowed_land=np.zeros(23,dtype=bool);allowed_land[land_codes]=True
     allowed_water=np.zeros(23,dtype=bool);allowed_water[[0,*water_codes]]=True
-    @cache
+    class_rows={};index_rows={}
     def classes(y):
+        if y in class_rows:return class_rows[y]
         p=core.shore.crop(*physical,y,0,width,width);q=core.shore.crop(*prefill,y,0,width,width)
         if np.any((p<0)|(p>=len(allowed_physical))) or np.any((q<0)|(q>=len(allowed_land))) or np.any(~allowed_physical[p]) or np.any((p==17)&~allowed_land[q]) or np.any((p==1)&~allowed_water[q]):
             raise ValueError(f'invalid physical/prefill relationship at row {y}')
+        class_rows[y]=(p,q)
         return p,q
-    @cache
     def row_index(y):
+        if y in index_rows:return index_rows[y]
         rows=db.execute('SELECT a,b,root FROM spans WHERE y=? ORDER BY a',(y,)).fetchall()
-        if not rows:return None
-        return tuple(np.fromiter((r[i] for r in rows),dtype=np.int64,count=len(rows)) for i in range(3))
+        data=tuple(np.fromiter((r[i] for r in rows),dtype=np.int64,count=len(rows)) for i in range(3)) if rows else None
+        index_rows[y]=data
+        return data
     def owners(y,x):
         data=row_index(y)
         if data is None:return np.full(len(x),-1,dtype=np.int64)
         starts,ends,roots=data;ix=np.searchsorted(starts,x,side='right')-1;safe=np.maximum(ix,0)
         return np.where((ix>=0)&(x<ends[safe]),roots[safe],-1)
-    for y in range(height):
-        data=row_index(y)
-        if data is None:continue
+    def classify_row(y,data):
         starts,ends,roots=data;p,q=classes(y);updates={};crop=int(y==0 or y==height-1)
         def accumulate(ids,ny,x):
             external=owners(ny,x)!=ids
@@ -152,14 +152,22 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
         flush()
         db.executemany('UPDATE components SET boundary_mask=boundary_mask|?,unknown=MAX(unknown,?),crop_edge=MAX(crop_edge,?) WHERE root=?',
                        ((mask,unknown,crop_edge,root) for root,(mask,unknown,crop_edge) in updates.items()))
+    for y in range(height):
+        # Only y-1, y and y+1 can participate in this row's four-neighbor
+        # checks. Earlier rows have no future consumer, including across gaps.
+        class_rows.pop(y-2,None);index_rows.pop(y-2,None)
+        data=row_index(y)
+        if data is not None:classify_row(y,data)
 
 
 def mark_cut_contacts(db,path,width,height,batch_size=4096):
  from bisect import bisect_right
- @cache
+ rows={}
  def row(y):
+  if y in rows:return rows[y]
   spans=db.execute('SELECT a,b,root FROM spans WHERE y=? ORDER BY a',(y,)).fetchall()
-  return ([z[0] for z in spans],spans)
+  rows[y]=([z[0] for z in spans],spans)
+  return rows[y]
  def owner(y,x):
   starts,spans=row(y);i=bisect_right(starts,x)-1
   return spans[i][2] if i>=0 and x<spans[i][1] else None
@@ -176,6 +184,11 @@ def mark_cut_contacts(db,path,width,height,batch_size=4096):
    elif k==1 and y<height-1 and x<width:pts=((y,x),(y+1,x))
    elif k==2 and y<height and x==0:pts=((y,width-1),(y,0))
    else:raise ValueError('barrier edge outside grid')
+   # Edges are sorted by kind, row and column. Keep only the current
+   # endpoints' rows; row order starts again when the edge kind changes.
+   needed={pt[0] for pt in pts}
+   for old in tuple(rows):
+    if old not in needed:del rows[old]
    batch.extend((r,) for r in {owner(*pt) for pt in pts}-{None})
    if len(batch)>=batch_size:db.executemany('UPDATE components SET cut=1 WHERE root=?',batch);batch.clear()
  if batch:db.executemany('UPDATE components SET cut=1 WHERE root=?',batch)
@@ -256,13 +269,19 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
              'closed_water_core':Path(core.__file__),'shared_nearest':Path(core.shore.__file__)}
  code_pins={name:sha(path) for name,path in code_paths.items()}
  out=Path(out);create_directory_exclusive(out);db=open_database(out/'work.sqlite3')
+ stage_seconds={}
+ def measure(name,action,*args):
+  started=time.perf_counter()
+  result=action(*args)
+  stage_seconds[name]=time.perf_counter()-started
+  return result
  try:
-  meta=ingest_partition(db,partition_path,width,height,snapshot_sha,inputs,snapshot['decision_revision'])
-  cells,nspans=ingest_spans(db,component_rows,component_spans,width,height,meta)
-  classify_boundaries(db,physical,prefill,width,height,pairs)
-  mark_cut_contacts(db,barrier_edges,width,height)
-  stats=assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,out/'pending-components.jsonl.gz')
-  count,output_spans=write_assignments(db,out/'closed-water-assignments.jsonl.gz',decision['id'],width,height)
+  meta=measure('ingest_partition',ingest_partition,db,partition_path,width,height,snapshot_sha,inputs,snapshot['decision_revision'])
+  cells,nspans=measure('ingest_spans',ingest_spans,db,component_rows,component_spans,width,height,meta)
+  measure('classify_boundaries',classify_boundaries,db,physical,prefill,width,height,pairs)
+  measure('mark_cut_contacts',mark_cut_contacts,db,barrier_edges,width,height)
+  stats=measure('assign_components',assign_components,db,physical,land,width,height,pairs,tolerance,pad,chunk,out/'pending-components.jsonl.gz')
+  count,output_spans=measure('write_assignments',write_assignments,db,out/'closed-water-assignments.jsonl.gz',decision['id'],width,height)
   if count!=stats['assigned_cells'] or count+stats['pending_cells']!=cells:raise ValueError('closed-water cell conservation failed')
   db.commit();db.close();db=None
   if verify_inputs:verify_inputs()
@@ -275,7 +294,7 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
     **stats,'input_span_count':nspans,'span_count':output_spans,
     'pending_file':{'path':'pending-components.jsonl.gz','sha256':sha(out/'pending-components.jsonl.gz')},
     'work_database':{'path':'work.sqlite3','sha256':sha(out/'work.sqlite3'),'purpose':'disk-backed row/component and mixed-output index'},
-    'algorithm_parameters':{'classification_chunk':chunk},
+    'algorithm_parameters':{'classification_chunk':chunk},'processing_stage_elapsed_seconds':stage_seconds,
     'algorithm_sha256':code_pins['streaming_closed_water'],'code_sha256':code_pins,
     'tiles':[{'core_rows':[0,height],'core_cols':[0,width],'span_file':{'path':'closed-water-assignments.jsonl.gz','sha256':sha(out/'closed-water-assignments.jsonl.gz')}}]}
   manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started

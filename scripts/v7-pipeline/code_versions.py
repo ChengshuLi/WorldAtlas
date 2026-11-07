@@ -1,4 +1,4 @@
-"""Explicit, immutable code upgrades before downstream water checkpoints exist."""
+"""Explicit, immutable code upgrades with conservative stage dependency domains."""
 import hashlib
 import json
 from pathlib import Path
@@ -11,6 +11,27 @@ WATER = ('v7-replay/', 'v7-recovery/ocean/')
 CONTROL = ('v7-pipeline/run_pipeline.py', 'v7-pipeline/execution_state.py',
            'v7-pipeline/code_versions.py')
 UPSTREAM = ('v7-raw-mask/', 'v7-recovery/land/', 'v7-land/')
+
+# These files are used only by the closed-water producer (or its tests).  A
+# change to one may reuse the specifically enumerated preceding water stages,
+# but never a closed-water or later output.  Unknown producers fail closed.
+CLOSED_ONLY = frozenset({
+    'v7-replay/streaming_closed_water.py',
+    'v7-replay/test_batch_equivalence.py',
+    'v7-replay/test_closed_water_row_lifetime.py',
+    'v7-replay/test_streaming_closed_water.py',
+})
+BEFORE_CLOSED = frozenset({
+    'v7-replay/assemble_coastal_tiles.py',
+    'v7-replay/batch_coastal_tiles.py',
+    'v7-replay/build_prefill.py',
+    'v7-replay/build_prefill_plan.py',
+    'v7-replay/build_seavox_basin.py',
+    'v7-replay/extract_seavox_feature.py',
+    'v7-replay/verify_basin_coverage.py',
+    'v7-recovery/ocean/make_candidate_build.py',
+    'v7-recovery/ocean/ocean_fill_runner.py',
+})
 
 
 def committed_code(repo, revision):
@@ -65,7 +86,9 @@ def changes(before, after):
 
 def validate_scope(delta, completed, scripts):
     """Conservative stage domains: shared/upstream code is never migrated."""
-    water = any(name.startswith(WATER) for name in delta)
+    water_changes = {name for name in delta if name.startswith(WATER)}
+    closed_only = bool(water_changes) and water_changes <= CLOSED_ONLY
+    water = bool(water_changes)
     for name in delta:
         test = name.startswith('v7-pipeline/test_') and '/' not in name[len('v7-pipeline/'):]
         if name not in CONTROL and not test and not name.startswith(WATER):
@@ -75,9 +98,10 @@ def validate_scope(delta, completed, scripts):
         entry = Path(receipt['invocation']['code']['path']).relative_to(scripts).as_posix()
         if not entry.startswith(UPSTREAM + WATER):
             raise ValueError('code upgrade has an unsupported completed producer: ' + entry)
-        if water and entry.startswith(WATER):
+        if water and entry.startswith(WATER) and not (closed_only and entry in BEFORE_CLOSED):
             raise ValueError('water code upgrade cannot reuse completed water checkpoints')
-    return water
+    # Closed-only changes cannot affect or invalidate a prior coastal batch.
+    return water and not closed_only
 
 
 def load(root, original, repo):

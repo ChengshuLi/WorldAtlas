@@ -47,7 +47,10 @@ run after an interruption, use the identical configuration, code and runtime:
       --allow-provisional-research --resume
 
 A committed downstream water fix can be applied before any water command has a
-completed checkpoint. Explicitly identify the old producer commit:
+completed checkpoint. A closed-water-only fix can also reuse explicitly listed
+earlier water stages, provided no closed-water or later stage is complete.
+Unknown producers and shared-code changes are rejected. Explicitly identify the
+old producer commit:
 
     /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
       /workspace/selection/config.json /workspace/runs/fresh-run \
@@ -56,17 +59,18 @@ completed checkpoint. Explicitly identify the old producer commit:
 The complete old scripts identity must match that git commit, and the complete
 new scripts identity must match the current committed `HEAD`. The request,
 sources, runtime and paths must remain unchanged. Only runner control/test files
-and downstream `v7-replay`/ocean code may change. Upstream/shared producer changes,
-unknown completed producers and water-code changes after any completed water
-checkpoint are rejected. Generated upstream requests must still be byte-identical.
+and downstream `v7-replay`/ocean code may change. Upstream/shared producer changes
+and unknown completed producers are rejected. After any completed water checkpoint,
+only the closed-water file domain may change, and only explicitly listed earlier
+producers may be reused. Generated upstream requests must still be byte-identical.
 
 An append-only `code-versions` chain records both commits, every changed code
 hash, unchanged checkpoint receipt pins and the timing-journal prefix. The
 original run identity and producer reports/receipts are not rewritten. New
 commands pin their own code version; the final report identifies both the
 original run and current version. Old partial coastal batches are preserved but
-not reused across a water-code upgrade. Subsequent ordinary `--resume` invocations
-validate this chain without needing the transition flag again. This is code
+not reused when a change could affect coastal production. Subsequent ordinary
+`--resume` invocations validate this chain without needing the transition flag again. This is code
 provenance, not scientific approval or a general migration of arbitrary changes.
 
 The runner takes an exclusive run lock and refuses to duplicate a still-running
