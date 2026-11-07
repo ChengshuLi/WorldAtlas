@@ -35,10 +35,11 @@ export default {
         },
       });
     }
-    if (!url.pathname.startsWith("/review/") || url.pathname.includes("%")) {
+    const sourcesAlias = url.pathname === "/v8.0/sources" || url.pathname === "/v8.0/sources.html";
+    if ((!url.pathname.startsWith("/review/") && !sourcesAlias) || url.pathname.includes("%")) {
       return new Response("Not found", { status: 404 });
     }
-    const key = url.pathname.slice(1);
+    const key = sourcesAlias ? "review/v8.0/sources.html" : url.pathname.slice(1);
     const rangeHeader = request.headers.get("Range");
     let range;
     if (rangeHeader) {
