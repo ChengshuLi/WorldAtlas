@@ -55,6 +55,33 @@ class OceanRunnerTests(unittest.TestCase):
     (root/(name+'r')).write_bytes(struct.pack('<5I',0,1,2,3,4));(root/(name+'u')).write_bytes(struct.pack('<8I',*[v for _ in range(4) for v in (10,code)]))
    r.run(s,'a'*64,root/'pr',root/'pu',root/'cr',root/'cu',root/'out',10,4,{},2)
    summary=json.loads((root/'out/run-summary.json').read_text());self.assertEqual(summary['unseeded_cell_count'],8);self.assertEqual(summary['assigned_cells_total'],32)
+ def test_spherical_rhumb_endpoints_and_constant_bearing(self):
+  import math
+  points=[(-29.4122,68.2254),(-23.1371290446,66.4303932484)]
+  dense=r.spherical_rhumb_points(points,1)
+  self.assertEqual((dense[0],dense[-1]),tuple(points))
+  def psi(lat):
+   p=math.radians(lat)
+   return math.asinh(math.tan(p))
+  mid=dense[len(dense)//2];t=(mid[0]-points[0][0])/(points[1][0]-points[0][0])
+  self.assertAlmostEqual(psi(mid[1]),psi(points[0][1])+t*(psi(points[1][1])-psi(points[0][1])),places=12)
+  self.assertEqual(r.spherical_rhumb_points([(0,30),(1,30)],1)[-1],(1,30))
+  for ends in [[(179,30),(-179,30)],[(0,90),(1,80)]]:
+   with self.assertRaises(ValueError):r.spherical_rhumb_points(ends,1)
+  with self.assertRaises(ValueError):r.spherical_rhumb_points(points,0)
+ def test_s130_published_rhumb_vertices(self):
+  # Source: IHO S-130 Ed.1.0.0 GML, M.1505 and M.1504.
+  import math
+  for first, middle, last in [
+   ((66.4303932484076,-23.137129044586),(67.3328552063905,-26.2331485568407),(68.2254,-29.4122)),
+   ((70.8287305424254,-9.04279190236343),(67.9535692712127,-11.4074756025156),(65.078408,-13.495404))]:
+   psi=lambda lat:math.asinh(math.tan(math.radians(lat)))
+   t=(middle[1]-first[1])/(last[1]-first[1])
+   self.assertAlmostEqual(psi(middle[0]),psi(first[0])+t*(psi(last[0])-psi(first[0])),places=12)
+ def test_rhumb_route_loader(self):
+  s=self.snapshot();s['routes'][0]['route_type']='spherical_rhumb';s['routes'][0]['parameters']={'max_step_km':'1'}
+  s['endpoints'][0]['latitude']='80';s['endpoints'][1]['latitude']='-80'
+  self.assertEqual(len(r.load_config(s,8,4)[1]),3)
  def test_geodesic_route_when_dependency_available(self):
   import importlib.util
   if importlib.util.find_spec('pyproj') is None:self.skipTest('pyproj is not installed')
