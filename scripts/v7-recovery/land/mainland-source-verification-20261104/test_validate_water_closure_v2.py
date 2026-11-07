@@ -105,6 +105,17 @@ class ContractValidation(unittest.TestCase):
    with self.assertRaisesRegex(ValueError,'producer evidence hash'): m.verify_producer_code(contract,c)
    report['grid']['width']=3; report_bytes=json.dumps(report).encode(); (base/'report.json').write_bytes(report_bytes); c['physical']['report_sha256']=hashlib.sha256(report_bytes).hexdigest()
    with self.assertRaisesRegex(ValueError,'grid mismatch'): m.verify_physical_report(base,c)
+ def test_v2_pins_absolute_producer_without_copying_code(self):
+  import hashlib,tempfile
+  with tempfile.TemporaryDirectory() as d:
+   base=Path(d);source=base/'source';source.mkdir();producer=source/'compose.py';producer.write_bytes(b'producer')
+   config=base/'contract';config.mkdir();path=config/'contract.json';c=self.make();c['schema']='physical-water-closure-contract-v2'
+   c['physical']['producer_code_path']=str(producer);c['physical']['encoding_evidence_sha256']=hashlib.sha256(producer.read_bytes()).hexdigest()
+   raw=json.dumps(c).encode();path.write_bytes(raw);m.load_contract(path,hashlib.sha256(raw).hexdigest())
+   self.assertEqual(m.verify_producer_code(path,c),producer);producer.write_bytes(b'tampered')
+   with self.assertRaisesRegex(ValueError,'producer evidence hash'):m.verify_producer_code(path,c)
+   c['physical']['producer_code_path']='relative.py';raw=json.dumps(c).encode();path.write_bytes(raw)
+   with self.assertRaisesRegex(ValueError,'absolute producer evidence path required'):m.load_contract(path,hashlib.sha256(raw).hexdigest())
  def test_historical_visit_setting_is_not_a_ceiling(self):
   c=self.make();c['resources']['max_cell_visits']=2000001
   self.load(c)

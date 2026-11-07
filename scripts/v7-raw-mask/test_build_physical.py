@@ -53,7 +53,7 @@ class PipelineTests(unittest.TestCase):
         with mock.patch.object(b.subprocess,'run',side_effect=download):b.run(self.config,out)
         report=json.loads((out/'report.json').read_text());self.assertEqual(report['staged_shard_count'],1)
         self.assertGreaterEqual(report['source_download_elapsed_seconds'],.05);self.assertGreaterEqual(report['processing_elapsed_seconds'],0)
-        self.assertFalse((out/'source-staging/00000.parquet').exists());self.assertFalse(shard.exists())
+        self.assertFalse((out/'source-staging'/shard.name).exists());self.assertFalse(shard.exists())
         self.assertEqual(report['physical_output_sha256']['runs.u32le'],b.sha(out/'physical/runs.u32le'))
         shard.write_bytes(content);local=self.root/'already-local'
         with mock.patch.object(b.subprocess,'run',side_effect=download):b.run(self.config,local)
@@ -74,7 +74,7 @@ class PipelineTests(unittest.TestCase):
             Path(args[args.index('--file')+1]).write_bytes(b'X'+content[1:])
         with mock.patch.object(b.subprocess,'run',side_effect=download):
             with self.assertRaisesRegex(ValueError,'size/hash mismatch'):b.run(self.config,out)
-        self.assertTrue((out/'source-staging/00000.parquet').exists());self.assertFalse((out/'report.json').exists())
+        self.assertTrue((out/'source-staging'/shard.name).exists());self.assertFalse((out/'report.json').exists())
     def test_end_to_end_without_reference(self):
         out=self.root/'out';b.run(self.config,out)
         report=json.loads((out/'report.json').read_text());self.assertEqual(report['status'],'candidate-only');self.assertEqual(report['shard_count'],1)

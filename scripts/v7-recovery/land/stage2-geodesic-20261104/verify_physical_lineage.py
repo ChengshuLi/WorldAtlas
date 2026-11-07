@@ -137,10 +137,14 @@ def _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report
  need(all(isinstance(x,str) and HEX.fullmatch(x) for x in (snapshot_sha256,physical_report_sha256,rows_sha256,runs_sha256)),'invalid expected hashes')
  need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and grid['width']>1 and type(grid['height']) is int and grid['height']>0 and grid['west']==-180 and grid['north']==90 and grid['step']==360/grid['width'] and 90-grid['height']*grid['step']>=-90-1e-8,'invalid expected grid')
  path=Path(request_path).resolve(strict=True);raw=path.read_bytes();req=json.loads(raw)
- need(set(req)=={'schema','inputs','code_root'} and req['schema']=='stage1-orchestrated-lineage-request-v1','invalid orchestrated lineage request')
- inp=req['inputs'];need(isinstance(inp,dict) and set(inp)=={'pipeline_report','osm_receipt','neon_selection','initial_events','resume_events','part18_receipt'},'invalid orchestrated input set')
- pipe,pp=read_pin(inp['pipeline_report'],guard);osm,_=read_pin(inp['osm_receipt'],guard);neon,_=read_pin(inp['neon_selection'],guard);part18,_=read_pin(inp['part18_receipt'],guard)
- initial=_events(inp['initial_events'],guard);resumed=_events(inp['resume_events'],guard)
+ need(set(req)=={'schema','inputs','code_root'} and req['schema'] in ('stage1-orchestrated-lineage-request-v1','stage1-raw-physical-lineage-request-v1'),'invalid orchestrated lineage request')
+ fresh=req['schema']=='stage1-raw-physical-lineage-request-v1'
+ expected={'pipeline_report','osm_receipt','neon_selection'}
+ if not fresh:expected|={'initial_events','resume_events','part18_receipt'}
+ inp=req['inputs'];need(isinstance(inp,dict) and set(inp)==expected,'invalid orchestrated input set')
+ pipe,pp=read_pin(inp['pipeline_report'],guard);osm,_=read_pin(inp['osm_receipt'],guard);neon,_=read_pin(inp['neon_selection'],guard)
+ if not fresh:
+  part18,_=read_pin(inp['part18_receipt'],guard);initial=_events(inp['initial_events'],guard);resumed=_events(inp['resume_events'],guard)
  need(pipe.get('status')=='candidate-only' and pipe.get('grid')==grid and pipe.get('shard_count')==32,'pipeline report mismatch')
  code_root=Path(req['code_root']).resolve(strict=True);need(code_root.is_dir(),'invalid code root')
  code=pipe.get('script_sha256');names={'build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/aggregate_compare.py','compose_physical.py'}
@@ -182,17 +186,18 @@ def _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report
  byname={Path(x['member']).name:x for x in members};pins={Path(x['path']).name:x for layer in landcfg['land'] for x in layer['files']};need(len(byname)==len(pins)==5 and set(byname)==set(pins),'OSM sidecar set mismatch')
  for name,pin in pins.items():
   m=byname[name];need(m.get('match') is True and m.get('archive_sha256')==m.get('local_sha256')==m.get('config_sha256')==pin['sha256'] and digest(pin['path'],guard)==pin['sha256'],'OSM sidecar mismatch: '+name)
- oldrows=[x for x in initial if x.get('event')=='shard_complete'];reusedrows=[x for x in resumed if x.get('event')=='reused_shard_checkpoint'];freshrows=[x for x in resumed if 'downloaded' in x]
- old={x.get('source_id'):x for x in oldrows};reused={x.get('source_id'):x for x in reusedrows};fresh={x.get('source_id'):x for x in freshrows}
- need(len(oldrows)==len(old)==18 and len(reusedrows)==len(reused)==18 and len(freshrows)==len(fresh)==14,'incomplete or duplicated event set')
+ if not fresh:
+  oldrows=[x for x in initial if x.get('event')=='shard_complete'];reusedrows=[x for x in resumed if x.get('event')=='reused_shard_checkpoint'];freshrows=[x for x in resumed if 'downloaded' in x]
+  old={x.get('source_id'):x for x in oldrows};reused={x.get('source_id'):x for x in reusedrows};freshrows_by_id={x.get('source_id'):x for x in freshrows}
+  need(len(oldrows)==len(old)==18 and len(reusedrows)==len(reused)==18 and len(freshrows)==len(freshrows_by_id)==14,'incomplete or duplicated event set')
  reportpins=[]
  for i,(item,sp) in enumerate(zip(files,union['shards'])):
   guard();source_id=item.get('source_id');live_row=liveby[('inland_water',i)];need(source_id==live_row['source_id'] and item.get('sha256')==live_row['sha256'] and str(item.get('size'))==str(live_row['size_bytes']) and item.get('r2_bucket')==live_row['r2_bucket'] and item.get('r2_key')==live_row['r2_key'],'source manifest/Neon mismatch')
   sr,_=read_pin(sp['report'],guard);need(sp.get('status')=='candidate-only' and sr.get('status')=='candidate-only' and sr.get('source_sha256')==item['sha256'] and Path(sr.get('source','')).name==Path(item['path']).name and sr.get('configuration_sha256')==pipe['water_config']['sha256'] and sr.get('script_sha256')==code['overture/rasterize_water_shard.py'] and sr.get('grid')==grid and sr.get('policy')==watercfg.get('policy') and sr.get('batch_size')==pipe.get('water_batch_size') and sr.get('output_sha256')==sp.get('sha256') and digest(sp['path'],guard)==sp['sha256'],'shard report/output mismatch: '+str(i))
-  if i<18:
+  if not fresh and i<18:
    e=old.get(source_id,{});re=reused.get(source_id,{});need(e.get('sha256')==item['sha256'] and e.get('size')==item['size'] and Path(e.get('source','')).name==Path(item['path']).name and e.get('output_sha256')==sp['sha256'] and re.get('source_sha256')==item['sha256'] and re.get('output_sha256')==sp['sha256'] and re.get('report_sha256')==sp['report']['sha256'],'checkpoint event mismatch')
-  else:
-   e=fresh.get(source_id,{});need(e.get('sha256')==item['sha256'] and e.get('size')==item['size'],'fresh staging event mismatch')
+  elif not fresh:
+   e=freshrows_by_id.get(source_id,{});need(e.get('sha256')==item['sha256'] and e.get('size')==item['size'],'fresh staging event mismatch')
    if i==18:need(e.get('downloaded') is False and part18.get('source_id')==source_id and part18.get('source_sha256')==item['sha256'] and part18.get('bytes')==item['size'] and part18.get('r2_key')==item['r2_key'] and part18.get('r2_bucket')==item['r2_bucket'] and part18.get('shard_report_sha256')==sp['report']['sha256'] and part18.get('output_sha256')==sp['sha256'] and part18.get('r2_readback')=='verified in this run','part18 receipt mismatch')
    else:need(e.get('downloaded') is True,'missing fresh R2 download assertion')
   reportpins.append(sp['report']['sha256'])
@@ -202,11 +207,13 @@ def _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report
  for name in names:need(digest(code_root/name,guard)==code[name],'pipeline code changed')
  for pin in pins.values():need(digest(pin['path'],guard)==pin['sha256'],'OSM sidecar changed')
  need(digest(path,guard)==hashlib.sha256(raw).hexdigest(),'lineage request changed')
- return {'schema':'stage1-lineage-and-selection-validation-v1','status':'selected-sources-match-reported-lineage','method':'orchestrated-report-chain-v1','request_sha256':hashlib.sha256(raw).hexdigest(),'snapshot_sha256':snapshot_sha256,'physical_report_sha256':physical_report_sha256,'physical_rows_sha256':rows_sha256,'physical_runs_sha256':runs_sha256,'shard_report_sha256':reportpins,'grid':grid,'limitations':['Report and receipt consistency, not independently authenticated provider claims or proof of geographic correctness.','The first 18 shards and land were reused from checked checkpoints; prior land producer code identity is an operator assertion, not an attestation.','The checker did not rerasterize raw sources; captured Neon and R2 observations are not cryptographic signatures.']}
+ limitations=['Report and receipt consistency, not independently authenticated provider claims or proof of geographic correctness.','The checker did not rerasterize raw sources; captured Neon and R2 observations are not cryptographic signatures.']
+ if not fresh:limitations.insert(1,'The first 18 shards and land were reused from checked checkpoints; prior land producer code identity is an operator assertion, not an attestation.')
+ return {'schema':'stage1-lineage-and-selection-validation-v1','status':'selected-sources-match-reported-lineage','method':'raw-physical-report-chain-v1' if fresh else 'orchestrated-report-chain-v1','request_sha256':hashlib.sha256(raw).hexdigest(),'snapshot_sha256':snapshot_sha256,'physical_report_sha256':physical_report_sha256,'physical_rows_sha256':rows_sha256,'physical_runs_sha256':runs_sha256,'shard_report_sha256':reportpins,'grid':grid,'limitations':limitations}
 
 
 def validate_combined(snapshot,snapshot_sha256,request_path,physical_report_sha256,rows_sha256,runs_sha256,grid,guard=lambda:None):
  with open(request_path,'rb') as f: schema=json.load(f).get('schema')
- if schema=='stage1-orchestrated-lineage-request-v1':
+ if schema in ('stage1-orchestrated-lineage-request-v1','stage1-raw-physical-lineage-request-v1'):
   return _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report_sha256,rows_sha256,runs_sha256,grid,guard)
  return _validate_legacy_combined(snapshot,snapshot_sha256,request_path,physical_report_sha256,rows_sha256,runs_sha256,grid,guard)

@@ -35,8 +35,8 @@ def coast_crop_bounds(box,width,height,step,latitude_pad,longitude_pad):
     return xa,xb,max(0,y0-yp),min(height,y1+yp)
 
 
-def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chunk=5000,verify_inputs=None,allow_selected_research=False,longitude_pad_degrees=None):
-    processing_started=time.perf_counter()
+def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chunk=5000,verify_inputs=None,allow_selected_research=False,longitude_pad_degrees=None,processing_started=None):
+    if processing_started is None:processing_started=time.perf_counter()
     x0,x1,y0,y1=box;step=360.0/width
     if not (0<=x0<x1<=width and 0<=y0<y1<=height) or chunk<=0:raise ValueError('invalid coastal tile')
     decision,pairs,tol,band,btol=core.policy(snapshot,allow_selected_research=allow_selected_research)
@@ -89,6 +89,7 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
 
 
 def main():
+    processing_started=time.perf_counter()
     ap=argparse.ArgumentParser(description=__doc__)
     for k in ('snapshot','snapshot-sha256','physical-rows','physical-rows-sha256','physical-runs','physical-runs-sha256','physical-report','physical-report-sha256',
               'land-rows','land-rows-sha256','land-runs','land-runs-sha256','land-report','land-report-sha256','input-root','out'):
@@ -118,7 +119,7 @@ def main():
         if any(sha(p)!=h for p,h in paths):raise ValueError('input changed during generation')
         check_lineage()
     m=run(snap,a.snapshot_sha256,open_grid(a.physical_rows,a.physical_runs,width,height),open_grid(a.land_rows,a.land_runs,width,height),
-          out,width,height,a.core,a.pad_degrees,inputs,verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy,longitude_pad_degrees=a.longitude_pad_degrees)
+          out,width,height,a.core,a.pad_degrees,inputs,verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy,longitude_pad_degrees=a.longitude_pad_degrees,processing_started=processing_started)
     print(json.dumps({'status':m['status'],'assigned_cells':m['assigned_cells'],'output':str(out)}))
 
 if __name__=='__main__':main()

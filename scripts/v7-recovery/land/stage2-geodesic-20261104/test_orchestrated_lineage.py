@@ -48,6 +48,34 @@ class OrchestratedLineageTests(unittest.TestCase):
   def jsonl(path,rows):path.write_text(''.join(json.dumps(x)+'\n' for x in rows));return {'path':str(path),'sha256':sha(path)}
   self.inputs={'pipeline_report':pp,'osm_receipt':osm_pin,'neon_selection':neo,'initial_events':jsonl(self.r/'old.jsonl',old),'resume_events':jsonl(self.r/'resume.jsonl',res),'part18_receipt':part};self.req={'schema':'stage1-orchestrated-lineage-request-v1','inputs':self.inputs,'code_root':str(self.code_root)};self.reqpath=self.r/'request.json';write(self.reqpath,self.req)
  def check(self):return v.validate_combined(self.snapshot,'a'*64,str(self.reqpath),self.pr['sha256'],self.out['rows.u32le'],self.out['runs.u32le'],self.grid)
+ def use_raw_physical_contract(self):
+  self.req={'schema':'stage1-raw-physical-lineage-request-v1','inputs':{k:self.inputs[k] for k in ('pipeline_report','osm_receipt','neon_selection')},'code_root':str(self.code_root)};write(self.reqpath,self.req)
+ def test_raw_physical_valid_without_historical_checkpoint_events(self):
+  self.use_raw_physical_contract();result=self.check()
+  self.assertEqual(result['method'],'raw-physical-report-chain-v1');self.assertEqual(len(result['shard_report_sha256']),32)
+  self.assertFalse(any('18 shards' in x for x in result['limitations']))
+ def test_raw_physical_rejects_changed_shard(self):
+  self.use_raw_physical_contract();(self.r/'output'/'shards'/'00005'/'water.tif').write_bytes(b'changed')
+  with self.assertRaises(ValueError):self.check()
+ def test_raw_physical_rejects_changed_code(self):
+  self.use_raw_physical_contract();(self.code_root/'build.py').write_bytes(b'changed')
+  with self.assertRaises(ValueError):self.check()
+ def test_raw_physical_rejects_changed_selection(self):
+  self.use_raw_physical_contract();self.snapshot['stage1_source_inputs'][3]['source_id']='other'
+  with self.assertRaises(ValueError):self.check()
+ def test_raw_physical_rejects_changed_source_evidence(self):
+  self.use_raw_physical_contract();p=Path(self.req['inputs']['neon_selection']['path']);doc=json.loads(p.read_text());doc['rows'][5]['sha256']='0'*64
+  self.req['inputs']['neon_selection']=write(p,doc);write(self.reqpath,self.req)
+  with self.assertRaises(ValueError):self.check()
+ def test_raw_physical_rejects_rehashed_wrong_filter_policy(self):
+  self.use_raw_physical_contract();srpath=self.r/'output'/'shards'/'00005'/'report.json';sr=json.loads(srpath.read_text());sr['policy']={'method':'wrong'};srpin=write(srpath,sr)
+  ucp=self.r/'output'/'union'/'config.json';uc=json.loads(ucp.read_text());uc['shards'][5]['report']=srpin;ucpin=write(ucp,uc)
+  urp=self.r/'output'/'union'/'report.json';ur=json.loads(urp.read_text());ur['configuration_sha256']=ucpin['sha256'];ur['shards']=uc['shards'];urpin=write(urp,ur)
+  pp=self.r/'output'/'report.json';report=json.loads(pp.read_text());report['stage_reports']['union']=urpin;self.req['inputs']['pipeline_report']=write(pp,report);write(self.reqpath,self.req)
+  with self.assertRaisesRegex(ValueError,'shard report/output mismatch'):self.check()
+ def test_raw_physical_rejects_unexpected_input(self):
+  self.use_raw_physical_contract();self.req['inputs']['initial_events']=self.inputs['initial_events'];write(self.reqpath,self.req)
+  with self.assertRaisesRegex(ValueError,'invalid orchestrated input set'):self.check()
  def test_valid(self):self.assertEqual(self.check()['method'],'orchestrated-report-chain-v1')
  def test_shard_tamper_rejected(self):
   (self.r/'output'/'shards'/'00005'/'water.tif').write_bytes(b'changed')

@@ -26,6 +26,18 @@ def load_json(spec,limit=32<<20):
  with p.open('rb') as f:b=f.read(limit+1)
  need(len(b)<=limit,'regional JSON exceeds limit');return json.loads(b)
 
+def load_pinned_module(name,path,digest):
+ module_name=('_worldatlas_regional_run_pair_'+digest) if name=='run_pair' else name
+ p=Path(path).resolve(strict=True);existing=sys.modules.get(module_name)
+ if existing is not None:
+  need(getattr(existing,'__file__',None) is not None and Path(existing.__file__).resolve()==p,'conflicting loaded regional module: '+name);return existing
+ spec=importlib.util.spec_from_file_location(module_name,p);need(spec and spec.loader,'regional module unavailable: '+name)
+ mod=importlib.util.module_from_spec(spec);sys.modules[module_name]=mod
+ try:spec.loader.exec_module(mod)
+ except BaseException:
+  sys.modules.pop(module_name,None);raise
+ return mod
+
 def modules_from_pins(code,policy):
  required=['regional_rule','component_scan','replay_adapter','geonames_anchors','satellite_geodesic','regional_workflow','regional_group_convention','source_groups','adapter','live_driver','point_prototype','run_pair','land_archive_source','polygon_intersection']
  need(isinstance(code,dict) and set(code)==set(required),'regional runtime code pins incomplete')
@@ -37,15 +49,10 @@ def modules_from_pins(code,policy):
  need(code['run_pair']['sha256']==policy['evidence']['wgs84_run_pair_sha256'] and code['point_prototype']['sha256']==policy['evidence']['point_prototype_sha256'],'WGS84 implementation pin mismatch')
  mods={}
  for name in required:
-  p=Path(code[name]['path']).resolve(strict=True);existing=sys.modules.get(name)
-  if existing is not None:
-   need(getattr(existing,'__file__',None) is not None and Path(existing.__file__).resolve()==p,'conflicting loaded regional module: '+name);mods[name]=existing;continue
-  spec=importlib.util.spec_from_file_location(name,p);need(spec and spec.loader,'regional module unavailable: '+name)
-  mod=importlib.util.module_from_spec(spec);sys.modules[name]=mod
-  try:spec.loader.exec_module(mod)
-  except BaseException:
-   sys.modules.pop(name,None);raise
-  mods[name]=mod
+  # WGS84 pair implementations may coexist with Stage 2's independently
+  # pinned implementation. Load the regional implementation by its own
+  # content-addressed module name rather than replacing a process-global name.
+  mods[name]=load_pinned_module(name,code[name]['path'],code[name]['sha256'])
  return mods
 
 def prepare(cfg,compiled,snapshot,reports,grid,inputs,mainland_roots,mixed_claims,*,snapshot_sha256):

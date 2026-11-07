@@ -56,8 +56,8 @@ def cover(boxes,width,height):
  if active:raise ValueError('unclosed tile bounds')
 
 
-def assemble(snapshot,snapshot_sha,entries,root,out,width,height,allow_selected_research=False):
- processing_started=time.perf_counter()
+def assemble(snapshot,snapshot_sha,entries,root,out,width,height,allow_selected_research=False,processing_started=None):
+ if processing_started is None:processing_started=time.perf_counter()
  decision,pairs,_,_,_=core.policy(snapshot,allow_selected_research=allow_selected_research)
  root=root.resolve();out=out.resolve()
  if not out.is_relative_to(root):raise ValueError('output manifest must be within input root')
@@ -98,6 +98,7 @@ def assemble(snapshot,snapshot_sha,entries,root,out,width,height,allow_selected_
 
 
 def main():
+ processing_started=time.perf_counter()
  p=argparse.ArgumentParser(description=__doc__)
  for k in ('snapshot','snapshot-sha256','input-root','tile-list','out'):p.add_argument('--'+k,required=True)
  p.add_argument('--allow-unverified-snapshot',action='store_true');p.add_argument('--allow-draft',action='store_true');p.add_argument('--allow-selected-research-policy',action='store_true')
@@ -108,7 +109,7 @@ def main():
  root=Path(a.input_root);config=Path(a.tile_list).resolve()
  if not config.is_relative_to(root.resolve()):raise ValueError('tile list outside input root')
  entries=json.loads(config.read_text())['tiles'];out=Path(a.out)
- result=assemble(snap,a.snapshot_sha256,entries,root,out,131072,54614,allow_selected_research=a.allow_selected_research_policy)
+ result=assemble(snap,a.snapshot_sha256,entries,root,out,131072,54614,allow_selected_research=a.allow_selected_research_policy,processing_started=processing_started)
  write_json_exclusive(out,result,indent=2)
  print(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'assigned_cells':result['assigned_cells']}))
 

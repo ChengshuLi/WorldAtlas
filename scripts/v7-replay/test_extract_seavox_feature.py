@@ -50,6 +50,18 @@ class ExtractTest(unittest.TestCase):
         self.assertEqual(manifest['decision_snapshot_sha256'],mod.digest(self.policy))
         with self.assertRaises(FileExistsError): self.run_main()
 
+    def test_fresh_output_inside_input_root(self):
+        self.args[-1]=str(self.root/'extracted')
+        self.run_main()
+        manifest=json.loads((self.root/'extracted/manifest.json').read_text())
+        self.assertEqual(manifest['feature_file_sha256'],mod.digest(self.root/'extracted/source.geojson'))
+        self.assertGreaterEqual(manifest['processing_elapsed_seconds'],0)
+
+    def test_output_cannot_replace_input_root(self):
+        self.args[-1]=str(self.root)
+        with self.assertRaises(FileExistsError):self.run_main()
+        self.assertTrue(self.archive.is_file())
+
     def test_mismatched_decision_geometry_fails_before_output(self):
         self.feature['geometry']={'type':'Polygon','coordinates':[[[0,0],[1,0],[0,1],[0,0]]]}
         with self.assertRaisesRegex(ValueError,'does not match'): self.run_main()

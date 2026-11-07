@@ -248,8 +248,8 @@ def write_assignments(db,path,decision_id,width,height):
 
 
 def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_rows,component_spans,barrier_edges,
-        out,width,height,pad,inputs,*,allow_selected_research=False,chunk=5000,verify_inputs=None):
- processing_started=time.perf_counter()
+        out,width,height,pad,inputs,*,allow_selected_research=False,chunk=5000,verify_inputs=None,processing_started=None):
+ if processing_started is None:processing_started=time.perf_counter()
  if chunk<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid chunk or halo')
  decision,pairs,tolerance=core.policy(snapshot,allow_selected_research=allow_selected_research)
  code_paths={'streaming_closed_water':Path(__file__),'partition_json_stream':Path(partition_json_stream.__file__),

@@ -17,7 +17,7 @@ import sys
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from exclusive_outputs import create_directory_exclusive, write_json_exclusive, create_text_exclusive
+from exclusive_outputs import create_directory_exclusive, write_json_exclusive, create_text_exclusive, validate_fresh_output
 from decision_snapshot import read_snapshot, find_basin, find_source
 from seavox_properties import feature_id as read_feature_id
 
@@ -76,7 +76,7 @@ def main():
     p.add_argument('--inspect-feature', help='candidate feature ID; print its geometry hash without writing output')
     p.add_argument('--archive-sha256', help='required in inspect mode')
     p.add_argument('--policy', type=Path); p.add_argument('--policy-sha256'); p.add_argument('--decision-id')
-    p.add_argument('--out', type=Path, help='new directory outside input root, required in build mode')
+    p.add_argument('--out', type=Path, help='fresh directory, required in build mode')
     p.add_argument('--allow-unverified-snapshot', action='store_true', help='test only; snapshot acceptance is not authenticated here')
     p.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow explicitly draft Neon evidence')
     args = p.parse_args()
@@ -95,9 +95,10 @@ def main():
         raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
     if not all((args.policy, args.policy_sha256, args.decision_id, args.out)):
         raise ValueError('build mode requires policy, its hash, decision ID, and output')
-    policy = args.policy.resolve(); out = args.out.resolve()
-    if not policy.is_relative_to(root) or out.is_relative_to(root) or root.is_relative_to(out):
-        raise ValueError('policy must be inside input root and output outside it')
+    policy = args.policy.resolve()
+    if not policy.is_relative_to(root):
+        raise ValueError('policy must be inside input root')
+    out=validate_fresh_output(root,args.out,(archive,policy))
     snapshot = read_snapshot(policy, args.policy_sha256, allow_draft=args.allow_draft_snapshot)
     basin = find_basin(snapshot, args.decision_id); source = find_source(snapshot, basin)
     if not basin.get('source_feature_id') or not basin.get('geometry_sha256'):
@@ -119,6 +120,8 @@ def main():
                 'source_version':basin['source_version'], 'source_feature_id':str(basin['source_feature_id']),
                 'archive_sha256':source['sha256'], 'geometry_sha256':geometry_hash, 'feature_file':feature_path.name,
                 'feature_file_sha256':digest(feature_path), 'gdal_version':gdal_version}
+    if digest(archive)!=source['sha256'] or digest(policy)!=args.policy_sha256:
+        raise ValueError('source archive or policy changed during extraction')
     manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'manifest.json', manifest, indent=2)
     print(json.dumps(manifest))

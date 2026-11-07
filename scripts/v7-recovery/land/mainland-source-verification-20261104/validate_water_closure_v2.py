@@ -21,7 +21,7 @@ def load_contract(path, expected_sha256):
     if actual != expected_sha256: raise ValueError('contract hash mismatch')
     c = json.loads(raw, object_pairs_hook=no_duplicate_keys, parse_float=bounded_decimal,
                    parse_constant=lambda x: (_ for _ in ()).throw(ValueError('non-finite number')))
-    if set(c) != {'schema','grid','physical','resources'} or c['schema'] != 'physical-water-closure-contract-v1': raise ValueError('unsupported contract')
+    if set(c) != {'schema','grid','physical','resources'} or c['schema'] not in ('physical-water-closure-contract-v1','physical-water-closure-contract-v2'): raise ValueError('unsupported contract')
     g, p, r = c['grid'], c['physical'], c['resources']
     if set(g) != {'crs','width','height','west','north','step_numerator','step_denominator'} or g['crs'] != 'EPSG:4326': raise ValueError('unsupported grid contract')
     if set(p) != {'rows_sha256','runs_sha256','water_code','land_code','report_sha256','encoding_evidence_sha256','producer_code_path'} or set(r) != {'max_cell_visits'}: raise ValueError('unsupported physical or resource contract')
@@ -39,7 +39,9 @@ def load_contract(path, expected_sha256):
     WATER=integer(p['water_code'],0,(1<<32)-1,'water code'); LAND=integer(p['land_code'],0,(1<<32)-1,'land code')
     if WATER == LAND: raise ValueError('water and land codes must differ')
     path=p['producer_code_path']
-    if not isinstance(path,str) or not path or Path(path).is_absolute() or '..' in Path(path).parts: raise ValueError('invalid producer evidence path')
+    if not isinstance(path,str) or not path: raise ValueError('invalid producer evidence path')
+    if c['schema']=='physical-water-closure-contract-v1' and (Path(path).is_absolute() or '..' in Path(path).parts): raise ValueError('invalid producer evidence path')
+    if c['schema']=='physical-water-closure-contract-v2' and not Path(path).is_absolute(): raise ValueError('absolute producer evidence path required')
     # Retain the historical field for contract compatibility; do not truncate checks.
     if type(r['max_cell_visits']) is not int or r['max_cell_visits']<1: raise ValueError('invalid historical visit setting')
     return actual, c
@@ -127,7 +129,7 @@ def geom_and_points(raw):
 def verify_producer_code(contract_path, contract):
     base=Path(contract_path).resolve().parent
     path=(base/contract['physical']['producer_code_path']).resolve()
-    if not path.is_relative_to(base): raise ValueError('producer evidence escapes contract directory')
+    if contract['schema']=='physical-water-closure-contract-v1' and not path.is_relative_to(base): raise ValueError('producer evidence escapes contract directory')
     if sha(path) != contract['physical']['encoding_evidence_sha256']: raise ValueError('producer evidence hash mismatch')
     return path
 

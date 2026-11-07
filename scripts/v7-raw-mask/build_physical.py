@@ -131,7 +131,7 @@ def run(manifest_path, output):
         if not path.is_file() and staging is not None:
             stage_dir=output/'source-staging';stage_dir.mkdir(mode=0o700,exist_ok=True)
             for name in ('cache','state','runtime'):(stage_dir/name).mkdir(mode=0o700,exist_ok=True)
-            staged=stage_dir/f'{i:05d}.parquet'
+            staged=stage_dir/path.name
             if staged.exists():raise ValueError('staging target already exists')
             env=os.environ.copy()
             env.update({key:str(stage_dir) for key in ('TMPDIR','TMP','TEMP','CPL_TMPDIR','SQLITE_TMPDIR')})

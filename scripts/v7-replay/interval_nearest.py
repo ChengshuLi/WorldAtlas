@@ -53,23 +53,24 @@ def classify_row(y,intervals,bounds,width,height,step,pairs,tol,indexes,*,leaf=1
   middle=(active[:,0]+active[:,1]-1)//2
   lon=-180+(middle+.5)*step;lats=np.full(len(middle),lat); points=s.unit(lats,lon)
   extent=MAX_RADIUS*math.cos(math.radians(lat))*np.deg2rad(step)*np.maximum(middle-active[:,0],active[:,1]-1-middle)+.01
-  lowers,best,upper=s.nearest_class_bounds(lats,lon,points,pairs,indexes)
-  lowers[np.arange(len(active)),best]=np.inf
+  lowers=[];uppers=[];stable=np.ones(len(active),bool)
+  for _,code,_ in pairs:
+   data,tree=indexes[code];chord,_=tree.query(points,k=1,workers=1)
+   angle=2*np.arcsin(np.clip(chord/2,0,1)); stable &= chord<1.99
+   lowers.append(np.maximum(0,s.MIN_RADIUS*angle-.01));uppers.append(MAX_RADIUS*angle+.01)
+  lowers=np.column_stack(lowers);uppers=np.column_stack(uppers)
+  best=np.argmin(uppers,axis=1);n=len(active);upper=uppers[np.arange(n),best]
+  lowers[np.arange(n),best]=np.inf
   boundary=s.boundary_lower(lats,lon,bounds,width,height,step)
-  good=(upper+2*extent+tol<lowers.min(axis=1))&(upper+2*extent+tol<boundary)
+  good=stable&(upper+2*extent+tol<lowers.min(axis=1))&(upper+2*extent+tol<boundary)
   for i in np.flatnonzero(good):
    a,b=map(int,active[i]);done.append((a,b,pairs[int(best[i])][2]));certified+=b-a
   todo=active[~good];small=todo[:,1]-todo[:,0]<=leaf
-  leaves=todo[small]
-  if len(leaves):
-   leaves=leaves[np.argsort(leaves[:,0])]
-   sizes=leaves[:,1]-leaves[:,0]
-   offsets=np.repeat(np.cumsum(sizes)-sizes,sizes)
-   xs=np.repeat(leaves[:,0],sizes)+np.arange(int(sizes.sum()))-offsets
-   codes,nb,ne=query(np.full(len(xs),lat),-180+(xs+.5)*step)
-   leafbounded+=nb;leafexact+=ne;leafcells+=len(xs)
-   cuts=np.r_[0,np.flatnonzero((np.diff(xs)>1)|(codes[1:]!=codes[:-1]))+1,len(xs)]
-   done.extend((int(xs[i]),int(xs[j-1])+1,int(codes[i])) for i,j in zip(cuts[:-1],cuts[1:]))
+  for a,b in todo[small]:
+   a=int(a);b=int(b);xs=np.arange(a,b,dtype=float); lats=np.full(len(xs),lat);lons=-180+(xs+.5)*step
+   codes,nb,ne=query(lats,lons);leafbounded+=nb;leafexact+=ne
+   cuts=np.r_[0,np.flatnonzero(np.diff(codes)!=0)+1,len(codes)]
+   done.extend((a+int(i),a+int(j),int(codes[i])) for i,j in zip(cuts[:-1],cuts[1:]));leafcells+=b-a
   parts=todo[~small];split+=len(parts)
   mid=(parts[:,0]+parts[:,1])//2
   active=np.concatenate((np.column_stack((parts[:,0],mid)),np.column_stack((mid,parts[:,1]))),axis=0)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Bounded-memory direct closed-water research stage."""
-import argparse,json
+import argparse,json,time
 from pathlib import Path
 import build_coastal_tile as base
 import closed_water_core as core
@@ -11,6 +11,7 @@ from direct_lineage import validate_physical_report,validate_direct_land
 
 
 def main():
+ processing_started=time.perf_counter()
  ap=argparse.ArgumentParser(description=__doc__)
  for k in ('snapshot','snapshot-sha256','physical-rows','physical-rows-sha256','physical-runs','physical-runs-sha256','physical-report','physical-report-sha256',
            'land-rows','land-rows-sha256','land-runs','land-runs-sha256','land-report','land-report-sha256',
@@ -64,7 +65,7 @@ def main():
  result=stream.run(snapshot,a.snapshot_sha256,base.open_grid(a.physical_rows,a.physical_runs,width,height),
    base.open_grid(a.prefill_rows,a.prefill_runs,width,height),base.open_grid(a.land_rows,a.land_runs,width,height),
    partition_path,a.component_rows,a.component_spans,a.barrier_edges,out,width,height,a.pad_degrees,inputs,
-   verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy)
+   verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy,processing_started=processing_started)
  print(json.dumps({'status':result['status'],'assigned':result['assigned_cells'],'pending':result['pending_cells'],'output':str(out)}))
 
 if __name__=='__main__':main()

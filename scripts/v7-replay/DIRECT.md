@@ -20,7 +20,14 @@ approval.
    physical inputs, baseline and code. Consumers validate those pins directly;
    no sidecar lineage repair or path relocation is supported. Rebuild requests
    and code pins after changing a producer. Diagnostic baselines remain explicitly
-   provisional and must pass their normal freeze gate.
+   provisional and must pass their normal freeze gate. The existing
+   `prepare_fresh_handoff.py` accepts a hash-pinned template and validates the
+   fresh Stage 2 report, derived manifest, outer request and code closure directly.
+   It emits current input/code pins, without a recovery-evidence sidecar or
+   an exact historical-template allowlist. Code dependencies use a fixed module
+   inventory with each policy hash checked at its canonical repository path; no
+   by-hash clone search or source-prefix relocation is performed. Regional and Stage 2 WGS84 modules
+   keep distinct, pinned identities without replacing each other in memory.
 3. `extract_seavox_feature.py` and `build_seavox_basin.py` produce each selected
    named basin. Shared basins also consume the fresh land streams. Use
    `--research-shore-method wgs84-coastal-4neighbor-center-v2` for WGS84
@@ -52,6 +59,12 @@ approval.
    outputs, validates their conservation and prepares the final plan.
    `compose_direct.py` checks disjoint full coverage and rejects overwrites,
    gaps and changed inputs before producing the final grid.
+7. `compare_grids.py` validates every row and compares all cells against explicit
+   reference rows/runs SHA-256 pins and dimensions. It reports exact changed-cell
+   pair counts, byte identity and both stream/combined hashes. A semantic mismatch
+   writes its comparison report and exits nonzero. Different valid RLE
+   segmentations can still have identical cells. No reference hashes are compiled
+   into the comparison code.
 
 All plan paths are relative to their document or absolute inside `--input-root`.
 Old workspace and `/tmp` prefixes are not remapped. Outputs must be new and must
@@ -76,7 +89,8 @@ reuse requires the existing partition-equivalence checks.
 ## Wall-clock timings
 
 Stage reports expose `processing_elapsed_seconds`, measured with a monotonic
-clock over the successful local processing invocation. Prepare/download inputs
+clock over the successful local processing invocation, including CLI preflight
+and integrity checks. Prepare/download inputs
 before these intervals; acquisition time is not processing time. A killed or
 interrupted attempt does not create a completed timing report. Stage 2 explicitly
 marks resumed checkpoints with prior work unmeasured; its successful invocation

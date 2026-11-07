@@ -72,13 +72,13 @@ def validate_plan(plan,width,height):
   boxes.append({'core':box,'latitude_pad_degrees':ypad,'longitude_pad_degrees':xpad})
  return boxes
 
-def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,check_metadata,*,metadata_pins):
+def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,check_metadata,*,metadata_pins,processing_started=None):
  """Generate partial research tiles; caller must authenticate objects and callback.
 
  Hash strings are caller assertions. Only the CLI validates pinned metadata and
  provides the required lineage callback; a completion record gates the batch.
  """
- processing_started=time.perf_counter()
+ if processing_started is None:processing_started=time.perf_counter()
  boxes=validate_plan(plan,width,height)
  names=('physical_rows','physical_runs','land_rows','land_runs')
  if set(paths)!=set(names) or set(pins)!=set(names):raise ValueError('four grid inputs required')
@@ -107,6 +107,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
 CODE_SHA=sha(Path(__file__))
 
 def main():
+ processing_started=time.perf_counter()
  ap=argparse.ArgumentParser(description=__doc__)
  for k in ('snapshot','snapshot-sha256','physical-rows','physical-rows-sha256','physical-runs','physical-runs-sha256','physical-report','physical-report-sha256','land-rows','land-rows-sha256','land-runs','land-runs-sha256','land-report','land-report-sha256','input-root','plan','plan-sha256','out'):ap.add_argument('--'+k,required=True)
  ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true');a=ap.parse_args()
@@ -121,7 +122,7 @@ def main():
   direct_lineage.validate_physical_report(files['physical_report'],expected['physical_report'],physical,width,height)
   direct_lineage.validate_direct_land(files['land_report'],expected['land_report'],physical,land,local_water_overlay.land_snapshot_hash(snapshot,expected['snapshot']),snapshot['decision_revision'],root,expected['physical_report'])
  grid={k:files[k] for k in ('physical_rows','physical_runs','land_rows','land_runs')};pins={k:expected[k] for k in grid}
- result=run_batch(snapshot,expected['snapshot'],grid,pins,plan,expected['plan'],out,width,height,check_metadata,metadata_pins={k:expected[k] for k in ('physical_report','land_report')})
+ result=run_batch(snapshot,expected['snapshot'],grid,pins,plan,expected['plan'],out,width,height,check_metadata,metadata_pins={k:expected[k] for k in ('physical_report','land_report')},processing_started=processing_started)
  print(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'output':str(out)}))
 if __name__=='__main__':main()
 

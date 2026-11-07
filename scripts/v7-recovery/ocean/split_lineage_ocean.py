@@ -4,7 +4,7 @@
 The snapshots are evidence, not authenticated Neon exports. No existing
 single-snapshot validation is weakened and no output is published.
 """
-import argparse, hashlib, json
+import argparse, hashlib, json, time
 from pathlib import Path
 import ocean_fill_runner as ocean
 import partition_core, rle_inputs, exclusive_outputs
@@ -83,6 +83,7 @@ def validate(ocean_snapshot, prefill_snapshot, prefill_sha, plan, audit, candida
 
 
 def main():
+    processing_started=time.perf_counter()
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('ocean-snapshot', 'ocean-snapshot-sha256', 'prefill-snapshot', 'prefill-snapshot-sha256',
                  'prefill-plan', 'prefill-dir', 'physical-rows', 'physical-runs',
@@ -137,7 +138,7 @@ def main():
     recheck()
     ocean.run(ocean_snapshot, hashes['ocean_snapshot'], files['physical_rows'], files['physical_runs'],
               files['prefill_rows'], files['prefill_runs'], out, width, height, pins,
-              allow_draft=True, software_versions=candidate.get('software_versions', {}), pre_finalize=recheck, pre_summary=recheck)
+              allow_draft=True, software_versions=candidate.get('software_versions', {}), pre_finalize=recheck, pre_summary=recheck, processing_started=processing_started)
     try:
         recheck()
     except Exception:

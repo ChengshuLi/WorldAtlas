@@ -6,8 +6,19 @@ import runpy
 
 import closure_client
 import region_client
+import seed_producer
 
 class DirectSeedExecutionTests(unittest.TestCase):
+ def test_new_checker_pair_requires_provisional_mode(self):
+  pins={k:{'sha256':v} for k,v in seed_producer.TRUSTED_CODE.items()}
+  pins['closure_checker']['sha256']=seed_producer.PROVISIONAL_CLOSURE_CHECKER
+  pins['terminal_checker']={'sha256':seed_producer.PROVISIONAL_TERMINAL_CHECKER}
+  with self.assertRaisesRegex(ValueError,'unreviewed'):seed_producer.validate_executable_pins(pins,False)
+  seed_producer.validate_executable_pins(pins,True)
+  with self.assertRaisesRegex(ValueError,'local provisional snapshot'):seed_producer.validate_provisional_checker_source(pins,{'source':'neon-export'},True)
+  seed_producer.validate_provisional_checker_source(pins,{'source':'local-derived-from-neon-export'},True)
+  pins['closure_checker']['sha256']='0'*64
+  with self.assertRaisesRegex(ValueError,'unreviewed'):seed_producer.validate_executable_pins(pins,True)
  def test_region_worker_is_invoked_in_process_and_code_is_bound(self):
   with tempfile.TemporaryDirectory() as td, tempfile.TemporaryDirectory() as wd:
    root=Path(td);work=Path(wd);physical=root/'physical';physical.mkdir();contract=root/'contract.json';contract.write_text('{}');checker=root/'checker.py';checker.write_text('pass')

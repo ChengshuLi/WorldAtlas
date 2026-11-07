@@ -26,14 +26,15 @@ class Fixture:
  def config_update(self):
   self.cfgspec=self.obj('request.json',self.cfg);self.set_lineage({'schema':'water-selected-mixed-lineage-v1','request':self.cfgspec,'snapshot_origin':{'kind':'direct','source_snapshot':self.snap}});self.report['request_sha256']=self.cfgspec['sha256']
  def diagnostic(self):
-  launcher=self.file('seed_worker.py',b'launcher');derived=self.obj('derived.json',{'code_sha256':{'seed-producer/seed_worker.py':launcher['sha256']}});self.cfg['stage2']['derived_manifest']=derived
-  spec=self.cfg['stage2']['report'];stage2=json.loads(Path(spec['path']).read_text());stage2.update(status='stage2-provisional-only',provisional_only=True,config_sha256='d'*64,orchestration={'provisional_only':True,'derived_manifest':derived});stage2['inputs_sha256']['seed_report']='f'*64;spec=self.obj('stage2.json',stage2);self.cfg['stage2']['report']=spec
-  self.cfg.update(schema='stage3-provisional-diagnostic-request-v1',diagnostic_only=True,publishable=False);self.cfg['stage2_recovery_evidence']=self.obj('repair.json',{'schema':'stage2-fresh-provisional-handoff-v1','status':'same-run-launcher-bound-by-derived-manifest','core_config_sha256':'d'*64,'derived_manifest_sha256':derived['sha256'],'seed_report_sha256':'f'*64,'launcher':launcher});self.cfg['regional']['request'].update(profiling_standin=True,pending_inventory_complete=False);self.cfg['policy_pins']['baseline_report_sha256']=spec['sha256']
+  seed=self.obj('seed-report.json',{'status':'candidate-only'});outer=self.obj('outer.json',{'schema':'stage2-fresh-orchestration-v1'});code={'orchestrate_stage2.py':'d'*64,'seed-producer/seed_worker.py':'e'*64};derived=self.obj('derived.json',{'schema':'stage2-fresh-derived-v1','provisional_only':True,'outer_config_sha256':outer['sha256'],'orchestrator_sha256':'d'*64,'code_sha256':code,'artifacts':{'seed_report':seed}});self.cfg['stage2'].update(derived_manifest=derived,outer_config=outer)
+  spec=self.cfg['stage2']['report'];stage2=json.loads(Path(spec['path']).read_text());stage2.update(status='stage2-provisional-only',provisional_only=True,config_sha256='d'*64,code_sha256={'build_stage2.py':'a'*64},dependency_sha256={'contracts.py':'b'*64},seed_report_sha256=seed['sha256'],orchestration={'provisional_only':True,'derived_manifest':derived,'outer_config_sha256':outer['sha256'],'orchestrator_sha256':'d'*64});stage2['inputs_sha256']['seed_report']=seed['sha256'];spec=self.obj('stage2.json',stage2);self.cfg['stage2']['report']=spec
+  self.cfg['stage2_approval']=self.obj('approval.json',{'validator_sha256':'b'*64,'approved_code':{'orchestration_files':code,'core_files':stage2['code_sha256'],'dependency_files':stage2['dependency_sha256']}})
+  self.cfg.update(schema='stage3-provisional-diagnostic-request-v1',diagnostic_only=True,publishable=False);self.cfg['regional']['request'].update(profiling_standin=True,pending_inventory_complete=False);self.cfg['policy_pins']['baseline_report_sha256']=spec['sha256']
   sp=self.report['policy']['policy'];pins=self.cfg['policy_pins'];self.report.update(schema='stage3-provisional-diagnostic-land-report-v1',status='provisional-profiling-only-not-publishable',publishable=False,provisional_only=True)
   self.report['baseline_validation'].update(status='provisional-diagnostic-candidate-bound',report_sha256=spec['sha256'],original_report_status='stage2-provisional-only',provisional_only=True,publishable=False)
   self.report['regional_island_rule'].update(status='research-profiling-standin');self.report['regional_island_rule']['provenance']['profiling_standin']=True;self.report['regional_island_rule']['provenance']['pending_inventory_complete']=False
   self.report['policy']['diagnostic_binding']={'actual_baseline_pins':dict(pins),'original_policy_baseline_revision':sp['baseline_revision'],'original_policy_pins':{k:sp.get(k) for k in pins}}
-  self.report['diagnostic_provenance']={'stage2_recovery_evidence':self.cfg['stage2_recovery_evidence'],'actual_baseline_pins':dict(pins),'list1_policy_original':sp,'stage2':self.cfg['stage2'],'stage2_report_schema':'stage2-source-geodesic-report-v1','stage2_report_status':'stage2-provisional-only','stage2_provisional_only':True,'stage2_publishable':False,'list1_snapshot':self.snap,'profiling_standin':True,'pending_inventory_complete':False,'stage2_snapshot_source':'local-derived-from-neon-export','list1_snapshot_source':'neon-export'}
+  self.report['diagnostic_provenance']={'actual_baseline_pins':dict(pins),'list1_policy_original':sp,'stage2':self.cfg['stage2'],'stage2_report_schema':'stage2-source-geodesic-report-v1','stage2_report_status':'stage2-provisional-only','stage2_provisional_only':True,'stage2_publishable':False,'list1_snapshot':self.snap,'profiling_standin':True,'pending_inventory_complete':False,'stage2_snapshot_source':'local-derived-from-neon-export','list1_snapshot_source':'neon-export'}
   self.config_update();self.set_lineage({'schema':'water-selected-mixed-lineage-v1','request':self.cfgspec,'mode':'explicit-provisional-diagnostic','snapshot_origin':{'kind':'direct','source_snapshot':self.snap}})
 class TestMixed(unittest.TestCase):
  def setUp(self):self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.f=Fixture(self.tmp.name)
@@ -51,12 +52,15 @@ class TestMixed(unittest.TestCase):
  def test_derived_manifest_tamper_rejected(self):
   self.f.diagnostic();Path(self.f.cfg['stage2']['derived_manifest']['path']).write_text('{}')
   with self.assertRaisesRegex(ValueError,'hash mismatch'):self.f.check()
- def test_launcher_tamper_rejected(self):
-  self.f.diagnostic();Path(json.loads(Path(self.f.cfg['stage2_recovery_evidence']['path']).read_text())['launcher']['path']).write_text('tamper')
+ def test_derived_artifact_tamper_rejected(self):
+  self.f.diagnostic();derived=json.loads(Path(self.f.cfg['stage2']['derived_manifest']['path']).read_text());Path(derived['artifacts']['seed_report']['path']).write_text('tamper')
   with self.assertRaisesRegex(ValueError,'hash mismatch'):self.f.check()
- def test_recovery_evidence_tamper_rejected(self):
-  self.f.diagnostic();Path(self.f.cfg['stage2_recovery_evidence']['path']).write_text('{}')
+ def test_outer_config_tamper_rejected(self):
+  self.f.diagnostic();Path(self.f.cfg['stage2']['outer_config']['path']).write_text('{}')
   with self.assertRaisesRegex(ValueError,'hash mismatch'):self.f.check()
+ def test_orchestration_code_closure_mismatch_rejected(self):
+  self.f.diagnostic();spec=self.f.cfg['stage2_approval'];approval=json.loads(Path(spec['path']).read_text());approval['approved_code']['orchestration_files']['seed-producer/seed_worker.py']='0'*64;self.f.cfg['stage2_approval']=self.f.obj('approval.json',approval);self.f.config_update();self.f.report['input_lineage']['mode']='explicit-provisional-diagnostic'
+  with self.assertRaisesRegex(ValueError,'intrinsic orchestration'):self.f.check()
  def test_diagnostic_baseline_pin_spoof_rejected(self):
   self.f.diagnostic();self.f.report['policy']['diagnostic_binding']['actual_baseline_pins']['baseline_runs_sha256']='0'*64
   with self.assertRaisesRegex(ValueError,'provenance'):self.f.check()
@@ -74,12 +78,9 @@ class TestMixed(unittest.TestCase):
  def test_incomplete_inventory_rejected(self):
   self.f.cfg['regional']['request']['pending_inventory_complete']=False;self.f.config_update()
   with self.assertRaisesRegex(ValueError,'profiling'):self.f.check()
- def test_local_derived_origin(self):
-  source=json.loads(Path(self.f.snap['path']).read_text());source['list1_policy']['baseline_revision']='older';source['list1_policy']['baseline_rows_sha256']='0'*64;sp=self.f.obj('neon-source.json',source)
-  self.f.set_lineage({'schema':'water-selected-mixed-lineage-v1','request':self.f.cfgspec,'snapshot_origin':{'kind':'local-derived-baseline-pin-refresh-v1','source_snapshot':sp}})
-  self.assertEqual(self.f.check()['regional_snapshot_origin'],'local-derived-baseline-pin-refresh-v1')
-  source['extra_unrelated_change']=True;sp=self.f.obj('neon-source.json',source);self.f.set_lineage({'schema':'water-selected-mixed-lineage-v1','request':self.f.cfgspec,'snapshot_origin':{'kind':'local-derived-baseline-pin-refresh-v1','source_snapshot':sp}})
-  with self.assertRaisesRegex(ValueError,'outside baseline'):self.f.check()
+ def test_unproduced_snapshot_refresh_rejected(self):
+  self.f.set_lineage({'schema':'water-selected-mixed-lineage-v1','request':self.f.cfgspec,'snapshot_origin':{'kind':'local-derived-baseline-pin-refresh-v1','source_snapshot':self.f.snap}})
+  with self.assertRaisesRegex(ValueError,'unknown regional snapshot origin'):self.f.check()
  def test_spherical_stage2_rejected(self):
   spec=self.f.cfg['stage2']['report']; obj=json.loads(Path(spec['path']).read_text());obj['distance_policy']['algorithm']='spherical';updated=self.f.obj('stage2.json',obj);self.f.cfg['stage2']['report']=updated;self.f.config_update()
   with self.assertRaisesRegex(ValueError,'WGS84'):self.f.check()

@@ -1,4 +1,4 @@
-import errno,fcntl,hashlib,json,os,tempfile,unittest
+import errno,fcntl,hashlib,json,os,tempfile,time,unittest
 from pathlib import Path
 from unittest import mock
 import numpy as np
@@ -19,6 +19,9 @@ class BatchTest(unittest.TestCase):
   self.assertEqual(copies.call_count,4);self.assertEqual(self.calls,2);self.assertEqual(len(result['tiles']),2);self.assertTrue((self.d/'batch/batch-complete.json').is_file());self.assertEqual(result['status'],'complete-research-not-published')
   for x in result['tiles']:
    p=self.d/'batch'/('tile-%04d'%x['tile'])/'manifest.json';self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),x['manifest_sha256']);self.assertEqual(json.loads(p.read_bytes())['status'],'partial-unverified-research-not-published')
+ def test_caller_timer_includes_preflight(self):
+  result=self.run_batch(processing_started=time.perf_counter()-5)
+  self.assertGreaterEqual(result['processing_elapsed_seconds'],5)
  def test_independent_tile_halos_and_elapsed_time(self):
   self.plan={'tiles':[{'core':[7,9,3,4],'latitude_pad_degrees':30,'longitude_pad_degrees':180}], 'chunk':10}
   result=self.run_batch()

@@ -1,0 +1,96 @@
+{
+  "schema": "worldatlas-end-to-end-pipeline-v1",
+  "research_only": true,
+  "selection_notes": "Replace with selected official source versions and research decision context.",
+  "input_root": "/workspace",
+  "sources": {
+    "land_config": {
+      "path": "/workspace/inputs/land_config.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "water_config": {
+      "path": "/workspace/inputs/water_config.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "raw_manifest": {
+      "path": "/workspace/inputs/raw_manifest.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "land_snapshot": {
+      "path": "/workspace/inputs/land_snapshot.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "resolution_template": {
+      "path": "/workspace/inputs/resolution_template.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "regional_template": {
+      "path": "/workspace/inputs/regional_template.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "water_snapshot": {
+      "path": "/workspace/inputs/water_snapshot.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "seavox_archive": {
+      "path": "/workspace/inputs/seavox-v19.zip",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "coastal_plan": {
+      "path": "/workspace/inputs/coastal_plan.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "neon_selection": {
+      "path": "/workspace/inputs/neon_selection.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "osm_receipt": {
+      "path": "/workspace/inputs/osm_receipt.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "prior_physical_report": {
+      "path": "/workspace/inputs/prior_physical_report.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "ocean_snapshot": {
+      "path": "/workspace/inputs/ocean_snapshot.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "reference_rows": {
+      "path": "/workspace/reference/rows.u32le",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "reference_runs": {
+      "path": "/workspace/reference/runs.u32le",
+      "sha256": "REPLACE_WITH_SHA256"
+    }
+  },
+  "physical_controls": {
+    "minimum_free_bytes": 2147483648,
+    "max_parallel_shards": 1,
+    "union_rows_per_block": 512,
+    "physical_rows_per_block": 512,
+    "source_staging": {
+      "mode": "wrangler-r2",
+      "wrangler_path": "/workspace/tools/node_modules/.bin/wrangler",
+      "wrangler_config": "/workspace/config/wrangler.jsonc"
+    }
+  },
+  "land_policy": {
+    "id": "worldatlas-wgs84-geodesic",
+    "version": "1"
+  },
+  "land_controls": {
+    "block_records": 10000,
+    "checkpoint_seconds": 30,
+    "chunk_columns": 1024,
+    "minimum_free_bytes": 2147483648,
+    "numerical_guard_metres": 1000
+  },
+  "seed_controls": {
+    "strip_rows": 64
+  },
+  "basin_workers": 2,
+  "shore_pad_degrees": 8,
+  "closed_pad_degrees": 8
+}
