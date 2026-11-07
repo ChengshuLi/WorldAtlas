@@ -1210,5 +1210,62 @@
       }
     ],
     "method": "Fresh remote GET streamed and hashed; local ZIP hashed separately; each run sidecar and matching local ZIP member independently hashed. The rasterizer read extracted local sidecars, not the R2 ZIP. SHA-256 collision resistance links the identical ZIP bytes."
+  },
+  "v24_local_replacement_geometries": {
+    "status": "r2-readback-matched; neon-source-recorded; unverified-research-not-accepted",
+    "snapshot_sha256": "2872d32290538bc9a9b2fd5fb1311930a6d8f04865ddd07d47b76e5fe9090981",
+    "limitation": "These preserve used research inputs; their source-construction lineage remains incomplete. The closure is stored as source evidence, not a normalized selected closure decision. No geography was accepted.",
+    "files": [
+      {
+        "source_id": "v24-ural-spring-boundary",
+        "version": "candidate-746e6a85b05e",
+        "sha256": "746e6a85b05e40994e451e49e7df6333b8816dfe1d6624d9c20f9c669e953b32",
+        "size_bytes": 1169579,
+        "r2_bucket": "worldatlas",
+        "r2_key": "sources/derived/v24-research/746e6a85b05e40994e451e49e7df6333b8816dfe1d6624d9c20f9c669e953b32.geojson",
+        "neon_geometry_revision": "ural-spring-geodesic-20261106"
+      },
+      {
+        "source_id": "v24-caucasus-boundary",
+        "version": "candidate-3be87f6ec29b",
+        "sha256": "3be87f6ec29be709a07c07c04ce62b6fb00e33f6b35020781a088be5b2d8e8b9",
+        "size_bytes": 375303,
+        "r2_bucket": "worldatlas",
+        "r2_key": "sources/derived/v24-research/3be87f6ec29be709a07c07c04ce62b6fb00e33f6b35020781a088be5b2d8e8b9.geojson",
+        "neon_geometry_revision": "v2-land-mainland-boundary-draft-1"
+      },
+      {
+        "source_id": "v24-europe-exterior-closure",
+        "version": "candidate-248e4ab8371b",
+        "sha256": "248e4ab8371b604affd97730c4c9c19f3ca9335d1d92eb0f3596a77f3c363392",
+        "size_bytes": 199813,
+        "r2_bucket": "worldatlas",
+        "r2_key": "sources/derived/v24-research/248e4ab8371b604affd97730c4c9c19f3ca9335d1d92eb0f3596a77f3c363392.geojson",
+        "neon_geometry_revision": null
+      }
+    ],
+    "neon_source_dependencies": [
+      {
+        "source_id": "v24-europe-exterior-closure",
+        "parent_source_id": "v24-ural-spring-boundary",
+        "relationship": "closure_start_terminal_boundary"
+      },
+      {
+        "source_id": "v24-europe-exterior-closure",
+        "parent_source_id": "v24-caucasus-boundary",
+        "relationship": "closure_end_terminal_boundary"
+      }
+    ],
+    "terminal_verification": "Both closure endpoints exactly match the respective boundary start coordinates in the retained v24 snapshot. These are partial lineage only."
+  },
+  "v24_iceland_ocean_source": {
+    "source_id": "iho-s130-global-sea-areas",
+    "version": "1.0.0-44997a24a4fe",
+    "r2_bucket": "worldatlas",
+    "r2_key": "sources/iho/s130/1.0.0/S-130-44997a24a4fe.zip",
+    "sha256": "44997a24a4fe83256cce1ef2b28588f46c9c2b7f1036a78bdb39283c5c0a76de",
+    "size_bytes": 13861201,
+    "status": "fresh-r2-stream-match",
+    "limitation": "Referenced by the v24 Iceland ocean snapshot; has no explicit source-asset foreign key. This check verifies custody, not geographical authority."
   }
 }

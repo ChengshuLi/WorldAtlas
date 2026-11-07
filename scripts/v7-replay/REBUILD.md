@@ -37,3 +37,16 @@ polygon-custody report, plus the physical OSM land archive and its five run
 sidecars. All matched the checked size and SHA-256 pins. The 32 Overture
 shards are verified separately by the physical rerun. This scoped check does
 not enumerate every source or decision and is not a geographic review.
+
+The three locally derived v24 boundary and closure inputs are preserved under
+content-addressed R2 keys and in private Neon source records, with byte-checked
+R2 readbacks. The Ural and Caucasus pins also match draft Neon boundary rows.
+The closure's geometry is stored as source evidence, not a normalized selected
+closure revision. All three remain unverified research and their construction
+lineage is incomplete; preserving them does not accept the geography.
+The Neon source graph now also records the closure's Ural start and Caucasus
+end boundary dependencies, verified against the retained snapshot endpoints.
+Those two edges are not a complete construction graph.
+The Iceland ocean snapshot also references the IHO S-130 source. A fresh R2
+stream matched its Neon size and SHA-256; the absence of a source-asset foreign
+key alone is not evidence that this source is unused.
