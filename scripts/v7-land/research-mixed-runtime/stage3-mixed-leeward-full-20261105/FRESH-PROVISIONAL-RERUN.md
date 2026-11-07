@@ -22,7 +22,7 @@ python prepare_fresh_handoff.py \
   --stage2-output /path/to/completed-stage2-output \
   --destination /path/to/new-preparation-directory \
   --regional-output /path/to/new-regional-output
-python apply_selected_mixed.py /path/to/new-preparation-directory/config.json
+PROJ_NETWORK=OFF python apply_selected_mixed.py /path/to/new-preparation-directory/config.json
 ```
 
 The exact template SHA-256 is `4668cac041f0dee1257c95a9e60c46d34fff53ffb5ab0010ec3647e114d909d0`.
@@ -52,3 +52,8 @@ geography.
 - Local-derived policy: `v24-regional-policy`, SHA-256 `1cae6df25a1f33ff557a4d93c90c4fdc3724983a3268801ae9621fe3f757840d`.
 - Regional line: `v24-regional-lydekker-line`, SHA-256 `cbb4508245942a2586bf37279570b55c7b2382c15268b311c0c2ddf3d96dbcd2`.
 - Empty pending stand-in: `v24-regional-pending-standin`, SHA-256 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`. Its emptiness does not establish that there are no pending claims.
+
+The regional Bering calculation requires PROJ network access disabled and the
+exact pinned active PROJ database. For the recorded v24 environment,
+`/usr/share/proj/proj.db` has SHA-256
+`8bbb2ea3a88c44383f51e205755c32bff09b8aff7937eca001a1cd519714be60`.
