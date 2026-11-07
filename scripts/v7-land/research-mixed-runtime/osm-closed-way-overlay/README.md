@@ -1,0 +1,9 @@
+# Closed-way research overlay
+
+This code-only research overlay extends the no-host-floor mixed-runtime prototype with the separately reviewed OSM map-export relation contract and a named closed-way all-center containment selector. It is not a selected geography decision or an accepted map. Source XML, geographic decisions, reports and diagnostic outputs are supplied separately from authorized R2/Neon custody and do not belong in this directory.
+
+Apply these files to the corresponding mixed-runtime working copy alongside its existing dependencies, use the no-host-floor point runtime and independent process-group/disk guard, and update every code pin in the runtime request. The new `osm_closed_way` pin must match the extractor bytes. Existing source evidence remains bound to the code that produced it; regenerate and independently monitor source resolution and full output under the new hashes. This overlay does not make older reports evidence for a new build.
+
+The way extractor accepts a specifically pinned OSM map export, checks source hash, way/version/tags, complete closed node membership and export bounds, and reconstructs geometry at runtime. Containment applies only to current-generation physical components whose every cell center lies within the single selected polygon; the caller must protect mainland components, authenticate source custody and validate the selected interpretation independently. The catalog readback assertion is not cryptographic proof of provider origin or historical source-byte equivalence.
+
+Synthetic regression tests are `test_osm_closed_way.py`, `test_way_contract.py`, and `test_mixed_driver.py`; they run with the existing mixed-runtime test suite. A complete monitored build and independent output verification remain required before any map change.

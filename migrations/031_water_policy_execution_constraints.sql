@@ -1,0 +1,2 @@
+ALTER TABLE atlas.decision_ocean_fill_policies ADD CONSTRAINT ocean_policy_execution_status_required CHECK (COALESCE(evidence->>'execution_status','') IN ('selected_for_research','research_only_not_selected'));
+ALTER TABLE atlas.decision_water_assignment_policies ADD CONSTRAINT water_policy_execution_status_required CHECK (COALESCE(evidence->>'execution_status','') IN ('selected_for_research','research_only_not_selected'));

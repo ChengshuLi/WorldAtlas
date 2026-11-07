@@ -1,0 +1,74 @@
+import copy,hashlib,tempfile,unittest
+from pathlib import Path
+from entry_evidence import resolve
+class EvidenceTests(unittest.TestCase):
+ def setUp(self):
+  self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);self.p=Path(self.t.name)/'article';self.p.write_bytes(b'Human-reviewed text')
+  pin={'source_id':'article','version':'v1','sha256':hashlib.sha256(self.p.read_bytes()).hexdigest(),'size_bytes':self.p.stat().st_size,'r2_bucket':'b','r2_key':'k'}
+  self.s={'sources':[pin],'source_lineage_assets':[{**pin,'kind':'raw','provenance':{'representation':'provider_original'},'source_uri':'https://example.org/article','provider':'Journal','attribution':'Author','license_name':'CC BY','license_uri':'https://example.org/license'}], 'list1_entry_evidence_sources':[{'decision_revision':'r','entry_id':'e','role':'geographic_membership_evidence','source_id':'article','source_version':'v1','citation_section':'Study area','interpretation':'Yamdena is in Wallacea','limitations':['Human inference; not geometry']}]};self.s['source_lineage_dependencies']=[];self.c={'entry_ids':['e'],'revision':'r'};self.f=[{**pin,'path':str(self.p)}]
+ def runv(self):return resolve(self.s,self.c,self.f)
+ def test_trace_and_byte_authentication(self):
+  x=self.runv()['e'][0];self.assertEqual(x['interpretation_status'],'selected_interpretation');self.assertEqual(x['citation_section'],'Study area');self.assertEqual(x['source_uri'],'https://example.org/article')
+ def test_tampering_fails(self):
+  self.p.write_bytes(b'bad');self.assertRaises(ValueError,self.runv)
+ def test_orphan_revision_duplicate_extra_fail(self):
+  orig=copy.deepcopy(self.s)
+  for mutate in (lambda x:x['list1_entry_evidence_sources'][0].update(entry_id='unknown'),lambda x:x['list1_entry_evidence_sources'][0].update(decision_revision='other'),lambda x:x['list1_entry_evidence_sources'].append(copy.deepcopy(x['list1_entry_evidence_sources'][0])),lambda x:x['source_lineage_assets'][0].update(r2_key='other'),lambda x:x['source_lineage_assets'][0]['provenance'].update(representation='derived'),lambda x:x['source_lineage_dependencies'].append({'source_id':'article','version':'v1'})):
+   self.s=copy.deepcopy(orig);mutate(self.s);self.assertRaises(ValueError,self.runv)
+  self.s=orig;self.f.append({**self.f[0],'source_id':'extra'});self.assertRaises(ValueError,self.runv)
+ def test_empty_links_allow_no_files(self):
+  self.s['list1_entry_evidence_sources']=[];self.assertEqual(resolve(self.s,self.c,[]),{'e':[]})
+
+class CapturedEvidenceTests(EvidenceTests):
+ def test_recorded_representation_and_provenance_preserved(self):
+  for kind in ('official-repository capture','official-repository original','HTML source capture'):
+   provenance={'representation':kind,'verification':'Direct capture; private readback compared','reuse_terms':'Rights reserved; no redistribution asserted'};self.s['source_lineage_assets'][0]['provenance']=provenance
+   result=self.runv()['e'][0];self.assertEqual(result['source_representation'],kind);self.assertEqual(result['source_provenance_verification_claim'],provenance['verification']);self.assertEqual(result['source_reuse_terms_claim'],provenance['reuse_terms']);self.assertIn('not independently authenticated',result['source_provenance_limitation'])
+   for field in ('verification','reuse_terms'):
+    old=provenance.pop(field)
+    with self.assertRaisesRegex(ValueError,'captured-source provenance'):self.runv()
+    provenance[field]=old
+ def test_capture_still_rejects_wrong_bytes(self):
+  self.s['source_lineage_assets'][0]['provenance']={'representation':'HTML source capture','verification':'capture','reuse_terms':'terms'}
+  self.p.write_bytes(b'bad')
+  with self.assertRaises(ValueError):self.runv()
+
+class MirrorEvidenceTests(EvidenceTests):
+ def setUp(self):
+  super().setUp()
+  self.s['source_lineage_assets'][0]['provenance']={
+   'representation':'third_party_mirror_scan',
+   'scope':'Historical geographic context only',
+   'verification':'Mirror capture and private object readback match; original provider bytes are not authenticated.',
+   'limitations':['Not a surveyed coastline.','Redistribution terms are not established.']}
+  self.s['source_lineage_assets'][0].update(license_name='Unspecified',license_uri='https://example.org/archive')
+ def test_mirror_disclosed_and_not_a_selector(self):
+  x=self.runv()['e'][0]
+  self.assertEqual(x['source_representation'],'third_party_mirror_scan')
+  self.assertIn('does not establish',x['original_provider_bytes_limitation'])
+  self.assertEqual(x['source_provenance_limitations'],self.s['source_lineage_assets'][0]['provenance']['limitations'])
+  self.assertIn('not machine-verified',x['verification_limitation'])
+ def test_incomplete_or_unknown_mirror_provenance_fails(self):
+  orig=copy.deepcopy(self.s)
+  for field,value in [('scope',''),('verification',None),('limitations',[]),('limitations',[None]),('representation','third_party_mirror'),('representation',None)]:
+   self.s=copy.deepcopy(orig);self.s['source_lineage_assets'][0]['provenance'][field]=value
+   with self.subTest(field=field,value=value):self.assertRaises(ValueError,self.runv)
+ def test_mirror_bytes_and_role_still_pinned(self):
+  self.s['list1_entry_evidence_sources'][0]['role']='construction_source'
+  self.assertRaises(ValueError,self.runv)
+  self.s['list1_entry_evidence_sources'][0]['role']='geographic_membership_evidence'
+  self.s['source_lineage_assets'][0]['sha256']='a'*64
+  self.assertRaises(ValueError,self.runv)
+ def test_mirror_derived_dependencies_rejected(self):
+  self.s['source_lineage_dependencies']=[{'source_id':'article','version':'v1'}]
+  self.assertRaises(ValueError,self.runv)
+
+ def test_boolean_size_pin_rejected_for_asset_and_local(self):
+  self.p.write_bytes(b'x')
+  for k in ('sources','source_lineage_assets'):
+   self.s[k][0]['size_bytes']=1;self.s[k][0]['sha256']=hashlib.sha256(b'x').hexdigest()
+  self.f[0]['size_bytes']=1;self.f[0]['sha256']=hashlib.sha256(b'x').hexdigest()
+  for obj in (self.s['source_lineage_assets'][0],self.f[0]):
+   obj['size_bytes']=True
+   with self.subTest(pin=obj):self.assertRaises(ValueError,self.runv)
+   obj['size_bytes']=1

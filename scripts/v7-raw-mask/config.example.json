@@ -1,0 +1,26 @@
+{
+  "schema": "raw-physical-mask-prototype-v1",
+  "grid": {"width": 131072, "height": 54614, "west": -180, "north": 90, "step": 0.00274658203125},
+  "strip_rows": 128,
+  "selection_notes": "REPLACE: document source release, selection predicate, extraction, and unresolved historical assumptions. This example is not executable.",
+  "land": [{
+    "dataset": "/ABSOLUTE/PATH/land_polygons.shp",
+    "files": [
+      {"path": "/ABSOLUTE/PATH/land_polygons.shp", "sha256": "REPLACE"},
+      {"path": "/ABSOLUTE/PATH/land_polygons.shx", "sha256": "REPLACE"},
+      {"path": "/ABSOLUTE/PATH/land_polygons.dbf", "sha256": "REPLACE"},
+      {"path": "/ABSOLUTE/PATH/land_polygons.prj", "sha256": "REPLACE"}
+    ],
+    "where": null
+  }],
+  "water": [{
+    "dataset": "/ABSOLUTE/PATH/selected-water.gpkg",
+    "layer": "water",
+    "files": [{"path": "/ABSOLUTE/PATH/selected-water.gpkg", "sha256": "REPLACE"}],
+    "where": "REPLACE WITH REVIEWED OGR ATTRIBUTE FILTER OR null FOR EXPLICIT PRESELECTION"
+  }],
+  "reference": {
+    "rows": {"path": "/ABSOLUTE/REFERENCE/physical-rows.u32", "sha256": "REPLACE"},
+    "runs": {"path": "/ABSOLUTE/REFERENCE/physical-runs.u32", "sha256": "REPLACE"}
+  }
+}

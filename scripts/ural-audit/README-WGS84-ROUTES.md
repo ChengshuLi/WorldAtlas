@@ -1,0 +1,5 @@
+# WGS84 research route measurements
+
+These Ural diagnostic tools preserve each source line as straight segments in the configured projected CRS. Reported geographic lengths, point distances and lateral offsets use the WGS84 ellipsoid. Route length is approximated by summing geodesic chords no longer than 100.01 m. Nearest-route searches numerically examine every such interval and assume local unimodality; they do not provide a certified global optimum or a formal error bound. Threshold counts are numerical estimates. Geographic coordinate-space and projected-coordinate operations used to locate, split or polygonize geometry remain topology operations, not reported distance metrics.
+
+The terrain screen preserves right-then-left offset ordering and honors the raster validity mask and finite nodata. Earlier projected-distance outputs should be marked historical and rerun. These tools are exploratory, depend on their input geometry and terrain, and do not establish a surveyed divide or select a boundary. Other code outside this scope is not certified by this update.
