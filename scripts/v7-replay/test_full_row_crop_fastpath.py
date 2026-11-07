@@ -29,6 +29,17 @@ class FullRowCropFastPath(unittest.TestCase):
         runs=np.array([2,1,4,17,7,1],dtype=np.uint32)
         np.testing.assert_array_equal(crop(rows,runs,0,-2,3,7),np.array([1,1,1,1,17],dtype=np.uint32))
 
+    def test_random_partial_and_wrapped_crops_match_dense_indexing(self):
+        rng=np.random.default_rng(90072)
+        for width in range(1,129):
+            values=rng.integers(0,2**32,size=width,dtype=np.uint32)
+            ends=np.r_[np.flatnonzero(values[1:]!=values[:-1])+1,width]
+            rows=np.array([0,len(ends)],dtype=np.uint32)
+            runs=np.column_stack((ends,values[ends-1])).astype(np.uint32).ravel()
+            for _ in range(6):
+                start=int(rng.integers(-3*width,3*width));stop=start+int(rng.integers(1,width+1))
+                np.testing.assert_array_equal(crop(rows,runs,0,start,stop,width),values[np.arange(start,stop)%width])
+
     def test_full_row_still_rejects_malformed_rle(self):
         rows=np.array([0,2],dtype=np.uint32)
         runs=np.array([2,1,6,17],dtype=np.uint32)

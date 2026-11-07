@@ -7,8 +7,10 @@ Resume copies verified completed tiles into a fresh batch; interrupted tiles
 are regenerated, and preserved source directories are never changed.
 """
 from __future__ import annotations
-import argparse,contextlib,fcntl,hashlib,json,math,os,stat,uuid
+import argparse,contextlib,ctypes,fcntl,hashlib,json,math,os,signal,stat,uuid
+import multiprocessing
 import time
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 import numpy as np
 import build_coastal_tile as tile
@@ -17,6 +19,34 @@ from pinned_coastal_metadata import pinned_bytes,pinned_json
 from exclusive_outputs import create_directory_exclusive,create_binary_exclusive,open_checkpoint_readonly
 
 F_SEALS=fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL
+_WORKER_STATE=None
+
+
+def available_workers():
+ """Choose concurrency from the process's available CPUs, never its RAM."""
+ return len(os.sched_getaffinity(0)) if hasattr(os,'sched_getaffinity') else (os.cpu_count() or 1)
+
+
+def initialize_worker(state,parent_pid):
+ # A killed batch must not leave orphan writers holding its inherited run
+ # lease. Linux supplies worker lifetime cleanup directly, without a monitor
+ # process, resource watchdog, or memory-dependent behavior.
+ signal.signal(signal.SIGTERM,signal.SIG_DFL)
+ libc=ctypes.CDLL(None,use_errno=True)
+ if libc.prctl(1,signal.SIGTERM,0,0,0)!=0:raise OSError(ctypes.get_errno(),'cannot bind coastal worker lifetime')
+ if os.getppid()!=parent_pid:raise InterruptedError('coastal parent exited during worker initialization')
+ global _WORKER_STATE
+ _WORKER_STATE=state
+
+
+def generate_tile(job):
+ """One independent tile over inherited immutable grids and shore geometry."""
+ index,entry=job
+ snapshot,snapshot_sha,physical,land,root,width,height,inputs,chunk,shore_index=_WORKER_STATE
+ return tile.run(snapshot,snapshot_sha,physical,land,root/f'tile-{index:04d}',width,height,
+                 entry['core'],entry['latitude_pad_degrees'],inputs,chunk=chunk,
+                 allow_selected_research=True,longitude_pad_degrees=entry['longitude_pad_degrees'],
+                 shore_index=shore_index)
 
 def sha(path):
  h=hashlib.sha256()
@@ -288,13 +318,15 @@ def merge_tiles(completed, recovered):
         completed[index] = candidate
 
 
-def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,check_metadata,*,metadata_pins,processing_started=None,resume_from=None):
+def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,check_metadata,*,metadata_pins,processing_started=None,resume_from=None,workers=1):
  """Generate partial research tiles with fresh-output, authenticated continuation.
 
  Hash strings are caller assertions. Only the CLI validates pinned metadata and
  provides the required lineage callback; a completion record gates the batch.
  """
  if processing_started is None:processing_started=time.perf_counter()
+ if workers is None:workers=available_workers()
+ if type(workers) is not int or workers<1:raise ValueError('workers must be a positive integer')
  boxes=validate_plan(plan,width,height)
  names=('physical_rows','physical_runs','land_rows','land_runs')
  if set(paths)!=set(names) or set(pins)!=set(names):raise ValueError('four grid inputs required')
@@ -322,16 +354,29 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
   physical=tile.open_grid(sealed['physical_rows'],sealed['physical_runs'],width,height);land=tile.open_grid(sealed['land_rows'],sealed['land_runs'],width,height)
   shore_started=time.perf_counter()
   shore_index=tile.coastal_shore_index.CoastalShoreIndex(physical,land,width,height)
+  for values in (shore_index.offsets,shore_index.starts,shore_index.ends,shore_index.codes):values.flags.writeable=False
   shore_elapsed=time.perf_counter()-shore_started
   root=create_directory_exclusive(out);sync_directory(root.parent);manifests=[];attempt_id=uuid.uuid4().hex
   start={'schema':'worldatlas-coastal-batch-start-v1','identity':identity,'attempt_id':attempt_id,'prior_attempts':prior,'processing_elapsed_seconds':time.perf_counter()-processing_started}
   publish_record(root/'batch-start.json',start)
+  jobs={}
+  if workers>1 and len(completed)<len(boxes):
+   # Linux fork shares the sealed RLE mappings and complete shore span arrays
+   # by copy-on-write. Do not pickle/copy that global geometry for each tile.
+   state=(snapshot,snapshot_sha,physical,land,root,width,height,inputs,plan['chunk'],shore_index)
+   pool=stack.enter_context(ProcessPoolExecutor(max_workers=workers,mp_context=multiprocessing.get_context('fork'),
+                                                initializer=initialize_worker,initargs=(state,os.getpid())))
+   jobs={i:pool.submit(generate_tile,(i,entry)) for i,entry in enumerate(boxes) if i not in completed}
+   # On failure cancel jobs not yet started before joining the worker pool.
+   stack.callback(lambda:[job.cancel() for job in jobs.values()])
   for i,entry in enumerate(boxes):
    box=entry['core'];dest=root/f'tile-{i:04d}'
    if i in completed:
     source,checkpoint,manifest=completed[i];create_directory_exclusive(dest)
     for name,digest in (('manifest.json',checkpoint['manifest_sha256']),('coastal-assignments.jsonl.gz',checkpoint['span_sha256'])):
      verified_copy(source/name,dest/name,digest)
+   elif i in jobs:
+    manifest=jobs[i].result()
    else:
     manifest=tile.run(snapshot,snapshot_sha,physical,land,dest,width,height,box,entry['latitude_pad_degrees'],inputs,chunk=plan['chunk'],allow_selected_research=True,longitude_pad_degrees=entry['longitude_pad_degrees'],shore_index=shore_index)
    if any(manifest[k+'_sha256']!=v for k,v in code_pins.items()):raise ValueError('tile code pin changed within batch')
@@ -344,7 +389,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
    sync_directory(root)
    manifests.append({'tile':i,'box':box,'manifest_sha256':record['manifest_sha256']})
   check_metadata();check_code()
-  result={'schema':'worldatlas-sealed-coastal-batch-v1','status':'complete-research-not-published',**identity,'sealed_input_bytes':used,'tiles':manifests,'checkpoint_identity_sha256':record_digest(identity),'batch_start_sha256':sha(root/'batch-start.json'),'resumed_tiles':len(completed),'limitations':['Tiles remain research candidates and require separate global coverage, source and geographic review.','Sealed input bytes do not establish the correctness or acceptance of their source or decision metadata.','On-disk code hashes are change indicators, not proof of already-imported Python module bytes.']}
+  result={'schema':'worldatlas-sealed-coastal-batch-v1','status':'complete-research-not-published',**identity,'sealed_input_bytes':used,'tiles':manifests,'checkpoint_identity_sha256':record_digest(identity),'batch_start_sha256':sha(root/'batch-start.json'),'resumed_tiles':len(completed),'parallel_workers':workers,'limitations':['Tiles remain research candidates and require separate global coverage, source and geographic review.','Sealed input bytes do not establish the correctness or acceptance of their source or decision metadata.','On-disk code hashes are change indicators, not proof of already-imported Python module bytes.']}
   result['shoreline_index']={'method':'exact-global-4neighbor-land-spans-v1','span_count':len(shore_index.starts),'coastal_cells':int(np.sum(shore_index.ends.astype(np.uint64)-shore_index.starts)),'storage_bytes':sum(a.nbytes for a in (shore_index.offsets,shore_index.starts,shore_index.ends,shore_index.codes)),'processing_elapsed_seconds':shore_elapsed}
   attempts=prior+[{'attempt_id':attempt_id,'processing_elapsed_seconds':time.perf_counter()-processing_started,'timing_complete':True}]
   result['timing_attempts']=attempts
@@ -360,6 +405,7 @@ def main():
  processing_started=time.perf_counter()
  ap=argparse.ArgumentParser(description=__doc__)
  for k in ('snapshot','snapshot-sha256','physical-rows','physical-rows-sha256','physical-runs','physical-runs-sha256','physical-report','physical-report-sha256','land-rows','land-rows-sha256','land-runs','land-runs-sha256','land-report','land-report-sha256','input-root','plan','plan-sha256','out'):ap.add_argument('--'+k,required=True)
+ ap.add_argument('--workers',type=int,help='parallel independent tiles; defaults to available CPU count')
  ap.add_argument('--resume-from',action='append',help='read verified per-tile checkpoints from a preserved batch into a new --out; repeat for earlier attempts');ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true');a=ap.parse_args()
  if not(a.allow_unverified_snapshot and a.allow_draft and a.allow_selected_research_policy):raise ValueError('all explicit research opt-ins are required')
  root=Path(a.input_root).resolve();out=Path(a.out).resolve();files={k:Path(getattr(a,k)).resolve() for k in ('snapshot','physical_rows','physical_runs','physical_report','land_rows','land_runs','land_report','plan')};expected={k:getattr(a,k+'_sha256') for k in files}
@@ -372,7 +418,7 @@ def main():
   direct_lineage.validate_physical_report(files['physical_report'],expected['physical_report'],physical,width,height)
   direct_lineage.validate_direct_land(files['land_report'],expected['land_report'],physical,land,local_water_overlay.land_snapshot_hash(snapshot,expected['snapshot']),snapshot['decision_revision'],root,expected['physical_report'])
  grid={k:files[k] for k in ('physical_rows','physical_runs','land_rows','land_runs')};pins={k:expected[k] for k in grid}
- result=run_batch(snapshot,expected['snapshot'],grid,pins,plan,expected['plan'],out,width,height,check_metadata,metadata_pins={k:expected[k] for k in ('physical_report','land_report')},processing_started=processing_started,resume_from=a.resume_from)
+ result=run_batch(snapshot,expected['snapshot'],grid,pins,plan,expected['plan'],out,width,height,check_metadata,metadata_pins={k:expected[k] for k in ('physical_report','land_report')},processing_started=processing_started,resume_from=a.resume_from,workers=a.workers)
  print(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'output':str(out)}))
 if __name__=='__main__':main()
 

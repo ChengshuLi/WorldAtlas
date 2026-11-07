@@ -38,7 +38,6 @@ class ClassCodeDomainTests(unittest.TestCase):
         self.assertEqual(valid, 13)
 
     def test_negative_signed_codes_are_rejected_before_lookup(self):
-        from unittest.mock import patch
         pairs=[(0,17,1),(1,18,2)]
         cases=[(np.array([-6],dtype=np.int32),np.array([17],dtype=np.int32)),
                (np.array([17],dtype=np.int32),np.array([-6],dtype=np.int32))]
@@ -46,9 +45,11 @@ class ClassCodeDomainTests(unittest.TestCase):
             db=s.open_database(':memory:')
             db.execute('INSERT INTO components(root,expected,reported_cut) VALUES(1,1,0)')
             db.execute('INSERT INTO spans(y,a,b,root) VALUES(0,0,1,1)')
-            with patch.object(s.core.shore,'crop',side_effect=[physical_row,prefill_row]):
-                with self.assertRaises(ValueError):
-                    s.classify_boundaries(db,(),(),1,1,pairs)
+            rows=np.array([0,1],dtype=np.uint32)
+            physical=(rows,np.array([1,int(physical_row[0])],dtype=np.int32))
+            prefill=(rows,np.array([1,int(prefill_row[0])],dtype=np.int32))
+            with self.assertRaisesRegex(ValueError,'physical/prefill relationship'):
+                s.classify_boundaries(db,physical,prefill,1,1,pairs)
             db.close()
 
 

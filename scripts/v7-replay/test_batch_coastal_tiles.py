@@ -1,4 +1,4 @@
-import errno,fcntl,hashlib,json,os,signal,subprocess,sys,tempfile,textwrap,time,unittest
+import errno,fcntl,gzip,hashlib,json,os,signal,subprocess,sys,tempfile,textwrap,time,unittest
 from pathlib import Path
 from unittest import mock
 import numpy as np
@@ -24,6 +24,74 @@ class BatchTest(unittest.TestCase):
  def test_caller_timer_includes_preflight(self):
   result=self.run_batch(processing_started=time.perf_counter()-5)
   self.assertGreaterEqual(result['processing_elapsed_seconds'],5)
+ def test_parallel_tiles_reproduce_serial_bytes_and_order(self):
+  serial=self.run_batch(out=self.d/'serial',workers=1)
+  parallel=self.run_batch(out=self.d/'parallel',workers=2)
+  self.assertEqual(parallel['parallel_workers'],2)
+  self.assertEqual([t['tile'] for t in parallel['tiles']],[0,1])
+  for index in range(2):
+   roots=[self.d/name/f'tile-{index:04d}' for name in ('serial','parallel')]
+   self.assertEqual(*[gzip.decompress((root/'coastal-assignments.jsonl.gz').read_bytes()) for root in roots])
+   manifests=[json.loads((root/'manifest.json').read_bytes()) for root in roots]
+   for manifest in manifests:
+    manifest.pop('processing_elapsed_seconds');manifest.pop('stage_processing_elapsed_seconds')
+   self.assertEqual(*manifests)
+  self.assertEqual(serial['sealed_input_sha256'],parallel['sealed_input_sha256'])
+ def test_parallel_failure_keeps_only_parent_published_checkpoints(self):
+  original=b.tile.run
+  def failed(*args,**kw):
+   if Path(args[4]).name=='tile-0001':raise ValueError('parallel tile failed')
+   return original(*args,**kw)
+  with mock.patch.object(b.tile,'run',side_effect=failed):
+   with self.assertRaisesRegex(ValueError,'parallel tile failed'):self.run_batch(workers=2)
+  self.assertTrue((self.d/'batch/tile-0000/tile-complete.json').is_file())
+  self.assertFalse((self.d/'batch/tile-0001/tile-complete.json').exists())
+  self.assertFalse((self.d/'batch/batch-complete.json').exists())
+  resumed=self.run_batch(out=self.d/'resumed',workers=2,resume_from=self.d/'batch')
+  self.assertEqual(resumed['resumed_tiles'],1)
+ def test_invalid_workers_fail_before_output(self):
+  for workers in (0,-1,True,1.5):
+   with self.subTest(workers=workers),self.assertRaisesRegex(ValueError,'workers'):
+    self.run_batch(workers=workers)
+  self.assertFalse((self.d/'batch').exists())
+ def test_parallel_workers_exit_after_parent_sigkill_and_resume_fresh(self):
+  config={'snapshot':self.snapshot,'paths':{k:str(v) for k,v in self.paths.items()},
+          'pins':self.pins,'plan':self.plan,'out':str(self.d/'killed-parallel')}
+  request=self.d/'parallel-request.json';request.write_text(json.dumps(config))
+  markers=self.d/'worker-pids';markers.mkdir()
+  program=textwrap.dedent("""
+   import json,os,sys,time
+   from pathlib import Path
+   import batch_coastal_tiles as b
+   c=json.loads(Path(sys.argv[1]).read_bytes())
+   def interrupted(*args,**kw):
+       Path(sys.argv[2],str(os.getpid())).write_text('started')
+       out=Path(args[4]);out.mkdir();(out/'coastal-assignments.jsonl.gz').write_bytes(b'partial')
+       while True:time.sleep(1)
+   b.tile.run=interrupted
+   b.run_batch(c['snapshot'],'a'*64,c['paths'],c['pins'],c['plan'],'b'*64,c['out'],16,8,lambda:None,
+               metadata_pins={'physical_report':'c'*64,'land_report':'d'*64},workers=2)
+  """)
+  process=subprocess.Popen([sys.executable,'-c',program,str(request),str(markers)],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+  try:
+   deadline=time.monotonic()+15
+   while len(list(markers.iterdir()))<2 and process.poll() is None and time.monotonic()<deadline:time.sleep(.02)
+   self.assertEqual(len(list(markers.iterdir())),2,'parallel workers did not start')
+   process.send_signal(signal.SIGKILL);process.communicate(timeout=5)
+   for marker in markers.iterdir():
+    stat=Path('/proc',marker.name,'stat')
+    deadline=time.monotonic()+5
+    while stat.exists() and time.monotonic()<deadline:
+     try:state=stat.read_text().split(') ',1)[1][0]
+     except FileNotFoundError:break
+     if state in ('Z','X'):break
+     time.sleep(.02)
+    if stat.exists():self.assertIn(stat.read_text().split(') ',1)[1][0],('Z','X'))
+  finally:
+   if process.poll() is None:process.kill();process.communicate(timeout=5)
+  self.assertFalse(list((self.d/'killed-parallel').glob('tile-*/tile-complete.json')))
+  result=self.run_batch(out=self.d/'resumed',resume_from=self.d/'killed-parallel',workers=2)
+  self.assertEqual(result['resumed_tiles'],0)
  def test_independent_tile_halos_and_elapsed_time(self):
   self.plan={'tiles':[{'core':[7,9,3,4],'latitude_pad_degrees':30,'longitude_pad_degrees':180}], 'chunk':10}
   result=self.run_batch()

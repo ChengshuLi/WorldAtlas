@@ -598,11 +598,14 @@ class Pipeline:
 
     def coast(self, physical, land, snapshot):
         out = self.out / 'coast'
+        workers = self.cfg.get('coastal_workers')
+        if workers is not None and (type(workers) is not int or workers < 1):
+            raise ValueError('coastal_workers must be a positive integer')
         self.command('water', 'coast', REPLAY + '/batch_coastal_tiles.py',
                      **self.pinned_options('snapshot', snapshot),
                      **self.streams('physical', physical), **self.streams('land', land),
                      input_root=self.root, **self.pinned_options('plan', self.sources['coastal_plan']),
-                     out=out, allow_unverified_snapshot=True, allow_draft=True,
+                     out=out, workers=workers, allow_unverified_snapshot=True, allow_draft=True,
                      allow_selected_research_policy=True,
                      _resume_marker=out / 'batch-start.json', _resume_from=True)
         with self.timing.measure('water', 'prepare-coast-assembly'):

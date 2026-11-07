@@ -60,12 +60,17 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
     index_elapsed=time.perf_counter()-index_started
     create_directory_exclusive(out);out=Path(out);path=out/'coastal-assignments.jsonl.gz'
     cells=spans=bounded=exact=water=0;classification_elapsed=0.
+    # Only the coordinates vary per span. Encode the policy strings once while
+    # retaining the exact JSON key order, escaping and decompressed bytes.
+    suffixes={code:json.dumps({'code':code,'rule_id':'coastal-nearest-final-center-v2',
+                    'member_id':f'coastal-policy-{decision["id"]}-code-{code}'},separators=(',',':'))[1:]
+              for _,_,code in pairs}
     with create_gzip_text_exclusive(path,encoding='utf8') as f:
         for first_y in range(y0,y1,64):
             last_y=min(first_y+64,y1);water_grid=np.empty((last_y-first_y,x1-x0),dtype=bool)
             for i,y in enumerate(range(first_y,last_y)):
                 p=core.shore.crop(*physical,y,x0,x1,width)
-                if np.any(~np.isin(p,[1,17])):raise ValueError('invalid physical tile values')
+                if np.any((p!=1)&(p!=17)):raise ValueError('invalid physical tile values')
                 water_grid[i]=p==1
             water+=int(water_grid.sum())
             classify_started=time.perf_counter()
@@ -78,10 +83,9 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
                     cuts=np.r_[0,np.flatnonzero((np.diff(chosen_x)>1)|(chosen_codes[1:]!=chosen_codes[:-1]))+1,len(chosen_x)]
                     for a,b in zip(cuts[:-1],cuts[1:]):
                         start_x,end_x,code=int(chosen_x[a]),int(chosen_x[b-1])+1,int(chosen_codes[a])
-                        records.append({'start':start_x,'end':end_x,'code':code,'rule_id':'coastal-nearest-final-center-v2',
-                                        'member_id':f'coastal-policy-{decision["id"]}-code-{code}'})
+                        records.append('{"start":'+str(start_x)+',"end":'+str(end_x)+','+suffixes[code])
                 if records:
-                    spans+=len(records);f.write(json.dumps({'row':y,'spans':records},separators=(',',':'))+'\n')
+                    spans+=len(records);f.write('{"row":'+str(y)+',"spans":['+','.join(records)+']}\n')
     if verify_inputs:verify_inputs()
     if any(sha(path)!=code_pins[name] for name,path in code_paths.items()):raise ValueError('algorithm changed during generation')
     manifest={'schema':'worldatlas-coastal-tile-candidate-v1','status':'partial-unverified-research-not-published',

@@ -247,14 +247,102 @@ def merge_row_cuts(*ends, assignments=(), extra_bounds=(), assignment_columns=No
 
 
 def choose_assignments(spans, y, physical_ends, physical_vals):
-    """Sweep span events; resolve only explicitly prioritized overlaps."""
+    """Sweep only genuine overlap groups, retaining every source breakpoint.
+
+    Isolated half-open spans have one unambiguous winner. Batched physical
+    lookups avoid creating a NumPy query and event dictionary for each of the
+    millions of ordinary coastal spans. Overlaps retain the full policy sweep.
+    """
     if not spans:
         return [], []
     spans = sorted(spans, key=lambda z: (z[1], z[2], z[5]))
+    starts = np.fromiter((s[1] for s in spans), dtype=np.uint32, count=len(spans))
+    stops = np.fromiter((s[2] for s in spans), dtype=np.uint32, count=len(spans))
+    groups = np.flatnonzero(np.r_[True, starts[1:] >= np.maximum.accumulate(stops)[:-1]])
+    sizes = np.diff(np.r_[groups, len(spans)])
+    overlapping = np.repeat(sizes > 1, sizes)
+    isolated = np.flatnonzero(~overlapping)
+    values = row_code_at(physical_ends, physical_vals, starts[isolated])
+    bad = np.flatnonzero(values != 1)
+    if len(bad):
+        at = int(bad[0]); i = int(isolated[at]); x, z = int(starts[i]), int(stops[i])
+        raise ValueError(f"water assignment overlaps physical land/nonwater row={y} x={x}:{z} (physical={int(values[at])})")
+    if not np.any(overlapping):
+        return [(s[1], s[2], s[3], s[4], s[5]) for s in spans], []
+    vectorized = two_priority_assignments(spans, starts, stops, y, physical_ends, physical_vals)
+    if vectorized is not None:
+        return vectorized
+    out = [(s[1], s[2], s[3], s[4], s[5]) for i, s in enumerate(spans) if not overlapping[i]]
+    selected = [s for i, s in enumerate(spans) if overlapping[i]]
+    resolved, conflicts = sweep_overlapping_assignments(selected, y, physical_ends, physical_vals)
+    out.extend(resolved)
+    out.sort(key=lambda s: s[0])
+    return out, conflicts
+
+
+def two_priority_assignments(spans, starts, stops, y, physical_ends, physical_vals):
+    """Overlay two internally disjoint priority bands using interval lookups.
+
+    This structural fast path is independent of layer names or geography. If
+    either band overlaps itself, the general sweep retains all duplicate and
+    same-priority rejection behavior. Every source endpoint remains a cut.
+    """
+    if any(len(s) < 11 or not isinstance(s[9], str) or not isinstance(s[10], (set, frozenset)) for s in spans):
+        return None
+    priorities = [int(s[8]) for s in spans]
+    levels = sorted(set(priorities))
+    if len(levels) != 2:
+        return None
+    groups = [np.flatnonzero(np.fromiter((p == level for p in priorities), dtype=bool, count=len(spans))) for level in levels]
+    if any(np.any(starts[ids][1:] < stops[ids][:-1]) for ids in groups):
+        return None
+    cuts = np.unique(np.r_[starts, stops]); xx, zz = cuts[:-1], cuts[1:]
+    owners = []
+    for ids in groups:
+        ix = np.searchsorted(starts[ids], xx, side='right') - 1
+        safe = np.maximum(ix, 0)
+        owners.append(np.where((ix >= 0) & (xx < stops[ids[safe]]), ids[safe], -1))
+    lower, higher = owners; winner = np.where(higher >= 0, higher, lower)
+    active = winner >= 0; both = (lower >= 0) & (higher >= 0)
+    # Group equal permission sets, including distinct set objects supplied by
+    # different parent layers. One check then covers many short higher/lower
+    # intervals without a Python loop or full-row scan per physical fragment.
+    layer_ids = np.fromiter((s[9] for s in spans), dtype=object, count=len(spans))
+    by_object = {}; permission_groups = {}; permission_ids = np.empty(len(spans), dtype=np.int64)
+    for i, span in enumerate(spans):
+        key = id(span[10])
+        if key not in by_object:
+            allowed = frozenset(span[10])
+            by_object[key] = permission_groups.setdefault(allowed, len(permission_groups))
+        permission_ids[i] = by_object[key]
+    higher_permission = permission_ids[np.maximum(higher, 0)]
+    for allowed, group in permission_groups.items():
+        selected = both & (higher_permission == group)
+        if not np.any(selected):
+            continue
+        forbidden = [layer for layer in np.unique(layer_ids[lower[selected]]) if layer not in allowed]
+        if forbidden:
+            bad = selected & np.isin(layer_ids[np.maximum(lower, 0)], forbidden)
+            i = int(np.flatnonzero(bad)[0]); low, high = int(lower[i]), int(higher[i])
+            raise ValueError(f"undeclared priority override row={y} x={int(xx[i])}:{int(zz[i])}: {spans[low][9]} -> {spans[high][9]}")
+    values = row_code_at(physical_ends, physical_vals, xx[active])
+    if np.any(values != 1):
+        at = int(np.flatnonzero(values != 1)[0]); i = int(np.flatnonzero(active)[at])
+        raise ValueError(f"water assignment overlaps physical land/nonwater row={y} x={int(xx[i])}:{int(zz[i])} (physical={int(values[at])})")
+    out = [(int(xx[i]), int(zz[i]), spans[winner[i]][3], spans[winner[i]][4], spans[winner[i]][5])
+           for i in np.flatnonzero(active)]
+    conflicts = [(int(xx[i]), int(zz[i]), spans[lower[i]][5], spans[higher[i]][5])
+                 for i in np.flatnonzero(both)]
+    return out, conflicts
+
+
+def sweep_overlapping_assignments(spans, y, physical_ends, physical_vals):
+    """Resolve sorted overlap groups with the original explicit-priority sweep."""
     events = defaultdict(lambda: [[], []])  # x -> (ending ids, starting ids)
     for i, s in enumerate(spans):
         events[s[1]][1].append(i); events[s[2]][0].append(i)
     cuts = sorted(events)
+    physical_codes = row_code_at(physical_ends, physical_vals, np.asarray(cuts[:-1], dtype=np.uint32))
     active = set(); out = []; conflicts = []
     # priority is declared in each tile manifest's parent layer descriptor, inserted by caller.
     priorities = [int(s[8]) if len(s) > 8 else 0 for s in spans]
@@ -282,7 +370,7 @@ def choose_assignments(spans, y, physical_ends, physical_vals):
                 if spans[j][9] not in winner[10]:
                     raise ValueError(f"undeclared priority override row={y} x={x}:{z}: {spans[j][9]} -> {winner[9]}")
                 conflicts.append((x, z, spans[j][5], winner[5]))
-        pv = int(row_code_at(physical_ends, physical_vals, np.asarray([x], dtype=np.uint32))[0])
+        pv = int(physical_codes[i])
         if pv != 1:
             raise ValueError(f"water assignment overlaps physical land/nonwater row={y} x={x}:{z} (physical={pv})")
         out.append((x, z, winner[3], winner[4], winner[5]))

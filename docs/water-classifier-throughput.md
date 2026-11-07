@@ -85,3 +85,60 @@ assignments but took 1,201.801 s, so that adapter was not adopted. This differs
 from the strong benefit for shared named seas. See the complete protocol,
 pins and timing breakdown in
 [`benchmarks/coastal-shore-index-20261107.json`](benchmarks/coastal-shore-index-20261107.json).
+
+## Remaining water work
+
+Partial/wrapped RLE crops now decode selected runs with native array repeats,
+rather than a Python fill loop per run. The complete shoreline span index also
+merges and expands intervals with array operations. The coastal writer encodes
+fixed policy strings once per code while preserving the original JSON escaping,
+key order and all decompressed assignment bytes.
+
+The sealed coastal batch can fork independent tile workers after constructing
+the complete read-only shore index. Grids and global geometry are shared by
+copy-on-write; no global input is truncated or duplicated into every task
+message. The parent consumes results and publishes checkpoints in canonical
+order, so an interrupted or failed tile never becomes a resumable checkpoint.
+The CLI defaults to the available CPU count; `--workers 1` retains serial
+execution. The supported pipeline exposes the same setting as `coastal_workers`.
+
+Enclosed-water boundary summaries use exact RLE interval intersections across
+the three-row stencil instead of expanding every listed cell and entire dense
+rows. Splits include every physical/prefill class and component transition;
+complete visited rows retain their original relationship validation. Mixed
+components use the existing exact WGS84 interval certificates and complete point
+fallback. Original input-span and chunk boundaries are retained, preserving
+serialized assignment spans. The interval helper is pinned in producer lineage.
+
+Prefill and final composition skip the event dictionary for isolated assignment
+groups. Two internally disjoint priority bands use vectorized interval lookups
+and group equal override permissions. Other overlaps retain the full
+explicit-priority sweep. All paths batch physical-code lookups. Source endpoints, tie/duplicate rejection,
+declared overrides, physical-mask validation and output breakpoints are retained.
+
+Use `scripts/v7-pipeline/benchmark_closed.py` with an admitted enclosed-water
+command and completed reference directory to time the complete stage separately
+from verification. It checks all decompressed assignment and pending bytes plus
+every component decision, input span and mixed assignment in the work database.
+`benchmark_prefill.py` likewise verifies every prefill RLE byte and complete
+scientific audit against its pinned reference, excluding only processing time.
+Complete actual-workload replays ran sequentially in an exclusive benchmark
+window on the same nine-CPU environment:
+
+- Coast: 791.148 s to 169.784 s, 4.66× faster, including the complete shared index
+  and all 546 tiles. Every one of the 2,116,758,035 decompressed assignment bytes
+  matched. The index itself took 23.870 s rather than 50.194 s.
+- Prefill: 130.846 s, with every output RLE byte and scientific audit identical
+  across all 7,158,366,208 cells and 27,351,067 runs.
+- Enclosed water: 52.659 s, with every assignment/pending byte and every work
+  database decision identical. All 6,723,660 cells were assigned, none pending.
+  Boundary classification took 12.870 s and component assignment 31.764 s.
+
+The compatible earlier full run recorded 243.694 s for prefill and 163.465 s
+for enclosed water. Those are historical full-run observations, not freshly
+paired baseline trials. Only coast has the isolated complete baseline above.
+These measurements do not establish a new end-to-end pipeline time, especially
+when coast shares CPUs with the basin pool. All 258 replay and 58 pipeline tests
+passed before rebasing the equivalent producers onto the batch-extraction PR4
+head. Full commands, pins, environment and comparisons are in
+[`benchmarks/water-remainder-20261107.json`](benchmarks/water-remainder-20261107.json).

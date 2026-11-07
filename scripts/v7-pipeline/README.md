@@ -128,7 +128,17 @@ the basin builder. Completed batch checkpoints pin every emitted file; partial
 attempts are preserved and regenerated, never treated as a reusable cache.
 The standalone single-feature extraction CLI remains available for targeted work.
 See [the complete extraction replay contract](../../docs/seavox-extraction.md).
-These are execution tuning controls, not memory limits.
+
+The coastal CLI generates independent tiles in parallel
+using the available CPU count, or the explicit positive `coastal_workers`
+setting (`1` selects serial execution). Linux fork shares the sealed RLE input
+mappings and complete read-only shoreline span index; only crop-specific
+centers and distance trees are constructed per worker. The parent alone
+publishes durable tile checkpoints, in canonical tile order, and writes batch
+completion only after every tile and metadata recheck succeed. These are
+execution tuning controls, not memory limits. Account for the simultaneously
+running basin pool when choosing explicit worker counts.
+
 Shared basins use exact WGS84 two-dimensional rectangle certificates by default,
 with complete point classification for unresolved centers. The standalone basin
 builder retains `--research-interval` and `--pointwise-nearest` as reference engines. See [the certificate and full-input

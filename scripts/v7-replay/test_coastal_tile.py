@@ -50,6 +50,16 @@ class TileTest(unittest.TestCase):
    with self.assertRaisesRegex(ValueError,'source pins'):b.validate_physical_report(report_path,b.sha(report_path),physical,4,2)
  def test_shore_segment_limit(self):
   s,p,l=self.fixture()
+ def test_serialization_preserves_json_escaping_and_span_bytes(self):
+  s,p,l=self.fixture();s['policies'][0]['id']='coast-"\\雪'
+  with tempfile.TemporaryDirectory() as d:
+   out=Path(d)/'tile'
+   b.run(s,'a'*64,p,l,out,360,180,[3,9,89,90],180,{},allow_selected_research=True)
+   records=[{'start':a,'end':z,'code':code,'rule_id':'coastal-nearest-final-center-v2',
+             'member_id':f'coastal-policy-{s["policies"][0]["id"]}-code-{code}'}
+            for a,z,code in ((3,4,1),(5,6,2),(7,8,2))]
+   expected=json.dumps({'row':89,'spans':records},separators=(',',':'))+'\n'
+   self.assertEqual(gzip.decompress((out/'coastal-assignments.jsonl.gz').read_bytes()).decode(),expected)
  def test_missing_policy_or_bad_core_fails(self):
   s,p,l=self.fixture();s['policies']=[]
   with tempfile.TemporaryDirectory() as d:

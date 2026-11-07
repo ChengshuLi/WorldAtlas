@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 import numpy as np
 import closed_water_core as core
+import interval_nearest
 import partition_json_stream
 from partition_json_stream import read_partition
 from exclusive_outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
@@ -88,7 +89,12 @@ def ingest_spans(db,rows_path,spans_path,width,height,meta,batch_size=4096):
 
 
 def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096):
-    """Stream the three-row boundary stencil and batch its point checks."""
+    """Intersect RLE intervals over the exact three-row boundary stencil.
+
+    Boundary summaries need code presence, not one record per cell. Split at
+    every class or component transition, so each checked interval has constant
+    physical/prefill codes and ownership. Full visited rows are still validated.
+    """
     water_to_entity={w:e for e,_,w in pairs};land_to_entity={l:e for e,l,_ in pairs}
     entity_to_water={e:w for e,_,w in pairs};water_codes=list(water_to_entity);land_codes=list(land_to_entity)
     bits_by_code=np.zeros(23,dtype=np.uint32)
@@ -99,11 +105,19 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
     class_rows={};index_rows={}
     def classes(y):
         if y in class_rows:return class_rows[y]
-        p=core.shore.crop(*physical,y,0,width,width);q=core.shore.crop(*prefill,y,0,width,width)
+        def read(grid):
+            rows,runs=grid;first,last=int(rows[y]),int(rows[y+1])
+            ends,values=runs[2*first:2*last:2],runs[2*first+1:2*last:2]
+            if not len(ends) or int(ends[0])<=0 or int(ends[-1])!=width or np.any(ends[1:]<=ends[:-1]):
+                raise ValueError(f'invalid RLE row {y}')
+            return ends,values
+        pe,pv=read(physical);qe,qv=read(prefill)
+        ends=np.union1d(pe,qe);starts=np.r_[0,ends[:-1]]
+        p=pv[np.searchsorted(pe,starts,side='right')];q=qv[np.searchsorted(qe,starts,side='right')]
         if np.any((p<0)|(p>=len(allowed_physical))) or np.any((q<0)|(q>=len(allowed_land))) or np.any(~allowed_physical[p]) or np.any((p==17)&~allowed_land[q]) or np.any((p==1)&~allowed_water[q]):
             raise ValueError(f'invalid physical/prefill relationship at row {y}')
-        class_rows[y]=(p,q)
-        return p,q
+        class_rows[y]=(ends,p,q)
+        return ends,p,q
     def row_index(y):
         if y in index_rows:return index_rows[y]
         rows=db.execute('SELECT a,b,root FROM spans WHERE y=? ORDER BY a',(y,)).fetchall()
@@ -116,17 +130,23 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
         starts,ends,roots=data;ix=np.searchsorted(starts,x,side='right')-1;safe=np.maximum(ix,0)
         return np.where((ix>=0)&(x<ends[safe]),roots[safe],-1)
     def classify_row(y,data):
-        starts,ends,roots=data;p,q=classes(y);updates={};crop=int(y==0 or y==height-1)
-        def accumulate(ids,ny,x):
-            external=owners(ny,x)!=ids
-            if not np.any(external):return
-            ids=ids[external];values=classes(ny)[1][x[external]]
+        starts,ends,roots=data;ce,p,q=classes(y);updates={};crop=int(y==0 or y==height-1)
+        def accumulate_values(ids,values):
             unique,inverse=np.unique(ids,return_inverse=True)
             masks=np.zeros(len(unique),dtype=np.uint32);unknown=np.zeros(len(unique),dtype=bool)
             np.bitwise_or.at(masks,inverse,bits_by_code[values]);np.logical_or.at(unknown,inverse,values==0)
             for root,mask,unk in zip(unique,masks,unknown):
                 root=int(root);prior=updates.get(root,(0,0,0))
                 updates[root]=(prior[0]|int(mask),max(prior[1],int(unk)),max(prior[2],crop))
+        def accumulate(ids,ny,x):
+            external=owners(ny,x)!=ids
+            if not np.any(external):return
+            ne,_,nq=classes(ny)
+            accumulate_values(ids[external],nq[np.searchsorted(ne,x[external],side='right')])
+        # Check every constant-code segment of the listed component spans.
+        cuts=np.unique(np.concatenate((starts,ends,ce)))
+        xx=cuts[:-1];rr=owners(y,xx);selected=rr>=0;ci=np.searchsorted(ce,xx[selected],side='right')
+        if np.any(p[ci]!=1) or np.any(q[ci]!=0):raise ValueError('component contains non-residual water')
         # Horizontal boundary cells only: interiors have the same component root.
         for at in range(0,len(starts),batch_cells):
             sub=slice(at,min(at+batch_cells,len(starts)));ids=roots[sub]
@@ -134,22 +154,21 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
             if crop:
                 for root in ids:
                     root=int(root);prior=updates.get(root,(0,0,0));updates[root]=(prior[0],prior[1],1)
-        coords=[];ids=[];used=0
-        def flush():
-            nonlocal coords,ids,used
-            if not used:return
-            xx=np.concatenate(coords);rr=np.concatenate(ids)
-            if np.any(p[xx]!=1) or np.any(q[xx]!=0):raise ValueError('component contains non-residual water')
-            if y>0:accumulate(rr,y-1,xx)
-            if y+1<height:accumulate(rr,y+1,xx)
-            coords=[];ids=[];used=0
-        for a,b,root in zip(starts,ends,roots):
-            a,b,root=int(a),int(b),int(root)
-            while a<b:
-                take=min(b-a,batch_cells-used)
-                coords.append(np.arange(a,a+take,dtype=np.int64));ids.append(np.full(take,root,dtype=np.int64));used+=take;a+=take
-                if used==batch_cells:flush()
-        flush()
+        for ny in (y-1,y+1):
+            if not 0<=ny<height:continue
+            adjacent=row_index(ny)
+            # First prove whether any vertical boundary is external. A fully
+            # shared component interior does not consume the adjacent classes.
+            pieces=[starts,ends]
+            if adjacent is not None:pieces.extend(adjacent[:2])
+            cuts=np.unique(np.concatenate(pieces));xx=cuts[:-1];rr=owners(y,xx)
+            external=(rr>=0)&(owners(ny,xx)!=rr)
+            if not np.any(external):continue
+            ne,_,nq=classes(ny)
+            # Neighbor class transitions can occur inside any component span.
+            cuts=np.union1d(cuts,ne);xx=cuts[:-1];rr=owners(y,xx)
+            external=(rr>=0)&(owners(ny,xx)!=rr)
+            accumulate_values(rr[external],nq[np.searchsorted(ne,xx[external],side='right')])
         db.executemany('UPDATE components SET boundary_mask=boundary_mask|?,unknown=MAX(unknown,?),crop_edge=MAX(crop_edge,?) WHERE root=?',
                        ((mask,unknown,crop_edge,root) for root,(mask,unknown,crop_edge) in updates.items()))
     for y in range(height):
@@ -229,11 +248,13 @@ def assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,pe
      if not records:break
      for y,a,b in records:
       for start in range(a,b,chunk):
-       end=min(start+chunk,b);xs=np.arange(start,end,dtype=np.float64)
-       codes,_,_=core.shore.classify(np.full(len(xs),90-(y+.5)*step),-180+(xs+.5)*step,crop,width,height,step,participants,tolerance,indexes)
-       cuts=np.r_[0,np.flatnonzero(np.diff(codes)!=0)+1,len(codes)]
-       for i,j in zip(cuts[:-1],cuts[1:]):
-        aa,bb=start+int(i),start+int(j);staged.append((y,aa,bb,int(codes[i]),root));produced+=bb-aa
+       end=min(start+chunk,b)
+       # The same exact WGS84 distance and tie rules certify whole intervals;
+       # uncertain leaves retain the complete-input point classifier. Keep the
+       # original source/chunk boundaries so serialized spans remain identical.
+       assignments,_=interval_nearest.classify_row(y,[(start,end)],crop,width,height,step,participants,tolerance,indexes)
+       for aa,bb,code in assignments:
+        staged.append((y,aa,bb,code,root));produced+=bb-aa
         if len(staged)>=4096:db.executemany('INSERT INTO mixed VALUES(?,?,?,?,?)',staged);staged.clear()
     if staged:db.executemany('INSERT INTO mixed VALUES(?,?,?,?,?)',staged)
     if produced!=expected:raise ValueError('mixed component cell count mismatch')
@@ -266,7 +287,8 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
  if chunk<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid chunk or halo')
  decision,pairs,tolerance=core.policy(snapshot,allow_selected_research=allow_selected_research)
  code_paths={'streaming_closed_water':Path(__file__),'partition_json_stream':Path(partition_json_stream.__file__),
-             'closed_water_core':Path(core.__file__),'shared_nearest':Path(core.shore.__file__)}
+             'closed_water_core':Path(core.__file__),'shared_nearest':Path(core.shore.__file__),
+             'interval_nearest':Path(interval_nearest.__file__)}
  code_pins={name:sha(path) for name,path in code_paths.items()}
  out=Path(out);create_directory_exclusive(out);db=open_database(out/'work.sqlite3')
  stage_seconds={}

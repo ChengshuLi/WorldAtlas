@@ -61,18 +61,19 @@ class CoastalShoreIndex:
                 aa, bb = np.r_[aa, side], np.r_[bb, side + 1]
                 cc = np.r_[cc, lv[np.searchsorted(le, side, side='right')]]
             order = np.argsort(aa, kind='stable')
-            merged = []
-            for a, b, code in zip(aa[order], bb[order], cc[order]):
-                a, b, code = int(a), int(b), int(code)
-                if merged and a <= merged[-1][1] and code == merged[-1][2]:
-                    merged[-1] = (merged[-1][0], max(b, merged[-1][1]), code)
-                else:
-                    merged.append((a, b, code))
-            if merged:
-                all_starts.append(np.fromiter((p[0] for p in merged), dtype=np.uint32))
-                all_ends.append(np.fromiter((p[1] for p in merged), dtype=np.uint32))
-                all_codes.append(np.fromiter((p[2] for p in merged), dtype=np.uint8))
-            offsets.append(offsets[-1] + len(merged))
+            aa, bb, cc = aa[order], bb[order], cc[order]
+            if len(aa):
+                # Side-neighbor cells can duplicate or lie inside a vertical
+                # coastal interval. Merge their union at category transitions
+                # without converting every global span to Python tuples.
+                split = np.r_[True, (aa[1:] > np.maximum.accumulate(bb)[:-1]) | (cc[1:] != cc[:-1])]
+                indices = np.flatnonzero(split)
+                all_starts.append(aa[indices].astype(np.uint32))
+                all_ends.append(np.maximum.reduceat(bb, indices).astype(np.uint32))
+                all_codes.append(cc[indices].astype(np.uint8))
+                offsets.append(offsets[-1] + len(indices))
+            else:
+                offsets.append(offsets[-1])
             previous, current = current, following
             following = physical_row(y + 2) if y + 2 < height else None
         self.offsets = np.asarray(offsets, dtype=np.uint64)
@@ -104,7 +105,9 @@ class CoastalShoreIndex:
                     aa = np.maximum(starts[a:b][keep].astype(np.int64), xm) - xm + x
                     bb = np.minimum(ends[a:b][keep].astype(np.int64), stop) - xm + x
                     if len(aa):
-                        xx = np.concatenate([np.arange(a, b, dtype=np.int64) for a, b in zip(aa, bb)])
+                        lengths = bb - aa
+                        offsets = np.repeat(np.cumsum(lengths) - lengths, lengths)
+                        xx = np.repeat(aa, lengths) + np.arange(int(lengths.sum())) - offsets
                         latitudes.append(np.full(len(xx), 90 - (y + .5) * step))
                         longitudes.append(((-180 + (xx + .5) * step + 180) % 360) - 180)
                         categories.append(np.repeat(codes[a:b][keep], bb - aa))

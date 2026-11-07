@@ -76,8 +76,11 @@ def crop(rows, runs, y, x0, x1, width):
     while x < x1:
         xm=x%width; take=min(x1-x,width-xm); stop=xm+take
         i=int(np.searchsorted(ends,xm,side='right'))
-        while xm < stop:
-            e=min(int(ends[i]),stop); result[cur:cur+e-xm]=int(vals[i]); cur+=e-xm; xm=e; i+=1
+        j=int(np.searchsorted(ends,stop,side='left'))+1
+        clipped=np.minimum(ends[i:j],stop).astype(np.int64)
+        lengths=np.diff(np.r_[xm,clipped])
+        result[cur:cur+take]=np.repeat(vals[i:j],lengths)
+        cur+=take
         x+=take
     return result
 
