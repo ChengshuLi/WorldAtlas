@@ -34,10 +34,19 @@ is supported.
       /workspace/selection/config.json /workspace/runs/fresh-run \
       --allow-provisional-research
 
-The output must be new. All temporary files are directed into `fresh-run/scratch`,
+For the first invocation, the output must be new. To continue a checkpoint-enabled
+run after an interruption, use the identical configuration, code and runtime:
+
+    /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
+      /workspace/selection/config.json /workspace/runs/fresh-run \
+      --allow-provisional-research --resume
+
+The runner takes an exclusive run lock and refuses to duplicate a still-running
+runner or an admitted stage process left alive by a killed parent. All temporary
+files are directed into `fresh-run/scratch`,
 including files created by child stages. No application memory cap, memory floor
-or memory watchdog is added. The component monitor observes RSS but does not cap
-it. Existing stage disk reserves and source/output validation remain enforced.
+or memory watchdog is added. Component construction runs directly without its
+retired monitor/guardian wrappers. Existing stage disk reserves and source/output validation remain enforced.
 Use a run path on the same filesystem as its generated component work.
 
 ## Configuration inputs
@@ -87,8 +96,9 @@ succeeds. It pins final rows, runs and producer report. Per-job logs are under
 `logs/`; generated requests are under `configs/`. The final map is under `final/`.
 No map is uploaded, published, or assigned accepted status.
 
-`timing-events.jsonl` is an append-only, fsynced start/completion ledger using one
-monotonic clock for the run. The stage totals in `report.json` are wall-clock
+`timing-events.jsonl` is an append-only, fsynced start/completion/heartbeat ledger.
+Each invocation has its own attempt ID and monotonic intervals. Durations are
+never computed by subtracting timestamps from different attempts or boots. The stage totals in `report.json` are wall-clock
 processing elapsed seconds:
 
 - Setup: initial source/configuration hashing, validation and run setup.
@@ -104,12 +114,77 @@ processing elapsed seconds:
 - Verification: final source/output hash verification and the optional
   full-grid comparison.
 
-The runner does not pause/resume or estimate historical gaps. A failed stage
-leaves `failure.json`, partial files, and completed interval evidence; those
-partial intervals are not a complete stage baseline. A killed process can leave
-an unmatched start and no failure report. Preserve that run for diagnosis and
-use a new output directory for a complete uninterrupted baseline. There is no
-manual checkpoint relabeling or automatic destructive cleanup.
+## Interruption and resume guarantees
+
+Before reusing completed work, `--resume` checks the original request, all selected
+source pins, current repository source code, Python/dependency versions, runtime
+paths, every completed command's input pins, and every output file/hash. Completed
+command receipts also seal timing-journal prefixes, so losing or changing prior
+recorded intervals cannot silently yield a new complete total. Generated requests
+must remain byte-identical. Seed rasterization and component/verifier compilation
+execute the pinned checked-in source files directly; run directories contain no
+copied Python/C++ source executables. A changed pin or a live prior stage stops resume.
+
+Stages execute directly, without a new supervisor or guardian process. Before
+launch, the runner durably records admission and timing. The ordinary stage
+process inherits the filesystem run lease, so another runner cannot duplicate
+it even if a later tool invocation has a different PID namespace.
+
+A missing `/proc` PID is never treated as proof that an old writer is dead. If
+an interruption left no normal stage exit record, resume stops until all old
+writer processes have independently been confirmed exited. The operator can then pass
+`--confirm-no-live-writers` with `--resume`; this explicit assertion is recorded
+separately for the exact unchanged old attempts and does not replace any source,
+checkpoint or output validation. The same confirmation is not requested again.
+The runner does not kill an unverified old process or move potentially live
+outputs based on a PID guess.
+
+The supported recovery granularity is:
+
+- Physical: validated completed land, individual water shards, union, and final
+  physical composition. The normal raw producer resumes the same output root.
+- Mainland/islands: completed components and Stage 2 are sealed. Stage 2 resumes
+  its normal checkpointed core after a durable derived manifest. Before that
+  manifest, partial work is preserved and its source preparation is rerun.
+- Water: completed basin extractions, basin assignments, independent coverage
+  checks and downstream stages are reused. The coastal batch copies validated
+  completed tiles from all preserved earlier coast attempts into fresh output.
+- The first failed coast or basin future cancels queued work and stops other
+  active stage commands, so a coastal failure cannot remain hidden behind all
+  basin results.
+- A leaf with no supported internal checkpoint is preserved under `preserved/`
+  and rerun from its pinned inputs. Partial data are never relabeled as complete,
+  overwritten in place, or deleted automatically.
+
+Downtime between attempts is excluded. Active intervals within each attempt are
+unioned, so concurrent work is counted once, and the attempt totals are added.
+Physical source downloads are excluded by the normal physical producer's own
+journal; completed-report verification is counted as new validation work rather
+than charging an old download or invocation again.
+
+A graceful interruption with durable endpoints can retain exact measured active
+time, including processing spent on a failed attempt. An abrupt kill can leave
+an unmatched interval. Only its last durable heartbeat/checkpoint prefix is known;
+its tail is not guessed. Such a stage reports `timing_complete: false`,
+`processing_elapsed_seconds: null` and a
+`recorded_processing_elapsed_seconds` lower bound. A successfully resumed final
+map can therefore have complete outputs but incomplete timing. Use a fresh,
+uninterrupted run if an exact whole-stage baseline is required.
+
+These are wall-clock processing intervals, not CPU-time measurements. Ordinary
+OS scheduling delays within a live invocation remain included. An external
+suspension of the same running process is not a separate measured restart gap;
+the runner does not infer an exact suspension duration from heartbeat silence.
+
+Logs and failed attempts are retained. Atomic JSON publication leaves an
+unreferenced pending file if a writer is killed; only the final filename is a
+checkpoint. A torn timing-journal tail is preserved before recovering its valid
+prefix. Older runs without this identity/checkpoint contract are not silently
+adopted. Existing uncheckpointed runs must retain their original code; this update does
+not migrate them.
+Cloud recovery also requires retaining/restoring the run directory and pinned
+inputs at their original paths; missing storage cannot be reconstructed from a
+chat transcript.
 
 ## Tests
 
@@ -125,6 +200,8 @@ Tests execute actual raw polygon/Parquet rasterization and C++ component
 production through ordinary subprocess CLIs. Another real-processing fixture
 chains ocean partition, enclosed-water classification, final-plan validation
 and composition, checking every cell of its final grid. Timing tests cover
-parallel union, idle gaps, failures and acquisition separation. These focused
+parallel union, idle gaps, failures, changed monotonic clock origins, simulated
+process interruptions, resumed output equality, torn journals, live-process
+safety, pin corruption and acquisition separation. These focused
 fixtures do not replace the global source-to-final acceptance run or establish
 its elapsed time.

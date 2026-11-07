@@ -37,7 +37,7 @@ class RepositoryDependenciesTest(unittest.TestCase):
         self.assertNotIn('guarded_exec.py', orchestrate_stage2.SEED_NAMES)
         self.assertNotIn('guarded_raster_exec.py', orchestrate_stage2.SEED_NAMES)
 
-    def test_external_executable_sources_match_frozen_pins(self):
+    def test_current_sources_and_distinct_reviewed_checker_pins(self):
         producer = HERE / 'seed-producer' / 'seed_producer.py'
         pins = literal_assignment(producer, 'TRUSTED_CODE')
         pins['terminal_checker'] = literal_assignment(producer, 'TRUSTED_TERMINAL_CHECKER')
@@ -48,9 +48,16 @@ class RepositoryDependenciesTest(unittest.TestCase):
             'terminal_checker': LAND / 'mainland-source-verification-20261104/validate_terminal_closure.py',
         }
         self.assertEqual(set(files), set(pins))
+        current = dict(pins)
+        # Current direct-path checkers remain provisional-only. Do not replace
+        # the separately reviewed historical freeze to make a test pass.
+        current['closure_checker'] = literal_assignment(producer, 'PROVISIONAL_CLOSURE_CHECKER')
+        current['terminal_checker'] = literal_assignment(producer, 'PROVISIONAL_TERMINAL_CHECKER')
+        self.assertNotEqual(current['closure_checker'], pins['closure_checker'])
+        self.assertNotEqual(current['terminal_checker'], pins['terminal_checker'])
         for name, path in files.items():
             with self.subTest(name=name):
-                self.assertEqual(sha(path), pins[name])
+                self.assertEqual(sha(path), current[name])
         component = LAND / 'fresh-components-20261104/build_components.py'
         source = LAND / 'simple-v2-baseline/build_components.cpp'
         self.assertEqual(sha(source), literal_assignment(component, 'REVIEWED_SOURCE_SHA256'))

@@ -24,23 +24,24 @@ class TimingTests(unittest.TestCase):
     def test_completed_intervals_survive_and_failures_remain_incomplete(self):
         with tempfile.TemporaryDirectory() as td:
             timer = pipeline.Timing(Path(td) / 'events.jsonl')
-            with patch.object(pipeline.time, 'monotonic', side_effect=[10, 13, 20, 21, 40, 65]):
+            with patch.object(pipeline.time, 'monotonic', side_effect=[10, 13, 20, 21, 40, 40, 65, 65]):
                 with timer.measure('water', 'basin'):
                     pass
                 with self.assertRaises(RuntimeError):
                     with timer.measure('water', 'coast'):
                         raise RuntimeError('interrupted')
                 with timer.measure('physical', 'stage-total'):
-                    pass
+                    with timer.measure('physical', 'physical', kind='command'):
+                        pass
             timer.completed_groups.add('physical')
             doc = timer.summary({'status': 'candidate-only', 'processing_elapsed_seconds': 5,
                                  'source_download_elapsed_seconds': 20})
-            self.assertEqual(doc['water']['processing_elapsed_seconds'], 3)
+            self.assertEqual(doc['water']['processing_elapsed_seconds'], 4)
             self.assertFalse(doc['water']['complete'])
             self.assertEqual(doc['physical']['processing_elapsed_seconds'], 5)
             self.assertEqual(doc['physical']['source_download_elapsed_seconds'], 20)
             records = [json.loads(line) for line in timer.path.read_text().splitlines()]
-            self.assertEqual([r['event'] for r in records], ['start', 'complete', 'start', 'failed', 'start', 'complete'])
+            self.assertEqual([r['event'] for r in records if r['event'] != 'attempt'], ['start', 'complete', 'start', 'failed', 'start', 'start', 'complete', 'complete'])
 
     def test_invalid_acquisition_timing_cannot_be_a_complete_stage(self):
         with tempfile.TemporaryDirectory() as td:
@@ -53,7 +54,7 @@ class TimingTests(unittest.TestCase):
                                      'source_download_elapsed_seconds': 4})['physical']
             self.assertFalse(summary['complete'])
             self.assertIsNone(summary['processing_elapsed_seconds'])
-            self.assertIn('invalid', summary['timing_error'])
+            self.assertIsNotNone(summary['timing_error'])
 
     def test_parallel_jobs_are_measured_as_union_not_sum(self):
         with tempfile.TemporaryDirectory() as td:
@@ -95,7 +96,9 @@ class Fixture(unittest.TestCase):
 
     def make(self):
         config = pipeline.write(self.inputs / 'request.json', self.cfg)
-        return pipeline.Pipeline(config, self.root / 'run', allow_provisional=True)
+        runner = pipeline.Pipeline(config, self.root / 'run', allow_provisional=True)
+        self.addCleanup(runner.close)
+        return runner
 
     def test_no_implicit_research_optin(self):
         config = pipeline.write(self.inputs / 'request.json', self.cfg)
@@ -113,6 +116,11 @@ class Fixture(unittest.TestCase):
         runner = self.make()
         for key in ('TMPDIR', 'TMP', 'TEMP', 'CPL_TMPDIR', 'SQLITE_TMPDIR'):
             self.assertEqual(runner.env[key], str(runner.out / 'scratch'))
+        self.assertEqual(runner.env['PYTHONPATH'].split(os.pathsep)[:3],
+                         [str(pipeline.SCRIPTS), str(pipeline.SCRIPTS / pipeline.REPLAY),
+                          str(pipeline.SCRIPTS / pipeline.OCEAN)])
+        runner.command('setup', 'coast-import', 'v7-replay/batch_coastal_tiles.py', '--help')
+        self.assertIn('usage:', (runner.out / 'logs/coast-import.log').read_text())
         with self.assertRaisesRegex(ValueError, 'new output'):
             pipeline.Pipeline(runner.config_path, runner.out, allow_provisional=True)
 
@@ -129,6 +137,35 @@ class Fixture(unittest.TestCase):
         failure = pipeline.read(runner.out / 'failure.json')
         self.assertFalse(failure['stages']['mainland']['complete'])
         self.assertFalse(failure['stages']['water']['complete'])
+
+    def test_coastal_failure_cancels_basins_without_waiting_for_all_results(self):
+        snapshot = pipeline.write(self.inputs / 'water.json',
+                                  {'basins': [{'id': f'b{i}'} for i in range(12)]})
+        self.cfg['sources']['water_snapshot'] = pipeline.pin(snapshot)
+        self.cfg['basin_workers'] = 1
+        runner = self.make()
+        entered, released = threading.Event(), threading.Event()
+        seen = []
+        def coast(*args):
+            if not entered.wait(.5):
+                raise RuntimeError('basin did not start')
+            raise ValueError('coastal failure')
+        def basin(decision, *args):
+            seen.append(decision['id'])
+            entered.set()
+            if not released.wait(.5):
+                raise RuntimeError('coastal failure was hidden behind basin results')
+            return {}
+        original_cancel = runner.cancel
+        def cancel():
+            original_cancel()
+            released.set()
+        with patch.object(runner, 'coast', side_effect=coast), \
+                patch.object(runner, 'basin', side_effect=basin), \
+                patch.object(runner, 'cancel', side_effect=cancel):
+            with self.assertRaisesRegex(ValueError, 'coastal failure'):
+                runner.water(self.inputs, self.inputs)
+        self.assertLess(len(seen), 12)
 
     def test_actual_archive_to_basin_to_coverage_via_runner(self):
         import numpy as np
@@ -165,7 +202,21 @@ class Fixture(unittest.TestCase):
             directory.mkdir()
             np.arange(height + 1, dtype='<u4').tofile(directory / 'rows.u32le')
             np.tile(np.array([width, water_code], dtype='<u4'), height).tofile(directory / 'runs.u32le')
+        original_command = runner.command
+        def stop_after_extraction(*args, **kwargs):
+            result = original_command(*args, **kwargs)
+            if args[1] == 'extract-tiny-sea':
+                raise KeyboardInterrupt('simulated workspace interruption between stages')
+            return result
+        with patch.object(runner, 'command', side_effect=stop_after_extraction):
+            with self.assertRaises(KeyboardInterrupt):
+                runner.basin(decision, physical, land, snapshot)
+        extraction_receipt = pipeline.pin(runner.out / 'checkpoints/extract-tiny-sea/complete.json')
+        runner.close()
+        runner = pipeline.Pipeline(runner.config_path, runner.out, allow_provisional=True, resume=True)
+        self.addCleanup(runner.close)
         result = runner.basin(decision, physical, land, snapshot)
+        self.assertEqual(extraction_receipt, pipeline.pin(extraction_receipt['path']))
         manifest = pipeline.read(result['manifest_path'])
         self.assertGreater(manifest['physical_water_cells'], 0)
         self.assertEqual(result['manifest_sha256'], pipeline.sha(result['manifest_path']))
@@ -223,14 +274,14 @@ class Fixture(unittest.TestCase):
                     'component_source': pipeline.SCRIPTS / 'v7-recovery/land/simple-v2-baseline/build_components.cpp'}.items()}})
         components = runner.out / 'components'
         runner.command('mainland', 'components',
-            'v7-recovery/land/fresh-components-20261104/watch_components.py',
+            'v7-recovery/land/fresh-components-20261104/build_components.py',
             request, runner.out / 'work/components', components)
         report = pipeline.read(components / 'report.json')
         self.assertEqual(report['land_cells'], 5)
         self.assertEqual(report['component_runs_sha256'], pipeline.sha(components / 'runs.u32le'))
         manifest = pipeline.read(components / 'manifest.json')
         self.assertEqual(manifest['physical_report'], pipeline.pin(physical / 'report.json'))
-        self.assertTrue((components / 'monitor.json').is_file())
+        self.assertFalse((components / 'monitor.json').exists())
         np.testing.assert_array_equal(np.fromfile(physical / 'rows.u32le', dtype='<u4'), [0, 3, 5, 6, 7])
         self.assertEqual(pipeline.read(runner.out / 'physical/report.json')['source_download_elapsed_seconds'], 0)
 

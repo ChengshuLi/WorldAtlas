@@ -37,6 +37,21 @@ class DirectSeedExecutionTests(unittest.TestCase):
    closure_client._run_checker(script,[output],log)
    self.assertEqual(output.read_text(),'proof')
    self.assertEqual(log.read_text().strip(),'validated')
+ def test_rasterizer_executes_checked_in_sources_without_copying(self):
+  directory=Path(seed_producer.BASE).parents[1]/'neon-mainland-regions-20261104/rasterizer'
+  pins={key:{'path':str(directory/name),'sha256':seed_producer.TRUSTED_CODE[key]}
+        for key,name in (('seed_builder','build_seed.py'),('seed_kernel','seed_kernel.cpp'))}
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);config=root/'config.json';output=root/'output'
+   result={'status':'fixture'}
+   with mock.patch.object(runpy,'run_path',return_value={'build':lambda cfg,out: result}) as run:
+    self.assertEqual(seed_producer.execute_rasterizer(pins,config,output,lambda:None),result)
+   run.assert_called_once_with(str((directory/'build_seed.py').resolve()))
+   self.assertEqual(list(root.iterdir()),[])
+   pins['seed_kernel']['path']=pins['seed_builder']['path']
+   with self.assertRaisesRegex(ValueError,'checked-in rasterizer source pair'):
+    seed_producer.rasterizer_sources(pins)
+
  def test_seed_runtime_has_no_guarded_wrappers_or_child_supervisor(self):
   base=Path(region_client.__file__).parent
   self.assertFalse((base/'guarded_exec.py').exists())

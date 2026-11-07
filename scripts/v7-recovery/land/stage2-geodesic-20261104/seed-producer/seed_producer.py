@@ -29,6 +29,22 @@ def validate_provisional_checker_source(inp,snapshot,allow_local):
  provisional=(inp['closure_checker'].get('sha256')==PROVISIONAL_CLOSURE_CHECKER or inp.get('terminal_checker',{}).get('sha256')==PROVISIONAL_TERMINAL_CHECKER)
  if provisional and not (allow_local and snapshot.get('source')=='local-derived-from-neon-export'):raise ValueError('provisional checker requires local provisional snapshot')
 
+def rasterizer_sources(inp):
+ directory=BASE.parents[1]/'neon-mainland-regions-20261104/rasterizer'
+ expected=(directory/'build_seed.py',directory/'seed_kernel.cpp')
+ actual=tuple(Path(inp[key]['path']).resolve(strict=True) for key in ('seed_builder','seed_kernel'))
+ if actual!=tuple(path.resolve(strict=True) for path in expected):raise ValueError('checked-in rasterizer source pair required')
+ return actual
+
+def execute_rasterizer(inp,config_path,seedout,guard):
+ builder,kernel=rasterizer_sources(inp)
+ for key,path in (('seed_builder',builder),('seed_kernel',kernel)):
+  if sha(path,guard)!=inp[key]['sha256']:raise ValueError('rasterizer source mismatch')
+ result=runpy.run_path(str(builder))['build'](str(config_path),str(seedout))
+ for key,path in (('seed_builder',builder),('seed_kernel',kernel)):
+  if sha(path,guard)!=inp[key]['sha256']:raise ValueError('rasterizer source changed')
+ return result
+
 def bounded_json(pin,guard):
  h=hashlib.sha256();chunks=[]
  with open(pin['path'],'rb') as f:
@@ -86,12 +102,8 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
  code_hashes={name:sha(BASE/name,guard) for name in CODE};code_hashes['rasterizer']=inp['seed_builder']['sha256'];code_hashes['rasterizer_kernel']=inp['seed_kernel']['sha256']
  work.mkdir(mode=0o700)
  if os.stat(work).st_dev!=os.stat(output.parent).st_dev:raise ValueError('seed output must share work filesystem')
- rinput=work/'region-input';rinput.mkdir();regionwork=work/'region-work';regionwork.mkdir();codework=work/'rasterizer-code';codework.mkdir();seedout=work/'seed-output'
- # Execute only reviewed byte-pinned rasterizer source copies.
- for key,name in (('seed_builder','build_seed.py'),('seed_kernel','seed_kernel.cpp')):
-  with open(inp[key]['path'],'rb') as f:data=f.read()
-  if hashlib.sha256(data).hexdigest()!=inp[key]['sha256']:raise ValueError('rasterizer source mismatch')
-  (codework/name).write_bytes(data)
+ rinput=work/'region-input';rinput.mkdir();regionwork=work/'region-work';regionwork.mkdir();seedout=work/'seed-output'
+ rasterizer_sources(inp)
  closure={'checker_path':inp['closure_checker']['path'],'checker_sha256':inp['closure_checker']['sha256'],'physical_dir':str(Path(inp['physical_rows']['path']).resolve().parent),'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'contract_path':inp['closure_contract']['path'],'contract_sha256':inp['closure_contract']['sha256']}
  if 'terminal_checker' in inp:closure.update({'terminal_checker_path':inp['terminal_checker']['path'],'terminal_checker_sha256':inp['terminal_checker']['sha256']})
  if Path(inp['physical_runs']['path']).resolve().parent!=Path(closure['physical_dir']):raise ValueError('physical files must be colocated')
@@ -112,8 +124,7 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
   equivalence={'prior_report_sha256':inp['prior_physical_report']['sha256'],'current_report_sha256':inp['physical_report']['sha256'],'rows_sha256':inp['physical_rows']['sha256'],'runs_sha256':inp['physical_runs']['sha256'],'historical_route_provenance':historical,'fresh_reproof_route_ids':sorted(verified),'status':'equivalent-streams-fresh-proofs-provisional-only'}
  raster_rules=[{'component_id':r['component_id_current_generation_only'],'region_id':r['region_id'],'inside_code':r['inside_code'],'outside_code':r['outside_code']} for r in rules]
  config={'schema':'direct-region-seed-research-v1','grid':{**grid,'crs':'EPSG:4326'},'component_rows':inp['component_rows'],'component_runs':inp['component_runs'],'regions':region_configs,'rules':raster_rules,'evidence':[inp[k] for k in ('snapshot','resolution','physical_rows','physical_runs','physical_report','component_manifest','closure_checker','closure_contract')]+([inp['prior_physical_report']] if local_candidate else []),'strip_rows':controls['strip_rows'],'reserve_bytes':controls['disk_reserve_bytes']};config_path=rinput/'seed-config.json';config_path.write_text(json.dumps(config,sort_keys=True,indent=2)+'\n')
- raster_module=runpy.run_path(str(codework/'build_seed.py'))
- raster=raster_module['build'](str(config_path),str(seedout))
+ execute_rasterizer(inp,config_path,seedout,guard)
  raster=bounded_json({'path':str(seedout/'report.json'),'sha256':sha(seedout/'report.json',guard)},guard)
  rows=sha(seedout/'rows.u32le',guard);runs=sha(seedout/'runs.u32le',guard)
  if raster.get('schema')!='direct-region-seed-research-report-v1' or raster.get('outputs_sha256')!={'rows':rows,'runs':runs} or raster.get('component_rows_sha256')!=inp['component_rows']['sha256'] or raster.get('component_runs_sha256')!=inp['component_runs']['sha256']:raise ValueError('seed rasterizer output mismatch')

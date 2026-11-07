@@ -43,6 +43,19 @@ approval.
    Independent halos avoid inflating latitude coverage near the poles. The
    current builder uses RLE shore extraction and 2-D rectangle certificates.
    `assemble_coastal_tiles.py` verifies the complete non-overlapping tessellation.
+   Each batch publishes `batch-start.json` and a durable `tile-complete.json`
+   after each closed tile. To continue after interruption, keep the previous
+   batch and run the same command with a new `--out` and `--resume-from OLD_OUT`.
+   Repeat `--resume-from` for earlier preserved attempts if a restart itself was
+   interrupted. Input, snapshot, plan, driver and supporting code hashes must
+   match; every copied manifest and assignment file is rehashed. Partial tiles
+   without completion records are regenerated, and corrupt records fail closed.
+   Historical batches without these producer-owned records are not adopted.
+   Checkpoints use relative paths and survive preservation-directory renames.
+   Timing carries recorded active intervals forward without restart downtime.
+   After a hard interruption, the work since the last checkpoint is unknown:
+   `timing_complete` is false, `processing_elapsed_seconds` is null, and
+   `recorded_processing_elapsed_seconds` is the measured lower bound.
 5. `build_prefill_plan.py` consumes a configuration with `rle_inputs.physical`,
    `rle_inputs.land`, `coastal_band` and the selected `basins`. Each stream and
    report has its path and SHA-256. It binds source selection, decision policy,

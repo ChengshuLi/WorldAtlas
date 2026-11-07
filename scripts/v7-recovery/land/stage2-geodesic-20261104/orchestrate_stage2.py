@@ -112,10 +112,8 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  # core repeats this verification and validates representative cell membership.
 
  source=HERE/'verify_seed_index.cpp';source_data=build_stage2.read_bytes(source,guard);need(hashlib.sha256(source_data).hexdigest()==code['verify_seed_index.cpp'],'verifier source changed')
- source_copy=work/'requests'/'tile-verifier.cpp'
- with open(source_copy,'xb') as f:f.write(source_data);f.flush();os.fsync(f.fileno())
- binary=work/'requests'/'tile-verifier';subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(source_copy),'-lcrypto','-o',str(binary)],check=True)
- need(verify_inputs.sha_file(source,guard)==code['verify_seed_index.cpp'] and verify_inputs.sha_file(source_copy,guard)==code['verify_seed_index.cpp'],'verifier source changed during compilation')
+ binary=work/'requests'/'tile-verifier';subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(source),'-lcrypto','-o',str(binary)],check=True)
+ need(verify_inputs.sha_file(source,guard)==code['verify_seed_index.cpp'],'verifier source changed during compilation')
  guard();check=subprocess.run([str(binary),srows['path'],sruns['path'],str(tileout),str(g['width']),str(g['height']),'1024'],capture_output=True,text=True,check=True)
  need(json.loads(check.stdout).get('status')=='verified','fresh seed/tile verification failed')
  import numpy as np

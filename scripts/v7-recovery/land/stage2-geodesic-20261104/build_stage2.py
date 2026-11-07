@@ -106,9 +106,9 @@ def _build(cp,work,output,resume,raw,cfg,processing_started=None,orchestration_r
  need(len(roots)==count and len(hints)==count and np.all(roots[1:]>roots[:-1]) and np.all(np.isin(hints,list(categories))),'invalid fresh root/hint arrays')
  # Verify every tile byte against the current selected seed with a freshly built verifier.
  src=HERE/'verify_seed_index.cpp';src_bytes=read_bytes(src,guard);need(hashlib.sha256(src_bytes).hexdigest()==code[src.name],'verifier changed')
- builddir=work/('verifier-build-'+uuid.uuid4().hex);builddir.mkdir();copy=builddir/src.name;copy.write_bytes(src_bytes);binary=builddir/'verifier'
- subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(copy),'-lcrypto','-o',str(binary)],check=True)
- need(verify_inputs.sha_file(src,guard)==code[src.name] and verify_inputs.sha_file(copy,guard)==code[src.name],'verifier changed during compilation');guard()
+ builddir=work/('verifier-build-'+uuid.uuid4().hex);builddir.mkdir();binary=builddir/'verifier'
+ subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(src),'-lcrypto','-o',str(binary)],check=True)
+ need(verify_inputs.sha_file(src,guard)==code[src.name],'verifier changed during compilation');guard()
  v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);tilecheck=json.loads(v.stdout);need(tilecheck.get('status')=='verified','seed/tile verification failed')
  spec=verify_inputs.manifest(paths['tile_manifest'],w,h,1024,guard);rep_bytes=verify_inputs.bounded_bytes(paths['representatives'],representative_byte_limit(len(spec)),guard);rep=np.frombuffer(rep_bytes,dtype='<u4');need(len(rep)%5==0,'invalid representative shape');rep=rep.reshape(-1,5)
  tiles=verify_inputs.verify_representatives(cfg['tile_directory'],paths['tile_manifest'],rep,w,h,guard=guard);need(len(tiles)==tilecheck['tiles'],'tile set mismatch')

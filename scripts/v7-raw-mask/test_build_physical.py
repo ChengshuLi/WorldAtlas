@@ -1,5 +1,9 @@
 import hashlib
+import fcntl
 import json
+import os
+import subprocess
+import sys
 import tempfile
 import time
 import unittest
@@ -12,6 +16,28 @@ from osgeo import gdal, ogr
 import build_physical as b
 
 class PipelineTests(unittest.TestCase):
+    def test_atomic_publish_preserves_pending_on_link_failure(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'report.json'
+            with mock.patch.object(b.os,'link',side_effect=OSError('link failure')):
+                with self.assertRaisesRegex(OSError,'link failure'):b.write_bytes_atomic(path,b'payload')
+            self.assertFalse(path.exists());self.assertEqual([p.read_bytes() for p in Path(d).glob('.report.json.*.pending')],[b'payload'])
+    def test_atomic_publish_does_not_overwrite_existing(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'report.json';path.write_bytes(b'existing')
+            with self.assertRaises(FileExistsError):b.write_bytes_atomic(path,b'new')
+            self.assertEqual(path.read_bytes(),b'existing')
+    def test_interrupted_parallel_units_use_wall_time_union(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);j=b.ProcessingJournal(root,time.perf_counter(),False)
+            j.add({'event':'attempt_start','attempt':'old'})
+            for start,end in ((0,10),(5,15)):
+                j.add({'event':'unit_complete','attempt':'old','unit':'test','start_monotonic_seconds':start,
+                       'end_monotonic_seconds':end,'processing_elapsed_seconds':end-start})
+            j.finish('complete');r=j.summary()
+            self.assertFalse(r['timing_complete']);self.assertIsNone(r['processing_elapsed_seconds'])
+            self.assertGreaterEqual(r['recorded_processing_elapsed_seconds'],15)
+            self.assertLess(r['recorded_processing_elapsed_seconds'],20)
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory(); self.root=Path(self.tmp.name)
         self.config_dir=self.root/'configs';self.config_dir.mkdir()
@@ -37,6 +63,109 @@ class PipelineTests(unittest.TestCase):
                   'source_manifest':{'path':str(source),'sha256':b.sha(source)}}
         self.config=self.config_dir/'pipeline.json';self.config.write_text(json.dumps(self.cfg))
     def tearDown(self):self.tmp.cleanup()
+    def interrupt_before_union(self,out):
+        actual=b.run_stage
+        def stage(name,*args):
+            if name=='overture/aggregate_compare.py':raise ValueError('simulated interruption')
+            return actual(name,*args)
+        with mock.patch.object(b,'run_stage',side_effect=stage):
+            with self.assertRaisesRegex(ValueError,'simulated interruption'):b.run(self.config,out)
+
+    def test_resume_reuses_verified_checkpoints_and_preserves_timing(self):
+        out=self.root/'resume';self.interrupt_before_union(out);actual=b.run_stage;seen=[]
+        def stage(name,*args):seen.append(name);return actual(name,*args)
+        with mock.patch.object(b,'run_stage',side_effect=stage):b.run(self.config,out,resume=True)
+        report=json.loads((out/'report.json').read_text())
+        self.assertTrue(report['timing_complete']);self.assertGreater(report['processing_elapsed_seconds'],0)
+        self.assertNotIn('rasterize_land.py',seen);self.assertNotIn('overture/rasterize_water_shard.py',seen)
+        self.assertEqual(b.run(self.config,out,resume=True),report)
+
+    def test_concurrent_attempt_is_rejected(self):
+        out=self.root/'locked';lock=self.root/'locked.lock'
+        with lock.open('w') as f:
+            fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            with self.assertRaisesRegex(ValueError,'already running'):b.run(self.config,out)
+        self.assertFalse(out.exists())
+
+    def test_resume_before_journal_creation_marks_timing_incomplete(self):
+        out=self.root/'early-interruption'
+        with mock.patch.object(b,'ProcessingJournal',side_effect=OSError('journal interrupted')):
+            with self.assertRaisesRegex(OSError,'journal interrupted'):b.run(self.config,out)
+        report=b.run(self.config,out,resume=True)
+        self.assertFalse(report['timing_complete']);self.assertIsNone(report['processing_elapsed_seconds'])
+
+    def test_resume_hard_interruption_reports_unknown_total(self):
+        out=self.root/'crashed';self.interrupt_before_union(out);journal=out/'processing-events.jsonl'
+        lines=journal.read_text().splitlines();self.assertEqual(json.loads(lines[-1])['event'],'attempt_end')
+        journal.write_text('\n'.join(lines[:-1])+'\n{"event":');b.run(self.config,out,resume=True)
+        report=json.loads((out/'report.json').read_text());self.assertFalse(report['timing_complete'])
+        self.assertIsNone(report['processing_elapsed_seconds']);self.assertGreater(report['recorded_processing_elapsed_seconds'],0)
+        self.assertEqual([p.read_text() for p in (out/'interrupted').glob('journal-tail-*')],['{"event":'])
+
+    def test_actual_kill_preserves_units_and_marks_timing_incomplete(self):
+        out=self.root/'actual-kill';marker=self.root/'waiting'
+        code='''import build_physical as b, pathlib, sys, time\noriginal=b.run_stage\ndef stage(name,*args):\n if name=="overture/aggregate_compare.py":\n  pathlib.Path(sys.argv[3]).write_text("ready");time.sleep(60)\n return original(name,*args)\nb.run_stage=stage\nb.run(sys.argv[1],sys.argv[2])\n'''
+        env=os.environ.copy();env['PYTHONPATH']=str(Path(b.__file__).parent)+os.pathsep+env.get('PYTHONPATH','')
+        proc=subprocess.Popen([sys.executable,'-c',code,str(self.config),str(out),str(marker)],env=env,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
+        try:
+            deadline=time.monotonic()+30
+            while not marker.exists() and proc.poll() is None and time.monotonic()<deadline:time.sleep(.05)
+            if not marker.exists():
+                if proc.poll() is None:proc.kill();proc.wait(timeout=10)
+                self.fail('child did not reach checkpoint: '+proc.stderr.read().decode())
+        finally:
+            if proc.poll() is None:proc.kill()
+            proc.wait(timeout=10)
+        b.run(self.config,out,resume=True);report=json.loads((out/'report.json').read_text())
+        self.assertFalse(report['timing_complete']);self.assertIsNone(report['processing_elapsed_seconds'])
+        self.assertGreater(report['recorded_processing_elapsed_seconds'],0)
+
+    def test_resume_rejects_tampered_checkpoint_and_input(self):
+        out=self.root/'tampered';self.interrupt_before_union(out)
+        (out/'shards/00000/water.tif').write_bytes(b'tampered')
+        with self.assertRaisesRegex(ValueError,'shard checkpoint mismatch'):b.run(self.config,out,resume=True)
+        self.cfg['selection_notes']='changed';self.config.write_text(json.dumps(self.cfg))
+        with self.assertRaisesRegex(ValueError,'resume identity mismatch'):b.run(self.config,out,resume=True)
+
+    def test_completed_resume_revalidates_shard_inventory(self):
+        out=self.root/'finished';b.run(self.config,out)
+        (out/'shards/00000/water.tif').write_bytes(b'tampered')
+        with self.assertRaisesRegex(ValueError,'completed shard checkpoint mismatch'):b.run(self.config,out,resume=True)
+
+    def test_resume_quarantines_incomplete_unit(self):
+        out=self.root/'partial';actual=b.run_stage
+        def stage(name,*args):
+            if name=='overture/rasterize_water_shard.py':
+                destination=Path(args[3]);destination.mkdir();(destination/'partial').write_text('preserve')
+                raise ValueError('partial shard')
+            return actual(name,*args)
+        with mock.patch.object(b,'run_stage',side_effect=stage):
+            with self.assertRaisesRegex(ValueError,'partial shard'):b.run(self.config,out)
+        b.run(self.config,out,resume=True)
+        self.assertEqual([p.read_text() for p in (out/'interrupted').glob('00000-*/partial')],['preserve'])
+
+    def test_resume_reuses_union_after_composition_failure(self):
+        out=self.root/'union-resume';actual=b.run_stage
+        def fail_compose(name,*args):
+            if name=='compose_physical.py':raise ValueError('composition interrupted')
+            return actual(name,*args)
+        with mock.patch.object(b,'run_stage',side_effect=fail_compose):
+            with self.assertRaisesRegex(ValueError,'composition interrupted'):b.run(self.config,out)
+        seen=[]
+        def stage(name,*args):seen.append(name);return actual(name,*args)
+        with mock.patch.object(b,'run_stage',side_effect=stage):b.run(self.config,out,resume=True)
+        self.assertEqual(seen,['compose_physical.py'])
+
+    def test_resume_after_report_write_failure_reuses_composition(self):
+        out=self.root/'report-resume';actual_write=b.write_json
+        def fail_report(path,value):
+            if Path(path)==out/'report.json':raise ValueError('report interrupted')
+            return actual_write(path,value)
+        with mock.patch.object(b,'write_json',side_effect=fail_report):
+            with self.assertRaisesRegex(ValueError,'report interrupted'):b.run(self.config,out)
+        with mock.patch.object(b,'run_stage',side_effect=AssertionError('unexpected rebuild')):
+            b.run(self.config,out,resume=True)
+        self.assertTrue((out/'report.json').is_file())
     def test_r2_staging_is_serial_verified_timed_and_owned(self):
         shard=self.raw/'water.parquet';content=shard.read_bytes();digest=b.sha(shard)
         source=Path(self.cfg['source_manifest']['path'])
@@ -75,6 +204,12 @@ class PipelineTests(unittest.TestCase):
         with mock.patch.object(b.subprocess,'run',side_effect=download):
             with self.assertRaisesRegex(ValueError,'size/hash mismatch'):b.run(self.config,out)
         self.assertTrue((out/'source-staging'/shard.name).exists());self.assertFalse((out/'report.json').exists())
+        def good_download(args,**kwargs):
+            if args[0]!=str(wrangler):return actual_run(args,**kwargs)
+            Path(args[args.index('--file')+1]).write_bytes(content)
+        with mock.patch.object(b.subprocess,'run',side_effect=good_download):b.run(self.config,out,resume=True)
+        self.assertEqual(len(list((out/'interrupted').glob(shard.name+'-*'))),1)
+        self.assertFalse((out/'source-staging'/shard.name).exists())
     def test_end_to_end_without_reference(self):
         out=self.root/'out';b.run(self.config,out)
         report=json.loads((out/'report.json').read_text());self.assertEqual(report['status'],'candidate-only');self.assertEqual(report['shard_count'],1)
