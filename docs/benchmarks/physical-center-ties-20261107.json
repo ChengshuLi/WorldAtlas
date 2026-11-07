@@ -1,0 +1,163 @@
+{
+  "schema": "worldatlas-physical-center-tie-correction-v1",
+  "date": "2026-11-07",
+  "affected_complete_run_commit": "ebfec04ffb61c1bee309c0ae969273bdb1cba08d",
+  "cause": "Global-coordinate GDAL VECTOR rasterization rounds rare pixel-center intersections differently from the original tile-local transform. Identical counts and total dry-cell count concealed two changed physical cells.",
+  "correction": "Use tile-local GDAL rasterization throughout. Prune only original vertex runs strictly outside each tile-row strip, with one-cell conservative padding. Retained intersection edges retain original double coordinates; added bridges lie outside all visible scanlines. Keep original source geometry validation and policy.",
+  "affected_physical_cells": [
+    {
+      "row": 7890,
+      "column": 97581,
+      "reference_code": 17,
+      "incorrect_code": 1
+    },
+    {
+      "row": 8650,
+      "column": 75722,
+      "reference_code": 1,
+      "incorrect_code": 17
+    }
+  ],
+  "complete_shard_verification": [
+    {
+      "ordinal": 29,
+      "source_sha256": "b571019419a8c668dc4af23a0598a06727b0369eb2e27756115d40a9a63ed8e4",
+      "source_rows": 2144984,
+      "incident_cell": {
+        "row": 8650,
+        "column": 75722,
+        "longitude": 27.978057861328125,
+        "latitude": 66.24069213867188
+      },
+      "extracted_features": [
+        {
+          "source_row": 2091632,
+          "id": "dd2633bd-31df-304d-9faa-22c2c5d31267"
+        }
+      ],
+      "legacy_reproduction": {
+        "python": 1,
+        "native-hybrid": 0,
+        "native-tiled": 1
+      },
+      "fixed_producer_seconds": 21.547294410003815,
+      "counts": {
+        "rows": 2144984,
+        "excluded_classification": 21063,
+        "polygons": 829012,
+        "non_polygon": 1294909
+      },
+      "reference_tiff_sha256": "5ef6aa2b48a1263079a2fb90974436f3e57ef148e406db3ff55776402dc7d62c",
+      "fixed_tiff_sha256": "5ef6aa2b48a1263079a2fb90974436f3e57ef148e406db3ff55776402dc7d62c",
+      "different_pixels": 0,
+      "fixed_report_sha256": "d24765d11aaa47d78f85e345e76e45d6a329d5cafc77581abd61aa84214e6cbc",
+      "native_kernel": {
+        "method": "hybrid",
+        "validation_threads": 9,
+        "source_sha256": "aa6fa32e66bb646122802d1d0f8aa77f7a5ed2b8f832faf00338421def35c8fa",
+        "binding_sha256": "89e02a41545adf474158a14d73900e64dfbdab343507b8c982ef4edc98c963d0",
+        "binary_sha256": "909fe9ae5251c08b017d35dcc6dfeda95e1e1671a4e44d8dec5c15f8289b9ecc",
+        "compiler": "c++ (Debian 14.2.0-19) 14.2.0",
+        "gdal": "3100300"
+      },
+      "native_timings": {
+        "parse_validate_index_seconds": 5.35240056,
+        "tile_burn_seconds": 5.992012024000001
+      }
+    },
+    {
+      "ordinal": 31,
+      "source_sha256": "b7df4485b75f81968ff98af738d11c7e58d7cac61cf898972b8d11c09f998d80",
+      "source_rows": 2076870,
+      "incident_cell": {
+        "row": 7890,
+        "column": 97581,
+        "longitude": 88.01559448242188,
+        "latitude": 68.32809448242188
+      },
+      "extracted_features": [
+        {
+          "source_row": 1697276,
+          "id": "d5cbfab6-2c19-376e-859e-460bf3f7efe0"
+        },
+        {
+          "source_row": 1697277,
+          "id": "12f2caf5-56ce-3ed8-ad05-8504fe6de4d2"
+        },
+        {
+          "source_row": 1722287,
+          "id": "b7b6adea-7bd8-384c-bd9b-507852abe589"
+        }
+      ],
+      "legacy_reproduction": {
+        "python": 0,
+        "native-hybrid": 1,
+        "native-tiled": 0
+      },
+      "fixed_producer_seconds": 45.37217025400605,
+      "counts": {
+        "rows": 2076870,
+        "excluded_classification": 12291,
+        "polygons": 1094006,
+        "non_polygon": 970573
+      },
+      "reference_tiff_sha256": "18b04bcb8dc3a2ea9ff9e502d1a23c082a5efacab6790b2621676e858539e156",
+      "fixed_tiff_sha256": "b23945daccf0e629b09ea669a60dc69e634e4eb071c2b9f5b0d81d994597cc37",
+      "different_pixels": 0,
+      "fixed_report_sha256": "0844da8acb86be698ea6048b5b87a36dcb1a870c8c572bd4b413a7f607d8178d",
+      "native_kernel": {
+        "method": "hybrid",
+        "validation_threads": 9,
+        "source_sha256": "aa6fa32e66bb646122802d1d0f8aa77f7a5ed2b8f832faf00338421def35c8fa",
+        "binding_sha256": "89e02a41545adf474158a14d73900e64dfbdab343507b8c982ef4edc98c963d0",
+        "binary_sha256": "909fe9ae5251c08b017d35dcc6dfeda95e1e1671a4e44d8dec5c15f8289b9ecc",
+        "compiler": "c++ (Debian 14.2.0-19) 14.2.0",
+        "gdal": "3100300"
+      },
+      "native_timings": {
+        "parse_validate_index_seconds": 7.800019529999997,
+        "tile_burn_seconds": 15.012721701999999
+      }
+    }
+  ],
+  "verification_scope": "Both complete offending official raw shards, every feature count and every grid cell compared to the original correct producers. Shard 29 is TIFF-byte-identical; shard 31 differs only in TIFF layout. Original and failed full outputs were preserved. The unchanged 30 raw sources were not rerun.",
+  "regressions": [
+    "Tiny production-grid polygons using both incident source edges and interiors.",
+    "Dense strip-crossing rings, holes, multipart and Z geometry.",
+    "Legacy global-vector kernel reproduces failure of the new incident-edge regression."
+  ],
+  "superseded_receipt": "physical-native-20261107.json",
+  "limitations": [
+    "These native-only checks are not paired timing trials or a corrected full 32-shard timing.",
+    "Explicit per-producer code provenance is required when reusing unchanged shards with older kernel code.",
+    "Pixel equality establishes reproduction, not independent geographic correctness."
+  ],
+  "regression_suites": {
+    "raw": {
+      "passed": 47,
+      "seconds": 79.572,
+      "log_sha256": "b8ee5fb3f8b29f4dc7a6bc0b85dceccbf6c16646a4ebcc486a416574250b264d"
+    },
+    "water": {
+      "passed": 25,
+      "seconds": 42.759,
+      "log_sha256": "2532618ee8fa74cc442bcb26fd1b709f6265625c8165686fe266c2f722f15e32"
+    },
+    "lineage": {
+      "passed": 32,
+      "seconds": 2.062,
+      "log_sha256": "ddc31a5baf04989e0c58d2c8167f595a833f7e72a48d42afaf7bbbdd2bcad387"
+    },
+    "legacy-lineage": {
+      "passed": 9,
+      "seconds": 0.254,
+      "log_sha256": "ee3a647b41218f3f9e0d71cfea0c4c9ed6c0e6c35f9e5f9c32a077f0ecfa4da8"
+    },
+    "pipeline": {
+      "passed": 68,
+      "seconds": 17.962,
+      "log_sha256": "b0cc6776af443c06d92361bede0abd732a6f6847590af47655cca261d97f0f1d"
+    }
+  },
+  "total_regression_tests_passed": 181
+}

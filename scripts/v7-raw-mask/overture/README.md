@@ -10,11 +10,13 @@ new shard output, using that output for compiler temporary files. GDAL developme
 headers are not required. The helper reads Arrow's existing WKB buffers, performs
 the same OGR parsing, geometry-type and GEOS-validity checks using independent
 geometries across the process's available CPUs. The default `native_method:
-"hybrid"` groups small features into shared tile burns, uses GDAL's native vector
-path for broad single-part polygons, and skips empty multipart bounding-box gaps.
-It retains complete original geometries, coordinates and GDAL fill rules. The
-`tiled` and `vector` methods remain available for controlled comparisons. This
-avoids repeated broad-polygon vertex traversal as well as Python dictionaries,
+"hybrid"` groups small features into shared tile burns, prunes only vertex runs
+strictly outside each tile-row strip, and skips empty multipart bounding-box gaps.
+Retained edges keep their original coordinates; outside-strip bridges cannot
+intersect a visible scanline. Every GDAL burn uses the reference tile-local
+transform. `tiled` retains the unpruned reference raster path. The former global
+`vector` method is rejected because it changes rare pixel-center ties. This
+avoids repeated off-strip vertex traversal as well as Python dictionaries,
 WKB copies and per-tile OGR feature clones. The report records method, validation
 threads, helper/binding, binary, compiler and GDAL identity. Union, checkpoint and physical-lineage checks
 verify those pins. Set `rasterizer: "python"` in the pinned config, or use
@@ -38,7 +40,16 @@ raw copy downloaded specifically for this benchmark, after every check succeeds.
 Do not use that option for an existing input shared with another task. Reports,
 hashes, native binaries and cleanup receipts remain available.
 
-### Complete-shard timing, 2026-11-07
+### Historical development timing, superseded by the center-tie correction
+
+The global-vector implementation below was subsequently found to change two
+physical cells in a complete 32-shard run. It is no longer used. Its selected
+shard measurements remain historical evidence, not a correctness claim or timing
+for the corrected implementation. The [correction receipt](../../../docs/benchmarks/physical-center-ties-20261107.json)
+records the exact incident, extracted-feature reproductions and complete fixed
+shard comparisons. Both offending full shards now match every original pixel;
+their corrected native producer times were 21.55 and 45.37 seconds. Those are
+native-only checks, not fresh paired or end-to-end timings.
 
 Two serial, alternating-order trials processed the entire official shard 6
 (1,196,853,535 bytes, 2,093,933 rows), the slowest shard in the preceding sealed
@@ -57,6 +68,12 @@ complete source shard, not a new full 32-shard or end-to-end physical run. See t
 code, runtime, timings and verification details. The owned download and matching
 generated TIFF copies were removed after verification; their digests and reports
 remain in the receipt.
+
+`reproduce_water_cell.py SOURCE SHA CONFIG ROW COLUMN NEW_OUTPUT` verifies a raw
+source, extracts nearby features using its bbox column with one-cell padding,
+and replays Python, native hybrid and native tiled paths. It retains source-row
+indices, feature IDs, extracted data, pinned reports and each cell value. This is
+a diagnostic subset, not a complete source or geographic verification.
 
 ## Union and comparison
 

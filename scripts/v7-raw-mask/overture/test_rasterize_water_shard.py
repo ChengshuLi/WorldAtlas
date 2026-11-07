@@ -156,7 +156,7 @@ class WaterShardTests(unittest.TestCase):
         polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,0 90,0 -45,-180 -45,-180 90))').ExportToWkb())
         multipart=bytes(ogr.CreateGeometryFromWkt('MULTIPOLYGON (((-180 90,-135 90,-135 45,-180 45,-180 90)),((135 0,180 0,180 -45,135 -45,135 0)))').ExportToWkb())
         results=[]
-        for method in ('hybrid','vector','tiled'):
+        for method in ('hybrid','tiled'):
             out=self.path/method;out.mkdir();kernel=WaterBatch(out,method)
             kernel.threads=4
             raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
@@ -171,6 +171,55 @@ class WaterShardTests(unittest.TestCase):
             self.assertEqual(failed,1);self.assertEqual(status.tolist(),[1,5,0,0,0])
             self.assertEqual(int(raster.ReadAsArray().sum()),0)
         for result in results[1:]:np.testing.assert_array_equal(result,results[0])
+        out=self.path/'vector';out.mkdir();kernel=WaterBatch(out,'vector')
+        with self.assertRaisesRegex(ValueError,'global vector mode does not preserve'):
+            kernel.burn(raster,pa.array([polygon]),[1],[8,4,-180,90,45],2)
+
+    def test_production_grid_center_tie_edges_keep_reference_values(self):
+        p,_=self.fixture();metadata=pq.read_schema(p).metadata
+        # Actual incident edges, from official Overture shards29/31. Extending
+        # the opposite edge preserves each incident interior and makes tiny cases.
+        edges=[[(27.97825,66.2405),(27.978,66.24075)],
+               [(88.01575,68.32825),(88.0155,68.328)]]
+        rows=[]
+        for i,(a,b) in enumerate(edges):
+            shift=-3 if i==0 else 3
+            points=[a,b,(b[0]+shift,b[1]),(a[0]+shift,a[1]),a]
+            wkt='POLYGON (('+','.join(f'{x} {y}' for x,y in points)+'))'
+            rows.append({'id':str(i),'subtype':'lake','geometry':bytes(ogr.CreateGeometryFromWkt(wkt).ExportToWkb())})
+        pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata),p)
+        cfg=json.loads(self.config.read_text());cfg['grid']={'width':131072,'height':54614,'west':-180,'north':90,'step':360/131072}
+        cfg['tile_size']=1024;self.config.write_text(json.dumps(cfg));reports=[]
+        for engine in ('python','native'):
+            out=self.path/engine;build.run(p,build.sha256(p),out,self.config,engine=engine)
+            reports.append(json.loads((out/'report.json').read_text()))
+            raster=gdal.Open(str(out/'water.tif'))
+            self.assertEqual(int(raster.ReadAsArray(75722,8650,1,1)[0,0]),1)
+            self.assertEqual(int(raster.ReadAsArray(97581,7890,1,1)[0,0]),0)
+        self.assertEqual(reports[0]['output_sha256'],reports[1]['output_sha256'])
+
+    def test_strip_pruning_preserves_dense_rings_holes_multipart_and_z(self):
+        p,_=self.fixture();metadata=pq.read_schema(p).metadata
+        def wave(center,amplitude):
+            xs=np.linspace(-170,170,1001);ys=center+amplitude*np.sin(xs/7)
+            points=list(zip(xs,ys+2))+list(zip(xs[::-1],(ys-2)[::-1]))
+            outer=ogr.Geometry(ogr.wkbLinearRing)
+            for x,y in points+[points[0]]:outer.AddPoint_2D(float(x),float(y))
+            polygon=ogr.Geometry(ogr.wkbPolygon);polygon.AddGeometry(outer)
+            hole=ogr.Geometry(ogr.wkbLinearRing)
+            for angle in np.linspace(0,2*np.pi,81):hole.AddPoint_2D(float(.1*np.cos(angle)),float(center+.5*np.sin(angle)))
+            hole.CloseRings();polygon.AddGeometry(hole);self.assertTrue(polygon.IsValid());return polygon
+        north,south=wave(40,12),wave(-35,10)
+        multi=ogr.Geometry(ogr.wkbMultiPolygon);multi.AddGeometry(north);multi.AddGeometry(south)
+        elevated=north.Clone();elevated.Set3D(True)
+        rows=[{'id':str(i),'subtype':'lake','geometry':bytes(g.ExportToWkb())} for i,g in enumerate((north,multi,elevated))]
+        pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata),p)
+        cfg=json.loads(self.config.read_text());cfg['grid']={'width':64,'height':32,'west':-180,'north':90,'step':5.625}
+        cfg['tile_size']=4;self.config.write_text(json.dumps(cfg));reports=[]
+        for engine in ('python','native'):
+            out=self.path/engine;build.run(p,build.sha256(p),out,self.config,engine=engine)
+            reports.append(json.loads((out/'report.json').read_text()))
+        self.assertEqual(reports[0]['output_sha256'],reports[1]['output_sha256'])
     def test_batch_config_and_override(self):
         p,digest=self.fixture();cfg=json.loads(self.config.read_text());cfg['batch_size']=2
         self.config.write_text(json.dumps(cfg))

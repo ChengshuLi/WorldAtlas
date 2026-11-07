@@ -37,8 +37,11 @@ Two alternating full-input comparisons on 2026-11-07 measured land rasterization
 at 197.00 → 115.16 and 188.82 → 102.30 seconds (1.71–1.85×), and composition at
 133.48 → 63.68 and 108.23 → 68.28 seconds (1.59–2.10×). The complete land TIFF,
 physical TIFF and both physical streams matched the fresh baseline and sealed
-full run byte-for-byte. The complete slowest raw-water shard improved
-2.37–3.35×. These are separate stage/shard measurements, not a new complete
+full run byte-for-byte. A historical raw-water probe improved 2.37–3.35× on the
+slowest shard, but its global-vector path was subsequently superseded after two
+center-tie errors were found in the full 32-shard set. The [correction](../../docs/benchmarks/physical-center-ties-20261107.json)
+keeps all burns tile-local and verifies both offending complete shards exactly.
+These are separate stage/shard measurements, not a new complete
 32-shard or end-to-end time. See the [pinned receipt](../../docs/benchmarks/physical-native-20261107.json).
 
 `build.py` supplies strict shared pin, geometry, and optional reference utilities; it is not the entry point for the recommended flow. Mask outputs, reports, inputs and configs are all checked for change; the configuration itself is retained with outputs. Reports and comparisons do not prove geographic correctness or historical provenance. Explicit review of source selection and any differences remains necessary.

@@ -27,6 +27,12 @@ struct Api {
     int (*valid)(void*);
     int (*child_count)(void*);
     void* (*child)(void*,int);
+    int (*point_count)(void*);
+    double (*x)(void*,int);
+    double (*y)(void*,int);
+    void* (*new_geometry)(int);
+    int (*add_geometry)(void*,void*);
+    void (*add_point)(void*,double,double);
     void (*envelope)(void*, Envelope*);
     void* (*driver)(const char*);
     void* (*create)(void*, const char*, int, int, int, int, char**);
@@ -50,6 +56,9 @@ struct Api {
         load(empty, "OGR_G_IsEmpty"); load(geometry_type, "OGR_G_GetGeometryType");
         load(flatten, "OGR_GT_Flatten"); load(valid, "OGR_G_IsValid");
         load(child_count,"OGR_G_GetGeometryCount"); load(child,"OGR_G_GetGeometryRef");
+        load(point_count,"OGR_G_GetPointCount");load(x,"OGR_G_GetX");load(y,"OGR_G_GetY");
+        load(new_geometry,"OGR_G_CreateGeometry");load(add_geometry,"OGR_G_AddGeometryDirectly");
+        load(add_point,"OGR_G_AddPoint_2D");
         load(envelope, "OGR_G_GetEnvelope"); load(driver, "GDALGetDriverByName");
         load(create, "GDALCreate"); load(transform, "GDALSetGeoTransform");
         load(band, "GDALGetRasterBand"); load(raster_io, "GDALRasterIO");
@@ -64,6 +73,52 @@ using Geometry = std::unique_ptr<void, GeometryDeleter>;
 using Raster = std::unique_ptr<void, RasterDeleter>;
 struct Tile { int x, y; std::vector<const void*> geometries; };
 void require(bool ok, const char* message) { if (!ok) throw std::runtime_error(message); }
+
+// Retain every original edge that can intersect this strip. Removing a run of
+// vertices strictly above or below it introduces only an outside-strip bridge:
+// no visible scanline intersection changes, and every retained coordinate is
+// bit-for-bit original. Unlike global VECTOR rasterization, the eventual GDAL
+// burn still uses exactly the reference tile-local floating-point transform.
+Geometry strip_geometry(void* source,double top,double bottom,double step) {
+    const int type=api.flatten(api.geometry_type(source));
+    Geometry result(api.new_geometry(type));require(bool(result),"strip geometry creation failed");
+    if (type==6) {
+        for (int i=0;i<api.child_count(source);++i) {
+            auto part=strip_geometry(api.child(source,i),top,bottom,step);
+            if (part) {
+                require(api.add_geometry(result.get(),part.get())==0,"strip polygon append failed");
+                part.release();
+            }
+        }
+        return api.child_count(result.get()) ? std::move(result) : Geometry();
+    }
+    require(type==3,"unexpected strip geometry type");
+    for (int part=0;part<api.child_count(source);++part) {
+        void* ring=api.child(source,part);const int count=api.point_count(ring);
+        std::vector<unsigned char> keep(count,0);
+        for (int j=0;j<count;++j) {
+            const int next=(j+1)%count;const double a=api.y(ring,j),b=api.y(ring,next);
+            // A complete cell of padding is conservative for center ties and
+            // transform roundoff. It affects only pruning, never coordinates.
+            if (std::min(a,b)<=top+step && std::max(a,b)>=bottom-step)
+                keep[j]=keep[next]=1;
+        }
+        if (std::find(keep.begin(),keep.end(),1)==keep.end()) {
+            if (part==0)return Geometry();
+            continue;
+        }
+        Geometry retained(api.new_geometry(101));require(bool(retained),"strip ring creation failed");
+        double first_x=0,first_y=0,last_x=0,last_y=0;bool first=true;
+        for (int j=0;j<count;++j) if (keep[j]) {
+            const double x=api.x(ring,j),y=api.y(ring,j);api.add_point(retained.get(),x,y);
+            if (first) {first_x=x;first_y=y;first=false;}last_x=x;last_y=y;
+        }
+        if (last_x!=first_x || last_y!=first_y)api.add_point(retained.get(),first_x,first_y);
+        require(api.add_geometry(result.get(),retained.get())==0,"strip ring append failed");
+        retained.release();
+    }
+    return result;
+}
 }
 
 extern "C" const char* water_error() { return error.c_str(); }
@@ -87,9 +142,10 @@ extern "C" int64_t water_batch(void* raster, const unsigned char* data,
         const auto started = std::chrono::steady_clock::now();
         const int width = static_cast<int>(grid[0]), height = static_cast<int>(grid[1]);
         const double west = grid[2], north = grid[3], step = grid[4];
+        require(vector_mode==0 || vector_mode==2,"global vector mode does not preserve tile-local pixel-center ties");
         std::vector<Geometry> owned(count);
         std::vector<Envelope> envelopes(count);
-        std::vector<const void*> vector_geometries;
+        std::vector<Geometry> strip_geometries;
         std::vector<Tile> tiles;
         std::map<std::pair<int,int>, size_t> tile_index;
         // Parsing and GEOS validation are independent per feature. Each task
@@ -149,23 +205,28 @@ extern "C" int64_t water_batch(void* raster, const unsigned char* data,
             const double y0 = std::max(0., std::floor((north - bounds.max_y) / step));
             const double y1 = std::min(double(height - 1), std::floor((north - bounds.min_y) / step));
             if (x0 <= x1 && y0 <= y1) {
-                // Small features share a tile burn. Features spanning tiles are
-                // burned once by GDAL's vector path instead of re-traversing all
-                // vertices for every tile. Multipart gaps are excluded using
-                // component envelopes, while retaining the complete geometry in
-                // every remaining tile burn to preserve its exact fill rules.
-                const bool spans_tiles=int(x0)/tile_size!=int(x1)/tile_size ||
-                                       int(y0)/tile_size!=int(y1)/tile_size;
-                const bool use_vector=vector_mode==1 || (vector_mode==2 && spans_tiles &&
-                    (type==3 || api.child_count(raw)==1));
+                // Prune off-strip edges once per geometry/strip, then share that
+                // view across longitude tiles. All burns remain tile-local.
+                const bool spans_rows=int(y0)/tile_size!=int(y1)/tile_size;
+                std::map<int,void*> strips;
                 auto add_tile = [&](int tx,int ty) {
+                    void* raster_geometry=raw;
+                    if (vector_mode==2 && spans_rows) {
+                        auto found=strips.find(ty);
+                        if (found==strips.end()) {
+                            auto view=strip_geometry(raw,north-ty*tile_size*step,
+                                north-std::min(height,(ty+1)*tile_size)*step,step);
+                            raster_geometry=view.get();strips.emplace(ty,raster_geometry);
+                            if (view)strip_geometries.push_back(std::move(view));
+                        } else raster_geometry=found->second;
+                    }
+                    if (!raster_geometry)return;
                     auto key = std::make_pair(tx, ty);
                     auto [it, inserted] = tile_index.emplace(key, tiles.size());
                     if (inserted) tiles.push_back({tx, ty, {}});
-                    tiles[it->second].geometries.push_back(raw);
+                    tiles[it->second].geometries.push_back(raster_geometry);
                 };
-                if (use_vector) vector_geometries.push_back(raw);
-                else if (vector_mode==2 && type==6) {
+                if (vector_mode==2 && type==6) {
                     std::set<std::pair<int,int>> candidates;
                     for (int part=0;part<api.child_count(raw);++part) {
                         void* component=api.child(raw,part);
@@ -193,16 +254,6 @@ extern "C" int64_t water_batch(void* raster, const unsigned char* data,
         }
         const auto validated = std::chrono::steady_clock::now();
         timings[0] = std::chrono::duration<double>(validated - started).count();
-        if (!vector_geometries.empty()) {
-            const std::vector<double> burns(vector_geometries.size(), 1.);
-            const int band = 1;
-            char vector_option[] = "OPTIM=VECTOR";
-            char* options[] = {vector_option, nullptr};
-            require(vector_geometries.size() <= size_t(std::numeric_limits<int>::max()), "too many batch geometries");
-            require(api.rasterize(raster, 1, &band, int(vector_geometries.size()), vector_geometries.data(),
-                    nullptr, nullptr, burns.data(), options, nullptr, nullptr) == 0,
-                    "native vector rasterization failed");
-        }
         for (const auto& tile : tiles) {
             const int x = tile.x * tile_size, y = tile.y * tile_size;
             const int w = std::min(tile_size, width - x), h = std::min(tile_size, height - y);

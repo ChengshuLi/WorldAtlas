@@ -268,5 +268,7 @@
     "No end-to-end speedup is inferred from selected-stage results.",
     "Output equality establishes reproduction, not independent geographic correctness.",
     "Source selection and publication gates are unchanged."
-  ]
+  ],
+  "superseded_by": "physical-center-ties-20261107.json",
+  "warning": "The global-vector raw-water kernel measured here was later found to change two physical cells in a complete 32-shard run. It is superseded; these timings do not measure the corrected kernel. Land/composition comparisons remain valid."
 }
