@@ -114,7 +114,7 @@ def compare_extractions(reference, candidate):
             'candidate_index_sha256': digest(candidate / 'batch-manifest.json')}
 
 
-def run(reference, code_root, out):
+def run(reference, code_root, out, *, scan_reference=False):
     reference, code_root, out = reference.resolve(), code_root.resolve(), out.absolute()
     request, sources, _ = selection(reference)
     create_directory_exclusive(out)
@@ -132,6 +132,8 @@ def run(reference, code_root, out):
                '--policy', sources['water_snapshot']['path'], '--policy-sha256', sources['water_snapshot']['sha256'],
                '--out', str(out / 'candidate'), '--work-root', str(scratch),
                '--allow-unverified-snapshot', '--allow-draft-snapshot']
+    if scan_reference:
+        command.append('--scan-reference')
     invocation = {'command': command, 'environment': {**environment(), 'TMPDIR': str(scratch), 'PROJ_NETWORK': 'OFF'},
                   'reference_request_sha256': digest(reference / 'request.json'),
                   'inputs': sources, 'code_sha256': {name: digest(code_root / 'scripts' / name) for name in (
@@ -154,8 +156,9 @@ def main():
     p.add_argument('--reference-run', type=Path, required=True)
     p.add_argument('--code-root', type=Path, required=True)
     p.add_argument('--out', type=Path, required=True)
+    p.add_argument('--scan-reference', action='store_true', help='benchmark the retained ogr2ogr filtered-scan engine')
     args = p.parse_args()
-    print(json.dumps(run(args.reference_run, args.code_root, args.out)))
+    print(json.dumps(run(args.reference_run, args.code_root, args.out, scan_reference=args.scan_reference)))
 
 
 if __name__ == '__main__':

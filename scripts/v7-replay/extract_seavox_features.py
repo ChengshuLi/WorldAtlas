@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from decision_snapshot import read_snapshot, find_source
 from exclusive_outputs import create_directory_exclusive, validate_fresh_output, write_json_exclusive
 from extract_seavox_feature import (canonical_hash, digest, extract_features,
-                                    validate_archive, write_extraction)
+                                    extract_indexed_features, validate_archive, write_extraction)
 
 
 def selected_basins(snapshot):
@@ -45,7 +45,8 @@ def selected_basins(snapshot):
     return [selected[ident] for ident in sorted(selected)], archive_hashes.pop()
 
 
-def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow_draft=False, work_root=None):
+def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow_draft=False,
+        work_root=None, scan_reference=False):
     started = time.perf_counter()
     if not allow_unverified:
         raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
@@ -59,6 +60,7 @@ def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow
     before = time.perf_counter()
     shape = validate_archive(archive, archive_sha)
     phases['archive_validation'] = time.perf_counter() - before
+    selection_index = {}
     # A compressed shapefile is seek-heavy. Materialize it once in this run's
     # workspace rather than repeatedly inflating ZIP prefixes through /vsizip/.
     # Archive member safety was checked above; this fresh directory contains no
@@ -69,17 +71,24 @@ def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow
             zipped.extractall(workspace)
         phases['archive_materialization'] = time.perf_counter() - before
         before = time.perf_counter()
-        features = extract_features(archive, [basin['source_feature_id'] for basin, _ in selected],
-                                    dataset=Path(workspace) / shape)
+        feature_ids = [basin['source_feature_id'] for basin, _ in selected]
+        if scan_reference:
+            features = extract_features(archive, feature_ids, dataset=Path(workspace) / shape)
+        else:
+            features = extract_indexed_features(archive, feature_ids, dataset=Path(workspace) / shape,
+                metrics=selection_index, geometry_hashes={str(basin['source_feature_id']): basin['geometry_sha256']
+                                                          for basin, _ in selected})
         phases['ogr_selection_and_json_decode'] = time.perf_counter() - before
     before = time.perf_counter()
-    geometry_hashes = {ident: canonical_hash(feature['geometry']) for ident, feature in features.items()}
+    geometry_hashes = selection_index.get('geometry_sha256') or {
+        ident: canonical_hash(feature['geometry']) for ident, feature in features.items()}
     for basin, _ in selected:
         actual = geometry_hashes[str(basin['source_feature_id'])]
         if actual != basin['geometry_sha256']:
             raise ValueError('archive feature geometry does not match the selected decision: ' + basin['id'] + ': ' + actual)
     phases['geometry_binding'] = time.perf_counter() - before
-    gdal_version = subprocess.run(['ogr2ogr', '--version'], check=True, capture_output=True, text=True).stdout.strip()
+    gdal_version = selection_index.get('gdal_version') or subprocess.run(
+        ['ogr2ogr', '--version'], check=True, capture_output=True, text=True).stdout.strip()
     # Validate all selected geometries and both input pins before creating any
     # candidate files. The final recheck below detects later source mutation.
     if digest(archive) != archive_sha or digest(policy) != policy_sha:
@@ -91,7 +100,8 @@ def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow
         feature_started = time.perf_counter()
         folder = out / basin['id']
         manifest = write_extraction(folder, features[str(basin['source_feature_id'])], snapshot,
-                                    policy_sha, basin, source, gdal_version)
+            policy_sha, basin, source, gdal_version,
+            geometry_sha256=geometry_hashes[str(basin['source_feature_id'])])
         manifest['processing_elapsed_seconds'] = time.perf_counter() - feature_started
         write_json_exclusive(folder / 'manifest.json', manifest, indent=2)
         entries.append({'decision_id': basin['id'], 'source_feature_id': str(basin['source_feature_id']),
@@ -109,6 +119,10 @@ def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow
              'decision_revision': snapshot['decision_revision']['id'],
              'entity_revision': snapshot['decision_revision']['entity_revision'],
              'gdal_version': gdal_version, 'feature_count': len(features), 'decision_count': len(entries),
+             'selection_method': 'ogr-filtered-scan' if scan_reference else 'ogr-attribute-index-direct-fid',
+             'geometry_serialization_method': ('ogr-geojson-coordinate-precision-15' if scan_reference else
+                 'decision-hash-certified-native-coordinates-with-ogr-fallback-v1'),
+             'selection_index': selection_index,
              'features': entries, 'processing_stages_seconds': phases,
              'processing_elapsed_seconds': time.perf_counter() - started}
     write_json_exclusive(out / 'batch-manifest.json', index, indent=2)
@@ -123,12 +137,13 @@ def main():
     p.add_argument('--policy-sha256', required=True)
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--work-root', type=Path, help='existing workspace directory for transient archive materialization; defaults to the output parent')
+    p.add_argument('--scan-reference', action='store_true', help='reference engine: scan features with the ogr2ogr attribute filter')
     p.add_argument('--allow-unverified-snapshot', action='store_true')
     p.add_argument('--allow-draft-snapshot', action='store_true')
     args = p.parse_args()
     print(json.dumps(run(args.archive, args.input_root, args.policy, args.policy_sha256, args.out,
                          allow_unverified=args.allow_unverified_snapshot, allow_draft=args.allow_draft_snapshot,
-                         work_root=args.work_root)))
+                         work_root=args.work_root, scan_reference=args.scan_reference)))
 
 
 if __name__ == '__main__':
