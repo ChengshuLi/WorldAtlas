@@ -101,7 +101,10 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  srows=pin(seedout/'rows.u32le',guard);sruns=pin(seedout/'runs.u32le',guard)
  # Verify selected rules, source/region traces and tie policy before using seed.
  groups={g['group_id']:g for g in resolution['groups']};entity_codes={b['entity_id']:b['code'] for b in snapshot['category_bindings'] if b['physical_class']=='land'}
- contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=guard)
+ equivalent=False
+ if snapshot.get('source')=='local-derived-from-neon-export':
+  pins={k:v['sha256'] for k,v in cfg['inputs'].items()};prior=json.loads(build_stage2.read_bytes(paths['prior_physical_report'],guard));equivalent=contracts.provisional_reproof(snapshot,seed,pins,prior,cfg['grid'])
+ contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=guard,provisional_equivalence=equivalent)
  tileout=work/'tiles-parent'/'tiles';g=cfg['grid'];tile=build_seed_tiles.build(srows['path'],sruns['path'],srows['sha256'],sruns['sha256'],g['width'],g['height'],tileout,disk_floor_bytes=c['minimum_free_bytes'])
  reps=work/'reps'/'representatives.u32le';representatives.build(tileout,tileout/'manifest.txt',tile['manifest_sha256'],reps,work/'reps'/'report.json',width=g['width'],height=g['height'],disk_floor_bytes=c['minimum_free_bytes'])
  # A separately compiled complete seed/tile verifier must precede hints. The
