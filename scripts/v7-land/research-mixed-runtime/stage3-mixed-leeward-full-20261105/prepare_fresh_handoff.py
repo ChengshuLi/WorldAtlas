@@ -36,6 +36,10 @@ def bind_regional_code(specs):
   result[name]=pin(path)
  return result
 
+def equivalent_runtime_code():
+ integration=HERE.parent/'lydekker-regional-writer-integration'
+ return {name:pin(integration/(name+'.py')) for name in ('component_index','satellite_index','regional_runtime')}
+
 def prepare(template_path,outer_path,work_path,output_path,dest_path,regional_output,*,template_sha256):
  dest=Path(dest_path).resolve();out=Path(regional_output).resolve()
  if dest.exists() or out.exists() or not dest.parent.is_dir() or not out.parent.is_dir() or dest==out or dest in out.parents or out in dest.parents:raise ValueError('fresh separate output paths required')
@@ -58,11 +62,14 @@ def prepare(template_path,outer_path,work_path,output_path,dest_path,regional_ou
  for name in ('physical_rows','physical_runs','component_rows','component_runs','component_manifest','component_source'):point[name]=inp[name]
  resolver=HERE.parent/'geonames-point-integration-20261105/point-component-prototype/resolve.py'
  point['resolver_sha256']=sha(resolver);cfg['code']['resolver']=point['resolver_sha256']
+ point['runtime']=pin(resolver.parent/'point_runtime.py')
  if point['grid']!=report['grid']:raise ValueError('point grid mismatch')
  # A versioned module inventory selects repository code; retain every
  # approved policy hash rather than searching clones for matching bytes.
  cfg['regional']['request']['code']=bind_regional_code(cfg['regional']['request']['code'])
+ cfg['regional']['request']['runtime']=equivalent_runtime_code()
  cfg['regional']['hook']=pin(HERE.parent/'lydekker-regional-writer-integration/driver_hook.py')
+ cfg['polygon_runtime']=pin(HERE.parent/'lydekker-regional-writer-integration/polygon_runtime.py')
  cfg['stage2']=stage2;cfg['output']=str(out);cfg['code']['driver']=sha(HERE/'apply_selected_mixed.py');cfg['code']['validator']=sha(STAGE2/'validate_stage2_candidate.py')
  cfg['policy_pins']={'baseline_report_sha256':stage2['report']['sha256'],'baseline_rows_sha256':stage2['rows']['sha256'],'baseline_runs_sha256':stage2['runs']['sha256'],'baseline_decision_snapshot_sha256':stage2['snapshot']['sha256'],**{k+'_sha256':point[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')}}
  dest.mkdir(mode=0o700)

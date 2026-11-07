@@ -49,6 +49,15 @@ paths={n:W/(n+'.py') for n in ('regional_rule','component_scan','replay_adapter'
   with patch.object(driver_hook,'modules_from_pins',return_value=modules):
    out=driver_hook.prepare(self.cfg,{}, {},reports,{}, {},{9},self.mixed,snapshot_sha256='a'*64)
    self.assertIs(seen['reports'],reports);self.assertEqual(seen['snapshot_sha256'],'a'*64);self.assertEqual(seen['pending'],[]);self.assertEqual(out['blocked_region_roots'],[3,9]);self.assertTrue(out['provenance']['profiling_standin']);out['verify']()
+   self.cfg['runtime']={name:pin(self.mixed_path) for name in ('component_index','satellite_index','regional_runtime')}
+   verify=unittest.mock.Mock();accelerated=unittest.mock.Mock()
+   runtime=NS(prepare=lambda *args:{'dependencies':{'scan':accelerated},'verify':verify,'provenance':{'geographic_policy_changed':False}})
+   with patch.object(driver_hook,'load_pinned_module',return_value=runtime):
+    indexed=driver_hook.prepare(self.cfg,{}, {},reports,{}, {},{9},self.mixed,snapshot_sha256='a'*64)
+   self.assertFalse(indexed['provenance']['equivalent_runtime']['geographic_policy_changed']);indexed['verify']();verify.assert_called_once_with()
+   self.cfg['runtime']['component_index']['sha256']='0'*64
+   with self.assertRaisesRegex(ValueError,'equivalent runtime code mismatch'):
+    driver_hook.prepare(self.cfg,{}, {},reports,{}, {},{9},self.mixed,snapshot_sha256='a'*64)
    self.pending.write_text('[{}]')
    with self.assertRaisesRegex(ValueError,'changed during run'):out['verify']()
 class ActualDriverBlockTests(unittest.TestCase):

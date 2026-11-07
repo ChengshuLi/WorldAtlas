@@ -14,6 +14,11 @@ class PreparationTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'inventory mismatch'):p.bind_regional_code(specs)
  def test_repo_root(self):
   self.assertTrue((p.REPO/'scripts/v7-recovery/land/stage2-geodesic-20261104/contracts.py').is_file())
+ def test_equivalent_runtime_is_separate_from_reviewed_inventory(self):
+  runtime=p.equivalent_runtime_code()
+  self.assertEqual(set(runtime),{'component_index','satellite_index','regional_runtime'})
+  self.assertFalse(set(runtime)&set(p.regional_code_paths()))
+  for spec in runtime.values():self.assertEqual(spec,p.pin(spec['path']))
  def test_template_pin_is_required_and_checked_before_output(self):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);template=root/'template';template.write_text('{}')
