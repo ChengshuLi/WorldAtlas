@@ -1,0 +1,95 @@
+{
+  "comparison": {
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-full-run-20261107/comparison.json",
+    "sha256": "f2a7319247cb05bb059e10b1bd5142a8210809bd239625531b4c43c7d14859ee"
+  },
+  "current_code_version": {
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-full-run-20261107/run-identity.json",
+    "sha256": "ec6465cdacd187a6c786127df6f4a6a785ebf1db42b5b7f3e38807fd90abf566"
+  },
+  "final": {
+    "report": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-full-run-20261107/final/report.json",
+      "sha256": "981e3e4b321d621f344cab9e56d28f972b2aac9ed4af8ec26161469ac26ee50f"
+    },
+    "rows": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-full-run-20261107/final/rows.u32le",
+      "sha256": "103a47a8a70676a9d403155717c95a12ecbd6fd51cdd9c35679e9f42c7a7199f"
+    },
+    "runs": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-full-run-20261107/final/runs.u32le",
+      "sha256": "cf14bcaf6f06a305b82205dc535584105e221bb79fc185a8f3371c41d61b7f78"
+    }
+  },
+  "original_run_identity": {
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-full-run-20261107/run-identity.json",
+    "sha256": "ec6465cdacd187a6c786127df6f4a6a785ebf1db42b5b7f3e38807fd90abf566"
+  },
+  "publishable": false,
+  "request": {
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-e2e-selection-20261107/config.json",
+    "sha256": "9563b98fa163278f35c6b7c09538d2bedbb386561763d7d7d4c52ec3c41476d6"
+  },
+  "runner": {
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-pr4-full-20261107/scripts/v7-pipeline/run_pipeline.py",
+    "sha256": "9c0609350cffdc0d7451cba72c008b2cc28fe2d53beda41c8d7a25b9bb3db0e1"
+  },
+  "schema": "worldatlas-end-to-end-report-v1",
+  "stages": {
+    "mainland": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 2261.2167475920287,
+      "recorded_processing_elapsed_seconds": 2261.2167475920287,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "physical": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 2120.098540483101,
+      "producer_processing_elapsed_seconds": 2119.2965349280275,
+      "recorded_processing_elapsed_seconds": 2120.098540483101,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "source_download_elapsed_seconds": 828.2952526329318,
+      "timing_complete": true,
+      "timing_error": null,
+      "unmeasured_interrupted_attempts": []
+    },
+    "setup": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 8.842606124002486,
+      "recorded_processing_elapsed_seconds": 8.842606124002486,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "verification": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 12.772312309010886,
+      "recorded_processing_elapsed_seconds": 12.772312309010886,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "water": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 3416.3122291540494,
+      "recorded_processing_elapsed_seconds": 3416.3122291540494,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    }
+  },
+  "status": "complete-provisional-research-not-published",
+  "timing_anchor": {
+    "bytes": 4518053,
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-full-run-20261107/timing-events.jsonl",
+    "sha256": "3276081c4d78ca679a67e0071f5a30a14f0eddaa96ddcb04a20ba298daa5d765"
+  },
+  "timing_complete": true
+}

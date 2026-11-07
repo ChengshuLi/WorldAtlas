@@ -1,0 +1,26 @@
+{
+  "schema": "worldatlas-full-grid-comparison-v1",
+  "status": "same-cells",
+  "grid": {
+    "width": 131072,
+    "height": 54614
+  },
+  "cells_compared": 7158366208,
+  "changed_cells": 0,
+  "pair_counts": {},
+  "byte_identical": true,
+  "reference_sha256": {
+    "rows.u32le": "103a47a8a70676a9d403155717c95a12ecbd6fd51cdd9c35679e9f42c7a7199f",
+    "runs.u32le": "cf14bcaf6f06a305b82205dc535584105e221bb79fc185a8f3371c41d61b7f78"
+  },
+  "candidate_sha256": {
+    "rows.u32le": "103a47a8a70676a9d403155717c95a12ecbd6fd51cdd9c35679e9f42c7a7199f",
+    "runs.u32le": "cf14bcaf6f06a305b82205dc535584105e221bb79fc185a8f3371c41d61b7f78"
+  },
+  "reference_combined_sha256": "4a34371c8f508380dde9b9b54d1edd642f217252f17b40885c86b2b192898dbd",
+  "candidate_combined_sha256": "4a34371c8f508380dde9b9b54d1edd642f217252f17b40885c86b2b192898dbd",
+  "limitations": [
+    "Exact equality verifies reproduction, not independent geographic correctness or publication approval."
+  ],
+  "processing_elapsed_seconds": 3.048225871985778
+}

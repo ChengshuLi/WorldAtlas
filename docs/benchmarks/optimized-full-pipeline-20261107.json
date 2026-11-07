@@ -1,0 +1,2355 @@
+{
+  "schema": "worldatlas-observed-full-pipeline-benchmark-v1",
+  "producer_commit": "88483e3021a6c12d148bbd7f673b4ff553c045f6",
+  "current_attempt_count": 1,
+  "runtime": {
+    "binary_sha256": "889c603f0d17cb54060951bcf4c4f9b8c9ebd9e52b392c70209bbb9755d797d9",
+    "executable": "/usr/bin/python3",
+    "gdal": "3.10.3",
+    "numpy": "2.2.4",
+    "proj": "9.6.0",
+    "proj_database": {
+      "path": "/usr/share/proj/proj.db",
+      "sha256": "8bbb2ea3a88c44383f51e205755c32bff09b8aff7937eca001a1cd519714be60"
+    },
+    "proj_network_enabled": false,
+    "pyarrow": "26.0.1",
+    "pyproj": "3.7.1",
+    "scipy": "1.15.3",
+    "tools": {
+      "g++": {
+        "path": "/usr/bin/x86_64-linux-gnu-g++-14",
+        "sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d"
+      },
+      "gdal_rasterize": {
+        "path": "/usr/bin/gdal_rasterize",
+        "sha256": "963f2749258444dae92f77c82acf4859db40859de1593719e35d5bebb70b69cc"
+      },
+      "ogr2ogr": {
+        "path": "/usr/bin/ogr2ogr",
+        "sha256": "3e0f60d9993c15cadb8ad9daf173f8a2336bb27b0430a808d03f5919302e1982"
+      }
+    },
+    "version": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]"
+  },
+  "current_stages": {
+    "mainland": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 2261.2167475920287,
+      "recorded_processing_elapsed_seconds": 2261.2167475920287,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "physical": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 2120.098540483101,
+      "producer_processing_elapsed_seconds": 2119.2965349280275,
+      "recorded_processing_elapsed_seconds": 2120.098540483101,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "source_download_elapsed_seconds": 828.2952526329318,
+      "timing_complete": true,
+      "timing_error": null,
+      "unmeasured_interrupted_attempts": []
+    },
+    "setup": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 8.842606124002486,
+      "recorded_processing_elapsed_seconds": 8.842606124002486,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "verification": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 12.772312309010886,
+      "recorded_processing_elapsed_seconds": 12.772312309010886,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "water": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 3416.3122291540494,
+      "recorded_processing_elapsed_seconds": 3416.3122291540494,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    }
+  },
+  "previous_observed_stages": {
+    "mainland": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 1958.4576666159555,
+      "recorded_processing_elapsed_seconds": 1958.4576666159555,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "physical": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 1720.0612256500171,
+      "producer_processing_elapsed_seconds": 1718.2370904119452,
+      "recorded_processing_elapsed_seconds": 1720.0612256500171,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "source_download_elapsed_seconds": 651.3961547700455,
+      "timing_complete": true,
+      "timing_error": null,
+      "unmeasured_interrupted_attempts": []
+    },
+    "setup": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 245.91267896909267,
+      "recorded_processing_elapsed_seconds": 245.91267896909267,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "verification": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 13.282864233013242,
+      "recorded_processing_elapsed_seconds": 13.282864233013242,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    },
+    "water": {
+      "complete": true,
+      "outputs_complete": true,
+      "processing_elapsed_seconds": 9843.559222288954,
+      "recorded_processing_elapsed_seconds": 9843.559222288954,
+      "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
+      "timing_complete": true,
+      "unmeasured_interrupted_attempts": []
+    }
+  },
+  "current_total_processing_seconds": 7819.242435662192,
+  "previous_total_processing_seconds": 13781.273657757032,
+  "timing_anchor": {
+    "bytes": 4518053,
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-optimized-full-run-20261107/timing-events.jsonl",
+    "sha256": "3276081c4d78ca679a67e0071f5a30a14f0eddaa96ddcb04a20ba298daa5d765"
+  },
+  "command_times": [
+    {
+      "stage": "physical",
+      "command_id": "physical/physical",
+      "wall_elapsed_seconds": 2948.371211339021,
+      "source_download_elapsed_seconds": 828.2952526329318,
+      "processing_elapsed_seconds": 2120.0759587060893
+    },
+    {
+      "stage": "mainland",
+      "command_id": "mainland/components",
+      "wall_elapsed_seconds": 32.76384897803655,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 32.76384897803655
+    },
+    {
+      "stage": "mainland",
+      "command_id": "mainland/stage2",
+      "wall_elapsed_seconds": 1702.8029252580018,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1702.8029252580018
+    },
+    {
+      "stage": "mainland",
+      "command_id": "mainland/prepare-regional",
+      "wall_elapsed_seconds": 9.748630115005653,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 9.748630115005653
+    },
+    {
+      "stage": "mainland",
+      "command_id": "mainland/regional",
+      "wall_elapsed_seconds": 514.8012440170278,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 514.8012440170278
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-gulf-of-carpentaria",
+      "wall_elapsed_seconds": 55.50008452904876,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 55.50008452904876
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24017",
+      "wall_elapsed_seconds": 57.18016226601321,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 57.18016226601321
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-gulf-of-carpentaria",
+      "wall_elapsed_seconds": 5.843155421025585,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.843155421025585
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-gulf-of-carpentaria",
+      "wall_elapsed_seconds": 1.503455925034359,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.503455925034359
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24017",
+      "wall_elapsed_seconds": 12.080880106950644,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 12.080880106950644
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24017",
+      "wall_elapsed_seconds": 2.492354497022461,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.492354497022461
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24018",
+      "wall_elapsed_seconds": 42.44324515701737,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 42.44324515701737
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24018",
+      "wall_elapsed_seconds": 15.772076427005231,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 15.772076427005231
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24018",
+      "wall_elapsed_seconds": 3.5999072820413858,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.5999072820413858
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24020",
+      "wall_elapsed_seconds": 41.08939421904506,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 41.08939421904506
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24019",
+      "wall_elapsed_seconds": 97.53943750797771,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 97.53943750797771
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24020",
+      "wall_elapsed_seconds": 8.737479921022896,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 8.737479921022896
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24020",
+      "wall_elapsed_seconds": 3.353535520960577,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.353535520960577
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24022",
+      "wall_elapsed_seconds": 50.28345245902892,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 50.28345245902892
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24019",
+      "wall_elapsed_seconds": 68.73658220097423,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 68.73658220097423
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24019",
+      "wall_elapsed_seconds": 3.1652323710150085,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.1652323710150085
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24022",
+      "wall_elapsed_seconds": 33.33704784500878,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 33.33704784500878
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24022",
+      "wall_elapsed_seconds": 9.189138557005208,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 9.189138557005208
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24028",
+      "wall_elapsed_seconds": 52.1318935569725,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 52.1318935569725
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24030",
+      "wall_elapsed_seconds": 43.4023629570147,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 43.4023629570147
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24028",
+      "wall_elapsed_seconds": 40.79382772697136,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 40.79382772697136
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24030",
+      "wall_elapsed_seconds": 15.186831603001337,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 15.186831603001337
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24030",
+      "wall_elapsed_seconds": 2.8609350320184603,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.8609350320184603
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24028",
+      "wall_elapsed_seconds": 5.673538158996962,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.673538158996962
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24038",
+      "wall_elapsed_seconds": 40.359611854015384,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 40.359611854015384
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24042",
+      "wall_elapsed_seconds": 41.431370735983364,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 41.431370735983364
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24038",
+      "wall_elapsed_seconds": 4.0924811600125395,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.0924811600125395
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24038",
+      "wall_elapsed_seconds": 1.717597917013336,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.717597917013336
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24042",
+      "wall_elapsed_seconds": 42.49429289397085,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 42.49429289397085
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24042",
+      "wall_elapsed_seconds": 6.736004806007259,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.736004806007259
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24043",
+      "wall_elapsed_seconds": 47.147728726034984,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 47.147728726034984
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24043",
+      "wall_elapsed_seconds": 4.814266211003996,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.814266211003996
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24043",
+      "wall_elapsed_seconds": 1.9565886440104805,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.9565886440104805
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24045",
+      "wall_elapsed_seconds": 39.015515907958616,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 39.015515907958616
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24045",
+      "wall_elapsed_seconds": 3.857662613969296,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.857662613969296
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24045",
+      "wall_elapsed_seconds": 2.6986322560114786,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.6986322560114786
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24044",
+      "wall_elapsed_seconds": 69.2946490229806,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 69.2946490229806
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24044",
+      "wall_elapsed_seconds": 25.064391103980597,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 25.064391103980597
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24044",
+      "wall_elapsed_seconds": 4.7584205429884605,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.7584205429884605
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24048",
+      "wall_elapsed_seconds": 45.17615674401168,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 45.17615674401168
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24048",
+      "wall_elapsed_seconds": 11.408691078017,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 11.408691078017
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24048",
+      "wall_elapsed_seconds": 3.0519848249969073,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.0519848249969073
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24049",
+      "wall_elapsed_seconds": 42.82237295998493,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 42.82237295998493
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24049",
+      "wall_elapsed_seconds": 7.41674099402735,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 7.41674099402735
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24049",
+      "wall_elapsed_seconds": 2.380818630044814,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.380818630044814
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24051",
+      "wall_elapsed_seconds": 40.92767121299403,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 40.92767121299403
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24051",
+      "wall_elapsed_seconds": 16.132009592955,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 16.132009592955
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24051",
+      "wall_elapsed_seconds": 3.068661561002955,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.068661561002955
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24052",
+      "wall_elapsed_seconds": 61.570531194040086,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 61.570531194040086
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24052",
+      "wall_elapsed_seconds": 5.308616953960154,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.308616953960154
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24052",
+      "wall_elapsed_seconds": 1.8637828629580326,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.8637828629580326
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24053",
+      "wall_elapsed_seconds": 56.56017442198936,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 56.56017442198936
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24053",
+      "wall_elapsed_seconds": 9.915183711971622,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 9.915183711971622
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24053",
+      "wall_elapsed_seconds": 3.82757084001787,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.82757084001787
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24054",
+      "wall_elapsed_seconds": 56.16489620500943,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 56.16489620500943
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24054",
+      "wall_elapsed_seconds": 3.563699031015858,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.563699031015858
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24054",
+      "wall_elapsed_seconds": 1.3438711470225826,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.3438711470225826
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24055",
+      "wall_elapsed_seconds": 67.02481617504964,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 67.02481617504964
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24055",
+      "wall_elapsed_seconds": 3.2448810570058413,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.2448810570058413
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24055",
+      "wall_elapsed_seconds": 2.224508061015513,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.224508061015513
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24060",
+      "wall_elapsed_seconds": 50.22987260698574,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 50.22987260698574
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24060",
+      "wall_elapsed_seconds": 5.723149758006912,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.723149758006912
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24060",
+      "wall_elapsed_seconds": 1.5224516249727458,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.5224516249727458
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24064",
+      "wall_elapsed_seconds": 39.25939356099116,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 39.25939356099116
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24064",
+      "wall_elapsed_seconds": 7.9403530600247905,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 7.9403530600247905
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24064",
+      "wall_elapsed_seconds": 2.2455308900098316,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.2455308900098316
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24065",
+      "wall_elapsed_seconds": 48.11696675402345,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 48.11696675402345
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24065",
+      "wall_elapsed_seconds": 8.371867312991526,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 8.371867312991526
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24065",
+      "wall_elapsed_seconds": 2.2732245009974577,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.2732245009974577
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24066",
+      "wall_elapsed_seconds": 39.244453133956995,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 39.244453133956995
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24066",
+      "wall_elapsed_seconds": 14.136557888006791,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 14.136557888006791
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24066",
+      "wall_elapsed_seconds": 1.4471922870143317,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.4471922870143317
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24068",
+      "wall_elapsed_seconds": 49.38580547401216,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 49.38580547401216
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24068",
+      "wall_elapsed_seconds": 3.3644820519839413,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.3644820519839413
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24068",
+      "wall_elapsed_seconds": 2.188634958991315,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.188634958991315
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24071",
+      "wall_elapsed_seconds": 42.33625468896935,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 42.33625468896935
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24071",
+      "wall_elapsed_seconds": 10.096073232009076,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 10.096073232009076
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24071",
+      "wall_elapsed_seconds": 2.3522628680220805,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.3522628680220805
+    },
+    {
+      "stage": "water",
+      "command_id": "water/coast",
+      "wall_elapsed_seconds": 952.6233999020187,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 952.6233999020187
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24072",
+      "wall_elapsed_seconds": 54.69995686499169,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 54.69995686499169
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24075",
+      "wall_elapsed_seconds": 40.99117083998863,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 40.99117083998863
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24072",
+      "wall_elapsed_seconds": 12.961046948039439,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 12.961046948039439
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24075",
+      "wall_elapsed_seconds": 4.848976286011748,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.848976286011748
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24072",
+      "wall_elapsed_seconds": 2.366288716031704,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.366288716031704
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24075",
+      "wall_elapsed_seconds": 1.5992525449837558,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.5992525449837558
+    },
+    {
+      "stage": "water",
+      "command_id": "water/assemble-coast",
+      "wall_elapsed_seconds": 34.68301773699932,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 34.68301773699932
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24080",
+      "wall_elapsed_seconds": 48.93096997495741,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 48.93096997495741
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24077",
+      "wall_elapsed_seconds": 56.60421498201322,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 56.60421498201322
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24080",
+      "wall_elapsed_seconds": 6.647816914017312,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.647816914017312
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24080",
+      "wall_elapsed_seconds": 1.4843535849940963,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.4843535849940963
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24077",
+      "wall_elapsed_seconds": 19.149704415991437,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 19.149704415991437
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24077",
+      "wall_elapsed_seconds": 2.653523690009024,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.653523690009024
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24082",
+      "wall_elapsed_seconds": 50.34762688202318,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 50.34762688202318
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24083",
+      "wall_elapsed_seconds": 37.39213256299263,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 37.39213256299263
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24082",
+      "wall_elapsed_seconds": 6.520701570028905,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.520701570028905
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24082",
+      "wall_elapsed_seconds": 1.9823086520191282,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.9823086520191282
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24084",
+      "wall_elapsed_seconds": 38.80276045401115,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 38.80276045401115
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24083",
+      "wall_elapsed_seconds": 43.84091711003566,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 43.84091711003566
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24083",
+      "wall_elapsed_seconds": 2.1421655289595947,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.1421655289595947
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24084",
+      "wall_elapsed_seconds": 7.456282811006531,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 7.456282811006531
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24084",
+      "wall_elapsed_seconds": 1.380237270030193,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.380237270030193
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24086",
+      "wall_elapsed_seconds": 42.40006494196132,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 42.40006494196132
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24085",
+      "wall_elapsed_seconds": 58.159317241981626,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 58.159317241981626
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24086",
+      "wall_elapsed_seconds": 12.473913001012988,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 12.473913001012988
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24086",
+      "wall_elapsed_seconds": 1.4533295899746008,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.4533295899746008
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24085",
+      "wall_elapsed_seconds": 5.060400936985388,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.060400936985388
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24085",
+      "wall_elapsed_seconds": 3.0320474070031196,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.0320474070031196
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24087",
+      "wall_elapsed_seconds": 42.81225065997569,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 42.81225065997569
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24087",
+      "wall_elapsed_seconds": 9.076916127989534,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 9.076916127989534
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24087",
+      "wall_elapsed_seconds": 2.3451960450038314,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.3451960450038314
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24088",
+      "wall_elapsed_seconds": 54.03320115595125,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 54.03320115595125
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24088",
+      "wall_elapsed_seconds": 3.513497747015208,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.513497747015208
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24088",
+      "wall_elapsed_seconds": 1.3476710169925354,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.3476710169925354
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24090",
+      "wall_elapsed_seconds": 35.035789749992546,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 35.035789749992546
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24089",
+      "wall_elapsed_seconds": 51.495638647000305,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 51.495638647000305
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24089",
+      "wall_elapsed_seconds": 6.285276270005852,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.285276270005852
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24089",
+      "wall_elapsed_seconds": 1.5787003220175393,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.5787003220175393
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24090",
+      "wall_elapsed_seconds": 19.13495137897553,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 19.13495137897553
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24090",
+      "wall_elapsed_seconds": 2.4286137090530246,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.4286137090530246
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24091",
+      "wall_elapsed_seconds": 42.86789588298416,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 42.86789588298416
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24091",
+      "wall_elapsed_seconds": 2.9982349540223368,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.9982349540223368
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24091",
+      "wall_elapsed_seconds": 1.117307542997878,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.117307542997878
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24092",
+      "wall_elapsed_seconds": 53.721643324010074,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 53.721643324010074
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24092",
+      "wall_elapsed_seconds": 7.044115755008534,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 7.044115755008534
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24092",
+      "wall_elapsed_seconds": 1.6769023449742235,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.6769023449742235
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24093",
+      "wall_elapsed_seconds": 49.60056341602467,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 49.60056341602467
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24094",
+      "wall_elapsed_seconds": 50.932928283000365,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 50.932928283000365
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24093",
+      "wall_elapsed_seconds": 24.868287744000554,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 24.868287744000554
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24093",
+      "wall_elapsed_seconds": 1.8672632689704187,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.8672632689704187
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24094",
+      "wall_elapsed_seconds": 5.675722005020361,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.675722005020361
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24094",
+      "wall_elapsed_seconds": 2.20202851400245,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.20202851400245
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24095",
+      "wall_elapsed_seconds": 44.55544406600529,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.55544406600529
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24095",
+      "wall_elapsed_seconds": 4.958110195992049,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.958110195992049
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24095",
+      "wall_elapsed_seconds": 2.4706235080375336,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.4706235080375336
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24097",
+      "wall_elapsed_seconds": 53.07537418499123,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 53.07537418499123
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24097",
+      "wall_elapsed_seconds": 14.825292426976375,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 14.825292426976375
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24097",
+      "wall_elapsed_seconds": 3.4805734480032697,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.4805734480032697
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24098",
+      "wall_elapsed_seconds": 40.85534136998467,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 40.85534136998467
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24098",
+      "wall_elapsed_seconds": 3.925091443990823,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.925091443990823
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24098",
+      "wall_elapsed_seconds": 1.633404184016399,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.633404184016399
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24099",
+      "wall_elapsed_seconds": 38.78234961302951,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 38.78234961302951
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24099",
+      "wall_elapsed_seconds": 5.699169147992507,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.699169147992507
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24099",
+      "wall_elapsed_seconds": 1.551902452018112,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.551902452018112
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24100",
+      "wall_elapsed_seconds": 43.4894914769684,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 43.4894914769684
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24100",
+      "wall_elapsed_seconds": 8.525184257014189,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 8.525184257014189
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24100",
+      "wall_elapsed_seconds": 2.145292121975217,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.145292121975217
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24101",
+      "wall_elapsed_seconds": 39.48663753998699,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 39.48663753998699
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24101",
+      "wall_elapsed_seconds": 5.350950543012004,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.350950543012004
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24101",
+      "wall_elapsed_seconds": 1.557946440007072,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.557946440007072
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24104",
+      "wall_elapsed_seconds": 44.538327545975335,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.538327545975335
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24104",
+      "wall_elapsed_seconds": 5.144960704958066,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.144960704958066
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24105",
+      "wall_elapsed_seconds": 40.365295093972236,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 40.365295093972236
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24104",
+      "wall_elapsed_seconds": 2.3121808739961125,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.3121808739961125
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24105",
+      "wall_elapsed_seconds": 6.970261632988695,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.970261632988695
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24105",
+      "wall_elapsed_seconds": 2.29779302602401,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.29779302602401
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24106",
+      "wall_elapsed_seconds": 40.45295053598238,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 40.45295053598238
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24106",
+      "wall_elapsed_seconds": 7.082613234990276,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 7.082613234990276
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24106",
+      "wall_elapsed_seconds": 2.494613856950309,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.494613856950309
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24107",
+      "wall_elapsed_seconds": 43.67562760098372,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 43.67562760098372
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24107",
+      "wall_elapsed_seconds": 11.01100472494727,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 11.01100472494727
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24107",
+      "wall_elapsed_seconds": 2.042714370007161,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.042714370007161
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24111",
+      "wall_elapsed_seconds": 35.950132700032555,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 35.950132700032555
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24111",
+      "wall_elapsed_seconds": 3.028653279005084,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.028653279005084
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24111",
+      "wall_elapsed_seconds": 1.2183935309876688,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.2183935309876688
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24110",
+      "wall_elapsed_seconds": 60.77496542799054,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 60.77496542799054
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24110",
+      "wall_elapsed_seconds": 6.850167406024411,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.850167406024411
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24110",
+      "wall_elapsed_seconds": 2.153147671953775,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.153147671953775
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24112",
+      "wall_elapsed_seconds": 43.62209749396425,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 43.62209749396425
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24112",
+      "wall_elapsed_seconds": 3.413102146994788,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.413102146994788
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24112",
+      "wall_elapsed_seconds": 1.1352746590273455,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.1352746590273455
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24113",
+      "wall_elapsed_seconds": 38.905233405996114,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 38.905233405996114
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24113",
+      "wall_elapsed_seconds": 13.3190140670049,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 13.3190140670049
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24113",
+      "wall_elapsed_seconds": 2.9878198400256224,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.9878198400256224
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24114",
+      "wall_elapsed_seconds": 44.49556865997147,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.49556865997147
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24114",
+      "wall_elapsed_seconds": 4.913000122003723,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.913000122003723
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24114",
+      "wall_elapsed_seconds": 1.683946589997504,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.683946589997504
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24119",
+      "wall_elapsed_seconds": 45.760311760008335,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 45.760311760008335
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24120",
+      "wall_elapsed_seconds": 47.7226465989952,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 47.7226465989952
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24120",
+      "wall_elapsed_seconds": 9.328394929994829,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 9.328394929994829
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24120",
+      "wall_elapsed_seconds": 4.835324151965324,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.835324151965324
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24119",
+      "wall_elapsed_seconds": 97.69293762900634,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 97.69293762900634
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24121",
+      "wall_elapsed_seconds": 50.60454500297783,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 50.60454500297783
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24119",
+      "wall_elapsed_seconds": 10.571186664979905,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 10.571186664979905
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24121",
+      "wall_elapsed_seconds": 10.748211361002177,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 10.748211361002177
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24121",
+      "wall_elapsed_seconds": 9.8098584949621,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 9.8098584949621
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24122",
+      "wall_elapsed_seconds": 49.51601636596024,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 49.51601636596024
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24122",
+      "wall_elapsed_seconds": 13.785825853003189,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 13.785825853003189
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24122",
+      "wall_elapsed_seconds": 1.957795670023188,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.957795670023188
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24123",
+      "wall_elapsed_seconds": 56.37280752998777,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 56.37280752998777
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24123",
+      "wall_elapsed_seconds": 4.344563219987322,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.344563219987322
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24123",
+      "wall_elapsed_seconds": 2.170611175999511,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.170611175999511
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24124",
+      "wall_elapsed_seconds": 56.21872915298445,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 56.21872915298445
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24125",
+      "wall_elapsed_seconds": 47.15117667301092,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 47.15117667301092
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24124",
+      "wall_elapsed_seconds": 3.7943573770462535,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.7943573770462535
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24125",
+      "wall_elapsed_seconds": 2.9951885450282134,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.9951885450282134
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24124",
+      "wall_elapsed_seconds": 1.524711795966141,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.524711795966141
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24125",
+      "wall_elapsed_seconds": 1.2748175529995933,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.2748175529995933
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24127",
+      "wall_elapsed_seconds": 39.586896654975135,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 39.586896654975135
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24126",
+      "wall_elapsed_seconds": 44.08015111798886,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.08015111798886
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24127",
+      "wall_elapsed_seconds": 2.950823997030966,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.950823997030966
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24127",
+      "wall_elapsed_seconds": 0.9437784570036456,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 0.9437784570036456
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24126",
+      "wall_elapsed_seconds": 3.7434042899985798,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.7434042899985798
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24126",
+      "wall_elapsed_seconds": 1.887902535032481,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.887902535032481
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24128",
+      "wall_elapsed_seconds": 33.47891112603247,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 33.47891112603247
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24128",
+      "wall_elapsed_seconds": 10.789479191007558,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 10.789479191007558
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24128",
+      "wall_elapsed_seconds": 2.073505332984496,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.073505332984496
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24129",
+      "wall_elapsed_seconds": 45.73215934296604,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 45.73215934296604
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24129",
+      "wall_elapsed_seconds": 4.102025497006252,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.102025497006252
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24129",
+      "wall_elapsed_seconds": 3.113984146970324,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.113984146970324
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24130",
+      "wall_elapsed_seconds": 51.69694461300969,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 51.69694461300969
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24130",
+      "wall_elapsed_seconds": 4.856884323991835,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.856884323991835
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24130",
+      "wall_elapsed_seconds": 2.4497101480374113,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.4497101480374113
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24132",
+      "wall_elapsed_seconds": 55.028808946954086,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 55.028808946954086
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24132",
+      "wall_elapsed_seconds": 7.2388482600217685,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 7.2388482600217685
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24132",
+      "wall_elapsed_seconds": 2.25784776796354,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.25784776796354
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24133",
+      "wall_elapsed_seconds": 50.28729102399666,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 50.28729102399666
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24133",
+      "wall_elapsed_seconds": 6.933928546030074,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.933928546030074
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24133",
+      "wall_elapsed_seconds": 1.997143060027156,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.997143060027156
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24134",
+      "wall_elapsed_seconds": 44.350804816000164,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.350804816000164
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24134",
+      "wall_elapsed_seconds": 3.604546020971611,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.604546020971611
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24134",
+      "wall_elapsed_seconds": 2.0254457509727217,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.0254457509727217
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24135",
+      "wall_elapsed_seconds": 47.306800845020916,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 47.306800845020916
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24136",
+      "wall_elapsed_seconds": 40.39059836603701,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 40.39059836603701
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24135",
+      "wall_elapsed_seconds": 4.427220639016014,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.427220639016014
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24135",
+      "wall_elapsed_seconds": 1.1815202109864913,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.1815202109864913
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24136",
+      "wall_elapsed_seconds": 6.674149084021337,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.674149084021337
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24136",
+      "wall_elapsed_seconds": 2.415191580017563,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.415191580017563
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24137",
+      "wall_elapsed_seconds": 34.559946863970254,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 34.559946863970254
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24137",
+      "wall_elapsed_seconds": 4.2411708169966005,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.2411708169966005
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24137",
+      "wall_elapsed_seconds": 2.2911396279814653,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.2911396279814653
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24138",
+      "wall_elapsed_seconds": 48.52206254401244,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 48.52206254401244
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24138",
+      "wall_elapsed_seconds": 6.385735791001935,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.385735791001935
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24138",
+      "wall_elapsed_seconds": 1.6376105709932745,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.6376105709932745
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24139",
+      "wall_elapsed_seconds": 44.707803677010816,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.707803677010816
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24139",
+      "wall_elapsed_seconds": 4.906098247040063,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.906098247040063
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24139",
+      "wall_elapsed_seconds": 2.2539552310481668,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.2539552310481668
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24140",
+      "wall_elapsed_seconds": 44.94416448997799,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.94416448997799
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24140",
+      "wall_elapsed_seconds": 5.6615585859981366,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.6615585859981366
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24140",
+      "wall_elapsed_seconds": 1.8021008819923736,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.8021008819923736
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24141",
+      "wall_elapsed_seconds": 43.4218020690023,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 43.4218020690023
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24141",
+      "wall_elapsed_seconds": 5.985953136056196,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.985953136056196
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24141",
+      "wall_elapsed_seconds": 1.3579920509946533,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.3579920509946533
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24142",
+      "wall_elapsed_seconds": 51.668582554964814,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 51.668582554964814
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24142",
+      "wall_elapsed_seconds": 5.302979860978667,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 5.302979860978667
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24142",
+      "wall_elapsed_seconds": 2.675880305992905,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.675880305992905
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24143",
+      "wall_elapsed_seconds": 38.079626911028754,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 38.079626911028754
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24143",
+      "wall_elapsed_seconds": 6.350852582021616,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.350852582021616
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24143",
+      "wall_elapsed_seconds": 2.2108865960035473,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.2108865960035473
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24144",
+      "wall_elapsed_seconds": 45.70870863395976,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 45.70870863395976
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24164",
+      "wall_elapsed_seconds": 41.5319765980239,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 41.5319765980239
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24144",
+      "wall_elapsed_seconds": 16.254383906023577,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 16.254383906023577
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24144",
+      "wall_elapsed_seconds": 2.5136728130164556,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.5136728130164556
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24164",
+      "wall_elapsed_seconds": 6.852816500002518,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 6.852816500002518
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24164",
+      "wall_elapsed_seconds": 1.6327561390353367,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.6327561390353367
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24196",
+      "wall_elapsed_seconds": 34.75182469695574,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 34.75182469695574
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24196",
+      "wall_elapsed_seconds": 4.474385301000439,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 4.474385301000439
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24177",
+      "wall_elapsed_seconds": 44.68373061699094,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.68373061699094
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24196",
+      "wall_elapsed_seconds": 1.0054505299776793,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.0054505299776793
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24177",
+      "wall_elapsed_seconds": 8.013580792990979,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 8.013580792990979
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24177",
+      "wall_elapsed_seconds": 1.5685019079828635,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.5685019079828635
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24199",
+      "wall_elapsed_seconds": 44.86318427399965,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 44.86318427399965
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24199",
+      "wall_elapsed_seconds": 3.1793157909996808,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.1793157909996808
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24199",
+      "wall_elapsed_seconds": 1.3367597149917856,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.3367597149917856
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24205",
+      "wall_elapsed_seconds": 42.35600439400878,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 42.35600439400878
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24205",
+      "wall_elapsed_seconds": 3.182053412019741,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.182053412019741
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24205",
+      "wall_elapsed_seconds": 2.241372191987466,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.241372191987466
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24213",
+      "wall_elapsed_seconds": 33.13919314095983,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 33.13919314095983
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24212",
+      "wall_elapsed_seconds": 43.94072361901635,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 43.94072361901635
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24213",
+      "wall_elapsed_seconds": 3.8363370889564976,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.8363370889564976
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24212",
+      "wall_elapsed_seconds": 2.8721298800082877,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.8721298800082877
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24212",
+      "wall_elapsed_seconds": 1.0382659989991225,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.0382659989991225
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24213",
+      "wall_elapsed_seconds": 1.7051433530286886,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.7051433530286886
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24228",
+      "wall_elapsed_seconds": 43.389923468988854,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 43.389923468988854
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24228",
+      "wall_elapsed_seconds": 3.755937654990703,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.755937654990703
+    },
+    {
+      "stage": "water",
+      "command_id": "water/extract-seavox-24223",
+      "wall_elapsed_seconds": 49.66696509800386,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 49.66696509800386
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24228",
+      "wall_elapsed_seconds": 1.5155705920187756,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 1.5155705920187756
+    },
+    {
+      "stage": "water",
+      "command_id": "water/basin-seavox-24223",
+      "wall_elapsed_seconds": 2.395172599994112,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.395172599994112
+    },
+    {
+      "stage": "water",
+      "command_id": "water/verify-basin-seavox-24223",
+      "wall_elapsed_seconds": 0.943202719965484,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 0.943202719965484
+    },
+    {
+      "stage": "water",
+      "command_id": "water/prefill-plan",
+      "wall_elapsed_seconds": 3.608507657016162,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.608507657016162
+    },
+    {
+      "stage": "water",
+      "command_id": "water/prefill",
+      "wall_elapsed_seconds": 223.46810592897236,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 223.46810592897236
+    },
+    {
+      "stage": "water",
+      "command_id": "water/ocean-candidate",
+      "wall_elapsed_seconds": 2.015133776003495,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 2.015133776003495
+    },
+    {
+      "stage": "water",
+      "command_id": "water/ocean",
+      "wall_elapsed_seconds": 46.60092141403584,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 46.60092141403584
+    },
+    {
+      "stage": "water",
+      "command_id": "water/closed",
+      "wall_elapsed_seconds": 192.58245134499157,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 192.58245134499157
+    },
+    {
+      "stage": "water",
+      "command_id": "water/prepare-final",
+      "wall_elapsed_seconds": 0.863270755042322,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 0.863270755042322
+    },
+    {
+      "stage": "water",
+      "command_id": "water/compose-final",
+      "wall_elapsed_seconds": 37.459673814999405,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 37.459673814999405
+    },
+    {
+      "stage": "water",
+      "command_id": "water/updated-ocean-candidate",
+      "wall_elapsed_seconds": 0.7726240119663998,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 0.7726240119663998
+    },
+    {
+      "stage": "water",
+      "command_id": "water/updated-ocean",
+      "wall_elapsed_seconds": 34.798334676015656,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 34.798334676015656
+    },
+    {
+      "stage": "water",
+      "command_id": "water/compose-split-final",
+      "wall_elapsed_seconds": 19.592558939999435,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 19.592558939999435
+    },
+    {
+      "stage": "verification",
+      "command_id": "verification/compare",
+      "wall_elapsed_seconds": 3.283713220967911,
+      "source_download_elapsed_seconds": 0,
+      "processing_elapsed_seconds": 3.283713220967911
+    }
+  ],
+  "limitations": [
+    "Current run is one fresh uninterrupted invocation. Previous observed run contains active recovery and repeated validation; its downtime and source downloads are excluded.",
+    "These complete-run observations are not controlled causal speedup measurements. Unchanged-stage times varied between runs.",
+    "Concurrent command durations overlap and must not be summed into water or end-to-end wall time; authoritative stage totals use interval unions.",
+    "Full-grid equality verifies reproduction, not independent geographic correctness or publication approval."
+  ],
+  "raw_water_inputs": {
+    "release": "2026-10-21.0",
+    "shards": 32,
+    "total_bytes": 28818195515
+  },
+  "physical_units": [
+    {
+      "unit": "land",
+      "processing_elapsed_seconds": 195.82327063800767
+    },
+    {
+      "unit": "shard-00000",
+      "processing_elapsed_seconds": 71.02445461403113
+    },
+    {
+      "unit": "shard-00001",
+      "processing_elapsed_seconds": 34.647005991020706
+    },
+    {
+      "unit": "shard-00002",
+      "processing_elapsed_seconds": 22.129883517045528
+    },
+    {
+      "unit": "shard-00003",
+      "processing_elapsed_seconds": 38.31932956498349
+    },
+    {
+      "unit": "shard-00004",
+      "processing_elapsed_seconds": 26.579558769008145
+    },
+    {
+      "unit": "shard-00005",
+      "processing_elapsed_seconds": 63.89723649201915
+    },
+    {
+      "unit": "shard-00006",
+      "processing_elapsed_seconds": 131.08382777305087
+    },
+    {
+      "unit": "shard-00007",
+      "processing_elapsed_seconds": 57.45792101096595
+    },
+    {
+      "unit": "shard-00008",
+      "processing_elapsed_seconds": 39.983394472976215
+    },
+    {
+      "unit": "shard-00009",
+      "processing_elapsed_seconds": 27.549294242053293
+    },
+    {
+      "unit": "shard-00010",
+      "processing_elapsed_seconds": 87.83735284995055
+    },
+    {
+      "unit": "shard-00011",
+      "processing_elapsed_seconds": 49.75716930598719
+    },
+    {
+      "unit": "shard-00012",
+      "processing_elapsed_seconds": 49.233435086964164
+    },
+    {
+      "unit": "shard-00013",
+      "processing_elapsed_seconds": 44.53366650600219
+    },
+    {
+      "unit": "shard-00014",
+      "processing_elapsed_seconds": 42.11445494694635
+    },
+    {
+      "unit": "shard-00015",
+      "processing_elapsed_seconds": 53.711700163956266
+    },
+    {
+      "unit": "shard-00016",
+      "processing_elapsed_seconds": 35.00952903198777
+    },
+    {
+      "unit": "shard-00017",
+      "processing_elapsed_seconds": 73.71390973200323
+    },
+    {
+      "unit": "shard-00018",
+      "processing_elapsed_seconds": 41.12023073999444
+    },
+    {
+      "unit": "shard-00019",
+      "processing_elapsed_seconds": 24.337901607970707
+    },
+    {
+      "unit": "shard-00020",
+      "processing_elapsed_seconds": 40.06574235402513
+    },
+    {
+      "unit": "shard-00021",
+      "processing_elapsed_seconds": 47.985907577036414
+    },
+    {
+      "unit": "shard-00022",
+      "processing_elapsed_seconds": 30.107948624994606
+    },
+    {
+      "unit": "shard-00023",
+      "processing_elapsed_seconds": 51.752085660991725
+    },
+    {
+      "unit": "shard-00024",
+      "processing_elapsed_seconds": 52.36931632098276
+    },
+    {
+      "unit": "shard-00025",
+      "processing_elapsed_seconds": 118.0894329380244
+    },
+    {
+      "unit": "shard-00026",
+      "processing_elapsed_seconds": 45.303872777032666
+    },
+    {
+      "unit": "shard-00027",
+      "processing_elapsed_seconds": 60.58538831799524
+    },
+    {
+      "unit": "shard-00028",
+      "processing_elapsed_seconds": 31.340101343987044
+    },
+    {
+      "unit": "shard-00029",
+      "processing_elapsed_seconds": 64.72707028198056
+    },
+    {
+      "unit": "shard-00030",
+      "processing_elapsed_seconds": 79.48607555497438
+    },
+    {
+      "unit": "shard-00031",
+      "processing_elapsed_seconds": 100.81266768998466
+    },
+    {
+      "unit": "union",
+      "processing_elapsed_seconds": 24.20434076996753
+    },
+    {
+      "unit": "physical",
+      "processing_elapsed_seconds": 108.32694429002004
+    }
+  ]
+}
