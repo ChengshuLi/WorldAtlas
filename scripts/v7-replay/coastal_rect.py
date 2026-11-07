@@ -31,20 +31,17 @@ def classify(water,x0,y0,bounds,w,h,step,pairs,tol,band,bandtol,idx,block=32):
   # and the maximum parallel radius attained within the rectangle.
   rmax=s.A/(1-s.F);closest_abs=np.maximum(0,np.abs(ml)-half_lat)
   radius=np.hypot(rmax*np.deg2rad(half_lat),rmax*np.cos(np.deg2rad(closest_abs))*np.deg2rad(half_lon))+.01
-  lows=[];nearest=[]
-  for _,lc,_ in available:
-   data,tree=idx[lc];chord,ix=tree.query(pts,k=1,workers=1);lows.append(np.maximum(0,s.MIN_RADIUS*chord-.01));nearest.append((data,ix))
-  lows=np.column_stack(lows) if lows else np.empty((len(mid),0));low=lows.min(axis=1) if lows.shape[1] else np.full(len(mid),np.inf)
-  boundary=s.boundary_lower(ml,mid,bounds,w,h,step);outside=(low-radius>band+bandtol)&(boundary-radius>band+bandtol);inside=np.zeros(len(mid),dtype=bool)
   if available:
-   active=~outside;highs=np.full(lows.shape,np.inf)
-   for col,(data,ix) in enumerate(nearest):
-    if np.any(active):
-     dist=s.geodesic_distances(mid[active],ml[active],data['lon'][ix[active]],data['lat'][ix[active]])
-     if np.any(~np.isfinite(dist)):raise ValueError('invalid inverse geodesic')
-     highs[active,col]=dist+radius[active]+.000001
-   winner=np.argmin(highs,axis=1);upper=highs[np.arange(len(mid)),winner];others=lows.copy();others[np.arange(len(mid)),winner]=np.inf
-   inside=active&(upper<=band+bandtol)&(upper+tol<others.min(axis=1)-radius)&(upper+tol<boundary-radius)
+   lows,winner,candidate=s.nearest_class_bounds(ml,mid,pts,available,idx,upper_limit=band+bandtol+radius)
+   low=lows.min(axis=1)
+  else:
+   lows=np.empty((len(mid),0));low=np.full(len(mid),np.inf)
+  boundary=s.boundary_lower(ml,mid,bounds,w,h,step)
+  outside=(low-radius>band+bandtol)&(boundary-radius>band+bandtol)
+  inside=np.zeros(len(mid),dtype=bool)
+  if available:
+   upper=candidate+radius;others=lows.copy();others[np.arange(len(mid)),winner]=np.inf
+   inside=(~outside)&(upper<=band+bandtol)&(upper+tol<others.min(axis=1)-radius)&(upper+tol<boundary-radius)
    for k,(_,_,code) in enumerate(available):
     for i in np.flatnonzero(inside&(winner==k)):output[a[i]:b[i],c[i]:d[i]]=code
   pending=~(outside|inside);leaf=pending&(b-a==1)&(d-c==1)
@@ -62,64 +59,7 @@ def classify(water,x0,y0,bounds,w,h,step,pairs,tol,band,bandtol,idx,block=32):
   codes,s0=core.classify(lat,lon,bounds,w,h,step,pairs,tol,band,bandtol,idx);output[ny,nx]=codes;stats['bounded']+=s0['bounded'];stats['exact']+=s0['exact']
  if stats['bounded']+stats['exact']!=int(water.sum()):raise RuntimeError('accounting mismatch')
  return output,stats
-"""Research scanline extraction of orthogonal shoreline centers from RLE."""
-import math
-import numpy as np
-import shared_nearest as s
 
-def spans(grid,y,x0,x1,width):
- rows,runs=grid;first,last=int(rows[y]),int(rows[y+1]);ends=runs[2*first:2*last:2];vals=runs[2*first+1:2*last:2]
- if not len(ends) or int(ends[0])<=0 or int(ends[-1])!=width or np.any(ends[1:]<=ends[:-1]):raise ValueError('invalid RLE row')
- out_e=[];out_v=[];x=x0
- while x<x1:
-  xm=x%width; take=min(x1-x,width-xm);stop=xm+take
-  i=int(np.searchsorted(ends,xm,side='right'));j=int(np.searchsorted(ends,stop,side='left'))+1
-  ee=np.minimum(ends[i:j].astype(np.int64),stop)-xm+x
-  out_e.extend(ee.tolist());out_v.extend(vals[i:j].tolist());x+=take
- return np.asarray(out_e,dtype=np.int64),np.asarray(out_v,dtype=np.int64)
-
-def centers_for_crop(physical,land,bounds,width,height,step,land_codes):
- x0,x1,y0,y1=bounds
- if not (0<=y0<y1<=height and 0<x1-x0<=width and math.isfinite(step) and step>0):raise ValueError('invalid crop')
- selected=np.zeros(23,dtype=bool);selected[land_codes]=True
- latitudes=[];longitudes=[];categories=[];count=0
- # full-width crops cannot be extended in the original crop helper, but this
- # span reader intentionally supports repeated wrapping for the side halo.
- def pget(y):
-  e,v=spans(physical,y,x0-1,x1+1,width)
-  if np.any((v!=1)&(v!=17)):raise ValueError('invalid physical or land row')
-  return e,v
- prev=pget(y0-1) if y0>0 else None;cur=pget(y0);nxt=pget(y0+1) if y0+1<height else None
- for y in range(y0,y1):
-  le,lv=spans(land,y,x0,x1,width)
-  # Break at all changes in either adjacent physical row, current physical
-  # row, or land category. Side halo endpoints are clipped out.
-  breaks=[np.array([x0,x1]),le,cur[0]]
-  if prev is not None:breaks.append(prev[0])
-  if nxt is not None:breaks.append(nxt[0])
-  b=np.unique(np.concatenate(breaks));b=b[(b>=x0)&(b<=x1)];starts=b[:-1];ends=b[1:]
-  mv=cur[1][np.searchsorted(cur[0],starts,side='right')]
-  cats=lv[np.searchsorted(le,starts,side='right')]
-  bad=(mv==17)&((cats<17)|(cats>22))
-  if np.any(bad):raise ValueError('invalid physical or land row')
-  wet=np.zeros(len(starts),dtype=bool)
-  for row in (prev,nxt):
-   if row is not None:wet |= row[1][np.searchsorted(row[0],starts,side='right')]==1
-  chosen=(mv==17)&selected[np.clip(cats,0,22)]&wet
-  starts1=starts[chosen];ends1=ends[chosen]
-  xx=np.concatenate([np.arange(a,b,dtype=np.int64) for a,b in zip(starts1,ends1)]) if len(starts1) else np.empty(0,dtype=np.int64)
-  # Horizontal coast consists of the land cell on each wet/dry run boundary.
-  ce,cv=cur; t=np.flatnonzero(cv[:-1]!=cv[1:]);boundary=ce[t]
-  side=np.where(cv[t]==17,boundary-1,boundary);side=side[(side>=x0)&(side<x1)]
-  if len(side):
-   sc=lv[np.searchsorted(le,side,side='right')];side=side[selected[np.clip(sc,0,22)]]
-   xx=np.union1d(xx,side)
-  count+=len(xx)
-  if len(xx):
-   latitudes.append(np.full(len(xx),90-(y+.5)*step));longitudes.append(((-180+(xx+.5)*step+180)%360)-180)
-   categories.append(lv[np.searchsorted(le,xx,side='right')].astype(np.uint8))
-  prev,cur=cur,nxt
-  nxt=pget(y+2) if y+2<height and y+1<y1 else None
- if not count:raise ValueError('no participant shorelines in crop')
- lat=np.concatenate(latitudes);lon=np.concatenate(longitudes);cat=np.concatenate(categories)
- return {'mids':s.unit(lat,lon),'lat':lat,'lon':lon,'category':cat}
+def centers_for_crop(physical, land, bounds, width, height, step, land_codes):
+ """Use the common exact RLE shoreline extractor for coast and shared seas."""
+ return s.centers_for_crop(physical,land,bounds,width,height,step,land_codes)
