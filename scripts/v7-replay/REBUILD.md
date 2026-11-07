@@ -14,3 +14,19 @@ This checkout remains a **research candidate, not a complete or publishable dire
 - `../v7-recovery/ocean/` contains the fresh ocean fill candidate; unseeded components are reported, not silently assigned. `compose_direct.py` composes a direct prefill and bound water layers without a prior continent grid, refuses unassigned cells and outputs a research-only audit. No complete direct global run has been performed. The older `compose_full_water_grid.py` is historical replay and still requires prior V2/V6 grids.
 
 All snapshot-consuming builders remain unverified research tools and require explicit flags. A file's claimed revision status and hash do not authenticate review. Before a release, complete and review the missing Neon decisions and source lineage, independently validate all geometries and layer coverage, pin software and inputs, run global connectivity and physical/land checks, then verify the final map, attribution and UI. Keep raw inputs and generated maps in R2 and versioned decisions in Neon; no live publication is authorized by these scripts.
+
+## Preserved code needed to investigate the Iceland v24 candidate
+
+The Iceland v24 research candidate was made by changing an existing ocean
+partition, not by running every stage afresh. Its final rows SHA-256 is
+`103a47a8a70676a9d403155717c95a12ecbd6fd51cdd9c35679e9f42c7a7199f` and
+runs SHA-256 is `cf14bcaf6f06a305b82205dc535584105e221bb79fc185a8f3371c41d61b7f78`.
+Its split-ocean proof reused 442 previously classified unseeded components.
+It is not evidence of a full source-to-map rerun.
+
+Nine exact earlier code files identified by the provisional land report, stage2
+configuration, and closed-water manifest are preserved in `../v7-recovery/v24-source-pins/`.
+Their hashes and report roles are in `pins.json`. They are provenance copies,
+not standalone entrypoints: imports, source and decision snapshots, manifests,
+and runtime inputs must also be reconstructed and validated. These pins do not
+establish completeness or permission to promote the candidate.

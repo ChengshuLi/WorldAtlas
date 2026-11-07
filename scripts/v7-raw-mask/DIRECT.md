@@ -32,3 +32,24 @@ On 2026-11-04, two runs processed the first 20,000 rows from each of two real Ov
 ## Complete-source timing profile
 
 A 2026-11-06 full-grid profile used all 32 Overture water shards. Its download-excluded critical path was 2,436.81 seconds for the baseline and 1,909.69 seconds with three parallel shard workers, 32,768-row water batches, and 512-row union and composition blocks (21.6% less time). Land, union, final dry mask, and run-stream output hashes matched; 31 shard TIFFs matched byte-for-byte and the remaining shard matched every pixel but had different TIFF bytes. Cache, host load and staging effects were not controlled, so this is a measured profile, not a guaranteed speedup. Outputs remain candidates and require independent source and geographic review.
+
+## R2 staging for a full physical run
+
+`run_with_r2_staging.py` wraps the physical builder and fetches each missing
+water shard from the R2 bucket and key in its hash-pinned source manifest.
+Each entry must also provide the byte size. The wrapper checks the downloaded
+bytes before running the unchanged rasterizer. It retains existing inputs and,
+by default, downloaded shards. `--remove-completed-downloads` removes only
+newly downloaded temporary copies after a matching complete shard report; failed
+or partial downloads remain for inspection. Use an official installed Wrangler
+entrypoint and authenticate separately; never put credentials in source files.
+The staging log directory and pipeline output directory must be new and separate.
+For example:
+
+`python run_with_r2_staging.py PIPELINE_CONFIG NEW_OUTPUT --wrangler /path/to/wrangler/bin/wrangler.js --wrangler-config /path/to/wrangler.jsonc --log-dir NEW_LOG_DIR`
+
+Run `python -m unittest -v test_r2_staging.py` for synthetic staging checks.
+These do not test a real R2 connection or establish source selection, global
+coverage, or equivalence to a published map. The exact local harness used in
+the 2026-11-07 physical rerun is retained under `research-run-provenance/` for
+provenance; its fixed environment paths make it non-portable.
