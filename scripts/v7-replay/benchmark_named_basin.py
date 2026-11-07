@@ -78,16 +78,18 @@ def main():
     ap.add_argument('--admitted', type=Path, required=True)
     ap.add_argument('--reference', type=Path, required=True, help='completed baseline basin directory')
     ap.add_argument('--out', type=Path, required=True, help='fresh benchmark directory')
-    ap.add_argument('--classifier', choices=('default', 'interval', 'point'), default='default')
+    ap.add_argument('--classifier', choices=('default', 'interval', 'rectangles', 'point'), default='default')
     args = ap.parse_args()
     baseline = json.loads((args.reference / 'manifest.json').read_text())
     out = args.out.absolute()
-    extra = {'default': [], 'interval': ['--research-interval'], 'point': ['--pointwise-nearest']}[args.classifier]
-    timing = run_stage(args.admitted, Path(__file__).resolve().parents[2], out, extra)
+    extra = {'default': [], 'interval': ['--research-interval'], 'point': ['--pointwise-nearest'], 'rectangles': ['--research-rectangles']}[args.classifier]
+    timing = run_stage(args.admitted, Path(__file__).resolve().parents[2], out, extra, drop_boolean_options=('--research-interval','--research-rectangles','--pointwise-nearest'))
     candidate = out / 'candidate'
     command = timing['command']
     builder = Path(command[1])
     result = json.loads((candidate / 'manifest.json').read_text())
+    if result['algorithm_sha256'] != timing['builder_sha256']:
+        raise ValueError('builder changed between benchmark admission and stage startup')
     # Equal source pins, raster bytes and grid prevent accidental changed-input
     # "speedups". Processing counters are checked against parsed full outputs.
     for key in ('source', 'grid', 'rasterization'):
@@ -117,6 +119,8 @@ def main():
               'speedup': baseline['processing_elapsed_seconds'] / result['processing_elapsed_seconds'],
               'coverage_verification': json.loads((out / 'coverage.log').read_text()),
               'baseline_timing_source': 'completed original stage manifest; not rerun by this driver',
+              'candidate_algorithm_sha256': result['algorithm_sha256'],
+              'candidate_nearest_assignment_audit': result['nearest_assignment_audit'],
               'candidate_manifest_sha256': digest(candidate / 'manifest.json'),
               'reference_manifest_sha256': digest(args.reference / 'manifest.json')}
     write_json_exclusive(out / 'report.json', report, indent=2)

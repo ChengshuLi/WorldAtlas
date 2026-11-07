@@ -328,10 +328,23 @@ def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,ba
     for i,(_,_,code) in enumerate(available):out[fast & (best==i) & (True if band is None else inside)]=code
     pending=np.flatnonzero(~fast)
     if len(pending):
-        distances = np.column_stack([
-            exact_minima_by_ordered_chord(points[pending], lon[pending],
-                                         lat[pending], *indexes[lc])
-            for _, lc, _ in available])
+        # A candidate upper bound is enough to exclude a distant class from
+        # the minimum and its tolerance tie. Coastal queries can also exclude
+        # classes beyond the band and its tie/ambiguity margins. Computing a
+        # complete exact minimum for those classes used to dominate fallback
+        # even when their nearest possible shore was on another continent.
+        # Always retain the candidate class, including outside-band queries,
+        # so the numerical-threshold and omitted-shore checks below still run.
+        limit = upper[pending] + tolerance + .000001
+        if band is not None:
+            limit = np.minimum(limit, threshold + tolerance + .000001)
+        distances = np.full((len(pending), len(available)), np.inf)
+        for col, (_, lc, _) in enumerate(available):
+            relevant = (lows[pending, col] <= limit) | (best[pending] == col)
+            queries = pending[relevant]
+            if len(queries):
+                distances[relevant, col] = exact_minima_by_ordered_chord(
+                    points[queries], lon[queries], lat[queries], *indexes[lc])
         minimum = distances.min(axis=1)
         if np.any(~np.isfinite(minimum)):
             raise RuntimeError('no provable candidate shore')

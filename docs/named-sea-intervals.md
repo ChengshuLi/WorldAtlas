@@ -1,4 +1,4 @@
-# Exact nearest-shore row intervals
+# Exact nearest-shore region certificates
 
 The shared SeaVoX basin builder classifies physical-water **cell centers** against
 the complete set of four-neighbor physical coastal land-cell centers. Distances
@@ -41,6 +41,26 @@ ambiguity checks and full-shore fallback. Missing classes or an interval outside
 the indexed crop also use the full-shore-capable point path. Floating-point
 guards make certificates conservative; they do not enlarge the decision's tie
 tolerance or permit an approximate label.
+
+The default rectangle execution engine extends the same proof
+across both columns and rows. It intersects the complete selected row spans with
+canonical source windows and streams consecutive 64-row groups. Selected cells
+are never dropped at a window, tile or group edge. For a rectangle, its middle
+latitude/longitude and extreme cell-center offsets give a conservative radius
+by integrating the straight latitude/longitude segment with the largest WGS84
+principal radius and largest parallel cosine in the rectangle. Subdivision skips
+only regions containing no selected cells. Point fallback and strict tie rules
+are unchanged. `--research-interval` retains the row engine and `--pointwise-nearest`
+retains the original point engine. The producer records a distinct rectangle execution method and
+helper hash; the consumer verifies these rather than relabeling row provenance.
+
+Before an expensive exact midpoint query, both engines also test whether any
+class could possibly certify the region. Its spherical nearest distance gives
+both a lower and an upper ellipsoidal bound using the minimum and maximum WGS84
+metric radii. If even the most optimistic gap is no larger than twice the region
+radius plus tolerance, exact refinement cannot certify it, so subdivision proceeds
+directly. The antipodal chord-only lower-bound branch instead uses a conservative
+half-circumference upper bound. This gate removes work, never shoreline candidates.
 
 ## Reproducible full-input benchmark
 
@@ -85,3 +105,29 @@ classification. These are full-input measurements, not sample extrapolations.
 The [machine-readable report](benchmarks/bering-row-interval-20261107.json)
 preserves the commands, hashes and resource context. Source polygon semantics
 and geographic approval are separate from this exact regression check.
+
+### Final rectangle default
+
+The final default engine completed the same full Bering stage in **105.837
+seconds** processing and **106.409 seconds** full process wall time: **48.58 times
+faster** than the original 5,141.516-second point stage. An earlier complete 2D
+trial took 117.386 seconds, with the same exact output. These are actual complete
+stage timings, not extrapolations from selected rows or classification kernels.
+
+All 43,945,230 cells, 5,010 rows, 29,539 spans and both compressed/decompressed
+assignment byte streams matched the original. The complete independent coverage
+check passed in another 11.558 seconds. The engine certified 43,925,062 cells in
+rectangles, leaving only 20,168 point fallbacks and zero streamed full-shore
+fallbacks. Every original input pin and raster byte was unchanged.
+
+The [final machine-readable report](benchmarks/bering-rectangles-20261107.json)
+also includes the exact builder/helper hashes and execution audit. The baseline
+timing is still the original completed run, not a fresh isolated baseline trial;
+the two 2D trials ran sequentially with other heavy benchmarks stopped.
+
+The final code passed all 241 replay tests, including randomized independent
+WGS84 checks, wrapped/missing-shore fallback, source masks, consumer provenance,
+coastal bands, ties, interrupted batch recovery and composition. The test process
+used a workspace-local `TMPDIR` and inherited `scripts`, `scripts/v7-replay` and
+`scripts/v7-pipeline` on `PYTHONPATH` so subprocess-import tests see the same
+modules. No benchmark ran alongside the tests.

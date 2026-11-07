@@ -36,6 +36,8 @@ class SharedAuditTests(unittest.TestCase):
         m=self.manifest(interval=True);m['nearest_assignment_audit']['helper_code_sha256']={};cases.append(m)
         m=self.manifest(interval=True);m['nearest_assignment_audit'].update(interval_leaf_cells=6,exact_interval_probe_count=2);cases.append(m)
         m=self.manifest(interval=True);m['nearest_assignment_audit'].update(interval_leaf_cells=5,exact_interval_probe_count=-1);cases.append(m)
+        m=self.manifest(interval=True);m['nearest_assignment_audit'].update(execution_method='wgs84-center-rectangle-v1',exact_rectangle_probe_count=2);cases.append(m)
+        m=self.manifest(interval=True);m['nearest_assignment_audit'].update(rectangle_nearest_sha256='a'*64);cases.append(m)
         m=self.manifest(wrapped=True);m['nearest_assignment_audit']['wrapped_fallback_cells']=3;cases.append(m)
         m=self.manifest(interval=True);m['nearest_assignment_audit']['shore_method']=self.manifest()['nearest_assignment_audit']['shore_method'];cases.append(m)
         for m in cases:

@@ -11,6 +11,25 @@ import numpy as np
 import shared_nearest as s
 MAX_RADIUS=s.A/(1-s.F)
 
+def exact_certificate_possible(lower,best,upper,radius,tolerance,boundary):
+ """Skip expensive exact probes when even optimistic class gaps cannot win.
+
+ The same spherical minimum giving a lower bound also gives an upper bound:
+ ellipsoid distance is at most MAX_RADIUS times its spherical angle. The
+ chord-only antipodal branch is detected conservatively and uses half the
+ maximum ellipsoid circumference instead. This is an exclusion proof, never
+ a replacement for exact minima or the final interval certificate.
+ """
+ maximum=np.where(lower<s.MIN_RADIUS*1.98,
+                  MAX_RADIUS/s.MIN_RADIUS*(lower+.001)+.01,
+                  math.pi*MAX_RADIUS+.01)
+ rows=np.arange(len(lower));maximum[rows,best]=np.minimum(maximum[rows,best],upper)
+ possible=np.zeros(len(lower),dtype=bool)
+ for col in range(lower.shape[1]):
+  competing=maximum.copy();competing[:,col]=np.inf
+  possible |= (competing.min(axis=1)-lower[:,col]>2*radius+tolerance)&(boundary-lower[:,col]>2*radius+tolerance)
+ return possible
+
 def classify_row(y,intervals,bounds,width,height,step,pairs,tol,indexes,*,leaf=16,point_classifier=None):
  if any(type(z) is not int for z in (y,width,height,leaf)) or width<=0 or height<=0 or not 0<=y<height or leaf<1:raise ValueError('invalid grid, row, or leaf')
  if isinstance(step,(bool,np.bool_)) or isinstance(tol,(bool,np.bool_)) or not math.isfinite(step) or step<=0 or abs(step*width-360)>1e-8 or not math.isfinite(tol) or tol<0:raise ValueError('invalid step or tolerance')
@@ -55,6 +74,7 @@ def classify_row(y,intervals,bounds,width,height,step,pairs,tol,indexes,*,leaf=1
   lon=-180+(middle+.5)*step;lats=np.full(len(middle),lat); points=s.unit(lats,lon)
   extent=MAX_RADIUS*math.cos(math.radians(lat))*np.deg2rad(step)*np.maximum(middle-active[:,0],active[:,1]-1-middle)+.01
   lowers,best,upper=s.nearest_class_bounds(lats,lon,points,pairs,indexes)
+  all_lowers=lowers.copy()
   lowers[np.arange(len(active)),best]=np.inf
   boundary=s.boundary_lower(lats,lon,bounds,width,height,step)
   good=(upper+2*extent+tol<lowers.min(axis=1))&(upper+2*extent+tol<boundary)
@@ -63,7 +83,8 @@ def classify_row(y,intervals,bounds,width,height,step,pairs,tol,indexes,*,leaf=1
   # strip around each class boundary would devolve into exact point queries.
   # Resolve complete class minima once at an unresolved interval midpoint;
   # their 1-Lipschitz distance functions then provide much tighter bounds.
-  probe=np.flatnonzero((~good)&(active[:,1]-active[:,0]>leaf))
+  possible=exact_certificate_possible(all_lowers,best,upper,extent,tol,boundary)
+  probe=np.flatnonzero((~good)&possible&(active[:,1]-active[:,0]>leaf))
   if len(probe):
    distances=np.column_stack([s.exact_minima_by_ordered_chord(points[probe],lon[probe],lats[probe],*indexes[code]) for _,code,_ in pairs])
    if np.any(~np.isfinite(distances)):raise RuntimeError('invalid exact interval distances')

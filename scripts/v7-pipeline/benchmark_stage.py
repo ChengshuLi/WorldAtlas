@@ -36,7 +36,7 @@ def environment():
             **{key: os.environ.get(key) for key in ('PROJ_NETWORK', 'PYTHONPATH', 'TMPDIR')}}
 
 
-def stage_command(admitted, code_root, candidate, extra_arguments=()):
+def stage_command(admitted, code_root, candidate, extra_arguments=(), *, drop_boolean_options=()):
     command = list(admitted['invocation']['command'])
     if len(command) < 2 or command.count('--out') != 1:
         raise ValueError('stage must use one explicit --out')
@@ -49,17 +49,20 @@ def stage_command(admitted, code_root, candidate, extra_arguments=()):
         raise ValueError(f'missing stage script: {relative}')
     command[1] = str(builder)
     command[command.index('--out') + 1] = str(candidate)
-    if '--out' in extra_arguments:
+    if any(v == '--out' or v.startswith('--out=') for v in extra_arguments):
         raise ValueError('extra arguments cannot replace the fresh output')
+    if any(not flag.startswith('--') or '=' in flag or flag in ('--out', '--input-root') for flag in drop_boolean_options):
+        raise ValueError('only explicit classifier boolean options can be removed')
+    command = [arg for arg in command if arg not in drop_boolean_options]
     return command + list(extra_arguments)
 
 
-def run_stage(admission, code_root, out, extra_arguments=()):
+def run_stage(admission, code_root, out, extra_arguments=(), *, drop_boolean_options=()):
     admitted = json.loads(admission.read_text())
     out = out.absolute()
     if out.exists() or not out.parent.is_dir():
         raise ValueError('benchmark output must be new with an existing parent')
-    command = stage_command(admitted, code_root.resolve(), out / 'candidate', extra_arguments)
+    command = stage_command(admitted, code_root.resolve(), out / 'candidate', extra_arguments, drop_boolean_options=drop_boolean_options)
     create_directory_exclusive(out)
     invocation = {'command': command, 'environment': environment(), 'admission_sha256': digest(admission),
                   'builder_sha256': digest(Path(command[1]))}

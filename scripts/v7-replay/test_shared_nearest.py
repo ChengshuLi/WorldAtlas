@@ -114,11 +114,23 @@ class FullBuilderTest(unittest.TestCase):
                     '--land-rows-sha256',h(root/'land-rows'),'--land-runs',str(root/'land-runs'),
                     '--land-runs-sha256',h(root/'land-runs'),'--shore-pad-degrees','180',
                     '--out',str(out),'--allow-unverified-snapshot','--allow-draft-snapshot',
-                    '--research-shore-method','wgs84-coastal-4neighbor-center-v2']
+                    '--research-shore-method','wgs84-coastal-4neighbor-center-v2','--research-interval']
                 m.main()
+                interval_argv=list(sys.argv)
                 baseline_out=Path(d)/'baseline-out'
-                sys.argv=[str(baseline_out) if arg==str(out) else arg for arg in sys.argv]+['--pointwise-nearest']
+                sys.argv=[str(baseline_out) if arg==str(out) else arg for arg in sys.argv if arg!='--research-interval']+['--pointwise-nearest']
                 m.main()
+                baseline_argv=list(sys.argv)
+                rectangle_out=Path(d)/'rectangle-out'
+                sys.argv=[str(rectangle_out) if arg==str(out) else arg for arg in interval_argv if arg!='--research-interval']
+                m.main()
+                rectangle_manifest=json.loads((rectangle_out/'manifest.json').read_text())
+                self.assertEqual(rectangle_manifest['nearest_assignment_audit']['execution_method'],'wgs84-center-rectangle-v1')
+                from build_prefill_plan import validate_shared_audit
+                validate_shared_audit(rectangle_manifest)
+                with gzip.open(out/'basin-assignment.jsonl.gz','rb') as reference, gzip.open(rectangle_out/'basin-assignment.jsonl.gz','rb') as rectangular:
+                    self.assertEqual(reference.read(),rectangular.read())
+                sys.argv=baseline_argv
                 # A helper changed after processing must not produce a completed manifest.
                 from unittest.mock import patch
                 tamper_out=Path(d)/'tamper-out'; seen=[0]

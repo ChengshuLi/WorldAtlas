@@ -27,6 +27,12 @@ class BenchmarkStage(unittest.TestCase):
                 run_stage(receipt, root, root / 'benchmark')
             with self.assertRaises(ValueError):
                 stage_command(admitted, root, root / 'new', ['--out', '/overwrite'])
+            with self.assertRaises(ValueError):
+                stage_command(admitted, root, root / 'new', ['--out=/overwrite'])
+            admitted['invocation']['command'].append('--research-interval')
+            command=stage_command(admitted,root,root/'new',['--pointwise-nearest'],drop_boolean_options=('--research-interval',))
+            self.assertNotIn('--research-interval',command)
+            self.assertIn('--pointwise-nearest',command)
 
 
 if __name__ == '__main__':

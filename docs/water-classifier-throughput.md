@@ -18,4 +18,36 @@ Targeted local-input measurements against PR4 commit `a601f853011337cc38cf1fba4b
 - Eight Bering rows, identical preserved V8 assignment spans: existing interval path 0.925 s to 0.794 s; the point path took 6.484 s.
 - A sparse shoreline prototype reproduced all 1,846,461 Bering centers exactly, reducing extraction from 21.01 s to 6.99 s. The final common extractor instead reuses the established coastal scanline implementation because that was faster than the prototype on coastal tile 135. Its full-stage timing remains to be measured.
 
-A full pinned-input pipeline replay and fresh whole-stage timings are required before claiming an end-to-end speedup. No benchmark or local compatibility scripts are part of this change.
+A full pinned-input pipeline replay and fresh whole-stage timings are required
+before claiming an end-to-end speedup from those microbenchmarks.
+
+## Relevant-class exact fallback
+
+Point fallback now computes complete exact minima only for classes whose
+conservative lower bound can still affect the answer. A class beyond a known
+candidate upper bound plus the tie tolerance and numerical guard cannot win or
+join the tie. For coastal-band queries, classes beyond the band plus those
+margins cannot change membership or an in-band winner either. The candidate
+class is always retained, including outside-band points, so existing threshold
+ambiguity and omitted-shore checks still run. Every relevant class retains the
+complete shoreline search; no candidate count is capped.
+
+The new tests compare output to complete all-center WGS84 searches near the
+band, poles and antimeridian; force tolerance ties; preserve band ambiguity;
+and verify that excluded distant classes do not invoke exact minima.
+
+For comparable complete coastal timings, use the admitted coastal command from
+a completed pipeline run. Run each checkout sequentially on the same local
+inputs, with a workspace-local temporary directory and the same runtime:
+
+    TMPDIR=/workspace/bench-tmp PROJ_NETWORK=OFF PYTHONPATH=/checkout/scripts \
+      /usr/bin/python3 scripts/v7-pipeline/benchmark_coastal.py \
+      --admitted /workspace/run/checkpoints/coast/attempt-ID/admitted.json \
+      --reference /workspace/run/coast --code-root /checkout \
+      --out /workspace/bench-candidate
+
+The reusable driver includes startup and all complete-stage processing in its
+wall time, excludes subsequent comparison work, and performs no downloads.
+Verification checks all tile inventories, input identities and artifact hashes,
+then compares every decompressed assignment byte. Results and environment are
+recorded in fresh output; source and reference artifacts are never modified.
