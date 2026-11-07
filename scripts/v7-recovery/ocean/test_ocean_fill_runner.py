@@ -21,6 +21,15 @@ class OceanRunnerTests(unittest.TestCase):
    rows=[json.loads(x) for t in layer['tiles'] for x in (out/t['span_file']['path']).read_text().splitlines()];self.assertEqual(len(rows),4)
    for row in rows:self.assertEqual([(s['start'],s['end'],s['code'],s['member_id']) for s in row['spans']],[(0,2,7,'s0'),(2,4,8,'s1'),(4,6,9,'s2'),(6,8,10,'s3')])
    with self.assertRaises(FileExistsError):r.run(self.snapshot(),'a'*64,pr,pu,rr,ru,out,8,4,{})
+ def test_final_recheck_runs_after_export_before_summary(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);pr,pu=self.grid(root,'phys',1);rr,ru=self.grid(root,'prefill',0);out=root/'out'
+   def after_export():
+    self.assertTrue((out/'ocean-layer-manifest.json').is_file())
+    raise ValueError('input changed during export')
+   with self.assertRaisesRegex(ValueError,'input changed during export'):
+    r.run(self.snapshot(),'a'*64,pr,pu,rr,ru,out,8,4,{},2,pre_summary=after_export)
+   self.assertFalse((out/'run-summary.json').exists())
  def test_fail_closed_on_unsupported_and_missing_decisions(self):
   s=self.snapshot();s['routes'][0]['route_type']='geodesic'
   with self.assertRaisesRegex(ValueError,'unsupported boundary'):r.load_config(s,8,4)

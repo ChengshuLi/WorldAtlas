@@ -196,7 +196,7 @@ def export_layer(partition,out,width,height,metadata,inputs,tile_height=256):
     write_json_exclusive(out/'ocean-layer-manifest.json',manifest,indent=2)
     return manifest
 
-def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_runs,out,width,height,inputs,tile_height=256,allow_draft=False,software_versions=None,pre_finalize=None):
+def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_runs,out,width,height,inputs,tile_height=256,allow_draft=False,software_versions=None,pre_finalize=None,pre_summary=None):
     policy,paths,seeds,metadata=load_config(snapshot,width,height,allow_draft,software_versions)
     if tile_height<=0:raise ValueError('tile height must be positive')
     create_directory_exclusive(out)
@@ -221,6 +221,7 @@ def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_
              unassigned_policy='report-only; do not assign unseeded components automatically',classification_rows=classes,seed_metadata=metadata)
     if pre_finalize: pre_finalize()
     export_layer(out/'partition',out,width,height,metadata,pins,tile_height)
+    if pre_summary: pre_summary()
     write_json_exclusive(out/'run-summary.json',{'status':'unverified-candidate-not-published','snapshot_sha256':snapshot_hash,
       'unseeded_cell_count':part['unseeded_cell_count'],'assigned_cells_total':part['assigned_cells_total'],
       'barrier_sha256':pins['source_cut_edges_sha256'],'layer_manifest_sha256':sha(out/'ocean-layer-manifest.json')},indent=2)
