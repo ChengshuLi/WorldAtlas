@@ -25,9 +25,10 @@ class Fixture:
  def check(self):return m.validate(self.report,self.rp,self.phys,self.land,self.bs['sha256'],self.rev,self.root,self.physr['sha256'])
  def config_update(self):
   self.cfgspec=self.obj('request.json',self.cfg);self.set_lineage({'schema':'water-selected-mixed-lineage-v1','request':self.cfgspec,'snapshot_origin':{'kind':'direct','source_snapshot':self.snap}});self.report['request_sha256']=self.cfgspec['sha256']
- def diagnostic(self):
+ def diagnostic(self,dependencies=None):
   seed=self.obj('seed-report.json',{'status':'candidate-only'});outer=self.obj('outer.json',{'schema':'stage2-fresh-orchestration-v1'});code={'orchestrate_stage2.py':'d'*64,'seed-producer/seed_worker.py':'e'*64};derived=self.obj('derived.json',{'schema':'stage2-fresh-derived-v1','provisional_only':True,'outer_config_sha256':outer['sha256'],'orchestrator_sha256':'d'*64,'code_sha256':code,'artifacts':{'seed_report':seed}});self.cfg['stage2'].update(derived_manifest=derived,outer_config=outer)
-  spec=self.cfg['stage2']['report'];stage2=json.loads(Path(spec['path']).read_text());stage2.update(status='stage2-provisional-only',provisional_only=True,config_sha256='d'*64,code_sha256={'build_stage2.py':'a'*64},dependency_sha256={'contracts.py':'b'*64},seed_report_sha256=seed['sha256'],orchestration={'provisional_only':True,'derived_manifest':derived,'outer_config_sha256':outer['sha256'],'orchestrator_sha256':'d'*64});stage2['inputs_sha256']['seed_report']=seed['sha256'];spec=self.obj('stage2.json',stage2);self.cfg['stage2']['report']=spec
+  if dependencies is None:dependencies={'seed_code_files':{'seed_producer.py':'b'*64,'rasterizer':'c'*64},'resolution_code_files':{'resolver':'a'*64},'hint_code_files':{'hints.py':'e'*64}}
+  spec=self.cfg['stage2']['report'];stage2=json.loads(Path(spec['path']).read_text());stage2.update(status='stage2-provisional-only',provisional_only=True,config_sha256='d'*64,code_sha256={'build_stage2.py':'a'*64},dependency_sha256=dependencies,seed_report_sha256=seed['sha256'],orchestration={'provisional_only':True,'derived_manifest':derived,'outer_config_sha256':outer['sha256'],'orchestrator_sha256':'d'*64});stage2['inputs_sha256']['seed_report']=seed['sha256'];spec=self.obj('stage2.json',stage2);self.cfg['stage2']['report']=spec
   self.cfg['stage2_approval']=self.obj('approval.json',{'validator_sha256':'b'*64,'approved_code':{'orchestration_files':code,'core_files':stage2['code_sha256'],'dependency_files':stage2['dependency_sha256']}})
   self.cfg.update(schema='stage3-provisional-diagnostic-request-v1',diagnostic_only=True,publishable=False);self.cfg['regional']['request'].update(profiling_standin=True,pending_inventory_complete=False);self.cfg['policy_pins']['baseline_report_sha256']=spec['sha256']
   sp=self.report['policy']['policy'];pins=self.cfg['policy_pins'];self.report.update(schema='stage3-provisional-diagnostic-land-report-v1',status='provisional-profiling-only-not-publishable',publishable=False,provisional_only=True)
@@ -43,6 +44,16 @@ class TestMixed(unittest.TestCase):
  def test_diagnostic_opt_in_required(self):
   self.f.diagnostic();self.f.set_lineage({'schema':'water-selected-mixed-lineage-v1','request':self.f.cfgspec,'snapshot_origin':{'kind':'direct','source_snapshot':self.f.snap}})
   with self.assertRaisesRegex(ValueError,'opt-in'):self.f.check()
+ def test_flat_dependency_manifest_remains_supported(self):
+  self.f.diagnostic({'contracts.py':'b'*64});self.f.check()
+ def test_every_nested_digest_and_group_is_validated_even_if_approved(self):
+  for value in ({},{'seed':{}},{'seed':{'file':'not-a-hash'}},{'seed':{'file':'F'*64}},{'seed':{'file':None}},{'seed':[]},{'seed':{'file':True}},{'':{'file':'a'*64}}):
+   with self.subTest(value=value),tempfile.TemporaryDirectory() as root:
+    f=Fixture(root);f.diagnostic(value)
+    with self.assertRaisesRegex(ValueError,'intrinsic orchestration'):f.check()
+ def test_nested_dependency_digest_must_equal_approved_manifest(self):
+  self.f.diagnostic();spec=self.f.cfg['stage2_approval'];approval=json.loads(Path(spec['path']).read_text());approval['approved_code']['dependency_files']['seed_code_files']['rasterizer']='0'*64;self.f.cfg['stage2_approval']=self.f.obj('approval.json',approval);self.f.config_update();self.f.report['input_lineage']['mode']='explicit-provisional-diagnostic'
+  with self.assertRaisesRegex(ValueError,'intrinsic orchestration'):self.f.check()
  def test_regional_provenance_inventory_cannot_be_erased(self):
   self.f.diagnostic();self.f.report['regional_island_rule']['provenance']['pending_inventory_complete']=True
   with self.assertRaisesRegex(ValueError,'profiling flags'):self.f.check()

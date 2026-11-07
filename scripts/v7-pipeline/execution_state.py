@@ -187,6 +187,7 @@ def process_identity(pid):
 class Checkpoints:
     def __init__(self, root, attempt):
         self.root, self.attempt = Path(root), attempt
+        self.code_version = None
         self.root.mkdir(exist_ok=True)
         self.preserved = self.root.parent / 'preserved'
         self.preserved.mkdir(exist_ok=True)
@@ -237,6 +238,8 @@ class Checkpoints:
         if not path.exists():
             return False
         receipt = json.loads(path.read_bytes())
+        if receipt.get('producer_code_version'):
+            verify_pins([receipt['producer_code_version']])
         verify_anchor(receipt['timing_anchor'], self.root.parent / 'timing-events.jsonl')
         if receipt.get('schema') != 'worldatlas-command-checkpoint-v1' or receipt['invocation'] != invocation:
             raise ValueError('completed command identity changed: ' + name)
@@ -267,6 +270,8 @@ class Checkpoints:
     def verify_all(self):
         for path in self.root.glob('*/complete.json'):
             receipt = json.loads(path.read_bytes())
+            if receipt.get('producer_code_version'):
+                verify_pins([receipt['producer_code_version']])
             verify_anchor(receipt['timing_anchor'], self.root.parent / 'timing-events.jsonl')
             verify_pins(receipt['inputs'])
             if inventory(receipt['output_roots']) != receipt['outputs']:
@@ -283,6 +288,7 @@ class Checkpoints:
         verify_pins(inputs)
         write(self.stage(name) / 'complete.json', {
             'schema': 'worldatlas-command-checkpoint-v1', 'attempt': self.attempt, 'timing_anchor': timing_anchor,
+            'producer_code_version': self.code_version,
             'invocation': invocation, 'inputs': inputs, 'output_roots': [str(Path(p).resolve()) for p in outputs],
             'outputs': inventory(outputs), 'log': pin(log)})
 

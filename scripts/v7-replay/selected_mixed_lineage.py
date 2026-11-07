@@ -15,6 +15,10 @@ def sha(path):
 def need(v,message):
  if not v:raise ValueError(message)
 def read(p):return json.loads(Path(p).read_bytes())
+def digest(x):return isinstance(x,str) and len(x)==64 and all(c in '0123456789abcdef' for c in x)
+def digest_map(value):
+ """Validate nonempty code groups recursively, including every digest leaf."""
+ return isinstance(value,dict) and bool(value) and all(isinstance(k,str) and bool(k) and (digest_map(v) if isinstance(v,dict) else digest(v)) for k,v in value.items())
 def pinned(spec,root):
  need(isinstance(spec,dict) and isinstance(spec.get('path'),str),'missing lineage path')
  d=spec.get('sha256');need(isinstance(d,str) and len(d)==64 and all(x in '0123456789abcdef' for x in d),'invalid lineage hash')
@@ -61,8 +65,7 @@ def validate(report,report_path,physical,land,snapshot_hash,revision,input_root,
  if diagnostic:
   binding=pol.get('diagnostic_binding',{});provenance=report.get('diagnostic_provenance',{})
   derived=read(pinned(s.get('derived_manifest'),root));outer=read(pinned(s.get('outer_config'),root));approval=read(pinned(cfg['stage2_approval'],root));approved=approval.get('approved_code',{});orchestration=baseline.get('orchestration',{});code=derived.get('code_sha256',{})
-  digest=lambda x:isinstance(x,str) and len(x)==64 and all(c in '0123456789abcdef' for c in x)
-  need(derived.get('schema')=='stage2-fresh-derived-v1' and derived.get('provisional_only') is True and outer.get('schema')=='stage2-fresh-orchestration-v1' and orchestration.get('derived_manifest')==s['derived_manifest'] and derived.get('outer_config_sha256')==s['outer_config']['sha256']==orchestration.get('outer_config_sha256') and digest(derived.get('orchestrator_sha256')) and derived['orchestrator_sha256']==orchestration.get('orchestrator_sha256')==code.get('orchestrate_stage2.py') and code==approved.get('orchestration_files') and all(digest(v) for v in code.values()) and isinstance(baseline.get('code_sha256'),dict) and baseline['code_sha256'] and all(digest(v) for v in baseline['code_sha256'].values()) and baseline['code_sha256']==approved.get('core_files') and isinstance(baseline.get('dependency_sha256'),dict) and baseline['dependency_sha256'] and all(digest(v) for v in baseline['dependency_sha256'].values()) and baseline['dependency_sha256']==approved.get('dependency_files'),'Stage 2 intrinsic orchestration mismatch')
+  need(derived.get('schema')=='stage2-fresh-derived-v1' and derived.get('provisional_only') is True and outer.get('schema')=='stage2-fresh-orchestration-v1' and orchestration.get('derived_manifest')==s['derived_manifest'] and derived.get('outer_config_sha256')==s['outer_config']['sha256']==orchestration.get('outer_config_sha256') and digest(derived.get('orchestrator_sha256')) and derived['orchestrator_sha256']==orchestration.get('orchestrator_sha256')==code.get('orchestrate_stage2.py') and code==approved.get('orchestration_files') and digest_map(code) and digest_map(baseline.get('code_sha256')) and baseline['code_sha256']==approved.get('core_files') and digest_map(baseline.get('dependency_sha256')) and baseline['dependency_sha256']==approved.get('dependency_files'),'Stage 2 intrinsic orchestration mismatch')
   artifacts=derived.get('artifacts',{});need(isinstance(artifacts,dict) and artifacts,'Stage 2 derived artifacts missing')
   for name,spec in artifacts.items():
    pinned(spec,root);need(baseline.get('inputs_sha256',{}).get(name)==spec['sha256'],'Stage 2 derived artifact mismatch')
