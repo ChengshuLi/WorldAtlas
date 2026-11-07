@@ -1,7 +1,9 @@
 import hashlib
 import json
 import tempfile
+import time
 import unittest
+from unittest import mock
 from pathlib import Path
 import numpy as np
 import pyarrow as pa
@@ -35,9 +37,48 @@ class PipelineTests(unittest.TestCase):
                   'source_manifest':{'path':str(source),'sha256':b.sha(source)}}
         self.config=self.config_dir/'pipeline.json';self.config.write_text(json.dumps(self.cfg))
     def tearDown(self):self.tmp.cleanup()
+    def test_r2_staging_is_serial_verified_timed_and_owned(self):
+        shard=self.raw/'water.parquet';content=shard.read_bytes();digest=b.sha(shard)
+        source=Path(self.cfg['source_manifest']['path'])
+        source.write_text(json.dumps({'file_count':1,'files':[{'path':shard.name,'sha256':digest,'size':len(content),'r2_bucket':'test-bucket','r2_key':'source/water.parquet'}]}))
+        self.cfg['source_manifest']['sha256']=b.sha(source);self.cfg['max_parallel_shards']=1
+        wrangler=self.config_dir/'wrangler';wrangler.write_text('test');config=self.config_dir/'wrangler.jsonc';config.write_text('{}')
+        self.cfg['source_staging']={'mode':'wrangler-r2','wrangler_path':str(wrangler),'wrangler_config':str(config)}
+        self.config.write_text(json.dumps(self.cfg));shard.unlink();out=self.root/'staged';actual_run=b.subprocess.run
+        def download(args,**kwargs):
+            if args[0]!=str(wrangler):return actual_run(args,**kwargs)
+            self.assertEqual(args[1:5],['r2','object','get','test-bucket/source/water.parquet'])
+            self.assertTrue(Path(kwargs['env']['TMPDIR']).is_relative_to(out));time.sleep(.05)
+            Path(args[args.index('--file')+1]).write_bytes(content)
+        with mock.patch.object(b.subprocess,'run',side_effect=download):b.run(self.config,out)
+        report=json.loads((out/'report.json').read_text());self.assertEqual(report['staged_shard_count'],1)
+        self.assertGreaterEqual(report['source_download_elapsed_seconds'],.05);self.assertGreaterEqual(report['processing_elapsed_seconds'],0)
+        self.assertFalse((out/'source-staging/00000.parquet').exists());self.assertFalse(shard.exists())
+        self.assertEqual(report['physical_output_sha256']['runs.u32le'],b.sha(out/'physical/runs.u32le'))
+        shard.write_bytes(content);local=self.root/'already-local'
+        with mock.patch.object(b.subprocess,'run',side_effect=download):b.run(self.config,local)
+        self.assertEqual(shard.read_bytes(),content)
+        self.assertEqual(json.loads((local/'report.json').read_text())['staged_shard_count'],0)
+        self.assertEqual(b.sha(local/'physical/runs.u32le'),b.sha(out/'physical/runs.u32le'))
+        self.cfg['max_parallel_shards']=2;self.config.write_text(json.dumps(self.cfg))
+        with self.assertRaisesRegex(ValueError,'one shard worker'):b.run(self.config,self.root/'unsafe-parallel')
+
+    def test_r2_bad_hash_retains_evidence_and_does_not_publish(self):
+        shard=self.raw/'water.parquet';content=shard.read_bytes();source=Path(self.cfg['source_manifest']['path'])
+        source.write_text(json.dumps({'file_count':1,'files':[{'path':shard.name,'sha256':b.sha(shard),'size':len(content),'r2_bucket':'test-bucket','r2_key':'source/water.parquet'}]}))
+        self.cfg['source_manifest']['sha256']=b.sha(source);self.cfg['max_parallel_shards']=1
+        wrangler=self.config_dir/'wrangler';wrangler.write_text('test');config=self.config_dir/'wrangler.jsonc';config.write_text('{}')
+        self.cfg['source_staging']={'mode':'wrangler-r2','wrangler_path':str(wrangler),'wrangler_config':str(config)};self.config.write_text(json.dumps(self.cfg));shard.unlink();out=self.root/'bad-staged';actual_run=b.subprocess.run
+        def download(args,**kwargs):
+            if args[0]!=str(wrangler):return actual_run(args,**kwargs)
+            Path(args[args.index('--file')+1]).write_bytes(b'X'+content[1:])
+        with mock.patch.object(b.subprocess,'run',side_effect=download):
+            with self.assertRaisesRegex(ValueError,'size/hash mismatch'):b.run(self.config,out)
+        self.assertTrue((out/'source-staging/00000.parquet').exists());self.assertFalse((out/'report.json').exists())
     def test_end_to_end_without_reference(self):
         out=self.root/'out';b.run(self.config,out)
         report=json.loads((out/'report.json').read_text());self.assertEqual(report['status'],'candidate-only');self.assertEqual(report['shard_count'],1)
+        self.assertGreaterEqual(report['processing_elapsed_seconds'],0)
         self.assertEqual(report['physical_output_sha256']['rows.u32le'],b.sha(out/'physical/rows.u32le'))
         expected=np.zeros((4,8),dtype=np.uint8);expected[:2,:3]=1;expected[0,0]=0
         np.testing.assert_array_equal(gdal.Open(str(out/'physical/physical-dry.tif')).ReadAsArray(),expected)

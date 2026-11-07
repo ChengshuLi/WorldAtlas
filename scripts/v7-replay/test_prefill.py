@@ -67,6 +67,7 @@ class PrefillTests(unittest.TestCase):
                 with patch.object(sys,'argv',argv+['--allow-research-shore']):
                     with self.assertRaisesRegex(ValueError,'does not bind'):prefill.main()
                 manifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+                manifest['physical_water_cells']=2;manifest['algorithm_sha256']='a'*64;manifest['nearest_assignment_audit'].update(certified_bound_cells=1,exact_distance_cells=1,shared_nearest_sha256='b'*64,shore_geometry_sha256='c'*64)
                 manifest['nearest_assignment_audit']['interval_nearest_sha256']='d'*64
                 mp.write_text(json.dumps(manifest));layer['manifest_sha256']=digest(mp);pp.write_text(json.dumps(plan))
                 with patch.object(sys,'argv',argv+['--allow-research-shore']):
@@ -85,9 +86,10 @@ class PrefillTests(unittest.TestCase):
                 with self.assertRaises(FileExistsError):
                     prefill.main()
                 argv[-1] = str(root / 'bad')
-                with self.assertRaises(ValueError):
-                    prefill.main()
-                self.assertFalse((root / 'bad').exists())
+                prefill.main()
+                self.assertTrue((root / 'bad' / 'prefill-audit.json').is_file())
+                argv[-1] = str(root)
+                with self.assertRaises(FileExistsError):prefill.main()
                 plan['water_layers'][0]['manifest_sha256'] = '0' * 64
                 pp.write_text(json.dumps(plan))
                 argv[-1] = str(base / 'bad-pin')
@@ -107,3 +109,29 @@ class PrefillTests(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
+
+class MixedWaterEncodingTests(unittest.TestCase):
+ def test_validated_producer_contract_without_report_allowlist(self):
+  r={'schema':'stage3-provisional-diagnostic-land-report-v1','status':'provisional-profiling-only-not-publishable','writer':{'schema':'stage3-land-writer-result-v1'},'policy':{'policy':{'physical_water_policy':'preserve_unassigned'}},'limitations':['Water cells stay unassigned.']};line={'status':'diagnostic-provisional-lineage-bound'}
+  self.assertEqual(prefill.direct_land_water_code(r,'arbitrary-new-report-sha',line),0)
+  self.assertEqual(prefill.direct_land_water_code(r,'different-report-sha',line),0)
+  r['policy']['policy']['physical_water_policy']='other'
+  with self.assertRaisesRegex(ValueError,'unsupported mixed'):prefill.direct_land_water_code(r,'arbitrary-new-report-sha',line)
+ def test_every_cell_encoding_is_checked(self):
+  def run(p,l):return prefill.validate_row_codes(np.array([p]),np.array([l]),np.array([False]),np.array([0]),np.array([0]),np.array([4]),0,0)
+  run(1,0);run(17,18)
+  for p,l,err in [(1,1,'physical water'),(17,0,'unassigned final land'),(7,0,'unexpected physical')]:
+   with self.assertRaisesRegex(ValueError,err):run(p,l)
+
+class DiagnosticPrefillIntegrationTests(unittest.TestCase):
+ def test_pinned_diagnostic_water_and_land_validation(self):
+  with tempfile.TemporaryDirectory() as t:
+   base=Path(t);root=base/'inputs';root.mkdir();rows=np.array([0,1,2],dtype='<u4').tobytes();(root/'rows').write_bytes(rows);(root/'physical').write_bytes(np.array([4,1,4,17],dtype='<u4').tobytes());(root/'land').write_bytes(np.array([4,0,4,18],dtype='<u4').tobytes())
+   report={'schema':'stage3-provisional-diagnostic-land-report-v1','status':'provisional-profiling-only-not-publishable','writer':{'schema':'stage3-land-writer-result-v1'},'policy':{'policy':{'physical_water_policy':'preserve_unassigned'}},'limitations':['Water cells stay unassigned.']};(root/'report').write_text(json.dumps(report));rh=digest(root/'report');line={'status':'diagnostic-provisional-lineage-bound'}
+   spec=lambda name:{'rows_path':'rows','rows_sha256':digest(root/'rows'),'runs_path':name,'runs_sha256':digest(root/name)}
+   plan={'schema':'worldatlas-v7-full-grid-composition-plan-v1','grid':{'width':4,'height':2},'rle_inputs':{'physical':spec('physical'),'land':{**spec('land'),'report_path':'report','report_sha256':rh}},'water_layers':[],'land_lineage':line,'land_input_kind':'direct-research','decision_revision_status':'draft'};pp=root/'plan';pp.write_text(json.dumps(plan));out=base/'out';argv=['build_prefill','--allow-unverified-snapshot','--allow-draft-snapshot','--plan',str(pp),'--input-root',str(root),'--out',str(out)]
+   with patch.object(c,'W',4),patch.object(c,'H',2),patch.object(c,'GRID',{'width':4,'height':2}),patch.object(sys,'argv',argv),patch.object(prefill,'validate_land_report',return_value=line),contextlib.redirect_stdout(io.StringIO()):
+    prefill.main();self.assertEqual(np.fromfile(out/'prefill-runs.u32le',dtype='<u4').tolist(),[4,0,4,18])
+    for i,values in enumerate(([4,1,4,18],[4,0,4,0])):
+     (root/'land').write_bytes(np.array(values,dtype='<u4').tobytes());plan['rle_inputs']['land']['runs_sha256']=digest(root/'land');pp.write_text(json.dumps(plan));argv[-1]=str(base/f'bad-{i}')
+     with self.assertRaises(ValueError):prefill.main()

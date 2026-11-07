@@ -68,7 +68,7 @@ class OrchestrationTests(unittest.TestCase):
     self.assertEqual(o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,False),{'ok':True})
     core=json.loads((work/'core-requests/config.json').read_bytes());self.assertEqual(core['inputs']['seed_rows'],artifacts['seed_rows']);self.assertEqual(core['orchestration']['outer_config_sha256'],hashlib.sha256(raw).hexdigest())
     self.assertEqual(set(core['seed_code_files']),set(o.SEED_REPORT_NAMES)|{'rasterizer','rasterizer_kernel'});self.assertIn('seed-producer/seed_worker.py',marker['code_sha256'])
-    o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,True);self.assertFalse(build.call_args.kwargs['resume'])
+    o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,True,processing_started=123.0);self.assertFalse(build.call_args.kwargs['resume']);self.assertTrue(build.call_args.kwargs['orchestration_resumed']);self.assertEqual(build.call_args.kwargs['processing_started'],123.0)
     (work/'core').mkdir();o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,True);self.assertTrue(build.call_args.kwargs['resume'])
     paths['seed_rows'].write_text('tampered')
     with self.assertRaisesRegex(ValueError,'input hash mismatch'):o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,True)

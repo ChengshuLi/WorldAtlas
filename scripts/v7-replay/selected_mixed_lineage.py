@@ -1,8 +1,8 @@
 """Bind a completed selected-mixed research land report to water inputs.
 
 Checks artifact identity and declared lineage, not independent scientific validation,
-Neon authentication, complete source replay, or publication approval. The sibling
-water-lineage.json locates the producer request whose hash is in the report.
+Neon authentication, complete source replay, or publication approval. The producer report binds and locates its request, so no water-side locator
+or historical-path adapter is required.
 """
 import copy,hashlib,json
 from pathlib import Path
@@ -23,7 +23,7 @@ def pinned(spec,root):
 
 def validate(report,report_path,physical,land,snapshot_hash,revision,input_root,physical_report_sha=None):
  root=Path(input_root).resolve();rp=Path(report_path).resolve();need(rp.is_relative_to(root),'mixed report outside input root')
- sidepath=(rp.parent/'water-lineage.json').resolve();need(sidepath.is_relative_to(root) and sidepath.is_file(),'mixed locator outside input root or missing');side=read(sidepath);need(side.get('schema')=='water-selected-mixed-lineage-v1','missing selected-mixed lineage locator')
+ side=report.get('input_lineage',{});need(side.get('schema')=='water-selected-mixed-lineage-v1','missing producer input lineage')
  config_path=pinned(side.get('request'),root);need(sha(config_path)==report.get('request_sha256'),'mixed request mismatch');cfg=read(config_path)
  diagnostic=report.get('schema')=='stage3-provisional-diagnostic-land-report-v1'
  if diagnostic:
@@ -62,7 +62,7 @@ def validate(report,report_path,physical,land,snapshot_hash,revision,input_root,
   binding=pol.get('diagnostic_binding',{});provenance=report.get('diagnostic_provenance',{})
   recovery=read(pinned(cfg.get('stage2_recovery_evidence'),root));derived=read(pinned(s.get('derived_manifest'),root));launcher=recovery.get('launcher',{});pinned(launcher,root)
   digest=lambda x:isinstance(x,str) and len(x)==64 and all(c in '0123456789abcdef' for c in x)
-  need(provenance.get('stage2_recovery_evidence')==cfg['stage2_recovery_evidence'] and recovery.get('schema')=='stage2-seed-code-handoff-repair-v1' and recovery.get('status')=='launcher-remains-bound-by-derived-manifest' and all(digest(recovery.get(k)) for k in ('corrected_core_config_sha256','derived_manifest_sha256','seed_report_sha256')) and recovery['corrected_core_config_sha256']==baseline.get('config_sha256') and recovery['derived_manifest_sha256']==s['derived_manifest']['sha256']==baseline.get('orchestration',{}).get('derived_manifest',{}).get('sha256') and recovery['seed_report_sha256']==baseline.get('inputs_sha256',{}).get('seed_report') and launcher['sha256']==derived.get('code_sha256',{}).get('seed-producer/seed_worker.py'),'Stage 2 recovery evidence mismatch')
+  need(provenance.get('stage2_recovery_evidence')==cfg['stage2_recovery_evidence'] and recovery.get('schema')=='stage2-fresh-provisional-handoff-v1' and recovery.get('status')=='same-run-launcher-bound-by-derived-manifest' and all(digest(recovery.get(k)) for k in ('core_config_sha256','derived_manifest_sha256','seed_report_sha256')) and recovery['core_config_sha256']==baseline.get('config_sha256') and recovery['derived_manifest_sha256']==s['derived_manifest']['sha256']==baseline.get('orchestration',{}).get('derived_manifest',{}).get('sha256') and recovery['seed_report_sha256']==baseline.get('inputs_sha256',{}).get('seed_report') and launcher['sha256']==derived.get('code_sha256',{}).get('seed-producer/seed_worker.py'),'Stage 2 handoff mismatch')
   need(binding.get('actual_baseline_pins')==expected and binding.get('original_policy_baseline_revision')==sp.get('baseline_revision') and binding.get('original_policy_pins')=={k:sp.get(k) for k in expected} and pol.get('baseline_revision')==revision.get('id') and provenance.get('actual_baseline_pins')==expected and provenance.get('list1_policy_original')==sp and provenance.get('stage2')==s and provenance.get('stage2_report_schema')==baseline['schema'] and provenance.get('stage2_report_status')==baseline['status'] and provenance.get('stage2_provisional_only') is True and provenance.get('stage2_publishable') is False and provenance.get('list1_snapshot')==req['snapshot'] and provenance.get('profiling_standin') is True and provenance.get('pending_inventory_complete') is False and provenance.get('stage2_snapshot_source')=='local-derived-from-neon-export' and provenance.get('list1_snapshot_source')=='neon-export','diagnostic baseline or provenance mismatch')
  else:need(all(sp.get(k)==v for k,v in expected.items()),'mixed policy input pins mismatch')
  origin=side.get('snapshot_origin',{});source=read(pinned(origin.get('source_snapshot'),root));kind=origin.get('kind')

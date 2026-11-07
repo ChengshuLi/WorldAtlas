@@ -9,6 +9,49 @@ import compose_full_water_grid as c
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 class DirectCompositionTest(unittest.TestCase):
+    def test_vectorized_row_cuts_match_python_half_open_union(self):
+        rng=np.random.default_rng(20261106)
+        with patch.object(c,'W',128):
+            for _ in range(100):
+                end_groups=[]
+                for _ in range(2):
+                    end_groups.append(np.asarray(sorted(set([128,*rng.integers(1,128,size=30).tolist()])),dtype=np.uint32))
+                assignments=[];x=0
+                while x<128:
+                    x+=int(rng.integers(0,5))
+                    if x>=128:break
+                    z=min(128,x+int(rng.integers(1,12)))
+                    assignments.append((x,z,int(rng.integers(1,11)),'rule','member'))
+                    x=z
+                actual=c.merge_row_cuts(*end_groups,assignments=assignments)
+                expected=sorted({0,128,*end_groups[0].tolist(),*end_groups[1].tolist(),
+                                 *(edge for a in assignments for edge in a[:2])})
+                self.assertEqual(actual.tolist(),expected)
+
+    def test_assignment_codes_matches_scalar_half_open_lookup(self):
+        rng=np.random.default_rng(20261106)
+        for _ in range(50):
+            assignments=[];x=0
+            while x<128:
+                x+=int(rng.integers(0,4))
+                if x>=128:break
+                stop=min(128,x+int(rng.integers(1,10)))
+                code=int(rng.integers(1,11))
+                assignments.append((x,stop,code,'rule','member'))
+                x=stop
+            xs=np.sort(rng.integers(0,128,size=100,dtype=np.uint32))
+            actual,mask=c.assignment_codes(assignments,xs)
+            expected=[]
+            for x in xs.tolist():
+                match=next((a for a in assignments if a[0]<=x<a[1]),None)
+                expected.append((0,False) if match is None else (match[2],True))
+            self.assertEqual(actual.tolist(),[x[0] for x in expected])
+            self.assertEqual(mask.tolist(),[x[1] for x in expected])
+        actual,mask=c.assignment_codes([],np.asarray([0,4,127],dtype=np.uint32))
+        self.assertEqual(actual.tolist(),[0,0,0]);self.assertEqual(mask.tolist(),[False,False,False])
+        with self.assertRaisesRegex(ValueError,'sorted, non-overlapping'):
+            c.assignment_codes([(2,8,1),(4,9,2)],np.asarray([4],dtype=np.uint32))
+
     def test_final_grid_rejects_gaps_changes_and_overlaps(self):
         with tempfile.TemporaryDirectory() as tmp:
             base=Path(tmp);root=base/'inputs';root.mkdir()
@@ -64,6 +107,7 @@ class DirectCompositionTest(unittest.TestCase):
                 set_shore('wgs84-coastal-4neighbor-center-v2')
                 with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'shared-old-audit',shore=True)
                 manifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+                manifest['physical_water_cells']=2;manifest['algorithm_sha256']='a'*64;manifest['nearest_assignment_audit'].update(certified_bound_cells=1,exact_distance_cells=1,shared_nearest_sha256='b'*64,shore_geometry_sha256='c'*64)
                 mp.write_text(json.dumps(manifest));plan['water_layers'][0]['manifest_sha256']=sha(mp);pp.write_text(json.dumps(plan))
                 manifest['nearest_assignment_audit']['execution_method']='wgs84-center-row-interval-v1'
                 mp.write_text(json.dumps(manifest));plan['water_layers'][0]['manifest_sha256']=sha(mp);pp.write_text(json.dumps(plan))
@@ -80,11 +124,18 @@ class DirectCompositionTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'pre-shared-no-tag',shore=True)
                 set_shore('wgs84-coastal-4neighbor-center-v2')
                 with self.assertRaisesRegex(ValueError,'does not bind'):run(base/'pre-shared-old-audit',shore=True)
-                premanifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)';prem.write_text(json.dumps(premanifest))
+                premanifest['nearest_assignment_audit']['shore_method']='wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
+                premanifest['physical_water_cells']=2;premanifest['algorithm_sha256']='a'*64;premanifest['nearest_assignment_audit'].update(certified_bound_cells=1,exact_distance_cells=1,shared_nearest_sha256='b'*64,shore_geometry_sha256='c'*64);prem.write_text(json.dumps(premanifest))
                 pre=json.loads(preplan.read_text());pre['water_layers'][0]['manifest_sha256']=sha(prem);preplan.write_text(json.dumps(pre));set_shore('wgs84-coastal-4neighbor-center-v2')
                 run(base/'pre-shared-wgs84',shore=True)
                 pre=json.loads(preplan.read_text());pre.pop('water_layers');preplan.write_text(json.dumps(pre));set_shore(None)
+                lineage={'status':'diagnostic-provisional-lineage-bound','publishable':False,'baseline_status':'stage2-provisional-only'}
+                pre=json.loads(preplan.read_text());pre['land_lineage']=lineage;preplan.write_text(json.dumps(pre));set_shore(None)
+                with self.assertRaisesRegex(ValueError,'prefill plan decision binding mismatch'):run(base/'lineage-mismatch')
+                au=json.loads(audit.read_text());au['land_lineage']=lineage;audit.write_text(json.dumps(au));spec['audit_sha256']=sha(audit);pp.write_text(json.dumps(plan))
                 run(base/'out')
+                run(root/'in-root-final')
+                self.assertEqual((root/'in-root-final/runs.u32le').read_bytes(),(base/'out/runs.u32le').read_bytes())
                 self.assertEqual(np.fromfile(base/'out/runs.u32le',dtype='<u4').tolist(),[1,2,4,7,4,18])
                 report=json.loads((base/'out/report.json').read_text());self.assertEqual(report['counts']['7'],3)
                 # Removing the only layer must not leave residual water silently unclassified.

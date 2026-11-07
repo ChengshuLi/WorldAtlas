@@ -5,7 +5,7 @@ All seed, resolution and hint products are generated from the pinned inputs in
 this invocation. No historical assignment or checkpoint is accepted. Outputs
 remain research-only.
 """
-import argparse,hashlib,importlib.util,json,os,subprocess,sys
+import argparse,hashlib,importlib.util,json,os,subprocess,sys,time
 from pathlib import Path
 import build_seed_tiles,build_stage2,checkpoints,contracts,verify_inputs
 import representatives,verify_physical_lineage
@@ -52,6 +52,7 @@ def load_config(path):
  return raw,obj
 
 def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
+ processing_started=time.monotonic()
  cp,work,out=map(lambda p:Path(p).resolve(),(config_path,work_dir,output_dir));raw,cfg=load_config(cp);c=cfg['controls']
  need('prior_physical_report' not in cfg['inputs'] or provisional_only,'prior physical report is provisional-only')
  need(work.parent.is_dir() and out.parent.is_dir() and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'invalid work/output')
@@ -81,7 +82,7 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  need(not out.exists(),'output already exists')
  if resume:
   need(work.is_dir() and json.loads(build_stage2.read_bytes(work/'identity.json',guard))==identity,'resume identity mismatch')
-  return finish_from_marker(cfg,raw,work,out,code,guard,True,provisional_only)
+  return finish_from_marker(cfg,raw,work,out,code,guard,True,provisional_only,processing_started)
  need(not work.exists(),'fresh work already exists')
  work.mkdir(mode=0o700)
  try:
@@ -130,9 +131,9 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  need(build_stage2.read_bytes(cp,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
  marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'artifacts':artifacts,'seed_request_sha256':verify_inputs.sha_file(seedrequest,guard),'hint_request_sha256':verify_inputs.sha_file(hreq,guard),'seed_tile_verification':json.loads(check.stdout),'physical_lineage_report':pin(work/'lineage'/'report.json',guard),'tile_directory':str(tileout),'code_sha256':code,'provisional_only':provisional_only}
  write_json(work/'derived'/'manifest.json',marker)
- return finish_from_marker(cfg,raw,work,out,code,guard,False,provisional_only)
+ return finish_from_marker(cfg,raw,work,out,code,guard,False,provisional_only,processing_started)
 
-def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False):
+def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False,processing_started=None):
  marker_path=work/'derived'/'manifest.json';marker_pin=pin(marker_path,guard);marker=json.loads(build_stage2.read_bytes(marker_path,guard));outer=hashlib.sha256(raw).hexdigest()
  need(marker.get('schema')=='stage2-fresh-derived-v1' and marker.get('outer_config_sha256')==outer and marker.get('orchestrator_sha256')==code['orchestrate_stage2.py'] and marker.get('code_sha256')==code and marker.get('provisional_only') is provisional_only,'derived manifest mismatch')
  snapshot=json.loads(build_stage2.read_bytes(cfg['inputs']['decision_snapshot']['path'],guard));lineage=verify_physical_lineage.validate_combined(snapshot,cfg['inputs']['decision_snapshot']['sha256'],cfg['inputs']['physical_lineage_request']['path'],cfg['inputs']['physical_report']['sha256'],cfg['inputs']['physical_rows']['sha256'],cfg['inputs']['physical_runs']['sha256'],cfg['grid'],guard);lineage_pin=marker.get('physical_lineage_report');need(isinstance(lineage_pin,dict) and Path(lineage_pin.get('path','')).resolve()==work/'lineage'/'report.json' and json.loads(build_stage2.read_bytes(build_stage2.pin(lineage_pin,guard),guard))==lineage,'physical lineage resume mismatch')
@@ -164,7 +165,7 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False
  if cp.exists():need(resume and json.loads(build_stage2.read_bytes(cp,guard))==core,'core resume config mismatch')
  else:
   need(not core_work.exists(),'core work exists without its config');write_json(cp,core)
- return build_stage2.build(cp,core_work,out,resume=resume and core_work.exists())
+ return build_stage2.build(cp,core_work,out,resume=resume and core_work.exists(),processing_started=processing_started,orchestration_resumed=resume)
 
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('config');p.add_argument('work');p.add_argument('output');p.add_argument('--resume',action='store_true');p.add_argument('--provisional-only',action='store_true',help='run only in distinct provisional paths; output cannot pass candidate validation');a=p.parse_args()

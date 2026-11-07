@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Generate one independently pinned research coastal tile in a new directory."""
 import argparse,hashlib,json,math
+import time
 from pathlib import Path
 import numpy as np
 import coastal_core as core
 import coastal_rect
 from decision_snapshot import read_snapshot
+import local_water_overlay
 from direct_lineage import validate_physical_report,validate_direct_land
 from exclusive_outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
 
@@ -24,13 +26,23 @@ def open_grid(rows_path,runs_path,width,height):
     return rows,runs
 
 
-def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chunk=5000,verify_inputs=None,allow_selected_research=False):
+def coast_crop_bounds(box,width,height,step,latitude_pad,longitude_pad):
+    """Independent latitude/longitude halos, wrapping longitude as needed."""
+    import math
+    if any(not math.isfinite(x) or x<=0 for x in (latitude_pad,longitude_pad)):raise ValueError('pad must be positive and finite')
+    x0,x1,y0,y1=box;xp=math.ceil(longitude_pad/step);yp=math.ceil(latitude_pad/step);xa,xb=x0-xp,x1+xp
+    if xb-xa>=width:xa,xb=0,width
+    return xa,xb,max(0,y0-yp),min(height,y1+yp)
+
+
+def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chunk=5000,verify_inputs=None,allow_selected_research=False,longitude_pad_degrees=None):
+    processing_started=time.perf_counter()
     x0,x1,y0,y1=box;step=360.0/width
     if not (0<=x0<x1<=width and 0<=y0<y1<=height) or chunk<=0:raise ValueError('invalid coastal tile')
     decision,pairs,tol,band,btol=core.policy(snapshot,allow_selected_research=allow_selected_research)
     code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__),'accelerator':Path(coastal_rect.__file__)}
     code_pins={name:sha(path) for name,path in code_paths.items()}
-    crop=core.shore.crop_bounds(box,width,height,step,pad)
+    crop=coast_crop_bounds(box,width,height,step,pad,pad if longitude_pad_degrees is None else longitude_pad_degrees)
     try:edges=coastal_rect.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in pairs])
     except ValueError as e:
         if str(e)!='no participant shorelines in crop':raise
@@ -71,6 +83,7 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
               'core_sha256':code_pins['core'],'shore_sha256':code_pins['shore'],
               'geometry_sha256':code_pins['geometry'],'accelerator_sha256':code_pins['accelerator'],
               'coverage':'candidate core only; independent global coverage and source semantics not yet verified'}
+    manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'manifest.json',manifest,indent=2)
     return manifest
 
@@ -81,7 +94,7 @@ def main():
               'land-rows','land-rows-sha256','land-runs','land-runs-sha256','land-report','land-report-sha256','input-root','out'):
         ap.add_argument('--'+k,required=True)
     ap.add_argument('--core',nargs=4,type=int,required=True,metavar=('X0','X1','Y0','Y1'))
-    ap.add_argument('--pad-degrees',type=float,required=True);ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true')
+    ap.add_argument('--pad-degrees',type=float,required=True);ap.add_argument('--longitude-pad-degrees',type=float);ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true')
     a=ap.parse_args()
     if not a.allow_unverified_snapshot:raise ValueError('unverified Neon snapshot requires explicit research opt-in')
     snap=read_snapshot(Path(a.snapshot),a.snapshot_sha256,allow_draft=a.allow_draft)
@@ -97,7 +110,7 @@ def main():
           'resolved_rows':Path(a.land_rows).resolve(),'resolved_runs':Path(a.land_runs).resolve()}
     def check_lineage():
         validate_physical_report(a.physical_report,a.physical_report_sha256,physical,width,height)
-        validate_direct_land(a.land_report,a.land_report_sha256,physical,land,a.snapshot_sha256,snap['decision_revision'],root,a.physical_report_sha256)
+        validate_direct_land(a.land_report,a.land_report_sha256,physical,land,local_water_overlay.land_snapshot_hash(snap,a.snapshot_sha256),snap['decision_revision'],root,a.physical_report_sha256)
     check_lineage()
     inputs={key:sha(path) for key,path in [('physical_rows_sha256',a.physical_rows),('physical_runs_sha256',a.physical_runs),
          ('physical_report_sha256',a.physical_report),('land_rows_sha256',a.land_rows),('land_runs_sha256',a.land_runs),('land_report_sha256',a.land_report)]}
@@ -105,7 +118,7 @@ def main():
         if any(sha(p)!=h for p,h in paths):raise ValueError('input changed during generation')
         check_lineage()
     m=run(snap,a.snapshot_sha256,open_grid(a.physical_rows,a.physical_runs,width,height),open_grid(a.land_rows,a.land_runs,width,height),
-          out,width,height,a.core,a.pad_degrees,inputs,verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy)
+          out,width,height,a.core,a.pad_degrees,inputs,verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy,longitude_pad_degrees=a.longitude_pad_degrees)
     print(json.dumps({'status':m['status'],'assigned_cells':m['assigned_cells'],'output':str(out)}))
 
 if __name__=='__main__':main()

@@ -4,10 +4,12 @@ import hashlib
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
 import sys
+import time
 
 HERE = Path(__file__).resolve().parent
 
@@ -38,6 +40,7 @@ def write_json(path, value):
 
 
 def run(manifest_path, output):
+    processing_started = time.perf_counter()
     manifest_path = Path(manifest_path).resolve(); data = manifest_path.read_bytes(); cfg = json.loads(data)
     if cfg.get('schema') != 'raw-physical-pipeline-v1' or not cfg.get('selection_notes'):
         raise ValueError('explicit pipeline schema and selection notes required')
@@ -47,6 +50,14 @@ def run(manifest_path, output):
     workers = cfg.get('max_parallel_shards', 2)
     if type(workers) is not int or workers < 1:
         raise ValueError('max_parallel_shards must be a positive integer')
+    staging = cfg.get('source_staging')
+    if staging is not None:
+        if (not isinstance(staging, dict) or set(staging) != {'mode','wrangler_path','wrangler_config'}
+            or staging['mode'] != 'wrangler-r2' or workers != 1):
+            raise ValueError('R2 staging requires a wrangler path, config and one shard worker')
+        for key in ('wrangler_path','wrangler_config'):
+            if not isinstance(staging[key],str) or not Path(staging[key]).is_file():
+                raise ValueError(f'invalid R2 staging {key}')
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
     land_path, land_bytes, land_cfg = read_pin(cfg['land_config'])
@@ -80,12 +91,19 @@ def run(manifest_path, output):
         digest = entry['sha256']
         if not isinstance(digest, str) or len(digest) != 64 or any(c not in '0123456789abcdef' for c in digest):
             raise ValueError('invalid raw source digest')
-        raw.append((path, digest))
+        if staging is not None and not path.is_file():
+            if (not isinstance(entry.get('r2_bucket'),str) or not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,62}',entry['r2_bucket'])
+                or not isinstance(entry.get('r2_key'),str) or not entry['r2_key']
+                or type(entry.get('size')) is not int or entry['size'] < 0):
+                raise ValueError('missing or invalid pinned R2 source metadata')
+        raw.append((path, digest, entry))
     if len({x[0] for x in raw}) != len(raw) or len({x[1] for x in raw}) != len(raw):
         raise ValueError('raw source paths and hashes must be unique')
     scripts = {name:sha(HERE / name) for name in ('build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/aggregate_compare.py','compose_physical.py')}
     output = Path(output).resolve()
     inputs = [manifest_path, land_path, water_path, source_path] + [x[0] for x in raw]
+    if staging is not None:
+        inputs += [Path(staging[k]).resolve() for k in ('wrangler_path','wrangler_config')]
     inputs += [Path(item['path']).resolve() for spec in land_cfg['land'] for item in spec['files']]
     for key in ('water_reference', 'physical_reference_mask'):
         if cfg.get(key): inputs.append(Path(cfg[key]['path']).resolve())
@@ -103,13 +121,35 @@ def run(manifest_path, output):
     land_report = json.loads((output / 'land/report.json').read_bytes())
     if land_report.get('status') != 'candidate-only':
         raise ValueError('land raster is incomplete')
+    download_elapsed = 0.0
+    staged_count = 0
     def build_shard(item):
-        i, (path, digest) = item
+        nonlocal download_elapsed, staged_count
+        i, (path, digest, entry) = item
         destination = output / 'shards' / f'{i:05d}'
+        owned = False
+        if not path.is_file() and staging is not None:
+            stage_dir=output/'source-staging';stage_dir.mkdir(mode=0o700,exist_ok=True)
+            for name in ('cache','state','runtime'):(stage_dir/name).mkdir(mode=0o700,exist_ok=True)
+            staged=stage_dir/f'{i:05d}.parquet'
+            if staged.exists():raise ValueError('staging target already exists')
+            env=os.environ.copy()
+            env.update({key:str(stage_dir) for key in ('TMPDIR','TMP','TEMP','CPL_TMPDIR','SQLITE_TMPDIR')})
+            env.update({'XDG_CACHE_HOME':str(stage_dir/'cache'),'XDG_STATE_HOME':str(stage_dir/'state'),'XDG_RUNTIME_DIR':str(stage_dir/'runtime')})
+            started=time.perf_counter()
+            try:
+                subprocess.run([staging['wrangler_path'],'r2','object','get',entry['r2_bucket']+'/'+entry['r2_key'],
+                                '--file',str(staged),'--remote','--config',staging['wrangler_config']],check=True,env=env)
+            finally:
+                download_elapsed += time.perf_counter()-started
+            if not staged.is_file() or staged.stat().st_size != entry['size'] or sha(staged) != digest:
+                raise ValueError(f'staged source size/hash mismatch: {path}')
+            path=staged;owned=True;staged_count+=1
         run_stage('overture/rasterize_water_shard.py', path, digest, water_path, destination, '--batch-size', str(batch_size))
         report_path = destination / 'report.json'; report = json.loads(report_path.read_bytes())
         if report.get('status') != 'candidate-only':
             raise ValueError(f'incomplete water shard: {path}')
+        if owned:path.unlink()
         return {'path':str(destination / 'water.tif'), 'sha256':report['output_sha256'],
                 'status':report['status'], 'report':{'path':str(report_path), 'sha256':sha(report_path)}}
     # Independent child outputs are kept in manifest order. On failure,
@@ -155,6 +195,9 @@ def run(manifest_path, output):
               'physical_output_sha256':physical['output_sha256'],
               'limitations':'Candidate physical land/water only; not historical source reproduction or continent labels.'}
     with (output / 'pipeline-config.json').open('xb') as f: f.write(data)
+    report['source_download_elapsed_seconds'] = download_elapsed
+    report['staged_shard_count'] = staged_count
+    report['processing_elapsed_seconds'] = time.perf_counter() - processing_started - download_elapsed
     write_json(output / 'report.json', report)
     print(json.dumps(report, indent=2), flush=True)
 

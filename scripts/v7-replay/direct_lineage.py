@@ -35,7 +35,7 @@ def validate_direct_land(report_path,expected_sha,physical,land,snapshot_sha,rev
  report=json.loads(p.read_text())
  # Import the same validator as the prefill path, including its streaming-land contract.
  from build_prefill_plan import validate_land_report
- validate_land_report(report,p,physical,land,snapshot_sha,revision,input_root=Path(input_root).resolve())
+ validate_land_report(report,p,{**physical,'report_sha256':physical_report_sha},land,snapshot_sha,revision,input_root=Path(input_root).resolve())
  if report.get('schema') in ('single-generation-direct-land-report-v1','single-generation-nearest-report-v1') and report.get('physical_report_sha256')!=physical_report_sha:
   raise ValueError('land and water use different physical report pins')
  return report.get('schema')

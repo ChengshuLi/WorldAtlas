@@ -6,6 +6,7 @@ import build_coastal_tile as base
 import closed_water_core as core
 import streaming_closed_water as stream
 from decision_snapshot import read_snapshot
+import local_water_overlay
 from direct_lineage import validate_physical_report,validate_direct_land
 
 
@@ -34,7 +35,7 @@ def main():
        'resolved_rows':Path(a.land_rows).resolve(),'resolved_runs':Path(a.land_runs).resolve()}
  def check_lineage():
   validate_physical_report(a.physical_report,a.physical_report_sha256,physical,width,height)
-  validate_direct_land(a.land_report,a.land_report_sha256,physical,land,a.snapshot_sha256,snapshot['decision_revision'],root,a.physical_report_sha256)
+  validate_direct_land(a.land_report,a.land_report_sha256,physical,land,local_water_overlay.land_snapshot_hash(snapshot,a.snapshot_sha256),snapshot['decision_revision'],root,a.physical_report_sha256)
  check_lineage()
  plan=json.loads(Path(a.prefill_plan).read_text());audit=json.loads(Path(a.prefill_audit).read_text())
  if (audit.get('schema')!='worldatlas-v7-prefill-class-rle-audit-v1' or audit.get('status')!='staged-not-published'

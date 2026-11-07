@@ -23,3 +23,9 @@ This is an isolated, configurable prototype, not the recovered historical builde
 ## Overture water shard candidate
 
 `overture/` contains a separate, configurable GeoParquet-to-water-mask experiment. It processes one hash-pinned shard at a time, records the selection policy and runtime, and reports invalid inputs. Separate union and composition stages produce a candidate physical mask; this does not assign continents or establish historical equivalence. See its README before use.
+
+### Optional serial R2 staging
+
+`build_physical.py` normally reads already-staged local shards. When storage is limited, its pipeline config may instead set `max_parallel_shards` to `1` and `source_staging` to an object with `mode: "wrangler-r2"`, `wrangler_path` and `wrangler_config`. Each missing manifest entry must also include `r2_bucket`, `r2_key`, `size` in bytes and `sha256`. The already-authenticated Wrangler executable performs a read-only object download into the new output directory; configure its credentials through the normal Wrangler environment. The pipeline verifies size and SHA-256 before processing and removes a downloaded shard only after its successful unit completes. Existing local inputs are never removed. A failed download or invalid shard is left for inspection; a failed run does not produce the final pipeline report.
+
+The report's `processing_elapsed_seconds` measures wall time for a successful invocation after inputs have been configured, excluding the serialized source downloads; `source_download_elapsed_seconds` reports those downloads separately. Staging requires one shard worker so downloads do not overlap processing. No report is emitted for an interrupted invocation, and a later invocation's timing does not include earlier attempts.

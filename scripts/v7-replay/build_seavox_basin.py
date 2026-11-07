@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 import platform
+import time
 from pathlib import Path
 import subprocess
 import sys
@@ -161,6 +162,7 @@ def source_water_spans(mask, x_offset, ends, values):
             for a,b in zip(cuts[:-1], cuts[1:])]
 
 def main():
+    processing_started=time.perf_counter()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--input-root', type=Path, required=True)
     ap.add_argument('--geometry', type=Path, required=True); ap.add_argument('--decision-id', required=True)
@@ -352,6 +354,7 @@ def main():
                     'shared_nearest_sha256':shared_code_sha,
                     'shore_geometry_sha256':shared_code_sha} if is_shared else None,
                 'tiles':[{'core_rows':[0,H],'core_cols':[0,W],'span_file':{'path':assignment.name,'sha256':digest(assignment)}}]}
+    manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'manifest.json', manifest, indent=2)
     print(json.dumps({'cells':cells,'spans':spans_count,'rows':row_count,'assignment_sha256':digest(assignment)}))
 

@@ -5,12 +5,13 @@ Requires an explicit unverified-snapshot flag: this module does not authenticate
 Neon. Outputs are newly created and remain staged; unseeded water is reported.
 """
 from __future__ import annotations
-import argparse, hashlib, json, math, re, struct
+import argparse, hashlib, json, math, re, struct, time
 from pathlib import Path
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]/'v7-replay'))
 from partition_core import rasterize_barriers, floodfill_run_graph
 from rle_inputs import RunRasterU32LE, make_prefill_adapters
 from exclusive_outputs import create_directory_exclusive, create_text_exclusive, write_json_exclusive
@@ -97,12 +98,16 @@ def load_config(snapshot,width,height,allow_draft=False,software_versions=None):
     rev=snapshot.get('decision_revision',{}); erev=snapshot.get('entity_revision',{})
     accepted=(snapshot.get('schema')=='worldatlas-geography-decision-export-v1' and rev.get('status')=='accepted' and erev.get('status')=='accepted')
     draft=(allow_draft and snapshot.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and rev.get('status')=='draft' and erev.get('status')=='draft')
-    if (snapshot.get('source')!='neon-export' or not (accepted or draft) or not rev.get('id') or not rev.get('entity_revision')
+    local=(allow_draft and snapshot.get('source')=='local-user-directed-overlay-not-neon' and snapshot.get('schema')=='worldatlas-local-water-effective-snapshot-v1' and snapshot.get('_local_overlay_verified') is True and rev.get('status')=='draft' and erev.get('status')=='draft')
+    if local:
+        import local_water_overlay
+        local_water_overlay.verify({k:v for k,v in snapshot.items() if k!='_local_overlay_verified'})
+    if ((snapshot.get('source')!='neon-export' and not local) or not (accepted or draft or local) or not rev.get('id') or not rev.get('entity_revision')
         or erev.get('id')!=rev['entity_revision']):
         raise ValueError('accepted or explicitly opted-in draft matching decision/entity revisions required; export is still unverified')
     policies=[p for p in snapshot.get('policies',[]) if p.get('kind')=='ocean_fill']
     if len(policies)!=1:raise ValueError('one ocean_fill policy is required')
-    if draft and (not isinstance(policies[0].get('evidence'),dict) or policies[0]['evidence'].get('execution_status')!='selected_for_research'):
+    if (draft or local) and (not isinstance(policies[0].get('evidence'),dict) or policies[0]['evidence'].get('execution_status')!=('local_user_authorized_overlay' if local else 'selected_for_research')):
         raise ValueError('draft ocean policy requires explicit research selection')
     policy=policies[0].get('definition',{})
     if (policy.get('connectivity')!=4 or type(policy.get('wrap_longitude')) is not bool
@@ -196,7 +201,8 @@ def export_layer(partition,out,width,height,metadata,inputs,tile_height=256):
     write_json_exclusive(out/'ocean-layer-manifest.json',manifest,indent=2)
     return manifest
 
-def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_runs,out,width,height,inputs,tile_height=256,allow_draft=False,software_versions=None,pre_finalize=None,pre_summary=None):
+def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_runs,out,width,height,inputs,tile_height=256,allow_draft=False,software_versions=None,pre_finalize=None,pre_summary=None,processing_started=None):
+    if processing_started is None: processing_started=time.perf_counter()
     policy,paths,seeds,metadata=load_config(snapshot,width,height,allow_draft,software_versions)
     if tile_height<=0:raise ValueError('tile height must be positive')
     create_directory_exclusive(out)
@@ -224,9 +230,11 @@ def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_
     if pre_summary: pre_summary()
     write_json_exclusive(out/'run-summary.json',{'status':'unverified-candidate-not-published','snapshot_sha256':snapshot_hash,
       'unseeded_cell_count':part['unseeded_cell_count'],'assigned_cells_total':part['assigned_cells_total'],
-      'barrier_sha256':pins['source_cut_edges_sha256'],'layer_manifest_sha256':sha(out/'ocean-layer-manifest.json')},indent=2)
+      'barrier_sha256':pins['source_cut_edges_sha256'],'layer_manifest_sha256':sha(out/'ocean-layer-manifest.json'),
+      'processing_elapsed_seconds':time.perf_counter()-processing_started},indent=2)
 
 def main():
+    processing_started=time.perf_counter()
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('snapshot','snapshot-sha256','physical-rows','physical-runs','prefill-dir','prefill-plan','out'):p.add_argument('--'+name,required=True)
     p.add_argument('--allow-unverified-snapshot',action='store_true');p.add_argument('--tile-height',type=int,default=256)
@@ -234,7 +242,11 @@ def main():
     a=p.parse_args()
     if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon export is not verified by this runner; explicit test-only flag required')
     if not HEX.fullmatch(a.snapshot_sha256) or sha(a.snapshot)!=a.snapshot_sha256:raise ValueError('snapshot hash mismatch')
-    snapshot=json.loads(Path(a.snapshot).read_text());plan=json.loads(Path(a.prefill_plan).read_text())
+    snapshot=json.loads(Path(a.snapshot).read_text())
+    if snapshot.get('source')=='local-user-directed-overlay-not-neon':
+        from decision_snapshot import read_snapshot
+        snapshot=read_snapshot(Path(a.snapshot),a.snapshot_sha256,allow_draft=a.allow_draft_snapshot)
+    plan=json.loads(Path(a.prefill_plan).read_text())
     prefill=Path(a.prefill_dir).resolve();audit=json.loads((prefill/'prefill-audit.json').read_text());out=Path(a.out).resolve()
     sources=[Path(a.snapshot).resolve(),Path(a.prefill_plan).resolve(),Path(a.physical_rows).resolve(),Path(a.physical_runs).resolve(),prefill]
     if any(s==out or s.is_relative_to(out) or (s.is_dir() and out.is_relative_to(s)) for s in sources):raise ValueError('output must be separate from all inputs')
@@ -279,7 +291,7 @@ def main():
                 (prefill/'prefill-audit.json',pins['prefill_audit_sha256'])]
         if candidate:checks.append((a.candidate_build,a.candidate_build_sha256))
         if any(sha(path)!=expected for path,expected in checks):raise ValueError('input changed during ocean fill')
-    run(snapshot,a.snapshot_sha256,a.physical_rows,a.physical_runs,rr,ru,out,width,height,pins,a.tile_height,allow_draft=a.allow_draft_snapshot,software_versions=candidate.get('software_versions',{}) if candidate else None,pre_finalize=verify_unchanged)
+    run(snapshot,a.snapshot_sha256,a.physical_rows,a.physical_runs,rr,ru,out,width,height,pins,a.tile_height,allow_draft=a.allow_draft_snapshot,software_versions=candidate.get('software_versions',{}) if candidate else None,pre_finalize=verify_unchanged,processing_started=processing_started)
     print(json.dumps({'status':'candidate-only','output':str(out),'summary_sha256':sha(out/'run-summary.json')}))
 
 if __name__=='__main__':main()

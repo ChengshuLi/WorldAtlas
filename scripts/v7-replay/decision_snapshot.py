@@ -18,7 +18,8 @@ def validate_revision(data, allow_draft=False):
     draft = (allow_draft and data.get('schema') == 'worldatlas-geography-decision-draft-evidence-v1'
              and revision.get('status') == 'draft' and entity.get('status') == 'draft'
              and entity.get('id') == revision.get('entity_revision'))
-    if data.get('source') != 'neon-export' or not valid_ids or not (accepted or draft):
+    local = (allow_draft and data.get('source') == 'local-user-directed-overlay-not-neon' and data.get('_local_overlay_verified') is True and data.get('schema') == 'worldatlas-local-water-effective-snapshot-v1' and revision.get('status') == 'draft' and entity.get('status') == 'draft' and entity.get('id') == revision.get('entity_revision'))
+    if (data.get('source') != 'neon-export' and not local) or not valid_ids or not (accepted or draft or local):
         raise ValueError('an accepted or explicitly opted-in draft revisioned Neon decision export is required')
     return revision
 
@@ -28,6 +29,10 @@ def read_snapshot(path, expected_sha256, allow_draft=False):
     if hashlib.sha256(raw).hexdigest() != expected_sha256:
         raise ValueError('decision snapshot hash mismatch')
     data = json.loads(raw)
+    if data.get('source') == 'local-user-directed-overlay-not-neon':
+        import local_water_overlay
+        local_water_overlay.verify(data)
+        data['_local_overlay_verified'] = True
     validate_revision(data, allow_draft=allow_draft)
     return data
 

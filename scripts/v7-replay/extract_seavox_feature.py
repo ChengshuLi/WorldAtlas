@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import time
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
@@ -68,6 +69,7 @@ def extract_feature(archive, feature_id):
 
 
 def main():
+    processing_started=time.perf_counter()
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--archive', type=Path, required=True)
     p.add_argument('--input-root', type=Path, required=True)
@@ -117,6 +119,7 @@ def main():
                 'source_version':basin['source_version'], 'source_feature_id':str(basin['source_feature_id']),
                 'archive_sha256':source['sha256'], 'geometry_sha256':geometry_hash, 'feature_file':feature_path.name,
                 'feature_file_sha256':digest(feature_path), 'gdal_version':gdal_version}
+    manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'manifest.json', manifest, indent=2)
     print(json.dumps(manifest))
 

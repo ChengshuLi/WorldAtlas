@@ -29,29 +29,16 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-# The preserved archive stores both the former workspace and /tmp trees at its root.
-LEGACY_ROOTS = (Path('/workspace/scratch/127991fc8b8e'), Path('/tmp'))
-
 def resolve_input(value, base: Path, input_root: Path) -> Path:
-    """Resolve an archived path without mutating the original manifests."""
+    """Resolve a relative or absolute input only within the supplied root."""
     root = input_root.resolve()
     value = Path(value)
-    if value.is_absolute():
-        for legacy in LEGACY_ROOTS:
-            try:
-                rel = value.relative_to(legacy)
-                candidate = root / rel
-                break
-            except ValueError:
-                continue
-        else:
-            raise ValueError(f'unrecognized absolute input path: {value}')
-    else:
-        candidate = base / value
+    candidate = value if value.is_absolute() else base / value
     candidate = candidate.resolve()
     if not candidate.is_relative_to(root):
         raise ValueError(f'input escapes recovery root: {candidate}')
     return candidate
+
 
 def read_pinned_manifest(entry, plan_path: Path, input_root: Path):
     expected = entry.get('manifest_sha256')
@@ -202,6 +189,61 @@ def rle_row(rows, runs, y):
 
 def row_code_at(ends, vals, xs):
     return vals[np.searchsorted(ends, xs, side='right')]
+
+
+def assignment_codes(assignments, xs, columns=None):
+    """Return the winning assignment code and presence mask at RLE starts.
+
+    ``choose_assignments`` returns sorted, disjoint half-open spans. Using one
+    vectorized search per row avoids a Python assignment scan for every RLE
+    segment in the full-grid prefill and final composition passes.
+    """
+    xs = np.asarray(xs)
+    codes = np.zeros(xs.shape, dtype=np.uint8)
+    present = np.zeros(xs.shape, dtype=bool)
+    if not assignments or not xs.size:
+        return codes, present
+    starts, stops, values = columns if columns is not None else assignment_arrays(assignments)
+    idx = np.searchsorted(starts, xs, side='right') - 1
+    present = idx >= 0
+    safe = np.maximum(idx, 0)
+    present &= xs < stops[safe]
+    codes[present] = values[safe[present]]
+    return codes, present
+
+
+def assignment_arrays(assignments):
+    """Return contiguous numeric assignment columns for vectorized row work."""
+    if not assignments:
+        empty = np.empty(0, dtype=np.uint32)
+        return empty, empty, np.empty(0, dtype=np.uint8)
+    starts = np.fromiter((int(a[0]) for a in assignments), dtype=np.uint32, count=len(assignments))
+    stops = np.fromiter((int(a[1]) for a in assignments), dtype=np.uint32, count=len(assignments))
+    values = np.fromiter((int(a[2]) for a in assignments), dtype=np.uint8, count=len(assignments))
+    if np.any(starts >= stops) or np.any(starts[1:] < stops[:-1]):
+        raise ValueError('assignments must be sorted, non-overlapping half-open spans')
+    return starts, stops, values
+
+
+def merge_row_cuts(*ends, assignments=(), extra_bounds=(), assignment_columns=None):
+    """Build sorted unique row breakpoints using NumPy rather than Python sets.
+
+    Full-grid RLE composition can encounter hundreds of millions of row
+    breakpoints. Updating and sorting a Python set converts every uint32 run
+    endpoint to a Python int, so use NumPy's native sort/unique path instead.
+    All emitted cut positions remain the same half-open boundaries.
+    """
+    parts = [np.asarray([0, W], dtype=np.uint32)]
+    parts.extend(np.asarray(x, dtype=np.uint32) for x in ends)
+    if assignments:
+        starts, stops, _ = assignment_columns if assignment_columns is not None else assignment_arrays(assignments)
+        bounds = np.empty(starts.size + stops.size, dtype=np.uint32)
+        bounds[0::2] = starts
+        bounds[1::2] = stops
+        parts.append(bounds)
+    if len(extra_bounds):
+        parts.append(np.asarray(extra_bounds, dtype=np.uint32))
+    return np.unique(np.concatenate(parts))
 
 
 def choose_assignments(spans, y, physical_ends, physical_vals):

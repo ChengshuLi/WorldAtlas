@@ -6,6 +6,7 @@ is enforced; actual memory use depends on inputs and algorithm workload.
 """
 import collections,hashlib,json,math,sqlite3,struct
 from functools import cache
+import time
 from pathlib import Path
 import numpy as np
 import closed_water_core as core
@@ -248,6 +249,7 @@ def write_assignments(db,path,decision_id,width,height):
 
 def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_rows,component_spans,barrier_edges,
         out,width,height,pad,inputs,*,allow_selected_research=False,chunk=5000,verify_inputs=None):
+ processing_started=time.perf_counter()
  if chunk<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid chunk or halo')
  decision,pairs,tolerance=core.policy(snapshot,allow_selected_research=allow_selected_research)
  code_paths={'streaming_closed_water':Path(__file__),'partition_json_stream':Path(partition_json_stream.__file__),
@@ -276,6 +278,7 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
     'algorithm_parameters':{'classification_chunk':chunk},
     'algorithm_sha256':code_pins['streaming_closed_water'],'code_sha256':code_pins,
     'tiles':[{'core_rows':[0,height],'core_cols':[0,width],'span_file':{'path':'closed-water-assignments.jsonl.gz','sha256':sha(out/'closed-water-assignments.jsonl.gz')}}]}
+  manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
   write_json_exclusive(out/'manifest.json',manifest,indent=2)
   return manifest
  finally:

@@ -6,12 +6,12 @@ A batch-complete record is written only after every tile and metadata recheck.
 """
 from __future__ import annotations
 import argparse,contextlib,fcntl,hashlib,json,math,os,stat
+import time
 from pathlib import Path
 import numpy as np
 import build_coastal_tile as tile
-import decision_snapshot,exclusive_outputs,pinned_coastal_metadata
-from decision_snapshot import validate_revision
-from pinned_coastal_metadata import pinned_bytes,pinned_json,validate_physical,validate_legacy_direct
+import decision_snapshot,exclusive_outputs,pinned_coastal_metadata,local_water_overlay,direct_lineage,build_prefill_plan,selected_mixed_lineage
+from pinned_coastal_metadata import pinned_bytes,pinned_json
 from exclusive_outputs import create_directory_exclusive,write_json_exclusive
 
 F_SEALS=fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL
@@ -51,15 +51,25 @@ def sealed_copy(path,expected):
   if target is not None:os.close(target)
 
 def validate_plan(plan,width,height):
- if not isinstance(plan,dict) or set(plan)!={'tiles','pad_degrees','chunk'}:raise ValueError('invalid batch plan keys')
- boxes=plan['tiles'];pad=plan['pad_degrees'];chunk=plan['chunk']
- if not isinstance(boxes,list) or not boxes or type(chunk)!=int or chunk<1 or isinstance(pad,bool) or not isinstance(pad,(int,float)) or not math.isfinite(pad) or not 0<pad:raise ValueError('invalid batch plan values')
- for i,b in enumerate(boxes):
-  if not isinstance(b,list) or len(b)!=4 or any(type(v)!=int for v in b):raise ValueError('invalid tile bounds')
-  x0,x1,y0,y1=b
+ if not isinstance(plan,dict) or set(plan) not in ({'tiles','pad_degrees','chunk'},{'tiles','chunk'}):raise ValueError('invalid batch plan keys')
+ entries=plan['tiles'];chunk=plan['chunk'];uniform=plan.get('pad_degrees')
+ if not isinstance(entries,list) or not entries or type(chunk)!=int or chunk<1:raise ValueError('invalid batch plan values')
+ def positive(v):return not isinstance(v,bool) and isinstance(v,(int,float)) and math.isfinite(v) and v>0
+ if uniform is not None and not positive(uniform):raise ValueError('invalid latitude/longitude halo')
+ boxes=[]
+ for entry in entries:
+  if uniform is None:
+   if not isinstance(entry,dict) or set(entry)!={'core','latitude_pad_degrees','longitude_pad_degrees'}:raise ValueError('invalid per-tile halo')
+   box=entry['core'];ypad=entry['latitude_pad_degrees'];xpad=entry['longitude_pad_degrees']
+  else:box=entry;ypad=xpad=uniform
+  if not positive(ypad) or not positive(xpad):raise ValueError('invalid latitude/longitude halo')
+  if not isinstance(box,list) or len(box)!=4 or any(type(v)!=int for v in box):raise ValueError('invalid tile bounds')
+  x0,x1,y0,y1=box
   if not(0<=x0<x1<=width and 0<=y0<y1<=height):raise ValueError('tile outside grid')
-  for p in boxes[:i]:
-   if max(x0,p[0])<min(x1,p[1]) and max(y0,p[2])<min(y1,p[3]):raise ValueError('overlapping tiles')
+  for other in boxes:
+   a,c,d,e=other['core']
+   if max(x0,a)<min(x1,c) and max(y0,d)<min(y1,e):raise ValueError('overlapping tiles')
+  boxes.append({'core':box,'latitude_pad_degrees':ypad,'longitude_pad_degrees':xpad})
  return boxes
 
 def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,check_metadata,*,metadata_pins):
@@ -68,12 +78,13 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
  Hash strings are caller assertions. Only the CLI validates pinned metadata and
  provides the required lineage callback; a completion record gates the batch.
  """
+ processing_started=time.perf_counter()
  boxes=validate_plan(plan,width,height)
  names=('physical_rows','physical_runs','land_rows','land_runs')
  if set(paths)!=set(names) or set(pins)!=set(names):raise ValueError('four grid inputs required')
  if set(metadata_pins)!={'physical_report','land_report'} or any(not isinstance(v,str) or len(v)!=64 or any(c not in '0123456789abcdef' for c in v) for v in metadata_pins.values()):raise ValueError('two report SHA-256 pins required')
  code_paths={'algorithm':Path(tile.__file__),'core':Path(tile.core.__file__),'shore':Path(tile.core.shore.__file__),'geometry':Path(tile.core.shore.__file__),'accelerator':Path(tile.coastal_rect.__file__)};code_pins={k:sha(v) for k,v in code_paths.items()}
- support_paths={'metadata':Path(pinned_coastal_metadata.__file__),'snapshot':Path(decision_snapshot.__file__),'output':Path(exclusive_outputs.__file__)};support_pins={k:sha(v) for k,v in support_paths.items()}
+ support_paths={'metadata':Path(pinned_coastal_metadata.__file__),'snapshot':Path(decision_snapshot.__file__),'land_lineage':Path(direct_lineage.__file__),'land_validator':Path(build_prefill_plan.__file__),'mixed_lineage':Path(selected_mixed_lineage.__file__),'overlay':Path(local_water_overlay.__file__),'output':Path(exclusive_outputs.__file__)};support_pins={k:sha(v) for k,v in support_paths.items()}
  check_metadata()
  with contextlib.ExitStack() as stack:
   sealed={};used=0
@@ -82,14 +93,15 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
   physical=tile.open_grid(sealed['physical_rows'],sealed['physical_runs'],width,height);land=tile.open_grid(sealed['land_rows'],sealed['land_runs'],width,height)
   root=create_directory_exclusive(out);manifests=[]
   inputs={k+'_sha256':pins[k] for k in names};inputs.update({k+'_sha256':v for k,v in metadata_pins.items()})
-  for i,box in enumerate(boxes):
-   dest=root/f'tile-{i:04d}'
-   manifest=tile.run(snapshot,snapshot_sha,physical,land,dest,width,height,box,plan['pad_degrees'],inputs,chunk=plan['chunk'],allow_selected_research=True)
+  for i,entry in enumerate(boxes):
+   box=entry['core'];dest=root/f'tile-{i:04d}'
+   manifest=tile.run(snapshot,snapshot_sha,physical,land,dest,width,height,box,entry['latitude_pad_degrees'],inputs,chunk=plan['chunk'],allow_selected_research=True,longitude_pad_degrees=entry['longitude_pad_degrees'])
    if any(manifest[k+'_sha256']!=v for k,v in code_pins.items()):raise ValueError('tile code pin changed within batch')
    manifests.append({'tile':i,'box':box,'manifest_sha256':sha(dest/'manifest.json')})
   check_metadata()
   if sha(Path(__file__))!=CODE_SHA or any(sha(path)!=code_pins[k] for k,path in code_paths.items()) or any(sha(path)!=support_pins[k] for k,path in support_paths.items()):raise ValueError('batch code changed during generation')
   result={'schema':'worldatlas-sealed-coastal-batch-v1','status':'complete-research-not-published','snapshot_sha256':snapshot_sha,'plan_sha256':plan_sha,'grid':{'width':width,'height':height},'sealed_input_sha256':pins,'metadata_sha256':metadata_pins,'sealed_input_bytes':used,'driver_sha256':CODE_SHA,'tile_code_sha256':code_pins,'support_code_sha256':support_pins,'tiles':manifests,'limitations':['Tiles remain research candidates and require separate global coverage, source and geographic review.','Sealed input bytes do not establish the correctness or acceptance of their source or decision metadata.','On-disk code hashes are change indicators, not proof of already-imported Python module bytes.']}
+  result['processing_elapsed_seconds']=time.perf_counter()-processing_started
   write_json_exclusive(root/'batch-complete.json',result);return result
 
 CODE_SHA=sha(Path(__file__))
@@ -101,15 +113,13 @@ def main():
  if not(a.allow_unverified_snapshot and a.allow_draft and a.allow_selected_research_policy):raise ValueError('all explicit research opt-ins are required')
  root=Path(a.input_root).resolve();out=Path(a.out).resolve();files={k:Path(getattr(a,k)).resolve() for k in ('snapshot','physical_rows','physical_runs','physical_report','land_rows','land_runs','land_report','plan')};expected={k:getattr(a,k+'_sha256') for k in files}
  if not root.is_dir() or any(not p.is_relative_to(root) for p in files.values()) or any(out==p or p.is_relative_to(out) for p in files.values()):raise ValueError('inputs must be inside input root and outside output')
- snapshot=pinned_json(files['snapshot'],expected['snapshot']);validate_revision(snapshot,allow_draft=True)
+ snapshot=decision_snapshot.read_snapshot(files['snapshot'],expected['snapshot'],allow_draft=True)
  plan=pinned_json(files['plan'],expected['plan']);width,height=131072,54614;validate_plan(plan,width,height)
  physical={'rows_sha256':expected['physical_rows'],'runs_sha256':expected['physical_runs']};land={'rows_sha256':expected['land_rows'],'runs_sha256':expected['land_runs'],'resolved_rows':files['land_rows'],'resolved_runs':files['land_runs']}
  def check_metadata():
   pinned_bytes(files['snapshot'],expected['snapshot']);pinned_bytes(files['plan'],expected['plan'])
-  physical_doc=pinned_json(files['physical_report'],expected['physical_report']);land_doc=pinned_json(files['land_report'],expected['land_report'])
-  grid={'width':width,'height':height,'west':-180,'north':90,'step':360/width}
-  validate_physical(physical_doc,physical,grid)
-  validate_legacy_direct(land_doc,files['land_report'],physical,land,expected['snapshot'],snapshot['decision_revision'],root,grid)
+  direct_lineage.validate_physical_report(files['physical_report'],expected['physical_report'],physical,width,height)
+  direct_lineage.validate_direct_land(files['land_report'],expected['land_report'],physical,land,local_water_overlay.land_snapshot_hash(snapshot,expected['snapshot']),snapshot['decision_revision'],root,expected['physical_report'])
  grid={k:files[k] for k in ('physical_rows','physical_runs','land_rows','land_runs')};pins={k:expected[k] for k in grid}
  result=run_batch(snapshot,expected['snapshot'],grid,pins,plan,expected['plan'],out,width,height,check_metadata,metadata_pins={k:expected[k] for k in ('physical_report','land_report')})
  print(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'output':str(out)}))

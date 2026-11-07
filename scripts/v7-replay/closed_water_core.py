@@ -7,6 +7,7 @@ from collections import Counter,defaultdict
 import math
 import numpy as np
 import shared_nearest as shore
+import local_water_overlay
 
 
 def policy(snapshot, *, allow_selected_research=False):
@@ -15,7 +16,7 @@ def policy(snapshot, *, allow_selected_research=False):
         raise ValueError('exactly one identified closed-water policy is required')
     decision=policies[0];d=decision.get('definition',{})
     if (not allow_selected_research or snapshot.get('decision_revision',{}).get('status')!='draft'
-            or decision.get('evidence',{}).get('execution_status')!='selected_for_research'):
+            or not local_water_overlay.selected(snapshot,decision)):
         raise ValueError('selected draft closed-water policy and explicit research opt-in required')
     expected={'method','boundary_participants','distance','ellipsoid','latitude_grid_edge_contacts',
               'multiple_participants','no_participants','one_participant','source_cut_contacts',

@@ -1,13 +1,102 @@
-# Direct research composition
+# Direct research pipeline
 
-These tools operate on new physical and land grids rather than a prior continent-labeled map. They are candidates, not an accepted or publishable V7 build. All decision snapshots are unverified; an explicit `--allow-unverified-snapshot` is required. Draft evidence additionally requires `--allow-draft-snapshot`. Shared-basin distance assignment uses the explicit `wgs84-coastal-4neighbor-center-v2` research method and WGS84 ellipsoidal center-to-center geodesic distance; spherical-edge methods are retired and rejected.
+The existing stage CLIs consume pinned raw sources and freshly produced physical,
+land and water artifacts. They do not need a local coordinator or an old labeled
+map. All outputs remain provisional, non-publishable research. Draft decisions,
+unverified snapshots, and selected research policies require the corresponding
+explicit CLI opt-ins. A hash proves byte identity, not geographic correctness or
+approval.
 
-1. Build physical rows/runs with `../v7-raw-mask/build_physical.py`; pin its candidate report and output hashes. Export a fresh draft using `../v7-decision-export/draft/`. Compile the land stage with `../v7-land/direct-neon-land/`; its report binds the physical and component streams, snapshot and resulting land rows/runs. The optional single-generation streaming path produces a distinct top-level report, whose nested report, physical report and manifest must be pinned and checked; same-run lineage is not independent verification.
-2. Extract each selected SeaVoX feature and run `build_seavox_basin.py` with the pinned archive, extraction manifest, decision snapshot and physical streams. Shared basins additionally require the new land streams. Run `verify_basin_coverage.py` with the output manifest and its SHA, the same pinned snapshot and physical streams. It checks all emitted spans against the source raster and physical water; it does not prove polygon semantics, shoreline correctness or source selection.
-3. Supply `build_prefill_plan.py` an input configuration with `rle_inputs.physical`, `rle_inputs.land`, `coastal_band`, and exactly the selected `basins`. Each RLE entry has `rows_path`, `runs_path`, `rows_sha256`, and `runs_sha256`; the direct land entry also has `report_path` and `report_sha256`. The physical entry carries `physical_mask_sha256` from the physical TIFF. The plan binds the land report, snapshot, sources and explicit precedence. The land report must bind the canonical grid and physical inputs. Same-run component artifacts are rehashed for integrity; that read is not independent connectivity recomputation. For a selected draft coast policy, use `build_coastal_tile.py` on certified, non-overlapping core tiles and `assemble_coastal_tiles.py` to verify a complete tessellation. The physical entry must also pin its report. Run `build_prefill.py` with that plan to produce the prefill audit and streams.
-4. For a draft ocean run, `../v7-recovery/ocean/make_candidate_build.py` binds the snapshot to the new physical report and output hashes. The ocean runner requires that manifest and digest, and reports unseeded components. A selected draft closed-water policy can drive `build_closed_water.py`. Its SQLite-backed work index streams component spans, but source-cut contacts, unknown boundaries and other unresolved components remain pending; a partial layer cannot be composed. The work database grows with spans and mixed output, has no disk quota or resume, and must fit available space.
-5. `compose_direct.py` consumes a `worldatlas-direct-final-plan-v1` JSON. It requires grid width/height, decision snapshot hash, decision and entity revision IDs, revision status, a `prefill` object with `rows`, `runs`, `audit`, and `plan` paths and SHA-256 fields, and water layer descriptors. Each layer specifies its ID, pinned manifest, priority, explicit overrides and allowed codes. Layer manifests must bind the same prefill streams and decision snapshot. The composer refuses a layer that overwrites assigned cells or leaves any water unassigned. Paths resolve inside `--input-root`; output must be new and outside that tree. The final report is research-only.
+## Stages and contracts
 
-A manifest's coverage flag and a local snapshot hash are assertions, not independent geographic validation or approval. Full source coverage, reviewed coast and closed-water policies, decision completeness, global connectivity and final UI/attribution checks remain outstanding. The coast and closed-water candidates have synthetic coverage only and have not run on a complete global partition. `compose_full_water_grid.py` is a separate historical replay tool and still reads V2/V6 inputs. The prefill planner and builder default to direct land and require `--allow-historical-v6` to use the historical V6-only replay path.
+1. `../v7-raw-mask/build_physical.py` produces the physical mask, rows, runs and
+   report from the official raw source manifest. Pin its output report and stream
+   hashes. Input acquisition is separate from processing time.
+2. The WGS84 Stage 2 entry is
+   `../v7-recovery/land/stage2-geodesic-20261104/orchestrate_stage2.py`.
+   The selected mixed/regional producer is
+   `../v7-land/research-mixed-runtime/stage3-mixed-leeward-full-20261105/apply_selected_mixed.py`.
+   Its report embeds `input_lineage`, binding its request, decision snapshot,
+   physical inputs, baseline and code. Consumers validate those pins directly;
+   no sidecar lineage repair or path relocation is supported. Rebuild requests
+   and code pins after changing a producer. Diagnostic baselines remain explicitly
+   provisional and must pass their normal freeze gate.
+3. `extract_seavox_feature.py` and `build_seavox_basin.py` produce each selected
+   named basin. Shared basins also consume the fresh land streams. Use
+   `--research-shore-method wgs84-coastal-4neighbor-center-v2` for WGS84
+   ellipsoidal center-to-center assignment. `--research-interval` is an optional
+   execution engine with the same exact fallback, not the default. Point,
+   wrapped-point, interval and wrapped-interval manifests carry distinct methods,
+   complete cell accounting and source-code pins. `verify_basin_coverage.py`
+   checks emitted spans against the source raster and physical water.
+4. `batch_coastal_tiles.py` uses the same canonical physical/land lineage checks
+   as the other consumers and seals the grid generation for each batch. A plan
+   accepts either uniform `pad_degrees` and core boxes or entries of the form
+   `{core: [x0,x1,y0,y1], latitude_pad_degrees: ..., longitude_pad_degrees: ...}`.
+   Independent halos avoid inflating latitude coverage near the poles. The
+   current builder uses RLE shore extraction and 2-D rectangle certificates.
+   `assemble_coastal_tiles.py` verifies the complete non-overlapping tessellation.
+5. `build_prefill_plan.py` consumes a configuration with `rle_inputs.physical`,
+   `rle_inputs.land`, `coastal_band` and the selected `basins`. Each stream and
+   report has its path and SHA-256. It binds source selection, decision policy,
+   explicit layer precedence and land lineage. `finish_prefill_config.py` can
+   attach a completed coast manifest to a pinned pending inventory.
+   `build_prefill.py` then produces the prefill streams and audit. Physical-water
+   encoding comes from the validated producer contract: mixed land preserves
+   unassigned water as 0; direct land uses 1. No report-hash allowlist is used.
+6. `../v7-recovery/ocean/make_candidate_build.py` pins the physical build and
+   selected ocean policy. `ocean_fill_runner.py` fills eligible residual water
+   and reports its unseeded partition. `build_closed_water.py` consumes that
+   partition and the prefill to assign enclosed water; unresolved components
+   fail closed. `prepare_final_plan.py` binds completed ordinary ocean/closed
+   outputs, validates their conservation and prepares the final plan.
+   `compose_direct.py` checks disjoint full coverage and rejects overwrites,
+   gaps and changed inputs before producing the final grid.
 
-Draft coast, closed-water and ocean policies require an explicit research-selection marker before execution. An unselected or unmarked policy stops the relevant builder; its presence in an export is not an approval.
+All plan paths are relative to their document or absolute inside `--input-root`.
+Old workspace and `/tmp` prefixes are not remapped. Outputs must be new and must
+not replace or contain inputs. Fresh output directories may be inside the run's
+input root, so one run can keep its artifacts together without copying them.
+
+## Separately pinned policy revisions
+
+A labeled local overlay remains `local-user-directed-overlay-not-neon`.
+`local_water_overlay.py` reconstructs it from its pinned land snapshot, Neon water
+structure and explicit overlay before a consumer accepts it. It does not write
+Neon or confer approval. Its land snapshot pin is validated separately from the
+water-policy snapshot; local selection markers are honored only after verification.
+
+When the ocean revision intentionally differs from the prefill revision, use the
+existing `../v7-recovery/ocean/split_lineage_ocean.py` and
+`split_lineage_compose.py`. They bind both snapshots, registry, prefill and
+partition and retain their distinct provenance. The V8 policy split must not be
+collapsed by relabeling an older snapshot or editing a manifest. Closed-water
+reuse requires the existing partition-equivalence checks.
+
+## Wall-clock timings
+
+Stage reports expose `processing_elapsed_seconds`, measured with a monotonic
+clock over the successful local processing invocation. Prepare/download inputs
+before these intervals; acquisition time is not processing time. A killed or
+interrupted attempt does not create a completed timing report. Stage 2 explicitly
+marks resumed checkpoints with prior work unmeasured; its successful invocation
+is not the complete stage total. A fresh uninterrupted run is required for a
+complete baseline when earlier intervals were not recorded.
+
+A batch timing includes its sequential tiles and input sealing. Per-tile timings
+are nested detail, not additional elapsed time. Never sum concurrent jobs as a
+stage's wall-clock duration: use the union of their processing intervals, excluding
+periods where no processing runs. Microbenchmarks and historical log gaps are not
+full-run timings. Exact final-grid equality must be checked separately from speed.
+
+## Focused checks
+
+With NumPy, SciPy, PyProj and the GDAL system Python available, set `TMPDIR`, `TMP`
+and `TEMP` to a persistent workspace directory, then run:
+
+    PYTHONPATH=scripts:scripts/v7-replay:scripts/v7-recovery/ocean \
+      /usr/bin/python3 -m unittest discover -q -s scripts/v7-replay -p 'test_*.py'
+
+The retired `scripts/research-diagnostic-water` fork has been consolidated into
+these normal stage contracts. Historical gzip comparison adapters, per-run report
+allowlists and lineage sidecars are not part of the supported pipeline.

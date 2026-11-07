@@ -5,6 +5,7 @@ This verifies raster-to-span completeness, not polygon validity or whether GDAL'
 rasterization embodies an approved geographic rule.
 """
 import argparse, gzip, hashlib, json
+import time
 from pathlib import Path
 import numpy as np
 from decision_snapshot import read_snapshot, find_basin, find_source, participant_water_codes
@@ -18,6 +19,7 @@ def sha(p):
 
 
 def main():
+    processing_started=time.perf_counter()
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--manifest',type=Path,required=True)
     ap.add_argument('--manifest-sha256',required=True)
@@ -84,7 +86,7 @@ def main():
             cells+=int(expected.sum())
         if rec is not None:raise ValueError('assignment has rows outside raster bounds')
     if cells!=manifest['physical_water_cells'] or spans!=manifest['span_count']:raise ValueError('manifest counts do not match')
-    print(json.dumps({'status':'raster-to-span-match','cells':cells,'spans':spans,'raster_sha256':sha(raster_path),
+    print(json.dumps({'processing_elapsed_seconds':time.perf_counter()-processing_started,'status':'raster-to-span-match','cells':cells,'spans':spans,'raster_sha256':sha(raster_path),
                       'assignment_sha256':sha(path),'limitation':'does not independently validate source polygon semantics'}))
 
 if __name__=='__main__':main()

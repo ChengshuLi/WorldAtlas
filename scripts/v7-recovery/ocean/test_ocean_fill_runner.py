@@ -1,4 +1,6 @@
 import json,struct,tempfile,unittest
+from unittest.mock import patch
+import sys,types
 from pathlib import Path
 import ocean_fill_runner as r
 
@@ -18,6 +20,7 @@ class OceanRunnerTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as td:
    root=Path(td);pr,pu=self.grid(root,'phys',1);rr,ru=self.grid(root,'prefill',0);out=root/'out';r.run(self.snapshot(),'a'*64,pr,pu,rr,ru,out,8,4,{'physical_rows_sha256':r.sha(pr)},2)
    summary=json.loads((out/'run-summary.json').read_text());layer=json.loads((out/'ocean-layer-manifest.json').read_text());self.assertEqual(summary['unseeded_cell_count'],0);self.assertEqual(summary['assigned_cells_total'],32);self.assertEqual(len(layer['tiles']),2)
+   self.assertGreaterEqual(summary['processing_elapsed_seconds'],0)
    rows=[json.loads(x) for t in layer['tiles'] for x in (out/t['span_file']['path']).read_text().splitlines()];self.assertEqual(len(rows),4)
    for row in rows:self.assertEqual([(s['start'],s['end'],s['code'],s['member_id']) for s in row['spans']],[(0,2,7,'s0'),(2,4,8,'s1'),(4,6,9,'s2'),(6,8,10,'s3')])
    with self.assertRaises(FileExistsError):r.run(self.snapshot(),'a'*64,pr,pu,rr,ru,out,8,4,{})
@@ -39,6 +42,19 @@ class OceanRunnerTests(unittest.TestCase):
   with self.assertRaises(ValueError):r.load_config(s,8,4)
   s=self.snapshot();s['policies'][0]['definition']['route_ids'].append('missing')
   with self.assertRaisesRegex(ValueError,'unknown route'):r.load_config(s,8,4)
+ def test_local_overlay_requires_opt_in_marker_and_verification(self):
+  s=self.snapshot();s['source']='local-user-directed-overlay-not-neon';s['schema']='worldatlas-local-water-effective-snapshot-v1'
+  s['decision_revision']['status']='draft';s['entity_revision']['status']='draft'
+  s['policies'][0]['evidence']={'execution_status':'local_user_authorized_overlay'}
+  with self.assertRaises(ValueError):r.load_config(s,8,4,allow_draft=True)
+  s['_local_overlay_verified']=True
+  with self.assertRaises(ValueError):r.load_config(s,8,4,allow_draft=False)
+  calls=[]
+  with patch.dict(sys.modules,{'local_water_overlay':types.SimpleNamespace(verify=lambda doc:calls.append(doc))}):
+   self.assertEqual(len(r.load_config(s,8,4,allow_draft=True)[2]),4)
+   self.assertEqual(len(calls),1);self.assertNotIn('_local_overlay_verified',calls[0])
+  with patch.dict(sys.modules,{'local_water_overlay':types.SimpleNamespace(verify=lambda doc:(_ for _ in ()).throw(ValueError('bad proof')))}):
+   with self.assertRaisesRegex(ValueError,'bad proof'):r.load_config(s,8,4,allow_draft=True)
  def test_draft_needs_explicit_opt_in(self):
   s=self.snapshot();s['schema']='worldatlas-geography-decision-draft-evidence-v1'
   s['decision_revision']['status']='draft';s['entity_revision']['status']='draft'

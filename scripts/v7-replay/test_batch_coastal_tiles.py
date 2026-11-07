@@ -19,6 +19,13 @@ class BatchTest(unittest.TestCase):
   self.assertEqual(copies.call_count,4);self.assertEqual(self.calls,2);self.assertEqual(len(result['tiles']),2);self.assertTrue((self.d/'batch/batch-complete.json').is_file());self.assertEqual(result['status'],'complete-research-not-published')
   for x in result['tiles']:
    p=self.d/'batch'/('tile-%04d'%x['tile'])/'manifest.json';self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),x['manifest_sha256']);self.assertEqual(json.loads(p.read_bytes())['status'],'partial-unverified-research-not-published')
+ def test_independent_tile_halos_and_elapsed_time(self):
+  self.plan={'tiles':[{'core':[7,9,3,4],'latitude_pad_degrees':30,'longitude_pad_degrees':180}], 'chunk':10}
+  result=self.run_batch()
+  manifest=json.loads((self.d/'batch/tile-0000/manifest.json').read_bytes())
+  self.assertGreaterEqual(result['processing_elapsed_seconds'],0)
+  self.assertGreaterEqual(manifest['processing_elapsed_seconds'],0)
+  self.assertEqual(manifest['shore_crop_bounds'],[0,16,1,6])
  def test_sealed_content_cannot_change(self):
   fd,n=b.sealed_copy(self.paths['physical_runs'],self.pins['physical_runs']);self.addCleanup(os.close,fd);self.assertEqual(fcntl.fcntl(fd,fcntl.F_GET_SEALS)&b.F_SEALS,b.F_SEALS)
   with self.assertRaises(OSError):os.write(fd,b'x')

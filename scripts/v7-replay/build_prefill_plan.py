@@ -2,14 +2,55 @@
 """Assemble a pinned prefill plan from the selected basin policies and fresh inputs."""
 from __future__ import annotations
 import argparse
+import time
 import json
 import os
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from exclusive_outputs import write_json_exclusive
+from exclusive_outputs import write_json_exclusive, validate_fresh_output
 from decision_snapshot import read_snapshot, validate_revision, participant_water_codes, find_source
 import compose_full_water_grid as c
+import local_water_overlay
+
+
+def validate_shared_audit(manifest):
+    """Check the versioned WGS84 point/interval producer contract, not old gzip bytes."""
+    audit=manifest.get('nearest_assignment_audit') or {}
+    suffix=' (research, not an approved decision)'
+    methods={'wgs84-coastal-4neighbor-center-v2':(False,False),
+             'wgs84-wrapped-certified-with-streamed-full-fallback-v1':(True,False),
+             'wgs84-coastal-center-interval-v1':(False,True),
+             'wgs84-wrapped-center-interval-v1':(True,True)}
+    method=audit.get('shore_method')
+    if not isinstance(method,str) or not method.endswith(suffix) or method[:-len(suffix)] not in methods:
+        raise ValueError('shared-shore manifest does not bind a supported WGS84 research method')
+    wrapped,interval=methods[method[:-len(suffix)]]
+    count=manifest.get('physical_water_cells');certified=audit.get('certified_bound_cells');exact=audit.get('exact_distance_cells')
+    integer=lambda x:type(x) is int and x>=0
+    digest=lambda x:isinstance(x,str) and len(x)==64 and all(c in '0123456789abcdef' for c in x)
+    if not all(integer(x) for x in (count,certified,exact)) or certified+exact!=count:
+        raise ValueError('shared-shore cell accounting mismatch')
+    hashes=[manifest.get('algorithm_sha256'),audit.get('shared_nearest_sha256'),audit.get('shore_geometry_sha256')]
+    if wrapped:
+        if (audit.get('index_optimization')!='certified-wrapped-crop-with-streamed-full-shore-fallback'
+                or audit.get('shore_order')!='original-full-crop-row-column-order'
+                or not all(integer(audit.get(k)) for k in ('wrapped_narrow_cells','wrapped_fallback_cells'))):
+            raise ValueError('wrapped-shore execution contract mismatch')
+        hashes.extend(audit.get(k) for k in ('wrapped_bounds_sha256','streamed_fallback_sha256'))
+    elif any(k in audit for k in ('index_optimization','wrapped_bounds_sha256','streamed_fallback_sha256','wrapped_narrow_cells','wrapped_fallback_cells')):
+        raise ValueError('unexpected wrapped-shore metadata')
+    if interval:
+        n=audit.get('interval_certified_cells');helpers=audit.get('helper_code_sha256')
+        if audit.get('execution_method')!='wgs84-center-row-interval-v1' or not integer(n) or n>certified or not isinstance(helpers,dict) or not helpers:
+            raise ValueError('interval-shore execution contract mismatch')
+        hashes.extend([audit.get('interval_nearest_sha256'),*helpers.values()])
+    elif any(k in audit for k in ('execution_method','interval_nearest_sha256','interval_certified_cells')):
+        raise ValueError('unexpected interval-shore metadata')
+    if not all(digest(x) for x in hashes):raise ValueError('shared-shore code pins missing')
+    if wrapped and audit['wrapped_narrow_cells']+audit['wrapped_fallback_cells']+audit.get('interval_certified_cells',0)!=count:
+        raise ValueError('wrapped-shore cell accounting mismatch')
+    return method
 
 
 def input_path(value, config_path, root):
@@ -25,7 +66,7 @@ def input_path(value, config_path, root):
 def require_selected_policy(policy, record):
     if policy.get('decision_revision', {}).get('status') == 'draft':
         evidence = record.get('evidence')
-        if not isinstance(evidence, dict) or evidence.get('execution_status') != 'selected_for_research':
+        if not isinstance(evidence, dict) or not local_water_overlay.selected(policy, record):
             raise ValueError('draft policy requires explicit research selection')
 
 
@@ -90,6 +131,10 @@ def validate_land_report(report, report_path, physical, land, snapshot_hash, rev
     The same-run manifest path is a research lineage assertion, not independent
     connectivity verification or authentication of source provenance.
     """
+    if report.get('schema') in ('stage3-selected-mixed-land-report-v1','stage3-provisional-diagnostic-land-report-v1'):
+        if input_root is None: raise ValueError('input root required for mixed land lineage')
+        from selected_mixed_lineage import validate
+        return validate(report, report_path, physical, land, snapshot_hash, revision, input_root, physical.get('report_sha256'))
     if report.get('schema') == 'single-generation-nearest-report-v1':
         raise ValueError('retired spherical nearest-land reports cannot drive new builds')
     digest = lambda value: isinstance(value, str) and len(value) == 64 and all(ch in '0123456789abcdef' for ch in value)
@@ -184,6 +229,7 @@ def validate_land_report(report, report_path, physical, land, snapshot_hash, rev
 
 
 def assemble(config, config_path, root, policy, policy_path, out, allow_draft=False, allow_research_shore=False, allow_historical_v6=False):
+    processing_started=time.perf_counter()
     revision = validate_revision(policy, allow_draft=allow_draft)
     selected = policy.get('basins', [])
     methods = {row.get('assignment_method') for row in selected}
@@ -217,8 +263,16 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
         rles[key] = {'rows_path':rel(rows), 'runs_path':rel(runs), 'rows_sha256':source['rows_sha256'], 'runs_sha256':source['runs_sha256']}
         if source.get('physical_mask_sha256'):
             rles[key]['physical_mask_sha256'] = source['physical_mask_sha256']
+    physical_source=config['rle_inputs']['physical']; physical=rles['physical']
+    if 'report_path' in physical_source:
+        physical_report_path=input_path(physical_source['report_path'],config_path,root)
+        if c.sha256(physical_report_path)!=physical_source['report_sha256']:
+            raise ValueError('physical report hash mismatch')
+        validate_physical_report(json.loads(physical_report_path.read_text()),physical)
+        physical['report_path']=rel(physical_report_path);physical['report_sha256']=physical_source['report_sha256']
     if shared and land_key != 'land':
         raise ValueError('shared basins require direct decision-derived land')
+    land_lineage = None
     if land_key == 'land':
         source = config['rle_inputs']['land']
         report_path = input_path(source['report_path'], config_path, root)
@@ -226,8 +280,8 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
             raise ValueError('direct land report hash mismatch')
         land = {**rles['land'], 'resolved_rows':input_path(source['rows_path'], config_path, root),
                 'resolved_runs':input_path(source['runs_path'], config_path, root)}
-        validate_land_report(json.loads(report_path.read_text()), report_path, rles['physical'],
-                             land, c.sha256(policy_path), revision, root)
+        land_lineage = validate_land_report(json.loads(report_path.read_text()), report_path, rles['physical'],
+                             land, local_water_overlay.land_snapshot_hash(policy, c.sha256(policy_path)), revision, root)
         rles['land']['report_path'] = rel(report_path)
         rles['land']['report_sha256'] = source['report_sha256']
     def validate_manifest(rec):
@@ -244,12 +298,7 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
     coast_decision, coast_catalog = coastline_policy(policy); coast_definition = coast_decision['definition']
     if coast_catalog is None:
         if land_key != 'land': raise ValueError('derived coastline requires direct land')
-        physical_source=config['rle_inputs']['physical']
-        physical_report_path=input_path(physical_source['report_path'],config_path,root)
-        if c.sha256(physical_report_path)!=physical_source['report_sha256']:
-            raise ValueError('physical report hash mismatch')
-        validate_physical_report(json.loads(physical_report_path.read_text()),physical)
-        physical['report_path']=rel(physical_report_path);physical['report_sha256']=physical_source['report_sha256']
+        if 'report_sha256' not in physical: raise ValueError('derived coast requires physical report')
         if (coast_source.get('decision_id') != coast_decision['id'] or coast_source.get('policy_definition') != coast_definition
                 or coast_source.get('physical_report_sha256') != physical['report_sha256']
                 or coast_source.get('land_rows_sha256') != rles['land']['rows_sha256']
@@ -303,21 +352,23 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
                     or source.get('land_runs_sha256') != rles['land']['runs_sha256']
                     or source.get('decision_status') != revision['status']
                     or source.get('tie_rules') != basin.get('tie_rules')
-                    or audit.get('shore_method') != 'wgs84-coastal-4neighbor-center-v2 (research, not an approved decision)'
-                    or any(key in audit for key in ('execution_method','interval_nearest_sha256','interval_certified_cells'))
                     or type(count) is not int or count < 0 or type(certified) is not int or certified < 0
                     or type(exact) is not int or exact < 0 or certified + exact != count
                     or not all(valid_hash(x) for x in hashes)):
                 raise ValueError(f'shared basin research method or land binding mismatch: {sid}')
+        if basin['assignment_method']=='shared_nearest_assigned_shore':
+            try:validate_shared_audit(manifest)
+            except ValueError as e:raise ValueError(f'shared basin research method or land binding mismatch: {sid}: {e}') from e
         layer_id = f'named-{sid}'
-        layers.append({'layer_id':layer_id,'manifest_path':rel(path),'manifest_sha256':entry['manifest_sha256'],
-                       'priority':priorities[layer_id],'overrides':overrides[layer_id],'allowed_codes':allowed})
-    return {'schema':'worldatlas-v7-full-grid-composition-plan-v1', 'status':'fresh-prefill-unverified-test-candidate',
+        layer={'layer_id':layer_id,'manifest_path':rel(path),'manifest_sha256':entry['manifest_sha256'],
+               'priority':priorities[layer_id],'overrides':overrides[layer_id],'allowed_codes':allowed}
+        layers.append(layer)
+    return {'processing_elapsed_seconds':time.perf_counter()-processing_started,'schema':'worldatlas-v7-full-grid-composition-plan-v1', 'status':'fresh-prefill-unverified-test-candidate',
             'purpose':'Fresh selected named basins and coast, with residual marine water code 0.',
             'land_input_kind':'direct-research' if land_key == 'land' else 'historical-v6-replay',
             'research_shore_method': 'wgs84-coastal-4neighbor-center-v2' if shared else None,
             'grid':{'width':c.W,'height':c.H}, 'rle_inputs':rles, 'water_layers':layers,
-            'decision_snapshot_sha256':c.sha256(policy_path), 'decision_revision':revision['id'], 'decision_revision_status':revision['status'], 'entity_revision':revision['entity_revision'],
+            'land_lineage':land_lineage, 'decision_snapshot_sha256':c.sha256(policy_path), 'land_decision_snapshot_sha256':local_water_overlay.land_snapshot_hash(policy, c.sha256(policy_path)), 'decision_revision':revision['id'], 'decision_revision_status':revision['status'], 'entity_revision':revision['entity_revision'],
             'precedence':'As specified by the revisioned layer-precedence decision; undeclared overlaps fail.'}
 
 
@@ -336,8 +387,7 @@ def main():
     root=args.input_root.resolve(); config_path=args.inputs.resolve(); policy_path=args.policy.resolve(); out=args.out.resolve()
     if not root.is_dir() or not config_path.is_relative_to(root):
         raise ValueError('input configuration must be inside the input root')
-    if out.is_relative_to(root) or root.is_relative_to(out):
-        raise ValueError('plan must be outside the input root')
+    out=validate_fresh_output(root,args.out,(config_path,policy_path))
     policy=read_snapshot(policy_path,args.policy_sha256,allow_draft=args.allow_draft_snapshot)
     config=json.loads(config_path.read_text())
     plan=assemble(config,config_path,root,policy,policy_path,out,allow_draft=args.allow_draft_snapshot,allow_research_shore=args.allow_research_shore,allow_historical_v6=args.allow_historical_v6)

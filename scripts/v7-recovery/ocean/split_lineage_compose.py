@@ -5,7 +5,7 @@ The previous enclosed-water layer is reused only if all unseeded component
 cells, grouping and source-cut contacts remain identical. Every changed ocean
 cell is checked against the original full grid. Nothing is published.
 """
-import argparse, collections, gzip, hashlib, json, struct
+import argparse, collections, gzip, hashlib, json, struct, time
 from pathlib import Path
 import numpy as np
 import ocean_fill_runner as ocean
@@ -234,6 +234,7 @@ def layer_rows(path, expected_height, expected_hash):
         raise ValueError('ocean tiles incomplete or changed')
 
 def compose(config_path, output):
+    processing_started=time.perf_counter()
     config_path=Path(config_path).resolve();raw=config_path.read_bytes();config=json.loads(raw);paths,hashes=read_pins(config)
     code_paths={'split_compose':Path(__file__).resolve(),'ocean_runner':Path(ocean.__file__).resolve(),'exclusive_outputs':Path(xo.__file__).resolve(),'split_ocean':Path(split.__file__).resolve()}
     code_hashes={k:ocean.sha(v) for k,v in code_paths.items()}
@@ -289,6 +290,7 @@ def compose(config_path, output):
       'grid':{'width':w,'height':h},'counts':counts,'run_count':nrun,'changed_cells':sum(changes.values()),'pair_counts':dict(changes),'difference_span_count':spans_count,
       'inputs':hashes,'code_sha256':code_hashes,'reused_unseeded_components':component_count,'output':{'rows_sha256':ocean.sha(out/'rows.u32le'),'runs_sha256':ocean.sha(out/'runs.u32le'),'difference_spans_sha256':ocean.sha(out/'difference-spans.jsonl.gz')},
       'limitations':['Research-only split lineage; snapshot authentication and geographic authority are not established.','Unseeded cells, component grouping and conservatively scanned cut-contact counts are unchanged; prior closed-water classifications are reused, not revalidated.']}
+    result['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'report.json',result,indent=2);return result
 
 if __name__=='__main__':

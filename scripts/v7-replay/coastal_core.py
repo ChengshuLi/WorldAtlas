@@ -7,6 +7,7 @@ import math
 import numpy as np
 from scipy.spatial import cKDTree
 import shared_nearest as shore
+import local_water_overlay
 
 
 def policy(snapshot, *, allow_selected_research=False):
@@ -15,7 +16,7 @@ def policy(snapshot, *, allow_selected_research=False):
         raise ValueError('exactly one identified coastline policy is required')
     decision=records[0];definition=decision.get('definition',{})
     if (not allow_selected_research or snapshot.get('decision_revision',{}).get('status')!='draft'
-            or decision.get('evidence',{}).get('execution_status')!='selected_for_research'):
+            or not local_water_overlay.selected(snapshot,decision)):
         raise ValueError('selected draft coastal policy and explicit research opt-in required')
     required={'method','band_metres','band_tolerance_metres','shore_geometry','distance','ellipsoid','tie_rules','land_input','water_input'}
     if not isinstance(definition,dict) or set(definition)!=required or definition.get('method')!='nearest_final_shore_band_v2':

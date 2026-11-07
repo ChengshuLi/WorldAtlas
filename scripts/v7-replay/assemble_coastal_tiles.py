@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Assemble validated non-overlapping coastal tiles into a research layer."""
 import argparse,gzip,hashlib,io,json,os
+import time
 from pathlib import Path
 import coastal_core as core
 from decision_snapshot import read_snapshot
@@ -56,6 +57,7 @@ def cover(boxes,width,height):
 
 
 def assemble(snapshot,snapshot_sha,entries,root,out,width,height,allow_selected_research=False):
+ processing_started=time.perf_counter()
  decision,pairs,_,_,_=core.policy(snapshot,allow_selected_research=allow_selected_research)
  root=root.resolve();out=out.resolve()
  if not out.is_relative_to(root):raise ValueError('output manifest must be within input root')
@@ -87,7 +89,7 @@ def assemble(snapshot,snapshot_sha,entries,root,out,width,height,allow_selected_
   total_cells+=m['assigned_cells'];total_spans+=m['span_count']
   tiles.append({'core_cols':cols,'core_rows':rows,'span_file':{'path':os.path.relpath(span,out.parent),'sha256':m['span_file']['sha256']}})
  cover(boxes,width,height)
- return {'schema':'worldatlas-full-water-assignment-tiles-v1','status':'completed_unverified_candidate_not_published',
+ return {'processing_elapsed_seconds':time.perf_counter()-processing_started,'schema':'worldatlas-full-water-assignment-tiles-v1','status':'completed_unverified_candidate_not_published',
     'grid':{'width':width,'height':height,'angular_step_deg':360/width,'row_convention':'north-to-south; cell centers; half-open [start,end) x spans'},
     'coverage':{'complete':True,'meaning':'all tile cores cover grid; assignment coverage is generator assertion and geographic semantics remain unverified'},
     'source':{**baseline['inputs'],'decision_id':decision['id'],'policy_definition':decision['definition'],'policy_sha256':snapshot_sha,

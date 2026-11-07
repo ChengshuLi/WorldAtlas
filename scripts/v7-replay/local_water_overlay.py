@@ -61,14 +61,14 @@ def make(base,water,overlay,base_path,base_sha,water_path,water_sha,overlay_path
  # Preserve the user-directed ordering without inventing an order among basins.
  if any(p.get('kind')=='layer_precedence' for p in policies):raise ValueError('land snapshot unexpectedly contains precedence policy')
  e=overlay.get('stage_order_evidence',{})
- if e.get('message_id')!='Sentinel_e4aea50e77c4819197f949eece0644c3':raise ValueError('missing exact user stage-order evidence')
+ if not e.get('message_id') or not e.get('user_exact_text'):raise ValueError('missing user stage-order evidence')
  names=['named-'+b['id'] for b in water['basins']]
- if len(names)!=92 or len(set(names))!=92:raise ValueError('invalid named layers')
+ if not names or len(set(names))!=len(names):raise ValueError('invalid named layers')
  policies.append({'id':'local-user-water-layer-order-v1','kind':'layer_precedence','definition':{'priorities':{'coastal-band':0,**{name:1 for name in names}},'allowed_overrides':[{'winner':name,'loser':'coastal-band'} for name in names]},'evidence':{'execution_status':'local_user_authorized_overlay','user_message_id':e['message_id'],'user_exact_text':e['user_exact_text'],'same_priority_named_overlaps':'report as ambiguity; do not choose a winner silently'}})
  source_ocean=neon['ocean_fill_policy'];definition=copy.deepcopy(source_ocean['definition']);local=overlay['ocean'];
- if local['bering_ocean_barrier'] is not False or len(local['routes'])!=6:raise ValueError('bad local ocean route set')
+ if not isinstance(local.get('routes'),list) or not local['routes']:raise ValueError('bad local ocean route set')
  southern=local['retain_southern_meridians_from_neon']; routes={r['route_id']:r for r in water['routes']}
- if len(southern)!=3 or any(k not in routes or routes[k]['route_type']!='meridian' for k in southern):raise ValueError('missing southern meridians')
+ if len(set(southern))!=len(southern) or any(k not in routes or routes[k]['route_type']!='meridian' for k in southern):raise ValueError('missing southern meridians')
  out['routes']=copy.deepcopy(base.get('routes',[]))+[copy.deepcopy(routes[k]) for k in southern]; endpoints=out['endpoints']
  for r in local['routes']:
   if len(r['points'])!=2:raise ValueError('unsupported route shape')
@@ -76,7 +76,7 @@ def make(base,water,overlay,base_path,base_sha,water_path,water_sha,overlay_path
   for i,p in enumerate(r['points']):
    eid=f'{r["id"]}-endpoint-{i}';ids.append(eid);endpoints.append({'endpoint_id':eid,'name':p.get('name',eid),'longitude':p['longitude'],'latitude':p['latitude'],'evidence':{'source':'local-overlay','coordinate_evidence':p}})
   kind='lonlat_polyline' if r['kind']=='latitude_parallel' else r['kind']
-  if kind not in ('lonlat_polyline','wgs84_geodesic') or (kind=='lonlat_polyline' and (r['latitude']!=60 or any(p['latitude']!=60 for p in r['points']))):raise ValueError('unexpected ocean route')
+  if kind not in ('lonlat_polyline','wgs84_geodesic') or (r['kind']=='latitude_parallel' and any(p['latitude']!=r['latitude'] for p in r['points'])):raise ValueError('unexpected ocean route')
   out['routes'].append({'route_id':r['id'],'route_type':kind,'parameters':{'max_step_km':r['max_step_km']} if kind=='wgs84_geodesic' else {},'points':[{'ordinal':i,'endpoint_id':x} for i,x in enumerate(ids)],'evidence':{'source':'local-user-directed-overlay','overlay_sha256':overlay_sha}})
  definition['route_ids']=[r['id'] for r in local['routes']]+southern
  policies.append({'id':source_ocean['policy_id'],'kind':'ocean_fill','definition':definition,'evidence':{'execution_status':'local_user_authorized_overlay','original_neon_evidence':copy.deepcopy(source_ocean['evidence'])}})

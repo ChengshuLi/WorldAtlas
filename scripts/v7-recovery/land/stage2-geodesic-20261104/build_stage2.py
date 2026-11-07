@@ -51,16 +51,16 @@ def load_config(path):
  o=cfg['orchestration'];need(isinstance(o,dict) and set(o)=={'outer_config_sha256','orchestrator_sha256','derived_manifest','physical_lineage_report','provisional_only'} and type(o.get('provisional_only')) is bool and all(isinstance(o.get(k),str) and contracts.HEX.fullmatch(o[k]) for k in ('outer_config_sha256','orchestrator_sha256')),'missing fresh-orchestration provenance')
  need('prior_physical_report' not in cfg['inputs'] or o['provisional_only'],'prior physical report is provisional-only');validate_controls(cfg['controls']);return raw,cfg
 
-def build(config_path,work_dir,output_dir,resume=False):
+def build(config_path,work_dir,output_dir,resume=False,processing_started=None,orchestration_resumed=False):
  cp=Path(config_path).resolve();work=Path(work_dir).resolve();output=Path(output_dir).resolve();need(work.parent.is_dir() and output.parent.is_dir() and work!=output and not work.is_relative_to(output) and not output.is_relative_to(work),'invalid work/output')
  raw,cfg=load_config(cp);disjoint(cfg,cp,work,output)
  with checkpoints.exclusive_lock(work.parent/(work.name+'.lock')):
-  return _build(cp,work,output,resume,raw,cfg)
+  return _build(cp,work,output,resume,raw,cfg,processing_started,orchestration_resumed)
 
 def validate_resume_checkpoint(work,resume):
  if resume:need((work/'checkpoint.npz').is_file(),'partial core work has no checkpoint; inspect before retry')
 
-def _build(cp,work,output,resume,raw,cfg):
+def _build(cp,work,output,resume,raw,cfg,processing_started=None,orchestration_resumed=False):
  validate_resume_checkpoint(work,resume)
  start=time.monotonic();ctrl=cfg['controls'];guard=lambda:checkpoints.guard(work.parent,ctrl['minimum_free_bytes']);guard()
  need(not output.exists() and (work.is_dir() if resume else not work.exists()),'output exists or invalid resume work')
@@ -131,6 +131,8 @@ def _build(cp,work,output,resume,raw,cfg):
  provisional=cfg['orchestration']['provisional_only']
  report={'schema':'stage2-source-geodesic-report-v1','status':'stage2-provisional-only' if provisional else 'stage2-research-complete','publishable':False,'provisional_only':provisional,'orchestration':cfg['orchestration'],'config_sha256':hashlib.sha256(raw).hexdigest(),'grid':g,'decision_snapshot_sha256':pins['decision_snapshot'],'decision_revision':rev,'entity_revision':ent,'distance_policy':metric,'land_baseline_policy':land_policy,'ural_delta':writer['ural_delta'],'seed_report_sha256':pins['seed_report'],'resolution_report_sha256':pins['resolution_report'],'hint_report_sha256':pins['hint_report'],'inputs_sha256':pins,'categories':categories,'code_sha256':code,'dependency_sha256':source_code,'runtime':request['runtime'],'physical_coverage':coverage,'physical_lineage_report_sha256':cfg['orchestration']['physical_lineage_report']['sha256'],'physical_lineage_status':lineage['status'],'tile_verification':tilecheck,'certified_components':result['certified_count'],'exact_search_components':result['exact_count'],'exact_queries':result['exact_queries'],'ties':result['ties'],'checkpoint_sha256':verify_inputs.sha_file(work/'checkpoint.npz',guard),'output_rows_sha256':writer['rows_sha256'],'output_runs_sha256':writer['runs_sha256'],'elapsed_seconds':time.monotonic()-start,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'method':'WGS84 ellipsoidal minimum over physical component and selected mainland cell centers; bounded Ural delta land cells are overridden by cell-center side of the selected Ural divider; no other island overrides or water assignment','limitations':['Research only; selected source and component provenance require independent authentication.','The numerical bound guard is tested but not a formal proof for all floating-point operations.','Source-only hints are performance suggestions and never accepted without certificate or exact search.','The Ural delta override is limited to its recorded scope and snapshot geometry; the Caspian closure proof must be current for any later global snapshot.']}
 
+ report['processing_elapsed_seconds']=time.monotonic()-(processing_started if processing_started is not None else start)
+ report['processing_elapsed_scope']='resumed invocation only; prior work not measured' if resume or orchestration_resumed else ('fresh orchestration invocation' if processing_started is not None else 'core invocation only')
  with open(partial/'report.json','x') as f:json.dump(report,f,sort_keys=True,indent=2,allow_nan=False);f.write('\n');f.flush();os.fsync(f.fileno())
  guard();fd=os.open(partial,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  atomic_move.move_noreplace(partial,output)

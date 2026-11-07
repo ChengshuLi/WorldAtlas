@@ -3,7 +3,7 @@
 
 Output is research-only. Unselected or unsupported methods fail closed.
 """
-import argparse,hashlib,importlib.util,json,os,sys,shutil,tempfile,re
+import argparse,hashlib,importlib.util,json,os,sys,shutil,tempfile,re,time
 from pathlib import Path
 import decision_contract,writer,polygon_policy,polygon_resolution,mixed_claims,polygon_loader,polygon_source,entry_evidence,corroboration_bridge,bering_adapter,bering_resolver,bering_bridge,bering_profiler,bering_intersection
 HERE=Path(__file__).resolve().parent
@@ -83,6 +83,7 @@ def claims_for(compiled,snapshot,resolution):
  need(seen==set(compiled['affiliation_ids']),'unconsumed selected affiliation');return roots
 
 def run(config_path):
+ processing_started=time.perf_counter()
  with open(config_path,'rb') as f:cfg_bytes=f.read()
  cfg=json.loads(cfg_bytes);need(cfg.get('schema') in ('stage3-selected-mixed-request-v1','stage3-provisional-diagnostic-request-v1'),'bad request');diagnostic=cfg['schema']=='stage3-provisional-diagnostic-request-v1'
  if diagnostic:
@@ -173,12 +174,14 @@ def run(config_path):
  need(entry_evidence.resolve(snapshot,compiled,evidence_files)==evidence,'entry evidence changed')
  with open(config_path,'rb') as f:need(f.read()==cfg_bytes,'request changed')
  output={'schema':('stage3-provisional-diagnostic-land-report-v1' if diagnostic else 'stage3-selected-mixed-land-report-v1'),'status':('provisional-profiling-only-not-publishable' if diagnostic else 'research-awaiting-review'),'publishable':False,'provisional_only':diagnostic,'request_sha256':hashlib.sha256(cfg_bytes).hexdigest(),'decision_snapshot_sha256':req['snapshot']['sha256'],'baseline_validation':validation,'policy':compiled,'point_resolution':resolution,'polygon_resolution':poly_resolution,'polygon_source_custody':poly['source_pins'],'administrative_corroboration':corroboration,'bering_resolution':bering_resolution,'bering_proj_db_sha256':(bering_proj[0]['sha256'] if bering_proj else None),'bering_protected_witness_report_sha256':(protected_specs[0]['sha256'] if bering_resolution else None),'bering_component_extents':bering_extents,'polygon_component_extents':extents,'protected_witness_checks':protected_checks,'writer':result,'code_sha256':codes,'limitations':['Point identity labels corroborate the witness, not every cell of its physical component.','A hashed identity document alone does not establish an island claim.','Only supported selected point and polygon-component affiliations are applied; unselected decisions remain unresolved.', 'A containment decision checks cell centers rather than continuous geometry; a polygon contact alone does not prove whole-component identity. Per-feature inside counts may overlap and are not union counts.', 'A matched guideline excerpt supports a reviewed CRS assertion and does not prove every record datum.','Geographic membership evidence records a selected interpretation, not an executable selector; source hashes do not verify the cited section or interpretation.','Source origin, reuse and R2-readback notes are catalog assertions, not machine proof of rights or geographic truth; documentation URI is not a reuse-license grant.','NE label containment and coarse EPA ecoregion contact do not prove full island membership; operation bboxes do not establish exact applicability.','Water cells stay unassigned.','External disk use can race reserve checks.']}
+ output['input_lineage']={'schema':'water-selected-mixed-lineage-v1','request':{'path':str(Path(config_path).resolve()),'sha256':hashlib.sha256(cfg_bytes).hexdigest()},'mode':'explicit-provisional-diagnostic' if diagnostic else 'selected-research','snapshot_origin':{'kind':'direct','source_snapshot':req['snapshot']}}
  if diagnostic:
   output['diagnostic_provenance']={'stage2':stage2,'stage2_recovery_evidence':cfg['stage2_recovery_evidence'],'stage2_report_schema':report['schema'],'stage2_report_status':report['status'],'stage2_provisional_only':report['provisional_only'],'stage2_publishable':report['publishable'],'stage2_snapshot_source':base['source'],'list1_snapshot':req['snapshot'],'list1_snapshot_source':snapshot['source'],'list1_policy_original':snapshot['list1_policy'],'actual_baseline_pins':pins,'pending_inventory_complete':False,'pending_inventory_scope':'External pending-claims registry not independently verified; supplied known conflicts remain held.','profiling_standin':True}
   output['limitations'] += ['Provisional locally derived baseline, not an authenticated or selectable Neon state; boundary provenance is incomplete.', 'List 1 binding to this baseline is diagnostic only; original decision snapshot and policy remain unchanged.', ('A same-run provisional Stage 2 handoff binds the launcher and derived inputs.' if recovery.get('schema')=='stage2-fresh-provisional-handoff-v1' else 'The Stage 2 seed-code handoff was corrected after a failed first core launch; consult the bound recovery evidence.')]
  if regional:
   output['limitations']=[x for x in output['limitations'] if not x.startswith('Only supported selected point and polygon-component affiliations')]+['Selected source affiliations and a separate research-only regional rule are applied; other unselected decisions remain unresolved.']
   output['regional_island_rule']={'status':'research-profiling-standin' if regional['provenance']['profiling_standin'] else 'research-awaiting-review','provenance':regional['provenance'],'result':regional['regional_result'],'proposal_trace':regional['regional_proposal_trace'],'synthetic_affiliation_id':regional['synthetic_affiliation_id'],'synthetic_affiliation_statistics':stats.get(regional['synthetic_affiliation_id']),'limitation':'Withheld roots retain baseline codes; geographic source interpretations require review.'}
+ output['processing_elapsed_seconds']=time.perf_counter()-processing_started
  payload=(json.dumps(output,sort_keys=True,indent=2)+'\n').encode();need(shutil.disk_usage(out).free>=cfg['minimum_free_bytes']+len(payload)+(1<<20),'disk reserve reached before report');p=out/'report.json';tmp=None
  try:
   with tempfile.NamedTemporaryFile(dir=out,prefix='.report-',delete=False) as f:tmp=f.name;f.write(payload);f.flush();os.fsync(f.fileno())

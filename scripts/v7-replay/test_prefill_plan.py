@@ -114,6 +114,11 @@ class PrefillPlanTest(unittest.TestCase):
                 direct_config={**config,'rle_inputs':{'physical':rles['physical'],'land':direct}}
                 direct_plan=plans.assemble(direct_config,config_path,root,policy,policy_path,base/'direct-plan.json')
                 self.assertEqual(direct_plan['land_input_kind'],'direct-research')
+                with patch.object(plans.local_water_overlay,'land_snapshot_hash',return_value='e'*64), patch.object(plans,'validate_land_report') as verify_land:
+                    separated=plans.assemble(direct_config,config_path,root,policy,policy_path,base/'separated.json')
+                self.assertEqual(separated['decision_snapshot_sha256'],policy_hash)
+                self.assertEqual(separated['land_decision_snapshot_sha256'],'e'*64)
+                self.assertEqual(verify_land.call_args.args[4],'e'*64)
                 shifted={**land_config,'grid':{**land_config['grid'],'west':-179}}
                 lcp.write_text(json.dumps(shifted));shift_report={**report,'config_sha256':sha(lcp)};rp.write_text(json.dumps(shift_report))
                 shifted_input={**direct,'report_sha256':sha(rp)}
