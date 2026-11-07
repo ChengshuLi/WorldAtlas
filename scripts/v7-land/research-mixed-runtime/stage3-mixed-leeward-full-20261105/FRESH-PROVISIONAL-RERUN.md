@@ -37,3 +37,18 @@ partial destination and must be inspected before retry.
 
 Successful preparation or output is a profiling candidate, not an accepted
 Neon geography, an independently authenticated source, or a final map rerun.
+
+## V24 regional input custody
+
+The following consumed regional inputs were preserved at
+`worldatlas/sources/derived/v24-research/<sha256>.json` in R2 and as the
+corresponding `atlas.source_assets` records in the Neon research branch.
+Each R2 object passed full-byte readback, and each Neon JSON value matched the
+input JSON. These records are unverified research evidence, not accepted
+geography.
+
+- Mixed request: `v24-regional-request`, SHA-256 `4668cac041f0dee1257c95a9e60c46d34fff53ffb5ab0010ec3647e114d909d0`.
+- Point request: `v24-regional-point-request`, SHA-256 `b0751dc93eff424ebe440d794e33b2ca5b0e6677bfc5fee1807468044ed3f192`.
+- Local-derived policy: `v24-regional-policy`, SHA-256 `1cae6df25a1f33ff557a4d93c90c4fdc3724983a3268801ae9621fe3f757840d`.
+- Regional line: `v24-regional-lydekker-line`, SHA-256 `cbb4508245942a2586bf37279570b55c7b2382c15268b311c0c2ddf3d96dbcd2`.
+- Empty pending stand-in: `v24-regional-pending-standin`, SHA-256 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`. Its emptiness does not establish that there are no pending claims.
