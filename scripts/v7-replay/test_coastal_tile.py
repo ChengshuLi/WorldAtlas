@@ -18,9 +18,18 @@ class TileTest(unittest.TestCase):
    with gzip.open(out/'coastal-assignments.jsonl.gz','rt') as f:r=json.loads(f.readline())
    self.assertEqual([(z['start'],z['end'],z['code']) for z in r['spans']],[(3,4,1),(5,6,2),(7,8,2)])
    self.assertEqual(m['assigned_cells'],3);self.assertEqual(m['physical_water_cells'],4)
+   self.assertEqual(m['shore_index_sha256'],b.sha(b.coastal_shore_index.__file__))
    self.assertIn('partial',m['status']);self.assertEqual(m['core_cols'],[3,9])
    with self.assertRaises(FileExistsError):b.run(s,'a'*64,p,l,out,360,180,[3,9,89,90],180,{},chunk=2,allow_selected_research=True)
   for arr,old in zip((*p,*l),before):np.testing.assert_array_equal(arr,old)
+ def test_indexed_geometry_matches_reference_tile(self):
+  s,p,l=self.fixture();index=b.coastal_shore_index.CoastalShoreIndex(p,l,360,180)
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d)
+   for name,idx in (('reference',None),('indexed',index)):
+    b.run(s,'a'*64,p,l,root/name,360,180,[3,9,89,90],180,{'test':'pin'},allow_selected_research=True,shore_index=idx)
+   with gzip.open(root/'reference/coastal-assignments.jsonl.gz','rb') as a,gzip.open(root/'indexed/coastal-assignments.jsonl.gz','rb') as z:
+    self.assertEqual(a.read(),z.read())
  def test_input_mutation_fails_without_complete_manifest(self):
   s,p,l=self.fixture()
   with tempfile.TemporaryDirectory() as d:

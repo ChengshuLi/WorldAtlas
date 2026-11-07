@@ -51,3 +51,37 @@ wall time, excludes subsequent comparison work, and performs no downloads.
 Verification checks all tile inventories, input identities and artifact hashes,
 then compares every decompressed assignment byte. Results and environment are
 recorded in fresh output; source and reference artifacts are never modified.
+
+## Reuse sealed-batch shoreline geometry
+
+The coastal batch builds its exact four-neighbor coastal-land geometry once
+from the sealed physical/final-land inputs. The reusable index stores every
+coastal span, rather than expanding all global cell centers. Each crop then
+expands only its selected spans, preserving wrapped row/column order and the
+same land categories. Standalone tiles retain the reference crop extractor.
+This removes repeated physical-neighbor and land-category reconstruction for
+overlapping crops without changing nearest-distance or band classification.
+
+Tile/batch provenance pins the index helper. Batch reports record index span
+count, coastal-cell count, storage and construction time. Tile reports also
+separate shoreline extraction, nearest-index construction and classification
+times. No cache limit or memory watchdog is imposed; storage scales with the
+complete input's coastal spans.
+
+Tests compare every returned center/category/vector against the common
+reference extractor over400 randomized wrapped, full-width and polar crops,
+plus explicit seam/pole and invalid-input cases. A tile-level test compares
+all assignment bytes with and without the index.
+
+Complete local-input measurement: 546 tiles, 5,173,897,169 physical-water cells,
+and 2,116,758,035 decompressed assignment bytes reproduced exactly. Sequential
+isolated process wall time fell from 1,142.289 s to 791.148 s, including the
+50.194 s global-index construction: 1.444× faster, or 30.74% less time.
+All 244 replay tests passed. The index retains 31,598,879 spans representing
+49,401,908 coastal cells in 284,826,831 bytes of arrays.
+
+A separate complete coastal trial of exact midpoint rectangles reproduced all
+assignments but took 1,201.801 s, so that adapter was not adopted. This differs
+from the strong benefit for shared named seas. See the complete protocol,
+pins and timing breakdown in
+[`benchmarks/coastal-shore-index-20261107.json`](benchmarks/coastal-shore-index-20261107.json).

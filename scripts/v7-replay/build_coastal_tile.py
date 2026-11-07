@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 import coastal_core as core
 import coastal_rect
+import coastal_shore_index
 from decision_snapshot import read_snapshot
 import local_water_overlay
 from direct_lineage import validate_physical_report,validate_direct_land
@@ -35,21 +36,30 @@ def coast_crop_bounds(box,width,height,step,latitude_pad,longitude_pad):
     return xa,xb,max(0,y0-yp),min(height,y1+yp)
 
 
-def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chunk=5000,verify_inputs=None,allow_selected_research=False,longitude_pad_degrees=None,processing_started=None):
+def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chunk=5000,verify_inputs=None,allow_selected_research=False,longitude_pad_degrees=None,processing_started=None,shore_index=None):
     if processing_started is None:processing_started=time.perf_counter()
     x0,x1,y0,y1=box;step=360.0/width
     if not (0<=x0<x1<=width and 0<=y0<y1<=height) or chunk<=0:raise ValueError('invalid coastal tile')
     decision,pairs,tol,band,btol=core.policy(snapshot,allow_selected_research=allow_selected_research)
-    code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__),'accelerator':Path(coastal_rect.__file__)}
+    code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__),'accelerator':Path(coastal_rect.__file__),
+                'shore_index':Path(coastal_shore_index.__file__)}
     code_pins={name:sha(path) for name,path in code_paths.items()}
     crop=coast_crop_bounds(box,width,height,step,pad,pad if longitude_pad_degrees is None else longitude_pad_degrees)
-    try:edges=coastal_rect.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in pairs])
+    shore_started=time.perf_counter()
+    try:
+        if shore_index is None:
+            edges=coastal_rect.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in pairs])
+        else:
+            if (shore_index.width,shore_index.height)!=(width,height):raise ValueError('shore index grid mismatch')
+            edges=shore_index.centers_for_crop(crop,step,[p[1] for p in pairs])
     except ValueError as e:
         if str(e)!='no participant shorelines in crop':raise
         edges={'mids':np.empty((0,3))}
-    idx=core.index_present(edges,pairs)
+    shore_elapsed=time.perf_counter()-shore_started
+    index_started=time.perf_counter();idx=core.index_present(edges,pairs)
+    index_elapsed=time.perf_counter()-index_started
     create_directory_exclusive(out);out=Path(out);path=out/'coastal-assignments.jsonl.gz'
-    cells=spans=bounded=exact=water=0
+    cells=spans=bounded=exact=water=0;classification_elapsed=0.
     with create_gzip_text_exclusive(path,encoding='utf8') as f:
         for first_y in range(y0,y1,64):
             last_y=min(first_y+64,y1);water_grid=np.empty((last_y-first_y,x1-x0),dtype=bool)
@@ -58,7 +68,9 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
                 if np.any(~np.isin(p,[1,17])):raise ValueError('invalid physical tile values')
                 water_grid[i]=p==1
             water+=int(water_grid.sum())
+            classify_started=time.perf_counter()
             codes,stats=coastal_rect.classify(water_grid,x0,first_y,crop,width,height,step,pairs,tol,band,btol,idx)
+            classification_elapsed+=time.perf_counter()-classify_started
             bounded+=stats['bounded'];exact+=stats['exact']
             for i,y in enumerate(range(first_y,last_y)):
                 chosen=np.flatnonzero(water_grid[i]&(codes[i]!=0));chosen_codes=codes[i,chosen];chosen_x=chosen+x0;cells+=len(chosen);records=[]
@@ -82,6 +94,8 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
               'span_file':{'path':path.name,'sha256':sha(path)},'algorithm_sha256':code_pins['algorithm'],
               'core_sha256':code_pins['core'],'shore_sha256':code_pins['shore'],
               'geometry_sha256':code_pins['geometry'],'accelerator_sha256':code_pins['accelerator'],
+              'shore_index_sha256':code_pins['shore_index'],
+              'stage_processing_elapsed_seconds':{'shore_centers':shore_elapsed,'nearest_index':index_elapsed,'classification':classification_elapsed},
               'coverage':'candidate core only; independent global coverage and source semantics not yet verified'}
     manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'manifest.json',manifest,indent=2)

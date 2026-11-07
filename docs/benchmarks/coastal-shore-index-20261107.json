@@ -1,0 +1,93 @@
+{
+  "baseline": {
+    "builder_sha256": "7e3df693e5587cdd92e5e0848b7c22a0801c138a5d1914bb9a3480810c668b30",
+    "code_commit": "8cb9a36910bb565d311c9fdc8b9d0f0244f3d9de",
+    "engine": "per-crop reference shoreline extraction; relevant-class exact-minimum exclusion enabled",
+    "process_wall_seconds": 1142.2893947990378
+  },
+  "candidate": {
+    "builder_sha256": "8cc6fec09a8533cd40f8ee8bf2ee058910785926ea03896eea40511d54982645",
+    "code_commit": "690c94d32ac2624b30ff81a73c2bdc7516b4dc5f",
+    "engine": "global exact shoreline span index, original coastal rectangle classifier",
+    "process_wall_seconds": 791.1475870920112,
+    "shoreline_index": {
+      "coastal_cells": 49401908,
+      "method": "exact-global-4neighbor-land-spans-v1",
+      "processing_elapsed_seconds": 50.19412164198002,
+      "span_count": 31598879,
+      "storage_bytes": 284826831
+    },
+    "tile_substage_processing_seconds": {
+      "classification": 318.2890131500317,
+      "nearest_index": 22.59229126741411,
+      "shore_centers": 87.50563661922934
+    }
+  },
+  "date": "2026-11-07",
+  "environment": {
+    "PROJ_NETWORK": "OFF",
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "cpu_quota": null,
+    "logical_cpu_count": 9,
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+  },
+  "inputs": {
+    "grid": {
+      "height": 54614,
+      "width": 131072
+    },
+    "metadata_sha256": {
+      "land_report": "5d0a16f4ee6ead03a203efa6de5fe8ab0ca8275d04449364db300d339b486e85",
+      "physical_report": "08b9cfc1f165610fc4f8dc3a766777219af8c6ba3a8a53e03287912882b061b1"
+    },
+    "plan_sha256": "9f05c81085aa76be5432cdb7e339e9fd4e736ac36e14eb073e0cf3e4e036c0e3",
+    "sealed_input_sha256": {
+      "land_rows": "8922efb4b90021e36e5491ddf65ab1eaa7f6961dfc0f81fadfbfecc45f510674",
+      "land_runs": "c15da5eb03d7c938194ea056cdfaf092d90f18fa4ed604f42466951316ed0b20",
+      "physical_rows": "6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468",
+      "physical_runs": "1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7"
+    },
+    "snapshot_sha256": "2872d32290538bc9a9b2fd5fb1311930a6d8f04865ddd07d47b76e5fe9090981"
+  },
+  "limitations": [
+    "Single-run stage timings are not a new complete-pipeline timing.",
+    "Input/assignment equality verifies reproduction, not independent geographic correctness.",
+    "Research decision acceptance and publication gates are unchanged."
+  ],
+  "rejected_experiment": {
+    "engine": "exact midpoint rectangles for the coastal band",
+    "outcome": "all assignment bytes identical, but slower than the baseline; not adopted",
+    "process_wall_seconds": 1201.8006351339864
+  },
+  "schema": "worldatlas-complete-coastal-benchmark-v1",
+  "scope": "complete pinned coastal batch on already-local inputs, including interpreter startup and global index construction; comparison excluded",
+  "speedup": 1.4438385624074317,
+  "tests": {
+    "indexed_crop_cases": 400,
+    "replay_suite": 244,
+    "status": "passed"
+  },
+  "timing_protocol": "one complete run per variant, serial exclusive benchmark windows, same input plan and runtime; no interruption or download time",
+  "verification": {
+    "assigned_cells": 299283795,
+    "assignment_bytes": 2116758035,
+    "assignment_content_sha256": "89b7114f3d4b3d97333f6ee7fb435b423283659a8c83128d426c7a43c987f0fc",
+    "candidate_completion_sha256": "394d3e57d99e0d79bf213ed14cd445be637b602fe56f75b26b9dd7631c0752e8",
+    "physical_water_cells": 5173897169,
+    "reference_completion_sha256": "6a8a203ae571dbee35199c95386cc24595fbf5729a13822db7b8154d4ddb8a85",
+    "span_count": 13958332,
+    "status": "all-tile-assignment-bytes-identical",
+    "tile_count": 546
+  },
+  "wall_reduction_percent": 30.740179266813794
+}

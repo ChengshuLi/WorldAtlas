@@ -17,6 +17,8 @@ class BatchTest(unittest.TestCase):
  def test_end_to_end_two_tiles_and_single_completion(self):
   with mock.patch.object(b,'sealed_copy',wraps=b.sealed_copy) as copies:result=self.run_batch()
   self.assertEqual(copies.call_count,4);self.assertEqual(self.calls,2);self.assertEqual(len(result['tiles']),2);self.assertTrue((self.d/'batch/batch-complete.json').is_file());self.assertEqual(result['status'],'complete-research-not-published')
+  self.assertEqual(result['shoreline_index']['coastal_cells'],16)
+  self.assertGreaterEqual(result['shoreline_index']['processing_elapsed_seconds'],0)
   for x in result['tiles']:
    p=self.d/'batch'/('tile-%04d'%x['tile'])/'manifest.json';self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),x['manifest_sha256']);self.assertEqual(json.loads(p.read_bytes())['status'],'partial-unverified-research-not-published')
  def test_caller_timer_includes_preflight(self):
@@ -188,7 +190,10 @@ class BatchTest(unittest.TestCase):
    name='tile-%04d'%index
    self.assertEqual((clean/name/'coastal-assignments.jsonl.gz').read_bytes(),(resumed/name/'coastal-assignments.jsonl.gz').read_bytes())
    a=json.loads((clean/name/'manifest.json').read_bytes());c=json.loads((resumed/name/'manifest.json').read_bytes())
-   assigned+=a['assigned_cells'];a.pop('processing_elapsed_seconds');c.pop('processing_elapsed_seconds');self.assertEqual(a,c)
+   assigned+=a['assigned_cells']
+   for manifest in (a,c):
+    manifest.pop('processing_elapsed_seconds');manifest.pop('stage_processing_elapsed_seconds')
+   self.assertEqual(a,c)
   self.assertGreater(assigned,0)
  def test_sigkill_with_partial_tile_resumes_from_last_durable_tile(self):
   config={'snapshot':self.snapshot,'paths':{k:str(p) for k,p in self.paths.items()},'pins':self.pins,'plan':self.plan,'out':str(self.d/'killed')}

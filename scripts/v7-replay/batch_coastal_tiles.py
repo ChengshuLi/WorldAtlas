@@ -279,7 +279,8 @@ def merge_tiles(completed, recovered):
         old = completed.get(index)
         if old is not None:
             # Generation time may differ; all scientific output must agree.
-            semantic = lambda manifest: {k: v for k, v in manifest.items() if k != 'processing_elapsed_seconds'}
+            semantic = lambda manifest: {k: v for k, v in manifest.items()
+                                         if k not in ('processing_elapsed_seconds', 'stage_processing_elapsed_seconds')}
             if semantic(old[2]) != semantic(candidate[2]):
                 raise ValueError('conflicting coastal checkpoints for the same tile')
             if old[1]['manifest_sha256'] <= candidate[1]['manifest_sha256']:
@@ -298,7 +299,8 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
  names=('physical_rows','physical_runs','land_rows','land_runs')
  if set(paths)!=set(names) or set(pins)!=set(names):raise ValueError('four grid inputs required')
  if set(metadata_pins)!={'physical_report','land_report'} or any(not isinstance(v,str) or len(v)!=64 or any(c not in '0123456789abcdef' for c in v) for v in metadata_pins.values()):raise ValueError('two report SHA-256 pins required')
- code_paths={'algorithm':Path(tile.__file__),'core':Path(tile.core.__file__),'shore':Path(tile.core.shore.__file__),'geometry':Path(tile.core.shore.__file__),'accelerator':Path(tile.coastal_rect.__file__)};code_pins={k:sha(v) for k,v in code_paths.items()}
+ code_paths={'algorithm':Path(tile.__file__),'core':Path(tile.core.__file__),'shore':Path(tile.core.shore.__file__),'geometry':Path(tile.core.shore.__file__),'accelerator':Path(tile.coastal_rect.__file__),
+             'shore_index':Path(tile.coastal_shore_index.__file__)};code_pins={k:sha(v) for k,v in code_paths.items()}
  support_paths={'metadata':Path(pinned_coastal_metadata.__file__),'snapshot':Path(decision_snapshot.__file__),'land_lineage':Path(direct_lineage.__file__),'land_validator':Path(build_prefill_plan.__file__),'mixed_lineage':Path(selected_mixed_lineage.__file__),'overlay':Path(local_water_overlay.__file__),'output':Path(exclusive_outputs.__file__)};support_pins={k:sha(v) for k,v in support_paths.items()}
  identity={'snapshot_sha256':snapshot_sha,'plan_sha256':plan_sha,'grid':{'width':width,'height':height},'sealed_input_sha256':pins,'metadata_sha256':metadata_pins,'driver_sha256':CODE_SHA,'tile_code_sha256':code_pins,'support_code_sha256':support_pins}
  inputs={k+'_sha256':pins[k] for k in names};inputs.update({k+'_sha256':v for k,v in metadata_pins.items()})
@@ -318,6 +320,9 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
   for k in names:
    fd,n=sealed_copy(paths[k],pins[k]);used+=n;stack.callback(os.close,fd);sealed[k]=os.fdopen(os.dup(fd),'rb');stack.callback(sealed[k].close)
   physical=tile.open_grid(sealed['physical_rows'],sealed['physical_runs'],width,height);land=tile.open_grid(sealed['land_rows'],sealed['land_runs'],width,height)
+  shore_started=time.perf_counter()
+  shore_index=tile.coastal_shore_index.CoastalShoreIndex(physical,land,width,height)
+  shore_elapsed=time.perf_counter()-shore_started
   root=create_directory_exclusive(out);sync_directory(root.parent);manifests=[];attempt_id=uuid.uuid4().hex
   start={'schema':'worldatlas-coastal-batch-start-v1','identity':identity,'attempt_id':attempt_id,'prior_attempts':prior,'processing_elapsed_seconds':time.perf_counter()-processing_started}
   publish_record(root/'batch-start.json',start)
@@ -328,7 +333,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
     for name,digest in (('manifest.json',checkpoint['manifest_sha256']),('coastal-assignments.jsonl.gz',checkpoint['span_sha256'])):
      verified_copy(source/name,dest/name,digest)
    else:
-    manifest=tile.run(snapshot,snapshot_sha,physical,land,dest,width,height,box,entry['latitude_pad_degrees'],inputs,chunk=plan['chunk'],allow_selected_research=True,longitude_pad_degrees=entry['longitude_pad_degrees'])
+    manifest=tile.run(snapshot,snapshot_sha,physical,land,dest,width,height,box,entry['latitude_pad_degrees'],inputs,chunk=plan['chunk'],allow_selected_research=True,longitude_pad_degrees=entry['longitude_pad_degrees'],shore_index=shore_index)
    if any(manifest[k+'_sha256']!=v for k,v in code_pins.items()):raise ValueError('tile code pin changed within batch')
    check_code()
    for name in ('manifest.json','coastal-assignments.jsonl.gz'):
@@ -340,6 +345,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
    manifests.append({'tile':i,'box':box,'manifest_sha256':record['manifest_sha256']})
   check_metadata();check_code()
   result={'schema':'worldatlas-sealed-coastal-batch-v1','status':'complete-research-not-published',**identity,'sealed_input_bytes':used,'tiles':manifests,'checkpoint_identity_sha256':record_digest(identity),'batch_start_sha256':sha(root/'batch-start.json'),'resumed_tiles':len(completed),'limitations':['Tiles remain research candidates and require separate global coverage, source and geographic review.','Sealed input bytes do not establish the correctness or acceptance of their source or decision metadata.','On-disk code hashes are change indicators, not proof of already-imported Python module bytes.']}
+  result['shoreline_index']={'method':'exact-global-4neighbor-land-spans-v1','span_count':len(shore_index.starts),'coastal_cells':int(np.sum(shore_index.ends.astype(np.uint64)-shore_index.starts)),'storage_bytes':sum(a.nbytes for a in (shore_index.offsets,shore_index.starts,shore_index.ends,shore_index.codes)),'processing_elapsed_seconds':shore_elapsed}
   attempts=prior+[{'attempt_id':attempt_id,'processing_elapsed_seconds':time.perf_counter()-processing_started,'timing_complete':True}]
   result['timing_attempts']=attempts
   result['timing_complete']=all(x['timing_complete'] for x in attempts)
