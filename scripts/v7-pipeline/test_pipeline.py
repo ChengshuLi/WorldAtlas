@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import struct
 import subprocess
+import sys
 import zipfile
 import tempfile
 import threading
@@ -109,6 +110,58 @@ class Fixture(unittest.TestCase):
     def test_invalid_source_fails_before_any_processing(self):
         self.cfg['sources']['land_config']['sha256'] = '0' * 64
         with self.assertRaisesRegex(ValueError, 'source pin mismatch'):
+            self.make()
+        self.assertFalse((self.root / 'run').exists())
+
+    def regional_template(self, value):
+        template = pipeline.write(self.inputs / 'regional.json', value)
+        self.cfg['sources']['regional_template'] = pipeline.pin(template)
+
+    def test_active_proj_database_outside_input_root_and_offline_children(self):
+        import pyproj
+        database = pipeline.pin(Path(pyproj.datadir.get_data_dir()) / 'proj.db')
+        self.assertFalse(Path(database['path']).is_relative_to(self.root))
+        self.regional_template({'bering_proj_db': database})
+        original_network = pyproj.network.is_network_enabled()
+        self.addCleanup(pyproj.network.set_network_enabled, original_network)
+        pyproj.network.set_network_enabled(True)
+        with patch.dict(os.environ, {'PROJ_NETWORK': 'ON'}):
+            runner = self.make()
+            self.assertEqual(os.environ['PROJ_NETWORK'], 'OFF')
+            self.assertFalse(pyproj.network.is_network_enabled())
+            self.assertEqual(runner.identity['runtime']['proj_database'], database)
+            self.assertFalse(runner.identity['runtime']['proj_network_enabled'])
+            self.assertIn(database, runner.source_pins)
+            result = subprocess.run([sys.executable, '-c',
+                'import os, pyproj; assert os.environ["PROJ_NETWORK"] == "OFF"; '
+                'assert not pyproj.network.is_network_enabled()'],
+                env=runner.env, check=True, capture_output=True)
+            self.assertEqual(result.returncode, 0)
+
+    def test_another_proj_database_path_is_rejected_even_with_correct_bytes(self):
+        import pyproj
+        database = Path(pyproj.datadir.get_data_dir()) / 'proj.db'
+        copy = self.inputs / 'other-proj.db'
+        copy.write_bytes(database.read_bytes())
+        self.regional_template({'bering_proj_db': pipeline.pin(copy)})
+        with self.assertRaisesRegex(ValueError, 'does not match active runtime database'):
+            self.make()
+        self.assertFalse((self.root / 'run').exists())
+
+    def test_proj_exception_does_not_allow_other_external_sources(self):
+        import pyproj
+        database = pipeline.pin(Path(pyproj.datadir.get_data_dir()) / 'proj.db')
+        self.regional_template({'bering_source_files': [database]})
+        with self.assertRaisesRegex(ValueError, 'outside input root'):
+            self.make()
+        self.assertFalse((self.root / 'run').exists())
+
+    def test_selected_proj_hash_is_verified_before_processing(self):
+        import pyproj
+        database = pipeline.pin(Path(pyproj.datadir.get_data_dir()) / 'proj.db')
+        database['sha256'] = '0' * 64
+        self.regional_template({'bering_proj_db': database})
+        with self.assertRaisesRegex(ValueError, 'hash mismatch'):
             self.make()
         self.assertFalse((self.root / 'run').exists())
 

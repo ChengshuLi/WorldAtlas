@@ -16,6 +16,11 @@ approve geography, authenticate Neon, or publish a map.
 Use one Python installation with NumPy, SciPy, PyProj, GDAL/OGR and PyArrow.
 `g++`, OpenSSL headers/libraries, `ogr2ogr` and `gdal_rasterize` must also be
 installed. The runner checks module/executable availability before processing.
+It enforces `PROJ_NETWORK=OFF` in the runner and child stages, disables pyproj's
+network API, and records the active local `proj.db` path and SHA-256 in runtime
+identity. A regional template's `bering_proj_db` must match that exact active
+database. This runtime file alone may be outside `input_root`; other selected
+source files must remain inside it.
 If a selected Python installation needs an existing dependency directory on
 `PYTHONPATH`, export that directory when launching; child stages inherit it. For R2 source
 staging, configure the installed official Wrangler entrypoint and authenticate

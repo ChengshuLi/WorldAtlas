@@ -39,6 +39,13 @@ def validate_runtime():
     missing.extend(name for name in ('g++', 'ogr2ogr', 'gdal_rasterize') if shutil.which(name) is None)
     if missing:
         raise ValueError('runtime prerequisites missing from this interpreter/PATH: ' + ', '.join(missing))
+    # All selected coordinate operations use the pinned local database. Never
+    # fetch a grid implicitly, including when pyproj was imported by a caller.
+    os.environ['PROJ_NETWORK'] = 'OFF'
+    import pyproj
+    pyproj.network.set_network_enabled(False)
+    if pyproj.network.is_network_enabled():
+        raise ValueError('PROJ network must be disabled')
 
 
 def runtime_identity():
@@ -51,6 +58,8 @@ def runtime_identity():
             'binary_sha256': sha(Path(sys.executable).resolve()),
             'numpy': numpy.__version__, 'scipy': scipy.__version__,
             'pyproj': pyproj.__version__, 'proj': pyproj.proj_version_str,
+            'proj_database': pin(Path(pyproj.datadir.get_data_dir()) / 'proj.db'),
+            'proj_network_enabled': pyproj.network.is_network_enabled(),
             'gdal': gdal.VersionInfo('RELEASE_NAME'), 'pyarrow': pyarrow.__version__,
             'tools': {name: pin(shutil.which(name)) for name in ('g++', 'ogr2ogr', 'gdal_rasterize')}}
 
@@ -109,6 +118,7 @@ class Pipeline:
         if resume and not (self.out / 'run-identity.json').is_file():
             raise ValueError('run has no supported checkpoint identity; preserve it and start a fresh run')
         validate_runtime()
+        self.runtime = runtime_identity()
         self.resume = resume
         self.source_pins = []
         self.allow_provisional = allow_provisional
@@ -126,8 +136,8 @@ class Pipeline:
         self.identity = {'schema': 'worldatlas-end-to-end-run-identity-v1',
             'request': self.config_pin, 'source_pins': self.source_pins,
             'code': self.code, 'scripts_root': str(SCRIPTS), 'output': str(self.out),
-            'runtime': runtime_identity(),
-            'runtime_paths': {key: os.environ.get(key) for key in ('PYTHONPATH', 'PROJ_DATA', 'PROJ_LIB')}}
+            'runtime': self.runtime,
+            'runtime_paths': {key: os.environ.get(key) for key in ('PYTHONPATH', 'PROJ_DATA', 'PROJ_LIB', 'PROJ_NETWORK')}}
         if not resume:
             self.out.mkdir(mode=0o700)
         self.run_lock = RunLock(self.out / 'run.lock')
@@ -160,6 +170,7 @@ class Pipeline:
 
         try:
             self.env = os.environ.copy()
+            self.env['PROJ_NETWORK'] = 'OFF'
             local_modules = [str(SCRIPTS), str(SCRIPTS / REPLAY), str(SCRIPTS / OCEAN)]
             self.env['PYTHONPATH'] = os.pathsep.join(local_modules +
                 ([self.env['PYTHONPATH']] if self.env.get('PYTHONPATH') else []))
@@ -213,12 +224,15 @@ class Pipeline:
         Historical physical/component/code paths in regional templates are not
         input sources and are deliberately not adopted as reusable outputs.
         """
-        def add(spec):
+        def add(spec, *, proj_database=False):
             if not isinstance(spec, dict) or not {'path', 'sha256'} <= spec.keys():
                 raise ValueError('invalid selected source pin')
             expected = {'path': str(Path(spec['path']).resolve()), 'sha256': spec['sha256']}
             verify_pins([expected])
-            if not Path(expected['path']).is_relative_to(self.root):
+            if proj_database:
+                if expected != self.runtime['proj_database']:
+                    raise ValueError('selected PROJ database does not match active runtime database')
+            elif not Path(expected['path']).is_relative_to(self.root):
                 raise ValueError('selected source file outside input root')
             if expected not in self.source_pins:
                 self.source_pins.append(expected)
@@ -229,12 +243,14 @@ class Pipeline:
             add(spec)
         template = read(self.sources['regional_template'])
         for key in ('polygon_source_files', 'evidence_source_files', 'corroboration_source_files',
-                    'bering_source_files', 'bering_proj_db'):
+                    'bering_source_files'):
             values = template.get(key, [])
             if isinstance(values, dict):
                 values = [values]
             for spec in values:
                 add(spec)
+        if template.get('bering_proj_db'):
+            add(template['bering_proj_db'], proj_database=True)
         if template.get('point_request'):
             add(template['point_request'])
             for spec in read(template['point_request']['path']).get('source_files', []):
