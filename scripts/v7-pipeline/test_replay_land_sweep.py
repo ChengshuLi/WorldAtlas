@@ -10,6 +10,7 @@ from unittest.mock import patch
 import numpy as np
 
 from replay_land_sweep import replay
+import replay_land_sweep as driver
 from stage_land_sweep_inputs import INPUTS, METADATA, STREAMS
 
 
@@ -69,6 +70,8 @@ class ReplayTest(unittest.TestCase):
             result=replay(self.stage,self.root/'out')
         self.assertEqual(result['coverage']['land_cells'],7)
         self.assertEqual(result['status'],'complete-global-preflight-identical')
+        self.assertIn('started_at_utc',result['phase_utc']['preflight'])
+        self.assertIn('completed_at_utc',result)
 
     def test_fresh_source_search_and_writer_match_all_expected_bytes(self):
         with patch('subprocess.Popen',side_effect=AssertionError('process launch')),patch('ural_delta.compile_rule',return_value=None):
@@ -76,6 +79,28 @@ class ReplayTest(unittest.TestCase):
         self.assertEqual(result['status'],'complete-source-bound-search-and-land-streams-identical')
         self.assertEqual((self.root/'out/codes.u8').read_bytes(),bytes([17]))
         self.assertTrue((self.root/'out/checkpoint.npz').is_file())
+
+    def test_search_inputs_are_rechecked_after_writing(self):
+        original=driver.land_writer.write_land_stream
+        def write_then_change(*args,**kwargs):
+            result=original(*args,**kwargs)
+            (self.stage/'decision_snapshot').write_bytes(b'changed')
+            return result
+        with patch('ural_delta.compile_rule',return_value=None),patch.object(driver.land_writer,'write_land_stream',side_effect=write_then_change):
+            with self.assertRaisesRegex(ValueError,'search input changed'):
+                replay(self.stage,self.root/'out',search=True)
+        self.assertFalse((self.root/'out/comparison.json').exists())
+
+    def test_staging_identity_is_byte_bound_until_completion(self):
+        original=driver.preflight.validate
+        def check_then_change(*args,**kwargs):
+            result=original(*args,**kwargs)
+            path=self.stage/'plan.json';path.write_text(path.read_text()+' ')
+            return result
+        with patch.object(driver.preflight,'validate',side_effect=check_then_change):
+            with self.assertRaisesRegex(ValueError,'staging plan changed'):
+                replay(self.stage,self.root/'out')
+        self.assertFalse((self.root/'out/comparison.json').exists())
 
     def test_corrupt_staged_stream_is_rejected_before_output_creation(self):
         (self.stage/'fresh-stage2-seed-runs').write_bytes(b'changed')

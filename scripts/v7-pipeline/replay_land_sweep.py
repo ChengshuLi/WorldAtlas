@@ -8,6 +8,7 @@ hint, upper bound, certificate, stopping condition or assignment.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -26,7 +27,7 @@ import engine
 import preflight
 import ural_delta
 import verify_inputs
-from write_land_stream import write_land_stream
+import write_land_stream as land_writer
 
 
 def staged_inputs(directory):
@@ -52,6 +53,10 @@ def staged_inputs(directory):
 
 
 def replay(directory, out, *, search=False):
+    started_at=datetime.now(timezone.utc).isoformat()
+    for module in (baseline_runner,build_seed_tiles,build_stage2,engine,preflight,ural_delta,verify_inputs,land_writer):
+        if Path(module.__file__).resolve()!=STAGE2/(module.__name__+'.py'):
+            raise ImportError('land replay module resolved outside its source: '+module.__name__)
     directory=directory.resolve(strict=True)
     plan,config,report,paths=staged_inputs(directory)
     roots=np.fromfile(paths['hint_roots'],dtype='<u4');hints=np.fromfile(paths['hint_codes'],dtype='u1')
@@ -60,24 +65,28 @@ def replay(directory, out, *, search=False):
     seed_roots=report['physical_coverage']['seed_roots']
     code={name:digest(STAGE2/name) for name in build_stage2.CODE_NAMES}
     identity={'schema':'worldatlas-land-evidence-replay-v1','staging_plan_sha256':digest(directory/'plan.json'),
-        'code_sha256':code,'python':sys.version,'platform':list(os.uname()),'search':search,
+        'code_sha256':code,'driver_sha256':digest(Path(__file__)),'started_at_utc':started_at,'python':sys.version,'platform':list(os.uname()),'search':search,
         'scope':'coverage and optional source-bound WGS84 search/writer; no fresh source construction or geography acceptance'}
     create_directory_exclusive(out);write_json_exclusive(out/'invocation.json',identity,indent=2)
-    timings={}
+    timings={};phase_utc={}
     def timed(name, function):
+        phase_start=datetime.now(timezone.utc).isoformat()
         started=time.perf_counter();result=function();timings[name]=time.perf_counter()-started
+        phase_utc[name]={'started_at_utc':phase_start,'completed_at_utc':datetime.now(timezone.utc).isoformat()}
         with (out/'progress.jsonl').open('a') as stream:
-            stream.write(json.dumps({'phase':name,'status':'complete','seconds':timings[name]})+'\n')
+            stream.write(json.dumps({'phase':name,'status':'complete','seconds':timings[name],**phase_utc[name]})+'\n')
         return result
     streams=[paths[name] for name in ('component_rows','component_runs','physical_rows','physical_runs','seed_rows','seed_runs')]
     coverage=timed('preflight',lambda:preflight.validate(grid['width'],grid['height'],*streams,roots,seed_roots,
         required_codes=map(int,report['categories']),seed_rules=seed['seed_rules'],
         expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts']))
     if coverage!=report['physical_coverage']:raise ValueError('complete coverage differs')
-    result={**identity,'status':'complete-global-preflight-identical','coverage':coverage,'timings':timings}
+    result={**identity,'status':'complete-global-preflight-identical','coverage':coverage,'timings':timings,'phase_utc':phase_utc}
     write_json_exclusive(out/'coverage.json',result,indent=2)
     if search:
-        extra=json.loads((directory/'search-inputs.json').read_bytes())
+        extra_path=directory/'search-inputs.json';extra_hash=digest(extra_path)
+        extra=json.loads(extra_path.read_bytes())
+        result['search_inputs_sha256']=extra_hash
         if extra['parent_plan_sha256']!=identity['staging_plan_sha256']:raise ValueError('search staging identity differs')
         for name,pin in extra['inputs'].items():
             path=Path(pin['path']).resolve(strict=True)
@@ -106,7 +115,7 @@ def replay(directory, out, *, search=False):
         rootfile,codefile=out/'roots.u32le',out/'codes.u8'
         decisions['roots'].astype('<u4').tofile(rootfile);decisions['codes'].astype('u1').tofile(codefile)
         delta=ural_delta.compile_rule(json.loads(paths['decision_snapshot'].read_bytes()),report['categories'],grid)
-        writer=timed('writer',lambda:write_land_stream(grid['width'],grid['height'],*streams,rootfile,codefile,seed_roots,
+        writer=timed('writer',lambda:land_writer.write_land_stream(grid['width'],grid['height'],*streams,rootfile,codefile,seed_roots,
             out/'candidate',disk_reserve_bytes=controls['minimum_free_bytes'],delta_rule=delta))
         if writer.get('ural_delta')!=report.get('ural_delta'):raise ValueError('Ural cell-side populations differ')
         for name in ('rows','runs'):
@@ -116,7 +125,17 @@ def replay(directory, out, *, search=False):
             'certified_components':decisions['certified_count'],'exact_components':decisions['exact_count'],
             'exact_queries':decisions['exact_queries'],'ties':decisions['ties']})
     staged_inputs(directory)
-    if code!={name:digest(STAGE2/name) for name in code}:raise ValueError('land replay code changed')
+    if digest(directory/'plan.json')!=identity['staging_plan_sha256']:
+        raise ValueError('staging plan changed during replay')
+    if search:
+        if digest(extra_path)!=extra_hash:raise ValueError('search staging identity changed')
+        for name,pin in extra['inputs'].items():
+            path=Path(pin['path'])
+            if path.stat().st_size!=pin['size_bytes'] or digest(path)!=pin['sha256']:
+                raise ValueError('search input changed during replay: '+name)
+    if code!={name:digest(STAGE2/name) for name in code} or digest(Path(__file__))!=identity['driver_sha256']:
+        raise ValueError('land replay code changed')
+    result['completed_at_utc']=datetime.now(timezone.utc).isoformat()
     write_json_exclusive(out/'comparison.json',result,indent=2)
     return result
 

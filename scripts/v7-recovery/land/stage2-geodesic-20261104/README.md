@@ -122,8 +122,10 @@ unchanged. No process, subprocess or compiler step is added.
 `test_land_stream_speed.py` checks per-row I/O, first/last/zero root IDs and a
 complete randomized stream against independently constructed expected bytes.
 The existing writer, seed-population and Ural tests cover malformed inputs and
-boundary failures. Full-world timing has not been measured for this change;
-`benchmark_land.py` remains the complete-mainland comparison when a completed
+boundary failures. The [complete preserved-source kernel replay](../../../../docs/benchmarks/land-kernel-replay-20261108.md)
+now reproduces every global land output byte, with fresh source-bound decisions.
+A fresh raw-source end-to-end build and controlled before/after timing ratio
+remain unmeasured. `benchmark_land.py` remains the complete-mainland comparison when a completed
 reference and an uncontended timing slot are available. For a local, in-process
 coverage/writer-only check, use `scripts/v7-pipeline/benchmark_land_sweep.py` with
 `--reference-run /path/to/completed-run --out /path/to/new-comparison`. It checks

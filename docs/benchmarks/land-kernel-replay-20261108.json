@@ -1,0 +1,336 @@
+{
+  "catalog_sha256": "8fe2bdf1a9d3bdf8d37614ca4e02489cc0e211773acfc6020b431c0874a9b600",
+  "certified_components": 456669,
+  "core_config_sha256": "93cdad000f2aacdfad00f17ce35273e551b050c0700fa965675b33e4a0ec9b20",
+  "coverage": {
+    "land_cells": 1984469039,
+    "nonseed_roots": 457889,
+    "seed_category_cells": {
+      "17": 327539159,
+      "18": 655193162,
+      "19": 168565998,
+      "20": 317651225,
+      "21": 198034747,
+      "22": 89669510
+    },
+    "seed_codes": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "seed_roots": [
+      459650,
+      650207,
+      9774639,
+      12357770
+    ]
+  },
+  "cpu_affinity_count": 9,
+  "driver_commit": "210ca4d9673149f1f4f0e7541e0adbe5a5d1bf45",
+  "driver_sha256": "1ae50bf69497ad83f3537371e360ee458f0a66187acbffcde4f491af0f247e05",
+  "exact_components": 1220,
+  "exact_queries": 14280,
+  "executed_code_sha256": {
+    "atomic_move.py": "056e59f9efe8df553e5a10f66678a3631dd41b67ab31440f3640aafad402f5f5",
+    "baseline_runner.py": "5e342afbf81b55e05c8fc7443e498db09872a5e23ea57517eee06e23345e919d",
+    "build_stage2.py": "207087ff66c829251c8d053cb9cfa6011866adb8660b2cdf146a54cc4c0d2b22",
+    "certificate.py": "d68264f95bac6d03c6c2bb407549ce2e9756c5530ba6f54efab0360338d339dc",
+    "checkpoints.py": "2ca856c8b3ee464ea85cee2251da078eb2fb3e1f7863730055a2e94dd18c8904",
+    "contracts.py": "e35a6885012bb8fe5cade4e3862fa4f643d103c821469b33505dedc855b17646",
+    "engine.py": "898b62fcf70dcf50472f262bcc1e2c6ffd03228dea010864e6ecea4e056210f0",
+    "exact_index.py": "f610381ca1d7d0faace2023a628a4c1a1c2f3150a7f5fe9517e1cedadb3639a0",
+    "point_prototype.py": "2aeb691e213fc91e82c3db52098bda119237a6656443e18c6bd4c2684c72b367",
+    "preflight.py": "0935fc84bf22d5288f249ab4688eb63528c0aef5d27a1fa76307c49bdedeb88d",
+    "run_pair.py": "366c401f4f684ecccbac6a9886e9e426e801c4775692cdce3f50a172dc921a56",
+    "ural_delta.py": "9ccfbae6f4ee98c8b74de03c902d367c7065537f8b41e67d9da27052b3dfbd96",
+    "v7-land/mainland-witness-prototype/resolve_mainland.py": "ffb3e7f84e7394492734d8d7729eadee3a4c8c75f8ac9ae5ea1e558f7a94c807",
+    "v7-land/named-identity-prototype/named_identity.py": "43baa61a07bfcc322adb63ba2f3bc9174d44c12fc4184dd7449cc6283c8b5ee0",
+    "v7-land/point-component-prototype/resolve.py": "1d99659e2f1294f8bde89e5c11a2d8b84aee0e299290dced4a319081c78f0bce",
+    "verify_inputs.py": "59a034aa685da01f21fd6b53d09d50e05731c53302075f664733bd6231b264a9",
+    "verify_physical_lineage.py": "817f608604a60511587532341573dcbc0dafd3aedcc67fc2242661d798283d1a",
+    "verify_seed_index.cpp": "73d3cff8cec55d15d446c6fa3430aef2d545cae18e64374670888ed54112c8e2",
+    "write_land_stream.py": "c2490c61d4fbb14739b86cd726dde6687b955fc26538070242f41bef4f8d886c"
+  },
+  "grid": {
+    "height": 54614,
+    "north": 90,
+    "step": 0.00274658203125,
+    "west": -180,
+    "width": 131072
+  },
+  "limits": [
+    "Preserved-evidence kernel replay; no raw-source reconstruction, full end-to-end build or geographic acceptance.",
+    "Not a controlled before/after speed ratio. Staging and input/final hash passes are outside the measured phase sum.",
+    "UTC phase anchors were not recorded for this run; recorded_at_utc is the evidence recording time.",
+    "Other heavy workers were coordinated to hold performance runs during this replay."
+  ],
+  "phase_seconds": {
+    "preflight": 24.08386733900079,
+    "seed-tiles": 9.962888045,
+    "source-bound-search": 37.0101764989995,
+    "spatial-index": 2.733470794000823,
+    "verify-representatives": 0.799455926000519,
+    "writer": 30.390109181000298
+  },
+  "python": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]",
+  "recorded_at_utc": "2026-11-08T04:20:41Z",
+  "reference_report_sha256": "1c5d00801121d1c6ffd58f3b50033dd9e8daf8e1659075e027b67c1fc56e6a6f",
+  "schema": "worldatlas-complete-land-kernel-replay-evidence-v1",
+  "search_input_pins": {
+    "decision_snapshot": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "sources/derived/v24-research/52499015a7eea0d3dafa0b7485d321e48654743f6a765ef89c3c6267df301ea4.json",
+      "sha256": "52499015a7eea0d3dafa0b7485d321e48654743f6a765ef89c3c6267df301ea4",
+      "size_bytes": 3775179
+    },
+    "representatives": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/20074608ba042cdc30166a4f88ee25d895f4fb7d915143fc932e99464f35d838/representatives.u32le",
+      "sha256": "20074608ba042cdc30166a4f88ee25d895f4fb7d915143fc932e99464f35d838",
+      "size_bytes": 1389800
+    },
+    "tile_manifest": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/9d57fd99231ea00f24d497bbd93044a58dc435512602e182df8b6341f9ec2e32/manifest.txt",
+      "sha256": "9d57fd99231ea00f24d497bbd93044a58dc435512602e182df8b6341f9ec2e32",
+      "size_bytes": 167285
+    }
+  },
+  "source_pins": {
+    "fresh-components-manifest": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/physical-components/sha256/e661edd03e0c9adbd71cff5a6fe0b70b8762f36f0aa4a4e9e3b51f73153a989b/manifest.json",
+      "sha256": "e661edd03e0c9adbd71cff5a6fe0b70b8762f36f0aa4a4e9e3b51f73153a989b",
+      "size_bytes": 1586,
+      "source_id": "fresh-components-manifest"
+    },
+    "fresh-components-report": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/physical-components/sha256/df86ff70b5e677deebb3034d9ddd3048fda11afcc99efee0a471d5168d5c9429/report.json",
+      "sha256": "df86ff70b5e677deebb3034d9ddd3048fda11afcc99efee0a471d5168d5c9429",
+      "size_bytes": 2023,
+      "source_id": "fresh-components-report"
+    },
+    "fresh-components-rows": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/physical-components/sha256/4beda178bfc7beeb2d30cbdfa5901a48f9a41bb82c69e534d4c8cddfdb09aea7/rows.u32le",
+      "sha256": "4beda178bfc7beeb2d30cbdfa5901a48f9a41bb82c69e534d4c8cddfdb09aea7",
+      "size_bytes": 218460,
+      "source_id": "fresh-components-rows"
+    },
+    "fresh-components-runs": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/physical-components/sha256/18d7f36fa22c5728662cdd40487bf684108da030c074fec6d22ac378d0df0961/runs.u32le",
+      "sha256": "18d7f36fa22c5728662cdd40487bf684108da030c074fec6d22ac378d0df0961",
+      "size_bytes": 159785880,
+      "source_id": "fresh-components-runs"
+    },
+    "fresh-physical-report": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/physical-components/sha256/1f5dcded8433167bee355912918b3bc8733f4f964b4a44d449d3901b4241cd05/report.json",
+      "sha256": "1f5dcded8433167bee355912918b3bc8733f4f964b4a44d449d3901b4241cd05",
+      "size_bytes": 1072,
+      "source_id": "fresh-physical-report"
+    },
+    "fresh-physical-rows": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/physical-components/sha256/6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468/rows.u32le",
+      "sha256": "6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468",
+      "size_bytes": 218460,
+      "source_id": "fresh-physical-rows"
+    },
+    "fresh-physical-runs": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/physical-components/sha256/1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7/runs.u32le",
+      "sha256": "1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7",
+      "size_bytes": 213457608,
+      "source_id": "fresh-physical-runs"
+    },
+    "fresh-stage2-core-config": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/93cdad000f2aacdfad00f17ce35273e551b050c0700fa965675b33e4a0ec9b20/config.json",
+      "sha256": "93cdad000f2aacdfad00f17ce35273e551b050c0700fa965675b33e4a0ec9b20",
+      "size_bytes": 9186,
+      "source_id": "fresh-stage2-core-config"
+    },
+    "fresh-stage2-derived-manifest": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/4dd1c0732eaf2f5c643ab33aa6e930043b4a07a55a67650c20375fb2ceed7701/manifest.json",
+      "sha256": "4dd1c0732eaf2f5c643ab33aa6e930043b4a07a55a67650c20375fb2ceed7701",
+      "size_bytes": 5812,
+      "source_id": "fresh-stage2-derived-manifest"
+    },
+    "fresh-stage2-hint-roots": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/3bb107bb490f48b1195a3bd34dede6781cd8d4e8f7aa5148830dbc0d26e6d063/roots.u32le",
+      "sha256": "3bb107bb490f48b1195a3bd34dede6781cd8d4e8f7aa5148830dbc0d26e6d063",
+      "size_bytes": 1831556,
+      "source_id": "fresh-stage2-hint-roots"
+    },
+    "fresh-stage2-hints": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/1cb57e0cfc2a6f7f2af69e864287308d276d9c170a3426faf4e7d9fa18143f3b/hints.u8",
+      "sha256": "1cb57e0cfc2a6f7f2af69e864287308d276d9c170a3426faf4e7d9fa18143f3b",
+      "size_bytes": 457889,
+      "source_id": "fresh-stage2-hints"
+    },
+    "fresh-stage2-hints-report": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/f26ed3e498d291ec170973d498243a8c0e9029b0d7b433060a7667eed5e0be4a/report.json",
+      "sha256": "f26ed3e498d291ec170973d498243a8c0e9029b0d7b433060a7667eed5e0be4a",
+      "size_bytes": 2822,
+      "source_id": "fresh-stage2-hints-report"
+    },
+    "fresh-stage2-land-report": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/1c5d00801121d1c6ffd58f3b50033dd9e8daf8e1659075e027b67c1fc56e6a6f/report.json",
+      "sha256": "1c5d00801121d1c6ffd58f3b50033dd9e8daf8e1659075e027b67c1fc56e6a6f",
+      "size_bytes": 12212,
+      "source_id": "fresh-stage2-land-report"
+    },
+    "fresh-stage2-land-rows": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/8922efb4b90021e36e5491ddf65ab1eaa7f6961dfc0f81fadfbfecc45f510674/rows.u32le",
+      "sha256": "8922efb4b90021e36e5491ddf65ab1eaa7f6961dfc0f81fadfbfecc45f510674",
+      "size_bytes": 218460,
+      "source_id": "fresh-stage2-land-rows"
+    },
+    "fresh-stage2-land-runs": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/dc19c358ce976b201c9861685948ca1ddae61635b10d4136c4ff19b9cb50310b/runs.u32le",
+      "sha256": "dc19c358ce976b201c9861685948ca1ddae61635b10d4136c4ff19b9cb50310b",
+      "size_bytes": 213549360,
+      "source_id": "fresh-stage2-land-runs"
+    },
+    "fresh-stage2-seed-report": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/9c3e2605eb702323e3c013c23b0868af686aeb45dffa6cde726f5e66fad0e9cc/report.json",
+      "sha256": "9c3e2605eb702323e3c013c23b0868af686aeb45dffa6cde726f5e66fad0e9cc",
+      "size_bytes": 136021,
+      "source_id": "fresh-stage2-seed-report"
+    },
+    "fresh-stage2-seed-rows": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/18358e4b343ea1ba0a812439ce43d155b6e337cb177a53e41a6e95bb195f08e9/rows.u32le",
+      "sha256": "18358e4b343ea1ba0a812439ce43d155b6e337cb177a53e41a6e95bb195f08e9",
+      "size_bytes": 218460,
+      "source_id": "fresh-stage2-seed-rows"
+    },
+    "fresh-stage2-seed-runs": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/a3a13634e58d413bc84251cb435a70025db845c1d74b4302e98e93e4eb6d2ec1/runs.u32le",
+      "sha256": "a3a13634e58d413bc84251cb435a70025db845c1d74b4302e98e93e4eb6d2ec1",
+      "size_bytes": 162554584,
+      "source_id": "fresh-stage2-seed-runs"
+    },
+    "fresh-stage2-writer-report": {
+      "r2_bucket": "worldatlas",
+      "r2_key": "evidence/full-raw-rerun/20261107/land-stage2/sha256/5067a3c837a1f3715993f59f87b0b0e7244a2a2849092393e173116472f08c43/writer-report.json",
+      "sha256": "5067a3c837a1f3715993f59f87b0b0e7244a2a2849092393e173116472f08c43",
+      "size_bytes": 1133,
+      "source_id": "fresh-stage2-writer-report"
+    }
+  },
+  "status": "complete-source-bound-search-and-land-streams-identical",
+  "sum_measured_phase_seconds": 104.97996778400193,
+  "ties": [
+    {
+      "codes": [
+        18,
+        19
+      ],
+      "minimum_m": 356.06438515937873,
+      "position": 254153
+    },
+    {
+      "codes": [
+        18,
+        19
+      ],
+      "minimum_m": 360.52071650768454,
+      "position": 271283
+    },
+    {
+      "codes": [
+        18,
+        19
+      ],
+      "minimum_m": 370.1962110403588,
+      "position": 299337
+    },
+    {
+      "codes": [
+        17,
+        18
+      ],
+      "minimum_m": 526.1518259491063,
+      "position": 340317
+    },
+    {
+      "codes": [
+        17,
+        18
+      ],
+      "minimum_m": 527.696221308315,
+      "position": 340831
+    },
+    {
+      "codes": [
+        17,
+        18
+      ],
+      "minimum_m": 527.7553594003565,
+      "position": 340867
+    }
+  ],
+  "verification": [
+    "All staged source bytes and configuration/report bindings checked before and after replay.",
+    "Fresh Python seed-tile manifest matched the pinned complete manifest.",
+    "Every representative was checked against an actual regenerated seed cell.",
+    "All source-bound WGS84 queries were rerun before reading expected output labels.",
+    "All global output row/run bytes, coverage populations, ties and Ural populations matched."
+  ],
+  "writer": {
+    "assigned_roots": 457889,
+    "height": 54614,
+    "land_cells": 1984469039,
+    "mainland_roots": [
+      459650,
+      650207,
+      9774639,
+      12357770
+    ],
+    "rows_sha256": "8922efb4b90021e36e5491ddf65ab1eaa7f6961dfc0f81fadfbfecc45f510674",
+    "runs": 26693670,
+    "runs_sha256": "dc19c358ce976b201c9861685948ca1ddae61635b10d4136c4ff19b9cb50310b",
+    "schema": "streamed-land-rle-research-v1",
+    "status": "complete",
+    "ural_delta": {
+      "asia_code": 18,
+      "boundary_id": "ural_kara_coast_to_caspian",
+      "boundary_sha256": "746e6a85b05e40994e451e49e7df6333b8816dfe1d6624d9c20f9c669e953b32",
+      "counts": {
+        "asia_to_europe": 5,
+        "europe_to_asia": 52,
+        "land_centers": 43575,
+        "other_land_labels": 0
+      },
+      "europe_code": 19,
+      "revision": "v2-land-mainland-boundary-draft-1",
+      "route_id": "europe_caspian_closure_v1",
+      "route_sha256": "6ee86cf4108b8622e01a4dd0be0b4ae19e809b4e04d8cceb25547425258ac62a",
+      "schema": "ural-delta-cell-center-side-v1",
+      "scope_bounds": [
+        51.3,
+        46.65,
+        52.2,
+        47.24
+      ],
+      "status": "applied-to-land-cell-centers"
+    },
+    "width": 131072
+  }
+}
