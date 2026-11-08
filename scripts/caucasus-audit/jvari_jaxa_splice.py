@@ -1,7 +1,0 @@
-import json
-from shapely.geometry import LineString,shape,mapping
-from shapely.ops import substring
-from geodesic_line import GeodesicLine
-src=LineString(json.load(open('caucasus-anapa-abin-combined-candidate.json'))['coordinates']);alt=shape(json.load(open('jvari-jaxa-downstream-interface-research.json'))['features'][0]['geometry']);g=GeodesicLine(list(src.coords));ref=g.closest((44.45332,42.50435))['station_m'];cross=src.intersection(alt);points=[p for p in getattr(cross,'geoms',[cross]) if p.geom_type=='Point'];pairs=sorted([(g.closest((p.x,p.y))['station_m'],p) for p in points],key=lambda x:x[0]);before=[p for p in pairs if p[0]<ref];after=[p for p in pairs if p[0]>ref];(s0,a),(s1,b)=before[-1],after[0];i,j=src.project(a),src.project(b);u,v=alt.project(a),alt.project(b);pre=substring(src,0,i);old=substring(src,i,j);cut=substring(alt,u,v);post=substring(src,j,src.length);full=LineString(list(pre.coords)+list(cut.coords)[1:]+list(post.coords)[1:]);print('source pass-relative joins m',round(s0-ref),round(s1-ref),'old length m',round(GeodesicLine(list(old.coords)).length),'candidate length m',round(GeodesicLine(list(cut.coords)).length),'simple',cut.is_simple,full.is_simple,'endpoints preserved',full.coords[0]==src.coords[0] and full.coords[-1]==src.coords[-1]);
-if not full.is_simple:raise ValueError('invalid splice')
-for f,g in [('jvari-current-cut-research.json',old),('jvari-jaxa-cut-research.json',cut),('jvari-jaxa-full-research.json',full)]:json.dump(mapping(g),open(f,'w'))
