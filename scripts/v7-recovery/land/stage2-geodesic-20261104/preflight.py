@@ -14,7 +14,7 @@ def validate(width,height,component_rows,component_runs,physical_rows,physical_r
    if y%128==0:guard()
    its=[iter(_components(streams[0].next(),width)),iter(_full(streams[1].next(),width,{1,17},'physical')),iter(_full(streams[2].next(),width,{0,17,18,19,20,21,22},'mainland'))];cur=[next(i) for i in its];x=0
    while x<width:
-    end=min(t[1] for t in cur);root,phys,seed=(t[2] for t in cur)
+    end=min(cur[0][1],cur[1][1],cur[2][1]);root,phys,seed=cur[0][2],cur[1][2],cur[2][2]
     if (root is not None)!=(phys==17):raise ValueError('physical/component mismatch at row '+str(y))
     if root is None:
      if seed:raise ValueError('seed outside physical land')

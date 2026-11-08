@@ -187,11 +187,6 @@ def write_land_stream(width, height, component_rows, component_runs,
         seen_f.truncate(seen_bytes)
         seen = mmap.mmap(seen_f.fileno(), seen_bytes) if seen_bytes else None
         if seen is not None: maps.append(seen)
-        def find(root):
-            i = positions.get(root)
-            if i is None:
-                raise ValueError('component has no assignment: ' + str(root))
-            return i
         rows_out = open(out / 'rows.u32le', 'wb'); files.append(rows_out)
         runs_out = open(out / 'runs.u32le', 'wb'); files.append(runs_out)
         rh, dh = hashlib.sha256(), hashlib.sha256()
@@ -210,7 +205,7 @@ def write_land_stream(width, height, component_rows, component_runs,
             delta_row_active = delta_range is not None and delta_range[2] <= y < delta_range[3]
             lat = delta_rule['grid']['north'] - (y + 0.5) * delta_rule['grid']['step'] if delta_row_active else None
             while x < width:
-                end = min(v[1] for v in current)
+                end = min(current[0][1], current[1][1], current[2][1])
                 # Only split the small Ural scope into cell-sized spans.
                 # All other rows and columns retain the original run stream.
                 if delta_row_active:
@@ -219,7 +214,7 @@ def write_land_stream(width, height, component_rows, component_runs,
                         end = dx0
                     elif dx0 <= x < dx1:
                         end = min(end, x + 1)
-                root, physical, seed = (v[2] for v in current)
+                root, physical, seed = current[0][2], current[1][2], current[2][2]
                 if (root is not None) != (physical == 17):
                     raise ValueError('physical/component coverage mismatch at row ' + str(y))
                 if root is None:
@@ -230,7 +225,10 @@ def write_land_stream(width, height, component_rows, component_runs,
                     seeds_seen.add(root); code = seed
                 else:
                     if seed != 0: raise ValueError('mainland seed overlaps non-mainland component')
-                    i = find(root); code = cm[i]
+                    i = positions.get(root)
+                    if i is None:
+                        raise ValueError('component has no assignment: ' + str(root))
+                    code = cm[i]
                     byte, bit = divmod(i, 8)
                     if not seen[byte] & (1 << bit):
                         seen[byte] |= 1 << bit; seen_count += 1
