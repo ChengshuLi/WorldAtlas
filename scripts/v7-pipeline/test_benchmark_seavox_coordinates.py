@@ -91,7 +91,8 @@ class BatchParityTests(unittest.TestCase):
         archive = self.root / 'archive.zip'
         archive.write_bytes(b'pinned archive fixture')
         repo = Path(__file__).resolve().parents[2]
-        names = ('extract_seavox_features', 'extract_seavox_feature', 'decision_snapshot', 'seavox_properties')
+        names = ('extract_seavox_features', 'extract_seavox_feature', 'decision_snapshot', 'seavox_properties',
+                 'seavox_coordinates')
         modules = {name: SimpleNamespace(__file__=str(repo / 'scripts/v7-replay' / (name + '.py')))
                    for name in names}
         out = self.root / 'paired'
@@ -107,6 +108,26 @@ class BatchParityTests(unittest.TestCase):
         calls = modules['extract_seavox_features'].run.call_args_list
         self.assertEqual([call.kwargs['scalar_coordinates'] for call in calls], [True, False])
         self.assertEqual(set(result['timings']), {'scalar-reference', 'arrow-candidate'})
+        for timing in result['timings'].values():
+            self.assertTrue(timing['started_at_utc'].endswith('+00:00'))
+            self.assertGreaterEqual(timing['ended_at_utc'], timing['started_at_utc'])
+
+    def test_cached_converter_outside_selected_checkout_prevents_report(self):
+        archive = self.root / 'archive.zip'
+        archive.write_bytes(b'pinned archive fixture')
+        repo = Path(__file__).resolve().parents[2]
+        names = ('extract_seavox_features', 'extract_seavox_feature', 'decision_snapshot', 'seavox_properties',
+                 'seavox_coordinates')
+        modules = {name: SimpleNamespace(__file__=str(repo / 'scripts/v7-replay' / (name + '.py')))
+                   for name in names}
+        modules['seavox_coordinates'].__file__ = str(self.root / 'other-checkout/seavox_coordinates.py')
+        modules['extract_seavox_features'].run = Mock(return_value={'synthetic': 'producer'})
+        out = self.root / 'wrong-cached-module'
+        with patch.object(b.importlib, 'import_module', return_value=modules['extract_seavox_features']), \
+             patch.dict(b.sys.modules, modules), patch.object(b, 'compare_batches', return_value={'status': 'exact'}):
+            with self.assertRaisesRegex(ValueError, 'outside.*seavox_coordinates'):
+                b.benchmark(archive, b.digest(archive), self.root, self.policy, self.policy_sha, out, repo)
+        self.assertFalse((out / 'report.json').exists())
 
 
 if __name__ == '__main__':

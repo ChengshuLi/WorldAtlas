@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Sequential, complete SeaVoX extraction A/B with exact feature/provenance QA."""
 import argparse
+from datetime import datetime, timezone
 import importlib
 import json
 import re
@@ -93,12 +94,14 @@ def benchmark(archive, archive_sha256, root, policy, policy_sha256, out, code_ro
             raise ValueError('benchmark module resolved outside the selected checkout: ' + name)
     timings = {}
     for mode in ('scalar-reference', 'arrow-candidate'):
+        started_utc = datetime.now(timezone.utc).isoformat()
         started = time.perf_counter()
         with stage_scratch(str(scratch)):
             result = producer.run(archive, root, policy, policy_sha256, out / mode,
                 allow_unverified=True, allow_draft=True, work_root=scratch,
                 scalar_coordinates=mode == 'scalar-reference')
-        timings[mode] = {'in_process_wall_seconds': time.perf_counter() - started, 'producer': result}
+        timings[mode] = {'in_process_wall_seconds': time.perf_counter() - started, 'producer': result,
+                        'started_at_utc': started_utc, 'ended_at_utc': datetime.now(timezone.utc).isoformat()}
     if digest(archive) != archive_sha256 or digest(policy) != policy_sha256:
         raise ValueError('benchmark source changed')
     if any(digest(code_root / 'scripts/v7-replay' / name) != value
@@ -107,6 +110,15 @@ def benchmark(archive, archive_sha256, root, policy, policy_sha256, out, code_ro
     if (digest(Path(__file__)) != invocation['benchmark_sha256']
             or digest(code_root / 'scripts/exclusive_outputs.py') != invocation['exclusive_outputs_sha256']):
         raise ValueError('benchmark/output helper changed')
+    # Deferred imports must also come from this checkout. In particular, a
+    # cached array converter must not run while receipts hash a different file.
+    for filename in sources:
+        name = Path(filename).stem
+        module = sys.modules.get(name)
+        if ((name == 'seavox_coordinates' and module is None)
+                or (module is not None and Path(module.__file__).resolve()
+                    != code_root / 'scripts/v7-replay' / filename)):
+            raise ValueError('benchmark module resolved outside the selected checkout: ' + name)
     comparison = compare_batches(out / 'scalar-reference', out / 'arrow-candidate', policy, policy_sha256, archive_sha256)
     result = {**invocation, 'timings': timings, 'comparison': comparison}
     write_json_exclusive(out / 'report.json', result, indent=2)

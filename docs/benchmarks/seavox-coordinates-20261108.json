@@ -1,20 +1,22 @@
 {
   "archive_bytes": 71306274,
   "archive_sha256": "78a7983940aa73989642f2b95f9261c07fc234bf7f8cd14e0dff96bb90ce7e0a",
-  "benchmark_sha256": "63b23c6e65bc64853d482de5b05dc7b92f7a0062406241c58e88e06bc1136b24",
+  "benchmark_sha256": "00b8e373cb2cfb5dd39974448f9461b9f90a24141cbda0407ea42c4200146edd",
   "candidate": {
+    "ended_at_utc": "2026-11-08T04:21:52.614483+00:00",
     "gdal_version": "GDAL 3.10.3, released 2025/04/01",
     "hash_certified_features": 92,
     "method": "whole-feature-in-process-arrow-decimal128-fixed15",
     "ogr_fallbacks": 0,
     "phases_seconds": {
-      "archive_materialization": 0.6887408589991537,
-      "archive_validation": 0.04734721000022546,
-      "feature_serialization": 4.248292194999522,
-      "geometry_binding": 4.4287000491749495e-05,
-      "ogr_selection_and_json_decode": 26.702697090000584
+      "archive_materialization": 0.6707856339999125,
+      "archive_validation": 0.045362692999333376,
+      "feature_serialization": 4.36203416600074,
+      "geometry_binding": 4.625000110536348e-05,
+      "ogr_selection_and_json_decode": 26.411965473998862
     },
-    "wall_seconds": 32.34765348600013
+    "started_at_utc": "2026-11-08T04:21:20.534713+00:00",
+    "wall_seconds": 32.07973687399863
   },
   "code_sha256": {
     "scripts/v7-replay/decision_snapshot.py": "0beb0f5558ef7daeee7c829ce5c30558ec7892b573b90c98b0b41af041a97b21",
@@ -31,6 +33,30 @@
   },
   "date": "2026-11-08",
   "decision_snapshot_sha256": "fe75aa08958215046d942518cd77e9f4cdaef3c07d01e9cf82057ad5cece3217",
+  "earlier_shared_load_trial": {
+    "benchmark_sha256": "63b23c6e65bc64853d482de5b05dc7b92f7a0062406241c58e88e06bc1136b24",
+    "candidate_wall_seconds": 32.34765348600013,
+    "comparison": {
+      "decision_count": 92,
+      "feature_bytes": 182644857,
+      "status": "all-selected-feature-bytes-and-provenance-identical"
+    },
+    "limitation": "Non-isolated; this larger apparent reduction is not the primary timing result.",
+    "observed_wall_reduction_fraction": 0.20227903279332837,
+    "raw_comparison_report_sha256": "f02eb89b3fc0d4c83c24b7ed7da5998dbed42288bc070e4d242d6bb960d26e0f",
+    "reference_wall_seconds": 40.55008557600013,
+    "workload_context": {
+      "concurrent_workload": "One complete Overture shard6 source-staging then in-process paired producer trial; independent worker on same9CPU host.",
+      "isolation": "not isolated",
+      "load_average_at_start": [
+        1.00048828125,
+        0.54296875,
+        0.369140625
+      ],
+      "logical_cpu_count": 9,
+      "started_at_utc": "2026-11-08T04:14:43.749233+00:00"
+    }
+  },
   "exclusive_outputs_sha256": "45280f05bba1560f8e738fc21b3a1e48bdfdcb0094e207f81e59fe3ebd1ae8e6",
   "features": [
     {
@@ -679,44 +705,48 @@
     }
   ],
   "limitations": [
-    "One paired trial, baseline first; host was shared with an independent physical shard6 workload. Timing is non-isolated.",
+    "One separate paired timing trial, baseline first, with other workers doing code work only by coordination. No end-to-end pipeline speedup is claimed.",
     "Sources were already local and exact size/hash verified; acquisition and comparison are outside the measured producer intervals.",
     "This measures complete SeaVoX extraction, not the coast/basin/prefill/ocean stages or complete pipeline wall time.",
     "Earlier per-ring prototypes were rejected after complete-source timing regressions; only whole-feature batching is proposed."
   ],
-  "observed_wall_reduction_fraction": 0.20227903279332837,
-  "raw_comparison_report_sha256": "f02eb89b3fc0d4c83c24b7ed7da5998dbed42288bc070e4d242d6bb960d26e0f",
+  "observed_wall_reduction_fraction": 0.08638311942752419,
+  "post_measurement_validation": "An untimed cached-module origin guard was added after measurement. Every measured extraction/conversion producer source hash is unchanged; the new guard has a wrong-checkout regression test.",
+  "published_benchmark_sha256": "66c6ae0ebeb26c6a86ef3ea97df8a2a5047fc35e1109cb0d4d4f1126a39525d4",
+  "raw_comparison_report_sha256": "c5cd18eb87ca6af52b54aa85bff9d48fc8d9ecc1f0ca70ac48b5cc45d6e55688",
   "reference": {
+    "ended_at_utc": "2026-11-08T04:21:20.534690+00:00",
     "gdal_version": "GDAL 3.10.3, released 2025/04/01",
     "hash_certified_features": 92,
     "method": "original-scalar-fixed15",
     "ogr_fallbacks": 0,
     "phases_seconds": {
-      "archive_materialization": 1.288884663999852,
-      "archive_validation": 0.046423347001109505,
-      "feature_serialization": 4.713892255000246,
-      "geometry_binding": 3.867799932777416e-05,
-      "ogr_selection_and_json_decode": 33.74324329599949
+      "archive_materialization": 0.6667771890006406,
+      "archive_validation": 0.0482624369997211,
+      "feature_serialization": 4.220555834999686,
+      "geometry_binding": 3.595400085032452e-05,
+      "ogr_selection_and_json_decode": 29.54694928600111
     },
-    "wall_seconds": 40.55008557600013
+    "started_at_utc": "2026-11-08T04:20:45.421768+00:00",
+    "wall_seconds": 35.112898585999574
   },
   "schema": "worldatlas-complete-seavox-coordinate-comparison-v1",
   "scientific_provenance_hash_format": "SHA256 of UTF-8 JSON with sorted keys, compact separators, ensure_ascii=false, allow_nan=false; only processing_elapsed_seconds removed.",
   "scope": "Complete selected92-feature extraction batches, sequential and in-process, followed by exact feature-byte and scientific-provenance comparison. Not an end-to-end pipeline timing.",
   "tests": {
-    "focused": 35,
-    "pipeline_integration": 75,
+    "focused": 36,
+    "pipeline_integration": 76,
     "status": "passed"
   },
   "workload_context": {
-    "concurrent_workload": "One complete Overture shard6 source-staging then in-process paired producer trial; independent worker on same9CPU host.",
-    "isolation": "not isolated",
+    "concurrent_workload": "Other workers performing code review/development only; land replay finished and physical full32 held until this pair completes.",
+    "isolation": "exclusive performance measurement by worker coordination",
     "load_average_at_start": [
-      1.00048828125,
-      0.54296875,
-      0.369140625
+      0.32666015625,
+      0.59619140625,
+      0.47216796875
     ],
     "logical_cpu_count": 9,
-    "started_at_utc": "2026-11-08T04:14:43.749233+00:00"
+    "started_at_utc": "2026-11-08T04:20:45.303936+00:00"
   }
 }

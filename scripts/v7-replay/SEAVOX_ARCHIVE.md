@@ -27,11 +27,11 @@ existing `--input-root` and fresh `--out`. Timing excludes source acquisition
 and the subsequent exact comparison. Record any concurrent shared-machine work;
 a complete extraction comparison is not an end-to-end pipeline timing claim.
 
-The [complete 92-feature comparison](../../docs/benchmarks/seavox-coordinates-20261108.json)
-observed 40.55s scalar versus 32.35s batched, with all 182,644,857 feature bytes
-and scientific provenance identical and no OGR fallbacks. This was one paired
-trial sharing the host with a physical-stage workload; its approximately 20%
-reduction is not an isolated or complete-pipeline speedup measurement.
+The separate [complete 92-feature comparison](../../docs/benchmarks/seavox-coordinates-20261108.json)
+measured 35.11s scalar versus 32.08s batched, with all 182,644,857 feature bytes
+and scientific provenance identical and no OGR fallbacks. This approximately
+8.6% observed reduction is one paired extraction trial, not a complete-pipeline
+timing. The earlier shared-load result is retained and labeled in the evidence.
 
 ## Selected archive and comparison evidence (2026-11-03)
 
