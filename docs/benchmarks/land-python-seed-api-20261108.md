@@ -33,12 +33,12 @@ noncanonical names and occupied dangling output symlinks. Runtime tests forbid
 process launches and ctypes bridges. All old reviewed producer freezes remain
 unchanged, so source changes do not silently acquire reviewed status.
 
-Complete-world parity and isolated serial/parallel timing for this new seed
-producer and verifier are **pending** the physical worker's measurement release.
-The reusable `prepare_seed_raster_replay.py` and `benchmark_seed_raster.py` tools
-record source/code pins and exact UTC intervals, compare all seed output hashes
-and populations, and never launch the whole user-owned pipeline. No new seed
-speed ratio, final-land artifact or end-to-end result is claimed here.
+Complete-world preserved-source parity and an isolated serial/parallel pair
+have now passed: 42.604 s serial versus 10.267 s with nine threads, with exact
+full seed streams/populations and all 2,139 tiles independently verified.
+See [exact receipts and limits](land-python-api-pairs-20261108.md).
+The reusable tools never launch the whole user-owned pipeline. No final-land
+artifact or end-to-end result is claimed.
 
 Entire raster strips are omitted only when NO selected component interval
 in the strip depends on ANY polygon. Whole-component/unselected intervals

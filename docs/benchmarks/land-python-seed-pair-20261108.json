@@ -1,0 +1,195 @@
+{
+  "schema": "worldatlas-seed-raster-api-pair-v1",
+  "driver_sha256": "98779e396c8e4c72f4f5cfa0ba4f777efae39d8ea4f634d2640f8362f9696fbd",
+  "staged_plan_sha256": "653aa47c70a35ac78668b5221e0a54c2221b266d6264462e1f0d91f71e707a66",
+  "recovered_report_sha256": "b3977c8e94c1d4c73b0a26b4e9b6474d685e459182f8abbb12cb7cf49ae5a8c4",
+  "code_sha256": {
+    "build_seed.py": "1600dc513a0889658963d3e5737f2490ba8de0f363a2910555f5b7111e87569b",
+    "seed_runtime.py": "d3ae7c6cada77a2c06b4b940a5478077d77d794d8596f193f19c599516d06c63"
+  },
+  "workers": [
+    1,
+    9
+  ],
+  "config": {
+    "schema": "direct-region-seed-research-v1",
+    "grid": {
+      "height": 54614,
+      "north": 90,
+      "step": 0.00274658203125,
+      "west": -180,
+      "width": 131072,
+      "crs": "EPSG:4326"
+    },
+    "component_rows": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-land-sweep-evidence-20261108/fresh-components-rows",
+      "sha256": "4beda178bfc7beeb2d30cbdfa5901a48f9a41bb82c69e534d4c8cddfdb09aea7"
+    },
+    "component_runs": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-land-sweep-evidence-20261108/fresh-components-runs",
+      "sha256": "18d7f36fa22c5728662cdd40487bf684108da030c074fec6d22ac378d0df0961"
+    },
+    "regions": [
+      {
+        "id": "europe_mainland_region_v1",
+        "geometry": {
+          "path": "/workspace/scratch/127991fc8b8e/worldatlas-seed-region-replay-20261108/regions/ed6f84c7d154b88921599e9229947a132b2fe48d4549b462ac9ccd7b8449d10a.geojson",
+          "sha256": "412d7579077df4d9acbac543db5a20c03faa52d85055102165f806029035f9b9"
+        },
+        "witnesses": [
+          {
+            "lon": 2.35,
+            "lat": 48.85,
+            "inside": true
+          },
+          {
+            "lon": 116.4,
+            "lat": 39.9,
+            "inside": false
+          },
+          {
+            "lon": 37.62,
+            "lat": 55.75,
+            "inside": true
+          },
+          {
+            "lon": 21.01,
+            "lat": 52.23,
+            "inside": true
+          },
+          {
+            "lon": 77.21,
+            "lat": 28.61,
+            "inside": false
+          },
+          {
+            "lon": 106.91,
+            "lat": 47.92,
+            "inside": false
+          }
+        ]
+      },
+      {
+        "id": "north_america_mainland_region_v1",
+        "geometry": {
+          "path": "/workspace/scratch/127991fc8b8e/worldatlas-seed-region-replay-20261108/regions/2d3b3aeb44cc790c6d9525cccf123c2cf32f2ddbe7d13f87b30ce4d30623695b.geojson",
+          "sha256": "cb9dadc9fa518f89788ae66d537a4a1f2c177908aaa36d3ffa243039c599aa5a"
+        },
+        "witnesses": [
+          {
+            "lon": -79.4,
+            "lat": 9.0,
+            "inside": true
+          },
+          {
+            "lon": -99.13,
+            "lat": 19.43,
+            "inside": true
+          },
+          {
+            "lon": -149.9,
+            "lat": 61.2,
+            "inside": true
+          },
+          {
+            "lon": -74.08,
+            "lat": 4.6,
+            "inside": false
+          },
+          {
+            "lon": -47.88,
+            "lat": -15.79,
+            "inside": false
+          },
+          {
+            "lon": -70.67,
+            "lat": -33.45,
+            "inside": false
+          }
+        ]
+      }
+    ],
+    "rules": [
+      {
+        "component_id": 9774639,
+        "region_id": null,
+        "inside_code": 17,
+        "outside_code": 17
+      },
+      {
+        "component_id": 459650,
+        "region_id": "north_america_mainland_region_v1",
+        "inside_code": 20,
+        "outside_code": 21
+      },
+      {
+        "component_id": 12357770,
+        "region_id": null,
+        "inside_code": 22,
+        "outside_code": 22
+      },
+      {
+        "component_id": 650207,
+        "region_id": "europe_mainland_region_v1",
+        "inside_code": 19,
+        "outside_code": 18
+      }
+    ],
+    "evidence": [
+      {
+        "path": "/workspace/scratch/127991fc8b8e/worldatlas-seed-region-replay-20261108/report.json",
+        "sha256": "b3977c8e94c1d4c73b0a26b4e9b6474d685e459182f8abbb12cb7cf49ae5a8c4"
+      }
+    ],
+    "strip_rows": 64,
+    "reserve_bytes": 0
+  },
+  "started_at_utc": "2026-11-08T06:51:56.771868+00:00",
+  "tile_identity": {
+    "directory": "/workspace/scratch/127991fc8b8e/worldatlas-land-replay-global-20261108/seed-tiles",
+    "manifest_sha256": "9d57fd99231ea00f24d497bbd93044a58dc435512602e182df8b6341f9ec2e32",
+    "verifier_source_sha256": "51381b03b07fb7b42e6e5e3b469e159814bb1129b62bb449500152e9beeae02d"
+  },
+  "status": "complete-seed-streams-and-populations-exact",
+  "publishable": false,
+  "results": [
+    {
+      "variant": "serial",
+      "workers": 1,
+      "elapsed_seconds": 42.60397046300204,
+      "started_at_utc": "2026-11-08T06:51:56.773085+00:00",
+      "finished_at_utc": "2026-11-08T06:52:39.377083+00:00",
+      "outputs_sha256": {
+        "rows": "18358e4b343ea1ba0a812439ce43d155b6e337cb177a53e41a6e95bb195f08e9",
+        "runs": "a3a13634e58d413bc84251cb435a70025db845c1d74b4302e98e93e4eb6d2ec1"
+      },
+      "report_sha256": "6ca73dc1a37b2d4c8009f2e0900f8d555e4362959cc3e90c6746cb3b34bfe49c"
+    },
+    {
+      "variant": "parallel",
+      "workers": 9,
+      "elapsed_seconds": 10.266616532000626,
+      "started_at_utc": "2026-11-08T06:52:39.377559+00:00",
+      "finished_at_utc": "2026-11-08T06:52:49.644195+00:00",
+      "outputs_sha256": {
+        "rows": "18358e4b343ea1ba0a812439ce43d155b6e337cb177a53e41a6e95bb195f08e9",
+        "runs": "a3a13634e58d413bc84251cb435a70025db845c1d74b4302e98e93e4eb6d2ec1"
+      },
+      "report_sha256": "08e17b7211faafe1c394cb741de531f61e1f42777424d8cf6f73d320fb8b1c4c"
+    }
+  ],
+  "tile_verification": {
+    "status": "verified",
+    "tiles": 2139,
+    "tile_records": 11844679,
+    "elapsed_seconds": 1.5648188179984572,
+    "started_at_utc": "2026-11-08T06:52:49.645392+00:00",
+    "completed_at_utc": "2026-11-08T06:52:51.210222+00:00"
+  },
+  "serial_over_parallel": 4.149757647050243,
+  "limitations": [
+    "One serial-first pair; cache order is not balanced.",
+    "This times Python-API seed rasterization/composition only, not an entire land pipeline.",
+    "Archived expected outputs and reports are used only after each fresh build."
+  ]
+}

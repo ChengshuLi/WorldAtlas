@@ -157,8 +157,10 @@ never compiles or starts a helper. Checkpoint identity pins the verifier's
 Python source instead of a binary. This intentionally prevents resuming a
 checkpoint authenticated under the retired verifier implementation.
 
-Complete-world parity and timing for the new Python seed producer and verifier
-are pending the exclusive measurement slot. Tiny fixtures cover different
+Complete-world preserved-source seed parity and tile verification passed. The
+serial/nine-thread pair measured 42.604 s/10.267 s with exact streams and all
+populations, plus all 2,139 tiles independently verified. See
+[receipts and limits](../../../../docs/benchmarks/land-python-api-pairs-20261108.md). Tiny fixtures cover different
 nonbinary steps, strip sizes, concurrency, root IDs zero/UINT32_MAX, arbitrary
 rules, empty rows, exact-center vertices, malformed streams and dangling output
 symlinks. This is not a new full-pipeline acceptance claim.
@@ -180,6 +182,7 @@ NumPy I/O and common endpoint arrays. Every source interval is checked; root
 zero is distinct from no component, and all physical coverage, seed placement,
 root/category completeness and exact rule populations remain mandatory.
 Independent randomized dense row oracles and the existing coverage/population
-contract cases pass. Full-input parity and timing remain pending. The supported
+contract cases pass. A complete isolated pair also matched every report field:
+22.689 s current versus 16.329 s numeric. It remains opt-in. The supported
 comparison tool is `scripts/v7-pipeline/compare_land_preflights.py`; no copied
 or patched producer or source report is needed.

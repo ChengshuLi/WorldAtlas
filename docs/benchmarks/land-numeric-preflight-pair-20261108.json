@@ -1,0 +1,86 @@
+{
+  "schema": "worldatlas-numeric-land-preflight-pair-v1",
+  "staging_plan_sha256": "653aa47c70a35ac78668b5221e0a54c2221b266d6264462e1f0d91f71e707a66",
+  "code_sha256": {
+    "preflight.py": "0935fc84bf22d5288f249ab4688eb63528c0aef5d27a1fa76307c49bdedeb88d",
+    "write_land_stream.py": "c2490c61d4fbb14739b86cd726dde6687b955fc26538070242f41bef4f8d886c",
+    "ural_delta.py": "9ccfbae6f4ee98c8b74de03c902d367c7065537f8b41e67d9da27052b3dfbd96",
+    "row_overlay.py": "0756a6d973822cb00080b20912d9455d5eb01ffed4c44b3e559a313af53e11d9",
+    "numeric_preflight.py": "0ae1b9fbd1d272993f5e55a0e4b92ac542a8b264ad2a1d8862fafe89c457c27e"
+  },
+  "driver_sha256": "9bad30115f03c5aebb8e809a5572c72c7f3f7a9078743003bf8c68b6ea62617d",
+  "order": [
+    "reference",
+    "candidate"
+  ],
+  "status": "complete-preflight-reports-identical",
+  "results": {
+    "reference": {
+      "elapsed_seconds": 22.688612513000407,
+      "coverage": {
+        "land_cells": 1984469039,
+        "nonseed_roots": 457889,
+        "seed_roots": [
+          459650,
+          650207,
+          9774639,
+          12357770
+        ],
+        "seed_codes": [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        "seed_category_cells": {
+          "18": 655193162,
+          "20": 317651225,
+          "19": 168565998,
+          "17": 327539159,
+          "21": 198034747,
+          "22": 89669510
+        }
+      },
+      "started_at_utc": "2026-11-08T06:53:50.779974+00:00",
+      "completed_at_utc": "2026-11-08T06:54:13.468618+00:00"
+    },
+    "candidate": {
+      "elapsed_seconds": 16.32913828099845,
+      "coverage": {
+        "land_cells": 1984469039,
+        "nonseed_roots": 457889,
+        "seed_roots": [
+          459650,
+          650207,
+          9774639,
+          12357770
+        ],
+        "seed_codes": [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        "seed_category_cells": {
+          "18": 655193162,
+          "20": 317651225,
+          "19": 168565998,
+          "17": 327539159,
+          "21": 198034747,
+          "22": 89669510
+        }
+      },
+      "started_at_utc": "2026-11-08T06:54:13.468979+00:00",
+      "completed_at_utc": "2026-11-08T06:54:29.798126+00:00"
+    }
+  },
+  "reference_over_candidate": 1.389455592975302,
+  "limitations": [
+    "One paired coverage sweep; cache order is not balanced.",
+    "No production default, writer, search, seed or geography decision is changed."
+  ]
+}

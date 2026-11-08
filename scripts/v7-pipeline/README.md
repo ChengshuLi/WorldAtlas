@@ -396,8 +396,11 @@ checks every physical/component/seed interval and exact population report,
 records source fingerprints and UTC intervals, and supports
 `--candidate-first` for reversed order. This only measures preflight, not the
 writer or any complete stage. The experimental files are not imported by the
-production runner, and the production default is unchanged. No complete-input
-speed or parity claim is made until an isolated pair has passed.
+production runner, and the production default is unchanged. The first complete
+isolated pair passed with identical reports: 22.689 s current versus 16.329 s
+numeric. Seed serial/nine-thread parity also passed at 42.604 s/10.267 s, with
+all seed populations and tiles exact. See the
+[receipts and scope limits](../../docs/benchmarks/land-python-api-pairs-20261108.md).
 
 The seed pair accepts `--verify-tiles DIRECTORY` to run the independent Python
 tile verifier against its freshly generated complete seed. That directory must
