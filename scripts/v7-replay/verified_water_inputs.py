@@ -13,8 +13,8 @@ from types import MappingProxyType
 
 import numpy as np
 
-from coastal_shore_index import CoastalShoreIndex
 import coastal_shore_index
+import coastal_shore_index_batch
 import snapshot_input
 
 
@@ -65,6 +65,7 @@ class VerifiedWaterInputs:
         self.shore_index = None
         self._sources = {'verified_water_inputs': Path(__file__),
                          'coastal_shore_index': Path(coastal_shore_index.__file__),
+                         'coastal_shore_index_batch': Path(coastal_shore_index_batch.__file__),
                          'shared_nearest': Path(coastal_shore_index.shore.__file__),
                          'snapshot_input': Path(snapshot_input.__file__)}
         self._code_pins = {}
@@ -101,7 +102,7 @@ class VerifiedWaterInputs:
                 if (len(rows) != self.height + 1 or len(runs) % 2 or int(rows[0]) != 0
                         or int(rows[-1]) != len(runs) // 2 or np.any(rows[1:] <= rows[:-1])):
                     raise ValueError(f'invalid shared {role} RLE offsets')
-            self.shore_index = CoastalShoreIndex(
+            self.shore_index = coastal_shore_index_batch.BatchedCoastalShoreIndex(
                 (self._arrays['physical_rows'], self._arrays['physical_runs']),
                 (self._arrays['land_rows'], self._arrays['land_runs']), self.width, self.height)
             for values in (self.shore_index.offsets, self.shore_index.starts,

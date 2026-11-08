@@ -83,7 +83,7 @@ class VerifiedWaterTests(unittest.TestCase):
     def test_foreign_cached_helper_fails_before_reading_inputs(self):
         with tempfile.TemporaryDirectory() as tmp:
             specs=self.fixture(Path(tmp))
-            for module in (capability.coastal_shore_index,capability.coastal_shore_index.shore,capability.snapshot_input):
+            for module in (capability.coastal_shore_index,capability.coastal_shore_index_batch,capability.coastal_shore_index.shore,capability.snapshot_input):
                 with self.subTest(module=module.__name__),patch.object(module,'__file__',str(Path(tmp)/'foreign.py')):
                     context=VerifiedWaterInputs(specs,8,3,work_root=tmp)
                     with patch.object(capability,'visit_pinned',side_effect=AssertionError('must fail before snapshots')):
