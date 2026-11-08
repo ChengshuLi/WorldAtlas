@@ -418,6 +418,8 @@ class Pipeline:
             if field in ('dataset', 'shapefile'):
                 return str(path)
             metadata = {key: value[key] for key in ('source_id', 'version', 'size_bytes') if key in value}
+            if field in ('evidence_source_files', 'corroboration_source_files'):
+                metadata.update({key: value[key] for key in ('r2_bucket', 'r2_key') if key in value})
             result = {**(metadata if field.endswith('files') or regional_source else {}), **pin(path)}
             if regional_source and 'shapefile' in value:
                 result['shapefile'] = self.source_document(value['shapefile'], field='shapefile')

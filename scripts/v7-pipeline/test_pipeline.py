@@ -175,6 +175,7 @@ class Fixture(unittest.TestCase):
         point = pipeline.read(template['point_request']['path'])
         self.assertEqual(point['source_files'][0]['source_id'], 'raw')
         self.assertEqual(point['source_files'][0]['path'], land['dataset'])
+        self.assertEqual(template['evidence_source_files'][0], {**source, 'path': land['dataset']})
         self.assertEqual(template['regional']['request']['sources']['raw']['version'], 'v1')
         self.assertEqual(calls, ['sources/land.geojson'])
 
