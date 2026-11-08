@@ -51,3 +51,10 @@ and builds both complete unions and physical compositions. Normal reference-mask
 and row/run checks must report zero differences. Reports retain original input
 and producer pins. Shared unchanged land and accumulated source trials make this
 a full-input parity proof, not a paired end-to-end timing or geographic approval.
+
+The [complete 2026-11-08 proof](../../docs/benchmarks/physical-python-gdal-20261108.json)
+records all 32 raw shards, 66,814,038 rows and 7,158,366,208 physical cells with
+zero differences and exact final row/run hashes. Observed raw-water processing
+was 938.04 seconds for the Python feature-layer reference and 899.75 seconds for
+the compiler-free GDAL batches. This is a roughly 4.1 percent reduction for that
+comparison, with downloads and verification measured separately.

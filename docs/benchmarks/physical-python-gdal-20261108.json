@@ -1,0 +1,77 @@
+{
+  "schema": "worldatlas-physical-python-gdal-full-input-proof-v1",
+  "date": "2026-11-08",
+  "scope": "Complete selected raw-water comparison followed by fresh land, both complete water unions, and physical-mask/row/run verification.",
+  "implementation": {
+    "method": "Python, NumPy and Arrow over the already-loaded GDAL public C API",
+    "custom_cpp_helper": false,
+    "runtime_compilation": false,
+    "physical_stage_subprocesses": false,
+    "water_batch_sha256": "2dc51a17cb62f0c58b545375892e246bf3cfc665e5b1a8ef529062c00d2ae5d8",
+    "rasterization": "Reference tile-local transforms, unchanged original coordinates, ALL_TOUCHED off"
+  },
+  "raw_water": {
+    "release": "2026-10-21.0",
+    "shards": 32,
+    "source_bytes": 28818195515,
+    "source_rows": 66814038,
+    "polygons": 26579125,
+    "non_polygons": 39914960,
+    "excluded_classification": 319953,
+    "different_pixels": 0,
+    "diagnostic_counts": "identical for every complete source",
+    "reference": "Retained Python feature-layer implementation, not the retired compiled helper",
+    "reference_processing_seconds": 938.0402989419981,
+    "gdal_processing_seconds": 899.7493426610017,
+    "ratio_of_summed_processing_times": 1.0425573595505513,
+    "source_download_seconds": 785.7575253880023,
+    "timing_protocol": "One complete paired trial per shard, alternating first backend by ordinal, sequential and in-process. Other scheduled performance runs were held. Acquisition and pixel comparison are excluded; outside-host load is uncontrolled.",
+    "gdal_phase_seconds": {
+      "parse_validate_index": 667.6239397379886,
+      "tile_burn": 82.93919279900547
+    },
+    "center_tie_incident_sources": {
+      "29": "Complete source mask is pixel- and TIFF-byte-identical",
+      "31": "Complete source mask is pixel-identical; TIFF layout differs"
+    }
+  },
+  "physical": {
+    "width": 131072,
+    "height": 54614,
+    "cells": 7158366208,
+    "fresh_osm_features": 874187,
+    "fresh_land_cells": 2041419121,
+    "candidate_dry_cells": 1984469039,
+    "different_physical_cells": 0,
+    "mismatch_spans": 0,
+    "row_and_run_bytes": "identical",
+    "output_sha256": {
+      "physical-dry.tif": "348b5e1765437259c2192c423826f140d9ba19f1d99d451312045bb3b0811306",
+      "rows.u32le": "6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468",
+      "runs.u32le": "1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7"
+    },
+    "reference_history": "These hashes also match the preserved correct physical outputs recorded in physical-native-20261107.json."
+  },
+  "receipts": {
+    "physical-python-gdal-20261108-water-receipt.json": "316bcbebd003486ffebe68610f32e784798ae68e221545955a0a91ef3b18d480",
+    "physical-python-gdal-20261108-physical-receipt.json": "2442c66737956207f51c6a8da0b6fe342ecaf4645b9de9a1fd84c3b0abe0f0f0"
+  },
+  "configuration_rebase": {
+    "measured_selection_sha256": "49f2f7f2bce2e26623a995227bb4fa2a3854616526ef5f37a5e3dd7acdb73440",
+    "published_selection_sha256": "54c2cc4b29ba0744cc210589de8a9d048571ea0b02142203d310355f2fda8e5d",
+    "physical_documents_sorted_json_sha256": "7f1adb7a552dc4a4e793ba2d3bba6fbfa2433d3203e7ca8239b3d5be5f1d779a",
+    "format": "jq -S of the object containing sources.land_config, sources.water_config, sources.raw_manifest and physical_controls, using those four short keys",
+    "result": "Physical input documents and controls are identical before and after rebasing. The whole selection hash changed because upstream refreshed source-code pins outside physical processing. Tested physical producer bytes are unchanged."
+  },
+  "final_fast_checks": {
+    "raw_mask_tests": 57,
+    "water_and_manifest_tests": 34,
+    "status": "passed with clean exit after rebase; includes subprocess-blocked complete physical processing"
+  },
+  "limitations": [
+    "The observed raw-water reduction is about 4.1 percent versus the retained Python reference. This does not measure the retired C++ backend or complete pipeline speedup.",
+    "The earlier selected-shard trial showed a larger gain and is not used for the complete-data timing conclusion.",
+    "Unchanged land is freshly rasterized once and shared by both compositions. The final physical proof is a complete-input parity check, not a paired end-to-end timing.",
+    "Output reproduction does not independently validate geographic decisions or approve publication. Original receipt paths are provenance, not portable input locations."
+  ]
+}
