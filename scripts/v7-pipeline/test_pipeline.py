@@ -1,5 +1,7 @@
 """Runner contracts, measured parallelism, and actual raw-to-component chaining."""
 import json
+import hashlib
+import io
 import os
 from pathlib import Path
 import struct
@@ -9,6 +11,7 @@ import zipfile
 import tempfile
 import threading
 import time
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -16,6 +19,20 @@ import run_pipeline as pipeline
 
 
 class TimingTests(unittest.TestCase):
+    def test_selected_configuration_has_portable_pins_and_complete_new_coastal_partition(self):
+        path = Path(pipeline.__file__).with_name('config.json')
+        cfg = pipeline.read(path)
+        self.assertNotIn('/workspace/', path.read_text())
+        self.assertNotIn('/tmp/', path.read_text())
+        self.assertNotIn('input_root', cfg)
+        self.assertEqual(cfg['sources']['raw_manifest']['json']['file_count'], 32)
+        prepare = pipeline.stage_module(pipeline.SCRIPTS / pipeline.REGIONAL / 'prepare_fresh_handoff.py')
+        codes = cfg['sources']['regional_template']['json']['regional']['request']['code']
+        self.assertEqual(set(prepare.bind_regional_code(codes)), set(codes))
+        batch = pipeline.stage_module(pipeline.SCRIPTS / pipeline.REPLAY / 'batch_coastal_tiles.py')
+        entries = batch.validate_plan(cfg['sources']['coastal_plan']['json'], 131072, 54614)
+        self.assertEqual(sum((e['core'][1]-e['core'][0])*(e['core'][3]-e['core'][2]) for e in entries), 131072*54614)
+
     def test_interval_union_excludes_idle_gaps_and_parallel_double_count(self):
         self.assertEqual(pipeline.elapsed_union([(1, 5), (2, 4), (8, 9), (4, 7)]), 7)
         self.assertEqual(pipeline.elapsed_union([]), 0)
@@ -106,6 +123,150 @@ class Fixture(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'source pin mismatch'):
             self.make()
         self.assertFalse((self.root / 'run').exists())
+
+    def cloud(self, payload, key='sources/input.json'):
+        return {'r2_bucket': 'worldatlas', 'r2_key': key,
+                'sha256': hashlib.sha256(payload).hexdigest(), 'size_bytes': len(payload)}
+
+    def fake_r2(self, payloads, calls):
+        module = pipeline.stage_module(pipeline.SCRIPTS / 'v7-raw-mask/build_physical.py')
+        def download(endpoint, entry, destination):
+            calls.append(entry['r2_key'])
+            destination.write_bytes(payloads[entry['r2_key']])
+        return patch.object(module, 'download_r2', side_effect=download)
+
+    def test_one_configuration_fetches_pinned_r2_inputs_into_selected_work_directory(self):
+        payload = b'{}'
+        self.cfg['sources'] = {key: self.cloud(payload) for key in self.cfg['sources']}
+        self.cfg['input_root'] = '/not-this-computer'
+        config = pipeline.write(self.inputs / 'cloud-config.json', self.cfg)
+        calls, results = [], []
+        with self.fake_r2({'sources/input.json': payload}, calls):
+            for name in ('computer-one', 'computer-two'):
+                root = self.root / name
+                runner = pipeline.Pipeline(config, work_dir=root)
+                try:
+                    self.assertEqual(runner.out, root / 'run')
+                    self.assertEqual(len(runner.source_pins), 1)
+                    source = runner.sources['land_snapshot']
+                    self.assertTrue(source.is_relative_to(root))
+                    self.assertEqual(source.read_bytes(), payload)
+                    self.assertEqual(len(runner.acquisition_intervals), 1)
+                    results.append(pipeline.sha(source))
+                finally:
+                    runner.close()
+        self.assertEqual(calls, ['sources/input.json', 'sources/input.json'])
+        self.assertEqual(results[0], results[1])
+
+    def test_inline_stage_documents_share_verified_cloud_sources_and_nested_pins(self):
+        payload = b'raw source bytes'
+        source = self.cloud(payload, 'sources/land.geojson')
+        self.cfg['sources']['land_config'] = {'json': {'land': [
+            {'dataset': source, 'files': [source]}]}}
+        self.cfg['sources']['regional_template'] = {'json': {
+            'point_request': {'json': {'source_files': [dict(source, source_id='raw', version='v1')]}},
+            'evidence_source_files': [source], 'regional': {'request': {'sources': {'raw': dict(source, version='v1')}}}}}
+        calls = []
+        with self.fake_r2({'sources/land.geojson': payload}, calls):
+            runner = self.make()
+        land = pipeline.read(runner.sources['land_config'])['land'][0]
+        self.assertEqual(land['dataset'], land['files'][0]['path'])
+        template = pipeline.read(runner.sources['regional_template'])
+        point = pipeline.read(template['point_request']['path'])
+        self.assertEqual(point['source_files'][0]['source_id'], 'raw')
+        self.assertEqual(point['source_files'][0]['path'], land['dataset'])
+        self.assertEqual(template['regional']['request']['sources']['raw']['version'], 'v1')
+        self.assertEqual(calls, ['sources/land.geojson'])
+
+    def test_inline_neon_record_metadata_is_not_mistaken_for_a_file_reference(self):
+        metadata = self.cloud(b'not a requested file')
+        self.cfg['sources']['coastal_plan'] = {'json': {'source_asset': metadata}}
+        with self.fake_r2({}, []) as download:
+            runner = self.make()
+        download.assert_not_called()
+        self.assertEqual(pipeline.read(runner.sources['coastal_plan'])['source_asset'], metadata)
+
+    def test_neon_reader_is_read_only_and_requires_exact_reconstructed_bytes(self):
+        value = {'name': 'Sørkapp', 'number': 1.0}
+        payload = pipeline.source_json_bytes(value, 'canonical-utf8')
+        expected = hashlib.sha256(payload).hexdigest()
+        statements = []
+        class Database:
+            def __enter__(self): return self
+            def __exit__(self, *args): pass
+            def execute(self, query, parameters=None):
+                statements.append((query, parameters)); return self
+            def fetchone(self): return (expected, len(payload), value)
+        fake = SimpleNamespace(connect=lambda connection: Database())
+        runner = pipeline.Pipeline.__new__(pipeline.Pipeline)
+        with patch.dict(sys.modules, {'psycopg': fake}), patch.dict(os.environ, {'NEON_DATABASE_URL': 'fixture-only'}):
+            self.assertEqual(runner.neon_source({'source_id': 'selected', 'version': 'v1'}, expected, len(payload)), payload)
+            value['number'] = 2.0
+            with self.assertRaisesRegex(ValueError, 'cannot reconstruct'):
+                runner.neon_source({'source_id': 'selected', 'version': 'v1'}, expected, len(payload))
+        self.assertEqual(statements[0][0], 'SET TRANSACTION READ ONLY')
+        self.assertEqual(statements[1][1], ('selected', 'v1'))
+
+    def test_cloud_zip_members_are_individually_pinned_and_keep_sidecars_together(self):
+        buffer = io.BytesIO()
+        members = {'land/land.shp': b'geometry', 'land/land.dbf': b'attributes'}
+        with zipfile.ZipFile(buffer, 'w') as packed:
+            for name, value in members.items():
+                packed.writestr(name, value)
+        archive = self.cloud(buffer.getvalue(), 'sources/land.zip')
+        files = [{'archive': archive, 'member': name, 'sha256': hashlib.sha256(value).hexdigest(),
+                  'size_bytes': len(value)} for name, value in members.items()]
+        self.cfg['sources']['land_config'] = {'json': {
+            'land': [{'dataset': files[0], 'files': files}]}}
+        calls = []
+        with self.fake_r2({'sources/land.zip': buffer.getvalue()}, calls):
+            runner = self.make()
+        land = pipeline.read(runner.sources['land_config'])['land'][0]
+        self.assertEqual(calls, ['sources/land.zip'])
+        self.assertEqual(Path(land['files'][0]['path']).parent, Path(land['files'][1]['path']).parent)
+        self.assertEqual(len({item['path'] for item in runner.source_pins}), 5)
+
+    def test_raw_manifest_keeps_shards_deferred_to_existing_physical_stage(self):
+        raw = {'file_count': 1, 'files': [{'path': 'raw/part.parquet', 'sha256': 'a' * 64,
+               'r2_bucket': 'worldatlas', 'r2_key': 'raw/part.parquet', 'size': 123}]}
+        self.cfg['sources']['raw_manifest'] = {'json': raw}
+        with self.fake_r2({}, []) as download:
+            runner = self.make()
+        download.assert_not_called()
+        self.assertEqual(pipeline.read(runner.sources['raw_manifest']), raw)
+
+    def test_changed_cloud_cache_or_wrong_download_fails_before_run_creation(self):
+        payload = b'{}'
+        self.cfg['sources']['land_snapshot'] = self.cloud(payload)
+        calls = []
+        with self.fake_r2({'sources/input.json': b'wrong'}, calls):
+            with self.assertRaisesRegex(ValueError, 'cloud input size/SHA-256 mismatch'):
+                self.make()
+        self.assertFalse((self.root / 'run').exists())
+        self.assertEqual(len(list((self.root / 'inputs').rglob('*.partial'))), 1)
+
+    def test_relative_input_root_is_relative_to_the_configuration(self):
+        self.cfg['input_root'] = '..'
+        runner = self.make()
+        self.assertEqual(runner.root, self.root)
+
+    def test_cached_cloud_corruption_and_zip_path_escapes_fail_closed(self):
+        payload = b'{}'
+        spec = self.cloud(payload)
+        cached = self.root / 'inputs' / spec['sha256'] / 'input.json'
+        cached.parent.mkdir(parents=True)
+        cached.write_bytes(b'xx')
+        self.cfg['sources']['land_snapshot'] = spec
+        with self.fake_r2({}, []) as download:
+            with self.assertRaisesRegex(ValueError, 'cached cloud input size/SHA-256 mismatch'):
+                self.make()
+        download.assert_not_called()
+        cached.write_bytes(payload)
+        self.cfg['sources']['land_snapshot'] = {'archive': spec, 'member': '../outside',
+            'sha256': 'a' * 64, 'size_bytes': 1}
+        config = pipeline.write(self.inputs / 'request2.json', self.cfg)
+        with self.assertRaisesRegex(ValueError, 'unsafe ZIP member'):
+            pipeline.Pipeline(config, self.root / 'run')
 
     def regional_template(self, value):
         template = pipeline.write(self.inputs / 'regional.json', value)
@@ -332,6 +493,42 @@ class Fixture(unittest.TestCase):
         self.assertFalse((components / 'monitor.json').exists())
         np.testing.assert_array_equal(np.fromfile(physical / 'rows.u32le', dtype='<u4'), [0, 3, 5, 6, 7])
         self.assertEqual(pipeline.read(runner.out / 'physical/report.json')['source_download_elapsed_seconds'], 0)
+
+    def test_single_cloud_configuration_matches_local_raw_and_component_streams_in_another_root(self):
+        self.test_actual_raw_sources_to_fresh_components_in_process()
+        payloads = {'sources/land.geojson': (self.root / 'raw/land.geojson').read_bytes(),
+                    'sources/water.parquet': (self.root / 'raw/water.parquet').read_bytes()}
+        land_source = self.cloud(payloads['sources/land.geojson'], 'sources/land.geojson')
+        land = pipeline.read(self.inputs / 'land.json')
+        land['land'] = [{'dataset': land_source, 'where': None, 'files': [land_source]}]
+        water_source = self.cloud(payloads['sources/water.parquet'], 'sources/water.parquet')
+        manifest = {'file_count': 1, 'files': [{'path': 'raw/water.parquet',
+            'sha256': water_source['sha256'], 'size': water_source['size_bytes'],
+            'r2_bucket': water_source['r2_bucket'], 'r2_key': water_source['r2_key']}]}
+        cfg = {**self.cfg, 'input_root': './unused-on-another-computer',
+            'sources': {key: {'json': {}} for key in self.cfg['sources']},
+            'physical_controls': {**self.cfg['physical_controls'], 'source_staging': {
+                'mode': 'r2-s3', 'endpoint_url': 'https://' + '0' * 32 + '.r2.cloudflarestorage.com'}}}
+        cfg['sources'].update(land_config={'json': land}, water_config={'json': pipeline.read(self.inputs / 'water.json')},
+                              raw_manifest={'json': manifest})
+        config = pipeline.write(self.inputs / 'single-cloud-config.json', cfg)
+        calls = []
+        with self.fake_r2(payloads, calls):
+            runner = pipeline.Pipeline(config, work_dir=self.root / 'another-computer')
+            self.addCleanup(runner.close)
+            physical = runner.physical()
+        components = runner.out / 'components'
+        request = runner.document('components', {'schema': 'fresh-physical-components-v1',
+            'grid': land['grid'], 'controls': cfg['land_controls'], 'inputs': {key: pipeline.pin(path)
+                for key, path in {'physical_rows': physical / 'rows.u32le', 'physical_runs': physical / 'runs.u32le',
+                    'physical_report': physical / 'report.json', 'component_source': pipeline.SCRIPTS /
+                    'v7-recovery/land/simple-v2-baseline/build_components.cpp'}.items()}})
+        runner.stage('mainland', 'components', 'v7-recovery/land/fresh-components-20261104/build_components.py',
+                     request, runner.out / 'work/components', components)
+        for local, cloud in [(self.root / 'run/physical/physical', physical), (self.root / 'run/components', components)]:
+            for name in ('rows.u32le', 'runs.u32le'):
+                self.assertEqual(pipeline.sha(local / name), pipeline.sha(cloud / name))
+        self.assertEqual(calls, ['sources/land.geojson', 'sources/water.parquet'])
 
 
 if __name__ == '__main__':

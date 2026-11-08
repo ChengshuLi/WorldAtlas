@@ -35,10 +35,57 @@ block and credentials for a fresh run.
 
 Copy `config.example.json`, replace the source paths and SHA-256 values, and
 choose an existing `input_root` containing the selected sources and the new run
-location. Relative top-level source paths resolve beside the configuration.
+location. A relative `input_root` resolves beside the configuration.
+Relative top-level source paths resolve beside the configuration.
 Nested source documents retain their own declared paths; materialize their
 pinned source files at those locations before starting. No path-prefix rewriting
 is supported.
+
+For one configuration that pulls its selected inputs directly, run:
+
+    /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py scripts/v7-pipeline/config.json \
+      --work-dir /persistent/worldatlas-work
+
+`config.json` contains the reconstructed selected research inputs. Structured
+snapshots are pinned Neon records or inline values; R2 is used for raw inputs.
+Set `NEON_DATABASE_URL` to the selected research database using a read-only role
+and install `psycopg` in the same Python environment. It is never saved in the
+configuration. The source reader opens a read-only transaction, checks the
+catalog identity, and accepts JSONB serialization only when all bytes match the
+selected size and SHA-256. Missing or changed source bytes fail closed.
+
+The original top-level configuration and coastal-plan bytes were not recovered.
+This configuration preserves the recovered geographic choices, uses the unchanged
+water-overlay producer and strict reference comparison, and declares a new
+224-tile coastal execution partition with conservative halos. It is not a claim
+of a new full global run, geographic acceptance, or verified final-grid equality.
+The original regional pending inventory remains a diagnostic stand-in.
+
+`--work-dir` chooses and creates the local input/run directory, overriding
+`input_root`; the configuration can omit that field when using this option.
+The default output is `WORK_DIR/run`. An explicit output and `--resume` retain
+their existing behavior. Source downloads and ZIP extraction happen within this
+invocation, before processing; they are excluded from setup processing time.
+
+A `sources` entry can be a local `{path, sha256}` pin, a pinned R2 file with
+`r2_bucket`, `r2_key`, `sha256`, and integer `size_bytes`, or `{json: ...}` containing
+the ordinary stage document directly. A pinned Neon document uses
+`{neon: {source_id: ..., version: ...}, sha256: ..., size_bytes: ...}`.
+Inline stage documents can use the same
+R2 pins in their dataset/static-file fields and nested `{json: ...}` file inputs.
+For an OSM sidecar, use `{archive: R2_PIN, member: EXACT_ZIP_MEMBER, sha256: ...,
+size_bytes: ...}`. Each archive and consumed member is independently checked.
+Generated local paths and normal input documents stay inside the work directory;
+the configuration requires no machine-specific source paths. In an inline regional
+template, `bering_proj_db: {sha256: ...}` binds the active local PROJ database.
+Raw-manifest shard entries retain the existing physical-stage R2 staging contract,
+so they are not downloaded eagerly. Immutable source documents are never rewritten.
+Keep structured decisions/configuration data in Neon or inline here, and R2 for
+used raw sources and the final map. Credentials remain outside the configuration.
+An inline document can declare its source `serialization` when exact original
+byte identity matters. The `local_water_overlay` source calls the ordinary
+producer and verifier, then compares every selected value and type with the
+pinned reference. Only its declared local provenance paths/hashes may differ.
 
     /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
       /workspace/selection/config.json /workspace/runs/fresh-run

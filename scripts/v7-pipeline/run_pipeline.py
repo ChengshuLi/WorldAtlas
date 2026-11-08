@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -21,6 +22,7 @@ import tempfile
 import time
 import traceback
 import uuid
+import zipfile
 
 from execution_state import (Timing, Checkpoints, RunLock, code_identity, inventory,
                              json_bytes, verify_pins, verify_anchor, write, elapsed_union)
@@ -137,6 +139,27 @@ def read(path):
     return json.loads(Path(path).read_bytes())
 
 
+def source_json_bytes(value, serialization='pretty-ascii'):
+    if serialization == 'physical-report-v1':
+        # The physical producer's original field order is part of this pin.
+        value = copy.deepcopy(value)
+        value = {key: value[key] for key in ('status', 'configuration_sha256', 'grid', 'inputs',
+                    'candidate_dry_cells', 'output_sha256', 'limitations')}
+        value['grid'] = {key: value['grid'][key] for key in ('width', 'height', 'west', 'north', 'step')}
+        value['inputs'] = {key: {field: value['inputs'][key][field] for field in ('path', 'sha256')}
+                           for key in ('land', 'water')}
+        value['output_sha256'] = {key: value['output_sha256'][key]
+                                 for key in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')}
+        serialization = 'original-pretty-utf8'
+    if serialization not in {'canonical-ascii', 'canonical-utf8', 'pretty-ascii',
+                              'pretty-utf8', 'original-order-utf8', 'original-pretty-utf8'}:
+        raise ValueError('unsupported source JSON serialization')
+    pretty = 'pretty' in serialization
+    return (json.dumps(value, sort_keys=not serialization.startswith('original-'),
+        ensure_ascii=serialization.endswith('ascii'), indent=2 if pretty else None,
+        separators=None if pretty else (',', ':'), allow_nan=False) + '\n').encode()
+
+
 def rle_spec(directory, *, physical=False):
     """Pin streams/report and, for physical input, its verified mask identity."""
     directory = Path(directory)
@@ -153,7 +176,7 @@ def rle_spec(directory, *, physical=False):
 
 
 class Pipeline:
-    def __init__(self, config, output, *, resume=False):
+    def __init__(self, config, output=None, *, resume=False, work_dir=None):
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
         self.config_path = Path(config).resolve(strict=True)
@@ -161,8 +184,15 @@ class Pipeline:
         self.cfg = read(self.config_path)
         if self.cfg.get('schema') != 'worldatlas-end-to-end-pipeline-v1':
             raise ValueError('unsupported end-to-end configuration')
-        self.root = Path(self.cfg['input_root']).resolve(strict=True)
-        self.out = Path(output).resolve()
+        if work_dir is None and 'input_root' not in self.cfg:
+            raise ValueError('choose a local input/run directory with --work-dir')
+        root = Path(work_dir) if work_dir is not None else Path(self.cfg['input_root'])
+        if not root.is_absolute():
+            root = (Path.cwd() if work_dir is not None else self.config_path.parent) / root
+        self.root = root.resolve()
+        if work_dir is not None:
+            self.root.mkdir(parents=True, exist_ok=True)
+        self.out = Path(output).resolve() if output is not None else self.root / 'run'
         if (not self.root.is_dir() or (self.out.exists() != resume) or not self.out.parent.is_dir()
                 or not self.out.is_relative_to(self.root)
                 or self.config_path.is_relative_to(self.out)):
@@ -173,13 +203,17 @@ class Pipeline:
         self.runtime = runtime_identity()
         self.resume = resume
         self.source_pins = []
+        self.input_cache = {}
+        self.acquisition_intervals = []
         # Verify every external document before expensive computation starts.
-        self.sources = self.resolve_pins(self.cfg.get('sources', {}))
         required = {'land_config', 'water_config', 'raw_manifest', 'land_snapshot',
                     'resolution_template', 'regional_template', 'water_snapshot',
                     'seavox_archive', 'coastal_plan', 'neon_selection', 'osm_receipt'}
-        if not required <= self.sources.keys() or set(self.sources) - required - {'prior_physical_report', 'ocean_snapshot', 'reference_rows', 'reference_runs'}:
+        selections = self.cfg.get('sources', {})
+        if (not isinstance(selections, dict) or not required <= selections.keys() or
+                set(selections) - required - {'prior_physical_report', 'ocean_snapshot', 'reference_rows', 'reference_runs'}):
             raise ValueError('wrong source selection input set')
+        self.sources = {name: self.resolve_source(name, spec) for name, spec in selections.items()}
         if bool('reference_rows' in self.sources) != bool('reference_runs' in self.sources):
             raise ValueError('both reference stream pins are required')
         self.collect_source_files()
@@ -221,11 +255,14 @@ class Pipeline:
             elif (self.out / 'request.json').read_bytes() != json_bytes(self.cfg):
                 raise ValueError('saved request changed')
             self.checkpoints.preserve('failure', [self.out / 'failure.json'])
-            token = uuid.uuid4().hex
-            self.timing.event({'event': 'start', 'token': token, 'id': 'setup/source-validation', 'group': 'setup',
-                               'monotonic_seconds': setup_started, 'utc': setup_utc})
-            self.timing.event({'event': 'complete', 'token': token, 'id': 'setup/source-validation', 'group': 'setup',
-                               'start_monotonic_seconds': setup_started, 'monotonic_seconds': time.monotonic()})
+            cursor = setup_started
+            for start, end in [*self.acquisition_intervals, (time.monotonic(), None)]:
+                token = uuid.uuid4().hex
+                self.timing.event({'event': 'start', 'token': token, 'id': 'setup/source-validation', 'group': 'setup',
+                                   'monotonic_seconds': cursor, 'utc': setup_utc})
+                self.timing.event({'event': 'complete', 'token': token, 'id': 'setup/source-validation', 'group': 'setup',
+                                   'start_monotonic_seconds': cursor, 'monotonic_seconds': start})
+                cursor = end
             if resume:
                 for previous in (self.out / 'attempts').iterdir():
                     if previous != self.attempt_dir and not (previous / 'setup-timing.json').exists():
@@ -238,6 +275,214 @@ class Pipeline:
                 self.timing.close()
             self.run_lock.close()
             raise
+
+    def cloud_file(self, spec):
+        """Resolve one pinned R2 file, Neon document or ZIP member locally."""
+        expected = spec.get('sha256')
+        size = spec.get('size_bytes')
+        if (not isinstance(expected, str) or len(expected) != 64 or any(c not in '0123456789abcdef' for c in expected)
+                or type(size) is not int or size < 0):
+            raise ValueError('cloud inputs require explicit SHA-256 and byte size')
+        if 'archive' in spec:
+            archive = self.cloud_file(spec['archive'])
+            member = spec['member']
+            if not isinstance(member, str):
+                raise ValueError('unsafe ZIP member')
+            rel = Path(member)
+            if (not member or rel.is_absolute() or '\\' in member
+                    or any(part in ('', '.', '..') for part in member.split('/'))):
+                raise ValueError('unsafe ZIP member')
+            path = self.root / 'inputs' / spec['archive']['sha256'] / rel
+            identity = ('member', str(archive), member, expected, size)
+        elif 'neon' in spec:
+            source = spec['neon']
+            if (not isinstance(source, dict) or set(source) not in ({'source_id', 'version'},
+                    {'source_id', 'version', 'serialization'}) or
+                    any(not isinstance(value, str) or not value for value in source.values())):
+                raise ValueError('Neon input requires source_id and version')
+            path = self.root / 'inputs' / expected / 'snapshot.json'
+            identity = ('neon', source['source_id'], source['version'], expected, size, source.get('serialization'))
+        else:
+            bucket, key = spec.get('r2_bucket'), spec.get('r2_key')
+            if (not isinstance(bucket, str) or not bucket or not isinstance(key, str) or not key
+                    or key.endswith('/') or '\\' in key or any(p in ('', '.', '..') for p in key.split('/'))):
+                raise ValueError('invalid pinned R2 location')
+            path = self.root / 'inputs' / expected / Path(key).name
+            identity = ('r2', bucket, key, expected, size)
+        if identity in self.input_cache:
+            return self.input_cache[identity]
+        path = path.resolve()
+        if not path.is_relative_to(self.root) or path.is_relative_to(self.out):
+            raise ValueError('cloud input overlaps output or escapes work directory')
+        if path.exists():
+            if not path.is_file() or path.stat().st_size != size or sha(path) != expected:
+                raise ValueError('cached cloud input size/SHA-256 mismatch: ' + str(path))
+        else:
+            started = time.monotonic()
+            path.parent.mkdir(parents=True, exist_ok=True)
+            partial = path.with_name(path.name + '.' + uuid.uuid4().hex + '.partial')
+            try:
+                if 'archive' in spec:
+                    with zipfile.ZipFile(archive) as packed:
+                        members = [item for item in packed.infolist() if item.filename == member]
+                        if (len(members) != 1 or members[0].is_dir() or
+                                ((members[0].external_attr >> 16) & 0o170000) == 0o120000):
+                            raise ValueError('ZIP member must be one regular file')
+                        with packed.open(members[0]) as src, partial.open('xb') as dst:
+                            shutil.copyfileobj(src, dst, 1 << 20)
+                elif 'neon' in spec:
+                    partial.write_bytes(self.neon_source(source, expected, size))
+                else:
+                    physical = stage_module(SCRIPTS / 'v7-raw-mask/build_physical.py')
+                    staging = self.cfg.get('physical_controls', {}).get('source_staging', {})
+                    physical.download_r2(staging.get('endpoint_url'),
+                        {'r2_bucket': bucket, 'r2_key': key, 'size': size}, partial)
+                if partial.stat().st_size != size or sha(partial) != expected:
+                    raise ValueError('cloud input size/SHA-256 mismatch: ' + str(path))
+                try:
+                    os.link(partial, path)
+                except FileExistsError:
+                    if not path.is_file() or path.stat().st_size != size or sha(path) != expected:
+                        raise ValueError('concurrent cloud input changed') from None
+                partial.unlink()
+            finally:
+                self.acquisition_intervals.append((started, time.monotonic()))
+        result = pin(path)
+        if result not in self.source_pins:
+            self.source_pins.append(result)
+        self.input_cache[identity] = path
+        return path
+
+    def neon_source(self, source, expected, size):
+        """Read a pinned research document, never mutate the Neon source catalog."""
+        try:
+            import psycopg
+        except ImportError:
+            raise ValueError('Neon inputs require psycopg in the pipeline Python environment') from None
+        connection = os.environ.get('NEON_DATABASE_URL')
+        if not connection:
+            raise ValueError('set NEON_DATABASE_URL for read-only access to the selected Neon database')
+        try:
+            with psycopg.connect(connection) as database:
+                database.execute('SET TRANSACTION READ ONLY')
+                row = database.execute(
+                    "SELECT sha256,size_bytes,COALESCE(provenance->'snapshot',provenance->'document') "
+                    'FROM atlas.source_assets WHERE source_id=%s AND version=%s',
+                    (source['source_id'], source['version'])).fetchone()
+        except Exception:
+            raise ValueError('Neon source read failed; check database access and selected source identity') from None
+        if row is None or row[0] != expected or int(row[1]) != size or not isinstance(row[2], dict):
+            raise ValueError('Neon source catalog identity/SHA-256/size mismatch')
+        # JSONB retains values, not file formatting. Accept only a reconstruction
+        # whose complete bytes match the independently selected catalog pin.
+        formats = dict.fromkeys([source.get('serialization', 'canonical-ascii'),
+            'canonical-ascii', 'canonical-utf8', 'pretty-ascii', 'pretty-utf8',
+            'original-order-utf8', 'original-pretty-utf8', 'physical-report-v1'])
+        for serialization in formats:
+            try:
+                data = source_json_bytes(row[2], serialization)
+            except KeyError:
+                continue
+            if len(data) == size and hashlib.sha256(data).hexdigest() == expected:
+                return data
+        raise ValueError('Neon JSON cannot reconstruct the selected source byte hash')
+
+    def source_document(self, value, *, raw_manifest=False, field=None, location=()):
+        """Fill local file pins in inline ordinary stage configurations only."""
+        if isinstance(value, list):
+            return [self.source_document(item, raw_manifest=raw_manifest, field=field, location=location) for item in value]
+        if not isinstance(value, dict):
+            return value
+        if set(value) in ({'json'}, {'json', 'serialization'}) and isinstance(value['json'], (dict, list)):
+            path = self.json_source(value['json'], serialization=value.get('serialization', 'pretty-ascii'))
+            return str(path) if field == 'dataset' else pin(path)
+        if field == 'bering_proj_db' and set(value) == {'sha256'}:
+            if value['sha256'] != self.runtime['proj_database']['sha256']:
+                raise ValueError('selected PROJ database does not match active runtime database')
+            return self.runtime['proj_database']
+        file_fields = {'dataset', 'shapefile', 'files', 'source_files', 'polygon_source_files', 'evidence_source_files',
+                       'corroboration_source_files', 'bering_source_files', 'point_request',
+                       'line', 'policy', 'pending', 'snapshot', 'neon_water_structure'}
+        regional_source = location[:3] == ('regional', 'request', 'sources') and len(location) in (3, 4)
+        if regional_source:
+            file_fields.add(field)
+        if not raw_manifest and field in file_fields and any(key in value for key in ('r2_bucket', 'archive', 'neon')):
+            path = self.cloud_file(value)
+            if field in ('dataset', 'shapefile'):
+                return str(path)
+            metadata = {key: value[key] for key in ('source_id', 'version', 'size_bytes') if key in value}
+            result = {**(metadata if field.endswith('files') or regional_source else {}), **pin(path)}
+            if regional_source and 'shapefile' in value:
+                result['shapefile'] = self.source_document(value['shapefile'], field='shapefile')
+            return result
+        return {key: self.source_document(item, raw_manifest=raw_manifest, field=key, location=location + (key,))
+                for key, item in value.items()}
+
+    def json_source(self, value, *, raw_manifest=False, serialization='pretty-ascii'):
+        document = self.source_document(value, raw_manifest=raw_manifest)
+        return self.save_source_document(document, serialization=serialization)
+
+    def save_source_document(self, document, *, serialization='pretty-ascii'):
+        data = source_json_bytes(document, serialization)
+        path = (self.root / 'inputs' / (hashlib.sha256(data).hexdigest() + '.json')).resolve()
+        if not path.is_relative_to(self.root) or path.is_relative_to(self.out):
+            raise ValueError('generated input overlaps output')
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists():
+            if path.read_bytes() != data:
+                raise ValueError('generated input changed')
+        else:
+            with path.open('xb') as stream:
+                stream.write(data)
+                stream.flush()
+                os.fsync(stream.fileno())
+        result = pin(path)
+        if result not in self.source_pins:
+            self.source_pins.append(result)
+        return path
+
+    def resolve_source(self, name, spec):
+        if name == 'water_snapshot' and isinstance(spec, dict) and set(spec) == {'local_water_overlay'}:
+            inputs = spec['local_water_overlay']
+            if not isinstance(inputs, dict) or set(inputs) != {'base', 'water', 'overlay', 'reference'}:
+                raise ValueError('local water selection requires base, water, overlay and reference inputs')
+            paths = {key: self.resolve_source(key, value) for key, value in inputs.items()}
+            producer = stage_module(SCRIPTS / REPLAY / 'local_water_overlay.py')
+            result = producer.make(read(paths['base']), read(paths['water']), read(paths['overlay']),
+                paths['base'], sha(paths['base']), paths['water'], sha(paths['water']),
+                paths['overlay'], sha(paths['overlay']))
+            producer.verify(result)
+            def selection(value):
+                value = copy.deepcopy(value)
+                provenance = value['local_overlay_provenance']
+                overlay_hash = provenance['overlay_sha256']
+                for key in ('base_land_snapshot_path', 'water_neon_snapshot_path', 'overlay_path',
+                            'overlay_sha256', 'neon_water_structure_sha256'):
+                    provenance[key] = None
+                for route in value['routes']:
+                    evidence = route.get('evidence', {})
+                    if 'overlay_sha256' in evidence:
+                        if evidence['overlay_sha256'] != overlay_hash:
+                            raise ValueError('water route has inconsistent overlay provenance')
+                        evidence['overlay_sha256'] = None
+                return value
+            def identical(a, b):
+                if type(a) is not type(b):
+                    return False
+                if isinstance(a, dict):
+                    return a.keys() == b.keys() and all(identical(a[key], b[key]) for key in a)
+                if isinstance(a, list):
+                    return len(a) == len(b) and all(identical(x, y) for x, y in zip(a, b))
+                return a == b
+            if not identical(selection(result), selection(read(paths['reference']))):
+                raise ValueError('regenerated water selection differs from pinned reference')
+            return self.save_source_document(result, serialization='canonical-utf8')
+        if isinstance(spec, dict) and set(spec) in ({'json'}, {'json', 'serialization'}) and isinstance(spec['json'], (dict, list)):
+            return self.json_source(spec['json'], raw_manifest=name == 'raw_manifest',
+                                    serialization=spec.get('serialization', 'pretty-ascii'))
+        if isinstance(spec, dict) and any(key in spec for key in ('r2_bucket', 'archive', 'neon')):
+            return self.cloud_file(spec)
+        return self.resolve_pins(spec)
 
     def resolve_pins(self, value):
         if isinstance(value, dict) and set(value) == {'path', 'sha256'}:
@@ -795,10 +1040,11 @@ class Pipeline:
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('config', type=Path)
-    p.add_argument('output', type=Path, help='new run directory inside input_root')
+    p.add_argument('output', type=Path, nargs='?', help='new run directory inside input_root; defaults to WORK_DIR/run')
+    p.add_argument('--work-dir', type=Path, help='local input/run directory, overriding input_root; created if absent')
     p.add_argument('--resume', action='store_true', help='validate and continue the same checkpoint-enabled run')
     a = p.parse_args()
-    pipeline = Pipeline(a.config, a.output, resume=a.resume)
+    pipeline = Pipeline(a.config, a.output, resume=a.resume, work_dir=a.work_dir)
 
     def stop(signum, frame):
         pipeline.cancel()
