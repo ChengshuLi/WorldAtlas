@@ -243,6 +243,15 @@ fields as the final report, so a completed stage can be read before later
 stages finish. A single resumed `stage-total` interval is only that attempt's
 work and must not be presented as the whole stage's processing time.
 
+For an exact clean water-stage baseline after an interrupted run, use
+`benchmark_water.py --reference-run COMPLETE_RUN --config ORIGINAL_CONFIG --out NEW_BENCHMARK`.
+It retains the pinned completed physical and land inputs, runs the entire normal
+water stage afresh, and separately compares every final cell and both output
+streams against the complete reference. `stage-timing.json` separates the water
+interval from process startup/setup; `comparison.json` is outside that interval.
+Run it sequentially with other full-input timing workloads. This is a new clean
+baseline, not a replacement for the interrupted run's historical timing.
+
 These are wall-clock processing intervals, not CPU-time measurements. Ordinary
 OS scheduling delays within a live invocation remain included. An external
 suspension of the same running process is not a separate measured restart gap;
