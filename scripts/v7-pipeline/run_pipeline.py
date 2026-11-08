@@ -7,6 +7,7 @@ import copy
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import contextmanager
 from datetime import datetime, timezone
+import gzip
 import hashlib
 import importlib
 import importlib.util
@@ -26,6 +27,7 @@ import zipfile
 
 from execution_state import (Timing, Checkpoints, RunLock, code_identity, inventory,
                              json_bytes, verify_pins, verify_anchor, write, elapsed_union)
+from draft_snapshot import draft_physical_selection, prepare_land_draft, read_land_draft, read_release_streams
 
 HERE = Path(__file__).resolve().parent
 SCRIPTS = HERE.parent
@@ -187,7 +189,8 @@ def rle_spec(directory, *, physical=False):
 
 
 class Pipeline:
-    def __init__(self, config, output=None, *, resume=False, work_dir=None):
+    def __init__(self, config, output=None, *, resume=False, work_dir=None,
+                 draft_revision=None, compare_release=None):
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
         self.config_path = Path(config).resolve(strict=True)
@@ -226,7 +229,42 @@ class Pipeline:
                 set(selections) - required - {'prior_physical_report', 'ocean_snapshot', 'reference_rows', 'reference_runs'}):
             raise ValueError('wrong source selection input set')
         resolved = self.resolve_raw_catalog(selections)
+        self.draft_land = None
+        self.preview_land = None
+        if draft_revision is not None:
+            if resume:
+                previous = read(self.out / 'run-identity.json').get('land_draft', {})
+                if previous.get('revision') != draft_revision:
+                    raise ValueError('resume requires the same mainland draft revision')
+                self.draft_land = self.resolve_pins(previous['snapshot'])
+            else:
+                snapshot = read_land_draft(draft_revision)
+                self.draft_land = self.save_source_document(snapshot, serialization='canonical-ascii')
+            published = self.resolve_source('land_snapshot', resolved['land_snapshot'])
+            assemble = stage_module(SCRIPTS / 'caucasus-audit/caucasus_seed_gate.py').assembled_region_hash
+            draft = read(self.draft_land)
+            prepared = prepare_land_draft(draft, read(published), assemble)
+            self.preview_land = self.save_source_document(prepared, serialization='canonical-ascii')
         self.sources = {name: self.resolve_source(name, spec) for name, spec in resolved.items()}
+        if self.preview_land is not None:
+            physical_selection = draft_physical_selection(draft, read(self.sources['neon_selection']))
+            self.sources['neon_selection'] = self.save_source_document(physical_selection)
+        if self.preview_land is not None and 'ocean_snapshot' in self.sources:
+            ocean_path = self.sources['ocean_snapshot']
+            ocean = read(ocean_path)
+            evidence = ocean['decision_revision']['evidence']
+            if (self.prefill_reference is None
+                    or evidence.get('base_local_snapshot_sha256') != sha(self.prefill_reference)):
+                raise ValueError('published ocean decisions do not match the published water selection')
+            evidence['preview_binding'] = {'ocean_export_sha256': sha(ocean_path),
+                                           'published_water_sha256': sha(self.prefill_reference)}
+            evidence['base_local_snapshot_sha256'] = sha(self.sources['water_snapshot'])
+            self.sources['ocean_snapshot'] = self.save_source_document(ocean, serialization='canonical-utf8')
+            self.prefill_reference = None
+        if compare_release is not None:
+            if {'reference_rows', 'reference_runs'} & self.sources.keys():
+                raise ValueError('choose a published comparison release or local reference streams')
+            self.sources.update(self.release_reference(compare_release))
         if bool('reference_rows' in self.sources) != bool('reference_runs' in self.sources):
             raise ValueError('both reference stream pins are required')
         self.collect_source_files()
@@ -236,6 +274,10 @@ class Pipeline:
             'code': self.code, 'scripts_root': str(SCRIPTS), 'output': str(self.out),
             'runtime': self.runtime,
             'runtime_paths': {key: os.environ.get(key) for key in ('PYTHONPATH', 'PROJ_DATA', 'PROJ_LIB', 'PROJ_NETWORK')}}
+        if self.draft_land is not None:
+            self.identity['land_draft'] = {'revision': draft_revision, 'snapshot': pin(self.draft_land)}
+        if compare_release is not None:
+            self.identity['compare_release'] = compare_release
         if not resume:
             self.out.mkdir(mode=0o700)
         self.run_lock = RunLock(self.out / 'run.lock')
@@ -509,20 +551,58 @@ class Pipeline:
             self.source_pins.append(result)
         return path
 
+    def release_reference(self, version):
+        streams = read_release_streams(version)
+        digest = hashlib.sha256(json_bytes(streams)).hexdigest()
+        directory = (self.root / 'inputs' / ('release-' + digest)).resolve()
+        if not directory.is_relative_to(self.root) or directory.is_relative_to(self.out):
+            raise ValueError('release reference overlaps output or escapes the work directory')
+        directory.mkdir(parents=True, exist_ok=True)
+        reference = {}
+        for stream, bucket, key, size, stored_hash, decoded_hash in streams:
+            path = directory / (stream + '.u32le')
+            compressed = self.cloud_file({'r2_bucket': bucket, 'r2_key': key, 'size_bytes': size,
+                                          'sha256': stored_hash})
+            if not path.exists():
+                started = time.monotonic()
+                partial = path.with_name(path.name + '.' + uuid.uuid4().hex + '.partial')
+                try:
+                    with gzip.open(compressed, 'rb') as src, partial.open('xb') as dst:
+                        shutil.copyfileobj(src, dst, 1 << 20)
+                    if sha(partial) != decoded_hash:
+                        raise ValueError('decoded reference stream hash mismatch')
+                    try:
+                        os.link(partial, path)
+                    except FileExistsError:
+                        pass
+                finally:
+                    partial.unlink(missing_ok=True)
+                    self.acquisition_intervals.append((started, time.monotonic()))
+            reference['reference_' + stream] = self.resolve_pins({'path': str(path), 'sha256': decoded_hash})
+        return reference
+
     def resolve_source(self, name, spec):
+        if name == 'land_snapshot' and self.preview_land is not None:
+            return self.preview_land
         if name == 'water_snapshot' and isinstance(spec, dict) and set(spec) == {'local_water_overlay'}:
             inputs = spec['local_water_overlay']
             if not isinstance(inputs, dict) or set(inputs) != {'base', 'water', 'overlay', 'reference'}:
                 raise ValueError('local water selection requires base, water, overlay and reference inputs')
             paths = {key: self.resolve_source(key, value) for key, value in inputs.items()}
             producer = stage_module(SCRIPTS / REPLAY / 'local_water_overlay.py')
-            result = producer.make(read(paths['base']), read(paths['water']), read(paths['overlay']),
-                paths['base'], sha(paths['base']), paths['water'], sha(paths['water']),
-                paths['overlay'], sha(paths['overlay']))
-            producer.verify(result)
+
+            def make(base):
+                result = producer.make(read(base), read(paths['water']), read(paths['overlay']),
+                    base, sha(base), paths['water'], sha(paths['water']), paths['overlay'], sha(paths['overlay']))
+                producer.verify(result)
+                return result
+
+            result = make(paths['base'])
             if not producer.equivalent_selection(result, read(paths['reference'])):
                 raise ValueError('regenerated water selection differs from pinned reference')
             self.prefill_reference = paths['reference']
+            if self.preview_land is not None:
+                result = make(self.preview_land)
             return self.save_source_document(result, serialization='canonical-utf8')
         if isinstance(spec, dict) and set(spec) in ({'json'}, {'json', 'serialization'}) and isinstance(spec['json'], (dict, list)):
             return self.json_source(spec['json'], raw_manifest=name == 'raw_manifest',
@@ -1032,7 +1112,8 @@ class Pipeline:
         report = self.out / 'comparison.json'
         self.stage('verification', 'compare', REPLAY + '/compare_grids.py',
                      candidate=final, reference=rows.parent, width=grid['width'], height=grid['height'],
-                     reference_rows_sha256=sha(rows), reference_runs_sha256=sha(runs), out=report)
+                     reference_rows_sha256=sha(rows), reference_runs_sha256=sha(runs),
+                     allow_different=self.preview_land is not None, out=report)
         self.timing.mark_complete('verification')
         return pin(report)
 
@@ -1095,8 +1176,12 @@ def main():
     p.add_argument('output', type=Path, nargs='?', help='new run directory inside input_root; defaults to WORK_DIR/run')
     p.add_argument('--work-dir', type=Path, help='local input/run directory, overriding input_root; created if absent')
     p.add_argument('--resume', action='store_true', help='validate and continue the same checkpoint-enabled run')
+    p.add_argument('--draft-land-revision', help='preview the selected editable mainland revision in Neon')
+    p.add_argument('--compare-release', help='compare with a published map version in Neon')
     a = p.parse_args()
-    pipeline = Pipeline(a.config, a.output, resume=a.resume, work_dir=a.work_dir)
+    compare_release = a.compare_release or ('v8.0' if a.draft_land_revision else None)
+    pipeline = Pipeline(a.config, a.output, resume=a.resume, work_dir=a.work_dir,
+                        draft_revision=a.draft_land_revision, compare_release=compare_release)
 
     def stop(signum, frame):
         pipeline.cancel()

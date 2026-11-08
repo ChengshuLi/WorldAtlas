@@ -25,5 +25,10 @@ class ReproofTests(unittest.TestCase):
    obj[key]=orig
  def test_accepted_snapshot_cannot_use_equivalence(self):
   self.snapshot['source']='neon-export'
+  self.snapshot['decision_revision']['status']='accepted'
   with self.assertRaises(ValueError):self.check_new()
+ def test_neon_draft_can_use_equivalence(self):
+  self.snapshot['source']='neon-export'
+  self.snapshot['decision_revision']['status']='draft'
+  self.assertTrue(self.check_new())
 if __name__=='__main__':unittest.main()

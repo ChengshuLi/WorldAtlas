@@ -29,9 +29,9 @@ def validate_executable_pins(inp,allow_local):
   if inp[key].get('sha256') not in allowed:raise ValueError('unreviewed executable code')
  if 'terminal_checker' in inp and inp['terminal_checker'].get('sha256')!=TRUSTED_TERMINAL_CHECKER and not (allow_local and inp['terminal_checker'].get('sha256')==PROVISIONAL_TERMINAL_CHECKER):raise ValueError('unreviewed terminal checker code')
 
-def validate_provisional_checker_source(inp,snapshot,allow_local):
+def validate_fresh_checker(inp,allow_local):
  provisional=(inp['closure_checker'].get('sha256')==PROVISIONAL_CLOSURE_CHECKER or inp.get('terminal_checker',{}).get('sha256')==PROVISIONAL_TERMINAL_CHECKER)
- if provisional and not (allow_local and snapshot.get('source')=='local-derived-from-neon-export'):raise ValueError('provisional checker requires local provisional snapshot')
+ if provisional and not (allow_local and 'prior_physical_report' in inp):raise ValueError('fresh closure checker requires the prior physical report')
 
 def rasterizer_sources(inp):
  directory=BASE.parents[1]/'neon-mainland-regions-20261104/rasterizer'
@@ -79,17 +79,17 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
  for target in (work,output):
   if any(target==d or target in d.parents or d in target.parents for d in sources):raise ValueError('seed work/output overlaps inputs')
  if shutil.disk_usage(work.parent).free<controls['disk_reserve_bytes']:raise RuntimeError('disk reserve reached')
- snapshot=load_pinned_snapshot(inp['snapshot']['path'],inp['snapshot']['sha256'],guard);validate_provisional_checker_source(inp,snapshot,allow_local);resolution=bounded_json(inp['resolution'],guard);rev,entity,boundaries,source_catalog=boundary_records(snapshot,allow_local=allow_local)
+ snapshot=load_pinned_snapshot(inp['snapshot']['path'],inp['snapshot']['sha256'],guard);validate_fresh_checker(inp,allow_local);resolution=bounded_json(inp['resolution'],guard);rev,entity,boundaries,source_catalog=boundary_records(snapshot,allow_local=allow_local)
  if resolution.get('grid')!=grid or resolution.get('component_manifest_sha256')!=inp['component_manifest']['sha256'] or any(resolution.get('input_sha256',{}).get(k)!=inp[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')):raise ValueError('witness resolution input mismatch')
  regions,records=selected_regions(snapshot,rev,boundaries,source_catalog);rules=compile_rules(snapshot,resolution,inp['snapshot']['sha256'],[r['region_id'] for r in regions],allow_local=allow_local)
  report=bounded_json(inp['physical_report'],guard);outputs=report.get('physical_output_sha256',report.get('output_sha256',{}))
  if report.get('status') not in ('candidate-only','stage1-complete') or report.get('grid')!=grid or outputs.get('rows.u32le')!=inp['physical_rows']['sha256'] or outputs.get('runs.u32le')!=inp['physical_runs']['sha256']:raise ValueError('physical report mismatch')
  contract=bounded_json(inp['closure_contract'],guard);physical=contract.get('physical',{});cg=contract.get('grid',{})
- if (contract.get('schema')!='physical-water-closure-contract-v1' and not (allow_local and snapshot.get('source')=='local-derived-from-neon-export' and contract.get('schema')=='physical-water-closure-contract-v2')) or physical.get('rows_sha256')!=inp['physical_rows']['sha256'] or physical.get('runs_sha256')!=inp['physical_runs']['sha256'] or physical.get('report_sha256')!=inp['physical_report']['sha256'] or physical.get('water_code')!=1 or physical.get('land_code')!=17 or cg.get('crs')!='EPSG:4326' or cg.get('width')!=grid['width'] or cg.get('height')!=grid['height'] or Fraction(str(cg.get('west')))!=Fraction(str(grid['west'])) or Fraction(str(cg.get('north')))!=Fraction(str(grid['north'])) or Fraction(cg.get('step_numerator'),cg.get('step_denominator'))!=Fraction(str(grid['step'])):raise ValueError('physical contract mismatch')
- local_candidate=allow_local and snapshot.get('source')=='local-derived-from-neon-export'
+ if (contract.get('schema')!='physical-water-closure-contract-v1' and not (allow_local and 'prior_physical_report' in inp and contract.get('schema')=='physical-water-closure-contract-v2')) or physical.get('rows_sha256')!=inp['physical_rows']['sha256'] or physical.get('runs_sha256')!=inp['physical_runs']['sha256'] or physical.get('report_sha256')!=inp['physical_report']['sha256'] or physical.get('water_code')!=1 or physical.get('land_code')!=17 or cg.get('crs')!='EPSG:4326' or cg.get('width')!=grid['width'] or cg.get('height')!=grid['height'] or Fraction(str(cg.get('west')))!=Fraction(str(grid['west'])) or Fraction(str(cg.get('north')))!=Fraction(str(grid['north'])) or Fraction(cg.get('step_numerator'),cg.get('step_denominator'))!=Fraction(str(grid['step'])):raise ValueError('physical contract mismatch')
+ local_candidate=allow_local and 'prior_physical_report' in inp
+ if snapshot.get('source')=='local-derived-from-neon-export' and not local_candidate:raise ValueError('local candidate requires prior physical report')
  prior=None
  if local_candidate:
-  if 'prior_physical_report' not in inp:raise ValueError('local candidate requires prior physical report')
   prior=bounded_json(inp['prior_physical_report'],guard)
   prior_out=prior.get('physical_output_sha256',prior.get('output_sha256',{}))
   if prior.get('status') not in ('candidate-only','stage1-complete') or prior.get('grid')!=grid or prior_out.get('rows.u32le')!=inp['physical_rows']['sha256'] or prior_out.get('runs.u32le')!=inp['physical_runs']['sha256']:raise ValueError('prior physical streams not equivalent')

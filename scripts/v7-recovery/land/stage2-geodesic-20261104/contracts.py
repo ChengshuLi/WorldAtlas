@@ -73,7 +73,8 @@ def seed_report(report,grid,pins,revision,entity_revision,groups,entity_codes,se
 
 def provisional_reproof(snapshot,seed,pins,prior,grid):
  """Bind a local research candidate to equal historical and fresh physical streams."""
- need(snapshot.get('source')=='local-derived-from-neon-export' and local_or_neon_source(snapshot),'exact provisional snapshot required')
+ need(local_or_neon_source(snapshot) and (snapshot.get('source')=='local-derived-from-neon-export'
+      or snapshot.get('decision_revision',{}).get('status')=='draft'),'selected mainland draft required')
  out=prior.get('physical_output_sha256',prior.get('output_sha256',{}))
  need(prior.get('status') in ('candidate-only','stage1-complete') and prior.get('grid')==grid and out.get('rows.u32le')==pins['physical_rows'] and out.get('runs.u32le')==pins['physical_runs'],'historical physical report mismatch')
  eq=seed.get('provisional_physical_equivalence');need(isinstance(eq,dict),'provisional equivalence missing')

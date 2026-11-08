@@ -1,5 +1,6 @@
 """Runner contracts, measured parallelism, and actual raw-to-component chaining."""
 import json
+import gzip
 import hashlib
 import io
 import os
@@ -123,6 +124,65 @@ class Fixture(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'source pin mismatch'):
             self.make()
         self.assertFalse((self.root / 'run').exists())
+
+    def test_resume_reuses_the_frozen_neon_draft(self):
+        revision = 'mainland-draft-1'
+        source = {'source_id': 'land', 'version': '1', 'r2_bucket': 'worldatlas',
+                  'r2_key': 'land.zip', 'sha256': 'a' * 64, 'size_bytes': 100}
+        selection = {'role': 'physical_land', 'ordinal': 0, 'execution_status': 'selected_for_research'}
+        draft = {'decision_revision': {'id': revision}, 'sources': [source],
+                 'stage1_source_inputs': [{**selection, 'decision_revision': revision,
+                                           'source_id': 'land', 'source_version': '1'}]}
+        capture = {'schema': 'worldatlas-neon-stage1-selection-readback-v1',
+                   'revision': 'published', 'rows': [{**source, **selection, 'revision': 'published'}]}
+        self.cfg['sources']['neon_selection'] = {'json': capture}
+        config = pipeline.write(self.inputs / 'preview-request.json', self.cfg)
+        with (patch.object(pipeline, 'read_land_draft', return_value=draft) as export,
+              patch.object(pipeline, 'prepare_land_draft', return_value=draft)):
+            runner = pipeline.Pipeline(config, draft_revision=revision)
+            try:
+                frozen = runner.sources['land_snapshot']
+                self.assertEqual(pipeline.read(frozen), draft)
+                self.assertEqual(pipeline.read(runner.sources['neon_selection'])['revision'], revision)
+                self.assertEqual(runner.identity['land_draft'],
+                                 {'revision': revision, 'snapshot': pipeline.pin(frozen)})
+            finally:
+                runner.close()
+        export.assert_called_once_with(revision)
+        with (patch.object(pipeline, 'read_land_draft', side_effect=AssertionError('draft reread')),
+              patch.object(pipeline, 'prepare_land_draft', return_value=draft)):
+            resumed = pipeline.Pipeline(config, draft_revision=revision, resume=True)
+            try:
+                self.assertEqual(resumed.sources['land_snapshot'], frozen)
+            finally:
+                resumed.close()
+        with self.assertRaisesRegex(ValueError, 'same mainland draft revision'):
+            pipeline.Pipeline(config, draft_revision='another-draft', resume=True)
+        draft['sources'][0]['sha256'] = 'b' * 64
+        with (patch.object(pipeline, 'read_land_draft', return_value=draft),
+              patch.object(pipeline, 'prepare_land_draft', return_value=draft),
+              self.assertRaisesRegex(ValueError, 'physical sources differ')):
+            pipeline.Pipeline(config, self.root / 'changed-physical-preview', draft_revision=revision)
+
+    def test_release_comparison_downloads_and_verifies_both_streams(self):
+        config = pipeline.write(self.inputs / 'request.json', self.cfg)
+        digest = lambda data: hashlib.sha256(data).hexdigest()
+        decoded = {name: name.encode() for name in ('rows', 'runs')}
+        stored = {f'review/{name}.u32le.gz': gzip.compress(data) for name, data in decoded.items()}
+        catalog = [(name, 'worldatlas', key, len(data), digest(data), digest(decoded[name]))
+                   for name, (key, data) in zip(decoded, stored.items())]
+        calls = []
+        with (patch.object(pipeline, 'read_release_streams', return_value=catalog),
+              self.fake_r2(stored, calls)):
+            runner = pipeline.Pipeline(config, compare_release='v8.0')
+            try:
+                for name, data in decoded.items():
+                    self.assertEqual(runner.sources['reference_' + name].read_bytes(), data)
+            finally:
+                runner.close()
+            resumed = pipeline.Pipeline(config, compare_release='v8.0', resume=True)
+            resumed.close()
+        self.assertEqual(calls, list(stored))
 
     def cloud(self, payload, key='sources/input.json'):
         return {'r2_bucket': 'worldatlas', 'r2_key': key,

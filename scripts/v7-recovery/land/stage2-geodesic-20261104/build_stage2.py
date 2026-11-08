@@ -99,7 +99,7 @@ def _build(cp,work,output,resume,raw,cfg,processing_started=None,orchestration_r
  fresh=resolver.resolve(rr,allow_local=True) if cfg['orchestration']['provisional_only'] else resolver.resolve(rr);fresh['request_sha256']=pins['resolution_request'];need(fresh==resolution,'fresh witness re-resolution differs from consumed report')
  seed=read_json(paths['seed_report'],guard);seed_roots=contracts.seed_report(seed,g,pins,rev,ent,groups,entity_codes,source_code['seed_code_files'])
  equivalent=False
- if snap.get('source')=='local-derived-from-neon-export':equivalent=contracts.provisional_reproof(snap,seed,pins,read_json(paths['prior_physical_report'],guard),g)
+ if 'prior_physical_report' in paths:equivalent=contracts.provisional_reproof(snap,seed,pins,read_json(paths['prior_physical_report'],guard),g)
  hint=read_json(paths['hint_report'],guard);count=contracts.hints_report(hint,g,pins,rev,ent,metric,seed_roots,source_code['hint_code_files'])
  # The exact snapshot rules/region trace and land-policy crosswalk is still
  # validated by a required separate contract routine, never inferred from V7.

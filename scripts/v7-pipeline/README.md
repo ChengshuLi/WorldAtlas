@@ -41,6 +41,27 @@ serialized bytes. `stored-json-text` preserves the stored JSON text.
 `spaced-ascii` serializes sorted ASCII JSON with default spacing and a final
 newline. Other documents specify their serialization in the configuration.
 
+## Preview a mainland draft
+
+Set `NEON_DATABASE_URL` to the branch containing your draft and the published
+release records. Use a new output directory for each preview.
+
+    python3 scripts/v7-pipeline/run_pipeline.py scripts/v7-pipeline/config.json \
+      /absolute/path/to/worldatlas-work/run-v9-preview \
+      --work-dir /absolute/path/to/worldatlas-work \
+      --draft-land-revision YOUR_REVISION
+
+The runner freezes the draft in one read-only transaction and recalculates the
+line and region checksums. This preview supports edits to the mainland lines
+and the regions that use them. It uses the configured raw inputs, published
+source evidence and selected regional and water decisions. The frozen draft
+and resolved input checksums are recorded with the run. Resume with the same
+arguments and `--resume` to use the frozen draft again.
+
+The preview compares with `v8.0` by default. Use `--compare-release VERSION` to
+choose another map in `atlas.map_release_objects`. Read `comparison.json` for
+the changed-cell count and category transitions.
+
 `--work-dir` chooses and creates the local input/run directory, overriding
 `input_root`; the configuration can omit that field when using this option.
 The default output is `WORK_DIR/run`. An explicit output and `--resume` retain
