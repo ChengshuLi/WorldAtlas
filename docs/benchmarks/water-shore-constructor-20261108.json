@@ -1,0 +1,171 @@
+{
+  "arrays": {
+    "codes": {
+      "dtype": "|u1",
+      "sha256": "0700b17fdbda33c90884e3f0087bc83b560dc0e55bd4abd232d85729eb1a30e7",
+      "shape": [
+        31598879
+      ]
+    },
+    "ends": {
+      "dtype": "<u4",
+      "sha256": "7b8ef03b0422443939a2966319251b764507b2c2cb21f323bb810b7f0c5433d1",
+      "shape": [
+        31598879
+      ]
+    },
+    "offsets": {
+      "dtype": "<u8",
+      "sha256": "1a3b5e769d6ef80daebd44cdef73fd53ea88b4ed782e7558ef4cdafaf6192b63",
+      "shape": [
+        54615
+      ]
+    },
+    "starts": {
+      "dtype": "<u4",
+      "sha256": "4fa44b793564d6c180e421178c3ced1db3a7e6e4c926dc15ac7264897ac154f8",
+      "shape": [
+        31598879
+      ]
+    }
+  },
+  "coastal_cells": 49401908,
+  "coastal_spans": 31598879,
+  "date": "2026-11-08",
+  "environment": {
+    "PROJ_NETWORK": "OFF",
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "cpu_quota": null,
+    "logical_cpu_count": 9,
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python_version": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]"
+  },
+  "grid": {
+    "height": 54614,
+    "width": 131072
+  },
+  "inputs": {
+    "land_rows": {
+      "bytes": 218460,
+      "sha256": "8922efb4b90021e36e5491ddf65ab1eaa7f6961dfc0f81fadfbfecc45f510674"
+    },
+    "land_runs": {
+      "bytes": 213549360,
+      "sha256": "dc19c358ce976b201c9861685948ca1ddae61635b10d4136c4ff19b9cb50310b"
+    },
+    "physical_rows": {
+      "bytes": 218460,
+      "sha256": "6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468"
+    },
+    "physical_runs": {
+      "bytes": 213457608,
+      "sha256": "1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7"
+    }
+  },
+  "integration_code_sha256": {
+    "batch_coastal_tiles": "aa467addd6df82c9588c3bb09c833720bd591f40386ef0052e0018a2702ae2dc",
+    "coastal_shore_index_batch": "55131e576b81c669f09594aa15ab860d0d3f934ae464fb5335d31e364b67454c",
+    "verified_water_inputs": "45224b009f9b5022b22cdd5ecdbb7a578c960b02fdbdaf157e7f018aaf9aaceb"
+  },
+  "limitations": [
+    "The two isolated pairs used opposite orders on the same host and source pins. They are not independent machines or a whole-stage speed estimate.",
+    "Both constructor intervals exclude context preparation, array fingerprint comparison and exit source revalidation. Preparation builds the generation own index and is reported separately.",
+    "The prior extraction-versus-index query proof applies to the unchanged query method. Existing coastal production already queried an index; only index construction is newly accelerated.",
+    "No runner, basin concurrency, source-hash verification, geography decisions or prefill defaults changed."
+  ],
+  "method": "NumPy shared interval-cut ranks across batches of complete RLE rows; no per-cell global expansion, process, ctypes or custom compiled helper. Inherits the original crop-query method.",
+  "numpy": "2.2.4",
+  "rejected_experiments": [
+    {
+      "candidate_seconds": 20.167818,
+      "method": "Batched repeated binary search",
+      "outcome": "Slower; superseded and not integrated.",
+      "reference_seconds": 17.070411
+    },
+    {
+      "method": "PyArrow Acero chained sorted joins",
+      "outcome": "Manually cancelled incomplete trial; no final parity receipt or measured full runtime. Not integrated and no runtime option retained."
+    }
+  ],
+  "rows_per_batch": 256,
+  "schema": "worldatlas-shore-index-constructor-evidence-v1",
+  "scope": "Complete global shoreline-index construction on source-bound provisional Stage 2 land; not final/regional land admission, prefill, geographic acceptance or whole-water speed proof.",
+  "status": "all-index-offset-start-end-category-bytes-identical",
+  "tests": {
+    "coverage": [
+      "120 deterministic arbitrary grids and variable batch sizes",
+      "seams, poles, empty coastal row batches, single cells and noncoalesced RLE",
+      "maximum uint32 width with compressed spans, no pixel expansion",
+      "wrong physical/land codes, foreign helper origins and immutable source checks",
+      "complete tiny coastal tile bytes and scientific manifests against legacy constructor"
+    ],
+    "focused_tests": 116,
+    "status": "passed locally"
+  },
+  "trials": [
+    {
+      "benchmark_code_sha256": {
+        "benchmark": "a1beaf6de77284c9dfd110554fd7ddb56cca4444747e05a7b4d7a8233057800d",
+        "coastal_shore_index": "1792c78a4fe0166a780c894445d451fd3aa5a1b5ecd3e09ff1f8aa475330965c",
+        "coastal_shore_index_batch": "55131e576b81c669f09594aa15ab860d0d3f934ae464fb5335d31e364b67454c",
+        "shared_nearest": "4780bd45ceb03ccfb980c0d4668f85c9062a7842548d9d5f892afe0344312506",
+        "snapshot_input": "93f24f7428685df723def0bfb427c598c50f9daba0fd6a03e728d04f9241f073",
+        "verified_water_inputs": "4b4ad46fa0e00b11a4059893ebd4b9a22df677e9ff4f5ad9efc10037862e3e9f"
+      },
+      "constructor_time_reduction_fraction": 0.2746049058811494,
+      "generation_exit_verification_seconds": 0.29429880599855096,
+      "generation_preparation_seconds": 17.903412723000656,
+      "order": "candidate-first",
+      "raw_receipt_sha256": "5a0398b48ccdca2f2f324014a8743bbc18f47e28766919ba76496d8300e7ce79",
+      "timings": {
+        "batched": {
+          "completed_utc": "2026-11-08T08:05:36.132648+00:00",
+          "constructor_seconds": 12.49824623799941,
+          "started_utc": "2026-11-08T08:05:23.634365+00:00"
+        },
+        "reference": {
+          "completed_utc": "2026-11-08T08:05:53.362261+00:00",
+          "constructor_seconds": 17.229570945997693,
+          "started_utc": "2026-11-08T08:05:36.132679+00:00"
+        }
+      }
+    },
+    {
+      "benchmark_code_sha256": {
+        "benchmark": "db500c6c00a63fc79be3eb70cd0bb51eb30bb2a9fbbe1a32b0dc3e0153e3a1c6",
+        "coastal_shore_index": "1792c78a4fe0166a780c894445d451fd3aa5a1b5ecd3e09ff1f8aa475330965c",
+        "coastal_shore_index_batch": "55131e576b81c669f09594aa15ab860d0d3f934ae464fb5335d31e364b67454c",
+        "shared_nearest": "4780bd45ceb03ccfb980c0d4668f85c9062a7842548d9d5f892afe0344312506",
+        "snapshot_input": "93f24f7428685df723def0bfb427c598c50f9daba0fd6a03e728d04f9241f073",
+        "verified_water_inputs": "45224b009f9b5022b22cdd5ecdbb7a578c960b02fdbdaf157e7f018aaf9aaceb"
+      },
+      "constructor_time_reduction_fraction": 0.2840450173224197,
+      "generation_exit_verification_seconds": 0.29065078499843366,
+      "generation_preparation_seconds": 12.206825895002112,
+      "order": "reference-first",
+      "raw_receipt_sha256": "b170fcb23dab9b426fc48f955a3a58900d3b4b4944f1af53536762e0776a2787",
+      "timings": {
+        "batched": {
+          "completed_utc": "2026-11-08T08:44:22.255542+00:00",
+          "constructor_seconds": 11.762492860001657,
+          "started_utc": "2026-11-08T08:44:10.493033+00:00"
+        },
+        "reference": {
+          "completed_utc": "2026-11-08T08:44:10.489459+00:00",
+          "constructor_seconds": 16.429095605999464,
+          "started_utc": "2026-11-08T08:43:54.060350+00:00"
+        }
+      }
+    }
+  ]
+}

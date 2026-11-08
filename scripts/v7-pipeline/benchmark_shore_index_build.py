@@ -71,7 +71,7 @@ def run(request_path,out,*,rows_per_batch=256,candidate_first=False):
     result={**invocation,'status':'all-index-offset-start-end-category-bytes-identical','grid':{'width':width,'height':height},
             'coastal_cells':cells,'coastal_spans':spans,'arrays':arrays,'timings':timings,
             'generation_preparation_seconds':preparation,'generation_exit_verification_seconds':exit_time,
-            'limitations':['Generation preparation (including a reference index) is excluded from both constructor intervals.',
+            'limitations':['Generation preparation (including the verified generation own index) is excluded from both constructor intervals.',
                            'One pair is not cache-order-balanced or a whole-stage speed estimate.',
                            'The candidate inherits the unchanged reference crop-query method; the request scope is not a final-land admission.']}
     write_json_exclusive(out/'report.json',result,indent=2)

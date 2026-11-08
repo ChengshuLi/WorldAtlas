@@ -442,6 +442,32 @@ already uses the index; the new opportunity is verified reuse by basin consumers
 Exact pins, canonical point hashes and UTC anchors are in
 [`water-shore-index-20261108.json`](../../docs/benchmarks/water-shore-index-20261108.json).
 
+### Batched shoreline construction
+
+The coastal batch and verified shared-input API now construct the same index
+with NumPy shared cut ranks over complete batches of RLE rows. Physical, land
+and adjacent-row endpoints all remain mandatory. Propagation repeats values
+over compressed cut intervals, never all global pixels. Horizontal wrap,
+polar boundaries, category splits and the original crop-query method are
+unchanged. Both consumers pin the new helper in their normal code provenance.
+
+`benchmark_shore_index_build.py --request REQUEST --out NEW_DIR` uses the same
+request schema as the global query proof. It compares every offset, start, end
+and category byte and revalidates sources before writing a success receipt.
+`--candidate-first` reverses constructor order; `--rows-per-batch` changes only
+ordinary complete-row batch size. Phase files distinguish unfinished work from
+a complete parity result. Run comparable measurements separately from other
+heavy jobs.
+
+Two isolated global pairs on 31,598,879 spans passed exactly, in opposite
+orders: 17.230→12.498 s candidate-first and 16.429→11.762 s reference-first.
+The 27.5–28.4% reduction concerns constructor time only. Preparation, exit
+source verification and output comparisons are separate. The inputs are
+source-bound provisional Stage 2 land, not final/regional land or a prefill
+admission. The generic implementation also passes arbitrary-grid, seam/pole,
+noncoalesced RLE, invalid-category and maximum-width compressed-span tests.
+See [source pins and full scope](../../docs/benchmarks/water-shore-constructor-20261108.json).
+
 The numeric writer's complete isolated byte/report proof measured 29.844 s
 legacy versus 13.012 s numeric. `compare_land_replays.py --compare-writer`
 holds current numeric coverage constant and pairs complete legacy/numeric
