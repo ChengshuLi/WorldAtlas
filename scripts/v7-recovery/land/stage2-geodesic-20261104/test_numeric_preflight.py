@@ -1,5 +1,6 @@
 """Run the unchanged coverage/population contract tests against the prototype."""
 from unittest import mock
+from functools import partial
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,12 +14,14 @@ from test_preflight import Preflight,RulePopulation
 class _NumericMixin:
     def setUp(self):
         super().setUp()
-        patcher=mock.patch('test_preflight.validate',new=numeric_preflight.validate)
+        patcher=mock.patch('test_preflight.validate',new=partial(numeric_preflight.validate,batch_rows=getattr(self,'batch_rows',1)))
         patcher.start();self.addCleanup(patcher.stop)
 
 
 class NumericCoverage(_NumericMixin,Preflight):pass
 class NumericPopulation(_NumericMixin,RulePopulation):pass
+class BatchedNumericCoverage(_NumericMixin,Preflight):batch_rows=128
+class BatchedNumericPopulation(_NumericMixin,RulePopulation):batch_rows=128
 
 
 class NumericDenseOracle(unittest.TestCase):
@@ -54,8 +57,9 @@ class NumericDenseOracle(unittest.TestCase):
                         'seed_rules':[{'component_id_current_generation_only':root,'region_id':None,'inside_code':code,'outside_code':code} for root,code in ((0,17),(0xffffffff,22))],
                         'expected_rule_population':{str(root):{'inside_cells':int(np.count_nonzero(roots==root)),'outside_cells':0} for root in (0,0xffffffff)},
                         'expected_category_counts':expected['seed_category_cells']}
-                    for module in (preflight,numeric_preflight):
-                        self.assertEqual(module.validate(width,height,*paths,np.asarray([19],dtype='u4'),[0,0xffffffff],**kwargs),expected)
+                    self.assertEqual(preflight.validate(width,height,*paths,np.asarray([19],dtype='u4'),[0,0xffffffff],**kwargs),expected)
+                    for batch in (1,2,5,128):
+                        self.assertEqual(numeric_preflight.validate(width,height,*paths,np.asarray([19],dtype='u4'),[0,0xffffffff],batch_rows=batch,**kwargs),expected)
 
     def test_maximum_width_sparse_row_is_not_pixel_expanded(self):
         with tempfile.TemporaryDirectory() as temp:

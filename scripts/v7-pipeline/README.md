@@ -407,6 +407,11 @@ tile verifier against its freshly generated complete seed. That directory must
 have the exact core-config-pinned manifest. The receipt records the verifier
 source hash, directory identity, UTC interval and complete tile/record counts.
 
+Numeric coverage comparison also accepts `--batch-rows N` to amortize ordinary
+NumPy/row I/O setup. This is explicitly opt-in and has no memory-based admission
+rule or cache ceiling. All source row boundaries remain mandatory. Batch-mode
+full-input results are separate from the published row-mode receipt.
+
 ## Global shoreline-index kernel QA
 
 `benchmark_water_shore_index.py --request REQUEST --out NEW_DIR` verifies every

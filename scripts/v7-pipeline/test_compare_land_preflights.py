@@ -13,7 +13,7 @@ class NumericPreflightPairTests(unittest.TestCase):
     def test_complete_pair_uses_python_apis_and_retains_default(self):
         for reverse in (False,True):
             with self.subTest(reverse=reverse),patch('subprocess.Popen',side_effect=AssertionError('no process')),patch('ctypes.CDLL',side_effect=AssertionError('no bridge')):
-                result=compare.compare(self.fixture.stage,self.fixture.root/str(reverse),candidate_first=reverse)
+                result=compare.compare(self.fixture.stage,self.fixture.root/str(reverse),candidate_first=reverse,batch_rows=128 if reverse else 1)
             self.assertEqual(result['status'],'complete-preflight-reports-identical')
             self.assertEqual(result['results']['candidate']['coverage']['land_cells'],7)
 

@@ -15,7 +15,8 @@ from exclusive_outputs import create_directory_exclusive,write_json_exclusive
 from replay_land_sweep import staged_inputs
 
 
-def compare(staged,out,*,candidate_first=False):
+def compare(staged,out,*,candidate_first=False,batch_rows=1):
+    if type(batch_rows) is not int or batch_rows<1:raise ValueError('invalid row batch')
     staged=Path(staged).resolve(strict=True)
     plan,config,report,paths=staged_inputs(staged)
     names=('preflight.py','write_land_stream.py','ural_delta.py','row_overlay.py','numeric_preflight.py')
@@ -33,7 +34,7 @@ def compare(staged,out,*,candidate_first=False):
     streams=[paths[name] for name in ('component_rows','component_runs','physical_rows','physical_runs','seed_rows','seed_runs')]
     identity={'schema':'worldatlas-numeric-land-preflight-pair-v1','staging_plan_sha256':digest(staged/'plan.json'),
         'code_sha256':pins,'driver_sha256':digest(Path(__file__)),
-        'order':['candidate','reference'] if candidate_first else ['reference','candidate']}
+        'candidate_batch_rows':batch_rows,'order':['candidate','reference'] if candidate_first else ['reference','candidate']}
     create_directory_exclusive(out);write_json_exclusive(out/'invocation.json',identity,indent=2)
     results={}
     for name in identity['order']:
@@ -41,7 +42,8 @@ def compare(staged,out,*,candidate_first=False):
         started_at=datetime.now(timezone.utc).isoformat();start=time.perf_counter()
         coverage=module.validate(grid['width'],grid['height'],*streams,roots,seed_roots,
             required_codes=map(int,report['categories']),seed_rules=seed['seed_rules'],
-            expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'])
+            expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'],
+            **({'batch_rows':batch_rows} if name=='candidate' else {}))
         results[name]={'elapsed_seconds':time.perf_counter()-start,'coverage':coverage,
             'started_at_utc':started_at,'completed_at_utc':datetime.now(timezone.utc).isoformat()}
         write_json_exclusive(out/(name+'.json'),results[name],indent=2)
@@ -60,5 +62,5 @@ def compare(staged,out,*,candidate_first=False):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--staged-inputs',type=Path,required=True);parser.add_argument('--out',type=Path,required=True)
-    parser.add_argument('--candidate-first',action='store_true');args=parser.parse_args()
-    print(json.dumps(compare(args.staged_inputs,args.out,candidate_first=args.candidate_first),indent=2))
+    parser.add_argument('--candidate-first',action='store_true');parser.add_argument('--batch-rows',type=int,default=1);args=parser.parse_args()
+    print(json.dumps(compare(args.staged_inputs,args.out,candidate_first=args.candidate_first,batch_rows=args.batch_rows),indent=2))

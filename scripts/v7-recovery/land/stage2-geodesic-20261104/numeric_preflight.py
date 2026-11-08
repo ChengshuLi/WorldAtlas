@@ -4,10 +4,11 @@ This removes Python dispatch per interval, not validation or input coverage.
 Use only for explicit paired validation until full-input parity/timing exists.
 """
 import numpy as np
-from row_overlay import RowStream,overlay
+from row_overlay import RowStream,overlay,overlay_batch
 
 
-def validate(width,height,component_rows,component_runs,physical_rows,physical_runs,mainland_rows,mainland_runs,roots,seed_roots,required_codes=range(17,23),guard=lambda:None,seed_rules=None,expected_rule_population=None,expected_category_counts=None):
+def validate(width,height,component_rows,component_runs,physical_rows,physical_runs,mainland_rows,mainland_runs,roots,seed_roots,required_codes=range(17,23),guard=lambda:None,seed_rules=None,expected_rule_population=None,expected_category_counts=None,*,batch_rows=1):
+    if type(batch_rows) is not int or batch_rows<1:raise ValueError('invalid row batch')
     roots=np.asarray(roots,dtype=np.uint32);seed_roots=set(map(int,seed_roots))
     if roots.ndim!=1 or len(roots)==0 or np.any(roots[1:]<=roots[:-1]) or not seed_roots or np.any(np.isin(roots,list(seed_roots))):
         raise ValueError('bad component root lists')
@@ -16,12 +17,20 @@ def validate(width,height,component_rows,component_runs,physical_rows,physical_r
     try:
         for rowpath,runpath,columns in ((component_rows,component_runs,3),(physical_rows,physical_runs,2),(mainland_rows,mainland_runs,2)):
             streams.append(RowStream(rowpath,runpath,height,columns))
-        for y in range(height):
-            if y%128==0:guard()
-            components,physical,seed=(stream.next() for stream in streams)
-            left,right,owner,phys,selected=overlay(width,components,physical,seed)
+        next_guard=0
+        for y in range(0,height,batch_rows):
+            if y>=next_guard:guard();next_guard=y+128
+            count=min(batch_rows,height-y)
+            if count==1:
+                components,physical,seed=(stream.next() for stream in streams)
+                left,right,owner,phys,selected=overlay(width,components,physical,seed)
+            else:
+                fields=[value for stream in streams for value in stream.next_rows(count)]
+                components=fields[1]
+                left,right,owner,phys,selected=overlay_batch(width,*fields)
             present=owner>=0
-            if np.any(present!=(phys==17)):raise ValueError('physical/component mismatch at row '+str(y))
+            if np.any(present!=(phys==17)):
+                at=int(np.flatnonzero(present!=(phys==17))[0]);raise ValueError('physical/component mismatch at row '+str(y+int(left[at])//width))
             if np.any((~present)&(selected!=0)):raise ValueError('seed outside physical land')
             root_values=components[:,2];is_seed=np.isin(root_values,list(seed_roots))
             position=np.searchsorted(roots,root_values)

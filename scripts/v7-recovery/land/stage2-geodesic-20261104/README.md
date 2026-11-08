@@ -186,3 +186,11 @@ contract cases pass. A complete isolated pair also matched every report field:
 22.689 s current versus 16.329 s numeric. It remains opt-in. The supported
 comparison tool is `scripts/v7-pipeline/compare_land_preflights.py`; no copied
 or patched producer or source report is needed.
+
+The numeric prototype now also accepts an explicit positive `batch_rows` option.
+`compare_land_preflights.py --batch-rows N` selects it; both production and the
+comparison's default remain unchanged. Batched offsets are validated for every
+source row, and uint64 positions pack rows/columns without pixel expansion.
+Independent per-row oracles, dense root/count cases, UINT32-width boundaries and
+all existing coverage/population cases pass for varied batch sizes. Complete
+batch-mode parity/timing are pending; the published 16.329 s result is row mode.
