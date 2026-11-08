@@ -46,7 +46,7 @@ def selected_basins(snapshot):
 
 
 def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow_draft=False,
-        work_root=None, scan_reference=False):
+        work_root=None, scan_reference=False, scalar_coordinates=False):
     started = time.perf_counter()
     if not allow_unverified:
         raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
@@ -77,7 +77,8 @@ def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow
         else:
             features = extract_indexed_features(archive, feature_ids, dataset=Path(workspace) / shape,
                 metrics=selection_index, geometry_hashes={str(basin['source_feature_id']): basin['geometry_sha256']
-                                                          for basin, _ in selected})
+                                                          for basin, _ in selected},
+                **({'scalar_coordinates': True} if scalar_coordinates else {}))
         phases['ogr_selection_and_json_decode'] = time.perf_counter() - before
     before = time.perf_counter()
     geometry_hashes = selection_index.get('geometry_sha256') or {
@@ -137,12 +138,15 @@ def main(argv=None, *, emit=print):
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--work-root', type=Path, help='existing workspace directory for transient archive materialization; defaults to the output parent')
     p.add_argument('--scan-reference', action='store_true', help='reference engine: scan features with the GDAL attribute filter')
+    p.add_argument('--scalar-coordinate-reference', action='store_true',
+                   help='retain the scalar fixed-15 candidate for exact in-process A/B tests')
     p.add_argument('--allow-unverified-snapshot', action='store_true')
     p.add_argument('--allow-draft-snapshot', action='store_true')
     args = p.parse_args(argv)
     emit(json.dumps(run(args.archive, args.input_root, args.policy, args.policy_sha256, args.out,
                          allow_unverified=args.allow_unverified_snapshot, allow_draft=args.allow_draft_snapshot,
-                         work_root=args.work_root, scan_reference=args.scan_reference)))
+                         work_root=args.work_root, scan_reference=args.scan_reference,
+                         scalar_coordinates=args.scalar_coordinate_reference)))
 
 
 if __name__ == '__main__':

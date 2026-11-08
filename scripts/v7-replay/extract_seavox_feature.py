@@ -116,12 +116,14 @@ def geojson_coordinate(value):
     return float(text)
 
 
-def coordinate_geometry(geometry):
+def coordinate_geometry(geometry, geometry_converter=None):
     """Build a candidate at the same 15-decimal precision as the OGR writer.
 
     This is never trusted by rounding alone: its canonical digest must match
     the decision-bound OGR geometry or the caller uses the reference writer.
     """
+    if geometry_converter is not None:
+        return geometry_converter(geometry)
     name = geometry.GetGeometryName()
     if name == 'POLYGON':
         dimension = 3 if geometry.Is3D() else 2
@@ -138,7 +140,8 @@ def coordinate_geometry(geometry):
     return None
 
 
-def extract_indexed_features(archive, feature_ids, *, dataset, metrics=None, geometry_hashes=None):
+def extract_indexed_features(archive, feature_ids, *, dataset, metrics=None, geometry_hashes=None,
+                             scalar_coordinates=False):
     """Index attributes without geometry, then read only the selected FIDs.
 
     A shapefile's ordinary filtered cursor constructs geometries before testing
@@ -187,6 +190,10 @@ def extract_indexed_features(archive, feature_ids, *, dataset, metrics=None, geo
     indexed = time.perf_counter()
     result, actual_hashes = {}, {}
     certified, fallbacks = 0, 0
+    geometry_converter = None
+    if geometry_hashes and not scalar_coordinates:
+        from seavox_coordinates import geometry_coordinates
+        geometry_converter = geometry_coordinates
     for ident in sorted(selected, key=lambda value: (int(value), value)):
         feature = layer.GetFeature(fids[ident])
         if feature is None or str(feature.GetField(field)) != ident:
@@ -198,7 +205,7 @@ def extract_indexed_features(archive, feature_ids, *, dataset, metrics=None, geo
         doc_geometry, actual = None, None
         if expected:
             try:
-                candidate = coordinate_geometry(geometry)
+                candidate = coordinate_geometry(geometry, geometry_converter)
                 if candidate is not None and canonical_hash(candidate) == expected:
                     doc_geometry, actual = candidate, expected
                     certified += 1
@@ -227,6 +234,8 @@ def extract_indexed_features(archive, feature_ids, *, dataset, metrics=None, geo
                         'ogr_geometry_fallbacks': fallbacks,
                         'attribute_index_seconds': indexed - started,
                         'selected_geometry_seconds': time.perf_counter() - indexed})
+        metrics['coordinate_conversion'] = ('arrow-decimal128-fixed15-hash-certified-v1'
+                                             if geometry_converter else 'scalar-fixed15-or-ogr')
     return result
 
 
