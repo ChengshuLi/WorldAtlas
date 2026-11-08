@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import importlib.util
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -24,32 +25,42 @@ from replay_land_sweep import staged_inputs
 import checkpoints
 import contracts
 import engine
-import preflight
-import ural_delta
-import write_land_stream as writer
 
 
-def reference_modules(directory):
-    # Only the preflight's ordinary sibling import is scoped. The returned
-    # modules retain their own reader and sweep globals after restoration.
-    if digest(directory/'ural_delta.py')!=digest(STAGE2/'ural_delta.py'):
-        raise ValueError('reference Ural semantics differ')
-    def load(name, path):
-        spec=importlib.util.spec_from_file_location(name,path)
-        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-        return module
-    old_writer=load('_land_sweep_reference_writer',directory/'write_land_stream.py')
-    previous=sys.modules.get('write_land_stream')
+def source_module(name, path, expected):
+    raw=path.read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=expected:
+        raise ValueError('benchmark source changed before loading: '+str(path))
+    spec=importlib.util.spec_from_file_location(name,path)
+    module=importlib.util.module_from_spec(spec)
+    # Execute the exact fingerprinted Python source rather than a cached module
+    # or bytecode cache. This is in-process Python, never a compiler subprocess.
+    exec(compile(raw,str(path),'exec'),module.__dict__)
+    return module
+
+
+def rule_module(expected):
+    return source_module('_land_sweep_rule',STAGE2/'ural_delta.py',expected)
+
+
+def sweep_modules(directory, expected, rule):
+    previous={name:sys.modules.get(name) for name in ('ural_delta','write_land_stream')}
     try:
-        sys.modules['write_land_stream']=old_writer
-        old_preflight=load('_land_sweep_reference_preflight',directory/'preflight.py')
+        sys.modules['ural_delta']=rule
+        selected_writer=source_module('_land_sweep_writer',directory/'write_land_stream.py',expected['write_land_stream.py'])
+        sys.modules['write_land_stream']=selected_writer
+        selected_preflight=source_module('_land_sweep_preflight',directory/'preflight.py',expected['preflight.py'])
     finally:
-        if previous is None:sys.modules.pop('write_land_stream',None)
-        else:sys.modules['write_land_stream']=previous
-    return old_preflight,old_writer
+        for name,module in previous.items():
+            if module is None:sys.modules.pop(name,None)
+            else:sys.modules[name]=module
+    return selected_preflight,selected_writer
 
 
 def compare(staged, source_replay, baseline_code, out, *, candidate_first=False):
+    for module in (checkpoints,contracts,engine):
+        if Path(module.__file__).resolve()!=STAGE2/(module.__name__+'.py'):
+            raise ImportError('comparison module resolved outside selected source: '+module.__name__)
     staged,source_replay,baseline_code=(Path(path).resolve(strict=True) for path in (staged,source_replay,baseline_code))
     plan,config,report,paths=staged_inputs(staged)
     completed=json.loads((source_replay/'comparison.json').read_bytes())
@@ -70,11 +81,14 @@ def compare(staged, source_replay, baseline_code, out, *, candidate_first=False)
     code_names=('preflight.py','write_land_stream.py','ural_delta.py')
     old_code={name:digest(baseline_code/name) for name in code_names}
     new_code={name:digest(STAGE2/name) for name in code_names}
-    old_preflight,old_writer=reference_modules(baseline_code)
+    if old_code['ural_delta.py']!=new_code['ural_delta.py']:raise ValueError('reference Ural semantics differ')
+    rule=rule_module(new_code['ural_delta.py'])
+    old_preflight,old_writer=sweep_modules(baseline_code,old_code,rule)
+    new_preflight,new_writer=sweep_modules(STAGE2,new_code,rule)
     pins={name:digest(source_replay/name) for name in ('comparison.json','invocation.json','checkpoint.npz','roots.u32le','codes.u8')}
     extra=json.loads((staged/'search-inputs.json').read_bytes());snapshot=Path(extra['inputs']['decision_snapshot']['path'])
     if digest(snapshot)!=config['inputs']['decision_snapshot']['sha256']:raise ValueError('snapshot differs')
-    delta=ural_delta.compile_rule(json.loads(snapshot.read_bytes()),report['categories'],config['grid'])
+    delta=rule.compile_rule(json.loads(snapshot.read_bytes()),report['categories'],config['grid'])
     invocation={'schema':'worldatlas-complete-python-land-sweep-comparison-v1','reference_code_sha256':old_code,
         'candidate_code_sha256':new_code,'staging_plan_sha256':digest(staged/'plan.json'),'source_replay_sha256':pins,
         'driver_sha256':digest(Path(__file__)),'python':sys.version,'cpu_affinity':sorted(os.sched_getaffinity(0)) if hasattr(os,'sched_getaffinity') else None,
@@ -85,7 +99,7 @@ def compare(staged, source_replay, baseline_code, out, *, candidate_first=False)
     streams=[paths[name] for name in ('component_rows','component_runs','physical_rows','physical_runs','seed_rows','seed_runs')]
     results={}
     for name in invocation['order']:
-        module,write_module=(preflight,writer) if name=='candidate' else (old_preflight,old_writer)
+        module,write_module=(new_preflight,new_writer) if name=='candidate' else (old_preflight,old_writer)
         begin=datetime.now(timezone.utc).isoformat();started=time.perf_counter()
         coverage=module.validate(grid['width'],grid['height'],*streams,roots,seed_roots,
             required_codes=map(int,report['categories']),seed_rules=seed['seed_rules'],
