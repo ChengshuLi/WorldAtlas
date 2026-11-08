@@ -41,14 +41,6 @@ On macOS the pinned run passed 1/1 in 13.547 seconds using `contracts.py` SHA-25
 
 The fresh outer orchestrator and real production closure are still not exercised, and this result does not establish geographic accuracy. No map was built and no Neon record was changed.
 
-## Fresh closure with historical route provenance (unpromoted scratch)
-
-`test_caucasus_v2_fresh_closure.py` runs the real Caucasus source gate, frozen direct producer and real checker on a synthetic 80×40 global grid, then validates its actual gate and seed reports using a scratch `contracts.py` with the fresh-closure change from `scripts/v7-land/research-mixed-runtime/direct-stage2-work-in-progress/work-in-progress.patch`. The scratch contract SHA-256 is `f703e5edcb0f67cc908aa0812e5b194b480ea2916c017464e51d1bfa0066c7f1`; it is not the active PR4 contract. The selected synthetic route deliberately records different historical physical, contract and checker pins than the new proof.
-
-The default historical-mode validator rejected the mismatch. An explicitly supplied `functools.partial` with `fresh_closure_proofs=True` passed; a forged fresh proof and a forged gate producer pin were rejected. The run passed 1/1 in 17.165 seconds. This tests the callback behavior only: the outer/core caller must authenticate the direct seed binding before selecting fresh mode. It does not exercise the outer runtime, production physical closure or real selected Neon data, and does not authorize enabling the unpromoted patch.
-
-The separate Panama/Caucasus combined fixture in PR4 `83fe2e8` covers both real source archives against a synthetic grid and the active historical-mode core; the two fixtures are complementary.
-
 ## Local rehearsal using a selected draft export
 
 `test_caucasus_real_snapshot_replay.py` checks a pinned existing selected-draft export and inserts the compact recipe into a **temporary copy only**. It independently derives the line, checks the region's joins, compares the selected and derived region hashes, verifies that all pre-existing boundary provenance/source relationships survive, and confirms the original export file has not changed.
