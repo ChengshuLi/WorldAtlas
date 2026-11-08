@@ -354,7 +354,7 @@ class Pipeline:
         return path
 
     def neon_source(self, source, expected, size):
-        """Read a pinned research document, never mutate the Neon source catalog."""
+        """Read a pinned research document from Neon."""
         try:
             import psycopg
         except ImportError:
@@ -366,16 +366,16 @@ class Pipeline:
             with psycopg.connect(connection) as database:
                 database.execute('SET TRANSACTION READ ONLY')
                 row = database.execute(
-                    "SELECT sha256,size_bytes,COALESCE(provenance->'snapshot',provenance->'document')::text "
-                    'FROM atlas.source_assets WHERE source_id=%s AND version=%s',
+                    'SELECT sha256,size_bytes,document::text '
+                    'FROM atlas.structured_documents WHERE source_id=%s AND version=%s',
                     (source['source_id'], source['version'])).fetchone()
         except Exception:
             raise ValueError('Neon source read failed; check database access and selected source identity') from None
         if row is None or row[0] != expected or int(row[1]) != size or not isinstance(row[2], str):
-            raise ValueError('Neon source catalog identity/SHA-256/size mismatch')
+            raise ValueError('Neon structured document identity/SHA-256/size mismatch')
         document = json.loads(row[2])
         if not isinstance(document, dict):
-            raise ValueError('Neon source catalog document must be an object')
+            raise ValueError('Neon structured document must be an object')
         # Keep PostgreSQL's JSONB text intact for records pinned in that form.
         # Parsing and reserializing it can change numeric spelling and byte order.
         # Every accepted representation must still match the selected size/hash.

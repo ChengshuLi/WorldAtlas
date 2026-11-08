@@ -60,9 +60,9 @@ For one configuration that pulls its selected inputs directly, run:
 snapshots are pinned Neon records or inline values; R2 is used for raw inputs.
 Set `NEON_DATABASE_URL` to the selected research database using a read-only role
 and install `psycopg` in the same Python environment. It is never saved in the
-configuration. The source reader opens a read-only transaction, checks the
-catalog identity, and accepts a document only when all bytes match the selected
-size and SHA-256. `jsonb-text` preserves PostgreSQL's JSONB text exactly, without
+configuration. The source reader opens a read-only transaction against
+`atlas.structured_documents`, checks the version, and accepts a document only
+when all bytes match the selected size and SHA-256. `jsonb-text` preserves PostgreSQL's JSONB text exactly, without
 adding a newline; `spaced-ascii` reconstructs sorted ASCII JSON with default
 separator spacing and one newline. The selected regional snapshot and Lydekker
 line use those representations respectively. Other existing serializations are

@@ -210,7 +210,7 @@ class Fixture(unittest.TestCase):
         self.assertEqual(statements[0][0], 'SET TRANSACTION READ ONLY')
         self.assertEqual(statements[1][1], ('selected', 'v1'))
 
-        self.assertIn("COALESCE(provenance->'snapshot',provenance->'document')::text", statements[1][0])
+        self.assertIn('document::text FROM atlas.structured_documents', statements[1][0])
 
     def test_spaced_neon_json_reconstructs_original_without_changing_compact_serialization(self):
         value = {'name': 'Sørkapp', 'number': 1.0}
@@ -284,10 +284,10 @@ class Fixture(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'cannot reconstruct'):
                 runner.neon_source(source, expected, len(payload))
             row[:] = ['0' * 64, len(payload), payload.decode()]
-            with self.assertRaisesRegex(ValueError, 'catalog identity/SHA-256/size mismatch'):
+            with self.assertRaisesRegex(ValueError, 'structured document identity/SHA-256/size mismatch'):
                 runner.neon_source(source, expected, len(payload))
             row[:] = [expected, len(payload) + 1, payload.decode()]
-            with self.assertRaisesRegex(ValueError, 'catalog identity/SHA-256/size mismatch'):
+            with self.assertRaisesRegex(ValueError, 'structured document identity/SHA-256/size mismatch'):
                 runner.neon_source(source, expected, len(payload))
 
     def test_cloud_zip_members_are_individually_pinned_and_keep_sidecars_together(self):
