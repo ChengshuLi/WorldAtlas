@@ -165,6 +165,7 @@ class Fixture(unittest.TestCase):
             {'dataset': source, 'files': [source]}]}}
         self.cfg['sources']['regional_template'] = {'json': {
             'point_request': {'json': {'source_files': [dict(source, source_id='raw', version='v1')]}},
+            'polygon_source_files': [dict(source, shapefile_path=source)],
             'evidence_source_files': [source], 'regional': {'request': {'sources': {'raw': dict(source, version='v1')}}}}}
         calls = []
         with self.fake_r2({'sources/land.geojson': payload}, calls):
@@ -176,6 +177,7 @@ class Fixture(unittest.TestCase):
         self.assertEqual(point['source_files'][0]['source_id'], 'raw')
         self.assertEqual(point['source_files'][0]['path'], land['dataset'])
         self.assertEqual(template['evidence_source_files'][0], {**source, 'path': land['dataset']})
+        self.assertEqual(template['polygon_source_files'][0]['shapefile_path'], land['dataset'])
         self.assertEqual(template['regional']['request']['sources']['raw']['version'], 'v1')
         self.assertEqual(calls, ['sources/land.geojson'])
 

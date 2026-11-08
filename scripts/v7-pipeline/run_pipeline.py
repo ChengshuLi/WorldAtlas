@@ -421,6 +421,8 @@ class Pipeline:
             if field in ('evidence_source_files', 'corroboration_source_files'):
                 metadata.update({key: value[key] for key in ('r2_bucket', 'r2_key') if key in value})
             result = {**(metadata if field.endswith('files') or regional_source else {}), **pin(path)}
+            if field == 'polygon_source_files' and 'shapefile_path' in value:
+                result['shapefile_path'] = str(self.cloud_file(value['shapefile_path']))
             if regional_source and 'shapefile' in value:
                 result['shapefile'] = self.source_document(value['shapefile'], field='shapefile')
             return result

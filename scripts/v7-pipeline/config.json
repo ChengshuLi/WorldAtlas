@@ -1979,7 +1979,20 @@
             "sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
             "size_bytes": 928947876,
             "source_id": "osm-land-polygons-split-4326",
-            "version": "2026-11-03-79e88a74ed72"
+            "version": "2026-11-03-79e88a74ed72",
+            "shapefile_path": {
+              "archive": {
+                "r2_bucket": "worldatlas",
+                "r2_key": "sources/osm/2026-11-03/land-polygons-split-4326.zip",
+                "sha256": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+                "size_bytes": 928947876,
+                "source_id": "osm-land-polygons-split-4326",
+                "version": "2026-11-03-79e88a74ed72"
+              },
+              "member": "land-polygons-split-4326/land_polygons.shp",
+              "sha256": "e2258f3e849f8101cd44cea0f7c6e1ae5b476ef11f84e053af8a29f6cb82ffc3",
+              "size_bytes": 1321197196
+            }
           },
           {
             "r2_bucket": "worldatlas",
