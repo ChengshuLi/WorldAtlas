@@ -29,8 +29,9 @@
     ]
   },
   "cpu_affinity_count": 9,
-  "driver_commit": "210ca4d9673149f1f4f0e7541e0adbe5a5d1bf45",
   "driver_sha256": "1ae50bf69497ad83f3537371e360ee458f0a66187acbffcde4f491af0f247e05",
+  "driver_source_commit": "883d4efac6401f55af68b4dec61dad5ad35c68fe",
+  "driver_source_note": "This source revision preserves the exact measured driver bytes, identified by driver_sha256; later revisions add UTC anchors and additional pin checks.",
   "exact_components": 1220,
   "exact_queries": 14280,
   "executed_code_sha256": {
@@ -53,6 +54,13 @@
     "verify_physical_lineage.py": "817f608604a60511587532341573dcbc0dafd3aedcc67fc2242661d798283d1a",
     "verify_seed_index.cpp": "73d3cff8cec55d15d446c6fa3430aef2d545cae18e64374670888ed54112c8e2",
     "write_land_stream.py": "c2490c61d4fbb14739b86cd726dde6687b955fc26538070242f41bef4f8d886c"
+  },
+  "fresh_replay_artifact_sha256": {
+    "checkpoint.npz": "bff1a5dc14823bb389832d62510aa597d18866ede865ca0a915c84f1635a45ff",
+    "codes.u8": "b1bd185ef7bc379f4ab44aeb4132260e56c101241afebf2a4790e7bc78f201a6",
+    "comparison.json": "c4b105038abac55d002b75405f5317b1644efc253eb008ec0ae08188bee4b296",
+    "invocation.json": "2291570744fefb563046f4395425e9859d98482f1b91b0299b3c4dc598571c7f",
+    "roots.u32le": "3bb107bb490f48b1195a3bd34dede6781cd8d4e8f7aa5148830dbc0d26e6d063"
   },
   "grid": {
     "height": 54614,

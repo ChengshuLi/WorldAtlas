@@ -325,3 +325,13 @@ Neither tool launches the complete pipeline, compiles code or starts a process.
 This is preserved-evidence kernel replay, not a fresh raw-source build, geographic
 acceptance or full end-to-end speed measurement. Keep complete timing comparisons
 separate from other heavy runs. The user-owned full pipeline is independent.
+
+`compare_land_sweeps.py` pairs the complete old and current Python preflight and
+writer against the same staged inputs and fresh replay checkpoint. Pass
+`--staged-inputs`, `--source-replay`, `--baseline-code` (the original Stage 2
+source directory) and a new `--out`. It verifies checkpoint identity/checksum,
+recomputes its final assignments, records both source fingerprints and exact
+UTC trial intervals, and requires all reports and output bytes to match. It
+loads the reference Python modules in process and never edits their source.
+Run without other heavy workloads. `--candidate-first` reverses trial order;
+one pair does not balance cache order and is not an end-to-end speed ratio.
