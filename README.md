@@ -2,19 +2,11 @@
 
 The settled project contract is in [the data strategy](docs/data-strategy.md).
 
-## Continent review prototype
+## Published V8 map
 
-`web/worker.js` serves deliberately published `review/` assets from the `worldatlas`
-R2 bucket. Evidence objects are not publicly routed. The root page is a draft review
-surface, not an accepted geography release.
-
-The viewer loads and verifies the entire native grid up front as lossless row runs.
-The low four bits contain the proposed continent ID; bit 4 distinguishes source land.
-WebGL renders directly from the compact run representation at every zoom, and local
-picking uses the same data. There are no overview substitutions or detail downloads
-during navigation. Controls remain disabled until the complete map is ready.
-`scripts/build_local_grid.py DRAFT_DIR` builds and hashes the local-rendering assets
-from the generation chunks; chunking is an offline generation detail only.
+The [current viewer](web/current/README.md) renders the V8.0 map from two
+checksum-verified row-run streams. The Cloudflare Worker serves the viewer and
+streams from the `worldatlas` R2 bucket.
 
 ## Current direct research pipeline
 
@@ -40,10 +32,11 @@ Use the new Cloudflare account specified in `wrangler.jsonc`. Authenticate with
 Wrangler; never commit credentials. Deploy with `wrangler deploy`. The Worker
 requires an R2 binding named `ATLAS` to the `worldatlas` bucket.
 
-The source contains `__ASSET_BASE__` in `web/index.html`; replace it with the exact
-versioned `/review/.../` prefix when generating a published index. The display grid
-is gzip data and must be served as `application/gzip`, without a `Content-Encoding`
-header, because the browser explicitly decompresses it.
+Publish `web/current/index.html` as `review/index.html` and
+`web/current/sources.html` as `review/v8.0/sources.html`. The viewer loads its
+JavaScript, CSS and configuration from the versioned asset prefix in the HTML.
+Serve the grid streams as `application/gzip` with no `Content-Encoding` header
+so the viewer can decompress them.
 
 `atlas.map_release_objects` tracks the two R2 objects for each versioned
 row-run map. The `rows` stream stores row offsets and the `runs` stream stores
