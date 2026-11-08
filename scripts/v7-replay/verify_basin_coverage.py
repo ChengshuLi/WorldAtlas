@@ -18,7 +18,7 @@ def sha(p):
     return h.hexdigest()
 
 
-def main(argv=None, *, emit=print):
+def main(argv=None, *, emit=print, shared_inputs=None):
     processing_started=time.perf_counter()
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--manifest',type=Path,required=True)
@@ -46,9 +46,15 @@ def main(argv=None, *, emit=print):
     if basin['assignment_method']=='shared_nearest_assigned_shore' and source.get('tie_rules')!=basin.get('tie_rules'):
         raise ValueError('manifest tie rules do not match decision')
     allowed=set(participant_water_codes(snapshot,basin))
-    if sha(args.physical_rows)!=source['physical_rows_sha256'] or sha(args.physical_runs)!=source['physical_runs_sha256']:
-        raise ValueError('physical hash mismatch')
-    rows=np.memmap(args.physical_rows,dtype='<u4',mode='r');runs=np.memmap(args.physical_runs,dtype='<u4',mode='r')
+    if shared_inputs is None:
+        if sha(args.physical_rows)!=source['physical_rows_sha256'] or sha(args.physical_runs)!=source['physical_runs_sha256']:
+            raise ValueError('physical hash mismatch')
+        rows=np.memmap(args.physical_rows,dtype='<u4',mode='r');runs=np.memmap(args.physical_runs,dtype='<u4',mode='r')
+    else:
+        from verified_water_inputs import VerifiedWaterInputs
+        if not isinstance(shared_inputs,VerifiedWaterInputs):raise TypeError('a verified shared water input context is required')
+        rows,runs=shared_inputs.grid('physical',args.physical_rows,source['physical_rows_sha256'],
+                                    args.physical_runs,source['physical_runs_sha256'],W,H)
     if len(rows)!=H+1 or len(runs)%2 or int(rows[0])!=0 or int(rows[-1])!=len(runs)//2 or np.any(rows[1:]<=rows[:-1]):
         raise ValueError('invalid physical row offsets')
     meta=manifest['rasterization']; x0,x1,y0,y1=map(int,meta['bounds_columns_rows'])

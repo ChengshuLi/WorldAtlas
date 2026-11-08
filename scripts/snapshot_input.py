@@ -4,9 +4,9 @@ from pathlib import Path
 import tempfile
 
 
-def open_snapshot(write):
-    with tempfile.TemporaryDirectory(prefix='worldatlas-input-') as directory:
-        path = Path(directory) / 'snapshot'
+def open_snapshot(write, *, directory=None):
+    with tempfile.TemporaryDirectory(prefix='worldatlas-input-', dir=directory) as temporary:
+        path = Path(temporary) / 'snapshot'
         with path.open('xb') as output:
             write(output)
         fd = os.open(path, os.O_RDONLY)

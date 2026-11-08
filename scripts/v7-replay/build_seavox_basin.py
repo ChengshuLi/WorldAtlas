@@ -182,7 +182,7 @@ def source_water_spans(mask, x_offset, ends, values):
     return [(int(selected[a])+x_offset, int(selected[b-1])+x_offset+1)
             for a,b in zip(cuts[:-1], cuts[1:])]
 
-def main(argv=None, *, emit=print):
+def main(argv=None, *, emit=print, shared_inputs=None):
     processing_started=time.perf_counter()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--input-root', type=Path, required=True)
@@ -248,16 +248,29 @@ def main(argv=None, *, emit=print):
     feature = validate_source(geometry, feature_sha, basin['geometry_sha256'], basin['source_feature_id'])
     decision_revision = snapshot['decision_revision']['id']; entity_revision = snapshot['decision_revision']['entity_revision']
     member_id = str(basin['id'])
-    if digest(rows_path) != args.rows_sha256 or digest(runs_path) != args.runs_sha256:
-        raise ValueError('physical grid hash mismatch')
-    rows = np.memmap(rows_path, dtype='<u4', mode='r'); runs = np.memmap(runs_path, dtype='<u4', mode='r')
+    if shared_inputs is None:
+        if digest(rows_path) != args.rows_sha256 or digest(runs_path) != args.runs_sha256:
+            raise ValueError('physical grid hash mismatch')
+        rows = np.memmap(rows_path, dtype='<u4', mode='r'); runs = np.memmap(runs_path, dtype='<u4', mode='r')
+    else:
+        from verified_water_inputs import VerifiedWaterInputs
+        if not isinstance(shared_inputs, VerifiedWaterInputs):
+            raise TypeError('a verified shared water input context is required')
+        rows, runs = shared_inputs.grid('physical', rows_path, args.rows_sha256,
+                                       runs_path, args.runs_sha256, W, H)
+        if land_rows_path is not None:
+            shared_land = shared_inputs.grid('land', land_rows_path, args.land_rows_sha256,
+                                            land_runs_path, args.land_runs_sha256, W, H)
     if len(rows) != H+1 or len(runs)%2 or int(rows[0]) != 0 or int(rows[-1]) != len(runs)//2 or np.any(rows[1:] <= rows[:-1]):
         raise ValueError('invalid physical RLE offsets')
     x0, x1, y0, y1 = grid_bounds(feature)
     if is_shared:
-        if digest(land_rows_path) != args.land_rows_sha256 or digest(land_runs_path) != args.land_runs_sha256:
-            raise ValueError('land grid hash mismatch')
-        lr = np.memmap(land_rows_path, dtype='<u4', mode='r'); lu = np.memmap(land_runs_path, dtype='<u4', mode='r')
+        if shared_inputs is None:
+            if digest(land_rows_path) != args.land_rows_sha256 or digest(land_runs_path) != args.land_runs_sha256:
+                raise ValueError('land grid hash mismatch')
+            lr = np.memmap(land_rows_path, dtype='<u4', mode='r'); lu = np.memmap(land_runs_path, dtype='<u4', mode='r')
+        else:
+            lr, lu = shared_land
         if len(lr) != H+1 or len(lu)%2 or int(lr[0]) != 0 or int(lr[-1]) != len(lu)//2 or np.any(lr[1:] <= lr[:-1]):
             raise ValueError('invalid land RLE offsets')
         pairs, tolerance = selection
@@ -279,7 +292,8 @@ def main(argv=None, *, emit=print):
     raster = np.memmap(raster_path, dtype='u1', mode='r', shape=(y1-y0,x1-x0))
     if is_shared:
         try:
-            edges = shared.centers_for_crop((rows,runs), (lr,lu), shore_bounds, W, H, STEP, [p[1] for p in pairs])
+            edges = (shared.centers_for_crop((rows,runs), (lr,lu), shore_bounds, W, H, STEP, [p[1] for p in pairs])
+                     if shared_inputs is None else shared_inputs.shore_index.centers_for_crop(shore_bounds, STEP, [p[1] for p in pairs]))
             if shore_bounds!=full_shore_bounds:
                 edges=wrapped_bounds.baseline_shore_order(edges,full_shore_bounds,W,STEP)
             indexes = shared.make_indexes(edges, pairs)
@@ -359,12 +373,14 @@ def main(argv=None, *, emit=print):
     if is_shared and (certified+exact != cells or interval_certified+classifier.narrow_cells+classifier.fallback_cells != cells):
         raise ValueError('shared basin classification accounting mismatch')
     # A run that observed changing inputs is not a usable result.
-    for path, expected in ((policy_path,args.policy_sha256),(geometry,feature_sha),
-                           (rows_path,args.rows_sha256),(runs_path,args.runs_sha256)):
+    checked_paths = [(policy_path,args.policy_sha256),(geometry,feature_sha)]
+    if shared_inputs is None:
+        checked_paths.extend(((rows_path,args.rows_sha256),(runs_path,args.runs_sha256)))
+    for path, expected in checked_paths:
         if digest(path) != expected: raise ValueError(f'input changed during run: {path}')
     if archive and (digest(archive) != source['sha256'] or digest(extraction_path) != args.extraction_manifest_sha256):
         raise ValueError('archive or extraction manifest changed during run')
-    if is_shared and (digest(land_rows_path) != args.land_rows_sha256 or digest(land_runs_path) != args.land_runs_sha256):
+    if shared_inputs is None and is_shared and (digest(land_rows_path) != args.land_rows_sha256 or digest(land_runs_path) != args.land_runs_sha256):
         raise ValueError('land input changed during run')
     if (digest(Path(__file__))!=builder_code_sha or digest(Path(shared.__file__))!=shared_code_sha
             or digest(Path(interval_nearest.__file__))!=interval_code_sha):
@@ -397,6 +413,8 @@ def main(argv=None, *, emit=print):
                     'shared_nearest_sha256':shared_code_sha,
                     'shore_geometry_sha256':shared_code_sha} if is_shared else None,
                 'tiles':[{'core_rows':[0,H],'core_cols':[0,W],'span_file':{'path':assignment.name,'sha256':digest(assignment)}}]}
+    if shared_inputs is not None:
+        manifest['shared_input_generation'] = shared_inputs.provenance()
     manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'manifest.json', manifest, indent=2)
     emit(json.dumps({'cells':cells,'spans':spans_count,'rows':row_count,'assignment_sha256':digest(assignment)}))

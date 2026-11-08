@@ -130,6 +130,30 @@ class FullBuilderTest(unittest.TestCase):
                 validate_shared_audit(rectangle_manifest)
                 with gzip.open(out/'basin-assignment.jsonl.gz','rb') as reference, gzip.open(rectangle_out/'basin-assignment.jsonl.gz','rb') as rectangular:
                     self.assertEqual(reference.read(),rectangular.read())
+                # Reuse one immutable generation and exact shore index through
+                # each supported classifier; the scientific manifests agree.
+                from verified_water_inputs import VerifiedWaterInputs
+                from unittest.mock import patch
+                specs={role+'_'+kind:{'path':root/f'{role}-{kind}','sha256':h(root/f'{role}-{kind}')}
+                       for role in ('physical','land') for kind in ('rows','runs')}
+                with VerifiedWaterInputs(specs,12,6,work_root=root) as verified:
+                    def no_rehash_grid(path):
+                        if Path(path).resolve() in {spec['path'].resolve() for spec in specs.values()}:
+                            raise AssertionError('producer must use the verified snapshot')
+                        return h(Path(path))
+                    for name,arguments,reference_out in [('interval',interval_argv,out),
+                        ('points',baseline_argv,baseline_out),('rectangles',
+                        [arg for arg in interval_argv if arg!='--research-interval'],out)]:
+                        shared_out=Path(d)/('shared-'+name)
+                        candidate=[str(shared_out) if arg==str(reference_out) else arg for arg in arguments[1:]]
+                        if name=='rectangles':reference_out=rectangle_out
+                        with patch.object(m,'digest',side_effect=no_rehash_grid),patch.object(m.shared,'centers_for_crop',side_effect=AssertionError('must reuse exact global index')):
+                            m.main(candidate,emit=lambda value:None,shared_inputs=verified)
+                        with gzip.open(reference_out/'basin-assignment.jsonl.gz','rb') as left,gzip.open(shared_out/'basin-assignment.jsonl.gz','rb') as right:
+                            self.assertEqual(left.read(),right.read())
+                        manifests=[json.loads((directory/'manifest.json').read_text()) for directory in (reference_out,shared_out)]
+                        self.assertEqual(*[{key:value for key,value in manifest.items() if key not in ('processing_elapsed_seconds','shared_input_generation')} for manifest in manifests])
+                        self.assertEqual(manifests[1]['shared_input_generation']['input_sha256'],dict(verified.pins))
                 sys.argv=baseline_argv
                 # A helper changed after processing must not produce a completed manifest.
                 from unittest.mock import patch

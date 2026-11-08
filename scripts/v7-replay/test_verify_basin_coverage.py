@@ -43,14 +43,28 @@ class CoverageTest(unittest.TestCase):
     def write_manifest(self): (self.root/'manifest.json').write_text(json.dumps(self.doc))
     def repin_spans(self):
         self.write_spans();self.doc['tiles'][0]['span_file']['sha256']=sha(self.root/'assign.gz');self.write_manifest()
-    def run_verifier(self,manifest_hash=None):
+    def run_verifier(self,manifest_hash=None,shared_inputs=None):
         p=self.root/'manifest.json'
         argv=['verify','--manifest',str(p),'--manifest-sha256',manifest_hash or sha(p),
               '--physical-rows',str(self.root/'rows'),'--physical-runs',str(self.root/'runs'),
               '--policy',str(self.root/'policy.json'),'--policy-sha256',sha(self.root/'policy.json')]
-        with patch.object(sys,'argv',argv),contextlib.redirect_stdout(io.StringIO()):v.main()
+        with patch.object(sys,'argv',argv),contextlib.redirect_stdout(io.StringIO()):v.main(shared_inputs=shared_inputs)
 
     def test_match(self): self.run_verifier()
+    def test_verified_shared_generation_is_used_without_rehashing_mutable_paths(self):
+        from verified_water_inputs import VerifiedWaterInputs
+        land_rows=self.root/'land-rows';land_runs=self.root/'land-runs'
+        land_rows.write_bytes((self.root/'rows').read_bytes())
+        np.asarray([1,0,2,18,4,0,4,0],dtype='<u4').tofile(land_runs)
+        specs={}
+        for name,path in [('physical_rows',self.root/'rows'),('physical_runs',self.root/'runs'),('land_rows',land_rows),('land_runs',land_runs)]:
+            specs[name]={'path':path,'sha256':sha(path)}
+        with VerifiedWaterInputs(specs,4,2,work_root=self.root) as verified:
+            original_sha=v.sha
+            def reject_rehash(path):
+                if path in (self.root/'rows',self.root/'runs'):raise AssertionError('must reuse snapshot')
+                return original_sha(path)
+            with patch.object(v,'sha',side_effect=reject_rehash):self.run_verifier(shared_inputs=verified)
     def test_missing_and_extra_cells(self):
         self.records[1]['spans'][0]['end']=2;self.repin_spans()
         with self.assertRaisesRegex(ValueError,'coverage mismatch'):self.run_verifier()

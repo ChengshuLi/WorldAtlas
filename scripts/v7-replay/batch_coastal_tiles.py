@@ -297,7 +297,7 @@ def merge_tiles(completed, recovered):
         completed[index] = candidate
 
 
-def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,check_metadata,*,metadata_pins,processing_started=None,resume_from=None,workers=1):
+def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,check_metadata,*,metadata_pins,processing_started=None,resume_from=None,workers=1,shared_inputs=None):
  """Generate partial research tiles with fresh-output, authenticated continuation.
 
  Hash strings are caller assertions. Only the CLI validates pinned metadata and
@@ -314,6 +314,12 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
              'shore_index':Path(tile.coastal_shore_index.__file__)};code_pins={k:sha(v) for k,v in code_paths.items()}
  support_paths={'metadata':Path(pinned_coastal_metadata.__file__),'snapshot':Path(decision_snapshot.__file__),'land_lineage':Path(direct_lineage.__file__),'land_validator':Path(build_prefill_plan.__file__),'mixed_lineage':Path(selected_mixed_lineage.__file__),'overlay':Path(local_water_overlay.__file__),'output':Path(exclusive_outputs.__file__),'snapshot_input':Path(snapshot_input.__file__)};support_pins={k:sha(v) for k,v in support_paths.items()}
  identity={'snapshot_sha256':snapshot_sha,'plan_sha256':plan_sha,'grid':{'width':width,'height':height},'sealed_input_sha256':pins,'metadata_sha256':metadata_pins,'driver_sha256':CODE_SHA,'tile_code_sha256':code_pins,'support_code_sha256':support_pins}
+ if shared_inputs is not None:
+  from verified_water_inputs import VerifiedWaterInputs
+  if not isinstance(shared_inputs,VerifiedWaterInputs):raise TypeError('a verified shared water input context is required')
+  physical=shared_inputs.grid('physical',paths['physical_rows'],pins['physical_rows'],paths['physical_runs'],pins['physical_runs'],width,height)
+  land=shared_inputs.grid('land',paths['land_rows'],pins['land_rows'],paths['land_runs'],pins['land_runs'],width,height)
+  identity['shared_input_generation']=shared_inputs.provenance()
  inputs={k+'_sha256':pins[k] for k in names};inputs.update({k+'_sha256':v for k,v in metadata_pins.items()})
  check_metadata()
  completed={};prior=[]
@@ -328,12 +334,17 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
   if sha(Path(__file__))!=CODE_SHA or any(sha(path)!=code_pins[k] for k,path in code_paths.items()) or any(sha(path)!=support_pins[k] for k,path in support_paths.items()):raise ValueError('batch code changed during generation')
  with contextlib.ExitStack() as stack:
   sealed={};used=0
-  for k in names:
-   fd,n=sealed_copy(paths[k],pins[k]);used+=n;sealed[k]=stack.enter_context(os.fdopen(fd,'rb'))
-  physical=tile.open_grid(sealed['physical_rows'],sealed['physical_runs'],width,height);land=tile.open_grid(sealed['land_rows'],sealed['land_runs'],width,height)
   shore_started=time.perf_counter()
-  shore_index=tile.coastal_shore_index.CoastalShoreIndex(physical,land,width,height)
-  for values in (shore_index.offsets,shore_index.starts,shore_index.ends,shore_index.codes):values.flags.writeable=False
+  if shared_inputs is None:
+   for k in names:
+    fd,n=sealed_copy(paths[k],pins[k]);used+=n;sealed[k]=stack.enter_context(os.fdopen(fd,'rb'))
+   physical=tile.open_grid(sealed['physical_rows'],sealed['physical_runs'],width,height);land=tile.open_grid(sealed['land_rows'],sealed['land_runs'],width,height)
+   shore_started=time.perf_counter()
+   shore_index=tile.coastal_shore_index.CoastalShoreIndex(physical,land,width,height)
+   for values in (shore_index.offsets,shore_index.starts,shore_index.ends,shore_index.codes):values.flags.writeable=False
+  else:
+   used=sum(values.nbytes for grid in (physical,land) for values in grid)
+   shore_index=shared_inputs.shore_index
   shore_elapsed=time.perf_counter()-shore_started
   root=create_directory_exclusive(out);sync_directory(root.parent);manifests=[];attempt_id=uuid.uuid4().hex
   start={'schema':'worldatlas-coastal-batch-start-v1','identity':identity,'attempt_id':attempt_id,'prior_attempts':prior,'processing_elapsed_seconds':time.perf_counter()-processing_started}
@@ -368,6 +379,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
   check_metadata();check_code()
   result={'schema':'worldatlas-sealed-coastal-batch-v1','status':'complete-research-not-published',**identity,'sealed_input_bytes':used,'tiles':manifests,'checkpoint_identity_sha256':record_digest(identity),'batch_start_sha256':sha(root/'batch-start.json'),'resumed_tiles':len(completed),'parallel_workers':workers,'limitations':['Tiles remain research candidates and require separate global coverage, source and geographic review.','Sealed input bytes do not establish the correctness or acceptance of their source or decision metadata.','On-disk code hashes are change indicators, not proof of already-imported Python module bytes.']}
   result['shoreline_index']={'method':'exact-global-4neighbor-land-spans-v1','span_count':len(shore_index.starts),'coastal_cells':int(np.sum(shore_index.ends.astype(np.uint64)-shore_index.starts)),'storage_bytes':sum(a.nbytes for a in (shore_index.offsets,shore_index.starts,shore_index.ends,shore_index.codes)),'processing_elapsed_seconds':shore_elapsed}
+  if shared_inputs is not None:result['shoreline_index']['reused_verified_generation']=True
   attempts=prior+[{'attempt_id':attempt_id,'processing_elapsed_seconds':time.perf_counter()-processing_started,'timing_complete':True}]
   result['timing_attempts']=attempts
   result['timing_complete']=all(x['timing_complete'] for x in attempts)
@@ -378,7 +390,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
 
 CODE_SHA=sha(Path(__file__))
 
-def main(argv=None, *, emit=print):
+def main(argv=None, *, emit=print, shared_inputs=None):
  processing_started=time.perf_counter()
  ap=argparse.ArgumentParser(description=__doc__)
  for k in ('snapshot','snapshot-sha256','physical-rows','physical-rows-sha256','physical-runs','physical-runs-sha256','physical-report','physical-report-sha256','land-rows','land-rows-sha256','land-runs','land-runs-sha256','land-report','land-report-sha256','input-root','plan','plan-sha256','out'):ap.add_argument('--'+k,required=True)
@@ -395,7 +407,7 @@ def main(argv=None, *, emit=print):
   direct_lineage.validate_physical_report(files['physical_report'],expected['physical_report'],physical,width,height)
   direct_lineage.validate_direct_land(files['land_report'],expected['land_report'],physical,land,local_water_overlay.land_snapshot_hash(snapshot,expected['snapshot']),snapshot['decision_revision'],root,expected['physical_report'])
  grid={k:files[k] for k in ('physical_rows','physical_runs','land_rows','land_runs')};pins={k:expected[k] for k in grid}
- result=run_batch(snapshot,expected['snapshot'],grid,pins,plan,expected['plan'],out,width,height,check_metadata,metadata_pins={k:expected[k] for k in ('physical_report','land_report')},processing_started=processing_started,resume_from=a.resume_from,workers=a.workers)
+ result=run_batch(snapshot,expected['snapshot'],grid,pins,plan,expected['plan'],out,width,height,check_metadata,metadata_pins={k:expected[k] for k in ('physical_report','land_report')},processing_started=processing_started,resume_from=a.resume_from,workers=a.workers,shared_inputs=shared_inputs)
  emit(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'output':str(out)}))
 if __name__=='__main__':main()
 

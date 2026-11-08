@@ -37,6 +37,23 @@ class BatchTest(unittest.TestCase):
     manifest.pop('processing_elapsed_seconds');manifest.pop('stage_processing_elapsed_seconds')
    self.assertEqual(*manifests)
   self.assertEqual(serial['sealed_input_sha256'],parallel['sealed_input_sha256'])
+ def test_verified_generation_reuses_snapshots_and_index_with_exact_tiles(self):
+  from verified_water_inputs import VerifiedWaterInputs
+  reference=self.run_batch(out=self.d/'reference')
+  specs={key:{'path':self.paths[key],'sha256':self.pins[key]} for key in self.paths}
+  with VerifiedWaterInputs(specs,self.width,self.height,work_root=self.d) as verified:
+   with mock.patch.object(b,'sealed_copy',side_effect=AssertionError('must share verified snapshots')),mock.patch.object(b.tile.coastal_shore_index,'CoastalShoreIndex',side_effect=AssertionError('must share exact index')):
+    candidate=self.run_batch(out=self.d/'shared',shared_inputs=verified,workers=2)
+   self.assertTrue(candidate['shoreline_index']['reused_verified_generation'])
+   self.assertEqual(reference['sealed_input_bytes'],candidate['sealed_input_bytes'])
+   self.assertEqual(candidate['shared_input_generation']['input_sha256'],self.pins)
+   for index in range(2):
+    roots=[self.d/name/f'tile-{index:04d}' for name in ('reference','shared')]
+    self.assertEqual(*[gzip.decompress((root/'coastal-assignments.jsonl.gz').read_bytes()) for root in roots])
+    manifests=[json.loads((root/'manifest.json').read_bytes()) for root in roots]
+    for manifest in manifests:
+     manifest.pop('processing_elapsed_seconds');manifest.pop('stage_processing_elapsed_seconds')
+    self.assertEqual(*manifests)
  def test_parallel_failure_keeps_only_parent_published_checkpoints(self):
   original=b.tile.run
   def failed(*args,**kw):
