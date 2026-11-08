@@ -345,3 +345,20 @@ can stage an additional exact catalog-pinned JSON report with its receipt.
 The option is repeatable and does not change the immutable main staging plan.
 It accepts no unpinned object or path override, and reads no bulk stream unless
 that separate staging option was explicitly requested.
+
+## In-process admitted-stage benchmarks
+
+`benchmark_stage.py` and the coastal, basin, closed-water and prefill wrappers
+call the selected stage's `main(argv, emit=...)` Python API. They do not launch
+an interpreter, subprocess or CLI. The admitted command remains in the receipt
+as argument provenance; `actual_interpreter` and `execution_mode` describe what
+ran. `stage_wall_seconds` excludes interpreter startup and comparison checks;
+`process_wall_seconds` is the same value retained for older comparison tools.
+UTC start/end anchors identify the actual measurement interval.
+
+Use a fresh interpreter with the required Python bindings and run measurements
+separately. Cached sibling modules from a different checkout are rejected,
+API errors produce no success timing report, and the entrypoint is rehashed
+after execution. Logs and failed output directories remain for inspection.
+Older receipts that measured a child interpreter are not directly equivalent
+to this timing scope.

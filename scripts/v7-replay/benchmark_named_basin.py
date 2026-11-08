@@ -14,7 +14,6 @@ import hashlib
 import itertools
 import json
 from pathlib import Path
-import subprocess
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -29,6 +28,16 @@ def digest(path):
         for block in iter(lambda: stream.read(1 << 20), b''):
             h.update(block)
     return h.hexdigest()
+
+
+def verify_coverage(builder, arguments, log_path):
+    """Use the ordinary verifier API in this interpreter, never a child CLI."""
+    import verify_basin_coverage as verifier
+    expected = builder.with_name('verify_basin_coverage.py').resolve(strict=True)
+    if Path(verifier.__file__).resolve() != expected:
+        raise ImportError('coverage verifier resolved outside the selected checkout')
+    with create_text_exclusive(log_path) as log:
+        verifier.main(arguments, emit=lambda value: log.write(str(value) + '\n'))
 
 
 def assignment_comparison(reference, candidate, width, height):
@@ -103,14 +112,12 @@ def main():
         raise ValueError('parsed assignment counts do not match manifests')
     def option(name):
         return command[command.index(name) + 1]
-    verify = [command[0], str(builder.with_name('verify_basin_coverage.py')),
-              '--manifest', str(candidate / 'manifest.json'), '--manifest-sha256', digest(candidate / 'manifest.json'),
+    verify = ['--manifest', str(candidate / 'manifest.json'), '--manifest-sha256', digest(candidate / 'manifest.json'),
               '--physical-rows', option('--rows'), '--physical-runs', option('--runs'),
               '--policy', option('--policy'), '--policy-sha256', option('--policy-sha256')]
     if '--allow-draft-snapshot' in command:
         verify.append('--allow-draft-snapshot')
-    with create_text_exclusive(out / 'coverage.log') as log:
-        subprocess.run(verify, check=True, stdout=log, stderr=subprocess.STDOUT)
+    verify_coverage(builder, verify, out / 'coverage.log')
     report = {'schema': 'worldatlas-named-basin-benchmark-v1', 'status': 'full-input-exact-match',
               'command': command, 'environment': timing['environment'], 'comparison': comparison,
               'baseline_processing_seconds': baseline['processing_elapsed_seconds'],
@@ -118,6 +125,7 @@ def main():
               'candidate_process_wall_seconds': timing['process_wall_seconds'],
               'speedup': baseline['processing_elapsed_seconds'] / result['processing_elapsed_seconds'],
               'coverage_verification': json.loads((out / 'coverage.log').read_text()),
+              'coverage_verifier_sha256': digest(builder.with_name('verify_basin_coverage.py')),
               'baseline_timing_source': 'completed original stage manifest; not rerun by this driver',
               'candidate_algorithm_sha256': result['algorithm_sha256'],
               'candidate_nearest_assignment_audit': result['nearest_assignment_audit'],
