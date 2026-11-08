@@ -1,4 +1,4 @@
-import errno,fcntl,gzip,hashlib,json,os,signal,subprocess,sys,tempfile,textwrap,time,unittest
+import errno,gzip,hashlib,json,os,signal,subprocess,sys,tempfile,textwrap,time,unittest
 from pathlib import Path
 from unittest import mock
 import numpy as np
@@ -92,11 +92,14 @@ class BatchTest(unittest.TestCase):
   self.assertGreaterEqual(result['processing_elapsed_seconds'],0)
   self.assertGreaterEqual(manifest['processing_elapsed_seconds'],0)
   self.assertEqual(manifest['shore_crop_bounds'],[0,16,1,6])
- def test_sealed_content_cannot_change(self):
-  fd,n=b.sealed_copy(self.paths['physical_runs'],self.pins['physical_runs']);self.addCleanup(os.close,fd);self.assertEqual(fcntl.fcntl(fd,fcntl.F_GET_SEALS)&b.F_SEALS,b.F_SEALS)
+ def test_snapshot_is_read_only_and_independent_of_source(self):
+  path=self.paths['physical_runs'];expected=path.read_bytes()
+  fd,n=b.sealed_copy(path,self.pins['physical_runs']);self.addCleanup(os.close,fd)
+  self.assertEqual(os.fstat(fd).st_nlink,0)
   with self.assertRaises(OSError):os.write(fd,b'x')
   with self.assertRaises(OSError):os.ftruncate(fd,0)
-  with self.assertRaises(OSError):fcntl.fcntl(fd,fcntl.F_ADD_SEALS,0)
+  path.write_bytes(b'replacement')
+  self.assertEqual(os.read(fd,n),expected)
  def test_bad_hash_fails_before_outputs(self):
   self.pins['physical_runs']='0'*64
   with self.assertRaisesRegex(ValueError,'SHA-256 mismatch'):self.run_batch()

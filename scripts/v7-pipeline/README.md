@@ -14,7 +14,11 @@ The runner builds a local grid from the selected inputs. Publication is a separa
 ## Run
 
 Use one Python installation with NumPy, SciPy, PyProj, GDAL/OGR and PyArrow.
-Install `g++` and the OpenSSL headers and libraries for the native kernels. The runner checks module/executable availability before processing.
+The same command runs on macOS and Linux. Install a C++17 compiler available as
+`g++` and `c++`, OpenSSL development files, and Poppler's `pdftotext` on
+`PATH`. If OpenSSL lives outside the compiler's search paths, add its include
+and library directories with `CPATH` and `LIBRARY_PATH`. Use GDAL 3.10.3 and
+PROJ 9.6.0 to match the original build's geometry runtime.
 It enforces `PROJ_NETWORK=OFF` throughout the runner, disables pyproj's
 network API, and records the active local `proj.db` path and SHA-256 in runtime
 identity. A regional template's `bering_proj_db` must match that exact active
@@ -43,7 +47,7 @@ is supported.
 
 For one configuration that pulls its selected inputs directly, run:
 
-    /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py scripts/v7-pipeline/config.json \
+    python3 scripts/v7-pipeline/run_pipeline.py scripts/v7-pipeline/config.json \
       --work-dir /persistent/worldatlas-work
 
 `config.json` contains the reconstructed selected research inputs. Structured
@@ -93,13 +97,13 @@ byte identity matters. The `local_water_overlay` source calls the ordinary
 producer and verifier, then compares every selected value and type with the
 pinned reference. Only its declared local provenance paths/hashes may differ.
 
-    /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
+    python3 scripts/v7-pipeline/run_pipeline.py \
       /workspace/selection/config.json /workspace/runs/fresh-run
 
 For the first invocation, the output must be new. To continue a checkpoint-enabled
 run after an interruption, use the identical configuration, code and runtime:
 
-    /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
+    python3 scripts/v7-pipeline/run_pipeline.py \
       /workspace/selection/config.json /workspace/runs/fresh-run --resume
 
 The runner takes an exclusive run lock and refuses to duplicate a still-running

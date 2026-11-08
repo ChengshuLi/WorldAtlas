@@ -4,7 +4,7 @@ The caller authenticates the pinned Neon export and independently resolves the
 current stage-1 component witnesses before invoking this producer. No historical
 continent map, prior assignment checkpoint, or List 1 override is accepted.
 """
-import hashlib,json,os,re,shutil,signal,tempfile,time,ctypes,runpy
+import hashlib,json,os,re,shutil,signal,tempfile,time,runpy
 from pathlib import Path
 from decimal import Decimal
 from fractions import Fraction
@@ -12,9 +12,11 @@ from export_adapter import load_pinned_snapshot,boundary_records,selected_region
 from seed_rules import compile_rules
 from region_client import execute as build_region
 from closure_client import sha
+from atomic_move import move_noreplace
 BASE=Path(__file__).resolve().parent
 CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py')
-TRUSTED_CODE={'seed_builder':'f28e06acaf6325ea8e5089ed51fbc8c860506153dc46c4d2ccdac29139ca1e66','seed_kernel':'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe','closure_checker':'1e796c7f9bc8843252398eed54093265581446c9f4cac10dcb3b4c424b6e1bd1'}
+TRUSTED_CODE={'seed_builder':'f28e06acaf6325ea8e5089ed51fbc8c860506153dc46c4d2ccdac29139ca1e66','seed_kernel':'37c15e452dca1f23cf5fe0fafa9c7bcc464a8227b99c120ab1c42a663605d84a','closure_checker':'1e796c7f9bc8843252398eed54093265581446c9f4cac10dcb3b4c424b6e1bd1'}
+PREVIOUS_SEED_KERNEL = 'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe'
 # Explicit research-only checker supporting a directly pinned producer path.
 PROVISIONAL_CLOSURE_CHECKER='4491d971541fcfe7317d40abf2e8320c308d58af5c7f8115348362f0f71da327'
 TRUSTED_TERMINAL_CHECKER='fb0058f368f0db8ca07d1c9347aaf1192cb5b2fc20c3691e167623531f5570f1'
@@ -22,7 +24,12 @@ PROVISIONAL_TERMINAL_CHECKER='a89a7cfc0a91983aa9babf6df72d93eb4aa3484b4ca9010c26
 INPUTS={'snapshot','resolution','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','closure_checker','closure_contract','seed_builder','seed_kernel'}
 def validate_executable_pins(inp,allow_local):
  for key,digest in TRUSTED_CODE.items():
-  if inp[key].get('sha256')!=digest and not (key=='closure_checker' and allow_local and inp[key].get('sha256')==PROVISIONAL_CLOSURE_CHECKER):raise ValueError('unreviewed executable code')
+  allowed = {digest}
+  if key == 'seed_kernel':
+   allowed.add(PREVIOUS_SEED_KERNEL)
+  if key == 'closure_checker' and allow_local:
+   allowed.add(PROVISIONAL_CLOSURE_CHECKER)
+  if inp[key].get('sha256') not in allowed:raise ValueError('unreviewed executable code')
  if 'terminal_checker' in inp and inp['terminal_checker'].get('sha256')!=TRUSTED_TERMINAL_CHECKER and not (allow_local and inp['terminal_checker'].get('sha256')==PROVISIONAL_TERMINAL_CHECKER):raise ValueError('unreviewed terminal checker code')
 
 def validate_provisional_checker_source(inp,snapshot,allow_local):
@@ -143,6 +150,5 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
  if local_candidate:out['provisional_physical_equivalence']=equivalence
  with open(seedout/'report.json','x') as f:json.dump(out,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
  fd=os.open(seedout/'rasterizer-report.json',os.O_RDONLY);os.fsync(fd);os.close(fd);fd=os.open(seedout,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
- guard();libc=ctypes.CDLL(None,use_errno=True);rc=libc.renameat2(-100,os.fsencode(seedout),-100,os.fsencode(output),1)
- if rc:raise OSError(ctypes.get_errno(),os.strerror(ctypes.get_errno()))
+ guard();move_noreplace(seedout,output)
  fd=os.open(output.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd);return out

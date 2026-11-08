@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Research-only WGS84 coastal tiles using a single sealed input generation.
+"""WGS84 coastal tiles using a single verified input generation.
 
-Linux memfd seals prevent writes, growth, shrinking and further seal changes.
+Workers share unlinked snapshots opened with read-only file descriptors.
 A batch-complete record is written only after every tile and metadata recheck.
 Resume copies verified completed tiles into a fresh batch; interrupted tiles
 are regenerated, and preserved source directories are never changed.
 """
 from __future__ import annotations
-import argparse,contextlib,fcntl,hashlib,json,math,os,stat,uuid
+import argparse,contextlib,hashlib,json,math,os,stat,uuid
 import time
 from concurrent.futures import ThreadPoolExecutor
 from contextvars import copy_context
@@ -17,12 +17,8 @@ import build_coastal_tile as tile
 import decision_snapshot,exclusive_outputs,pinned_coastal_metadata,local_water_overlay,direct_lineage,build_prefill_plan,selected_mixed_lineage
 from pinned_coastal_metadata import pinned_bytes,pinned_json
 from stage_external import check_cancelled
+import snapshot_input
 from exclusive_outputs import create_directory_exclusive,create_binary_exclusive,open_checkpoint_readonly
-
-F_SEALS = (fcntl.F_SEAL_WRITE | fcntl.F_SEAL_GROW | fcntl.F_SEAL_SHRINK | fcntl.F_SEAL_SEAL
-           if hasattr(fcntl, 'F_ADD_SEALS') else None)
-
-
 
 def available_workers():
  """Choose concurrency from the process's available CPUs, never its RAM."""
@@ -45,32 +41,25 @@ def sha(path):
  return h.hexdigest()
 
 def sealed_copy(path,expected):
- """Return a sealed memfd holding precisely the SHA-pinned input bytes."""
+ """Return a read-only snapshot holding precisely the SHA-pinned input bytes."""
  if not isinstance(expected,str) or len(expected)!=64 or any(x not in '0123456789abcdef' for x in expected):raise ValueError('invalid SHA-256')
- if F_SEALS is None or not hasattr(os,'memfd_create') or not hasattr(os,'MFD_ALLOW_SEALING'):raise RuntimeError('Linux sealing-enabled memfd is required')
- source=os.open(path,os.O_RDONLY|getattr(os,'O_NOFOLLOW',0));target=None
- try:
-  st=os.fstat(source)
-  if not stat.S_ISREG(st.st_mode):raise ValueError('source is not regular')
-  target=os.memfd_create('worldatlas-pinned-input',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING);h=hashlib.sha256();total=0
-  while True:
-   b=os.read(source,1024*1024)
-   if not b:break
-   total+=len(b)
-   if total>st.st_size:raise ValueError('source grew during copy')
-   h.update(b);view=memoryview(b)
-   while view:
-    n=os.write(target,view)
-    if n<=0:raise OSError('short memfd write')
-    view=view[n:]
-  aft=os.fstat(source)
-  if total!=st.st_size or (st.st_dev,st.st_ino,st.st_size,st.st_mtime_ns)!=(aft.st_dev,aft.st_ino,aft.st_size,aft.st_mtime_ns) or h.hexdigest()!=expected:raise ValueError('source changed or SHA-256 mismatch')
-  fcntl.fcntl(target,fcntl.F_ADD_SEALS,F_SEALS)
-  if fcntl.fcntl(target,fcntl.F_GET_SEALS)&F_SEALS!=F_SEALS:raise RuntimeError('seals not established')
-  os.lseek(target,0,os.SEEK_SET);out=target;target=None;return out,total
- finally:
-  os.close(source)
-  if target is not None:os.close(target)
+ total=0
+ def copy(target):
+  nonlocal total
+  with open(path,'rb',opener=lambda name,flags:os.open(name,flags|os.O_NOFOLLOW|os.O_NONBLOCK)) as source:
+   before=os.fstat(source.fileno())
+   if not stat.S_ISREG(before.st_mode):raise ValueError('source is not regular')
+   digest=hashlib.sha256()
+   for block in iter(lambda:source.read(1<<20),b''):
+    check_cancelled()
+    total+=len(block)
+    if total>before.st_size:raise ValueError('source grew during copy')
+    digest.update(block)
+    target.write(block)
+   after=os.fstat(source.fileno())
+   if total!=before.st_size or before.st_mtime_ns!=after.st_mtime_ns or digest.hexdigest()!=expected:
+    raise ValueError('source changed or SHA-256 mismatch')
+ return snapshot_input.open_snapshot(copy),total
 
 def validate_plan(plan,width,height):
  if not isinstance(plan,dict) or set(plan) not in ({'tiles','pad_degrees','chunk'},{'tiles','chunk'}):raise ValueError('invalid batch plan keys')
@@ -323,7 +312,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
  if set(metadata_pins)!={'physical_report','land_report'} or any(not isinstance(v,str) or len(v)!=64 or any(c not in '0123456789abcdef' for c in v) for v in metadata_pins.values()):raise ValueError('two report SHA-256 pins required')
  code_paths={'algorithm':Path(tile.__file__),'core':Path(tile.core.__file__),'shore':Path(tile.core.shore.__file__),'geometry':Path(tile.core.shore.__file__),'accelerator':Path(tile.coastal_rect.__file__),
              'shore_index':Path(tile.coastal_shore_index.__file__)};code_pins={k:sha(v) for k,v in code_paths.items()}
- support_paths={'metadata':Path(pinned_coastal_metadata.__file__),'snapshot':Path(decision_snapshot.__file__),'land_lineage':Path(direct_lineage.__file__),'land_validator':Path(build_prefill_plan.__file__),'mixed_lineage':Path(selected_mixed_lineage.__file__),'overlay':Path(local_water_overlay.__file__),'output':Path(exclusive_outputs.__file__)};support_pins={k:sha(v) for k,v in support_paths.items()}
+ support_paths={'metadata':Path(pinned_coastal_metadata.__file__),'snapshot':Path(decision_snapshot.__file__),'land_lineage':Path(direct_lineage.__file__),'land_validator':Path(build_prefill_plan.__file__),'mixed_lineage':Path(selected_mixed_lineage.__file__),'overlay':Path(local_water_overlay.__file__),'output':Path(exclusive_outputs.__file__),'snapshot_input':Path(snapshot_input.__file__)};support_pins={k:sha(v) for k,v in support_paths.items()}
  identity={'snapshot_sha256':snapshot_sha,'plan_sha256':plan_sha,'grid':{'width':width,'height':height},'sealed_input_sha256':pins,'metadata_sha256':metadata_pins,'driver_sha256':CODE_SHA,'tile_code_sha256':code_pins,'support_code_sha256':support_pins}
  inputs={k+'_sha256':pins[k] for k in names};inputs.update({k+'_sha256':v for k,v in metadata_pins.items()})
  check_metadata()
@@ -340,7 +329,7 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
  with contextlib.ExitStack() as stack:
   sealed={};used=0
   for k in names:
-   fd,n=sealed_copy(paths[k],pins[k]);used+=n;stack.callback(os.close,fd);sealed[k]=os.fdopen(os.dup(fd),'rb');stack.callback(sealed[k].close)
+   fd,n=sealed_copy(paths[k],pins[k]);used+=n;sealed[k]=stack.enter_context(os.fdopen(fd,'rb'))
   physical=tile.open_grid(sealed['physical_rows'],sealed['physical_runs'],width,height);land=tile.open_grid(sealed['land_rows'],sealed['land_runs'],width,height)
   shore_started=time.perf_counter()
   shore_index=tile.coastal_shore_index.CoastalShoreIndex(physical,land,width,height)

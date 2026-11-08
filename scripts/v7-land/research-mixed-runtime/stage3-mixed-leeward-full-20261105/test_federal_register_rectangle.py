@@ -1,4 +1,7 @@
+from contextlib import contextmanager
+from io import BytesIO
 import unittest
+from unittest.mock import Mock
 from federal_register_rectangle import rectangle_from_text
 
 class RectangleTest(unittest.TestCase):
@@ -19,23 +22,23 @@ class RectangleTest(unittest.TestCase):
         with self.assertRaises(ValueError):self.parse(self.t.replace('W. long. N. lat.','E. long. N. lat.'))
     def test_reordered_rows_fail(self):
         with self.assertRaises(ValueError):self.parse(self.t.replace('3 ..........','4 ..........'))
+@contextmanager
+def extracted(output):
+    yield Mock(stdout=BytesIO(output), wait=Mock(return_value=0))
+
+
 class PinnedSourceTest(unittest.TestCase):
     def test_source_and_geometry_pins(self):
         import tempfile,hashlib,json
         from pathlib import Path
         from unittest.mock import patch
-        from types import SimpleNamespace
         from federal_register_rectangle import extract_pdf_rectangle
         fixture=RectangleTest();fixture.setUp();text=fixture.t
         g=rectangle_from_text(text,'Section A','Section B')
         gh=hashlib.sha256(json.dumps(g,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()).hexdigest()
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'a.pdf';p.write_bytes(b'%PDF-fake');ph=hashlib.sha256(p.read_bytes()).hexdigest();crop={'x':0,'y':0,'width':100,'height':100}
-            def emit(*args, **kwargs):
-                self.assertNotIn('timeout',kwargs)
-                kwargs['stdout'].write(text.encode())
-                return SimpleNamespace()
-            with patch('subprocess.run',side_effect=emit):
+            with patch('stage_external.popen', side_effect=lambda *a, **k: extracted(text.encode())):
                 self.assertEqual(extract_pdf_rectangle(p,ph,9,gh,1,crop,'Section A','Section B'),g)
                 with self.assertRaises(ValueError):extract_pdf_rectangle(p,'0'*64,9,gh,1,crop,'Section A','Section B')
                 with self.assertRaises(ValueError):extract_pdf_rectangle(p,ph,9,'0'*64,1,crop,'Section A','Section B')
@@ -52,20 +55,19 @@ class PinnedSourceTest(unittest.TestCase):
             p=Path(d)/'source.pdf';p.write_bytes(b'%PDF-fake');ph=hashlib.sha256(p.read_bytes()).hexdigest()
             def args():return (p,ph,9,gh,1,crop,'Section A','Section B')
             p.write_bytes(b'%PDF-fake'+b'x'*10000)
-            with patch('subprocess.run') as run:
+            with patch('stage_external.popen') as run:
                 with self.assertRaises(ValueError):extract_pdf_rectangle(*args())
                 run.assert_not_called()
             p.write_bytes(b'%PDF-fake')
-            def oversized(*a,**k):k['stdout'].write(b'x'*10_000_001)
-            with patch('subprocess.run',side_effect=oversized):
+            with patch('stage_external.popen', side_effect=lambda *a, **k: extracted(b'x'*10_000_001)):
                 with self.assertRaises(ValueError):extract_pdf_rectangle(*args())
             def swap(*a,**k):
                 self.assertEqual(k['stdin'].read(),b'%PDF-fake')
                 with self.assertRaises(OSError) as exc:os.write(k['stdin'].fileno(),b'changed')
-                self.assertEqual(exc.exception.errno,errno.EPERM)
+                self.assertEqual(exc.exception.errno,errno.EBADF)
                 p.write_bytes(b'%PDF-evil')
-                k['stdout'].write(text.encode())
-            with patch('subprocess.run',side_effect=swap):
+                return extracted(text.encode())
+            with patch('stage_external.popen',side_effect=swap):
                 with self.assertRaises(ValueError):extract_pdf_rectangle(*args())
 
 if __name__=='__main__':unittest.main()

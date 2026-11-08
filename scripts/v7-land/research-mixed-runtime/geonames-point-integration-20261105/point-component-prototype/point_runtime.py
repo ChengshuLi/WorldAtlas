@@ -97,7 +97,7 @@ def run_identity(checker_bytes, requests):
         need(len(payload) <= 65536, 'worker request too large')
         frames.append(payload)
     env = dict(os.environ, OPENBLAS_NUM_THREADS='1', OMP_NUM_THREADS='1', MKL_NUM_THREADS='1')
-    child = subprocess.run(['/usr/bin/python3', '-I', '-c', Path(__file__).read_text()],
+    child = subprocess.run([sys.executable, '-I', '-c', Path(__file__).read_text()],
                            input=b'\n'.join(frames) + b'\n', stdout=subprocess.PIPE,
                            stderr=subprocess.PIPE, env=env)
     need(len(child.stderr) <= 65536, 'identity worker output too large')

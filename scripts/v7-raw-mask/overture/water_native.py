@@ -31,7 +31,8 @@ class WaterBatch:
             raise ValueError('a C++17 compiler is required for native water batches')
         binary = Path(output) / 'water-native.so'
         env = {**os.environ, 'TMPDIR': str(output), 'TMP': str(output), 'TEMP': str(output)}
-        stage_external.run([compiler, '-std=c++17', '-O3', '-fPIC', '-shared',
+        # Match Python's separate multiply and add when locating tile origins.
+        stage_external.run([compiler, '-std=c++17', '-O3', '-ffp-contract=off', '-fPIC', '-shared',
                         str(source), '-o', str(binary), '-ldl', '-pthread'], check=True, env=env)
         self.lib = ctypes.CDLL(str(binary))
         self.lib.water_error.restype = ctypes.c_char_p

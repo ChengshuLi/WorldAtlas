@@ -560,8 +560,6 @@ class Fixture(unittest.TestCase):
                     'physical_runs': physical / 'runs.u32le', 'physical_report': physical / 'report.json',
                     'component_source': pipeline.SCRIPTS / 'v7-recovery/land/simple-v2-baseline/build_components.cpp'}.items()}})
         components = runner.out / 'components'
-        if sys.platform != 'linux':
-            self.skipTest('component publication requires Linux renameat2')
         runner.stage('mainland', 'components',
             'v7-recovery/land/fresh-components-20261104/build_components.py',
             request, runner.out / 'work/components', components)
