@@ -227,6 +227,22 @@ its tail is not guessed. Such a stage reports `timing_complete: false`,
 map can therefore have complete outputs but incomplete timing. Use a fresh,
 uninterrupted run if an exact whole-stage baseline is required.
 
+`recorded_processing_is_lower_bound` labels that distinction explicitly.
+`interrupted_interval_details` retains each unmatched interval's start, last
+durable heartbeat (or start when no heartbeat exists), measured prefix and
+unknown tail. The measured prefixes remain included in the stage's recorded
+total. Do not sum the detail entries: parent and concurrent child intervals can
+overlap, while the reported stage total unions them once per attempt.
+`unrecorded_interruption_tail_seconds: null` means the lost tail is unknown,
+not zero. A one-second heartbeat cadence does not prove a one-second error
+bound because scheduling or a stopped process can delay a heartbeat.
+
+Every new `group-complete` journal record includes a durable `timing_summary`
+for the entire stage across all recorded attempts. It has the same timing
+fields as the final report, so a completed stage can be read before later
+stages finish. A single resumed `stage-total` interval is only that attempt's
+work and must not be presented as the whole stage's processing time.
+
 These are wall-clock processing intervals, not CPU-time measurements. Ordinary
 OS scheduling delays within a live invocation remain included. An external
 suspension of the same running process is not a separate measured restart gap;

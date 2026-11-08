@@ -759,7 +759,7 @@ class Pipeline:
                 return report
             with self.timing.measure('physical', 'stage-total'):
                 physical = self.physical()
-            self.timing.mark_complete('physical')
+            self.timing.mark_complete('physical', physical_report=read(self.out / 'physical/report.json'))
             with self.timing.measure('mainland', 'stage-total'):
                 land = self.mainland(physical)
             self.timing.mark_complete('mainland')

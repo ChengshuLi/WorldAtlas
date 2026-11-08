@@ -402,11 +402,27 @@ class Timing:
         with self.lock:
             return journal_anchor(self.path)
 
-    def mark_complete(self, group):
-        self.event({'event': 'group-complete', 'id': group, 'group': group})
-        self.completed_groups.add(group)
+    def mark_complete(self, group, *, physical_report=None):
+        # Publish the cumulative stage result with completion, rather than
+        # making a reader mistake the last resumed interval for the full total.
+        with self.lock:
+            summary = self.summary(physical_report)[group]
+            summary.update(outputs_complete=True, complete=summary['timing_complete'])
+            self.event({'event': 'group-complete', 'id': group, 'group': group,
+                        'timing_summary': summary})
+            self.completed_groups.add(group)
 
     def intervals(self, group, *, kind=None):
+        intervals, missing, _ = self.interval_details(group, kind=kind)
+        return intervals, missing
+
+    def interval_details(self, group, *, kind=None):
+        """Keep measurable interrupted prefixes and identify every unknown tail.
+
+        A heartbeat is a durable lower-bound endpoint, never a guessed stop
+        time. Nested interval details must not be summed; stage totals use the
+        attempt-local unions returned alongside them.
+        """
         starts, ends, beats = {}, {}, {}
         for record in self.records:
             token = (record.get('attempt'), record.get('token'))
@@ -422,6 +438,11 @@ class Timing:
         incomplete = [{'attempt': record.get('attempt'), 'id': record['id']}
                       for record in self.records if record['event'] == 'unmeasured-initialization'
                       and record.get('group') == group]
+        details = [{**record, 'start_monotonic_seconds': None,
+                    'last_recorded_monotonic_seconds': None, 'last_recorded_event': None,
+                    'recorded_elapsed_seconds': None, 'unrecorded_tail_seconds': None,
+                    'reason': 'initialization has no durable start/end interval'}
+                   for record in incomplete]
         for token, start in starts.items():
             if kind is not None and start.get('kind', 'processing') != kind:
                 continue
@@ -429,15 +450,20 @@ class Timing:
             b = ends.get(token, beats.get(token, a))
             if token not in ends:
                 incomplete.append({'attempt': token[0], 'id': start['id']})
+                details.append({'attempt': token[0], 'id': start['id'],
+                    'start_monotonic_seconds': a, 'last_recorded_monotonic_seconds': b,
+                    'last_recorded_event': 'heartbeat' if token in beats else 'start',
+                    'recorded_elapsed_seconds': b - a, 'unrecorded_tail_seconds': None,
+                    'reason': 'no durable completion or failure endpoint'})
             if b < a:
                 raise ValueError('non-monotonic processing interval')
             by_attempt.setdefault(token[0], []).append((a, b))
-        return by_attempt, incomplete
+        return by_attempt, incomplete, details
 
     def summary(self, physical_report):
         groups = {}
         for group in ('setup', 'physical', 'mainland', 'water', 'verification'):
-            intervals, missing = self.intervals(group)
+            intervals, missing, interrupted = self.interval_details(group)
             measured = sum(elapsed_union(items) for items in intervals.values())
             complete = not missing
             error = None
@@ -463,8 +489,11 @@ class Timing:
             outputs_complete = group in self.completed_groups
             groups[group] = {'processing_elapsed_seconds': measured if complete else None,
                 'recorded_processing_elapsed_seconds': measured,
+                'recorded_processing_is_lower_bound': not complete,
                 'complete': outputs_complete and complete, 'outputs_complete': outputs_complete,
                 'timing_complete': complete, 'unmeasured_interrupted_attempts': missing,
+                'interrupted_interval_details': interrupted,
+                'unrecorded_interruption_tail_seconds': None if not complete else 0.0,
                 'semantics': 'sum of attempt-local active interval unions; no restart gap is counted'}
             if group == 'physical':
                 groups[group].update({'source_download_elapsed_seconds': downloads,
