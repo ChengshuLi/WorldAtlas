@@ -35,6 +35,10 @@ class PrefillPairTests(unittest.TestCase):
                     self.assertEqual(list(timings),['column-candidate','tuple-reference'] if first else ['tuple-reference','column-candidate'])
                     self.assertGreater(timings['column-candidate']['stage_wall_seconds'],0)
                     with self.assertRaises(FileExistsError):run_pair(plan,inputs,out,checkout)
+                result=run_pair(plan,inputs,root/'arrow-reader',checkout,
+                    options=('--allow-unverified-snapshot','--allow-historical-v6'),arrow_spans=True)
+                self.assertEqual(result['candidate_span_reader'],'pyarrow-columns')
+                self.assertEqual(result['comparison']['status'],'all-prefill-rle-bytes-and-audit-identical')
                 with self.assertRaises(ValueError):run_pair(plan,inputs,root/'bad',checkout,options=('--anything',))
                 self.assertFalse((root/'bad').exists())
 

@@ -90,6 +90,13 @@ class PrefillTests(unittest.TestCase):
                     self.assertEqual((out/name).read_bytes(),(column_out/name).read_bytes())
                 audits=[json.loads((directory/'prefill-audit.json').read_text()) for directory in (out,column_out)]
                 self.assertEqual(*[{k:v for k,v in audit.items() if k!='processing_elapsed_seconds'} for audit in audits])
+                arrow_out=base/'arrow-output'
+                with patch.object(sys,'argv',[*argv[:-1],str(arrow_out),'--column-engine','--arrow-spans']):prefill.main()
+                for name in ('prefill-rows.u32le','prefill-runs.u32le'):
+                    self.assertEqual((out/name).read_bytes(),(arrow_out/name).read_bytes())
+                arrow_audit=json.loads((arrow_out/'prefill-audit.json').read_text())
+                self.assertEqual({k:v for k,v in audits[0].items() if k!='processing_elapsed_seconds'},
+                                 {k:v for k,v in arrow_audit.items() if k!='processing_elapsed_seconds'})
                 with self.assertRaises(FileExistsError):
                     prefill.main()
                 argv[-1] = str(root / 'bad')
@@ -170,14 +177,19 @@ class ColumnPrefillIntegrationTests(unittest.TestCase):
    plan=put('plan.json',json.dumps({'schema':'worldatlas-v7-full-grid-composition-plan-v1',
     'grid':{'width':16,'height':3},'rle_inputs':grids,'water_layers':layers}).encode())
    with patch.object(c,'W',16),patch.object(c,'H',3),patch.object(c,'GRID',{'width':16,'height':3}):
-    for engine in ('reference','columns'):
+    for engine in ('reference','columns','arrows'):
      argv=['--plan',str(plan),'--input-root',str(root),'--out',str(base/engine),'--allow-unverified-snapshot','--allow-historical-v6']
-     if engine=='columns':argv.append('--column-engine')
+     if engine!='reference':argv.append('--column-engine')
+     if engine=='arrows':argv.append('--arrow-spans')
      prefill.main(argv,emit=lambda value:None)
    for name in ('prefill-rows.u32le','prefill-runs.u32le'):
     self.assertEqual((base/'reference'/name).read_bytes(),(base/'columns'/name).read_bytes())
+    self.assertEqual((base/'reference'/name).read_bytes(),(base/'arrows'/name).read_bytes())
    audits=[json.loads((base/engine/'prefill-audit.json').read_text()) for engine in ('reference','columns')]
    self.assertEqual(*[{k:v for k,v in audit.items() if k!='processing_elapsed_seconds'} for audit in audits])
+   arrow_audit=json.loads((base/'arrows/prefill-audit.json').read_text())
+   self.assertEqual({k:v for k,v in audits[0].items() if k!='processing_elapsed_seconds'},
+                    {k:v for k,v in arrow_audit.items() if k!='processing_elapsed_seconds'})
    self.assertEqual(np.fromfile(base/'columns/prefill-runs.u32le',dtype='<u4').tolist(),
                     [1,0,3,2,5,4,11,6,16,0,1,0,3,2,6,4,8,0,16,18,16,18])
    # A source span can start on water and cross an interior land boundary.
@@ -190,10 +202,11 @@ class ColumnPrefillIntegrationTests(unittest.TestCase):
    layers[0]['manifest_sha256']=digest(manifest_path)
    document=json.loads(plan.read_text());document['water_layers']=[layers[0]];plan.write_text(json.dumps(document))
    with patch.object(c,'W',16),patch.object(c,'H',3),patch.object(c,'GRID',{'width':16,'height':3}):
-    for engine in ('reference','columns'):
+    for engine in ('reference','columns','arrows'):
      out=base/('interior-land-'+engine)
      argv=['--plan',str(plan),'--input-root',str(root),'--out',str(out),'--allow-unverified-snapshot','--allow-historical-v6']
-     if engine=='columns':argv.append('--column-engine')
+     if engine!='reference':argv.append('--column-engine')
+     if engine=='arrows':argv.append('--arrow-spans')
      with self.assertRaisesRegex(ValueError,'continent-water span covers physical land row=1 x=8:10'):
       prefill.main(argv,emit=lambda value:None)
      self.assertFalse((out/'prefill-audit.json').exists())

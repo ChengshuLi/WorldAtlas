@@ -48,7 +48,9 @@ def main(argv=None, *, emit=print):
  ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved WGS84 coastal land-cell-center method')
  ap.add_argument('--allow-historical-v6',action='store_true',help='historical replay only: permit V6 land')
  ap.add_argument('--column-engine',action='store_true',help='research: resolve validated spans as numeric columns; verify full-input parity before adoption')
+ ap.add_argument('--arrow-spans',action='store_true',help='research: stream span columns with PyArrow; requires --column-engine')
  a=ap.parse_args(argv)
+ if a.arrow_spans and not a.column_engine:raise ValueError('--arrow-spans requires --column-engine')
  if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
  root=Path(a.input_root).resolve()
  if not root.is_dir():raise ValueError('input root must exist')
@@ -101,7 +103,11 @@ def main(argv=None, *, emit=print):
   if not isinstance(ent.get('priority'),int):raise ValueError(f"layer missing explicit priority: {ent}")
   layers.append((ent,m))
  create_directory_exclusive(out)
- cursors=[(ent,c.RowCursor(m,0,c.H,'water')) for ent,m in layers]
+ if a.arrow_spans:
+  from columnar_water_rows import RowCursor
+  cursors=[(ent,RowCursor(m,0,c.H)) for ent,m in layers]
+ else:
+  cursors=[(ent,c.RowCursor(m,0,c.H,'water')) for ent,m in layers]
  policy=LayerPolicy([ent for ent,_ in layers]) if a.column_engine else None
  pr,pu=rles['physical'];landr,landu=rles[land_key];rawr=out/'prefill-rows.u32le';rawu=out/'prefill-runs.u32le'
  counts={str(k):0 for k in range(23)};runs_written=0;overlap_cells=0;assigned_cells=0;residual_cells=0;land_cells=0

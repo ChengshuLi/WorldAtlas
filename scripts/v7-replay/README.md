@@ -65,3 +65,18 @@ file cannot change the snapshot and causes successful-exit validation to fail.
 Global matching/current-input timings are still required before orchestration
 adopts this path. Include snapshot creation, index construction and final source
 checks in any reported full-stage timing; a prebuilt index is not free work.
+
+`--column-engine --arrow-spans` additionally streams canonical assignment JSON
+through the existing PyArrow binding. Coordinates stay in numeric buffers;
+rule/member Python objects are created only for a reference-policy fallback.
+The original reader retains aliases, numeric coercions, duplicate-key behavior,
+noncanonical Unicode/newline representations and diagnostics. A partial-stream
+fallback resumes after exactly the spans already delivered, without omitting or
+duplicating records. Dense/sparse row coverage, duplicate-row continuation,
+bounds, ordering and required identities remain validated. No current geography,
+layer count or map decision chooses the parser. The default reader is unchanged.
+
+The prefill pair harness accepts `--arrow-spans` for its candidate only. Complete
+small fixtures compare all three engines' RLE bytes and scientific audits;
+streaming tests cover compressed inputs, legacy forms and late fallback. Global
+current-prefill parity and elapsed-time evidence are still required for adoption.

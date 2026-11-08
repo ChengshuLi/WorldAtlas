@@ -41,6 +41,8 @@ class LayerPolicy:
     def reference_row(self, chunks, row, physical_ends, physical_values):
         spans = []
         for layer, records in chunks:
+            if hasattr(records, 'reference_records'):
+                records = records.reference_records(row)
             for record in records:
                 code = record[3]
                 if code > 6:
@@ -58,12 +60,13 @@ class LayerPolicy:
         chunks = [(layer, records) for layer, records in chunks if records]
         if not chunks:
             return ResolvedRow(empty_columns(), 0)
-        starts = np.concatenate([np.fromiter((s[1] for s in records), dtype=np.uint32, count=len(records))
-                                 for _, records in chunks])
-        stops = np.concatenate([np.fromiter((s[2] for s in records), dtype=np.uint32, count=len(records))
-                                for _, records in chunks])
-        codes = np.concatenate([np.fromiter((s[3] for s in records), dtype=np.int64, count=len(records))
-                                for _, records in chunks])
+        def column(records, index, dtype):
+            if hasattr(records, 'columns'):
+                return records.columns[index - 1]
+            return np.fromiter((s[index] for s in records), dtype=dtype, count=len(records))
+        starts = np.concatenate([column(records, 1, np.uint32) for _, records in chunks])
+        stops = np.concatenate([column(records, 2, np.uint32) for _, records in chunks])
+        codes = np.concatenate([column(records, 3, np.int64) for _, records in chunks])
         layers = np.concatenate([np.full(len(records), layer, dtype=np.intp) for layer, records in chunks])
         invalid = (codes < 1) | (codes > 6)
         if np.any(invalid) or np.any(~self.allowed[layers, codes - 1]):
