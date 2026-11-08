@@ -46,27 +46,12 @@ The `worldatlas-v8-viewer-inventory` document at version `v8.0` in
 their repository paths, byte lengths and SHA-256 hashes. The source catalog
 tracks raw data objects, including the parts of source archives.
 
-## Entity registry and staged stable-ID grid
+## Entity registry
 
-`migrations/002_entity_registry.sql` defines stable entity identities and revisioned
-names, levels, parents, V7 review-code bindings, and R2 artifact references.
-Geographic entities and review-code bindings are supplied by a versioned Neon
-registry snapshot. The schema migration does not publish or approve geography. Colors and the historic V7 land/water codes remain presentation data,
-not entity IDs. The revisioned schema permits the remaining hierarchy to be added
-without changing the legend code.
+`migrations/002_entity_registry.sql` defines stable entity IDs, revisioned names
+and parent relationships, and the bindings from map category codes to entities.
+Use the registry revision selected by the decision snapshot.
 
-Export a registry revision from Neon using `scripts/export_entity_registry.sql`,
-for example with `psql -X -A -t -v revision=REVISION -f scripts/export_entity_registry.sql > registry.json`. Use the same registry revision
-as the decision snapshot and review-code bindings.
+Export a registry revision from Neon with `scripts/export_entity_registry.sql`.
 
-For a staged continent-ID grid, first prepare proposal metadata with
-`node scripts/prepare_entity_metadata.mjs proposal.json prepared.json --registry
-registry.json`, then run `python scripts/build_entity_grid.py prepared.json
-rows.u32le runs.u32le NEW_OUTPUT_DIR` on the matching uncompressed V7 row offsets
-and run pairs. It writes a new lossless u32 row-run grid and a checksummed manifest;
-adjacent land and water runs for the same entity may merge. The source physical
-mask and review-code grid must be retained independently for rendering and review.
-The manifest pins the registry and bindings as well as the input and output streams.
-This conversion stages files only: uploading them to R2 and atomically activating a
-matching accepted Neon revision require the separate reviewed publication process.
-The final canonical grid will use location IDs after the lower hierarchy is approved.
+    psql -X -A -t -v revision=REVISION -f scripts/export_entity_registry.sql > registry.json
