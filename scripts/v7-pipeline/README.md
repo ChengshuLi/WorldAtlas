@@ -406,3 +406,21 @@ The seed pair accepts `--verify-tiles DIRECTORY` to run the independent Python
 tile verifier against its freshly generated complete seed. That directory must
 have the exact core-config-pinned manifest. The receipt records the verifier
 source hash, directory identity, UTC interval and complete tile/record counts.
+
+## Global shoreline-index kernel QA
+
+`benchmark_water_shore_index.py --request REQUEST --out NEW_DIR` verifies every
+coastal point/category against the original RLE extractor, in ordinary streaming
+row blocks. The request schema is `worldatlas-shore-index-global-qa-request-v1`,
+with `grid`, four `inputs` named `physical_rows`, `physical_runs`, `land_rows`,
+`land_runs` (each with `path` and `sha256`), and a truthful `scope`. Optional
+`source_evidence` metadata files carry independent path/hash pins. Relative
+paths resolve beside the request. The request is not a Stage 3 admission.
+
+Both paths query the same immutable verified streams. The report separately
+records generation preparation, source revalidation, query-call time and the
+whole pass including fingerprint generation. Coordinates are fingerprinted as
+little-endian float64 and categories as uint32. A complete success report is
+written only after context exit/source checks and all per-block fingerprints
+match. `--candidate-first` reverses query order. These are kernel QA timings,
+not a prefill, final-land, geographic-acceptance or whole-water speed claim.
