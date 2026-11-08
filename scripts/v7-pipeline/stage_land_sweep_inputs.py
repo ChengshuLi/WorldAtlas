@@ -60,8 +60,13 @@ def fetch(client, pin, destination):
     with closing(response['Body']) as body, destination.open('xb') as stream:
         if response['ContentLength']!=pin['size_bytes']:
             raise ValueError('cloud input length differs: '+pin['source_id'])
-        for chunk in iter(lambda:body.read(1 << 20),b''):
-            stream.write(chunk)
+        remaining=pin['size_bytes']
+        while remaining:
+            chunk=body.read(min(1 << 20,remaining))
+            if not chunk:break
+            stream.write(chunk);remaining-=len(chunk)
+        if remaining or body.read(1):
+            raise ValueError('cloud input size/hash differs: '+pin['source_id'])
     if destination.stat().st_size!=pin['size_bytes'] or digest(destination)!=pin['sha256']:
         raise ValueError('cloud input size/hash differs: '+pin['source_id'])
 
@@ -127,6 +132,30 @@ def stage_search_inputs(catalog_path, config_path, out, client):
     return result
 
 
+def stage_additional_metadata(catalog_path, config_path, out, client, sources):
+    identity=plan(catalog_path,config_path)
+    if json.loads((out/'plan.json').read_bytes())!=identity:raise ValueError('staging identity changed')
+    catalog=json.loads(catalog_path.read_bytes());directory=out/'additional-metadata'
+    directory.mkdir(exist_ok=True)
+    result={}
+    for source in sources:
+        if not isinstance(source,str) or not re.fullmatch(r'[a-z0-9][a-z0-9-]*',source):
+            raise ValueError('unsafe metadata source ID')
+        matches=[row for row in catalog if row.get('source_id')==source]
+        if len(matches)!=1 or not matches[0]['r2_key'].endswith('.json'):
+            raise ValueError('one pinned JSON metadata source required: '+source)
+        pin=dict(matches[0]);pin['size_bytes']=int(pin['size_bytes'])
+        fetch(client,pin,directory/source)
+        receipt=directory/(source+'.pin.json')
+        if receipt.exists():
+            if json.loads(receipt.read_bytes())!=pin:raise ValueError('metadata receipt changed')
+        else:
+            with receipt.open('x') as stream:json.dump(pin,stream,sort_keys=True,indent=2);stream.write('\n')
+        result[source]={'path':str((directory/source).resolve()),'sha256':pin['sha256'],'size_bytes':pin['size_bytes']}
+    if identity!=plan(catalog_path,config_path):raise ValueError('staging source identity changed')
+    return result
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--catalog',type=Path,required=True)
@@ -135,6 +164,7 @@ def main():
     parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--stage-streams',action='store_true')
     parser.add_argument('--stage-search',action='store_true',help='stage pinned representatives, manifest and snapshot for a fresh in-process search')
+    parser.add_argument('--metadata-source',action='append',default=[],help='stage one additional exact catalog-pinned JSON report (repeatable)')
     args=parser.parse_args()
     if not re.fullmatch(r'https://[0-9a-f]{32}(?:\.(?:eu|us|fedramp))?\.r2\.cloudflarestorage\.com',args.endpoint_url):
         raise ValueError('an HTTPS Cloudflare R2 account endpoint is required')
@@ -142,6 +172,7 @@ def main():
     with closing(boto3.client('s3',endpoint_url=args.endpoint_url,region_name='auto')) as client:
         result=stage(args.catalog,args.core_config,args.out,client,stage_streams=args.stage_streams)
         if args.stage_search:result['search_inputs']=stage_search_inputs(args.catalog,args.core_config,args.out,client)
+        if args.metadata_source:result['additional_metadata']=stage_additional_metadata(args.catalog,args.core_config,args.out,client,args.metadata_source)
         print(json.dumps(result,indent=2))
 
 

@@ -60,3 +60,27 @@ profiling run should preserve those counts and separate witness, certificate
 and exact phases before proposing tighter bounds or more batching. Changing
 pruning, tie policy or numerical guards without that evidence would add risk
 without an established target. No such algorithm change has been made.
+
+## Fresh seed construction is a separate major cost
+
+The subsequently inspected, exact catalog-pinned rasterizer report records
+102.705 seconds for the complete 131,072 × 54,614 grid. This historical
+measurement is excluded from the current 104.980-second kernel replay. It
+includes its recorded builder/kernel path and is not a current controlled
+comparison. The exact report, program and polygon hashes are in
+[the seed-raster cost audit](land-seed-raster-cost-audit-20261108.json).
+
+The current frozen builder burns serial full-width strips. A future parallel
+GDAL design must keep the identical original affine transform for each strip,
+use independent OGR datasets/layers per worker, preserve strip order and burn
+semantics, and compare complete resulting seed streams and populations. Threads
+are a possible Python/GDAL implementation route; executable subprocesses must
+not be restored. This is a design direction, not a measured improvement.
+
+The archived rasterizer references two exact assembled polygon GeoJSONs that
+are not present in the recovered catalog. That is not proof of cloud absence.
+Their normal producer requires fresh water/terminal closure proofs, so no
+substitute rings were assembled by skipping those proofs or patching a report.
+A faithful fresh-seed raster comparison needs those exact staged polygons or
+normal current-producer outputs. The prepared complete kernel A/B does not
+have this dependency and remains ready.

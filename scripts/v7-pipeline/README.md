@@ -335,3 +335,9 @@ UTC trial intervals, and requires all reports and output bytes to match. It
 loads the reference Python modules in process and never edits their source.
 Run without other heavy workloads. `--candidate-first` reverses trial order;
 one pair does not balance cache order and is not an end-to-end speed ratio.
+
+For upstream cost inspection, `stage_land_sweep_inputs.py --metadata-source ID`
+can stage an additional exact catalog-pinned JSON report with its receipt.
+The option is repeatable and does not change the immutable main staging plan.
+It accepts no unpinned object or path override, and reads no bulk stream unless
+that separate staging option was explicitly requested.

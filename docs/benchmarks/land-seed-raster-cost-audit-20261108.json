@@ -1,0 +1,38 @@
+{
+  "gdal_version": "3100300",
+  "grid": {
+    "height": 54614,
+    "north": 90,
+    "step": 0.00274658203125,
+    "west": -180,
+    "width": 131072
+  },
+  "historical_elapsed_seconds": 102.70500326156616,
+  "limitations": [
+    "The reported historical time includes its recorded builder/kernel path and is not a current controlled comparison.",
+    "Not present in the recovered catalog does not establish absence from cloud storage.",
+    "Fresh region production requires normal closure proofs; no proof was bypassed and no historical report was rewritten."
+  ],
+  "producer_sha256": {
+    "builder": "f28e06acaf6325ea8e5089ed51fbc8c860506153dc46c4d2ccdac29139ca1e66",
+    "compiled_kernel": "424a7bfdd145e08d478a82f9b76acdaf315a01c9d4d6877a1131792472076d24",
+    "kernel_source": "b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe"
+  },
+  "required_assembled_polygons": [
+    {
+      "geojson_file_sha256": "412d7579077df4d9acbac543db5a20c03faa52d85055102165f806029035f9b9",
+      "geometry_sha256": "b53983bc90d9e43139b373dc2779a257aa2096928b029f27aaafbe78ca9a8f42",
+      "present_in_recovered_catalog": false,
+      "region_id": "europe_mainland_region_v1"
+    },
+    {
+      "geojson_file_sha256": "cb9dadc9fa518f89788ae66d537a4a1f2c177908aaa36d3ffa243039c599aa5a",
+      "geometry_sha256": "c39566a9cf530bbeaac273c0697758b6657c37f397cc4196d1795d94c827f90b",
+      "present_in_recovered_catalog": false,
+      "region_id": "north_america_mainland_region_v1"
+    }
+  ],
+  "schema": "worldatlas-seed-raster-cost-audit-v1",
+  "source_report_sha256": "8bee9164542f68ea9b5946f639636bd0a3d7893a9a32a49c5f005c8d3b30538e",
+  "status": "historical-metadata-inspection-not-a-current-benchmark"
+}

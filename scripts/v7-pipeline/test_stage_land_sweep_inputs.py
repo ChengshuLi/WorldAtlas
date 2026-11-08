@@ -61,12 +61,36 @@ class StagingTest(unittest.TestCase):
             staging.stage(self.catalog,self.config,self.out,self.client)
         self.assertFalse((self.out/'metadata-staged.json').exists())
 
+    def test_response_body_must_match_the_pinned_length(self):
+        name='fresh-stage2-core-config';pin={'source_id':name,'r2_bucket':'bucket','r2_key':name,
+            'size_bytes':len(self.data[name]),'sha256':sha(self.data[name])}
+        for value in (self.data[name][:-1],self.data[name]+b'extra'):
+            with self.subTest(length=len(value)):
+                client=Client({name:value})
+                client.get_object=lambda **kwargs:{'ContentLength':pin['size_bytes'],'Body':io.BytesIO(value)}
+                with self.assertRaisesRegex(ValueError,'size/hash differs'):
+                    staging.fetch(client,pin,self.root/str(len(value)))
+
     def test_catalog_core_mismatch_fails_before_output_creation(self):
         value=json.loads(self.catalog.read_bytes());value[0]['source_id']='duplicate'
         self.catalog.write_text(json.dumps(value))
         with self.assertRaisesRegex(ValueError,'catalog entry required'):
             staging.stage(self.catalog,self.config,self.out,self.client)
         self.assertFalse(self.out.exists())
+
+    def test_additional_json_metadata_is_exact_and_does_not_change_plan(self):
+        rows=json.loads(self.catalog.read_bytes())
+        rows.append({'source_id':'extra-report','version':'test','r2_bucket':'bucket','r2_key':'extra/report.json',
+            'sha256':sha(b'{}'),'size_bytes':'2'})
+        self.catalog.write_text(json.dumps(rows));self.client.data['extra/report.json']=b'{}'
+        staging.stage(self.catalog,self.config,self.out,self.client)
+        identity=(self.out/'plan.json').read_bytes()
+        result=staging.stage_additional_metadata(self.catalog,self.config,self.out,self.client,['extra-report'])
+        self.assertEqual(Path(result['extra-report']['path']).read_bytes(),b'{}')
+        self.assertEqual((self.out/'plan.json').read_bytes(),identity)
+        staging.stage_additional_metadata(self.catalog,self.config,self.out,self.client,['extra-report'])
+        with self.assertRaisesRegex(ValueError,'unsafe metadata'):
+            staging.stage_additional_metadata(self.catalog,self.config,self.out,self.client,['../escape'])
 
     def test_identity_change_is_rejected_without_rewriting_sources(self):
         staging.stage(self.catalog,self.config,self.out,self.client)
