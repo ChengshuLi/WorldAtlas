@@ -2,6 +2,20 @@
 
 Read-only catalog inspection on 2026-11-05, branch `continent-review-v1`. This distinguishes exact archived source bytes from proof that those bytes produced the selected geometry. It does not accept geography or change any source or boundary.
 
+## Sourcecut recovery on 2026-11-08
+
+The combined mainland sourcecut was recovered from the older V5 review
+archive. Its file SHA-256 is
+`b0401ee291aff8b6b5fdaabb4501e7321cbf6c8e9eba9be19cdca6e7ab846382`.
+The Caucasus feature has 2,292 coordinates, all equal in order to the
+historical base Neon export described below. This is the guide from before
+the later V8 Caucasus replacement. The accompanying Ural and Panama features
+also match their historical export. Neon preserves the exact GeoJSON text in
+`atlas.structured_documents` under `v8-historical-mainland-sourcecut`, with
+version `sha256-b0401ee291aff8b6b5fdaabb4501e7321cbf6c8e9eba9be19cdca6e7ab846382`.
+The recovered file identifies earlier inputs and joins. The original shoreline
+files and complete extraction recipe remain open evidence gaps.
+
 ## Selected input and stage-2 handoff
 
 `atlas.decision_mainland_boundaries` records revision `v2-land-mainland-boundary-draft-1`, boundary `caucasus_blacksea_anapa_to_caspian`, `stored_linestring_v1`, CRS84, `selected_for_research`, geometry digest `9f4ae3bc778ebbcd0258a19868acf0fa655763f5e849361196160fb4289c0d52` under `binary64-sorted-compact-geojson-v1`. The revision is draft. It is one stored LineString, not four independently proven constructions. `atlas.decision_mainland_region_segments` references its full stored index range 0–2292 with `reverse=true` for `europe_mainland_region_v1`. This describes a research input reference, not a demonstration that any current stage-2 run executed it or that a historical grid used it.
