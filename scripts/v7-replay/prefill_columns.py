@@ -60,6 +60,12 @@ class LayerPolicy:
         chunks = [(layer, records) for layer, records in chunks if records]
         if not chunks:
             return ResolvedRow(empty_columns(), 0)
+        # Non-string legacy identities can affect sorting/hash diagnostics.
+        # Arrow's validated string columns avoid this Python metadata scan.
+        if any(not (records.metadata_strings_only if hasattr(records, 'metadata_strings_only') else
+                    all(isinstance(span[4], str) and isinstance(span[5], str) for span in records))
+               for _, records in chunks):
+            return self.reference_row(chunks, row, physical_ends, physical_values)
         def column(records, index, dtype):
             if hasattr(records, 'columns'):
                 return records.columns[index - 1]

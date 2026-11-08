@@ -57,6 +57,9 @@ class ColumnSpans:
     def __init__(self, starts, stops, codes, *, arrow=None, legacy=None, children=(), order=None):
         self.columns=(starts,stops,codes)
         self.arrow,self.legacy,self.children,self.order=arrow,legacy,children,order
+        self.metadata_strings_only=(True if arrow is not None else
+            all(isinstance(span[4],str) and isinstance(span[5],str) for span in legacy)
+            if legacy is not None else all(child.metadata_strings_only for child in children))
 
     def __len__(self):return len(self.columns[0])
 

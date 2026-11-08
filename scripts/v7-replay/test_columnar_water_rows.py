@@ -20,19 +20,20 @@ def record(row=0,start=1,stop=4,**extra):
 
 
 class ColumnarWaterTests(unittest.TestCase):
-    def compare(self,data,*,rows=(0,4),sparse=True,cols=None,compressed=False,block_size=128):
+    def compare(self,data,*,rows=(0,4),sparse=True,cols=None,compressed=False,block_size=128,selection=None):
         if isinstance(data,list):data=('\n'.join(json.dumps(r,ensure_ascii=False) for r in data)+'\n').encode()
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/('tile.gz' if compressed else 'tile')
             path.write_bytes(gzip.compress(data) if compressed else data)
             tile={'_path':path,'_rows':rows,'_cols':cols}
-            try:expected=list(reference.tile_spans(tile,0,rows[1],'water',sparse))
+            y0,y1=selection or (0,rows[1])
+            try:expected=list(reference.tile_spans(tile,y0,y1,'water',sparse))
             except Exception as expected_error:
                 with self.assertRaises(type(expected_error)) as actual:
-                    list(columns.tile_rows(tile,0,rows[1],sparse,block_size=block_size))
+                    list(columns.tile_rows(tile,y0,y1,sparse,block_size=block_size))
                 self.assertEqual(str(actual.exception),str(expected_error))
                 return None
-            batches=list(columns.tile_rows(tile,0,rows[1],sparse,block_size=block_size))
+            batches=list(columns.tile_rows(tile,y0,y1,sparse,block_size=block_size))
             actual=[span for row,batch in batches for span in batch.reference_records(row)]
             self.assertEqual(actual,expected)
             return batches
@@ -94,6 +95,25 @@ class ColumnarWaterTests(unittest.TestCase):
             self.assertTrue(fallback.called)
             self.assertGreater(fallback.call_args.args[-1],0)
 
+    def test_nonzero_selection_late_fallback_and_outside_tail_validation(self):
+        for late in (1,10,14):
+            data=[]
+            for row in range(16):
+                data.append(record(row))
+                if row==7:
+                    data[-1]=record(row,1,3);data.append(record(row,3,5))
+                if row==late:
+                    data[-1]={'row':row,'spans':[{'x_start':1,'x_end_exclusive':4,'to_code':3,
+                               'rule_id':'r','source_member_id':'m'}]}
+            with self.subTest(late=late),patch.object(columns,'original_remainder',wraps=columns.original_remainder) as fallback:
+                result=self.compare(data,rows=(0,16),selection=(4,12),compressed=True)
+                self.assertTrue(fallback.called)
+                if late>4:self.assertGreater(fallback.call_args.args[-1],0)
+                self.assertEqual(sum(len(batch) for _,batch in result),9)
+            data[-1]=record(15,1,reference.W+1)
+            self.compare(data,rows=(0,16),selection=(4,12),compressed=True)
+        self.compare([record(row) for row in range(15)],rows=(0,16),selection=(4,12),sparse=False)
+
     def test_merging_tiles_retains_global_span_order_and_reference_diagnostics(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);tiles=[]
@@ -126,6 +146,18 @@ class ColumnarWaterTests(unittest.TestCase):
         with columns.CompatibleJSONLines(io.BytesIO(raw)) as stream:
             self.assertEqual(stream.read(7),raw[:7]);self.assertEqual(stream.read(0),b'')
             self.assertEqual(stream.read(),raw[7:]);self.assertEqual(stream.read(),b'')
+
+    def test_nonstring_legacy_identities_keep_reference_sort_errors(self):
+        first=self.compare([record(0,member_id={'identifier':1})])[0][1]
+        second=self.compare([record(0,member_id=[2])])[0][1]
+        policy=LayerPolicy([{'layer_id':'one','manifest_path':'one','priority':1},
+                            {'layer_id':'two','manifest_path':'two','priority':2,'overrides':['one']}])
+        chunks=[(0,first),(1,second)]
+        with self.assertRaises(TypeError) as expected:
+            policy.reference_row(chunks,0,np.asarray([128]),np.asarray([1]))
+        with self.assertRaises(TypeError) as actual:
+            policy.resolve(chunks,0,np.asarray([128]),np.asarray([1]))
+        self.assertEqual(str(actual.exception),str(expected.exception))
 
     def test_randomized_sparse_rows_and_multiple_span_values(self):
         rng=np.random.default_rng(20261110)
