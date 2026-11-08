@@ -151,13 +151,15 @@ def source_json_bytes(value, serialization='pretty-ascii'):
         value['output_sha256'] = {key: value['output_sha256'][key]
                                  for key in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')}
         serialization = 'original-pretty-utf8'
-    if serialization not in {'canonical-ascii', 'canonical-utf8', 'pretty-ascii',
-                              'pretty-utf8', 'original-order-utf8', 'original-pretty-utf8'}:
+    if serialization not in {'canonical-ascii', 'canonical-utf8', 'spaced-ascii',
+                              'spaced-utf8', 'pretty-ascii', 'pretty-utf8',
+                              'original-order-utf8', 'original-pretty-utf8'}:
         raise ValueError('unsupported source JSON serialization')
     pretty = 'pretty' in serialization
     return (json.dumps(value, sort_keys=not serialization.startswith('original-'),
         ensure_ascii=serialization.endswith('ascii'), indent=2 if pretty else None,
-        separators=None if pretty else (',', ':'), allow_nan=False) + '\n').encode()
+        separators=None if pretty or serialization.startswith('spaced-') else (',', ':'),
+        allow_nan=False) + '\n').encode()
 
 
 def rle_spec(directory, *, physical=False):
@@ -366,21 +368,26 @@ class Pipeline:
             with psycopg.connect(connection) as database:
                 database.execute('SET TRANSACTION READ ONLY')
                 row = database.execute(
-                    "SELECT sha256,size_bytes,COALESCE(provenance->'snapshot',provenance->'document') "
+                    "SELECT sha256,size_bytes,COALESCE(provenance->'snapshot',provenance->'document')::text "
                     'FROM atlas.source_assets WHERE source_id=%s AND version=%s',
                     (source['source_id'], source['version'])).fetchone()
         except Exception:
             raise ValueError('Neon source read failed; check database access and selected source identity') from None
-        if row is None or row[0] != expected or int(row[1]) != size or not isinstance(row[2], dict):
+        if row is None or row[0] != expected or int(row[1]) != size or not isinstance(row[2], str):
             raise ValueError('Neon source catalog identity/SHA-256/size mismatch')
-        # JSONB retains values, not file formatting. Accept only a reconstruction
-        # whose complete bytes match the independently selected catalog pin.
+        document = json.loads(row[2])
+        if not isinstance(document, dict):
+            raise ValueError('Neon source catalog document must be an object')
+        # Keep PostgreSQL's JSONB text intact for records pinned in that form.
+        # Parsing and reserializing it can change numeric spelling and byte order.
+        # Every accepted representation must still match the selected size/hash.
         formats = dict.fromkeys([source.get('serialization', 'canonical-ascii'),
-            'canonical-ascii', 'canonical-utf8', 'pretty-ascii', 'pretty-utf8',
-            'original-order-utf8', 'original-pretty-utf8', 'physical-report-v1'])
+            'canonical-ascii', 'canonical-utf8', 'spaced-ascii', 'spaced-utf8',
+            'pretty-ascii', 'pretty-utf8', 'original-order-utf8',
+            'original-pretty-utf8', 'physical-report-v1', 'jsonb-text'])
         for serialization in formats:
             try:
-                data = source_json_bytes(row[2], serialization)
+                data = row[2].encode() if serialization == 'jsonb-text' else source_json_bytes(document, serialization)
             except KeyError:
                 continue
             if len(data) == size and hashlib.sha256(data).hexdigest() == expected:

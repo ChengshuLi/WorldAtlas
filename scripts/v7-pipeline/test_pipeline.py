@@ -196,7 +196,7 @@ class Fixture(unittest.TestCase):
             def __exit__(self, *args): pass
             def execute(self, query, parameters=None):
                 statements.append((query, parameters)); return self
-            def fetchone(self): return (expected, len(payload), value)
+            def fetchone(self): return (expected, len(payload), json.dumps(value, ensure_ascii=False))
         fake = SimpleNamespace(connect=lambda connection: Database())
         runner = pipeline.Pipeline.__new__(pipeline.Pipeline)
         with patch.dict(sys.modules, {'psycopg': fake}), patch.dict(os.environ, {'NEON_DATABASE_URL': 'fixture-only'}):
@@ -206,6 +206,86 @@ class Fixture(unittest.TestCase):
                 runner.neon_source({'source_id': 'selected', 'version': 'v1'}, expected, len(payload))
         self.assertEqual(statements[0][0], 'SET TRANSACTION READ ONLY')
         self.assertEqual(statements[1][1], ('selected', 'v1'))
+
+        self.assertIn("COALESCE(provenance->'snapshot',provenance->'document')::text", statements[1][0])
+
+    def test_spaced_neon_json_reconstructs_original_without_changing_compact_serialization(self):
+        value = {'name': 'Sørkapp', 'number': 1.0}
+        payload = (json.dumps(value, sort_keys=True, ensure_ascii=True) + '\n').encode()
+        self.assertEqual(pipeline.source_json_bytes(value, 'spaced-ascii'), payload)
+        self.assertNotEqual(pipeline.source_json_bytes(value, 'canonical-ascii'), payload)
+        self.assertEqual(pipeline.source_json_bytes(value, 'spaced-utf8'),
+                         (json.dumps(value, sort_keys=True, ensure_ascii=False) + '\n').encode())
+        expected = hashlib.sha256(payload).hexdigest()
+        class Database:
+            def __enter__(self): return self
+            def __exit__(self, *args): pass
+            def execute(self, *args): return self
+            def fetchone(self): return (expected, len(payload), json.dumps(value))
+        fake = SimpleNamespace(connect=lambda connection: Database())
+        runner = pipeline.Pipeline.__new__(pipeline.Pipeline)
+        with patch.dict(sys.modules, {'psycopg': fake}), patch.dict(os.environ, {'NEON_DATABASE_URL': 'fixture-only'}):
+            self.assertEqual(runner.neon_source({'source_id': 'selected', 'version': 'v1',
+                'serialization': 'spaced-ascii'}, expected, len(payload)), payload)
+
+    def test_neon_jsonb_text_fetches_exact_bytes_from_empty_roots_and_reuses_verified_cache(self):
+        # PostgreSQL text preserves decimal spelling, Unicode and key order.
+        # This selected representation has no trailing newline.
+        payload = '{"b": 1.2300, "a": "Sørkapp"}'.encode()
+        expected = hashlib.sha256(payload).hexdigest()
+        source = {'neon': {'source_id': 'selected', 'version': 'v1', 'serialization': 'jsonb-text'},
+                  'sha256': expected, 'size_bytes': len(payload)}
+        self.cfg['sources'] = {key: source for key in self.cfg['sources']}
+        config = pipeline.write(self.inputs / 'neon-config.json', self.cfg)
+        statements = []
+        class Database:
+            def __enter__(self): return self
+            def __exit__(self, *args): pass
+            def execute(self, query, parameters=None):
+                statements.append((query, parameters)); return self
+            def fetchone(self): return (expected, len(payload), payload.decode())
+        fake = SimpleNamespace(connect=lambda connection: Database())
+        with patch.dict(sys.modules, {'psycopg': fake}), patch.dict(os.environ, {'NEON_DATABASE_URL': 'fixture-only'}):
+            for name in ('computer-one', 'computer-two'):
+                root = self.root / name
+                self.assertFalse(root.exists())
+                runner = pipeline.Pipeline(config, work_dir=root)
+                try:
+                    self.assertEqual(runner.sources['land_snapshot'].read_bytes(), payload)
+                    self.assertEqual(len(runner.acquisition_intervals), 1)
+                finally:
+                    runner.close()
+                with patch.object(fake, 'connect', side_effect=AssertionError('cache must not reconnect')):
+                    runner = pipeline.Pipeline(config, root / 'second-run', work_dir=root)
+                    try:
+                        self.assertEqual(runner.sources['land_snapshot'].read_bytes(), payload)
+                        self.assertEqual(runner.acquisition_intervals, [])
+                    finally:
+                        runner.close()
+        self.assertEqual([query for query, _ in statements[::2]], ['SET TRANSACTION READ ONLY'] * 2)
+        self.assertEqual([parameters for _, parameters in statements[1::2]], [('selected', 'v1')] * 2)
+
+    def test_neon_jsonb_text_changed_document_or_catalog_pin_fails_closed(self):
+        payload = b'{"value": 1.00}'
+        expected = hashlib.sha256(payload).hexdigest()
+        row = [expected, len(payload), '{"value": 2.00}']
+        class Database:
+            def __enter__(self): return self
+            def __exit__(self, *args): pass
+            def execute(self, *args): return self
+            def fetchone(self): return row
+        fake = SimpleNamespace(connect=lambda connection: Database())
+        runner = pipeline.Pipeline.__new__(pipeline.Pipeline)
+        source = {'source_id': 'selected', 'version': 'v1', 'serialization': 'jsonb-text'}
+        with patch.dict(sys.modules, {'psycopg': fake}), patch.dict(os.environ, {'NEON_DATABASE_URL': 'fixture-only'}):
+            with self.assertRaisesRegex(ValueError, 'cannot reconstruct'):
+                runner.neon_source(source, expected, len(payload))
+            row[:] = ['0' * 64, len(payload), payload.decode()]
+            with self.assertRaisesRegex(ValueError, 'catalog identity/SHA-256/size mismatch'):
+                runner.neon_source(source, expected, len(payload))
+            row[:] = [expected, len(payload) + 1, payload.decode()]
+            with self.assertRaisesRegex(ValueError, 'catalog identity/SHA-256/size mismatch'):
+                runner.neon_source(source, expected, len(payload))
 
     def test_cloud_zip_members_are_individually_pinned_and_keep_sidecars_together(self):
         buffer = io.BytesIO()
