@@ -122,11 +122,8 @@ unchanged. No process, subprocess or compiler step is added.
 `test_land_stream_speed.py` checks per-row I/O, first/last/zero root IDs and a
 complete randomized stream against independently constructed expected bytes.
 The existing writer, seed-population and Ural tests cover malformed inputs and
-boundary failures. The [complete preserved-source kernel replay](../../../../docs/benchmarks/land-kernel-replay-20261108.md)
-now reproduces every global land output byte, with fresh source-bound decisions.
-A fresh raw-source end-to-end build and controlled before/after timing ratio
-remain unmeasured. `benchmark_land.py` remains the complete-mainland comparison when a completed
-reference and an uncontended timing slot are available. For a local, in-process
+boundary failures. `benchmark_land.py` compares complete mainland runs.
+Use a completed reference and an uncontended timing slot. For a local, in-process
 coverage/writer-only check, use `scripts/v7-pipeline/benchmark_land_sweep.py` with
 `--reference-run /path/to/completed-run --out /path/to/new-comparison`. It checks
 all source, configuration, producer-report and checkpoint pins, every output
@@ -190,12 +187,9 @@ Independent dense, UINT32-width and varied-batch-size oracles pass.
 The complete candidate-first preflight pair matched every report field at
 8.319 s versus 22.672 s (2.73x observed). See the
 [receipt and limits](../../../../docs/benchmarks/land-batched-preflight-20261108.md).
-`compare_land_preflights.py --batch-rows N` keeps diagnostic selection explicit;
-its comparison default remains one-row mode. `compare_land_replays.py` pairs
-complete fresh seed-index/WGS84/writer replays with legacy and integrated
-coverage. The integrated full-kernel pair passed with every decision, output hash and
-Ural count identical: 104.133 s legacy versus 89.160 s integrated. See the
-[full receipt and scope](../../../../docs/benchmarks/land-batch-integration-20261108.md).
+The paired kernel runs rebuilt seed indexes, reran WGS84 decisions and
+wrote identical output hashes and Ural counts. The legacy path took 104.133 s
+and the integrated path took 89.160 s. See the [full receipt and scope](../../../../docs/benchmarks/land-batch-integration-20261108.md).
 It is not raw-pipeline/geographic acceptance.
 
 ### Numeric writer integration
@@ -213,9 +207,3 @@ Both row offsets and records stream in ordinary batches, with every span/root
 condition checked. The Ural policy retains exact original scalar center
 arithmetic; only compressed output transitions are retained, not pixel arrays.
 Dense/MAX-width/failure oracles and the unchanged writer contracts pass.
-
-`compare_land_replays.py --compare-writer` holds the already integrated numeric
-coverage constant, then independently rebuilds seed indexes, reruns every
-WGS84 decision/tie and writes full output bytes with legacy/numeric writers.
-`replay_land_sweep.py --writer-engine legacy` retains an explicit baseline.
-No accepted geography or user-owned raw pipeline is changed by these proofs.

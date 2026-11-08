@@ -269,7 +269,8 @@ synthetic tests, since `tempfile` is also used by the test framework:
 
     mkdir -p /workspace/test-scratch
     TMPDIR=/workspace/test-scratch TMP=/workspace/test-scratch \
-      TEMP=/workspace/test-scratch /usr/bin/python3 -m unittest discover \
+      TEMP=/workspace/test-scratch PYTHONPATH=scripts/v7-replay \
+      python3 -m unittest discover \
       -v -s scripts/v7-pipeline -p 'test_*.py'
 
 Tests execute actual raw polygon/Parquet rasterization and Python component
@@ -281,46 +282,6 @@ process interruptions, resumed output equality, torn journals, live-process
 safety, pin corruption and acquisition separation. These focused
 fixtures do not replace the global source-to-final acceptance run or establish
 its elapsed time.
-
-## Replay preserved land evidence without a pipeline launch
-
-`stage_land_sweep_inputs.py` reads an existing catalog and exact core-config
-pin. It stages metadata by default; `--stage-streams` reads the catalog-pinned
-physical/component/seed RLE, hints and expected land streams. `--stage-search`
-adds the pinned representatives, tile manifest and decision snapshot. Use an
-existing read-only boto3 profile and an explicit HTTPS R2 account endpoint.
-Every byte count and SHA-256 is checked. Original configurations and reports
-remain byte-identical, including historical paths; the separate staging plan
-maps those identities to the current files. No cloud object is changed.
-
-`replay_land_sweep.py --staged-inputs DIR --out NEW_DIR` verifies all staged
-pins and reruns complete physical/component/seed coverage and population checks.
-Add `--search` to regenerate the seed index in Python, require its exact pinned
-manifest, verify representatives against actual seed cells, rerun all source-bound
-WGS84 decisions and then write and compare every land output byte and Ural count.
-It can reconstruct missing assignment state without using expected output labels
-as hints or assignments. Expected land output is used only for the final check.
-Neither tool launches the complete pipeline, compiles code or starts a process.
-
-This is preserved-evidence kernel replay, not a fresh raw-source build, geographic
-acceptance or full end-to-end speed measurement. Keep complete timing comparisons
-separate from other heavy runs. The user-owned full pipeline is independent.
-
-`compare_land_sweeps.py` pairs the complete old and current Python preflight and
-writer against the same staged inputs and fresh replay checkpoint. Pass
-`--staged-inputs`, `--source-replay`, `--baseline-code` (the original Stage 2
-source directory) and a new `--out`. It verifies checkpoint identity/checksum,
-recomputes its final assignments, records both source fingerprints and exact
-UTC trial intervals, and requires all reports and output bytes to match. It
-loads the reference Python modules in process and never edits their source.
-Run without other heavy workloads. `--candidate-first` reverses trial order;
-one pair does not balance cache order and is not an end-to-end speed ratio.
-
-For upstream cost inspection, `stage_land_sweep_inputs.py --metadata-source ID`
-can stage an additional exact catalog-pinned JSON report with its receipt.
-The option is repeatable and does not change the immutable main staging plan.
-It accepts no unpinned object or path override, and reads no bulk stream unless
-that separate staging option was explicitly requested.
 
 ## In-process admitted-stage benchmarks
 
@@ -340,24 +301,6 @@ Older receipts that measured a child interpreter are not directly equivalent
 to this timing scope.
 
 
-## Replay seed raster sources through Python APIs
-
-`prepare_seed_raster_replay.py --staged-inputs DIR --out NEW_DIR` reconstructs
-source polygons with the ordinary regional producer and fresh water/terminal
-closure checks. A local-derived decision snapshot requires
-`--allow-local-provisional --prior-physical-report PINNED_FILE` and exact physical
-stream equivalence. Recreated GeoJSON bytes must match archived source pins.
-Historical reports and contracts are never rewritten or substituted for a fresh
-closure proof. This is provisional research, not a final-land artifact.
-
-`benchmark_seed_raster.py --staged-inputs DIR --recovered-regions SOURCE_DIR
---out NEW_DIR --workers N` runs complete serial and parallel GDAL-Python/NumPy
-seed builds. It uses old seed outputs only after each build to check every
-output hash and every rule/category population. Source polygons, component
-streams, driver code and exact UTC intervals are pinned in separate receipts.
-No compiler, ctypes bridge, child process or whole pipeline is used. Run alone
-for comparable timing; one serial-first pair does not balance cache order.
-
 ## Numeric land coverage and complete integration pairs
 
 The actual Stage2 builder now uses the general 128-row NumPy coverage checker,
@@ -365,25 +308,6 @@ with both numeric source files in its normal code identity. The independent
 legacy Python checker is retained for comparison. The complete isolated
 candidate-first preflight pair passed at 8.319 s versus 22.672 s, with every
 coverage/population field equal. This is not a whole-stage speed ratio.
-
-`compare_land_preflights.py --staged-inputs DIR --out NEW_DIR --batch-rows N`
-selects explicit ordinary row batches; the comparison default remains one row.
-There is no memory-based admission rule or cache ceiling. All source row and
-interval boundaries remain mandatory.
-
-`compare_land_replays.py --staged-inputs DIR --out NEW_DIR` pairs complete
-preserved-source kernels. Each trial rebuilds every seed tile, searches all
-source components/ties and writes every output byte/Ural count. Reference uses
-the legacy coverage checker; candidate uses the actual Stage2 numeric default.
-The pair records complete code/input hashes, UTC intervals and all outputs.
-It never launches or changes the user-owned whole pipeline. The full-kernel pair passed with all decisions/output bytes identical:
-104.133 s reference versus 89.160 s integrated. See the
-[full receipt and scope](../../docs/benchmarks/land-batch-integration-20261108.md).
-
-The seed pair accepts `--verify-tiles DIRECTORY` to run the independent Python
-tile verifier against its freshly generated complete seed. That directory must
-have the exact core-config-pinned manifest. Its receipt records verifier source,
-directory identity, UTC interval and complete tile/record counts.
 
 ## Global shoreline-index kernel QA
 
@@ -439,9 +363,7 @@ noncoalesced RLE, invalid-category and maximum-width compressed-span tests.
 See [source pins and full scope](../../docs/benchmarks/water-shore-constructor-20261108.json).
 
 The numeric writer's complete isolated byte/report proof measured 29.844 s
-legacy versus 13.012 s numeric. `compare_land_replays.py --compare-writer`
-holds current numeric coverage constant and pairs complete legacy/numeric
-writer replays. The complete integration pair passed
+legacy versus 13.012 s numeric. The complete integration pair passed
 before default promotion: 90.238 s legacy versus 73.051 s numeric, with every
 decision/output byte/Ural count identical. [Exact writer receipt and limits](../../docs/benchmarks/land-numeric-writer-20261108.md)
 are recorded separately from the earlier coverage integration.
