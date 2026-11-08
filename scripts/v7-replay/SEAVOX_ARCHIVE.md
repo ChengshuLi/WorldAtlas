@@ -8,6 +8,31 @@ Build mode requires `--policy`, `--policy-sha256`, `--decision-id` and an `--out
 
 The adapter only extracts a geometry; it does not rasterize, create assignments, verify an authenticated revision, or publish a grid. Downstream code must verify both archive and feature file bytes, the manifest, and the same decision snapshot before using the geometry.
 
+## In-process complete batch
+
+`extract_seavox_features.py` reads the complete selected feature inventory from
+one archive scan. Its coordinate candidate batches all rings of a feature into
+ordinary PyArrow array operations, preserving polygon/ring/vertex order and 2D
+or 3D coordinates. Near-zero scientific-notation values use the existing scalar
+conversion. Every complete canonical geometry must still match its selected
+decision hash; otherwise the unchanged OGR writer is used. No coordinates or
+features are omitted. This adds no compiler, process, subprocess or memory cap.
+
+`--scalar-coordinate-reference` retains the original scalar conversion for
+exact comparisons. `scripts/v7-pipeline/benchmark_seavox_coordinates.py` runs
+both complete selected batches sequentially in the same Python process, then
+checks every canonical feature byte and scientific provenance field. Give it
+the pinned `--archive`, `--archive-sha256`, `--policy`, `--policy-sha256`, an
+existing `--input-root` and fresh `--out`. Timing excludes source acquisition
+and the subsequent exact comparison. Record any concurrent shared-machine work;
+a complete extraction comparison is not an end-to-end pipeline timing claim.
+
+The [complete 92-feature comparison](../../docs/benchmarks/seavox-coordinates-20261108.json)
+observed 40.55s scalar versus 32.35s batched, with all 182,644,857 feature bytes
+and scientific provenance identical and no OGR fallbacks. This was one paired
+trial sharing the host with a physical-stage workload; its approximately 20%
+reduction is not an isolated or complete-pipeline speedup measurement.
+
 ## Selected archive and comparison evidence (2026-11-03)
 
 The user-supplied complete SeaVoX v19 archive has SHA-256 `78a7983940aa73989642f2b95f9261c07fc234bf7f8cd14e0dff96bb90ce7e0a` and contains 249 feature records. It is the draft source pin; any build must verify the exact bytes and an authenticated decision revision. An earlier derived 92-feature subset has SHA-256 `53a8209108721f9472b6e8f42c53cb5796f788570c8a315e26362b98f8a3cf97` and is comparison evidence only. Its 92 selected SHP geometry records were byte-identical to the corresponding records in the complete archive; an independent GDAL extraction also matched all 92 canonical geometry hashes. Do not substitute either archive or an earlier feature GeoJSON under another source pin. Gulf feature `24063`, extracted with GDAL 3.10.3 at 15 decimal places, has canonical geometry SHA-256 `fd50f0dc4673c62d5f508681c6d49fa5994802f0bae8fadbaf037175fffc8e22`. Geometry hashes are representation-specific.

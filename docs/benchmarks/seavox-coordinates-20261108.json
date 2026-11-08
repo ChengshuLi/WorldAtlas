@@ -1,0 +1,722 @@
+{
+  "archive_bytes": 71306274,
+  "archive_sha256": "78a7983940aa73989642f2b95f9261c07fc234bf7f8cd14e0dff96bb90ce7e0a",
+  "benchmark_sha256": "63b23c6e65bc64853d482de5b05dc7b92f7a0062406241c58e88e06bc1136b24",
+  "candidate": {
+    "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+    "hash_certified_features": 92,
+    "method": "whole-feature-in-process-arrow-decimal128-fixed15",
+    "ogr_fallbacks": 0,
+    "phases_seconds": {
+      "archive_materialization": 0.6887408589991537,
+      "archive_validation": 0.04734721000022546,
+      "feature_serialization": 4.248292194999522,
+      "geometry_binding": 4.4287000491749495e-05,
+      "ogr_selection_and_json_decode": 26.702697090000584
+    },
+    "wall_seconds": 32.34765348600013
+  },
+  "code_sha256": {
+    "scripts/v7-replay/decision_snapshot.py": "0beb0f5558ef7daeee7c829ce5c30558ec7892b573b90c98b0b41af041a97b21",
+    "scripts/v7-replay/extract_seavox_feature.py": "db8d531e8046339157f56db53d99441bfdd9d5bd551e2b57f5ea8db2822d5564",
+    "scripts/v7-replay/extract_seavox_features.py": "7621760b6b23e50b547708cd17cf8df5e16a5312bd2743ff9bfc4456e66e9641",
+    "scripts/v7-replay/local_water_overlay.py": "1109cadf29e055a0be04683098f64fccff1de6be8bf497363830c0c671055382",
+    "scripts/v7-replay/seavox_coordinates.py": "fbca68711ee437780ce0b2c452921739d219c3b9cd3bce0a514184937c3cbb92",
+    "scripts/v7-replay/seavox_properties.py": "b72b9bb2c02f266611795a7918200ac0d0e50e56dcab85e24cd274267755a78e"
+  },
+  "comparison": {
+    "decision_count": 92,
+    "feature_bytes": 182644857,
+    "status": "all-selected-feature-bytes-and-provenance-identical"
+  },
+  "date": "2026-11-08",
+  "decision_snapshot_sha256": "fe75aa08958215046d942518cd77e9f4cdaef3c07d01e9cf82057ad5cece3217",
+  "exclusive_outputs_sha256": "45280f05bba1560f8e738fc21b3a1e48bdfdcb0094e207f81e59fe3ebd1ae8e6",
+  "features": [
+    {
+      "decision_id": "gulf-of-carpentaria",
+      "feature_file_sha256": "9c3c86a19112cdbeb9976161fabca423aae4e2789e39f9ffb547585f53578f5c",
+      "geometry_sha256": "fd50f0dc4673c62d5f508681c6d49fa5994802f0bae8fadbaf037175fffc8e22",
+      "scientific_provenance_sha256": "4caf8f28ce059684286014610050f1df65dd13edd2c3ab573ad8d47413a944f3",
+      "source_feature_id": "24063"
+    },
+    {
+      "decision_id": "seavox-24017",
+      "feature_file_sha256": "47ddda08d904ffa0fd79bee35f2f81ce750294531da385baab74e96460bd7058",
+      "geometry_sha256": "c54f10f82d230c0a8c33621f4dfcaf2aab2fecaa064a7602402fdacd499732f7",
+      "scientific_provenance_sha256": "a4683ffde6f5b6dff6ddba14a92d10895cbdd3fd0e2b566bed8da4cb7bcaa153",
+      "source_feature_id": "24017"
+    },
+    {
+      "decision_id": "seavox-24018",
+      "feature_file_sha256": "abddc340fcbbf52174be775f70b791b3472fd723e97726c0c7fe152beb4640cc",
+      "geometry_sha256": "0649798967d0ea552bb7b9eb03563667e551aeebc700a46a345931282096deb1",
+      "scientific_provenance_sha256": "7d364e75044efbbd42fca65064b274163edef2361b27d7919e29e0ae92bd2ac4",
+      "source_feature_id": "24018"
+    },
+    {
+      "decision_id": "seavox-24019",
+      "feature_file_sha256": "9c0456d6acd8c9e57fe15d6dd37b5d0687d57cd607b8040ad751630ea0262069",
+      "geometry_sha256": "02f44f7cb6bc081f33edb2671bcbb3ff75db3d57fa9cfac8ac6cd606c5b0adcb",
+      "scientific_provenance_sha256": "0e2edc681a90d6992f291348543607c3f7631c589e6d1dcf2ae82cf2d4b2a736",
+      "source_feature_id": "24019"
+    },
+    {
+      "decision_id": "seavox-24020",
+      "feature_file_sha256": "c56899b077c823b72b2ad21e3774cf82e9307a57a1c04b968b30a593a1db3c5a",
+      "geometry_sha256": "81c6189eff42daf95367387ea3192adb2dee3ac68ac1002ea1006366381630a2",
+      "scientific_provenance_sha256": "e39eed72bfa91e4395440deab2ff165aa7eb952209e00ca2292a6d1df7f81a0a",
+      "source_feature_id": "24020"
+    },
+    {
+      "decision_id": "seavox-24022",
+      "feature_file_sha256": "9e0f8bb520e5dc2060707d18571b4891a65f7945e1ecf55231c2d65aaacef489",
+      "geometry_sha256": "b77e1d9f95f4374b6822969fd04403c2c38a53619906d8f03e0d417675e18a6f",
+      "scientific_provenance_sha256": "502baf541842c5c76bebced3c93c3d46ef763f84e3cb9271ba6d386f2b79fb31",
+      "source_feature_id": "24022"
+    },
+    {
+      "decision_id": "seavox-24028",
+      "feature_file_sha256": "bc60f323a350ef82f1b04a7f210525928e9048249f284562f77cebb99ac71f45",
+      "geometry_sha256": "df2748e0bba6a79917bd3d9ae4179f340a86b38cd35ff8363b28eccc4dd0f114",
+      "scientific_provenance_sha256": "2743e0c69e20f9f4dcad751586df4ada34a48d20bade57b4002d863f74d836ad",
+      "source_feature_id": "24028"
+    },
+    {
+      "decision_id": "seavox-24030",
+      "feature_file_sha256": "cbd58544ad29c27d5574c69612c12f4eee272e96801f178ac2ad630603c0e89d",
+      "geometry_sha256": "29a316f79b360802a8df3115c4a52b8a197ee5710f5c87ee14e6e67fb5e78625",
+      "scientific_provenance_sha256": "c46ef3302d2cecfde1954f4057171504c91a606f1803523eb9869d89a7e2ad6e",
+      "source_feature_id": "24030"
+    },
+    {
+      "decision_id": "seavox-24038",
+      "feature_file_sha256": "b109af06d14975792ff41b8c8f082425180f5bf90598a7f5b7d8c790261d01ba",
+      "geometry_sha256": "60814be9b15488b10fef2387e0686f8140affa933f18be5e5f6b4c123737a9e1",
+      "scientific_provenance_sha256": "21d51e52e392b97fca633dff8cf1d6076faf9eddbf06d8bee2ce9ed7785551df",
+      "source_feature_id": "24038"
+    },
+    {
+      "decision_id": "seavox-24042",
+      "feature_file_sha256": "b79dfd2b0b5cb36b896ef30ba9bee4488d4f4769c9e8fc7a342f2d3087a642fa",
+      "geometry_sha256": "4c3858a1d3a74952c15d243e9276bf649d8849147b437f4a69619bc3f8ba2b03",
+      "scientific_provenance_sha256": "cf58c9fe9d6ca9abf3865dd1f540f850d151a29614e57a7409384280d4b99691",
+      "source_feature_id": "24042"
+    },
+    {
+      "decision_id": "seavox-24043",
+      "feature_file_sha256": "ce505e79bd9690e7a00ffb4ade3b1136ce6df0801c90988d53377cb769723cf9",
+      "geometry_sha256": "7480dbff0cdcc6210609048fdc88cb96aead29d2f1cc2b93446ba18f1b1158e0",
+      "scientific_provenance_sha256": "c6aca0d4b94593501977f1e275bd3f82943941213f47e4fe7ea6952dec7c414e",
+      "source_feature_id": "24043"
+    },
+    {
+      "decision_id": "seavox-24044",
+      "feature_file_sha256": "153e41c3f978e7df3515004ee20abf1443e3d3f7ab7ed4f4bb986cc423ae4ece",
+      "geometry_sha256": "2af89d46f129b2c37071cb7de6be7e9095b17f7eb6eea65cfa44193b0e1db3c9",
+      "scientific_provenance_sha256": "fe53188e558f9cbe17cfc6a7913d1af647aab90dd6d8493496c591ef6f6ac16a",
+      "source_feature_id": "24044"
+    },
+    {
+      "decision_id": "seavox-24045",
+      "feature_file_sha256": "9068561f96da443efaaed001c73e309ac884bc6fc149b55cbbf668d77f7b0c3e",
+      "geometry_sha256": "1f401bddff75b633d054f7f62a09b0547eb05ff0560bd05c4009bb30b8aa10ac",
+      "scientific_provenance_sha256": "ac4eb34c2980006637cff6977317742e4ae6cd02215456d88d71d2913c383970",
+      "source_feature_id": "24045"
+    },
+    {
+      "decision_id": "seavox-24048",
+      "feature_file_sha256": "772fa6474852b0352c6d9b357dad7f863bc42162ae22939cc245bedbc03dc12f",
+      "geometry_sha256": "f14b159c8ee6022d6a9720fc4f24ede23503e57d449d0cc58cdba736d84f92ed",
+      "scientific_provenance_sha256": "324ba3fc5c75161002e62939a627e3fee257290634fa881de9681a8e787757bf",
+      "source_feature_id": "24048"
+    },
+    {
+      "decision_id": "seavox-24049",
+      "feature_file_sha256": "5a20018dabeebc3e20dce45847b02f08d509f292c8f832a616767e8edd2abcaf",
+      "geometry_sha256": "4bf3628b3f989e270778c7e1668862aceace22fe3dd2080100da95aae8b62a50",
+      "scientific_provenance_sha256": "70f35836c46850c4d39d8d91be47637650549654f3961049193c045f5d0024b4",
+      "source_feature_id": "24049"
+    },
+    {
+      "decision_id": "seavox-24051",
+      "feature_file_sha256": "93e6f4f1882ba43c2c89272c0a4c21a609e38e44ddd7812c7c45e2fad713ce17",
+      "geometry_sha256": "999e56a781ca3a20b0272f000c10ce925a33a84613b61ffa95c439122e6bdf7e",
+      "scientific_provenance_sha256": "6506e72e9629091ab803749dd04b867a37345dbbf69f567bfa1280257bff329f",
+      "source_feature_id": "24051"
+    },
+    {
+      "decision_id": "seavox-24052",
+      "feature_file_sha256": "419666d17cb14061ec18ef517d5d66894c66a412a3dd41bec5f316ca7fea068d",
+      "geometry_sha256": "6d0e148f08334831a575c0d8d3446f4d6e9fe9197a71622b7878c80a861d7b44",
+      "scientific_provenance_sha256": "b01c1b22a8cad1c446f16f471ae2355ba3e988ca14834d49d8311fc02e0a565b",
+      "source_feature_id": "24052"
+    },
+    {
+      "decision_id": "seavox-24053",
+      "feature_file_sha256": "8cb7075c04b872964a7630fc43d733002ac4e3949c907d9e385f494cf30a0c60",
+      "geometry_sha256": "5ff7589994e80c122c0164943ee31eb44bf4396e7413b133fa7b79c0a81d1efc",
+      "scientific_provenance_sha256": "5bfb60c57f97f1d989a87e13a0e4a717cb9ba32e7320a62f4142a758a27aed71",
+      "source_feature_id": "24053"
+    },
+    {
+      "decision_id": "seavox-24054",
+      "feature_file_sha256": "e5c41c9d98906d3b52c161f2a4f3de5d85c0f718393c787fd832d57d6eda7535",
+      "geometry_sha256": "2f4ffa2c3f5cf1ff14d0457ab32f7cf16ce31fef8cc34132464381e5dbe3dbac",
+      "scientific_provenance_sha256": "affc4dab1091a4c057c4a0d79ac9e1c544d93c2203cab0b4707a0963ff00679b",
+      "source_feature_id": "24054"
+    },
+    {
+      "decision_id": "seavox-24055",
+      "feature_file_sha256": "cbda57f92b48c056300bbde895bb2c9a892eef1afce9c3d6837a0a133f780601",
+      "geometry_sha256": "7e7f39cfd203140dfd84defb912e8507e31744c7279d143fcf7f178015ff3305",
+      "scientific_provenance_sha256": "943cca8a11b60a20f970b2c8c99b26570732dd9bc13cf36e06bd75c59e161d79",
+      "source_feature_id": "24055"
+    },
+    {
+      "decision_id": "seavox-24060",
+      "feature_file_sha256": "dadc25b5174360bbfdfb76e716c4e6d14f74f1b2434373ecf37bad75aa93a08f",
+      "geometry_sha256": "b19a00e24ec60b2aa08b2a9cb8a2c6f752fffa5def95cdc746f80888f52f692c",
+      "scientific_provenance_sha256": "f73072b4c0ccceeaf28364a2cf54ca5e27adb9ff65f78059c449e1bcb46678c1",
+      "source_feature_id": "24060"
+    },
+    {
+      "decision_id": "seavox-24064",
+      "feature_file_sha256": "6a2922fbc41e53520e25a6b9c2865d9bb5c9efb67c684d515b482a24fcd2f080",
+      "geometry_sha256": "59fe703ef106f3430750d38a48b1e9f12cff239347f04079b9b3588cd7672d4b",
+      "scientific_provenance_sha256": "dcdb010a5d3089bb7e9fa26211281d7e6867fe2ca4d9a8ff550a9bd8e3a5865f",
+      "source_feature_id": "24064"
+    },
+    {
+      "decision_id": "seavox-24065",
+      "feature_file_sha256": "15fd2399564abcf4867e40a45d4a97373bc97aeb2823af7ef1d0e136595205cf",
+      "geometry_sha256": "7baa006a5d44f383c999f4c16880c63fbb0c6118c0212b190acd7922d6c51135",
+      "scientific_provenance_sha256": "8140da149f2c551f599d8fe7658df5d52db02c6c3adc9fb31c342b0e0ba875ee",
+      "source_feature_id": "24065"
+    },
+    {
+      "decision_id": "seavox-24066",
+      "feature_file_sha256": "2187c0c33ceed6b94533be608a5f2d6961709756bdf5af6cabe81a09bd4a793c",
+      "geometry_sha256": "a2248e30264796e530c43839be2f5d3a1642fc8bebcffd7f82d9f69995b4cb6e",
+      "scientific_provenance_sha256": "7f038884206f9c5ec4448e5a62800131b3369042c0dfff88af0c72888b0e897b",
+      "source_feature_id": "24066"
+    },
+    {
+      "decision_id": "seavox-24068",
+      "feature_file_sha256": "a120326928bf8c8a297b8e2ca25cf9f83adaeb6dffe023bd78ccad19402abc82",
+      "geometry_sha256": "8060eb5c1456524d2e73a661f92429b42bccfa8ed1003187bc452219173db8b5",
+      "scientific_provenance_sha256": "132bd57d79a2d0fc129f3969d2ca7ecb3666a73407a7b09480d0f60763f9e3e9",
+      "source_feature_id": "24068"
+    },
+    {
+      "decision_id": "seavox-24071",
+      "feature_file_sha256": "80e044aa418bf251b7ed8cf24b192ddabf60abe8881a75fa30ad5fd51dcb2fcc",
+      "geometry_sha256": "6117ae509c405855a210bae1a2fd3f6bfcfdad7933ffb1c5ecc8af729f346bba",
+      "scientific_provenance_sha256": "8b2d1594a048337b4cc74fa252bfc375170ab659e3ff1bb03725b9ef481b281a",
+      "source_feature_id": "24071"
+    },
+    {
+      "decision_id": "seavox-24072",
+      "feature_file_sha256": "0a0b1a7d290160a8c57f02aacd4fb5450802d467913f9bb0b9011017614fa5aa",
+      "geometry_sha256": "ae376f0392c594cff86d4b6e4e316590f44674e4f812c4a01840d5894f2965b2",
+      "scientific_provenance_sha256": "c8db3be85bc7bd850bcbeb6bbccfb2e19f176ae99809ec52c4522ae55a714508",
+      "source_feature_id": "24072"
+    },
+    {
+      "decision_id": "seavox-24075",
+      "feature_file_sha256": "75e37be10790dc5788eeba20ff01caec4ee847ee5157c9d3636f3aefaf058a4e",
+      "geometry_sha256": "ce4a049e1c2d3e2e1b5c9a7ae859ad8f6b16250d18673f5654296dca627a7813",
+      "scientific_provenance_sha256": "43a346447377d098b29525ce1b6d4d6e85289d456d262f52c05ba7536c25ce5e",
+      "source_feature_id": "24075"
+    },
+    {
+      "decision_id": "seavox-24077",
+      "feature_file_sha256": "bec9406bf0e07cf0a9aadb0fcf5184aab950ce5858b1b4873bd4f2a13ab17854",
+      "geometry_sha256": "017cd5edb2c9908efe0bfd1a418dac16d9bceecb66fe1cdf40f8a39c5b3bed08",
+      "scientific_provenance_sha256": "698f42a73727531fe11245375e38c7889b61b2e2454603cefc1ea71e05e607d7",
+      "source_feature_id": "24077"
+    },
+    {
+      "decision_id": "seavox-24080",
+      "feature_file_sha256": "cd25bf10a441f0ed12a113cbb539def654c5bfa11e45433d9368c93849e56372",
+      "geometry_sha256": "f5547a58ecbbe4e5ea222c36c2edd16e03d482cc65059f714d3a63cc4230cb1a",
+      "scientific_provenance_sha256": "fa6a6f13532f1a247cc38b856342bef4a36bcae36cc7b676bcf1ecdb55e5be7b",
+      "source_feature_id": "24080"
+    },
+    {
+      "decision_id": "seavox-24082",
+      "feature_file_sha256": "ed5ea602153dad23394c22e717afb254a7df7e0185e74282b1bb62fc36a7223a",
+      "geometry_sha256": "d75ff6351559677d50982990ecd07f2c75f388082216854b51624384e84c600a",
+      "scientific_provenance_sha256": "951c249488ba00a590dff056f0b6435ce839eff404303d5a728fff1977f2bb36",
+      "source_feature_id": "24082"
+    },
+    {
+      "decision_id": "seavox-24083",
+      "feature_file_sha256": "33da4352f79bea5a92208fcc394e60fd513d200e8a50d4a27bf97856fd113739",
+      "geometry_sha256": "9ebf22df9e1a82a0974c2c2ff01a0aecf104ac6ae78b5f3fc691e7a2c26e33da",
+      "scientific_provenance_sha256": "252ff380d7a3adac778eb3a426ff9f5e338bd34093ab66bc9f8c4363d858c6a0",
+      "source_feature_id": "24083"
+    },
+    {
+      "decision_id": "seavox-24084",
+      "feature_file_sha256": "120e20e72ebf1a0eb8baa1788ff7d429fdaea7c7a880d95d2b4607393666babc",
+      "geometry_sha256": "333d8d3051a4d86390fd0d6c916338d6625117276ed31ab4700fd77b69c9c4d5",
+      "scientific_provenance_sha256": "c581fc9d7b1ebbe3c2a301636ef516af7d08f1e10af13e27b7e5ae5aa11d397b",
+      "source_feature_id": "24084"
+    },
+    {
+      "decision_id": "seavox-24085",
+      "feature_file_sha256": "f3221f0679ec1131b67208196fb598f66d57d9846bfe0189ea46731403189046",
+      "geometry_sha256": "afbfbb96152f7a5a83e22ae856dfcb4eb7aba70956ea51e7647ea89767b62acf",
+      "scientific_provenance_sha256": "be85d402cc7d64327afa4149b9b80c304a35295dc7f9144955c490f647c9d849",
+      "source_feature_id": "24085"
+    },
+    {
+      "decision_id": "seavox-24086",
+      "feature_file_sha256": "b574e62466d0b70aeef12253e0b542794836ce6dcd0445a27c7d0af9b927fbfb",
+      "geometry_sha256": "b61c72bbfcd1e431d7c0fc33e52c55a7498e2930eb2fbb6dc16613907f02d8b0",
+      "scientific_provenance_sha256": "fe9b5a77bb2dc940a76df5a66a7c8151b7b4ff781fc8ee2157ce895431dc6dce",
+      "source_feature_id": "24086"
+    },
+    {
+      "decision_id": "seavox-24087",
+      "feature_file_sha256": "a9efe6d0173812f61f27b124636308bc3e25423bd892a3eaf5080f8bdd7336d2",
+      "geometry_sha256": "5e075a1f813a24303db771e14557bb075e36aeb11a27aa642589343378bed908",
+      "scientific_provenance_sha256": "6dc7619134f3c7566b858b208b51fd365e4efcbb0f4810fa68888856f3653ded",
+      "source_feature_id": "24087"
+    },
+    {
+      "decision_id": "seavox-24088",
+      "feature_file_sha256": "e8cb88aa98fcff95fb9f679c05db5a961ba91d3710f24d67aa23ceb7c94539bc",
+      "geometry_sha256": "0f2b4e18078681f9b046548c331661026fc8a11cc7188d3f9b37ae1a80ab7c06",
+      "scientific_provenance_sha256": "4fb7f437ea69f26193068b85e63577db98e45311b8ebbedde815954bc493c336",
+      "source_feature_id": "24088"
+    },
+    {
+      "decision_id": "seavox-24089",
+      "feature_file_sha256": "29eee42c23556de8f678eb84f6ca960083135a1bef202dff1e6653ae3809639d",
+      "geometry_sha256": "3c10805b3807260bc0a66241fff7d4ea633e2b7e96872f0dd25c0ef743a6c33a",
+      "scientific_provenance_sha256": "5a47210e6e200990079aaa46c5ff3079acd74902822a3024de94108355b00c9b",
+      "source_feature_id": "24089"
+    },
+    {
+      "decision_id": "seavox-24090",
+      "feature_file_sha256": "8c2af9a35e92dafe421d20b09a629cfcceab99673ff9f7b6ca16a15e96846f61",
+      "geometry_sha256": "fa8dab608198f5f053186c17d7400c7f3372d9eefa0a44ce51d8a7ae617a1a55",
+      "scientific_provenance_sha256": "923df84fb5e95ae51513f8d8ad9c640f9180ab55950d253e41ca0185656faa59",
+      "source_feature_id": "24090"
+    },
+    {
+      "decision_id": "seavox-24091",
+      "feature_file_sha256": "898a471ac754769638fa8fc2f42c7a5491fb4bc09d2df243d3f345a031a164b8",
+      "geometry_sha256": "70fc0804c60e222ffd5787c44982829b08ff59e941fe4370d2c1cf9e5a1c4319",
+      "scientific_provenance_sha256": "9430a6f5e32d4bcd360c936f33e477be7180ebd9ef69e668564281c5f8741349",
+      "source_feature_id": "24091"
+    },
+    {
+      "decision_id": "seavox-24092",
+      "feature_file_sha256": "2a10fc37cc98dd89a580ea854fce6daec667a471d47ffb759f409a72606e982e",
+      "geometry_sha256": "bc4b357b53296b56aba38cba65cbcfd99ae5219f01df435550c435c6a132c63d",
+      "scientific_provenance_sha256": "c1226437db0f4b83ff88c590626d120f76ab5a29f058d09871f0ce56897c1637",
+      "source_feature_id": "24092"
+    },
+    {
+      "decision_id": "seavox-24093",
+      "feature_file_sha256": "7c70323def8520bf6999fd7183b9e172aaf5a71f2ab9d32067509d32146ab898",
+      "geometry_sha256": "cffa5de47498584341cea9e868b124dbc21e5a87968f9d2ece5f9cc3eaf04db5",
+      "scientific_provenance_sha256": "ccf087c757c96bb2a97f589510884b15f5d6de2945a5d5903a6e322f5051e5e7",
+      "source_feature_id": "24093"
+    },
+    {
+      "decision_id": "seavox-24094",
+      "feature_file_sha256": "416e4c84e0010bc040a2605b11da1f94a3fa3c8d053e757d5b68d7093ca2046a",
+      "geometry_sha256": "5c1c03265490bea41ecbb1aebf94d0d6187ab8c432b62d242f6a1791b65725d0",
+      "scientific_provenance_sha256": "6e44a99dfa2b29fe8c4664898f7104fb8e591f2671d3748d700eb262872d65b9",
+      "source_feature_id": "24094"
+    },
+    {
+      "decision_id": "seavox-24095",
+      "feature_file_sha256": "b4d5af6b4b71604f80ee60a04674528fce391a988571bd701615bfd3e76a56a7",
+      "geometry_sha256": "9aec4d928defc58bff0b3b3a2ff34401d21ebf72898b5acc050876d07cf12091",
+      "scientific_provenance_sha256": "1c71bb1505ae0f9c5992859f88249a777d1a42955ea8ad5e475d99cacd1d1fe0",
+      "source_feature_id": "24095"
+    },
+    {
+      "decision_id": "seavox-24097",
+      "feature_file_sha256": "eab404c501c2fd8d593c4237c7030bad6f174062b5af94d37b21fb256cc844f3",
+      "geometry_sha256": "fddc0af75cb9b9f605b28f4a8bde7c8b9fdcefe88e76c6e270b5513da241439d",
+      "scientific_provenance_sha256": "313fd09084903cb5a7f241bf6558c24c6eb529eb66c444198dc887eb0c8c171e",
+      "source_feature_id": "24097"
+    },
+    {
+      "decision_id": "seavox-24098",
+      "feature_file_sha256": "bf1468c60153e89fd52efeb003f902ccb5e304cd032a18b61996d47567e81181",
+      "geometry_sha256": "696bbd82038e2a0e5baf183b997b00c762e8ccc0d9656e4f7b768f9298ba02d4",
+      "scientific_provenance_sha256": "318a80e2c1fd3dd25feb35f1cad5d56de18c6b2db1d7b57bedd6db60e94643c5",
+      "source_feature_id": "24098"
+    },
+    {
+      "decision_id": "seavox-24099",
+      "feature_file_sha256": "d85496e4002c19aa7fa8ae9bfe8f0460abcec127e3a11a1b0a7aa3bb12c0ac94",
+      "geometry_sha256": "d2e8eee474062b6834914761ac3841159bf723c962dcf54dbbd3d7abb91f755d",
+      "scientific_provenance_sha256": "243bf4b1944f5ba4f60f9636b4fdf4fd9213b52ff31be85a09aa8e39052101c5",
+      "source_feature_id": "24099"
+    },
+    {
+      "decision_id": "seavox-24100",
+      "feature_file_sha256": "52093322c7b5c07e1c9c622ed070e59d531d20001f1534c098e5c377fa9ea333",
+      "geometry_sha256": "34bdf22b7a84801fe56e33adff8c74d2328b37e7c5c86c465516ed2042821a48",
+      "scientific_provenance_sha256": "6062de76821cfd8585063dafa299daa5761eb23320d94c7860e8c0f97788dd0f",
+      "source_feature_id": "24100"
+    },
+    {
+      "decision_id": "seavox-24101",
+      "feature_file_sha256": "3b97e939161e762be649b761c5b433fb4d28cacde8bb01586d761bfd7f16cb24",
+      "geometry_sha256": "b00402df02b460dfc375f90a79d417a71371a12586f598958ce005d737d61fb1",
+      "scientific_provenance_sha256": "88be81a7d5ca12899c213116cd4aa29bf78611887255234d75b55beb5a6866d6",
+      "source_feature_id": "24101"
+    },
+    {
+      "decision_id": "seavox-24104",
+      "feature_file_sha256": "1109746528785e8014ef45555e2f279c6cdf2306f08dac1850b795669cd5bbfe",
+      "geometry_sha256": "c91f94e3a9f08b357318e0eb7d95a0e5aca7f3fa7a3789f39b7182090e61f852",
+      "scientific_provenance_sha256": "377a3bc02586f6050f9dec93f9193655349efa3e0a6ca9bf36fb7c362d02fc4f",
+      "source_feature_id": "24104"
+    },
+    {
+      "decision_id": "seavox-24105",
+      "feature_file_sha256": "184724a827b95eb8f61df16f07f3c9cd615075ce908442d6387ba6b00471c9c2",
+      "geometry_sha256": "b13ddb7a8d3a339f8966a13e330109d7a4037c8cb857fcc65ae587ab864f55eb",
+      "scientific_provenance_sha256": "bd3791667bf5b5e07ade4577cdb190ba39fb728d7c52bdc9a6b3faa15e579bbe",
+      "source_feature_id": "24105"
+    },
+    {
+      "decision_id": "seavox-24106",
+      "feature_file_sha256": "6c9a4978c849b2eec67e18154f5ca536863210ed0a906a38250ce3a6ec83b92b",
+      "geometry_sha256": "12568e1e51225a4994614d2d1c6428034ce7418181d639bbae0dae2eb4c046f7",
+      "scientific_provenance_sha256": "86fd98193508d3799513f54f54f7d419fc06da1636173270c2282a30bf745465",
+      "source_feature_id": "24106"
+    },
+    {
+      "decision_id": "seavox-24107",
+      "feature_file_sha256": "3859d0fee2983b66ba6d4639532e737ddfeee7c8ab9e69f2da636d3c05fa8650",
+      "geometry_sha256": "0f653beebf95c9a298337f7ed53eb40d45dfd0f880ec5d183c421940525f5e28",
+      "scientific_provenance_sha256": "822415c6d02a9a324915c1a5d10e8a78dae07fe38eb26043ae2f511ebf675c0d",
+      "source_feature_id": "24107"
+    },
+    {
+      "decision_id": "seavox-24110",
+      "feature_file_sha256": "0639f4a44a6ac591cb2235e409db83882b4858a8b61cea2c4c81d3825496ac72",
+      "geometry_sha256": "d09f63ee5bc130429b15639ccbc5f462b10087d286d31356e849432ed9d39ed7",
+      "scientific_provenance_sha256": "01e73da30d6f5b106e0b717e1004f18d980ef9d2711217b45da50f69d08c9c5f",
+      "source_feature_id": "24110"
+    },
+    {
+      "decision_id": "seavox-24111",
+      "feature_file_sha256": "5478c60f14f9a36cfa9092a775277d5285edc98879fc62be07ebab92dfe72667",
+      "geometry_sha256": "d436f21132dfdf71b162d68a7c838fbd20d72f323c3898b3bfb4a3891f6e18cc",
+      "scientific_provenance_sha256": "6086f1738c9604912cac1ed6cdbe3bb0a533bfea3b0e7e07ca3f22a1bb5b7b9f",
+      "source_feature_id": "24111"
+    },
+    {
+      "decision_id": "seavox-24112",
+      "feature_file_sha256": "dbb2893ce22018aa12081254e1e5b508a85f59d30302435242b8f75478efbba4",
+      "geometry_sha256": "368f48bf36663398f51d2a0303faef728d9d9c5283c59090a24b6fc4c07e006e",
+      "scientific_provenance_sha256": "73903a6045d5e90cae893f05bf5edce4c1531910a6f01aa905017e2d892f6323",
+      "source_feature_id": "24112"
+    },
+    {
+      "decision_id": "seavox-24113",
+      "feature_file_sha256": "40e81e0ced02c9a0a1a0da60a2da5506c4a0c524a89a7a73d52784a74f110d9e",
+      "geometry_sha256": "aa576bd41b1ea606192ac02c6dbf19ff7b8c024d53527e08e74d0c0b3db78472",
+      "scientific_provenance_sha256": "c95c7460cd5b1628f91219c673fa28e16677def0c07b498d1df7a58b0804c13b",
+      "source_feature_id": "24113"
+    },
+    {
+      "decision_id": "seavox-24114",
+      "feature_file_sha256": "9697164b2f423ce272bd3d72e76c2f1ceb79485ff9ebfaaea771e217158380d3",
+      "geometry_sha256": "27618d2a7a721d719b691b11774cab1c3b52eab76658bdffb02449e1e1df82fb",
+      "scientific_provenance_sha256": "173f90083baf0fddb65fda390e363e9758bb98f2668b08a88d44b793c825d8fe",
+      "source_feature_id": "24114"
+    },
+    {
+      "decision_id": "seavox-24119",
+      "feature_file_sha256": "3b6e120fe066729d15a930c426a988523da2c9d9e49c26b46d03b17d5b987eea",
+      "geometry_sha256": "b3eae942f05c1a2489cd1d4de77855841c2d7a679e5fdc9b3ae499fd22bfe17c",
+      "scientific_provenance_sha256": "c9b6587295f53b84056eedac33a9bd5900354a762ac803669ba10cea0ee4c6f9",
+      "source_feature_id": "24119"
+    },
+    {
+      "decision_id": "seavox-24120",
+      "feature_file_sha256": "8a283a3833d3359ee3b67dbed8eb90cfa3edf5a033d3ddd332ecead195aa2b47",
+      "geometry_sha256": "1014c902ed491823daba8f30a85d625f784f7dac2d95b1e7dfbc2cf9c896bc9e",
+      "scientific_provenance_sha256": "511d8ce4f41dc7b3bec1676a36c5b48def6dadda939834ebf69d81186c4f183a",
+      "source_feature_id": "24120"
+    },
+    {
+      "decision_id": "seavox-24121",
+      "feature_file_sha256": "9ca275aacc6e0bf2563886781fba284b338f4a95b8ba4440f015adb796a0f035",
+      "geometry_sha256": "079802a42daf450972e9019f1185d40dee2de7b6e60aed3667d497ee50a0341d",
+      "scientific_provenance_sha256": "a8d999d8982a0f8219b0a788b295374c774bc49773aa2babe19d6b2bbd63d651",
+      "source_feature_id": "24121"
+    },
+    {
+      "decision_id": "seavox-24122",
+      "feature_file_sha256": "4ff706a8f8949636e0423e73a315e937eb2f0099ab016ca92b56a84df9c1720e",
+      "geometry_sha256": "37f68a251d468e0080576928a76a4b097226a6de98576de415cf0ea7bda9e6c7",
+      "scientific_provenance_sha256": "09f880a255bf69728b36a45ed7e230f6b8d821929c006fb6c72a33ad22c528ee",
+      "source_feature_id": "24122"
+    },
+    {
+      "decision_id": "seavox-24123",
+      "feature_file_sha256": "3c2bf6d296236bed50d38a60afe60b1aa674b1c4a2aca3a2a9d21ac745a6202f",
+      "geometry_sha256": "9954d85210354f020cbabf80d29f134915d268bd4ca023579282e9c9d2998c24",
+      "scientific_provenance_sha256": "6d6869bdd22bd41a35491206130857c574fe7c7803504e5e4a0fed45692d2ce7",
+      "source_feature_id": "24123"
+    },
+    {
+      "decision_id": "seavox-24124",
+      "feature_file_sha256": "e7cb39c961359574b0c73952cea886791f5c6a5cf6a93f9984d1499561077377",
+      "geometry_sha256": "018ebb587831a3eff91118483a4bef0ff72ebdac3de1b79d20fc979434dd2e36",
+      "scientific_provenance_sha256": "d3a6d75ac7ce96c83f4bb725a50e461252d1b61675332bb6d68f72ef896b5f13",
+      "source_feature_id": "24124"
+    },
+    {
+      "decision_id": "seavox-24125",
+      "feature_file_sha256": "66c8a69a6f4554271f0b3bb4d3a1396681a70ddf2463de54ac05d2b5fc2aa311",
+      "geometry_sha256": "8e877b2d4f5271a73a4b681daccf03b03a345797b888e7a5f5501a0062bda708",
+      "scientific_provenance_sha256": "04c9793d85545367c4bfcb13573a15a1243512cf4b3fcdefe52357f7b7438dc4",
+      "source_feature_id": "24125"
+    },
+    {
+      "decision_id": "seavox-24126",
+      "feature_file_sha256": "4a4afaab6785ceed2626042c550b543a0d5479aa05d673753a184d664eea06e2",
+      "geometry_sha256": "e988251584dbabd4d0d21e9efa42483724b24e8b59d7fe1fc460b59df041bba9",
+      "scientific_provenance_sha256": "ee7d06118345f10cbc4ef251e75600a5ee5a12c9ef597e1863e63ad1edd5dc1a",
+      "source_feature_id": "24126"
+    },
+    {
+      "decision_id": "seavox-24127",
+      "feature_file_sha256": "2b305c29f1aef60d45e4608481db1f35a0d6c555df07f6d15cbabb8cfcf60ecd",
+      "geometry_sha256": "dc897a1771cdead24e42bdf2532d76b82532a69181a87bc1887ecb6b938e11ca",
+      "scientific_provenance_sha256": "71cc5303aea9023cc0782efecfdf30230390648a81ef14a1d29b4469c077a20e",
+      "source_feature_id": "24127"
+    },
+    {
+      "decision_id": "seavox-24128",
+      "feature_file_sha256": "5042e98914840ab81ad76e2557cc10fe8d76d98581d2d93c1b7f40bc72c13ec7",
+      "geometry_sha256": "81cfcfa3b7e905fa1ba66b2b7a8360c471d8e395844c2f93373505f012420545",
+      "scientific_provenance_sha256": "fc35b41aaf5b45194b43e8b7e1044263c8b6c3d08ce2de077e4a08fdb29ada3d",
+      "source_feature_id": "24128"
+    },
+    {
+      "decision_id": "seavox-24129",
+      "feature_file_sha256": "28c0475f27cd466068186572b0bff6aee574106b6cc3ef77972b07485d27ce2b",
+      "geometry_sha256": "5cea314828b56f493d22d63c8d9fb93834698c6a8ef1d1ebefcaf83073a0c2d6",
+      "scientific_provenance_sha256": "2c70c7b3a9526aae2289409699c7bde2a18d972fa743cda3d723fc6322f11903",
+      "source_feature_id": "24129"
+    },
+    {
+      "decision_id": "seavox-24130",
+      "feature_file_sha256": "25db042ecbb0aa6cc6eacc07277e0ad41d0f889f52ffae01eeb03349fa346d23",
+      "geometry_sha256": "cef3da5cf7c8a58d51b970861e570134a2653a98935cd07df5238f6616393886",
+      "scientific_provenance_sha256": "6dd3e69cede1db6a9c8dd9578954473b11e18bb9f7af48547233e44e362bf555",
+      "source_feature_id": "24130"
+    },
+    {
+      "decision_id": "seavox-24132",
+      "feature_file_sha256": "f3f2483befd2afb155c27bbb7f631c62694ac13728bd4144533b854b67c17c31",
+      "geometry_sha256": "1d04960ac76e55d636f75db708ade0cf5aff8a1947732a5affc3789513d6043c",
+      "scientific_provenance_sha256": "217c4f411974f754786452cc6840da9ffa434bad8d1eb7bea077c4074996bb02",
+      "source_feature_id": "24132"
+    },
+    {
+      "decision_id": "seavox-24133",
+      "feature_file_sha256": "89e5547b4129d89d3581175f1ebf9fee6197df4604033cb719c8673b8539580b",
+      "geometry_sha256": "50064e27bd9c177c9eb53d932b7beec57586c26a3e0a365ad7d665edb7eed1fb",
+      "scientific_provenance_sha256": "876259b056c4fb29bdf036105888aa01dc4a4cd19eae026e9ed5e1f6caeda96e",
+      "source_feature_id": "24133"
+    },
+    {
+      "decision_id": "seavox-24134",
+      "feature_file_sha256": "7a2bf76c3b1ed72ab5f7f7be45eca86179c7b4d42b941ba5c4af23f4526479b0",
+      "geometry_sha256": "84f1ed123d1cd711f6089b5c5b79b4cf4d1639ef840f646b7a4cbb92bd8950e3",
+      "scientific_provenance_sha256": "7a582890d8b3d851cb9341fdda1f8ba6ba062bd2b0b433db192a0f889a08822b",
+      "source_feature_id": "24134"
+    },
+    {
+      "decision_id": "seavox-24135",
+      "feature_file_sha256": "92ca2f2c549ba367ea950633c6a8105ee50d782e1a951dc4616f1aaacd6afca8",
+      "geometry_sha256": "753c350e8506ea99a96268ed89778c20b661efc0e9aec53aaeb3c19db14cd765",
+      "scientific_provenance_sha256": "2d413250b4a20d59ffbc2c96ef7d3b6258c8664c1af39ee02f408bbdf4708190",
+      "source_feature_id": "24135"
+    },
+    {
+      "decision_id": "seavox-24136",
+      "feature_file_sha256": "f00e8ce5fe8811fe53e589862d00fd0c5215225d0fa84b1d231b33a98a37a076",
+      "geometry_sha256": "943dcb202ee70fb62cd7ce110906aedb7c5964345137c0d5d9d107e5bb79b4fb",
+      "scientific_provenance_sha256": "17185fbaa16a32d8c367f22bd277978458f325d48dd816b4df3083e7ebb6893b",
+      "source_feature_id": "24136"
+    },
+    {
+      "decision_id": "seavox-24137",
+      "feature_file_sha256": "e63baa5061f51e35aac91157bb884fddf4b878cb7cd40d2e9661791678a98f76",
+      "geometry_sha256": "e65b0a26eb8d7c3d3278933ad60c6d8a61a3d731c8fe0419c7cf733ba466cd38",
+      "scientific_provenance_sha256": "a96d79cac7f8435234606e606551f7e0750906324dcbba5e1e92b139b6b037c6",
+      "source_feature_id": "24137"
+    },
+    {
+      "decision_id": "seavox-24138",
+      "feature_file_sha256": "7f8c326b1dab99932298e764fd34b656e7010a1381f3dc2aebfd235a84dcd73c",
+      "geometry_sha256": "1fc2a6b8202c84e75ce766791c6e4915b9db88d6e1ed979bcce0b76cbc4e325b",
+      "scientific_provenance_sha256": "b55f0c0a47178f2443d0632811dcaf13e9d0c7843d1e524d0ffbbfdc98573ffd",
+      "source_feature_id": "24138"
+    },
+    {
+      "decision_id": "seavox-24139",
+      "feature_file_sha256": "6e72bd59983c004e3043952d0716013e6ee8ff13081fac8fe0a1db8c195380aa",
+      "geometry_sha256": "1777749829f40349e0f7cc4fb31c28574ccf24a59eb8378cfd88a7c336daea05",
+      "scientific_provenance_sha256": "217be9c92cbfe75abbbc00e151297d45e603e792a7b190026acd6b5752d80c84",
+      "source_feature_id": "24139"
+    },
+    {
+      "decision_id": "seavox-24140",
+      "feature_file_sha256": "67edd8becc229c1fca32a5069f36031f973a5e2e9711513c945a86d0dfb7b613",
+      "geometry_sha256": "c6a69c24e718c0f845ebfddcda28365639312c550d99296943e6d840b3f7570b",
+      "scientific_provenance_sha256": "c993695b064b8f73401ce303908f8dad87ac2ddfad08d2ed88b9d37db8766114",
+      "source_feature_id": "24140"
+    },
+    {
+      "decision_id": "seavox-24141",
+      "feature_file_sha256": "f4750fddc088074a461a32824af5e32fdfe02a9e2944b3f50f43fea5ed871714",
+      "geometry_sha256": "960c8b08410537b65dabd771cdfbff72bbec595cec5c06b48fe96909c6203085",
+      "scientific_provenance_sha256": "93f1b85fc8eb3b6b24abb38d6efba0e669718c4f645138c0256cb433591ea5d1",
+      "source_feature_id": "24141"
+    },
+    {
+      "decision_id": "seavox-24142",
+      "feature_file_sha256": "76e56bba59fa1b20c8ecfe856dc8681f20e5fdc684014707d316500c13dacc5c",
+      "geometry_sha256": "1646004b0401fbe7253f85cd1eedc8bd0b040c6f75963a7e4d3cb005657df800",
+      "scientific_provenance_sha256": "19ffc1f9b2263474ac925d4e6081f6ed68f37d2a8d26a72bf2efa8aeaea67b6f",
+      "source_feature_id": "24142"
+    },
+    {
+      "decision_id": "seavox-24143",
+      "feature_file_sha256": "688ed03211b2239ee0a5da627a543d6b86a2f10bdf339b59bbadcbdb7c99a360",
+      "geometry_sha256": "f4d94d2b472a781dcdf0649319f9be7a4ef863a66597f3fc033c3de37678e9ca",
+      "scientific_provenance_sha256": "8ba89e9035c8fe7ef9002cf27a699f9186b1b607568ff94c91f9c80cb266c1df",
+      "source_feature_id": "24143"
+    },
+    {
+      "decision_id": "seavox-24144",
+      "feature_file_sha256": "07bbfbeb0d15b866931cfe1275a3c0f13f9c2b317531eb4c08d9960dd0eb707a",
+      "geometry_sha256": "0681907b33e0e2a52059685fd8c38042857cb6868342911615b1660ed8e6c693",
+      "scientific_provenance_sha256": "d37853f3740eba63eb12389d002799273f217e542044a1c649c088cce2fb6bcc",
+      "source_feature_id": "24144"
+    },
+    {
+      "decision_id": "seavox-24164",
+      "feature_file_sha256": "7e18a07822ee5dd0121ab690bc1b5ca4b78870628819ceba472350ce457e2dfc",
+      "geometry_sha256": "ff7bf40e3ab0c8d3c21fe78c086d033cd9b6edf02805ac6b76b7009655a6f872",
+      "scientific_provenance_sha256": "b904e5b712d92396473b73915b0ccaf1b733fbea6dc7b08ed2056dd302c5a2d3",
+      "source_feature_id": "24164"
+    },
+    {
+      "decision_id": "seavox-24177",
+      "feature_file_sha256": "336dea9dba6fb2884cff0b97e51c50e6af2bf8c897e2e648bb9a5132962bc8ad",
+      "geometry_sha256": "feafeb8ecff76e5afe19424b51b80ec30ae3817b37a0ab9b0d2972181c91d8ab",
+      "scientific_provenance_sha256": "557254befa7fd1cb4f976cfd918124ee62ffa100998da68f67b5da15383d1a24",
+      "source_feature_id": "24177"
+    },
+    {
+      "decision_id": "seavox-24196",
+      "feature_file_sha256": "4e9ba10295ecb820966e7d04843c0e26b8696a6f5ca5642b8fc7fe4bf6dbd155",
+      "geometry_sha256": "46c86295757ec3a8d6a2862f05e5798d6f5f19a44c8489479eae2dc7687d9224",
+      "scientific_provenance_sha256": "a82cc91fd95dd76eb27ba2280d54ba981d29b4e2fb3d4a545ab9846ad840ee80",
+      "source_feature_id": "24196"
+    },
+    {
+      "decision_id": "seavox-24199",
+      "feature_file_sha256": "01c7db822b3c021e0fdcc62411b48814432e260061133705b24075e6af134628",
+      "geometry_sha256": "aff8b94b662ca5b10b00867fd8d756ea02f87b0ddc17e03f46161d170edcd1bf",
+      "scientific_provenance_sha256": "bd2cdcb2fa89381c29f52f4011cceb5ef63303c4001720c1a3ded245fb4e2deb",
+      "source_feature_id": "24199"
+    },
+    {
+      "decision_id": "seavox-24205",
+      "feature_file_sha256": "6157b0dfb51c482f116cd78daf23dd4d079202e41da9dbe82ad1588c8588c1da",
+      "geometry_sha256": "39a239834961138e7edf46ba055ed0c748ff9d7bacd174e0c7feb297e5d69403",
+      "scientific_provenance_sha256": "f2d95730b2957a913edd9ce20c5b3e127ad967f977b0bd6e3b73ddb0beb49b46",
+      "source_feature_id": "24205"
+    },
+    {
+      "decision_id": "seavox-24212",
+      "feature_file_sha256": "2bcf3cceca60d6227202782d87edba69ed41c91768fd0ffdd5ffa316a45a49b5",
+      "geometry_sha256": "b87aa992e951f6436b29729699be1a434a7dd985723b687dcdd1598f61553a59",
+      "scientific_provenance_sha256": "2fac24152a9fb479a1aa86b8117a24d4ce566da6646f5c4d1ce58e6f91261482",
+      "source_feature_id": "24212"
+    },
+    {
+      "decision_id": "seavox-24213",
+      "feature_file_sha256": "81c572f53455d4106562ee05984e4f944a95a65429d80e52271c3e526944f40f",
+      "geometry_sha256": "e6f14ffd9e8a39b705db68fed9927193411687b0c68f34a611f1149a23910dbc",
+      "scientific_provenance_sha256": "1bcdfdb741e359bcc742906dafcf1bb1499749f4638c087db7340d609f7a828e",
+      "source_feature_id": "24213"
+    },
+    {
+      "decision_id": "seavox-24223",
+      "feature_file_sha256": "1b252e6a10a26fef62584736d66bb8df771f788a554e3b0a24c761a61ec07d74",
+      "geometry_sha256": "13ebd5e438bb313e8b1692d482452105fb6670e18f879afea45e8affb146d244",
+      "scientific_provenance_sha256": "c7829178cf951e814201273dd9dbf0bea1723c12ec56b92562b71e61dce34f33",
+      "source_feature_id": "24223"
+    },
+    {
+      "decision_id": "seavox-24228",
+      "feature_file_sha256": "741369e5ccdc2d563c35064bb8d0b5245024427a8b7211ebad8e3ed276448b94",
+      "geometry_sha256": "8a9b1270172cc02213b4b648469b4ac0c4212f49d0644dbdc9190df4726cec06",
+      "scientific_provenance_sha256": "9d87755ff95cb1843cdbb9f39c428db4797b5923a0d4f8028247b6d03fb5a114",
+      "source_feature_id": "24228"
+    }
+  ],
+  "limitations": [
+    "One paired trial, baseline first; host was shared with an independent physical shard6 workload. Timing is non-isolated.",
+    "Sources were already local and exact size/hash verified; acquisition and comparison are outside the measured producer intervals.",
+    "This measures complete SeaVoX extraction, not the coast/basin/prefill/ocean stages or complete pipeline wall time.",
+    "Earlier per-ring prototypes were rejected after complete-source timing regressions; only whole-feature batching is proposed."
+  ],
+  "observed_wall_reduction_fraction": 0.20227903279332837,
+  "raw_comparison_report_sha256": "f02eb89b3fc0d4c83c24b7ed7da5998dbed42288bc070e4d242d6bb960d26e0f",
+  "reference": {
+    "gdal_version": "GDAL 3.10.3, released 2025/04/01",
+    "hash_certified_features": 92,
+    "method": "original-scalar-fixed15",
+    "ogr_fallbacks": 0,
+    "phases_seconds": {
+      "archive_materialization": 1.288884663999852,
+      "archive_validation": 0.046423347001109505,
+      "feature_serialization": 4.713892255000246,
+      "geometry_binding": 3.867799932777416e-05,
+      "ogr_selection_and_json_decode": 33.74324329599949
+    },
+    "wall_seconds": 40.55008557600013
+  },
+  "schema": "worldatlas-complete-seavox-coordinate-comparison-v1",
+  "scientific_provenance_hash_format": "SHA256 of UTF-8 JSON with sorted keys, compact separators, ensure_ascii=false, allow_nan=false; only processing_elapsed_seconds removed.",
+  "scope": "Complete selected92-feature extraction batches, sequential and in-process, followed by exact feature-byte and scientific-provenance comparison. Not an end-to-end pipeline timing.",
+  "tests": {
+    "focused": 35,
+    "pipeline_integration": 75,
+    "status": "passed"
+  },
+  "workload_context": {
+    "concurrent_workload": "One complete Overture shard6 source-staging then in-process paired producer trial; independent worker on same9CPU host.",
+    "isolation": "not isolated",
+    "load_average_at_start": [
+      1.00048828125,
+      0.54296875,
+      0.369140625
+    ],
+    "logical_cpu_count": 9,
+    "started_at_utc": "2026-11-08T04:14:43.749233+00:00"
+  }
+}
