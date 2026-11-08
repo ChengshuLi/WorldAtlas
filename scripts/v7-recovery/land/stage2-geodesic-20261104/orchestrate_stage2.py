@@ -17,6 +17,7 @@ import representatives,verify_physical_lineage
 
 HERE=Path(__file__).resolve().parent
 BASE_INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','closure_checker','terminal_checker','closure_contract','seed_builder','seed_kernel'}
+PYTHON_INPUTS=(BASE_INPUTS-{'component_builder_binary'})|{'component_builder'}
 SEED_NAMES=('seed_worker.py','seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py')
 # The launcher is pinned in the orchestration identity, while the producer's
 # own report binds the actual producer modules and rasterizer separately.
@@ -59,7 +60,7 @@ def code_hashes(guard):
 def load_config(path):
  raw=build_stage2.read_bytes(path);obj=json.loads(raw)
  keys={'schema','grid','inputs','policy_id','policy_version','controls','seed_controls'}
- need(isinstance(obj,dict) and set(obj)==keys and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs']) in (BASE_INPUTS,BASE_INPUTS|{'prior_physical_report'}),'invalid fresh orchestration config or historical input')
+ need(isinstance(obj,dict) and set(obj)==keys and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs']) in (BASE_INPUTS,PYTHON_INPUTS,BASE_INPUTS|{'prior_physical_report'},PYTHON_INPUTS|{'prior_physical_report'}),'invalid fresh orchestration config or historical input')
  build_stage2.validate_controls(obj['controls'])
  s=obj['seed_controls'];need(isinstance(s,dict) and set(s)=={'strip_rows'} and type(s['strip_rows']) is int and 1<=s['strip_rows']<=64,'invalid seed controls')
  need(all(isinstance(obj[k],str) and obj[k] for k in ('policy_id','policy_version')),'invalid policy controls')
@@ -67,7 +68,7 @@ def load_config(path):
 
 def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  processing_started=time.monotonic()
- cp,work,out=map(lambda p:Path(p).resolve(),(config_path,work_dir,output_dir));raw,cfg=load_config(cp);c=cfg['controls']
+ cp=Path(config_path).resolve();work=build_stage2.atomic_move.output_path(work_dir);out=build_stage2.atomic_move.output_path(output_dir);raw,cfg=load_config(cp);c=cfg['controls']
  need('prior_physical_report' not in cfg['inputs'] or provisional_only,'prior physical report is provisional-only')
  need(work.parent.is_dir() and out.parent.is_dir() and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'invalid work/output')
  guard=lambda:checkpoints.guard(work.parent,c['minimum_free_bytes']);guard()
@@ -93,11 +94,11 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  need(rr.get('schema')=='mainland-witness-request-v1' and rr.get('grid')==grid and rr.get('code_sha256')=={k:code[v] for k,v in rnames.items()},'resolution request/code mismatch')
  for rk,ik in (('snapshot','decision_snapshot'),('component_manifest','component_manifest'),('component_source','component_source'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('component_rows','component_rows'),('component_runs','component_runs')):need(rr.get(rk,{}).get('sha256')==pins[ik],'resolution request pin mismatch: '+rk)
  identity={'schema':'stage2-fresh-work-v1','config_sha256':hashlib.sha256(raw).hexdigest(),'input_sha256':{k:v['sha256'] for k,v in cfg['inputs'].items()},'code_sha256':code,'output_path':str(out),'provisional_only':provisional_only}
- need(not out.exists(),'output already exists')
+ need(not os.path.lexists(out),'output already exists')
  if resume:
-  need(work.is_dir() and json.loads(build_stage2.read_bytes(work/'identity.json',guard))==identity,'resume identity mismatch')
+  need(work.is_dir() and not work.is_symlink() and json.loads(build_stage2.read_bytes(work/'identity.json',guard))==identity,'resume identity mismatch')
   return finish_from_marker(cfg,raw,work,out,code,guard,True,provisional_only,processing_started)
- need(not work.exists(),'fresh work already exists')
+ need(not os.path.lexists(work),'fresh work already exists')
  work.mkdir(mode=0o700)
  try:
   fd=os.open(work.parent,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
@@ -157,7 +158,7 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False
  artifacts=marker.get('artifacts');names={'resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'}
  need(isinstance(artifacts,dict) and set(artifacts)==names,'incomplete derived artifacts')
  expected={'resolution_report':work/'resolution'/'report.json','seed_rows':work/'seed-work-parent'/'output'/'rows.u32le','seed_runs':work/'seed-work-parent'/'output'/'runs.u32le','seed_report':work/'seed-work-parent'/'output'/'report.json','hint_roots':work/'hints-parent'/'hints'/'roots.u32le','hint_codes':work/'hints-parent'/'hints'/'hints.u8','hint_report':work/'hints-parent'/'hints'/'report.json','tile_manifest':work/'tiles-parent'/'tiles'/'manifest.txt','representatives':work/'reps'/'representatives.u32le'}
- need(all(Path(artifacts[k].get('path','')).resolve()==v for k,v in expected.items()),'derived artifact path is not fresh work output')
+ need(all(Path(artifacts[k].get('path','')).resolve()==v.resolve(strict=True) for k,v in expected.items()),'derived artifact path is not fresh work output')
  for p in artifacts.values():build_stage2.pin(p,guard)
  for p in cfg['inputs'].values():build_stage2.pin(p,guard)
  seedreq=work/'requests'/'seed.json';hintreq=work/'requests'/'hints.json'
@@ -171,8 +172,9 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False
  need(hr=={'schema':'source-only-hints-diagnostic-request-v1','grid':cfg['grid'],'codes':sorted(categories),'inputs':hint_inputs,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']},'hint request linkage mismatch')
  seed_report=json.loads(build_stage2.read_bytes(artifacts['seed_report']['path'],guard));hint_report=json.loads(build_stage2.read_bytes(artifacts['hint_report']['path'],guard));need(seed_report.get('request_sha256')==marker['seed_request_sha256'] and seed_report.get('input_sha256')=={k:v['sha256'] for k,v in expected_seed.items()} and hint_report.get('request_sha256')==marker['hint_request_sha256'],'request/report provenance mismatch')
  tiles=work/'tiles-parent'/'tiles';need(marker.get('tile_directory')==str(tiles) and tiles.is_dir() and marker.get('seed_tile_verification',{}).get('status')=='verified','tile verification binding mismatch')
- inputs={k:v for k,v in cfg['inputs'].items() if k in build_stage2.INPUTS or k=='prior_physical_report'};inputs.update(artifacts)
- need(set(inputs)==build_stage2.INPUTS|({'prior_physical_report'} if 'prior_physical_report' in cfg['inputs'] else set()),'core input mapping mismatch')
+ required=build_stage2.PYTHON_INPUTS if 'component_builder' in cfg['inputs'] else build_stage2.INPUTS
+ inputs={k:v for k,v in cfg['inputs'].items() if k in required or k=='prior_physical_report'};inputs.update(artifacts)
+ need(set(inputs)==required|({'prior_physical_report'} if 'prior_physical_report' in cfg['inputs'] else set()),'core input mapping mismatch')
  seed_files={n:pin(HERE/'seed-producer'/n,guard) for n in SEED_REPORT_NAMES};seed_files.update({'rasterizer':cfg['inputs']['seed_builder'],'rasterizer_kernel':cfg['inputs']['seed_kernel']})
  resolver_files={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py'}
  core={'schema':'stage2-source-geodesic-v1','grid':cfg['grid'],'inputs':inputs,'seed_code_files':seed_files,'resolution_code_files':{k:pin(HERE/v,guard) for k,v in resolver_files.items()},'hint_code_files':{n:pin(HERE/'hint-producer'/n,guard) for n in ('hints.py','run_diagnostic.py')},'tile_directory':str(tiles),'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'controls':cfg['controls'],'orchestration':{'outer_config_sha256':outer,'orchestrator_sha256':code['orchestrate_stage2.py'],'derived_manifest':marker_pin,'physical_lineage_report':lineage_pin,'provisional_only':provisional_only}}

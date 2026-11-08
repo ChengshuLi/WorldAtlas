@@ -59,8 +59,8 @@ class RepositoryDependenciesTest(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertEqual(sha(path), current[name])
         component = LAND / 'fresh-components-20261104/build_components.py'
-        source = LAND / 'simple-v2-baseline/build_components.cpp'
-        self.assertEqual(sha(source), literal_assignment(component, 'REVIEWED_SOURCE_SHA256'))
+        source = LAND / 'fresh-components-20261104/components.py'
+        self.assertEqual(sha(source), literal_assignment(component, 'COMPONENT_SOURCE_SHA256'))
 
 
 if __name__ == '__main__':

@@ -296,7 +296,7 @@ synthetic tests, since `tempfile` is also used by the test framework:
       TEMP=/workspace/test-scratch /usr/bin/python3 -m unittest discover \
       -v -s scripts/v7-pipeline -p 'test_*.py'
 
-Tests execute actual raw polygon/Parquet rasterization and C++ component
+Tests execute actual raw polygon/Parquet rasterization and Python component
 production through direct Python stage calls. Another real-processing fixture
 chains ocean partition, enclosed-water classification, final-plan validation
 and composition, checking every cell of its final grid. Timing tests cover

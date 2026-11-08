@@ -78,6 +78,22 @@ class ResolverTests(unittest.TestCase):
  def test_combined_rejects_wrong_identity_role(self):
     d=self.use_combined_export();d['affiliation_source_refs'][0]['role']='wrong';self.req['snapshot']=put(self.p/'combined.json',d)
     with self.assertRaisesRegex(ValueError,'unsupported source role'):resolve.resolve(self.req)
+ def test_python_component_lineage_and_canonical_public_paths(self):
+    import importlib.util
+    manifest=copy.deepcopy(self.manifest)
+    manifest.update(schema='single-generation-component-manifest-v2',builder=dict(self.req['component_source']),builder_kind='python-api',runtime={'implementation':'CPython','version':'3.13'})
+    for key in ('builder_binary','builder_binary_sha256','compiler_version'):manifest.pop(key)
+    alias=self.p/'component-row-alias';alias.symlink_to(self.req['component_rows']['path'])
+    manifest['pins']['component_rows']['path']=str(alias)
+    stage2=Path(__file__).resolve().parents[4]/'v7-recovery/land/stage2-geodesic-20261104/v7-land/point-component-prototype/resolve.py'
+    spec=importlib.util.spec_from_file_location('stage2_point_lineage',stage2);other=importlib.util.module_from_spec(spec);spec.loader.exec_module(other)
+    for helper in (resolve,other):
+     mode,specs,paths=helper.validate_lineage(manifest,self.req,self.g)
+     self.assertEqual(mode,'single-generation-manifest');self.assertEqual(len(paths),2)
+     bad=copy.deepcopy(manifest);bad['builder_kind']='native'
+     with self.assertRaisesRegex(ValueError,'Python builder provenance'):helper.validate_lineage(bad,self.req,self.g)
+     bad=copy.deepcopy(manifest);bad['pins']['component_rows']['path']=str(self.p/'missing')
+     with self.assertRaisesRegex(ValueError,'stream pin mismatch'):helper.validate_lineage(bad,self.req,self.g)
  def test_valid(self):
     out=resolve.resolve(self.req);self.assertEqual(out['claims'][0]['component_id'],7);self.assertEqual(out['claims'][0]['affiliation_id'],'a');self.assertEqual(out['status'],'research-only-not-a-build')
  def test_source_digest_mismatch(self):

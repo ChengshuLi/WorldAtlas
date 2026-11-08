@@ -48,9 +48,14 @@ def resolution_roots(report,grid,pins,revision,entity_revision):
  return out
 
 def component_manifest(manifest,grid,pins):
- need(manifest.get('schema')=='single-generation-component-manifest-v1' and manifest.get('status')=='complete-research' and manifest.get('grid')==grid,'fresh component manifest required')
+ kind=manifest.get('schema')
+ need(kind in ('single-generation-component-manifest-v1','single-generation-component-manifest-v2') and manifest.get('status')=='complete-research' and manifest.get('grid')==grid,'fresh component manifest required')
  for k in ('physical_rows','physical_runs','component_rows','component_runs'):need(manifest.get('pins',{}).get(k,{}).get('sha256')==pins[k],'component manifest mismatch: '+k)
- need(manifest.get('component_source_sha256')==pins['component_source'] and manifest.get('builder_binary_sha256')==pins['component_builder_binary'] and manifest.get('builder_binary',{}).get('sha256')==pins['component_builder_binary'] and manifest.get('physical_report',{}).get('sha256')==pins['physical_report'] and text(manifest.get('compiler_version')) and text(manifest.get('builder_output')),'component builder provenance mismatch')
+ need(manifest.get('component_source_sha256')==pins['component_source'] and manifest.get('physical_report',{}).get('sha256')==pins['physical_report'] and text(manifest.get('builder_output')),'component builder provenance mismatch')
+ if kind=='single-generation-component-manifest-v2':
+  need('component_builder_binary' not in pins and manifest.get('builder',{}).get('sha256')==pins.get('component_builder')==pins['component_source'] and manifest.get('builder_kind')=='python-api' and isinstance(manifest.get('runtime'),dict) and text(manifest['runtime'].get('implementation')) and text(manifest['runtime'].get('version')),'Python component builder provenance mismatch')
+ else:
+  need(manifest.get('builder_binary_sha256')==pins.get('component_builder_binary') and manifest.get('builder_binary',{}).get('sha256')==pins.get('component_builder_binary') and text(manifest.get('compiler_version')),'component builder provenance mismatch')
 
 def seed_report(report,grid,pins,revision,entity_revision,groups,entity_codes,seed_code_hashes):
  need(report.get('schema')=='worldatlas-stage2-mainland-seed-report-v1' and report.get('status')=='diagnostic-seed-pending-independent-provenance' and report.get('publishable') is False and report.get('grid')==grid,'fresh diagnostic stage-2 seed and matching grid required')

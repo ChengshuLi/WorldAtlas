@@ -573,8 +573,10 @@ class Pipeline:
             if value is not True:
                 command.extend(map(str, value if isinstance(value, (list, tuple)) else [value]))
         outputs = list(_outputs or ([options['out']] if options.get('out') else []))
-        outputs = [Path(path).resolve() for path in outputs]
-        if any(not path.is_relative_to(self.out) or path == self.out for path in outputs):
+        outputs = [Path(os.path.abspath(path)) for path in outputs]
+        if any(not path.is_relative_to(self.out) or path == self.out
+               or not path.resolve().is_relative_to(self.out) or path.resolve() == self.out
+               for path in outputs):
             raise ValueError('stage output outside run or replaces run root')
         invocation = {'command': command, 'code': pin(script_path),
                       'outputs': list(map(str, outputs))}
@@ -716,7 +718,7 @@ class Pipeline:
                        'physical_rows': physical / 'rows.u32le',
                        'physical_runs': physical / 'runs.u32le',
                        'physical_report': physical / 'report.json',
-                       'component_source': SCRIPTS / 'v7-recovery/land/simple-v2-baseline/build_components.cpp'}.items()},
+                       'component_source': SCRIPTS / 'v7-recovery/land/fresh-components-20261104/components.py'}.items()},
                    'controls': {'minimum_free_bytes': self.cfg['land_controls']['minimum_free_bytes']}}
             component_request = self.document('components', cfg)
         components = self.out / 'components'
@@ -756,8 +758,8 @@ class Pipeline:
             'physical_report': physical / 'report.json',
             'component_rows': components / 'rows.u32le', 'component_runs': components / 'runs.u32le',
             'component_manifest': components / 'manifest.json',
-            'component_builder_binary': components / 'component-builder',
-            'component_source': SCRIPTS / 'v7-recovery/land/simple-v2-baseline/build_components.cpp',
+            'component_builder': components / 'component-builder.py',
+            'component_source': SCRIPTS / 'v7-recovery/land/fresh-components-20261104/components.py',
             'closure_checker': SCRIPTS / 'v7-recovery/land/mainland-source-verification-20261104/validate_water_closure_v2.py',
             'terminal_checker': SCRIPTS / 'v7-recovery/land/mainland-source-verification-20261104/validate_terminal_closure.py',
             'seed_builder': SCRIPTS / 'v7-recovery/land/neon-mainland-regions-20261104/rasterizer/build_seed.py',

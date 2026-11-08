@@ -21,6 +21,7 @@ from write_land_stream import write_land_stream
 HERE=Path(__file__).resolve().parent
 CODE_NAMES=('build_stage2.py','contracts.py','atomic_move.py','baseline_runner.py','certificate.py','checkpoints.py','engine.py','exact_index.py','point_prototype.py','preflight.py','run_pair.py','verify_inputs.py','verify_physical_lineage.py','verify_seed_index.cpp','write_land_stream.py','ural_delta.py','v7-land/mainland-witness-prototype/resolve_mainland.py','v7-land/point-component-prototype/resolve.py','v7-land/named-identity-prototype/named_identity.py')
 INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'}
+PYTHON_INPUTS=(INPUTS-{'component_builder_binary'})|{'component_builder'}
 
 def need(x,msg):
  if not x:raise ValueError(msg)
@@ -59,14 +60,14 @@ def disjoint(cfg,config_path,work,output):
 def load_config(path):
  raw=read_bytes(path);cfg=json.loads(raw)
  keys={'schema','grid','inputs','seed_code_files','resolution_code_files','hint_code_files','tile_directory','policy_id','policy_version','controls','orchestration'}
- need(set(cfg)==keys and cfg['schema']=='stage2-source-geodesic-v1' and isinstance(cfg['inputs'],dict) and set(cfg['inputs']) in (INPUTS,INPUTS|{'prior_physical_report'}),'invalid stage-2 config or unsupported historical inputs')
+ need(set(cfg)==keys and cfg['schema']=='stage2-source-geodesic-v1' and isinstance(cfg['inputs'],dict) and set(cfg['inputs']) in (INPUTS,PYTHON_INPUTS,INPUTS|{'prior_physical_report'},PYTHON_INPUTS|{'prior_physical_report'}),'invalid stage-2 config or unsupported historical inputs')
  for k in ('seed_code_files','resolution_code_files','hint_code_files'):need(isinstance(cfg[k],dict) and bool(cfg[k]) and all(isinstance(x,str) and x and '/' not in x for x in cfg[k]),'invalid code file pins')
  need(set(cfg['hint_code_files'])=={'hints.py','run_diagnostic.py'} and isinstance(cfg['tile_directory'],str) and isinstance(cfg['policy_id'],str) and cfg['policy_id'] and isinstance(cfg['policy_version'],str) and cfg['policy_version'],'invalid hint code or policy')
  o=cfg['orchestration'];need(isinstance(o,dict) and set(o)=={'outer_config_sha256','orchestrator_sha256','derived_manifest','physical_lineage_report','provisional_only'} and type(o.get('provisional_only')) is bool and all(isinstance(o.get(k),str) and contracts.HEX.fullmatch(o[k]) for k in ('outer_config_sha256','orchestrator_sha256')),'missing fresh-orchestration provenance')
  need('prior_physical_report' not in cfg['inputs'] or o['provisional_only'],'prior physical report is provisional-only');validate_controls(cfg['controls']);return raw,cfg
 
 def build(config_path,work_dir,output_dir,resume=False,processing_started=None,orchestration_resumed=False):
- cp=Path(config_path).resolve();work=Path(work_dir).resolve();output=Path(output_dir).resolve();need(work.parent.is_dir() and output.parent.is_dir() and work!=output and not work.is_relative_to(output) and not output.is_relative_to(work),'invalid work/output')
+ cp=Path(config_path).resolve();work=atomic_move.output_path(work_dir);output=atomic_move.output_path(output_dir);need(work.parent.is_dir() and output.parent.is_dir() and work!=output and not work.is_relative_to(output) and not output.is_relative_to(work),'invalid work/output')
  raw,cfg=load_config(cp);disjoint(cfg,cp,work,output)
  with checkpoints.exclusive_lock(work.parent/(work.name+'.lock')):
   return _build(cp,work,output,resume,raw,cfg,processing_started,orchestration_resumed)
@@ -77,7 +78,7 @@ def validate_resume_checkpoint(work,resume):
 def _build(cp,work,output,resume,raw,cfg,processing_started=None,orchestration_resumed=False):
  validate_resume_checkpoint(work,resume)
  start=time.monotonic();ctrl=cfg['controls'];guard=lambda:checkpoints.guard(work.parent,ctrl['minimum_free_bytes']);guard()
- need(not output.exists() and (work.is_dir() if resume else not work.exists()),'output exists or invalid resume work')
+ need(not os.path.lexists(output) and not work.is_symlink() and (work.is_dir() if resume else not os.path.lexists(work)),'output exists or invalid resume work')
  inp=cfg['inputs'];paths={k:pin(v,guard) for k,v in inp.items()};pins={k:v['sha256'] for k,v in inp.items()}
  code_files={}
  for field in ('seed_code_files','resolution_code_files','hint_code_files'):

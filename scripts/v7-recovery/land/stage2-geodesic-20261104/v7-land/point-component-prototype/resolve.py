@@ -69,6 +69,8 @@ def readrow(rows_path,runs_path,y,width,kind):
     return vals
 
 def lineage_specs(manifest):
+    if manifest.get('schema')=='single-generation-component-manifest-v2':
+        return [manifest.get('physical_report'),manifest.get('builder')]
     if manifest.get('schema')=='single-generation-component-manifest-v1':
         return [manifest.get('physical_report'),manifest.get('builder_binary')]
     if manifest.get('schema')=='simple-v2-land-report-v1':
@@ -92,10 +94,15 @@ def checkpoint_header(path):
 
 def validate_lineage(manifest,req,grid):
     kind=manifest.get('schema');specs=lineage_specs(manifest);paths=[pinned(x) for x in specs]
-    if kind=='single-generation-component-manifest-v1':
+    if kind in ('single-generation-component-manifest-v1','single-generation-component-manifest-v2'):
         need(manifest.get('status')=='complete-research' and manifest.get('grid')==grid and manifest.get('component_source_sha256')==req['component_source']['sha256'], 'component manifest identity mismatch')
-        for k in ('physical_rows','physical_runs','component_rows','component_runs'):need(manifest.get('pins',{}).get(k)==req[k], 'component manifest stream pin mismatch')
-        need(manifest.get('builder_binary_sha256')==manifest['builder_binary']['sha256'] and text(manifest.get('compiler_version')) and text(manifest.get('builder_output')), 'invalid builder provenance')
+        for k in ('physical_rows','physical_runs','component_rows','component_runs'):
+            declared=manifest.get('pins',{}).get(k,{})
+            need(declared.get('sha256')==req[k]['sha256'] and isinstance(declared.get('path'),str) and Path(declared['path']).resolve()==Path(req[k]['path']).resolve(), 'component manifest stream pin mismatch')
+        if kind=='single-generation-component-manifest-v2':
+            need(manifest['builder']['sha256']==req['component_source']['sha256'] and manifest.get('builder_kind')=='python-api' and isinstance(manifest.get('runtime'),dict) and text(manifest['runtime'].get('implementation')) and text(manifest['runtime'].get('version')) and text(manifest.get('builder_output')), 'invalid Python builder provenance')
+        else:
+            need(manifest.get('builder_binary_sha256')==manifest['builder_binary']['sha256'] and text(manifest.get('compiler_version')) and text(manifest.get('builder_output')), 'invalid builder provenance')
         physical_report=paths[0];mode='single-generation-manifest'
     else:
         need(manifest.get('status')=='research-not-published' and manifest.get('grid')==grid and text(manifest.get('component_topology_provenance')), 'baseline component lineage mismatch')

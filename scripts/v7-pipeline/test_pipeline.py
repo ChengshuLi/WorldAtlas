@@ -558,11 +558,15 @@ class Fixture(unittest.TestCase):
             'grid': grid, 'controls': self.cfg['land_controls'], 'inputs': {key: pipeline.pin(path)
                 for key, path in {'physical_rows': physical / 'rows.u32le',
                     'physical_runs': physical / 'runs.u32le', 'physical_report': physical / 'report.json',
-                    'component_source': pipeline.SCRIPTS / 'v7-recovery/land/simple-v2-baseline/build_components.cpp'}.items()}})
+                    'component_source': pipeline.SCRIPTS / 'v7-recovery/land/fresh-components-20261104/components.py'}.items()}})
         components = runner.out / 'components'
         runner.stage('mainland', 'components',
             'v7-recovery/land/fresh-components-20261104/build_components.py',
-            request, runner.out / 'work/components', components)
+            request, runner.out / 'work/components', components, _outputs=[components])
+        self.assertFalse(runner.stage('mainland', 'components',
+            'v7-recovery/land/fresh-components-20261104/build_components.py',
+            request, runner.out / 'work/components', components, _outputs=[components]))
+        runner.checkpoints.verify_all()
         report = pipeline.read(components / 'report.json')
         self.assertEqual(report['land_cells'], 5)
         self.assertEqual(report['component_runs_sha256'], pipeline.sha(components / 'runs.u32le'))
@@ -600,7 +604,7 @@ class Fixture(unittest.TestCase):
             'grid': land['grid'], 'controls': cfg['land_controls'], 'inputs': {key: pipeline.pin(path)
                 for key, path in {'physical_rows': physical / 'rows.u32le', 'physical_runs': physical / 'runs.u32le',
                     'physical_report': physical / 'report.json', 'component_source': pipeline.SCRIPTS /
-                    'v7-recovery/land/simple-v2-baseline/build_components.cpp'}.items()}})
+                    'v7-recovery/land/fresh-components-20261104/components.py'}.items()}})
         runner.stage('mainland', 'components', 'v7-recovery/land/fresh-components-20261104/build_components.py',
                      request, runner.out / 'work/components', components)
         for local, cloud in [(self.root / 'run/physical/physical', physical), (self.root / 'run/components', components)]:

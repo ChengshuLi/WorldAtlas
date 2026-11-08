@@ -18,6 +18,17 @@ class ContractsTests(unittest.TestCase):
   self.assertEqual(c.policy_tolerance_metres({'tie_tolerance_metres':'0.00001'}),.00001)
   for x in (None,True,'NaN','Infinity','-0.1','1e9999','1e-9999'):
    with self.assertRaisesRegex(ValueError,'tie tolerance'):c.policy_tolerance_metres({'tie_tolerance_metres':x})
+ def test_python_component_manifest_truthfully_binds_the_source_artifact(self):
+  import copy
+  manifest=copy.deepcopy(self.man);pins=dict(self.pins)
+  pins.pop('component_builder_binary');pins['component_builder']=pins['component_source']
+  manifest.update(schema='single-generation-component-manifest-v2',builder={'sha256':pins['component_builder']},builder_kind='python-api',runtime={'implementation':'CPython','version':'3.13'})
+  manifest.pop('builder_binary');manifest.pop('builder_binary_sha256');manifest.pop('compiler_version')
+  c.component_manifest(manifest,self.grid,pins)
+  for key,value in [('builder_kind','native'),('runtime',{}),('builder',{'sha256':'0'*64})]:
+   changed=copy.deepcopy(manifest);changed[key]=value
+   with self.assertRaisesRegex(ValueError,'Python component builder provenance'):c.component_manifest(changed,self.grid,pins)
+  with self.assertRaisesRegex(ValueError,'Python component builder provenance'):c.component_manifest(manifest,self.grid,self.pins)
  def test_valid_chain(self):
   metric,codes,entity=c.snap_policy(self.snapshot,'d','e','wgs','1');groups=c.resolution_roots(self.res,self.grid,self.pins,'d','e');c.component_manifest(self.man,self.grid,self.pins);roots=c.seed_report(self.seed,self.grid,self.pins,'d','e',groups,entity,{'seed.py':'a'*64});n=c.hints_report(self.hints,self.grid,self.pins,'d','e',metric,roots,{'hints.py':'b'*64,'run_diagnostic.py':'c'*64});self.assertEqual((roots,n),([7],3))
  def test_snapshot_rejects_nonselected_and_wrong_metric(self):

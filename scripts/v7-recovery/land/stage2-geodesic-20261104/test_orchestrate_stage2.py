@@ -4,10 +4,11 @@ from pathlib import Path
 import orchestrate_stage2 as o
 
 class OrchestrationTests(unittest.TestCase):
- def fixture(self,root):
+ def fixture(self,root,python_components=False):
   p=Path(root);ind=p/'inputs';ind.mkdir();pins={}
   for key in o.BASE_INPUTS:
    f=ind/(key+'.txt');f.write_text(key);pins[key]=o.pin(f,lambda:None)
+  if python_components:pins['component_builder']=pins.pop('component_builder_binary')
   cfg={'schema':'stage2-fresh-orchestration-v1','grid':{'width':8,'height':4,'west':-180,'north':90,'step':45},'inputs':pins,'policy_id':'wgs','policy_version':'1','controls':{'minimum_free_bytes':1,'chunk_columns':16,'checkpoint_seconds':1,'numerical_guard_metres':1000,'block_records':100},'seed_controls':{'strip_rows':1}}
   cp=ind/'config.json';cp.write_text(json.dumps(cfg));return p,cp,cfg
  def test_seed_launcher_is_identity_pinned_but_not_in_producer_report(self):
@@ -48,14 +49,21 @@ class OrchestrationTests(unittest.TestCase):
     with self.assertRaisesRegex(ValueError,'crosswalk not yet implemented'):o.run(cp,p/'work',p/'output')
    self.assertFalse((p/'work').exists())
  def test_direct_core_build_binds_generated_artifacts_and_resume(self):
+  self.check_direct_core_build(False)
+ def test_python_core_build_binds_published_seed_artifacts_and_resume(self):
+  self.check_direct_core_build(True)
+ def check_direct_core_build(self,python_components):
   import hashlib
   with tempfile.TemporaryDirectory() as d:
-   p,cp,cfg=self.fixture(d);work=p/'work';work.mkdir()
+   p,cp,cfg=self.fixture(d,python_components=python_components);work=p/'work';work.mkdir()
    for x in ('derived','core-requests','requests','resolution','seed-work-parent/output','tiles-parent/tiles','hints-parent/hints','reps','lineage'):(work/x).mkdir(parents=True,exist_ok=True)
    tiles=work/'tiles-parent'/'tiles';snap={'schema':'worldatlas-geography-decision-draft-evidence-v1','source':'neon-export','decision_revision':{'id':'d','entity_revision':'e','status':'draft'},'entity_revision':{'id':'e','status':'draft'},'distance_policies':[{'policy_id':'wgs','version':'1','decision_revision':'d','execution_status':'selected_for_research','algorithm':'wgs84_ellipsoidal_geodesic_inverse','units':'metres','semi_major_axis_m':'6378137','inverse_flattening':'298.257223563'}],'entities':[{'id':i,'name':str(i),'level':'continent'} for i in range(6)],'category_bindings':[{'entity_id':i,'code':i+17,'physical_class':'land'} for i in range(6)]}
    sp=Path(cfg['inputs']['decision_snapshot']['path']);sp.write_text(json.dumps(snap));cfg['inputs']['decision_snapshot']=o.pin(sp,lambda:None);cp.write_text(json.dumps(cfg));raw=cp.read_bytes();code=o.code_hashes(lambda:None)
    paths={'resolution_report':work/'resolution/report.json','seed_rows':work/'seed-work-parent/output/rows.u32le','seed_runs':work/'seed-work-parent/output/runs.u32le','seed_report':work/'seed-work-parent/output/report.json','hint_roots':work/'hints-parent/hints/roots.u32le','hint_codes':work/'hints-parent/hints/hints.u8','hint_report':work/'hints-parent/hints/report.json','tile_manifest':work/'tiles-parent/tiles/manifest.txt','representatives':work/'reps/representatives.u32le'}
    for name,f in paths.items():f.write_text(name)
+   if python_components:
+    import atomic_move
+    seedout=work/'seed-work-parent/output';staging=work/'seed-work-parent/staging';seedout.rename(staging);atomic_move.move_noreplace(staging,seedout)
    artifacts={name:o.pin(f,lambda:None) for name,f in paths.items()}
    c=cfg['controls'];si={dst:cfg['inputs'][src] for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel'))};si['resolution']=artifacts['resolution_report']
    sr={'schema':'worldatlas-stage2-seed-request-v1','grid':cfg['grid'],'inputs':si,'controls':{'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}};sh=o.write_json(work/'requests/seed.json',sr)
@@ -66,7 +74,7 @@ class OrchestrationTests(unittest.TestCase):
    marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'code_sha256':code,'artifacts':artifacts,'tile_directory':str(tiles),'seed_tile_verification':{'status':'verified'},'seed_request_sha256':sh,'hint_request_sha256':hh,'physical_lineage_report':o.pin(work/'lineage/report.json',lambda:None),'provisional_only':False};o.write_json(work/'derived/manifest.json',marker)
    with mock.patch.object(o.verify_physical_lineage,'validate_combined',return_value=lineage),mock.patch.object(o.build_stage2,'build',return_value={'ok':True}) as build:
     self.assertEqual(o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,False),{'ok':True})
-    core=json.loads((work/'core-requests/config.json').read_bytes());self.assertEqual(core['inputs']['seed_rows'],artifacts['seed_rows']);self.assertEqual(core['orchestration']['outer_config_sha256'],hashlib.sha256(raw).hexdigest())
+    core=json.loads((work/'core-requests/config.json').read_bytes());self.assertEqual(core['inputs']['seed_rows'],artifacts['seed_rows']);self.assertIn('component_builder' if python_components else 'component_builder_binary',core['inputs']);self.assertEqual(core['orchestration']['outer_config_sha256'],hashlib.sha256(raw).hexdigest())
     self.assertEqual(set(core['seed_code_files']),set(o.SEED_REPORT_NAMES)|{'rasterizer','rasterizer_kernel'});self.assertIn('seed-producer/seed_worker.py',marker['code_sha256'])
     o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,True,processing_started=123.0);self.assertFalse(build.call_args.kwargs['resume']);self.assertTrue(build.call_args.kwargs['orchestration_resumed']);self.assertEqual(build.call_args.kwargs['processing_started'],123.0)
     (work/'core').mkdir();o.finish_from_marker(cfg,raw,work,p/'out',code,lambda:None,True);self.assertTrue(build.call_args.kwargs['resume'])

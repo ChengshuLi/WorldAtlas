@@ -2,6 +2,7 @@
 from contextlib import contextmanager
 import fcntl
 import hashlib
+import importlib.util
 import json
 import math
 import os
@@ -91,21 +92,33 @@ def verify_anchor(anchor, expected_path):
         raise ValueError('timing journal checkpoint prefix changed')
 
 
+def _publication_module():
+    path = Path(__file__).resolve().parents[1] / 'v7-recovery/land/stage2-geodesic-20261104/atomic_move.py'
+    spec = importlib.util.spec_from_file_location('pipeline_directory_publication', path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def inventory(paths):
-    """Seal every regular file in output roots, rejecting symlink escapes."""
+    """Seal all files and exact publication receipts; reject other symlinks."""
     result = []
+
+    def visit(path):
+        if path.is_symlink():
+            target, receipt = _publication_module().published_directory(path)
+            result.append(pin(receipt))
+            visit(target)
+        elif path.is_file():
+            result.append(pin(path))
+        elif path.is_dir():
+            for child in sorted(path.iterdir()):
+                visit(child)
+        else:
+            raise ValueError('missing or non-regular checkpoint output: ' + str(path))
+
     for value in paths:
-        root = Path(value)
-        if root.is_symlink() or not root.exists():
-            raise ValueError('missing or linked checkpoint output: ' + str(root))
-        entries = [root] if root.is_file() else sorted(root.rglob('*'))
-        for path in entries:
-            if path.is_symlink():
-                raise ValueError('linked checkpoint output: ' + str(path))
-            if path.is_file():
-                result.append(pin(path))
-            elif not path.is_dir():
-                raise ValueError('non-regular checkpoint output: ' + str(path))
+        visit(Path(value))
     return result
 
 
@@ -239,7 +252,7 @@ class Checkpoints:
         verify_pins(inputs)
         write(self.stage(name) / 'complete.json', {
             'schema': 'worldatlas-command-checkpoint-v1', 'attempt': self.attempt, 'timing_anchor': timing_anchor,
-            'invocation': invocation, 'inputs': inputs, 'output_roots': [str(Path(p).resolve()) for p in outputs],
+            'invocation': invocation, 'inputs': inputs, 'output_roots': [os.path.abspath(p) for p in outputs],
             'outputs': inventory(outputs), 'log': pin(log)})
 
 

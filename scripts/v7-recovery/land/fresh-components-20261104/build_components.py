@@ -1,17 +1,16 @@
 #!/usr/bin/env /usr/bin/python3
 """Fresh accepted-physical connected components, guarded and data-only."""
-import argparse,hashlib,json,os,shutil,sys,time,uuid
+import argparse,hashlib,json,os,platform,runpy,shutil,sys,time
 from pathlib import Path
 
 _SCRIPTS = Path(__file__).resolve().parents[3]
 if str(_SCRIPTS) not in sys.path:
     sys.path.append(str(_SCRIPTS))
-import stage_external
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/'stage2-geodesic-20261104'))
 import verify_inputs,atomic_move
 from write_land_stream import _Rows,_full,_components,PAIR,TRIPLE
-REVIEWED_SOURCE_SHA256='2f4df94c6ca50ea66f43092a174962ce4fdd5e5c3137f55ca4f335964894515e'
+COMPONENT_SOURCE_SHA256='efbe62186e140e1dbd13857819bbc954cad9ae526455bf5330d670936a88168a'
 def need(v,msg):
  if not v:raise ValueError(msg)
 def sync_dir(path):
@@ -25,7 +24,7 @@ def require_same_filesystem(work_parent,output_parent):
 def require_disk_headroom(directory,physical_runs,physical_rows,reserve):
  size=Path(physical_runs).stat().st_size;need(size%8==0,'misaligned physical run stream')
  # At most one component triple for each input physical run, plus rows and
- # conservative compiler/metadata allowance. Keep the configured reserve free.
+ # conservative source/metadata allowance. Keep the configured reserve free.
  upper=(size//8)*12+Path(physical_rows).stat().st_size+64*1024**2
  need(shutil.disk_usage(directory).free>=reserve+upper,'insufficient component-output disk headroom')
  return upper
@@ -46,29 +45,29 @@ def coverage(pr,ps,cr,cs,w,h,guard):
  finally:
   for r in rows:r.close()
 def run(config_path,work_dir,output_dir):
- cp,work,out=map(lambda x:Path(x).resolve(),(config_path,work_dir,output_dir));raw=verify_inputs.bounded_bytes(cp,1<<20);cfg=json.loads(raw)
+ cp=Path(config_path).resolve();work=atomic_move.output_path(work_dir);out=atomic_move.output_path(output_dir);raw=verify_inputs.bounded_bytes(cp,1<<20);cfg=json.loads(raw)
  need(set(cfg)=={'schema','grid','inputs','controls'} and cfg['schema']=='fresh-physical-components-v1' and set(cfg['inputs'])=={'physical_rows','physical_runs','physical_report','component_source'},'invalid component request')
  c=cfg['controls'];need(set(c)=={'minimum_free_bytes'} and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>=2*1024**3,'invalid disk reserve')
  g=cfg['grid'];need(isinstance(g,dict) and set(g)=={'width','height','west','north','step'} and type(g['width']) is int and type(g['height']) is int and 1<g['width']<=1000000 and 0<g['height']<=1000000 and g['west']==-180 and g['north']==90 and g['step']==360/g['width'] and 90-g['height']*g['step']>=-90-1e-8,'invalid grid')
- need(work.parent.is_dir() and out.parent.is_dir() and not work.exists() and not out.exists() and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'fresh work/output required')
+ need(work.parent.is_dir() and out.parent.is_dir() and not os.path.lexists(work) and not os.path.lexists(out) and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'fresh work/output required')
  require_same_filesystem(work.parent,out.parent)
  guard=lambda:need(shutil.disk_usage(work.parent).free>=c['minimum_free_bytes'],'disk guard reached');guard();paths={k:pin(v,guard) for k,v in cfg['inputs'].items()}
  for p in [cp,HERE,*paths.values()]:
   d=p if p==HERE else p.parent;need(all(not t.is_relative_to(d) and not d.is_relative_to(t) for t in (work,out)),'work/output overlaps code or inputs')
- need(cfg['inputs']['component_source']['sha256']==REVIEWED_SOURCE_SHA256,'unreviewed component builder source')
+ need(paths['component_source']==HERE/'components.py' and cfg['inputs']['component_source']['sha256']==COMPONENT_SOURCE_SHA256,'component source must match the pinned in-process Python implementation')
  physical=json.loads(verify_inputs.bounded_bytes(paths['physical_report'],16<<20,guard));po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==g and po.get('rows.u32le')==cfg['inputs']['physical_rows']['sha256'] and po.get('runs.u32le')==cfg['inputs']['physical_runs']['sha256'],'physical report mismatch')
  output_upper_bytes=require_disk_headroom(work.parent,paths['physical_runs'],paths['physical_rows'],c['minimum_free_bytes'])
- work.mkdir(mode=0o700);sync_dir(work.parent);stage=work/'result.partial';stage.mkdir(mode=0o700);src=paths['component_source'];binary=stage/'component-builder';data=verify_inputs.bounded_bytes(paths['component_source'],1<<20,guard);need(hashlib.sha256(data).hexdigest()==REVIEWED_SOURCE_SHA256,'source changed')
+ work.mkdir(mode=0o700);sync_dir(work.parent);stage=work/'result.partial';stage.mkdir(mode=0o700);src=paths['component_source'];builder=stage/'component-builder.py';data=verify_inputs.bounded_bytes(src,1<<20,guard);source_sha=hashlib.sha256(data).hexdigest();need(source_sha==cfg['inputs']['component_source']['sha256'],'source changed')
+ with builder.open('xb') as f:f.write(data);f.flush();os.fsync(f.fileno())
  driver_sha=verify_inputs.sha_file(HERE/'build_components.py',guard);support={n:verify_inputs.sha_file(HERE.parent/'stage2-geodesic-20261104'/n,guard) for n in ('checkpoints.py','verify_inputs.py','atomic_move.py','write_land_stream.py')};started=time.monotonic()
- compiler=stage_external.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',str(src),'-o',str(binary)],check=True,capture_output=True,text=True);guard();need(verify_inputs.sha_file(src,guard)==REVIEWED_SOURCE_SHA256 and verify_inputs.sha_file(paths['component_source'],guard)==REVIEWED_SOURCE_SHA256,'compiler source changed')
- proc=stage_external.run([str(binary),str(g['width']),str(g['height']),str(paths['physical_rows']),str(paths['physical_runs']),str(stage/'rows.u32le'),str(stage/'runs.u32le')],check=True,capture_output=True,text=True);guard();output=proc.stdout.strip();need(output and len(output)<512,'invalid builder output')
+ result=runpy.run_path(str(src))['build'](g['width'],g['height'],paths['physical_rows'],paths['physical_runs'],stage/'rows.u32le',stage/'runs.u32le',guard=guard);guard();output=' '.join(f'{key}={result[key]}' for key in ('runs','components','land_cells'))
  land=coverage(paths['physical_rows'],paths['physical_runs'],stage/'rows.u32le',stage/'runs.u32le',g['width'],g['height'],guard);need(land==physical.get('candidate_dry_cells'),'physical land count mismatch')
- for n in ('rows.u32le','runs.u32le','component-builder'):
+ for n in ('rows.u32le','runs.u32le','component-builder.py'):
   fd=os.open(stage/n,os.O_RDONLY);os.fsync(fd);os.close(fd)
- rsha=verify_inputs.sha_file(stage/'rows.u32le',guard);ssha=verify_inputs.sha_file(stage/'runs.u32le',guard);bsha=verify_inputs.sha_file(binary,guard);version=stage_external.run(['g++','--version'],check=True,capture_output=True,text=True).stdout.splitlines()[0]
- manifest={'schema':'single-generation-component-manifest-v1','status':'complete-research','grid':g,'component_source_sha256':REVIEWED_SOURCE_SHA256,'pins':{'physical_rows':cfg['inputs']['physical_rows'],'physical_runs':cfg['inputs']['physical_runs'],'component_rows':{'path':str(out/'rows.u32le'),'sha256':rsha},'component_runs':{'path':str(out/'runs.u32le'),'sha256':ssha}},'physical_report':cfg['inputs']['physical_report'],'builder_binary':{'path':str(out/'component-builder'),'sha256':bsha},'builder_binary_sha256':bsha,'compiler_version':version,'builder_output':output}
+ rsha=verify_inputs.sha_file(stage/'rows.u32le',guard);ssha=verify_inputs.sha_file(stage/'runs.u32le',guard);bsha=verify_inputs.sha_file(builder,guard);runtime={'implementation':platform.python_implementation(),'version':platform.python_version()}
+ manifest={'schema':'single-generation-component-manifest-v2','status':'complete-research','grid':g,'component_source_sha256':source_sha,'pins':{'physical_rows':cfg['inputs']['physical_rows'],'physical_runs':cfg['inputs']['physical_runs'],'component_rows':{'path':str(out/'rows.u32le'),'sha256':rsha},'component_runs':{'path':str(out/'runs.u32le'),'sha256':ssha}},'physical_report':cfg['inputs']['physical_report'],'builder':{'path':str(out/'component-builder.py'),'sha256':bsha},'builder_kind':'python-api','runtime':runtime,'builder_output':output}
  with open(stage/'manifest.json','x') as f:json.dump(manifest,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
- report={'schema':'fresh-physical-components-report-v1','status':'research-awaiting-review','publishable':False,'config_sha256':hashlib.sha256(raw).hexdigest(),'driver_sha256':driver_sha,'support_sha256':support,'grid':g,'input_sha256':{k:v['sha256'] for k,v in cfg['inputs'].items()},'component_rows_sha256':rsha,'component_runs_sha256':ssha,'builder_binary_sha256':bsha,'manifest_sha256':verify_inputs.sha_file(stage/'manifest.json',guard),'land_cells':land,'builder_output':output,'output_upper_bound_bytes':output_upper_bytes,'elapsed_seconds':time.monotonic()-started,'limitations':['Physical component coverage was checked against the accepted mask; the mask source was not rerasterized.','Root IDs are ephemeral for this exact build; no continent assignment is made.','Memory use is not capped by this runner.']}
+ report={'schema':'fresh-physical-components-report-v1','status':'research-awaiting-review','publishable':False,'config_sha256':hashlib.sha256(raw).hexdigest(),'driver_sha256':driver_sha,'support_sha256':support,'grid':g,'input_sha256':{k:v['sha256'] for k,v in cfg['inputs'].items()},'component_rows_sha256':rsha,'component_runs_sha256':ssha,'builder_sha256':bsha,'builder_kind':'python-api','runtime':runtime,'manifest_sha256':verify_inputs.sha_file(stage/'manifest.json',guard),'land_cells':land,'builder_output':output,'output_upper_bound_bytes':output_upper_bytes,'elapsed_seconds':time.monotonic()-started,'limitations':['Physical component coverage was checked against the accepted mask; the mask source was not rerasterized.','Root IDs are ephemeral for this exact build; no continent assignment is made.','Memory use is not capped by this runner.']}
  with open(stage/'report.json','x') as f:json.dump(report,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
  for p in cfg['inputs'].values():pin(p,guard)
  need(verify_inputs.bounded_bytes(cp,1<<20,guard)==raw and verify_inputs.sha_file(HERE/'build_components.py',guard)==driver_sha and {n:verify_inputs.sha_file(HERE.parent/'stage2-geodesic-20261104'/n,guard) for n in support}==support,'input or code changed');guard();sync_dir(stage);atomic_move.move_noreplace(stage,out)

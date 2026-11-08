@@ -47,7 +47,7 @@ def resolve(req, *, allow_local=False):
     w,h=grid['width'],grid['height'];step=helper.finite_decimal(grid['step']);west=helper.finite_decimal(grid['west']);north=helper.finite_decimal(grid['north'])
     need(type(w) is int and type(h) is int and w>0 and h>0 and west==Decimal(-180) and north==Decimal(90) and step>0 and Decimal(w)*step==Decimal(360) and Decimal(h)*step<=Decimal(180),'invalid global grid')
     manifest=json.loads(helper.read_document(refs['component_manifest'],'component manifest'))
-    need(manifest.get('schema')=='single-generation-component-manifest-v1','current independent component generation required')
+    need(manifest.get('schema') in ('single-generation-component-manifest-v1','single-generation-component-manifest-v2'),'current independent component generation required')
     mode,lineage_pins,lineage_paths=helper.validate_lineage(manifest,req,grid)
     for k in ('physical_rows','component_rows'):need(refs[k].stat().st_size==(h+1)*4,'row file size mismatch')
     for k,m in (('physical_runs',8),('component_runs',12)):need(refs[k].stat().st_size % m==0,'run alignment error')

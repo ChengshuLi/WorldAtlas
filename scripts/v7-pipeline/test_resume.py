@@ -218,6 +218,63 @@ class ExecutorResumeTests(unittest.TestCase):
         self.assertEqual(receipt, pipeline.pin(receipt['path']))
         self.assertEqual((self.out / 'result/result.bin').read_bytes(), self.source.read_bytes())
 
+    def published(self, runner):
+        return runner.stage('water', 'published-stage', 'v7-pipeline/fixtures/published_stage.py',
+            self.source, self.out / 'published', _outputs=[self.out / 'published'],
+            _restart=[self.out / 'published.partial'])
+
+    def test_published_output_uses_stable_checkpoint_identity_across_restart(self):
+        first = self.runner()
+        self.assertTrue(self.published(first))
+        self.assertTrue((self.out / 'published').is_symlink())
+        first.close()
+        second = self.runner(resume=True)
+        with patch.object(pipeline, 'stage_module', side_effect=AssertionError('completed publication ran again')):
+            self.assertFalse(self.published(second))
+        self.assertEqual((self.out / 'published/result.bin').read_bytes(), self.source.read_bytes())
+        second.checkpoints.verify_all()
+
+    def test_published_output_receipt_tampering_fails_before_reuse(self):
+        from execution_state import _publication_module
+        first = self.runner()
+        self.published(first)
+        first.close()
+        _, receipt = _publication_module().published_directory(self.out / 'published')
+        receipt.write_text('{}')
+        with self.assertRaisesRegex(ValueError, 'receipt mismatch'):
+            self.runner(resume=True)
+
+    def test_uncheckpointed_publication_is_preserved_without_breaking_its_payload(self):
+        first = self.runner()
+        with patch.object(first.checkpoints, 'complete', side_effect=RuntimeError('crash after publication')):
+            with self.assertRaisesRegex(RuntimeError, 'crash after publication'):
+                self.published(first)
+        first.close()
+        second = self.runner(resume=True)
+        self.assertTrue(self.published(second))
+        saved = list((self.out / 'preserved').glob('published-stage-*/0-published'))
+        self.assertEqual(len(saved), 1)
+        self.assertTrue(saved[0].is_symlink())
+        self.assertEqual((saved[0] / 'result.bin').read_bytes(), self.source.read_bytes())
+        second.checkpoints.verify_all()
+
+    def test_output_parent_symlink_cannot_escape_run(self):
+        first = self.runner()
+        outside = self.root / 'outside'
+        outside.mkdir()
+        (first.out / 'escape').symlink_to(outside, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, 'stage output outside run'):
+            first.stage('water', 'escape-stage', 'v7-pipeline/fixtures/published_stage.py',
+                self.source, first.out / 'escape/result', _outputs=[first.out / 'escape/result'])
+        self.assertEqual(list(outside.iterdir()), [])
+
+    def test_arbitrary_output_symlinks_remain_rejected(self):
+        from execution_state import inventory
+        first = self.runner()
+        (first.out / 'linked').symlink_to(self.source.parent, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, 'invalid publication payload path'):
+            inventory([first.out / 'linked'])
+
     def test_interrupted_leaf_is_preserved_then_rebuilt_and_checkpoints_resumed(self):
         first = self.runner()
         once = self.out / 'work/interrupt-marker'
