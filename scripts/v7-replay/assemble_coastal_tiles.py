@@ -97,12 +97,12 @@ def assemble(snapshot,snapshot_sha,entries,root,out,width,height,allow_selected_
     'algorithm_pins':{k:v for k,v in baseline.items() if k!='inputs'},'assigned_cells':total_cells,'span_count':total_spans,'tiles':tiles}
 
 
-def main():
+def main(argv=None, *, emit=print):
  processing_started=time.perf_counter()
  p=argparse.ArgumentParser(description=__doc__)
  for k in ('snapshot','snapshot-sha256','input-root','tile-list','out'):p.add_argument('--'+k,required=True)
  p.add_argument('--allow-unverified-snapshot',action='store_true');p.add_argument('--allow-draft',action='store_true');p.add_argument('--allow-selected-research-policy',action='store_true')
- a=p.parse_args()
+ a=p.parse_args(argv)
  if not a.allow_unverified_snapshot:raise ValueError('unverified snapshot requires explicit research opt-in')
  if Path(a.snapshot).stat().st_size>16*1024*1024:raise ValueError('snapshot exceeds size limit')
  snap=read_snapshot(Path(a.snapshot),a.snapshot_sha256,allow_draft=a.allow_draft)
@@ -111,7 +111,7 @@ def main():
  entries=json.loads(config.read_text())['tiles'];out=Path(a.out)
  result=assemble(snap,a.snapshot_sha256,entries,root,out,131072,54614,allow_selected_research=a.allow_selected_research_policy,processing_started=processing_started)
  write_json_exclusive(out,result,indent=2)
- print(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'assigned_cells':result['assigned_cells']}))
+ emit(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'assigned_cells':result['assigned_cells']}))
 
 if __name__=='__main__':main()
 

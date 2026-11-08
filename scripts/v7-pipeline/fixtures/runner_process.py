@@ -1,4 +1,4 @@
-"""Controlled parent-kill fixture; uses the normal direct-execution API."""
+"""Controlled parent-kill fixture for the native-command lock."""
 from pathlib import Path
 import sys
 
@@ -8,7 +8,7 @@ from run_pipeline import Pipeline
 config, output, source, release = map(Path, sys.argv[1:])
 runner = Pipeline(config, output)
 try:
-    runner.command('water', 'fixture-stage', 'v7-pipeline/fixtures/partial_stage.py',
+    runner.stage('water', 'fixture-stage', 'v7-pipeline/fixtures/partial_stage.py',
                    source, output / 'result', wait_for=release,
                    _outputs=[output / 'result'])
 finally:

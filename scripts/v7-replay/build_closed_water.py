@@ -10,7 +10,7 @@ import local_water_overlay
 from direct_lineage import validate_physical_report,validate_direct_land
 
 
-def main():
+def main(argv=None, *, emit=print):
  processing_started=time.perf_counter()
  ap=argparse.ArgumentParser(description=__doc__)
  for k in ('snapshot','snapshot-sha256','physical-rows','physical-rows-sha256','physical-runs','physical-runs-sha256','physical-report','physical-report-sha256',
@@ -20,7 +20,7 @@ def main():
            'component-rows','component-rows-sha256','component-spans','component-spans-sha256','barrier-edges','barrier-edges-sha256','input-root','out'):
   ap.add_argument('--'+k,required=True)
  ap.add_argument('--pad-degrees',type=float,required=True);ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true')
- a=ap.parse_args()
+ a=ap.parse_args(argv)
  if not a.allow_unverified_snapshot:raise ValueError('unverified snapshot requires explicit research opt-in')
  pairs=[(getattr(a,k),getattr(a,k+'_sha256')) for k in ('snapshot','physical_rows','physical_runs','physical_report','land_rows','land_runs','land_report',
     'prefill_rows','prefill_runs','prefill_audit','prefill_plan','partition_manifest','component_rows','component_spans','barrier_edges')]
@@ -66,6 +66,6 @@ def main():
    base.open_grid(a.prefill_rows,a.prefill_runs,width,height),base.open_grid(a.land_rows,a.land_runs,width,height),
    partition_path,a.component_rows,a.component_spans,a.barrier_edges,out,width,height,a.pad_degrees,inputs,
    verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy,processing_started=processing_started)
- print(json.dumps({'status':result['status'],'assigned':result['assigned_cells'],'pending':result['pending_cells'],'output':str(out)}))
+ emit(json.dumps({'status':result['status'],'assigned':result['assigned_cells'],'pending':result['pending_cells'],'output':str(out)}))
 
 if __name__=='__main__':main()

@@ -140,7 +140,7 @@ class PipelineTests(unittest.TestCase):
         out=self.root/'partial';actual=b.run_stage
         def stage(name,*args):
             if name=='overture/rasterize_water_shard.py':
-                destination=Path(args[3]);destination.mkdir();(destination/'partial').write_text('preserve')
+                destination=Path(args[2]);destination.mkdir();(destination/'partial').write_text('preserve')
                 raise ValueError('partial shard')
             return actual(name,*args)
         with mock.patch.object(b,'run_stage',side_effect=stage):

@@ -18,7 +18,7 @@ def sha(p):
     return h.hexdigest()
 
 
-def main():
+def main(argv=None, *, emit=print):
     processing_started=time.perf_counter()
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--manifest',type=Path,required=True)
@@ -28,7 +28,7 @@ def main():
     ap.add_argument('--policy',type=Path,required=True)
     ap.add_argument('--policy-sha256',required=True)
     ap.add_argument('--allow-draft-snapshot',action='store_true')
-    args=ap.parse_args()
+    args=ap.parse_args(argv)
     if sha(args.manifest)!=args.manifest_sha256: raise ValueError('manifest hash mismatch')
     manifest=json.loads(args.manifest.read_text()); root=args.manifest.parent
     source=manifest['source']; grid=manifest['grid']; W,H=int(grid['width']),int(grid['height'])
@@ -86,7 +86,7 @@ def main():
             cells+=int(expected.sum())
         if rec is not None:raise ValueError('assignment has rows outside raster bounds')
     if cells!=manifest['physical_water_cells'] or spans!=manifest['span_count']:raise ValueError('manifest counts do not match')
-    print(json.dumps({'processing_elapsed_seconds':time.perf_counter()-processing_started,'status':'raster-to-span-match','cells':cells,'spans':spans,'raster_sha256':sha(raster_path),
+    emit(json.dumps({'processing_elapsed_seconds':time.perf_counter()-processing_started,'status':'raster-to-span-match','cells':cells,'spans':spans,'raster_sha256':sha(raster_path),
                       'assignment_sha256':sha(path),'limitation':'does not independently validate source polygon semantics'}))
 
 if __name__=='__main__':main()

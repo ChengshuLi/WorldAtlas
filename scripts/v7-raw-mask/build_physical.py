@@ -3,6 +3,7 @@
 import hashlib
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextvars import copy_context
 import fcntl
 import json
 import math
@@ -15,6 +16,11 @@ import sys
 import threading
 import time
 import uuid
+
+_SCRIPTS = Path(__file__).resolve().parents[1]
+if str(_SCRIPTS) not in sys.path:
+    sys.path.append(str(_SCRIPTS))
+import stage_external
 
 HERE = Path(__file__).resolve().parent
 
@@ -36,7 +42,19 @@ def read_pin(spec):
 
 
 def run_stage(script, *args):
-    subprocess.run([sys.executable, str(HERE / script), *map(str, args)], check=True)
+    if script == 'rasterize_land.py':
+        from rasterize_land import run
+        return run(*args, emit=stage_external.emit)
+    if script == 'overture/rasterize_water_shard.py':
+        from overture.rasterize_water_shard import run
+        return run(*args, emit=stage_external.emit)
+    if script == 'overture/aggregate_compare.py':
+        from overture.aggregate_compare import run
+        return run(*args, emit=stage_external.emit)
+    if script == 'compose_physical.py':
+        from compose_physical import main
+        return main(*args, emit=stage_external.emit)
+    raise ValueError(f'unknown physical stage: {script}')
 
 
 def sync_directory(path):
@@ -306,6 +324,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         journal.unit('land',unit_start,land_dir/'report.json',land_dir/'land.tif')
     staged_count = 0
     def build_shard(item):
+        stage_external.check_cancelled()
         nonlocal staged_count
         i, (path, digest, entry) = item
         destination = output / 'shards' / f'{i:05d}'
@@ -336,7 +355,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             if not staged.exists():
                 started=time.perf_counter()
                 try:
-                    subprocess.run([staging['wrangler_path'],'r2','object','get',entry['r2_bucket']+'/'+entry['r2_key'],
+                    stage_external.run([staging['wrangler_path'],'r2','object','get',entry['r2_bucket']+'/'+entry['r2_key'],
                                     '--file',str(staged),'--remote','--config',staging['wrangler_config']],check=True,env=env)
                 finally:
                     journal.download_done(started)
@@ -345,7 +364,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
                 raise ValueError(f'staged source size/hash mismatch: {path}')
             path=staged;owned=True
         unit_start=time.perf_counter()
-        run_stage('overture/rasterize_water_shard.py', path, digest, water_path, destination, '--batch-size', str(batch_size))
+        run_stage('overture/rasterize_water_shard.py', path, digest, destination, water_path, batch_size)
         report_path = destination / 'report.json'; report = json.loads(report_path.read_bytes())
         check_kernel(report,destination)
         if (report.get('status')!='candidate-only' or report.get('source_sha256')!=digest
@@ -360,7 +379,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     # cancel work not yet started; running children finish and remain auditable.
     shards = [None] * len(raw)
     with ThreadPoolExecutor(max_workers=min(workers, len(raw))) as pool:
-        futures = {pool.submit(build_shard, item): item[0] for item in enumerate(raw)}
+        futures = {pool.submit(copy_context().run, build_shard, item): item[0] for item in enumerate(raw)}
         try:
             for future in as_completed(futures):
                 shards[futures[future]] = future.result()
@@ -432,13 +451,16 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     journal.finish('complete');report.update(journal.summary())
     report['pipeline_identity_sha256']=sha(identity_path);report['processing_journal_sha256']=sha(journal.path)
     write_json(output / 'report.json', report)
-    print(json.dumps(report, indent=2), flush=True)
     return report
 
 
-if __name__ == '__main__':
+def main(argv=None, *, emit=print):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('pipeline_config');parser.add_argument('output');parser.add_argument('--resume',action='store_true')
-    args=parser.parse_args()
-    try: run(args.pipeline_config,args.output,resume=args.resume)
+    args=parser.parse_args(argv)
+    emit(json.dumps(run(args.pipeline_config, args.output, resume=args.resume), indent=2), flush=True)
+
+
+if __name__ == '__main__':
+    try: main()
     except (ValueError, OSError, subprocess.CalledProcessError) as e: sys.exit(f'failed: {e}')

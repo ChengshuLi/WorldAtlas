@@ -47,13 +47,13 @@ def build(snapshot_path, snapshot_sha, physical_dir, physical_report_sha, output
     return doc
 
 
-def main():
+def main(argv=None, *, emit=print):
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('snapshot','snapshot-sha256','physical-dir','physical-report-sha256','out'):p.add_argument('--'+name,required=True)
     p.add_argument('--allow-draft-snapshot',action='store_true')
-    a=p.parse_args()
+    a=p.parse_args(argv)
     if not a.allow_draft_snapshot: raise ValueError('explicit draft research opt-in required')
     build(a.snapshot,a.snapshot_sha256,a.physical_dir,a.physical_report_sha256,a.out)
-    print(json.dumps({'status':'unverified-research-not-published','sha256':sha(a.out)}))
+    emit(json.dumps({'status':'unverified-research-not-published','sha256':sha(a.out)}))
 
 if __name__=='__main__':main()

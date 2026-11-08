@@ -142,7 +142,7 @@ def native_batch(kernel, raster, batch, counts, invalid, grid, tile, ids):
     invalid.extend(ids.get(first+np.flatnonzero(status == 4)))
 
 
-def run(source, expected, output, config_path, batch_size=None, engine=None):
+def run(source, expected, output, config_path, batch_size=None, engine=None, *, emit=print):
     source = Path(source).resolve()
     config_path = Path(config_path).resolve()
     output = Path(output).resolve()
@@ -192,7 +192,10 @@ def run(source, expected, output, config_path, batch_size=None, engine=None):
     out = Path(output)
     kernel = None
     if engine == 'native':
-        from water_native import WaterBatch
+        if __package__:
+            from .water_native import WaterBatch
+        else:
+            from water_native import WaterBatch
         kernel = WaterBatch(out,cfg.get('native_method','hybrid'))
     raster = gdal.GetDriverByName('GTiff').Create(str(out/'water.tif'), width, height, 1,
         gdal.GDT_Byte, options=['TILED=YES', 'BLOCKXSIZE=512', 'BLOCKYSIZE=512',
@@ -231,7 +234,7 @@ def run(source, expected, output, config_path, batch_size=None, engine=None):
                         if line.startswith('VmRSS:')), 'unavailable')
         except OSError:
             pass
-        print(json.dumps({'rows': counts['rows'], 'polygons': counts['polygons'],
+        emit(json.dumps({'rows': counts['rows'], 'polygons': counts['polygons'],
                           'invalid_polygon': counts['invalid_polygon'], 'rss':rss,
                           'gdal_cache_used_bytes':gdal.GetCacheUsed()}), flush=True)
     raster.FlushCache(); raster = None
@@ -257,7 +260,7 @@ def run(source, expected, output, config_path, batch_size=None, engine=None):
        'output_sha256':sha256(out/'water.tif'),
        'limitations':'Candidate water mask only, not a historical or complete physical mask. Review invalid features and compare against preserved references before use.'}
     with (out/'report.json').open('x') as f: f.write(json.dumps(report, indent=2)+'\n')
-    print(json.dumps(report, indent=2), flush=True)
+    return report
 
 
 if __name__ == '__main__':
@@ -266,6 +269,6 @@ if __name__ == '__main__':
     p.add_argument('--batch-size', type=int, default=None, help='override batch_size in config')
     p.add_argument('--engine', choices=('native','python'), help='override rasterizer in config')
     a = p.parse_args()
-    try: run(a.source, a.sha256, a.new_output_directory, a.config, a.batch_size, a.engine)
+    try: print(json.dumps(run(a.source, a.sha256, a.new_output_directory, a.config, a.batch_size, a.engine), indent=2), flush=True)
     except Exception as e:
         print(f'failed: {e}', file=sys.stderr); sys.exit(1)

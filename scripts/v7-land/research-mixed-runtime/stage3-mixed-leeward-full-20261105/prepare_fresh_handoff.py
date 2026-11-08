@@ -80,5 +80,9 @@ def prepare(template_path,outer_path,work_path,output_path,dest_path,regional_ou
   cp=dest/'config.json';write(cp,cfg);write(dest/'preparation.json',{'schema':'stage3-fresh-provisional-preparation-v1','status':'validated-not-run','publishable':False,'template':pin(template_path),'stage2_validation':validation,'config':pin(cp),'limitations':['Original regional decision snapshot and policy remain unchanged.','Pending inventory remains incomplete; regional output is profiling-only.']})
  except BaseException:raise RuntimeError('Preparation failed; inspect partially created destination before retry') from None
  return dest/'config.json'
-if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--template',required=True);p.add_argument('--template-sha256',required=True);p.add_argument('--outer',required=True);p.add_argument('--work',required=True);p.add_argument('--stage2-output',required=True);p.add_argument('--destination',required=True);p.add_argument('--regional-output',required=True);a=p.parse_args();print(prepare(a.template,a.outer,a.work,a.stage2_output,a.destination,a.regional_output,template_sha256=a.template_sha256))
+def main(argv=None, *, emit=print):
+ p=argparse.ArgumentParser();p.add_argument('--template',required=True);p.add_argument('--template-sha256',required=True);p.add_argument('--outer',required=True);p.add_argument('--work',required=True);p.add_argument('--stage2-output',required=True);p.add_argument('--destination',required=True);p.add_argument('--regional-output',required=True);a=p.parse_args(argv);emit(prepare(a.template,a.outer,a.work,a.stage2_output,a.destination,a.regional_output,template_sha256=a.template_sha256))
+
+
+if __name__ == '__main__':
+    main()

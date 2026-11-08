@@ -82,7 +82,7 @@ def validate(ocean_snapshot, prefill_snapshot, prefill_sha, plan, audit, candida
     return grid['width'], grid['height']
 
 
-def main():
+def main(argv=None, *, emit=print):
     processing_started=time.perf_counter()
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('ocean-snapshot', 'ocean-snapshot-sha256', 'prefill-snapshot', 'prefill-snapshot-sha256',
@@ -91,7 +91,7 @@ def main():
         p.add_argument('--' + name, required=True)
     p.add_argument('--allow-unverified-snapshots', action='store_true')
     p.add_argument('--allow-draft-snapshot', action='store_true')
-    a = p.parse_args()
+    a = p.parse_args(argv)
     if not a.allow_unverified_snapshots or not a.allow_draft_snapshot:
         raise ValueError('explicit unverified and draft research opt-ins required')
     files = {'ocean_snapshot': Path(a.ocean_snapshot), 'prefill_snapshot': Path(a.prefill_snapshot),
@@ -145,7 +145,7 @@ def main():
         summary=out/'run-summary.json'
         if summary.exists():summary.rename(out/'run-summary-invalid.json')
         raise
-    print(json.dumps({'status': 'unverified-research-not-published', 'output': str(out),
+    emit(json.dumps({'status': 'unverified-research-not-published', 'output': str(out),
                       'summary_sha256': ocean.sha(out / 'run-summary.json')}))
 
 if __name__ == '__main__':

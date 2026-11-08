@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from exclusive_outputs import create_binary_exclusive, create_directory_exclusive, write_json_exclusive, validate_fresh_output
 
 
-def main():
+def main(argv=None, *, emit=print):
     processing_started=time.perf_counter()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--plan', type=Path, required=True)
@@ -22,7 +22,7 @@ def main():
     ap.add_argument('--allow-unverified-snapshot', action='store_true')
     ap.add_argument('--allow-draft-snapshot', action='store_true')
     ap.add_argument('--allow-research-shore', action='store_true', help='research only: allow the unapproved WGS84 coastal land-cell-center method')
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
     if not a.allow_unverified_snapshot:
         raise ValueError('snapshot authentication is not implemented; research opt-in required')
     root, plan_path = a.input_root.resolve(), a.plan.resolve()
@@ -160,7 +160,7 @@ def main():
               'limitations':'Research composition only; source coverage, geographic decisions and snapshot authority require independent verification.'}
     report['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'report.json', report, indent=2)
-    print(json.dumps(report, indent=2))
+    emit(json.dumps(report, indent=2))
 
 if __name__ == '__main__': main()
 

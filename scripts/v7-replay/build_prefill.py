@@ -39,13 +39,13 @@ def validate_row_codes(phys,land,assigned,assigned_codes,starts,ends,y,water_cod
   else:raise ValueError(f'unexpected physical mask code {phys[j]} row={y}')
  return land_mask,water_mask
 
-def main():
+def main(argv=None, *, emit=print):
  processing_started=time.perf_counter()
  ap=argparse.ArgumentParser();ap.add_argument('--plan',required=True);ap.add_argument('--input-root',required=True);ap.add_argument('--out',required=True)
  ap.add_argument('--allow-unverified-snapshot',action='store_true',help='test only: Neon acceptance cannot yet be authenticated by this tool')
  ap.add_argument('--allow-draft-snapshot',action='store_true',help='research only: allow a draft plan')
  ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved WGS84 coastal land-cell-center method')
- ap.add_argument('--allow-historical-v6',action='store_true',help='historical replay only: permit V6 land');a=ap.parse_args()
+ ap.add_argument('--allow-historical-v6',action='store_true',help='historical replay only: permit V6 land');a=ap.parse_args(argv)
  if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
  root=Path(a.input_root).resolve()
  if not root.is_dir():raise ValueError('input root must exist')
@@ -146,6 +146,6 @@ def main():
   'direct_land_physical_water_code':land_water_code,'prior_ocean_water_labels_read':'none','physical_mask_invariance':'passed; every physical land/water center accounted exactly once'}
  report['processing_elapsed_seconds']=time.perf_counter()-processing_started
  write_json_exclusive(out/'prefill-audit.json',report)
- print(json.dumps(report,indent=2))
+ emit(json.dumps(report,indent=2))
 if __name__=='__main__':main()
 

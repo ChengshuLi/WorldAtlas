@@ -4,8 +4,14 @@
 Research-only: selected seed/region provenance and topology must be authenticated
 independently. Hints are performance suggestions, never final assignments.
 """
-import argparse,hashlib,importlib.util,json,os,resource,subprocess,time,uuid
+import argparse,hashlib,importlib.util,json,os,resource,time,uuid
 from pathlib import Path
+import sys
+
+_SCRIPTS = Path(__file__).resolve().parents[3]
+if str(_SCRIPTS) not in sys.path:
+    sys.path.append(str(_SCRIPTS))
+import stage_external
 import numpy as np,pyproj,scipy
 import atomic_move,baseline_runner,checkpoints,contracts,engine,preflight,verify_inputs,verify_physical_lineage,ural_delta
 from certificate import CertificateIndex
@@ -115,9 +121,9 @@ def _build(cp,work,output,resume,raw,cfg,processing_started=None,orchestration_r
  # Verify every tile byte against the current selected seed with a freshly built verifier.
  src=HERE/'verify_seed_index.cpp';src_bytes=read_bytes(src,guard);need(hashlib.sha256(src_bytes).hexdigest()==code[src.name],'verifier changed')
  builddir=work/('verifier-build-'+uuid.uuid4().hex);builddir.mkdir();binary=builddir/'verifier'
- subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(src),'-lcrypto','-o',str(binary)],check=True)
+ stage_external.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(src),'-lcrypto','-o',str(binary)],check=True)
  need(verify_inputs.sha_file(src,guard)==code[src.name],'verifier changed during compilation');guard()
- v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);tilecheck=json.loads(v.stdout);need(tilecheck.get('status')=='verified','seed/tile verification failed')
+ v=stage_external.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);tilecheck=json.loads(v.stdout);need(tilecheck.get('status')=='verified','seed/tile verification failed')
  spec=verify_inputs.manifest(paths['tile_manifest'],w,h,1024,guard);rep_bytes=verify_inputs.bounded_bytes(paths['representatives'],representative_byte_limit(len(spec)),guard);rep=np.frombuffer(rep_bytes,dtype='<u4');need(len(rep)%5==0,'invalid representative shape');rep=rep.reshape(-1,5)
  tiles=verify_inputs.verify_representatives(cfg['tile_directory'],paths['tile_manifest'],rep,w,h,guard=guard);need(len(tiles)==tilecheck['tiles'],'tile set mismatch')
  run_count=paths['component_runs'].stat().st_size//12;co=engine.offsets(paths['component_rows'],h,run_count)
@@ -134,7 +140,7 @@ def _build(cp,work,output,resume,raw,cfg,processing_started=None,orchestration_r
  for field in code_files:
   for v in cfg[field].values():pin(v,guard)
  pin(cfg['orchestration']['derived_manifest'],guard);pin(cfg['orchestration']['physical_lineage_report'],guard);need(verify_physical_lineage.validate_combined(read_json(paths['decision_snapshot'],guard),pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard)==lineage,'physical lineage changed');need(read_bytes(cp,guard)==raw and {n:verify_inputs.sha_file(HERE/n,guard) for n in CODE_NAMES}==code,'input or code changed')
- v=subprocess.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);need(json.loads(v.stdout).get('status')=='verified','seed/tile recheck failed')
+ v=stage_external.run([str(binary),str(paths['seed_rows']),str(paths['seed_runs']),cfg['tile_directory'],str(w),str(h),'1024'],check=True,capture_output=True,text=True);need(json.loads(v.stdout).get('status')=='verified','seed/tile recheck failed')
  os.replace(partial/'report.json',partial/'writer-report.json')
  provisional=cfg['orchestration']['provisional_only']
  report={'schema':'stage2-source-geodesic-report-v1','status':'stage2-provisional-only' if provisional else 'stage2-research-complete','publishable':False,'provisional_only':provisional,'orchestration':cfg['orchestration'],'config_sha256':hashlib.sha256(raw).hexdigest(),'grid':g,'decision_snapshot_sha256':pins['decision_snapshot'],'decision_revision':rev,'entity_revision':ent,'distance_policy':metric,'land_baseline_policy':land_policy,'ural_delta':writer['ural_delta'],'seed_report_sha256':pins['seed_report'],'resolution_report_sha256':pins['resolution_report'],'hint_report_sha256':pins['hint_report'],'inputs_sha256':pins,'categories':categories,'code_sha256':code,'dependency_sha256':source_code,'runtime':request['runtime'],'physical_coverage':coverage,'physical_lineage_report_sha256':cfg['orchestration']['physical_lineage_report']['sha256'],'physical_lineage_status':lineage['status'],'tile_verification':tilecheck,'certified_components':result['certified_count'],'exact_search_components':result['exact_count'],'exact_queries':result['exact_queries'],'ties':result['ties'],'checkpoint_sha256':verify_inputs.sha_file(work/'checkpoint.npz',guard),'output_rows_sha256':writer['rows_sha256'],'output_runs_sha256':writer['runs_sha256'],'elapsed_seconds':time.monotonic()-start,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'method':'WGS84 ellipsoidal minimum over physical component and selected mainland cell centers; bounded Ural delta land cells are overridden by cell-center side of the selected Ural divider; no other island overrides or water assignment','limitations':['Research only; selected source and component provenance require independent authentication.','The numerical bound guard is tested but not a formal proof for all floating-point operations.','Source-only hints are performance suggestions and never accepted without certificate or exact search.','The Ural delta override is limited to its recorded scope and snapshot geometry; the Caspian closure proof must be current for any later global snapshot.']}

@@ -129,7 +129,7 @@ class Fixture(unittest.TestCase):
             result = subprocess.run([sys.executable, '-c',
                 'import os, pyproj; assert os.environ["PROJ_NETWORK"] == "OFF"; '
                 'assert not pyproj.network.is_network_enabled()'],
-                env=runner.env, check=True, capture_output=True)
+                check=True, capture_output=True)
             self.assertEqual(result.returncode, 0)
 
     def test_another_proj_database_path_is_rejected_even_with_correct_bytes(self):
@@ -159,15 +159,11 @@ class Fixture(unittest.TestCase):
             self.make()
         self.assertFalse((self.root / 'run').exists())
 
-    def test_child_temporary_files_stay_in_workspace_and_outputs_are_fresh(self):
+    def test_stage_temporary_files_stay_in_workspace_and_outputs_are_fresh(self):
         runner = self.make()
-        for key in ('TMPDIR', 'TMP', 'TEMP', 'CPL_TMPDIR', 'SQLITE_TMPDIR'):
-            self.assertEqual(runner.env[key], str(runner.out / 'scratch'))
-        self.assertEqual(runner.env['PYTHONPATH'].split(os.pathsep)[:3],
-                         [str(pipeline.SCRIPTS), str(pipeline.SCRIPTS / pipeline.REPLAY),
-                          str(pipeline.SCRIPTS / pipeline.OCEAN)])
-        runner.command('setup', 'coast-import', 'v7-replay/batch_coastal_tiles.py', '--help')
-        self.assertIn('usage:', (runner.out / 'logs/coast-import.log').read_text())
+        runner.stage('setup', 'fixture', 'v7-pipeline/fixtures/partial_stage.py',
+                       self.sentinel, runner.out / 'fixture', _outputs=[runner.out / 'fixture'])
+        self.assertIn(str(runner.out / 'scratch'), (runner.out / 'logs/fixture.log').read_text())
         with self.assertRaisesRegex(ValueError, 'new output'):
             pipeline.Pipeline(runner.config_path, runner.out)
 
@@ -250,13 +246,13 @@ class Fixture(unittest.TestCase):
             directory.mkdir()
             np.arange(height + 1, dtype='<u4').tofile(directory / 'rows.u32le')
             np.tile(np.array([width, water_code], dtype='<u4'), height).tofile(directory / 'runs.u32le')
-        original_command = runner.command
+        original_stage = runner.stage
         def stop_after_extraction(*args, **kwargs):
-            result = original_command(*args, **kwargs)
+            result = original_stage(*args, **kwargs)
             if args[1] == 'extract-basins':
                 raise KeyboardInterrupt('simulated workspace interruption between stages')
             return result
-        with patch.object(runner, 'command', side_effect=stop_after_extraction):
+        with patch.object(runner, 'stage', side_effect=stop_after_extraction):
             with self.assertRaises(KeyboardInterrupt):
                 runner.extract_basins(snapshot)
         extraction_receipt = pipeline.pin(runner.out / 'checkpoints/extract-basins/complete.json')
@@ -275,7 +271,7 @@ class Fixture(unittest.TestCase):
         self.assertTrue(any(r['id'] == 'water/verify-basin-tiny-sea' and r['event'] == 'complete'
                             for r in runner.timing.records))
 
-    def test_actual_raw_sources_to_fresh_components_via_stage_clis(self):
+    def test_actual_raw_sources_to_fresh_components_in_process(self):
         import pyarrow as pa
         import pyarrow.parquet as pq
         from osgeo import ogr
@@ -322,7 +318,9 @@ class Fixture(unittest.TestCase):
                     'physical_runs': physical / 'runs.u32le', 'physical_report': physical / 'report.json',
                     'component_source': pipeline.SCRIPTS / 'v7-recovery/land/simple-v2-baseline/build_components.cpp'}.items()}})
         components = runner.out / 'components'
-        runner.command('mainland', 'components',
+        if sys.platform != 'linux':
+            self.skipTest('component publication requires Linux renameat2')
+        runner.stage('mainland', 'components',
             'v7-recovery/land/fresh-components-20261104/build_components.py',
             request, runner.out / 'work/components', components)
         report = pipeline.read(components / 'report.json')

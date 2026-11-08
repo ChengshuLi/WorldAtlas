@@ -12,13 +12,13 @@ import math
 import platform
 import time
 from pathlib import Path
-import subprocess
 import sys
 
 import numpy as np
 import scipy
 import pyproj
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import stage_external
 from exclusive_outputs import create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, write_json_exclusive, validate_fresh_output
 import exclusive_outputs, decision_snapshot, seavox_properties
 from decision_snapshot import read_snapshot, participant_water_codes, find_basin, find_source
@@ -85,7 +85,7 @@ def validate_extraction(manifest_path, expected_manifest_sha, archive, geometry,
 
 def validate_geometry_ogr(path):
     """Fail closed on empty or invalid polygon geometries; never repair source bytes."""
-    result = subprocess.run(['ogrinfo','-ro','-json','-features','-dialect','sqlite','-sql',
+    result = stage_external.run(['ogrinfo','-ro','-json','-features','-dialect','sqlite','-sql',
         'SELECT ST_IsValid(geometry) AS valid, ST_IsEmpty(geometry) AS empty FROM source',str(path)],
         check=True,capture_output=True,text=True)
     doc=json.loads(result.stdout); layers=doc.get('layers',[])
@@ -162,7 +162,7 @@ def source_water_spans(mask, x_offset, ends, values):
     return [(int(selected[a])+x_offset, int(selected[b-1])+x_offset+1)
             for a,b in zip(cuts[:-1], cuts[1:])]
 
-def main():
+def main(argv=None, *, emit=print):
     processing_started=time.perf_counter()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--input-root', type=Path, required=True)
@@ -184,7 +184,7 @@ def main():
     ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow a correctly labeled draft decision and entity revision')
     ap.add_argument('--allow-unverified-snapshot', action='store_true', help='test only: Neon acceptance cannot yet be authenticated by this tool')
     ap.add_argument('--out', type=Path, required=True, help='fresh output directory that does not contain inputs')
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
     builder_code_sha = digest(Path(__file__))
     shared_code_sha = digest(Path(shared.__file__))
     interval_code_sha = digest(Path(interval_nearest.__file__))
@@ -257,10 +257,10 @@ def main():
               format(-180+x1*STEP, '.15g'), format(90-y0*STEP, '.15g')]
     cmd = ['gdal_rasterize','-q','-burn','1','-init','0','-ot','Byte','-of','ENVI',
            '-te',*bounds,'-ts',str(x1-x0),str(y1-y0),'-a_srs','EPSG:4326',str(feature_path),str(raster_path)]
-    subprocess.run(cmd, check=True)
+    stage_external.run(cmd, check=True)
     # ENVI creation with -init can silently leave tiny rasters all zero on
     # some GDAL builds. A separate update-mode burn is idempotent and tested.
-    subprocess.run(['gdal_rasterize','-q','-burn','1',str(feature_path),str(raster_path)], check=True)
+    stage_external.run(['gdal_rasterize','-q','-burn','1',str(feature_path),str(raster_path)], check=True)
     raster = np.memmap(raster_path, dtype='u1', mode='r', shape=(y1-y0,x1-x0))
     if is_shared:
         try:
@@ -358,7 +358,7 @@ def main():
         raise ValueError('interval builder helper code changed during run')
     if is_shared and (digest(Path(wrapped_bounds.__file__))!=wrapped_code_sha or digest(Path(streamed_shore_fallback.__file__))!=fallback_code_sha):
         raise ValueError('wrapped classifier code changed during run')
-    gdal_version = subprocess.run(['gdal_rasterize','--version'],check=True,capture_output=True,text=True).stdout.strip()
+    gdal_version = stage_external.run(['gdal_rasterize','--version'],check=True,capture_output=True,text=True).stdout.strip()
     manifest = {'schema':'worldatlas-full-water-assignment-tiles-v1', 'status':'completed_unverified_candidate_not_published',
                 'grid':{'width':W,'height':H,'angular_step_deg':STEP,'row_convention':'north-to-south; cell centers; half-open [start,end) x spans'},
                 'coverage':{'complete':True,'meaning':'all physical-water centers inside the selected SeaVoX polygon',
@@ -384,7 +384,7 @@ def main():
                 'tiles':[{'core_rows':[0,H],'core_cols':[0,W],'span_file':{'path':assignment.name,'sha256':digest(assignment)}}]}
     manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'manifest.json', manifest, indent=2)
-    print(json.dumps({'cells':cells,'spans':spans_count,'rows':row_count,'assignment_sha256':digest(assignment)}))
+    emit(json.dumps({'cells':cells,'spans':spans_count,'rows':row_count,'assignment_sha256':digest(assignment)}))
 
 
 if __name__ == '__main__':

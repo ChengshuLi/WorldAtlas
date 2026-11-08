@@ -44,7 +44,7 @@ def write_run_block(codes,runs,offsets,width,*,binary=False):
     offsets.extend(next_offsets.tolist())
 
 
-def main(config_path,output):
+def main(config_path,output,*,emit=None):
     config_path=Path(config_path).resolve();data=config_path.read_bytes();cfg=json.loads(data)
     if cfg.get('schema')!='candidate-physical-composition-v1' or not cfg.get('selection_notes'):raise ValueError('explicit schema and selection notes required')
     g=cfg['grid'];w,h,west,north,step=(g[k] for k in ('width','height','west','north','step'))
@@ -95,7 +95,7 @@ def main(config_path,output):
                         diff.write(json.dumps({'row':i,'start':start,'end':end,'reference':oldcode,'candidate':newcode},separators=(',',':'))+'\n');spancount+=1
             progress={'rows_done':y+n,'candidate_dry_cells':candidate_count}
             if has_ref:progress.update({'candidate_extra_land':extra,'candidate_missing_land':missing,'mismatch_spans':spancount})
-            print(json.dumps(progress),flush=True)
+            if emit is not None:emit(json.dumps(progress),flush=True)
     tif.FlushCache();tif=None;masks=[]
     with (out/'rows.u32le').open('xb') as f:np.asarray(offsets,dtype='<u4').tofile(f)
     for key in keys:
@@ -114,8 +114,8 @@ def main(config_path,output):
         report['limitations']='Candidate physical land/water only, not V2 continent assignments or historic source reproduction.'
     with (out/'config.json').open('xb') as f:f.write(data)
     with (out/'report.json').open('x') as f:json.dump(report,f,indent=2);f.write('\n')
-    print(json.dumps(report,indent=2),flush=True)
+    return report
 if __name__=='__main__':
     if len(sys.argv)!=3:sys.exit('usage: compose_physical.py CONFIG_JSON NEW_OUTPUT_DIRECTORY')
-    try:main(sys.argv[1],sys.argv[2])
+    try:print(json.dumps(main(sys.argv[1],sys.argv[2],emit=print),indent=2),flush=True)
     except Exception as e:sys.exit(f'failed: {e}')

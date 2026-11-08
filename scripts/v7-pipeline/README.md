@@ -2,7 +2,10 @@
 
 `run_pipeline.py` is the supported single entrypoint from pinned raw OSM and
 Overture inputs to the final WorldAtlas grid. It calls the ordinary repository
-stage CLIs and generates each downstream request from the files just produced.
+Python stage functions in one interpreter and generates each downstream request
+from the files just produced. The standalone stage commands use the same entry
+functions. Native tools such as GDAL, the C++ compiler, and Wrangler still run
+as external commands.
 It does not call dated local coordinators, reuse old land/water output grids,
 patch producer reports, relocate historical paths, or repair lineage sidecars.
 
@@ -13,13 +16,13 @@ The runner builds a local grid from the selected inputs. Publication is a separa
 Use one Python installation with NumPy, SciPy, PyProj, GDAL/OGR and PyArrow.
 `g++`, OpenSSL headers/libraries, `ogr2ogr` and `gdal_rasterize` must also be
 installed. The runner checks module/executable availability before processing.
-It enforces `PROJ_NETWORK=OFF` in the runner and child stages, disables pyproj's
+It enforces `PROJ_NETWORK=OFF` throughout the runner, disables pyproj's
 network API, and records the active local `proj.db` path and SHA-256 in runtime
 identity. A regional template's `bering_proj_db` must match that exact active
 database. This runtime file alone may be outside `input_root`; other selected
 source files must remain inside it.
 If a selected Python installation needs an existing dependency directory on
-`PYTHONPATH`, export that directory when launching; child stages inherit it. For R2 source
+`PYTHONPATH`, export that directory when launching; all stages share that interpreter. For R2 source
 staging, configure the installed official Wrangler entrypoint and authenticate
 separately. If your existing authorized Wrangler login uses a nondefault
 `XDG_CONFIG_HOME`, provide that directory in the launch environment. The runner
@@ -42,9 +45,8 @@ run after an interruption, use the identical configuration, code and runtime:
       /workspace/selection/config.json /workspace/runs/fresh-run --resume
 
 The runner takes an exclusive run lock and refuses to duplicate a still-running
-runner or an admitted stage process left alive by a killed parent. All temporary
-files are directed into `fresh-run/scratch`,
-including files created by child stages. No application memory cap, memory floor
+runner or an external command still holding the run lock after interruption.
+Temporary files are directed into `fresh-run/scratch`. No application memory cap, memory floor
 or memory watchdog is added. Component construction runs directly without its
 retired monitor/guardian wrappers. Existing stage disk reserves and source/output validation remain enforced.
 Use a run path on the same filesystem as its generated component work.
@@ -96,9 +98,8 @@ See [the complete extraction replay contract](../../docs/seavox-extraction.md).
 
 The coastal CLI generates independent tiles in parallel
 using the available CPU count, or the explicit positive `coastal_workers`
-setting (`1` selects serial execution). Linux fork shares the sealed RLE input
-mappings and complete read-only shoreline span index; only crop-specific
-centers and distance trees are constructed per worker. The parent alone
+setting (`1` selects serial execution). Tile threads share the sealed RLE mappings and read-only shoreline span index.
+Each thread constructs its own crop-specific centers and distance trees. The parent alone
 publishes durable tile checkpoints, in canonical tile order, and writes batch
 completion only after every tile and metadata recheck succeed. These are
 execution tuning controls, not memory limits. Account for the simultaneously
@@ -145,10 +146,11 @@ execute the pinned checked-in source files directly; run directories contain no
 copied Python/C++ source executables. A changed pin or a live prior stage stops
 resume.
 
-Stages execute directly, without a new supervisor or guardian process. Before
-launch, the runner durably records admission and timing. The ordinary stage
-process inherits the filesystem run lease, so another runner cannot duplicate
-it even if a later tool invocation has a different PID namespace.
+The runner records stage admission and timing before the call. Native commands
+launched through the runner inherit its filesystem lock. The pinned seed writer
+has its own parent-exit guard. Cancellation stops tracked commands and skips
+queued work. Python work already running in a thread can stop at a stage or tile
+boundary.
 
 The supported recovery granularity is:
 
@@ -233,7 +235,7 @@ synthetic tests, since `tempfile` is also used by the test framework:
       -v -s scripts/v7-pipeline -p 'test_*.py'
 
 Tests execute actual raw polygon/Parquet rasterization and C++ component
-production through ordinary subprocess CLIs. Another real-processing fixture
+production through direct Python stage calls. Another real-processing fixture
 chains ocean partition, enclosed-water classification, final-plan validation
 and composition, checking every cell of its final grid. Timing tests cover
 parallel union, idle gaps, failures, changed monotonic clock origins, simulated

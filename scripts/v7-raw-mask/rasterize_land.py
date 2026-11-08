@@ -14,7 +14,7 @@ from build import checked_files, open_layer, sha
 gdal.UseExceptions()
 
 
-def run(config_path, output):
+def run(config_path, output, *, emit=print):
     config_path = Path(config_path).resolve()
     data = config_path.read_bytes()
     cfg = json.loads(data)
@@ -101,7 +101,7 @@ def run(config_path, output):
                 selected_layer=None;vector=None
         values = mem.ReadAsArray(); land_cells += int(values.sum())
         ds.GetRasterBand(1).WriteArray(values, 0, y)
-        print(json.dumps({'rows_done': y+n, 'land_cells': land_cells}), flush=True)
+        emit(json.dumps({'rows_done': y+n, 'land_cells': land_cells}), flush=True)
     ds.FlushCache(); ds = None; opened = []
     for spec in specs:
         checked_files(spec)
@@ -117,9 +117,9 @@ def run(config_path, output):
               'limitations': 'Candidate mask only; source decisions and geographic correctness require review.'}
     with (output / 'config.json').open('xb') as f: f.write(data)
     with (output / 'report.json').open('x') as f: json.dump(report, f, indent=2); f.write('\n')
-    print(json.dumps(report, indent=2), flush=True)
+    return report
 
 if __name__ == '__main__':
     if len(sys.argv) != 3: sys.exit('usage: rasterize_land.py CONFIG.json NEW_OUTPUT_DIRECTORY')
-    try: run(sys.argv[1], sys.argv[2])
+    try: print(json.dumps(run(sys.argv[1], sys.argv[2]), indent=2), flush=True)
     except Exception as e: sys.exit(f'failed: {e}')

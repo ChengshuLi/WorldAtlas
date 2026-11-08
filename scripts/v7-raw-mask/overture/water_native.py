@@ -3,6 +3,12 @@ import ctypes
 import hashlib
 import os
 from pathlib import Path
+import sys
+
+_SCRIPTS = Path(__file__).resolve().parents[2]
+if str(_SCRIPTS) not in sys.path:
+    sys.path.append(str(_SCRIPTS))
+import stage_external
 import shutil
 import subprocess
 
@@ -25,7 +31,7 @@ class WaterBatch:
             raise ValueError('a C++17 compiler is required for native water batches')
         binary = Path(output) / 'water-native.so'
         env = {**os.environ, 'TMPDIR': str(output), 'TMP': str(output), 'TEMP': str(output)}
-        subprocess.run([compiler, '-std=c++17', '-O3', '-fPIC', '-shared',
+        stage_external.run([compiler, '-std=c++17', '-O3', '-fPIC', '-shared',
                         str(source), '-o', str(binary), '-ldl', '-pthread'], check=True, env=env)
         self.lib = ctypes.CDLL(str(binary))
         self.lib.water_error.restype = ctypes.c_char_p
@@ -42,8 +48,8 @@ class WaterBatch:
         self.threads = len(os.sched_getaffinity(0)) if hasattr(os,'sched_getaffinity') else (os.cpu_count() or 1)
         self.provenance = {'method':method,'validation_threads':self.threads,
             'source_sha256': sha(source), 'binding_sha256': sha(__file__),
-            'binary_sha256': sha(binary), 'compiler': subprocess.check_output(
-                [compiler, '--version'], text=True).splitlines()[0], 'gdal': gdal.VersionInfo()}
+            'binary_sha256': sha(binary), 'compiler': stage_external.run(
+                [compiler, '--version'], text=True, check=True, stdout=subprocess.PIPE).stdout.splitlines()[0], 'gdal': gdal.VersionInfo()}
         self.timings = {'parse_validate_index_seconds':0.,'tile_burn_seconds':0.}
 
     def error(self):

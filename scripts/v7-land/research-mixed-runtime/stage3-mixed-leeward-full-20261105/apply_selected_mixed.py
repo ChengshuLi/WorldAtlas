@@ -178,7 +178,11 @@ def run(config_path):
  finally:
   if tmp is not None:os.unlink(tmp)
  return hashlib.sha256(payload).hexdigest()
-if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('config');a=p.parse_args()
- try:print(run(a.config),flush=True)
- except Exception as e:print('stage3 failed: '+str(e),file=sys.stderr,flush=True);sys.exit(1)
+def main(argv=None, *, emit=print):
+ p=argparse.ArgumentParser();p.add_argument('config');a=p.parse_args(argv)
+ emit(run(a.config),flush=True)
+
+
+if __name__ == '__main__':
+    try: main()
+    except Exception as e: print('stage3 failed: '+str(e),file=sys.stderr,flush=True); sys.exit(1)

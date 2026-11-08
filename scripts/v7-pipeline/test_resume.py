@@ -204,7 +204,7 @@ class ExecutorResumeTests(unittest.TestCase):
         return runner
 
     def execute(self, runner, **kwargs):
-        return runner.command('water', 'fixture-stage', 'v7-pipeline/fixtures/partial_stage.py',
+        return runner.stage('water', 'fixture-stage', 'v7-pipeline/fixtures/partial_stage.py',
             self.source, self.out / 'result', _outputs=[self.out / 'result'], **kwargs)
 
     def test_completed_stage_is_verified_and_not_run_again(self):
@@ -213,7 +213,7 @@ class ExecutorResumeTests(unittest.TestCase):
         receipt = pipeline.pin(self.out / 'checkpoints/fixture-stage/complete.json')
         first.close()
         second = self.runner(resume=True)
-        with patch.object(pipeline.subprocess, 'Popen', side_effect=AssertionError('completed process restarted')):
+        with patch.object(pipeline, 'stage_module', side_effect=AssertionError('completed stage ran again')):
             self.assertFalse(self.execute(second))
         self.assertEqual(receipt, pipeline.pin(receipt['path']))
         self.assertEqual((self.out / 'result/result.bin').read_bytes(), self.source.read_bytes())
@@ -272,7 +272,7 @@ class ExecutorResumeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'another pipeline runner'):
             self.runner(resume=True)
 
-    def test_direct_stage_retains_lease_after_parent_is_killed(self):
+    def test_external_command_retains_lease_after_parent_is_killed(self):
         release = self.root / 'release'
         log = self.root / 'parent.log'
         with log.open('wb') as stream:
@@ -285,7 +285,7 @@ class ExecutorResumeTests(unittest.TestCase):
                     if parent.poll() is not None:
                         self.fail('fixture parent exited: ' + log.read_text())
                     if time.monotonic() > deadline:
-                        self.fail('fixture did not reach direct stage')
+                        self.fail('fixture did not reach external command')
                     time.sleep(.01)
                 parent.kill()
                 parent.wait()
@@ -302,7 +302,7 @@ class ExecutorResumeTests(unittest.TestCase):
                 lease = RunLock(self.out / 'run.lock')
             except ValueError:
                 if time.monotonic() > deadline:
-                    self.fail('direct stage did not release lease')
+                    self.fail('external command did not release lease')
                 time.sleep(.01)
             else:
                 lease.close()

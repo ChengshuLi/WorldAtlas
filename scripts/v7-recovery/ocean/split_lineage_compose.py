@@ -298,7 +298,11 @@ def compose(config_path, output):
     result['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'report.json',result,indent=2);return result
 
-if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--config',required=True);p.add_argument('--out',required=True);p.add_argument('--allow-unverified',action='store_true');a=p.parse_args()
+def main(argv=None, *, emit=print):
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--config',required=True);p.add_argument('--out',required=True);p.add_argument('--allow-unverified',action='store_true');a=p.parse_args(argv)
     if not a.allow_unverified:raise ValueError('explicit unverified research opt-in required')
-    print(json.dumps(compose(a.config,a.out),indent=2))
+    emit(json.dumps(compose(a.config,a.out),indent=2))
+
+
+if __name__ == '__main__':
+    main()

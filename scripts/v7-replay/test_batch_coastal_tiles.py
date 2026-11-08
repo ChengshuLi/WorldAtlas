@@ -54,18 +54,18 @@ class BatchTest(unittest.TestCase):
    with self.subTest(workers=workers),self.assertRaisesRegex(ValueError,'workers'):
     self.run_batch(workers=workers)
   self.assertFalse((self.d/'batch').exists())
- def test_parallel_workers_exit_after_parent_sigkill_and_resume_fresh(self):
+ def test_parallel_tiles_share_runner_process_and_resume_after_sigkill(self):
   config={'snapshot':self.snapshot,'paths':{k:str(v) for k,v in self.paths.items()},
           'pins':self.pins,'plan':self.plan,'out':str(self.d/'killed-parallel')}
   request=self.d/'parallel-request.json';request.write_text(json.dumps(config))
-  markers=self.d/'worker-pids';markers.mkdir()
+  markers=self.d/'worker-threads';markers.mkdir()
   program=textwrap.dedent("""
-   import json,os,sys,time
+   import json,os,sys,threading,time
    from pathlib import Path
    import batch_coastal_tiles as b
    c=json.loads(Path(sys.argv[1]).read_bytes())
    def interrupted(*args,**kw):
-       Path(sys.argv[2],str(os.getpid())).write_text('started')
+       Path(sys.argv[2],str(threading.get_native_id())).write_text(str(os.getpid()))
        out=Path(args[4]);out.mkdir();(out/'coastal-assignments.jsonl.gz').write_bytes(b'partial')
        while True:time.sleep(1)
    b.tile.run=interrupted
@@ -77,16 +77,9 @@ class BatchTest(unittest.TestCase):
    deadline=time.monotonic()+15
    while len(list(markers.iterdir()))<2 and process.poll() is None and time.monotonic()<deadline:time.sleep(.02)
    self.assertEqual(len(list(markers.iterdir())),2,'parallel workers did not start')
+   self.assertEqual({int(marker.read_text()) for marker in markers.iterdir()},{process.pid})
    process.send_signal(signal.SIGKILL);process.communicate(timeout=5)
-   for marker in markers.iterdir():
-    stat=Path('/proc',marker.name,'stat')
-    deadline=time.monotonic()+5
-    while stat.exists() and time.monotonic()<deadline:
-     try:state=stat.read_text().split(') ',1)[1][0]
-     except FileNotFoundError:break
-     if state in ('Z','X'):break
-     time.sleep(.02)
-    if stat.exists():self.assertIn(stat.read_text().split(') ',1)[1][0],('Z','X'))
+   self.assertEqual(process.returncode,-signal.SIGKILL)
   finally:
    if process.poll() is None:process.kill();process.communicate(timeout=5)
   self.assertFalse(list((self.d/'killed-parallel').glob('tile-*/tile-complete.json')))

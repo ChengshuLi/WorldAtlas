@@ -7,6 +7,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import hashlib
+import importlib
 import importlib.util
 import json
 import math
@@ -14,23 +15,75 @@ import os
 from pathlib import Path
 import signal
 import shutil
-import subprocess
 import sys
 import threading
+import tempfile
 import time
+import traceback
 import uuid
 
 from execution_state import (Timing, Checkpoints, RunLock, code_identity, inventory,
                              json_bytes, verify_pins, verify_anchor, write, elapsed_union)
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[1]
-SCRIPTS = REPO / 'scripts'
+SCRIPTS = HERE.parent
+if str(SCRIPTS) not in sys.path:
+    sys.path.append(str(SCRIPTS))
+from stage_external import ExternalCommands, emit
 STAGE2 = 'v7-recovery/land/stage2-geodesic-20261104'
 REGIONAL = 'v7-land/research-mixed-runtime/stage3-mixed-leeward-full-20261105'
 OCEAN = 'v7-recovery/ocean'
 REPLAY = 'v7-replay'
 SHORE = 'wgs84-coastal-4neighbor-center-v2'
+
+
+_IMPORT_LOCK = threading.Lock()
+_ENV_LOCK = threading.Lock()
+_active_scratch = None
+_scratch_users = 0
+
+
+def stage_module(path):
+    # The standalone scripts use sibling imports. Keep their directories
+    # available for deferred imports without changing sys.argv.
+    with _IMPORT_LOCK:
+        for directory in (path.parent, SCRIPTS, SCRIPTS / REPLAY, SCRIPTS / OCEAN):
+            if str(directory) not in sys.path:
+                sys.path.append(str(directory))
+        module = importlib.import_module(path.stem)
+        if Path(module.__file__).resolve() != path:
+            raise ImportError(f'stage module {path.stem} resolved outside its source: {module.__file__}')
+        return module
+
+
+@contextmanager
+def stage_scratch(directory):
+    # Temporary-directory settings are process-wide. Parallel stages of one
+    # run may share them, and the last stage restores the caller's settings.
+    global _active_scratch, _scratch_users
+    keys = ('TMPDIR', 'TMP', 'TEMP', 'CPL_TMPDIR', 'SQLITE_TMPDIR')
+    with _ENV_LOCK:
+        if _scratch_users and _active_scratch != directory:
+            raise RuntimeError('another in-process build is using a different scratch directory')
+        if not _scratch_users:
+            _active_scratch = directory
+            stage_scratch.previous = tempfile.tempdir, {key: os.environ.get(key) for key in keys}
+            tempfile.tempdir = directory
+            os.environ.update({key: directory for key in keys})
+        _scratch_users += 1
+    try:
+        yield
+    finally:
+        with _ENV_LOCK:
+            _scratch_users -= 1
+            if not _scratch_users:
+                tempfile.tempdir, previous = stage_scratch.previous
+                for key, value in previous.items():
+                    if value is None:
+                        os.environ.pop(key, None)
+                    else:
+                        os.environ[key] = value
+                _active_scratch = None
 
 
 def validate_runtime():
@@ -159,17 +212,9 @@ class Pipeline:
             raise
 
         try:
-            self.env = os.environ.copy()
-            self.env['PROJ_NETWORK'] = 'OFF'
-            local_modules = [str(SCRIPTS), str(SCRIPTS / REPLAY), str(SCRIPTS / OCEAN)]
-            self.env['PYTHONPATH'] = os.pathsep.join(local_modules +
-                ([self.env['PYTHONPATH']] if self.env.get('PYTHONPATH') else []))
-            self.env.update({key: str(self.out / 'scratch') for key in
-                             ('TMPDIR', 'TMP', 'TEMP', 'CPL_TMPDIR', 'SQLITE_TMPDIR')})
             self.timing = Timing(self.out / 'timing-events.jsonl', resume=resume, attempt=self.attempt, heartbeat_seconds=1.0)
-            self.processes = set()
-            self.process_lock = threading.RLock()
             self.cancelled = threading.Event()
+            self.external = ExternalCommands(self.run_lock, self.cancelled)
             if not resume:
                 write(self.out / 'request.json', self.cfg)
             elif (self.out / 'request.json').read_bytes() != json_bytes(self.cfg):
@@ -259,7 +304,7 @@ class Pipeline:
             return path
         return write(path, value)
 
-    def command(self, group, name, script, *args, _outputs=None, _restart=(),
+    def stage(self, group, name, script, *args, _outputs=None, _restart=(),
                 _resume_marker=None, _resume_from=False, **options):
         """Run or validate a completed canonical stage. No arbitrary command list."""
         if self.cancelled.is_set():
@@ -311,42 +356,27 @@ class Pipeline:
         log = self.out / 'logs' / (name + '.log')
         if log.exists():
             log = self.out / 'logs' / (name + '-' + self.attempt + '.log')
-        process = None
         prior_physical = self.physical_attempts() if name == 'physical' else None
         measurement = None
         try:
             with self.timing.measure(group, name, kind='command') as measurement:
-                try:
-                    with log.open('xb') as stream:
-                        with self.process_lock:
-                            if self.cancelled.is_set():
-                                raise InterruptedError('pipeline cancelled')
-                            write(attempt / 'admitted.json', {'invocation': invocation,
-                                'name': name, 'inputs': inputs, 'log': str(log),
-                                'timing_anchor': self.timing.anchor()})
-                            process = subprocess.Popen(effective, env=self.env, stdout=stream,
-                                stderr=subprocess.STDOUT, start_new_session=True, pass_fds=(self.run_lock.fd,))
-                            self.processes.add(process)
-                        status = process.wait()
-                        if status:
-                            raise RuntimeError(f'{name} failed ({status}); inspect {log}')
-                        if pin(script_path) != invocation['code']:
-                            raise ValueError('stage entrypoint changed during execution: ' + script)
-                    self.checkpoints.complete(name, invocation, outputs, inputs, log, self.timing.anchor())
-                finally:
-                    if process is not None:
-                        if process.poll() is None:
-                            try:
-                                os.killpg(process.pid, signal.SIGTERM)
-                            except ProcessLookupError:
-                                pass
-                            try:
-                                process.wait(timeout=30)
-                            except subprocess.TimeoutExpired:
-                                os.killpg(process.pid, signal.SIGKILL)
-                                process.wait()
-                        with self.process_lock:
-                            self.processes.discard(process)
+                with log.open('x', encoding='utf-8') as stream:
+                    write(attempt / 'admitted.json', {'invocation': invocation,
+                        'name': name, 'inputs': inputs, 'log': str(log),
+                        'timing_anchor': self.timing.anchor()})
+                    try:
+                        with stage_scratch(str(self.out / 'scratch')), self.external.stage(stream):
+                            stage_module(script_path).main(effective[2:], emit=emit)
+                    except SystemExit as exc:
+                        if exc.code not in (0, None):
+                            traceback.print_exc(file=stream)
+                            raise RuntimeError(f'{name} failed ({exc.code}); inspect {log}') from exc
+                    except BaseException:
+                        traceback.print_exc(file=stream)
+                        raise
+                    if pin(script_path) != invocation['code']:
+                        raise ValueError('stage entrypoint changed during execution: ' + script)
+                self.checkpoints.complete(name, invocation, outputs, inputs, log, self.timing.anchor())
         finally:
             if name == 'physical' and measurement and 'end_monotonic_seconds' in measurement:
                 self.record_physical_invocation(measurement, prior_physical)
@@ -396,13 +426,7 @@ class Pipeline:
         self.run_lock.close()
 
     def cancel(self):
-        self.cancelled.set()
-        with self.process_lock:
-            for process in self.processes:
-                try:
-                    os.killpg(process.pid, signal.SIGTERM)
-                except ProcessLookupError:
-                    pass
+        self.external.cancel()
 
     def flags(self):
         return {'allow_unverified_snapshot': True, 'allow_draft_snapshot': True}
@@ -424,7 +448,7 @@ class Pipeline:
                **{key: pin(self.sources[source]) for key, source in
                   [('land_config', 'land_config'), ('water_config', 'water_config'),
                    ('source_manifest', 'raw_manifest')]}}
-        self.command('physical', 'physical', 'v7-raw-mask/build_physical.py',
+        self.stage('physical', 'physical', 'v7-raw-mask/build_physical.py',
                      self.document('physical', cfg), self.out / 'physical',
                      _outputs=[self.out / 'physical'],
                      _resume_marker=self.out / 'physical/pipeline-identity.json')
@@ -443,7 +467,7 @@ class Pipeline:
                    'controls': {'minimum_free_bytes': self.cfg['land_controls']['minimum_free_bytes']}}
             component_request = self.document('components', cfg)
         components = self.out / 'components'
-        self.command('mainland', 'components',
+        self.stage('mainland', 'components',
                      'v7-recovery/land/fresh-components-20261104/build_components.py',
                      component_request, self.out / 'work' / 'components', components,
                      _outputs=[components], _restart=[self.out / 'work/components'])
@@ -457,18 +481,18 @@ class Pipeline:
                 'seed_controls': self.cfg.get('seed_controls', {'strip_rows': 64})})
         work = self.out / 'work' / 'stage2-provisional-only'
         stageout = self.out / 'stage2-provisional-only'
-        self.command('mainland', 'stage2', STAGE2 + '/orchestrate_stage2.py',
+        self.stage('mainland', 'stage2', STAGE2 + '/orchestrate_stage2.py',
                      outer, work, stageout, provisional_only=True,
                      _outputs=[stageout, work], _restart=[work],
                      _resume_marker=work / 'derived/manifest.json')
         prepared = self.out / 'regional-inputs'
         land = self.out / 'land'
-        self.command('mainland', 'prepare-regional', REGIONAL + '/prepare_fresh_handoff.py',
+        self.stage('mainland', 'prepare-regional', REGIONAL + '/prepare_fresh_handoff.py',
                      template=self.sources['regional_template'],
                      template_sha256=sha(self.sources['regional_template']),
                      outer=outer, work=work, stage2_output=stageout,
                      destination=prepared, regional_output=land, _outputs=[prepared])
-        self.command('mainland', 'regional', REGIONAL + '/apply_selected_mixed.py',
+        self.stage('mainland', 'regional', REGIONAL + '/apply_selected_mixed.py',
                      prepared / 'config.json', _outputs=[land])
         return land
 
@@ -523,7 +547,7 @@ class Pipeline:
 
     def extract_basins(self, snapshot):
         extraction = self.out / 'extractions'
-        self.command('water', 'extract-basins', REPLAY + '/extract_seavox_features.py',
+        self.stage('water', 'extract-basins', REPLAY + '/extract_seavox_features.py',
                      archive=self.sources['seavox_archive'], input_root=self.root,
                      **self.pinned_options('policy', snapshot), out=extraction,
                      work_root=self.out / 'scratch', **self.flags())
@@ -537,7 +561,7 @@ class Pipeline:
         # Keep the independently callable single-basin path for targeted work.
         # Full runs extract and checkpoint the entire pinned selection once.
         if extraction_root is None:
-            self.command('water', 'extract-' + ident, REPLAY + '/extract_seavox_feature.py',
+            self.stage('water', 'extract-' + ident, REPLAY + '/extract_seavox_feature.py',
                          archive=self.sources['seavox_archive'], input_root=self.root,
                          policy=snapshot, policy_sha256=sha(snapshot), decision_id=ident,
                          out=extraction, **self.flags())
@@ -546,7 +570,7 @@ class Pipeline:
                    **self.pinned_options('runs', physical / 'runs.u32le'),
                    **self.pinned_options('land_rows', land / 'rows.u32le'),
                    **self.pinned_options('land_runs', land / 'runs.u32le')}
-        self.command('water', 'basin-' + ident, REPLAY + '/build_seavox_basin.py',
+        self.stage('water', 'basin-' + ident, REPLAY + '/build_seavox_basin.py',
                      input_root=self.root, geometry=extraction / 'source.geojson',
                      archive=self.sources['seavox_archive'],
                      extraction_manifest=extraction / 'manifest.json',
@@ -554,7 +578,7 @@ class Pipeline:
                      policy=snapshot, policy_sha256=sha(snapshot), decision_id=ident,
                      shore_pad_degrees=self.cfg.get('shore_pad_degrees', 8),
                      research_shore_method=SHORE, out=out, **options, **self.flags())
-        self.command('water', 'verify-basin-' + ident, REPLAY + '/verify_basin_coverage.py',
+        self.stage('water', 'verify-basin-' + ident, REPLAY + '/verify_basin_coverage.py',
                      **self.pinned_options('manifest', out / 'manifest.json'),
                      physical_rows=physical / 'rows.u32le', physical_runs=physical / 'runs.u32le',
                      **self.pinned_options('policy', snapshot), allow_draft_snapshot=True)
@@ -566,7 +590,7 @@ class Pipeline:
         workers = self.cfg.get('coastal_workers')
         if workers is not None and (type(workers) is not int or workers < 1):
             raise ValueError('coastal_workers must be a positive integer')
-        self.command('water', 'coast', REPLAY + '/batch_coastal_tiles.py',
+        self.stage('water', 'coast', REPLAY + '/batch_coastal_tiles.py',
                      **self.pinned_options('snapshot', snapshot),
                      **self.streams('physical', physical), **self.streams('land', land),
                      input_root=self.root, **self.pinned_options('plan', self.sources['coastal_plan']),
@@ -579,7 +603,7 @@ class Pipeline:
                 {'manifest_path': str(out / f"tile-{item['tile']:04d}" / 'manifest.json'),
                  'manifest_sha256': item['manifest_sha256']} for item in batch['tiles']]})
         assembled = self.out / 'coast-manifest.json'
-        self.command('water', 'assemble-coast', REPLAY + '/assemble_coastal_tiles.py',
+        self.stage('water', 'assemble-coast', REPLAY + '/assemble_coastal_tiles.py',
                      **self.pinned_options('snapshot', snapshot), input_root=self.root,
                      tile_list=tile_list, out=assembled, allow_unverified_snapshot=True,
                      allow_draft=True, allow_selected_research_policy=True)
@@ -611,17 +635,17 @@ class Pipeline:
                    'coastal_band': coast, 'basins': basins}
             prefill_inputs = self.document('prefill-inputs', cfg)
         plan = self.out / 'prefill-plan.json'
-        self.command('water', 'prefill-plan', REPLAY + '/build_prefill_plan.py',
+        self.stage('water', 'prefill-plan', REPLAY + '/build_prefill_plan.py',
                      input_root=self.root, inputs=prefill_inputs,
                      **self.pinned_options('policy', snapshot), out=plan,
                      allow_research_shore=True, **self.flags())
         prefill = self.out / 'prefill'
-        self.command('water', 'prefill', REPLAY + '/build_prefill.py',
+        self.stage('water', 'prefill', REPLAY + '/build_prefill.py',
                      plan=plan, input_root=self.root, out=prefill,
                      allow_research_shore=True, **self.flags())
         ocean = self.run_ocean(physical, prefill, plan, snapshot, 'ocean')
         closed = self.out / 'closed'
-        self.command('water', 'closed', REPLAY + '/build_closed_water.py',
+        self.stage('water', 'closed', REPLAY + '/build_closed_water.py',
                      **self.pinned_options('snapshot', snapshot),
                      **self.streams('physical', physical), **self.streams('land', land),
                      **self.pinned_options('prefill_rows', prefill / 'prefill-rows.u32le'),
@@ -642,10 +666,10 @@ class Pipeline:
                 'closed': closed / 'manifest.json', 'partition': ocean / 'partition/manifest.json'}.items()}
             specpath = self.document('final-spec', spec)
         final_plan = self.out / 'final-plan.json'
-        self.command('water', 'prepare-final', REPLAY + '/prepare_final_plan.py',
+        self.stage('water', 'prepare-final', REPLAY + '/prepare_final_plan.py',
                      spec=specpath, spec_sha256=sha(specpath), out=final_plan)
         final = self.out / ('baseline-final' if 'ocean_snapshot' in self.sources else 'final')
-        self.command('water', 'compose-final', REPLAY + '/compose_direct.py',
+        self.stage('water', 'compose-final', REPLAY + '/compose_direct.py',
                      plan=final_plan, input_root=self.root, out=final,
                      allow_research_shore=True, **self.flags())
         if 'ocean_snapshot' in self.sources:
@@ -654,7 +678,7 @@ class Pipeline:
 
     def run_ocean(self, physical, prefill, plan, snapshot, name, baseline_snapshot=None):
         candidate = self.out / (name + '-candidate.json')
-        self.command('water', name + '-candidate', OCEAN + '/make_candidate_build.py',
+        self.stage('water', name + '-candidate', OCEAN + '/make_candidate_build.py',
                      **self.pinned_options('snapshot', snapshot), physical_dir=physical,
                      physical_report_sha256=sha(physical / 'report.json'), out=candidate,
                      allow_draft_snapshot=True)
@@ -663,11 +687,11 @@ class Pipeline:
                        **self.pinned_options('candidate_build', candidate),
                        out=self.out / name, **self.flags())
         if baseline_snapshot is None:
-            self.command('water', name, OCEAN + '/ocean_fill_runner.py',
+            self.stage('water', name, OCEAN + '/ocean_fill_runner.py',
                          **self.pinned_options('snapshot', snapshot), **options)
         else:
             options.pop('allow_unverified_snapshot')
-            self.command('water', name, OCEAN + '/split_lineage_ocean.py',
+            self.stage('water', name, OCEAN + '/split_lineage_ocean.py',
                          **self.pinned_options('ocean_snapshot', snapshot),
                          **self.pinned_options('prefill_snapshot', baseline_snapshot),
                          allow_unverified_snapshots=True, **options)
@@ -694,7 +718,7 @@ class Pipeline:
             config = self.document('split-final', {'schema': 'worldatlas-split-ocean-final-config-v1',
                                                    'inputs': {key: pin(path) for key, path in paths.items()}})
         final = self.out / 'final'
-        self.command('water', 'compose-split-final', OCEAN + '/split_lineage_compose.py',
+        self.stage('water', 'compose-split-final', OCEAN + '/split_lineage_compose.py',
                      config=config, out=final, allow_unverified=True)
         return final
 
@@ -708,7 +732,7 @@ class Pipeline:
             raise ValueError('reference must use rows.u32le and runs.u32le in one directory')
         grid = read(physical / 'report.json')['grid']
         report = self.out / 'comparison.json'
-        self.command('verification', 'compare', REPLAY + '/compare_grids.py',
+        self.stage('verification', 'compare', REPLAY + '/compare_grids.py',
                      candidate=final, reference=rows.parent, width=grid['width'], height=grid['height'],
                      reference_rows_sha256=sha(rows), reference_runs_sha256=sha(runs), out=report)
         self.timing.mark_complete('verification')

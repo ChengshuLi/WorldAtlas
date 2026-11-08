@@ -1,7 +1,12 @@
 #!/usr/bin/env /usr/bin/python3
 """Fresh accepted-physical connected components, guarded and data-only."""
-import argparse,hashlib,json,os,shutil,subprocess,sys,time,uuid
+import argparse,hashlib,json,os,shutil,sys,time,uuid
 from pathlib import Path
+
+_SCRIPTS = Path(__file__).resolve().parents[3]
+if str(_SCRIPTS) not in sys.path:
+    sys.path.append(str(_SCRIPTS))
+import stage_external
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/'stage2-geodesic-20261104'))
 import verify_inputs,atomic_move
@@ -55,12 +60,12 @@ def run(config_path,work_dir,output_dir):
  output_upper_bytes=require_disk_headroom(work.parent,paths['physical_runs'],paths['physical_rows'],c['minimum_free_bytes'])
  work.mkdir(mode=0o700);sync_dir(work.parent);stage=work/'result.partial';stage.mkdir(mode=0o700);src=paths['component_source'];binary=stage/'component-builder';data=verify_inputs.bounded_bytes(paths['component_source'],1<<20,guard);need(hashlib.sha256(data).hexdigest()==REVIEWED_SOURCE_SHA256,'source changed')
  driver_sha=verify_inputs.sha_file(HERE/'build_components.py',guard);support={n:verify_inputs.sha_file(HERE.parent/'stage2-geodesic-20261104'/n,guard) for n in ('checkpoints.py','verify_inputs.py','atomic_move.py','write_land_stream.py')};started=time.monotonic()
- compiler=subprocess.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',str(src),'-o',str(binary)],check=True,capture_output=True,text=True);guard();need(verify_inputs.sha_file(src,guard)==REVIEWED_SOURCE_SHA256 and verify_inputs.sha_file(paths['component_source'],guard)==REVIEWED_SOURCE_SHA256,'compiler source changed')
- proc=subprocess.run([str(binary),str(g['width']),str(g['height']),str(paths['physical_rows']),str(paths['physical_runs']),str(stage/'rows.u32le'),str(stage/'runs.u32le')],check=True,capture_output=True,text=True);guard();output=proc.stdout.strip();need(output and len(output)<512,'invalid builder output')
+ compiler=stage_external.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',str(src),'-o',str(binary)],check=True,capture_output=True,text=True);guard();need(verify_inputs.sha_file(src,guard)==REVIEWED_SOURCE_SHA256 and verify_inputs.sha_file(paths['component_source'],guard)==REVIEWED_SOURCE_SHA256,'compiler source changed')
+ proc=stage_external.run([str(binary),str(g['width']),str(g['height']),str(paths['physical_rows']),str(paths['physical_runs']),str(stage/'rows.u32le'),str(stage/'runs.u32le')],check=True,capture_output=True,text=True);guard();output=proc.stdout.strip();need(output and len(output)<512,'invalid builder output')
  land=coverage(paths['physical_rows'],paths['physical_runs'],stage/'rows.u32le',stage/'runs.u32le',g['width'],g['height'],guard);need(land==physical.get('candidate_dry_cells'),'physical land count mismatch')
  for n in ('rows.u32le','runs.u32le','component-builder'):
   fd=os.open(stage/n,os.O_RDONLY);os.fsync(fd);os.close(fd)
- rsha=verify_inputs.sha_file(stage/'rows.u32le',guard);ssha=verify_inputs.sha_file(stage/'runs.u32le',guard);bsha=verify_inputs.sha_file(binary,guard);version=subprocess.run(['g++','--version'],check=True,capture_output=True,text=True).stdout.splitlines()[0]
+ rsha=verify_inputs.sha_file(stage/'rows.u32le',guard);ssha=verify_inputs.sha_file(stage/'runs.u32le',guard);bsha=verify_inputs.sha_file(binary,guard);version=stage_external.run(['g++','--version'],check=True,capture_output=True,text=True).stdout.splitlines()[0]
  manifest={'schema':'single-generation-component-manifest-v1','status':'complete-research','grid':g,'component_source_sha256':REVIEWED_SOURCE_SHA256,'pins':{'physical_rows':cfg['inputs']['physical_rows'],'physical_runs':cfg['inputs']['physical_runs'],'component_rows':{'path':str(out/'rows.u32le'),'sha256':rsha},'component_runs':{'path':str(out/'runs.u32le'),'sha256':ssha}},'physical_report':cfg['inputs']['physical_report'],'builder_binary':{'path':str(out/'component-builder'),'sha256':bsha},'builder_binary_sha256':bsha,'compiler_version':version,'builder_output':output}
  with open(stage/'manifest.json','x') as f:json.dump(manifest,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
  report={'schema':'fresh-physical-components-report-v1','status':'research-awaiting-review','publishable':False,'config_sha256':hashlib.sha256(raw).hexdigest(),'driver_sha256':driver_sha,'support_sha256':support,'grid':g,'input_sha256':{k:v['sha256'] for k,v in cfg['inputs'].items()},'component_rows_sha256':rsha,'component_runs_sha256':ssha,'builder_binary_sha256':bsha,'manifest_sha256':verify_inputs.sha_file(stage/'manifest.json',guard),'land_cells':land,'builder_output':output,'output_upper_bound_bytes':output_upper_bytes,'elapsed_seconds':time.monotonic()-started,'limitations':['Physical component coverage was checked against the accepted mask; the mask source was not rerasterized.','Root IDs are ephemeral for this exact build; no continent assignment is made.','Memory use is not capped by this runner.']}
@@ -70,7 +75,11 @@ def run(config_path,work_dir,output_dir):
  try:sync_dir(out.parent)
  except OSError as exc:raise RuntimeError('component output may exist; durability uncertain, inspect before retry') from exc
  return report
-if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('config');p.add_argument('work');p.add_argument('output');a=p.parse_args()
- try:run(a.config,a.work,a.output)
- except Exception as exc:print('error: '+str(exc),file=sys.stderr);raise SystemExit(1)
+def main(argv=None, *, emit=print):
+ p=argparse.ArgumentParser();p.add_argument('config');p.add_argument('work');p.add_argument('output');a=p.parse_args(argv)
+ run(a.config,a.work,a.output)
+
+
+if __name__ == '__main__':
+    try: main()
+    except Exception as exc: print('error: '+str(exc),file=sys.stderr); raise SystemExit(1)

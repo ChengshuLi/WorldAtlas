@@ -12,11 +12,11 @@ import json
 import time
 from pathlib import Path, PurePosixPath
 import re
-import subprocess
 import sys
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import stage_external
 from exclusive_outputs import create_directory_exclusive, write_json_exclusive, create_text_exclusive, validate_fresh_output
 from decision_snapshot import read_snapshot, find_basin, find_source
 from seavox_properties import feature_id as read_feature_id
@@ -63,7 +63,7 @@ def extract_features(archive, feature_ids, *, dataset=None):
     cmd = ['ogr2ogr', '-f', 'GeoJSON', '/vsistdout/', source,
            '-where', where, '-t_srs', 'EPSG:4326',
            '-lco', 'COORDINATE_PRECISION=15']
-    data = json.loads(subprocess.run(cmd, check=True, capture_output=True).stdout)
+    data = json.loads(stage_external.run(cmd, check=True, capture_output=True).stdout)
     features = data.get('features', []) if data.get('type') == 'FeatureCollection' else []
     result = {}
     for feature in features:
@@ -240,7 +240,7 @@ def write_extraction(out, feature, snapshot, policy_sha, basin, source, gdal_ver
             'feature_file':feature_path.name, 'feature_file_sha256':digest(feature_path), 'gdal_version':gdal_version}
 
 
-def main():
+def main(argv=None, *, emit=print):
     processing_started=time.perf_counter()
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--archive', type=Path, required=True)
@@ -251,7 +251,7 @@ def main():
     p.add_argument('--out', type=Path, help='fresh directory, required in build mode')
     p.add_argument('--allow-unverified-snapshot', action='store_true', help='test only; snapshot acceptance is not authenticated here')
     p.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow explicitly draft Neon evidence')
-    args = p.parse_args()
+    args = p.parse_args(argv)
     root = args.input_root.resolve(); archive = args.archive.resolve()
     if not root.is_dir() or not archive.is_relative_to(root):
         raise ValueError('archive must be inside an existing input root')
@@ -260,7 +260,7 @@ def main():
             raise ValueError('inspect mode needs only archive hash and feature ID')
         validate_archive(archive, args.archive_sha256)
         feature = extract_feature(archive, args.inspect_feature)
-        print(json.dumps({'status':'unbound_candidate', 'archive_sha256':args.archive_sha256,
+        emit(json.dumps({'status':'unbound_candidate', 'archive_sha256':args.archive_sha256,
                           'source_feature_id':str(args.inspect_feature), 'geometry_sha256':canonical_hash(feature['geometry'])}))
         return
     if not args.allow_unverified_snapshot:
@@ -280,13 +280,13 @@ def main():
     geometry_hash = canonical_hash(feature['geometry'])
     if geometry_hash != basin['geometry_sha256']:
         raise ValueError('archive feature geometry does not match the selected decision: ' + geometry_hash)
-    gdal_version = subprocess.run(['ogr2ogr', '--version'], check=True, capture_output=True, text=True).stdout.strip()
+    gdal_version = stage_external.run(['ogr2ogr', '--version'], check=True, capture_output=True, text=True).stdout.strip()
     manifest = write_extraction(out, feature, snapshot, args.policy_sha256, basin, source, gdal_version)
     if digest(archive)!=source['sha256'] or digest(policy)!=args.policy_sha256:
         raise ValueError('source archive or policy changed during extraction')
     manifest['processing_elapsed_seconds']=time.perf_counter()-processing_started
     write_json_exclusive(out/'manifest.json', manifest, indent=2)
-    print(json.dumps(manifest))
+    emit(json.dumps(manifest))
 
 
 if __name__ == '__main__':

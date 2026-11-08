@@ -7,19 +7,21 @@ Resume copies verified completed tiles into a fresh batch; interrupted tiles
 are regenerated, and preserved source directories are never changed.
 """
 from __future__ import annotations
-import argparse,contextlib,ctypes,fcntl,hashlib,json,math,os,signal,stat,uuid
-import multiprocessing
+import argparse,contextlib,fcntl,hashlib,json,math,os,stat,uuid
 import time
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
+from contextvars import copy_context
 from pathlib import Path
 import numpy as np
 import build_coastal_tile as tile
 import decision_snapshot,exclusive_outputs,pinned_coastal_metadata,local_water_overlay,direct_lineage,build_prefill_plan,selected_mixed_lineage
 from pinned_coastal_metadata import pinned_bytes,pinned_json
+from stage_external import check_cancelled
 from exclusive_outputs import create_directory_exclusive,create_binary_exclusive,open_checkpoint_readonly
 
-F_SEALS=fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL
-_WORKER_STATE=None
+F_SEALS = (fcntl.F_SEAL_WRITE | fcntl.F_SEAL_GROW | fcntl.F_SEAL_SHRINK | fcntl.F_SEAL_SEAL
+           if hasattr(fcntl, 'F_ADD_SEALS') else None)
+
 
 
 def available_workers():
@@ -27,22 +29,10 @@ def available_workers():
  return len(os.sched_getaffinity(0)) if hasattr(os,'sched_getaffinity') else (os.cpu_count() or 1)
 
 
-def initialize_worker(state,parent_pid):
- # A killed batch must not leave orphan writers holding its inherited run
- # lease. Linux supplies worker lifetime cleanup directly, without a monitor
- # process, resource watchdog, or memory-dependent behavior.
- signal.signal(signal.SIGTERM,signal.SIG_DFL)
- libc=ctypes.CDLL(None,use_errno=True)
- if libc.prctl(1,signal.SIGTERM,0,0,0)!=0:raise OSError(ctypes.get_errno(),'cannot bind coastal worker lifetime')
- if os.getppid()!=parent_pid:raise InterruptedError('coastal parent exited during worker initialization')
- global _WORKER_STATE
- _WORKER_STATE=state
-
-
-def generate_tile(job):
- """One independent tile over inherited immutable grids and shore geometry."""
- index,entry=job
- snapshot,snapshot_sha,physical,land,root,width,height,inputs,chunk,shore_index=_WORKER_STATE
+def generate_tile(state, index, entry):
+ """Generate one tile using read-only grid and shoreline arrays."""
+ check_cancelled()
+ snapshot,snapshot_sha,physical,land,root,width,height,inputs,chunk,shore_index=state
  return tile.run(snapshot,snapshot_sha,physical,land,root/f'tile-{index:04d}',width,height,
                  entry['core'],entry['latitude_pad_degrees'],inputs,chunk=chunk,
                  allow_selected_research=True,longitude_pad_degrees=entry['longitude_pad_degrees'],
@@ -57,7 +47,7 @@ def sha(path):
 def sealed_copy(path,expected):
  """Return a sealed memfd holding precisely the SHA-pinned input bytes."""
  if not isinstance(expected,str) or len(expected)!=64 or any(x not in '0123456789abcdef' for x in expected):raise ValueError('invalid SHA-256')
- if not hasattr(os,'memfd_create') or not hasattr(os,'MFD_ALLOW_SEALING'):raise RuntimeError('Linux sealing-enabled memfd is required')
+ if F_SEALS is None or not hasattr(os,'memfd_create') or not hasattr(os,'MFD_ALLOW_SEALING'):raise RuntimeError('Linux sealing-enabled memfd is required')
  source=os.open(path,os.O_RDONLY|getattr(os,'O_NOFOLLOW',0));target=None
  try:
   st=os.fstat(source)
@@ -361,15 +351,13 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
   publish_record(root/'batch-start.json',start)
   jobs={}
   if workers>1 and len(completed)<len(boxes):
-   # Linux fork shares the sealed RLE mappings and complete shore span arrays
-   # by copy-on-write. Do not pickle/copy that global geometry for each tile.
    state=(snapshot,snapshot_sha,physical,land,root,width,height,inputs,plan['chunk'],shore_index)
-   pool=stack.enter_context(ProcessPoolExecutor(max_workers=workers,mp_context=multiprocessing.get_context('fork'),
-                                                initializer=initialize_worker,initargs=(state,os.getpid())))
-   jobs={i:pool.submit(generate_tile,(i,entry)) for i,entry in enumerate(boxes) if i not in completed}
+   pool=stack.enter_context(ThreadPoolExecutor(max_workers=workers))
+   jobs={i:pool.submit(copy_context().run,generate_tile,state,i,entry) for i,entry in enumerate(boxes) if i not in completed}
    # On failure cancel jobs not yet started before joining the worker pool.
    stack.callback(lambda:[job.cancel() for job in jobs.values()])
   for i,entry in enumerate(boxes):
+   check_cancelled()
    box=entry['core'];dest=root/f'tile-{i:04d}'
    if i in completed:
     source,checkpoint,manifest=completed[i];create_directory_exclusive(dest)
@@ -401,12 +389,12 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
 
 CODE_SHA=sha(Path(__file__))
 
-def main():
+def main(argv=None, *, emit=print):
  processing_started=time.perf_counter()
  ap=argparse.ArgumentParser(description=__doc__)
  for k in ('snapshot','snapshot-sha256','physical-rows','physical-rows-sha256','physical-runs','physical-runs-sha256','physical-report','physical-report-sha256','land-rows','land-rows-sha256','land-runs','land-runs-sha256','land-report','land-report-sha256','input-root','plan','plan-sha256','out'):ap.add_argument('--'+k,required=True)
  ap.add_argument('--workers',type=int,help='parallel independent tiles; defaults to available CPU count')
- ap.add_argument('--resume-from',action='append',help='read verified per-tile checkpoints from a preserved batch into a new --out; repeat for earlier attempts');ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true');a=ap.parse_args()
+ ap.add_argument('--resume-from',action='append',help='read verified per-tile checkpoints from a preserved batch into a new --out; repeat for earlier attempts');ap.add_argument('--allow-unverified-snapshot',action='store_true');ap.add_argument('--allow-draft',action='store_true');ap.add_argument('--allow-selected-research-policy',action='store_true');a=ap.parse_args(argv)
  if not(a.allow_unverified_snapshot and a.allow_draft and a.allow_selected_research_policy):raise ValueError('all explicit research opt-ins are required')
  root=Path(a.input_root).resolve();out=Path(a.out).resolve();files={k:Path(getattr(a,k)).resolve() for k in ('snapshot','physical_rows','physical_runs','physical_report','land_rows','land_runs','land_report','plan')};expected={k:getattr(a,k+'_sha256') for k in files}
  if not root.is_dir() or any(not p.is_relative_to(root) for p in files.values()) or any(out==p or p.is_relative_to(out) for p in files.values()):raise ValueError('inputs must be inside input root and outside output')
@@ -419,6 +407,6 @@ def main():
   direct_lineage.validate_direct_land(files['land_report'],expected['land_report'],physical,land,local_water_overlay.land_snapshot_hash(snapshot,expected['snapshot']),snapshot['decision_revision'],root,expected['physical_report'])
  grid={k:files[k] for k in ('physical_rows','physical_runs','land_rows','land_runs')};pins={k:expected[k] for k in grid}
  result=run_batch(snapshot,expected['snapshot'],grid,pins,plan,expected['plan'],out,width,height,check_metadata,metadata_pins={k:expected[k] for k in ('physical_report','land_report')},processing_started=processing_started,resume_from=a.resume_from,workers=a.workers)
- print(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'output':str(out)}))
+ emit(json.dumps({'status':result['status'],'tiles':len(result['tiles']),'output':str(out)}))
 if __name__=='__main__':main()
 

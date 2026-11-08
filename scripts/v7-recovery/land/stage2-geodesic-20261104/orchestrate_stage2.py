@@ -5,8 +5,13 @@ All seed, resolution and hint products are generated from the pinned inputs in
 this invocation. No historical assignment or checkpoint is accepted. Outputs
 remain research-only.
 """
-import argparse,hashlib,importlib.util,json,os,subprocess,sys,time
+import argparse,hashlib,importlib.util,json,os,runpy,sys,time
 from pathlib import Path
+
+_SCRIPTS = Path(__file__).resolve().parents[3]
+if str(_SCRIPTS) not in sys.path:
+    sys.path.append(str(_SCRIPTS))
+import stage_external
 import build_seed_tiles,build_stage2,checkpoints,contracts,verify_inputs
 import representatives,verify_physical_lineage
 
@@ -22,6 +27,15 @@ HINT_NAMES=('hints.py','run_diagnostic.py')
 REVIEWED_SEED_FREEZE={'seed_producer.py': '5a1eb9d9ba14ed7a7ecd2dd9d9f0deba00262f7e9b26b52c56e745690d248306', 'export_adapter.py': '2ade004c620acccb52ab70d1702f08a760c91f3a78328c97f5610111cbd0f598', 'seed_rules.py': '0e98f77341b8f297b434d46250f2e8e9f615e6a3764cad176fe3cdf40c52f342', 'region_client.py': '9f5c51269abe890ba2db71c8ea91c600f002ea2f1fb6331739c0d84cb5dbc795', 'region_worker.py': 'c4db765b5c2d89ccd715e5c659dc46b7355a4e23843fb4c146d7237f66539fbe', 'regions.py': '7a4e47a3c8e8bd21c72a8aa5a318e043df784e642943c0fe00c229625b581f22', 'closure_client.py': '9e5439bdfaf4228ca01a4e3d533c8436c4afc6e5e0a29e65fd0c28fdd3c80dbf'}
 SEED_FREEZE_CURRENT=False  # New direct-run producer implementation needs a new independent freeze review.
 SELECTED_POLICY_CROSSWALK_READY=True
+
+def load_worker(path):
+ # These legacy scripts use sibling imports. Stage 2 runs before the parallel
+ # water stages, so their import path can be scoped to the module load.
+ sys.path.insert(0,str(path.parent))
+ try:
+  return runpy.run_path(str(path))
+ finally:
+  sys.path.remove(str(path.parent))
 
 def need(v,msg):
  if not v:raise ValueError(msg)
@@ -91,14 +105,17 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  for name in ('resolution','requests','seed-work-parent','tiles-parent','reps','hints-parent','core-requests','derived','lineage'):(work/name).mkdir(mode=0o700)
  write_json(work/'identity.json',identity);write_json(work/'lineage'/'report.json',lineage)
  rr=paths['resolution_request'];rout=work/'resolution'/'report.json'
- subprocess.run([sys.executable,str(HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py'),str(rr),str(rout)]+(['--allow-local-provisional'] if provisional_only else []),check=True)
+ witness=load_worker(HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py')['main']
+ witness([str(rr),str(rout)]+(['--allow-local-provisional'] if provisional_only else []))
  resolution=json.loads(build_stage2.read_bytes(rout,guard));snapshot=json.loads(build_stage2.read_bytes(paths['decision_snapshot'],guard));need(snapshot.get('source')!='local-derived-from-neon-export' or (provisional_only and 'prior_physical_report' in paths),'local candidate requires provisional prior report');rev=snapshot['decision_revision']['id'];entity=snapshot['entity_revision']['id'];metric,categories,_=contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'],allow_local=provisional_only)
  rp=pin(rout,guard);si={}
  for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel')):si[dst]=cfg['inputs'][src]
  if 'prior_physical_report' in cfg['inputs']:si['prior_physical_report']=cfg['inputs']['prior_physical_report']
  seedrequest=work/'requests'/'seed.json';seedwork=work/'seed-work-parent'/'build';seedout=work/'seed-work-parent'/'output'
  sr={'schema':'worldatlas-stage2-seed-request-v1','grid':cfg['grid'],'inputs':si,'controls':{'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}};si['resolution']=rp;sr['inputs']=si;write_json(seedrequest,sr)
- subprocess.run([sys.executable,str(HERE/'seed-producer'/'seed_worker.py'),str(seedrequest),str(seedwork),str(seedout)]+(['--allow-local-provisional'] if provisional_only else []),check=True);seed=json.loads(build_stage2.read_bytes(seedout/'report.json',guard))
+ seed_worker=load_worker(HERE/'seed-producer'/'seed_worker.py')['run']
+ seed_worker(seedrequest,seedwork,seedout,allow_local=provisional_only)
+ seed=json.loads(build_stage2.read_bytes(seedout/'report.json',guard))
  srows=pin(seedout/'rows.u32le',guard);sruns=pin(seedout/'runs.u32le',guard)
  # Verify selected rules, source/region traces and tie policy before using seed.
  groups={g['group_id']:g for g in resolution['groups']};entity_codes={b['entity_id']:b['code'] for b in snapshot['category_bindings'] if b['physical_class']=='land'}
@@ -112,9 +129,9 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  # core repeats this verification and validates representative cell membership.
 
  source=HERE/'verify_seed_index.cpp';source_data=build_stage2.read_bytes(source,guard);need(hashlib.sha256(source_data).hexdigest()==code['verify_seed_index.cpp'],'verifier source changed')
- binary=work/'requests'/'tile-verifier';subprocess.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(source),'-lcrypto','-o',str(binary)],check=True)
+ binary=work/'requests'/'tile-verifier';stage_external.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(source),'-lcrypto','-o',str(binary)],check=True)
  need(verify_inputs.sha_file(source,guard)==code['verify_seed_index.cpp'],'verifier source changed during compilation')
- guard();check=subprocess.run([str(binary),srows['path'],sruns['path'],str(tileout),str(g['width']),str(g['height']),'1024'],capture_output=True,text=True,check=True)
+ guard();check=stage_external.run([str(binary),srows['path'],sruns['path'],str(tileout),str(g['width']),str(g['height']),'1024'],capture_output=True,text=True,check=True)
  need(json.loads(check.stdout).get('status')=='verified','fresh seed/tile verification failed')
  import numpy as np
 
@@ -123,7 +140,8 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  hi={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hi.update({'seed_rows':srows,'seed_runs':sruns,'resolution_report':rp,'representatives':pin(reps,guard),'tile_manifest':pin(tileout/'manifest.txt',guard)})
  hr={'schema':'source-only-hints-diagnostic-request-v1','grid':g,'codes':sorted(categories),'inputs':hi,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']}
  hreq=work/'requests'/'hints.json';write_json(hreq,hr);hout=work/'hints-parent'/'hints'
- subprocess.run([sys.executable,str(HERE/'hint-producer'/'run_diagnostic.py'),str(hreq),str(hout)]+(['--allow-local-provisional'] if provisional_only else []),check=True)
+ hint_worker=load_worker(HERE/'hint-producer'/'run_diagnostic.py')['run']
+ hint_worker(str(hreq),str(hout),allow_local=provisional_only)
  artifacts={'resolution_report':rp,'seed_rows':srows,'seed_runs':sruns,'seed_report':pin(seedout/'report.json',guard),'tile_manifest':pin(tileout/'manifest.txt',guard),'representatives':pin(reps,guard),'hint_roots':pin(hout/'roots.u32le',guard),'hint_codes':pin(hout/'hints.u8',guard),'hint_report':pin(hout/'report.json',guard)}
  for spec in cfg['inputs'].values():build_stage2.pin(spec,guard)
  need(build_stage2.read_bytes(cp,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
@@ -165,8 +183,11 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False
   need(not core_work.exists(),'core work exists without its config');write_json(cp,core)
  return build_stage2.build(cp,core_work,out,resume=resume and core_work.exists(),processing_started=processing_started,orchestration_resumed=resume)
 
-if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('config');p.add_argument('work');p.add_argument('output');p.add_argument('--resume',action='store_true');p.add_argument('--provisional-only',action='store_true',help='run only in distinct provisional paths; output cannot pass candidate validation');a=p.parse_args()
- try:
-  run(a.config,a.work,a.output,a.resume,a.provisional_only)
- except Exception as exc:print('error: '+str(exc),file=sys.stderr);raise SystemExit(1)
+def main(argv=None, *, emit=print):
+ p=argparse.ArgumentParser();p.add_argument('config');p.add_argument('work');p.add_argument('output');p.add_argument('--resume',action='store_true');p.add_argument('--provisional-only',action='store_true',help='run only in distinct provisional paths; output cannot pass candidate validation');a=p.parse_args(argv)
+ run(a.config,a.work,a.output,a.resume,a.provisional_only)
+
+
+if __name__ == '__main__':
+    try: main()
+    except Exception as exc: print('error: '+str(exc),file=sys.stderr); raise SystemExit(1)

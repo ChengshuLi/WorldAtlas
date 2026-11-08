@@ -381,7 +381,7 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
             'precedence':'As specified by the revisioned layer-precedence decision; undeclared overlaps fail.'}
 
 
-def main():
+def main(argv=None, *, emit=print):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--input-root', type=Path, required=True); ap.add_argument('--inputs', type=Path, required=True)
     ap.add_argument('--policy', type=Path, required=True); ap.add_argument('--policy-sha256', required=True)
@@ -390,7 +390,7 @@ def main():
     ap.add_argument('--allow-research-shore', action='store_true', help='research only: allow the unapproved WGS84 coastal land-cell-center method')
     ap.add_argument('--allow-historical-v6', action='store_true', help='historical replay only: permit the V6 land grid')
     ap.add_argument('--out', type=Path, required=True)
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
     if not args.allow_unverified_snapshot:
         raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
     root=args.input_root.resolve(); config_path=args.inputs.resolve(); policy_path=args.policy.resolve(); out=args.out.resolve()
@@ -401,7 +401,7 @@ def main():
     config=json.loads(config_path.read_text())
     plan=assemble(config,config_path,root,policy,policy_path,out,allow_draft=args.allow_draft_snapshot,allow_research_shore=args.allow_research_shore,allow_historical_v6=args.allow_historical_v6)
     write_json_exclusive(out,plan,indent=2)
-    print(json.dumps({'plan':str(out),'sha256':c.sha256(out),'layers':len(plan['water_layers'])}))
+    emit(json.dumps({'plan':str(out),'sha256':c.sha256(out),'layers':len(plan['water_layers'])}))
 
 
 if __name__ == '__main__':

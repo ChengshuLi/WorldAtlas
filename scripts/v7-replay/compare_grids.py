@@ -75,12 +75,12 @@ def compare(candidate,reference,width,height,reference_sha256,out):
     write_json_exclusive(out,report)
     return report
 
-def main():
+def main(argv=None, *, emit=print):
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('candidate','reference','reference-rows-sha256','reference-runs-sha256','out'):p.add_argument('--'+name,required=True)
-    p.add_argument('--width',type=int,required=True);p.add_argument('--height',type=int,required=True);a=p.parse_args()
+    p.add_argument('--width',type=int,required=True);p.add_argument('--height',type=int,required=True);a=p.parse_args(argv)
     report=compare(a.candidate,a.reference,a.width,a.height,dict(zip(NAMES,(a.reference_rows_sha256,a.reference_runs_sha256))),a.out)
-    print(f"{report['status']}: {report['changed_cells']} changed cells of {report['cells_compared']}")
+    emit(f"{report['status']}: {report['changed_cells']} changed cells of {report['cells_compared']}")
     if report['changed_cells']:raise SystemExit(1)
 
 if __name__=='__main__':main()

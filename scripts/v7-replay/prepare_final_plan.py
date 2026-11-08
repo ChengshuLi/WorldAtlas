@@ -41,6 +41,10 @@ def make(spec,out):
  try:os.fsync(fd)
  finally:os.close(fd)
  return result
-if __name__=='__main__':
+def main(argv=None, *, emit=print):
  import argparse
- p=argparse.ArgumentParser();p.add_argument('--spec',required=True);p.add_argument('--spec-sha256',required=True);p.add_argument('--out',required=True);a=p.parse_args();s=read(a.spec,a.spec_sha256);make(s,a.out);print('provisional final composition plan prepared')
+ p=argparse.ArgumentParser();p.add_argument('--spec',required=True);p.add_argument('--spec-sha256',required=True);p.add_argument('--out',required=True);a=p.parse_args(argv);s=read(a.spec,a.spec_sha256);make(s,a.out);emit('provisional final composition plan prepared')
+
+
+if __name__ == '__main__':
+    main()

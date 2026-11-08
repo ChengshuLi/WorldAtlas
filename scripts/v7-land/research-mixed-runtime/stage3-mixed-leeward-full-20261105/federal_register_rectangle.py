@@ -45,6 +45,10 @@ def extract_pdf_rectangle(path, expected_sha256, expected_size, expected_geometr
     """Hash-check a bounded PDF, extract its reviewed page/column and verify geometry."""
     import hashlib,json,subprocess,tempfile,os,fcntl,sys
     from pathlib import Path
+    scripts = str(Path(__file__).resolve().parents[3])
+    if scripts not in sys.path:
+        sys.path.append(scripts)
+    import stage_external
     if not isinstance(expected_sha256,str) or re.fullmatch(r'[0-9a-f]{64}',expected_sha256) is None or not isinstance(expected_geometry_sha256,str) or re.fullmatch(r'[0-9a-f]{64}',expected_geometry_sha256) is None:
         raise ValueError('invalid pinned hashes')
     if type(expected_size) is not int or not 1 <= expected_size <= 32*1024*1024 or type(page) is not int or not 1 <= page <= 10000:
@@ -71,7 +75,7 @@ def extract_pdf_rectangle(path, expected_sha256, expected_size, expected_geometr
         fcntl.fcntl(source.fileno(),add_seals,seals)
         if fcntl.fcntl(source.fileno(),get_seals)&seals != seals:raise ValueError('source could not be sealed')
         source.seek(0)
-        subprocess.run(args,check=True,stdin=source,stdout=output,stderr=subprocess.DEVNULL)
+        stage_external.run(args,check=True,stdin=source,stdout=output,stderr=subprocess.DEVNULL)
         if output.tell()>10_000_000:raise ValueError('extracted page too large')
         output.seek(0);text=output.read().decode('utf-8')
     geom=rectangle_from_text(text,heading,next_heading)

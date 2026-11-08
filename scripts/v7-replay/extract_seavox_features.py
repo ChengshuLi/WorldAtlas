@@ -11,13 +11,13 @@ import argparse
 import json
 from pathlib import Path
 import re
-import subprocess
 import sys
 import tempfile
 import time
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import stage_external
 from decision_snapshot import read_snapshot, find_source
 from exclusive_outputs import create_directory_exclusive, validate_fresh_output, write_json_exclusive
 from extract_seavox_feature import (canonical_hash, digest, extract_features,
@@ -87,7 +87,7 @@ def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow
         if actual != basin['geometry_sha256']:
             raise ValueError('archive feature geometry does not match the selected decision: ' + basin['id'] + ': ' + actual)
     phases['geometry_binding'] = time.perf_counter() - before
-    gdal_version = selection_index.get('gdal_version') or subprocess.run(
+    gdal_version = selection_index.get('gdal_version') or stage_external.run(
         ['ogr2ogr', '--version'], check=True, capture_output=True, text=True).stdout.strip()
     # Validate all selected geometries and both input pins before creating any
     # candidate files. The final recheck below detects later source mutation.
@@ -129,7 +129,7 @@ def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow
     return index
 
 
-def main():
+def main(argv=None, *, emit=print):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--archive', type=Path, required=True)
     p.add_argument('--input-root', type=Path, required=True)
@@ -140,8 +140,8 @@ def main():
     p.add_argument('--scan-reference', action='store_true', help='reference engine: scan features with the ogr2ogr attribute filter')
     p.add_argument('--allow-unverified-snapshot', action='store_true')
     p.add_argument('--allow-draft-snapshot', action='store_true')
-    args = p.parse_args()
-    print(json.dumps(run(args.archive, args.input_root, args.policy, args.policy_sha256, args.out,
+    args = p.parse_args(argv)
+    emit(json.dumps(run(args.archive, args.input_root, args.policy, args.policy_sha256, args.out,
                          allow_unverified=args.allow_unverified_snapshot, allow_draft=args.allow_draft_snapshot,
                          work_root=args.work_root, scan_reference=args.scan_reference)))
 

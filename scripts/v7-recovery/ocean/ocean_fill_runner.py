@@ -233,13 +233,13 @@ def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_
       'barrier_sha256':pins['source_cut_edges_sha256'],'layer_manifest_sha256':sha(out/'ocean-layer-manifest.json'),
       'processing_elapsed_seconds':time.perf_counter()-processing_started},indent=2)
 
-def main():
+def main(argv=None, *, emit=print):
     processing_started=time.perf_counter()
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('snapshot','snapshot-sha256','physical-rows','physical-runs','prefill-dir','prefill-plan','out'):p.add_argument('--'+name,required=True)
     p.add_argument('--allow-unverified-snapshot',action='store_true');p.add_argument('--tile-height',type=int,default=256)
     p.add_argument('--allow-draft-snapshot',action='store_true');p.add_argument('--candidate-build');p.add_argument('--candidate-build-sha256')
-    a=p.parse_args()
+    a=p.parse_args(argv)
     if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon export is not verified by this runner; explicit test-only flag required')
     if not HEX.fullmatch(a.snapshot_sha256) or sha(a.snapshot)!=a.snapshot_sha256:raise ValueError('snapshot hash mismatch')
     snapshot=json.loads(Path(a.snapshot).read_text())
@@ -292,6 +292,6 @@ def main():
         if candidate:checks.append((a.candidate_build,a.candidate_build_sha256))
         if any(sha(path)!=expected for path,expected in checks):raise ValueError('input changed during ocean fill')
     run(snapshot,a.snapshot_sha256,a.physical_rows,a.physical_runs,rr,ru,out,width,height,pins,a.tile_height,allow_draft=a.allow_draft_snapshot,software_versions=candidate.get('software_versions',{}) if candidate else None,pre_finalize=verify_unchanged,processing_started=processing_started)
-    print(json.dumps({'status':'candidate-only','output':str(out),'summary_sha256':sha(out/'run-summary.json')}))
+    emit(json.dumps({'status':'candidate-only','output':str(out),'summary_sha256':sha(out/'run-summary.json')}))
 
 if __name__=='__main__':main()

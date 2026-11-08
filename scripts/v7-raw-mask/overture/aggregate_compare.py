@@ -94,7 +94,7 @@ def verify_lineage(cfg, grid):
         raise ValueError('inconsistent shard rasterizer')
     if any(k != kernels[0] for k in kernels):raise ValueError('inconsistent native water kernels')
 
-def run(config_path,output):
+def run(config_path,output,*,emit=print):
     config_path=Path(config_path).resolve();data=config_path.read_bytes();cfg=json.loads(data);output=Path(output).resolve()
     if cfg.get('schema')!='water-union-comparison-v1' or not cfg.get('selection_notes'):raise ValueError('explicit schema and selection notes required')
     grid=cfg['grid'];w,h,west,north,step=(grid[k] for k in ('width','height','west','north','step'))
@@ -137,7 +137,7 @@ def run(config_path,output):
                         out.write(json.dumps({'row':y+offset,'start':int(x0),'end':int(x1),'reference':int(a[x0]),'candidate':int(b[x0])},separators=(',',':'))+'\n');spans+=1
             progress={'rows_done':y+n,'candidate_water_cells':candidate}
             if reference:progress.update({'extra_cells':extra,'missing_cells':missing})
-            print(json.dumps(progress),flush=True)
+            emit(json.dumps(progress),flush=True)
     tif.FlushCache();tif=None;ref=None;masks=[]
     for item in shards+([reference] if reference else []):
         if sha(item['path'])!=item['sha256']:raise ValueError('input changed during comparison')
@@ -155,8 +155,8 @@ def run(config_path,output):
         report['limitations'] = 'Candidate water mask; source selection and geographic correctness require independent review.'
     with (output/'config.json').open('xb') as f:f.write(data)
     with (output/'report.json').open('x') as f:json.dump(report,f,indent=2);f.write('\n')
-    print(json.dumps(report,indent=2),flush=True)
+    return report
 if __name__=='__main__':
     if len(sys.argv)!=3:sys.exit('usage: aggregate_compare.py CONFIG.json NEW_OUTPUT_DIRECTORY')
-    try:run(sys.argv[1],sys.argv[2])
+    try:print(json.dumps(run(sys.argv[1],sys.argv[2]),indent=2),flush=True)
     except Exception as e:sys.exit(f'failed: {e}')
