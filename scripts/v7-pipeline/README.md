@@ -301,3 +301,27 @@ process interruptions, resumed output equality, torn journals, live-process
 safety, pin corruption and acquisition separation. These focused
 fixtures do not replace the global source-to-final acceptance run or establish
 its elapsed time.
+
+## Replay preserved land evidence without a pipeline launch
+
+`stage_land_sweep_inputs.py` reads an existing catalog and exact core-config
+pin. It stages metadata by default; `--stage-streams` reads the catalog-pinned
+physical/component/seed RLE, hints and expected land streams. `--stage-search`
+adds the pinned representatives, tile manifest and decision snapshot. Use an
+existing read-only boto3 profile and an explicit HTTPS R2 account endpoint.
+Every byte count and SHA-256 is checked. Original configurations and reports
+remain byte-identical, including historical paths; the separate staging plan
+maps those identities to the current files. No cloud object is changed.
+
+`replay_land_sweep.py --staged-inputs DIR --out NEW_DIR` verifies all staged
+pins and reruns complete physical/component/seed coverage and population checks.
+Add `--search` to regenerate the seed index in Python, require its exact pinned
+manifest, verify representatives against actual seed cells, rerun all source-bound
+WGS84 decisions and then write and compare every land output byte and Ural count.
+It can reconstruct missing assignment state without using expected output labels
+as hints or assignments. Expected land output is used only for the final check.
+Neither tool launches the complete pipeline, compiles code or starts a process.
+
+This is preserved-evidence kernel replay, not a fresh raw-source build, geographic
+acceptance or full end-to-end speed measurement. Keep complete timing comparisons
+separate from other heavy runs. The user-owned full pipeline is independent.
