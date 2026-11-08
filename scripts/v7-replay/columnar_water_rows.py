@@ -102,7 +102,7 @@ def tile_rows(tile, y0, y1, sparse, *, block_size=1<<20):
         opener=gzip.open if tile['_path'].suffix=='.gz' else open
         with opener(tile['_path'],'rb') as source,CompatibleJSONLines(source) as validated:
             with paj.open_json(validated,read_options=paj.ReadOptions(block_size=block_size),
-                    parse_options=paj.ParseOptions(explicit_schema=schema,unexpected_field_behavior='ignore')) as reader:
+                    parse_options=paj.ParseOptions(explicit_schema=schema,unexpected_field_behavior='error')) as reader:
                 for batch in reader:
                     batch.validate(full=True)
                     rows,lists=batch.column(0),batch.column(1)
