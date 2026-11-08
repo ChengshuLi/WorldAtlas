@@ -186,7 +186,7 @@ class CheckpointStager:
             if report.get('rasterizer') == 'gdal':
                 kernel = report.get('gdal_kernel', {})
                 if (kernel.get('method') != cfg.get('batch_method','hybrid') or
-                        kernel.get('implementation')!='python-gdal-c-api-v1' or
+                        kernel.get('implementation')!='python-gdal-api-v2' or
                         kernel.get('binding_sha256') != sha(physical.HERE/'overture/water_batch.py')):
                     raise ValueError('in-process GDAL water checkpoint mismatch')
             self.copy_files(old, dest, names)

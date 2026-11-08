@@ -44,6 +44,9 @@ def verify_completed(item,entry,output,config,repeats):
 
 
 def run(selection,output,*,shards=None,repeats=1,keep_sources=False,resume=False):
+    for name,module in (('benchmark_water_shard.py',benchmark),('rasterize_water_shard.py',benchmark.build)):
+        if Path(module.__file__).resolve()!=HERE/name:
+            raise ValueError('water benchmark module resolved outside selected checkout: '+name)
     selection=Path(selection).resolve();data=selection.read_bytes();cfg=json.loads(data)
     if cfg.get('schema')!='worldatlas-end-to-end-pipeline-v1':raise ValueError('selected pipeline configuration required')
     water=cfg['sources']['water_config']['json'];manifest=cfg['sources']['raw_manifest']['json']

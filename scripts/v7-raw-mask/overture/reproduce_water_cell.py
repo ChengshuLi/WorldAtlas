@@ -43,8 +43,8 @@ def run(source, expected, config, row, column, output):
     report={'schema':'worldatlas-water-cell-reproduction-v1','source_sha256':expected,
         'configuration_sha256':build.sha256(config),'row':row,'column':column,
         'longitude':x,'latitude':y,'features':selected,'extracted_sha256':build.sha256(extracted),'results':{}}
-    for name,engine,method in [('python','python','hybrid'),('native-hybrid','native','hybrid'),('native-tiled','native','tiled')]:
-        variant=inputs/(name+'.json');variant.write_text(json.dumps({**cfg,'native_method':method},indent=2)+'\n')
+    for name,engine,method in [('python','python','hybrid'),('gdal-hybrid','gdal','hybrid'),('gdal-tiled','gdal','tiled')]:
+        variant=inputs/(name+'.json');variant.write_text(json.dumps({**cfg,'batch_method':method},indent=2)+'\n')
         destination=output/name
         with (output/(name+'.log')).open('x') as log,redirect_stdout(log):
             build.run(extracted,report['extracted_sha256'],destination,variant,engine=engine)

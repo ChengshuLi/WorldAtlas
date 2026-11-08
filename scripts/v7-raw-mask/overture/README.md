@@ -4,10 +4,9 @@ This experimental tool rasterizes one pinned Overture GeoParquet water shard int
 
 It requires Python 3, NumPy, PyArrow with Parquet support, and GDAL/OGR Python bindings with GEOS, a GeoTIFF driver, and a memory vector driver. The trial used Python 3.13.5, PyArrow 26.0.1, GDAL 3.10.3, and GEOS 3.13.1. Parquet pre-buffering is disabled; GDAL uses its default cache behavior, with no application-imposed memory cap. The tool processes features in batches and rasterizes tiles, but unusually complex input may require additional memory. The example grid is large; provision disk and memory accordingly.
 
-The default `gdal` rasterizer is Python code over NumPy, Arrow and the public
-GDAL C API already loaded by its Python extension. It needs no custom C++ helper,
-compiler, executable or subprocess. It reads Arrow's WKB buffers directly and
-performs the same OGR parsing, geometry-type and GEOS-validity checks. Only exact
+The default `gdal` rasterizer uses NumPy, Arrow and the supported GDAL/OGR Python
+bindings. It needs no ctypes bridge, custom C++ helper, compiler, executable or
+subprocess. It performs the same OGR parsing, geometry-type and GEOS-validity checks. Only exact
 finite standard 2D Point WKB is classified without OGR as a non-polygon.
 
 The default `batch_method: "hybrid"` groups features into tile burns, prunes only original vertex
@@ -15,8 +14,9 @@ runs strictly outside each tile-row strip, and skips empty multipart envelope
 gaps. NumPy indexes ring coordinates once per batch. Retained edges keep their
 original double coordinates; outside-strip bridges cannot intersect a visible
 scanline. Every GDAL burn retains the reference tile-local transform, including
-center ties. GDAL MEM borrows the live NumPy tile buffer, avoiding initialization
-and result copies. The `tiled` method retains the unpruned reference raster path;
+center ties. `Layer.WriteArrow` populates each tile layer in a batch rather than
+building a Python Feature per polygon. `gdal_array.OpenArray` shares the live
+NumPy tile, avoiding initialization and result copies. The `tiled` method retains the unpruned reference raster path;
 global vector mode is rejected because it changes rare pixel-center ties.
 
 Reports pin the Python binding and GDAL identity; physical checkpoints verify
@@ -47,16 +47,16 @@ are not an uninterrupted end-to-end pipeline timing.
 Run the synthetic tests with `python -m unittest -v test_rasterize_water_shard.py`. They cover policy selection, batching and tile boundaries, input integrity, output separation and collision, and invalid-geometry reporting. Synthetic tests do not prove equivalence on a global dataset.
 
 `benchmark_water_shard.py SOURCE SHA256 CONFIG NEW_OUTPUT --repeats 2` times
-complete reference/native shard runs in alternating order and checks feature
+complete reference/GDAL Python API shard runs in alternating order and checks feature
 counts and every mask pixel. `--reference PRIOR_SHARD_OUTPUT` additionally checks
-the prior producer's mask. Source hashing and native compilation are included;
-source acquisition is outside this benchmark. Retain the source and benchmark
+the prior producer's mask. Source hashing is included; source acquisition is
+outside this benchmark. Retain the source and benchmark
 report. A selected-shard result is not a complete 32-shard throughput result.
 Use `--discard-matching-outputs` to remove only new byte-identical mask copies
 after verification. `--discard-owned-source` additionally removes a regenerable
 raw copy downloaded specifically for this benchmark, after every check succeeds.
 Do not use that option for an existing input shared with another task. Reports,
-hashes, native binaries and cleanup receipts remain available.
+hashes and cleanup receipts remain available.
 
 ### Historical development timing, superseded by the center-tie correction
 
@@ -89,7 +89,7 @@ remain in the receipt.
 
 `reproduce_water_cell.py SOURCE SHA CONFIG ROW COLUMN NEW_OUTPUT` verifies a raw
 source, extracts nearby features using its bbox column with one-cell padding,
-and replays Python, native hybrid and native tiled paths. It retains source-row
+and replays the Python feature-layer reference, GDAL hybrid and GDAL tiled paths. It retains source-row
 indices, feature IDs, extracted data, pinned reports and each cell value. This is
 a diagnostic subset, not a complete source or geographic verification.
 

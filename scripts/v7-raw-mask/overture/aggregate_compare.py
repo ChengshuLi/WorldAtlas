@@ -85,7 +85,7 @@ def verify_lineage(cfg, grid):
         elif doc.get('rasterizer')=='gdal':
             kernel=doc.get('gdal_kernel')
             if (native is not None or not isinstance(kernel,dict) or
-                    kernel.get('implementation')!='python-gdal-c-api-v1' or
+                    kernel.get('implementation') not in ('python-gdal-c-api-v1','python-gdal-api-v2') or
                     kernel.get('method') not in ('hybrid','tiled') or
                     not isinstance(kernel.get('binding_sha256'),str) or len(kernel['binding_sha256'])!=64 or
                     any(ch not in '0123456789abcdef' for ch in kernel['binding_sha256'])):

@@ -268,7 +268,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         kernel = report.get('gdal_kernel')
         if report.get('native_kernel') is not None:raise ValueError('unexpected compiled water kernel')
         if engine == 'gdal':
-            if (not isinstance(kernel,dict) or kernel.get('implementation')!='python-gdal-c-api-v1'
+            if (not isinstance(kernel,dict) or kernel.get('implementation')!='python-gdal-api-v2'
                 or kernel.get('method') != water_cfg.get('batch_method','hybrid')
                 or kernel.get('binding_sha256') != scripts['overture/water_batch.py']):
                 raise ValueError('in-process GDAL water kernel mismatch')

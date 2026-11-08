@@ -1,4 +1,5 @@
 import json
+import ctypes
 from pathlib import Path
 import subprocess
 import unittest
@@ -24,7 +25,8 @@ class PhysicalParityTests(unittest.TestCase):
 
     def test_complete_inputs_produce_identical_final_streams_without_processes(self):
         selection=self.selection();water=self.root/'water-parity';out=self.root/'physical-parity'
-        with mock.patch.object(subprocess,'Popen',side_effect=AssertionError('unexpected subprocess')):
+        with mock.patch.object(subprocess,'Popen',side_effect=AssertionError('unexpected subprocess')), \
+                mock.patch.object(ctypes,'CDLL',side_effect=AssertionError('unexpected ctypes bridge')):
             verify.benchmark_selected_water.run(selection,water)
             report=verify.run(selection,water,self.root,out)
         self.assertEqual(report['status'],'complete-physical-pixels-and-streams-identical')

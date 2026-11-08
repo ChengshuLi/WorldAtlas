@@ -113,7 +113,7 @@ class CheckpointTests(unittest.TestCase):
         shard=self.check/'shards'/'00000';report=json.loads((shard/'report.json').read_text())
         (self.repo/'overture/water_batch.py').write_bytes(b'Python binding')
         report.update({'rasterizer':'gdal','configuration_sha256':module.sha(self.watercfg),'gdal_kernel':{
-            'implementation':'python-gdal-c-api-v1','method':'hybrid',
+            'implementation':'python-gdal-api-v2','method':'hybrid',
             'binding_sha256':module.sha(self.repo/'overture/water_batch.py')}})
         (shard/'report.json').write_text(json.dumps(report));dest=self.root/'native-copy'/'00000';dest.parent.mkdir()
         self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,dest,self.watercfg)

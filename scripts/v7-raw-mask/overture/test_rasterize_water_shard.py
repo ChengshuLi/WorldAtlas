@@ -3,6 +3,7 @@ import json
 import struct
 import tempfile
 import unittest
+import weakref
 from pathlib import Path
 from unittest import mock
 import numpy as np
@@ -128,12 +129,41 @@ class WaterShardTests(unittest.TestCase):
             self.assertEqual(failed,1);self.assertEqual(status.tolist(),[1,5,0])
 
     def test_batch_backend_does_not_compile_or_start_processes(self):
+        import ctypes
         import subprocess
-        with mock.patch.object(subprocess,'Popen',side_effect=AssertionError('unexpected subprocess')):
+        p,digest=self.fixture()
+        with mock.patch.object(subprocess,'Popen',side_effect=AssertionError('unexpected subprocess')), \
+                mock.patch.object(ctypes,'CDLL',side_effect=AssertionError('unexpected ctypes bridge')), \
+                mock.patch.object(ogr,'Feature',side_effect=AssertionError('unexpected per-row Feature creation')):
             first=WaterBatch();second=WaterBatch()
+            build.run(p,digest,self.path/'python-api',self.config)
         self.assertEqual(first.provenance,second.provenance)
         first.timings['tile_burn_seconds']=1
         self.assertEqual(second.timings['tile_burn_seconds'],0)
+
+    def test_vector_point_status_preserves_first_failure_and_unselected_rows(self):
+        kernel=WaterBatch();point=struct.pack('<BIdd',1,1,1.,2.)
+        for values,selected,expected in (([point,None,point],[1,1,1],[3,5,0]),
+                                        ([None,point,None],[0,1,0],[0,3,0])):
+            raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
+            status,failed=kernel.burn(raster,pa.array(values),selected,[8,4,-180,90,45],4)
+            self.assertEqual(status.tolist(),expected)
+            self.assertEqual(failed,1 if expected==[3,5,0] else None)
+
+    def test_arrow_tile_layers_preserve_big_endian_m_zm_and_trailing_wkb(self):
+        p,_=self.fixture();metadata=pq.read_schema(p).metadata;rows=[]
+        for i,wkt in enumerate(('POLYGON ((-170 80,-120 80,-120 -20,-170 -20,-170 80))',
+                'POLYGON M ((-100 80 1,-40 80 2,-40 -20 3,-100 -20 4,-100 80 1))',
+                'POLYGON ZM ((20 80 1 2,100 80 3 4,100 -20 5 6,20 -20 7 8,20 80 1 2))')):
+            geometry=ogr.CreateGeometryFromWkt(wkt)
+            for order in (ogr.wkbXDR,ogr.wkbNDR):
+                value=bytes(geometry.ExportToWkb(order))
+                rows.append({'id':str(len(rows)),'subtype':'lake','geometry':value})
+            rows.append({'id':str(len(rows)),'subtype':'lake','geometry':value+b'extra'})
+        pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata),p)
+        for engine in ('python','gdal'):
+            build.run(p,build.sha256(p),self.path/engine,self.config,engine=engine)
+        self.assertEqual(build.sha256(self.path/'python/water.tif'),build.sha256(self.path/'gdal/water.tif'))
 
     def test_point_shortcut_matches_ogr_for_endianness_dimensions_and_nonfinite_values(self):
         out=self.path/'point-kernel';out.mkdir();kernel=WaterBatch(out)
@@ -160,13 +190,17 @@ class WaterShardTests(unittest.TestCase):
         kernel=WaterBatch();raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
         raster.SetGeoTransform((-180,45,0,90,0,-45))
         points=[struct.pack('<BIdd',1,1,1.,2.),struct.pack('>BIdd',0,1,-3.,4.)]
-        with mock.patch.object(kernel.api,'OGR_G_CreateFromWkb',side_effect=AssertionError('finite point was parsed')):
+        with mock.patch.object(ogr,'CreateGeometryFromWkb',side_effect=AssertionError('finite point was parsed')):
             status,failed=kernel.burn(raster,pa.array(points),[1,1],[8,4,-180,90,45],4)
         self.assertEqual(status.tolist(),[3,3]);self.assertIsNone(failed)
         polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))').ExportToWkb())
-        with mock.patch.object(kernel.api,'OGR_G_DestroyGeometry',wraps=kernel.api.OGR_G_DestroyGeometry) as release:
+        created=[];create=ogr.CreateGeometryFromWkb
+        def tracked(value):
+            geometry=create(value);created.append(weakref.ref(geometry));return geometry
+        with mock.patch.object(ogr,'CreateGeometryFromWkb',side_effect=tracked):
             status,failed=kernel.burn(raster,pa.array([polygon,None,polygon]),[1,1,1],[8,4,-180,90,45],4)
-        self.assertEqual(status.tolist(),[1,5,0]);self.assertEqual(failed,1);self.assertEqual(release.call_count,1)
+        self.assertEqual(status.tolist(),[1,5,0]);self.assertEqual(failed,1);self.assertEqual(len(created),1)
+        self.assertIsNone(created[0]())
         self.assertEqual(int(raster.ReadAsArray().sum()),0)
 
     def test_borrowed_tile_buffer_preserves_existing_burns_and_partial_edge_tiles(self):

@@ -46,6 +46,12 @@ class SelectedWaterTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'report or mask changed'):
             benchmark.run(selection,output,resume=True)
 
+    def test_foreign_cached_module_fails_before_creating_output(self):
+        with mock.patch.object(benchmark.benchmark.build,'__file__',str(self.path/'foreign.py')):
+            with self.assertRaisesRegex(ValueError,'outside selected checkout'):
+                benchmark.run(self.inputs/'not-read.json',self.path/'not-created')
+        self.assertFalse((self.path/'not-created').exists())
+
     def test_incomplete_pair_is_preserved_before_retry(self):
         selection,_=self.selection();output=self.path/'interrupted'
         def interrupt(source,digest,config,destination,**kwargs):

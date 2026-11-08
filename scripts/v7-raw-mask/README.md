@@ -39,9 +39,9 @@ The physical stage writes `pipeline-identity.json` and an append-only `processin
 
 The report's `processing_elapsed_seconds` is the accumulated attempt wall time excluding serialized source downloads, when every attempt has a durable end event; `source_download_elapsed_seconds` is reported separately. If a process is killed without recording its end, `timing_complete` is false, `processing_elapsed_seconds` is null, and `recorded_processing_elapsed_seconds` is only a measured lower bound. A fresh uninterrupted timing run is required for an exact total in that case. Staging requires one shard worker so downloads do not overlap processing. Checkpoints and timing files survive process interruption only while the workspace itself survives; they are not remote backups.
 
-The physical stages run through Python functions, including the water batches
-over the already-loaded GDAL library. No physical-stage compiler, custom native
-helper or subprocess is required. See [the water parity harness](overture/README.md).
+The physical stages run through Python functions and the supported GDAL/OGR
+Python bindings. No ctypes bridge, physical-stage compiler, custom native helper
+or subprocess is required. See [the water parity harness](overture/README.md).
 
 After a complete paired water-manifest run, use
 `verify_selected_physical.py SELECTED_CONFIG PAIRED_WATER_OUTPUT INPUT_CACHE_ROOT NEW_OUTPUT`
@@ -52,9 +52,10 @@ and row/run checks must report zero differences. Reports retain original input
 and producer pins. Shared unchanged land and accumulated source trials make this
 a full-input parity proof, not a paired end-to-end timing or geographic approval.
 
-The [complete 2026-11-08 proof](../../docs/benchmarks/physical-python-gdal-20261108.json)
+The [historical 2026-11-08 ctypes-bridge proof](../../docs/benchmarks/physical-python-gdal-20261108.json)
 records all 32 raw shards, 66,814,038 rows and 7,158,366,208 physical cells with
 zero differences and exact final row/run hashes. Observed raw-water processing
 was 938.04 seconds for the Python feature-layer reference and 899.75 seconds for
-the compiler-free GDAL batches. This is a roughly 4.1 percent reduction for that
-comparison, with downloads and verification measured separately.
+the compiler-free ctypes-based GDAL batches. This historical roughly 4.1 percent
+reduction is versus the Python oracle, not production C++ or the new supported
+Python-binding implementation. Do not use it as a current production gain.

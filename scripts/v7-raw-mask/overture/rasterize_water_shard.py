@@ -6,7 +6,6 @@ local PyArrow install. The new output directory must not already exist.
 """
 import argparse
 import gc
-import ctypes
 from collections import Counter
 import hashlib
 import json
@@ -50,7 +49,7 @@ def selected(subtype):
 
 
 def python_batch(raster, batch, counts, invalid, grid, tile, srs):
-    """Retained reference implementation for exact native-kernel comparisons."""
+    """Retained feature-layer reference for exact Python API comparisons."""
     width, height, west, north, step = grid
     tiles = {}
     for item in batch.to_pylist():
@@ -198,6 +197,8 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
             from .water_batch import WaterBatch
         else:
             from water_batch import WaterBatch
+        if Path(sys.modules[WaterBatch.__module__].__file__).resolve()!=Path(__file__).parent/'water_batch.py':
+            raise ValueError('water kernel resolved outside selected checkout')
         kernel = WaterBatch(out,cfg.get('batch_method','hybrid'))
     raster = gdal.GetDriverByName('GTiff').Create(str(out/'water.tif'), width, height, 1,
         gdal.GDT_Byte, options=['TILED=YES', 'BLOCKXSIZE=512', 'BLOCKYSIZE=512',
@@ -225,11 +226,6 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         if kernel is None:
             gc.collect()
             pyarrow.default_memory_pool().release_unused()
-            try:
-                trim = getattr(ctypes.CDLL(None), 'malloc_trim', None)
-                if trim: trim(0)
-            except (AttributeError, OSError):
-                pass
         rss = 'unavailable'
         try:
             rss = next((line for line in Path('/proc/self/status').read_text().splitlines()
