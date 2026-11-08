@@ -40,10 +40,11 @@ record source/code pins and exact UTC intervals, compare all seed output hashes
 and populations, and never launch the whole user-owned pipeline. No new seed
 speed ratio, final-land artifact or end-to-end result is claimed here.
 
-Polygon burns are also omitted when no selected component interval in a strip
-depends on that polygon bit. All polygons are still authenticated and validated;
-full-width affine math is unchanged for every retained burn. The dependency
-mask follows arbitrary configured root/bit rules, including equal output codes
-whose inside/outside populations still require the polygon. Execution reports
-record actual versus possible polygon burns. Randomized independent oracles
-check that discarding every unused bit preserves complete RLE and populations.
+Entire raster strips are omitted only when NO selected component interval
+in the strip depends on ANY polygon. Whole-component/unselected intervals
+do not inspect the mask. Otherwise every original polygon is burned in its
+original order, even when its nominal bit is unused: GDAL MERGE_ALG=ADD can
+carry/saturate boundary contributions into other bits. A hole/disconnected-part
+fixture with exact-center vertices caught this distinction. Per-bit omission
+was withdrawn before complete-world validation. All polygons remain pinned
+and validated even when an entire raster strip is not needed.

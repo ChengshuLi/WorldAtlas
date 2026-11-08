@@ -15,7 +15,7 @@ from closure_client import sha
 from atomic_move import move_noreplace,output_path
 BASE=Path(__file__).resolve().parent
 CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py')
-TRUSTED_CODE={'seed_builder':'3fd920c0c5711e87ad2d08dc127966e2acbf7b4291d264a032ad45d715a895c8','seed_kernel':'d3ae7c6cada77a2c06b4b940a5478077d77d794d8596f193f19c599516d06c63','closure_checker':'1e796c7f9bc8843252398eed54093265581446c9f4cac10dcb3b4c424b6e1bd1'}
+TRUSTED_CODE={'seed_builder':'1600dc513a0889658963d3e5737f2490ba8de0f363a2910555f5b7111e87569b','seed_kernel':'d3ae7c6cada77a2c06b4b940a5478077d77d794d8596f193f19c599516d06c63','closure_checker':'1e796c7f9bc8843252398eed54093265581446c9f4cac10dcb3b4c424b6e1bd1'}
 # Explicit research-only checker supporting a directly pinned producer path.
 PROVISIONAL_CLOSURE_CHECKER='4491d971541fcfe7317d40abf2e8320c308d58af5c7f8115348362f0f71da327'
 TRUSTED_TERMINAL_CHECKER='fb0058f368f0db8ca07d1c9347aaf1192cb5b2fc20c3691e167623531f5570f1'

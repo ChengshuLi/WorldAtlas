@@ -90,6 +90,7 @@ class SeedBuildTests(unittest.TestCase):
                         self.assertNotIn('compiled_kernel',report['program_sha256'])
                         if strip==1:self.assertLess(report['execution']['polygon_burns'],report['execution']['possible_polygon_burns'])
                         outputs.append(((out/'rows.u32le').read_bytes(),(out/'runs.u32le').read_bytes()))
+                self.assertEqual(len(outputs),2)
                 self.assertEqual(*outputs)
 
     def test_missing_root_and_invalid_offsets_never_complete(self):

@@ -101,13 +101,15 @@ def build(config,output):
  def raster(y):
   h=min(c['strip_rows'],g['height']-y)
   bits=index.required_bits(records[int(offsets[y]):int(offsets[y+h])])
+  # ADD rasterization is not a bitwise OR: exact boundary contributions
+  # can carry/saturate into another bit. Retain ALL original polygon burns
+  # whenever any selected interval reads a polygon bit.
   if bits==0:return y,np.zeros((h,g['width']),dtype=np.uint8),bits
   if not hasattr(local,'datasets'):local.datasets={}
   ds=gdal.GetDriverByName('MEM').Create('',g['width'],h,1,gdal.GDT_Byte)
   # Preserve original global-grid origin, dimensions and center arithmetic.
   ds.SetGeoTransform((g['west'],g['step'],0,g['north']-y*g['step'],0,-g['step']))
   for i in range(len(c['regions'])):
-   if not bits & (1<<i):continue
    if i not in local.datasets:
     local.datasets[i]=ogr.Open(str(paths[2+i]))
     if local.datasets[i] is None:raise ValueError('cannot reopen geometry')
@@ -133,7 +135,7 @@ def build(config,output):
  with (out/'rows.u32le').open('xb') as rowout,(out/'runs.u32le').open('xb') as runout:
   rowout.write(np.asarray([0],dtype='<u4').tobytes())
   for y,mask,bits in ordered_strips():
-   strips+=1;burns+=bits.bit_count()
+   strips+=1;burns+=len(c['regions']) if bits else 0
    check_space();h=len(mask);lo,hi=int(offsets[y]),int(offsets[y+h])
    pairs,counts,ri,ro,cc=index.strip(mask,offsets[y:y+h+1].astype(np.int64)-lo,records[lo:hi])
    cumulative=np.cumsum(counts,dtype=np.uint64)+total

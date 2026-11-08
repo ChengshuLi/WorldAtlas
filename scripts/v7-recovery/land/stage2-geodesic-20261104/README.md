@@ -163,10 +163,11 @@ nonbinary steps, strip sizes, concurrency, root IDs zero/UINT32_MAX, arbitrary
 rules, empty rows, exact-center vertices, malformed streams and dangling output
 symlinks. This is not a new full-pipeline acceptance claim.
 
-Polygon burns are also omitted when no selected component interval in a strip
-depends on that polygon bit. All polygons are still authenticated and validated;
-full-width affine math is unchanged for every retained burn. The dependency
-mask follows arbitrary configured root/bit rules, including equal output codes
-whose inside/outside populations still require the polygon. Execution reports
-record actual versus possible polygon burns. Randomized independent oracles
-check that discarding every unused bit preserves complete RLE and populations.
+Entire raster strips are omitted only when NO selected component interval
+in the strip depends on ANY polygon. Whole-component/unselected intervals
+do not inspect the mask. Otherwise every original polygon is burned in its
+original order, even when its nominal bit is unused: GDAL MERGE_ALG=ADD can
+carry/saturate boundary contributions into other bits. A hole/disconnected-part
+fixture with exact-center vertices caught this distinction. Per-bit omission
+was withdrawn before complete-world validation. All polygons remain pinned
+and validated even when an entire raster strip is not needed.
