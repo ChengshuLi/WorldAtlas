@@ -52,6 +52,11 @@ tracks raw data objects, including the parts of source archives.
 and parent relationships, and the bindings from map category codes to entities.
 Use the registry revision selected by the decision snapshot.
 
+For a fresh database, apply the SQL migrations in filename order.
+`036_v8_editable_schema.sql` supplies the mainland and regional decision
+tables already present on `continent-review-v1`. The migrations define the
+schema. The Neon branch holds the source catalog, drafts and release records.
+
 Export a registry revision from Neon with `scripts/export_entity_registry.sql`.
 
     psql -X -A -t -v revision=REVISION -f scripts/export_entity_registry.sql > registry.json
