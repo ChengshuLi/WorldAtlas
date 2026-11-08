@@ -203,10 +203,10 @@ source pins, current repository source code, Python/dependency versions, runtime
 paths, every completed command's input pins, and every output file/hash. Completed
 command receipts also seal timing-journal prefixes, so losing or changing prior
 recorded intervals cannot silently yield a new complete total. Generated requests
-must remain byte-identical. Seed rasterization and component/verifier compilation
-execute the pinned checked-in source files directly; run directories contain no
-copied Python/C++ source executables. A changed pin or a live prior stage stops
-resume.
+must remain byte-identical. Land seed rasterization, component construction and
+tile verification execute pinned checked-in Python implementations through proper
+library APIs. Run directories contain no copied land compiler helpers. A changed
+pin or a live prior stage stops resume.
 
 The runner records stage admission and timing before the call. Native commands
 launched through the runner inherit its filesystem lock. The pinned seed writer
@@ -362,3 +362,22 @@ API errors produce no success timing report, and the entrypoint is rehashed
 after execution. Logs and failed output directories remain for inspection.
 Older receipts that measured a child interpreter are not directly equivalent
 to this timing scope.
+
+
+## Replay seed raster sources through Python APIs
+
+`prepare_seed_raster_replay.py --staged-inputs DIR --out NEW_DIR` reconstructs
+source polygons with the ordinary regional producer and fresh water/terminal
+closure checks. A local-derived decision snapshot requires
+`--allow-local-provisional --prior-physical-report PINNED_FILE` and exact physical
+stream equivalence. Recreated GeoJSON bytes must match archived source pins.
+Historical reports and contracts are never rewritten or substituted for a fresh
+closure proof. This is provisional research, not a final-land artifact.
+
+`benchmark_seed_raster.py --staged-inputs DIR --recovered-regions SOURCE_DIR
+--out NEW_DIR --workers N` runs complete serial and parallel GDAL-Python/NumPy
+seed builds. It uses old seed outputs only after each build to check every
+output hash and every rule/category population. Source polygons, component
+streams, driver code and exact UTC intervals are pinned in separate receipts.
+No compiler, ctypes bridge, child process or whole pipeline is used. Run alone
+for comparable timing; one serial-first pair does not balance cache order.

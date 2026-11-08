@@ -14,7 +14,7 @@ The direct orchestration sequence is:
 2. Run the reviewed seed producer on the selected Neon mainland rules and
    boundaries. Validate geographic closure and physical/component coverage.
 3. Generate seed tiles and representatives. Verify every tile against the seed
-   with an independent compiled verifier and check representative membership.
+   with an independent NumPy interval verifier and check representative membership.
 4. Generate source-only hints. Certify the candidate or run the exact WGS84
    search for every non-seed physical component; hints never become labels
    without one of those checks.
@@ -132,3 +132,33 @@ coverage/writer-only check, use `scripts/v7-pipeline/benchmark_land_sweep.py` wi
 all source, configuration, producer-report and checkpoint pins, every output
 byte and the Ural populations. It starts no process, contacts no service and
 compiles no code. Its timings exclude seed production, search and regional work.
+
+
+### Python seed raster and index verification
+
+The active seed producer uses GDAL's Python API and NumPy. Each raster worker
+opens independent OGR dataset handles. Work is consumed in original strip order,
+with unchanged full-width affine transforms and pixel-center conventions.
+`seed_runtime.py` composes only actual mask transitions inside selected physical
+component intervals, rather than dispatching a Python operation for every cell.
+Whole-component rules emit intervals directly. No region name, root identity,
+current map size or chosen label selects a special path.
+
+The rasterizer's v2 report binds both Python source files and has no compiled
+binary pin. The existing `seed_kernel` input field now pins `seed_runtime.py`;
+it is an algorithm source pin, not an executable. Old C++ pins are rejected.
+The historical reviewed seed freeze remains unchanged: changed source paths
+remain explicit provisional research until independently reviewed.
+
+`verify_seed_index.verify` independently reconstructs every canonical tile
+record from complete source RLE using tile-row bands, checking all offsets,
+row endpoints, categories, exact tile bytes and unexpected tile files. It
+never compiles or starts a helper. Checkpoint identity pins the verifier's
+Python source instead of a binary. This intentionally prevents resuming a
+checkpoint authenticated under the retired verifier implementation.
+
+Complete-world parity and timing for the new Python seed producer and verifier
+are pending the exclusive measurement slot. Tiny fixtures cover different
+nonbinary steps, strip sizes, concurrency, root IDs zero/UINT32_MAX, arbitrary
+rules, empty rows, exact-center vertices, malformed streams and dangling output
+symlinks. This is not a new full-pipeline acceptance claim.

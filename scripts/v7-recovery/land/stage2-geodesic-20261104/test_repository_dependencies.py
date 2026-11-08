@@ -43,7 +43,7 @@ class RepositoryDependenciesTest(unittest.TestCase):
         pins['terminal_checker'] = literal_assignment(producer, 'TRUSTED_TERMINAL_CHECKER')
         files = {
             'seed_builder': LAND / 'neon-mainland-regions-20261104/rasterizer/build_seed.py',
-            'seed_kernel': LAND / 'neon-mainland-regions-20261104/rasterizer/seed_kernel.cpp',
+            'seed_kernel': LAND / 'neon-mainland-regions-20261104/rasterizer/seed_runtime.py',
             'closure_checker': LAND / 'mainland-source-verification-20261104/validate_water_closure_v2.py',
             'terminal_checker': LAND / 'mainland-source-verification-20261104/validate_terminal_closure.py',
         }

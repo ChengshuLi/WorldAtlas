@@ -763,7 +763,7 @@ class Pipeline:
             'closure_checker': SCRIPTS / 'v7-recovery/land/mainland-source-verification-20261104/validate_water_closure_v2.py',
             'terminal_checker': SCRIPTS / 'v7-recovery/land/mainland-source-verification-20261104/validate_terminal_closure.py',
             'seed_builder': SCRIPTS / 'v7-recovery/land/neon-mainland-regions-20261104/rasterizer/build_seed.py',
-            'seed_kernel': SCRIPTS / 'v7-recovery/land/neon-mainland-regions-20261104/rasterizer/seed_kernel.cpp'}.items()}
+            'seed_kernel': SCRIPTS / 'v7-recovery/land/neon-mainland-regions-20261104/rasterizer/seed_runtime.py'}.items()}
         if 'prior_physical_report' in self.sources:
             inputs['prior_physical_report'] = pin(self.sources['prior_physical_report'])
         resolution = read(self.sources['resolution_template'])

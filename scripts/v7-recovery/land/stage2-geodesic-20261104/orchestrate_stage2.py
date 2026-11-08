@@ -11,8 +11,7 @@ from pathlib import Path
 _SCRIPTS = Path(__file__).resolve().parents[3]
 if str(_SCRIPTS) not in sys.path:
     sys.path.append(str(_SCRIPTS))
-import stage_external
-import build_seed_tiles,build_stage2,checkpoints,contracts,verify_inputs
+import build_seed_tiles,build_stage2,checkpoints,contracts,verify_inputs,verify_seed_index
 import representatives,verify_physical_lineage
 
 HERE=Path(__file__).resolve().parent
@@ -129,11 +128,8 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  # A separately compiled complete seed/tile verifier must precede hints. The
  # core repeats this verification and validates representative cell membership.
 
- source=HERE/'verify_seed_index.cpp';source_data=build_stage2.read_bytes(source,guard);need(hashlib.sha256(source_data).hexdigest()==code['verify_seed_index.cpp'],'verifier source changed')
- binary=work/'requests'/'tile-verifier';stage_external.run(['g++','-O3','-std=c++17','-Wall','-Wextra','-Werror',str(source),'-lcrypto','-o',str(binary)],check=True)
- need(verify_inputs.sha_file(source,guard)==code['verify_seed_index.cpp'],'verifier source changed during compilation')
- guard();check=stage_external.run([str(binary),srows['path'],sruns['path'],str(tileout),str(g['width']),str(g['height']),'1024'],capture_output=True,text=True,check=True)
- need(json.loads(check.stdout).get('status')=='verified','fresh seed/tile verification failed')
+ check=verify_seed_index.verify(srows['path'],sruns['path'],tileout,g['width'],g['height'],1024,guard)
+ need(check.get('status')=='verified','fresh seed/tile verification failed')
  import numpy as np
 
  rdata=build_stage2.read_bytes(reps,guard);need(len(rdata)%20==0,'bad representative data');arr=np.frombuffer(rdata,dtype='<u4').reshape(-1,5)
@@ -146,7 +142,7 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  artifacts={'resolution_report':rp,'seed_rows':srows,'seed_runs':sruns,'seed_report':pin(seedout/'report.json',guard),'tile_manifest':pin(tileout/'manifest.txt',guard),'representatives':pin(reps,guard),'hint_roots':pin(hout/'roots.u32le',guard),'hint_codes':pin(hout/'hints.u8',guard),'hint_report':pin(hout/'report.json',guard)}
  for spec in cfg['inputs'].values():build_stage2.pin(spec,guard)
  need(build_stage2.read_bytes(cp,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
- marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'artifacts':artifacts,'seed_request_sha256':verify_inputs.sha_file(seedrequest,guard),'hint_request_sha256':verify_inputs.sha_file(hreq,guard),'seed_tile_verification':json.loads(check.stdout),'physical_lineage_report':pin(work/'lineage'/'report.json',guard),'tile_directory':str(tileout),'code_sha256':code,'provisional_only':provisional_only}
+ marker={'schema':'stage2-fresh-derived-v1','outer_config_sha256':hashlib.sha256(raw).hexdigest(),'orchestrator_sha256':code['orchestrate_stage2.py'],'artifacts':artifacts,'seed_request_sha256':verify_inputs.sha_file(seedrequest,guard),'hint_request_sha256':verify_inputs.sha_file(hreq,guard),'seed_tile_verification':check,'physical_lineage_report':pin(work/'lineage'/'report.json',guard),'tile_directory':str(tileout),'code_sha256':code,'provisional_only':provisional_only}
  write_json(work/'derived'/'manifest.json',marker)
  return finish_from_marker(cfg,raw,work,out,code,guard,False,provisional_only,processing_started)
 

@@ -2,6 +2,9 @@
 """Direct seed-producer adapter invoked by the stage-2 orchestrator."""
 import json,os,shutil,sys
 from pathlib import Path
+# The direct adapter is also a supported CLI, outside the orchestrator's
+# already-loaded module context.
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import seed_producer
 
 def run(request, work, out, *, allow_local=False):

@@ -40,7 +40,7 @@ class DirectSeedExecutionTests(unittest.TestCase):
  def test_rasterizer_executes_checked_in_sources_without_copying(self):
   directory=Path(seed_producer.BASE).parents[1]/'neon-mainland-regions-20261104/rasterizer'
   pins={key:{'path':str(directory/name),'sha256':seed_producer.TRUSTED_CODE[key]}
-        for key,name in (('seed_builder','build_seed.py'),('seed_kernel','seed_kernel.cpp'))}
+        for key,name in (('seed_builder','build_seed.py'),('seed_kernel','seed_runtime.py'))}
   with tempfile.TemporaryDirectory() as td:
    root=Path(td);config=root/'config.json';output=root/'output'
    result={'status':'fixture'}

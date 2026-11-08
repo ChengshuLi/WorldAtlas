@@ -1,6 +1,9 @@
 #!/usr/bin/env /usr/bin/python3
 """Config-driven center-rasterized mainland seed, research only, no historical labels."""
-import hashlib,json,math,os,shutil,subprocess,sys,time
+import hashlib,json,math,os,shutil,sys,threading,time,types
+from collections import deque
+from concurrent.futures import ThreadPoolExecutor
+import numpy as np
 from pathlib import Path
 from osgeo import gdal,ogr,osr
 
@@ -35,9 +38,9 @@ def pinned(x):
  if not p.is_file() or sha(p)!=x['sha256']:raise ValueError('input pin mismatch: '+str(p))
  return p
 def build(config,output):
- start=time.time();program_hashes={name:sha(HERE/name) for name in ('build_seed.py','seed_kernel.cpp')};config=Path(config).resolve(strict=True);raw=config.read_bytes();c=json.loads(raw);out=Path(output).resolve()
+ start=time.time();program_hashes={name:sha(HERE/name) for name in ('build_seed.py','seed_runtime.py')};config=Path(config).resolve(strict=True);raw=config.read_bytes();c=json.loads(raw);out=Path(output).absolute();out=out.parent.resolve()/out.name
  required={'schema','grid','component_rows','component_runs','regions','rules','evidence','strip_rows'}
- if not required<=set(c) or set(c)-required-{'reserve_bytes'} or c['schema']!='direct-region-seed-research-v1':raise ValueError('invalid config')
+ if not required<=set(c) or set(c)-required-{'reserve_bytes','workers'} or c['schema']!='direct-region-seed-research-v1':raise ValueError('invalid config')
  if sys.byteorder!='little':raise ValueError('little-endian host required')
  reserve=c.get('reserve_bytes',2*1024**3)
  if type(reserve) is not int or reserve<0:raise ValueError('invalid reserve')
@@ -45,13 +48,13 @@ def build(config,output):
   if shutil.disk_usage(out.parent).free<reserve:raise ValueError('insufficient free space for reserve')
  check_space()
  g=c['grid'];
- if set(g)!={'width','height','west','north','step','crs'} or g['crs']!='EPSG:4326' or any(type(g[k]) is not int or g[k]<=0 for k in ('width','height')) or any(type(g[k]) not in (int,float) or not math.isfinite(g[k]) for k in ('west','north','step')) or g['step']<=0:raise ValueError('invalid grid')
+ if set(g)!={'width','height','west','north','step','crs'} or g['crs']!='EPSG:4326' or any(type(g[k]) is not int or not 0<g[k]<=0xffffffff for k in ('width','height')) or any(type(g[k]) not in (int,float) or not math.isfinite(g[k]) for k in ('west','north','step')) or g['step']<=0:raise ValueError('invalid grid')
  if g['west'] < -180 or g['west']+g['width']*g['step'] > 180+1e-9 or g['north']>90 or g['north']-g['height']*g['step'] < -90-1e-9:raise ValueError('grid outside WGS84 bounds')
  if type(c['strip_rows']) is not int or not 1<=c['strip_rows']<=1024:raise ValueError('invalid strip rows')
  if not isinstance(c['regions'],list) or len(c['regions'])>8 or not isinstance(c['rules'],list) or not c['rules'] or not isinstance(c['evidence'],list):raise ValueError('invalid arrays')
  pins=[c['component_rows'],c['component_runs']]+[r['geometry'] for r in c['regions']]+c['evidence']; paths=[pinned(p) for p in pins]
- if out.exists():raise ValueError('output exists')
- for p in [config]+paths+[HERE/'build_seed.py',HERE/'seed_kernel.cpp']:
+ if os.path.lexists(out):raise ValueError('output exists')
+ for p in [config]+paths+[HERE/'build_seed.py',HERE/'seed_runtime.py']:
   parent=p.parent.resolve()
   if out==parent or out in parent.parents or parent in out.parents:raise ValueError('output/input directories overlap')
  regionids={};datasets=[];layers=[]
@@ -83,43 +86,61 @@ def build(config,output):
   elif region in regionids:bit=regionids[region]
   else:raise ValueError('missing region')
   seen.add(root);rules.append((root,bit,inside,outside))
- out.mkdir(mode=0o700,parents=False,exist_ok=False);rulepath=out/'rules.txt';rulepath.write_text(''.join('%s %s %s %s\n'%r for r in rules))
- # Compile an ephemeral program in the new isolated output directory, not in source.
- subprocess.run(['g++','-O3','-std=c++17',str(HERE/'seed_kernel.cpp'),'-o',str(out/'seed-kernel')],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
- err=(out/'builder.log').open('wb');proc=subprocess.Popen([str(out/'seed-kernel'),str(paths[0]),str(paths[1]),str(rulepath),str(out/'rows.u32le'),str(out/'runs.u32le'),str(g['width']),str(g['height']),str(os.getpid())],stdin=subprocess.PIPE,stderr=err)
- try:
-  for y in range(0,g['height'],c['strip_rows']):
-   check_space()
-   h=min(c['strip_rows'],g['height']-y);ds=gdal.GetDriverByName('MEM').Create('',g['width'],h,1,gdal.GDT_Byte);ds.SetGeoTransform((g['west'],g['step'],0,g['north']-y*g['step'],0,-g['step']))
-   for i,layer in enumerate(layers):
-    layer.ResetReading();gdal.RasterizeLayer(ds,[1],layer,burn_values=[1<<i],options=['MERGE_ALG=ADD'])
-   proc.stdin.write(ds.ReadRaster())
-  proc.stdin.close();rc=proc.wait();err.close()
-  if rc:raise RuntimeError('kernel failed, see builder.log')
- except BaseException:
-  if proc.poll() is None:proc.kill();proc.wait()
-  try:proc.stdin.close()
-  except (BrokenPipeError,OSError,ValueError):pass
-  err.close();raise
+ # Every worker owns its OGR handles; no layer cursor crosses a thread.
+ workers=c.get('workers',len(os.sched_getaffinity(0)) if hasattr(os,'sched_getaffinity') else (os.cpu_count() or 1))
+ if type(workers) is not int or workers<1:raise ValueError('invalid raster workers')
+ runtime=types.ModuleType('worldatlas_seed_runtime');runtime.__file__=str(HERE/'seed_runtime.py');runtime_source=(HERE/'seed_runtime.py').read_bytes()
+ if hashlib.sha256(runtime_source).hexdigest()!=program_hashes['seed_runtime.py']:raise ValueError('runtime source changed')
+ exec(compile(runtime_source,runtime.__file__,'exec'),runtime.__dict__)
+ index=runtime.RuleIndex(rules)
+ if paths[0].stat().st_size!=(g['height']+1)*4 or paths[1].stat().st_size%12:raise ValueError('invalid component array size')
+ offsets=np.memmap(paths[0],mode='r',dtype='<u4');count=paths[1].stat().st_size//12
+ if int(offsets[0])!=0 or int(offsets[-1])!=count or np.any(offsets[1:]<offsets[:-1]):raise ValueError('invalid component offsets')
+ records=np.memmap(paths[1],mode='r',dtype='<u4',shape=(count,3)) if count else np.empty((0,3),dtype='<u4')
+ local=threading.local()
+ def raster(y):
+  if not hasattr(local,'datasets'):
+   local.datasets=[ogr.Open(str(paths[2+i])) for i in range(len(c['regions']))]
+   if any(ds is None for ds in local.datasets):raise ValueError('cannot reopen geometry')
+  h=min(c['strip_rows'],g['height']-y)
+  ds=gdal.GetDriverByName('MEM').Create('',g['width'],h,1,gdal.GDT_Byte)
+  # Preserve original global-grid origin, dimensions and center arithmetic.
+  ds.SetGeoTransform((g['west'],g['step'],0,g['north']-y*g['step'],0,-g['step']))
+  for i,source in enumerate(local.datasets):
+   layer=source.GetLayer(0);layer.ResetReading()
+   if gdal.RasterizeLayer(ds,[1],layer,burn_values=[1<<i],options=['MERGE_ALG=ADD'])!=0:raise ValueError('rasterization failed')
+  mask=ds.ReadAsArray();ds=None
+  return y,mask
+ def ordered_strips():
+  positions=iter(range(0,g['height'],c['strip_rows']))
+  with ThreadPoolExecutor(max_workers=workers) as executor:
+   pending=deque()
+   for _ in range(workers):
+    y=next(positions,None)
+    if y is None:break
+    pending.append(executor.submit(raster,y))
+   while pending:
+    yield pending.popleft().result()
+    y=next(positions,None)
+    if y is not None:pending.append(executor.submit(raster,y))
+ out.mkdir(mode=0o700,parents=False,exist_ok=False)
+ inside=np.zeros(len(rules),dtype=np.uint64);outside=inside.copy();categories=np.zeros(6,dtype=np.uint64);total=0
+ with (out/'rows.u32le').open('xb') as rowout,(out/'runs.u32le').open('xb') as runout:
+  rowout.write(np.asarray([0],dtype='<u4').tobytes())
+  for y,mask in ordered_strips():
+   check_space();h=len(mask);lo,hi=int(offsets[y]),int(offsets[y+h])
+   pairs,counts,ri,ro,cc=index.strip(mask,offsets[y:y+h+1].astype(np.int64)-lo,records[lo:hi])
+   cumulative=np.cumsum(counts,dtype=np.uint64)+total
+   if int(cumulative[-1])>0xffffffff:raise ValueError('too many output runs')
+   rowout.write(cumulative.astype('<u4').tobytes());runout.write(pairs.tobytes())
+   total=int(cumulative[-1]);inside+=ri;outside+=ro;categories+=cc
+ if np.any(inside+outside==0):raise ValueError('selected root missing')
+ populations={root:{'inside_cells':int(inside[i]),'outside_cells':int(outside[i])} for i,(root,_,_,_) in enumerate(rules)}
+ code_counts={code:int(categories[code-17]) for code in range(17,23)}
  for x in pins:pinned(x)
  if config.read_bytes()!=raw:raise ValueError('config changed')
  if any(sha(HERE/name)!=digest for name,digest in program_hashes.items()):raise ValueError('program changed during build')
- with open(out/'builder.log','rb') as lf:logbytes=lf.read()
- log=logbytes.decode('ascii')
- populations={};code_counts={}
- for line in log.splitlines():
-  z=line.split()
-  if len(z)==4 and z[0]=='RULE':
-   root,inside,outside=map(int,z[1:]);
-   if root in populations:raise ValueError('duplicate population record')
-   populations[root]={'inside_cells':inside,'outside_cells':outside}
-  elif len(z)==3 and z[0]=='CODE':
-   code,count=map(int,z[1:]);
-   if code in code_counts:raise ValueError('duplicate category count')
-   code_counts[code]=count
-  else:raise ValueError('invalid rasterizer population record')
- if set(populations)!={r[0] for r in rules} or set(code_counts)!=set(range(17,23)):raise ValueError('incomplete rasterizer population records')
- report={'schema':'direct-region-seed-research-report-v1','status':'unreviewed-research-not-published','method':'Per selected root, rasterize explicitly supplied valid polygon(s) at GDAL pixel centers and select configured inside/outside codes; unselected roots are zero. Source and closure evidence pins do not prove the supplied polygon derives from them.','tie_convention':'GDAL rasterization pixel-center convention for recorded GDAL version; exact-boundary behavior needs review.','grid':{k:g[k] for k in ('width','height','west','north','step')},'grid_crs':g['crs'],'component_rows_sha256':pins[0]['sha256'],'component_runs_sha256':pins[1]['sha256'],'output_rows_sha256':sha(out/'rows.u32le'),'output_runs_sha256':sha(out/'runs.u32le'),'reserve_bytes':reserve,'config_sha256':hashlib.sha256(raw).hexdigest(),'input_pins':pins,'program_sha256':{'builder':program_hashes['build_seed.py'],'kernel_source':program_hashes['seed_kernel.cpp'],'compiled_kernel':sha(out/'seed-kernel')},'outputs_sha256':{'rows':sha(out/'rows.u32le'),'runs':sha(out/'runs.u32le')},'rule_population':{str(k):v for k,v in populations.items()},'category_cell_counts':{str(k):v for k,v in code_counts.items()},'gdal_version':gdal.VersionInfo(),'elapsed_seconds':time.time()-start}
+ report={'schema':'direct-region-seed-research-report-v2','status':'unreviewed-research-not-published','method':'Per selected root, rasterize explicitly supplied valid polygon(s) at GDAL pixel centers and select configured inside/outside codes; unselected roots are zero. Source and closure evidence pins do not prove the supplied polygon derives from them.','tie_convention':'GDAL rasterization pixel-center convention for recorded GDAL version; exact-boundary behavior needs review.','grid':{k:g[k] for k in ('width','height','west','north','step')},'grid_crs':g['crs'],'component_rows_sha256':pins[0]['sha256'],'component_runs_sha256':pins[1]['sha256'],'output_rows_sha256':sha(out/'rows.u32le'),'output_runs_sha256':sha(out/'runs.u32le'),'reserve_bytes':reserve,'config_sha256':hashlib.sha256(raw).hexdigest(),'input_pins':pins,'program_sha256':{'builder':program_hashes['build_seed.py'],'runtime_source':program_hashes['seed_runtime.py']},'outputs_sha256':{'rows':sha(out/'rows.u32le'),'runs':sha(out/'runs.u32le')},'rule_population':{str(k):v for k,v in populations.items()},'category_cell_counts':{str(k):v for k,v in code_counts.items()},'execution':{'api':'osgeo.gdal + NumPy','workers':workers,'strip_rows':c['strip_rows']},'gdal_version':gdal.VersionInfo(),'elapsed_seconds':time.time()-start}
  (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');return report
 if __name__=='__main__':
  if len(sys.argv)!=3:raise SystemExit('usage: build_seed.py CONFIG NEW_OUTPUT_DIR')

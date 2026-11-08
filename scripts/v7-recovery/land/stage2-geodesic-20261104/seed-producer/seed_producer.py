@@ -12,11 +12,10 @@ from export_adapter import load_pinned_snapshot,boundary_records,selected_region
 from seed_rules import compile_rules
 from region_client import execute as build_region
 from closure_client import sha
-from atomic_move import move_noreplace
+from atomic_move import move_noreplace,output_path
 BASE=Path(__file__).resolve().parent
 CODE=('seed_producer.py','export_adapter.py','seed_rules.py','region_client.py','region_worker.py','regions.py','closure_client.py')
-TRUSTED_CODE={'seed_builder':'f28e06acaf6325ea8e5089ed51fbc8c860506153dc46c4d2ccdac29139ca1e66','seed_kernel':'37c15e452dca1f23cf5fe0fafa9c7bcc464a8227b99c120ab1c42a663605d84a','closure_checker':'1e796c7f9bc8843252398eed54093265581446c9f4cac10dcb3b4c424b6e1bd1'}
-PREVIOUS_SEED_KERNEL = 'b8109861272d3dc0ea514575a4dc3803cf2691c76d0a77e76e4ab4bb382fccfe'
+TRUSTED_CODE={'seed_builder':'cba6ab8237338b97c6d31d94c3133d0a8fbc39866fad74cb0c6db8d3000602d2','seed_kernel':'f10542566f0be9cabde84d8a247f8afb173137af250d0cb9dc8c14d76fc98339','closure_checker':'1e796c7f9bc8843252398eed54093265581446c9f4cac10dcb3b4c424b6e1bd1'}
 # Explicit research-only checker supporting a directly pinned producer path.
 PROVISIONAL_CLOSURE_CHECKER='4491d971541fcfe7317d40abf2e8320c308d58af5c7f8115348362f0f71da327'
 TRUSTED_TERMINAL_CHECKER='fb0058f368f0db8ca07d1c9347aaf1192cb5b2fc20c3691e167623531f5570f1'
@@ -25,8 +24,6 @@ INPUTS={'snapshot','resolution','physical_rows','physical_runs','physical_report
 def validate_executable_pins(inp,allow_local):
  for key,digest in TRUSTED_CODE.items():
   allowed = {digest}
-  if key == 'seed_kernel':
-   allowed.add(PREVIOUS_SEED_KERNEL)
   if key == 'closure_checker' and allow_local:
    allowed.add(PROVISIONAL_CLOSURE_CHECKER)
   if inp[key].get('sha256') not in allowed:raise ValueError('unreviewed executable code')
@@ -38,7 +35,7 @@ def validate_provisional_checker_source(inp,snapshot,allow_local):
 
 def rasterizer_sources(inp):
  directory=BASE.parents[1]/'neon-mainland-regions-20261104/rasterizer'
- expected=(directory/'build_seed.py',directory/'seed_kernel.cpp')
+ expected=(directory/'build_seed.py',directory/'seed_runtime.py')
  actual=tuple(Path(inp[key]['path']).resolve(strict=True) for key in ('seed_builder','seed_kernel'))
  if actual!=tuple(path.resolve(strict=True) for path in expected):raise ValueError('checked-in rasterizer source pair required')
  return actual
@@ -63,8 +60,8 @@ def bounded_json(pin,guard):
  return json.loads(b''.join(chunks))
 def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
  if not callable(guard):raise ValueError('resource guard required')
- request_path=Path(request_path).resolve(strict=True);work=Path(work_dir).resolve();output=Path(output_dir).resolve();guard()
- if work.exists() or output.exists() or not work.parent.is_dir() or not output.parent.is_dir() or work==output or work in output.parents or output in work.parents:raise ValueError('invalid work/output directory')
+ request_path=Path(request_path).resolve(strict=True);work=output_path(work_dir);output=output_path(output_dir);guard()
+ if os.path.lexists(work) or os.path.lexists(output) or not work.parent.is_dir() or not output.parent.is_dir() or work==output or work in output.parents or output in work.parents:raise ValueError('invalid work/output directory')
  with open(request_path,'rb') as f:raw=f.read()
  req=json.loads(raw,object_pairs_hook=no_duplicates);inp=req.get('inputs');grid=req.get('grid');controls=req.get('controls')
  if req.get('schema')!='worldatlas-stage2-seed-request-v1' or not isinstance(inp,dict) or set(inp) not in (INPUTS,INPUTS|{'terminal_checker'},INPUTS|{'terminal_checker','prior_physical_report'}) or not isinstance(grid,dict) or set(grid)!={'width','height','west','north','step'} or not isinstance(controls,dict) or set(controls)!={'disk_reserve_bytes','strip_rows'}:raise ValueError('invalid seed request')
@@ -134,7 +131,7 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
  execute_rasterizer(inp,config_path,seedout,guard)
  raster=bounded_json({'path':str(seedout/'report.json'),'sha256':sha(seedout/'report.json',guard)},guard)
  rows=sha(seedout/'rows.u32le',guard);runs=sha(seedout/'runs.u32le',guard)
- if raster.get('schema')!='direct-region-seed-research-report-v1' or raster.get('outputs_sha256')!={'rows':rows,'runs':runs} or raster.get('component_rows_sha256')!=inp['component_rows']['sha256'] or raster.get('component_runs_sha256')!=inp['component_runs']['sha256']:raise ValueError('seed rasterizer output mismatch')
+ if raster.get('schema')!='direct-region-seed-research-report-v2' or raster.get('outputs_sha256')!={'rows':rows,'runs':runs} or raster.get('component_rows_sha256')!=inp['component_rows']['sha256'] or raster.get('component_runs_sha256')!=inp['component_runs']['sha256']:raise ValueError('seed rasterizer output mismatch')
  populations=raster.get('rule_population');counts=raster.get('category_cell_counts')
  if not isinstance(populations,dict) or set(populations)!={str(r['component_id_current_generation_only']) for r in rules} or not isinstance(counts,dict) or set(counts)!={str(x) for x in range(17,23)} or any(type(v) is not int or v<=0 for v in counts.values()):raise ValueError('missing mainland category population')
  for r in rules:

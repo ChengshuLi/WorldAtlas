@@ -11,7 +11,6 @@ import argparse
 import json
 from pathlib import Path
 import resource
-import subprocess
 import sys
 import time
 
@@ -26,7 +25,7 @@ STAGE2 = REPO / 'scripts/v7-recovery/land/stage2-geodesic-20261104'
 
 def run(reference, out):
     sys.path.insert(0, str(STAGE2))
-    import baseline_runner, build_stage2, checkpoints, contracts, engine, verify_inputs
+    import baseline_runner, build_stage2, checkpoints, contracts, engine, verify_inputs, verify_seed_index
     reference = reference.resolve(strict=True)
     core = reference / 'work/stage2-provisional-only/core'
     cfg = json.loads((core.parent / 'core-requests/config.json').read_text())
@@ -46,14 +45,7 @@ def run(reference, out):
         raise ValueError('reference checkpoint does not match completed producer report')
     # Independently verify every tile against every current seed run before
     # constructing any spatial bound. This is not timed as search work.
-    verifier = out / 'verify-seed-index'
-    subprocess.run(['g++', '-O3', '-std=c++17', '-Wall', '-Wextra', '-Werror',
-                    str(STAGE2 / 'verify_seed_index.cpp'), '-lcrypto', '-o', str(verifier)], check=True)
-    checked = subprocess.run([str(verifier), str(paths['seed_rows']), str(paths['seed_runs']),
-                              cfg['tile_directory'], str(width), str(height), '1024'],
-                             text=True, capture_output=True, check=True)
-    if json.loads(checked.stdout).get('status') != 'verified':
-        raise ValueError('seed index verification failed')
+    verify_seed_index.verify(paths['seed_rows'],paths['seed_runs'],cfg['tile_directory'],width,height,1024,guard)
     reps = np.fromfile(paths['representatives'], dtype='<u4').reshape(-1, 5)
     tiles = verify_inputs.verify_representatives(cfg['tile_directory'], paths['tile_manifest'],
                                                  reps, width, height, guard=guard)
