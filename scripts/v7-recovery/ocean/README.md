@@ -1,5 +1,12 @@
 # Candidate ocean fill runner
 
+V8 inherits its four ocean seeds from the Neon revision
+`v7-ocean-seed-recovery-draft-1`. The original grid indices are in
+`run_fresh_ocean_fill.py`, and `original_ocean_seed_rows.sql` records the
+import that converted them to grid-center coordinates in Neon. The selected
+ocean revision `v7-ocean-iho-2026-draft-1` retains those same coordinates and
+labels. Use `ocean_fill_runner.py` for the selected routes and seeds.
+
 This isolated candidate adapts the preserved interval flood-fill engine. It is not a release or a raw-source rebuild. It does not authenticate Neon snapshots and refuses the CLI unless `--allow-unverified-snapshot` is supplied. It never reads prior ocean labels and it creates a fresh output directory exclusively. No deployment is performed.
 
 The snapshot uses `worldatlas-geography-decision-export-v1`: accepted, matching entity/decision revisions; endpoints with longitude/latitude; ordered routes; ocean seed records linked by entity IDs to water codes 7–10; and one `ocean_fill` policy with `connectivity: 4`, `wrap_longitude`, `barrier_tie_rule: "left-of-oriented-route"`, `unseeded_policy: "report-only"`, and explicit unique `route_ids` and `seed_ids`. Routes currently support `lonlat_polyline`, `meridian`, `wgs84_geodesic`, and `spherical_rhumb`. Both geographic interpolation types require `parameters.max_step_km` in (0,1]. Geodesics additionally require exact `build.software_versions.pyproj` and `.proj` matching the installed libraries. Rhumbs are constant-bearing curves interpolated in spherical Mercator coordinates, matching the IHO S-130 Ed.1.0.0 construction lines; pole endpoints are unsupported. Antimeridian-crossing routes and unsupported geometry fail closed. Distinct ocean seeds reaching the same connected component also fail. Seed names, boundary choices, and physical limits come from the export, not hard-coded geography.

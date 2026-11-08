@@ -1,0 +1,14 @@
+-- Draft recovery evidence only. These are candidate grid-center seeds, not accepted geography.
+INSERT INTO atlas.decision_revisions(revision,entity_revision,evidence)
+VALUES ('v7-ocean-seed-recovery-draft-1','v7-category-bootstrap-v1',
+ '{"status":"candidate-not-approved","source_path":"scripts/v7-recovery/ocean/run_fresh_ocean_fill.py","source_commit":"6939267eea33354a86bf6723d60bb73d3252dc81","source_sha256":"2f6b544d635ea571ec38dfd72e83d7a3438c170db6587b2a5f145aef03607458","note":"Recovered seed cells and nominal labels; current mask eligibility and final geographic review remain unverified."}');
+INSERT INTO atlas.decision_endpoints(revision,endpoint_id,name,longitude,latitude,derivation,evidence) VALUES
+ ('v7-ocean-seed-recovery-draft-1','seed-atlantic','Atlantic Ocean seed',-29.999542236328125,-0.001373291015625,'{"method":"grid-cell-center","grid_width":131072,"grid_height":54614,"x":54613,"y":32768,"longitude_formula":"-180+(x+0.5)*360/width","latitude_formula":"90-(y+0.5)*360/width"}','{"nominal_longitude":-30,"nominal_latitude":0,"status":"candidate-not-approved"}'),
+ ('v7-ocean-seed-recovery-draft-1','seed-pacific','Pacific Ocean seed',-140.000152587890625,-0.001373291015625,'{"method":"grid-cell-center","grid_width":131072,"grid_height":54614,"x":14563,"y":32768,"longitude_formula":"-180+(x+0.5)*360/width","latitude_formula":"90-(y+0.5)*360/width"}','{"nominal_longitude":-140,"nominal_latitude":0,"status":"candidate-not-approved"}'),
+ ('v7-ocean-seed-recovery-draft-1','seed-indian','Indian Ocean seed',80.001068115234375,-29.999542236328125,'{"method":"grid-cell-center","grid_width":131072,"grid_height":54614,"x":94663,"y":43690,"longitude_formula":"-180+(x+0.5)*360/width","latitude_formula":"90-(y+0.5)*360/width"}','{"nominal_longitude":80,"nominal_latitude":-30,"status":"candidate-not-approved"}'),
+ ('v7-ocean-seed-recovery-draft-1','seed-arctic','Arctic Ocean seed',0.001373291015625,84.999847412109375,'{"method":"grid-cell-center","grid_width":131072,"grid_height":54614,"x":65536,"y":1820,"longitude_formula":"-180+(x+0.5)*360/width","latitude_formula":"90-(y+0.5)*360/width"}','{"nominal_longitude":0,"nominal_latitude":85,"status":"candidate-not-approved"}');
+INSERT INTO atlas.decision_ocean_seeds(revision,seed_id,endpoint_id,entity_revision,entity_id,evidence) VALUES
+ ('v7-ocean-seed-recovery-draft-1','atlantic','seed-atlantic','v7-category-bootstrap-v1',7,'{"status":"candidate-not-approved"}'),
+ ('v7-ocean-seed-recovery-draft-1','pacific','seed-pacific','v7-category-bootstrap-v1',8,'{"status":"candidate-not-approved"}'),
+ ('v7-ocean-seed-recovery-draft-1','indian','seed-indian','v7-category-bootstrap-v1',9,'{"status":"candidate-not-approved"}'),
+ ('v7-ocean-seed-recovery-draft-1','arctic','seed-arctic','v7-category-bootstrap-v1',10,'{"status":"candidate-not-approved"}');
