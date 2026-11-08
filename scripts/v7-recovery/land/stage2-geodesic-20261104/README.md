@@ -162,3 +162,11 @@ are pending the exclusive measurement slot. Tiny fixtures cover different
 nonbinary steps, strip sizes, concurrency, root IDs zero/UINT32_MAX, arbitrary
 rules, empty rows, exact-center vertices, malformed streams and dangling output
 symlinks. This is not a new full-pipeline acceptance claim.
+
+Polygon burns are also omitted when no selected component interval in a strip
+depends on that polygon bit. All polygons are still authenticated and validated;
+full-width affine math is unchanged for every retained burn. The dependency
+mask follows arbitrary configured root/bit rules, including equal output codes
+whose inside/outside populations still require the polygon. Execution reports
+record actual versus possible polygon burns. Randomized independent oracles
+check that discarding every unused bit preserves complete RLE and populations.

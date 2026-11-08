@@ -25,6 +25,19 @@ class RuleIndex:
         self.order=np.argsort(self.table[:,0],kind='stable');self.roots=self.table[self.order,0]
         if np.any(self.roots[1:]==self.roots[:-1]):raise ValueError('duplicate seed root')
 
+    def required_bits(self, records):
+        """Polygon dependencies of present selected intervals, never geography.
+
+        Full interval/offset validation still happens in strip before output.
+        Whole-component rules and unselected roots do not inspect any mask bit.
+        """
+        records=np.asarray(records)
+        if records.ndim!=2 or records.shape[1]!=3 or records.dtype.kind not in 'iu':
+            raise ValueError('component records required')
+        positions=np.searchsorted(self.roots,records[:,2]);safe=np.minimum(positions,len(self.roots)-1)
+        selected=(positions<len(self.roots)) & (self.roots[safe]==records[:,2])
+        return int(np.bitwise_or.reduce(self.table[self.order[positions[selected]],1],initial=np.uint32(0)))
+
     def strip(self, mask, offsets, records):
         mask=np.asarray(mask);offsets=np.asarray(offsets);records=np.asarray(records)
         if mask.dtype!=np.uint8 or mask.ndim!=2 or min(mask.shape)<=0:raise ValueError('Byte raster strip required')

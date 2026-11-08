@@ -99,18 +99,23 @@ def build(config,output):
  records=np.memmap(paths[1],mode='r',dtype='<u4',shape=(count,3)) if count else np.empty((0,3),dtype='<u4')
  local=threading.local()
  def raster(y):
-  if not hasattr(local,'datasets'):
-   local.datasets=[ogr.Open(str(paths[2+i])) for i in range(len(c['regions']))]
-   if any(ds is None for ds in local.datasets):raise ValueError('cannot reopen geometry')
   h=min(c['strip_rows'],g['height']-y)
+  bits=index.required_bits(records[int(offsets[y]):int(offsets[y+h])])
+  if bits==0:return y,np.zeros((h,g['width']),dtype=np.uint8),bits
+  if not hasattr(local,'datasets'):local.datasets={}
   ds=gdal.GetDriverByName('MEM').Create('',g['width'],h,1,gdal.GDT_Byte)
   # Preserve original global-grid origin, dimensions and center arithmetic.
   ds.SetGeoTransform((g['west'],g['step'],0,g['north']-y*g['step'],0,-g['step']))
-  for i,source in enumerate(local.datasets):
+  for i in range(len(c['regions'])):
+   if not bits & (1<<i):continue
+   if i not in local.datasets:
+    local.datasets[i]=ogr.Open(str(paths[2+i]))
+    if local.datasets[i] is None:raise ValueError('cannot reopen geometry')
+   source=local.datasets[i]
    layer=source.GetLayer(0);layer.ResetReading()
    if gdal.RasterizeLayer(ds,[1],layer,burn_values=[1<<i],options=['MERGE_ALG=ADD'])!=0:raise ValueError('rasterization failed')
   mask=ds.ReadAsArray();ds=None
-  return y,mask
+  return y,mask,bits
  def ordered_strips():
   positions=iter(range(0,g['height'],c['strip_rows']))
   with ThreadPoolExecutor(max_workers=workers) as executor:
@@ -124,10 +129,11 @@ def build(config,output):
     y=next(positions,None)
     if y is not None:pending.append(executor.submit(raster,y))
  out.mkdir(mode=0o700,parents=False,exist_ok=False)
- inside=np.zeros(len(rules),dtype=np.uint64);outside=inside.copy();categories=np.zeros(6,dtype=np.uint64);total=0
+ inside=np.zeros(len(rules),dtype=np.uint64);outside=inside.copy();categories=np.zeros(6,dtype=np.uint64);total=0;burns=0;strips=0
  with (out/'rows.u32le').open('xb') as rowout,(out/'runs.u32le').open('xb') as runout:
   rowout.write(np.asarray([0],dtype='<u4').tobytes())
-  for y,mask in ordered_strips():
+  for y,mask,bits in ordered_strips():
+   strips+=1;burns+=bits.bit_count()
    check_space();h=len(mask);lo,hi=int(offsets[y]),int(offsets[y+h])
    pairs,counts,ri,ro,cc=index.strip(mask,offsets[y:y+h+1].astype(np.int64)-lo,records[lo:hi])
    cumulative=np.cumsum(counts,dtype=np.uint64)+total
@@ -140,7 +146,7 @@ def build(config,output):
  for x in pins:pinned(x)
  if config.read_bytes()!=raw:raise ValueError('config changed')
  if any(sha(HERE/name)!=digest for name,digest in program_hashes.items()):raise ValueError('program changed during build')
- report={'schema':'direct-region-seed-research-report-v2','status':'unreviewed-research-not-published','method':'Per selected root, rasterize explicitly supplied valid polygon(s) at GDAL pixel centers and select configured inside/outside codes; unselected roots are zero. Source and closure evidence pins do not prove the supplied polygon derives from them.','tie_convention':'GDAL rasterization pixel-center convention for recorded GDAL version; exact-boundary behavior needs review.','grid':{k:g[k] for k in ('width','height','west','north','step')},'grid_crs':g['crs'],'component_rows_sha256':pins[0]['sha256'],'component_runs_sha256':pins[1]['sha256'],'output_rows_sha256':sha(out/'rows.u32le'),'output_runs_sha256':sha(out/'runs.u32le'),'reserve_bytes':reserve,'config_sha256':hashlib.sha256(raw).hexdigest(),'input_pins':pins,'program_sha256':{'builder':program_hashes['build_seed.py'],'runtime_source':program_hashes['seed_runtime.py']},'outputs_sha256':{'rows':sha(out/'rows.u32le'),'runs':sha(out/'runs.u32le')},'rule_population':{str(k):v for k,v in populations.items()},'category_cell_counts':{str(k):v for k,v in code_counts.items()},'execution':{'api':'osgeo.gdal + NumPy','workers':workers,'strip_rows':c['strip_rows']},'gdal_version':gdal.VersionInfo(),'elapsed_seconds':time.time()-start}
+ report={'schema':'direct-region-seed-research-report-v2','status':'unreviewed-research-not-published','method':'Per selected root, rasterize explicitly supplied valid polygon(s) at GDAL pixel centers and select configured inside/outside codes; unselected roots are zero. Source and closure evidence pins do not prove the supplied polygon derives from them.','tie_convention':'GDAL rasterization pixel-center convention for recorded GDAL version; exact-boundary behavior needs review.','grid':{k:g[k] for k in ('width','height','west','north','step')},'grid_crs':g['crs'],'component_rows_sha256':pins[0]['sha256'],'component_runs_sha256':pins[1]['sha256'],'output_rows_sha256':sha(out/'rows.u32le'),'output_runs_sha256':sha(out/'runs.u32le'),'reserve_bytes':reserve,'config_sha256':hashlib.sha256(raw).hexdigest(),'input_pins':pins,'program_sha256':{'builder':program_hashes['build_seed.py'],'runtime_source':program_hashes['seed_runtime.py']},'outputs_sha256':{'rows':sha(out/'rows.u32le'),'runs':sha(out/'runs.u32le')},'rule_population':{str(k):v for k,v in populations.items()},'category_cell_counts':{str(k):v for k,v in code_counts.items()},'execution':{'api':'osgeo.gdal + NumPy','workers':workers,'strip_rows':c['strip_rows'],'strips':strips,'polygon_burns':burns,'possible_polygon_burns':strips*len(c['regions'])},'gdal_version':gdal.VersionInfo(),'elapsed_seconds':time.time()-start}
  (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');return report
 if __name__=='__main__':
  if len(sys.argv)!=3:raise SystemExit('usage: build_seed.py CONFIG NEW_OUTPUT_DIR')

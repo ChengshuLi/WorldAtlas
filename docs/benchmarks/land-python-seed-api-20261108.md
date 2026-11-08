@@ -39,3 +39,11 @@ The reusable `prepare_seed_raster_replay.py` and `benchmark_seed_raster.py` tool
 record source/code pins and exact UTC intervals, compare all seed output hashes
 and populations, and never launch the whole user-owned pipeline. No new seed
 speed ratio, final-land artifact or end-to-end result is claimed here.
+
+Polygon burns are also omitted when no selected component interval in a strip
+depends on that polygon bit. All polygons are still authenticated and validated;
+full-width affine math is unchanged for every retained burn. The dependency
+mask follows arbitrary configured root/bit rules, including equal output codes
+whose inside/outside populations still require the polygon. Execution reports
+record actual versus possible polygon burns. Randomized independent oracles
+check that discarding every unused bit preserves complete RLE and populations.

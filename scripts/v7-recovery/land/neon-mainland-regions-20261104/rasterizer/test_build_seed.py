@@ -45,6 +45,7 @@ class SeedBuildTests(unittest.TestCase):
             # zero and maximum uint32 identities, and a whole-component rule.
             if y!=3:
                 for a,b,r in ((0,3,0),(4,8,0xffffffff),(8,11,42),(12,13,77)):
+                    if (r==0 and y>=5) or (r==0xffffffff and y<5):continue
                     records.append((a,b,r));roots[y,a:b]=r
             offsets.append(len(records))
         rowpath=source/'rows';runpath=source/'runs'
@@ -84,6 +85,7 @@ class SeedBuildTests(unittest.TestCase):
                         self.assertEqual(report['rule_population'],{r:{'inside_cells':v[0],'outside_cells':v[1]} for r,v in pop.items()})
                         self.assertEqual(report['category_cell_counts'],{str(c):int(np.count_nonzero(expected==c)) for c in range(17,23)})
                         self.assertNotIn('compiled_kernel',report['program_sha256'])
+                        if strip==1:self.assertLess(report['execution']['polygon_burns'],report['execution']['possible_polygon_burns'])
                         outputs.append(((out/'rows.u32le').read_bytes(),(out/'runs.u32le').read_bytes()))
                 self.assertEqual(*outputs)
 

@@ -32,9 +32,12 @@ class SeedRuntimeTests(unittest.TestCase):
         offsets=[0];flat=[]
         for row in rows:flat.extend(row);offsets.append(len(flat))
         records=np.asarray(flat,dtype='<u4').reshape(-1,3);offsets=np.asarray(offsets,dtype='<u4')
-        actual=RuleIndex(rules).strip(mask,offsets,records)
+        runtime=RuleIndex(rules);actual=runtime.strip(mask,offsets,records)
         wanted=expected(mask,offsets,records,rules)
         for a,b in zip(actual,wanted):np.testing.assert_array_equal(a,b)
+        required=runtime.required_bits(records)
+        pruned=runtime.strip(mask & required,offsets,records)
+        for a,b in zip(actual,pruned):np.testing.assert_array_equal(a,b)
 
     def test_random_masks_and_roots_match_independent_cell_oracle(self):
         rng=random.Random(102941)
@@ -62,6 +65,12 @@ class SeedRuntimeTests(unittest.TestCase):
         mask=np.asarray([[0,255,85,170]],dtype=np.uint8)
         for bit in (1,2,4,8,16,32,64,128):
             self.compare(mask,[[(0,4,913)]],[(913,bit,22,22)])
+
+    def test_dependencies_ignore_only_absent_or_whole_component_rules(self):
+        runtime=RuleIndex([(0,128,17,18),(19,0,22,22),(0xffffffff,2,20,21)])
+        for records,expected_bits in (([],0),([(0,1,19),(1,2,555)],0),([(0,1,0)],128),
+                ([(0,1,0xffffffff),(1,2,0)],130)):
+            self.assertEqual(runtime.required_bits(np.asarray(records,dtype='<u4').reshape(-1,3)),expected_bits)
 
     def test_validation_rejects_overlaps_offsets_duplicate_and_invalid_rules(self):
         mask=np.zeros((1,4),dtype=np.uint8);runtime=RuleIndex([(1,1,17,18)])
