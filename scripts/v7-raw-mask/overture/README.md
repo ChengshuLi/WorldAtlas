@@ -58,6 +58,15 @@ raw copy downloaded specifically for this benchmark, after every check succeeds.
 Do not use that option for an existing input shared with another task. Reports,
 hashes and cleanup receipts remain available.
 
+`profile_water_shard.py SOURCE SHA256 CONFIG PINNED_REFERENCE NEW_OUTPUT` uses
+standard Python cProfile on one complete GDAL-API run, then checks every count
+and mask pixel against the pinned reference. It retains per-function calls,
+self/cumulative time, producer logs and raw pstats data. Instrumentation adds
+overhead; this attributes repeated work, not a speed comparison. Run it outside
+the exclusive uninstrumented timing window. Cumulative times overlap and must
+not be summed. See the [baseline audit](../../../docs/benchmarks/physical-baseline-audit-20261108.json)
+before comparing retained receipts from different implementations or scopes.
+
 ### Historical development timing, superseded by the center-tie correction
 
 The global-vector implementation below was subsequently found to change two
