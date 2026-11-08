@@ -1,8 +1,10 @@
-# Mixed land research runtime
+# Regional land assignment
 
-This directory preserves the exact mixed source-resolved land runtime used for the verified draft-22 research build. The sibling directory names are retained because the coordinator locates reviewed modules relative to its own path and verifies their SHA-256 digests before use. `SHA256SUMS` records the copied Python files. It includes the imported stage-2 validation dependencies, point and identity adapters, and OSM geometry extractors used by the coordinator.
-
-This is code preservation, not an accepted geography release. No source datasets, snapshots, credentials, decisions, output grids, or geographic records are included. A real run requires independently obtained and validated private inputs, a source-based decision snapshot, the exact stage-2 approval closure, and a guarded process supervisor. Missing inputs or mismatched code pins must fail closed. The repository does not supply a preconfigured real-world run.
+`stage3-mixed-leeward-full-20261105/apply_selected_mixed.py` builds the regional
+land assignments from the current mainland streams and selected regional
+snapshot. It resolves named points, source polygons and regional policies
+against components produced by the same run. The
+[V8 runner](../../v7-pipeline/README.md) prepares the request and code pins.
 
 The small synthetic checks can be run with GDAL Python bindings, NumPy, SciPy and pyproj available:
 
