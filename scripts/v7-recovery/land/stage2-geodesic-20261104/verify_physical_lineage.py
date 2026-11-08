@@ -202,7 +202,7 @@ def _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report
    engine=watercfg.get('rasterizer','gdal');kernel=sr.get('gdal_kernel')
    need(engine in ('gdal','python') and sr.get('rasterizer')==engine and sr.get('native_kernel') is None,'water rasterizer/config mismatch: '+str(i))
    if engine=='gdal':
-    need(isinstance(kernel,dict) and kernel.get('implementation')=='python-gdal-c-api-v1' and kernel.get('method')==watercfg.get('batch_method','hybrid') and kernel.get('binding_sha256')==code[batch_name],'GDAL water kernel mismatch: '+str(i))
+    need(isinstance(kernel,dict) and kernel.get('implementation') in ('python-gdal-c-api-v1','python-gdal-api-v2') and kernel.get('method')==watercfg.get('batch_method','hybrid') and kernel.get('binding_sha256')==code[batch_name],'GDAL water kernel mismatch: '+str(i))
    else:
     need(kernel is None,'unexpected GDAL water kernel: '+str(i))
   if sr.get('rasterizer')=='native':

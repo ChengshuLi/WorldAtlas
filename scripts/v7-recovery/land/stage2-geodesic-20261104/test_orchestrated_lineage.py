@@ -64,6 +64,28 @@ class OrchestratedLineageTests(unittest.TestCase):
   ucpin=write(ucp,uc);urp=self.r/'output'/'union'/'report.json';union=json.loads(urp.read_text())
   union.update({'configuration_sha256':ucpin['sha256'],'shards':uc['shards']});pipe['stage_reports']['union']=write(urp,union)
   self.req['inputs']['pipeline_report']=write(pp,pipe);write(self.reqpath,self.req)
+ def use_gdal_kernel(self,implementation='python-gdal-api-v2',wrong_binding=False):
+  self.use_raw_physical_contract();pp=self.r/'output'/'report.json';pipe=json.loads(pp.read_text())
+  name='overture/water_batch.py';pipe['script_sha256'][name]=blob(self.code_root/name,name.encode())['sha256']
+  ucp=self.r/'output'/'union'/'config.json';uc=json.loads(ucp.read_text())
+  for i,shard in enumerate(uc['shards']):
+   path=Path(shard['report']['path']);report=json.loads(path.read_text())
+   report.update({'rasterizer':'gdal','gdal_kernel':{'implementation':implementation,'method':'hybrid','binding_sha256':pipe['script_sha256'][name]}})
+   if wrong_binding and i==5:report['gdal_kernel']['binding_sha256']='0'*64
+   shard['report']=write(path,report)
+  ucpin=write(ucp,uc);urp=self.r/'output'/'union'/'report.json';union=json.loads(urp.read_text())
+  union.update({'configuration_sha256':ucpin['sha256'],'shards':uc['shards']});pipe['stage_reports']['union']=write(urp,union)
+  self.req['inputs']['pipeline_report']=write(pp,pipe);write(self.reqpath,self.req)
+ def test_python_api_kernel_report_chain(self):
+  self.use_gdal_kernel();self.assertEqual(self.check()['method'],'raw-physical-report-chain-v1')
+ def test_historical_gdal_kernel_report_chain_is_readable(self):
+  self.use_gdal_kernel(implementation='python-gdal-c-api-v1');self.assertEqual(self.check()['method'],'raw-physical-report-chain-v1')
+ def test_python_api_kernel_wrong_binding_rejected(self):
+  self.use_gdal_kernel(wrong_binding=True)
+  with self.assertRaisesRegex(ValueError,'GDAL water kernel mismatch'):self.check()
+ def test_unknown_gdal_kernel_implementation_rejected(self):
+  self.use_gdal_kernel(implementation='unknown')
+  with self.assertRaisesRegex(ValueError,'GDAL water kernel mismatch'):self.check()
  def test_native_kernel_report_chain_and_binary_tamper(self):
   self.use_native_kernel();self.assertEqual(self.check()['method'],'raw-physical-report-chain-v1')
   (self.r/'output'/'shards'/'00005'/'water-native.so').write_bytes(b'changed')
