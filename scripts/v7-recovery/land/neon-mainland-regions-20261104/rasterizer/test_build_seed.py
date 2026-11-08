@@ -33,11 +33,14 @@ class SeedBuildTests(unittest.TestCase):
         width,height=13,9
         grid={'width':width,'height':height,'west':-7.3,'north':4.1,'step':step,'crs':'EPSG:4326'}
         regions=[]
-        for i,(a,b,c,d) in enumerate(((1.5,7.5,1.5,7.5),(5,11,0,9))):
-            # Include vertices on pixel centers and a nonbinary global affine.
-            ring=[[grid['west']+x*step,grid['north']-y*step] for x,y in ((a,c),(b,c),(b,d),(a,d),(a,c))]
+        def ring(a,b,c,d):
+            return [[grid['west']+x*step,grid['north']-y*step] for x,y in ((a,c),(b,c),(b,d),(a,d),(a,c))]
+        geometries=({'type':'Polygon','coordinates':[ring(1.5,7.5,1.5,7.5),ring(2.5,6.5,2.5,6.5)]},
+                    {'type':'MultiPolygon','coordinates':[[ring(5,7,0,9)],[ring(9,11,0,9)]]})
+        for i,geometry in enumerate(geometries):
+            # Holes, disconnected parts, exact centers and nonbinary affines.
             path=source/f'{i}.geojson'
-            path.write_text(json.dumps({'type':'FeatureCollection','features':[{'type':'Feature','properties':{},'geometry':{'type':'Polygon','coordinates':[ring]}}]}))
+            path.write_text(json.dumps({'type':'FeatureCollection','features':[{'type':'Feature','properties':{},'geometry':geometry}]}))
             regions.append({'id':str(i),'geometry':pin(path),'witnesses':[]})
         records=[];offsets=[0];roots=np.zeros((height,width),dtype=np.uint32)
         for y in range(height):
