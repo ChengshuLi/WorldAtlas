@@ -1,5 +1,0 @@
-# GeoNames airport witness support
-
-This research overlay adds a separately versioned S/AIRP airport-point method. The existing T/ISL extractor and island method remain strict. A selected airport point can identify one current physical land component only when a named-region check succeeds and a separate, revision-bound geographic-membership citation explicitly associates that airport with the named island. The source bytes are pinned and checked; the cited text and interpretation still require human review. A point does not establish every cell's identity, nearby islet membership, coastline accuracy, or permission to publish.
-
-To reproduce, materialize the previously preserved mixed-runtime, GeoNames point and claim-validator directories and provider-archive overlay as siblings, then apply these files over their matching paths. Verify code and source pins and rerun the full synthetic test suites before use. This overlay includes code and synthetic tests only: no geographic decisions, source datasets, credentials, or result grids.
