@@ -11,6 +11,7 @@ import json
 import math
 import mmap
 import os
+from operator import length_hint
 from pathlib import Path
 import shutil
 import struct
@@ -41,6 +42,7 @@ class _Rows:
             self.runs = open(run_path, 'rb')
             try:
                 self.record = record
+                self.pending = None
                 if os.fstat(self.rows.fileno()).st_size != 4 * (height + 1):
                     raise ValueError('invalid row offset length')
                 size = os.fstat(self.runs.fileno()).st_size
@@ -58,6 +60,8 @@ class _Rows:
             raise
 
     def next(self):
+        if self.pending is not None and length_hint(self.pending, -1) != 0:
+            raise ValueError('previous row records not fully consumed')
         end = U32.unpack(_read_exact(self.rows, 4))[0]
         if end < self.pos or end > self.count:
             raise ValueError('invalid row offset')
@@ -65,10 +69,12 @@ class _Rows:
         self.pos = end
         # One ordinary row buffer replaces a Python read/unpack per record.
         # Keep this a generator so offsets still advance only on consumption.
-        yield from self.record.iter_unpack(_read_exact(self.runs, n * self.record.size))
+        self.pending = self.record.iter_unpack(_read_exact(self.runs, n * self.record.size))
+        yield from self.pending
 
     def finish(self):
-        if self.pos != self.count or self.runs.read(1) or self.rows.read(1):
+        if ((self.pending is not None and length_hint(self.pending, -1) != 0) or
+                self.pos != self.count or self.runs.read(1) or self.rows.read(1)):
             raise ValueError('run count mismatch')
 
     def close(self):

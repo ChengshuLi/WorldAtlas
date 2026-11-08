@@ -1,5 +1,9 @@
 """Pure-Python row batching preserves every output byte and validation rule."""
 import builtins
+import hashlib
+import importlib.util
+import struct
+import tempfile
 from pathlib import Path
 import random
 from unittest.mock import patch
@@ -50,6 +54,51 @@ class BatchedLandTest(fixture.WriterTest):
         self.assertEqual(result['runs'],9)
         self.assertEqual(self.output(),[(3,17),(4,18),(5,0),(7,20),(8,0),
                                        (4,19),(6,20),(7,0),(8,20)])
+
+    def test_unconsumed_buffer_cannot_pass_completion_or_advance_rows(self):
+        paths=self.pair('c',self.comp)
+        source=_Rows(*paths,2,TRIPLE)
+        try:
+            records=source.next()
+            self.assertEqual(next(records),self.comp[0][0])
+            with self.assertRaisesRegex(ValueError,'run count mismatch'):
+                source.finish()
+            with self.assertRaisesRegex(ValueError,'not fully consumed'):
+                next(source.next())
+            # Reading the last record is enough, even before asking the iterator
+            # for StopIteration. This preserves normal fixed-count consumption.
+            for expected in self.comp[0][1:]:self.assertEqual(next(records),expected)
+            self.assertEqual(list(source.next()),self.comp[1])
+            source.finish()
+        finally:
+            source.close()
+
+    def test_adjacent_component_coverage_and_seed_tiles_consume_every_row(self):
+        paths=[value for name,rows in (('c',self.comp),('p',self.phys)) for value in self.pair(name,rows)]
+        program=Path(__file__).resolve().parent.parent/'fresh-components-20261104/build_components.py'
+        spec=importlib.util.spec_from_file_location('stream_component_coverage_test',program)
+        component=importlib.util.module_from_spec(spec);spec.loader.exec_module(component)
+        self.assertEqual(component.coverage(paths[2],paths[3],paths[0],paths[1],8,2,lambda:None),13)
+        import build_seed_tiles
+        # Tile output must be outside its source and input directories.
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[4]) as temp:
+            root=Path(temp);inputs=root/'inputs';inputs.mkdir()
+            rows,runs=inputs/'rows',inputs/'runs'
+            rows.write_bytes(U(0,3,4));runs.write_bytes(U(3,17,7,18,8,0,8,19))
+            pin=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
+            report=build_seed_tiles.build(rows,runs,pin(rows),pin(runs),8,2,root/'tiles',tile_size=4,disk_floor_bytes=0)
+            self.assertEqual(report['tile_count'],2)
+            actual={}
+            for path in (root/'tiles').glob('*.bin'):
+                ty,tx=map(int,path.stem.split('-'))
+                for y,a,b,code in struct.iter_unpack('<IIII',path.read_bytes()):
+                    self.assertEqual(y//4,ty);self.assertEqual(a//4,tx)
+                    self.assertLessEqual(b,(tx+1)*4)
+                    for x in range(a,b):
+                        self.assertNotIn((y,x),actual);actual[y,x]=code
+            expected={(0,x):17 if x<3 else 18 for x in range(7)}
+            expected.update({(1,x):19 for x in range(8)})
+            self.assertEqual(actual,expected)
 
     def test_root_index_first_last_and_missing_entries(self):
         # Long, sparse root IDs exercise dictionary misses and the first entry
