@@ -76,27 +76,6 @@ A bounded run against the real Linux/GDAL region and seed builders and independe
 The experimental source-configured orchestrator now calls this adapter through `caucasus_stage2_binding.py`. Bounded tests include a pinned raw-source replay and synthetic closure, stale-trace rejection and call-site checks; they do not establish real-seed integration. No actual map or seed build was initiated.
 
 
-## Bounded strict-validator result
-
-A fresh macOS replay regenerated the compact recipe and derived line from the pinned raw source readbacks and the selected guide; the output bytes exactly matched the handoff. `test_caucasus_real_contract_adapter.py` then ran the actual stage-2 `contracts.validate_selected_seed_decisions` through the independent adapter with those source bytes and derived line. Three tests passed, including rejection of a stale boundary trace. The region, route, closure proof, component groups and seed trace were synthetic; the test did not execute a seed compiler, validate a real closure, or create a map. It did not claim historic V7 equivalence.
-
-Run from `scripts/caucasus-audit` with the pinned stage-2 code directory and the four source fixture paths:
-
-```sh
-CAUCASUS_SELECTED=/path/to/selected-caucasus.geojson \
-CAUCASUS_RECIPE=/path/to/compact.json \
-CAUCASUS_HYDRO=/path/to/hybas.zip \
-CAUCASUS_AUTHOR=/path/to/asia_europe_border.geojson \
-PYTHONPATH=".:../v7-land/research-mixed-runtime/stage2-geodesic-20261104" \
-python -m unittest -v test_caucasus_real_contract_adapter
-```
-
-Separately, the Linux builder's real GDAL region-builder fixture passed as recorded in [BOUNDED-GDAL-HANDOFF.md](BOUNDED-GDAL-HANDOFF.md). Neither bounded result exercises the newly wired orchestrator or proves real land-cell output. The real builder must reproduce source-to-line independently in its environment, review the integration and pin code and runtime before the selected workflow is used. No recipe was written to Neon.
-
-
-The source-and-validator fixture also confirms that the current strict validator rejects the derived seed trace when presented with the unchanged selected view; it accepts that trace only against the independently reconstructed effective view. The latest local focused run passed 35 tests. These are still bounded, synthetic-closure tests. In accordance with the user's instruction, do not install or use the separate dependency handoff and do not describe the Mac replay and Linux GDAL fixture as a single-environment run.
-
-
 ## Worker resource guard
 
 The source gate supports direct invocation of a pinned seed producer without adding a resource guard. An optional `--worker-sha256` invokes the pinned legacy worker and its resource checks instead. The producer itself may enforce resource limits: the currently frozen producer and orchestrator do, so they need an independently reviewed revision before a no-limit run. The experimental orchestrator binds trusted code/input pins and the gate report into its provenance and resume checks. It remains untested with the real seed pipeline.

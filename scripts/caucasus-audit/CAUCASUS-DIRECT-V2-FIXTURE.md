@@ -31,7 +31,7 @@ Environment: macOS 15.6.1 arm64, conda-forge Python 3.11.18 (`ccebca3c526a165ae7
 
 Use the same environment variables and real local inputs documented above, substituting `python -m unittest -v test_caucasus_v2_binding_real_source`. The input snapshot and source catalog, 40×40 grid, region closure, physical mask, components and resolution remain synthetic. This is not the outer orchestrator, production closure or a rebuilt map, and it does not establish that the source-derived line is a correct watershed. No Neon data was changed.
 
-A subsequent run also passed the actual gate and seed reports into `caucasus_stage2_binding.validate_seed`, which independently replayed the raw inputs and checked the gate report. Its validator callback was a **test probe**, not the strict core validator. This run passed 1/1 in 9.695 seconds. The separate `test_caucasus_real_contract_adapter.py` exercises the real strict validator with a synthetic seed report; the two tests do not demonstrate the complete direct outer/core path together.
+A subsequent run also passed the actual gate and seed reports into `caucasus_stage2_binding.validate_seed`, which independently replayed the raw inputs and checked the gate report. Its validator callback was a **test probe**, not the strict core validator. This run passed 1/1 in 9.695 seconds.
 
 ## Direct producer and strict selected-decision crosswalk
 

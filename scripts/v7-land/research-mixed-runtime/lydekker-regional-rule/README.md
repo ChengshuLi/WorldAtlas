@@ -1,11 +1,16 @@
-# Regional Lydekker whole-island research rule
+# Lydekker regional land rule
 
-This package proposes assignments for complete, generation-scoped physical components. It does not build or publish a map and is not wired into the existing production or mixed-land driver. `regional_workflow.research` authenticates the pinned Boo-east line, scans complete components, replays caller-authenticated selected claims before the line rule, protects supplied pending and mainland roots, and optionally evaluates source-anchored satellites using the caller-supplied exact WGS84 component-run metric. Source membership and physical component lineage must be authenticated independently.
+The V8 regional stage uses this rule to assign whole physical components
+against the selected line observation and source-backed group policy.
+Selected affiliations take precedence over the line default. Named source
+anchors can assign nearby components using WGS84 center-to-center distances.
+The rule holds conflicting, crossing, or partially covered components for
+review. It does not infer membership through chains of nearby islands.
 
-Selected affiliations are preserved. A source-backed regional group convention takes precedence over a line default; differing known group and nearby anchor targets are held for review with evidence. Conflicting group targets stay held across passes. A directly anchored island may replace a line default. The optional direct-anchor convention can use a source-named island despite closer unnamed land, but records that land and holds known conflicting targets. It never chains through inferred satellites. Unknown review states, pending claims, protected mainland, crossing and partial components are held.
+The [V8 configuration](../../../v7-pipeline/config.json) selects the regional
+snapshot and its source data and code pins. The regional writer reads fresh
+physical components and mainland streams from the same run.
 
-The `selected-regional-policy.json` records the research inputs and operational conventions, including provisional maximum 20 cells and 5 km WGS84 center-to-center distance. The source descriptions support geographic conventions; extent rectangles, source point-to-polygon matches and nearby-islet grouping are not proof of group membership. Known pending claims must be supplied explicitly; the complete pending inventory was not authenticated for the documented preview.
+Run focused tests from this directory with Python, NumPy, SciPy and pyproj.
 
-On the pinned draft-170 snapshot and previously executed, reconciled source-resolver reports, a bounded diagnostic against the historical draft-163/V7 comparison had zero remaining differences. Historical V7 is a comparison, not geographic authority, and no full map was rebuilt. This does not establish a current map result or authorize accepted-geography publication.
-
-For tests, use Python 3 with NumPy, SciPy and pyproj. Set `MIXED_CLAIMS_PATH` and `RUN_PAIR_PATH` to the authenticated existing modules to exercise actual mixed-claims and WGS84 dependencies, then run `python3 -m unittest discover -s scripts/v7-land/research-mixed-runtime/lydekker-regional-rule -v`. Inputs, source catalog, pending groups, line and component generation need separate verification before any use in a geography build.
+    python3 -m unittest discover -v

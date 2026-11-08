@@ -152,11 +152,11 @@ class TestSatelliteGeodesic(unittest.TestCase):
     def test_real_wgs84_run_pair(self):
         import importlib.util,os,sys
         from pathlib import Path
-        path=os.environ.get('RUN_PAIR_PATH')
-        if not path:
-            path=str(Path(__file__).resolve().parent.parent/'stage2-geodesic-20261104'/'run_pair.py')
-        if not Path(path).is_file(): self.skipTest('existing WGS84 run_pair unavailable')
-        sys.path.insert(0,str(Path(path).parent))
+        recovery=Path(__file__).resolve().parents[3]/'v7-recovery'
+        path=Path(os.environ.get('RUN_PAIR_PATH', recovery/'v24-source-pins/land/run_pair.py'))
+        if not path.is_file(): self.skipTest('existing WGS84 run_pair unavailable')
+        stage2=recovery/'land/stage2-geodesic-20261104'
+        sys.path[:0]=[str(path.parent),str(stage2)]
         try:
             spec=importlib.util.spec_from_file_location('actual_run_pair',path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
             components={1:summary(1),2:summary(3)};runs={1:[(90,5,6)],2:[(90,2,5)]}
@@ -165,6 +165,6 @@ class TestSatelliteGeodesic(unittest.TestCase):
             out=apply_satellites(result,components,runs,anchors,module.run_pair,width=360,north=90,max_satellite_cells=1,max_gap_m=120000,candidate_roots={1,2})
             self.assertEqual(out['proposals'][1]['code'],22)
             self.assertTrue(110000 < out['satellites'][1]['distance_m'] < 112000)
-        finally: sys.path.pop(0)
+        finally: del sys.path[:2]
 
 if __name__=='__main__':unittest.main()
