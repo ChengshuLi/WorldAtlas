@@ -15,7 +15,7 @@ source staging and final composition remain outside it. The archived component
 report has its own 32.143-second historical measurement; it is not a current
 controlled baseline.
 
-## The next paired test covers the largest measured share
+## The paired test covers the largest measured share
 
 Preflight plus writing account for 51.89% of this measured replay. Their exact
 input sizes explain why the Python call overhead matters:
@@ -34,13 +34,13 @@ not predicted wall-time ratios. All records are still validated and consumed.
 The complete assignment dictionary replaces repeated binary searches without
 sampling or a bounded cache.
 
-`compare_land_sweeps.py` is ready to pair the original PR4 b09ecb545 sweeps and
-current sweeps over the same complete inputs and freshly source-derived
-checkpoint. The preserved baseline files were checked byte for byte against
+`compare_land_sweeps.py` has now paired the original PR4 b09ecb545 and current
+sweeps over the same complete inputs and freshly source-derived checkpoint.
+The [paired result](land-sweep-ab-20261108.md) records the observed timings. The preserved baseline files were checked byte for byte against
 that Git revision. The comparator loads the exact fingerprinted Python source,
 not a possibly unrelated cached module. It checks every output byte, population
-and Ural count and records UTC trial intervals. No new performance run starts
-while the physical paired benchmark owns the shared slot.
+and Ural count and records UTC trial intervals. The paired run completed before
+the physical final proof took the released slot.
 
 One pair gives an observed ratio in a declared order, not a balanced cache-order
 study. A reverse-order repeat is the appropriate next check if the conclusion
