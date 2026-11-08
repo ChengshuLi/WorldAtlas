@@ -387,3 +387,14 @@ output hash and every rule/category population. Source polygons, component
 streams, driver code and exact UTC intervals are pinned in separate receipts.
 No compiler, ctypes bridge, child process or whole pipeline is used. Run alone
 for comparable timing; one serial-first pair does not balance cache order.
+
+## Experimental numeric land coverage
+
+`compare_land_preflights.py --staged-inputs DIR --out NEW_DIR` compares the
+complete current coverage sweep with an experimental NumPy row overlay. It
+checks every physical/component/seed interval and exact population report,
+records source fingerprints and UTC intervals, and supports
+`--candidate-first` for reversed order. This only measures preflight, not the
+writer or any complete stage. The experimental files are not imported by the
+production runner, and the production default is unchanged. No complete-input
+speed or parity claim is made until an isolated pair has passed.

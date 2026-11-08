@@ -171,3 +171,15 @@ carry/saturate boundary contributions into other bits. A hole/disconnected-part
 fixture with exact-center vertices caught this distinction. Per-bit omission
 was withdrawn before complete-world validation. All polygons remain pinned
 and validated even when an entire raster strip is not needed.
+
+### Experimental numeric coverage prototype
+
+`numeric_preflight.py` and `row_overlay.py` are not production imports. They
+explore the measured remaining Python interval-dispatch cost with full-row
+NumPy I/O and common endpoint arrays. Every source interval is checked; root
+zero is distinct from no component, and all physical coverage, seed placement,
+root/category completeness and exact rule populations remain mandatory.
+Independent randomized dense row oracles and the existing coverage/population
+contract cases pass. Full-input parity and timing remain pending. The supported
+comparison tool is `scripts/v7-pipeline/compare_land_preflights.py`; no copied
+or patched producer or source report is needed.
