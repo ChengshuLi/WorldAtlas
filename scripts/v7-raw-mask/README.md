@@ -68,11 +68,3 @@ Python APIs, after a documented overlapped sample was repeated separately.
 That is 12.0 percent less processing time versus this oracle, not production C++
 or a whole-pipeline gain. Source acquisition is separate. See the
 [baseline audit](../../docs/benchmarks/physical-baseline-audit-20261108.json).
-
-The [historical 2026-11-08 ctypes-bridge proof](../../docs/benchmarks/physical-python-gdal-20261108.json)
-records all 32 raw shards, 66,814,038 rows and 7,158,366,208 physical cells with
-zero differences and exact final row/run hashes. Observed raw-water processing
-was 938.04 seconds for the Python feature-layer reference and 899.75 seconds for
-the compiler-free ctypes-based GDAL batches. This historical roughly 4.1 percent
-reduction is versus the Python oracle, not production C++ or the new supported
-Python-binding implementation. Do not use it as a current production gain.
