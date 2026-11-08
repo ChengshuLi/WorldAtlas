@@ -11,72 +11,35 @@ patch producer reports, relocate historical paths, or repair lineage sidecars.
 
 The runner builds a local grid from the selected inputs. Publication is a separate workflow.
 
-## Run
+## Run V8
 
-Use one Python installation with NumPy, SciPy, PyProj, GDAL/OGR and PyArrow.
-The same command runs on macOS and Linux. The pipeline does not require a
-runtime C++ compiler or OpenSSL development files. The selected regional PDF
-evidence reader still needs Poppler's `pdftotext` on `PATH`.
-Use GDAL 3.10.3 and
-PROJ 9.6.0 to match the original build's geometry runtime.
-For byte-for-byte V8 reproduction, use GDAL compiled with
-`-ffp-contract=off` in both `CMAKE_C_FLAGS` and `CMAKE_CXX_FLAGS`. This
-keeps rounding in the tile coordinate transform consistent across compilers.
-A minimal GDAL build needs the GeoTIFF, ENVI, Shapefile and GeoJSON drivers.
-Use the Python bindings for that GDAL version and make sure they load the
-compiled library. [GDAL build instructions](https://gdal.org/en/stable/development/building_from_source.html)
-It enforces `PROJ_NETWORK=OFF` throughout the runner, disables pyproj's
-network API, and records the active local `proj.db` path and SHA-256 in runtime
-identity. A regional template's `bering_proj_db` must match that exact active
-database. This runtime file alone may be outside `input_root`; other selected
-source files must remain inside it.
-If the Python installation needs a dependency directory on `PYTHONPATH`, export
-that directory when launching. For R2 staging, install `boto3` into the same
-Python environment and set `physical_controls.source_staging` to
-`{"mode": "r2-s3", "endpoint_url": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com"}`.
-Use an R2 S3 token with Object Read only access to the source bucket. Supply
-the access key ID and secret access key through `AWS_ACCESS_KEY_ID` and
-`AWS_SECRET_ACCESS_KEY` or a boto3 credentials profile. Keep credentials outside
-the configuration. For a build with all shards already local, omit
-`source_staging`.
+Use one Python installation with NumPy, SciPy, PyProj, GDAL/OGR, PyArrow,
+boto3 and psycopg. The same command runs on macOS and Linux. The selected
+regional PDF evidence reader needs Poppler's `pdftotext` on `PATH`.
 
-Existing Wrangler-based build configurations need the new `source_staging`
-block and credentials for a fresh run.
+For byte-for-byte V8 reproduction, use GDAL 3.10.3 and PROJ 9.6.0.
+Compile GDAL with `-ffp-contract=off` in both `CMAKE_C_FLAGS` and
+`CMAKE_CXX_FLAGS` to preserve rounding in the tile coordinate transform.
+The Python bindings must load that GDAL library. A minimal build needs the
+GeoTIFF, ENVI, Shapefile and GeoJSON drivers.
+[GDAL build instructions](https://gdal.org/en/stable/development/building_from_source.html)
 
-Copy `config.example.json`, replace the source paths and SHA-256 values, and
-choose an existing `input_root` containing the selected sources and the new run
-location. A relative `input_root` resolves beside the configuration.
-Relative top-level source paths resolve beside the configuration.
-Nested source documents retain their own declared paths; materialize their
-pinned source files at those locations before starting. No path-prefix rewriting
-is supported.
-
-For one configuration that pulls its selected inputs directly, run:
+The runner disables PROJ network access and checks the local `proj.db` against
+the pin in the regional template. Set `NEON_DATABASE_URL` to a read-only
+connection to the selected Neon database. Supply R2 credentials through a boto3
+profile such as `AWS_PROFILE=worldatlas-r2` or the AWS credential environment
+variables. The R2 endpoint is set in the configuration.
 
     python3 scripts/v7-pipeline/run_pipeline.py scripts/v7-pipeline/config.json \
-      --work-dir /persistent/worldatlas-work
+      --work-dir /absolute/path/to/worldatlas-work
 
-`config.json` contains the reconstructed selected research inputs. Structured
-snapshots are pinned Neon records or inline values; R2 is used for raw inputs.
-Set `NEON_DATABASE_URL` to the selected research database using a read-only role
-and install `psycopg` in the same Python environment. It is never saved in the
-configuration. The source reader opens a read-only transaction against
-`atlas.structured_documents`, checks the version, and accepts a document only
-when all bytes match the selected size and SHA-256. `stored-json-text` uses the
-exact stored JSON text, including any trailing newline. `jsonb-text` is the
-older name for this mode. `spaced-ascii` reconstructs sorted ASCII JSON with default
-separator spacing and one newline. The selected regional snapshot and Lydekker
-line use those representations respectively. Other existing serializations are
-unchanged. Structured documents are read directly from Neon, never copied from
-R2 as a fallback. Missing or changed source bytes fail closed; an empty work
-directory needs no manual source-cache seeding.
-
-The original top-level configuration and coastal-plan bytes were not recovered.
-This configuration preserves the recovered geographic choices, uses the unchanged
-water-overlay producer and strict reference comparison, and declares a new
-224-tile coastal execution partition with conservative halos. It is not a claim
-of a new full global run, geographic acceptance, or verified final-grid equality.
-The original regional pending inventory remains a diagnostic stand-in.
+The checked-in configuration selects raw source IDs and versions. The runner
+resolves them through `atlas.source_assets`, checks the catalog digest, and
+verifies the R2 downloads against the selected sizes and checksums. It also
+reads the pinned documents from `atlas.structured_documents` and verifies their
+serialized bytes. `stored-json-text` preserves the stored JSON text.
+`spaced-ascii` serializes sorted ASCII JSON with default spacing and a final
+newline. Other documents specify their serialization in the configuration.
 
 `--work-dir` chooses and creates the local input/run directory, overriding
 `input_root`; the configuration can omit that field when using this option.

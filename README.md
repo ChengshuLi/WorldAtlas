@@ -8,23 +8,20 @@ The [current viewer](web/current/README.md) renders the V8.0 map from two
 checksum-verified row-run streams. The Cloudflare Worker serves the viewer and
 streams from the `worldatlas` R2 bucket.
 
-## Current direct research pipeline
+## Rebuild V8
 
-The direct research pipeline builds the physical grid from pinned raw OSM land
-and Overture inland-water sources. Its geographic decisions and source catalog
-are versioned in Neon. See [the physical stage](scripts/v7-raw-mask/DIRECT.md),
-[the direct composition workflow](scripts/v7-replay/DIRECT.md), and
-[the rebuild status](scripts/v7-replay/REBUILD.md).
+Run the [V8 pipeline](scripts/v7-pipeline/README.md) from the repository root.
 
-The target grid uses 131,072 columns and center sampling. Use
-`scripts/native_grid.py` to read lossless row runs. Source archives and generated
-grids belong in R2; geographic records and source references belong in Neon.
-The direct build remains research-only and is not a complete or publishable map.
-Publishing a review page does not accept its geography.
+```bash
+python3 scripts/v7-pipeline/run_pipeline.py scripts/v7-pipeline/config.json \
+  --work-dir /absolute/path/to/worldatlas-work
+```
 
-`migrations/001_geography_review.sql` provides the initial proposal record and an
-accepted-only view. Test migrations on a Neon development branch before applying
-them to the main database.
+The configuration selects versioned geographic decisions and source records in
+Neon. The pipeline downloads the raw bytes from R2 and builds the physical grid,
+then assigns land and water categories. The final grid has 131,072 columns and
+54,614 rows. The pipeline guide covers credentials, the GDAL and PROJ versions
+for exact reproduction, and stage timings.
 
 ## Deployment
 
