@@ -376,16 +376,17 @@ class Pipeline:
         document = json.loads(row[2])
         if not isinstance(document, dict):
             raise ValueError('Neon structured document must be an object')
-        # Keep PostgreSQL's JSONB text intact for records pinned in that form.
+        # Keep PostgreSQL's stored text intact for records pinned in that form.
         # Parsing and reserializing it can change numeric spelling and byte order.
         # Every accepted representation must still match the selected size/hash.
         formats = dict.fromkeys([source.get('serialization', 'canonical-ascii'),
             'canonical-ascii', 'canonical-utf8', 'spaced-ascii', 'spaced-utf8',
             'pretty-ascii', 'pretty-utf8', 'original-order-utf8',
-            'original-pretty-utf8', 'physical-report-v1', 'jsonb-text'])
+            'original-pretty-utf8', 'physical-report-v1', 'stored-json-text'])
         for serialization in formats:
             try:
-                data = row[2].encode() if serialization == 'jsonb-text' else source_json_bytes(document, serialization)
+                data = (row[2].encode() if serialization in ('stored-json-text', 'jsonb-text')
+                        else source_json_bytes(document, serialization))
             except KeyError:
                 continue
             if len(data) == size and hashlib.sha256(data).hexdigest() == expected:

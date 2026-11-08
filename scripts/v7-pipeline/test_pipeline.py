@@ -231,12 +231,11 @@ class Fixture(unittest.TestCase):
             self.assertEqual(runner.neon_source({'source_id': 'selected', 'version': 'v1',
                 'serialization': 'spaced-ascii'}, expected, len(payload)), payload)
 
-    def test_neon_jsonb_text_fetches_exact_bytes_from_empty_roots_and_reuses_verified_cache(self):
-        # PostgreSQL text preserves decimal spelling, Unicode and key order.
-        # This selected representation has no trailing newline.
-        payload = '{"b": 1.2300, "a": "Sørkapp"}'.encode()
+    def test_neon_stored_json_text_fetches_exact_bytes_from_empty_roots_and_reuses_verified_cache(self):
+        # Stored text preserves decimal spelling, Unicode, key order and the trailing newline.
+        payload = '{"b": 1.2300, "a": "Sørkapp"}\n'.encode()
         expected = hashlib.sha256(payload).hexdigest()
-        source = {'neon': {'source_id': 'selected', 'version': 'v1', 'serialization': 'jsonb-text'},
+        source = {'neon': {'source_id': 'selected', 'version': 'v1', 'serialization': 'stored-json-text'},
                   'sha256': expected, 'size_bytes': len(payload)}
         self.cfg['sources'] = {key: source for key in self.cfg['sources']}
         config = pipeline.write(self.inputs / 'neon-config.json', self.cfg)
