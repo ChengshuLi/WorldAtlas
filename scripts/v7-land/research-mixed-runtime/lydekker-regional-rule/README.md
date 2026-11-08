@@ -11,6 +11,10 @@ The [V8 configuration](../../../v7-pipeline/config.json) selects the regional
 snapshot and its source data and code pins. The regional writer reads fresh
 physical components and mainland streams from the same run.
 
+The [policy preparation record](reproduction/README.md) traces the selected
+island groups from source evidence through the local previews and Neon
+registration to the V8 policy.
+
 Run focused tests from this directory with Python, NumPy, SciPy and pyproj.
 
     python3 -m unittest discover -v
