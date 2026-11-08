@@ -133,16 +133,18 @@ boundary and recipe remain unchanged.
 
 ## Abin raw-source replay (2026-11-06)
 
-The following existing WorldAtlas R2 objects were independently downloaded and
-verified by full SHA-256 readback:
+The following WorldAtlas R2 objects were independently downloaded and verified
+by full SHA-256 readback. For the four OSM inputs, these are the canonical
+keys pinned by the selected Neon recipe. Their bytes also match the original
+review copies.
 
-- `sources/osm/caucasus-west/broad-20261105-ada68ef47c11.osm`:
+- `sources/osm/caucasus-abin/20261105/broad-ada68ef47c11.osm`:
   `ada68ef47c11ad4cfbdcd36cf369ca96e91072cfd406f2d28f2f16349dc4b72d`.
-- `sources/osm/caucasus-west/further-20261105-7152fe44f0da.osm`:
+- `sources/osm/caucasus-abin/20261105/further-7152fe44f0da.osm`:
   `7152fe44f0dae950965c06777e206a396f3b7938ee1fdc4d33dc0f96757e0033`.
-- `sources/osm/caucasus-west/ubin-20261105-2e2bbebd62e0.zip`:
+- `sources/osm/caucasus-abin/20261105/ubin-2e2bbebd62e0.zip`:
   `2e2bbebd62e0c5bbca7c2ca9ebc00bb263dec148d26c922db5cdc619764be216`.
-- `sources/osm/caucasus-west/khabl-20261105-42864b4776ee.zip`:
+- `sources/osm/caucasus-abin/20261105/khabl-42864b4776ee.zip`:
   `42864b4776eecd500c639c72028ff2eec2b16f9454215d1c9a42acc194060e50`.
 - `sources/opentopography/srtm-gl1/n44e038/N44E038-1b7c92844482.tif`:
   `1b7c928444828a5ff161a062c3eef789ef848b6f2bca8663ca8fae9b583e05bd`.

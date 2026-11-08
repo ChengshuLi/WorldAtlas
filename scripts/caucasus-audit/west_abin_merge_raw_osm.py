@@ -67,8 +67,13 @@ def main():
                 continue
             seen[key] = sig
             root.append(element)
-    # Serialize before writing the requested output so hash failure leaves no
-    # candidate file. ET's serialization and the fixed source order are pinned.
+    # The pinned XML uses sorted attributes. ElementTree preserves input
+    # attribute order on current Python versions.
+    for element in root.iter():
+        attributes = sorted(element.attrib.items())
+        element.attrib.clear()
+        element.attrib.update(attributes)
+    # Serialize before writing so a hash failure leaves no candidate file.
     out = io.BytesIO()
     ET.ElementTree(root).write(out, encoding='utf-8', xml_declaration=True)
     data = out.getvalue()
