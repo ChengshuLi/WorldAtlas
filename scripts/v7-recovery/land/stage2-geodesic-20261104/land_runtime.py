@@ -3,7 +3,7 @@ from certificate import CertificateIndex
 from exact_index import ExactIndex
 
 CODE_NAMES=('land_runtime.py','contracts.py','baseline_runner.py','certificate.py','checkpoints.py',
-    'numeric_preflight.py','row_overlay.py','engine.py','exact_index.py','point_prototype.py','preflight.py','run_pair.py',
+    'numeric_preflight.py','numeric_land_stream.py','row_overlay.py','engine.py','exact_index.py','point_prototype.py','preflight.py','run_pair.py',
     'verify_inputs.py','write_land_stream.py','ural_delta.py')
 
 

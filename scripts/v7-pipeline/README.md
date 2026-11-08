@@ -441,3 +441,10 @@ kernel pair, not whole-water speedup or final-land acceptance. The coastal batch
 already uses the index; the new opportunity is verified reuse by basin consumers.
 Exact pins, canonical point hashes and UTC anchors are in
 [`water-shore-index-20261108.json`](../../docs/benchmarks/water-shore-index-20261108.json).
+
+The numeric writer's complete isolated byte/report proof measured 29.844 s
+legacy versus 13.012 s numeric. `compare_land_replays.py --compare-writer`
+holds current numeric coverage constant and pairs complete legacy/numeric
+writer replays. The candidate default is local until that full integration
+proof passes; [exact writer receipt and limits](../../docs/benchmarks/land-numeric-writer-20261108.md)
+are recorded separately from the earlier coverage integration.

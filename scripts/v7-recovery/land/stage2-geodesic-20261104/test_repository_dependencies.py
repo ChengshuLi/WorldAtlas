@@ -36,6 +36,12 @@ class RepositoryDependenciesTest(unittest.TestCase):
         self.assertEqual(len(batch),1)
         self.assertEqual(ast.unparse(batch[0]),'numeric_preflight.DEFAULT_BATCH_ROWS')
 
+    def test_candidate_stage_uses_the_source_bound_numeric_writer(self):
+        import numeric_land_stream
+        self.assertIn('numeric_land_stream.py',build_stage2.CODE_NAMES)
+        self.assertIs(build_stage2.write_land_stream,numeric_land_stream.write_land_stream)
+        self.assertEqual(build_stage2.write_land_stream.__kwdefaults__['batch_rows'],128)
+
     def test_orchestrator_and_core_files_are_present(self):
         code = orchestrate_stage2.code_hashes(lambda: None)
         self.assertTrue(set(build_stage2.CODE_NAMES).issubset(code))

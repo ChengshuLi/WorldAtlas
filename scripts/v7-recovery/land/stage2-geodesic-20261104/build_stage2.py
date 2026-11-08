@@ -14,7 +14,7 @@ if str(_SCRIPTS) not in sys.path:
 import numpy as np,pyproj,scipy
 import atomic_move,baseline_runner,checkpoints,contracts,engine,numeric_preflight,verify_inputs,verify_seed_index,verify_physical_lineage,ural_delta
 from land_runtime import CODE_NAMES as RUNTIME_CODE_NAMES, search_indexes
-from write_land_stream import write_land_stream
+from numeric_land_stream import write_land_stream
 
 HERE=Path(__file__).resolve().parent
 CODE_NAMES=RUNTIME_CODE_NAMES+('build_stage2.py','atomic_move.py','verify_physical_lineage.py','verify_seed_index.py','v7-land/mainland-witness-prototype/resolve_mainland.py','v7-land/point-component-prototype/resolve.py','v7-land/named-identity-prototype/named_identity.py')

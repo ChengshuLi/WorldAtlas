@@ -198,15 +198,22 @@ Ural count identical: 104.133 s legacy versus 89.160 s integrated. See the
 [full receipt and scope](../../../../docs/benchmarks/land-batch-integration-20261108.md).
 It is not raw-pipeline/geographic acceptance.
 
-### Numeric writer prototype
+### Numeric writer candidate integration
 
-`numeric_land_stream.py` is not a production import. It explores the measured
-29.6 s writer cost with ordinary numeric row batches and streaming offset files.
-Every component/physical/seed interval and assignment remains checked. Ural land
-centers use the original scalar floating-point arithmetic and classifier; only
-compressed output transitions are retained. No pixel-sized ROI array or
-memory-based admission rule is introduced, even for a sparse UINT32-width row.
-The legacy writer stays the independent oracle/default until complete byte
-parity and separate timing justify a change. `compare_land_writers.py` consumes
-only assignments from a checksum-verified complete fresh-search checkpoint;
-expected labels are used only for the final byte comparison.
+The isolated candidate Stage2 builder now selects `numeric_land_stream`, with
+its source in the normal code identity. Production publication waits for the
+complete integration pair; the legacy writer remains its independent oracle.
+
+The full writer-only pair passed exact outputs and reports at 29.844 s legacy
+versus 13.012 s numeric. See the
+[receipt and scope](../../../../docs/benchmarks/land-numeric-writer-20261108.md).
+Both row offsets and records stream in ordinary batches, with every span/root
+condition checked. The Ural policy retains exact original scalar center
+arithmetic; only compressed output transitions are retained, not pixel arrays.
+Dense/MAX-width/failure oracles and the unchanged writer contracts pass.
+
+`compare_land_replays.py --compare-writer` holds the already integrated numeric
+coverage constant, then independently rebuilds seed indexes, reruns every
+WGS84 decision/tie and writes full output bytes with legacy/numeric writers.
+`replay_land_sweep.py --writer-engine legacy` retains an explicit baseline.
+No accepted geography or user-owned raw pipeline is changed by these proofs.

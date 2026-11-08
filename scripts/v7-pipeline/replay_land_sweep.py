@@ -29,7 +29,8 @@ import numeric_preflight as preflight
 import preflight as reference_preflight
 import ural_delta
 import verify_inputs
-import write_land_stream as land_writer
+import numeric_land_stream as land_writer
+import write_land_stream as legacy_writer
 
 
 def staged_inputs(directory):
@@ -54,9 +55,10 @@ def staged_inputs(directory):
     return plan,config,report,paths
 
 
-def replay(directory, out, *, search=False,legacy_preflight=False):
+def replay(directory, out, *, search=False,legacy_preflight=False,writer_engine='numeric'):
+    if writer_engine not in ('legacy','numeric'):raise ValueError('unknown writer engine')
     started_at=datetime.now(timezone.utc).isoformat()
-    for module in (baseline_runner,build_seed_tiles,land_runtime,contracts,engine,preflight,reference_preflight,ural_delta,verify_inputs,land_writer):
+    for module in (baseline_runner,build_seed_tiles,land_runtime,contracts,engine,preflight,reference_preflight,ural_delta,verify_inputs,land_writer,legacy_writer):
         if Path(module.__file__).resolve()!=STAGE2/(module.__name__+'.py'):
             raise ImportError('land replay module resolved outside its source: '+module.__name__)
     directory=directory.resolve(strict=True)
@@ -68,6 +70,7 @@ def replay(directory, out, *, search=False,legacy_preflight=False):
     code={name:digest(STAGE2/name) for name in land_runtime.CODE_NAMES}
     identity={'schema':'worldatlas-land-evidence-replay-v1','staging_plan_sha256':digest(directory/'plan.json'),
         'code_sha256':code,'driver_sha256':digest(Path(__file__)),'started_at_utc':started_at,'python':sys.version,'platform':list(os.uname()),'search':search,
+        'writer_engine':writer_engine,
         'preflight_engine':'legacy-python-row' if legacy_preflight else 'numpy-row-batch',
         'preflight_batch_rows':None if legacy_preflight else preflight.DEFAULT_BATCH_ROWS,
         'scope':'coverage and optional source-bound WGS84 search/writer; no fresh source construction or geography acceptance'}
@@ -121,7 +124,8 @@ def replay(directory, out, *, search=False,legacy_preflight=False):
         rootfile,codefile=out/'roots.u32le',out/'codes.u8'
         decisions['roots'].astype('<u4').tofile(rootfile);decisions['codes'].astype('u1').tofile(codefile)
         delta=ural_delta.compile_rule(json.loads(paths['decision_snapshot'].read_bytes()),report['categories'],grid)
-        writer=timed('writer',lambda:land_writer.write_land_stream(grid['width'],grid['height'],*streams,rootfile,codefile,seed_roots,
+        writer_module=land_writer if writer_engine=='numeric' else legacy_writer
+        writer=timed('writer',lambda:writer_module.write_land_stream(grid['width'],grid['height'],*streams,rootfile,codefile,seed_roots,
             out/'candidate',disk_reserve_bytes=controls['minimum_free_bytes'],delta_rule=delta))
         if writer.get('ural_delta')!=report.get('ural_delta'):raise ValueError('Ural cell-side populations differ')
         for name in ('rows','runs'):
@@ -152,8 +156,9 @@ def main():
     parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--search',action='store_true',help='regenerate seed tiles and WGS84 decisions before writing every land row')
     parser.add_argument('--legacy-preflight',action='store_true',help='comparison only: run the previous Python row checker')
+    parser.add_argument('--writer-engine',choices=('legacy','numeric'),default='numeric')
     args=parser.parse_args()
-    print(json.dumps(replay(args.staged_inputs,args.out,search=args.search,legacy_preflight=args.legacy_preflight),indent=2))
+    print(json.dumps(replay(args.staged_inputs,args.out,search=args.search,legacy_preflight=args.legacy_preflight,writer_engine=args.writer_engine),indent=2))
 
 
 if __name__=='__main__':main()

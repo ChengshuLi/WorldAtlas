@@ -1,4 +1,4 @@
-"""Experimental numeric land writer; the legacy writer remains production.
+"""Numeric land writer; the legacy implementation remains an independent oracle.
 
 Ordinary row batches remove Python dispatch per source interval. The optional
 geographic override still classifies each relevant land center with the exact

@@ -1,0 +1,123 @@
+{
+  "schema": "worldatlas-complete-numeric-land-writer-pair-v1",
+  "staging_plan_sha256": "653aa47c70a35ac78668b5221e0a54c2221b266d6264462e1f0d91f71e707a66",
+  "code_sha256": {
+    "write_land_stream.py": "c2490c61d4fbb14739b86cd726dde6687b955fc26538070242f41bef4f8d886c",
+    "numeric_land_stream.py": "c43b3bec3b04825024a8ddd42452d1e151be9da96d43657684944ab23a0391d0",
+    "row_overlay.py": "30b885354b5139f8b067e6ef65debb7b362a85cba0e03b4284cf94074ef97a78",
+    "ural_delta.py": "9ccfbae6f4ee98c8b74de03c902d367c7065537f8b41e67d9da27052b3dfbd96"
+  },
+  "source_replay_sha256": {
+    "comparison.json": "de5871260326f105337fc216cd190b9d5cce59748cf4e638f966adc4c82cd5d9",
+    "invocation.json": "1057e1bd8ab4ae81ac0a7c155e7cca3d40321aedc631919c063a5d55aec509f1",
+    "checkpoint.npz": "68f7c38f01b9665deeb086215af8e715a5d294c9a7c8589b9b28b5bfdc36a70c",
+    "roots.u32le": "3bb107bb490f48b1195a3bd34dede6781cd8d4e8f7aa5148830dbc0d26e6d063",
+    "codes.u8": "b1bd185ef7bc379f4ab44aeb4132260e56c101241afebf2a4790e7bc78f201a6"
+  },
+  "search_inputs_sha256": "bbcdcaf315073213239419e6ae1059a1bb320074cd5fce31d2a64b8c4157a7f3",
+  "snapshot_sha256": "52499015a7eea0d3dafa0b7485d321e48654743f6a765ef89c3c6267df301ea4",
+  "driver_sha256": "0da9a653f279376432251322109c639f0473debd982aa5ff9770de03623129f9",
+  "candidate_batch_rows": 128,
+  "order": [
+    "reference",
+    "candidate"
+  ],
+  "status": "complete-land-writer-bytes-and-reports-identical",
+  "results": {
+    "reference": {
+      "elapsed_seconds": 29.84373310600131,
+      "report": {
+        "schema": "streamed-land-rle-research-v1",
+        "status": "complete",
+        "width": 131072,
+        "height": 54614,
+        "runs": 26693670,
+        "land_cells": 1984469039,
+        "assigned_roots": 457889,
+        "mainland_roots": [
+          459650,
+          650207,
+          9774639,
+          12357770
+        ],
+        "rows_sha256": "8922efb4b90021e36e5491ddf65ab1eaa7f6961dfc0f81fadfbfecc45f510674",
+        "runs_sha256": "dc19c358ce976b201c9861685948ca1ddae61635b10d4136c4ff19b9cb50310b",
+        "ural_delta": {
+          "schema": "ural-delta-cell-center-side-v1",
+          "revision": "v2-land-mainland-boundary-draft-1",
+          "boundary_id": "ural_kara_coast_to_caspian",
+          "boundary_sha256": "746e6a85b05e40994e451e49e7df6333b8816dfe1d6624d9c20f9c669e953b32",
+          "route_id": "europe_caspian_closure_v1",
+          "route_sha256": "6ee86cf4108b8622e01a4dd0be0b4ae19e809b4e04d8cceb25547425258ac62a",
+          "scope_bounds": [
+            51.3,
+            46.65,
+            52.2,
+            47.24
+          ],
+          "europe_code": 19,
+          "asia_code": 18,
+          "counts": {
+            "land_centers": 43575,
+            "other_land_labels": 0,
+            "europe_to_asia": 52,
+            "asia_to_europe": 5
+          },
+          "status": "applied-to-land-cell-centers"
+        }
+      },
+      "started_at_utc": "2026-11-08T08:08:11.349656+00:00",
+      "completed_at_utc": "2026-11-08T08:08:41.193424+00:00"
+    },
+    "candidate": {
+      "elapsed_seconds": 13.012283528001717,
+      "report": {
+        "schema": "streamed-land-rle-research-v1",
+        "status": "complete",
+        "width": 131072,
+        "height": 54614,
+        "runs": 26693670,
+        "land_cells": 1984469039,
+        "assigned_roots": 457889,
+        "mainland_roots": [
+          459650,
+          650207,
+          9774639,
+          12357770
+        ],
+        "rows_sha256": "8922efb4b90021e36e5491ddf65ab1eaa7f6961dfc0f81fadfbfecc45f510674",
+        "runs_sha256": "dc19c358ce976b201c9861685948ca1ddae61635b10d4136c4ff19b9cb50310b",
+        "ural_delta": {
+          "schema": "ural-delta-cell-center-side-v1",
+          "revision": "v2-land-mainland-boundary-draft-1",
+          "boundary_id": "ural_kara_coast_to_caspian",
+          "boundary_sha256": "746e6a85b05e40994e451e49e7df6333b8816dfe1d6624d9c20f9c669e953b32",
+          "route_id": "europe_caspian_closure_v1",
+          "route_sha256": "6ee86cf4108b8622e01a4dd0be0b4ae19e809b4e04d8cceb25547425258ac62a",
+          "scope_bounds": [
+            51.3,
+            46.65,
+            52.2,
+            47.24
+          ],
+          "europe_code": 19,
+          "asia_code": 18,
+          "counts": {
+            "land_centers": 43575,
+            "other_land_labels": 0,
+            "europe_to_asia": 52,
+            "asia_to_europe": 5
+          },
+          "status": "applied-to-land-cell-centers"
+        }
+      },
+      "started_at_utc": "2026-11-08T08:08:41.193869+00:00",
+      "completed_at_utc": "2026-11-08T08:08:54.206164+00:00"
+    }
+  },
+  "reference_over_candidate": 2.293504675161684,
+  "limits": [
+    "One writer-only pair; cache order is not balanced.",
+    "No production switch, source construction, search or geography acceptance is included."
+  ]
+}

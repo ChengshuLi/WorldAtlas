@@ -16,11 +16,11 @@ from exclusive_outputs import create_directory_exclusive,write_json_exclusive
 import replay_land_sweep as driver
 
 
-def compare(staged,out,*,candidate_first=False):
+def compare(staged,out,*,candidate_first=False,compare_writer=False):
     # Authenticate the complete plan before creating the exclusive trial tree.
     driver.staged_inputs(staged)
     identity={'schema':'worldatlas-complete-land-coverage-integration-pair-v1',
-        'staging_plan_sha256':digest(staged/'plan.json'),'driver_sha256':digest(Path(__file__)),
+        'comparison':'writer' if compare_writer else 'coverage','staging_plan_sha256':digest(staged/'plan.json'),'driver_sha256':digest(Path(__file__)),
         'replay_driver_sha256':digest(Path(driver.__file__)),'stage_builder_sha256':digest(STAGE2/'build_stage2.py'),
         'order':['candidate','reference'] if candidate_first else ['reference','candidate'],
         'scope':'complete preserved-source coverage + seed-index + WGS84 + writer kernels, not raw pipeline/geography acceptance'}
@@ -28,7 +28,8 @@ def compare(staged,out,*,candidate_first=False):
     results={}
     for name in identity['order']:
         started_at=datetime.now(timezone.utc).isoformat();start=time.perf_counter()
-        result=driver.replay(staged,out/name,search=True,legacy_preflight=name=='reference')
+        result=driver.replay(staged,out/name,search=True,legacy_preflight=(name=='reference' and not compare_writer),
+            writer_engine=('numeric' if name=='candidate' and compare_writer else 'legacy'))
         results[name]={'elapsed_seconds':time.perf_counter()-start,'started_at_utc':started_at,
             'completed_at_utc':datetime.now(timezone.utc).isoformat(),'result':result}
         write_json_exclusive(out/(name+'.json'),results[name],indent=2)
@@ -52,5 +53,5 @@ def compare(staged,out,*,candidate_first=False):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--staged-inputs',type=Path,required=True);parser.add_argument('--out',type=Path,required=True)
-    parser.add_argument('--candidate-first',action='store_true');args=parser.parse_args()
-    print(json.dumps(compare(args.staged_inputs,args.out,candidate_first=args.candidate_first),indent=2))
+    parser.add_argument('--candidate-first',action='store_true');parser.add_argument('--compare-writer',action='store_true');args=parser.parse_args()
+    print(json.dumps(compare(args.staged_inputs,args.out,candidate_first=args.candidate_first,compare_writer=args.compare_writer),indent=2))
