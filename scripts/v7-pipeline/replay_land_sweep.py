@@ -25,7 +25,8 @@ import build_seed_tiles
 import land_runtime
 import contracts
 import engine
-import preflight
+import numeric_preflight as preflight
+import preflight as reference_preflight
 import ural_delta
 import verify_inputs
 import write_land_stream as land_writer
@@ -53,9 +54,9 @@ def staged_inputs(directory):
     return plan,config,report,paths
 
 
-def replay(directory, out, *, search=False):
+def replay(directory, out, *, search=False,legacy_preflight=False):
     started_at=datetime.now(timezone.utc).isoformat()
-    for module in (baseline_runner,build_seed_tiles,land_runtime,contracts,engine,preflight,ural_delta,verify_inputs,land_writer):
+    for module in (baseline_runner,build_seed_tiles,land_runtime,contracts,engine,preflight,reference_preflight,ural_delta,verify_inputs,land_writer):
         if Path(module.__file__).resolve()!=STAGE2/(module.__name__+'.py'):
             raise ImportError('land replay module resolved outside its source: '+module.__name__)
     directory=directory.resolve(strict=True)
@@ -67,6 +68,8 @@ def replay(directory, out, *, search=False):
     code={name:digest(STAGE2/name) for name in land_runtime.CODE_NAMES}
     identity={'schema':'worldatlas-land-evidence-replay-v1','staging_plan_sha256':digest(directory/'plan.json'),
         'code_sha256':code,'driver_sha256':digest(Path(__file__)),'started_at_utc':started_at,'python':sys.version,'platform':list(os.uname()),'search':search,
+        'preflight_engine':'legacy-python-row' if legacy_preflight else 'numpy-row-batch',
+        'preflight_batch_rows':None if legacy_preflight else preflight.DEFAULT_BATCH_ROWS,
         'scope':'coverage and optional source-bound WGS84 search/writer; no fresh source construction or geography acceptance'}
     create_directory_exclusive(out);write_json_exclusive(out/'invocation.json',identity,indent=2)
     timings={};phase_utc={}
@@ -78,9 +81,11 @@ def replay(directory, out, *, search=False):
             stream.write(json.dumps({'phase':name,'status':'complete','seconds':timings[name],**phase_utc[name]})+'\n')
         return result
     streams=[paths[name] for name in ('component_rows','component_runs','physical_rows','physical_runs','seed_rows','seed_runs')]
-    coverage=timed('preflight',lambda:preflight.validate(grid['width'],grid['height'],*streams,roots,seed_roots,
+    checker=reference_preflight if legacy_preflight else preflight
+    coverage=timed('preflight',lambda:checker.validate(grid['width'],grid['height'],*streams,roots,seed_roots,
         required_codes=map(int,report['categories']),seed_rules=seed['seed_rules'],
-        expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts']))
+        expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'],
+        **({} if legacy_preflight else {'batch_rows':preflight.DEFAULT_BATCH_ROWS})))
     if coverage!=report['physical_coverage']:raise ValueError('complete coverage differs')
     result={**identity,'status':'complete-global-preflight-identical','coverage':coverage,'timings':timings,'phase_utc':phase_utc}
     write_json_exclusive(out/'coverage.json',result,indent=2)
@@ -146,8 +151,9 @@ def main():
     parser.add_argument('--staged-inputs',type=Path,required=True)
     parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--search',action='store_true',help='regenerate seed tiles and WGS84 decisions before writing every land row')
+    parser.add_argument('--legacy-preflight',action='store_true',help='comparison only: run the previous Python row checker')
     args=parser.parse_args()
-    print(json.dumps(replay(args.staged_inputs,args.out,search=args.search),indent=2))
+    print(json.dumps(replay(args.staged_inputs,args.out,search=args.search,legacy_preflight=args.legacy_preflight),indent=2))
 
 
 if __name__=='__main__':main()

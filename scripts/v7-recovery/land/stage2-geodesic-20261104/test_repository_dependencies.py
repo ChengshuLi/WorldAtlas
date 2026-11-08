@@ -25,6 +25,17 @@ def sha(path):
 
 
 class RepositoryDependenciesTest(unittest.TestCase):
+    def test_stage_uses_source_bound_numeric_batch_coverage(self):
+        self.assertTrue({'numeric_preflight.py','row_overlay.py'}.issubset(build_stage2.CODE_NAMES))
+        tree=ast.parse((HERE/'build_stage2.py').read_text())
+        calls=[node for node in ast.walk(tree) if isinstance(node,ast.Call)
+               and isinstance(node.func,ast.Attribute) and isinstance(node.func.value,ast.Name)
+               and node.func.value.id=='numeric_preflight' and node.func.attr=='validate']
+        self.assertEqual(len(calls),1)
+        batch=[node.value for node in calls[0].keywords if node.arg=='batch_rows']
+        self.assertEqual(len(batch),1)
+        self.assertEqual(ast.unparse(batch[0]),'numeric_preflight.DEFAULT_BATCH_ROWS')
+
     def test_orchestrator_and_core_files_are_present(self):
         code = orchestrate_stage2.code_hashes(lambda: None)
         self.assertTrue(set(build_stage2.CODE_NAMES).issubset(code))

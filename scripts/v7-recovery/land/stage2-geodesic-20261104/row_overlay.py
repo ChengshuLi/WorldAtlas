@@ -1,6 +1,6 @@
-"""Experimental numeric row overlay, independent of geography and policy.
+"""Numeric row overlay, independent of geography and policy.
 
-No production caller uses this yet. Actual interval endpoints determine the
+Actual interval endpoints determine the
 work; no pixel expansion, sampling, root cache ceiling or map-specific path.
 """
 import numpy as np

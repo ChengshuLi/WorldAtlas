@@ -1,10 +1,12 @@
-"""Experimental complete NumPy coverage check; production remains unchanged.
+"""Complete NumPy coverage check with explicit ordinary row batches.
 
 This removes Python dispatch per interval, not validation or input coverage.
-Use only for explicit paired validation until full-input parity/timing exists.
+Production selects DEFAULT_BATCH_ROWS; the legacy checker remains an independent reference.
 """
 import numpy as np
 from row_overlay import RowStream,overlay,overlay_batch
+
+DEFAULT_BATCH_ROWS=128
 
 
 def validate(width,height,component_rows,component_runs,physical_rows,physical_runs,mainland_rows,mainland_runs,roots,seed_roots,required_codes=range(17,23),guard=lambda:None,seed_rules=None,expected_rule_population=None,expected_category_counts=None,*,batch_rows=1):

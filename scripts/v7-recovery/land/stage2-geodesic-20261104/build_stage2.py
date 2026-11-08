@@ -12,7 +12,7 @@ _SCRIPTS = Path(__file__).resolve().parents[3]
 if str(_SCRIPTS) not in sys.path:
     sys.path.append(str(_SCRIPTS))
 import numpy as np,pyproj,scipy
-import atomic_move,baseline_runner,checkpoints,contracts,engine,preflight,verify_inputs,verify_seed_index,verify_physical_lineage,ural_delta
+import atomic_move,baseline_runner,checkpoints,contracts,engine,numeric_preflight,verify_inputs,verify_seed_index,verify_physical_lineage,ural_delta
 from land_runtime import CODE_NAMES as RUNTIME_CODE_NAMES, search_indexes
 from write_land_stream import write_land_stream
 
@@ -114,7 +114,7 @@ def _build(cp,work,output,resume,raw,cfg,processing_started=None,orchestration_r
  spec=verify_inputs.manifest(paths['tile_manifest'],w,h,1024,guard);rep_bytes=verify_inputs.bounded_bytes(paths['representatives'],representative_byte_limit(len(spec)),guard);rep=np.frombuffer(rep_bytes,dtype='<u4');need(len(rep)%5==0,'invalid representative shape');rep=rep.reshape(-1,5)
  tiles=verify_inputs.verify_representatives(cfg['tile_directory'],paths['tile_manifest'],rep,w,h,guard=guard);need(len(tiles)==tilecheck['tiles'],'tile set mismatch')
  run_count=paths['component_runs'].stat().st_size//12;co=engine.offsets(paths['component_rows'],h,run_count)
- coverage=preflight.validate(w,h,paths['component_rows'],paths['component_runs'],paths['physical_rows'],paths['physical_runs'],paths['seed_rows'],paths['seed_runs'],roots,seed_roots,required_codes=categories.keys(),guard=guard,seed_rules=seed['seed_rules'],expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'])
+ coverage=numeric_preflight.validate(w,h,paths['component_rows'],paths['component_runs'],paths['physical_rows'],paths['physical_runs'],paths['seed_rows'],paths['seed_runs'],roots,seed_roots,required_codes=categories.keys(),guard=guard,seed_rules=seed['seed_rules'],expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'],batch_rows=numeric_preflight.DEFAULT_BATCH_ROWS)
  identity={'schema':'stage2-source-geodesic-checkpoint-identity-v1','request':request,'verifier_python_sha256':code['verify_seed_index.py']}
  cert,exact=search_indexes(cfg['tile_directory'],g,tiles,rep,ctrl)
  def progress(phase,cursor,queries):

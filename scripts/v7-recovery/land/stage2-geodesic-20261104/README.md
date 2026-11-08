@@ -174,23 +174,24 @@ fixture with exact-center vertices caught this distinction. Per-bit omission
 was withdrawn before complete-world validation. All polygons remain pinned
 and validated even when an entire raster strip is not needed.
 
-### Experimental numeric coverage prototype
+### Numeric coverage integration
 
-`numeric_preflight.py` and `row_overlay.py` are not production imports. They
-explore the measured remaining Python interval-dispatch cost with full-row
-NumPy I/O and common endpoint arrays. Every source interval is checked; root
-zero is distinct from no component, and all physical coverage, seed placement,
-root/category completeness and exact rule populations remain mandatory.
-Independent randomized dense row oracles and the existing coverage/population
-contract cases pass. A complete isolated pair also matched every report field:
-22.689 s current versus 16.329 s numeric. It remains opt-in. The supported
-comparison tool is `scripts/v7-pipeline/compare_land_preflights.py`; no copied
-or patched producer or source report is needed.
+The Stage2 builder now selects `numeric_preflight.validate` with the shared
+128-row default. Its normal code identity includes `numeric_preflight.py` and
+`row_overlay.py`. The independent legacy Python row checker remains a baseline,
+not the production coverage path.
 
-The numeric prototype now also accepts an explicit positive `batch_rows` option.
-`compare_land_preflights.py --batch-rows N` selects it; both production and the
-comparison's default remain unchanged. Batched offsets are validated for every
-source row, and uint64 positions pack rows/columns without pixel expansion.
-Independent per-row oracles, dense root/count cases, UINT32-width boundaries and
-all existing coverage/population cases pass for varied batch sizes. Complete
-batch-mode parity/timing are pending; the published 16.329 s result is row mode.
+This uses full-row NumPy I/O and common endpoint arrays, with every row offset,
+physical/component/seed interval, root/category completeness and exact rule
+population checked. Root zero stays distinct from a component gap. uint64
+positions pack batches without pixel expansion or a memory-based admission rule.
+Independent dense, UINT32-width and varied-batch-size oracles pass.
+
+The complete candidate-first preflight pair matched every report field at
+8.319 s versus 22.672 s (2.73x observed). See the
+[receipt and limits](../../../../docs/benchmarks/land-batched-preflight-20261108.md).
+`compare_land_preflights.py --batch-rows N` keeps diagnostic selection explicit;
+its comparison default remains one-row mode. `compare_land_replays.py` pairs
+complete fresh seed-index/WGS84/writer replays with legacy and integrated
+coverage. The integrated full-kernel pair is pending, not yet a stage speed or
+raw-pipeline/geographic acceptance claim.

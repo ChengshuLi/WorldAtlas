@@ -388,29 +388,31 @@ streams, driver code and exact UTC intervals are pinned in separate receipts.
 No compiler, ctypes bridge, child process or whole pipeline is used. Run alone
 for comparable timing; one serial-first pair does not balance cache order.
 
-## Experimental numeric land coverage
+## Numeric land coverage and complete integration pairs
 
-`compare_land_preflights.py --staged-inputs DIR --out NEW_DIR` compares the
-complete current coverage sweep with an experimental NumPy row overlay. It
-checks every physical/component/seed interval and exact population report,
-records source fingerprints and UTC intervals, and supports
-`--candidate-first` for reversed order. This only measures preflight, not the
-writer or any complete stage. The experimental files are not imported by the
-production runner, and the production default is unchanged. The first complete
-isolated pair passed with identical reports: 22.689 s current versus 16.329 s
-numeric. Seed serial/nine-thread parity also passed at 42.604 s/10.267 s, with
-all seed populations and tiles exact. See the
-[receipts and scope limits](../../docs/benchmarks/land-python-api-pairs-20261108.md).
+The actual Stage2 builder now uses the general 128-row NumPy coverage checker,
+with both numeric source files in its normal code identity. The independent
+legacy Python checker is retained for comparison. The complete isolated
+candidate-first preflight pair passed at 8.319 s versus 22.672 s, with every
+coverage/population field equal. This is not a whole-stage speed ratio.
+
+`compare_land_preflights.py --staged-inputs DIR --out NEW_DIR --batch-rows N`
+selects explicit ordinary row batches; the comparison default remains one row.
+There is no memory-based admission rule or cache ceiling. All source row and
+interval boundaries remain mandatory.
+
+`compare_land_replays.py --staged-inputs DIR --out NEW_DIR` pairs complete
+preserved-source kernels. Each trial rebuilds every seed tile, searches all
+source components/ties and writes every output byte/Ural count. Reference uses
+the legacy coverage checker; candidate uses the actual Stage2 numeric default.
+The pair records complete code/input hashes, UTC intervals and all outputs.
+It never launches or changes the user-owned whole pipeline. Full-kernel timing
+is pending. See the [preflight receipt and limits](../../docs/benchmarks/land-batched-preflight-20261108.md).
 
 The seed pair accepts `--verify-tiles DIRECTORY` to run the independent Python
 tile verifier against its freshly generated complete seed. That directory must
-have the exact core-config-pinned manifest. The receipt records the verifier
-source hash, directory identity, UTC interval and complete tile/record counts.
-
-Numeric coverage comparison also accepts `--batch-rows N` to amortize ordinary
-NumPy/row I/O setup. This is explicitly opt-in and has no memory-based admission
-rule or cache ceiling. All source row boundaries remain mandatory. Batch-mode
-full-input results are separate from the published row-mode receipt.
+have the exact core-config-pinned manifest. Its receipt records verifier source,
+directory identity, UTC interval and complete tile/record counts.
 
 ## Global shoreline-index kernel QA
 
