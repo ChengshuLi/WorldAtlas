@@ -124,4 +124,9 @@ complete randomized stream against independently constructed expected bytes.
 The existing writer, seed-population and Ural tests cover malformed inputs and
 boundary failures. Full-world timing has not been measured for this change;
 `benchmark_land.py` remains the complete-mainland comparison when a completed
-reference and an uncontended timing slot are available.
+reference and an uncontended timing slot are available. For a local, in-process
+coverage/writer-only check, use `scripts/v7-pipeline/benchmark_land_sweep.py` with
+`--reference-run /path/to/completed-run --out /path/to/new-comparison`. It checks
+all source, configuration, producer-report and checkpoint pins, every output
+byte and the Ural populations. It starts no process, contacts no service and
+compiles no code. Its timings exclude seed production, search and regional work.
