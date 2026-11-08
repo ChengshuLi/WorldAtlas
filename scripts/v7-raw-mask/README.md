@@ -43,6 +43,14 @@ The physical stages run through Python functions and the supported GDAL/OGR
 Python bindings. No ctypes bridge, physical-stage compiler, custom native helper
 or subprocess is required. See [the water parity harness](overture/README.md).
 
+`benchmark_physical.py land|compose CONFIG BASELINE_CHECKOUT NEW_OUTPUT --repeats 2`
+compares complete local inputs through each checkout's Python stage API, in
+alternating order. Checkout-local helpers are isolated and pinned. There is no
+CLI or subprocess fallback. Timings include module loading and the stage API,
+exclude interpreter startup and comparison, and retain UTC anchors and report
+hashes. Both stages must expose their ordinary Python API; historical timings
+that included process startup have a different measurement boundary.
+
 After a complete paired water-manifest run, use
 `verify_selected_physical.py SELECTED_CONFIG PAIRED_WATER_OUTPUT INPUT_CACHE_ROOT NEW_OUTPUT`
 to verify the final physical result in-process. It checks every paired shard
