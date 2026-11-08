@@ -1,0 +1,84 @@
+{
+  "schema": "worldatlas-water-validation-workers-benchmark-v1",
+  "status": "all-complete-source-pixels-and-diagnostics-identical",
+  "source_sha256": "599c2da0e5d10e25e34abbbfa87d7b008746c6d9bec06f8239c6b2c39409d842",
+  "source_bytes": 1196853535,
+  "base_configuration_sha256": "8f3db37aefb539c4ed21d6dfedfe582ba6a0fdf80d84f8718d427f2af0f2abb8",
+  "script_sha256": {
+    "benchmark_water_validation.py": "9e20c789c948478670c49fa8663c2cc4384f57990b7193a58abbed53b54ba28b",
+    "benchmark_water_shard.py": "729814e79018ed3deb97fbdb485f2ae122c4b4e3678eee07167f52e32413bcb5",
+    "rasterize_water_shard.py": "9697253662faa2a8c862fc7ab466f83e898e4bd6753cdfbefcf15ed43ab0aec1",
+    "water_batch.py": "04ace707cc8d1e8f26af8162679e64e0cb9fa2a06b8d8c335b16af9812fbc699"
+  },
+  "worker_counts": {
+    "serial": 1,
+    "parallel": 9
+  },
+  "parallel_first": false,
+  "results": [
+    {
+      "repeat": 0,
+      "runs": {
+        "serial": {
+          "seconds": 40.427670739998575,
+          "started_at_utc": "2026-11-08T07:32:40.446841+00:00",
+          "ended_at_utc": "2026-11-08T07:33:20.874542+00:00",
+          "output": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/validation-shard6-pair/00-serial",
+          "counts": {
+            "rows": 2093933,
+            "excluded_classification": 7267,
+            "polygons": 975748,
+            "non_polygon": 1110918
+          },
+          "mask_sha256": "ee8e855c0f46e28d1976563f2245152cea93bc78d223de20b77ea5deb5ed50cf",
+          "report_sha256": "84816e00a1917bdf0d9ca6efc93bd5ae092d39cc3176fecf7489ab86436050c0",
+          "configuration_sha256": "5e459b2453ebb5d3a0d872b0fe5832000aed40c45d9954b4da8122b6f3afba28",
+          "batch_timings": {
+            "parse_validate_index_seconds": 25.729734798980644,
+            "tile_burn_seconds": 10.197846560990001
+          }
+        },
+        "parallel": {
+          "seconds": 160.328324367998,
+          "started_at_utc": "2026-11-08T07:33:20.874857+00:00",
+          "ended_at_utc": "2026-11-08T07:36:01.203192+00:00",
+          "output": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/validation-shard6-pair/00-parallel",
+          "counts": {
+            "rows": 2093933,
+            "excluded_classification": 7267,
+            "polygons": 975748,
+            "non_polygon": 1110918
+          },
+          "mask_sha256": "ee8e855c0f46e28d1976563f2245152cea93bc78d223de20b77ea5deb5ed50cf",
+          "report_sha256": "4e1cb3e603f36833e17a03e406f838c2a8037d7e937ec03909c819d37aef1373",
+          "configuration_sha256": "7ca38c85f34ad911d25fc142caa1139a260871e06973b65931a8789144e0c1a0",
+          "batch_timings": {
+            "parse_validate_index_seconds": 145.574047558006,
+            "tile_burn_seconds": 10.092743045992393
+          }
+        }
+      },
+      "different_pixels": 0,
+      "different_reference_pixels": 0
+    }
+  ],
+  "python": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]",
+  "gdal": "3100300",
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "scope": "Complete source, source hashing, pool startup/join and all GDAL API production; excludes comparison. No C++ production baseline or whole-pipeline claim.",
+  "processing_seconds": {
+    "serial": 40.427670739998575,
+    "parallel": 160.328324367998
+  },
+  "ratio_of_summed_times": 0.2521555121302575
+}
