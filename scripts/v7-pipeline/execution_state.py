@@ -170,24 +170,9 @@ class RunLock:
         self.close()
 
 
-def process_identity(pid):
-    """Linux boot/PID/start-tick identity is stable across exec, not PID reuse."""
-    try:
-        stat = Path(f'/proc/{pid}/stat').read_text()
-        tail = stat[stat.rfind(')') + 2:].split()
-        if tail[0] == 'Z':
-            return None
-        return {'boot_id': Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
-                'pid': pid, 'start_ticks': tail[19],
-                'pid_namespace': os.readlink(f'/proc/{pid}/ns/pid')}
-    except FileNotFoundError:
-        return None
-
-
 class Checkpoints:
     def __init__(self, root, attempt):
         self.root, self.attempt = Path(root), attempt
-        self.code_version = None
         self.root.mkdir(exist_ok=True)
         self.preserved = self.root.parent / 'preserved'
         self.preserved.mkdir(exist_ok=True)
@@ -200,46 +185,11 @@ class Checkpoints:
         path.mkdir(exist_ok=True)
         return path
 
-    def check_live(self, *, confirm_no_writers=False):
-        uncertain = []
-        confirmed = set()
-        for path in (self.root.parent / 'attempts').glob('*/operator-writer-confirmation.json'):
-            assertion = json.loads(path.read_bytes())
-            if assertion.get('schema') != 'worldatlas-operator-quiescence-confirmation-v1':
-                raise ValueError('invalid prior writer confirmation')
-            verify_pins(assertion['metadata_pins'])
-            confirmed.update(assertion['unproven_old_attempts'])
-        for admission in self.root.glob('*/attempt-*/admitted.json'):
-            record = json.loads(admission.read_bytes())
-            verify_anchor(record['timing_anchor'], self.root.parent / 'timing-events.jsonl')
-            if str(admission) in confirmed:
-                continue
-            finished = admission.with_name('finished.json')
-            if finished.exists() and json.loads(finished.read_bytes()).get('returncode') == 0:
-                # The ordinary synchronous stage returned normally. Its own
-                # producer checks and the output receipt still gate reuse.
-                continue
-            started = admission.with_name('started.json')
-            expected = json.loads(started.read_bytes()).get('process') if started.exists() else None
-            if expected and process_identity(expected['pid']) == expected:
-                raise ValueError('previous stage process is still alive; leave it running or stop it before resume: '
-                                 + str(expected['pid']))
-            # An inherited filesystem lease blocks a live primary even across
-            # PID namespaces. If both runner and stage were killed, descendants
-            # may be invisible here; no PID heuristic may declare them stopped.
-            if not confirm_no_writers:
-                raise ValueError('interrupted stage has no normal exit record; after independently confirming '
-                                 'all old writers have stopped, use --confirm-no-live-writers: ' + str(admission))
-            uncertain.append(str(admission))
-        return uncertain
-
     def completed(self, name, invocation, outputs):
         path = self.stage(name) / 'complete.json'
         if not path.exists():
             return False
         receipt = json.loads(path.read_bytes())
-        if receipt.get('producer_code_version'):
-            verify_pins([receipt['producer_code_version']])
         verify_anchor(receipt['timing_anchor'], self.root.parent / 'timing-events.jsonl')
         if receipt.get('schema') != 'worldatlas-command-checkpoint-v1' or receipt['invocation'] != invocation:
             raise ValueError('completed command identity changed: ' + name)
@@ -268,10 +218,11 @@ class Checkpoints:
         return moved
 
     def verify_all(self):
+        for path in self.root.glob('*/attempt-*/admitted.json'):
+            admission = json.loads(path.read_bytes())
+            verify_anchor(admission['timing_anchor'], self.root.parent / 'timing-events.jsonl')
         for path in self.root.glob('*/complete.json'):
             receipt = json.loads(path.read_bytes())
-            if receipt.get('producer_code_version'):
-                verify_pins([receipt['producer_code_version']])
             verify_anchor(receipt['timing_anchor'], self.root.parent / 'timing-events.jsonl')
             verify_pins(receipt['inputs'])
             if inventory(receipt['output_roots']) != receipt['outputs']:
@@ -288,7 +239,6 @@ class Checkpoints:
         verify_pins(inputs)
         write(self.stage(name) / 'complete.json', {
             'schema': 'worldatlas-command-checkpoint-v1', 'attempt': self.attempt, 'timing_anchor': timing_anchor,
-            'producer_code_version': self.code_version,
             'invocation': invocation, 'inputs': inputs, 'output_roots': [str(Path(p).resolve()) for p in outputs],
             'outputs': inventory(outputs), 'log': pin(log)})
 

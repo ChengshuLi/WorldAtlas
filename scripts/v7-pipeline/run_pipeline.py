@@ -21,8 +21,7 @@ import time
 import uuid
 
 from execution_state import (Timing, Checkpoints, RunLock, code_identity, inventory,
-                             json_bytes, process_identity, verify_pins, verify_anchor, write, elapsed_union)
-import code_versions
+                             json_bytes, verify_pins, verify_anchor, write, elapsed_union)
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -100,8 +99,7 @@ def rle_spec(directory, *, physical=False):
 
 
 class Pipeline:
-    def __init__(self, config, output, *, resume=False, confirm_no_writers=False,
-                 resume_code_from=None):
+    def __init__(self, config, output, *, resume=False):
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
         self.config_path = Path(config).resolve(strict=True)
@@ -120,8 +118,6 @@ class Pipeline:
         validate_runtime()
         self.runtime = runtime_identity()
         self.resume = resume
-        if resume_code_from and not resume:
-            raise ValueError('--resume-code-from requires --resume')
         self.source_pins = []
         # Verify every external document before expensive computation starts.
         self.sources = self.resolve_pins(self.cfg.get('sources', {}))
@@ -143,29 +139,18 @@ class Pipeline:
             self.out.mkdir(mode=0o700)
         self.run_lock = RunLock(self.out / 'run.lock')
         try:
-            self.stale_coast_batches = []
+            identity_path = self.out / 'run-identity.json'
             if resume:
-                previous, self.code_version, self.stale_coast_batches, version_count = code_versions.load(
-                    self.out, read(self.out / 'run-identity.json'), REPO)
-                if previous != self.identity and not resume_code_from:
+                if read(identity_path) != self.identity:
                     raise ValueError('resume request, input, code, runtime or output identity changed')
             else:
-                write(self.out / 'run-identity.json', self.identity)
-                self.code_version = pin(self.out / 'run-identity.json')
+                write(identity_path, self.identity)
             for name in ('configs', 'work', 'logs', 'scratch', 'basins', 'extractions', 'attempts'):
                 (self.out / name).mkdir(mode=0o700, exist_ok=resume)
             self.attempt = uuid.uuid4().hex
             self.attempt_dir = self.out / 'attempts' / self.attempt
             self.attempt_dir.mkdir()
             self.checkpoints = Checkpoints(self.out / 'checkpoints', self.attempt)
-            uncertain = self.checkpoints.check_live(confirm_no_writers=confirm_no_writers)
-            if uncertain:
-                write(self.attempt_dir / 'operator-writer-confirmation.json', {
-                    'schema': 'worldatlas-operator-quiescence-confirmation-v1',
-                    'unproven_old_attempts': uncertain,
-                    'metadata_pins': [pin(path) for admission in uncertain
-                        for path in (Path(admission), Path(admission).with_name('started.json')) if path.is_file()],
-                    'limitation': 'Operator assertion that all old writers stopped; not inferred from invisible PIDs.'})
             self.checkpoints.verify_all()
             for marker in (self.out / 'attempts').glob('*/setup-timing.json'):
                 verify_anchor(read(marker), self.out / 'timing-events.jsonl')
@@ -189,13 +174,6 @@ class Pipeline:
                 write(self.out / 'request.json', self.cfg)
             elif (self.out / 'request.json').read_bytes() != json_bytes(self.cfg):
                 raise ValueError('saved request changed')
-            # Timing first preserves/repairs any torn final journal record.
-            # Seal the normalized prefix, never bytes that recovery will remove.
-            if resume_code_from:
-                self.code_version, stale = code_versions.upgrade(self.out, previous, self.identity,
-                    self.code_version, resume_code_from, REPO, version_count)
-                self.stale_coast_batches.extend(stale)
-            self.checkpoints.code_version = self.code_version
             self.checkpoints.preserve('failure', [self.out / 'failure.json'])
             token = uuid.uuid4().hex
             self.timing.event({'event': 'start', 'token': token, 'id': 'setup/source-validation', 'group': 'setup',
@@ -318,8 +296,7 @@ class Pipeline:
             sources = sorted(path for parent in self.checkpoints.preserved.glob(name + '-*')
                              for path in parent.iterdir() if (path / marker).is_file())
             for source in sources:
-                if sha(source / marker) not in {p['sha256'] for p in self.stale_coast_batches}:
-                    effective.extend(['--resume-from', str(source)])
+                effective.extend(['--resume-from', str(source)])
         else:
             self.checkpoints.preserve(name, [*outputs, *_restart])
         inputs = []
@@ -346,20 +323,11 @@ class Pipeline:
                                 raise InterruptedError('pipeline cancelled')
                             write(attempt / 'admitted.json', {'invocation': invocation,
                                 'name': name, 'inputs': inputs, 'log': str(log),
-                                'producer_code_version': self.code_version,
                                 'timing_anchor': self.timing.anchor()})
                             process = subprocess.Popen(effective, env=self.env, stdout=stream,
                                 stderr=subprocess.STDOUT, start_new_session=True, pass_fds=(self.run_lock.fd,))
                             self.processes.add(process)
-                        identity = process_identity(process.pid)
-                        if identity is None:
-                            identity = {'pid': process.pid, 'identity_unavailable_after_spawn': True}
-                        write(attempt / 'started.json', {'process': identity, 'invocation': invocation,
-                            'name': name, 'pipeline_attempt': self.attempt, 'inputs': inputs, 'log': str(log),
-                            'producer_code_version': self.code_version,
-                            'timing_anchor': self.timing.anchor()})
                         status = process.wait()
-                        write(attempt / 'finished.json', {'returncode': status})
                         if status:
                             raise RuntimeError(f'{name} failed ({status}); inspect {log}')
                         if pin(script_path) != invocation['code']:
@@ -778,7 +746,6 @@ class Pipeline:
                 'status': 'complete',
                 'request': self.config_pin, 'runner': pin(__file__), 'comparison': comparison,
                 'original_run_identity': pin(self.out / 'run-identity.json'),
-                'current_code_version': self.code_version,
                 'stages': stages, 'timing_complete': all(stage['timing_complete'] for stage in stages.values()),
                 'timing_anchor': self.timing.anchor(),
                 'final': final_pins}
@@ -805,13 +772,9 @@ def main():
     p.add_argument('config', type=Path)
     p.add_argument('output', type=Path, help='new run directory inside input_root')
     p.add_argument('--resume', action='store_true', help='validate and continue the same checkpoint-enabled run')
-    p.add_argument('--resume-code-from', metavar='COMMIT',
-                   help='explicit committed-code transition, preserving unchanged upstream producer provenance')
-    p.add_argument('--confirm-no-live-writers', action='store_true',
-                   help='operator confirms all old writers stopped when an interrupted stage has no normal exit record')
     a = p.parse_args()
-    pipeline = Pipeline(a.config, a.output, resume=a.resume,
-                        confirm_no_writers=a.confirm_no_live_writers, resume_code_from=a.resume_code_from)
+    pipeline = Pipeline(a.config, a.output, resume=a.resume)
+
     def stop(signum, frame):
         pipeline.cancel()
         raise KeyboardInterrupt(f'interrupted by signal {signum}')

@@ -1,6 +1,5 @@
 """Restart safety: active-time arithmetic, real leaf processes and pinned outputs."""
 import json
-import os
 from pathlib import Path
 import tempfile
 import subprocess
@@ -10,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 import run_pipeline as pipeline
-from execution_state import Checkpoints, Timing, RunLock, process_identity, write
+from execution_state import Timing, RunLock
 
 
 class ActiveTimingTests(unittest.TestCase):
@@ -199,9 +198,8 @@ class ExecutorResumeTests(unittest.TestCase):
         self.source = inputs / 'source.bin'
         self.source.write_bytes(b'final-output\x00\x01\x02')
 
-    def runner(self, resume=False, confirm_no_writers=False):
-        runner = pipeline.Pipeline(self.config, self.out, resume=resume,
-                                   confirm_no_writers=confirm_no_writers)
+    def runner(self, resume=False):
+        runner = pipeline.Pipeline(self.config, self.out, resume=resume)
         self.addCleanup(runner.close)
         return runner
 
@@ -227,9 +225,7 @@ class ExecutorResumeTests(unittest.TestCase):
             self.execute(first, interrupt_once=once)
         self.assertEqual((self.out / 'result/result.bin').read_bytes(), b'partial')
         first.close()
-        with self.assertRaisesRegex(ValueError, 'no normal exit record'):
-            self.runner(resume=True)
-        second = self.runner(resume=True, confirm_no_writers=True)
+        second = self.runner(resume=True)
         self.assertTrue(self.execute(second, interrupt_once=once))
         self.assertEqual((self.out / 'result/result.bin').read_bytes(), self.source.read_bytes())
         saved = list((self.out / 'preserved').glob('fixture-stage-*/0-result/result.bin'))
@@ -276,17 +272,6 @@ class ExecutorResumeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'another pipeline runner'):
             self.runner(resume=True)
 
-    def test_verified_unfinished_stage_process_blocks_resume_without_killing_it(self):
-        first = self.runner()
-        attempt = first.checkpoints.begin('orphan')
-        write(attempt / 'admitted.json', {'timing_anchor': first.timing.anchor()})
-        write(attempt / 'started.json', {'process': process_identity(os.getpid()),
-                                              'timing_anchor': first.timing.anchor()})
-        first.close()
-        with self.assertRaisesRegex(ValueError, 'previous stage process is still alive'):
-            self.runner(resume=True)
-        self.assertIsNotNone(process_identity(os.getpid()))
-
     def test_direct_stage_retains_lease_after_parent_is_killed(self):
         release = self.root / 'release'
         log = self.root / 'parent.log'
@@ -304,11 +289,8 @@ class ExecutorResumeTests(unittest.TestCase):
                     time.sleep(.01)
                 parent.kill()
                 parent.wait()
-                # Even if /proc cannot see the old namespace, the filesystem
-                # lease remains held by the admitted ordinary stage process.
-                with patch.object(pipeline, 'process_identity', return_value=None):
-                    with self.assertRaisesRegex(ValueError, 'another pipeline runner'):
-                        self.runner(resume=True)
+                with self.assertRaisesRegex(ValueError, 'another pipeline runner'):
+                    self.runner(resume=True)
             finally:
                 release.write_bytes(b'continue')
                 if parent.poll() is None:
@@ -325,12 +307,7 @@ class ExecutorResumeTests(unittest.TestCase):
             else:
                 lease.close()
                 break
-        # A lease becoming free is not evidence about invisible grandchildren.
-        # Without a normal exit record, only explicit quiescence confirmation
-        # permits preserving/restarting the incomplete command.
-        with self.assertRaisesRegex(ValueError, 'no normal exit record'):
-            self.runner(resume=True)
-        resumed = self.runner(resume=True, confirm_no_writers=True)
+        resumed = self.runner(resume=True)
         self.assertTrue(self.execute(resumed, wait_for=release))
         self.assertEqual((self.out / 'result/result.bin').read_bytes(), self.source.read_bytes())
         self.assertFalse(resumed.timing.summary(None)['water']['timing_complete'])

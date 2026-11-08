@@ -41,35 +41,6 @@ run after an interruption, use the identical configuration, code and runtime:
     /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
       /workspace/selection/config.json /workspace/runs/fresh-run --resume
 
-A committed downstream water fix can be applied before any water command has a
-completed checkpoint. A closed-water-only fix can also reuse explicitly listed
-earlier water stages, provided no closed-water or later stage is complete.
-Unknown producers and shared-code changes are rejected. Explicitly identify the
-old producer commit:
-
-    /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
-      /workspace/selection/config.json /workspace/runs/fresh-run --resume --resume-code-from OLD_COMMIT
-
-The complete old scripts identity must match that git commit, and the complete
-new scripts identity must match the current committed `HEAD`. The request,
-sources, runtime and paths must remain unchanged. Only runner control/test files
-and downstream `v7-replay`/ocean code may change. Upstream/shared producer changes
-and unknown completed producers are rejected. After any completed water checkpoint,
-only a closed-water-only or split-final-only file domain may change, and only
-explicitly listed earlier producers may be reused. The split-final domain excludes
-the split-ocean runner and shared helpers; it permits a completed baseline grid,
-not a completed final grid or later verification. Generated upstream requests must
-still be byte-identical.
-
-An append-only `code-versions` chain records both commits, every changed code
-hash, unchanged checkpoint receipt pins and the timing-journal prefix. The
-original run identity and producer reports/receipts are not rewritten. New
-commands pin their own code version; the final report identifies both the
-original run and current version. Old partial coastal batches are preserved but
-not reused when a change could affect coastal production. Subsequent ordinary
-`--resume` invocations validate this chain without needing the transition flag again. This is code
-provenance, not scientific approval or a general migration of arbitrary changes.
-
 The runner takes an exclusive run lock and refuses to duplicate a still-running
 runner or an admitted stage process left alive by a killed parent. All temporary
 files are directed into `fresh-run/scratch`,
@@ -172,21 +143,12 @@ recorded intervals cannot silently yield a new complete total. Generated request
 must remain byte-identical. Seed rasterization and component/verifier compilation
 execute the pinned checked-in source files directly; run directories contain no
 copied Python/C++ source executables. A changed pin or a live prior stage stops
-resume, except for the explicit restricted committed-code transition above.
+resume.
 
 Stages execute directly, without a new supervisor or guardian process. Before
 launch, the runner durably records admission and timing. The ordinary stage
 process inherits the filesystem run lease, so another runner cannot duplicate
 it even if a later tool invocation has a different PID namespace.
-
-A missing `/proc` PID is never treated as proof that an old writer is dead. If
-an interruption left no normal stage exit record, resume stops until all old
-writer processes have independently been confirmed exited. The operator can then pass
-`--confirm-no-live-writers` with `--resume`; this explicit assertion is recorded
-separately for the exact unchanged old attempts and does not replace any source,
-checkpoint or output validation. The same confirmation is not requested again.
-The runner does not kill an unverified old process or move potentially live
-outputs based on a PID guess.
 
 The supported recovery granularity is:
 
