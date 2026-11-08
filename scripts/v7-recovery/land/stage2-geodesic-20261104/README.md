@@ -193,5 +193,7 @@ The complete candidate-first preflight pair matched every report field at
 `compare_land_preflights.py --batch-rows N` keeps diagnostic selection explicit;
 its comparison default remains one-row mode. `compare_land_replays.py` pairs
 complete fresh seed-index/WGS84/writer replays with legacy and integrated
-coverage. The integrated full-kernel pair is pending, not yet a stage speed or
-raw-pipeline/geographic acceptance claim.
+coverage. The integrated full-kernel pair passed with every decision, output hash and
+Ural count identical: 104.133 s legacy versus 89.160 s integrated. See the
+[full receipt and scope](../../../../docs/benchmarks/land-batch-integration-20261108.md).
+It is not raw-pipeline/geographic acceptance.

@@ -47,7 +47,9 @@ not balance cache order.
 The optional prototype replaces Python dispatch per interval with full-row
 NumPy I/O and common endpoint/owner arrays. It checks every interval and retains
 all coverage, seed placement, root/category completeness and exact population
-contracts. Production still imports the existing preflight implementation.
+contracts. At that measurement, production still used the existing checker. Later
+[batching and full integration](land-batch-integration-20261108.md) are
+recorded separately.
 
 - Current Python preflight: 22.688613 s,
   06:53:50.779974–06:54:13.468618 UTC.
@@ -60,9 +62,8 @@ contracts. Production still imports the existing preflight implementation.
 The [verbatim coverage receipt](land-numeric-preflight-pair-20261108.json)
 binds complete input/code hashes and both UTC intervals. This is one
 reference-first coverage-only pair. Writer/search/seed production were not
-included, and the prototype remains opt-in. The next general question is
-whether batching several ordinary rows can remove remaining NumPy call
-setup, before considering a production switch or the analogous writer path.
+included, and this receipt describes the original opt-in row prototype. Subsequent
+batching and its tested production integration have their own receipts.
 
 ## Runtime and tests
 

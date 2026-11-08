@@ -406,8 +406,9 @@ preserved-source kernels. Each trial rebuilds every seed tile, searches all
 source components/ties and writes every output byte/Ural count. Reference uses
 the legacy coverage checker; candidate uses the actual Stage2 numeric default.
 The pair records complete code/input hashes, UTC intervals and all outputs.
-It never launches or changes the user-owned whole pipeline. Full-kernel timing
-is pending. See the [preflight receipt and limits](../../docs/benchmarks/land-batched-preflight-20261108.md).
+It never launches or changes the user-owned whole pipeline. The full-kernel pair passed with all decisions/output bytes identical:
+104.133 s reference versus 89.160 s integrated. See the
+[full receipt and scope](../../docs/benchmarks/land-batch-integration-20261108.md).
 
 The seed pair accepts `--verify-tiles DIRECTORY` to run the independent Python
 tile verifier against its freshly generated complete seed. That directory must

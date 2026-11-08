@@ -18,7 +18,8 @@ that is historical context, not a controlled row-versus-batch ratio.
 
 The actual Stage2 builder now calls the numeric checker with the shared
 128-row default, and its normal source identity includes both numeric modules.
-The independent legacy row checker remains available for comparison. A complete
-paired source-bound replay (fresh seed index, all WGS84 decisions and ties,
-full writer and Ural counts) is the next integration proof. No raw-source/full
+The independent legacy row checker remains available for comparison. The complete
+[paired source-bound integration replay](land-batch-integration-20261108.md)
+also passed with identical decisions, full output hashes and Ural counts:
+104.133 s current versus 89.160 s integrated. No raw-source/full
 user-owned pipeline, provider authentication or geography acceptance is claimed.
