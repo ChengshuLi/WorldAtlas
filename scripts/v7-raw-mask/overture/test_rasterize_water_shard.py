@@ -156,6 +156,19 @@ class WaterShardTests(unittest.TestCase):
                 self.assertEqual(failed,0 if expected==2 else None)
                 self.assertEqual(int(raster.ReadAsArray().sum()),0)
 
+    def test_finite_points_bypass_ogr_and_failed_batches_release_parsed_geometry(self):
+        kernel=WaterBatch();raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
+        raster.SetGeoTransform((-180,45,0,90,0,-45))
+        points=[struct.pack('<BIdd',1,1,1.,2.),struct.pack('>BIdd',0,1,-3.,4.)]
+        with mock.patch.object(kernel.api,'OGR_G_CreateFromWkb',side_effect=AssertionError('finite point was parsed')):
+            status,failed=kernel.burn(raster,pa.array(points),[1,1],[8,4,-180,90,45],4)
+        self.assertEqual(status.tolist(),[3,3]);self.assertIsNone(failed)
+        polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))').ExportToWkb())
+        with mock.patch.object(kernel.api,'OGR_G_DestroyGeometry',wraps=kernel.api.OGR_G_DestroyGeometry) as release:
+            status,failed=kernel.burn(raster,pa.array([polygon,None,polygon]),[1,1,1],[8,4,-180,90,45],4)
+        self.assertEqual(status.tolist(),[1,5,0]);self.assertEqual(failed,1);self.assertEqual(release.call_count,1)
+        self.assertEqual(int(raster.ReadAsArray().sum()),0)
+
     def test_borrowed_tile_buffer_preserves_existing_burns_and_partial_edge_tiles(self):
         out=self.path/'edge-kernel';out.mkdir();kernel=WaterBatch(out)
         raster=gdal.GetDriverByName('MEM').Create('',7,3,1,gdal.GDT_Byte)

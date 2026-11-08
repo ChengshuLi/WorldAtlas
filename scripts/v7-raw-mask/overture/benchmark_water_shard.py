@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Compare complete raw-shard Python reference/GDAL batches in one process."""
 import argparse
+from datetime import datetime, timezone
 import json
 from pathlib import Path
 import time
@@ -40,12 +41,15 @@ def run(source, expected, config, output, repeats=1, reference=None,discard=Fals
         pair={}
         for engine in engines:
             destination=output/f'{repeat:02d}-{engine}'
+            started_utc=datetime.now(timezone.utc).isoformat()
             started=time.perf_counter()
             build.run(source,expected,destination,config,engine=engine)
             elapsed=time.perf_counter()-started
+            ended_utc=datetime.now(timezone.utc).isoformat()
             report=json.loads((destination/'report.json').read_text())
             if report.get('status')!='candidate-only':raise ValueError('benchmark shard is incomplete')
             pair[engine]={'output':str(destination),'seconds':elapsed,
+                          'started_at_utc':started_utc,'ended_at_utc':ended_utc,
                           'counts':report['counts'],'mask_sha256':report['output_sha256'],
                           'report_sha256':build.sha256(destination/'report.json'),
                           'batch_timings':report.get('batch_timings'),'gdal_kernel':report.get('gdal_kernel')}

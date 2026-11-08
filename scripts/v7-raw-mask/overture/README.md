@@ -38,6 +38,11 @@ failed downloads remain untouched. Use `--shard 6` for a clearly labeled single
 complete-shard trial, `--repeats 2` for alternating repeat order, or
 `--keep-downloaded-sources` to retain newly acquired raw copies. These controls
 do not weaken source pins or imply geographic acceptance.
+If interrupted, use the identical command with `--resume`. Completed paired
+reports and masks are reverified before reuse; incomplete outputs and partial
+downloads are preserved under `interrupted`. Producer UTC intervals and attempt
+records distinguish separate measurement windows. Summed production durations
+are not an uninterrupted end-to-end pipeline timing.
 
 Run the synthetic tests with `python -m unittest -v test_rasterize_water_shard.py`. They cover policy selection, batching and tile boundaries, input integrity, output separation and collision, and invalid-geometry reporting. Synthetic tests do not prove equivalence on a global dataset.
 
