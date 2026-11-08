@@ -1,11 +1,12 @@
 """Streaming physical/component/seed coverage check before WGS84 search."""
-from bisect import bisect_left
 import numpy as np
 from write_land_stream import _Rows,_full,_components,PAIR,TRIPLE
 
 def validate(width,height,component_rows,component_runs,physical_rows,physical_runs,mainland_rows,mainland_runs,roots,seed_roots,required_codes=range(17,23),guard=lambda:None,seed_rules=None,expected_rule_population=None,expected_category_counts=None):
  roots=np.asarray(roots,dtype=np.uint32);seed_roots=set(map(int,seed_roots));seen=np.zeros(len(roots),dtype=bool);seeds_seen=set();codes=set();land=0;by_root={};category_counts={}
  if len(roots)==0 or np.any(roots[1:]<=roots[:-1]) or not seed_roots or any(int(x) in seed_roots for x in roots):raise ValueError('bad component root lists')
+ # Every root is indexed once; no bounded cache or component sample is used.
+ positions={int(root):i for i,root in enumerate(roots)}
  streams=[]
  try:
   for rp,sp,typ in ((component_rows,component_runs,TRIPLE),(physical_rows,physical_runs,PAIR),(mainland_rows,mainland_runs,PAIR)):streams.append(_Rows(rp,sp,height,typ))
@@ -23,8 +24,8 @@ def validate(width,height,component_rows,component_runs,physical_rows,physical_r
      by_root.setdefault(int(root),{});by_root[int(root)][int(seed)]=by_root[int(root)].get(int(seed),0)+end-x;category_counts[int(seed)]=category_counts.get(int(seed),0)+end-x
     else:
      if seed:raise ValueError('seed on nonseed root')
-     i=bisect_left(roots,root)
-     if i==len(roots) or int(roots[i])!=root:raise ValueError('unknown nonseed root')
+     i=positions.get(root)
+     if i is None:raise ValueError('unknown nonseed root')
      seen[i]=True;land+=end-x
     x=end
     for i in range(3):

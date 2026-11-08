@@ -63,8 +63,9 @@ class _Rows:
             raise ValueError('invalid row offset')
         n = end - self.pos
         self.pos = end
-        for _ in range(n):
-            yield self.record.unpack(_read_exact(self.runs, self.record.size))
+        # One ordinary row buffer replaces a Python read/unpack per record.
+        # Keep this a generator so offsets still advance only on consumption.
+        yield from self.record.iter_unpack(_read_exact(self.runs, n * self.record.size))
 
     def finish(self):
         if self.pos != self.count or self.runs.read(1) or self.rows.read(1):
@@ -105,9 +106,9 @@ def write_land_stream(width, height, component_rows, component_runs,
                       disk_reserve_bytes=1 << 30, delta_rule=None):
     """Write rows.u32le, runs.u32le and an atomic report.json; return report.
 
-    Run streams are consumed one row at a time, with at most one record per
-    input held during the boundary sweep. Roots/codes are memory-mapped, as is
-    the on-disk assignment-seen bitmap. A failed build leaves partial files.
+    Run streams are decoded one row at a time. Every assignment root is indexed
+    once in an input-sized dictionary; codes and the assignment-seen bitmap
+    remain memory-mapped. A failed build leaves partial files.
     """
     if type(width) is not int or not 0 < width <= MAX_U32 or type(height) is not int or not 0 < height <= MAX_U32:
         raise ValueError('invalid grid dimensions')
@@ -168,25 +169,23 @@ def write_land_stream(width, height, component_rows, component_runs,
         maps.extend(x for x in (rm, cm) if x is not None)
         def root_at(i): return U32.unpack_from(rm, 4 * i)[0]
         previous = -1
+        positions = {}
         for i in range(n):
             root = root_at(i)
             if root <= previous or root in seed_ids or cm[i] not in range(17, 23):
                 raise ValueError('invalid, duplicate, unsorted or mainland assignment')
             previous = root
+            positions[root] = i
         seen_f = open(out / 'assignment-seen.partial', 'w+b'); files.append(seen_f)
         seen_bytes = (n + 7) // 8
         seen_f.truncate(seen_bytes)
         seen = mmap.mmap(seen_f.fileno(), seen_bytes) if seen_bytes else None
         if seen is not None: maps.append(seen)
         def find(root):
-            lo, hi = 0, n
-            while lo < hi:
-                m = (lo + hi) // 2
-                if root_at(m) < root: lo = m + 1
-                else: hi = m
-            if lo == n or root_at(lo) != root:
+            i = positions.get(root)
+            if i is None:
                 raise ValueError('component has no assignment: ' + str(root))
-            return lo
+            return i
         rows_out = open(out / 'rows.u32le', 'wb'); files.append(rows_out)
         runs_out = open(out / 'runs.u32le', 'wb'); files.append(runs_out)
         rh, dh = hashlib.sha256(), hashlib.sha256()
@@ -201,6 +200,7 @@ def write_land_stream(width, height, component_rows, component_runs,
                    iter(_full(sources[2].next(), width, {0, 17, 18, 19, 20, 21, 22}, 'mainland'))]
             current = [next(it) for it in its]
             x = 0; pending = None; pending_end = 0
+            encoded_row = bytearray()
             delta_row_active = delta_range is not None and delta_range[2] <= y < delta_range[3]
             lat = delta_rule['grid']['north'] - (y + 0.5) * delta_rule['grid']['step'] if delta_row_active else None
             while x < width:
@@ -244,14 +244,15 @@ def write_land_stream(width, height, component_rows, component_runs,
                     code = side_code
                 if code: land_cells += end - x
                 if pending is not None and code != pending:
-                    wr(runs_out, dh, PAIR.pack(pending_end, pending)); total += 1
+                    encoded_row.extend(PAIR.pack(pending_end, pending)); total += 1
                 pending = code; pending_end = end; x = end
                 for i in range(3):
                     if current[i][1] == x:
                         current[i] = next(its[i], None)
             if any(v is not None for v in current): raise ValueError('row extends past width')
-            wr(runs_out, dh, PAIR.pack(pending_end, pending)); total += 1
+            encoded_row.extend(PAIR.pack(pending_end, pending)); total += 1
             if total > MAX_U32: raise ValueError('output run count exceeds u32')
+            wr(runs_out, dh, encoded_row)
             wr(rows_out, rh, U32.pack(total))
         for source in sources: source.finish()
         if seeds_seen != seed_ids: raise ValueError('missing designated mainland roots')

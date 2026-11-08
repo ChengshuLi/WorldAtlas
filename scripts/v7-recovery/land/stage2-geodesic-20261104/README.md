@@ -107,3 +107,21 @@ every new proof, geometry and checker. This exception is available only to the
 explicitly provisional exact snapshot; normal-mode provenance gates remain in
 force. It establishes stream equivalence, not provider authentication or
 geographic correctness.
+
+## Python stream throughput
+
+The physical/component/seed sweeps decode one complete row per input read and
+write/hash one complete output row at a time. All assignment roots are indexed
+once in an input-sized dictionary, replacing a binary search for every component
+span. This is ordinary row buffering and a complete root index, without a
+bounded cache or application memory limit. Codes and the assignment-seen bitmap
+remain memory-mapped. Coverage checks, sorted/unique-root checks, missing/unused
+roots, seed populations, output coalescing and Ural cell-side arithmetic are
+unchanged. No process, subprocess or compiler step is added.
+
+`test_land_stream_speed.py` checks per-row I/O, first/last/zero root IDs and a
+complete randomized stream against independently constructed expected bytes.
+The existing writer, seed-population and Ural tests cover malformed inputs and
+boundary failures. Full-world timing has not been measured for this change;
+`benchmark_land.py` remains the complete-mainland comparison when a completed
+reference and an uncontended timing slot are available.
