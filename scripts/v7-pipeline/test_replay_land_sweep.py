@@ -74,7 +74,7 @@ class ReplayTest(unittest.TestCase):
         self.assertIn('completed_at_utc',result)
 
     def test_fresh_source_search_and_writer_match_all_expected_bytes(self):
-        with patch('subprocess.Popen',side_effect=AssertionError('process launch')),patch('ural_delta.compile_rule',return_value=None):
+        with patch('subprocess.Popen',side_effect=AssertionError('process launch')),patch('ctypes.CDLL',side_effect=AssertionError('ctypes binding')),patch('ural_delta.compile_rule',return_value=None):
             result=replay(self.stage,self.root/'out',search=True)
         self.assertEqual(result['status'],'complete-source-bound-search-and-land-streams-identical')
         self.assertEqual((self.root/'out/codes.u8').read_bytes(),bytes([17]))

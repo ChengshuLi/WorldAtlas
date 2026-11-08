@@ -22,7 +22,8 @@ from exclusive_outputs import create_directory_exclusive, write_json_exclusive
 from stage_land_sweep_inputs import INPUTS, METADATA, STREAMS
 import baseline_runner
 import build_seed_tiles
-import build_stage2
+import land_runtime
+import contracts
 import engine
 import preflight
 import ural_delta
@@ -54,7 +55,7 @@ def staged_inputs(directory):
 
 def replay(directory, out, *, search=False):
     started_at=datetime.now(timezone.utc).isoformat()
-    for module in (baseline_runner,build_seed_tiles,build_stage2,engine,preflight,ural_delta,verify_inputs,land_writer):
+    for module in (baseline_runner,build_seed_tiles,land_runtime,contracts,engine,preflight,ural_delta,verify_inputs,land_writer):
         if Path(module.__file__).resolve()!=STAGE2/(module.__name__+'.py'):
             raise ImportError('land replay module resolved outside its source: '+module.__name__)
     directory=directory.resolve(strict=True)
@@ -63,7 +64,7 @@ def replay(directory, out, *, search=False):
     if len(roots)!=len(hints):raise ValueError('root/hint count mismatch')
     seed=json.loads(paths['seed_report'].read_bytes());grid=config['grid'];controls=config['controls']
     seed_roots=report['physical_coverage']['seed_roots']
-    code={name:digest(STAGE2/name) for name in build_stage2.CODE_NAMES}
+    code={name:digest(STAGE2/name) for name in land_runtime.CODE_NAMES}
     identity={'schema':'worldatlas-land-evidence-replay-v1','staging_plan_sha256':digest(directory/'plan.json'),
         'code_sha256':code,'driver_sha256':digest(Path(__file__)),'started_at_utc':started_at,'python':sys.version,'platform':list(os.uname()),'search':search,
         'scope':'coverage and optional source-bound WGS84 search/writer; no fresh source construction or geography acceptance'}
@@ -101,14 +102,14 @@ def replay(directory, out, *, search=False):
             raise ValueError('fresh source-bound tile index differs')
         reps=np.fromfile(paths['representatives'],dtype='<u4').reshape(-1,5)
         tiles=timed('verify-representatives',lambda:verify_inputs.verify_representatives(tiled,tiled/'manifest.txt',reps,grid['width'],grid['height']))
-        cert,exact=timed('spatial-index',lambda:build_stage2.search_indexes(tiled,grid,tiles,reps,controls))
+        cert,exact=timed('spatial-index',lambda:land_runtime.search_indexes(tiled,grid,tiles,reps,controls))
         offsets=engine.offsets(paths['component_rows'],grid['height'],paths['component_runs'].stat().st_size//12)
         def progress(phase,cursor,queries):
             with (out/'progress.jsonl').open('a') as stream:
                 stream.write(json.dumps({'phase':phase,'cursor':cursor,'queries':queries})+'\n')
         decisions=timed('source-bound-search',lambda:baseline_runner.run(paths['component_runs'],offsets,roots,hints,seed_roots,
             grid['width'],cert,exact,out/'checkpoint.npz',identity,chunk=controls['chunk_columns'],
-            tolerance=build_stage2.contracts.policy_tolerance_metres(report['land_baseline_policy']),
+            tolerance=contracts.policy_tolerance_metres(report['land_baseline_policy']),
             disk_floor_bytes=controls['minimum_free_bytes'],checkpoint_seconds=controls['checkpoint_seconds'],
             block_records=controls['block_records'],progress=progress))
         if decisions['ties']!=report['ties']:raise ValueError('fresh WGS84 ties differ')

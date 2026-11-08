@@ -14,12 +14,11 @@ if str(_SCRIPTS) not in sys.path:
 import stage_external
 import numpy as np,pyproj,scipy
 import atomic_move,baseline_runner,checkpoints,contracts,engine,preflight,verify_inputs,verify_physical_lineage,ural_delta
-from certificate import CertificateIndex
-from exact_index import ExactIndex
+from land_runtime import CODE_NAMES as RUNTIME_CODE_NAMES, search_indexes
 from write_land_stream import write_land_stream
 
 HERE=Path(__file__).resolve().parent
-CODE_NAMES=('build_stage2.py','contracts.py','atomic_move.py','baseline_runner.py','certificate.py','checkpoints.py','engine.py','exact_index.py','point_prototype.py','preflight.py','run_pair.py','verify_inputs.py','verify_physical_lineage.py','verify_seed_index.cpp','write_land_stream.py','ural_delta.py','v7-land/mainland-witness-prototype/resolve_mainland.py','v7-land/point-component-prototype/resolve.py','v7-land/named-identity-prototype/named_identity.py')
+CODE_NAMES=RUNTIME_CODE_NAMES+('build_stage2.py','atomic_move.py','verify_physical_lineage.py','verify_seed_index.cpp','v7-land/mainland-witness-prototype/resolve_mainland.py','v7-land/point-component-prototype/resolve.py','v7-land/named-identity-prototype/named_identity.py')
 INPUTS={'decision_snapshot','physical_rows','physical_runs','physical_report','component_rows','component_runs','component_manifest','component_source','component_builder_binary','physical_lineage_request','resolution_request','resolution_report','seed_rows','seed_runs','seed_report','hint_roots','hint_codes','hint_report','tile_manifest','representatives'}
 PYTHON_INPUTS=(INPUTS-{'component_builder_binary'})|{'component_builder'}
 
@@ -42,14 +41,6 @@ def pin(spec,guard):
 def validate_controls(c):
  keys={'minimum_free_bytes','chunk_columns','checkpoint_seconds','numerical_guard_metres','block_records'}
  need(isinstance(c,dict) and set(c)==keys and type(c['minimum_free_bytes']) is int and c['minimum_free_bytes']>0 and type(c['chunk_columns']) is int and 1<=c['chunk_columns']<=1024 and type(c['block_records']) is int and 1<=c['block_records']<=100000 and type(c['checkpoint_seconds']) in (int,float) and 0<c['checkpoint_seconds']<=3600 and type(c['numerical_guard_metres']) in (int,float) and c['numerical_guard_metres']>=1000,'invalid resource/algorithm controls')
-
-def search_indexes(directory,grid,tiles,reps,controls):
- """Use cheap global bounds before refining only still-possible categories."""
- w,h=grid['width'],grid['height'];step,north=grid['step'],grid['north'];guard=controls['numerical_guard_metres']
- exact=ExactIndex(directory,w,h,step,north,tiles,tile_cells=1024,guard_m=guard)
- fine=CertificateIndex(w,h,step,north,exact.certificate_tiles,reps[:,2:5],tile_cells=exact.leaf_cells,numerical_guard_m=guard)
- coarse=CertificateIndex(w,h,step,north,[(ty,tx,codes) for ty,tx,codes,n,sha in tiles],reps[:,2:5],tile_cells=1024,numerical_guard_m=guard,refinement=fine)
- return coarse,exact
 
 def disjoint(cfg,config_path,work,output):
  specs=list(cfg['inputs'].values())+list(cfg['seed_code_files'].values())+list(cfg['resolution_code_files'].values())+list(cfg['hint_code_files'].values())+[cfg['orchestration']['derived_manifest'],cfg['orchestration']['physical_lineage_report']]
