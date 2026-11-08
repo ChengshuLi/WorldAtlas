@@ -1,3 +1,17 @@
+-- Source geometry referenced by a selected regional rule.
+CREATE TABLE IF NOT EXISTS atlas.geographic_line_observations (
+    line_id text PRIMARY KEY,
+    source_id text NOT NULL,
+    source_version text NOT NULL,
+    geometry jsonb NOT NULL CHECK (geometry ->> 'type' IN ('LineString', 'MultiLineString')),
+    geometry_sha256 text NOT NULL CHECK (geometry_sha256 ~ '^[0-9a-f]{64}$'),
+    coordinate_reference text NOT NULL,
+    provenance jsonb NOT NULL,
+    status text NOT NULL CHECK (status IN ('research', 'selected', 'retired')),
+    created_at timestamptz NOT NULL DEFAULT now(),
+    FOREIGN KEY (source_id, source_version) REFERENCES atlas.source_assets(source_id, version)
+);
+
 -- Selected research policy data only. No accepted geography or map is changed.
 CREATE TABLE IF NOT EXISTS atlas.regional_island_rule_sets (
     revision text NOT NULL REFERENCES atlas.decision_revisions(revision),

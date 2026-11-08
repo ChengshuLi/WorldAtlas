@@ -32,7 +32,6 @@ but retain the selected line until the joins have adequate support. An older
 draft-93 screen identified 113 bounded candidate centers, five with an
 ambiguous side; this is not a count against the current physical mask.
 
-The current mask could not be identified from local old artifacts or the
-empty Neon `atlas.source_builds` and `atlas.entity_grid_artifacts` tables.
-Therefore no current land-cell impact is asserted. For Anapa, the changed
-coastal endpoint also requires a valid water closure for a complete impact.
+This assessment used historical artifacts. A current land-cell impact check
+requires a fresh physical mask and, for Anapa, a valid water closure at the
+changed coastal endpoint.

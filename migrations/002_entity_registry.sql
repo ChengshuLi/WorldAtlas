@@ -66,16 +66,3 @@ CREATE TABLE atlas.review_category_bindings (
     PRIMARY KEY (revision, code),
     FOREIGN KEY (revision, entity_id) REFERENCES atlas.geographic_entities(revision, id)
 );
-
--- The bytes remain in R2; the record pins their exact registry revision.
-CREATE TABLE atlas.entity_grid_artifacts (
-    artifact_id text PRIMARY KEY,
-    revision text NOT NULL REFERENCES atlas.entity_registry_revisions(revision),
-    hierarchy_level text NOT NULL CHECK (hierarchy_level IN ('continent','subcontinent','region','area','province','location')),
-    r2_key text NOT NULL UNIQUE CHECK (length(trim(r2_key)) > 0),
-    sha256 text NOT NULL CHECK (sha256 ~ '^[0-9a-f]{64}$'),
-    width integer NOT NULL CHECK (width > 0),
-    height integer NOT NULL CHECK (height > 0),
-    encoding text NOT NULL,
-    created_at timestamptz NOT NULL DEFAULT now()
-);

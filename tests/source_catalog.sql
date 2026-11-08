@@ -1,4 +1,4 @@
--- Run against a disposable/test branch after migrations 001–004. The outer
+-- Run against a disposable/test branch after migrations 002 and 004. The outer
 -- exception rolls back all synthetic rows; no example source is registered.
 DO $$
 BEGIN

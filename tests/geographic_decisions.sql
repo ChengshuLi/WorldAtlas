@@ -1,4 +1,4 @@
--- Run in a disposable database after 001–006 and before 010. Synthetic writes roll back.
+-- Run in a disposable database after 002–006 and before 010. Synthetic writes roll back.
 -- Migration 010 intentionally blocks the acceptance transition tested below;
 -- use decision_acceptance_gate.sql after installing that later gate.
 DO $$ BEGIN
