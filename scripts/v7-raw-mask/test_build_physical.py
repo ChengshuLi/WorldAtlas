@@ -132,10 +132,17 @@ class PipelineTests(unittest.TestCase):
         out=self.root/'finished';b.run(self.config,out)
         (out/'shards/00000/water.tif').write_bytes(b'tampered')
         with self.assertRaisesRegex(ValueError,'completed shard checkpoint mismatch'):b.run(self.config,out,resume=True)
-    def test_completed_resume_revalidates_native_kernel_binary(self):
-        out=self.root/'finished-native';b.run(self.config,out)
-        (out/'shards/00000/water-native.so').write_bytes(b'tampered')
-        with self.assertRaisesRegex(ValueError,'native water kernel mismatch'):b.run(self.config,out,resume=True)
+    def test_completed_resume_revalidates_gdal_kernel_report(self):
+        out=self.root/'finished-gdal';b.run(self.config,out)
+        path=out/'shards/00000/report.json';report=json.loads(path.read_bytes())
+        report['gdal_kernel']['binding_sha256']='0'*64;path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError,'completed shard checkpoint mismatch'):b.run(self.config,out,resume=True)
+
+    def test_complete_physical_stage_does_not_start_processes(self):
+        with mock.patch.object(subprocess,'Popen',side_effect=AssertionError('unexpected subprocess')):
+            report=b.run(self.config,self.root/'in-process')
+        self.assertEqual(report['status'],'candidate-only')
+        self.assertFalse(list((self.root/'in-process').rglob('*.so')))
 
     def test_resume_quarantines_incomplete_unit(self):
         out=self.root/'partial';actual=b.run_stage

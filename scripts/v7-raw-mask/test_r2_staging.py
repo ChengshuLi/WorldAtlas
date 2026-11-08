@@ -108,20 +108,19 @@ class CheckpointTests(unittest.TestCase):
     def test_bad_shard_hash_fails_closed(self):
         (self.check/'shards'/'00000'/'water.tif').write_bytes(b'tampered')
         with self.assertRaises(ValueError): self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.root/'00000',self.watercfg)
-    def test_native_checkpoint_copies_binary_and_requires_configured_method(self):
-        cfg=json.loads(self.watercfg.read_text());cfg['rasterizer']='native';self.watercfg.write_text(json.dumps(cfg))
+    def test_gdal_checkpoint_requires_pinned_python_binding_and_method(self):
+        cfg=json.loads(self.watercfg.read_text());cfg['rasterizer']='gdal';self.watercfg.write_text(json.dumps(cfg))
         shard=self.check/'shards'/'00000';report=json.loads((shard/'report.json').read_text())
-        for filename in ('water_native.cpp','water_native.py'):(self.repo/'overture'/filename).write_bytes(filename.encode())
-        (shard/'water-native.so').write_bytes(b'native binary')
-        report.update({'rasterizer':'native','configuration_sha256':module.sha(self.watercfg),'native_kernel':{
-            'method':'hybrid','source_sha256':module.sha(self.repo/'overture/water_native.cpp'),
-            'binding_sha256':module.sha(self.repo/'overture/water_native.py'),'binary_sha256':module.sha(shard/'water-native.so')}})
+        (self.repo/'overture/water_batch.py').write_bytes(b'Python binding')
+        report.update({'rasterizer':'gdal','configuration_sha256':module.sha(self.watercfg),'gdal_kernel':{
+            'implementation':'python-gdal-c-api-v1','method':'hybrid',
+            'binding_sha256':module.sha(self.repo/'overture/water_batch.py')}})
         (shard/'report.json').write_text(json.dumps(report));dest=self.root/'native-copy'/'00000';dest.parent.mkdir()
         self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,dest,self.watercfg)
-        self.assertEqual((dest/'water-native.so').read_bytes(),b'native binary')
-        report['native_kernel']['method']='vector';(shard/'report.json').write_text(json.dumps(report))
+        self.assertFalse((dest/'water-native.so').exists())
+        report['gdal_kernel']['method']='vector';(shard/'report.json').write_text(json.dumps(report))
         wrong=self.root/'wrong-method'/'00000';wrong.parent.mkdir()
-        with self.assertRaisesRegex(ValueError,'native water checkpoint mismatch'):
+        with self.assertRaisesRegex(ValueError,'in-process GDAL water checkpoint mismatch'):
             self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,wrong,self.watercfg)
     def test_bad_land_code_fails_closed(self):
         (self.repo/'rasterize_land.py').write_bytes(b'changed')

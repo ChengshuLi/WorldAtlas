@@ -1,15 +1,17 @@
 import hashlib
 import json
+import struct
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 import rasterize_water_shard as build
 import benchmark_water_shard as benchmark
-from water_native import WaterBatch
+from water_batch import WaterBatch
 
 class WaterShardTests(unittest.TestCase):
     def test_arrow_policy_matches_python_for_whitespace_and_dictionary_strings(self):
@@ -32,7 +34,7 @@ class WaterShardTests(unittest.TestCase):
         result=benchmark.run(p,digest,self.config,out,discard=True,discard_source=True)
         self.assertEqual(result[0]['different_pixels'],0)
         self.assertFalse(p.exists());self.assertTrue(self.config.exists())
-        for name in ('python','native'):
+        for name in ('python','gdal'):
             self.assertFalse((out/f'00-{name}'/'water.tif').exists())
             self.assertTrue((out/f'00-{name}'/'report.json').exists())
         report=json.loads((out/'benchmark.json').read_text())
@@ -79,7 +81,7 @@ class WaterShardTests(unittest.TestCase):
         feat = ogr.Feature(layer.GetLayerDefn()); feat.SetGeometry(ogr.CreateGeometryFromWkt('POLYGON ((-170 80,-120 80,-120 40,-170 40,-170 80))')); layer.CreateFeature(feat)
         gdal.RasterizeLayer(target,[1],layer,burn_values=[1])
         np.testing.assert_array_equal(a,target.ReadAsArray())
-    def test_native_matches_reference_with_holes_edges_and_nonpolygons(self):
+    def test_gdal_matches_reference_with_holes_edges_and_nonpolygons(self):
         p, _ = self.fixture()
         table = pq.read_table(p)
         rows = table.to_pylist()
@@ -104,15 +106,15 @@ class WaterShardTests(unittest.TestCase):
         table = pa.Table.from_pylist(rows).replace_schema_metadata(table.schema.metadata)
         pq.write_table(table,p);digest = build.sha256(p)
         reports=[]
-        for engine in ('python','native'):
+        for engine in ('python','gdal'):
             out=self.path/engine;build.run(p,digest,out,self.config,17,engine)
             reports.append(json.loads((out/'report.json').read_text()))
         self.assertEqual(reports[0]['counts'],reports[1]['counts'])
         np.testing.assert_array_equal(gdal.Open(str(self.path/'python/water.tif')).ReadAsArray(),
-                                      gdal.Open(str(self.path/'native/water.tif')).ReadAsArray())
+                                      gdal.Open(str(self.path/'gdal/water.tif')).ReadAsArray())
         self.assertEqual(reports[0]['output_sha256'],reports[1]['output_sha256'])
 
-    def test_native_arrow_slices_large_offsets_and_validity_bitmap(self):
+    def test_gdal_arrow_slices_large_offsets_and_validity_bitmap(self):
         out=self.path/'kernel';out.mkdir();kernel=WaterBatch(out)
         polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))').ExportToWkb())
         for dtype in (pa.binary(),pa.large_binary()):
@@ -124,6 +126,47 @@ class WaterShardTests(unittest.TestCase):
             self.assertEqual(int(raster.ReadAsArray().sum()),1)
             status,failed=kernel.burn(raster,geometry,[1,1,1],[8,4,-180,90,45],4)
             self.assertEqual(failed,1);self.assertEqual(status.tolist(),[1,5,0])
+
+    def test_batch_backend_does_not_compile_or_start_processes(self):
+        import subprocess
+        with mock.patch.object(subprocess,'Popen',side_effect=AssertionError('unexpected subprocess')):
+            first=WaterBatch();second=WaterBatch()
+        self.assertEqual(first.provenance,second.provenance)
+        first.timings['tile_burn_seconds']=1
+        self.assertEqual(second.timings['tile_burn_seconds'],0)
+
+    def test_point_shortcut_matches_ogr_for_endianness_dimensions_and_nonfinite_values(self):
+        out=self.path/'point-kernel';out.mkdir();kernel=WaterBatch(out)
+        points=[struct.pack(order+'BIdd',endian,1,x,y)
+                for order,endian in (('<',1),('>',0))
+                for x,y in ((0.,0.),(-180.,90.),(1e300,-1e300),(float('nan'),0.),
+                            (0.,float('inf')),(float('nan'),float('nan')))]
+        points.extend(bytes(ogr.CreateGeometryFromWkt(wkt).ExportToWkb())
+                      for wkt in ('POINT Z (1 2 3)','POINT M (1 2 3)','POINT ZM (1 2 3 4)'))
+        points.extend((points[0]+b'extra',points[0][:-1],b'\x02'+points[0][1:]))
+        for value in points:
+            with self.subTest(wkb=value.hex()):
+                try:geometry=ogr.CreateGeometryFromWkb(value)
+                except RuntimeError:geometry=None
+                expected=2 if geometry is None or geometry.IsEmpty() else 3
+                raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
+                raster.SetGeoTransform((-180,45,0,90,0,-45))
+                status,failed=kernel.burn(raster,pa.array([value]),[1],[8,4,-180,90,45],4)
+                self.assertEqual(status.tolist(),[expected])
+                self.assertEqual(failed,0 if expected==2 else None)
+                self.assertEqual(int(raster.ReadAsArray().sum()),0)
+
+    def test_borrowed_tile_buffer_preserves_existing_burns_and_partial_edge_tiles(self):
+        out=self.path/'edge-kernel';out.mkdir();kernel=WaterBatch(out)
+        raster=gdal.GetDriverByName('MEM').Create('',7,3,1,gdal.GDT_Byte)
+        raster.SetGeoTransform((-180,45,0,90,0,-45))
+        initial=np.zeros((3,7),dtype=np.uint8);initial[0,0]=1
+        raster.GetRasterBand(1).WriteArray(initial)
+        polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((45 0,135 0,135 -45,45 -45,45 0))').ExportToWkb())
+        status,failed=kernel.burn(raster,pa.array([polygon]),[1],[7,3,-180,90,45],4)
+        self.assertIsNone(failed);self.assertEqual(status.tolist(),[1])
+        initial[2,5:7]=1
+        np.testing.assert_array_equal(raster.ReadAsArray(),initial)
 
     def test_hybrid_global_burn_matches_local_tiles_at_pixel_centers(self):
         p,_=self.fixture();metadata=pq.read_schema(p).metadata
@@ -137,12 +180,12 @@ class WaterShardTests(unittest.TestCase):
                     geom=ogr.CreateGeometryFromWkt(f'POLYGON (({edge} {y},{edge+.8} {y},{edge+.8} {y-1.6},{edge} {y-1.6},{edge} {y}))')
                     rows.append({'id':str(len(rows)),'subtype':'lake','geometry':bytes(geom.ExportToWkb())})
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata),p)
-        for engine in ('python','native'):
+        for engine in ('python','gdal'):
             build.run(p,build.sha256(p),self.path/engine,self.config,19,engine)
         np.testing.assert_array_equal(gdal.Open(str(self.path/'python/water.tif')).ReadAsArray(),
-                                      gdal.Open(str(self.path/'native/water.tif')).ReadAsArray())
+                                      gdal.Open(str(self.path/'gdal/water.tif')).ReadAsArray())
 
-    def test_native_rejects_bad_and_empty_wkb_without_burning_batch(self):
+    def test_gdal_rejects_bad_and_empty_wkb_without_burning_batch(self):
         out=self.path/'kernel';out.mkdir();kernel=WaterBatch(out)
         polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))').ExportToWkb())
         for bad in (b'',b'invalid',bytes(ogr.CreateGeometryFromWkt('POLYGON EMPTY').ExportToWkb())):
@@ -152,7 +195,7 @@ class WaterShardTests(unittest.TestCase):
             self.assertEqual(failed,1);self.assertEqual(status.tolist(),[1,2])
             self.assertEqual(int(raster.ReadAsArray().sum()),0)
 
-    def test_native_methods_and_parallel_first_error_preserve_source_order(self):
+    def test_gdal_methods_and_first_error_preserve_source_order(self):
         polygon=bytes(ogr.CreateGeometryFromWkt('POLYGON ((-180 90,0 90,0 -45,-180 -45,-180 90))').ExportToWkb())
         multipart=bytes(ogr.CreateGeometryFromWkt('MULTIPOLYGON (((-180 90,-135 90,-135 45,-180 45,-180 90)),((135 0,180 0,180 -45,135 -45,135 0)))').ExportToWkb())
         results=[]
@@ -171,9 +214,9 @@ class WaterShardTests(unittest.TestCase):
             self.assertEqual(failed,1);self.assertEqual(status.tolist(),[1,5,0,0,0])
             self.assertEqual(int(raster.ReadAsArray().sum()),0)
         for result in results[1:]:np.testing.assert_array_equal(result,results[0])
-        out=self.path/'vector';out.mkdir();kernel=WaterBatch(out,'vector')
+        out=self.path/'vector';out.mkdir()
         with self.assertRaisesRegex(ValueError,'global vector mode does not preserve'):
-            kernel.burn(raster,pa.array([polygon]),[1],[8,4,-180,90,45],2)
+            WaterBatch(out,'vector')
 
     def test_production_grid_center_tie_edges_keep_reference_values(self):
         p,_=self.fixture();metadata=pq.read_schema(p).metadata
@@ -190,7 +233,7 @@ class WaterShardTests(unittest.TestCase):
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata),p)
         cfg=json.loads(self.config.read_text());cfg['grid']={'width':131072,'height':54614,'west':-180,'north':90,'step':360/131072}
         cfg['tile_size']=1024;self.config.write_text(json.dumps(cfg));reports=[]
-        for engine in ('python','native'):
+        for engine in ('python','gdal'):
             out=self.path/engine;build.run(p,build.sha256(p),out,self.config,engine=engine)
             reports.append(json.loads((out/'report.json').read_text()))
             raster=gdal.Open(str(out/'water.tif'))
@@ -216,7 +259,7 @@ class WaterShardTests(unittest.TestCase):
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata),p)
         cfg=json.loads(self.config.read_text());cfg['grid']={'width':64,'height':32,'west':-180,'north':90,'step':5.625}
         cfg['tile_size']=4;self.config.write_text(json.dumps(cfg));reports=[]
-        for engine in ('python','native'):
+        for engine in ('python','gdal'):
             out=self.path/engine;build.run(p,build.sha256(p),out,self.config,engine=engine)
             reports.append(json.loads((out/'report.json').read_text()))
         self.assertEqual(reports[0]['output_sha256'],reports[1]['output_sha256'])
@@ -241,6 +284,12 @@ class WaterShardTests(unittest.TestCase):
     def test_old_policy_rejected_instead_of_silently_reinterpreted(self):
         p,digest=self.fixture();cfg=json.loads(self.config.read_text());cfg['schema']='water-shard-candidate-v1';self.config.write_text(json.dumps(cfg));out=self.path/'old-policy'
         with self.assertRaisesRegex(ValueError,'supported configuration'):build.run(p,digest,out,self.config)
+        self.assertFalse(out.exists())
+    def test_compiled_engine_configuration_is_rejected_before_output(self):
+        p,digest=self.fixture();cfg=json.loads(self.config.read_bytes());cfg['rasterizer']='native'
+        self.config.write_text(json.dumps(cfg));out=self.path/'retired-engine'
+        with self.assertRaisesRegex(ValueError,'runtime native compilation is retired'):
+            build.run(p,digest,out,self.config)
         self.assertFalse(out.exists())
     def test_invalid_geometry_is_reported_and_not_claimed_complete(self):
         p,_ = self.fixture()

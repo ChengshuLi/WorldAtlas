@@ -12,7 +12,6 @@ import os
 import re
 from pathlib import Path
 import shutil
-import subprocess
 import sys
 import threading
 import time
@@ -220,6 +219,10 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         raise ValueError('invalid free-space reserve')
     land_path, land_bytes, land_cfg = read_pin(cfg['land_config'])
     water_path, water_bytes, water_cfg = read_pin(cfg['water_config'])
+    if water_cfg.get('rasterizer','gdal') not in ('gdal','python'):
+        raise ValueError('water rasterizer must be gdal or python; runtime native compilation is retired')
+    if 'native_method' in water_cfg:
+        raise ValueError('retired native_method; use batch_method')
     source_path, source_bytes, source = read_pin(cfg['source_manifest'])
     grid = land_cfg['grid']
     if grid != water_cfg['grid']:
@@ -257,20 +260,20 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         raw.append((path, digest, entry))
     if len({x[0] for x in raw}) != len(raw) or len({x[1] for x in raw}) != len(raw):
         raise ValueError('raw source paths and hashes must be unique')
-    scripts = {name:sha(HERE / name) for name in ('build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/water_native.py','overture/water_native.cpp','overture/aggregate_compare.py','compose_physical.py')}
+    scripts = {name:sha(HERE / name) for name in ('build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/water_batch.py','overture/aggregate_compare.py','compose_physical.py')}
     def check_kernel(report, directory):
-        engine = water_cfg.get('rasterizer', 'native')
+        engine = water_cfg.get('rasterizer', 'gdal')
         if report.get('rasterizer') != engine:
             raise ValueError('water rasterizer mismatch')
-        native = report.get('native_kernel')
-        if engine == 'native':
-            if (not isinstance(native,dict) or native.get('source_sha256') != scripts['overture/water_native.cpp']
-                or native.get('method') != water_cfg.get('native_method','hybrid')
-                or native.get('binding_sha256') != scripts['overture/water_native.py']
-                or native.get('binary_sha256') != sha(directory/'water-native.so')):
-                raise ValueError('native water kernel mismatch')
-        elif native is not None:
-            raise ValueError('unexpected native water kernel')
+        kernel = report.get('gdal_kernel')
+        if report.get('native_kernel') is not None:raise ValueError('unexpected compiled water kernel')
+        if engine == 'gdal':
+            if (not isinstance(kernel,dict) or kernel.get('implementation')!='python-gdal-c-api-v1'
+                or kernel.get('method') != water_cfg.get('batch_method','hybrid')
+                or kernel.get('binding_sha256') != scripts['overture/water_batch.py']):
+                raise ValueError('in-process GDAL water kernel mismatch')
+        elif kernel is not None or report.get('native_kernel') is not None:
+            raise ValueError('unexpected water kernel')
     output = Path(output).resolve()
     inputs = [manifest_path, land_path, water_path, source_path] + [x[0] for x in raw]
     inputs += [Path(item['path']).resolve() for spec in land_cfg['land'] for item in spec['files']]
@@ -489,4 +492,4 @@ def main(argv=None, *, emit=print):
 
 if __name__ == '__main__':
     try: main()
-    except (ValueError, OSError, subprocess.CalledProcessError) as e: sys.exit(f'failed: {e}')
+    except (ValueError, OSError) as e: sys.exit(f'failed: {e}')

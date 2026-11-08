@@ -180,17 +180,15 @@ class CheckpointStager:
                     event.get('size') != entry['size'] or
                     event.get('output_sha256') != report.get('output_sha256')):
                 raise ValueError(f'shard checkpoint lineage or output mismatch: {src}')
-            if report.get('rasterizer') != cfg.get('rasterizer','native'):
+            if report.get('rasterizer') != cfg.get('rasterizer','gdal'):
                 raise ValueError('water checkpoint rasterizer/config mismatch')
             names = ('report.json', 'water.tif')
-            if report.get('rasterizer') == 'native':
-                kernel = report.get('native_kernel', {})
-                if (kernel.get('method') != cfg.get('native_method','hybrid') or
-                        kernel.get('source_sha256') != sha(physical.HERE/'overture/water_native.cpp') or
-                        kernel.get('binding_sha256') != sha(physical.HERE/'overture/water_native.py') or
-                        kernel.get('binary_sha256') != sha(old/'water-native.so')):
-                    raise ValueError('native water checkpoint mismatch')
-                names += ('water-native.so',)
+            if report.get('rasterizer') == 'gdal':
+                kernel = report.get('gdal_kernel', {})
+                if (kernel.get('method') != cfg.get('batch_method','hybrid') or
+                        kernel.get('implementation')!='python-gdal-c-api-v1' or
+                        kernel.get('binding_sha256') != sha(physical.HERE/'overture/water_batch.py')):
+                    raise ValueError('in-process GDAL water checkpoint mismatch')
             self.copy_files(old, dest, names)
             if sha(dest / 'report.json') != report_sha or sha(dest / 'water.tif') != report['output_sha256']:
                 raise ValueError('shard checkpoint changed during copy')

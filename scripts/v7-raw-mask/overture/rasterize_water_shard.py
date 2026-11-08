@@ -124,7 +124,7 @@ class SourceIds:
         return result
 
 
-def native_batch(kernel, raster, batch, counts, invalid, grid, tile, ids):
+def gdal_batch(kernel, raster, batch, counts, invalid, grid, tile, ids):
     first=counts['rows']
     eligible,missing,excluded=classifications(batch.column('subtype'))
     counts['rows'] += len(batch)
@@ -172,9 +172,11 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         batch_size = cfg.get('batch_size', 8192)
     if type(batch_size) is not int or batch_size < 1:
         raise ValueError('batch size must be a positive integer')
-    engine = engine or cfg.get('rasterizer', 'native')
-    if engine not in ('native', 'python'):
-        raise ValueError('rasterizer must be native or python')
+    engine = engine or cfg.get('rasterizer', 'gdal')
+    if engine not in ('gdal', 'python'):
+        raise ValueError('rasterizer must be gdal or python; runtime native compilation is retired')
+    if 'native_method' in cfg:
+        raise ValueError('retired native_method; select the in-process method with batch_method')
     if len(expected) != 64 or sha256(source) != expected.lower():
         raise ValueError('source SHA-256 does not match expected digest')
     pf = pq.ParquetFile(source, pre_buffer=False)
@@ -191,12 +193,12 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
     os.mkdir(output)
     out = Path(output)
     kernel = None
-    if engine == 'native':
+    if engine == 'gdal':
         if __package__:
-            from .water_native import WaterBatch
+            from .water_batch import WaterBatch
         else:
-            from water_native import WaterBatch
-        kernel = WaterBatch(out,cfg.get('native_method','hybrid'))
+            from water_batch import WaterBatch
+        kernel = WaterBatch(out,cfg.get('batch_method','hybrid'))
     raster = gdal.GetDriverByName('GTiff').Create(str(out/'water.tif'), width, height, 1,
         gdal.GDT_Byte, options=['TILED=YES', 'BLOCKXSIZE=512', 'BLOCKYSIZE=512',
                                'NBITS=1', 'COMPRESS=DEFLATE', 'SPARSE_OK=YES', 'BIGTIFF=YES'])
@@ -214,10 +216,10 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
             raise ValueError('free disk below configured reserve; partial output preserved')
         dimensions = (width, height, west, north, step)
         if kernel:
-            native_batch(kernel, raster, batch, counts, invalid, dimensions, tile, ids)
+            gdal_batch(kernel, raster, batch, counts, invalid, dimensions, tile, ids)
         else:
             python_batch(raster, batch, counts, invalid, dimensions, tile, srs)
-        # The reference path creates Python feature objects. Native batches own
+        # The reference path creates Python feature objects. GDAL batches own
         # and release their geometries directly and do not require cyclic GC.
         batch = None
         if kernel is None:
@@ -247,8 +249,8 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
     report = {'status': 'incomplete-input-issues' if invalid or counts['missing_classification'] else 'candidate-only',
        'source':str(source), 'source_sha256':expected.lower(), 'rows_in_source':pf.metadata.num_rows,
        'script_sha256':sha256(Path(__file__).resolve()),
-       'rasterizer':engine, 'native_kernel':kernel.provenance if kernel else None,
-       'native_timings':kernel.timings if kernel else None,
+       'rasterizer':engine, 'gdal_kernel':kernel.provenance if kernel else None,
+       'batch_timings':kernel.timings if kernel else None,
        'counts':dict(counts), 'batch_size':batch_size, 'invalid_feature_ids': 'invalid-feature-ids.json' if invalid else None,
        'policy': policy, 'selection_notes':cfg['selection_notes'],
        'configuration_sha256':hashlib.sha256(config_bytes).hexdigest(),
@@ -267,7 +269,7 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('source'); p.add_argument('sha256'); p.add_argument('config'); p.add_argument('new_output_directory')
     p.add_argument('--batch-size', type=int, default=None, help='override batch_size in config')
-    p.add_argument('--engine', choices=('native','python'), help='override rasterizer in config')
+    p.add_argument('--engine', choices=('gdal','python'), help='override rasterizer in config')
     a = p.parse_args()
     try: print(json.dumps(run(a.source, a.sha256, a.new_output_directory, a.config, a.batch_size, a.engine), indent=2), flush=True)
     except Exception as e:

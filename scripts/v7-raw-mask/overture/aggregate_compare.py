@@ -73,7 +73,7 @@ def verify_lineage(cfg, grid):
                 row_count != doc.get('counts',{}).get('rows')):
             raise ValueError('incomplete or inconsistent shard report')
         native=doc.get('native_kernel')
-        if doc.get('rasterizer') not in (None,'python','native'):raise ValueError('unknown water rasterizer')
+        if doc.get('rasterizer') not in (None,'python','native','gdal'):raise ValueError('unknown water rasterizer')
         if doc.get('rasterizer')=='native':
             if (not isinstance(native,dict) or native.get('method') not in ('hybrid','vector','tiled') or
                     any(not isinstance(native.get(k),str) or len(native[k])!=64 or
@@ -82,6 +82,15 @@ def verify_lineage(cfg, grid):
                     sha(Path(report['path']).parent/'water-native.so')!=native['binary_sha256']):
                 raise ValueError('invalid native water kernel')
             kernels.append((doc['rasterizer'],native['method'],native['source_sha256'],native['binding_sha256'],native.get('gdal')))
+        elif doc.get('rasterizer')=='gdal':
+            kernel=doc.get('gdal_kernel')
+            if (native is not None or not isinstance(kernel,dict) or
+                    kernel.get('implementation')!='python-gdal-c-api-v1' or
+                    kernel.get('method') not in ('hybrid','tiled') or
+                    not isinstance(kernel.get('binding_sha256'),str) or len(kernel['binding_sha256'])!=64 or
+                    any(ch not in '0123456789abcdef' for ch in kernel['binding_sha256'])):
+                raise ValueError('invalid in-process GDAL water kernel')
+            kernels.append(('gdal',kernel['method'],kernel['binding_sha256'],kernel.get('gdal')))
         else:
             if native is not None:raise ValueError('unexpected native water kernel')
             kernels.append((doc.get('rasterizer','python'),))

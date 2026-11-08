@@ -4,27 +4,40 @@ This experimental tool rasterizes one pinned Overture GeoParquet water shard int
 
 It requires Python 3, NumPy, PyArrow with Parquet support, and GDAL/OGR Python bindings with GEOS, a GeoTIFF driver, and a memory vector driver. The trial used Python 3.13.5, PyArrow 26.0.1, GDAL 3.10.3, and GEOS 3.13.1. Parquet pre-buffering is disabled; GDAL uses its default cache behavior, with no application-imposed memory cap. The tool processes features in batches and rasterizes tiles, but unusually complex input may require additional memory. The example grid is large; provision disk and memory accordingly.
 
-The default `native` rasterizer additionally requires a C++17 compiler and a
-Linux GDAL shared library. It builds the checked-in `water_native.cpp` into the
-new shard output, using that output for compiler temporary files. GDAL development
-headers are not required. The helper reads Arrow's existing WKB buffers, performs
-the same OGR parsing, geometry-type and GEOS-validity checks using independent
-geometries across the process's available CPUs. The default `native_method:
-"hybrid"` groups small features into shared tile burns, prunes only vertex runs
-strictly outside each tile-row strip, and skips empty multipart bounding-box gaps.
-Retained edges keep their original coordinates; outside-strip bridges cannot
-intersect a visible scanline. Every GDAL burn uses the reference tile-local
-transform. `tiled` retains the unpruned reference raster path. The former global
-`vector` method is rejected because it changes rare pixel-center ties. This
-avoids repeated off-strip vertex traversal as well as Python dictionaries,
-WKB copies and per-tile OGR feature clones. The report records method, validation
-threads, helper/binding, binary, compiler and GDAL identity. Union, checkpoint and physical-lineage checks
-verify those pins. Set `rasterizer: "python"` in the pinned config, or use
-`--engine python` for a direct run, to use the retained reference implementation.
+The default `gdal` rasterizer is Python code over NumPy, Arrow and the public
+GDAL C API already loaded by its Python extension. It needs no custom C++ helper,
+compiler, executable or subprocess. It reads Arrow's WKB buffers directly and
+performs the same OGR parsing, geometry-type and GEOS-validity checks. Only exact
+finite standard 2D Point WKB is classified without OGR as a non-polygon.
+
+The default `batch_method: "hybrid"` groups features into tile burns, prunes only original vertex
+runs strictly outside each tile-row strip, and skips empty multipart envelope
+gaps. NumPy indexes ring coordinates once per batch. Retained edges keep their
+original double coordinates; outside-strip bridges cannot intersect a visible
+scanline. Every GDAL burn retains the reference tile-local transform, including
+center ties. GDAL MEM borrows the live NumPy tile buffer, avoiding initialization
+and result copies. The `tiled` method retains the unpruned reference raster path;
+global vector mode is rejected because it changes rare pixel-center ties.
+
+Reports pin the Python binding and GDAL identity; physical checkpoints verify
+those pins. Old `rasterizer: "native"` configurations fail explicitly rather than
+compile or silently change engines. Set `rasterizer: "python"`, or use
+`--engine python`, for the retained feature-layer reference implementation.
 
 Copy `config.example.json` and explicitly review the grid and policy. The `water-shard-candidate-v2` configuration uses Overture's inland-water classification: all nonempty subtypes except `ocean` and `physical` are eligible. It burns only polygon/multipolygon geometry and applies no source-provenance, class, or OSM-tag filter. This follows the [Overture water schema](https://docs.overturemaps.org/schema/reference/base/water/), but the historical V2 predicate is not known. Invalid polygons are not repaired; IDs are recorded and the result is marked incomplete. A missing subtype also marks it incomplete. GDAL default polygon rasterization is used with `ALL_TOUCHED` off; exact historic boundary behavior is unproven.
 
 Run `python rasterize_water_shard.py SOURCE.parquet SOURCE_SHA256 CONFIG.json NEW_OUTPUT_DIRECTORY`. The output directory must not exist, contain an input, or be located within either input's directory. The tool hashes the source before and after, detects changes to configuration, and creates outputs exclusively. Interruptions may leave partial files, without a completion report. Keep those outputs until their disposal is authorized. A successful result is still only a candidate; independent geographic and reference comparisons are required before use.
+
+`benchmark_selected_water.py SELECTED_PIPELINE_CONFIG NEW_OUTPUT` reads the
+inline water configuration and complete raw manifest from the supported pipeline
+selection, then compares every raw shard through both Python implementations in
+one process. It verifies every pixel and diagnostic count. Missing raw inputs
+use the selected serial R2 S3 staging; downloads are timed separately. Completed
+owned downloads are removed after verification, while original local inputs and
+failed downloads remain untouched. Use `--shard 6` for a clearly labeled single
+complete-shard trial, `--repeats 2` for alternating repeat order, or
+`--keep-downloaded-sources` to retain newly acquired raw copies. These controls
+do not weaken source pins or imply geographic acceptance.
 
 Run the synthetic tests with `python -m unittest -v test_rasterize_water_shard.py`. They cover policy selection, batching and tile boundaries, input integrity, output separation and collision, and invalid-geometry reporting. Synthetic tests do not prove equivalence on a global dataset.
 
