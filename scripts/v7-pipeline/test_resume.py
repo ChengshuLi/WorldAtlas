@@ -192,7 +192,7 @@ class ExecutorResumeTests(unittest.TestCase):
         sentinel = pipeline.write(inputs / 'sentinel.json', {})
         required = ('land_config water_config raw_manifest land_snapshot resolution_template '
                     'regional_template water_snapshot seavox_archive coastal_plan neon_selection osm_receipt').split()
-        cfg = {'schema': 'worldatlas-end-to-end-pipeline-v1', 'research_only': True,
+        cfg = {'schema': 'worldatlas-end-to-end-pipeline-v1',
                'input_root': str(self.root), 'sources': {key: pipeline.pin(sentinel) for key in required}}
         self.config = pipeline.write(inputs / 'request.json', cfg)
         self.out = self.root / 'run'
@@ -200,7 +200,7 @@ class ExecutorResumeTests(unittest.TestCase):
         self.source.write_bytes(b'final-output\x00\x01\x02')
 
     def runner(self, resume=False, confirm_no_writers=False):
-        runner = pipeline.Pipeline(self.config, self.out, allow_provisional=True, resume=resume,
+        runner = pipeline.Pipeline(self.config, self.out, resume=resume,
                                    confirm_no_writers=confirm_no_writers)
         self.addCleanup(runner.close)
         return runner

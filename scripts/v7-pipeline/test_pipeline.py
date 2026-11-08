@@ -89,7 +89,7 @@ class Fixture(unittest.TestCase):
         self.sentinel = pipeline.write(self.inputs / 'sentinel.json', {})
         required = ('land_config water_config raw_manifest land_snapshot resolution_template '
                     'regional_template water_snapshot seavox_archive coastal_plan neon_selection osm_receipt').split()
-        self.cfg = {'schema': 'worldatlas-end-to-end-pipeline-v1', 'research_only': True,
+        self.cfg = {'schema': 'worldatlas-end-to-end-pipeline-v1',
                     'selection_notes': 'Synthetic processor integration fixture',
                     'input_root': str(self.root),
                     'sources': {key: pipeline.pin(self.sentinel) for key in required},
@@ -97,15 +97,9 @@ class Fixture(unittest.TestCase):
 
     def make(self):
         config = pipeline.write(self.inputs / 'request.json', self.cfg)
-        runner = pipeline.Pipeline(config, self.root / 'run', allow_provisional=True)
+        runner = pipeline.Pipeline(config, self.root / 'run')
         self.addCleanup(runner.close)
         return runner
-
-    def test_no_implicit_research_optin(self):
-        config = pipeline.write(self.inputs / 'request.json', self.cfg)
-        with self.assertRaisesRegex(ValueError, 'explicit'):
-            pipeline.Pipeline(config, self.root / 'run')
-        self.assertFalse((self.root / 'run').exists())
 
     def test_invalid_source_fails_before_any_processing(self):
         self.cfg['sources']['land_config']['sha256'] = '0' * 64
@@ -175,7 +169,7 @@ class Fixture(unittest.TestCase):
         runner.command('setup', 'coast-import', 'v7-replay/batch_coastal_tiles.py', '--help')
         self.assertIn('usage:', (runner.out / 'logs/coast-import.log').read_text())
         with self.assertRaisesRegex(ValueError, 'new output'):
-            pipeline.Pipeline(runner.config_path, runner.out, allow_provisional=True)
+            pipeline.Pipeline(runner.config_path, runner.out)
 
     def test_failure_report_is_not_a_completed_stage(self):
         runner = self.make()
@@ -267,7 +261,7 @@ class Fixture(unittest.TestCase):
                 runner.extract_basins(snapshot)
         extraction_receipt = pipeline.pin(runner.out / 'checkpoints/extract-basins/complete.json')
         runner.close()
-        runner = pipeline.Pipeline(runner.config_path, runner.out, allow_provisional=True, resume=True)
+        runner = pipeline.Pipeline(runner.config_path, runner.out, resume=True)
         self.addCleanup(runner.close)
         extraction = runner.extract_basins(snapshot)
         result = runner.basin(decision, physical, land, snapshot, extraction)

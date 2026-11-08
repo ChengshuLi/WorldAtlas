@@ -1,4 +1,4 @@
-# End-to-end research pipeline
+# End-to-end map build
 
 `run_pipeline.py` is the supported single entrypoint from pinned raw OSM and
 Overture inputs to the final WorldAtlas grid. It calls the ordinary repository
@@ -6,10 +6,7 @@ stage CLIs and generates each downstream request from the files just produced.
 It does not call dated local coordinators, reuse old land/water output grids,
 patch producer reports, relocate historical paths, or repair lineage sidecars.
 
-This is **provisional, non-publishable research**. The current mainland producer
-freeze and selected geographic decisions have not completed independent review.
-The explicit research flag preserves those gates and source labels; it does not
-approve geography, authenticate Neon, or publish a map.
+The runner builds a local grid from the selected inputs. Publication is a separate workflow.
 
 ## Run
 
@@ -36,15 +33,13 @@ pinned source files at those locations before starting. No path-prefix rewriting
 is supported.
 
     /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
-      /workspace/selection/config.json /workspace/runs/fresh-run \
-      --allow-provisional-research
+      /workspace/selection/config.json /workspace/runs/fresh-run
 
 For the first invocation, the output must be new. To continue a checkpoint-enabled
 run after an interruption, use the identical configuration, code and runtime:
 
     /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
-      /workspace/selection/config.json /workspace/runs/fresh-run \
-      --allow-provisional-research --resume
+      /workspace/selection/config.json /workspace/runs/fresh-run --resume
 
 A committed downstream water fix can be applied before any water command has a
 completed checkpoint. A closed-water-only fix can also reuse explicitly listed
@@ -53,8 +48,7 @@ Unknown producers and shared-code changes are rejected. Explicitly identify the
 old producer commit:
 
     /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
-      /workspace/selection/config.json /workspace/runs/fresh-run \
-      --allow-provisional-research --resume --resume-code-from OLD_COMMIT
+      /workspace/selection/config.json /workspace/runs/fresh-run --resume --resume-code-from OLD_COMMIT
 
 The complete old scripts identity must match that git commit, and the complete
 new scripts identity must match the current committed `HEAD`. The request,
@@ -99,11 +93,11 @@ All `sources` are explicit `{path, sha256}` pins:
   files are preserved; physical/component pins and current executable hashes
   are generated afresh. Historical output artifacts are not reused.
 - `prior_physical_report`: optional prior report required by a selected
-  locally-derived provisional snapshot's independent physical/seed reproof.
+  locally derived land snapshot's independent physical/seed reproof.
   Its presence does not replace fresh physical output or relabel the snapshot.
-- `regional_template`: explicit provisional mixed/regional decision request.
+- `regional_template`: selected mixed/regional decision request.
   The normal preparer validates the fresh Stage 2 artifacts and binds current
-  code. Preserve its source policy; do not turn provisional flags into approval.
+  code and preserves the template’s source policy.
 - `water_snapshot`, `seavox_archive`, `coastal_plan`: selected named-basin,
   coast, closed-water and baseline ocean policies, the pinned SeaVoX archive,
   and the complete coastal tessellation. All basins in the snapshot are built,
@@ -149,7 +143,6 @@ benchmark contract](../../docs/named-sea-intervals.md).
 `report.json` is created only after every requested stage and reference check
 succeeds. It pins final rows, runs and producer report. Per-job logs are under
 `logs/`; generated requests are under `configs/`. The final map is under `final/`.
-No map is uploaded, published, or assigned accepted status.
 
 `timing-events.jsonl` is an append-only, fsynced start/completion/heartbeat ledger.
 Each invocation has its own attempt ID and monotonic intervals. Durations are

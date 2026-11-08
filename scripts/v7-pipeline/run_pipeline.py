@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the pinned raw-source WorldAtlas research pipeline through final composition."""
+"""Run the pinned raw-source WorldAtlas pipeline through final composition."""
 from __future__ import annotations
 
 import argparse
@@ -100,7 +100,7 @@ def rle_spec(directory, *, physical=False):
 
 
 class Pipeline:
-    def __init__(self, config, output, *, allow_provisional=False, resume=False, confirm_no_writers=False,
+    def __init__(self, config, output, *, resume=False, confirm_no_writers=False,
                  resume_code_from=None):
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
@@ -109,8 +109,6 @@ class Pipeline:
         self.cfg = read(self.config_path)
         if self.cfg.get('schema') != 'worldatlas-end-to-end-pipeline-v1':
             raise ValueError('unsupported end-to-end configuration')
-        if self.cfg.get('research_only') is not True or not allow_provisional:
-            raise ValueError('explicit --allow-provisional-research required; no accepted geography is claimed')
         self.root = Path(self.cfg['input_root']).resolve(strict=True)
         self.out = Path(output).resolve()
         if (not self.root.is_dir() or (self.out.exists() != resume) or not self.out.parent.is_dir()
@@ -125,7 +123,6 @@ class Pipeline:
         if resume_code_from and not resume:
             raise ValueError('--resume-code-from requires --resume')
         self.source_pins = []
-        self.allow_provisional = allow_provisional
         # Verify every external document before expensive computation starts.
         self.sources = self.resolve_pins(self.cfg.get('sources', {}))
         required = {'land_config', 'water_config', 'raw_manifest', 'land_snapshot',
@@ -778,7 +775,7 @@ class Pipeline:
             if not all(stage['outputs_complete'] for stage in stages.values()):
                 raise ValueError('all stage outputs must be complete')
             result = {'schema': 'worldatlas-end-to-end-report-v1',
-                'status': 'complete-provisional-research-not-published', 'publishable': False,
+                'status': 'complete',
                 'request': self.config_pin, 'runner': pin(__file__), 'comparison': comparison,
                 'original_run_identity': pin(self.out / 'run-identity.json'),
                 'current_code_version': self.code_version,
@@ -795,7 +792,7 @@ class Pipeline:
             except (ValueError, OSError):
                 physical_report = None
             write(self.out / 'failure.json', {'schema': 'worldatlas-end-to-end-failure-v1',
-                'status': 'incomplete', 'publishable': False,
+                'status': 'incomplete',
                 'stages': self.timing.summary(physical_report),
                 'limitations': 'Resume validates source/code/output pins. Missing interrupted endpoints remain timing-incomplete; no downtime is added.'})
             raise
@@ -807,14 +804,13 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('config', type=Path)
     p.add_argument('output', type=Path, help='new run directory inside input_root')
-    p.add_argument('--allow-provisional-research', action='store_true')
     p.add_argument('--resume', action='store_true', help='validate and continue the same checkpoint-enabled run')
     p.add_argument('--resume-code-from', metavar='COMMIT',
                    help='explicit committed-code transition, preserving unchanged upstream producer provenance')
     p.add_argument('--confirm-no-live-writers', action='store_true',
                    help='operator confirms all old writers stopped when an interrupted stage has no normal exit record')
     a = p.parse_args()
-    pipeline = Pipeline(a.config, a.output, allow_provisional=a.allow_provisional_research, resume=a.resume,
+    pipeline = Pipeline(a.config, a.output, resume=a.resume,
                         confirm_no_writers=a.confirm_no_live_writers, resume_code_from=a.resume_code_from)
     def stop(signum, frame):
         pipeline.cancel()

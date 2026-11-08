@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from run_pipeline import Pipeline
 
 config, output, source, release = map(Path, sys.argv[1:])
-runner = Pipeline(config, output, allow_provisional=True)
+runner = Pipeline(config, output)
 try:
     runner.command('water', 'fixture-stage', 'v7-pipeline/fixtures/partial_stage.py',
                    source, output / 'result', wait_for=release,

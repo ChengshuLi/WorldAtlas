@@ -51,7 +51,7 @@ def benchmark(reference, config, out):
     create_directory_exclusive(out)
     write_json_exclusive(out / 'invocation.json', invocation, indent=2)
     started = time.perf_counter()
-    pipeline = Pipeline(config, out / 'candidate', allow_provisional=True)
+    pipeline = Pipeline(config, out / 'candidate')
     try:
         with pipeline.timing.measure('mainland', 'stage-total'):
             pipeline.mainland(physical)

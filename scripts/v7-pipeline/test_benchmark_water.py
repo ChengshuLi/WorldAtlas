@@ -29,11 +29,11 @@ class WaterBenchmarkTests(unittest.TestCase):
         calls = []
 
         class FakePipeline:
-            def __init__(self, config, candidate, *, allow_provisional):
+            def __init__(self, config, candidate):
                 self.out = candidate
                 candidate.mkdir()
                 self.timing = Timing(candidate / 'timing-events.jsonl', attempt='fresh')
-                calls.append(('new', config, allow_provisional))
+                calls.append(('new', config))
 
             def water(self, physical, land):
                 calls.append(('water', physical, land))

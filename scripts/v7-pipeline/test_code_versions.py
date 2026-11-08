@@ -291,11 +291,11 @@ class CodeVersionTests(unittest.TestCase):
         required = ('land_config water_config raw_manifest land_snapshot resolution_template '
                     'regional_template water_snapshot seavox_archive coastal_plan neon_selection osm_receipt').split()
         config = write(self.root / 'request.json', {'schema': 'worldatlas-end-to-end-pipeline-v1',
-            'research_only': True, 'input_root': str(self.root),
+            'input_root': str(self.root),
             'sources': {key: pin(sentinel) for key in required}})
         out = self.root / 'integration'
         with patch.object(pipeline, 'REPO', self.repo), patch.object(pipeline, 'SCRIPTS', self.scripts):
-            first = pipeline.Pipeline(config, out, allow_provisional=True)
+            first = pipeline.Pipeline(config, out)
             self.addCleanup(first.close)
             for name, entry in stages:
                 first.command('water', name, entry, out / name, _outputs=[out / name])
@@ -309,7 +309,7 @@ class CodeVersionTests(unittest.TestCase):
             timing_prefix = (out / 'timing-events.jsonl').read_bytes()
             self.source(split_final, leaf)
             self.commit()
-            second = pipeline.Pipeline(config, out, allow_provisional=True, resume=True,
+            second = pipeline.Pipeline(config, out, resume=True,
                                        resume_code_from=old_commit, confirm_no_writers=True)
             self.addCleanup(second.close)
             with patch.object(pipeline.subprocess, 'Popen', side_effect=AssertionError('old water restarted')):
@@ -328,7 +328,7 @@ class CodeVersionTests(unittest.TestCase):
             self.assertEqual(receipt['producer_code_version'], second.code_version)
             self.assertNotEqual(receipt['producer_code_version'], before[0])
             second.close()
-            third = pipeline.Pipeline(config, out, allow_provisional=True, resume=True)
+            third = pipeline.Pipeline(config, out, resume=True)
             self.addCleanup(third.close)
             self.assertFalse(third.command('water', 'compose-split-final', split_final,
                 out / 'final', _outputs=[out / 'final']))
@@ -342,11 +342,11 @@ class CodeVersionTests(unittest.TestCase):
         required = ('land_config water_config raw_manifest land_snapshot resolution_template '
                     'regional_template water_snapshot seavox_archive coastal_plan neon_selection osm_receipt').split()
         config = write(self.root / 'request.json', {'schema': 'worldatlas-end-to-end-pipeline-v1',
-            'research_only': True, 'input_root': str(self.root),
+            'input_root': str(self.root),
             'sources': {key: pin(sentinel) for key in required}})
         out = self.root / 'integration'
         with patch.object(pipeline, 'REPO', self.repo), patch.object(pipeline, 'SCRIPTS', self.scripts):
-            first = pipeline.Pipeline(config, out, allow_provisional=True)
+            first = pipeline.Pipeline(config, out)
             self.addCleanup(first.close)
             first.command('physical', 'physical', 'v7-raw-mask/build_physical.py', out / 'physical',
                           _outputs=[out / 'physical'])
@@ -362,8 +362,8 @@ class CodeVersionTests(unittest.TestCase):
             with (out / 'timing-events.jsonl').open('ab') as stream:
                 stream.write(b'{"event":"torn')
             with self.assertRaisesRegex(ValueError, 'identity changed'):
-                pipeline.Pipeline(config, out, allow_provisional=True, resume=True)
-            second = pipeline.Pipeline(config, out, allow_provisional=True, resume=True,
+                pipeline.Pipeline(config, out, resume=True)
+            second = pipeline.Pipeline(config, out, resume=True,
                                        resume_code_from=old_commit)
             self.addCleanup(second.close)
             with patch.object(pipeline.subprocess, 'Popen', side_effect=AssertionError('old producer restarted')):
@@ -383,7 +383,7 @@ class CodeVersionTests(unittest.TestCase):
             self.assertNotEqual(water['producer_code_version'], original)
             self.assertTrue(list(out.glob('timing-events.jsonl.torn-*')))
             second.close()
-            third = pipeline.Pipeline(config, out, allow_provisional=True, resume=True)
+            third = pipeline.Pipeline(config, out, resume=True)
             self.addCleanup(third.close)
             self.assertEqual(third.code_version, water['producer_code_version'])
 

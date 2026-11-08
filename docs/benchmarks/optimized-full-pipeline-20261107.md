@@ -73,8 +73,7 @@ Use the checked-in entrypoint with the pinned selection and a new persistent
 run directory, following `scripts/v7-pipeline/README.md`:
 
     /usr/bin/python3 scripts/v7-pipeline/run_pipeline.py \
-      /workspace/selection/config.json /workspace/runs/fresh-run \
-      --allow-provisional-research
+      /workspace/selection/config.json /workspace/runs/fresh-run
 
 The actual selection SHA-256 was
 `9563b98fa163278f35c6b7c09538d2bedbb386561763d7d7d4c52ec3c41476d6`.
