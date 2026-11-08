@@ -37,7 +37,10 @@ The experimental stage-2 orchestrator now has an optional source-derived path, b
 
 ## Feature output for the region builder
 
-Pass `--feature-id caucasus_blacksea_anapa_to_caspian` to emit a GeoJSON FeatureCollection instead of a bare LineString. The output has a single feature whose `cut_id` equals that value and is compatible in shape with the `feature` selector in `../v2-baseline/build_regions.py`: pin the generated file bytes, set `id_property` to `cut_id`, set `id_value` to the feature ID, and set the appropriate direction. Region construction still requires the other segments, a valid closure, a pinned physical grid where applicable, and witness checks. The local run produced feature-file SHA-256 `a022157d877d8ace9916aed63eda0b1014520e965fd1db54a3ef61ffaf090b2b`, with the same line geometry digest and guard comparison described above. The feature wrapper was checked, but the full region builder and land compiler were not run in this environment; do not call this a completed pipeline integration.
+Pass `--feature-id caucasus_blacksea_anapa_to_caspian` to emit a GeoJSON
+FeatureCollection instead of a bare LineString. The feature's `cut_id` equals
+the supplied ID. Region construction also needs the other segments, a valid
+closure, the pinned physical grid and witness checks.
 
 The current project objective is a reproducible current pipeline, not recovering or matching the historical V7 implementation or its cells. Comparison with the saved selected line above is a guard for preserving the existing geography during this transition, not a requirement that the final geography match old V7.
 
