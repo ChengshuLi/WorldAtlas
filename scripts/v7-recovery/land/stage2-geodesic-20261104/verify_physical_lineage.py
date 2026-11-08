@@ -149,7 +149,8 @@ def _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report
  code_root=Path(req['code_root']).resolve(strict=True);need(code_root.is_dir(),'invalid code root')
  code=pipe.get('script_sha256');names={'build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/aggregate_compare.py','compose_physical.py'}
  native_names={'overture/water_native.py','overture/water_native.cpp'}
- need(isinstance(code,dict) and set(code) in (names,names|native_names),'invalid pipeline code pins')
+ batch_name='overture/water_batch.py'
+ need(isinstance(code,dict) and set(code) in (names,names|native_names,names|{batch_name}),'invalid pipeline code pins')
  names=set(code)
  for name in sorted(names):
   cp=(code_root/name).resolve(strict=True);need(cp.is_relative_to(code_root) and cp.is_file() and digest(cp,guard)==code[name],'pipeline code mismatch: '+name)
@@ -197,6 +198,13 @@ def _validate_orchestrated(snapshot,snapshot_sha256,request_path,physical_report
   guard();source_id=item.get('source_id');live_row=liveby[('inland_water',i)];need(source_id==live_row['source_id'] and item.get('sha256')==live_row['sha256'] and str(item.get('size'))==str(live_row['size_bytes']) and item.get('r2_bucket')==live_row['r2_bucket'] and item.get('r2_key')==live_row['r2_key'],'source manifest/Neon mismatch')
   sr,_=read_pin(sp['report'],guard);need(sp.get('status')=='candidate-only' and sr.get('status')=='candidate-only' and sr.get('source_sha256')==item['sha256'] and Path(sr.get('source','')).name==Path(item['path']).name and sr.get('configuration_sha256')==pipe['water_config']['sha256'] and sr.get('script_sha256')==code['overture/rasterize_water_shard.py'] and sr.get('grid')==grid and sr.get('policy')==watercfg.get('policy') and sr.get('batch_size')==pipe.get('water_batch_size') and sr.get('output_sha256')==sp.get('sha256') and digest(sp['path'],guard)==sp['sha256'],'shard report/output mismatch: '+str(i))
   if native_names<=names:need(sr.get('rasterizer')==watercfg.get('rasterizer','native'),'water rasterizer/config mismatch: '+str(i))
+  if batch_name in names:
+   engine=watercfg.get('rasterizer','gdal');kernel=sr.get('gdal_kernel')
+   need(engine in ('gdal','python') and sr.get('rasterizer')==engine and sr.get('native_kernel') is None,'water rasterizer/config mismatch: '+str(i))
+   if engine=='gdal':
+    need(isinstance(kernel,dict) and kernel.get('implementation')=='python-gdal-c-api-v1' and kernel.get('method')==watercfg.get('batch_method','hybrid') and kernel.get('binding_sha256')==code[batch_name],'GDAL water kernel mismatch: '+str(i))
+   else:
+    need(kernel is None,'unexpected GDAL water kernel: '+str(i))
   if sr.get('rasterizer')=='native':
    kernel=sr.get('native_kernel',{});need(native_names<=names and kernel.get('method')==watercfg.get('native_method','hybrid') and kernel.get('source_sha256')==code['overture/water_native.cpp'] and kernel.get('binding_sha256')==code['overture/water_native.py'] and digest(Path(sp['path']).parent/'water-native.so',guard)==kernel.get('binary_sha256'),'native water kernel mismatch: '+str(i))
   elif native_names<=names:need(sr.get('rasterizer')=='python' and sr.get('native_kernel') is None,'invalid water rasterizer: '+str(i))

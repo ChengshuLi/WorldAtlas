@@ -19,6 +19,12 @@ The same command runs on macOS and Linux. Install a C++17 compiler available as
 `PATH`. If OpenSSL lives outside the compiler's search paths, add its include
 and library directories with `CPATH` and `LIBRARY_PATH`. Use GDAL 3.10.3 and
 PROJ 9.6.0 to match the original build's geometry runtime.
+For byte-for-byte V8 reproduction, use GDAL compiled with
+`-ffp-contract=off` in both `CMAKE_C_FLAGS` and `CMAKE_CXX_FLAGS`. This
+keeps rounding in the tile coordinate transform consistent across compilers.
+A minimal GDAL build needs the GeoTIFF, ENVI, Shapefile and GeoJSON drivers.
+Use the Python bindings for that GDAL version and make sure they load the
+compiled library. [GDAL build instructions](https://gdal.org/en/stable/development/building_from_source.html)
 It enforces `PROJ_NETWORK=OFF` throughout the runner, disables pyproj's
 network API, and records the active local `proj.db` path and SHA-256 in runtime
 identity. A regional template's `bering_proj_db` must match that exact active
