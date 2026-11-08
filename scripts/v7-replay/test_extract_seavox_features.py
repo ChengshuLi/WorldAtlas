@@ -1,10 +1,9 @@
 """Batch extraction keeps the single-feature bytes, bindings and failure gates."""
+from contextlib import nullcontext
 import copy
 import json
 import random
 from pathlib import Path
-import shutil
-import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -43,8 +42,7 @@ class BatchExtractionTests(unittest.TestCase):
     def run_batch(self, **kwargs):
         policy_sha = self.save_policy()
         with patch.object(batch, 'extract_indexed_features', return_value=self.features) as extract, \
-                patch.object(batch.subprocess, 'run') as run:
-            run.return_value.stdout = 'GDAL test'
+                patch.object(batch.gdal, 'VersionInfo', return_value='GDAL test'):
             result = batch.run(self.archive, self.root, self.policy, policy_sha, self.out,
                                allow_unverified=True, **kwargs)
         extract.assert_called_once()
@@ -115,8 +113,7 @@ class BatchExtractionTests(unittest.TestCase):
             self.archive.write_bytes(self.archive.read_bytes() + b'changed')
             return self.features
         with patch.object(batch, 'extract_indexed_features', side_effect=mutate), \
-                patch.object(batch.subprocess, 'run') as run:
-            run.return_value.stdout = 'GDAL test'
+                patch.object(batch.gdal, 'VersionInfo', return_value='GDAL test'):
             with self.assertRaisesRegex(ValueError, 'changed during extraction'):
                 batch.run(self.archive, self.root, self.policy, policy_sha, self.out, allow_unverified=True)
         self.assertFalse(self.out.exists())
@@ -136,8 +133,7 @@ class BatchExtractionTests(unittest.TestCase):
             self.assertTrue(dataset.with_suffix('.prj').is_file())
             return self.features
         with patch.object(batch, 'extract_indexed_features', side_effect=extract), \
-                patch.object(batch.subprocess, 'run') as run:
-            run.return_value.stdout = 'GDAL test'
+                patch.object(batch.gdal, 'VersionInfo', return_value='GDAL test'):
             result = batch.run(self.archive, self.root, self.policy, policy_sha, self.out,
                                allow_unverified=True, work_root=work)
         self.assertEqual(list(work.iterdir()), [])
@@ -147,8 +143,7 @@ class BatchExtractionTests(unittest.TestCase):
         policy_sha = self.save_policy()
         with patch.object(batch, 'extract_features', return_value=self.features) as scan, \
                 patch.object(batch, 'extract_indexed_features', side_effect=AssertionError('unexpected index')), \
-                patch.object(batch.subprocess, 'run') as run:
-            run.return_value.stdout = 'GDAL test'
+                patch.object(batch.gdal, 'VersionInfo', return_value='GDAL test'):
             result = batch.run(self.archive, self.root, self.policy, policy_sha, self.out,
                                allow_unverified=True, scan_reference=True)
         scan.assert_called_once()
@@ -173,8 +168,9 @@ class OgrBatchTests(unittest.TestCase):
         source = root / 'source.geojson'
         source.write_text(json.dumps({'type': 'FeatureCollection', 'features': features}))
         shape = root / 'shape'
-        subprocess.run(['ogr2ogr', '-f', 'ESRI Shapefile', str(shape), str(source),
-                        '-a_srs', 'EPSG:' + str(epsg)], check=True, capture_output=True)
+        with single.gdal.VectorTranslate(str(shape), str(source), format='ESRI Shapefile',
+                                         options=['-a_srs', 'EPSG:' + str(epsg)]):
+            pass
         archive = root / 'sea.zip'
         with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED) as zipped:
             for component in shape.iterdir():
@@ -184,18 +180,18 @@ class OgrBatchTests(unittest.TestCase):
     def test_filter_and_exact_inventory(self):
         features = [{'type': 'Feature', 'properties': {'mrgid_sr': ident},
             'geometry': {'type': 'Polygon', 'coordinates': []}} for ident in ('2', '10')]
-        with patch.object(single.subprocess, 'run') as run:
-            run.return_value.stdout = json.dumps({'type': 'FeatureCollection', 'features': features})
-            result = single.extract_features(Path('source.zip'), ['10', '2'])
-            self.assertEqual(set(result), {'2', '10'})
-            self.assertIn("mrgid_sr IN ('2','10')", run.call_args.args[0])
-            for invalid in (features[:1], [*features, features[0]], [*features, {
+        def translate(output, source, **options):
+            self.assertEqual(options['where'], "mrgid_sr IN ('2','10')")
+            Path(output).write_text(json.dumps({'type': 'FeatureCollection', 'features': selected}))
+            return nullcontext()
+        selected = features
+        with patch.object(single.gdal, 'VectorTranslate', side_effect=translate):
+            self.assertEqual(set(single.extract_features(Path('source.zip'), ['10', '2'])), {'2', '10'})
+            for selected in (features[:1], [*features, features[0]], [*features, {
                     **features[0], 'properties': {'mrgid_sr': '999'}}]):
-                run.return_value.stdout = json.dumps({'type': 'FeatureCollection', 'features': invalid})
                 with self.assertRaisesRegex(ValueError, 'exactly one matching'):
                     single.extract_features(Path('source.zip'), ['2', '10'])
 
-    @unittest.skipUnless(shutil.which('ogr2ogr'), 'GDAL ogr2ogr is required')
     def test_real_archive_batch_is_byte_identical_to_individual_extractions(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
@@ -206,8 +202,8 @@ class OgrBatchTests(unittest.TestCase):
                                                                [n, 1], [n, 0]]]}}
                 for n, ident in enumerate(('24063', '24064', '24065'))]}))
             shape = root / 'shape'
-            subprocess.run(['ogr2ogr', '-f', 'ESRI Shapefile', str(shape), str(source)],
-                           check=True, capture_output=True)
+            with single.gdal.VectorTranslate(str(shape), str(source), format='ESRI Shapefile'):
+                pass
             archive = root / 'sea.zip'
             with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED) as zipped:
                 for component in shape.iterdir():
@@ -241,7 +237,6 @@ class OgrBatchTests(unittest.TestCase):
                 self.assertEqual(single.canonical_hash(selected[ident]), single.canonical_hash(individual))
                 self.assertEqual(json.dumps(selected[ident], sort_keys=True), json.dumps(individual, sort_keys=True))
 
-    @unittest.skipUnless(shutil.which('ogr2ogr'), 'GDAL ogr2ogr is required')
     def test_indexed_polygons_holes_properties_and_projection_match_ogr(self):
         geometry = {'type': 'MultiPolygon', 'coordinates': [
             [[[0, 0], [4, 0], [4, 4], [0, 4], [0, 0]],
@@ -276,7 +271,6 @@ class OgrBatchTests(unittest.TestCase):
                 self.assertEqual(metrics['ogr_geometry_fallbacks'], 1)
                 self.assertEqual(metrics['hash_certified_coordinate_features'], 0)
 
-    @unittest.skipUnless(shutil.which('ogr2ogr'), 'GDAL ogr2ogr is required')
     def test_index_rejects_missing_duplicate_and_nonpolygon_selections(self):
         feature = {'type': 'Feature', 'properties': {'MRGID_SR': '123'},
                    'geometry': {'type': 'Polygon', 'coordinates': [[[0, 0], [1, 0], [0, 1], [0, 0]]]}}

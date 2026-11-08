@@ -3,6 +3,7 @@
 import hashlib
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import closing
 from contextvars import copy_context
 import fcntl
 import json
@@ -55,6 +56,41 @@ def run_stage(script, *args):
         from compose_physical import main
         return main(*args, emit=stage_external.emit)
     raise ValueError(f'unknown physical stage: {script}')
+
+
+def validate_r2_endpoint(endpoint):
+    if (not isinstance(endpoint, str) or not re.fullmatch(
+            r'https://[0-9a-f]{32}(?:\.(?:eu|us|fedramp))?\.r2\.cloudflarestorage\.com', endpoint)):
+        raise ValueError('R2 endpoint must be an HTTPS Cloudflare R2 S3 account endpoint')
+
+
+def make_r2_client(endpoint):
+    validate_r2_endpoint(endpoint)
+    try:
+        import boto3
+    except ImportError as exc:
+        raise ValueError('R2 staging requires boto3 in the pipeline Python environment') from exc
+    return boto3.client('s3', endpoint_url=endpoint, region_name='auto')
+
+
+def download_r2(endpoint, entry, destination):
+    """Write a streamed response exclusively. Keep partial files for inspection."""
+    stage_external.check_cancelled()
+    with closing(make_r2_client(endpoint)) as client:
+        response = client.get_object(Bucket=entry['r2_bucket'], Key=entry['r2_key'])
+        with closing(response['Body']) as body, destination.open('xb') as stream:
+            if response['ContentLength'] != entry['size']:
+                raise ValueError('staged source size/hash mismatch: ' + str(destination))
+            remaining = entry['size']
+            while remaining:
+                stage_external.check_cancelled()
+                chunk = body.read(min(4 << 20, remaining))
+                if not chunk:
+                    break
+                stream.write(chunk)
+                remaining -= len(chunk)
+            if remaining or body.read(1):
+                raise ValueError('staged source size/hash mismatch: ' + str(destination))
 
 
 def sync_directory(path):
@@ -176,12 +212,10 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         raise ValueError('max_parallel_shards must be a positive integer')
     staging = cfg.get('source_staging')
     if staging is not None:
-        if (not isinstance(staging, dict) or set(staging) != {'mode','wrangler_path','wrangler_config'}
-            or staging['mode'] != 'wrangler-r2' or workers != 1):
-            raise ValueError('R2 staging requires a wrangler path, config and one shard worker')
-        for key in ('wrangler_path','wrangler_config'):
-            if not isinstance(staging[key],str) or not Path(staging[key]).is_file():
-                raise ValueError(f'invalid R2 staging {key}')
+        if (not isinstance(staging, dict) or set(staging) != {'mode', 'endpoint_url'}
+                or staging['mode'] != 'r2-s3' or workers != 1):
+            raise ValueError('R2 staging requires r2-s3 mode, endpoint_url and one shard worker')
+        validate_r2_endpoint(staging['endpoint_url'])
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
     land_path, land_bytes, land_cfg = read_pin(cfg['land_config'])
@@ -239,8 +273,6 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             raise ValueError('unexpected native water kernel')
     output = Path(output).resolve()
     inputs = [manifest_path, land_path, water_path, source_path] + [x[0] for x in raw]
-    if staging is not None:
-        inputs += [Path(staging[k]).resolve() for k in ('wrangler_path','wrangler_config')]
     inputs += [Path(item['path']).resolve() for spec in land_cfg['land'] for item in spec['files']]
     for key in ('water_reference', 'physical_reference_mask'):
         if cfg.get(key): inputs.append(Path(cfg[key]['path']).resolve())
@@ -256,8 +288,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     if any(sha(p['path'])!=p['sha256'] for p in source_pins):raise ValueError('land source hash mismatch')
     identity={'schema':'raw-physical-resume-identity-v1','configuration_sha256':hashlib.sha256(data).hexdigest(),
               'land_config':cfg['land_config'],'water_config':cfg['water_config'],'source_manifest':cfg['source_manifest'],
-              'script_sha256':scripts,'land_source_pins':source_pins,
-              'staging_code_sha256':({k:sha(staging[k]) for k in ('wrangler_path','wrangler_config')} if staging else None)}
+              'script_sha256':scripts,'land_source_pins':source_pins}
     identity_path=output/'pipeline-identity.json'
     if resume:
         if not output.is_dir() or not identity_path.is_file() or json.loads(identity_path.read_bytes())!=identity:
@@ -346,17 +377,12 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         owned = False
         if not path.is_file() and staging is not None:
             stage_dir=output/'source-staging';stage_dir.mkdir(mode=0o700,exist_ok=True)
-            for name in ('cache','state','runtime'):(stage_dir/name).mkdir(mode=0o700,exist_ok=True)
             staged=stage_dir/path.name
             if staged.exists() and (not staged.is_file() or staged.stat().st_size!=entry['size'] or sha(staged)!=digest):quarantine(staged)
-            env=os.environ.copy()
-            env.update({key:str(stage_dir) for key in ('TMPDIR','TMP','TEMP','CPL_TMPDIR','SQLITE_TMPDIR')})
-            env.update({'XDG_CACHE_HOME':str(stage_dir/'cache'),'XDG_STATE_HOME':str(stage_dir/'state'),'XDG_RUNTIME_DIR':str(stage_dir/'runtime')})
             if not staged.exists():
                 started=time.perf_counter()
                 try:
-                    stage_external.run([staging['wrangler_path'],'r2','object','get',entry['r2_bucket']+'/'+entry['r2_key'],
-                                    '--file',str(staged),'--remote','--config',staging['wrangler_config']],check=True,env=env)
+                    download_r2(staging['endpoint_url'], entry, staged)
                 finally:
                     journal.download_done(started)
                 staged_count+=1

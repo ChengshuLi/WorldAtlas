@@ -4,8 +4,8 @@
 Overture inputs to the final WorldAtlas grid. It calls the ordinary repository
 Python stage functions in one interpreter and generates each downstream request
 from the files just produced. The standalone stage commands use the same entry
-functions. Native tools such as GDAL, the C++ compiler, and Wrangler still run
-as external commands.
+functions. The stages use GDAL’s Python bindings and boto3 for R2 reads. Compilers and
+native kernels still run as external commands.
 It does not call dated local coordinators, reuse old land/water output grids,
 patch producer reports, relocate historical paths, or repair lineage sidecars.
 
@@ -14,19 +14,24 @@ The runner builds a local grid from the selected inputs. Publication is a separa
 ## Run
 
 Use one Python installation with NumPy, SciPy, PyProj, GDAL/OGR and PyArrow.
-`g++`, OpenSSL headers/libraries, `ogr2ogr` and `gdal_rasterize` must also be
-installed. The runner checks module/executable availability before processing.
+Install `g++` and the OpenSSL headers and libraries for the native kernels. The runner checks module/executable availability before processing.
 It enforces `PROJ_NETWORK=OFF` throughout the runner, disables pyproj's
 network API, and records the active local `proj.db` path and SHA-256 in runtime
 identity. A regional template's `bering_proj_db` must match that exact active
 database. This runtime file alone may be outside `input_root`; other selected
 source files must remain inside it.
-If a selected Python installation needs an existing dependency directory on
-`PYTHONPATH`, export that directory when launching; all stages share that interpreter. For R2 source
-staging, configure the installed official Wrangler entrypoint and authenticate
-separately. If your existing authorized Wrangler login uses a nondefault
-`XDG_CONFIG_HOME`, provide that directory in the launch environment. The runner
-inherits it unchanged. No credentials belong in the configuration or logs.
+If the Python installation needs a dependency directory on `PYTHONPATH`, export
+that directory when launching. For R2 staging, install `boto3` into the same
+Python environment and set `physical_controls.source_staging` to
+`{"mode": "r2-s3", "endpoint_url": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com"}`.
+Use an R2 S3 token with Object Read only access to the source bucket. Supply
+the access key ID and secret access key through `AWS_ACCESS_KEY_ID` and
+`AWS_SECRET_ACCESS_KEY` or a boto3 credentials profile. Keep credentials outside
+the configuration. For a build with all shards already local, omit
+`source_staging`.
+
+Existing Wrangler-based build configurations need the new `source_staging`
+block and credentials for a fresh run.
 
 Copy `config.example.json`, replace the source paths and SHA-256 values, and
 choose an existing `input_root` containing the selected sources and the new run
@@ -59,7 +64,7 @@ All `sources` are explicit `{path, sha256}` pins:
   contracts. The land config pins all required source sidecars. The raw manifest
   lists the complete official Overture shard set and, for missing local files,
   their R2 bucket, key, byte size and SHA-256. `source_staging` in
-  `physical_controls` uses read-only R2 GETs, never intermediate R2 writes.
+  `physical_controls` uses read-only S3 GETs against R2, never intermediate R2 writes.
 - `land_snapshot`, `neon_selection`, `osm_receipt`: selected source/decision data
   and custody evidence consumed by the normal Stage 2 lineage validator.
 - `resolution_template`: mainland witness/source selection data. Its source

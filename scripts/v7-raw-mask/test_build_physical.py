@@ -1,5 +1,6 @@
 import hashlib
 import fcntl
+import io
 import json
 import os
 import subprocess
@@ -175,21 +176,27 @@ class PipelineTests(unittest.TestCase):
         source=Path(self.cfg['source_manifest']['path'])
         source.write_text(json.dumps({'file_count':1,'files':[{'path':shard.name,'sha256':digest,'size':len(content),'r2_bucket':'test-bucket','r2_key':'source/water.parquet'}]}))
         self.cfg['source_manifest']['sha256']=b.sha(source);self.cfg['max_parallel_shards']=1
-        wrangler=self.config_dir/'wrangler';wrangler.write_text('test');config=self.config_dir/'wrangler.jsonc';config.write_text('{}')
-        self.cfg['source_staging']={'mode':'wrangler-r2','wrangler_path':str(wrangler),'wrangler_config':str(config)}
-        self.config.write_text(json.dumps(self.cfg));shard.unlink();out=self.root/'staged';actual_run=b.subprocess.run
-        def download(args,**kwargs):
-            if args[0]!=str(wrangler):return actual_run(args,**kwargs)
-            self.assertEqual(args[1:5],['r2','object','get','test-bucket/source/water.parquet'])
-            self.assertTrue(Path(kwargs['env']['TMPDIR']).is_relative_to(out));time.sleep(.05)
-            Path(args[args.index('--file')+1]).write_bytes(content)
-        with mock.patch.object(b.subprocess,'run',side_effect=download):b.run(self.config,out)
+        endpoint='https://'+'a'*32+'.r2.cloudflarestorage.com'
+        self.cfg['source_staging']={'mode':'r2-s3','endpoint_url':endpoint}
+        self.config.write_text(json.dumps(self.cfg));shard.unlink();out=self.root/'staged'
+        client=mock.Mock()
+        def download(**kwargs):
+            self.assertEqual(kwargs, {'Bucket':'test-bucket','Key':'source/water.parquet'})
+            time.sleep(.05)
+            return {'Body':io.BytesIO(content),'ContentLength':len(content)}
+        client.get_object.side_effect=download
+        with mock.patch.object(b,'make_r2_client',return_value=client) as make_client:
+            b.run(self.config,out)
+            make_client.assert_called_once_with(endpoint)
+        client.get_object.assert_called_once()
+        client.close.assert_called_once()
         report=json.loads((out/'report.json').read_text());self.assertEqual(report['staged_shard_count'],1)
         self.assertGreaterEqual(report['source_download_elapsed_seconds'],.05);self.assertGreaterEqual(report['processing_elapsed_seconds'],0)
         self.assertFalse((out/'source-staging'/shard.name).exists());self.assertFalse(shard.exists())
         self.assertEqual(report['physical_output_sha256']['runs.u32le'],b.sha(out/'physical/runs.u32le'))
         shard.write_bytes(content);local=self.root/'already-local'
-        with mock.patch.object(b.subprocess,'run',side_effect=download):b.run(self.config,local)
+        with mock.patch.object(b,'make_r2_client',side_effect=AssertionError('unexpected R2 request')):
+            b.run(self.config,local)
         self.assertEqual(shard.read_bytes(),content)
         self.assertEqual(json.loads((local/'report.json').read_text())['staged_shard_count'],0)
         self.assertEqual(b.sha(local/'physical/runs.u32le'),b.sha(out/'physical/runs.u32le'))
@@ -200,18 +207,16 @@ class PipelineTests(unittest.TestCase):
         shard=self.raw/'water.parquet';content=shard.read_bytes();source=Path(self.cfg['source_manifest']['path'])
         source.write_text(json.dumps({'file_count':1,'files':[{'path':shard.name,'sha256':b.sha(shard),'size':len(content),'r2_bucket':'test-bucket','r2_key':'source/water.parquet'}]}))
         self.cfg['source_manifest']['sha256']=b.sha(source);self.cfg['max_parallel_shards']=1
-        wrangler=self.config_dir/'wrangler';wrangler.write_text('test');config=self.config_dir/'wrangler.jsonc';config.write_text('{}')
-        self.cfg['source_staging']={'mode':'wrangler-r2','wrangler_path':str(wrangler),'wrangler_config':str(config)};self.config.write_text(json.dumps(self.cfg));shard.unlink();out=self.root/'bad-staged';actual_run=b.subprocess.run
-        def download(args,**kwargs):
-            if args[0]!=str(wrangler):return actual_run(args,**kwargs)
-            Path(args[args.index('--file')+1]).write_bytes(b'X'+content[1:])
-        with mock.patch.object(b.subprocess,'run',side_effect=download):
+        self.cfg['source_staging']={'mode':'r2-s3','endpoint_url':'https://'+'a'*32+'.r2.cloudflarestorage.com'}
+        self.config.write_text(json.dumps(self.cfg));shard.unlink();out=self.root/'bad-staged'
+        client=mock.Mock()
+        client.get_object.return_value={'Body':io.BytesIO(b'X'+content[1:]),'ContentLength':len(content)}
+        with mock.patch.object(b,'make_r2_client',return_value=client):
             with self.assertRaisesRegex(ValueError,'size/hash mismatch'):b.run(self.config,out)
         self.assertTrue((out/'source-staging'/shard.name).exists());self.assertFalse((out/'report.json').exists())
-        def good_download(args,**kwargs):
-            if args[0]!=str(wrangler):return actual_run(args,**kwargs)
-            Path(args[args.index('--file')+1]).write_bytes(content)
-        with mock.patch.object(b.subprocess,'run',side_effect=good_download):b.run(self.config,out,resume=True)
+        client.get_object.return_value={'Body':io.BytesIO(content),'ContentLength':len(content)}
+        with mock.patch.object(b,'make_r2_client',return_value=client):
+            b.run(self.config,out,resume=True)
         self.assertEqual(len(list((out/'interrupted').glob(shard.name+'-*'))),1)
         self.assertFalse((out/'source-staging'/shard.name).exists())
     def test_end_to_end_without_reference(self):

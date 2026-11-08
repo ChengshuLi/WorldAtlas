@@ -26,7 +26,14 @@ This is an isolated, configurable prototype, not the recovered historical builde
 
 ### Optional serial R2 staging
 
-`build_physical.py` normally reads already-staged local shards. When storage is limited, its pipeline config may instead set `max_parallel_shards` to `1` and `source_staging` to an object with `mode: "wrangler-r2"`, `wrangler_path` and `wrangler_config`. Each missing manifest entry must also include `r2_bucket`, `r2_key`, `size` in bytes and `sha256`. The already-authenticated Wrangler executable performs a read-only object download into the new output directory; configure its credentials through the normal Wrangler environment. The pipeline verifies size and SHA-256 before processing and removes a downloaded shard only after its successful unit completes. Existing local inputs are never removed. A failed download or invalid shard is left for inspection; a failed run does not produce the final pipeline report.
+`build_physical.py` reads local shards when available. To stage missing
+shards from R2, install `boto3`, set `max_parallel_shards` to `1`, and set
+`source_staging` to `{"mode": "r2-s3", "endpoint_url": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com"}`.
+Each missing manifest entry needs its R2 bucket, key, byte size and SHA-256.
+Use read-only R2 S3 credentials through the boto3 credential chain. The
+pipeline verifies the size and SHA-256 before rasterization and removes
+temporary downloads after their shard completes. It retains existing local
+inputs and partial or failed downloads.
 
 The physical stage writes `pipeline-identity.json` and an append-only `processing-events.jsonl` in its own output directory. If interrupted, run the same command with `--resume`. It verifies the original configuration, source and code identity and checks each completed land, shard, union and physical output before reuse. Incomplete files are moved into an `interrupted` directory for inspection; existing local source files are never removed. A partial downloaded source is preserved there; a complete matching download may be reused. A completed output can also be verified by a later `--resume` invocation. Never change an input or code file between attempts.
 

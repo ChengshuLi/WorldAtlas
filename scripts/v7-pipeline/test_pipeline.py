@@ -221,8 +221,9 @@ class Fixture(unittest.TestCase):
                 'properties': {'MRGID_SR': '24063'}, 'geometry': {'type': 'Polygon',
                     'coordinates': [[[0, 0], [0.006, 0], [0.006, 0.006], [0, 0.006], [0, 0]]]}}]})
         shape = self.inputs / 'shape'
-        subprocess.run(['ogr2ogr', '-f', 'ESRI Shapefile', str(shape), str(source)],
-                       check=True, capture_output=True)
+        from osgeo import gdal
+        with gdal.VectorTranslate(str(shape), str(source), format='ESRI Shapefile'):
+            pass
         archive = self.inputs / 'sea.zip'
         with zipfile.ZipFile(archive, 'w') as zipped:
             for component in shape.iterdir():

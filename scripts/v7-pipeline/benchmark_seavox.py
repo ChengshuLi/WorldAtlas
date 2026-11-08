@@ -156,7 +156,7 @@ def main():
     p.add_argument('--reference-run', type=Path, required=True)
     p.add_argument('--code-root', type=Path, required=True)
     p.add_argument('--out', type=Path, required=True)
-    p.add_argument('--scan-reference', action='store_true', help='benchmark the retained ogr2ogr filtered-scan engine')
+    p.add_argument('--scan-reference', action='store_true', help='benchmark the retained GDAL filtered-scan engine')
     args = p.parse_args()
     print(json.dumps(run(args.reference_run, args.code_root, args.out, scan_reference=args.scan_reference)))
 

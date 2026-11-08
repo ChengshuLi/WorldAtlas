@@ -18,7 +18,7 @@ import numpy as np
 import scipy
 import pyproj
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-import stage_external
+from osgeo import gdal
 from exclusive_outputs import create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, write_json_exclusive, validate_fresh_output
 import exclusive_outputs, decision_snapshot, seavox_properties
 from decision_snapshot import read_snapshot, participant_water_codes, find_basin, find_source
@@ -85,13 +85,33 @@ def validate_extraction(manifest_path, expected_manifest_sha, archive, geometry,
 
 def validate_geometry_ogr(path):
     """Fail closed on empty or invalid polygon geometries; never repair source bytes."""
-    result = stage_external.run(['ogrinfo','-ro','-json','-features','-dialect','sqlite','-sql',
-        'SELECT ST_IsValid(geometry) AS valid, ST_IsEmpty(geometry) AS empty FROM source',str(path)],
-        check=True,capture_output=True,text=True)
-    doc=json.loads(result.stdout); layers=doc.get('layers',[])
-    features=layers[0].get('features',[]) if len(layers)==1 else []
-    if len(features)!=1 or features[0].get('properties')!={'valid':1,'empty':0}:
-        raise ValueError('source geometry is empty, invalid, or could not be verified')
+    with gdal.ExceptionMgr():
+        with gdal.OpenEx(str(path), gdal.OF_VECTOR) as dataset:
+            layer = dataset.ExecuteSQL(
+                'SELECT ST_IsValid(geometry) AS valid, ST_IsEmpty(geometry) AS empty FROM source',
+                dialect='SQLite')
+            if layer is None:
+                raise ValueError('source geometry could not be verified')
+            try:
+                feature = layer.GetNextFeature()
+                if (feature is None or feature.GetField('valid') != 1
+                        or feature.GetField('empty') != 0 or layer.GetNextFeature() is not None):
+                    raise ValueError('source geometry is empty, invalid, or could not be verified')
+            finally:
+                feature = None
+                dataset.ReleaseResultSet(layer)
+
+
+def rasterize_source(feature_path, raster_path, bounds, width, height):
+    # Preserve the CLI's coordinate precision and separate update-mode burn.
+    options = ['-q', '-burn', '1', '-init', '0', '-ot', 'Byte', '-of', 'ENVI',
+               '-te', *bounds, '-ts', str(width), str(height), '-a_srs', 'EPSG:4326']
+    with gdal.ExceptionMgr():
+        with gdal.Rasterize(str(raster_path), str(feature_path), options=options):
+            pass
+        with gdal.Open(str(raster_path), gdal.GA_Update) as raster:
+            if gdal.Rasterize(raster, str(feature_path), options=['-q', '-burn', '1']) != 1:
+                raise ValueError('source geometry rasterization failed')
 
 
 def selected_basin(snapshot, decision_id):
@@ -255,12 +275,7 @@ def main(argv=None, *, emit=print):
     validate_geometry_ogr(feature_path)
     bounds = [format(-180+x0*STEP, '.15g'), format(90-y1*STEP, '.15g'),
               format(-180+x1*STEP, '.15g'), format(90-y0*STEP, '.15g')]
-    cmd = ['gdal_rasterize','-q','-burn','1','-init','0','-ot','Byte','-of','ENVI',
-           '-te',*bounds,'-ts',str(x1-x0),str(y1-y0),'-a_srs','EPSG:4326',str(feature_path),str(raster_path)]
-    stage_external.run(cmd, check=True)
-    # ENVI creation with -init can silently leave tiny rasters all zero on
-    # some GDAL builds. A separate update-mode burn is idempotent and tested.
-    stage_external.run(['gdal_rasterize','-q','-burn','1',str(feature_path),str(raster_path)], check=True)
+    rasterize_source(feature_path, raster_path, bounds, x1-x0, y1-y0)
     raster = np.memmap(raster_path, dtype='u1', mode='r', shape=(y1-y0,x1-x0))
     if is_shared:
         try:
@@ -358,7 +373,7 @@ def main(argv=None, *, emit=print):
         raise ValueError('interval builder helper code changed during run')
     if is_shared and (digest(Path(wrapped_bounds.__file__))!=wrapped_code_sha or digest(Path(streamed_shore_fallback.__file__))!=fallback_code_sha):
         raise ValueError('wrapped classifier code changed during run')
-    gdal_version = stage_external.run(['gdal_rasterize','--version'],check=True,capture_output=True,text=True).stdout.strip()
+    gdal_version = gdal.VersionInfo('--version')
     manifest = {'schema':'worldatlas-full-water-assignment-tiles-v1', 'status':'completed_unverified_candidate_not_published',
                 'grid':{'width':W,'height':H,'angular_step_deg':STEP,'row_convention':'north-to-south; cell centers; half-open [start,end) x spans'},
                 'coverage':{'complete':True,'meaning':'all physical-water centers inside the selected SeaVoX polygon',

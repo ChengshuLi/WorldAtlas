@@ -17,7 +17,7 @@ import time
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-import stage_external
+from osgeo import gdal
 from decision_snapshot import read_snapshot, find_source
 from exclusive_outputs import create_directory_exclusive, validate_fresh_output, write_json_exclusive
 from extract_seavox_feature import (canonical_hash, digest, extract_features,
@@ -87,8 +87,7 @@ def run(archive, root, policy, policy_sha, out, *, allow_unverified=False, allow
         if actual != basin['geometry_sha256']:
             raise ValueError('archive feature geometry does not match the selected decision: ' + basin['id'] + ': ' + actual)
     phases['geometry_binding'] = time.perf_counter() - before
-    gdal_version = selection_index.get('gdal_version') or stage_external.run(
-        ['ogr2ogr', '--version'], check=True, capture_output=True, text=True).stdout.strip()
+    gdal_version = selection_index.get('gdal_version') or gdal.VersionInfo('--version')
     # Validate all selected geometries and both input pins before creating any
     # candidate files. The final recheck below detects later source mutation.
     if digest(archive) != archive_sha or digest(policy) != policy_sha:
@@ -137,7 +136,7 @@ def main(argv=None, *, emit=print):
     p.add_argument('--policy-sha256', required=True)
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--work-root', type=Path, help='existing workspace directory for transient archive materialization; defaults to the output parent')
-    p.add_argument('--scan-reference', action='store_true', help='reference engine: scan features with the ogr2ogr attribute filter')
+    p.add_argument('--scan-reference', action='store_true', help='reference engine: scan features with the GDAL attribute filter')
     p.add_argument('--allow-unverified-snapshot', action='store_true')
     p.add_argument('--allow-draft-snapshot', action='store_true')
     args = p.parse_args(argv)

@@ -2,8 +2,6 @@ import contextlib
 import hashlib
 import io
 import json
-import shutil
-import subprocess
 from pathlib import Path
 import sys
 import tempfile
@@ -38,8 +36,8 @@ class ExtractTest(unittest.TestCase):
 
     def run_main(self, args=None):
         with patch.object(sys,'argv',args or self.args), patch.object(mod,'extract_feature',return_value=self.feature), \
-             patch.object(mod.subprocess,'run') as run, contextlib.redirect_stdout(io.StringIO()):
-            run.return_value.stdout = 'GDAL test'; mod.main()
+             patch.object(mod.gdal, 'VersionInfo', return_value='GDAL test'), contextlib.redirect_stdout(io.StringIO()):
+            mod.main()
 
     def test_build_binds_hashes_and_refuses_reuse(self):
         self.run_main(); out=self.base/'out'; manifest=json.loads((out/'manifest.json').read_text())
@@ -90,7 +88,6 @@ class ExtractTest(unittest.TestCase):
 
 
 class ExtractGdalIntegrationTest(unittest.TestCase):
-    @unittest.skipUnless(shutil.which('ogr2ogr'), 'GDAL ogr2ogr is required')
     def test_real_archive_extracts_exact_selected_feature(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
@@ -101,7 +98,8 @@ class ExtractGdalIntegrationTest(unittest.TestCase):
                 {'type':'Feature','properties':{'MRGID_SR':'24064'},
                  'geometry':{'type':'Polygon','coordinates':[[[3,3],[4,3],[3,4],[3,3]]]}}]}))
             shape = root/'shape'
-            subprocess.run(['ogr2ogr','-f','ESRI Shapefile',str(shape),str(source)], check=True, capture_output=True)
+            with mod.gdal.VectorTranslate(str(shape), str(source), format='ESRI Shapefile'):
+                pass
             archive = root/'source.zip'
             with zipfile.ZipFile(archive, 'w') as z:
                 for component in shape.iterdir():

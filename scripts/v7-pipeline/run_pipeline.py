@@ -89,7 +89,8 @@ def stage_scratch(directory):
 def validate_runtime():
     missing = [name for name in ('numpy', 'scipy', 'pyproj', 'osgeo', 'pyarrow')
                if importlib.util.find_spec(name) is None]
-    missing.extend(name for name in ('g++', 'ogr2ogr', 'gdal_rasterize') if shutil.which(name) is None)
+    if shutil.which('g++') is None:
+        missing.append('g++')
     if missing:
         raise ValueError('runtime prerequisites missing from this interpreter/PATH: ' + ', '.join(missing))
     # All selected coordinate operations use the pinned local database. Never
@@ -114,7 +115,7 @@ def runtime_identity():
             'proj_database': pin(Path(pyproj.datadir.get_data_dir()) / 'proj.db'),
             'proj_network_enabled': pyproj.network.is_network_enabled(),
             'gdal': gdal.VersionInfo('RELEASE_NAME'), 'pyarrow': pyarrow.__version__,
-            'tools': {name: pin(shutil.which(name)) for name in ('g++', 'ogr2ogr', 'gdal_rasterize')}}
+            'tools': {'g++': pin(shutil.which('g++'))}}
 
 
 def sha(path):

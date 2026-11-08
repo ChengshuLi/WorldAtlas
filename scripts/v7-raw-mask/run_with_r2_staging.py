@@ -6,7 +6,6 @@ import json
 import os
 import shutil
 from pathlib import Path
-import subprocess
 import threading
 
 import build_physical as physical
@@ -44,11 +43,10 @@ def manifest_entries(config_path):
 
 
 class Stager:
-    def __init__(self, entries, wrangler, log_dir, config=None, remove_downloads=False):
+    def __init__(self, entries, endpoint, log_dir, remove_downloads=False):
         self.entries = entries
-        self.wrangler = str(wrangler)
+        self.endpoint = endpoint
         self.log_dir = Path(log_dir)
-        self.config = config
         self.remove_downloads = remove_downloads
         self.lock = threading.Lock()
         self.original_stage = physical.run_stage
@@ -61,7 +59,7 @@ class Stager:
     def run_stage(self, name, *args):
         if str(name) != 'overture/rasterize_water_shard.py':
             return self.original_stage(name, *args)
-        src, expected, _, dest = Path(args[0]).resolve(), str(args[1]), args[2], Path(args[3])
+        src, expected, dest = Path(args[0]).resolve(), str(args[1]), Path(args[2])
         entry = self.entries.get(src)
         if entry is None or entry['sha256'] != expected:
             raise ValueError('shard path or digest not in selected source manifest')
@@ -71,12 +69,7 @@ class Stager:
             partial = src.with_name(src.name + '.partial')
             if partial.exists():
                 raise FileExistsError(f'partial staging file exists: {partial}')
-            cmd = ['node', self.wrangler, 'r2', 'object', 'get',
-                   entry['r2_bucket'] + '/' + entry['r2_key'], '--file', str(partial), '--remote']
-            if self.config:
-                cmd.extend(['--config', str(self.config)])
-            with (self.log_dir / (src.name + '.wrangler.log')).open('xb') as log:
-                subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT, check=True, env=os.environ.copy())
+            physical.download_r2(self.endpoint, entry, partial)
             if partial.stat().st_size != entry['size'] or sha(partial) != expected:
                 raise ValueError(f'R2 size or SHA mismatch: {src}')
             # A hard link fails if a target appeared; never replace another file.
@@ -163,7 +156,7 @@ class CheckpointStager:
                                   'limitation':'Prior land report does not attest code identity.'})
             return
         if str(name) == 'overture/rasterize_water_shard.py':
-            src, source_sha, config, dest = Path(args[0]).resolve(), str(args[1]), Path(args[2]), Path(args[3])
+            src, source_sha, dest, config = Path(args[0]).resolve(), str(args[1]), Path(args[2]), Path(args[3])
             old = self.checkpoint / 'shards' / dest.name
             if not old.exists():
                 return self.delegate.run_stage(name, *args)
@@ -212,8 +205,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('config', help='hash-pinned physical pipeline configuration')
     parser.add_argument('output', help='new output directory')
-    parser.add_argument('--wrangler', required=True, help='path to official Wrangler JS entrypoint')
-    parser.add_argument('--wrangler-config', help='Wrangler project config, if needed')
+    parser.add_argument('--r2-endpoint', required=True, help='Cloudflare R2 S3 account endpoint')
     parser.add_argument('--log-dir', required=True, help='new directory for staging logs')
     parser.add_argument('--reuse-checkpoint', help='previous incomplete output directory; copy validated completed stages')
     parser.add_argument('--checkpoint-events', help='previous staging events JSONL')
@@ -228,8 +220,9 @@ def main():
     output = Path(args.output).resolve()
     if log_dir == output or log_dir.is_relative_to(output) or output.is_relative_to(log_dir):
         raise ValueError('log and output directories must be separate')
+    physical.validate_r2_endpoint(args.r2_endpoint)
     log_dir.mkdir()
-    stager = Stager(entries, args.wrangler, log_dir, args.wrangler_config, args.remove_completed_downloads)
+    stager = Stager(entries, args.r2_endpoint, log_dir, args.remove_completed_downloads)
     original = physical.run_stage
     if args.reuse_checkpoint:
         checkpoint = Path(args.reuse_checkpoint).resolve()

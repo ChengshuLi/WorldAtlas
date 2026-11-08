@@ -23,7 +23,7 @@ class StagingTests(unittest.TestCase):
         self.digest = hashlib.sha256(self.payload).hexdigest()
         self.entry = {'source_id':'one', 'sha256':self.digest, 'size':len(self.payload),
                       'r2_bucket':'bucket', 'r2_key':'prefix/shard'}
-        self.stager = module.Stager({self.src:self.entry}, '/official/wrangler.js', self.logs,
+        self.stager = module.Stager({self.src:self.entry}, 'r2-endpoint', self.logs,
                                     remove_downloads=True)
         def stage(*args):
             self.dest.mkdir()
@@ -31,41 +31,41 @@ class StagingTests(unittest.TestCase):
                                                               'source_sha256':self.digest}))
         self.stager.original_stage = stage
 
-    def fetch(self, cmd, **kwargs):
-        Path(cmd[cmd.index('--file') + 1]).write_bytes(self.payload)
+    def fetch(self, endpoint, entry, destination):
+        destination.write_bytes(self.payload)
 
     def call(self):
         self.stager.run_stage('overture/rasterize_water_shard.py', self.src, self.digest,
-                              'water-config', self.dest)
+                              self.dest, 'water-config')
 
     def test_download_validated_and_only_new_temporary_removed(self):
-        with mock.patch.object(module.subprocess, 'run', side_effect=self.fetch): self.call()
+        with mock.patch.object(module.physical, 'download_r2', side_effect=self.fetch): self.call()
         self.assertFalse(self.src.exists())
         event = json.loads((self.logs/'events.jsonl').read_text())
         self.assertTrue(event['downloaded']); self.assertTrue(event['removed_download'])
 
     def test_existing_input_is_never_removed(self):
         self.src.parent.mkdir(); self.src.write_bytes(self.payload)
-        with mock.patch.object(module.subprocess, 'run') as get:
+        with mock.patch.object(module.physical, 'download_r2') as get:
             self.call(); get.assert_not_called()
         self.assertEqual(self.src.read_bytes(), self.payload)
 
     def test_wrong_download_is_retained_and_rejected(self):
-        def bad(cmd, **kwargs): Path(cmd[cmd.index('--file')+1]).write_bytes(b'wrong')
-        with mock.patch.object(module.subprocess, 'run', side_effect=bad):
+        def bad(endpoint, entry, destination): destination.write_bytes(b'wrong')
+        with mock.patch.object(module.physical, 'download_r2', side_effect=bad):
             with self.assertRaises(ValueError): self.call()
         self.assertEqual(self.src.with_name('shard.partial').read_bytes(), b'wrong')
         self.assertFalse(self.src.exists())
 
     def test_failed_raster_retains_download(self):
         self.stager.original_stage = mock.Mock(side_effect=RuntimeError('failed'))
-        with mock.patch.object(module.subprocess, 'run', side_effect=self.fetch):
+        with mock.patch.object(module.physical, 'download_r2', side_effect=self.fetch):
             with self.assertRaises(RuntimeError): self.call()
         self.assertEqual(self.src.read_bytes(), self.payload)
 
     def test_unlisted_and_wrong_pins_fail(self):
         with self.assertRaises(ValueError):
-            self.stager.run_stage('overture/rasterize_water_shard.py', self.src, '0'*64, 'config', self.dest)
+            self.stager.run_stage('overture/rasterize_water_shard.py', self.src, '0'*64, self.dest, 'config')
 
     def test_manifest_pin_and_path_validation(self):
         m = self.root/'manifest.json'; entry = dict(self.entry, path='raw/shard')
@@ -90,7 +90,7 @@ class CheckpointTests(unittest.TestCase):
         self.landcfg=self.root/'land.json'; self.landcfg.write_text(json.dumps({'grid':{'width':8},'land':[{'files':[{'path':str(self.landfile),'sha256':module.sha(self.landfile)}]}]}))
         self.watercfg=self.root/'water.json';self.watercfg.write_text(json.dumps({'grid':{'width':8},'policy':{'method':'x'},'batch_size':8,'rasterizer':'python'}))
         self.entry={'source_id':'s','sha256':self.source_sha,'size':len(self.data),'r2_bucket':'b','r2_key':'k'}
-        self.stager=module.Stager({self.source:self.entry},'wrangler',self.log);self.stager.original_stage=mock.Mock()
+        self.stager=module.Stager({self.source:self.entry},'r2-endpoint',self.log);self.stager.original_stage=mock.Mock()
         land=self.check/'land'; (land/'config.json').write_bytes(self.landcfg.read_bytes()); (land/'land.tif').write_bytes(b'land raster')
         (land/'report.json').write_text(json.dumps({'status':'candidate-only','grid':{'width':8},'configuration_sha256':module.sha(self.landcfg),'land_sha256':module.sha(land/'land.tif')}))
         shard=self.check/'shards'/'00000';(shard/'water.tif').write_bytes(b'water raster')
@@ -100,14 +100,14 @@ class CheckpointTests(unittest.TestCase):
     def test_land_and_shard_reused_in_new_output(self):
         dest=self.root/'new';(dest/'shards').mkdir(parents=True)
         self.resume.run_stage('rasterize_land.py',self.landcfg,dest/'land')
-        self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,dest/'shards'/'00000','--batch-size','8')
+        self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,dest/'shards'/'00000',self.watercfg,8)
         self.stager.original_stage.assert_not_called()
         self.assertEqual((dest/'land'/'land.tif').read_bytes(),b'land raster')
         self.assertEqual((dest/'shards'/'00000'/'water.tif').read_bytes(),b'water raster')
         self.assertEqual((self.check/'shards'/'00000'/'water.tif').read_bytes(),b'water raster')
     def test_bad_shard_hash_fails_closed(self):
         (self.check/'shards'/'00000'/'water.tif').write_bytes(b'tampered')
-        with self.assertRaises(ValueError): self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,self.root/'00000')
+        with self.assertRaises(ValueError): self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.root/'00000',self.watercfg)
     def test_native_checkpoint_copies_binary_and_requires_configured_method(self):
         cfg=json.loads(self.watercfg.read_text());cfg['rasterizer']='native';self.watercfg.write_text(json.dumps(cfg))
         shard=self.check/'shards'/'00000';report=json.loads((shard/'report.json').read_text())
@@ -117,18 +117,18 @@ class CheckpointTests(unittest.TestCase):
             'method':'hybrid','source_sha256':module.sha(self.repo/'overture/water_native.cpp'),
             'binding_sha256':module.sha(self.repo/'overture/water_native.py'),'binary_sha256':module.sha(shard/'water-native.so')}})
         (shard/'report.json').write_text(json.dumps(report));dest=self.root/'native-copy'/'00000';dest.parent.mkdir()
-        self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,dest)
+        self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,dest,self.watercfg)
         self.assertEqual((dest/'water-native.so').read_bytes(),b'native binary')
         report['native_kernel']['method']='vector';(shard/'report.json').write_text(json.dumps(report))
         wrong=self.root/'wrong-method'/'00000';wrong.parent.mkdir()
         with self.assertRaisesRegex(ValueError,'native water checkpoint mismatch'):
-            self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,wrong)
+            self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,wrong,self.watercfg)
     def test_bad_land_code_fails_closed(self):
         (self.repo/'rasterize_land.py').write_bytes(b'changed')
         with self.assertRaises(ValueError): self.resume.run_stage('rasterize_land.py',self.landcfg,self.root/'newland')
     def test_missing_stage_runs_normally(self):
         self.stager.run_stage=mock.Mock()
-        dest=self.root/'00001';self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,self.watercfg,dest)
+        dest=self.root/'00001';self.resume.run_stage('overture/rasterize_water_shard.py',self.source,self.source_sha,dest,self.watercfg)
         self.stager.run_stage.assert_called_once()
 
 

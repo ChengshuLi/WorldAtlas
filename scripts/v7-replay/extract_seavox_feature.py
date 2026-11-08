@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import tempfile
 import time
 from pathlib import Path, PurePosixPath
 import re
@@ -16,7 +17,7 @@ import sys
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-import stage_external
+from osgeo import gdal
 from exclusive_outputs import create_directory_exclusive, write_json_exclusive, create_text_exclusive, validate_fresh_output
 from decision_snapshot import read_snapshot, find_basin, find_source
 from seavox_properties import feature_id as read_feature_id
@@ -60,10 +61,14 @@ def extract_features(archive, feature_ids, *, dataset=None):
     where = ("mrgid_sr = '" + selected[0] + "'" if len(selected) == 1 else
              'mrgid_sr IN (' + ','.join("'" + value + "'" for value in selected) + ')')
     source = str(dataset) if dataset is not None else '/vsizip/' + str(archive)
-    cmd = ['ogr2ogr', '-f', 'GeoJSON', '/vsistdout/', source,
-           '-where', where, '-t_srs', 'EPSG:4326',
-           '-lco', 'COORDINATE_PRECISION=15']
-    data = json.loads(stage_external.run(cmd, check=True, capture_output=True).stdout)
+    with tempfile.TemporaryDirectory(prefix='seavox-scan-') as workspace:
+        output = Path(workspace) / 'selection.geojson'
+        with gdal.ExceptionMgr():
+            with gdal.VectorTranslate(str(output), source, format='GeoJSON', where=where,
+                                      dstSRS='EPSG:4326',
+                                      layerCreationOptions=['COORDINATE_PRECISION=15']):
+                pass
+        data = json.loads(output.read_bytes())
     features = data.get('features', []) if data.get('type') == 'FeatureCollection' else []
     result = {}
     for feature in features:
@@ -280,7 +285,7 @@ def main(argv=None, *, emit=print):
     geometry_hash = canonical_hash(feature['geometry'])
     if geometry_hash != basin['geometry_sha256']:
         raise ValueError('archive feature geometry does not match the selected decision: ' + geometry_hash)
-    gdal_version = stage_external.run(['ogr2ogr', '--version'], check=True, capture_output=True, text=True).stdout.strip()
+    gdal_version = gdal.VersionInfo('--version')
     manifest = write_extraction(out, feature, snapshot, args.policy_sha256, basin, source, gdal_version)
     if digest(archive)!=source['sha256'] or digest(policy)!=args.policy_sha256:
         raise ValueError('source archive or policy changed during extraction')

@@ -70,9 +70,8 @@
     "union_rows_per_block": 512,
     "physical_rows_per_block": 512,
     "source_staging": {
-      "mode": "wrangler-r2",
-      "wrangler_path": "/workspace/tools/node_modules/.bin/wrangler",
-      "wrangler_config": "/workspace/config/wrangler.jsonc"
+      "mode": "r2-s3",
+      "endpoint_url": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com"
     }
   },
   "land_policy": {

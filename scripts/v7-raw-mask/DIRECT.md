@@ -62,18 +62,22 @@ A 2026-11-06 full-grid profile used all 32 Overture water shards. Its download-e
 
 ## R2 staging for a full physical run
 
-`run_with_r2_staging.py` wraps the physical builder and fetches each missing
-water shard from the R2 bucket and key in its hash-pinned source manifest.
-Each entry must also provide the byte size. The wrapper checks the downloaded
-bytes before running the unchanged rasterizer. It retains existing inputs and,
-by default, downloaded shards. `--remove-completed-downloads` removes only
-newly downloaded temporary copies after a matching complete shard report; failed
-or partial downloads remain for inspection. Use an official installed Wrangler
-entrypoint and authenticate separately; never put credentials in source files.
+`build_physical.py` can fetch missing shards directly from R2 with boto3.
+Set `max_parallel_shards` to `1` and set `source_staging` to
+`{"mode": "r2-s3", "endpoint_url": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com"}`.
+Each missing shard needs a bucket, key, byte size and SHA-256 in the pinned
+manifest. The builder verifies downloaded bytes before rasterizing them and
+removes its temporary copy after the shard completes. It retains existing
+inputs and partial or failed downloads. Use R2 S3 credentials with Object
+Read only access via the boto3 credential chain.
+
+The standalone `run_with_r2_staging.py` wrapper also uses boto3. It supports
+staging into the source directory and copying validated checkpoints into a
+new run.
 The staging log directory and pipeline output directory must be new and separate.
 For example:
 
-`python run_with_r2_staging.py PIPELINE_CONFIG NEW_OUTPUT --wrangler /path/to/wrangler/bin/wrangler.js --wrangler-config /path/to/wrangler.jsonc --log-dir NEW_LOG_DIR`
+`python run_with_r2_staging.py PIPELINE_CONFIG NEW_OUTPUT --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com --log-dir NEW_LOG_DIR`
 
 Run `python -m unittest -v test_r2_staging.py` for synthetic staging checks.
 These do not test a real R2 connection or establish source selection, global
