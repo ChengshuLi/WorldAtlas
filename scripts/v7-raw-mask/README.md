@@ -60,6 +60,15 @@ and row/run checks must report zero differences. Reports retain original input
 and producer pins. Shared unchanged land and accumulated source trials make this
 a full-input parity proof, not a paired end-to-end timing or geographic approval.
 
+The [supported-Python-API proof](../../docs/benchmarks/physical-python-api-20261108.json)
+reproduces all 32 raw shards, 66,814,038 rows and all 7,158,366,208 physical cells,
+with exact final mask and row/run hashes. The paired raw samples measured
+895.42 seconds for the retained Python oracle and 787.96 seconds for GDAL's
+Python APIs, after a documented overlapped sample was repeated separately.
+That is 12.0 percent less processing time versus this oracle, not production C++
+or a whole-pipeline gain. Source acquisition is separate. See the
+[baseline audit](../../docs/benchmarks/physical-baseline-audit-20261108.json).
+
 The [historical 2026-11-08 ctypes-bridge proof](../../docs/benchmarks/physical-python-gdal-20261108.json)
 records all 32 raw shards, 66,814,038 rows and 7,158,366,208 physical cells with
 zero differences and exact final row/run hashes. Observed raw-water processing

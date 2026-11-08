@@ -248,7 +248,6 @@ class WaterShardTests(unittest.TestCase):
         results=[]
         for method in ('hybrid','tiled'):
             out=self.path/method;out.mkdir();kernel=WaterBatch(out,method)
-            kernel.threads=4
             raster=gdal.GetDriverByName('MEM').Create('',8,4,1,gdal.GDT_Byte)
             raster.SetGeoTransform((-180,45,0,90,0,-45))
             status,failed=kernel.burn(raster,pa.array([polygon,multipart]*25),[1]*50,[8,4,-180,90,45],2)

@@ -1,0 +1,98 @@
+{
+  "status": "complete-physical-pixels-and-streams-identical",
+  "selection": {
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/api-measured-selection.json",
+    "sha256": "54c2cc4b29ba0744cc210589de8a9d048571ea0b02142203d310355f2fda8e5d"
+  },
+  "paired_water_receipt": {
+    "path": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/api-full32/benchmark.json",
+    "sha256": "d7ae744177c6eaee13431d103c81d37e32d48dd757e32e9d2954c6784d628d04"
+  },
+  "land_source_sha256": {
+    "/workspace/scratch/127991fc8b8e/worldatlas-config-recovery-20261108/full-run-20261108/inputs/79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d/land-polygons-split-4326.zip": "79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d",
+    "/workspace/scratch/127991fc8b8e/worldatlas-config-recovery-20261108/full-run-20261108/inputs/79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d/land-polygons-split-4326/land_polygons.shp": "e2258f3e849f8101cd44cea0f7c6e1ae5b476ef11f84e053af8a29f6cb82ffc3",
+    "/workspace/scratch/127991fc8b8e/worldatlas-config-recovery-20261108/full-run-20261108/inputs/79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d/land-polygons-split-4326/land_polygons.shx": "b894349c1be3de80bbd244196ee268f78f87cb77b599065cb1f0914e972df390",
+    "/workspace/scratch/127991fc8b8e/worldatlas-config-recovery-20261108/full-run-20261108/inputs/79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d/land-polygons-split-4326/land_polygons.dbf": "860656edf73e247ee949e1f62af4eeb87b9db45ad9ad21504ce316bfebaa75e6",
+    "/workspace/scratch/127991fc8b8e/worldatlas-config-recovery-20261108/full-run-20261108/inputs/79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d/land-polygons-split-4326/land_polygons.prj": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+    "/workspace/scratch/127991fc8b8e/worldatlas-config-recovery-20261108/full-run-20261108/inputs/79e88a74ed7276177a331c0b4b2a1ee0859e7da216bcbf98cc6479ccad69078d/land-polygons-split-4326/land_polygons.cpg": "146d6789ffe033a5297c1ad046e6a62ee35319b86b021444f05b6ea2aa8a1f4a"
+  },
+  "script_sha256": {
+    "verifier": "f00a1221dfa27aa84d6f0285589eb8f35f894b3873d88ac72a2754a096823174",
+    "land": "4d13d4622ec8bebc4b7067c14ebc582ec73ae1c0c902e5698a4925becca2b1ca",
+    "input_validation": "2b365ebefb304e3ea8b571df40931407bfbc74ef48b6ff4ee217a7a6fc357282",
+    "union": "5a28e80056161b902c95fbea81625ec5f9e986cc625e17a58206c1f54767b4dd",
+    "composition": "b01bba9a2c7445e98a334e986a9731d34f88a374e68b3fa19f4205f9a130c700",
+    "paired_verifier": "e1958d625e3fcafafd0d03e01df7dcd55ef0dfee6f8c66c55300ba948af5bc91"
+  },
+  "timings": {
+    "land": {
+      "processing_seconds": 59.36445542000001,
+      "started_at_utc": "2026-11-08T06:56:24.382225+00:00",
+      "ended_at_utc": "2026-11-08T06:57:23.746724+00:00"
+    },
+    "union-python": {
+      "processing_seconds": 9.169901430002938,
+      "started_at_utc": "2026-11-08T06:57:23.775014+00:00",
+      "ended_at_utc": "2026-11-08T06:57:32.944936+00:00"
+    },
+    "union-gdal": {
+      "processing_seconds": 9.246725291002804,
+      "started_at_utc": "2026-11-08T06:57:32.971434+00:00",
+      "ended_at_utc": "2026-11-08T06:57:42.218179+00:00"
+    },
+    "physical-python": {
+      "processing_seconds": 30.03317495399824,
+      "started_at_utc": "2026-11-08T06:57:42.241119+00:00",
+      "ended_at_utc": "2026-11-08T06:58:12.274318+00:00"
+    },
+    "physical-gdal": {
+      "processing_seconds": 75.81464045699977,
+      "started_at_utc": "2026-11-08T06:58:12.442935+00:00",
+      "ended_at_utc": "2026-11-08T06:59:28.257598+00:00"
+    }
+  },
+  "grid": {
+    "height": 54614,
+    "north": 90,
+    "step": 0.00274658203125,
+    "west": -180,
+    "width": 131072
+  },
+  "grid_cells": 7158366208,
+  "raw_shard_count": 32,
+  "raw_source_rows": 66814038,
+  "runtime": {
+    "python": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]",
+    "numpy": "2.2.4",
+    "gdal": "GDAL 3.10.3, released 2025/04/01"
+  },
+  "scope": "all raw water shards plus one fresh unchanged land raster; both complete unions and physical compositions",
+  "different_physical_cells": 0,
+  "output_sha256": {
+    "physical-dry.tif": "348b5e1765437259c2192c423826f140d9ba19f1d99d451312045bb3b0811306",
+    "rows.u32le": "6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468",
+    "runs.u32le": "1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7"
+  },
+  "producer_reports": {
+    "land": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/api-final-physical-proof/land/report.json",
+      "sha256": "487d30788c7aaa3b89e08da0bb6833e711f910c30989ae25cf7c0137e27765b7"
+    },
+    "union-python": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/api-final-physical-proof/union-python/report.json",
+      "sha256": "fee2292d53d86df359291891952b23fa663fad756d5e8b766d961d64555a1a0a"
+    },
+    "union-gdal": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/api-final-physical-proof/union-gdal/report.json",
+      "sha256": "0a37a14b6d30f7f666a40a4b2833353295371b65a628c7e64017c755b3bda626"
+    },
+    "physical-python": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/api-final-physical-proof/physical-python/report.json",
+      "sha256": "637ee85fd7895a82783c4da48a1d756050f66ca7e98029ecdd5d4154e3275762"
+    },
+    "physical-gdal": {
+      "path": "/workspace/scratch/127991fc8b8e/worldatlas-physical-python/.work/api-final-physical-proof/physical-gdal/report.json",
+      "sha256": "5ade02ff71d32c708abf9de7acfbcc9a00e01803c599dc273a8268f687c4f64f"
+    }
+  }
+}

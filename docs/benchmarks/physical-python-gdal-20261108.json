@@ -1,6 +1,8 @@
 {
   "schema": "worldatlas-physical-python-gdal-full-input-proof-v1",
   "date": "2026-11-08",
+  "superseded_by": "physical-python-api-20261108.json",
+  "warning": "Historical ctypes-bridge implementation. Current production uses supported GDAL Python bindings; these timings do not measure that replacement.",
   "scope": "Complete selected raw-water comparison followed by fresh land, both complete water unions, and physical-mask/row/run verification.",
   "implementation": {
     "method": "Python, NumPy and Arrow over the already-loaded GDAL public C API",

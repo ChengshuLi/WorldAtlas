@@ -1,0 +1,95 @@
+{
+  "schema": "worldatlas-physical-python-api-full-input-proof-v1",
+  "date": "2026-11-08",
+  "implementation": {
+    "method": "Supported GDAL/OGR Python APIs with NumPy and Arrow",
+    "apis": ["ogr.CreateGeometryFromWkb", "Geometry.IsValid", "Layer.WriteArrow", "gdal.RasterizeLayer", "gdal_array.OpenArray"],
+    "ctypes_bridge": false,
+    "custom_cpp_helper": false,
+    "runtime_compilation": false,
+    "physical_stage_subprocesses": false,
+    "water_batch_sha256": "75194b5ce6400eea7c481f318079c223e0cc9ea1771218b3c93c686c80ce60a4",
+    "rasterizer_sha256": "0c40e100ab9e50672bb6eef97448e70ba9fdbf0fa426d9654bd514ce23cf47b8",
+    "physical_orchestrator_sha256": "87256e426437c519b44470db3bf35f1cdff77329f46d2409ee654599827b4b5f",
+    "rasterization": "Unchanged tile-local transforms and original retained coordinates; ALL_TOUCHED off"
+  },
+  "raw_water": {
+    "release": "2026-10-21.0",
+    "shards": 32,
+    "source_bytes": 28818195515,
+    "source_rows": 66814038,
+    "polygons": 26579125,
+    "non_polygons": 39914960,
+    "excluded_classification": 319953,
+    "different_pixels": 0,
+    "diagnostic_counts": "Identical on every complete source",
+    "tiff_layout": "Every mask is pixel-identical; only shard 31 has different TIFF bytes",
+    "reference": "Retained Python feature-layer oracle, not production C++",
+    "unadjusted_reference_seconds": 895.8938075599981,
+    "unadjusted_python_api_seconds": 788.4134414780056,
+    "first_sweep_source_download_seconds": 775.908760304992,
+    "unadjusted_python_api_phase_seconds": {
+      "parse_validate_index": 562.1273413570707,
+      "tile_layer_and_burn": 111.9011291448951
+    },
+    "timing_protocol": "One complete paired sample per source, alternating first backend by ordinal; serial in-process processing; acquisition and pixel comparison excluded. Cache and outside-host load are uncontrolled.",
+    "recorded_overlap": {
+      "other_job": "Complete component-driver verification and its fast tests",
+      "conservative_start_utc": "2026-11-08T06:10:40.210664224Z",
+      "conservative_end_utc": "2026-11-08T06:11:17.744322700Z",
+      "affected_sample": "Shard 5 Python-API run only, 06:10:54.307210 through 06:11:24.668771 UTC",
+      "handling": "Preserve the original complete receipt unchanged, then repeat the entire shard-5 pair in a separate exclusive window"
+    },
+    "clean_timing_selection": {
+      "source_samples": "31 original paired samples plus the complete clean shard-5 replacement pair",
+      "identity_check": "Selection, water configuration, all measured code hashes and source entry are exactly equal across both receipts",
+      "reference_seconds": 895.4152512820001,
+      "python_api_seconds": 787.9639808730026,
+      "ratio_of_summed_processing_times": 1.1363657134301366,
+      "time_reduction_percent": 12.000160847735774,
+      "calculation": "For each backend, full-sweep total minus its original shard-5 time plus its clean recheck time. This is an accumulated paired-sample timing, not continuous wall time."
+    }
+  },
+  "physical": {
+    "width": 131072,
+    "height": 54614,
+    "cells": 7158366208,
+    "fresh_osm_features": 874187,
+    "fresh_land_cells": 2041419121,
+    "dry_cells": 1984469039,
+    "different_physical_cells": 0,
+    "mismatch_spans": 0,
+    "row_and_run_bytes": "Identical",
+    "output_sha256": {
+      "physical-dry.tif": "348b5e1765437259c2192c423826f140d9ba19f1d99d451312045bb3b0811306",
+      "rows.u32le": "6cf4b928b6609b4d9c8fdd9264bb6f463a38a5d7376d6ffb0ffc43502284a468",
+      "runs.u32le": "1396fe9dfde48b65b6e5884089a5445682511fb47f9560ce06edd53c95d928d7"
+    },
+    "scope": "Fresh unchanged OSM land once; both complete water unions and physical compositions. Candidate comparison verifies every mask cell and row/run byte. This is parity evidence, not a paired total-stage speed comparison."
+  },
+  "configuration_rebase": {
+    "measured_selection_sha256": "54c2cc4b29ba0744cc210589de8a9d048571ea0b02142203d310355f2fda8e5d",
+    "published_selection_sha256": "bc130dc55fe3a1885d2d6548c252fb1526fac8a95e3501ce5d2a7fc6eb296e1e",
+    "result": "All 32 source entries, land/water settings and physical controls are unchanged. Upstream adds raw-manifest total_bytes equal to the verified source-size sum, plus a regional OSM materialization outside physical processing.",
+    "normalized_physical_documents_sha256": "46480afa4ffe0f67fd49f4514719214453380424e0f0b80d60fae0a9b86c0bcb",
+    "normalization": "jq -S object with land_config, water_config, raw_manifest and physical_controls; add only raw_manifest.json.total_bytes computed as the sum of every files[].size to the measured document. It then equals the published physical document byte-for-byte.",
+    "producer_source_result": "Measured producer bytes are unchanged after rebase. The complete physical proof uses the frozen measured selection; historical receipts are not rewritten."
+  },
+  "receipts": {
+    "physical-python-api-20261108-water-receipt.json": "d7ae744177c6eaee13431d103c81d37e32d48dd757e32e9d2954c6784d628d04",
+    "physical-python-api-20261108-recheck5-receipt.json": "9a486332ef06c81df170f2881a178958e8889fb75fb6ab26639268aac449c2f0",
+    "physical-python-api-20261108-physical-receipt.json": "521031e21627e344d35b1be9ab55a3d7d28bf543006eada05a6016cee6baf4d2"
+  },
+  "final_fast_checks": {
+    "raw_mask_tests": 61,
+    "water_harness_and_profile_tests": 39,
+    "orchestrated_lineage_tests": 23,
+    "status": "Passed after rebase, including complete physical fixtures with ctypes.CDLL and subprocess.Popen blocked"
+  },
+  "limitations": [
+    "The observed 12.0 percent raw-water reduction is versus the retained Python oracle. No verified corrected full-input production-C++ comparison is available; see physical-baseline-audit-20261108.json. No deprecated C++ baseline was executed.",
+    "The earlier ctypes-bridge receipts are historical and do not measure this implementation.",
+    "No whole-pipeline speedup, independent geographic validation, accepted-geography publication or deployment is inferred.",
+    "Receipt paths are provenance, not portable input locations."
+  ]
+}
