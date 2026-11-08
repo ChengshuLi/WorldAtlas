@@ -198,11 +198,13 @@ Ural count identical: 104.133 s legacy versus 89.160 s integrated. See the
 [full receipt and scope](../../../../docs/benchmarks/land-batch-integration-20261108.md).
 It is not raw-pipeline/geographic acceptance.
 
-### Numeric writer candidate integration
+### Numeric writer integration
 
-The isolated candidate Stage2 builder now selects `numeric_land_stream`, with
-its source in the normal code identity. Production publication waits for the
-complete integration pair; the legacy writer remains its independent oracle.
+The Stage2 builder now selects `numeric_land_stream`, with its source in the
+normal code identity. The complete integration pair passed before this default
+was published: 90.238 s legacy versus 73.051 s numeric, with every decision,
+output byte and Ural count identical. The legacy writer remains its independent
+oracle. See the [complete receipt and scope](../../../../docs/benchmarks/land-writer-integration-20261108.md).
 
 The full writer-only pair passed exact outputs and reports at 29.844 s legacy
 versus 13.012 s numeric. See the

@@ -20,7 +20,7 @@ A sparse UINT32-width override fixture validates this with two land centers.
 Independent dense cell oracles, varied batch sizes, sparse/extreme identities,
 malformed input/failure cases and the unchanged writer contracts pass. This
 receipt is one writer-only reference-first pair, not a whole-stage ratio.
-Production promotion waits for the separately prepared complete integration pair
-(fresh seed index, all WGS84 decisions/ties and every final output byte), using
-current numeric coverage on BOTH sides. No raw-source/user-owned pipeline,
+The subsequent [complete integration pair](land-writer-integration-20261108.md)
+also passed before production promotion: 90.238 s current versus 73.051 s
+numeric, holding current numeric coverage constant on BOTH sides. No raw-source/user-owned pipeline,
 provider authentication, geographic acceptance or intermediate R2 upload occurs.

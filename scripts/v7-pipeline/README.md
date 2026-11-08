@@ -445,6 +445,11 @@ Exact pins, canonical point hashes and UTC anchors are in
 The numeric writer's complete isolated byte/report proof measured 29.844 s
 legacy versus 13.012 s numeric. `compare_land_replays.py --compare-writer`
 holds current numeric coverage constant and pairs complete legacy/numeric
-writer replays. The candidate default is local until that full integration
-proof passes; [exact writer receipt and limits](../../docs/benchmarks/land-numeric-writer-20261108.md)
+writer replays. The complete integration pair passed
+before default promotion: 90.238 s legacy versus 73.051 s numeric, with every
+decision/output byte/Ural count identical. [Exact writer receipt and limits](../../docs/benchmarks/land-numeric-writer-20261108.md)
 are recorded separately from the earlier coverage integration.
+
+The [complete writer integration receipt](../../docs/benchmarks/land-writer-integration-20261108.md)
+records all source/code fingerprints and full phase intervals. Stage2 now uses
+the numeric writer; the legacy Python writer stays an explicit comparison oracle.
