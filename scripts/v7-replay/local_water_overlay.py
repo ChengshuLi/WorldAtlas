@@ -100,6 +100,34 @@ def verify(doc):
     if doc!=expected:raise ValueError('materialized local snapshot is not the exact verified overlay')
     return True
 
+def equivalent_selection(current, reference):
+    """Compare decisions exactly while allowing regenerated local source paths."""
+    def selection(value):
+        value = copy.deepcopy(value)
+        provenance = value['local_overlay_provenance']
+        overlay_hash = provenance['overlay_sha256']
+        for key in ('base_land_snapshot_path', 'water_neon_snapshot_path', 'overlay_path',
+                    'overlay_sha256', 'neon_water_structure_sha256'):
+            provenance[key] = None
+        for route in value['routes']:
+            evidence = route.get('evidence', {})
+            if 'overlay_sha256' in evidence:
+                if evidence['overlay_sha256'] != overlay_hash:
+                    raise ValueError('water route has inconsistent overlay provenance')
+                evidence['overlay_sha256'] = None
+        return value
+
+    def identical(a, b):
+        if type(a) is not type(b):
+            return False
+        if isinstance(a, dict):
+            return a.keys() == b.keys() and all(identical(a[key], b[key]) for key in a)
+        if isinstance(a, list):
+            return len(a) == len(b) and all(identical(x, y) for x, y in zip(a, b))
+        return a == b
+
+    return identical(selection(current), selection(reference))
+
 def selected(snapshot,record):
     e=record.get('evidence',{})
     return (e.get('execution_status')=='selected_for_research' or (snapshot.get('_local_overlay_verified') is True and e.get('execution_status')=='local_user_authorized_overlay'))

@@ -8,6 +8,7 @@ import argparse, hashlib, json, time
 from pathlib import Path
 import ocean_fill_runner as ocean
 import partition_core, rle_inputs, exclusive_outputs
+import local_water_overlay
 
 
 def _bindings(snapshot):
@@ -28,7 +29,15 @@ def _bindings(snapshot):
     return result
 
 
-def validate(ocean_snapshot, prefill_snapshot, prefill_sha, plan, audit, candidate, hashes):
+def prefill_matches_ocean(ocean_snapshot, prefill_snapshot, hashes, reference=None):
+    expected = ocean_snapshot['decision_revision'].get('evidence', {}).get('base_local_snapshot_sha256')
+    if reference is None:
+        return expected == hashes['prefill_snapshot']
+    return (expected == hashes['prefill_reference']
+            and local_water_overlay.equivalent_selection(prefill_snapshot, reference))
+
+
+def validate(ocean_snapshot, prefill_snapshot, prefill_sha, plan, audit, candidate, hashes, reference=None):
     """Validate both branches of lineage before launching or finalizing a fill."""
     o = ocean_snapshot.get('decision_revision', {})
     b = prefill_snapshot.get('decision_revision', {})
@@ -39,7 +48,8 @@ def validate(ocean_snapshot, prefill_snapshot, prefill_sha, plan, audit, candida
             or ocean_snapshot.get('entity_revision', {}).get('id') != e
             or ocean_snapshot.get('entity_revision', {}).get('status') != 'draft'):
         raise ValueError('a draft Neon ocean snapshot is required')
-    if (o.get('evidence', {}).get('base_local_snapshot_sha256') != prefill_sha
+    if (hashes['prefill_snapshot'] != prefill_sha
+            or not prefill_matches_ocean(ocean_snapshot, prefill_snapshot, hashes, reference)
             or b.get('entity_revision') != e
             or prefill_snapshot.get('entity_revision', {}).get('id') != e
             or _bindings(prefill_snapshot) != _bindings(ocean_snapshot)):
@@ -91,6 +101,7 @@ def main(argv=None, *, emit=print):
         p.add_argument('--' + name, required=True)
     p.add_argument('--allow-unverified-snapshots', action='store_true')
     p.add_argument('--allow-draft-snapshot', action='store_true')
+    p.add_argument('--prefill-reference', type=Path)
     a = p.parse_args(argv)
     if not a.allow_unverified_snapshots or not a.allow_draft_snapshot:
         raise ValueError('explicit unverified and draft research opt-ins required')
@@ -98,6 +109,8 @@ def main(argv=None, *, emit=print):
              'plan': Path(a.prefill_plan), 'physical_rows': Path(a.physical_rows),
              'physical_runs': Path(a.physical_runs), 'candidate': Path(a.candidate_build),
              'audit': Path(a.prefill_dir) / 'prefill-audit.json'}
+    if a.prefill_reference is not None:
+        files['prefill_reference'] = a.prefill_reference
     audit_raw=files['audit'].read_bytes(); audit=json.loads(audit_raw); prefill = Path(a.prefill_dir).resolve()
     for key in ('rows', 'runs'):
         f = (prefill / audit['output'][key + '_path']).resolve()
@@ -120,7 +133,8 @@ def main(argv=None, *, emit=print):
         return json.loads(raw)
     ocean_snapshot=pinned_json('ocean_snapshot');baseline=pinned_json('prefill_snapshot')
     plan=pinned_json('plan');candidate=pinned_json('candidate')
-    width, height = validate(ocean_snapshot, baseline, a.prefill_snapshot_sha256, plan, audit, candidate, hashes)
+    reference = pinned_json('prefill_reference') if a.prefill_reference is not None else None
+    width, height = validate(ocean_snapshot, baseline, a.prefill_snapshot_sha256, plan, audit, candidate, hashes, reference)
     execution_paths={'adapter':Path(__file__).resolve(),'ocean_runner':Path(ocean.__file__).resolve(),
                      'partition_core':Path(partition_core.__file__).resolve(),'rle_inputs':Path(rle_inputs.__file__).resolve(),
                      'exclusive_outputs':Path(exclusive_outputs.__file__).resolve()}
@@ -131,6 +145,8 @@ def main(argv=None, *, emit=print):
             'prefill_plan_sha256': hashes['plan'], 'prefill_decision_snapshot_sha256': hashes['prefill_snapshot'],
             'prefill_decision_revision': baseline['decision_revision']['id'], 'candidate_build_sha256': hashes['candidate'],
             'lineage_mode': 'separately-pinned-prefill-and-ocean-research-decisions'}
+    if a.prefill_reference is not None:
+        pins['prefill_reference_sha256'] = hashes['prefill_reference']
     def recheck():
         if (any(ocean.sha(v)!=execution_hashes[k] for k,v in execution_paths.items())
                 or any(ocean.sha(v) != hashes[k] for k, v in files.items())):

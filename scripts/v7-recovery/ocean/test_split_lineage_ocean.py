@@ -39,6 +39,20 @@ class SplitLineageTest(unittest.TestCase):
  def test_wrong_source_snapshot_rejected(self):
   self.ocean['decision_revision']['evidence']['base_local_snapshot_sha256']='0'*64
   with self.assertRaisesRegex(ValueError,'lineage'):self.check()
+ def test_regenerated_prefill_requires_pinned_equivalent_reference(self):
+  expected='f'*64
+  self.ocean['decision_revision']['evidence']['base_local_snapshot_sha256']=expected
+  self.base.update(routes=[],local_overlay_provenance={'overlay_sha256':'current','overlay_path':'/local/overlay'})
+  reference=copy.deepcopy(self.base)
+  reference['local_overlay_provenance'].update(overlay_sha256='historical',overlay_path='/original/overlay')
+  self.h['prefill_reference']='e'*64
+  def check():
+   return s.validate(self.ocean,self.base,self.h['prefill_snapshot'],self.plan,self.audit,self.candidate,self.h,reference)
+  with self.assertRaisesRegex(ValueError,'lineage'):check()
+  self.h['prefill_reference']=expected
+  self.assertEqual(check(),(8,4))
+  reference['decision_revision']['id']='different'
+  with self.assertRaisesRegex(ValueError,'lineage'):check()
  def test_registry_mismatch_rejected(self):
   self.ocean['category_bindings'][0]['code']=18
   with self.assertRaisesRegex(ValueError,'registry'):self.check()

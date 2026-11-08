@@ -205,6 +205,7 @@ class Pipeline:
         self.runtime = runtime_identity()
         self.resume = resume
         self.source_pins = []
+        self.prefill_reference = None
         self.input_cache = {}
         self.acquisition_intervals = []
         # Verify every external document before expensive computation starts.
@@ -463,30 +464,9 @@ class Pipeline:
                 paths['base'], sha(paths['base']), paths['water'], sha(paths['water']),
                 paths['overlay'], sha(paths['overlay']))
             producer.verify(result)
-            def selection(value):
-                value = copy.deepcopy(value)
-                provenance = value['local_overlay_provenance']
-                overlay_hash = provenance['overlay_sha256']
-                for key in ('base_land_snapshot_path', 'water_neon_snapshot_path', 'overlay_path',
-                            'overlay_sha256', 'neon_water_structure_sha256'):
-                    provenance[key] = None
-                for route in value['routes']:
-                    evidence = route.get('evidence', {})
-                    if 'overlay_sha256' in evidence:
-                        if evidence['overlay_sha256'] != overlay_hash:
-                            raise ValueError('water route has inconsistent overlay provenance')
-                        evidence['overlay_sha256'] = None
-                return value
-            def identical(a, b):
-                if type(a) is not type(b):
-                    return False
-                if isinstance(a, dict):
-                    return a.keys() == b.keys() and all(identical(a[key], b[key]) for key in a)
-                if isinstance(a, list):
-                    return len(a) == len(b) and all(identical(x, y) for x, y in zip(a, b))
-                return a == b
-            if not identical(selection(result), selection(read(paths['reference']))):
+            if not producer.equivalent_selection(result, read(paths['reference'])):
                 raise ValueError('regenerated water selection differs from pinned reference')
+            self.prefill_reference = paths['reference']
             return self.save_source_document(result, serialization='canonical-utf8')
         if isinstance(spec, dict) and set(spec) in ({'json'}, {'json', 'serialization'}) and isinstance(spec['json'], (dict, list)):
             return self.json_source(spec['json'], raw_manifest=name == 'raw_manifest',
@@ -953,6 +933,7 @@ class Pipeline:
             self.stage('water', name, OCEAN + '/split_lineage_ocean.py',
                          **self.pinned_options('ocean_snapshot', snapshot),
                          **self.pinned_options('prefill_snapshot', baseline_snapshot),
+                         prefill_reference=self.prefill_reference,
                          allow_unverified_snapshots=True, **options)
         return self.out / name
 
@@ -966,6 +947,8 @@ class Pipeline:
                 'ocean_snapshot': new_snapshot, 'prefill_plan': plan,
                 'prefill_audit': prefill / 'prefill-audit.json',
                 'ocean_candidate_build': self.out / 'updated-ocean-candidate.json'}
+            if self.prefill_reference is not None:
+                paths['prefill_reference'] = self.prefill_reference
             for prefix, directory in [('old', old), ('new', new)]:
                 paths.update({prefix + '_' + key: directory / rel for key, rel in {
                     'partition': 'partition/manifest.json', 'layer_manifest': 'ocean-layer-manifest.json',

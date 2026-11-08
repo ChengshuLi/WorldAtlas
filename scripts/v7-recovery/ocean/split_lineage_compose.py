@@ -19,11 +19,11 @@ KEYS = ('baseline_report','baseline_rows','baseline_runs','baseline_plan','close
         'prefill_snapshot','ocean_snapshot','prefill_plan','prefill_audit','ocean_candidate_build')
 
 def read_pins(config):
-    if config.get('schema') != 'worldatlas-split-ocean-final-config-v1' or set(config.get('inputs', {})) != set(KEYS):
+    inputs = config.get('inputs', {})
+    if config.get('schema') != 'worldatlas-split-ocean-final-config-v1' or set(inputs) not in (set(KEYS), set(KEYS) | {'prefill_reference'}):
         raise ValueError('invalid split final configuration')
     paths={}; hashes={}
-    for key in KEYS:
-        pin=config['inputs'][key]
+    for key,pin in inputs.items():
         if set(pin) != {'path','sha256'} or not ocean.HEX.fullmatch(str(pin['sha256'])):
             raise ValueError('invalid input pin: '+key)
         path=Path(pin['path']).resolve()
@@ -73,6 +73,7 @@ def validate_lineage(paths, hashes):
         return json.loads(raw)
     report=document('baseline_report');plan=document('baseline_plan');closed=document('closed_manifest')
     old=document('old_partition');new=document('new_partition');prefill=document('prefill_snapshot');snap=document('ocean_snapshot')
+    reference = document('prefill_reference') if 'prefill_reference' in paths else None
     prefill_plan=document('prefill_plan');audit=document('prefill_audit');candidate=document('ocean_candidate_build')
     base=prefill.get('decision_revision',{});rev=snap.get('decision_revision',{});entity=rev.get('entity_revision')
     if (report.get('schema')!='worldatlas-direct-final-audit-v1' or report.get('status')!='unverified-research-not-published'
@@ -142,7 +143,8 @@ def validate_lineage(paths, hashes):
             or ni.get('decision_snapshot_sha256')!=hashes['ocean_snapshot']
             or ni.get('prefill_decision_snapshot_sha256')!=hashes['prefill_snapshot']
             or oi.get('source_cut_edges_sha256')!=hashes['old_barrier'] or ni.get('source_cut_edges_sha256')!=hashes['new_barrier']
-            or rev.get('evidence',{}).get('base_local_snapshot_sha256')!=hashes['prefill_snapshot']
+            or ni.get('prefill_reference_sha256') != hashes.get('prefill_reference')
+            or not split.prefill_matches_ocean(snap, prefill, hashes, reference)
             or rev.get('id')!=ni.get('decision_revision') or entity!=ni.get('entity_revision')
             or base.get('entity_revision')!=entity):
         raise ValueError('split ocean partition lineage mismatch')
