@@ -14,10 +14,10 @@ The runner builds a local grid from the selected inputs. Publication is a separa
 ## Run
 
 Use one Python installation with NumPy, SciPy, PyProj, GDAL/OGR and PyArrow.
-The same command runs on macOS and Linux. Install a C++17 compiler available as
-`g++` and `c++`, OpenSSL development files, and Poppler's `pdftotext` on
-`PATH`. If OpenSSL lives outside the compiler's search paths, add its include
-and library directories with `CPATH` and `LIBRARY_PATH`. Use GDAL 3.10.3 and
+The same command runs on macOS and Linux. The pipeline does not require a
+runtime C++ compiler or OpenSSL development files. The selected regional PDF
+evidence reader still needs Poppler's `pdftotext` on `PATH`.
+Use GDAL 3.10.3 and
 PROJ 9.6.0 to match the original build's geometry runtime.
 For byte-for-byte V8 reproduction, use GDAL compiled with
 `-ffp-contract=off` in both `CMAKE_C_FLAGS` and `CMAKE_CXX_FLAGS`. This
