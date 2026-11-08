@@ -45,6 +45,13 @@ versioned `/review/.../` prefix when generating a published index. The display g
 is gzip data and must be served as `application/gzip`, without a `Content-Encoding`
 header, because the browser explicitly decompresses it.
 
+`atlas.map_release_objects` tracks the two R2 objects for each versioned
+row-run map. The `rows` stream stores row offsets and the `runs` stream stores
+run endpoints and category codes. Register both in one transaction after
+verifying the stored byte lengths and both sets of hashes. The table tracks
+outputs separately from the source catalog. See
+[`033_map_release_objects.sql`](migrations/033_map_release_objects.sql).
+
 ## Entity registry and staged stable-ID grid
 
 `migrations/002_entity_registry.sql` defines stable entity identities and revisioned
