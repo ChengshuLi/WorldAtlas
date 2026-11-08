@@ -26,9 +26,9 @@ for directory in (SCRIPTS, STAGE2):
 from exclusive_outputs import create_directory_exclusive, write_json_exclusive
 import contracts
 import engine
-import preflight
+import numeric_preflight as preflight
 import ural_delta
-from write_land_stream import write_land_stream
+from numeric_land_stream import write_land_stream
 
 
 def digest(path):
@@ -80,7 +80,7 @@ def benchmark(reference, out):
     grid=config['grid'];seed_roots=report['physical_coverage']['seed_roots']
     seed=json.loads(paths['seed_report'].read_bytes())
     delta=ural_delta.compile_rule(json.loads(paths['decision_snapshot'].read_bytes()),report['categories'],grid)
-    code={name:digest(STAGE2/name) for name in ('preflight.py','write_land_stream.py','ural_delta.py','engine.py','contracts.py')}
+    code={name:digest(STAGE2/name) for name in ('numeric_preflight.py','numeric_land_stream.py','row_overlay.py','write_land_stream.py','ural_delta.py','engine.py','contracts.py')}
     invocation={'schema':'worldatlas-python-land-sweep-benchmark-v1','reference':str(reference),
         'inputs':pins,'reference_report_sha256':report_hash,'config_sha256':report['config_sha256'],
         'expected_output_sha256':expected,'checkpoint_sha256':checkpoint_hash,'code_sha256':code,'python':sys.version,
@@ -94,7 +94,8 @@ def benchmark(reference, out):
     started=time.perf_counter()
     coverage=preflight.validate(grid['width'],grid['height'],*streams,roots,seed_roots,
         required_codes=map(int,report['categories']),seed_rules=seed['seed_rules'],
-        expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'])
+        expected_rule_population=seed['rule_population'],expected_category_counts=seed['category_cell_counts'],
+        batch_rows=preflight.DEFAULT_BATCH_ROWS)
     coverage_seconds=time.perf_counter()-started
     started=time.perf_counter()
     writer=write_land_stream(grid['width'],grid['height'],*streams,rootfile,codefile,seed_roots,
