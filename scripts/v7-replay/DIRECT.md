@@ -59,8 +59,7 @@ approval.
 5. `build_prefill_plan.py` consumes a configuration with `rle_inputs.physical`,
    `rle_inputs.land`, `coastal_band` and the selected `basins`. Each stream and
    report has its path and SHA-256. It binds source selection, decision policy,
-   explicit layer precedence and land lineage. `finish_prefill_config.py` can
-   attach a completed coast manifest to a pinned pending inventory.
+   explicit layer precedence and land lineage.
    `build_prefill.py` then produces the prefill streams and audit. Physical-water
    encoding comes from the validated producer contract: mixed land preserves
    unassigned water as 0; direct land uses 1. No report-hash allowlist is used.
