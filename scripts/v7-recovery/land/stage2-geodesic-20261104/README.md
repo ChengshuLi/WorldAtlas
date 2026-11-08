@@ -197,3 +197,16 @@ coverage. The integrated full-kernel pair passed with every decision, output has
 Ural count identical: 104.133 s legacy versus 89.160 s integrated. See the
 [full receipt and scope](../../../../docs/benchmarks/land-batch-integration-20261108.md).
 It is not raw-pipeline/geographic acceptance.
+
+### Numeric writer prototype
+
+`numeric_land_stream.py` is not a production import. It explores the measured
+29.6 s writer cost with ordinary numeric row batches and streaming offset files.
+Every component/physical/seed interval and assignment remains checked. Ural land
+centers use the original scalar floating-point arithmetic and classifier; only
+compressed output transitions are retained. No pixel-sized ROI array or
+memory-based admission rule is introduced, even for a sparse UINT32-width row.
+The legacy writer stays the independent oracle/default until complete byte
+parity and separate timing justify a change. `compare_land_writers.py` consumes
+only assignments from a checksum-verified complete fresh-search checkpoint;
+expected labels are used only for the final byte comparison.
