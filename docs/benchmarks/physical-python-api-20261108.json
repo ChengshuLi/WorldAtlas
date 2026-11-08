@@ -80,6 +80,22 @@
     "physical-python-api-20261108-recheck5-receipt.json": "9a486332ef06c81df170f2881a178958e8889fb75fb6ab26639268aac449c2f0",
     "physical-python-api-20261108-physical-receipt.json": "521031e21627e344d35b1be9ab55a3d7d28bf543006eada05a6016cee6baf4d2"
   },
+  "profiling": {
+    "source_ordinal": 6,
+    "source_rows": 2093933,
+    "status": "Complete source counts and every mask pixel match the pinned oracle",
+    "artifacts": ["physical-python-api-20261108-shard6-profile.json", "physical-python-api-20261108-shard6-profile.pstats"],
+    "profiled_wall_seconds": 51.334699225000804,
+    "largest_self_times_seconds": {
+      "OGR_Geometry_IsValid_975748_calls": 16.012554374,
+      "Python_burn_body": 9.817401828000001,
+      "GDAL_RasterizeLayer_226_batches": 8.039993131000001,
+      "OGR_CreateGeometryFromWkb_2083731_calls": 1.7677618570000002,
+      "repeated_numpy_iinfo_construction_2083731_calls": 1.131533025
+    },
+    "interpretation": "GEOS validity, Python control/indexing and rasterization dominate this source. Repeated dtype-limit construction is invariant work to review. Further batching or in-process concurrency needs measurement and exact verification.",
+    "limitation": "cProfile adds per-call overhead and this is one complete source. These times attribute work; they are not an uninstrumented speed comparison. Cumulative times overlap. No producer change followed this measurement."
+  },
   "final_fast_checks": {
     "raw_mask_tests": 61,
     "water_harness_and_profile_tests": 39,
