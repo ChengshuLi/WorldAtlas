@@ -33,7 +33,10 @@ class SeedRasterBenchmarkTests(unittest.TestCase):
         metadata=staged/'additional-metadata';metadata.mkdir();archive=metadata/'fresh-stage2-rasterizer-report';write(archive,expected)
         seed={'grid':grid,'rasterizer_report_sha256':bench.digest(archive),'resource_controls':{'strip_rows':1},
             'seed_rules':[{'component_id_current_generation_only':1,'region_id':'area','inside_code':17,'outside_code':18}]}
-        write(staged/'fresh-stage2-seed-report',seed);write(staged/'fresh-stage2-core-config',{'grid':grid,'inputs':component})
+        tiles=root/'tiles';tiles.mkdir();tile=tiles/'00000-00000.bin'
+        np.asarray([(0,0,4,17),(1,0,4,17)],dtype='<u4').tofile(tile)
+        manifest=tiles/'manifest.txt';manifest.write_text(f'0 0 2 1 {bench.digest(tile)}\n')
+        write(staged/'fresh-stage2-seed-report',seed);write(staged/'fresh-stage2-core-config',{'grid':grid,'inputs':{**component,'tile_manifest':pin(manifest)}})
         assets={p.name:{'sha256':bench.digest(p),'size_bytes':p.stat().st_size} for p in staged.iterdir() if p.is_file()}
         write(staged/'plan.json',{'grid':grid,'assets':assets})
         write(regions/'report.json',{'status':'exact-pinned-polygons-recreated-with-fresh-closure-proofs','publishable':False,
@@ -45,9 +48,10 @@ class SeedRasterBenchmarkTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td);staged,regions=self.fixture(root);out=root/'pair'
             with patch('subprocess.Popen',side_effect=AssertionError('no process')),patch('ctypes.CDLL',side_effect=AssertionError('no bridge')):
-                result=bench.run(staged,regions,out,2)
+                result=bench.run(staged,regions,out,2,verify_tiles=root/'tiles')
             self.assertEqual(result['status'],'complete-seed-streams-and-populations-exact')
             self.assertEqual(result['results'][0]['outputs_sha256'],result['results'][1]['outputs_sha256'])
+            self.assertEqual(result['tile_verification']['tile_records'],2)
             with self.assertRaises(FileExistsError):bench.run(staged,regions,out,2)
 
     def test_source_geometry_and_fresh_proof_tampering_fail(self):

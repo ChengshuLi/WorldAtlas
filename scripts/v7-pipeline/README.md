@@ -398,3 +398,8 @@ records source fingerprints and UTC intervals, and supports
 writer or any complete stage. The experimental files are not imported by the
 production runner, and the production default is unchanged. No complete-input
 speed or parity claim is made until an isolated pair has passed.
+
+The seed pair accepts `--verify-tiles DIRECTORY` to run the independent Python
+tile verifier against its freshly generated complete seed. That directory must
+have the exact core-config-pinned manifest. The receipt records the verifier
+source hash, directory identity, UTC interval and complete tile/record counts.

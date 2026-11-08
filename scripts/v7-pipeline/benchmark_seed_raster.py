@@ -58,7 +58,7 @@ def configuration(staged, recovered):
     return config,expected
 
 
-def run(staged, recovered, out, workers):
+def run(staged, recovered, out, workers, *, verify_tiles=None):
     if type(workers) is not int or workers<1:raise ValueError('positive workers required')
     config,expected=configuration(staged,recovered)
     sources={name:digest(RASTER/name) for name in ('build_seed.py','seed_runtime.py')}
@@ -67,6 +67,15 @@ def run(staged, recovered, out, workers):
     invocation={'schema':'worldatlas-seed-raster-api-pair-v1','driver_sha256':digest(Path(__file__)),
         'staged_plan_sha256':digest(staged/'plan.json'),'recovered_report_sha256':digest(recovered/'report.json'),
         'code_sha256':sources,'workers':[1,workers],'config':config,'started_at_utc':datetime.now(timezone.utc).isoformat()}
+    tile_identity=None
+    if verify_tiles is not None:
+        verify_tiles=Path(verify_tiles).resolve(strict=True)
+        core=json.loads((staged/'fresh-stage2-core-config').read_bytes())
+        expected_manifest=core['inputs']['tile_manifest']['sha256']
+        if digest(verify_tiles/'manifest.txt')!=expected_manifest:raise ValueError('seed tile manifest differs')
+        tile_identity={'directory':str(verify_tiles),'manifest_sha256':expected_manifest,
+            'verifier_source_sha256':digest(STAGE2/'verify_seed_index.py')}
+    invocation['tile_identity']=tile_identity
     write_json_exclusive(out/'invocation.json',invocation,indent=2)
     create_directory_exclusive(out/'requests')
     results=[]
@@ -79,11 +88,23 @@ def run(staged, recovered, out, workers):
         results.append({'variant':name,'workers':concurrency,'elapsed_seconds':elapsed,
             'started_at_utc':started_at,'finished_at_utc':datetime.now(timezone.utc).isoformat(),
             'outputs_sha256':result['outputs_sha256'],'report_sha256':digest(out/name/'report.json')})
+    tile_result=None
+    if tile_identity is not None:
+        verifier=source_module('_seed_pair_tile_verifier',STAGE2/'verify_seed_index.py',tile_identity['verifier_source_sha256'])
+        started_at=datetime.now(timezone.utc).isoformat();start=time.perf_counter()
+        tile_result=verifier.verify(out/'parallel/rows.u32le',out/'parallel/runs.u32le',verify_tiles,
+            config['grid']['width'],config['grid']['height'],1024)
+        tile_result={**tile_result,'elapsed_seconds':time.perf_counter()-start,'started_at_utc':started_at,
+            'completed_at_utc':datetime.now(timezone.utc).isoformat()}
+        if (digest(verify_tiles/'manifest.txt')!=tile_identity['manifest_sha256'] or
+                digest(STAGE2/'verify_seed_index.py')!=tile_identity['verifier_source_sha256'] or
+                {kind:digest(out/'parallel'/(kind+'.u32le')) for kind in ('rows','runs')}!=expected['outputs_sha256']):
+            raise ValueError('seed/verifier identity changed during tile proof')
     if {name:digest(RASTER/name) for name in sources}!=sources or digest(Path(__file__))!=invocation['driver_sha256']:
         raise ValueError('benchmark code changed')
     if configuration(staged,recovered)!=(config,expected):raise ValueError('source identity changed')
     report={**invocation,'status':'complete-seed-streams-and-populations-exact','publishable':False,
-        'results':results,'serial_over_parallel':results[0]['elapsed_seconds']/results[1]['elapsed_seconds'],
+        'results':results,'tile_verification':tile_result,'serial_over_parallel':results[0]['elapsed_seconds']/results[1]['elapsed_seconds'],
         'limitations':['One serial-first pair; cache order is not balanced.',
             'This times Python-API seed rasterization/composition only, not an entire land pipeline.',
             'Archived expected outputs and reports are used only after each fresh build.']}
@@ -95,5 +116,6 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--staged-inputs',type=Path,required=True);parser.add_argument('--recovered-regions',type=Path,required=True)
     parser.add_argument('--out',type=Path,required=True)
+    parser.add_argument('--verify-tiles',type=Path,help='authenticate every tile against the freshly generated seed; core manifest pin must match')
     parser.add_argument('--workers',type=int,default=len(os.sched_getaffinity(0)) if hasattr(os,'sched_getaffinity') else os.cpu_count() or 1)
-    args=parser.parse_args();print(json.dumps(run(args.staged_inputs,args.recovered_regions,args.out,args.workers),indent=2))
+    args=parser.parse_args();print(json.dumps(run(args.staged_inputs,args.recovered_regions,args.out,args.workers,verify_tiles=args.verify_tiles),indent=2))
