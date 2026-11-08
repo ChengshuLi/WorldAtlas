@@ -41,6 +41,10 @@ run endpoints and category codes. Register both in one transaction after
 verifying the stored byte lengths and both sets of hashes. The table tracks
 outputs separately from the source catalog. See
 [`033_map_release_objects.sql`](migrations/033_map_release_objects.sql).
+The `worldatlas-v8-viewer-inventory` document at version `v8.0` in
+`atlas.structured_documents` records the deployed viewer's seven R2 objects,
+their repository paths, byte lengths and SHA-256 hashes. The source catalog
+tracks raw data objects, including the parts of source archives.
 
 ## Entity registry and staged stable-ID grid
 
