@@ -136,6 +136,18 @@ def read(path):
     return json.loads(Path(path).read_bytes())
 
 
+def catalog_references(value):
+    if isinstance(value, list):
+        for item in value:
+            yield from catalog_references(item)
+    elif isinstance(value, dict):
+        if 'r2_source' in value:
+            yield value
+        for key, item in value.items():
+            if key != 'r2_source':
+                yield from catalog_references(item)
+
+
 def source_json_bytes(value, serialization='pretty-ascii'):
     if serialization == 'physical-report-v1':
         # The physical producer's original field order is part of this pin.
@@ -213,7 +225,8 @@ class Pipeline:
         if (not isinstance(selections, dict) or not required <= selections.keys() or
                 set(selections) - required - {'prior_physical_report', 'ocean_snapshot', 'reference_rows', 'reference_runs'}):
             raise ValueError('wrong source selection input set')
-        self.sources = {name: self.resolve_source(name, spec) for name, spec in selections.items()}
+        resolved = self.resolve_raw_catalog(selections)
+        self.sources = {name: self.resolve_source(name, spec) for name, spec in resolved.items()}
         if bool('reference_rows' in self.sources) != bool('reference_runs' in self.sources):
             raise ValueError('both reference stream pins are required')
         self.collect_source_files()
@@ -275,6 +288,51 @@ class Pipeline:
                 self.timing.close()
             self.run_lock.close()
             raise
+
+    def resolve_raw_catalog(self, selections):
+        """Expand exact raw source versions before any raw objects are acquired."""
+        resolved = copy.deepcopy(selections)
+        references = [(spec, 'size' if name == 'raw_manifest' else 'size_bytes')
+                      for name, value in resolved.items() for spec in catalog_references(value)]
+        if not references:
+            return selections
+
+        requested = set()
+        for spec, _ in references:
+            identity = spec['r2_source']
+            if (not isinstance(identity, dict) or set(identity) != {'source_id', 'version'}
+                    or any(not isinstance(v, str) or not v.strip() for v in identity.values())
+                    or {'r2_bucket', 'r2_key', 'source_id', 'version', 'sha256', 'size_bytes', 'size'} & spec.keys()):
+                raise ValueError('invalid raw catalog reference')
+            requested.add((identity['source_id'], identity['version']))
+
+        rows = sorted(self.neon_raw_catalog(sorted(requested)))
+        catalog = {(row[0], row[1]): row for row in rows}
+        if catalog.keys() != requested:
+            raise ValueError('Neon raw catalog is missing selected source versions')
+        if hashlib.sha256(json_bytes(rows)).hexdigest() != self.cfg.get('raw_catalog_sha256'):
+            raise ValueError('Neon raw catalog metadata differs from the config pin')
+        for spec, size_field in references:
+            identity = spec.pop('r2_source')
+            source_id, version, bucket, key, digest, size = catalog[identity['source_id'], identity['version']]
+            spec.update(source_id=source_id, version=version, r2_bucket=bucket, r2_key=key, sha256=digest)
+            spec[size_field] = size
+        return resolved
+
+    def neon_raw_catalog(self, requested):
+        import psycopg
+
+        connection = os.environ.get('NEON_DATABASE_URL')
+        if not connection:
+            raise ValueError('set NEON_DATABASE_URL for read-only access to the raw source catalog')
+        source_ids, versions = zip(*requested, strict=True)
+        with psycopg.connect(connection) as database:
+            database.execute('SET TRANSACTION READ ONLY')
+            return database.execute(
+                "SELECT a.source_id, a.version, a.r2_bucket, a.r2_key, a.sha256, a.size_bytes "
+                "FROM atlas.source_assets AS a "
+                "JOIN unnest(%s::text[], %s::text[]) AS selected(source_id, version) USING (source_id, version) "
+                "WHERE a.kind = 'raw'", (list(source_ids), list(versions))).fetchall()
 
     def cloud_file(self, spec):
         """Resolve one pinned R2 file, Neon document or ZIP member locally."""

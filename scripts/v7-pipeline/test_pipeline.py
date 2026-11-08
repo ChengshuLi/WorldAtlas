@@ -135,6 +135,36 @@ class Fixture(unittest.TestCase):
             destination.write_bytes(payloads[entry['r2_key']])
         return patch.object(module, 'download_r2', side_effect=download)
 
+    def test_catalog_resolves_exact_versions_before_r2_acquisition(self):
+        payload = b'{}'
+        raw = self.cloud(payload)
+        identity = {'source_id': 'fixture', 'version': 'v1'}
+        reference = {'r2_source': identity}
+        row = ('fixture', 'v1', raw['r2_bucket'], raw['r2_key'], raw['sha256'], len(payload))
+        self.cfg['raw_catalog_sha256'] = hashlib.sha256(pipeline.json_bytes([row])).hexdigest()
+        self.cfg['sources']['seavox_archive'] = reference
+        self.cfg['sources']['raw_manifest'] = {'json': {'files': [{'path': 'raw/fixture', **reference}]}}
+        calls = []
+        with (patch.object(pipeline.Pipeline, 'neon_raw_catalog', return_value=[row]) as lookup,
+              self.fake_r2({raw['r2_key']: payload}, calls)):
+            runner = self.make()
+        lookup.assert_called_once_with([('fixture', 'v1')])
+        self.assertEqual(calls, [raw['r2_key']])
+        self.assertEqual(runner.sources['seavox_archive'].read_bytes(), payload)
+        manifest = pipeline.read(runner.sources['raw_manifest'])
+        size = raw.pop('size_bytes')
+        self.assertEqual(manifest['files'], [{'path': 'raw/fixture', 'size': size, **identity, **raw}])
+
+    def test_catalog_pin_mismatch_stops_before_r2(self):
+        self.cfg['raw_catalog_sha256'] = '0' * 64
+        self.cfg['sources']['seavox_archive'] = {'r2_source': {'source_id': 'fixture', 'version': 'v1'}}
+        row = ('fixture', 'v1', 'worldatlas', 'sources/input.json', 'a' * 64, 2)
+        with (patch.object(pipeline.Pipeline, 'neon_raw_catalog', return_value=[row]),
+              self.fake_r2({}, []) as download):
+            with self.assertRaisesRegex(ValueError, 'catalog metadata differs'):
+                self.make()
+        download.assert_not_called()
+
     def test_one_configuration_fetches_pinned_r2_inputs_into_selected_work_directory(self):
         payload = b'{}'
         self.cfg['sources'] = {key: self.cloud(payload) for key in self.cfg['sources']}

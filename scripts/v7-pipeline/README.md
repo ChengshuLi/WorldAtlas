@@ -84,9 +84,15 @@ The default output is `WORK_DIR/run`. An explicit output and `--resume` retain
 their existing behavior. Source downloads and ZIP extraction happen within this
 invocation, before processing; they are excluded from setup processing time.
 
-A `sources` entry can be a local `{path, sha256}` pin, a pinned R2 file with
-`r2_bucket`, `r2_key`, `sha256`, and integer `size_bytes`, or `{json: ...}` containing
-the ordinary stage document directly. A pinned Neon document uses
+A raw R2 input can use `{r2_source: {source_id: ..., version: ...}}`.
+Setup looks up the selected raw versions in `atlas.source_assets` in one
+read-only query. The `raw_catalog_sha256` config field pins the sorted result,
+including each bucket, key, size, and checksum. The pipeline downloads and
+verifies the bytes directly from R2.
+
+A `sources` entry can also be a local `{path, sha256}` pin, an explicit R2
+pin with `r2_bucket`, `r2_key`, `sha256`, and integer `size_bytes`, or
+`{json: ...}` containing the ordinary stage document directly. A pinned Neon document uses
 `{neon: {source_id: ..., version: ...}, sha256: ..., size_bytes: ...}`.
 Inline stage documents can use the same
 R2 pins in their dataset/static-file fields and nested `{json: ...}` file inputs.
