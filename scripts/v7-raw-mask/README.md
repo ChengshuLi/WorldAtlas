@@ -38,3 +38,16 @@ inputs and partial or failed downloads.
 The physical stage writes `pipeline-identity.json` and an append-only `processing-events.jsonl` in its own output directory. If interrupted, run the same command with `--resume`. It verifies the original configuration, source and code identity and checks each completed land, shard, union and physical output before reuse. Incomplete files are moved into an `interrupted` directory for inspection; existing local source files are never removed. A partial downloaded source is preserved there; a complete matching download may be reused. A completed output can also be verified by a later `--resume` invocation. Never change an input or code file between attempts.
 
 The report's `processing_elapsed_seconds` is the accumulated attempt wall time excluding serialized source downloads, when every attempt has a durable end event; `source_download_elapsed_seconds` is reported separately. If a process is killed without recording its end, `timing_complete` is false, `processing_elapsed_seconds` is null, and `recorded_processing_elapsed_seconds` is only a measured lower bound. A fresh uninterrupted timing run is required for an exact total in that case. Staging requires one shard worker so downloads do not overlap processing. Checkpoints and timing files survive process interruption only while the workspace itself survives; they are not remote backups.
+
+The physical stages run through Python functions, including the water batches
+over the already-loaded GDAL library. No physical-stage compiler, custom native
+helper or subprocess is required. See [the water parity harness](overture/README.md).
+
+After a complete paired water-manifest run, use
+`verify_selected_physical.py SELECTED_CONFIG PAIRED_WATER_OUTPUT INPUT_CACHE_ROOT NEW_OUTPUT`
+to verify the final physical result in-process. It checks every paired shard
+report/mask, validates cached pinned OSM inputs, rasterizes unchanged land once,
+and builds both complete unions and physical compositions. Normal reference-mask
+and row/run checks must report zero differences. Reports retain original input
+and producer pins. Shared unchanged land and accumulated source trials make this
+a full-input parity proof, not a paired end-to-end timing or geographic approval.
