@@ -83,6 +83,13 @@ class PrefillTests(unittest.TestCase):
                 prefill.main()
                 self.assertEqual(np.fromfile(out / 'prefill-rows.u32le', dtype='<u4').tolist(), [0, 2, 3])
                 self.assertEqual(np.fromfile(out / 'prefill-runs.u32le', dtype='<u4').tolist(), [2, 2, 4, 0, 4, 18])
+                column_out=base/'column-output'
+                column_argv=[*argv[:-1],str(column_out),'--column-engine']
+                with patch.object(sys,'argv',column_argv):prefill.main()
+                for name in ('prefill-rows.u32le','prefill-runs.u32le'):
+                    self.assertEqual((out/name).read_bytes(),(column_out/name).read_bytes())
+                audits=[json.loads((directory/'prefill-audit.json').read_text()) for directory in (out,column_out)]
+                self.assertEqual(*[{k:v for k,v in audit.items() if k!='processing_elapsed_seconds'} for audit in audits])
                 with self.assertRaises(FileExistsError):
                     prefill.main()
                 argv[-1] = str(root / 'bad')
@@ -135,3 +142,58 @@ class DiagnosticPrefillIntegrationTests(unittest.TestCase):
     for i,values in enumerate(([4,1,4,18],[4,0,4,0])):
      (root/'land').write_bytes(np.array(values,dtype='<u4').tobytes());plan['rle_inputs']['land']['runs_sha256']=digest(root/'land');pp.write_text(json.dumps(plan));argv[-1]=str(base/f'bad-{i}')
      with self.assertRaises(ValueError):prefill.main()
+
+
+class ColumnPrefillIntegrationTests(unittest.TestCase):
+ def test_three_priority_sparse_tiles_exact_full_writer_and_audit(self):
+  import gzip
+  with tempfile.TemporaryDirectory() as tmp:
+   base=Path(tmp);root=base/'inputs';root.mkdir()
+   def put(name,data):
+    p=root/name;p.write_bytes(data);return p
+   rows=put('rows',np.asarray([0,1,3,4],dtype='<u4').tobytes())
+   grids={}
+   for name,values in [('physical',[16,1,8,1,16,17,16,17]),('v6',[16,8,8,8,16,18,16,18])]:
+    runs=put(name,np.asarray(values,dtype='<u4').tobytes())
+    grids[name]={'rows_path':rows.name,'rows_sha256':digest(rows),'runs_path':runs.name,'runs_sha256':digest(runs)}
+   layers=[]
+   for label,priority,overrides,code,bounds in [
+    ('low',-100,[],2,{0:(1,10),1:(1,5)}),
+    ('middle',5,['low'],4,{0:(3,8),1:(3,6)}),
+    ('highest',10**40,['low','middle'],6,{0:(5,11)})]:
+    records=[{'row':y,'spans':[{'start':a,'end':b,'code':code,'rule_id':'arbitrary-policy','member_id':label}]} for y,(a,b) in bounds.items()]
+    tile=put(label+'.jsonl.gz',gzip.compress(('\n'.join(map(json.dumps,records))+'\n').encode()))
+    manifest={'schema':'worldatlas-full-water-assignment-tiles-v1','status':'complete','grid':{'width':16,'height':3},
+              'coverage':{'complete':True},'tiles':[{'path':tile.name,'sha256':digest(tile),'row_start':0,'row_end_exclusive':3}]}
+    mp=put(label+'.json',json.dumps(manifest).encode())
+    layers.append({'layer_id':label,'manifest_path':mp.name,'manifest_sha256':digest(mp),'priority':priority,'overrides':overrides,'allowed_codes':[code]})
+   plan=put('plan.json',json.dumps({'schema':'worldatlas-v7-full-grid-composition-plan-v1',
+    'grid':{'width':16,'height':3},'rle_inputs':grids,'water_layers':layers}).encode())
+   with patch.object(c,'W',16),patch.object(c,'H',3),patch.object(c,'GRID',{'width':16,'height':3}):
+    for engine in ('reference','columns'):
+     argv=['--plan',str(plan),'--input-root',str(root),'--out',str(base/engine),'--allow-unverified-snapshot','--allow-historical-v6']
+     if engine=='columns':argv.append('--column-engine')
+     prefill.main(argv,emit=lambda value:None)
+   for name in ('prefill-rows.u32le','prefill-runs.u32le'):
+    self.assertEqual((base/'reference'/name).read_bytes(),(base/'columns'/name).read_bytes())
+   audits=[json.loads((base/engine/'prefill-audit.json').read_text()) for engine in ('reference','columns')]
+   self.assertEqual(*[{k:v for k,v in audit.items() if k!='processing_elapsed_seconds'} for audit in audits])
+   self.assertEqual(np.fromfile(base/'columns/prefill-runs.u32le',dtype='<u4').tolist(),
+                    [1,0,3,2,5,4,11,6,16,0,1,0,3,2,6,4,8,0,16,18,16,18])
+   # A source span can start on water and cross an interior land boundary.
+   # Neither resolver alone proves that invariant: full writer cuts must reject it.
+   tile=root/'low.jsonl.gz'
+   tile.write_bytes(gzip.compress((json.dumps({'row':1,'spans':[{'start':1,'end':10,'code':2,
+      'rule_id':'arbitrary-policy','member_id':'low'}]})+'\n').encode()))
+   manifest_path=root/'low.json';manifest=json.loads(manifest_path.read_text())
+   manifest['tiles'][0]['sha256']=digest(tile);manifest_path.write_text(json.dumps(manifest))
+   layers[0]['manifest_sha256']=digest(manifest_path)
+   document=json.loads(plan.read_text());document['water_layers']=[layers[0]];plan.write_text(json.dumps(document))
+   with patch.object(c,'W',16),patch.object(c,'H',3),patch.object(c,'GRID',{'width':16,'height':3}):
+    for engine in ('reference','columns'):
+     out=base/('interior-land-'+engine)
+     argv=['--plan',str(plan),'--input-root',str(root),'--out',str(out),'--allow-unverified-snapshot','--allow-historical-v6']
+     if engine=='columns':argv.append('--column-engine')
+     with self.assertRaisesRegex(ValueError,'continent-water span covers physical land row=1 x=8:10'):
+      prefill.main(argv,emit=lambda value:None)
+     self.assertFalse((out/'prefill-audit.json').exists())

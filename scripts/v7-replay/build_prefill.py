@@ -13,6 +13,7 @@ from exclusive_outputs import create_binary_exclusive, create_directory_exclusiv
 import numpy as np
 import compose_full_water_grid as c
 from build_prefill_plan import validate_land_report, validate_physical_report, validate_shared_audit
+from prefill_columns import LayerPolicy
 
 
 def direct_land_water_code(report,report_sha,lineage):
@@ -45,7 +46,9 @@ def main(argv=None, *, emit=print):
  ap.add_argument('--allow-unverified-snapshot',action='store_true',help='test only: Neon acceptance cannot yet be authenticated by this tool')
  ap.add_argument('--allow-draft-snapshot',action='store_true',help='research only: allow a draft plan')
  ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved WGS84 coastal land-cell-center method')
- ap.add_argument('--allow-historical-v6',action='store_true',help='historical replay only: permit V6 land');a=ap.parse_args(argv)
+ ap.add_argument('--allow-historical-v6',action='store_true',help='historical replay only: permit V6 land')
+ ap.add_argument('--column-engine',action='store_true',help='research: resolve validated spans as numeric columns; verify full-input parity before adoption')
+ a=ap.parse_args(argv)
  if not a.allow_unverified_snapshot:raise ValueError('authenticated Neon revision verification is not implemented; explicit test-only flag required')
  root=Path(a.input_root).resolve()
  if not root.is_dir():raise ValueError('input root must exist')
@@ -99,6 +102,7 @@ def main(argv=None, *, emit=print):
   layers.append((ent,m))
  create_directory_exclusive(out)
  cursors=[(ent,c.RowCursor(m,0,c.H,'water')) for ent,m in layers]
+ policy=LayerPolicy([ent for ent,_ in layers]) if a.column_engine else None
  pr,pu=rles['physical'];landr,landu=rles[land_key];rawr=out/'prefill-rows.u32le';rawu=out/'prefill-runs.u32le'
  counts={str(k):0 for k in range(23)};runs_written=0;overlap_cells=0;assigned_cells=0;residual_cells=0;land_cells=0
  with create_binary_exclusive(rawr) as yf,create_binary_exclusive(rawu) as rf:
@@ -109,21 +113,27 @@ def main(argv=None, *, emit=print):
    if (int(pe[-1])!=c.W or int(ve[-1])!=c.W or np.any(pe[1:]<=pe[:-1])
        or np.any(ve[1:]<=ve[:-1]) or int(pe[0])==0 or int(ve[0])==0):
     raise ValueError(f'bad RLE endpoints on row {y}')
-   spans=[]
-   for ent,cur in cursors:
-    ss=cur.take(y)
-    for s in ss:
-     if s[3]>6:raise ValueError(f"prefill layers may only assign water code 1–6, got {s[3]} on row {y}")
-     if 'allowed_codes' in ent and s[3] not in ent['allowed_codes']:
-      raise ValueError(f"assignment code not allowed by selected basin policy on row {y}: {s[3]}")
-    spans.extend(c.add_layer_identity(ss,int(ent['priority']),str(ent.get('layer_id',ent['manifest_path'])),set(ent.get('overrides',[]))))
-   ass,conflicts=c.choose_assignments(spans,y,pe,pv)
-   overlap_cells+=sum(b-a for a,b in {(a,b) for a,b,_,_ in conflicts})
-   assignment_columns=c.assignment_arrays(ass)
-   xx=c.merge_row_cuts(pe,ve,assignments=ass,assignment_columns=assignment_columns)
+   if policy is None:
+    spans=[]
+    for ent,cur in cursors:
+     ss=cur.take(y)
+     for s in ss:
+      if s[3]>6:raise ValueError(f"prefill layers may only assign water code 1–6, got {s[3]} on row {y}")
+      if 'allowed_codes' in ent and s[3] not in ent['allowed_codes']:
+       raise ValueError(f"assignment code not allowed by selected basin policy on row {y}: {s[3]}")
+     spans.extend(c.add_layer_identity(ss,int(ent['priority']),str(ent.get('layer_id',ent['manifest_path'])),set(ent.get('overrides',[]))))
+    ass,conflicts=c.choose_assignments(spans,y,pe,pv)
+    overlap_cells+=sum(b-a for a,b in {(a,b) for a,b,_,_ in conflicts})
+    assignment_columns=c.assignment_arrays(ass)
+   else:
+    chunks=[(index,cur.take(y)) for index,(_,cur) in enumerate(cursors)]
+    resolved=policy.resolve(chunks,y,pe,pv)
+    overlap_cells+=resolved.overlap_cells
+    assignment_columns=resolved.columns
+   xx=c.merge_row_cuts(pe,ve,assignment_columns=assignment_columns)
    starts=xx[:-1];ends=xx[1:]
    phys=c.row_code_at(pe,pv,starts);land=c.row_code_at(ve,vv,starts)
-   assigned_codes,assigned=c.assignment_codes(ass,starts,columns=assignment_columns)
+   assigned_codes,assigned=c.assignment_codes((),starts,columns=assignment_columns)
    land_mask,water_mask=validate_row_codes(phys,land,assigned,assigned_codes,starts,ends,y,land_water_code)
    lens=(ends-starts).astype(np.uint64)
    codes=np.where(land_mask,land,np.where(assigned,assigned_codes,0)).astype(np.uint8,copy=False)

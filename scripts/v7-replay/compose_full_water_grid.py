@@ -201,9 +201,11 @@ def assignment_codes(assignments, xs, columns=None):
     xs = np.asarray(xs)
     codes = np.zeros(xs.shape, dtype=np.uint8)
     present = np.zeros(xs.shape, dtype=bool)
-    if not assignments or not xs.size:
+    if not xs.size or (columns is None and not assignments):
         return codes, present
     starts, stops, values = columns if columns is not None else assignment_arrays(assignments)
+    if not starts.size:
+        return codes, present
     idx = np.searchsorted(starts, xs, side='right') - 1
     present = idx >= 0
     safe = np.maximum(idx, 0)
@@ -235,7 +237,7 @@ def merge_row_cuts(*ends, assignments=(), extra_bounds=(), assignment_columns=No
     """
     parts = [np.asarray([0, W], dtype=np.uint32)]
     parts.extend(np.asarray(x, dtype=np.uint32) for x in ends)
-    if assignments:
+    if assignments or assignment_columns is not None:
         starts, stops, _ = assignment_columns if assignment_columns is not None else assignment_arrays(assignments)
         bounds = np.empty(starts.size + stops.size, dtype=np.uint32)
         bounds[0::2] = starts
