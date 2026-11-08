@@ -424,3 +424,12 @@ little-endian float64 and categories as uint32. A complete success report is
 written only after context exit/source checks and all per-block fingerprints
 match. `--candidate-first` reverses query order. These are kernel QA timings,
 not a prefill, final-land, geographic-acceptance or whole-water speed claim.
+
+The 2026-11-08 staged global proof checked all 49,401,908 coastal points/categories
+bit-for-bit on source-bound provisional Stage 2 land. Query calls were 46.568 s
+for the original extractor and 5.536 s indexed; separate generation preparation
+was 16.955 s and final source verification 0.277 s. This is one reference-first
+kernel pair, not whole-water speedup or final-land acceptance. The coastal batch
+already uses the index; the new opportunity is verified reuse by basin consumers.
+Exact pins, canonical point hashes and UTC anchors are in
+[`water-shore-index-20261108.json`](../../docs/benchmarks/water-shore-index-20261108.json).
