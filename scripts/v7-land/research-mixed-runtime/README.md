@@ -6,6 +6,13 @@ snapshot. It resolves named points, source polygons and regional policies
 against components produced by the same run. The
 [V8 runner](../../v7-pipeline/README.md) prepares the request and code pins.
 
+The Port Fouad entry cites the pinned `worldatlas-v7-review-references`
+index for the main Suez Canal side convention. `entry_evidence.py` verifies
+the index against its catalog pin. The regional resolver applies the selected
+source polygons to the current grid. The 315-cell comparison span linked by
+the citation is preserved as `v8-historical-port-fouad-v7-comparison-span`
+in `atlas.structured_documents`.
+
 The small synthetic checks can be run with GDAL Python bindings, NumPy, SciPy and pyproj available:
 
 ```sh
