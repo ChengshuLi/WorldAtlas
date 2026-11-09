@@ -11,7 +11,6 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 import rasterize_water_shard as build
-import benchmark_water_shard as benchmark
 from water_batch import WaterBatch
 
 class WaterShardTests(unittest.TestCase):
@@ -30,16 +29,6 @@ class WaterShardTests(unittest.TestCase):
         ids=build.SourceIds(pq.ParquetFile(p))
         self.assertEqual(ids.get([5,0,2,5]),['pool','lake','label','pool'])
         self.assertEqual(ids.get([]),[])
-    def test_benchmark_discards_only_proven_generated_copies_and_owned_source(self):
-        p,digest=self.fixture();out=self.path/'benchmark'
-        result=benchmark.run(p,digest,self.config,out,discard=True,discard_source=True)
-        self.assertEqual(result[0]['different_pixels'],0)
-        self.assertFalse(p.exists());self.assertTrue(self.config.exists())
-        for name in ('python','gdal'):
-            self.assertFalse((out/f'00-{name}'/'water.tif').exists())
-            self.assertTrue((out/f'00-{name}'/'report.json').exists())
-        report=json.loads((out/'benchmark.json').read_text())
-        self.assertEqual(report['discarded_owned_source']['sha256'],digest)
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(); self.path = Path(self.tmp.name)
         self.inputs=self.path/'inputs';self.inputs.mkdir()

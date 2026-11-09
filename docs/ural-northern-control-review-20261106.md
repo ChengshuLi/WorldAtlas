@@ -20,8 +20,7 @@ interpretation, not exact continental-boundary coordinates:
   the mirror and official PDF is not established. The mirror's R2 readback
   SHA-256 is `e4655ca6122b02cc1fe039291a9b96c1c5cacf1f632b94b3fc61e586aab7d1a7`.
 
-On the research line, `screen_federal_basin_control_points.py` sampled
-coordinate-linear segments at up to 20 m WGS84 length: control 144 was about
+The control-point check sampled coordinate-linear segments at up to 20 m WGS84 length: control 144 was about
 203 m from the nearest sampled point, and control 146 about 491 m. The first
 control lies well south of the gap-00 join; the second is near gap-02. These
 are sampled distances, not certified minima. Control-point datum, placement

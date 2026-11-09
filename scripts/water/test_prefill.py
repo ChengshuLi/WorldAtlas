@@ -51,7 +51,7 @@ class PrefillTests(unittest.TestCase):
             out = base / 'output'
             argv = ['build_prefill', '--allow-unverified-snapshot', '--plan', str(pp), '--input-root', str(root), '--out', str(out)]
             with patch.object(c, 'W', 4), patch.object(c, 'H', 2), patch.object(c, 'GRID', {'width': 4, 'height': 2}), patch.object(sys, 'argv', argv), patch.object(prefill, 'validate_land_report', return_value=None), contextlib.redirect_stdout(io.StringIO()):
-                obsolete={**plan,'rle_inputs':{'physical':rles['physical'],'v6':rles['land']}}
+                obsolete={**plan,'rle_inputs':{'physical':rles['physical'],'unsupported_grid':rles['land']}}
                 pp.write_text(json.dumps(obsolete))
                 with self.assertRaisesRegex(ValueError,'physical and direct land grids'):
                     prefill.main()

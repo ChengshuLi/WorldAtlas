@@ -48,7 +48,7 @@ class PrefillPlanTest(unittest.TestCase):
             config={'rle_inputs':rles,'coastal_band':coast,'basins':[basin]};config_path=put('inputs.json',json.dumps(config).encode())
             plan_path=base/'plan.json'
             with patch.object(c,'W',4),patch.object(c,'H',2),patch.object(c,'GRID',{'width':4,'height':2}):
-                obsolete={**config,'rle_inputs':{'physical':rles['physical'],'v6':rles['land']}}
+                obsolete={**config,'rle_inputs':{'physical':rles['physical'],'unsupported_grid':rles['land']}}
                 with self.assertRaisesRegex(ValueError,'physical and direct land grids'):
                     plans.assemble(obsolete,config_path,root,policy,policy_path,base/'obsolete-plan')
                 # Direct land must bind the same physical inputs and decision snapshot.
