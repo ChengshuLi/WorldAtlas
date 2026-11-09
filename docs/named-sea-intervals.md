@@ -1,63 +1,45 @@
-# Exact nearest-shore region certificates
+# How we assign water in a shared sea
 
-The shared SeaVoX basin builder classifies physical-water **cell centers** against
-the complete set of four-neighbor physical coastal land-cell centers. Distances
-remain WGS84 geodesic center-to-center distances. The participant priority and
-tie tolerance come from the pinned decision snapshot. No water-path distance,
-coastline approximation, candidate cap, or changed geography is introduced.
+**TL;DR.** In a shared sea, assign each water cell to the continent with the nearest shore. The build assigns a whole block at once when it can prove the same continent wins throughout. Otherwise it splits the block and checks any remaining cells individually.
 
-## Certificate
+## The assignment rule
 
-Let `d_C(p)` be the shortest WGS84 distance from query center `p` to a center in
-participant class `C`. The triangle inequality makes every `d_C` 1-Lipschitz.
-For a row interval, choose an actual middle cell center `m`. Every center in the
-interval is within distance `r` of `m`, where a conservative upper bound is the
-length of the constant-latitude ellipsoidal path:
+When two or more continents share a named sea, each water cell goes to the continent with the nearest shore. The build considers only the continents listed for that sea.
 
-`r = a/(1-f) * cos(latitude) * maximum_longitude_offset_in_radians + 0.01 metres`.
+It measures the shortest distance along the WGS84 ellipsoid from the center of the water cell to the center of a coastal land cell. A land cell counts as coastal if it shares an edge with a water cell. The sea’s decision record sets how close distances must be to count as a tie and which continent wins a tie.
 
-Here `a` and `f` are the WGS84 equatorial radius and flattening. The true prime
-vertical radius never exceeds `a/(1-f)`, and a geodesic is no longer than this
-latitude path. The unwrapped interval and middle center are chosen in integer
-grid columns, including intervals crossing the canonical longitude seam.
+## How the build speeds this up
 
-At `m`, let `U` upper-bound one candidate class's distance and let `L_C`
-lower-bound each competing class. The existing crop-boundary lower bound also
-bounds any shoreline omitted from a wrapped index. If every competitor and the
-omitted shore satisfy `U + 2*r + tie_tolerance < L`, the same candidate class
-strictly wins at **every** interval center. This follows by adding `r` to the
-winner's upper bound and subtracting `r` from the competitors' lower bounds.
+1. Take a rectangle of water cells and check distances near its middle.
+2. If one continent’s shore is far enough ahead to win everywhere in the rectangle, give all the selected water cells there to that continent.
+3. If the result is uncertain, split the rectangle and try again. Check any cells that remain unresolved individually.
 
-Cheap spherical/chord lower bounds certify most intervals. If they overlap,
-the builder computes complete exact WGS84 class minima at the midpoint. Their
-millimetre-expanded bounds often certify a whole interval even when the looser
-spherical bounds cannot certify its individual centers. The existing exact
-minimum search proves exclusion of every omitted shore center; unresolved wide
-searches stream the complete input. No nearest-neighbor prefix is a hard cap.
+The shortcut gives the same assignments as checking every cell separately. For example, suppose two continents share a sea and one shore is 10 km closer at the middle of a rectangle. If every cell is within 2 km of the middle, the lead can shrink by at most 4 km. At least 6 km of the lead remains, so the same shore wins throughout the rectangle if the tie tolerance is less than 6 km.
 
-An interval that cannot be proved is subdivided. Small unresolved intervals use
-the unchanged point classifier, including priority, tolerance, numerical
-ambiguity checks and full-shore fallback. Missing classes or an interval outside
-the indexed crop also use the full-shore-capable point path. Floating-point
-guards make certificates conservative; they do not enlarge the decision's tie
-tolerance or permit an approximate label.
+## How the build proves a rectangle is safe to assign
 
-The default rectangle execution engine extends the same proof
-across both columns and rows. It intersects the complete selected row spans with
-canonical source windows and streams consecutive 64-row groups. Selected cells
-are never dropped at a window, tile or group edge. For a rectangle, its middle
-latitude/longitude and extreme cell-center offsets give a conservative radius
-by integrating the straight latitude/longitude segment with the largest WGS84
-principal radius and largest parallel cosine in the rectangle. Subdivision skips
-only regions containing no selected cells. Point fallback and strict tie rules
-are unchanged. `--research-interval` retains the row engine and `--pointwise-nearest`
-retains the original point engine. The producer records a distinct rectangle execution method and
-helper hash; the consumer verifies these rather than relabeling row provenance.
+Call the middle point `m` and let `r` be a conservative upper bound on the distance from `m` to any selected cell center in the rectangle. The nearest-shore distance for any continent can change by at most `r` between those points. That follows from the triangle inequality.
 
-Before an expensive exact midpoint query, both engines also test whether any
-class could possibly certify the region. Its spherical nearest distance gives
-both a lower and an upper ellipsoidal bound using the minimum and maximum WGS84
-metric radii. If even the most optimistic gap is no larger than twice the region
-radius plus tolerance, exact refinement cannot certify it, so subdivision proceeds
-directly. The antipodal chord-only lower-bound branch instead uses a conservative
-half-circumference upper bound. This gate removes work, never shoreline candidates.
+At `m`, let `U` be an upper bound on the candidate’s nearest-shore distance and `L` a lower bound on a competitor’s. The candidate wins throughout the rectangle if this is true for every competitor and any shore outside the local search window.
+
+```text
+U + 2 × r + tie tolerance < L
+```
+
+The two copies of `r` cover the worst case. The candidate’s shore could get farther away by `r` while the competitor’s shore gets closer by `r`. The strict inequality keeps the shortcut out of tie cases.
+
+### Implementation details
+
+- **Distance bounds.** The rectangle bound uses its midpoint, the farthest offsets in latitude and longitude, and conservative WGS84 radii along that path. The row-only version uses an actual middle cell and bounds the distance along that latitude. It uses the WGS84 equatorial radius divided by one minus the flattening as an upper bound on the radius of curvature, scales by the latitude cosine and longitude offset in radians, and adds a 1 cm numerical margin. Both versions handle the map seam.
+- **Fast checks first.** Bounds based on spherical distances often settle the result. When those bounds overlap, the build first checks whether a more precise midpoint measurement could possibly establish a large enough lead. If it could, the build computes the exact WGS84 minimum distance at that point for any continent still in contention and expands the bounds by a millimetre. Near antipodal points, the chord-only lower-bound calculation uses half the maximum ellipsoid circumference as a conservative upper bound.
+- **Fallback.** If the build still cannot rule out a closer shore outside the local search window after subdivision, it checks the unresolved cells individually. It also uses this check if the index lacks one of the continents. That check can scan the full shoreline. It retains the decision’s tie rules and handles numerical uncertainty.
+- **Coverage.** The rectangle engine works within source windows in groups of 64 rows. It divides or skips a region only as needed and skips a region only when it contains no selected cells. Every selected cell is accounted for, including at window, tile, and row-group edges.
+
+The rectangle engine is the default. The standalone builder also offers `--research-interval` to check stretches of a single row and `--pointwise-nearest` to check one cell at a time. The basin output records which engine ran and the hash of its helper code. The next stage verifies those records.
+
+## Where this runs in the code
+
+- The [basin builder](../scripts/water/build_seavox_basin.py) reads the sea’s decisions and selects the engine.
+- The [rectangle engine](../scripts/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
+- The [individual-cell check](../scripts/water/wrapped_bounds.py) calls the [nearest-shore search](../scripts/water/shared_nearest.py) and uses a [full-shore scan](../scripts/water/streamed_shore_fallback.py) when needed.
+- The [row-only engine](../scripts/water/interval_nearest.py) implements the single-row reference method.
