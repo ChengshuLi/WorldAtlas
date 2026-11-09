@@ -1,4 +1,4 @@
-# Current map UI
+# Map viewer
 
 This folder contains the streamlined WorldAtlas interface deployed at the Cloudflare root. It renders the V8.0 native grid. `config.json` pins the row-offset and run streams, which remain in R2. The V8.0 reproduction matched the published grid byte for byte.
 

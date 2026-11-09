@@ -4,7 +4,7 @@ The settled project contract is in [the data strategy](docs/data-strategy.md).
 
 ## Published V8 map
 
-The [current viewer](web/current/README.md) renders the V8.0 map from two
+The [map viewer](web/viewer/README.md) renders the V8.0 map from two
 checksum-verified row-run streams. The Cloudflare Worker serves the viewer and
 streams from the `worldatlas` R2 bucket.
 
@@ -36,8 +36,8 @@ Use the new Cloudflare account specified in `wrangler.jsonc`. Authenticate with
 Wrangler; never commit credentials. Deploy with `wrangler deploy`. The Worker
 requires an R2 binding named `ATLAS` to the `worldatlas` bucket.
 
-Publish `web/current/index.html` as `review/index.html` and
-`web/current/sources.html` as `review/v8.0/sources.html`. The viewer loads its
+Publish `web/viewer/index.html` as `review/index.html` and
+`web/viewer/sources.html` as `review/v8.0/sources.html`. The viewer loads its
 JavaScript, CSS and configuration from the versioned asset prefix in the HTML.
 V8.0 is the first WorldAtlas release. Its row and run streams are
 `review/v8.0/rows.u32le.gz` and `review/v8.0/runs.u32le.gz`. Serve them as
@@ -50,7 +50,7 @@ run endpoints and category codes. Register both in one transaction after
 verifying the stored byte lengths and both sets of hashes. The table tracks
 outputs separately from the source catalog. See
 the [initial database schema](database/migrations/001_initial_schema.sql).
-The `worldatlas-v8-viewer-inventory` document at version `v8.0` in
+The `worldatlas-v8-viewer-inventory` document in
 `atlas.structured_documents` records the deployed viewer's seven R2 objects,
 their repository paths, byte lengths and SHA-256 hashes. The source catalog
 tracks raw data objects, including the parts of source archives.
