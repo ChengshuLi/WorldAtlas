@@ -1,6 +1,6 @@
 # WorldAtlas Data Strategy
 
-This document describes the design for the full project. V8 implements the first continent and ocean map. The [pipeline guide](../scripts/pipeline/README.md) describes the current build.
+This document describes the design for the full project. The [pipeline guide](../scripts/pipeline/README.md) describes the current build.
 
 ## Contents
 
@@ -77,21 +77,21 @@ Non-river-water locations are named and selectable. Land-continent groups includ
 
 **Bounded and shared seas.** Group these seas separately using documented geographic limits, including their bays, sounds, and passages. List the waters that belong to each sea group. A source dataset may draw the main sea, its bays, and its passages separately. Apply the chosen geographic boundary convention consistently when source conventions differ.
 
-**Open coasts.** Use a uniform 12-nautical-mile (22.224-km) buffer. Measure the shortest distance along the WGS84 ellipsoid between the center of each water cell and the centers of coastal land cells on the grid. Where buffers overlap, use the nearer coast. Source islands absent from the land grid do not generate buffers. The buffer defines a geographic grouping for this map. National territorial waters have their own boundaries.
+**Open coasts.** Use a uniform 12-nautical-mile (22.224-km) buffer. Measure the shortest distance along the WGS84 ellipsoid between the center of each water cell and the centers of coastal land cells on the grid. Where buffers overlap, use the nearer coast. Source islands absent from the land grid do not generate buffers. The buffer defines a geographic grouping for this map.
 
-**Ocean assignments and connections.** Check that every ocean cell is assigned to the correct ocean. Check how cells connect by sharing an edge, first across all oceans together and then within each ocean. Count connections across the left and right edges of the map, where the world wraps around. If a sea at the edge of an ocean is disconnected from the rest of that ocean on the map, record why the separation is correct.
+**Ocean assignments and connections.** Verify ocean labels and check which cells connect by shared edges, across all oceans and within each one. Include connections where the map’s left and right edges meet. Explain any expected separations.
 
 **Enclosed water.** If a connected patch of water marked as ocean is surrounded by one continent, assign it to that continent. If the patch borders several continents and it is unclear which one it belongs to, review it before assigning it.
 
 #### Editable records and published grid
 
-Store editable geography records in Neon/PostGIS with stable numeric IDs, names, hierarchy levels and parents, and source polygons. Each location also records whether it is land or water. Code derives the approved hierarchy, app tables, river display and selection data, and the canonical cell grid. Neon holds the approved hierarchy and metadata. R2 holds the canonical cell-ID grid. V8 uses continent and ocean category codes in its published grid.
+Store editable geography records in Neon/PostGIS with stable numeric IDs, names, hierarchy levels and parents, and source polygons. Each location also records whether it is land or water. Code derives the approved hierarchy, app tables, river display and selection data, and the canonical cell grid. Neon holds the approved hierarchy and metadata. R2 holds the canonical cell-ID grid.
 
 Store one canonical logical grid. Use a compact lossless encoding such as row runs so the builder can write the grid incrementally and the viewer can load it all up front. In the location grid, each unsigned 16-bit value stores a location ID. Reserve 0 during construction, leaving 65,535 usable values, and widen to 32 bits if needed. Every published cell has an assignment. Compression size depends on the final geography.
 
 ### Research, cell review, publication, and rivers
 
-Generate candidate cell assignments from polygons and research inputs. For each proposal, record its parent area, sources, reasoning, review status, and the revision it starts from. Keep incomplete or invalid drafts when they can be corrected. Check IDs, hierarchy, and whether the source geometry can be used. Each cell in the approved parent area must belong to exactly one child area, and every child cell must be inside the parent. Investigate source-polygon gaps and overlaps. Check conflicts against the affected records and relevant parent boundaries. Separate areas can proceed in parallel, and work can continue in one area while the same level is still being completed elsewhere.
+Generate candidate cell assignments from polygons and research inputs. For each proposal, record the geographic unit being divided, such as the province when proposing its locations. Also record the sources, reasoning, review status, and starting revision. Keep incomplete or invalid drafts when they can be corrected. Check IDs, hierarchy, and whether the source geometry can be used. Each cell in the approved parent area must belong to exactly one child area, and every child cell must be inside the parent. Investigate source-polygon gaps and overlaps. Check conflicts against the affected records and relevant parent boundaries. Separate areas can proceed in parallel, and work can continue in one area while the same level is still being completed elsewhere.
 
 Each geography-research scope has one accountable owner from research through validation and delivery; separate areas can proceed concurrently.
 
