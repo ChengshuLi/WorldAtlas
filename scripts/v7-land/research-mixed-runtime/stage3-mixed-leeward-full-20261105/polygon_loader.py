@@ -15,7 +15,7 @@ OSM_CODE_V3_SHA256='1ec2c1b224528698a0e2e5bf6bd6fecd657e659da30de8188e3a7b12497f
 OSM_CODE_V4=Path(__file__).resolve().parent.parent/'osm-relation-adapter-20261104/osm_outer_relation_v4.py'
 OSM_CODE_V4_SHA256='618fece35eac7aa13cd05957a517f278004be8a6be5fd62d965e6d649cac10dd'
 ANCHOR_CODE=Path(__file__).resolve().parent.parent/'aegean-rhodes-method-20261104/osm_anchored_outer_ring_v1.py'
-ANCHOR_CODE_SHA256='1d7ba4312a3c08ff56272b2e2e392eda0ba5cf4e7c7e9afaa3ad7a895bcddd21'
+ANCHOR_CODE_SHA256='9357946b80a7b077ca2824786eb1f303c9835bd1466d43e283c06e53342b824e'
 LABEL_CODE=Path(__file__).resolve().parent.parent/'osm-label-member-prototype-20261104/label_member_v2.py'
 LABEL_CODE_SHA256='ddb285bd1fdc198617f9e38f9efd3b46f62a4df6c74b828dce317c7e91a1b61f'
 ADMIN_CODE=Path(__file__).resolve().parent.parent/'osm-relation-adapter-20261104/osm_admin_envelope_v1.py'
@@ -117,5 +117,5 @@ def extract(feature,source_pin):
  if version in ('osm-multipolygon-outer-v3','osm-multipolygon-outer-v4'):
   tags=feature.get('expected_identity_tags');allowed={'name','name:en','place','wikidata'}|({'alt_name'} if version=='osm-multipolygon-outer-v4' else set());need(isinstance(tags,dict) and set(tags)<=allowed and tags.get('place')==('archipelago' if feature.get('source_class')=='archipelago' else 'island') and (feature.get('source_class')!='archipelago' or version=='osm-multipolygon-outer-v4') and any(isinstance(tags.get(k),str) and tags[k] for k in ('name','name:en')) and all(isinstance(v,str) and v and trace.get('tags',{}).get(k)==v for k,v in tags.items()),'OSM relation identity tags mismatch');trace['verified_identity_tags']=tags
  with codepath.open('rb') as f:after=f.read((1<<20)+1)
- need(after==code and p.stat().st_size==source_pin['size_bytes'],'source or extractor changed');trace.update(extractor_version=feature['extractor_version'],extractor_sha256=expected,limitation='Source geometry is runtime-derived; historical V7 source-byte identity must be assessed separately.')
+ need(after==code and p.stat().st_size==source_pin['size_bytes'],'source or extractor changed');trace.update(extractor_version=feature['extractor_version'],extractor_sha256=expected,limitation='The extractor derives geometry from the pinned OSM capture.')
  return g,trace
