@@ -13,6 +13,12 @@ source polygons to the current grid. The 315-cell comparison span linked by
 the citation is preserved as `v8-historical-port-fouad-v7-comparison-span`
 in `atlas.structured_documents`.
 
+Regional entries also keep older List 1 item identifiers as decision lineage.
+For example, the Greater Antilles entry carries forward the historical
+North America convention and selects whole components with the current
+Natural Earth group polygon. The exact V7 comparison spans linked by these
+older item identifiers are preserved in `v8-historical-list1-comparison-spans`.
+
 The small synthetic checks can be run with GDAL Python bindings, NumPy, SciPy and pyproj available:
 
 ```sh
