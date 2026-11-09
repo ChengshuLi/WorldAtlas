@@ -24,3 +24,15 @@ python -m unittest discover -s scripts/lydekker -p 'test_*.py'
 On the original inputs and software versions, the generated 10,703 coordinate pairs exactly match `smoothed-candidate-v2.json` (file SHA-256 `8b6fb89e0e329095a1cb6a45c1c24de431f29b93b9a238311d3fcd2cd6a8392f`), although this program emits a different GeoJSON wrapper. The original candidate and its diagnostics remain external. Floating-point results may differ across dependency versions; review such changes rather than treating file hashes as geographic accuracy claims.
 
 The resulting smoothed geometry is registered for research in `atlas.geographic_line_observations` as `lydekker-anu-figure81-regional-smoothed-v1`; its canonical geometry SHA-256 is `0c3ada39efe778e42808a112d8cf264703b1966cf0dab1df8a002fcc0f2df94a`. Registration is not a map rebuild or acceptance of a geography partition.
+
+## Boo adjustment used by V8
+
+The project shifted the line smoothly west to put Boo Besar on the Oceania side. The displacement is centered at 1.17°S, extends 0.45° latitude on each side, and peaks at 0.30° longitude. Export the smoothed Neon observation with its `geometry` field, or use the matching GeoJSON from the smoothing command.
+
+```sh
+python scripts/lydekker/apply_boo_adjustment.py \
+  --observation /external/lydekker-review.geojson \
+  --output /external/lydekker-boo-east.geojson
+```
+
+The implementation was reconstructed from the recorded method. Its 10,703 coordinates match `lydekker-anu-figure81-regional-boo-east-v2` in Neon and V8's pinned geometry SHA-256 `87514ff08498fa2e2a27bfe2f0a1026511b3c5f01acfbaecbf1f753392c33655`. The output uses a new GeoJSON wrapper.
