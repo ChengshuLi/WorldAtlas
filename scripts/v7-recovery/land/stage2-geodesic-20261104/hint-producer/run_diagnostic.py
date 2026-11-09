@@ -8,15 +8,6 @@ import hints
 
 NAMES={'physical_rows','physical_runs','component_rows','component_runs','seed_rows','seed_runs','representatives','tile_manifest','resolution_report','decision_snapshot','component_manifest'}
 
-# Exact local candidate is admissible only through an explicit diagnostic flag.
-def snapshot_source_allowed(snapshot, allow_local=False):
- if type(allow_local) is not bool: raise ValueError('invalid local diagnostic mode')
- if not isinstance(snapshot,dict): return False
- if snapshot.get('source')=='neon-export': return True
- if not allow_local or snapshot.get('source')!='local-derived-from-neon-export': return False
- try: return hashlib.sha256(json.dumps(snapshot,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()=='fddc8e6703d4bf8c089f5d94933f05bcf2c2f6580ef162508e772de9e0ed001f'
- except (TypeError,ValueError): return False
-
 def need(v,msg):
  if not v: raise ValueError(msg)
 def representative_byte_limit(tile_count):return tile_count*6*32*20
@@ -30,7 +21,7 @@ def digest(path,guard):
    if not b:break
    h.update(b)
  return h.hexdigest()
-def run(config_path,out_path, *, allow_local=False):
+def run(config_path,out_path):
  cp=Path(config_path).resolve();out=Path(out_path).resolve(); raw=read_bytes(cp);cfg=json.loads(raw)
  need(set(cfg)=={'schema','grid','codes','inputs','decision_revision','entity_revision','policy_id','policy_version','minimum_free_bytes'} and cfg['schema']=='source-only-hints-diagnostic-request-v1','bad request')
  inp=cfg['inputs'];need(isinstance(inp,dict) and set(inp)==NAMES,'bad inputs')
@@ -46,7 +37,7 @@ def run(config_path,out_path, *, allow_local=False):
  for k in sorted(paths):need(paths[k].is_file() and digest(paths[k],guard)==inp[k]['sha256'],'input hash mismatch: '+k)
  grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','step','west','north'} and type(grid['width']) is int and 1<=grid['width']<=0xffffffff and type(grid['height']) is int and 1<=grid['height']<=0xffffffff and grid['west']==-180,'bad grid')
  snapshot_bytes=read_bytes(paths['decision_snapshot']);snap=json.loads(snapshot_bytes)
- need(snap.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and snapshot_source_allowed(snap,allow_local),'invalid snapshot')
+ need(snap.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and snap.get('source')=='neon-export','invalid snapshot')
  dr=snap.get('decision_revision',{});er=snap.get('entity_revision',{})
  need(dr.get('id')==cfg['decision_revision'] and er.get('id')==cfg['entity_revision'] and dr.get('entity_revision')==er.get('id') and dr.get('status')=='draft' and er.get('status')=='draft','revision mismatch')
  policies=snap.get('distance_policies',[]);need(isinstance(policies,list),'missing distance policies')
@@ -99,5 +90,5 @@ def run(config_path,out_path, *, allow_local=False):
   raise
  return result
 if __name__=='__main__':
- if len(sys.argv) not in (3,4) or (len(sys.argv)==4 and sys.argv[3]!='--allow-local-provisional'):raise SystemExit('usage: run_diagnostic.py REQUEST.json NEW_OUTPUT_DIRECTORY [--allow-local-provisional]')
- print(json.dumps(run(sys.argv[1],sys.argv[2],allow_local=len(sys.argv)==4),sort_keys=True))
+ if len(sys.argv)!=3:raise SystemExit('usage: run_diagnostic.py REQUEST.json NEW_OUTPUT_DIRECTORY')
+ print(json.dumps(run(sys.argv[1],sys.argv[2]),sort_keys=True))

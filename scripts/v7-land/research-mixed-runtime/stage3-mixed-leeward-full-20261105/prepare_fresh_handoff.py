@@ -50,7 +50,6 @@ def prepare(template_path,outer_path,work_path,output_path,dest_path,regional_ou
  if report.get('status')!='stage2-provisional-only' or report.get('publishable') is not False or report.get('provisional_only') is not True or derived.get('provisional_only') is not True:raise ValueError('completed provisional Stage 2 required')
  if report.get('config_sha256')!=sha(work/'core-requests/config.json') or derived.get('outer_config_sha256')!=sha(outer_path):raise ValueError('same-run outer/core mismatch')
  inp=core['inputs'];stage2={'report':pin(stageout/'report.json'),'derived_manifest':pin(work/'derived/manifest.json'),'outer_config':pin(outer_path),'rows':pin(stageout/'rows.u32le'),'runs':pin(stageout/'runs.u32le'),'snapshot':inp['decision_snapshot'],'physical_rows':inp['physical_rows'],'physical_runs':inp['physical_runs'],'physical_report':inp['physical_report'],'physical_lineage_request':inp['physical_lineage_request'],'physical_lineage_report':core['orchestration']['physical_lineage_report']}
- if 'prior_physical_report' in inp:stage2['prior_physical_report']=inp['prior_physical_report']
  code={'orchestrator':report['orchestration']['orchestrator_sha256'],'core':report['code_sha256']['build_stage2.py'],'core_files':report['code_sha256'],'dependency_files':report['dependency_sha256'],'orchestration_files':derived['code_sha256']}
  for name,digest in code['orchestration_files'].items():
   if sha(STAGE2/name)!=digest:raise ValueError('current runtime code mismatch: '+name)

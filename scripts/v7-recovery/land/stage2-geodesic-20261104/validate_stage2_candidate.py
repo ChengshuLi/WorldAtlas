@@ -11,7 +11,7 @@ def validate(pins,approved_code,guard=None, *, provisional_diagnostic=False):
  contracts.need(guard is None or callable(guard),'invalid validation callback')
  callbacks=() if guard is None else (guard,)
  names={'report','derived_manifest','outer_config','rows','runs','snapshot','physical_rows','physical_runs','physical_report','physical_lineage_request','physical_lineage_report'}
- contracts.need(isinstance(pins,dict) and (set(pins)==names or (provisional_diagnostic is True and set(pins)==names|{'prior_physical_report'})),'exact candidate inputs required')
+ contracts.need(isinstance(pins,dict) and set(pins)==names,'exact candidate inputs required')
  paths={}
  for name,spec in pins.items():
   contracts.need(isinstance(spec,dict) and set(spec)=={'path','sha256'} and isinstance(spec['sha256'],str) and contracts.HEX.fullmatch(spec['sha256']),'invalid input pin')
@@ -27,31 +27,18 @@ def validate(pins,approved_code,guard=None, *, provisional_diagnostic=False):
  dep=approved_code['dependency_files'];contracts.need(set(approved_code['core_files'])==set(build_stage2.CODE_NAMES) and all(valid_digest(x) for x in approved_code['core_files'].values()) and set(approved_code['orchestration_files'])==expected_orchestration and all(valid_digest(x) for x in approved_code['orchestration_files'].values()) and set(dep)==set(expected_dependencies) and all(isinstance(dep[k],dict) and set(dep[k])==names and all(valid_digest(x) for x in dep[k].values()) for k,names in expected_dependencies.items()),'incomplete approved code closure')
  contracts.need(type(provisional_diagnostic) is bool,'invalid diagnostic mode')
  if provisional_diagnostic:
-  contracts.need(report.get('schema')=='stage2-source-geodesic-report-v1' and report.get('status')=='stage2-provisional-only' and report.get('publishable') is False and report.get('provisional_only') is True and report.get('orchestration',{}).get('provisional_only') is True and contracts.local_or_neon_source(snapshot),'selected mainland diagnostic candidate required')
+  contracts.need(report.get('schema')=='stage2-source-geodesic-report-v1' and report.get('status')=='stage2-provisional-only' and report.get('publishable') is False and report.get('provisional_only') is True and report.get('orchestration',{}).get('provisional_only') is True and snapshot.get('source')=='neon-export','selected mainland diagnostic candidate required')
  else:
   contracts.need(report.get('schema')=='stage2-source-geodesic-report-v1' and report.get('status')=='stage2-research-complete' and report.get('publishable') is False and report.get('provisional_only') is not True and report.get('orchestration',{}).get('provisional_only') is not True and snapshot.get('source')=='neon-export','completed research candidate required; provisional-only outputs are not selectable')
  for k,n in (('output_rows_sha256','rows'),('output_runs_sha256','runs'),('decision_snapshot_sha256','snapshot')):contracts.need(report.get(k)==pins[n]['sha256'],'candidate report mismatch: '+k)
  for n in ('physical_rows','physical_runs','physical_report','physical_lineage_request'):contracts.need(report.get('inputs_sha256',{}).get(n)==pins[n]['sha256'],'candidate input mismatch: '+n)
  grid=report.get('grid');outputs=physical.get('physical_output_sha256',physical.get('output_sha256',{}))
  contracts.need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==grid and outputs.get('rows.u32le')==pins['physical_rows']['sha256'] and outputs.get('runs.u32le')==pins['physical_runs']['sha256'],'physical report mismatch')
- metric=report.get('distance_policy',{});rev=report.get('decision_revision');entity=report.get('entity_revision');actual,categories,_=contracts.snap_policy(snapshot,rev,entity,metric.get('policy_id'),metric.get('version'),allow_local=provisional_diagnostic)
+ metric=report.get('distance_policy',{});rev=report.get('decision_revision');entity=report.get('entity_revision');actual,categories,_=contracts.snap_policy(snapshot,rev,entity,metric.get('policy_id'),metric.get('version'))
  policy=report.get('land_baseline_policy');contracts.need(actual==metric and isinstance(policy,dict) and policy==snapshot.get('land_baseline_policy') and policy.get('execution_status')=='selected_for_research' and policy.get('decision_revision')==rev and policy.get('distance_policy_id')==metric.get('policy_id') and policy.get('distance_policy_version')==metric.get('version'),'selected policy mismatch');contracts.policy_tolerance_metres(policy)
  contracts.validate_simple_policy(policy,rev,metric)
  same=policy['physical_report_sha256']==pins['physical_report']['sha256']
- if not same:
-  contracts.need(provisional_diagnostic is True and 'prior_physical_report' in paths and report.get('inputs_sha256',{}).get('prior_physical_report')==pins['prior_physical_report']['sha256'] and policy['physical_report_sha256']==pins['prior_physical_report']['sha256'],'prior physical report binding required')
-  arts=derived.get('artifacts',{});seed_pin=arts.get('seed_report');resolution_pin=arts.get('resolution_report')
-  for key,spec in (('seed_report',seed_pin),('resolution_report',resolution_pin)):
-   contracts.need(isinstance(spec,dict) and set(spec)=={'path','sha256'} and spec['sha256']==report.get('inputs_sha256',{}).get(key) and verify_inputs.sha_file(spec['path'],*callbacks)==spec['sha256'],'derived '+key+' pin mismatch')
-  with open(seed_pin['path'],'rb') as f:seed=json.load(f)
-  with open(resolution_pin['path'],'rb') as f:resolution=json.load(f)
-  prior=read('prior_physical_report');pp=dict(report['inputs_sha256']);pp['decision_snapshot']=pins['snapshot']['sha256']
-  equivalent=contracts.provisional_reproof(snapshot,seed,pp,prior,grid)
-  groups=contracts.resolution_roots(resolution,grid,pp,rev,entity)
-  _,_,entity_codes=contracts.snap_policy(snapshot,rev,entity,metric.get('policy_id'),metric.get('version'),allow_local=True)
-  contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=(guard or (lambda:None)),provisional_equivalence=equivalent)
- else:contracts.need('prior_physical_report' not in pins,'unexpected prior physical report')
- contracts.need(contracts.grids_equal(policy['grid'],grid) and all(policy[k+'_sha256']==pins[k]['sha256'] for k in ('physical_rows','physical_runs')) and (same or provisional_diagnostic),'selected policy physical/grid mismatch')
+ contracts.need(contracts.grids_equal(policy['grid'],grid) and all(policy[k+'_sha256']==pins[k]['sha256'] for k in ('physical_rows','physical_runs')) and same,'selected policy physical/grid mismatch')
  contracts.need(report.get('physical_lineage_report_sha256')==pins['physical_lineage_report']['sha256'] and report.get('physical_lineage_status')=='selected-sources-match-reported-lineage' and derived.get('physical_lineage_report',{}).get('sha256')==pins['physical_lineage_report']['sha256'] and report.get('orchestration',{}).get('physical_lineage_report',{}).get('sha256')==pins['physical_lineage_report']['sha256'],'physical lineage report binding mismatch')
  verified=verify_physical_lineage.validate_combined(snapshot,pins['snapshot']['sha256'],paths['physical_lineage_request'],pins['physical_report']['sha256'],pins['physical_rows']['sha256'],pins['physical_runs']['sha256'],grid,*callbacks);contracts.need(verified==lineage,'physical lineage verification mismatch')
  contracts.need(report.get('categories')=={str(k):v for k,v in categories.items()},'category report mismatch')

@@ -4,7 +4,7 @@ The caller authenticates the pinned Neon export and independently resolves the
 current stage-1 component witnesses before invoking this producer. No historical
 continent map, prior assignment checkpoint, or List 1 override is accepted.
 """
-import hashlib,json,os,re,shutil,signal,tempfile,time,runpy
+import hashlib,json,os,shutil,signal,tempfile,time,runpy
 from pathlib import Path
 from decimal import Decimal
 from fractions import Fraction
@@ -60,8 +60,7 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
  if os.path.lexists(work) or os.path.lexists(output) or not work.parent.is_dir() or not output.parent.is_dir() or work==output or work in output.parents or output in work.parents:raise ValueError('invalid work/output directory')
  with open(request_path,'rb') as f:raw=f.read()
  req=json.loads(raw,object_pairs_hook=no_duplicates);inp=req.get('inputs');grid=req.get('grid');controls=req.get('controls')
- if req.get('schema')!='worldatlas-stage2-seed-request-v1' or not isinstance(inp,dict) or set(inp) not in (INPUTS,INPUTS|{'terminal_checker'},INPUTS|{'terminal_checker','prior_physical_report'}) or not isinstance(grid,dict) or set(grid)!={'width','height','west','north','step'} or not isinstance(controls,dict) or set(controls)!={'disk_reserve_bytes','strip_rows'}:raise ValueError('invalid seed request')
- if 'prior_physical_report' in inp and not allow_local:raise ValueError('prior physical report is provisional-only')
+ if req.get('schema')!='worldatlas-stage2-seed-request-v1' or not isinstance(inp,dict) or set(inp) not in (INPUTS,INPUTS|{'terminal_checker'}) or not isinstance(grid,dict) or set(grid)!={'width','height','west','north','step'} or not isinstance(controls,dict) or set(controls)!={'disk_reserve_bytes','strip_rows'}:raise ValueError('invalid seed request')
  if type(controls['disk_reserve_bytes']) is not int or controls['disk_reserve_bytes']<0  or type(controls['strip_rows']) is not int or not 1<=controls['strip_rows']<=64:raise ValueError('invalid seed controls')
  external_guard=guard
  def guard():
@@ -75,29 +74,17 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
  for target in (work,output):
   if any(target==d or target in d.parents or d in target.parents for d in sources):raise ValueError('seed work/output overlaps inputs')
  if shutil.disk_usage(work.parent).free<controls['disk_reserve_bytes']:raise RuntimeError('disk reserve reached')
- snapshot=load_pinned_snapshot(inp['snapshot']['path'],inp['snapshot']['sha256'],guard);resolution=bounded_json(inp['resolution'],guard);rev,entity,boundaries,source_catalog=boundary_records(snapshot,allow_local=allow_local)
+ snapshot=load_pinned_snapshot(inp['snapshot']['path'],inp['snapshot']['sha256'],guard);resolution=bounded_json(inp['resolution'],guard);rev,entity,boundaries,source_catalog=boundary_records(snapshot)
  if resolution.get('grid')!=grid or resolution.get('component_manifest_sha256')!=inp['component_manifest']['sha256'] or any(resolution.get('input_sha256',{}).get(k)!=inp[k]['sha256'] for k in ('physical_rows','physical_runs','component_rows','component_runs')):raise ValueError('witness resolution input mismatch')
- regions,records=selected_regions(snapshot,rev,boundaries,source_catalog);rules=compile_rules(snapshot,resolution,inp['snapshot']['sha256'],[r['region_id'] for r in regions],allow_local=allow_local)
+ regions,records=selected_regions(snapshot,rev,boundaries,source_catalog);rules=compile_rules(snapshot,resolution,inp['snapshot']['sha256'],[r['region_id'] for r in regions])
  report=bounded_json(inp['physical_report'],guard);outputs=report.get('physical_output_sha256',report.get('output_sha256',{}))
  if report.get('status') not in ('candidate-only','stage1-complete') or report.get('grid')!=grid or outputs.get('rows.u32le')!=inp['physical_rows']['sha256'] or outputs.get('runs.u32le')!=inp['physical_runs']['sha256']:raise ValueError('physical report mismatch')
  contract=bounded_json(inp['closure_contract'],guard);physical=contract.get('physical',{});cg=contract.get('grid',{})
  if (contract.get('schema')!='physical-water-closure-contract-v1' and not (allow_local and contract.get('schema')=='physical-water-closure-contract-v2')) or physical.get('rows_sha256')!=inp['physical_rows']['sha256'] or physical.get('runs_sha256')!=inp['physical_runs']['sha256'] or physical.get('report_sha256')!=inp['physical_report']['sha256'] or physical.get('water_code')!=1 or physical.get('land_code')!=17 or cg.get('crs')!='EPSG:4326' or cg.get('width')!=grid['width'] or cg.get('height')!=grid['height'] or Fraction(str(cg.get('west')))!=Fraction(str(grid['west'])) or Fraction(str(cg.get('north')))!=Fraction(str(grid['north'])) or Fraction(cg.get('step_numerator'),cg.get('step_denominator'))!=Fraction(str(grid['step'])):raise ValueError('physical contract mismatch')
- local_candidate=allow_local and 'prior_physical_report' in inp
- if snapshot.get('source')=='local-derived-from-neon-export' and not local_candidate:raise ValueError('local candidate requires prior physical report')
- prior=None
- if local_candidate:
-  prior=bounded_json(inp['prior_physical_report'],guard)
-  prior_out=prior.get('physical_output_sha256',prior.get('output_sha256',{}))
-  if prior.get('status') not in ('candidate-only','stage1-complete') or prior.get('grid')!=grid or prior_out.get('rows.u32le')!=inp['physical_rows']['sha256'] or prior_out.get('runs.u32le')!=inp['physical_runs']['sha256']:raise ValueError('prior physical streams not equivalent')
- elif 'prior_physical_report' in inp:raise ValueError('prior report requires local provisional snapshot')
- historical={}
  for key,record in records.items():
   if key[0]!='route':continue
   p=record['provenance'];expected={'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'physical_report_sha256':inp['physical_report']['sha256'],'encoding_evidence_sha256':physical.get('encoding_evidence_sha256'),'contract_sha256':inp['closure_contract']['sha256'],'support_checker_sha256':inp['closure_checker']['sha256'],'checker_sha256':inp.get('terminal_checker',{}).get('sha256') if record['closure_method']=='physical_terminal_closure_v1' else inp['closure_checker']['sha256']}
-  if local_candidate:
-   if p.get('physical_rows_sha256')!=expected['physical_rows_sha256'] or p.get('physical_runs_sha256')!=expected['physical_runs_sha256'] or p.get('physical_report_sha256')!=inp['prior_physical_report']['sha256'] or any(not isinstance(p.get(k),str) or not re.fullmatch('[0-9a-f]{64}',p[k]) for k in expected):raise ValueError('historical route physical provenance mismatch')
-   historical[record['id']]=p
-  elif any(p.get(k)!=v for k,v in expected.items()):raise ValueError('route physical provenance differs from current stage-1 inputs')
+  if any(p.get(k)!=v for k,v in expected.items()):raise ValueError('route physical provenance differs from current stage-1 inputs')
 
  code_hashes={name:sha(BASE/name,guard) for name in CODE};code_hashes['rasterizer']=inp['seed_builder']['sha256'];code_hashes['rasterizer_kernel']=inp['seed_kernel']['sha256']
  work.mkdir(mode=0o700)
@@ -112,18 +99,8 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
   guard();result=build_region({'schema':'stage2-region-worker-request-v1','revision_id':rev,'records':list(records.values()),'sources':source_list,'decision':decision,'closure':closure},regionwork,guard);
   if any(result['code_sha256'].get(n)!=code_hashes[n] for n in ('region_worker.py','regions.py','closure_client.py')):raise ValueError('region worker code mismatch')
   g=result['geometry'];name=hashlib.sha256(decision['region_id'].encode()).hexdigest()+'.geojson';p=rinput/name;data=json.dumps({'type':'FeatureCollection','features':[{'type':'Feature','properties':{},'geometry':g}]},sort_keys=True,separators=(',',':'),allow_nan=False).encode();p.write_bytes(data);region_configs.append({'id':decision['region_id'],'geometry':{'path':str(p),'sha256':hashlib.sha256(data).hexdigest()},'witnesses':[{'lon':float(w['lon']),'lat':float(w['lat']),'inside':w['inside']} for w in decision['witnesses']]});region_traces.append(result['report'])
- if local_candidate:
-  route_ids=set(historical);verified=set()
-  for trace in region_traces:
-   for item in trace.get('input_trace',[]):
-    if item.get('kind')=='route':
-     proof=item.get('closure_proof',{});rid=item.get('id')
-     if rid not in historical or item.get('route_provenance')!=historical[rid] or proof.get('status')!='valid' or proof.get('physical_rows_sha256')!=inp['physical_rows']['sha256'] or proof.get('physical_runs_sha256')!=inp['physical_runs']['sha256'] or proof.get('contract_sha256')!=inp['closure_contract']['sha256']:raise ValueError('fresh route reproof missing or mismatched')
-     verified.add(rid)
-  if verified!=route_ids:raise ValueError('not every selected route was freshly reproved')
-  equivalence={'prior_report_sha256':inp['prior_physical_report']['sha256'],'current_report_sha256':inp['physical_report']['sha256'],'rows_sha256':inp['physical_rows']['sha256'],'runs_sha256':inp['physical_runs']['sha256'],'historical_route_provenance':historical,'fresh_reproof_route_ids':sorted(verified),'status':'equivalent-streams-fresh-proofs-provisional-only'}
  raster_rules=[{'component_id':r['component_id_current_generation_only'],'region_id':r['region_id'],'inside_code':r['inside_code'],'outside_code':r['outside_code']} for r in rules]
- config={'schema':'direct-region-seed-research-v1','grid':{**grid,'crs':'EPSG:4326'},'component_rows':inp['component_rows'],'component_runs':inp['component_runs'],'regions':region_configs,'rules':raster_rules,'evidence':[inp[k] for k in ('snapshot','resolution','physical_rows','physical_runs','physical_report','component_manifest','closure_checker','closure_contract')]+([inp['prior_physical_report']] if local_candidate else []),'strip_rows':controls['strip_rows'],'reserve_bytes':controls['disk_reserve_bytes']};config_path=rinput/'seed-config.json';config_path.write_text(json.dumps(config,sort_keys=True,indent=2)+'\n')
+ config={'schema':'direct-region-seed-research-v1','grid':{**grid,'crs':'EPSG:4326'},'component_rows':inp['component_rows'],'component_runs':inp['component_runs'],'regions':region_configs,'rules':raster_rules,'evidence':[inp[k] for k in ('snapshot','resolution','physical_rows','physical_runs','physical_report','component_manifest','closure_checker','closure_contract')],'strip_rows':controls['strip_rows'],'reserve_bytes':controls['disk_reserve_bytes']};config_path=rinput/'seed-config.json';config_path.write_text(json.dumps(config,sort_keys=True,indent=2)+'\n')
  execute_rasterizer(inp,config_path,seedout,guard)
  raster=bounded_json({'path':str(seedout/'report.json'),'sha256':sha(seedout/'report.json',guard)},guard)
  rows=sha(seedout/'rows.u32le',guard);runs=sha(seedout/'runs.u32le',guard)
@@ -140,7 +117,6 @@ def run(request_path,work_dir,output_dir,guard, *, allow_local=False):
  (seedout/'report.json').rename(seedout/'rasterizer-report.json')
  rasterizer_report_sha=sha(seedout/'rasterizer-report.json',guard)
  out={'schema':'worldatlas-stage2-mainland-seed-report-v1','status':'diagnostic-seed-pending-independent-provenance','publishable':False,'grid':grid,'decision_snapshot_sha256':inp['snapshot']['sha256'],'decision_revision':rev,'entity_revision':entity,'resolution_report_sha256':inp['resolution']['sha256'],'physical_rows_sha256':inp['physical_rows']['sha256'],'physical_runs_sha256':inp['physical_runs']['sha256'],'component_rows_sha256':inp['component_rows']['sha256'],'component_runs_sha256':inp['component_runs']['sha256'],'component_manifest_sha256':inp['component_manifest']['sha256'],'physical_report_sha256':inp['physical_report']['sha256'],'physical_code_contract':{'water':1,'land':17},'input_sha256':{k:v['sha256'] for k,v in inp.items()},'rasterizer_report_sha256':rasterizer_report_sha,'resource_controls':controls,'seed_rows_sha256':rows,'seed_runs_sha256':runs,'seed_roots':sorted(r['component_id_current_generation_only'] for r in rules),'rule_population':populations,'category_cell_counts':counts,'region_traces':region_traces,'seed_rules':rules,'code_sha256':code_hashes,'request_sha256':hashlib.sha256(raw).hexdigest(),'limitations':['Caller must authenticate the source snapshot and independently re-execute witness resolution and full physical/component coverage; a local-derived snapshot is provisional only.','Witnesses support component identity but do not prove absence of unintended bridges.','Stored boundary lineage and historical V2/V7 raster equivalence may be incomplete.','Stored route proof hashes are unverified evidence references; fresh closure checks are executed separately.','No island or List 1 overrides are applied.']}
- if local_candidate:out['provisional_physical_equivalence']=equivalence
  with open(seedout/'report.json','x') as f:json.dump(out,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
  fd=os.open(seedout/'rasterizer-report.json',os.O_RDONLY);os.fsync(fd);os.close(fd);fd=os.open(seedout,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  guard();move_noreplace(seedout,output)

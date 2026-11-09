@@ -59,7 +59,7 @@ def code_hashes(guard):
 def load_config(path):
  raw=build_stage2.read_bytes(path);obj=json.loads(raw)
  keys={'schema','grid','inputs','policy_id','policy_version','controls','seed_controls'}
- need(isinstance(obj,dict) and set(obj)==keys and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs']) in (BASE_INPUTS,PYTHON_INPUTS,BASE_INPUTS|{'prior_physical_report'},PYTHON_INPUTS|{'prior_physical_report'}),'invalid fresh orchestration config or historical input')
+ need(isinstance(obj,dict) and set(obj)==keys and obj['schema']=='stage2-fresh-orchestration-v1' and isinstance(obj['inputs'],dict) and set(obj['inputs']) in (BASE_INPUTS,PYTHON_INPUTS),'invalid fresh orchestration config or historical input')
  build_stage2.validate_controls(obj['controls'])
  s=obj['seed_controls'];need(isinstance(s,dict) and set(s)=={'strip_rows'} and type(s['strip_rows']) is int and 1<=s['strip_rows']<=64,'invalid seed controls')
  need(all(isinstance(obj[k],str) and obj[k] for k in ('policy_id','policy_version')),'invalid policy controls')
@@ -68,7 +68,6 @@ def load_config(path):
 def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  processing_started=time.monotonic()
  cp=Path(config_path).resolve();work=build_stage2.atomic_move.output_path(work_dir);out=build_stage2.atomic_move.output_path(output_dir);raw,cfg=load_config(cp);c=cfg['controls']
- need('prior_physical_report' not in cfg['inputs'] or provisional_only,'prior physical report is provisional-only')
  need(work.parent.is_dir() and out.parent.is_dir() and work!=out and not work.is_relative_to(out) and not out.is_relative_to(work),'invalid work/output')
  guard=lambda:checkpoints.guard(work.parent,c['minimum_free_bytes']);guard()
  paths={k:build_stage2.pin(v,guard) for k,v in cfg['inputs'].items()}
@@ -86,7 +85,7 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  need(SELECTED_POLICY_CROSSWALK_READY,'selected land-policy crosswalk not yet implemented')
  grid=cfg['grid'];need(isinstance(grid,dict) and set(grid)=={'width','height','west','north','step'} and type(grid['width']) is int and type(grid['height']) is int and 1<grid['width']<=0xffffffff and 0<grid['height']<=0xffffffff and grid['west']==-180 and grid['north']==90 and grid['step']==360/grid['width'] and 90-grid['height']*grid['step']>=-90-1e-8,'invalid global grid')
  closure_contract=json.loads(build_stage2.read_bytes(paths['closure_contract'],guard));need((closure_contract.get('schema')=='physical-water-closure-contract-v1' or (provisional_only and closure_contract.get('schema')=='physical-water-closure-contract-v2')) and closure_contract.get('physical',{}).get('rows_sha256')==cfg['inputs']['physical_rows']['sha256'] and closure_contract.get('physical',{}).get('runs_sha256')==cfg['inputs']['physical_runs']['sha256'] and closure_contract.get('physical',{}).get('report_sha256')==cfg['inputs']['physical_report']['sha256'],'physical closure contract/input mismatch')
- snapshot=json.loads(build_stage2.read_bytes(paths['decision_snapshot'],guard));need(snapshot.get('source')!='local-derived-from-neon-export' or (provisional_only and 'prior_physical_report' in paths),'local candidate requires provisional prior report');rev=snapshot.get('decision_revision',{}).get('id');entity=snapshot.get('entity_revision',{}).get('id');contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'],allow_local=provisional_only)
+ snapshot=json.loads(build_stage2.read_bytes(paths['decision_snapshot'],guard));rev=snapshot.get('decision_revision',{}).get('id');entity=snapshot.get('entity_revision',{}).get('id');contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
  pins={k:v['sha256'] for k,v in cfg['inputs'].items()};lineage=verify_physical_lineage.validate_combined(snapshot,pins['decision_snapshot'],paths['physical_lineage_request'],pins['physical_report'],pins['physical_rows'],pins['physical_runs'],cfg['grid'],guard);manifest=json.loads(build_stage2.read_bytes(paths['component_manifest'],guard));contracts.component_manifest(manifest,grid,pins)
  physical=json.loads(build_stage2.read_bytes(paths['physical_report'],guard));po=physical.get('physical_output_sha256',physical.get('output_sha256',{}));need(physical.get('status') in ('candidate-only','stage1-complete') and physical.get('grid')==grid and po.get('rows.u32le')==pins['physical_rows'] and po.get('runs.u32le')==pins['physical_runs'],'physical report mismatch')
  rr=json.loads(build_stage2.read_bytes(paths['resolution_request'],guard));rnames={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py'}
@@ -106,11 +105,10 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  write_json(work/'identity.json',identity);write_json(work/'lineage'/'report.json',lineage)
  rr=paths['resolution_request'];rout=work/'resolution'/'report.json'
  witness=load_worker(HERE/'v7-land/mainland-witness-prototype/resolve_mainland.py')['main']
- witness([str(rr),str(rout)]+(['--allow-local-provisional'] if provisional_only else []))
- resolution=json.loads(build_stage2.read_bytes(rout,guard));snapshot=json.loads(build_stage2.read_bytes(paths['decision_snapshot'],guard));need(snapshot.get('source')!='local-derived-from-neon-export' or (provisional_only and 'prior_physical_report' in paths),'local candidate requires provisional prior report');rev=snapshot['decision_revision']['id'];entity=snapshot['entity_revision']['id'];metric,categories,_=contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'],allow_local=provisional_only)
+ witness([str(rr),str(rout)])
+ resolution=json.loads(build_stage2.read_bytes(rout,guard));snapshot=json.loads(build_stage2.read_bytes(paths['decision_snapshot'],guard));rev=snapshot['decision_revision']['id'];entity=snapshot['entity_revision']['id'];metric,categories,_=contracts.snap_policy(snapshot,rev,entity,cfg['policy_id'],cfg['policy_version'])
  rp=pin(rout,guard);si={}
  for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel')):si[dst]=cfg['inputs'][src]
- if 'prior_physical_report' in cfg['inputs']:si['prior_physical_report']=cfg['inputs']['prior_physical_report']
  seedrequest=work/'requests'/'seed.json';seedwork=work/'seed-work-parent'/'build';seedout=work/'seed-work-parent'/'output'
  sr={'schema':'worldatlas-stage2-seed-request-v1','grid':cfg['grid'],'inputs':si,'controls':{'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']}};si['resolution']=rp;sr['inputs']=si;write_json(seedrequest,sr)
  seed_worker=load_worker(HERE/'seed-producer'/'seed_worker.py')['run']
@@ -119,10 +117,7 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  srows=pin(seedout/'rows.u32le',guard);sruns=pin(seedout/'runs.u32le',guard)
  # Verify selected rules, source/region traces and tie policy before using seed.
  groups={g['group_id']:g for g in resolution['groups']};entity_codes={b['entity_id']:b['code'] for b in snapshot['category_bindings'] if b['physical_class']=='land'}
- equivalent=False
- if 'prior_physical_report' in paths:
-  pins={k:v['sha256'] for k,v in cfg['inputs'].items()};prior=json.loads(build_stage2.read_bytes(paths['prior_physical_report'],guard));equivalent=contracts.provisional_reproof(snapshot,seed,pins,prior,cfg['grid'])
- contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=guard,provisional_equivalence=equivalent)
+ contracts.validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,guard=guard)
  tileout=work/'tiles-parent'/'tiles';g=cfg['grid'];tile=build_seed_tiles.build(srows['path'],sruns['path'],srows['sha256'],sruns['sha256'],g['width'],g['height'],tileout,disk_floor_bytes=c['minimum_free_bytes'])
  reps=work/'reps'/'representatives.u32le';representatives.build(tileout,tileout/'manifest.txt',tile['manifest_sha256'],reps,work/'reps'/'report.json',width=g['width'],height=g['height'],disk_floor_bytes=c['minimum_free_bytes'])
  # A separately compiled complete seed/tile verifier must precede hints. The
@@ -138,7 +133,7 @@ def run(config_path,work_dir,output_dir,resume=False,provisional_only=False):
  hr={'schema':'source-only-hints-diagnostic-request-v1','grid':g,'codes':sorted(categories),'inputs':hi,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']}
  hreq=work/'requests'/'hints.json';write_json(hreq,hr);hout=work/'hints-parent'/'hints'
  hint_worker=load_worker(HERE/'hint-producer'/'run_diagnostic.py')['run']
- hint_worker(str(hreq),str(hout),allow_local=provisional_only)
+ hint_worker(str(hreq),str(hout))
  artifacts={'resolution_report':rp,'seed_rows':srows,'seed_runs':sruns,'seed_report':pin(seedout/'report.json',guard),'tile_manifest':pin(tileout/'manifest.txt',guard),'representatives':pin(reps,guard),'hint_roots':pin(hout/'roots.u32le',guard),'hint_codes':pin(hout/'hints.u8',guard),'hint_report':pin(hout/'report.json',guard)}
  for spec in cfg['inputs'].values():build_stage2.pin(spec,guard)
  need(build_stage2.read_bytes(cp,guard)==raw and code_hashes(guard)==code,'orchestration input or code changed')
@@ -161,16 +156,15 @@ def finish_from_marker(cfg,raw,work,out,code,guard,resume,provisional_only=False
  need(verify_inputs.sha_file(seedreq,guard)==marker.get('seed_request_sha256') and verify_inputs.sha_file(hintreq,guard)==marker.get('hint_request_sha256'),'derived request hash mismatch')
  sr=json.loads(build_stage2.read_bytes(seedreq,guard));hr=json.loads(build_stage2.read_bytes(hintreq,guard));snap=json.loads(build_stage2.read_bytes(cfg['inputs']['decision_snapshot']['path'],guard))
  expected_seed={dst:cfg['inputs'][src] for dst,src in (('snapshot','decision_snapshot'),('physical_rows','physical_rows'),('physical_runs','physical_runs'),('physical_report','physical_report'),('component_rows','component_rows'),('component_runs','component_runs'),('component_manifest','component_manifest'),('closure_checker','closure_checker'),('terminal_checker','terminal_checker'),('closure_contract','closure_contract'),('seed_builder','seed_builder'),('seed_kernel','seed_kernel'))};expected_seed['resolution']=artifacts['resolution_report']
- if 'prior_physical_report' in cfg['inputs']:expected_seed['prior_physical_report']=cfg['inputs']['prior_physical_report']
  c=cfg['controls'];need(expected_seed['resolution']['sha256']==artifacts['resolution_report']['sha256'] and sr.get('schema')=='worldatlas-stage2-seed-request-v1' and sr.get('grid')==cfg['grid'] and sr.get('inputs')==expected_seed and sr.get('controls')=={'disk_reserve_bytes':c['minimum_free_bytes'],**cfg['seed_controls']},'seed request linkage mismatch')
  hint_inputs={k:cfg['inputs'][k] for k in ('physical_rows','physical_runs','component_rows','component_runs','decision_snapshot','component_manifest')};hint_inputs.update({k:artifacts[k] for k in ('seed_rows','seed_runs','resolution_report','representatives','tile_manifest')})
- rev=snap.get('decision_revision',{}).get('id');entity=snap.get('entity_revision',{}).get('id');_,categories,_=contracts.snap_policy(snap,rev,entity,cfg['policy_id'],cfg['policy_version'],allow_local=provisional_only)
+ rev=snap.get('decision_revision',{}).get('id');entity=snap.get('entity_revision',{}).get('id');_,categories,_=contracts.snap_policy(snap,rev,entity,cfg['policy_id'],cfg['policy_version'])
  need(hr=={'schema':'source-only-hints-diagnostic-request-v1','grid':cfg['grid'],'codes':sorted(categories),'inputs':hint_inputs,'decision_revision':rev,'entity_revision':entity,'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'minimum_free_bytes':c['minimum_free_bytes']},'hint request linkage mismatch')
  seed_report=json.loads(build_stage2.read_bytes(artifacts['seed_report']['path'],guard));hint_report=json.loads(build_stage2.read_bytes(artifacts['hint_report']['path'],guard));need(seed_report.get('request_sha256')==marker['seed_request_sha256'] and seed_report.get('input_sha256')=={k:v['sha256'] for k,v in expected_seed.items()} and hint_report.get('request_sha256')==marker['hint_request_sha256'],'request/report provenance mismatch')
  tiles=work/'tiles-parent'/'tiles';need(marker.get('tile_directory')==str(tiles) and tiles.is_dir() and marker.get('seed_tile_verification',{}).get('status')=='verified','tile verification binding mismatch')
  required=build_stage2.PYTHON_INPUTS if 'component_builder' in cfg['inputs'] else build_stage2.INPUTS
- inputs={k:v for k,v in cfg['inputs'].items() if k in required or k=='prior_physical_report'};inputs.update(artifacts)
- need(set(inputs)==required|({'prior_physical_report'} if 'prior_physical_report' in cfg['inputs'] else set()),'core input mapping mismatch')
+ inputs={k:v for k,v in cfg['inputs'].items() if k in required};inputs.update(artifacts)
+ need(set(inputs)==required,'core input mapping mismatch')
  seed_files={n:pin(HERE/'seed-producer'/n,guard) for n in SEED_REPORT_NAMES};seed_files.update({'rasterizer':cfg['inputs']['seed_builder'],'rasterizer_kernel':cfg['inputs']['seed_kernel']})
  resolver_files={'resolver':'v7-land/mainland-witness-prototype/resolve_mainland.py','helper':'v7-land/point-component-prototype/resolve.py','named_identity':'v7-land/named-identity-prototype/named_identity.py'}
  core={'schema':'stage2-source-geodesic-v1','grid':cfg['grid'],'inputs':inputs,'seed_code_files':seed_files,'resolution_code_files':{k:pin(HERE/v,guard) for k,v in resolver_files.items()},'hint_code_files':{n:pin(HERE/'hint-producer'/n,guard) for n in ('hints.py','run_diagnostic.py')},'tile_directory':str(tiles),'policy_id':cfg['policy_id'],'policy_version':cfg['policy_version'],'controls':cfg['controls'],'orchestration':{'outer_config_sha256':outer,'orchestrator_sha256':code['orchestrate_stage2.py'],'derived_manifest':marker_pin,'physical_lineage_report':lineage_pin,'provisional_only':provisional_only}}
