@@ -8,12 +8,19 @@ The [current viewer](web/current/README.md) renders the V8.0 map from two
 checksum-verified row-run streams. The Cloudflare Worker serves the viewer and
 streams from the `worldatlas` R2 bucket.
 
+## Pipeline code
+
+- [Prepare structured geography](scripts/raw-to-structured/) from raw sources. These tools reconstruct and verify boundary geometry and other inputs for review and registration in Neon.
+- [Build the map](scripts/map-build/pipeline/README.md) from selected Neon records and the raw R2 inputs the build reads directly. This includes the physical land and water grid, land and water assignment, and final composition.
+
+Neon records the sources and reasoning for individual geographic decisions. The code guides explain how to produce and use those records.
+
 ## Rebuild V8
 
-Run the [V8 pipeline](scripts/pipeline/README.md) from the repository root.
+Run the [V8 pipeline](scripts/map-build/pipeline/README.md) from the repository root.
 
 ```bash
-python3 scripts/pipeline/run_pipeline.py scripts/pipeline/config.json \
+python3 scripts/map-build/pipeline/run_pipeline.py scripts/map-build/pipeline/config.json \
   --work-dir /absolute/path/to/worldatlas-work
 ```
 
@@ -59,6 +66,6 @@ For a fresh database, apply the SQL migrations in filename order.
 tables already present on `continent-review-v1`. The migrations define the
 schema. The Neon branch holds the source catalog, drafts and release records.
 
-Export a registry revision from Neon with `scripts/export_entity_registry.sql`.
+Export a registry revision from Neon with `scripts/map-build/export_entity_registry.sql`.
 
-    psql -X -A -t -v revision=REVISION -f scripts/export_entity_registry.sql > registry.json
+    psql -X -A -t -v revision=REVISION -f scripts/map-build/export_entity_registry.sql > registry.json

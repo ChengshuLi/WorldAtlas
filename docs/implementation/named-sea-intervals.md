@@ -4,10 +4,10 @@
 
 ## Where this runs in the code
 
-- The [basin builder](../../scripts/water/build_seavox_basin.py) reads the sea’s decisions and selects the engine.
-- The [rectangle engine](../../scripts/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
-- The [individual-cell check](../../scripts/water/wrapped_bounds.py) calls the [nearest-shore search](../../scripts/water/shared_nearest.py) and uses a [full-shore scan](../../scripts/water/streamed_shore_fallback.py) when needed.
-- The [row-only engine](../../scripts/water/interval_nearest.py) implements the single-row reference method.
+- The [basin builder](../../scripts/map-build/water/build_seavox_basin.py) reads the sea’s decisions and selects the engine.
+- The [rectangle engine](../../scripts/map-build/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
+- The [individual-cell check](../../scripts/map-build/water/wrapped_bounds.py) calls the [nearest-shore search](../../scripts/map-build/water/shared_nearest.py) and uses a [full-shore scan](../../scripts/map-build/water/streamed_shore_fallback.py) when needed.
+- The [row-only engine](../../scripts/map-build/water/interval_nearest.py) implements the single-row reference method.
 
 ## How it works
 

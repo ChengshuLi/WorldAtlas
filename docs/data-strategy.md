@@ -1,6 +1,6 @@
 # WorldAtlas Data Strategy
 
-This document describes the design for the full project. The [pipeline guide](../scripts/pipeline/README.md) describes the current build.
+This document describes the design for the full project. The [pipeline guide](../scripts/map-build/pipeline/README.md) describes the current build.
 
 ## Contents
 
@@ -91,7 +91,7 @@ Store one canonical logical grid. Use a compact lossless encoding such as row ru
 
 ### Research, cell review, publication, and rivers
 
-Generate candidate cell assignments from polygons and research inputs. For each proposal, record the geographic unit being divided, such as the province when proposing its locations. Also record the sources, reasoning, review status, and starting revision. Keep incomplete or invalid drafts when they can be corrected. Check IDs, hierarchy, and whether the source geometry can be used. Each cell in the approved parent area must belong to exactly one child area, and every child cell must be inside the parent. Investigate source-polygon gaps and overlaps. Check conflicts against the affected records and relevant parent boundaries. Separate areas can proceed in parallel, and work can continue in one area while the same level is still being completed elsewhere.
+Generate candidate cell assignments from polygons and research inputs. For each proposal, record the geographic unit being divided, such as the province when proposing its locations. Store each proposal in Neon with its sources, reasoning, review status, and starting revision. Use the same approach at every level of the hierarchy. Keep incomplete or invalid drafts when they can be corrected. Check IDs, hierarchy, and whether the source geometry can be used. Each cell in the approved parent area must belong to exactly one child area, and every child cell must be inside the parent. Investigate source-polygon gaps and overlaps. Check conflicts against the affected records and relevant parent boundaries. Separate areas can proceed in parallel, and work can continue in one area while the same level is still being completed elsewhere.
 
 Each geography-research scope has one accountable owner from research through validation and delivery; separate areas can proceed concurrently.
 

@@ -4,9 +4,9 @@
 
 ## Where this runs in the code
 
-- The [pipeline runner](../../scripts/pipeline/run_pipeline.py) starts the extraction as part of the water stage.
-- The [batch extractor](../../scripts/water/extract_seavox_features.py) checks the inputs, extracts the selected seas, and writes the batch manifest.
-- The [feature extractor](../../scripts/water/extract_seavox_feature.py) finds shapes by ID, prepares their geometry, and writes the individual outputs. It also provides the standalone single-feature command.
+- The [pipeline runner](../../scripts/map-build/pipeline/run_pipeline.py) starts the extraction as part of the water stage.
+- The [batch extractor](../../scripts/map-build/water/extract_seavox_features.py) checks the inputs, extracts the selected seas, and writes the batch manifest.
+- The [feature extractor](../../scripts/map-build/water/extract_seavox_feature.py) finds shapes by ID, prepares their geometry, and writes the individual outputs. It also provides the standalone single-feature command.
 
 ## How it works
 
@@ -28,5 +28,5 @@ Each sea keeps the `worldatlas-seavox-archive-extraction-v1` manifest format. Th
 ## Implementation details
 
 - **Reference paths.** Use `--scan-reference` to compare with GDAL’s filtered scan. The standalone feature extractor can also extract a single feature.
-- **Coordinate formatting.** See the [GDAL formatting attribution](../../scripts/water/GDAL_FORMATTING_LICENSE.txt).
+- **Coordinate formatting.** See the [GDAL formatting attribution](../../scripts/map-build/water/GDAL_FORMATTING_LICENSE.txt).
 - **Timing.** The batch’s `processing_elapsed_seconds` covers validation, extraction, and writing the outputs. Per-sea elapsed fields cover only writing the individual files and are already included in the batch time. The water stage counts the batch once.
