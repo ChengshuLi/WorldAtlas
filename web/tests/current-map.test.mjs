@@ -1,5 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
-import {cellValue,wrapColumn,renderPixels,validateGrid} from '../viewer/local-grid.js';
+import {cellValue,wrapColumn,validateGrid} from '../viewer/grid-data.js';
+import {renderPixels} from '../viewer/grid-renderer.js';
 import * as legend from '../viewer/legend-model.js';
 const read=f=>fs.readFileSync(new URL('../viewer/'+f,import.meta.url),'utf8');
 class Element{constructor(id=''){this.id=id;this.hidden=false;this.textContent='';this.value='';this.style={};this.attrs={};this.handlers={};this.children=[];this.classList={add(){},remove(){},toggle(){}};this.clientWidth=1000;this.clientHeight=600}addEventListener(t,f){(this.handlers[t]??=[]).push(f)}dispatch(t,e={}){e.target??=this;e.preventDefault??=()=>{e.prevented=true};for(const f of this.handlers[t]||[])f(e);return e}setAttribute(k,v){this.attrs[k]=v}append(...x){this.children.push(...x)}replaceChildren(...x){this.children=[...x]}focus(){this.focused=true}setPointerCapture(){}}
