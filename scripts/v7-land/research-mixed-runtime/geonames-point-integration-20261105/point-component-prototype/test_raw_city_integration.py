@@ -67,7 +67,7 @@ class RawCityIntegrationTests(ResolverTests):
   out=resolve.resolve(self.req);self.assertEqual({(c['affiliation_id'],c['component_id']) for c in out['claims']},{('a',7),('b',8)});self.assertEqual({c['source_crs_scope'] for c in out['claims']},{'collection_feature_geometry','raw_record_coordinate_assertion'})
  def test_polygon_fk_coexists_with_point_guideline(self):
   import sys
-  sys.path.insert(0,str(Path(resolve.__file__).resolve().parents[2]/'stage3-land-overrides-20261104'))
+  sys.path.insert(0,str(Path(resolve.__file__).resolve().parents[2]/'stage3-mixed-leeward-full-20261105'))
   import polygon_policy
   d,raw=self.raw_fixture();src={'source_id':'poly','version':'1','sha256':'a'*64,'r2_bucket':'bucket','r2_key':'poly','size_bytes':10};asset=dict(src,source_uri='https://example.org/poly',attribution='provider',license_name='test',license_uri='https://example.org/license',provider='provider',title='poly',kind='raw',provenance={'representation':'provider_original'})
   d['sources'].append(src);d['source_lineage_assets'].append(asset)

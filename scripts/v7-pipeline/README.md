@@ -127,7 +127,12 @@ All `sources` are explicit `{path, sha256}` pins:
 - `prior_physical_report`: optional prior report required by a selected
   locally derived land snapshot's independent physical/seed reproof.
   Its presence does not replace fresh physical output or relabel the snapshot.
-- `regional_template`: selected mixed/regional decision request.
+- `regional_template`: selected regional decision request and raw source versions.
+  The editable regional revision exports through
+  [export_regional.sql](../v7-land/research-mixed-runtime/stage3-mixed-leeward-full-20261105/export_regional.sql).
+  Supply the `revision` parameter on a read-only psycopg connection. A named-island
+  decision uses the GeoNames record to find the physical component and links
+  independent geographic evidence to the editable continent choice.
   The normal preparer validates the fresh Stage 2 artifacts and binds current
   code and preserves the template’s source policy.
 - `water_snapshot`, `seavox_archive`, `coastal_plan`: selected named-basin,

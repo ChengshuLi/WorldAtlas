@@ -43,10 +43,10 @@ def compile_policy(snapshot,baseline_snapshot,baseline_report,pins,supported_met
  selected={aid for aid,a in affiliations.items() if a.get('scope')=='land' and isinstance(a.get('evidence'),dict) and a['evidence'].get('execution_status')=='selected_for_research'}
  need(set(aids)==selected,'selected affiliations differ from policy');need(not snapshot['schema'].endswith('-v3') or not any(a.get('affiliation_id') in selected and a.get('method') in ('source_point_component_v1','raw_json_city_named_region_component_v1') for a in affiliations.values()),'unsupported v3 point source-reference method');links={aid:set() for aid in aids};entry_trace={}
  for eid in sorted(eids):
-  e=entries[eid];l=e.get('affiliation_ids');old=e.get('old_list1_refs')
-  need(e.get('decision_revision')==rev['id'] and e.get('execution_status')=='selected_for_research' and isinstance(e.get('title'),str) and e['title'].strip() and isinstance(e.get('reason'),str) and e['reason'].strip() and isinstance(old,list) and isinstance(l,list) and l and len(l)==len(set(l)) and set(l)<=set(aids),'invalid or orphan List 1 entry')
+  e=entries[eid];l=e.get('affiliation_ids')
+  need(e.get('decision_revision')==rev['id'] and e.get('execution_status')=='selected_for_research' and isinstance(e.get('title'),str) and e['title'].strip() and isinstance(e.get('reason'),str) and e['reason'].strip() and isinstance(l,list) and l and len(l)==len(set(l)) and set(l)<=set(aids),'invalid or orphan List 1 entry')
   for aid in l:links[aid].add(eid)
-  entry_trace[eid]={'title':e['title'],'reason':e['reason'],'old_list1_refs':old,'affiliation_ids':sorted(l)}
+  entry_trace[eid]={'title':e['title'],'reason':e['reason'],'affiliation_ids':sorted(l)}
  need(all(links.values()),'unlinked selected affiliation')
  land_codes={b['entity_id']:b['code'] for b in snapshot['category_bindings'] if b.get('physical_class')=='land'}
  notes={}

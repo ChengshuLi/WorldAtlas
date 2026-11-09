@@ -153,7 +153,7 @@ class TestSatelliteGeodesic(unittest.TestCase):
         import importlib.util,os,sys
         from pathlib import Path
         recovery=Path(__file__).resolve().parents[3]/'v7-recovery'
-        path=Path(os.environ.get('RUN_PAIR_PATH', recovery/'v24-source-pins/land/run_pair.py'))
+        path=Path(os.environ.get('RUN_PAIR_PATH', Path(__file__).resolve().parents[1]/'lydekker-regional-writer-integration/run_pair.py'))
         if not path.is_file(): self.skipTest('existing WGS84 run_pair unavailable')
         stage2=recovery/'land/stage2-geodesic-20261104'
         sys.path[:0]=[str(path.parent),str(stage2)]

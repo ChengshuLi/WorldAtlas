@@ -23,7 +23,7 @@ def regional_code_paths():
  rule=HERE.parent/'lydekker-regional-rule';integration=HERE.parent/'lydekker-regional-writer-integration'
  result={name:rule/(name+'.py') for name in ('regional_rule','component_scan','replay_adapter','geonames_anchors','satellite_geodesic','regional_workflow','regional_group_convention')}
  result.update({name:integration/(name+'.py') for name in ('source_groups','adapter','live_driver')})
- result.update({'point_prototype':STAGE2/'point_prototype.py','run_pair':REPO/'scripts/v7-recovery/v24-source-pins/land/run_pair.py',**{name:HERE/(name+'.py') for name in ('land_archive_source','polygon_intersection')}})
+ result.update({'point_prototype':STAGE2/'point_prototype.py','run_pair':HERE.parent/'lydekker-regional-writer-integration/run_pair.py',**{name:HERE/(name+'.py') for name in ('land_archive_source','polygon_intersection')}})
  return result
 
 def bind_regional_code(specs):

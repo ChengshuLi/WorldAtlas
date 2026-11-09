@@ -1,7 +1,7 @@
 {
   "schema": "worldatlas-end-to-end-pipeline-v1",
-  "raw_catalog_sha256": "442efeb7a2270ac49bc336ac8d9265609c505304f77d11ecca8b1ec3fd73ccda",
-  "selection_notes": "Reconstructed research selection from exact preserved v24 land/water/regional evidence. Original top-level configuration and 546-tile plan were not recovered. This file uses a new 224-tile certified execution partition and normal water producer reconstruction with strict selection equivalence. Geography remains provisional and non-publishable; no new full global run or final-grid equality is claimed.",
+  "raw_catalog_sha256": "46c4bd2eead04123478bd113371e0fe487def889fa63a904643d862ebd370cd0",
+  "selection_notes": "WorldAtlas V8.0 source selection. The regional snapshot is an export of the editable V8.0 island rules and resolves components from the current physical grid.",
   "sources": {
     "land_config": {
       "json": {
@@ -401,18 +401,18 @@
           }
         ],
         "code": {
-          "adapter": "52c772f51533e6fb326beee8b90ef3090e48d20ad6b4353a163540b257b09b0e",
+          "adapter": "a0bec523de11e05ba6f0a9464aaf33d97ddc698f4d77c2e7dfda00be0a4d3db7",
           "bering_adapter": "294f68b3f7a99c88976153c698e39d9f0cf3b93b80f53bab125111d361bb950f",
           "bering_bridge": "3ebe15ba2972a60144212c1847a84dcd80f905130afaa7e20ea95ee53d99431e",
           "bering_intersection": "a7a6228b5e9cb51f5d520db043a035f819013f670c50522372d257f375cf71f5",
           "bering_profiler": "9ff772b16dab93c9a34567f56a7e1f5e58c9c834f88277f3f9f7a19c4a11a7b7",
           "bering_resolver": "dc01717c6320055fdcd2cdb9b5a61c64cb12420f8c730f7c6d7c35236e8e2f6f",
-          "contract": "cb939686a2c33dc0cd2d1d9e5797679eba7e2c1c9f7233f4ea81038293aac243",
+          "contract": "2add1f4b0aa8cee71d08b9fe79e55c046549bbefb30c0726dffda0cb89f9b1bb",
           "corroboration_adapter": "2853331555b38d56fb40a1939c1bfcee3d5a448e4c2b7c4cb93eaf2cebbdfa76",
           "corroboration_bridge": "b04b580f0a54d1d9e16db0988357ad031f36994991bfe2ee9b76c0b4d7cd8e76",
           "corroboration_evaluate": "d5d4f4cd0fc8973c15c5b9bad44c68ae93ea098116de472e33c1d3c65a0fdb4b",
           "corroboration_source": "b188a9f2864b3caee03ca8d3fca9c14565879d7d65657490ddf6f620713b12f2",
-          "driver": "7a0d1e84aebb512bbbc18b963def31935362196a01742d7ae19b66e9d81ba2f1",
+          "driver": "de6bcdb7f0850a20e8916a41c3673bd159fe11d451ffb745b93fc1efcacdc30a",
           "entry_evidence": "255508d8ef9ca860eb401c0b432b0aa1d2dc7fc070ab7c6e8c9036a939b0dc1a",
           "federal_register_rectangle": "23c0e70cb536a6535ce04f0cc492dc72510a1f5d24df76357c64974683286783",
           "full_coverage_policy": "2d94334ee7bc1dd49df577274dfe3f4135c9a4cf5f946465b5a28163dcc9291d",
@@ -420,8 +420,7 @@
           "geonames_extractor": "bc8ccf3966642c779b36b18e3a91ebe567df0a34f7ae6622bbd30d9aed466c35",
           "identity_worker": "397a11d006c95c0f16ea46092ceedceda6349968f3663df0721c8d5f6b09c435",
           "land_archive_extractor": "54463745d57c0fb266103fc67c0c51c4b5d674f830c445b2fd7ba99a80937a72",
-          "line_side": "268c84faa605a8fe38e5e4014294bc556580c69ed4666940cc4da16fd09d3a2f",
-          "mixed_claims": "fa484e624fae44003cad09e39ccc049a102685341fcd41354bd33008d2ac8777",
+          "mixed_claims": "8da1b7f860c161f91861f97b1d4c12e850436363b8518b69c9291cf46ae00f6c",
           "named_identity": "54878f130a1694f159932b471f8d21d7af4faac785deed9eccb0f1b2876549c6",
           "negative_component_filter": "278fef0a25e6159d01098d62764d29933aea7cdc6ad6e937acb6a3b9c9584673",
           "osm_admin_extractor": "27e8259ca26a58dd3f837a78e4b1aaed719abcdf30e310601003d60d3c952fe2",
@@ -433,15 +432,15 @@
           "osm_node_extractor": "04560125ef6db9200d1557c2d6bc9b3beff6f9a7d5ee5fec878c05fb1b6f8771",
           "osm_reef_extractor": "ee7e38b674b20f29e6a43834de7be0242bea1b2600c4581e247e804fe09f10b9",
           "overlay": "bd6d867e9da713be13e4c756a08e4f3ae20f3764dd13b97298bffb8f024270f7",
-          "point_claim_validator": "631ce9f59deb4dcf010f5a81bf5d600c3f262034024224425237d3cf9f61b46f",
+          "point_claim_validator": "d5f2057102c3607727115af85965872c1fdfbbbd123c2d5fba8b1ca147f81c78",
           "polygon_intersection": "3823226bd91104c54a1fda4ce6ac83632a7bef6889345dac9c5efc9986515944",
           "polygon_loader": "4f6fb0c4c20991a46d237898883c484f20af3568a6610c5892330d963fd729e1",
           "polygon_policy": "b9181298b2b058ab7a1f51784ea692c537d9484650dcadf4a4c7980237a12168",
           "polygon_resolution": "fb5cf69d41f05ba34db42f064e20ec364d1ef82bbee8665cf3d78329ce9fc387",
           "polygon_source": "eac989aeef6a48852ce8d5fd5f57b49cc2d5c18531723913f76861bbe0968f64",
           "raw_city_extractor": "d910045ce40b26a5ddd67aafc2ddf6afb523d4653cd898e39ae42d4958c38d5c",
-          "resolver": "8b0cf8a59bff81c1e88e4ebcaec8ec57ee1f801928bbb469261e723464e61df3",
-          "validator": "833cb3b4cd86336d90a2aea9a176cac4c8f45743caaabdd37ea864d31ec0e50c",
+          "resolver": "60a8d0be91abf279a46606159d3a585238a37a6e61b27bb2614e10e51b73e3d2",
+          "validator": "0aec817f371af87caae2c3ffd7585d522333382f3630dd0b68299501141c070a",
           "writer": "d25d192e7b035c9d4d110a036f041b6f5df5e85080c860c5dd3191bceced1c4b"
         },
         "corroboration_source_files": [],
@@ -635,12 +634,6 @@
           },
           {
             "r2_source": {
-              "source_id": "greece-aegean-flood-plan-2017",
-              "version": "2017-4627631b3fb4"
-            }
-          },
-          {
-            "r2_source": {
               "source_id": "cyclades-ephorate-anafi-history",
               "version": "2026-11-05-e6949b1f0c40"
             }
@@ -803,12 +796,6 @@
           },
           {
             "r2_source": {
-              "source_id": "anu-west-new-guinea-lydekker-ch08",
-              "version": "2025-4bcc38d0da4f-official"
-            }
-          },
-          {
-            "r2_source": {
               "source_id": "geonames-country-lc",
               "version": "2026-11-05-64c6286ae43d"
             }
@@ -869,12 +856,6 @@
           },
           {
             "r2_source": {
-              "source_id": "indonesian-navy-widi",
-              "version": "2022-12-18-e2290d0ca2ce"
-            }
-          },
-          {
-            "r2_source": {
               "source_id": "greek-cultural-archive-grantes",
               "version": "2026-11-05-c55065340726"
             }
@@ -917,12 +898,6 @@
           },
           {
             "r2_source": {
-              "source_id": "indonesia-bpk-maluku-tenggara-regulation-2-2024",
-              "version": "2024-e81f84d25dc7-official"
-            }
-          },
-          {
-            "r2_source": {
               "source_id": "greece-shipping-decree-81-2014",
               "version": "2014-3da725d20f96"
             }
@@ -947,20 +922,8 @@
           },
           {
             "r2_source": {
-              "source_id": "indonesia-bpk-presidential-regulation-29-2023",
-              "version": "2023-a8f6cc63f186-official"
-            }
-          },
-          {
-            "r2_source": {
               "source_id": "greece-environment-rhodes-epm8c",
               "version": "2024-c1e465e50277"
-            }
-          },
-          {
-            "r2_source": {
-              "source_id": "anu-tukang-besi-fortifications-chapter",
-              "version": "2020-d4ad5cc0ba1d-official"
             }
           },
           {
@@ -985,30 +948,6 @@
             "r2_source": {
               "source_id": "indonesia-big-national-gazetteer",
               "version": "2021-5ecdc47a0a59-official"
-            }
-          },
-          {
-            "r2_source": {
-              "source_id": "indonesia-education-wakatobi-folklore",
-              "version": "2017-d00bfc566d2f-official"
-            }
-          },
-          {
-            "r2_source": {
-              "source_id": "indonesia-ksdae-hoga-wakatobi",
-              "version": "2022-11-08-8051f8869d01"
-            }
-          },
-          {
-            "r2_source": {
-              "source_id": "indonesia-ksdae-wakatobi-profile",
-              "version": "2026-11-05-c2457b054f0c-capture"
-            }
-          },
-          {
-            "r2_source": {
-              "source_id": "unkhair-siko-gura-ici-study",
-              "version": "2020-6a2e5cba7861-publisher"
             }
           },
           {
@@ -1136,12 +1075,30 @@
               "source_id": "wikipedia-de-kei-inseln",
               "version": "2026-11-05-b4114740306c"
             }
+          },
+          {
+            "r2_source": {
+              "source_id": "land-southeast-crete-coastal-study",
+              "version": "capture-9c954c271fdc"
+            }
+          },
+          {
+            "r2_source": {
+              "source_id": "quaternary-ouriakos-paleolandscapes",
+              "version": "capture-b194ef4f30b7"
+            }
+          },
+          {
+            "r2_source": {
+              "source_id": "gnto-anafi-cyclades",
+              "version": "capture-7ab22495ceaf"
+            }
           }
         ],
         "minimum_free_bytes": 2147483648,
         "point_request": {
           "json": {
-            "adapter_sha256": "52c772f51533e6fb326beee8b90ef3090e48d20ad6b4353a163540b257b09b0e",
+            "adapter_sha256": "a0bec523de11e05ba6f0a9464aaf33d97ddc698f4d77c2e7dfda00be0a4d3db7",
             "geonames_airport_extractor_sha256": "5a805909d331e0ceaa662d6eb0b81d8e75a447d8e81b44dd9218b95c1c717e97",
             "geonames_extractor_sha256": "bc8ccf3966642c779b36b18e3a91ebe567df0a34f7ae6622bbd30d9aed466c35",
             "grid": {
@@ -1152,19 +1109,18 @@
               "width": 131072
             },
             "identity_worker_sha256": "397a11d006c95c0f16ea46092ceedceda6349968f3663df0721c8d5f6b09c435",
-            "line_side_sha256": "268c84faa605a8fe38e5e4014294bc556580c69ed4666940cc4da16fd09d3a2f",
             "named_identity_sha256": "54878f130a1694f159932b471f8d21d7af4faac785deed9eccb0f1b2876549c6",
             "osm_node_extractor_sha256": "04560125ef6db9200d1557c2d6bc9b3beff6f9a7d5ee5fec878c05fb1b6f8771",
-            "resolver_sha256": "8b0cf8a59bff81c1e88e4ebcaec8ec57ee1f801928bbb469261e723464e61df3",
+            "resolver_sha256": "60a8d0be91abf279a46606159d3a585238a37a6e61b27bb2614e10e51b73e3d2",
             "schema": "point-component-request-v1",
             "snapshot": {
               "neon": {
-                "source_id": "v24-regional-snapshot",
-                "version": "candidate-3f381ba575b3",
+                "source_id": "v8-regional-islands-snapshot",
+                "version": "v8.0-12c50bf0b3b9",
                 "serialization": "stored-json-text"
               },
-              "sha256": "3f381ba575b34a10b599a038a37cf872822e1db0b1fdc7489402ff52af1f9ee9",
-              "size_bytes": 1646973
+              "sha256": "12c50bf0b3b99d1c0c2ce859c2549b7c476cef4386f846233d56e70536dcd197",
+              "size_bytes": 1310236
             },
             "source_files": [
               {
@@ -1261,12 +1217,6 @@
                 "r2_source": {
                   "source_id": "geonames-country-mq",
                   "version": "2026-11-05-7fab5ffa923c"
-                }
-              },
-              {
-                "r2_source": {
-                  "source_id": "anu-west-new-guinea-lydekker-ch08",
-                  "version": "2025-4bcc38d0da4f-official"
                 }
               }
             ]
@@ -1719,7 +1669,7 @@
                 "sha256": "4513d6b6b687320f26f02658dce53a9fc744910e6a3853c1959e00c701d3b740"
               },
               "run_pair": {
-                "path": "scripts/v7-recovery/v24-source-pins/land/run_pair.py",
+                "path": "scripts/v7-land/research-mixed-runtime/lydekker-regional-writer-integration/run_pair.py",
                 "sha256": "82edc904cd917a41adf7b7c24cdeb3289e7286f9f72498991510818669dec40c"
               },
               "satellite_geodesic": {
@@ -1747,14 +1697,14 @@
             "pending_inventory_complete": false,
             "policy": {
               "neon": {
-                "source_id": "v24-regional-policy",
-                "version": "candidate-fee04545483f",
-                "serialization": "pretty-ascii"
+                "source_id": "v8-regional-islands-policy",
+                "version": "v8.0-c66bcd2728e4",
+                "serialization": "stored-json-text"
               },
-              "sha256": "fee04545483f53411775bd1d7dac08eca825f49eb4a80dad12574b2b22ffc5f4",
-              "size_bytes": 12609
+              "sha256": "c66bcd2728e49d0f9be8e1e9b72076e83373a6bec41d185bab1bb9289ae054ea",
+              "size_bytes": 8245
             },
-            "policy_canonical_sha256": "d09a9b9e5f4deae286e80531937abb38b4a690cb37a37c9f95305aa0cbcd9c20",
+            "policy_canonical_sha256": "c0dbdd40a88a1bf79318eac09d53a4eb4d811d0f2273a93211815a342535af9b",
             "profiling_standin": true,
             "sources": {
               "anu-west-new-guinea-lydekker-ch08": {
@@ -1950,7 +1900,7 @@
                     "status": "draft-not-approved"
                   },
                   "interim_policy_sha256": "f5933741b8250834d19cf5e1c8daa79459e7a6c2351cf73827b40f2319ed1c9d",
-                  "source_name": "CHUKCHI SEA — Asia nearest shore",
+                  "source_name": "CHUKCHI SEA \u2014 Asia nearest shore",
                   "status": "draft-not-approved",
                   "unresolved": [
                     "Historical tie rule reconstructed; review the stable entity priority and geographic policy before acceptance.",
@@ -2731,7 +2681,7 @@
                     "status": "draft-not-approved"
                   },
                   "interim_policy_sha256": "f5933741b8250834d19cf5e1c8daa79459e7a6c2351cf73827b40f2319ed1c9d",
-                  "source_name": "AEGEAN SEA → Asia",
+                  "source_name": "AEGEAN SEA \u2192 Asia",
                   "status": "draft-not-approved",
                   "unresolved": [
                     "Historical tie rule reconstructed; review the stable entity priority and geographic policy before acceptance.",
@@ -3448,7 +3398,7 @@
                     "status": "draft-not-approved"
                   },
                   "interim_policy_sha256": "f5933741b8250834d19cf5e1c8daa79459e7a6c2351cf73827b40f2319ed1c9d",
-                  "source_name": "BERING STRAIT — Asia portion",
+                  "source_name": "BERING STRAIT \u2014 Asia portion",
                   "status": "draft-not-approved",
                   "unresolved": [
                     "Historical tie rule reconstructed; review the stable entity priority and geographic policy before acceptance."
@@ -5078,7 +5028,7 @@
                 },
                 "latitude": "76.466666666666667",
                 "longitude": "16.616666666666667",
-                "name": "Sørkapp, Svalbard"
+                "name": "S\u00f8rkapp, Svalbard"
               },
               {
                 "derivation": {
@@ -5448,7 +5398,7 @@
                 },
                 "latitude": "76.466666666666667",
                 "longitude": "16.616666666666667",
-                "name": "Sørkapp, Svalbard"
+                "name": "S\u00f8rkapp, Svalbard"
               },
               {
                 "derivation": {
@@ -5483,7 +5433,7 @@
                   "north_endpoint_dms_source_sha256": null,
                   "preserved_manifest_record": "atlantic-indian-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "IHO S-23 §32/§45 (1953), 20°E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
+                  "source": "IHO S-23 \u00a732/\u00a745 (1953), 20\u00b0E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
                   "status": "draft-not-approved"
                 },
                 "latitude": "-60.0018310546875",
@@ -5546,12 +5496,12 @@
                   "north_endpoint_dms_source_sha256": null,
                   "preserved_manifest_record": "atlantic-indian-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "IHO S-23 §32/§45 (1953), 20°E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
+                  "source": "IHO S-23 \u00a732/\u00a745 (1953), 20\u00b0E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
                   "status": "draft-not-approved"
                 },
                 "latitude": "-34.8321533203125",
                 "longitude": "20",
-                "name": "20°E physical-mask coastline intersection"
+                "name": "20\u00b0E physical-mask coastline intersection"
               },
               {
                 "derivation": {
@@ -5586,7 +5536,7 @@
                   "north_endpoint_dms_source_sha256": null,
                   "preserved_manifest_record": "atlantic-pacific-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "IHO S-23 §32/§61 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
+                  "source": "IHO S-23 \u00a732/\u00a761 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
                   "status": "draft-not-approved"
                 },
                 "latitude": "-60.0018310546875",
@@ -5623,7 +5573,7 @@
                   "north_endpoint_dms_source_sha256": null,
                   "preserved_manifest_record": "atlantic-pacific-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "IHO S-23 §32/§61 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
+                  "source": "IHO S-23 \u00a732/\u00a761 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
                   "status": "draft-not-approved"
                 },
                 "latitude": "-55.983333333333333",
@@ -5663,7 +5613,7 @@
                   "north_endpoint_dms_source_sha256": null,
                   "preserved_manifest_record": "indian-pacific-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23’s 146°55′E",
+                  "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23\u2019s 146\u00b055\u2032E",
                   "status": "draft-not-approved"
                 },
                 "latitude": "-60.0018310546875",
@@ -5700,7 +5650,7 @@
                   "north_endpoint_dms_source_sha256": null,
                   "preserved_manifest_record": "indian-pacific-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23’s 146°55′E",
+                  "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23\u2019s 146\u00b055\u2032E",
                   "status": "draft-not-approved"
                 },
                 "latitude": "-43.644444444444444",
@@ -8293,10 +8243,10 @@
                     "NOAA_Norwegian_Sea": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/seaname/details/96",
                     "South_East_Cape_GA": "https://www.ga.gov.au/scientific-topics/national-location-information/dimensions/continental-extremities"
                   },
-                  "method": "explicit meridian 20°E from physical-mask coastline intersection near Cape Agulhas to actual lower grid edge",
+                  "method": "explicit meridian 20\u00b0E from physical-mask coastline intersection near Cape Agulhas to actual lower grid edge",
                   "preserved_manifest_record": "atlantic-indian-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "IHO S-23 §32/§45 (1953), 20°E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
+                  "source": "IHO S-23 \u00a732/\u00a745 (1953), 20\u00b0E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
                   "status": "draft-not-approved"
                 },
                 "parameters": {},
@@ -8326,10 +8276,10 @@
                     "NOAA_Norwegian_Sea": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/seaname/details/96",
                     "South_East_Cape_GA": "https://www.ga.gov.au/scientific-topics/national-location-information/dimensions/continental-extremities"
                   },
-                  "method": "explicit meridian 67°16′W from Cape Horn to actual lower grid edge",
+                  "method": "explicit meridian 67\u00b016\u2032W from Cape Horn to actual lower grid edge",
                   "preserved_manifest_record": "atlantic-pacific-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "IHO S-23 §32/§61 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
+                  "source": "IHO S-23 \u00a732/\u00a761 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
                   "status": "draft-not-approved"
                 },
                 "parameters": {},
@@ -8359,10 +8309,10 @@
                     "NOAA_Norwegian_Sea": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/seaname/details/96",
                     "South_East_Cape_GA": "https://www.ga.gov.au/scientific-topics/national-location-information/dimensions/continental-extremities"
                   },
-                  "method": "explicit modern South East Cape meridian 146°49′30″E to actual lower grid edge",
+                  "method": "explicit modern South East Cape meridian 146\u00b049\u203230\u2033E to actual lower grid edge",
                   "preserved_manifest_record": "indian-pacific-south",
                   "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                  "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23’s 146°55′E",
+                  "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23\u2019s 146\u00b055\u2032E",
                   "status": "draft-not-approved"
                 },
                 "parameters": {},
@@ -8553,7 +8503,7 @@
                         "status": "draft-not-approved"
                       },
                       "interim_policy_sha256": "f5933741b8250834d19cf5e1c8daa79459e7a6c2351cf73827b40f2319ed1c9d",
-                      "source_name": "CHUKCHI SEA — Asia nearest shore",
+                      "source_name": "CHUKCHI SEA \u2014 Asia nearest shore",
                       "status": "draft-not-approved",
                       "unresolved": [
                         "Historical tie rule reconstructed; review the stable entity priority and geographic policy before acceptance.",
@@ -9334,7 +9284,7 @@
                         "status": "draft-not-approved"
                       },
                       "interim_policy_sha256": "f5933741b8250834d19cf5e1c8daa79459e7a6c2351cf73827b40f2319ed1c9d",
-                      "source_name": "AEGEAN SEA → Asia",
+                      "source_name": "AEGEAN SEA \u2192 Asia",
                       "status": "draft-not-approved",
                       "unresolved": [
                         "Historical tie rule reconstructed; review the stable entity priority and geographic policy before acceptance.",
@@ -10051,7 +10001,7 @@
                         "status": "draft-not-approved"
                       },
                       "interim_policy_sha256": "f5933741b8250834d19cf5e1c8daa79459e7a6c2351cf73827b40f2319ed1c9d",
-                      "source_name": "BERING STRAIT — Asia portion",
+                      "source_name": "BERING STRAIT \u2014 Asia portion",
                       "status": "draft-not-approved",
                       "unresolved": [
                         "Historical tie rule reconstructed; review the stable entity priority and geographic policy before acceptance."
@@ -11599,7 +11549,7 @@
                     },
                     "latitude": 76.46666666666667,
                     "longitude": 16.616666666666667,
-                    "name": "Sørkapp, Svalbard"
+                    "name": "S\u00f8rkapp, Svalbard"
                   },
                   {
                     "derivation": {
@@ -11969,7 +11919,7 @@
                     },
                     "latitude": 76.46666666666667,
                     "longitude": 16.616666666666667,
-                    "name": "Sørkapp, Svalbard"
+                    "name": "S\u00f8rkapp, Svalbard"
                   },
                   {
                     "derivation": {
@@ -12004,7 +11954,7 @@
                       "north_endpoint_dms_source_sha256": null,
                       "preserved_manifest_record": "atlantic-indian-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "IHO S-23 §32/§45 (1953), 20°E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
+                      "source": "IHO S-23 \u00a732/\u00a745 (1953), 20\u00b0E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
                       "status": "draft-not-approved"
                     },
                     "latitude": -60.0018310546875,
@@ -12067,12 +12017,12 @@
                       "north_endpoint_dms_source_sha256": null,
                       "preserved_manifest_record": "atlantic-indian-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "IHO S-23 §32/§45 (1953), 20°E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
+                      "source": "IHO S-23 \u00a732/\u00a745 (1953), 20\u00b0E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
                       "status": "draft-not-approved"
                     },
                     "latitude": -34.8321533203125,
                     "longitude": 20,
-                    "name": "20°E physical-mask coastline intersection"
+                    "name": "20\u00b0E physical-mask coastline intersection"
                   },
                   {
                     "derivation": {
@@ -12107,7 +12057,7 @@
                       "north_endpoint_dms_source_sha256": null,
                       "preserved_manifest_record": "atlantic-pacific-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "IHO S-23 §32/§61 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
+                      "source": "IHO S-23 \u00a732/\u00a761 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
                       "status": "draft-not-approved"
                     },
                     "latitude": -60.0018310546875,
@@ -12144,7 +12094,7 @@
                       "north_endpoint_dms_source_sha256": null,
                       "preserved_manifest_record": "atlantic-pacific-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "IHO S-23 §32/§61 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
+                      "source": "IHO S-23 \u00a732/\u00a761 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
                       "status": "draft-not-approved"
                     },
                     "latitude": -55.983333333333334,
@@ -12184,7 +12134,7 @@
                       "north_endpoint_dms_source_sha256": null,
                       "preserved_manifest_record": "indian-pacific-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23’s 146°55′E",
+                      "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23\u2019s 146\u00b055\u2032E",
                       "status": "draft-not-approved"
                     },
                     "latitude": -60.0018310546875,
@@ -12221,7 +12171,7 @@
                       "north_endpoint_dms_source_sha256": null,
                       "preserved_manifest_record": "indian-pacific-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23’s 146°55′E",
+                      "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23\u2019s 146\u00b055\u2032E",
                       "status": "draft-not-approved"
                     },
                     "latitude": -43.644444444444446,
@@ -12614,10 +12564,10 @@
                         "NOAA_Norwegian_Sea": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/seaname/details/96",
                         "South_East_Cape_GA": "https://www.ga.gov.au/scientific-topics/national-location-information/dimensions/continental-extremities"
                       },
-                      "method": "explicit meridian 20°E from physical-mask coastline intersection near Cape Agulhas to actual lower grid edge",
+                      "method": "explicit meridian 20\u00b0E from physical-mask coastline intersection near Cape Agulhas to actual lower grid edge",
                       "preserved_manifest_record": "atlantic-indian-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "IHO S-23 §32/§45 (1953), 20°E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
+                      "source": "IHO S-23 \u00a732/\u00a745 (1953), 20\u00b0E from Cape Agulhas to Antarctica; Cape tip coordinate from SANParks",
                       "status": "draft-not-approved"
                     },
                     "parameters": {},
@@ -12647,10 +12597,10 @@
                         "NOAA_Norwegian_Sea": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/seaname/details/96",
                         "South_East_Cape_GA": "https://www.ga.gov.au/scientific-topics/national-location-information/dimensions/continental-extremities"
                       },
-                      "method": "explicit meridian 67°16′W from Cape Horn to actual lower grid edge",
+                      "method": "explicit meridian 67\u00b016\u2032W from Cape Horn to actual lower grid edge",
                       "preserved_manifest_record": "atlantic-pacific-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "IHO S-23 §32/§61 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
+                      "source": "IHO S-23 \u00a732/\u00a761 (1953), Cape Horn is the north/cape endpoint; AADC Gazetteer endpoint coordinate",
                       "status": "draft-not-approved"
                     },
                     "parameters": {},
@@ -12680,10 +12630,10 @@
                         "NOAA_Norwegian_Sea": "https://www.ncei.noaa.gov/archive/archive-management-system/OAS/bin/prd/jquery/seaname/details/96",
                         "South_East_Cape_GA": "https://www.ga.gov.au/scientific-topics/national-location-information/dimensions/continental-extremities"
                       },
-                      "method": "explicit modern South East Cape meridian 146°49′30″E to actual lower grid edge",
+                      "method": "explicit modern South East Cape meridian 146\u00b049\u203230\u2033E to actual lower grid edge",
                       "preserved_manifest_record": "indian-pacific-south",
                       "preserved_manifest_sha256": "453feb05e7534921506539122aeee972108ad1f0f2733fff838f26befd45b3b4",
-                      "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23’s 146°55′E",
+                      "source": "Modern Cape endpoint from Geoscience Australia; this chooses the modern cape meridian rather than 1953 S-23\u2019s 146\u00b055\u2032E",
                       "status": "draft-not-approved"
                     },
                     "parameters": {},
@@ -12932,7 +12882,7 @@
                     {
                       "latitude": 76.46666666666667,
                       "longitude": 16.616666666666667,
-                      "name": "Sørkapp, Svalbard"
+                      "name": "S\u00f8rkapp, Svalbard"
                     }
                   ]
                 },
@@ -12944,7 +12894,7 @@
                     {
                       "latitude": 76.46666666666667,
                       "longitude": 16.616666666666667,
-                      "name": "Sørkapp, Svalbard"
+                      "name": "S\u00f8rkapp, Svalbard"
                     },
                     {
                       "latitude": 74.5,

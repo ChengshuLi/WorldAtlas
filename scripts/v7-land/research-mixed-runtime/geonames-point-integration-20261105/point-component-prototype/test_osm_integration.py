@@ -35,7 +35,7 @@ class OSMIntegrationTests(ResolverTests):
   with self.assertRaisesRegex(ValueError,'identity polygon feature missing'):resolve.resolve(self.req)
  def test_mixed_osm_polygon_coexist(self):
   import sys
-  sys.path.insert(0,str(Path(resolve.__file__).resolve().parents[2]/'stage3-land-overrides-20261104'));import polygon_policy
+  sys.path.insert(0,str(Path(resolve.__file__).resolve().parents[2]/'stage3-mixed-leeward-full-20261105'));import polygon_policy
   d,_=self.osm_fixture();src={'source_id':'poly','version':'1','sha256':'a'*64,'r2_bucket':'bucket','r2_key':'poly','size_bytes':10};asset=dict(src,source_uri='https://example.org/poly',attribution='provider',license_name='test',license_uri='https://example.org/license',provider='provider',title='poly',kind='raw',provenance={'representation':'provider_original'})
   d['sources'].append(src);d['source_lineage_assets'].append(asset)
   for name in ('poly-main','poly-extra'):d['features'].append({'feature_id':name,'source_id':'poly','source_version':'1','source_feature_id':name,'geometry_sha256':'b'*64,'evidence':{'selector_property':'id'}})

@@ -49,32 +49,38 @@ def adapt(doc):
     selected=[];needed=set();targets={}
     for aid,a in sorted(aff.items()):
         method=a.get('method')
-        if method not in ('source_point_component_v1','source_point_named_region_component_v1','raw_json_city_named_region_component_v1','osm_api_node_named_region_component_v1','osm_api_island_node_group_component_v1','geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1','geonames_zip_named_list1_component_v1','geonames_zip_line_side_component_v1'):continue
+        if method not in ('source_point_component_v1','source_point_named_region_component_v1','raw_json_city_named_region_component_v1','osm_api_node_named_region_component_v1','osm_api_island_node_group_component_v1','geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1','geonames_zip_named_island_component_v1'):continue
         evidence=a.get('evidence');need(a.get('scope')=='land' and a.get('relationship')=='affiliation' and text(a.get('rationale')) and isinstance(evidence,dict) and evidence.get('execution_status')=='selected_for_research','unselected or invalid point affiliation')
         sel=evidence.get('selector');keys=({'island_name','group_identity','identity_scope','id_property'} if method=='osm_api_island_node_group_component_v1' else {'island_identity','point_name','id_property'})
         if method in ('source_point_named_region_component_v1','raw_json_city_named_region_component_v1','osm_api_node_named_region_component_v1','osm_api_island_node_group_component_v1','geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1'):keys|={'identity_id_property','identity_name_property','identity_class_property','identity_class_value'}
         if method in ('osm_api_node_named_region_component_v1','osm_api_island_node_group_component_v1'):keys|={'node_version','place_tag','source_crs','extractor_version'}
         if method=='raw_json_city_named_region_component_v1':keys|={'name_property','longitude_property','latitude_property','source_crs_assertion','extractor_version','coordinate_guideline_excerpt'}
-        if method in ('geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1','geonames_zip_named_list1_component_v1','geonames_zip_line_side_component_v1'):keys|={'country_code','extractor_version'}
+        if method in ('geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1','geonames_zip_named_island_component_v1'):keys|={'country_code','extractor_version'}
         if method=='geonames_zip_airport_named_region_component_v1':keys|={'airport_island_name','island_evidence_source_id','island_evidence_source_version','island_evidence_citation'}
-        if method in ('geonames_zip_named_list1_component_v1','geonames_zip_line_side_component_v1'):keys|={'list1_entry_id','old_item_id'}
-        if method=='geonames_zip_line_side_component_v1':keys|={'line_id','line_geometry_sha256','expected_side','minimum_separation_m'}
-        need(isinstance(sel,dict) and set(sel)==keys and all(text(sel.get(k)) for k in keys-{'minimum_separation_m'}) and (method!='geonames_zip_line_side_component_v1' or type(sel.get('minimum_separation_m')) in (int,float)),'point selector missing identity or contains unsupported keys')
+        if method=='geonames_zip_named_island_component_v1':keys.add('decision_entry_id')
+        need(isinstance(sel,dict) and set(sel)==keys and all(text(sel.get(k)) for k in keys),'point selector missing identity or contains unsupported keys')
         if method=='osm_api_island_node_group_component_v1':need(sel['identity_scope']=='island_group' and sel['identity_class_value']=='Island group' and sel['place_tag']=='island','invalid island group scope or class')
         if method in ('osm_api_node_named_region_component_v1','osm_api_island_node_group_component_v1'):need(sel['id_property']=='id' and re.fullmatch(r'[1-9][0-9]{0,19}',sel['node_version']) is not None and sel['source_crs']=='OGC:CRS84' and sel['extractor_version']=='osm-api-node-point-selection-v1','unsupported OSM node selector')
         if method=='raw_json_city_named_region_component_v1':need(sel['extractor_version']=='raw-json-city-point-selection-v1' and sel['source_crs_assertion']=='OGC:CRS84','unsupported raw city extractor or CRS')
-        if method in ('geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1','geonames_zip_named_list1_component_v1','geonames_zip_line_side_component_v1'):need(sel['id_property']=='geonameid' and re.fullmatch(r'[A-Z]{2}',sel['country_code']) is not None and sel['extractor_version']==('geonames-island-point-extraction-v1' if method in ('geonames_zip_island_named_region_component_v1','geonames_zip_named_list1_component_v1','geonames_zip_line_side_component_v1') else 'geonames-airport-point-extraction-v1'),'unsupported GeoNames selection')
+        if method in ('geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1','geonames_zip_named_island_component_v1'):need(sel['id_property']=='geonameid' and re.fullmatch(r'[A-Z]{2}',sel['country_code']) is not None and sel['extractor_version']==('geonames-island-point-extraction-v1' if method in ('geonames_zip_island_named_region_component_v1','geonames_zip_named_island_component_v1') else 'geonames-airport-point-extraction-v1'),'unsupported GeoNames selection')
         f=features.get(a.get('feature_id'));need(isinstance(f,dict) and text(f.get('source_feature_id')) and isinstance(f.get('geometry_sha256'),str) and HEX.fullmatch(f['geometry_sha256']),'point feature missing')
         pk=(f.get('source_id'),f.get('source_version'));extra={}
         if method=='source_point_component_v1':
             need(aid in identity,'point feature or identity source missing');ik=identity[aid]
-        elif method in ('geonames_zip_named_list1_component_v1','geonames_zip_line_side_component_v1'):
-            matches=[e for e in doc.get('list1_entries',[]) if e.get('entry_id')==sel['list1_entry_id'] and aid in e.get('affiliation_ids',[]) and any(ref.get('old_item_id')==sel['old_item_id'] for ref in e.get('old_list1_refs',[]))]
-            need(len(matches)==1 and matches[0].get('decision_revision')==rev['id'] and matches[0].get('execution_status')=='selected_for_research' and sel['island_identity']==sel['point_name'],'List 1 entry link or island identity missing or mismatched')
-            entity=entities.get(a.get('entity_id'),{});continent=entity.get('name');need(text(continent) and sum(1 for ref in matches[0].get('old_list1_refs',[]) if ref.get('old_item_id')==sel['old_item_id'] and isinstance(ref.get('reference'),str) and ref['reference'].startswith('List 1 · '+continent+' · '))==1,'List 1 continent reference mismatched')
-            ik=None;extra={'list1_entry_id':sel['list1_entry_id'],'old_item_id':sel['old_item_id']}
-            if method=='geonames_zip_line_side_component_v1':
-                lines=[x for x in doc.get('line_observations',[]) if x.get('line_id')==sel['line_id']];need(len(lines)==1,'line observation missing or duplicate');line=lines[0];lk=(line.get('source_id'),line.get('source_version'));need(line.get('status')=='research' and line.get('geometry_sha256')==sel['line_geometry_sha256'] and lk in src and lk in assets and any((r.get('entry_id'),r.get('source_id'),r.get('source_version'))==(sel['list1_entry_id'],*lk) for r in doc.get('list1_entry_evidence_sources',[])),'line source or entry evidence mismatch');need(sel['expected_side'] in ('east','west'),'invalid expected side');needed.add(lk);extra.update({'line_observation':line,'expected_side':sel['expected_side'],'minimum_separation_m':sel['minimum_separation_m']})
+        elif method=='geonames_zip_named_island_component_v1':
+            entry_id=sel['decision_entry_id']
+            entries=[e for e in doc.get('list1_entries',[]) if e.get('entry_id')==entry_id]
+            need(len(entries)==1 and aid in entries[0].get('affiliation_ids',[])
+                 and entries[0].get('decision_revision')==rev['id']
+                 and entries[0].get('execution_status')=='selected_for_research'
+                 and sel['island_identity']==sel['point_name'],'invalid named island decision link')
+            need(any(e.get('entry_id')==entry_id and e.get('decision_revision')==rev['id']
+                     and e.get('role')=='geographic_membership_evidence'
+                     and (e.get('source_id'),e.get('source_version'))!=pk
+                     and (e.get('source_id'),e.get('source_version')) in assets
+                     for e in doc.get('list1_entry_evidence_sources',[])),'named island geographic evidence missing')
+            ik=None
+            extra={'decision_entry_id':entry_id}
         else:
             ident=features.get(named_identity.get(aid));need(isinstance(ident,dict) and ident.get('feature_id')!=f['feature_id'] and text(ident.get('source_feature_id')) and isinstance(ident.get('geometry_sha256'),str) and HEX.fullmatch(ident['geometry_sha256']),'identity polygon feature missing')
             ik=(ident.get('source_id'),ident.get('source_version'))
@@ -83,7 +89,7 @@ def adapt(doc):
             need(re.fullmatch(r'[1-9][0-9]{0,19}',f['source_feature_id']) is not None,'invalid OSM node ID');src_asset=assets.get(pk);need(isinstance(src_asset,dict) and text(src_asset.get('source_uri')),'OSM source missing');u=urlsplit(src_asset['source_uri']);expected='/api/0.6/node/'+f['source_feature_id'];need(u.scheme=='https' and u.netloc=='api.openstreetmap.org' and not u.query and not u.fragment and u.path in (expected,expected+'/'+sel['node_version']),'official OSM node URL mismatch')
             extra.update({k:sel[k] for k in ('node_version','place_tag','source_crs','extractor_version')})
             if method=='osm_api_island_node_group_component_v1':extra.update({'identity_scope':sel['identity_scope'],'group_identity':sel['group_identity'],'island_name':sel['island_name']})
-        if method in ('geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1','geonames_zip_named_list1_component_v1','geonames_zip_line_side_component_v1'):
+        if method in ('geonames_zip_island_named_region_component_v1','geonames_zip_airport_named_region_component_v1','geonames_zip_named_island_component_v1'):
             need(re.fullmatch(r'[1-9][0-9]{0,15}',f['source_feature_id']) is not None,'invalid GeoNames feature ID');asset=assets.get(pk);need(isinstance(asset,dict) and asset.get('provider')=='GeoNames' and asset.get('source_uri')=='https://download.geonames.org/export/dump/'+sel['country_code']+'.zip','GeoNames original source mismatch');extra.update({'country_code':sel['country_code'],'extractor_version':sel['extractor_version']});
             if method=='geonames_zip_airport_named_region_component_v1':extra.update({k:sel[k] for k in ('airport_island_name','island_evidence_source_id','island_evidence_source_version','island_evidence_citation')})
         if method=='raw_json_city_named_region_component_v1':
@@ -96,7 +102,7 @@ def adapt(doc):
                 return (parts[0],parts[1],parts[3],asset['provider'])
             need(git_source(pk)==git_source(gk),'guideline and city must share provider repository and commit')
             extra.update({k:sel[k] for k in ('name_property','longitude_property','latitude_property','source_crs_assertion','extractor_version','coordinate_guideline_excerpt')});extra.update({'guideline_source_id':gk[0],'guideline_source_version':gk[1]});needed.add(gk)
-        need(pk in src and (method in ('geonames_zip_named_list1_component_v1','geonames_zip_line_side_component_v1') and ik is None or ik in src and pk!=ik),'point or identity sources missing or identical')
+        need(pk in src and (method=='geonames_zip_named_island_component_v1' and ik is None or ik in src and pk!=ik),'point or identity sources missing or identical')
         eid=a.get('entity_id');entity=entities.get(eid);matches=[b for b in bindings if b.get('entity_id')==eid and b.get('physical_class')=='land']
         need(type(eid) is int and isinstance(entity,dict) and text(entity.get('name')) and len(matches)==1 and type(matches[0].get('code')) is int and 17<=matches[0]['code']<=22,'invalid point target')
         targets[eid]={'id':eid,'name':entity['name'],'physical_class':'land','code':matches[0]['code']};needed.add(pk)
