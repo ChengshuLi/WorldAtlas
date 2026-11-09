@@ -44,5 +44,5 @@ authorize a map build.
 V8 uses these as model-dependent cartographic decisions. The headwater
 assessment has limited survey evidence, and the cited library and attraction
 descriptions may share underlying local sources. The [V8 construction
-recipe](../scripts/ural-audit/REVIEWED-URAL-20261106.md) describes how to
+recipe](../../scripts/ural-audit/REVIEWED-URAL-20261106.md) describes how to
 reproduce the selected boundary from the raw sources.

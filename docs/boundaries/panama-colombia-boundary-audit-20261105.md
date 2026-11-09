@@ -7,18 +7,18 @@ GeoJSON SHA-256
 
 The raw archive `osm-panama-current-way-full-bundle`, version
 `capture-20261105-04fe1adb295e`, contains 33 OSM way/full responses and their
-manifest. The [archive verifier](../scripts/land/mainland-seed-l2/osm_source_handoff.py)
+manifest. The [archive verifier](../../scripts/land/mainland-seed-l2/osm_source_handoff.py)
 checks the archive and response pins, joins the ways in order, and verifies the
 geometry digest. The OSM way and relation history responses linked in Neon
 supply membership evidence. The way/full archive supplies the coordinates.
 
-The [mainland export](../scripts/land/mainland-l2-draft/query-stage2-selected.sql)
+The [mainland export](../../scripts/land/mainland-l2-draft/query-stage2-selected.sql)
 supplies the editable line and its source pins to the V8 build.
 `north_america_mainland_region_v1` uses the boundary in forward order and
 `americas_exterior_closure_v1` in reverse. The closure has 14,541 vertices and
 its canonical SHA-256 is
 `36d72849f2677a2a31250451d81c614d5e00e6b3228635470167a30ef1dbb940`.
-The [pipeline](../scripts/pipeline/README.md) checks the closure against
+The [pipeline](../../scripts/pipeline/README.md) checks the closure against
 the physical grid generated for that run. The region builder checks ordered
 joins, polygon validity and the six selected inside and outside witnesses.
 

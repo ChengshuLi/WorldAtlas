@@ -52,5 +52,5 @@ general headwater area but identifies no surveyed source node or divide join.
 No authoritative georeferenced headwater survey was found in this review.
 
 The government documents provide geographic context. The [V8 construction
-recipe](../scripts/ural-audit/REVIEWED-URAL-20261106.md) specifies the
+recipe](../../scripts/ural-audit/REVIEWED-URAL-20261106.md) specifies the
 HydroBASINS vertices and terrain crossings used to build the line.

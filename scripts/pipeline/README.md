@@ -151,7 +151,7 @@ canonical per-decision `source.geojson` and ordinary extraction manifest used by
 the basin builder. Completed batch checkpoints pin every emitted file; partial
 attempts are preserved and regenerated, never treated as a reusable cache.
 The standalone single-feature extraction CLI remains available for targeted work.
-See [the complete extraction replay contract](../../docs/seavox-extraction.md).
+See [the complete extraction replay contract](../../docs/implementation/seavox-extraction.md).
 
 The coastal CLI generates independent tiles in parallel
 using the available CPU count, or the explicit positive `coastal_workers`
