@@ -240,9 +240,8 @@ class Pipeline:
                 snapshot = read_land_draft(draft_revision)
                 self.draft_land = self.save_source_document(snapshot, serialization='canonical-ascii')
             published = self.resolve_source('land_snapshot', resolved['land_snapshot'])
-            assemble = stage_module(SCRIPTS / 'caucasus-audit/caucasus_seed_gate.py').assembled_region_hash
             draft = read(self.draft_land)
-            prepared = prepare_land_draft(draft, read(published), assemble)
+            prepared = prepare_land_draft(draft, read(published))
             self.preview_land = self.save_source_document(prepared, serialization='canonical-ascii')
         self.sources = {name: self.resolve_source(name, spec) for name, spec in resolved.items()}
         if self.preview_land is not None:

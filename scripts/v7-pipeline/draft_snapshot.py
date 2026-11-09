@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import os
+from decimal import Decimal
 from pathlib import Path
 
 
@@ -92,7 +93,32 @@ def draft_physical_selection(draft, published):
     return {'schema': published['schema'], 'revision': revision, 'rows': rows}
 
 
-def prepare_land_draft(draft, published, assemble_region_hash):
+def assembled_region_hash(decision, records):
+    """Mirror the region builder's ordered, exact-join ring serialization."""
+    ring = []
+    for segment in decision['segments']:
+        record = records[(segment['kind'], segment['id'])]
+        coordinates = record['geometry']['coordinates']
+        start, end = segment['start'], segment['end']
+        if type(start) is not int or type(end) is not int or not 0 <= start < end <= len(coordinates) or end - start < 2:
+            raise ValueError('invalid region slice')
+        pts = [tuple(Decimal(str(v)) for v in p) for p in coordinates[start:end]]
+        if any(len(p) != 2 or any(not v.is_finite() for v in p) for p in pts):
+            raise ValueError('invalid region coordinate')
+        if type(segment['reverse']) is not bool:
+            raise ValueError('invalid region direction')
+        if segment['reverse']:
+            pts.reverse()
+        if ring and ring[-1] != pts[0]:
+            raise ValueError('region does not join exactly')
+        ring.extend(pts if not ring else pts[1:])
+    if len(ring) < 4 or ring[0] != ring[-1]:
+        raise ValueError('region is not explicitly closed')
+    geom = {'type': 'Polygon', 'coordinates': [[[float(x), float(y)] for x, y in ring]]}
+    return hashlib.sha256(json.dumps(geom, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
+
+
+def prepare_land_draft(draft, published):
     """Recalculate geometry pins for a preview of the editable draft."""
     prepared = copy.deepcopy(draft)
     for section, key in (('mainland_boundaries', 'boundary_id'), ('routes', 'route_id')):
@@ -110,5 +136,5 @@ def prepare_land_draft(draft, published, assemble_region_hash):
     lines = {('boundary', row['boundary_id']): row for row in prepared['mainland_boundaries']}
     lines.update({('route', row['route_id']): row for row in prepared['routes']})
     for region in prepared['seed_regions']:
-        region['geometry_sha256'] = assemble_region_hash(region, lines)
+        region['geometry_sha256'] = assembled_region_hash(region, lines)
     return prepared
