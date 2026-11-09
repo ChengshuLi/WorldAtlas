@@ -1,13 +1,43 @@
-# Reviewed Ural research boundary
+# V8 Ural boundary
 
-Neon project `wild-cherry-46472487`, branch `br-shy-mountain-arsff6zb`, database `worldatlas`, revision `ural-spring-geodesic-20261106`, boundary `ural_kara_coast_to_caspian`: 46,430 vertices, canonical compact binary64 GeoJSON SHA-256 `746e6a85b05e40994e451e49e7df6333b8816dfe1d6624d9c20f9c669e953b32`. This is the Ural-only research decision; it is not a complete global revision or a map release.
+The editable `v8-mainland` revision in Neon holds the selected 46,430-point
+boundary `ural_kara_coast_to_caspian`. Its construction recipe is
+`v8-ural-construction-recipe` version `v8.0-1e485322c45a` in
+`atlas.structured_documents`. The recipe names the exact raw catalog versions,
+the HydroBASINS polygon vertices, and the four edges where the ArcticDEM
+drainage paths join the basin boundaries. Reassembly of the three ArcticDEM
+tiles uses the ordered raw chunks listed in the recipe.
 
-The segment 7 terminal connection from the Copernicus-modeled flow cell to the OSM spring is a WGS84 geodesic represented by 16 coordinate-linear chords, each with less than one metre of geodesic station spacing. The mapped spring is OSM relation 214415 version 122, node 1385867869. The northern Kara endpoint is the HydroBASINS edge's mapped coastline intersection. Both derivations check source and geometry hashes.
+Set `NEON_DATABASE_URL` and the boto3 credentials as described in the
+[pipeline setup](../v7-pipeline/README.md). Use the R2 endpoint from the pipeline
+configuration. Run the input preparation with Python 3.11 or later, boto3 and
+psycopg.
 
-Construction uses European and Siberian HydroBASINS level 12, three ArcticDEM source-tile manifests and their parts, Copernicus GLO-30, OSM Ural relation and OSM Kara coast. Each cataloged source and all three ArcticDEM manifests are in R2. Eight objects/manifests were freshly read back and their SHA-256 verified on 2026-11-06. All ArcticDEM parts were individually checked and reassembled in the earlier readback; the three parts sets were not redownloaded for this check. The Neon boundary links these eight construction sources and three supporting geographic references.
+```bash
+python3 scripts/ural-audit/prepare_v8_boundary_inputs.py \
+  --r2-endpoint "$R2_ENDPOINT" --work-dir "$URAL_WORK"
+```
 
-Run `reproduce_raw_boundary.py --reviewed-boundary` with its normal inputs, pinned helpers, Python and dependency arguments. Add the archived Kara extract as `ural-kara-coast.osm` in the input directory. `reproduce_raw_boundary.py --help` describes arguments; `RAW_BOUNDARY_RESEARCH.md` lists the original seven inputs, selector export and runtime versions. The reviewed option runs the original source replay, `intersect_kara_coast.py`, and `geodesic_spring_join.py`, and checks the final newline-terminated file SHA-256 `904a5014d9ebad365c836dfa80bcabdc8fdac158b1ce0c06d277d657b5870d27`. An end-to-end replay from the pinned inputs passed on 2026-11-06. The earlier selector is a structured Neon decision, not a raw terrain source. The replay currently also requires its exact previously exported snapshot (`review_snapshot.json` SHA-256 `615bc1aaa67d099ebd140dc172fd54885d66e82ef595a57a97e5a284f483f7cc`); a later fresh export might not be byte-identical. The exact export is therefore also stored as gzip/base64 in the reviewed Neon boundary provenance under `selector_pinned_export`. Its compressed SHA-256 is `756e518fd7dc73a392b860bab5f7c52cc1a8b7c00989e3b151e525fec947b785`; a Neon readback verified the compressed bytes. Retrieve that JSON entry and use `restore_ural_selector.py` to verify both hashes and restore the exact bytes. `store_ural_selector_export.sql` documents the guarded Neon write.
+The verified native macOS geometry replay uses Python 3.9.6, NumPy 2.0.2,
+rasterio 1.4.3 with GDAL 3.9.3, pyproj 3.6.1, Shapely 2.0.7, Numba 0.60.0 and
+pyshp 2.3.1. Run the replay with that environment. Use a new output directory.
 
-`publish_ural_spring_geodesic.sql` records the guarded insert used to create this decision. Its `points` psql parameter is compact JSON of the 15 inserted intermediate positions extracted from the verified reviewed geometry; no geographic data is embedded in this file. It refuses stale source and point hashes or a pre-existing target. The insert statements were exercised in a transaction deliberately rolled back; actual Neon readback confirmed the 15 points, all other vertices and 11 source links. The recorded hash is of compact binary64 GeoJSON, not PostgreSQL's JSONB textual serialization.
+```bash
+python3 scripts/ural-audit/reproduce_v8_boundary.py \
+  --recipe "$URAL_WORK/recipe.json" \
+  --recipe-sha256 1e485322c45a8b135e998845c5aa77d856a6d215cd420504d33a8635e8ebc429 \
+  --inputs "$URAL_WORK/inputs" --workdir "$URAL_WORK/replay"
+```
 
-The earlier closure proofs were bound to the prior geometry hash and are not copied as valid proofs for this revision. Rebind and verify them before a downstream global pipeline consumes this line. The actual coastline and modeled headwater are working geographical choices, not claims of survey precision.
+The replay intersects the basin edge with OSM coastline way 28592677 at
+Kara. It models the spring connection from Copernicus GLO-30 and joins the
+modeled flow to OSM relation 214415 version 122 at spring node 1385867869.
+The last 15.36 m to the node use WGS84 geodesic stations spaced at most one
+metre apart. The remainder follows the mapped main-stream graph to its
+coastal endpoint. These selections describe the geographic rule used for
+V8, with terrain-derived sections dependent on the drainage model.
+
+The canonical compact GeoJSON SHA-256 is
+`746e6a85b05e40994e451e49e7df6333b8816dfe1d6624d9c20f9c669e953b32`.
+The final newline-terminated file has SHA-256
+`904a5014d9ebad365c836dfa80bcabdc8fdac158b1ce0c06d277d657b5870d27`.

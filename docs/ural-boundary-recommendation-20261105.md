@@ -41,13 +41,8 @@ authorize a map build.
   cartographic choice; mapped topology alone is not an independent survey of
   distributary dominance or current shoreline position.
 
-The record currently remains `selected_for_research`. Before representing it
-as a geographically certified or fully raw-derived boundary, independently
-establish the intended northern drainage crosswalk and headwater/join, or adopt
-these explicitly as model-dependent cartographic decisions. A georeferenced
-official hydrographic map or survey would materially improve the headwater
-assessment. None of the web references above supplies a survey-quality point
-or a measured divider, and the cited library and attraction descriptions may
-share underlying local sources; they should not be counted as independent
-measurements. Earlier evidence and exact hashes are in `FINDINGS.md` and
-`docs/ural-raw-boundary-research-20261105.md`.
+V8 uses these as model-dependent cartographic decisions. The headwater
+assessment has limited survey evidence, and the cited library and attraction
+descriptions may share underlying local sources. The [V8 construction
+recipe](../scripts/ural-audit/REVIEWED-URAL-20261106.md) describes how to
+reproduce the selected boundary from the raw sources.

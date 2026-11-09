@@ -52,8 +52,6 @@ places the Ural source on the slopes of Kruglaya Sopka, which supports the
 general headwater area but identifies no surveyed source node or divide join.
 No authoritative georeferenced headwater survey was found in this review.
 
-The seven construction inputs and the new supporting citations are distinct:
-neither government document supplied coordinates to construct this line. The
-prior structured northern line is still the route selector and supplies many
-coordinates, while raw-edge fidelity and model outputs are independently
-checked as documented in `docs/ural-raw-boundary-research-20261105.md`.
+The government documents provide geographic context. The [V8 construction
+recipe](../scripts/ural-audit/REVIEWED-URAL-20261106.md) specifies the
+HydroBASINS vertices and terrain crossings used to build the line.

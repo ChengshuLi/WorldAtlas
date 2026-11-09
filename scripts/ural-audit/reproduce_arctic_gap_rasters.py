@@ -33,24 +33,20 @@ def sha(path):
     return h.hexdigest()
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source-dir', type=Path, required=True)
-    parser.add_argument('--output-dir', type=Path, required=True)
-    args = parser.parse_args()
-    args.output_dir.mkdir(parents=True, exist_ok=True)
+def build_crops(source_dir, output_dir):
+    output_dir.mkdir(parents=True, exist_ok=True)
     for name, expected in INPUTS.items():
-        if sha(args.source_dir / name) != expected:
+        if sha(source_dir / name) != expected:
             raise ValueError('raw source hash mismatch: ' + name)
     results = []
     for name, sources, origin, shape, expected in CASES:
-        output = args.output_dir / name
+        output = output_dir / name
         if output.exists():
             raise FileExistsError(output)
         transform = from_origin(*origin)
         data = np.full(shape, np.nan, dtype='float32')
         for source in sources:
-            with rasterio.open(args.source_dir / source) as ds:
+            with rasterio.open(source_dir / source) as ds:
                 reproject(rasterio.band(ds, 1), data, src_transform=ds.transform,
                           src_crs=ds.crs, src_nodata=ds.nodata,
                           dst_transform=transform, dst_crs='EPSG:3413',
@@ -66,8 +62,17 @@ def main():
         results.append({'file': name, 'sha256': actual,
                         'nodata_cells': int(np.count_nonzero(np.isnan(data)))})
     for name, expected in INPUTS.items():
-        if sha(args.source_dir / name) != expected:
+        if sha(source_dir / name) != expected:
             raise ValueError('source changed during reproduction: ' + name)
+    return results
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source-dir', type=Path, required=True)
+    parser.add_argument('--output-dir', type=Path, required=True)
+    args = parser.parse_args()
+    results = build_crops(args.source_dir, args.output_dir)
     print(json.dumps({'outputs': results, 'resampling': 'nearest',
                       'note': 'Source order is significant in overlapping valid pixels.'}, sort_keys=True))
 
