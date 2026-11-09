@@ -1,6 +1,10 @@
 # Approved Caucasus WGS84 source replay
 
-This replay produces the selected Caucasus research boundary directly from pinned R2 raw-source readbacks and structured choices in Neon. It does not build a map. The source gate and new physical-generation closure proofs still need integration before a map run.
+This standalone replay reconstructs the selected Caucasus boundary from pinned
+R2 sources and a structured recipe in Neon. The V8 map build reads the selected
+boundary from its Neon land snapshot. Stage 2 uses that geometry to assemble
+the Europe region and checks the water closures against the newly generated
+physical grid.
 
 The boundary uses WGS84 ellipsoidal distances for drainage slopes, length ranking and geographic nearest-join choices. OSM and source line edges retain their coordinate-linear geometry. Exact source intersections and substring positions are topology operations; they do not choose a geographic nearest feature. Join decisions within 0.02 m are treated as one intersection only if their positions also lie within 0.02 m of each other; distinct competing joins fail closed.
 
