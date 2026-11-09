@@ -7,6 +7,21 @@ import that converted them to grid-center coordinates in Neon. The selected
 ocean revision `v7-ocean-iho-2026-draft-1` retains those same coordinates and
 labels. Use `ocean_fill_runner.py` for the selected routes and seeds.
 
+## Iceland source extraction
+
+Run `python extract_s130_iceland.py --archive S-130.zip --output iceland-routes.json`
+with the archive registered as `iho-s130-global-sea-areas`, version
+`1.0.0-44997a24a4fe`. The extractor verifies the ZIP and GML hashes and
+recovers the two Iceland rhumb routes and their four endpoint coordinates.
+It reads the endpoints of construction lines `M.1505` and `M.1504`, then
+reverses their order to match the selected routes in Neon. For Jan Mayen
+South Cape, the line endpoint is `-9.04279190236343` longitude and the
+associated point is `-9.04279190236342`. The selected Neon record uses
+the line endpoint. The extractor was reconstructed from the retained
+source and records. It emits a new JSON document.
+
+## Runner
+
 This isolated candidate adapts the preserved interval flood-fill engine. It is not a release or a raw-source rebuild. It does not authenticate Neon snapshots and refuses the CLI unless `--allow-unverified-snapshot` is supplied. It never reads prior ocean labels and it creates a fresh output directory exclusively. No deployment is performed.
 
 The snapshot uses `worldatlas-geography-decision-export-v1`: accepted, matching entity/decision revisions; endpoints with longitude/latitude; ordered routes; ocean seed records linked by entity IDs to water codes 7–10; and one `ocean_fill` policy with `connectivity: 4`, `wrap_longitude`, `barrier_tie_rule: "left-of-oriented-route"`, `unseeded_policy: "report-only"`, and explicit unique `route_ids` and `seed_ids`. Routes currently support `lonlat_polyline`, `meridian`, `wgs84_geodesic`, and `spherical_rhumb`. Both geographic interpolation types require `parameters.max_step_km` in (0,1]. Geodesics additionally require exact `build.software_versions.pyproj` and `.proj` matching the installed libraries. Rhumbs are constant-bearing curves interpolated in spherical Mercator coordinates, matching the IHO S-130 Ed.1.0.0 construction lines; pole endpoints are unsupported. Antimeridian-crossing routes and unsupported geometry fail closed. Distinct ocean seeds reaching the same connected component also fail. Seed names, boundary choices, and physical limits come from the export, not hard-coded geography.
