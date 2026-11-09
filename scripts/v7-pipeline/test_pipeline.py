@@ -112,6 +112,9 @@ class Fixture(unittest.TestCase):
                     'input_root': str(self.root),
                     'sources': {key: pipeline.pin(self.sentinel) for key in required},
                     'land_controls': {'minimum_free_bytes': 2 << 30}}
+        self.cfg['sources']['water_snapshot'] = {'selected_water': {
+            name: pipeline.pin(self.sentinel) for name in ('water', 'ocean')
+        }}
 
     def make(self):
         config = pipeline.write(self.inputs / 'request.json', self.cfg)
@@ -228,6 +231,9 @@ class Fixture(unittest.TestCase):
     def test_one_configuration_fetches_pinned_r2_inputs_into_selected_work_directory(self):
         payload = b'{}'
         self.cfg['sources'] = {key: self.cloud(payload) for key in self.cfg['sources']}
+        self.cfg['sources']['water_snapshot'] = {'selected_water': {
+            name: self.cloud(payload) for name in ('water', 'ocean')
+        }}
         self.cfg['input_root'] = '/not-this-computer'
         config = pipeline.write(self.inputs / 'cloud-config.json', self.cfg)
         calls, results = [], []
@@ -328,6 +334,9 @@ class Fixture(unittest.TestCase):
         source = {'neon': {'source_id': 'selected', 'version': 'v1', 'serialization': 'stored-json-text'},
                   'sha256': expected, 'size_bytes': len(payload)}
         self.cfg['sources'] = {key: source for key in self.cfg['sources']}
+        self.cfg['sources']['water_snapshot'] = {'selected_water': {
+            name: source for name in ('water', 'ocean')
+        }}
         config = pipeline.write(self.inputs / 'neon-config.json', self.cfg)
         statements = []
         class Database:
@@ -515,11 +524,25 @@ class Fixture(unittest.TestCase):
         self.assertFalse(failure['stages']['water']['complete'])
 
     def test_coastal_failure_cancels_basins_without_waiting_for_all_results(self):
-        snapshot = pipeline.write(self.inputs / 'water.json',
-                                  {'basins': [{'id': f'b{i}'} for i in range(12)]})
-        self.cfg['sources']['water_snapshot'] = pipeline.pin(snapshot)
+        registry = {'source': 'neon-export',
+                    'decision_revision': {'id': 'fixture', 'entity_revision': 'entities', 'status': 'draft'},
+                    'entity_revision': {'id': 'entities', 'status': 'draft'}, 'category_bindings': []}
+        water = pipeline.write(self.inputs / 'water.json', {
+            **registry, 'basins': [{'id': f'b{i}'} for i in range(12)], 'sources': [], 'features': [],
+            'policies': [{'kind': name, 'evidence': {'execution_status': 'selected_for_research'}}
+                         for name in ('coastline_assignment', 'closed_water_assignment', 'layer_precedence')],
+        })
+        ocean = pipeline.write(self.inputs / 'ocean.json', {
+            **registry, 'endpoints': [], 'routes': [], 'ocean_seeds': [],
+            'policies': [{'kind': 'ocean_fill', 'evidence': {'execution_status': 'selected_for_research'}}],
+        })
+        land = pipeline.write(self.inputs / 'land.json', registry)
+        self.cfg['sources']['water_snapshot'] = {'selected_water': {
+            'water': pipeline.pin(water), 'ocean': pipeline.pin(ocean),
+        }}
         self.cfg['basin_workers'] = 1
         runner = self.make()
+        runner.document('stage2', {'inputs': {'decision_snapshot': pipeline.pin(land)}})
         entered, released = threading.Event(), threading.Event()
         seen = []
         def coast(*args):
@@ -572,7 +595,9 @@ class Fixture(unittest.TestCase):
             'category_bindings': [{'entity_id': 101, 'code': 6, 'physical_class': 'water'}],
             'sources': [{'source_id': 'seavox', 'version': 'fixture', 'sha256': pipeline.sha(archive)}]})
         self.cfg['sources']['seavox_archive'] = pipeline.pin(archive)
-        self.cfg['sources']['water_snapshot'] = pipeline.pin(snapshot)
+        self.cfg['sources']['water_snapshot'] = {'selected_water': {
+            'water': pipeline.pin(snapshot), 'ocean': pipeline.pin(self.sentinel),
+        }}
         runner = self.make()
         width, height = 131072, 54614
         physical, land = self.inputs / 'physical', self.inputs / 'land'
@@ -685,6 +710,9 @@ class Fixture(unittest.TestCase):
                 'mode': 'r2-s3', 'endpoint_url': 'https://' + '0' * 32 + '.r2.cloudflarestorage.com'}}}
         cfg['sources'].update(land_config={'json': land}, water_config={'json': pipeline.read(self.inputs / 'water.json')},
                               raw_manifest={'json': manifest})
+        cfg['sources']['water_snapshot'] = {'selected_water': {
+            name: {'json': {}} for name in ('water', 'ocean')
+        }}
         config = pipeline.write(self.inputs / 'single-cloud-config.json', cfg)
         calls = []
         with self.fake_r2(payloads, calls):

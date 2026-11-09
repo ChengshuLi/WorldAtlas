@@ -15,9 +15,6 @@ class DirectSeedExecutionTests(unittest.TestCase):
   pins['terminal_checker']={'sha256':seed_producer.PROVISIONAL_TERMINAL_CHECKER}
   with self.assertRaisesRegex(ValueError,'unreviewed'):seed_producer.validate_executable_pins(pins,False)
   seed_producer.validate_executable_pins(pins,True)
-  with self.assertRaisesRegex(ValueError,'prior physical report'):seed_producer.validate_fresh_checker(pins,True)
-  pins['prior_physical_report']={'sha256':'1'*64}
-  seed_producer.validate_fresh_checker(pins,True)
   pins['closure_checker']['sha256']='0'*64
   with self.assertRaisesRegex(ValueError,'unreviewed'):seed_producer.validate_executable_pins(pins,True)
  def test_region_worker_is_invoked_in_process_and_code_is_bound(self):

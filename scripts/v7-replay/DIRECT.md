@@ -85,18 +85,11 @@ input root, so one run can keep its artifacts together without copying them.
 
 ## Separately pinned policy revisions
 
-A labeled local overlay remains `local-user-directed-overlay-not-neon`.
-`local_water_overlay.py` reconstructs it from its pinned land snapshot, Neon water
-structure and explicit overlay before a consumer accepts it. It does not write
-Neon or confer approval. Its land snapshot pin is validated separately from the
-water-policy snapshot; local selection markers are honored only after verification.
-
-When the ocean revision intentionally differs from the prefill revision, use the
-existing `../v7-recovery/ocean/split_lineage_ocean.py` and
-`split_lineage_compose.py`. They bind both snapshots, registry, prefill and
-partition and retain their distinct provenance. The V8 policy split must not be
-collapsed by relabeling an older snapshot or editing a manifest. Closed-water
-reuse requires the existing partition-equivalence checks.
+The pipeline binds the selected named-water and ocean exports to the
+same run's mainland snapshot. The effective water snapshot records all
+three source pins and validates the shared registry. The water stages
+build named basins, coastal water, prefill, ocean and enclosed water
+from that bound selection.
 
 ## Wall-clock timings
 

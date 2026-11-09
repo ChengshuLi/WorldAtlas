@@ -1,11 +1,9 @@
 # Candidate ocean fill runner
 
-V8 inherits its four ocean seeds from the Neon revision
-`v7-ocean-seed-recovery-draft-1`. The original grid indices are in
-`run_fresh_ocean_fill.py`, and `original_ocean_seed_rows.sql` records the
-import that converted them to grid-center coordinates in Neon. The selected
-ocean revision `v7-ocean-iho-2026-draft-1` retains those same coordinates and
-labels. Use `ocean_fill_runner.py` for the selected routes and seeds.
+V8 uses the editable `v8-ocean` revision in Neon. The four seed points
+are inside the selected marine features in the pinned Natural Earth
+archive. The end-to-end pipeline binds the ocean export to the current
+land and named-water selections before calling `ocean_fill_runner.py`.
 
 ## Southern ocean route sources
 
@@ -25,12 +23,9 @@ Both endpoints store exact fractions for the degree values in Neon.
 At Cape Agulhas, the [SANParks tip latitude](https://www.sanparks.org/parks/agulhas/what-to-do/activities/scenic-landmarks)
 locates the search along the 20°E meridian. The selected endpoint is the
 nearest south-facing edge with dry cells on both sides of the meridian in
-the row above and water cells in the row below. The historical
-`data/osm/physical/660ac7608f72b447c95eb8820979951fe589f25c70303efe732b374049127017/final-dry-mask.tif`
+the row above and water cells in the row below. The current physical grid
 has that transition at row edge 45,450, between columns 72,817 and 72,818.
-It yields latitude −34.8321533203125°. Encoding this mask with
-`write_run_block(..., binary=True)` in `scripts/v7-raw-mask/compose_physical.py`
-reproduces both decoded physical streams pinned by the endpoint.
+It yields latitude −34.8321533203125°.
 
 ## Iceland source extraction
 
@@ -68,11 +63,3 @@ Before use beyond a test: authenticate the exported Neon revision and trusted sn
 For draft research, first run `make_candidate_build.py --snapshot SNAPSHOT --snapshot-sha256 SHA --physical-dir PHYSICAL_OUTPUT --physical-report-sha256 SHA --out NEW_MANIFEST --allow-draft-snapshot`. This binds the new physical TIFF and row/run hashes, the draft snapshot and installed geodesic software versions. Pass its path and digest with `--candidate-build` and `--candidate-build-sha256`, as well as `--allow-draft-snapshot`, to the ocean runner. The existing `--allow-unverified-snapshot` is still required. No historical physical-grid pin is used for this draft path. The candidate manifest is not an approval, and the complete coast, closed-water and decision inputs are still required for a final map.
 
 Draft coast, closed-water and ocean policies require an explicit research-selection marker before execution. An unselected or unmarked policy stops the relevant builder; its presence in an export is not an approval.
-
-## Split-lineage research builds
-
-When a newer ocean decision is based on an unchanged land/prefill snapshot, use `split_lineage_ocean.py` rather than changing or forging either snapshot. Generate the ocean candidate-build manifest with `make_candidate_build.py` first. The split runner takes pinned ocean and prefill snapshots, prefill plan and directory, physical RLEs, and the pinned candidate-build manifest. The ocean revision evidence must identify the exact base prefill snapshot as `base_local_snapshot_sha256`; entity revisions and every category binding must match. The runner checks both plan and audit against the prefill, checks the physical grid and candidate manifest, rechecks all input bytes after the fill, and records both decision lineages. It requires `--allow-unverified-snapshots` and `--allow-draft-snapshot`. These flags do not authenticate either export or accept the decisions.
-
-To create a full research grid without rerunning an unchanged enclosed-water stage, use `split_lineage_compose.py --config CONFIG --out NEW_DIRECTORY --allow-unverified`. The JSON config schema is `worldatlas-split-ocean-final-config-v1`; its `inputs` object must pin each input with `path` and `sha256`. Required keys are `baseline_report`, `baseline_rows`, `baseline_runs`, `baseline_plan`, `closed_manifest`, `prefill_snapshot`, `ocean_snapshot`, `prefill_plan`, `prefill_audit`, `ocean_candidate_build`, and, for both `old_` and `new_`, `partition`, `layer_manifest`, `summary`, `ocean_rows`, `ocean_spans`, `unseeded_rows`, `unseeded_spans`, and `barrier`. Partition binary files must be adjacent to their pinned manifest. The baseline plan must bind the old partition and both old ocean and enclosed-water manifests. Each old and new partition span is checked against every row of its hash-pinned ocean layer.
-
-Composition refuses changes to ocean eligibility, seeds, unseeded cell footprints or component grouping, and independently scans both barriers for every cut incident to an unseeded cell, including internal cuts omitted by partition summaries. Any such contact blocks reuse. It verifies the previous full-grid label at every changed ocean cell, preserves every other cell, rechecks all input hashes, and writes a fresh grid, cell-difference spans, and separate-lineage report. If any unseeded component or cut contact changes, rerun the enclosed-water stage instead; do not force this reuse path. This is a research artifact, not an accepted or authenticated release.

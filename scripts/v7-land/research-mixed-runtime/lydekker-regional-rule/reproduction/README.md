@@ -1,31 +1,20 @@
-# V8 regional policy preparation
+# V8 regional island decisions
 
-The [original policy](../selected-regional-policy.json) records how the
-selected island groups were worked out. V8 uses a copy with updated runtime
-code pins and the same group choices. The original policy is registered as
-`lydekker-whole-island-regional-v1` on decision revision
-`v7-list1-wgs84-draft-170` in `atlas.regional_island_rule_sets`.
+The editable `v8-regional-islands` revision in Neon contains the selected
+island affiliations and the `lydekker-whole-island-regional-v1` rule set.
+The [V8 pipeline](../../../../v7-pipeline/README.md) pins the revision's
+decision export and rule, plus the source-derived Lydekker geometry.
 
-1. `reconstruct_current_replay.py` reconciles earlier source resolution
-   reports with the selected Neon snapshot.
-2. `apply_reconciled_current.py` produces the first regional diagnostic.
-   The `preview_*` scripts extend it in order through source extents,
-   named source groups, nearest groups, government named groups, and reef
-   groups. Each consumes a hash-pinned earlier result.
-3. The selected choices were recorded in the original policy.
-   `prepare_neon_transaction.py` prepares the SQL that registered it.
-   `compare.py` checks the regional changes against the historical comparison
-   window.
+The rule states the geographic extents, named witnesses and OSM feature
+IDs. The regional stage reads GeoNames records and the pinned OSM
+shapefile, checks each selected geometry hash, and intersects the source
+features with the physical components from the current run. It requires
+whole-component coverage and verifies that the named witnesses fall
+inside the selected features. The report records the source IDs, the
+witnesses and the resolved component IDs for that run.
 
-These scripts preserve the original working paths and hash checks. To run
-them, first recreate their input workspace with the named snapshot, source
-archives, physical components and resolver reports. The two original feature
-previews are preserved in `atlas.structured_documents` as
-`v8-regional-residual-source-feature-preview` and
-`v8-regional-residual-unnamed-feature-preview`. Export their stored JSON text
-unchanged to the filenames in the scripts. The original policy records their
-SHA-256 values.
-
-The normal [V8 pipeline](../../../../v7-pipeline/README.md) starts from the
-already selected policy, regional snapshot and line in Neon. It applies the
-policy to the physical components of the current run.
+The named group extents use NGA Sailing Directions. The Indonesian
+national gazetteer and GeoNames provide island and reef witnesses, and
+the OSM archive supplies the selected polygon geometries. The two
+regional extent rules and four explicit source-feature groups are
+editable in the same Neon rule set.

@@ -193,6 +193,9 @@ class ExecutorResumeTests(unittest.TestCase):
                     'regional_template water_snapshot seavox_archive coastal_plan neon_selection osm_receipt').split()
         cfg = {'schema': 'worldatlas-end-to-end-pipeline-v1',
                'input_root': str(self.root), 'sources': {key: pipeline.pin(sentinel) for key in required}}
+        cfg['sources']['water_snapshot'] = {'selected_water': {
+            name: pipeline.pin(sentinel) for name in ('water', 'ocean')
+        }}
         self.config = pipeline.write(inputs / 'request.json', cfg)
         self.out = self.root / 'run'
         self.source = inputs / 'source.bin'

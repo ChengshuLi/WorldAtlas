@@ -217,7 +217,6 @@ class Pipeline:
         self.runtime = runtime_identity()
         self.resume = resume
         self.source_pins = []
-        self.prefill_reference = None
         self.input_cache = {}
         self.acquisition_intervals = []
         # Verify every external document before expensive computation starts.
@@ -226,7 +225,7 @@ class Pipeline:
                     'seavox_archive', 'coastal_plan', 'neon_selection', 'osm_receipt'}
         selections = self.cfg.get('sources', {})
         if (not isinstance(selections, dict) or not required <= selections.keys() or
-                set(selections) - required - {'prior_physical_report', 'ocean_snapshot', 'reference_rows', 'reference_runs'}):
+                set(selections) - required - {'prior_physical_report', 'reference_rows', 'reference_runs'}):
             raise ValueError('wrong source selection input set')
         resolved = self.resolve_raw_catalog(selections)
         self.draft_land = None
@@ -243,24 +242,13 @@ class Pipeline:
             published = self.resolve_source('land_snapshot', resolved['land_snapshot'])
             assemble = stage_module(SCRIPTS / 'caucasus-audit/caucasus_seed_gate.py').assembled_region_hash
             draft = read(self.draft_land)
-            prepared = prepare_land_draft(draft, read(published), assemble)
+            prepared = prepare_land_draft(draft, read(published), assemble,
+                                          bind_published_sources='prior_physical_report' in resolved)
             self.preview_land = self.save_source_document(prepared, serialization='canonical-ascii')
         self.sources = {name: self.resolve_source(name, spec) for name, spec in resolved.items()}
         if self.preview_land is not None:
             physical_selection = draft_physical_selection(draft, read(self.sources['neon_selection']))
             self.sources['neon_selection'] = self.save_source_document(physical_selection)
-        if self.preview_land is not None and 'ocean_snapshot' in self.sources:
-            ocean_path = self.sources['ocean_snapshot']
-            ocean = read(ocean_path)
-            evidence = ocean['decision_revision']['evidence']
-            if (self.prefill_reference is None
-                    or evidence.get('base_local_snapshot_sha256') != sha(self.prefill_reference)):
-                raise ValueError('published ocean decisions do not match the published water selection')
-            evidence['preview_binding'] = {'ocean_export_sha256': sha(ocean_path),
-                                           'published_water_sha256': sha(self.prefill_reference)}
-            evidence['base_local_snapshot_sha256'] = sha(self.sources['water_snapshot'])
-            self.sources['ocean_snapshot'] = self.save_source_document(ocean, serialization='canonical-utf8')
-            self.prefill_reference = None
         if compare_release is not None:
             if {'reference_rows', 'reference_runs'} & self.sources.keys():
                 raise ValueError('choose a published comparison release or local reference streams')
@@ -584,26 +572,13 @@ class Pipeline:
     def resolve_source(self, name, spec):
         if name == 'land_snapshot' and self.preview_land is not None:
             return self.preview_land
-        if name == 'water_snapshot' and isinstance(spec, dict) and set(spec) == {'local_water_overlay'}:
-            inputs = spec['local_water_overlay']
-            if not isinstance(inputs, dict) or set(inputs) != {'base', 'water', 'overlay', 'reference'}:
-                raise ValueError('local water selection requires base, water, overlay and reference inputs')
-            paths = {key: self.resolve_source(key, value) for key, value in inputs.items()}
-            producer = stage_module(SCRIPTS / REPLAY / 'local_water_overlay.py')
-
-            def make(base):
-                result = producer.make(read(base), read(paths['water']), read(paths['overlay']),
-                    base, sha(base), paths['water'], sha(paths['water']), paths['overlay'], sha(paths['overlay']))
-                producer.verify(result)
-                return result
-
-            result = make(paths['base'])
-            if not producer.equivalent_selection(result, read(paths['reference'])):
-                raise ValueError('regenerated water selection differs from pinned reference')
-            self.prefill_reference = paths['reference']
-            if self.preview_land is not None:
-                result = make(self.preview_land)
-            return self.save_source_document(result, serialization='canonical-utf8')
+        if name == 'water_snapshot':
+            if not isinstance(spec, dict) or set(spec) != {'selected_water'}:
+                raise ValueError('water_snapshot must select named-water and ocean decisions')
+            inputs = spec['selected_water']
+            if not isinstance(inputs, dict) or set(inputs) != {'water', 'ocean'}:
+                raise ValueError('selected water requires named-water and ocean decisions')
+            return {key: self.resolve_source(key, value) for key, value in inputs.items()}
         if isinstance(spec, dict) and set(spec) in ({'json'}, {'json', 'serialization'}) and isinstance(spec['json'], (dict, list)):
             return self.json_source(spec['json'], raw_manifest=name == 'raw_manifest',
                                     serialization=spec.get('serialization', 'pretty-ascii'))
@@ -663,11 +638,6 @@ class Pipeline:
             add(template['point_request'])
             for spec in read(template['point_request']['path']).get('source_files', []):
                 add(spec)
-        snapshot = read(self.sources['water_snapshot'])
-        provenance = snapshot.get('local_overlay_provenance', {})
-        for prefix in ('base_land_snapshot', 'water_neon_snapshot', 'overlay'):
-            if prefix + '_path' in provenance:
-                add({'path': provenance[prefix + '_path'], 'sha256': provenance[prefix + '_sha256']})
 
     def document(self, name, value):
         path = self.out / 'configs' / (name + '.json')
@@ -886,19 +856,6 @@ class Pipeline:
             'seed_kernel': SCRIPTS / 'v7-recovery/land/neon-mainland-regions-20261104/rasterizer/seed_runtime.py'}.items()}
         if 'prior_physical_report' in self.sources:
             inputs['prior_physical_report'] = pin(self.sources['prior_physical_report'])
-        resolution = read(self.sources['resolution_template'])
-        if resolution.get('schema') != 'mainland-witness-request-v1':
-            raise ValueError('wrong mainland resolution template')
-        for key in ('physical_rows', 'physical_runs', 'component_rows', 'component_runs',
-                    'component_manifest', 'component_source'):
-            resolution[key] = inputs[key]
-        resolution['snapshot'] = inputs['decision_snapshot']
-        resolution['grid'] = grid
-        resolution['code_sha256'] = {key: sha(SCRIPTS / STAGE2 / rel) for key, rel in {
-            'resolver': 'v7-land/mainland-witness-prototype/resolve_mainland.py',
-            'helper': 'v7-land/point-component-prototype/resolve.py',
-            'named_identity': 'v7-land/named-identity-prototype/named_identity.py'}.items()}
-        inputs['resolution_request'] = pin(self.document('resolution', resolution))
         # The supported source contract accepts an explicitly pinned producer;
         # no copied producer script or patched report is generated.
         closure = {'schema': 'physical-water-closure-contract-v2',
@@ -913,6 +870,45 @@ class Pipeline:
                          'encoding_evidence_sha256': sha(SCRIPTS / 'v7-raw-mask/compose_physical.py')},
             'resources': {'max_cell_visits': 2000000}}
         inputs['closure_contract'] = pin(self.document('closure', closure))
+        if 'prior_physical_report' not in inputs:
+            authored = inputs['decision_snapshot']
+            snapshot = read(authored['path'])
+            if snapshot.get('source') != 'neon-export':
+                raise ValueError('current physical binding requires an editable Neon export')
+            physical_pins = {key + '_sha256': inputs[key]['sha256']
+                             for key in ('physical_rows', 'physical_runs', 'physical_report')}
+            snapshot['land_baseline_policy'].update(physical_pins)
+            selected = set(snapshot['land_baseline_policy']['route_ids'])
+            for route in snapshot['routes']:
+                if route['route_id'] not in selected:
+                    continue
+                provenance = route['provenance']
+                checker = ('terminal_checker' if route['closure_method'] == 'physical_terminal_closure_v1'
+                           else 'closure_checker')
+                route['provenance'] = {
+                    'source_refs': provenance['source_refs'],
+                    'lineage_status': provenance.get('lineage_status', 'incomplete'),
+                    **physical_pins,
+                    'encoding_evidence_sha256': closure['physical']['encoding_evidence_sha256'],
+                    'contract_sha256': inputs['closure_contract']['sha256'],
+                    'support_checker_sha256': inputs['closure_checker']['sha256'],
+                    'checker_sha256': inputs[checker]['sha256'],
+                }
+            snapshot['runtime_physical_binding'] = {'authored_snapshot_sha256': authored['sha256']}
+            inputs['decision_snapshot'] = pin(self.document('land-snapshot-for-current-physical', snapshot))
+        resolution = read(self.sources['resolution_template'])
+        if resolution.get('schema') != 'mainland-witness-request-v1':
+            raise ValueError('wrong mainland resolution template')
+        for key in ('physical_rows', 'physical_runs', 'component_rows', 'component_runs',
+                    'component_manifest', 'component_source'):
+            resolution[key] = inputs[key]
+        resolution['snapshot'] = inputs['decision_snapshot']
+        resolution['grid'] = grid
+        resolution['code_sha256'] = {key: sha(SCRIPTS / STAGE2 / rel) for key, rel in {
+            'resolver': 'v7-land/mainland-witness-prototype/resolve_mainland.py',
+            'helper': 'v7-land/point-component-prototype/resolve.py',
+            'named_identity': 'v7-land/named-identity-prototype/named_identity.py'}.items()}
+        inputs['resolution_request'] = pin(self.document('resolution', resolution))
         lineage = {'schema': 'stage1-raw-physical-lineage-request-v1', 'code_root': str(SCRIPTS / 'v7-raw-mask'), 'inputs': {
             'pipeline_report': pin(physical.parent / 'report.json'),
             'neon_selection': pin(self.sources['neon_selection']),
@@ -985,8 +981,13 @@ class Pipeline:
         return {'manifest_path': str(assembled), 'manifest_sha256': sha(assembled)}
 
     def water(self, physical, land):
-        snapshot = self.sources['water_snapshot']
+        sources = self.sources['water_snapshot']
         with self.timing.measure('water', 'prepare-water-selection'):
+            stage2 = read(self.out / 'configs/stage2.json')['inputs']['decision_snapshot']
+            verify_pins([stage2])
+            binder = stage_module(SCRIPTS / REPLAY / 'local_water_overlay.py')
+            selected = binder.bind_selected(stage2['path'], sources['water'], sources['ocean'])
+            snapshot = self.document('water-snapshot', selected)
             decisions = read(snapshot)['basins']
             workers = self.cfg.get('basin_workers', 1)
             if type(workers) is not int or workers < 1:
@@ -1043,15 +1044,13 @@ class Pipeline:
         final_plan = self.out / 'final-plan.json'
         self.stage('water', 'prepare-final', REPLAY + '/prepare_final_plan.py',
                      spec=specpath, spec_sha256=sha(specpath), out=final_plan)
-        final = self.out / ('baseline-final' if 'ocean_snapshot' in self.sources else 'final')
+        final = self.out / 'final'
         self.stage('water', 'compose-final', REPLAY + '/compose_direct.py',
                      plan=final_plan, input_root=self.root, out=final,
                      allow_research_shore=True, **self.flags())
-        if 'ocean_snapshot' in self.sources:
-            final = self.split_ocean(physical, prefill, plan, snapshot, ocean, closed, final_plan, final)
         return final
 
-    def run_ocean(self, physical, prefill, plan, snapshot, name, baseline_snapshot=None):
+    def run_ocean(self, physical, prefill, plan, snapshot, name):
         candidate = self.out / (name + '-candidate.json')
         self.stage('water', name + '-candidate', OCEAN + '/make_candidate_build.py',
                      **self.pinned_options('snapshot', snapshot), physical_dir=physical,
@@ -1061,44 +1060,9 @@ class Pipeline:
                        prefill_dir=prefill, prefill_plan=plan,
                        **self.pinned_options('candidate_build', candidate),
                        out=self.out / name, **self.flags())
-        if baseline_snapshot is None:
-            self.stage('water', name, OCEAN + '/ocean_fill_runner.py',
-                         **self.pinned_options('snapshot', snapshot), **options)
-        else:
-            options.pop('allow_unverified_snapshot')
-            self.stage('water', name, OCEAN + '/split_lineage_ocean.py',
-                         **self.pinned_options('ocean_snapshot', snapshot),
-                         **self.pinned_options('prefill_snapshot', baseline_snapshot),
-                         prefill_reference=self.prefill_reference,
-                         allow_unverified_snapshots=True, **options)
+        self.stage('water', name, OCEAN + '/ocean_fill_runner.py',
+                   **self.pinned_options('snapshot', snapshot), **options)
         return self.out / name
-
-    def split_ocean(self, physical, prefill, plan, snapshot, old, closed, baseline_plan, baseline):
-        new_snapshot = self.sources['ocean_snapshot']
-        new = self.run_ocean(physical, prefill, plan, new_snapshot, 'updated-ocean', snapshot)
-        with self.timing.measure('water', 'prepare-split-final'):
-            paths = {'baseline_report': baseline / 'report.json', 'baseline_rows': baseline / 'rows.u32le',
-                'baseline_runs': baseline / 'runs.u32le', 'baseline_plan': baseline_plan,
-                'closed_manifest': closed / 'manifest.json', 'prefill_snapshot': snapshot,
-                'ocean_snapshot': new_snapshot, 'prefill_plan': plan,
-                'prefill_audit': prefill / 'prefill-audit.json',
-                'ocean_candidate_build': self.out / 'updated-ocean-candidate.json'}
-            if self.prefill_reference is not None:
-                paths['prefill_reference'] = self.prefill_reference
-            for prefix, directory in [('old', old), ('new', new)]:
-                paths.update({prefix + '_' + key: directory / rel for key, rel in {
-                    'partition': 'partition/manifest.json', 'layer_manifest': 'ocean-layer-manifest.json',
-                    'summary': 'run-summary.json', 'ocean_rows': 'partition/ocean_rows.u64le',
-                    'ocean_spans': 'partition/ocean_assignment_spans.u32le',
-                    'unseeded_rows': 'partition/unseeded_rows.u64le',
-                    'unseeded_spans': 'partition/unseeded_component_spans.u32le',
-                    'barrier': 'barrier_edges.u32le'}.items()})
-            config = self.document('split-final', {'schema': 'worldatlas-split-ocean-final-config-v1',
-                                                   'inputs': {key: pin(path) for key, path in paths.items()}})
-        final = self.out / 'final'
-        self.stage('water', 'compose-split-final', OCEAN + '/split_lineage_compose.py',
-                     config=config, out=final, allow_unverified=True)
-        return final
 
     def compare(self, final, physical):
         if not ({'reference_rows', 'reference_runs'} & self.sources.keys()):

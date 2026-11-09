@@ -52,10 +52,9 @@ release records. Use a new output directory for each preview.
       --draft-land-revision YOUR_REVISION
 
 The runner freezes the draft in one read-only transaction and recalculates the
-line and region checksums. This preview supports edits to the mainland lines
-and the regions that use them. It uses the configured raw inputs, published
-source evidence and selected regional and water decisions. The frozen draft
-and resolved input checksums are recorded with the run. Resume with the same
+line and region checksums. It uses the draft's source evidence, the configured
+raw inputs and the selected regional and water decisions. The frozen draft and
+resolved input checksums are recorded with the run. Resume with the same
 arguments and `--resume` to use the frozen draft again.
 
 The preview compares with `v8.0` by default. Use `--compare-release VERSION` to
@@ -90,9 +89,8 @@ so they are not downloaded eagerly. Immutable source documents are never rewritt
 Keep structured decisions/configuration data in Neon or inline here, and R2 for
 used raw sources and the final map. Credentials remain outside the configuration.
 An inline document can declare its source `serialization` when exact original
-byte identity matters. The `local_water_overlay` source calls the ordinary
-producer and verifier, then compares every selected value and type with the
-pinned reference. Only its declared local provenance paths/hashes may differ.
+byte identity matters. The water selection pins the named-water and ocean
+exports separately and binds them to the land produced in the same run.
 
     python3 scripts/v7-pipeline/run_pipeline.py \
       /workspace/selection/config.json /workspace/runs/fresh-run
@@ -120,13 +118,12 @@ All `sources` are explicit `{path, sha256}` pins:
   their R2 bucket, key, byte size and SHA-256. `source_staging` in
   `physical_controls` uses read-only S3 GETs against R2, never intermediate R2 writes.
 - `land_snapshot`, `neon_selection`, `osm_receipt`: selected source/decision data
-  and custody evidence consumed by the normal Stage 2 lineage validator.
+  and custody evidence consumed by the normal Stage 2 lineage validator. The
+  runner binds the editable mainland selection to the physical grid from this
+  run and verifies its three water closures against that grid.
 - `resolution_template`: mainland witness/source selection data. Its source
   files are preserved; physical/component pins and current executable hashes
   are generated afresh. Historical output artifacts are not reused.
-- `prior_physical_report`: optional prior report required by a selected
-  locally derived land snapshot's independent physical/seed reproof.
-  Its presence does not replace fresh physical output or relabel the snapshot.
 - `regional_template`: selected regional decision request and raw source versions.
   The editable regional revision exports through
   [export_regional.sql](../v7-land/research-mixed-runtime/stage3-mixed-leeward-full-20261105/export_regional.sql).
@@ -135,16 +132,12 @@ All `sources` are explicit `{path, sha256}` pins:
   independent geographic evidence to the editable continent choice.
   The normal preparer validates the fresh Stage 2 artifacts and binds current
   code and preserves the template’s source policy.
-- `water_snapshot`, `seavox_archive`, `coastal_plan`: selected named-basin,
-  coast, closed-water and baseline ocean policies, the pinned SeaVoX archive,
-  and the complete coastal tessellation. All basins in the snapshot are built,
-  including both direct and shared-shore assignments. Each completed basin runs
-  the normal independent raster-to-span coverage verifier before prefill.
-- `ocean_snapshot`: optional separately pinned final ocean revision. When given,
-  the runner builds the baseline complete grid, executes the normal split-ocean
-  producer, and uses the split compositor to verify unseeded-partition
-  equivalence before reusing enclosed water. This is needed when the selected
-  final revision includes an ocean change such as the V8 Iceland boundary.
+- `water_snapshot.selected_water` pins separate editable named-water and ocean
+  exports. The runner binds them to the mainland and regional land generated
+  by the current run. `seavox_archive` supplies named-basin geometry, and
+  `coastal_plan` supplies the full coastal tessellation. Every basin receives
+  an independent raster-to-span coverage check before prefill. The selected
+  ocean routes and seeds run once, followed by enclosed-water assignment.
 - `reference_rows`, `reference_runs`: optional explicit full-grid reference pins,
   named `rows.u32le` and `runs.u32le` in one directory. The normal comparator
   checks every cell and fails the run if any differ. Reference equality is a
@@ -193,8 +186,8 @@ processing elapsed seconds:
 - Mainland/islands: complete request preparation, component generation, Stage 2,
   regional handoff preparation, and the mixed/regional producer.
 - Water: complete preparation, all parallel basin/coast work, assembly, prefill,
-  ocean, enclosed water and final composition, including the optional split
-  ocean. Nested and concurrent intervals are counted once, never added twice.
+  ocean, enclosed water and final composition. Nested and concurrent intervals
+  are counted once.
 - Verification: final source/output hash verification and the optional
   full-grid comparison.
 

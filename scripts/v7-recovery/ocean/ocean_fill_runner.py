@@ -6,6 +6,7 @@ Neon. Outputs are newly created and remain staged; unseeded water is reported.
 """
 from __future__ import annotations
 import argparse, hashlib, json, math, re, struct, time
+from bisect import bisect_right
 from pathlib import Path
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
@@ -39,6 +40,33 @@ def num(x):
     n=float(x)
     if not math.isfinite(n):raise ValueError('invalid coordinate')
     return n
+
+def coast_edge_latitude(physical, longitude, reference_latitude):
+    """Find the nearest south-facing coast edge straddling the meridian."""
+    step = Fraction(360, physical.width)
+    west_cell = math.floor((longitude + 180) / step - Fraction(1, 2))
+    if not 0 <= west_cell < physical.width - 1:
+        raise ValueError('coast endpoint requires two cells bracketing its meridian')
+
+    def codes(y):
+        row = physical.row(y)
+        return tuple(row[bisect_right(row, x, key=lambda run: run[0])][1]
+                     for x in (west_cell, west_cell + 1))
+
+    north_codes = codes(0)
+    nearest = None
+    for y in range(1, physical.height):
+        south_codes = codes(y)
+        if north_codes == (17, 17) and south_codes == (1, 1):
+            latitude = 90 - y * step
+            distance = abs(latitude - reference_latitude)
+            if nearest is None or distance < nearest[0]:
+                nearest = distance, latitude
+        north_codes = south_codes
+    if nearest is None:
+        raise ValueError('no south-facing coast edge at the selected meridian')
+    return nearest[1]
+
 
 def endpoint_coordinate(endpoint, axis):
     raw = endpoint.get(axis)
@@ -94,7 +122,7 @@ def spherical_rhumb_points(points, step_km):
     return dense
 
 
-def load_config(snapshot,width,height,allow_draft=False,software_versions=None):
+def load_config(snapshot,width,height,allow_draft=False,software_versions=None,*,physical=None):
     rev=snapshot.get('decision_revision',{}); erev=snapshot.get('entity_revision',{})
     accepted=(snapshot.get('schema')=='worldatlas-geography-decision-export-v1' and rev.get('status')=='accepted' and erev.get('status')=='accepted')
     draft=(allow_draft and snapshot.get('schema')=='worldatlas-geography-decision-draft-evidence-v1' and rev.get('status')=='draft' and erev.get('status')=='draft')
@@ -125,7 +153,17 @@ def load_config(snapshot,width,height,allow_draft=False,software_versions=None):
     step=360.0/width
     def coord(ident):
         if ident not in endpoints:raise ValueError(f'unknown endpoint {ident}')
-        e=endpoints[ident];lon=endpoint_coordinate(e,'longitude');lat=endpoint_coordinate(e,'latitude')
+        e=endpoints[ident];lon=endpoint_coordinate(e,'longitude')
+        derivation = e.get('derivation', {})
+        if derivation.get('method') == 'physical_coast_edge':
+            if physical is None or (physical.width, physical.height) != (width, height):
+                raise ValueError('coast endpoint requires the current physical grid')
+            reference = Fraction(str(derivation['reference_latitude']))
+            if not -90 <= reference <= 90:
+                raise ValueError('invalid coast endpoint reference latitude')
+            lat = float(coast_edge_latitude(physical, Fraction(str(e['longitude'])), reference))
+        else:
+            lat = endpoint_coordinate(e,'latitude')
         if not -180<=lon<=180 or not (90-height*step)<=lat<=90:raise ValueError(f'endpoint outside grid: {ident}')
         return lon,lat
     paths=[]
@@ -203,7 +241,8 @@ def export_layer(partition,out,width,height,metadata,inputs,tile_height=256):
 
 def run(snapshot,snapshot_hash,physical_rows,physical_runs,prefill_rows,prefill_runs,out,width,height,inputs,tile_height=256,allow_draft=False,software_versions=None,pre_finalize=None,pre_summary=None,processing_started=None):
     if processing_started is None: processing_started=time.perf_counter()
-    policy,paths,seeds,metadata=load_config(snapshot,width,height,allow_draft,software_versions)
+    with RunRasterU32LE(physical_rows,physical_runs,width,height) as physical:
+        policy,paths,seeds,metadata=load_config(snapshot,width,height,allow_draft,software_versions,physical=physical)
     if tile_height<=0:raise ValueError('tile height must be positive')
     create_directory_exclusive(out)
     cuts=rasterize_barriers(paths,width,height)
