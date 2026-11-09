@@ -1,12 +1,8 @@
 -- Run on a disposable database initialized with the full schema.
--- Temporarily allow acceptance to test source-build locking with a synthetic decision.
-BEGIN;
-ALTER TABLE atlas.decision_revisions DISABLE TRIGGER decision_acceptance_gate;
-
 DO $$
 BEGIN
   BEGIN
-    INSERT INTO atlas.entity_registry_revisions(revision,status) VALUES ('__source_catalog_test_registry','draft');
+    INSERT INTO atlas.entity_registry_revisions(revision) VALUES ('__source_catalog_test_registry');
     INSERT INTO atlas.geographic_entity_ids(id) VALUES (1) ON CONFLICT DO NOTHING;
     INSERT INTO atlas.geographic_entities(revision,id,name,level,parent_id)
       VALUES ('__source_catalog_test_registry',1,'Synthetic parent','continent',NULL);
@@ -61,12 +57,8 @@ BEGIN
       RAISE EXCEPTION 'missing input accepted';
     EXCEPTION WHEN foreign_key_violation THEN NULL; END;
     INSERT INTO atlas.source_build_inputs VALUES ('__test_build','__test_b','1','raw','mask');
-    UPDATE atlas.entity_registry_revisions SET status='accepted',reviewed_by='test',reviewed_at=now()
-      WHERE revision='__source_catalog_test_registry';
     INSERT INTO atlas.decision_revisions (revision,entity_revision,evidence)
       VALUES ('__source_catalog_test_decision','__source_catalog_test_registry','{}');
-    UPDATE atlas.decision_revisions SET status='accepted',reviewed_by='test',reviewed_at=now()
-      WHERE revision='__source_catalog_test_decision';
     UPDATE atlas.source_builds SET decision_revision='__source_catalog_test_decision',
       decision_snapshot_sha256=repeat('a',64),physical_grid_revision='test-grid',
       physical_grid_sha256=repeat('b',64),software_versions='{}'
@@ -96,5 +88,3 @@ BEGIN
     RAISE EXCEPTION USING ERRCODE = 'ZX001', MESSAGE = 'rollback test data';
   EXCEPTION WHEN SQLSTATE 'ZX001' THEN NULL; END;
 END; $$;
-
-ROLLBACK;

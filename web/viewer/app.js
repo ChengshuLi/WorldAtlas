@@ -242,13 +242,19 @@ function bindMapControls() {
 
 async function startViewer() {
   try {
-    const response = await fetch(new URL('./config.json', import.meta.url));
+    const configURL = new URL('./config.json', import.meta.url);
+    const response = await fetch(configURL);
     if (!response.ok) throw Error('Map configuration could not load');
     meta = await response.json();
     meta.palette = Array.from(
       { length: 32 }, (_, id) => meta.categories.find((entry) => entry.id === id)?.rgb || [0, 0, 0],
     );
-    data = await loadLocalGrid(meta, location.href);
+    data = await loadLocalGrid(meta, configURL);
+    if (meta.map_version) {
+      const release = $('#map-release');
+      release.textContent = `${meta.map_version.toUpperCase()} · SHA-256 ${meta.combined_sha256.slice(0, 12)}`;
+      release.title = `SHA-256 of the decoded rows and runs. Full hash: ${meta.combined_sha256}`;
+    }
     renderer = createRenderer(canvas, meta, data);
     items = makeLegendItems(meta.categories, meta.counts);
     renderLegend();

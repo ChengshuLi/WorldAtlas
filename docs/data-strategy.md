@@ -97,7 +97,7 @@ Each geography-research scope has one accountable owner from research through va
 
 Rasterize each proposal to actual map cells at the chosen resolution, using IDs for that hierarchy level. The previews are temporary. The final location grid is canonical. At each level, the user approves the rendered cell map. Show the approved parent boundary and labeled, color-coded child cells. Let the user zoom, pan, and inspect sources and reasoning. Highlight issues and inhabited-island exceptions. Only valid, user-approved proposals feed the next level or publication. A change to an approved parent requires renewed cell-map approval.
 
-Publish shared-grid updates one at a time. Build the grid from approved geography, upload it to R2 under a versioned key, then recheck the relevant revisions. Commit the matching results and grid reference together in one Neon transaction. The app reads matching revisions. If publication fails, the previous revision stays active.
+Build one release candidate from the selected geography and viewer code. Review the rendered candidate and record approval for its exact files and inputs. Publish shared-grid updates one at a time. Verify the candidate files, record the release and its grid references in Neon, then switch the homepage to those same files. The working geography remains editable for future releases.
 
 After all locations are finalized, complete a dedicated river-data and map-review pass before historical attribute research. Rivers are selectable line overlays with names and details, enough tolerance to select a river near its line, and minimum visible width. River overlays preserve underlying cell location IDs. Store river IDs, names, source lines, and geographic access links.
 

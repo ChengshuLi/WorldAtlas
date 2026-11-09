@@ -12,14 +12,16 @@ export default {
       return Response.json({
         project: "worldatlas",
         status: "ready",
-        geography: "not_approved",
       });
     }
-    if (url.pathname === "/") {
-      const index = await env.ATLAS.get("review/index.html");
+    const candidate = /^\/(v[0-9]+\.[0-9]+)-rc\/?$/.exec(url.pathname);
+    if (url.pathname === "/" || candidate) {
+      const key = candidate ? `review/previews/${candidate[1]}/index.html` : "review/index.html";
+      const index = await env.ATLAS.get(key);
       if (!index) {
+        if (candidate) return new Response("Release candidate not found", { status: 404 });
         return new Response(
-          "WorldAtlas: continent cell-map research is in progress. No partition has been approved.",
+          "WorldAtlas has no published map yet.",
           {
             headers: {
               "Content-Type": "text/plain; charset=utf-8",

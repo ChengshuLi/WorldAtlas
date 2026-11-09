@@ -41,21 +41,18 @@ serialized bytes. `stored-json-text` preserves the stored JSON text.
 `spaced-ascii` serializes sorted ASCII JSON with default spacing and a final
 newline. Other documents specify their serialization in the configuration.
 
-## Preview a mainland draft
+## Build from working mainland decisions
 
-Set `NEON_DATABASE_URL` to the branch containing your draft and the published
-release records. Use a new output directory for each preview.
+Set `NEON_DATABASE_URL` to the integration branch containing your working decisions and the published release records. Use a new output directory for each preview.
 
     python3 scripts/map-build/pipeline/run_pipeline.py scripts/map-build/pipeline/config.json \
       /absolute/path/to/worldatlas-work/run-v9-preview \
       --work-dir /absolute/path/to/worldatlas-work \
-      --draft-land-revision YOUR_REVISION
+      --land-revision YOUR_REVISION
 
-The runner freezes the draft in one read-only transaction and recalculates the
-line and region checksums. It uses the draft's source evidence, the configured
-raw inputs and the selected regional and water decisions. The frozen draft and
-resolved input checksums are recorded with the run. Resume with the same
-arguments and `--resume` to use the frozen draft again.
+The runner saves the selected decisions in one read-only transaction and recalculates the
+line and region checksums. It uses the revision’s source evidence, the configured
+raw inputs and the selected regional and water decisions. The saved decisions and resolved input checksums are recorded with the run. Resume with the same arguments and `--resume` to reuse those exact inputs.
 
 The preview compares with `v8.0` by default. Use `--compare-release VERSION` to
 choose another map in `atlas.map_release_objects`. Read `comparison.json` for
@@ -165,6 +162,41 @@ running basin pool when choosing explicit worker counts.
 Shared basins use exact WGS84 two-dimensional rectangle certificates by default,
 with complete point classification for unresolved centers. The standalone basin
 builder retains `--research-interval` and `--pointwise-nearest` as reference engines. See [the nearest-shore certificate](../../../docs/implementation/named-sea-intervals.md).
+
+## Stage, review, and publish a release
+
+Give each geography worker a Neon branch from the same starting point and a
+Git branch for any code changes. Keep each worker's database changes in a
+reviewable SQL change set. Apply the reviewed changes to one integration Neon
+branch, combine the pipeline and viewer changes in Git, and run the build
+against the integration database. Keep the published site on its existing
+release while reviewing the combined result.
+
+Apply [the release-candidate migration](../../../database/migrations/002_release_candidates.sql)
+to the release catalog and deploy the Worker before staging a candidate. Use a
+direct `NEON_DATABASE_URL` for the release commands and an R2 profile with write
+access to the map bucket. Pass the path to the combined viewer source from the
+integration branch.
+
+    python3 scripts/map-build/pipeline/manage_release.py stage v9.0-rc.1 \
+      /absolute/path/to/worldatlas-work/run-v9-preview --viewer web/viewer
+
+The command uploads a new immutable set of viewer and map files. It saves the
+file hashes, the build configuration, and the exact build inputs in Neon.
+Open `/v9.0-rc` for the most recently staged candidate or
+`/review/releases/v9.0-rc.1/index.html` for that exact candidate. Build and
+stage `v9.0-rc.2` if anything needs to change.
+
+Once you’ve reviewed the exact candidate and the release changes are ready,
+record approval and publish that candidate.
+
+    python3 scripts/map-build/pipeline/manage_release.py approve v9.0-rc.1 --reviewer NAME
+    python3 scripts/map-build/pipeline/manage_release.py publish v9.0-rc.1
+
+Approval belongs to the candidate. The working geography stays editable.
+Publication verifies all uploaded bytes, records both map streams in one Neon
+transaction, then switches the homepage with one conditional R2 write. A
+failed homepage write can be retried with the same candidate.
 
 ## Outputs and timing
 

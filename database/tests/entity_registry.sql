@@ -2,7 +2,7 @@
 DO $$
 BEGIN
   BEGIN
-    INSERT INTO atlas.entity_registry_revisions(revision,status) VALUES ('__registry_parent_test','draft');
+    INSERT INTO atlas.entity_registry_revisions(revision) VALUES ('__registry_parent_test');
     INSERT INTO atlas.geographic_entity_ids(id) VALUES (1) ON CONFLICT DO NOTHING;
     INSERT INTO atlas.geographic_entities(revision,id,name,level,parent_id)
       VALUES ('__registry_parent_test',1,'Synthetic parent','continent',NULL);

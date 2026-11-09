@@ -30,19 +30,15 @@ then assigns land and water categories. The final grid has 131,072 columns and
 54,614 rows. The pipeline guide covers credentials, the GDAL and PROJ versions
 for exact reproduction, and stage timings.
 
-## Deployment
+## Preview and publish
 
-Use the new Cloudflare account specified in `wrangler.jsonc`. Authenticate with
-Wrangler; never commit credentials. Deploy with `wrangler deploy`. The Worker
-requires an R2 binding named `ATLAS` to the `worldatlas` bucket.
+The [release workflow](scripts/map-build/pipeline/README.md#stage-review-and-publish-a-release)
+puts each candidate at its own address while the homepage serves the published
+map. Approval records the exact candidate. Publishing serves its existing viewer
+and map files at the homepage.
 
-Publish `web/viewer/index.html` as `review/index.html` and
-`web/viewer/sources.html` as `review/v8.0/sources.html`. The viewer loads its
-JavaScript, CSS and configuration from the versioned asset prefix in the HTML.
-V8.0 is the first WorldAtlas release. Its row and run streams are
-`review/v8.0/rows.u32le.gz` and `review/v8.0/runs.u32le.gz`. Serve them as
-`application/gzip` with no `Content-Encoding` header so the viewer can
-decompress them.
+Deploy the Cloudflare Worker with `wrangler deploy`. The Worker uses the
+`ATLAS` binding to the `worldatlas` R2 bucket.
 
 `atlas.map_release_objects` tracks the two R2 objects for each versioned
 row-run map. The `rows` stream stores row offsets and the `runs` stream stores
@@ -62,9 +58,8 @@ IDs, revisioned names and parent relationships, and the bindings from map
 category codes to entities. Use the registry revision selected by the
 decision snapshot.
 
-Apply the initial schema to a fresh database. Load the source catalog, editable
-decisions, and release records separately. The working Neon database already
-has the schema and those records.
+Apply the [database migrations](database/migrations/) in filename order to a fresh database. Load the source catalog, editable
+decisions, and release records separately. For an existing database, apply only migrations it is missing.
 Run the [SQL checks](database/tests/) against a disposable database.
 
 Export a registry revision from Neon with `scripts/map-build/export_entity_registry.sql`.

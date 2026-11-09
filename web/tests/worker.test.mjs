@@ -6,10 +6,10 @@ const request = (path, method = "GET") =>
   new Request(`https://atlas.example${path}`, { method });
 const env = { ATLAS: { get: async () => null } };
 
-test("health does not claim geography approval", async () => {
+test("health reports service readiness", async () => {
   const result = await worker.fetch(request("/health"), env);
   assert.equal(result.status, 200);
-  assert.equal((await result.json()).geography, "not_approved");
+  assert.deepEqual(await result.json(), { project: "worldatlas", status: "ready" });
 });
 
 test("evidence and arbitrary bucket paths are not publicly routed", async () => {
@@ -33,7 +33,7 @@ test("the review surface is read-only", async () => {
 test("missing index is explicitly unfinished", async () => {
   assert.match(
     await (await worker.fetch(request("/"), env)).text(),
-    /No partition has been approved/,
+    /no published map yet/,
   );
 });
 
@@ -91,4 +91,26 @@ test("V8 sources aliases expose only the known public source page", async () => 
   assert.deepEqual(seen, ["review/v8.0/sources.html", "review/v8.0/sources.html", "review/v8.0/sources.html"]);
   for (const path of ["/v8.0/private", "/v8.0/sources%2Fsecret"]) assert.equal((await worker.fetch(request(path), env)).status, 404);
   assert.equal((await worker.fetch(request("/v8.0/sources", "POST"), env)).status, 405);
+});
+
+test("the candidate URL and homepage serve separate objects", async () => {
+  const requested = [];
+  const storage = { ATLAS: { get: async (key) => {
+    requested.push(key);
+    if (key === "review/index.html") return { body: "V8" };
+    if (key === "review/previews/v9.0/index.html") return { body: "V9 candidate" };
+    return null;
+  } } };
+  assert.equal(await (await worker.fetch(request("/"), storage)).text(), "V8");
+  const preview = await worker.fetch(request("/v9.0-rc"), storage);
+  assert.equal(await preview.text(), "V9 candidate");
+  assert.equal(preview.headers.get("Cache-Control"), "no-cache");
+  assert.equal(await (await worker.fetch(request("/v9.0-rc", "HEAD"), storage)).text(), "");
+  assert.equal((await worker.fetch(request("/v10.0-rc"), storage)).status, 404);
+  assert.deepEqual(requested, [
+    "review/index.html",
+    "review/previews/v9.0/index.html",
+    "review/previews/v9.0/index.html",
+    "review/previews/v10.0/index.html",
+  ]);
 });

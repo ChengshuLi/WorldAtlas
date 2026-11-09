@@ -1135,7 +1135,8 @@ def main():
     p.add_argument('output', type=Path, nargs='?', help='new run directory inside input_root; defaults to WORK_DIR/run')
     p.add_argument('--work-dir', type=Path, help='local input/run directory, overriding input_root; created if absent')
     p.add_argument('--resume', action='store_true', help='validate and continue the same checkpoint-enabled run')
-    p.add_argument('--draft-land-revision', help='preview the selected editable mainland revision in Neon')
+    p.add_argument('--land-revision', '--draft-land-revision', dest='draft_land_revision',
+                   help='build a candidate from the selected working mainland revision in Neon')
     p.add_argument('--compare-release', help='compare with a published map version in Neon')
     a = p.parse_args()
     compare_release = a.compare_release or ('v8.0' if a.draft_land_revision else None)

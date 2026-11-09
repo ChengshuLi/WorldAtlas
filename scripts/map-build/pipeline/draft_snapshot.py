@@ -15,12 +15,12 @@ LAND_EXPORT = (
 
 
 def read_land_draft(revision):
-    """Export a single, consistent view of a named Neon draft."""
+    """Export a single, consistent view of working mainland decisions."""
     if not isinstance(revision, str) or not revision.strip():
-        raise ValueError('a mainland draft revision is required')
+        raise ValueError('a mainland revision is required')
     connection = os.environ.get('NEON_DATABASE_URL')
     if not connection:
-        raise ValueError('set NEON_DATABASE_URL to the database containing the draft')
+        raise ValueError('set NEON_DATABASE_URL to the database containing the mainland revision')
 
     import psycopg
 
@@ -29,14 +29,14 @@ def read_land_draft(revision):
             database.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY')
             row = database.execute(LAND_EXPORT.read_text(), {'revision': revision}).fetchone()
     except psycopg.Error:
-        raise ValueError('Neon mainland export failed; check draft database access') from None
+        raise ValueError('Neon mainland export failed; check working database access') from None
     draft = json.loads(row[0]) if row is not None else {}
     identity = draft.get('decision_revision') or {}
-    if (identity.get('id') != revision or identity.get('status') != 'draft'
+    if (identity.get('id') != revision
             or draft.get('source') != 'neon-export'
             or not draft.get('land_baseline_policy')
             or not draft.get('seed_regions')):
-        raise ValueError(f'no selected mainland draft found for {revision}')
+        raise ValueError(f'no selected mainland decisions found for {revision}')
     return draft
 
 
