@@ -6,6 +6,12 @@
   - [Architecture and data lifecycle](#architecture-and-data-lifecycle)
 - [2. Geography](#2-geography)
   - [Geographic framework and grid](#geographic-framework-and-grid)
+    - [Map projection and dimensions](#map-projection-and-dimensions)
+    - [Geographic hierarchy](#geographic-hierarchy)
+    - [Classifying and assigning cells](#classifying-and-assigning-cells)
+    - [Land rules](#land-rules)
+    - [Water rules](#water-rules)
+    - [Editable records and published grid](#editable-records-and-published-grid)
   - [Research, cell review, publication, and rivers](#research-cell-review-publication-and-rivers)
   - [Derived geographic relationships](#derived-geographic-relationships)
   - [Map rendering](#map-rendering)
@@ -39,17 +45,98 @@ GitHub tracks code, schemas, documentation, and task issues; the user merges pul
 
 ### Geographic framework and grid
 
-Use a flat, 2D equirectangular (Plate Carrée) map with equal longitude and latitude steps. The fixed, time-agnostic geographic hierarchy is **location → province → area → region → subcontinent → continent**. Use reasonably recent reliable administrative boundaries, older where necessary; record source dates and allow different reference dates by location, with no common reference year. Freeze chosen footprints across history. Use one fixed, current-reference display name for each unit.
+#### Map projection and dimensions
 
-Start with six land continents, excluding Antarctica, plus ocean groups. Every cell within the chosen map coverage belongs to exactly one land or non-river-water location. Land-continent groups include nearby seas, island-region waters, and lakes; ocean groups cover remaining ocean waters. Broad waters may be grouped with relevant continents, and large seas may be shared by adjacent groups. Non-river-water locations are named and selectable. Ordinary open coasts use a uniform 12-nautical-mile (22.224-km) buffer from represented physical coastal land-cell centers, measured by WGS84 ellipsoidal geodesic distance from each water-cell center; nearer coasts resolve overlaps. Source islands absent from the land grid do not generate buffers. Bounded and shared seas are grouped separately by documented geographic limits, including their constituent bays, sounds, and passages. List the waters that belong to each sea group. A source dataset may draw the main sea, its bays, and its passages separately. Check that every ocean cell is assigned to the correct ocean. Check how cells connect by sharing an edge, first across all oceans together and then within each ocean. Count connections across the left and right edges of the map, where the world wraps around. If a sea at the edge of an ocean is disconnected from the rest of that ocean on the map, record why the separation is correct. Apply the chosen geographic boundary convention consistently when source conventions differ. If a connected patch of water marked as ocean is surrounded by one continent, assign it to that continent. If the patch borders several continents and it is unclear which one it belongs to, review it before assigning it. The distance is a geographic convention, not a representation of national territorial waters. Small lakes and islands may not resolve at this scale. Flag inhabited islands too small to resolve during the first continent review and assess whether a higher resolution is warranted.
+Use a flat, 2D equirectangular (Plate Carrée) map with equal longitude and
+latitude steps of 0.00274658203125°. The full-world reference grid is
+131,072 × 65,536. Keep the northern edge at 90°N and crop the map at about
+60°S. Aligning the crop to a row edge gives a final grid of 131,072 × 54,614
+cells (7,158,366,208), with a southern edge of 60.0018310546875°S.
 
-Every land cell belongs to an ordinary location. Research sparse areas in proportion to their significance; locations have no imposed maximum size. User-approved subdivisions fully cover their parent cells without gaps, overlaps, or cells outside the parent. Check lower-level administrative boundaries for compatibility before approving a higher-level division. Investigate source-polygon gaps and overlaps, and document any approximation rule and its consequences.
+#### Geographic hierarchy
 
-Classify and assign each cell by its center point: use the land or water location containing that point. Stable numeric location IDs break exact shared-boundary ties. Investigate source gaps and overlaps rather than treating them as valid geography. Flag important inhabited islands that still have no land-cell centers for explicit review.
+Use the same geographic hierarchy throughout history. From smallest to
+largest, the levels are **location → province → area → region → subcontinent
+→ continent**. Start with six land continents, excluding Antarctica, plus
+ocean groups. Give each unit one fixed display name based on the current
+reference.
 
-Use equal equirectangular steps of 0.00274658203125°. The full-world reference grid is 131,072 × 65,536; crop at nominal 60°S while retaining 90°N. Row alignment gives a final grid of 131,072 × 54,614 cells (7,158,366,208), with a southern edge of 60.0018310546875°S. Store one canonical, losslessly compressed logical grid using a compact lossless encoding, such as row runs, for bounded-memory generation and full up-front loading. Each unsigned 16-bit value is the numeric location ID itself; reserve 0 during construction, leaving 65,535 usable values, and widen to 32-bit if needed. Every published cell is assigned. Compression size depends on the final geography.
+#### Classifying and assigning cells
 
-Editable geography records in Neon/PostGIS use stable numeric IDs, names, hierarchy levels and parents, and source polygons; locations also record land or water type. Code derives approved hierarchy, app tables, river display/selection data, and the canonical cell grid. Approved hierarchy and metadata are in Neon; the canonical cell-ID grid is in R2.
+Classify and assign each cell by its center point. Assign it to the land
+or water location that contains its center. Use stable numeric location
+IDs to break exact shared-boundary ties. Every cell within the map's
+coverage belongs to exactly one land or non-river-water location.
+
+Investigate gaps and overlaps in source polygons before using them.
+Document any approximation and its consequences.
+
+#### Land rules
+
+Assign every land cell to an ordinary location. Use reasonably recent,
+reliable administrative boundaries, with older boundaries where necessary.
+Record each source date. Locations can use different reference dates with
+no common reference year. Keep the chosen boundaries fixed across history.
+
+Research sparse areas in proportion to their significance. Locations have
+no imposed maximum size. Check lower-level administrative boundaries for
+compatibility before approving a higher-level division. User-approved
+subdivisions must cover every cell in their parent area without gaps,
+overlaps, or cells outside the parent.
+
+Small islands may be too small to appear at this resolution. During the
+first continent review, flag inhabited islands that are too small to
+appear and assess whether a finer grid is warranted. Flag important
+inhabited islands that still have no land-cell centers for explicit review.
+
+#### Water rules
+
+Non-river-water locations are named and selectable. Land-continent groups
+include nearby seas, island-region waters, and lakes. Ocean groups cover
+the remaining ocean waters. Broad waters may be grouped with relevant
+continents. Adjacent groups may share large seas. Small lakes may be too
+small to appear at this resolution.
+
+**Bounded and shared seas.** Group these seas separately using documented
+geographic limits, including their bays, sounds, and passages. List the waters
+that belong to each sea group. A source dataset may draw the main sea, its
+bays, and its passages separately. Apply the chosen geographic boundary
+convention consistently when source conventions differ.
+
+**Open coasts.** Use a uniform 12-nautical-mile (22.224-km) buffer. Measure
+the shortest distance along the WGS84 ellipsoid between the center of each
+water cell and the centers of coastal land cells on the grid. Where buffers
+overlap, use the nearer coast. Source islands absent from the land grid do
+not generate buffers. The distance defines a geographic grouping and has
+no bearing on national territorial waters.
+
+**Ocean assignments and connections.** Check that every ocean cell is
+assigned to the correct ocean. Check how cells connect by sharing an edge,
+first across all oceans together and then within each ocean. Count
+connections across the left and right edges of the map, where the world wraps
+around. If a sea at the edge of an ocean is disconnected from the rest of
+that ocean on the map, record why the separation is correct.
+
+**Enclosed water.** If a connected patch of water marked as ocean is
+surrounded by one continent, assign it to that continent. If the patch
+borders several continents and it is unclear which one it belongs to, review
+it before assigning it.
+
+#### Editable records and published grid
+
+Store editable geography records in Neon/PostGIS with stable numeric IDs,
+names, hierarchy levels and parents, and source polygons. Each location
+also records whether it is land or water. Code derives the approved
+hierarchy, app tables, river display and selection data, and the canonical
+cell grid. Neon holds the approved hierarchy and metadata. R2 holds the
+canonical cell-ID grid.
+
+Store one canonical logical grid. Use a compact lossless encoding such as
+row runs to keep memory use bounded during generation and load the whole
+grid up front. Each unsigned 16-bit value is the numeric location ID itself.
+Reserve 0 during construction, leaving 65,535 usable values, and widen to
+32 bits if needed. Every published cell has an assignment. Compression
+size depends on the final geography.
 
 ### Research, cell review, publication, and rivers
 
