@@ -49,7 +49,7 @@ row-run map. The `rows` stream stores row offsets and the `runs` stream stores
 run endpoints and category codes. Register both in one transaction after
 verifying the stored byte lengths and both sets of hashes. The table tracks
 outputs separately from the source catalog. See
-the [initial database schema](migrations/001_initial_schema.sql).
+the [initial database schema](database/migrations/001_initial_schema.sql).
 The `worldatlas-v8-viewer-inventory` document at version `v8.0` in
 `atlas.structured_documents` records the deployed viewer's seven R2 objects,
 their repository paths, byte lengths and SHA-256 hashes. The source catalog
@@ -57,7 +57,7 @@ tracks raw data objects, including the parts of source archives.
 
 ## Entity registry
 
-The [initial schema](migrations/001_initial_schema.sql) defines stable entity
+The [initial schema](database/migrations/001_initial_schema.sql) defines stable entity
 IDs, revisioned names and parent relationships, and the bindings from map
 category codes to entities. Use the registry revision selected by the
 decision snapshot.
@@ -65,6 +65,7 @@ decision snapshot.
 Apply the initial schema to a fresh database. Load the source catalog, editable
 decisions, and release records separately. The working Neon database already
 has the schema and those records.
+Run the [SQL checks](database/tests/) against a disposable database.
 
 Export a registry revision from Neon with `scripts/map-build/export_entity_registry.sql`.
 

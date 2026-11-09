@@ -6,4 +6,4 @@ The displayed combined SHA-256 is calculated over the decompressed little-endian
 
 OpenStreetMap and SeaVoX attributions are available through Data sources. OpenStreetMap Foundation guidance recommends presenting its attribution on startup or beside a browsable map; this interface follows the requested source-page-only presentation. The linked source page lists the main current inputs. The deployment uses an immutable `review/worldatlas-current-20261107-clean-v1/` asset prefix, while the Worker serves the root HTML from `review/index.html`. The Worker maps `/v8.0/sources` and `/v8.0/sources.html` to the existing public `/review/v8.0/sources.html` object.
 
-Run `node --test tests/current-map.test.mjs` for lightweight DOM-model interaction and configuration tests. These tests do not replace a real-browser rendering check.
+Run `node --test web/tests/current-map.test.mjs` for lightweight DOM-model interaction and configuration tests. These tests do not replace a real-browser rendering check.

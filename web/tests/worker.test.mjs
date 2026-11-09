@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import worker from "../web/worker.js";
+import worker from "../worker.js";
 
 const request = (path, method = "GET") =>
   new Request(`https://atlas.example${path}`, { method });
