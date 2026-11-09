@@ -2,6 +2,13 @@
 
 **TL;DR.** In a shared sea, assign each water cell to the continent with the nearest shore. The build assigns a whole block at once when it can prove the same continent wins throughout. Otherwise it splits the block and checks any remaining cells individually.
 
+## Where this runs in the code
+
+- The [basin builder](../../scripts/water/build_seavox_basin.py) reads the sea’s decisions and selects the engine.
+- The [rectangle engine](../../scripts/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
+- The [individual-cell check](../../scripts/water/wrapped_bounds.py) calls the [nearest-shore search](../../scripts/water/shared_nearest.py) and uses a [full-shore scan](../../scripts/water/streamed_shore_fallback.py) when needed.
+- The [row-only engine](../../scripts/water/interval_nearest.py) implements the single-row reference method.
+
 ## The assignment rule
 
 When two or more continents share a named sea, each water cell goes to the continent with the nearest shore. The build considers only the continents listed for that sea.
@@ -36,10 +43,3 @@ The two copies of `r` cover the worst case. The candidate’s shore could get fa
 - **Coverage.** The rectangle engine works within source windows in groups of 64 rows. It divides or skips a region only as needed and skips a region only when it contains no selected cells. Every selected cell is accounted for, including at window, tile, and row-group edges.
 
 The rectangle engine is the default. The standalone builder also offers `--research-interval` to check stretches of a single row and `--pointwise-nearest` to check one cell at a time. The basin output records which engine ran and the hash of its helper code. The next stage verifies those records.
-
-## Where this runs in the code
-
-- The [basin builder](../scripts/water/build_seavox_basin.py) reads the sea’s decisions and selects the engine.
-- The [rectangle engine](../scripts/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
-- The [individual-cell check](../scripts/water/wrapped_bounds.py) calls the [nearest-shore search](../scripts/water/shared_nearest.py) and uses a [full-shore scan](../scripts/water/streamed_shore_fallback.py) when needed.
-- The [row-only engine](../scripts/water/interval_nearest.py) implements the single-row reference method.

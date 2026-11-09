@@ -164,7 +164,7 @@ running basin pool when choosing explicit worker counts.
 
 Shared basins use exact WGS84 two-dimensional rectangle certificates by default,
 with complete point classification for unresolved centers. The standalone basin
-builder retains `--research-interval` and `--pointwise-nearest` as reference engines. See [the nearest-shore certificate](../../docs/named-sea-intervals.md).
+builder retains `--research-interval` and `--pointwise-nearest` as reference engines. See [the nearest-shore certificate](../../docs/implementation/named-sea-intervals.md).
 
 ## Outputs and timing
 
