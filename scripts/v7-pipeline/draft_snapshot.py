@@ -92,12 +92,12 @@ def draft_physical_selection(draft, published):
     return {'schema': published['schema'], 'revision': revision, 'rows': rows}
 
 
-def prepare_land_draft(draft, published, assemble_region_hash, *, bind_published_sources=True):
+def prepare_land_draft(draft, published, assemble_region_hash):
     """Recalculate geometry pins for a preview of the editable draft."""
     prepared = copy.deepcopy(draft)
     for section, key in (('mainland_boundaries', 'boundary_id'), ('routes', 'route_id')):
-        baseline = {row[key]: row for row in published[section]}
-        if {row[key] for row in prepared[section]} != baseline.keys():
+        baseline = {row[key] for row in published[section]}
+        if {row[key] for row in prepared[section]} != baseline:
             raise ValueError(f'preview requires the published set of {section}')
         for row in prepared[section]:
             geometry = row['geometry']
@@ -106,16 +106,6 @@ def prepare_land_draft(draft, published, assemble_region_hash, *, bind_published
             geometry_bytes = json.dumps(canonical, sort_keys=True, separators=(',', ':'),
                                         allow_nan=False).encode()
             row['geometry_sha256'] = hashlib.sha256(geometry_bytes).hexdigest()
-            if bind_published_sources:
-                row['provenance'] = copy.deepcopy(baseline[row[key]]['provenance'])
-                if section == 'mainland_boundaries' and row['geometry_sha256'] != baseline[row[key]]['geometry_sha256']:
-                    row['provenance']['lineage_status'] = 'incomplete'
-
-    # The released evidence supplies the checked source relationships for
-    # these records. The complete editable export is retained separately.
-    if bind_published_sources:
-        for section in ('sources', 'source_lineage_assets', 'source_lineage_dependencies'):
-            prepared[section] = published[section]
 
     lines = {('boundary', row['boundary_id']): row for row in prepared['mainland_boundaries']}
     lines.update({('route', row['route_id']): row for row in prepared['routes']})

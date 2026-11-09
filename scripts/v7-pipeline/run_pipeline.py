@@ -225,7 +225,7 @@ class Pipeline:
                     'seavox_archive', 'coastal_plan', 'neon_selection', 'osm_receipt'}
         selections = self.cfg.get('sources', {})
         if (not isinstance(selections, dict) or not required <= selections.keys() or
-                set(selections) - required - {'prior_physical_report', 'reference_rows', 'reference_runs'}):
+                set(selections) - required - {'reference_rows', 'reference_runs'}):
             raise ValueError('wrong source selection input set')
         resolved = self.resolve_raw_catalog(selections)
         self.draft_land = None
@@ -242,8 +242,7 @@ class Pipeline:
             published = self.resolve_source('land_snapshot', resolved['land_snapshot'])
             assemble = stage_module(SCRIPTS / 'caucasus-audit/caucasus_seed_gate.py').assembled_region_hash
             draft = read(self.draft_land)
-            prepared = prepare_land_draft(draft, read(published), assemble,
-                                          bind_published_sources='prior_physical_report' in resolved)
+            prepared = prepare_land_draft(draft, read(published), assemble)
             self.preview_land = self.save_source_document(prepared, serialization='canonical-ascii')
         self.sources = {name: self.resolve_source(name, spec) for name, spec in resolved.items()}
         if self.preview_land is not None:
@@ -854,8 +853,6 @@ class Pipeline:
             'terminal_checker': SCRIPTS / 'v7-recovery/land/mainland-source-verification-20261104/validate_terminal_closure.py',
             'seed_builder': SCRIPTS / 'v7-recovery/land/neon-mainland-regions-20261104/rasterizer/build_seed.py',
             'seed_kernel': SCRIPTS / 'v7-recovery/land/neon-mainland-regions-20261104/rasterizer/seed_runtime.py'}.items()}
-        if 'prior_physical_report' in self.sources:
-            inputs['prior_physical_report'] = pin(self.sources['prior_physical_report'])
         # The supported source contract accepts an explicitly pinned producer;
         # no copied producer script or patched report is generated.
         closure = {'schema': 'physical-water-closure-contract-v2',
@@ -870,32 +867,31 @@ class Pipeline:
                          'encoding_evidence_sha256': sha(SCRIPTS / 'v7-raw-mask/compose_physical.py')},
             'resources': {'max_cell_visits': 2000000}}
         inputs['closure_contract'] = pin(self.document('closure', closure))
-        if 'prior_physical_report' not in inputs:
-            authored = inputs['decision_snapshot']
-            snapshot = read(authored['path'])
-            if snapshot.get('source') != 'neon-export':
-                raise ValueError('current physical binding requires an editable Neon export')
-            physical_pins = {key + '_sha256': inputs[key]['sha256']
-                             for key in ('physical_rows', 'physical_runs', 'physical_report')}
-            snapshot['land_baseline_policy'].update(physical_pins)
-            selected = set(snapshot['land_baseline_policy']['route_ids'])
-            for route in snapshot['routes']:
-                if route['route_id'] not in selected:
-                    continue
-                provenance = route['provenance']
-                checker = ('terminal_checker' if route['closure_method'] == 'physical_terminal_closure_v1'
-                           else 'closure_checker')
-                route['provenance'] = {
-                    'source_refs': provenance['source_refs'],
-                    'lineage_status': provenance.get('lineage_status', 'incomplete'),
-                    **physical_pins,
-                    'encoding_evidence_sha256': closure['physical']['encoding_evidence_sha256'],
-                    'contract_sha256': inputs['closure_contract']['sha256'],
-                    'support_checker_sha256': inputs['closure_checker']['sha256'],
-                    'checker_sha256': inputs[checker]['sha256'],
-                }
-            snapshot['runtime_physical_binding'] = {'authored_snapshot_sha256': authored['sha256']}
-            inputs['decision_snapshot'] = pin(self.document('land-snapshot-for-current-physical', snapshot))
+        authored = inputs['decision_snapshot']
+        snapshot = read(authored['path'])
+        if snapshot.get('source') != 'neon-export':
+            raise ValueError('current physical binding requires an editable Neon export')
+        physical_pins = {key + '_sha256': inputs[key]['sha256']
+                         for key in ('physical_rows', 'physical_runs', 'physical_report')}
+        snapshot['land_baseline_policy'].update(physical_pins)
+        selected = set(snapshot['land_baseline_policy']['route_ids'])
+        for route in snapshot['routes']:
+            if route['route_id'] not in selected:
+                continue
+            provenance = route['provenance']
+            checker = ('terminal_checker' if route['closure_method'] == 'physical_terminal_closure_v1'
+                       else 'closure_checker')
+            route['provenance'] = {
+                'source_refs': provenance['source_refs'],
+                'lineage_status': provenance.get('lineage_status', 'incomplete'),
+                **physical_pins,
+                'encoding_evidence_sha256': closure['physical']['encoding_evidence_sha256'],
+                'contract_sha256': inputs['closure_contract']['sha256'],
+                'support_checker_sha256': inputs['closure_checker']['sha256'],
+                'checker_sha256': inputs[checker]['sha256'],
+            }
+        snapshot['runtime_physical_binding'] = {'authored_snapshot_sha256': authored['sha256']}
+        inputs['decision_snapshot'] = pin(self.document('land-snapshot-for-current-physical', snapshot))
         resolution = read(self.sources['resolution_template'])
         if resolution.get('schema') != 'mainland-witness-request-v1':
             raise ValueError('wrong mainland resolution template')
