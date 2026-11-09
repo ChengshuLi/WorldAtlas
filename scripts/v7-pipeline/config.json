@@ -1,6 +1,6 @@
 {
   "schema": "worldatlas-end-to-end-pipeline-v1",
-  "raw_catalog_sha256": "7d2cdc89fe7332e4eed67b25bad006e132a87a0431f655cee6f00aeb44801fd9",
+  "raw_catalog_sha256": "442efeb7a2270ac49bc336ac8d9265609c505304f77d11ecca8b1ec3fd73ccda",
   "selection_notes": "Reconstructed research selection from exact preserved v24 land/water/regional evidence. Original top-level configuration and 546-tile plan were not recovered. This file uses a new 224-tile certified execution partition and normal water producer reconstruction with strict selection equivalence. Geography remains provisional and non-publishable; no new full global run or final-grid equality is claimed.",
   "sources": {
     "land_config": {
@@ -845,12 +845,6 @@
           },
           {
             "r2_source": {
-              "source_id": "worldatlas-v7-review-references",
-              "version": "2026-11-03-0f33f34b57f1"
-            }
-          },
-          {
-            "r2_source": {
               "source_id": "suez-canal-authority-canal-characteristics",
               "version": "2026-11-05-c87b1a4c6cc8"
             }
@@ -1166,11 +1160,11 @@
             "snapshot": {
               "neon": {
                 "source_id": "v24-regional-snapshot",
-                "version": "candidate-30d04b428b5b",
-                "serialization": "jsonb-text"
+                "version": "candidate-3f381ba575b3",
+                "serialization": "stored-json-text"
               },
-              "sha256": "30d04b428b5b20f626410d7c349a83363fa13dd2f99b87aa59cfdb3aa26625e1",
-              "size_bytes": 1649524
+              "sha256": "3f381ba575b34a10b599a038a37cf872822e1db0b1fdc7489402ff52af1f9ee9",
+              "size_bytes": 1646973
             },
             "source_files": [
               {
@@ -1754,13 +1748,13 @@
             "policy": {
               "neon": {
                 "source_id": "v24-regional-policy",
-                "version": "candidate-1cae6df25a1f",
+                "version": "candidate-fee04545483f",
                 "serialization": "pretty-ascii"
               },
-              "sha256": "1cae6df25a1f33ff557a4d93c90c4fdc3724983a3268801ae9621fe3f757840d",
+              "sha256": "fee04545483f53411775bd1d7dac08eca825f49eb4a80dad12574b2b22ffc5f4",
               "size_bytes": 12609
             },
-            "policy_canonical_sha256": "4445dc453785c4eb6022560ceab9b1e2c5c3c5699b076ecf76e5fee7431b16fd",
+            "policy_canonical_sha256": "d09a9b9e5f4deae286e80531937abb38b4a690cb37a37c9f95305aa0cbcd9c20",
             "profiling_standin": true,
             "sources": {
               "anu-west-new-guinea-lydekker-ch08": {
