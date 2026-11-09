@@ -10,10 +10,10 @@ streams from the `worldatlas` R2 bucket.
 
 ## Rebuild V8
 
-Run the [V8 pipeline](scripts/v7-pipeline/README.md) from the repository root.
+Run the [V8 pipeline](scripts/pipeline/README.md) from the repository root.
 
 ```bash
-python3 scripts/v7-pipeline/run_pipeline.py scripts/v7-pipeline/config.json \
+python3 scripts/pipeline/run_pipeline.py scripts/pipeline/config.json \
   --work-dir /absolute/path/to/worldatlas-work
 ```
 

@@ -9,7 +9,7 @@ drainage paths join the basin boundaries. Reassembly of the three ArcticDEM
 tiles uses the ordered raw chunks listed in the recipe.
 
 Set `NEON_DATABASE_URL` and the boto3 credentials as described in the
-[pipeline setup](../v7-pipeline/README.md). Use the R2 endpoint from the pipeline
+[pipeline setup](../pipeline/README.md). Use the R2 endpoint from the pipeline
 configuration. Run the input preparation with Python 3.11 or later, boto3 and
 psycopg.
 

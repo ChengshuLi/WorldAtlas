@@ -2,8 +2,8 @@ import importlib.util,math,sys,unittest
 from pathlib import Path
 from osgeo import ogr
 ROOT=Path(__file__).resolve().parent.parent
-sys.path.insert(0,str(ROOT/'scripts/v7-replay'))
-PATHS=[ROOT/'scripts/v7-recovery/land/neon-mainland-regions-20261104/rasterizer/build_seed.py']
+sys.path.insert(0,str(ROOT/'scripts/water'))
+PATHS=[ROOT/'scripts/stages/land/neon-mainland-regions-20261104/rasterizer/build_seed.py']
 class NumericalBoundaryGuard(unittest.TestCase):
  def test_coordinate_box_rejects_boundary_and_near_boundary(self):
   geom=ogr.CreateGeometryFromWkt('POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))')
