@@ -1,4 +1,7 @@
-For the reference-optional direct physical stage, see [DIRECT.md](DIRECT.md).
+The [V8 pipeline](../v7-pipeline/README.md) calls the
+[direct physical stage](DIRECT.md) with the selected OSM coastline archive
+and 32 Overture water shards. The standalone builder below also supplies
+shared utilities used by that stage.
 
 # Experimental raw-to-physical mask builder
 
@@ -14,10 +17,10 @@ This is an isolated, configurable prototype, not the recovered historical builde
 
 ## Explicit unresolved inputs and choices
 
-1. The exact OSM land snapshot and all companion files are missing. The inventory records only the `.shp` SHA-256 `f1636460ab634d1f06a0bd72b957fbc8a8a85eabeabf5919f790573990ba0f33`, insufficient to pin a shapefile. The historical source URL, acquisition time and licensing details also need confirmation.
+1. The historical mask manifest records the [OSM land archive](https://osmdata.openstreetmap.de/data/land-polygons.html) SHA-256 `1da76610d4267a15c40f77106f062af0768548253add8ad7ca56a9f617300709` and the `.shp` SHA-256 `f1636460ab634d1f06a0bd72b957fbc8a8a85eabeabf5919f790573990ba0f33`. The original archive remains unlocated. The selected V8 archive is the separately pinned November 3, 2026 capture.
 2. The raw Overture `2026-10-21.0` water release was downloaded and pinned. The current direct candidate follows Overture’s inland-water subtype classification; the historical builder’s exact predicate is unknown. See `DIRECT.md` and `overture/README.md` for the current method and limitations.
 3. The historical builder and its geometry repair/invalidity policy, boundary-on-cell-center behavior, antimeridian handling, GDAL and dependent library versions, rasterization options and any processing simplifications are unknown. This prototype rejects invalid geometry, assumes input polygons already correctly handle the antimeridian and uses the GDAL default polygon rasterization (`ALL_TOUCHED` off). Boundary tie behavior must be characterized before calling it equivalent to an ideal point-in-polygon center test or the historical builder.
-4. The earlier, narrower water policy was run and compared with the preserved physical streams, with 674 differing cells. The current subtype-only policy has not been run globally. End-to-end runtime and resource requirements remain unmeasured; the saved mask cannot by itself establish water-source decomposition.
+4. The current subtype-based run reproduces the selected V8 physical grid across all 32 shards. Its dry mask differs from the historical mask by 674 cells. The historical mask preserves the [Cape Agulhas endpoint derivation](../v7-recovery/ocean/README.md#southern-ocean-route-sources).
 5. This builds **only** physical land versus water. It does not reconstruct continent assignments, reviewed island or mainland-cut decisions, or later V2-to-V7 land changes. Those require independently pinned, reviewed geographic decisions and further verification.
 
 ## Overture water shard candidate
