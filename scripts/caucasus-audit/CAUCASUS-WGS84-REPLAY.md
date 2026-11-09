@@ -44,7 +44,6 @@ geometry calculations still depend on the geospatial runtime.
 
 The preparer verifies each source hash, verifies the OSM bundle members, rejects conflicting OSM objects, and reconstructs local inputs. The replay expands the structured selector, reconstructs the baseline from HydroBASINS and the author file, constructs the Anapa opening using the OSM coast, reconstructs and models Abin, regenerates all nine JAXA drainage models, and splices their approved interfaces using WGS84 join selection. It verifies the final geometry hash in the recipe. No prior map or saved final geometry is an input.
 
-`caucasus_prepare_neon_wgs84.py` prepares a guarded transaction to install a verified replay and its recipe in the draft Neon revision. It checks the current boundary, Ural and closure pins, reconstructs the Europe polygon and checks its witnesses, and links the eight JAXA tiles already referenced by the boundary as construction inputs. The generated SQL must be executed through the authorized Neon connection and its resulting geometry, recipe and region read back. The transaction accepts either the guarded prior selection or the identical current WGS84 selection, so a verified replay can be applied idempotently; mismatched boundary, region, recipe or source pins fail closed.
 
 ## Verification of this revision
 

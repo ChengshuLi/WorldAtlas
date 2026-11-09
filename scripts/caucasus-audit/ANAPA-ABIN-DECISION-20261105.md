@@ -1,8 +1,8 @@
 # Anapa and Abin: source-backed provisional corrections
 
-Status: research candidates, not selected geography. The criterion is the
-physical drainage divide, not agreement with a historic label grid. Source and
-model limitations below remain material.
+These source screens informed the selected Anapa opening and Abin joins.
+The [V8 source replay](CAUCASUS-WGS84-REPLAY.md) reconstructs the approved
+geometry. The criterion here is the physical drainage divide.
 
 ## Anapa: prefer the Shingari approach for further verification
 

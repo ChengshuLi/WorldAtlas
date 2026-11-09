@@ -11,7 +11,7 @@ def generate(coordinates,start,end,section,spacing,epsg):
  records=[];total=0.
  for i in range(start,end):
   a,b=points[i],points[i+1];chord=geodistance(a,b)
-  if chord<=0 or chord>=19900000:raise ValueError('zero-length or ambiguous source edge')
+  if a==b or chord<=0 or chord>=19900000:raise ValueError('zero-length or ambiguous source edge')
   count=max(1,math.ceil(chord/80.))
   if count>1000000 or len(records)+count>1000000:raise ValueError('source sampling limit exceeded')
   pa,pb=projected[i],projected[i+1];previous=a
