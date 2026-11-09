@@ -53,6 +53,12 @@ geography.
 - Regional line: `v24-regional-lydekker-line`, SHA-256 `cbb4508245942a2586bf37279570b55c7b2382c15268b311c0c2ddf3d96dbcd2`.
 - Empty pending stand-in: `v24-regional-pending-standin`, SHA-256 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`. Its emptiness does not establish that there are no pending claims.
 
+The mixed and point requests are also available by their original IDs and
+versions in `atlas.structured_documents`. The
+`v8-historical-source-lineage` document preserves the original catalog
+metadata, dependency rows and exact text of the empty pending stand-in.
+Look up the original SHA-256 values above to verify the exported inputs.
+
 The regional Bering calculation requires PROJ network access disabled and the
 exact pinned active PROJ database. For the recorded v24 environment,
 `/usr/share/proj/proj.db` has SHA-256
