@@ -119,7 +119,7 @@ simplicity. The three raw R2 objects were independently read back and hashed:
 HydroBASINS `21797d53e0792cae047d25f0c3cfb570c7ef43700ec962b35b2ac92467e29f03`,
 author `c9d56b1291522573fbb8b0baa1a39cecfd192eda8f5e51650b24f562d13688e6`,
 and coastline extract `66c3c6a36802cf08e70d65c8119c285bf5f88c90b4e3320e0c96e352779515`.
-The last is R2 key `sources/osm/anapa/shingari-mouth-20261105-66c3c6a36802.osm`.
+The last is R2 key `sources/osm/caucasus-anapa/shingari-coast-20261105-66c3c6a36802.osm`.
 The resulting 2,320-vertex candidate SHA-256 is
 `e3dd7f326c0247f4d9f4c4c61b7c31782a5fc1b9e850d164cf46e729cbb60929`.
 A modified coastline file was rejected before output. Execution requires an

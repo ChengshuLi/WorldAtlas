@@ -35,7 +35,7 @@ In the Shingari extract, the author's coastal leg intersects OSM coastline way 3
 
 The selected historical physical land source itself is not recoverable from these extracts: [the land-mask investigation](../v7-raw-mask/README.md) reports the exact OSM land snapshot and shapefile companion files missing, with only a .shp hash inventoried. Thus these dated OSM feature versions offer a current source-relative check, not a proven match to the selected historical land input. `anapa_mouth_screen.py` reproduces the intersections; no line or label change follows.
 
-The raw OSM XML responses are in R2 and read-back SHA-256 verified: `sources/osm/anapa/anapa-mouth-20261105-26ae194b3234.osm` = `26ae194b32349dcca0c0c6f908cf7f9ad03cedcba06c933a921b4a35541f3b91`; `sources/osm/anapa/shingari-mouth-20261105-66c3c6a36802.osm` = `66c3c6a36802cf08e70d65c8119c285bf5f88c90b4c8e3320e0c96e352779515`. These small bounding-box extracts are research-only and © OpenStreetMap contributors, ODbL; feature timestamps are last-edit timestamps, not independently established survey dates.
+The raw OSM XML responses are in R2 and read-back SHA-256 verified: `sources/osm/anapa/anapa-mouth-20261105-26ae194b3234.osm` = `26ae194b32349dcca0c0c6f908cf7f9ad03cedcba06c933a921b4a35541f3b91`; `sources/osm/caucasus-anapa/shingari-coast-20261105-66c3c6a36802.osm` = `66c3c6a36802cf08e70d65c8119c285bf5f88c90b4c8e3320e0c96e352779515`. These small bounding-box extracts are research-only and © OpenStreetMap contributors, ODbL; feature timestamps are last-edit timestamps, not independently established survey dates.
 
 ### Anapa inland drainage screen
 
