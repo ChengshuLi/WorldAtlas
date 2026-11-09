@@ -90,9 +90,19 @@ On printed p. 152 (PDF p. 153), the same monograph explicitly describes Zolotoy 
 
 The tested scope is `[51.3, 46.65, 52.2, 47.24]` (west, south, east, north), extending the earlier screen downstream beyond the selected river mouth. The first three closure segments used in that scope have zero land contacts in the pinned physical mask. Applied to the coordinator-supplied draft-82 grids, the rule visited 43,575 physical-land centers, changed 52 Europe-to-Asia and five Asia-to-Europe, and preserved all other labels. A fresh side screen found zero disagreements in that scope. An independent row-by-row comparison of the entire grid found exactly those 57 changes and none outside scope. Focused tests cover component splitting, physical-mask mismatch and divider ties.
 
-The new **research candidate** is available in R2 at `research/ural-delta-divider-20261105/draft82/`: `rows.u32le.gz`, `runs.u32le.gz`, `config.json`, `divider.json`, and `report.json`. All five objects passed remote readback and SHA-256 checks. Decompressed output row/run SHA-256 values are `da78a3772af41e6cd7c2cbfc9f76961c40caf81cf2c02667772a3106c29e2b72` and `c5f17373eb91b869c9ad417ade6774815d32d85cfd9ed1a06f78b199e4c7623d`. Full input and archive pins, validation counts, and limitations are in Neon under `delta_divider_applied_draft82_20261105`.
+The draft-82 audit pinned five R2 files under `research/ural-delta-divider-20261105/draft82/`.
+Its original config, divider and report are preserved byte for byte in Neon as
+`v8-historical-ural-draft82-config`, `v8-historical-ural-draft82-divider` and
+`v8-historical-ural-draft82-report`. The Ural boundary provenance field
+`delta_divider_applied_draft82_20261105` records their hashes and the old grid hashes.
 
-Draft-82 is the latest verified candidate supplied to this audit, not proof that no newer concurrent candidate exists. Re-run the rule against the coordinator's current pinned candidate before integration; do not overwrite a concurrent build. The scope and side convention are explicit and do not establish correctness outside that scope. The northern mountain and spring connector geometry was not modified.
+V8 applies the center-side rule during the land stage using
+`scripts/v7-recovery/land/stage2-geodesic-20261104/ural_delta.py`. It derives the
+scoped divider from the selected reviewed Ural line and Caspian closure in
+the land snapshot. The native replay matched draft-82 at all 70,305 cell
+centers in scope, including all 43,575 physical-land centers. Both runs
+recorded the same 57 side changes. The full draft-82 grid streams differ
+from V8's land stage streams.
 
 
 ## Spring monument coordinate cross-check
@@ -104,11 +114,19 @@ This is a geographic cross-check, not a surveyed identification: Wikipedia and O
 
 ## Integration and temporary-artifact handoff
 
-The divider executable is a standalone post-processing step; it has **not** been wired into the coordinator's main candidate build. The owner should obtain the current candidate and stage-1 physical grid, derive the scoped divider from the unchanged selected boundary and closure, update the config's exact hashes, then rerun the rule and both side and whole-grid comparisons. Do not apply the draft-82 output to a newer candidate as a precomputed patch. The current rule, focused tests, explicit scope and tested draft-82 pins are above.
+The draft-82 R2 handoff is eligible for cleanup after review. To recreate
+the V8 assignment, rerun the V8 land stage with its selected snapshot and
+physical grid. The standalone divider executable records the original
+draft-82 method.
 
-After the main pipeline owner has integrated the rule, reproduced its result using the retained source inputs and recorded the new output, the five objects under `research/ural-delta-divider-20261105/draft82/` are temporary handoff artifacts eligible for cleanup. Their current compressed grid is about 48 MiB plus small metadata. The five `evidence/ural-audit-20261105/dem-crops/` TIFFs recorded under `northern_dem_reproduction_20261105` are derived intermediate crops, not raw sources; they are additional cleanup candidates only once their results are no longer needed and recreation from the archived ArcticDEM tiles, code and recorded crop settings has been verified. This is an inventory, not a deletion authorization.
+The five `evidence/ural-audit-20261105/dem-crops/` TIFFs recorded under
+`northern_dem_reproduction_20261105` are derived crops. Verify their
+recreation from the archived ArcticDEM tiles, code and recorded crop
+settings before considering cleanup.
 
-The downloaded ArcticDEM tiles, original OSM snapshots and the cited historical source documents remain used source evidence. Neon audit results and source crosswalks are used structured data; retain them while decisions rely on them. No objects or records were deleted by this inventory.
+The downloaded ArcticDEM tiles, original OSM snapshots, cited historical
+source documents, and Neon audit results and source crosswalks support the
+retained decisions.
 
 
 ## Additional spring terrain sensitivity
