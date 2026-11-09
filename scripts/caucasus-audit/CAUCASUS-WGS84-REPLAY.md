@@ -10,7 +10,18 @@ The boundary uses WGS84 ellipsoidal distances for drainage slopes, length rankin
 
 ## Inputs and Neon recipe
 
-The selected row is `atlas.decision_mainland_boundaries` in research revision `v2-land-mainland-boundary-draft-1`, boundary `caucasus_blacksea_anapa_to_caspian`. Its `provenance.current_selection.source_assembly_wgs84_v2.recipe` holds the source pins, R2 keys, 1,893 baseline selectors, OSM merge groups, seed choices, approved join anchors and model settings. Its adjacent `recipe_sha256` pins the canonical JSON. Export the jsonb value as text, then canonicalize it with `caucasus_neon_wgs84_recipe_export.py --recipe-text <file> --sha256 <pinned-sha> --output <recipe.json>`.
+The construction recipe is stored in Neon as `atlas.structured_documents`
+source `v8-caucasus-construction-recipe`, version `v8.0-9c90e4432a53`.
+The selected geometry is in the editable `v8-mainland` revision under boundary
+`caucasus_blacksea_anapa_to_caspian`. The recipe pins the same geometry hash.
+
+Set `NEON_DATABASE_URL` to the branch holding the recipe, then export it with:
+
+```bash
+python caucasus_neon_wgs84_recipe_export.py --from-neon \
+  --sha256 9c90e4432a538b62bd0409802fb678a59d777863748fea20a4659ad813d72215 \
+  --output recipe.json
+```
 
 The recipe names the exact R2 raw objects: HydroBASINS Europe level 12, the pinned author GeoJSON, Anapa OSM coastline, four Abin OSM responses/archives, the 41-response approved OSM bundle, and eight JAXA original tiles. The OSM bundle contains `SHA256-MANIFEST.json`; its response bytes and manifest were verified after a full R2 readback. Read back each R2 key to a local directory under the corresponding `sources_sha256` name in the recipe. No locally derived mosaics, merged OSM files, label arrays or candidate geometries are source inputs.
 
