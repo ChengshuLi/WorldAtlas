@@ -32,8 +32,10 @@ requires an R2 binding named `ATLAS` to the `worldatlas` bucket.
 Publish `web/current/index.html` as `review/index.html` and
 `web/current/sources.html` as `review/v8.0/sources.html`. The viewer loads its
 JavaScript, CSS and configuration from the versioned asset prefix in the HTML.
-Serve the grid streams as `application/gzip` with no `Content-Encoding` header
-so the viewer can decompress them.
+V8.0 is the first WorldAtlas release. Its row and run streams are
+`review/v8.0/rows.u32le.gz` and `review/v8.0/runs.u32le.gz`. Serve them as
+`application/gzip` with no `Content-Encoding` header so the viewer can
+decompress them.
 
 `atlas.map_release_objects` tracks the two R2 objects for each versioned
 row-run map. The `rows` stream stores row offsets and the `runs` stream stores
