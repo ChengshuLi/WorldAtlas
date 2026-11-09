@@ -20,7 +20,7 @@ class PrefillPlanTest(unittest.TestCase):
             def put(path, data):
                 p=root/path; p.write_bytes(data); return p
             rows=np.array([0,1,2],dtype='<u4').tobytes(); rles={}
-            for key,values in [('physical',[4,1,4,17]),('v6',[4,8,4,18])]:
+            for key,values in [('physical',[4,1,4,17]),('land',[4,1,4,18])]:
                 rp=put(key+'-rows',rows); up=put(key+'-runs',np.array(values,dtype='<u4').tobytes())
                 rles[key]={'rows_path':rp.name,'runs_path':up.name,'rows_sha256':sha(rp),'runs_sha256':sha(up)}
             policy={'schema':'worldatlas-geography-decision-export-v1','source':'neon-export',
@@ -48,45 +48,9 @@ class PrefillPlanTest(unittest.TestCase):
             config={'rle_inputs':rles,'coastal_band':coast,'basins':[basin]};config_path=put('inputs.json',json.dumps(config).encode())
             plan_path=base/'plan.json'
             with patch.object(c,'W',4),patch.object(c,'H',2),patch.object(c,'GRID',{'width':4,'height':2}):
-                with self.assertRaisesRegex(ValueError,'historical V6 replay requires explicit opt-in'):
-                    plans.assemble(config,config_path,root,policy,policy_path,base/'historical-default')
-                result=plans.assemble(config,config_path,root,policy,policy_path,plan_path,allow_historical_v6=True);plan_path.write_text(json.dumps(result))
-                output=base/'prefill';argv=['build_prefill','--allow-unverified-snapshot','--allow-historical-v6','--plan',str(plan_path),'--input-root',str(root),'--out',str(output)]
-                with patch.object(sys,'argv',argv),contextlib.redirect_stdout(io.StringIO()): prefill.main()
-                self.assertEqual(np.fromfile(output/'prefill-runs.u32le',dtype='<u4').tolist(),[1,2,3,6,4,0,4,18])
-                audit=json.loads((output/'prefill-audit.json').read_text())
-                self.assertEqual((audit['decision_revision'],audit['entity_revision'],audit['decision_snapshot_sha256']),('d1','e1',policy_hash))
-                for invalid in ([],[basin,basin],[{**basin,'decision_id':'bad'}]):
-                    with self.assertRaisesRegex(ValueError,'exactly match'):
-                        plans.assemble({**config,'basins':invalid},config_path,root,policy,policy_path,base/'bad',allow_historical_v6=True)
-                bad_coast_path=root/'bad-coast.json'; bad_coast=json.loads((root/'coast.json').read_text())
-                bad_coast['source']['parameters']['distance']=13; bad_coast_path.write_text(json.dumps(bad_coast))
-                with self.assertRaisesRegex(ValueError,'coastal manifest source or assignment decision mismatch'):
-                    plans.assemble({**config,'coastal_band':{'manifest_path':bad_coast_path.name,'manifest_sha256':sha(bad_coast_path)}},config_path,root,policy,policy_path,base/'bad-coast-plan',allow_historical_v6=True)
-                for definition in ({'priorities':{'coastal-band':1},'allowed_overrides':[]},
-                                   {'priorities':{'coastal-band':1,'named-b1':10},'allowed_overrides':[{'winner':'coastal-band','loser':'named-b1'}]},
-                                   {'priorities':{'coastal-band':1,'named-b1':10},'allowed_overrides':[{'winner':'named-b1','loser':'coastal-band'}]*2}):
-                    bad_policy={**policy,'policies':[{'kind':'layer_precedence','definition':definition},policy['policies'][1]]}
-                    with self.assertRaises(ValueError): plans.assemble(config,config_path,root,bad_policy,policy_path,base/'bad-precedence',allow_historical_v6=True)
-                # Shared-nearest tie decisions are not implemented by the candidate generator.
-                unsupported=json.loads(json.dumps(policy))
-                unsupported['basins'][0]['assignment_method']='shared_nearest_assigned_shore'
-                unsupported['basins'][0]['tie_rules']={'method':'within_minimum_distance_tolerance', 'tolerance_metres':'0.00001'}
-                with self.assertRaisesRegex(ValueError,'shared shoreline metric requires explicit draft research opt-in'):
-                    plans.assemble(config,config_path,root,unsupported,policy_path,base/'unsupported',allow_historical_v6=True)
-                # A manifest built with a different geographic rule is not interchangeable.
-                bad_method_path=root/'bad-method.json'; bad_method=json.loads((root/'basin.json').read_text())
-                bad_method['source']['assignment_method']='shared_nearest_assigned_shore'
-                bad_method_path.write_text(json.dumps(bad_method))
-                bad_method_basin={**basin,'manifest_path':bad_method_path.name,'manifest_sha256':sha(bad_method_path)}
-                with self.assertRaisesRegex(ValueError,'manifest source does not match'):
-                    plans.assemble({**config,'basins':[bad_method_basin]},config_path,root,policy,policy_path,base/'method-plan',allow_historical_v6=True)
-                # A pinned but partial layer must not silently omit ungenerated cells.
-                partial_path=root/'partial.json'; partial=json.loads((root/'basin.json').read_text())
-                partial['coverage']={'complete':False}; partial_path.write_text(json.dumps(partial))
-                partial_basin={**basin,'manifest_path':partial_path.name,'manifest_sha256':sha(partial_path)}
-                with self.assertRaisesRegex(ValueError,'complete coverage'):
-                    plans.assemble({**config,'basins':[partial_basin]},config_path,root,policy,policy_path,base/'partial-plan',allow_historical_v6=True)
+                obsolete={**config,'rle_inputs':{'physical':rles['physical'],'v6':rles['land']}}
+                with self.assertRaisesRegex(ValueError,'physical and direct land grids'):
+                    plans.assemble(obsolete,config_path,root,policy,policy_path,base/'obsolete-plan')
                 # Direct land must bind the same physical inputs and decision snapshot.
                 ld=root/'land-build';(ld/'land').mkdir(parents=True)
                 lr=ld/'land/rows.u32le';lu=ld/'land/runs.u32le'
@@ -112,6 +76,44 @@ class PrefillPlanTest(unittest.TestCase):
                         'rows_sha256':sha(lr),'runs_sha256':sha(lu),
                         'report_path':str(rp.relative_to(root)),'report_sha256':sha(rp)}
                 direct_config={**config,'rle_inputs':{'physical':rles['physical'],'land':direct}}
+                config=direct_config
+                result=plans.assemble(config,config_path,root,policy,policy_path,plan_path);plan_path.write_text(json.dumps(result))
+                output=base/'prefill';argv=['build_prefill','--allow-unverified-snapshot','--plan',str(plan_path),'--input-root',str(root),'--out',str(output)]
+                with patch.object(sys,'argv',argv),contextlib.redirect_stdout(io.StringIO()): prefill.main()
+                self.assertEqual(np.fromfile(output/'prefill-runs.u32le',dtype='<u4').tolist(),[1,2,3,6,4,0,4,18])
+                audit=json.loads((output/'prefill-audit.json').read_text())
+                self.assertEqual((audit['decision_revision'],audit['entity_revision'],audit['decision_snapshot_sha256']),('d1','e1',policy_hash))
+                for invalid in ([],[basin,basin],[{**basin,'decision_id':'bad'}]):
+                    with self.assertRaisesRegex(ValueError,'exactly match'):
+                        plans.assemble({**config,'basins':invalid},config_path,root,policy,policy_path,base/'bad')
+                bad_coast_path=root/'bad-coast.json'; bad_coast=json.loads((root/'coast.json').read_text())
+                bad_coast['source']['parameters']['distance']=13; bad_coast_path.write_text(json.dumps(bad_coast))
+                with self.assertRaisesRegex(ValueError,'coastal manifest source or assignment decision mismatch'):
+                    plans.assemble({**config,'coastal_band':{'manifest_path':bad_coast_path.name,'manifest_sha256':sha(bad_coast_path)}},config_path,root,policy,policy_path,base/'bad-coast-plan')
+                for definition in ({'priorities':{'coastal-band':1},'allowed_overrides':[]},
+                                   {'priorities':{'coastal-band':1,'named-b1':10},'allowed_overrides':[{'winner':'coastal-band','loser':'named-b1'}]},
+                                   {'priorities':{'coastal-band':1,'named-b1':10},'allowed_overrides':[{'winner':'named-b1','loser':'coastal-band'}]*2}):
+                    bad_policy={**policy,'policies':[{'kind':'layer_precedence','definition':definition},policy['policies'][1]]}
+                    with self.assertRaises(ValueError): plans.assemble(config,config_path,root,bad_policy,policy_path,base/'bad-precedence')
+                # Shared-nearest tie decisions are not implemented by the candidate generator.
+                unsupported=json.loads(json.dumps(policy))
+                unsupported['basins'][0]['assignment_method']='shared_nearest_assigned_shore'
+                unsupported['basins'][0]['tie_rules']={'method':'within_minimum_distance_tolerance', 'tolerance_metres':'0.00001'}
+                with self.assertRaisesRegex(ValueError,'shared shoreline metric requires explicit draft research opt-in'):
+                    plans.assemble(config,config_path,root,unsupported,policy_path,base/'unsupported')
+                # A manifest built with a different geographic rule is not interchangeable.
+                bad_method_path=root/'bad-method.json'; bad_method=json.loads((root/'basin.json').read_text())
+                bad_method['source']['assignment_method']='shared_nearest_assigned_shore'
+                bad_method_path.write_text(json.dumps(bad_method))
+                bad_method_basin={**basin,'manifest_path':bad_method_path.name,'manifest_sha256':sha(bad_method_path)}
+                with self.assertRaisesRegex(ValueError,'manifest source does not match'):
+                    plans.assemble({**config,'basins':[bad_method_basin]},config_path,root,policy,policy_path,base/'method-plan')
+                # A pinned but partial layer must not silently omit ungenerated cells.
+                partial_path=root/'partial.json'; partial=json.loads((root/'basin.json').read_text())
+                partial['coverage']={'complete':False}; partial_path.write_text(json.dumps(partial))
+                partial_basin={**basin,'manifest_path':partial_path.name,'manifest_sha256':sha(partial_path)}
+                with self.assertRaisesRegex(ValueError,'complete coverage'):
+                    plans.assemble({**config,'basins':[partial_basin]},config_path,root,policy,policy_path,base/'partial-plan')
                 direct_plan=plans.assemble(direct_config,config_path,root,policy,policy_path,base/'direct-plan.json')
                 self.assertEqual(direct_plan['land_input_kind'],'direct-research')
                 with patch.object(plans.local_water_overlay,'land_snapshot_hash',return_value='e'*64), patch.object(plans,'validate_land_report') as verify_land:
@@ -126,7 +128,7 @@ class PrefillPlanTest(unittest.TestCase):
                     plans.assemble({**direct_config,'rle_inputs':{'physical':rles['physical'],'land':shifted_input}},config_path,root,policy,policy_path,base/'shifted')
                 lcp.write_text(json.dumps(land_config));rp.write_text(json.dumps(report))
                 dp=base/'direct-plan.json';dp.write_text(json.dumps(direct_plan))
-                with patch.object(sys,'argv',['build_prefill','--allow-unverified-snapshot','--allow-historical-v6','--plan',str(dp),'--input-root',str(root),'--out',str(base/'direct-out')]),contextlib.redirect_stdout(io.StringIO()):
+                with patch.object(sys,'argv',['build_prefill','--allow-unverified-snapshot','--plan',str(dp),'--input-root',str(root),'--out',str(base/'direct-out')]),contextlib.redirect_stdout(io.StringIO()):
                     prefill.main()
                 self.assertEqual(np.fromfile(base/'direct-out/prefill-runs.u32le',dtype='<u4').tolist(),[1,2,3,6,4,0,4,18])
                 # A shared basin requires the exact draft tie rules and the same direct land grid.
@@ -186,20 +188,23 @@ class PrefillPlanTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError,'direct land report does not bind'):
                     plans.assemble({**direct_config,'rle_inputs':{'physical':rles['physical'],'land':bad}},config_path,root,policy,policy_path,base/'bad-direct')
                 # A report changed after planning is rejected before output creation.
-                with patch.object(sys,'argv',['build_prefill','--allow-unverified-snapshot','--allow-historical-v6','--plan',str(dp),'--input-root',str(root),'--out',str(base/'changed-report')]),contextlib.redirect_stdout(io.StringIO()):
+                with patch.object(sys,'argv',['build_prefill','--allow-unverified-snapshot','--plan',str(dp),'--input-root',str(root),'--out',str(base/'changed-report')]),contextlib.redirect_stdout(io.StringIO()):
                     with self.assertRaisesRegex(ValueError,'report hash mismatch'):prefill.main()
                 self.assertFalse((base/'changed-report').exists())
                 # A pinned direct grid may not turn physical water into land.
+                valid_land_runs=lu.read_bytes()
                 report['compiler_report']['input_sha256']['physical_runs']=rles['physical']['runs_sha256']
                 lu.write_bytes(np.array([4,18,4,18],dtype='<u4').tobytes())
                 report['compiler_report']['output_runs_sha256']=sha(lu);rp.write_text(json.dumps(report))
                 invalid_land={**direct,'runs_sha256':sha(lu),'report_sha256':sha(rp)}
                 bad_grid=plans.assemble({**direct_config,'rle_inputs':{'physical':rles['physical'],'land':invalid_land}},config_path,root,policy,policy_path,base/'bad-grid-plan.json')
                 gp=base/'bad-grid-plan.json';gp.write_text(json.dumps(bad_grid))
-                with patch.object(sys,'argv',['build_prefill','--allow-unverified-snapshot','--allow-historical-v6','--plan',str(gp),'--input-root',str(root),'--out',str(base/'bad-grid')]),contextlib.redirect_stdout(io.StringIO()):
+                with patch.object(sys,'argv',['build_prefill','--allow-unverified-snapshot','--plan',str(gp),'--input-root',str(root),'--out',str(base/'bad-grid')]),contextlib.redirect_stdout(io.StringIO()):
                     with self.assertRaisesRegex(ValueError,'disagrees with physical water'):prefill.main()
+                lu.write_bytes(valid_land_runs)
+                report['compiler_report']['output_runs_sha256']=sha(lu);rp.write_text(json.dumps(report))
                 wrong=json.loads(json.dumps(result));wrong['water_layers'][1]['allowed_codes']=[5];wp=base/'wrong.json';wp.write_text(json.dumps(wrong))
-                with patch.object(sys,'argv',['build_prefill','--allow-unverified-snapshot','--allow-historical-v6','--plan',str(wp),'--input-root',str(root),'--out',str(base/'bad-code')]),contextlib.redirect_stdout(io.StringIO()):
+                with patch.object(sys,'argv',['build_prefill','--allow-unverified-snapshot','--plan',str(wp),'--input-root',str(root),'--out',str(base/'bad-code')]),contextlib.redirect_stdout(io.StringIO()):
                     with self.assertRaisesRegex(ValueError,'not allowed by selected basin policy'):prefill.main()
 
 

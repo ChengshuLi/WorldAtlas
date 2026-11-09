@@ -29,7 +29,7 @@ class PrefillTests(unittest.TestCase):
                 return p
             rows = np.array([0, 1, 2], dtype='<u4').tobytes()
             rles = {}
-            for name, values in [('physical', [4, 1, 4, 17]), ('v6', [4, 8, 4, 18])]:
+            for name, values in [('physical', [4, 1, 4, 17]), ('land', [4, 1, 4, 18])]:
                 rp = put(name + '-rows', rows)
                 up = put(name + '-runs', np.array(values, dtype='<u4').tobytes())
                 rles[name] = {'rows_path': rp.name, 'runs_path': up.name,
@@ -44,14 +44,19 @@ class PrefillTests(unittest.TestCase):
                      'manifest_sha256': digest(mp), 'priority': 1, 'overrides': []}
             plan = {'schema': 'worldatlas-v7-full-grid-composition-plan-v1',
                     'grid': {'width': 4, 'height': 2}, 'rle_inputs': rles, 'water_layers': [layer]}
+            report = put('land-report.json', b'{}')
+            rles['land'].update(report_path=report.name, report_sha256=digest(report))
+            plan.update(land_input_kind='direct-research', decision_revision_status='accepted')
             pp = put('plan.json', json.dumps(plan).encode())
             out = base / 'output'
-            argv = ['build_prefill', '--allow-unverified-snapshot', '--allow-historical-v6', '--plan', str(pp), '--input-root', str(root), '--out', str(out)]
-            with patch.object(c, 'W', 4), patch.object(c, 'H', 2), patch.object(c, 'GRID', {'width': 4, 'height': 2}), patch.object(sys, 'argv', argv), contextlib.redirect_stdout(io.StringIO()):
-                no_history=[x for x in argv if x!='--allow-historical-v6']
-                with patch.object(sys,'argv',no_history):
-                    with self.assertRaisesRegex(ValueError,'historical V6 replay requires explicit opt-in'):prefill.main()
+            argv = ['build_prefill', '--allow-unverified-snapshot', '--plan', str(pp), '--input-root', str(root), '--out', str(out)]
+            with patch.object(c, 'W', 4), patch.object(c, 'H', 2), patch.object(c, 'GRID', {'width': 4, 'height': 2}), patch.object(sys, 'argv', argv), patch.object(prefill, 'validate_land_report', return_value=None), contextlib.redirect_stdout(io.StringIO()):
+                obsolete={**plan,'rle_inputs':{'physical':rles['physical'],'v6':rles['land']}}
+                pp.write_text(json.dumps(obsolete))
+                with self.assertRaisesRegex(ValueError,'physical and direct land grids'):
+                    prefill.main()
                 self.assertFalse(out.exists())
+                pp.write_text(json.dumps(plan))
                 # Actual CLI gate: obsolete and unknown methods are rejected
                 # even with opt-in; the WGS84 method requires that opt-in.
                 for method in ('spherical-grid-edge-v1','',False):
@@ -160,7 +165,7 @@ class ColumnPrefillIntegrationTests(unittest.TestCase):
     p=root/name;p.write_bytes(data);return p
    rows=put('rows',np.asarray([0,1,3,4],dtype='<u4').tobytes())
    grids={}
-   for name,values in [('physical',[16,1,8,1,16,17,16,17]),('v6',[16,8,8,8,16,18,16,18])]:
+   for name,values in [('physical',[16,1,8,1,16,17,16,17]),('land',[16,1,8,1,16,18,16,18])]:
     runs=put(name,np.asarray(values,dtype='<u4').tobytes())
     grids[name]={'rows_path':rows.name,'rows_sha256':digest(rows),'runs_path':runs.name,'runs_sha256':digest(runs)}
    layers=[]
@@ -174,11 +179,14 @@ class ColumnPrefillIntegrationTests(unittest.TestCase):
               'coverage':{'complete':True},'tiles':[{'path':tile.name,'sha256':digest(tile),'row_start':0,'row_end_exclusive':3}]}
     mp=put(label+'.json',json.dumps(manifest).encode())
     layers.append({'layer_id':label,'manifest_path':mp.name,'manifest_sha256':digest(mp),'priority':priority,'overrides':overrides,'allowed_codes':[code]})
+   report=put('land-report.json',b'{}')
+   grids['land'].update(report_path=report.name,report_sha256=digest(report))
    plan=put('plan.json',json.dumps({'schema':'worldatlas-v7-full-grid-composition-plan-v1',
+    'land_input_kind':'direct-research','decision_revision_status':'accepted',
     'grid':{'width':16,'height':3},'rle_inputs':grids,'water_layers':layers}).encode())
-   with patch.object(c,'W',16),patch.object(c,'H',3),patch.object(c,'GRID',{'width':16,'height':3}):
+   with patch.object(c,'W',16),patch.object(c,'H',3),patch.object(c,'GRID',{'width':16,'height':3}),patch.object(prefill,'validate_land_report',return_value=None):
     for engine in ('reference','columns','arrows'):
-     argv=['--plan',str(plan),'--input-root',str(root),'--out',str(base/engine),'--allow-unverified-snapshot','--allow-historical-v6']
+     argv=['--plan',str(plan),'--input-root',str(root),'--out',str(base/engine),'--allow-unverified-snapshot']
      if engine!='reference':argv.append('--column-engine')
      if engine=='arrows':argv.append('--arrow-spans')
      prefill.main(argv,emit=lambda value:None)
@@ -201,10 +209,10 @@ class ColumnPrefillIntegrationTests(unittest.TestCase):
    manifest['tiles'][0]['sha256']=digest(tile);manifest_path.write_text(json.dumps(manifest))
    layers[0]['manifest_sha256']=digest(manifest_path)
    document=json.loads(plan.read_text());document['water_layers']=[layers[0]];plan.write_text(json.dumps(document))
-   with patch.object(c,'W',16),patch.object(c,'H',3),patch.object(c,'GRID',{'width':16,'height':3}):
+   with patch.object(c,'W',16),patch.object(c,'H',3),patch.object(c,'GRID',{'width':16,'height':3}),patch.object(prefill,'validate_land_report',return_value=None):
     for engine in ('reference','columns','arrows'):
      out=base/('interior-land-'+engine)
-     argv=['--plan',str(plan),'--input-root',str(root),'--out',str(out),'--allow-unverified-snapshot','--allow-historical-v6']
+     argv=['--plan',str(plan),'--input-root',str(root),'--out',str(out),'--allow-unverified-snapshot']
      if engine!='reference':argv.append('--column-engine')
      if engine=='arrows':argv.append('--arrow-spans')
      with self.assertRaisesRegex(ValueError,'continent-water span covers physical land row=1 x=8:10'):

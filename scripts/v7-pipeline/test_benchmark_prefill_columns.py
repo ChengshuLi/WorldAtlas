@@ -7,6 +7,7 @@ from unittest.mock import patch
 
 import numpy as np
 
+import build_prefill_plan
 import compose_full_water_grid as c
 from benchmark_prefill_columns import run_pair
 
@@ -18,16 +19,19 @@ class PrefillPairTests(unittest.TestCase):
             rows=inputs/'rows';rows.write_bytes(np.asarray([0,1,2],dtype='<u4').tobytes())
             sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
             rles={}
-            for name,values in [('physical',[4,1,4,17]),('v6',[4,8,4,18])]:
+            for name,values in [('physical',[4,1,4,17]),('land',[4,1,4,18])]:
                 runs=inputs/name;runs.write_bytes(np.asarray(values,dtype='<u4').tobytes())
                 rles[name]={'rows_path':'rows','rows_sha256':sha(rows),'runs_path':name,'runs_sha256':sha(runs)}
+            report=inputs/'land-report.json';report.write_text('{}')
+            rles['land'].update(report_path=report.name,report_sha256=sha(report))
             plan=inputs/'plan';plan.write_text(json.dumps({'schema':'worldatlas-v7-full-grid-composition-plan-v1',
+                'land_input_kind':'direct-research','decision_revision_status':'accepted',
                 'grid':{'width':4,'height':2},'rle_inputs':rles,'water_layers':[]}))
             checkout=Path(__file__).resolve().parents[2]
-            with patch.object(c,'W',4),patch.object(c,'H',2),patch.object(c,'GRID',{'width':4,'height':2}):
+            with patch.object(c,'W',4),patch.object(c,'H',2),patch.object(c,'GRID',{'width':4,'height':2}),patch.object(build_prefill_plan,'validate_land_report',return_value=None):
                 for first in (False,True):
                     out=root/('candidate-first' if first else 'reference-first')
-                    result=run_pair(plan,inputs,out,checkout,options=('--allow-unverified-snapshot','--allow-historical-v6'),candidate_first=first)
+                    result=run_pair(plan,inputs,out,checkout,options=('--allow-unverified-snapshot',),candidate_first=first)
                     self.assertEqual(result['comparison']['status'],'all-prefill-rle-bytes-and-audit-identical')
                     self.assertEqual(result['candidate_first'],first)
                     self.assertEqual(result['execution_mode'],'in-process-python-api')
@@ -36,7 +40,7 @@ class PrefillPairTests(unittest.TestCase):
                     self.assertGreater(timings['column-candidate']['stage_wall_seconds'],0)
                     with self.assertRaises(FileExistsError):run_pair(plan,inputs,out,checkout)
                 result=run_pair(plan,inputs,root/'arrow-reader',checkout,
-                    options=('--allow-unverified-snapshot','--allow-historical-v6'),arrow_spans=True)
+                    options=('--allow-unverified-snapshot',),arrow_spans=True)
                 self.assertEqual(result['candidate_span_reader'],'pyarrow-columns')
                 self.assertEqual(result['comparison']['status'],'all-prefill-rle-bytes-and-audit-identical')
                 with self.assertRaises(ValueError):run_pair(plan,inputs,root/'bad',checkout,options=('--anything',))

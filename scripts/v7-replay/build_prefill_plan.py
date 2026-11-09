@@ -237,7 +237,7 @@ def validate_land_report(report, report_path, physical, land, snapshot_hash, rev
         raise ValueError('direct land outputs do not match report location')
 
 
-def assemble(config, config_path, root, policy, policy_path, out, allow_draft=False, allow_research_shore=False, allow_historical_v6=False):
+def assemble(config, config_path, root, policy, policy_path, out, allow_draft=False, allow_research_shore=False):
     processing_started=time.perf_counter()
     revision = validate_revision(policy, allow_draft=allow_draft)
     selected = policy.get('basins', [])
@@ -258,12 +258,9 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
     def rel(path):
         return os.path.relpath(path, out.parent)
     rles = {}
-    land_key = 'land' if 'land' in config['rle_inputs'] else 'v6'
-    if set(config['rle_inputs']) != {'physical', land_key}:
-        raise ValueError('exactly one direct land or historical v6 grid is required')
-    if land_key == 'v6' and not allow_historical_v6:
-        raise ValueError('historical V6 replay requires explicit opt-in')
-    for key in ('physical', land_key):
+    if set(config['rle_inputs']) != {'physical', 'land'}:
+        raise ValueError('physical and direct land grids are required')
+    for key in ('physical', 'land'):
         source = config['rle_inputs'][key]
         rows = input_path(source['rows_path'], config_path, root)
         runs = input_path(source['runs_path'], config_path, root)
@@ -279,20 +276,16 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
             raise ValueError('physical report hash mismatch')
         validate_physical_report(json.loads(physical_report_path.read_text()),physical)
         physical['report_path']=rel(physical_report_path);physical['report_sha256']=physical_source['report_sha256']
-    if shared and land_key != 'land':
-        raise ValueError('shared basins require direct decision-derived land')
-    land_lineage = None
-    if land_key == 'land':
-        source = config['rle_inputs']['land']
-        report_path = input_path(source['report_path'], config_path, root)
-        if c.sha256(report_path) != source['report_sha256']:
-            raise ValueError('direct land report hash mismatch')
-        land = {**rles['land'], 'resolved_rows':input_path(source['rows_path'], config_path, root),
-                'resolved_runs':input_path(source['runs_path'], config_path, root)}
-        land_lineage = validate_land_report(json.loads(report_path.read_text()), report_path, rles['physical'],
-                             land, local_water_overlay.land_snapshot_hash(policy, c.sha256(policy_path)), revision, root)
-        rles['land']['report_path'] = rel(report_path)
-        rles['land']['report_sha256'] = source['report_sha256']
+    source = config['rle_inputs']['land']
+    report_path = input_path(source['report_path'], config_path, root)
+    if c.sha256(report_path) != source['report_sha256']:
+        raise ValueError('direct land report hash mismatch')
+    land = {**rles['land'], 'resolved_rows':input_path(source['rows_path'], config_path, root),
+            'resolved_runs':input_path(source['runs_path'], config_path, root)}
+    land_lineage = validate_land_report(json.loads(report_path.read_text()), report_path, rles['physical'],
+                         land, local_water_overlay.land_snapshot_hash(policy, c.sha256(policy_path)), revision, root)
+    rles['land']['report_path'] = rel(report_path)
+    rles['land']['report_sha256'] = source['report_sha256']
     def validate_manifest(rec):
         path = input_path(rec['manifest_path'], config_path, root)
         if c.sha256(path) != rec['manifest_sha256']:
@@ -306,7 +299,6 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
     coast_source = coast_manifest.get('source', {}); physical = rles['physical']
     coast_decision, coast_catalog = coastline_policy(policy); coast_definition = coast_decision['definition']
     if coast_catalog is None:
-        if land_key != 'land': raise ValueError('derived coastline requires direct land')
         if 'report_sha256' not in physical: raise ValueError('derived coast requires physical report')
         if (coast_source.get('decision_id') != coast_decision['id'] or coast_source.get('policy_definition') != coast_definition
                 or coast_source.get('physical_report_sha256') != physical['report_sha256']
@@ -374,7 +366,7 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
         layers.append(layer)
     return {'processing_elapsed_seconds':time.perf_counter()-processing_started,'schema':'worldatlas-v7-full-grid-composition-plan-v1', 'status':'fresh-prefill-unverified-test-candidate',
             'purpose':'Fresh selected named basins and coast, with residual marine water code 0.',
-            'land_input_kind':'direct-research' if land_key == 'land' else 'historical-v6-replay',
+            'land_input_kind':'direct-research',
             'research_shore_method': 'wgs84-coastal-4neighbor-center-v2' if shared else None,
             'grid':{'width':c.W,'height':c.H}, 'rle_inputs':rles, 'water_layers':layers,
             'land_lineage':land_lineage, 'decision_snapshot_sha256':c.sha256(policy_path), 'land_decision_snapshot_sha256':local_water_overlay.land_snapshot_hash(policy, c.sha256(policy_path)), 'decision_revision':revision['id'], 'decision_revision_status':revision['status'], 'entity_revision':revision['entity_revision'],
@@ -388,7 +380,6 @@ def main(argv=None, *, emit=print):
     ap.add_argument('--allow-unverified-snapshot', action='store_true', help='test only: Neon acceptance cannot yet be authenticated by this tool')
     ap.add_argument('--allow-draft-snapshot', action='store_true', help='research only: allow explicitly draft Neon evidence')
     ap.add_argument('--allow-research-shore', action='store_true', help='research only: allow the unapproved WGS84 coastal land-cell-center method')
-    ap.add_argument('--allow-historical-v6', action='store_true', help='historical replay only: permit the V6 land grid')
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args(argv)
     if not args.allow_unverified_snapshot:
@@ -399,7 +390,7 @@ def main(argv=None, *, emit=print):
     out=validate_fresh_output(root,args.out,(config_path,policy_path))
     policy=read_snapshot(policy_path,args.policy_sha256,allow_draft=args.allow_draft_snapshot)
     config=json.loads(config_path.read_text())
-    plan=assemble(config,config_path,root,policy,policy_path,out,allow_draft=args.allow_draft_snapshot,allow_research_shore=args.allow_research_shore,allow_historical_v6=args.allow_historical_v6)
+    plan=assemble(config,config_path,root,policy,policy_path,out,allow_draft=args.allow_draft_snapshot,allow_research_shore=args.allow_research_shore)
     write_json_exclusive(out,plan,indent=2)
     emit(json.dumps({'plan':str(out),'sha256':c.sha256(out),'layers':len(plan['water_layers'])}))
 

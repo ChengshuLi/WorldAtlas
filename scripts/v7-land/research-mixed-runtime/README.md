@@ -6,18 +6,11 @@ snapshot. It resolves named points, source polygons and regional policies
 against components produced by the same run. The
 [V8 runner](../../v7-pipeline/README.md) prepares the request and code pins.
 
-The Port Fouad entry cites the pinned `worldatlas-v7-review-references`
-index for the main Suez Canal side convention. `entry_evidence.py` verifies
-the index against its catalog pin. The regional resolver applies the selected
-source polygons to the current grid. The 315-cell comparison span linked by
-the citation is preserved as `v8-historical-port-fouad-v7-comparison-span`
-in `atlas.structured_documents`.
-
-Regional entries also keep older List 1 item identifiers as decision lineage.
-For example, the Greater Antilles entry carries forward the historical
-North America convention and selects whole components with the current
-Natural Earth group polygon. The exact V7 comparison spans linked by these
-older item identifiers are preserved in `v8-historical-list1-comparison-spans`.
+The selected regional decisions and policy are stored in
+`atlas.structured_documents`. The resolver applies their point and polygon
+selectors to the current physical components. For example, the Greater
+Antilles decision uses the Natural Earth group polygon to select whole
+components for North America.
 
 The small synthetic checks can be run with GDAL Python bindings, NumPy, SciPy and pyproj available:
 
@@ -31,4 +24,5 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -m unittest -q \
   test_shared_coverage_index
 ```
 
-The tests are synthetic and do not establish source rights, whole-component geographic identity, historical source equivalence, or correctness of a particular map.
+The tests exercise the resolver's input contracts and assignment rules with
+synthetic data.

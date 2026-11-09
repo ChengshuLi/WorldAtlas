@@ -15,7 +15,7 @@ from run_pipeline import stage_scratch
 
 
 OPTIONS = ('--allow-unverified-snapshot', '--allow-draft-snapshot',
-           '--allow-research-shore', '--allow-historical-v6')
+           '--allow-research-shore')
 
 
 def run_pair(plan, input_root, out, code_root, *, options=(), candidate_first=False, arrow_spans=False):

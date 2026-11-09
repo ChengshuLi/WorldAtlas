@@ -1,4 +1,4 @@
-"""Verify completed, direct-run stage-2 land candidate before V7 comparison.
+"""Verify the completed mainland stage and its same-run inputs.
 
 Research diagnostic only. Hashes establish artifact identity, not independent
 Neon authentication or scientific correctness. This does not construct List 1.

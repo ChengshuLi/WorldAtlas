@@ -36,7 +36,6 @@ The earlier audit placed explicitly unselected, temporary research in draft Neon
 
 ## Reproducibility and scope
 
-The [construction lineage](CONSTRUCTION-LINEAGE-20261105.md) records the earlier boundary and recovered sourcecut.
 
 
 ### Selected-line topology

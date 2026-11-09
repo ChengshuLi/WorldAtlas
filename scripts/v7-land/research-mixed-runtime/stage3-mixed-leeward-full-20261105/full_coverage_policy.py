@@ -3,7 +3,7 @@
 Call only after the authenticated, single-source polygon rasterizer has rejected
 exact boundary/center coincidences and produced per-root hit counts. The caller
 must pin source/code/physical/component streams before and after execution and
-verify those pins. No V7 labels, old roots, or geographic coordinates enter.
+verify those pins. Coverage is computed from the pinned current-run components.
 """
 from collections import Counter
 from pathlib import Path

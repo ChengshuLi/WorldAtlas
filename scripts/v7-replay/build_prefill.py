@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build a portable candidate 0–6/17–22 prefill RLE for the ocean seed-fill engine.
 
-Inputs are a physical mask, either decision-derived research land or historical V6 land,
-and continent-water layers. No V2 or V6 water label is read.
+Inputs are a physical mask, same-run decision-derived land and
+continent-water layers.
 """
 from __future__ import annotations
 import argparse,json,sys
@@ -46,7 +46,6 @@ def main(argv=None, *, emit=print):
  ap.add_argument('--allow-unverified-snapshot',action='store_true',help='test only: Neon acceptance cannot yet be authenticated by this tool')
  ap.add_argument('--allow-draft-snapshot',action='store_true',help='research only: allow a draft plan')
  ap.add_argument('--allow-research-shore',action='store_true',help='research only: allow the unapproved WGS84 coastal land-cell-center method')
- ap.add_argument('--allow-historical-v6',action='store_true',help='historical replay only: permit V6 land')
  ap.add_argument('--column-engine',action='store_true',help='research: resolve validated spans as numeric columns; verify full-input parity before adoption')
  ap.add_argument('--arrow-spans',action='store_true',help='research: stream span columns with PyArrow; requires --column-engine')
  a=ap.parse_args(argv)
@@ -62,11 +61,9 @@ def main(argv=None, *, emit=print):
  out=validate_fresh_output(root,a.out,(plan_path,))
  if plan.get('grid',{}).get('width')!=c.W or plan.get('grid',{}).get('height')!=c.H:raise ValueError('plan grid mismatch')
  rles={}
- land_key='land' if 'land' in plan['rle_inputs'] else 'v6'
- if land_key=='v6' and not a.allow_historical_v6:raise ValueError('historical V6 replay requires explicit opt-in')
- if land_key=='land' and (plan.get('land_input_kind')!='direct-research' or plan.get('decision_revision_status') not in ('draft','accepted')):raise ValueError('direct land input kind or revision status mismatch')
- if set(plan['rle_inputs'])!={'physical',land_key}:raise ValueError('exactly one direct land or historical v6 grid is required')
- for key in ('physical',land_key):
+ if plan.get('land_input_kind')!='direct-research' or plan.get('decision_revision_status') not in ('draft','accepted'):raise ValueError('direct land input kind or revision status mismatch')
+ if set(plan['rle_inputs'])!={'physical','land'}:raise ValueError('physical and direct land grids are required')
+ for key in ('physical','land'):
   ent=plan['rle_inputs'][key];rp=c.resolve_input(ent['rows_path'],plan_path.parent,root);up=c.resolve_input(ent['runs_path'],plan_path.parent,root)
   if c.sha256(rp)!=ent['rows_sha256'] or c.sha256(up)!=ent['runs_sha256']:raise ValueError(f'{key} input RLE hash mismatch')
   rows=np.memmap(rp,dtype='<u4',mode='r');runs=np.memmap(up,dtype='<u4',mode='r')
@@ -77,17 +74,15 @@ def main(argv=None, *, emit=print):
   pent=plan['rle_inputs']['physical'];ppath=c.resolve_input(pent['report_path'],plan_path.parent,root)
   if c.sha256(ppath)!=pent['report_sha256']:raise ValueError('physical report hash mismatch')
   validate_physical_report(json.loads(ppath.read_text()),pent)
- land_water_code=None
- if land_key=='land':
-  ent=plan['rle_inputs']['land'];report_path=c.resolve_input(ent['report_path'],plan_path.parent,root)
-  if c.sha256(report_path)!=ent['report_sha256']:raise ValueError('direct land report hash mismatch')
-  physical=plan['rle_inputs']['physical']
-  land={**ent,'resolved_rows':c.resolve_input(ent['rows_path'],plan_path.parent,root),'resolved_runs':c.resolve_input(ent['runs_path'],plan_path.parent,root)}
-  report=json.loads(report_path.read_text())
-  revision={'id':plan.get('decision_revision'),'entity_revision':plan.get('entity_revision'),'status':plan.get('decision_revision_status')}
-  checked_land_lineage=validate_land_report(report,report_path,physical,land,plan.get('land_decision_snapshot_sha256',plan.get('decision_snapshot_sha256')),revision,root)
-  if checked_land_lineage!=plan.get('land_lineage'):raise ValueError('land lineage differs from prefill plan')
-  land_water_code=direct_land_water_code(report,ent['report_sha256'],checked_land_lineage)
+ ent=plan['rle_inputs']['land'];report_path=c.resolve_input(ent['report_path'],plan_path.parent,root)
+ if c.sha256(report_path)!=ent['report_sha256']:raise ValueError('direct land report hash mismatch')
+ physical=plan['rle_inputs']['physical']
+ land={**ent,'resolved_rows':c.resolve_input(ent['rows_path'],plan_path.parent,root),'resolved_runs':c.resolve_input(ent['runs_path'],plan_path.parent,root)}
+ report=json.loads(report_path.read_text())
+ revision={'id':plan.get('decision_revision'),'entity_revision':plan.get('entity_revision'),'status':plan.get('decision_revision_status')}
+ checked_land_lineage=validate_land_report(report,report_path,physical,land,plan.get('land_decision_snapshot_sha256',plan.get('decision_snapshot_sha256')),revision,root)
+ if checked_land_lineage!=plan.get('land_lineage'):raise ValueError('land lineage differs from prefill plan')
+ land_water_code=direct_land_water_code(report,ent['report_sha256'],checked_land_lineage)
  layers=[]
  for ent in plan.get('water_layers',[]):
   mp,m=c.read_pinned_manifest(ent,plan_path,root);m['_tiles']=m['tiles']
@@ -109,7 +104,7 @@ def main(argv=None, *, emit=print):
  else:
   cursors=[(ent,c.RowCursor(m,0,c.H,'water')) for ent,m in layers]
  policy=LayerPolicy([ent for ent,_ in layers]) if a.column_engine else None
- pr,pu=rles['physical'];landr,landu=rles[land_key];rawr=out/'prefill-rows.u32le';rawu=out/'prefill-runs.u32le'
+ pr,pu=rles['physical'];landr,landu=rles['land'];rawr=out/'prefill-rows.u32le';rawu=out/'prefill-runs.u32le'
  counts={str(k):0 for k in range(23)};runs_written=0;overlap_cells=0;assigned_cells=0;residual_cells=0;land_cells=0
  with create_binary_exclusive(rawr) as yf,create_binary_exclusive(rawu) as rf:
   yf.write(np.asarray([0],dtype='<u4').tobytes())
@@ -152,7 +147,7 @@ def main(argv=None, *, emit=print):
    runs_written+=len(vals);yf.write(np.asarray([runs_written],dtype='<u4').tobytes())
  report={'schema':'worldatlas-v7-prefill-class-rle-audit-v1','status':'staged-not-published','grid':c.GRID,
   'source_plan_sha256':c.sha256(plan_path),'decision_snapshot_sha256':plan.get('decision_snapshot_sha256'),
-  'land_input_kind':plan.get('land_input_kind','historical-v6-replay'),'land_lineage':plan.get('land_lineage'),'research_shore_method':plan.get('research_shore_method'),
+  'land_input_kind':plan['land_input_kind'],'land_lineage':plan.get('land_lineage'),'research_shore_method':plan.get('research_shore_method'),
   'decision_revision':plan.get('decision_revision'),'entity_revision':plan.get('entity_revision'),
   'physical_mask_sha256':plan['rle_inputs']['physical'].get('physical_mask_sha256'),
   'layer_manifests':[{'layer_id':x.get('layer_id'),'manifest_sha256':c.sha256(c.resolve_input(x['manifest_path'],plan_path.parent,root)),'priority':x['priority']} for x,_ in layers],
