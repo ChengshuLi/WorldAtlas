@@ -16,6 +16,22 @@ Agulhas and the 67°16′W meridian from Cape Horn. It also cites the
 historical South East Cape meridian for comparison with the modern
 meridian used by V8.
 
+The Cape Horn endpoint uses 55°59′S and 67°16′W, consistent with the
+[Australian Antarctic Data Centre gazetteer](https://data.aad.gov.au/aadc/gaz/place_names_within_map.cfm?east=-44&north=-47.1666666667&south=-56&west=-69.5).
+The South East Cape endpoint uses 43°38′40″S and 146°49′30″E from
+[Geoscience Australia](https://www.ga.gov.au/scientific-topics/national-location-information/geography/extreme-points).
+Both endpoints store exact fractions for the degree values in Neon.
+
+At Cape Agulhas, the [SANParks tip latitude](https://www.sanparks.org/parks/agulhas/what-to-do/activities/scenic-landmarks)
+locates the search along the 20°E meridian. The selected endpoint is the
+nearest south-facing edge with dry cells on both sides of the meridian in
+the row above and water cells in the row below. The historical
+`data/osm/physical/660ac7608f72b447c95eb8820979951fe589f25c70303efe732b374049127017/final-dry-mask.tif`
+has that transition at row edge 45,450, between columns 72,817 and 72,818.
+It yields latitude −34.8321533203125°. Encoding this mask with
+`write_run_block(..., binary=True)` in `scripts/v7-raw-mask/compose_physical.py`
+reproduces both decoded physical streams pinned by the endpoint.
+
 ## Iceland source extraction
 
 Run `python extract_s130_iceland.py --archive S-130.zip --output iceland-routes.json`
