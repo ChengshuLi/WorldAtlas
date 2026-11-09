@@ -1,17 +1,9 @@
 #!/usr/bin/env python3
-"""Compose a staged full V7 grid from independently generated water-assignment layers.
-
-Inputs are immutable V2, V6 (read for land values only), and the physical mask.
-Water assignments arrive as row/span JSONL tiles, keyed by semantic rule/member IDs.
-This tool never publishes and never writes any source input.
-"""
+"""Read and combine the pinned water-assignment layers used by the V8 build."""
 from __future__ import annotations
-import argparse, gzip, hashlib, heapq, json, os
+import gzip, hashlib, heapq, json
 from collections import defaultdict
 from pathlib import Path
-import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from exclusive_outputs import create_binary_exclusive, create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, create_run_directory, write_json_exclusive
 import numpy as np
 
 W, H = 131072, 54614
@@ -51,8 +43,7 @@ def read_pinned_manifest(entry, plan_path: Path, input_root: Path):
 
 def read_manifest(path: Path, input_root: Path):
     m = json.loads(path.read_text())
-    if m.get('schema') not in ('worldatlas-full-water-assignment-tiles-v1',
-                               'worldatlas-land-provenance-tiles-v1'):
+    if m.get('schema') != 'worldatlas-full-water-assignment-tiles-v1':
         raise ValueError(f"unsupported tile manifest schema in {path}: {m.get('schema')}")
     if str(m.get('status', '')).lower() in ('active', 'running', 'partial', 'failed'):
         raise ValueError(f"tile manifest is not a completed candidate: {path} status={m.get('status')}")
@@ -134,19 +125,11 @@ def tile_spans(tile, y0, y1, role, sparse_rows_allowed=False):
                 if tile['_cols'] is not None and not (tile['_cols'][0] <= x0 < x1 <= tile['_cols'][1]):
                     raise ValueError(f"span escapes tile columns in {tile['_path']} line {ln}: {s}")
                 if y0 <= y < y1:
-                    if role == 'land_provenance':
-                        fr = int(s.get('from_code', -1)); to = int(s.get('to_code', code))
-                        owner = s.get('member_id') or s.get('source_member_id')
-                        rule = s.get('rule_id', 'inherited-v6-land-exception')
-                        if not (17 <= fr <= 22 and 17 <= to <= 22 and fr != to and owner):
-                            raise ValueError(f"invalid land provenance span: {s}")
-                        yield (y, x0, x1, to, rule, owner, fr, to)
-                    else:
-                        owner = s.get('member_id') or s.get('source_member_id')
-                        rule = s.get('rule_id')
-                        if not (1 <= code <= 10 and owner and rule):
-                            raise ValueError(f"water assignment lacks a valid code/rule/member: {s}")
-                        yield (y, x0, x1, code, rule, owner, None, None)
+                    owner = s.get('member_id') or s.get('source_member_id')
+                    rule = s.get('rule_id')
+                    if not (1 <= code <= 10 and owner and rule):
+                        raise ValueError(f"water assignment lacks a valid code/rule/member: {s}")
+                    yield (y, x0, x1, code, rule, owner, None, None)
                 last_end = x1
     if not sparse_rows_allowed and (expected_row != brow or last_row != brow - 1):
         raise ValueError(f"tile row record count mismatch in {tile['_path']}: ended at {expected_row}, expected {brow}")
@@ -383,23 +366,6 @@ def add_layer_identity(spans, priority, layer_id, overrides):
     return [(*s, priority, layer_id, overrides) for s in spans]
 
 
-def v2_diff_identity(rule, member, from_code, to_code):
-    """Give fresh-ocean changes honest pairwise source/target identities.
-
-    The seed-fill layer assigns each residual cell by its resulting ocean, not
-    by a particular divider arc. When that result changes a V2 water code,
-    attribute the V2→V7 exception to the old/new code pair. This avoids
-    implying that a changed cell came from one specific arc when the source
-    only supports the four-ocean partition as a whole.
-    """
-    if (rule == 'fresh-ocean-seed-floodfill-v1' and
-            1 <= int(from_code) <= 10 and 7 <= int(to_code) <= 10 and
-            int(from_code) != int(to_code)):
-        return ('fresh-ocean-seed-partition-reassignment-v1',
-                f'ocean-repartition-v2-{int(from_code)}-to-v7-{int(to_code)}')
-    return rule, member
-
-
 def open_validated_rle(rows_path: Path, runs_path: Path, name: str):
     """Validate the RLE envelope before rows are read or narrowed to uint8."""
     if rows_path.stat().st_size != (H + 1) * 4 or runs_path.stat().st_size % 8:
@@ -419,123 +385,3 @@ def validate_rle_row(ends, values, name: str, row: int):
     allowed = (1, 17) if name == 'physical' else tuple(range(1, 11)) + tuple(range(17, 23))
     if np.any(~np.isin(values, allowed)):
         raise ValueError(f'{name} invalid RLE code on row {row}')
-
-
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--plan', required=True, help='JSON plan with V2/V6/physical RLE paths and water/land layer manifests')
-    ap.add_argument('--out', required=True, help='new isolated output directory outside the input tree')
-    ap.add_argument('--input-root', required=True, help='root of the extracted recovery inputs')
-    ap.add_argument('--row-start', type=int, default=0); ap.add_argument('--row-end', type=int, default=H)
-    args = ap.parse_args()
-    out = Path(args.out).resolve(); input_root = Path(args.input_root).resolve()
-    if not input_root.is_dir(): raise ValueError('input root must be an existing directory')
-    if out.is_relative_to(input_root) or input_root.is_relative_to(out):
-        raise ValueError('output must be outside the input tree')
-    create_directory_exclusive(out)
-    y0, y1 = args.row_start, args.row_end
-    if not 0 <= y0 < y1 <= H: raise ValueError('invalid row range')
-    plan_path = Path(args.plan).resolve(); plan = json.loads(plan_path.read_text())
-    if plan.get('schema') != 'worldatlas-v7-full-grid-composition-plan-v1': raise ValueError('wrong plan schema')
-    if plan.get('grid', {}).get('width') != W or plan.get('grid', {}).get('height') != H: raise ValueError('plan grid mismatch')
-    rles = {}
-    for key in ('physical', 'v2', 'v6'):
-        ent = plan['rle_inputs'][key]; rp = resolve_input(ent['rows_path'], plan_path.parent, input_root); up = resolve_input(ent['runs_path'], plan_path.parent, input_root)
-        if sha256(rp) != ent['rows_sha256'] or sha256(up) != ent['runs_sha256']:
-            raise ValueError(f'{key} RLE hash mismatch')
-        rles[key] = open_validated_rle(rp, up, key)
-    layers=[]
-    for ent in plan.get('water_layers', []):
-        mp, m = read_pinned_manifest(ent, plan_path, input_root); m['_tiles'] = m['tiles'];
-        layers.append((ent, m))
-    for ent, _ in layers:
-        if not isinstance(ent.get('priority'), int): raise ValueError('each water layer needs explicit integer priority')
-    lp = plan.get('land_provenance')
-    land_cursor = None
-    if lp:
-        mp, m = read_pinned_manifest(lp, plan_path, input_root); m['_tiles'] = m['tiles']
-        land_cursor = RowCursor(m, y0, y1, 'land_provenance')
-    cursors = [(ent, RowCursor(m, y0, y1, 'water')) for ent,m in layers]
-    pr, pu = rles['physical']; v2r, v2u = rles['v2']; v6r, v6u = rles['v6']
-    raw_rows = out/'rows.u32le'; raw_runs = out/'runs.u32le'; diffp = out/'v2-diff-spans.jsonl.gz'
-    counts = defaultdict(int); delta = defaultdict(lambda: {'cells':0,'intervals':0,'transitions':defaultdict(int)})
-    conflict_cells=0; runs_written=0; changed_cells=0; changed_intervals=0; physical_water=0; assigned_water=0
-    with create_binary_exclusive(raw_rows) as yf, create_binary_exclusive(raw_runs) as rf, create_gzip_text_exclusive(diffp,encoding='utf8') as df:
-        yf.write(np.asarray([0],dtype='<u4').tobytes())
-        for y in range(y0,y1):
-            pe,pv = rle_row(pr,pu,y); v6e,v6v = rle_row(v6r,v6u,y); v2e,v2v = rle_row(v2r,v2u,y)
-            pe=np.asarray(pe,dtype=np.uint32);pv=np.asarray(pv,dtype=np.uint32);v6e=np.asarray(v6e,dtype=np.uint32);v6v=np.asarray(v6v,dtype=np.uint32);v2e=np.asarray(v2e,dtype=np.uint32);v2v=np.asarray(v2v,dtype=np.uint32)
-            for name, ends, values in (('physical', pe, pv), ('v2', v2e, v2v), ('v6', v6e, v6v)):
-                validate_rle_row(ends, values, name, y)
-            candidate_spans=[]
-            for ent,cur in cursors:
-                ss=cur.take(y)
-                candidate_spans.extend(add_layer_identity(
-                    ss, int(ent['priority']), str(ent.get('layer_id', ent['manifest_path'])),
-                    set(ent.get('overrides', []))))
-            assignments, conflicts = choose_assignments(candidate_spans,y,pe,pv)
-            conflict_cells += sum(b-a for a,b in {(a,b) for a,b,_,_ in conflicts})
-            land_spans=land_cursor.take(y) if land_cursor else []
-            # All relevant boundaries, including source identity and old V2, define atomic intervals.
-            cuts={0,W};cuts.update(map(int,pe));cuts.update(map(int,v6e));cuts.update(map(int,v2e))
-            for a,b,_,_,_ in assignments: cuts.add(a);cuts.add(b)
-            for s in land_spans: cuts.update((s[1],s[2]))
-            xx=np.asarray(sorted(cuts),dtype=np.uint32); starts=xx[:-1]; ends=xx[1:]
-            phys=row_code_at(pe,pv,starts).astype(np.uint8); old=row_code_at(v2e,v2v,starts).astype(np.uint8); land=row_code_at(v6e,v6v,starts).astype(np.uint8)
-            outcodes=np.empty(len(starts),dtype=np.uint8); owners=[None]*len(starts); rules=[None]*len(starts)
-            ai=0; li=0
-            for j,x in enumerate(starts.tolist()):
-                z=int(ends[j])
-                while ai<len(assignments) and assignments[ai][1] <= x: ai+=1
-                assign=assignments[ai] if ai<len(assignments) and assignments[ai][0] <= x < assignments[ai][1] else None
-                while li<len(land_spans) and land_spans[li][2] <= x: li+=1
-                lspan=land_spans[li] if li<len(land_spans) and land_spans[li][1] <= x < land_spans[li][2] else None
-                if lspan is not None and phys[j] != 17:
-                    raise ValueError(f"land provenance overlaps physical water/nonland row={y} x={x}:{z}")
-                if phys[j] == 17:
-                    if assign is not None: raise ValueError(f"water-layer assignment on land row={y} x={x}:{z}")
-                    if not 17 <= land[j] <= 22: raise ValueError(f"unassigned land code row={y} x={x}:{z} code={land[j]}")
-                    outcodes[j]=land[j]
-                    if lspan is not None:
-                        if lspan[6] != int(old[j]) or lspan[7] != int(land[j]):
-                            raise ValueError(f"land owner from/to mismatch row={y} x={x}:{z}")
-                        owners[j],rules[j]=lspan[5],lspan[4]
-                elif phys[j] == 1:
-                    physical_water += z-x
-                    if assign is None: raise ValueError(f"unassigned physical water row={y} x={x}:{z}")
-                    outcodes[j]=assign[2];owners[j],rules[j]=assign[4],assign[3];assigned_water += z-x
-                    if not 1 <= outcodes[j] <= 10: raise ValueError(f"invalid water code row={y} x={x}:{z}")
-                else:
-                    raise ValueError(f"unexpected physical mask code {phys[j]} at row={y} x={x}:{z}")
-            lens=(ends-starts).astype(np.uint64)
-            for c in np.unique(outcodes): counts[int(c)] += int(lens[outcodes==c].sum())
-            # Emit candidate RLE, coalescing adjacent equal codes.
-            mask=np.r_[True,outcodes[1:]!=outcodes[:-1]]
-            vstarts=np.flatnonzero(mask); vend_idx=np.r_[vstarts[1:],len(outcodes)]
-            rowvals=outcodes[vstarts].astype('<u4'); rowends=ends[vend_idx-1].astype('<u4')
-            inter=np.column_stack((rowends,rowvals)).astype('<u4').ravel()
-            rf.write(inter.tobytes()); runs_written += len(rowvals)
-            yf.write(np.asarray([runs_written],dtype='<u4').tobytes())
-            # Emit V2 changes with owner attribution. Each atomic segment is already identity-stable.
-            for j in np.flatnonzero(outcodes != old):
-                a=int(starts[j]);b=int(ends[j]);fr=int(old[j]);to=int(outcodes[j]);owner=owners[j];rule=rules[j]
-                if not owner or not rule: raise ValueError(f"changed V2 cell lacks source owner row={y} x={a}:{b} {fr}->{to}")
-                rule, owner = v2_diff_identity(rule, owner, fr, to)
-                rec={'row':y,'start':a,'end':b,'from_code':fr,'to_code':to,'rule_id':rule,'member_id':owner}
-                df.write(json.dumps(rec,separators=(',',':'))+'\n')
-                changed_cells += b-a;changed_intervals += 1
-                d=delta[owner];d['cells']+=b-a;d['intervals']+=1;d['transitions'][f'{fr}->{to}']+=b-a
-    report={'schema':'worldatlas-v7-full-grid-composition-audit-v1','status':'staged-not-published',
-        'plan_sha256':sha256(plan_path),'grid':GRID,'row_range':[y0,y1],
-        'input_rle_sha256':{k:{'rows':plan['rle_inputs'][k]['rows_sha256'],'runs':plan['rle_inputs'][k]['runs_sha256']} for k in ('physical','v2','v6')},
-        'input_layer_manifests':[{'id':ent.get('layer_id'),'manifest_sha256':sha256(resolve_input(ent['manifest_path'], plan_path.parent, input_root)),'priority':ent['priority']} for ent,_ in layers],
-        'output':{'rows_sha256':sha256(raw_rows),'runs_sha256':sha256(raw_runs),'v2_diff_spans_sha256':sha256(diffp),'rle_run_count':runs_written},
-        'counts_by_code':{str(k):v for k,v in sorted(counts.items())},'physical_water_cells':physical_water,'assigned_water_cells':assigned_water,
-        'v2_diff_cells':changed_cells,'v2_diff_intervals':changed_intervals,'resolved_overlap_cells':conflict_cells,
-        'delta_owner_summary':{k:{'cells':v['cells'],'intervals':v['intervals'],'transitions':dict(sorted(v['transitions'].items()))} for k,v in sorted(delta.items())},
-        'v6_water_label_inheritance':'none; V6 codes read only where physical mask is land',
-        'immutable_inputs_written':False}
-    write_json_exclusive(out/'composition-audit.json',report)
-    print(json.dumps(report,indent=2))
-
-if __name__ == '__main__': main()
