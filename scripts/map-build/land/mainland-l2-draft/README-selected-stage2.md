@@ -6,6 +6,6 @@ references, boundaries, closure routes, seed regions, witnesses and mainland
 rules that belong to the selected revision.
 
 The query reads the schema defined by
-[the editable decision migration](../../../../migrations/036_v8_editable_schema.sql).
+[the initial database schema](../../../../migrations/001_initial_schema.sql).
 For the full rebuild command and runtime dependencies, see
 [the V8 pipeline guide](../../pipeline/README.md).

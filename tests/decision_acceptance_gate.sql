@@ -1,4 +1,4 @@
--- Run after migrations 002–008 and 010. Every synthetic write rolls back.
+-- Run on a disposable database initialized with the full schema. Synthetic writes roll back.
 DO $$ BEGIN
  BEGIN
   INSERT INTO atlas.entity_registry_revisions(revision,status) VALUES ('__gate_entity','draft');

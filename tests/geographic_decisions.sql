@@ -1,6 +1,9 @@
--- Run in a disposable database after 002–006 and before 010. Synthetic writes roll back.
--- Migration 010 intentionally blocks the acceptance transition tested below;
--- use decision_acceptance_gate.sql after installing that later gate.
+-- Run on a disposable database initialized with the full schema.
+-- Suspend the separate acceptance gate inside this transaction to test
+-- basin participant counts and accepted-record immutability.
+BEGIN;
+ALTER TABLE atlas.decision_revisions DISABLE TRIGGER decision_acceptance_gate;
+
 DO $$ BEGIN
  BEGIN
   INSERT INTO atlas.entity_registry_revisions(revision,status) VALUES ('__decision_test_registry','draft');
@@ -51,3 +54,5 @@ DO $$ BEGIN
   RAISE EXCEPTION USING ERRCODE='ZX001',MESSAGE='rollback synthetic test';
  EXCEPTION WHEN SQLSTATE 'ZX001' THEN NULL; END;
 END $$;
+
+ROLLBACK;

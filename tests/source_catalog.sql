@@ -1,5 +1,8 @@
--- Run against a disposable/test branch after migrations 002 and 004. The outer
--- exception rolls back all synthetic rows; no example source is registered.
+-- Run on a disposable database initialized with the full schema.
+-- Temporarily allow acceptance to test source-build locking with a synthetic decision.
+BEGIN;
+ALTER TABLE atlas.decision_revisions DISABLE TRIGGER decision_acceptance_gate;
+
 DO $$
 BEGIN
   BEGIN
@@ -48,21 +51,7 @@ BEGIN
     INSERT INTO atlas.source_builds (build_id, entity_revision, code_revision)
       VALUES ('__test_build', '__source_catalog_test_registry', 'test');
     BEGIN
-      INSERT INTO atlas.source_asset_dependencies VALUES ('__test_b','1','__test_c','1','derived_from');
-    BEGIN
-      INSERT INTO atlas.source_asset_dependencies VALUES ('__test_c','1','__test_b','1','derived_from');
-      RAISE EXCEPTION 'dependency cycle accepted';
-    EXCEPTION WHEN raise_exception THEN
-      IF SQLERRM <> 'source dependency cycle' THEN RAISE; END IF;
-    END;
-    UPDATE atlas.source_builds SET status = 'locked' WHERE build_id = '__test_build';
-    BEGIN
-      INSERT INTO atlas.source_asset_dependencies VALUES ('__test_b','1','__test_a','1','derived_from');
-      RAISE EXCEPTION 'locked lineage changed';
-    EXCEPTION WHEN raise_exception THEN
-      IF SQLERRM <> 'locked build lineage is immutable' THEN RAISE; END IF;
-    END;
-
+      UPDATE atlas.source_builds SET status = 'locked' WHERE build_id = '__test_build';
       RAISE EXCEPTION 'empty build locked';
     EXCEPTION WHEN raise_exception THEN
       IF SQLERRM <> 'a locked build requires at least one input' THEN RAISE; END IF;
@@ -72,6 +61,16 @@ BEGIN
       RAISE EXCEPTION 'missing input accepted';
     EXCEPTION WHEN foreign_key_violation THEN NULL; END;
     INSERT INTO atlas.source_build_inputs VALUES ('__test_build','__test_b','1','raw','mask');
+    UPDATE atlas.entity_registry_revisions SET status='accepted',reviewed_by='test',reviewed_at=now()
+      WHERE revision='__source_catalog_test_registry';
+    INSERT INTO atlas.decision_revisions (revision,entity_revision,evidence)
+      VALUES ('__source_catalog_test_decision','__source_catalog_test_registry','{}');
+    UPDATE atlas.decision_revisions SET status='accepted',reviewed_by='test',reviewed_at=now()
+      WHERE revision='__source_catalog_test_decision';
+    UPDATE atlas.source_builds SET decision_revision='__source_catalog_test_decision',
+      decision_snapshot_sha256=repeat('a',64),physical_grid_revision='test-grid',
+      physical_grid_sha256=repeat('b',64),software_versions='{}'
+      WHERE build_id='__test_build';
     INSERT INTO atlas.source_entity_links VALUES ('__test_a','1','__source_catalog_test_registry',1,'supports');
     INSERT INTO atlas.source_asset_dependencies VALUES ('__test_b','1','__test_c','1','derived_from');
     BEGIN
@@ -97,3 +96,5 @@ BEGIN
     RAISE EXCEPTION USING ERRCODE = 'ZX001', MESSAGE = 'rollback test data';
   EXCEPTION WHEN SQLSTATE 'ZX001' THEN NULL; END;
 END; $$;
+
+ROLLBACK;

@@ -1,1 +1,0 @@
-ALTER TABLE atlas.decision_land_component_witness_rules ADD CONSTRAINT witness_execution_status_required CHECK (COALESCE(evidence->>'execution_status','') IN ('selected_for_research','research_only_not_selected'));

@@ -1,7 +1,5 @@
 -- Rollback-only synthetic checks for witness and water-policy draft schema.
--- Requires migrations 002, 005, 008, 023, 028, 030, 031 and an existing
--- entity registry revision containing entity 3, supplied below. Run on a test
--- branch. The deliberately raised sentinel rolls back every synthetic row.
+-- Run on a disposable database initialized with the full schema.
 DO $$
 DECLARE
  rev constant text := 'test-draft-guards-rollback-20261104';
