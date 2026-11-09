@@ -7,6 +7,15 @@ import that converted them to grid-center coordinates in Neon. The selected
 ocean revision `v7-ocean-iho-2026-draft-1` retains those same coordinates and
 labels. Use `ocean_fill_runner.py` for the selected routes and seeds.
 
+## Southern ocean route sources
+
+The raw source catalog records the official 1953 IHO S-23 PDF as
+`iho-s23-limits-of-oceans-and-seas`, version `1953-ed3-en-ff838517a57c`.
+The selected ocean revision cites it for the 20°E meridian from Cape
+Agulhas and the 67°16′W meridian from Cape Horn. It also cites the
+historical South East Cape meridian for comparison with the modern
+meridian used by V8.
+
 ## Iceland source extraction
 
 Run `python extract_s130_iceland.py --archive S-130.zip --output iceland-routes.json`
