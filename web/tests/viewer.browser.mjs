@@ -37,14 +37,13 @@ function bundle(prefix, version, east) {
   const config = JSON.parse(readFileSync(new URL('config.json', viewer)));
   Object.assign(config, {
     width: mapWidth, height: mapHeight, step: 360 / mapWidth, map_version: version,
-    counts: { 1: 30 * mapHeight, 2: 20 * mapHeight, 7: 15 * mapHeight,
-      17: (30 + (east === 17 ? 25 : 0)) * mapHeight, 18: east === 18 ? 25 * mapHeight : 0 },
+    legend: 'legend/continents.json',
     categories: [
-      { id: 1, entity_id: 1, name: 'Africa', physical_class: 'water' },
-      { id: 2, entity_id: 2, name: 'Asia', physical_class: 'water' },
-      { id: 7, entity_id: 7, name: 'Atlantic Ocean', physical_class: 'water' },
-      { id: 17, entity_id: 1, name: 'Africa', physical_class: 'land', rgb: [233, 180, 76] },
-      { id: 18, entity_id: 2, name: 'Asia', physical_class: 'land', rgb: [222, 118, 110] },
+      { id: 1, entity_id: 1, physical_class: 'water' },
+      { id: 2, entity_id: 2, physical_class: 'water' },
+      { id: 7, entity_id: 7, physical_class: 'water' },
+      { id: 17, entity_id: 1, physical_class: 'land' },
+      { id: 18, entity_id: 2, physical_class: 'land' },
     ],
     local_grid: {
       run_count: mapHeight * 5, rows: 'rows.u32le.gz', runs: 'runs.u32le.gz',
@@ -52,6 +51,11 @@ function bundle(prefix, version, east) {
     },
     combined_sha256: sha256(Buffer.concat([rows, runs])),
   });
+  store(`${prefix}/legend/continents.json`, JSON.stringify([
+    { id: 1, name: 'Africa', color: [233, 180, 76], count: (60 + (east === 17 ? 25 : 0)) * mapHeight },
+    { id: 2, name: 'Asia', color: [222, 118, 110], count: (20 + (east === 18 ? 25 : 0)) * mapHeight },
+    { id: 7, name: 'Atlantic Ocean', color: config.water_rgb, count: 15 * mapHeight },
+  ]), 'application/json');
   store(`${prefix}/config.json`, JSON.stringify(config), 'application/json');
   store(`${prefix}/rows.u32le.gz`, gzipSync(rows), 'application/gzip');
   store(`${prefix}/runs.u32le.gz`, gzipSync(runs), 'application/gzip');
@@ -79,6 +83,9 @@ before(async () => {
   const missing = 'review/releases/v9.2-rc.1';
   store('review/previews/v9.2/index.html', bundle(missing, 'v9.2', 18), 'text/html');
   objects.delete(`${missing}/rows.u32le.gz`);
+  const missingLegend = 'review/releases/v9.3-rc.1';
+  store('review/previews/v9.3/index.html', bundle(missingLegend, 'v9.3', 18), 'text/html');
+  objects.delete(`${missingLegend}/legend/continents.json`);
 
   server = createServer(async (request, reply) => {
     try {
@@ -228,6 +235,9 @@ test('homepage and preview load their own map and source files', { timeout: 30_0
       [`/${candidate}/index.html`, 'v9.0', candidate, 'Asia'], ['/', 'v8.0', published, 'Africa'],
     ]) {
       await loaded(page, path, version);
+      const africaCount = version === 'v8.0' ? 85 * mapHeight : 60 * mapHeight;
+      assert.equal(await page.getByRole('button', { name: /Africa/ }).locator('.legend-count').textContent(),
+        africaCount.toLocaleString() + ' cells');
       await page.locator('#canvas').click({ position: await pickPoint(page, 90, 20) });
       assert.match(await page.locator('#selection').textContent(), new RegExp(`${name} \\(land\\)$`));
       await page.getByRole('link', { name: 'Data sources' }).click();
@@ -242,6 +252,7 @@ test('missing or corrupted map data leaves a clear error and no selectable map',
   try {
     for (const [path, message] of [
       ['/v9.1-rc', 'Native map checksum mismatch'], ['/v9.2-rc', 'Native map could not load'],
+      ['/v9.3-rc', 'Map legend could not load'],
     ]) {
       await page.goto(origin + path);
       await page.locator('#status.error').waitFor();

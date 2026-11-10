@@ -249,10 +249,16 @@ async function startViewer() {
     const response = await fetch(configURL);
     if (!response.ok) throw Error('Map configuration could not load');
     meta = await response.json();
+    const legendResponse = await fetch(new URL(meta.legend, configURL));
+    if (!legendResponse.ok) throw Error('Map legend could not load');
+    items = makeLegendItems(await legendResponse.json(), meta.categories);
+    const entities = new Map(items.map(item => [item.id, item]));
     meta.palette = Array.from({ length: 32 }, () => [0, 0, 0]);
     for (const category of meta.categories) {
-      const rgb = category.physical_class === 'water' ? meta.water_rgb : category.rgb;
+      const entity = entities.get(category.entity_id);
+      const rgb = category.physical_class === 'water' ? meta.water_rgb : entity.color;
       if (!rgb) throw Error('Map configuration is missing a category color');
+      category.name = entity.name;
       meta.palette[category.id] = rgb;
     }
     data = await loadLocalGrid(meta, configURL);
@@ -262,7 +268,6 @@ async function startViewer() {
       release.title = `SHA-256 of the decoded rows and runs. Full hash: ${meta.combined_sha256}`;
     }
     renderer = createRenderer(canvas, meta, data);
-    items = makeLegendItems(meta.categories, meta.counts, meta.water_rgb);
     renderLegend();
     resize();
     fitWorld();

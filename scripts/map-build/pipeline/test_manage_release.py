@@ -75,10 +75,16 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(config['local_grid']['rows'], 'rows.u32le.gz')
         self.assertEqual(config['map_version'], 'v9.0')
         self.assertEqual(config['water_rgb'], [84, 141, 183])
+        self.assertNotIn('counts', config)
+        self.assertEqual(config['legend'], 'legend/continents.json')
         self.assertEqual(config['categories'], [
-            {'id': 1, 'entity_id': 42, 'name': 'Africa', 'physical_class': 'water'},
-            {'id': 17, 'entity_id': 42, 'name': 'Africa', 'physical_class': 'land', 'rgb': [233, 180, 76]},
+            {'id': 1, 'entity_id': 42, 'physical_class': 'water'},
+            {'id': 17, 'entity_id': 42, 'physical_class': 'land'},
         ])
+        self.assertEqual(json.loads((self.output / config['legend']).read_bytes()), [
+            {'id': 42, 'name': 'Africa', 'color': [233, 180, 76], 'count': 2},
+        ])
+        self.assertIn(config['legend'], manifest['objects'])
         self.assertEqual(config['combined_sha256'], hashlib.sha256(self.rows + self.runs).hexdigest())
         self.assertEqual(manifest['decoded_sha256']['runs'], hashlib.sha256(self.runs).hexdigest())
 
