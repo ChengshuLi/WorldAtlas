@@ -1,8 +1,9 @@
--- A working boundary can receive notes without changing its geometry or links.
+-- A working boundary keeps its source links when its notes or geometry change.
 BEGIN;
 DO $$
 DECLARE
     line jsonb := '{"type":"LineString","coordinates":[[0,0],[1,1]]}';
+    edited_line jsonb := '{"type":"LineString","coordinates":[[0,0],[1,1],[2,2]]}';
     line_hash text := repeat('a',64);
 BEGIN
     INSERT INTO atlas.entity_registry_revisions(revision) VALUES ('__boundary_entities');
@@ -28,6 +29,14 @@ BEGIN
         WHERE b.revision='__boundary_decisions' AND b.geometry=line AND b.geometry_sha256=line_hash
           AND b.provenance->>'review'='checked' AND s.source_id='__boundary_source' AND s.source_version='1'
     ) THEN RAISE EXCEPTION 'the notes, geometry, or source links changed unexpectedly'; END IF;
+
+    UPDATE atlas.decision_mainland_boundaries SET geometry=edited_line, geometry_sha256=repeat('c',64)
+    WHERE revision='__boundary_decisions' AND boundary_id='line';
+    IF NOT EXISTS (
+        SELECT FROM atlas.decision_mainland_boundaries b JOIN atlas.decision_mainland_boundary_sources s USING (revision,boundary_id)
+        WHERE b.revision='__boundary_decisions' AND b.geometry=edited_line AND b.geometry_sha256=repeat('c',64)
+          AND s.source_id='__boundary_source' AND s.source_version='1'
+    ) THEN RAISE EXCEPTION 'editing a boundary lost its geometry or source'; END IF;
 
     BEGIN
         UPDATE atlas.decision_mainland_boundaries SET geometry='{"type":"Point","coordinates":[0,0]}'

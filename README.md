@@ -60,7 +60,10 @@ decision snapshot.
 
 Apply the [database migrations](database/migrations/) in filename order to a fresh database. Load the source catalog, editable
 decisions, and release records separately. For an existing database, apply only migrations it is missing.
-Run the [SQL checks](database/tests/) against a disposable database.
+Run the [database tests](database/tests/) with `bash database/tests/run.sh`.
+Have PostgreSQL's `initdb`, `pg_ctl`, and `psql` on your path. The runner starts
+a temporary local database, checks a fresh installation, and rehearses the
+upgrade from the V8 schema with sample data.
 
 Export a registry revision from Neon with `scripts/map-build/export_entity_registry.sql`.
 

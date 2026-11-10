@@ -10,4 +10,18 @@ Use the [release workflow](../../scripts/map-build/pipeline/README.md#stage-revi
 to package the browser modules with a completed build. The candidate bundle
 contains the viewer’s release-specific configuration and base URL.
 
-Run `node --test web/tests/current-map.test.mjs` for lightweight DOM-model interaction and configuration tests. These tests do not replace a real-browser rendering check.
+From the repository root, run `npm test` for grid, viewer, and Worker checks
+that need only Node. For browser tests, install the development dependencies and
+Chromium, then run the separate suite.
+
+```bash
+npm install
+PLAYWRIGHT_SKIP_BROWSER_GC=1 npx playwright install chromium --only-shell
+npm run test:browser
+```
+
+The browser suite runs the real Worker and viewer locally against a tiny map
+stored in memory. It checks desktop WebGL, mobile touch and the Canvas fallback,
+separate homepage and preview files, and missing or corrupted map data. Before
+publishing, open `/` and the deployed preview to check both maps with the real
+release files.

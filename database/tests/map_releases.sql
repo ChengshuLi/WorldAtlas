@@ -9,6 +9,7 @@ DECLARE
             'rows.u32le.gz', jsonb_build_object('sha256', repeat('b',64), 'size_bytes', 2),
             'runs.u32le.gz', jsonb_build_object('sha256', repeat('c',64), 'size_bytes', 3)),
         'decoded_sha256', jsonb_build_object('rows', repeat('d',64), 'runs', repeat('e',64)));
+    mismatch record;
 BEGIN
     BEGIN
         INSERT INTO atlas.map_release_candidates(candidate_id,r2_bucket,manifest)
@@ -17,6 +18,10 @@ BEGIN
     EXCEPTION WHEN check_violation THEN NULL; END;
     INSERT INTO atlas.map_release_candidates(candidate_id,r2_bucket,manifest)
     VALUES ('v99.0-rc.1','test',bundle), ('v99.0-rc.2','test',bundle);
+    BEGIN
+        UPDATE atlas.map_release_candidates SET approved_by='   ',approved_at=now() WHERE candidate_id='v99.0-rc.1';
+        RAISE EXCEPTION 'blank reviewer accepted';
+    EXCEPTION WHEN check_violation THEN NULL; END;
     BEGIN
         UPDATE atlas.map_release_candidates SET manifest=bundle||'{"changed":true}'
         WHERE candidate_id='v99.0-rc.1';
@@ -45,13 +50,24 @@ BEGIN
     EXCEPTION WHEN raise_exception THEN
         IF SQLERRM <> 'only an unapproved candidate can receive approval' THEN RAISE; END IF;
     END;
-    BEGIN
-        INSERT INTO atlas.map_release_objects VALUES
-          ('v99.0','rows','test','review/releases/v99.0-rc.1/rows.u32le.gz',2,repeat('b',64),repeat('f',64),'v99.0-rc.1');
-        RAISE EXCEPTION 'different decoded bytes accepted';
-    EXCEPTION WHEN raise_exception THEN
-        IF SQLERRM <> 'release object must match an approved candidate' THEN RAISE; END IF;
-    END;
+    FOR mismatch IN
+        SELECT * FROM (VALUES
+          ('v98.0','test','review/releases/v99.0-rc.1/rows.u32le.gz',2,repeat('b',64),repeat('d',64)),
+          ('v99.0','other','review/releases/v99.0-rc.1/rows.u32le.gz',2,repeat('b',64),repeat('d',64)),
+          ('v99.0','test','different/rows.u32le.gz',2,repeat('b',64),repeat('d',64)),
+          ('v99.0','test','review/releases/v99.0-rc.1/rows.u32le.gz',3,repeat('b',64),repeat('d',64)),
+          ('v99.0','test','review/releases/v99.0-rc.1/rows.u32le.gz',2,repeat('f',64),repeat('d',64)),
+          ('v99.0','test','review/releases/v99.0-rc.1/rows.u32le.gz',2,repeat('b',64),repeat('f',64))
+        ) AS cases(version,bucket,key,size,stored,decoded)
+    LOOP
+        BEGIN
+            INSERT INTO atlas.map_release_objects VALUES
+              (mismatch.version,'rows',mismatch.bucket,mismatch.key,mismatch.size,mismatch.stored,mismatch.decoded,'v99.0-rc.1');
+            RAISE EXCEPTION 'release object with different metadata accepted';
+        EXCEPTION WHEN raise_exception THEN
+            IF SQLERRM <> 'release object must match an approved candidate' THEN RAISE; END IF;
+        END;
+    END LOOP;
     BEGIN
         INSERT INTO atlas.map_release_objects VALUES
           ('v99.0','rows','test','review/releases/v99.0-rc.1/rows.u32le.gz',2,repeat('b',64),repeat('d',64),'v99.0-rc.1');

@@ -57,6 +57,12 @@ BEGIN
       RAISE EXCEPTION 'missing input accepted';
     EXCEPTION WHEN foreign_key_violation THEN NULL; END;
     INSERT INTO atlas.source_build_inputs VALUES ('__test_build','__test_b','1','raw','mask');
+    BEGIN
+      UPDATE atlas.source_builds SET status = 'locked' WHERE build_id = '__test_build';
+      RAISE EXCEPTION 'build locked without provenance pins';
+    EXCEPTION WHEN raise_exception THEN
+      IF SQLERRM <> 'locked build requires decision, grid, hash and software pins' THEN RAISE; END IF;
+    END;
     INSERT INTO atlas.decision_revisions (revision,entity_revision,evidence)
       VALUES ('__source_catalog_test_decision','__source_catalog_test_registry','{}');
     UPDATE atlas.source_builds SET decision_revision='__source_catalog_test_decision',
@@ -71,13 +77,26 @@ BEGIN
     EXCEPTION WHEN raise_exception THEN
       IF SQLERRM <> 'source dependency cycle' THEN RAISE; END IF;
     END;
+    INSERT INTO atlas.decision_features VALUES
+      ('__source_catalog_test_decision','feature','__test_a','1','raw-feature',repeat('a',64),'{}');
+    BEGIN
+      UPDATE atlas.source_builds SET status = 'locked' WHERE build_id = '__test_build';
+      RAISE EXCEPTION 'build locked without all decision sources';
+    EXCEPTION WHEN raise_exception THEN
+      IF SQLERRM <> 'locked build must select every decision source' THEN RAISE; END IF;
+    END;
+    INSERT INTO atlas.source_build_inputs VALUES ('__test_build','__test_a','1','decision','feature');
     UPDATE atlas.source_builds SET status = 'locked' WHERE build_id = '__test_build';
     BEGIN
-      INSERT INTO atlas.source_asset_dependencies VALUES ('__test_b','1','__test_a','1','derived_from');
-      RAISE EXCEPTION 'locked lineage changed';
+      INSERT INTO atlas.source_asset_dependencies VALUES ('__test_c','1','__test_a','1','derived_from');
+      RAISE EXCEPTION 'transitive locked lineage changed';
     EXCEPTION WHEN raise_exception THEN
       IF SQLERRM <> 'locked build lineage is immutable' THEN RAISE; END IF;
     END;
+    BEGIN
+      DELETE FROM atlas.source_assets WHERE source_id = '__test_c' AND version = '1';
+      RAISE EXCEPTION 'a source referenced by lineage was deleted';
+    EXCEPTION WHEN foreign_key_violation THEN NULL; END;
 
     BEGIN
       UPDATE atlas.source_build_inputs SET role = 'changed' WHERE build_id = '__test_build';
