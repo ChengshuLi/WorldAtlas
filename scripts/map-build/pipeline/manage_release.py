@@ -55,8 +55,8 @@ def release_categories(db, snapshot):
     names = {entity['id']: entity['name'] for entity in snapshot['entities']}
     bindings = snapshot['category_bindings']
     land_ids = sorted({b['entity_id'] for b in bindings if b['physical_class'] == 'land'})
-    colors = {entity_id: [red, green, blue] for entity_id, red, green, blue in db.execute(
-        'SELECT entity_id, red, green, blue FROM atlas.geographic_entity_colors WHERE entity_id = ANY(%s)',
+    colors = {entity_id: list(bytes.fromhex(color[1:])) for entity_id, color in db.execute(
+        'SELECT id, color_rgb FROM atlas.geographic_entity_ids WHERE id = ANY(%s) AND color_rgb IS NOT NULL',
         (land_ids,),
     )}
     if missing := sorted(set(land_ids) - colors.keys()):

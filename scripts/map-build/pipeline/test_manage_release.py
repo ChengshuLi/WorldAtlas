@@ -13,9 +13,10 @@ from manage_release import build_bundle, verify_object, version
 
 class ColorCatalog:
     def execute(self, query, params):
-        assert 'FROM atlas.geographic_entity_colors' in query
+        assert 'FROM atlas.geographic_entity_ids' in query
+        assert 'color_rgb IS NOT NULL' in query
         assert params == ([42],)
-        return [(42, 233, 180, 76)]
+        return [(42, '#E9B44C')]
 
 
 class BundleTests(unittest.TestCase):
