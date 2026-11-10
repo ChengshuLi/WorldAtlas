@@ -9,6 +9,9 @@ OpenStreetMap and SeaVoX attributions are available through Data sources. OpenSt
 Use the [release workflow](../../scripts/map-build/pipeline/README.md#stage-review-and-publish-a-release)
 to package the browser modules with a completed build. The candidate bundle
 contains the viewer’s release-specific configuration and base URL.
+Staging generates the category list and land colors in `config.json`. The
+source config defines the shared water color. Selecting legend entries keeps
+their fills at full brightness and outlines their combined area in white.
 
 From the repository root, run `npm test` for grid, viewer, and Worker checks
 that need only Node. For browser tests, install the development dependencies and

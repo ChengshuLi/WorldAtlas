@@ -35,7 +35,45 @@ def read(path):
     return json.loads(path.read_bytes())
 
 
-def build_bundle(candidate, run, viewer, bundle):
+def category_snapshot(request, identity):
+    draft = identity.get('land_draft')
+    if draft is not None:
+        snapshot = draft['snapshot']
+    else:
+        source = request['sources']['land_snapshot']
+        if 'json' in source:
+            return source['json']
+        snapshot = next((item for item in identity['source_pins']
+                         if item['sha256'] == source['sha256']), None)
+        if snapshot is None:
+            raise ValueError('build identity is missing its geographic snapshot')
+    verify_pins([snapshot])
+    return read(Path(snapshot['path']))
+
+
+def release_categories(db, snapshot):
+    names = {entity['id']: entity['name'] for entity in snapshot['entities']}
+    bindings = snapshot['category_bindings']
+    land_ids = sorted({b['entity_id'] for b in bindings if b['physical_class'] == 'land'})
+    colors = {entity_id: [red, green, blue] for entity_id, red, green, blue in db.execute(
+        'SELECT entity_id, red, green, blue FROM atlas.geographic_entity_colors WHERE entity_id = ANY(%s)',
+        (land_ids,),
+    )}
+    if missing := sorted(set(land_ids) - colors.keys()):
+        raise ValueError(f'Neon colors are missing for land entities {missing}')
+    categories = []
+    for binding in sorted(bindings, key=lambda b: b['code']):
+        entity_id = binding['entity_id']
+        physical_class = binding['physical_class']
+        category = {'id': binding['code'], 'entity_id': entity_id, 'name': names[entity_id],
+                    'physical_class': physical_class}
+        if physical_class == 'land':
+            category['rgb'] = colors[entity_id]
+        categories.append(category)
+    return categories
+
+
+def build_bundle(candidate, run, viewer, bundle, db):
     report = read(run / 'report.json')
     if (report.get('schema') != 'worldatlas-end-to-end-report-v1'
             or report.get('status') != 'complete'
@@ -61,6 +99,9 @@ def build_bundle(candidate, run, viewer, bundle):
     counts = summary['counts']
     if sum(counts.values()) != grid['width'] * grid['height']:
         raise ValueError('the output counts must cover the entire grid')
+    categories = release_categories(db, category_snapshot(request, identity))
+    if {code for code, count in counts.items() if count} - {str(c['id']) for c in categories}:
+        raise ValueError('geographic snapshot is missing categories used by the map')
 
     for source in sorted(viewer.rglob('*')):
         rel = source.relative_to(viewer)
@@ -99,12 +140,9 @@ def build_bundle(candidate, run, viewer, bundle):
 
     config = bundle / 'config.json'
     viewer_config = read(config)
-    categories = {str(item['id']) for item in viewer_config['categories']}
-    if {code for code, count in counts.items() if count} - categories:
-        raise ValueError('viewer configuration is missing categories used by the map')
     viewer_config.update(width=grid['width'], height=grid['height'], step=grid['step'],
                          map_version=version(candidate), counts=counts, local_grid=grid_config,
-                         combined_sha256=combined.hexdigest())
+                         combined_sha256=combined.hexdigest(), categories=categories)
     config.write_bytes(json_bytes(viewer_config))
 
     inputs = {'configuration': request, 'run': identity, 'report_sha256': digest(run / 'report.json')}
@@ -267,9 +305,9 @@ def main():
 
     with tempfile.TemporaryDirectory() as temp:
         bundle = Path(temp)
-        if args.action == 'stage':
-            manifest = build_bundle(args.candidate, args.run.resolve(), args.viewer.resolve(), bundle)
         with psycopg.connect(connection, autocommit=True) as db:
+            if args.action == 'stage':
+                manifest = build_bundle(args.candidate, args.run.resolve(), args.viewer.resolve(), bundle, db)
             db.execute("SELECT pg_advisory_lock(hashtext('atlas.release_publication'))")
             if args.action == 'approve':
                 approve(db, args.candidate, args.reviewer)

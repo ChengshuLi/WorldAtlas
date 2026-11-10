@@ -32,14 +32,22 @@ function words(values) {
 }
 
 function bundle(prefix, version, east) {
-  const rows = words(Array.from({ length: mapHeight + 1 }, (_, y) => y * 2));
-  const runs = words(Array.from({ length: mapHeight }, () => [mapWidth / 2, 1, mapWidth, east]).flat());
+  const rows = words(Array.from({ length: mapHeight + 1 }, (_, y) => y * 5));
+  const runs = words(Array.from({ length: mapHeight }, () => [30, 1, 60, 17, 80, 2, 105, east, 120, 7]).flat());
   const config = JSON.parse(readFileSync(new URL('config.json', viewer)));
   Object.assign(config, {
     width: mapWidth, height: mapHeight, step: 360 / mapWidth, map_version: version,
-    counts: { 1: mapWidth * mapHeight / 2, [east]: mapWidth * mapHeight / 2 },
+    counts: { 1: 30 * mapHeight, 2: 20 * mapHeight, 7: 15 * mapHeight,
+      17: (30 + (east === 17 ? 25 : 0)) * mapHeight, 18: east === 18 ? 25 * mapHeight : 0 },
+    categories: [
+      { id: 1, entity_id: 1, name: 'Africa', physical_class: 'water' },
+      { id: 2, entity_id: 2, name: 'Asia', physical_class: 'water' },
+      { id: 7, entity_id: 7, name: 'Atlantic Ocean', physical_class: 'water' },
+      { id: 17, entity_id: 1, name: 'Africa', physical_class: 'land', rgb: [233, 180, 76] },
+      { id: 18, entity_id: 2, name: 'Asia', physical_class: 'land', rgb: [222, 118, 110] },
+    ],
     local_grid: {
-      run_count: mapHeight * 2, rows: 'rows.u32le.gz', runs: 'runs.u32le.gz',
+      run_count: mapHeight * 5, rows: 'rows.u32le.gz', runs: 'runs.u32le.gz',
       rows_sha256: sha256(rows), runs_sha256: sha256(runs),
     },
     combined_sha256: sha256(Buffer.concat([rows, runs])),
@@ -152,9 +160,16 @@ for (const { name, options, fallback } of [
       await legend.getByRole('button', { name: 'Collapse legend' }).click();
       assert.equal(await legend.isVisible(), false);
       const east = await pickPoint(page, 90, 20);
-      const west = await pickPoint(page, 40, 20);
+      const eastFill = await pickPoint(page, 94, 20);
+      const west = await pickPoint(page, 20, 20);
+      const africaLand = await pickPoint(page, 40, 20);
+      const asiaWater = await pickPoint(page, 70, 20);
+      const { width } = await canvas.boundingBox();
+      const insideBorder = column => ({ x: Math.ceil(width * column / mapWidth - 0.5) - 1, y: west.y });
+      const waterColor = [84, 141, 183, 255];
       assert.deepEqual(await visiblePixel(page, east), [222, 118, 110, 255]);
-      assert.deepEqual(await visiblePixel(page, west), [233, 203, 146, 255]);
+      assert.deepEqual(await visiblePixel(page, west), waterColor);
+      assert.deepEqual(await visiblePixel(page, asiaWater), waterColor);
 
       const pick = () => fallback ? canvas.tap({ position: east }) : canvas.click({ position: east });
       const selection = page.locator('#selection');
@@ -175,7 +190,30 @@ for (const { name, options, fallback } of [
       const africa = legend.getByRole('button', { name: /Africa/ });
       await africa.click();
       assert.equal(await africa.getAttribute('aria-pressed'), 'true');
+      await legend.getByRole('button', { name: 'Collapse legend' }).click();
+      assert.deepEqual(await visiblePixel(page, west), waterColor);
+      assert.deepEqual(await visiblePixel(page, africaLand), [233, 180, 76, 255]);
+      // WebGL and Canvas may round a dimmed channel differently by one byte.
+      const assertDimmed = async (point, rgb) => {
+        const pixel = await visiblePixel(page, point);
+        assert.ok(rgb.every((channel, i) => Math.abs(pixel[i] - Math.round(channel * 0.55)) <= 1),
+          `Expected a dimmed ${rgb.join(',')} fill, got ${pixel.join(',')}`);
+      };
+      await assertDimmed(eastFill, [222, 118, 110]);
+      await assertDimmed(asiaWater, waterColor.slice(0, 3));
+      assert.deepEqual(await visiblePixel(page, insideBorder(30)), waterColor);
+      assert.deepEqual(await visiblePixel(page, insideBorder(60)), [255, 255, 255, 255]);
+
+      await page.getByRole('button', { name: 'Legend', exact: true }).click();
+      await search.fill('asia');
+      await legend.getByRole('button', { name: /Asia/ }).click();
+      await legend.getByRole('button', { name: 'Collapse legend' }).click();
+      assert.deepEqual(await visiblePixel(page, insideBorder(60)), [233, 180, 76, 255]);
+      assert.deepEqual(await visiblePixel(page, insideBorder(105)), [255, 255, 255, 255]);
+
+      await page.getByRole('button', { name: 'Legend', exact: true }).click();
       await legend.getByRole('button', { name: 'Clear filter' }).click();
+      await search.fill('africa');
       assert.equal(await africa.getAttribute('aria-pressed'), 'false');
       assert.deepEqual(errors, []);
     } finally { await page.close(); }

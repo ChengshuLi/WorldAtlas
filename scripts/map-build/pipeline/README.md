@@ -183,6 +183,9 @@ integration branch.
 
 The command uploads a new immutable set of viewer and map files. It saves the
 file hashes, the build configuration, and the exact build inputs in Neon.
+The viewer config uses the build's pinned category bindings and reads the
+land colors for those entities from Neon. All water uses the viewer's shared
+water color. The generated config is included in the candidate's file hashes.
 Open `/v9.0-rc` for the most recently staged candidate or
 `/review/releases/v9.0-rc.1/index.html` for that exact candidate. Build and
 stage `v9.0-rc.2` if anything needs to change.

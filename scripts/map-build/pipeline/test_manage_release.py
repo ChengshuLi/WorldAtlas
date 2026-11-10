@@ -11,6 +11,13 @@ from execution_state import pin
 from manage_release import build_bundle, verify_object, version
 
 
+class ColorCatalog:
+    def execute(self, query, params):
+        assert 'FROM atlas.geographic_entity_colors' in query
+        assert params == ([42],)
+        return [(42, 233, 180, 76)]
+
+
 class BundleTests(unittest.TestCase):
     def setUp(self):
         work = tempfile.TemporaryDirectory()
@@ -22,19 +29,31 @@ class BundleTests(unittest.TestCase):
         for directory in (self.run / 'final', self.viewer, self.output):
             directory.mkdir(parents=True)
         request = root / 'config.json'
+        self.snapshot = root / 'land.json'
+        self.snapshot.write_text(json.dumps({
+            'entities': [{'id': 42, 'name': 'Africa'}],
+            'category_bindings': [
+                {'code': 1, 'entity_id': 42, 'physical_class': 'water'},
+                {'code': 17, 'entity_id': 42, 'physical_class': 'land'},
+            ],
+        }))
+        snapshot_pin = pin(self.snapshot)
         request.write_text(json.dumps({
-            'sources': {'land_config': {'json': {'grid': {'width': 2, 'height': 1, 'step': 180}}}},
+            'sources': {
+                'land_config': {'json': {'grid': {'width': 2, 'height': 1, 'step': 180}}},
+                'land_snapshot': snapshot_pin,
+            },
         }))
         identity = self.run / 'run-identity.json'
-        identity.write_text(json.dumps({'request': pin(request), 'source_pins': []}))
+        identity.write_text(json.dumps({'request': pin(request), 'source_pins': [snapshot_pin]}))
         (self.viewer / 'index.html').write_text('<html><head></head><body></body></html>')
-        (self.viewer / 'config.json').write_text('{"categories":[{"id":1}]}')
-        self.rows = struct.pack('<2I', 0, 1)
-        self.runs = struct.pack('<2I', 2, 1)
+        (self.viewer / 'config.json').write_text('{"water_rgb":[84,141,183]}')
+        self.rows = struct.pack('<2I', 0, 2)
+        self.runs = struct.pack('<4I', 1, 1, 2, 17)
         final = self.run / 'final'
         (final / 'rows.u32le').write_bytes(self.rows)
         (final / 'runs.u32le').write_bytes(self.runs)
-        (final / 'report.json').write_text('{"counts":{"1":2},"run_count":1}')
+        (final / 'report.json').write_text('{"counts":{"1":1,"17":1},"run_count":2}')
         self.report = self.run / 'report.json'
         self.report.write_text(json.dumps({
             'schema': 'worldatlas-end-to-end-report-v1', 'status': 'complete',
@@ -46,7 +65,7 @@ class BundleTests(unittest.TestCase):
         }))
 
     def test_bundle_uses_exact_output_files_and_one_asset_base(self):
-        manifest = build_bundle('v9.0-rc.1', self.run, self.viewer, self.output)
+        manifest = build_bundle('v9.0-rc.1', self.run, self.viewer, self.output, ColorCatalog())
         self.assertIn('<base href="/review/releases/v9.0-rc.1/">',
                       (self.output / 'index.html').read_text())
         self.assertEqual(gzip.decompress((self.output / 'rows.u32le.gz').read_bytes()), self.rows)
@@ -54,13 +73,26 @@ class BundleTests(unittest.TestCase):
         config = json.loads((self.output / 'config.json').read_text())
         self.assertEqual(config['local_grid']['rows'], 'rows.u32le.gz')
         self.assertEqual(config['map_version'], 'v9.0')
+        self.assertEqual(config['water_rgb'], [84, 141, 183])
+        self.assertEqual(config['categories'], [
+            {'id': 1, 'entity_id': 42, 'name': 'Africa', 'physical_class': 'water'},
+            {'id': 17, 'entity_id': 42, 'name': 'Africa', 'physical_class': 'land', 'rgb': [233, 180, 76]},
+        ])
         self.assertEqual(config['combined_sha256'], hashlib.sha256(self.rows + self.runs).hexdigest())
         self.assertEqual(manifest['decoded_sha256']['runs'], hashlib.sha256(self.runs).hexdigest())
 
     def test_changed_map_output_cannot_be_staged(self):
         (self.run / 'final/runs.u32le').write_bytes(b'changed')
         with self.assertRaisesRegex(ValueError, 'checkpoint/input hash mismatch'):
-            build_bundle('v9.0-rc.1', self.run, self.viewer, self.output)
+            build_bundle('v9.0-rc.1', self.run, self.viewer, self.output, ColorCatalog())
+
+    def test_missing_land_color_blocks_staging(self):
+        class EmptyCatalog:
+            def execute(self, query, params):
+                return []
+
+        with self.assertRaisesRegex(ValueError, 'missing for land entities'):
+            build_bundle('v9.0-rc.1', self.run, self.viewer, self.output, EmptyCatalog())
 
     def test_candidate_name_identifies_the_release(self):
         self.assertEqual(version('v9.0-rc.2'), 'v9.0')

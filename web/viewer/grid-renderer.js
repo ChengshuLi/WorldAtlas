@@ -1,11 +1,22 @@
+const dimBrightness = 0.55;
+
 // Canvas fallback renders the same fully loaded native runs, never an overview.
-export function renderPixels(meta, data, width, height, scale, ox, oy, activeMask=0) {
+export function renderPixels(meta, data, width, height, scale, ox, oy, activeMask=0, outlineMask=0, outlineWidth=1) {
   const pixels = new Uint32Array(width * height);
-  const colors = meta.palette.map((rgb,value) => { if(activeMask && (activeMask & (1<<value))===0) rgb=value>=17?[88,96,99]:[194,202,205]; return (255 << 24 | rgb[2] << 16 | rgb[1] << 8 | rgb[0]) >>> 0; });
+  const selectedPixels = outlineMask ? new Uint8Array(pixels.length) : null;
+  const colors = meta.palette.map((rgb, code) => {
+    const [r, g, b] = activeMask && !(activeMask & (1 << code))
+      ? rgb.map(channel => Math.round(channel * dimBrightness)) : rgb;
+    return (0xff000000 | b << 16 | g << 8 | r) >>> 0;
+  });
   let previousY = -999;
   for (let py = 0; py < height; py++) {
     const y = Math.floor((py + 0.5 - oy) / scale), offset = py * width;
-    if (y === previousY && py > 0) { pixels.copyWithin(offset, offset - width, offset); continue; }
+    if (y === previousY && py > 0) {
+      pixels.copyWithin(offset, offset - width, offset);
+      selectedPixels?.copyWithin(offset, offset - width, offset);
+      continue;
+    }
     previousY = y;
     if (y < 0 || y >= meta.height) { pixels.fill(0xfff2ece6, offset, offset + width); continue; }
     const period=meta.width*scale;
@@ -18,15 +29,31 @@ export function renderPixels(meta, data, width, height, scale, ox, oy, activeMas
     };
     const first=Math.floor((0.5-ox)/period),last=Math.floor((width-0.5-ox)/period);
     for(let copy=first;copy<=last;copy++) {
-      const offsetX=ox+copy*period;
       const left=Math.max(0,Math.floor((0.5-ox)/scale)-copy*meta.width);
       let lo=data.rows[y],hi=data.rows[y+1];
       while(lo<hi){const mid=(lo+hi)>>>1;if(data.runs[mid*2]<=left)lo=mid+1;else hi=mid;}
       let start=Math.max(0,boundaryPixel(copy*meta.width));
       for(let r=lo;r<data.rows[y+1]&&start<width;r++) {
         const end=Math.min(width,Math.max(0,boundaryPixel(copy*meta.width+data.runs[r*2])));
-        if(end>start)pixels.fill(colors[data.runs[r*2+1]],offset+start,offset+end);
+        if (end > start) {
+          const code = data.runs[r*2+1];
+          pixels.fill(colors[code], offset+start, offset+end);
+          if (outlineMask & (1 << code)) selectedPixels.fill(1, offset+start, offset+end);
+        }
         start=end;
+      }
+    }
+  }
+  if (selectedPixels) {
+    const vertical = width * outlineWidth;
+    for (let i = 0; i < selectedPixels.length; i++) {
+      if (!selectedPixels[i]) continue;
+      const x = i % width;
+      if ((x >= outlineWidth && !selectedPixels[i-outlineWidth])
+          || (x + outlineWidth < width && !selectedPixels[i+outlineWidth])
+          || (i >= vertical && !selectedPixels[i-vertical])
+          || (i + vertical < selectedPixels.length && !selectedPixels[i+vertical])) {
+        pixels[i] = 0xffffffff;
       }
     }
   }
@@ -45,9 +72,10 @@ export function gridLinePixels(offset, scale, extent, worldSize, repeat=false) {
 function canvasRenderer(canvas, meta, data) {
   let ctx = canvas.getContext('2d', {alpha:false}), currentMeta=meta, currentData=data, disposed=false;
   if (!ctx) throw Error('No supported map rendering context');
-  return { draw({scale,ox,oy,dpr,selected,activeMask=0}) {
+  return { draw({scale,ox,oy,dpr,selected,activeMask=0,outlineMask=0}) {
     if(disposed)return;
-    const pixels = renderPixels(currentMeta,currentData,canvas.width,canvas.height,scale*dpr,ox*dpr,oy*dpr,activeMask);
+    const pixels = renderPixels(currentMeta,currentData,canvas.width,canvas.height,scale*dpr,ox*dpr,oy*dpr,
+      activeMask,outlineMask,Math.round(dpr));
     ctx.setTransform(1,0,0,1,0,0);
     ctx.putImageData(new ImageData(new Uint8ClampedArray(pixels.buffer),canvas.width,canvas.height),0,0);
     ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -98,25 +126,34 @@ export function createRenderer(canvas, meta, data) {
   uniform float uCssScale;
   uniform ivec2 uSelected;
   uniform uint uActiveMask;
+  uniform uint uOutlineMask;
   uniform vec3 uPalette[32];
   out vec4 color;
   uint rowWord(int i) { return texelFetch(uRows, ivec2(i % uTextureWidth, i / uTextureWidth), 0).r; }
   uint runWord(int i) { return texelFetch(uRuns, ivec2(i % uTextureWidth, i / uTextureWidth), 0).r; }
-  void main() {
-    vec2 screen = vec2(gl_FragCoord.x, uViewport.y - gl_FragCoord.y);
-    vec2 position = (screen - uOffset) / uScale;
-    ivec2 cell = ivec2(floor(position));
+  uint codeAt(vec2 screen) {
+    ivec2 cell = ivec2(floor((screen - uOffset) / uScale));
     cell.x=((cell.x % uWorld.x)+uWorld.x)%uWorld.x;
-    if (cell.y < 0 || cell.y >= uWorld.y) { color=vec4(0.91,0.94,0.95,1.0); return; }
+    if (cell.y < 0 || cell.y >= uWorld.y) return 0u;
     int lo = int(rowWord(cell.y)), hi = int(rowWord(cell.y + 1));
     for (int i=0; i<24; i++) {
       if (lo >= hi) break;
       int mid = (lo + hi) / 2;
       if (int(runWord(mid * 2)) <= cell.x) lo=mid+1; else hi=mid;
     }
-    uint value = runWord(lo * 2 + 1);
+    return runWord(lo * 2 + 1);
+  }
+  bool outsideSelection(vec2 screen) {
+    return all(greaterThanEqual(screen, vec2(0.0))) && all(lessThan(screen, uViewport))
+      && (uOutlineMask & (1u << codeAt(screen))) == 0u;
+  }
+  void main() {
+    vec2 screen = vec2(gl_FragCoord.x, uViewport.y - gl_FragCoord.y);
+    vec2 position = (screen - uOffset) / uScale;
+    uint value = codeAt(screen);
+    if (value == 0u) { color=vec4(0.91,0.94,0.95,1.0); return; }
     vec3 rgb = uPalette[int(value)];
-    if (uActiveMask != 0u && ((uActiveMask & (1u << value)) == 0u)) rgb = value >= 17u ? vec3(0.345,0.376,0.388) : vec3(0.761,0.792,0.804);
+    if (uActiveMask != 0u && (uActiveMask & (1u << value)) == 0u) rgb *= ${dimBrightness};
     if (uCssScale >= 9.0) {
       vec2 nearestBoundary=floor(position+0.5);
       vec2 linePixel=floor(uOffset+nearestBoundary*uScale)+0.5;
@@ -129,6 +166,12 @@ export function createRenderer(canvas, meta, data) {
       vec2 q=(position-vec2(selectedX,float(uSelected.y)))*uScale;
       float side=max(uScale,3.0*ratio);
       if(q.x>=0.0 && q.y>=0.0 && q.x<side && q.y<side && min(min(q.x,q.y),min(side-q.x,side-q.y))<1.5*ratio) rgb=vec3(0.09,0.17,0.23);
+    }
+    if ((uOutlineMask & (1u << value)) != 0u) {
+      float width = round(uScale / uCssScale);
+      vec2 dx = vec2(width, 0.0), dy = vec2(0.0, width);
+      if (outsideSelection(screen + dx) || outsideSelection(screen - dx)
+          || outsideSelection(screen + dy) || outsideSelection(screen - dy)) rgb = vec3(1.0);
     }
     color=vec4(rgb,1.0);
   }`;
@@ -157,14 +200,14 @@ export function createRenderer(canvas, meta, data) {
   gl.uniform1i(gl.getUniformLocation(program,'uTextureWidth'),width);
   gl.uniform2i(gl.getUniformLocation(program,'uWorld'),meta.width,meta.height);
   gl.uniform3fv(gl.getUniformLocation(program,'uPalette[0]'),new Float32Array(meta.palette.slice(0,32).flat().map(v=>v/255)));
-  let uniforms=Object.fromEntries(['uViewport','uOffset','uScale','uCssScale','uSelected','uActiveMask'].map(n=>[n,gl.getUniformLocation(program,n)]));
+  let uniforms=Object.fromEntries(['uViewport','uOffset','uScale','uCssScale','uSelected','uActiveMask','uOutlineMask'].map(n=>[n,gl.getUniformLocation(program,n)]));
   if(gl.getError()!==gl.NO_ERROR) throw Error('GPU native map upload failed');
   // Texture upload is complete. Do not retain the large typed RLE streams in
   // the renderer closure; the WebGL textures are the renderer's owned copy.
   data=null;meta=null;
   let disposed=false;
   return {
-    draw({scale,ox,oy,dpr,selected,activeMask=0}) {
+    draw({scale,ox,oy,dpr,selected,activeMask=0,outlineMask=0}) {
       if(disposed)return;
       gl.viewport(0,0,canvas.width,canvas.height);gl.useProgram(program);
       gl.uniform2f(uniforms.uViewport,canvas.width,canvas.height);
@@ -172,6 +215,7 @@ export function createRenderer(canvas, meta, data) {
       gl.uniform1f(uniforms.uScale,scale*dpr);gl.uniform1f(uniforms.uCssScale,scale);
       gl.uniform2i(uniforms.uSelected,selected?.x??-1,selected?.y??-1);
       gl.uniform1ui(uniforms.uActiveMask,activeMask>>>0);
+      gl.uniform1ui(uniforms.uOutlineMask,outlineMask>>>0);
       gl.drawArrays(gl.TRIANGLES,0,3);
     },
     destroy(){

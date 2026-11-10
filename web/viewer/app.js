@@ -66,7 +66,8 @@ function requestDraw() {
     renderer.draw({
       scale, ox, oy, dpr,
       selected: selectedCell,
-      activeMask: activeCategoryMask(items, selectedGroups, hoveredGroup),
+      activeMask: activeCategoryMask(items, selectedGroups, selectedGroups.size ? null : hoveredGroup),
+      outlineMask: activeCategoryMask(items, selectedGroups),
     });
   });
 }
@@ -147,6 +148,7 @@ function renderLegend() {
     button.addEventListener('blur', clearHighlight);
     button.addEventListener('click', () => {
       selectedGroups = toggleSelection(selectedGroups, item.id);
+      hoveredGroup = null;
       renderLegend();
       requestDraw();
     });
@@ -172,6 +174,7 @@ function bindLegendControls() {
   $('#legend-search').addEventListener('input', renderLegend);
   $('#legend-clear').addEventListener('click', () => {
     selectedGroups.clear();
+    hoveredGroup = null;
     renderLegend();
     requestDraw();
   });
@@ -246,9 +249,12 @@ async function startViewer() {
     const response = await fetch(configURL);
     if (!response.ok) throw Error('Map configuration could not load');
     meta = await response.json();
-    meta.palette = Array.from(
-      { length: 32 }, (_, id) => meta.categories.find((entry) => entry.id === id)?.rgb || [0, 0, 0],
-    );
+    meta.palette = Array.from({ length: 32 }, () => [0, 0, 0]);
+    for (const category of meta.categories) {
+      const rgb = category.physical_class === 'water' ? meta.water_rgb : category.rgb;
+      if (!rgb) throw Error('Map configuration is missing a category color');
+      meta.palette[category.id] = rgb;
+    }
     data = await loadLocalGrid(meta, configURL);
     if (meta.map_version) {
       const release = $('#map-release');
@@ -256,7 +262,7 @@ async function startViewer() {
       release.title = `SHA-256 of the decoded rows and runs. Full hash: ${meta.combined_sha256}`;
     }
     renderer = createRenderer(canvas, meta, data);
-    items = makeLegendItems(meta.categories, meta.counts);
+    items = makeLegendItems(meta.categories, meta.counts, meta.water_rgb);
     renderLegend();
     resize();
     fitWorld();
