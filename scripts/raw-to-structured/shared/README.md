@@ -1,6 +1,7 @@
 # Shared OpenStreetMap boundary tools
 
-Boundary-specific folders choose the sources, destination records and rationale.
+Boundary-specific folders choose the sources, destination records and construction
+description.
 Reuse these functions for boundaries made from a single chain of OpenStreetMap
 ways. Local processing and the Neon/R2 workflow are separate:
 
@@ -63,12 +64,14 @@ An optional expected geometry checksum supports replaying an existing result.
 
 It saves the geometry in `atlas.decision_mainland_boundaries` and its construction
 source link in `atlas.decision_mainland_boundary_sources`, in one transaction.
+The construction description is saved in the boundary's `provenance.basis` field.
 The destination revision must already exist. Repeating the command updates the
 same boundary, retaining other notes and supporting source links. Changing the
 source version replaces the previous construction source link.
 
 For another OSM boundary, write a small entry script that supplies its source ID,
-boundary ID and rationale to `run_cli()` from `shared.build_osm_boundary`.
+boundary ID and construction description to `run_cli()` from
+`shared.build_osm_boundary`.
 Add `scripts/raw-to-structured` to the Python import path. See
 [`panama-colombia/build_boundary.py`](../panama-colombia/build_boundary.py)
 for a caller and its README for release-specific commands.

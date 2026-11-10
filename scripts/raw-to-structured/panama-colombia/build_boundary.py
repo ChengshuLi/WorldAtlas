@@ -10,9 +10,11 @@ from shared.build_osm_boundary import run_cli
 
 SOURCE_ID = 'osm-panama-current-way-full-bundle'
 BOUNDARY_ID = 'panama_colombia_osm_admin_boundary'
-RATIONALE = ('Reconstruct the administrative boundary from the archived OSM way '
-             'membership and selected node coordinates.')
+CONSTRUCTION_DESCRIPTION = (
+    'Join archived OpenStreetMap border segments at their shared point IDs, '
+    'preserving their coordinates.'
+)
 
 
 if __name__ == '__main__':
-    run_cli(SOURCE_ID, BOUNDARY_ID, RATIONALE)
+    run_cli(SOURCE_ID, BOUNDARY_ID, CONSTRUCTION_DESCRIPTION)

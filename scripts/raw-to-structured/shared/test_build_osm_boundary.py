@@ -102,7 +102,7 @@ class DatabaseTest(unittest.TestCase):
 
     def build(self, revision='__osm_a', version='1', expected=None):
         return build_boundary(self.database, self.storage, 'osm-test', version, revision,
-                              'border', 'Test rationale', self.directory, expected)
+                              'border', 'Test construction description', self.directory, expected)
 
     def boundary(self, revision='__osm_a'):
         return self.database.execute(

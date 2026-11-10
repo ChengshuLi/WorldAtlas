@@ -55,12 +55,12 @@ def download_archive(client, source, work_dir):
     return archive
 
 
-def save_boundary(database, revision, boundary_id, geometry, source, rationale):
+def save_boundary(database, revision, boundary_id, geometry, source, construction_description):
     """Save geometry and its construction source together, retaining other evidence."""
     raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
     digest = hashlib.sha256(raw).hexdigest()
     provenance = {
-        'basis': rationale,
+        'basis': construction_description,
         'construction': {
             'processor': 'shared.osm_ways.assemble',
             'source_id': source['source_id'],
@@ -98,7 +98,7 @@ def save_boundary(database, revision, boundary_id, geometry, source, rationale):
 
 
 def build_boundary(database, client, source_id, source_version, revision,
-                   boundary_id, rationale, work_dir, expected_geometry_sha256=None):
+                   boundary_id, construction_description, work_dir, expected_geometry_sha256=None):
     """Look up, download, assemble, and save one boundary in the requested revision."""
     with database.transaction():
         if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
@@ -107,13 +107,14 @@ def build_boundary(database, client, source_id, source_version, revision,
         source = catalog_source(database, source_id, source_version)
     archive = download_archive(client, source, work_dir)
     geometry = assemble_archive(archive, source['sha256'], expected_geometry_sha256)
-    digest = save_boundary(database, revision, boundary_id, geometry, source, rationale)
+    digest = save_boundary(database, revision, boundary_id, geometry, source,
+                           construction_description)
     return {'revision': revision, 'boundary_id': boundary_id,
             'vertices': len(geometry['coordinates']), 'sha256': digest,
             'archive': str(archive)}
 
 
-def run_cli(source_id, boundary_id, rationale):
+def run_cli(source_id, boundary_id, construction_description):
     """Common command-line interface for boundary-specific entry scripts."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source-version', required=True)
@@ -134,6 +135,6 @@ def run_cli(source_id, boundary_id, rationale):
     with psycopg.connect(connection) as database, closing(
             boto3.client('s3', endpoint_url=args.r2_endpoint, region_name='auto')) as storage:
         result = build_boundary(database, storage, source_id, args.source_version,
-                                args.revision, boundary_id, rationale, args.work_dir,
+                                args.revision, boundary_id, construction_description, args.work_dir,
                                 args.expected_geometry_sha256)
     print(json.dumps(result))
