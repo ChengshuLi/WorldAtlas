@@ -21,14 +21,29 @@ SHA-256, and the expected boundary geometry SHA-256. It checks that:
 Both tools work with local files; neither downloads from R2 nor reads or
 updates Neon.
 
-## Example: V8
+## Example: V8.0 release
 
 Download the `osm-panama-current-way-full-bundle` archive selected in Neon,
 set `PANAMA_OSM_ARCHIVE` to its local path, and run from the repository root.
 These checksums verify the 5,254-point line selected by `v8-mainland`.
 For another boundary revision, use its archive and geometry checksums.
 
-First, verify the archive and reconstructed boundary:
+First, extract the archive into a new temporary directory and run the assembler:
+
+```bash
+PANAMA_OSM_DIRECTORY="$(mktemp -d)"
+python3 -m zipfile -e "$PANAMA_OSM_ARCHIVE" "$PANAMA_OSM_DIRECTORY"
+python3 scripts/raw-to-structured/panama-colombia/assemble_osm_ways.py \
+  "$PANAMA_OSM_DIRECTORY/manifest.json" \
+  "$PANAMA_OSM_DIRECTORY" \
+  "$PANAMA_OSM_DIRECTORY/boundary.geojson"
+```
+
+For this V8.0 source, the assembler prints 5,254 vertices and SHA-256
+`cfbfbb514d0f6efff1c0c803ae5f0f0835225015568747bb8b1164f3bb6d0e17`.
+
+Then run the verifier to check the archive and reconstructed boundary against
+the V8.0 checksums:
 
 ```bash
 PYTHONPATH=scripts/raw-to-structured/panama-colombia python3 - "$PANAMA_OSM_ARCHIVE" <<'PY'
@@ -43,18 +58,3 @@ line = verified_geometry(
 print(len(line["coordinates"]))
 PY
 ```
-
-To also save the boundary as a local file, extract the verified archive into a
-new temporary directory and run the assembler:
-
-```bash
-PANAMA_OSM_DIRECTORY="$(mktemp -d)"
-python3 -m zipfile -e "$PANAMA_OSM_ARCHIVE" "$PANAMA_OSM_DIRECTORY"
-python3 scripts/raw-to-structured/panama-colombia/assemble_osm_ways.py \
-  "$PANAMA_OSM_DIRECTORY/manifest.json" \
-  "$PANAMA_OSM_DIRECTORY" \
-  "$PANAMA_OSM_DIRECTORY/boundary.geojson"
-```
-
-For this V8 source, the assembler prints 5,254 vertices and SHA-256
-`cfbfbb514d0f6efff1c0c803ae5f0f0835225015568747bb8b1164f3bb6d0e17`.
