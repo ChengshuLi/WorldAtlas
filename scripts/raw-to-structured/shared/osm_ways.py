@@ -58,6 +58,8 @@ def assemble(manifest, directory):
         current = refs[-1]
     if current == start or current not in terminals or any(n not in nodes for n in chain):
         raise ValueError('invalid terminal or missing node')
+    if len(set(chain)) != len(chain):
+        raise ValueError('boundary revisits a node')
     coords = [[float(v) for v in nodes[n]] for n in chain]
     if any(a == b for a, b in zip(coords, coords[1:])):
         raise ValueError('duplicate adjacent coordinates')

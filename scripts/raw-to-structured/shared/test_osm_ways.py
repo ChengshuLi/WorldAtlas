@@ -50,6 +50,41 @@ class AssemblyTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'unbranched'):
             assemble(self.manifest, self.directory)
 
+    def test_reject_disconnected_cycle(self):
+        self.way(11, [1, 2], [(1, 0, 0), (2, 1, 1)])
+        self.way(12, [3, 4, 5, 3], [(3, 2, 2), (4, 3, 3), (5, 4, 4)])
+        with self.assertRaisesRegex(ValueError, 'disconnected'):
+            assemble(self.manifest, self.directory)
+
+    def test_reject_start_inside_chain(self):
+        self.way(11, [1, 2, 3], [(1, 0, 0), (2, 1, 1), (3, 2, 2)])
+        self.manifest['start_node'] = 2
+        with self.assertRaisesRegex(ValueError, 'start node'):
+            assemble(self.manifest, self.directory)
+
+    def test_reject_missing_node(self):
+        self.way(11, [1, 2], [(1, 0, 0)])
+        with self.assertRaisesRegex(ValueError, 'missing node'):
+            assemble(self.manifest, self.directory)
+
+    def test_reject_invalid_coordinates(self):
+        for longitude, latitude in [(float('nan'), 0), (181, 0), (0, 91), (True, 0)]:
+            with self.subTest(longitude=longitude, latitude=latitude):
+                self.manifest['ways'] = []
+                self.way(11, [1, 2], [(1, 0, 0), (2, longitude, latitude)])
+                with self.assertRaisesRegex(ValueError, 'invalid node coordinates'):
+                    assemble(self.manifest, self.directory)
+
+    def test_reject_revisited_node(self):
+        self.way(11, [1, 2, 3, 2, 4], [(1, 0, 0), (2, 1, 1), (3, 2, 2), (4, 3, 3)])
+        with self.assertRaisesRegex(ValueError, 'revisits a node'):
+            assemble(self.manifest, self.directory)
+
+    def test_reject_duplicate_adjacent_coordinates(self):
+        self.way(11, [1, 2], [(1, 0, 0), (2, 0, 0)])
+        with self.assertRaisesRegex(ValueError, 'duplicate adjacent coordinates'):
+            assemble(self.manifest, self.directory)
+
 
 class ArchiveTest(unittest.TestCase):
     def reject_archive(self, entries, message):
@@ -90,7 +125,7 @@ class ArchiveTest(unittest.TestCase):
             geom_hash = hashlib.sha256(json.dumps(geom, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
             self.assertEqual(assemble_archive(archive, archive_hash), geom)
             self.assertEqual(assemble_archive(archive, archive_hash,
-                                              expected_geometry_sha256=geom_hash), geom)
+                                             expected_geometry_sha256=geom_hash), geom)
             with self.assertRaisesRegex(ValueError, 'source archive'):
                 assemble_archive(archive, '0' * 64)
             with self.assertRaisesRegex(ValueError, 'expected geometry'):

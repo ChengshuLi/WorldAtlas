@@ -13,9 +13,9 @@ from psycopg.types.json import Jsonb
 from shared.build_osm_boundary import build_boundary, download_archive, save_boundary
 
 
-def source_fixture():
+def source_fixture(endpoint=(1, 1)):
     elements = [{'type': 'node', 'id': 1, 'lon': 0, 'lat': 0},
-                {'type': 'node', 'id': 2, 'lon': 1, 'lat': 1},
+                {'type': 'node', 'id': 2, 'lon': endpoint[0], 'lat': endpoint[1]},
                 {'type': 'way', 'id': 3, 'nodes': [1, 2]}]
     response = json.dumps({'elements': elements}).encode()
     manifest = {'start_node': 1, 'ways': [{'id': 3, 'file': '3.json',
@@ -84,20 +84,24 @@ class DatabaseTest(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.directory = Path(self.temp.name)
         self.raw, self.source = source_fixture()
+        raw_updated, source_updated = source_fixture(endpoint=(2, 2))
         self.storage = Mock()
-        self.storage.get_object.side_effect = lambda **kwargs: {'Body': io.BytesIO(self.raw)}
+        responses = {'1.zip': self.raw, '2.zip': raw_updated}
+        self.storage.get_object.side_effect = lambda **kwargs: {
+            'Body': io.BytesIO(responses[kwargs['Key']])}
         self.database.execute("INSERT INTO atlas.entity_registry_revisions VALUES ('__osm_entities')")
         for revision in ('__osm_a', '__osm_b'):
             self.database.execute('INSERT INTO atlas.decision_revisions VALUES (%s,%s,%s)',
                                   (revision, '__osm_entities', Jsonb({})))
         for version in ('1', '2', 'evidence'):
+            source = source_updated if version == '2' else self.source
             self.database.execute(
                 "INSERT INTO atlas.source_assets "
                 "(source_id,version,title,kind,provider,source_uri,license_name,license_uri,"
                 "attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
                 "VALUES ('osm-test',%s,'Test','raw','Test','test:source','Test','test:license',"
                 "'Test','test',%s,%s,%s,'{}')",
-                (version, version + '.zip', self.source['sha256'], self.source['size_bytes']),
+                (version, version + '.zip', source['sha256'], source['size_bytes']),
             )
 
     def build(self, revision='__osm_a', version='1', expected=None):
@@ -122,6 +126,7 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(geometry['coordinates'], [[0.0, 0.0], [1.0, 1.0]])
         self.assertEqual(result['sha256'], digest)
         self.assertEqual(result['vertices'], 2)
+        self.assertEqual(provenance['basis'], 'Test construction description')
         self.assertEqual(provenance['construction']['archive_sha256'], self.source['sha256'])
         self.assertEqual(self.links(), [('1', 'geometry_source')])
         self.assertEqual(self.build(), result)
@@ -141,6 +146,8 @@ class DatabaseTest(unittest.TestCase):
         self.build(version='2')
         self.assertEqual(self.links(), [('2', 'geometry_source'), ('evidence', 'supporting_evidence')])
         self.assertEqual(self.boundary()[2]['review_note'], 'keep me')
+        self.assertEqual(self.boundary()[0]['coordinates'], [[0.0, 0.0], [2.0, 2.0]])
+        self.assertNotEqual(self.boundary()[1], before[1])
         self.assertEqual(self.boundary('__osm_b'), before)
 
     def test_geometry_can_change_without_release_pin(self):

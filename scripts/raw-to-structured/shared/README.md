@@ -27,6 +27,7 @@ nodes. The manifest identifies the ways to join and the starting endpoint:
 ```
 
 The ways must form one continuous, unbranched line and meet at shared node IDs.
+The assembled line must not revisit a node.
 Coordinates are longitude followed by latitude. Source checksums identify the
 exact response files used.
 
