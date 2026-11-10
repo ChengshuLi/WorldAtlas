@@ -179,7 +179,10 @@ branch, combine the pipeline and viewer changes in Git, and run the build
 against the integration database. Keep the published site on its existing
 release while reviewing the combined result.
 
-Deploy the Worker before staging a candidate. The release commands use the
+The Worker serves staged and published files from R2. Deploy it with
+`npx wrangler deploy` when its server code or configuration changes.
+The release commands below stage and publish the viewer and map files.
+They use the
 candidate catalog defined in the [database schema](../../../database/migrations/001_initial_schema.sql).
 Use a direct `NEON_DATABASE_URL` and an R2 profile with write
 access to the map bucket. Pass the path to the combined viewer source from the

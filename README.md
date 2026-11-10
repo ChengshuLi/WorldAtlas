@@ -37,8 +37,9 @@ puts each candidate at its own address while the homepage serves the published
 map. Approval records the exact candidate. Publishing serves its existing viewer
 and map files at the homepage.
 
-Deploy the Cloudflare Worker with `wrangler deploy`. The Worker uses the
-`ATLAS` binding to the `worldatlas` R2 bucket.
+Use the release command to publish the reviewed viewer and map files.
+When changing the Worker's server code or configuration, deploy it with
+`npx wrangler deploy`. Its `ATLAS` binding connects it to the `worldatlas` R2 bucket.
 
 `atlas.map_release_objects` tracks the two R2 objects for each versioned
 row-run map. The `rows` stream stores row offsets and the `runs` stream stores
