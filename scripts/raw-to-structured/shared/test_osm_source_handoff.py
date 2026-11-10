@@ -6,7 +6,7 @@ import zipfile
 import warnings
 from pathlib import Path
 
-from osm_source_handoff import verified_geometry
+from shared.osm_source_handoff import verified_geometry
 
 
 class HandoffTest(unittest.TestCase):
@@ -28,8 +28,9 @@ class HandoffTest(unittest.TestCase):
     def test_rejects_duplicate_names(self):
         self.reject_archive([('same', b'a'), ('same', b'b')], 'duplicate or unsafe')
 
-    def test_rejects_oversized_member(self):
-        self.reject_archive([('large', b'x' * ((4 << 20) + 1))], 'expanded size limit')
+    def test_rejects_unlisted_member(self):
+        self.reject_archive([('manifest.json', b'{"ways": []}'), ('extra.json', b'{}')],
+                            'manifest does not match')
 
     def test_selected_geometry_and_pin(self):
         with tempfile.TemporaryDirectory() as tmp:
