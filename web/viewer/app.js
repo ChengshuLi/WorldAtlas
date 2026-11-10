@@ -66,7 +66,7 @@ function requestDraw() {
     renderer.draw({
       scale, ox, oy, dpr,
       selected: selectedCell,
-      activeMask: activeCategoryMask(items, selectedGroups, selectedGroups.size ? null : hoveredGroup),
+      activeMask: activeCategoryMask(items, selectedGroups, hoveredGroup),
       outlineMask: activeCategoryMask(items, selectedGroups),
     });
   });
