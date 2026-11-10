@@ -18,9 +18,8 @@ SHA-256, and the expected boundary geometry SHA-256. It checks that:
 3. The segments join into one continuous boundary.
 4. The resulting geometry matches the supplied boundary checksum.
 
-These checks confirm reproducibility from the specified source, rather than
-independently establishing geographic correctness. Both tools work with local
-files; neither downloads from R2 nor reads or updates Neon.
+Both tools work with local files; neither downloads from R2 nor reads or
+updates Neon.
 
 ## Example: V8
 
