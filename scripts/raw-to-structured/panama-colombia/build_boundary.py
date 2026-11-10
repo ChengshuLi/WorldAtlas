@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from shared.osm_boundary import run_cli
+from shared.build_osm_boundary import run_cli
 
 
 SOURCE_ID = 'osm-panama-current-way-full-bundle'

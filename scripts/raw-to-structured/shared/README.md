@@ -1,21 +1,70 @@
-# Shared source-processing code
+# Shared OpenStreetMap boundary tools
 
 Boundary-specific folders choose the sources, destination records and rationale.
 Reuse these functions for boundaries made from a single chain of OpenStreetMap
-ways:
+ways. Local processing and the Neon/R2 workflow are separate:
 
-- [`assemble_osm_ways.py`](assemble_osm_ways.py): join the ways listed in a local
-  manifest into a GeoJSON line. Also provides a local-file command.
-- [`osm_source_handoff.py`](osm_source_handoff.py): check an archive and assemble
-  its contents; optionally compare the line with an expected geometry checksum.
-- [`osm_boundary.py`](osm_boundary.py): look up a raw source version in Neon,
-  download it from R2, assemble the line, and save the boundary and source link
+- [`osm_ways.py`](osm_ways.py): read local archives and manifests, check source
+  files, join ways into a GeoJSON line, and optionally check its geometry checksum.
+  Also provides a command for assembling extracted files.
+- [`build_osm_boundary.py`](build_osm_boundary.py): look up a raw source version
+  in Neon, download it from R2, assemble the line, and save the boundary and source link
   in Neon. Existing notes and supporting source links are retained.
 
-Use Python 3.11 or later. The Neon/R2 workflow also needs `psycopg` and `boto3`.
-Add `scripts/raw-to-structured` to the Python import path, then import functions
-from `shared`. For a complete caller, see
-[`panama-colombia/build_boundary.py`](../panama-colombia/build_boundary.py).
+## Local processing
+
+Use Python 3.11 or later. `osm_ways.py` uses Python's standard library.
+An archive is a ZIP containing `manifest.json` and the OpenStreetMap JSON
+responses it names. Each response contains a way and the coordinates of its
+nodes. The manifest identifies the ways to join and the starting endpoint:
+
+```json
+{
+  "start_node": 1,
+  "ways": [{"id": 3, "file": "3.json", "sha256": "<response file SHA-256>"}]
+}
+```
+
+The ways must form one continuous, unbranched line and meet at shared node IDs.
+Coordinates are longitude followed by latitude. Source checksums identify the
+exact response files used.
+
+Import these functions from `shared.osm_ways`:
+
+| Function | Input and result |
+| --- | --- |
+| `assemble(manifest, directory)` | Read the responses named in a parsed manifest and return a GeoJSON `LineString`. |
+| `assemble_archive(archive, archive_sha256)` | Check the ZIP checksum and contents, then return the assembled line. |
+| `verified_geometry(archive, archive_sha256, selected_geometry_sha256)` | Assemble the archive and check the resulting geometry checksum. |
+
+The local command takes three paths: manifest, source directory, and output
+file. It writes GeoJSON and prints the point count and checksum. The output file
+must not already exist. See the [boundary example](../panama-colombia/README.md)
+for commands that assemble first and then verify the result.
+
+## Neon and R2 workflow
+
+The workflow also requires `psycopg` and `boto3`. Set `NEON_DATABASE_URL` to the
+working database and configure R2 credentials through `AWS_PROFILE`.
+
+`build_boundary()` looks up the exact source version in `atlas.source_assets`,
+downloads its R2 object into the work directory, checks its size and checksum,
+and assembles the boundary. A checked local download is reused on later runs.
+An optional expected geometry checksum supports replaying an existing result.
+
+It saves the geometry in `atlas.decision_mainland_boundaries` and its construction
+source link in `atlas.decision_mainland_boundary_sources`, in one transaction.
+The destination revision must already exist. Repeating the command updates the
+same boundary, retaining other notes and supporting source links. Changing the
+source version replaces the previous construction source link.
+
+For another OSM boundary, write a small entry script that supplies its source ID,
+boundary ID and rationale to `run_cli()` from `shared.build_osm_boundary`.
+Add `scripts/raw-to-structured` to the Python import path. See
+[`panama-colombia/build_boundary.py`](../panama-colombia/build_boundary.py)
+for a caller and its README for release-specific commands.
+
+## Tests
 
 Run the tests from the repository root:
 

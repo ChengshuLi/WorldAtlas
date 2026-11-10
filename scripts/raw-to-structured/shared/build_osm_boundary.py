@@ -10,7 +10,7 @@ from tempfile import NamedTemporaryFile
 
 from psycopg.types.json import Jsonb
 
-from shared.osm_source_handoff import assemble_archive
+from shared.osm_ways import assemble_archive
 
 
 def catalog_source(database, source_id, version):
@@ -62,7 +62,7 @@ def save_boundary(database, revision, boundary_id, geometry, source, rationale):
     provenance = {
         'basis': rationale,
         'construction': {
-            'processor': 'shared.assemble_osm_ways.assemble',
+            'processor': 'shared.osm_ways.assemble',
             'source_id': source['source_id'],
             'source_version': source['version'],
             'archive_sha256': source['sha256'],
