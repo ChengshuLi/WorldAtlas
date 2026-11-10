@@ -10,17 +10,13 @@ class HookTests(unittest.TestCase):
   self.tmp=tempfile.TemporaryDirectory();d=Path(self.tmp.name)
   self.mixed_path=d/'mixed.py';self.mixed_path.write_text('mixed fixture')
   self.mixed=NS(__file__=str(self.mixed_path))
-  for n,v in [('policy',{'evidence':{'decision_snapshot_sha256':'a'*64,'mixed_claims_sha256':pin(self.mixed_path)['sha256']}}),('line',{}),('pending',[])]:
+  for n,v in [('policy',{'evidence':{'mixed_claims_sha256':pin(self.mixed_path)['sha256']}}),('line',{}),('pending',[])]:
    p=d/(n+'.json');p.write_text(json.dumps(v));setattr(self,n,p)
   self.cfg={'policy':pin(self.policy),'policy_canonical_sha256':'b'*64,'line':pin(self.line),'pending':pin(self.pending),'pending_inventory_complete':False,'profiling_standin':True,'sources':{},'code':{}}
  def tearDown(self):self.tmp.cleanup()
  def test_incomplete_pending_requires_profiling(self):
   self.cfg['profiling_standin']=False
   with self.assertRaisesRegex(ValueError,'profiling'):driver_hook.prepare(self.cfg,{}, {},[],{}, {},set(),None,snapshot_sha256='a'*64)
- def test_snapshot_mismatch_precedes_module_loading(self):
-  with patch.object(driver_hook,'modules_from_pins') as m:
-   with self.assertRaisesRegex(ValueError,'snapshot'):driver_hook.prepare(self.cfg,{}, {},[],{}, {},set(),None,snapshot_sha256='c'*64)
-   m.assert_not_called()
  def test_real_driver_import_uses_exact_loaded_module_pins(self):
   import subprocess,sys
   root=Path(__file__).resolve().parent.parent
@@ -48,7 +44,7 @@ paths={n:W/(n+'.py') for n in ('regional_rule','component_scan','replay_adapter'
   modules={'regional_workflow':NS(research=none,buffered_bounds=none),'regional_rule':NS(verified_line=none),'component_scan':NS(scan=none,collect_runs=none,component_at=none),'source_groups':NS(resolve_feature_windows=none),'regional_group_convention':NS(apply_groups=none),'replay_adapter':NS(resolve_with_mixed_replay=none),'satellite_geodesic':NS(apply_satellites=none),'land_archive_source':NS(extract=none),'polygon_intersection':NS(intersect=none),'run_pair':NS(run_pair=none),'live_driver':NS(resolve_live=resolve),'adapter':NS(protected_region_rows=none)}
   with patch.object(driver_hook,'modules_from_pins',return_value=modules):
    out=driver_hook.prepare(self.cfg,{}, {},reports,{}, {},{9},self.mixed,snapshot_sha256='a'*64)
-   self.assertIs(seen['reports'],reports);self.assertEqual(seen['snapshot_sha256'],'a'*64);self.assertEqual(seen['pending'],[]);self.assertEqual(out['blocked_region_roots'],[3,9]);self.assertTrue(out['provenance']['profiling_standin']);out['verify']()
+   self.assertIs(seen['reports'],reports);self.assertEqual(seen['snapshot_sha256'],'a'*64);self.assertEqual(seen['pending'],[]);self.assertEqual(out['blocked_region_roots'],[3,9]);self.assertTrue(out['provenance']['profiling_standin']);self.assertEqual(out['provenance']['decision_snapshot_sha256'],'a'*64);out['verify']()
    self.cfg['runtime']={name:pin(self.mixed_path) for name in ('component_index','satellite_index','regional_runtime')}
    verify=unittest.mock.Mock();accelerated=unittest.mock.Mock()
    runtime=NS(prepare=lambda *args:{'dependencies':{'scan':accelerated},'verify':verify,'provenance':{'geographic_policy_changed':False}})

@@ -2,7 +2,7 @@ import copy,unittest,hashlib,json
 from adapter import merge_live_claims,filter_region_claims,protected_region_rows,RULE,LINE,LINE_SHA
 S='a'*64; C={'rows':'b'*64,'runs':'c'*64}
 def fixture():
- p={'rule_set_id':RULE,'status':'selected_for_research','decision_revision':'r','line':{'line_id':LINE,'geometry_sha256':LINE_SHA},'evidence':{'decision_snapshot_sha256':S,'component_rows_sha256':C['rows'],'component_runs_sha256':C['runs']}}
+ p={'rule_set_id':RULE,'status':'selected_for_research','decision_revision':'r','line':{'line_id':LINE,'geometry_sha256':LINE_SHA},'evidence':{'component_rows_sha256':C['rows'],'component_runs_sha256':C['runs']}}
  c={'revision':'r','affiliation_ids':['selected','pending'],'affiliation_entry_links':{'selected':['entry'],'pending':['entry']}};selected={1:[{'affiliation_id':'selected','entry_ids':['entry'],'code':22}],3:[{'affiliation_id':'pending','entry_ids':['entry'],'code':18}]};r={'line_id':LINE,'geometry_sha256':LINE_SHA,'component_input_sha256':C,'proposals':{1:{'basis':'selected_affiliation','code':22},2:{'basis':'whole_component_line_side','code':18}},'review':{3:'source_group_pending_review'}}
  return p,c,selected,r
 def digest(p):return hashlib.sha256(json.dumps(p,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()

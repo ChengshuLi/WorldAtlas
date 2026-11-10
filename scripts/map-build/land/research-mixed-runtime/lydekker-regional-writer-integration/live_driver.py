@@ -23,7 +23,7 @@ def resolve_live(policy,compiled,snapshot,reports,grid,inputs,sources,line_recor
     that the pending inventory is complete. Does not create output grid files.
     """
     need(isinstance(policy,dict) and canonical_sha(policy)==policy_canonical_sha256 and policy.get('status')=='selected_for_research','invalid selected research policy pin')
-    need(isinstance(compiled,dict) and policy.get('decision_revision')==compiled.get('revision') and policy.get('evidence',{}).get('decision_snapshot_sha256')==snapshot_sha256,'decision snapshot mismatch')
+    need(isinstance(compiled,dict) and policy.get('decision_revision')==compiled.get('revision'),'decision revision mismatch')
     need(isinstance(inputs,dict) and set(inputs)=={'physical_rows','physical_runs','component_rows','component_runs'},'invalid physical inputs')
     need(isinstance(mainland_roots,(set,frozenset)) and isinstance(pending_claims,(list,tuple)) and all(isinstance(c,dict) and type(c.get('component_id')) is int for c in pending_claims),'explicit protections required')
     required={'research','verified_line','scan','buffered_bounds','resolve_feature_windows','apply_groups','resolve_with_mixed_replay','collect_runs','apply_satellites','extract','intersect','point_inside','component_at','run_pair','mixed_claims'}

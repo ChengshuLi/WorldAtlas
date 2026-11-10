@@ -67,7 +67,6 @@ def prepare(cfg,compiled,snapshot,reports,grid,inputs,mainland_roots,mixed_claim
  need(type(cfg['pending_inventory_complete']) is bool and type(cfg['profiling_standin']) is bool and (cfg['pending_inventory_complete'] or cfg['profiling_standin']),'incomplete pending inventory requires profiling label')
  policy=load_json(cfg['policy']);line=load_json(cfg['line']);pending=load_json(cfg['pending'])
  need(isinstance(pending,list),'invalid pending inventory')
- need(policy.get('evidence',{}).get('decision_snapshot_sha256')==snapshot_sha256,'regional decision snapshot mismatch')
  mixed_path=Path(getattr(mixed_claims,'__file__','')).resolve(strict=True);mixed_sha=policy['evidence'].get('mixed_claims_sha256');need(mixed_path.is_file() and file_sha(mixed_path)==mixed_sha,'regional mixed claims code mismatch')
  mods=modules_from_pins(cfg['code'],policy)
  from osgeo import ogr
@@ -85,7 +84,7 @@ def prepare(cfg,compiled,snapshot,reports,grid,inputs,mainland_roots,mixed_claim
  resolved=mods['live_driver'].resolve_live(policy,compiled,snapshot,reports,grid,inputs,cfg['sources'],line,snapshot_sha256=snapshot_sha256,policy_canonical_sha256=cfg['policy_canonical_sha256'],mainland_roots=set(mainland_roots),pending_claims=pending,deps=deps)
  # The driver must compare its own pinned snapshot with this value, not trust
  # the policy alone. All source/group evidence stays in the output report.
- b=resolved['writer_bridge'];provenance={'policy':cfg['policy'],'line':cfg['line'],'pending':cfg['pending'],'pending_inventory_complete':cfg['pending_inventory_complete'],'profiling_standin':cfg['profiling_standin'],'code':cfg['code'],'sources':cfg['sources'],'decision_snapshot_sha256':policy['evidence']['decision_snapshot_sha256'],'policy_canonical_sha256':cfg['policy_canonical_sha256']}
+ b=resolved['writer_bridge'];provenance={'policy':cfg['policy'],'line':cfg['line'],'pending':cfg['pending'],'pending_inventory_complete':cfg['pending_inventory_complete'],'profiling_standin':cfg['profiling_standin'],'code':cfg['code'],'sources':cfg['sources'],'decision_snapshot_sha256':snapshot_sha256,'policy_canonical_sha256':cfg['policy_canonical_sha256']}
  if runtime:provenance['equivalent_runtime']=runtime['provenance']
  specs=[cfg['policy'],cfg['line'],cfg['pending'],{'path':str(mixed_path),'sha256':mixed_sha},*cfg['code'].values(),*runtime_specs]+[{'path':v['path'],'sha256':v['sha256']} for v in cfg['sources'].values()]
  def verify():

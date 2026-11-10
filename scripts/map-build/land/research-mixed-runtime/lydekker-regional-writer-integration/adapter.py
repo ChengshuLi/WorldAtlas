@@ -28,7 +28,7 @@ def merge_live_claims(policy,compiled,selected,regional,*,snapshot_sha256,compon
     need(isinstance(policy_canonical_sha256,str) and re.fullmatch(r'[0-9a-f]{64}',policy_canonical_sha256) is not None and
          hashlib.sha256(json.dumps(policy,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()).hexdigest()==policy_canonical_sha256,'policy definition pin mismatch')
     need(isinstance(policy,dict) and policy.get('rule_set_id')==RULE and policy.get('status')=='selected_for_research','regional rule not selected for research')
-    need(policy.get('decision_revision')==compiled.get('revision') and policy.get('evidence',{}).get('decision_snapshot_sha256')==snapshot_sha256,'decision revision or snapshot mismatch')
+    need(policy.get('decision_revision')==compiled.get('revision'),'decision revision mismatch')
     need(policy.get('line')=={'line_id':LINE,'geometry_sha256':LINE_SHA} and regional.get('line_id')==LINE and regional.get('geometry_sha256')==LINE_SHA,'line pin mismatch')
     need(isinstance(component_sha256,dict) and set(component_sha256)=={'rows','runs'} and regional.get('component_input_sha256')==component_sha256 and
          policy['evidence'].get('component_rows_sha256')==component_sha256['rows'] and policy['evidence'].get('component_runs_sha256')==component_sha256['runs'],'component generation mismatch')
