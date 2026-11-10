@@ -172,9 +172,9 @@ branch, combine the pipeline and viewer changes in Git, and run the build
 against the integration database. Keep the published site on its existing
 release while reviewing the combined result.
 
-Apply [the release-candidate migration](../../../database/migrations/002_release_candidates.sql)
-to the release catalog and deploy the Worker before staging a candidate. Use a
-direct `NEON_DATABASE_URL` for the release commands and an R2 profile with write
+Deploy the Worker before staging a candidate. The release commands use the
+candidate catalog defined in the [database schema](../../../database/migrations/001_initial_schema.sql).
+Use a direct `NEON_DATABASE_URL` and an R2 profile with write
 access to the map bucket. Pass the path to the combined viewer source from the
 integration branch.
 

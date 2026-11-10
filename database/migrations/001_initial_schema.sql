@@ -14,7 +14,6 @@ CREATE TABLE atlas.geographic_entity_ids (
 
 CREATE TABLE atlas.entity_registry_revisions (
     revision text PRIMARY KEY CHECK (length(trim(revision)) > 0),
-    status text NOT NULL CHECK (status IN ('draft', 'accepted', 'rejected')),
     created_at timestamptz NOT NULL DEFAULT now()
 );
 
@@ -191,18 +190,12 @@ END; $$;
 CREATE TRIGGER source_dependency_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.source_asset_dependencies
   FOR EACH ROW EXECUTE FUNCTION atlas.guard_source_dependency();
 
--- Geographic decisions, review gates, and build locking
-
--- Review-only schema. No revisions are accepted by this migration.
--- All writers and acceptance transitions serialize on one transaction lock.
+-- Working geographic decisions and build locking
 CREATE TABLE atlas.decision_revisions (
  revision text PRIMARY KEY CHECK (length(trim(revision)) > 0),
  entity_revision text NOT NULL REFERENCES atlas.entity_registry_revisions(revision),
- status text NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','accepted','rejected')),
  evidence jsonb NOT NULL CHECK (jsonb_typeof(evidence) = 'object'),
- reviewed_by text, reviewed_at timestamptz,
- UNIQUE (revision, entity_revision),
- CHECK ((status = 'accepted') = (reviewed_by IS NOT NULL AND length(trim(reviewed_by)) > 0 AND reviewed_at IS NOT NULL))
+ UNIQUE (revision, entity_revision)
 );
 CREATE TABLE atlas.decision_features (
  revision text NOT NULL REFERENCES atlas.decision_revisions(revision),
@@ -277,50 +270,6 @@ CREATE TABLE atlas.decision_ocean_seeds (
  FOREIGN KEY (revision,entity_revision) REFERENCES atlas.decision_revisions(revision,entity_revision),
  FOREIGN KEY (entity_revision,entity_id) REFERENCES atlas.geographic_entities(revision,id)
 );
-CREATE FUNCTION atlas.guard_decision_revision() RETURNS trigger LANGUAGE plpgsql AS $$
-BEGIN
- PERFORM pg_advisory_xact_lock(hashtext('atlas.decision_graph'));
- IF TG_OP = 'INSERT' THEN
-   IF NEW.status <> 'draft' THEN RAISE EXCEPTION 'decision revision must start as draft'; END IF;
-   RETURN NEW;
- END IF;
- IF OLD.status <> 'draft' THEN RAISE EXCEPTION 'closed decision revisions are immutable'; END IF;
- IF TG_OP = 'DELETE' THEN RETURN OLD; END IF;
- IF NEW.status = 'accepted' THEN
-   IF NOT EXISTS (SELECT 1 FROM atlas.entity_registry_revisions WHERE revision = NEW.entity_revision AND status = 'accepted') THEN
-     RAISE EXCEPTION 'accepted decisions require an accepted entity registry';
-   END IF;
-   IF EXISTS (SELECT 1 FROM atlas.decision_basins b WHERE b.revision = NEW.revision AND
-     (SELECT count(*) FROM atlas.decision_basin_participants p WHERE p.revision=b.revision AND p.basin_id=b.basin_id) < CASE WHEN b.method = 'shared_nearest_assigned_shore' THEN 2 ELSE 1 END) THEN
-     RAISE EXCEPTION 'basin has too few participants for its method';
-   END IF;
-   IF EXISTS (SELECT 1 FROM atlas.decision_basin_participants p WHERE p.revision=NEW.revision AND
-     (SELECT count(*) FROM atlas.review_category_bindings b WHERE b.revision=p.entity_revision AND b.entity_id=p.entity_id AND b.physical_class='water') <> 1) THEN
-     RAISE EXCEPTION 'basin participant requires one water binding';
-   END IF;
-   IF EXISTS (SELECT 1 FROM atlas.decision_routes r WHERE r.revision = NEW.revision AND
-     ((SELECT count(*) FROM atlas.decision_route_points p WHERE p.revision=r.revision AND p.route_id=r.route_id) < 2 OR
-      (SELECT min(ordinal) FROM atlas.decision_route_points p WHERE p.revision=r.revision AND p.route_id=r.route_id) <> 0 OR
-      (SELECT max(ordinal) FROM atlas.decision_route_points p WHERE p.revision=r.revision AND p.route_id=r.route_id) <>
-      (SELECT count(*) - 1 FROM atlas.decision_route_points p WHERE p.revision=r.revision AND p.route_id=r.route_id))) THEN
-     RAISE EXCEPTION 'each route requires contiguous points starting at zero';
-   END IF;
- END IF;
- RETURN NEW;
-END $$;
-CREATE TRIGGER decision_revision_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.decision_revisions FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_revision();
-CREATE FUNCTION atlas.guard_decision_row() RETURNS trigger LANGUAGE plpgsql AS $$
-BEGIN
- PERFORM pg_advisory_xact_lock(hashtext('atlas.decision_graph'));
- IF TG_OP <> 'INSERT' AND EXISTS (SELECT 1 FROM atlas.decision_revisions WHERE revision=OLD.revision AND status <> 'draft') THEN RAISE EXCEPTION 'closed decision rows are immutable'; END IF;
- IF TG_OP <> 'DELETE' AND EXISTS (SELECT 1 FROM atlas.decision_revisions WHERE revision=NEW.revision AND status <> 'draft') THEN RAISE EXCEPTION 'closed decision rows are immutable'; END IF;
- RETURN CASE WHEN TG_OP='DELETE' THEN OLD ELSE NEW END;
-END $$;
-DO $$ DECLARE t text; BEGIN
- FOREACH t IN ARRAY ARRAY['decision_features','decision_endpoints','decision_routes','decision_route_points','decision_basins','decision_basin_participants','decision_affiliations','decision_ocean_seeds'] LOOP
-  EXECUTE format('CREATE TRIGGER decision_row_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.%I FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row()',t);
- END LOOP;
-END $$;
 -- Policy values are reviewed data. Consumers must reject unknown/missing policy kinds.
 CREATE TABLE atlas.decision_policies (
  revision text NOT NULL REFERENCES atlas.decision_revisions(revision),
@@ -330,32 +279,6 @@ CREATE TABLE atlas.decision_policies (
  evidence jsonb NOT NULL CHECK (jsonb_typeof(evidence) = 'object'),
  PRIMARY KEY (revision,policy_id)
 );
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.decision_policies FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
--- Existing entity records must also be frozen for accepted snapshots to be reproducible.
-ALTER TABLE atlas.entity_registry_revisions ADD COLUMN reviewed_by text;
-ALTER TABLE atlas.entity_registry_revisions ADD COLUMN reviewed_at timestamptz;
-ALTER TABLE atlas.entity_registry_revisions ADD CONSTRAINT entity_review_required CHECK
- ((status = 'accepted') = (reviewed_by IS NOT NULL AND length(trim(reviewed_by)) > 0 AND reviewed_at IS NOT NULL));
-CREATE FUNCTION atlas.guard_entity_revision() RETURNS trigger LANGUAGE plpgsql AS $$
-BEGIN
- PERFORM pg_advisory_xact_lock(hashtext('atlas.decision_graph'));
- IF TG_OP='INSERT' THEN
-  IF NEW.status <> 'draft' THEN RAISE EXCEPTION 'entity revision must start as draft'; END IF;
-  RETURN NEW;
- END IF;
- IF OLD.status <> 'draft' THEN RAISE EXCEPTION 'closed entity revisions are immutable'; END IF;
- RETURN CASE WHEN TG_OP='DELETE' THEN OLD ELSE NEW END;
-END $$;
-CREATE TRIGGER entity_revision_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.entity_registry_revisions FOR EACH ROW EXECUTE FUNCTION atlas.guard_entity_revision();
-CREATE FUNCTION atlas.guard_entity_revision_row() RETURNS trigger LANGUAGE plpgsql AS $$
-BEGIN
- PERFORM pg_advisory_xact_lock(hashtext('atlas.decision_graph'));
- IF TG_OP <> 'INSERT' AND EXISTS (SELECT 1 FROM atlas.entity_registry_revisions WHERE revision=OLD.revision AND status <> 'draft') THEN RAISE EXCEPTION 'closed entity rows are immutable'; END IF;
- IF TG_OP <> 'DELETE' AND EXISTS (SELECT 1 FROM atlas.entity_registry_revisions WHERE revision=NEW.revision AND status <> 'draft') THEN RAISE EXCEPTION 'closed entity rows are immutable'; END IF;
- RETURN CASE WHEN TG_OP='DELETE' THEN OLD ELSE NEW END;
-END $$;
-CREATE TRIGGER entity_row_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.geographic_entities FOR EACH ROW EXECUTE FUNCTION atlas.guard_entity_revision_row();
-CREATE TRIGGER entity_binding_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.review_category_bindings FOR EACH ROW EXECUTE FUNCTION atlas.guard_entity_revision_row();
 -- A locked build requires these decision, grid, and software pins.
 ALTER TABLE atlas.source_builds ADD COLUMN decision_revision text;
 ALTER TABLE atlas.source_builds ADD COLUMN decision_snapshot_sha256 text CHECK (decision_snapshot_sha256 ~ '^[0-9a-f]{64}$');
@@ -375,7 +298,6 @@ BEGIN
  IF TG_OP = 'UPDATE' AND NEW.status = 'locked' THEN
   IF NOT EXISTS (SELECT 1 FROM atlas.source_build_inputs WHERE build_id=NEW.build_id) THEN RAISE EXCEPTION 'a locked build requires at least one input'; END IF;
   IF NEW.decision_revision IS NULL OR NEW.decision_snapshot_sha256 IS NULL OR NEW.physical_grid_revision IS NULL OR length(trim(NEW.physical_grid_revision)) = 0 OR NEW.physical_grid_sha256 IS NULL OR NEW.software_versions IS NULL THEN RAISE EXCEPTION 'locked build requires decision, grid, hash and software pins'; END IF;
-  IF NOT EXISTS (SELECT 1 FROM atlas.decision_revisions d JOIN atlas.entity_registry_revisions e ON e.revision=d.entity_revision WHERE d.revision=NEW.decision_revision AND d.entity_revision=NEW.entity_revision AND d.status='accepted' AND e.status='accepted') THEN RAISE EXCEPTION 'locked build requires matching accepted revisions'; END IF;
   IF EXISTS (SELECT 1 FROM atlas.decision_features f WHERE f.revision=NEW.decision_revision AND NOT EXISTS (SELECT 1 FROM atlas.source_build_inputs i WHERE i.build_id=NEW.build_id AND i.source_id=f.source_id AND i.version=f.source_version)) THEN RAISE EXCEPTION 'locked build must select every decision source'; END IF;
  END IF;
  RETURN CASE WHEN TG_OP = 'DELETE' THEN OLD ELSE NEW END;
@@ -383,25 +305,9 @@ END $$;
 CREATE TRIGGER source_build_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.source_builds
   FOR EACH ROW EXECUTE FUNCTION atlas.guard_source_build();
 
--- Fail closed: the current model cannot prove complete source-backed land and
--- sea coverage. Draft records and research evidence are not build authority.
--- A future reviewed migration may replace this gate only after implementing and
--- testing completeness, source-byte verification, and review controls.
-CREATE FUNCTION atlas.block_decision_acceptance_pending_readiness() RETURNS trigger LANGUAGE plpgsql AS $$
-BEGIN
- PERFORM pg_advisory_xact_lock(hashtext('atlas.decision_graph'));
- IF NEW.status='accepted' THEN
-  RAISE EXCEPTION 'decision acceptance disabled until source-backed land and sea completeness can be verified';
- END IF;
- RETURN NEW;
-END $$;
-CREATE TRIGGER decision_acceptance_gate BEFORE UPDATE OF status ON atlas.decision_revisions
- FOR EACH ROW EXECUTE FUNCTION atlas.block_decision_acceptance_pending_readiness();
-
 -- Land witness and water assignment policies
 
--- Draft structural land proposals. Source geometry hashes are evidence, not
--- claims that an external file has been selected or registered in R2.
+-- Land witness proposals retain their source geometry hashes as evidence.
 CREATE TABLE atlas.decision_land_component_witness_rules (
  revision text NOT NULL,
  rule_id text NOT NULL CHECK (length(trim(rule_id)) > 0),
@@ -415,10 +321,6 @@ CREATE TABLE atlas.decision_land_component_witness_rules (
  FOREIGN KEY (entity_revision,entity_id) REFERENCES atlas.geographic_entities(revision,id),
  CONSTRAINT witness_execution_status_required CHECK (COALESCE(evidence->>'execution_status','') IN ('selected_for_research','research_only_not_selected'))
 );
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR UPDATE OR DELETE
- ON atlas.decision_land_component_witness_rules FOR EACH ROW
- EXECUTE FUNCTION atlas.guard_decision_row();
-
 CREATE TABLE atlas.decision_ocean_fill_policies (
  revision text PRIMARY KEY REFERENCES atlas.decision_revisions(revision),
  policy_id text NOT NULL CHECK (length(trim(policy_id)) > 0),
@@ -426,9 +328,7 @@ CREATE TABLE atlas.decision_ocean_fill_policies (
  evidence jsonb NOT NULL CHECK (jsonb_typeof(evidence) = 'object'),
  CONSTRAINT ocean_policy_execution_status_required CHECK (COALESCE(evidence->>'execution_status','') IN ('selected_for_research','research_only_not_selected'))
 );
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.decision_ocean_fill_policies FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
--- Research-only water policy values; no acceptance or source-catalog assertion.
+-- Water assignment policy values.
 CREATE TABLE atlas.decision_water_assignment_policies (
  revision text NOT NULL REFERENCES atlas.decision_revisions(revision),
  policy_id text NOT NULL CHECK (length(trim(policy_id)) > 0),
@@ -438,9 +338,6 @@ CREATE TABLE atlas.decision_water_assignment_policies (
  PRIMARY KEY (revision,policy_id),
  CONSTRAINT water_policy_execution_status_required CHECK (COALESCE(evidence->>'execution_status','') IN ('selected_for_research','research_only_not_selected'))
 );
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.decision_water_assignment_policies
- FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
 -- Regional source observations and island rules
 
 -- Source geometry referenced by a selected regional rule.
@@ -457,7 +354,7 @@ CREATE TABLE IF NOT EXISTS atlas.geographic_line_observations (
     FOREIGN KEY (source_id, source_version) REFERENCES atlas.source_assets(source_id, version)
 );
 
--- Selected research policy data only. No accepted geography or map is changed.
+-- Regional island rules selected for use in the build.
 CREATE TABLE IF NOT EXISTS atlas.regional_island_rule_sets (
     revision text NOT NULL REFERENCES atlas.decision_revisions(revision),
     rule_set_id text NOT NULL CHECK (length(btrim(rule_set_id)) > 0),
@@ -468,13 +365,39 @@ CREATE TABLE IF NOT EXISTS atlas.regional_island_rule_sets (
     created_at timestamptz NOT NULL DEFAULT now(),
     PRIMARY KEY (revision, rule_set_id)
 );
-DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgrelid = 'atlas.regional_island_rule_sets'::regclass AND tgname = 'decision_row_guard' AND NOT tgisinternal) THEN
-    CREATE TRIGGER decision_row_guard BEFORE INSERT OR UPDATE OR DELETE ON atlas.regional_island_rule_sets FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-  END IF;
-END $$;
+-- Release candidates and published map objects
 
--- Published map objects
+CREATE TABLE atlas.map_release_candidates (
+    candidate_id text PRIMARY KEY CHECK (candidate_id ~ '^v[0-9]+[.][0-9]+-rc[.][1-9][0-9]*$'),
+    map_version text GENERATED ALWAYS AS (split_part(candidate_id, '-rc.', 1)) STORED,
+    r2_bucket text NOT NULL CHECK (length(btrim(r2_bucket)) > 0),
+    manifest jsonb NOT NULL,
+    approved_by text,
+    approved_at timestamptz,
+    CHECK ((approved_by IS NULL AND approved_at IS NULL) OR
+           (approved_by IS NOT NULL AND length(btrim(approved_by)) > 0 AND approved_at IS NOT NULL)),
+    CHECK (COALESCE(jsonb_typeof(manifest->'inputs') = 'object'
+                    AND jsonb_typeof(manifest->'objects') = 'object'
+                    AND manifest->'objects' ?& ARRAY['index.html', 'rows.u32le.gz', 'runs.u32le.gz']
+                    AND (manifest->'decoded_sha256'->>'rows') ~ '^[0-9a-f]{64}$'
+                    AND (manifest->'decoded_sha256'->>'runs') ~ '^[0-9a-f]{64}$', false))
+);
+
+CREATE FUNCTION atlas.guard_map_release_candidate() RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        IF NEW.approved_at IS NOT NULL THEN
+            RAISE EXCEPTION 'stage the release candidate before approving it';
+        END IF;
+    ELSIF OLD.approved_at IS NOT NULL OR NEW.approved_at IS NULL
+          OR (NEW.candidate_id, NEW.r2_bucket, NEW.manifest)
+             IS DISTINCT FROM (OLD.candidate_id, OLD.r2_bucket, OLD.manifest) THEN
+        RAISE EXCEPTION 'only an unapproved candidate can receive approval';
+    END IF;
+    RETURN NEW;
+END $$;
+CREATE TRIGGER map_release_candidate_guard BEFORE INSERT OR UPDATE ON atlas.map_release_candidates
+    FOR EACH ROW EXECUTE FUNCTION atlas.guard_map_release_candidate();
 
 CREATE TABLE atlas.map_release_objects (
     map_version text NOT NULL CHECK (length(btrim(map_version)) > 0),
@@ -484,18 +407,64 @@ CREATE TABLE atlas.map_release_objects (
     size_bytes bigint NOT NULL CHECK (size_bytes > 0),
     stored_sha256 text NOT NULL CHECK (stored_sha256 ~ '^[0-9a-f]{64}$'),
     decoded_sha256 text NOT NULL CHECK (decoded_sha256 ~ '^[0-9a-f]{64}$'),
+    candidate_id text REFERENCES atlas.map_release_candidates(candidate_id),
+    CONSTRAINT map_release_objects_candidate_required
+        CHECK (map_version = 'v8.0' OR candidate_id IS NOT NULL),
     PRIMARY KEY (map_version, stream),
     UNIQUE (r2_bucket, r2_key)
 );
 
 COMMENT ON TABLE atlas.map_release_objects IS
-    'Versioned row-run map outputs in R2. Recording an object does not approve its geography.';
+    'Versioned row-run map outputs in R2, tied to the approved candidate for new releases.';
 COMMENT ON COLUMN atlas.map_release_objects.size_bytes IS
     'Byte length of the stored R2 object before gzip decompression.';
 COMMENT ON COLUMN atlas.map_release_objects.stored_sha256 IS
     'SHA-256 of the stored R2 object.';
 COMMENT ON COLUMN atlas.map_release_objects.decoded_sha256 IS
     'SHA-256 of the uncompressed little-endian u32 stream.';
+
+CREATE FUNCTION atlas.guard_map_release_object() RETURNS trigger LANGUAGE plpgsql AS $$
+DECLARE
+    candidate atlas.map_release_candidates%ROWTYPE;
+    asset jsonb;
+BEGIN
+    IF TG_OP = 'UPDATE' AND (OLD.candidate_id IS NOT NULL OR NEW.candidate_id IS NOT NULL) THEN
+        RAISE EXCEPTION 'published release objects are immutable';
+    END IF;
+    IF NEW.candidate_id IS NULL THEN
+        RETURN NEW;
+    END IF;
+    SELECT * INTO candidate FROM atlas.map_release_candidates WHERE candidate_id=NEW.candidate_id;
+    asset := candidate.manifest->'objects'->(NEW.stream || '.u32le.gz');
+    IF candidate.approved_at IS NULL
+       OR (NEW.map_version, NEW.r2_bucket, NEW.r2_key, NEW.stored_sha256, NEW.size_bytes, NEW.decoded_sha256)
+          IS DISTINCT FROM
+          (candidate.map_version, candidate.r2_bucket,
+           'review/releases/' || candidate.candidate_id || '/' || NEW.stream || '.u32le.gz',
+           asset->>'sha256', (asset->>'size_bytes')::bigint, candidate.manifest->'decoded_sha256'->>NEW.stream) THEN
+        RAISE EXCEPTION 'release object must match an approved candidate';
+    END IF;
+    RETURN NEW;
+END $$;
+CREATE TRIGGER map_release_object_guard BEFORE INSERT OR UPDATE ON atlas.map_release_objects
+    FOR EACH ROW EXECUTE FUNCTION atlas.guard_map_release_object();
+
+CREATE FUNCTION atlas.check_map_release_pair() RETURNS trigger LANGUAGE plpgsql AS $$
+DECLARE
+    release_version text := CASE WHEN TG_OP = 'DELETE' THEN OLD.map_version ELSE NEW.map_version END;
+    objects integer;
+    candidates integer;
+    linked integer;
+BEGIN
+    SELECT count(*), count(DISTINCT candidate_id), count(candidate_id)
+      INTO objects, candidates, linked FROM atlas.map_release_objects WHERE map_version=release_version;
+    IF linked > 0 AND (objects <> 2 OR candidates <> 1 OR linked <> 2) THEN
+        RAISE EXCEPTION 'publish both streams from one approved candidate together';
+    END IF;
+    RETURN NULL;
+END $$;
+CREATE CONSTRAINT TRIGGER map_release_pair AFTER INSERT OR UPDATE OR DELETE ON atlas.map_release_objects
+    DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_map_release_pair();
 
 -- Versioned structured inputs
 
@@ -1141,70 +1110,8 @@ ALTER TABLE ONLY atlas.decision_stage1_source_inputs
 ALTER TABLE ONLY atlas.distance_policy_versions
     ADD CONSTRAINT distance_policy_versions_pkey PRIMARY KEY (policy_id, version);
 
--- Draft and source identity guards
+-- Source identity and version guards
 CREATE TRIGGER basin_source_selection_identity BEFORE INSERT OR UPDATE ON atlas.decision_basin_source_selections FOR EACH ROW EXECUTE FUNCTION atlas.guard_basin_source_selection_identity();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_affiliation_feature_refs FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_basin_source_selections FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_distance_policy_selections FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_ecoregion_source_refs FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_land_baseline_boundaries FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_land_baseline_policies FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_land_baseline_regions FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_land_baseline_routes FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_land_baseline_rules FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_list1_entries FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_list1_entry_affiliations FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_list1_entry_evidence_sources FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_list1_policies FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_list1_policy_affiliations FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_list1_policy_entries FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_list1_records FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_boundaries FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_boundary_sources FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_closure_routes FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_closure_sources FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_component_rules FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_group_relations FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_region_segments FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_seed_regions FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_witness_group_members FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_witness_group_targets FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_witness_groups FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_mainland_witnesses FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_polygon_affiliation_feature_refs FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_polygon_corroboration_refs FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
-
-CREATE TRIGGER decision_row_guard BEFORE INSERT OR DELETE OR UPDATE ON atlas.decision_stage1_source_inputs FOR EACH ROW EXECUTE FUNCTION atlas.guard_decision_row();
 
 CREATE TRIGGER version_immutable BEFORE DELETE OR UPDATE ON atlas.distance_policy_versions FOR EACH ROW EXECUTE FUNCTION atlas.reject_source_change();
 

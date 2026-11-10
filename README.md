@@ -58,12 +58,12 @@ IDs, revisioned names and parent relationships, and the bindings from map
 category codes to entities. Use the registry revision selected by the
 decision snapshot.
 
-Apply the [database migrations](database/migrations/) in filename order to a fresh database. Load the source catalog, editable
-decisions, and release records separately. For an existing database, apply only migrations it is missing.
+Apply the [initial schema](database/migrations/001_initial_schema.sql) to an
+empty database. Load the source catalog, editable decisions, and release
+records separately.
 Run the [database tests](database/tests/) with `bash database/tests/run.sh`.
 Have PostgreSQL's `initdb`, `pg_ctl`, and `psql` on your path. The runner starts
-a temporary local database, checks a fresh installation, and rehearses the
-upgrade from the V8 schema with sample data.
+a temporary local database, installs the schema, and runs the database checks.
 
 Export a registry revision from Neon with `scripts/map-build/export_entity_registry.sql`.
 
