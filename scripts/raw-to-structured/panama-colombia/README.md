@@ -3,18 +3,21 @@
 Build the Panama–Colombia administrative border used to separate North and
 South America on the map.
 
-[`build_boundary.py`](build_boundary.py) selects:
+The construction record `panama-colombia-osm-construction` in Neon's
+`atlas.structured_documents` selects:
 
 | Setting | Value |
 | --- | --- |
+| Processing method | `osm_way_chain` |
 | Raw source in Neon's catalog | `osm-panama-current-way-full-bundle` |
 | Editable boundary ID in Neon | `panama_colombia_osm_admin_boundary` |
 | How the boundary is built | Join archived OpenStreetMap border segments at their shared point IDs, preserving their coordinates. |
 
-The source version and destination decision revision are command-line arguments.
-The entry script calls the [shared OSM workflow](../shared/README.md), which
-handles downloading, assembly, checks, and saving the boundary and its source
-link to Neon.
+The record also selects the raw source version. The
+[shared OSM command](../shared/build_osm_boundary.py) reads those settings and
+builds the boundary. Its arguments select the construction record's version and
+the destination decision revision. See the [shared guide](../shared/README.md)
+for the record format, setup, and command arguments.
 
 ## Example: V8.0 release
 
@@ -24,17 +27,19 @@ existing `v8-mainland` decision revision:
 
 ```bash
 PANAMA_WORK_DIR="$(mktemp -d)"
-python3 scripts/raw-to-structured/panama-colombia/build_boundary.py \
-  --source-version capture-20261105-04fe1adb295e \
+PYTHONPATH=scripts/raw-to-structured python3 -m shared.build_osm_boundary \
+  --recipe panama-colombia-osm-construction 1 \
   --revision v8-mainland \
   --r2-endpoint https://8551d6a44afbf7d8080fb67cefe241fc.r2.cloudflarestorage.com \
   --work-dir "$PANAMA_WORK_DIR" \
   --expected-geometry-sha256 cfbfbb514d0f6efff1c0c803ae5f0f0835225015568747bb8b1164f3bb6d0e17
 ```
 
-For another revision, pass its destination and source version. The optional
-geometry checksum checks an existing result when replaying a release. Omit it
-when constructing a changed boundary.
+Construction record version `1` selects raw source version
+`capture-20261105-04fe1adb295e`. To change those settings, add a new version of the
+construction record and select it with `--recipe`. Use `--revision` to choose
+where the resulting boundary is saved. Omit the optional geometry checksum when
+constructing a changed boundary.
 
 To run the shared tools separately on the downloaded archive, set:
 

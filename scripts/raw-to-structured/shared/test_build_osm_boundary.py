@@ -103,10 +103,24 @@ class DatabaseTest(unittest.TestCase):
                 "'Test','test',%s,%s,%s,'{}')",
                 (version, version + '.zip', source['sha256'], source['size_bytes']),
             )
+        self.recipe = self.add_recipe('1')
+        self.add_recipe('2', source_version='2')
+
+    def add_recipe(self, version, **changes):
+        recipe = dict(method='osm_way_chain', source_id='osm-test', source_version='1',
+                      boundary_id='border', basis='Test construction description')
+        recipe.update(changes)
+        text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))
+        raw = text.encode()
+        self.database.execute(
+            'INSERT INTO atlas.structured_documents VALUES (%s,%s,%s,%s,%s::json)',
+            ('__osm_recipe', version, hashlib.sha256(raw).hexdigest(), len(raw), text),
+        )
+        return dict(recipe, recipe_id='__osm_recipe', recipe_version=version)
 
     def build(self, revision='__osm_a', version='1', expected=None):
-        return build_boundary(self.database, self.storage, 'osm-test', version, revision,
-                              'border', 'Test construction description', self.directory, expected)
+        return build_boundary(self.database, self.storage, '__osm_recipe', version,
+                              revision, self.directory, expected)
 
     def boundary(self, revision='__osm_a'):
         return self.database.execute(
@@ -127,6 +141,8 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(result['sha256'], digest)
         self.assertEqual(result['vertices'], 2)
         self.assertEqual(provenance['basis'], 'Test construction description')
+        self.assertEqual(provenance['construction']['recipe_id'], '__osm_recipe')
+        self.assertEqual(provenance['construction']['recipe_version'], '1')
         self.assertEqual(provenance['construction']['archive_sha256'], self.source['sha256'])
         self.assertEqual(self.links(), [('1', 'geometry_source')])
         self.assertEqual(self.build(), result)
@@ -148,13 +164,14 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(self.boundary()[2]['review_note'], 'keep me')
         self.assertEqual(self.boundary()[0]['coordinates'], [[0.0, 0.0], [2.0, 2.0]])
         self.assertNotEqual(self.boundary()[1], before[1])
+        self.assertEqual(self.boundary()[2]['construction']['recipe_version'], '2')
         self.assertEqual(self.boundary('__osm_b'), before)
 
     def test_geometry_can_change_without_release_pin(self):
         self.build()
         changed = {'type': 'LineString', 'coordinates': [[0.0, 0.0], [2.0, 2.0]]}
-        digest = save_boundary(self.database, '__osm_a', 'border', changed,
-                               self.source, 'Changed source interpretation')
+        digest = save_boundary(self.database, '__osm_a', changed, self.source,
+                               dict(self.recipe, basis='Changed source interpretation'))
         self.assertEqual(self.boundary()[:2], (changed, digest))
 
     def test_unknown_revision_stops_before_download(self):
@@ -163,8 +180,33 @@ class DatabaseTest(unittest.TestCase):
         self.storage.get_object.assert_not_called()
 
     def test_missing_source_stops_before_download(self):
+        self.add_recipe('missing-source', source_version='missing')
         with self.assertRaisesRegex(ValueError, 'raw source version is missing'):
+            self.build(version='missing-source')
+        self.storage.get_object.assert_not_called()
+
+    def test_missing_recipe_stops_before_download(self):
+        with self.assertRaisesRegex(ValueError, 'construction record is missing'):
             self.build(version='missing')
+        self.storage.get_object.assert_not_called()
+
+    def test_recipe_checksum_mismatch_stops_before_download(self):
+        self.database.execute("INSERT INTO atlas.structured_documents VALUES "
+                              "('__osm_recipe','bad-hash',repeat('0',64),2,'{}')")
+        with self.assertRaisesRegex(ValueError, 'construction record size or hash mismatch'):
+            self.build(version='bad-hash')
+        self.storage.get_object.assert_not_called()
+
+    def test_unknown_method_stops_before_download(self):
+        self.add_recipe('unknown-method', method='some.python.function')
+        with self.assertRaisesRegex(ValueError, 'unsupported construction method'):
+            self.build(version='unknown-method')
+        self.storage.get_object.assert_not_called()
+
+    def test_empty_description_stops_before_download(self):
+        self.add_recipe('empty-basis', basis='')
+        with self.assertRaisesRegex(ValueError, 'invalid OSM construction record'):
+            self.build(version='empty-basis')
         self.storage.get_object.assert_not_called()
 
     def test_corrupt_download_does_not_create_boundary(self):
@@ -189,9 +231,9 @@ class DatabaseTest(unittest.TestCase):
         self.build()
         before = self.boundary()
         with self.assertRaises(psycopg.errors.ForeignKeyViolation):
-            save_boundary(self.database, '__osm_a', 'border',
+            save_boundary(self.database, '__osm_a',
                           {'type': 'LineString', 'coordinates': [[0, 0], [2, 2]]},
-                          dict(self.source, version='missing'), 'Must roll back')
+                          dict(self.source, version='missing'), self.recipe)
         self.assertEqual(self.boundary(), before)
         self.assertEqual(self.links(), [('1', 'geometry_source')])
 

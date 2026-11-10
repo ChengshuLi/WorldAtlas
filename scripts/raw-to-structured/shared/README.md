@@ -1,7 +1,7 @@
 # Shared OpenStreetMap boundary tools
 
-Boundary-specific folders choose the sources, destination records and construction
-description.
+Construction records in Neon choose the sources, destination boundary IDs, and
+construction descriptions.
 Reuse these functions for boundaries made from a single chain of OpenStreetMap
 ways. Local processing and the Neon/R2 workflow are separate:
 
@@ -48,17 +48,37 @@ for commands that assemble first and then verify the result.
 The workflow also requires `psycopg` and `boto3`. Set `NEON_DATABASE_URL` to the
 working database and configure R2 credentials through `AWS_PROFILE`.
 
-Boundary entry scripts take these arguments:
+Run the shared command from the repository root with
+`PYTHONPATH=scripts/raw-to-structured python3 -m shared.build_osm_boundary`.
+It takes these arguments:
 
 | Argument | Meaning |
 | --- | --- |
-| `--source-version` | Exact raw source version to look up in Neon's catalog. |
+| `--recipe ID VERSION` | Construction record's `source_id` and `version` in `atlas.structured_documents`. |
 | `--revision` | Existing group of editable decisions in Neon where the boundary is saved. |
 | `--r2-endpoint` | Address used to access the Cloudflare R2 account. The catalog supplies the bucket and object path. |
 | `--work-dir` | Local directory for downloading and reusing the source archive. |
 | `--expected-geometry-sha256` | Optional checksum of the expected boundary geometry. A mismatch stops the command before saving. Omit it when building a changed boundary. |
 
-`build_boundary()` looks up the exact source version in `atlas.source_assets`,
+The construction record is a JSON object in the existing
+`atlas.structured_documents` table:
+
+```json
+{
+  "method": "osm_way_chain",
+  "source_id": "raw-source-id",
+  "source_version": "raw-source-version",
+  "boundary_id": "boundary-id",
+  "basis": "A plain-English explanation of how the boundary is built."
+}
+```
+
+`osm_way_chain` selects the assembly function in `osm_ways.py`. Each stored
+document version is immutable. To change settings, insert a new version and
+select it in the command.
+
+`build_boundary()` reads and checks the construction record, looks up its exact
+raw source version in `atlas.source_assets`,
 downloads its R2 object into the work directory, checks its size and checksum,
 and assembles the boundary. A checked local download is reused on later runs.
 An optional expected geometry checksum supports replaying an existing result.
@@ -66,16 +86,15 @@ An optional expected geometry checksum supports replaying an existing result.
 It saves the geometry in `atlas.decision_mainland_boundaries` and its construction
 source link in `atlas.decision_mainland_boundary_sources`, in one transaction.
 The construction description is saved in the boundary's `provenance.basis` field.
+The selected record ID and version are saved in `provenance.construction`, along
+with the processing function and raw source details.
 The destination revision must already exist. Repeating the command updates the
 same boundary, retaining other notes and supporting source links. Changing the
 source version replaces the previous construction source link.
 
-For another OSM boundary, write a small entry script that supplies its source ID,
-boundary ID and construction description to `run_cli()` from
-`shared.build_osm_boundary`.
-Add `scripts/raw-to-structured` to the Python import path. See
-[`panama-colombia/build_boundary.py`](../panama-colombia/build_boundary.py)
-for a caller and its README for release-specific commands.
+For another boundary using this method, add a construction record and run the
+same command. See the [Panama–Colombia guide](../panama-colombia/README.md) for a
+release-specific example.
 
 ## Tests
 

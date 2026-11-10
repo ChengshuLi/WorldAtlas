@@ -13,6 +13,28 @@ from psycopg.types.json import Jsonb
 from shared.osm_ways import assemble_archive
 
 
+def read_recipe(database, recipe_id, version):
+    """Read a versioned construction record from the existing document table."""
+    row = database.execute(
+        'SELECT document::text,sha256,size_bytes FROM atlas.structured_documents '
+        'WHERE source_id=%s AND version=%s', (recipe_id, version),
+    ).fetchone()
+    if row is None:
+        raise ValueError('construction record is missing from Neon')
+    text, digest, size = row
+    raw = text.encode()
+    if len(raw) != size or hashlib.sha256(raw).hexdigest() != digest:
+        raise ValueError('construction record size or hash mismatch')
+    recipe = json.loads(text)
+    fields = {'method', 'source_id', 'source_version', 'boundary_id', 'basis'}
+    if (not isinstance(recipe, dict) or set(recipe) != fields
+            or any(not isinstance(value, str) or not value.strip() for value in recipe.values())):
+        raise ValueError('invalid OSM construction record')
+    if recipe['method'] != 'osm_way_chain':
+        raise ValueError('unsupported construction method')
+    return dict(recipe, recipe_id=recipe_id, recipe_version=version)
+
+
 def catalog_source(database, source_id, version):
     """Look up an exact raw source version and its R2 location."""
     row = database.execute(
@@ -55,14 +77,16 @@ def download_archive(client, source, work_dir):
     return archive
 
 
-def save_boundary(database, revision, boundary_id, geometry, source, construction_description):
+def save_boundary(database, revision, geometry, source, recipe):
     """Save geometry and its construction source together, retaining other evidence."""
     raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
     digest = hashlib.sha256(raw).hexdigest()
     provenance = {
-        'basis': construction_description,
+        'basis': recipe['basis'],
         'construction': {
             'processor': 'shared.osm_ways.assemble',
+            'recipe_id': recipe['recipe_id'],
+            'recipe_version': recipe['recipe_version'],
             'source_id': source['source_id'],
             'source_version': source['version'],
             'archive_sha256': source['sha256'],
@@ -78,13 +102,13 @@ def save_boundary(database, revision, boundary_id, geometry, source, constructio
             "ON CONFLICT (revision,boundary_id) DO UPDATE SET "
             "geometry=EXCLUDED.geometry,geometry_sha256=EXCLUDED.geometry_sha256,"
             "provenance=atlas.decision_mainland_boundaries.provenance || EXCLUDED.provenance",
-            (revision, boundary_id, Jsonb(geometry), digest, Jsonb(provenance)),
+            (revision, recipe['boundary_id'], Jsonb(geometry), digest, Jsonb(provenance)),
         )
         database.execute(
             "DELETE FROM atlas.decision_mainland_boundary_sources "
             "WHERE revision=%s AND boundary_id=%s AND relationship='geometry_source' "
             "AND (source_id,source_version)<>(%s,%s)",
-            (revision, boundary_id, source['source_id'], source['version']),
+            (revision, recipe['boundary_id'], source['source_id'], source['version']),
         )
         database.execute(
             "INSERT INTO atlas.decision_mainland_boundary_sources "
@@ -92,32 +116,33 @@ def save_boundary(database, revision, boundary_id, geometry, source, constructio
             "VALUES (%s,%s,%s,%s,'geometry_source') "
             "ON CONFLICT (revision,boundary_id,source_id,source_version) "
             "DO UPDATE SET relationship=EXCLUDED.relationship",
-            (revision, boundary_id, source['source_id'], source['version']),
+            (revision, recipe['boundary_id'], source['source_id'], source['version']),
         )
     return digest
 
 
-def build_boundary(database, client, source_id, source_version, revision,
-                   boundary_id, construction_description, work_dir, expected_geometry_sha256=None):
+def build_boundary(database, client, recipe_id, recipe_version, revision,
+                   work_dir, expected_geometry_sha256=None):
     """Look up, download, assemble, and save one boundary in the requested revision."""
     with database.transaction():
         if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
                             (revision,)).fetchone() is None:
             raise ValueError('destination decision revision does not exist')
-        source = catalog_source(database, source_id, source_version)
+        recipe = read_recipe(database, recipe_id, recipe_version)
+        source = catalog_source(database, recipe['source_id'], recipe['source_version'])
     archive = download_archive(client, source, work_dir)
     geometry = assemble_archive(archive, source['sha256'], expected_geometry_sha256)
-    digest = save_boundary(database, revision, boundary_id, geometry, source,
-                           construction_description)
-    return {'revision': revision, 'boundary_id': boundary_id,
+    digest = save_boundary(database, revision, geometry, source, recipe)
+    return {'revision': revision, 'boundary_id': recipe['boundary_id'],
             'vertices': len(geometry['coordinates']), 'sha256': digest,
             'archive': str(archive)}
 
 
-def run_cli(source_id, boundary_id, construction_description):
-    """Common command-line interface for boundary-specific entry scripts."""
+def main():
+    """Build the OSM boundary described by a selected Neon construction record."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source-version', required=True)
+    parser.add_argument('--recipe', nargs=2, required=True, metavar=('ID', 'VERSION'),
+                        help='construction record source_id and version in Neon')
     parser.add_argument('--revision', required=True,
                         help='existing decision revision to write in Neon')
     parser.add_argument('--r2-endpoint', required=True)
@@ -134,7 +159,11 @@ def run_cli(source_id, boundary_id, construction_description):
 
     with psycopg.connect(connection) as database, closing(
             boto3.client('s3', endpoint_url=args.r2_endpoint, region_name='auto')) as storage:
-        result = build_boundary(database, storage, source_id, args.source_version,
-                                args.revision, boundary_id, construction_description, args.work_dir,
+        result = build_boundary(database, storage, *args.recipe,
+                                args.revision, args.work_dir,
                                 args.expected_geometry_sha256)
     print(json.dumps(result))
+
+
+if __name__ == '__main__':
+    main()
