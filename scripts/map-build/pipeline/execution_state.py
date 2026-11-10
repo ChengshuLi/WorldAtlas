@@ -56,7 +56,7 @@ def pin(path):
 
 def verify_pins(pins):
     for expected in pins:
-        if pin(expected['path']) != expected:
+        if pin(expected['path'])['sha256'] != expected['sha256']:
             raise ValueError('checkpoint/input hash mismatch: ' + expected['path'])
 
 

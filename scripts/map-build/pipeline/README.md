@@ -64,6 +64,13 @@ The default output is `WORK_DIR/run`. An explicit output and `--resume` retain
 their existing behavior. Source downloads and ZIP extraction happen within this
 invocation, before processing; they are excluded from setup processing time.
 
+Use one shared work directory for repeated builds. It holds the reusable
+`inputs/` cache, while each build gets its own output directory, for example
+`WORK_DIR/runs/RELEASE`. Create `runs/` before starting a build. Keeping inputs
+at the work-folder level lets later builds reuse verified downloads.
+If a cache moves, a link at its original path preserves access for completed
+build records. File verification follows the link and checks the stored checksum.
+
 A raw R2 input can use `{r2_source: {source_id: ..., version: ...}}`.
 Setup looks up the selected raw versions in `atlas.source_assets` in one
 read-only query. The `raw_catalog_sha256` config field pins the sorted result,

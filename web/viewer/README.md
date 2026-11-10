@@ -30,7 +30,7 @@ that need only Node. For browser tests, install the development dependencies and
 Chromium, then run the separate suite.
 
 ```bash
-npm install
+npm ci
 PLAYWRIGHT_SKIP_BROWSER_GC=1 npx playwright install chromium --only-shell
 npm run test:browser
 ```

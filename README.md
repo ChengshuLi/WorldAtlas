@@ -2,9 +2,9 @@
 
 The settled project contract is in [the data strategy](docs/data-strategy.md).
 
-## Published V8 map
+## Map viewer
 
-The [map viewer](web/viewer/README.md) renders the V8.0 map from two
+The [map viewer](web/viewer/README.md) renders a published release from two
 checksum-verified row-run streams. The Cloudflare Worker serves the viewer and
 streams from the `worldatlas` R2 bucket.
 
@@ -15,9 +15,9 @@ streams from the `worldatlas` R2 bucket.
 
 Neon records the sources and reasoning for individual geographic decisions. The code guides explain how to produce and use those records.
 
-## Rebuild V8
+## Build a map
 
-Run the [V8 pipeline](scripts/map-build/pipeline/README.md) from the repository root.
+Run the [pipeline](scripts/map-build/pipeline/README.md) from the repository root.
 
 ```bash
 python3 scripts/map-build/pipeline/run_pipeline.py scripts/map-build/pipeline/config.json \
@@ -46,15 +46,15 @@ run endpoints and category codes. Register both in one transaction after
 verifying the stored byte lengths and both sets of hashes. The table tracks
 outputs separately from the source catalog. See
 the [initial database schema](database/migrations/001_initial_schema.sql).
-The `worldatlas-v8-viewer-inventory` document in
-`atlas.structured_documents` records the deployed viewer's seven R2 objects,
-their repository paths, byte lengths and SHA-256 hashes. The source catalog
-tracks raw data objects, including the parts of source archives.
+`atlas.map_release_candidates` records each candidate's complete file manifest,
+including its grid, viewer, generated config, and legend file. The legend
+contains entity names, colors, and cell counts for that release. The source
+catalog tracks raw data objects, including the parts of source archives.
 
 ## Entity registry
 
 The [initial schema](database/migrations/001_initial_schema.sql) defines stable entity
-IDs, revisioned names and parent relationships, and the bindings from map
+IDs and colors, revisioned names and parent relationships, and the bindings from map
 category codes to entities. Use the registry revision selected by the
 decision snapshot.
 
@@ -68,3 +68,15 @@ a temporary local database, installs the schema, and runs the database checks.
 Export a registry revision from Neon with `scripts/map-build/export_entity_registry.sql`.
 
     psql -X -A -t -v revision=REVISION -f scripts/map-build/export_entity_registry.sql > registry.json
+
+## Viewer tools and tests
+
+Use Node 22 or newer. From the repository root, install the locked dependencies
+and run the Node tests.
+
+```bash
+npm ci
+npm test
+```
+
+The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.

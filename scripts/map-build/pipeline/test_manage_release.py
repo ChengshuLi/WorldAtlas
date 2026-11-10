@@ -93,6 +93,18 @@ class BundleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'checkpoint/input hash mismatch'):
             build_bundle('v9.0-rc.1', self.run, self.viewer, self.output, ColorCatalog())
 
+    def test_source_cache_can_move_while_preserving_its_original_link(self):
+        shared = self.snapshot.parent / 'shared'
+        shared.mkdir()
+        moved = shared / self.snapshot.name
+        self.snapshot.rename(moved)
+        self.snapshot.symlink_to(moved)
+        build_bundle('v9.0-rc.1', self.run, self.viewer, self.output, ColorCatalog())
+
+        moved.write_text('changed source')
+        with self.assertRaisesRegex(ValueError, 'checkpoint/input hash mismatch'):
+            build_bundle('v9.0-rc.2', self.run, self.viewer, self.output, ColorCatalog())
+
     def test_missing_land_color_blocks_staging(self):
         class EmptyCatalog:
             def execute(self, query, params):
