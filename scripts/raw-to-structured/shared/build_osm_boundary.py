@@ -106,12 +106,8 @@ def build_boundary(database, client, source_id, source_version, revision,
             raise ValueError('destination decision revision does not exist')
         source = catalog_source(database, source_id, source_version)
     archive = download_archive(client, source, work_dir)
-    geometry = assemble_archive(archive, source['sha256'])
-    raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
-    digest = hashlib.sha256(raw).hexdigest()
-    if expected_geometry_sha256 is not None and digest != expected_geometry_sha256:
-        raise ValueError('reconstructed boundary differs from expected geometry')
-    save_boundary(database, revision, boundary_id, geometry, source, rationale)
+    geometry = assemble_archive(archive, source['sha256'], expected_geometry_sha256)
+    digest = save_boundary(database, revision, boundary_id, geometry, source, rationale)
     return {'revision': revision, 'boundary_id': boundary_id,
             'vertices': len(geometry['coordinates']), 'sha256': digest,
             'archive': str(archive)}

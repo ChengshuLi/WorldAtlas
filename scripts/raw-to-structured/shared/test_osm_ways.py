@@ -6,7 +6,7 @@ import warnings
 import zipfile
 from pathlib import Path
 
-from shared.osm_ways import assemble, verified_geometry
+from shared.osm_ways import assemble, assemble_archive
 
 
 class AssemblyTest(unittest.TestCase):
@@ -62,7 +62,7 @@ class ArchiveTest(unittest.TestCase):
                         z.writestr(name, data)
             digest = hashlib.sha256(archive.read_bytes()).hexdigest()
             with self.assertRaisesRegex(ValueError, message):
-                verified_geometry(archive, digest, '0' * 64)
+                assemble_archive(archive, digest)
 
     def test_rejects_path_traversal(self):
         self.reject_archive([('../escape', b'x')], 'unsafe archive names')
@@ -88,11 +88,13 @@ class ArchiveTest(unittest.TestCase):
             archive_hash = hashlib.sha256(archive.read_bytes()).hexdigest()
             geom = {'type': 'LineString', 'coordinates': [[0., 0.], [1., 1.]]}
             geom_hash = hashlib.sha256(json.dumps(geom, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
-            self.assertEqual(verified_geometry(archive, archive_hash, geom_hash), geom)
+            self.assertEqual(assemble_archive(archive, archive_hash), geom)
+            self.assertEqual(assemble_archive(archive, archive_hash,
+                                              expected_geometry_sha256=geom_hash), geom)
             with self.assertRaisesRegex(ValueError, 'source archive'):
-                verified_geometry(archive, '0' * 64, geom_hash)
-            with self.assertRaisesRegex(ValueError, 'selected boundary'):
-                verified_geometry(archive, archive_hash, '0' * 64)
+                assemble_archive(archive, '0' * 64)
+            with self.assertRaisesRegex(ValueError, 'expected geometry'):
+                assemble_archive(archive, archive_hash, expected_geometry_sha256='0' * 64)
 
 
 if __name__ == '__main__':

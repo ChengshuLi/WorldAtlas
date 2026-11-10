@@ -34,8 +34,7 @@ Import these functions from `shared.osm_ways`:
 | Function | Input and result |
 | --- | --- |
 | `assemble(manifest, directory)` | Read the responses named in a parsed manifest and return a GeoJSON `LineString`. |
-| `assemble_archive(archive, archive_sha256)` | Check the ZIP checksum and contents, then return the assembled line. |
-| `verified_geometry(archive, archive_sha256, selected_geometry_sha256)` | Assemble the archive and check the resulting geometry checksum. |
+| `assemble_archive(archive, archive_sha256, expected_geometry_sha256=None)` | Check the ZIP checksum and contents, then return the assembled line. Supply the optional geometry checksum to verify an existing result. |
 
 The local command takes three paths: manifest, source directory, and output
 file. It writes GeoJSON and prints the point count and checksum. The output file
@@ -46,6 +45,16 @@ for commands that assemble first and then verify the result.
 
 The workflow also requires `psycopg` and `boto3`. Set `NEON_DATABASE_URL` to the
 working database and configure R2 credentials through `AWS_PROFILE`.
+
+Boundary entry scripts take these arguments:
+
+| Argument | Meaning |
+| --- | --- |
+| `--source-version` | Exact raw source version to look up in Neon's catalog. |
+| `--revision` | Existing group of editable decisions in Neon where the boundary is saved. |
+| `--r2-endpoint` | Address used to access the Cloudflare R2 account. The catalog supplies the bucket and object path. |
+| `--work-dir` | Local directory for downloading and reusing the source archive. |
+| `--expected-geometry-sha256` | Optional checksum of the expected boundary geometry. A mismatch stops the command before saving. Omit it when building a changed boundary. |
 
 `build_boundary()` looks up the exact source version in `atlas.source_assets`,
 downloads its R2 object into the work directory, checks its size and checksum,

@@ -9,7 +9,7 @@ South America on the map.
 | --- | --- |
 | Raw source in Neon's catalog | `osm-panama-current-way-full-bundle` |
 | Editable boundary ID in Neon | `panama_colombia_osm_admin_boundary` |
-| Construction method | Join the border segments and node coordinates from the archived OpenStreetMap responses. |
+| How the boundary is built | Join archived OpenStreetMap border segments at their shared point IDs, preserving their coordinates. |
 
 The source version and destination decision revision are command-line arguments.
 The entry script calls the [shared OSM workflow](../shared/README.md), which
@@ -56,18 +56,18 @@ PYTHONPATH=scripts/raw-to-structured python3 -m shared.osm_ways \
 For this V8.0 source, the assembler prints 5,254 vertices and SHA-256
 `cfbfbb514d0f6efff1c0c803ae5f0f0835225015568747bb8b1164f3bb6d0e17`.
 
-Then run the verifier to check the archive and reconstructed boundary against
-the V8.0 checksums:
+Then call `assemble_archive()` with the expected geometry checksum to check the
+archive and reconstructed boundary against the V8.0 checksums:
 
 ```bash
 PYTHONPATH=scripts/raw-to-structured python3 - "$PANAMA_OSM_ARCHIVE" <<'PY'
 import sys
-from shared.osm_ways import verified_geometry
+from shared.osm_ways import assemble_archive
 
-line = verified_geometry(
+line = assemble_archive(
     sys.argv[1],
     "04fe1adb295e93d78ee029b48351d2b0380d69ac631b47c909dffd538bbaf6c1",
-    "cfbfbb514d0f6efff1c0c803ae5f0f0835225015568747bb8b1164f3bb6d0e17",
+    expected_geometry_sha256="cfbfbb514d0f6efff1c0c803ae5f0f0835225015568747bb8b1164f3bb6d0e17",
 )
 print(len(line["coordinates"]))
 PY

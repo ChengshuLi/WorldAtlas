@@ -64,8 +64,8 @@ def assemble(manifest, directory):
     return {'type': 'LineString', 'coordinates': coords}
 
 
-def assemble_archive(archive, archive_sha256):
-    """Check an OSM source archive and assemble its manifest's boundary."""
+def assemble_archive(archive, archive_sha256, expected_geometry_sha256=None):
+    """Assemble a checked archive, optionally checking the resulting geometry hash."""
     archive = Path(archive)
     with archive.open('rb') as f:
         digest = hashlib.file_digest(f, 'sha256').hexdigest()
@@ -85,15 +85,11 @@ def assemble_archive(archive, archive_sha256):
         directory = Path(temp)
         for name in wanted:
             (directory / name).write_bytes(z.read(name))
-        return assemble(manifest, directory)
-
-
-def verified_geometry(archive, archive_sha256, selected_geometry_sha256):
-    """Reconstruct a boundary and compare it with an expected geometry hash."""
-    geom = assemble_archive(archive, archive_sha256)
-    encoded = json.dumps(geom, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
-    if hashlib.sha256(encoded).hexdigest() != selected_geometry_sha256:
-        raise ValueError('reconstructed boundary differs from selected boundary')
+        geom = assemble(manifest, directory)
+    if expected_geometry_sha256 is not None:
+        encoded = json.dumps(geom, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+        if hashlib.sha256(encoded).hexdigest() != expected_geometry_sha256:
+            raise ValueError('reconstructed boundary differs from expected geometry')
     return geom
 
 
