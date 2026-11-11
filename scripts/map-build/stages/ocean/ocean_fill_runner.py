@@ -73,7 +73,8 @@ def endpoint_coordinate(endpoint, axis):
     derivation = endpoint.get('derivation', {})
     if not isinstance(derivation, dict):
         raise ValueError('invalid endpoint derivation')
-    if derivation.get('method') not in ('source_dms_exact_rational', 'preserved_grid_edge'):
+    if derivation.get('method') not in ('source_dms_exact_rational',
+                                      'source_decimal_exact_rational', 'preserved_grid_edge'):
         return num(raw)
     pair = derivation.get(axis + '_fraction')
     if (not isinstance(pair, list) or len(pair) != 2 or any(type(x) is not int for x in pair)

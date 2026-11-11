@@ -20,14 +20,15 @@ The South East Cape endpoint uses 43°38′40″S and 146°49′30″E from
 [Geoscience Australia](https://www.ga.gov.au/scientific-topics/national-location-information/geography/extreme-points).
 Both endpoints store exact fractions for the degree values in Neon.
 
-At Cape Agulhas, the [SANParks tip latitude](https://www.sanparks.org/parks/agulhas/what-to-do/activities/scenic-landmarks)
-locates the search along the 20°E meridian. The selected endpoint is the
+At Cape Agulhas, the GeoNames cape latitude locates the search along the
+20°E meridian. The selected endpoint is the
 nearest south-facing edge with dry cells on both sides of the meridian in
 the row above and water cells in the row below. The current physical grid
 has that transition at row edge 45,450, between columns 72,817 and 72,818.
 It yields latitude −34.8321533203125°.
 
-[Iceland route extraction](../../../raw-to-structured/iceland/README.md) prepares the selected source routes.
+[IHO S-130 route processing](../../../raw-to-structured/iho/README.md) prepares the
+selected source routes.
 
 ## Runner
 

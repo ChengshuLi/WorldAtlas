@@ -122,6 +122,12 @@ class OceanRunnerTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'disagrees'):r.endpoint_coordinate(e,'longitude')
   e['longitude']='-0.333333333333333333';e['derivation']['longitude_fraction']=[1,0]
   with self.assertRaisesRegex(ValueError,'invalid exact'):r.endpoint_coordinate(e,'longitude')
+ def test_source_decimal_fraction_is_used_and_checked(self):
+  e={'longitude':'-9.042791902363430','derivation':{
+   'method':'source_decimal_exact_rational','longitude_fraction':[-904279190236343,100000000000000]}}
+  self.assertEqual(r.endpoint_coordinate(e,'longitude'),float(-904279190236343/100000000000000))
+  e['derivation']['longitude_fraction']=[1,2]
+  with self.assertRaisesRegex(ValueError,'disagrees'):r.endpoint_coordinate(e,'longitude')
 
  def test_requires_explicit_snapshot_opt_in(self):
   import sys

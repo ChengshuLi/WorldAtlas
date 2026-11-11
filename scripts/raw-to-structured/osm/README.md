@@ -11,6 +11,8 @@ ways. Local processing and the Neon/R2 workflow are separate:
 - [`build_boundary.py`](build_boundary.py): look up a raw source version
   in Neon, download it from R2, assemble the line, and save the boundary and source link
   in Neon. Existing notes and supporting source links are retained.
+- [`source_io.py`](../source_io.py) supplies the document, catalog, and download
+  functions also used by other source processors.
 
 ## Local processing
 
@@ -114,7 +116,7 @@ Run the tests from the repository root:
 
 ```bash
 PYTHONPATH=scripts/raw-to-structured python3 -m unittest discover \
-  -s scripts/raw-to-structured/osm -p 'test_*.py'
+  -s scripts/raw-to-structured -p 'test_*.py'
 ```
 
 To include the database write tests, set `WORLDATLAS_TEST_DATABASE_URL` to a
