@@ -15,10 +15,13 @@ class Grid:
     transform: tuple
     crs: str
     secondary_cells: int = 0
+    native_origin: tuple | None = None
+    window_offset: tuple = (0, 0)
 
     def coordinates(self, rows, columns, center=True):
         offset = .5 if center else 0.
-        x, a, b, y, d, e = self.transform
+        x, a, b, y, d, e = self.native_origin or self.transform
+        rows, columns = rows + self.window_offset[0], columns + self.window_offset[1]
         return (x + (columns + offset) * a + (rows + offset) * b,
                 y + (columns + offset) * d + (rows + offset) * e)
 
@@ -70,7 +73,7 @@ def read_native(paths, bounds):
         usable = band.GetMaskBand().ReadAsArray(x0 - column, y0 - row, x1 - x0, y1 - y0) != 0
         usable &= np.isfinite(values)
         elevation[y0:y1, x0:x1][usable] = values[usable]
-    return Grid(elevation, transform, crs)
+    return Grid(elevation, transform, crs, native_origin=origin, window_offset=(row0, col0))
 
 
 def align(paths, grid):

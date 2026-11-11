@@ -149,3 +149,30 @@ def destinations(flow, seeds, terminals=None):
     if np.any(flow < -1) or np.any(flow >= flow.size) or np.any(seeds < -1) or np.any(terminals < -1):
         raise ValueError('invalid flow link or destination ID')
     return _destinations(flow.astype('int64'), seeds.astype('int64'), terminals.astype('int64'))
+
+
+@njit(cache=True)
+def upstream_order(flow, terminal):
+    """Visit every cell whose flow reaches terminal, starting at that terminal."""
+    links = flow.ravel()
+    heads = np.full(links.size, -1, np.int64)
+    following = np.full(links.size, -1, np.int64)
+    for index in range(links.size):
+        target = links[index]
+        if target >= 0:
+            following[index] = heads[target]
+            heads[target] = index
+    queue = np.empty(links.size, np.int64)
+    visited = np.zeros(links.size, np.bool_)
+    queue[0], visited[terminal] = terminal, True
+    first, count = 0, 1
+    while first < count:
+        index = heads[queue[first]]
+        first += 1
+        while index >= 0:
+            if not visited[index]:
+                visited[index] = True
+                queue[count] = index
+                count += 1
+            index = following[index]
+    return queue[:count]

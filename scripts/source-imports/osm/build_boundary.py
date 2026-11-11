@@ -1,21 +1,16 @@
 """Build an editable Neon boundary from an OSM way archive cataloged in Neon."""
 import argparse
-import hashlib
 import json
 from contextlib import closing
 import os
 from pathlib import Path
 
-from psycopg.types.json import Jsonb
-
 from osm.ways import assemble_archive
-from source_io import read_recipe, catalog_source, download_archive
+from source_io import read_recipe, catalog_source, download_source, save_boundary as save_mainland_boundary
 
 
 def save_boundary(database, revision, geometry, source, recipe):
     """Save geometry and its construction source together, retaining other evidence."""
-    raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
-    digest = hashlib.sha256(raw).hexdigest()
     provenance = {
         'basis': recipe['basis'],
         'lineage_status': 'complete',
@@ -28,33 +23,8 @@ def save_boundary(database, revision, geometry, source, recipe):
             'archive_sha256': source['sha256'],
         },
     }
-    with database.transaction():
-        database.execute(
-            "INSERT INTO atlas.decision_mainland_boundaries "
-            "(revision,boundary_id,method,execution_status,geometry,geometry_sha256,"
-            "geometry_hash_method,coordinate_reference,provenance) "
-            "VALUES (%s,%s,'stored_linestring_v1','selected_for_research',%s,%s,"
-            "'binary64-sorted-compact-geojson-v1','OGC:CRS84',%s) "
-            "ON CONFLICT (revision,boundary_id) DO UPDATE SET "
-            "geometry=EXCLUDED.geometry,geometry_sha256=EXCLUDED.geometry_sha256,"
-            "provenance=atlas.decision_mainland_boundaries.provenance || EXCLUDED.provenance",
-            (revision, recipe['boundary_id'], Jsonb(geometry), digest, Jsonb(provenance)),
-        )
-        database.execute(
-            "DELETE FROM atlas.decision_mainland_boundary_sources "
-            "WHERE revision=%s AND boundary_id=%s AND relationship='construction_input' "
-            "AND (source_id,source_version)<>(%s,%s)",
-            (revision, recipe['boundary_id'], source['source_id'], source['version']),
-        )
-        database.execute(
-            "INSERT INTO atlas.decision_mainland_boundary_sources "
-            "(revision,boundary_id,source_id,source_version,relationship) "
-            "VALUES (%s,%s,%s,%s,'construction_input') "
-            "ON CONFLICT (revision,boundary_id,source_id,source_version) "
-            "DO UPDATE SET relationship=EXCLUDED.relationship",
-            (revision, recipe['boundary_id'], source['source_id'], source['version']),
-        )
-    return digest
+    return save_mainland_boundary(database, revision, recipe['boundary_id'], geometry,
+                                  provenance, [source])
 
 
 def build_boundary(database, client, recipe_id, recipe_version, revision,
@@ -73,7 +43,7 @@ def build_boundary(database, client, recipe_id, recipe_version, revision,
         if recipe['method'] != 'osm_way_chain':
             raise ValueError('unsupported construction method')
         source = catalog_source(database, recipe['source_id'], recipe['source_version'])
-    archive = download_archive(client, source, work_dir)
+    archive = download_source(client, source, work_dir)
     geometry = assemble_archive(archive, source['sha256'], expected_geometry_sha256)
     digest = save_boundary(database, revision, geometry, source, recipe)
     return {'revision': revision, 'boundary_id': recipe['boundary_id'],

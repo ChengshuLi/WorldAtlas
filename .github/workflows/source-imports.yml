@@ -1,0 +1,38 @@
+name: Source imports
+on:
+  pull_request:
+    paths:
+      - 'scripts/source-imports/**'
+      - 'database/migrations/001_initial_schema.sql'
+      - '.github/workflows/source-imports.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-file: scripts/source-imports/watersheds/environment.yml
+          cache-environment: true
+      - name: Test source imports with disposable PostgreSQL
+        shell: bash -el {0}
+        env:
+          PYTHONPATH: scripts/source-imports
+          PROJ_NETWORK: 'OFF'
+        run: |
+          set -euo pipefail
+          database_dir=$(TMPDIR=/tmp mktemp -d)
+          trap 'pg_ctl -D "$database_dir/data" -m fast -w stop; rm -rf "$database_dir"' EXIT
+          initdb -D "$database_dir/data" -U postgres -A trust --no-locale --encoding=UTF8
+          pg_ctl -D "$database_dir/data" -l "$database_dir/postgres.log" \
+            -o "-k $database_dir -p 5432 -c listen_addresses=''" -w start
+          psql -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 \
+            -f database/migrations/001_initial_schema.sql
+          export WORLDATLAS_TEST_DATABASE_URL="postgresql://postgres@/postgres?host=$database_dir"
+          time python -m unittest discover -s scripts/source-imports -p 'test_*.py'

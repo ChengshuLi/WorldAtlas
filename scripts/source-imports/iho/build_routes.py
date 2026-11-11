@@ -8,7 +8,7 @@ from pathlib import Path
 from psycopg.types.json import Jsonb
 
 from iho.s130 import extract_routes, validate_recipe
-from source_io import read_recipe, catalog_source, download_archive
+from source_io import read_recipe, catalog_source, download_source
 
 
 def save_routes(database, revision, result, source, recipe):
@@ -61,7 +61,7 @@ def build_routes(database, client, recipe_id, recipe_version, revision, work_dir
         recipe = read_recipe(database, recipe_id, recipe_version)
         validate_recipe(recipe)
         source = catalog_source(database, recipe['source_id'], recipe['source_version'])
-    archive = download_archive(client, source, work_dir)
+    archive = download_source(client, source, work_dir)
     result = extract_routes(archive, source['sha256'], recipe)
     save_routes(database, revision, result, source, recipe)
     return dict(revision=revision, route_ids=[route['route_id'] for route in result['routes']],

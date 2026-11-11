@@ -74,7 +74,9 @@ class WaterwayTests(unittest.TestCase):
                           self.node(3, .1, .5) + self.node(4, 1.9, .5) +
                           self.way(10, [1, 2]) + self.way(20, [3, 4]))
         grid = Grid(np.zeros((2, 2)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
-        seeds, report = seed_grid(Waterways([path]), {3: ['10'], 9876543210: ['20']}, grid)
+        network = Waterways([path])
+        assigned, _ = network.groups({3: ['10'], 9876543210: ['20']})
+        seeds, report = seed_grid(network, assigned, grid)
         np.testing.assert_array_equal(seeds, [[3, 3], [9876543210, 9876543210]])
         self.assertEqual(report['conflicting_seed_cells'], 0)
 

@@ -109,6 +109,14 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(self.links(), [('1', 'construction_input')])
         self.assertEqual(self.storage.get_object.call_count, 1)
 
+    def test_existing_relationship_to_same_raw_source_is_preserved(self):
+        self.build()
+        self.database.execute("UPDATE atlas.decision_mainland_boundary_sources "
+                              "SET relationship='supporting_evidence' "
+                              "WHERE revision='__osm_a' AND boundary_id='border'")
+        self.build()
+        self.assertEqual(self.links(), [('1', 'supporting_evidence')])
+
     def test_source_update_preserves_evidence_notes_and_other_revision(self):
         self.build()
         self.build(revision='__osm_b')
@@ -217,6 +225,46 @@ class DatabaseTest(unittest.TestCase):
                           dict(self.source, version='missing'), self.recipe)
         self.assertEqual(self.boundary(), before)
         self.assertEqual(self.links(), [('1', 'construction_input')])
+
+    def region_fixture(self):
+        self.build()
+        save_boundary(self.database, '__osm_a',
+                      {'type': 'LineString', 'coordinates': [[1., 1.], [1., 0.], [0., 0.]]},
+                      self.source, dict(self.recipe, boundary_id='return'))
+        self.database.execute(
+            "INSERT INTO atlas.decision_mainland_seed_regions VALUES "
+            "('__osm_a','region','selected_for_research',repeat('0',64),"
+            "'binary64-sorted-compact-geojson-v1','[]')")
+        self.database.execute(
+            "INSERT INTO atlas.decision_mainland_region_segments VALUES "
+            "('__osm_a','region',0,'boundary','border',NULL,0,2,false),"
+            "('__osm_a','region',1,'boundary','return',NULL,0,3,false)")
+
+    def test_changed_vertex_count_updates_region_references_and_hash_in_one_write(self):
+        self.region_fixture()
+        geometry = {'type': 'LineString', 'coordinates': [[0., 0.], [.4, .6], [1., 1.]]}
+        save_boundary(self.database, '__osm_a', geometry, self.source, self.recipe)
+        count = self.database.execute(
+            "SELECT end_index FROM atlas.decision_mainland_region_segments "
+            "WHERE revision='__osm_a' AND region_id='region' AND ordinal=0").fetchone()[0]
+        self.assertEqual(count, 3)
+        polygon = {'type': 'Polygon', 'coordinates': [[[0., 0.], [.4, .6], [1., 1.], [1., 0.], [0., 0.]]]}
+        digest = hashlib.sha256(json.dumps(polygon, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+        self.assertEqual(self.database.execute(
+            "SELECT geometry_sha256 FROM atlas.decision_mainland_seed_regions "
+            "WHERE revision='__osm_a' AND region_id='region'").fetchone()[0], digest)
+
+    def test_broken_region_join_rolls_back_boundary_source_links_and_slice(self):
+        self.region_fixture()
+        before = self.boundary()
+        with self.assertRaisesRegex(ValueError, 'does not join'):
+            save_boundary(self.database, '__osm_a',
+                          {'type': 'LineString', 'coordinates': [[0., 0.], [.4, .6], [2., 2.]]},
+                          self.source, self.recipe)
+        self.assertEqual(self.boundary(), before)
+        self.assertEqual(self.database.execute(
+            "SELECT end_index FROM atlas.decision_mainland_region_segments "
+            "WHERE revision='__osm_a' AND region_id='region' AND ordinal=0").fetchone()[0], 2)
 
 
 if __name__ == '__main__':

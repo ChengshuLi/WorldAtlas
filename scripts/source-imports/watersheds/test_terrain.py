@@ -68,6 +68,16 @@ class TerrainTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'not aligned'):
             read_native([first, second], [0, 0, 2, 2])
 
+    def test_overlapping_crops_share_native_grid_node_identity(self):
+        path = self.raster('primary.tif', np.arange(16).reshape(4, 4),
+                           transform=(0., 1., 0., 4., 0., -1.))
+        first = read_native([path], [0, 0, 3, 3])
+        second = read_native([path], [1, 1, 4, 4])
+        self.assertEqual(first.coordinates(1, 1, center=False),
+                         second.coordinates(2, 0, center=False))
+        self.assertEqual((first.window_offset[0] + 1, first.window_offset[1] + 1),
+                         (second.window_offset[0] + 2, second.window_offset[1]))
+
 
 if __name__ == '__main__':
     unittest.main()
