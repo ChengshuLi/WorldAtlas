@@ -84,6 +84,12 @@ class BoundaryTests(unittest.TestCase):
         self.assertEqual(geometry['coordinates'].count([0., 0.]), 1)
         self.assertTrue(LineString(geometry['coordinates']).is_simple)
 
+    def test_repeated_source_coordinates_do_not_create_zero_length_output_segments(self):
+        source = LineString([(0., 0.), (.01, 0.), (.01, 0.), (.02, .01)])
+        geometry = assemble([source], [], (0., 0.), (.02, .01))
+        self.assertEqual(geometry['coordinates'], [[0., 0.], [.01, 0.], [.02, .01]])
+        self.assertTrue(LineString(geometry['coordinates']).equals(source))
+
     def test_explicit_geodesic_connector_has_no_old_length_requirement(self):
         for endpoint in [(44.0001, 43.), (44.1, 43.)]:
             points = geodesic((44., 43.), endpoint, 20.)

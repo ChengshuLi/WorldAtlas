@@ -138,9 +138,7 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
             "'binary64-sorted-compact-geojson-v1','OGC:CRS84',%s) "
             'ON CONFLICT (revision,boundary_id) DO UPDATE SET '
             'geometry=EXCLUDED.geometry,geometry_sha256=EXCLUDED.geometry_sha256,'
-            'provenance=(atlas.decision_mainland_boundaries.provenance '
-            "- ARRAY['construction_recipe_sha256','construction_geometry_sha256','source_roles']) "
-            '|| EXCLUDED.provenance',
+            'provenance=atlas.decision_mainland_boundaries.provenance || EXCLUDED.provenance',
             (revision, boundary_id, Jsonb(geometry), digest, Jsonb(provenance)),
         )
         database.execute(

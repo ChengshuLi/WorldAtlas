@@ -230,7 +230,9 @@ def assemble(sections, joins, start, end):
             raise ValueError('boundary section has coincident or invalid joins')
         points = list(cut.coords)
         points[0], points[-1] = first.point, last.point
-        coordinates.extend(points if not coordinates else points[1:])
+        for point in points:
+            if not coordinates or coordinates[-1] != point:
+                coordinates.append(point)
     line = LineString(coordinates)
     if not line.is_simple or not line.is_valid or not np.isfinite(coordinates).all():
         raise ValueError('assembled boundary is not a finite simple line')

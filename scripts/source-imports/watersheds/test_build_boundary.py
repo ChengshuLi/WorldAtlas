@@ -134,15 +134,13 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(self.build()['sha256'], result['sha256'])
         self.assertEqual(self.client.get_object.call_count, 3)
         self.db.execute("UPDATE atlas.decision_mainland_boundaries SET provenance=provenance || "
-                        "'{\"note\":\"retain this\",\"construction_geometry_sha256\":\"obsolete\","
-                        "\"construction_recipe_sha256\":\"obsolete\",\"source_roles\":[]}' "
+                        "'{\"note\":\"retain this\",\"custom_context\":{\"source\":\"reviewed\"}}' "
                         "WHERE revision='__watershed'")
         changed = dict(self.recipe, basis='Updated explanation')
         self.store_recipe('2', changed)
         self.assertEqual(self.build('2')['sha256'], result['sha256'])
         self.assertEqual(self.row()[2]['note'], 'retain this')
-        self.assertFalse({'construction_geometry_sha256', 'construction_recipe_sha256', 'source_roles'}
-                         & self.row()[2].keys())
+        self.assertEqual(self.row()[2]['custom_context'], {'source': 'reviewed'})
         self.assertEqual(self.row()[2]['construction']['recipe_version'], '2')
         links = self.db.execute('SELECT source_id,source_version FROM atlas.decision_mainland_boundary_sources '
                                 "WHERE revision='__watershed'").fetchall()

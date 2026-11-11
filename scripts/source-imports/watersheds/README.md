@@ -115,6 +115,8 @@ areas and the native grid.
 Construct the complete interface between selected drainage groups. Route between
 actual source intersections using WGS84 edge lengths, including connected pieces,
 branches and loops. Disconnected joins are reported rather than bridged.
+Repeated consecutive source coordinates appear once in the final line; their
+coordinates are unchanged.
 
 A stream-head connection follows a real drainage path and adds a geodesic to the
 exact selected source point. Its receipt records the connector length. The source

@@ -6,8 +6,8 @@ Python stage functions in one interpreter and generates each downstream request
 from the files just produced. The standalone stage commands use the same entry
 functions. The stages use GDAL’s Python bindings and boto3 for R2 reads. Compilers and
 native kernels still run as external commands.
-It does not call dated local coordinators, reuse old land/water output grids,
-patch producer reports, relocate historical paths, or repair lineage sidecars.
+The runner records the selected inputs and builds each downstream request from
+the outputs of the preceding stages.
 
 The runner builds a local grid from the selected inputs. Publication is a separate workflow.
 
@@ -49,6 +49,12 @@ serialized bytes. `stored-json-text` preserves the stored JSON text.
 newline. Other documents specify their serialization in the configuration.
 
 ## Build from working mainland decisions
+
+Regenerate terrain-derived boundaries with the shared
+[watershed constructor](../../source-imports/watersheds/README.md). It reads a
+versioned construction record, resolves raw sources through Neon's catalog and
+R2, and saves the final editable boundary in Neon. The map build below reads
+those updated decisions automatically.
 
 Set `NEON_DATABASE_URL` to the integration branch containing your working decisions and the published release records. Use a new output directory for each preview.
 
