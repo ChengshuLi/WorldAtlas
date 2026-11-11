@@ -5,6 +5,7 @@ from contextlib import closing
 from pathlib import Path
 import shutil
 from tempfile import NamedTemporaryFile
+import time
 
 
 def read_recipe(database, recipe_id, version):
@@ -45,7 +46,7 @@ def check_source(path, source):
         raise ValueError('source file size or hash differs from the Neon catalog')
 
 
-def download_source(client, source, work_dir):
+def download_source(client, source, work_dir, *, timing=None):
     """Download and check a cataloged R2 file, or reuse a verified local copy."""
     directory = Path(work_dir) / source['sha256']
     directory.mkdir(parents=True, exist_ok=True)
@@ -57,9 +58,14 @@ def download_source(client, source, work_dir):
     partial = Path(output.name)
     try:
         with output:
-            response = client.get_object(Bucket=source['r2_bucket'], Key=source['r2_key'])
-            with closing(response['Body']) as stream:
-                shutil.copyfileobj(stream, output, 1 << 20)
+            started = time.monotonic()
+            try:
+                response = client.get_object(Bucket=source['r2_bucket'], Key=source['r2_key'])
+                with closing(response['Body']) as stream:
+                    shutil.copyfileobj(stream, output, 1 << 20)
+            finally:
+                if timing is not None:
+                    timing['download_seconds'] = timing.get('download_seconds', 0.) + time.monotonic() - started
         check_source(partial, source)
         partial.replace(destination)
     finally:
@@ -67,7 +73,7 @@ def download_source(client, source, work_dir):
     return destination
 
 
-def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir):
+def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir, *, timing=None):
     """Reassemble a provider file from cataloged byte parts and verify the whole.
 
     Each physical R2 object has its own catalog record. The construction records
@@ -89,7 +95,7 @@ def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir):
     try:
         with output:
             for part in parts:
-                with download_source(client, part, work_dir).open('rb') as stream:
+                with download_source(client, part, work_dir, timing=timing).open('rb') as stream:
                     shutil.copyfileobj(stream, output, 1 << 20)
         check_source(partial, source)
         partial.replace(destination)

@@ -42,6 +42,9 @@ in one transaction. Existing notes and unrelated source relationships remain.
 Region references and derived polygon hashes update in that same transaction.
 A failed calculation or invalid join leaves the existing boundary unchanged.
 This command does not publish a website.
+Its receipt records catalog lookup, source verification, construction phases and
+database-write times. R2 transfer time is reported separately; cached verification
+and multipart reassembly count as source processing.
 
 ## Construction settings
 
@@ -66,6 +69,9 @@ Source basin values identify drainage groups; unknown drainage has its own value
 Use `waterway_groups` for explicitly identified downstream ways; otherwise natural
 networks are traced to their source-backed exit basins. Unassigned, ambiguous and
 incomplete networks are reported.
+The receipt lists unresolved and ambiguous ways in the analysis domains;
+unrelated waterways elsewhere in a larger provider extract are excluded from
+those lists. Counts refer to OSM ways, not distinct rivers or drainage groups.
 
 Mapped rivers can continue through several estuary ways beyond the basin
 polygons. Trace back through that uncovered geometry to the downstream-most

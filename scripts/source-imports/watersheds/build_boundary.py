@@ -51,15 +51,15 @@ def resolve_sources(database, recipe):
     return resolved
 
 
-def stage_sources(client, selections, work_dir):
+def stage_sources(client, selections, work_dir, *, timing=None):
     files, references = {}, []
     for alias, source in selections.items():
         if 'parts' in source:
             files[alias] = assemble_parts(client, source['parts'], source['sha256'],
-                                          source['size_bytes'], source['filename'], work_dir)
+                                          source['size_bytes'], source['filename'], work_dir, timing=timing)
             references.extend(source['parts'])
         else:
-            files[alias] = download_source(client, source, work_dir)
+            files[alias] = download_source(client, source, work_dir, timing=timing)
             references.append(source)
     return files, references
 
@@ -103,7 +103,7 @@ def construct(recipe, files):
                         if 'flow' in section and section['flow']['terrain'] == name]
             if required and len(domains) != 1:
                 raise ValueError('a stream-head connection requires one continuous terrain domain')
-            graph, domain_reports = Divide(), []
+            graph, domain_reports, relevant_ways = Divide(), [], set()
             for domain in domains:
                 bounds = bounds_of(domain)
                 output_bounds = domain.get('output_bounds') if isinstance(domain, dict) else None
@@ -115,6 +115,7 @@ def construct(recipe, files):
                 terrain_seconds = time.monotonic() - tick
                 step = time.monotonic()
                 seeds, seed_report = seed_grid(network, assigned, grid)
+                relevant_ways.update(network.nearby(grid))
                 for _, flow_settings in required:
                     point = sources.point(flow_settings['point'], lines)
                     row, column = cell_at(grid, point)
@@ -158,6 +159,11 @@ def construct(recipe, files):
                 LOGGER.info('%s: %s cells, %.2f seconds', name, labels.shape,
                             domain_reports[-1]['seconds'])
             divides[name] = graph
+            network_report = dict(network_report)
+            for category in ('ambiguous', 'unassigned'):
+                network_report[category] = [way for way in network_report[category] if way in relevant_ways]
+            network_report['natural_ways_in_domains'] = len(relevant_ways)
+            network_report['natural_ways_in_sources'] = len(network.natural)
             report['terrain'][name] = {'domains': domain_reports, 'network': network_report,
                                        'network_seconds': network_seconds,
                                        'seconds': time.monotonic() - phase}
@@ -197,6 +203,7 @@ def construct(recipe, files):
 
 def build_boundary(database, client, recipe_id, recipe_version, revision, work_dir):
     """Read immutable inputs, calculate, then save the final result atomically."""
+    started = time.monotonic()
     with database.transaction():
         if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
                             (revision,)).fetchone() is None:
@@ -208,9 +215,11 @@ def build_boundary(database, client, recipe_id, recipe_version, revision, work_d
         evidence = [dict(catalog_source(database, item['source_id'], item['version']),
                          relationship='supporting_evidence')
                     for item in recipe.get('evidence_sources', [])]
+    catalog_seconds = time.monotonic() - started
     started = time.monotonic()
-    files, references = stage_sources(client, selections, work_dir)
-    download_seconds = time.monotonic() - started
+    acquisition = {}
+    files, references = stage_sources(client, selections, work_dir, timing=acquisition)
+    staging_seconds = time.monotonic() - started
     geometry, report = construct(recipe, files)
     runtime = runtime_versions()
     provenance = {'basis': recipe['basis'], 'lineage_status': 'complete', 'construction': {
@@ -223,7 +232,10 @@ def build_boundary(database, client, recipe_id, recipe_version, revision, work_d
     digest = save_boundary(database, revision, recipe['boundary_id'], geometry, provenance,
                            [*references, *evidence])
     report.update(revision=revision, boundary_id=recipe['boundary_id'], sha256=digest,
-                  vertices=len(geometry['coordinates']), download_verify_seconds=download_seconds,
+                  vertices=len(geometry['coordinates']), catalog_seconds=catalog_seconds,
+                  source_staging_seconds=staging_seconds,
+                  download_seconds=acquisition.get('download_seconds', 0.),
+                  source_processing_seconds=staging_seconds - acquisition.get('download_seconds', 0.),
                   save_seconds=time.monotonic() - started)
     report['runtime'] = runtime
     return report
