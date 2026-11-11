@@ -90,6 +90,11 @@ class BoundaryTests(unittest.TestCase):
         self.assertEqual(geometry['coordinates'], [[0., 0.], [.01, 0.], [.02, .01]])
         self.assertTrue(LineString(geometry['coordinates']).equals(source))
 
+    def test_invalid_latitude_and_uncut_longitude_discontinuity_are_rejected(self):
+        for points in [[(0., 91.), (1., 89.)], [(179., 0.), (-179., 1.)]]:
+            with self.subTest(points=points), self.assertRaisesRegex(ValueError, 'WGS84 line'):
+                assemble([LineString(points)], [], points[0], points[-1])
+
     def test_explicit_geodesic_connector_has_no_old_length_requirement(self):
         for endpoint in [(44.0001, 43.), (44.1, 43.)]:
             points = geodesic((44., 43.), endpoint, 20.)

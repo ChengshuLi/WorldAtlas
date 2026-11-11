@@ -10,8 +10,6 @@ catalog identifies their versions and checksums.
   traced from source figures.
 - [`watersheds/`](watersheds/README.md): construct boundaries from elevation,
   natural waterways and source basin geometry.
-- [`ural-audit/`](ural-audit/README.md): reproduce the reviewed Ural boundary.
-- `caucasus-audit/`: construct and reproduce the reviewed Caucasus boundary.
 - [`source_io.py`](source_io.py): shared Neon recipe/catalog reads and verified
   R2 downloads.
 

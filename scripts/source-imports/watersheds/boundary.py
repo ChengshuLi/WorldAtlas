@@ -234,8 +234,11 @@ def assemble(sections, joins, start, end):
             if not coordinates or coordinates[-1] != point:
                 coordinates.append(point)
     line = LineString(coordinates)
-    if not line.is_simple or not line.is_valid or not np.isfinite(coordinates).all():
-        raise ValueError('assembled boundary is not a finite simple line')
+    values = np.asarray(coordinates)
+    if (not line.is_simple or not line.is_valid or not np.isfinite(values).all() or
+            np.any(np.abs(values[:, 0]) > 180) or np.any(np.abs(values[:, 1]) > 90) or
+            np.any(np.abs(np.diff(values[:, 0])) > 180)):
+        raise ValueError('assembled boundary is not a finite simple WGS84 line without a longitude discontinuity')
     return {'type': 'LineString', 'coordinates': [list(map(float, point)) for point in coordinates]}
 
 

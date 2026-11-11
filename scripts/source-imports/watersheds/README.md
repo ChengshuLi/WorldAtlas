@@ -46,6 +46,10 @@ Its receipt records catalog lookup, source verification, construction phases and
 database-write times. R2 transfer time is reported separately; cached verification
 and multipart reassembly count as source processing.
 
+The current construction IDs are `caucasus-boundary-construction` and
+`ural-boundary-construction`, both version `1`. Their geographic choices and
+exact source versions are in `atlas.structured_documents`.
+
 ## Construction settings
 
 The record's method is `watershed_boundary`. It contains:
