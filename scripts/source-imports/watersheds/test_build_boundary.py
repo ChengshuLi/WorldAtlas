@@ -111,7 +111,40 @@ class ConstructionTests(unittest.TestCase):
             geometry, report = construct(recipe, files)
             self.assertIn([.003, .005], geometry['coordinates'])
             self.assertEqual(report['terrain']['ridge']['domains'][0]['coast'],
-                             {'ocean_cells': 6, 'land_outlet_cells': 6, 'river_basin_conflicts': 0})
+                             {'ocean_cells': 6, 'land_outlet_cells': 6, 'river_basin_conflicts': 0,
+                              'source_coverage': {'resolved': [], 'conflicting': [], 'unreferenced': 0}})
+
+    def test_basin_coverage_gap_at_the_shore_does_not_cut_the_continuous_divide(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            files, recipe = fixtures(directory)
+            ds = gdal.Open(str(files['dem']), gdal.GA_Update)
+            ds.GetRasterBand(1).WriteArray(np.tile([0, 1, 2, 2, 1, 0], (6, 1)) +
+                                         np.arange(6)[:, None] * 10)
+            ds = None
+            with shapefile.Writer(str(directory / 'basins')) as writer:
+                writer.field('BASIN', 'N')
+                for ident, west, east in ((41, -.01, .003), (99, .003, .02)):
+                    writer.poly([[(west, -.01), (west, .004), (east, .004),
+                                  (east, -.01), (west, -.01)]])
+                    writer.record(ident)
+            with zipfile.ZipFile(files['basins'], 'w') as output:
+                for suffix in ('.shp', '.shx', '.dbf', '.prj'):
+                    output.write(directory / ('basins' + suffix), 'basins' + suffix)
+            files['water'] = directory / 'water.tif'
+            ds = gdal.GetDriverByName('GTiff').Create(str(files['water']), 6, 6, 1, gdal.GDT_Byte)
+            ds.SetGeoTransform((0., .001, 0., .006, 0., -.001))
+            ds.SetProjection(CRS.from_epsg(4326).to_wkt())
+            water = np.zeros((6, 6), dtype='uint8')
+            water[0] = 1
+            ds.GetRasterBand(1).WriteArray(water)
+            ds = None
+            recipe['terrains']['ridge']['ocean_mask'] = {'sources': ['water'], 'values': [1]}
+            geometry, report = construct(recipe, files)
+            self.assertIn([.003, .005], geometry['coordinates'])
+            coverage = report['terrain']['ridge']['domains'][0]['coast']['source_coverage']
+            self.assertEqual({item['group'] for item in coverage['resolved']}, {3, 100})
+            self.assertEqual(coverage['conflicting'], [])
 
 
 @unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'), 'requires disposable PostgreSQL')

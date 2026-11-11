@@ -156,8 +156,8 @@ def destinations(flow, seeds, terminals=None):
 
 
 @njit(cache=True)
-def upstream_order(flow, terminal):
-    """Visit every cell whose flow reaches terminal, starting at that terminal."""
+def upstream_links(flow):
+    """Index the actual incoming flow edges once for upstream tracing."""
     links = flow.ravel()
     heads = np.full(links.size, -1, np.int64)
     following = np.full(links.size, -1, np.int64)
@@ -166,6 +166,14 @@ def upstream_order(flow, terminal):
         if target >= 0:
             following[index] = heads[target]
             heads[target] = index
+    return heads, following
+
+
+@njit(cache=True)
+def upstream_order(flow, terminal):
+    """Visit every cell whose flow reaches terminal, starting at that terminal."""
+    links = flow.ravel()
+    heads, following = upstream_links(flow)
     queue = np.empty(links.size, np.int64)
     visited = np.zeros(links.size, np.bool_)
     queue[0], visited[terminal] = terminal, True

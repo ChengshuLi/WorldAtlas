@@ -118,6 +118,10 @@ codes. Read categorical masks with nearest-neighbor alignment. Stop drainage at
 observed ocean cells and adjoining land outlets; do not route across flat sea
 cells to an arbitrary crop edge. Basin identities classify the land outlets,
 with mapped river destinations taking precedence. Unknown outlets stay unknown.
+If the basin polygons stop inland of that shoreline, follow the outlet's actual
+incoming flow paths back to the first mapped river or source-covered cells.
+Use their destination only when the references agree. Missing or conflicting
+references remain unknown; an unconnected nearby basin supplies no destination.
 
 Check the chosen boundary against larger terrain domains when sources or
 construction settings change. Once that comparison passes, reuse the validated

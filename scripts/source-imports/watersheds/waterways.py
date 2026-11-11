@@ -17,6 +17,8 @@ from shapely import get_coordinates, transform as transform_geometry
 from shapely.geometry import LineString, Point, box, shape
 from shapely.strtree import STRtree
 
+from watersheds.drainage import upstream_links
+
 
 @dataclass
 class Way:
@@ -406,3 +408,59 @@ class Basins:
             point = to_geo.transform(*grid.coordinates(rr, cc), errcheck=True)
             labels[rr, cc] = self.at(point)
         return ocean | shore, labels
+
+    def uncovered_exits(self, grid, flow, exits, labels, seeds):
+        """Classify uncovered outlets through their actual upstream flow paths.
+
+        Basin polygons can end inland of a water mask's shoreline. Walk each
+        incoming branch to its first mapped river or covered source-basin cell.
+        Agreeing references identify the outlet; conflicting or absent references
+        leave it unknown. Nearby basins without a flow connection are not used.
+        """
+        if any(np.asarray(a).shape != flow.shape for a in (exits, labels, seeds)):
+            raise ValueError('outlets, labels and terrain flow must share one grid')
+        if np.any(np.asarray(exits) & (flow != -1)):
+            raise ValueError('selected exits must be flow terminals')
+        result = labels.copy()
+        unresolved = np.flatnonzero(np.asarray(exits).ravel() & (result.ravel() < 0))
+        report = {'resolved': [], 'conflicting': [], 'unreferenced': 0}
+        if not unresolved.size:
+            return result, report
+        heads, following = upstream_links(flow)
+        width = flow.shape[1]
+        to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
+
+        def point(index):
+            row, column = divmod(int(index), width)
+            return tuple(map(float, to_geo.transform(*grid.coordinates(row, column), errcheck=True)))
+
+        for terminal in unresolved:
+            todo = [int(terminal)]
+            groups, basin_values, references = set(), set(), {}
+            while todo:
+                index = todo.pop()
+                group = int(seeds.ravel()[index])
+                location = point(index)
+                values = set() if group >= 0 else self.values_at(location)
+                if group >= 0 or values:
+                    group = group if group >= 0 else self.group(values)
+                    groups.add(group)
+                    basin_values.update(values)
+                    references.setdefault(group, location)
+                    continue
+                child = heads[index]
+                while child >= 0:
+                    todo.append(int(child))
+                    child = following[child]
+            if len(groups) == 1 and min(groups) >= 0:
+                group, = groups
+                result.ravel()[terminal] = group
+                report['resolved'].append({'outlet': point(terminal), 'group': group,
+                                           'basin_values': sorted(basin_values),
+                                           'upstream_reference': references[group]})
+            elif groups:
+                report['conflicting'].append({'outlet': point(terminal), 'groups': sorted(groups),
+                                              'basin_values': sorted(basin_values)})
+            else:
+                report['unreferenced'] += 1
+        return result, report

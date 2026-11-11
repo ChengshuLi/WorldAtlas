@@ -157,6 +157,9 @@ def construct(recipe, files):
                 working, flow = compute_flow(grid, closed, outlets=outlets)
                 terminals = basins.terminals(grid, flow)
                 if coastal_labels is not None:
+                    coastal_labels, coverage_report = basins.uncovered_exits(
+                        grid, flow, outlets & ~ocean, coastal_labels, seeds)
+                    coast_report['source_coverage'] = coverage_report
                     terminals[outlets] = coastal_labels[outlets]
                 labels = destinations(flow, seeds, terminals)
                 drainage_seconds = time.monotonic() - step

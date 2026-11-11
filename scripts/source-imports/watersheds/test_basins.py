@@ -88,6 +88,56 @@ class BasinTests(unittest.TestCase):
         _, labels = self.basins().coastal_outlets(grid, ocean)
         np.testing.assert_array_equal(labels, np.full((3, 3), -1))
 
+    def test_uncovered_outlet_uses_the_first_basin_reached_along_its_upstream_flow(self):
+        grid = Grid(np.zeros((1, 5)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        flow = np.array([[1, 2, 3, 4, -1]])
+        exits = np.array([[False, False, False, False, True]])
+        labels = np.full(flow.shape, -1)
+        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, labels)
+        self.assertEqual(result[0, 4], 7)
+        self.assertEqual(report['resolved'][0]['basin_values'], [200])
+        self.assertEqual(report['resolved'][0]['upstream_reference'], (1.5, 1.))
+        np.testing.assert_array_equal(labels, np.full(flow.shape, -1))
+
+    def test_conflicting_upstream_source_destinations_leave_the_outlet_unknown(self):
+        grid = Grid(np.zeros((2, 3)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
+        # One incoming branch first reaches basin 100, the other basin 200.
+        flow = np.array([[2, -1, -1], [-1, 5, 2]])
+        exits = np.zeros(flow.shape, dtype=bool)
+        exits[0, 2] = True
+        labels = np.full(flow.shape, -1)
+        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, labels)
+        self.assertEqual(result[0, 2], -1)
+        self.assertEqual(report['conflicting'][0]['groups'], [3, 7])
+
+    def test_an_unselected_basin_at_the_coverage_frontier_is_not_skipped(self):
+        grid = Grid(np.zeros((1, 4)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        flow = np.array([[1, 2, 3, -1]])
+        exits = np.array([[False, False, False, True]])
+        labels = np.full(flow.shape, -1)
+        result, report = self.basins({3: [100]}).uncovered_exits(grid, flow, exits, labels, labels)
+        self.assertEqual(result[0, 3], -1)
+        self.assertEqual(report['conflicting'][0]['basin_values'], [200])
+
+    def test_an_unconnected_nearby_basin_does_not_classify_an_outlet(self):
+        grid = Grid(np.zeros((1, 4)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        flow = np.full((1, 4), -1)
+        exits = np.array([[False, False, False, True]])
+        labels = np.full(flow.shape, -1)
+        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, labels)
+        self.assertEqual(result[0, 3], -1)
+        self.assertEqual(report['unreferenced'], 1)
+
+    def test_a_connected_mapped_river_identifies_an_uncovered_exit(self):
+        grid = Grid(np.zeros((1, 3)), (3., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        flow = np.array([[1, 2, -1]])
+        labels = np.full(flow.shape, -1)
+        seeds = np.array([[12345, -1, -1]])
+        exits = np.array([[False, False, True]])
+        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, seeds)
+        self.assertEqual(result[0, 2], 12345)
+        self.assertEqual(report['resolved'][0]['basin_values'], [])
+
     def test_disconnected_natural_networks_use_their_actual_exit_basins(self):
         path = self.root / 'rivers.osm'
         path.write_text('<osm><node id="1" lon="0.2" lat="1.5"/>'
