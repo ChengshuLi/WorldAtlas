@@ -10,7 +10,7 @@ import zipfile
 
 from psycopg.types.json import Jsonb
 
-from shared.build_osm_boundary import build_boundary, download_archive, save_boundary
+from osm.build_boundary import build_boundary, download_archive, save_boundary
 
 
 def source_fixture(endpoint=(1, 1)):

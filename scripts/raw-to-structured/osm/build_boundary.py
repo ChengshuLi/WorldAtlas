@@ -10,7 +10,7 @@ from tempfile import NamedTemporaryFile
 
 from psycopg.types.json import Jsonb
 
-from shared.osm_ways import assemble_archive
+from osm.ways import assemble_archive
 
 
 def read_recipe(database, recipe_id, version):
@@ -84,7 +84,7 @@ def save_boundary(database, revision, geometry, source, recipe):
     provenance = {
         'basis': recipe['basis'],
         'construction': {
-            'processor': 'shared.osm_ways.assemble',
+            'processor': 'osm.ways.assemble',
             'recipe_id': recipe['recipe_id'],
             'recipe_version': recipe['recipe_version'],
             'source_id': source['source_id'],

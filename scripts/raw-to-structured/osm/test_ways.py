@@ -6,7 +6,7 @@ import warnings
 import zipfile
 from pathlib import Path
 
-from shared.osm_ways import assemble, assemble_archive
+from osm.ways import assemble, assemble_archive
 
 
 class AssemblyTest(unittest.TestCase):

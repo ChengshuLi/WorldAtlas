@@ -5,16 +5,16 @@ construction descriptions.
 Reuse these functions for boundaries made from a single chain of OpenStreetMap
 ways. Local processing and the Neon/R2 workflow are separate:
 
-- [`osm_ways.py`](osm_ways.py): read local archives and manifests, check source
+- [`ways.py`](ways.py): read local archives and manifests, check source
   files, join ways into a GeoJSON line, and optionally check its geometry checksum.
   Also provides a command for assembling extracted files.
-- [`build_osm_boundary.py`](build_osm_boundary.py): look up a raw source version
+- [`build_boundary.py`](build_boundary.py): look up a raw source version
   in Neon, download it from R2, assemble the line, and save the boundary and source link
   in Neon. Existing notes and supporting source links are retained.
 
 ## Local processing
 
-Use Python 3.11 or later. `osm_ways.py` uses Python's standard library.
+Use Python 3.11 or later. `ways.py` uses Python's standard library.
 An archive is a ZIP containing `manifest.json` and the OpenStreetMap JSON
 responses it names. Each response contains a way and the coordinates of its
 nodes. The manifest identifies the ways to join and the starting endpoint:
@@ -31,7 +31,7 @@ The assembled line must not revisit a node.
 Coordinates are longitude followed by latitude. Source checksums identify the
 exact response files used.
 
-Import these functions from `shared.osm_ways`:
+Import these functions from `osm.ways`:
 
 | Function | Input and result |
 | --- | --- |
@@ -40,17 +40,30 @@ Import these functions from `shared.osm_ways`:
 
 The local command takes three paths: manifest, source directory, and output
 file. It writes GeoJSON and prints the point count and checksum. The output file
-must not already exist. See the [boundary example](../panama-colombia/README.md)
-for commands that assemble first and then verify the result.
+must not already exist:
+
+```bash
+PYTHONPATH=scripts/raw-to-structured python3 -m osm.ways \
+  /path/to/manifest.json \
+  /path/to/source-directory \
+  /path/to/boundary.geojson
+```
 
 ## Neon and R2 workflow
 
 The workflow also requires `psycopg` and `boto3`. Set `NEON_DATABASE_URL` to the
 working database and configure R2 credentials through `AWS_PROFILE`.
 
-Run the shared command from the repository root with
-`PYTHONPATH=scripts/raw-to-structured python3 -m shared.build_osm_boundary`.
-It takes these arguments:
+Run from the repository root, replacing the uppercase placeholders with your
+Neon record IDs, version, and R2 account ID, and choosing a local work directory:
+
+```bash
+PYTHONPATH=scripts/raw-to-structured python3 -m osm.build_boundary \
+  --recipe CONSTRUCTION_ID VERSION \
+  --revision DECISION_REVISION \
+  --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com \
+  --work-dir /path/to/work-directory
+```
 
 | Argument | Meaning |
 | --- | --- |
@@ -73,7 +86,7 @@ The construction record is a JSON object in the existing
 }
 ```
 
-`osm_way_chain` selects the assembly function in `osm_ways.py`. Each stored
+`osm_way_chain` selects the assembly function in `ways.py`. Each stored
 document version is immutable. To change settings, insert a new version and
 select it in the command.
 
@@ -93,8 +106,7 @@ same boundary, retaining other notes and supporting source links. Changing the
 source version replaces the previous construction source link.
 
 For another boundary using this method, add a construction record and run the
-same command. See the [Panama–Colombia guide](../panama-colombia/README.md) for a
-release-specific example.
+same command.
 
 ## Tests
 
@@ -102,7 +114,7 @@ Run the tests from the repository root:
 
 ```bash
 PYTHONPATH=scripts/raw-to-structured python3 -m unittest discover \
-  -s scripts/raw-to-structured/shared -p 'test_*.py'
+  -s scripts/raw-to-structured/osm -p 'test_*.py'
 ```
 
 To include the database write tests, set `WORLDATLAS_TEST_DATABASE_URL` to a
