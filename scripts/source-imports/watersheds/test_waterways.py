@@ -59,6 +59,23 @@ class WaterwayTests(unittest.TestCase):
         new = self.write('new.osm', self.node(1, 2, 1, 2))
         self.assertEqual(Waterways([new, old]).nodes['1'], (2., 1.))
 
+    def test_reviewed_reverse_uses_the_connected_downstream_network(self):
+        path = self.write('network.osm', ''.join(self.node(i, lon=i / 10) for i in range(1, 5)) +
+                          self.way(10, [1, 2, 3]) + self.way(20, [2, 4], 'stream'))
+        network = Waterways([path], reverse=['20', '20'])
+        assigned, report = network.groups({37: ['10']})
+        self.assertEqual(assigned, {'10': 37, '20': 37})
+        self.assertEqual(report['ambiguous'], [])
+        self.assertEqual(list(network.line(20).coords), [(.4, 1.), (.2, 1.)])
+        self.assertEqual(network.ways['20'].version, 1)
+
+    def test_reviewed_reverse_requires_a_present_natural_way(self):
+        path = self.write('network.osm', self.node(1) + self.node(2, 2) +
+                          self.way(10, [1, 2], 'canal'))
+        for ident in ['10', '999']:
+            with self.subTest(ident=ident), self.assertRaisesRegex(ValueError, 'missing'):
+                Waterways([path], reverse=[ident])
+
     def test_same_version_coordinate_conflict_is_rejected(self):
         first = self.write('first.osm', self.node(1, 1, 1))
         other = self.write('other.osm', self.node(1, 2, 1))

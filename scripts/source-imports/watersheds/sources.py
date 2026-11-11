@@ -19,6 +19,7 @@ class Sources:
         self.files = files
         self.stack = ExitStack()
         self.readers, self.indices, self.networks, self.extracted = {}, {}, {}, {}
+        self.points = {}
 
     def __enter__(self):
         return self
@@ -55,19 +56,41 @@ class Sources:
         source = specification['source']
         return self.member(source, specification['member']) if 'member' in specification else self.files[source]
 
-    def network(self, sources, *, natural_only=False):
+    def network(self, sources, *, natural_only=False, reverse=()):
         paths = [self.path(source) if isinstance(source, dict) else self.files[source]
                  for source in sources]
-        key = tuple(paths), natural_only
+        reverse = tuple(sorted(set(map(str, reverse))))
+        key = tuple(paths), natural_only, reverse
         if key not in self.networks:
-            self.networks[key] = Waterways(paths, natural_only=natural_only)
+            self.networks[key] = Waterways(paths, natural_only=natural_only, reverse=reverse)
         return self.networks[key]
 
     def point(self, specification, lines):
         if 'point' in specification:
             return tuple(map(float, specification['point']))
         if 'node' in specification:
-            return self.network([specification['source']]).nodes[str(specification['node'])]
+            source, node = specification['source'], str(specification['node'])
+            path = self.files[source]
+            if path.suffix != '.pbf':
+                return self.network([source]).nodes[node]
+            key = source, node
+            if key not in self.points:
+                import osmium
+
+                selected = []
+
+                class Coordinates(osmium.SimpleHandler):
+                    def node(self, value):
+                        selected.append((value.lon, value.lat))
+
+                Coordinates().apply_file(str(path), filters=[osmium.filter.IdFilter([int(node)])])
+                if len(selected) != 1:
+                    raise ValueError('selected OSM node is missing or duplicated')
+                point = selected[0]
+                if not np.isfinite(point).all() or not (-180 <= point[0] <= 180 and -90 <= point[1] <= 90):
+                    raise ValueError('invalid OSM node coordinates')
+                self.points[key] = point
+            return self.points[key]
         if 'line' in specification:
             line = lines[specification['line']]
             if specification['endpoint'] not in ('start', 'end'):

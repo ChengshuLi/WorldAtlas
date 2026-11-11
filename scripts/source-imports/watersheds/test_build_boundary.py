@@ -83,6 +83,24 @@ class ConstructionTests(unittest.TestCase):
             self.assertEqual(report['terrain']['ridge']['domains'][0]['output_bounds'],
                              [0, 0, .006, .006])
 
+    def test_provider_ocean_mask_ends_the_divide_at_land_outlets(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            water = Path(directory) / 'water.tif'
+            ds = gdal.GetDriverByName('GTiff').Create(str(water), 6, 6, 1, gdal.GDT_Byte)
+            ds.SetGeoTransform((0., .001, 0., .006, 0., -.001))
+            ds.SetProjection(CRS.from_epsg(4326).to_wkt())
+            values = np.zeros((6, 6), dtype='uint8')
+            values[0] = 1
+            ds.GetRasterBand(1).WriteArray(values)
+            ds = None
+            files['water'] = water
+            recipe['terrains']['ridge']['ocean_mask'] = {'sources': ['water'], 'values': [1]}
+            geometry, report = construct(recipe, files)
+            self.assertIn([.003, .005], geometry['coordinates'])
+            self.assertEqual(report['terrain']['ridge']['domains'][0]['coast'],
+                             {'ocean_cells': 6, 'land_outlet_cells': 6, 'river_basin_conflicts': 0})
+
 
 @unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'), 'requires disposable PostgreSQL')
 class StorageTests(unittest.TestCase):

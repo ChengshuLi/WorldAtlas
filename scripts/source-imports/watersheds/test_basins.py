@@ -69,6 +69,25 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(terminals[0, 0], 3)
         self.assertEqual(terminals[1, 1], -1)
 
+    def test_observed_ocean_creates_land_outlets_without_classifying_the_sea(self):
+        grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        ocean = np.zeros((4, 4), dtype=bool)
+        ocean[0] = True
+        outlets, labels = self.basins().coastal_outlets(grid, ocean)
+        np.testing.assert_array_equal(outlets[:2], np.ones((2, 4), dtype=bool))
+        self.assertFalse(outlets[2:].any())
+        np.testing.assert_array_equal(labels[0], [-1, -1, -1, -1])
+        np.testing.assert_array_equal(labels[1], [3, 3, 7, 7])
+        # Interior zero heights do not become ocean or drainage outlets.
+        np.testing.assert_array_equal(labels[2:], np.full((2, 4), -1))
+
+    def test_coastal_outlet_without_source_basin_coverage_stays_unknown(self):
+        grid = Grid(np.zeros((3, 3)), (3., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        ocean = np.zeros((3, 3), dtype=bool)
+        ocean[0] = True
+        _, labels = self.basins().coastal_outlets(grid, ocean)
+        np.testing.assert_array_equal(labels, np.full((3, 3), -1))
+
     def test_disconnected_natural_networks_use_their_actual_exit_basins(self):
         path = self.root / 'rivers.osm'
         path.write_text('<osm><node id="1" lon="0.2" lat="1.5"/>'

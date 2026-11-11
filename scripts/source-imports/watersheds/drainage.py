@@ -92,11 +92,15 @@ def _flow(elevation, distances, closed):
     return working, flow
 
 
-def compute_flow(grid, closed_sinks=()):
+def compute_flow(grid, closed_sinks=(), *, outlets=None):
     elevation = np.asarray(grid.elevation, dtype='float64')
     if elevation.ndim != 2 or not elevation.size or not np.isfinite(elevation).all():
         raise ValueError('a complete finite two-dimensional elevation grid is required')
     closed = np.zeros(elevation.shape, dtype='bool')
+    if outlets is not None:
+        if np.asarray(outlets).shape != elevation.shape:
+            raise ValueError('outlets and terrain grid must match')
+        closed |= np.asarray(outlets, dtype=bool)
     for row, column in closed_sinks:
         if not (0 <= row < elevation.shape[0] and 0 <= column < elevation.shape[1]):
             raise ValueError('closed sink is outside the elevation grid')

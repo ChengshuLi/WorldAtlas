@@ -10,13 +10,14 @@ from pathlib import Path
 import platform
 import time
 
+import numpy as np
 from shapely.geometry import LineString
 
 from source_io import assemble_parts, catalog_source, download_source, read_recipe, save_boundary
 from watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
 from watersheds.drainage import compute_flow, destinations
 from watersheds.sources import Sources
-from watersheds.terrain import prepare
+from watersheds.terrain import align, prepare
 from watersheds.waterways import Basins, seed_grid
 
 LOGGER = logging.getLogger(__name__)
@@ -86,7 +87,8 @@ def construct(recipe, files):
                                       for item in selected]
             bounds = [min(bounds_of(b)[0] for b in domains), min(bounds_of(b)[1] for b in domains),
                       max(bounds_of(b)[2] for b in domains), max(bounds_of(b)[3] for b in domains)]
-            network = sources.network(settings.get('waterways', []), natural_only=True)
+            network = sources.network(settings.get('waterways', []), natural_only=True,
+                                      reverse=settings.get('reverse_waterways', []))
             if network.nodes:
                 # Complete ways can end outside the terrain crop. Include those
                 # destinations when looking up source basin identities.
@@ -131,10 +133,26 @@ def construct(recipe, files):
                         raise ValueError('closed drainage destination conflicts with a mapped group')
                     seeds[row, column] = group
                     closed.append((row, column))
+                outlets, coastal_labels, coast_report = None, None, None
+                if 'ocean_mask' in settings:
+                    selection = settings['ocean_mask']
+                    water = align(paths(selection['sources']), grid, resampling='near')
+                    ocean = np.isin(water, selection['values'])
+                    outlets, coastal_labels = basins.coastal_outlets(grid, ocean)
+                    conflict = (seeds >= 0) & (coastal_labels >= 0) & (seeds != coastal_labels)
+                    # Traced river destinations take precedence over coarse basin
+                    # membership at the shore. Keep disagreements in the receipt.
+                    coastal_labels[seeds >= 0] = seeds[seeds >= 0]
+                    coast_report = {'ocean_cells': int(ocean.sum()),
+                                    'land_outlet_cells': int((outlets & ~ocean).sum()),
+                                    'river_basin_conflicts': int(conflict.sum())}
                 seed_seconds = time.monotonic() - step
                 step = time.monotonic()
-                working, flow = compute_flow(grid, closed)
-                labels = destinations(flow, seeds, basins.terminals(grid, flow))
+                working, flow = compute_flow(grid, closed, outlets=outlets)
+                terminals = basins.terminals(grid, flow)
+                if coastal_labels is not None:
+                    terminals[outlets] = coastal_labels[outlets]
+                labels = destinations(flow, seeds, terminals)
                 drainage_seconds = time.monotonic() - step
                 step = time.monotonic()
                 graph.add_grid(grid, labels, settings['interfaces'], output_bounds)
@@ -152,6 +170,7 @@ def construct(recipe, files):
                     'raised_cells': int((working > grid.elevation).sum()),
                     'max_raise_m': float((working - grid.elevation).max()),
                     'seeds': seed_report, 'terrain_seconds': terrain_seconds,
+                    'coast': coast_report,
                     'seed_seconds': seed_seconds, 'drainage_seconds': drainage_seconds,
                     'divide_seconds': time.monotonic() - step,
                     'seconds': time.monotonic() - tick,
@@ -164,6 +183,8 @@ def construct(recipe, files):
                 network_report[category] = [way for way in network_report[category] if way in relevant_ways]
             network_report['natural_ways_in_domains'] = len(relevant_ways)
             network_report['natural_ways_in_sources'] = len(network.natural)
+            network_report['reversed_waterways'] = {
+                ident: network.ways[ident].version for ident in settings.get('reverse_waterways', [])}
             report['terrain'][name] = {'domains': domain_reports, 'network': network_report,
                                        'network_seconds': network_seconds,
                                        'seconds': time.monotonic() - phase}

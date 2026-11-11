@@ -47,7 +47,7 @@ database-write times. R2 transfer time is reported separately; cached verificati
 and multipart reassembly count as source processing.
 
 The current construction IDs are `caucasus-boundary-construction` and
-`ural-boundary-construction`, both version `1`. Their geographic choices and
+`ural-boundary-construction`, both version `2`. Their geographic choices and
 exact source versions are in `atlas.structured_documents`.
 
 ## Construction settings
@@ -73,6 +73,10 @@ Source basin values identify drainage groups; unknown drainage has its own value
 Use `waterway_groups` for explicitly identified downstream ways; otherwise natural
 networks are traced to their source-backed exit basins. Unassigned, ambiguous and
 incomplete networks are reported.
+If source evidence establishes that a mapped way points upstream, list its ID in
+`reverse_waterways`. The constructor reverses its direction before tracing the
+network; its coordinates and source version stay unchanged. Keep the supporting
+measurements and reason in the construction record.
 The receipt lists unresolved and ambiguous ways in the analysis domains;
 unrelated waterways elsewhere in a larger provider extract are excluded from
 those lists. Counts refer to OSM ways, not distinct rivers or drainage groups.
@@ -109,6 +113,12 @@ heights remain unchanged. Known closed drainage destinations can be supplied as
 excluded from natural drainage; an explicitly selected geographic boundary can
 still follow their source geometry.
 
+For coastal terrain, `ocean_mask` selects provider mask sources and their ocean
+codes. Read categorical masks with nearest-neighbor alignment. Stop drainage at
+observed ocean cells and adjoining land outlets; do not route across flat sea
+cells to an arbitrary crop edge. Basin identities classify the land outlets,
+with mapped river destinations taking precedence. Unknown outlets stay unknown.
+
 Check the chosen boundary against larger terrain domains when sources or
 construction settings change. Once that comparison passes, reuse the validated
 domains. An ordinary run does not perform an automatic crop-expansion search.
@@ -132,6 +142,10 @@ A stream-head connection follows a real drainage path and adds a geodesic to the
 exact selected source point. Its receipt records the connector length. The source
 point need not fall in the cell traversed by raster drainage. Explicit connectors
 are construction choices, assembled with the other sections in one pass.
+This also supports a selected mapped junction where streams assigned to different
+groups meet. Connect the divide to the exact source node; report that intended
+contact separately from additional crossings along the stream. A shared mapped
+node alone does not establish whether a physical bifurcation exists.
 
 Where source grids have different native resolutions, a connector endpoint can
 select the nearest divide corner to a geographic anchor:

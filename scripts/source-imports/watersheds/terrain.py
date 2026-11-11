@@ -76,7 +76,7 @@ def read_native(paths, bounds):
     return Grid(elevation, transform, crs, native_origin=origin, window_offset=(row0, col0))
 
 
-def align(paths, grid):
+def align(paths, grid, *, resampling='bilinear'):
     """Interpolate secondary raster values onto the unchanged primary grid."""
     height, width = grid.elevation.shape
     destination = gdal.GetDriverByName('MEM').Create('', width, height, 1, gdal.GDT_Float64)
@@ -86,7 +86,7 @@ def align(paths, grid):
     band.SetNoDataValue(float('nan'))
     band.Fill(float('nan'))
     gdal.Warp(destination, [str(path) for path in paths],
-              resampleAlg='bilinear', dstNodata=float('nan'))
+              resampleAlg=resampling, dstNodata=float('nan'))
     return band.ReadAsArray()
 
 

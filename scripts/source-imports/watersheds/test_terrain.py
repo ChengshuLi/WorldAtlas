@@ -6,7 +6,7 @@ import numpy as np
 from osgeo import gdal
 from pyproj import CRS
 
-from watersheds.terrain import prepare, read_native
+from watersheds.terrain import align, prepare, read_native
 
 
 class TerrainTests(unittest.TestCase):
@@ -48,6 +48,14 @@ class TerrainTests(unittest.TestCase):
                                 transform=(0., 2., 0., 4., 0., -2.))
         grid = prepare([primary], [1, 1, 3, 3], [secondary])
         np.testing.assert_allclose(grid.elevation, [[13, 15], [17, 19]])
+
+    def test_water_categories_are_aligned_without_mixing_codes(self):
+        primary = self.raster('primary.tif', [[0] * 2] * 2,
+                              transform=(1., 1., 0., 3., 0., -1.))
+        mask = self.raster('water.tif', [[0, 1], [2, 3]],
+                           transform=(0., 2., 0., 4., 0., -2.))
+        grid = read_native([primary], [1, 1, 3, 3])
+        np.testing.assert_array_equal(align([mask], grid, resampling='near'), [[0, 1], [2, 3]])
 
     def test_unfilled_gaps_are_rejected(self):
         primary = self.raster('primary.tif', [[np.nan, 2], [3, 4]])

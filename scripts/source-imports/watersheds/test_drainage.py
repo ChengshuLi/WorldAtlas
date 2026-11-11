@@ -56,6 +56,14 @@ class DrainageTests(unittest.TestCase):
         # not established merely by the presence of a known sink farther in.
         self.assertEqual(labels[0, 0], -1)
 
+    def test_known_water_outlets_stop_flat_routing_through_the_ocean(self):
+        grid = self.grid([[5, 0, 0], [4, 0, 0], [3, 0, 0]])
+        outlets = grid.elevation == 0
+        working, flow = compute_flow(grid, outlets=outlets)
+        np.testing.assert_array_equal(flow[outlets], np.full(outlets.sum(), -1))
+        self.assertTrue(np.isin(flow[:, 0], [1, 4, 7]).all())
+        np.testing.assert_array_equal(working, grid.elevation)
+
     def test_geographic_and_projected_neighbor_distances_are_supported(self):
         geographic = neighbor_distances(self.grid(np.zeros((3, 3))))
         projected = neighbor_distances(self.grid(np.zeros((3, 3)), 'EPSG:32640',

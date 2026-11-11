@@ -26,7 +26,7 @@ class Way:
 
 
 class Waterways:
-    def __init__(self, paths, *, natural_only=False):
+    def __init__(self, paths, *, natural_only=False, reverse=()):
         self.nodes, self.ways, self.relations = {}, {}, {}
         self.natural_only = natural_only
         self._node_versions, self._way_versions = {}, {}
@@ -67,6 +67,13 @@ class Waterways:
             wanted = {node for way in self.ways.values() for node in way.nodes}
             self.nodes = {node: point for node, point in self.nodes.items() if node in wanted}
         del self._node_versions, self._way_versions
+        # A reviewed source-direction correction changes topology, not coordinates.
+        # Apply it after merging source versions so file order remains irrelevant.
+        for ident in sorted(set(map(str, reverse))):
+            if ident not in self.ways or self.ways[ident].tags.get('waterway') not in ('river', 'stream'):
+                raise ValueError(f'reversed natural waterway {ident} is missing')
+            way = self.ways[ident]
+            self.ways[ident] = Way(tuple(reversed(way.nodes)), way.tags, way.version)
         self.natural = {ident for ident, way in self.ways.items()
                         if way.tags.get('waterway') in ('river', 'stream')}
         self.incomplete = {ident for ident in self.natural
@@ -370,3 +377,32 @@ class Basins:
             point = to_geo.transform(*grid.coordinates(row, column), errcheck=True)
             result[row, column] = self.at(point)
         return result
+
+    def coastal_outlets(self, grid, ocean):
+        """Stop at observed ocean cells and classify adjacent land exits.
+
+        Ocean coverage comes from a provider water mask, not zero elevation.
+        Basin identities classify land outlets; no basin boundary coordinates
+        are copied into the resulting divide.
+        """
+        ocean = np.asarray(ocean, dtype=bool)
+        if ocean.shape != grid.elevation.shape:
+            raise ValueError('ocean mask and terrain grid must match')
+        height, width = ocean.shape
+        shore = np.zeros(ocean.shape, dtype=bool)
+        for dr in (-1, 0, 1):
+            for dc in (-1, 0, 1):
+                if not (dr or dc):
+                    continue
+                first = (slice(max(0, -dr), min(height, height - dr)),
+                         slice(max(0, -dc), min(width, width - dc)))
+                second = (slice(max(0, dr), min(height, height + dr)),
+                          slice(max(0, dc), min(width, width + dc)))
+                shore[first] |= ocean[second]
+        shore &= ~ocean
+        labels = np.full(ocean.shape, -1, dtype='int64')
+        to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
+        for rr, cc in np.argwhere(shore):
+            point = to_geo.transform(*grid.coordinates(rr, cc), errcheck=True)
+            labels[rr, cc] = self.at(point)
+        return ocean | shore, labels

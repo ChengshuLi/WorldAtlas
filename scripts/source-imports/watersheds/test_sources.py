@@ -4,6 +4,7 @@ import tempfile
 import unittest
 import zipfile
 
+import osmium
 from pyproj import CRS
 import shapefile
 
@@ -67,6 +68,32 @@ class SourceGeometryTests(unittest.TestCase):
         with Sources({}) as sources:
             with self.assertRaisesRegex(ValueError, 'finite WGS84'):
                 sources.line([{'point': [0, 0]}, {'point': [0, 100]}])
+
+    def test_pbf_point_selection_includes_isolated_nodes_without_loading_ways(self):
+        path = self.root / 'provider.osm.pbf'
+        with osmium.SimpleWriter(str(path)) as writer:
+            writer.add_node(osmium.osm.mutable.Node(id=42, location=(44., 43.), version=2))
+            writer.add_node(osmium.osm.mutable.Node(id=99, location=(45., 44.), version=1))
+        with Sources({'provider': path}) as sources:
+            specification = {'source': 'provider', 'node': 42}
+            self.assertEqual(sources.point(specification, {}), (44., 43.))
+            self.assertEqual(sources.point(specification, {}), (44., 43.))
+            self.assertEqual(sources.networks, {})
+            with self.assertRaisesRegex(ValueError, 'missing'):
+                sources.point({'source': 'provider', 'node': 100}, {})
+
+    def test_network_cache_keeps_reviewed_directions_separate(self):
+        path = self.root / 'rivers.osm'
+        path.write_text('<osm><node id="1" lon="0" lat="0"/>'
+                        '<node id="2" lon="1" lat="1"/>'
+                        '<way id="10"><nd ref="1"/><nd ref="2"/>'
+                        '<tag k="waterway" v="river"/></way></osm>')
+        with Sources({'rivers': path}) as sources:
+            normal = sources.network(['rivers'], natural_only=True)
+            reverse = sources.network(['rivers'], natural_only=True, reverse=['10'])
+            self.assertEqual(normal.ways['10'].nodes, ('1', '2'))
+            self.assertEqual(reverse.ways['10'].nodes, ('2', '1'))
+            self.assertIs(normal, sources.network(['rivers'], natural_only=True))
 
 
 if __name__ == '__main__':
