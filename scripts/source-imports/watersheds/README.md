@@ -96,6 +96,10 @@ intersecting ways without clipping their geometry or downstream relationships.
 
 ## Terrain and flow
 
+Use the provider's 10 m ArcticDEM mosaics where available and Copernicus
+GLO-30 elsewhere. Copernicus also fills missing ArcticDEM heights after height
+conversion. Construction records select exact catalog versions and coverage.
+
 Keep the primary grid's native cell alignment and valid heights. Fill missing
 cells only from the selected secondary source, bilinearly aligned to that grid.
 Add the cataloged height-reference offset before combining different height
