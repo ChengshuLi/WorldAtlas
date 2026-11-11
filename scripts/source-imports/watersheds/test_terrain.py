@@ -33,6 +33,22 @@ class TerrainTests(unittest.TestCase):
         np.testing.assert_array_equal(grid.elevation, [[1, 2], [3, 4]])
         self.assertEqual(grid.transform, (0., 1., 0., 2., 0., -1.))
 
+    def test_projected_bounds_select_the_exact_native_cells(self):
+        values = np.arange(20).reshape(4, 5)
+        path = self.raster('polar.tif', values,
+                           transform=(2249900., 2., 0., 900100., 0., -2.), crs=3413)
+        grid = read_native([path], [2249902.5, 900094.5, 2249907.5, 900099.5], bounds_crs=3413)
+        np.testing.assert_array_equal(grid.elevation, values[:3, 1:4])
+        self.assertEqual(grid.transform, (2249902., 2., 0., 900100., 0., -2.))
+        self.assertEqual(grid.window_offset, (0, 1))
+
+    def test_projected_domain_gap_fill_preserves_valid_primary_heights(self):
+        transform = (2249900., 2., 0., 900100., 0., -2.)
+        primary = self.raster('polar.tif', [[3, np.nan], [np.nan, 8]], transform, 3413)
+        secondary = self.raster('secondary.tif', [[11, 12], [13, 14]], transform, 3413)
+        grid = prepare([primary], [2249900, 900096, 2249904, 900100], [secondary], bounds_crs=3413)
+        np.testing.assert_array_equal(grid.elevation, [[3, 12], [13, 8]])
+
     def test_gap_fill_and_height_offset_leave_valid_primary_values_unchanged(self):
         primary = self.raster('primary.tif', [[np.nan, 2], [3, np.nan]])
         secondary = self.raster('secondary.tif', [[11, 12], [13, 14]])

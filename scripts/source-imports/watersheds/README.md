@@ -129,6 +129,10 @@ Both are WGS84 rectangles. Use adjoining output areas and overlapping context;
 this keeps inconsistent interfaces at calculation edges out of the assembled
 graph. Larger-crop validation expands the context while retaining those output
 areas and the native grid.
+Domains may specify `crs` when their bounds and output areas are projected
+rectangles. This avoids enlarging a native raster crop by converting its rectangle
+to longitude and latitude and back. Source lookups and final coordinates still
+use WGS84; elevation cells retain their original positions and values.
 
 ## Boundary assembly and tests
 

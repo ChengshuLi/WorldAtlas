@@ -36,7 +36,7 @@ class Divide:
         self.origin = None
         self.crs = None
 
-    def add_grid(self, grid, labels, pairs, output_bounds=None):
+    def add_grid(self, grid, labels, pairs, output_bounds=None, *, bounds_crs=4326):
         labels = np.asarray(labels)
         if labels.shape != grid.elevation.shape:
             raise ValueError('basin labels and terrain grid must match')
@@ -49,6 +49,7 @@ class Divide:
             raise ValueError('divide domains must share one native grid')
         self.origin, self.crs = origin, crs
         to_geo = Transformer.from_crs(crs, 4326, always_xy=True)
+        to_output = Transformer.from_crs(crs, bounds_crs, always_xy=True)
         height, width = labels.shape
         if output_bounds is not None:
             if (len(output_bounds) != 4 or not np.isfinite(output_bounds).all() or
@@ -74,9 +75,9 @@ class Divide:
                 if output_bounds is not None:
                     midpoint = grid.coordinates(row + (.5 if dc else 1),
                                                 column + (1 if dc else .5), center=False)
-                    lon, lat = to_geo.transform(*midpoint, errcheck=True)
+                    x, y = to_output.transform(*midpoint, errcheck=True)
                     west, south, east, north = output_bounds
-                    if not (west <= lon < east and south <= lat < north):
+                    if not (west <= x < east and south <= y < north):
                         continue
                 edge = ((node(row, column + 1), node(row + 1, column + 1)) if dc else
                         (node(row + 1, column), node(row + 1, column + 1)))

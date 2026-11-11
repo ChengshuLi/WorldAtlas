@@ -73,6 +73,20 @@ class BoundaryTests(unittest.TestCase):
         np.testing.assert_allclose(route.bounds, (.01, .01, .01, .03))
         self.assertTrue(all(.01 <= point[1] <= .03 for point in graph.coordinates.values()))
 
+    def test_projected_output_areas_partition_one_connected_native_divide(self):
+        grid = Grid(np.zeros((4, 2)), (2249900., 2., 0., 900100., 0., -2.), 'EPSG:3413')
+        labels = np.tile([1, 3], (4, 1))
+        complete, partitioned = Divide(), Divide()
+        complete.add_grid(grid, labels, [(1, 3)])
+        for bounds in ([2249900, 900092, 2249904, 900096],
+                       [2249900, 900096, 2249904, 900100]):
+            partitioned.add_grid(grid, labels, [(1, 3)], bounds, bounds_crs=3413)
+        self.assertEqual(partitioned.edges, complete.edges)
+        self.assertEqual(partitioned.coordinates, complete.coordinates)
+        route = partitioned.route(partitioned.nearest_vertex(complete.coordinates[(0, 1)]),
+                                  partitioned.nearest_vertex(complete.coordinates[(4, 1)]))
+        self.assertTrue(route.is_simple)
+
     def test_final_assembly_preserves_endpoints_and_has_shared_joins(self):
         graph = self.graph()
         before = LineString([(-.01, -.01), (0., 0.), (0., .01)])

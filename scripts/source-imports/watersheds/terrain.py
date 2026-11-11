@@ -26,16 +26,21 @@ class Grid:
                 y + (columns + offset) * d + (rows + offset) * e)
 
 
-def read_native(paths, bounds):
+def read_native(paths, bounds, *, bounds_crs=4326):
     """Crop aligned source tiles without changing their cell positions or values.
 
-    Bounds are west/south/east/north in WGS84. Later valid tiles take precedence
-    in overlaps, following the order explicitly chosen in the construction.
+    Bounds use bounds_crs (WGS84 by default). Native projected rectangles avoid
+    enlarging a crop through an unnecessary round trip through longitude and
+    latitude. Later valid tiles take precedence in the selected source order.
     """
     if not paths or len(bounds) != 4 or not np.isfinite(bounds).all():
-        raise ValueError('source tiles and finite WGS84 bounds are required')
+        raise ValueError('source tiles and finite analysis bounds are required')
     west, south, east, north = bounds
-    if not (-180 <= west < east <= 180 and -90 <= south < north <= 90):
+    bounds_crs = CRS.from_user_input(bounds_crs)
+    if not (west < east and south < north):
+        raise ValueError('invalid analysis bounds')
+    if bounds_crs.equals(CRS.from_epsg(4326), ignore_axis_order=True) and not (
+            -180 <= west < east <= 180 and -90 <= south < north <= 90):
         raise ValueError('invalid WGS84 analysis bounds')
     datasets = [gdal.Open(str(path)) for path in paths]
     first = datasets[0]
@@ -45,7 +50,7 @@ def read_native(paths, bounds):
     if not np.isfinite(origin).all() or origin[1] <= 0 or origin[5] >= 0 or origin[2] or origin[4]:
         raise ValueError('a finite north-up native grid is required')
     left, bottom, right, top = Transformer.from_crs(
-        4326, reference, always_xy=True).transform_bounds(*bounds, densify_pts=21, errcheck=True)
+        bounds_crs, reference, always_xy=True).transform_bounds(*bounds, densify_pts=21, errcheck=True)
     col0 = math.floor((left - origin[0]) / origin[1])
     col1 = math.ceil((right - origin[0]) / origin[1])
     row0 = math.floor((top - origin[3]) / origin[5])
@@ -90,13 +95,13 @@ def align(paths, grid, *, resampling='bilinear'):
     return band.ReadAsArray()
 
 
-def prepare(primary, bounds, secondary=(), height_offset=None):
+def prepare(primary, bounds, secondary=(), height_offset=None, *, bounds_crs=4326):
     """Fill gaps only; height_offset contains secondary-to-primary offsets in metres.
 
     For EGM2008 heights converted to WGS84 ellipsoidal heights, the offset is
     the EGM2008 geoid undulation. Its source is selected and cataloged normally.
     """
-    grid = read_native(primary, bounds)
+    grid = read_native(primary, bounds, bounds_crs=bounds_crs)
     missing = ~np.isfinite(grid.elevation)
     grid.secondary_cells = int(missing.sum())
     if missing.any() and secondary:

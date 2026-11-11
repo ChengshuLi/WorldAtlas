@@ -11,6 +11,7 @@ import platform
 import time
 
 import numpy as np
+from pyproj import Transformer
 from shapely.geometry import LineString
 
 from source_io import assemble_parts, catalog_source, download_source, read_recipe, save_boundary
@@ -83,10 +84,14 @@ def construct(recipe, files):
             if not domains:
                 raise ValueError('terrain requires at least one analysis domain')
             bounds_of = lambda domain: domain['bounds'] if isinstance(domain, dict) else domain
+            crs_of = lambda domain: domain.get('crs', 4326) if isinstance(domain, dict) else 4326
             paths = lambda selected: [sources.path({'source': item} if isinstance(item, str) else item)
                                       for item in selected]
-            bounds = [min(bounds_of(b)[0] for b in domains), min(bounds_of(b)[1] for b in domains),
-                      max(bounds_of(b)[2] for b in domains), max(bounds_of(b)[3] for b in domains)]
+            geographic_bounds = [Transformer.from_crs(crs_of(domain), 4326, always_xy=True)
+                                 .transform_bounds(*bounds_of(domain), densify_pts=21, errcheck=True)
+                                 for domain in domains]
+            bounds = [min(b[0] for b in geographic_bounds), min(b[1] for b in geographic_bounds),
+                      max(b[2] for b in geographic_bounds), max(b[3] for b in geographic_bounds)]
             network = sources.network(settings.get('waterways', []), natural_only=True,
                                       reverse=settings.get('reverse_waterways', []))
             if network.nodes:
@@ -113,7 +118,8 @@ def construct(recipe, files):
                 grid = prepare(paths(settings['primary']), bounds,
                                paths(settings.get('secondary', [])),
                                sources.path({'source': settings['height_offset']})
-                               if 'height_offset' in settings else None)
+                               if 'height_offset' in settings else None,
+                               bounds_crs=crs_of(domain))
                 terrain_seconds = time.monotonic() - tick
                 step = time.monotonic()
                 seeds, seed_report = seed_grid(network, assigned, grid)
@@ -155,7 +161,8 @@ def construct(recipe, files):
                 labels = destinations(flow, seeds, terminals)
                 drainage_seconds = time.monotonic() - step
                 step = time.monotonic()
-                graph.add_grid(grid, labels, settings['interfaces'], output_bounds)
+                graph.add_grid(grid, labels, settings['interfaces'], output_bounds,
+                               bounds_crs=crs_of(domain))
                 for index, flow_settings in required:
                     curve, receipt = flow_to_point(
                         grid, flow, labels, sources.point(flow_settings['point'], lines),
@@ -165,6 +172,7 @@ def construct(recipe, files):
                     report['connections'][str(index)] = receipt
                 domain_reports.append({
                     'bounds': bounds, 'output_bounds': output_bounds, 'shape': list(labels.shape),
+                    'bounds_crs': crs_of(domain),
                     'secondary_cells': grid.secondary_cells,
                     'unknown_cells': int((labels < 0).sum()),
                     'raised_cells': int((working > grid.elevation).sum()),

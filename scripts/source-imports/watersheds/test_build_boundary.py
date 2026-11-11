@@ -11,7 +11,7 @@ import zipfile
 
 import numpy as np
 from osgeo import gdal
-from pyproj import CRS
+from pyproj import CRS, Transformer
 import shapefile
 
 from watersheds.build_boundary import build_boundary, construct
@@ -82,6 +82,18 @@ class ConstructionTests(unittest.TestCase):
             self.assertEqual(geometry, original)
             self.assertEqual(report['terrain']['ridge']['domains'][0]['output_bounds'],
                              [0, 0, .006, .006])
+
+    def test_projected_analysis_bounds_use_geographic_sources_and_joins(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            original = construct(recipe, files)[0]
+            bounds = Transformer.from_crs(4326, 3857, always_xy=True).transform_bounds(
+                .00001, .00001, .00599, .00599)
+            recipe['terrains']['ridge']['domains'] = [
+                {'crs': 'EPSG:3857', 'bounds': bounds, 'output_bounds': bounds}]
+            geometry, report = construct(recipe, files)
+            self.assertEqual(geometry, original)
+            self.assertEqual(report['terrain']['ridge']['domains'][0]['bounds_crs'], 'EPSG:3857')
 
     def test_provider_ocean_mask_ends_the_divide_at_land_outlets(self):
         with tempfile.TemporaryDirectory() as directory:
