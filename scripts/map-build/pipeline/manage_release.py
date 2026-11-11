@@ -344,8 +344,7 @@ def main():
             with closing(physical.make_r2_client(endpoint)) as storage:
                 if args.action == 'stage':
                     stage(db, storage, args.bucket, args.candidate, bundle, manifest)
-                    print(f'Preview: /{version(args.candidate)}-rc')
-                    print(f'Exact candidate: /{prefix(args.candidate)}/index.html')
+                    print(f'Preview: /{prefix(args.candidate)}/index.html')
                 else:
                     publish(db, storage, args.candidate)
                     print(f'Published {args.candidate} at /')
