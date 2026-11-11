@@ -30,13 +30,15 @@ def validate_recipe(recipe):
     routes = recipe.get('routes')
     if not isinstance(routes, list) or not routes:
         raise ValueError('missing S-130 route selections')
-    ids = set()
+    ids, endpoint_ids = set(), set()
     for route in routes:
+        required = {'route_id', 'construction_line_id', 'reverse', 'endpoint_names'}
         if (not isinstance(route, dict)
-                or set(route) != {'route_id', 'construction_line_id', 'reverse', 'endpoint_names'}
+                or not required <= set(route) <= required | {'extend_to_south_grid_edge', 'endpoint_ids'}
                 or any(not isinstance(route.get(key), str) or not route[key].strip()
                        for key in ('route_id', 'construction_line_id'))
                 or type(route.get('reverse')) is not bool
+                or type(route.get('extend_to_south_grid_edge', False)) is not bool
                 or not isinstance(route.get('endpoint_names'), list)
                 or len(route['endpoint_names']) != 2
                 or any(not isinstance(name, str) or not name.strip() for name in route['endpoint_names'])):
@@ -44,6 +46,13 @@ def validate_recipe(recipe):
         if route['route_id'] in ids:
             raise ValueError('duplicate route selection')
         ids.add(route['route_id'])
+        selected_ids = route.get('endpoint_ids',
+                                 [f"{route['route_id']}-endpoint-{i}" for i in range(2)])
+        if (not isinstance(selected_ids, list) or len(selected_ids) != 2
+                or any(not isinstance(ident, str) or not ident.strip() for ident in selected_ids)
+                or len(set(selected_ids)) != 2 or endpoint_ids.intersection(selected_ids)):
+            raise ValueError('invalid or duplicate endpoint IDs')
+        endpoint_ids.update(selected_ids)
 
 
 def coordinate_pair(values):
@@ -101,6 +110,10 @@ def extract_routes(path, archive_sha256, recipe):
             raise ValueError('antimeridian-crossing rhumb unsupported')
         if selected['reverse']:
             ends.reverse()
+        extend = selected.get('extend_to_south_grid_edge', False)
+        if extend and Decimal(ends[0][1]) != Decimal(ends[1][1]):
+            raise ValueError('south-grid extension requires a meridian')
+        southern = min(range(2), key=lambda index: Decimal(ends[index][0]))
 
         # Some source line endpoints have no separate ContributingPoint record.
         # Source point and line coordinates can differ in their final decimal digit.
@@ -122,7 +135,8 @@ def extract_routes(path, archive_sha256, recipe):
                               for a, b in zip(numeric, location, strict=True))]
             if len(matches) > 1:
                 raise ValueError('ambiguous contributing endpoint')
-            endpoint_id = f'{route_id}-endpoint-{ordinal}'
+            endpoint_id = selected.get('endpoint_ids',
+                                       [f'{route_id}-endpoint-{i}' for i in range(2)])[ordinal]
             evidence = {'construction_line_id': source_id, 'gml_sha256': recipe['gml_sha256'],
                         'archive_sha256': archive_sha256, 'source_axis_order': 'latitude longitude'}
             if matches:
@@ -131,6 +145,8 @@ def extract_routes(path, archive_sha256, recipe):
             derivation = dict(method='source_decimal_exact_rational', **{
                 axis + '_fraction': [value.numerator, value.denominator]
                 for axis, value in zip(('latitude', 'longitude'), fractions, strict=True)})
+            if extend and ordinal == southern:
+                derivation['method'] = 'grid_south_edge'
             endpoints.append(dict(endpoint_id=endpoint_id, name=name, latitude=latitude,
                                   longitude=longitude, derivation=derivation, evidence=evidence))
             points.append(dict(ordinal=ordinal, endpoint_id=endpoint_id))

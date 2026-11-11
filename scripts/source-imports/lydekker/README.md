@@ -15,10 +15,10 @@ This is a schematic, approximate geographic interpretation, not a surveyed line 
 Use Python 3 with NumPy and SciPy. The original run used NumPy 2.3.5 and SciPy 1.17.0. Export the inset observation from Neon research `atlas.geographic_line_observations`, line ID `lydekker-anu-figure81-inset-trace-v1`, as JSON with its `geometry` field, and store it outside the repository. The code checks the SHA-256 of that geometry serialized with sorted keys and compact JSON separators: `fce7c71b71666d70dae5265eb1fee7102beffdbc37837d93266e8b96c65c1c1e`. The fitted overview transform is recorded directly in the derivation code so a separate local file is not needed. The original source PDF is registered in `atlas.source_assets` under `anu-west-new-guinea-lydekker-ch08`, version `2025-4bcc38d0da4f-official`, and archived in R2 at `worldatlas/sources/anu-press/west-new-guinea/2025/official-ch08-4bcc38d0da4f.pdf`.
 
 ```sh
-python scripts/raw-to-structured/lydekker/derive_lydekker.py \
+python scripts/source-imports/lydekker/derive_lydekker.py \
   --observation /external/line-observation.json \
   --output /external/lydekker-review.geojson
-python -m unittest discover -s scripts/raw-to-structured/lydekker -p 'test_*.py'
+python -m unittest discover -s scripts/source-imports/lydekker -p 'test_*.py'
 ```
 
 On the original inputs and software versions, the generated 10,703 coordinate pairs exactly match `smoothed-candidate-v2.json` (file SHA-256 `8b6fb89e0e329095a1cb6a45c1c24de431f29b93b9a238311d3fcd2cd6a8392f`), although this program emits a different GeoJSON wrapper. The original candidate and its diagnostics remain external. Floating-point results may differ across dependency versions; review such changes rather than treating file hashes as geographic accuracy claims.
@@ -30,7 +30,7 @@ The resulting smoothed geometry is registered for research in `atlas.geographic_
 The project shifted the line smoothly west to put Boo Besar on the Oceania side. The displacement is centered at 1.17°S, extends 0.45° latitude on each side, and peaks at 0.30° longitude. Export the smoothed Neon observation with its `geometry` field, or use the matching GeoJSON from the smoothing command.
 
 ```sh
-python scripts/raw-to-structured/lydekker/apply_boo_adjustment.py \
+python scripts/source-imports/lydekker/apply_boo_adjustment.py \
   --observation /external/lydekker-review.geojson \
   --output /external/lydekker-boo-east.geojson
 ```

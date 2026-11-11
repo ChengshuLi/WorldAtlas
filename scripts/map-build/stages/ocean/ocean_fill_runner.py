@@ -74,7 +74,8 @@ def endpoint_coordinate(endpoint, axis):
     if not isinstance(derivation, dict):
         raise ValueError('invalid endpoint derivation')
     if derivation.get('method') not in ('source_dms_exact_rational',
-                                      'source_decimal_exact_rational', 'preserved_grid_edge'):
+                                      'source_decimal_exact_rational', 'preserved_grid_edge',
+                                      'grid_south_edge'):
         return num(raw)
     pair = derivation.get(axis + '_fraction')
     if (not isinstance(pair, list) or len(pair) != 2 or any(type(x) is not int for x in pair)
@@ -163,6 +164,11 @@ def load_config(snapshot,width,height,allow_draft=False,software_versions=None,*
             if not -90 <= reference <= 90:
                 raise ValueError('invalid coast endpoint reference latitude')
             lat = float(coast_edge_latitude(physical, Fraction(str(e['longitude'])), reference))
+        elif derivation.get('method') == 'grid_south_edge':
+            reference = endpoint_coordinate(e,'latitude')
+            lat = float(Fraction(90) - Fraction(height * 360, width))
+            if not lat <= reference < lat + step:
+                raise ValueError('south-grid endpoint must lie in the final grid row')
         else:
             lat = endpoint_coordinate(e,'latitude')
         if not -180<=lon<=180 or not (90-height*step)<=lat<=90:raise ValueError(f'endpoint outside grid: {ident}')

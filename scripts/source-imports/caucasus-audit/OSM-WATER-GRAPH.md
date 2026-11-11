@@ -18,4 +18,4 @@ attribution and ODbL terms apply. Keep source extracts, coordinates and
 outputs in the project's data stores.
 
 Requires Shapely 2 and pyproj. Run synthetic graph and CRS validation tests
-with `python -m unittest discover -s scripts/raw-to-structured/caucasus-audit -p 'test_osm_water_graph.py'`.
+with `python -m unittest discover -s scripts/source-imports/caucasus-audit -p 'test_osm_water_graph.py'`.

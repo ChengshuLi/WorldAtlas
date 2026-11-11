@@ -39,6 +39,13 @@ table. Each record version contains a JSON object like this:
 direction. Coordinates come from the construction line itself and retain their
 source decimal precision. `max_step_km` tells the map builder how closely to
 sample each spherical rhumb route; it must be greater than zero and at most 1.
+Endpoint IDs default to `ROUTE_ID-endpoint-0` and `ROUTE_ID-endpoint-1`. To update
+existing endpoints with different IDs, supply `endpoint_ids` in the chosen order.
+
+A meridian selection can set `extend_to_south_grid_edge` to `true`. Its southern
+endpoint keeps the source coordinate in Neon and uses `grid_south_edge` as its
+derivation. The map builder extends it to the outer edge of the final grid row.
+It requires the source endpoint to fall within that row.
 
 Add selections to the list to process more lines from the same dataset.
 To change an immutable construction record, insert a new version.
@@ -51,7 +58,7 @@ Run from the repository root, replacing the uppercase placeholders and local
 work path with your settings:
 
 ```bash
-PYTHONPATH=scripts/raw-to-structured python3 -m iho.build_routes \
+PYTHONPATH=scripts/source-imports python3 -m iho.build_routes \
   --recipe CONSTRUCTION_ID VERSION \
   --revision DECISION_REVISION \
   --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com \
@@ -68,8 +75,7 @@ Unselected routes are left in place. Evidence records the construction record,
 raw source, GML line IDs, and checksums.
 
 Endpoints carry exact coordinate fractions. The map builder uses those fractions
-when constructing the final route. This importer does not calculate coast or
-grid-edge adjustments; those are separate geographic decisions.
+when constructing the final route and resolves the selected grid-edge rule.
 
 ## Tests
 
@@ -77,8 +83,8 @@ Run these tools' tests, including the common source helpers and OSM regression
 tests, from the repository root:
 
 ```bash
-PYTHONPATH=scripts/raw-to-structured python3 -m unittest discover \
-  -s scripts/raw-to-structured -p 'test_*.py'
+PYTHONPATH=scripts/source-imports python3 -m unittest discover \
+  -s scripts/source-imports -p 'test_*.py'
 ```
 
 Set `WORLDATLAS_TEST_DATABASE_URL` to a disposable local PostgreSQL database with

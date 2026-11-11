@@ -45,7 +45,7 @@ file. It writes GeoJSON and prints the point count and checksum. The output file
 must not already exist:
 
 ```bash
-PYTHONPATH=scripts/raw-to-structured python3 -m osm.ways \
+PYTHONPATH=scripts/source-imports python3 -m osm.ways \
   /path/to/manifest.json \
   /path/to/source-directory \
   /path/to/boundary.geojson
@@ -60,7 +60,7 @@ Run from the repository root, replacing the uppercase placeholders with your
 Neon record IDs, version, and R2 account ID, and choosing a local work directory:
 
 ```bash
-PYTHONPATH=scripts/raw-to-structured python3 -m osm.build_boundary \
+PYTHONPATH=scripts/source-imports python3 -m osm.build_boundary \
   --recipe CONSTRUCTION_ID VERSION \
   --revision DECISION_REVISION \
   --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com \
@@ -115,8 +115,8 @@ same command.
 Run the tests from the repository root:
 
 ```bash
-PYTHONPATH=scripts/raw-to-structured python3 -m unittest discover \
-  -s scripts/raw-to-structured -p 'test_*.py'
+PYTHONPATH=scripts/source-imports python3 -m unittest discover \
+  -s scripts/source-imports -p 'test_*.py'
 ```
 
 To include the database write tests, set `WORLDATLAS_TEST_DATABASE_URL` to a

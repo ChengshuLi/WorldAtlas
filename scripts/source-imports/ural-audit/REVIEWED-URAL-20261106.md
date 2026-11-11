@@ -14,7 +14,7 @@ configuration. Run the input preparation with Python 3.11 or later, boto3 and
 psycopg.
 
 ```bash
-python3 scripts/raw-to-structured/ural-audit/prepare_v8_boundary_inputs.py \
+python3 scripts/source-imports/ural-audit/prepare_v8_boundary_inputs.py \
   --r2-endpoint "$R2_ENDPOINT" --work-dir "$URAL_WORK"
 ```
 
@@ -23,7 +23,7 @@ rasterio 1.4.3 with GDAL 3.9.3, pyproj 3.6.1, Shapely 2.0.7, Numba 0.60.0 and
 pyshp 2.3.1. Run the replay with that environment. Use a new output directory.
 
 ```bash
-python3 scripts/raw-to-structured/ural-audit/reproduce_v8_boundary.py \
+python3 scripts/source-imports/ural-audit/reproduce_v8_boundary.py \
   --recipe "$URAL_WORK/recipe.json" \
   --recipe-sha256 1e485322c45a8b135e998845c5aa77d856a6d215cd420504d33a8635e8ebc429 \
   --inputs "$URAL_WORK/inputs" --workdir "$URAL_WORK/replay"

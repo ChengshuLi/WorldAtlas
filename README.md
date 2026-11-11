@@ -10,7 +10,7 @@ streams from the `worldatlas` R2 bucket.
 
 ## Pipeline code
 
-- [Prepare structured geography](scripts/raw-to-structured/) from raw sources. These tools reconstruct and verify boundary geometry and other inputs for review and registration in Neon.
+- [Import source geography](scripts/source-imports/) from raw sources. These tools reconstruct and verify boundary geometry and other inputs for review and registration in Neon.
 - [Build the map](scripts/map-build/pipeline/README.md) from selected Neon records and the raw R2 inputs the build reads directly. This includes the physical land and water grid, land and water assignment, and final composition.
 
 Neon records the sources and reasoning for individual geographic decisions. The code guides explain how to produce and use those records.

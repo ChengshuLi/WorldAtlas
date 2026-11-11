@@ -128,6 +128,15 @@ class OceanRunnerTests(unittest.TestCase):
   self.assertEqual(r.endpoint_coordinate(e,'longitude'),float(-904279190236343/100000000000000))
   e['derivation']['longitude_fraction']=[1,2]
   with self.assertRaisesRegex(ValueError,'disagrees'):r.endpoint_coordinate(e,'longitude')
+ def test_south_grid_endpoint_uses_grid_dimensions(self):
+  s=self.snapshot()
+  for e in s['endpoints']:
+   if e['endpoint_id'].startswith('bottom'):
+    e['latitude']='-89';e['derivation']={'method':'grid_south_edge','latitude_fraction':[-89,1],'longitude_fraction':[int(e['longitude']),1]}
+  paths=r.load_config(s,8,4)[1]
+  self.assertTrue(all(path[-1][1]==4 for path in paths))
+  s['endpoints'][1]['latitude']='0';s['endpoints'][1]['derivation']['latitude_fraction']=[0,1]
+  with self.assertRaisesRegex(ValueError,'final grid row'):r.load_config(s,8,4)
 
  def test_requires_explicit_snapshot_opt_in(self):
   import sys

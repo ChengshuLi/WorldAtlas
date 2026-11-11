@@ -8,6 +8,7 @@ import tempfile
 import unittest
 from unittest.mock import Mock
 
+import psycopg
 from psycopg.types.json import Jsonb
 
 from iho.build_routes import build_routes, save_routes
@@ -19,8 +20,6 @@ from iho.test_s130 import fixture, GML
                      'set WORLDATLAS_TEST_DATABASE_URL to a local database with the initial schema')
 class BuildTests(unittest.TestCase):
     def setUp(self):
-        import psycopg
-
         self.database = psycopg.connect(os.environ['WORLDATLAS_TEST_DATABASE_URL'])
         self.addCleanup(self.database.close)
         self.addCleanup(self.database.rollback)
@@ -96,9 +95,43 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(evidence['construction']['recipe_version'], '2')
         self.assertEqual(self.snapshot('__iho_b'), other)
 
-    def test_failed_point_link_rolls_back_all_records(self):
-        import psycopg
+    def test_replaced_endpoint_drops_old_selector_and_point_id(self):
+        self.build()
+        self.database.execute("UPDATE atlas.decision_endpoints SET evidence=evidence || "
+                              "'{\"selector\":{},\"point_id\":\"old\",\"note\":\"keep\"}' "
+                              "WHERE revision='__iho_a' AND endpoint_id='route-b-endpoint-1'")
+        self.build()
+        evidence = self.database.execute("SELECT evidence FROM atlas.decision_endpoints "
+                                         "WHERE revision='__iho_a' AND endpoint_id='route-b-endpoint-1'").fetchone()[0]
+        self.assertEqual(evidence['note'], 'keep')
+        self.assertNotIn('selector', evidence)
+        self.assertNotIn('point_id', evidence)
 
+    def test_snapshot_exports_route_and_endpoint_sources(self):
+        import importlib.util
+
+        path = Path(__file__).resolve().parents[2] / 'map-build/decision-export/draft/export_draft.py'
+        spec = importlib.util.spec_from_file_location('iho_test_export', path)
+        exporter = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(exporter)
+        self.build()
+        # Exercise the real export query against the transaction's source records.
+        raw = self.database.execute((path.parent / 'query.sql').read_text(),
+                                    {'revision': '__iho_a'}).fetchone()[0]
+        snapshot = exporter.parse_snapshot(raw)
+        self.assertEqual([(s['source_id'], s['version']) for s in snapshot['sources']],
+                         [('iho-test', '1')])
+        digest = self.database.execute("SELECT sha256 FROM atlas.source_assets "
+                                       "WHERE source_id='iho-test' AND version='2'").fetchone()[0]
+        self.database.execute("UPDATE atlas.decision_endpoints SET evidence=%s "
+                              "WHERE revision='__iho_a' AND endpoint_id='route-b-endpoint-1'",
+                              (Jsonb({'source_refs': [dict(source_id='iho-test', version='2', sha256=digest)]}),))
+        raw = self.database.execute((path.parent / 'query.sql').read_text(),
+                                    {'revision': '__iho_a'}).fetchone()[0]
+        snapshot = exporter.parse_snapshot(raw)
+        self.assertEqual([s['version'] for s in snapshot['sources']], ['1', '2'])
+
+    def test_failed_point_link_rolls_back_all_records(self):
         self.build()
         before = self.snapshot()
         result = extract_routes(self.path, self.digest, self.recipe)

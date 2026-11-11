@@ -66,6 +66,31 @@ class ExtractTests(unittest.TestCase):
         self.assertEqual((last['latitude'], last['longitude']), ('-60', '60'))
         self.assertNotIn('point_id', last['evidence'])
 
+    def test_existing_endpoint_ids_are_preserved(self):
+        self.recipe['routes'][0]['endpoint_ids'] = ['existing-start', 'existing-end']
+        result = self.extract()
+        self.assertEqual([p['endpoint_id'] for p in result['routes'][0]['points']],
+                         ['existing-start', 'existing-end'])
+        self.assertEqual(result['endpoints'][0]['endpoint_id'], 'existing-start')
+
+    def test_endpoint_ids_must_be_unique_and_nonempty(self):
+        for ids in (['same', 'same'], ['', 'end'], ['start'], ['route-b-endpoint-0', 'end']):
+            self.recipe['routes'][0]['endpoint_ids'] = ids
+            with self.subTest(ids=ids), self.assertRaisesRegex(ValueError, 'endpoint IDs'):
+                self.extract()
+
+    def test_south_grid_rule_preserves_the_raw_coordinate(self):
+        self.recipe['routes'][1]['extend_to_south_grid_edge'] = True
+        endpoint = self.extract()['endpoints'][-1]
+        self.assertEqual(endpoint['latitude'], '-60')
+        self.assertEqual(endpoint['derivation']['latitude_fraction'], [-60, 1])
+        self.assertEqual(endpoint['derivation']['method'], 'grid_south_edge')
+
+    def test_south_grid_extension_requires_a_meridian(self):
+        self.recipe['routes'][0]['extend_to_south_grid_edge'] = True
+        with self.assertRaisesRegex(ValueError, 'requires a meridian'):
+            self.extract()
+
     def test_wrong_archive_checksum(self):
         with self.assertRaisesRegex(ValueError, 'archive SHA-256'):
             extract_routes(self.path, '0' * 64, self.recipe)

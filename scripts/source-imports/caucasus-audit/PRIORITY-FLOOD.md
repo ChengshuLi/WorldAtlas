@@ -20,4 +20,4 @@ project's data stores, not this source directory.
 Pass the WGS84 unrotated raster affine transform and an explicit EPSG:4326 CRS as the final trace arguments. The function rejects projected CRSs, nonfinite transforms and out-of-bounds longitude/latitude extents; the former fixed-distance and bare-affine interfaces are no longer supported. Ties follow iteration order.
 
 Requires NumPy, SciPy and pyproj. Run the synthetic pit, invalid-neighbor and validation
-tests with `python -m unittest discover -s scripts/raw-to-structured/caucasus-audit -p 'test_priority_flood.py'`.
+tests with `python -m unittest discover -s scripts/source-imports/caucasus-audit -p 'test_priority_flood.py'`.

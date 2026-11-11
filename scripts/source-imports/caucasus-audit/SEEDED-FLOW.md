@@ -18,5 +18,5 @@ flat routing, mask gaps and crop size can materially affect the result. An
 assigned model label is not proof of a stream, named basin, or selected boundary.
 
 Requires numpy, scipy and pyproj. Run `python -m unittest discover -s
-scripts/raw-to-structured/caucasus-audit -p 'test_seeded_flow_basins.py'`. Input and output data
+scripts/source-imports/caucasus-audit -p 'test_seeded_flow_basins.py'`. Input and output data
 and geographic decisions belong in the project's data stores.

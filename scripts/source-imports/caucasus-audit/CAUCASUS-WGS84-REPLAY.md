@@ -27,7 +27,7 @@ The recipe names the exact R2 raw objects: HydroBASINS Europe level 12, the pinn
 
 ## Replay
 
-Use the current PR4 versions of the scripts in `scripts/raw-to-structured/caucasus-audit` and a Python environment with NumPy, SciPy, Rasterio, Shapely, pyproj and pyshp. After exporting the Neon recipe and downloading the pinned R2 objects:
+Use the current PR4 versions of the scripts in `scripts/source-imports/caucasus-audit` and a Python environment with NumPy, SciPy, Rasterio, Shapely, pyproj and pyshp. After exporting the Neon recipe and downloading the pinned R2 objects:
 
 ```
 python caucasus_geodesic_replay.py \

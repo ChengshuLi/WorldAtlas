@@ -80,6 +80,18 @@ class DraftExportTest(unittest.TestCase):
         shuffled=copy.deepcopy(d); shuffled['endpoints'].reverse()
         self.assertEqual(canonical_bytes(read(d)), canonical_bytes(read(shuffled)))
         raw=canonical_bytes(read(d)); self.assertEqual(canonical_bytes(parse_snapshot(raw)),raw)
+    def test_endpoint_and_route_source_refs_match_exported_sources(self):
+        for field in ('endpoints','routes'):
+            d=sample()
+            row=d['endpoints'][0] if field=='endpoints' else {'route_id':'r','points':[]}
+            if field=='routes':d['routes'].append(row)
+            ref={'source_id':'source','version':'v1','sha256':D}
+            row['evidence']={'source_refs':[ref]}
+            read(d)
+            ref['source_id']='missing'
+            with self.assertRaisesRegex(ValueError,'source reference'):read(d)
+            ref['source_id']='source';ref['sha256']='b'*64
+            with self.assertRaisesRegex(ValueError,'source reference'):read(d)
     def test_database_sql_is_select_only_and_scoped(self):
         sql=(Path(__file__).parent/'query.sql').read_text()
         self.assertTrue(sql.startswith('WITH RECURSIVE')); self.assertIn('%(revision)s',sql)

@@ -49,6 +49,12 @@ def parse_snapshot(raw):
     by_asset = {(a['source_id'],a['version']): a for a in assets}
     if any(any(s[k] != by_asset[(s['source_id'],s['version'])][k] for k in ('sha256','size_bytes','r2_bucket','r2_key')) for s in sources): raise ValueError('source lineage mismatch')
     if any(not HEX.fullmatch(s['sha256']) for s in assets): raise ValueError('invalid source digest')
+    source_by_id = {(s['source_id'], s['version']): s for s in sources}
+    for record in doc['endpoints'] + doc['routes']:
+        for ref in record.get('evidence', {}).get('source_refs', []):
+            source = source_by_id.get((ref['source_id'], ref['version']))
+            if source is None or ('sha256' in ref and ref['sha256'] != source['sha256']):
+                raise ValueError('invalid route or endpoint source reference')
     if any((f['source_id'],f['source_version']) not in sk or not HEX.fullmatch(f['geometry_sha256']) for f in features): raise ValueError('invalid feature source')
     feature_by_id = {f['feature_id']: f for f in features}
     entity_ids = {row['id'] for row in doc['entities']}; unique(doc['entities'], ('id',)); unique(doc['category_bindings'], ('code',))

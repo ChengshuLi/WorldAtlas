@@ -28,7 +28,7 @@ def save_routes(database, revision, result, source, recipe):
                 'VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (revision,endpoint_id) '
                 'DO UPDATE SET name=EXCLUDED.name,longitude=EXCLUDED.longitude,'
                 'latitude=EXCLUDED.latitude,derivation=EXCLUDED.derivation,'
-                'evidence=atlas.decision_endpoints.evidence || EXCLUDED.evidence',
+                "evidence=(atlas.decision_endpoints.evidence - 'selector' - 'point_id') || EXCLUDED.evidence",
                 (revision, endpoint['endpoint_id'], endpoint['name'], endpoint['longitude'],
                  endpoint['latitude'], Jsonb(endpoint['derivation']),
                  Jsonb(dict(endpoint['evidence'], **common))),
