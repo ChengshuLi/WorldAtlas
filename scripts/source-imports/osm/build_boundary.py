@@ -18,6 +18,7 @@ def save_boundary(database, revision, geometry, source, recipe):
     digest = hashlib.sha256(raw).hexdigest()
     provenance = {
         'basis': recipe['basis'],
+        'lineage_status': 'complete',
         'construction': {
             'processor': 'osm.ways.assemble',
             'recipe_id': recipe['recipe_id'],
@@ -41,14 +42,14 @@ def save_boundary(database, revision, geometry, source, recipe):
         )
         database.execute(
             "DELETE FROM atlas.decision_mainland_boundary_sources "
-            "WHERE revision=%s AND boundary_id=%s AND relationship='geometry_source' "
+            "WHERE revision=%s AND boundary_id=%s AND relationship='construction_input' "
             "AND (source_id,source_version)<>(%s,%s)",
             (revision, recipe['boundary_id'], source['source_id'], source['version']),
         )
         database.execute(
             "INSERT INTO atlas.decision_mainland_boundary_sources "
             "(revision,boundary_id,source_id,source_version,relationship) "
-            "VALUES (%s,%s,%s,%s,'geometry_source') "
+            "VALUES (%s,%s,%s,%s,'construction_input') "
             "ON CONFLICT (revision,boundary_id,source_id,source_version) "
             "DO UPDATE SET relationship=EXCLUDED.relationship",
             (revision, recipe['boundary_id'], source['source_id'], source['version']),

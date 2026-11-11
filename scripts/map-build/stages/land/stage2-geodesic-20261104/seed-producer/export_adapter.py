@@ -70,7 +70,7 @@ def boundary_records(snapshot):
    if not relationship or not src or not lin or key in derived_keys or lin.get('kind')!='raw' or not isinstance(lin.get('provider'),str) or not lin['provider'] or not isinstance(lin.get('source_uri'),str) or not lin['source_uri'] or any(src.get(k)!=lin.get(k) for k in ('sha256','r2_bucket','r2_key','size_bytes')) or not re.fullmatch('[0-9a-f]{64}',str(src.get('sha256'))) or not src.get('r2_bucket') or not src.get('r2_key') or type(src.get('size_bytes')) is not int or src['size_bytes']<=0:raise ValueError('boundary source is not pinned raw R2 asset')
    if relationship==CONSTRUCTION_RELATIONSHIP:
     prov=lin.get('provenance')
-    if not isinstance(prov,dict) or not isinstance(prov.get('origin'),str) or not prov['origin'] or prov.get('representation')!='provider_original':raise ValueError('construction source is not an identified provider original')
+    if not isinstance(prov,dict) or not isinstance(prov.get('origin'),str) or not prov['origin'] or prov.get('representation') not in ('provider_original','provider_original_bundle'):raise ValueError('construction source is not an identified provider original')
     construction_count+=1
    clean.append(ref);qualified.append({**ref,'relationship':relationship,'role':'construction_input' if relationship==CONSTRUCTION_RELATIONSHIP else 'supporting_research_evidence'});source_out[key]={'kind':'raw','sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'size_bytes':src['size_bytes'],'origin':(lin.get('provenance') or {}).get('origin')}
   if set(relmap)!={(x['source_id'],x['version']) for x in clean} or len(clean)!=len(relmap):raise ValueError('boundary source relationship mismatch')

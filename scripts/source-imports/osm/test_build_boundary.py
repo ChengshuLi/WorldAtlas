@@ -60,7 +60,7 @@ class DatabaseTest(unittest.TestCase):
                 "(source_id,version,title,kind,provider,source_uri,license_name,license_uri,"
                 "attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
                 "VALUES ('osm-test',%s,'Test','raw','Test','test:source','Test','test:license',"
-                "'Test','test',%s,%s,%s,'{}')",
+                "'Test','test',%s,%s,%s,'{\"origin\":\"test:source\",\"representation\":\"provider_original_bundle\"}')",
                 (version, version + '.zip', source['sha256'], source['size_bytes']),
             )
         self.recipe = self.add_recipe('1')
@@ -104,9 +104,9 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(provenance['construction']['recipe_id'], '__osm_recipe')
         self.assertEqual(provenance['construction']['recipe_version'], '1')
         self.assertEqual(provenance['construction']['archive_sha256'], self.source['sha256'])
-        self.assertEqual(self.links(), [('1', 'geometry_source')])
+        self.assertEqual(self.links(), [('1', 'construction_input')])
         self.assertEqual(self.build(), result)
-        self.assertEqual(self.links(), [('1', 'geometry_source')])
+        self.assertEqual(self.links(), [('1', 'construction_input')])
         self.assertEqual(self.storage.get_object.call_count, 1)
 
     def test_source_update_preserves_evidence_notes_and_other_revision(self):
@@ -120,12 +120,33 @@ class DatabaseTest(unittest.TestCase):
             "INSERT INTO atlas.decision_mainland_boundary_sources "
             "VALUES ('__osm_a','border','osm-test','evidence','supporting_evidence')")
         self.build(version='2')
-        self.assertEqual(self.links(), [('2', 'geometry_source'), ('evidence', 'supporting_evidence')])
+        self.assertEqual(self.links(), [('2', 'construction_input'), ('evidence', 'supporting_evidence')])
         self.assertEqual(self.boundary()[2]['review_note'], 'keep me')
         self.assertEqual(self.boundary()[0]['coordinates'], [[0.0, 0.0], [2.0, 2.0]])
         self.assertNotEqual(self.boundary()[1], before[1])
         self.assertEqual(self.boundary()[2]['construction']['recipe_version'], '2')
         self.assertEqual(self.boundary('__osm_b'), before)
+
+    def test_imported_boundary_is_consumable_by_map_builder(self):
+        import importlib.util
+        import sys
+        from unittest.mock import patch
+
+        self.build()
+        scripts = Path(__file__).resolve().parents[2]
+        query = scripts / 'map-build/land/mainland-l2-draft/query-stage2-selected.sql'
+        raw = self.database.execute(query.read_text(), {'revision': '__osm_a'}).fetchone()[0]
+        path = scripts / 'map-build/stages/land/stage2-geodesic-20261104/seed-producer/export_adapter.py'
+        spec = importlib.util.spec_from_file_location('osm_test_export_adapter', path)
+        adapter = importlib.util.module_from_spec(spec)
+        with patch.object(sys, 'path', [str(path.parent), *sys.path]):
+            spec.loader.exec_module(adapter)
+        revision, registry, records, sources = adapter.boundary_records(json.loads(raw))
+        self.assertEqual((revision, registry), ('__osm_a', '__osm_entities'))
+        boundary = records['boundary', 'border']
+        self.assertEqual(boundary['lineage_status'], 'complete')
+        self.assertEqual(boundary['qualified_source_refs'][0]['role'], 'construction_input')
+        self.assertEqual(sources['osm-test', '1']['sha256'], self.source['sha256'])
 
     def test_geometry_can_change_without_release_pin(self):
         self.build()
@@ -183,7 +204,7 @@ class DatabaseTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'expected geometry'):
             self.build(expected='0' * 64)
         self.assertEqual(self.boundary(), before)
-        self.assertEqual(self.links(), [('1', 'geometry_source')])
+        self.assertEqual(self.links(), [('1', 'construction_input')])
 
     def test_failed_source_link_rolls_back_geometry_and_links(self):
         import psycopg
@@ -195,7 +216,7 @@ class DatabaseTest(unittest.TestCase):
                           {'type': 'LineString', 'coordinates': [[0, 0], [2, 2]]},
                           dict(self.source, version='missing'), self.recipe)
         self.assertEqual(self.boundary(), before)
-        self.assertEqual(self.links(), [('1', 'geometry_source')])
+        self.assertEqual(self.links(), [('1', 'construction_input')])
 
 
 if __name__ == '__main__':

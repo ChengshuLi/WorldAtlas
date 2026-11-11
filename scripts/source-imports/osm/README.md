@@ -114,6 +114,8 @@ same command.
 
 Run the tests from the repository root:
 
+The map-builder integration test also uses GDAL's Python bindings.
+
 ```bash
 PYTHONPATH=scripts/source-imports python3 -m unittest discover \
   -s scripts/source-imports -p 'test_*.py'
