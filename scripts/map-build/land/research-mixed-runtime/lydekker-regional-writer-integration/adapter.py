@@ -8,8 +8,6 @@ import copy,hashlib,json,math,re
 
 BASES={'whole_component_line_side','source_anchored_nearest_main_island','inferred_source_extent_group_convention'}
 RULE='lydekker-whole-island-regional-v1'
-LINE='lydekker-anu-figure81-regional-boo-east-v2'
-LINE_SHA='87514ff08498fa2e2a27bfe2f0a1026511b3c5f01acfbaecbf1f753392c33655'
 
 def need(ok,msg):
     if not ok: raise ValueError(msg)
@@ -29,7 +27,11 @@ def merge_live_claims(policy,compiled,selected,regional,*,snapshot_sha256,compon
          hashlib.sha256(json.dumps(policy,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()).hexdigest()==policy_canonical_sha256,'policy definition pin mismatch')
     need(isinstance(policy,dict) and policy.get('rule_set_id')==RULE and policy.get('status')=='selected_for_research','regional rule not selected for research')
     need(policy.get('decision_revision')==compiled.get('revision'),'decision revision mismatch')
-    need(policy.get('line')=={'line_id':LINE,'geometry_sha256':LINE_SHA} and regional.get('line_id')==LINE and regional.get('geometry_sha256')==LINE_SHA,'line pin mismatch')
+    line=policy.get('line')
+    need(isinstance(line,dict) and set(line)=={'line_id','geometry_sha256'} and
+         isinstance(line['line_id'],str) and bool(line['line_id'].strip()) and
+         isinstance(line['geometry_sha256'],str) and re.fullmatch(r'[0-9a-f]{64}',line['geometry_sha256']) is not None and
+         all(regional.get(k)==v for k,v in line.items()),'line pin mismatch')
     need(isinstance(component_sha256,dict) and set(component_sha256)=={'rows','runs'} and regional.get('component_input_sha256')==component_sha256 and
          policy['evidence'].get('component_rows_sha256')==component_sha256['rows'] and policy['evidence'].get('component_runs_sha256')==component_sha256['runs'],'component generation mismatch')
     need(isinstance(selected,dict) and isinstance(regional,dict) and isinstance(regional.get('proposals'),dict) and isinstance(regional.get('review'),dict),'invalid claim sets')
@@ -60,7 +62,7 @@ def merge_live_claims(policy,compiled,selected,regional,*,snapshot_sha256,compon
         need(p['basis'] in BASES,'selected proposal lacks source claim')
         basis=p['basis']
         if basis=='whole_component_line_side':
-            evidence={'line_id':LINE,'geometry_sha256':LINE_SHA}
+            evidence=dict(line)
         elif basis=='source_anchored_nearest_main_island':
             evidence=regional.get('satellites',{}).get(root)
             need(isinstance(evidence,dict) and isinstance(evidence.get('source_id'),str) and evidence['source_id'] and
@@ -80,7 +82,7 @@ def merge_live_claims(policy,compiled,selected,regional,*,snapshot_sha256,compon
         claims[root]=[{'affiliation_id':RULE,'entry_ids':[RULE],'code':p['code']}]
         trace[root]={'basis':basis,'code':p['code'],'evidence':evidence,'policy_canonical_sha256':policy_canonical_sha256}
     return {'component_claims':claims,'regional_proposal_trace':trace,'withheld_selected_pending_roots':sorted(withheld),'synthetic_affiliation_id':RULE,'blocked_region_roots':sorted(blocked_region_roots),
-            'provenance':{'policy_canonical_sha256':policy_canonical_sha256,'decision_snapshot_sha256':snapshot_sha256,'component_input_sha256':dict(component_sha256),'line_id':LINE,'geometry_sha256':LINE_SHA},
+            'provenance':{'policy_canonical_sha256':policy_canonical_sha256,'decision_snapshot_sha256':snapshot_sha256,'component_input_sha256':dict(component_sha256),**line},
             'limitations':['Caller must authenticate current source inputs, same-run freshness and pending groups.',
                            'The writer retains baseline values where new claims are withheld; this does not mark the output unassigned.',
                            'Every region-claim channel must filter blocked roots before writing.']}

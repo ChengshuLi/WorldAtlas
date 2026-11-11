@@ -6,7 +6,8 @@ catalog identifies their versions and checksums.
 
 - [`osm/`](osm/README.md): join archived OpenStreetMap ways into a boundary.
 - [`iho/`](iho/README.md): import selected IHO S-130 ocean boundary routes.
-- [`lydekker/`](lydekker/README.md): construct and adjust the Lydekker boundary.
+- [`traces/`](traces/README.md): construct final boundaries from reviewed points
+  traced from source figures.
 - [`ural-audit/`](ural-audit/README.md): reproduce the reviewed Ural boundary.
 - `caucasus-audit/`: construct and reproduce the reviewed Caucasus boundary.
 - [`source_io.py`](source_io.py): shared Neon recipe/catalog reads and verified

@@ -58,6 +58,12 @@ The preview compares with `v8.0` by default. Use `--compare-release VERSION` to
 choose another map in `atlas.map_release_objects`. Read `comparison.json` for
 the changed-cell count and category transitions.
 
+`regional_revision` selects the working regional decisions in Neon. At the start
+of a build, the runner reads that revision, its selected island rule, and its
+current boundary in one transaction. It freezes them for this run; resuming
+reuses that selection. The release catalog retains the frozen input records.
+Editing a boundary therefore needs no manual snapshot export or config-pin edit.
+
 `--work-dir` chooses and creates the local input/run directory, overriding
 `input_root`; the configuration can omit that field when using this option.
 The default output is `WORK_DIR/run`. An explicit output and `--resume` retain

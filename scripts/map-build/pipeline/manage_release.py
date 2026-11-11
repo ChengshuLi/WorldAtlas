@@ -165,6 +165,10 @@ def build_bundle(candidate, run, viewer, bundle, db):
         snapshot = identity['land_draft']['snapshot']
         verify_pins([snapshot])
         inputs['mainland_snapshot'] = Path(snapshot['path']).read_text()
+    if 'regional_decisions' in identity:
+        snapshot = identity['regional_decisions']
+        verify_pins([snapshot])
+        inputs['regional_snapshot'] = Path(snapshot['path']).read_text()
     if report['comparison']:
         verify_pins([report['comparison']])
         inputs['comparison'] = read(Path(report['comparison']['path']))

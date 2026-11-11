@@ -128,6 +128,30 @@ class Fixture(unittest.TestCase):
             self.make()
         self.assertFalse((self.root / 'run').exists())
 
+    def test_regional_decisions_are_read_together_and_frozen_for_resume(self):
+        selected = {'snapshot': {'decision_revision': {'id': 'regional'}},
+                    'policy': {'line': {'line_id': 'current', 'geometry_sha256': 'a' * 64}},
+                    'line': {'line_id': 'current', 'geometry_sha256': 'a' * 64}}
+        self.cfg['regional_revision'] = 'regional'
+        self.cfg['sources']['regional_template'] = {'json': {
+            'point_request': {'json': {}}, 'regional': {'request': {}}}}
+        config = pipeline.write(self.inputs / 'regional-request.json', self.cfg)
+        with patch.object(pipeline, 'read_regional_decisions', return_value=selected) as export:
+            runner = pipeline.Pipeline(config)
+            template = pipeline.read(runner.sources['regional_template'])
+            point = pipeline.read(Path(template['point_request']['path']))
+            self.assertEqual(pipeline.read(Path(point['snapshot']['path'])), selected['snapshot'])
+            self.assertEqual(pipeline.read(Path(template['regional']['request']['line']['path'])), selected['line'])
+            identity = runner.identity
+            runner.close()
+            export.assert_called_once_with('regional')
+        with patch.object(pipeline, 'read_regional_decisions', side_effect=AssertionError('reuse the frozen selection')):
+            resumed = pipeline.Pipeline(config, resume=True)
+            try:
+                self.assertEqual(resumed.identity, identity)
+            finally:
+                resumed.close()
+
     def test_resume_reuses_the_frozen_neon_draft(self):
         revision = 'mainland-draft-1'
         source = {'source_id': 'land', 'version': '1', 'r2_bucket': 'worldatlas',

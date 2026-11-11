@@ -1,5 +1,6 @@
 import copy,unittest,hashlib,json
-from adapter import merge_live_claims,filter_region_claims,protected_region_rows,RULE,LINE,LINE_SHA
+from adapter import merge_live_claims,filter_region_claims,protected_region_rows,RULE
+LINE='test-boundary';LINE_SHA='d'*64
 S='a'*64; C={'rows':'b'*64,'runs':'c'*64}
 def fixture():
  p={'rule_set_id':RULE,'status':'selected_for_research','decision_revision':'r','line':{'line_id':LINE,'geometry_sha256':LINE_SHA},'evidence':{'component_rows_sha256':C['rows'],'component_runs_sha256':C['runs']}}
@@ -10,6 +11,11 @@ def run(p,c,s,r,**kw):return merge_live_claims(p,c,s,r,snapshot_sha256=S,compone
 class Tests(unittest.TestCase):
  def test_selected_preserved_pending_withheld_regional_added(self):
   p,c,s,r=fixture();out=run(p,c,s,r);self.assertEqual(out['component_claims'][1],s[1]);self.assertNotIn(3,out['component_claims']);self.assertEqual(out['withheld_selected_pending_roots'],[3]);self.assertEqual(out['component_claims'][2][0]['code'],18);self.assertEqual(out['component_claims'][2][0]['affiliation_id'],RULE)
+ def test_selected_line_can_change_without_editing_code(self):
+  p,c,s,r=fixture();line={'line_id':'another-boundary','geometry_sha256':'e'*64};p['line']=line;r.update(line)
+  out=run(p,c,s,r);self.assertEqual(out['regional_proposal_trace'][2]['evidence'],line)
+  r['geometry_sha256']='f'*64
+  with self.assertRaisesRegex(ValueError,'line pin mismatch'):run(p,c,s,r)
  def test_conflicts_and_stale_inputs_fail_closed(self):
   p,c,s,r=fixture();r['proposals'][1]['code']=18
   with self.assertRaisesRegex(ValueError,'selected'):run(p,c,s,r)

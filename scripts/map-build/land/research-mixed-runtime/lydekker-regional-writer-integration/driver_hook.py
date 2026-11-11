@@ -38,15 +38,12 @@ def load_pinned_module(name,path,digest):
   sys.modules.pop(module_name,None);raise
  return mod
 
-def modules_from_pins(code,policy):
+def modules_from_pins(code):
  required=['regional_rule','component_scan','replay_adapter','geonames_anchors','satellite_geodesic','regional_workflow','regional_group_convention','source_groups','adapter','live_driver','point_prototype','run_pair','land_archive_source','polygon_intersection']
  need(isinstance(code,dict) and set(code)==set(required),'regional runtime code pins incomplete')
  for name in required:
   s=code[name];need(isinstance(s,dict) and set(s)=={'path','sha256'},'invalid regional runtime pin')
   p=Path(s['path']).resolve(strict=True);need(p.is_file() and file_sha(p)==s['sha256'],'regional runtime code mismatch: '+name)
-  expected=policy['evidence']['runtime_code_sha256'].get(name+'.py')
-  if expected:need(s['sha256']==expected,'regional reviewed code mismatch: '+name)
- need(code['run_pair']['sha256']==policy['evidence']['wgs84_run_pair_sha256'] and code['point_prototype']['sha256']==policy['evidence']['point_prototype_sha256'],'WGS84 implementation pin mismatch')
  mods={}
  for name in required:
   # WGS84 pair implementations may coexist with Stage 2's independently
@@ -68,7 +65,7 @@ def prepare(cfg,compiled,snapshot,reports,grid,inputs,mainland_roots,mixed_claim
  policy=load_json(cfg['policy']);line=load_json(cfg['line']);pending=load_json(cfg['pending'])
  need(isinstance(pending,list),'invalid pending inventory')
  mixed_path=Path(getattr(mixed_claims,'__file__','')).resolve(strict=True);mixed_sha=policy['evidence'].get('mixed_claims_sha256');need(mixed_path.is_file() and file_sha(mixed_path)==mixed_sha,'regional mixed claims code mismatch')
- mods=modules_from_pins(cfg['code'],policy)
+ mods=modules_from_pins(cfg['code'])
  from osgeo import ogr
  def inside(geometry,lon,lat):
   g=ogr.CreateGeometryFromJson(json.dumps(geometry));p=ogr.Geometry(ogr.wkbPoint);p.AddPoint_2D(lon,lat);return bool(g.Contains(p))

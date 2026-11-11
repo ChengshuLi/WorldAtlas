@@ -3,6 +3,7 @@
 These rules apply to every agent working in this repository.
 
 - Keep code, documentation, and reports concise and human-readable.
+- When blocked or slowed down, always first ask whether the blocking mechanism is needed. Remove it completely if unnecessary. If it is needed, choose the appropriate fix, including a justified exception when warranted.
 - Do not spawn subagents or create Codex chats unless the user explicitly requests it.
 - Make each change in a small pull request with a clear summary and relevant test results. The user reviews and comments; workers should be ready to revise based on that feedback. The user manually merges. Never push directly to `main`, enable auto-merge, or merge any PR.
 - Only the user may submit GitHub reviews or post inline code-review comments, including replies in review threads. Open pull requests ready for review by default. Use draft status only when drafts skip CI to ease a long queue for ready PRs.

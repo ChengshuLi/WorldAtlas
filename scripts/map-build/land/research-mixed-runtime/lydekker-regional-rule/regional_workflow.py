@@ -15,8 +15,6 @@ from satellite_geodesic import apply_satellites, MIN_MERIDIONAL_RADIUS
 # The source witness establishes which entire physical component must lie on
 # the revised line's Oceania side. It is a validation, not a cell override.
 BOO_POINT = (129.32551,-1.16341)
-APPROVED_LINE_ID = 'lydekker-anu-figure81-regional-boo-east-v2'
-APPROVED_GEOMETRY = '87514ff08498fa2e2a27bfe2f0a1026511b3c5f01acfbaecbf1f753392c33655'
 
 
 def require_boo_east(bounds,region,row_spec,run_spec,grid):
@@ -56,9 +54,6 @@ def research(row_spec, run_spec, grid, bounds, line_record, compiled, snapshot,
     _require(isinstance(grid,dict) and type(grid.get('width')) is int and
              grid['width']>1 and grid.get('west') == -180 and
              grid.get('step') == 360/grid['width'], 'WGS84 global grid required')
-    _require(isinstance(line_pin,dict), 'approved line pin required')
-    _require(line_pin == {'line_id':APPROVED_LINE_ID,'geometry_sha256':APPROVED_GEOMETRY},
-             'unapproved Lydekker line pin')
     line=verified_line(line_record,line_pin)
     region=scan(row_spec,run_spec,grid,bounds,line)
     boo_root=require_boo_east(bounds,region,row_spec,run_spec,grid)

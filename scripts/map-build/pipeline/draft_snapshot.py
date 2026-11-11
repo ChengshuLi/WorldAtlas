@@ -12,6 +12,34 @@ LAND_EXPORT = (
     Path(__file__).resolve().parents[1]
     / 'land/mainland-l2-draft/query-stage2-selected.sql'
 )
+REGIONAL_EXPORT = (Path(__file__).resolve().parents[1]
+                   / 'land/research-mixed-runtime/stage3-mixed-leeward-full-20261105/export_regional.sql')
+
+
+def read_regional_decisions(revision):
+    """Read the working regional records, selected rule, and its current boundary together."""
+    import psycopg
+
+    connection = os.environ.get('NEON_DATABASE_URL')
+    if not connection:
+        raise ValueError('set NEON_DATABASE_URL to the working database')
+    with psycopg.connect(connection) as database:
+        database.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY')
+        snapshot = json.loads(database.execute(REGIONAL_EXPORT.read_text(), {'revision': revision}).fetchone()[0])
+        rows = database.execute(
+            'SELECT line_id,definition FROM atlas.regional_island_rule_sets '
+            "WHERE revision=%s AND selection_status='selected_for_research'", (revision,)).fetchall()
+        if len(rows) != 1:
+            raise ValueError('the regional builder requires one selected island rule')
+        line_id, policy = rows[0]
+        row = database.execute(
+            "SELECT (to_jsonb(l)-'created_at')::text FROM atlas.geographic_line_observations l "
+            'WHERE line_id=%s', (line_id,)).fetchone()
+        if row is None:
+            raise ValueError('selected regional boundary is missing')
+        line = json.loads(row[0])
+        policy['line'] = {'line_id': line_id, 'geometry_sha256': line['geometry_sha256']}
+    return {'snapshot': snapshot, 'policy': policy, 'line': line}
 
 
 def read_land_draft(revision):

@@ -18,13 +18,14 @@ class TestWorkflow(unittest.TestCase):
             require_boo_east(bounds,{123:east},{},{},{})
             with self.assertRaisesRegex(ValueError,'whole Boo'):
                 require_boo_east(bounds,{123:dict(east,east=3,west=1)},{},{},{})
-    def test_superseded_line_is_rejected(self):
+    def test_mismatched_line_is_rejected(self):
         from regional_workflow import research
-        with self.assertRaisesRegex(ValueError,'unapproved'):
+        with self.assertRaisesRegex(ValueError,'unexpected line identity'):
             research({}, {}, {'width':360,'west':-180,'step':1}, [], {}, {}, {}, [], set(), None, None, {}, line_pin={'line_id':'old-v1','geometry_sha256':'0'*64},max_satellite_cells=1,max_gap_m=1,pending_claims=())
     def test_external_non_anchor_competitor_keeps_its_target(self):
         from unittest.mock import patch
-        from regional_workflow import research, APPROVED_LINE_ID, APPROVED_GEOMETRY
+        from regional_workflow import research
+        APPROVED_LINE_ID,APPROVED_GEOMETRY='test-line','e'*64
         candidate={'total':1,'in_scope':1,'west':1,'east':0,'boundary':0,'outside_latitude':0}
         competitor={'total':2,'in_scope':2,'west':0,'east':2,'boundary':0,'outside_latitude':0}
         region={1:candidate}; buffer={1:candidate,2:competitor}
@@ -70,15 +71,13 @@ class TestWorkflow(unittest.TestCase):
                 snap={'affiliations':[{'affiliation_id':'group','method':'component_intersection_v1','entity_id':5}], 'category_bindings':[{'entity_id':5,'physical_class':'land','code':22}]}
                 reports=[{'schema':'source-polygon-component-report-v1','status':'research-only-not-a-build','revision':'r1','entity_revision':'e1','claims':[{'affiliation_id':'group','entity_id':5,'entity_code':22,'method':'component_intersection_v1','component_ids':[2]}]}]
                 anchor={2:{'code':22,'source_id':'source','source_feature_id':'island','source_version':'v1','source_sha256':'a'*64,'main_island_evidence':'reviewed source'}}
-                with patch('regional_workflow.APPROVED_LINE_ID','test'), patch('regional_workflow.APPROVED_GEOMETRY',digest):
-                    out=research(pin(rows),pin(runs),{'width':360,'height':4,'west':-180,'north':2,'step':1},[0,-1,8,1],obs,compiled,snap,reports,set(),mixed_module,pair_module.run_pair,anchor,line_pin={'line_id':'test','geometry_sha256':digest},max_satellite_cells=1,max_gap_m=120000,pending_claims=())
+                out=research(pin(rows),pin(runs),{'width':360,'height':4,'west':-180,'north':2,'step':1},[0,-1,8,1],obs,compiled,snap,reports,set(),mixed_module,pair_module.run_pair,anchor,line_pin={'line_id':'test','geometry_sha256':digest},max_satellite_cells=1,max_gap_m=120000,pending_claims=())
                 self.assertEqual(out['proposals'][1]['code'],22)
                 self.assertEqual(out['proposals'][1]['basis'],'source_anchored_nearest_main_island')
                 self.assertEqual(out['proposals'][2]['basis'],'selected_affiliation')
                 self.assertIn(2,out['replayed_claims'])
                 self.assertEqual(set(Path(tmp).iterdir()),{rows,runs})
-                with patch('regional_workflow.APPROVED_LINE_ID','test'), patch('regional_workflow.APPROVED_GEOMETRY',digest):
-                    outside=research(pin(rows),pin(runs),{'width':360,'height':4,'west':-180,'north':2,'step':1},[0,-1,3.8,1],obs,compiled,snap,reports,set(),mixed_module,pair_module.run_pair,anchor,line_pin={'line_id':'test','geometry_sha256':digest},max_satellite_cells=1,max_gap_m=120000,pending_claims=())
+                outside=research(pin(rows),pin(runs),{'width':360,'height':4,'west':-180,'north':2,'step':1},[0,-1,3.8,1],obs,compiled,snap,reports,set(),mixed_module,pair_module.run_pair,anchor,line_pin={'line_id':'test','geometry_sha256':digest},max_satellite_cells=1,max_gap_m=120000,pending_claims=())
                 self.assertEqual(outside['proposals'][1]['code'],22)
                 self.assertNotIn(2,outside['proposals'])
                 self.assertIn(2,outside['buffer_anchor_claims'])
@@ -86,8 +85,7 @@ class TestWorkflow(unittest.TestCase):
                 fields=['99','Main Island','Main Island','','0.5','4.5','T','ISL','ID']+['']*10
                 with zipfile.ZipFile(archive,'w') as z: z.writestr('ID.txt','\t'.join(fields)+'\n')
                 source={'path':str(archive),'sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'source_id':'geonames-country-id','source_version':'test','country':'ID'}
-                with patch('regional_workflow.APPROVED_LINE_ID','test'), patch('regional_workflow.APPROVED_GEOMETRY',digest):
-                    auto=research(pin(rows),pin(runs),{'width':360,'height':4,'west':-180,'north':2,'step':1},[0,-1,8,1],obs,compiled,snap,reports,set(),mixed_module,pair_module.run_pair,None,line_pin={'line_id':'test','geometry_sha256':digest},max_satellite_cells=1,max_gap_m=120000,pending_claims=(),anchor_source=source)
+                auto=research(pin(rows),pin(runs),{'width':360,'height':4,'west':-180,'north':2,'step':1},[0,-1,8,1],obs,compiled,snap,reports,set(),mixed_module,pair_module.run_pair,None,line_pin={'line_id':'test','geometry_sha256':digest},max_satellite_cells=1,max_gap_m=120000,pending_claims=(),anchor_source=source)
                 self.assertEqual(auto['proposals'][1]['code'],22)
                 self.assertEqual(auto['satellites'][1]['source_feature_id'],'99')
                 self.assertEqual(auto['anchor_discovery']['eligible_anchors'],1)

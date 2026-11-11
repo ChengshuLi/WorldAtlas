@@ -27,7 +27,8 @@ import zipfile
 
 from execution_state import (Timing, Checkpoints, RunLock, code_identity, inventory,
                              json_bytes, verify_pins, verify_anchor, write, elapsed_union)
-from draft_snapshot import draft_physical_selection, prepare_land_draft, read_land_draft, read_release_streams
+from draft_snapshot import (draft_physical_selection, prepare_land_draft, read_land_draft,
+                            read_release_streams, read_regional_decisions)
 
 HERE = Path(__file__).resolve().parent
 SCRIPTS = HERE.parent
@@ -228,6 +229,26 @@ class Pipeline:
                 set(selections) - required - {'reference_rows', 'reference_runs'}):
             raise ValueError('wrong source selection input set')
         resolved = self.resolve_raw_catalog(selections)
+        self.regional_decisions = None
+        if revision := self.cfg.get('regional_revision'):
+            resolved = copy.deepcopy(resolved)
+            if resume:
+                selected = read(self.out / 'run-identity.json')['regional_decisions']
+                self.regional_decisions = self.resolve_pins(selected)
+                regional = read(self.regional_decisions)
+            else:
+                regional = read_regional_decisions(revision)
+                self.regional_decisions = self.save_source_document(regional, serialization='canonical-ascii')
+            if regional['snapshot']['decision_revision']['id'] != revision:
+                raise ValueError('regional decision revision mismatch')
+            template = resolved['regional_template']['json']
+            template['point_request']['json']['snapshot'] = {'json': regional['snapshot']}
+            request = template['regional']['request']
+            request['line'] = {'json': regional['line']}
+            request['policy'] = {'json': regional['policy']}
+            request['policy_canonical_sha256'] = hashlib.sha256(
+                json.dumps(regional['policy'], sort_keys=True, separators=(',', ':'),
+                           ensure_ascii=False, allow_nan=False).encode()).hexdigest()
         self.draft_land = None
         self.preview_land = None
         if draft_revision is not None:
@@ -262,6 +283,8 @@ class Pipeline:
             'runtime_paths': {key: os.environ.get(key) for key in ('PYTHONPATH', 'PROJ_DATA', 'PROJ_LIB', 'PROJ_NETWORK')}}
         if self.draft_land is not None:
             self.identity['land_draft'] = {'revision': draft_revision, 'snapshot': pin(self.draft_land)}
+        if self.regional_decisions is not None:
+            self.identity['regional_decisions'] = pin(self.regional_decisions)
         if compare_release is not None:
             self.identity['compare_release'] = compare_release
         if not resume:
