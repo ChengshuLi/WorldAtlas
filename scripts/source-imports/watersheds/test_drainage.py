@@ -15,6 +15,15 @@ class DrainageTests(unittest.TestCase):
         _, flow = compute_flow(grid)
         self.assertEqual(flow[0, 1], 4)
 
+    def test_all_eight_downhill_directions(self):
+        for neighbor in (0, 1, 2, 3, 5, 6, 7, 8):
+            with self.subTest(neighbor=neighbor):
+                heights = np.full((3, 3), 5.)
+                heights[1, 1] = 4.
+                heights.ravel()[neighbor] = 0.
+                _, flow = compute_flow(self.grid(heights))
+                self.assertEqual(flow[1, 1], neighbor)
+
     def test_fill_preserves_source_and_routes_flats_to_an_exit(self):
         raw = np.full((5, 5), 10.)
         raw[2, 2] = 0.

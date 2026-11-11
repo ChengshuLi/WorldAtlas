@@ -67,6 +67,12 @@ Use `waterway_groups` for explicitly identified downstream ways; otherwise natur
 networks are traced to their source-backed exit basins. Unassigned, ambiguous and
 incomplete networks are reported.
 
+Mapped rivers can continue through several estuary ways beyond the basin
+polygons. Trace back through that uncovered geometry to the downstream-most
+basin intersection on each path. Report the selected way, group and intersection.
+Stop at an unselected or ambiguous source basin; a path without a source-backed
+destination remains unassigned.
+
 OSM inputs can be XML, ZIP archives of XML responses, or provider PBF files.
 The PBF reader streams memberships and coordinates in two passes. Natural
 drainage includes rivers and streams; full coordinates remain available for

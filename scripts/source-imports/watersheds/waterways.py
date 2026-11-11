@@ -13,7 +13,7 @@ from osgeo import gdal, ogr, osr
 from pyproj import CRS
 from pyproj import Transformer
 import shapefile
-from shapely import transform as transform_geometry
+from shapely import get_coordinates, transform as transform_geometry
 from shapely.geometry import LineString, Point, box, shape
 from shapely.strtree import STRtree
 
@@ -73,6 +73,7 @@ class Waterways:
                            if len(self.ways[ident].nodes) < 2 or
                            any(n not in self.nodes for n in self.ways[ident].nodes)}
         self.upstream, self.downstream = defaultdict(set), defaultdict(set)
+        self.edge_sources = defaultdict(list)
         seen, junctions = set(), set()
         for ident in sorted(self.natural - self.incomplete):
             nodes = self.ways[ident].nodes
@@ -83,10 +84,11 @@ class Waterways:
                 seen.add(node)
         self.topology_nodes = junctions
         for ident in sorted(self.natural - self.incomplete):
-            nodes = [node for node in self.ways[ident].nodes if node in junctions]
-            for first, second in zip(nodes, nodes[1:]):
+            nodes = [(i, node) for i, node in enumerate(self.ways[ident].nodes) if node in junctions]
+            for (start, first), (end, second) in zip(nodes, nodes[1:]):
                 self.upstream[second].add(first)
                 self.downstream[first].add(second)
+                self.edge_sources[first, second].append((ident, start, end))
         self._lines, self._spatial = {}, None
 
     def _node(self, ident, version, point):
@@ -197,12 +199,35 @@ class Waterways:
     def basin_groups(self, basins):
         """Trace every mapped natural network to source-backed exit basins."""
         roots = defaultdict(set)
-        for node in sorted(self.topology_nodes):
-            if not self.downstream[node]:
-                group = basins.at(self.nodes[node])
+        coastal, seen = [], set()
+        todo = sorted(node for node in self.topology_nodes if not self.downstream[node])
+        while todo:
+            node = todo.pop()
+            if node in seen:
+                continue
+            seen.add(node)
+            values = basins.values_at(self.nodes[node])
+            if values:
+                group = basins.group(values)
                 if group >= 0:
                     roots[group].add(node)
-        return self._assign(roots)
+                continue
+            # Several complete ways can continue through estuary water beyond
+            # the basin polygons. Walk upstream only through that uncovered
+            # geometry, stopping at the first source-backed basin on each path.
+            for parent in sorted(self.upstream[node]):
+                for ident, start, end in self.edge_sources[parent, node]:
+                    way = self.ways[ident]
+                    line = LineString([self.nodes[n] for n in way.nodes[start:end + 1]])
+                    group, point = basins.exit_group(line)
+                    if group >= 0:
+                        roots[group].add(node)
+                        coastal.append({'way': ident, 'group': group, 'point': list(point)})
+                    elif point is None:
+                        todo.append(parent)
+        assigned, report = self._assign(roots)
+        report['basin_exit_before_way_endpoint'] = coastal
+        return assigned, report
 
     def _assign(self, roots):
         reaches = {}
@@ -298,11 +323,40 @@ class Basins:
         self.unmapped = sorted(set(self.values) - self.mapped)
 
     def at(self, point):
+        return self.group(self.values_at(point))
+
+    def values_at(self, point):
         location = Point(*point)
-        values = {self.values[int(i)] for i in self.tree.query(location)
-                  if self.polygons[int(i)].covers(location)}
+        return {self.values[int(i)] for i in self.tree.query(location)
+                if self.polygons[int(i)].covers(location)}
+
+    def group(self, values):
         matches = {group for group, selected in self.groups.items() if values & selected}
         return next(iter(matches)) if len(matches) == 1 and values <= self.mapped else -1
+
+    def exit_group(self, line):
+        """Use the last source basin on a complete downstream river way.
+
+        Basin polygons can stop at the shore while river geometry continues
+        into an estuary. A covered but unselected destination stays unknown;
+        missing polygon coverage is resolved only by an actual intersection
+        of this same terminal way with the basin source.
+        """
+        endpoint = Point(line.coords[-1])
+        values = {self.values[int(i)] for i in self.tree.query(endpoint, predicate='intersects')}
+        if values:
+            return self.group(values), None
+        exits = []
+        for index in self.tree.query(line, predicate='intersects'):
+            index = int(index)
+            for coordinate in get_coordinates(line.intersection(self.polygons[index])):
+                point = tuple(map(float, coordinate))
+                exits.append((line.project(Point(point)), self.values[index], point))
+        if not exits:
+            return -1, None
+        station = max(item[0] for item in exits)
+        last = [item for item in exits if item[0] == station]
+        return self.group({item[1] for item in last}), min(item[2] for item in last)
 
     def terminals(self, grid, flow):
         """Classify only domain exits; interior depressions do not become outlets."""

@@ -5,6 +5,7 @@ import unittest
 import numpy as np
 from pyproj import CRS
 import shapefile
+from shapely.geometry import LineString
 
 from watersheds.terrain import Grid
 from watersheds.waterways import Basins, Waterways
@@ -46,6 +47,22 @@ class BasinTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'multiple drainage groups'):
             self.basins({3: [100], 7: [100, 200]})
 
+    def test_terminal_way_beyond_shore_uses_its_last_actual_basin_intersection(self):
+        line = LineString([(.5, 1.), (1.5, 1.), (3., 1.)])
+        group, point = self.basins().exit_group(line)
+        self.assertEqual(group, 7)
+        self.assertEqual(point, (2., 1.))
+
+    def test_unselected_downstream_basin_cannot_fall_back_to_an_upstream_group(self):
+        basins = self.basins({3: [100]})
+        for endpoint in (1.5, 3.):
+            self.assertEqual(basins.exit_group(LineString([(.5, 1.), (endpoint, 1.)]))[0], -1)
+
+    def test_uncovered_way_and_shared_basin_edge_stay_unknown(self):
+        basins = self.basins()
+        self.assertEqual(basins.exit_group(LineString([(3., 1.), (4., 1.)])), (-1, None))
+        self.assertEqual(basins.exit_group(LineString([(1., 1.), (1., 3.)]))[0], -1)
+
     def test_only_domain_exits_receive_basin_fallback(self):
         grid = Grid(np.zeros((3, 3)), (0., .5, 0., 1.5, 0., -.5), 'EPSG:4326')
         terminals = self.basins().terminals(grid, np.full((3, 3), -1))
@@ -65,6 +82,36 @@ class BasinTests(unittest.TestCase):
         assigned, report = Waterways([path]).basin_groups(self.basins())
         self.assertEqual(assigned, {'10': 3, '20': 7})
         self.assertEqual(report['unassigned'], [])
+
+    def test_downstream_trace_can_cross_several_uncovered_estuary_ways(self):
+        path = self.root / 'estuary.osm'
+        path.write_text('<osm><node id="1" lon="0.5" lat="1"/>'
+                        '<node id="2" lon="1.5" lat="1"/>'
+                        '<node id="3" lon="3" lat="1"/>'
+                        '<node id="4" lon="4" lat="1"/>'
+                        '<way id="10"><nd ref="1"/><nd ref="2"/>'
+                        '<tag k="waterway" v="river"/></way>'
+                        '<way id="20"><nd ref="2"/><nd ref="3"/>'
+                        '<tag k="waterway" v="river"/></way>'
+                        '<way id="30"><nd ref="3"/><nd ref="4"/>'
+                        '<tag k="waterway" v="river"/></way></osm>')
+        network = Waterways([path])
+        assigned, report = network.basin_groups(self.basins())
+        self.assertEqual(assigned['10'], 7)
+        self.assertEqual(assigned['20'], 7)
+        self.assertIn({'way': '20', 'group': 7, 'point': [2., 1.]},
+                      report['basin_exit_before_way_endpoint'])
+        self.assertEqual(network.basin_groups(self.basins({3: [100]}))[0], {})
+
+    def test_closed_waterway_cycle_does_not_gain_an_invented_destination(self):
+        path = self.root / 'cycle.osm'
+        path.write_text('<osm><node id="1" lon="0.2" lat="1"/>'
+                        '<node id="2" lon="0.3" lat="1"/>'
+                        '<way id="10"><nd ref="1"/><nd ref="2"/><nd ref="1"/>'
+                        '<tag k="waterway" v="stream"/></way></osm>')
+        assigned, report = Waterways([path]).basin_groups(self.basins())
+        self.assertEqual(assigned, {})
+        self.assertEqual(report['unassigned'], ['10'])
 
 
 if __name__ == '__main__':
