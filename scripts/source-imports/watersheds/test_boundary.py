@@ -64,6 +64,15 @@ class BoundaryTests(unittest.TestCase):
         graph.add_grid(grid, np.array([[1, -1], [1, -1]]), [(1, 3)])
         self.assertEqual(graph.edges, set())
 
+    def test_context_cells_influence_flow_but_do_not_add_overlapping_output_edges(self):
+        grid = Grid(np.zeros((4, 2)), (0., .01, 0., .04, 0., -.01), 'EPSG:4326')
+        labels = np.tile([1, 3], (4, 1))
+        graph = Divide()
+        graph.add_grid(grid, labels, [(1, 3)], output_bounds=[0., .01, .02, .03])
+        route = graph.geometry()
+        np.testing.assert_allclose(route.bounds, (.01, .01, .01, .03))
+        self.assertTrue(all(.01 <= point[1] <= .03 for point in graph.coordinates.values()))
+
     def test_final_assembly_preserves_endpoints_and_has_shared_joins(self):
         graph = self.graph()
         before = LineString([(-.01, -.01), (0., 0.), (0., .01)])

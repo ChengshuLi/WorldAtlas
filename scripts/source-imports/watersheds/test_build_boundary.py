@@ -72,6 +72,17 @@ class ConstructionTests(unittest.TestCase):
             self.assertEqual(report['joins'], [[.003, .005], [.003, .001]])
             self.assertEqual(construct(recipe, files)[0], geometry)
 
+    def test_explicit_output_area_keeps_the_native_construction_unchanged(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            original = construct(recipe, files)[0]
+            recipe['terrains']['ridge']['domains'] = [
+                {'bounds': [0, 0, .006, .006], 'output_bounds': [0, 0, .006, .006]}]
+            geometry, report = construct(recipe, files)
+            self.assertEqual(geometry, original)
+            self.assertEqual(report['terrain']['ridge']['domains'][0]['output_bounds'],
+                             [0, 0, .006, .006])
+
 
 @unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'), 'requires disposable PostgreSQL')
 class StorageTests(unittest.TestCase):

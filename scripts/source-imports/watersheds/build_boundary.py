@@ -81,10 +81,11 @@ def construct(recipe, files):
             domains = settings['domains']
             if not domains:
                 raise ValueError('terrain requires at least one analysis domain')
+            bounds_of = lambda domain: domain['bounds'] if isinstance(domain, dict) else domain
             paths = lambda selected: [sources.path({'source': item} if isinstance(item, str) else item)
                                       for item in selected]
-            bounds = [min(b[0] for b in domains), min(b[1] for b in domains),
-                      max(b[2] for b in domains), max(b[3] for b in domains)]
+            bounds = [min(bounds_of(b)[0] for b in domains), min(bounds_of(b)[1] for b in domains),
+                      max(bounds_of(b)[2] for b in domains), max(bounds_of(b)[3] for b in domains)]
             network = sources.network(settings.get('waterways', []), natural_only=True)
             if network.nodes:
                 # Complete ways can end outside the terrain crop. Include those
@@ -104,8 +105,10 @@ def construct(recipe, files):
                 raise ValueError('a stream-head connection requires one continuous terrain domain')
             graph, domain_reports = Divide(), []
             for domain in domains:
+                bounds = bounds_of(domain)
+                output_bounds = domain.get('output_bounds') if isinstance(domain, dict) else None
                 tick = time.monotonic()
-                grid = prepare(paths(settings['primary']), domain,
+                grid = prepare(paths(settings['primary']), bounds,
                                paths(settings.get('secondary', [])),
                                sources.path({'source': settings['height_offset']})
                                if 'height_offset' in settings else None)
@@ -133,7 +136,7 @@ def construct(recipe, files):
                 labels = destinations(flow, seeds, basins.terminals(grid, flow))
                 drainage_seconds = time.monotonic() - step
                 step = time.monotonic()
-                graph.add_grid(grid, labels, settings['interfaces'])
+                graph.add_grid(grid, labels, settings['interfaces'], output_bounds)
                 for index, flow_settings in required:
                     curve, receipt = flow_to_point(
                         grid, flow, labels, sources.point(flow_settings['point'], lines),
@@ -142,7 +145,7 @@ def construct(recipe, files):
                     connections[index] = curve
                     report['connections'][str(index)] = receipt
                 domain_reports.append({
-                    'bounds': domain, 'shape': list(labels.shape),
+                    'bounds': bounds, 'output_bounds': output_bounds, 'shape': list(labels.shape),
                     'secondary_cells': grid.secondary_cells,
                     'unknown_cells': int((labels < 0).sum()),
                     'raised_cells': int((working > grid.elevation).sum()),

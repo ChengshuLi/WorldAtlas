@@ -103,6 +103,13 @@ Check the chosen boundary against larger terrain domains when sources or
 construction settings change. Once that comparison passes, reuse the validated
 domains. An ordinary run does not perform an automatic crop-expansion search.
 
+For overlapping calculation areas, a domain can specify `bounds` for its full
+terrain context and `output_bounds` for the portion contributing divide edges.
+Both are WGS84 rectangles. Use adjoining output areas and overlapping context;
+this keeps inconsistent interfaces at calculation edges out of the assembled
+graph. Larger-crop validation expands the context while retaining those output
+areas and the native grid.
+
 ## Boundary assembly and tests
 
 Construct the complete interface between selected drainage groups. Route between

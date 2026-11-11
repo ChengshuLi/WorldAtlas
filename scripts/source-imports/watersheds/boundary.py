@@ -36,7 +36,7 @@ class Divide:
         self.origin = None
         self.crs = None
 
-    def add_grid(self, grid, labels, pairs):
+    def add_grid(self, grid, labels, pairs, output_bounds=None):
         labels = np.asarray(labels)
         if labels.shape != grid.elevation.shape:
             raise ValueError('basin labels and terrain grid must match')
@@ -50,6 +50,10 @@ class Divide:
         self.origin, self.crs = origin, crs
         to_geo = Transformer.from_crs(crs, 4326, always_xy=True)
         height, width = labels.shape
+        if output_bounds is not None:
+            if (len(output_bounds) != 4 or not np.isfinite(output_bounds).all() or
+                    not output_bounds[0] < output_bounds[2] or not output_bounds[1] < output_bounds[3]):
+                raise ValueError('divide output bounds require a finite geographic rectangle')
 
         def node(row, column):
             key = (row + grid.window_offset[0], column + grid.window_offset[1])
@@ -67,6 +71,13 @@ class Divide:
                 selected |= ((first == a) & (second == b)) | ((first == b) & (second == a))
             for rr, cc in np.argwhere(selected):
                 row, column = int(rr), int(cc)
+                if output_bounds is not None:
+                    midpoint = grid.coordinates(row + (.5 if dc else 1),
+                                                column + (1 if dc else .5), center=False)
+                    lon, lat = to_geo.transform(*midpoint, errcheck=True)
+                    west, south, east, north = output_bounds
+                    if not (west <= lon < east and south <= lat < north):
+                        continue
                 edge = ((node(row, column + 1), node(row + 1, column + 1)) if dc else
                         (node(row + 1, column), node(row + 1, column + 1)))
                 self.edges.add(tuple(sorted(edge)))
