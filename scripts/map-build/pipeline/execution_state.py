@@ -430,7 +430,10 @@ class Timing:
             measured = sum(elapsed_union(items) for items in intervals.values())
             complete = not missing
             error = None
-            if group == 'physical':
+            reused = group == 'physical' and physical_report and physical_report.get('status') == 'reused'
+            if reused:
+                downloads = 0.0
+            elif group == 'physical':
                 report = physical_report or {}
                 commands, _ = self.intervals(group, kind='command')
                 overhead = sum(outside(items, commands.get(attempt, []))
@@ -460,6 +463,9 @@ class Timing:
                 'semantics': 'sum of attempt-local active interval unions; no restart gap is counted'}
             if group == 'physical':
                 groups[group].update({'source_download_elapsed_seconds': downloads,
-                    'producer_processing_elapsed_seconds': physical_report.get('processing_elapsed_seconds') if physical_report else None,
+                    'producer_processing_elapsed_seconds': (physical_report.get('processing_elapsed_seconds')
+                                                            if physical_report and not reused else None),
                     'timing_error': error})
+                if reused:
+                    groups[group]['reused_from'] = physical_report['source_run']
         return groups

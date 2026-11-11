@@ -20,6 +20,23 @@ import run_pipeline as pipeline
 
 
 class TimingTests(unittest.TestCase):
+    def test_reused_physical_outputs_count_current_verification_only(self):
+        with tempfile.TemporaryDirectory() as td:
+            timer = pipeline.Timing(Path(td) / 'events.jsonl')
+            self.addCleanup(timer.close)
+            receipt = {'status': 'reused', 'source_run': '/source/run',
+                       'processing_elapsed_seconds': 12345,
+                       'source_download_elapsed_seconds': 54321}
+            with timer.measure('physical', 'verify-reused'):
+                pass
+            timer.mark_complete('physical', physical_report=receipt)
+            result = timer.summary(receipt)['physical']
+            self.assertTrue(result['complete'])
+            self.assertLess(result['processing_elapsed_seconds'], 1)
+            self.assertEqual(result['source_download_elapsed_seconds'], 0)
+            self.assertEqual(result['reused_from'], '/source/run')
+            self.assertIsNone(result['producer_processing_elapsed_seconds'])
+
     def test_selected_configuration_has_portable_pins_and_complete_new_coastal_partition(self):
         path = Path(pipeline.__file__).with_name('config.json')
         cfg = pipeline.read(path)
@@ -101,7 +118,7 @@ class Fixture(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()
         self.inputs = self.root / 'inputs'
         self.inputs.mkdir()
         self.sentinel = pipeline.write(self.inputs / 'sentinel.json', {})
@@ -689,11 +706,23 @@ class Fixture(unittest.TestCase):
         spec = pipeline.rle_spec(physical, physical=True)
         self.assertEqual(spec['physical_mask_sha256'], pipeline.sha(physical / 'physical-dry.tif'))
         self.assertEqual(spec['report_sha256'], pipeline.sha(physical / 'report.json'))
+        reused = pipeline.Pipeline(runner.config_path, self.root / 'reused', physical_from=runner.out)
+        self.addCleanup(reused.close)
+        producer_report = (physical / 'report.json').read_bytes()
+        with patch.object(reused, 'stage', side_effect=AssertionError('physical outputs must be reused')):
+            self.assertEqual(reused.physical(), physical)
+        self.assertEqual(reused.identity['physical_reuse']['source_run'], str(runner.out))
+        self.assertEqual((physical / 'report.json').read_bytes(), producer_report)
+        changed = pipeline.write(self.inputs / 'different-land.json', {'grid': grid, 'different': True})
+        with self.assertRaisesRegex(ValueError, 'physical input differs'):
+            pipeline.physical_reference(runner.out, {**runner.sources, 'land_config': changed})
         mask = physical / 'physical-dry.tif'
         original = mask.read_bytes()
         mask.write_bytes(original + b'changed')
         with self.assertRaisesRegex(ValueError, 'physical mask'):
             pipeline.rle_spec(physical, physical=True)
+        with self.assertRaisesRegex(ValueError, 'checkpoint/input hash mismatch'):
+            reused.physical()
         mask.write_bytes(original)
         request = runner.document('components', {'schema': 'fresh-physical-components-v1',
             'grid': grid, 'controls': self.cfg['land_controls'], 'inputs': {key: pipeline.pin(path)

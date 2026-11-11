@@ -81,11 +81,11 @@ class CrosswalkTests(unittest.TestCase):
   prov=self.snapshot['mainland_boundaries'][0]['provenance'];trace=self.seed['region_traces'][0]['input_trace'][0]
   relationship='local_geographic_comparison_not_terrain_or_construction_proof';prov['source_relationships'][0]['relationship']=relationship
   self.snapshot['source_lineage_assets'][0]['provenance']={'origin':'provider'}
-  trace['source_citations'][0].update(relationship=relationship,role='supporting_research_evidence')
+  trace['source_citations'][0].update(relationship=relationship,role='supporting_evidence')
   self.assertTrue(self.check())
   trace['source_citations'][0]['role']='construction_input'
   with self.assertRaisesRegex(ValueError,'boundary citations mismatch'):self.check()
-  trace['source_citations'][0]['role']='supporting_research_evidence';prov['lineage_status']='complete';trace['lineage_status']='complete'
+  trace['source_citations'][0]['role']='supporting_evidence';prov['lineage_status']='complete';trace['lineage_status']='complete'
   with self.assertRaisesRegex(ValueError,'boundary lineage'):self.check()
  def test_full_crosswalk_and_tampers(self):
   self.assertEqual(self.check(),self.snapshot['land_baseline_policy'])

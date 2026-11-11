@@ -189,9 +189,38 @@ def rle_spec(directory, *, physical=False):
     return spec
 
 
+def physical_reference(run, sources):
+    """Reuse completed physical outputs only for identical raw-source requests.
+
+    The producer's reports stay intact. This receipt records which existing
+    outputs the new run must verify; it does not create a replacement checkpoint.
+    """
+    run = Path(run).resolve(strict=True)
+    root = run / 'physical'
+    identity = read(root / 'pipeline-identity.json')
+    report = read(root / 'report.json')
+    if report.get('status') != 'candidate-only':
+        raise ValueError('physical source run is incomplete')
+    for key, selected in [('land_config', 'land_config'), ('water_config', 'water_config'),
+                          ('source_manifest', 'raw_manifest')]:
+        if identity[key]['sha256'] != sha(sources[selected]):
+            raise ValueError('physical input differs from the source run: ' + key)
+    output = root / 'physical'
+    produced = read(output / 'report.json')
+    if produced.get('grid') != read(sources['land_config']).get('grid'):
+        raise ValueError('physical grid differs from the selected grid')
+    pins = [pin(root / 'report.json'),
+            {'path': str(root / 'pipeline-identity.json'), 'sha256': report['pipeline_identity_sha256']},
+            {'path': str(output / 'report.json'), 'sha256': report['stage_reports']['physical']['sha256']}]
+    pins.extend({'path': str(output / name), 'sha256': produced['output_sha256'][name]}
+                for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le'))
+    return {'schema': 'worldatlas-physical-reuse-v1', 'status': 'reused',
+            'source_run': str(run), 'pins': pins}
+
+
 class Pipeline:
     def __init__(self, config, output=None, *, resume=False, work_dir=None,
-                 draft_revision=None, compare_release=None):
+                 draft_revision=None, compare_release=None, physical_from=None):
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
         self.config_path = Path(config).resolve(strict=True)
@@ -275,6 +304,11 @@ class Pipeline:
         if bool('reference_rows' in self.sources) != bool('reference_runs' in self.sources):
             raise ValueError('both reference stream pins are required')
         self.collect_source_files()
+        if resume and physical_from is None:
+            physical_from = read(self.out / 'run-identity.json').get('physical_reuse', {}).get('source_run')
+        self.physical_reuse = physical_reference(physical_from, self.sources) if physical_from else None
+        if self.physical_reuse is not None:
+            self.source_pins.extend(p for p in self.physical_reuse['pins'] if p not in self.source_pins)
         self.code = code_identity(SCRIPTS)
         self.identity = {'schema': 'worldatlas-end-to-end-run-identity-v1',
             'request': self.config_pin, 'source_pins': self.source_pins,
@@ -287,6 +321,8 @@ class Pipeline:
             self.identity['regional_decisions'] = pin(self.regional_decisions)
         if compare_release is not None:
             self.identity['compare_release'] = compare_release
+        if self.physical_reuse is not None:
+            self.identity['physical_reuse'] = self.physical_reuse
         if not resume:
             self.out.mkdir(mode=0o700)
         self.run_lock = RunLock(self.out / 'run.lock')
@@ -808,6 +844,9 @@ class Pipeline:
         return options
 
     def physical(self):
+        if self.physical_reuse is not None:
+            verify_pins(self.physical_reuse['pins'])
+            return Path(self.physical_reuse['source_run']) / 'physical' / 'physical'
         cfg = {'schema': 'raw-physical-pipeline-v1',
                'selection_notes': self.cfg['selection_notes'],
                **self.cfg.get('physical_controls', {}),
@@ -1109,7 +1148,8 @@ class Pipeline:
                 return report
             with self.timing.measure('physical', 'stage-total'):
                 physical = self.physical()
-            self.timing.mark_complete('physical', physical_report=read(self.out / 'physical/report.json'))
+            physical_report = self.physical_reuse or read(self.out / 'physical/report.json')
+            self.timing.mark_complete('physical', physical_report=physical_report)
             with self.timing.measure('mainland', 'stage-total'):
                 land = self.mainland(physical)
             self.timing.mark_complete('mainland')
@@ -1124,7 +1164,7 @@ class Pipeline:
                 final_pins = {key: pin(final / name) for key, name in
                               [('rows', 'rows.u32le'), ('runs', 'runs.u32le'), ('report', 'report.json')]}
             self.timing.mark_complete('verification')
-            stages = self.timing.summary(read(self.out / 'physical/report.json'))
+            stages = self.timing.summary(physical_report)
             if not all(stage['outputs_complete'] for stage in stages.values()):
                 raise ValueError('all stage outputs must be complete')
             result = {'schema': 'worldatlas-end-to-end-report-v1',
@@ -1134,13 +1174,15 @@ class Pipeline:
                 'stages': stages, 'timing_complete': all(stage['timing_complete'] for stage in stages.values()),
                 'timing_anchor': self.timing.anchor(),
                 'final': final_pins}
+            if self.physical_reuse is not None:
+                result['physical_reuse'] = self.physical_reuse
             write(self.out / 'report.json', result)
             return result
         except BaseException:
             self.cancel()
             report = self.out / 'physical/report.json'
             try:
-                physical_report = read(report) if report.exists() else None
+                physical_report = self.physical_reuse or (read(report) if report.exists() else None)
             except (ValueError, OSError):
                 physical_report = None
             write(self.out / 'failure.json', {'schema': 'worldatlas-end-to-end-failure-v1',
@@ -1161,10 +1203,13 @@ def main():
     p.add_argument('--land-revision', '--draft-land-revision', dest='draft_land_revision',
                    help='build a candidate from the selected working mainland revision in Neon')
     p.add_argument('--compare-release', help='compare with a published map version in Neon')
+    p.add_argument('--physical-from', type=Path,
+                   help='reuse verified physical outputs from a previous run with identical physical inputs')
     a = p.parse_args()
     compare_release = a.compare_release or ('v8.0' if a.draft_land_revision else None)
     pipeline = Pipeline(a.config, a.output, resume=a.resume, work_dir=a.work_dir,
-                        draft_revision=a.draft_land_revision, compare_release=compare_release)
+                        draft_revision=a.draft_land_revision, compare_release=compare_release,
+                        physical_from=a.physical_from)
 
     def stop(signum, frame):
         pipeline.cancel()

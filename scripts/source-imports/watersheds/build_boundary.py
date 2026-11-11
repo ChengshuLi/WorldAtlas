@@ -1,9 +1,13 @@
 """Regenerate an editable mainland boundary from a Neon construction record."""
 import argparse
 from contextlib import closing
+import hashlib
+from importlib.metadata import version
 import json
+import logging
 import os
 from pathlib import Path
+import platform
 import time
 
 from shapely.geometry import LineString
@@ -14,6 +18,24 @@ from watersheds.drainage import compute_flow, destinations
 from watersheds.sources import Sources
 from watersheds.terrain import prepare
 from watersheds.waterways import Basins, seed_grid
+
+LOGGER = logging.getLogger(__name__)
+
+
+def runtime_versions():
+    from osgeo import gdal, osr
+    import pyproj
+    import shapely
+
+    database = Path(pyproj.datadir.get_data_dir()) / 'proj.db'
+    return {'python': platform.python_version(),
+            'packages': {name: version(name) for name in (
+                'numpy', 'pyproj', 'shapely', 'numba', 'llvmlite', 'pyshp', 'boto3', 'psycopg')},
+            'gdal': gdal.VersionInfo('RELEASE_NAME'), 'pyproj_proj': pyproj.proj_version_str,
+            'gdal_proj': '.'.join(map(str, (osr.GetPROJVersionMajor(), osr.GetPROJVersionMinor(),
+                                          osr.GetPROJVersionMicro()))),
+            'shapely_geos': shapely.geos_version_string,
+            'proj_database_sha256': hashlib.sha256(database.read_bytes()).hexdigest()}
 
 
 def resolve_sources(database, recipe):
@@ -52,6 +74,7 @@ def construct(recipe, files):
     report = {'terrain': {}, 'connections': {}}
     with Sources(files) as sources:
         lines = {name: sources.line(parts) for name, parts in recipe['lines'].items()}
+        report['source_geometry_seconds'] = time.monotonic() - started
         divides, connections = {}, {}
         for name, settings in recipe.get('terrains', {}).items():
             phase = time.monotonic()
@@ -74,6 +97,7 @@ def construct(recipe, files):
                             settings['groups'], bounds)
             assigned, network_report = (network.groups(settings['waterway_groups'])
                                         if 'waterway_groups' in settings else network.basin_groups(basins))
+            network_seconds = time.monotonic() - phase
             required = [(i, section['flow']) for i, section in enumerate(recipe['sections'])
                         if 'flow' in section and section['flow']['terrain'] == name]
             if required and len(domains) != 1:
@@ -86,6 +110,7 @@ def construct(recipe, files):
                                sources.path({'source': settings['height_offset']})
                                if 'height_offset' in settings else None)
                 terrain_seconds = time.monotonic() - tick
+                step = time.monotonic()
                 seeds, seed_report = seed_grid(network, assigned, grid)
                 for _, flow_settings in required:
                     point = sources.point(flow_settings['point'], lines)
@@ -102,8 +127,12 @@ def construct(recipe, files):
                         raise ValueError('closed drainage destination conflicts with a mapped group')
                     seeds[row, column] = group
                     closed.append((row, column))
+                seed_seconds = time.monotonic() - step
+                step = time.monotonic()
                 working, flow = compute_flow(grid, closed)
                 labels = destinations(flow, seeds, basins.terminals(grid, flow))
+                drainage_seconds = time.monotonic() - step
+                step = time.monotonic()
                 graph.add_grid(grid, labels, settings['interfaces'])
                 for index, flow_settings in required:
                     curve, receipt = flow_to_point(
@@ -119,11 +148,17 @@ def construct(recipe, files):
                     'raised_cells': int((working > grid.elevation).sum()),
                     'max_raise_m': float((working - grid.elevation).max()),
                     'seeds': seed_report, 'terrain_seconds': terrain_seconds,
+                    'seed_seconds': seed_seconds, 'drainage_seconds': drainage_seconds,
+                    'divide_seconds': time.monotonic() - step,
                     'seconds': time.monotonic() - tick,
                 })
+                LOGGER.info('%s: %s cells, %.2f seconds', name, labels.shape,
+                            domain_reports[-1]['seconds'])
             divides[name] = graph
             report['terrain'][name] = {'domains': domain_reports, 'network': network_report,
+                                       'network_seconds': network_seconds,
                                        'seconds': time.monotonic() - phase}
+        phase = time.monotonic()
         sections = []
         for index, section in enumerate(recipe['sections']):
             if 'line' in section:
@@ -146,6 +181,7 @@ def construct(recipe, files):
         geometry = assemble(sections, joins, sources.point(recipe['start'], lines),
                             sources.point(recipe['end'], lines))
         report['joins'] = [list(join.point) for join in joins]
+        report['assembly_seconds'] = time.monotonic() - phase
     report['construction_seconds'] = time.monotonic() - started
     return geometry, report
 
@@ -160,10 +196,14 @@ def build_boundary(database, client, recipe_id, recipe_version, revision, work_d
         if recipe.get('method') != 'watershed_boundary' or not recipe.get('basis') or not recipe.get('boundary_id'):
             raise ValueError('invalid watershed construction record')
         selections = resolve_sources(database, recipe)
+        evidence = [dict(catalog_source(database, item['source_id'], item['version']),
+                         relationship='supporting_evidence')
+                    for item in recipe.get('evidence_sources', [])]
     started = time.monotonic()
     files, references = stage_sources(client, selections, work_dir)
     download_seconds = time.monotonic() - started
     geometry, report = construct(recipe, files)
+    runtime = runtime_versions()
     provenance = {'basis': recipe['basis'], 'lineage_status': 'complete', 'construction': {
         'processor': 'watersheds.build_boundary', 'recipe_id': recipe_id,
         'recipe_version': recipe_version, 'sources': [
@@ -171,14 +211,17 @@ def build_boundary(database, client, recipe_id, recipe_version, revision, work_d
             for source in references],
     }}
     started = time.monotonic()
-    digest = save_boundary(database, revision, recipe['boundary_id'], geometry, provenance, references)
+    digest = save_boundary(database, revision, recipe['boundary_id'], geometry, provenance,
+                           [*references, *evidence])
     report.update(revision=revision, boundary_id=recipe['boundary_id'], sha256=digest,
                   vertices=len(geometry['coordinates']), download_verify_seconds=download_seconds,
                   save_seconds=time.monotonic() - started)
+    report['runtime'] = runtime
     return report
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--recipe', nargs=2, required=True, metavar=('ID', 'VERSION'))
     parser.add_argument('--revision', required=True)

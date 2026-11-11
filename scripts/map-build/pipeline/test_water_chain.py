@@ -54,7 +54,7 @@ class FinalGridChain(unittest.TestCase):
                 'connectivity': 4, 'wrap_longitude': True, 'barrier_tie_rule': 'left-of-oriented-route',
                 'unseeded_policy': 'report-only', 'route_ids': ['r0'], 'seed_ids': ['s0', 's1', 's2', 's3']}})
         with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
+            root = Path(td).resolve()
             inputs = root / 'inputs'
             inputs.mkdir()
             timer = pipeline.Timing(root / 'events.jsonl')

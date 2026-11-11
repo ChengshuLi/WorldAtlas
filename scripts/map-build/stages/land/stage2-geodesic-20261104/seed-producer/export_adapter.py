@@ -6,7 +6,7 @@ No preview or prior assignment map is accepted as executable input.
 """
 import hashlib,json,re
 from pathlib import Path
-from regions import points,geometry_hash,SUPPORTING_RELATIONSHIPS,CONSTRUCTION_RELATIONSHIP
+from regions import points,geometry_hash,CONSTRUCTION_RELATIONSHIP
 
 
 def no_duplicates(pairs):
@@ -60,7 +60,7 @@ def boundary_records(snapshot):
   for item in relationships:
    if not isinstance(item,dict) or set(item)!={'source_id','version','relationship'}:raise ValueError('invalid boundary source relationship')
    key=(item['source_id'],item['version']);relationship=item['relationship']
-   if key in relmap or relationship not in SUPPORTING_RELATIONSHIPS|{CONSTRUCTION_RELATIONSHIP}:raise ValueError('duplicate or unsupported boundary source relationship')
+   if key in relmap or not isinstance(relationship,str) or not relationship.strip():raise ValueError('duplicate or unsupported boundary source relationship')
    relmap[key]=relationship
   clean=[]; qualified=[]; construction_count=0
   for ref in refs:
@@ -70,7 +70,7 @@ def boundary_records(snapshot):
    if not relationship or not src or not lin or key in derived_keys or lin.get('kind')!='raw' or not isinstance(lin.get('provider'),str) or not lin['provider'] or not isinstance(lin.get('source_uri'),str) or not lin['source_uri'] or any(src.get(k)!=lin.get(k) for k in ('sha256','r2_bucket','r2_key','size_bytes')) or not re.fullmatch('[0-9a-f]{64}',str(src.get('sha256'))) or not src.get('r2_bucket') or not src.get('r2_key') or type(src.get('size_bytes')) is not int or src['size_bytes']<=0:raise ValueError('boundary source is not pinned raw R2 asset')
    if relationship==CONSTRUCTION_RELATIONSHIP:
     construction_count+=1
-   clean.append(ref);qualified.append({**ref,'relationship':relationship,'role':'construction_input' if relationship==CONSTRUCTION_RELATIONSHIP else 'supporting_research_evidence'});source_out[key]={'kind':'raw','sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'size_bytes':src['size_bytes'],'origin':(lin.get('provenance') or {}).get('origin')}
+   clean.append(ref);qualified.append({**ref,'relationship':relationship,'role':'construction_input' if relationship==CONSTRUCTION_RELATIONSHIP else 'supporting_evidence'});source_out[key]={'kind':'raw','sha256':src['sha256'],'bucket':src['r2_bucket'],'key':src['r2_key'],'size_bytes':src['size_bytes'],'origin':(lin.get('provenance') or {}).get('origin')}
   if set(relmap)!={(x['source_id'],x['version']) for x in clean} or len(clean)!=len(relmap):raise ValueError('boundary source relationship mismatch')
   if status=='complete' and not construction_count:raise ValueError('complete lineage requires construction input')
   normalized[('boundary',bid)]={'id':bid,'kind':'boundary','revision_id':rev['id'],'execution_status':'selected_for_research','geometry':geom,'geometry_sha256':r['geometry_sha256'],'geometry_hash_method':r['geometry_hash_method'],'source_refs':clean,'qualified_source_refs':qualified,'lineage_status':status,'provenance':p}

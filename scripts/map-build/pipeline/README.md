@@ -24,6 +24,13 @@ The Python bindings must load that GDAL library. A minimal build needs the
 GeoTIFF, ENVI, Shapefile and GeoJSON drivers.
 [GDAL build instructions](https://gdal.org/en/stable/development/building_from_source.html)
 
+When only editable boundary decisions change, reuse the previous run's verified
+physical outputs with `--physical-from /absolute/path/to/previous-run`. The runner
+checks that the land, inland-water and raw-source requests are identical, then
+verifies the existing physical mask, streams and reports. It reruns land assignment
+and the dependent water and packaging stages. Previous reports stay unchanged;
+the new run records the reuse and times only its own verification and processing.
+
 The runner disables PROJ network access and checks the local `proj.db` against
 the pin in the regional template. Set `NEON_DATABASE_URL` to a read-only
 connection to the selected Neon database. Supply R2 credentials through a boto3

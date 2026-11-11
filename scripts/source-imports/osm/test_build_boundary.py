@@ -109,13 +109,13 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(self.links(), [('1', 'construction_input')])
         self.assertEqual(self.storage.get_object.call_count, 1)
 
-    def test_existing_relationship_to_same_raw_source_is_preserved(self):
+    def test_source_consumed_by_the_constructor_is_marked_as_an_input(self):
         self.build()
         self.database.execute("UPDATE atlas.decision_mainland_boundary_sources "
                               "SET relationship='supporting_evidence' "
                               "WHERE revision='__osm_a' AND boundary_id='border'")
         self.build()
-        self.assertEqual(self.links(), [('1', 'supporting_evidence')])
+        self.assertEqual(self.links(), [('1', 'construction_input')])
 
     def test_source_update_preserves_evidence_notes_and_other_revision(self):
         self.build()

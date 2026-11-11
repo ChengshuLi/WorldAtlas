@@ -36,10 +36,14 @@ class Export(unittest.TestCase):
   p=self.s['mainland_boundaries'][0]['provenance'];p['source_relationships'][0]['relationship']='local_geographic_comparison_not_terrain_or_construction_proof'
   self.s['source_lineage_assets'][0]['provenance']={}
   _,_,b,_=boundary_records(self.s);ref=b[('boundary','b')]['qualified_source_refs'][0]
-  self.assertEqual(ref['role'],'supporting_research_evidence');self.assertEqual(ref['relationship'],'local_geographic_comparison_not_terrain_or_construction_proof')
- def test_unknown_relationship_rejected(self):
-  self.s['mainland_boundaries'][0]['provenance']['source_relationships'][0]['relationship']='unreviewed'
-  with self.assertRaisesRegex(ValueError,'unsupported'):boundary_records(self.s)
+  self.assertEqual(ref['role'],'supporting_evidence');self.assertEqual(ref['relationship'],'local_geographic_comparison_not_terrain_or_construction_proof')
+ def test_descriptive_relationship_does_not_require_a_code_allowlist(self):
+  self.s['mainland_boundaries'][0]['provenance']['source_relationships'][0]['relationship']='local drainage comparison'
+  _,_,records,_=boundary_records(self.s)
+  self.assertEqual(records[('boundary','b')]['qualified_source_refs'][0]['role'],'supporting_evidence')
+ def test_empty_relationship_rejected(self):
+  self.s['mainland_boundaries'][0]['provenance']['source_relationships'][0]['relationship']=''
+  with self.assertRaisesRegex(ValueError,'relationship'):boundary_records(self.s)
  def test_relationship_set_mismatch_rejected(self):
   self.s['mainland_boundaries'][0]['provenance']['source_relationships'][0]['source_id']='different'
   with self.assertRaisesRegex(ValueError,'pinned raw R2'):boundary_records(self.s)

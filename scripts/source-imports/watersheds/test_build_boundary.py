@@ -123,11 +123,15 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(self.build()['sha256'], result['sha256'])
         self.assertEqual(self.client.get_object.call_count, 3)
         self.db.execute("UPDATE atlas.decision_mainland_boundaries SET provenance=provenance || "
-                        "'{\"note\":\"retain this\"}' WHERE revision='__watershed'")
+                        "'{\"note\":\"retain this\",\"construction_geometry_sha256\":\"obsolete\","
+                        "\"construction_recipe_sha256\":\"obsolete\",\"source_roles\":[]}' "
+                        "WHERE revision='__watershed'")
         changed = dict(self.recipe, basis='Updated explanation')
         self.store_recipe('2', changed)
         self.assertEqual(self.build('2')['sha256'], result['sha256'])
         self.assertEqual(self.row()[2]['note'], 'retain this')
+        self.assertFalse({'construction_geometry_sha256', 'construction_recipe_sha256', 'source_roles'}
+                         & self.row()[2].keys())
         self.assertEqual(self.row()[2]['construction']['recipe_version'], '2')
         links = self.db.execute('SELECT source_id,source_version FROM atlas.decision_mainland_boundary_sources '
                                 "WHERE revision='__watershed'").fetchall()
@@ -144,6 +148,24 @@ class StorageTests(unittest.TestCase):
         count = self.db.execute("SELECT count(*) FROM atlas.decision_mainland_boundary_sources "
                                 "WHERE revision='__watershed'").fetchone()[0]
         self.assertEqual(count, 3)
+
+    def test_supporting_sources_are_linked_without_being_downloaded(self):
+        self.db.execute(
+            "INSERT INTO atlas.source_assets (source_id,version,title,kind,provider,source_uri,"
+            "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
+            "SELECT source_id,'evidence',title,kind,provider,source_uri,license_name,license_uri,"
+            "attribution,r2_bucket,r2_key||'-evidence',sha256,size_bytes,provenance "
+            "FROM atlas.source_assets WHERE source_id='__watershed_dem' AND version='1'")
+        recipe = dict(self.recipe, evidence_sources=[{'source_id': '__watershed_dem', 'version': 'evidence'}])
+        self.store_recipe('with-evidence', recipe)
+        self.build('with-evidence')
+        self.build('with-evidence')
+        self.assertEqual(self.client.get_object.call_count, 3)
+        relationship = self.db.execute(
+            "SELECT relationship FROM atlas.decision_mainland_boundary_sources "
+            "WHERE revision='__watershed' AND source_id='__watershed_dem' AND source_version='evidence'"
+        ).fetchone()[0]
+        self.assertEqual(relationship, 'supporting_evidence')
 
 
 if __name__ == '__main__':

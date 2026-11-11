@@ -3,6 +3,9 @@ on:
   pull_request:
     paths:
       - 'scripts/source-imports/**'
+      - 'scripts/map-build/pipeline/**'
+      - 'scripts/map-build/stages/land/stage2-geodesic-20261104/contracts.py'
+      - 'scripts/map-build/stages/land/stage2-geodesic-20261104/seed-producer/**'
       - 'database/migrations/001_initial_schema.sql'
       - '.github/workflows/source-imports.yml'
 permissions:
@@ -15,11 +18,12 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: mamba-org/setup-micromamba@v3
         with:
           environment-file: scripts/source-imports/watersheds/environment.yml
           cache-environment: true
+          cache-environment-key: sources-${{ runner.arch }}-${{ hashFiles('scripts/source-imports/watersheds/requirements.txt') }}
       - name: Test source imports with disposable PostgreSQL
         shell: bash -el {0}
         env:
@@ -36,3 +40,12 @@ jobs:
             -f database/migrations/001_initial_schema.sql
           export WORLDATLAS_TEST_DATABASE_URL="postgresql://postgres@/postgres?host=$database_dir"
           time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
+      - name: Test pipeline and source references
+        shell: bash -el {0}
+        env:
+          PROJ_NETWORK: 'OFF'
+          PYTHONPATH: scripts/map-build/stages/land/stage2-geodesic-20261104
+        run: |
+          time python -m unittest discover -s scripts/map-build/pipeline -p 'test_*.py'
+          python -m unittest discover -s scripts/map-build/stages/land/stage2-geodesic-20261104/seed-producer -p 'test_*.py'
+          python -m unittest discover -s scripts/map-build/stages/land/stage2-geodesic-20261104 -p 'test_contracts.py'

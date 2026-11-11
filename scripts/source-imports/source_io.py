@@ -104,7 +104,12 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
 
     raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
     digest = hashlib.sha256(raw).hexdigest()
-    selected = sorted({(source['source_id'], source['version']) for source in sources})
+    selected = {}
+    for source in sources:
+        key = (source['source_id'], source['version'])
+        relationship = source.get('relationship', 'construction_input')
+        if key not in selected or relationship == 'construction_input':
+            selected[key] = relationship
     with database.transaction():
         old = database.execute(
             "SELECT jsonb_array_length(geometry->'coordinates') "
@@ -133,7 +138,9 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
             "'binary64-sorted-compact-geojson-v1','OGC:CRS84',%s) "
             'ON CONFLICT (revision,boundary_id) DO UPDATE SET '
             'geometry=EXCLUDED.geometry,geometry_sha256=EXCLUDED.geometry_sha256,'
-            'provenance=atlas.decision_mainland_boundaries.provenance || EXCLUDED.provenance',
+            'provenance=(atlas.decision_mainland_boundaries.provenance '
+            "- ARRAY['construction_recipe_sha256','construction_geometry_sha256','source_roles']) "
+            '|| EXCLUDED.provenance',
             (revision, boundary_id, Jsonb(geometry), digest, Jsonb(provenance)),
         )
         database.execute(
@@ -141,13 +148,15 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
             "WHERE revision=%s AND boundary_id=%s AND relationship='construction_input'",
             (revision, boundary_id),
         )
-        for source_id, version in selected:
+        for (source_id, version), relationship in sorted(selected.items()):
             database.execute(
                 'INSERT INTO atlas.decision_mainland_boundary_sources '
                 '(revision,boundary_id,source_id,source_version,relationship) '
-                "VALUES (%s,%s,%s,%s,'construction_input') "
-                'ON CONFLICT (revision,boundary_id,source_id,source_version) DO NOTHING',
-                (revision, boundary_id, source_id, version),
+                'VALUES (%s,%s,%s,%s,%s) '
+                'ON CONFLICT (revision,boundary_id,source_id,source_version) DO UPDATE SET '
+                "relationship=CASE WHEN EXCLUDED.relationship='construction_input' THEN "
+                'EXCLUDED.relationship ELSE atlas.decision_mainland_boundary_sources.relationship END',
+                (revision, boundary_id, source_id, version, relationship),
             )
         _refresh_regions(database, revision, boundary_id)
     return digest

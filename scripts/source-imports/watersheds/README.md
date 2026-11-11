@@ -57,6 +57,10 @@ The record's method is `watershed_boundary`. It contains:
 - `joins`: geographic anchors for choosing actual intersections between sections.
 - `start` and `end`: source endpoints, selected intersections or explicit geographic points.
 
+Optional `evidence_sources` name catalog records supporting geographic review.
+They are linked to the boundary but are not downloaded during construction.
+Files read by the calculation belong in `sources`.
+
 Source basin values identify drainage groups; unknown drainage has its own value,
 `-1`. Group IDs need not be consecutive. A group can contain several source basins.
 Use `waterway_groups` for explicitly identified downstream ways; otherwise natural
