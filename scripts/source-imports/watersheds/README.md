@@ -67,6 +67,13 @@ Use `waterway_groups` for explicitly identified downstream ways; otherwise natur
 networks are traced to their source-backed exit basins. Unassigned, ambiguous and
 incomplete networks are reported.
 
+OSM inputs can be XML, ZIP archives of XML responses, or provider PBF files.
+The PBF reader streams memberships and coordinates in two passes. Natural
+drainage includes rivers and streams; full coordinates remain available for
+geometry. Shared nodes and way endpoints preserve downstream connections without
+turning every shape vertex into a separate graph junction. Raster seeding selects
+intersecting ways without clipping their geometry or downstream relationships.
+
 ## Terrain and flow
 
 Keep the primary grid's native cell alignment and valid heights. Fill missing
@@ -100,6 +107,11 @@ A stream-head connection follows a real drainage path and adds a geodesic to the
 exact selected source point. Its receipt records the connector length. The source
 point need not fall in the cell traversed by raster drainage. Explicit connectors
 are construction choices, assembled with the other sections in one pass.
+
+Where source grids have different native resolutions, a connector endpoint can
+select the nearest divide corner to a geographic anchor:
+`{"nearest_divide": "TERRAIN_NAME", "near": {"point": [longitude, latitude]}}`.
+The constructor measures the connector and retains both native grids.
 
 Tests beside these files cover terrain, flow, destinations, waterways, source
 selection, graph paths, assembly and database writes. Run all source-import tests:

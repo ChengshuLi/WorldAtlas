@@ -4,6 +4,7 @@ import unittest
 import zipfile
 
 import numpy as np
+import osmium
 
 from watersheds.terrain import Grid
 from watersheds.waterways import Waterways, seed_grid
@@ -44,6 +45,15 @@ class WaterwayTests(unittest.TestCase):
         self.assertNotIn('10', assigned)
         self.assertIn('10', report['ambiguous'])
 
+    def test_tributary_at_an_internal_vertex_keeps_its_downstream_connection(self):
+        path = self.write('network.osm', ''.join(self.node(i, lon=i / 10) for i in range(1, 6)) +
+                          self.way(10, [1, 2, 3, 4]) + self.way(20, [5, 3], 'stream'))
+        graph = Waterways([path])
+        assigned, report = graph.groups({37: ['10']})
+        self.assertEqual(assigned, {'10': 37, '20': 37})
+        self.assertEqual(report['unassigned'], [])
+        self.assertEqual(list(graph.line(10).coords), [(i / 10, 1.) for i in range(1, 5)])
+
     def test_latest_pinned_object_version_is_used_regardless_of_file_order(self):
         old = self.write('old.osm', self.node(1, 1, 1, 1))
         new = self.write('new.osm', self.node(1, 2, 1, 2))
@@ -68,6 +78,41 @@ class WaterwayTests(unittest.TestCase):
         with zipfile.ZipFile(archive, 'w') as z:
             z.write(path, 'response.osm')
         self.assertEqual(Waterways([path]).ways, Waterways([archive]).ways)
+
+    def test_pbf_and_xml_preserve_the_same_objects_and_natural_network(self):
+        path = self.write('network.osm', self.node(1) + self.node(2, 2) + self.node(3, 3) +
+                          self.node(99, 4) + self.way(10, [1, 2]) + self.way(20, [2, 3], 'canal') +
+                          '<relation id="30" version="1"><member type="way" ref="10" role="main_stream"/>'
+                          '<member type="node" ref="1" role="spring"/></relation>')
+        pbf = self.root / 'network.osm.pbf'
+        writer = osmium.SimpleWriter(str(pbf))
+
+        class Copy(osmium.SimpleHandler):
+            def node(self, node):
+                writer.add_node(node)
+
+            def way(self, way):
+                writer.add_way(way)
+
+            def relation(self, relation):
+                writer.add_relation(relation)
+
+        Copy().apply_file(str(path))
+        writer.close()
+        for natural_only in (False, True):
+            xml = Waterways([path], natural_only=natural_only)
+            packed = Waterways([pbf], natural_only=natural_only)
+            self.assertEqual(packed.nodes, xml.nodes)
+            self.assertEqual(packed.ways, xml.ways)
+            self.assertEqual(packed.relations, xml.relations)
+            self.assertEqual(packed.groups({3: ['10']}), xml.groups({3: ['10']}))
+        self.assertEqual(set(Waterways([pbf], natural_only=True).nodes), {'1', '2'})
+
+    def test_later_artificial_classification_retires_an_older_natural_way(self):
+        first = self.write('old.osm', self.node(1) + self.node(2, 2) + self.way(10, [1, 2]))
+        other = self.write('new.osm', self.way(10, [1, 2], 'canal').replace('version="1"', 'version="2"'))
+        for files in ([first, other], [other, first]):
+            self.assertEqual(Waterways(files, natural_only=True).ways, {})
 
     def test_seed_raster_uses_actual_ids_and_native_cell_positions(self):
         path = self.write('network.osm', self.node(1, .1, 1.5) + self.node(2, 1.9, 1.5) +

@@ -55,12 +55,12 @@ class Sources:
         source = specification['source']
         return self.member(source, specification['member']) if 'member' in specification else self.files[source]
 
-    def network(self, sources):
+    def network(self, sources, *, natural_only=False):
         paths = [self.path(source) if isinstance(source, dict) else self.files[source]
                  for source in sources]
-        key = tuple(paths)
+        key = tuple(paths), natural_only
         if key not in self.networks:
-            self.networks[key] = Waterways(paths)
+            self.networks[key] = Waterways(paths, natural_only=natural_only)
         return self.networks[key]
 
     def point(self, specification, lines):

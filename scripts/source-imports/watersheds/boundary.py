@@ -78,6 +78,20 @@ class Divide:
     def geometry(self):
         return MultiLineString([list(line.coords) for line in self.segments()[1]])
 
+    def nearest_vertex(self, point):
+        """Select a native divide corner for an explicit geographic connector."""
+        if not self.coordinates:
+            raise ValueError('selected divide is empty')
+        keys = sorted(self.coordinates)
+        coordinates = np.asarray([self.coordinates[key] for key in keys])
+        lengths = GEOD.inv(coordinates[:, 0], coordinates[:, 1],
+                           np.full(len(keys), point[0]), np.full(len(keys), point[1]))[2]
+        if not np.isfinite(lengths).all():
+            raise ValueError('invalid geographic connector anchor')
+        key = keys[int(np.argmin(lengths))]
+        edge = min(edge for edge in self.edges if key in edge)
+        return Join(self.coordinates[key], {self: edge})
+
     def route(self, start, end):
         """Find a WGS84 shortest connected path between the chosen intersections."""
         if start.point == end.point:

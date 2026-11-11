@@ -41,6 +41,12 @@ class BoundaryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'disconnected'):
             graph.route(first, last)
 
+    def test_connector_selection_uses_native_vertices_without_coordinate_rounding(self):
+        graph = self.graph()
+        join = graph.nearest_vertex((.01001, .00999))
+        self.assertEqual(join.point, graph.coordinates[(1, 1)])
+        self.assertIn((1, 1), join.edges[graph])
+
     def test_native_overlapping_domains_share_the_same_grid_edges(self):
         origin = (0., .01, 0., .03, 0., -.01)
         first = Grid(np.zeros((2, 2)), origin, 'EPSG:4326', native_origin=origin)

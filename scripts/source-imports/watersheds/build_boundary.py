@@ -13,7 +13,7 @@ import time
 from shapely.geometry import LineString
 
 from source_io import assemble_parts, catalog_source, download_source, read_recipe, save_boundary
-from watersheds.boundary import Divide, assemble, cell_at, flow_to_point, geodesic, intersection
+from watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
 from watersheds.drainage import compute_flow, destinations
 from watersheds.sources import Sources
 from watersheds.terrain import prepare
@@ -30,7 +30,7 @@ def runtime_versions():
     database = Path(pyproj.datadir.get_data_dir()) / 'proj.db'
     return {'python': platform.python_version(),
             'packages': {name: version(name) for name in (
-                'numpy', 'pyproj', 'shapely', 'numba', 'llvmlite', 'pyshp', 'boto3', 'psycopg')},
+                'numpy', 'pyproj', 'shapely', 'numba', 'llvmlite', 'pyshp', 'osmium', 'boto3', 'psycopg')},
             'gdal': gdal.VersionInfo('RELEASE_NAME'), 'pyproj_proj': pyproj.proj_version_str,
             'gdal_proj': '.'.join(map(str, (osr.GetPROJVersionMajor(), osr.GetPROJVersionMinor(),
                                           osr.GetPROJVersionMicro()))),
@@ -85,7 +85,7 @@ def construct(recipe, files):
                                       for item in selected]
             bounds = [min(b[0] for b in domains), min(b[1] for b in domains),
                       max(b[2] for b in domains), max(b[3] for b in domains)]
-            network = sources.network(settings.get('waterways', []))
+            network = sources.network(settings.get('waterways', []), natural_only=True)
             if network.nodes:
                 # Complete ways can end outside the terrain crop. Include those
                 # destinations when looking up source basin identities.
@@ -159,6 +159,12 @@ def construct(recipe, files):
                                        'network_seconds': network_seconds,
                                        'seconds': time.monotonic() - phase}
         phase = time.monotonic()
+        def selected_point(specification):
+            if 'nearest_divide' in specification:
+                target = sources.point(specification['near'], lines)
+                return divides[specification['nearest_divide']].nearest_vertex(target).point
+            return sources.point(specification, lines)
+
         sections = []
         for index, section in enumerate(recipe['sections']):
             if 'line' in section:
@@ -169,17 +175,17 @@ def construct(recipe, files):
                 sections.append(connections[index])
             elif 'geodesic' in section:
                 choice = section['geodesic']
-                sections.append(LineString(geodesic(sources.point(choice['start'], lines),
-                                                   sources.point(choice['end'], lines),
-                                                   choice['max_step_m'])))
+                first, last = selected_point(choice['start']), selected_point(choice['end'])
+                sections.append(LineString(geodesic(first, last, choice['max_step_m'])))
+                report.setdefault('connectors', {})[str(index)] = {
+                    'start': list(first), 'end': list(last), 'length_m': distance(first, last)}
             else:
                 raise ValueError('unknown boundary section type')
         if len(recipe['joins']) != len(sections) - 1:
             raise ValueError('one geographic join selection is required between adjacent sections')
         joins = [intersection(a, b, choice['near'])
                  for a, b, choice in zip(sections, sections[1:], recipe['joins'])]
-        geometry = assemble(sections, joins, sources.point(recipe['start'], lines),
-                            sources.point(recipe['end'], lines))
+        geometry = assemble(sections, joins, selected_point(recipe['start']), selected_point(recipe['end']))
         report['joins'] = [list(join.point) for join in joins]
         report['assembly_seconds'] = time.monotonic() - phase
     report['construction_seconds'] = time.monotonic() - started

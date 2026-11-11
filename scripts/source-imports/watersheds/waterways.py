@@ -3,6 +3,7 @@ from collections import defaultdict
 from contextlib import ExitStack
 from dataclasses import dataclass
 import json
+import math
 from pathlib import Path
 import xml.etree.ElementTree as ET
 import zipfile
@@ -13,7 +14,7 @@ from pyproj import CRS
 from pyproj import Transformer
 import shapefile
 from shapely import transform as transform_geometry
-from shapely.geometry import LineString, Point, shape
+from shapely.geometry import LineString, Point, box, shape
 from shapely.strtree import STRtree
 
 
@@ -25,10 +26,14 @@ class Way:
 
 
 class Waterways:
-    def __init__(self, paths):
+    def __init__(self, paths, *, natural_only=False):
         self.nodes, self.ways, self.relations = {}, {}, {}
-        node_versions = {}
+        self.natural_only = natural_only
+        self._node_versions, self._way_versions = {}, {}
         for path in paths:
+            if Path(path).suffix == '.pbf':
+                self._read_pbf(path)
+                continue
             with ExitStack() as stack:
                 if zipfile.is_zipfile(path):
                     archive = stack.enter_context(zipfile.ZipFile(path))
@@ -44,52 +49,132 @@ class Waterways:
                         if element.tag == 'node':
                             version = int(element.get('version', '0'))
                             point = (float(element.get('lon')), float(element.get('lat')))
-                            if not np.isfinite(point).all() or not (-180 <= point[0] <= 180 and -90 <= point[1] <= 90):
-                                raise ValueError('invalid OSM node coordinates')
-                            old = node_versions.get(ident, -1)
-                            if version == old and self.nodes[ident] != point:
-                                raise ValueError('conflicting same-version OSM node')
-                            if version >= old:
-                                self.nodes[ident], node_versions[ident] = point, version
+                            self._node(ident, version, point)
                             element.clear()
                         elif element.tag == 'way':
                             way = Way(tuple(n.get('ref') for n in element.findall('nd')),
                                       {tag.get('k'): tag.get('v') for tag in element.findall('tag')},
                                       int(element.get('version', '0')))
-                            old = self.ways.get(ident)
-                            if old and old.version == way.version and old != way:
-                                raise ValueError('conflicting same-version OSM way')
-                            if old is None or way.version >= old.version:
-                                self.ways[ident] = way
+                            self._way(ident, way)
                             element.clear()
                         elif element.tag == 'relation':
                             relation = (int(element.get('version', '0')),
                                         tuple((m.get('type'), m.get('ref'), m.get('role'))
                                               for m in element.findall('member')))
-                            old = self.relations.get(ident)
-                            if old and old[0] == relation[0] and old != relation:
-                                raise ValueError('conflicting same-version OSM relation')
-                            if old is None or relation[0] >= old[0]:
-                                self.relations[ident] = relation
+                            self._relation(ident, relation)
                             element.clear()
+        if natural_only:
+            wanted = {node for way in self.ways.values() for node in way.nodes}
+            self.nodes = {node: point for node, point in self.nodes.items() if node in wanted}
+        del self._node_versions, self._way_versions
         self.natural = {ident for ident, way in self.ways.items()
                         if way.tags.get('waterway') in ('river', 'stream')}
         self.incomplete = {ident for ident in self.natural
                            if len(self.ways[ident].nodes) < 2 or
                            any(n not in self.nodes for n in self.ways[ident].nodes)}
-        self.upstream = defaultdict(set)
-        self.downstream = defaultdict(set)
+        self.upstream, self.downstream = defaultdict(set), defaultdict(set)
+        seen, junctions = set(), set()
         for ident in sorted(self.natural - self.incomplete):
             nodes = self.ways[ident].nodes
+            junctions.update((nodes[0], nodes[-1]))
+            for node in nodes:
+                if node in seen:
+                    junctions.add(node)
+                seen.add(node)
+        self.topology_nodes = junctions
+        for ident in sorted(self.natural - self.incomplete):
+            nodes = [node for node in self.ways[ident].nodes if node in junctions]
             for first, second in zip(nodes, nodes[1:]):
                 self.upstream[second].add(first)
                 self.downstream[first].add(second)
+        self._lines, self._spatial = {}, None
+
+    def _node(self, ident, version, point):
+        if not all(map(math.isfinite, point)) or not (-180 <= point[0] <= 180 and -90 <= point[1] <= 90):
+            raise ValueError('invalid OSM node coordinates')
+        old = self._node_versions.get(ident, -1)
+        if version == old and self.nodes[ident] != point:
+            raise ValueError('conflicting same-version OSM node')
+        if version >= old:
+            self.nodes[ident], self._node_versions[ident] = point, version
+
+    def _way(self, ident, way):
+        natural = way.tags.get('waterway') in ('river', 'stream')
+        old = self._way_versions.get(ident)
+        if old and old[0] == way.version:
+            if old[1] != natural or (ident in self.ways and self.ways[ident] != way):
+                raise ValueError('conflicting same-version OSM way')
+        if old is None or way.version >= old[0]:
+            self._way_versions[ident] = (way.version, natural)
+            if not self.natural_only or natural:
+                self.ways[ident] = way
+            else:
+                self.ways.pop(ident, None)
+
+    def _relation(self, ident, relation):
+        if self.natural_only:
+            return
+        old = self.relations.get(ident)
+        if old and old[0] == relation[0] and old != relation:
+            raise ValueError('conflicting same-version OSM relation')
+        if old is None or relation[0] >= old[0]:
+            self.relations[ident] = relation
+
+    def _read_pbf(self, path):
+        """Read way memberships first, then the exact nodes those ways need.
+
+        Both passes stream the full provider file. Natural drainage requests
+        omit unrelated roads and buildings; source-geometry requests retain
+        all supplied ways and relations.
+        """
+        import osmium
+
+        owner = self
+
+        class Memberships(osmium.SimpleHandler):
+            def way(self, way):
+                owner._way(str(way.id), Way(tuple(str(n.ref) for n in way.nodes),
+                                           dict(way.tags), way.version))
+
+            def relation(self, relation):
+                if not owner.natural_only:
+                    kinds = {'n': 'node', 'w': 'way', 'r': 'relation'}
+                    owner._relation(str(relation.id), (relation.version, tuple(
+                        (kinds[m.type], str(m.ref), m.role) for m in relation.members)))
+
+        Memberships().apply_file(str(path))
+        wanted = {int(node) for way in self.ways.values() for node in way.nodes}
+
+        class Coordinates(osmium.SimpleHandler):
+            def node(self, node):
+                owner._node(str(node.id), node.version, (node.lon, node.lat))
+
+        filters = [osmium.filter.IdFilter(wanted)] if self.natural_only else []
+        Coordinates().apply_file(str(path), filters=filters)
 
     def line(self, way_id):
-        way = self.ways[str(way_id)]
+        way_id = str(way_id)
+        if way_id in self._lines:
+            return self._lines[way_id]
+        way = self.ways[way_id]
         if len(way.nodes) < 2 or any(n not in self.nodes for n in way.nodes):
             raise ValueError('selected OSM way has missing nodes')
-        return LineString([self.nodes[n] for n in way.nodes])
+        self._lines[way_id] = LineString([self.nodes[n] for n in way.nodes])
+        return self._lines[way_id]
+
+    def nearby(self, grid):
+        """Select ways intersecting the grid, preserving each complete geometry."""
+        if self._spatial is None:
+            self._spatial_ids = sorted(self.natural - self.incomplete)
+            self._spatial = STRtree([self.line(ident) for ident in self._spatial_ids])
+        x, a, _, y, _, e = grid.transform
+        height, width = grid.elevation.shape
+        west, south, east, north = Transformer.from_crs(grid.crs, 4326, always_xy=True).transform_bounds(
+            x, y + height * e, x + width * a, y, densify_pts=21, errcheck=True)
+        areas = [box(west, south, east, north)] if west <= east else [
+            box(west, south, 180, north), box(-180, south, east, north)]
+        indices = {int(index) for area in areas for index in self._spatial.query(area, predicate='intersects')}
+        return [self._spatial_ids[index] for index in sorted(indices)]
 
     def groups(self, groups):
         """Include all mapped natural tributaries reaching the selected ways.
@@ -105,15 +190,14 @@ class Waterways:
             for ident in map(str, ways):
                 if ident not in self.natural or ident in self.incomplete:
                     raise ValueError(f'selected natural waterway {ident} is missing or incomplete')
-                seen.update(self.ways[ident].nodes)
+                seen.update(node for node in self.ways[ident].nodes if node in self.topology_nodes)
             roots[int(group)] = seen
         return self._assign(roots)
 
     def basin_groups(self, basins):
         """Trace every mapped natural network to source-backed exit basins."""
         roots = defaultdict(set)
-        nodes = {node for ident in self.natural - self.incomplete for node in self.ways[ident].nodes}
-        for node in sorted(nodes):
+        for node in sorted(self.topology_nodes):
             if not self.downstream[node]:
                 group = basins.at(self.nodes[node])
                 if group >= 0:
@@ -171,14 +255,16 @@ def seed_grid(network, assigned, grid):
     seeds = np.full(grid.elevation.shape, -1, dtype='int64')
     conflicts = np.zeros(seeds.shape, dtype=bool)
     groups = sorted(set(assigned.values()))
+    nearby = network.nearby(grid)
     for group in groups:
-        lines = [network.line(ident) for ident, value in assigned.items() if value == group]
+        lines = [network.line(ident) for ident in nearby if assigned.get(ident) == group]
         cells = rasterize(lines, grid)
         conflicts |= cells & (seeds >= 0) & (seeds != group)
         seeds[cells & ~conflicts] = group
     seeds[conflicts] = -1
     report['conflicting_seed_cells'] = int(conflicts.sum())
     report['seed_cells'] = {str(group): int((seeds == int(group)).sum()) for group in groups}
+    report['nearby_ways'] = len(nearby)
     return seeds, report
 
 
