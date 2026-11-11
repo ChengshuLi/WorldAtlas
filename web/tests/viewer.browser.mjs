@@ -75,16 +75,16 @@ let server;
 let origin;
 before(async () => {
   store('review/index.html', bundle(published, 'v8.0', 17), 'text/html');
-  store('review/previews/v9.0/index.html', bundle(candidate, 'v9.0', 18), 'text/html');
+  store(`${candidate}/index.html`, bundle(candidate, 'v9.0', 18), 'text/html');
   const corrupt = 'review/releases/v9.1-rc.1';
-  store('review/previews/v9.1/index.html', bundle(corrupt, 'v9.1', 18), 'text/html');
+  store(`${corrupt}/index.html`, bundle(corrupt, 'v9.1', 18), 'text/html');
   // Valid gzip with different decoded bytes exercises the viewer's checksum.
   store(`${corrupt}/runs.u32le.gz`, gzipSync(words([1, 17])), 'application/gzip');
   const missing = 'review/releases/v9.2-rc.1';
-  store('review/previews/v9.2/index.html', bundle(missing, 'v9.2', 18), 'text/html');
+  store(`${missing}/index.html`, bundle(missing, 'v9.2', 18), 'text/html');
   objects.delete(`${missing}/rows.u32le.gz`);
   const missingLegend = 'review/releases/v9.3-rc.1';
-  store('review/previews/v9.3/index.html', bundle(missingLegend, 'v9.3', 18), 'text/html');
+  store(`${missingLegend}/index.html`, bundle(missingLegend, 'v9.3', 18), 'text/html');
   objects.delete(`${missingLegend}/legend/continents.json`);
 
   server = createServer(async (request, reply) => {
@@ -159,7 +159,7 @@ for (const { name, options, fallback } of [
       });
       const errors = [];
       page.on('pageerror', (error) => errors.push(error.message));
-      await loaded(page, '/v9.0-rc', 'v9.0');
+      await loaded(page, '/review/releases/v9.0-rc.1/index.html', 'v9.0');
       const canvas = page.locator('#canvas');
       assert.equal(await canvas.evaluate((element, type) => Boolean(element.getContext(type)), fallback ? '2d' : 'webgl2'), true);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth === innerWidth), true);
@@ -231,7 +231,7 @@ test('homepage and preview load their own map and source files', { timeout: 30_0
   const page = await browser.newPage();
   try {
     for (const [path, version, prefix, name] of [
-      ['/', 'v8.0', published, 'Africa'], ['/v9.0-rc', 'v9.0', candidate, 'Asia'],
+      ['/', 'v8.0', published, 'Africa'], ['/review/releases/v9.0-rc.1/index.html', 'v9.0', candidate, 'Asia'],
       [`/${candidate}/index.html`, 'v9.0', candidate, 'Asia'], ['/', 'v8.0', published, 'Africa'],
     ]) {
       await loaded(page, path, version);
@@ -251,8 +251,8 @@ test('missing or corrupted map data leaves a clear error and no selectable map',
   const page = await browser.newPage();
   try {
     for (const [path, message] of [
-      ['/v9.1-rc', 'Native map checksum mismatch'], ['/v9.2-rc', 'Native map could not load'],
-      ['/v9.3-rc', 'Map legend could not load'],
+      ['/review/releases/v9.1-rc.1/index.html', 'Native map checksum mismatch'], ['/review/releases/v9.2-rc.1/index.html', 'Native map could not load'],
+      ['/review/releases/v9.3-rc.1/index.html', 'Map legend could not load'],
     ]) {
       await page.goto(origin + path);
       await page.locator('#status.error').waitFor();

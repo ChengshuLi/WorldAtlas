@@ -6,9 +6,10 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
+from unittest.mock import Mock
 
 from execution_state import pin
-from manage_release import build_bundle, verify_object, version
+from manage_release import build_bundle, stage, verify_object, version
 
 
 class ColorCatalog:
@@ -120,6 +121,32 @@ class BundleTests(unittest.TestCase):
 
 
 class R2VerificationTests(unittest.TestCase):
+    def test_staging_writes_only_the_numbered_candidate(self):
+        class Storage:
+            def __init__(self):
+                self.objects = {'review/index.html': b'published'}
+
+            def put_object(self, **options):
+                assert options['IfNoneMatch'] == '*'
+                self.objects[options['Key']] = options['Body'].read()
+
+            def get_object(self, **options):
+                body = self.objects[options['Key']]
+                return {'ContentLength': len(body), 'ContentType': 'text/html',
+                        'Body': io.BytesIO(body)}
+
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = Path(directory)
+            body = b'numbered candidate'
+            (bundle / 'index.html').write_bytes(body)
+            manifest = {'objects': {'index.html': {'size_bytes': len(body),
+                        'content_type': 'text/html', 'sha256': hashlib.sha256(body).hexdigest()}}}
+            db, storage = Mock(), Storage()
+            db.execute.return_value.fetchone.return_value = None
+            stage(db, storage, 'test', 'v9.0-rc.1', bundle, manifest)
+            self.assertEqual(storage.objects, {'review/index.html': b'published',
+                             'review/releases/v9.0-rc.1/index.html': body})
+
     def test_matching_size_alone_cannot_pass_release_verification(self):
         class Storage:
             def get_object(self, **options):

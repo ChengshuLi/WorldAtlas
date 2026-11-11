@@ -222,8 +222,7 @@ its ID, name, color, and total cell count. Names come from the selected snapshot
 land colors come from Neon, and counts come from the completed grid report.
 Land and water counts are added for each continent. All water uses the viewer's
 shared water color. Both generated files are included in the candidate's file hashes.
-Open `/v9.0-rc` for the most recently staged candidate or
-`/review/releases/v9.0-rc.1/index.html` for that exact candidate. Build and
+Open `/review/releases/v9.0-rc.1/index.html` for that exact candidate. Build and
 stage `v9.0-rc.2` if anything needs to change.
 
 Once you’ve reviewed the exact candidate and the release changes are ready,

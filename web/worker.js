@@ -14,12 +14,9 @@ export default {
         status: "ready",
       });
     }
-    const candidate = /^\/(v[0-9]+\.[0-9]+)-rc\/?$/.exec(url.pathname);
-    if (url.pathname === "/" || candidate) {
-      const key = candidate ? `review/previews/${candidate[1]}/index.html` : "review/index.html";
-      const index = await env.ATLAS.get(key);
+    if (url.pathname === "/") {
+      const index = await env.ATLAS.get("review/index.html");
       if (!index) {
-        if (candidate) return new Response("Release candidate not found", { status: 404 });
         return new Response(
           "WorldAtlas has no published map yet.",
           {

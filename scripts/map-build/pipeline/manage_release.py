@@ -242,9 +242,6 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
     if row is None:
         db.execute('INSERT INTO atlas.map_release_candidates (candidate_id,r2_bucket,manifest) VALUES (%s,%s,%s)',
                    (candidate, bucket, Jsonb(manifest)))
-    html = verify_object(storage, bucket, f'{prefix(candidate)}/index.html',
-                         manifest['objects']['index.html'], return_bytes=True)
-    put_homepage(storage, bucket, f'review/previews/{version(candidate)}/index.html', html)
 
 
 def approve(db, candidate, reviewer):

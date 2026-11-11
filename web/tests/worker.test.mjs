@@ -93,24 +93,28 @@ test("V8 sources aliases expose only the known public source page", async () => 
   assert.equal((await worker.fetch(request("/v8.0/sources", "POST"), env)).status, 405);
 });
 
-test("the candidate URL and homepage serve separate objects", async () => {
+test("numbered candidates stay separate from the published homepage", async () => {
   const requested = [];
   const storage = { ATLAS: { get: async (key) => {
     requested.push(key);
     if (key === "review/index.html") return { body: "V8" };
-    if (key === "review/previews/v9.0/index.html") return { body: "V9 candidate" };
+    if (key === "review/releases/v9.0-rc.1/index.html" || key === "review/releases/v9.0-rc.2/index.html") {
+      return { body: key.includes("rc.1") ? "First candidate" : "Second candidate",
+        httpEtag: '"candidate"', writeHttpMetadata: h => h.set("Content-Type", "text/html") };
+    }
     return null;
   } } };
   assert.equal(await (await worker.fetch(request("/"), storage)).text(), "V8");
-  const preview = await worker.fetch(request("/v9.0-rc"), storage);
-  assert.equal(await preview.text(), "V9 candidate");
-  assert.equal(preview.headers.get("Cache-Control"), "no-cache");
-  assert.equal(await (await worker.fetch(request("/v9.0-rc", "HEAD"), storage)).text(), "");
-  assert.equal((await worker.fetch(request("/v10.0-rc"), storage)).status, 404);
+  assert.equal(await (await worker.fetch(request("/review/releases/v9.0-rc.1/index.html"), storage)).text(), "First candidate");
+  assert.equal(await (await worker.fetch(request("/review/releases/v9.0-rc.2/index.html"), storage)).text(), "Second candidate");
+  assert.equal(await (await worker.fetch(request("/review/releases/v9.0-rc.1/index.html", "HEAD"), storage)).text(), "");
+  assert.equal((await worker.fetch(request("/v9.0-rc"), storage)).status, 404);
+  assert.equal((await worker.fetch(request("/review/releases/v9.0-rc.3/index.html"), storage)).status, 404);
   assert.deepEqual(requested, [
     "review/index.html",
-    "review/previews/v9.0/index.html",
-    "review/previews/v9.0/index.html",
-    "review/previews/v10.0/index.html",
+    "review/releases/v9.0-rc.1/index.html",
+    "review/releases/v9.0-rc.2/index.html",
+    "review/releases/v9.0-rc.1/index.html",
+    "review/releases/v9.0-rc.3/index.html",
   ]);
 });
