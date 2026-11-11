@@ -47,8 +47,8 @@ database-write times. R2 transfer time is reported separately; cached verificati
 and multipart reassembly count as source processing.
 
 The current construction IDs are `caucasus-boundary-construction` and
-`ural-boundary-construction`, both version `2`. Their geographic choices and
-exact source versions are in `atlas.structured_documents`.
+`ural-boundary-construction`. Their versioned geographic choices and exact source
+selections are in `atlas.structured_documents`.
 
 ## Construction settings
 
