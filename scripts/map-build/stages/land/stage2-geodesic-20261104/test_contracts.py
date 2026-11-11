@@ -73,6 +73,10 @@ class CrosswalkTests(unittest.TestCase):
   traces=[{**segs[0],'geometry_sha256':lg,'lineage_status':'incomplete','source_citations':[{'source_id':'s','version':'1','relationship':'construction_input','role':'construction_input','sha256':'a'*64,'bucket':'raw','key':'s'}],'closure_proof':None},{**segs[1],'geometry_sha256':rg,'lineage_status':'incomplete','route_provenance':prov,'source_citations':[{'source_id':'s','version':'1','sha256':'a'*64,'bucket':'raw','key':'s','origin':'provider'}],'closure_proof':proof}]
   self.seed={'grid':self.grid,'physical_rows_sha256':pins['physical_rows'],'physical_runs_sha256':pins['physical_runs'],'physical_report_sha256':pins['physical_report'],'seed_rules':result,'input_sha256':pins,'region_traces':[{'region_id':'z','revision_id':'d','geometry_sha256':polygon_hash,'input_trace':traces}]};self.codes={i:17+i for i in range(6)}
  def check(self):return c.validate_selected_seed_decisions(self.snapshot,self.seed,self.groups,self.codes,self.metric)
+ def test_source_description_does_not_gate_construction(self):
+  for representation in ('provider_original_bundle','archived_responses',None):
+   self.snapshot['source_lineage_assets'][0]['provenance']['representation']=representation
+   with self.subTest(representation=representation):self.check()
  def test_supporting_roles_are_not_construction_proof(self):
   prov=self.snapshot['mainland_boundaries'][0]['provenance'];trace=self.seed['region_traces'][0]['input_trace'][0]
   relationship='local_geographic_comparison_not_terrain_or_construction_proof';prov['source_relationships'][0]['relationship']=relationship

@@ -11,13 +11,13 @@ patch producer reports, relocate historical paths, or repair lineage sidecars.
 
 The runner builds a local grid from the selected inputs. Publication is a separate workflow.
 
-## Run V8
+## Run
 
 Use one Python installation with NumPy, SciPy, PyProj, GDAL/OGR, PyArrow,
 boto3 and psycopg. The same command runs on macOS and Linux. The selected
 regional PDF evidence reader needs Poppler's `pdftotext` on `PATH`.
 
-For byte-for-byte V8 reproduction, use GDAL 3.10.3 and PROJ 9.6.0.
+For consistent rasterization, use GDAL 3.10.3 and PROJ 9.6.0.
 Compile GDAL with `-ffp-contract=off` in both `CMAKE_C_FLAGS` and
 `CMAKE_CXX_FLAGS` to preserve rounding in the tile coordinate transform.
 The Python bindings must load that GDAL library. A minimal build needs the
@@ -142,6 +142,10 @@ All `sources` are explicit `{path, sha256}` pins:
   `coastal_plan` supplies the full coastal tessellation. Every basin receives
   an independent raster-to-span coverage check before prefill. The selected
   ocean routes and seeds run once, followed by enclosed-water assignment.
+  Ocean routes are imported from IHO S-130 using a
+  [construction record in Neon](../../source-imports/iho/README.md). This selection
+  leaves the named-sea inputs unchanged. Updating the ocean snapshot changes the
+  next build; it does not alter an already published release.
 - `reference_rows`, `reference_runs`: optional explicit full-grid reference pins,
   named `rows.u32le` and `runs.u32le` in one directory. The normal comparator
   checks every cell and fails the run if any differ. Reference equality is a

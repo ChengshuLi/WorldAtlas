@@ -25,12 +25,10 @@ class Export(unittest.TestCase):
  def test_raw_record_with_dependency_rejected(self):
   self.s['source_lineage_dependencies']=[{'source_id':'raw','version':'1','parent_source_id':'other','parent_version':'1'}]
   with self.assertRaisesRegex(ValueError,'pinned raw R2'):boundary_records(self.s)
- def test_missing_provider_origin_rejected(self):
-  del self.s['source_lineage_assets'][0]['provenance']['origin']
-  with self.assertRaisesRegex(ValueError,'provider original'):boundary_records(self.s)
- def test_nonoriginal_raw_rejected(self):
-  self.s['source_lineage_assets'][0]['provenance']['representation']='derived'
-  with self.assertRaisesRegex(ValueError,'provider original'):boundary_records(self.s)
+ def test_descriptive_source_metadata_does_not_gate_construction(self):
+  for provenance in ({},{'representation':'provider_original_bundle'},{'representation':'archived_responses'}):
+   self.s['source_lineage_assets'][0]['provenance']=provenance
+   with self.subTest(provenance=provenance):boundary_records(self.s)
  def test_derived_source_rejected(self):
   self.s['source_lineage_assets'][0]['kind']='derived'
   with self.assertRaisesRegex(ValueError,'pinned raw R2'):boundary_records(self.s)

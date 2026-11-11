@@ -177,7 +177,7 @@ def validate_selected_seed_decisions(snapshot,seed,groups,entity_codes,metric,gu
      need(isinstance(ref,dict) and set(ref)=={'source_id','version'} and (ref['source_id'],ref['version']) in source_by,'invalid boundary source');key=(ref['source_id'],ref['version']);need(key not in used_refs and key in relmap,'boundary source relationship mismatch');used_refs.add(key);source=source_by[key];asset=asset_by.get(key);need(isinstance(asset,dict) and key not in derived and asset.get('kind')=='raw' and text(asset.get('provider')) and text(asset.get('source_uri')) and all(asset.get(k)==source.get(k) for k in ('sha256','r2_bucket','r2_key','size_bytes')) and isinstance(source.get('sha256'),str) and HEX.fullmatch(source['sha256']) and text(source.get('r2_bucket')) and text(source.get('r2_key')) and type(source.get('size_bytes')) is int and source['size_bytes']>0,'invalid raw source custody')
      relationship=relmap[key];role='construction_input' if relationship==CONSTRUCTION_RELATIONSHIP else 'supporting_research_evidence'
      if role=='construction_input':
-      ap=asset.get('provenance');need(isinstance(ap,dict) and ap.get('representation')=='provider_original' and text(ap.get('origin')),'invalid construction source provenance');construction_count+=1
+      construction_count+=1
      cit.append({'source_id':ref['source_id'],'version':ref['version'],'relationship':relationship,'role':role,'sha256':source.get('sha256'),'bucket':source.get('r2_bucket'),'key':source.get('r2_key')})
     need(used_refs==set(relmap) and (prov.get('lineage_status')!='complete' or construction_count>0),'boundary lineage or source relationship mismatch')
     need(trace.get('source_citations')==cit,'boundary citations mismatch')
