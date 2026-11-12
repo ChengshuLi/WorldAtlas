@@ -165,9 +165,18 @@ exact selected source point. Its receipt records the connector length. The sourc
 point need not fall in the cell traversed by raster drainage. Explicit connectors
 are construction choices, assembled with the other sections in one pass.
 This also supports a selected mapped junction where streams assigned to different
-groups meet. Connect the divide to the exact source node; report that intended
-contact separately from additional crossings along the stream. A shared mapped
-node alone does not establish whether a physical bifurcation exists.
+groups meet. Put the ordered source points in the divide section's `via` list
+and set `max_step_m` for its geodesic connections. The constructor derives
+attachments from the current ordered divide, extending each replaced interval
+to enclose any crossings of the original route. Overlapping intervals are joined
+in the declared point order. Coordinates outside those intervals and the section
+endpoints are preserved. Attachments are calculated results, not settings to
+retune after a source changes. Invalid point order or a self-crossing result is
+reported before saving. Receipts record the attachments and connection lengths.
+
+Report the intended junction contact separately from additional crossings along
+the stream. A shared mapped node alone does not establish whether a physical
+bifurcation exists.
 
 Where source grids have different native resolutions, a connector endpoint can
 select the nearest divide corner to a geographic anchor:
