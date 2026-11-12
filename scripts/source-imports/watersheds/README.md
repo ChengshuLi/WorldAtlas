@@ -25,7 +25,7 @@ native dependency versions in [`environment.yml`](environment.yml).
 Set `NEON_DATABASE_URL` and an AWS credential profile outside the code. Then run:
 
 ```bash
-PYTHONPATH=scripts/source-imports python3 -m watersheds.build_boundary \
+PYTHONPATH=scripts/source-imports python3 -m run_import \
   --recipe CONSTRUCTION_ID VERSION \
   --revision DECISION_REVISION \
   --r2-endpoint R2_ENDPOINT \

@@ -1,9 +1,4 @@
 """Build an editable Neon boundary from an OSM way archive cataloged in Neon."""
-import argparse
-import json
-from contextlib import closing
-import os
-from pathlib import Path
 
 from osm.ways import assemble_archive
 from source_io import read_recipe, catalog_source, download_source, save_boundary as save_mainland_boundary
@@ -49,34 +44,3 @@ def build_boundary(database, client, recipe_id, recipe_version, revision,
     return {'revision': revision, 'boundary_id': recipe['boundary_id'],
             'vertices': len(geometry['coordinates']), 'sha256': digest,
             'archive': str(archive)}
-
-
-def main():
-    """Build the OSM boundary described by a selected Neon construction record."""
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--recipe', nargs=2, required=True, metavar=('ID', 'VERSION'),
-                        help='construction record source_id and version in Neon')
-    parser.add_argument('--revision', required=True,
-                        help='existing decision revision to write in Neon')
-    parser.add_argument('--r2-endpoint', required=True)
-    parser.add_argument('--work-dir', type=Path, required=True)
-    parser.add_argument('--expected-geometry-sha256',
-                        help='check an existing boundary before writing, e.g. a release replay')
-    args = parser.parse_args()
-    connection = os.environ.get('NEON_DATABASE_URL')
-    if not connection:
-        parser.error('set NEON_DATABASE_URL to the working database')
-
-    import boto3
-    import psycopg
-
-    with psycopg.connect(connection) as database, closing(
-            boto3.client('s3', endpoint_url=args.r2_endpoint, region_name='auto')) as storage:
-        result = build_boundary(database, storage, *args.recipe,
-                                args.revision, args.work_dir,
-                                args.expected_geometry_sha256)
-    print(json.dumps(result))
-
-
-if __name__ == '__main__':
-    main()

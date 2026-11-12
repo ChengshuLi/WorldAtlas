@@ -17,3 +17,36 @@ Geographic selections belong in Neon construction records. Reusable parsing and
 construction code belongs here. The [map builder](../map-build/pipeline/README.md)
 uses the selected structured records, together with large raw raster/vector
 inputs, to produce map cells.
+
+## Choose a construction record
+
+Use one entry point for all construction methods:
+
+```bash
+PYTHONPATH=scripts/source-imports python3 -m run_import \
+  --recipe CONSTRUCTION_ID VERSION
+```
+
+The command reads the record from `atlas.structured_documents`. Its JSON
+`method` selects the constructor through the explicit `IMPORTERS` mapping in
+[`run_import.py`](run_import.py):
+
+| Record method | Constructor |
+| --- | --- |
+| `osm_way_chain` | `osm.build_boundary` |
+| `s130_rhumb_routes` | `iho.build_routes` |
+| `smooth_latitude_trace` | `traces.build_boundary` |
+| `watershed_boundary` | `watersheds.build_boundary` |
+
+The record ID identifies data; its name does not select Python code.
+OSM, IHO and watershed imports additionally require `--revision`,
+`--r2-endpoint` and `--work-dir`. Traced boundaries need only the record ID and
+version. Set `NEON_DATABASE_URL` and any required AWS profile outside the code.
+A supplied work directory also receives a JSON receipt after a successful run.
+
+For example, the Lydekker construction record can be run with:
+
+```bash
+PYTHONPATH=scripts/source-imports python3 -m run_import \
+  --recipe lydekker-boundary-construction 1
+```

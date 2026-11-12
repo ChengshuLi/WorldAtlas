@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 import hashlib
 import json
 import os
@@ -48,6 +49,12 @@ class DatabaseTests(unittest.TestCase):
         self.assertEqual(before[6]['construction']['recipe_id'], '__trace_construction')
         self.assertEqual(self.build(), result)
         self.assertEqual(self.row(), before)
+
+    def test_shared_entry_point_selects_trace_from_the_stored_method(self):
+        from run_import import run_import
+        result = run_import(lambda: nullcontext(self.database), '__trace_construction', '1')
+        self.assertEqual(result['line_id'], '__trace_final')
+        self.assertEqual(self.row()[4], result['sha256'])
 
     def test_new_points_update_final_boundary_and_retain_notes(self):
         self.build()

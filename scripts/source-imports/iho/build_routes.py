@@ -1,9 +1,4 @@
 """Build selected IHO S-130 routes from a Neon construction record and raw R2 data."""
-import argparse
-from contextlib import closing
-import json
-import os
-from pathlib import Path
 
 from psycopg.types.json import Jsonb
 
@@ -66,26 +61,3 @@ def build_routes(database, client, recipe_id, recipe_version, revision, work_dir
     save_routes(database, revision, result, source, recipe)
     return dict(revision=revision, route_ids=[route['route_id'] for route in result['routes']],
                 endpoint_count=len(result['endpoints']), archive=str(archive))
-
-
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--recipe', nargs=2, required=True, metavar=('ID', 'VERSION'))
-    parser.add_argument('--revision', required=True)
-    parser.add_argument('--r2-endpoint', required=True)
-    parser.add_argument('--work-dir', type=Path, required=True)
-    args = parser.parse_args()
-    connection = os.environ.get('NEON_DATABASE_URL')
-    if not connection:
-        parser.error('set NEON_DATABASE_URL to the working database')
-    import boto3
-    import psycopg
-
-    with psycopg.connect(connection) as database, closing(
-            boto3.client('s3', endpoint_url=args.r2_endpoint, region_name='auto')) as storage:
-        result = build_routes(database, storage, *args.recipe, args.revision, args.work_dir)
-    print(json.dumps(result))
-
-
-if __name__ == '__main__':
-    main()

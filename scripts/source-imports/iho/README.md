@@ -58,7 +58,7 @@ Run from the repository root, replacing the uppercase placeholders and local
 work path with your settings:
 
 ```bash
-PYTHONPATH=scripts/source-imports python3 -m iho.build_routes \
+PYTHONPATH=scripts/source-imports python3 -m run_import \
   --recipe CONSTRUCTION_ID VERSION \
   --revision DECISION_REVISION \
   --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com \

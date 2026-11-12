@@ -1,8 +1,6 @@
 """Build and save one final boundary from a construction record in Neon."""
-import argparse
 import hashlib
 import json
-import os
 
 from psycopg.types.json import Jsonb
 
@@ -47,21 +45,3 @@ def build_boundary(database, recipe_id, recipe_version, expected_geometry_sha256
         )
 
     return dict(line_id=recipe['line_id'], vertices=len(geometry['coordinates']), sha256=digest)
-
-
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--recipe', nargs=2, required=True, metavar=('ID', 'VERSION'))
-    parser.add_argument('--expected-geometry-sha256', help='optional geometry check before saving')
-    args = parser.parse_args()
-    if not (connection := os.environ.get('NEON_DATABASE_URL')):
-        parser.error('set NEON_DATABASE_URL to the working database')
-    import psycopg
-
-    with psycopg.connect(connection) as database:
-        result = build_boundary(database, *args.recipe, args.expected_geometry_sha256)
-    print(json.dumps(result))
-
-
-if __name__ == '__main__':
-    main()

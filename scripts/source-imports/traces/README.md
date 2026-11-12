@@ -11,7 +11,10 @@ separate correction or adjustment stage.
 
 ## Construction record
 
-Use the existing `atlas.structured_documents` table. A record contains:
+Use the existing `atlas.structured_documents` table. Its `source_id` identifies
+the construction record and `version` selects its version. The following fields
+are JSON keys inside its `document` column, not separate table columns. The
+`source_id` inside that JSON identifies the raw source figure.
 
 | Field | Meaning |
 | --- | --- |
@@ -43,8 +46,16 @@ Use Python 3.11 or later with NumPy, SciPy, and psycopg. Set
 `NEON_DATABASE_URL` to the working database, then run from the repository root:
 
 ```bash
-PYTHONPATH=scripts/source-imports python3 -m traces.build_boundary \
+PYTHONPATH=scripts/source-imports python3 -m run_import \
   --recipe CONSTRUCTION_ID VERSION
+```
+
+The shared entry point reads `method: smooth_latitude_trace` and selects this
+constructor. For example:
+
+```bash
+PYTHONPATH=scripts/source-imports python3 -m run_import \
+  --recipe lydekker-boundary-construction 1
 ```
 
 The command saves the geometry, checksum, raw-source reference, and construction

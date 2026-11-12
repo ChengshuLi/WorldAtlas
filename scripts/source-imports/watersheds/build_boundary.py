@@ -1,11 +1,7 @@
 """Regenerate an editable mainland boundary from a Neon construction record."""
-import argparse
-from contextlib import closing
 import hashlib
 from importlib.metadata import version
-import json
 import logging
-import os
 from pathlib import Path
 import platform
 import time
@@ -272,29 +268,3 @@ def build_boundary(connect, client, recipe_id, recipe_version, revision, work_di
                   save_seconds=time.monotonic() - started)
     report['runtime'] = runtime
     return report
-
-
-def main():
-    logging.basicConfig(level=logging.INFO, format='%(message)s')
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--recipe', nargs=2, required=True, metavar=('ID', 'VERSION'))
-    parser.add_argument('--revision', required=True)
-    parser.add_argument('--r2-endpoint', required=True)
-    parser.add_argument('--work-dir', type=Path, required=True)
-    args = parser.parse_args()
-    if not os.environ.get('NEON_DATABASE_URL'):
-        parser.error('set NEON_DATABASE_URL to the working database')
-    import boto3
-    import psycopg
-
-    connect = lambda: psycopg.connect(os.environ['NEON_DATABASE_URL'], connect_timeout=15)
-    with closing(boto3.client('s3', endpoint_url=args.r2_endpoint, region_name='auto')) as client:
-        result = build_boundary(connect, client, *args.recipe, args.revision, args.work_dir)
-    destination = args.work_dir / 'receipts' / f'{args.recipe[0]}-{args.recipe[1]}.json'
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(json.dumps(result, indent=2) + '\n')
-    print(json.dumps(result))
-
-
-if __name__ == '__main__':
-    main()
