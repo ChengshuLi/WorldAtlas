@@ -286,6 +286,77 @@ class DatabaseTest(unittest.TestCase):
             "SELECT end_index FROM atlas.decision_mainland_region_segments "
             "WHERE revision='__osm_a' AND region_id='region' AND ordinal=0").fetchone()[0], 2)
 
+    def test_parallel_boundary_updates_leave_the_shared_region_hash_consistent(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+        import time
+
+        import psycopg
+
+        self.region_fixture()
+        self.database.commit()
+
+        def cleanup():
+            self.database.rollback()
+            with self.database.transaction():
+                for table in ('decision_mainland_region_segments', 'decision_mainland_seed_regions',
+                              'decision_mainland_boundary_sources', 'decision_mainland_boundaries',
+                              'decision_revisions'):
+                    self.database.execute('DELETE FROM atlas.' + table + " WHERE revision IN ('__osm_a','__osm_b')")
+                self.database.execute("DELETE FROM atlas.entity_registry_revisions WHERE revision='__osm_entities'")
+                self.database.execute("DELETE FROM atlas.structured_documents WHERE source_id='__osm_recipe'")
+                self.database.execute("DELETE FROM atlas.source_assets WHERE source_id='osm-test'")
+
+        self.addCleanup(cleanup)
+        paused, release = Event(), Event()
+
+        class PauseBeforeHash:
+            def __init__(self, database):
+                self.database = database
+
+            def transaction(self):
+                return self.database.transaction()
+
+            def execute(self, sql, parameters):
+                if sql.startswith('UPDATE atlas.decision_mainland_seed_regions SET geometry_sha256'):
+                    paused.set()
+                    if not release.wait(5):
+                        raise AssertionError('test did not release the first writer')
+                return self.database.execute(sql, parameters)
+
+        first = {'type': 'LineString', 'coordinates': [[0., 0.], [.4, .6], [1., 1.]]}
+        second = {'type': 'LineString', 'coordinates': [[1., 1.], [1.2, -.2], [0., 0.]]}
+
+        def write(database, geometry, boundary_id):
+            return save_boundary(database, '__osm_a', geometry, self.source,
+                                 dict(self.recipe, boundary_id=boundary_id))
+
+        url = os.environ['WORLDATLAS_TEST_DATABASE_URL']
+        with psycopg.connect(url) as a, psycopg.connect(url) as b, \
+                psycopg.connect(url, autocommit=True) as observer, ThreadPoolExecutor(2) as workers:
+            try:
+                first_result = workers.submit(write, PauseBeforeHash(a), first, 'border')
+                self.assertTrue(paused.wait(5))
+                second_result = workers.submit(write, b, second, 'return')
+                deadline = time.monotonic() + 5
+                while not second_result.done():
+                    blockers = observer.execute('SELECT pg_blocking_pids(%s)', (b.info.backend_pid,)).fetchone()[0]
+                    if a.info.backend_pid in blockers:
+                        break
+                    if time.monotonic() >= deadline:
+                        self.fail('second writer neither completed nor waited for the first writer')
+                    release.wait(.01)
+            finally:
+                release.set()
+            first_result.result(timeout=5)
+            second_result.result(timeout=5)
+
+        polygon = {'type': 'Polygon', 'coordinates': [[*first['coordinates'], *second['coordinates'][1:]]]}
+        digest = hashlib.sha256(json.dumps(polygon, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+        saved = self.database.execute("SELECT geometry_sha256 FROM atlas.decision_mainland_seed_regions "
+                                      "WHERE revision='__osm_a' AND region_id='region'").fetchone()[0]
+        self.assertEqual(saved, digest)
+
 
 if __name__ == '__main__':
     unittest.main()

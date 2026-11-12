@@ -117,9 +117,19 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
         if key not in selected or relationship == 'construction_input':
             selected[key] = relationship
     with database.transaction():
+        # Boundaries of one region may be saved by different workers. Serialize
+        # their short writes so each polygon hash includes every committed edit.
+        database.execute(
+            'SELECT r.region_id FROM atlas.decision_mainland_seed_regions r '
+            'WHERE r.revision=%s AND EXISTS ('
+            'SELECT 1 FROM atlas.decision_mainland_region_segments s '
+            'WHERE s.revision=r.revision AND s.region_id=r.region_id AND s.boundary_id=%s) '
+            'ORDER BY r.region_id FOR UPDATE',
+            (revision, boundary_id),
+        ).fetchall()
         old = database.execute(
             "SELECT jsonb_array_length(geometry->'coordinates') "
-            'FROM atlas.decision_mainland_boundaries WHERE revision=%s AND boundary_id=%s',
+            'FROM atlas.decision_mainland_boundaries WHERE revision=%s AND boundary_id=%s FOR UPDATE',
             (revision, boundary_id),
         ).fetchone()
         count = len(geometry['coordinates'])
