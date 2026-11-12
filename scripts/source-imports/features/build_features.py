@@ -18,6 +18,9 @@ def build_features(database, storage, recipe_id, version, revision, work_dir):
     method = recipe['method']
     if method == 'selected_vector_features':
         features = read_features(path, recipe)
+    elif method == 'selected_table_points':
+        from features.points import read_points
+        features = read_points(path, recipe)
     elif method == 's130_areas':
         from iho.areas import read_areas
         features = read_areas(path, source, recipe)

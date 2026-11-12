@@ -86,6 +86,32 @@ class StorageTests(unittest.TestCase):
             save_features(self.database, '__features_a', features, self.recipe)
         self.assertEqual(self.snapshot(), before)
 
+    def test_table_import_uses_the_same_atomic_storage_and_cache(self):
+        raw = b'provider_id,name,longitude,latitude\na,First,-20.25,11.5\n'
+        self.database.execute('INSERT INTO atlas.source_assets '
+                              '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+                              'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+                              "SELECT source_id,'2',title,kind,provider,source_uri,license_name,license_uri,"
+                              'attribution,r2_bucket,%s,%s,%s,provenance FROM atlas.source_assets '
+                              'WHERE source_id=%s AND version=%s',
+                              ('source.csv', hashlib.sha256(raw).hexdigest(), len(raw), '__feature_raw', '1'))
+        self.storage.get_object.side_effect = lambda **_: {'Body': io.BytesIO(raw)}
+        self.recipe.update(method='selected_table_points', source_version='2', longitude_field='longitude',
+                           latitude_field='latitude', coordinate_reference='OGC:CRS84')
+        self.recipe['selections'][0]['expected_properties'] = {'name': 'First'}
+        self.register('2')
+        self.build(version='2')
+        before = self.snapshot()
+        self.assertEqual(before[0][1], {'type': 'Point', 'coordinates': [-20.25, 11.5]})
+        self.assertEqual(before[0][4]['provider_properties']['name'], 'First')
+        self.build(version='2')
+        self.assertEqual(self.storage.get_object.call_count, 1)
+        self.recipe['selections'][0]['expected_properties']['name'] = 'Changed'
+        self.register('3')
+        with self.assertRaisesRegex(ValueError, 'identity'):
+            self.build(version='3')
+        self.assertEqual(self.snapshot(), before)
+
     def test_signed_zero_checksum_matches_the_geometry_read_back_from_jsonb(self):
         save_features(self.database, '__features_a', [dict(
             feature_id='zero', source_id='__feature_raw', source_version='1', source_feature_id='a',

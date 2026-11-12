@@ -40,6 +40,8 @@ def validate_geometry(geometry):
         elif (len(values) != 2 or any(type(value) not in (int, float)
                                      or not math.isfinite(value) for value in values)):
             raise ValueError('expected finite two-dimensional numeric coordinates')
+        elif not (-180 <= values[0] <= 180 and -90 <= values[1] <= 90):
+            raise ValueError('coordinates are outside WGS84 longitude/latitude ranges')
     coordinates(geometry['coordinates'])
     result = shape(geometry)
     if result.is_empty or not result.is_valid or result.has_z:

@@ -84,6 +84,8 @@ class VectorTests(unittest.TestCase):
                          {'type': 'Point', 'coordinates': [1, 2, 3]},
                          {'type': 'Point', 'coordinates': [True, 2]},
                          {'type': 'Point', 'coordinates': ['1', 2]},
+                         {'type': 'Point', 'coordinates': [181, 2]},
+                         {'type': 'Point', 'coordinates': [1, -91]},
                          {'type': 'Polygon', 'coordinates': [[[0, 0], [1, 1], [0, 1], [1, 0], [0, 0]]]}):
             with self.subTest(geometry=geometry), self.assertRaises(ValueError):
                 validate_geometry(geometry)

@@ -29,6 +29,15 @@ available when a source needs a particular documented CRS conversion.
 The `s130_areas` method uses the same storage workflow and
 [`iho/areas.py`](../iho/areas.py) for complete S-130 surfaces and collections.
 
+`selected_table_points` uses [`points.py`](points.py) for CSV, TSV and other
+delimited point tables. Its construction supplies `id_field`, `longitude_field`,
+`latitude_field` and `coordinate_reference: OGC:CRS84`, plus the same selections
+and optional identity/checksum checks. Set `delimiter` for a non-comma separator,
+`columns` for a headerless table, and `member` for a table inside a ZIP archive.
+For example, a GeoNames construction names its published columns and checks each
+selected record's name, feature type and country; those choices are data, not
+separate island/airport implementations.
+
 `test_vector.py` checks selection, identity, archives, conversion and malformed
 geometry. `test_storage.py` checks transactional saves, repeat imports, preserved
 relationships, schema upgrades and rollback using disposable PostgreSQL.

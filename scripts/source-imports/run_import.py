@@ -44,6 +44,7 @@ IMPORTERS = {
     's130_rhumb_routes': _iho,
     'watershed_boundary': _watershed,
     'selected_vector_features': _features,
+    'selected_table_points': _features,
     's130_areas': _features,
 }
 
