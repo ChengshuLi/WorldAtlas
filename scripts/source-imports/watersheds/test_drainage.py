@@ -1,6 +1,7 @@
 import unittest
 
 import numpy as np
+from pyproj import Geod, Transformer
 
 from watersheds.drainage import compute_flow, destinations, neighbor_distances
 from watersheds.terrain import Grid
@@ -71,6 +72,29 @@ class DrainageTests(unittest.TestCase):
         self.assertTrue(70 < geographic[0, 1, 1] < 100)
         self.assertTrue(14 < projected[0, 1, 1] < 16)
         self.assertGreater(projected[2, 1, 1], projected[0, 1, 1])
+
+    def test_neighbor_distances_across_parallel_row_boundaries(self):
+        geod = Geod(ellps='WGS84')
+        for crs, transform in [('EPSG:4326', (44., .001, 0., 43., 0., -.001)),
+                               ('EPSG:3413', (2150000., 10., 0., 890000., 0., -10.))]:
+            with self.subTest(crs=crs):
+                grid = self.grid(np.zeros((270, 4)), crs, transform)
+                actual = neighbor_distances(grid)
+                to_geo = Transformer.from_crs(crs, 4326, always_xy=True)
+                for plane, dr, dc in ((0, 0, 1), (1, 1, 0), (2, 1, 1), (3, 1, -1)):
+                    for row in (0, 126, 127, 128, 129, 254, 255, 256, 268, 269):
+                        for column in range(4):
+                            if row + dr >= 270 or not 0 <= column + dc < 4:
+                                self.assertEqual(actual[plane, row, column], 0.)
+                                continue
+                            first = to_geo.transform(*grid.coordinates(row, column))
+                            last = to_geo.transform(*grid.coordinates(row + dr, column + dc))
+                            self.assertEqual(actual[plane, row, column], geod.inv(*first, *last)[2])
+
+    def test_coordinate_error_in_a_later_row_block_is_reported(self):
+        grid = self.grid(np.zeros((270, 2)), transform=(44., .001, 0., 80., 0., -1.))
+        with self.assertRaises((ValueError, RuntimeError)):
+            neighbor_distances(grid)
 
     def test_actual_group_ids_include_zero_three_and_large_numbers(self):
         flow = np.array([[1, 2, -1], [4, 5, -1], [7, 8, -1]])

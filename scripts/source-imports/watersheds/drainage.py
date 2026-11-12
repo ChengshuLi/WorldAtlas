@@ -4,7 +4,9 @@ Depression filling changes only a working copy. Exact flats follow the
 priority-flood parent toward a spill or outlet; strictly downhill flow takes
 precedence. Source-backed closed sinks can be supplied as terminal cells.
 """
+from concurrent.futures import ThreadPoolExecutor
 import heapq
+import os
 
 import numpy as np
 from numba import njit
@@ -19,7 +21,8 @@ def neighbor_distances(grid):
     height, width = grid.elevation.shape
     to_geo = Transformer.from_crs(CRS.from_user_input(grid.crs), 4326, always_xy=True)
     distances = np.zeros((4, height, width), dtype='float64')
-    for first in range(0, height, 128):
+
+    def calculate_rows(first):
         last = min(height, first + 128)
         stop = min(height, last + 1)
         columns, rows = np.meshgrid(np.arange(width), np.arange(first, stop))
@@ -38,6 +41,10 @@ def neighbor_distances(grid):
             if not np.isfinite(length).all() or np.any(length <= 0):
                 raise ValueError('invalid neighboring-cell distance')
             distances[plane, first:first + n, a] = length
+
+    with ThreadPoolExecutor(max_workers=os.cpu_count() or 1) as executor:
+        # Consume every result so errors in a worker reach the caller.
+        list(executor.map(calculate_rows, range(0, height, 128)))
     return distances
 
 

@@ -108,7 +108,8 @@ Add the cataloged height-reference offset before combining different height
 systems. Reject any remaining missing or non-finite elevations.
 
 Flow chooses the steepest downhill neighbor using WGS84 distances. This works for
-geographic and projected source grids. Edge cells can flow inward; the edge alone
+geographic and projected source grids. Independent row blocks calculate the exact
+distances across available CPU cores. Edge cells can flow inward; the edge alone
 does not identify a drainage destination. Source basin polygons can identify an
 exit when mapped natural waterways do not.
 
