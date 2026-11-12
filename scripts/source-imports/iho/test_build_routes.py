@@ -108,17 +108,12 @@ class BuildTests(unittest.TestCase):
         self.assertNotIn('point_id', evidence)
 
     def test_snapshot_exports_route_and_endpoint_sources(self):
-        import importlib.util
-
-        path = Path(__file__).resolve().parents[2] / 'map-build/decision-export/draft/export_draft.py'
-        spec = importlib.util.spec_from_file_location('iho_test_export', path)
-        exporter = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(exporter)
+        path = Path(__file__).resolve().parents[2] / 'map-build/map_build/inputs/geography.sql'
         self.build()
         # Exercise the real export query against the transaction's source records.
-        raw = self.database.execute((path.parent / 'query.sql').read_text(),
+        raw = self.database.execute(path.read_text(),
                                     {'revision': '__iho_a'}).fetchone()[0]
-        snapshot = exporter.parse_snapshot(raw)
+        snapshot = json.loads(raw)
         self.assertEqual([(s['source_id'], s['version']) for s in snapshot['sources']],
                          [('iho-test', '1')])
         digest = self.database.execute("SELECT sha256 FROM atlas.source_assets "
@@ -126,9 +121,9 @@ class BuildTests(unittest.TestCase):
         self.database.execute("UPDATE atlas.decision_endpoints SET evidence=%s "
                               "WHERE revision='__iho_a' AND endpoint_id='route-b-endpoint-1'",
                               (Jsonb({'source_refs': [dict(source_id='iho-test', version='2', sha256=digest)]}),))
-        raw = self.database.execute((path.parent / 'query.sql').read_text(),
+        raw = self.database.execute(path.read_text(),
                                     {'revision': '__iho_a'}).fetchone()[0]
-        snapshot = exporter.parse_snapshot(raw)
+        snapshot = json.loads(raw)
         self.assertEqual([s['version'] for s in snapshot['sources']], ['1', '2'])
 
     def test_failed_point_link_rolls_back_all_records(self):

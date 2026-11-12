@@ -143,7 +143,7 @@ class DatabaseTest(unittest.TestCase):
 
         self.build()
         scripts = Path(__file__).resolve().parents[2]
-        query = scripts / 'map-build/land/mainland-l2-draft/query-stage2-selected.sql'
+        query = scripts / 'map-build/map_build/inputs/mainland.sql'
         raw = self.database.execute(query.read_text(), {'revision': '__osm_a'}).fetchone()[0]
         path = scripts / 'map-build/stages/land/stage2-geodesic-20261104/seed-producer/export_adapter.py'
         spec = importlib.util.spec_from_file_location('osm_test_export_adapter', path)
