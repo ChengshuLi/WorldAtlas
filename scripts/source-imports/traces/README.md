@@ -23,7 +23,7 @@ are JSON keys inside its `document` column, not separate table columns. The
 | `line_id` | The final record in `atlas.geographic_line_observations` |
 | `basis` | How the figure was interpreted, including inferred connections and extensions |
 | `points` | Selected `[longitude, latitude]` points, ordered north to south |
-| `step_latitude_degrees` | Spacing between generated coordinates |
+| `step_latitude_degrees` | Maximum latitude spacing between generated coordinates |
 | `smoothing_latitude_degrees` | Width of the Gaussian smoothing filter |
 
 This method requires latitude to decrease along the line. Use another

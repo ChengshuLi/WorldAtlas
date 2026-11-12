@@ -34,7 +34,7 @@ def source_fixture(endpoint=(1, 1), *, coordinates=None):
 @unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'),
                      'set WORLDATLAS_TEST_DATABASE_URL to a local database with the initial schema')
 class DatabaseTest(unittest.TestCase):
-    """Exercise actual SQL and rollback behavior; every test rolls back its fixtures."""
+    """Exercise actual SQL and rollback behavior; every test removes its fixtures."""
     def setUp(self):
         import psycopg
 

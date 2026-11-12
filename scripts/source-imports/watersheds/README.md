@@ -233,4 +233,4 @@ PYTHONPATH=scripts/source-imports python3 -m unittest discover \
 
 Set `WORLDATLAS_TEST_DATABASE_URL` to a disposable PostgreSQL database loaded with
 [`001_initial_schema.sql`](../../../database/migrations/001_initial_schema.sql)
-to include actual SQL, source-link and rollback tests. Tests roll back their rows.
+to include actual SQL, source-link and rollback tests. Tests remove their fixtures.
