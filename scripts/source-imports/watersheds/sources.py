@@ -93,31 +93,28 @@ class Sources:
         raise ValueError('unknown source point selection')
 
     def line(self, parts):
-        coordinates = []
-        for part in parts:
-            if 'point' in part:
-                if set(part) != {'point'}:
-                    raise ValueError('unsupported source point options')
-                coordinates.append(tuple(map(float, part['point'])))
-                continue
-            if 'way' in part:
-                allowed = {'source', 'way'}
-                points = list(self.network([part['source']]).line(part['way']).coords)
-            elif 'relation' in part:
-                allowed = {'source', 'relation', 'role', 'start_node'}
-                points = self.river(part)
-            elif 'geojson_feature' in part:
-                allowed = {'source', 'member', 'geojson_feature'}
-                document = json.loads(self.path(part).read_bytes())
-                geometry = document['features'][part['geojson_feature']]['geometry']
-                if geometry['type'] != 'LineString':
-                    raise ValueError('selected GeoJSON feature must be a line')
-                points = geometry['coordinates']
-            else:
-                raise ValueError('unsupported source line selection')
-            if set(part) - allowed:
-                raise ValueError('unsupported source line options')
-            coordinates.extend(tuple(map(float, point)) for point in points)
+        """Read one complete source feature; boundary assembly joins sections."""
+        if len(parts) != 1:
+            raise ValueError('select one source feature per line; join separate sections in boundary assembly')
+        part, = parts
+        if 'way' in part:
+            allowed = {'source', 'way'}
+            points = list(self.network([part['source']]).line(part['way']).coords)
+        elif 'relation' in part:
+            allowed = {'source', 'relation', 'role', 'start_node'}
+            points = self.river(part)
+        elif 'geojson_feature' in part:
+            allowed = {'source', 'member', 'geojson_feature'}
+            document = json.loads(self.path(part).read_bytes())
+            geometry = document['features'][part['geojson_feature']]['geometry']
+            if geometry['type'] != 'LineString':
+                raise ValueError('selected GeoJSON feature must be a line')
+            points = geometry['coordinates']
+        else:
+            raise ValueError('unsupported source line selection')
+        if set(part) - allowed:
+            raise ValueError('unsupported source line options')
+        coordinates = [tuple(map(float, point)) for point in points]
         if len(coordinates) < 2:
             raise ValueError('source line needs at least two selected points')
         values = np.asarray(coordinates)

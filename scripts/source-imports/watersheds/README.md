@@ -17,11 +17,19 @@ selections live in the construction record.
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
 | [`../source_io.py`](../source_io.py) | Resolve catalog versions, verify downloads, and write geometry and source links together. |
 
+The split follows the work: read source features, prepare terrain, calculate
+drainage, then assemble the boundary. `build_boundary.py` connects those steps to
+Neon and R2. `waterways.py` keeps river networks and basin polygons together
+because both establish drainage destinations. Source reading does not join
+separate features; that responsibility belongs to boundary assembly.
+`__init__.py` marks the Python package and lets our test discovery find its tests.
+
 ## Run
 
 Use the [pipeline's Python/GDAL environment](../../map-build/pipeline/README.md).
-The tested package versions are in [`requirements.txt`](requirements.txt), with
-native dependency versions in [`environment.yml`](environment.yml).
+The shared [source-import environment](../environment.yml) pins both Python
+packages and native libraries. It also provides the disposable PostgreSQL used
+by tests and the packages needed by related pipeline checks in CI.
 Set `NEON_DATABASE_URL` and an AWS credential profile outside the code. Then run:
 
 ```bash
@@ -58,7 +66,8 @@ The record's method is `watershed_boundary`. It contains:
 
 - `boundary_id` and `basis`: the editable boundary and a plain-language explanation.
 - `sources`: local aliases for exact catalog source IDs and versions.
-- `lines`: source GeoJSON features, OSM ways or river relations.
+- `lines`: one complete GeoJSON feature, OSM way or river relation per named line.
+  Joining different source features belongs in `sections` with explicit joins.
 - `terrains`: primary and secondary sources, height conversion, analysis domains,
   drainage groups, waterway references and the group pairs whose divides are needed.
 - `sections`: the final ordered source lines, calculated divides, drainage paths
@@ -203,8 +212,19 @@ An explicit point endpoint cuts its source line at the nearest position and
 retains the exact chosen endpoint coordinate. Use a geodesic section for a
 deliberate connection between separated source sections.
 
-Tests beside these files cover terrain, flow, destinations, waterways, source
-selection, graph paths, assembly and database writes. Run all source-import tests:
+Each test file covers a distinct responsibility:
+
+| File | What it verifies |
+| --- | --- |
+| `test_terrain.py` | Native cell alignment, missing heights, secondary data and height conversion. |
+| `test_drainage.py` | Flow directions, flat terrain, distances, known/shared/unknown destinations and cycles. |
+| `test_waterways.py` | OSM versions and connections, missing routes, river seeds and the crossing check. |
+| `test_basins.py` | Basin identities, source coverage and coastal outlet classification. |
+| `test_sources.py` | Exact source-feature selection, archive access and river-relation order. |
+| `test_boundary.py` | Connected routes, joins, geographic connections and final geometry. |
+| `test_build_boundary.py` | The steps working together, early failures, database writes and rollback. |
+
+Run all source-import tests:
 
 ```bash
 PYTHONPATH=scripts/source-imports python3 -m unittest discover \

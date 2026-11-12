@@ -138,7 +138,11 @@ class ConstructionTests(unittest.TestCase):
     def test_boundary_can_start_at_a_calculated_source_intersection(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
-            recipe['lines']['crossing'] = [{'point': [.001, .004]}, {'point': [.003, .006]}]
+            document = json.loads(files['lines'].read_text())
+            document['features'].append({'type': 'Feature', 'properties': {}, 'geometry': {
+                'type': 'LineString', 'coordinates': [[.001, .004], [.003, .006]]}})
+            files['lines'].write_text(json.dumps(document))
+            recipe['lines']['crossing'] = [{'source': 'lines', 'geojson_feature': 2}]
             recipe['start'] = {'intersection': ['before', 'crossing'], 'near': [.002, .005]}
             geometry, _ = construct(recipe, files)
             self.assertEqual(geometry['coordinates'][0], [.002, .005])

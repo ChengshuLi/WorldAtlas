@@ -4,7 +4,7 @@ import numpy as np
 from pyproj import Geod, Transformer
 
 from watersheds.drainage import (compute_flow, destinations, neighbor_distances,
-                                 destination_memberships, possible_destinations, single_destinations)
+                                 possible_destinations, single_destinations)
 from watersheds.terrain import Grid
 
 

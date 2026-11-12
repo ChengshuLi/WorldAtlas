@@ -52,9 +52,18 @@ class SourceGeometryTests(unittest.TestCase):
             sources.line([{'source': 'unused', 'feature_field': 'ID', 'feature': 42}])
 
     def test_invalid_source_coordinates_are_rejected(self):
-        sources = Sources({})
+        path = self.root / 'invalid.geojson'
+        path.write_text(json.dumps({'features': [{'geometry': {
+            'type': 'LineString', 'coordinates': [[0, 0], [0, 100]]}}]}))
+        sources = Sources({'provider': path})
         with self.assertRaisesRegex(ValueError, 'finite WGS84'):
-            sources.line([{'point': [0, 0]}, {'point': [0, 100]}])
+            sources.line([{'source': 'provider', 'geojson_feature': 0}])
+
+    def test_source_reader_does_not_invent_connectors_between_features(self):
+        sources = Sources({})
+        with self.assertRaisesRegex(ValueError, 'one source feature per line'):
+            sources.line([{'source': 'provider', 'geojson_feature': 0},
+                          {'source': 'provider', 'geojson_feature': 1}])
 
     def test_pbf_point_selection_includes_isolated_nodes_without_loading_ways(self):
         path = self.root / 'provider.osm.pbf'

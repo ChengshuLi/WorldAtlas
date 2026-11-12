@@ -8,7 +8,7 @@ import osmium
 from shapely.geometry import LineString
 
 from watersheds.terrain import Grid
-from watersheds.drainage import destination_memberships, single_destinations
+from watersheds.drainage import single_destinations
 from watersheds.waterways import Waterways, seed_grid
 
 
