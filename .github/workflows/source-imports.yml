@@ -22,10 +22,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
-    env:
-      TMPDIR: ${{ runner.temp }}
-      TMP: ${{ runner.temp }}
-      TEMP: ${{ runner.temp }}
     steps:
       - uses: actions/checkout@v5
       - uses: mamba-org/setup-micromamba@v3
@@ -36,6 +32,9 @@ jobs:
       - name: Test source imports with disposable PostgreSQL
         shell: bash -el {0}
         env:
+          TMPDIR: ${{ runner.temp }}
+          TMP: ${{ runner.temp }}
+          TEMP: ${{ runner.temp }}
           PYTHONPATH: scripts/source-imports:scripts/map-build
           PROJ_NETWORK: 'OFF'
         run: |
@@ -53,6 +52,9 @@ jobs:
       - name: Test pipeline and source references
         shell: bash -el {0}
         env:
+          TMPDIR: ${{ runner.temp }}
+          TMP: ${{ runner.temp }}
+          TEMP: ${{ runner.temp }}
           PROJ_NETWORK: 'OFF'
           PYTHONPATH: scripts/map-build:scripts/map-build/water:scripts/map-build/stages/ocean:scripts/map-build/stages/land/stage2-geodesic-20261104
         run: |
