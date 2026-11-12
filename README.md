@@ -10,6 +10,11 @@ streams from the `worldatlas` R2 bucket.
 
 ## Pipeline code
 
+The root [`environment.yml`](environment.yml) defines the shared Python
+environment. It currently covers source imports and related tests; add missing
+dependencies here as the remaining pipeline is reviewed. Website dependencies
+are managed separately in [`package.json`](package.json).
+
 - [Import source geography](scripts/source-imports/) from raw sources. These tools reconstruct and verify boundary geometry and other inputs for review and registration in Neon.
 - [Build the map](scripts/map-build/pipeline/README.md) from selected Neon records and the raw R2 inputs the build reads directly. This includes the physical land and water grid, land and water assignment, and final composition.
 

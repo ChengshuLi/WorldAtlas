@@ -27,7 +27,7 @@ separate features; that responsibility belongs to boundary assembly.
 ## Run
 
 Use the [pipeline's Python/GDAL environment](../../map-build/pipeline/README.md).
-The shared [source-import environment](../environment.yml) pins both Python
+The shared [project environment](../../../environment.yml) pins both Python
 packages and native libraries. It also provides the disposable PostgreSQL used
 by tests and the packages needed by related pipeline checks in CI.
 Set `NEON_DATABASE_URL` and an AWS credential profile outside the code. Then run:

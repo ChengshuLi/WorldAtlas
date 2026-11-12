@@ -18,7 +18,7 @@ construction code belongs here. The [map builder](../map-build/pipeline/README.m
 uses the selected structured records, together with large raw raster/vector
 inputs, to produce map cells.
 
-The shared [`environment.yml`](environment.yml) pins Python, GDAL/PROJ and Python
+The project [`environment.yml`](../../environment.yml) pins Python, GDAL/PROJ and Python
 packages for these importers. It also installs PostgreSQL for disposable database
 tests and the dependencies used by related pipeline checks in CI. One file
 defines the environment; a separate Python requirements file is unnecessary.
