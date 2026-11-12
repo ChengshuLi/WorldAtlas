@@ -4,13 +4,13 @@ import argparse,hashlib,json,math
 import time
 from pathlib import Path
 import numpy as np
-import coastal_core as core
-import coastal_rect
-import coastal_shore_index
+from map_build.water import coastal_core as core
+from map_build.water import coastal_rect
+from map_build.water import coastal_shore_index
 from decision_snapshot import read_snapshot
 import local_water_overlay
 from direct_lineage import validate_physical_report,validate_direct_land
-from exclusive_outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
+from map_build.execution.outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
 
 
 def sha(path):
@@ -40,7 +40,7 @@ def run(snapshot,snapshot_sha,physical,land,out,width,height,box,pad,inputs,chun
     if processing_started is None:processing_started=time.perf_counter()
     x0,x1,y0,y1=box;step=360.0/width
     if not (0<=x0<x1<=width and 0<=y0<y1<=height) or chunk<=0:raise ValueError('invalid coastal tile')
-    decision,pairs,tol,band,btol=core.policy(snapshot,allow_selected_research=allow_selected_research)
+    decision,pairs,tol,band,btol=core.policy(snapshot)
     code_paths={'algorithm':Path(__file__),'core':Path(core.__file__),'shore':Path(core.shore.__file__),'geometry':Path(core.shore.__file__),'accelerator':Path(coastal_rect.__file__),
                 'shore_index':Path(coastal_shore_index.__file__)}
     code_pins={name:sha(path) for name,path in code_paths.items()}

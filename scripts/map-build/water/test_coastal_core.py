@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-import coastal_core as c
+from map_build.water import coastal_core as c
 from test_helpers import rle
 
 
@@ -20,24 +20,23 @@ class CoastalTest(unittest.TestCase):
     def setUp(self):
         self.p=np.ones((180,360),dtype=np.uint32);self.l=np.zeros((180,360),dtype=np.uint32)
         self.p[89,4]=self.p[89,6]=17;self.l[89,4]=17;self.l[89,6]=18
-        self.bounds=(0,360,0,180);_,self.pairs,self.tol,self.band,self.btol=c.policy(snap(),allow_selected_research=True)
+        self.bounds=(0,360,0,180);_,self.pairs,self.tol,self.band,self.btol=c.policy(snap())
         self.edges=c.shore.centers_for_crop(rle(self.p),rle(self.l),self.bounds,360,180,1,[17,18,19,20,21,22])
         self.idx=c.index_present(self.edges,self.pairs)
     def test_band_and_entity_tie(self):
         # Row 89, midpoint x5 and distant x8. Two shores are equidistant to x5.
         result,stats=c.classify([.5,.5],[-174.5,-171.5],self.bounds,360,180,1,self.pairs,self.tol,self.band,self.btol,self.idx)
         self.assertEqual(result.tolist(),[2,0]);self.assertEqual(stats['exact']+stats['bounded'],2)
-        _,pairs,t,b,bt=c.policy(snap((1,2,3,4,5,6)),allow_selected_research=True)
+        _,pairs,t,b,bt=c.policy(snap((1,2,3,4,5,6)))
         result,_=c.classify([.5],[-174.5],self.bounds,360,180,1,pairs,t,b,bt,c.index_present(self.edges,pairs))
         self.assertEqual(result.tolist(),[1])
     def test_missing_or_unsupported_policy_fails(self):
-        with self.assertRaisesRegex(ValueError,'opt-in'):c.policy(snap())
         x=snap();x['policies']=[]
-        with self.assertRaisesRegex(ValueError,'policy'):c.policy(x,allow_selected_research=True)
+        with self.assertRaisesRegex(ValueError,'policy'):c.policy(x)
         x=snap();x['policies'][0]['definition']['distance']='spherical_segment'
-        with self.assertRaisesRegex(ValueError,'distance'):c.policy(x,allow_selected_research=True)
+        with self.assertRaisesRegex(ValueError,'distance'):c.policy(x)
         x=snap();x['policies'][0]['definition']['tie_rules']['priority_entity_ids']=[1,2]
-        with self.assertRaises(ValueError):c.policy(x,allow_selected_research=True)
+        with self.assertRaises(ValueError):c.policy(x)
     def test_crop_boundary_or_missing_shore(self):
         with self.assertRaisesRegex(ValueError,'increase halo'):
             c.classify([.5],[-176],(4,8,88,91),360,180,1,self.pairs,self.tol,self.band,self.btol,self.idx)

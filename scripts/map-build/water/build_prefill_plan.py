@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from exclusive_outputs import write_json_exclusive, validate_fresh_output
+from map_build.execution.outputs import write_json_exclusive, validate_fresh_output
 from decision_snapshot import read_snapshot, validate_revision, participant_water_codes, find_source
 import compose_full_water_grid as c
 import local_water_overlay
@@ -111,8 +111,8 @@ def coastline_policy(policy):
     if isinstance(definition, dict) and definition.get('method') == 'nearest_final_shore_band_v2':
         if policy.get('decision_revision',{}).get('status') != 'draft':
             raise ValueError('derived coastline method is draft research only')
-        import coastal_core
-        coastal_core.policy(policy, allow_selected_research=True)
+        from map_build.water import coastal_core
+        coastal_core.policy(policy)
         return records[0], None
     if (not isinstance(definition, dict) or not isinstance(definition.get('source_id'), str)
             or not definition['source_id'] or not isinstance(definition.get('source_version'), str)
@@ -342,7 +342,7 @@ def assemble(config, config_path, root, policy, policy_path, out, allow_draft=Fa
             raise ValueError(f'manifest physical grid mismatch: {sid}')
         allowed = participant_water_codes(policy, basin)
         if basin['assignment_method'] == 'shared_nearest_assigned_shore':
-            from shared_nearest import selected_rules
+            from map_build.water.shared_nearest import selected_rules
             selected_rules(policy, basin)  # Validate participant bindings and exact tie policy.
             audit = manifest.get('nearest_assignment_audit') or {}
             count = manifest.get('physical_water_cells')

@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-import streaming_closed_water as s
+from map_build.water import streaming_closed_water as s
 
 
 def rle(values):

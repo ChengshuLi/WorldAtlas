@@ -3,11 +3,11 @@
 import argparse,gzip,hashlib,io,json,os
 import time
 from pathlib import Path
-import coastal_core as core
+from map_build.water import coastal_core as core
 from decision_snapshot import read_snapshot
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from exclusive_outputs import write_json_exclusive
+from map_build.execution.outputs import write_json_exclusive
 from build_coastal_tile import sha
 
 
@@ -58,7 +58,7 @@ def cover(boxes,width,height):
 
 def assemble(snapshot,snapshot_sha,entries,root,out,width,height,allow_selected_research=False,processing_started=None):
  if processing_started is None:processing_started=time.perf_counter()
- decision,pairs,_,_,_=core.policy(snapshot,allow_selected_research=allow_selected_research)
+ decision,pairs,_,_,_=core.policy(snapshot)
  root=root.resolve();out=out.resolve()
  if not out.is_relative_to(root):raise ValueError('output manifest must be within input root')
  tiles=[];boxes=[];baseline=None;total_cells=total_spans=0

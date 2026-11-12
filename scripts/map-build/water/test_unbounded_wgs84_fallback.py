@@ -1,7 +1,7 @@
 import math, unittest
 import numpy as np
 from scipy.spatial import cKDTree
-import shared_nearest as s
+from map_build.water import shared_nearest as s
 
 def run(lat,lon,qlat,qlon):
  d={'lat':np.asarray(lat,dtype=float),'lon':np.asarray(lon,dtype=float)}; d['mids']=s.unit(d['lat'],d['lon']); t=cKDTree(d['mids']); p=s.unit([qlat],[qlon])[0]

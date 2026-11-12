@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
-from exclusive_outputs import write_json_exclusive
+from map_build.execution.outputs import write_json_exclusive
 
 NAMES=('rows.u32le','runs.u32le')
 

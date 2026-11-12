@@ -5,8 +5,8 @@ from unittest.mock import patch
 import numpy as np
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/'stages'/'ocean'))
-import ocean_fill_runner as ocean
-import streaming_closed_water as closed
+from map_build.water.ocean import engine as ocean
+from map_build.water import streaming_closed_water as closed
 import compose_direct,compose_full_water_grid as common
 from test_closed_water_core import policy_snapshot
 from test_helpers import rle
@@ -31,9 +31,9 @@ class OceanClosedPipeline(unittest.TestCase):
    preplan=put('prefill-plan.json',json.dumps({'land_input_kind':'direct-research','decision_revision_status':'draft','decision_snapshot_sha256':snapsha,'decision_revision':'draft','entity_revision':'entities','research_shore_method':None}).encode())
    audit=put('prefill-audit.json',json.dumps({'schema':'worldatlas-prefill-class-rle-audit-v1','status':'staged-not-published','land_input_kind':'direct-research','source_plan_sha256':closed.sha(preplan),'decision_snapshot_sha256':snapsha,'decision_revision':'draft','entity_revision':'entities','research_shore_method':None,'output':{'rows_sha256':closed.sha(qrp),'runs_sha256':closed.sha(qup)}}).encode())
    inputs={'physical_rows_sha256':closed.sha(prp),'physical_runs_sha256':closed.sha(pup),'prefill_rows_sha256':closed.sha(qrp),'prefill_runs_sha256':closed.sha(qup),'prefill_audit_sha256':closed.sha(audit)}
-   ocean_out=root/'ocean';ocean.run(snapshot,snapsha,prp,pup,qrp,qup,ocean_out,w,h,inputs,tile_height=2,allow_draft=True)
+   ocean_out=root/'ocean';ocean.run(snapshot,snapsha,prp,pup,qrp,qup,ocean_out,w,h,inputs,tile_height=2)
    cuts=ocean_out/'barrier_edges.u32le';partition=ocean_out/'partition'/'manifest.json';rows=ocean_out/'partition'/'unseeded_rows.u64le';spans=ocean_out/'partition'/'unseeded_component_spans.u32le';inputs['source_cut_edges_sha256']=closed.sha(cuts)
-   result=closed.run(snapshot,snapsha,(pr,pu),(qr,qu),(lr,lu),partition,rows,spans,cuts,root/'closed',w,h,180,inputs,allow_selected_research=True)
+   result=closed.run(snapshot,snapsha,(pr,pu),(qr,qu),(lr,lu),partition,rows,spans,cuts,root/'closed',w,h,180,inputs)
    self.assertEqual(result['assigned_cells'],1);self.assertEqual(result['pending_cells'],0)
    spec={}
    for key,path in [('rows',qrp),('runs',qup),('audit',audit),('plan',preplan)]:spec[key+'_path']=path.name;spec[key+'_sha256']=closed.sha(path)

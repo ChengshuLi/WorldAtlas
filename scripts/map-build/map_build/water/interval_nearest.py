@@ -8,7 +8,7 @@ midpoint can still certify an entire interval. No shoreline candidate is capped.
 """
 import math
 import numpy as np
-import shared_nearest as s
+from map_build.water import shared_nearest as s
 MAX_RADIUS=s.A/(1-s.F)
 
 def exact_certificate_possible(lower,best,upper,radius,tolerance,boundary):

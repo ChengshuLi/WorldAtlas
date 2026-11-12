@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
-import wrapped_bounds as w
-import shared_nearest as s
-import streamed_shore_fallback as sf
+from map_build.water import wrapped_bounds as w
+from map_build.water import shared_nearest as s
+from map_build.water import streamed_shore_fallback as sf
 W,H=36,18;STEP=10.
 def poly(a,b,c=-5,d=5):return [[[a,c],[b,c],[b,d],[a,d],[a,c]]]
 def multi(*p):return {'geometry':{'type':'MultiPolygon','coordinates':list(p)}}

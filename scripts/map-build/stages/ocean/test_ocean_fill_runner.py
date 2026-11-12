@@ -2,7 +2,7 @@ import json,struct,tempfile,unittest
 from unittest.mock import patch
 import sys,types
 from pathlib import Path
-import ocean_fill_runner as r
+from map_build.water.ocean import engine as r
 
 class OceanRunnerTests(unittest.TestCase):
  def snapshot(self):
@@ -38,34 +38,10 @@ class OceanRunnerTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'unsupported boundary'):r.load_config(s,8,4)
   s=self.snapshot();s['category_bindings'][0]['code']=8
   with self.assertRaises(ValueError):r.load_config(s,8,4)
-  s=self.snapshot();s['decision_revision']['status']='draft'
+  s=self.snapshot();s['entity_revision']['id']='different-registry'
   with self.assertRaises(ValueError):r.load_config(s,8,4)
   s=self.snapshot();s['policies'][0]['definition']['route_ids'].append('missing')
   with self.assertRaisesRegex(ValueError,'unknown route'):r.load_config(s,8,4)
- def test_local_overlay_requires_opt_in_marker_and_verification(self):
-  s=self.snapshot();s['source']='local-user-directed-overlay-not-neon';s['schema']='worldatlas-local-water-effective-snapshot-v1'
-  s['decision_revision']['status']='draft';s['entity_revision']['status']='draft'
-  s['policies'][0]['evidence']={'execution_status':'local_user_authorized_overlay'}
-  with self.assertRaises(ValueError):r.load_config(s,8,4,allow_draft=True)
-  s['_local_overlay_verified']=True
-  with self.assertRaises(ValueError):r.load_config(s,8,4,allow_draft=False)
-  calls=[]
-  with patch.dict(sys.modules,{'local_water_overlay':types.SimpleNamespace(verify=lambda doc:calls.append(doc))}):
-   self.assertEqual(len(r.load_config(s,8,4,allow_draft=True)[2]),4)
-   self.assertEqual(len(calls),1);self.assertNotIn('_local_overlay_verified',calls[0])
-  with patch.dict(sys.modules,{'local_water_overlay':types.SimpleNamespace(verify=lambda doc:(_ for _ in ()).throw(ValueError('bad proof')))}):
-   with self.assertRaisesRegex(ValueError,'bad proof'):r.load_config(s,8,4,allow_draft=True)
- def test_draft_needs_explicit_opt_in(self):
-  s=self.snapshot();s['schema']='worldatlas-geography-decision-draft-evidence-v1'
-  s['decision_revision']['status']='draft';s['entity_revision']['status']='draft'
-  s['policies'][0]['evidence']={'execution_status':'selected_for_research'}
-  with self.assertRaisesRegex(ValueError,'explicitly opted-in'):r.load_config(s,8,4)
-  self.assertEqual(len(r.load_config(s,8,4,allow_draft=True)[2]),4)
-  s['policies'][0]['evidence']['execution_status']='research_only_not_selected'
-  with self.assertRaisesRegex(ValueError,'policy requires explicit research selection'):r.load_config(s,8,4,allow_draft=True)
-  s['policies'][0]['evidence']['execution_status']='selected_for_research'
-  s['entity_revision']['status']='accepted'
-  with self.assertRaisesRegex(ValueError,'matching'):r.load_config(s,8,4,allow_draft=True)
  def test_unseeded_component_reported_not_assigned(self):
   s=self.snapshot();s['endpoints']=[];s['routes']=[]
   for i,lon in enumerate((-108,-36,36,108)):
@@ -138,11 +114,5 @@ class OceanRunnerTests(unittest.TestCase):
   s['endpoints'][1]['latitude']='0';s['endpoints'][1]['derivation']['latitude_fraction']=[0,1]
   with self.assertRaisesRegex(ValueError,'final grid row'):r.load_config(s,8,4)
 
- def test_requires_explicit_snapshot_opt_in(self):
-  import sys
-  from unittest.mock import patch
-  argv=['ocean','--snapshot','/tmp/s','--snapshot-sha256','0'*64,'--physical-rows','/tmp/a','--physical-runs','/tmp/b','--prefill-dir','/tmp/c','--prefill-plan','/tmp/d','--out','/tmp/e']
-  with patch.object(sys,'argv',argv):
-   with self.assertRaisesRegex(ValueError,'explicit test-only flag'):r.main()
 if __name__=='__main__':unittest.main()
 

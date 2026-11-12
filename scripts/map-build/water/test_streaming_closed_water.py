@@ -1,8 +1,8 @@
 import contextlib,gzip,hashlib,json,sqlite3,struct,tempfile,unittest
 from pathlib import Path
 import numpy as np
-import streaming_closed_water as s
-from partition_json_stream import read_partition
+from map_build.water import streaming_closed_water as s
+from map_build.water.partition_json_stream import read_partition
 from test_closed_water_core import policy_snapshot
 from test_helpers import rle
 
@@ -32,7 +32,7 @@ class StreamingTest(unittest.TestCase):
  def tearDown(self):self.tmp.cleanup()
  def run_stage(self,name='out',**kw):
   return s.run(self.snap,'s'*64,self.physical,self.prefill,self.land,self.partition,self.rows,self.spans,self.cuts,
-               self.root/name,360,180,180,self.inputs,allow_selected_research=True,**kw)
+               self.root/name,360,180,180,self.inputs,**kw)
  def test_streamed_direct_mixed_and_cut(self):
   m=self.run_stage();self.assertEqual((m['assigned_cells'],m['pending_cells']),(2,1));self.assertEqual(m['status'],'partial')
   with gzip.open(self.root/'out/closed-water-assignments.jsonl.gz','rt') as f:z=json.loads(f.readline())
@@ -69,9 +69,9 @@ class StreamingTest(unittest.TestCase):
   self.rows.write_bytes(struct.pack('<181Q',*data))
   with self.assertRaisesRegex(ValueError,'offsets'):self.run_stage('bad-offsets')
   self.assertFalse((self.root/'bad-offsets/manifest.json').exists())
- def test_unverified_policy_rejected_before_output(self):
-  self.snap['policies'][0]['evidence']['execution_status']='research_only_not_selected'
-  with self.assertRaisesRegex(ValueError,'selected draft'):self.run_stage()
+ def test_unsupported_policy_rejected_before_output(self):
+  self.snap['policies'][0]['definition']['distance']='unsupported'
+  with self.assertRaisesRegex(ValueError,'safety'):self.run_stage()
   self.assertFalse((self.root/'out').exists())
  def test_mutation_callback_does_not_write_manifest(self):
   def changed():raise ValueError('input changed')
@@ -98,13 +98,17 @@ class ParserTest(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'p';p.write_text(json.dumps({'first':{'nested':[1,2]},'components':[{'root':1},{'root':2}],'after':'x'}))
    found=[];meta=read_partition(p,found.append);self.assertEqual(found,[{'root':1},{'root':2}]);self.assertEqual(meta['after'],'x')
- def test_duplicate_and_truncated_and_element_limit(self):
+ def test_duplicate_and_truncated_json_are_rejected(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'p';p.write_text('{"components":[],"components":[]}')
    with self.assertRaisesRegex(ValueError,'duplicate'):read_partition(p,lambda x:None)
    p.write_text('{"components":[{"a":1}')
    with self.assertRaises(ValueError):read_partition(p,lambda x:None)
-   p.write_text('{"components":[{"a":"'+('x'*10000)+'"}]}')
-   with self.assertRaisesRegex(ValueError,'exceeds limit'):read_partition(p,lambda x:None,element_limit=1000)
+ def test_complete_large_components_and_metadata_are_read_without_size_caps(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'p';payload='x'*(2*1024*1024+1)
+   p.write_text(json.dumps({'components':[{'a':payload}],'metadata':payload*2}))
+   found=[];meta=read_partition(p,found.append)
+   self.assertEqual(found,[{'a':payload}]);self.assertEqual(meta['metadata'],payload*2)
 
 if __name__=='__main__':unittest.main()

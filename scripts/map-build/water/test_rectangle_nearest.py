@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
-import rectangle_nearest as r
-import shared_nearest as s
-import coastal_core as coast
+from map_build.water import rectangle_nearest as r
+from map_build.water import shared_nearest as s
+from map_build.water import coastal_core as coast
 
 
 class RectangleNearest(unittest.TestCase):

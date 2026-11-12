@@ -3,8 +3,8 @@ import unittest
 from unittest.mock import patch
 
 import numpy as np
-import coastal_core as core
-import shared_nearest as s
+from map_build.water import coastal_core as core
+from map_build.water import shared_nearest as s
 
 
 class RelevantMinimaTest(unittest.TestCase):

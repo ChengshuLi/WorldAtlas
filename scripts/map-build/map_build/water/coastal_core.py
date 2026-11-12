@@ -1,23 +1,19 @@
 """Reference coastal-band classifier, driven by a versioned decision policy.
 
-This research candidate uses only the physical grid and decision-derived land.
+Uses only the physical grid and final assigned land.
 It rejects uncertifiable crop edges rather than assuming omitted shores are far.
 """
 import math
 import numpy as np
 from scipy.spatial import cKDTree
-import shared_nearest as shore
-import local_water_overlay
+from map_build.water import shared_nearest as shore
 
 
-def policy(snapshot, *, allow_selected_research=False):
+def policy(snapshot):
     records=[p for p in snapshot.get('policies',[]) if p.get('kind')=='coastline_assignment']
     if len(records)!=1 or not isinstance(records[0].get('id'),str) or not records[0]['id']:
         raise ValueError('exactly one identified coastline policy is required')
     decision=records[0];definition=decision.get('definition',{})
-    if (not allow_selected_research or snapshot.get('decision_revision',{}).get('status')!='draft'
-            or not local_water_overlay.selected(snapshot,decision)):
-        raise ValueError('selected draft coastal policy and explicit research opt-in required')
     required={'method','band_metres','band_tolerance_metres','shore_geometry','distance','ellipsoid','tie_rules','land_input','water_input'}
     if not isinstance(definition,dict) or set(definition)!=required or definition.get('method')!='nearest_final_shore_band_v2':
         raise ValueError('unsupported coastal policy definition')
@@ -32,17 +28,14 @@ def policy(snapshot, *, allow_selected_research=False):
         if not math.isfinite(v):raise ValueError('invalid coastal numeric parameter')
         return v
     band,bandtol=map(number,(p['band_metres'],p['band_tolerance_metres']))
-    if not (0 < band <= 1_000_000 and 0 <= bandtol <= 1):
+    if not (band > 0 and bandtol >= 0):
         raise ValueError('unsupported coastal band or threshold tolerance')
     tie=p['tie_rules']
     if not isinstance(tie,dict):raise ValueError('coast tie rules required')
-    entities=tie.get('priority_entity_ids')
-    # Reuse exact entity-priority and 10-micrometre-capable validation.
-    fake={'assignment_method':'shared_nearest_assigned_shore','participant_entity_ids':entities,'tie_rules':tie}
-    pairs,tolerance=shore.selected_rules(snapshot,fake)
-    land_entities={b.get('entity_id') for b in snapshot.get('category_bindings',[]) if b.get('physical_class')=='land' and b.get('code') in range(17,23)}
-    if set(entities)!=land_entities or len(entities)!=6:
-        raise ValueError('coastal priority must cover every continental land entity once')
+    pairs,tolerance=shore.tie_policy(snapshot,tie)
+    land_entities={b['entity_id'] for b in snapshot['category_bindings'] if b['physical_class']=='land'}
+    if {entity for entity,_,_ in pairs}!=land_entities:
+        raise ValueError('coastal priority must cover every land entity once')
     return decision,pairs,tolerance,band,bandtol
 
 

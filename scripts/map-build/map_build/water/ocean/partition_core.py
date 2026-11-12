@@ -12,7 +12,7 @@ from array import array
 from bisect import bisect_left, bisect_right
 from collections import defaultdict, Counter
 from pathlib import Path
-from exclusive_outputs import create_binary_exclusive, create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, create_run_directory, write_json_exclusive
+from map_build.execution.outputs import create_binary_exclusive, create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, create_run_directory, write_json_exclusive
 import hashlib, json, math, struct
 
 class CutEdges:
@@ -50,8 +50,6 @@ class CutEdges:
             else:raise ValueError(f'unknown cut edge kind {k}')
         return cuts
 
-CLASS_LABELS={1:'Africa water',2:'Asia water',3:'Europe water',4:'North America water',5:'South America water',6:'Oceania water',
-  17:'Africa land',18:'Asia land',19:'Europe land',20:'North America land',21:'South America land',22:'Oceania land'}
 
 def _cross(ax,ay,bx,by):return ax*by-ay*bx
 
@@ -176,7 +174,7 @@ class _DSU:
 
 def _blocked_count(sorted_x,lo,hi):return bisect_left(sorted_x,hi)-bisect_left(sorted_x,lo)
 
-def floodfill_run_graph(eligible_rows,width,height,cuts,seeds,workdir,*,manifest_inputs=None,unassigned_policy='report-only',required_seed_codes=(7,8,9,10),classification_rows=None,seed_metadata=None):
+def floodfill_run_graph(eligible_rows,width,height,cuts,seeds,workdir,*,manifest_inputs=None,unassigned_policy='report-only',required_seed_codes=None,classification_rows=None,seed_metadata=None,class_labels=None):
     """Flood fill eligible RLE intervals and emit sparse fresh ocean spans.
 
     `eligible_rows(y)` returns sorted, disjoint `[x_start,x_end)` intervals for
@@ -191,7 +189,10 @@ def floodfill_run_graph(eligible_rows,width,height,cuts,seeds,workdir,*,manifest
     No source ocean-label raster is read; each eligible component gets its code
     only from a supplied verified seed. Unseeded components are left separate.
     """
-    if set(seeds)!=set(required_seed_codes):raise ValueError(f'expected seed codes {sorted(required_seed_codes)}; got {sorted(seeds)}')
+    class_labels = class_labels or {}
+    if not seeds or any(type(code) is not int or not 0 < code < 2**32 for code in seeds):
+        raise ValueError('positive u32 seed codes are required')
+    if required_seed_codes is not None and set(seeds)!=set(required_seed_codes):raise ValueError(f'expected seed codes {sorted(required_seed_codes)}; got {sorted(seeds)}')
     workdir=Path(workdir);create_directory_exclusive(workdir)
     dsu=_DSU();row_offsets=array('Q',[0]);prev=[];seed_nodes={};eligible_cells=0
     node_path=workdir/'node_intervals.bin'
@@ -328,41 +329,25 @@ def floodfill_run_graph(eligible_rows,width,height,cuts,seeds,workdir,*,manifest
     write_u64le(workdir/'unseeded_rows.u64le',residual_rows)
     comps=[]
     for root,s in comp.items():
-        adjacent_seeded=sorted(map(int,s['adjacent_seeded_ocean_codes_across_source_barriers']))
-        adjacent_classes=sorted(map(int,s['adjacent_class_cells']))
-        if len(adjacent_seeded)==1 and not adjacent_classes:
-            resolution_hint='source-cut-isolated-ocean-parent-candidate'
-        elif len(adjacent_seeded)>1:
-            resolution_hint='source-cut-isolated-multiple-ocean-adjacencies-review'
-        elif len(adjacent_seeded)==1:
-            resolution_hint='source-cut-isolated-ocean-with-shore-contact-review'
-        elif s['source_barrier_contact_edge_count']:
-            resolution_hint='source-cut-contact-without-seeded-parent-review'
-        elif not adjacent_seeded and adjacent_classes:
-            resolution_hint='shore-or-continental-water-adjacency-pocket-review'
-        else:
-            resolution_hint='unresolved-component-review'
-        s.update({'component_root':root,'ocean_code':seed_roots.get(root),'ocean_label':{7:'Atlantic',8:'Pacific',9:'Indian',10:'Arctic'}.get(seed_roots.get(root)),
+        s.update({'component_root':root,'ocean_code':seed_roots.get(root),'ocean_label':class_labels.get(seed_roots.get(root)),
                   'longitude_bounds_edges':[-180+s['x_min']*360/width,-180+s['x_max']*360/width],
                   'latitude_bounds_centers':[90-(s['row_min']+.5)*360/width,90-(s['row_max']+.5)*360/width],
                   'adjacent_class_cells':dict(sorted(s['adjacent_class_cells'].items())),
-                  'adjacent_class_label_counts':{CLASS_LABELS.get(int(k),f'code-{k}'):v for k,v in sorted(s['adjacent_class_cells'].items(),key=lambda kv:int(kv[0]))},
+                  'adjacent_class_label_counts':{class_labels.get(int(k),f'code-{k}'):v for k,v in sorted(s['adjacent_class_cells'].items(),key=lambda kv:int(kv[0]))},
                   'adjacent_noneligible_class_edge_counts':dict(sorted(s['adjacent_class_cells'].items())),
-                  'adjacent_noneligible_class_edge_label_counts':{CLASS_LABELS.get(int(k),f'code-{k}'):v for k,v in sorted(s['adjacent_class_cells'].items(),key=lambda kv:int(kv[0]))},
+                  'adjacent_noneligible_class_edge_label_counts':{class_labels.get(int(k),f'code-{k}'):v for k,v in sorted(s['adjacent_class_cells'].items(),key=lambda kv:int(kv[0]))},
                   'adjacent_seeded_ocean_codes_across_source_barriers':dict(sorted(s['adjacent_seeded_ocean_codes_across_source_barriers'].items())),
-                  'source_barrier_contact_edge_count':s['source_barrier_contact_edge_count'],
-                  'resolution_hint':resolution_hint,
-                  'provisional_ocean_parent_code':adjacent_seeded[0] if len(adjacent_seeded)==1 else None})
+                  'source_barrier_contact_edge_count':s['source_barrier_contact_edge_count']})
         comps.append(s)
     comps.sort(key=lambda x:(x['ocean_code'] is None,-x['cell_count'],x['component_root']))
     assigned_total=sum(counts.values());unseeded_total=sum(s['cell_count'] for s in comps if s['ocean_code'] is None)
     if assigned_total+unseeded_total!=eligible_cells:raise AssertionError(f'cell conservation failed: assigned {assigned_total} + residual {unseeded_total} != eligible {eligible_cells}')
-    manifest={'schema':'fresh-ocean-run-partition-v1','status':'proposal-only','grid':{'W':width,'H':height,'angular_step_degrees':360/width,'rows_included':[0,height-1]},
-      'inputs':manifest_inputs or {},'method':'Run-segment four-neighbor connected components over residual physical marine mask. Source boundaries block crossed cell-center adjacency edges. Longitude wrap is enabled except where an explicit barrier blocks it. Only the four verified seed cells assign ocean codes; no previous ocean-label raster is used.',
+    manifest={'schema':'fresh-ocean-run-partition-v1','grid':{'W':width,'H':height,'angular_step_degrees':360/width,'rows_included':[0,height-1]},
+      'inputs':manifest_inputs or {},'method':'Run-segment four-neighbor connected components over remaining physical water. Source boundaries block crossed cell-center adjacency edges. Longitude wraps except at explicit barriers. Supplied seed cells assign ocean codes.',
       'seed_cells':{str(code):{'x':xy[0],'y':xy[1],'longitude_center':-180+(xy[0]+.5)*360/width,'latitude_center':90-(xy[1]+.5)*360/width,**(seed_metadata or {}).get(code,{})} for code,xy in seeds.items()},
-      'physical_class_code_labels':{str(k):v for k,v in CLASS_LABELS.items()},
+      'physical_class_code_labels':{str(k):v for k,v in class_labels.items()},
       'barrier_edge_counts':{'horizontal':sum(map(len,cuts.horizontal.values())),'vertical':sum(map(len,cuts.vertical.values())),'wrap':len(cuts.wrap)},
-      'eligible_water_cells':eligible_cells,'assigned_cells_by_ocean_code':{str(k):counts[k] for k in (7,8,9,10)},'assigned_cells_total':sum(counts.values()),
+      'eligible_water_cells':eligible_cells,'assigned_cells_by_ocean_code':{str(k):counts[k] for k in sorted(seeds)},'assigned_cells_total':sum(counts.values()),
       'ocean_assignment_span_count':out_spans,'unseeded_cell_count':sum(s['cell_count'] for s in comps if s['ocean_code'] is None),'unseeded_span_count':res_spans,
       'unseeded_component_policy':unassigned_policy,'components':comps,
       'outputs':{'node_intervals':'node_intervals.bin','node_rows':'node_rows.u64le','ocean_spans':'ocean_assignment_spans.u32le','ocean_rows':'ocean_rows.u64le','unseeded_spans':'unseeded_component_spans.u32le','unseeded_rows':'unseeded_rows.u64le'}}

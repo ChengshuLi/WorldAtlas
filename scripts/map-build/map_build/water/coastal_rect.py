@@ -1,8 +1,8 @@
-"""Research 2-D rectangular certificates with exact WGS84 fallback."""
+"""Coastal-band rectangle certificates with complete WGS84 fallback."""
 import math
 import numpy as np
-import shared_nearest as s
-import coastal_core as core
+from map_build.water import shared_nearest as s
+from map_build.water import coastal_core as core
 
 def classify(water,x0,y0,bounds,w,h,step,pairs,tol,band,bandtol,idx,block=32):
  water=np.asarray(water)
@@ -16,13 +16,13 @@ def classify(water,x0,y0,bounds,w,h,step,pairs,tol,band,bandtol,idx,block=32):
  # Crop may wrap the antimeridian; place core in the same unwrapped copy.
  mapped=x0+math.ceil((xa-x0)/w)*w
  if mapped<xa or mapped+nc>xb:raise ValueError('query outside crop')
- if not nr or not nc:return np.zeros((nr,nc),dtype=np.uint8),{'bounded':0,'exact':0}
+ if not nr or not nc:return np.zeros((nr,nc),dtype=np.uint32),{'bounded':0,'exact':0}
  # Summed area lets each rectangle skip land-only regions in constant time.
  sat=np.pad(np.cumsum(np.cumsum(water,axis=0,dtype=np.int64),axis=1,dtype=np.int64),((1,0),(1,0)))
  def wet(y0,y1,x0,x1):return sat[y1,x1]-sat[y0,x1]-sat[y1,x0]+sat[y0,x0]
  ys,xs=np.meshgrid(np.arange(0,nr,block),np.arange(0,nc,block),indexing='ij');a=ys.ravel();c=xs.ravel();b=np.minimum(a+block,nr);d=np.minimum(c+block,nc)
  mask=wet(a,b,c,d)>0;a,b,c,d=a[mask],b[mask],c[mask],d[mask]
- output=np.zeros(water.shape,dtype=np.uint8);available=[p for p in pairs if p[1] in idx];unresolved=[]
+ output=np.zeros(water.shape,dtype=np.uint32);available=[p for p in pairs if p[1] in idx];unresolved=[]
  while len(a):
   # Centers are midpoints between extreme grid-cell centers.
   ml=90-(y0+(a+b)/2)*step;mid=-180+(x0+(c+d)/2)*step;pts=s.unit(ml,mid)
@@ -58,6 +58,7 @@ def classify(water,x0,y0,bounds,w,h,step,pairs,tol,band,bandtol,idx,block=32):
   lat=90-(y0+ny+.5)*step;lon=-180+(x0+nx+.5)*step
   codes,s0=core.classify(lat,lon,bounds,w,h,step,pairs,tol,band,bandtol,idx);output[ny,nx]=codes;stats['bounded']+=s0['bounded'];stats['exact']+=s0['exact']
  if stats['bounded']+stats['exact']!=int(water.sum()):raise RuntimeError('accounting mismatch')
+ output[~water]=0
  return output,stats
 
 def centers_for_crop(physical, land, bounds, width, height, step, land_codes):

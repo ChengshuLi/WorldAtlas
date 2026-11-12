@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
-import shared_nearest as shore
-from coastal_shore_index import CoastalShoreIndex
+from map_build.water import shared_nearest as shore
+from map_build.water.coastal_shore_index import CoastalShoreIndex
 from test_shore_throughput import rle
 
 

@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import patch
 import numpy as np
-import coastal_rect as rect
-import coastal_core as core
-import shared_nearest as shore
+from map_build.water import coastal_rect as rect
+from map_build.water import coastal_core as core
+from map_build.water import shared_nearest as shore
 
 def rle(grid):
  rows=[0];runs=[]

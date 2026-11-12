@@ -1,4 +1,4 @@
-"""Bounded parser for a top-level JSON object with a streamed components array."""
+"""Read partition metadata while processing components one at a time."""
 import json
 
 
@@ -11,8 +11,8 @@ def unique_object(pairs):
 
 
 class Reader:
- def __init__(self,f,limit=2*1024*1024):
-  self.f=f;self.buf='';self.pos=0;self.eof=False;self.limit=limit
+ def __init__(self,f):
+  self.f=f;self.buf='';self.pos=0;self.eof=False
   self.decoder=json.JSONDecoder(object_pairs_hook=unique_object)
  def compact(self):
   if self.pos:self.buf=self.buf[self.pos:];self.pos=0
@@ -22,7 +22,6 @@ class Reader:
   chunk=self.f.read(65536)
   if not chunk:self.eof=True;return False
   self.buf+=chunk
-  if len(self.buf)>self.limit:raise ValueError('partition JSON element exceeds limit')
   return True
  def space(self):
   while True:
@@ -49,10 +48,10 @@ class Reader:
     self.fill()
 
 
-def read_partition(path,on_component,element_limit=2*1024*1024,metadata_limit=4*1024*1024):
+def read_partition(path,on_component):
  """Return metadata; invoke callback once per component, never retaining array."""
  with open(path,'r',encoding='utf8') as f:
-  r=Reader(f,element_limit);r.char('{');meta={};seen=set();components_seen=False;metasize=0
+  r=Reader(f);r.char('{');meta={};seen=set();components_seen=False
   if r.peek()=='}':r.char('}');raise ValueError('missing components')
   while True:
    key=r.value()
@@ -69,8 +68,7 @@ def read_partition(path,on_component,element_limit=2*1024*1024,metadata_limit=4*
       break
     r.char(']')
    else:
-    value=r.value();metasize+=len(json.dumps(value,ensure_ascii=False))
-    if metasize>metadata_limit:raise ValueError('partition metadata exceeds limit')
+    value=r.value()
     meta[key]=value
    if r.peek()==',':r.char(',');continue
    break

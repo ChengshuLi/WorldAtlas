@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from pyproj import Geod
 from test_helpers import rle
-import shared_nearest as s
+from map_build.water import shared_nearest as s
 class CenterSearch(unittest.TestCase):
  def test_random_against_brute_wgs84(self):
   rng=np.random.default_rng(2026);p=np.ones((180,360),dtype=np.uint32);l=np.zeros_like(p)

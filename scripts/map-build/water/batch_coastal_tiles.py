@@ -14,12 +14,18 @@ from contextvars import copy_context
 from pathlib import Path
 import numpy as np
 import build_coastal_tile as tile
-import decision_snapshot,exclusive_outputs,pinned_coastal_metadata,local_water_overlay,direct_lineage,build_prefill_plan,selected_mixed_lineage
+import decision_snapshot
+from map_build.execution import outputs as exclusive_outputs
+import pinned_coastal_metadata
+import local_water_overlay
+import direct_lineage
+import build_prefill_plan
+import selected_mixed_lineage
 from pinned_coastal_metadata import pinned_bytes,pinned_json
 from stage_external import check_cancelled
 import snapshot_input
-import coastal_shore_index_batch
-from exclusive_outputs import create_directory_exclusive,create_binary_exclusive,open_checkpoint_readonly
+from map_build.water import coastal_shore_index_batch
+from map_build.execution.outputs import create_directory_exclusive,create_binary_exclusive,open_checkpoint_readonly
 
 def available_workers():
  """Choose concurrency from the process's available CPUs, never its RAM."""
@@ -169,7 +175,7 @@ def validate_tile(directory, entry, snapshot, inputs, identity, checkpoint):
         raise ValueError('resume tile manifest hash mismatch')
     box = entry['core']
     width, height = identity['grid']['width'], identity['grid']['height']
-    decision, _, _, _, _ = tile.core.policy(snapshot, allow_selected_research=True)
+    decision, _, _, _, _ = tile.core.policy(snapshot)
     expected = {
         'schema': 'worldatlas-coastal-tile-candidate-v1',
         'status': 'partial-unverified-research-not-published',
@@ -311,8 +317,6 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
  names=('physical_rows','physical_runs','land_rows','land_runs')
  if set(paths)!=set(names) or set(pins)!=set(names):raise ValueError('four grid inputs required')
  if set(metadata_pins)!={'physical_report','land_report'} or any(not isinstance(v,str) or len(v)!=64 or any(c not in '0123456789abcdef' for c in v) for v in metadata_pins.values()):raise ValueError('two report SHA-256 pins required')
- if Path(coastal_shore_index_batch.__file__).resolve()!=Path(__file__).resolve().with_name('coastal_shore_index_batch.py'):
-  raise ImportError('shoreline index builder resolved outside the selected checkout')
  code_paths={'algorithm':Path(tile.__file__),'core':Path(tile.core.__file__),'shore':Path(tile.core.shore.__file__),'geometry':Path(tile.core.shore.__file__),'accelerator':Path(tile.coastal_rect.__file__),
              'shore_index':Path(tile.coastal_shore_index.__file__)};code_pins={k:sha(v) for k,v in code_paths.items()}
  support_paths={'metadata':Path(pinned_coastal_metadata.__file__),'snapshot':Path(decision_snapshot.__file__),'land_lineage':Path(direct_lineage.__file__),'land_validator':Path(build_prefill_plan.__file__),'mixed_lineage':Path(selected_mixed_lineage.__file__),'overlay':Path(local_water_overlay.__file__),'output':Path(exclusive_outputs.__file__),'snapshot_input':Path(snapshot_input.__file__),'shore_index_builder':Path(coastal_shore_index_batch.__file__)};support_pins={k:sha(v) for k,v in support_paths.items()}
@@ -336,7 +340,8 @@ def run_batch(snapshot,snapshot_sha,paths,pins,plan,plan_sha,out,width,height,ch
    fd,n=sealed_copy(paths[k],pins[k]);used+=n;sealed[k]=stack.enter_context(os.fdopen(fd,'rb'))
   physical=tile.open_grid(sealed['physical_rows'],sealed['physical_runs'],width,height);land=tile.open_grid(sealed['land_rows'],sealed['land_runs'],width,height)
   shore_started=time.perf_counter()
-  shore_index=coastal_shore_index_batch.BatchedCoastalShoreIndex(physical,land,width,height)
+  land_codes=[b['code'] for b in snapshot['category_bindings'] if b['physical_class']=='land']
+  shore_index=coastal_shore_index_batch.BatchedCoastalShoreIndex(physical,land,width,height,land_codes=land_codes)
   for values in (shore_index.offsets,shore_index.starts,shore_index.ends,shore_index.codes):values.flags.writeable=False
   shore_elapsed=time.perf_counter()-shore_started
   root=create_directory_exclusive(out);sync_directory(root.parent);manifests=[];attempt_id=uuid.uuid4().hex

@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 import numpy as np
-import shared_nearest as s
-import interval_nearest as x
+from map_build.water import shared_nearest as s
+from map_build.water import interval_nearest as x
 class Intervals(unittest.TestCase):
  def test_exact_midpoint_minima_resolve_loose_spherical_bounds(self):
   width=131072;height=54614;step=360/width;pairs=[('a',17,1),('b',18,2)]
@@ -61,8 +61,8 @@ class Intervals(unittest.TestCase):
   def bad(lat,lon):return np.full(len(lat),99,dtype='u1'),0,len(lat)
   with self.assertRaises(ValueError):x.classify_row(89,[(0,4)],(160,200,70,110),360,180,1.,pairs,1e-5,{},point_classifier=bad)
  def test_actual_wrapped_streamed_fallback(self):
-  from wrapped_bounds import StreamedWrappedClassifier
-  import streamed_shore_fallback as fallback
+  from map_build.water.wrapped_bounds import StreamedWrappedClassifier
+  from map_build.water import streamed_shore_fallback as fallback
   from scipy.spatial import cKDTree
   def dataset(lats,lons):
    lat=np.array(lats,dtype=float);lon=np.array(lons,dtype=float)

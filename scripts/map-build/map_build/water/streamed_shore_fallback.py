@@ -6,7 +6,7 @@ the current exact WGS84 upper bound. Research only, dedicated stable inputs.
 """
 import math
 import numpy as np
-import shared_nearest as s
+from map_build.water import shared_nearest as s
 
 def classify_one(lat,lon,full_bounds,width,height,step,pairs,tolerance,full_blocks,narrow_indexes,block=65536):
  if not(math.isfinite(lat) and math.isfinite(lon) and abs(lat)<=90 and abs(lon)<=180 and math.isfinite(tolerance) and tolerance>=0 and type(block) is int and block>0 and type(width) is int and type(height) is int and width>0 and height>0 and math.isfinite(step) and step>0 and abs(step*width-360)<=1e-8 and pairs):raise ValueError('invalid query or parameters')

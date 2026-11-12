@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Streaming adapters for the WorldAtlas row-offset + (end,code) RLE format.
 
-The final prefill class raster is expected to encode physical land as 17..22,
-already-assigned coastal/named-basin water as 1..6, and residual eligible water
-as 0. Eligibility is then computed as physical code 1 intersect class code 0;
-old ocean label rasters are never consulted.
+The prefill raster contains registry-bound land and assigned-water codes, with
+zero for remaining water. Eligibility is physical water intersecting that zero
+mask. The caller supplies the permitted category codes.
 """
 from __future__ import annotations
 from pathlib import Path
@@ -75,12 +74,11 @@ def intersect_intervals(a,b):
     return out
 
 
-def validate_prefill_row(physical_runs, class_runs, width):
+def validate_prefill_row(physical_runs, class_runs, width, land_codes, water_codes):
     """Check complete rows contain only stable land/water prefill codes.
 
-    Physical 17 (dry) must map to land codes 17..22. Physical 1 (water) must
-    map to 0 (residual eligible) or 1..6 (already assigned continental water).
-    In particular, a legacy ocean code 7..10 in the input is rejected.
+    Physical dry cells must have a supplied land code. Physical water must
+    have zero or a supplied water code.
     """
     if not physical_runs or not class_runs or physical_runs[-1][0]!=width or class_runs[-1][0]!=width:
         raise ValueError('physical and prefill-class rows must both cover the full width')
@@ -88,26 +86,26 @@ def validate_prefill_row(physical_runs, class_runs, width):
     while i<len(physical_runs) and j<len(class_runs):
         pe,pc=physical_runs[i];ce,cc=class_runs[j];end=min(pe,ce)
         if pc==17:
-            if cc not in (17,18,19,20,21,22):raise ValueError(f'physical land has invalid prefill code {cc}')
+            if cc not in land_codes:raise ValueError(f'physical land has invalid prefill code {cc}')
         elif pc==1:
-            if cc not in (0,1,2,3,4,5,6):raise ValueError(f'physical water has invalid/inherited prefill code {cc}')
+            if cc != 0 and cc not in water_codes:raise ValueError(f'physical water has invalid/inherited prefill code {cc}')
         else:raise ValueError(f'unknown physical code {pc}')
         if pe==end:i+=1
         if ce==end:j+=1
     if i!=len(physical_runs) or j!=len(class_runs):raise ValueError('physical and prefill-class rows do not end together')
 
 
-def make_prefill_adapters(physical, final_class, width, height):
+def make_prefill_adapters(physical, final_class, width, height, land_codes, water_codes):
     """Build callbacks for fresh fill from physical + complete prefill-class RLEs.
 
-    `final_class` must already include all finalized 1–6 water assignments and
-    all 17–22 land cells; code 0 is reserved for residual physical water.
+    `final_class` includes all finalized water assignments and land cells;
+    code 0 is reserved for residual physical water.
     An inconsistent zero on physical land is not treated as ocean eligibility.
     """
     if (physical.width,physical.height)!=(width,height) or (final_class.width,final_class.height)!=(width,height):
         raise ValueError('input raster dimensions differ from requested grid')
     def eligible_rows(y):
-        pr=physical.row(y);cr=final_class.row(y);validate_prefill_row(pr,cr,width)
+        pr=physical.row(y);cr=final_class.row(y);validate_prefill_row(pr,cr,width,land_codes,water_codes)
         phys=code_intervals(pr,1)
         residual=code_intervals(cr,0)
         return intersect_intervals(phys,residual)

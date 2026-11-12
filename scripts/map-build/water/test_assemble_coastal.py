@@ -44,9 +44,9 @@ class AssemblyTest(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'mixed'):self.call()
   self.write(1,lambda m:m.update(accelerator_sha256='z'*64))
   with self.assertRaisesRegex(ValueError,'incomplete'):self.call()
- def test_unselected_fails_even_with_optin(self):
-  self.s['policies'][0]['evidence']['execution_status']='research_only_not_selected'
-  with self.assertRaisesRegex(ValueError,'selected draft'):self.call()
+ def test_policy_notes_are_not_an_execution_gate(self):
+  self.s['policies'][0]['evidence']={}
+  self.assertEqual(self.call()['assigned_cells'],2)
 
 if __name__=='__main__':unittest.main()
 

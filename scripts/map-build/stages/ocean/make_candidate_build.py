@@ -10,7 +10,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1] / 'water'))
 sys.path.insert(0, str(HERE.parents[1]))
 from decision_snapshot import read_snapshot
-from exclusive_outputs import write_json_exclusive
+from map_build.execution.outputs import write_json_exclusive
 
 
 def sha(path):

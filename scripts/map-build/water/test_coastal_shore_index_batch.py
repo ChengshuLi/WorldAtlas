@@ -2,8 +2,8 @@ import unittest
 from unittest.mock import patch
 import numpy as np
 
-from coastal_shore_index import CoastalShoreIndex
-from coastal_shore_index_batch import BatchedCoastalShoreIndex
+from map_build.water.coastal_shore_index import CoastalShoreIndex
+from map_build.water.coastal_shore_index_batch import BatchedCoastalShoreIndex
 from test_shore_throughput import rle
 
 
@@ -36,7 +36,7 @@ class BatchIndexTests(unittest.TestCase):
         for changed,at in ((p,(2,5)),(l,(1,2))):
             original=int(changed[at]);changed[at]=273
             with self.assertRaisesRegex(ValueError,'invalid physical or land'):
-                BatchedCoastalShoreIndex(rle(p),rle(l),8,4,rows_per_batch=2)
+                BatchedCoastalShoreIndex(rle(p),rle(l),8,4,rows_per_batch=2,land_codes=range(17,23))
             changed[at]=original
         l[2,5]=273  # On physical water this category is not used by either index.
         self.compare(p,l,2)

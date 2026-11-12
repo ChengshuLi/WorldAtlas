@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from shared_nearest import crop
+from map_build.water.shared_nearest import crop
 
 class FullRowCropFastPath(unittest.TestCase):
     def test_full_row_matches_rle_values_and_dtype(self):

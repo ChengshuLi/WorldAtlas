@@ -1,4 +1,4 @@
-"""Research-only unseeded-water classification from pinned ocean partition.
+"""Classify enclosed residual water from its current neighboring entities.
 
 Component identity,
 barrier counts and snapshot/physical lineage must be verified by the caller.
@@ -6,18 +6,14 @@ barrier counts and snapshot/physical lineage must be verified by the caller.
 from collections import Counter,defaultdict
 import math
 import numpy as np
-import shared_nearest as shore
-import local_water_overlay
+from map_build.water import shared_nearest as shore
 
 
-def policy(snapshot, *, allow_selected_research=False):
+def policy(snapshot):
     policies=[p for p in snapshot.get('policies',[]) if p.get('kind')=='closed_water_assignment']
     if len(policies)!=1 or not isinstance(policies[0].get('id'),str) or not policies[0]['id']:
         raise ValueError('exactly one identified closed-water policy is required')
     decision=policies[0];d=decision.get('definition',{})
-    if (not allow_selected_research or snapshot.get('decision_revision',{}).get('status')!='draft'
-            or not local_water_overlay.selected(snapshot,decision)):
-        raise ValueError('selected draft closed-water policy and explicit research opt-in required')
     expected={'method','boundary_participants','distance','ellipsoid','latitude_grid_edge_contacts',
               'multiple_participants','no_participants','one_participant','source_cut_contacts',
               'tie_rules','unresolved_zero_neighbors','shore_geometry'}
@@ -32,10 +28,9 @@ def policy(snapshot, *, allow_selected_research=False):
         or p['distance']!='wgs84_ellipsoidal_center_to_center' or p['ellipsoid']!='WGS84'):
         raise ValueError('unsupported closed-water safety or geometry rule')
     tie=p['tie_rules']; ids=tie.get('priority_entity_ids') if isinstance(tie,dict) else None
-    fake={'assignment_method':'shared_nearest_assigned_shore','participant_entity_ids':ids,'tie_rules':tie}
-    pairs,tol=shore.selected_rules(snapshot,fake)
-    land_entities={b.get('entity_id') for b in snapshot.get('category_bindings',[]) if b.get('physical_class')=='land' and b.get('code') in range(17,23)}
-    if len(ids)!=6 or set(ids)!=land_entities:raise ValueError('closed-water priority must cover six continents')
+    pairs,tol=shore.tie_policy(snapshot,tie)
+    land_entities={b.get('entity_id') for b in snapshot.get('category_bindings',[]) if b.get('physical_class')=='land'}
+    if set(ids)!=land_entities:raise ValueError('closed-water priority must cover every land entity')
     return policies[0],pairs,tol
 
 

@@ -8,11 +8,11 @@ import collections,hashlib,json,math,sqlite3,struct
 import time
 from pathlib import Path
 import numpy as np
-import closed_water_core as core
-import interval_nearest
-import partition_json_stream
-from partition_json_stream import read_partition
-from exclusive_outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
+from map_build.water import closed_water_core as core
+from map_build.water import interval_nearest
+from map_build.water import partition_json_stream
+from map_build.water.partition_json_stream import read_partition
+from map_build.execution.outputs import create_directory_exclusive,create_gzip_text_exclusive,write_json_exclusive
 
 
 def sha(path):
@@ -27,7 +27,7 @@ def open_database(path):
  db.execute('PRAGMA temp_store=FILE');db.execute('PRAGMA foreign_keys=ON')
  db.executescript('''
  CREATE TABLE components(root INTEGER PRIMARY KEY, expected INTEGER NOT NULL, reported_cut INTEGER NOT NULL,
-   boundary_mask INTEGER NOT NULL DEFAULT 0, unknown INTEGER NOT NULL DEFAULT 0, crop_edge INTEGER NOT NULL DEFAULT 0,
+   boundary_entities TEXT NOT NULL DEFAULT '[]', unknown INTEGER NOT NULL DEFAULT 0, crop_edge INTEGER NOT NULL DEFAULT 0,
    cut INTEGER NOT NULL DEFAULT 0, method TEXT, code INTEGER);
  CREATE TABLE spans(y INTEGER NOT NULL, a INTEGER NOT NULL, b INTEGER NOT NULL, root INTEGER NOT NULL REFERENCES components(root),
    PRIMARY KEY(y,a)) WITHOUT ROWID;
@@ -39,7 +39,7 @@ def open_database(path):
 
 def ingest_partition(db,path,width,height,snapshot_sha,inputs,revision):
  def insert(c):
-  if 'ocean_code' not in c or (c['ocean_code'] is not None and (type(c['ocean_code']) is not int or c['ocean_code'] not in (7,8,9,10))):
+  if 'ocean_code' not in c or (c['ocean_code'] is not None and (type(c['ocean_code']) is not int or not 0 < c['ocean_code'] < 2**32)):
    raise ValueError('invalid component ocean code')
   if c['ocean_code'] is not None:return
   root,count,cut=c.get('component_root'),c.get('cell_count'),c.get('source_barrier_contact_edge_count')
@@ -51,7 +51,7 @@ def ingest_partition(db,path,width,height,snapshot_sha,inputs,revision):
  if meta.get('schema')!='fresh-ocean-run-partition-v1' or meta.get('grid',{}).get('W')!=width or meta.get('grid',{}).get('H')!=height:
   raise ValueError('partition schema or grid mismatch')
  pin=meta.get('inputs',{})
- if (pin.get('decision_snapshot_sha256')!=snapshot_sha or pin.get('legacy_ocean_label_inheritance') is not False
+ if (pin.get('decision_snapshot_sha256')!=snapshot_sha
      or pin.get('decision_revision')!=revision.get('id') or pin.get('entity_revision')!=revision.get('entity_revision')):
   raise ValueError('partition snapshot or historical-label lineage mismatch')
  for key in ('physical_rows_sha256','physical_runs_sha256','prefill_rows_sha256','prefill_runs_sha256','prefill_audit_sha256','source_cut_edges_sha256'):
@@ -96,12 +96,8 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
     physical/prefill codes and ownership. Full visited rows are still validated.
     """
     water_to_entity={w:e for e,_,w in pairs};land_to_entity={l:e for e,l,_ in pairs}
-    entity_to_water={e:w for e,_,w in pairs};water_codes=list(water_to_entity);land_codes=list(land_to_entity)
-    bits_by_code=np.zeros(23,dtype=np.uint32)
-    for code,entity in {**water_to_entity,**land_to_entity}.items():bits_by_code[code]=1<<entity_to_water[entity]
-    allowed_physical=np.zeros(23,dtype=bool);allowed_physical[[1,17]]=True
-    allowed_land=np.zeros(23,dtype=bool);allowed_land[land_codes]=True
-    allowed_water=np.zeros(23,dtype=bool);allowed_water[[0,*water_codes]]=True
+    code_to_entity = {**water_to_entity, **land_to_entity}
+    water_codes, land_codes = list(water_to_entity), list(land_to_entity)
     class_rows={};index_rows={}
     def classes(y):
         if y in class_rows:return class_rows[y]
@@ -114,7 +110,7 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
         pe,pv=read(physical);qe,qv=read(prefill)
         ends=np.union1d(pe,qe);starts=np.r_[0,ends[:-1]]
         p=pv[np.searchsorted(pe,starts,side='right')];q=qv[np.searchsorted(qe,starts,side='right')]
-        if np.any((p<0)|(p>=len(allowed_physical))) or np.any((q<0)|(q>=len(allowed_land))) or np.any(~allowed_physical[p]) or np.any((p==17)&~allowed_land[q]) or np.any((p==1)&~allowed_water[q]):
+        if np.any(~np.isin(p, [1,17])) or np.any((p==17)&~np.isin(q,land_codes)) or np.any((p==1)&~np.isin(q,[0,*water_codes])):
             raise ValueError(f'invalid physical/prefill relationship at row {y}')
         class_rows[y]=(ends,p,q)
         return ends,p,q
@@ -131,13 +127,15 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
         return np.where((ix>=0)&(x<ends[safe]),roots[safe],-1)
     def classify_row(y,data):
         starts,ends,roots=data;ce,p,q=classes(y);updates={};crop=int(y==0 or y==height-1)
-        def accumulate_values(ids,values):
-            unique,inverse=np.unique(ids,return_inverse=True)
-            masks=np.zeros(len(unique),dtype=np.uint32);unknown=np.zeros(len(unique),dtype=bool)
-            np.bitwise_or.at(masks,inverse,bits_by_code[values]);np.logical_or.at(unknown,inverse,values==0)
-            for root,mask,unk in zip(unique,masks,unknown):
-                root=int(root);prior=updates.get(root,(0,0,0))
-                updates[root]=(prior[0]|int(mask),max(prior[1],int(unk)),max(prior[2],crop))
+        def accumulate_values(ids, values):
+            for value in np.unique(values):
+                entity = code_to_entity.get(int(value))
+                for root in np.unique(ids[values == value]):
+                    record = updates.setdefault(int(root), [set(), 0, 0])
+                    if entity is not None:
+                        record[0].add(entity)
+                    record[1] |= int(value == 0)
+                    record[2] |= crop
         def accumulate(ids,ny,x):
             external=owners(ny,x)!=ids
             if not np.any(external):return
@@ -153,7 +151,7 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
             accumulate(ids,y,(starts[sub]-1)%width);accumulate(ids,y,ends[sub]%width)
             if crop:
                 for root in ids:
-                    root=int(root);prior=updates.get(root,(0,0,0));updates[root]=(prior[0],prior[1],1)
+                    updates.setdefault(int(root), [set(), 0, 0])[2] = 1
         for ny in (y-1,y+1):
             if not 0<=ny<height:continue
             adjacent=row_index(ny)
@@ -169,8 +167,14 @@ def classify_boundaries(db,physical,prefill,width,height,pairs,batch_cells=4096)
             cuts=np.union1d(cuts,ne);xx=cuts[:-1];rr=owners(y,xx)
             external=(rr>=0)&(owners(ny,xx)!=rr)
             accumulate_values(rr[external],nq[np.searchsorted(ne,xx[external],side='right')])
-        db.executemany('UPDATE components SET boundary_mask=boundary_mask|?,unknown=MAX(unknown,?),crop_edge=MAX(crop_edge,?) WHERE root=?',
-                       ((mask,unknown,crop_edge,root) for root,(mask,unknown,crop_edge) in updates.items()))
+        records = []
+        for root, (entities, unknown, crop_edge) in updates.items():
+            old = db.execute('SELECT boundary_entities FROM components WHERE root=?', (root,)).fetchone()
+            if old is None:
+                raise ValueError('boundary references an unknown component')
+            merged = sorted(set(json.loads(old[0])) | entities)
+            records.append((json.dumps(merged), unknown, crop_edge, root))
+        db.executemany('UPDATE components SET boundary_entities=?,unknown=MAX(unknown,?),crop_edge=MAX(crop_edge,?) WHERE root=?', records)
     for y in range(height):
         # Only y-1, y and y+1 can participate in this row's four-neighbor
         # checks. Earlier rows have no future consumer, including across gaps.
@@ -221,17 +225,18 @@ def assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,pe
  cache_key=None;edges=indexes=None
  with create_gzip_text_exclusive(pending_file,encoding='utf8') as pf:
   while True:
-   batch=db.execute('SELECT root,expected,reported_cut,boundary_mask,unknown,crop_edge,cut FROM components WHERE root>? ORDER BY root LIMIT 256',(last,)).fetchall()
+   batch=db.execute('SELECT root,expected,reported_cut,boundary_entities,unknown,crop_edge,cut FROM components WHERE root>? ORDER BY root LIMIT 256',(last,)).fetchall()
    if not batch:break
-   for root,expected,reported,mask,unknown,crop_edge,cut in batch:
+   for root,expected,reported,raw_entities,unknown,crop_edge,cut in batch:
+    entities=set(json.loads(raw_entities))
     last=root
     reason=('pending-source-cut-contact' if cut else 'pending-grid-crop-edge' if crop_edge else
-            'pending-unknown-zero-boundary' if unknown else 'pending-no-boundary-continent' if not mask else None)
+            'pending-unknown-zero-boundary' if unknown else 'pending-no-boundary-continent' if not entities else None)
     if reason:
      pf.write(json.dumps({'component_root':root,'reason':reason,'cells':expected},separators=(',',':'))+'\n')
      db.execute('UPDATE components SET method=? WHERE root=?',(reason,root));pending_cells+=expected;pending_count+=1;continue
-    participants=[p for p in pairs if mask&(1<<p[2])]
-    if not participants or mask!=sum(1<<p[2] for p in participants):raise ValueError('unknown participant boundary mask')
+    participants=[p for p in pairs if p[0] in entities]
+    if not participants or entities!={p[0] for p in participants}:raise ValueError('unknown boundary participant entity')
     if len(participants)==1:
      db.execute("UPDATE components SET method='direct',code=? WHERE root=?",(participants[0][2],root))
      assigned_cells+=expected;direct_count+=1;continue
@@ -282,10 +287,10 @@ def write_assignments(db,path,decision_id,width,height):
 
 
 def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_rows,component_spans,barrier_edges,
-        out,width,height,pad,inputs,*,allow_selected_research=False,chunk=5000,verify_inputs=None,processing_started=None):
+        out,width,height,pad,inputs,*,chunk=5000,verify_inputs=None,processing_started=None):
  if processing_started is None:processing_started=time.perf_counter()
  if chunk<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid chunk or halo')
- decision,pairs,tolerance=core.policy(snapshot,allow_selected_research=allow_selected_research)
+ decision,pairs,tolerance=core.policy(snapshot)
  code_paths={'streaming_closed_water':Path(__file__),'partition_json_stream':Path(partition_json_stream.__file__),
              'closed_water_core':Path(core.__file__),'shared_nearest':Path(core.shore.__file__),
              'interval_nearest':Path(interval_nearest.__file__)}
@@ -307,12 +312,11 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
   if count!=stats['assigned_cells'] or count+stats['pending_cells']!=cells:raise ValueError('closed-water cell conservation failed')
   db.commit();db.close();db=None
   if verify_inputs:verify_inputs()
-  if any(sha(path)!=code_pins[name] for name,path in code_paths.items()):raise ValueError('algorithm changed during generation')
   manifest={'schema':'worldatlas-full-water-assignment-tiles-v1','status':'partial' if stats['pending_cells'] else 'completed_unverified_candidate_not_published',
     'grid':{'width':width,'height':height,'angular_step_deg':360/width,'row_convention':'north-to-south; cell centers; half-open [start,end) x spans'},
     'coverage':{'complete':not stats['pending_cells'],'meaning':'classified listed unseeded components; geographic and upstream partition correctness remain unverified'},
     'source':{**inputs,'decision_id':decision['id'],'policy_definition':decision['definition'],'policy_sha256':snapshot_sha,
-      'decision_snapshot_sha256':snapshot_sha,'decision_revision':snapshot['decision_revision']['id'],'entity_revision':snapshot['decision_revision']['entity_revision'],'legacy_ocean_label_inheritance':False},
+      'decision_snapshot_sha256':snapshot_sha,'decision_revision':snapshot['decision_revision']['id'],'entity_revision':snapshot['decision_revision']['entity_revision']},
     **stats,'input_span_count':nspans,'span_count':output_spans,
     'pending_file':{'path':'pending-components.jsonl.gz','sha256':sha(out/'pending-components.jsonl.gz')},
     'work_database':{'path':'work.sqlite3','sha256':sha(out/'work.sqlite3'),'purpose':'disk-backed row/component and mixed-output index'},

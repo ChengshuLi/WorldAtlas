@@ -3,8 +3,8 @@
 import argparse,json,time
 from pathlib import Path
 import build_coastal_tile as base
-import closed_water_core as core
-import streaming_closed_water as stream
+from map_build.water import closed_water_core as core
+from map_build.water import streaming_closed_water as stream
 from decision_snapshot import read_snapshot
 import local_water_overlay
 from direct_lineage import validate_physical_report,validate_direct_land
@@ -26,7 +26,7 @@ def main(argv=None, *, emit=print):
     'prefill_rows','prefill_runs','prefill_audit','prefill_plan','partition_manifest','component_rows','component_spans','barrier_edges')]
  if any(Path(p).stat().st_size>16*1024*1024 for p in (a.snapshot,a.prefill_plan,a.prefill_audit)):raise ValueError('control JSON exceeds size limit')
  if any(base.sha(p)!=h for p,h in pairs):raise ValueError('input hash mismatch')
- snapshot=read_snapshot(Path(a.snapshot),a.snapshot_sha256,allow_draft=a.allow_draft);core.policy(snapshot,allow_selected_research=a.allow_selected_research_policy)
+ snapshot=read_snapshot(Path(a.snapshot),a.snapshot_sha256,allow_draft=a.allow_draft);core.policy(snapshot)
  root=Path(a.input_root).resolve();out=Path(a.out).resolve()
  if not root.is_dir() or any(not Path(p).resolve().is_relative_to(root) for p,_ in pairs):raise ValueError('all inputs must be inside input root')
  if any(out==Path(p).resolve() or Path(p).resolve().is_relative_to(out) for p,_ in pairs):raise ValueError('output overlaps input')
@@ -65,7 +65,7 @@ def main(argv=None, *, emit=print):
  result=stream.run(snapshot,a.snapshot_sha256,base.open_grid(a.physical_rows,a.physical_runs,width,height),
    base.open_grid(a.prefill_rows,a.prefill_runs,width,height),base.open_grid(a.land_rows,a.land_runs,width,height),
    partition_path,a.component_rows,a.component_spans,a.barrier_edges,out,width,height,a.pad_degrees,inputs,
-   verify_inputs=recheck,allow_selected_research=a.allow_selected_research_policy,processing_started=processing_started)
+   verify_inputs=recheck,processing_started=processing_started)
  emit(json.dumps({'status':result['status'],'assigned':result['assigned_cells'],'pending':result['pending_cells'],'output':str(out)}))
 
 if __name__=='__main__':main()

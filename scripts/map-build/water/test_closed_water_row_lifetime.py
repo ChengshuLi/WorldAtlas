@@ -1,5 +1,6 @@
 """Boundary row storage follows the geometric stencil, not scan history."""
 import collections
+import json
 import struct
 import tempfile
 import unittest
@@ -8,8 +9,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 import numpy as np
-import closed_water_core as reference
-import streaming_closed_water as stream
+from map_build.water import closed_water_core as reference
+from map_build.water import streaming_closed_water as stream
 from test_helpers import rle
 
 
@@ -78,11 +79,11 @@ class RowLifetimeTests(unittest.TestCase):
                 self.assertTrue(all(count == 1 for count in tracked.reads.values()))
                 _, expected = reference.adjacency(by_row, rle(physical), rle(prefill),
                                                   width, height, self.pairs)
-                actual = {root: (mask, unknown, crop_edge)
-                          for root, mask, unknown, crop_edge in db.execute(
-                              'SELECT root,boundary_mask,unknown,crop_edge FROM components')}
+                actual = {root: (set(json.loads(entities)), unknown, crop_edge)
+                          for root, entities, unknown, crop_edge in db.execute(
+                              'SELECT root,boundary_entities,unknown,crop_edge FROM components')}
                 self.assertEqual(actual, {
-                    root: (sum(1 << self.pairs[entity][2] for entity in value['codes']),
+                    root: (set(value['codes']),
                            int(value['unknown_zero_edges'] > 0), int(value['crop_edge']))
                     for root, value in expected.items()})
 

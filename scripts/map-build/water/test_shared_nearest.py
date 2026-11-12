@@ -1,7 +1,7 @@
 import json
 import unittest
 import numpy as np
-import shared_nearest as s
+from map_build.water import shared_nearest as s
 
 
 def rle(array):
@@ -76,10 +76,10 @@ class SharedTest(unittest.TestCase):
         edges=s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
         with self.assertRaisesRegex(ValueError,'no shoreline'):s.make_indexes(edges,pairs)
         l[2,4]=0
-        with self.assertRaisesRegex(ValueError,'invalid'):s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
+        with self.assertRaisesRegex(ValueError,'invalid'):s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18],all_land_codes=[17,18])
         # Never narrow untrusted uint32 values before physical/land validation.
         p=p.astype(np.uint32);l=l.astype(np.uint32);l[2,4]=273
-        with self.assertRaisesRegex(ValueError,'invalid'):s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
+        with self.assertRaisesRegex(ValueError,'invalid'):s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18],all_land_codes=[17,18])
         l[2,4]=17;p[2,5]=257
         with self.assertRaisesRegex(ValueError,'invalid'):s.centers_for_crop(rle(p),rle(l),(0,12,0,6),12,6,30,[17,18])
 

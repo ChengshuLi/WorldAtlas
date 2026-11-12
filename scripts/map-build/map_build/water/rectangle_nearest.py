@@ -5,8 +5,8 @@ share proofs across rows; uncertain cells use the complete point classifier.
 """
 import math
 import numpy as np
-import shared_nearest as s
-from interval_nearest import exact_certificate_possible
+from map_build.water import shared_nearest as s
+from map_build.water.interval_nearest import exact_certificate_possible
 
 MAX_RADIUS = s.A / (1 - s.F)
 
@@ -39,7 +39,7 @@ def classify(water, x0, y0, bounds, width, height, step, pairs, tolerance,
         raise ValueError('invalid crop')
     if nr and 90 - (y0 + nr - .5) * step < -90:
         raise ValueError('query latitude outside globe')
-    output = np.zeros(water.shape, dtype=np.uint8)
+    output = np.zeros(water.shape, dtype=np.uint32)
     total = int(water.sum())
     stats = {'certified_cells': 0, 'leaf_cells': 0, 'bounded_cells': 0,
              'exact_cells': 0, 'exact_rectangle_probes': 0}

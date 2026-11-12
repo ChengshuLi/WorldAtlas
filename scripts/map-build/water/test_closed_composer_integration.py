@@ -3,7 +3,7 @@ import contextlib,io,json,struct,sys,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
 import numpy as np
-import streaming_closed_water as stream
+from map_build.water import streaming_closed_water as stream
 from test_closed_water_core import policy_snapshot
 from test_helpers import rle
 HERE=Path(__file__).resolve().parent
@@ -31,7 +31,7 @@ class ComposerTest(unittest.TestCase):
         'decision_revision':'draft','entity_revision':'entities','legacy_ocean_label_inheritance':False},'unseeded_cell_count':1,
         'unseeded_span_count':1,'components':[{'component_root':1,'ocean_code':None,'cell_count':1,'source_barrier_contact_edge_count':0}]}
    partition=put('partition.json',json.dumps(part).encode());closed=root/'closed'
-   m=stream.run(snapshot,snapsha,(pr,pu),(qr,qu),(lr,lu),partition,rows,spans,cuts,closed,w,h,180,inputs,allow_selected_research=True)
+   m=stream.run(snapshot,snapsha,(pr,pu),(qr,qu),(lr,lu),partition,rows,spans,cuts,closed,w,h,180,inputs)
    self.assertTrue(m['coverage']['complete']);self.assertEqual(m['source']['decision_snapshot_sha256'],snapsha)
    spec={}
    for key,path in [('rows',qrp),('runs',qup),('audit',audit),('plan',preplan)]:spec[key+'_path']=path.name;spec[key+'_sha256']=stream.sha(path)

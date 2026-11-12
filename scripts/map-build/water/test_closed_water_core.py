@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-import closed_water_core as c
+from map_build.water import closed_water_core as c
 from test_helpers import rle
 from test_coastal_core import snap
 
@@ -20,7 +20,7 @@ class ClosedTest(unittest.TestCase):
  def setup_case(self):
   p=np.full((5,12),17,dtype=np.uint32);q=np.full((5,12),17,dtype=np.uint32)
   p[2,4:6]=1;q[2,4:6]=0
-  _,pairs,t=c.policy(policy_snapshot(),allow_selected_research=True)
+  _,pairs,t=c.policy(policy_snapshot())
   return p,q,pairs,t
  def test_direct_boundary_and_source_cut(self):
   p,q,pairs,_=self.setup_case();components,r=c.adjacency({2:[(4,6,7)]},rle(p),rle(q),12,5,pairs)
@@ -60,10 +60,10 @@ class ClosedTest(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'unique and sorted'):c.cut_contacts(by,[(0,2,4),(0,2,4)],12,5)
   with self.assertRaisesRegex(ValueError,'outside grid'):c.cut_contacts(by,[(1,4,4)],12,5)
  def test_policy_fails_closed(self):
-  with self.assertRaisesRegex(ValueError,'opt-in'):c.policy(policy_snapshot())
+  self.assertTrue(c.policy(policy_snapshot())[1])
   s=policy_snapshot();s['policies']=[]
-  with self.assertRaisesRegex(ValueError,'policy'):c.policy(s,allow_selected_research=True)
+  with self.assertRaisesRegex(ValueError,'policy'):c.policy(s)
   s=policy_snapshot();s['policies'][0]['definition']['unresolved_zero_neighbors']='direct_fill'
-  with self.assertRaisesRegex(ValueError,'safety'):c.policy(s,allow_selected_research=True)
+  with self.assertRaisesRegex(ValueError,'safety'):c.policy(s)
 
 if __name__=='__main__':unittest.main()

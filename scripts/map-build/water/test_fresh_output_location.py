@@ -1,6 +1,6 @@
 import os,tempfile,unittest
 from pathlib import Path
-from exclusive_outputs import validate_fresh_output,create_directory_exclusive,create_binary_exclusive
+from map_build.execution.outputs import validate_fresh_output,create_directory_exclusive,create_binary_exclusive
 class OutputSafety(unittest.TestCase):
  def test_fresh_sibling_inside_root_and_exclusive_collision(self):
   with tempfile.TemporaryDirectory() as t:

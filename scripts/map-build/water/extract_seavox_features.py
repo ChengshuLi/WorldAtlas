@@ -19,7 +19,7 @@ import zipfile
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from osgeo import gdal
 from decision_snapshot import read_snapshot, find_source
-from exclusive_outputs import create_directory_exclusive, validate_fresh_output, write_json_exclusive
+from map_build.execution.outputs import create_directory_exclusive, validate_fresh_output, write_json_exclusive
 from extract_seavox_feature import (canonical_hash, digest, extract_features,
                                     extract_indexed_features, validate_archive, write_extraction)
 

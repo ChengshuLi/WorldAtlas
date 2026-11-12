@@ -29,39 +29,51 @@ def geodesic_distances(lon,lat,target_lon,target_lat):
     return np.asarray(GEOD.inv(lon,lat,target_lon,target_lat)[2],dtype=np.float64)
 
 
-def binding(snapshot, entity, physical_class, codes):
+def binding(snapshot, entity, physical_class, codes=None):
     values = [b.get('code') for b in snapshot.get('category_bindings', [])
               if b.get('entity_id') == entity and b.get('physical_class') == physical_class]
-    if len(values) != 1 or type(values[0]) is not int or values[0] not in codes:
+    if (len(values) != 1 or type(values[0]) is not int or not 0 < values[0] < 2**32
+            or (codes is not None and values[0] not in codes)):
         raise ValueError(f'entity {entity} lacks a unique {physical_class} binding')
     return values[0]
 
 
+def tie_policy(snapshot, tie, participants=None):
+    """Resolve a distance tie policy through stable entity bindings."""
+    if (not isinstance(tie, dict)
+            or set(tie) != {'method', 'tie_break', 'priority_entity_ids', 'tolerance_metres'}
+            or tie.get('method') != 'within_minimum_distance_tolerance'
+            or tie.get('tie_break') != 'first_entity_in_priority_order'):
+        raise ValueError('unsupported or missing shared-basin tie rules')
+    order = tie['priority_entity_ids']
+    if (not isinstance(order, list) or not order or len(set(order)) != len(order)
+            or (participants is not None and set(order) != set(participants))):
+        raise ValueError('tie priority must list each participant exactly once')
+    raw = tie['tolerance_metres']
+    if isinstance(raw, bool):
+        raise ValueError('invalid tie tolerance')
+    try:
+        tolerance = float(raw)
+    except (TypeError, ValueError):
+        raise ValueError('invalid tie tolerance') from None
+    if not math.isfinite(tolerance) or not 0 <= tolerance <= 1:
+        raise ValueError('invalid tie tolerance')
+    pairs = [(entity, binding(snapshot, entity, 'land'), binding(snapshot, entity, 'water'))
+             for entity in order]
+    codes = [code for _, land, water in pairs for code in (land, water)]
+    if len(set(codes)) != len(codes):
+        raise ValueError('participant land and water bindings must be distinct')
+    return pairs, tolerance
+
+
 def selected_rules(snapshot, basin):
-    """Resolve the versioned priority by stable entity ID, not category order."""
+    """Read the fixed participant selection of a saved basin replay."""
     if basin.get('assignment_method') != 'shared_nearest_assigned_shore':
         raise ValueError('unsupported shared-basin assignment method')
     participants = basin.get('participant_entity_ids')
     if not isinstance(participants, list) or len(participants) < 2 or len(set(participants)) != len(participants):
         raise ValueError('shared basin requires distinct participant entities')
-    tie = basin.get('tie_rules')
-    if (not isinstance(tie, dict) or set(tie) != {'method','tie_break','priority_entity_ids','tolerance_metres'}
-            or tie.get('method') != 'within_minimum_distance_tolerance' or tie.get('tie_break') != 'first_entity_in_priority_order'):
-        raise ValueError('unsupported or missing shared-basin tie rules')
-    order = tie.get('priority_entity_ids')
-    if not isinstance(order, list) or len(order) != len(participants) or len(set(order)) != len(order) or set(order) != set(participants):
-        raise ValueError('tie priority must list each participant exactly once')
-    raw = tie.get('tolerance_metres')
-    if isinstance(raw, bool): raise ValueError('invalid tie tolerance')
-    try: tolerance = float(raw)
-    except (TypeError, ValueError): raise ValueError('invalid tie tolerance') from None
-    if not math.isfinite(tolerance) or tolerance < 0 or tolerance > 1:
-        raise ValueError('invalid tie tolerance')
-    pairs = [(entity, binding(snapshot, entity, 'land', range(17,23)),
-              binding(snapshot, entity, 'water', range(1,7))) for entity in order]
-    if len({p[1] for p in pairs}) != len(pairs) or len({p[2] for p in pairs}) != len(pairs):
-        raise ValueError('participant land and water bindings must be distinct')
-    return pairs, tolerance
+    return tie_policy(snapshot, basin.get('tie_rules'), participants)
 
 
 def crop(rows, runs, y, x0, x1, width):
@@ -105,7 +117,7 @@ def _shore_spans(grid,y,x0,x1,width):
   out_e.extend(ee.tolist());out_v.extend(vals[i:j].tolist());x+=take
  return np.asarray(out_e,dtype=np.int64),np.asarray(out_v,dtype=np.int64)
 
-def centers_for_crop(physical,land,bounds,width,height,step,land_codes):
+def centers_for_crop(physical,land,bounds,width,height,step,land_codes,*,all_land_codes=None):
  """Extract exact four-neighbor coastal centers from RLE change positions.
 
  Dense arrays are allocated only for coastal centers. Wrapped crops retain
@@ -113,7 +125,7 @@ def centers_for_crop(physical,land,bounds,width,height,step,land_codes):
  """
  x0,x1,y0,y1=bounds
  if not (0<=y0<y1<=height and 0<x1-x0<=width and math.isfinite(step) and step>0):raise ValueError('invalid crop')
- selected=np.zeros(23,dtype=bool);selected[land_codes]=True
+ selected=np.asarray(land_codes,dtype=np.uint32)
  latitudes=[];longitudes=[];categories=[];count=0
  # full-width crops cannot be extended in the original crop helper, but this
  # span reader intentionally supports repeated wrapping for the side halo.
@@ -132,24 +144,25 @@ def centers_for_crop(physical,land,bounds,width,height,step,land_codes):
   b=np.unique(np.concatenate(breaks));b=b[(b>=x0)&(b<=x1)];starts=b[:-1];ends=b[1:]
   mv=cur[1][np.searchsorted(cur[0],starts,side='right')]
   cats=lv[np.searchsorted(le,starts,side='right')]
-  bad=(mv==17)&((cats<17)|(cats>22))
+  valid=(cats>0) if all_land_codes is None else np.isin(cats,all_land_codes)
+  bad=(mv==17)&~valid
   if np.any(bad):raise ValueError('invalid physical or land row')
   wet=np.zeros(len(starts),dtype=bool)
   for row in (prev,nxt):
    if row is not None:wet |= row[1][np.searchsorted(row[0],starts,side='right')]==1
-  chosen=(mv==17)&selected[np.clip(cats,0,22)]&wet
+  chosen=(mv==17)&np.isin(cats,selected)&wet
   starts1=starts[chosen];ends1=ends[chosen]
   xx=np.concatenate([np.arange(a,b,dtype=np.int64) for a,b in zip(starts1,ends1)]) if len(starts1) else np.empty(0,dtype=np.int64)
   # Horizontal coast consists of the land cell on each wet/dry run boundary.
   ce,cv=cur; t=np.flatnonzero(cv[:-1]!=cv[1:]);boundary=ce[t]
   side=np.where(cv[t]==17,boundary-1,boundary);side=side[(side>=x0)&(side<x1)]
   if len(side):
-   sc=lv[np.searchsorted(le,side,side='right')];side=side[selected[np.clip(sc,0,22)]]
+   sc=lv[np.searchsorted(le,side,side='right')];side=side[np.isin(sc,selected)]
    xx=np.union1d(xx,side)
   count+=len(xx)
   if len(xx):
    latitudes.append(np.full(len(xx),90-(y+.5)*step));longitudes.append(((-180+(xx+.5)*step+180)%360)-180)
-   categories.append(lv[np.searchsorted(le,xx,side='right')].astype(np.uint8))
+   categories.append(lv[np.searchsorted(le,xx,side='right')].astype(np.uint32))
   prev,cur=cur,nxt
   nxt=pget(y+2) if y+2<height and y+1<y1 else None
  if not count:raise ValueError('no participant shorelines in crop')
@@ -307,7 +320,7 @@ def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,ba
     x0,x1,y0,y1=bounds
     if any(type(z) is not int for z in (x0,x1,y0,y1,width,height)) or not (0<width and 0<height and 0<x1-x0<=width and 0<=y0<y1<=height and math.isfinite(step) and step>0):raise ValueError('invalid crop or grid')
     if abs(step*width-360)>1e-8:raise ValueError('step does not match world width')
-    if not len(lat):return np.empty(0,dtype=np.uint8),{'bounded':0,'exact':0}
+    if not len(lat):return np.empty(0,dtype=np.uint32),{'bounded':0,'exact':0}
     # An omitted-shore proof is valid only for points inside the indexed crop.
     y=(90-lat)/step; x=(lon+180)/step; x=x+np.ceil((x0-x)/width)*width
     if np.any(y<y0-1e-8) or np.any(y>y1+1e-8) or np.any(x<x0-1e-8) or np.any(x>x1+1e-8):raise ValueError('query lies outside crop')
@@ -316,12 +329,12 @@ def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,ba
     if band is None and len(available)!=len(pairs):raise ValueError('missing participant shore')
     if not available:
         if band is None or np.any(boundary<=band+bandtol):raise ValueError('crop cannot certify; increase halo')
-        return np.zeros(len(lat),dtype=np.uint8),{'bounded':len(lat),'exact':0}
+        return np.zeros(len(lat),dtype=np.uint32),{'bounded':len(lat),'exact':0}
     lows, best, upper = nearest_class_bounds(lat, lon, points, available, indexes,
                                                    upper_limit=None if band is None else band+bandtol)
     others=lows.copy();others[np.arange(len(lat)),best]=np.inf
     unique=(upper+tolerance<others.min(axis=1))&(upper+tolerance<boundary)
-    out=np.zeros(len(lat),dtype=np.uint8)
+    out=np.zeros(len(lat),dtype=np.uint32)
     if band is None:fast=unique
     else:
         threshold=band+bandtol
@@ -366,7 +379,7 @@ def classify_wgs84(lat,lon,bounds,width,height,step,pairs,tolerance,indexes,*,ba
             raise RuntimeError('tie threshold numerically ambiguous')
         # argmax selects the first eligible entity in the versioned priority.
         winners = np.argmax(candidates <= minima[:, None]+tolerance, axis=1)
-        codes = np.asarray([p[2] for p in available], dtype=np.uint8)
+        codes = np.asarray([p[2] for p in available], dtype=np.uint32)
         out[pending[inside]] = codes[winners]
     return out,{'bounded':int(fast.sum()),'exact':int(len(pending))}
 

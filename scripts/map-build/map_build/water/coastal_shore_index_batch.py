@@ -7,7 +7,7 @@ Batches are complete row ranges, not data/resource ceilings.
 """
 import numpy as np
 
-from coastal_shore_index import CoastalShoreIndex
+from map_build.water.coastal_shore_index import CoastalShoreIndex
 
 
 def flat_rows(grid, first_row, end_row, width):
@@ -25,7 +25,7 @@ def flat_rows(grid, first_row, end_row, width):
 
 
 class BatchedCoastalShoreIndex(CoastalShoreIndex):
-    def __init__(self,physical,land,width,height,*,rows_per_batch=256):
+    def __init__(self,physical,land,width,height,*,rows_per_batch=256,land_codes=None):
         if any(type(value) is not int or value<=0 for value in (width,height,rows_per_batch)):
             raise ValueError('invalid grid or row batch')
         for offsets,runs in (physical,land):
@@ -65,7 +65,8 @@ class BatchedCoastalShoreIndex(CoastalShoreIndex):
                 return np.repeat(values,np.diff(np.r_[0,end_ranks]))
             starts,stops=cuts[:-1],cuts[1:]
             physical_values=expand(cv,ranks[0]);categories=expand(lv,ranks[1])
-            if np.any((physical_values==17)&((categories<17)|(categories>22))):
+            valid=categories>0 if land_codes is None else np.isin(categories,land_codes)
+            if np.any((physical_values==17)&~valid):
                 raise ValueError('invalid physical or land row')
             wet=expand(prev_values==1,ranks[2])|expand(next_values==1,ranks[3])
             chosen=(physical_values==17)&wet
@@ -94,10 +95,10 @@ class BatchedCoastalShoreIndex(CoastalShoreIndex):
                 counts=np.bincount((row-y0).astype(np.intp),minlength=y1-y0)
                 all_starts.append((aa[indices]-row*width).astype(np.uint32))
                 all_ends.append((np.maximum.reduceat(bb,indices)-row*width).astype(np.uint32))
-                all_codes.append(cc[indices].astype(np.uint8))
+                all_codes.append(cc[indices].astype(np.uint32))
             else:counts=np.zeros(y1-y0,dtype=np.int64)
             offsets.append(total+np.cumsum(counts,dtype=np.uint64));total=int(offsets[-1][-1])
         self.offsets=np.concatenate(offsets)
         self.starts=np.concatenate(all_starts) if all_starts else np.empty(0,dtype=np.uint32)
         self.ends=np.concatenate(all_ends) if all_ends else np.empty(0,dtype=np.uint32)
-        self.codes=np.concatenate(all_codes) if all_codes else np.empty(0,dtype=np.uint8)
+        self.codes=np.concatenate(all_codes) if all_codes else np.empty(0,dtype=np.uint32)

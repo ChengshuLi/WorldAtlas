@@ -4,8 +4,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 import numpy as np
-import shared_nearest as shore
-import streaming_closed_water as stream
+from map_build.water import shared_nearest as shore
+from map_build.water import streaming_closed_water as stream
 
 
 class ClosedIntervalTests(unittest.TestCase):
@@ -22,7 +22,7 @@ class ClosedIntervalTests(unittest.TestCase):
             db=stream.open_database(':memory:')
             self.addCleanup(db.close)
             expected=sum(b-a for _,a,b in source)
-            db.execute('INSERT INTO components(root,expected,reported_cut,boundary_mask) VALUES(1,?,0,6)',(expected,))
+            db.execute("INSERT INTO components(root,expected,reported_cut,boundary_entities) VALUES(1,?,0,?)",(expected,'["first","second"]'))
             db.executemany('INSERT INTO spans VALUES(?,?,?,1)',source)
             reference=[]
             for y,a,b in source:
@@ -50,7 +50,7 @@ class ClosedIntervalTests(unittest.TestCase):
         with patch.object(shore,'crop',side_effect=AssertionError('dense crop')), \
              patch.object(np,'arange',side_effect=AssertionError('per-cell expansion')):
             stream.classify_boundaries(db,physical,prefill,width,3,self.pairs)
-        self.assertEqual(db.execute('SELECT boundary_mask,unknown,crop_edge FROM components').fetchone(),(2,0,0))
+        self.assertEqual(db.execute('SELECT boundary_entities,unknown,crop_edge FROM components').fetchone(),('["first"]',0,0))
 
 
 if __name__=='__main__':unittest.main()

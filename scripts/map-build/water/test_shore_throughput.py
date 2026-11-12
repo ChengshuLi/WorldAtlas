@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 import numpy as np
 
-import shared_nearest as shore
+from map_build.water import shared_nearest as shore
 from test_shared_nearest import rle
 
 

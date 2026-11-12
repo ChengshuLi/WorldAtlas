@@ -7,7 +7,7 @@ in the same wrapped row/column order as the common reference extractor.
 from __future__ import annotations
 import math
 import numpy as np
-import shared_nearest as shore
+from map_build.water import shared_nearest as shore
 
 
 def row(grid, y, width):
@@ -21,7 +21,7 @@ def row(grid, y, width):
 
 
 class CoastalShoreIndex:
-    def __init__(self, physical, land, width, height):
+    def __init__(self, physical, land, width, height, *, land_codes=None):
         if any(type(v) is not int or v <= 0 for v in (width, height)):
             raise ValueError('invalid grid')
         self.width, self.height = width, height
@@ -44,7 +44,8 @@ class CoastalShoreIndex:
             starts, ends = cuts[:-1], cuts[1:]
             values = current[1][np.searchsorted(current[0], starts, side='right')]
             categories = lv[np.searchsorted(le, starts, side='right')]
-            if np.any((values == 17) & ((categories < 17) | (categories > 22))):
+            valid = categories > 0 if land_codes is None else np.isin(categories, land_codes)
+            if np.any((values == 17) & ~valid):
                 raise ValueError('invalid physical or land row')
             wet = np.zeros(len(starts), dtype=bool)
             for adjacent in (previous, following):
@@ -70,7 +71,7 @@ class CoastalShoreIndex:
                 indices = np.flatnonzero(split)
                 all_starts.append(aa[indices].astype(np.uint32))
                 all_ends.append(np.maximum.reduceat(bb, indices).astype(np.uint32))
-                all_codes.append(cc[indices].astype(np.uint8))
+                all_codes.append(cc[indices].astype(np.uint32))
                 offsets.append(offsets[-1] + len(indices))
             else:
                 offsets.append(offsets[-1])
@@ -79,7 +80,7 @@ class CoastalShoreIndex:
         self.offsets = np.asarray(offsets, dtype=np.uint64)
         self.starts = np.concatenate(all_starts) if all_starts else np.empty(0, dtype=np.uint32)
         self.ends = np.concatenate(all_ends) if all_ends else np.empty(0, dtype=np.uint32)
-        self.codes = np.concatenate(all_codes) if all_codes else np.empty(0, dtype=np.uint8)
+        self.codes = np.concatenate(all_codes) if all_codes else np.empty(0, dtype=np.uint32)
 
     def centers_for_crop(self, bounds, step, land_codes):
         x0, x1, y0, y1 = bounds
@@ -87,8 +88,7 @@ class CoastalShoreIndex:
         if not (0 <= y0 < y1 <= height and 0 < x1 - x0 <= width
                 and math.isfinite(step) and step > 0):
             raise ValueError('invalid crop')
-        selected = np.zeros(23, dtype=bool)
-        selected[land_codes] = True
+        selected = np.asarray(land_codes, dtype=np.uint32)
         latitudes, longitudes, categories = [], [], []
         for y in range(y0, y1):
             first, last = map(int, self.offsets[y:y + 2])
@@ -101,7 +101,7 @@ class CoastalShoreIndex:
                 stop = min(width, xm + x1 - x)
                 a, b = np.searchsorted(ends, xm, side='right'), np.searchsorted(starts, stop, side='left')
                 if a < b:
-                    keep = selected[codes[a:b]]
+                    keep = np.isin(codes[a:b], selected)
                     aa = np.maximum(starts[a:b][keep].astype(np.int64), xm) - xm + x
                     bb = np.minimum(ends[a:b][keep].astype(np.int64), stop) - xm + x
                     if len(aa):

@@ -13,8 +13,8 @@ import run_pipeline as pipeline
 
 sys.path[:0] = [str(pipeline.SCRIPTS / 'water'),
                 str(pipeline.SCRIPTS / 'stages/ocean'), str(pipeline.SCRIPTS)]
-import ocean_fill_runner as ocean
-import streaming_closed_water as closed
+from map_build.water.ocean import engine as ocean
+from map_build.water import streaming_closed_water as closed
 import compose_direct
 import compose_full_water_grid as common
 import prepare_final_plan
@@ -84,7 +84,7 @@ class FinalGridChain(unittest.TestCase):
             ocean_out = root / 'ocean'
             with timer.measure('water', 'ocean'):
                 ocean.run(snapshot, snapshot_hash, prp, pup, qrp, qup, ocean_out,
-                          width, height, pins, tile_height=2, allow_draft=True)
+                          width, height, pins, tile_height=2)
             partition = ocean_out / 'partition/manifest.json'
             cuts = ocean_out / 'barrier_edges.u32le'
             pins['source_cut_edges_sha256'] = pipeline.sha(cuts)
@@ -93,7 +93,7 @@ class FinalGridChain(unittest.TestCase):
                 result = closed.run(snapshot, snapshot_hash, (pr, pu), (qr, qu), (lr, lu),
                     partition, ocean_out / 'partition/unseeded_rows.u64le',
                     ocean_out / 'partition/unseeded_component_spans.u32le', cuts,
-                    root / 'closed', width, height, 180, pins, allow_selected_research=True)
+                    root / 'closed', width, height, 180, pins)
             self.assertEqual(result['assigned_cells'], 1)
             self.assertEqual(result['pending_cells'], 0)
             spec = {key: pipeline.pin(path) for key, path in {

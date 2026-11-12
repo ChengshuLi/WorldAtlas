@@ -19,13 +19,15 @@ import scipy
 import pyproj
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from osgeo import gdal
-from exclusive_outputs import create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, write_json_exclusive, validate_fresh_output
-import exclusive_outputs, decision_snapshot, seavox_properties
+from map_build.execution.outputs import create_directory_exclusive, create_gzip_text_exclusive, create_text_exclusive, write_json_exclusive, validate_fresh_output
+from map_build.execution import outputs as exclusive_outputs
+import decision_snapshot
+import seavox_properties
 from decision_snapshot import read_snapshot, participant_water_codes, find_basin, find_source
 from seavox_properties import feature_id as read_feature_id
-import shared_nearest as shared
-import interval_nearest
-import rectangle_nearest
+from map_build.water import shared_nearest as shared
+from map_build.water import interval_nearest
+from map_build.water import rectangle_nearest
 
 W, H = 131072, 54614
 STEP = 360.0 / W
@@ -261,7 +263,8 @@ def main(argv=None, *, emit=print):
         if len(lr) != H+1 or len(lu)%2 or int(lr[0]) != 0 or int(lr[-1]) != len(lu)//2 or np.any(lr[1:] <= lr[:-1]):
             raise ValueError('invalid land RLE offsets')
         pairs, tolerance = selection
-        import wrapped_bounds, streamed_shore_fallback
+        from map_build.water import wrapped_bounds
+        from map_build.water import streamed_shore_fallback
         wrapped_code_sha = digest(Path(wrapped_bounds.__file__))
         fallback_code_sha = digest(Path(streamed_shore_fallback.__file__))
         full_shore_bounds = shared.crop_bounds((x0,x1,y0,y1), W, H, STEP, args.shore_pad_degrees)
