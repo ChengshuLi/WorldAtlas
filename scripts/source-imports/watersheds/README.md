@@ -41,6 +41,8 @@ The result updates `atlas.decision_mainland_boundaries` and its raw-source links
 in one transaction. Existing notes and unrelated source relationships remain.
 Region references and derived polygon hashes update in that same transaction.
 A failed calculation or invalid join leaves the existing boundary unchanged.
+Database connections are open only while reading inputs or saving the result;
+terrain calculation does not keep an idle cloud connection open.
 This command does not publish a website.
 Its receipt records catalog lookup, source verification, construction phases and
 database-write times. R2 transfer time is reported separately; cached verification
@@ -133,7 +135,7 @@ domains. An ordinary run does not perform an automatic crop-expansion search.
 
 For overlapping calculation areas, a domain can specify `bounds` for its full
 terrain context and `output_bounds` for the portion contributing divide edges.
-Both are WGS84 rectangles. Use adjoining output areas and overlapping context;
+Both rectangles use WGS84 by default. Use adjoining output areas and overlapping context;
 this keeps inconsistent interfaces at calculation edges out of the assembled
 graph. Larger-crop validation expands the context while retaining those output
 areas and the native grid.

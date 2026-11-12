@@ -233,10 +233,10 @@ def construct(recipe, files):
     return geometry, report
 
 
-def build_boundary(database, client, recipe_id, recipe_version, revision, work_dir):
+def build_boundary(connect, client, recipe_id, recipe_version, revision, work_dir):
     """Read immutable inputs, calculate, then save the final result atomically."""
     started = time.monotonic()
-    with database.transaction():
+    with connect() as database, database.transaction():
         if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
                             (revision,)).fetchone() is None:
             raise ValueError('destination decision revision does not exist')
@@ -261,8 +261,9 @@ def build_boundary(database, client, recipe_id, recipe_version, revision, work_d
             for source in references],
     }}
     started = time.monotonic()
-    digest = save_boundary(database, revision, recipe['boundary_id'], geometry, provenance,
-                           [*references, *evidence])
+    with connect() as database:
+        digest = save_boundary(database, revision, recipe['boundary_id'], geometry, provenance,
+                               [*references, *evidence])
     report.update(revision=revision, boundary_id=recipe['boundary_id'], sha256=digest,
                   vertices=len(geometry['coordinates']), catalog_seconds=catalog_seconds,
                   source_staging_seconds=staging_seconds,
@@ -286,9 +287,9 @@ def main():
     import boto3
     import psycopg
 
-    with psycopg.connect(os.environ['NEON_DATABASE_URL']) as database, closing(
-            boto3.client('s3', endpoint_url=args.r2_endpoint, region_name='auto')) as client:
-        result = build_boundary(database, client, *args.recipe, args.revision, args.work_dir)
+    connect = lambda: psycopg.connect(os.environ['NEON_DATABASE_URL'], connect_timeout=15)
+    with closing(boto3.client('s3', endpoint_url=args.r2_endpoint, region_name='auto')) as client:
+        result = build_boundary(connect, client, *args.recipe, args.revision, args.work_dir)
     destination = args.work_dir / 'receipts' / f'{args.recipe[0]}-{args.recipe[1]}.json'
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(result, indent=2) + '\n')

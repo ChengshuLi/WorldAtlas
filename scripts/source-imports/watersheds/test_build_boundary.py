@@ -1,4 +1,5 @@
 """Run a real native-grid construction and its database writes with small sources."""
+from contextlib import nullcontext
 import hashlib
 import io
 import json
@@ -6,7 +7,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 import zipfile
 
 import numpy as np
@@ -180,13 +181,48 @@ class StorageTests(unittest.TestCase):
                          len(text.encode()), text))
 
     def build(self, version='1'):
-        return build_boundary(self.db, self.client, '__watershed_recipe', version,
+        return build_boundary(lambda: nullcontext(self.db), self.client, '__watershed_recipe', version,
                               '__watershed', self.directory / 'cache')
 
     def row(self):
         return self.db.execute('SELECT geometry,geometry_sha256,provenance '
                                'FROM atlas.decision_mainland_boundaries WHERE revision=%s',
                                ('__watershed',)).fetchone()
+
+    def test_database_connections_close_during_calculation(self):
+        import psycopg
+
+        self.db.commit()
+
+        def remove_committed_fixtures():
+            self.db.rollback()
+            with self.db.transaction():
+                for table in ('decision_mainland_boundary_sources', 'decision_mainland_boundaries'):
+                    self.db.execute('DELETE FROM atlas.' + table + " WHERE revision='__watershed'")
+                self.db.execute("DELETE FROM atlas.decision_revisions WHERE revision='__watershed'")
+                self.db.execute("DELETE FROM atlas.entity_registry_revisions WHERE revision='__watershed_entities'")
+                self.db.execute("DELETE FROM atlas.structured_documents WHERE source_id='__watershed_recipe'")
+                self.db.execute("DELETE FROM atlas.source_assets WHERE source_id LIKE '__watershed_%'")
+
+        self.addCleanup(remove_committed_fixtures)
+        connections = []
+
+        def connect():
+            database = psycopg.connect(os.environ['WORLDATLAS_TEST_DATABASE_URL'])
+            connections.append(database)
+            return database
+
+        def calculate(recipe, files):
+            self.assertEqual(len(connections), 1)
+            self.assertTrue(connections[0].closed)
+            return construct(recipe, files)
+
+        with patch('watersheds.build_boundary.construct', side_effect=calculate):
+            receipt = build_boundary(connect, self.client, '__watershed_recipe', '1',
+                                     '__watershed', self.directory / 'cache')
+        self.assertEqual(len(connections), 2)
+        self.assertTrue(all(database.closed for database in connections))
+        self.assertEqual(self.row()[1], receipt['sha256'])
 
     def test_repeat_version_change_and_preserved_notes(self):
         result = self.build()
