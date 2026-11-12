@@ -86,6 +86,13 @@ class StorageTests(unittest.TestCase):
             save_features(self.database, '__features_a', features, self.recipe)
         self.assertEqual(self.snapshot(), before)
 
+    def test_signed_zero_checksum_matches_the_geometry_read_back_from_jsonb(self):
+        save_features(self.database, '__features_a', [dict(
+            feature_id='zero', source_id='__feature_raw', source_version='1', source_feature_id='a',
+            geometry={'type': 'Point', 'coordinates': [-0.0, 0.0]})], self.recipe)
+        row = self.snapshot()[0]
+        self.assertEqual(geometry_hash(row[1]), row[3])
+
     def test_schema_upgrade_from_previous_layout_is_idempotent(self):
         with self.database.transaction(force_rollback=True):
             self.database.execute('ALTER TABLE atlas.decision_features DROP COLUMN geometry, DROP COLUMN coordinate_reference')

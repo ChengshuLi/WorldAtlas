@@ -1,6 +1,7 @@
 """Canonical geographic geometry and atomic storage of source-derived features."""
 import hashlib
 import json
+import math
 
 from psycopg.types.json import Jsonb
 from shapely.geometry import shape
@@ -15,13 +16,31 @@ def geometry_hash(geometry):
     return hashlib.sha256(geometry_bytes(geometry)).hexdigest()
 
 
+def storage_geometry(geometry):
+    # PostgreSQL JSONB stores -0.0 as 0.0. Hash the same coordinates that the
+    # database can retain; all other coordinate values remain unchanged.
+    def coordinates(value):
+        if isinstance(value, (list, tuple)):
+            return [coordinates(child) for child in value]
+        return 0.0 if type(value) is float and value == 0 else value
+    return {'type': geometry['type'], 'coordinates': coordinates(geometry['coordinates'])}
+
+
 def validate_geometry(geometry):
     if (not isinstance(geometry, dict) or set(geometry) != {'type', 'coordinates'}
             or geometry['type'] not in {'Point', 'MultiPoint', 'LineString',
                                         'MultiLineString', 'Polygon', 'MultiPolygon'}):
         raise ValueError('expected a point, line or polygon geometry')
-    # JSON rejects non-finite values before GEOS receives them.
-    geometry_bytes(geometry)
+    def coordinates(values):
+        if not isinstance(values, (tuple, list)) or not values:
+            raise ValueError('geometry coordinates must be nonempty arrays')
+        if isinstance(values[0], (tuple, list)):
+            for child in values:
+                coordinates(child)
+        elif (len(values) != 2 or any(type(value) not in (int, float)
+                                     or not math.isfinite(value) for value in values)):
+            raise ValueError('expected finite two-dimensional numeric coordinates')
+    coordinates(geometry['coordinates'])
     result = shape(geometry)
     if result.is_empty or not result.is_valid or result.has_z:
         raise ValueError('expected valid, nonempty two-dimensional geometry')
@@ -34,16 +53,18 @@ def save_features(database, revision, features, recipe):
     if (not identifiers or any(not isinstance(value, str) or not value.strip() for value in identifiers)
             or len(set(identifiers)) != len(identifiers)):
         raise ValueError('feature IDs must be nonempty and unique')
-    records = []
+    records, hashes = [], {}
     for feature in features:
         validate_geometry(feature['geometry'])
-        digest = geometry_hash(feature['geometry'])
+        geometry = storage_geometry(feature['geometry'])
+        digest = geometry_hash(geometry)
+        hashes[feature['feature_id']] = digest
         evidence = dict(feature.get('evidence', {}), basis=recipe['basis'],
                         construction_ref={'source_id': recipe['recipe_id'],
                                           'version': recipe['recipe_version']})
         records.append((revision, feature['feature_id'], feature['source_id'],
                         feature['source_version'], feature['source_feature_id'],
-                        digest, Jsonb(feature['geometry']), 'OGC:CRS84', Jsonb(evidence)))
+                        digest, Jsonb(geometry), 'OGC:CRS84', Jsonb(evidence)))
     with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(
@@ -57,4 +78,4 @@ def save_features(database, revision, features, recipe):
                 'geometry_sha256=EXCLUDED.geometry_sha256,geometry=EXCLUDED.geometry,'
                 'coordinate_reference=EXCLUDED.coordinate_reference,'
                 'evidence=atlas.decision_features.evidence || EXCLUDED.evidence', records)
-    return {feature['feature_id']: geometry_hash(feature['geometry']) for feature in features}
+    return hashes

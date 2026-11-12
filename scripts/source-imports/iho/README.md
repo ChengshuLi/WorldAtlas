@@ -7,6 +7,10 @@ provider MRN. Linked parts sharing one MRN are combined; a parent with its own
 surface retains that surface. Holes, dateline crossings and explicit polar caps
 are preserved. `test_areas.py` covers those cases.
 
+S-130 encodes area surfaces as `LinearRing` vertices and supplies separate
+construction-line records. Area imports preserve the encoded surface. Route
+imports apply each selected construction line's declared rhumb interpolation.
+
 An `s130_areas` construction supplies `source_id`, `source_version`, `basis`,
 `gml_member`, `gml_sha256` and `selections`. Each selection specifies the output
 `feature_id` and provider MRN in `source_feature_id`.

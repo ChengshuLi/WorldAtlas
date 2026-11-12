@@ -82,6 +82,8 @@ class VectorTests(unittest.TestCase):
     def test_invalid_geometry_is_rejected(self):
         for geometry in ({'type': 'Point', 'coordinates': [float('nan'), 1]},
                          {'type': 'Point', 'coordinates': [1, 2, 3]},
+                         {'type': 'Point', 'coordinates': [True, 2]},
+                         {'type': 'Point', 'coordinates': ['1', 2]},
                          {'type': 'Polygon', 'coordinates': [[[0, 0], [1, 1], [0, 1], [1, 0], [0, 0]]]}):
             with self.subTest(geometry=geometry), self.assertRaises(ValueError):
                 validate_geometry(geometry)
