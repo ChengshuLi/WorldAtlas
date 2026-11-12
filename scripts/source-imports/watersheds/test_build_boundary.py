@@ -62,6 +62,25 @@ def fixtures(directory):
 
 
 class ConstructionTests(unittest.TestCase):
+    def test_boundary_can_start_and_end_on_a_selected_divide(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            recipe['sections'] = [{'divide': 'ridge'}]
+            recipe['joins'] = []
+            recipe['start'] = {'nearest_divide': 'ridge', 'near': {'point': [.003, .005]}}
+            recipe['end'] = {'nearest_divide': 'ridge', 'near': {'point': [.003, .001]}}
+            geometry, _ = construct(recipe, files)
+            self.assertEqual(geometry['coordinates'][0], [.003, .005])
+            self.assertEqual(geometry['coordinates'][-1], [.003, .001])
+
+    def test_boundary_can_start_at_a_calculated_source_intersection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            recipe['lines']['crossing'] = [{'point': [.001, .004]}, {'point': [.003, .006]}]
+            recipe['start'] = {'intersection': ['before', 'crossing'], 'near': [.002, .005]}
+            geometry, _ = construct(recipe, files)
+            self.assertEqual(geometry['coordinates'][0], [.002, .005])
+
     def test_complete_native_divide_and_source_joins(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))

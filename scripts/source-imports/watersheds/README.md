@@ -166,6 +166,12 @@ Where source grids have different native resolutions, a connector endpoint can
 select the nearest divide corner to a geographic anchor:
 `{"nearest_divide": "TERRAIN_NAME", "near": {"point": [longitude, latitude]}}`.
 The constructor measures the connector and retains both native grids.
+The same `nearest_divide` selection can start or end a boundary directly on a
+divide; its grid-edge identity is retained for routing.
+
+An explicit point endpoint cuts its source line at the nearest position and
+retains the exact chosen endpoint coordinate. Use a geodesic section for a
+deliberate connection between separated source sections.
 
 Tests beside these files cover terrain, flow, destinations, waterways, source
 selection, graph paths, assembly and database writes. Run all source-import tests:

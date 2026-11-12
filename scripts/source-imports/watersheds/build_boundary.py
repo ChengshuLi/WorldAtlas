@@ -196,11 +196,13 @@ def construct(recipe, files):
                                        'network_seconds': network_seconds,
                                        'seconds': time.monotonic() - phase}
         phase = time.monotonic()
-        def selected_point(specification):
+        def selected_point(specification, *, retain_join=False):
             if 'nearest_divide' in specification:
                 target = sources.point(specification['near'], lines)
-                return divides[specification['nearest_divide']].nearest_vertex(target).point
-            return sources.point(specification, lines)
+                join = divides[specification['nearest_divide']].nearest_vertex(target)
+            else:
+                return sources.point(specification, lines)
+            return join if retain_join else join.point
 
         sections = []
         for index, section in enumerate(recipe['sections']):
@@ -222,7 +224,8 @@ def construct(recipe, files):
             raise ValueError('one geographic join selection is required between adjacent sections')
         joins = [intersection(a, b, choice['near'])
                  for a, b, choice in zip(sections, sections[1:], recipe['joins'])]
-        geometry = assemble(sections, joins, selected_point(recipe['start']), selected_point(recipe['end']))
+        geometry = assemble(sections, joins, selected_point(recipe['start'], retain_join=True),
+                            selected_point(recipe['end'], retain_join=True))
         report['joins'] = [list(join.point) for join in joins]
         report['assembly_seconds'] = time.monotonic() - phase
     report['construction_seconds'] = time.monotonic() - started
