@@ -129,7 +129,7 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
         ).fetchall()
         old = database.execute(
             "SELECT jsonb_array_length(geometry->'coordinates') "
-            'FROM atlas.decision_mainland_boundaries WHERE revision=%s AND boundary_id=%s FOR UPDATE',
+            'FROM atlas.decision_mainland_boundaries WHERE revision=%s AND boundary_id=%s',
             (revision, boundary_id),
         ).fetchone()
         count = len(geometry['coordinates'])
