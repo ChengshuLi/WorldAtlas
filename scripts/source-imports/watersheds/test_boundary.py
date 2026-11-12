@@ -3,11 +3,87 @@ import unittest
 import numpy as np
 from shapely.geometry import LineString
 
-from watersheds.boundary import Divide, Join, assemble, distance, flow_to_point, geodesic, intersection
+from watersheds.boundary import Divide, Join, assemble, connect_waypoints, distance, flow_to_point, geodesic, intersection
 from watersheds.terrain import Grid
+from watersheds.drainage import destination_memberships
 
 
 class BoundaryTests(unittest.TestCase):
+    def test_a_shared_catchment_has_no_invented_divide_inside_it(self):
+        grid = Grid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        graph = Divide()
+        graph.add_grid(grid, {3: np.ones((3, 3), dtype=bool),
+                              100: np.ones((3, 3), dtype=bool)}, [(3, 100)])
+        self.assertEqual(graph.edges, set())
+
+    def test_shared_catchment_edges_remain_possible_boundary_routes(self):
+        grid = Grid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        first = np.tile([True, True, False], (3, 1))
+        second = np.tile([False, True, True], (3, 1))
+        graph = Divide()
+        graph.add_grid(grid, {3: first, 100: second}, [(3, 100)])
+        self.assertEqual({a[1] for a, b in graph.edges} | {b[1] for a, b in graph.edges}, {1, 2})
+        self.assertTrue(all(a[1] == b[1] for a, b in graph.edges))
+
+    def test_a_third_destination_does_not_invent_an_interface_for_an_unchanged_pair(self):
+        grid = Grid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        graph = Divide()
+        graph.add_grid(grid, {3: np.ones((3, 3), dtype=bool),
+                              100: np.ones((3, 3), dtype=bool),
+                              900: np.tile([False, False, True], (3, 1))}, [(3, 100)])
+        self.assertEqual(graph.edges, set())
+
+    def test_waypoint_connections_keep_endpoints_and_declared_points(self):
+        line = LineString([(i * .001, 0.) for i in range(10)])
+        points = [(.002, .0002), (.006, -.0002)]
+        result, receipts = connect_waypoints(line, points, 20.)
+        coordinates = list(result.coords)
+        self.assertEqual(coordinates[0], line.coords[0])
+        self.assertEqual(coordinates[-1], line.coords[-1])
+        self.assertLess(coordinates.index(points[0]), coordinates.index(points[1]))
+        self.assertIn((.004, 0.), coordinates)
+        self.assertEqual(len(receipts), 2)
+        self.assertTrue(result.is_simple)
+
+    def test_a_waypoint_already_at_a_divide_vertex_keeps_the_line_unchanged(self):
+        line = LineString([(0., 0.), (.001, 0.), (.002, 0.)])
+        result, receipts = connect_waypoints(line, [(.001, 0.)], 20.)
+        self.assertEqual(list(result.coords), list(line.coords))
+        self.assertEqual(receipts[0]['length_m'], 0.)
+
+    def test_overlapping_waypoint_connections_keep_both_points_in_order(self):
+        line = LineString([(i * .001, 0.) for i in range(6)])
+        points = [(.0022, .0001), (.0028, .0002)]
+        result, receipts = connect_waypoints(line, points, 20.)
+        coordinates = list(result.coords)
+        self.assertLess(coordinates.index(points[0]), coordinates.index(points[1]))
+        self.assertEqual(len(receipts), 1)
+        self.assertTrue(result.is_simple)
+
+    def test_attachments_expand_to_enclose_crossings_of_the_source_route(self):
+        line = LineString([(0., 0.), (.004, 0.), (.004, .004), (0., .004),
+                           (0., .002), (.003, .002), (.003, .001), (.001, .001)])
+        point = (.002, -.0001)
+        result, receipts = connect_waypoints(line, [point], 20.)
+        self.assertTrue(result.is_simple)
+        self.assertIn(point, result.coords)
+        self.assertEqual(receipts[0]['start'], [0., 0.])
+        self.assertEqual(result.coords[-1], line.coords[-1])
+
+    def test_out_of_order_or_invalid_waypoints_are_reported(self):
+        line = LineString([(i * .001, 0.) for i in range(6)])
+        with self.assertRaisesRegex(ValueError, 'ordered divide'):
+            connect_waypoints(line, [(.004, .0001), (.001, .0001)], 20.)
+        with self.assertRaisesRegex(ValueError, 'finite WGS84'):
+            connect_waypoints(line, [(0., 91.)], 20.)
+        with self.assertRaisesRegex(ValueError, 'positive geodesic'):
+            connect_waypoints(line, [(.002, .0001)], 0.)
+
+    def test_waypoint_cannot_double_back_beyond_a_fixed_boundary_endpoint(self):
+        line = LineString([(0., 0.), (.001, 0.), (.002, 0.)])
+        with self.assertRaisesRegex(ValueError, 'simple ordered line'):
+            connect_waypoints(line, [(.004, 0.)], 20.)
+
     def graph(self):
         graph = Divide()
         graph.coordinates = {(0, 0): (0., 0.), (0, 1): (.01, 0.),
@@ -54,21 +130,21 @@ class BoundaryTests(unittest.TestCase):
                       'EPSG:4326', native_origin=origin, window_offset=(1, 0))
         graph = Divide()
         for grid in (first, second):
-            graph.add_grid(grid, np.array([[1, 3], [1, 3]]), [(1, 3)])
+            graph.add_grid(grid, destination_memberships(np.array([[1, 3], [1, 3]])), [(1, 3)])
         self.assertEqual(len(graph.edges), 3)
         self.assertEqual(len(graph.coordinates), 4)
 
     def test_unknown_is_not_used_as_an_opposing_basin(self):
         grid = Grid(np.zeros((2, 2)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
         graph = Divide()
-        graph.add_grid(grid, np.array([[1, -1], [1, -1]]), [(1, 3)])
+        graph.add_grid(grid, destination_memberships(np.array([[1, -1], [1, -1]])), [(1, 3)])
         self.assertEqual(graph.edges, set())
 
     def test_context_cells_influence_flow_but_do_not_add_overlapping_output_edges(self):
         grid = Grid(np.zeros((4, 2)), (0., .01, 0., .04, 0., -.01), 'EPSG:4326')
         labels = np.tile([1, 3], (4, 1))
         graph = Divide()
-        graph.add_grid(grid, labels, [(1, 3)], output_bounds=[0., .01, .02, .03])
+        graph.add_grid(grid, destination_memberships(labels), [(1, 3)], output_bounds=[0., .01, .02, .03])
         route = graph.geometry()
         np.testing.assert_allclose(route.bounds, (.01, .01, .01, .03))
         self.assertTrue(all(.01 <= point[1] <= .03 for point in graph.coordinates.values()))
@@ -77,10 +153,10 @@ class BoundaryTests(unittest.TestCase):
         grid = Grid(np.zeros((4, 2)), (2249900., 2., 0., 900100., 0., -2.), 'EPSG:3413')
         labels = np.tile([1, 3], (4, 1))
         complete, partitioned = Divide(), Divide()
-        complete.add_grid(grid, labels, [(1, 3)])
+        complete.add_grid(grid, destination_memberships(labels), [(1, 3)])
         for bounds in ([2249900, 900092, 2249904, 900096],
                        [2249900, 900096, 2249904, 900100]):
-            partitioned.add_grid(grid, labels, [(1, 3)], bounds, bounds_crs=3413)
+            partitioned.add_grid(grid, destination_memberships(labels), [(1, 3)], bounds, bounds_crs=3413)
         self.assertEqual(partitioned.edges, complete.edges)
         self.assertEqual(partitioned.coordinates, complete.coordinates)
         route = partitioned.route(partitioned.nearest_vertex(complete.coordinates[(0, 1)]),
@@ -136,7 +212,7 @@ class BoundaryTests(unittest.TestCase):
         self.assertEqual(report['flow_cells'], 2)
         self.assertGreater(report['point_snap_m'], 0)
         divide = Divide()
-        divide.add_grid(grid, labels, [(1, 2)])
+        divide.add_grid(grid, destination_memberships(labels), [(1, 2)])
         join = intersection(divide, curve, point)
         self.assertAlmostEqual(join.point[0], 44.001)
 

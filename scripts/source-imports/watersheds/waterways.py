@@ -97,8 +97,7 @@ class Waterways:
                 seen.add(node)
         self.topology_nodes = junctions
         for ident in sorted(self.natural - self.incomplete):
-            nodes = [(i, node) for i, node in enumerate(self.ways[ident].nodes) if node in junctions]
-            for (start, first), (end, second) in zip(nodes, nodes[1:]):
+            for (start, first), (end, second) in self.segments(ident):
                 self.upstream[second].add(first)
                 self.downstream[first].add(second)
                 self.edge_sources[first, second].append((ident, start, end))
@@ -167,15 +166,24 @@ class Waterways:
         filters = [osmium.filter.IdFilter({int(node) for node in wanted})] if self.natural_only else []
         Coordinates().apply_file(str(path), filters=filters)
 
-    def line(self, way_id):
+    def segments(self, way_id):
+        """Source index/node pairs delimiting each directed topology segment."""
+        anchors = [(i, node) for i, node in enumerate(self.ways[str(way_id)].nodes)
+                   if node in self.topology_nodes]
+        return zip(anchors, anchors[1:])
+
+    def line(self, way_id, start=0, end=None):
+        """Keep original coordinates from start through end, including both indices."""
         way_id = str(way_id)
-        if way_id in self._lines:
-            return self._lines[way_id]
         way = self.ways[way_id]
+        end = len(way.nodes) - 1 if end is None else end
+        key = way_id, start, end
+        if key in self._lines:
+            return self._lines[key]
         if len(way.nodes) < 2 or any(n not in self.nodes for n in way.nodes):
             raise ValueError('selected OSM way has missing nodes')
-        self._lines[way_id] = LineString([self.nodes[n] for n in way.nodes])
-        return self._lines[way_id]
+        self._lines[key] = LineString([self.nodes[n] for n in way.nodes[start:end + 1]])
+        return self._lines[key]
 
     def nearby(self, grid):
         """Select ways intersecting the grid, preserving each complete geometry."""
@@ -253,18 +261,20 @@ class Waterways:
                         seen.add(node)
                         todo.append(node)
             reaches[int(group)] = seen
-        assigned, ambiguous, unassigned = {}, [], []
-        for ident in sorted(self.natural - self.incomplete):
-            destination = self.ways[ident].nodes[-1]
-            matches = [group for group, nodes in reaches.items() if destination in nodes]
-            if len(matches) == 1:
-                assigned[ident] = matches[0]
-            elif matches:
-                ambiguous.append(ident)
-            else:
-                unassigned.append(ident)
-        return assigned, {'ambiguous': ambiguous, 'unassigned': unassigned,
-                          'incomplete': sorted(self.incomplete)}
+        assigned, ambiguous, unassigned, shared = {}, set(), set(), []
+        for edge, references in sorted(self.edge_sources.items()):
+            matches = tuple(sorted(group for group, nodes in reaches.items() if edge[1] in nodes))
+            if matches:
+                assigned[edge] = matches
+            if len(matches) > 1:
+                ambiguous.update(ident for ident, _, _ in references)
+                shared.append({'nodes': list(edge), 'groups': list(matches),
+                               'source_segments': [list(reference) for reference in references]})
+            elif not matches:
+                unassigned.update(ident for ident, _, _ in references)
+        return assigned, {'ambiguous': sorted(ambiguous), 'unassigned': sorted(unassigned),
+                          'incomplete': sorted(self.incomplete), 'shared_sections': shared}
+
 
 
 def rasterize(lines, grid):
@@ -288,22 +298,21 @@ def rasterize(lines, grid):
 
 
 def seed_grid(network, assigned, grid):
-    """Rasterize assigned natural ways; conflicting groups remain unassigned."""
-    report = {}
-    seeds = np.full(grid.elevation.shape, -1, dtype='int64')
-    conflicts = np.zeros(seeds.shape, dtype=bool)
-    groups = sorted(set(assigned.values()))
+    """Retain every known destination when burning natural river sections."""
+    groups = sorted({group for possible in assigned.values() for group in possible})
     nearby = network.nearby(grid)
+    seeds = {}
     for group in groups:
-        lines = [network.line(ident) for ident in nearby if assigned.get(ident) == group]
-        cells = rasterize(lines, grid)
-        conflicts |= cells & (seeds >= 0) & (seeds != group)
-        seeds[cells & ~conflicts] = group
-    seeds[conflicts] = -1
-    report['conflicting_seed_cells'] = int(conflicts.sum())
-    report['seed_cells'] = {str(group): int((seeds == int(group)).sum()) for group in groups}
-    report['nearby_ways'] = len(nearby)
-    return seeds, report
+        lines = [network.line(ident, start, end) for ident in nearby
+                 for (start, first), (end, last) in network.segments(ident)
+                 if group in assigned.get((first, last), ())]
+        seeds[group] = rasterize(lines, grid)
+    count = np.zeros(grid.elevation.shape, dtype='int64')
+    for cells in seeds.values():
+        count += cells
+    return seeds, {'shared_seed_cells': int((count > 1).sum()),
+                   'seed_cells': {str(group): int(cells.sum()) for group, cells in seeds.items()},
+                   'nearby_ways': len(nearby)}
 
 
 class Basins:
@@ -421,7 +430,7 @@ class Basins:
         Agreeing references identify the outlet; conflicting or absent references
         leave it unknown. Nearby basins without a flow connection are not used.
         """
-        if any(np.asarray(a).shape != flow.shape for a in (exits, labels, seeds)):
+        if any(np.asarray(a).shape != flow.shape for a in (exits, labels, *seeds.values())):
             raise ValueError('outlets, labels and terrain flow must share one grid')
         if np.any(np.asarray(exits) & (flow != -1)):
             raise ValueError('selected exits must be flow terminals')
@@ -443,12 +452,13 @@ class Basins:
             groups, basin_values, references = set(), set(), {}
             while todo:
                 index = todo.pop()
-                group = int(seeds.ravel()[index])
+                seed_groups = {group for group, cells in seeds.items() if cells.ravel()[index]}
+                group = next(iter(seed_groups)) if len(seed_groups) == 1 else -1
                 location = point(index)
-                values = set() if group >= 0 else self.values_at(location)
-                if group >= 0 or values:
+                values = set() if seed_groups else self.values_at(location)
+                if seed_groups or values:
                     group = group if group >= 0 else self.group(values)
-                    groups.add(group)
+                    groups.update(seed_groups or {group})
                     basin_values.update(values)
                     references.setdefault(group, location)
                     continue

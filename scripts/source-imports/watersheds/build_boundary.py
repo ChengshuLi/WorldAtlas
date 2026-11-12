@@ -12,7 +12,7 @@ from shapely.geometry import LineString
 
 from source_io import assemble_parts, catalog_source, download_source, read_recipe, save_boundary
 from watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
-from watersheds.drainage import compute_flow, destinations
+from watersheds.drainage import compute_flow, possible_destinations, single_destinations
 from watersheds.sources import Sources
 from watersheds.terrain import align, prepare
 from watersheds.waterways import Basins, seed_grid
@@ -125,22 +125,23 @@ def construct(recipe, files):
                 step = time.monotonic()
                 seeds, seed_report = seed_grid(network, assigned, grid)
                 relevant_ways.update(network.nearby(grid))
+                def seed_point(row, column, group, message):
+                    present = {g for g, cells in seeds.items() if cells[row, column]}
+                    if present and present != {group}:
+                        raise ValueError(message)
+                    seeds.setdefault(group, np.zeros(grid.elevation.shape, dtype=bool))[row, column] = True
                 for _, flow_settings in required:
                     point = sources.point(flow_settings['point'], lines)
                     row, column = cell_at(grid, point)
                     group = int(flow_settings['inside_group'])
-                    if seeds[row, column] not in (-1, group):
-                        raise ValueError('source stream head conflicts with a mapped drainage group')
-                    seeds[row, column] = group
+                    seed_point(row, column, group, 'source stream head conflicts with a mapped drainage group')
                 closed = []
                 for index, (point, group) in enumerate(sinks):
                     cell = cell_at(grid, point, required=False)
                     if cell is None:
                         continue
                     row, column = cell
-                    if seeds[row, column] not in (-1, group):
-                        raise ValueError('closed drainage destination conflicts with a mapped group')
-                    seeds[row, column] = group
+                    seed_point(row, column, group, 'closed drainage destination conflicts with a mapped group')
                     closed.append((row, column))
                     covered_sinks.add(index)
                 outlets, coastal_labels, coast_report = None, None, None
@@ -149,10 +150,12 @@ def construct(recipe, files):
                     water = align(paths(selection['sources']), grid, resampling='near')
                     ocean = np.isin(water, selection['values'])
                     outlets, coastal_labels = basins.coastal_outlets(grid, ocean)
-                    conflict = (seeds >= 0) & (coastal_labels >= 0) & (seeds != coastal_labels)
+                    unique_seeds = single_destinations(seeds, grid.elevation.shape)
+                    conflict = ((unique_seeds >= 0) & (coastal_labels >= 0) &
+                                (unique_seeds != coastal_labels))
                     # Traced river destinations take precedence over coarse basin
                     # membership at the shore. Keep disagreements in the receipt.
-                    coastal_labels[seeds >= 0] = seeds[seeds >= 0]
+                    coastal_labels[unique_seeds >= 0] = unique_seeds[unique_seeds >= 0]
                     coast_report = {'ocean_cells': int(ocean.sum()),
                                     'land_outlet_cells': int((outlets & ~ocean).sum()),
                                     'river_basin_conflicts': int(conflict.sum())}
@@ -165,23 +168,28 @@ def construct(recipe, files):
                         grid, flow, outlets & ~ocean, coastal_labels, seeds)
                     coast_report['source_coverage'] = coverage_report
                     terminals[outlets] = coastal_labels[outlets]
-                labels = destinations(flow, seeds, terminals)
+                labels = possible_destinations(flow, seeds, terminals)
                 drainage_seconds = time.monotonic() - step
                 step = time.monotonic()
                 graph.add_grid(grid, labels, settings['interfaces'], output_bounds,
                                bounds_crs=crs_of(domain))
                 for index, flow_settings in required:
                     curve, receipt = flow_to_point(
-                        grid, flow, labels, sources.point(flow_settings['point'], lines),
+                        grid, flow, single_destinations(labels, flow.shape),
+                        sources.point(flow_settings['point'], lines),
                         int(flow_settings['inside_group']), flow_settings['outside_groups'],
                         flow_settings['max_step_m'])
                     connections[index] = curve
                     report['connections'][str(index)] = receipt
+                destination_count = np.zeros(flow.shape, dtype='int64')
+                for cells in labels.values():
+                    destination_count += cells
                 domain_reports.append({
-                    'bounds': bounds, 'output_bounds': output_bounds, 'shape': list(labels.shape),
+                    'bounds': bounds, 'output_bounds': output_bounds, 'shape': list(flow.shape),
                     'bounds_crs': crs_of(domain),
                     'secondary_cells': grid.secondary_cells,
-                    'unknown_cells': int((labels < 0).sum()),
+                    'unknown_cells': int((destination_count == 0).sum()),
+                    'shared_drainage_cells': int((destination_count > 1).sum()),
                     'raised_cells': int((working > grid.elevation).sum()),
                     'max_raise_m': float((working - grid.elevation).max()),
                     'seeds': seed_report, 'terrain_seconds': terrain_seconds,
@@ -190,7 +198,7 @@ def construct(recipe, files):
                     'divide_seconds': time.monotonic() - step,
                     'seconds': time.monotonic() - tick,
                 })
-                LOGGER.info('%s: %s cells, %.2f seconds', name, labels.shape,
+                LOGGER.info('%s: %s cells, %.2f seconds', name, flow.shape,
                             domain_reports[-1]['seconds'])
             if len(covered_sinks) != len(sinks):
                 raise ValueError('closed drainage destination is outside every analysis domain')
@@ -198,6 +206,9 @@ def construct(recipe, files):
             network_report = dict(network_report)
             for category in ('ambiguous', 'unassigned'):
                 network_report[category] = [way for way in network_report[category] if way in relevant_ways]
+            network_report['shared_sections'] = [
+                section for section in network_report['shared_sections']
+                if any(way in relevant_ways for way, _, _ in section['source_segments'])]
             network_report['natural_ways_in_domains'] = len(relevant_ways)
             network_report['natural_ways_in_sources'] = len(network.natural)
             network_report['reversed_waterways'] = {
@@ -214,12 +225,15 @@ def construct(recipe, files):
                 return sources.point(specification, lines)
             return join if retain_join else join.point
 
-        sections = []
+        sections, waypoints = [], {}
         for index, section in enumerate(recipe['sections']):
             if 'line' in section:
                 sections.append(lines[section['line']])
             elif 'divide' in section:
                 sections.append(divides[section['divide']])
+                if section.get('via'):
+                    waypoints[index] = {'points': [sources.point(p, lines) for p in section['via']],
+                                        'max_step_m': section['max_step_m']}
             elif 'flow' in section:
                 sections.append(connections[index])
             elif 'geodesic' in section:
@@ -235,7 +249,8 @@ def construct(recipe, files):
         joins = [intersection(a, b, choice['near'])
                  for a, b, choice in zip(sections, sections[1:], recipe['joins'])]
         geometry = assemble(sections, joins, selected_point(recipe['start'], retain_join=True),
-                            selected_point(recipe['end'], retain_join=True))
+                            selected_point(recipe['end'], retain_join=True),
+                            waypoints=waypoints, connections=report['connections'])
         report['joins'] = [list(join.point) for join in joins]
         report['assembly_seconds'] = time.monotonic() - phase
     report['construction_seconds'] = time.monotonic() - started
@@ -269,6 +284,9 @@ def build_boundary(connect, client, recipe_id, recipe_version, revision, work_di
             {'source_id': source['source_id'], 'version': source['version'], 'sha256': source['sha256']}
             for source in references],
     }}
+    provenance['shared_drainage'] = {
+        name: terrain['network']['shared_sections']
+        for name, terrain in report['terrain'].items() if terrain['network']['shared_sections']}
     started = time.monotonic()
     with connect() as database:
         digest = save_boundary(database, revision, recipe['boundary_id'], geometry, provenance,

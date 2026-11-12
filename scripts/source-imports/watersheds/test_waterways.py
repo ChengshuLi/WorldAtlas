@@ -5,9 +5,9 @@ import zipfile
 
 import numpy as np
 import osmium
-import osmium
 
 from watersheds.terrain import Grid
+from watersheds.drainage import destination_memberships, single_destinations
 from watersheds.waterways import Waterways, seed_grid
 
 
@@ -36,14 +36,14 @@ class WaterwayTests(unittest.TestCase):
                           self.way(11, [3, 1], 'stream') + self.way(12, [4, 3], 'stream') +
                           self.way(13, [5, 4], 'canal') + self.way(14, [6, 5], 'ditch'))
         groups, report = Waterways([path]).groups({37: ['10']})
-        self.assertEqual(groups, {'10': 37, '11': 37, '12': 37})
-        self.assertEqual(report, {'ambiguous': [], 'unassigned': [], 'incomplete': []})
+        self.assertEqual(groups, {('1', '2'): (37,), ('3', '1'): (37,), ('4', '3'): (37,)})
+        self.assertEqual(report, {'ambiguous': [], 'unassigned': [], 'incomplete': [], 'shared_sections': []})
 
     def test_conflicting_downstream_groups_remain_ambiguous(self):
         path = self.write('network.osm', ''.join(self.node(i, lon=i / 10) for i in [1, 2, 3]) +
                           self.way(10, [1, 2]) + self.way(20, [2, 3]))
         assigned, report = Waterways([path]).groups({1: ['10'], 2: ['20']})
-        self.assertNotIn('10', assigned)
+        self.assertEqual(assigned[('1', '2')], (1, 2))
         self.assertIn('10', report['ambiguous'])
 
     def test_tributary_at_an_internal_vertex_keeps_its_downstream_connection(self):
@@ -51,7 +51,7 @@ class WaterwayTests(unittest.TestCase):
                           self.way(10, [1, 2, 3, 4]) + self.way(20, [5, 3], 'stream'))
         graph = Waterways([path])
         assigned, report = graph.groups({37: ['10']})
-        self.assertEqual(assigned, {'10': 37, '20': 37})
+        self.assertEqual(assigned, {('1', '3'): (37,), ('3', '4'): (37,), ('5', '3'): (37,)})
         self.assertEqual(report['unassigned'], [])
         self.assertEqual(list(graph.line(10).coords), [(i / 10, 1.) for i in range(1, 5)])
 
@@ -80,7 +80,7 @@ class WaterwayTests(unittest.TestCase):
                     self.assertEqual(network.incomplete, set())
                     self.assertEqual(network.ways['10'].version, 2)
                     self.assertEqual(list(network.line(10).coords), [(1., 0.), (3., 0.)])
-                    self.assertEqual(network.groups({7: ['10']})[0], {'10': 7})
+                    self.assertEqual(network.groups({7: ['10']})[0], {('1', '3'): (7,)})
 
     def test_conflicting_same_version_nodes_across_pbfs_are_rejected(self):
         paths = []
@@ -117,7 +117,7 @@ class WaterwayTests(unittest.TestCase):
                           self.way(10, [1, 2, 3]) + self.way(20, [2, 4], 'stream'))
         network = Waterways([path], reverse=['20', '20'])
         assigned, report = network.groups({37: ['10']})
-        self.assertEqual(assigned, {'10': 37, '20': 37})
+        self.assertEqual(assigned, {('1', '2'): (37,), ('2', '3'): (37,), ('4', '2'): (37,)})
         self.assertEqual(report['ambiguous'], [])
         self.assertEqual(list(network.line(20).coords), [(.4, 1.), (.2, 1.)])
         self.assertEqual(network.ways['20'].version, 1)
@@ -192,8 +192,9 @@ class WaterwayTests(unittest.TestCase):
         network = Waterways([path])
         assigned, _ = network.groups({3: ['10'], 9876543210: ['20']})
         seeds, report = seed_grid(network, assigned, grid)
-        np.testing.assert_array_equal(seeds, [[3, 3], [9876543210, 9876543210]])
-        self.assertEqual(report['conflicting_seed_cells'], 0)
+        np.testing.assert_array_equal(single_destinations(seeds, grid.elevation.shape),
+                                      [[3, 3], [9876543210, 9876543210]])
+        self.assertEqual(report['shared_seed_cells'], 0)
 
     def test_non_waterway_source_geometry_is_preserved_but_not_used_for_drainage(self):
         path = self.write('coast.osm', self.node(1, .1, 1.5) + self.node(2, 1.9, 1.5) +

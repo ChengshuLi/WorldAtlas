@@ -73,8 +73,13 @@ Files read by the calculation belong in `sources`.
 Source basin values identify drainage groups; unknown drainage has its own value,
 `-1`. Group IDs need not be consecutive. A group can contain several source basins.
 Use `waterway_groups` for explicitly identified downstream ways; otherwise natural
-networks are traced to their source-backed exit basins. Unassigned, ambiguous and
-incomplete networks are reported.
+networks are traced to their source-backed exit basins. Track destinations between
+real junctions, independently of how the provider divides a river into way records.
+An incoming section feeding two drainage groups retains both destinations.
+Shared drainage is known information; an unknown destination has no known route.
+Receipts identify shared sections by source way, node IDs and destination groups.
+The saved boundary's `provenance.shared_drainage` retains those references in Neon.
+Unassigned and incomplete networks are also reported.
 If source evidence establishes that a mapped way points upstream, list its ID in
 `reverse_waterways`. The constructor reverses its direction before tracing the
 network; its coordinates and source version stay unchanged. Keep the supporting
@@ -153,6 +158,10 @@ use WGS84; elevation cells retain their original positions and values.
 Construct the complete interface between selected drainage groups. Route between
 actual source intersections using WGS84 edge lengths, including connected pieces,
 branches and loops. Disconnected joins are reported rather than bridged.
+For shared drainage, both outer catchment edges remain possible routes. Do not
+invent a divide through the interior of a catchment whose destinations are the
+same on both sides. The existing connected-path selection chooses the route
+between the declared joins; no upstream area is forced into one group.
 Repeated consecutive source coordinates appear once in the final line; their
 coordinates are unchanged.
 
@@ -161,9 +170,17 @@ exact selected source point. Its receipt records the connector length. The sourc
 point need not fall in the cell traversed by raster drainage. Explicit connectors
 are construction choices, assembled with the other sections in one pass.
 This also supports a selected mapped junction where streams assigned to different
-groups meet. Connect the divide to the exact source node; report that intended
-contact separately from additional crossings along the stream. A shared mapped
-node alone does not establish whether a physical bifurcation exists.
+groups meet. List its source node in a divide section's ordered `via` points and
+set `max_step_m` for the geodesic connections. Attachments are derived from the
+current ordered divide, extending the replaced interval to enclose connector
+crossings of that divide. Nearby overlapping connections retain their declared
+point order. Source endpoints and coordinates outside the replaced intervals stay
+unchanged. Receipts record the calculated attachments and lengths; attachment
+coordinates are not stored settings to retune after a source changes.
+
+Review the complete result against mapped rivers and streams. Record intended
+junction contacts separately from additional crossings. A shared mapped node
+alone does not establish whether a physical bifurcation exists.
 
 Where source grids have different native resolutions, a connector endpoint can
 select the nearest divide corner to a geographic anchor:

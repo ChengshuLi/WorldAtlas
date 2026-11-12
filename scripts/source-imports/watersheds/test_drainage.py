@@ -3,11 +3,58 @@ import unittest
 import numpy as np
 from pyproj import Geod, Transformer
 
-from watersheds.drainage import compute_flow, destinations, neighbor_distances
+from watersheds.drainage import (compute_flow, destinations, neighbor_distances,
+                                 destination_memberships, possible_destinations, single_destinations)
 from watersheds.terrain import Grid
 
 
 class DrainageTests(unittest.TestCase):
+    def test_shared_river_destinations_are_preserved_upstream(self):
+        flow = np.array([[1, 2, -1, -1]])
+        seeds = {37: np.array([[False, True, False, False]]),
+                 9000000001: np.array([[False, True, False, False]])}
+        labels = possible_destinations(flow, seeds, np.full(flow.shape, -1))
+        for group in seeds:
+            np.testing.assert_array_equal(labels[group], [[True, True, False, False]])
+        # Shared drainage remains known in both masks; unique-only operations
+        # cannot silently turn it into one destination.
+        np.testing.assert_array_equal(single_destinations(labels, flow.shape), [[-1, -1, -1, -1]])
+
+    def test_three_real_groups_and_a_shared_seed_do_not_need_consecutive_ids(self):
+        flow = np.array([[1, -1, 3, -1, -1]])
+        seeds = {7: np.array([[False, True, False, False, False]]),
+                 100: np.array([[False, True, False, False, False]])}
+        terminals = np.array([[-1, -1, -1, 9999999999, -1]])
+        result = possible_destinations(flow, seeds, terminals)
+        np.testing.assert_array_equal(result[7], [[True, True, False, False, False]])
+        np.testing.assert_array_equal(result[100], result[7])
+        np.testing.assert_array_equal(result[9999999999], [[False, False, True, True, False]])
+
+    def test_unique_river_seed_stops_tracing_before_a_different_terminal(self):
+        flow = np.array([[1, 2, -1]])
+        seeds = {7: np.array([[False, True, False]])}
+        result = possible_destinations(flow, seeds, np.array([[-1, -1, 100]]))
+        np.testing.assert_array_equal(result[7], [[True, True, False]])
+        np.testing.assert_array_equal(result[100], [[False, False, True]])
+
+    def test_unseeded_cycles_stay_unknown_and_seeded_cycles_keep_both_destinations(self):
+        flow = np.array([[1, 0]])
+        terminals = np.full(flow.shape, -1)
+        self.assertEqual(possible_destinations(flow, {}, terminals), {})
+        seeds = {g: np.array([[True, False]]) for g in (3, 7)}
+        for cells in possible_destinations(flow, seeds, terminals).values():
+            self.assertTrue(cells.all())
+
+    def test_invalid_shared_destination_inputs_are_rejected_even_without_seeds(self):
+        for flow, terminals in [(np.array([[2]]), np.array([[-1]])),
+                                (np.array([[-1]]), np.array([[-2]])),
+                                (np.array([[-1.]]), np.array([[-1]])),
+                                (np.array([[-1]]), np.array([[-1], [-1]]))]:
+            with self.subTest(flow=flow, terminals=terminals), self.assertRaises(ValueError):
+                possible_destinations(flow, {}, terminals)
+        with self.assertRaises(ValueError):
+            possible_destinations(np.array([[-1]]), {3: np.array([[1]])}, np.array([[-1]]))
+
     def grid(self, values, crs='EPSG:4326', transform=(44., .001, 0., 43., 0., -.001)):
         return Grid(np.array(values, dtype=float), transform, crs)
 

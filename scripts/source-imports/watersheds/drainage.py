@@ -162,6 +162,57 @@ def destinations(flow, seeds, terminals=None):
     return _destinations(flow.astype('int64'), seeds.astype('int64'), terminals.astype('int64'))
 
 
+def destination_memberships(labels):
+    """Convert single destination IDs into one membership grid per real group."""
+    labels = np.asarray(labels)
+    return {int(group): labels == group for group in np.unique(labels) if group >= 0}
+
+
+def single_destinations(memberships, shape):
+    """Return a group only where exactly one destination is known.
+
+    This view is for operations requiring a unique destination. It does not
+    replace the memberships, which retain shared drainage separately from unknown.
+    """
+    labels = np.full(shape, UNKNOWN, dtype='int64')
+    count = np.zeros(shape, dtype='int64')
+    for group, cells in memberships.items():
+        labels[cells] = group
+        count += cells
+    labels[count != 1] = UNKNOWN
+    return labels
+
+
+def possible_destinations(flow, seeds, terminals):
+    """Follow all known river destinations, including genuine split flow.
+
+    Each group's Boolean grid records whether that destination is possible.
+    Two true memberships mean two known routes; no true membership means unknown.
+    A seed containing several groups stops tracing with all of those groups.
+    """
+    flow, terminals = np.asarray(flow), np.asarray(terminals)
+    shape = flow.shape
+    if (flow.ndim != 2 or terminals.shape != shape or
+            flow.dtype.kind not in 'iu' or terminals.dtype.kind not in 'iu' or
+            np.any(flow < -1) or np.any(flow >= flow.size) or np.any(terminals < -1)):
+        raise ValueError('flow links and terminal IDs require matching valid integer grids')
+    if any(not isinstance(group, (int, np.integer)) or group < 0 or
+           np.asarray(cells).shape != shape or np.asarray(cells).dtype != bool
+           for group, cells in seeds.items()):
+        raise ValueError('destination memberships require known IDs and matching Boolean grids')
+    known = np.zeros(shape, dtype=bool)
+    for cells in seeds.values():
+        known |= cells
+    groups = sorted(set(seeds) | {int(g) for g in np.unique(terminals) if g >= 0})
+    result = {}
+    for group in groups:
+        present = seeds.get(group, np.zeros(shape, dtype=bool))
+        seed = np.where(known, present.astype('int64'), UNKNOWN)
+        terminal = np.where(terminals >= 0, (terminals == group).astype('int64'), UNKNOWN)
+        result[group] = destinations(flow, seed, terminal) == 1
+    return result
+
+
 @njit(cache=True)
 def upstream_links(flow):
     """Index the actual incoming flow edges once for upstream tracing."""
