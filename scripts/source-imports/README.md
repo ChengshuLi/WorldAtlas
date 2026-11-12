@@ -18,6 +18,18 @@ construction code belongs here. The [map builder](../map-build/pipeline/README.m
 uses the selected structured records, together with large raw raster/vector
 inputs, to produce map cells.
 
+## Code organization
+
+`run_import.py` selects the method. Each method's `build_*.py` coordinates its
+Neon/R2 workflow; the other modules implement the calculations. `source_io.py`
+contains the catalog, verified-file and mainland-boundary save functions shared
+by those workflows. Calculation modules do not query Neon or R2.
+
+Tests live beside the code they exercise. The root `test_run_import.py` covers
+method selection; `test_source_io.py` covers downloads and multipart files.
+Each package README identifies its calculation and storage tests.
+The four `__init__.py` files mark importable packages and enable test discovery.
+
 The project [`environment.yml`](../../environment.yml) pins Python, GDAL/PROJ and Python
 packages for these importers. It also installs PostgreSQL for disposable database
 tests and the dependencies used by related pipeline checks in CI. One file

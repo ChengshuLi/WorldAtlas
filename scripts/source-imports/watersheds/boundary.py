@@ -7,7 +7,7 @@ import math
 import numpy as np
 from pyproj import CRS, Geod, Transformer
 from shapely import linestrings
-from shapely.geometry import LineString, MultiLineString, Point
+from shapely.geometry import LineString, Point
 from shapely.ops import substring
 from shapely.strtree import STRtree
 
@@ -92,9 +92,6 @@ class Divide:
     def segments(self):
         edges = sorted(self.edges)
         return edges, [LineString([self.coordinates[a], self.coordinates[b]]) for a, b in edges]
-
-    def geometry(self):
-        return MultiLineString([list(line.coords) for line in self.segments()[1]])
 
     def nearest_vertex(self, point):
         """Select a native divide corner for an explicit geographic connector."""

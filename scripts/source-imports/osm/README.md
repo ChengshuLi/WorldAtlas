@@ -7,7 +7,6 @@ ways. Local processing and the Neon/R2 workflow are separate:
 
 - [`ways.py`](ways.py): read local archives and manifests, check source
   files, join ways into a GeoJSON line, and optionally check its geometry checksum.
-  Also provides a command for assembling extracted files.
 - [`build_boundary.py`](build_boundary.py): look up a raw source version
   in Neon, download it from R2, assemble the line, and save the boundary and source link
   in Neon. Existing notes and supporting source links are retained.
@@ -16,7 +15,8 @@ ways. Local processing and the Neon/R2 workflow are separate:
 
 ## Local processing
 
-Use Python 3.11 or later. `ways.py` uses Python's standard library.
+Use the shared [project environment](../../../environment.yml).
+`ways.py` uses Shapely to reject a line that crosses itself.
 An archive is a ZIP containing `manifest.json` and the OpenStreetMap JSON
 responses it names. Each response contains a way and the coordinates of its
 nodes. The manifest identifies the ways to join and the starting endpoint:
@@ -29,7 +29,8 @@ nodes. The manifest identifies the ways to join and the starting endpoint:
 ```
 
 The ways must form one continuous, unbranched line and meet at shared node IDs.
-The assembled line must not revisit a node.
+The assembled line must not revisit a node or cross itself. Lines crossing the
+antimeridian need a separate construction method that splits them there.
 Coordinates are longitude followed by latitude. Source checksums identify the
 exact response files used.
 
@@ -39,17 +40,6 @@ Import these functions from `osm.ways`:
 | --- | --- |
 | `assemble(manifest, directory)` | Read the responses named in a parsed manifest and return a GeoJSON `LineString`. |
 | `assemble_archive(archive, archive_sha256, expected_geometry_sha256=None)` | Check the ZIP checksum and contents, then return the assembled line. Supply the optional geometry checksum to verify an existing result. |
-
-The local command takes three paths: manifest, source directory, and output
-file. It writes GeoJSON and prints the point count and checksum. The output file
-must not already exist:
-
-```bash
-PYTHONPATH=scripts/source-imports python3 -m osm.ways \
-  /path/to/manifest.json \
-  /path/to/source-directory \
-  /path/to/boundary.geojson
-```
 
 ## Neon and R2 workflow
 
@@ -111,6 +101,9 @@ For another boundary using this method, add a construction record and run the
 same command.
 
 ## Tests
+
+`test_ways.py` checks chain assembly, source verification and invalid geometry.
+`test_build_boundary.py` checks the Neon/R2 workflow and database transactions.
 
 Run the tests from the repository root:
 

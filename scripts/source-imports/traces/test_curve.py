@@ -36,6 +36,14 @@ class CurveTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 construct([[0, 1], [1, 0]], .01, value)
 
+    def test_endpoint_correction_cannot_create_invalid_longitudes(self):
+        with self.assertRaisesRegex(ValueError, 'smoothed trace'):
+            construct([[180., 2.], [179., 1.], [180., 0.]], .01, 1.)
+
+    def test_coarse_sampling_cannot_create_a_longitude_discontinuity(self):
+        with self.assertRaisesRegex(ValueError, 'longitude discontinuity'):
+            construct([[-170., 1.], [0., 0.], [170., -1.]], 3., .08)
+
 
 if __name__ == '__main__':
     unittest.main()

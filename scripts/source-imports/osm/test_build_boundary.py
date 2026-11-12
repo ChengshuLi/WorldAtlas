@@ -13,10 +13,11 @@ from psycopg.types.json import Jsonb
 from osm.build_boundary import build_boundary, save_boundary
 
 
-def source_fixture(endpoint=(1, 1)):
-    elements = [{'type': 'node', 'id': 1, 'lon': 0, 'lat': 0},
-                {'type': 'node', 'id': 2, 'lon': endpoint[0], 'lat': endpoint[1]},
-                {'type': 'way', 'id': 3, 'nodes': [1, 2]}]
+def source_fixture(endpoint=(1, 1), *, coordinates=None):
+    points = coordinates if coordinates is not None else [(0, 0), endpoint]
+    elements = [{'type': 'node', 'id': i, 'lon': x, 'lat': y}
+                for i, (x, y) in enumerate(points, 1)]
+    elements.append({'type': 'way', 'id': 3, 'nodes': list(range(1, len(points) + 1))})
     response = json.dumps({'elements': elements}).encode()
     manifest = {'start_node': 1, 'ways': [{'id': 3, 'file': '3.json',
                  'sha256': hashlib.sha256(response).hexdigest()}]}
@@ -211,6 +212,25 @@ class DatabaseTest(unittest.TestCase):
         before = self.boundary()
         with self.assertRaisesRegex(ValueError, 'expected geometry'):
             self.build(expected='0' * 64)
+        self.assertEqual(self.boundary(), before)
+        self.assertEqual(self.links(), [('1', 'construction_input')])
+
+    def test_crossing_source_leaves_existing_boundary_and_links_unchanged(self):
+        self.build()
+        before = self.boundary()
+        raw, source = source_fixture(coordinates=[(0, 0), (2, 2), (0, 2), (2, 0)])
+        self.database.execute(
+            'INSERT INTO atlas.source_assets '
+            '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+            'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+            "SELECT source_id,'crossing',title,kind,provider,source_uri,license_name,license_uri,"
+            "attribution,r2_bucket,'crossing.zip',%s,%s,provenance FROM atlas.source_assets "
+            "WHERE source_id='osm-test' AND version='1'",
+            (source['sha256'], source['size_bytes']))
+        self.add_recipe('crossing', source_version='crossing')
+        self.storage.get_object.side_effect = lambda **kwargs: {'Body': io.BytesIO(raw)}
+        with self.assertRaisesRegex(ValueError, 'self-intersection'):
+            self.build(version='crossing')
         self.assertEqual(self.boundary(), before)
         self.assertEqual(self.links(), [('1', 'construction_input')])
 

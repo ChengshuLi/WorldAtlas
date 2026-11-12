@@ -39,5 +39,8 @@ def construct(points, step_latitude_degrees, smoothing_latitude_degrees):
     w1 = 1 - 3 * t1 * t1 + 2 * t1 * t1 * t1
     result += (raw[0] - result[0]) * w0 + (raw[-1] - result[-1]) * w1
     result[0], result[-1] = raw[0], raw[-1]
+    if (not np.isfinite(result).all() or np.any(np.abs(result) > 180) or
+            np.any(np.abs(np.diff(result)) > 180)):
+        raise ValueError('smoothed trace requires finite WGS84 longitudes without a longitude discontinuity')
     return {'type': 'LineString',
             'coordinates': [[float(x), float(y)] for x, y in zip(result[::-1], ys[::-1])]}

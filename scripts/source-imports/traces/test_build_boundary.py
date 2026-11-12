@@ -93,6 +93,15 @@ class DatabaseTests(unittest.TestCase):
             self.build('2')
         self.assertIsNone(self.row())
 
+    def test_smoothing_outside_wgs84_leaves_existing_record_unchanged(self):
+        self.build()
+        before = self.row()
+        self.register('invalid-output', dict(self.recipe, points=[[180., 2.], [179., 1.], [180., 0.]],
+                                             smoothing_latitude_degrees=1.))
+        with self.assertRaisesRegex(ValueError, 'smoothed trace'):
+            self.build('invalid-output')
+        self.assertEqual(self.row(), before)
+
     def test_unknown_method_does_not_write(self):
         self.register('2', dict(self.recipe, method='some.python.function'))
         with self.assertRaisesRegex(ValueError, 'unsupported'):

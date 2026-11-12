@@ -444,7 +444,6 @@ class Basins:
                     self.values.append(feature.record.as_dict()[attribute])
         self.tree = STRtree(self.polygons)
         self.mapped = set().union(*self.groups.values())
-        self.unmapped = sorted(set(self.values) - self.mapped)
 
     def at(self, point):
         return self.group(self.values_at(point))

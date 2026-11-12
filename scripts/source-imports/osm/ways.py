@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Assemble and verify boundary geometry from local OpenStreetMap way files."""
-import argparse
 import hashlib
 import json
 import math
@@ -8,6 +7,8 @@ import tempfile
 import zipfile
 from collections import defaultdict
 from pathlib import Path
+
+from shapely.geometry import LineString
 
 
 def assemble(manifest, directory):
@@ -63,6 +64,10 @@ def assemble(manifest, directory):
     coords = [[float(v) for v in nodes[n]] for n in chain]
     if any(a == b for a, b in zip(coords, coords[1:])):
         raise ValueError('duplicate adjacent coordinates')
+    if not LineString(coords).is_simple:
+        raise ValueError('assembled boundary has a self-intersection')
+    if any(abs(a[0] - b[0]) > 180 for a, b in zip(coords, coords[1:])):
+        raise ValueError('antimeridian-crossing boundaries require a split source line')
     return {'type': 'LineString', 'coordinates': coords}
 
 
@@ -93,20 +98,3 @@ def assemble_archive(archive, archive_sha256, expected_geometry_sha256=None):
         if hashlib.sha256(encoded).hexdigest() != expected_geometry_sha256:
             raise ValueError('reconstructed boundary differs from expected geometry')
     return geom
-
-
-def main():
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('manifest', type=Path)
-    p.add_argument('directory', type=Path)
-    p.add_argument('output', type=Path)
-    args = p.parse_args()
-    geometry = assemble(json.loads(args.manifest.read_bytes()), args.directory)
-    raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
-    with args.output.open('xb') as f:
-        f.write(raw)
-    print(json.dumps({'vertices': len(geometry['coordinates']), 'sha256': hashlib.sha256(raw).hexdigest()}))
-
-
-if __name__ == '__main__':
-    main()

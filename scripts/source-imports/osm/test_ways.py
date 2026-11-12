@@ -85,6 +85,16 @@ class AssemblyTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'duplicate adjacent coordinates'):
             assemble(self.manifest, self.directory)
 
+    def test_reject_geometric_crossing_with_distinct_node_ids(self):
+        self.way(11, [1, 2, 3, 4], [(1, 0, 0), (2, 2, 2), (3, 0, 2), (4, 2, 0)])
+        with self.assertRaisesRegex(ValueError, 'self-intersection'):
+            assemble(self.manifest, self.directory)
+
+    def test_reject_unsplit_longitude_discontinuity(self):
+        self.way(11, [1, 2], [(1, 179, 0), (2, -179, 1)])
+        with self.assertRaisesRegex(ValueError, 'antimeridian'):
+            assemble(self.manifest, self.directory)
+
 
 class ArchiveTest(unittest.TestCase):
     def reject_archive(self, entries, message):

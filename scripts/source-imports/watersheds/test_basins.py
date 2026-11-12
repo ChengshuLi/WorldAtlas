@@ -8,7 +8,6 @@ import shapefile
 from shapely.geometry import LineString
 
 from watersheds.terrain import Grid
-from watersheds.drainage import destination_memberships
 from watersheds.waterways import Basins, Waterways, seed_grid
 
 
@@ -42,7 +41,6 @@ class BasinTests(unittest.TestCase):
         basins = self.basins({0: [100]})
         self.assertEqual(basins.at((.5, 1)), 0)
         self.assertEqual(basins.at((1.5, 1)), -1)
-        self.assertEqual(basins.unmapped, [200])
 
     def test_source_values_cannot_be_assigned_to_two_groups(self):
         with self.assertRaisesRegex(ValueError, 'multiple drainage groups'):
@@ -94,7 +92,7 @@ class BasinTests(unittest.TestCase):
         flow = np.array([[1, 2, 3, 4, -1]])
         exits = np.array([[False, False, False, False, True]])
         labels = np.full(flow.shape, -1)
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, destination_memberships(labels))
+        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, {})
         self.assertEqual(result[0, 4], 7)
         self.assertEqual(report['resolved'][0]['basin_values'], [200])
         self.assertEqual(report['resolved'][0]['upstream_reference'], (1.5, 1.))
@@ -107,7 +105,7 @@ class BasinTests(unittest.TestCase):
         exits = np.zeros(flow.shape, dtype=bool)
         exits[0, 2] = True
         labels = np.full(flow.shape, -1)
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, destination_memberships(labels))
+        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, {})
         self.assertEqual(result[0, 2], -1)
         self.assertEqual(report['conflicting'][0]['groups'], [3, 7])
 
@@ -116,7 +114,7 @@ class BasinTests(unittest.TestCase):
         flow = np.array([[1, 2, 3, -1]])
         exits = np.array([[False, False, False, True]])
         labels = np.full(flow.shape, -1)
-        result, report = self.basins({3: [100]}).uncovered_exits(grid, flow, exits, labels, destination_memberships(labels))
+        result, report = self.basins({3: [100]}).uncovered_exits(grid, flow, exits, labels, {})
         self.assertEqual(result[0, 3], -1)
         self.assertEqual(report['conflicting'][0]['basin_values'], [200])
 
@@ -125,7 +123,7 @@ class BasinTests(unittest.TestCase):
         flow = np.full((1, 4), -1)
         exits = np.array([[False, False, False, True]])
         labels = np.full(flow.shape, -1)
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, destination_memberships(labels))
+        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, {})
         self.assertEqual(result[0, 3], -1)
         self.assertEqual(report['unreferenced'], 1)
 
@@ -133,9 +131,9 @@ class BasinTests(unittest.TestCase):
         grid = Grid(np.zeros((1, 3)), (3., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
         flow = np.array([[1, 2, -1]])
         labels = np.full(flow.shape, -1)
-        seeds = np.array([[12345, -1, -1]])
+        seeds = {12345: np.array([[True, False, False]])}
         exits = np.array([[False, False, True]])
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, destination_memberships(seeds))
+        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, seeds)
         self.assertEqual(result[0, 2], 12345)
         self.assertEqual(report['resolved'][0]['basin_values'], [])
 

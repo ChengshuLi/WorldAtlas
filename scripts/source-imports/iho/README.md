@@ -79,6 +79,10 @@ when constructing the final route and resolves the selected grid-edge rule.
 
 ## Tests
 
+`test_s130.py` checks GML selection, exact coordinates and route settings.
+`test_build_routes.py` checks the Neon/R2 workflow, exported source links and
+database transactions.
+
 Run these tools' tests, including the common source helpers and OSM regression
 tests, from the repository root:
 

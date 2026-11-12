@@ -28,6 +28,8 @@ are JSON keys inside its `document` column, not separate table columns. The
 
 This method requires latitude to decrease along the line. Use another
 construction method for a boundary that doubles back northward.
+The generated line must retain valid longitudes without crossing the
+antimeridian. Invalid smoothing or sampling results stop before saving.
 
 The original source figure stays in R2. A person reads it and records the chosen
 points and geographic decisions in the construction record. The automatic
@@ -64,6 +66,10 @@ are retained. `--expected-geometry-sha256 SHA256` optionally checks the generate
 geometry before saving.
 
 ## Tests
+
+`test_curve.py` checks interpolation, smoothing, endpoint preservation and
+invalid geometry. `test_build_boundary.py` checks stored constructions, source
+references, repeat runs and failed writes.
 
 ```bash
 PYTHONPATH=scripts/source-imports python3 -m unittest discover \

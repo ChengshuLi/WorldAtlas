@@ -162,12 +162,6 @@ def destinations(flow, seeds, terminals=None):
     return _destinations(flow.astype('int64'), seeds.astype('int64'), terminals.astype('int64'))
 
 
-def destination_memberships(labels):
-    """Convert single destination IDs into one membership grid per real group."""
-    labels = np.asarray(labels)
-    return {int(group): labels == group for group in np.unique(labels) if group >= 0}
-
-
 def single_destinations(memberships, shape):
     """Return a group only where exactly one destination is known.
 
