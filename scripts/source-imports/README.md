@@ -26,6 +26,7 @@ contains the catalog, verified-file and mainland-boundary save functions shared
 by those workflows. Calculation modules do not query Neon or R2.
 Workers calculate independently. Saves affecting the same mainland region wait
 for one another so its saved polygon checksum includes both edits.
+The assembled region must close and form a valid polygon before the save commits.
 
 Tests live beside the code they exercise. The root `test_run_import.py` covers
 method selection; `test_source_io.py` covers downloads and multipart files.

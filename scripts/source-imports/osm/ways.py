@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Assemble and verify boundary geometry from local OpenStreetMap way files."""
 import hashlib
 import json

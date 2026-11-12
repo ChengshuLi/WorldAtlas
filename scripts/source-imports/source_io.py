@@ -178,6 +178,8 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
 
 def _refresh_regions(database, revision, boundary_id):
     """Keep existing derived region hashes consistent with the newly saved line."""
+    from shapely.geometry import Polygon
+
     regions = database.execute(
         'SELECT DISTINCT region_id FROM atlas.decision_mainland_region_segments '
         'WHERE revision=%s AND boundary_id=%s', (revision, boundary_id),
@@ -205,6 +207,8 @@ def _refresh_regions(database, revision, boundary_id):
             ring.extend(points if not ring else points[1:])
         if len(ring) < 4 or ring[0] != ring[-1]:
             raise ValueError('updated boundary does not form a closed region')
+        if not Polygon(ring).is_valid:
+            raise ValueError('updated boundary creates an invalid region polygon')
         polygon = {'type': 'Polygon', 'coordinates': [ring]}
         raw = json.dumps(polygon, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
         database.execute(

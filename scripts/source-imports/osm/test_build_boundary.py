@@ -251,10 +251,12 @@ class DatabaseTest(unittest.TestCase):
         save_boundary(self.database, '__osm_a',
                       {'type': 'LineString', 'coordinates': [[1., 1.], [1., 0.], [0., 0.]]},
                       self.source, dict(self.recipe, boundary_id='return'))
+        polygon = {'type': 'Polygon', 'coordinates': [[[0., 0.], [1., 1.], [1., 0.], [0., 0.]]]}
+        digest = hashlib.sha256(json.dumps(polygon, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
         self.database.execute(
             "INSERT INTO atlas.decision_mainland_seed_regions VALUES "
-            "('__osm_a','region','selected_for_research',repeat('0',64),"
-            "'binary64-sorted-compact-geojson-v1','[]')")
+            "('__osm_a','region','selected_for_research',%s,"
+            "'binary64-sorted-compact-geojson-v1','[]')", (digest,))
         self.database.execute(
             "INSERT INTO atlas.decision_mainland_region_segments VALUES "
             "('__osm_a','region',0,'boundary','border',NULL,0,2,false),"
@@ -285,6 +287,32 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(self.database.execute(
             "SELECT end_index FROM atlas.decision_mainland_region_segments "
             "WHERE revision='__osm_a' AND region_id='region' AND ordinal=0").fetchone()[0], 2)
+
+    def test_simple_boundary_crossing_another_region_section_rolls_back(self):
+        from shapely.geometry import LineString, Polygon
+
+        self.region_fixture()
+        before = self.boundary()
+        region_before = self.database.execute(
+            "SELECT geometry_sha256 FROM atlas.decision_mainland_seed_regions "
+            "WHERE revision='__osm_a' AND region_id='region'").fetchone()
+        # The edited line is simple and its endpoints still join exactly, but
+        # it crosses the return section, making the complete polygon invalid.
+        coordinates = [[0., 0.], [2., .5], [1., 1.]]
+        self.assertTrue(LineString(coordinates).is_simple)
+        self.assertFalse(Polygon([*coordinates, [1., 0.], [0., 0.]]).is_valid)
+        with self.assertRaisesRegex(ValueError, 'invalid region polygon'):
+            save_boundary(self.database, '__osm_a',
+                          {'type': 'LineString', 'coordinates': coordinates},
+                          self.source, self.recipe)
+        self.assertEqual(self.boundary(), before)
+        self.assertEqual(self.links(), [('1', 'construction_input')])
+        self.assertEqual(self.database.execute(
+            "SELECT end_index FROM atlas.decision_mainland_region_segments "
+            "WHERE revision='__osm_a' AND region_id='region' AND ordinal=0").fetchone()[0], 2)
+        self.assertEqual(self.database.execute(
+            "SELECT geometry_sha256 FROM atlas.decision_mainland_seed_regions "
+            "WHERE revision='__osm_a' AND region_id='region'").fetchone(), region_before)
 
     def test_parallel_boundary_updates_leave_the_shared_region_hash_consistent(self):
         from concurrent.futures import ThreadPoolExecutor
