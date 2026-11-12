@@ -62,6 +62,38 @@ def fixtures(directory):
 
 
 class ConstructionTests(unittest.TestCase):
+    def test_unresolved_river_stops_before_terrain_processing(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            river = Path(directory) / 'rivers.osm'
+            river.write_text('<osm><node id="1" lon=".001" lat=".005"/>'
+                             '<node id="2" lon=".002" lat=".003"/>'
+                             '<node id="3" lon=".001" lat=".001"/>'
+                             '<node id="4" lon=".005" lat=".001"/>'
+                             '<way id="10"><nd ref="1"/><nd ref="2"/><tag k="waterway" v="stream"/></way>'
+                             '<way id="20"><nd ref="2"/><nd ref="3"/><tag k="waterway" v="stream"/></way>'
+                             '<way id="30"><nd ref="2"/><nd ref="4"/><tag k="waterway" v="stream"/></way></osm>')
+            files['rivers'] = river
+            recipe['terrains']['ridge'].update(waterways=['rivers'], waterway_groups={3: ['20']})
+            with patch('watersheds.build_boundary.prepare') as terrain:
+                with self.assertRaisesRegex(ValueError, 'unresolved downstream route'):
+                    construct(recipe, files)
+                terrain.assert_not_called()
+
+    def test_final_connector_crossing_is_rejected_by_the_pipeline(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            river = Path(directory) / 'river.osm'
+            river.write_text('<osm><node id="1" lon=".002" lat=".0022"/>'
+                             '<node id="2" lon=".002" lat=".0038"/>'
+                             '<way id="10"><nd ref="1"/><nd ref="2"/>'
+                             '<tag k="waterway" v="stream"/></way></osm>')
+            files['river'] = river
+            recipe['terrains']['ridge']['waterways'] = ['river']
+            recipe['sections'][1].update(via=[{'point': [.001, .003]}], max_step_m=10.)
+            with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
+                construct(recipe, files)
+
     def test_divide_waypoints_need_no_stored_attachment_coordinates(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))

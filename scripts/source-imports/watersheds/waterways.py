@@ -95,6 +95,8 @@ class Waterways:
                 if node in seen:
                     junctions.add(node)
                 seen.add(node)
+        for ident in self.incomplete:
+            junctions.update(node for node in self.ways[ident].nodes if node in seen)
         self.topology_nodes = junctions
         for ident in sorted(self.natural - self.incomplete):
             for (start, first), (end, second) in self.segments(ident):
@@ -187,17 +189,92 @@ class Waterways:
 
     def nearby(self, grid):
         """Select ways intersecting the grid, preserving each complete geometry."""
+        x, a, _, y, _, e = grid.transform
+        height, width = grid.elevation.shape
+        bounds = Transformer.from_crs(grid.crs, 4326, always_xy=True).transform_bounds(
+            x, y + height * e, x + width * a, y, densify_pts=21, errcheck=True)
+        return self.in_bounds(bounds)
+
+    def in_bounds(self, bounds):
+        """Find complete natural ways in a WGS84 rectangle, including wrapping."""
         if self._spatial is None:
             self._spatial_ids = sorted(self.natural - self.incomplete)
             self._spatial = STRtree([self.line(ident) for ident in self._spatial_ids])
-        x, a, _, y, _, e = grid.transform
-        height, width = grid.elevation.shape
-        west, south, east, north = Transformer.from_crs(grid.crs, 4326, always_xy=True).transform_bounds(
-            x, y + height * e, x + width * a, y, densify_pts=21, errcheck=True)
+        west, south, east, north = bounds
         areas = [box(west, south, east, north)] if west <= east else [
             box(west, south, 180, north), box(-180, south, east, north)]
         indices = {int(index) for area in areas for index in self._spatial.query(area, predicate='intersects')}
         return [self._spatial_ids[index] for index in sorted(indices)]
+
+    def require_destinations(self, bounds, report):
+        """Reject unresolved relevant rivers before calculating terrain drainage."""
+        relevant = set().union(*(self.in_bounds(rectangle) for rectangle in bounds))
+        relevant_nodes = {node for ident in relevant for node in self.ways[ident].nodes}
+        areas = [area for w, s, e, n in bounds
+                 for area in ([box(w, s, e, n)] if w <= e else
+                              [box(w, s, 180, n), box(-180, s, e, n)])]
+        for ident in sorted(self.incomplete):
+            nodes = self.ways[ident].nodes
+            if (relevant_nodes.intersection(nodes) or
+                    any(node in self.nodes and any(area.covers(Point(self.nodes[node])) for area in areas)
+                        for node in nodes)):
+                raise ValueError(f'natural waterway {ident} has missing source coordinates; repair the source')
+        for section in report['unresolved_sections']:
+            affected = [way for way, _, _ in section['source_segments'] if way in relevant]
+            if affected:
+                raise ValueError(
+                    f'natural waterway {affected[0]} has an unresolved downstream route '
+                    f'from node {section["nodes"][1]}; known groups={section["groups"]}; '
+                    f'first unresolved node={section["unresolved_node"]}; repair the source')
+
+    def check_crossings(self, geometry):
+        """Check the final line against river interiors, allowing real endpoints.
+
+        A natural fork or confluence ends a river section. An arbitrary OSM way
+        split with two incident neighbours does not. No locations are exempted.
+        """
+        ports = defaultdict(set)
+        for references in self.edge_sources.values():
+            for ident, first, last in references:
+                nodes = self.ways[ident].nodes
+                ports[nodes[first]].add(nodes[first + 1])
+                ports[nodes[last]].add(nodes[last - 1])
+        contacts = defaultdict(list)
+        for node, neighbors in ports.items():
+            if len(neighbors) != 2:
+                contacts[self.nodes[node]].append((node, len(neighbors)))
+        endpoints = {tuple(geometry.coords[0]), tuple(geometry.coords[-1])}
+        self.in_bounds(geometry.bounds)
+        crossings, junctions, river_ends = {}, set(), set()
+
+        def intersection_points(hit):
+            if hit.geom_type == 'Point':
+                yield tuple(hit.coords[0])
+            elif hit.geom_type in ('MultiPoint', 'GeometryCollection'):
+                for part in hit.geoms:
+                    yield from intersection_points(part)
+            # Following a river along a line is not a transverse crossing.
+
+        for index in self._spatial.query(geometry, predicate='intersects'):
+            ident = self._spatial_ids[int(index)]
+            for point in intersection_points(geometry.intersection(self.line(ident))):
+                if point in endpoints:
+                    continue
+                matching = [(node, degree) for node, degree in contacts.get(point, [])
+                            if node in self.ways[ident].nodes]
+                if matching:
+                    for node, degree in matching:
+                        (junctions if degree > 2 else river_ends).add(node)
+                else:
+                    crossings.setdefault(point, set()).add(ident)
+        result = {'checked_natural_ways': len(self._spatial_ids),
+                  'junction_contacts': sorted(junctions), 'river_endpoint_contacts': sorted(river_ends),
+                  'crossings': [{'point': list(point), 'ways': sorted(ways)}
+                                for point, ways in sorted(crossings.items())]}
+        if crossings:
+            first = result['crossings'][0]
+            raise ValueError(f'boundary crosses natural waterway {first["ways"]} at {first["point"]}')
+        return result
 
     def groups(self, groups):
         """Include all mapped natural tributaries reaching the selected ways.
@@ -213,7 +290,9 @@ class Waterways:
             for ident in map(str, ways):
                 if ident not in self.natural or ident in self.incomplete:
                     raise ValueError(f'selected natural waterway {ident} is missing or incomplete')
-                seen.update(node for node in self.ways[ident].nodes if node in self.topology_nodes)
+                # The selected downstream endpoint is the reference. Walking
+                # upstream already reaches every earlier node of this way.
+                seen.add(self.ways[ident].nodes[-1])
             roots[int(group)] = seen
         return self._assign(roots)
 
@@ -261,11 +340,33 @@ class Waterways:
                         seen.add(node)
                         todo.append(node)
             reaches[int(group)] = seen
-        assigned, ambiguous, unassigned, shared = {}, set(), set(), []
+        known = set().union(*reaches.values()) if reaches else set()
+        supported = set().union(*roots.values()) if roots else set()
+        unresolved = {node: node for node in self.topology_nodes - known}
+        for ident in self.incomplete:
+            unresolved.update((node, node) for node in self.ways[ident].nodes
+                              if node in self.topology_nodes)
+        todo = list(sorted(unresolved))
+        while todo:
+            node = todo.pop()
+            for parent in sorted(self.upstream[node]):
+                # Do not look beyond an established destination reference.
+                # Uncovered estuary geometry downstream does not invalidate
+                # the basin identity already established by the source.
+                if parent in supported:
+                    continue
+                if parent not in unresolved:
+                    unresolved[parent] = unresolved[node]
+                    todo.append(parent)
+        assigned, ambiguous, unassigned, shared, missing = {}, set(), set(), [], []
         for edge, references in sorted(self.edge_sources.items()):
             matches = tuple(sorted(group for group, nodes in reaches.items() if edge[1] in nodes))
             if matches:
                 assigned[edge] = matches
+            if edge[1] in unresolved:
+                missing.append({'nodes': list(edge), 'groups': list(matches),
+                                'source_segments': [list(reference) for reference in references],
+                                'unresolved_node': unresolved[edge[1]]})
             if len(matches) > 1:
                 ambiguous.update(ident for ident, _, _ in references)
                 shared.append({'nodes': list(edge), 'groups': list(matches),
@@ -273,7 +374,8 @@ class Waterways:
             elif not matches:
                 unassigned.update(ident for ident, _, _ in references)
         return assigned, {'ambiguous': sorted(ambiguous), 'unassigned': sorted(unassigned),
-                          'incomplete': sorted(self.incomplete), 'shared_sections': shared}
+                          'incomplete': sorted(self.incomplete), 'shared_sections': shared,
+                          'unresolved_sections': missing}
 
 
 

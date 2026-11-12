@@ -13,7 +13,7 @@ selections live in the construction record.
 | [`terrain.py`](terrain.py) | Crop native grids and fill missing heights from real secondary data. |
 | [`drainage.py`](drainage.py) | Calculate eight-neighbor flow and downstream destinations. |
 | [`waterways.py`](waterways.py) | Read natural waterways and source basin polygons. |
-| [`sources.py`](sources.py) | Read selected provider vertices, ways and river relations. |
+| [`sources.py`](sources.py) | Read source GeoJSON lines, OSM ways and river relations. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
 | [`../source_io.py`](../source_io.py) | Resolve catalog versions, verify downloads, and write geometry and source links together. |
 
@@ -58,7 +58,7 @@ The record's method is `watershed_boundary`. It contains:
 
 - `boundary_id` and `basis`: the editable boundary and a plain-language explanation.
 - `sources`: local aliases for exact catalog source IDs and versions.
-- `lines`: selected shapefile vertices, GeoJSON features, OSM ways or river relations.
+- `lines`: source GeoJSON features, OSM ways or river relations.
 - `terrains`: primary and secondary sources, height conversion, analysis domains,
   drainage groups, waterway references and the group pairs whose divides are needed.
 - `sections`: the final ordered source lines, calculated divides, drainage paths
@@ -80,6 +80,12 @@ Shared drainage is known information; an unknown destination has no known route.
 Receipts identify shared sections by source way, node IDs and destination groups.
 The saved boundary's `provenance.shared_drainage` retains those references in Neon.
 Unassigned and incomplete networks are also reported.
+Before terrain processing, check the rivers intersecting the analysis areas and
+their downstream connections. If any route is unresolved, including one branch
+of an otherwise known fork, stop with its way and node IDs. Fix the source data
+or source-backed destination references and rerun. Two known destinations are
+valid. Unrelated unresolved rivers elsewhere in a provider extract do not block
+the calculation. Missing coordinates on a relevant river also stop the run.
 If source evidence establishes that a mapped way points upstream, list its ID in
 `reverse_waterways`. The constructor reverses its direction before tracing the
 network; its coordinates and source version stay unchanged. Keep the supporting
@@ -178,9 +184,13 @@ point order. Source endpoints and coordinates outside the replaced intervals sta
 unchanged. Receipts record the calculated attachments and lengths; attachment
 coordinates are not stored settings to retune after a source changes.
 
-Review the complete result against mapped rivers and streams. Record intended
-junction contacts separately from additional crossings. A shared mapped node
-alone does not establish whether a physical bifurcation exists.
+The constructor checks the complete final line against the drainage reference
+rivers before saving. A crossing through a river section fails the run. Contact
+at a real fork, confluence or river endpoint is allowed; an arbitrary OSM record
+split does not create an allowed contact. The same general checker runs in tests
+and production, with no location-specific exemptions. Following a river along
+its length is allowed. Receipts and Neon provenance record the check results.
+A shared mapped node alone does not establish whether a physical bifurcation exists.
 
 Where source grids have different native resolutions, a connector endpoint can
 select the nearest divide corner to a geographic anchor:

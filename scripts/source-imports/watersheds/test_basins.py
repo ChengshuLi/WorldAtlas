@@ -8,7 +8,7 @@ import shapefile
 from shapely.geometry import LineString
 
 from watersheds.terrain import Grid
-from watersheds.drainage import destination_memberships, single_destinations
+from watersheds.drainage import destination_memberships
 from watersheds.waterways import Basins, Waterways, seed_grid
 
 
