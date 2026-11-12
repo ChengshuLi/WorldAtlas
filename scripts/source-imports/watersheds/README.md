@@ -75,10 +75,6 @@ Source basin values identify drainage groups; unknown drainage has its own value
 Use `waterway_groups` for explicitly identified downstream ways; otherwise natural
 networks are traced to their source-backed exit basins. Unassigned, ambiguous and
 incomplete networks are reported.
-Assign drainage between junctions, independently of how OSM divides a stream into
-way records. At a fork reaching different groups, its upstream section stays
-ambiguous while the known outgoing sections supply seeds. Reports list a way as
-ambiguous or unassigned when any of its sections has that status.
 If source evidence establishes that a mapped way points upstream, list its ID in
 `reverse_waterways`. The constructor reverses its direction before tracing the
 network; its coordinates and source version stay unchanged. Keep the supporting
@@ -94,8 +90,9 @@ Stop at an unselected or ambiguous source basin; a path without a source-backed
 destination remains unassigned.
 
 OSM inputs can be XML, ZIP archives of XML responses, or provider PBF files.
-The PBF reader merges memberships from all inputs before its coordinate pass, so
-a later source can reference a point supplied by an earlier file. Natural
+The reader merges memberships from every input before filtering PBF coordinates,
+so later sources can use points supplied by earlier files.
+The PBF reader streams memberships and coordinates in two passes. Natural
 drainage includes rivers and streams; full coordinates remain available for
 geometry. Shared nodes and way endpoints preserve downstream connections without
 turning every shape vertex into a separate graph junction. Raster seeding selects
@@ -123,9 +120,8 @@ Exact flat cells follow the priority-flood route to a reachable outlet. The sour
 heights remain unchanged. Known closed drainage destinations can be supplied as
 `closed_sinks`, each with a source point and group ID. Canals and drains are
 excluded from natural drainage; an explicitly selected geographic boundary can
-still follow their source geometry.
-Apply each closed sink in the analysis crops containing it. Report a selected
-sink outside every crop instead of silently omitting it.
+still follow their source geometry. Apply a closed sink only in crops containing
+it; report a sink outside every analysis crop instead of silently omitting it.
 
 For coastal terrain, `ocean_mask` selects provider mask sources and their ocean
 codes. Read categorical masks with nearest-neighbor alignment. Stop drainage at
@@ -165,18 +161,9 @@ exact selected source point. Its receipt records the connector length. The sourc
 point need not fall in the cell traversed by raster drainage. Explicit connectors
 are construction choices, assembled with the other sections in one pass.
 This also supports a selected mapped junction where streams assigned to different
-groups meet. Put the ordered source points in the divide section's `via` list
-and set `max_step_m` for its geodesic connections. The constructor derives
-attachments from the current ordered divide, extending each replaced interval
-to enclose any crossings of the original route. Overlapping intervals are joined
-in the declared point order. Coordinates outside those intervals and the section
-endpoints are preserved. Attachments are calculated results, not settings to
-retune after a source changes. Invalid point order or a self-crossing result is
-reported before saving. Receipts record the attachments and connection lengths.
-
-Report the intended junction contact separately from additional crossings along
-the stream. A shared mapped node alone does not establish whether a physical
-bifurcation exists.
+groups meet. Connect the divide to the exact source node; report that intended
+contact separately from additional crossings along the stream. A shared mapped
+node alone does not establish whether a physical bifurcation exists.
 
 Where source grids have different native resolutions, a connector endpoint can
 select the nearest divide corner to a geographic anchor:

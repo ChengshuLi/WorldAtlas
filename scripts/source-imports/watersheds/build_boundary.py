@@ -214,15 +214,12 @@ def construct(recipe, files):
                 return sources.point(specification, lines)
             return join if retain_join else join.point
 
-        sections, waypoints = [], {}
+        sections = []
         for index, section in enumerate(recipe['sections']):
             if 'line' in section:
                 sections.append(lines[section['line']])
             elif 'divide' in section:
                 sections.append(divides[section['divide']])
-                if section.get('via'):
-                    waypoints[index] = {'points': [sources.point(p, lines) for p in section['via']],
-                                        'max_step_m': section['max_step_m']}
             elif 'flow' in section:
                 sections.append(connections[index])
             elif 'geodesic' in section:
@@ -238,8 +235,7 @@ def construct(recipe, files):
         joins = [intersection(a, b, choice['near'])
                  for a, b, choice in zip(sections, sections[1:], recipe['joins'])]
         geometry = assemble(sections, joins, selected_point(recipe['start'], retain_join=True),
-                            selected_point(recipe['end'], retain_join=True),
-                            waypoints=waypoints, connections=report['connections'])
+                            selected_point(recipe['end'], retain_join=True))
         report['joins'] = [list(join.point) for join in joins]
         report['assembly_seconds'] = time.monotonic() - phase
     report['construction_seconds'] = time.monotonic() - started

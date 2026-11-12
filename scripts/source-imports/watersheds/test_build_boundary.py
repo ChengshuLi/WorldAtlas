@@ -62,18 +62,6 @@ def fixtures(directory):
 
 
 class ConstructionTests(unittest.TestCase):
-    def test_divide_waypoints_need_no_stored_attachment_coordinates(self):
-        with tempfile.TemporaryDirectory() as directory:
-            files, recipe = fixtures(Path(directory))
-            points = [[.0032, .004], [.0028, .002]]
-            recipe['sections'][1].update(via=[{'point': p} for p in points], max_step_m=10.)
-            geometry, report = construct(recipe, files)
-            coordinates = geometry['coordinates']
-            self.assertEqual(coordinates[0], [.001, .005])
-            self.assertEqual(coordinates[-1], [.005, .001])
-            self.assertLess(coordinates.index(points[0]), coordinates.index(points[1]))
-            self.assertIn('waypoints', report['connections']['1'])
-
     def test_closed_sink_is_applied_only_to_domains_that_contain_it(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))

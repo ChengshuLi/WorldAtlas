@@ -6,7 +6,6 @@ import math
 
 import numpy as np
 from pyproj import CRS, Geod, Transformer
-from shapely import linestrings
 from shapely.geometry import LineString, MultiLineString, Point
 from shapely.ops import substring
 from shapely.strtree import STRtree
@@ -215,88 +214,7 @@ def geodesic(first, last, max_step_m):
                             for i in range(1, count)] + [tuple(last)]
 
 
-def connect_waypoints(line, points, max_step_m):
-    """Derive ordered attachments to geographic points on the current divide.
-
-    Enclose every intersection of each connector with the source route. The
-    attachment interval grows only at existing vertices, so this terminates
-    without a search radius, numerical tolerance or stored attachment coordinates.
-    """
-    if not math.isfinite(max_step_m) or max_step_m <= 0:
-        raise ValueError('positive geodesic spacing is required')
-    coordinates = np.asarray(line.coords)
-    groups = []
-    previous = -1
-    for point in points:
-        point = tuple(map(float, point))
-        if (len(point) != 2 or not np.isfinite(point).all() or
-                abs(point[0]) > 180 or abs(point[1]) > 90):
-            raise ValueError('waypoints require finite WGS84 coordinates')
-        lengths = GEOD.inv(coordinates[:, 0], coordinates[:, 1],
-                           np.full(len(coordinates), point[0]), np.full(len(coordinates), point[1]))[2]
-        index = int(np.argmin(lengths))
-        if index < previous:
-            raise ValueError('waypoints must follow the ordered divide')
-        previous = index
-        first, last = (index, index) if tuple(coordinates[index]) == point else (
-            max(0, index - 1), min(len(coordinates) - 1, index + 1))
-        groups.append({'first': first, 'last': last, 'points': [point]})
-    edges = linestrings(np.stack((coordinates[:-1], coordinates[1:]), axis=1))
-    tree = STRtree(edges)
-
-    def connector(group):
-        chain = [tuple(coordinates[group['first']]), *group['points'],
-                 tuple(coordinates[group['last']])]
-        result = [chain[0]]
-        for first, last in zip(chain, chain[1:]):
-            if first != last:
-                result.extend(geodesic(first, last, max_step_m)[1:])
-        return result
-
-    changed = True
-    while changed:
-        changed = False
-        for group in groups:
-            curve = connector(group)
-            geometry = LineString(curve) if len(curve) > 1 else Point(curve[0])
-            first, last = group['first'], group['last']
-            for index in tree.query(geometry, predicate='intersects'):
-                index = int(index)
-                if first <= index < last:
-                    continue
-                allowed = Point(coordinates[first if index < first else last])
-                if edges[index].intersection(geometry).difference(allowed).is_empty:
-                    continue
-                group['first'] = min(group['first'], index)
-                group['last'] = max(group['last'], index + 1)
-            changed |= (first, last) != (group['first'], group['last'])
-        merged = []
-        for group in groups:
-            if merged and merged[-1]['last'] >= group['first']:
-                merged[-1]['first'] = min(merged[-1]['first'], group['first'])
-                merged[-1]['last'] = max(merged[-1]['last'], group['last'])
-                merged[-1]['points'].extend(group['points'])
-                changed = True
-            else:
-                merged.append(group)
-        groups = merged
-    result, receipts, position = [], [], 0
-    for group in groups:
-        curve = connector(group)
-        result.extend(map(tuple, coordinates[position:group['first'] + 1]))
-        result.extend(curve[1:])
-        position = group['last'] + 1
-        receipts.append({'points': [list(p) for p in group['points']],
-                         'start': list(curve[0]), 'end': list(curve[-1]),
-                         'length_m': sum(distance(a, b) for a, b in zip(curve, curve[1:]))})
-    result.extend(map(tuple, coordinates[position:]))
-    connected = LineString(result)
-    if not connected.is_simple:
-        raise ValueError('geographic waypoint connections do not form a simple ordered line')
-    return connected, receipts
-
-
-def assemble(sections, joins, start, end, *, waypoints=None, connections=None):
+def assemble(sections, joins, start, end):
     """Cut independent sections at their shared joins and assemble the final line."""
     if not sections or len(joins) != len(sections) - 1:
         raise ValueError('one join is required between each pair of sections')
@@ -311,11 +229,6 @@ def assemble(sections, joins, start, end, *, waypoints=None, connections=None):
             cut = substring(section, section.project(Point(first.point)), section.project(Point(last.point)))
         if cut.geom_type != 'LineString' or cut.is_empty:
             raise ValueError('boundary section has coincident or invalid joins')
-        if waypoints and index in waypoints:
-            choice = waypoints[index]
-            cut, receipts = connect_waypoints(cut, choice['points'], choice['max_step_m'])
-            if connections is not None:
-                connections[str(index)] = {'waypoints': receipts}
         points = list(cut.coords)
         points[0], points[-1] = first.point, last.point
         for point in points:

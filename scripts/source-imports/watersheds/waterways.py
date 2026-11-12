@@ -97,7 +97,8 @@ class Waterways:
                 seen.add(node)
         self.topology_nodes = junctions
         for ident in sorted(self.natural - self.incomplete):
-            for (start, first), (end, second) in self.segments(ident):
+            nodes = [(i, node) for i, node in enumerate(self.ways[ident].nodes) if node in junctions]
+            for (start, first), (end, second) in zip(nodes, nodes[1:]):
                 self.upstream[second].add(first)
                 self.downstream[first].add(second)
                 self.edge_sources[first, second].append((ident, start, end))
@@ -166,24 +167,15 @@ class Waterways:
         filters = [osmium.filter.IdFilter({int(node) for node in wanted})] if self.natural_only else []
         Coordinates().apply_file(str(path), filters=filters)
 
-    def segments(self, way_id):
-        """Source index/node pairs delimiting each directed topology segment."""
-        anchors = [(i, node) for i, node in enumerate(self.ways[str(way_id)].nodes)
-                   if node in self.topology_nodes]
-        return zip(anchors, anchors[1:])
-
-    def line(self, way_id, start=0, end=None):
-        """Keep original coordinates from start through end, including both indices."""
+    def line(self, way_id):
         way_id = str(way_id)
+        if way_id in self._lines:
+            return self._lines[way_id]
         way = self.ways[way_id]
-        end = len(way.nodes) - 1 if end is None else end
-        key = way_id, start, end
-        if key in self._lines:
-            return self._lines[key]
         if len(way.nodes) < 2 or any(n not in self.nodes for n in way.nodes):
             raise ValueError('selected OSM way has missing nodes')
-        self._lines[key] = LineString([self.nodes[n] for n in way.nodes[start:end + 1]])
-        return self._lines[key]
+        self._lines[way_id] = LineString([self.nodes[n] for n in way.nodes])
+        return self._lines[way_id]
 
     def nearby(self, grid):
         """Select ways intersecting the grid, preserving each complete geometry."""
@@ -203,7 +195,7 @@ class Waterways:
         """Include all mapped natural tributaries reaching the selected ways.
 
         Keys are actual construction group IDs; values are selected downstream
-        way IDs. Sections reaching multiple groups are reported as ambiguous.
+        way IDs. Ways reaching multiple groups are reported as ambiguous.
         """
         roots = {}
         for group, ways in groups.items():
@@ -251,7 +243,6 @@ class Waterways:
         return assigned, report
 
     def _assign(self, roots):
-        """Map directed (start_node, end_node) segments to known group IDs."""
         reaches = {}
         for group, initial in roots.items():
             seen = set(initial)
@@ -262,17 +253,17 @@ class Waterways:
                         seen.add(node)
                         todo.append(node)
             reaches[int(group)] = seen
-        assigned, ambiguous, unassigned = {}, set(), set()
-        for edge, references in sorted(self.edge_sources.items()):
-            _, destination = edge
+        assigned, ambiguous, unassigned = {}, [], []
+        for ident in sorted(self.natural - self.incomplete):
+            destination = self.ways[ident].nodes[-1]
             matches = [group for group, nodes in reaches.items() if destination in nodes]
             if len(matches) == 1:
-                assigned[edge] = matches[0]
+                assigned[ident] = matches[0]
             elif matches:
-                ambiguous.update(ident for ident, _, _ in references)
+                ambiguous.append(ident)
             else:
-                unassigned.update(ident for ident, _, _ in references)
-        return assigned, {'ambiguous': sorted(ambiguous), 'unassigned': sorted(unassigned),
+                unassigned.append(ident)
+        return assigned, {'ambiguous': ambiguous, 'unassigned': unassigned,
                           'incomplete': sorted(self.incomplete)}
 
 
@@ -297,16 +288,14 @@ def rasterize(lines, grid):
 
 
 def seed_grid(network, assigned, grid):
-    """Rasterize known directed sections; ambiguous sections supply no seeds."""
+    """Rasterize assigned natural ways; conflicting groups remain unassigned."""
     report = {}
     seeds = np.full(grid.elevation.shape, -1, dtype='int64')
     conflicts = np.zeros(seeds.shape, dtype=bool)
     groups = sorted(set(assigned.values()))
     nearby = network.nearby(grid)
     for group in groups:
-        lines = [network.line(ident, start, end) for ident in nearby
-                 for (start, first), (end, last) in network.segments(ident)
-                 if assigned.get((first, last)) == group]
+        lines = [network.line(ident) for ident in nearby if assigned.get(ident) == group]
         cells = rasterize(lines, grid)
         conflicts |= cells & (seeds >= 0) & (seeds != group)
         seeds[cells & ~conflicts] = group
