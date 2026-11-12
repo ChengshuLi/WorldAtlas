@@ -10,7 +10,7 @@ ways. Local processing and the Neon/R2 workflow are separate:
 - [`build_boundary.py`](build_boundary.py): look up a raw source version
   in Neon, download it from R2, assemble the line, and save the boundary and source link
   in Neon. Existing notes and supporting source links are retained.
-- [`source_io.py`](../source_io.py) supplies the document, catalog, and download
+- [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) supplies the document, catalog, and download
   functions also used by other source processors.
 
 ## Local processing

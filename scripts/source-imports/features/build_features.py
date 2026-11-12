@@ -1,7 +1,7 @@
 """Import selected source features into existing Neon decision records."""
 import time
 
-from source_io import read_recipe, catalog_source, download_source, check_source
+from atlas_sources.catalog import read_recipe, catalog_source, download_source, check_source
 from features.geometry import save_features
 from features.vector import read_features
 

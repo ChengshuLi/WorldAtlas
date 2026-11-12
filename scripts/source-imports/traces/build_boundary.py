@@ -4,7 +4,7 @@ import json
 
 from psycopg.types.json import Jsonb
 
-from source_io import catalog_source, read_recipe
+from atlas_sources.catalog import catalog_source, read_recipe
 from traces.curve import construct
 
 

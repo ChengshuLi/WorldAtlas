@@ -6,7 +6,7 @@ import logging
 import os
 from pathlib import Path
 
-from source_io import read_recipe
+from atlas_sources.catalog import read_recipe
 
 
 def _trace(connect, storage, recipe_id, version, revision, work_dir, expected):

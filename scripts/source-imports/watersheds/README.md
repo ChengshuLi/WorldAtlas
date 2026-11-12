@@ -15,7 +15,8 @@ selections live in the construction record.
 | [`waterways.py`](waterways.py) | Read natural waterways and source basin polygons. |
 | [`sources.py`](sources.py) | Read source GeoJSON lines, OSM ways and river relations. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
-| [`../source_io.py`](../source_io.py) | Resolve catalog versions, verify downloads, and write geometry and source links together. |
+| [`../atlas_sources/catalog.py`](../atlas_sources/catalog.py) | Resolve catalog versions and verify downloaded or multipart files. |
+| [`../source_io.py`](../source_io.py) | Save boundary geometry and source links together; refresh assembled region checksums. |
 
 The split follows the work: read source features, prepare terrain, calculate
 drainage, then assemble the boundary. `build_boundary.py` connects those steps to

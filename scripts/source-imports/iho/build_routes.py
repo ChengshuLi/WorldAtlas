@@ -3,7 +3,7 @@
 from psycopg.types.json import Jsonb
 
 from iho.s130 import extract_routes, validate_recipe
-from source_io import read_recipe, catalog_source, download_source
+from atlas_sources.catalog import read_recipe, catalog_source, download_source
 
 
 def save_routes(database, revision, result, source, recipe):

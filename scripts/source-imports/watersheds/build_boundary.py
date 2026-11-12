@@ -10,7 +10,8 @@ import numpy as np
 from pyproj import Transformer
 from shapely.geometry import LineString
 
-from source_io import assemble_parts, catalog_source, download_source, read_recipe, save_boundary
+from atlas_sources.catalog import assemble_parts, catalog_source, download_source, read_recipe
+from source_io import save_boundary
 from watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
 from watersheds.drainage import compute_flow, possible_destinations, single_destinations
 from watersheds.sources import Sources

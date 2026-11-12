@@ -1,7 +1,8 @@
 """Build an editable Neon boundary from an OSM way archive cataloged in Neon."""
 
 from osm.ways import assemble_archive
-from source_io import read_recipe, catalog_source, download_source, save_boundary as save_mainland_boundary
+from atlas_sources.catalog import read_recipe, catalog_source, download_source
+from source_io import save_boundary as save_mainland_boundary
 
 
 def save_boundary(database, revision, geometry, source, recipe):

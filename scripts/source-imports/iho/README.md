@@ -20,7 +20,7 @@ endpoints, route definitions, and ordered endpoint links in Neon.
   selects the source lines, and extracts their endpoints in the chosen direction.
 - [`build_routes.py`](build_routes.py) reads a construction record from Neon,
   downloads the cataloged source from R2, extracts the routes, and saves them.
-- [`source_io.py`](../source_io.py) provides the catalog, document-reading, and
+- [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) provides the catalog, document-reading, and
   download functions also used by the OSM tools.
 
 ## Construction record

@@ -11,7 +11,7 @@ catalog identifies their versions and checksums.
   traced from source figures.
 - [`watersheds/`](watersheds/README.md): construct boundaries from elevation,
   natural waterways and source basin geometry.
-- [`source_io.py`](source_io.py): shared Neon recipe/catalog reads and verified
+- [`atlas_sources/`](atlas_sources/README.md): shared Neon recipe/catalog reads and verified
   R2 downloads.
 
 Geographic selections belong in Neon construction records. Reusable parsing and
@@ -22,15 +22,16 @@ inputs, to produce map cells.
 ## Code organization
 
 `run_import.py` selects the method. Each method's `build_*.py` coordinates its
-Neon/R2 workflow; the other modules implement the calculations. `source_io.py`
-contains the catalog, verified-file and mainland-boundary save functions shared
-by those workflows. Calculation modules do not query Neon or R2.
+Neon/R2 workflow; the other modules implement the calculations. `atlas_sources`
+contains the catalog and verified-file functions also used by map building.
+`source_io.py` saves mainland boundaries and refreshes their assembled region
+checksums. Calculation modules do not query Neon or R2.
 Workers calculate independently. Saves affecting the same mainland region wait
 for one another so its saved polygon checksum includes both edits.
 The assembled region must close and form a valid polygon before the save commits.
 
 Tests live beside the code they exercise. The root `test_run_import.py` covers
-method selection; `test_source_io.py` covers downloads and multipart files.
+method selection; `atlas_sources/test_catalog.py` covers downloads and multipart files.
 Each package README identifies its calculation and storage tests.
 The `__init__.py` files mark importable packages and enable test discovery.
 

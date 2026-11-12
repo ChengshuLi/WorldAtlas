@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from source_io import download_source, assemble_parts
+from atlas_sources.catalog import download_source, assemble_parts
 
 
 class DownloadTest(unittest.TestCase):
@@ -28,9 +28,9 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(self.storage.get_object.call_count, 1)
 
     def test_download_time_excludes_verification_and_cached_reuse(self):
-        import source_io
+        import atlas_sources.catalog as catalog
         clock, timing = [0.], {}
-        original = source_io.check_source
+        original = catalog.check_source
 
         def retrieve(**kwargs):
             clock[0] += 3.
@@ -41,8 +41,8 @@ class DownloadTest(unittest.TestCase):
             original(path, source)
 
         self.storage.get_object.side_effect = retrieve
-        with patch('source_io.time.monotonic', side_effect=lambda: clock[0]), \
-                patch('source_io.check_source', side_effect=verify):
+        with patch('atlas_sources.catalog.time.monotonic', side_effect=lambda: clock[0]), \
+                patch('atlas_sources.catalog.check_source', side_effect=verify):
             download_source(self.storage, self.source, self.directory, timing=timing)
             download_source(self.storage, self.source, self.directory, timing=timing)
         self.assertEqual(timing['download_seconds'], 3.)
@@ -98,7 +98,7 @@ class DownloadTest(unittest.TestCase):
     def test_multipart_download_times_accumulate_without_charging_reassembly(self):
         parts, whole, digest = self.parts()
         timing = {}
-        with patch('source_io.time.monotonic', side_effect=[0., 2., 4., 7.]):
+        with patch('atlas_sources.catalog.time.monotonic', side_effect=[0., 2., 4., 7.]):
             assemble_parts(self.storage, parts, digest, len(whole),
                            'provider.tif', self.directory, timing=timing)
             assemble_parts(self.storage, parts, digest, len(whole),
