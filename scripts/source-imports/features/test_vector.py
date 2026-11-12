@@ -49,6 +49,32 @@ class VectorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'identity'):
             read_features(self.path, self.recipe)
 
+    def test_provider_geometry_can_backfill_distinct_existing_feature_ids(self):
+        self.recipe['selections'].append({'feature_id': 'existing-alias', 'source_feature_id': 'a'})
+        result = read_features(self.path, self.recipe)
+        self.assertEqual([r['feature_id'] for r in result], ['selected', 'existing-alias'])
+        self.assertEqual(result[0]['geometry'], result[1]['geometry'])
+        self.recipe['selections'][1]['feature_id'] = 'selected'
+        with self.assertRaisesRegex(ValueError, 'unique'):
+            read_features(self.path, self.recipe)
+
+    def test_geojson_preserves_provider_numbers_and_integer_feature_ids(self):
+        geometry = {'type': 'Point', 'coordinates': [-180, 1e-24]}
+        self.path.write_text(json.dumps({'type': 'FeatureCollection', 'features': [{
+            'type': 'Feature', 'id': 42, 'properties': {}, 'geometry': geometry}]}))
+        recipe = dict(id_field='@fid', selections=[dict(feature_id='point', source_feature_id='42',
+                                                       expected_geometry_sha256=geometry_hash(geometry))])
+        self.assertEqual(read_features(self.path, recipe)[0]['geometry'], geometry)
+
+    def test_projected_geojson_is_converted_instead_of_retaining_source_coordinates(self):
+        self.path.write_text(json.dumps({'type': 'FeatureCollection',
+            'crs': {'type': 'name', 'properties': {'name': 'EPSG:3857'}}, 'features': [{
+                'type': 'Feature', 'properties': {'provider_id': 'a', 'name': 'First'},
+                'geometry': {'type': 'Point', 'coordinates': [1113194.9079327357, 0]}}]}))
+        geometry = read_features(self.path, self.recipe)[0]['geometry']
+        self.assertAlmostEqual(geometry['coordinates'][0], 10.)
+        self.assertAlmostEqual(geometry['coordinates'][1], 0.)
+
     def test_projected_source_is_converted_with_xy_axis_order(self):
         path = self.path.with_suffix('.gpkg')
         source = ogr.GetDriverByName('GPKG').CreateDataSource(str(path))

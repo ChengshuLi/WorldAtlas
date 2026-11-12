@@ -26,12 +26,32 @@ def dataset_path(path, member=None):
     return '/vsizip/' + str(path) + '/' + member
 
 
+def geojson_geometries(path, member, id_field, wanted):
+    """Preserve source coordinate values, including integer JSON numbers."""
+    path = Path(path)
+    if member is not None:
+        with ZipFile(path) as archive:
+            document = json.loads(archive.read(member))
+    else:
+        document = json.loads(path.read_bytes())
+    rows = document['features'] if document['type'] == 'FeatureCollection' else [document]
+    result = {}
+    for ordinal, row in enumerate(rows):
+        ident = row.get('id')
+        fid = ident if type(ident) is int else ordinal
+        key = str(fid if id_field == '@fid' else row.get('properties', {}).get(id_field))
+        if key in wanted:
+            result[key] = row['geometry'] if row['type'] == 'Feature' else row
+    return result
+
+
 def read_features(path, settings):
     """Extract requested provider IDs once; no continent or grid decisions."""
     selected = settings['selections']
-    wanted = {str(item['source_feature_id']): item for item in selected}
-    if not wanted or len(wanted) != len(selected):
-        raise ValueError('provider feature selections must be unique')
+    wanted = {str(item['source_feature_id']) for item in selected}
+    identifiers = [item['feature_id'] for item in selected]
+    if not wanted or len(set(identifiers)) != len(selected):
+        raise ValueError('output feature selections must be unique')
     source = ogr.Open(dataset_path(path, settings.get('member')), 0)
     if source is None:
         raise ValueError('source vector dataset cannot be opened')
@@ -56,7 +76,7 @@ def read_features(path, settings):
                     raise ValueError('selected provider feature is duplicated')
                 fids[key] = row.GetFID()
         layer.SetIgnoredFields([])
-    if fids.keys() != wanted.keys():
+    if fids.keys() != wanted:
         raise ValueError('selected provider feature is missing')
     original = layer.GetSpatialRef()
     if original is None:
@@ -71,8 +91,13 @@ def read_features(path, settings):
     if operation:
         options.SetOperation(operation)
     conversion = osr.CreateCoordinateTransformation(original, target, options)
+    source_geometries = None
+    if (source.GetDriver().GetName() == 'GeoJSON' and not operation
+            and original.IsSame(target, ['IGNORE_DATA_AXIS_TO_SRS_AXIS_MAPPING=YES'])):
+        source_geometries = geojson_geometries(path, settings.get('member'), id_field, wanted)
     result = []
-    for key, selection in wanted.items():
+    for selection in selected:
+        key = str(selection['source_feature_id'])
         row = layer.GetFeature(fids[key])
         if row is None:
             raise ValueError('selected provider feature is missing')
@@ -84,9 +109,13 @@ def read_features(path, settings):
         if geometry is None:
             raise ValueError('source feature has no geometry')
         geometry = geometry.Clone()
-        if geometry.Transform(conversion) != 0:
+        if source_geometries is None and geometry.Transform(conversion) != 0:
             raise ValueError('source geometry coordinate conversion failed')
-        value = json.loads(geometry.ExportToJson(options=['COORDINATE_PRECISION=15']))
+        # GeoJSON coordinates are already binary64 values. Keep enough decimal
+        # places to round-trip them instead of shortening provider coordinates.
+        options = ['SIGNIFICANT_FIGURES=17'] if source.GetDriver().GetName() == 'GeoJSON' else []
+        value = (source_geometries[key] if source_geometries is not None
+                 else json.loads(geometry.ExportToJson(options=options)))
         validate_geometry(value)
         expected = selection.get('expected_geometry_sha256')
         if expected and geometry_hash(value) != expected:

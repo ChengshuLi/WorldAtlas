@@ -25,6 +25,9 @@ A `selected_vector_features` construction contains `source_id`, `source_version`
 `expected_geometry_sha256`. Select `member` for an archived dataset and `layer`
 when a file contains several layers. An explicit `coordinate_operation` is
 available when a source needs a particular documented CRS conversion.
+WGS84 GeoJSON coordinates retain their original numeric values. Distinct existing
+output IDs may select the same provider feature when backfilling current records;
+provider IDs must still identify one source feature.
 
 The `s130_areas` method uses the same storage workflow and
 [`iho/areas.py`](../iho/areas.py) for complete S-130 surfaces and collections.
