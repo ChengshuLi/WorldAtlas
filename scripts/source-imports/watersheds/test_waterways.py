@@ -35,14 +35,14 @@ class WaterwayTests(unittest.TestCase):
                           self.way(11, [3, 1], 'stream') + self.way(12, [4, 3], 'stream') +
                           self.way(13, [5, 4], 'canal') + self.way(14, [6, 5], 'ditch'))
         groups, report = Waterways([path]).groups({37: ['10']})
-        self.assertEqual(groups, {'10': 37, '11': 37, '12': 37})
+        self.assertEqual(groups, {('1', '2'): 37, ('3', '1'): 37, ('4', '3'): 37})
         self.assertEqual(report, {'ambiguous': [], 'unassigned': [], 'incomplete': []})
 
     def test_conflicting_downstream_groups_remain_ambiguous(self):
         path = self.write('network.osm', ''.join(self.node(i, lon=i / 10) for i in [1, 2, 3]) +
                           self.way(10, [1, 2]) + self.way(20, [2, 3]))
         assigned, report = Waterways([path]).groups({1: ['10'], 2: ['20']})
-        self.assertNotIn('10', assigned)
+        self.assertNotIn(('1', '2'), assigned)
         self.assertIn('10', report['ambiguous'])
 
     def test_tributary_at_an_internal_vertex_keeps_its_downstream_connection(self):
@@ -50,7 +50,7 @@ class WaterwayTests(unittest.TestCase):
                           self.way(10, [1, 2, 3, 4]) + self.way(20, [5, 3], 'stream'))
         graph = Waterways([path])
         assigned, report = graph.groups({37: ['10']})
-        self.assertEqual(assigned, {'10': 37, '20': 37})
+        self.assertEqual(assigned, {('1', '3'): 37, ('3', '4'): 37, ('5', '3'): 37})
         self.assertEqual(report['unassigned'], [])
         self.assertEqual(list(graph.line(10).coords), [(i / 10, 1.) for i in range(1, 5)])
 
@@ -59,12 +59,64 @@ class WaterwayTests(unittest.TestCase):
         new = self.write('new.osm', self.node(1, 2, 1, 2))
         self.assertEqual(Waterways([new, old]).nodes['1'], (2., 1.))
 
+    def test_later_memberships_can_reference_nodes_in_an_earlier_pbf(self):
+        first = self.root / 'first.osm.pbf'
+        with osmium.SimpleWriter(str(first)) as writer:
+            for ident in (1, 2, 3):
+                writer.add_node(osmium.osm.mutable.Node(id=ident, version=1,
+                                                        location=(float(ident), 0.)))
+            writer.add_way(osmium.osm.mutable.Way(id=10, version=1, nodes=[1, 2],
+                                                 tags={'waterway': 'stream'}))
+        second = self.root / 'second.osm.pbf'
+        with osmium.SimpleWriter(str(second)) as writer:
+            writer.add_way(osmium.osm.mutable.Way(id=10, version=2, nodes=[1, 3],
+                                                 tags={'waterway': 'stream'}))
+        xml = self.write('second.osm', self.way(10, [1, 3]).replace('version="1"', 'version="2"'))
+        for later in (second, xml):
+            for paths in ([first, later], [later, first]):
+                with self.subTest(later=later.suffix, order=paths):
+                    network = Waterways(paths, natural_only=True)
+                    self.assertEqual(network.incomplete, set())
+                    self.assertEqual(network.ways['10'].version, 2)
+                    self.assertEqual(list(network.line(10).coords), [(1., 0.), (3., 0.)])
+                    self.assertEqual(network.groups({7: ['10']})[0], {('1', '3'): 7})
+
+    def test_conflicting_same_version_nodes_across_pbfs_are_rejected(self):
+        paths = []
+        for name, longitude in [('first', 1.), ('second', 2.)]:
+            path = self.root / (name + '.osm.pbf')
+            with osmium.SimpleWriter(str(path)) as writer:
+                writer.add_node(osmium.osm.mutable.Node(id=1, version=1, location=(longitude, 0.)))
+                writer.add_node(osmium.osm.mutable.Node(id=2, version=1, location=(3., 0.)))
+                writer.add_way(osmium.osm.mutable.Way(id=10, version=1, nodes=[1, 2],
+                                                     tags={'waterway': 'stream'}))
+            paths.append(path)
+        with self.assertRaisesRegex(ValueError, 'same-version OSM node'):
+            Waterways(paths, natural_only=True)
+
+    def test_latest_pbf_classification_can_remove_all_natural_memberships(self):
+        paths = []
+        for version, kind in [(1, 'stream'), (2, 'canal')]:
+            path = self.root / f'version-{version}.osm.pbf'
+            with osmium.SimpleWriter(str(path)) as writer:
+                for ident in (1, 2):
+                    writer.add_node(osmium.osm.mutable.Node(id=ident, version=1,
+                                                            location=(float(ident), 0.)))
+                writer.add_way(osmium.osm.mutable.Way(id=10, version=version, nodes=[1, 2],
+                                                     tags={'waterway': kind}))
+            paths.append(path)
+        for ordered in (paths, paths[::-1]):
+            network = Waterways(ordered, natural_only=True)
+            self.assertEqual(network.ways, {})
+            self.assertEqual(network.nodes, {})
+            self.assertEqual(network.incomplete, set())
+
     def test_reviewed_reverse_uses_the_connected_downstream_network(self):
         path = self.write('network.osm', ''.join(self.node(i, lon=i / 10) for i in range(1, 5)) +
                           self.way(10, [1, 2, 3]) + self.way(20, [2, 4], 'stream'))
         network = Waterways([path], reverse=['20', '20'])
         assigned, report = network.groups({37: ['10']})
-        self.assertEqual(assigned, {'10': 37, '20': 37})
+        self.assertEqual(assigned, {('1', '2'): 37, ('2', '3'): 37, ('4', '2'): 37})
         self.assertEqual(report['ambiguous'], [])
         self.assertEqual(list(network.line(20).coords), [(.4, 1.), (.2, 1.)])
         self.assertEqual(network.ways['20'].version, 1)

@@ -32,9 +32,11 @@ class Waterways:
         self.nodes, self.ways, self.relations = {}, {}, {}
         self.natural_only = natural_only
         self._node_versions, self._way_versions = {}, {}
+        pbf_paths = []
         for path in paths:
             if Path(path).suffix == '.pbf':
-                self._read_pbf(path)
+                self._read_pbf_memberships(path)
+                pbf_paths.append(path)
                 continue
             with ExitStack() as stack:
                 if zipfile.is_zipfile(path):
@@ -65,8 +67,10 @@ class Waterways:
                                               for m in element.findall('member')))
                             self._relation(ident, relation)
                             element.clear()
+        wanted = {node for way in self.ways.values() for node in way.nodes} if natural_only else None
+        for path in pbf_paths:
+            self._read_pbf_nodes(path, wanted)
         if natural_only:
-            wanted = {node for way in self.ways.values() for node in way.nodes}
             self.nodes = {node: point for node, point in self.nodes.items() if node in wanted}
         del self._node_versions, self._way_versions
         # A reviewed source-direction correction changes topology, not coordinates.
@@ -93,8 +97,7 @@ class Waterways:
                 seen.add(node)
         self.topology_nodes = junctions
         for ident in sorted(self.natural - self.incomplete):
-            nodes = [(i, node) for i, node in enumerate(self.ways[ident].nodes) if node in junctions]
-            for (start, first), (end, second) in zip(nodes, nodes[1:]):
+            for (start, first), (end, second) in self.segments(ident):
                 self.upstream[second].add(first)
                 self.downstream[first].add(second)
                 self.edge_sources[first, second].append((ident, start, end))
@@ -131,13 +134,8 @@ class Waterways:
         if old is None or relation[0] >= old[0]:
             self.relations[ident] = relation
 
-    def _read_pbf(self, path):
-        """Read way memberships first, then the exact nodes those ways need.
-
-        Both passes stream the full provider file. Natural drainage requests
-        omit unrelated roads and buildings; source-geometry requests retain
-        all supplied ways and relations.
-        """
+    def _read_pbf_memberships(self, path):
+        """Merge memberships from every source before filtering any PBF nodes."""
         import osmium
 
         owner = self
@@ -154,24 +152,38 @@ class Waterways:
                         (kinds[m.type], str(m.ref), m.role) for m in relation.members)))
 
         Memberships().apply_file(str(path))
-        wanted = {int(node) for way in self.ways.values() for node in way.nodes}
+
+    def _read_pbf_nodes(self, path, wanted):
+        """Read coordinates needed by the final, merged source memberships."""
+        import osmium
+
+        owner = self
 
         class Coordinates(osmium.SimpleHandler):
             def node(self, node):
                 owner._node(str(node.id), node.version, (node.lon, node.lat))
 
-        filters = [osmium.filter.IdFilter(wanted)] if self.natural_only else []
+        filters = [osmium.filter.IdFilter({int(node) for node in wanted})] if self.natural_only else []
         Coordinates().apply_file(str(path), filters=filters)
 
-    def line(self, way_id):
+    def segments(self, way_id):
+        """Source index/node pairs delimiting each directed topology segment."""
+        anchors = [(i, node) for i, node in enumerate(self.ways[str(way_id)].nodes)
+                   if node in self.topology_nodes]
+        return zip(anchors, anchors[1:])
+
+    def line(self, way_id, start=0, end=None):
+        """Keep original coordinates from start through end, including both indices."""
         way_id = str(way_id)
-        if way_id in self._lines:
-            return self._lines[way_id]
         way = self.ways[way_id]
+        end = len(way.nodes) - 1 if end is None else end
+        key = way_id, start, end
+        if key in self._lines:
+            return self._lines[key]
         if len(way.nodes) < 2 or any(n not in self.nodes for n in way.nodes):
             raise ValueError('selected OSM way has missing nodes')
-        self._lines[way_id] = LineString([self.nodes[n] for n in way.nodes])
-        return self._lines[way_id]
+        self._lines[key] = LineString([self.nodes[n] for n in way.nodes[start:end + 1]])
+        return self._lines[key]
 
     def nearby(self, grid):
         """Select ways intersecting the grid, preserving each complete geometry."""
@@ -191,7 +203,7 @@ class Waterways:
         """Include all mapped natural tributaries reaching the selected ways.
 
         Keys are actual construction group IDs; values are selected downstream
-        way IDs. Ways reaching multiple groups are reported as ambiguous.
+        way IDs. Sections reaching multiple groups are reported as ambiguous.
         """
         roots = {}
         for group, ways in groups.items():
@@ -239,6 +251,7 @@ class Waterways:
         return assigned, report
 
     def _assign(self, roots):
+        """Map directed (start_node, end_node) segments to known group IDs."""
         reaches = {}
         for group, initial in roots.items():
             seen = set(initial)
@@ -249,17 +262,17 @@ class Waterways:
                         seen.add(node)
                         todo.append(node)
             reaches[int(group)] = seen
-        assigned, ambiguous, unassigned = {}, [], []
-        for ident in sorted(self.natural - self.incomplete):
-            destination = self.ways[ident].nodes[-1]
+        assigned, ambiguous, unassigned = {}, set(), set()
+        for edge, references in sorted(self.edge_sources.items()):
+            _, destination = edge
             matches = [group for group, nodes in reaches.items() if destination in nodes]
             if len(matches) == 1:
-                assigned[ident] = matches[0]
+                assigned[edge] = matches[0]
             elif matches:
-                ambiguous.append(ident)
+                ambiguous.update(ident for ident, _, _ in references)
             else:
-                unassigned.append(ident)
-        return assigned, {'ambiguous': ambiguous, 'unassigned': unassigned,
+                unassigned.update(ident for ident, _, _ in references)
+        return assigned, {'ambiguous': sorted(ambiguous), 'unassigned': sorted(unassigned),
                           'incomplete': sorted(self.incomplete)}
 
 
@@ -284,14 +297,16 @@ def rasterize(lines, grid):
 
 
 def seed_grid(network, assigned, grid):
-    """Rasterize assigned natural ways; conflicting groups remain unassigned."""
+    """Rasterize known directed sections; ambiguous sections supply no seeds."""
     report = {}
     seeds = np.full(grid.elevation.shape, -1, dtype='int64')
     conflicts = np.zeros(seeds.shape, dtype=bool)
     groups = sorted(set(assigned.values()))
     nearby = network.nearby(grid)
     for group in groups:
-        lines = [network.line(ident) for ident in nearby if assigned.get(ident) == group]
+        lines = [network.line(ident, start, end) for ident in nearby
+                 for (start, first), (end, last) in network.segments(ident)
+                 if assigned.get((first, last)) == group]
         cells = rasterize(lines, grid)
         conflicts |= cells & (seeds >= 0) & (seeds != group)
         seeds[cells & ~conflicts] = group

@@ -107,6 +107,11 @@ def construct(recipe, files):
             if required and len(domains) != 1:
                 raise ValueError('a stream-head connection requires one continuous terrain domain')
             graph, domain_reports, relevant_ways = Divide(), [], set()
+            sinks = [(sources.point(sink['point'], lines), int(sink['group']))
+                     for sink in settings.get('closed_sinks', [])]
+            if any(group < 0 for _, group in sinks):
+                raise ValueError('closed drainage destinations require known group IDs')
+            covered_sinks = set()
             for domain in domains:
                 bounds = bounds_of(domain)
                 output_bounds = domain.get('output_bounds') if isinstance(domain, dict) else None
@@ -128,13 +133,16 @@ def construct(recipe, files):
                         raise ValueError('source stream head conflicts with a mapped drainage group')
                     seeds[row, column] = group
                 closed = []
-                for sink in settings.get('closed_sinks', []):
-                    row, column = cell_at(grid, sources.point(sink['point'], lines))
-                    group = int(sink['group'])
-                    if group < 0 or seeds[row, column] not in (-1, group):
+                for index, (point, group) in enumerate(sinks):
+                    cell = cell_at(grid, point, required=False)
+                    if cell is None:
+                        continue
+                    row, column = cell
+                    if seeds[row, column] not in (-1, group):
                         raise ValueError('closed drainage destination conflicts with a mapped group')
                     seeds[row, column] = group
                     closed.append((row, column))
+                    covered_sinks.add(index)
                 outlets, coastal_labels, coast_report = None, None, None
                 if 'ocean_mask' in settings:
                     selection = settings['ocean_mask']
@@ -184,6 +192,8 @@ def construct(recipe, files):
                 })
                 LOGGER.info('%s: %s cells, %.2f seconds', name, labels.shape,
                             domain_reports[-1]['seconds'])
+            if len(covered_sinks) != len(sinks):
+                raise ValueError('closed drainage destination is outside every analysis domain')
             divides[name] = graph
             network_report = dict(network_report)
             for category in ('ambiguous', 'unassigned'):

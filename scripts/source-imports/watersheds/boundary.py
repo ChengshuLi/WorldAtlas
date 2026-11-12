@@ -243,12 +243,15 @@ def assemble(sections, joins, start, end):
     return {'type': 'LineString', 'coordinates': [list(map(float, point)) for point in coordinates]}
 
 
-def cell_at(grid, point):
+def cell_at(grid, point, *, required=True):
+    """Find a source point's cell; optional selections may lie in another crop."""
     x, y = Transformer.from_crs(4326, grid.crs, always_xy=True).transform(*point, errcheck=True)
     left, a, _, top, _, e = grid.transform
     row, column = math.floor((y - top) / e), math.floor((x - left) / a)
     if not (0 <= row < grid.elevation.shape[0] and 0 <= column < grid.elevation.shape[1]):
-        raise ValueError('selected source point is outside the terrain domain')
+        if required:
+            raise ValueError('selected source point is outside the terrain domain')
+        return None
     return row, column
 
 

@@ -62,6 +62,24 @@ def fixtures(directory):
 
 
 class ConstructionTests(unittest.TestCase):
+    def test_closed_sink_is_applied_only_to_domains_that_contain_it(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            expected, _ = construct(recipe, files)
+            recipe['terrains']['ridge']['domains'] = [[0, .003, .006, .006], [0, 0, .006, .003]]
+            recipe['terrains']['ridge']['closed_sinks'] = [
+                {'point': {'point': [.001, .005]}, 'group': 3}]
+            actual, _ = construct(recipe, files)
+            self.assertEqual(actual, expected)
+
+    def test_closed_sink_outside_all_domains_is_reported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            recipe['terrains']['ridge']['closed_sinks'] = [
+                {'point': {'point': [.02, .02]}, 'group': 3}]
+            with self.assertRaisesRegex(ValueError, 'outside every analysis domain'):
+                construct(recipe, files)
+
     def test_boundary_can_start_and_end_on_a_selected_divide(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))

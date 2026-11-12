@@ -8,7 +8,7 @@ import shapefile
 from shapely.geometry import LineString
 
 from watersheds.terrain import Grid
-from watersheds.waterways import Basins, Waterways
+from watersheds.waterways import Basins, Waterways, seed_grid
 
 
 class BasinTests(unittest.TestCase):
@@ -149,8 +149,51 @@ class BasinTests(unittest.TestCase):
                         '<way id="20"><nd ref="3"/><nd ref="4"/>'
                         '<tag k="waterway" v="stream"/></way></osm>')
         assigned, report = Waterways([path]).basin_groups(self.basins())
-        self.assertEqual(assigned, {'10': 3, '20': 7})
+        self.assertEqual(assigned, {('1', '2'): 3, ('3', '4'): 7})
         self.assertEqual(report['unassigned'], [])
+
+    def test_fork_seeds_do_not_depend_on_osm_way_segmentation(self):
+        nodes = ('<node id="1" lon="1" lat="1.75"/>'
+                 '<node id="2" lon="1" lat="1"/>'
+                 '<node id="3" lon="0.25" lat="0.25"/>'
+                 '<node id="4" lon="1.75" lat="0.25"/>')
+
+        def way(ident, members):
+            return (f'<way id="{ident}">' + ''.join(f'<nd ref="{n}"/>' for n in members) +
+                    '<tag k="waterway" v="stream"/></way>')
+
+        grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        seeds = []
+        for name, parts in [('unsplit', [way(10, [1, 2, 3]), way(20, [2, 4])]),
+                            ('split', [way(10, [1, 2]), way(11, [2, 3]), way(20, [2, 4])])]:
+            path = self.root / (name + '.osm')
+            path.write_text('<osm>' + nodes + ''.join(parts) + '</osm>')
+            network = Waterways([path])
+            assigned, report = network.basin_groups(self.basins())
+            self.assertEqual(assigned, {('2', '3'): 3, ('2', '4'): 7})
+            self.assertIn('10', report['ambiguous'])
+            seeds.append(seed_grid(network, assigned, grid)[0])
+        np.testing.assert_array_equal(seeds[0], seeds[1])
+        self.assertEqual(seeds[0][0, 2], -1)
+        self.assertEqual(seeds[0][3, 0], 3)
+        self.assertEqual(seeds[0][3, 3], 7)
+
+    def test_splitting_at_an_ordinary_shape_node_keeps_the_same_seeds(self):
+        nodes = ('<node id="1" lon="0.25" lat="1.75"/>'
+                 '<node id="2" lon="0.25" lat="1"/>'
+                 '<node id="3" lon="0.25" lat="0.25"/>')
+        grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        results = []
+        for name, members in [('unsplit', [(1, 2, 3)]), ('split', [(1, 2), (2, 3)])]:
+            body = ''.join('<way id="' + str(i) + '">' +
+                           ''.join(f'<nd ref="{n}"/>' for n in part) +
+                           '<tag k="waterway" v="stream"/></way>' for i, part in enumerate(members))
+            path = self.root / (name + '.osm')
+            path.write_text('<osm>' + nodes + body + '</osm>')
+            network = Waterways([path])
+            assigned, _ = network.basin_groups(self.basins())
+            results.append(seed_grid(network, assigned, grid)[0])
+        np.testing.assert_array_equal(*results)
 
     def test_downstream_trace_can_cross_several_uncovered_estuary_ways(self):
         path = self.root / 'estuary.osm'
@@ -166,8 +209,8 @@ class BasinTests(unittest.TestCase):
                         '<tag k="waterway" v="river"/></way></osm>')
         network = Waterways([path])
         assigned, report = network.basin_groups(self.basins())
-        self.assertEqual(assigned['10'], 7)
-        self.assertEqual(assigned['20'], 7)
+        self.assertEqual(assigned[('1', '2')], 7)
+        self.assertEqual(assigned[('2', '3')], 7)
         self.assertIn({'way': '20', 'group': 7, 'point': [2., 1.]},
                       report['basin_exit_before_way_endpoint'])
         self.assertEqual(network.basin_groups(self.basins({3: [100]}))[0], {})

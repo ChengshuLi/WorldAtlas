@@ -75,6 +75,10 @@ Source basin values identify drainage groups; unknown drainage has its own value
 Use `waterway_groups` for explicitly identified downstream ways; otherwise natural
 networks are traced to their source-backed exit basins. Unassigned, ambiguous and
 incomplete networks are reported.
+Assign drainage between junctions, independently of how OSM divides a stream into
+way records. At a fork reaching different groups, its upstream section stays
+ambiguous while the known outgoing sections supply seeds. Reports list a way as
+ambiguous or unassigned when any of its sections has that status.
 If source evidence establishes that a mapped way points upstream, list its ID in
 `reverse_waterways`. The constructor reverses its direction before tracing the
 network; its coordinates and source version stay unchanged. Keep the supporting
@@ -90,7 +94,8 @@ Stop at an unselected or ambiguous source basin; a path without a source-backed
 destination remains unassigned.
 
 OSM inputs can be XML, ZIP archives of XML responses, or provider PBF files.
-The PBF reader streams memberships and coordinates in two passes. Natural
+The PBF reader merges memberships from all inputs before its coordinate pass, so
+a later source can reference a point supplied by an earlier file. Natural
 drainage includes rivers and streams; full coordinates remain available for
 geometry. Shared nodes and way endpoints preserve downstream connections without
 turning every shape vertex into a separate graph junction. Raster seeding selects
@@ -119,6 +124,8 @@ heights remain unchanged. Known closed drainage destinations can be supplied as
 `closed_sinks`, each with a source point and group ID. Canals and drains are
 excluded from natural drainage; an explicitly selected geographic boundary can
 still follow their source geometry.
+Apply each closed sink in the analysis crops containing it. Report a selected
+sink outside every crop instead of silently omitting it.
 
 For coastal terrain, `ocean_mask` selects provider mask sources and their ocean
 codes. Read categorical masks with nearest-neighbor alignment. Stop drainage at

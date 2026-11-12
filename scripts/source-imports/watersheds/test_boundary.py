@@ -87,6 +87,24 @@ class BoundaryTests(unittest.TestCase):
                                   partitioned.nearest_vertex(complete.coordinates[(4, 1)]))
         self.assertTrue(route.is_simple)
 
+    def test_output_rectangles_must_cover_the_route_between_selected_joins(self):
+        grid = Grid(np.zeros((5, 6)), (0., .01, 0., .05, 0., -.01), 'EPSG:4326')
+        labels = np.full((5, 6), 2)
+        for column, boundary in enumerate((2, 2, 4, 4, 2, 2)):
+            labels[:boundary, column] = 1
+        graphs = []
+        for bottom in (.02, 0.):
+            graph = Divide()
+            graph.add_grid(grid, labels, [(1, 2)], [0., 0., .03, .05])
+            graph.add_grid(grid, labels, [(1, 2)], [.03, bottom, .06, .05])
+            graphs.append(graph)
+        start, end = (0., .03), (.06, .03)
+        with self.assertRaisesRegex(ValueError, 'disconnected'):
+            graphs[0].route(graphs[0].nearest_vertex(start), graphs[0].nearest_vertex(end))
+        route = graphs[1].route(graphs[1].nearest_vertex(start), graphs[1].nearest_vertex(end))
+        self.assertLess(min(point[1] for point in route.coords), .02)
+        self.assertTrue(route.is_simple)
+
     def test_final_assembly_preserves_endpoints_and_has_shared_joins(self):
         graph = self.graph()
         before = LineString([(-.01, -.01), (0., 0.), (0., .01)])
