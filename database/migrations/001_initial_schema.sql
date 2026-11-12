@@ -205,6 +205,14 @@ CREATE TABLE atlas.decision_features (
  source_feature_id text NOT NULL CHECK (length(trim(source_feature_id)) > 0),
  geometry_sha256 text NOT NULL CHECK (geometry_sha256 ~ '^[0-9a-f]{64}$'),
  evidence jsonb NOT NULL CHECK (jsonb_typeof(evidence) = 'object'),
+ geometry jsonb,
+ coordinate_reference text,
+ CONSTRAINT decision_features_geometry CHECK (
+   (geometry IS NULL AND coordinate_reference IS NULL) OR
+   (geometry IS NOT NULL AND jsonb_typeof(geometry)='object'
+    AND geometry ? 'type' AND geometry ? 'coordinates'
+    AND coordinate_reference IS NOT NULL AND length(trim(coordinate_reference))>0)
+ ),
  PRIMARY KEY (revision, feature_id),
  FOREIGN KEY (source_id, source_version) REFERENCES atlas.source_assets(source_id, version)
 );

@@ -5,7 +5,8 @@ construction decisions in Neon. Raw source files stay in R2; Neon's source
 catalog identifies their versions and checksums.
 
 - [`osm/`](osm/README.md): join archived OpenStreetMap ways into a boundary.
-- [`iho/`](iho/README.md): import selected IHO S-130 ocean boundary routes.
+- [`iho/`](iho/README.md): import selected IHO S-130 routes and sea areas.
+- [`features/`](features/README.md): import selected vector geometry into Neon.
 - [`traces/`](traces/README.md): construct final boundaries from reviewed points
   traced from source figures.
 - [`watersheds/`](watersheds/README.md): construct boundaries from elevation,
@@ -31,7 +32,7 @@ The assembled region must close and form a valid polygon before the save commits
 Tests live beside the code they exercise. The root `test_run_import.py` covers
 method selection; `test_source_io.py` covers downloads and multipart files.
 Each package README identifies its calculation and storage tests.
-The four `__init__.py` files mark importable packages and enable test discovery.
+The `__init__.py` files mark importable packages and enable test discovery.
 
 The project [`environment.yml`](../../environment.yml) pins Python, GDAL/PROJ and Python
 packages for these importers. It also installs PostgreSQL for disposable database
@@ -57,6 +58,8 @@ The command reads the record from `atlas.structured_documents`. Its JSON
 | `s130_rhumb_routes` | `iho.build_routes` |
 | `smooth_latitude_trace` | `traces.build_boundary` |
 | `watershed_boundary` | `watersheds.build_boundary` |
+| `selected_vector_features` | `features.build_features` |
+| `s130_areas` | `features.build_features` with `iho.areas` |
 
 The record ID identifies data; its name does not select Python code.
 OSM, IHO and watershed imports additionally require `--revision`,

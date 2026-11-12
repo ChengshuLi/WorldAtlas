@@ -1,4 +1,17 @@
-# IHO S-130 route processing
+# IHO S-130 geographic geometry
+
+[`areas.py`](areas.py) imports selected complete sea areas into
+`atlas.decision_features` through the common
+[`feature import workflow`](../features/README.md). Select areas by their stable
+provider MRN. Linked parts sharing one MRN are combined; a parent with its own
+surface retains that surface. Holes, dateline crossings and explicit polar caps
+are preserved. `test_areas.py` covers those cases.
+
+An `s130_areas` construction supplies `source_id`, `source_version`, `basis`,
+`gml_member`, `gml_sha256` and `selections`. Each selection specifies the output
+`feature_id` and provider MRN in `source_feature_id`.
+
+## Ocean boundary routes
 
 Read selected rhumb construction lines from an IHO S-130 dataset and save their
 endpoints, route definitions, and ordered endpoint links in Neon.

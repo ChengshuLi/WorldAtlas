@@ -32,11 +32,19 @@ def _watershed(connect, storage, recipe_id, version, revision, work_dir, expecte
     return build_boundary(connect, storage, recipe_id, version, revision, work_dir)
 
 
+def _features(connect, storage, recipe_id, version, revision, work_dir, expected):
+    from features.build_features import build_features
+    with connect() as database:
+        return build_features(database, storage, recipe_id, version, revision, work_dir)
+
+
 IMPORTERS = {
     'smooth_latitude_trace': _trace,
     'osm_way_chain': _osm,
     's130_rhumb_routes': _iho,
     'watershed_boundary': _watershed,
+    'selected_vector_features': _features,
+    's130_areas': _features,
 }
 
 
