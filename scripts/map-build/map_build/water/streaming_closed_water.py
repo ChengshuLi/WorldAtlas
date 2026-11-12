@@ -219,7 +219,7 @@ def mark_cut_contacts(db,path,width,height,batch_size=4096):
   raise ValueError('independent barrier scan contradicts partition')
 
 
-def assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,pending_file):
+def assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,pending_file,shores=None):
  step=360/width;last=-1;pending_cells=assigned_cells=0;pending_count=direct_count=mixed_count=0
  # Page by stable root key to avoid retaining all components or modifying an active cursor.
  cache_key=None;edges=indexes=None
@@ -241,8 +241,11 @@ def assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,pe
      db.execute("UPDATE components SET method='direct',code=? WHERE root=?",(participants[0][2],root))
      assigned_cells+=expected;direct_count+=1;continue
     bbox=db.execute('SELECT MIN(a),MAX(b),MIN(y),MAX(y)+1 FROM spans WHERE root=?',(root,)).fetchone()
-    crop=core.shore.crop_bounds(bbox,width,height,step,pad);key=(tuple(crop),tuple(p[1] for p in participants))
-    if key!=cache_key:
+    crop=(0,width,0,height) if shores is not None else core.shore.crop_bounds(bbox,width,height,step,pad)
+    key=(tuple(crop),tuple(p[1] for p in participants))
+    if shores is not None:
+     indexes=shores.indexes
+    elif key!=cache_key:
      # Release the prior tree before constructing a different one.
      edges=indexes=None;cache_key=None
      edges=core.shore.centers_for_crop(physical,land,crop,width,height,step,[p[1] for p in participants])
@@ -268,13 +271,13 @@ def assign_components(db,physical,land,width,height,pairs,tolerance,pad,chunk,pe
          'direct_components':direct_count,'mixed_components':mixed_count}
 
 
-def write_assignments(db,path,decision_id,width,height):
+def write_assignments(db,path,decision_id,width,height,water_codes):
  query='''SELECT s.y,s.a,s.b,c.code,s.root FROM spans s JOIN components c ON c.root=s.root WHERE c.method='direct'
           UNION ALL SELECT y,a,b,code,root FROM mixed ORDER BY 1,2'''
  count=spans=0;last_y=-1;last_end=0;first=True
  with create_gzip_text_exclusive(path,encoding='utf8') as f:
   for y,a,b,code,root in db.execute(query):
-   if not (0<=y<height and 0<=a<b<=width and 1<=code<=6) or y<last_y or (y==last_y and a<last_end):
+   if not (0<=y<height and 0<=a<b<=width and code in water_codes) or y<last_y or (y==last_y and a<last_end):
     raise ValueError('invalid or overlapping closed-water output')
    if y!=last_y:
     if last_y>=0:f.write(']}\n')
@@ -287,10 +290,12 @@ def write_assignments(db,path,decision_id,width,height):
 
 
 def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_rows,component_spans,barrier_edges,
-        out,width,height,pad,inputs,*,chunk=5000,verify_inputs=None,processing_started=None):
+        out,width,height,pad,inputs,*,chunk=5000,verify_inputs=None,processing_started=None,shores=None):
  if processing_started is None:processing_started=time.perf_counter()
  if chunk<=0 or not math.isfinite(pad) or pad<=0:raise ValueError('invalid chunk or halo')
  decision,pairs,tolerance=core.policy(snapshot)
+ if shores is not None and ((shores.grid.width,shores.grid.height)!=(width,height) or shores.pairs!=pairs):
+  raise ValueError('enclosed-water policy and shoreline index use different grids or bindings')
  code_paths={'streaming_closed_water':Path(__file__),'partition_json_stream':Path(partition_json_stream.__file__),
              'closed_water_core':Path(core.__file__),'shared_nearest':Path(core.shore.__file__),
              'interval_nearest':Path(interval_nearest.__file__)}
@@ -307,8 +312,8 @@ def run(snapshot,snapshot_sha,physical,prefill,land,partition_path,component_row
   cells,nspans=measure('ingest_spans',ingest_spans,db,component_rows,component_spans,width,height,meta)
   measure('classify_boundaries',classify_boundaries,db,physical,prefill,width,height,pairs)
   measure('mark_cut_contacts',mark_cut_contacts,db,barrier_edges,width,height)
-  stats=measure('assign_components',assign_components,db,physical,land,width,height,pairs,tolerance,pad,chunk,out/'pending-components.jsonl.gz')
-  count,output_spans=measure('write_assignments',write_assignments,db,out/'closed-water-assignments.jsonl.gz',decision['id'],width,height)
+  stats=measure('assign_components',assign_components,db,physical,land,width,height,pairs,tolerance,pad,chunk,out/'pending-components.jsonl.gz',shores)
+  count,output_spans=measure('write_assignments',write_assignments,db,out/'closed-water-assignments.jsonl.gz',decision['id'],width,height,{p[2] for p in pairs})
   if count!=stats['assigned_cells'] or count+stats['pending_cells']!=cells:raise ValueError('closed-water cell conservation failed')
   db.commit();db.close();db=None
   if verify_inputs:verify_inputs()

@@ -203,15 +203,31 @@ def nearest_class_bounds(lat, lon, points, pairs, indexes, *, upper_limit=None):
     lower = np.empty((count, len(pairs)), dtype=np.float64)
     targets_lon = np.empty_like(lower)
     targets_lat = np.empty_like(lower)
+    query_options = {}
+    search_limit = None
+    if upper_limit is not None and count:
+        # A coastal-band query need not find a shore on a distant continent.
+        # Expand the query's exact-distance threshold using the same global
+        # ellipsoid lower bound as the certificates. Missing neighbors then
+        # have a finite proven lower bound, rather than being treated as absent.
+        search_limit = float(np.max(upper_limit)) + .01
+        if search_limit + .001 < math.pi * MIN_RADIUS:
+            chord_limit = 2 * math.sin((search_limit + .001) / (2 * MIN_RADIUS))
+            query_options['distance_upper_bound'] = np.nextafter(chord_limit, np.inf)
     for col, (_, code, _) in enumerate(pairs):
         data, tree = indexes[code]
-        chord, ix = tree.query(points, k=1, workers=1)
+        chord, ix = tree.query(points, k=1, workers=1, **query_options)
+        found = np.isfinite(chord)
         angle = 2 * np.arcsin(np.clip(chord / 2, 0, 1))
         # Chord itself stays a conservative angular bound near antipodes,
         # where asin amplifies floating-point error.
         lower[:, col] = np.maximum(0, MIN_RADIUS * np.where(chord < 1.99, angle, chord) - .001)
-        targets_lon[:, col] = data['lon'][ix]
-        targets_lat[:, col] = data['lat'][ix]
+        if search_limit is not None:
+            lower[~found, col] = search_limit
+        targets_lon[:, col] = 0
+        targets_lat[:, col] = 0
+        targets_lon[found, col] = data['lon'][ix[found]]
+        targets_lat[found, col] = data['lat'][ix[found]]
     best = np.argmin(lower, axis=1)
     rows = np.arange(count)
     active = np.ones(count, dtype=bool) if upper_limit is None else lower[rows, best] <= upper_limit

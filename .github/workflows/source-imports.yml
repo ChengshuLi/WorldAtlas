@@ -5,9 +5,13 @@ on:
       - 'environment.yml'
       - 'scripts/source-imports/**'
       - 'scripts/map-build/pipeline/**'
+      - 'scripts/map-build/map_build/**'
+      - 'scripts/map-build/water/**'
+      - 'scripts/map-build/stages/ocean/**'
       - 'scripts/map-build/stages/land/stage2-geodesic-20261104/contracts.py'
       - 'scripts/map-build/stages/land/stage2-geodesic-20261104/seed-producer/**'
       - 'database/migrations/001_initial_schema.sql'
+      - 'database/upgrades/**'
       - '.github/workflows/source-imports.yml'
 permissions:
   contents: read
@@ -18,6 +22,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
+    env:
+      TMPDIR: ${{ runner.temp }}
+      TMP: ${{ runner.temp }}
+      TEMP: ${{ runner.temp }}
     steps:
       - uses: actions/checkout@v5
       - uses: mamba-org/setup-micromamba@v3
@@ -28,7 +36,7 @@ jobs:
       - name: Test source imports with disposable PostgreSQL
         shell: bash -el {0}
         env:
-          PYTHONPATH: scripts/source-imports
+          PYTHONPATH: scripts/source-imports:scripts/map-build
           PROJ_NETWORK: 'OFF'
         run: |
           set -euo pipefail
@@ -41,12 +49,15 @@ jobs:
             -f database/migrations/001_initial_schema.sql
           export WORLDATLAS_TEST_DATABASE_URL="postgresql://postgres@/postgres?host=$database_dir"
           time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
+          time python -m unittest discover -s scripts/map-build/map_build -t scripts/map-build
       - name: Test pipeline and source references
         shell: bash -el {0}
         env:
           PROJ_NETWORK: 'OFF'
-          PYTHONPATH: scripts/map-build/stages/land/stage2-geodesic-20261104
+          PYTHONPATH: scripts/map-build:scripts/map-build/water:scripts/map-build/stages/ocean:scripts/map-build/stages/land/stage2-geodesic-20261104
         run: |
           time python -m unittest discover -s scripts/map-build/pipeline -p 'test_*.py'
+          time python -m unittest discover -s scripts/map-build/water -p 'test_*.py'
+          time python -m unittest discover -s scripts/map-build/stages/ocean -p 'test_*.py'
           python -m unittest discover -s scripts/map-build/stages/land/stage2-geodesic-20261104/seed-producer -p 'test_*.py'
           python -m unittest discover -s scripts/map-build/stages/land/stage2-geodesic-20261104 -p 'test_contracts.py'
