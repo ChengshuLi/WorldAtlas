@@ -279,12 +279,12 @@ class Pipeline:
                     'resolution_template', 'regional_template', 'water_snapshot',
                     'seavox_archive', 'coastal_plan', 'neon_selection', 'osm_receipt'}
         selections = self.cfg.get('sources', {})
-        native_regional = (self.selection is not None and self.selection['regional_partition']['policy'].get('method')
-                           == 'line_group_satellite_assignment')
+        native_regional = self.selection is not None
         if self.selection is not None:
             retired_water_inputs = {'water_snapshot', 'seavox_archive', 'coastal_plan'}
             if native_regional:
-                retired_water_inputs.add('regional_template')
+                retired_water_inputs.update({'regional_template', 'land_snapshot', 'resolution_template',
+                                             'neon_selection', 'osm_receipt'})
             required -= retired_water_inputs
             selections = {key: value for key, value in selections.items() if key not in retired_water_inputs}
         if (not isinstance(selections, dict) or not required <= selections.keys() or
@@ -322,7 +322,7 @@ class Pipeline:
                            ensure_ascii=False, allow_nan=False).encode()).hexdigest()
         self.draft_land = None
         self.preview_land = None
-        if draft_revision is not None:
+        if draft_revision is not None and not native_regional:
             if self.selection is not None:
                 self.draft_land = self.save_source_document(self.selection['domains']['mainland'],
                                                             serialization='canonical-ascii')
@@ -737,7 +737,8 @@ class Pipeline:
         for layer in read(self.sources['land_config']).get('land', []):
             for spec in layer['files']:
                 add(spec)
-        for spec in read(self.sources['resolution_template']).get('source_files', []):
+        resolution = read(self.sources['resolution_template']) if 'resolution_template' in self.sources else {}
+        for spec in resolution.get('source_files', []):
             add(spec)
         template = read(self.sources['regional_template']) if 'regional_template' in self.sources else {}
         for key in ('polygon_source_files', 'evidence_source_files', 'corroboration_source_files',
@@ -918,6 +919,8 @@ class Pipeline:
 
     def mainland(self, physical):
         """Generate requests from fresh streams; do not edit a prior run's reports."""
+        if self.selection is not None:
+            return self.build_selected_land(physical)
         with self.timing.measure('mainland', 'prepare-components'):
             grid = read(physical / 'report.json')['grid']
             cfg = {'schema': 'fresh-physical-components-v1', 'grid': grid,
@@ -947,19 +950,6 @@ class Pipeline:
                      outer, work, stageout, provisional_only=True,
                      _outputs=[stageout, work], _restart=[work],
                      _resume_marker=work / 'derived/manifest.json')
-        if (self.selection is not None and self.selection['regional_partition']['policy'].get('method')
-                == 'line_group_satellite_assignment'):
-            from map_build.core.grid import Grid
-            from map_build.land.regional import build_regional
-            protected = set(read(stageout / 'report.json')['physical_coverage']['seed_roots'])
-            inputs = [pin(self.out / 'input-selection.json'), pin(stageout / 'report.json')]
-            inputs += [pin(root / name) for root in (physical, components, stageout)
-                       for name in ('rows.u32le', 'runs.u32le')]
-            result = self.checkpoints.run_function('regional-land', 'mainland', build_regional,
-                (self.selection, Grid(**grid), physical, components, stageout, self.out / 'regional'),
-                kwargs={'protected': protected}, timing=self.timing, inputs=inputs,
-                outputs=[self.out / 'regional'])
-            return Path(result['land'])
         prepared = self.out / 'regional-inputs'
         land = self.out / 'land'
         self.stage('mainland', 'prepare-regional', REGIONAL + '/prepare_fresh_handoff.py',
@@ -970,6 +960,51 @@ class Pipeline:
         self.stage('mainland', 'regional', REGIONAL + '/apply_selected_mixed.py',
                      prepared / 'config.json', _outputs=[land])
         return land
+
+    def build_selected_land(self, physical):
+        """Run ordinary component, seed, search and regional functions directly."""
+        from map_build.core.grid import Grid
+        from map_build.land.components import ComponentGrid
+        from map_build.land.connected import build_components
+        from map_build.land.seeds import build_seeds
+        from map_build.land.seed_index import build_seed_index
+        from map_build.land.assignments import assign_components, read_assignments
+        from map_build.land.regional import build_regional
+
+        grid = Grid(**read(physical/'report.json')['grid'])
+        selected = self.selection['domains']['mainland']
+        common = [pin(self.out/'input-selection.json'), pin(physical/'report.json')]
+        common += [pin(physical/name) for name in ('rows.u32le','runs.u32le')]
+        component_directory = self.out/'components'
+        self.checkpoints.run_function('components', 'mainland', build_components,
+            (grid, physical, component_directory), timing=self.timing, inputs=common,
+            outputs=[component_directory])
+        component_inputs = common + [pin(component_directory/name) for name in ('rows.u32le','runs.u32le')]
+        seeds = self.out/'seeds'
+        index = self.out/'seed-index'
+        assignments = self.out/'component-assignments'
+        with ComponentGrid(physical, component_directory, grid) as components:
+            seed_report = self.checkpoints.run_function('mainland-seeds', 'mainland', build_seeds,
+                (selected, components, seeds), kwargs=self.cfg.get('seed_controls', {}),
+                timing=self.timing, inputs=component_inputs, outputs=[seeds])
+            seed_inputs = component_inputs + [pin(seeds/name) for name in ('rows.u32le','runs.u32le','report.json')]
+            self.checkpoints.run_function('seed-index', 'mainland', build_seed_index,
+                (grid, seeds, index), timing=self.timing, inputs=seed_inputs, outputs=[index])
+            assignment_inputs = seed_inputs + [pin(index/'report.json')]
+            controls = self.cfg['land_controls']
+            assigned = self.checkpoints.run_function('land-distances', 'mainland', assign_components,
+                (components, seed_report, index, selected['category_bindings'], assignments),
+                kwargs=dict(tie_metres=float(selected['land_baseline_policy']['tie_tolerance_metres']),
+                            guard_metres=controls['numerical_guard_metres'],
+                            chunk_columns=controls['chunk_columns']), timing=self.timing,
+                inputs=assignment_inputs, outputs=[assignments])
+        protected = {g['component_id'] for g in seed_report['groups'].values() if g['role'] == 'mainland'}
+        inputs = seed_inputs + [pin(assignments/name) for name in ('roots.u32le','entities.i64le','report.json')]
+        result = self.checkpoints.run_function('regional-land', 'mainland', build_regional,
+            (self.selection, grid, physical, component_directory, seeds, self.out/'regional'),
+            kwargs=dict(protected=protected, component_defaults=read_assignments(assigned)),
+            timing=self.timing, inputs=inputs, outputs=[self.out/'regional'])
+        return Path(result['land'])
 
     def prepare_stage2(self, physical, components, grid):
         inputs = {key: pin(path) for key, path in {
@@ -1215,7 +1250,7 @@ class Pipeline:
         self.stage('verification', 'compare', REPLAY + '/compare_grids.py',
                      candidate=final, reference=rows.parent, width=grid['width'], height=grid['height'],
                      reference_rows_sha256=sha(rows), reference_runs_sha256=sha(runs),
-                     allow_different=self.preview_land is not None, out=report)
+                     allow_different=self.selection is not None or self.preview_land is not None, out=report)
         self.timing.mark_complete('verification')
         return pin(report)
 

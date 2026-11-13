@@ -350,53 +350,6 @@
         ]
       },
       "serialization": "pretty-ascii"
-    },
-    "land_snapshot": {
-      "neon": {
-        "source_id": "v8-mainland-snapshot",
-        "version": "v8.0-336c589b6411",
-        "serialization": "stored-json-text"
-      },
-      "sha256": "336c589b64117cba860b85c12d90fd8fa57b536c18489899a94c4243bc3f85dd",
-      "size_bytes": 2651778
-    },
-    "resolution_template": {
-      "json": {
-        "schema": "mainland-witness-request-v1",
-        "source_files": [
-          {
-            "r2_source": {
-              "source_id": "natural-earth-50m-geographic-labels",
-              "version": "commit-ca96624a56bd078437bca8184e78163e5039ad19"
-            }
-          },
-          {
-            "r2_source": {
-              "source_id": "natural-earth-50m-populated-places",
-              "version": "commit-ca96624a56bd078437bca8184e78163e5039ad19"
-            }
-          }
-        ]
-      },
-      "serialization": "pretty-ascii"
-    },
-    "neon_selection": {
-      "neon": {
-        "source_id": "v8-stage1-source-selection",
-        "version": "v8.0-48d9277a42f0",
-        "serialization": "pretty-ascii"
-      },
-      "sha256": "48d9277a42f0d9f4a188cba7efaa45e4a4939251f859ca2ac7e6f97711e227ea",
-      "size_bytes": 17684
-    },
-    "osm_receipt": {
-      "neon": {
-        "source_id": "v8-osm-custody-receipt",
-        "version": "v8.0-3bb3f44453a4",
-        "serialization": "pretty-ascii"
-      },
-      "sha256": "3bb3f44453a438c1c3f10722466d7f7e409783aef24f8c256be9e70df37cb083",
-      "size_bytes": 2990
     }
   },
   "physical_controls": {
@@ -409,15 +362,8 @@
       "endpoint_url": "https://8551d6a44afbf7d8080fb67cefe241fc.r2.cloudflarestorage.com"
     }
   },
-  "land_policy": {
-    "id": "worldatlas-wgs84-geodesic",
-    "version": "1"
-  },
   "land_controls": {
-    "block_records": 10000,
-    "checkpoint_seconds": 30,
     "chunk_columns": 1024,
-    "minimum_free_bytes": 2147483648,
     "numerical_guard_metres": 1000
   },
   "seed_controls": {

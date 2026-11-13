@@ -53,21 +53,20 @@ def read_selection(database, revisions, *, raw_sources=(), documents=()):
             references.update((source['source_id'], source['version']) for source in data['sources'])
         if 'regional' in revisions:
             rows = database.execute(
-                'SELECT line_id,definition FROM atlas.regional_island_rule_sets '
-                "WHERE revision=%s AND selection_status <> 'withdrawn'",
+                'SELECT rule_set_id,line_id,definition FROM atlas.regional_island_rule_sets '
+                "WHERE revision=%s AND selection_status <> 'withdrawn' ORDER BY rule_set_id",
                 (revisions['regional'],)).fetchall()
-            if len(rows) != 1:
-                raise ValueError('select exactly one active regional partition')
-            line_id, definition = rows[0]
-            line = database.execute(
-                "SELECT to_jsonb(l)-'created_at' FROM atlas.geographic_line_observations l WHERE line_id=%s",
-                (line_id,)).fetchone()
-            if line is None:
-                raise ValueError('selected geographic line is missing')
-            result['regional_partition'] = {'line': line[0], 'policy': definition}
-            references.add((line[0]['source_id'], line[0]['source_version']))
-            references.update((source['source_id'], source['version'])
-                              for source in definition.get('sources', []))
+            result['regional_partitions'] = []
+            for rule_set_id, line_id, definition in rows:
+                line = database.execute(
+                    "SELECT to_jsonb(l)-'created_at' FROM atlas.geographic_line_observations l WHERE line_id=%s",
+                    (line_id,)).fetchone()
+                if line is None:
+                    raise ValueError('selected geographic line is missing')
+                result['regional_partitions'].append({'rule_set_id': rule_set_id, 'line': line[0], 'policy': definition})
+                references.add((line[0]['source_id'], line[0]['source_version']))
+                references.update((source['source_id'], source['version'])
+                                  for source in definition.get('sources', []))
         requested = sorted(references)
         rows = database.execute(
             "SELECT to_jsonb(a)-'created_at' FROM atlas.source_assets a WHERE kind='raw' "

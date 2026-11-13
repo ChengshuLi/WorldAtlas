@@ -81,6 +81,39 @@ class SelectionTests(unittest.TestCase):
             self.assertEqual(self.writer.execute("SELECT count(*) FROM atlas.decision_policies "
                                                  "WHERE revision='__selection_water'").fetchone()[0], 1)
 
+    def test_regional_rules_are_optional_and_all_selected_source_links_are_frozen(self):
+        with psycopg.connect(self.url) as database:
+            result = read_selection(database, {'regional': '__selection_water'})
+        self.assertEqual(result['regional_partitions'], [])
+        try:
+            with self.writer.transaction():
+                for ident in ('__line_source', '__policy_source'):
+                    self.writer.execute('INSERT INTO atlas.source_assets '
+                        '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+                        'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+                        "VALUES (%s,'1','Test','raw','Test','test:source','Test','test:license',"
+                        "'Test','test',%s,%s,1,'{}')", (ident, ident+'.json', 'a'*64))
+                geometry = dict(type='LineString', coordinates=[[0,1],[0,-1]])
+                checksum = hashlib.sha256(json.dumps(geometry,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+                for ident in ('a','b'):
+                    self.writer.execute('INSERT INTO atlas.geographic_line_observations '
+                        '(line_id,source_id,source_version,geometry,geometry_sha256,coordinate_reference,provenance,status) '
+                        "VALUES (%s,'__line_source','1',%s,%s,'OGC:CRS84','{}','selected')",
+                        ('__selection_'+ident, Jsonb(geometry), checksum))
+                    self.writer.execute('INSERT INTO atlas.regional_island_rule_sets '
+                        '(revision,rule_set_id,selection_status,line_id,definition,evidence) '
+                        "VALUES ('__selection_water',%s,'selected_for_research',%s,%s,'{}')",
+                        (ident,'__selection_'+ident,Jsonb({'sources':[{'source_id':'__policy_source','version':'1'}]})))
+            with psycopg.connect(self.url) as database:
+                result = read_selection(database, {'regional':'__selection_water'})
+            self.assertEqual([rule['rule_set_id'] for rule in result['regional_partitions']], ['a','b'])
+            self.assertEqual({source['source_id'] for source in result['raw_sources']},
+                             {'__line_source','__policy_source'})
+        finally:
+            self.writer.execute("DELETE FROM atlas.regional_island_rule_sets WHERE revision='__selection_water'")
+            self.writer.execute("DELETE FROM atlas.geographic_line_observations WHERE line_id IN ('__selection_a','__selection_b')")
+            self.writer.execute("DELETE FROM atlas.source_assets WHERE source_id IN ('__line_source','__policy_source')")
+
     def test_geometry_and_source_metadata_survive_separate_record_reads(self):
         geometry = {'type': 'Point', 'coordinates': [12.25, 45.5]}
         digest = hashlib.sha256(json.dumps(geometry, sort_keys=True, separators=(',', ':')).encode()).hexdigest()

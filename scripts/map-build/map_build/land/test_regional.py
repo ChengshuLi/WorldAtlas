@@ -104,6 +104,20 @@ class RegionalTests(unittest.TestCase):
             compose_land(components, self.root / 'baseline', {}, self.bindings,
                          self.root / 'land-contact', partitions=[partition])
 
+    def test_geographic_partition_overrides_distance_default_but_not_an_explicit_claim(self):
+        seed = self.baseline.copy()
+        seed[2, [0, 7]] = 0
+        write_layer(self.root/'seeds', self.grid, patch_rows(seed, self.grid.bounds, self.grid))
+        partition = dict(geometry=polygon(-180, -45, -135, 0), entity_id=42)
+        with self.components() as components:
+            compose_land(components, self.root/'seeds', {}, self.bindings,
+                         self.root/'defaults', component_defaults={42: 81}, partitions=[partition])
+        with open_grid(self.root/'defaults', self.grid) as output:
+            self.assertEqual(crop(*output, 2, 0, 8, 8).tolist(), [999, 0, 0, 0, 0, 0, 0, 301])
+        with self.components() as components, self.assertRaisesRegex(ValueError, 'conflicting'):
+            compose_land(components, self.root/'seeds', {42: 81}, self.bindings,
+                         self.root/'explicit-conflict', component_defaults={42: 81}, partitions=[partition])
+
     def test_line_groups_and_affiliations_are_resolved_before_one_composition(self):
         line = feature('divider', {'type': 'LineString', 'coordinates': [[0, 80], [0, -80]]})
         line['line_id'] = 'divider'
@@ -121,8 +135,8 @@ class RegionalTests(unittest.TestCase):
         report = build_regional(selection, self.grid, self.root / 'physical', self.root / 'components',
                                 self.root / 'baseline', self.root / 'grouped')
         self.assertEqual(report['counts'], {'301': 2, '999': 3})
-        self.assertEqual(report['islands']['proposals'][7]['basis'], 'inferred_source_extent_group_convention')
-        self.assertEqual(report['islands']['review'][42], 'crosses_or_touches_line')
+        self.assertEqual(report['islands'][0]['proposals'][7]['basis'], 'inferred_source_extent_group_convention')
+        self.assertEqual(report['islands'][0]['review'][42], 'crosses_or_touches_line')
 
     def test_line_scans_complete_counts_and_wrapped_competitor_runs(self):
         line = LatitudeLine({'type': 'LineString', 'coordinates': [[0, 80], [0, -80]]}, 0)

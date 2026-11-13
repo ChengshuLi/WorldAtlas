@@ -21,12 +21,15 @@ def partition_rows(partition, components, code, *, rows_per_batch=64):
         yield from patch_rows(values, bounds, grid)
 
 
-def compose_land(components, baseline_directory, component_entities, bindings, directory, *, partitions=()):
+def compose_land(components, baseline_directory, component_entities, bindings, directory, *,
+                 partitions=(), component_defaults=None):
     """Apply current component assignments and scoped polygons during composition.
 
     Partitions contain geographic geometry, a target entity and optionally the
     eligible current ``component_ids``. They cannot assign physical water.
-    Conflicting active assignments fail instead of being overwritten silently.
+    Component defaults supply inferred distance labels where the mainland seed
+    is empty. Explicit affiliations and partitions take precedence over them.
+    Conflicting explicit assignments fail instead of depending on order.
     """
     grid = components.grid
     codes = {b['entity_id']: b['code'] for b in bindings if b['physical_class'] == 'land'}
@@ -34,10 +37,13 @@ def compose_land(components, baseline_directory, component_entities, bindings, d
     if (not allowed or len(allowed) != len(codes)
             or any(type(code) is not int or not 0 < code < 2**32 for code in allowed)):
         raise ValueError('land entities need distinct nonzero category bindings')
-    if set(component_entities) - components.totals().keys():
+    component_defaults = component_defaults or {}
+    if (set(component_entities) | set(component_defaults)) - components.totals().keys():
         raise ValueError('land assignment refers to a missing current component')
     roots = np.array(sorted(component_entities), dtype=np.uint32)
     assigned = np.array([codes[component_entities[int(r)]] for r in roots], dtype=np.uint32)
+    default_roots = np.array(sorted(component_defaults), dtype=np.uint32)
+    defaults = np.array([codes[component_defaults[int(r)]] for r in default_roots], dtype=np.uint32)
     streams = []
     for partition in partitions:
         stream = iter(partition_rows(partition, components, codes[partition['entity_id']]))
@@ -56,12 +62,19 @@ def compose_land(components, baseline_directory, component_entities, bindings, d
                 starts, ends = cuts[:-1], cuts[1:]
                 dry = physical[1][np.searchsorted(physical[0], starts, side='right')] == 17
                 values = base[1][np.searchsorted(base[0], starts, side='right')].copy()
-                if np.any(~np.isin(values[dry], list(allowed))) or np.any(values[~dry] != 0):
+                if np.any((values != 0) & ~np.isin(values, list(allowed))) or np.any(values[~dry] != 0):
                     raise ValueError('baseline land differs from the physical mask or entity bindings')
                 component_ids = np.full(len(starts), 2**32 - 1, dtype=np.uint32)
                 if len(spans):
                     locations = np.searchsorted(spans[:, 1], starts[dry], side='right')
                     component_ids[dry] = spans[locations, 2]
+                if len(default_roots):
+                    locations = np.searchsorted(default_roots, component_ids)
+                    found = locations < len(default_roots)
+                    found[found] &= default_roots[locations[found]] == component_ids[found]
+                    if np.any(found & (values != 0)):
+                        raise ValueError('component distance default overlaps mainland seeds')
+                    values[found] = defaults[locations[found]]
                 claims = np.zeros(len(starts), dtype=np.uint32)
                 if len(roots):
                     locations = np.searchsorted(roots, component_ids)
@@ -78,6 +91,8 @@ def compose_land(components, baseline_directory, component_entities, bindings, d
                             raise ValueError('conflicting land component and partition assignments')
                         claims[selected] = code
                 values = np.where(claims != 0, claims, values)
+                if np.any(~np.isin(values[dry], list(allowed))):
+                    raise ValueError('final land composition leaves physical land unassigned')
                 changes = np.r_[True, values[1:] != values[:-1]]
                 indices = np.flatnonzero(changes)
                 stops = ends[np.r_[indices[1:] - 1, len(ends) - 1]]

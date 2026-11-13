@@ -19,12 +19,13 @@ class ComponentGrid:
     """
     def __init__(self, physical_directory, component_directory, grid):
         self.grid = grid
+        self.directory = Path(component_directory)
         self.resources = ExitStack()
         self.validated = np.zeros(grid.height, dtype=bool)
         self.populations = None
         try:
             self.physical = self.resources.enter_context(open_grid(physical_directory, grid))
-            directory = Path(component_directory)
+            directory = self.directory
             self.offsets = self._map(directory / 'rows.u32le')
             self.runs = self._map(directory / 'runs.u32le')
             if (len(self.offsets) != grid.height + 1 or len(self.runs) % 3

@@ -45,8 +45,7 @@ class TimingTests(unittest.TestCase):
         self.assertNotIn('input_root', cfg)
         self.assertEqual(cfg['sources']['raw_manifest']['json']['file_count'], 32)
         self.assertEqual(set(cfg['decision_revisions']), {'mainland', 'regional', 'water', 'ocean'})
-        self.assertEqual(set(cfg['sources']), {'land_config', 'water_config', 'raw_manifest',
-                                             'land_snapshot', 'resolution_template', 'neon_selection', 'osm_receipt'})
+        self.assertEqual(set(cfg['sources']), {'land_config', 'water_config', 'raw_manifest'})
 
     def test_interval_union_excludes_idle_gaps_and_parallel_double_count(self):
         self.assertEqual(pipeline.elapsed_union([(1, 5), (2, 4), (8, 9), (4, 7)]), 7)

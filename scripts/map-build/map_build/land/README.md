@@ -1,41 +1,59 @@
 # Land assignment
 
-Land calculations use imported geographic records and the current physical grid.
-They do not reopen source archives.
+The land calculation reads imported geographic records from the run's saved
+Neon selection. It uses the current physical grid and does not reopen source
+archives or read an earlier map.
 
-- `components.py` reads current component runs, checks their physical coverage,
-  locates source points and counts component centers inside source polygons.
-- `affiliations.py` resolves the geographic selection in each affiliation's
-  `evidence.component_selection`. Conditions select a point's component,
-  intersecting components or wholly contained components. Rules can combine
-  conditions, exclude features and check selected witnesses or identity areas.
-- `composition.py` combines mainland assignments, component affiliations and
-  scoped geographic polygons in one final land composition. Conflicting claims
-  fail; physical water stays unassigned by land calculations.
-- `line_groups.py` counts complete components on either side of a selected
-  latitude-monotonic line. It also reads complete nearby competitor runs.
-- `source_groups.py` applies selected source-backed group choices before
-  `satellites.py` calculates direct WGS84 distances to independently named
-  islands. Inferred satellites cannot become anchors for other satellites.
-- `islands.py` connects those operations using selected lines, imported point
-  and polygon features, geographic scopes and entity IDs from Neon.
-- `partitions.py` builds scoped polygons from selected joined lines and two
-  side witnesses. These rules apply during final composition and never change
-  mainland distance seeds or search domains.
-- `regional.py` connects the complete regional calculation and final land
-  composition through ordinary Python calls.
+## Calculation
 
-Entity IDs and land codes come from registry bindings. Source identities and
-geographic choices belong in Neon. Current component IDs are temporary run data.
+1. Find connected physical land, with longitude wrapping.
+2. Use selected named points to identify mainland components. Assemble selected
+   boundary sections and closure routes into the mainland regions.
+3. Rasterize those regions on the native grid to create mainland seeds.
+4. Assign other components to their nearest mainland using WGS84 distances.
+5. Apply explicit affiliations, selected line sides, source-backed island groups
+   and direct satellite relationships. Compose the final land once, including
+   scoped geographic partitions.
 
-Most imported geometry uses WGS84 longitude/latitude. A source can retain its
-declared native projection when transforming its edges would approximate them.
-Projected contact queries transform cell centers using the selected coordinate
-operations and their geographic coverage. Unknown coverage and exact boundary
-contacts remain explicit; no boundary-name branch chooses their treatment.
+Distance assignments supply defaults. Explicit geographic decisions take
+precedence. Conflicting explicit decisions fail; physical water stays zero.
+Scoped partitions never change mainland seeds or distance-search domains.
 
-`test_regional.py` covers point and polygon selections, partial components,
-longitude wrapping, projected queries, protected components, conflicting claims
-and a complete small structured-input-to-land calculation.
-`test_satellites.py` checks complete candidate searches and distances against
-independent cell-pair calculations, source-group conflicts and no chaining.
+## Files
+
+| Files | Responsibility |
+| --- | --- |
+| `connected.py` | Build four-neighbor physical components. |
+| `components.py` | Read current components; locate points and query polygon coverage. |
+| `witnesses.py` | Resolve imported named points, identity areas and selected component groups. |
+| `regions.py` | Join selected line sections; check closure routes against the physical grid. |
+| `seeds.py`, `seed_strips.py` | Rasterize selected regions and compose seed runs efficiently. |
+| `seed_index.py` | Index every seed run and choose actual seed-cell samples. |
+| `hints.py` | Choose a promising category from those samples. Hints are not final assignments. |
+| `certificates.py` | Prove a hint wins when complete spatial bounds exclude all competing categories. |
+| `exact_search.py`, `search_engine.py` | Search remaining possibilities using complete WGS84 distances. |
+| `assignments.py` | Connect the distance calculations and write component-to-entity results. |
+| `affiliations.py` | Resolve selected point/component and polygon/component relationships. |
+| `line_groups.py` | Count complete components on either side of selected latitude-monotonic lines. |
+| `source_groups.py` | Apply selected source-backed island-group choices. |
+| `satellites.py` | Find direct nearby named anchors, including every relevant competing component. |
+| `islands.py` | Connect line, group and satellite operations using Neon choices. |
+| `partitions.py` | Construct scoped land partitions from selected lines and side witnesses. |
+| `composition.py`, `regional.py` | Combine the assignments and write final land in one composition. |
+
+Entity IDs, category bindings, geographic extents, selected features, witnesses
+and distance policies come from Neon. Component IDs are temporary run data.
+Inferred satellites cannot become anchors for other satellites.
+
+Imported geometry normally uses WGS84 longitude/latitude. A source may retain its
+native projection when converting its edges would approximate them. Projected
+queries transform cell centers with the selected coordinate operations and
+coverage. Unknown coverage and boundary contacts remain explicit.
+
+## Tests
+
+The tests beside these modules cover component identity and coverage, arbitrary
+codes and region counts, complete seed construction, exact distance comparisons,
+longitude wrapping, source-group conflicts, direct satellites and final
+composition. Small independent cell calculations check the optimized algorithms.
+The main-command tests also exercise the direct stage chain and checkpoint reuse.
