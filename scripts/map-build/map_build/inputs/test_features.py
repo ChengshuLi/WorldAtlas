@@ -39,7 +39,7 @@ class SelectedFeatureTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'checksum'):
             selected_basins(changed)
         domain['features'][0]['coordinate_reference'] = 'EPSG:3857'
-        with self.assertRaisesRegex(ValueError, 'longitude/latitude'):
+        with self.assertRaisesRegex(ValueError, 'OGC:CRS84'):
             selected_basins(domain)
 
     def test_duplicate_provider_area_and_missing_feature_are_rejected(self):

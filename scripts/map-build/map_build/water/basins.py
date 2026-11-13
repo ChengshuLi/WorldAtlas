@@ -6,15 +6,13 @@ WGS84 cell-center solver as coastal assignment, restricted to those participants
 """
 from collections import Counter
 from dataclasses import dataclass
-import json
 
 import numpy as np
-from osgeo import gdal, ogr, osr
 
 from map_build.water import shared_nearest as nearest
 from map_build.water.coastal_shore_index_batch import BatchedCoastalShoreIndex
 from map_build.water.rectangle_nearest import classify
-from map_build.water.wrapped_bounds import wrapped_grid_bounds
+from map_build.core.geometry import rasterize
 
 
 def entity_pairs(bindings, priority):
@@ -46,39 +44,6 @@ class Shorelines:
             self.indexes = nearest.make_indexes(centers, [p for p in pairs if p[1] in present])
 
 
-def rasterize(geometry, grid, bounds=None):
-    """Rasterize all source pieces at native grid centers, preserving wrapping."""
-    if bounds is None:
-        bounds, windows = wrapped_grid_bounds(geometry, grid.width, grid.height, grid.step)
-    else:
-        x0, x1, y0, y1 = bounds
-        if not (0 <= x0 < grid.width and 0 < x1-x0 <= grid.width and 0 <= y0 < y1 <= grid.height):
-            raise ValueError('invalid rasterization window')
-        windows = ((x0, min(x1, grid.width)),)
-        if x1 > grid.width:
-            windows += ((0, x1-grid.width),)
-    x0, x1, y0, y1 = bounds
-    mask = np.zeros((y1 - y0, x1 - x0), dtype=bool)
-    with ogr.ExceptionMgr(), gdal.ExceptionMgr():
-        source = ogr.GetDriverByName('Memory').CreateDataSource('')
-        reference = osr.SpatialReference()
-        reference.SetFromUserInput('OGC:CRS84')
-        layer = source.CreateLayer('area', reference, geom_type=ogr.wkbUnknown)
-        feature = ogr.Feature(layer.GetLayerDefn())
-        feature.SetGeometry(ogr.CreateGeometryFromJson(json.dumps(geometry, allow_nan=False)))
-        layer.CreateFeature(feature)
-        for first, last in windows:
-            # Each canonical window has its own world extent; the output mask
-            # retains the selected continuous, potentially wrapped column order.
-            raster = gdal.GetDriverByName('MEM').Create('', last - first, y1 - y0, 1, gdal.GDT_Byte)
-            raster.SetGeoTransform((grid.west + first * grid.step, grid.step, 0,
-                                    grid.north - y0 * grid.step, 0, -grid.step))
-            raster.SetProjection(reference.ExportToWkt())
-            if gdal.RasterizeLayer(raster, [1], layer, burn_values=[1]) != 0:
-                raise ValueError('basin rasterization failed')
-            offset = (first - x0) % grid.width
-            mask[:, offset:offset + last - first] = raster.ReadAsArray() != 0
-    return bounds, mask
 
 
 def physical_water(mask, bounds, physical, grid):
