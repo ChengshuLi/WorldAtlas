@@ -12,6 +12,40 @@ QUERIES = {name: HERE / (name + '.sql') for name in ('mainland', 'regional')}
 QUERIES.update(water=HERE / 'geography.sql', ocean=HERE / 'geography.sql')
 
 
+def validate_bindings(domains):
+    """Require every selected stage to give each map code the same meaning.
+
+    Row order and descriptive metadata do not affect a binding. Registry
+    revision names may differ when their entity/code meanings are identical.
+    """
+    expected = None
+    for name, domain in domains.items():
+        rows = domain.get('category_bindings')
+        if not isinstance(rows, list):
+            raise ValueError(f'{name} selection needs category bindings')
+        bindings, entities = {}, set()
+        for row in rows:
+            if not isinstance(row, dict):
+                raise ValueError(f'{name} selection has an invalid category binding')
+            code, entity, kind = (row.get(key) for key in ('code', 'entity_id', 'physical_class'))
+            if (
+                type(code) is not int
+                or not 0 < code < 2**32
+                or type(entity) is not int
+                or entity <= 0
+                or kind not in ('land', 'water')
+                or code in bindings
+                or (entity, kind) in entities
+            ):
+                raise ValueError(f'{name} selection has invalid or duplicate category bindings')
+            bindings[code] = (entity, kind)
+            entities.add((entity, kind))
+        if expected is not None and bindings != expected:
+            raise ValueError(f'{name} category bindings differ from {first}')
+        if expected is None:
+            first, expected = name, bindings
+
+
 def canonical_bytes(value):
     return (
         json.dumps(
@@ -67,6 +101,7 @@ def read_selection(database, revisions, *, raw_sources=(), documents=()):
             references.update(
                 (source['source_id'], source['version']) for source in data['sources']
             )
+        validate_bindings(result['domains'])
         if 'regional' in revisions:
             rows = database.execute(
                 'SELECT rule_set_id,line_id,definition FROM atlas.regional_island_rule_sets '
@@ -139,6 +174,7 @@ def read_saved(path, expected_revisions=None):
         raise ValueError('unsupported saved input selection')
     if expected_revisions is not None and result['revisions'] != expected_revisions:
         raise ValueError('saved selection uses different geographic revisions')
+    validate_bindings(result['domains'])
     if 'water' in result['domains']:
         selected_basins(result['domains']['water'])
     return result

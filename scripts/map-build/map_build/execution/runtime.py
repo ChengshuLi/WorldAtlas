@@ -167,14 +167,8 @@ class RunLock:
             self.stream.close()
             raise ValueError('another pipeline runner still owns this run') from None
 
-    @property
-    def fd(self):
-        return self.stream.fileno()
-
     def close(self):
         if not self.stream.closed:
-            # Do not explicitly LOCK_UN: an admitted stage process may still
-            # hold this same open-file description after its parent dies.
             self.stream.close()
 
     def __del__(self):
@@ -187,7 +181,6 @@ class Checkpoints:
         self.root.mkdir(exist_ok=True)
         self.preserved = self.root.parent / 'preserved'
         self.preserved.mkdir(exist_ok=True)
-        self.lock = threading.Lock()
 
     def stage(self, name):
         if not name or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789-_' for c in name):

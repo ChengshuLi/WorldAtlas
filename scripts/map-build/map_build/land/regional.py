@@ -9,6 +9,7 @@ from map_build.land.components import ComponentGrid
 from map_build.land.composition import compose_land
 from map_build.land.islands import resolve_islands
 from map_build.land.partitions import build_partitions
+from map_build.inputs.selection import validate_bindings
 
 
 def build_regional(
@@ -21,10 +22,11 @@ def build_regional(
     *,
     protected=(),
     partitions=(),
-    component_defaults=None
+    component_defaults=None,
 ):
     """Resolve working geographic rules and return final land paths and counts."""
     started = time.monotonic()
+    validate_bindings(selection['domains'])
     domain = selection['domains']['regional']
     rules = domain['affiliations']
     if any(rule['method'] != 'component_selection' for rule in rules):
@@ -52,6 +54,20 @@ def build_regional(
                 domain['category_bindings'],
                 protected=protected,
             )
+            conflicts = {
+                root: reason
+                for root, reason in result['review'].items()
+                if reason
+                in {
+                    'conflicting_regional_group_conventions',
+                    'conflicting_group_and_anchor',
+                    'conflicting_nearest_land_targets',
+                }
+            }
+            if conflicts:
+                raise ValueError(
+                    f"conflicting regional assignments for {selected['policy']['line_id']}: {conflicts}"
+                )
             for root, entity in result['component_entities'].items():
                 if root in entities and entities[root] != entity:
                     raise ValueError('regional line rules conflict with a selected affiliation')

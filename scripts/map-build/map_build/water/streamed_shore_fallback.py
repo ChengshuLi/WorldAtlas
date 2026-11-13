@@ -2,7 +2,7 @@
 
 No full-shore spatial index is built. Each full-source point is visited; a
 conservative chord lower bound prunes only inverse calls that cannot improve
-the current exact WGS84 upper bound. Research only, dedicated stable inputs.
+the current exact WGS84 upper bound.
 """
 
 import math

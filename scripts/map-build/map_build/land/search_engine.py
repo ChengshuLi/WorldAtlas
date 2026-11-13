@@ -331,22 +331,3 @@ def finalize(hints, amb, best, category_codes, tolerance=1e-5):
                 }
             )
     return codes, ties
-
-
-def prefix_query_count(path, roots, seed_roots, cursor, chunk=1024, amb=None, guard=lambda: None):
-    if cursor < 0 or cursor > Path(path).stat().st_size // 12:
-        raise ValueError('invalid prefix cursor')
-    roots = np.asarray(roots, dtype=np.uint32)
-    total = 0
-    for off, a in blocks(path, 0, 100000, guard):
-        if off >= cursor:
-            break
-        a = a[: min(len(a), cursor - off)]
-        pos, match = positions(a[:, 2], roots, seed_roots)
-        if amb is not None:
-            valid = np.zeros(len(a), dtype=bool)
-            valid[match] = np.asarray(amb, dtype=bool)[pos[match]]
-            match &= valid
-        length = a[match, 1].astype(np.uint64) - a[match, 0].astype(np.uint64)
-        total += int(((length + chunk - 1) // chunk).sum())
-    return total

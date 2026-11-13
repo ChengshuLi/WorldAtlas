@@ -1,8 +1,8 @@
-"""Shared SeaVoX basin assignment from physical water and final land only.
+"""Shared WGS84 nearest-shore calculations for physical water and final land.
 
-No previous water labels are inputs. Distances are WGS84 geodesic
-center-to-center to physical coastal land cells, in metres. Each participant is indexed independently; missing shores or
-an insufficient crop fail closed. This module is a candidate, not a release.
+Distances are measured in metres between cell centers and physical coastal
+land-cell centers. Each participant is indexed independently. Missing shores
+or an insufficient crop are reported instead of assuming a distance.
 """
 
 from __future__ import annotations
@@ -55,7 +55,7 @@ def binding(snapshot, entity, physical_class, codes=None):
     return values[0]
 
 
-def tie_policy(snapshot, tie, participants=None):
+def tie_policy(snapshot, tie):
     """Resolve a distance tie policy through stable entity bindings."""
     if (
         not isinstance(tie, dict)
@@ -65,12 +65,7 @@ def tie_policy(snapshot, tie, participants=None):
     ):
         raise ValueError('unsupported or missing shared-basin tie rules')
     order = tie['priority_entity_ids']
-    if (
-        not isinstance(order, list)
-        or not order
-        or len(set(order)) != len(order)
-        or (participants is not None and set(order) != set(participants))
-    ):
+    if not isinstance(order, list) or not order or len(set(order)) != len(order):
         raise ValueError('tie priority must list each participant exactly once')
     raw = tie['tolerance_metres']
     if isinstance(raw, bool):
@@ -89,20 +84,6 @@ def tie_policy(snapshot, tie, participants=None):
     if len(set(codes)) != len(codes):
         raise ValueError('participant land and water bindings must be distinct')
     return pairs, tolerance
-
-
-def selected_rules(snapshot, basin):
-    """Read the fixed participant selection of a saved basin replay."""
-    if basin.get('assignment_method') != 'shared_nearest_assigned_shore':
-        raise ValueError('unsupported shared-basin assignment method')
-    participants = basin.get('participant_entity_ids')
-    if (
-        not isinstance(participants, list)
-        or len(participants) < 2
-        or len(set(participants)) != len(participants)
-    ):
-        raise ValueError('shared basin requires distinct participant entities')
-    return tie_policy(snapshot, basin.get('tie_rules'), participants)
 
 
 def crop(rows, runs, y, x0, x1, width):

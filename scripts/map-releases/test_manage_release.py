@@ -10,7 +10,7 @@ from unittest.mock import Mock
 
 from map_build.execution.runtime import pin
 from map_build.inputs.selection import canonical_bytes
-from manage_release import build_bundle, stage, verify_object, version
+from manage_release import build_bundle, release_categories, stage, verify_object, version
 
 
 class BundleTests(unittest.TestCase):
@@ -146,6 +146,16 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(json.loads(decoded), self.selection)
         self.assertEqual(hashlib.sha256(decoded).hexdigest(), reference['decoded_sha256'])
         self.assertIn(reference['object'], manifest['objects'])
+
+    def test_release_rejects_a_code_with_different_meanings_between_stages(self):
+        self.selection['domains']['regional'] = {
+            'category_bindings': [
+                dict(code=1, entity_id=42, physical_class='water'),
+                dict(code=17, entity_id=999, physical_class='land'),
+            ]
+        }
+        with self.assertRaisesRegex(ValueError, 'category bindings differ'):
+            release_categories(self.selection)
 
     def test_missing_land_color_blocks_staging(self):
         self.selection['registry_colors']['entities'][0]['color_rgb'] = None

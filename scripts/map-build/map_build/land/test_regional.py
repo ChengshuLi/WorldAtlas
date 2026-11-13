@@ -210,7 +210,7 @@ class RegionalTests(unittest.TestCase):
                 partitions=[partition],
             )
 
-    def test_line_groups_and_affiliations_are_resolved_before_one_composition(self):
+    def island_selection(self, targets=(42,)):
         line = feature('divider', {'type': 'LineString', 'coordinates': [[0, 80], [0, -80]]})
         line['line_id'] = 'divider'
         policy = dict(
@@ -228,14 +228,15 @@ class RegionalTests(unittest.TestCase):
             ),
             groups=[
                 dict(
-                    group_id='source-group',
+                    group_id=f'source-group-{i}',
                     mode='geographic_extent',
                     bounds_lon_lat=[-130, 0, -50, 45],
-                    target_entity_id=42,
+                    target_entity_id=entity,
                 )
+                for i, entity in enumerate(targets)
             ],
         )
-        selection = dict(
+        return dict(
             domains={
                 'regional': dict(
                     features=self.features,
@@ -246,8 +247,10 @@ class RegionalTests(unittest.TestCase):
             regional_partition=dict(line=line, policy=policy),
             raw_sources=[],
         )
+
+    def test_line_groups_and_affiliations_are_resolved_before_one_composition(self):
         report = build_regional(
-            selection,
+            self.island_selection(),
             self.grid,
             self.root / 'physical',
             self.root / 'components',
@@ -259,6 +262,40 @@ class RegionalTests(unittest.TestCase):
             report['islands'][0]['proposals'][7]['basis'], 'inferred_source_extent_group_convention'
         )
         self.assertEqual(report['islands'][0]['review'][42], 'crosses_or_touches_line')
+
+    def test_opposing_complete_group_choices_stop_before_final_land_is_written(self):
+        for targets in ((81, 42), (42, 81)):
+            with self.subTest(order=targets):
+                output = self.root / f'conflict-{targets[0]}'
+                with self.assertRaisesRegex(ValueError, 'conflicting regional assignments.*7'):
+                    build_regional(
+                        self.island_selection(targets),
+                        self.grid,
+                        self.root / 'physical',
+                        self.root / 'components',
+                        self.root / 'baseline',
+                        output,
+                    )
+                self.assertFalse((output / 'land').exists())
+
+    def test_agreeing_groups_and_explicit_affiliation_priority_still_build(self):
+        for targets, affiliations, expected in (
+            ((42, 42), self.rules[1:], 999),
+            ((81, 42), self.rules, 301),
+        ):
+            with self.subTest(groups=targets):
+                selected = self.island_selection(targets)
+                selected['domains']['regional']['affiliations'] = affiliations
+                report = build_regional(
+                    selected,
+                    self.grid,
+                    self.root / 'physical',
+                    self.root / 'components',
+                    self.root / 'baseline',
+                    self.root / f'valid-{expected}',
+                )
+                with open_grid(report['land'], self.grid) as data:
+                    self.assertEqual(crop(*data, 1, 1, 3, 8).tolist(), [expected, expected])
 
     def test_line_scans_complete_counts_and_wrapped_competitor_runs(self):
         line = LatitudeLine({'type': 'LineString', 'coordinates': [[0, 80], [0, -80]]}, 0)

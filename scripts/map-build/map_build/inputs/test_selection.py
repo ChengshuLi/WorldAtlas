@@ -4,11 +4,72 @@ from pathlib import Path
 import tempfile
 import unittest
 import hashlib
+from copy import deepcopy
 
 import psycopg
 from psycopg.types.json import Jsonb
 
-from map_build.inputs.selection import read_selection, read_saved
+from map_build.inputs.selection import read_selection, read_saved, validate_bindings
+
+
+class BindingTests(unittest.TestCase):
+    def setUp(self):
+        bindings = [
+            dict(code=301, entity_id=81, physical_class='land'),
+            dict(code=999, entity_id=42, physical_class='land'),
+            dict(code=4321, entity_id=81, physical_class='water'),
+        ]
+        self.selection = dict(
+            schema='worldatlas-input-selection-v1',
+            domains={
+                name: dict(category_bindings=deepcopy(bindings))
+                for name in ('mainland', 'regional', 'water', 'ocean')
+            },
+        )
+        self.selection['domains']['water'].update(features=[], basins=[])
+
+    def test_reordered_rows_and_different_registry_names_keep_the_same_meanings(self):
+        for name, domain in self.selection['domains'].items():
+            domain['entity_revision'] = {'id': name}
+            domain['category_bindings'].reverse()
+        validate_bindings(self.selection['domains'])
+
+    def test_replay_rejects_swapped_entity_meanings_in_every_stage(self):
+        for name in self.selection['domains']:
+            with self.subTest(stage=name), tempfile.TemporaryDirectory() as directory:
+                selected = deepcopy(self.selection)
+                bindings = selected['domains'][name]['category_bindings']
+                bindings[0]['entity_id'], bindings[1]['entity_id'] = (
+                    bindings[1]['entity_id'],
+                    bindings[0]['entity_id'],
+                )
+                path = Path(directory) / 'selection.json'
+                path.write_text(json.dumps(selected))
+                with self.assertRaisesRegex(ValueError, 'category bindings differ'):
+                    read_saved(path)
+
+    def test_physical_classes_and_missing_rows_are_part_of_the_mapping(self):
+        for change in ('class', 'missing'):
+            with self.subTest(change=change):
+                selected = deepcopy(self.selection)
+                bindings = selected['domains']['regional']['category_bindings']
+                if change == 'class':
+                    bindings[1]['physical_class'] = 'water'
+                else:
+                    bindings.pop()
+                with self.assertRaisesRegex(ValueError, 'category bindings differ'):
+                    validate_bindings(selected['domains'])
+
+    def test_duplicate_codes_or_entity_classes_cannot_hide_a_disagreement(self):
+        for duplicate in (
+            dict(code=301, entity_id=42, physical_class='water'),
+            dict(code=123, entity_id=81, physical_class='land'),
+        ):
+            with self.subTest(binding=duplicate):
+                selected = deepcopy(self.selection)
+                selected['domains']['regional']['category_bindings'].append(duplicate)
+                with self.assertRaisesRegex(ValueError, 'duplicate category bindings'):
+                    validate_bindings(selected['domains'])
 
 
 @unittest.skipUnless(
@@ -93,6 +154,51 @@ class SelectionTests(unittest.TestCase):
         with psycopg.connect(self.url) as database:
             with self.assertRaisesRegex(ValueError, 'missing'):
                 read_selection(database, {'water': 'missing'})
+
+    def test_live_selection_rejects_conflicting_registry_bindings(self):
+        with self.writer.transaction():
+            self.writer.execute("INSERT INTO atlas.geographic_entity_ids(id) VALUES (970000002)")
+            self.writer.execute(
+                "INSERT INTO atlas.geographic_entities(revision,id,name,level) "
+                "VALUES ('__selection_entities',970000002,'Second entity','continent')"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.entity_registry_revisions VALUES ('__selection_alternate')"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.geographic_entities(revision,id,name,level) "
+                "SELECT '__selection_alternate',id,name,level FROM atlas.geographic_entities "
+                "WHERE revision='__selection_entities'"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.decision_revisions VALUES "
+                "('__selection_regional','__selection_alternate','{}')"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.review_category_bindings VALUES "
+                "('__selection_entities',301,970000001,'land'),"
+                "('__selection_entities',999,970000002,'land'),"
+                "('__selection_alternate',999,970000001,'land'),"
+                "('__selection_alternate',301,970000002,'land')"
+            )
+        try:
+            with psycopg.connect(self.url) as reader:
+                with self.assertRaisesRegex(ValueError, 'category bindings differ'):
+                    read_selection(
+                        reader, {'water': '__selection_water', 'regional': '__selection_regional'}
+                    )
+        finally:
+            with self.writer.transaction():
+                self.writer.execute(
+                    "DELETE FROM atlas.decision_revisions WHERE revision='__selection_regional';"
+                    "DELETE FROM atlas.review_category_bindings "
+                    "WHERE revision IN ('__selection_entities','__selection_alternate');"
+                    "DELETE FROM atlas.geographic_entities WHERE revision='__selection_alternate';"
+                    "DELETE FROM atlas.entity_registry_revisions WHERE revision='__selection_alternate';"
+                    "DELETE FROM atlas.geographic_entities "
+                    "WHERE revision='__selection_entities' AND id=970000002;"
+                    "DELETE FROM atlas.geographic_entity_ids WHERE id=970000002"
+                )
 
     def test_scoped_partition_schema_upgrade_accepts_data_without_seeding_it(self):
         upgrade = (

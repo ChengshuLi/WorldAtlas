@@ -164,10 +164,10 @@ class Fixture(unittest.TestCase):
                 mainland='mainland', regional='regional', water='water', ocean='ocean'
             ),
             'domains': {
-                'mainland': {},
-                'regional': {},
-                'water': {'features': [], 'basins': []},
-                'ocean': {},
+                'mainland': {'category_bindings': []},
+                'regional': {'category_bindings': []},
+                'water': {'features': [], 'basins': [], 'category_bindings': []},
+                'ocean': {'category_bindings': []},
             },
             'raw_sources': [],
         }

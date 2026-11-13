@@ -8,19 +8,15 @@ import time
 
 from map_build.core.layers import file_hash, layer_rows, write_layer
 from map_build.core.rle import open_grid
-from map_build.inputs.selection import canonical_bytes
+from map_build.inputs.selection import canonical_bytes, validate_bindings
 from map_build.water.composition import compose
 from map_build.water.ocean import engine as ocean
 from map_build.water import streaming_closed_water as enclosed
 
 
 def water_snapshot(selection):
+    validate_bindings(selection['domains'])
     water, oceans = (selection['domains'][name] for name in ('water', 'ocean'))
-    if (
-        water['category_bindings'] != oceans['category_bindings']
-        or water['entity_revision']['id'] != oceans['entity_revision']['id']
-    ):
-        raise ValueError('water and ocean selections use different registry bindings')
     digest = hashlib.sha256(canonical_bytes(selection)).hexdigest()
     return {
         'source': 'saved-selection',

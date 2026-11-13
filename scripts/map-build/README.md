@@ -35,6 +35,8 @@ The configuration selects four working revisions: mainland, regional land,
 named water and oceans. At startup, the pipeline reads them and their source
 catalog references in one repeatable-read, read-only transaction. It saves that
 selection and closes the transaction before downloads or computation.
+Every selected stage must map each grid code to the same entity and land/water
+class. Row order and registry names do not affect this check.
 
 Use `--selection /absolute/path/to/input-selection.json` to replay a saved
 selection. Resume uses the run's saved selection rather than rereading Neon.
@@ -59,6 +61,9 @@ The calculation is:
    Basin participants come from current physical shores and final land.
 4. **Comparison:** optionally compare every final cell with the release selected
    by `--compare-release VERSION` or explicit reference streams.
+
+Conflicting applicable regional assignments stop the build. Components outside
+a regional rule's scope keep their normal mainland or nearest-land assignment.
 
 Geographic features are imported beforehand through the supported
 [source imports](../source-imports/README.md). Map building reads their saved

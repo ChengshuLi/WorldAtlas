@@ -1,4 +1,3 @@
-import json
 import unittest
 import numpy as np
 from map_build.water import shared_nearest as s
@@ -26,22 +25,18 @@ def snapshot():
     }
 
 
-def basin(order=(22, 11), tolerance='0.00001'):
+def tie_rules(order=(22, 11), tolerance='0.00001'):
     return {
-        'assignment_method': 'shared_nearest_assigned_shore',
-        'participant_entity_ids': [11, 22],
-        'tie_rules': {
-            'method': 'within_minimum_distance_tolerance',
-            'tie_break': 'first_entity_in_priority_order',
-            'tolerance_metres': tolerance,
-            'priority_entity_ids': list(order),
-        },
+        'method': 'within_minimum_distance_tolerance',
+        'tie_break': 'first_entity_in_priority_order',
+        'tolerance_metres': tolerance,
+        'priority_entity_ids': list(order),
     }
 
 
 class SharedTest(unittest.TestCase):
     def test_priority_is_entity_order_not_category_order(self):
-        pairs, t = s.selected_rules(snapshot(), basin())
+        pairs, t = s.tie_policy(snapshot(), tie_rules())
         self.assertEqual(pairs, [(22, 18, 2), (11, 17, 1)])
         # Symmetrical two-cell shores with a center water cell.
         p = np.ones((6, 12), dtype=np.uint8)
@@ -56,7 +51,7 @@ class SharedTest(unittest.TestCase):
         )
         self.assertEqual(result.tolist(), [2])
         self.assertEqual((cert, exact), (0, 1))
-        pairs, t = s.selected_rules(snapshot(), basin((11, 22)))
+        pairs, t = s.tie_policy(snapshot(), tie_rules((11, 22)))
         result, _, _ = s.classify(
             np.array([15.0]),
             np.array([-15.0]),
@@ -77,7 +72,7 @@ class SharedTest(unittest.TestCase):
         l[2, 0] = 17
         l[2, 4] = 18
         self.assertEqual(s.crop(*rle(p), 2, -1, 2, 12).tolist(), [1, 17, 1])
-        pairs, t = s.selected_rules(snapshot(), basin())
+        pairs, t = s.tie_policy(snapshot(), tie_rules())
         edges = s.centers_for_crop(rle(p), rle(l), (0, 12, 0, 6), 12, 6, 30, [17, 18])
         codes, cert, exact = s.classify(
             np.array([15.0, 15.0]),
@@ -109,21 +104,19 @@ class SharedTest(unittest.TestCase):
                 'tolerance_metres': '0.00001',
             },
         ):
-            b = basin()
-            b['tie_rules'] = bad
             with self.assertRaises(ValueError):
-                s.selected_rules(snapshot(), b)
-        b = basin()
-        b['tie_rules']['additional_constraint'] = 'unknown'
+                s.tie_policy(snapshot(), bad)
+        rules = tie_rules()
+        rules['additional_constraint'] = 'unknown'
         with self.assertRaises(ValueError):
-            s.selected_rules(snapshot(), b)
+            s.tie_policy(snapshot(), rules)
         data = snapshot()
         data['category_bindings'].pop()
         with self.assertRaises(ValueError):
-            s.selected_rules(data, basin())
+            s.tie_policy(data, tie_rules())
         for t in ['nan', '-1', '2', None, True]:
             with self.assertRaises(ValueError):
-                s.selected_rules(snapshot(), basin(tolerance=t))
+                s.tie_policy(snapshot(), tie_rules(tolerance=t))
 
     def test_uncertified_crop_rejected(self):
         p = np.ones((6, 12), dtype=np.uint8)
@@ -131,7 +124,7 @@ class SharedTest(unittest.TestCase):
         l = np.zeros_like(p)
         l[2, 4] = 17
         l[2, 6] = 18
-        pairs, t = s.selected_rules(snapshot(), basin())
+        pairs, t = s.tie_policy(snapshot(), tie_rules())
         bounds = (3, 8, 1, 5)
         edges = s.centers_for_crop(rle(p), rle(l), bounds, 12, 6, 30, [17, 18])
         idx = s.make_indexes(edges, pairs)
@@ -144,7 +137,7 @@ class SharedTest(unittest.TestCase):
         p[2, 4] = 17
         l = np.zeros_like(p)
         l[2, 4] = 17
-        pairs, _ = s.selected_rules(snapshot(), basin())
+        pairs, _ = s.tie_policy(snapshot(), tie_rules())
         edges = s.centers_for_crop(rle(p), rle(l), (0, 12, 0, 6), 12, 6, 30, [17, 18])
         with self.assertRaisesRegex(ValueError, 'no shoreline'):
             s.make_indexes(edges, pairs)

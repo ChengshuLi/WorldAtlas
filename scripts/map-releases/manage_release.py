@@ -17,7 +17,7 @@ import tempfile
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'map-build'))
 
 from map_build.execution.runtime import digest, json_bytes, pin, verify_pins
-from map_build.inputs.selection import canonical_bytes, read_saved
+from map_build.inputs.selection import canonical_bytes, read_saved, validate_bindings
 
 STREAMS = ('rows', 'runs')
 CANDIDATE = re.compile(r'(?P<version>v[0-9]+\.[0-9]+)-rc\.?[1-9][0-9]*')
@@ -40,6 +40,7 @@ def read(path):
 
 
 def release_categories(selection):
+    validate_bindings(selection['domains'])
     snapshot = selection['domains']['mainland']
     names = {entity['id']: entity['name'] for entity in snapshot['entities']}
     bindings = snapshot['category_bindings']
