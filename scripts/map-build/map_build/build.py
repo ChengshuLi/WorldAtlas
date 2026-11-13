@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+from contextlib import closing
 from datetime import datetime, timezone
 import gzip
 import hashlib
@@ -523,30 +524,19 @@ class Pipeline:
             if not path.is_file() or path.stat().st_size != size or sha(path) != expected:
                 raise ValueError('cached cloud input size/SHA-256 mismatch: ' + str(path))
         else:
-            started = time.monotonic()
             path.parent.mkdir(parents=True, exist_ok=True)
-            partial = path.with_name(path.name + '.' + uuid.uuid4().hex + '.partial')
-            try:
-                if 'archive' in spec:
-                    with zipfile.ZipFile(archive) as packed:
-                        members = [item for item in packed.infolist() if item.filename == member]
-                        if (
-                            len(members) != 1
-                            or members[0].is_dir()
-                            or ((members[0].external_attr >> 16) & 0o170000) == 0o120000
-                        ):
-                            raise ValueError('ZIP member must be one regular file')
-                        with packed.open(members[0]) as src, partial.open('xb') as dst:
-                            shutil.copyfileobj(src, dst, 1 << 20)
-                else:
-                    from map_build.physical import build as physical
-
-                    staging = self.cfg.get('physical_controls', {}).get('source_staging', {})
-                    physical.download_r2(
-                        staging.get('endpoint_url'),
-                        {'r2_bucket': bucket, 'r2_key': key, 'size': size},
-                        partial,
-                    )
+            if 'archive' in spec:
+                partial = path.with_name(path.name + '.' + uuid.uuid4().hex + '.partial')
+                with zipfile.ZipFile(archive) as packed:
+                    members = [item for item in packed.infolist() if item.filename == member]
+                    if (
+                        len(members) != 1
+                        or members[0].is_dir()
+                        or ((members[0].external_attr >> 16) & 0o170000) == 0o120000
+                    ):
+                        raise ValueError('ZIP member must be one regular file')
+                    with packed.open(members[0]) as src, partial.open('xb') as dst:
+                        shutil.copyfileobj(src, dst, 1 << 20)
                 if partial.stat().st_size != size or sha(partial) != expected:
                     raise ValueError('cloud input size/SHA-256 mismatch: ' + str(path))
                 try:
@@ -555,8 +545,21 @@ class Pipeline:
                     if not path.is_file() or path.stat().st_size != size or sha(path) != expected:
                         raise ValueError('concurrent cloud input changed') from None
                 partial.unlink()
-            finally:
-                self.acquisition_intervals.append((started, time.monotonic()))
+            else:
+                from atlas_sources.catalog import download_source
+                from map_build.physical.build import make_r2_client
+
+                staging = self.cfg.get('physical_controls', {}).get('source_staging', {})
+                transfer = {}
+                try:
+                    with closing(make_r2_client(staging.get('endpoint_url'))) as client:
+                        download_source(
+                            client, spec, self.root / 'inputs', filename=path.name, timing=transfer
+                        )
+                except ValueError as exc:
+                    raise ValueError('cloud input size/SHA-256 mismatch: ' + str(path)) from exc
+                finally:
+                    self.acquisition_intervals.extend(transfer.get('download_intervals', []))
         result = pin(path)
         if result not in self.source_pins:
             self.source_pins.append(result)
@@ -625,7 +628,6 @@ class Pipeline:
                 {'r2_bucket': bucket, 'r2_key': key, 'size_bytes': size, 'sha256': stored_hash}
             )
             if not path.exists():
-                started = time.monotonic()
                 partial = path.with_name(path.name + '.' + uuid.uuid4().hex + '.partial')
                 try:
                     with gzip.open(compressed, 'rb') as src, partial.open('xb') as dst:
@@ -638,7 +640,6 @@ class Pipeline:
                         pass
                 finally:
                     partial.unlink(missing_ok=True)
-                    self.acquisition_intervals.append((started, time.monotonic()))
             reference['reference_' + stream] = self.resolve_pins(
                 {'path': str(path), 'sha256': decoded_hash}
             )

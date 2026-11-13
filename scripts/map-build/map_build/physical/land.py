@@ -48,7 +48,7 @@ def run(config_path, output, *, emit=print):
         raise ValueError('nonempty explicitly pinned land inputs required')
     strip = cfg.get('strip_rows', 512)
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    if not isinstance(strip, int) or isinstance(strip, bool) or not 1 <= strip <= 1024:
+    if not isinstance(strip, int) or isinstance(strip, bool) or strip < 1:
         raise ValueError('invalid strip_rows')
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')

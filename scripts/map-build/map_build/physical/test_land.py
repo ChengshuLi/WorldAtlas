@@ -62,7 +62,7 @@ class RasterizeLandTests(unittest.TestCase):
         report = json.loads((a / 'report.json').read_text())
         self.assertEqual(report['land_cells'], 6)
         self.assertEqual(report['feature_counts'], [1])
-        self.cfg['strip_rows'] = 4
+        self.cfg['strip_rows'] = 4096
         self.config.write_text(json.dumps(self.cfg))
         out = self.d / 'all-rows'
         b.run(self.config, out)

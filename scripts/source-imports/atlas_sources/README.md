@@ -10,6 +10,9 @@ and map building:
 - Join ordered, individually cataloged parts into a checked provider file.
 
 Cached files live under their content hash in the chosen work directory.
+Source imports and map building reuse the same verified bytes. Existing provider
+filenames and the generic import filename can share a hard link, avoiding a
+second download or a second copy.
 Downloads use a temporary file and publish only verified bytes. Download time
 excludes verification and processing. Credentials come from the caller.
 

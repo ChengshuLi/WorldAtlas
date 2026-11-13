@@ -1,6 +1,8 @@
 """Resolve cataloged inputs and stage verified files for importers and map builds."""
+
 import hashlib
 import json
+import os
 from contextlib import closing
 from pathlib import Path
 import shutil
@@ -12,7 +14,8 @@ def read_recipe(database, recipe_id, version):
     """Read a versioned construction record from the existing document table."""
     row = database.execute(
         'SELECT document::text,sha256,size_bytes FROM atlas.structured_documents '
-        'WHERE source_id=%s AND version=%s', (recipe_id, version),
+        'WHERE source_id=%s AND version=%s',
+        (recipe_id, version),
     ).fetchone()
     if row is None:
         raise ValueError('construction record is missing from Neon')
@@ -35,8 +38,11 @@ def catalog_source(database, source_id, version):
     ).fetchone()
     if row is None:
         raise ValueError('raw source version is missing from the Neon catalog')
-    return dict(zip(('r2_bucket', 'r2_key', 'sha256', 'size_bytes'), row),
-                source_id=source_id, version=version)
+    return dict(
+        zip(('r2_bucket', 'r2_key', 'sha256', 'size_bytes'), row),
+        source_id=source_id,
+        version=version,
+    )
 
 
 def check_source(path, source):
@@ -66,14 +72,29 @@ def stream_source(client, source, output, *, check_cancelled=lambda: None):
             raise ValueError('source file size or hash differs from the Neon catalog')
 
 
-def download_source(client, source, work_dir, *, timing=None):
+def download_source(client, source, work_dir, *, timing=None, filename=None):
     """Download and check a cataloged R2 file, or reuse a verified local copy."""
     directory = Path(work_dir) / source['sha256']
     directory.mkdir(parents=True, exist_ok=True)
-    destination = directory / ('source' + (Path(source['r2_key']).suffix or '.bin'))
+    standard = 'source' + (Path(source['r2_key']).suffix or '.bin')
+    filename = standard if filename is None else filename
+    if not filename or Path(filename).name != filename or filename in ('.', '..'):
+        raise ValueError('source cache needs a plain filename')
+    destination = directory / filename
     if destination.exists():
         check_source(destination, source)
         return destination
+    # Both callers use the same content directory. Preserve their established
+    # filenames without downloading or copying bytes already cached by the other.
+    for name in dict.fromkeys((standard, Path(source['r2_key']).name)):
+        existing = directory / name
+        if existing != destination and existing.is_file():
+            check_source(existing, source)
+            try:
+                os.link(existing, destination)
+            except FileExistsError:
+                check_source(destination, source)
+            return destination
     output = NamedTemporaryFile(dir=directory, prefix='download-', delete=False)
     partial = Path(output.name)
     try:
@@ -83,9 +104,16 @@ def download_source(client, source, work_dir, *, timing=None):
                 stream_source(client, source, output)
             finally:
                 if timing is not None:
-                    timing['download_seconds'] = timing.get('download_seconds', 0.) + time.monotonic() - started
+                    ended = time.monotonic()
+                    timing['download_seconds'] = (
+                        timing.get('download_seconds', 0.0) + ended - started
+                    )
+                    timing.setdefault('download_intervals', []).append((started, ended))
         check_source(partial, source)
-        partial.replace(destination)
+        try:
+            os.link(partial, destination)
+        except FileExistsError:
+            check_source(destination, source)
     finally:
         partial.unlink(missing_ok=True)
     return destination
@@ -116,8 +144,10 @@ def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir, *, tim
                 with download_source(client, part, work_dir, timing=timing).open('rb') as stream:
                     shutil.copyfileobj(stream, output, 1 << 20)
         check_source(partial, source)
-        partial.replace(destination)
+        try:
+            os.link(partial, destination)
+        except FileExistsError:
+            check_source(destination, source)
     finally:
         partial.unlink(missing_ok=True)
     return destination
-

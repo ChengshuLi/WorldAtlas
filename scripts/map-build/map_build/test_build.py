@@ -1,6 +1,7 @@
 """Runner contracts, measured parallelism, and actual raw-to-component chaining."""
 
 import json
+from contextlib import contextmanager
 import gzip
 import hashlib
 import io
@@ -15,7 +16,7 @@ import threading
 import time
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from map_build import build as pipeline
 
@@ -215,6 +216,7 @@ class Fixture(unittest.TestCase):
             'size_bytes': len(payload),
         }
 
+    @contextmanager
     def fake_r2(self, payloads, calls):
         from map_build.physical import build as module
 
@@ -222,7 +224,18 @@ class Fixture(unittest.TestCase):
             calls.append(entry['r2_key'])
             destination.write_bytes(payloads[entry['r2_key']])
 
-        return patch.object(module, 'download_r2', side_effect=download)
+        def retrieve(*, Bucket, Key):
+            calls.append(Key)
+            data = payloads[Key]
+            return {'Body': io.BytesIO(data), 'ContentLength': len(data)}
+
+        client = Mock()
+        client.get_object.side_effect = retrieve
+        with (
+            patch.object(module, 'download_r2', side_effect=download),
+            patch.object(module, 'make_r2_client', return_value=client),
+        ):
+            yield client.get_object
 
     def test_catalog_resolves_exact_versions_before_r2_acquisition(self):
         payload = b'{}'
@@ -342,7 +355,20 @@ class Fixture(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'cloud input size/SHA-256 mismatch'):
                 self.make()
         self.assertFalse((self.root / 'run').exists())
-        self.assertEqual(len(list((self.root / 'inputs').rglob('*.partial'))), 1)
+        self.assertEqual(len(list((self.root / 'inputs').rglob('download-*'))), 0)
+
+    def test_import_cache_is_reused_without_network_or_download_time(self):
+        payload = b'{}'
+        source = self.cloud(payload)
+        cached = self.inputs / source['sha256'] / 'source.json'
+        cached.parent.mkdir()
+        cached.write_bytes(payload)
+        self.cfg['sources']['raw_manifest'] = source
+        with self.fake_r2({}, []) as download:
+            runner = self.make()
+        download.assert_not_called()
+        self.assertEqual(runner.sources['raw_manifest'].stat().st_ino, cached.stat().st_ino)
+        self.assertEqual(runner.acquisition_intervals, [])
 
     def test_relative_input_root_is_relative_to_the_configuration(self):
         self.cfg['input_root'] = '..'
