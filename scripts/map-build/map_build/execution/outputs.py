@@ -159,18 +159,3 @@ def write_json_exclusive(
     with create_text_exclusive(path, encoding="utf-8", newline="\n") as stream:
         json.dump(value, stream, indent=indent, ensure_ascii=ensure_ascii)
         stream.write("\n")
-
-
-@contextmanager
-def open_checkpoint_readonly(path: os.PathLike[str] | str) -> Iterator[BinaryIO]:
-    """Open a *closed, complete* checkpoint for reading only.
-
-    The caller must select a completion-recorded artifact, never a `.tmp`, active
-    stream, or mutable manifest. O_RDONLY and O_NOFOLLOW prevent writes and
-    symlink substitution; this function deliberately offers no resume-in-place.
-    """
-    p = os.fspath(path)
-    flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
-    fd = os.open(p, flags)
-    with os.fdopen(fd, "rb") as stream:
-        yield stream

@@ -1,7 +1,7 @@
 """Complete WGS84 tile/run search with conservative bounds and no cache limit."""
 
 from pathlib import Path
-import hashlib, math, sys
+import hashlib, math
 import numpy as np
 from scipy.spatial import cKDTree
 from map_build.core.distances import run_pairs_batch

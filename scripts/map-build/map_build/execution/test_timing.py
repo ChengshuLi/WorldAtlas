@@ -1,16 +1,12 @@
-"""Restart safety: active-time arithmetic, real leaf processes and pinned outputs."""
+"""Restart safety: active-time arithmetic, checkpoints and pinned outputs."""
 
-import json
 from pathlib import Path
 import tempfile
-import subprocess
-import sys
-import time
 import unittest
 from unittest.mock import patch
 
 from map_build.execution import runtime as pipeline
-from map_build.execution.runtime import Timing, RunLock
+from map_build.execution.runtime import Timing
 
 
 class ActiveTimingTests(unittest.TestCase):

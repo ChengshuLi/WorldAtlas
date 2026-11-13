@@ -5,7 +5,7 @@ source partition and output are streamed. No application-imposed memory cap
 is enforced; actual memory use depends on inputs and algorithm workload.
 """
 
-import collections, hashlib, json, math, sqlite3, struct
+import hashlib, json, math, sqlite3, struct
 import time
 from pathlib import Path
 import numpy as np

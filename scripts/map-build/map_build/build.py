@@ -33,17 +33,15 @@ from map_build.execution.runtime import (
     Checkpoints,
     RunLock,
     code_identity,
-    inventory,
     json_bytes,
     verify_pins,
     verify_anchor,
     write,
-    elapsed_union,
 )
 from map_build.inputs.selection import canonical_bytes, read_saved, read_selection
 from map_build.inputs.releases import read_release_streams
 
-from map_build.execution.control import stage as stage_context, emit
+from map_build.execution.control import stage as stage_context
 
 
 def validate_runtime():

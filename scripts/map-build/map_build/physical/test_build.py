@@ -1,4 +1,3 @@
-import hashlib
 import fcntl
 import io
 import json

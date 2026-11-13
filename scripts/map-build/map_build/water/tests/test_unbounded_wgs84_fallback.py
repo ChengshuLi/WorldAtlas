@@ -1,4 +1,4 @@
-import math, unittest
+import unittest
 import numpy as np
 from scipy.spatial import cKDTree
 from map_build.water import shared_nearest as s

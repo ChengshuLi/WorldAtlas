@@ -1,6 +1,6 @@
 """Randomized comparison of batched and prior per-component boundary scans."""
 
-import sqlite3, tempfile, unittest, json
+import tempfile, unittest, json
 from pathlib import Path
 import numpy as np
 from map_build.water import closed_water_core as ref

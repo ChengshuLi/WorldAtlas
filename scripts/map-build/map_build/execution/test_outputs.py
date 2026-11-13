@@ -1,4 +1,4 @@
-import os, tempfile, unittest
+import tempfile, unittest
 from pathlib import Path
 from map_build.execution.outputs import (
     validate_fresh_output,

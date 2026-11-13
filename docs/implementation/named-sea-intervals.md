@@ -6,7 +6,7 @@
 
 - The [basin builder](../../scripts/map-build/map_build/water/basins.py) reads imported basin geometry and discovers its participating continents from the current shores.
 - The [rectangle engine](../../scripts/map-build/map_build/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
-- The [individual-cell check](../../scripts/map-build/map_build/water/wrapped_bounds.py) calls the [nearest-shore search](../../scripts/map-build/map_build/water/shared_nearest.py) and uses a [full-shore scan](../../scripts/map-build/map_build/water/streamed_shore_fallback.py) when needed.
+- The [nearest-shore search](../../scripts/map-build/map_build/water/shared_nearest.py) checks unresolved cells against the complete shared shoreline index.
 - The [row-only engine](../../scripts/map-build/map_build/water/interval_nearest.py) implements the single-row reference method.
 
 ## How it works
@@ -29,7 +29,7 @@ The shortcut gives the same assignments as checking every cell separately. For e
 
 Call the middle point `m` and let `r` be a conservative upper bound on the distance from `m` to any selected cell center in the rectangle. The nearest-shore distance for any continent can change by at most `r` between those points. That follows from the triangle inequality.
 
-At `m`, let `U` be an upper bound on the candidate’s nearest-shore distance and `L` a lower bound on a competitor’s. The candidate wins throughout the rectangle if this is true for every competitor and any shore outside the local search window.
+At `m`, let `U` be an upper bound on the candidate’s nearest-shore distance and `L` a lower bound on a competitor’s. The candidate wins throughout the rectangle if this is true for every competitor. The calculation uses every participating shore.
 
 ```text
 U + 2 × r + tie tolerance < L
@@ -41,9 +41,9 @@ The two copies of `r` cover the worst case. The candidate’s shore could get fa
 
 - **Distance bounds.** The rectangle bound uses its midpoint, the farthest offsets in latitude and longitude, and conservative WGS84 radii along that path. The row-only version uses an actual middle cell and bounds the distance along that latitude. It uses the WGS84 equatorial radius divided by one minus the flattening as an upper bound on the radius of curvature, scales by the latitude cosine and longitude offset in radians, and adds a 1 cm numerical margin. Both versions handle the map seam.
 - **Fast checks first.** Bounds based on spherical distances often settle the result. When those bounds overlap, the build first checks whether a more precise midpoint measurement could possibly establish a large enough lead. If it could, the build computes the exact WGS84 minimum distance at that point for any continent still in contention and expands the bounds by a millimetre. Near antipodal points, the chord-only lower-bound calculation uses half the maximum ellipsoid circumference as a conservative upper bound.
-- **Fallback.** If the build still cannot rule out a closer shore outside the local search window after subdivision, it checks the unresolved cells individually. It also uses this check if the index lacks one of the continents. That check can scan the full shoreline. It retains the decision’s tie rules and handles numerical uncertainty.
-- **Coverage.** The rectangle engine works within source windows in groups of 64 rows. It divides or skips a region only as needed and skips a region only when it contains no selected cells. Every selected cell is accounted for, including at window, tile, and row-group edges.
+- **Individual cells.** Unresolved cells use the complete shoreline index, with conservative candidate bounds followed by exact WGS84 distances. Missing participant shores stop the calculation. The selected tie policy applies throughout.
+- **Coverage.** The basin builder supplies source windows in ordinary row batches. It divides or skips a region only as needed and skips a region only when it contains no selected cells. Every selected cell is accounted for, including at window, tile, and row-group edges.
 
 The rectangle engine is the default. Tests compare it with independent
 individual-cell calculations and the row-only engine. The complete shoreline
-index supplies fallback searches when a local bound cannot establish the winner.
+index supplies individual-cell searches when a block cannot be certified.

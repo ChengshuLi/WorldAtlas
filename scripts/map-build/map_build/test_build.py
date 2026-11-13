@@ -5,20 +5,16 @@ from contextlib import contextmanager
 import gzip
 import hashlib
 import io
-import os
 from pathlib import Path
-import struct
-import subprocess
-import sys
 import zipfile
 import tempfile
 import threading
 import time
-from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
 
 from map_build import build as pipeline
+from map_build.execution.runtime import elapsed_union
 
 
 class TimingTests(unittest.TestCase):
@@ -53,10 +49,10 @@ class TimingTests(unittest.TestCase):
         self.assertEqual(set(cfg['sources']), {'land_config', 'water_config', 'raw_manifest'})
 
     def test_interval_union_excludes_idle_gaps_and_parallel_double_count(self):
-        self.assertEqual(pipeline.elapsed_union([(1, 5), (2, 4), (8, 9), (4, 7)]), 7)
-        self.assertEqual(pipeline.elapsed_union([]), 0)
+        self.assertEqual(elapsed_union([(1, 5), (2, 4), (8, 9), (4, 7)]), 7)
+        self.assertEqual(elapsed_union([]), 0)
         with self.assertRaises(ValueError):
-            pipeline.elapsed_union([(2, 1)])
+            elapsed_union([(2, 1)])
 
     def test_completed_intervals_survive_and_failures_remain_incomplete(self):
         with tempfile.TemporaryDirectory() as td:

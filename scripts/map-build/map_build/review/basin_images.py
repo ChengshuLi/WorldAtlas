@@ -20,7 +20,7 @@ from shapely.ops import unary_union
 
 from map_build.core.rle import open_grid, row
 from map_build.water.basins import physical_water, rasterize
-from map_build.water.wrapped_bounds import wrapped_grid_bounds
+from map_build.core.wrapping import wrapped_grid_bounds
 
 
 def union(geometries):

@@ -2,7 +2,6 @@
 
 import math
 import numpy as np
-from scipy.spatial import cKDTree
 from map_build.core.geodesy import GEOD, MIN_RADIUS as MIN_CURVATURE_RADIUS
 
 BOUND_CUSHION_M = 0.001

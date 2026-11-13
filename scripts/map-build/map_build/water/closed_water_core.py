@@ -5,7 +5,6 @@ barrier counts and snapshot/physical lineage must be verified by the caller.
 """
 
 from collections import Counter, defaultdict
-import math
 import numpy as np
 from map_build.water import shared_nearest as shore
 

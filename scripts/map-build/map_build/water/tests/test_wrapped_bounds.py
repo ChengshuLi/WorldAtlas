@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
-from map_build.water import wrapped_bounds as w
+from map_build.water.tests import shore_reference as w
 from map_build.water import shared_nearest as s
-from map_build.water import streamed_shore_fallback as sf
+from map_build.water.tests import shore_scan as sf
 
 W, H = 36, 18
 STEP = 10.0

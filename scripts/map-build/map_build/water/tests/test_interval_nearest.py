@@ -184,8 +184,8 @@ class Intervals(unittest.TestCase):
             )
 
     def test_actual_wrapped_streamed_fallback(self):
-        from map_build.water.wrapped_bounds import StreamedWrappedClassifier
-        from map_build.water import streamed_shore_fallback as fallback
+        from map_build.water.tests.shore_reference import StreamedWrappedClassifier
+        from map_build.water.tests import shore_scan as fallback
         from scipy.spatial import cKDTree
 
         def dataset(lats, lons):

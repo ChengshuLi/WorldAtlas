@@ -16,12 +16,9 @@ from pathlib import Path
 from map_build.execution.outputs import (
     create_binary_exclusive,
     create_directory_exclusive,
-    create_gzip_text_exclusive,
-    create_text_exclusive,
-    create_run_directory,
     write_json_exclusive,
 )
-import hashlib, json, math, struct
+import math, struct
 
 
 class CutEdges:
@@ -628,88 +625,3 @@ def floodfill_run_graph(
     }
     write_json_exclusive(workdir / 'manifest.json', manifest)
     return manifest
-
-
-def export_jsonl_tiles(
-    workdir,
-    width,
-    height,
-    *,
-    tile_height=256,
-    manifest_inputs=None,
-    rule_id='fresh-ocean-seed-floodfill-v1',
-):
-    """Stream complete row-interval JSONL tiles from the sparse binary spans.
-
-    Each tile has one JSON line per row including empty rows. Span end is
-    exclusive. This is an interchange/export layer; binary row spans remain the
-    compact authoritative candidate.
-    """
-    workdir = Path(workdir)
-    offset_bytes = (workdir / 'ocean_rows.u64le').read_bytes()
-    offsets = struct.unpack('<%dQ' % (height + 1), offset_bytes)
-    out_manifest = {
-        'schema': 'fresh-ocean-jsonl-tiles-v1',
-        'grid': {'W': width, 'H': height, 'row_start': 0, 'row_end_exclusive': height},
-        'inputs': manifest_inputs or {},
-        'rule_id': rule_id,
-        'member_ids': {
-            '7': 'ocean-seed-7-atlantic',
-            '8': 'ocean-seed-8-pacific',
-            '9': 'ocean-seed-9-indian',
-            '10': 'ocean-seed-10-arctic',
-        },
-        'tiles': [],
-    }
-    span_path = workdir / 'ocean_assignment_spans.u32le'
-    with span_path.open('rb') as sf:
-        for y0 in range(0, height, tile_height):
-            y1 = min(height, y0 + tile_height)
-            path = workdir / f'ocean-assignment-rows-{y0:06d}-{y1:06d}.jsonl'
-            counts = Counter()
-            nspans = 0
-            ncells = 0
-            with create_text_exclusive(path, encoding='utf-8', newline='\n') as out:
-                for y in range(y0, y1):
-                    out_spans = []
-                    a = offsets[y]
-                    b = offsets[y + 1]
-                    sf.seek(a * 12)
-                    for _ in range(b - a):
-                        x0, x1, code = struct.unpack('<III', sf.read(12))
-                        n = x1 - x0
-                        counts[code] += n
-                        ncells += n
-                        nspans += 1
-                        out_spans.append(
-                            {
-                                'start': x0,
-                                'end': x1,
-                                'code': code,
-                                'rule_id': rule_id,
-                                'member_id': out_manifest['member_ids'][str(code)],
-                            }
-                        )
-                    out.write(
-                        json.dumps({'row': y, 'spans': out_spans}, separators=(',', ':')) + '\n'
-                    )
-            digest = hashlib.sha256(path.read_bytes()).hexdigest()
-            out_manifest['tiles'].append(
-                {
-                    'path': path.name,
-                    'sha256': digest,
-                    'row_start': y0,
-                    'row_end_exclusive': y1,
-                    'row_count': y1 - y0,
-                    'span_count': nspans,
-                    'cell_count': ncells,
-                    'cell_counts_by_code': {str(k): counts[k] for k in sorted(counts)},
-                }
-            )
-    out_manifest['row_coverage_complete'] = (
-        sum(t['row_count'] for t in out_manifest['tiles']) == height
-    )
-    out_manifest['tile_count'] = len(out_manifest['tiles'])
-    mpath = workdir / 'tile_manifest.json'
-    write_json_exclusive(mpath, out_manifest)
-    return out_manifest

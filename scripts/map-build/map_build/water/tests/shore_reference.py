@@ -1,8 +1,4 @@
-"""Conservative circular envelopes and fail-closed nearest-shore fallback.
-Each Polygon component's full ordinary longitude projection is retained, so
-actual planar edges are never reinterpreted across the antimeridian. The optional wrapped-index path keeps exact WGS84 classification and falls back
-to a streamed full crop whenever omitted shores cannot be certified.
-"""
+"""Test reference for crop wrapping and exhaustive full-shore fallback."""
 
 import math
 
@@ -68,7 +64,7 @@ class StreamedWrappedClassifier:
             except ValueError as exc:
                 if str(exc) not in recoverable:
                     raise
-        out = np.empty(len(lat), dtype='u1')
+        out = np.empty(len(lat), dtype=np.uint32)
         certified = exact = 0
         for i in range(len(lat)):
             try:
