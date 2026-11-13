@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from unittest.mock import Mock
 
-from execution_state import pin
+from map_build.execution.runtime import pin
 from manage_release import build_bundle, stage, verify_object, version
 
 
@@ -116,8 +116,13 @@ class BundleTests(unittest.TestCase):
 
     def test_candidate_name_identifies_the_release(self):
         self.assertEqual(version('v9.0-rc.2'), 'v9.0')
+        self.assertEqual(version('v8.3-rc1'), 'v8.3')
+        self.assertEqual(version('v8.3-rc12'), 'v8.3')
         with self.assertRaises(ValueError):
             version('../v9.0')
+        for invalid in ('v8.3-rc', 'v8.3-rc0', 'v8.3-rc01', 'v8.3-rc1/extra'):
+            with self.assertRaises(ValueError):
+                version(invalid)
 
 
 class R2VerificationTests(unittest.TestCase):

@@ -1,7 +1,7 @@
 """Small in-process fixture for the canonical directory publication protocol."""
 from pathlib import Path
 
-from execution_state import _publication_module
+from map_build.execution.runtime import _publication_module
 
 
 def main(argv=None, *, emit=print):

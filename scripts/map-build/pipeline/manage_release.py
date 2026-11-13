@@ -10,20 +10,23 @@ import os
 from pathlib import Path
 import re
 import shutil
+import sys
 import tempfile
 
-from execution_state import digest, json_bytes, pin, verify_pins
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from map_build.execution.runtime import digest, json_bytes, pin, verify_pins
 from run_pipeline import SCRIPTS, stage_module
 
 STREAMS = ('rows', 'runs')
-CANDIDATE = re.compile(r'(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*')
+CANDIDATE = re.compile(r'(?P<version>v[0-9]+\.[0-9]+)-rc\.?[1-9][0-9]*')
 HOMEPAGE = 'review/index.html'
 
 
 def version(candidate):
     match = CANDIDATE.fullmatch(candidate)
     if not match:
-        raise ValueError('candidate must look like v9.0-rc.1')
+        raise ValueError('candidate must look like v9.0-rc1')
     return match['version']
 
 

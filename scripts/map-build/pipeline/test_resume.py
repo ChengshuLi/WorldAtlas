@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 import run_pipeline as pipeline
-from execution_state import Timing, RunLock
+from map_build.execution.runtime import Timing, RunLock
 
 
 class ActiveTimingTests(unittest.TestCase):
@@ -238,7 +238,7 @@ class ExecutorResumeTests(unittest.TestCase):
         second.checkpoints.verify_all()
 
     def test_published_output_receipt_tampering_fails_before_reuse(self):
-        from execution_state import _publication_module
+        from map_build.execution.runtime import _publication_module
         first = self.runner()
         self.published(first)
         first.close()
@@ -272,7 +272,7 @@ class ExecutorResumeTests(unittest.TestCase):
         self.assertEqual(list(outside.iterdir()), [])
 
     def test_arbitrary_output_symlinks_remain_rejected(self):
-        from execution_state import inventory
+        from map_build.execution.runtime import inventory
         first = self.runner()
         (first.out / 'linked').symlink_to(self.source.parent, target_is_directory=True)
         with self.assertRaisesRegex(ValueError, 'invalid publication payload path'):
@@ -320,12 +320,15 @@ class ExecutorResumeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'timing journal lost'):
             self.runner(resume=True)
 
-    def test_changed_code_identity_fails_before_reuse(self):
+    def test_changed_code_is_recorded_and_resume_keeps_the_original_identity(self):
         first = self.runner()
+        original = pipeline.pin(self.out / 'run-identity.json')
         first.close()
         with patch.object(pipeline, 'code_identity', return_value={'changed.py': '0' * 64}):
-            with self.assertRaisesRegex(ValueError, 'identity changed'):
-                self.runner(resume=True)
+            resumed = self.runner(resume=True)
+            self.assertEqual(pipeline.pin(self.out / 'run-identity.json'), original)
+            self.assertEqual(pipeline.read(resumed.attempt_dir / 'producer.json')['code'],
+                             {'changed.py': '0' * 64})
 
     def test_two_live_runners_cannot_resume_same_run(self):
         self.runner()

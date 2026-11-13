@@ -25,15 +25,17 @@ import traceback
 import uuid
 import zipfile
 
-from execution_state import (Timing, Checkpoints, RunLock, code_identity, inventory,
-                             json_bytes, verify_pins, verify_anchor, write, elapsed_union)
-from draft_snapshot import (draft_physical_selection, prepare_land_draft, read_land_draft,
-                            read_release_streams, read_regional_decisions)
-
 HERE = Path(__file__).resolve().parent
 SCRIPTS = HERE.parent
 if str(SCRIPTS) not in sys.path:
     sys.path.append(str(SCRIPTS))
+
+from map_build.execution.runtime import (Timing, Checkpoints, RunLock, code_identity, inventory,
+                             json_bytes, verify_pins, verify_anchor, write, elapsed_union)
+from map_build.inputs.selection import canonical_bytes, read_saved, read_selection
+from draft_snapshot import (draft_physical_selection, prepare_land_draft, read_land_draft,
+                            read_release_streams, read_regional_decisions)
+
 from stage_external import ExternalCommands, emit
 STAGE2 = 'stages/land/stage2-geodesic-20261104'
 REGIONAL = 'land/research-mixed-runtime/stage3-mixed-leeward-full-20261105'
@@ -220,7 +222,7 @@ def physical_reference(run, sources):
 
 class Pipeline:
     def __init__(self, config, output=None, *, resume=False, work_dir=None,
-                 draft_revision=None, compare_release=None, physical_from=None):
+                 draft_revision=None, compare_release=None, physical_from=None, selection=None):
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
         self.config_path = Path(config).resolve(strict=True)
@@ -249,19 +251,54 @@ class Pipeline:
         self.source_pins = []
         self.input_cache = {}
         self.acquisition_intervals = []
+        self.selection = None
+        selected_path = self.out / 'input-selection.json'
+        revisions = self.cfg.get('decision_revisions')
+        if resume and selected_path.is_file():
+            self.selection = read_saved(selected_path, revisions)
+            if selection is not None and canonical_bytes(read_saved(selection)) != canonical_bytes(self.selection):
+                raise ValueError('resume uses a different saved geographic selection')
+        elif selection is not None:
+            self.selection = read_saved(selection, revisions)
+        elif revisions:
+            import psycopg
+            connection = os.environ.get('NEON_DATABASE_URL')
+            if not connection:
+                raise ValueError('set NEON_DATABASE_URL to freeze the working geographic selection')
+            with psycopg.connect(connection, connect_timeout=15) as database:
+                self.selection = read_selection(database, revisions)
+        if self.selection is not None:
+            if set(self.selection['domains']) != {'mainland', 'regional', 'water', 'ocean'}:
+                raise ValueError('a map build needs mainland, regional, water and ocean selections')
+            selected_revision = self.selection['revisions']['mainland']
+            if draft_revision is not None and draft_revision != selected_revision:
+                raise ValueError('mainland argument differs from the saved selection')
+            draft_revision = selected_revision
         # Verify every external document before expensive computation starts.
         required = {'land_config', 'water_config', 'raw_manifest', 'land_snapshot',
                     'resolution_template', 'regional_template', 'water_snapshot',
                     'seavox_archive', 'coastal_plan', 'neon_selection', 'osm_receipt'}
         selections = self.cfg.get('sources', {})
+        if self.selection is not None:
+            retired_water_inputs = {'water_snapshot', 'seavox_archive', 'coastal_plan'}
+            required -= retired_water_inputs
+            selections = {key: value for key, value in selections.items() if key not in retired_water_inputs}
         if (not isinstance(selections, dict) or not required <= selections.keys() or
                 set(selections) - required - {'reference_rows', 'reference_runs'}):
             raise ValueError('wrong source selection input set')
         resolved = self.resolve_raw_catalog(selections)
         self.regional_decisions = None
-        if revision := self.cfg.get('regional_revision'):
+        if revision := (self.selection['revisions']['regional'] if self.selection is not None
+                        else self.cfg.get('regional_revision')):
             resolved = copy.deepcopy(resolved)
-            if resume:
+            if self.selection is not None:
+                partition = self.selection['regional_partition']
+                policy = copy.deepcopy(partition['policy'])
+                policy['line'] = {key: partition['line'][key] for key in ('line_id', 'geometry_sha256')}
+                regional = {'snapshot': self.selection['domains']['regional'],
+                            'line': partition['line'], 'policy': policy}
+                self.regional_decisions = self.save_source_document(regional, serialization='canonical-ascii')
+            elif resume:
                 selected = read(self.out / 'run-identity.json')['regional_decisions']
                 self.regional_decisions = self.resolve_pins(selected)
                 regional = read(self.regional_decisions)
@@ -281,7 +318,10 @@ class Pipeline:
         self.draft_land = None
         self.preview_land = None
         if draft_revision is not None:
-            if resume:
+            if self.selection is not None:
+                self.draft_land = self.save_source_document(self.selection['domains']['mainland'],
+                                                            serialization='canonical-ascii')
+            elif resume:
                 previous = read(self.out / 'run-identity.json').get('land_draft', {})
                 if previous.get('revision') != draft_revision:
                     raise ValueError('resume requires the same mainland draft revision')
@@ -315,6 +355,8 @@ class Pipeline:
             'code': self.code, 'scripts_root': str(SCRIPTS), 'output': str(self.out),
             'runtime': self.runtime,
             'runtime_paths': {key: os.environ.get(key) for key in ('PYTHONPATH', 'PROJ_DATA', 'PROJ_LIB', 'PROJ_NETWORK')}}
+        if self.selection is not None:
+            self.identity['input_selection_sha256'] = hashlib.sha256(canonical_bytes(self.selection)).hexdigest()
         if self.draft_land is not None:
             self.identity['land_draft'] = {'revision': draft_revision, 'snapshot': pin(self.draft_land)}
         if self.regional_decisions is not None:
@@ -325,12 +367,17 @@ class Pipeline:
             self.identity['physical_reuse'] = self.physical_reuse
         if not resume:
             self.out.mkdir(mode=0o700)
+            if self.selection is not None:
+                write(selected_path, self.selection)
         self.run_lock = RunLock(self.out / 'run.lock')
         try:
             identity_path = self.out / 'run-identity.json'
             if resume:
-                if read(identity_path) != self.identity:
-                    raise ValueError('resume request, input, code, runtime or output identity changed')
+                previous = read(identity_path)
+                provenance = {'code', 'runtime', 'runtime_paths', 'scripts_root'}
+                selection = lambda value: {k: v for k, v in value.items() if k not in provenance}
+                if selection(previous) != selection(self.identity):
+                    raise ValueError('resume request, input selection or output identity changed')
             else:
                 write(identity_path, self.identity)
             for name in ('configs', 'work', 'logs', 'scratch', 'basins', 'extractions', 'attempts'):
@@ -338,6 +385,8 @@ class Pipeline:
             self.attempt = uuid.uuid4().hex
             self.attempt_dir = self.out / 'attempts' / self.attempt
             self.attempt_dir.mkdir()
+            write(self.attempt_dir / 'producer.json', {'code': self.code, 'runtime': self.runtime,
+                                                       'scripts_root': str(SCRIPTS)})
             self.checkpoints = Checkpoints(self.out / 'checkpoints', self.attempt)
             self.checkpoints.verify_all()
             for marker in (self.out / 'attempts').glob('*/setup-timing.json'):
@@ -397,7 +446,7 @@ class Pipeline:
         catalog = {(row[0], row[1]): row for row in rows}
         if catalog.keys() != requested:
             raise ValueError('Neon raw catalog is missing selected source versions')
-        if hashlib.sha256(json_bytes(rows)).hexdigest() != self.cfg.get('raw_catalog_sha256'):
+        if self.selection is None and hashlib.sha256(json_bytes(rows)).hexdigest() != self.cfg.get('raw_catalog_sha256'):
             raise ValueError('Neon raw catalog metadata differs from the config pin')
         for spec, size_field in references:
             identity = spec.pop('r2_source')
@@ -407,6 +456,10 @@ class Pipeline:
         return resolved
 
     def neon_raw_catalog(self, requested):
+        if self.selection is not None:
+            wanted = set(requested)
+            return [tuple(source[key] for key in ('source_id', 'version', 'r2_bucket', 'r2_key', 'sha256', 'size_bytes'))
+                    for source in self.selection['raw_sources'] if (source['source_id'], source['version']) in wanted]
         import psycopg
 
         connection = os.environ.get('NEON_DATABASE_URL')
@@ -750,6 +803,7 @@ class Pipeline:
         for token in command[1:]:
             path = Path(token)
             if (path.is_absolute() and path.is_file()
+                    and path != script_path
                     and not any(path == output or path.is_relative_to(output) for output in outputs)):
                 candidate = pin(path)
                 if candidate not in inputs:
@@ -776,8 +830,6 @@ class Pipeline:
                     except BaseException:
                         traceback.print_exc(file=stream)
                         raise
-                    if pin(script_path) != invocation['code']:
-                        raise ValueError('stage entrypoint changed during execution: ' + script)
                 self.checkpoints.complete(name, invocation, outputs, inputs, log, self.timing.anchor())
         finally:
             if name == 'physical' and measurement and 'end_monotonic_seconds' in measurement:
@@ -1038,6 +1090,17 @@ class Pipeline:
         return {'manifest_path': str(assembled), 'manifest_sha256': sha(assembled)}
 
     def water(self, physical, land):
+        if self.selection is not None:
+            from map_build.core.grid import Grid
+            from map_build.water.build import build_water
+            grid = Grid(**read(physical / 'report.json')['grid'])
+            inputs = [pin(self.out / 'input-selection.json'), pin(physical / 'report.json')]
+            inputs += [pin(root / name) for root in (physical, land)
+                       for name in ('rows.u32le', 'runs.u32le')]
+            result = self.checkpoints.run_function('water', 'water', build_water,
+                (self.selection, grid, physical, land, self.out / 'water'),
+                timing=self.timing, inputs=inputs, outputs=[self.out / 'water'])
+            return Path(result['final'])
         sources = self.sources['water_snapshot']
         with self.timing.measure('water', 'prepare-water-selection'):
             stage2 = read(self.out / 'configs/stage2.json')['inputs']['decision_snapshot']
@@ -1158,8 +1221,7 @@ class Pipeline:
             self.timing.mark_complete('water')
             with self.timing.measure('verification', 'stage-total'):
                 comparison = self.compare(final, physical)
-                if (pin(self.config_path) != self.config_pin or any(pin(p['path']) != p for p in self.source_pins)
-                        or code_identity(SCRIPTS) != self.code):
+                if pin(self.config_path) != self.config_pin or any(pin(p['path']) != p for p in self.source_pins):
                     raise ValueError('source configuration changed during pipeline')
                 final_pins = {key: pin(final / name) for key, name in
                               [('rows', 'rows.u32le'), ('runs', 'runs.u32le'), ('report', 'report.json')]}
@@ -1188,7 +1250,7 @@ class Pipeline:
             write(self.out / 'failure.json', {'schema': 'worldatlas-end-to-end-failure-v1',
                 'status': 'incomplete',
                 'stages': self.timing.summary(physical_report),
-                'limitations': 'Resume validates source/code/output pins. Missing interrupted endpoints remain timing-incomplete; no downtime is added.'})
+                'limitations': 'Resume validates source and output pins. Code changes are recorded as provenance. Missing interrupted endpoints remain timing-incomplete; no downtime is added.'})
             raise
         finally:
             self.close()
@@ -1200,7 +1262,8 @@ def main():
     p.add_argument('output', type=Path, nargs='?', help='new run directory inside input_root; defaults to WORK_DIR/run')
     p.add_argument('--work-dir', type=Path, help='local input/run directory, overriding input_root; created if absent')
     p.add_argument('--resume', action='store_true', help='validate and continue the same checkpoint-enabled run')
-    p.add_argument('--land-revision', '--draft-land-revision', dest='draft_land_revision',
+    p.add_argument('--selection', type=Path, help='replay a saved complete geographic selection')
+    p.add_argument('--land-revision', dest='draft_land_revision',
                    help='build a candidate from the selected working mainland revision in Neon')
     p.add_argument('--compare-release', help='compare with a published map version in Neon')
     p.add_argument('--physical-from', type=Path,
@@ -1209,7 +1272,7 @@ def main():
     compare_release = a.compare_release or ('v8.0' if a.draft_land_revision else None)
     pipeline = Pipeline(a.config, a.output, resume=a.resume, work_dir=a.work_dir,
                         draft_revision=a.draft_land_revision, compare_release=compare_release,
-                        physical_from=a.physical_from)
+                        physical_from=a.physical_from, selection=a.selection)
 
     def stop(signum, frame):
         pipeline.cancel()

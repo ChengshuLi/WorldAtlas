@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import threading
 import time
+import traceback
 import uuid
 
 
@@ -93,7 +94,7 @@ def verify_anchor(anchor, expected_path):
 
 
 def _publication_module():
-    path = Path(__file__).resolve().parents[1] / 'stages/land/stage2-geodesic-20261104/atomic_move.py'
+    path = Path(__file__).resolve().parents[2] / 'stages/land/stage2-geodesic-20261104/atomic_move.py'
     spec = importlib.util.spec_from_file_location('pipeline_directory_publication', path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -185,7 +186,7 @@ class RunLock:
 
 class Checkpoints:
     def __init__(self, root, attempt):
-        self.root, self.attempt = Path(root), attempt
+        self.root, self.attempt = Path(root).resolve(), attempt
         self.root.mkdir(exist_ok=True)
         self.preserved = self.root.parent / 'preserved'
         self.preserved.mkdir(exist_ok=True)
@@ -204,13 +205,21 @@ class Checkpoints:
             return False
         receipt = json.loads(path.read_bytes())
         verify_anchor(receipt['timing_anchor'], self.root.parent / 'timing-events.jsonl')
-        if receipt.get('schema') != 'worldatlas-command-checkpoint-v1' or receipt['invocation'] != invocation:
+        request = lambda value: {k: v for k, v in value.items() if k != 'code'}
+        if receipt.get('schema') != 'worldatlas-command-checkpoint-v1' or request(receipt['invocation']) != request(invocation):
             raise ValueError('completed command identity changed: ' + name)
-        verify_pins(receipt['inputs'])
+        verify_pins(self.data_pins(receipt))
         if inventory(outputs) != receipt['outputs']:
             raise ValueError('completed stage output changed: ' + name)
         verify_pins([receipt['log']])
         return True
+
+    @staticmethod
+    def data_pins(receipt):
+        # Earlier checkpoints also included the executable Python file among
+        # their inputs. Preserve the receipt and verify its data inputs only.
+        code_path = receipt['invocation'].get('code', {}).get('path')
+        return [pin for pin in receipt['inputs'] if pin['path'] != code_path]
 
     def preserve(self, name, paths):
         existing = list(dict.fromkeys(Path(path) for path in paths if Path(path).exists() or Path(path).is_symlink()))
@@ -237,7 +246,7 @@ class Checkpoints:
         for path in self.root.glob('*/complete.json'):
             receipt = json.loads(path.read_bytes())
             verify_anchor(receipt['timing_anchor'], self.root.parent / 'timing-events.jsonl')
-            verify_pins(receipt['inputs'])
+            verify_pins(self.data_pins(receipt))
             if inventory(receipt['output_roots']) != receipt['outputs']:
                 raise ValueError('completed stage output changed: ' + path.parent.name)
             verify_pins([receipt['log']])
@@ -254,6 +263,43 @@ class Checkpoints:
             'schema': 'worldatlas-command-checkpoint-v1', 'attempt': self.attempt, 'timing_anchor': timing_anchor,
             'invocation': invocation, 'inputs': inputs, 'output_roots': [os.path.abspath(p) for p in outputs],
             'outputs': inventory(outputs), 'log': pin(log)})
+
+    def run_function(self, name, group, function, args, *, timing, inputs, outputs):
+        """Call an ordinary Python stage and checkpoint its returned record.
+
+        Input/output identity controls reuse. The function's location is
+        provenance, so editing or moving code does not block resume.
+        """
+        outputs = [Path(path).absolute() for path in outputs]
+        run = self.root.parent
+        if any(not path.resolve().is_relative_to(run.resolve()) or path.resolve() == run.resolve()
+               for path in outputs):
+            raise ValueError('stage output outside run or replaces run root')
+        result_path = self.stage(name) / 'result.json'
+        invocation = {'stage': name, 'inputs': inputs, 'outputs': list(map(str, outputs)),
+                      'code': {'module': function.__module__, 'function': function.__qualname__}}
+        sealed = [*outputs, result_path]
+        if self.completed(name, invocation, sealed):
+            return json.loads(result_path.read_bytes())
+        self.preserve(name, sealed)
+        attempt = self.begin(name)
+        logs = run / 'logs'
+        logs.mkdir(exist_ok=True)
+        log = logs / (name + '-' + attempt.name + '.log')
+        verify_pins(inputs)
+        with log.open('x') as stream:
+            write(attempt / 'admitted.json', {'invocation': invocation, 'inputs': inputs,
+                  'log': str(log), 'timing_anchor': timing.anchor()})
+            try:
+                with timing.measure(group, name):
+                    result = function(*args)
+                write(result_path, result)
+                stream.write(json_bytes(result).decode())
+            except BaseException:
+                traceback.print_exc(file=stream)
+                raise
+        self.complete(name, invocation, sealed, inputs, log, timing.anchor())
+        return json.loads(result_path.read_bytes())
 
 
 class Timing:

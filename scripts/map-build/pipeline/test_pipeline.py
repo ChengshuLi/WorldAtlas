@@ -208,6 +208,38 @@ class Fixture(unittest.TestCase):
               self.assertRaisesRegex(ValueError, 'physical sources differ')):
             pipeline.Pipeline(config, self.root / 'changed-physical-preview', draft_revision=revision)
 
+    def test_saved_complete_selection_is_used_for_initialization_and_resume(self):
+        source = {'source_id': 'land', 'version': '1', 'r2_bucket': 'worldatlas',
+                  'r2_key': 'land.zip', 'sha256': 'a' * 64, 'size_bytes': 100}
+        physical = {'role': 'physical_land', 'ordinal': 0, 'execution_status': 'selected_for_research'}
+        mainland = {'decision_revision': {'id': 'mainland'}, 'sources': [source],
+                    'stage1_source_inputs': [{**physical, 'decision_revision': 'mainland',
+                                              'source_id': 'land', 'source_version': '1'}]}
+        selected = {'schema': 'worldatlas-input-selection-v1',
+                    'revisions': dict(mainland='mainland', regional='regional', water='water', ocean='ocean'),
+                    'domains': {'mainland': mainland, 'regional': {'decision_revision': {'id': 'regional'}},
+                                'water': {'features': [], 'basins': []}, 'ocean': {}},
+                    'raw_sources': [source], 'regional_partition': {'policy': {}, 'line': {
+                        'line_id': 'selected', 'geometry_sha256': 'b' * 64}}}
+        self.cfg['sources']['regional_template'] = {'json': {
+            'point_request': {'json': {}}, 'regional': {'request': {}}}}
+        self.cfg['sources']['neon_selection'] = {'json': {
+            'schema': 'worldatlas-neon-stage1-selection-readback-v1', 'revision': 'published',
+            'rows': [{**source, **physical, 'revision': 'published'}]}}
+        config = pipeline.write(self.inputs / 'request.json', self.cfg)
+        selection = pipeline.write(self.inputs / 'selection.json', selected)
+        with (patch.object(pipeline, 'read_land_draft', side_effect=AssertionError('live mainland read')),
+              patch.object(pipeline, 'read_regional_decisions', side_effect=AssertionError('live regional read')),
+              patch.object(pipeline, 'prepare_land_draft', return_value=mainland)):
+            runner = pipeline.Pipeline(config, selection=selection)
+            original = runner.identity['input_selection_sha256']
+            self.assertNotIn('seavox_archive', runner.sources)
+            self.assertEqual(pipeline.read(runner.out / 'input-selection.json'), selected)
+            runner.close()
+            resumed = pipeline.Pipeline(config, resume=True)
+            self.assertEqual(resumed.identity['input_selection_sha256'], original)
+            resumed.close()
+
     def test_release_comparison_downloads_and_verifies_both_streams(self):
         config = pipeline.write(self.inputs / 'request.json', self.cfg)
         digest = lambda data: hashlib.sha256(data).hexdigest()
