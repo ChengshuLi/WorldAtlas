@@ -38,7 +38,7 @@ PYTHONPATH=scripts/source-imports python3 -m run_import \
   --recipe CONSTRUCTION_ID VERSION \
   --revision DECISION_REVISION \
   --r2-endpoint R2_ENDPOINT \
-  --work-dir /absolute/path/to/worldatlas-work/inputs/source-imports
+  --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
 The command reads `atlas.structured_documents` and resolves exact source versions

@@ -76,3 +76,10 @@ For example, the Lydekker construction record can be run with:
 PYTHONPATH=scripts/source-imports python3 -m run_import \
   --recipe lydekker-boundary-construction 1
 ```
+
+## Local source cache
+
+Use `/absolute/path/to/worldatlas-work/inputs` as `--work-dir` for source
+imports. The map command uses that same `inputs/` directory beneath its work
+directory. Both tools verify the cataloged sizes and checksums and reuse the
+same raw bytes. Import receipts live under `inputs/receipts/`.

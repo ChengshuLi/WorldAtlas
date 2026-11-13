@@ -79,7 +79,7 @@ PYTHONPATH=scripts/source-imports python3 -m run_import \
   --recipe CONSTRUCTION_ID VERSION \
   --revision DECISION_REVISION \
   --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com \
-  --work-dir /path/to/work-directory
+  --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
 The selected record identifies the raw source version in `atlas.source_assets`.
