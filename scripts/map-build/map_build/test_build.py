@@ -109,7 +109,6 @@ class TimingTests(unittest.TestCase):
             def job(name):
                 with timer.measure('water', name):
                     entered.wait()
-                    time.sleep(0.06)
 
             threads = [threading.Thread(target=job, args=(name,)) for name in ('sea', 'coast')]
             for thread in threads:
@@ -121,8 +120,9 @@ class TimingTests(unittest.TestCase):
             summary = timer.summary(None)['water']
             self.assertTrue(summary['complete'])
             completed = [r for r in timer.records if r['event'] == 'complete']
-            summed = sum(r['monotonic_seconds'] - r['start_monotonic_seconds'] for r in completed)
-            self.assertLess(summary['processing_elapsed_seconds'], summed * 0.8)
+            intervals = [(r['start_monotonic_seconds'], r['monotonic_seconds']) for r in completed]
+            self.assertEqual(summary['processing_elapsed_seconds'], elapsed_union(intervals))
+            self.assertLess(summary['processing_elapsed_seconds'], sum(end - start for start, end in intervals))
 
 
 class Fixture(unittest.TestCase):
