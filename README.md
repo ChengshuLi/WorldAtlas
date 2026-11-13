@@ -118,7 +118,7 @@ The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 
 ## Continuous integration
 
-All automated test suites are included in [Checks](.github/workflows/source-imports.yml).
+All automated test suites are included in [Checks](.github/workflows/ci.yml).
 CI selects tests from the whole PR's changes against its target branch. This
 keeps code covered when a later push cancels an unfinished run. The relevant
 Python suites run on macOS and Linux:
