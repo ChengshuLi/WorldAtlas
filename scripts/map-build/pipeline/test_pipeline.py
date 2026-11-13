@@ -37,19 +37,16 @@ class TimingTests(unittest.TestCase):
             self.assertEqual(result['reused_from'], '/source/run')
             self.assertIsNone(result['producer_processing_elapsed_seconds'])
 
-    def test_selected_configuration_has_portable_pins_and_complete_new_coastal_partition(self):
+    def test_selected_configuration_has_portable_sources_and_working_geographic_revisions(self):
         path = Path(pipeline.__file__).with_name('config.json')
         cfg = pipeline.read(path)
         self.assertNotIn('/workspace/', path.read_text())
         self.assertNotIn('/tmp/', path.read_text())
         self.assertNotIn('input_root', cfg)
         self.assertEqual(cfg['sources']['raw_manifest']['json']['file_count'], 32)
-        prepare = pipeline.stage_module(pipeline.SCRIPTS / pipeline.REGIONAL / 'prepare_fresh_handoff.py')
-        codes = cfg['sources']['regional_template']['json']['regional']['request']['code']
-        self.assertEqual(set(prepare.bind_regional_code(codes)), set(codes))
-        batch = pipeline.stage_module(pipeline.SCRIPTS / pipeline.REPLAY / 'batch_coastal_tiles.py')
-        entries = batch.validate_plan(cfg['sources']['coastal_plan']['json'], 131072, 54614)
-        self.assertEqual(sum((e['core'][1]-e['core'][0])*(e['core'][3]-e['core'][2]) for e in entries), 131072*54614)
+        self.assertEqual(set(cfg['decision_revisions']), {'mainland', 'regional', 'water', 'ocean'})
+        self.assertEqual(set(cfg['sources']), {'land_config', 'water_config', 'raw_manifest',
+                                             'land_snapshot', 'resolution_template', 'neon_selection', 'osm_receipt'})
 
     def test_interval_union_excludes_idle_gaps_and_parallel_double_count(self):
         self.assertEqual(pipeline.elapsed_union([(1, 5), (2, 4), (8, 9), (4, 7)]), 7)
