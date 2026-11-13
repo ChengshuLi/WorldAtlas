@@ -82,7 +82,7 @@ bash database/tests/run.sh
 
 These SQL checks create a disposable local database and roll back their fixtures.
 Importer and map-input tests add real save, rollback, concurrent-edit and replay
-checks. CI runs the relevant suites on macOS and Linux.
+checks. CI runs all Python and database suites on macOS and Linux.
 
 Database backups must retain exact document text. Parsing and reformatting a
 `document` would invalidate its byte checksum. During cleanup, follow current

@@ -8,28 +8,7 @@ concurrency:
   group: checks-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
-  changes:
-    runs-on: ubuntu-latest
-    outputs:
-      python: ${{ steps.paths.outputs.python }}
-      imports: ${{ steps.paths.outputs.imports }}
-      map: ${{ steps.paths.outputs.map }}
-      releases: ${{ steps.paths.outputs.releases }}
-      sql: ${{ steps.paths.outputs.sql }}
-      web: ${{ steps.paths.outputs.web }}
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 2
-      - name: Test CI selection
-        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
-      - id: paths
-        env:
-          EVENT: ${{ github.event_name }}
-        run: python3 .github/scripts/select_tests.py
   test:
-    needs: changes
-    if: needs.changes.outputs.python == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -42,8 +21,7 @@ jobs:
           environment-file: environment.yml
           cache-environment: true
           cache-environment-key: sources-${{ runner.arch }}-${{ hashFiles('environment.yml') }}
-      - name: Test source imports with disposable PostgreSQL
-        if: needs.changes.outputs.imports == 'true' || needs.changes.outputs.map == 'true' || needs.changes.outputs.sql == 'true'
+      - name: Test database, source imports and map building
         shell: bash -el {0}
         env:
           TMPDIR: ${{ runner.temp }}
@@ -51,9 +29,6 @@ jobs:
           TEMP: ${{ runner.temp }}
           PYTHONPATH: scripts/source-imports:scripts/map-build
           PROJ_NETWORK: 'OFF'
-          RUN_IMPORTS: ${{ needs.changes.outputs.imports }}
-          RUN_MAP: ${{ needs.changes.outputs.map }}
-          RUN_SQL: ${{ needs.changes.outputs.sql }}
         run: |
           set -euo pipefail
           database_dir=$(TMPDIR=/tmp mktemp -d)
@@ -63,28 +38,19 @@ jobs:
             -o "-k $database_dir -p 5432 -c listen_addresses=''" -w start
           psql -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 \
             -f database/migrations/001_initial_schema.sql
-          if [[ "$RUN_SQL" == true ]]; then
-            for check in database/tests/*.sql; do
-              psql -Xq -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 -f "$check"
-            done
-          fi
+          for check in database/tests/*.sql; do
+            psql -Xq -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 -f "$check"
+          done
           export WORLDATLAS_TEST_DATABASE_URL="postgresql://postgres@/postgres?host=$database_dir"
-          if [[ "$RUN_IMPORTS" == true ]]; then
-            time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
-          fi
-          if [[ "$RUN_MAP" == true ]]; then
-            time python -m unittest discover -s scripts/map-build/map_build -t scripts/map-build
-          fi
+          time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
+          time python -m unittest discover -s scripts/map-build/map_build -t scripts/map-build
       - name: Test release staging
-        if: needs.changes.outputs.releases == 'true'
         shell: bash -el {0}
         env:
           PROJ_NETWORK: 'OFF'
           PYTHONPATH: scripts/map-build
         run: time python -m unittest discover -s scripts/map-releases -p 'test_*.py'
   website:
-    needs: changes
-    if: needs.changes.outputs.web == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

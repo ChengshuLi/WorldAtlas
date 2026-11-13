@@ -118,25 +118,14 @@ The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 
 ## Continuous integration
 
-All automated test suites are included in [Checks](.github/workflows/ci.yml).
-The [test selector](.github/scripts/select_tests.py) selects suites from the whole
-PR's changes against its target branch. This
-keeps code covered when a later push cancels an unfinished run. The relevant
-Python suites run on macOS and Linux:
+[Checks](.github/workflows/ci.yml) runs every fast automated suite on each PR
+update and on manual runs:
 
-| Changed code | Suites |
-| --- | --- |
-| Source imports | Source-import tests; shared catalog changes also test map building and packaging |
-| Map building | Map-build and release-packaging tests |
-| Release commands | Packaging, Node and browser tests |
-| Database schema or SQL checks | SQL checks and all Python suites |
-| Website, Node dependencies or Worker | Node and Chromium browser tests on Linux |
-| Viewer configuration | Website and packaging tests |
+- Python source-import, map-building, release and SQL database tests on macOS and Linux.
+- Node and Chromium browser tests on Linux.
 
-The selector has focused tests, run before classification in CI.
-Environment changes run all Python/SQL suites. CI code changes and manual runs
-select every suite. Documentation-only PRs skip runtime suites. CI caches
-installed environments and uses local fixtures and disposable databases, with
-no cloud credentials. Full-size builds and geographic review remain separate.
-The website job uses Chrome already installed on GitHub's runner, avoiding a
-browser and system-package installation. New pushes cancel superseded runs.
+These jobs run in parallel. CI caches installed environments, uses local fixtures
+and disposable databases, and needs no cloud credentials. The website job uses
+Chrome already installed on GitHub's runner. New pushes cancel superseded runs.
+Documentation-only updates also run the checks. Full-size map builds and
+geographic review remain separate.
