@@ -2,7 +2,7 @@ import json,tempfile,unittest
 from pathlib import Path
 import numpy as np
 from osgeo import gdal,osr
-import compose_physical as b
+from map_build.physical import composition as b
 
 class ComposeTests(unittest.TestCase):
     def setUp(self):

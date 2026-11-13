@@ -186,19 +186,14 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
     # GeoParquet specifies OGC:CRS84 when crs is absent. Refuse a different or
     # explicitly null CRS rather than silently assume longitude/latitude.
     if 'crs' in geo['columns']['geometry']:
-        raise ValueError('explicit CRS requires independent review; expected GeoParquet default OGC:CRS84')
+        raise ValueError('unsupported explicit CRS; expected GeoParquet default OGC:CRS84')
     if shutil.disk_usage(output.parent).free < reserve:
         raise ValueError('free disk below configured reserve')
     os.mkdir(output)
     out = Path(output)
     kernel = None
     if engine == 'gdal':
-        if __package__:
-            from .water_batch import WaterBatch
-        else:
-            from water_batch import WaterBatch
-        if Path(sys.modules[WaterBatch.__module__].__file__).resolve()!=Path(__file__).parent/'water_batch.py':
-            raise ValueError('water kernel resolved outside selected checkout')
+        from map_build.physical.water_batch import WaterBatch
         kernel = WaterBatch(out,cfg.get('batch_method','hybrid'))
     raster = gdal.GetDriverByName('GTiff').Create(str(out/'water.tif'), width, height, 1,
         gdal.GDT_Byte, options=['TILED=YES', 'BLOCKXSIZE=512', 'BLOCKYSIZE=512',

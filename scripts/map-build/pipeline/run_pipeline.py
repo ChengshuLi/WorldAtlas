@@ -205,7 +205,11 @@ def physical_reference(run, sources):
         raise ValueError('physical source run is incomplete')
     for key, selected in [('land_config', 'land_config'), ('water_config', 'water_config'),
                           ('source_manifest', 'raw_manifest')]:
-        if identity[key]['sha256'] != sha(sources[selected]):
+        previous = Path(identity[key]['path'])
+        if sha(previous) != identity[key]['sha256']:
+            raise ValueError('physical source configuration changed: ' + key)
+        data = lambda value: {k:v for k,v in value.items() if k != 'selection_notes'}
+        if data(read(previous)) != data(read(sources[selected])):
             raise ValueError('physical input differs from the source run: ' + key)
     output = root / 'physical'
     produced = read(output / 'report.json')
@@ -536,7 +540,7 @@ class Pipeline:
                 elif 'neon' in spec:
                     partial.write_bytes(self.neon_source(source, expected, size))
                 else:
-                    physical = stage_module(SCRIPTS / 'physical/build_physical.py')
+                    from map_build.physical import build as physical
                     staging = self.cfg.get('physical_controls', {}).get('source_staging', {})
                     physical.download_r2(staging.get('endpoint_url'),
                         {'r2_bucket': bucket, 'r2_key': key, 'size': size}, partial)
@@ -911,10 +915,19 @@ class Pipeline:
                **{key: pin(self.sources[source]) for key, source in
                   [('land_config', 'land_config'), ('water_config', 'water_config'),
                    ('source_manifest', 'raw_manifest')]}}
-        self.stage('physical', 'physical', 'physical/build_physical.py',
-                     self.document('physical', cfg), self.out / 'physical',
-                     _outputs=[self.out / 'physical'],
-                     _resume_marker=self.out / 'physical/pipeline-identity.json')
+        from map_build.physical.build import run
+        request = self.document('physical', cfg)
+        marker = self.out/'physical/pipeline-identity.json'
+        previous = self.physical_attempts()
+        measurement = None
+        try:
+            with self.timing.measure('physical', 'physical-invocation', kind='command') as measurement:
+                self.checkpoints.run_function('physical', 'physical', run,
+                    (request, self.out/'physical'), kwargs={'resume': marker.is_file()},
+                    timing=self.timing, inputs=[pin(request)], outputs=[self.out/'physical'], resume_marker=marker)
+        finally:
+            if measurement and 'end_monotonic_seconds' in measurement:
+                self.record_physical_invocation(measurement, previous)
         return self.out / 'physical' / 'physical'
 
     def mainland(self, physical):

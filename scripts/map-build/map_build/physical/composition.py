@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 from osgeo import gdal,osr
 gdal.UseExceptions()
-from build import sha,validate_reference,compare_row
+from map_build.physical.sources import sha,validate_reference,compare_row
 
 
 def open_mask(spec,grid):

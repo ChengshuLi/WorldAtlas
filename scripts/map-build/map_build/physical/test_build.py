@@ -14,7 +14,7 @@ import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
-import build_physical as b
+from map_build.physical import build as b
 
 class PipelineTests(unittest.TestCase):
     def test_atomic_publish_preserves_pending_on_link_failure(self):
@@ -40,7 +40,7 @@ class PipelineTests(unittest.TestCase):
             self.assertGreaterEqual(r['recorded_processing_elapsed_seconds'],15)
             self.assertLess(r['recorded_processing_elapsed_seconds'],20)
     def setUp(self):
-        self.tmp=tempfile.TemporaryDirectory(); self.root=Path(self.tmp.name)
+        self.tmp=tempfile.TemporaryDirectory(); self.root=Path(self.tmp.name).resolve()
         self.config_dir=self.root/'configs';self.config_dir.mkdir()
         self.land_dir=self.root/'land-input';self.land_dir.mkdir()
         self.raw=self.root/'raw';self.raw.mkdir()
@@ -67,7 +67,7 @@ class PipelineTests(unittest.TestCase):
     def interrupt_before_union(self,out):
         actual=b.run_stage
         def stage(name,*args):
-            if name=='overture/aggregate_compare.py':raise ValueError('simulated interruption')
+            if name==b.water_union.run:raise ValueError('simulated interruption')
             return actual(name,*args)
         with mock.patch.object(b,'run_stage',side_effect=stage):
             with self.assertRaisesRegex(ValueError,'simulated interruption'):b.run(self.config,out)
@@ -78,7 +78,7 @@ class PipelineTests(unittest.TestCase):
         with mock.patch.object(b,'run_stage',side_effect=stage):b.run(self.config,out,resume=True)
         report=json.loads((out/'report.json').read_text())
         self.assertTrue(report['timing_complete']);self.assertGreater(report['processing_elapsed_seconds'],0)
-        self.assertNotIn('rasterize_land.py',seen);self.assertNotIn('overture/rasterize_water_shard.py',seen)
+        self.assertNotIn(b.land.run,seen);self.assertNotIn(b.water.run,seen)
         self.assertEqual(b.run(self.config,out,resume=True),report)
 
     def test_concurrent_attempt_is_rejected(self):
@@ -105,8 +105,8 @@ class PipelineTests(unittest.TestCase):
 
     def test_actual_kill_preserves_units_and_marks_timing_incomplete(self):
         out=self.root/'actual-kill';marker=self.root/'waiting'
-        code='''import build_physical as b, pathlib, sys, time\noriginal=b.run_stage\ndef stage(name,*args):\n if name=="overture/aggregate_compare.py":\n  pathlib.Path(sys.argv[3]).write_text("ready");time.sleep(60)\n return original(name,*args)\nb.run_stage=stage\nb.run(sys.argv[1],sys.argv[2])\n'''
-        env=os.environ.copy();env['PYTHONPATH']=str(Path(b.__file__).parent)+os.pathsep+env.get('PYTHONPATH','')
+        code='''from map_build.physical import build as b\nimport pathlib, sys, time\noriginal=b.run_stage\ndef stage(name,*args):\n if name==b.water_union.run:\n  pathlib.Path(sys.argv[3]).write_text("ready");time.sleep(60)\n return original(name,*args)\nb.run_stage=stage\nb.run(sys.argv[1],sys.argv[2])\n'''
+        env=os.environ.copy();env['PYTHONPATH']=str(Path(b.__file__).parents[2])+os.pathsep+env.get('PYTHONPATH','')
         proc=subprocess.Popen([sys.executable,'-c',code,str(self.config),str(out),str(marker)],env=env,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
         try:
             deadline=time.monotonic()+30
@@ -128,6 +128,17 @@ class PipelineTests(unittest.TestCase):
         self.cfg['selection_notes']='changed';self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError,'resume identity mismatch'):b.run(self.config,out,resume=True)
 
+    def test_resume_trusts_changed_code_and_retains_completed_data(self):
+        out=self.root/'changed-code';self.interrupt_before_union(out)
+        original=b.sha
+        def changed(path):
+            path=Path(path)
+            return 'c'*64 if path.parent==Path(b.__file__).parent and path.suffix=='.py' else original(path)
+        with mock.patch.object(b,'sha',side_effect=changed):
+            report=b.run(self.config,out,resume=True)
+        self.assertEqual(report['status'],'candidate-only')
+        self.assertTrue(all(value=='c'*64 for value in report['script_sha256'].values()))
+
     def test_completed_resume_revalidates_shard_inventory(self):
         out=self.root/'finished';b.run(self.config,out)
         (out/'shards/00000/water.tif').write_bytes(b'tampered')
@@ -147,7 +158,7 @@ class PipelineTests(unittest.TestCase):
     def test_resume_quarantines_incomplete_unit(self):
         out=self.root/'partial';actual=b.run_stage
         def stage(name,*args):
-            if name=='overture/rasterize_water_shard.py':
+            if name==b.water.run:
                 destination=Path(args[2]);destination.mkdir();(destination/'partial').write_text('preserve')
                 raise ValueError('partial shard')
             return actual(name,*args)
@@ -159,14 +170,14 @@ class PipelineTests(unittest.TestCase):
     def test_resume_reuses_union_after_composition_failure(self):
         out=self.root/'union-resume';actual=b.run_stage
         def fail_compose(name,*args):
-            if name=='compose_physical.py':raise ValueError('composition interrupted')
+            if name==b.composition.main:raise ValueError('composition interrupted')
             return actual(name,*args)
         with mock.patch.object(b,'run_stage',side_effect=fail_compose):
             with self.assertRaisesRegex(ValueError,'composition interrupted'):b.run(self.config,out)
         seen=[]
         def stage(name,*args):seen.append(name);return actual(name,*args)
         with mock.patch.object(b,'run_stage',side_effect=stage):b.run(self.config,out,resume=True)
-        self.assertEqual(seen,['compose_physical.py'])
+        self.assertEqual(seen,[b.composition.main])
 
     def test_resume_after_report_write_failure_reuses_composition(self):
         out=self.root/'report-resume';actual_write=b.write_json

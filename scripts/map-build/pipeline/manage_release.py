@@ -332,7 +332,7 @@ def main():
                 approve(db, args.candidate, args.reviewer)
                 print(f'Approved {args.candidate}')
                 return
-            physical = stage_module(SCRIPTS / 'physical/build_physical.py')
+            from map_build.physical import build as physical
             if args.action == 'stage':
                 endpoint = manifest['inputs']['configuration']['physical_controls']['source_staging']['endpoint_url']
             else:

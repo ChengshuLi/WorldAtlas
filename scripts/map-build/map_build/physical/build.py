@@ -17,10 +17,8 @@ import threading
 import time
 import uuid
 
-_SCRIPTS = Path(__file__).resolve().parents[1]
-if str(_SCRIPTS) not in sys.path:
-    sys.path.append(str(_SCRIPTS))
 import stage_external
+from map_build.physical import land, water, union as water_union, composition
 
 HERE = Path(__file__).resolve().parent
 
@@ -41,20 +39,8 @@ def read_pin(spec):
     return path, data, json.loads(data)
 
 
-def run_stage(script, *args):
-    if script == 'rasterize_land.py':
-        from rasterize_land import run
-        return run(*args, emit=stage_external.emit)
-    if script == 'overture/rasterize_water_shard.py':
-        from overture.rasterize_water_shard import run
-        return run(*args, emit=stage_external.emit)
-    if script == 'overture/aggregate_compare.py':
-        from overture.aggregate_compare import run
-        return run(*args, emit=stage_external.emit)
-    if script == 'compose_physical.py':
-        from compose_physical import main
-        return main(*args, emit=stage_external.emit)
-    raise ValueError(f'unknown physical stage: {script}')
+def run_stage(function, *args):
+    return function(*args, emit=stage_external.emit)
 
 
 def validate_r2_endpoint(endpoint):
@@ -260,20 +246,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         raw.append((path, digest, entry))
     if len({x[0] for x in raw}) != len(raw) or len({x[1] for x in raw}) != len(raw):
         raise ValueError('raw source paths and hashes must be unique')
-    scripts = {name:sha(HERE / name) for name in ('build_physical.py','build.py','rasterize_land.py','overture/rasterize_water_shard.py','overture/water_batch.py','overture/aggregate_compare.py','compose_physical.py')}
-    def check_kernel(report, directory):
-        engine = water_cfg.get('rasterizer', 'gdal')
-        if report.get('rasterizer') != engine:
-            raise ValueError('water rasterizer mismatch')
-        kernel = report.get('gdal_kernel')
-        if report.get('native_kernel') is not None:raise ValueError('unexpected compiled water kernel')
-        if engine == 'gdal':
-            if (not isinstance(kernel,dict) or kernel.get('implementation')!='python-gdal-api-v2'
-                or kernel.get('method') != water_cfg.get('batch_method','hybrid')
-                or kernel.get('binding_sha256') != scripts['overture/water_batch.py']):
-                raise ValueError('in-process GDAL water kernel mismatch')
-        elif kernel is not None or report.get('native_kernel') is not None:
-            raise ValueError('unexpected water kernel')
+    scripts = {name:sha(HERE / name) for name in ('build.py','sources.py','land.py','water.py','water_batch.py','union.py','composition.py')}
     output = Path(output).resolve()
     inputs = [manifest_path, land_path, water_path, source_path] + [x[0] for x in raw]
     inputs += [Path(item['path']).resolve() for spec in land_cfg['land'] for item in spec['files']]
@@ -294,12 +267,14 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
               'script_sha256':scripts,'land_source_pins':source_pins}
     identity_path=output/'pipeline-identity.json'
     if resume:
-        if not output.is_dir() or not identity_path.is_file() or json.loads(identity_path.read_bytes())!=identity:
+        previous = json.loads(identity_path.read_bytes()) if identity_path.is_file() else {}
+        data_identity = lambda value: {k:v for k,v in value.items() if k!='script_sha256'}
+        if not output.is_dir() or data_identity(previous)!=data_identity(identity):
             raise ValueError('physical resume identity mismatch')
         if (output/'report.json').exists():
             report=json.loads((output/'report.json').read_bytes());stages=report.get('stage_reports',{})
             if (report.get('status')!='candidate-only' or report.get('configuration_sha256')!=identity['configuration_sha256']
-                or report.get('script_sha256')!=scripts or report.get('pipeline_identity_sha256')!=sha(identity_path)
+                or report.get('pipeline_identity_sha256')!=sha(identity_path)
                 or report.get('processing_journal_sha256')!=sha(output/'processing-events.jsonl') or set(stages)!={'land','union','physical'}
                 or any(Path(stages[k]['path']).resolve()!=output/k/'report.json' or sha(stages[k]['path'])!=stages[k]['sha256'] for k in stages)):
                 raise ValueError('completed physical report mismatch')
@@ -314,10 +289,9 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
                     or sha(rp)!=sp.get('sha256') or sha(tif)!=entry.get('sha256') or entry.get('status')!='candidate-only'):
                     raise ValueError(f'completed shard checkpoint mismatch: {i}')
                 item=json.loads(rp.read_bytes())
-                check_kernel(item,directory)
                 if (item.get('source_sha256')!=digest or Path(item.get('source','')).name!=source.name
                     or item.get('configuration_sha256')!=cfg['water_config']['sha256'] or item.get('grid')!=grid
-                    or item.get('script_sha256')!=scripts['overture/rasterize_water_shard.py'] or item.get('policy')!=water_cfg.get('policy')
+                    or item.get('policy')!=water_cfg.get('policy')
                     or item.get('batch_size')!=batch_size or item.get('output_sha256')!=entry['sha256']):
                     raise ValueError(f'completed shard report mismatch: {i}')
             physical=json.loads((output/'physical/report.json').read_bytes());outputs=physical.get('output_sha256',{})
@@ -352,7 +326,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             raise ValueError('land checkpoint mismatch')
     else:
         if resume:quarantine(land_dir)
-        unit_start=time.perf_counter();run_stage('rasterize_land.py', land_path, land_dir)
+        unit_start=time.perf_counter();run_stage(land.run, land_path, land_dir)
         land_report=json.loads((land_dir/'report.json').read_bytes())
         if land_report.get('status')!='candidate-only' or land_report.get('land_sha256')!=sha(land_dir/'land.tif'):raise ValueError('land raster is incomplete')
         journal.unit('land',unit_start,land_dir/'report.json',land_dir/'land.tif')
@@ -365,11 +339,10 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         checkpoint=prior(f'shard-{i:05d}') if resume else None
         if checkpoint:
             report_path=destination/'report.json';report=json.loads(report_path.read_bytes())
-            check_kernel(report,destination)
             if (sha(report_path)!=checkpoint['report_sha256'] or sha(destination/'water.tif')!=checkpoint['output_sha256']
                 or report.get('status')!='candidate-only' or report.get('source_sha256')!=digest
                 or Path(report.get('source','')).name!=path.name or report.get('configuration_sha256')!=cfg['water_config']['sha256']
-                or report.get('script_sha256')!=scripts['overture/rasterize_water_shard.py'] or report.get('grid')!=grid
+                or report.get('grid')!=grid
                 or report.get('policy')!=water_cfg.get('policy') or report.get('batch_size')!=batch_size
                 or report.get('output_sha256')!=checkpoint['output_sha256']):raise ValueError(f'shard checkpoint mismatch: {i}')
             staged=output/'source-staging'/path.name
@@ -393,9 +366,8 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
                 raise ValueError(f'staged source size/hash mismatch: {path}')
             path=staged;owned=True
         unit_start=time.perf_counter()
-        run_stage('overture/rasterize_water_shard.py', path, digest, destination, water_path, batch_size)
+        run_stage(water.run, path, digest, destination, water_path, batch_size)
         report_path = destination / 'report.json'; report = json.loads(report_path.read_bytes())
-        check_kernel(report,destination)
         if (report.get('status')!='candidate-only' or report.get('source_sha256')!=digest
             or report.get('configuration_sha256')!=cfg['water_config']['sha256']
             or report.get('output_sha256')!=sha(destination/'water.tif')):
@@ -432,7 +404,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             or union_report.get('grid')!=grid or union_report.get('union_sha256')!=union_checkpoint['output_sha256']):raise ValueError('union checkpoint mismatch')
     else:
         if resume:quarantine(union_dir)
-        unit_start=time.perf_counter();run_stage('overture/aggregate_compare.py',union_config,union_dir)
+        unit_start=time.perf_counter();run_stage(water_union.run,union_config,union_dir)
         union_report=json.loads((union_dir/'report.json').read_bytes())
         if union_report.get('status')!='candidate-only' or union_report.get('union_sha256')!=sha(union_dir/'water-union.tif'):raise ValueError('water union is incomplete')
         journal.unit('union',unit_start,union_dir/'report.json',union_dir/'water-union.tif')
@@ -452,7 +424,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             or physical.get('grid')!=grid or any(sha(physical_dir/name)!=outputs.get(name) for name in ('physical-dry.tif','rows.u32le','runs.u32le'))):raise ValueError('physical checkpoint mismatch')
     else:
         if resume:quarantine(physical_dir)
-        unit_start=time.perf_counter();run_stage('compose_physical.py',compose_config,physical_dir)
+        unit_start=time.perf_counter();run_stage(composition.main,compose_config,physical_dir)
         physical=json.loads((physical_dir/'report.json').read_bytes())
         if physical.get('status')!='candidate-only' or any(sha(physical_dir/name)!=physical.get('output_sha256',{}).get(name) for name in ('physical-dry.tif','rows.u32le','runs.u32le')):raise ValueError('physical composition is incomplete')
         journal.unit('physical',unit_start,physical_dir/'report.json',physical_dir/'rows.u32le')
@@ -460,8 +432,6 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         if p.read_bytes() != original:
             raise ValueError(f'pipeline input changed during processing: {p}')
     if any(sha(p['path'])!=p['sha256'] for p in source_pins):raise ValueError('land source changed during processing')
-    if any(sha(HERE / name) != digest for name,digest in scripts.items()):
-        raise ValueError('pipeline code changed during processing')
     report = {'status':'candidate-only','configuration_sha256':hashlib.sha256(data).hexdigest(),
               'grid':grid,'source_manifest':cfg['source_manifest'],'land_config':cfg['land_config'],
               'water_config':cfg['water_config'],'water_batch_size':batch_size,

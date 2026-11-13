@@ -263,7 +263,7 @@ class Fixture(unittest.TestCase):
                 'sha256': hashlib.sha256(payload).hexdigest(), 'size_bytes': len(payload)}
 
     def fake_r2(self, payloads, calls):
-        module = pipeline.stage_module(pipeline.SCRIPTS / 'physical/build_physical.py')
+        from map_build.physical import build as module
         def download(endpoint, entry, destination):
             calls.append(entry['r2_key'])
             destination.write_bytes(payloads[entry['r2_key']])
@@ -743,6 +743,10 @@ class Fixture(unittest.TestCase):
             self.assertEqual(reused.physical(), physical)
         self.assertEqual(reused.identity['physical_reuse']['source_run'], str(runner.out))
         self.assertEqual((physical / 'report.json').read_bytes(), producer_report)
+        notes = pipeline.read(land)
+        notes['selection_notes'] = 'Reworded description of the same selected sources'
+        descriptive = pipeline.write(self.inputs / 'same-land-new-notes.json', notes)
+        self.assertEqual(pipeline.physical_reference(runner.out, {**runner.sources, 'land_config': descriptive})['status'], 'reused')
         changed = pipeline.write(self.inputs / 'different-land.json', {'grid': grid, 'different': True})
         with self.assertRaisesRegex(ValueError, 'physical input differs'):
             pipeline.physical_reference(runner.out, {**runner.sources, 'land_config': changed})

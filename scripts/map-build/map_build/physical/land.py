@@ -9,7 +9,7 @@ import shutil
 import sys
 
 from osgeo import gdal, ogr, osr
-from build import checked_files, open_layer, sha
+from map_build.physical.sources import checked_files, open_layer, sha
 
 gdal.UseExceptions()
 

@@ -10,8 +10,8 @@ import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
-import rasterize_water_shard as build
-from water_batch import WaterBatch
+from map_build.physical import water as build
+from map_build.physical.water_batch import WaterBatch
 
 class WaterShardTests(unittest.TestCase):
     def test_arrow_policy_matches_python_for_whitespace_and_dictionary_strings(self):

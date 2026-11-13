@@ -68,6 +68,22 @@ class FunctionCheckpointTests(unittest.TestCase):
         self.assertEqual(preserved[0].read_text(), 'partial')
         self.assertEqual((self.output / 'result').read_text(), 'input')
 
+    def test_producer_owned_marker_preserves_internal_checkpoints(self):
+        marker = self.output/'resume.json'
+        def interrupted():
+            self.output.mkdir()
+            marker.write_text('completed first unit')
+            raise InterruptedError('interrupted')
+        with self.assertRaises(InterruptedError):
+            self.checkpoints.run_function('calculate','physical',interrupted,(),timing=self.timing,
+                inputs=[pin(self.source)],outputs=[self.output],resume_marker=marker)
+        def continue_stage():
+            self.assertEqual(marker.read_text(),'completed first unit')
+            return {'resumed':True}
+        result=self.checkpoints.run_function('calculate','physical',continue_stage,(),timing=self.timing,
+            inputs=[pin(self.source)],outputs=[self.output],resume_marker=marker)
+        self.assertTrue(result['resumed'])
+
 
 if __name__ == '__main__':
     unittest.main()

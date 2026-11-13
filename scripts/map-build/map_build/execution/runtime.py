@@ -264,7 +264,8 @@ class Checkpoints:
             'invocation': invocation, 'inputs': inputs, 'output_roots': [os.path.abspath(p) for p in outputs],
             'outputs': inventory(outputs), 'log': pin(log)})
 
-    def run_function(self, name, group, function, args, *, timing, inputs, outputs, kwargs=None):
+    def run_function(self, name, group, function, args, *, timing, inputs, outputs, kwargs=None,
+                     resume_marker=None):
         """Call an ordinary Python stage and checkpoint its returned record.
 
         Input/output identity controls reuse. The function's location is
@@ -281,7 +282,12 @@ class Checkpoints:
         sealed = [*outputs, result_path]
         if self.completed(name, invocation, sealed):
             return json.loads(result_path.read_bytes())
-        self.preserve(name, sealed)
+        if resume_marker is not None and Path(resume_marker).is_file():
+            # The producer owns its validated internal checkpoints. Preserve
+            # those outputs so it can continue completed shards or tiles.
+            self.preserve(name, [result_path])
+        else:
+            self.preserve(name, sealed)
         attempt = self.begin(name)
         logs = run / 'logs'
         logs.mkdir(exist_ok=True)

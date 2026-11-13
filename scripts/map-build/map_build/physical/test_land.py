@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 import numpy as np
 from osgeo import gdal
-import rasterize_land as b
+from map_build.physical import land as b
 
 class RasterizeLandTests(unittest.TestCase):
     def setUp(self):

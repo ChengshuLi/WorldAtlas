@@ -2,7 +2,7 @@ import json,tempfile,unittest
 from pathlib import Path
 import numpy as np
 from osgeo import gdal,osr
-import aggregate_compare as c
+from map_build.physical import union as c
 
 class AggregateTests(unittest.TestCase):
     def setUp(self):
