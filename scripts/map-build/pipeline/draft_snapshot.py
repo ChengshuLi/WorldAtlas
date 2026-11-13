@@ -8,12 +8,10 @@ from decimal import Decimal
 from pathlib import Path
 
 
-LAND_EXPORT = (
-    Path(__file__).resolve().parents[1]
-    / 'land/mainland-l2-draft/query-stage2-selected.sql'
-)
-REGIONAL_EXPORT = (Path(__file__).resolve().parents[1]
-                   / 'land/research-mixed-runtime/stage3-mixed-leeward-full-20261105/export_regional.sql')
+from map_build.inputs.selection import QUERIES
+
+LAND_EXPORT = QUERIES['mainland']
+REGIONAL_EXPORT = QUERIES['regional']
 
 
 def read_regional_decisions(revision):

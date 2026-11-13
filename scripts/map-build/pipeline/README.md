@@ -149,7 +149,7 @@ All `sources` are explicit `{path, sha256}` pins:
   are generated afresh. Historical output artifacts are not reused.
 - `regional_template`: selected regional decision request and raw source versions.
   The editable regional revision exports through
-  [export_regional.sql](../land/research-mixed-runtime/stage3-mixed-leeward-full-20261105/export_regional.sql).
+  [regional.sql](../map_build/inputs/regional.sql).
   Supply the `revision` parameter on a read-only psycopg connection. A named-island
   decision uses the GeoNames record to find the physical component and links
   independent geographic evidence to the editable continent choice.

@@ -11,6 +11,12 @@ DECLARE
         'decoded_sha256', jsonb_build_object('rows', repeat('d',64), 'runs', repeat('e',64)));
     mismatch record;
 BEGIN
+    INSERT INTO atlas.map_release_candidates(candidate_id,r2_bucket,manifest)
+    VALUES ('v98.1-rc1','test',bundle), ('v98.1-rc2','test',bundle);
+    IF EXISTS (SELECT 1 FROM atlas.map_release_candidates
+               WHERE candidate_id IN ('v98.1-rc1','v98.1-rc2') AND map_version <> 'v98.1') THEN
+        RAISE EXCEPTION 'candidate version was not extracted correctly';
+    END IF;
     BEGIN
         INSERT INTO atlas.map_release_candidates(candidate_id,r2_bucket,manifest)
         VALUES ('v99.0-rc.1','test','{}');

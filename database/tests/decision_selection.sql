@@ -30,10 +30,12 @@ BEGIN
   BEGIN INSERT INTO atlas.decision_land_component_witness_rules(revision,rule_id,entity_revision,entity_id,method,selector,evidence)
    VALUES(rev,'bad-entity',erev,-9223372036854775807,'component_witness_list_v1','{}','{"execution_status":"selected_for_research"}'); EXCEPTION WHEN foreign_key_violation THEN caught:=true; END;
   IF NOT caught THEN RAISE EXCEPTION 'orphan witness entity allowed'; END IF;
+  INSERT INTO atlas.decision_water_assignment_policies(revision,policy_id,kind,definition,evidence)
+   VALUES(rev,'plain-policy','closed_water_assignment','{}','{}');
   caught:=false;
   BEGIN INSERT INTO atlas.decision_water_assignment_policies(revision,policy_id,kind,definition,evidence)
-   VALUES(rev,'missing','closed_water_assignment','{}','{}'); EXCEPTION WHEN check_violation THEN caught:=true; END;
-  IF NOT caught THEN RAISE EXCEPTION 'missing water selection allowed'; END IF;
+   VALUES(rev,'unknown-kind','unknown','{}','{}'); EXCEPTION WHEN check_violation THEN caught:=true; END;
+  IF NOT caught THEN RAISE EXCEPTION 'unknown water policy kind allowed'; END IF;
   caught:=false;
   BEGIN INSERT INTO atlas.decision_ocean_fill_policies(revision,policy_id,definition,evidence)
    VALUES(rev,'unknown','{}','{"execution_status":"unknown"}'); EXCEPTION WHEN check_violation THEN caught:=true; END;

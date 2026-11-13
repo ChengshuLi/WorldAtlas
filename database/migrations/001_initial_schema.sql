@@ -344,8 +344,7 @@ CREATE TABLE atlas.decision_water_assignment_policies (
  kind text NOT NULL CHECK (kind IN ('coastline_assignment','closed_water_assignment')),
  definition jsonb NOT NULL CHECK (jsonb_typeof(definition) = 'object'),
  evidence jsonb NOT NULL CHECK (jsonb_typeof(evidence) = 'object'),
- PRIMARY KEY (revision,policy_id),
- CONSTRAINT water_policy_execution_status_required CHECK (COALESCE(evidence->>'execution_status','') IN ('selected_for_research','research_only_not_selected'))
+ PRIMARY KEY (revision,policy_id)
 );
 -- Regional source observations and island rules
 
@@ -377,8 +376,9 @@ CREATE TABLE IF NOT EXISTS atlas.regional_island_rule_sets (
 -- Release candidates and published map objects
 
 CREATE TABLE atlas.map_release_candidates (
-    candidate_id text PRIMARY KEY CHECK (candidate_id ~ '^v[0-9]+[.][0-9]+-rc[.][1-9][0-9]*$'),
-    map_version text GENERATED ALWAYS AS (split_part(candidate_id, '-rc.', 1)) STORED,
+    candidate_id text PRIMARY KEY CONSTRAINT map_release_candidate_name
+        CHECK (candidate_id ~ '^v[0-9]+[.][0-9]+-rc[.]?[1-9][0-9]*$'),
+    map_version text GENERATED ALWAYS AS (split_part(candidate_id, '-rc', 1)) STORED,
     r2_bucket text NOT NULL CHECK (length(btrim(r2_bucket)) > 0),
     manifest jsonb NOT NULL,
     approved_by text,
