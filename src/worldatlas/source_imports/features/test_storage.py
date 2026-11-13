@@ -44,8 +44,8 @@ class StorageTests(unittest.TestCase):
     def register(self, version):
         self.recipe['recipe_version'] = version
         text = json.dumps(self.recipe, sort_keys=True, separators=(',', ':'))
-        self.database.execute('INSERT INTO atlas.structured_documents VALUES (%s,%s,%s,%s,%s::json)',
-                              ('__features', version, hashlib.sha256(text.encode()).hexdigest(), len(text), text))
+        self.database.execute('INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+                              ('__features', version, text))
 
     def build(self, version='1', revision='__features_a'):
         return build_features(self.database, self.storage, '__features', version, revision, self.work)

@@ -261,9 +261,8 @@ class StorageTests(unittest.TestCase):
 
     def store_recipe(self, version, recipe):
         text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))
-        self.db.execute('INSERT INTO atlas.structured_documents VALUES (%s,%s,%s,%s,%s::json)',
-                        ('__watershed_recipe', version, hashlib.sha256(text.encode()).hexdigest(),
-                         len(text.encode()), text))
+        self.db.execute('INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+                        ('__watershed_recipe', version, text))
 
     def build(self, version='1'):
         return build_boundary(lambda: nullcontext(self.db), self.client, '__watershed_recipe', version,

@@ -72,10 +72,9 @@ class DatabaseTest(unittest.TestCase):
                       boundary_id='border', basis='Test construction description')
         recipe.update(changes)
         text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))
-        raw = text.encode()
         self.database.execute(
-            'INSERT INTO atlas.structured_documents VALUES (%s,%s,%s,%s,%s::json)',
-            ('__osm_recipe', version, hashlib.sha256(raw).hexdigest(), len(raw), text),
+            'INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+            ('__osm_recipe', version, text),
         )
         return dict(recipe, recipe_id='__osm_recipe', recipe_version=version)
 
@@ -184,11 +183,11 @@ class DatabaseTest(unittest.TestCase):
             self.build(version='missing')
         self.storage.get_object.assert_not_called()
 
-    def test_recipe_checksum_mismatch_stops_before_download(self):
+    def test_incomplete_recipe_stops_before_download(self):
         self.database.execute("INSERT INTO atlas.structured_documents VALUES "
-                              "('__osm_recipe','bad-hash',repeat('0',64),2,'{}')")
-        with self.assertRaisesRegex(ValueError, 'construction record size or hash mismatch'):
-            self.build(version='bad-hash')
+                              "('__osm_recipe','incomplete','{}')")
+        with self.assertRaisesRegex(ValueError, 'invalid OSM construction record'):
+            self.build(version='incomplete')
         self.storage.get_object.assert_not_called()
 
     def test_unknown_method_stops_before_download(self):

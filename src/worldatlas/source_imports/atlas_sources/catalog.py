@@ -1,7 +1,6 @@
 """Resolve cataloged inputs and stage verified files for importers and map builds."""
 
 import hashlib
-import json
 import os
 from contextlib import closing
 from pathlib import Path
@@ -13,17 +12,13 @@ import time
 def read_recipe(database, recipe_id, version):
     """Read a versioned construction record from the existing document table."""
     row = database.execute(
-        'SELECT document::text,sha256,size_bytes FROM atlas.structured_documents '
+        'SELECT document FROM atlas.structured_documents '
         'WHERE source_id=%s AND version=%s',
         (recipe_id, version),
     ).fetchone()
     if row is None:
         raise ValueError('construction record is missing from Neon')
-    text, digest, size = row
-    raw = text.encode()
-    if len(raw) != size or hashlib.sha256(raw).hexdigest() != digest:
-        raise ValueError('construction record size or hash mismatch')
-    recipe = json.loads(text)
+    recipe = row[0]
     if not isinstance(recipe, dict):
         raise ValueError('invalid construction record')
     return dict(recipe, recipe_id=recipe_id, recipe_version=version)

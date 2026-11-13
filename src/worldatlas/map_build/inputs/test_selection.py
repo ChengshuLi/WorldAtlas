@@ -34,6 +34,16 @@ class BindingTests(unittest.TestCase):
             domain['category_bindings'].reverse()
         validate_bindings(self.selection['domains'])
 
+    def test_saved_replay_preserves_legacy_document_metadata(self):
+        selected = dict(self.selection, documents=[dict(
+            source_id='saved-construction', version='1', document_text=' {"a": 1}\n',
+            sha256='a' * 64, size_bytes=10,
+        )])
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'selection.json'
+            path.write_text(json.dumps(selected))
+            self.assertEqual(read_saved(path), selected)
+
     def test_replay_rejects_swapped_entity_meanings_in_every_stage(self):
         for name in self.selection['domains']:
             with self.subTest(stage=name), tempfile.TemporaryDirectory() as directory:
@@ -277,9 +287,9 @@ class SelectionTests(unittest.TestCase):
                 "VALUES ('__selection_water','point','__selection_raw','1','provider-point',%s,%s,'OGC:CRS84','{}')",
                 (digest, Jsonb(geometry)),
             )
-            document = '{ "method": "selected_vector_features", "basis": "Selected source" }'
-            self.writer.execute('INSERT INTO atlas.structured_documents VALUES (%s,%s,%s,%s,%s::json)',
-                                ('__selected_construction','1',hashlib.sha256(document.encode()).hexdigest(),len(document),document))
+            document = '{ "method": "selected_vector_features", "basis": "Selected source — côte" }'
+            self.writer.execute('INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+                                ('__selected_construction','1',document))
             self.writer.execute("UPDATE atlas.decision_features SET construction_id='__selected_construction',construction_version='1' "
                                 "WHERE revision='__selection_water'")
             with psycopg.connect(self.url) as database:
@@ -290,8 +300,18 @@ class SelectionTests(unittest.TestCase):
             self.assertEqual(feature['source_feature_id'], 'provider-point')
             self.assertEqual(result['raw_sources'][0]['source_id'], '__selection_raw')
             self.assertEqual(result['schema'], 'worldatlas-input-selection-v2')
-            self.assertEqual(result['documents'][0]['document_text'], document)
-            self.assertEqual(result['documents'][0]['source_id'], '__selected_construction')
+            self.assertEqual(result['documents'], [dict(
+                source_id='__selected_construction', version='1', document=json.loads(document))])
+            self.writer.execute(
+                'INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+                ('__selected_construction','2',json.dumps(json.loads(document), sort_keys=True, indent=2)),
+            )
+            self.writer.execute("UPDATE atlas.decision_features SET construction_version='2' "
+                                "WHERE revision='__selection_water'")
+            with psycopg.connect(self.url) as database:
+                reordered = read_selection(database, {'water': '__selection_water'})
+            self.assertEqual(reordered['documents'][0]['document'], result['documents'][0]['document'])
+            self.assertEqual(reordered['documents'][0]['version'], '2')
             with self.assertRaises(psycopg.errors.ForeignKeyViolation), self.writer.transaction():
                 self.writer.execute("DELETE FROM atlas.structured_documents WHERE source_id='__selected_construction'")
 

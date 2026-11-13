@@ -48,12 +48,8 @@ CREATE TRIGGER source_asset_immutable BEFORE UPDATE ON atlas.source_assets FOR E
 CREATE TABLE atlas.structured_documents (
     source_id text NOT NULL,
     version text NOT NULL,
-    sha256 text NOT NULL,
-    size_bytes bigint NOT NULL,
-    document json NOT NULL,
-    CONSTRAINT structured_documents_document_check CHECK ((json_typeof(document) = 'object'::text)),
-    CONSTRAINT structured_documents_sha256_check CHECK ((sha256 ~ '^[0-9a-f]{64}$'::text)),
-    CONSTRAINT structured_documents_size_bytes_check CHECK ((size_bytes > 0)),
+    document jsonb NOT NULL,
+    CONSTRAINT structured_documents_document_check CHECK ((jsonb_typeof(document) = 'object'::text)),
     CONSTRAINT structured_documents_source_id_check CHECK ((length(btrim(source_id)) > 0)),
     CONSTRAINT structured_documents_version_check CHECK ((length(btrim(version)) > 0)),
     CONSTRAINT structured_documents_pkey PRIMARY KEY (source_id, version)
@@ -66,6 +62,6 @@ BEGIN
   RAISE EXCEPTION 'source records are immutable; use a new source version';
 END; $$;
 
-COMMENT ON TABLE atlas.structured_documents IS 'Versioned pipeline inputs stored in Neon. Size and SHA-256 refer to the selected serialized document.';
+COMMENT ON TABLE atlas.structured_documents IS 'Immutable versioned JSON inputs identified by source_id and version.';
 
 CREATE TRIGGER structured_document_immutable BEFORE UPDATE ON atlas.structured_documents FOR EACH ROW EXECUTE FUNCTION atlas.reject_source_change();

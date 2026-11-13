@@ -29,9 +29,8 @@ class DatabaseTests(unittest.TestCase):
 
     def register(self, version, recipe):
         text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))
-        self.database.execute('INSERT INTO atlas.structured_documents VALUES (%s,%s,%s,%s,%s::json)',
-                              ('__trace_construction', version, hashlib.sha256(text.encode()).hexdigest(),
-                               len(text.encode()), text))
+        self.database.execute('INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+                              ('__trace_construction', version, text))
 
     def build(self, version='1', expected=None):
         return build_boundary(self.database, '__trace_construction', version, expected)

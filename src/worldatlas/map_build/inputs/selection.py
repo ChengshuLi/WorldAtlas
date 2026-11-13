@@ -1,7 +1,6 @@
 """Freeze working geographic decisions in one short, read-only transaction."""
 
 from datetime import datetime, timezone
-import hashlib
 import json
 from pathlib import Path
 
@@ -144,10 +143,9 @@ def read_selection(database, revisions, *, raw_sources=(), documents=()):
         missing = references - {(row['source_id'], row['version']) for row in result['raw_sources']}
         if missing:
             raise ValueError('selected raw source is missing: ' + str(sorted(missing)))
-        result['documents'] = []
         requested_documents = sorted(document_refs)
         rows = database.execute(
-            'SELECT source_id,version,document::text,sha256,size_bytes '
+            'SELECT source_id,version,document '
             'FROM atlas.structured_documents WHERE (source_id,version) IN '
             '(SELECT * FROM unnest(%s::text[],%s::text[])) ORDER BY source_id,version',
             ([key[0] for key in requested_documents], [key[1] for key in requested_documents]),
@@ -155,12 +153,8 @@ def read_selection(database, revisions, *, raw_sources=(), documents=()):
         missing = document_refs - {(row[0], row[1]) for row in rows}
         if missing:
             raise ValueError('selected document is missing: ' + str(sorted(missing)))
-        for source_id, version, text, checksum, size in rows:
-            raw = text.encode()
-            if len(raw) != size or hashlib.sha256(raw).hexdigest() != checksum:
-                raise ValueError('selected document checksum or size differs: ' + source_id)
-            result['documents'].append(dict(source_id=source_id, version=version,
-                                           document_text=text, sha256=checksum, size_bytes=size))
+        result['documents'] = [dict(source_id=source_id, version=version, document=document)
+                               for source_id, version, document in rows]
         rows = database.execute(
             'SELECT e.revision,jsonb_agg(jsonb_build_object('
             "'entity_id',e.id,'color_rgb',i.color_rgb) ORDER BY e.id) "

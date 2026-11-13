@@ -12,9 +12,10 @@ permission to resume.
 
 [`geography.sql`](geography.sql) selects any of the four decision domains by a
 bound revision parameter. It uses the same tables and policy representation for
-all domains. The selected catalog is frozen once, together with the exact text
-of contributing construction documents. Boundary-to-source relationships and
-case citations remain part of the saved provenance.
+all domains. The selected catalog is frozen once, together with the JSON values of
+contributing construction documents. Documents carry their ID, version and
+content without per-document checksums or sizes. Boundary-to-source relationships
+and case citations remain part of the saved provenance.
 
 New selections use format v2. Retained v1 selections remain readable without
 rewriting their original files.

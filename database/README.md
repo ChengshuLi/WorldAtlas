@@ -11,7 +11,7 @@ It loads these files in dependency order, within one transaction:
 
 | File | Contents |
 | --- | --- |
-| [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and exact versioned construction documents. |
+| [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and versioned construction documents. |
 | [`entities.sql`](schema/entities.sql) | Stable entity IDs/colors, revisioned names/parents and grid-code bindings. |
 | [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, decisions, shared explanations, citations, ocean routes and assignment policies. |
 | [`mainland.sql`](schema/mainland.sql) | Editable boundaries, raw-source links, assembled seed regions and component witnesses. |
@@ -49,15 +49,22 @@ structure. Schema upgrades stay separate from geographic data imports.
 
 Existing databases that still have `source_assets.provenance` can apply
 [`001_remove_source_provenance.sql`](migrations/001_remove_source_provenance.sql)
-after backing up the source catalog. Fresh databases already omit this column:
+after backing up the source catalog. For databases that still store checksums
+and sizes in `structured_documents`, apply
+[`002_simplify_structured_documents.sql`](migrations/002_simplify_structured_documents.sql)
+after backing up those rows. It also converts `document` to `jsonb`. Fresh
+databases already have both changes:
 
 ```bash
 psql "$NEON_DATABASE_URL" -X -v ON_ERROR_STOP=1 -f database/migrations/001_remove_source_provenance.sql
+psql "$NEON_DATABASE_URL" -X -v ON_ERROR_STOP=1 -f database/migrations/002_simplify_structured_documents.sql
 ```
 
-Backups must retain exact document text: reformatting a construction document
-would invalidate its byte checksum. Retain original contributing records and
-released input selections when assessing data for deletion.
+Documents store their ID, version and `jsonb` content. Importers validate the
+settings. Spacing and object-key order do not identify a document. Frozen build
+selections include the document values without per-document checksums or sizes.
+Existing saved selections and released files remain unchanged. Retain original
+contributing records and released input selections when assessing data for deletion.
 
 ## Tests
 
@@ -66,7 +73,7 @@ SQL checks cover database guarantees:
 | Check | Purpose |
 | --- | --- |
 | `source_catalog.sql` | Raw-file identity, metadata corrections and source references. |
-| `structured_documents.sql` | Exact JSON text and immutable document versions. |
+| `structured_documents.sql` | JSON values, formatting-independent content and immutable document versions. |
 | `entity_registry.sql` | Stable IDs, hierarchy relationships and grid-code bindings. |
 | `geographic_entity_colors.sql` | Optional colors and valid RGB values. |
 | `geographic_decisions.sql` | Geometry records, shared explanations, citations and entity targets. |

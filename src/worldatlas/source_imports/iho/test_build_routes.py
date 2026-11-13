@@ -52,9 +52,8 @@ class BuildTests(unittest.TestCase):
             (version, version + '.zip', hashlib.sha256(raw).hexdigest(), len(raw)),
         )
         text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))
-        self.database.execute('INSERT INTO atlas.structured_documents VALUES (%s,%s,%s,%s,%s::json)',
-                              ('__iho_recipe', version, hashlib.sha256(text.encode()).hexdigest(),
-                               len(text.encode()), text))
+        self.database.execute('INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+                              ('__iho_recipe', version, text))
 
     def build(self, version='1', revision='__iho_a'):
         return build_routes(self.database, self.storage, '__iho_recipe', version,
