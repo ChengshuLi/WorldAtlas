@@ -46,6 +46,26 @@ def check_source(path, source):
         raise ValueError('source file size or hash differs from the Neon catalog')
 
 
+def stream_source(client, source, output, *, check_cancelled=lambda: None):
+    """Copy a complete R2 object and enforce its cataloged byte length."""
+    check_cancelled()
+    response = client.get_object(Bucket=source['r2_bucket'], Key=source['r2_key'])
+    expected = source['size_bytes']
+    with closing(response['Body']) as body:
+        if response.get('ContentLength', expected) != expected:
+            raise ValueError('source file size or hash differs from the Neon catalog')
+        remaining = expected
+        while remaining:
+            check_cancelled()
+            chunk = body.read(min(4 << 20, remaining))
+            if not chunk:
+                break
+            output.write(chunk)
+            remaining -= len(chunk)
+        if remaining or body.read(1):
+            raise ValueError('source file size or hash differs from the Neon catalog')
+
+
 def download_source(client, source, work_dir, *, timing=None):
     """Download and check a cataloged R2 file, or reuse a verified local copy."""
     directory = Path(work_dir) / source['sha256']
@@ -60,9 +80,7 @@ def download_source(client, source, work_dir, *, timing=None):
         with output:
             started = time.monotonic()
             try:
-                response = client.get_object(Bucket=source['r2_bucket'], Key=source['r2_key'])
-                with closing(response['Body']) as stream:
-                    shutil.copyfileobj(stream, output, 1 << 20)
+                stream_source(client, source, output)
             finally:
                 if timing is not None:
                     timing['download_seconds'] = timing.get('download_seconds', 0.) + time.monotonic() - started

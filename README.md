@@ -24,7 +24,7 @@ Neon records the sources and reasoning for individual geographic decisions. The 
 Run the [pipeline](scripts/map-build/README.md) from the repository root.
 
 ```bash
-PYTHONPATH=scripts/map-build python3 -m map_build scripts/map-build/config.json \
+PYTHONPATH=scripts/source-imports:scripts/map-build python3 -m map_build scripts/map-build/config.json \
   --work-dir /absolute/path/to/worldatlas-work
 ```
 

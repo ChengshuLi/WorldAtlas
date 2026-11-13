@@ -60,22 +60,16 @@ def make_r2_client(endpoint):
 
 def download_r2(endpoint, entry, destination):
     """Write a streamed response exclusively. Keep partial files for inspection."""
+    from atlas_sources.catalog import stream_source
+
     control.check_cancelled()
-    with closing(make_r2_client(endpoint)) as client:
-        response = client.get_object(Bucket=entry['r2_bucket'], Key=entry['r2_key'])
-        with closing(response['Body']) as body, destination.open('xb') as stream:
-            if response['ContentLength'] != entry['size']:
-                raise ValueError('staged source size/hash mismatch: ' + str(destination))
-            remaining = entry['size']
-            while remaining:
-                control.check_cancelled()
-                chunk = body.read(min(4 << 20, remaining))
-                if not chunk:
-                    break
-                stream.write(chunk)
-                remaining -= len(chunk)
-            if remaining or body.read(1):
-                raise ValueError('staged source size/hash mismatch: ' + str(destination))
+    with closing(make_r2_client(endpoint)) as client, destination.open('xb') as stream:
+        try:
+            stream_source(client, dict(entry, size_bytes=entry['size']), stream,
+                          check_cancelled=control.check_cancelled)
+        except ValueError as exc:
+            raise ValueError('staged source size/hash mismatch: ' + str(destination)) from exc
+
 
 
 def sync_directory(path):

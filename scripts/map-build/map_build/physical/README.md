@@ -8,7 +8,7 @@ The supported map command calls these Python functions directly. For a focused
 physical build:
 
 ```bash
-PYTHONPATH=scripts/map-build python3 -m map_build.physical.build \
+PYTHONPATH=scripts/source-imports:scripts/map-build python3 -m map_build.physical.build \
   PIPELINE_CONFIG.json /absolute/path/to/new-physical-output
 ```
 

@@ -8,7 +8,7 @@ The Cloudflare Worker serves viewer files and map data from R2. Each candidate
 has an immutable directory at `review/releases/CANDIDATE/`. Publishing copies
 that candidate's homepage to `review/index.html`, which the Worker serves at
 `/`. The homepage's base URL selects its release files. Data sources opens
-the release's `sources.html`, including OpenStreetMap and SeaVoX attributions.
+the release's `sources.html`, including OpenStreetMap and IHO attributions.
 
 Use the [release workflow](../../scripts/map-releases/README.md)
 to package the browser modules with a completed build. The candidate bundle

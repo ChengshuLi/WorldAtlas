@@ -410,7 +410,7 @@ class Pipeline:
             return str(path) if field == 'dataset' else pin(path)
         if not raw_manifest and field in ('dataset','files') and any(key in value for key in ('r2_bucket','archive')):
             path = self.cloud_file(value)
-            return str(path) if field == 'dataset' else pin(path)
+            return str(path) if field == 'dataset' else dict(pin(path), size_bytes=value['size_bytes'])
         return {key: self.source_document(item, raw_manifest=raw_manifest, field=key) for key,item in value.items()}
 
     def json_source(self, value, *, raw_manifest=False):

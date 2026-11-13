@@ -238,6 +238,7 @@ class Fixture(unittest.TestCase):
             runner = self.make()
         land = pipeline.read(runner.sources['land_config'])['land'][0]
         self.assertEqual(land['dataset'], land['files'][0]['path'])
+        self.assertEqual(land['files'][0]['size_bytes'], len(payload))
         self.assertEqual(calls, ['sources/land.geojson'])
 
     def test_cloud_zip_members_are_individually_pinned_and_keep_sidecars_together(self):

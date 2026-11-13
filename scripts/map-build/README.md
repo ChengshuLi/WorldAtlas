@@ -11,7 +11,7 @@ chain, for example `AWS_PROFILE=worldatlas-r2`. Credentials stay outside code an
 configuration.
 
 ```bash
-PYTHONPATH=scripts/map-build python3 -m map_build \
+PYTHONPATH=scripts/source-imports:scripts/map-build python3 -m map_build \
   scripts/map-build/config.json \
   /absolute/path/to/worldatlas-work/runs/preview \
   --work-dir /absolute/path/to/worldatlas-work
