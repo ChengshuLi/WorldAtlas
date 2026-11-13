@@ -65,6 +65,22 @@ class SelectionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'missing'):
                 read_selection(database, {'water': 'missing'})
 
+    def test_scoped_partition_schema_upgrade_accepts_data_without_seeding_it(self):
+        upgrade = (Path(__file__).resolve().parents[4] / 'database/upgrades/scoped_land_partitions.sql').read_text()
+        with self.writer.transaction(force_rollback=True):
+            self.writer.execute('ALTER TABLE atlas.decision_policies DROP CONSTRAINT decision_policies_kind_check')
+            self.writer.execute("ALTER TABLE atlas.decision_policies ADD CONSTRAINT decision_policies_kind_check "
+                                "CHECK (kind IN ('layer_precedence','overlap','coastline_assignment'))")
+            insert = ("INSERT INTO atlas.decision_policies VALUES "
+                      "('__selection_water','partition','scoped_land_partition','{}','{}')")
+            with self.assertRaises(psycopg.errors.CheckViolation), self.writer.transaction():
+                self.writer.execute(insert)
+            self.writer.execute(upgrade)
+            self.writer.execute(upgrade)
+            self.writer.execute(insert)
+            self.assertEqual(self.writer.execute("SELECT count(*) FROM atlas.decision_policies "
+                                                 "WHERE revision='__selection_water'").fetchone()[0], 1)
+
     def test_geometry_and_source_metadata_survive_separate_record_reads(self):
         geometry = {'type': 'Point', 'coordinates': [12.25, 45.5]}
         digest = hashlib.sha256(json.dumps(geometry, sort_keys=True, separators=(',', ':')).encode()).hexdigest()

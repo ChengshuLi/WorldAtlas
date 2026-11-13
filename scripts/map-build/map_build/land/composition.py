@@ -1,15 +1,18 @@
 """Compose assigned land and selected geographic partitions on the native grid."""
 import numpy as np
 
-from map_build.core.geometry import rasterize
+from map_build.core.geometry import rasterize, reject_boundary_centers
 from map_build.core.layers import patch_rows, write_layer
 from map_build.core.rle import open_grid, row
 from map_build.core.wrapping import wrapped_grid_bounds
 
 
-def partition_rows(partition, grid, code, *, rows_per_batch=64):
+def partition_rows(partition, components, code, *, rows_per_batch=64):
     """Rasterize a selected geographic polygon, never saved comparison spans."""
+    grid = components.grid
     geometry = partition['geometry']
+    reject_boundary_centers(geometry, grid, selected=lambda x, y:
+                            components.component_at(float(grid.longitude(x)), float(grid.latitude(y))) is not None)
     (x0, x1, y0, y1), _ = wrapped_grid_bounds(geometry, grid.width, grid.height, grid.step)
     for first in range(y0, y1, rows_per_batch):
         last = min(first + rows_per_batch, y1)
@@ -37,7 +40,7 @@ def compose_land(components, baseline_directory, component_entities, bindings, d
     assigned = np.array([codes[component_entities[int(r)]] for r in roots], dtype=np.uint32)
     streams = []
     for partition in partitions:
-        stream = iter(partition_rows(partition, grid, codes[partition['entity_id']]))
+        stream = iter(partition_rows(partition, components, codes[partition['entity_id']]))
         streams.append([partition, stream, next(stream, None)])
 
     with open_grid(baseline_directory, grid) as baseline:

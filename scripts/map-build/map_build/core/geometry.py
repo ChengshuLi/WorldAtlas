@@ -53,11 +53,13 @@ def need(ok, message):
         raise ValueError(message)
 
 
-def reject_boundary_centers(geometry, grid):
+def reject_boundary_centers(geometry, grid, *, selected=None):
     """Solve exact segment/center incidence with integer congruences.
 
     Fraction in the reviewed algorithm denotes each supplied binary64 coordinate
-    exactly. as_integer_ratio gives that same value. One conversion per vertex
+    exactly. ``selected(x,y)`` can restrict rejection to relevant cells, such as
+    physical land; contacts on other cells do not affect that calculation.
+    as_integer_ratio gives that same value. One conversion per vertex
     and a common integer denominator per edge avoid repeated Fraction arithmetic.
     """
     grid = vars(grid)
@@ -92,8 +94,10 @@ def reject_boundary_centers(geometry, grid):
                 x1, y1 = current[0]*(d//current[1]), current[2]*(d//current[3])
                 previous = current
                 if y0 == y1:
-                    if y0 % d == 0 and 0 <= y0//d < h and max(0, _ceil(min(x0, x1), d)) <= min(w-1, max(x0, x1)//d):
-                        raise ValueError('polygon boundary crosses grid cell center')
+                    if y0 % d == 0 and 0 <= y0//d < h:
+                        first, last = max(0, _ceil(min(x0, x1), d)), min(w-1, max(x0, x1)//d)
+                        if first <= last and (selected is None or any(selected(x, y0//d) for x in range(first, last+1))):
+                            raise ValueError('polygon boundary crosses grid cell center')
                     continue
                 lo, hi = max(0, _ceil(min(y0, y1), d)), min(h-1, max(y0, y1)//d)
                 visits += max(0, hi-lo+1)
@@ -117,6 +121,10 @@ def reject_boundary_centers(geometry, grid):
                 period = denominator//g
                 residue = (-b//g*pow(a//g, -1, period)) % period
                 hit = residue + _ceil(lo-residue, period)*period
-                need(hit > hi, 'polygon boundary crosses grid cell center')
+                if hit <= hi:
+                    need(selected is not None, 'polygon boundary crosses grid cell center')
+                    for y in range(hit, hi+1, period):
+                        x = (a*y+b)//denominator
+                        need(not selected(x, y), 'polygon boundary crosses grid cell center')
     return visits
 

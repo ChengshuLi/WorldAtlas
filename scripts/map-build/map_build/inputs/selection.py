@@ -65,6 +65,9 @@ def read_selection(database, revisions, *, raw_sources=(), documents=()):
             if line is None:
                 raise ValueError('selected geographic line is missing')
             result['regional_partition'] = {'line': line[0], 'policy': definition}
+            references.add((line[0]['source_id'], line[0]['source_version']))
+            references.update((source['source_id'], source['version'])
+                              for source in definition.get('sources', []))
         requested = sorted(references)
         rows = database.execute(
             "SELECT to_jsonb(a)-'created_at' FROM atlas.source_assets a WHERE kind='raw' "

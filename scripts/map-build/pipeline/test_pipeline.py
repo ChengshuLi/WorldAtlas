@@ -219,7 +219,8 @@ class Fixture(unittest.TestCase):
                     'revisions': dict(mainland='mainland', regional='regional', water='water', ocean='ocean'),
                     'domains': {'mainland': mainland, 'regional': {'decision_revision': {'id': 'regional'}},
                                 'water': {'features': [], 'basins': []}, 'ocean': {}},
-                    'raw_sources': [source], 'regional_partition': {'policy': {}, 'line': {
+                    'raw_sources': [source], 'regional_partition': {'policy': {
+                        'method': 'line_group_satellite_assignment'}, 'line': {
                         'line_id': 'selected', 'geometry_sha256': 'b' * 64}}}
         self.cfg['sources']['regional_template'] = {'json': {
             'point_request': {'json': {}}, 'regional': {'request': {}}}}
@@ -234,6 +235,7 @@ class Fixture(unittest.TestCase):
             runner = pipeline.Pipeline(config, selection=selection)
             original = runner.identity['input_selection_sha256']
             self.assertNotIn('seavox_archive', runner.sources)
+            self.assertNotIn('regional_template', runner.sources)
             self.assertEqual(pipeline.read(runner.out / 'input-selection.json'), selected)
             runner.close()
             resumed = pipeline.Pipeline(config, resume=True)

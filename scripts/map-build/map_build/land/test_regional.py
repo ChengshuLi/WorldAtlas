@@ -14,6 +14,8 @@ from map_build.land.affiliations import resolve_affiliations
 from map_build.land.components import ComponentGrid
 from map_build.land.composition import compose_land
 from map_build.land.regional import build_regional
+from map_build.land.line_groups import LatitudeLine, buffered_bounds, collect_runs, scan_components
+from map_build.land.partitions import build_partitions
 from map_build.water.shared_nearest import crop
 
 
@@ -91,6 +93,71 @@ class RegionalTests(unittest.TestCase):
         with self.components() as components, self.assertRaisesRegex(ValueError, 'conflicting'):
             compose_land(components, self.root / 'baseline', {42: 81}, self.bindings,
                          self.root / 'conflict', partitions=[partition])
+
+    def test_partition_contacts_on_water_are_irrelevant_but_land_ties_fail(self):
+        partition = dict(geometry=polygon(-22.5, -45, 45, 45), entity_id=42)
+        with self.components() as components:
+            compose_land(components, self.root / 'baseline', {}, self.bindings,
+                         self.root / 'water-contact', partitions=[partition])
+        partition['geometry'] = polygon(-67.5, -45, 45, 45)
+        with self.components() as components, self.assertRaisesRegex(ValueError, 'cell center'):
+            compose_land(components, self.root / 'baseline', {}, self.bindings,
+                         self.root / 'land-contact', partitions=[partition])
+
+    def test_line_groups_and_affiliations_are_resolved_before_one_composition(self):
+        line = feature('divider', {'type': 'LineString', 'coordinates': [[0, 80], [0, -80]]})
+        line['line_id'] = 'divider'
+        policy = dict(line_id='divider', boundary_tolerance_degrees=0,
+                      bounds_lon_lat=[-179, -44, 179, 44],
+                      side_entity_ids={'west': 81, 'east': 42}, anchor_feature_ids=[],
+                      anchor_assignment_bases=['selected_affiliation', 'whole_component_line_side'],
+                      satellite_policy=dict(max_satellite_cells=1, max_gap_m=5000, tie_m=0,
+                                            allow_anchored_over_unknown_nearer=True),
+                      groups=[dict(group_id='source-group', mode='geographic_extent',
+                                   bounds_lon_lat=[-130, 0, -50, 45], target_entity_id=42)])
+        selection = dict(domains={'regional': dict(features=self.features, affiliations=self.rules[1:],
+                                                   category_bindings=self.bindings)},
+                         regional_partition=dict(line=line, policy=policy), raw_sources=[])
+        report = build_regional(selection, self.grid, self.root / 'physical', self.root / 'components',
+                                self.root / 'baseline', self.root / 'grouped')
+        self.assertEqual(report['counts'], {'301': 2, '999': 3})
+        self.assertEqual(report['islands']['proposals'][7]['basis'], 'inferred_source_extent_group_convention')
+        self.assertEqual(report['islands']['review'][42], 'crosses_or_touches_line')
+
+    def test_line_scans_complete_counts_and_wrapped_competitor_runs(self):
+        line = LatitudeLine({'type': 'LineString', 'coordinates': [[0, 80], [0, -80]]}, 0)
+        with self.components() as components:
+            stats = scan_components(components, [130, -44, -130, 44], line)
+            self.assertEqual(stats[42], dict(total=2, in_scope=2, west=1, east=1,
+                                            boundary=0, outside_latitude=0))
+            self.assertEqual(collect_runs(components, {42}), {42: [(2, 0, 1), (2, 7, 8)]})
+        self.assertIsNone(line.longitude(81))
+        self.assertEqual(line.longitude(0), 0)
+        bounds = buffered_bounds([170, -10, 179, 10], 500000)
+        self.assertGreater(bounds[0], bounds[2])
+
+    def test_selected_lines_produce_two_witnessed_partition_faces(self):
+        a = feature('a', {'type': 'LineString', 'coordinates': [[0, 80], [0, 0]]})
+        b = feature('b', {'type': 'LineString', 'coordinates': [[0, 0], [0, -80]]})
+        a['boundary_id'], b['route_id'] = 'a', 'b'
+        definition = dict(bounds_lon_lat=[-120, -40, 120, 40],
+                          sections=[dict(kind='boundary', id='a'), dict(kind='route', id='b')],
+                          sides=[dict(coordinates=[-60, 10], entity_id=81),
+                                 dict(coordinates=[60, 10], entity_id=42)])
+        domain = dict(mainland_boundaries=[a], routes=[b],
+                      policies=[dict(id='scope', kind='scoped_land_partition', definition=definition)])
+        partitions = build_partitions(domain)
+        from shapely.geometry import Point, shape
+        self.assertTrue(shape(partitions[0]['geometry']).contains(Point(-60, 10)))
+        self.assertTrue(shape(partitions[1]['geometry']).contains(Point(60, 10)))
+        definition['sides'][1]['coordinates'] = [-30, 10]
+        with self.assertRaisesRegex(ValueError, 'opposite'):
+            build_partitions(domain)
+        definition['sides'][1]['coordinates'] = [60, 10]
+        b['geometry']['coordinates'][0] = [1, 0]
+        b['geometry_sha256'] = feature('b', b['geometry'])['geometry_sha256']
+        with self.assertRaisesRegex(ValueError, 'do not join'):
+            build_partitions(domain)
 
     def test_projected_source_contact_uses_declared_operations_and_reports_unknown(self):
         from pyproj import Transformer

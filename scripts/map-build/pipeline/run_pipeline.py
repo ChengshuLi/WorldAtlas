@@ -279,8 +279,12 @@ class Pipeline:
                     'resolution_template', 'regional_template', 'water_snapshot',
                     'seavox_archive', 'coastal_plan', 'neon_selection', 'osm_receipt'}
         selections = self.cfg.get('sources', {})
+        native_regional = (self.selection is not None and self.selection['regional_partition']['policy'].get('method')
+                           == 'line_group_satellite_assignment')
         if self.selection is not None:
             retired_water_inputs = {'water_snapshot', 'seavox_archive', 'coastal_plan'}
+            if native_regional:
+                retired_water_inputs.add('regional_template')
             required -= retired_water_inputs
             selections = {key: value for key, value in selections.items() if key not in retired_water_inputs}
         if (not isinstance(selections, dict) or not required <= selections.keys() or
@@ -288,8 +292,9 @@ class Pipeline:
             raise ValueError('wrong source selection input set')
         resolved = self.resolve_raw_catalog(selections)
         self.regional_decisions = None
-        if revision := (self.selection['revisions']['regional'] if self.selection is not None
-                        else self.cfg.get('regional_revision')):
+        revision = (self.selection['revisions']['regional'] if self.selection is not None
+                    else self.cfg.get('regional_revision'))
+        if revision and not native_regional:
             resolved = copy.deepcopy(resolved)
             if self.selection is not None:
                 partition = self.selection['regional_partition']
@@ -734,7 +739,7 @@ class Pipeline:
                 add(spec)
         for spec in read(self.sources['resolution_template']).get('source_files', []):
             add(spec)
-        template = read(self.sources['regional_template'])
+        template = read(self.sources['regional_template']) if 'regional_template' in self.sources else {}
         for key in ('polygon_source_files', 'evidence_source_files', 'corroboration_source_files',
                     'bering_source_files'):
             values = template.get(key, [])
@@ -942,6 +947,19 @@ class Pipeline:
                      outer, work, stageout, provisional_only=True,
                      _outputs=[stageout, work], _restart=[work],
                      _resume_marker=work / 'derived/manifest.json')
+        if (self.selection is not None and self.selection['regional_partition']['policy'].get('method')
+                == 'line_group_satellite_assignment'):
+            from map_build.core.grid import Grid
+            from map_build.land.regional import build_regional
+            protected = set(read(stageout / 'report.json')['physical_coverage']['seed_roots'])
+            inputs = [pin(self.out / 'input-selection.json'), pin(stageout / 'report.json')]
+            inputs += [pin(root / name) for root in (physical, components, stageout)
+                       for name in ('rows.u32le', 'runs.u32le')]
+            result = self.checkpoints.run_function('regional-land', 'mainland', build_regional,
+                (self.selection, Grid(**grid), physical, components, stageout, self.out / 'regional'),
+                kwargs={'protected': protected}, timing=self.timing, inputs=inputs,
+                outputs=[self.out / 'regional'])
+            return Path(result['land'])
         prepared = self.out / 'regional-inputs'
         land = self.out / 'land'
         self.stage('mainland', 'prepare-regional', REGIONAL + '/prepare_fresh_handoff.py',

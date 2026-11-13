@@ -12,8 +12,18 @@ They do not reopen source archives.
 - `composition.py` combines mainland assignments, component affiliations and
   scoped geographic polygons in one final land composition. Conflicting claims
   fail; physical water stays unassigned by land calculations.
-- `regional.py` connects affiliation resolution and composition through ordinary
-  Python calls. Its caller supplies any additional geographic partitions.
+- `line_groups.py` counts complete components on either side of a selected
+  latitude-monotonic line. It also reads complete nearby competitor runs.
+- `source_groups.py` applies selected source-backed group choices before
+  `satellites.py` calculates direct WGS84 distances to independently named
+  islands. Inferred satellites cannot become anchors for other satellites.
+- `islands.py` connects those operations using selected lines, imported point
+  and polygon features, geographic scopes and entity IDs from Neon.
+- `partitions.py` builds scoped polygons from selected joined lines and two
+  side witnesses. These rules apply during final composition and never change
+  mainland distance seeds or search domains.
+- `regional.py` connects the complete regional calculation and final land
+  composition through ordinary Python calls.
 
 Entity IDs and land codes come from registry bindings. Source identities and
 geographic choices belong in Neon. Current component IDs are temporary run data.
@@ -27,3 +37,5 @@ contacts remain explicit; no boundary-name branch chooses their treatment.
 `test_regional.py` covers point and polygon selections, partial components,
 longitude wrapping, projected queries, protected components, conflicting claims
 and a complete small structured-input-to-land calculation.
+`test_satellites.py` checks complete candidate searches and distances against
+independent cell-pair calculations, source-group conflicts and no chaining.

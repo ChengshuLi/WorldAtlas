@@ -283,7 +283,7 @@ CREATE TABLE atlas.decision_ocean_seeds (
 CREATE TABLE atlas.decision_policies (
  revision text NOT NULL REFERENCES atlas.decision_revisions(revision),
  policy_id text NOT NULL CHECK (length(trim(policy_id)) > 0),
- kind text NOT NULL CHECK (kind IN ('layer_precedence','overlap','coastline_assignment')),
+ kind text NOT NULL CHECK (kind IN ('layer_precedence','overlap','coastline_assignment','scoped_land_partition')),
  definition jsonb NOT NULL CHECK (jsonb_typeof(definition) = 'object'),
  evidence jsonb NOT NULL CHECK (jsonb_typeof(evidence) = 'object'),
  PRIMARY KEY (revision,policy_id)

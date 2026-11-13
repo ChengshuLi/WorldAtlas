@@ -264,7 +264,7 @@ class Checkpoints:
             'invocation': invocation, 'inputs': inputs, 'output_roots': [os.path.abspath(p) for p in outputs],
             'outputs': inventory(outputs), 'log': pin(log)})
 
-    def run_function(self, name, group, function, args, *, timing, inputs, outputs):
+    def run_function(self, name, group, function, args, *, timing, inputs, outputs, kwargs=None):
         """Call an ordinary Python stage and checkpoint its returned record.
 
         Input/output identity controls reuse. The function's location is
@@ -292,7 +292,7 @@ class Checkpoints:
                   'log': str(log), 'timing_anchor': timing.anchor()})
             try:
                 with timing.measure(group, name):
-                    result = function(*args)
+                    result = function(*args, **(kwargs or {}))
                 write(result_path, result)
                 stream.write(json_bytes(result).decode())
             except BaseException:

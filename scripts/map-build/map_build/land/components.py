@@ -101,10 +101,25 @@ class ComponentGrid:
         x, y = int(x // 1), int(y // 1)
         if not 0 <= x < self.grid.width or not 0 <= y < self.grid.height:
             raise ValueError('source point outside grid')
+        root = self._at_cell(x, y)
+        if root is None:
+            raise ValueError('source point does not fall on physical land')
+        return root
+
+    def component_at(self, longitude, latitude):
+        """Locate a candidate source point with the grid's floor convention."""
+        import math
+        x = math.floor((float(longitude) - self.grid.west) / self.grid.step)
+        y = math.floor((self.grid.north - float(latitude)) / self.grid.step)
+        if not 0 <= x < self.grid.width or not 0 <= y < self.grid.height:
+            return None
+        return self._at_cell(x, y)
+
+    def _at_cell(self, x, y):
         spans = self.row(y)
         index = int(np.searchsorted(spans[:, 1], x, side='right'))
         if index == len(spans) or not int(spans[index, 0]) <= x < int(spans[index, 1]):
-            raise ValueError('source point does not fall on physical land')
+            return None
         return int(spans[index, 2])
 
     def profile(self, geometry, *, rows_per_batch=64):

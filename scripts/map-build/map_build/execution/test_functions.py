@@ -35,6 +35,15 @@ class FunctionCheckpointTests(unittest.TestCase):
         self.assertEqual(self.call(changed_function), first)
         self.assertEqual(Path(first['result']).read_text(), 'input')
 
+    def test_stage_accepts_explicit_keyword_inputs(self):
+        def calculate(*, suffix):
+            result = self.calculate()
+            result['suffix'] = suffix
+            return result
+        result = self.checkpoints.run_function('calculate', 'water', calculate, (), kwargs={'suffix': 'selected'},
+                                              timing=self.timing, inputs=[pin(self.source)], outputs=[self.output])
+        self.assertEqual(result['suffix'], 'selected')
+
     def test_changed_data_or_output_is_rejected(self):
         self.call(self.calculate)
         (self.output / 'result').write_text('tampered')
