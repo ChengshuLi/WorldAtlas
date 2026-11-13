@@ -3,13 +3,12 @@ name: worldatlas
 channels:
   - conda-forge
 dependencies:
-  - python=3.13.9
+  - python=3.13
   - gdal=3.10.3
   - proj=9.6.0
   - pyproj=3.7.1
   - geos=3.13.1
-  - postgresql=17.5
-  - cmake=4.4.3
+  - postgresql>=17,<19
   - pip
   - pip:
       - numpy==2.5.4
@@ -20,7 +19,6 @@ dependencies:
       - llvmlite==0.50.0
       - pyshp==3.1.8
       - osmium==4.3.2
-      - boto3==1.43.126
-      - botocore==1.43.127
-      - psycopg[binary]==3.2.3
-      - matplotlib==3.11.2
+      - boto3>=1.43.126,<2
+      - psycopg[binary]>=3.2.3,<4
+      - matplotlib>=3.11.2,<4

@@ -30,7 +30,8 @@ land and water assignment, without another physical rasterization.
 The project environment provides GDAL 3.10.3, its Python bindings and PROJ 9.6.0.
 For byte-identical physical rasterization, build that GDAL library with
 `-ffp-contract=off`. A stock prebuilt library may round a raster boundary
-differently. Use a C/C++ compiler and Git, then run this once inside the project
+differently. Install CMake 3.16 or newer, a C/C++ compiler and Git separately;
+they are setup tools, not pipeline runtime dependencies. Then run once inside the project
 environment, choosing an absolute work directory:
 
 ```bash

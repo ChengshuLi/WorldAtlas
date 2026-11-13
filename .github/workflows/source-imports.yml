@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       python: ${{ steps.paths.outputs.python }}
+      imports: ${{ steps.paths.outputs.imports }}
+      map: ${{ steps.paths.outputs.map }}
+      releases: ${{ steps.paths.outputs.releases }}
+      sql: ${{ steps.paths.outputs.sql }}
       web: ${{ steps.paths.outputs.web }}
     steps:
       - uses: actions/checkout@v5
@@ -17,16 +21,35 @@ jobs:
       - id: paths
         env:
           EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           python3 - <<'PY'
           import os, subprocess
           from pathlib import Path
-          paths = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD^', 'HEAD'], text=True).splitlines()
+          before = os.environ.get('BEFORE')
+          if before and os.environ['EVENT'] != 'workflow_dispatch':
+              head = os.environ['HEAD_SHA']
+              subprocess.run(['git', 'fetch', '--no-tags', '--depth=1', 'origin', before, head], check=True)
+              compare = [before, head]
+          else:
+              compare = ['HEAD^', 'HEAD']
+          paths = subprocess.check_output(['git', 'diff', '--name-only', *compare], text=True).splitlines()
           all_checks = os.environ['EVENT'] == 'workflow_dispatch' or any(p.startswith('.github/workflows/') for p in paths)
-          python = all_checks or any(p == 'environment.yml' or p.startswith(('scripts/', 'database/')) and not p.endswith('.md') or p == 'web/viewer/config.json' for p in paths)
-          web = all_checks or any(p.startswith(('web/', 'scripts/map-releases/')) and not p.endswith('.md') or p in ('package.json', 'package-lock.json', 'wrangler.jsonc') for p in paths)
+          paths = [p for p in paths if not p.endswith('.md')]
+          environment = 'environment.yml' in paths
+          database = any(p.startswith('database/') for p in paths)
+          shared = any(p.startswith('scripts/source-imports/atlas_sources/') for p in paths)
+          imports = all_checks or environment or database or any(p.startswith('scripts/source-imports/') for p in paths)
+          map_tests = all_checks or environment or database or shared or any(p.startswith('scripts/map-build/') for p in paths)
+          releases = all_checks or environment or database or shared or map_tests or 'web/viewer/config.json' in paths or any(p.startswith('scripts/map-releases/') for p in paths)
+          sql = all_checks or environment or database
+          web = all_checks or any(p.startswith(('web/', 'scripts/map-releases/')) or p in ('package.json', 'package-lock.json', 'wrangler.jsonc') for p in paths)
+          selected = dict(python=imports or map_tests or releases or sql,
+                          imports=imports, map=map_tests, releases=releases, sql=sql, web=web)
           with Path(os.environ['GITHUB_OUTPUT']).open('a') as output:
-              output.write(f'python={str(python).lower()}\nweb={str(web).lower()}\n')
+              for name, run in selected.items():
+                  output.write(f'{name}={str(run).lower()}\n')
           PY
   test:
     needs: changes
@@ -44,6 +67,7 @@ jobs:
           cache-environment: true
           cache-environment-key: sources-${{ runner.arch }}-${{ hashFiles('environment.yml') }}
       - name: Test source imports with disposable PostgreSQL
+        if: needs.changes.outputs.imports == 'true' || needs.changes.outputs.map == 'true' || needs.changes.outputs.sql == 'true'
         shell: bash -el {0}
         env:
           TMPDIR: ${{ runner.temp }}
@@ -51,6 +75,9 @@ jobs:
           TEMP: ${{ runner.temp }}
           PYTHONPATH: scripts/source-imports:scripts/map-build
           PROJ_NETWORK: 'OFF'
+          RUN_IMPORTS: ${{ needs.changes.outputs.imports }}
+          RUN_MAP: ${{ needs.changes.outputs.map }}
+          RUN_SQL: ${{ needs.changes.outputs.sql }}
         run: |
           set -euo pipefail
           database_dir=$(TMPDIR=/tmp mktemp -d)
@@ -60,13 +87,20 @@ jobs:
             -o "-k $database_dir -p 5432 -c listen_addresses=''" -w start
           psql -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 \
             -f database/migrations/001_initial_schema.sql
-          for check in database/tests/*.sql; do
-            psql -Xq -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 -f "$check"
-          done
+          if [[ "$RUN_SQL" == true ]]; then
+            for check in database/tests/*.sql; do
+              psql -Xq -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 -f "$check"
+            done
+          fi
           export WORLDATLAS_TEST_DATABASE_URL="postgresql://postgres@/postgres?host=$database_dir"
-          time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
-          time python -m unittest discover -s scripts/map-build/map_build -t scripts/map-build
+          if [[ "$RUN_IMPORTS" == true ]]; then
+            time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
+          fi
+          if [[ "$RUN_MAP" == true ]]; then
+            time python -m unittest discover -s scripts/map-build/map_build -t scripts/map-build
+          fi
       - name: Test release staging
+        if: needs.changes.outputs.releases == 'true'
         shell: bash -el {0}
         env:
           PROJ_NETWORK: 'OFF'

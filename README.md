@@ -25,6 +25,13 @@ micromamba run -n worldatlas bash
 Run the commands below from the repository root in that shell. For exact
 physical-grid reproduction, complete the [GDAL setup](scripts/map-build/README.md#exact-physical-rasterization).
 
+Geographic and numerical libraries use tested exact versions because upgrades
+can change map coordinates or cells. Python accepts patch updates within 3.13;
+the database tests support PostgreSQL 17 and 18. Storage/database clients and
+review-image tools accept compatible updates. Boto3 selects its own matching
+Botocore dependency. Each build records the actual runtime versions. CMake is
+needed only when compiling GDAL and stays outside the runtime environment.
+
 Set `NEON_DATABASE_URL` to the direct connection URL for the existing working
 `worldatlas` database. The [database guide](database/README.md) explains how to
 identify the working branch and inspect its construction records.
@@ -112,10 +119,19 @@ The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 ## Continuous integration
 
 All automated test suites are included in [Checks](.github/workflows/source-imports.yml).
-Source-import, map-build, environment, or database changes run Python and SQL
-tests on macOS and Linux. Release-command changes also run website tests.
-Website, Node dependency, or Worker changes run Node and Chromium browser tests
-on Linux; viewer configuration changes also run Python packaging tests.
-Workflow changes and a manual run select every suite. Documentation-only changes
-skip the runtime suites. CI uses local fixtures and disposable databases, with no
-cloud credentials. Full-size builds and geographic review remain separate.
+For a new PR, CI checks its full change; subsequent pushes check the changed
+files in that update. The relevant Python suites run on macOS and Linux:
+
+| Changed code | Suites |
+| --- | --- |
+| Source imports | Source-import tests; shared catalog changes also test map building and packaging |
+| Map building | Map-build and release-packaging tests |
+| Release commands | Packaging, Node and browser tests |
+| Database schema, upgrades or SQL checks | SQL checks and all Python suites |
+| Website, Node dependencies or Worker | Node and Chromium browser tests on Linux |
+| Viewer configuration | Website and packaging tests |
+
+Environment changes run all Python/SQL suites. Workflow changes and manual runs
+select every suite. Documentation-only updates skip runtime suites. CI caches
+installed environments and uses local fixtures and disposable databases, with
+no cloud credentials. Full-size builds and geographic review remain separate.
