@@ -50,6 +50,12 @@ For example, a GeoNames construction names its published columns and checks each
 selected record's name, feature type and country; those choices are data, not
 separate island/airport implementations.
 
+To import a selected set of candidate points, use `where` with exact property
+matches, `feature_id_prefix` for the output IDs and optional `bounds_lon_lat`.
+Any explicit `selections` are retained as well, including outside those bounds.
+Map building then resolves these imported points against the current components;
+it does not reopen the provider table.
+
 `test_vector.py` checks selection, identity, archives, conversion and malformed
 geometry. `test_storage.py` checks transactional saves, repeat imports, preserved
 relationships, schema upgrades and rollback using disposable PostgreSQL.

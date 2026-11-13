@@ -28,6 +28,22 @@ class PointTableTests(unittest.TestCase):
         self.settings['selections'][0]['expected_geometry_sha256'] = geometry_hash(features[0]['geometry'])
         self.assertEqual(read_points(self.path, self.settings), features)
 
+    def test_filtered_selection_keeps_explicit_points_outside_its_bounds(self):
+        self.path.write_text('id\tname\tlon\tlat\tkind\n'
+                             '2\tOutside\t-20.25\t11.5\tisland\n'
+                             '3\tNew\t6\t-2\tisland\n'
+                             '4\tWrong kind\t7\t-3\tcity\n'
+                             '1\tFirst\t5.5\t-2.25\tisland\n')
+        settings = dict(self.settings, where={'kind': 'island'}, feature_id_prefix='island-',
+                        bounds_lon_lat=[0, -10, 10, 0])
+        self.assertEqual([f['feature_id'] for f in read_points(self.path, settings)],
+                         ['point-one', 'point-two', 'island-3'])
+        settings['selections'] = []
+        self.assertEqual([f['feature_id'] for f in read_points(self.path, settings)], ['island-1', 'island-3'])
+        settings['where'] = {'missing': 'island'}
+        with self.assertRaisesRegex(ValueError, 'filter columns'):
+            read_points(self.path, settings)
+
     def test_headerless_archive_uses_explicit_column_names_and_member(self):
         archive = self.path.with_suffix('.zip')
         with ZipFile(archive, 'w') as output:

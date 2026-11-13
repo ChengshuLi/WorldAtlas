@@ -10,7 +10,8 @@ def build_features(database, storage, recipe_id, version, revision, work_dir):
     started = time.monotonic()
     with database.transaction():
         recipe = read_recipe(database, recipe_id, version)
-        if not recipe.get('basis') or not recipe.get('selections'):
+        filtered_points = recipe.get('method') == 'selected_table_points' and 'where' in recipe
+        if not recipe.get('basis') or not (recipe.get('selections') or filtered_points):
             raise ValueError('feature construction needs a basis and selections')
         source = catalog_source(database, recipe['source_id'], recipe['source_version'])
     timing = {}
