@@ -24,20 +24,13 @@ jobs:
       - id: paths
         env:
           EVENT: ${{ github.event_name }}
-          BEFORE: ${{ github.event.before }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           python3 - <<'PY'
           import os, subprocess
           from pathlib import Path
-          before = os.environ.get('BEFORE')
-          if before and os.environ['EVENT'] != 'workflow_dispatch':
-              head = os.environ['HEAD_SHA']
-              subprocess.run(['git', 'fetch', '--no-tags', '--depth=1', 'origin', before, head], check=True)
-              compare = [before, head]
-          else:
-              compare = ['HEAD^', 'HEAD']
-          paths = subprocess.check_output(['git', 'diff', '--name-only', *compare], text=True).splitlines()
+          # Checkout uses the PR merge commit. Its first parent is the target
+          # branch, so this includes code from canceled or failed earlier runs.
+          paths = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD^', 'HEAD'], text=True).splitlines()
           all_checks = os.environ['EVENT'] == 'workflow_dispatch' or any(p.startswith('.github/workflows/') for p in paths)
           paths = [p for p in paths if not p.endswith('.md')]
           environment = 'environment.yml' in paths

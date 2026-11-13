@@ -119,8 +119,9 @@ The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 ## Continuous integration
 
 All automated test suites are included in [Checks](.github/workflows/source-imports.yml).
-For a new PR, CI checks its full change; subsequent pushes check the changed
-files in that update. The relevant Python suites run on macOS and Linux:
+CI selects tests from the whole PR's changes against its target branch. This
+keeps code covered when a later push cancels an unfinished run. The relevant
+Python suites run on macOS and Linux:
 
 | Changed code | Suites |
 | --- | --- |
@@ -132,7 +133,7 @@ files in that update. The relevant Python suites run on macOS and Linux:
 | Viewer configuration | Website and packaging tests |
 
 Environment changes run all Python/SQL suites. Workflow changes and manual runs
-select every suite. Documentation-only updates skip runtime suites. CI caches
+select every suite. Documentation-only PRs skip runtime suites. CI caches
 installed environments and uses local fixtures and disposable databases, with
 no cloud credentials. Full-size builds and geographic review remain separate.
 The website job uses Chrome already installed on GitHub's runner, avoiding a
