@@ -89,7 +89,7 @@ The calculation is:
    then remaining selected basin water, followed by oceans and enclosed water.
    Basin participants come from current physical shores and final land.
 4. **Comparison:** optionally compare every final cell with the release selected
-   by `--compare-release VERSION` or explicit reference streams.
+   by `--compare-release VERSION_OR_CANDIDATE` or explicit reference streams.
 
 Conflicting applicable regional assignments stop the build. Components outside
 a regional rule's scope keep their normal mainland or nearest-land assignment.

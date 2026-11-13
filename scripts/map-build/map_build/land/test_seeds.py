@@ -223,6 +223,16 @@ class SeedBuildTests(unittest.TestCase):
             self.assertEqual(ends.tolist(), [3, 4, 5, 10, 12, 16])
             self.assertEqual(codes.tolist(), [0, 301, 999, 0, 77, 0])
 
+    def test_current_selection_uses_distinct_pairs_and_complete_lines(self):
+        self.domain['distinct_groups'] = [item['group_ids'] for item in self.domain.pop('mainland_group_relations')]
+        for region in self.domain['seed_regions']:
+            for segment in region['segments']:
+                segment.pop('start')
+                segment.pop('end')
+        with self.components() as components:
+            result = build_seeds(self.domain, components, self.root / 'current-seeds', workers=1)
+        self.assertEqual(result['category_cell_counts'], {'77': 2, '301': 1, '999': 1})
+
     def test_wrong_source_identity_and_closure_crossing_land_fail_before_output(self):
         self.domain['mainland_witnesses'][0]['point_name'] = 'wrong'
         with self.components() as components, self.assertRaisesRegex(ValueError, 'source identity'):

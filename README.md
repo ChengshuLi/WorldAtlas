@@ -79,16 +79,16 @@ Use the release command to publish the reviewed viewer and map files.
 When changing the Worker's server code or configuration, deploy it with
 `npx wrangler deploy`. Its `ATLAS` binding connects it to the `worldatlas` R2 bucket.
 
-`atlas.map_release_objects` tracks the two R2 objects for each versioned
-row-run map. The `rows` stream stores row offsets and the `runs` stream stores
-run endpoints and category codes. Register both in one transaction after
-verifying the stored byte lengths and both sets of hashes. The table tracks
-outputs separately from the source catalog. See
-the [initial database schema](database/migrations/001_initial_schema.sql).
-`atlas.map_release_candidates` records each candidate's complete file manifest,
-including its grid, viewer, generated config, and legend file. The legend
-contains entity names, colors, and cell counts for that release. The source
-catalog tracks raw data objects, including the parts of source archives.
+`atlas.map_releases` stores each release's immutable R2 asset manifest: map
+streams, viewer, configuration, legends and frozen inputs. `atlas.map_publications`
+connects official versions to those releases and identifies the homepage.
+The legend contains entity names, colors and counts for that release. The source
+catalog tracks raw files, including archive parts.
+
+The grid's `rows` stream stores row offsets; `runs` stores run endpoints and
+category codes. Both are registered together in the manifest after their stored
+and decoded checksums are verified. See the
+[database guide](database/README.md).
 
 ## Entity registry
 
@@ -128,7 +128,7 @@ Python suites run on macOS and Linux:
 | Source imports | Source-import tests; shared catalog changes also test map building and packaging |
 | Map building | Map-build and release-packaging tests |
 | Release commands | Packaging, Node and browser tests |
-| Database schema, upgrades or SQL checks | SQL checks and all Python suites |
+| Database schema or SQL checks | SQL checks and all Python suites |
 | Website, Node dependencies or Worker | Node and Chromium browser tests on Linux |
 | Viewer configuration | Website and packaging tests |
 

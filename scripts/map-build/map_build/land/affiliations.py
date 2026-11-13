@@ -2,7 +2,7 @@
 
 from shapely.geometry import shape
 
-from map_build.inputs.features import feature_geometry
+from map_build.inputs.features import affiliation_selection, feature_geometry
 
 
 def resolve_affiliations(rules, features, components, bindings, *, protected=()):
@@ -90,15 +90,13 @@ def resolve_affiliations(rules, features, components, bindings, *, protected=())
         if ident in identifiers or entity not in codes:
             raise ValueError('duplicate affiliation or unbound target entity')
         identifiers.add(ident)
-        selection = rule['evidence']['component_selection']
+        selection = affiliation_selection(rule, by_id.keys())
         for assertion in selection.get('source_assertions', []):
             point = shape(geometry(assertion['point_feature_id']))
             area = shape(geometry(assertion['area_feature_id']))
             if point.geom_type != 'Point' or not area.contains(point):
                 raise ValueError('selected source point is not inside its identity area')
         conditions = selection['conditions']
-        if not conditions or selection['combine'] not in ('all', 'any'):
-            raise ValueError('component selection needs conditions and an all/any combination')
         selected = None
         for record in conditions:
             found = condition(record, selected if selection['combine'] == 'all' else None)

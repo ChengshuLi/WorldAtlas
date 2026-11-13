@@ -17,7 +17,7 @@ def snap(priority=(2, 1, 3, 4, 5, 6)):
             {
                 'id': 'test-coast',
                 'kind': 'coastline_assignment',
-                'evidence': {'execution_status': 'selected_for_research'},
+                'evidence': {},
                 'definition': {
                     'method': 'nearest_final_shore_band_v2',
                     'band_metres': '120000',

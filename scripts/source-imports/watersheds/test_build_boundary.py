@@ -250,9 +250,9 @@ class StorageTests(unittest.TestCase):
         for name, path in self.files.items():
             raw = path.read_bytes()
             self.db.execute(
-                "INSERT INTO atlas.source_assets (source_id,version,title,kind,provider,source_uri,"
+                "INSERT INTO atlas.source_assets (source_id,version,title,provider,source_uri,"
                 "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
-                "VALUES (%s,'1','Test','raw','Test','test:input','Test','test:license','Test','test',"
+                "VALUES (%s,'1','Test','Test','test:input','Test','test:license','Test','test',"
                 "%s,%s,%s,'{\"origin\":\"test:input\",\"representation\":\"provider_original\"}')",
                 ('__watershed_' + name, path.name, hashlib.sha256(raw).hexdigest(), len(raw)))
         self.store_recipe('1', self.recipe)
@@ -270,7 +270,7 @@ class StorageTests(unittest.TestCase):
                               '__watershed', self.directory / 'cache')
 
     def row(self):
-        return self.db.execute('SELECT geometry,geometry_sha256,provenance '
+        return self.db.execute('SELECT geometry,geometry_sha256,provenance,construction_version '
                                'FROM atlas.decision_mainland_boundaries WHERE revision=%s',
                                ('__watershed',)).fetchone()
 
@@ -313,8 +313,7 @@ class StorageTests(unittest.TestCase):
         result = self.build()
         first = self.row()
         self.assertEqual(first[1], result['sha256'])
-        self.assertEqual(first[2]['construction']['recipe_version'], '1')
-        self.assertEqual(len(first[2]['construction']['sources']), 3)
+        self.assertEqual(first[3], '1')
         self.assertEqual(self.build()['sha256'], result['sha256'])
         self.assertEqual(self.client.get_object.call_count, 3)
         self.db.execute("UPDATE atlas.decision_mainland_boundaries SET provenance=provenance || "
@@ -325,7 +324,7 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(self.build('2')['sha256'], result['sha256'])
         self.assertEqual(self.row()[2]['note'], 'retain this')
         self.assertEqual(self.row()[2]['custom_context'], {'source': 'reviewed'})
-        self.assertEqual(self.row()[2]['construction']['recipe_version'], '2')
+        self.assertEqual(self.row()[3], '2')
         links = self.db.execute('SELECT source_id,source_version FROM atlas.decision_mainland_boundary_sources '
                                 "WHERE revision='__watershed'").fetchall()
         self.assertEqual(set(links), {(v['source_id'], '1') for v in self.recipe['sources'].values()})
@@ -344,9 +343,9 @@ class StorageTests(unittest.TestCase):
 
     def test_supporting_sources_are_linked_without_being_downloaded(self):
         self.db.execute(
-            "INSERT INTO atlas.source_assets (source_id,version,title,kind,provider,source_uri,"
+            "INSERT INTO atlas.source_assets (source_id,version,title,provider,source_uri,"
             "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
-            "SELECT source_id,'evidence',title,kind,provider,source_uri,license_name,license_uri,"
+            "SELECT source_id,'evidence',title,provider,source_uri,license_name,license_uri,"
             "attribution,r2_bucket,r2_key||'-evidence',sha256,size_bytes,provenance "
             "FROM atlas.source_assets WHERE source_id='__watershed_dem' AND version='1'")
         recipe = dict(self.recipe, evidence_sources=[{'source_id': '__watershed_dem', 'version': 'evidence'}])

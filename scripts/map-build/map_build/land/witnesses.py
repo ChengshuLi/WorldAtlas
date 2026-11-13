@@ -73,11 +73,12 @@ def resolve_witnesses(domain, components):
         used.update(members)
     if used != witnesses.keys():
         raise ValueError('unconsumed mainland witness')
-    for relation in domain['mainland_group_relations']:
-        a, b = relation['group_ids']
-        if (
-            relation['relation'] != 'different'
-            or groups[a]['component_id'] == groups[b]['component_id']
-        ):
+    # Retained selections express these pairs as relation records.
+    earlier = domain.get('mainland_group_relations', [])
+    if any(item['relation'] != 'different' for item in earlier):
+        raise ValueError('unsupported mainland group relation')
+    pairs = domain.get('distinct_groups', [item['group_ids'] for item in earlier])
+    for a, b in pairs:
+        if groups[a]['component_id'] == groups[b]['component_id']:
             raise ValueError('different-group mainland witness mismatch')
     return dict(groups=groups, witnesses=witnesses)

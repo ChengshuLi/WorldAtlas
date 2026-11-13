@@ -29,8 +29,6 @@ def build_regional(
     validate_bindings(selection['domains'])
     domain = selection['domains']['regional']
     rules = domain['affiliations']
-    if any(rule['method'] != 'component_selection' for rule in rules):
-        raise ValueError('regional rules must use source-neutral component selections')
     directory = Path(directory)
     directory.mkdir()
     with ComponentGrid(physical_directory, component_directory, grid) as components:

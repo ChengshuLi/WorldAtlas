@@ -74,7 +74,8 @@ def assemble_regions(domain, components):
             key = segment['kind'], segment['id']
             record = records[key]
             line = feature_geometry(record, ('LineString',))['coordinates']
-            first, last = segment['start'], segment['end']
+            # Retained selections may contain explicit coordinate slices.
+            first, last = segment.get('start', 0), segment.get('end', len(line))
             if (
                 type(first) is not int
                 or type(last) is not int

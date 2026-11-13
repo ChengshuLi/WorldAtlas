@@ -33,7 +33,7 @@ def catalog_source(database, source_id, version):
     """Look up an exact raw source version and its R2 location."""
     row = database.execute(
         "SELECT r2_bucket,r2_key,sha256,size_bytes FROM atlas.source_assets "
-        "WHERE kind='raw' AND source_id=%s AND version=%s",
+        "WHERE source_id=%s AND version=%s",
         (source_id, version),
     ).fetchone()
     if row is None:

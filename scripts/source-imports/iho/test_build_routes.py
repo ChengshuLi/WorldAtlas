@@ -45,9 +45,9 @@ class BuildTests(unittest.TestCase):
         self.responses[version + '.zip'] = raw
         self.database.execute(
             'INSERT INTO atlas.source_assets '
-            '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+            '(source_id,version,title,provider,source_uri,license_name,license_uri,'
             'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
-            "VALUES ('iho-test',%s,'Test','raw','Test','test:source','Test','test:license',"
+            "VALUES ('iho-test',%s,'Test','Test','test:source','Test','test:license',"
             "'Test','test',%s,%s,%s,'{}')",
             (version, version + '.zip', hashlib.sha256(raw).hexdigest(), len(raw)),
         )
@@ -70,12 +70,12 @@ class BuildTests(unittest.TestCase):
         before = self.snapshot()
         self.assertEqual(result['endpoint_count'], 4)
         self.assertEqual([len(rows) for rows in before], [4, 2, 4])
-        first = self.database.execute("SELECT longitude,latitude,derivation,evidence FROM atlas.decision_endpoints "
+        first = self.database.execute("SELECT longitude,latitude,derivation,evidence,construction_id FROM atlas.decision_endpoints "
                                       "WHERE revision='__iho_a' AND endpoint_id='route-a-endpoint-0'").fetchone()
         self.assertEqual(first[:2], (Decimal(40), Decimal(30)))
         self.assertEqual(first[2]['method'], 'source_decimal_exact_rational')
-        self.assertEqual(first[3]['construction']['recipe_id'], '__iho_recipe')
-        self.assertEqual(first[3]['source_refs'][0]['sha256'], self.digest)
+        self.assertEqual(first[4], '__iho_recipe')
+        self.assertEqual(first[3]['source_refs'], [{'source_id': 'iho-test', 'version': '1'}])
         self.assertEqual(self.build(), result)
         self.assertEqual(self.snapshot(), before)
         self.assertEqual(self.storage.get_object.call_count, 1)
@@ -92,7 +92,7 @@ class BuildTests(unittest.TestCase):
         evidence = self.database.execute("SELECT evidence FROM atlas.decision_routes "
                                          "WHERE revision='__iho_a' AND route_id='route-a'").fetchone()[0]
         self.assertEqual(evidence['review_note'], 'keep')
-        self.assertEqual(evidence['construction']['recipe_version'], '2')
+        self.assertEqual(self.database.execute("SELECT construction_version FROM atlas.decision_routes WHERE revision='__iho_a'").fetchone()[0], '2')
         self.assertEqual(self.snapshot('__iho_b'), other)
 
     def test_replaced_endpoint_drops_old_selector_and_point_id(self):

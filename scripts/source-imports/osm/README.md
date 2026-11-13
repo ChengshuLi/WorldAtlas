@@ -113,8 +113,9 @@ An optional expected geometry checksum supports replaying an existing result.
 It saves the geometry in `atlas.decision_mainland_boundaries` and its construction
 source link in `atlas.decision_mainland_boundary_sources`, in one transaction.
 The construction description is saved in the boundary's `provenance.basis` field.
-The selected record ID and version are saved in `provenance.construction`, along
-with the processing function and raw source details.
+The selected record ID and version are saved in the boundary’s
+`construction_id` and `construction_version` columns. The source link identifies
+the catalog entry with the raw file’s R2 location, size and checksum.
 The destination revision must already exist. Repeating the command updates the
 same boundary, retaining other notes and supporting source links. Changing the
 source version replaces the previous construction source link.

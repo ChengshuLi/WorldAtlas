@@ -4,6 +4,35 @@ import hashlib
 import json
 
 
+def affiliation_selection(rule, features):
+    """Read current or frozen affiliation data and check its feature references."""
+    selection = rule.get('component_selection', rule.get('evidence', {}).get('component_selection'))
+    if (not isinstance(selection, dict) or selection.get('combine') not in ('all', 'any')
+            or not isinstance(selection.get('conditions'), list) or not selection['conditions']):
+        raise ValueError('affiliation needs conditions and an all/any component selection')
+    references = set()
+    for key in ('conditions', 'exclusions'):
+        if not isinstance(selection.get(key, []), list):
+            raise ValueError('component selection conditions must be lists')
+        for condition in selection.get(key, []):
+            if (not isinstance(condition, dict)
+                    or condition.get('relation') not in ('point_component', 'intersects_component', 'contains_component')
+                    or not isinstance(condition.get('feature_id'), str)):
+                raise ValueError('invalid component selection condition')
+            references.add(condition['feature_id'])
+    assertions = selection.get('source_assertions', [])
+    if not isinstance(assertions, list):
+        raise ValueError('source assertions must be a list')
+    for assertion in assertions:
+        if (not isinstance(assertion, dict)
+                or any(not isinstance(assertion.get(key), str) for key in ('point_feature_id', 'area_feature_id'))):
+            raise ValueError('source assertion needs point and area feature IDs')
+        references.update((assertion['point_feature_id'], assertion['area_feature_id']))
+    if references - features:
+        raise ValueError('component selection refers to a missing feature: ' + str(sorted(references - features)))
+    return selection
+
+
 def feature_geometry(feature, types, *, coordinate_reference='OGC:CRS84'):
     """Read imported geometry in the declared coordinates and verify its checksum."""
     geometry = feature.get('geometry')

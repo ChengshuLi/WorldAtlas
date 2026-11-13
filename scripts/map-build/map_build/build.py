@@ -117,6 +117,23 @@ def catalog_references(value):
                 yield from catalog_references(item)
 
 
+def catalog_keys(value):
+    """Validate exact catalog selectors once for freezing and resolving inputs."""
+    requested = set()
+    for spec in catalog_references(value):
+        identity = spec['r2_source']
+        if (
+            not isinstance(identity, dict)
+            or set(identity) != {'source_id', 'version'}
+            or any(not isinstance(v, str) or not v.strip() for v in identity.values())
+            or {'r2_bucket', 'r2_key', 'source_id', 'version', 'sha256', 'size_bytes', 'size'}
+            & spec.keys()
+        ):
+            raise ValueError('invalid raw catalog reference')
+        requested.add((identity['source_id'], identity['version']))
+    return requested
+
+
 def physical_reference(run, sources):
     """Reuse completed physical outputs only for identical raw-source requests.
 
@@ -124,6 +141,11 @@ def physical_reference(run, sources):
     outputs the new run must verify; it does not create a replacement checkpoint.
     """
     run = Path(run).resolve(strict=True)
+    saved = run / 'run-identity.json'
+    if saved.is_file():
+        reuse = read(saved).get('physical_reuse')
+        if reuse is not None:
+            run = Path(reuse['source_run']).resolve(strict=True)
     root = run / 'physical'
     identity = read(root / 'pipeline-identity.json')
     report = read(root / 'report.json')
@@ -234,7 +256,8 @@ class Pipeline:
             if not connection:
                 raise ValueError('set NEON_DATABASE_URL to freeze the working geographic selection')
             with psycopg.connect(connection, connect_timeout=15) as database:
-                self.selection = read_selection(database, revisions)
+                references = catalog_keys(self.cfg.get('sources', {}))
+                self.selection = read_selection(database, revisions, raw_sources=references)
         if self.selection is not None:
             if set(self.selection['domains']) != {'mainland', 'regional', 'water', 'ocean'}:
                 raise ValueError('a map build needs mainland, regional, water and ocean selections')
@@ -393,18 +416,7 @@ class Pipeline:
         if not references:
             return selections
 
-        requested = set()
-        for spec, _ in references:
-            identity = spec['r2_source']
-            if (
-                not isinstance(identity, dict)
-                or set(identity) != {'source_id', 'version'}
-                or any(not isinstance(v, str) or not v.strip() for v in identity.values())
-                or {'r2_bucket', 'r2_key', 'source_id', 'version', 'sha256', 'size_bytes', 'size'}
-                & spec.keys()
-            ):
-                raise ValueError('invalid raw catalog reference')
-            requested.add((identity['source_id'], identity['version']))
+        requested = catalog_keys(resolved)
 
         rows = sorted(self.neon_raw_catalog(sorted(requested)))
         catalog = {(row[0], row[1]): row for row in rows}
@@ -450,8 +462,7 @@ class Pipeline:
             return database.execute(
                 "SELECT a.source_id, a.version, a.r2_bucket, a.r2_key, a.sha256, a.size_bytes "
                 "FROM atlas.source_assets AS a "
-                "JOIN unnest(%s::text[], %s::text[]) AS selected(source_id, version) USING (source_id, version) "
-                "WHERE a.kind = 'raw'",
+                "JOIN unnest(%s::text[], %s::text[]) AS selected(source_id, version) USING (source_id, version)",
                 (list(source_ids), list(versions)),
             ).fetchall()
 
@@ -1035,7 +1046,7 @@ def main():
         '--land-revision',
         help='build a candidate from the selected working mainland revision in Neon',
     )
-    p.add_argument('--compare-release', help='compare with a published map version in Neon')
+    p.add_argument('--compare-release', help='compare with an official version or numbered candidate in Neon')
     p.add_argument(
         '--physical-from',
         type=Path,

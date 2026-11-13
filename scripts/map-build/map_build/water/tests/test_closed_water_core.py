@@ -13,7 +13,7 @@ def policy_snapshot():
         {
             'id': 'test-closed',
             'kind': 'closed_water_assignment',
-            'evidence': {'execution_status': 'selected_for_research'},
+            'evidence': {},
             'definition': {
                 'method': 'closed_water_component_v2',
                 'boundary_participants': 'adjacent_final_water_or_assigned_land',

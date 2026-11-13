@@ -58,9 +58,9 @@ class DatabaseTest(unittest.TestCase):
             source = source_updated if version == '2' else self.source
             self.database.execute(
                 "INSERT INTO atlas.source_assets "
-                "(source_id,version,title,kind,provider,source_uri,license_name,license_uri,"
+                "(source_id,version,title,provider,source_uri,license_name,license_uri,"
                 "attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
-                "VALUES ('osm-test',%s,'Test','raw','Test','test:source','Test','test:license',"
+                "VALUES ('osm-test',%s,'Test','Test','test:source','Test','test:license',"
                 "'Test','test',%s,%s,%s,'{\"origin\":\"test:source\",\"representation\":\"provider_original_bundle\"}')",
                 (version, version + '.zip', source['sha256'], source['size_bytes']),
             )
@@ -85,7 +85,7 @@ class DatabaseTest(unittest.TestCase):
 
     def boundary(self, revision='__osm_a'):
         return self.database.execute(
-            'SELECT geometry,geometry_sha256,provenance FROM atlas.decision_mainland_boundaries '
+            'SELECT geometry,geometry_sha256,provenance,construction_version FROM atlas.decision_mainland_boundaries '
             'WHERE revision=%s AND boundary_id=%s', (revision, 'border'),
         ).fetchone()
 
@@ -97,14 +97,13 @@ class DatabaseTest(unittest.TestCase):
 
     def test_full_build_and_idempotent_repeat(self):
         result = self.build()
-        geometry, digest, provenance = self.boundary()
+        geometry, digest, provenance, construction_version = self.boundary()
         self.assertEqual(geometry['coordinates'], [[0.0, 0.0], [1.0, 1.0]])
         self.assertEqual(result['sha256'], digest)
         self.assertEqual(result['vertices'], 2)
         self.assertEqual(provenance['basis'], 'Test construction description')
-        self.assertEqual(provenance['construction']['recipe_id'], '__osm_recipe')
-        self.assertEqual(provenance['construction']['recipe_version'], '1')
-        self.assertEqual(provenance['construction']['archive_sha256'], self.source['sha256'])
+        self.assertEqual(self.database.execute("SELECT construction_id FROM atlas.decision_mainland_boundaries WHERE revision='__osm_a' AND boundary_id='border'").fetchone()[0], '__osm_recipe')
+        self.assertEqual(construction_version, '1')
         self.assertEqual(self.links(), [('1', 'construction_input')])
         self.assertEqual(self.build(), result)
         self.assertEqual(self.links(), [('1', 'construction_input')])
@@ -133,7 +132,7 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(self.boundary()[2]['review_note'], 'keep me')
         self.assertEqual(self.boundary()[0]['coordinates'], [[0.0, 0.0], [2.0, 2.0]])
         self.assertNotEqual(self.boundary()[1], before[1])
-        self.assertEqual(self.boundary()[2]['construction']['recipe_version'], '2')
+        self.assertEqual(self.boundary()[3], '2')
         self.assertEqual(self.boundary('__osm_b'), before)
 
     def test_imported_boundary_is_consumable_by_map_builder(self):
@@ -141,16 +140,16 @@ class DatabaseTest(unittest.TestCase):
 
         self.build()
         scripts = Path(__file__).resolve().parents[2]
-        query = scripts / 'map-build/map_build/inputs/mainland.sql'
+        query = scripts / 'map-build/map_build/inputs/geography.sql'
         raw = self.database.execute(query.read_text(), {'revision': '__osm_a'}).fetchone()[0]
         selected = json.loads(raw)
         self.assertEqual(selected['decision_revision']['id'], '__osm_a')
         record = next(b for b in selected['mainland_boundaries'] if b['boundary_id'] == 'border')
         geometry = feature_geometry(record, ('LineString',))
         self.assertEqual(geometry, self.boundary()[0])
-        self.assertEqual(record['provenance']['source_relationships'][0]['relationship'], 'construction_input')
+        self.assertEqual(record['source_refs'][0]['relationship'], 'construction_input')
         source = next(s for s in selected['sources'] if s['source_id'] == 'osm-test')
-        self.assertEqual(source['sha256'], self.source['sha256'])
+        self.assertEqual(source, {'source_id': 'osm-test', 'version': '1'})
 
     def test_geometry_can_change_without_release_pin(self):
         self.build()
@@ -164,7 +163,7 @@ class DatabaseTest(unittest.TestCase):
 
         geometry = {'type': 'LineString', 'coordinates': [[-0.0, 0.0], [1.0, 1.0]]}
         digest = save_boundary(self.database, '__osm_a', geometry, self.source, self.recipe)
-        saved, stored_digest, _ = self.boundary()
+        saved, stored_digest, *_ = self.boundary()
         self.assertEqual(digest, stored_digest)
         self.assertEqual(feature_geometry(dict(geometry=saved, geometry_sha256=digest,
                                               coordinate_reference='OGC:CRS84'), ('LineString',)), saved)
@@ -226,9 +225,9 @@ class DatabaseTest(unittest.TestCase):
         raw, source = source_fixture(coordinates=[(0, 0), (2, 2), (0, 2), (2, 0)])
         self.database.execute(
             'INSERT INTO atlas.source_assets '
-            '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+            '(source_id,version,title,provider,source_uri,license_name,license_uri,'
             'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
-            "SELECT source_id,'crossing',title,kind,provider,source_uri,license_name,license_uri,"
+            "SELECT source_id,'crossing',title,provider,source_uri,license_name,license_uri,"
             "attribution,r2_bucket,'crossing.zip',%s,%s,provenance FROM atlas.source_assets "
             "WHERE source_id='osm-test' AND version='1'",
             (source['sha256'], source['size_bytes']))
@@ -256,53 +255,41 @@ class DatabaseTest(unittest.TestCase):
         save_boundary(self.database, '__osm_a',
                       {'type': 'LineString', 'coordinates': [[1., 1.], [1., 0.], [0., 0.]]},
                       self.source, dict(self.recipe, boundary_id='return'))
-        polygon = {'type': 'Polygon', 'coordinates': [[[0., 0.], [1., 1.], [1., 0.], [0., 0.]]]}
-        digest = hashlib.sha256(json.dumps(polygon, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
         self.database.execute(
-            "INSERT INTO atlas.decision_mainland_seed_regions VALUES "
-            "('__osm_a','region','selected_for_research',%s,"
-            "'binary64-sorted-compact-geojson-v1','[]')", (digest,))
+            "INSERT INTO atlas.decision_mainland_seed_regions VALUES ('__osm_a','region','[]')")
         self.database.execute(
             "INSERT INTO atlas.decision_mainland_region_segments VALUES "
-            "('__osm_a','region',0,'boundary','border',NULL,0,2,false),"
-            "('__osm_a','region',1,'boundary','return',NULL,0,3,false)")
+            "('__osm_a','region',0,'boundary','border',NULL,false),"
+            "('__osm_a','region',1,'boundary','return',NULL,false)")
 
-    def test_changed_vertex_count_updates_region_references_and_hash_in_one_write(self):
+    def region_sections(self):
+        return self.database.execute(
+            "SELECT * FROM atlas.decision_mainland_region_segments WHERE revision='__osm_a' ORDER BY ordinal").fetchall()
+
+    def test_changed_vertex_count_needs_no_region_reference_updates(self):
         self.region_fixture()
+        sections = self.region_sections()
         geometry = {'type': 'LineString', 'coordinates': [[0., 0.], [.4, .6], [1., 1.]]}
         save_boundary(self.database, '__osm_a', geometry, self.source, self.recipe)
-        count = self.database.execute(
-            "SELECT end_index FROM atlas.decision_mainland_region_segments "
-            "WHERE revision='__osm_a' AND region_id='region' AND ordinal=0").fetchone()[0]
-        self.assertEqual(count, 3)
-        polygon = {'type': 'Polygon', 'coordinates': [[[0., 0.], [.4, .6], [1., 1.], [1., 0.], [0., 0.]]]}
-        digest = hashlib.sha256(json.dumps(polygon, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
-        self.assertEqual(self.database.execute(
-            "SELECT geometry_sha256 FROM atlas.decision_mainland_seed_regions "
-            "WHERE revision='__osm_a' AND region_id='region'").fetchone()[0], digest)
+        self.assertEqual(self.boundary()[0], geometry)
+        self.assertEqual(self.region_sections(), sections)
 
-    def test_broken_region_join_rolls_back_boundary_source_links_and_slice(self):
+    def test_broken_region_join_rolls_back_boundary_and_source_links(self):
         self.region_fixture()
-        before = self.boundary()
+        before, sections = self.boundary(), self.region_sections()
         with self.assertRaisesRegex(ValueError, 'does not join'):
             save_boundary(self.database, '__osm_a',
                           {'type': 'LineString', 'coordinates': [[0., 0.], [.4, .6], [2., 2.]]},
                           self.source, self.recipe)
         self.assertEqual(self.boundary(), before)
-        self.assertEqual(self.database.execute(
-            "SELECT end_index FROM atlas.decision_mainland_region_segments "
-            "WHERE revision='__osm_a' AND region_id='region' AND ordinal=0").fetchone()[0], 2)
+        self.assertEqual(self.links(), [('1', 'construction_input')])
+        self.assertEqual(self.region_sections(), sections)
 
     def test_simple_boundary_crossing_another_region_section_rolls_back(self):
         from shapely.geometry import LineString, Polygon
 
         self.region_fixture()
-        before = self.boundary()
-        region_before = self.database.execute(
-            "SELECT geometry_sha256 FROM atlas.decision_mainland_seed_regions "
-            "WHERE revision='__osm_a' AND region_id='region'").fetchone()
-        # The edited line is simple and its endpoints still join exactly, but
-        # it crosses the return section, making the complete polygon invalid.
+        before, sections = self.boundary(), self.region_sections()
         coordinates = [[0., 0.], [2., .5], [1., 1.]]
         self.assertTrue(LineString(coordinates).is_simple)
         self.assertFalse(Polygon([*coordinates, [1., 0.], [0., 0.]]).is_valid)
@@ -312,14 +299,9 @@ class DatabaseTest(unittest.TestCase):
                           self.source, self.recipe)
         self.assertEqual(self.boundary(), before)
         self.assertEqual(self.links(), [('1', 'construction_input')])
-        self.assertEqual(self.database.execute(
-            "SELECT end_index FROM atlas.decision_mainland_region_segments "
-            "WHERE revision='__osm_a' AND region_id='region' AND ordinal=0").fetchone()[0], 2)
-        self.assertEqual(self.database.execute(
-            "SELECT geometry_sha256 FROM atlas.decision_mainland_seed_regions "
-            "WHERE revision='__osm_a' AND region_id='region'").fetchone(), region_before)
+        self.assertEqual(self.region_sections(), sections)
 
-    def test_parallel_boundary_updates_leave_the_shared_region_hash_consistent(self):
+    def test_parallel_boundary_updates_validate_the_latest_committed_region(self):
         from concurrent.futures import ThreadPoolExecutor
         from threading import Event
         import time
@@ -343,7 +325,7 @@ class DatabaseTest(unittest.TestCase):
         self.addCleanup(cleanup)
         paused, release = Event(), Event()
 
-        class PauseBeforeHash:
+        class PauseBeforeValidation:
             def __init__(self, database):
                 self.database = database
 
@@ -351,7 +333,7 @@ class DatabaseTest(unittest.TestCase):
                 return self.database.transaction()
 
             def execute(self, sql, parameters):
-                if sql.startswith('UPDATE atlas.decision_mainland_seed_regions SET geometry_sha256'):
+                if sql.startswith('SELECT s.reverse,coalesce'):
                     paused.set()
                     if not release.wait(5):
                         raise AssertionError('test did not release the first writer')
@@ -368,7 +350,7 @@ class DatabaseTest(unittest.TestCase):
         with psycopg.connect(url) as a, psycopg.connect(url) as b, \
                 psycopg.connect(url, autocommit=True) as observer, ThreadPoolExecutor(2) as workers:
             try:
-                first_result = workers.submit(write, PauseBeforeHash(a), first, 'border')
+                first_result = workers.submit(write, PauseBeforeValidation(a), first, 'border')
                 self.assertTrue(paused.wait(5))
                 second_result = workers.submit(write, b, second, 'return')
                 deadline = time.monotonic() + 5
@@ -384,11 +366,11 @@ class DatabaseTest(unittest.TestCase):
             first_result.result(timeout=5)
             second_result.result(timeout=5)
 
-        polygon = {'type': 'Polygon', 'coordinates': [[*first['coordinates'], *second['coordinates'][1:]]]}
-        digest = hashlib.sha256(json.dumps(polygon, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
-        saved = self.database.execute("SELECT geometry_sha256 FROM atlas.decision_mainland_seed_regions "
-                                      "WHERE revision='__osm_a' AND region_id='region'").fetchone()[0]
-        self.assertEqual(saved, digest)
+        from shapely.geometry import Polygon
+        saved = dict(self.database.execute(
+            "SELECT boundary_id,geometry FROM atlas.decision_mainland_boundaries WHERE revision='__osm_a'").fetchall())
+        self.assertEqual(saved, {'border': first, 'return': second})
+        self.assertTrue(Polygon([*saved['border']['coordinates'], *saved['return']['coordinates'][1:]]).is_valid)
 
 
 if __name__ == '__main__':

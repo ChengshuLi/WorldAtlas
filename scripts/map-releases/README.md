@@ -29,8 +29,14 @@ python3 scripts/map-releases/manage_release.py approve v9.0-rc1 --reviewer NAME
 python3 scripts/map-releases/manage_release.py publish v9.0-rc1
 ```
 
+`atlas.map_releases` stores each immutable manifest, including exact R2 object
+keys. `atlas.map_publications` maps an official version to one release. Stream
+lookups use that manifest rather than a second copy of its hashes and sizes.
+The homepage alias is recorded on the current publication.
+
 Publishing verifies the stored files and changes the homepage to serve them.
-It keeps the numbered candidate URL. It does not rebuild or recolor the map.
+If publication is interrupted, retry the same command; it reconciles the
+homepage pointer without changing the approved bundle. It keeps the numbered candidate URL. It does not rebuild or recolor the map.
 Deploying changes to the Cloudflare Worker itself is separate: `npx wrangler deploy`.
 
 Run the release tests with:

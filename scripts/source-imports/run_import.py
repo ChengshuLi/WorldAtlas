@@ -1,5 +1,6 @@
 """Select a source constructor from a versioned Neon record's method."""
 import argparse
+import hashlib
 from contextlib import ExitStack, closing
 import json
 import logging
@@ -50,6 +51,25 @@ IMPORTERS = {
 }
 
 
+def selected_constructions(database, revisions):
+    """List the exact constructors contributing to the selected editable revisions."""
+    known = {row[0] for row in database.execute('SELECT revision FROM atlas.decision_revisions WHERE revision=ANY(%s)', (list(revisions),))}
+    if set(revisions) - known:
+        raise ValueError('unknown decision revisions: ' + str(sorted(set(revisions) - known)))
+    rows = database.execute(
+        'SELECT DISTINCT construction_id,construction_version,revision FROM ('
+        'SELECT construction_id,construction_version,revision FROM atlas.decision_features '
+        'UNION ALL SELECT construction_id,construction_version,revision FROM atlas.decision_mainland_boundaries '
+        'UNION ALL SELECT construction_id,construction_version,revision FROM atlas.decision_routes '
+        'UNION ALL SELECT construction_id,construction_version,revision FROM atlas.decision_endpoints '
+        'UNION ALL SELECT l.construction_id,l.construction_version,r.revision '
+        'FROM atlas.regional_island_rule_sets r JOIN atlas.geographic_line_observations l USING(line_id) '
+        'WHERE r.enabled) c WHERE revision=ANY(%s) AND construction_id IS NOT NULL '
+        'ORDER BY revision,construction_id,construction_version', (list(revisions),),
+    ).fetchall()
+    return rows
+
+
 def run_import(connect, recipe_id, version, *, storage=None, revision=None,
                work_dir=None, expected_geometry_sha256=None):
     """Read the method, check required inputs, and call its Python constructor."""
@@ -70,7 +90,9 @@ def run_import(connect, recipe_id, version, *, storage=None, revision=None,
 def main():
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--recipe', nargs=2, required=True, metavar=('ID', 'VERSION'))
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument('--recipe', nargs=2, metavar=('ID', 'VERSION'))
+    selection.add_argument('--revisions', nargs='+', help='regenerate constructions selected by these revisions')
     parser.add_argument('--revision', help='existing decision revision for OSM, IHO and watersheds')
     parser.add_argument('--r2-endpoint', help='R2 endpoint for methods that download raw files')
     parser.add_argument('--work-dir', type=Path, help='verified source cache and local receipts')
@@ -87,13 +109,27 @@ def main():
             import boto3
             storage = stack.enter_context(closing(boto3.client(
                 's3', endpoint_url=args.r2_endpoint, region_name='auto')))
-        result = run_import(connect, *args.recipe, storage=storage, revision=args.revision,
-                            work_dir=args.work_dir,
-                            expected_geometry_sha256=args.expected_geometry_sha256)
-    if args.work_dir is not None:
-        receipt = args.work_dir / 'receipts' / f'{args.recipe[0]}-{args.recipe[1]}.json'
-        receipt.parent.mkdir(parents=True, exist_ok=True)
-        receipt.write_text(json.dumps(result, indent=2) + '\n')
+        if args.revisions:
+            if args.revision or args.expected_geometry_sha256:
+                parser.error('--revisions cannot be combined with --revision or an expected checksum')
+            with connect() as database:
+                database.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY')
+                constructions = selected_constructions(database, args.revisions)
+        else:
+            constructions = [(*args.recipe, args.revision)]
+        results = []
+        for ident, version, revision in constructions:
+            result = run_import(connect, ident, version, storage=storage, revision=revision,
+                                work_dir=args.work_dir,
+                                expected_geometry_sha256=args.expected_geometry_sha256)
+            results.append(result)
+            if args.work_dir is not None:
+                identity = {'construction_id': ident, 'version': version, 'revision': revision}
+                name = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+                receipt = args.work_dir / 'receipts' / (name + '.json')
+                receipt.parent.mkdir(parents=True, exist_ok=True)
+                receipt.write_text(json.dumps(dict(identity, result=result), indent=2) + '\n')
+        result = results if args.revisions else results[0]
     print(json.dumps(result))
 
 

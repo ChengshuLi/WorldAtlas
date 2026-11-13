@@ -10,11 +10,14 @@ so another worker's edits cannot enter partway through a build. Executing code
 and runtime versions are separate provenance; a code change does not require
 permission to resume.
 
-The SQL files select the corresponding records by a bound `revision` parameter:
+[`geography.sql`](geography.sql) selects any of the four decision domains by a
+bound revision parameter. It uses the same tables and policy representation for
+all domains. The selected catalog is frozen once, together with the exact text
+of contributing construction documents. Boundary-to-source relationships and
+case citations remain part of the saved provenance.
 
-- `mainland.sql`: boundaries, closure routes, seed regions, witnesses and rules.
-- `regional.sql`: geographic features, affiliations, groups and source evidence.
-- `geography.sql`: named basins, ocean routes/seeds and water policies.
+New selections use format v2. Retained v1 selections remain readable without
+rewriting their original files.
 
 Provider endpoint decimals are exported as text to preserve their exact values.
 Stored GeoJSON coordinates remain numeric. Source versions, sizes and hashes

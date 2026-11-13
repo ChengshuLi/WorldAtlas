@@ -65,23 +65,23 @@ def save_features(database, revision, features, recipe):
         geometry = storage_geometry(feature['geometry'])
         digest = geometry_hash(geometry)
         hashes[feature['feature_id']] = digest
-        evidence = dict(feature.get('evidence', {}), basis=recipe['basis'],
-                        construction_ref={'source_id': recipe['recipe_id'],
-                                          'version': recipe['recipe_version']})
+        evidence = dict(feature.get('evidence', {}), basis=recipe['basis'])
         records.append((revision, feature['feature_id'], feature['source_id'],
                         feature['source_version'], feature['source_feature_id'],
-                        digest, Jsonb(geometry), reference, Jsonb(evidence)))
+                        digest, Jsonb(geometry), reference, Jsonb(evidence),
+                        recipe['recipe_id'], recipe['recipe_version']))
     with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(
                 'INSERT INTO atlas.decision_features '
                 '(revision,feature_id,source_id,source_version,source_feature_id,'
-                'geometry_sha256,geometry,coordinate_reference,evidence) '
-                'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) '
+                'geometry_sha256,geometry,coordinate_reference,evidence,construction_id,construction_version) '
+                'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) '
                 'ON CONFLICT (revision,feature_id) DO UPDATE SET '
                 'source_id=EXCLUDED.source_id,source_version=EXCLUDED.source_version,'
                 'source_feature_id=EXCLUDED.source_feature_id,'
                 'geometry_sha256=EXCLUDED.geometry_sha256,geometry=EXCLUDED.geometry,'
                 'coordinate_reference=EXCLUDED.coordinate_reference,'
+                'construction_id=EXCLUDED.construction_id,construction_version=EXCLUDED.construction_version,'
                 'evidence=atlas.decision_features.evidence || EXCLUDED.evidence', records)
     return hashes

@@ -1,10 +1,10 @@
-"""Resolve published map streams from their separate release catalog."""
+"""Resolve official releases or numbered candidates from their asset manifests."""
 
 import os
 
 
 def read_release_streams(version):
-    """Resolve the two published streams without embedding object paths in a preview."""
+    """Resolve the two streams without embedding object paths in a preview."""
     connection = os.environ.get('NEON_DATABASE_URL')
     if not connection:
         raise ValueError('set NEON_DATABASE_URL to the database containing the map release')
@@ -15,9 +15,13 @@ def read_release_streams(version):
         with psycopg.connect(connection) as database:
             database.execute('SET TRANSACTION READ ONLY')
             rows = database.execute(
-                'SELECT stream,r2_bucket,r2_key,size_bytes,stored_sha256,decoded_sha256 '
-                'FROM atlas.map_release_objects WHERE map_version=%s ORDER BY stream',
-                (version,),
+                "SELECT stream,r.r2_bucket,asset->>'r2_key',(asset->>'size_bytes')::bigint,"
+                "asset->>'sha256',r.manifest->'decoded_sha256'->>stream "
+                'FROM atlas.map_releases r LEFT JOIN atlas.map_publications p USING(release_id) '
+                "CROSS JOIN (VALUES ('rows'),('runs')) streams(stream) "
+                "CROSS JOIN LATERAL (SELECT r.manifest->'objects'->(stream||'.u32le.gz') asset) a "
+                'WHERE p.map_version=%s OR r.release_id=%s ORDER BY stream',
+                (version, version),
             ).fetchall()
     except psycopg.Error:
         raise ValueError('Neon release lookup failed; check release database access') from None

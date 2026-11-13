@@ -10,11 +10,10 @@ BEGIN
     INSERT INTO atlas.decision_revisions(revision,entity_revision,evidence)
       VALUES ('__boundary_decisions','__boundary_entities','{}');
     INSERT INTO atlas.source_assets
-      (source_id,version,title,kind,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance)
-      VALUES ('__boundary_source','1','Test','raw','Test','test:source','Test','test:license','Test','test','boundary',repeat('b',64),1,'{}');
-    INSERT INTO atlas.decision_mainland_boundaries VALUES
-      ('__boundary_decisions','line','stored_linestring_v1','selected_for_research',line,line_hash,
-       'binary64-sorted-compact-geojson-v1','OGC:CRS84','{}');
+      (source_id,version,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance)
+      VALUES ('__boundary_source','1','Test','Test','test:source','Test','test:license','Test','test','boundary',repeat('b',64),1,'{}');
+    INSERT INTO atlas.decision_mainland_boundaries(revision,boundary_id,geometry,geometry_sha256,coordinate_reference,provenance) VALUES
+      ('__boundary_decisions','line',line,line_hash,'OGC:CRS84','{}');
     BEGIN
         INSERT INTO atlas.decision_mainland_boundary_sources VALUES
           ('__boundary_decisions','line','missing','1','construction');
@@ -43,5 +42,20 @@ BEGIN
         WHERE revision='__boundary_decisions';
         RAISE EXCEPTION 'a boundary accepted a point instead of a line';
     EXCEPTION WHEN check_violation THEN NULL; END;
+    BEGIN
+        UPDATE atlas.decision_mainland_boundaries SET geometry='{}'
+        WHERE revision='__boundary_decisions';
+        RAISE EXCEPTION 'a boundary accepted missing geometry fields';
+    EXCEPTION WHEN check_violation THEN NULL; END;
+    BEGIN
+        UPDATE atlas.decision_mainland_boundaries SET construction_id='missing'
+        WHERE revision='__boundary_decisions';
+        RAISE EXCEPTION 'a boundary accepted an incomplete construction reference';
+    EXCEPTION WHEN check_violation THEN NULL; END;
+    BEGIN
+        UPDATE atlas.decision_mainland_boundaries SET construction_id='missing',construction_version='1'
+        WHERE revision='__boundary_decisions';
+        RAISE EXCEPTION 'a boundary accepted a missing construction';
+    EXCEPTION WHEN foreign_key_violation THEN NULL; END;
 END $$;
 ROLLBACK;

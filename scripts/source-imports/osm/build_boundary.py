@@ -7,20 +7,10 @@ from source_io import save_boundary as save_mainland_boundary
 
 def save_boundary(database, revision, geometry, source, recipe):
     """Save geometry and its construction source together, retaining other evidence."""
-    provenance = {
-        'basis': recipe['basis'],
-        'lineage_status': 'complete',
-        'construction': {
-            'processor': 'osm.ways.assemble',
-            'recipe_id': recipe['recipe_id'],
-            'recipe_version': recipe['recipe_version'],
-            'source_id': source['source_id'],
-            'source_version': source['version'],
-            'archive_sha256': source['sha256'],
-        },
-    }
+    provenance = {'basis': recipe['basis']}
     return save_mainland_boundary(database, revision, recipe['boundary_id'], geometry,
-                                  provenance, [source])
+                                  provenance, [source],
+                                  construction=(recipe['recipe_id'], recipe['recipe_version']))
 
 
 def build_boundary(database, client, recipe_id, recipe_version, revision,

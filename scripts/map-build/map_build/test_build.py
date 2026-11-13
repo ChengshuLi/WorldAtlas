@@ -564,6 +564,9 @@ class Fixture(unittest.TestCase):
         ):
             self.assertEqual(reused.physical(), physical)
         self.assertEqual(reused.identity['physical_reuse']['source_run'], str(runner.out))
+        self.assertEqual(
+            pipeline.physical_reference(reused.out, runner.sources)['source_run'], str(runner.out)
+        )
         self.assertEqual((physical / 'report.json').read_bytes(), producer_report)
         notes = pipeline.read(land)
         notes['selection_notes'] = 'Reworded description of the same selected sources'

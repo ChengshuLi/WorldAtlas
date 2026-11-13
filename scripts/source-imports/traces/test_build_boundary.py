@@ -17,9 +17,9 @@ class DatabaseTests(unittest.TestCase):
         self.addCleanup(self.database.rollback)
         self.database.execute(
             'INSERT INTO atlas.source_assets '
-            '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+            '(source_id,version,title,provider,source_uri,license_name,license_uri,'
             'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
-            "VALUES ('__trace_source','1','Test','raw','Test','test:source','Test','test:license',"
+            "VALUES ('__trace_source','1','Test','Test','test:source','Test','test:license',"
             "'Test','test','figure.pdf',%s,10,'{}')", ('a' * 64,))
         self.recipe = dict(method='smooth_latitude_trace', source_id='__trace_source', source_version='1',
                            line_id='__trace_final', basis='Reviewed points from the source figure.',
@@ -37,7 +37,7 @@ class DatabaseTests(unittest.TestCase):
         return build_boundary(self.database, '__trace_construction', version, expected)
 
     def row(self):
-        return self.database.execute("SELECT * FROM atlas.geographic_line_observations "
+        return self.database.execute("SELECT line_id,source_id,source_version,geometry,geometry_sha256,coordinate_reference,provenance,construction_id,construction_version FROM atlas.geographic_line_observations "
                                      "WHERE line_id='__trace_final'").fetchone()
 
     def test_build_and_repeat(self):
@@ -46,7 +46,7 @@ class DatabaseTests(unittest.TestCase):
         self.assertEqual(result['line_id'], '__trace_final')
         self.assertEqual(result['vertices'], 201)
         self.assertEqual(result['sha256'], before[4])
-        self.assertEqual(before[6]['construction']['recipe_id'], '__trace_construction')
+        self.assertEqual(before[7], '__trace_construction')
         self.assertEqual(self.build(), result)
         self.assertEqual(self.row(), before)
 
@@ -76,7 +76,7 @@ class DatabaseTests(unittest.TestCase):
         self.assertNotEqual(after[4], before[4])
         self.assertEqual(after[3]['coordinates'][0], [12., 1.])
         self.assertEqual(after[6]['note'], 'keep')
-        self.assertEqual(after[6]['construction']['recipe_version'], '2')
+        self.assertEqual(after[8], '2')
 
     def test_description_fields_do_not_control_execution(self):
         self.register('2', dict(self.recipe, source_location='An additional source description.'))

@@ -33,9 +33,9 @@ class StorageTests(unittest.TestCase):
              'geometry': {'type': 'Point', 'coordinates': [10, 20]}}]}).encode()
         self.database.execute(
             'INSERT INTO atlas.source_assets '
-            '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+            '(source_id,version,title,provider,source_uri,license_name,license_uri,'
             'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
-            "VALUES ('__feature_raw','1','Test','raw','Test','test:source','Test','test:license',"
+            "VALUES ('__feature_raw','1','Test','Test','test:source','Test','test:license',"
             "'Test','test','source.geojson',%s,%s,'{}')", (hashlib.sha256(raw).hexdigest(), len(raw)))
         self.register('1')
         self.storage = Mock()
@@ -51,7 +51,7 @@ class StorageTests(unittest.TestCase):
         return build_features(self.database, self.storage, '__features', version, revision, self.work)
 
     def snapshot(self, revision='__features_a'):
-        return self.database.execute('SELECT feature_id,geometry,coordinate_reference,geometry_sha256,evidence '
+        return self.database.execute('SELECT feature_id,geometry,coordinate_reference,geometry_sha256,evidence,construction_id,construction_version '
                                      'FROM atlas.decision_features WHERE revision=%s ORDER BY feature_id', (revision,)).fetchall()
 
     def test_build_cached_repeat_and_changed_construction_preserve_notes_and_links(self):
@@ -69,11 +69,25 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(after[2], 'OGC:CRS84')
         self.assertEqual(after[3], geometry_hash(after[1]))
         self.assertEqual(after[4]['note'], 'keep')
-        self.assertEqual(after[4]['construction_ref']['version'], '2')
+        self.assertEqual(after[6], '2')
         self.assertEqual(self.snapshot('__features_b'), other)
         self.assertEqual(self.build(version='2')['geometry_sha256'], first['geometry_sha256'])
         self.assertEqual(self.storage.get_object.call_count, 1)
         self.assertEqual(self.database.execute('SELECT count(*) FROM atlas.decision_basins WHERE revision=%s', ('__features_a',)).fetchone()[0], 1)
+
+    def test_revision_selection_deduplicates_features_and_tracks_construction_versions(self):
+        from run_import import selected_constructions
+
+        self.build()
+        self.build(revision='__features_b')
+        self.assertEqual(selected_constructions(self.database, ['__features_a', '__features_b']),
+                         [('__features', '1', '__features_a'), ('__features', '1', '__features_b')])
+        self.register('2')
+        self.build(version='2')
+        self.assertEqual(selected_constructions(self.database, ['__features_a']),
+                         [('__features', '2', '__features_a')])
+        with self.assertRaisesRegex(ValueError, 'unknown decision revisions'):
+            selected_constructions(self.database, ['missing'])
 
     def test_save_rolls_back_all_features_on_missing_source(self):
         self.build()
@@ -89,9 +103,9 @@ class StorageTests(unittest.TestCase):
     def test_table_import_uses_the_same_atomic_storage_and_cache(self):
         raw = b'provider_id,name,longitude,latitude\na,First,-20.25,11.5\n'
         self.database.execute('INSERT INTO atlas.source_assets '
-                              '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+                              '(source_id,version,title,provider,source_uri,license_name,license_uri,'
                               'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
-                              "SELECT source_id,'2',title,kind,provider,source_uri,license_name,license_uri,"
+                              "SELECT source_id,'2',title,provider,source_uri,license_name,license_uri,"
                               'attribution,r2_bucket,%s,%s,%s,provenance FROM atlas.source_assets '
                               'WHERE source_id=%s AND version=%s',
                               ('source.csv', hashlib.sha256(raw).hexdigest(), len(raw), '__feature_raw', '1'))
@@ -130,9 +144,9 @@ class StorageTests(unittest.TestCase):
             with self.subTest(method=method):
                 self.database.execute(
                     'INSERT INTO atlas.source_assets '
-                    '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+                    '(source_id,version,title,provider,source_uri,license_name,license_uri,'
                     'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
-                    'SELECT source_id,%s,title,kind,provider,source_uri,license_name,license_uri,'
+                    'SELECT source_id,%s,title,provider,source_uri,license_name,license_uri,'
                     'attribution,r2_bucket,%s,%s,%s,provenance FROM atlas.source_assets '
                     'WHERE source_id=%s AND version=%s',
                     (method, 'zero.' + suffix, hashlib.sha256(raw).hexdigest(), len(raw), '__feature_raw', '1'))
@@ -162,17 +176,3 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(row[1], {'type': 'Point', 'coordinates': [1000, 2000]})
         self.assertEqual(row[2], 'EPSG:3857')
         self.assertEqual(row[3], geometry_hash(row[1]))
-
-    def test_schema_upgrade_from_previous_layout_is_idempotent(self):
-        with self.database.transaction(force_rollback=True):
-            self.database.execute('ALTER TABLE atlas.decision_features DROP COLUMN geometry, DROP COLUMN coordinate_reference')
-            sql = (Path(__file__).resolve().parents[3] / 'database/upgrades/feature_geometry.sql').read_text()
-            self.database.execute(sql)
-            self.database.execute(sql)
-            self.build()
-            self.assertEqual(self.snapshot()[0][2], 'OGC:CRS84')
-
-    def test_database_rejects_half_populated_geometry(self):
-        self.build()
-        with self.assertRaises(psycopg.errors.CheckViolation), self.database.transaction():
-            self.database.execute("UPDATE atlas.decision_features SET coordinate_reference=NULL WHERE revision='__features_a'")

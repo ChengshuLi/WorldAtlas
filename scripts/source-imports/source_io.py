@@ -1,13 +1,17 @@
-"""Save source-derived mainland boundaries and refresh their assembled regions."""
-from features.geometry import geometry_hash, storage_geometry
+"""Save source-derived boundaries and validate their assembled regions atomically."""
+from features.geometry import geometry_hash, storage_geometry, validate_geometry
 
 
-def save_boundary(database, revision, boundary_id, geometry, provenance, sources):
+def save_boundary(database, revision, boundary_id, geometry, provenance, sources, *, construction=None):
     """Save a complete mainland boundary and its raw-input links atomically."""
     from psycopg.types.json import Jsonb
 
+    line = validate_geometry(geometry)
+    if line.geom_type != 'LineString' or not line.is_simple:
+        raise ValueError('boundary needs a simple LineString')
     geometry = storage_geometry(geometry)
     digest = geometry_hash(geometry)
+    construction_id, construction_version = construction or (None, None)
     selected = {}
     for source in sources:
         key = (source['source_id'], source['version'])
@@ -16,7 +20,7 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
             selected[key] = relationship
     with database.transaction():
         # Boundaries of one region may be saved by different workers. Serialize
-        # their short writes so each polygon hash includes every committed edit.
+        # their short writes so polygon validation includes every committed edit.
         database.execute(
             'SELECT r.region_id FROM atlas.decision_mainland_seed_regions r '
             'WHERE r.revision=%s AND EXISTS ('
@@ -25,35 +29,17 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
             'ORDER BY r.region_id FOR UPDATE',
             (revision, boundary_id),
         ).fetchall()
-        old = database.execute(
-            "SELECT jsonb_array_length(geometry->'coordinates') "
-            'FROM atlas.decision_mainland_boundaries WHERE revision=%s AND boundary_id=%s',
-            (revision, boundary_id),
-        ).fetchone()
-        count = len(geometry['coordinates'])
-        if old and old[0] != count:
-            slices = database.execute(
-                'SELECT start_index,end_index FROM atlas.decision_mainland_region_segments '
-                "WHERE revision=%s AND boundary_id=%s AND kind='boundary'",
-                (revision, boundary_id),
-            ).fetchall()
-            if any(first != 0 or last != old[0] for first, last in slices):
-                raise ValueError('partial region slices need source-backed joins before changing boundary vertices')
-            database.execute(
-                'UPDATE atlas.decision_mainland_region_segments SET end_index=%s '
-                "WHERE revision=%s AND boundary_id=%s AND kind='boundary'",
-                (count, revision, boundary_id),
-            )
         database.execute(
             'INSERT INTO atlas.decision_mainland_boundaries '
-            '(revision,boundary_id,method,execution_status,geometry,geometry_sha256,'
-            'geometry_hash_method,coordinate_reference,provenance) '
-            "VALUES (%s,%s,'stored_linestring_v1','selected_for_research',%s,%s,"
-            "'binary64-sorted-compact-geojson-v1','OGC:CRS84',%s) "
+            '(revision,boundary_id,geometry,geometry_sha256,'
+            'coordinate_reference,provenance,construction_id,construction_version) '
+            "VALUES (%s,%s,%s,%s,'OGC:CRS84',%s,%s,%s) "
             'ON CONFLICT (revision,boundary_id) DO UPDATE SET '
             'geometry=EXCLUDED.geometry,geometry_sha256=EXCLUDED.geometry_sha256,'
+            'construction_id=EXCLUDED.construction_id,construction_version=EXCLUDED.construction_version,'
             'provenance=atlas.decision_mainland_boundaries.provenance || EXCLUDED.provenance',
-            (revision, boundary_id, Jsonb(geometry), digest, Jsonb(provenance)),
+            (revision, boundary_id, Jsonb(geometry), digest, Jsonb(provenance),
+             construction_id, construction_version),
         )
         database.execute(
             'DELETE FROM atlas.decision_mainland_boundary_sources '
@@ -70,12 +56,12 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
                 'EXCLUDED.relationship ELSE atlas.decision_mainland_boundary_sources.relationship END',
                 (revision, boundary_id, source_id, version, relationship),
             )
-        _refresh_regions(database, revision, boundary_id)
+        _validate_regions(database, revision, boundary_id)
     return digest
 
 
-def _refresh_regions(database, revision, boundary_id):
-    """Keep existing derived region hashes consistent with the newly saved line."""
+def _validate_regions(database, revision, boundary_id):
+    """Reject edits that break a selected region's joins or polygon validity."""
     from shapely.geometry import Polygon
 
     regions = database.execute(
@@ -84,7 +70,7 @@ def _refresh_regions(database, revision, boundary_id):
     ).fetchall()
     for (region_id,) in regions:
         rows = database.execute(
-            'SELECT s.start_index,s.end_index,s.reverse,coalesce(b.geometry,r.geometry) '
+            'SELECT s.reverse,coalesce(b.geometry,r.geometry) '
             'FROM atlas.decision_mainland_region_segments s '
             "LEFT JOIN atlas.decision_mainland_boundaries b ON s.kind='boundary' "
             'AND (b.revision,b.boundary_id)=(s.revision,s.boundary_id) '
@@ -94,10 +80,10 @@ def _refresh_regions(database, revision, boundary_id):
             (revision, region_id),
         ).fetchall()
         ring = []
-        for first, last, reverse, geometry in rows:
-            if geometry is None or not 0 <= first < last <= len(geometry['coordinates']):
-                raise ValueError('region references a missing line or invalid slice')
-            points = [[float(x), float(y)] for x, y in geometry['coordinates'][first:last]]
+        for reverse, geometry in rows:
+            if geometry is None:
+                raise ValueError('region references a missing line')
+            points = [[float(x), float(y)] for x, y in geometry['coordinates']]
             if reverse:
                 points.reverse()
             if len(points) < 2 or (ring and ring[-1] != points[0]):
@@ -107,9 +93,3 @@ def _refresh_regions(database, revision, boundary_id):
             raise ValueError('updated boundary does not form a closed region')
         if not Polygon(ring).is_valid:
             raise ValueError('updated boundary creates an invalid region polygon')
-        polygon = {'type': 'Polygon', 'coordinates': [ring]}
-        database.execute(
-            'UPDATE atlas.decision_mainland_seed_regions SET geometry_sha256=%s '
-            'WHERE revision=%s AND region_id=%s',
-            (geometry_hash(polygon), revision, region_id),
-        )

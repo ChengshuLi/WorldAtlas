@@ -24,10 +24,9 @@ inputs, to produce map cells.
 `run_import.py` selects the method. Each method's `build_*.py` coordinates its
 Neon/R2 workflow; the other modules implement the calculations. `atlas_sources`
 contains the catalog and verified-file functions also used by map building.
-`source_io.py` saves mainland boundaries and refreshes their assembled region
-checksums. Calculation modules do not query Neon or R2.
+`source_io.py` saves mainland boundaries and validates their assembled regions. Calculation modules do not query Neon or R2.
 Workers calculate independently. Saves affecting the same mainland region wait
-for one another so its saved polygon checksum includes both edits.
+for one another so validation sees both committed edits.
 The assembled region must close and form a valid polygon before the save commits.
 
 Tests live beside the code they exercise. The root `test_run_import.py` covers
@@ -82,6 +81,26 @@ For example, the Lydekker construction record can be run with:
 PYTHONPATH=scripts/source-imports python3 -m run_import \
   --recipe lydekker-boundary-construction 1
 ```
+
+## Regenerate the selected inputs
+
+To rerun every construction contributing to selected decision revisions:
+
+```bash
+PYTHONPATH=scripts/source-imports python3 -m run_import \
+  --revisions MAINLAND_REVISION REGIONAL_REVISION WATER_REVISION OCEAN_REVISION \
+  --r2-endpoint R2_ENDPOINT \
+  --work-dir /absolute/path/to/worldatlas-work/inputs
+```
+
+Use the revisions from the map configuration. The command follows each record's
+construction foreign key and uses that exact version. It includes enabled line
+partitions and avoids repeating a construction selected by several output rows.
+Each import saves atomically; if a later one fails, earlier successful imports
+remain available and the command can be repeated. Then run the map builder.
+
+Receipts include the construction ID, version and destination revision. Their
+filenames are derived from the construction identity so provider identifiers cannot become file paths.
 
 ## Local source cache
 

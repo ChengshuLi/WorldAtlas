@@ -286,12 +286,7 @@ def build_boundary(connect, client, recipe_id, recipe_version, revision, work_di
     staging_seconds = time.monotonic() - started
     geometry, report = construct(recipe, files)
     runtime = runtime_versions()
-    provenance = {'basis': recipe['basis'], 'lineage_status': 'complete', 'construction': {
-        'processor': 'watersheds.build_boundary', 'recipe_id': recipe_id,
-        'recipe_version': recipe_version, 'sources': [
-            {'source_id': source['source_id'], 'version': source['version'], 'sha256': source['sha256']}
-            for source in references],
-    }}
+    provenance = {'basis': recipe['basis']}
     provenance['shared_drainage'] = {
         name: terrain['network']['shared_sections']
         for name, terrain in report['terrain'].items() if terrain['network']['shared_sections']}
@@ -299,7 +294,7 @@ def build_boundary(connect, client, recipe_id, recipe_version, revision, work_di
     started = time.monotonic()
     with connect() as database:
         digest = save_boundary(database, revision, recipe['boundary_id'], geometry, provenance,
-                               [*references, *evidence])
+                               [*references, *evidence], construction=(recipe_id, recipe_version))
     report.update(revision=revision, boundary_id=recipe['boundary_id'], sha256=digest,
                   vertices=len(geometry['coordinates']), catalog_seconds=catalog_seconds,
                   source_staging_seconds=staging_seconds,

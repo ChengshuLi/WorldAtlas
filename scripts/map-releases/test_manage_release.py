@@ -208,6 +208,7 @@ class R2VerificationTests(unittest.TestCase):
             manifest = {
                 'objects': {
                     'index.html': {
+                        'r2_key': 'review/releases/v9.0-rc.1/index.html',
                         'size_bytes': len(body),
                         'content_type': 'text/html',
                         'sha256': hashlib.sha256(body).hexdigest(),

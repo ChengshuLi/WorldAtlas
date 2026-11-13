@@ -217,6 +217,7 @@ def build_bundle(candidate, run, viewer, bundle):
 
     objects = {
         path.relative_to(bundle).as_posix(): {
+            'r2_key': f'{prefix(candidate)}/{path.relative_to(bundle).as_posix()}',
             'sha256': digest(path),
             'size_bytes': path.stat().st_size,
             'content_type': (
@@ -249,7 +250,7 @@ def upload_bundle(storage, bucket, candidate, bundle, manifest):
     from botocore.exceptions import ClientError
 
     for name, asset in manifest['objects'].items():
-        key = f'{prefix(candidate)}/{name}'
+        key = asset['r2_key']
         with (bundle / name).open('rb') as body:
             try:
                 storage.put_object(
@@ -291,7 +292,7 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
     from psycopg.types.json import Jsonb
 
     row = db.execute(
-        'SELECT r2_bucket,manifest FROM atlas.map_release_candidates WHERE candidate_id=%s',
+        'SELECT r2_bucket,manifest FROM atlas.map_releases WHERE release_id=%s',
         (candidate,),
     ).fetchone()
     if row is not None and row != (bucket, manifest):
@@ -299,7 +300,7 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
     upload_bundle(storage, bucket, candidate, bundle, manifest)
     if row is None:
         db.execute(
-            'INSERT INTO atlas.map_release_candidates (candidate_id,r2_bucket,manifest) VALUES (%s,%s,%s)',
+            'INSERT INTO atlas.map_releases (release_id,r2_bucket,manifest) VALUES (%s,%s,%s)',
             (candidate, bucket, Jsonb(manifest)),
         )
 
@@ -308,8 +309,8 @@ def approve(db, candidate, reviewer):
     if not reviewer.strip():
         raise ValueError('reviewer name is required')
     row = db.execute(
-        'UPDATE atlas.map_release_candidates SET approved_by=%s,approved_at=now() '
-        'WHERE candidate_id=%s AND approved_at IS NULL RETURNING candidate_id',
+        'UPDATE atlas.map_releases SET approved_by=%s,approved_at=now() '
+        'WHERE release_id=%s AND approved_at IS NULL RETURNING release_id',
         (reviewer, candidate),
     ).fetchone()
     if row is None:
@@ -318,59 +319,41 @@ def approve(db, candidate, reviewer):
 
 def publish(db, storage, candidate):
     row = db.execute(
-        'SELECT map_version,r2_bucket,manifest FROM atlas.map_release_candidates '
-        'WHERE candidate_id=%s AND approved_at IS NOT NULL',
+        'SELECT map_version,r2_bucket,manifest FROM atlas.map_releases '
+        'WHERE release_id=%s AND approved_at IS NOT NULL',
         (candidate,),
     ).fetchone()
     if row is None:
         raise ValueError('approve this exact candidate before publishing')
     map_version, bucket, manifest = row
     condition = homepage_condition(storage, bucket)
-    expected = []
-    for stream in STREAMS:
-        name = f'{stream}.u32le.gz'
-        asset = manifest['objects'][name]
-        expected.append(
-            (
-                map_version,
-                stream,
-                bucket,
-                f'{prefix(candidate)}/{name}',
-                asset['size_bytes'],
-                asset['sha256'],
-                manifest['decoded_sha256'][stream],
-                candidate,
-            )
-        )
     with db.transaction():
-        rows = db.execute(
-            'SELECT map_version,stream,r2_bucket,r2_key,size_bytes,stored_sha256,decoded_sha256,candidate_id '
-            'FROM atlas.map_release_objects WHERE map_version=%s ORDER BY stream',
+        existing = db.execute(
+            'SELECT release_id FROM atlas.map_publications WHERE map_version=%s',
             (map_version,),
-        ).fetchall()
-        if rows and rows != expected:
+        ).fetchone()
+        if existing is not None and existing[0] != candidate:
             raise ValueError('this map version already points to a different release')
         html = None
         for name, asset in manifest['objects'].items():
-            data = verify_object(
-                storage,
-                bucket,
-                f'{prefix(candidate)}/{name}',
-                asset,
-                return_bytes=name == 'index.html',
-            )
+            data = verify_object(storage, bucket, asset['r2_key'], asset,
+                                 return_bytes=name == 'index.html')
             if name == 'index.html':
                 html = data
-        if not rows:
-            for entry in expected:
-                db.execute(
-                    'INSERT INTO atlas.map_release_objects '
-                    '(map_version,stream,r2_bucket,r2_key,size_bytes,stored_sha256,decoded_sha256,candidate_id) '
-                    'VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                    entry,
-                )
-    # This single write is the switch. A failed write can be retried using the same candidate.
+        if html is None:
+            raise ValueError('release has no viewer homepage')
+        db.execute(
+            'INSERT INTO atlas.map_publications(map_version,release_id) VALUES (%s,%s) '
+            'ON CONFLICT (map_version) DO NOTHING', (map_version, candidate),
+        )
+    # R2 is the website switch. Retrying the same release reconciles its pointer
+    # if the connection fails after the conditional write succeeds.
     put_homepage(storage, bucket, HOMEPAGE, html, **condition)
+    with db.transaction():
+        db.execute('UPDATE atlas.map_publications SET homepage_key=NULL WHERE homepage_key=%s',
+                   (HOMEPAGE,))
+        db.execute('UPDATE atlas.map_publications SET homepage_key=%s WHERE map_version=%s',
+                   (HOMEPAGE, map_version))
 
 
 def main():
@@ -418,7 +401,7 @@ def main():
             else:
                 row = db.execute(
                     "SELECT manifest#>>'{inputs,configuration,physical_controls,source_staging,endpoint_url}' "
-                    'FROM atlas.map_release_candidates WHERE candidate_id=%s AND approved_at IS NOT NULL',
+                    'FROM atlas.map_releases WHERE release_id=%s AND approved_at IS NOT NULL',
                     (args.candidate,),
                 ).fetchone()
                 if row is None:

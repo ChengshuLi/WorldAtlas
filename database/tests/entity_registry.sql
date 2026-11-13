@@ -15,6 +15,15 @@ BEGIN
 
     INSERT INTO atlas.review_category_bindings VALUES
       ('__registry_first',17,4294967294,'land'), ('__registry_second',17,4294967293,'land');
+    INSERT INTO atlas.review_category_bindings VALUES ('__registry_first',4294967295,4294967294,'water');
+    BEGIN
+        INSERT INTO atlas.review_category_bindings VALUES ('__registry_first',4294967296,4294967293,'water');
+        RAISE EXCEPTION 'category exceeded uint32';
+    EXCEPTION WHEN check_violation THEN NULL; END;
+    BEGIN
+        INSERT INTO atlas.review_category_bindings VALUES ('__registry_first',123,4294967294,'land');
+        RAISE EXCEPTION 'an entity/class had two map codes';
+    EXCEPTION WHEN unique_violation THEN NULL; END;
     BEGIN
         UPDATE atlas.review_category_bindings SET entity_id=4294967294
         WHERE revision='__registry_second' AND code=17;
