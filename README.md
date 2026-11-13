@@ -119,7 +119,8 @@ The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 ## Continuous integration
 
 All automated test suites are included in [Checks](.github/workflows/ci.yml).
-CI selects tests from the whole PR's changes against its target branch. This
+The [test selector](.github/scripts/select_tests.py) selects suites from the whole
+PR's changes against its target branch. This
 keeps code covered when a later push cancels an unfinished run. The relevant
 Python suites run on macOS and Linux:
 
@@ -132,7 +133,8 @@ Python suites run on macOS and Linux:
 | Website, Node dependencies or Worker | Node and Chromium browser tests on Linux |
 | Viewer configuration | Website and packaging tests |
 
-Environment changes run all Python/SQL suites. Workflow changes and manual runs
+The selector has focused tests, run before classification in CI.
+Environment changes run all Python/SQL suites. CI code changes and manual runs
 select every suite. Documentation-only PRs skip runtime suites. CI caches
 installed environments and uses local fixtures and disposable databases, with
 no cloud credentials. Full-size builds and geographic review remain separate.

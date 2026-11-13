@@ -21,32 +21,12 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 2
+      - name: Test CI selection
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
       - id: paths
         env:
           EVENT: ${{ github.event_name }}
-        run: |
-          python3 - <<'PY'
-          import os, subprocess
-          from pathlib import Path
-          # Checkout uses the PR merge commit. Its first parent is the target
-          # branch, so this includes code from canceled or failed earlier runs.
-          paths = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD^', 'HEAD'], text=True).splitlines()
-          all_checks = os.environ['EVENT'] == 'workflow_dispatch' or any(p.startswith('.github/workflows/') for p in paths)
-          paths = [p for p in paths if not p.endswith('.md')]
-          environment = 'environment.yml' in paths
-          database = any(p.startswith('database/') for p in paths)
-          shared = any(p.startswith('scripts/source-imports/atlas_sources/') for p in paths)
-          imports = all_checks or environment or database or any(p.startswith('scripts/source-imports/') for p in paths)
-          map_tests = all_checks or environment or database or shared or any(p.startswith('scripts/map-build/') for p in paths)
-          releases = all_checks or environment or database or shared or map_tests or 'web/viewer/config.json' in paths or any(p.startswith('scripts/map-releases/') for p in paths)
-          sql = all_checks or environment or database
-          web = all_checks or any(p.startswith(('web/', 'scripts/map-releases/')) or p in ('package.json', 'package-lock.json', 'wrangler.jsonc') for p in paths)
-          selected = dict(python=imports or map_tests or releases or sql,
-                          imports=imports, map=map_tests, releases=releases, sql=sql, web=web)
-          with Path(os.environ['GITHUB_OUTPUT']).open('a') as output:
-              for name, run in selected.items():
-                  output.write(f'{name}={str(run).lower()}\n')
-          PY
+        run: python3 .github/scripts/select_tests.py
   test:
     needs: changes
     if: needs.changes.outputs.python == 'true'
