@@ -27,7 +27,7 @@ separate features; that responsibility belongs to boundary assembly.
 
 ## Run
 
-Use the [pipeline's Python/GDAL environment](../../map-build/pipeline/README.md).
+Use the [pipeline's Python/GDAL environment](../../map-build/README.md).
 The shared [project environment](../../../environment.yml) pins both Python
 packages and native libraries. It also provides the disposable PostgreSQL used
 by tests and the packages needed by related pipeline checks in CI.

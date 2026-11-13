@@ -4,16 +4,16 @@
 
 ## Where this runs in the code
 
-- The [basin builder](../../scripts/map-build/water/build_seavox_basin.py) reads the sea’s decisions and selects the engine.
-- The [rectangle engine](../../scripts/map-build/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
-- The [individual-cell check](../../scripts/map-build/water/wrapped_bounds.py) calls the [nearest-shore search](../../scripts/map-build/water/shared_nearest.py) and uses a [full-shore scan](../../scripts/map-build/water/streamed_shore_fallback.py) when needed.
-- The [row-only engine](../../scripts/map-build/water/interval_nearest.py) implements the single-row reference method.
+- The [basin builder](../../scripts/map-build/map_build/water/basins.py) reads imported basin geometry and discovers its participating continents from the current shores.
+- The [rectangle engine](../../scripts/map-build/map_build/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
+- The [individual-cell check](../../scripts/map-build/map_build/water/wrapped_bounds.py) calls the [nearest-shore search](../../scripts/map-build/map_build/water/shared_nearest.py) and uses a [full-shore scan](../../scripts/map-build/map_build/water/streamed_shore_fallback.py) when needed.
+- The [row-only engine](../../scripts/map-build/map_build/water/interval_nearest.py) implements the single-row reference method.
 
 ## How it works
 
 ### The assignment rule
 
-When two or more continents share a named sea, each water cell goes to the continent with the nearest shore. The build considers only the continents listed for that sea.
+When two or more continents share a named sea, each water cell goes to the continent with the nearest shore. The build considers the continents whose physical shores border that sea in the current map. Coastal water is assigned first; basin assignment handles the remaining water.
 
 It measures the shortest distance along the WGS84 ellipsoid from the center of the water cell to the center of a coastal land cell. A land cell counts as coastal if it shares an edge with a water cell. The sea’s decision record sets how close distances must be to count as a tie and which continent wins a tie.
 
@@ -44,4 +44,6 @@ The two copies of `r` cover the worst case. The candidate’s shore could get fa
 - **Fallback.** If the build still cannot rule out a closer shore outside the local search window after subdivision, it checks the unresolved cells individually. It also uses this check if the index lacks one of the continents. That check can scan the full shoreline. It retains the decision’s tie rules and handles numerical uncertainty.
 - **Coverage.** The rectangle engine works within source windows in groups of 64 rows. It divides or skips a region only as needed and skips a region only when it contains no selected cells. Every selected cell is accounted for, including at window, tile, and row-group edges.
 
-The rectangle engine is the default. The standalone builder also offers `--research-interval` to check stretches of a single row and `--pointwise-nearest` to check one cell at a time. The basin output records which engine ran and the hash of its helper code. The next stage verifies those records.
+The rectangle engine is the default. Tests compare it with independent
+individual-cell calculations and the row-only engine. The complete shoreline
+index supplies fallback searches when a local bound cannot establish the winner.

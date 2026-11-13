@@ -2,7 +2,6 @@
 from contextlib import contextmanager
 import fcntl
 import hashlib
-import importlib.util
 import json
 import math
 import os
@@ -93,23 +92,13 @@ def verify_anchor(anchor, expected_path):
         raise ValueError('timing journal checkpoint prefix changed')
 
 
-def _publication_module():
-    path = Path(__file__).resolve().parents[2] / 'stages/land/stage2-geodesic-20261104/atomic_move.py'
-    spec = importlib.util.spec_from_file_location('pipeline_directory_publication', path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
 def inventory(paths):
-    """Seal all files and exact publication receipts; reject other symlinks."""
+    """Seal regular output files; never follow an output symlink."""
     result = []
 
     def visit(path):
         if path.is_symlink():
-            target, receipt = _publication_module().published_directory(path)
-            result.append(pin(receipt))
-            visit(target)
+            raise ValueError('symlink checkpoint output: ' + str(path))
         elif path.is_file():
             result.append(pin(path))
         elif path.is_dir():

@@ -15,7 +15,7 @@ catalog identifies their versions and checksums.
   R2 downloads.
 
 Geographic selections belong in Neon construction records. Reusable parsing and
-construction code belongs here. The [map builder](../map-build/pipeline/README.md)
+construction code belongs here. The [map builder](../map-build/README.md)
 uses the selected structured records, together with large raw raster/vector
 inputs, to produce map cells.
 

@@ -28,7 +28,10 @@ def rasterize(geometry, grid, bounds=None):
         reference.SetFromUserInput('OGC:CRS84')
         layer = source.CreateLayer('area', reference, geom_type=ogr.wkbUnknown)
         feature = ogr.Feature(layer.GetLayerDefn())
-        feature.SetGeometry(ogr.CreateGeometryFromJson(json.dumps(geometry, allow_nan=False)))
+        imported = ogr.CreateGeometryFromJson(json.dumps(geometry, allow_nan=False))
+        if imported is None or imported.IsEmpty() or not imported.IsValid():
+            raise ValueError('invalid polygon geometry')
+        feature.SetGeometry(imported)
         layer.CreateFeature(feature)
         for first, last in windows:
             # Each canonical window has its own world extent; the output mask

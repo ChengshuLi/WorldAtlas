@@ -137,25 +137,20 @@ class DatabaseTest(unittest.TestCase):
         self.assertEqual(self.boundary('__osm_b'), before)
 
     def test_imported_boundary_is_consumable_by_map_builder(self):
-        import importlib.util
-        import sys
-        from unittest.mock import patch
+        from map_build.inputs.features import feature_geometry
 
         self.build()
         scripts = Path(__file__).resolve().parents[2]
         query = scripts / 'map-build/map_build/inputs/mainland.sql'
         raw = self.database.execute(query.read_text(), {'revision': '__osm_a'}).fetchone()[0]
-        path = scripts / 'map-build/stages/land/stage2-geodesic-20261104/seed-producer/export_adapter.py'
-        spec = importlib.util.spec_from_file_location('osm_test_export_adapter', path)
-        adapter = importlib.util.module_from_spec(spec)
-        with patch.object(sys, 'path', [str(path.parent), *sys.path]):
-            spec.loader.exec_module(adapter)
-        revision, registry, records, sources = adapter.boundary_records(json.loads(raw))
-        self.assertEqual((revision, registry), ('__osm_a', '__osm_entities'))
-        boundary = records['boundary', 'border']
-        self.assertEqual(boundary['lineage_status'], 'complete')
-        self.assertEqual(boundary['qualified_source_refs'][0]['role'], 'construction_input')
-        self.assertEqual(sources['osm-test', '1']['sha256'], self.source['sha256'])
+        selected = json.loads(raw)
+        self.assertEqual(selected['decision_revision']['id'], '__osm_a')
+        record = next(b for b in selected['mainland_boundaries'] if b['boundary_id'] == 'border')
+        geometry = feature_geometry(record, ('LineString',))
+        self.assertEqual(geometry, self.boundary()[0])
+        self.assertEqual(record['provenance']['source_relationships'][0]['relationship'], 'construction_input')
+        source = next(s for s in selected['sources'] if s['source_id'] == 'osm-test')
+        self.assertEqual(source['sha256'], self.source['sha256'])
 
     def test_geometry_can_change_without_release_pin(self):
         self.build()

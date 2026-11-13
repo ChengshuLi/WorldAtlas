@@ -4,12 +4,8 @@ on:
     paths:
       - 'environment.yml'
       - 'scripts/source-imports/**'
-      - 'scripts/map-build/pipeline/**'
-      - 'scripts/map-build/map_build/**'
-      - 'scripts/map-build/water/**'
-      - 'scripts/map-build/stages/ocean/**'
-      - 'scripts/map-build/stages/land/stage2-geodesic-20261104/contracts.py'
-      - 'scripts/map-build/stages/land/stage2-geodesic-20261104/seed-producer/**'
+      - 'scripts/map-build/**'
+      - 'scripts/map-releases/**'
       - 'database/migrations/001_initial_schema.sql'
       - 'database/upgrades/**'
       - '.github/workflows/source-imports.yml'
@@ -49,17 +45,9 @@ jobs:
           export WORLDATLAS_TEST_DATABASE_URL="postgresql://postgres@/postgres?host=$database_dir"
           time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
           time python -m unittest discover -s scripts/map-build/map_build -t scripts/map-build
-      - name: Test pipeline and source references
+      - name: Test release staging
         shell: bash -el {0}
         env:
-          TMPDIR: ${{ runner.temp }}
-          TMP: ${{ runner.temp }}
-          TEMP: ${{ runner.temp }}
           PROJ_NETWORK: 'OFF'
-          PYTHONPATH: scripts/map-build:scripts/map-build/water:scripts/map-build/stages/ocean:scripts/map-build/stages/land/stage2-geodesic-20261104
-        run: |
-          time python -m unittest discover -s scripts/map-build/pipeline -p 'test_*.py'
-          time python -m unittest discover -s scripts/map-build/water -p 'test_*.py'
-          time python -m unittest discover -s scripts/map-build/stages/ocean -p 'test_*.py'
-          python -m unittest discover -s scripts/map-build/stages/land/stage2-geodesic-20261104/seed-producer -p 'test_*.py'
-          python -m unittest discover -s scripts/map-build/stages/land/stage2-geodesic-20261104 -p 'test_contracts.py'
+          PYTHONPATH: scripts/map-build
+        run: time python -m unittest discover -s scripts/map-releases -p 'test_*.py'

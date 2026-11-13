@@ -11,21 +11,20 @@ streams from the `worldatlas` R2 bucket.
 ## Pipeline code
 
 The root [`environment.yml`](environment.yml) defines the shared Python
-environment. It currently covers source imports and related tests; add missing
-dependencies here as the remaining pipeline is reviewed. Website dependencies
+environment. It covers source imports, map building and their tests. Website dependencies
 are managed separately in [`package.json`](package.json).
 
 - [Import source geography](scripts/source-imports/) from raw sources. These tools reconstruct and verify boundary geometry and other inputs for review and registration in Neon.
-- [Build the map](scripts/map-build/pipeline/README.md) from selected Neon records and the raw R2 inputs the build reads directly. This includes the physical land and water grid, land and water assignment, and final composition.
+- [Build the map](scripts/map-build/README.md) from selected Neon records and the raw R2 inputs the build reads directly. This includes the physical land and water grid, land and water assignment, and final composition.
 
 Neon records the sources and reasoning for individual geographic decisions. The code guides explain how to produce and use those records.
 
 ## Build a map
 
-Run the [pipeline](scripts/map-build/pipeline/README.md) from the repository root.
+Run the [pipeline](scripts/map-build/README.md) from the repository root.
 
 ```bash
-python3 scripts/map-build/pipeline/run_pipeline.py scripts/map-build/pipeline/config.json \
+PYTHONPATH=scripts/map-build python3 -m map_build scripts/map-build/config.json \
   --work-dir /absolute/path/to/worldatlas-work
 ```
 
@@ -37,7 +36,7 @@ for exact reproduction, and stage timings.
 
 ## Preview and publish
 
-The [release workflow](scripts/map-build/pipeline/README.md#stage-review-and-publish-a-release)
+The [release workflow](scripts/map-releases/README.md)
 puts each candidate at its own address while the homepage serves the published
 map. Approval records the exact candidate. Publishing serves its existing viewer
 and map files at the homepage.
@@ -70,10 +69,6 @@ release records separately.
 Run the [database tests](database/tests/) with `bash database/tests/run.sh`.
 Have PostgreSQL's `initdb`, `pg_ctl`, and `psql` on your path. The runner starts
 a temporary local database, installs the schema, and runs the database checks.
-
-Export a registry revision from Neon with `scripts/map-build/export_entity_registry.sql`.
-
-    psql -X -A -t -v revision=REVISION -f scripts/map-build/export_entity_registry.sql > registry.json
 
 ## Viewer tools and tests
 

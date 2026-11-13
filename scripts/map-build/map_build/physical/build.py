@@ -17,7 +17,7 @@ import threading
 import time
 import uuid
 
-import stage_external
+from map_build.execution import control
 from map_build.physical import land, water, union as water_union, composition
 
 HERE = Path(__file__).resolve().parent
@@ -40,7 +40,7 @@ def read_pin(spec):
 
 
 def run_stage(function, *args):
-    return function(*args, emit=stage_external.emit)
+    return function(*args, emit=control.emit)
 
 
 def validate_r2_endpoint(endpoint):
@@ -60,7 +60,7 @@ def make_r2_client(endpoint):
 
 def download_r2(endpoint, entry, destination):
     """Write a streamed response exclusively. Keep partial files for inspection."""
-    stage_external.check_cancelled()
+    control.check_cancelled()
     with closing(make_r2_client(endpoint)) as client:
         response = client.get_object(Bucket=entry['r2_bucket'], Key=entry['r2_key'])
         with closing(response['Body']) as body, destination.open('xb') as stream:
@@ -68,7 +68,7 @@ def download_r2(endpoint, entry, destination):
                 raise ValueError('staged source size/hash mismatch: ' + str(destination))
             remaining = entry['size']
             while remaining:
-                stage_external.check_cancelled()
+                control.check_cancelled()
                 chunk = body.read(min(4 << 20, remaining))
                 if not chunk:
                     break
@@ -332,7 +332,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         journal.unit('land',unit_start,land_dir/'report.json',land_dir/'land.tif')
     staged_count = 0
     def build_shard(item):
-        stage_external.check_cancelled()
+        control.check_cancelled()
         nonlocal staged_count
         i, (path, digest, entry) = item
         destination = output / 'shards' / f'{i:05d}'

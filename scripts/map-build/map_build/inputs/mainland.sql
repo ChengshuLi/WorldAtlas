@@ -1,4 +1,3 @@
--- The build snapshot format retains its original status fields for V8 compatibility.
 WITH RECURSIVE
 rev AS (SELECT * FROM atlas.decision_revisions WHERE revision = %(revision)s),
 ent AS (SELECT e.* FROM atlas.entity_registry_revisions e JOIN rev d ON e.revision=d.entity_revision),
@@ -15,10 +14,10 @@ source_refs(source_id, version) AS (
  JOIN source_refs r ON (dep.source_id,dep.version)=(r.source_id,r.version)
 )
 SELECT jsonb_build_object(
- 'schema','worldatlas-geography-decision-draft-evidence-v1',
+ 'schema','worldatlas-geography-selection-v1',
  'serialization','worldatlas-canonical-json-v1', 'source','neon-export',
- 'decision_revision',(SELECT jsonb_build_object('id',revision,'entity_revision',entity_revision,'status','draft','evidence',evidence,'reviewed_by',NULL,'reviewed_at',NULL) FROM rev),
- 'entity_revision',(SELECT jsonb_build_object('id',revision,'status','draft','reviewed_by',NULL,'reviewed_at',NULL) FROM ent),
+ 'decision_revision',(SELECT jsonb_build_object('id',revision,'entity_revision',entity_revision,'evidence',evidence) FROM rev),
+ 'entity_revision',(SELECT jsonb_build_object('id',revision) FROM ent),
  'sources',COALESCE((SELECT jsonb_agg(to_jsonb(s) ORDER BY s.source_id,s.version) FROM (SELECT a.source_id,a.version,a.sha256,a.size_bytes,a.r2_bucket,a.r2_key FROM atlas.source_assets a WHERE EXISTS (SELECT 1 FROM atlas.decision_features f WHERE f.revision=%(revision)s AND (f.source_id,f.source_version)=(a.source_id,a.version)) OR EXISTS (SELECT 1 FROM atlas.decision_mainland_boundary_sources r WHERE r.revision=%(revision)s AND (r.source_id,r.source_version)=(a.source_id,a.version)) OR EXISTS (SELECT 1 FROM atlas.decision_stage1_source_inputs s1 WHERE s1.revision=%(revision)s AND (s1.source_id,s1.source_version)=(a.source_id,a.version)) OR EXISTS (SELECT 1 FROM atlas.decision_mainland_closure_sources rs WHERE rs.revision=%(revision)s AND (rs.source_id,rs.source_version)=(a.source_id,a.version))) s),'[]'::jsonb),
  'source_lineage_assets',COALESCE((SELECT jsonb_agg(to_jsonb(a) - 'created_at' ORDER BY a.source_id,a.version) FROM atlas.source_assets a JOIN source_refs r USING (source_id,version)),'[]'::jsonb),
  'source_lineage_dependencies',COALESCE((SELECT jsonb_agg(to_jsonb(dep) ORDER BY dep.source_id,dep.version,dep.parent_source_id,dep.parent_version) FROM atlas.source_asset_dependencies dep JOIN source_refs r ON (dep.source_id,dep.version)=(r.source_id,r.version)),'[]'::jsonb),
