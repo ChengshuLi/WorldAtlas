@@ -28,6 +28,13 @@ available when a source needs a particular documented CRS conversion.
 WGS84 GeoJSON coordinates retain their original numeric values. Distinct existing
 output IDs may select the same provider feature when backfilling current records;
 provider IDs must still identify one source feature.
+For a provider area stored as several records with the same identifier, set
+`collection: true` on its selection. All matching polygons are included; an
+optional `expected_feature_count` checks collection completeness.
+
+Outputs normally use `OGC:CRS84`. Set `coordinate_reference` to retain another
+declared CRS when grid queries need the original projected polygon edges.
+The saved geometry declares that reference explicitly.
 
 The `s130_areas` method uses the same storage workflow and
 [`iho/areas.py`](../iho/areas.py) for complete S-130 surfaces and collections.

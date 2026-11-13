@@ -119,6 +119,15 @@ class StorageTests(unittest.TestCase):
         row = self.snapshot()[0]
         self.assertEqual(geometry_hash(row[1]), row[3])
 
+    def test_native_geometry_retains_its_declared_coordinate_reference(self):
+        save_features(self.database, '__features_a', [dict(
+            feature_id='native', source_id='__feature_raw', source_version='1', source_feature_id='a',
+            coordinate_reference='EPSG:3857', geometry={'type': 'Point', 'coordinates': [1000, 2000]})], self.recipe)
+        row = self.snapshot()[0]
+        self.assertEqual(row[1], {'type': 'Point', 'coordinates': [1000, 2000]})
+        self.assertEqual(row[2], 'EPSG:3857')
+        self.assertEqual(row[3], geometry_hash(row[1]))
+
     def test_schema_upgrade_from_previous_layout_is_idempotent(self):
         with self.database.transaction(force_rollback=True):
             self.database.execute('ALTER TABLE atlas.decision_features DROP COLUMN geometry, DROP COLUMN coordinate_reference')

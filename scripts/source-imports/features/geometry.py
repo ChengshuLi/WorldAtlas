@@ -26,7 +26,7 @@ def storage_geometry(geometry):
     return {'type': geometry['type'], 'coordinates': coordinates(geometry['coordinates'])}
 
 
-def validate_geometry(geometry):
+def validate_geometry(geometry, coordinate_reference='OGC:CRS84'):
     if (not isinstance(geometry, dict) or set(geometry) != {'type', 'coordinates'}
             or geometry['type'] not in {'Point', 'MultiPoint', 'LineString',
                                         'MultiLineString', 'Polygon', 'MultiPolygon'}):
@@ -40,7 +40,7 @@ def validate_geometry(geometry):
         elif (len(values) != 2 or any(type(value) not in (int, float)
                                      or not math.isfinite(value) for value in values)):
             raise ValueError('expected finite two-dimensional numeric coordinates')
-        elif not (-180 <= values[0] <= 180 and -90 <= values[1] <= 90):
+        elif coordinate_reference == 'OGC:CRS84' and not (-180 <= values[0] <= 180 and -90 <= values[1] <= 90):
             raise ValueError('coordinates are outside WGS84 longitude/latitude ranges')
     coordinates(geometry['coordinates'])
     result = shape(geometry)
@@ -57,7 +57,10 @@ def save_features(database, revision, features, recipe):
         raise ValueError('feature IDs must be nonempty and unique')
     records, hashes = [], {}
     for feature in features:
-        validate_geometry(feature['geometry'])
+        reference = feature.get('coordinate_reference', 'OGC:CRS84')
+        if not isinstance(reference, str) or not reference.strip():
+            raise ValueError('feature coordinate reference is required')
+        validate_geometry(feature['geometry'], reference)
         geometry = storage_geometry(feature['geometry'])
         digest = geometry_hash(geometry)
         hashes[feature['feature_id']] = digest
@@ -66,7 +69,7 @@ def save_features(database, revision, features, recipe):
                                           'version': recipe['recipe_version']})
         records.append((revision, feature['feature_id'], feature['source_id'],
                         feature['source_version'], feature['source_feature_id'],
-                        digest, Jsonb(geometry), 'OGC:CRS84', Jsonb(evidence)))
+                        digest, Jsonb(geometry), reference, Jsonb(evidence)))
     with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(
