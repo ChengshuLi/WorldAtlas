@@ -1,3 +1,4 @@
+from map_build.water.tests.helpers import index_present
 import unittest
 import numpy as np
 from map_build.water import coastal_core as c
@@ -50,7 +51,7 @@ class CoastalTest(unittest.TestCase):
         self.edges = c.shore.centers_for_crop(
             rle(self.p), rle(self.l), self.bounds, 360, 180, 1, [17, 18, 19, 20, 21, 22]
         )
-        self.idx = c.index_present(self.edges, self.pairs)
+        self.idx = index_present(self.edges, self.pairs)
 
     def test_band_and_entity_tie(self):
         # Row 89, midpoint x5 and distant x8. Two shores are equidistant to x5.
@@ -81,7 +82,7 @@ class CoastalTest(unittest.TestCase):
             t,
             b,
             bt,
-            c.index_present(self.edges, pairs),
+            index_present(self.edges, pairs),
         )
         self.assertEqual(result.tolist(), [1])
 

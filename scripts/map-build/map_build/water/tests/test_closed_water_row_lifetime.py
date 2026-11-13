@@ -10,7 +10,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import numpy as np
-from map_build.water import closed_water_core as reference
+from map_build.water.tests import closed_water_reference as reference
 from map_build.water import streaming_closed_water as stream
 from map_build.water.tests.helpers import rle
 

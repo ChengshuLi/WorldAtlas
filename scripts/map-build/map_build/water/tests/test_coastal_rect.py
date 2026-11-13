@@ -1,3 +1,4 @@
+from map_build.water.tests.helpers import index_present
 import unittest
 from unittest.mock import patch
 import numpy as np
@@ -39,7 +40,7 @@ class RectangleTest(unittest.TestCase):
                     'mids': shore.unit(slat, slon),
                     'category': rng.choice(np.array([17, 18, 19], dtype=np.uint8), 60),
                 }
-                idx = core.index_present(centers, pairs)
+                idx = index_present(centers, pairs)
                 yy, xx = np.nonzero(water)
                 lat = 90 - (y0 + yy + 0.5) * step
                 lon = -180 + (x0 + xx + 0.5) * step
@@ -80,7 +81,7 @@ class RectangleTest(unittest.TestCase):
         west = shore.GEOD.fwd(lon, lat, -90, 5000)
         slat = np.array([east[1], west[1]])
         slon = np.array([east[0], west[0]])
-        idx = core.index_present(
+        idx = index_present(
             {
                 'lat': slat,
                 'lon': slon,
@@ -114,7 +115,7 @@ class RectangleTest(unittest.TestCase):
         target = shore.GEOD.fwd(lon, lat, 90, 22224)
         slat = np.array([target[1]])
         slon = np.array([target[0]])
-        idx = core.index_present(
+        idx = index_present(
             {
                 'lat': slat,
                 'lon': slon,

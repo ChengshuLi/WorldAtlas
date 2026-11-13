@@ -1,12 +1,10 @@
-"""Reference coastal-band classifier, driven by a versioned decision policy.
+"""Coastal-band policy and WGS84 classification.
 
 Uses only the physical grid and final assigned land.
 It rejects uncertifiable crop edges rather than assuming omitted shores are far.
 """
 
 import math
-import numpy as np
-from scipy.spatial import cKDTree
 from map_build.water import shared_nearest as shore
 
 
@@ -67,18 +65,6 @@ def policy(snapshot):
     if {entity for entity, _, _ in pairs} != land_entities:
         raise ValueError('coastal priority must cover every land entity once')
     return decision, pairs, tolerance, band, bandtol
-
-
-def index_present(centers, pairs):
-    indices = {}
-    if not len(centers['mids']):
-        return indices
-    for _, lc, _ in pairs:
-        m = centers['category'] == lc
-        if np.any(m):
-            part = {k: centers[k][m] for k in ('mids', 'lat', 'lon', 'category')}
-            indices[lc] = (part, cKDTree(part['mids']))
-    return indices
 
 
 def classify(lat, lon, bounds, width, height, step, pairs, tolerance, band, bandtol, indices):

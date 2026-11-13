@@ -1,6 +1,7 @@
+from map_build.water.closed_water_core import policy
 import unittest
 import numpy as np
-from map_build.water import closed_water_core as c
+from map_build.water.tests import closed_water_reference as c
 from map_build.water.tests.helpers import rle
 from map_build.water.tests.test_coastal_core import snap
 
@@ -38,7 +39,7 @@ class ClosedTest(unittest.TestCase):
         q = np.full((5, 12), 17, dtype=np.uint32)
         p[2, 4:6] = 1
         q[2, 4:6] = 0
-        _, pairs, t = c.policy(policy_snapshot())
+        _, pairs, t = policy(policy_snapshot())
         return p, q, pairs, t
 
     def test_direct_boundary_and_source_cut(self):
@@ -102,15 +103,15 @@ class ClosedTest(unittest.TestCase):
             c.cut_contacts(by, [(1, 4, 4)], 12, 5)
 
     def test_policy_fails_closed(self):
-        self.assertTrue(c.policy(policy_snapshot())[1])
+        self.assertTrue(policy(policy_snapshot())[1])
         s = policy_snapshot()
         s['policies'] = []
         with self.assertRaisesRegex(ValueError, 'policy'):
-            c.policy(s)
+            policy(s)
         s = policy_snapshot()
         s['policies'][0]['definition']['unresolved_zero_neighbors'] = 'direct_fill'
         with self.assertRaisesRegex(ValueError, 'safety'):
-            c.policy(s)
+            policy(s)
 
 
 if __name__ == '__main__':

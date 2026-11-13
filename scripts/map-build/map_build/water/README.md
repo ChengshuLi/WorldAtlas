@@ -34,7 +34,9 @@ exact WGS84 refinement. A bound certifies an assignment only when omitted shores
 cannot change the result. The complete shared index removes crop omissions.
 
 Tests use independent exhaustive distances, arbitrary category codes, changed
-land labels, wrapping, holes, conflicts and a complete small water build. Run with:
+land labels, wrapping, holes, conflicts and a complete small water build.
+Independent shoreline and enclosed-water references live under `tests/`; they
+are not runtime alternatives. Run with:
 
 ```bash
 PYTHONPATH=scripts/map-build python -m unittest discover \

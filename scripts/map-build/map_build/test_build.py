@@ -499,9 +499,6 @@ class Fixture(unittest.TestCase):
         self.cfg['physical_controls'] = {'minimum_free_bytes': 0, 'max_parallel_shards': 1}
         runner = self.make()
         physical = runner.physical()
-        spec = pipeline.rle_spec(physical, physical=True)
-        self.assertEqual(spec['physical_mask_sha256'], pipeline.sha(physical / 'physical-dry.tif'))
-        self.assertEqual(spec['report_sha256'], pipeline.sha(physical / 'report.json'))
         reused = pipeline.Pipeline(
             runner.config_path, self.root / 'reused', physical_from=runner.out
         )
@@ -532,8 +529,6 @@ class Fixture(unittest.TestCase):
         mask = physical / 'physical-dry.tif'
         original = mask.read_bytes()
         mask.write_bytes(original + b'changed')
-        with self.assertRaisesRegex(ValueError, 'physical mask'):
-            pipeline.rle_spec(physical, physical=True)
         with self.assertRaisesRegex(ValueError, 'checkpoint/input hash mismatch'):
             reused.physical()
         mask.write_bytes(original)

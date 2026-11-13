@@ -6,15 +6,9 @@ from types import SimpleNamespace
 import numpy as np
 
 from map_build.core.grid import Grid
-from map_build.core.rle import encode_row
-from map_build.water.basins import Shorelines, assign, entity_pairs, participants, rasterize
+from map_build.water.tests.helpers import rle
+from map_build.water.basins import Shorelines, assign, participants, rasterize
 from map_build.water import shared_nearest as nearest
-
-
-def rle(array):
-    runs = [encode_row(row) for row in np.asarray(array)]
-    offsets = np.r_[0, np.cumsum([len(row) // 2 for row in runs])].astype('<u4')
-    return offsets, np.concatenate(runs)
 
 
 class BasinTests(unittest.TestCase):
@@ -31,16 +25,6 @@ class BasinTests(unittest.TestCase):
 
     def shores(self):
         return Shorelines(self.p, self.l, self.grid, self.pairs)
-
-    def test_arbitrary_bindings_have_no_code_offset_or_six_entity_rule(self):
-        bindings = [
-            dict(entity_id=e, physical_class=k, code=c)
-            for e, land, water in self.pairs
-            for k, c in [('land', land), ('water', water)]
-        ]
-        self.assertEqual(entity_pairs(bindings, [42, 81]), list(reversed(self.pairs)))
-        with self.assertRaisesRegex(ValueError, 'priority'):
-            entity_pairs(bindings, [81])
 
     def test_participants_are_discovered_before_coastal_exclusion(self):
         bounds = (11, 16, 7, 11)

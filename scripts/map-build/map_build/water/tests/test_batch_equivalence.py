@@ -3,7 +3,8 @@
 import tempfile, unittest, json
 from pathlib import Path
 import numpy as np
-from map_build.water import closed_water_core as ref
+from map_build.water.closed_water_core import policy
+from map_build.water.tests import closed_water_reference as ref
 from map_build.water import streaming_closed_water as stream
 from map_build.water.tests.test_closed_water_core import policy_snapshot
 from map_build.water.tests.helpers import rle
@@ -11,7 +12,7 @@ from map_build.water.tests.helpers import rle
 
 class BoundaryEquivalence(unittest.TestCase):
     def test_randomized_rows_cuts_and_wrap(self):
-        _, pairs, _ = ref.policy(policy_snapshot())
+        _, pairs, _ = policy(policy_snapshot())
         for seed in range(40):
             rng = np.random.default_rng(seed)
             h, w = 12, 24

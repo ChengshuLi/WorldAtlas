@@ -78,41 +78,6 @@ class RectangleNearest(unittest.TestCase):
             self.assertTrue(np.all(actual[~water] == 0))
             self.assertEqual(stats['bounded_cells'] + stats['exact_cells'], int(water.sum()))
 
-    def test_complete_fallback_and_selection_window_validation(self):
-        pairs = [('a', 17, 1), ('b', 18, 2)]
-
-        def point(lat, lon):
-            return np.ones(len(lat), dtype='u1'), 0, len(lat)
-
-        selected = {10: [(0, 3), (357, 360)], 11: [(1, 4)]}
-        assigned, stats = r.classify_rows(
-            selected,
-            [(0, 4), (357, 360)],
-            (350, 370, 0, 180),
-            360,
-            180,
-            1.0,
-            pairs,
-            1e-5,
-            {},
-            point,
-        )
-        self.assertEqual(assigned, {10: [(0, 3, 1), (357, 360, 1)], 11: [(1, 4, 1)]})
-        self.assertEqual(stats['exact_cells'], 9)
-        with self.assertRaisesRegex(ValueError, 'complete selected input'):
-            r.classify_rows(
-                selected,
-                [(0, 2), (357, 360)],
-                (350, 370, 0, 180),
-                360,
-                180,
-                1.0,
-                pairs,
-                1e-5,
-                {},
-                point,
-            )
-
     def test_coastal_band_accepts_one_or_no_participant(self):
         bounds = (0, 360, 0, 180)
         data = {

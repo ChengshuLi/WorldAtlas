@@ -9,14 +9,11 @@ in place; a retry uses a new run directory and new names.
 from __future__ import annotations
 
 from contextlib import contextmanager
-from datetime import datetime, timezone
 import gzip
 import io
 import json
 import os
 from pathlib import Path
-import re
-import uuid
 from typing import Any, Iterator, TextIO, BinaryIO
 
 
@@ -98,54 +95,11 @@ def create_gzip_text_exclusive(
                 text.detach()
 
 
-def validate_fresh_output(
-    input_root: os.PathLike[str] | str,
-    output: os.PathLike[str] | str,
-    inputs: tuple[os.PathLike[str] | str, ...] = (),
-) -> Path:
-    """Allow a fresh sibling or in-root output, never an existing input or symlink path.
-
-    Callers must validate all input files before exclusively creating this path.
-    No concurrent adversarial filesystem mutation is assumed by this path check.
-    """
-    root = Path(input_root).resolve(strict=True)
-    if not root.is_dir():
-        raise ValueError('input root must be a directory')
-    lexical = Path(os.path.abspath(os.fspath(output)))
-    canonical = lexical.resolve(strict=False)
-    if lexical != canonical:
-        raise ValueError('output path traverses a symlink')
-    if not canonical.parent.is_dir():
-        raise ValueError('output parent must exist')
-    if os.path.lexists(canonical):
-        raise FileExistsError('output path must be new')
-    if root == canonical or root.is_relative_to(canonical):
-        raise ValueError('output cannot be the input root or its ancestor')
-    for item in inputs:
-        source = Path(item).resolve(strict=True)
-        if source == canonical or source.is_relative_to(canonical):
-            raise ValueError('output contains an input')
-    return canonical
-
-
 def create_directory_exclusive(path: os.PathLike[str] | str, *, mode: int = 0o777) -> Path:
     """Create exactly one directory; existing files/directories are errors."""
     p = Path(path)
     p.mkdir(mode=mode, parents=False, exist_ok=False)
     return p
-
-
-def create_run_directory(parent: os.PathLike[str] | str, prefix: str = "run") -> Path:
-    """Create a unique immutable run directory below an existing parent.
-
-    A name collision raises FileExistsError. Callers start a fresh attempt rather
-    than reusing, clearing, or replacing any previous run directory.
-    """
-    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}", prefix):
-        raise ValueError("run prefix must be a simple filename component")
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
-    path = Path(parent) / f"{prefix}-{stamp}-{uuid.uuid4().hex[:12]}"
-    return create_directory_exclusive(path)
 
 
 def write_json_exclusive(

@@ -16,26 +16,6 @@ from map_build.water.rectangle_nearest import classify
 from map_build.core.geometry import rasterize
 
 
-def entity_pairs(bindings, priority):
-    """Resolve stable entities to independent land/water codes."""
-    entities = {b['entity_id'] for b in bindings if b['physical_class'] == 'land'}
-    if len(priority) != len(set(priority)) or set(priority) != entities:
-        raise ValueError('tie priority must list each land entity exactly once')
-    snapshot = {'category_bindings': bindings}
-    pairs = [
-        (
-            entity,
-            nearest.binding(snapshot, entity, 'land'),
-            nearest.binding(snapshot, entity, 'water'),
-        )
-        for entity in priority
-    ]
-    codes = [code for _, land, water in pairs for code in (land, water)]
-    if len(set(codes)) != len(codes):
-        raise ValueError('land and water bindings must use distinct codes')
-    return pairs
-
-
 class Shorelines:
     """Share one complete physical shore index and reuse its entity trees."""
 

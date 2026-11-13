@@ -117,23 +117,6 @@ def catalog_references(value):
                 yield from catalog_references(item)
 
 
-def rle_spec(directory, *, physical=False):
-    """Pin streams/report and, for physical input, its verified mask identity."""
-    directory = Path(directory)
-    spec = {
-        key + '_' + field: value
-        for key, name in [('rows', 'rows.u32le'), ('runs', 'runs.u32le'), ('report', 'report.json')]
-        for field, value in pin(directory / name).items()
-    }
-    if physical:
-        report = read(directory / 'report.json')
-        mask_hash = sha(directory / 'physical-dry.tif')
-        if report.get('output_sha256', {}).get('physical-dry.tif') != mask_hash:
-            raise ValueError('physical mask does not match its producer report')
-        spec['physical_mask_sha256'] = mask_hash
-    return spec
-
-
 def physical_reference(run, sources):
     """Reuse completed physical outputs only for identical raw-source requests.
 

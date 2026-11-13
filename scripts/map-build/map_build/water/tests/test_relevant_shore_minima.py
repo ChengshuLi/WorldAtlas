@@ -1,4 +1,5 @@
 """Exact fallback excludes a class only after a conservative distance proof."""
+from map_build.water.tests.helpers import index_present
 
 import unittest
 from unittest.mock import patch
@@ -14,7 +15,7 @@ class RelevantMinimaTest(unittest.TestCase):
 
     def indexes(self, lat, lon, categories):
         lat, lon = np.asarray(lat), np.asarray(lon)
-        return core.index_present(
+        return index_present(
             {'lat': lat, 'lon': lon, 'mids': s.unit(lat, lon), 'category': np.asarray(categories)},
             self.pairs,
         )

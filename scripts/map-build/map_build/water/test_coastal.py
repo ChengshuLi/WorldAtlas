@@ -1,3 +1,4 @@
+from map_build.water.tests.helpers import index_present
 import unittest
 
 import numpy as np
@@ -21,7 +22,7 @@ class CoastalGeneralityTests(unittest.TestCase):
             category=np.array([70000, 300]),
             mids=shared_nearest.unit(np.array([lat, lat]), shores),
         )
-        indexes = coastal_core.index_present(centers, pairs)
+        indexes = index_present(centers, pairs)
         xs = np.arange(left + 1, right)
         actual, _ = coastal_rect.classify(
             np.ones((1, len(xs)), dtype=bool),
@@ -90,7 +91,7 @@ class CoastalGeneralityTests(unittest.TestCase):
             category=np.array([70000]),
             mids=shared_nearest.unit(np.array([sy]), np.array([sx])),
         )
-        indexes = coastal_core.index_present(centers, pairs)
+        indexes = index_present(centers, pairs)
         result, _ = coastal_rect.classify(
             np.ones((1, 1), dtype=bool),
             x,

@@ -1,3 +1,4 @@
+from map_build.water.tests.helpers import index_present
 import unittest
 
 import numpy as np
@@ -17,7 +18,7 @@ class CoastalDistanceBoundTests(unittest.TestCase):
             category=categories,
             mids=shared_nearest.unit(shore_lat, shore_lon),
         )
-        indexes = coastal_core.index_present(centers, pairs)
+        indexes = index_present(centers, pairs)
         lat, lon = np.array([0.0, 0.1, 89.0]), np.array([0.0, 0.1, 120.0])
         lower, _, upper = shared_nearest.nearest_class_bounds(
             lat, lon, shared_nearest.unit(lat, lon), pairs, indexes, upper_limit=22224
