@@ -21,35 +21,15 @@ jobs:
           environment-file: environment.yml
           cache-environment: true
           cache-environment-key: sources-${{ runner.arch }}-${{ hashFiles('environment.yml') }}
-      - name: Test database, source imports and map building
+      - name: Install WorldAtlas
+        shell: bash -el {0}
+        run: python -m pip install --no-deps --force-reinstall .
+      - name: Run Python and database tests in parallel
         shell: bash -el {0}
         env:
           TMPDIR: ${{ runner.temp }}
-          TMP: ${{ runner.temp }}
-          TEMP: ${{ runner.temp }}
-          PYTHONPATH: scripts/source-imports:scripts/map-build
           PROJ_NETWORK: 'OFF'
-        run: |
-          set -euo pipefail
-          database_dir=$(TMPDIR=/tmp mktemp -d)
-          trap 'pg_ctl -D "$database_dir/data" -m fast -w stop; rm -rf "$database_dir"' EXIT
-          initdb -D "$database_dir/data" -U postgres -A trust --no-locale --encoding=UTF8
-          pg_ctl -D "$database_dir/data" -l "$database_dir/postgres.log" \
-            -o "-k $database_dir -p 5432 -c listen_addresses=''" -w start
-          psql -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 \
-            -f database/migrations/001_initial_schema.sql
-          for check in database/tests/*.sql; do
-            psql -Xq -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 -f "$check"
-          done
-          export WORLDATLAS_TEST_DATABASE_URL="postgresql://postgres@/postgres?host=$database_dir"
-          time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
-          time python -m unittest discover -s scripts/map-build/map_build -t scripts/map-build
-      - name: Test release staging
-        shell: bash -el {0}
-        env:
-          PROJ_NETWORK: 'OFF'
-          PYTHONPATH: scripts/map-build
-        run: time python -m unittest discover -s scripts/map-releases -p 'test_*.py'
+        run: python .github/scripts/run_tests.py
   website:
     runs-on: ubuntu-latest
     steps:
@@ -59,7 +39,13 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npm test
-      - run: npm run test:browser
+      - name: Run website tests in parallel
         env:
           PLAYWRIGHT_CHANNEL: chrome
+        run: |
+          npm test & unit_tests=$!
+          npm run test:browser & browser_tests=$!
+          status=0
+          wait "$unit_tests" || status=1
+          wait "$browser_tests" || status=1
+          exit "$status"

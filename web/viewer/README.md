@@ -10,7 +10,7 @@ that candidate's homepage to `review/index.html`, which the Worker serves at
 `/`. The homepage's base URL selects its release files. Data sources opens
 the release's `sources.html`, including OpenStreetMap and IHO attributions.
 
-Use the [release workflow](../../scripts/map-releases/README.md)
+Use the [release workflow](../../src/worldatlas/map_releases/README.md)
 to package the browser modules with a completed build. The candidate bundle
 contains the viewer’s release-specific configuration and base URL.
 Staging generates `legend/continents.json` with one entry per entity containing

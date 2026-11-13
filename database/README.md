@@ -46,7 +46,7 @@ FROM atlas.decision_routes ORDER BY revision, route_id;
 ```
 
 Read that exact document, then use the shared
-[source-import command](../scripts/source-imports/README.md):
+[source-import command](../src/worldatlas/source_imports/README.md):
 
 ```sql
 SELECT document FROM atlas.structured_documents

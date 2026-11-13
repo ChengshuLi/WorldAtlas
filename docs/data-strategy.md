@@ -1,6 +1,6 @@
 # WorldAtlas Data Strategy
 
-This document describes the design for the full project. The [pipeline guide](../scripts/map-build/README.md) describes the current build.
+This document describes the design for the full project. The [pipeline guide](../src/worldatlas/map_build/README.md) describes the current build.
 
 ## Contents
 

@@ -4,10 +4,10 @@
 
 ## Where this runs in the code
 
-- The [basin builder](../../scripts/map-build/map_build/water/basins.py) reads imported basin geometry and discovers its participating continents from the current shores.
-- The [rectangle engine](../../scripts/map-build/map_build/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
-- The [nearest-shore search](../../scripts/map-build/map_build/water/shared_nearest.py) checks unresolved cells against the complete shared shoreline index.
-- The [row-only engine](../../scripts/map-build/map_build/water/interval_nearest.py) implements the single-row reference method.
+- The [basin builder](../../src/worldatlas/map_build/water/basins.py) reads imported basin geometry and discovers its participating continents from the current shores.
+- The [rectangle engine](../../src/worldatlas/map_build/water/rectangle_nearest.py) checks blocks and splits those it cannot assign.
+- The [nearest-shore search](../../src/worldatlas/map_build/water/shared_nearest.py) checks unresolved cells against the complete shared shoreline index.
+- The [row-only engine](../../src/worldatlas/map_build/water/interval_nearest.py) implements the single-row reference method.
 
 ## How it works
 
