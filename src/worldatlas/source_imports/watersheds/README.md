@@ -228,9 +228,7 @@ Each test file covers a distinct responsibility:
 Run all source-import tests:
 
 ```bash
-python3 -m unittest discover -s src/worldatlas/source_imports -t src
+python .github/scripts/run_tests.py --suite source_imports
 ```
 
-Set `WORLDATLAS_TEST_DATABASE_URL` to a disposable PostgreSQL database loaded with
-[`001_initial_schema.sql`](../../../../database/migrations/001_initial_schema.sql)
-to include actual SQL, source-link and rollback tests. Tests remove their fixtures.
+The runner creates a disposable database for the SQL, source-link and rollback tests.

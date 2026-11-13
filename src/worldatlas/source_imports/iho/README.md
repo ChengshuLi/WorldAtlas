@@ -104,9 +104,7 @@ Run these tools' tests, including the common source helpers and OSM regression
 tests, from the repository root:
 
 ```bash
-python3 -m unittest discover -s src/worldatlas/source_imports -t src
+python .github/scripts/run_tests.py --suite source_imports
 ```
 
-Set `WORLDATLAS_TEST_DATABASE_URL` to a disposable local PostgreSQL database with
-the [initial schema](../../../../database/migrations/001_initial_schema.sql) to
-include the database write and rollback tests.
+The runner creates a disposable database and includes the write and rollback tests.

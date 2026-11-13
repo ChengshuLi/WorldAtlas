@@ -1,91 +1,113 @@
 # Database
 
-Neon stores editable geography, its source links and versioned construction
-settings. Raw files live in R2. Map building freezes the selected records before
-calculating cells; publishing serves those completed files rather than querying
-editable geography from the website.
+Neon holds editable geography, versioned construction settings and the catalog
+of raw R2 files. The website reads completed release files. Building a new map
+freezes the selected Neon records before calculating cells.
 
-## What belongs here
+## Schema organization
 
-| Records | Purpose |
+[`schema.sql`](schema.sql) creates the complete schema for an empty database.
+It loads these files in dependency order, within one transaction:
+
+| File | Contents |
 | --- | --- |
-| `source_assets` | One exact raw R2 file per row: source/version, object key, size, checksum and source credit. |
-| `structured_documents` | Immutable construction settings, released input snapshots and original processing evidence. |
-| Entity registry and category bindings | Stable entity IDs/colors, versioned names/parents, and each grid code's entity and land/water meaning. |
-| Features, boundaries and line observations | Imported geometry, its coordinate reference, checksum and construction reference. Original contributing observations remain. |
-| Cases and case sources | Shared geographic reasoning and exact source citations. Affiliations can also have their own explanation. |
-| Geographic rules | Component selections, mainland witnesses/regions, selected basins, ocean routes/seeds and policies. |
-| `map_releases` | One immutable file manifest per numbered candidate or retained official release. |
-| `map_publications` | Which release represents each official version and which publication owns the homepage alias. |
+| [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and exact versioned construction documents. |
+| [`entities.sql`](schema/entities.sql) | Stable entity IDs/colors, revisioned names/parents and grid-code bindings. |
+| [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, decisions, shared explanations, citations, ocean routes and assignment policies. |
+| [`mainland.sql`](schema/mainland.sql) | Editable boundaries, raw-source links, assembled seed regions and component witnesses. |
+| [`releases.sql`](schema/releases.sql) | Immutable release manifests, approval and official-version/homepage pointers. |
 
-A construction version describes how to regenerate geometry. A decision revision
-selects editable geographic records. A release freezes a completed result.
-Working geography needs no draft/research/acceptance status. Publication approval
-applies to the exact release bundle.
+Each table's constraints and supporting functions are kept beside its definition.
+These files define structure only. Source records, colors, geographic choices and
+construction settings are loaded separately into Neon.
 
-The catalog's source identity, original capture provenance, object location, size
-and checksum are immutable. Correcting a title, provider description or source
-credit does not require uploading another copy of the same bytes.
+## Initialize an empty database
 
-## Find the selected construction
+Use the project environment and a connection URL supplied outside the code:
 
-Geometry records use ordinary foreign keys to the versioned document:
-
-```sql
-SELECT revision, feature_id, construction_id, construction_version
-FROM atlas.decision_features ORDER BY revision, feature_id;
-
-SELECT revision, boundary_id, construction_id, construction_version
-FROM atlas.decision_mainland_boundaries ORDER BY revision, boundary_id;
-
-SELECT line_id, construction_id, construction_version
-FROM atlas.geographic_line_observations ORDER BY line_id;
-
-SELECT revision, route_id, construction_id, construction_version
-FROM atlas.decision_routes ORDER BY revision, route_id;
+```bash
+psql "$NEON_DATABASE_URL" -X -f database/schema.sql
 ```
 
-Read that exact document, then use the shared
-[source-import command](../src/worldatlas/source_imports/README.md):
+Run the entry point rather than individual schema files. Its relative includes
+work regardless of the current directory. A failure rolls back the complete
+initialization. An existing `atlas` schema causes initialization to fail.
+
+The working database is already initialized. Creating the schema does not load
+the data required to build a map. Restore a database backup to recover existing
+records, or load new records through the supported source-import workflow.
+
+## Change an existing database
+
+Update the relevant schema definition. When an existing database needs an
+upgrade, put the explicit change under `database/migrations/` in the same PR.
+Create that directory when the first upgrade is needed. Preserve applied upgrade
+scripts rather than editing their meaning afterward.
+
+Test the upgrade against a disposable copy of working data before applying it.
+Check that upgrading and creating a fresh database produce the same intended
+structure. Schema upgrades stay separate from geographic data imports.
+
+Backups must retain exact document text: reformatting a construction document
+would invalidate its byte checksum. Retain original contributing records and
+released input selections when assessing data for deletion.
+
+## Tests
+
+SQL checks cover database guarantees:
+
+| Check | Purpose |
+| --- | --- |
+| `source_catalog.sql` | Raw-file identity, metadata corrections and source references. |
+| `structured_documents.sql` | Exact JSON text and immutable document versions. |
+| `entity_registry.sql` | Stable IDs, hierarchy relationships and grid-code bindings. |
+| `geographic_entity_colors.sql` | Optional colors and valid RGB values. |
+| `geographic_decisions.sql` | Geometry records, shared explanations, citations and entity targets. |
+| `editable_boundaries.sql` | Editable lines, construction references and retained source links. |
+| `policies.sql` | Editable assignment policies and valid policy definitions. |
+| `map_releases.sql` | Immutable bundles, approval and publication relationships. |
+
+Run the database checks locally with the same runner used by CI:
+
+```bash
+python .github/scripts/run_tests.py --suite database
+```
+
+Omit `--suite` to run all Python and SQL suites concurrently. The runner starts
+one temporary PostgreSQL server, gives each database-using suite its own empty
+database, loads `schema.sql`, and removes the databases afterward. PostgreSQL's
+`initdb`, `pg_ctl` and `psql` must be available in the project environment.
+
+Python integration tests stay beside source-import and map-building code. They
+cover real writes, rollback, concurrent edits and consistent input selection.
+CI runs all suites on macOS and Linux without live Neon credentials.
+
+## Find and regenerate a construction
+
+A construction version describes how to regenerate geometry. A decision revision
+selects editable records. A release freezes a completed result.
+
+Features, mainland boundaries, ocean endpoints/routes and selected geographic
+lines reference their construction through `construction_id` and
+`construction_version`. For example:
 
 ```sql
+SELECT revision, boundary_id, construction_id, construction_version
+FROM atlas.decision_mainland_boundaries
+ORDER BY revision, boundary_id;
+
 SELECT document FROM atlas.structured_documents
 WHERE source_id = 'CONSTRUCTION_ID' AND version = 'VERSION';
 ```
 
-Its `method` selects the reusable constructor. For changed settings, insert a
-new construction version and run it against the intended decision revision.
-The importer saves the new geometry and reference together. It preserves
-unrelated notes and relationships; a failed calculation leaves the old record.
-Some original observations are supporting evidence and have no automatic
-constructor. They remain distinct from the selected constructed output.
+Use that exact version with the [source-import command](../src/worldatlas/source_imports/README.md).
+The document's `method` selects the constructor. Changed settings get a new
+construction version. Successful imports save geometry and its references
+together, preserving unrelated notes and relationships. Failed imports leave
+the previous record intact. Original supporting
+observations can remain without an automatic constructor.
 
-## Schema and tests
-
-For an empty database:
-
-```bash
-psql "$NEON_DATABASE_URL" -v ON_ERROR_STOP=1 -f database/migrations/001_initial_schema.sql
-```
-
-The initial SQL creates schema only. Load catalog records, constructions,
-editable geography, entity colors and releases from a database backup or the
-source-import workflow. Empty tables cannot produce a map.
-
-Test schema changes against disposable PostgreSQL and a copy of the working
-data before applying them. Keep the initial schema current. One-off upgrades
-are retained with their migration backup, rather than becoming a setup chain.
-
-```bash
-bash database/tests/run.sh
-```
-
-These SQL checks create a disposable local database and roll back their fixtures.
-Importer and map-input tests add real save, rollback, concurrent-edit and replay
-checks. CI runs all Python and database suites on macOS and Linux.
-
-Database backups must retain exact document text. Parsing and reformatting a
-`document` would invalidate its byte checksum. During cleanup, follow current
-construction/source relationships, original contributing records and retained
-release manifests, including their frozen input selections. A missing active
-reference alone does not make original released input safe to delete.
+Working decisions are editable directly. Publication approval applies to an
+exact release bundle. Raw-file identities and capture provenance remain
+immutable; source titles and credit descriptions can be corrected without
+uploading duplicate bytes.

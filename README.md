@@ -93,15 +93,15 @@ and decoded checksums are verified. See the
 
 ## Entity registry
 
-The [initial schema](database/migrations/001_initial_schema.sql) defines stable entity
+The [initial schema](database/schema.sql) defines stable entity
 IDs and colors, revisioned names and parent relationships, and the bindings from map
 category codes to entities. Use the registry revision selected by the
 decision snapshot.
 
-Apply the [initial schema](database/migrations) only to an empty database.
+Apply the [initial schema](database/schema.sql) only to an empty database.
 The working database is already initialized. The [database guide](database/README.md)
 covers existing-database upgrades and loading data separately from the schema.
-Run the [database tests](database/tests) with `bash database/tests/run.sh`.
+Run the [database tests](database/tests) with `python .github/scripts/run_tests.py --suite database`.
 Have PostgreSQL's `initdb`, `pg_ctl`, and `psql` on your path. The runner starts
 a temporary local database, installs the schema, and runs the database checks.
 

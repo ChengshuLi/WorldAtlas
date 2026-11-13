@@ -72,9 +72,9 @@ invalid geometry. `test_build_boundary.py` checks stored constructions, source
 references, repeat runs and failed writes.
 
 ```bash
-python3 -m unittest discover -s src/worldatlas/source_imports -t src
+python .github/scripts/run_tests.py --suite source_imports
 ```
 
 Set `WORLDATLAS_TEST_DATABASE_URL` to a disposable local PostgreSQL database with
-the [initial schema](../../../../database/migrations/001_initial_schema.sql) to
+the [initial schema](../../../../database/schema.sql) to
 include database writes, repeat runs, edits, and rollback checks.

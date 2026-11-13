@@ -133,11 +133,9 @@ Run the tests from the repository root:
 The map-builder integration test also uses GDAL's Python bindings.
 
 ```bash
-python3 -m unittest discover -s src/worldatlas/source_imports -t src
+python .github/scripts/run_tests.py --suite source_imports
 ```
 
-To include the database write tests, set `WORLDATLAS_TEST_DATABASE_URL` to a
-disposable local PostgreSQL database initialized with
-[`001_initial_schema.sql`](../../../../database/migrations/001_initial_schema.sql).
+The runner creates a disposable database and includes the database write tests.
 Those tests cover complete builds, repeat runs, source updates, preservation of
 notes and supporting evidence, revision isolation, and failed-write rollbacks.

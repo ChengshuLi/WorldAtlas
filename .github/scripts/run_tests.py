@@ -1,5 +1,6 @@
 """Run the installed Python suites concurrently, each with isolated database fixtures."""
 
+import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import os
@@ -50,33 +51,41 @@ def run_suite(name, directory, databases):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--suite', choices=SUITES, help='run one suite; defaults to all suites')
+    args = parser.parse_args()
+    selected = (args.suite,) if args.suite else tuple(SUITES)
     # Unix socket paths must stay short on macOS; Python fixtures use their
     # ordinary temporary directories independently of this server directory.
     with tempfile.TemporaryDirectory(prefix='worldatlas-tests-', dir='/tmp') as temp:
         directory = Path(temp)
         data = directory / 'data'
-        subprocess.run(['initdb', '-D', str(data), '-U', 'postgres', '-A', 'trust',
-                        '--no-locale', '--encoding=UTF8'], check=True)
-        subprocess.run(['pg_ctl', '-D', str(data), '-l', str(directory / 'postgres.log'),
-                        '-o', f"-k {directory} -p 5432 -c listen_addresses=''", '-w', 'start'],
-                       check=True)
+        needs_database = any(SUITES[name] for name in selected)
+        if needs_database:
+            subprocess.run(['initdb', '-D', str(data), '-U', 'postgres', '-A', 'trust',
+                            '--no-locale', '--encoding=UTF8'], check=True)
+            subprocess.run(['pg_ctl', '-D', str(data), '-l', str(directory / 'postgres.log'),
+                            '-o', f"-k {directory} -p 5432 -c listen_addresses=''", '-w', 'start'],
+                           check=True)
         try:
             databases = {}
-            base = make_conninfo(user='postgres', dbname='postgres', host=str(directory))
-            schema = (ROOT / 'database/migrations/001_initial_schema.sql').read_text()
-            with psycopg.connect(base, autocommit=True) as server:
-                for name, needs_database in SUITES.items():
-                    if not needs_database:
-                        continue
-                    server.execute(sql.SQL('CREATE DATABASE {}').format(sql.Identifier(name)))
-                    url = make_conninfo(base, dbname=name)
-                    with psycopg.connect(url, autocommit=True) as database:
-                        database.execute(schema)
-                    databases[name] = url
+            if needs_database:
+                base = make_conninfo(user='postgres', dbname='postgres', host=str(directory))
+                with psycopg.connect(base, autocommit=True) as server:
+                    for name in selected:
+                        if not SUITES[name]:
+                            continue
+                        server.execute(sql.SQL('CREATE DATABASE {}').format(sql.Identifier(name)))
+                        url = make_conninfo(base, dbname=name)
+                        subprocess.run(
+                            ['psql', '-Xq', '--dbname', url, '-f', str(ROOT / 'database/schema.sql')],
+                            check=True,
+                        )
+                        databases[name] = url
             started = time.monotonic()
             failed = False
-            with ThreadPoolExecutor(max_workers=len(SUITES)) as executor:
-                futures = [executor.submit(run_suite, name, directory, databases) for name in SUITES]
+            with ThreadPoolExecutor(max_workers=len(selected)) as executor:
+                futures = [executor.submit(run_suite, name, directory, databases) for name in selected]
                 for future in as_completed(futures):
                     name, code, elapsed, log = future.result()
                     failed |= code != 0
@@ -85,7 +94,8 @@ def main():
             print(f'\nAll suites finished in {time.monotonic() - started:.2f}s wall time.', flush=True)
             return int(failed)
         finally:
-            subprocess.run(['pg_ctl', '-D', str(data), '-m', 'fast', '-w', 'stop'], check=True)
+            if needs_database:
+                subprocess.run(['pg_ctl', '-D', str(data), '-m', 'fast', '-w', 'stop'], check=True)
 
 
 if __name__ == '__main__':

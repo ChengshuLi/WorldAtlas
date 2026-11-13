@@ -1,4 +1,4 @@
--- Working geographic policies can be edited without a research/approval state.
+-- Working geographic policies can be edited directly.
 BEGIN;
 DO $$ BEGIN
  INSERT INTO atlas.entity_registry_revisions(revision) VALUES ('__policies');

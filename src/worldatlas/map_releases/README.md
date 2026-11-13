@@ -42,5 +42,5 @@ Deploying changes to the Cloudflare Worker itself is separate: `npx wrangler dep
 Run the release tests with:
 
 ```bash
-python3 -m unittest discover -s src/worldatlas/map_releases -t src
+python .github/scripts/run_tests.py --suite map_releases
 ```

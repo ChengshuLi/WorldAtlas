@@ -39,5 +39,5 @@ Independent shoreline and enclosed-water references live under `tests/`; they
 are not runtime alternatives. Run with:
 
 ```bash
-python3 -m unittest discover -s src/worldatlas/map_build -t src
+python .github/scripts/run_tests.py --suite map_build
 ```
