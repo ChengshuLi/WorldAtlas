@@ -21,6 +21,7 @@ class ImportSelectionTests(unittest.TestCase):
             ('watershed_boundary', 'watersheds.build_boundary.build_boundary'),
             ('selected_vector_features', 'features.build_features.build_features'),
             ('selected_table_points', 'features.build_features.build_features'),
+            ('selected_osm_features', 'features.build_features.build_features'),
             ('s130_areas', 'features.build_features.build_features'),
         ]
         for method, target in cases:

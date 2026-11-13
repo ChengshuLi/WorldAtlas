@@ -4,9 +4,9 @@ These tools read raw geographic sources and save the selected geometry and
 construction decisions in Neon. Raw source files stay in R2; Neon's source
 catalog identifies their versions and checksums.
 
-- [`osm/`](osm/README.md): join archived OpenStreetMap ways into a boundary.
+- [`osm/`](osm/README.md): assemble archived OpenStreetMap boundaries and selected features.
 - [`iho/`](iho/README.md): import selected IHO S-130 routes and sea areas.
-- [`features/`](features/README.md): import selected vector geometry into Neon.
+- [`features/`](features/README.md): import selected vector and point-table geometry into Neon.
 - [`traces/`](traces/README.md): construct final boundaries from reviewed points
   traced from source figures.
 - [`watersheds/`](watersheds/README.md): construct boundaries from elevation,
@@ -60,6 +60,8 @@ The command reads the record from `atlas.structured_documents`. Its JSON
 | `smooth_latitude_trace` | `traces.build_boundary` |
 | `watershed_boundary` | `watersheds.build_boundary` |
 | `selected_vector_features` | `features.build_features` |
+| `selected_table_points` | `features.build_features` with `features.points` |
+| `selected_osm_features` | `features.build_features` with `osm.features` |
 | `s130_areas` | `features.build_features` with `iho.areas` |
 
 The record ID identifies data; its name does not select Python code.

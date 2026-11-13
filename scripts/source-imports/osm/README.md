@@ -1,4 +1,26 @@
-# Shared OpenStreetMap boundary tools
+# OpenStreetMap imports
+
+[`features.py`](features.py) imports selected nodes, closed ways and relation
+polygons into `atlas.decision_features`. It reads each archived object graph
+once through osmium's Python API. [`features/build_features.py`](../features/build_features.py)
+handles catalog lookup, verified downloads and transactional storage.
+
+Use the common command below with a `selected_osm_features` construction. Each
+selection identifies an output `feature_id`, provider `source_feature_id`,
+`object_type` (`node`, `way` or `relation`), `object_version` and identity tags.
+The constructor joins member ways at shared node IDs in stable way-ID order.
+
+Relations preserve inner rings by default. An explicit `holes: outer_envelope`
+selects the outer envelope, while `ignored_member_roles` identifies non-geometric
+members such as label nodes. Optional `ring_anchors` select particular rings by
+tagged node ID/version and member way; `parent_relation` checks a selected
+membership. These interpretations live in the construction record. The same
+implementation handles administrative, reef and archipelago sources.
+
+`test_features.py` covers joining, holes, anchors, membership, source identity
+and invalid geometry.
+
+## Boundary lines
 
 Construction records in Neon choose the sources, destination boundary IDs, and
 construction descriptions.

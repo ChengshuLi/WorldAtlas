@@ -21,6 +21,9 @@ def build_features(database, storage, recipe_id, version, revision, work_dir):
     elif method == 'selected_table_points':
         from features.points import read_points
         features = read_points(path, recipe)
+    elif method == 'selected_osm_features':
+        from osm.features import read_features as read_osm_features
+        features = read_osm_features(path, recipe)
     elif method == 's130_areas':
         from iho.areas import read_areas
         features = read_areas(path, source, recipe)

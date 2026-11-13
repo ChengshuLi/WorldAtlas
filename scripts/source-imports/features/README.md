@@ -31,6 +31,8 @@ provider IDs must still identify one source feature.
 
 The `s130_areas` method uses the same storage workflow and
 [`iho/areas.py`](../iho/areas.py) for complete S-130 surfaces and collections.
+`selected_osm_features` uses [`osm/features.py`](../osm/features.py) to assemble
+selected OSM points and polygons through that same storage workflow.
 
 `selected_table_points` uses [`points.py`](points.py) for CSV, TSV and other
 delimited point tables. Its construction supplies `id_field`, `longitude_field`,
