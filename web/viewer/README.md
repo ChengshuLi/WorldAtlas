@@ -35,6 +35,10 @@ PLAYWRIGHT_SKIP_BROWSER_GC=1 npx playwright install chromium --only-shell
 npm run test:browser
 ```
 
+CI runs the same suite with `PLAYWRIGHT_CHANNEL=chrome`, using the browser
+already installed on GitHub's Linux runner. Local runs use Playwright's bundled
+Chromium unless that variable selects an installed browser.
+
 The browser suite runs the real Worker and viewer locally against a tiny map
 stored in memory. It checks desktop WebGL, mobile touch and the Canvas fallback,
 separate homepage and preview files, and legend totals. It also checks errors

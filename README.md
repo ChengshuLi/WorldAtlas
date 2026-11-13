@@ -135,3 +135,5 @@ Environment changes run all Python/SQL suites. Workflow changes and manual runs
 select every suite. Documentation-only updates skip runtime suites. CI caches
 installed environments and uses local fixtures and disposable databases, with
 no cloud credentials. Full-size builds and geographic review remain separate.
+The website job uses Chrome already installed on GitHub's runner, avoiding a
+browser and system-package installation. New pushes cancel superseded runs.

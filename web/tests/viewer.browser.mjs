@@ -216,7 +216,10 @@ before(async () => {
   server.listen(0, "127.0.0.1");
   await once(server, "listening");
   origin = `http://127.0.0.1:${server.address().port}`;
-  browser = await chromium.launch({ args: ["--enable-unsafe-swiftshader"] });
+  browser = await chromium.launch({
+    channel: process.env.PLAYWRIGHT_CHANNEL || undefined,
+    args: ["--enable-unsafe-swiftshader"],
+  });
 });
 
 after(async () => {
