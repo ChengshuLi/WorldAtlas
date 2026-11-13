@@ -8,7 +8,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from shapely.geometry import LineString
-from features.geometry import storage_geometry
+from features.geometry import geometry_hash, storage_geometry
 
 
 def assemble(manifest, directory):
@@ -94,7 +94,6 @@ def assemble_archive(archive, archive_sha256, expected_geometry_sha256=None):
             (directory / name).write_bytes(z.read(name))
         geom = assemble(manifest, directory)
     if expected_geometry_sha256 is not None:
-        encoded = json.dumps(geom, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
-        if hashlib.sha256(encoded).hexdigest() != expected_geometry_sha256:
+        if geometry_hash(geom) != expected_geometry_sha256:
             raise ValueError('reconstructed boundary differs from expected geometry')
     return geom

@@ -119,6 +119,41 @@ class StorageTests(unittest.TestCase):
         row = self.snapshot()[0]
         self.assertEqual(geometry_hash(row[1]), row[3])
 
+    def test_expected_checksum_survives_vector_and_table_import_storage_and_repeat(self):
+        expected = hashlib.sha256(b'{"coordinates":[0.0,1e-24],"type":"Point"}').hexdigest()
+        for method, raw, suffix in (
+            ('selected_vector_features', json.dumps({'type': 'FeatureCollection', 'features': [
+                {'type': 'Feature', 'properties': {'provider_id': 'a'},
+                 'geometry': {'type': 'Point', 'coordinates': [-0.0, 1e-24]}}]}).encode(), 'geojson'),
+            ('selected_table_points', b'provider_id,lon,lat\na,-0.0,1e-24\n', 'csv'),
+        ):
+            with self.subTest(method=method):
+                self.database.execute(
+                    'INSERT INTO atlas.source_assets '
+                    '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
+                    'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+                    'SELECT source_id,%s,title,kind,provider,source_uri,license_name,license_uri,'
+                    'attribution,r2_bucket,%s,%s,%s,provenance FROM atlas.source_assets '
+                    'WHERE source_id=%s AND version=%s',
+                    (method, 'zero.' + suffix, hashlib.sha256(raw).hexdigest(), len(raw), '__feature_raw', '1'))
+                self.recipe.update(method=method, source_version=method)
+                if suffix == 'csv':
+                    self.recipe.update(longitude_field='lon', latitude_field='lat', coordinate_reference='OGC:CRS84')
+                self.recipe['selections'][0]['expected_geometry_sha256'] = expected
+                self.register(method)
+                self.storage.get_object.side_effect = lambda **_: {'Body': io.BytesIO(raw)}
+                self.build(version=method)
+                before = self.snapshot()
+                self.assertEqual(json.dumps(before[0][1]['coordinates']), '[0.0, 1e-24]')
+                self.assertEqual(before[0][3], expected)
+                self.build(version=method)
+                self.assertEqual(self.snapshot(), before)
+                self.recipe['selections'][0]['expected_geometry_sha256'] = '0' * 64
+                self.register(method + '-bad')
+                with self.assertRaisesRegex(ValueError, 'checksum'):
+                    self.build(version=method + '-bad')
+                self.assertEqual(self.snapshot(), before)
+
     def test_native_geometry_retains_its_declared_coordinate_reference(self):
         save_features(self.database, '__features_a', [dict(
             feature_id='native', source_id='__feature_raw', source_version='1', source_feature_id='a',

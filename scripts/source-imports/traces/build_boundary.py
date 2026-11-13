@@ -1,11 +1,9 @@
 """Build and save one final boundary from a construction record in Neon."""
-import hashlib
-import json
 
 from psycopg.types.json import Jsonb
 
 from atlas_sources.catalog import catalog_source, read_recipe
-from features.geometry import storage_geometry
+from features.geometry import geometry_hash, storage_geometry
 from traces.curve import construct
 
 
@@ -22,8 +20,7 @@ def build_boundary(database, recipe_id, recipe_version, expected_geometry_sha256
         geometry = construct(recipe.get('points'), recipe.get('step_latitude_degrees'),
                              recipe.get('smoothing_latitude_degrees'))
         geometry = storage_geometry(geometry)
-        raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
-        digest = hashlib.sha256(raw).hexdigest()
+        digest = geometry_hash(geometry)
         if expected_geometry_sha256 is not None and digest != expected_geometry_sha256:
             raise ValueError('expected geometry SHA-256 mismatch')
         provenance = {

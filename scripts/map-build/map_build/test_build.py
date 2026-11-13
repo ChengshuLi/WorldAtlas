@@ -1,6 +1,7 @@
 """Runner contracts, measured parallelism, and actual raw-to-component chaining."""
 
 import json
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 import gzip
 import hashlib
@@ -146,6 +147,58 @@ class Fixture(unittest.TestCase):
         runner = pipeline.Pipeline(config, self.root / 'run')
         self.addCleanup(runner.close)
         return runner
+
+    def test_parallel_builds_can_publish_the_same_generated_input(self):
+        first = self.make()
+        second = pipeline.Pipeline(first.config_path, self.root / 'other-run')
+        self.addCleanup(second.close)
+        document = {'source': 'shared'}
+        data = pipeline.json_bytes(document)
+        name = hashlib.sha256(data).hexdigest() + '.json'
+        opening = threading.Barrier(2)
+        original = Path.open
+
+        def synchronized(path, mode='r', *args, **kwargs):
+            if mode == 'xb' and name in path.name:
+                opening.wait(timeout=10)
+            return original(path, mode, *args, **kwargs)
+
+        with patch.object(Path, 'open', synchronized), ThreadPoolExecutor(max_workers=2) as workers:
+            futures = [workers.submit(runner.save_source_document, document) for runner in (first, second)]
+            paths = [future.result(timeout=10) for future in futures]
+        self.assertEqual(paths[0], paths[1])
+        self.assertEqual(paths[0].read_bytes(), data)
+        self.assertIn(pipeline.pin(paths[0]), first.source_pins)
+        self.assertIn(pipeline.pin(paths[0]), second.source_pins)
+
+    def test_interrupted_generated_input_is_not_published_and_can_be_retried(self):
+        runner = self.make()
+        document = {'source': 'interrupted'}
+        data = pipeline.json_bytes(document)
+        path = self.inputs / (hashlib.sha256(data).hexdigest() + '.json')
+        original = Path.open
+
+        @contextmanager
+        def interrupted(target, mode='r', *args, **kwargs):
+            with original(target, mode, *args, **kwargs) as stream:
+                if mode == 'xb' and path.name in target.name:
+                    def partial(value):
+                        stream.write(value[:4])
+                        stream.flush()
+                        raise KeyboardInterrupt('interrupted write')
+                    yield Mock(write=partial)
+                else:
+                    yield stream
+
+        with patch.object(Path, 'open', interrupted), self.assertRaises(KeyboardInterrupt):
+            runner.save_source_document(document)
+        self.assertFalse(path.exists())
+        self.assertEqual(runner.save_source_document(document), path)
+        self.assertEqual(path.read_bytes(), data)
+        path.write_bytes(b'corrupt')
+        with self.assertRaisesRegex(ValueError, 'generated input changed'):
+            runner.save_source_document(document)
+        self.assertEqual(path.read_bytes(), b'corrupt')
 
     def test_invalid_source_fails_before_any_processing(self):
         self.cfg['sources']['land_config']['sha256'] = '0' * 64

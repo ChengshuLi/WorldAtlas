@@ -1,4 +1,5 @@
 from copy import deepcopy
+import hashlib
 from pathlib import Path
 import tempfile
 import unittest
@@ -27,6 +28,16 @@ class PointTableTests(unittest.TestCase):
         self.assertEqual(features[1]['evidence']['provider_properties']['name'], 'Second')
         self.settings['selections'][0]['expected_geometry_sha256'] = geometry_hash(features[0]['geometry'])
         self.assertEqual(read_points(self.path, self.settings), features)
+
+    def test_expected_hash_matches_stored_zero_but_still_detects_changed_coordinates(self):
+        self.path.write_text('id\tname\tlon\tlat\n1\tFirst\t-0.0\t1e-24\n')
+        self.settings['selections'] = self.settings['selections'][:1]
+        canonical = b'{"coordinates":[0.0,1e-24],"type":"Point"}'
+        self.settings['selections'][0]['expected_geometry_sha256'] = hashlib.sha256(canonical).hexdigest()
+        self.assertEqual(read_points(self.path, self.settings)[0]['geometry']['coordinates'], [-0.0, 1e-24])
+        self.path.write_text(self.path.read_text().replace('1e-24', '2e-24'))
+        with self.assertRaisesRegex(ValueError, 'checksum'):
+            read_points(self.path, self.settings)
 
     def test_filtered_selection_keeps_explicit_points_outside_its_bounds(self):
         self.path.write_text('id\tname\tlon\tlat\tkind\n'

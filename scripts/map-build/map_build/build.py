@@ -582,14 +582,14 @@ class Pipeline:
         if not path.is_relative_to(self.root) or path.is_relative_to(self.out):
             raise ValueError('generated input overlaps output')
         path.parent.mkdir(parents=True, exist_ok=True)
-        if path.exists():
-            if path.read_bytes() != data:
-                raise ValueError('generated input changed')
-        else:
-            with path.open('xb') as stream:
-                stream.write(data)
-                stream.flush()
-                os.fsync(stream.fileno())
+        if not path.exists():
+            try:
+                write(path, document)
+            except FileExistsError:
+                # Another build may have published this same cache entry.
+                pass
+        if path.read_bytes() != data:
+            raise ValueError('generated input changed')
         result = pin(path)
         if result not in self.source_pins:
             self.source_pins.append(result)

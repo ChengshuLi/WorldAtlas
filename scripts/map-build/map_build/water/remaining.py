@@ -25,7 +25,8 @@ def water_snapshot(selection):
         'endpoints': oceans['endpoints'],
         'routes': oceans['routes'],
         'ocean_seeds': oceans['ocean_seeds'],
-        'policies': water['policies'] + oceans['policies'],
+        'policies': [p for p in water['policies'] if p['kind'] != 'ocean_fill']
+        + [p for p in oceans['policies'] if p['kind'] == 'ocean_fill'],
     }
 
 

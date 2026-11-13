@@ -8,7 +8,8 @@ from shapely.geometry import shape
 
 
 def geometry_bytes(geometry):
-    return json.dumps(geometry, sort_keys=True, separators=(',', ':'),
+    """Hash the coordinate representation retained by PostgreSQL JSONB."""
+    return json.dumps(storage_geometry(geometry), sort_keys=True, separators=(',', ':'),
                       ensure_ascii=False, allow_nan=False).encode()
 
 

@@ -22,8 +22,10 @@ PYTHONPATH=scripts/source-imports python3 -m run_import \
 A `selected_vector_features` construction contains `source_id`, `source_version`,
 `basis`, `id_field` and `selections`. Each selection supplies `feature_id` and
 `source_feature_id`; it may check `expected_properties` or an
-`expected_geometry_sha256`. Select `member` for an archived dataset and `layer`
-when a file contains several layers. An explicit `coordinate_operation` is
+`expected_geometry_sha256`. Checksums use the stored coordinate representation:
+floating-point negative zero becomes positive zero; other values are unchanged.
+Select `member` for an archived dataset and `layer` when a file contains several
+layers. An explicit `coordinate_operation` is
 available when a source needs a particular documented CRS conversion.
 WGS84 GeoJSON coordinates retain their original numeric values. Distinct existing
 output IDs may select the same provider feature when backfilling current records;

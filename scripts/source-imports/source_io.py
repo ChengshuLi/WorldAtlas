@@ -1,8 +1,5 @@
 """Save source-derived mainland boundaries and refresh their assembled regions."""
-import hashlib
-import json
-
-from features.geometry import storage_geometry
+from features.geometry import geometry_hash, storage_geometry
 
 
 def save_boundary(database, revision, boundary_id, geometry, provenance, sources):
@@ -10,8 +7,7 @@ def save_boundary(database, revision, boundary_id, geometry, provenance, sources
     from psycopg.types.json import Jsonb
 
     geometry = storage_geometry(geometry)
-    raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
-    digest = hashlib.sha256(raw).hexdigest()
+    digest = geometry_hash(geometry)
     selected = {}
     for source in sources:
         key = (source['source_id'], source['version'])
@@ -112,9 +108,8 @@ def _refresh_regions(database, revision, boundary_id):
         if not Polygon(ring).is_valid:
             raise ValueError('updated boundary creates an invalid region polygon')
         polygon = {'type': 'Polygon', 'coordinates': [ring]}
-        raw = json.dumps(polygon, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
         database.execute(
             'UPDATE atlas.decision_mainland_seed_regions SET geometry_sha256=%s '
             'WHERE revision=%s AND region_id=%s',
-            (hashlib.sha256(raw).hexdigest(), revision, region_id),
+            (geometry_hash(polygon), revision, region_id),
         )

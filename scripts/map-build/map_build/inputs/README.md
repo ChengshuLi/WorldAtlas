@@ -28,3 +28,8 @@ wrong coordinate references and duplicate provider parent/child selections.
 `test_selection.py` uses disposable PostgreSQL to check concurrent edits, saved
 replay and missing selections. Source-import integration tests also exercise the
 real mainland and geography queries against newly imported records.
+
+Generated JSON cache entries are published as complete files, so builds can share
+the input directory and retry interrupted writes. Water rules come from the
+selected water revision; ocean-fill rules come from the selected ocean revision.
+These revisions may be the same.

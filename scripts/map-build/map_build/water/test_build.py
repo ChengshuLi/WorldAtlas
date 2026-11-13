@@ -1,5 +1,6 @@
 """Exercise the complete water calculation with independent expected labels."""
 
+from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
@@ -12,6 +13,9 @@ from map_build.core.grid import Grid
 from map_build.core.layers import file_hash, patch_rows, write_layer
 from map_build.core.rle import open_grid
 from map_build.water.build import build_water
+from map_build.water.remaining import water_snapshot
+from map_build.water.coastal_core import policy
+from map_build.water.ocean.engine import load_config
 from map_build.water.shared_nearest import crop, GEOD
 
 
@@ -149,6 +153,11 @@ class WaterBuildTests(unittest.TestCase):
                 build_water(selection(), grid, root / 'physical', root / 'land', root / name)
                 for name in ('one', 'two')
             ]
+            shared = selection()
+            water, ocean = (shared['domains'][key] for key in ('water', 'ocean'))
+            combined = {**water, **ocean, 'policies': water['policies'] + ocean['policies']}
+            shared['domains'] = {'water': deepcopy(combined), 'ocean': deepcopy(combined)}
+            reports.append(build_water(shared, grid, root / 'physical', root / 'land', root / 'shared'))
             with open_grid(reports[0]['final'], grid) as data:
                 actual = np.stack(
                     [crop(*data, y, 0, grid.width, grid.width) for y in range(grid.height)]
@@ -162,12 +171,35 @@ class WaterBuildTests(unittest.TestCase):
             self.assertFalse(np.any(actual == 0))
             self.assertEqual(reports[0]['basins'][0]['participant_shore_edges'], {81: 6, 42: 6})
             for name in ('rows.u32le', 'runs.u32le'):
-                self.assertEqual(
-                    file_hash(Path(reports[0]['final']) / name),
-                    file_hash(Path(reports[1]['final']) / name),
-                )
+                for report in reports[1:]:
+                    self.assertEqual(file_hash(Path(reports[0]['final']) / name),
+                                     file_hash(Path(report['final']) / name))
             self.assertEqual(sum(reports[0]['counts'].values()), grid.width * grid.height)
             self.assertEqual(reports[0]['download_seconds'], 0)
+
+    def test_policies_come_from_their_selected_domain_without_hiding_missing_or_duplicate_rules(self):
+        chosen = selection()
+        expected = water_snapshot(chosen)
+        water, ocean = (chosen['domains'][key] for key in ('water', 'ocean'))
+        water['policies'].append(dict(id='wrong-ocean', kind='ocean_fill', definition={}))
+        ocean['policies'].append(dict(id='wrong-coast', kind='coastline_assignment', definition={}))
+        before = deepcopy(chosen)
+        self.assertEqual(water_snapshot(chosen)['policies'], expected['policies'])
+        self.assertEqual(chosen, before)
+        policy(water_snapshot(chosen))
+        load_config(water_snapshot(chosen), 36, 18)
+        water['policies'].append(deepcopy(water['policies'][0]))
+        with self.assertRaisesRegex(ValueError, 'exactly one'):
+            policy(water_snapshot(chosen))
+        water['policies'] = [p for p in water['policies'] if p['kind'] != 'coastline_assignment']
+        with self.assertRaisesRegex(ValueError, 'exactly one'):
+            policy(water_snapshot(chosen))
+        ocean['policies'].append(deepcopy(ocean['policies'][0]))
+        with self.assertRaisesRegex(ValueError, 'one ocean_fill'):
+            load_config(water_snapshot(chosen), 36, 18)
+        ocean['policies'] = [p for p in ocean['policies'] if p['kind'] != 'ocean_fill']
+        with self.assertRaisesRegex(ValueError, 'one ocean_fill'):
+            load_config(water_snapshot(chosen), 36, 18)
 
     def test_enclosed_water_uses_registry_codes_and_shared_complete_shores(self):
         grid = Grid(36, 18, 10.0)
