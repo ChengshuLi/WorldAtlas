@@ -16,7 +16,9 @@ The preview appears at `/review/releases/v9.0-rc1/`. The homepage continues to
 serve the published release. Use a new candidate number for changed contents.
 
 The bundle contains the viewer, compressed map streams, generated configuration
-and legend. Names, colors, bindings and all geographic inputs come from the
+and legend, plus a compressed copy of the frozen input selection. Neon stores
+the file manifest and checksums instead of duplicating that large snapshot in
+one database row. Names, colors, bindings and all geographic inputs come from the
 build's saved selection. Counts come from its final grid. Staging verifies the
 build's checksums and registers the exact bundle in Neon.
 

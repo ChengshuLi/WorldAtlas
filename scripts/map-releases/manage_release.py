@@ -4,6 +4,7 @@ import argparse
 from contextlib import closing
 import gzip
 import hashlib
+import io
 import json
 import mimetypes
 import os
@@ -43,8 +44,11 @@ def release_categories(selection):
     names = {entity['id']: entity['name'] for entity in snapshot['entities']}
     bindings = snapshot['category_bindings']
     registry = snapshot['decision_revision']['entity_revision']
-    colors = {row['entity_id']: list(bytes.fromhex(row['color_rgb'][1:]))
-              for row in selection['registry_colors'][registry] if row['color_rgb'] is not None}
+    colors = {
+        row['entity_id']: list(bytes.fromhex(row['color_rgb'][1:]))
+        for row in selection['registry_colors'][registry]
+        if row['color_rgb'] is not None
+    }
     land_ids = {b['entity_id'] for b in bindings if b['physical_class'] == 'land'}
     if missing := sorted(land_ids - colors.keys()):
         raise ValueError(f'Saved colors are missing for land entities {missing}')
@@ -52,8 +56,12 @@ def release_categories(selection):
     for binding in sorted(bindings, key=lambda b: b['code']):
         entity_id = binding['entity_id']
         physical_class = binding['physical_class']
-        category = {'id': binding['code'], 'entity_id': entity_id, 'name': names[entity_id],
-                    'physical_class': physical_class}
+        category = {
+            'id': binding['code'],
+            'entity_id': entity_id,
+            'name': names[entity_id],
+            'physical_class': physical_class,
+        }
         if physical_class == 'land':
             category['rgb'] = colors[entity_id]
         categories.append(category)
@@ -62,10 +70,14 @@ def release_categories(selection):
 
 def build_bundle(candidate, run, viewer, bundle):
     report = read(run / 'report.json')
-    if (report.get('schema') != 'worldatlas-end-to-end-report-v1'
-            or report.get('status') != 'complete'
-            or any(not report['stages'].get(name, {}).get('outputs_complete')
-                   for name in ('physical', 'mainland', 'water', 'verification'))):
+    if (
+        report.get('schema') != 'worldatlas-end-to-end-report-v1'
+        or report.get('status') != 'complete'
+        or any(
+            not report['stages'].get(name, {}).get('outputs_complete')
+            for name in ('physical', 'mainland', 'water', 'verification')
+        )
+    ):
         raise ValueError('a completed map build is required')
     identity_pin = report['original_run_identity']
     if identity_pin != pin(run / 'run-identity.json'):
@@ -77,9 +89,13 @@ def build_bundle(candidate, run, viewer, bundle):
     final = report['final']
     verify_pins([request_pin, *final.values()])
     final_directory = Path(final['report']['path']).parent
-    for name, filename in (('rows', 'rows.u32le'), ('runs', 'runs.u32le'), ('report', 'report.json')):
+    for name, filename in (
+        ('rows', 'rows.u32le'),
+        ('runs', 'runs.u32le'),
+        ('report', 'report.json'),
+    ):
         path = Path(final[name]['path']).resolve(strict=True)
-        if (not path.is_relative_to(run.resolve()) or path != final_directory / filename):
+        if not path.is_relative_to(run.resolve()) or path != final_directory / filename:
             raise ValueError('expected final outputs together inside the build directory')
     selection = read_saved(run / 'input-selection.json')
     if hashlib.sha256(canonical_bytes(selection)).hexdigest() != identity['input_selection_sha256']:
@@ -88,6 +104,7 @@ def build_bundle(candidate, run, viewer, bundle):
     request = read(Path(request_pin['path']))
     summary = read(final_directory / 'report.json')
     from map_build.core.grid import Grid
+
     grid = vars(Grid(**summary['grid']))
     counts = summary['counts']
     if sum(counts.values()) != grid['width'] * grid['height']:
@@ -98,7 +115,9 @@ def build_bundle(candidate, run, viewer, bundle):
 
     for source in sorted(viewer.rglob('*')):
         rel = source.relative_to(viewer)
-        if source.is_symlink() or not all(re.fullmatch(r'[A-Za-z0-9_-][A-Za-z0-9_.-]*', part) for part in rel.parts):
+        if source.is_symlink() or not all(
+            re.fullmatch(r'[A-Za-z0-9_-][A-Za-z0-9_.-]*', part) for part in rel.parts
+        ):
             raise ValueError(f'invalid viewer asset path: {rel}')
         if source.is_dir() or source.suffix == '.md':
             continue
@@ -120,7 +139,8 @@ def build_bundle(candidate, run, viewer, bundle):
         raw = Path(final[stream]['path'])
         checksum = hashlib.sha256()
         with raw.open('rb') as src, output.open('xb') as dst, gzip.GzipFile(
-                filename='', fileobj=dst, mode='wb', mtime=0) as compressed:
+            filename='', fileobj=dst, mode='wb', mtime=0
+        ) as compressed:
             while chunk := src.read(4 << 20):
                 checksum.update(chunk)
                 combined.update(chunk)
@@ -136,36 +156,76 @@ def build_bundle(candidate, run, viewer, bundle):
     legend = {}
     for category in categories:
         entity_id = category['entity_id']
-        entry = legend.setdefault(entity_id, {
-            'id': entity_id, 'name': category['name'],
-            'color': viewer_config['water_rgb'], 'count': 0,
-        })
+        entry = legend.setdefault(
+            entity_id,
+            {
+                'id': entity_id,
+                'name': category['name'],
+                'color': viewer_config['water_rgb'],
+                'count': 0,
+            },
+        )
         entry['count'] += counts.get(str(category['id']), 0)
         if category['physical_class'] == 'land':
             entry['color'] = category['rgb']
     legend_path = bundle / 'legend' / 'continents.json'
     legend_path.parent.mkdir(exist_ok=True)
     legend_path.write_bytes(json_bytes(list(legend.values())))
-    viewer_config.update(width=grid['width'], height=grid['height'], step=grid['step'],
-                         map_version=version(candidate), local_grid=grid_config,
-                         combined_sha256=combined.hexdigest(), legend='legend/continents.json',
-                         categories=[{key: category[key] for key in ('id', 'entity_id', 'physical_class')}
-                                     for category in categories])
+    viewer_config.update(
+        width=grid['width'],
+        height=grid['height'],
+        step=grid['step'],
+        map_version=version(candidate),
+        local_grid=grid_config,
+        combined_sha256=combined.hexdigest(),
+        legend='legend/continents.json',
+        categories=[
+            {key: category[key] for key in ('id', 'entity_id', 'physical_class')}
+            for category in categories
+        ],
+    )
     config.write_bytes(json_bytes(viewer_config))
 
-    inputs = {'configuration': request, 'run': identity, 'selection': selection,
-              'report_sha256': digest(run / 'report.json')}
+    selection_name = 'inputs/selection.json.gz'
+    selection_path = bundle / selection_name
+    selection_path.parent.mkdir()
+    with selection_path.open('xb') as output, gzip.GzipFile(
+        filename='', fileobj=output, mode='wb', mtime=0, compresslevel=6
+    ) as compressed, io.TextIOWrapper(compressed, encoding='utf-8', newline='\n') as text:
+        json.dump(
+            selection,
+            text,
+            sort_keys=True,
+            separators=(',', ':'),
+            ensure_ascii=False,
+            allow_nan=False,
+        )
+        text.write('\n')
+    inputs = {
+        'configuration': request,
+        'run': identity,
+        'selection': {
+            'object': selection_name,
+            'decoded_sha256': identity['input_selection_sha256'],
+        },
+        'report_sha256': digest(run / 'report.json'),
+    }
     if report['comparison']:
         verify_pins([report['comparison']])
         inputs['comparison'] = read(Path(report['comparison']['path']))
 
     objects = {
         path.relative_to(bundle).as_posix(): {
-            'sha256': digest(path), 'size_bytes': path.stat().st_size,
-            'content_type': 'application/gzip' if path.suffix == '.gz' else
-                            mimetypes.guess_type(path.name)[0] or 'application/octet-stream',
+            'sha256': digest(path),
+            'size_bytes': path.stat().st_size,
+            'content_type': (
+                'application/gzip'
+                if path.suffix == '.gz'
+                else mimetypes.guess_type(path.name)[0] or 'application/octet-stream'
+            ),
         }
-        for path in sorted(bundle.rglob('*')) if path.is_file()
+        for path in sorted(bundle.rglob('*'))
+        if path.is_file()
     }
     return {'inputs': inputs, 'decoded_sha256': decoded, 'objects': objects}
 
@@ -191,8 +251,13 @@ def upload_bundle(storage, bucket, candidate, bundle, manifest):
         key = f'{prefix(candidate)}/{name}'
         with (bundle / name).open('rb') as body:
             try:
-                storage.put_object(Bucket=bucket, Key=key, Body=body, IfNoneMatch='*',
-                                   ContentType=asset['content_type'])
+                storage.put_object(
+                    Bucket=bucket,
+                    Key=key,
+                    Body=body,
+                    IfNoneMatch='*',
+                    ContentType=asset['content_type'],
+                )
             except ClientError as exc:
                 if exc.response['ResponseMetadata']['HTTPStatusCode'] != 412:
                     raise
@@ -200,8 +265,14 @@ def upload_bundle(storage, bucket, candidate, bundle, manifest):
 
 
 def put_homepage(storage, bucket, key, html, **condition):
-    storage.put_object(Bucket=bucket, Key=key, Body=html,
-                       ContentType='text/html', CacheControl='no-cache', **condition)
+    storage.put_object(
+        Bucket=bucket,
+        Key=key,
+        Body=html,
+        ContentType='text/html',
+        CacheControl='no-cache',
+        **condition,
+    )
 
 
 def homepage_condition(storage, bucket):
@@ -226,8 +297,10 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
         raise ValueError('that candidate already exists with different contents')
     upload_bundle(storage, bucket, candidate, bundle, manifest)
     if row is None:
-        db.execute('INSERT INTO atlas.map_release_candidates (candidate_id,r2_bucket,manifest) VALUES (%s,%s,%s)',
-                   (candidate, bucket, Jsonb(manifest)))
+        db.execute(
+            'INSERT INTO atlas.map_release_candidates (candidate_id,r2_bucket,manifest) VALUES (%s,%s,%s)',
+            (candidate, bucket, Jsonb(manifest)),
+        )
 
 
 def approve(db, candidate, reviewer):
@@ -245,7 +318,8 @@ def approve(db, candidate, reviewer):
 def publish(db, storage, candidate):
     row = db.execute(
         'SELECT map_version,r2_bucket,manifest FROM atlas.map_release_candidates '
-        'WHERE candidate_id=%s AND approved_at IS NOT NULL', (candidate,),
+        'WHERE candidate_id=%s AND approved_at IS NOT NULL',
+        (candidate,),
     ).fetchone()
     if row is None:
         raise ValueError('approve this exact candidate before publishing')
@@ -255,19 +329,35 @@ def publish(db, storage, candidate):
     for stream in STREAMS:
         name = f'{stream}.u32le.gz'
         asset = manifest['objects'][name]
-        expected.append((map_version, stream, bucket, f'{prefix(candidate)}/{name}',
-                         asset['size_bytes'], asset['sha256'], manifest['decoded_sha256'][stream], candidate))
+        expected.append(
+            (
+                map_version,
+                stream,
+                bucket,
+                f'{prefix(candidate)}/{name}',
+                asset['size_bytes'],
+                asset['sha256'],
+                manifest['decoded_sha256'][stream],
+                candidate,
+            )
+        )
     with db.transaction():
         rows = db.execute(
             'SELECT map_version,stream,r2_bucket,r2_key,size_bytes,stored_sha256,decoded_sha256,candidate_id '
-            'FROM atlas.map_release_objects WHERE map_version=%s ORDER BY stream', (map_version,),
+            'FROM atlas.map_release_objects WHERE map_version=%s ORDER BY stream',
+            (map_version,),
         ).fetchall()
         if rows and rows != expected:
             raise ValueError('this map version already points to a different release')
         html = None
         for name, asset in manifest['objects'].items():
-            data = verify_object(storage, bucket, f'{prefix(candidate)}/{name}', asset,
-                                 return_bytes=name == 'index.html')
+            data = verify_object(
+                storage,
+                bucket,
+                f'{prefix(candidate)}/{name}',
+                asset,
+                return_bytes=name == 'index.html',
+            )
             if name == 'index.html':
                 html = data
         if not rows:
@@ -275,7 +365,8 @@ def publish(db, storage, candidate):
                 db.execute(
                     'INSERT INTO atlas.map_release_objects '
                     '(map_version,stream,r2_bucket,r2_key,size_bytes,stored_sha256,decoded_sha256,candidate_id) '
-                    'VALUES (%s,%s,%s,%s,%s,%s,%s,%s)', entry,
+                    'VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                    entry,
                 )
     # This single write is the switch. A failed write can be retried using the same candidate.
     put_homepage(storage, bucket, HOMEPAGE, html, **condition)
@@ -309,15 +400,20 @@ def main():
         bundle = Path(temp)
         with psycopg.connect(connection, autocommit=True) as db:
             if args.action == 'stage':
-                manifest = build_bundle(args.candidate, args.run.resolve(), args.viewer.resolve(), bundle)
+                manifest = build_bundle(
+                    args.candidate, args.run.resolve(), args.viewer.resolve(), bundle
+                )
             db.execute("SELECT pg_advisory_lock(hashtext('atlas.release_publication'))")
             if args.action == 'approve':
                 approve(db, args.candidate, args.reviewer)
                 print(f'Approved {args.candidate}')
                 return
             from map_build.physical import build as physical
+
             if args.action == 'stage':
-                endpoint = manifest['inputs']['configuration']['physical_controls']['source_staging']['endpoint_url']
+                endpoint = manifest['inputs']['configuration']['physical_controls'][
+                    'source_staging'
+                ]['endpoint_url']
             else:
                 row = db.execute(
                     "SELECT manifest#>>'{inputs,configuration,physical_controls,source_staging,endpoint_url}' "
