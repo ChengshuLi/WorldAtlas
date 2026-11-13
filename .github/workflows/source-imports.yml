@@ -1,18 +1,36 @@
-name: Source imports
+name: Checks
 on:
   pull_request:
-    paths:
-      - 'environment.yml'
-      - 'scripts/source-imports/**'
-      - 'scripts/map-build/**'
-      - 'scripts/map-releases/**'
-      - 'database/migrations/001_initial_schema.sql'
-      - 'database/upgrades/**'
-      - '.github/workflows/source-imports.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      python: ${{ steps.paths.outputs.python }}
+      web: ${{ steps.paths.outputs.web }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+      - id: paths
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          python3 - <<'PY'
+          import os, subprocess
+          from pathlib import Path
+          paths = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD^', 'HEAD'], text=True).splitlines()
+          all_checks = os.environ['EVENT'] == 'workflow_dispatch' or any(p.startswith('.github/workflows/') for p in paths)
+          python = all_checks or any(p == 'environment.yml' or p.startswith(('scripts/', 'database/')) and not p.endswith('.md') or p == 'web/viewer/config.json' for p in paths)
+          web = all_checks or any(p.startswith(('web/', 'scripts/map-releases/')) and not p.endswith('.md') or p in ('package.json', 'package-lock.json', 'wrangler.jsonc') for p in paths)
+          with Path(os.environ['GITHUB_OUTPUT']).open('a') as output:
+              output.write(f'python={str(python).lower()}\nweb={str(web).lower()}\n')
+          PY
   test:
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -42,6 +60,9 @@ jobs:
             -o "-k $database_dir -p 5432 -c listen_addresses=''" -w start
           psql -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 \
             -f database/migrations/001_initial_schema.sql
+          for check in database/tests/*.sql; do
+            psql -Xq -h "$database_dir" -U postgres -v ON_ERROR_STOP=1 -f "$check"
+          done
           export WORLDATLAS_TEST_DATABASE_URL="postgresql://postgres@/postgres?host=$database_dir"
           time python -m unittest discover -s scripts/source-imports -p 'test_*.py'
           time python -m unittest discover -s scripts/map-build/map_build -t scripts/map-build
@@ -51,3 +72,17 @@ jobs:
           PROJ_NETWORK: 'OFF'
           PYTHONPATH: scripts/map-build
         run: time python -m unittest discover -s scripts/map-releases -p 'test_*.py'
+  website:
+    needs: changes
+    if: needs.changes.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npx playwright install --with-deps chromium --only-shell
+      - run: npm run test:browser

@@ -65,10 +65,16 @@ The command reads the record from `atlas.structured_documents`. Its JSON
 | `s130_areas` | `features.build_features` with `iho.areas` |
 
 The record ID identifies data; its name does not select Python code.
-OSM, IHO and watershed imports additionally require `--revision`,
+All file-backed imports additionally require `--revision`,
 `--r2-endpoint` and `--work-dir`. Traced boundaries need only the record ID and
 version. Set `NEON_DATABASE_URL` and any required AWS profile outside the code.
 A supplied work directory also receives a JSON receipt after a successful run.
+
+Use the [database queries](../../database/README.md#find-the-selected-construction)
+to find the construction ID/version selected by an editable record. Use that
+reference rather than assuming that the largest version number is selected.
+The destination revision is the record's revision, also selected by the map
+configuration. Import changed source geometry first, then run map building.
 
 For example, the Lydekker construction record can be run with:
 

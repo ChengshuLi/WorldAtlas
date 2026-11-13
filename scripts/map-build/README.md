@@ -25,9 +25,37 @@ For identical physical inputs, add
 existing physical grid and reuses it. Geographic decision edits then require
 land and water assignment, without another physical rasterization.
 
-For consistent physical rasterization, use GDAL 3.10.3 and PROJ 9.6.0. Build GDAL
-with `-ffp-contract=off` in both `CMAKE_C_FLAGS` and `CMAKE_CXX_FLAGS`; its Python
-bindings must load that library.
+### Exact physical rasterization
+
+The project environment provides GDAL 3.10.3, its Python bindings and PROJ 9.6.0.
+For byte-identical physical rasterization, build that GDAL library with
+`-ffp-contract=off`. A stock prebuilt library may round a raster boundary
+differently. Use a C/C++ compiler and Git, then run this once inside the project
+environment, choosing an absolute work directory:
+
+```bash
+export WORLDATLAS_WORK=/absolute/path/to/worldatlas-work
+mkdir -p "$WORLDATLAS_WORK/runtime"
+git clone --depth 1 --branch v3.10.3 https://github.com/OSGeo/gdal.git \
+  "$WORLDATLAS_WORK/runtime/gdal-source"
+cmake -S "$WORLDATLAS_WORK/runtime/gdal-source" \
+  -B "$WORLDATLAS_WORK/runtime/gdal-build" \
+  -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$CONDA_PREFIX" \
+  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_INSTALL_LIBDIR=lib \
+  -DCMAKE_INSTALL_RPATH="$CONDA_PREFIX/lib" \
+  -DCMAKE_C_FLAGS=-ffp-contract=off -DCMAKE_CXX_FLAGS=-ffp-contract=off \
+  -DBUILD_TESTING=OFF -DBUILD_APPS=OFF \
+  -DBUILD_PYTHON_BINDINGS=OFF -DBUILD_JAVA_BINDINGS=OFF -DBUILD_CSHARP_BINDINGS=OFF
+cmake --build "$WORLDATLAS_WORK/runtime/gdal-build" --parallel
+cmake --install "$WORLDATLAS_WORK/runtime/gdal-build"
+python3 -c 'from osgeo import gdal; print(gdal.VersionInfo("RELEASE_NAME"))'
+```
+
+This replaces the environment's native GDAL library; its existing Python
+bindings use the same ABI. Do not point `DYLD_LIBRARY_PATH`, `LD_LIBRARY_PATH`,
+or `PROJ_DATA` at a different installation. Reinstalling the Conda GDAL package
+replaces this custom build. See the [GDAL build guide](https://gdal.org/en/stable/development/building_from_source.html).
+Verified physical outputs can instead be reused with `--physical-from`.
 
 ## Inputs and stages
 

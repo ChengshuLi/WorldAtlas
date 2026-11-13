@@ -14,6 +14,33 @@ The root [`environment.yml`](environment.yml) defines the shared Python
 environment. It covers source imports, map building and their tests. Website dependencies
 are managed separately in [`package.json`](package.json).
 
+Install [Micromamba](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html),
+then create the environment and enter a shell using it:
+
+```bash
+micromamba create -y -n worldatlas -f environment.yml
+micromamba run -n worldatlas bash
+```
+
+Run the commands below from the repository root in that shell. For exact
+physical-grid reproduction, complete the [GDAL setup](scripts/map-build/README.md#exact-physical-rasterization).
+
+Set `NEON_DATABASE_URL` to the direct connection URL for the existing working
+`worldatlas` database. The [database guide](database/README.md) explains how to
+identify the working branch and inspect its construction records.
+For R2, reuse the `worldatlas-r2` profile in `~/.aws/credentials`, or set
+`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. With the profile:
+
+```bash
+export AWS_PROFILE=worldatlas-r2
+export PROJ_NETWORK=OFF
+export PYTHONPATH="$PWD/scripts/source-imports:$PWD/scripts/map-build"
+```
+
+Set the database URL in your shell or secret manager. Credentials stay outside
+GitHub and Neon construction records. Connector logins are separate from the
+credentials used by these Python commands.
+
 - [Import source geography](scripts/source-imports/) from raw sources. These tools reconstruct and verify boundary geometry and other inputs for review and registration in Neon.
 - [Build the map](scripts/map-build/README.md) from selected Neon records and the raw R2 inputs the build reads directly. This includes the physical land and water grid, land and water assignment, and final composition.
 
@@ -63,9 +90,9 @@ IDs and colors, revisioned names and parent relationships, and the bindings from
 category codes to entities. Use the registry revision selected by the
 decision snapshot.
 
-Apply the [database migrations](database/migrations/) in order to an empty
-database. Load the source catalog, editable decisions, entity colors, and
-release records separately.
+Apply the [initial schema](database/migrations/) only to an empty database.
+The working database is already initialized. The [database guide](database/README.md)
+covers existing-database upgrades and loading data separately from the schema.
 Run the [database tests](database/tests/) with `bash database/tests/run.sh`.
 Have PostgreSQL's `initdb`, `pg_ctl`, and `psql` on your path. The runner starts
 a temporary local database, installs the schema, and runs the database checks.
@@ -81,3 +108,14 @@ npm test
 ```
 
 The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
+
+## Continuous integration
+
+All automated test suites are included in [Checks](.github/workflows/source-imports.yml).
+Source-import, map-build, environment, or database changes run Python and SQL
+tests on macOS and Linux. Release-command changes also run website tests.
+Website, Node dependency, or Worker changes run Node and Chromium browser tests
+on Linux; viewer configuration changes also run Python packaging tests.
+Workflow changes and a manual run select every suite. Documentation-only changes
+skip the runtime suites. CI uses local fixtures and disposable databases, with no
+cloud credentials. Full-size builds and geographic review remain separate.

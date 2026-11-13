@@ -12,7 +12,7 @@ python3 scripts/map-releases/manage_release.py stage v9.0-rc1 \
   /absolute/path/to/worldatlas-work/runs/preview --viewer web/viewer
 ```
 
-The preview appears at `/review/releases/v9.0-rc1/`. The homepage continues to
+The preview appears at `/review/releases/v9.0-rc1/index.html`. The homepage continues to
 serve the published release. Use a new candidate number for changed contents.
 
 The bundle contains the viewer, compressed map streams, generated configuration

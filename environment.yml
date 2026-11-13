@@ -1,4 +1,4 @@
-# Shared project Python environment; extend as the remaining pipeline is reviewed.
+# Shared source-import, map-build, release and database-test environment.
 name: worldatlas
 channels:
   - conda-forge
@@ -9,6 +9,7 @@ dependencies:
   - pyproj=3.7.1
   - geos=3.13.1
   - postgresql=17.5
+  - cmake=4.4.3
   - pip
   - pip:
       - numpy==2.5.4

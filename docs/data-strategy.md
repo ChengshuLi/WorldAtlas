@@ -38,10 +38,10 @@ This document describes the design for the full project. The [pipeline guide](..
 Geography and historical attributes use three kinds of records.
 
 1. **Evidence** retains original sources, conflicting claims, and their links to conclusions. Store original files of any size in R2. Neon records their references, dates, and checksums.
-2. **Research** stores versioned geometry, values, reasoning, provenance, and review state.
-3. **Published data** exposes only accepted records to the app.
+2. **Editable data** stores geometry, values, reasoning and provenance in Neon. Versioned construction records describe how to regenerate source-derived geography.
+3. **Published releases** contain the reviewed map, viewer and metadata for an exact saved input selection.
 
-The same database can serve these roles. Drafts stay out of the app. Keep the accepted revision visible while a replacement is validated and reviewed. Accept the replacement and make it visible in one operation.
+Workers can edit separate areas in parallel. Those edits do not change the published website, which reads immutable release files from R2. Build a numbered candidate, review its exact files and inputs, then publish those same files. Approval belongs to the candidate; individual editable records do not need a separate draft/accepted workflow.
 
 GitHub tracks code, schemas, documentation, and task issues. The user merges pull requests.
 
