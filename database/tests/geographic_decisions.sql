@@ -4,8 +4,8 @@ DO $$ BEGIN
  INSERT INTO atlas.entity_registry_revisions(revision) VALUES ('__decisions'),('__other');
  INSERT INTO atlas.geographic_entity_ids(id) VALUES(7) ON CONFLICT DO NOTHING;
  INSERT INTO atlas.geographic_entities(revision,id,name,level) VALUES ('__decisions',7,'Entity','continent'),('__other',7,'Other revision','continent');
- INSERT INTO atlas.source_assets(source_id,version,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance)
- VALUES ('__decision_source','1','Test','Provider','test:source','Terms','test:terms','Credit','test','source',repeat('a',64),1,'{}');
+ INSERT INTO atlas.source_assets(source_id,version,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes)
+ VALUES ('__decision_source','1','Test','Provider','test:source','Terms','test:terms','Credit','test','source',repeat('a',64),1);
  INSERT INTO atlas.decision_revisions VALUES ('__decisions','__decisions','{}');
  BEGIN
   INSERT INTO atlas.decision_features(revision,feature_id,source_id,source_version,source_feature_id,geometry_sha256,evidence)

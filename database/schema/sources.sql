@@ -13,12 +13,10 @@ CREATE TABLE atlas.source_assets (
     r2_key text NOT NULL,
     sha256 text NOT NULL,
     size_bytes bigint NOT NULL,
-    provenance jsonb NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     CONSTRAINT source_assets_attribution_check CHECK ((length(TRIM(BOTH FROM attribution)) > 0)),
     CONSTRAINT source_assets_license_name_check CHECK ((length(TRIM(BOTH FROM license_name)) > 0)),
     CONSTRAINT source_assets_license_uri_check CHECK ((length(TRIM(BOTH FROM license_uri)) > 0)),
-    CONSTRAINT source_assets_provenance_check CHECK ((jsonb_typeof(provenance) = 'object'::text)),
     CONSTRAINT source_assets_provider_check CHECK ((length(TRIM(BOTH FROM provider)) > 0)),
     CONSTRAINT source_assets_r2_bucket_check CHECK ((length(TRIM(BOTH FROM r2_bucket)) > 0)),
     CONSTRAINT source_assets_r2_key_check CHECK ((length(TRIM(BOTH FROM r2_key)) > 0)),
@@ -37,9 +35,9 @@ CREATE FUNCTION atlas.guard_source_identity() RETURNS trigger
     AS $$
 BEGIN
  IF (NEW.source_id,NEW.version,NEW.r2_bucket,NEW.r2_key,NEW.sha256,NEW.size_bytes,
-     NEW.source_uri,NEW.provenance,NEW.created_at) IS DISTINCT FROM
+     NEW.source_uri,NEW.created_at) IS DISTINCT FROM
     (OLD.source_id,OLD.version,OLD.r2_bucket,OLD.r2_key,OLD.sha256,OLD.size_bytes,
-     OLD.source_uri,OLD.provenance,OLD.created_at) THEN
+     OLD.source_uri,OLD.created_at) THEN
   RAISE EXCEPTION 'source identity and captured bytes are immutable; use a new source version';
  END IF;
  RETURN NEW;

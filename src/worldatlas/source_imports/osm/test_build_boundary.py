@@ -59,9 +59,9 @@ class DatabaseTest(unittest.TestCase):
             self.database.execute(
                 "INSERT INTO atlas.source_assets "
                 "(source_id,version,title,provider,source_uri,license_name,license_uri,"
-                "attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
+                "attribution,r2_bucket,r2_key,sha256,size_bytes) "
                 "VALUES ('osm-test',%s,'Test','Test','test:source','Test','test:license',"
-                "'Test','test',%s,%s,%s,'{\"origin\":\"test:source\",\"representation\":\"provider_original_bundle\"}')",
+                "'Test','test',%s,%s,%s)",
                 (version, version + '.zip', source['sha256'], source['size_bytes']),
             )
         self.recipe = self.add_recipe('1')
@@ -226,9 +226,9 @@ class DatabaseTest(unittest.TestCase):
         self.database.execute(
             'INSERT INTO atlas.source_assets '
             '(source_id,version,title,provider,source_uri,license_name,license_uri,'
-            'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+            'attribution,r2_bucket,r2_key,sha256,size_bytes) '
             "SELECT source_id,'crossing',title,provider,source_uri,license_name,license_uri,"
-            "attribution,r2_bucket,'crossing.zip',%s,%s,provenance FROM atlas.source_assets "
+            "attribution,r2_bucket,'crossing.zip',%s,%s FROM atlas.source_assets "
             "WHERE source_id='osm-test' AND version='1'",
             (source['sha256'], source['size_bytes']))
         self.add_recipe('crossing', source_version='crossing')

@@ -251,9 +251,9 @@ class StorageTests(unittest.TestCase):
             raw = path.read_bytes()
             self.db.execute(
                 "INSERT INTO atlas.source_assets (source_id,version,title,provider,source_uri,"
-                "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
+                "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
                 "VALUES (%s,'1','Test','Test','test:input','Test','test:license','Test','test',"
-                "%s,%s,%s,'{\"origin\":\"test:input\",\"representation\":\"provider_original\"}')",
+                "%s,%s,%s)",
                 ('__watershed_' + name, path.name, hashlib.sha256(raw).hexdigest(), len(raw)))
         self.store_recipe('1', self.recipe)
         self.client = Mock()
@@ -344,9 +344,9 @@ class StorageTests(unittest.TestCase):
     def test_supporting_sources_are_linked_without_being_downloaded(self):
         self.db.execute(
             "INSERT INTO atlas.source_assets (source_id,version,title,provider,source_uri,"
-            "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) "
+            "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
             "SELECT source_id,'evidence',title,provider,source_uri,license_name,license_uri,"
-            "attribution,r2_bucket,r2_key||'-evidence',sha256,size_bytes,provenance "
+            "attribution,r2_bucket,r2_key||'-evidence',sha256,size_bytes "
             "FROM atlas.source_assets WHERE source_id='__watershed_dem' AND version='1'")
         recipe = dict(self.recipe, evidence_sources=[{'source_id': '__watershed_dem', 'version': 'evidence'}])
         self.store_recipe('with-evidence', recipe)

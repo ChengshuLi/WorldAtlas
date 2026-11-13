@@ -10,8 +10,8 @@ BEGIN
     INSERT INTO atlas.decision_revisions(revision,entity_revision,evidence)
       VALUES ('__boundary_decisions','__boundary_entities','{}');
     INSERT INTO atlas.source_assets
-      (source_id,version,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,provenance)
-      VALUES ('__boundary_source','1','Test','Test','test:source','Test','test:license','Test','test','boundary',repeat('b',64),1,'{}');
+      (source_id,version,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes)
+      VALUES ('__boundary_source','1','Test','Test','test:source','Test','test:license','Test','test','boundary',repeat('b',64),1);
     INSERT INTO atlas.decision_mainland_boundaries(revision,boundary_id,geometry,geometry_sha256,coordinate_reference,provenance) VALUES
       ('__boundary_decisions','line',line,line_hash,'OGC:CRS84','{}');
     BEGIN

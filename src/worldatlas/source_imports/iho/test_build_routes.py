@@ -46,9 +46,9 @@ class BuildTests(unittest.TestCase):
         self.database.execute(
             'INSERT INTO atlas.source_assets '
             '(source_id,version,title,provider,source_uri,license_name,license_uri,'
-            'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+            'attribution,r2_bucket,r2_key,sha256,size_bytes) '
             "VALUES ('iho-test',%s,'Test','Test','test:source','Test','test:license',"
-            "'Test','test',%s,%s,%s,'{}')",
+            "'Test','test',%s,%s,%s)",
             (version, version + '.zip', hashlib.sha256(raw).hexdigest(), len(raw)),
         )
         text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))

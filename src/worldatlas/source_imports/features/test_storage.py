@@ -34,9 +34,9 @@ class StorageTests(unittest.TestCase):
         self.database.execute(
             'INSERT INTO atlas.source_assets '
             '(source_id,version,title,provider,source_uri,license_name,license_uri,'
-            'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+            'attribution,r2_bucket,r2_key,sha256,size_bytes) '
             "VALUES ('__feature_raw','1','Test','Test','test:source','Test','test:license',"
-            "'Test','test','source.geojson',%s,%s,'{}')", (hashlib.sha256(raw).hexdigest(), len(raw)))
+            "'Test','test','source.geojson',%s,%s)", (hashlib.sha256(raw).hexdigest(), len(raw)))
         self.register('1')
         self.storage = Mock()
         self.storage.get_object.side_effect = lambda **_: {'Body': io.BytesIO(raw)}
@@ -104,9 +104,9 @@ class StorageTests(unittest.TestCase):
         raw = b'provider_id,name,longitude,latitude\na,First,-20.25,11.5\n'
         self.database.execute('INSERT INTO atlas.source_assets '
                               '(source_id,version,title,provider,source_uri,license_name,license_uri,'
-                              'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+                              'attribution,r2_bucket,r2_key,sha256,size_bytes) '
                               "SELECT source_id,'2',title,provider,source_uri,license_name,license_uri,"
-                              'attribution,r2_bucket,%s,%s,%s,provenance FROM atlas.source_assets '
+                              'attribution,r2_bucket,%s,%s,%s FROM atlas.source_assets '
                               'WHERE source_id=%s AND version=%s',
                               ('source.csv', hashlib.sha256(raw).hexdigest(), len(raw), '__feature_raw', '1'))
         self.storage.get_object.side_effect = lambda **_: {'Body': io.BytesIO(raw)}
@@ -145,9 +145,9 @@ class StorageTests(unittest.TestCase):
                 self.database.execute(
                     'INSERT INTO atlas.source_assets '
                     '(source_id,version,title,provider,source_uri,license_name,license_uri,'
-                    'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+                    'attribution,r2_bucket,r2_key,sha256,size_bytes) '
                     'SELECT source_id,%s,title,provider,source_uri,license_name,license_uri,'
-                    'attribution,r2_bucket,%s,%s,%s,provenance FROM atlas.source_assets '
+                    'attribution,r2_bucket,%s,%s,%s FROM atlas.source_assets '
                     'WHERE source_id=%s AND version=%s',
                     (method, 'zero.' + suffix, hashlib.sha256(raw).hexdigest(), len(raw), '__feature_raw', '1'))
                 self.recipe.update(method=method, source_version=method)

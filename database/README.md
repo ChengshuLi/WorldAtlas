@@ -41,12 +41,19 @@ records, or load new records through the supported source-import workflow.
 
 Update the relevant schema definition. When an existing database needs an
 upgrade, put the explicit change under `database/migrations/` in the same PR.
-Create that directory when the first upgrade is needed. Preserve applied upgrade
-scripts rather than editing their meaning afterward.
+Preserve applied upgrade scripts rather than editing their meaning afterward.
 
 Test the upgrade against a disposable copy of working data before applying it.
 Check that upgrading and creating a fresh database produce the same intended
 structure. Schema upgrades stay separate from geographic data imports.
+
+Existing databases that still have `source_assets.provenance` can apply
+[`001_remove_source_provenance.sql`](migrations/001_remove_source_provenance.sql)
+after backing up the source catalog. Fresh databases already omit this column:
+
+```bash
+psql "$NEON_DATABASE_URL" -X -v ON_ERROR_STOP=1 -f database/migrations/001_remove_source_provenance.sql
+```
 
 Backups must retain exact document text: reformatting a construction document
 would invalidate its byte checksum. Retain original contributing records and
@@ -108,6 +115,6 @@ the previous record intact. Original supporting
 observations can remain without an automatic constructor.
 
 Working decisions are editable directly. Publication approval applies to an
-exact release bundle. Raw-file identities and capture provenance remain
-immutable; source titles and credit descriptions can be corrected without
-uploading duplicate bytes.
+exact release bundle. Raw-file identities remain immutable. Source titles and
+credit descriptions can be corrected without uploading duplicate bytes. The raw
+catalog has no catch-all metadata column. Construction settings belong in versioned construction records.

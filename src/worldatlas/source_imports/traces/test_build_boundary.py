@@ -18,9 +18,9 @@ class DatabaseTests(unittest.TestCase):
         self.database.execute(
             'INSERT INTO atlas.source_assets '
             '(source_id,version,title,provider,source_uri,license_name,license_uri,'
-            'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+            'attribution,r2_bucket,r2_key,sha256,size_bytes) '
             "VALUES ('__trace_source','1','Test','Test','test:source','Test','test:license',"
-            "'Test','test','figure.pdf',%s,10,'{}')", ('a' * 64,))
+            "'Test','test','figure.pdf',%s,10)", ('a' * 64,))
         self.recipe = dict(method='smooth_latitude_trace', source_id='__trace_source', source_version='1',
                            line_id='__trace_final', basis='Reviewed points from the source figure.',
                            points=[[10., 1.], [9., 0.], [8., -1.]],

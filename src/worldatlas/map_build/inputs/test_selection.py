@@ -210,9 +210,9 @@ class SelectionTests(unittest.TestCase):
                     self.writer.execute(
                         'INSERT INTO atlas.source_assets '
                         '(source_id,version,title,provider,source_uri,license_name,license_uri,'
-                        'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+                        'attribution,r2_bucket,r2_key,sha256,size_bytes) '
                         "VALUES (%s,'1','Test','Test','test:source','Test','test:license',"
-                        "'Test','test',%s,%s,1,'{}')",
+                        "'Test','test',%s,%s,1)",
                         (ident, ident + '.json', 'a' * 64),
                     )
                 geometry = dict(type='LineString', coordinates=[[0, 1], [0, -1]])
@@ -264,9 +264,9 @@ class SelectionTests(unittest.TestCase):
         self.writer.execute(
             'INSERT INTO atlas.source_assets '
             '(source_id,version,title,provider,source_uri,license_name,license_uri,'
-            'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
+            'attribution,r2_bucket,r2_key,sha256,size_bytes) '
             "VALUES ('__selection_raw','1','Test','Test','test:source','Test','test:license',"
-            "'Test','test','source.geojson',%s,1,'{}')",
+            "'Test','test','source.geojson',%s,1)",
             ('a' * 64,),
         )
         try:
