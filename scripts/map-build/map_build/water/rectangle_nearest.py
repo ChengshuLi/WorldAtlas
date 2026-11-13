@@ -3,6 +3,7 @@
 The mask is only a selection, never a source of previous labels. Rectangles
 share proofs across rows; uncertain cells use the complete point classifier.
 """
+
 import math
 import numpy as np
 from map_build.water import shared_nearest as s
@@ -11,41 +12,93 @@ from map_build.water.interval_nearest import exact_certificate_possible
 MAX_RADIUS = s.A / (1 - s.F)
 
 
-def classify(water, x0, y0, bounds, width, height, step, pairs, tolerance,
-             indexes, point_classifier, block=64, *, band=None, band_tolerance=0.):
+def classify(
+    water,
+    x0,
+    y0,
+    bounds,
+    width,
+    height,
+    step,
+    pairs,
+    tolerance,
+    indexes,
+    point_classifier,
+    block=64,
+    *,
+    band=None,
+    band_tolerance=0.0
+):
     water = np.asarray(water)
     if water.ndim != 2 or water.dtype != np.bool_:
         raise ValueError('boolean selection grid required')
-    if (not isinstance(pairs, (list, tuple)) or len(pairs) < (2 if band is None else 0)
-            or any(not isinstance(p, (list, tuple)) or len(p) != 3
-                   or type(p[1]) is not int or type(p[2]) is not int for p in pairs)
-            or len({p[1] for p in pairs}) != len(pairs) or len({p[2] for p in pairs}) != len(pairs)):
+    if (
+        not isinstance(pairs, (list, tuple))
+        or len(pairs) < (2 if band is None else 0)
+        or any(
+            not isinstance(p, (list, tuple))
+            or len(p) != 3
+            or type(p[1]) is not int
+            or type(p[2]) is not int
+            for p in pairs
+        )
+        or len({p[1] for p in pairs}) != len(pairs)
+        or len({p[2] for p in pairs}) != len(pairs)
+    ):
         raise ValueError('invalid participant classes')
     nr, nc = water.shape
-    if (any(type(v) is not int for v in (x0, y0, width, height, block))
-            or not (width > 0 and height > 0 and block > 0
-                    and 0 <= x0 <= x0 + nc <= width and 0 <= y0 <= y0 + nr <= height)
-            or isinstance(step, (bool, np.bool_)) or isinstance(tolerance, (bool, np.bool_))
-            or not math.isfinite(step) or step <= 0 or abs(step * width - 360) > 1e-8
-            or not math.isfinite(tolerance) or tolerance < 0 or not callable(point_classifier)):
+    if (
+        any(type(v) is not int for v in (x0, y0, width, height, block))
+        or not (
+            width > 0
+            and height > 0
+            and block > 0
+            and 0 <= x0 <= x0 + nc <= width
+            and 0 <= y0 <= y0 + nr <= height
+        )
+        or isinstance(step, (bool, np.bool_))
+        or isinstance(tolerance, (bool, np.bool_))
+        or not math.isfinite(step)
+        or step <= 0
+        or abs(step * width - 360) > 1e-8
+        or not math.isfinite(tolerance)
+        or tolerance < 0
+        or not callable(point_classifier)
+    ):
         raise ValueError('invalid grid or classifier')
-    if band is not None and (not math.isfinite(band) or band < 0 or not math.isfinite(band_tolerance) or band_tolerance < 0):
+    if band is not None and (
+        not math.isfinite(band)
+        or band < 0
+        or not math.isfinite(band_tolerance)
+        or band_tolerance < 0
+    ):
         raise ValueError('invalid coastal band')
     threshold = None if band is None else band + band_tolerance
-    if not isinstance(bounds, (list, tuple)) or len(bounds) != 4 or any(type(v) is not int for v in bounds):
+    if (
+        not isinstance(bounds, (list, tuple))
+        or len(bounds) != 4
+        or any(type(v) is not int for v in bounds)
+    ):
         raise ValueError('invalid crop')
     xa, xb, ya, yb = bounds
     if not (0 < xb - xa <= width and 0 <= ya < yb <= height):
         raise ValueError('invalid crop')
-    if nr and 90 - (y0 + nr - .5) * step < -90:
+    if nr and 90 - (y0 + nr - 0.5) * step < -90:
         raise ValueError('query latitude outside globe')
     output = np.zeros(water.shape, dtype=np.uint32)
     total = int(water.sum())
-    stats = {'certified_cells': 0, 'leaf_cells': 0, 'bounded_cells': 0,
-             'exact_cells': 0, 'exact_rectangle_probes': 0}
+    stats = {
+        'certified_cells': 0,
+        'leaf_cells': 0,
+        'bounded_cells': 0,
+        'exact_cells': 0,
+        'exact_rectangle_probes': 0,
+    }
     if not total:
         return output, stats
-    sat = np.pad(water.cumsum(axis=0, dtype=np.int64).cumsum(axis=1, dtype=np.int64), ((1, 0), (1, 0)))
+    sat = np.pad(
+        water.cumsum(axis=0, dtype=np.int64).cumsum(axis=1, dtype=np.int64), ((1, 0), (1, 0))
+    )
 
     def wet(a, b, c, d):
         return sat[b, d] - sat[a, d] - sat[b, c] + sat[a, c]
@@ -66,29 +119,51 @@ def classify(water, x0, y0, bounds, width, height, step, pairs, tolerance,
         # Integrating the straight lat/lon segment bounds its ellipsoidal
         # length by this maximum metric norm. A geodesic is no longer.
         closest = np.maximum(0, np.abs(lat) - half_lat)
-        radius = np.hypot(MAX_RADIUS * np.deg2rad(half_lat),
-                          MAX_RADIUS * np.cos(np.deg2rad(closest)) * np.deg2rad(half_lon)) + .01
+        radius = (
+            np.hypot(
+                MAX_RADIUS * np.deg2rad(half_lat),
+                MAX_RADIUS * np.cos(np.deg2rad(closest)) * np.deg2rad(half_lon),
+            )
+            + 0.01
+        )
         left = x0 + c
-        mapped = left + np.ceil((xa - left - .5) / width).astype(np.int64) * width
-        inside_crop = ((y0 + a >= ya) & (y0 + b <= yb)
-                       & (mapped + .5 >= xa) & (mapped + d - c - .5 <= xb))
+        mapped = left + np.ceil((xa - left - 0.5) / width).astype(np.int64) * width
+        inside_crop = (
+            (y0 + a >= ya) & (y0 + b <= yb) & (mapped + 0.5 >= xa) & (mapped + d - c - 0.5 <= xb)
+        )
         inside = np.zeros(len(a), dtype=bool)
         outside = np.zeros(len(a), dtype=bool)
         best = np.zeros(len(a), dtype=np.int64)
         boundary = s.boundary_lower(lat, lon, bounds, width, height, step)
         if complete and available:
-            lower, best, upper = s.nearest_class_bounds(lat, lon, points, available, indexes,
-                                                       upper_limit=None if band is None else threshold + radius)
+            lower, best, upper = s.nearest_class_bounds(
+                lat,
+                lon,
+                points,
+                available,
+                indexes,
+                upper_limit=None if band is None else threshold + radius,
+            )
             other = lower.copy()
             other[np.arange(len(a)), best] = np.inf
-            inside = inside_crop & (upper + 2 * radius + tolerance < other.min(axis=1)) & (upper + 2 * radius + tolerance < boundary)
+            inside = (
+                inside_crop
+                & (upper + 2 * radius + tolerance < other.min(axis=1))
+                & (upper + 2 * radius + tolerance < boundary)
+            )
             possible = exact_certificate_possible(lower, best, upper, radius, tolerance, boundary)
             if band is not None:
                 inside &= upper + radius <= threshold
-                outside = inside_crop & (lower.min(axis=1) - radius > threshold) & (boundary - radius > threshold)
+                outside = (
+                    inside_crop
+                    & (lower.min(axis=1) - radius > threshold)
+                    & (boundary - radius > threshold)
+                )
                 possible &= lower.min(axis=1) + radius <= threshold
                 possible |= (upper > threshold + radius) & (boundary > threshold + radius)
-            probe = np.flatnonzero(inside_crop & ~(inside | outside) & possible & ((b - a) * (d - c) > 1))
+            probe = np.flatnonzero(
+                inside_crop & ~(inside | outside) & possible & ((b - a) * (d - c) > 1)
+            )
             if len(probe):
                 exact_lower = lower[probe].copy()
                 exact_upper = np.full_like(exact_lower, np.inf)
@@ -96,21 +171,28 @@ def classify(water, x0, y0, bounds, width, height, step, pairs, tolerance,
                     # Excluded classes keep their already-valid lower bound.
                     needed = exact_lower[:, col] <= upper[probe] + 2 * radius[probe] + tolerance
                     if band is not None:
-                        needed &= exact_lower[:, col] <= threshold + radius[probe] + tolerance + .001
+                        needed &= (
+                            exact_lower[:, col] <= threshold + radius[probe] + tolerance + 0.001
+                        )
                     q = probe[needed]
-                    values = s.exact_minima_by_ordered_chord(points[q], lon[q], lat[q], *indexes[code])
+                    values = s.exact_minima_by_ordered_chord(
+                        points[q], lon[q], lat[q], *indexes[code]
+                    )
                     if np.any(~np.isfinite(values)):
                         raise RuntimeError('invalid exact rectangle distances')
-                    exact_lower[needed, col] = np.maximum(0, values - .001)
-                    exact_upper[needed, col] = values + .001
+                    exact_lower[needed, col] = np.maximum(0, values - 0.001)
+                    exact_upper[needed, col] = values + 0.001
                 winner = np.argmin(exact_upper, axis=1)
                 rows = np.arange(len(probe))
                 if band is not None:
-                    outside[probe] = ((exact_lower.min(axis=1) - radius[probe] > threshold)
-                                      & (boundary[probe] - radius[probe] > threshold))
+                    outside[probe] = (exact_lower.min(axis=1) - radius[probe] > threshold) & (
+                        boundary[probe] - radius[probe] > threshold
+                    )
                 exact_lower[rows, winner] = np.inf
-                proved = ((exact_upper[rows, winner] + 2 * radius[probe] + tolerance < exact_lower.min(axis=1))
-                          & (exact_upper[rows, winner] + 2 * radius[probe] + tolerance < boundary[probe]))
+                proved = (
+                    exact_upper[rows, winner] + 2 * radius[probe] + tolerance
+                    < exact_lower.min(axis=1)
+                ) & (exact_upper[rows, winner] + 2 * radius[probe] + tolerance < boundary[probe])
                 if band is not None:
                     proved &= exact_upper[rows, winner] + radius[probe] <= threshold
                 chosen = probe[proved]
@@ -122,7 +204,7 @@ def classify(water, x0, y0, bounds, width, height, step, pairs, tolerance,
         good = inside | outside
         for i in np.flatnonzero(good):
             if inside[i]:
-                output[a[i]:b[i], c[i]:d[i]] = available[int(best[i])][2]
+                output[a[i] : b[i], c[i] : d[i]] = available[int(best[i])][2]
             stats['certified_cells'] += int(wet(a[i], b[i], c[i], d[i]))
         pending = ~good
         leaf = pending & (b - a == 1) & (d - c == 1)
@@ -143,26 +225,49 @@ def classify(water, x0, y0, bounds, width, height, step, pairs, tolerance,
     # Ordinary point batches cover every unresolved selected cell, without an
     # input-size/candidate limit or any full-grid dense allocation.
     for first in range(0, len(yy), 5000):
-        gy, gx = yy[first:first + 5000], xx[first:first + 5000]
-        codes, bounded, exact = point_classifier(90 - (y0 + gy + .5) * step, -180 + (x0 + gx + .5) * step)
+        gy, gx = yy[first : first + 5000], xx[first : first + 5000]
+        codes, bounded, exact = point_classifier(
+            90 - (y0 + gy + 0.5) * step, -180 + (x0 + gx + 0.5) * step
+        )
         codes = np.asarray(codes)
-        if (codes.shape != gx.shape or not np.issubdtype(codes.dtype, np.integer)
-                or np.any(~np.isin(codes, ([0] if band is not None else []) + [p[2] for p in pairs]))
-                or any(not isinstance(v, (int, np.integer)) or isinstance(v, (bool, np.bool_)) for v in (bounded, exact))
-                or min(bounded, exact) < 0 or bounded + exact != len(gx)):
+        if (
+            codes.shape != gx.shape
+            or not np.issubdtype(codes.dtype, np.integer)
+            or np.any(~np.isin(codes, ([0] if band is not None else []) + [p[2] for p in pairs]))
+            or any(
+                not isinstance(v, (int, np.integer)) or isinstance(v, (bool, np.bool_))
+                for v in (bounded, exact)
+            )
+            or min(bounded, exact) < 0
+            or bounded + exact != len(gx)
+        ):
             raise ValueError('invalid point classifier result')
         output[gy, gx] = codes
         stats['bounded_cells'] += int(bounded)
         stats['exact_cells'] += int(exact)
     output[~water] = 0
     stats['leaf_cells'] = len(yy)
-    if stats['certified_cells'] + len(yy) != total or stats['bounded_cells'] + stats['exact_cells'] != total:
+    if (
+        stats['certified_cells'] + len(yy) != total
+        or stats['bounded_cells'] + stats['exact_cells'] != total
+    ):
         raise RuntimeError('rectangle classification accounting mismatch')
     return output, stats
 
 
-def classify_rows(rows, windows, bounds, width, height, step, pairs, tolerance,
-                  indexes, point_classifier, block=64):
+def classify_rows(
+    rows,
+    windows,
+    bounds,
+    width,
+    height,
+    step,
+    pairs,
+    tolerance,
+    indexes,
+    point_classifier,
+    block=64,
+):
     """Classify a full row-span selection in ordinary streaming row groups.
 
     Canonical windows may wrap a source at the longitude seam. Every selected
@@ -170,42 +275,78 @@ def classify_rows(rows, windows, bounds, width, height, step, pairs, tolerance,
     The caller chooses row groups for streaming, never to truncate the input.
     """
     keys = sorted(rows)
-    if not keys or any(type(y) is not int for y in keys) or keys != list(range(keys[0], keys[-1] + 1)):
+    if (
+        not keys
+        or any(type(y) is not int for y in keys)
+        or keys != list(range(keys[0], keys[-1] + 1))
+    ):
         raise ValueError('consecutive selected rows required')
     y0, nr = keys[0], len(keys)
     windows = sorted(windows)
-    if (not windows or any(not isinstance(z, (tuple, list)) or len(z) != 2
-                          or any(type(v) is not int for v in z) or not 0 <= z[0] < z[1] <= width for z in windows)
-            or any(a[1] > b[0] for a, b in zip(windows, windows[1:]))):
+    if (
+        not windows
+        or any(
+            not isinstance(z, (tuple, list))
+            or len(z) != 2
+            or any(type(v) is not int for v in z)
+            or not 0 <= z[0] < z[1] <= width
+            for z in windows
+        )
+        or any(a[1] > b[0] for a, b in zip(windows, windows[1:]))
+    ):
         raise ValueError('invalid canonical windows')
     total = covered = 0
     for y in keys:
         spans = rows[y]
-        if (any(not isinstance(z, (tuple, list)) or len(z) != 2
-                or any(type(v) is not int for v in z) or not 0 <= z[0] < z[1] <= width for z in spans)
-                or any(a[1] > b[0] for a, b in zip(spans, spans[1:]))):
+        if any(
+            not isinstance(z, (tuple, list))
+            or len(z) != 2
+            or any(type(v) is not int for v in z)
+            or not 0 <= z[0] < z[1] <= width
+            for z in spans
+        ) or any(a[1] > b[0] for a, b in zip(spans, spans[1:])):
             raise ValueError('invalid selected row spans')
         total += sum(b - a for a, b in spans)
     assigned = {y: [] for y in keys}
-    stats = {'certified_cells': 0, 'leaf_cells': 0, 'bounded_cells': 0,
-             'exact_cells': 0, 'exact_rectangle_probes': 0}
+    stats = {
+        'certified_cells': 0,
+        'leaf_cells': 0,
+        'bounded_cells': 0,
+        'exact_cells': 0,
+        'exact_rectangle_probes': 0,
+    }
     for left, right in windows:
         water = np.zeros((nr, right - left), dtype=bool)
         for y in keys:
             for a, b in rows[y]:
                 lo, hi = max(a, left), min(b, right)
                 if lo < hi:
-                    water[y - y0, lo - left:hi - left] = True
+                    water[y - y0, lo - left : hi - left] = True
                     covered += hi - lo
-        output, part = classify(water, left, y0, bounds, width, height, step, pairs,
-                                tolerance, indexes, point_classifier, block)
+        output, part = classify(
+            water,
+            left,
+            y0,
+            bounds,
+            width,
+            height,
+            step,
+            pairs,
+            tolerance,
+            indexes,
+            point_classifier,
+            block,
+        )
         for key in stats:
             stats[key] += part[key]
         for y in keys:
             codes = output[y - y0]
             cuts = np.r_[0, np.flatnonzero(codes[1:] != codes[:-1]) + 1, len(codes)]
-            assigned[y].extend((left + int(a), left + int(b), int(codes[a]))
-                               for a, b in zip(cuts[:-1], cuts[1:]) if codes[a])
+            assigned[y].extend(
+                (left + int(a), left + int(b), int(codes[a]))
+                for a, b in zip(cuts[:-1], cuts[1:])
+                if codes[a]
+            )
     if covered != total or stats['certified_cells'] + stats['leaf_cells'] != total:
         raise ValueError('canonical windows do not cover the complete selected input')
     for y, spans in assigned.items():

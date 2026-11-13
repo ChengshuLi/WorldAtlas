@@ -11,27 +11,44 @@ from psycopg.types.json import Jsonb
 from map_build.inputs.selection import read_selection, read_saved
 
 
-@unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'), 'requires disposable PostgreSQL')
+@unittest.skipUnless(
+    os.environ.get('WORLDATLAS_TEST_DATABASE_URL'), 'requires disposable PostgreSQL'
+)
 class SelectionTests(unittest.TestCase):
     def setUp(self):
         self.url = os.environ['WORLDATLAS_TEST_DATABASE_URL']
         self.writer = psycopg.connect(self.url, autocommit=True)
         self.addCleanup(self.writer.close)
         self.addCleanup(self.remove)
-        self.writer.execute("INSERT INTO atlas.geographic_entity_ids(id,color_rgb) VALUES (970000001,'#123456')")
-        self.writer.execute("INSERT INTO atlas.entity_registry_revisions VALUES ('__selection_entities')")
-        self.writer.execute("INSERT INTO atlas.geographic_entities(revision,id,name,level) "
-                            "VALUES ('__selection_entities',970000001,'Selected entity','continent')")
-        self.writer.execute("INSERT INTO atlas.decision_revisions VALUES ('__selection_water','__selection_entities','{}')")
+        self.writer.execute(
+            "INSERT INTO atlas.geographic_entity_ids(id,color_rgb) VALUES (970000001,'#123456')"
+        )
+        self.writer.execute(
+            "INSERT INTO atlas.entity_registry_revisions VALUES ('__selection_entities')"
+        )
+        self.writer.execute(
+            "INSERT INTO atlas.geographic_entities(revision,id,name,level) "
+            "VALUES ('__selection_entities',970000001,'Selected entity','continent')"
+        )
+        self.writer.execute(
+            "INSERT INTO atlas.decision_revisions VALUES ('__selection_water','__selection_entities','{}')"
+        )
 
     def remove(self):
-        self.writer.execute("DELETE FROM atlas.decision_revisions WHERE revision='__selection_water'")
-        self.writer.execute("DELETE FROM atlas.geographic_entities WHERE revision='__selection_entities'")
-        self.writer.execute("DELETE FROM atlas.entity_registry_revisions WHERE revision='__selection_entities'")
+        self.writer.execute(
+            "DELETE FROM atlas.decision_revisions WHERE revision='__selection_water'"
+        )
+        self.writer.execute(
+            "DELETE FROM atlas.geographic_entities WHERE revision='__selection_entities'"
+        )
+        self.writer.execute(
+            "DELETE FROM atlas.entity_registry_revisions WHERE revision='__selection_entities'"
+        )
         self.writer.execute('DELETE FROM atlas.geographic_entity_ids WHERE id=970000001')
 
     def test_later_queries_keep_the_same_view_when_another_worker_commits(self):
         writer = self.writer
+
         class ConcurrentEditCursor(psycopg.Cursor):
             def execute(self, query, *args, **kwargs):
                 self.domain = isinstance(query, str) and query.startswith('WITH RECURSIVE')
@@ -40,14 +57,24 @@ class SelectionTests(unittest.TestCase):
             def fetchone(self):
                 row = super().fetchone()
                 if self.domain:
-                    writer.execute("UPDATE atlas.geographic_entity_ids SET color_rgb='#ABCDEF' WHERE id=970000001")
+                    writer.execute(
+                        "UPDATE atlas.geographic_entity_ids SET color_rgb='#ABCDEF' WHERE id=970000001"
+                    )
                 return row
+
         with psycopg.connect(self.url, cursor_factory=ConcurrentEditCursor) as reader:
             result = read_selection(reader, {'water': '__selection_water'})
             self.assertEqual(reader.info.transaction_status, psycopg.pq.TransactionStatus.IDLE)
-        self.assertEqual(result['registry_colors']['__selection_entities'],
-                         [{'entity_id': 970000001, 'color_rgb': '#123456'}])
-        self.assertEqual(writer.execute('SELECT color_rgb FROM atlas.geographic_entity_ids WHERE id=970000001').fetchone()[0], '#ABCDEF')
+        self.assertEqual(
+            result['registry_colors']['__selection_entities'],
+            [{'entity_id': 970000001, 'color_rgb': '#123456'}],
+        )
+        self.assertEqual(
+            writer.execute(
+                'SELECT color_rgb FROM atlas.geographic_entity_ids WHERE id=970000001'
+            ).fetchone()[0],
+            '#ABCDEF',
+        )
 
     def test_saved_replay_keeps_old_values_after_an_edit(self):
         with psycopg.connect(self.url) as database:
@@ -55,7 +82,9 @@ class SelectionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'selection.json'
             path.write_text(json.dumps(selected))
-            self.writer.execute("UPDATE atlas.geographic_entity_ids SET color_rgb='#ABCDEF' WHERE id=970000001")
+            self.writer.execute(
+                "UPDATE atlas.geographic_entity_ids SET color_rgb='#ABCDEF' WHERE id=970000001"
+            )
             self.assertEqual(read_saved(path, selected['revisions']), selected)
             with self.assertRaisesRegex(ValueError, 'different geographic revisions'):
                 read_saved(path, {'water': 'different'})
@@ -66,20 +95,33 @@ class SelectionTests(unittest.TestCase):
                 read_selection(database, {'water': 'missing'})
 
     def test_scoped_partition_schema_upgrade_accepts_data_without_seeding_it(self):
-        upgrade = (Path(__file__).resolve().parents[4] / 'database/upgrades/scoped_land_partitions.sql').read_text()
+        upgrade = (
+            Path(__file__).resolve().parents[4] / 'database/upgrades/scoped_land_partitions.sql'
+        ).read_text()
         with self.writer.transaction(force_rollback=True):
-            self.writer.execute('ALTER TABLE atlas.decision_policies DROP CONSTRAINT decision_policies_kind_check')
-            self.writer.execute("ALTER TABLE atlas.decision_policies ADD CONSTRAINT decision_policies_kind_check "
-                                "CHECK (kind IN ('layer_precedence','overlap','coastline_assignment'))")
-            insert = ("INSERT INTO atlas.decision_policies VALUES "
-                      "('__selection_water','partition','scoped_land_partition','{}','{}')")
+            self.writer.execute(
+                'ALTER TABLE atlas.decision_policies DROP CONSTRAINT decision_policies_kind_check'
+            )
+            self.writer.execute(
+                "ALTER TABLE atlas.decision_policies ADD CONSTRAINT decision_policies_kind_check "
+                "CHECK (kind IN ('layer_precedence','overlap','coastline_assignment'))"
+            )
+            insert = (
+                "INSERT INTO atlas.decision_policies VALUES "
+                "('__selection_water','partition','scoped_land_partition','{}','{}')"
+            )
             with self.assertRaises(psycopg.errors.CheckViolation), self.writer.transaction():
                 self.writer.execute(insert)
             self.writer.execute(upgrade)
             self.writer.execute(upgrade)
             self.writer.execute(insert)
-            self.assertEqual(self.writer.execute("SELECT count(*) FROM atlas.decision_policies "
-                                                 "WHERE revision='__selection_water'").fetchone()[0], 1)
+            self.assertEqual(
+                self.writer.execute(
+                    "SELECT count(*) FROM atlas.decision_policies "
+                    "WHERE revision='__selection_water'"
+                ).fetchone()[0],
+                1,
+            )
 
     def test_regional_rules_are_optional_and_all_selected_source_links_are_frozen(self):
         with psycopg.connect(self.url) as database:
@@ -88,48 +130,76 @@ class SelectionTests(unittest.TestCase):
         try:
             with self.writer.transaction():
                 for ident in ('__line_source', '__policy_source'):
-                    self.writer.execute('INSERT INTO atlas.source_assets '
+                    self.writer.execute(
+                        'INSERT INTO atlas.source_assets '
                         '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
                         'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
                         "VALUES (%s,'1','Test','raw','Test','test:source','Test','test:license',"
-                        "'Test','test',%s,%s,1,'{}')", (ident, ident+'.json', 'a'*64))
-                geometry = dict(type='LineString', coordinates=[[0,1],[0,-1]])
-                checksum = hashlib.sha256(json.dumps(geometry,sort_keys=True,separators=(',',':')).encode()).hexdigest()
-                for ident in ('a','b'):
-                    self.writer.execute('INSERT INTO atlas.geographic_line_observations '
+                        "'Test','test',%s,%s,1,'{}')",
+                        (ident, ident + '.json', 'a' * 64),
+                    )
+                geometry = dict(type='LineString', coordinates=[[0, 1], [0, -1]])
+                checksum = hashlib.sha256(
+                    json.dumps(geometry, sort_keys=True, separators=(',', ':')).encode()
+                ).hexdigest()
+                for ident in ('a', 'b'):
+                    self.writer.execute(
+                        'INSERT INTO atlas.geographic_line_observations '
                         '(line_id,source_id,source_version,geometry,geometry_sha256,coordinate_reference,provenance,status) '
                         "VALUES (%s,'__line_source','1',%s,%s,'OGC:CRS84','{}','selected')",
-                        ('__selection_'+ident, Jsonb(geometry), checksum))
-                    self.writer.execute('INSERT INTO atlas.regional_island_rule_sets '
+                        ('__selection_' + ident, Jsonb(geometry), checksum),
+                    )
+                    self.writer.execute(
+                        'INSERT INTO atlas.regional_island_rule_sets '
                         '(revision,rule_set_id,selection_status,line_id,definition,evidence) '
                         "VALUES ('__selection_water',%s,'selected_for_research',%s,%s,'{}')",
-                        (ident,'__selection_'+ident,Jsonb({'sources':[{'source_id':'__policy_source','version':'1'}]})))
+                        (
+                            ident,
+                            '__selection_' + ident,
+                            Jsonb({'sources': [{'source_id': '__policy_source', 'version': '1'}]}),
+                        ),
+                    )
             with psycopg.connect(self.url) as database:
-                result = read_selection(database, {'regional':'__selection_water'})
-            self.assertEqual([rule['rule_set_id'] for rule in result['regional_partitions']], ['a','b'])
-            self.assertEqual({source['source_id'] for source in result['raw_sources']},
-                             {'__line_source','__policy_source'})
+                result = read_selection(database, {'regional': '__selection_water'})
+            self.assertEqual(
+                [rule['rule_set_id'] for rule in result['regional_partitions']], ['a', 'b']
+            )
+            self.assertEqual(
+                {source['source_id'] for source in result['raw_sources']},
+                {'__line_source', '__policy_source'},
+            )
         finally:
-            self.writer.execute("DELETE FROM atlas.regional_island_rule_sets WHERE revision='__selection_water'")
-            self.writer.execute("DELETE FROM atlas.geographic_line_observations WHERE line_id IN ('__selection_a','__selection_b')")
-            self.writer.execute("DELETE FROM atlas.source_assets WHERE source_id IN ('__line_source','__policy_source')")
+            self.writer.execute(
+                "DELETE FROM atlas.regional_island_rule_sets WHERE revision='__selection_water'"
+            )
+            self.writer.execute(
+                "DELETE FROM atlas.geographic_line_observations WHERE line_id IN ('__selection_a','__selection_b')"
+            )
+            self.writer.execute(
+                "DELETE FROM atlas.source_assets WHERE source_id IN ('__line_source','__policy_source')"
+            )
 
     def test_geometry_and_source_metadata_survive_separate_record_reads(self):
         geometry = {'type': 'Point', 'coordinates': [12.25, 45.5]}
-        digest = hashlib.sha256(json.dumps(geometry, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+        digest = hashlib.sha256(
+            json.dumps(geometry, sort_keys=True, separators=(',', ':')).encode()
+        ).hexdigest()
         self.writer.execute(
             'INSERT INTO atlas.source_assets '
             '(source_id,version,title,kind,provider,source_uri,license_name,license_uri,'
             'attribution,r2_bucket,r2_key,sha256,size_bytes,provenance) '
             "VALUES ('__selection_raw','1','Test','raw','Test','test:source','Test','test:license',"
-            "'Test','test','source.geojson',%s,1,'{}')", ('a'*64,))
+            "'Test','test','source.geojson',%s,1,'{}')",
+            ('a' * 64,),
+        )
         try:
             self.writer.execute(
                 'INSERT INTO atlas.decision_features '
                 '(revision,feature_id,source_id,source_version,source_feature_id,geometry_sha256,'
                 'geometry,coordinate_reference,evidence) '
                 "VALUES ('__selection_water','point','__selection_raw','1','provider-point',%s,%s,'OGC:CRS84','{}')",
-                (digest, Jsonb(geometry)))
+                (digest, Jsonb(geometry)),
+            )
             with psycopg.connect(self.url) as database:
                 result = read_selection(database, {'water': '__selection_water'})
             feature = result['domains']['water']['features'][0]
@@ -138,5 +208,7 @@ class SelectionTests(unittest.TestCase):
             self.assertEqual(feature['source_feature_id'], 'provider-point')
             self.assertEqual(result['raw_sources'][0]['source_id'], '__selection_raw')
         finally:
-            self.writer.execute("DELETE FROM atlas.decision_features WHERE revision='__selection_water'")
+            self.writer.execute(
+                "DELETE FROM atlas.decision_features WHERE revision='__selection_water'"
+            )
             self.writer.execute("DELETE FROM atlas.source_assets WHERE source_id='__selection_raw'")

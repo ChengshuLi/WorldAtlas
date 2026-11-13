@@ -1,8 +1,8 @@
 """Share progress output and cancellation with a stage's worker threads."""
+
 from contextlib import contextmanager
 from contextvars import ContextVar
 import threading
-
 
 _current = ContextVar('map_build_stage', default=None)
 

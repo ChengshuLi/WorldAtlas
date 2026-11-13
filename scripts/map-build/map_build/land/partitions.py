@@ -1,4 +1,5 @@
 """Construct scoped land partitions from selected lines and side witnesses."""
+
 import math
 
 from shapely.geometry import LineString, Point, box, mapping
@@ -22,9 +23,12 @@ def build_partitions(domain):
             continue
         definition = policy['definition']
         bounds = definition['bounds_lon_lat']
-        if (len(bounds) != 4 or any(type(v) not in (int, float) or not math.isfinite(v) for v in bounds)
-                or not -180 <= bounds[0] < bounds[2] <= 180
-                or not -90 <= bounds[1] < bounds[3] <= 90):
+        if (
+            len(bounds) != 4
+            or any(type(v) not in (int, float) or not math.isfinite(v) for v in bounds)
+            or not -180 <= bounds[0] < bounds[2] <= 180
+            or not -90 <= bounds[1] < bounds[3] <= 90
+        ):
             raise ValueError('land partition needs an unwrapped geographic rectangle')
         points = []
         for section in definition['sections']:
@@ -38,9 +42,13 @@ def build_partitions(domain):
         line = LineString(points)
         scope = box(*bounds)
         clipped = line.intersection(scope)
-        if (not line.is_simple or clipped.geom_type != 'LineString' or clipped.is_empty
-                or not scope.boundary.covers(Point(clipped.coords[0]))
-                or not scope.boundary.covers(Point(clipped.coords[-1]))):
+        if (
+            not line.is_simple
+            or clipped.geom_type != 'LineString'
+            or clipped.is_empty
+            or not scope.boundary.covers(Point(clipped.coords[0]))
+            or not scope.boundary.covers(Point(clipped.coords[-1]))
+        ):
             raise ValueError('selected line must cross the scope once without a loop')
         faces = list(split(scope, clipped).geoms)
         witnesses = definition['sides']
@@ -53,6 +61,11 @@ def build_partitions(domain):
             if len(matches) != 1 or matches[0] in selected:
                 raise ValueError('land partition witnesses must be inside opposite faces')
             selected.add(matches[0])
-            partitions.append(dict(geometry=mapping(faces[matches[0]]), entity_id=side['entity_id'],
-                                   policy_id=policy['id']))
+            partitions.append(
+                dict(
+                    geometry=mapping(faces[matches[0]]),
+                    entity_id=side['entity_id'],
+                    policy_id=policy['id'],
+                )
+            )
     return partitions

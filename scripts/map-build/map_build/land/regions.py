@@ -1,4 +1,5 @@
 """Assemble selected region polygons and check closures against physical water."""
+
 import hashlib
 import json
 
@@ -13,20 +14,25 @@ def verify_closure(record, coordinates, records, components):
     """Check the complete route; only selected endpoint cells may touch land."""
     points = grid_points(coordinates, components.grid)
     terminal = record['closure_method'] == 'physical_terminal_closure_v1'
-    if record['closure_method'] not in ('physical_water_closure_v1', 'physical_terminal_closure_v1'):
+    if record['closure_method'] not in (
+        'physical_water_closure_v1',
+        'physical_terminal_closure_v1',
+    ):
         raise ValueError('unsupported physical closure rule')
     cells = []
     if terminal:
         for side, actual in [('start', coordinates[0]), ('end', coordinates[-1])]:
-            reference = record[side+'_terminal']
-            boundary = feature_geometry(records['boundary', reference['boundary_id']], ('LineString',))
+            reference = record[side + '_terminal']
+            boundary = feature_geometry(
+                records['boundary', reference['boundary_id']], ('LineString',)
+            )
             expected = boundary['coordinates'][{'start': 0, 'end': -1}[reference['endpoint']]]
             if actual != expected:
                 raise ValueError('closure does not join its selected boundary endpoint')
         for point in (points[0], points[-1]):
             if any(v.denominator == 1 for v in point):
                 raise ValueError('closure terminal lies on an ambiguous grid edge')
-            cells.append(tuple(int(v//1) for v in point))
+            cells.append(tuple(int(v // 1) for v in point))
         if cells[0] == cells[1]:
             raise ValueError('closure terminals share one cell')
     physical, visits, land = {}, 0, set()
@@ -43,11 +49,12 @@ def verify_closure(record, coordinates, records, components):
             visits += 1
             if code == 1:
                 continue
-            allowed = terminal and ((i == 0 and (x,y) == cells[0])
-                                    or (i == len(points)-2 and (x,y) == cells[1]))
+            allowed = terminal and (
+                (i == 0 and (x, y) == cells[0]) or (i == len(points) - 2 and (x, y) == cells[1])
+            )
             if code != 17 or not allowed:
                 raise ValueError(f'closure touches nonterminal land at {x},{y}')
-            touched_land.add((x,y))
+            touched_land.add((x, y))
         if len(touched_land) > 1:
             raise ValueError('closure segment joins two land cells')
         land.update(touched_land)
@@ -68,7 +75,12 @@ def assemble_regions(domain, components):
             record = records[key]
             line = feature_geometry(record, ('LineString',))['coordinates']
             first, last = segment['start'], segment['end']
-            if type(first) is not int or type(last) is not int or not 0 <= first < last <= len(line) or last-first < 2:
+            if (
+                type(first) is not int
+                or type(last) is not int
+                or not 0 <= first < last <= len(line)
+                or last - first < 2
+            ):
                 raise ValueError('invalid selected region vertex slice')
             if key[0] == 'route' and key not in checked_routes:
                 if first != 0 or last != len(line):
@@ -90,7 +102,8 @@ def assemble_regions(domain, components):
             point = Point(float(witness['lon']), float(witness['lat']))
             if polygon.boundary.intersects(point) or polygon.contains(point) != witness['inside']:
                 raise ValueError('selected region side witness fails')
-        checksum = hashlib.sha256(json.dumps(geometry, sort_keys=True, separators=(',', ':'),
-                                             allow_nan=False).encode()).hexdigest()
+        checksum = hashlib.sha256(
+            json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+        ).hexdigest()
         result[ident] = dict(geometry=geometry, geometry_sha256=checksum)
     return result, {key[1]: value for key, value in checked_routes.items()}

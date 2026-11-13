@@ -4,6 +4,7 @@ The sequential union-by-size order is deliberately identical to the original
 builder, including equal-size ties. Component IDs are generation-local, but
 preserving them allows byte-for-byte comparison with existing evidence.
 """
+
 from array import array
 from pathlib import Path
 import os
@@ -34,15 +35,19 @@ def _write(path, values):
         os.fsync(stream.fileno())
 
 
-def build(width, height, physical_rows, physical_runs, output_rows, output_runs,
-          *, guard=lambda: None):
+def build(
+    width, height, physical_rows, physical_runs, output_rows, output_runs, *, guard=lambda: None
+):
     """Build complete run-level components in-process, without a dense grid."""
-    if (type(width) is not int or type(height) is not int or
-            not 0 < width <= 0xffffffff or not 0 < height <= 0xffffffff):
+    if (
+        type(width) is not int
+        or type(height) is not int
+        or not 0 < width <= 0xFFFFFFFF
+        or not 0 < height <= 0xFFFFFFFF
+    ):
         raise ValueError('invalid dimensions')
     rows, runs = _read(physical_rows), _read(physical_runs)
-    if (len(rows) != height + 1 or rows[0] != 0 or len(runs) % 2 or
-            rows[-1] != len(runs) // 2):
+    if len(rows) != height + 1 or rows[0] != 0 or len(runs) % 2 or rows[-1] != len(runs) // 2:
         raise ValueError('invalid stream lengths')
     parents, sizes = array('I'), array('I')
     outrows, spans = array('I', [0]), array('I')
@@ -76,7 +81,7 @@ def build(width, height, physical_rows, physical_runs, output_rows, output_runs,
                 raise ValueError('invalid or noncanonical physical run')
             if code == 17:
                 node = len(parents)
-                if node == 0xffffffff:
+                if node == 0xFFFFFFFF:
                     raise ValueError('too many component runs')
                 parents.append(node)
                 sizes.append(1)
@@ -122,9 +127,19 @@ def build_components(grid, physical_directory, directory):
     started = time.monotonic()
     physical_directory, directory = Path(physical_directory), Path(directory)
     directory.mkdir()
-    result = build(grid.width, grid.height, physical_directory / 'rows.u32le',
-                   physical_directory / 'runs.u32le', directory / 'rows.u32le', directory / 'runs.u32le')
-    report = dict(result, grid=vars(grid), output_sha256={name: file_hash(directory / name)
-                  for name in ('rows.u32le', 'runs.u32le')}, processing_seconds=time.monotonic()-started)
+    result = build(
+        grid.width,
+        grid.height,
+        physical_directory / 'rows.u32le',
+        physical_directory / 'runs.u32le',
+        directory / 'rows.u32le',
+        directory / 'runs.u32le',
+    )
+    report = dict(
+        result,
+        grid=vars(grid),
+        output_sha256={name: file_hash(directory / name) for name in ('rows.u32le', 'runs.u32le')},
+        processing_seconds=time.monotonic() - started,
+    )
     (directory / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     return report

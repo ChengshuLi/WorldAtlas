@@ -8,9 +8,14 @@ def apply_groups(result, windows):
     beyond the line's endpoints. Partial, crossing and protected components stay
     unresolved. Opposing group choices stay visible rather than depending on order.
     """
-    out = {**result, 'proposals': {root: dict(value) for root, value in result['proposals'].items()},
-           'review': dict(result['review']), 'regional_group_proposals': {},
-           'regional_group_diagnostics': {}, 'selected_group_conflicts': {}}
+    out = {
+        **result,
+        'proposals': {root: dict(value) for root, value in result['proposals'].items()},
+        'review': dict(result['review']),
+        'regional_group_proposals': {},
+        'regional_group_diagnostics': {},
+        'selected_group_conflicts': {},
+    }
     candidates = {}
     for window in windows:
         counts = dict(whole_roots=0, partial_roots=0, selected_preserved=0, eligible_held_roots=0)
@@ -20,12 +25,15 @@ def apply_groups(result, windows):
                 continue
             counts['whole_roots'] += 1
             proposal = result['proposals'].get(root)
-            evidence = dict(group_id=window['group_id'], target_code=window['code'], source=window['source'])
+            evidence = dict(
+                group_id=window['group_id'], target_code=window['code'], source=window['source']
+            )
             if proposal and proposal['basis'] == 'selected_affiliation':
                 counts['selected_preserved'] += 1
                 if proposal['code'] != window['code']:
                     out['selected_group_conflicts'].setdefault(root, []).append(
-                        dict(evidence, selected_code=proposal['code']))
+                        dict(evidence, selected_code=proposal['code'])
+                    )
                 continue
             if proposal and proposal['basis'] == 'whole_component_line_side':
                 candidates.setdefault(root, []).append(evidence)
@@ -40,6 +48,8 @@ def apply_groups(result, windows):
             out['proposals'].pop(root, None)
             out['review'][root] = 'conflicting_regional_group_conventions'
         else:
-            out['proposals'][root] = dict(code=next(iter(codes)), basis='inferred_source_extent_group_convention')
+            out['proposals'][root] = dict(
+                code=next(iter(codes)), basis='inferred_source_extent_group_convention'
+            )
             out['review'].pop(root, None)
     return out

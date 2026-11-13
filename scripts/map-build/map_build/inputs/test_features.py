@@ -8,17 +8,32 @@ from map_build.inputs.features import selected_basins
 
 def feature(ident, provider_id, parents=()):
     geometry = {'type': 'Polygon', 'coordinates': [[[0, 0], [2, 0], [2, 2], [0, 0]]]}
-    return dict(feature_id=ident, source_id='provider', source_version='edition',
-                source_feature_id=provider_id, geometry=geometry, coordinate_reference='OGC:CRS84',
-                geometry_sha256=hashlib.sha256(json.dumps(geometry, sort_keys=True,
-                    separators=(',', ':')).encode()).hexdigest(),
-                evidence={'source_parent_feature_ids': list(parents)})
+    return dict(
+        feature_id=ident,
+        source_id='provider',
+        source_version='edition',
+        source_feature_id=provider_id,
+        geometry=geometry,
+        coordinate_reference='OGC:CRS84',
+        geometry_sha256=hashlib.sha256(
+            json.dumps(geometry, sort_keys=True, separators=(',', ':')).encode()
+        ).hexdigest(),
+        evidence={'source_parent_feature_ids': list(parents)},
+    )
 
 
 def selection(*features):
-    return {'features': list(features), 'basins': [
-        dict(id='basin-'+f['feature_id'], feature_id=f['feature_id'],
-             geometry_sha256=f['geometry_sha256']) for f in features]}
+    return {
+        'features': list(features),
+        'basins': [
+            dict(
+                id='basin-' + f['feature_id'],
+                feature_id=f['feature_id'],
+                geometry_sha256=f['geometry_sha256'],
+            )
+            for f in features
+        ],
+    }
 
 
 class SelectedFeatureTests(unittest.TestCase):

@@ -1,4 +1,5 @@
 """Small geographic fixtures exercise current-shore discovery and precedence."""
+
 import unittest
 from types import SimpleNamespace
 
@@ -6,8 +7,7 @@ import numpy as np
 
 from map_build.core.grid import Grid
 from map_build.core.rle import encode_row
-from map_build.water.basins import (Shorelines, assign, entity_pairs,
-                                     participants, rasterize)
+from map_build.water.basins import Shorelines, assign, entity_pairs, participants, rasterize
 from map_build.water import shared_nearest as nearest
 
 
@@ -19,7 +19,7 @@ def rle(array):
 
 class BasinTests(unittest.TestCase):
     def setUp(self):
-        self.grid = Grid(36, 18, 10.)
+        self.grid = Grid(36, 18, 10.0)
         self.physical = np.ones((18, 36), dtype='u4')
         self.land = np.zeros((18, 36), dtype='u4')
         self.physical[7:11, 10] = 17
@@ -33,8 +33,11 @@ class BasinTests(unittest.TestCase):
         return Shorelines(self.p, self.l, self.grid, self.pairs)
 
     def test_arbitrary_bindings_have_no_code_offset_or_six_entity_rule(self):
-        bindings = [dict(entity_id=e, physical_class=k, code=c)
-                    for e, land, water in self.pairs for k, c in [('land', land), ('water', water)]]
+        bindings = [
+            dict(entity_id=e, physical_class=k, code=c)
+            for e, land, water in self.pairs
+            for k, c in [('land', land), ('water', water)]
+        ]
         self.assertEqual(entity_pairs(bindings, [42, 81]), list(reversed(self.pairs)))
         with self.assertRaisesRegex(ValueError, 'priority'):
             entity_pairs(bindings, [81])
@@ -74,7 +77,15 @@ class BasinTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'no source-backed'):
             assign(water, (11, 16, 7, 11), self.grid, SimpleNamespace(pairs=self.pairs), {}, 1e-5)
         coast = np.full_like(self.physical, 17)
-        result = assign(water, (11, 16, 7, 11), self.grid, SimpleNamespace(pairs=self.pairs), {}, 1e-5, coastal=rle(coast))
+        result = assign(
+            water,
+            (11, 16, 7, 11),
+            self.grid,
+            SimpleNamespace(pairs=self.pairs),
+            {},
+            1e-5,
+            coastal=rle(coast),
+        )
         self.assertFalse(result.any())
 
     def test_complete_search_matches_independent_wgs84_distances(self):
@@ -86,22 +97,35 @@ class BasinTests(unittest.TestCase):
                 minima = []
                 for _, code, _ in self.pairs:
                     yy, xx = np.nonzero(self.land == code)
-                    distances = nearest.GEOD.inv(np.full(len(xx), float(self.grid.longitude(x))),
-                                                 np.full(len(yy), float(self.grid.latitude(y))),
-                                                 self.grid.longitude(xx), self.grid.latitude(yy))[2]
+                    distances = nearest.GEOD.inv(
+                        np.full(len(xx), float(self.grid.longitude(x))),
+                        np.full(len(yy), float(self.grid.latitude(y))),
+                        self.grid.longitude(xx),
+                        self.grid.latitude(yy),
+                    )[2]
                     minima.append(float(np.min(distances)))
-                expected = self.pairs[next(i for i, d in enumerate(minima) if d <= min(minima) + 1e-5)][2]
+                expected = self.pairs[
+                    next(i for i, d in enumerate(minima) if d <= min(minima) + 1e-5)
+                ][2]
                 self.assertEqual(result[y - 7, x - 11], expected)
 
     def test_dateline_and_holes_are_rasterized_at_cell_centers(self):
-        geometry = {'type': 'MultiPolygon', 'coordinates': [
-            [[[170, -10], [180, -10], [180, 10], [170, 10], [170, -10]]],
-            [[[-180, -10], [-170, -10], [-170, 10], [-180, 10], [-180, -10]]]]}
+        geometry = {
+            'type': 'MultiPolygon',
+            'coordinates': [
+                [[[170, -10], [180, -10], [180, 10], [170, 10], [170, -10]]],
+                [[[-180, -10], [-170, -10], [-170, 10], [-180, 10], [-180, -10]]],
+            ],
+        }
         bounds, mask = rasterize(geometry, self.grid)
         self.assertEqual(bounds, (35, 37, 8, 10))
         self.assertEqual(int(mask.sum()), 4)
-        geometry = {'type': 'Polygon', 'coordinates': [
-            [[-20, -20], [20, -20], [20, 20], [-20, 20], [-20, -20]],
-            [[-10, -10], [10, -10], [10, 10], [-10, 10], [-10, -10]]]}
+        geometry = {
+            'type': 'Polygon',
+            'coordinates': [
+                [[-20, -20], [20, -20], [20, 20], [-20, 20], [-20, -20]],
+                [[-10, -10], [10, -10], [10, 10], [-10, 10], [-10, -10]],
+            ],
+        }
         _, mask = rasterize(geometry, self.grid)
         self.assertEqual(int(mask.sum()), 12)

@@ -5,6 +5,7 @@ This module intentionally offers no append, truncate, replace, rename, delete,
 cleanup, or in-place manifest-update API. A failed write leaves its created path
 in place; a retry uses a new run directory and new names.
 """
+
 from __future__ import annotations
 
 from contextlib import contextmanager
@@ -33,7 +34,9 @@ def _new_fd(path: os.PathLike[str] | str, mode: int = 0o666) -> int:
 
 
 @contextmanager
-def create_binary_exclusive(path: os.PathLike[str] | str, *, mode: int = 0o666) -> Iterator[BinaryIO]:
+def create_binary_exclusive(
+    path: os.PathLike[str] | str, *, mode: int = 0o666
+) -> Iterator[BinaryIO]:
     """Create a binary output exactly once with O_CREAT|O_EXCL; never truncate."""
     fd = _new_fd(path, mode)
     with os.fdopen(fd, "wb") as stream:
@@ -66,8 +69,9 @@ def create_gzip_exclusive(
 ) -> Iterator[gzip.GzipFile]:
     """Stream gzip bytes to a single O_EXCL-created file descriptor."""
     with create_binary_exclusive(path, mode=mode) as raw:
-        with gzip.GzipFile(filename="", mode="wb", fileobj=raw,
-                           compresslevel=compresslevel, mtime=mtime) as gz:
+        with gzip.GzipFile(
+            filename="", mode="wb", fileobj=raw, compresslevel=compresslevel, mtime=mtime
+        ) as gz:
             yield gz
 
 
@@ -94,23 +98,33 @@ def create_gzip_text_exclusive(
                 text.detach()
 
 
-def validate_fresh_output(input_root: os.PathLike[str] | str, output: os.PathLike[str] | str, inputs: tuple[os.PathLike[str] | str, ...] = ()) -> Path:
+def validate_fresh_output(
+    input_root: os.PathLike[str] | str,
+    output: os.PathLike[str] | str,
+    inputs: tuple[os.PathLike[str] | str, ...] = (),
+) -> Path:
     """Allow a fresh sibling or in-root output, never an existing input or symlink path.
 
     Callers must validate all input files before exclusively creating this path.
     No concurrent adversarial filesystem mutation is assumed by this path check.
     """
     root = Path(input_root).resolve(strict=True)
-    if not root.is_dir(): raise ValueError('input root must be a directory')
+    if not root.is_dir():
+        raise ValueError('input root must be a directory')
     lexical = Path(os.path.abspath(os.fspath(output)))
     canonical = lexical.resolve(strict=False)
-    if lexical != canonical: raise ValueError('output path traverses a symlink')
-    if not canonical.parent.is_dir(): raise ValueError('output parent must exist')
-    if os.path.lexists(canonical): raise FileExistsError('output path must be new')
-    if root == canonical or root.is_relative_to(canonical): raise ValueError('output cannot be the input root or its ancestor')
+    if lexical != canonical:
+        raise ValueError('output path traverses a symlink')
+    if not canonical.parent.is_dir():
+        raise ValueError('output parent must exist')
+    if os.path.lexists(canonical):
+        raise FileExistsError('output path must be new')
+    if root == canonical or root.is_relative_to(canonical):
+        raise ValueError('output cannot be the input root or its ancestor')
     for item in inputs:
         source = Path(item).resolve(strict=True)
-        if source == canonical or source.is_relative_to(canonical): raise ValueError('output contains an input')
+        if source == canonical or source.is_relative_to(canonical):
+            raise ValueError('output contains an input')
     return canonical
 
 

@@ -1,4 +1,5 @@
 """Resume validates selected data and outputs while trusting code changes."""
+
 from pathlib import Path
 import tempfile
 import unittest
@@ -14,9 +15,12 @@ class ExecutorResumeTests(unittest.TestCase):
         inputs = self.root / 'inputs'
         inputs.mkdir()
         sentinel = pipeline.write(inputs / 'sentinel.json', {})
-        required = ('land_config','water_config','raw_manifest')
-        cfg = {'schema': 'worldatlas-end-to-end-pipeline-v1',
-               'input_root': str(self.root), 'sources': {key: pipeline.pin(sentinel) for key in required}}
+        required = ('land_config', 'water_config', 'raw_manifest')
+        cfg = {
+            'schema': 'worldatlas-end-to-end-pipeline-v1',
+            'input_root': str(self.root),
+            'sources': {key: pipeline.pin(sentinel) for key in required},
+        }
         cfg['sources']['raw_manifest'] = pipeline.pin(self.source_path(inputs))
         self.config = pipeline.write(inputs / 'request.json', cfg)
         self.out = self.root / 'run'
@@ -26,7 +30,6 @@ class ExecutorResumeTests(unittest.TestCase):
         runner = pipeline.Pipeline(self.config, self.out, resume=resume)
         self.addCleanup(runner.close)
         return runner
-
 
     def test_changed_completed_output_fails_before_reuse(self):
         first = self.runner()
@@ -59,14 +62,15 @@ class ExecutorResumeTests(unittest.TestCase):
         with patch.object(pipeline, 'code_identity', return_value={'changed.py': '0' * 64}):
             resumed = self.runner(resume=True)
             self.assertEqual(pipeline.pin(self.out / 'run-identity.json'), original)
-            self.assertEqual(pipeline.read(resumed.attempt_dir / 'producer.json')['code'],
-                             {'changed.py': '0' * 64})
+            self.assertEqual(
+                pipeline.read(resumed.attempt_dir / 'producer.json')['code'],
+                {'changed.py': '0' * 64},
+            )
 
     def test_two_live_runners_cannot_resume_same_run(self):
         self.runner()
         with self.assertRaisesRegex(ValueError, 'another pipeline runner'):
             self.runner(resume=True)
-
 
     def test_generated_document_must_match_on_resume(self):
         first = self.runner()
@@ -77,17 +81,25 @@ class ExecutorResumeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'generated request changed'):
             second.document('handoff', {'input': 'different'})
 
-
     def source_path(self, inputs):
-        path = inputs/'source.bin'
+        path = inputs / 'source.bin'
         path.write_bytes(b'final-output\x00\x01\x02')
         return path
 
     def execute(self, runner):
-        output = self.out/'result'
+        output = self.out / 'result'
+
         def calculate():
             output.mkdir()
-            (output/'result.bin').write_bytes(self.source.read_bytes())
-            return {'directory':str(output)}
-        return runner.checkpoints.run_function('fixture-stage','water',calculate,(),
-            timing=runner.timing,inputs=[pipeline.pin(self.source)],outputs=[output])
+            (output / 'result.bin').write_bytes(self.source.read_bytes())
+            return {'directory': str(output)}
+
+        return runner.checkpoints.run_function(
+            'fixture-stage',
+            'water',
+            calculate,
+            (),
+            timing=runner.timing,
+            inputs=[pipeline.pin(self.source)],
+            outputs=[output],
+        )

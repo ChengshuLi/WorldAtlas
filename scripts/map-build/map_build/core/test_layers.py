@@ -15,7 +15,7 @@ from map_build.water.shared_nearest import crop
 
 class LayersTests(unittest.TestCase):
     def test_wrapped_patch_roundtrip_preserves_unrelated_zero_cells(self):
-        grid = Grid(36, 18, 10.)
+        grid = Grid(36, 18, 10.0)
         values = np.array([[4321, 4321, 902], [0, 902, 902]], dtype='u4')
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'layer'
@@ -26,14 +26,24 @@ class LayersTests(unittest.TestCase):
                 self.assertFalse(crop(*data, 0, 0, 36, 36).any())
 
     def test_tile_checksums_and_category_bindings_are_verified(self):
-        grid = Grid(36, 18, 10.)
+        grid = Grid(36, 18, 10.0)
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             data = gzip.compress(b'{"row":3,"spans":[{"start":4,"end":6,"code":4321}]}\n')
             (root / 'tile.gz').write_bytes(data)
-            manifest = {'grid': {'width': 36, 'height': 18}, 'tiles': [{
-                'core_rows': [0, 18], 'core_cols': [0, 36],
-                'span_file': {'path': 'tile.gz', 'sha256': hashlib.sha256(data).hexdigest()}}]}
+            manifest = {
+                'grid': {'width': 36, 'height': 18},
+                'tiles': [
+                    {
+                        'core_rows': [0, 18],
+                        'core_cols': [0, 36],
+                        'span_file': {
+                            'path': 'tile.gz',
+                            'sha256': hashlib.sha256(data).hexdigest(),
+                        },
+                    }
+                ],
+            }
             path = root / 'manifest.json'
             path.write_text(json.dumps(manifest))
             self.assertEqual(list(layer_rows(path, grid, {4321})), [(3, [(4, 6, 4321)])])
@@ -50,7 +60,9 @@ class LayersTests(unittest.TestCase):
                 list(layer_rows(path, grid, {4321}))
 
     def test_overlapping_tiles_and_duplicate_output_rows_are_rejected(self):
-        grid = Grid(36, 18, 10.)
+        grid = Grid(36, 18, 10.0)
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaisesRegex(ValueError, 'ordered and unique'):
-                write_layer(Path(directory) / 'layer', grid, [(3, [(1, 2, 700)]), (3, [(2, 3, 700)])])
+                write_layer(
+                    Path(directory) / 'layer', grid, [(3, [(1, 2, 700)]), (3, [(2, 3, 700)])]
+                )

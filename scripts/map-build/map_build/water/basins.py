@@ -4,6 +4,7 @@ Discover participants on the complete physical-water footprint. Only then remove
 the water already assigned by the coastal band. Distances use the same exact
 WGS84 cell-center solver as coastal assignment, restricted to those participants.
 """
+
 from collections import Counter
 from dataclasses import dataclass
 
@@ -21,8 +22,14 @@ def entity_pairs(bindings, priority):
     if len(priority) != len(set(priority)) or set(priority) != entities:
         raise ValueError('tie priority must list each land entity exactly once')
     snapshot = {'category_bindings': bindings}
-    pairs = [(entity, nearest.binding(snapshot, entity, 'land'),
-              nearest.binding(snapshot, entity, 'water')) for entity in priority]
+    pairs = [
+        (
+            entity,
+            nearest.binding(snapshot, entity, 'land'),
+            nearest.binding(snapshot, entity, 'water'),
+        )
+        for entity in priority
+    ]
     codes = [code for _, land, water in pairs for code in (land, water)]
     if len(set(codes)) != len(codes):
         raise ValueError('land and water bindings must use distinct codes')
@@ -31,19 +38,19 @@ def entity_pairs(bindings, priority):
 
 class Shorelines:
     """Share one complete physical shore index and reuse its entity trees."""
+
     def __init__(self, physical, land, grid, pairs):
         self.grid = grid
         self.pairs = pairs
         codes = [land_code for _, land_code, _ in pairs]
-        self.spans = BatchedCoastalShoreIndex(physical, land, grid.width, grid.height,
-                                            land_codes=codes)
+        self.spans = BatchedCoastalShoreIndex(
+            physical, land, grid.width, grid.height, land_codes=codes
+        )
         present = set(map(int, np.unique(self.spans.codes)))
         self.indexes = {}
         if present:
             centers = self.spans.centers_for_crop(grid.bounds, grid.step, codes)
             self.indexes = nearest.make_indexes(centers, [p for p in pairs if p[1] in present])
-
-
 
 
 def physical_water(mask, bounds, physical, grid):
@@ -96,21 +103,43 @@ def assign(water, bounds, grid, shores, participant_counts, tolerance, *, coasta
     if len(chosen) == 1:
         output[remaining] = chosen[0][2]
         return output
+
     # Full shore trees make omitted-crop shores impossible. Keep the proven
     # rectangular certificates and complete exact refinement for uncertain cells.
     def points(lat, lon):
-        return nearest.classify(lat, lon, grid.bounds, grid.width, grid.height,
-                                grid.step, chosen, tolerance, shores.indexes)
+        return nearest.classify(
+            lat,
+            lon,
+            grid.bounds,
+            grid.width,
+            grid.height,
+            grid.step,
+            chosen,
+            tolerance,
+            shores.indexes,
+        )
+
     for first in range(y0, y1, 256):
         last = min(first + 256, y1)
         for xa, xb in ((x0, min(x1, grid.width)), (0, max(0, x1 - grid.width))):
             if xa == xb:
                 continue
             offset = (xa - x0) % grid.width
-            selected = remaining[first - y0:last - y0, offset:offset + xb - xa]
-            result, _ = classify(selected, xa, first, grid.bounds, grid.width, grid.height,
-                                 grid.step, chosen, tolerance, shores.indexes, points)
-            output[first - y0:last - y0, offset:offset + xb - xa] = result
+            selected = remaining[first - y0 : last - y0, offset : offset + xb - xa]
+            result, _ = classify(
+                selected,
+                xa,
+                first,
+                grid.bounds,
+                grid.width,
+                grid.height,
+                grid.step,
+                chosen,
+                tolerance,
+                shores.indexes,
+                points,
+            )
+            output[first - y0 : last - y0, offset : offset + xb - xa] = result
     return output
 
 

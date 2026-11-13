@@ -1,4 +1,5 @@
 """Durable pipeline identities, output checkpoints and attempt-local active timing."""
+
 from contextlib import contextmanager
 import fcntl
 import hashlib
@@ -76,8 +77,12 @@ def journal_anchor(path):
 
 
 def verify_anchor(anchor, expected_path):
-    if (set(anchor) != {'path', 'bytes', 'sha256'} or Path(anchor['path']).resolve() != Path(expected_path).resolve()
-            or type(anchor['bytes']) is not int or anchor['bytes'] < 0):
+    if (
+        set(anchor) != {'path', 'bytes', 'sha256'}
+        or Path(anchor['path']).resolve() != Path(expected_path).resolve()
+        or type(anchor['bytes']) is not int
+        or anchor['bytes'] < 0
+    ):
         raise ValueError('invalid timing journal anchor')
     remaining = anchor['bytes']
     h = hashlib.sha256()
@@ -113,10 +118,13 @@ def inventory(paths):
 
 
 def code_identity(scripts):
-    return {str(path.relative_to(scripts)): digest(path)
-            for path in sorted(Path(scripts).rglob('*'))
-            if path.is_file() and '__pycache__' not in path.parts
-            and path.suffix in {'.py', '.cpp', '.c', '.h', '.hpp', '.sh'}}
+    return {
+        str(path.relative_to(scripts)): digest(path)
+        for path in sorted(Path(scripts).rglob('*'))
+        if path.is_file()
+        and '__pycache__' not in path.parts
+        and path.suffix in {'.py', '.cpp', '.c', '.h', '.hpp', '.sh'}
+    }
 
 
 def elapsed_union(intervals):
@@ -195,7 +203,9 @@ class Checkpoints:
         receipt = json.loads(path.read_bytes())
         verify_anchor(receipt['timing_anchor'], self.root.parent / 'timing-events.jsonl')
         request = lambda value: {k: v for k, v in value.items() if k != 'code'}
-        if receipt.get('schema') != 'worldatlas-command-checkpoint-v1' or request(receipt['invocation']) != request(invocation):
+        if receipt.get('schema') != 'worldatlas-command-checkpoint-v1' or request(
+            receipt['invocation']
+        ) != request(invocation):
             raise ValueError('completed command identity changed: ' + name)
         verify_pins(self.data_pins(receipt))
         if inventory(outputs) != receipt['outputs']:
@@ -211,14 +221,21 @@ class Checkpoints:
         return [pin for pin in receipt['inputs'] if pin['path'] != code_path]
 
     def preserve(self, name, paths):
-        existing = list(dict.fromkeys(Path(path) for path in paths if Path(path).exists() or Path(path).is_symlink()))
+        existing = list(
+            dict.fromkeys(
+                Path(path) for path in paths if Path(path).exists() or Path(path).is_symlink()
+            )
+        )
         if not existing:
             return []
         destination = self.preserved / (name + '-' + uuid.uuid4().hex)
         destination.mkdir()
         moved = []
         for index, path in enumerate(existing):
-            if not path.resolve().is_relative_to(self.root.parent) or path.resolve() == self.root.parent:
+            if (
+                not path.resolve().is_relative_to(self.root.parent)
+                or path.resolve() == self.root.parent
+            ):
                 raise ValueError('partial output outside run cannot be moved')
             target = destination / f'{index}-{path.name}'
             path.rename(target)
@@ -248,13 +265,33 @@ class Checkpoints:
 
     def complete(self, name, invocation, outputs, inputs, log, timing_anchor):
         verify_pins(inputs)
-        write(self.stage(name) / 'complete.json', {
-            'schema': 'worldatlas-command-checkpoint-v1', 'attempt': self.attempt, 'timing_anchor': timing_anchor,
-            'invocation': invocation, 'inputs': inputs, 'output_roots': [os.path.abspath(p) for p in outputs],
-            'outputs': inventory(outputs), 'log': pin(log)})
+        write(
+            self.stage(name) / 'complete.json',
+            {
+                'schema': 'worldatlas-command-checkpoint-v1',
+                'attempt': self.attempt,
+                'timing_anchor': timing_anchor,
+                'invocation': invocation,
+                'inputs': inputs,
+                'output_roots': [os.path.abspath(p) for p in outputs],
+                'outputs': inventory(outputs),
+                'log': pin(log),
+            },
+        )
 
-    def run_function(self, name, group, function, args, *, timing, inputs, outputs, kwargs=None,
-                     resume_marker=None):
+    def run_function(
+        self,
+        name,
+        group,
+        function,
+        args,
+        *,
+        timing,
+        inputs,
+        outputs,
+        kwargs=None,
+        resume_marker=None,
+    ):
         """Call an ordinary Python stage and checkpoint its returned record.
 
         Input/output identity controls reuse. The function's location is
@@ -262,12 +299,18 @@ class Checkpoints:
         """
         outputs = [Path(path).absolute() for path in outputs]
         run = self.root.parent
-        if any(not path.resolve().is_relative_to(run.resolve()) or path.resolve() == run.resolve()
-               for path in outputs):
+        if any(
+            not path.resolve().is_relative_to(run.resolve()) or path.resolve() == run.resolve()
+            for path in outputs
+        ):
             raise ValueError('stage output outside run or replaces run root')
         result_path = self.stage(name) / 'result.json'
-        invocation = {'stage': name, 'inputs': inputs, 'outputs': list(map(str, outputs)),
-                      'code': {'module': function.__module__, 'function': function.__qualname__}}
+        invocation = {
+            'stage': name,
+            'inputs': inputs,
+            'outputs': list(map(str, outputs)),
+            'code': {'module': function.__module__, 'function': function.__qualname__},
+        }
         sealed = [*outputs, result_path]
         if self.completed(name, invocation, sealed):
             return json.loads(result_path.read_bytes())
@@ -283,8 +326,15 @@ class Checkpoints:
         log = logs / (name + '-' + attempt.name + '.log')
         verify_pins(inputs)
         with log.open('x') as stream:
-            write(attempt / 'admitted.json', {'invocation': invocation, 'inputs': inputs,
-                  'log': str(log), 'timing_anchor': timing.anchor()})
+            write(
+                attempt / 'admitted.json',
+                {
+                    'invocation': invocation,
+                    'inputs': inputs,
+                    'log': str(log),
+                    'timing_anchor': timing.anchor(),
+                },
+            )
             try:
                 with timing.measure(group, name):
                     result = function(*args, **(kwargs or {}))
@@ -299,6 +349,7 @@ class Checkpoints:
 
 class Timing:
     """Attempt-local monotonic intervals. No subtraction crosses a restart gap."""
+
     def __init__(self, path, *, resume=False, attempt=None, heartbeat_seconds=0):
         self.path = Path(path)
         self.attempt = attempt or uuid.uuid4().hex
@@ -343,7 +394,9 @@ class Timing:
             sync_directory(self.path.parent)
         self.event({'event': 'attempt', 'id': self.attempt})
         if heartbeat_seconds:
-            self.thread = threading.Thread(target=self._heartbeat, args=(heartbeat_seconds,), daemon=True)
+            self.thread = threading.Thread(
+                target=self._heartbeat, args=(heartbeat_seconds,), daemon=True
+            )
             self.thread.start()
 
     def event(self, value):
@@ -365,9 +418,18 @@ class Timing:
         while not self.stopped.wait(seconds):
             with self.lock:
                 now = time.monotonic()
-                self.events([{'event': 'heartbeat', 'token': token, 'id': record['id'],
-                              'group': record['group'], 'monotonic_seconds': now}
-                             for token, record in self.active.items()])
+                self.events(
+                    [
+                        {
+                            'event': 'heartbeat',
+                            'token': token,
+                            'id': record['id'],
+                            'group': record['group'],
+                            'monotonic_seconds': now,
+                        }
+                        for token, record in self.active.items()
+                    ]
+                )
 
     def close(self):
         self.stopped.set()
@@ -379,8 +441,14 @@ class Timing:
     def measure(self, group, name, *, kind='processing'):
         started = time.monotonic()
         token = uuid.uuid4().hex
-        record = {'event': 'start', 'token': token, 'id': f'{group}/{name}', 'group': group,
-                  'kind': kind, 'monotonic_seconds': started}
+        record = {
+            'event': 'start',
+            'token': token,
+            'id': f'{group}/{name}',
+            'group': group,
+            'kind': kind,
+            'monotonic_seconds': started,
+        }
         with self.lock:
             self.event(record)
             self.active[token] = record
@@ -397,8 +465,16 @@ class Timing:
         with self.lock:
             ended = time.monotonic()
             record['end_monotonic_seconds'] = ended
-            self.event({'event': event, 'token': token, 'id': record['id'], 'group': record['group'],
-                        'start_monotonic_seconds': started, 'monotonic_seconds': ended})
+            self.event(
+                {
+                    'event': event,
+                    'token': token,
+                    'id': record['id'],
+                    'group': record['group'],
+                    'start_monotonic_seconds': started,
+                    'monotonic_seconds': ended,
+                }
+            )
             self.active.pop(token, None)
             self.open.discard(token)
 
@@ -412,8 +488,9 @@ class Timing:
         with self.lock:
             summary = self.summary(physical_report)[group]
             summary.update(outputs_complete=True, complete=summary['timing_complete'])
-            self.event({'event': 'group-complete', 'id': group, 'group': group,
-                        'timing_summary': summary})
+            self.event(
+                {'event': 'group-complete', 'id': group, 'group': group, 'timing_summary': summary}
+            )
             self.completed_groups.add(group)
 
     def intervals(self, group, *, kind=None):
@@ -439,14 +516,23 @@ class Timing:
             elif record['event'] == 'heartbeat':
                 beats[token] = max(beats.get(token, float('-inf')), record['monotonic_seconds'])
         by_attempt = {}
-        incomplete = [{'attempt': record.get('attempt'), 'id': record['id']}
-                      for record in self.records if record['event'] == 'unmeasured-initialization'
-                      and record.get('group') == group]
-        details = [{**record, 'start_monotonic_seconds': None,
-                    'last_recorded_monotonic_seconds': None, 'last_recorded_event': None,
-                    'recorded_elapsed_seconds': None, 'unrecorded_tail_seconds': None,
-                    'reason': 'initialization has no durable start/end interval'}
-                   for record in incomplete]
+        incomplete = [
+            {'attempt': record.get('attempt'), 'id': record['id']}
+            for record in self.records
+            if record['event'] == 'unmeasured-initialization' and record.get('group') == group
+        ]
+        details = [
+            {
+                **record,
+                'start_monotonic_seconds': None,
+                'last_recorded_monotonic_seconds': None,
+                'last_recorded_event': None,
+                'recorded_elapsed_seconds': None,
+                'unrecorded_tail_seconds': None,
+                'reason': 'initialization has no durable start/end interval',
+            }
+            for record in incomplete
+        ]
         for token, start in starts.items():
             if kind is not None and start.get('kind', 'processing') != kind:
                 continue
@@ -454,11 +540,18 @@ class Timing:
             b = ends.get(token, beats.get(token, a))
             if token not in ends:
                 incomplete.append({'attempt': token[0], 'id': start['id']})
-                details.append({'attempt': token[0], 'id': start['id'],
-                    'start_monotonic_seconds': a, 'last_recorded_monotonic_seconds': b,
-                    'last_recorded_event': 'heartbeat' if token in beats else 'start',
-                    'recorded_elapsed_seconds': b - a, 'unrecorded_tail_seconds': None,
-                    'reason': 'no durable completion or failure endpoint'})
+                details.append(
+                    {
+                        'attempt': token[0],
+                        'id': start['id'],
+                        'start_monotonic_seconds': a,
+                        'last_recorded_monotonic_seconds': b,
+                        'last_recorded_event': 'heartbeat' if token in beats else 'start',
+                        'recorded_elapsed_seconds': b - a,
+                        'unrecorded_tail_seconds': None,
+                        'reason': 'no durable completion or failure endpoint',
+                    }
+                )
             if b < a:
                 raise ValueError('non-monotonic processing interval')
             by_attempt.setdefault(token[0], []).append((a, b))
@@ -471,42 +564,75 @@ class Timing:
             measured = sum(elapsed_union(items) for items in intervals.values())
             complete = not missing
             error = None
-            reused = group == 'physical' and physical_report and physical_report.get('status') == 'reused'
+            reused = (
+                group == 'physical'
+                and physical_report
+                and physical_report.get('status') == 'reused'
+            )
             if reused:
                 downloads = 0.0
             elif group == 'physical':
                 report = physical_report or {}
                 commands, _ = self.intervals(group, kind='command')
-                overhead = sum(outside(items, commands.get(attempt, []))
-                               for attempt, items in intervals.items())
-                child = report.get('recorded_processing_elapsed_seconds', report.get('processing_elapsed_seconds'))
+                overhead = sum(
+                    outside(items, commands.get(attempt, []))
+                    for attempt, items in intervals.items()
+                )
+                child = report.get(
+                    'recorded_processing_elapsed_seconds', report.get('processing_elapsed_seconds')
+                )
                 if type(child) not in (int, float) or not math.isfinite(child) or child < 0:
-                    child = sum(record['seconds'] for record in self.records
-                                if record['event'] == 'physical-invocation-processing')
+                    child = sum(
+                        record['seconds']
+                        for record in self.records
+                        if record['event'] == 'physical-invocation-processing'
+                    )
                     complete = False
                     error = 'physical producer has no valid measured processing total'
-                command_overhead = sum(record['seconds'] for record in self.records
-                                       if record['event'] == 'physical-command-overhead')
+                command_overhead = sum(
+                    record['seconds']
+                    for record in self.records
+                    if record['event'] == 'physical-command-overhead'
+                )
                 measured = overhead + command_overhead + child
-                complete = complete and report.get('timing_complete', True) and report.get('status') == 'candidate-only'
+                complete = (
+                    complete
+                    and report.get('timing_complete', True)
+                    and report.get('status') == 'candidate-only'
+                )
                 downloads = report.get('source_download_elapsed_seconds')
-                if type(downloads) not in (int, float) or not math.isfinite(downloads) or downloads < 0:
+                if (
+                    type(downloads) not in (int, float)
+                    or not math.isfinite(downloads)
+                    or downloads < 0
+                ):
                     complete = False
                     error = 'missing or invalid physical acquisition timing'
             outputs_complete = group in self.completed_groups
-            groups[group] = {'processing_elapsed_seconds': measured if complete else None,
+            groups[group] = {
+                'processing_elapsed_seconds': measured if complete else None,
                 'recorded_processing_elapsed_seconds': measured,
                 'recorded_processing_is_lower_bound': not complete,
-                'complete': outputs_complete and complete, 'outputs_complete': outputs_complete,
-                'timing_complete': complete, 'unmeasured_interrupted_attempts': missing,
+                'complete': outputs_complete and complete,
+                'outputs_complete': outputs_complete,
+                'timing_complete': complete,
+                'unmeasured_interrupted_attempts': missing,
                 'interrupted_interval_details': interrupted,
                 'unrecorded_interruption_tail_seconds': None if not complete else 0.0,
-                'semantics': 'sum of attempt-local active interval unions; no restart gap is counted'}
+                'semantics': 'sum of attempt-local active interval unions; no restart gap is counted',
+            }
             if group == 'physical':
-                groups[group].update({'source_download_elapsed_seconds': downloads,
-                    'producer_processing_elapsed_seconds': (physical_report.get('processing_elapsed_seconds')
-                                                            if physical_report and not reused else None),
-                    'timing_error': error})
+                groups[group].update(
+                    {
+                        'source_download_elapsed_seconds': downloads,
+                        'producer_processing_elapsed_seconds': (
+                            physical_report.get('processing_elapsed_seconds')
+                            if physical_report and not reused
+                            else None
+                        ),
+                        'timing_error': error,
+                    }
+                )
                 if reused:
                     groups[group]['reused_from'] = physical_report['source_run']
         return groups

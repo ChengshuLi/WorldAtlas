@@ -1,4 +1,5 @@
 """Read current land components and answer source-neutral geographic queries."""
+
 from contextlib import ExitStack
 from fractions import Fraction
 from pathlib import Path
@@ -17,6 +18,7 @@ class ComponentGrid:
     The caller owns input checksums and checkpoint reuse. Root IDs are meaningful
     only within these streams.
     """
+
     def __init__(self, physical_directory, component_directory, grid):
         self.grid = grid
         self.directory = Path(component_directory)
@@ -28,9 +30,13 @@ class ComponentGrid:
             directory = self.directory
             self.offsets = self._map(directory / 'rows.u32le')
             self.runs = self._map(directory / 'runs.u32le')
-            if (len(self.offsets) != grid.height + 1 or len(self.runs) % 3
-                    or self.offsets[0] != 0 or int(self.offsets[-1]) != len(self.runs) // 3
-                    or np.any(self.offsets[1:] < self.offsets[:-1])):
+            if (
+                len(self.offsets) != grid.height + 1
+                or len(self.runs) % 3
+                or self.offsets[0] != 0
+                or int(self.offsets[-1]) != len(self.runs) // 3
+                or np.any(self.offsets[1:] < self.offsets[:-1])
+            ):
                 raise ValueError('invalid component stream offsets')
             self.runs = self.runs.reshape(-1, 3)
         except BaseException:
@@ -58,7 +64,7 @@ class ComponentGrid:
     def row(self, y):
         if type(y) is not int or not 0 <= y < self.grid.height:
             raise ValueError('component row outside grid')
-        first, last = map(int, self.offsets[y:y + 2])
+        first, last = map(int, self.offsets[y : y + 2])
         spans = self.runs[first:last]
         if self.validated[y]:
             return spans
@@ -67,8 +73,12 @@ class ComponentGrid:
         if np.any(~np.isin(codes, [1, 17])):
             raise ValueError('invalid physical class')
         lo, hi, roots = spans.T
-        if (np.any(lo >= hi) or np.any(hi > self.grid.width)
-                or np.any(roots == 2**32 - 1) or np.any(hi[:-1] > lo[1:])):
+        if (
+            np.any(lo >= hi)
+            or np.any(hi > self.grid.width)
+            or np.any(roots == 2**32 - 1)
+            or np.any(hi[:-1] > lo[1:])
+        ):
             raise ValueError('invalid component row')
 
         def union(a, b):
@@ -110,6 +120,7 @@ class ComponentGrid:
     def component_at(self, longitude, latitude):
         """Locate a candidate source point with the grid's floor convention."""
         import math
+
         x = math.floor((float(longitude) - self.grid.west) / self.grid.step)
         y = math.floor((self.grid.north - float(latitude)) / self.grid.step)
         if not 0 <= x < self.grid.width or not 0 <= y < self.grid.height:
@@ -129,7 +140,8 @@ class ComponentGrid:
             raise ValueError('row batch must be positive')
         reject_boundary_centers(geometry, self.grid)
         (x0, x1, y0, y1), _ = wrapped_grid_bounds(
-            geometry, self.grid.width, self.grid.height, self.grid.step)
+            geometry, self.grid.width, self.grid.height, self.grid.step
+        )
         counts = {}
         windows = [(x0, min(x1, self.grid.width))]
         if x1 > self.grid.width:
@@ -144,7 +156,9 @@ class ComponentGrid:
                     for lo, hi, root in relevant:
                         lo, hi, root = max(int(lo), a), min(int(hi), b), int(root)
                         offset = (a - x0) % self.grid.width
-                        count = int(np.count_nonzero(mask[y - first, offset + lo - a:offset + hi - a]))
+                        count = int(
+                            np.count_nonzero(mask[y - first, offset + lo - a : offset + hi - a])
+                        )
                         if count:
                             counts[root] = counts.get(root, 0) + count
         return counts
@@ -168,8 +182,10 @@ class ComponentGrid:
         order = operations['operation_preference']
         if len(set(order)) != len(order) or set(order) != set(definitions):
             raise ValueError('coordinate operations need one complete preference order')
-        transforms = [(definitions[key], Transformer.from_pipeline(definitions[key]['pipeline']))
-                      for key in order]
+        transforms = [
+            (definitions[key], Transformer.from_pipeline(definitions[key]['pipeline']))
+            for key in order
+        ]
         source = shape(geometry)
         counts = {root: {'inside': 0, 'boundary': 0, 'unknown': 0} for root in candidates}
         for y in range(self.grid.height):
@@ -182,14 +198,25 @@ class ComponentGrid:
                 available = np.ones(len(longitude), dtype=bool)
                 for definition, transform in transforms:
                     area = definition['area_bounds']
-                    inside_lon = ((longitude >= area['west']) & (longitude <= area['east'])
-                                  if area['west'] <= area['east'] else
-                                  (longitude >= area['west']) | (longitude <= area['east']))
-                    chosen = available & inside_lon & (latitude >= area['south']) & (latitude <= area['north'])
+                    inside_lon = (
+                        (longitude >= area['west']) & (longitude <= area['east'])
+                        if area['west'] <= area['east']
+                        else (longitude >= area['west']) | (longitude <= area['east'])
+                    )
+                    chosen = (
+                        available
+                        & inside_lon
+                        & (latitude >= area['south'])
+                        & (latitude <= area['north'])
+                    )
                     if not chosen.any():
                         continue
-                    x, z = transform.transform(longitude[chosen], latitude[chosen],
-                                               direction=TransformDirection.INVERSE, errcheck=True)
+                    x, z = transform.transform(
+                        longitude[chosen],
+                        latitude[chosen],
+                        direction=TransformDirection.INVERSE,
+                        errcheck=True,
+                    )
                     if not (np.isfinite(x).all() and np.isfinite(z).all()):
                         raise ValueError('coordinate operation produced invalid source coordinates')
                     inside = contains_xy(source, x, z)

@@ -1,8 +1,10 @@
 """Verify selected vector inputs and read physical comparison streams."""
+
 import hashlib
 from pathlib import Path
 import numpy as np
 from osgeo import ogr, osr
+
 
 def sha(path):
     h = hashlib.sha256()
@@ -76,7 +78,7 @@ def validate_reference(ref, width, height):
             raise ValueError(f'reference {key} digest mismatch')
     rows = np.memmap(ref['rows']['path'], dtype='<u4', mode='r')
     runs = np.memmap(ref['runs']['path'], dtype='<u4', mode='r')
-    if len(rows) != height + 1 or len(runs) % 2 or rows[0] != 0 or rows[-1] != len(runs)//2:
+    if len(rows) != height + 1 or len(runs) % 2 or rows[0] != 0 or rows[-1] != len(runs) // 2:
         raise ValueError('invalid reference stream lengths/offsets')
     if np.any(rows[1:] < rows[:-1]):
         raise ValueError('reference offsets not monotone')
@@ -86,7 +88,13 @@ def validate_reference(ref, width, height):
 def compare_row(values, ref_runs, width):
     ends = ref_runs[:, 0]
     codes = ref_runs[:, 1]
-    if not len(ends) or ends[0] == 0 or ends[-1] != width or np.any(ends[1:] <= ends[:-1]) or np.any(~np.isin(codes, [1, 17])):
+    if (
+        not len(ends)
+        or ends[0] == 0
+        or ends[-1] != width
+        or np.any(ends[1:] <= ends[:-1])
+        or np.any(~np.isin(codes, [1, 17]))
+    ):
         raise ValueError('invalid reference row')
     actual_ends = np.flatnonzero(np.r_[values[1:] != values[:-1], True]) + 1
     cuts = np.unique(np.r_[0, ends, actual_ends])
@@ -94,6 +102,7 @@ def compare_row(values, ref_runs, width):
     old = codes[np.searchsorted(ends, x, side='right')]
     new = values[x]
     bad = old != new
-    return int(np.diff(cuts)[bad].sum()), [(int(a), int(b), int(c), int(d)) for a, b, c, d in zip(x[bad], cuts[1:][bad], old[bad], new[bad])]
-
-
+    return int(np.diff(cuts)[bad].sum()), [
+        (int(a), int(b), int(c), int(d))
+        for a, b, c, d in zip(x[bad], cuts[1:][bad], old[bad], new[bad])
+    ]

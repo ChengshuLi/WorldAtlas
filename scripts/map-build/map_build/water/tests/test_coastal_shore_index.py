@@ -11,7 +11,7 @@ class ShoreIndexTest(unittest.TestCase):
         for _ in range(50):
             width = int(rng.integers(8, 80))
             height = width // 2
-            physical = np.where(rng.random((height, width)) < rng.uniform(.01, .99), 1, 17)
+            physical = np.where(rng.random((height, width)) < rng.uniform(0.01, 0.99), 1, 17)
             land = np.where(physical == 17, rng.integers(17, 23, (height, width)), 0)
             p, l = rle(physical), rle(land)
             index = CoastalShoreIndex(p, l, width, height)
@@ -20,10 +20,14 @@ class ShoreIndexTest(unittest.TestCase):
                 x1 = x0 + (width if crop % 3 == 0 else int(rng.integers(1, width + 1)))
                 y0 = int(rng.integers(height))
                 y1 = int(rng.integers(y0 + 1, height + 1))
-                codes = rng.choice(np.arange(17, 23), int(rng.integers(1, 7)), replace=False).tolist()
+                codes = rng.choice(
+                    np.arange(17, 23), int(rng.integers(1, 7)), replace=False
+                ).tolist()
                 bounds = (x0, x1, y0, y1)
                 try:
-                    expected = shore.centers_for_crop(p, l, bounds, width, height, 360 / width, codes)
+                    expected = shore.centers_for_crop(
+                        p, l, bounds, width, height, 360 / width, codes
+                    )
                 except ValueError as error:
                     if str(error) != 'no participant shorelines in crop':
                         raise
@@ -40,8 +44,8 @@ class ShoreIndexTest(unittest.TestCase):
         land = np.where(physical == 17, 22, 0)
         index = CoastalShoreIndex(rle(physical), rle(land), 8, 4)
         for bounds in ((-1, 2, 0, 4), (7, 10, 0, 4), (0, 8, 0, 4)):
-            expected = shore.centers_for_crop(rle(physical), rle(land), bounds, 8, 4, 45., [22])
-            actual = index.centers_for_crop(bounds, 45., [22])
+            expected = shore.centers_for_crop(rle(physical), rle(land), bounds, 8, 4, 45.0, [22])
+            actual = index.centers_for_crop(bounds, 45.0, [22])
             for key in expected:
                 np.testing.assert_array_equal(actual[key], expected[key])
         land[3, 7] = 0

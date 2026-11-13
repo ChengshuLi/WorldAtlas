@@ -18,8 +18,15 @@ class FunctionCheckpointTests(unittest.TestCase):
         self.addCleanup(self.timing.close)
 
     def call(self, action):
-        return self.checkpoints.run_function('calculate', 'water', action, (), timing=self.timing,
-                                            inputs=[pin(self.source)], outputs=[self.output])
+        return self.checkpoints.run_function(
+            'calculate',
+            'water',
+            action,
+            (),
+            timing=self.timing,
+            inputs=[pin(self.source)],
+            outputs=[self.output],
+        )
 
     def calculate(self):
         self.output.mkdir()
@@ -40,8 +47,17 @@ class FunctionCheckpointTests(unittest.TestCase):
             result = self.calculate()
             result['suffix'] = suffix
             return result
-        result = self.checkpoints.run_function('calculate', 'water', calculate, (), kwargs={'suffix': 'selected'},
-                                              timing=self.timing, inputs=[pin(self.source)], outputs=[self.output])
+
+        result = self.checkpoints.run_function(
+            'calculate',
+            'water',
+            calculate,
+            (),
+            kwargs={'suffix': 'selected'},
+            timing=self.timing,
+            inputs=[pin(self.source)],
+            outputs=[self.output],
+        )
         self.assertEqual(result['suffix'], 'selected')
 
     def test_changed_data_or_output_is_rejected(self):
@@ -69,19 +85,39 @@ class FunctionCheckpointTests(unittest.TestCase):
         self.assertEqual((self.output / 'result').read_text(), 'input')
 
     def test_producer_owned_marker_preserves_internal_checkpoints(self):
-        marker = self.output/'resume.json'
+        marker = self.output / 'resume.json'
+
         def interrupted():
             self.output.mkdir()
             marker.write_text('completed first unit')
             raise InterruptedError('interrupted')
+
         with self.assertRaises(InterruptedError):
-            self.checkpoints.run_function('calculate','physical',interrupted,(),timing=self.timing,
-                inputs=[pin(self.source)],outputs=[self.output],resume_marker=marker)
+            self.checkpoints.run_function(
+                'calculate',
+                'physical',
+                interrupted,
+                (),
+                timing=self.timing,
+                inputs=[pin(self.source)],
+                outputs=[self.output],
+                resume_marker=marker,
+            )
+
         def continue_stage():
-            self.assertEqual(marker.read_text(),'completed first unit')
-            return {'resumed':True}
-        result=self.checkpoints.run_function('calculate','physical',continue_stage,(),timing=self.timing,
-            inputs=[pin(self.source)],outputs=[self.output],resume_marker=marker)
+            self.assertEqual(marker.read_text(), 'completed first unit')
+            return {'resumed': True}
+
+        result = self.checkpoints.run_function(
+            'calculate',
+            'physical',
+            continue_stage,
+            (),
+            timing=self.timing,
+            inputs=[pin(self.source)],
+            outputs=[self.output],
+            resume_marker=marker,
+        )
         self.assertTrue(result['resumed'])
 
 

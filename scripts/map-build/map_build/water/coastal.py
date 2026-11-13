@@ -1,4 +1,5 @@
 """Build the coastal band using the shared complete shoreline index."""
+
 from pathlib import Path
 import json
 import logging
@@ -27,11 +28,26 @@ def build_coastal(snapshot, grid, physical, shores, directory, *, rows_per_batch
     def rows():
         for first in range(0, grid.height, rows_per_batch):
             last = min(first + rows_per_batch, grid.height)
-            water = np.stack([shared_nearest.crop(*physical, y, 0, grid.width, grid.width) == 1
-                              for y in range(first, last)])
+            water = np.stack(
+                [
+                    shared_nearest.crop(*physical, y, 0, grid.width, grid.width) == 1
+                    for y in range(first, last)
+                ]
+            )
             assignments, stats = coastal_rect.classify(
-                water, 0, first, grid.bounds, grid.width, grid.height, grid.step,
-                pairs, tolerance, band, bandtol, shores.indexes)
+                water,
+                0,
+                first,
+                grid.bounds,
+                grid.width,
+                grid.height,
+                grid.step,
+                pairs,
+                tolerance,
+                band,
+                bandtol,
+                shores.indexes,
+            )
             totals['physical_water_cells'] += int(water.sum())
             totals['bounded_cells'] += stats['bounded']
             totals['exact_cells'] += stats['exact']
@@ -42,7 +58,11 @@ def build_coastal(snapshot, grid, physical, shores, directory, *, rows_per_batch
     report = write_layer(directory, grid, rows())
     if totals['bounded_cells'] + totals['exact_cells'] != totals['physical_water_cells']:
         raise ValueError('coastal classification counts do not cover physical water')
-    report.update(policy_id=decision['id'], policy_definition=decision['definition'],
-                  processing_seconds=time.monotonic()-start, **totals)
-    (directory/'report.json').write_text(json.dumps(report, indent=2)+'\n')
+    report.update(
+        policy_id=decision['id'],
+        policy_definition=decision['definition'],
+        processing_seconds=time.monotonic() - start,
+        **totals
+    )
+    (directory / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     return report

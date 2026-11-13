@@ -1,5 +1,7 @@
 """Resolve published map streams from their separate release catalog."""
+
 import os
+
 
 def read_release_streams(version):
     """Resolve the two published streams without embedding object paths in a preview."""
@@ -22,5 +24,3 @@ def read_release_streams(version):
     if [row[0] for row in rows] != ['rows', 'runs']:
         raise ValueError(f'missing row or run stream for map release {version}')
     return rows
-
-

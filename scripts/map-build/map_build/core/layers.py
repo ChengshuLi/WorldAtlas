@@ -1,4 +1,5 @@
 """Read checksum-verified assignment tiles and write ordinary row-run layers."""
+
 from collections import Counter
 import gzip
 import hashlib
@@ -36,8 +37,11 @@ def tile_rows(path, tile, grid, codes):
             spans, stop = [], left
             for item in record['spans']:
                 a, b, code = (item[key] for key in ('start', 'end', 'code'))
-                if (any(type(v) is not int for v in (a, b, code))
-                        or not stop <= a < b <= right or code not in codes):
+                if (
+                    any(type(v) is not int for v in (a, b, code))
+                    or not stop <= a < b <= right
+                    or code not in codes
+                ):
                     raise ValueError('invalid assignment span or unbound category code')
                 spans.append((a, b, code))
                 stop = b
@@ -74,14 +78,19 @@ def write_layer(directory, grid, rows):
             spans = current[1] if current is not None and current[0] == y else ()
             pairs = []
             stop = 0
+
             def append(end, code):
                 if pairs and pairs[-1][1] == code:
                     pairs[-1] = (end, code)
                 else:
                     pairs.append((end, code))
+
             for a, b, code in spans:
-                if (any(type(v) is not int for v in (a, b, code)) or
-                        not stop <= a < b <= grid.width or not 0 < code < 2**32):
+                if (
+                    any(type(v) is not int for v in (a, b, code))
+                    or not stop <= a < b <= grid.width
+                    or not 0 < code < 2**32
+                ):
                     raise ValueError('invalid output span')
                 if a > stop:
                     append(a, 0)
@@ -99,8 +108,11 @@ def write_layer(directory, grid, rows):
         if current is not None:
             raise ValueError('assignment row outside the grid')
     np.asarray(offsets, dtype='<u4').tofile(directory / 'rows.u32le')
-    report = {'grid': {'width': grid.width, 'height': grid.height, 'step': grid.step},
-              'counts': dict(counts), 'run_count': offsets[-1]}
+    report = {
+        'grid': {'width': grid.width, 'height': grid.height, 'step': grid.step},
+        'counts': dict(counts),
+        'run_count': offsets[-1],
+    }
     (directory / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     return report
 
@@ -116,7 +128,7 @@ def patch_rows(values, bounds, grid):
             if a == b:
                 continue
             offset = (a - x0) % grid.width
-            part = row[offset:offset + b - a]
+            part = row[offset : offset + b - a]
             stops = np.r_[0, np.flatnonzero(part[1:] != part[:-1]) + 1, len(part)]
             for first, last in zip(stops, stops[1:]):
                 code = int(part[first])

@@ -5,6 +5,7 @@ The prefill raster contains registry-bound land and assigned-water codes, with
 zero for remaining water. Eligibility is physical water intersecting that zero
 mask. The caller supplies the permitted category codes.
 """
+
 from __future__ import annotations
 from pathlib import Path
 import struct
@@ -12,6 +13,7 @@ import struct
 
 class RunRasterU32LE:
     """A row-indexed RLE raster: row offsets, then uint32 (x_end, code) pairs."""
+
     def __init__(self, rows_path, runs_path, width, height, *, offset_bytes=4):
         if offset_bytes not in (4, 8):
             raise ValueError('offset_bytes must be 4 or 8')
@@ -22,7 +24,7 @@ class RunRasterU32LE:
         if len(raw) != (height + 1) * offset_bytes:
             raise ValueError(f'row-offset file length {len(raw)} != {(height+1)*offset_bytes}')
         self.offsets = tuple(v[0] for v in struct.iter_unpack(row_fmt, raw))
-        if self.offsets[0] != 0 or any(a > b for a,b in zip(self.offsets,self.offsets[1:])):
+        if self.offsets[0] != 0 or any(a > b for a, b in zip(self.offsets, self.offsets[1:])):
             raise ValueError('row offsets must be monotonic and start at zero')
         self.run_count = self.runs_path.stat().st_size // 8
         if self.runs_path.stat().st_size % 8 or self.offsets[-1] != self.run_count:
@@ -31,23 +33,30 @@ class RunRasterU32LE:
 
     def close(self):
         if self._runs:
-            self._runs.close();self._runs=None
+            self._runs.close()
+            self._runs = None
 
-    def __enter__(self):return self
-    def __exit__(self,*exc):self.close()
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        self.close()
 
     def row(self, y):
         if not 0 <= y < self.height:
             raise IndexError(y)
-        if self._runs is None:raise ValueError('RLE raster reader is closed')
-        a,b = self.offsets[y:y+2]
+        if self._runs is None:
+            raise ValueError('RLE raster reader is closed')
+        a, b = self.offsets[y : y + 2]
         self._runs.seek(a * 8)
-        raw = self._runs.read((b-a)*8)
-        out=[];prev=0
-        for end,code in struct.iter_unpack('<II',raw):
+        raw = self._runs.read((b - a) * 8)
+        out = []
+        prev = 0
+        for end, code in struct.iter_unpack('<II', raw):
             if end <= prev or end > self.width:
                 raise ValueError(f'invalid run end {end} in row {y} after {prev}')
-            out.append((end,code));prev=end
+            out.append((end, code))
+            prev = end
         if prev != self.width:
             raise ValueError(f'row {y} ends at {prev}, expected width {self.width}')
         return out
@@ -55,22 +64,29 @@ class RunRasterU32LE:
 
 def code_intervals(runs, wanted):
     """Return sorted half-open x intervals assigned to `wanted` from end/code runs."""
-    out=[];start=0
-    for end,code in runs:
-        if code == wanted: out.append((start,end))
-        start=end
+    out = []
+    start = 0
+    for end, code in runs:
+        if code == wanted:
+            out.append((start, end))
+        start = end
     return out
 
 
-def intersect_intervals(a,b):
+def intersect_intervals(a, b):
     """Intersect two sorted disjoint half-open interval sequences."""
-    out=[];i=j=0
-    while i<len(a) and j<len(b):
-        lo=max(a[i][0],b[j][0]);hi=min(a[i][1],b[j][1])
-        if lo<hi:out.append((lo,hi))
-        a_end,b_end=a[i][1],b[j][1]
-        if a_end<=b_end:i+=1
-        if b_end<=a_end:j+=1
+    out = []
+    i = j = 0
+    while i < len(a) and j < len(b):
+        lo = max(a[i][0], b[j][0])
+        hi = min(a[i][1], b[j][1])
+        if lo < hi:
+            out.append((lo, hi))
+        a_end, b_end = a[i][1], b[j][1]
+        if a_end <= b_end:
+            i += 1
+        if b_end <= a_end:
+            j += 1
     return out
 
 
@@ -80,19 +96,32 @@ def validate_prefill_row(physical_runs, class_runs, width, land_codes, water_cod
     Physical dry cells must have a supplied land code. Physical water must
     have zero or a supplied water code.
     """
-    if not physical_runs or not class_runs or physical_runs[-1][0]!=width or class_runs[-1][0]!=width:
+    if (
+        not physical_runs
+        or not class_runs
+        or physical_runs[-1][0] != width
+        or class_runs[-1][0] != width
+    ):
         raise ValueError('physical and prefill-class rows must both cover the full width')
-    i=j=0
-    while i<len(physical_runs) and j<len(class_runs):
-        pe,pc=physical_runs[i];ce,cc=class_runs[j];end=min(pe,ce)
-        if pc==17:
-            if cc not in land_codes:raise ValueError(f'physical land has invalid prefill code {cc}')
-        elif pc==1:
-            if cc != 0 and cc not in water_codes:raise ValueError(f'physical water has invalid/inherited prefill code {cc}')
-        else:raise ValueError(f'unknown physical code {pc}')
-        if pe==end:i+=1
-        if ce==end:j+=1
-    if i!=len(physical_runs) or j!=len(class_runs):raise ValueError('physical and prefill-class rows do not end together')
+    i = j = 0
+    while i < len(physical_runs) and j < len(class_runs):
+        pe, pc = physical_runs[i]
+        ce, cc = class_runs[j]
+        end = min(pe, ce)
+        if pc == 17:
+            if cc not in land_codes:
+                raise ValueError(f'physical land has invalid prefill code {cc}')
+        elif pc == 1:
+            if cc != 0 and cc not in water_codes:
+                raise ValueError(f'physical water has invalid/inherited prefill code {cc}')
+        else:
+            raise ValueError(f'unknown physical code {pc}')
+        if pe == end:
+            i += 1
+        if ce == end:
+            j += 1
+    if i != len(physical_runs) or j != len(class_runs):
+        raise ValueError('physical and prefill-class rows do not end together')
 
 
 def make_prefill_adapters(physical, final_class, width, height, land_codes, water_codes):
@@ -102,17 +131,27 @@ def make_prefill_adapters(physical, final_class, width, height, land_codes, wate
     code 0 is reserved for residual physical water.
     An inconsistent zero on physical land is not treated as ocean eligibility.
     """
-    if (physical.width,physical.height)!=(width,height) or (final_class.width,final_class.height)!=(width,height):
+    if (physical.width, physical.height) != (width, height) or (
+        final_class.width,
+        final_class.height,
+    ) != (width, height):
         raise ValueError('input raster dimensions differ from requested grid')
+
     def eligible_rows(y):
-        pr=physical.row(y);cr=final_class.row(y);validate_prefill_row(pr,cr,width,land_codes,water_codes)
-        phys=code_intervals(pr,1)
-        residual=code_intervals(cr,0)
-        return intersect_intervals(phys,residual)
+        pr = physical.row(y)
+        cr = final_class.row(y)
+        validate_prefill_row(pr, cr, width, land_codes, water_codes)
+        phys = code_intervals(pr, 1)
+        residual = code_intervals(cr, 0)
+        return intersect_intervals(phys, residual)
+
     def classification_rows(y):
-        runs=final_class.row(y)
-        start=0;out=[]
-        for end,code in runs:
-            out.append((end,code));start=end
+        runs = final_class.row(y)
+        start = 0
+        out = []
+        for end, code in runs:
+            out.append((end, code))
+            start = end
         return out
-    return eligible_rows,classification_rows
+
+    return eligible_rows, classification_rows

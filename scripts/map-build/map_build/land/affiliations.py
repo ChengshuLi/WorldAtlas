@@ -1,4 +1,5 @@
 """Resolve geographic selection rules against current land components."""
+
 from shapely.geometry import shape
 
 from map_build.inputs.features import feature_geometry
@@ -23,8 +24,11 @@ def resolve_affiliations(rules, features, components, bindings, *, protected=())
         if ident not in by_id:
             raise ValueError('component selection refers to a missing feature: ' + ident)
         if ident not in geometries:
-            value = feature_geometry(by_id[ident], ('Point', 'Polygon', 'MultiPolygon'),
-                                     coordinate_reference=by_id[ident]['coordinate_reference'])
+            value = feature_geometry(
+                by_id[ident],
+                ('Point', 'Polygon', 'MultiPolygon'),
+                coordinate_reference=by_id[ident]['coordinate_reference'],
+            )
             parsed = shape(value)
             if parsed.is_empty or not parsed.is_valid:
                 raise ValueError('component selection needs valid nonempty geometry')
@@ -45,17 +49,33 @@ def resolve_affiliations(rules, features, components, bindings, *, protected=())
         if by_id[ident]['coordinate_reference'] != 'OGC:CRS84':
             operations = record['coordinate_operations']
             if operations['source_coordinate_reference'] != by_id[ident]['coordinate_reference']:
-                raise ValueError('coordinate operation does not match the imported source coordinates')
+                raise ValueError(
+                    'coordinate operation does not match the imported source coordinates'
+                )
             if candidates is None:
-                raise ValueError('projected contact needs a preceding geographic candidate selection')
+                raise ValueError(
+                    'projected contact needs a preceding geographic candidate selection'
+                )
             counts = components.profile_projected(value, operations, candidates)
-            if record.get('unknown_coordinates', 'reject') == 'reject' and any(v['unknown'] for v in counts.values()):
-                raise ValueError('coordinate operations do not cover all candidate component centers')
+            if record.get('unknown_coordinates', 'reject') == 'reject' and any(
+                v['unknown'] for v in counts.values()
+            ):
+                raise ValueError(
+                    'coordinate operations do not cover all candidate component centers'
+                )
             if record.get('unknown_coordinates', 'reject') not in ('reject', 'exclude'):
                 raise ValueError('unsupported unknown-coordinate treatment')
-            return {root for root, values in counts.items() if not values['unknown']
-                    and not values['boundary'] and (values['inside'] > 0 if relation == 'intersects_component'
-                                                   else values['inside'] == components.totals()[root])}
+            return {
+                root
+                for root, values in counts.items()
+                if not values['unknown']
+                and not values['boundary']
+                and (
+                    values['inside'] > 0
+                    if relation == 'intersects_component'
+                    else values['inside'] == components.totals()[root]
+                )
+            }
         if ident not in profiles:
             profiles[ident] = components.profile(value)
         counts = profiles[ident]
@@ -82,15 +102,28 @@ def resolve_affiliations(rules, features, components, bindings, *, protected=())
         selected = None
         for record in conditions:
             found = condition(record, selected if selection['combine'] == 'all' else None)
-            selected = (found if selected is None else selected & found
-                        if selection['combine'] == 'all' else selected | found)
+            selected = (
+                found
+                if selected is None
+                else selected & found if selection['combine'] == 'all' else selected | found
+            )
         for exclusion in selection.get('exclusions', []):
             selected -= condition(exclusion)
-        included = [components.point(w['lon'], w['lat']) for w in selection.get('include_witnesses', [])]
-        excluded = [components.point(w['lon'], w['lat']) for w in selection.get('exclude_witnesses', [])]
-        if (len(set(included)) != len(included) or len(set(excluded)) != len(excluded)
-                or set(included) & selected or not set(excluded) <= selected):
-            raise ValueError('component inclusion/exclusion witnesses conflict with selected geometry')
+        included = [
+            components.point(w['lon'], w['lat']) for w in selection.get('include_witnesses', [])
+        ]
+        excluded = [
+            components.point(w['lon'], w['lat']) for w in selection.get('exclude_witnesses', [])
+        ]
+        if (
+            len(set(included)) != len(included)
+            or len(set(excluded)) != len(excluded)
+            or set(included) & selected
+            or not set(excluded) <= selected
+        ):
+            raise ValueError(
+                'component inclusion/exclusion witnesses conflict with selected geometry'
+            )
         selected = (selected - set(excluded)) | set(included)
         treatment = selection.get('protected_components', 'reject')
         if treatment == 'exclude':
@@ -105,6 +138,12 @@ def resolve_affiliations(rules, features, components, bindings, *, protected=())
             if root in assigned and assigned[root] != entity:
                 raise ValueError('geographic rules assign one component to different entities')
             assigned[root] = entity
-        claims.append({'affiliation_id': ident, 'entity_id': entity, 'entity_code': codes[entity],
-                       'component_ids': sorted(selected)})
+        claims.append(
+            {
+                'affiliation_id': ident,
+                'entity_id': entity,
+                'entity_code': codes[entity],
+                'component_ids': sorted(selected),
+            }
+        )
     return {'claims': claims, 'component_entities': assigned}
