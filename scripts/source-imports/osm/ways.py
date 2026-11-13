@@ -8,6 +8,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from shapely.geometry import LineString
+from features.geometry import storage_geometry
 
 
 def assemble(manifest, directory):
@@ -67,7 +68,7 @@ def assemble(manifest, directory):
         raise ValueError('assembled boundary has a self-intersection')
     if any(abs(a[0] - b[0]) > 180 for a, b in zip(coords, coords[1:])):
         raise ValueError('antimeridian-crossing boundaries require a split source line')
-    return {'type': 'LineString', 'coordinates': coords}
+    return storage_geometry({'type': 'LineString', 'coordinates': coords})
 
 
 def assemble_archive(archive, archive_sha256, expected_geometry_sha256=None):

@@ -122,7 +122,7 @@ class ArchiveTest(unittest.TestCase):
     def test_selected_geometry_and_pin(self):
         with tempfile.TemporaryDirectory() as tmp:
             archive = Path(tmp) / 'source.zip'
-            elements = [{'type': 'node', 'id': 1, 'lon': 0, 'lat': 0},
+            elements = [{'type': 'node', 'id': 1, 'lon': -0.0, 'lat': 0},
                         {'type': 'node', 'id': 2, 'lon': 1, 'lat': 1},
                         {'type': 'way', 'id': 3, 'nodes': [1, 2]}]
             source = json.dumps({'elements': elements}).encode()

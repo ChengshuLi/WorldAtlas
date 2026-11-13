@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 import numpy as np
-from osgeo import gdal
+from osgeo import gdal, ogr
 from map_build.physical import land as b
 
 
@@ -160,6 +160,13 @@ class RasterizeLandTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'invalid geometry'):
             b.run(self.config, self.d / 'bad')
         self.assertFalse((self.d / 'bad').exists())
+
+    def test_invalid_filter_fails_even_when_ogr_exceptions_are_disabled(self):
+        self.cfg['land'][0]['where'] = 'missing_field = 1'
+        self.config.write_text(json.dumps(self.cfg))
+        with ogr.ExceptionMgr(useExceptions=False), self.assertRaisesRegex(ValueError, 'invalid source selection'):
+            b.run(self.config, self.d / 'bad-filter')
+        self.assertFalse((self.d / 'bad-filter').exists())
 
 
 if __name__ == '__main__':

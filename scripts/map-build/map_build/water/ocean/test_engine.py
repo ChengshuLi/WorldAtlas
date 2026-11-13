@@ -250,23 +250,32 @@ class OceanRunnerTests(unittest.TestCase):
         s['endpoints'][1]['latitude'] = '-80'
         self.assertEqual(len(r.load_config(s, 8, 4)[1]), 3)
 
-    def test_geodesic_route_when_dependency_available(self):
-        import importlib.util
-
-        if importlib.util.find_spec('pyproj') is None:
-            self.skipTest('pyproj is not installed')
-        import pyproj
-
+    def test_geodesic_route_without_version_metadata(self):
         s = self.snapshot()
-        s['build'] = {
-            'software_versions': {'pyproj': pyproj.__version__, 'proj': pyproj.proj_version_str}
-        }
         s['routes'][0]['route_type'] = 'wgs84_geodesic'
         s['routes'][0]['parameters'] = {'max_step_km': '1'}
         _, paths, _, _ = r.load_config(s, 8, 4)
         self.assertGreater(len(paths[0]), 100)
         self.assertEqual(paths[0][0], (2.0, 0.0))
         self.assertEqual(paths[0][-1], (2.0, 4.0))
+
+    def test_saved_selection_geodesic_build_records_actual_versions(self):
+        import pyproj
+        from map_build.water.remaining import water_snapshot
+
+        s = self.snapshot()
+        s['routes'][0].update(route_type='wgs84_geodesic', parameters={'max_step_km': 1})
+        selected = water_snapshot({'domains': {'water': dict(s, policies=[]), 'ocean': s}})
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pr, pu = self.grid(root, 'phys', 1)
+            rr, ru = self.grid(root, 'prefill', 0)
+            r.run(selected, 'a' * 64, pr, pu, rr, ru, root / 'out', 8, 4, {})
+            summary = json.loads((root / 'out/run-summary.json').read_text())
+            self.assertEqual(summary['assigned_cells_total'], 32)
+            manifest = json.loads((root / 'out/ocean-layer-manifest.json').read_text())
+            self.assertEqual(manifest['source']['geodesic_software'],
+                             {'pyproj': pyproj.__version__, 'proj': pyproj.proj_version_str})
 
     def test_exact_rational_endpoint_matches_rounded_decimal(self):
         e = {

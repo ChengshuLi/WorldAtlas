@@ -159,6 +159,16 @@ class DatabaseTest(unittest.TestCase):
                                dict(self.recipe, basis='Changed source interpretation'))
         self.assertEqual(self.boundary()[:2], (changed, digest))
 
+    def test_signed_zero_boundary_can_be_read_by_map_builder(self):
+        from map_build.inputs.features import feature_geometry
+
+        geometry = {'type': 'LineString', 'coordinates': [[-0.0, 0.0], [1.0, 1.0]]}
+        digest = save_boundary(self.database, '__osm_a', geometry, self.source, self.recipe)
+        saved, stored_digest, _ = self.boundary()
+        self.assertEqual(digest, stored_digest)
+        self.assertEqual(feature_geometry(dict(geometry=saved, geometry_sha256=digest,
+                                              coordinate_reference='OGC:CRS84'), ('LineString',)), saved)
+
     def test_unknown_revision_stops_before_download(self):
         with self.assertRaisesRegex(ValueError, 'revision does not exist'):
             self.build(revision='missing')

@@ -2,11 +2,14 @@
 import hashlib
 import json
 
+from features.geometry import storage_geometry
+
 
 def save_boundary(database, revision, boundary_id, geometry, provenance, sources):
     """Save a complete mainland boundary and its raw-input links atomically."""
     from psycopg.types.json import Jsonb
 
+    geometry = storage_geometry(geometry)
     raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
     digest = hashlib.sha256(raw).hexdigest()
     selected = {}

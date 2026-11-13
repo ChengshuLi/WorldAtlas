@@ -7,6 +7,7 @@ from bisect import bisect_right
 from pathlib import Path
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
+from map_build.core.geodesy import GEOD
 from map_build.water.ocean.partition_core import rasterize_barriers, floodfill_run_graph
 from map_build.water.ocean.rle_inputs import RunRasterU32LE, make_prefill_adapters
 from map_build.execution.outputs import (
@@ -147,7 +148,7 @@ def spherical_rhumb_points(points, step_km):
     return dense
 
 
-def load_config(snapshot, width, height, software_versions=None, *, physical=None):
+def load_config(snapshot, width, height, *, physical=None):
     revision = snapshot.get('decision_revision', {})
     registry = snapshot.get('entity_revision', {})
     if (
@@ -225,32 +226,15 @@ def load_config(snapshot, width, height, software_versions=None, *, physical=Non
             step_km = num(params.get('max_step_km'))
             if not 0 < step_km <= 1:
                 raise ValueError('geodesic max_step_km must be in (0,1]')
-            try:
-                from pyproj import Geod
-            except ImportError as e:
-                raise ValueError('wgs84_geodesic requires pinned pyproj and PROJ') from e
-            import pyproj
-
-            versions = (
-                software_versions
-                if software_versions is not None
-                else snapshot.get('build', {}).get('software_versions', {})
-            )
-            if (
-                versions.get('pyproj') != pyproj.__version__
-                or versions.get('proj') != pyproj.proj_version_str
-            ):
-                raise ValueError('WGS84 route requires matching pinned pyproj and PROJ versions')
-            geod = Geod(ellps='WGS84')
             dense = []
             for a, b in zip(ll, ll[1:]):
                 if abs(b[0] - a[0]) > 180:
                     raise ValueError('antimeridian-crossing geodesic unsupported')
-                _, _, distance = geod.inv(a[0], a[1], b[0], b[1])
+                _, _, distance = GEOD.inv(a[0], a[1], b[0], b[1])
                 count = max(1, math.ceil(distance / (1000 * step_km)))
                 dense.append(a)
                 if count > 1:
-                    dense.extend(geod.npts(a[0], a[1], b[0], b[1], count - 1))
+                    dense.extend(GEOD.npts(a[0], a[1], b[0], b[1], count - 1))
             dense.append(ll[-1])
             ll = dense
         path = []
@@ -367,7 +351,6 @@ def run(
     height,
     inputs,
     tile_height=256,
-    software_versions=None,
     pre_finalize=None,
     pre_summary=None,
     processing_started=None,
@@ -375,9 +358,7 @@ def run(
     if processing_started is None:
         processing_started = time.perf_counter()
     with RunRasterU32LE(physical_rows, physical_runs, width, height) as physical:
-        policy, paths, seeds, metadata = load_config(
-            snapshot, width, height, software_versions, physical=physical
-        )
+        policy, paths, seeds, metadata = load_config(snapshot, width, height, physical=physical)
     if tile_height <= 0:
         raise ValueError('tile height must be positive')
     create_directory_exclusive(out)

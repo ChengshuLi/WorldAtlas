@@ -53,7 +53,8 @@ def open_layer(spec, *, feature_callback=None):
     if 'where' not in spec:
         raise ValueError('selection predicate must be explicit; null means all features')
     if spec['where'] is not None:
-        layer.SetAttributeFilter(spec['where'])
+        if layer.SetAttributeFilter(spec['where']) != ogr.OGRERR_NONE:
+            raise ValueError('invalid source selection predicate')
     count = 0
     for feat in layer:
         geom = feat.GetGeometryRef()

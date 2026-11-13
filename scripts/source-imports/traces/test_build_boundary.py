@@ -50,6 +50,14 @@ class DatabaseTests(unittest.TestCase):
         self.assertEqual(self.build(), result)
         self.assertEqual(self.row(), before)
 
+    def test_signed_zero_trace_hash_matches_saved_geometry(self):
+        self.register('zero', dict(self.recipe, points=[[10., -0.0], [9., -1.]]))
+        result = self.build('zero')
+        geometry = self.row()[3]
+        raw = json.dumps(geometry, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), result['sha256'])
+        self.assertEqual(geometry['coordinates'][0], [10., 0.])
+
     def test_shared_entry_point_selects_trace_from_the_stored_method(self):
         from run_import import run_import
         result = run_import(lambda: nullcontext(self.database), '__trace_construction', '1')
