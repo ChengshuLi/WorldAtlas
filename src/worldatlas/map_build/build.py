@@ -333,10 +333,14 @@ class Pipeline:
             self.attempt = uuid.uuid4().hex
             self.attempt_dir = self.out / 'attempts' / self.attempt
             self.attempt_dir.mkdir()
+            from worldatlas.map_build.execution.code_archive import capture_source, write_source
+            source_archive = self.attempt_dir / 'source-code.json.gz'
+            write_source(source_archive, capture_source(PACKAGE_ROOT))
             write(
                 self.attempt_dir / 'producer.json',
                 {'code': self.code, 'repository': self.repository,
-                 'runtime': self.runtime, 'scripts_root': str(PACKAGE_ROOT)},
+                 'runtime': self.runtime, 'scripts_root': str(PACKAGE_ROOT),
+                 'source_archive': pin(source_archive)},
             )
             self.checkpoints = Checkpoints(self.out / 'checkpoints', self.attempt)
             self.checkpoints.verify_all()

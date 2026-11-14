@@ -19,5 +19,10 @@ include = ["worldatlas*"]
 namespaces = false
 
 [tool.setuptools.package-data]
+"*" = ["*.md"]
 "worldatlas.map_build" = ["config.json"]
 "worldatlas.map_build.inputs" = ["geography.sql"]
+
+# Ship the same setup definitions used from a checkout; no duplicate copies to maintain.
+[tool.setuptools.data-files]
+"share/worldatlas" = ["environment.yml", "pyproject.toml", "README.md"]

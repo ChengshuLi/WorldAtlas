@@ -90,6 +90,25 @@ class BundleTests(unittest.TestCase):
         (final / "report.json").write_text(
             '{"counts":{"1":1,"17":1},"run_count":2,"grid":{"width":2,"height":1,"step":180}}'
         )
+        from worldatlas.map_build.execution.code_archive import (
+            capture_source,
+            write_source,
+        )
+
+        project = root / "source-project"
+        package = project / "src/worldatlas"
+        package.mkdir(parents=True)
+        (package / "__init__.py").write_text("")
+        (package / "build.py").write_text("value = 42\n")
+        for name in ("environment.yml", "pyproject.toml", "README.md"):
+            (project / name).write_text("setup: " + name)
+        self.code = capture_source(package)
+        self.attempt = self.run / "attempts/first"
+        self.attempt.mkdir(parents=True)
+        write_source(self.attempt / "source-code.json.gz", self.code)
+        (self.attempt / "producer.json").write_text(
+            json.dumps({"source_archive": pin(self.attempt / "source-code.json.gz")})
+        )
         self.report = self.run / "report.json"
         self.report.write_text(
             json.dumps(
@@ -213,8 +232,37 @@ class BundleTests(unittest.TestCase):
             selection=archived["selection"],
             run=archived["run"],
             report=archived["report"],
+            source_code=archived.get("source_code"),
         )
         self.assertEqual(again.read_bytes(), body)
+
+    def test_release_keeps_captured_code_and_deduplicates_unchanged_attempts(self):
+        import shutil
+
+        second = self.run / "attempts/second"
+        second.mkdir()
+        shutil.copyfile(
+            self.attempt / "source-code.json.gz", second / "source-code.json.gz"
+        )
+        (second / "producer.json").write_text(
+            json.dumps({"source_archive": pin(second / "source-code.json.gz")})
+        )
+        build_bundle("v9.0-rc1", self.run, self.viewer, self.output)
+        archived = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc1")
+        self.assertEqual(len(archived["source_code"]), 1)
+        self.assertEqual(len(archived["run"]["attempts"]), 2)
+        restored = self.run.parent / "restored-code"
+        restore_inputs(archived, restored)
+        code_id = next(iter(archived["source_code"]))
+        self.assertEqual(
+            (restored / "code" / code_id / "src/worldatlas/build.py").read_text(),
+            "value = 42\n",
+        )
+
+    def test_changed_code_archive_cannot_be_staged(self):
+        (self.attempt / "source-code.json.gz").write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "checkpoint/input hash mismatch"):
+            build_bundle("v9.0-rc1", self.run, self.viewer, self.output)
 
     def test_historical_restore_applies_locations_without_rewriting_original_records(
         self,

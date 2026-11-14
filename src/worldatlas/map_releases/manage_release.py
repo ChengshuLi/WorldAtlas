@@ -183,10 +183,19 @@ def build_bundle(candidate, run, viewer, bundle):
     )
     config.write_bytes(json_bytes(viewer_config))
 
-    attempts = [read(path) for path in sorted((run / 'attempts').glob('*/producer.json'))]
+    from worldatlas.map_build.execution.code_archive import read_source
+    attempts, source_code = [], {}
+    for producer in sorted((run / 'attempts').glob('*/producer.json')):
+        attempt = read(producer)
+        attempts.append(dict(attempt, attempt_id=producer.parent.name))
+        if source := attempt.get('source_archive'):
+            if Path(source['path']).resolve() != (producer.parent / 'source-code.json.gz').resolve():
+                raise ValueError('source archive must be inside its build attempt')
+            verify_pins([source])
+            source_code[source['sha256']] = read_source(Path(source['path']))
     captured_run = dict(identity, attempts=attempts)
     write_inputs(bundle / INPUTS_FILE, release_id=candidate, configuration=request,
-                 selection=selection, run=captured_run, report=report)
+                 selection=selection, run=captured_run, report=report, source_code=source_code)
     endpoint = request.get('physical_controls', {}).get('source_staging', {}).get('endpoint_url')
     inputs = {'archive': INPUTS_FILE}
     if endpoint is not None:

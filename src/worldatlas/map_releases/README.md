@@ -52,6 +52,24 @@ only `/`, `/index.html` and `/releases/RELEASE_ID/...`; retired `/review/` URLs
 and version shortcuts return 404.
 Deploying the Worker itself is separate: `npx wrangler deploy`.
 
+## Archived code
+
+New build attempts capture the installed WorldAtlas source files and the project
+`environment.yml`, `pyproject.toml` and README before computation. Staging includes
+those captured bytes in `inputs.json.gz`; it does not copy code from the checkout
+at staging time. Git history is not needed to recover them.
+
+Each attempt's producer record identifies its source archive. Identical snapshots
+are stored once per release; resumed attempts using different code retain each
+snapshot. Keep code unchanged while an attempt runs; edits between attempts are
+captured on resume. This does not add a restriction on resuming with changed code.
+
+The snapshot includes source and setup definitions, not raw datasets, Git history,
+Python or native-library binaries. Raw data remains in R2; the run records runtime
+versions and hashes. Reproduction uses that recorded environment and the native
+GDAL setup described in the archived map-building guide. The current source
+snapshot adds approximately 0.5 MB compressed per distinct code version.
+
 ## Restore inputs
 
 ```bash
@@ -61,8 +79,22 @@ worldatlas-build /absolute/path/to/restored-inputs/configuration.json \
   --selection /absolute/path/to/restored-inputs/selection.json
 ```
 
-Restoration verifies the R2 archive and writes a new directory. Use the recorded
-code and environment when reproducing an older result. Source location changes
+Restoration verifies the R2 archive and writes a new directory. Code snapshots
+are extracted under `restored-inputs/code/CODE_ID/`, alongside configuration,
+selection and run records. `run.json` connects attempts to their code IDs through
+the source-archive checksums. To use a restored code snapshot:
+
+```bash
+cd /absolute/path/to/restored-inputs/code/CODE_ID
+micromamba create -f environment.yml
+micromamba activate worldatlas
+python -m pip install --no-deps .
+```
+
+Follow its archived map-building README for the recorded native GDAL setup,
+then run the build command above using the restored configuration and selection.
+Compare its output with the archived release's recorded checksums. Use the
+recorded code and environment when reproducing an older result. Source location changes
 recorded by an archive are applied to the extracted configuration/selection;
 original captured records and reports are preserved.
 

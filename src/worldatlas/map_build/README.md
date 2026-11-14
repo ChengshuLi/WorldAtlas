@@ -144,3 +144,14 @@ the user approves that candidate.
 
 These folders are inside `map_build/`; tests live beside their corresponding
 code. Release commands live separately in [map-releases](../map_releases/README.md).
+
+## Source capture
+
+Each build attempt saves its actual package sources and setup files in
+`attempts/ATTEMPT_ID/source-code.json.gz`. Its producer record pins that archive.
+Keep the code unchanged while an attempt runs; resume captures the code for the
+new attempt and preserves earlier snapshots. Release staging includes these bytes
+in the [release input archive](../map_releases/README.md#archived-code), so later
+Git cleanup or squash merging cannot remove them. Older attempts without captured
+source files remain identifiable by their existing provenance; their code is not
+invented from today's checkout.
