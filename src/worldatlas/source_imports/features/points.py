@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 from zipfile import ZipFile
 
-from worldatlas.source_imports.features.geometry import geometry_hash, validate_geometry
+from worldatlas.source_imports.features.geometry import validate_geometry
 
 
 def read_points(path, settings):
@@ -77,9 +77,6 @@ def read_points(path, settings):
                 continue
             if key in results:
                 raise ValueError('selected provider point is duplicated')
-            expected = selected.get('expected_geometry_sha256')
-            if expected and geometry_hash(geometry) != expected:
-                raise ValueError('selected point geometry checksum differs')
             results[key] = {'feature_id': selected['feature_id'], 'source_feature_id': key,
                             'geometry': geometry}
     if wanted.keys() - results.keys():

@@ -2,7 +2,6 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from worldatlas.source_imports.features.geometry import geometry_hash
 from worldatlas.source_imports.osm.features import assemble_rings, read_features
 
 
@@ -42,12 +41,6 @@ class OsmFeatureTests(unittest.TestCase):
         self.assertEqual(polygons[0][0], [[0., 0.], [10., 0.], [10., 10.], [0., 10.], [0., 0.]])
         self.assertEqual(len(polygons[0]), 2)
         self.assertEqual(len(polygons[1]), 1)
-        self.selection['expected_geometry_sha256'] = geometry_hash(result['geometry'])
-        self.assertEqual(self.read(), result)
-        self.selection['expected_geometry_sha256'] = '0' * 64
-        with self.assertRaisesRegex(ValueError, 'checksum'):
-            self.read()
-
     def test_outer_envelope_is_an_explicit_construction_choice(self):
         self.selection['holes'] = 'outer_envelope'
         self.assertEqual([len(p) for p in self.read()['geometry']['coordinates']], [1, 1])

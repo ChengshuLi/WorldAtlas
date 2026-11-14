@@ -31,12 +31,6 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]['geometry'], {'type': 'Point', 'coordinates': [20, 10]})
         self.assertEqual(rows[0]['source_feature_id'], 'a')
-        self.recipe['selections'][0]['expected_geometry_sha256'] = geometry_hash(rows[0]['geometry'])
-        self.assertEqual(read_features(self.path, self.recipe), rows)
-        self.recipe['selections'][0]['expected_geometry_sha256'] = '0' * 64
-        with self.assertRaisesRegex(ValueError, 'checksum'):
-            read_features(self.path, self.recipe)
-
     def test_missing_and_duplicate_provider_ids(self):
         self.write(('b',))
         with self.assertRaisesRegex(ValueError, 'missing'):
@@ -57,23 +51,16 @@ class VectorTests(unittest.TestCase):
         geometry = {'type': 'Point', 'coordinates': [-180, 1e-24]}
         self.path.write_text(json.dumps({'type': 'FeatureCollection', 'features': [{
             'type': 'Feature', 'id': 42, 'properties': {}, 'geometry': geometry}]}))
-        recipe = dict(id_field='@fid', selections=[dict(feature_id='point', source_feature_id='42',
-                                                       expected_geometry_sha256=geometry_hash(geometry))])
+        recipe = dict(id_field='@fid', selections=[dict(feature_id='point', source_feature_id='42')])
         self.assertEqual(read_features(self.path, recipe)[0]['geometry'], geometry)
 
-    def test_expected_hash_uses_stored_coordinates_without_rounding_source_values(self):
+    def test_geojson_preserves_small_coordinates_and_signed_zero(self):
         geometry = {'type': 'Point', 'coordinates': [-0.0, 1e-24]}
         self.path.write_text(json.dumps({'type': 'FeatureCollection', 'features': [{
             'type': 'Feature', 'properties': {'provider_id': 'a', 'name': 'First'},
             'geometry': geometry}]}))
-        canonical = b'{"coordinates":[0.0,1e-24],"type":"Point"}'
-        self.recipe['selections'][0]['expected_geometry_sha256'] = hashlib.sha256(canonical).hexdigest()
         result = read_features(self.path, self.recipe)[0]['geometry']
         self.assertEqual(json.dumps(result), json.dumps(geometry))
-        self.path.write_text(self.path.read_text().replace('1e-24', '2e-24'))
-        with self.assertRaisesRegex(ValueError, 'checksum'):
-            read_features(self.path, self.recipe)
-
     def test_projected_geojson_is_converted_instead_of_retaining_source_coordinates(self):
         self.path.write_text(json.dumps({'type': 'FeatureCollection',
             'crs': {'type': 'name', 'properties': {'name': 'EPSG:3857'}}, 'features': [{

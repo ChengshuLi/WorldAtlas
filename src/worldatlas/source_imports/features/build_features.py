@@ -17,11 +17,7 @@ class FeatureIdentity(TypedDict):
     source_feature_id: NonEmptyText | int
 
 
-class Selection(FeatureIdentity):
-    expected_geometry_sha256: NotRequired[NonEmptyText]
-
-
-class VectorSelection(Selection):
+class VectorSelection(FeatureIdentity):
     collection: NotRequired[bool]
     expected_feature_count: NotRequired[int]
 
@@ -46,7 +42,6 @@ class OsmSelection(TypedDict):
     object_type: Literal["node", "way", "relation"]
     object_version: NonEmptyText | int
     expected_tags: NotRequired[dict[str, str]]
-    expected_geometry_sha256: NotRequired[NonEmptyText]
     parent_relation: NotRequired[ParentRelation]
     ignored_member_roles: NotRequired[list[tuple[Literal["n", "w", "r"], str]]]
     ring_anchors: NotRequired[list[RingAnchor]]
@@ -107,7 +102,7 @@ def selected_table_points(
     id_field: NonEmptyText,
     longitude_field: NonEmptyText,
     latitude_field: NonEmptyText,
-    selections: list[Selection] | None = None,
+    selections: list[FeatureIdentity] | None = None,
     member: NonEmptyText | None = None,
     columns: list[NonEmptyText] | None = None,
     delimiter: str = ",",

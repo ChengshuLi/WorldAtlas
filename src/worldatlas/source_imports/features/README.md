@@ -33,9 +33,9 @@ worldatlas-import --recipe CONSTRUCTION_ID \
 
 A `selected_vector_features` construction contains `source_id`,
 `basis`, `id_field` and `selections`. Each selection supplies `feature_id` and
-`source_feature_id`; it may check an `expected_geometry_sha256`. Checksums use
-the stored coordinate representation:
-floating-point negative zero becomes positive zero; other values are unchanged.
+`source_feature_id`. Imports verify the cataloged raw bytes and selected IDs;
+there is no separate expected-geometry checksum setting. Floating-point negative
+zero becomes positive zero for storage; other coordinate values are unchanged.
 Select `member` for an archived dataset and `layer` when a file contains several
 layers. An explicit `coordinate_operation` is
 available when a source needs a particular documented CRS conversion.
@@ -56,8 +56,7 @@ selected OSM points and polygons through that same storage workflow.
 
 `selected_table_points` uses [`points.py`](points.py) for CSV, TSV and other
 delimited point tables. Its construction supplies `id_field`, `longitude_field`,
-`latitude_field`, plus the same selections
-and optional geometry-checksum checks. Set `delimiter` for a non-comma separator,
+`latitude_field`, plus the same selections. Set `delimiter` for a non-comma separator,
 `columns` for a headerless table, and `member` for a table inside a ZIP archive.
 A GeoNames construction names its published columns and selected IDs; it uses
 the same table reader as other delimited point sources.

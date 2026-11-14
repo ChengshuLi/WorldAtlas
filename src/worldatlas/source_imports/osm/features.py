@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 import osmium
 from shapely.geometry import Polygon
 
-from worldatlas.source_imports.features.geometry import geometry_hash, validate_geometry
+from worldatlas.source_imports.features.geometry import validate_geometry
 
 
 @dataclass
@@ -177,8 +177,6 @@ def read_features(path, settings):
         geometry = ({'type': 'Point', 'coordinates': list(record['coordinates'])}
                     if kind == 'node' else polygon_geometry(graph, selection, record))
         validate_geometry(geometry)
-        if selection.get('expected_geometry_sha256', geometry_hash(geometry)) != geometry_hash(geometry):
-            raise ValueError('selected OSM geometry checksum differs')
         result.append(dict(feature_id=selection['feature_id'], source_feature_id=selection['source_feature_id'],
                            geometry=geometry))
     return result

@@ -1,11 +1,9 @@
 from copy import deepcopy
-import hashlib
 from pathlib import Path
 import tempfile
 import unittest
 from zipfile import ZipFile
 
-from worldatlas.source_imports.features.geometry import geometry_hash
 from worldatlas.source_imports.features.points import read_points
 
 
@@ -25,19 +23,10 @@ class PointTableTests(unittest.TestCase):
         self.assertEqual([f['feature_id'] for f in features], ['point-one', 'point-two'])
         self.assertEqual(features[0]['geometry'], {'type': 'Point', 'coordinates': [5.5, -2.25]})
         self.assertNotIn('evidence', features[1])
-        self.settings['selections'][0]['expected_geometry_sha256'] = geometry_hash(features[0]['geometry'])
-        self.assertEqual(read_points(self.path, self.settings), features)
-
-    def test_expected_hash_matches_stored_zero_but_still_detects_changed_coordinates(self):
+    def test_small_coordinates_and_signed_zero_are_preserved(self):
         self.path.write_text('id\tname\tlon\tlat\n1\tFirst\t-0.0\t1e-24\n')
         self.settings['selections'] = self.settings['selections'][:1]
-        canonical = b'{"coordinates":[0.0,1e-24],"type":"Point"}'
-        self.settings['selections'][0]['expected_geometry_sha256'] = hashlib.sha256(canonical).hexdigest()
         self.assertEqual(read_points(self.path, self.settings)[0]['geometry']['coordinates'], [-0.0, 1e-24])
-        self.path.write_text(self.path.read_text().replace('1e-24', '2e-24'))
-        with self.assertRaisesRegex(ValueError, 'checksum'):
-            read_points(self.path, self.settings)
-
     def test_filtered_selection_keeps_explicit_points_outside_its_bounds(self):
         self.path.write_text('id\tname\tlon\tlat\tkind\n'
                              '2\tOutside\t-20.25\t11.5\tisland\n'
@@ -86,10 +75,7 @@ class PointTableTests(unittest.TestCase):
             with self.subTest(update=update), self.assertRaises(ValueError):
                 read_points(self.path, dict(self.settings, **update))
 
-    def test_checksum_and_duplicate_selection_are_rejected(self):
-        self.settings['selections'][0]['expected_geometry_sha256'] = '0' * 64
-        with self.assertRaisesRegex(ValueError, 'checksum'):
-            read_points(self.path, self.settings)
+    def test_duplicate_selection_is_rejected(self):
         settings = deepcopy(self.settings)
         settings['selections'] *= 2
         with self.assertRaisesRegex(ValueError, 'unique'):

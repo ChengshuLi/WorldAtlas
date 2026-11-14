@@ -5,7 +5,7 @@ from zipfile import ZipFile
 
 from osgeo import ogr, osr
 
-from worldatlas.source_imports.features.geometry import geometry_hash, validate_geometry
+from worldatlas.source_imports.features.geometry import validate_geometry
 
 
 def dataset_path(path, member=None):
@@ -128,9 +128,6 @@ def read_features(path, settings):
             validate_geometry(value)
         else:
             value = values[0]
-        expected = selection.get('expected_geometry_sha256')
-        if expected and geometry_hash(value) != expected:
-            raise ValueError('selected source geometry checksum differs')
         result.append({'feature_id': selection['feature_id'], 'source_feature_id': key,
                        'geometry': value})
     return result
