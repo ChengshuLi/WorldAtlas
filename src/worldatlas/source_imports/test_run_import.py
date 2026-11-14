@@ -10,11 +10,6 @@ from worldatlas.source_imports.run_import import IMPORTERS, run_import
 
 
 DOCUMENTS = {
-    "composed_area": dict(
-        feature_id="group",
-        input_feature_ids=["first", "second"],
-        basis="A geographic family",
-    ),
     "smooth_latitude_trace": dict(
         source_id="raw",
         basis="Chosen points",

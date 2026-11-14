@@ -67,8 +67,9 @@ Receipts under `inputs/receipts/` identify the construction and its result.
 The map builder uses the same verified raw-file cache. Both commands check the
 catalog's byte sizes and checksums before reusing downloads.
 
-Source-backed area compositions run after their input constructions. All ordering
-comes from the saved `input_feature_ids`; no per-region command sequence is required.
+Every construction consumes cataloged raw sources and its interpretation settings.
+No construction depends on another structured feature; grouping existing features
+belongs to geographic assignments in map building.
 
 ## Document validation
 

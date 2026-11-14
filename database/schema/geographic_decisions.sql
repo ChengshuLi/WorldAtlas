@@ -49,21 +49,31 @@ CREATE TABLE atlas.source_features (
     CONSTRAINT source_features_geometry_check CHECK (atlas.valid_source_geometry(geometry))
 );
 
--- Each assignment selects whole current land components using one imported feature.
+-- An assignment selects whole components using the union of imported features.
+CREATE FUNCTION atlas.valid_assignment_selection(selection jsonb)
+RETURNS boolean LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE AS $$
+DECLARE identifiers jsonb;
+BEGIN
+    IF jsonb_typeof(selection) IS DISTINCT FROM 'object' THEN RETURN false; END IF;
+    IF NOT selection ?& ARRAY['relation','feature_ids']
+       OR selection - ARRAY['relation','feature_ids'] <> '{}'::jsonb
+       OR COALESCE(selection->>'relation' IN ('point_component','intersects_component','contains_component','majority_component'), false) = false
+       THEN RETURN false; END IF;
+    identifiers := selection->'feature_ids';
+    IF jsonb_typeof(identifiers) IS DISTINCT FROM 'array' THEN RETURN false; END IF;
+    IF jsonb_array_length(identifiers) = 0 THEN RETURN false; END IF;
+    RETURN NOT EXISTS (
+        SELECT FROM jsonb_array_elements(identifiers) item
+        WHERE jsonb_typeof(item) <> 'string' OR (item #>> '{}') !~ '[^[:space:]]'
+    ) AND (SELECT count(DISTINCT item) = count(*) FROM jsonb_array_elements(identifiers) item);
+END; $$;
+
 CREATE TABLE atlas.geographic_assignments (
     assignment_id text PRIMARY KEY CHECK (length(trim(assignment_id)) > 0),
     entity_id bigint NOT NULL REFERENCES atlas.geographic_entities(id),
     rationale text NOT NULL CHECK (length(trim(rationale)) > 0),
     selection jsonb NOT NULL,
-    CONSTRAINT geographic_assignments_selection_check CHECK (
-        CASE WHEN jsonb_typeof(selection) = 'object' THEN COALESCE(
-            selection ?& ARRAY['relation','feature_id']
-            AND selection - ARRAY['relation','feature_id'] = '{}'::jsonb
-            AND selection->>'relation' IN ('point_component','intersects_component','contains_component','majority_component')
-            AND jsonb_typeof(selection->'feature_id') = 'string'
-            AND length(trim(selection->>'feature_id')) > 0,
-            false) ELSE false END
-    )
+    CONSTRAINT geographic_assignments_selection_check CHECK (atlas.valid_assignment_selection(selection))
 );
 
 CREATE TABLE atlas.geographic_assignment_sources (

@@ -81,21 +81,6 @@ areas are unwrapped and split back into WGS84 polygons. An ambiguous global
 extent is rejected. These operations are choices in Neon, not automatic changes
 to every imported polygon.
 
-`composed_area` constructs one geographic family's area from contributing
-`input_feature_ids`. For example, a coarse group outline can be supplemented by a
-documented member it omits. The construction stores the output `feature_id`,
-`basis`, input IDs and optional `footprint`. Inputs remain separate structured
-records with their raw-source and construction links. The output carries the
-first input's primary provider identity; the construction records its complete
-lineage. Inputs are read and locked together with the atomic save.
-
-The complete import command orders constructions by these feature dependencies:
-
-```bash
-worldatlas-import --all --r2-endpoint R2_ENDPOINT \
-  --work-dir /absolute/path/to/worldatlas-work/inputs
-```
-
-Running a single `composed_area` recipe combines its current structured inputs.
-Running `--all` regenerates upstream inputs before their dependent areas. Cycles
-or missing inputs stop before the full import begins.
+Geographic assignments can group several imported features directly. Map building
+combines their areas while calculating component membership; source imports do
+not create additional Neon features merely to group existing records.

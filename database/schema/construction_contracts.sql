@@ -2,13 +2,6 @@
 CREATE FUNCTION atlas.valid_construction_record(document jsonb)
 RETURNS boolean LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $contract$
 SELECT CASE document ->> 'method'
-WHEN 'composed_area' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
-    document - ARRAY['method', 'feature_id', 'input_feature_ids', 'basis', 'footprint']::text[] = '{}'::jsonb
-    AND (document ? 'method' AND COALESCE(((document -> 'method') = '"composed_area"'::jsonb), FALSE))
-    AND (document ? 'feature_id' AND COALESCE((jsonb_typeof((document -> 'feature_id')) = 'string' AND ((document -> 'feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (document ? 'input_feature_ids' AND COALESCE(CASE WHEN jsonb_typeof((document -> 'input_feature_ids')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((document -> 'input_feature_ids')) AS item0(value) WHERE NOT COALESCE((jsonb_typeof(item0.value) = 'string' AND (item0.value #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))) ELSE FALSE END, FALSE))
-    AND (document ? 'basis' AND COALESCE((jsonb_typeof((document -> 'basis')) = 'string' AND ((document -> 'basis') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (NOT document ? 'footprint' OR COALESCE(((document -> 'footprint') = '"source"'::jsonb OR (document -> 'footprint') = '"bounding_box"'::jsonb), FALSE))) ELSE FALSE END
 WHEN 'osm_way_chain' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
     document - ARRAY['method', 'source_id', 'boundary_id', 'basis']::text[] = '{}'::jsonb
     AND (document ? 'method' AND COALESCE(((document -> 'method') = '"osm_way_chain"'::jsonb), FALSE))

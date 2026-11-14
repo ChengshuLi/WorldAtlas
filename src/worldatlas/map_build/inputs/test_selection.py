@@ -142,7 +142,11 @@ class SelectionTests(unittest.TestCase):
 
         self.writer.execute(
             "INSERT INTO atlas.geographic_assignments VALUES ('__selected_assignment',970000001,'A geographic decision',%s)",
-            (Jsonb(dict(relation="point_component", feature_id="__selected_point")),),
+            (
+                Jsonb(
+                    dict(relation="point_component", feature_ids=["__selected_point"])
+                ),
+            ),
         )
         self.writer.execute(
             "INSERT INTO atlas.geographic_assignment_sources VALUES ('__selected_assignment','__selected_raw','Section 1','A supporting citation')"
@@ -202,7 +206,7 @@ class SelectionTests(unittest.TestCase):
                     entity_id=970000001,
                     rationale="A geographic decision",
                     selection=dict(
-                        relation="point_component", feature_id="__selected_point"
+                        relation="point_component", feature_ids=["__selected_point"]
                     ),
                 )
             ],

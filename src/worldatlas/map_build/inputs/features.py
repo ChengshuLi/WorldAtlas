@@ -1,21 +1,48 @@
 """Validate selected geographic operations and imported geometry before processing."""
 
 
+def selection_feature_ids(selection):
+    """Current selections use a list; frozen releases may use one feature ID."""
+    return (
+        selection["feature_ids"]
+        if "feature_ids" in selection
+        else [selection["feature_id"]]
+    )
+
+
 def assignment_selection(rule, features):
-    """Require one supported geographic operation and an existing feature."""
+    """Validate one operation over the union of existing imported features."""
     selection = rule.get("selection")
+    # Read the earlier frozen format without mutating the archived selection.
+    if isinstance(selection, dict) and set(selection) == {"relation", "feature_id"}:
+        selection = {
+            "relation": selection["relation"],
+            "feature_ids": [selection["feature_id"]],
+        }
     if (
         not isinstance(selection, dict)
-        or set(selection) != {"relation", "feature_id"}
+        or set(selection) != {"relation", "feature_ids"}
         or selection["relation"]
-        not in ("point_component", "intersects_component", "contains_component", "majority_component")
-        or not isinstance(selection["feature_id"], str)
-        or not selection["feature_id"].strip()
+        not in (
+            "point_component",
+            "intersects_component",
+            "contains_component",
+            "majority_component",
+        )
+        or not isinstance(selection["feature_ids"], list)
+        or not selection["feature_ids"]
+        or any(
+            not isinstance(ident, str) or not ident.strip()
+            for ident in selection["feature_ids"]
+        )
+        or len(set(selection["feature_ids"])) != len(selection["feature_ids"])
     ):
-        raise ValueError("assignment needs exactly one relation and feature_id")
-    if selection["feature_id"] not in features:
         raise ValueError(
-            "assignment refers to a missing feature: " + selection["feature_id"]
+            "assignment needs exactly one relation and distinct nonempty feature_ids"
+        )
+    if missing := set(selection["feature_ids"]) - features:
+        raise ValueError(
+            "assignment refers to a missing feature: " + str(sorted(missing))
         )
     return selection
 

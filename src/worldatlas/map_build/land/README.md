@@ -46,15 +46,18 @@ and distance policies come from Neon. Component IDs are temporary run data.
 Inferred satellites cannot become anchors for other satellites.
 
 Working assignments read `atlas.geographic_assignments`. Each row has one
-`selection` object containing exactly `relation` and `feature_id`, a target entity
-and a rationale. Alternative selections are separate rows. Every selected whole
+`selection` object containing exactly `relation` and `feature_ids`, a target entity
+and a rationale. `feature_ids` is a nonempty list of distinct imported feature IDs.
+Areas are unioned before evaluating component coverage; point selections identify
+the components containing the listed points. This groups nearby geography without
+creating extra features or source-construction records in Neon. Every selected whole
 component receives the target's land code. Broad geographic areas can use
 `majority_component`: more than half the component centers must fall inside, and the entire component receives the label.
 Empty selections, missing features,
 protected mainland selections and disagreeing targets fail before composition.
 
 Current imported features use WGS84 longitude/latitude. Retained release inputs
-may contain earlier compound rules and projected geometry. Replay reads those
+may contain earlier single-feature or compound rules and projected geometry. Replay reads those
 frozen formats without rewriting their stored records; they are not accepted as
 new working assignments.
 

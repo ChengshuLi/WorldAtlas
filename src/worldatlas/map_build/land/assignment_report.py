@@ -11,6 +11,7 @@ import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.inputs.selection import geographic_domain, read_saved
+from worldatlas.map_build.inputs.features import selection_feature_ids
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.geographic_assignments import resolve_assignments
 
@@ -188,7 +189,10 @@ def _regional_claims(frozen, domain, rules, result, components):
                     feature_id=line["feature_id"],
                 ),
                 _component_entities=entities,
-                _display_name=record["rule_set_id"].replace("-", " ").replace("_", " ").capitalize(),
+                _display_name=record["rule_set_id"]
+                .replace("-", " ")
+                .replace("_", " ")
+                .capitalize(),
             )
         )
         result["claims"].append(
@@ -264,7 +268,11 @@ def write_report(
             conditions = (
                 [rule["selection"]] if "selection" in rule else legacy["conditions"]
             )
-            geometries = [features[c["feature_id"]]["geometry"] for c in conditions]
+            geometries = [
+                features[ident]["geometry"]
+                for c in conditions
+                for ident in selection_feature_ids(c)
+            ]
             bounds = view_bounds(geometries, selected, components.grid)
             background, stride = context_spans(components, bounds)
             entity = entities.get(rule["entity_id"], {})
@@ -330,14 +338,16 @@ def write_report(
             ).replace("<", "\\u003c")
             documents = documents_by_section[label]
             details = []
-            for condition in conditions:
-                feature = features[condition["feature_id"]]
+            for feature_id in dict.fromkeys(
+                ident for c in conditions for ident in selection_feature_ids(c)
+            ):
+                feature = features[feature_id]
                 construction = feature.get("construction_id")
                 document = documents.get(construction)
                 if document is not None:
                     details.append(
                         "<h3>"
-                        + escape(condition["feature_id"])
+                        + escape(feature_id)
                         + "</h3><p>"
                         + escape(document["basis"])
                         + "</p><pre>"
@@ -354,20 +364,24 @@ def write_report(
                 else ""
             )
             explanations = {
-                'point_component': 'Select the whole land component containing this point.',
-                'intersects_component': 'Select each whole land component with at least one land-cell center inside the area.',
-                'contains_component': 'Select each whole land component whose land-cell centers all lie inside the area.',
-                'majority_component': 'Select each whole land component with more than half its land-cell centers inside the area. Its coastal tips can extend beyond the outline.',
-                'regional_line_groups_and_satellites': 'Use the dividing line, source-backed island groups and direct nearby named anchors to assign complete islands.'
+                "point_component": "Select the whole land component containing this point.",
+                "intersects_component": "Select each whole land component with at least one land-cell center inside the area.",
+                "contains_component": "Select each whole land component whose land-cell centers all lie inside the area.",
+                "majority_component": "Select each whole land component with more than half its land-cell centers inside the area. Its coastal tips can extend beyond the outline.",
+                "regional_line_groups_and_satellites": "Use the dividing line, source-backed island groups and direct nearby named anchors to assign complete islands.",
             }
-            explanation = ' AND '.join(explanations[c['relation']] for c in conditions) if record['combine']=='all' else ' OR '.join(explanations[c['relation']] for c in conditions)
+            explanation = (
+                " AND ".join(explanations[c["relation"]] for c in conditions)
+                if record["combine"] == "all"
+                else " OR ".join(explanations[c["relation"]] for c in conditions)
+            )
             heading = f"{reference}. {display_name}"
             html = f"""<!doctype html><html lang="en"><meta charset="utf-8">
 <title>{escape(heading)}</title><link rel="stylesheet" href="../assignment_report.css">
 <body><h1>{escape(heading)}</h1><p>{escape(rule.get("rationale", ""))}</p>
 <p><strong>{escape(record["entity"])}</strong> · {len(roots):,} components · {record["cell_count"]:,} cells ·
 {record["unique_component_count"]:,} components uniquely selected by this rule</p>
-<p>{escape(explanation)}</p>
+<p>{escape(explanation)} When several areas are listed, their union is used before selecting components.</p>
 <pre>{escape(json.dumps(rule["selection"] if "selection" in rule else legacy, indent=2))}</pre>
 {construction_details}
 <p>Left: selection geometry. Right: actual assigned land cells in the entity color.
@@ -385,7 +399,10 @@ Drag to pan; scroll to zoom. Both views move together.</p>
                 f"<td>{escape(record['entity'])}</td><td>{len(roots):,}</td><td>{record['cell_count']:,}</td>"
                 f"<td>{record['unique_component_count']:,}</td></tr>"
             )
-        for title, rows in (("assignments", assignment_rows), ("regional policies", policy_rows)):
+        for title, rows in (
+            ("assignments", assignment_rows),
+            ("regional policies", policy_rows),
+        ):
             if rows:
                 index.append(
                     f"<h2>{label.title()} {title} ({len(rows)})</h2><table><thead><tr><th>#</th><th>Rule</th><th>Entity</th><th>Components</th><th>Cells</th><th>Unique components</th></tr></thead><tbody>"

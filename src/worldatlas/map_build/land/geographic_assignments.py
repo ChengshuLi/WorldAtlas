@@ -1,11 +1,13 @@
 """Resolve geographic selection rules against current land components."""
 
-from shapely.geometry import shape
+from shapely import union_all
+from shapely.geometry import mapping, shape
 
 from worldatlas.map_build.inputs.features import (
     assignment_selection,
     affiliation_selection,
     feature_geometry,
+    selection_feature_ids,
 )
 
 
@@ -44,15 +46,16 @@ def resolve_assignments(rules, features, components, bindings, *, protected=()):
         return geometries[ident]
 
     def condition(record, candidates=None):
-        ident, relation = record["feature_id"], record["relation"]
-        value = geometry(ident)
+        identifiers, relation = selection_feature_ids(record), record["relation"]
+        values = [geometry(ident) for ident in identifiers]
         if relation == "point_component":
-            if (
+            if any(
                 value["type"] != "Point"
                 or by_id[ident].get("coordinate_reference", "OGC:CRS84") != "OGC:CRS84"
+                for ident, value in zip(identifiers, values)
             ):
                 raise ValueError("point-component selection needs a point")
-            return {components.point(*value["coordinates"])}
+            return {components.point(*value["coordinates"]) for value in values}
         if relation not in (
             "intersects_component",
             "contains_component",
@@ -70,8 +73,14 @@ def resolve_assignments(rules, features, components, bindings, *, protected=()):
                 else count == total
             )
 
-        if value["type"] not in ("Polygon", "MultiPolygon"):
+        if any(value["type"] not in ("Polygon", "MultiPolygon") for value in values):
             raise ValueError("polygon-component selection needs a polygon")
+        ident, value = identifiers[0], values[0]
+        if len(identifiers) > 1 and any(
+            by_id[ident].get("coordinate_reference", "OGC:CRS84") != "OGC:CRS84"
+            for ident in identifiers
+        ):
+            raise ValueError("grouped features need WGS84 longitude/latitude geometry")
         if by_id[ident].get("coordinate_reference", "OGC:CRS84") != "OGC:CRS84":
             operations = record["coordinate_operations"]
             if operations["source_coordinate_reference"] != by_id[ident].get(
@@ -100,9 +109,14 @@ def resolve_assignments(rules, features, components, bindings, *, protected=()):
                 and not values["boundary"]
                 and accepts(values["inside"], root)
             }
-        if ident not in profiles:
-            profiles[ident] = components.profile(value)
-        counts = profiles[ident]
+        key = tuple(sorted(identifiers))
+        if key not in profiles:
+            # Union before counting: overlapping areas cannot count a cell twice,
+            # and adjacent pieces can together cover a complete land component.
+            if len(values) > 1:
+                value = mapping(union_all([shape(value) for value in values]))
+            profiles[key] = components.profile(value)
+        counts = profiles[key]
         return {root for root, count in counts.items() if accepts(count, root)}
 
     claims, assigned, identifiers = [], {}, set()

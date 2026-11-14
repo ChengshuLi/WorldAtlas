@@ -80,12 +80,12 @@ class RegionalTests(unittest.TestCase):
             dict(
                 assignment_id="left",
                 entity_id=81,
-                selection=dict(feature_id="left", relation="contains_component"),
+                selection=dict(feature_ids=["left"], relation="contains_component"),
             ),
             dict(
                 assignment_id="right",
                 entity_id=42,
-                selection=dict(feature_id="right", relation="point_component"),
+                selection=dict(feature_ids=["right"], relation="point_component"),
             ),
         ]
 
@@ -155,7 +155,7 @@ class RegionalTests(unittest.TestCase):
             dict(
                 assignment_id="right",
                 entity_id=81,
-                selection=dict(feature_id="right", relation="point_component"),
+                selection=dict(feature_ids=["right"], relation="point_component"),
             ),
         ]
         archived = [
@@ -163,7 +163,14 @@ class RegionalTests(unittest.TestCase):
                 affiliation_id="old",
                 entity_id=81,
                 component_selection=dict(
-                    combine="any", conditions=[r["selection"] for r in current]
+                    combine="any",
+                    conditions=[
+                        dict(
+                            relation=r["selection"]["relation"],
+                            feature_id=r["selection"]["feature_ids"][0],
+                        )
+                        for r in current
+                    ],
                 ),
             )
         ]
@@ -173,6 +180,89 @@ class RegionalTests(unittest.TestCase):
         self.assertEqual(a["component_entities"], b["component_entities"])
         self.assertEqual([r["assignment_id"] for r in a["claims"]], ["left", "right"])
         self.assertEqual(b["claims"][0]["affiliation_id"], "old")
+
+    def test_grouped_polygons_are_unioned_before_component_coverage(self):
+        pieces = [
+            feature("first", polygon(-130, 0, -90, 45)),
+            feature("second", polygon(-85, 0, -50, 45)),
+        ]
+        for relation in ("contains_component", "majority_component"):
+            rule = dict(
+                assignment_id="group",
+                entity_id=81,
+                selection=dict(relation=relation, feature_ids=["first", "second"]),
+            )
+            with self.components() as components:
+                result = resolve_assignments([rule], pieces, components, self.bindings)
+                self.assertEqual(result["component_entities"], {7: 81})
+        # Repeated coverage from distinct features must not be counted twice.
+        pieces[1] = feature("second", pieces[0]["geometry"])
+        with (
+            self.components() as components,
+            self.assertRaisesRegex(ValueError, "no current land"),
+        ):
+            resolve_assignments([rule], pieces, components, self.bindings)
+
+    def test_grouped_points_and_dateline_polygons(self):
+        points = [
+            self.features[2],
+            feature("left-point", {"type": "Point", "coordinates": [-112.5, 22.5]}),
+        ]
+        rule = dict(
+            assignment_id="group",
+            entity_id=81,
+            selection=dict(
+                relation="point_component", feature_ids=["right", "left-point"]
+            ),
+        )
+        with self.components() as components:
+            result = resolve_assignments([rule], points, components, self.bindings)
+            self.assertEqual(result["component_entities"], {7: 81, 90000: 81})
+        areas = [
+            feature("west", polygon(-180, -45, -135, 0)),
+            feature("east", polygon(135, -45, 180, 0)),
+        ]
+        rule["selection"] = dict(
+            relation="contains_component", feature_ids=["west", "east"]
+        )
+        with self.components() as components:
+            result = resolve_assignments([rule], areas, components, self.bindings)
+            self.assertEqual(result["component_entities"], {42: 81})
+
+    def test_grouped_selection_rejects_malformed_ids_and_geometry_types(self):
+        for ids in ([], "left", [None], [7], [" "], ["left", "left"]):
+            rule = dict(
+                assignment_id="group",
+                entity_id=81,
+                selection=dict(relation="contains_component", feature_ids=ids),
+            )
+            with (
+                self.subTest(ids=ids),
+                self.components() as components,
+                self.assertRaisesRegex(ValueError, "distinct nonempty"),
+            ):
+                resolve_assignments([rule], self.features, components, self.bindings)
+        for relation in ("contains_component", "point_component"):
+            rule["selection"] = dict(relation=relation, feature_ids=["left", "right"])
+            with (
+                self.components() as components,
+                self.assertRaisesRegex(ValueError, "selection needs"),
+            ):
+                resolve_assignments([rule], self.features, components, self.bindings)
+
+    def test_single_feature_frozen_assignment_replays_without_mutation(self):
+        rule = dict(
+            assignment_id="frozen",
+            entity_id=81,
+            selection=dict(relation="contains_component", feature_id="left"),
+        )
+        original = json.dumps(rule, sort_keys=True)
+        with self.components() as components:
+            result = resolve_assignments(
+                [rule], self.features, components, self.bindings
+            )
+        self.assertEqual(result["component_entities"], {7: 81})
+        self.assertEqual(json.dumps(rule, sort_keys=True), original)
 
     def test_contains_does_not_assign_a_partial_component_and_overlap_can_select_it(
         self,
