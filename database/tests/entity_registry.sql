@@ -1,7 +1,11 @@
 -- Stable IDs, valid hierarchy links and unique grid-code meanings.
 BEGIN;
-DO $$ BEGIN
- INSERT INTO atlas.geographic_entity_ids(id) VALUES (4294967293),(4294967294),(4294967295);
+DO $$
+DECLARE first_id bigint; second_id bigint;
+BEGIN
+ INSERT INTO atlas.geographic_entities(name,level) VALUES ('Generated first','continent') RETURNING id INTO first_id;
+ INSERT INTO atlas.geographic_entities(name,level) VALUES ('Generated second','continent') RETURNING id INTO second_id;
+ IF first_id IS NULL OR second_id<=first_id THEN RAISE EXCEPTION 'generated entity IDs did not advance'; END IF;
  INSERT INTO atlas.geographic_entities(id,name,level,parent_id) VALUES
  (4294967294,'Subcontinent','subcontinent',4294967293),(4294967293,'Continent','continent',NULL);
  SET CONSTRAINTS ALL IMMEDIATE;

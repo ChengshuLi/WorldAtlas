@@ -85,6 +85,11 @@ def selection_domains(selection):
 def entity_colors(selection):
     if "entity_colors" in selection:
         return selection["entity_colors"]
+    if "geography" in selection:
+        return [
+            {"entity_id": entity["id"], "color_rgb": entity.get("color_rgb")}
+            for entity in selection["geography"]["entities"]
+        ]
     # Retained archives have registry-keyed colors; never query current Neon.
     snapshot = selection["domains"]["mainland"]
     return selection["registry_colors"][
@@ -162,12 +167,6 @@ def read_selection(database, *, raw_sources=(), constructions=()):
             )
         result["construction_records"] = [
             dict(source_id=ident, document=document) for ident, document in rows
-        ]
-        result["entity_colors"] = [
-            dict(entity_id=ident, color_rgb=color)
-            for ident, color in database.execute(
-                "SELECT id,color_rgb FROM atlas.geographic_entity_ids ORDER BY id"
-            ).fetchall()
         ]
     return result
 

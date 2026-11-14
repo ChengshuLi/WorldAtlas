@@ -10,6 +10,7 @@ import psycopg
 from psycopg.types.json import Jsonb
 
 from worldatlas.map_build.inputs.selection import (
+    entity_colors,
     canonical_bytes,
     read_selection,
     read_saved,
@@ -107,10 +108,7 @@ class SelectionTests(unittest.TestCase):
         self.addCleanup(self.writer.close)
         self.addCleanup(self.remove)
         self.writer.execute(
-            "INSERT INTO atlas.geographic_entity_ids(id,color_rgb) VALUES (970000001,'#123456')"
-        )
-        self.writer.execute(
-            "INSERT INTO atlas.geographic_entities(id,name,level) VALUES (970000001,'Selected entity','continent')"
+            "INSERT INTO atlas.geographic_entities(id,name,level,color_rgb) VALUES (970000001,'Selected entity','continent','#123456')"
         )
         self.writer.execute(
             "INSERT INTO atlas.review_category_bindings VALUES (17,970000001,'land')"
@@ -141,9 +139,6 @@ class SelectionTests(unittest.TestCase):
             "DELETE FROM atlas.review_category_bindings WHERE entity_id=970000001"
         )
         self.writer.execute("DELETE FROM atlas.geographic_entities WHERE id=970000001")
-        self.writer.execute(
-            "DELETE FROM atlas.geographic_entity_ids WHERE id=970000001"
-        )
 
     def read(self, **options):
         with psycopg.connect(self.url) as db:
@@ -162,7 +157,7 @@ class SelectionTests(unittest.TestCase):
         )
         self.assertEqual(selected["raw_sources"][0]["sha256"], "a" * 64)
         self.assertEqual(
-            selected["entity_colors"], [dict(entity_id=970000001, color_rgb="#123456")]
+            entity_colors(selected), [dict(entity_id=970000001, color_rgb="#123456")]
         )
 
     def test_later_working_edit_does_not_change_saved_inputs(self):
@@ -234,10 +229,10 @@ class SelectionTests(unittest.TestCase):
                     result = db.execute(query, params)
                     if query.startswith("SELECT to_jsonb(a)"):
                         outer.writer.execute(
-                            "UPDATE atlas.geographic_entity_ids SET color_rgb='#654321' WHERE id=970000001"
+                            "UPDATE atlas.geographic_entities SET color_rgb='#654321' WHERE id=970000001"
                         )
                     return result
 
             first = read_selection(ConcurrentEdit())
-        self.assertEqual(first["entity_colors"][0]["color_rgb"], "#123456")
-        self.assertEqual(self.read()["entity_colors"][0]["color_rgb"], "#654321")
+        self.assertEqual(entity_colors(first)[0]["color_rgb"], "#123456")
+        self.assertEqual(entity_colors(self.read())[0]["color_rgb"], "#654321")

@@ -13,10 +13,15 @@ It loads these files in dependency order, within one transaction:
 | --- | --- |
 | [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and editable construction documents. |
 | [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated checks for typed construction parameters. |
-| [`entities.sql`](schema/entities.sql) | Stable entity IDs/colors, editable names/parents and grid-code bindings. |
+| [`entities.sql`](schema/entities.sql) | Entities with generated IDs, names, hierarchy links and colors, plus grid-code bindings. |
 | [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, decisions, shared explanations, citations, ocean routes and assignment policies. |
 | [`mainland.sql`](schema/mainland.sql) | Editable boundaries, raw-source links, assembled seed regions and component witnesses. |
 | [`releases.sql`](schema/releases.sql) | Immutable release manifests, approval and official-version/homepage pointers. |
+
+`geographic_entities` stores each entity's generated ID, name, hierarchy links and
+color together. The top hierarchy level currently uses `continent` for both
+continents and top-level oceans. Location-level entities have a land/water class;
+map-code bindings also distinguish land from water.
 
 Each table's constraints and supporting functions are kept beside its definition.
 These files define structure only. Source records, colors, geographic choices and

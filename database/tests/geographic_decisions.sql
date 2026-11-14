@@ -1,7 +1,6 @@
 -- Geographic records link to existing sources, entities and explanations.
 BEGIN;
 DO $$ BEGIN
- INSERT INTO atlas.geographic_entity_ids(id) VALUES(7);
  INSERT INTO atlas.geographic_entities(id,name,level) VALUES (7,'Entity','continent');
  INSERT INTO atlas.source_assets(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes)
  VALUES ('__source','Test','Provider','test:source','Terms','test:terms','Credit','test','source',repeat('a',64),1);

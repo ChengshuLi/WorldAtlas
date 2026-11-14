@@ -11,7 +11,7 @@ and runtime versions are separate provenance; a code change does not require
 permission to resume.
 
 [`geography.sql`](geography.sql) exports working records once. New selections use
-format v3 with one geography collection, entity colors, contributing construction
+format v3 with one geography collection (including entity colors), contributing construction
 settings and exact raw-file catalog records. Stage views distinguish ocean barriers
 from mainland closure lines without independent database revisions.
 
