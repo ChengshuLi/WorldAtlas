@@ -91,11 +91,6 @@ def resolve_affiliations(rules, features, components, bindings, *, protected=())
             raise ValueError('duplicate affiliation or unbound target entity')
         identifiers.add(ident)
         selection = affiliation_selection(rule, by_id.keys())
-        for assertion in selection.get('source_assertions', []):
-            point = shape(geometry(assertion['point_feature_id']))
-            area = shape(geometry(assertion['area_feature_id']))
-            if point.geom_type != 'Point' or not area.contains(point):
-                raise ValueError('selected source point is not inside its identity area')
         conditions = selection['conditions']
         selected = None
         for record in conditions:

@@ -17,14 +17,6 @@ def affiliation_selection(rule, features):
                     or not isinstance(condition.get('feature_id'), str)):
                 raise ValueError('invalid component selection condition')
             references.add(condition['feature_id'])
-    assertions = selection.get('source_assertions', [])
-    if not isinstance(assertions, list):
-        raise ValueError('source assertions must be a list')
-    for assertion in assertions:
-        if (not isinstance(assertion, dict)
-                or any(not isinstance(assertion.get(key), str) for key in ('point_feature_id', 'area_feature_id'))):
-            raise ValueError('source assertion needs point and area feature IDs')
-        references.update((assertion['point_feature_id'], assertion['area_feature_id']))
     if references - features:
         raise ValueError('component selection refers to a missing feature: ' + str(sorted(references - features)))
     return selection
