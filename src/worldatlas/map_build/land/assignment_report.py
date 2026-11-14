@@ -17,6 +17,43 @@ from worldatlas.map_build.land.geographic_assignments import resolve_assignments
 ASSETS = Path(__file__).parent
 
 
+INDEX_SCRIPT = r"""<script>
+document.querySelector('#search').oninput = event => {
+  const query = event.target.value.toLowerCase();
+  document.querySelectorAll('tbody tr').forEach(row => {
+    row.hidden = !row.textContent.toLowerCase().includes(query);
+  });
+};
+for (const table of document.querySelectorAll('table')) {
+  const body = table.tBodies[0], headers = [...table.tHead.rows[0].cells];
+  headers.forEach((header, column) => {
+    const label = header.textContent, button = document.createElement('button');
+    button.textContent = label + ' ↕';
+    header.replaceChildren(button);
+    button.onclick = () => {
+      const rows = [...body.rows];
+      const value = row => row.cells[column].textContent.trim();
+      const numeric = rows.every(row => /^[\d,]+$/.test(value(row)));
+      const descending = header.hasAttribute('aria-sort')
+        ? header.getAttribute('aria-sort') === 'ascending' : numeric && column !== 0;
+      rows.sort((a, b) => {
+        const comparison = numeric
+          ? Number(value(a).replaceAll(',', '')) - Number(value(b).replaceAll(',', ''))
+          : value(a).localeCompare(value(b), undefined, {numeric: true, sensitivity: 'base'});
+        return (descending ? -comparison : comparison) || Number(a.cells[0].textContent) - Number(b.cells[0].textContent);
+      });
+      body.append(...rows);
+      headers.forEach(other => {
+        other.removeAttribute('aria-sort');
+        other.firstChild.textContent = other.firstChild.textContent.replace(/ [↑↓↕]$/, '') + ' ↕';
+      });
+      header.setAttribute('aria-sort', descending ? 'descending' : 'ascending');
+      button.textContent = label + (descending ? ' ↓' : ' ↑');
+    };
+  });
+}
+</script></body></html>"""
+
 def cell_spans(components, roots):
     """Index only requested components; keep every selected native-grid cell."""
     positions = np.flatnonzero(np.isin(components.runs[:, 2], list(roots)))
@@ -252,7 +289,8 @@ This report covers whole-component assignments; mainland partitions and regional
         + '<input id="search" placeholder="Filter rules by name, entity or number"><div class="layout"><nav>'
         + "".join(index)
         + '</nav><iframe name="detail" title="Rule details" src="current/001.html"></iframe></div>'
-        + '<script>document.querySelector("#search").oninput=e=>document.querySelectorAll("tbody tr").forEach(r=>r.hidden=!r.textContent.toLowerCase().includes(e.target.value.toLowerCase()))</script></body></html>'
+        + INDEX_SCRIPT
+
     )
     return summary
 
