@@ -26,10 +26,12 @@ class ComponentGrid:
         self.validated = np.zeros(grid.height, dtype=bool)
         self.populations = None
         try:
-            self.physical = self.resources.enter_context(open_grid(physical_directory, grid))
+            self.physical = self.resources.enter_context(
+                open_grid(physical_directory, grid)
+            )
             directory = self.directory
-            self.offsets = self._map(directory / 'rows.u32le')
-            self.runs = self._map(directory / 'runs.u32le')
+            self.offsets = self._map(directory / "rows.u32le")
+            self.runs = self._map(directory / "runs.u32le")
             if (
                 len(self.offsets) != grid.height + 1
                 or len(self.runs) % 3
@@ -37,7 +39,7 @@ class ComponentGrid:
                 or int(self.offsets[-1]) != len(self.runs) // 3
                 or np.any(self.offsets[1:] < self.offsets[:-1])
             ):
-                raise ValueError('invalid component stream offsets')
+                raise ValueError("invalid component stream offsets")
             self.runs = self.runs.reshape(-1, 3)
         except BaseException:
             self.close()
@@ -45,10 +47,10 @@ class ComponentGrid:
 
     def _map(self, path):
         if path.stat().st_size % 4:
-            raise ValueError('incomplete component u32 stream')
+            raise ValueError("incomplete component u32 stream")
         if not path.stat().st_size:
-            return np.empty(0, dtype='<u4')
-        values = np.memmap(path, dtype='<u4', mode='r')
+            return np.empty(0, dtype="<u4")
+        values = np.memmap(path, dtype="<u4", mode="r")
         self.resources.callback(values._mmap.close)
         return values
 
@@ -63,7 +65,7 @@ class ComponentGrid:
 
     def row(self, y):
         if type(y) is not int or not 0 <= y < self.grid.height:
-            raise ValueError('component row outside grid')
+            raise ValueError("component row outside grid")
         first, last = map(int, self.offsets[y : y + 2])
         spans = self.runs[first:last]
         if self.validated[y]:
@@ -71,7 +73,7 @@ class ComponentGrid:
         ends, codes = row(self.physical, y, self.grid.width)
         starts = np.r_[np.uint32(0), ends[:-1]]
         if np.any(~np.isin(codes, [1, 17])):
-            raise ValueError('invalid physical class')
+            raise ValueError("invalid physical class")
         lo, hi, roots = spans.T
         if (
             np.any(lo >= hi)
@@ -79,7 +81,7 @@ class ComponentGrid:
             or np.any(roots == 2**32 - 1)
             or np.any(hi[:-1] > lo[1:])
         ):
-            raise ValueError('invalid component row')
+            raise ValueError("invalid component row")
 
         def union(a, b):
             if not len(a):
@@ -89,7 +91,7 @@ class ComponentGrid:
         expected = union(starts[codes == 17], ends[codes == 17])
         actual = union(lo, hi)
         if any(not np.array_equal(a, b) for a, b in zip(expected, actual)):
-            raise ValueError('component coverage differs from physical land')
+            raise ValueError("component coverage differs from physical land")
         self.validated[y] = True
         return spans
 
@@ -99,8 +101,12 @@ class ComponentGrid:
                 self.row(y)
             roots, inverse = np.unique(self.runs[:, 2], return_inverse=True)
             totals = np.zeros(len(roots), dtype=np.uint64)
-            np.add.at(totals, inverse, self.runs[:, 1].astype(np.uint64) - self.runs[:, 0])
-            self.populations = {int(root): int(total) for root, total in zip(roots, totals)}
+            np.add.at(
+                totals, inverse, self.runs[:, 1].astype(np.uint64) - self.runs[:, 0]
+            )
+            self.populations = {
+                int(root): int(total) for root, total in zip(roots, totals)
+            }
         return self.populations
 
     def point(self, longitude, latitude):
@@ -108,13 +114,13 @@ class ComponentGrid:
         x = (Fraction(str(longitude)) - Fraction(str(self.grid.west))) / step
         y = (Fraction(str(self.grid.north)) - Fraction(str(latitude))) / step
         if x.denominator == 1 or y.denominator == 1:
-            raise ValueError('source point lies on a grid edge')
+            raise ValueError("source point lies on a grid edge")
         x, y = int(x // 1), int(y // 1)
         if not 0 <= x < self.grid.width or not 0 <= y < self.grid.height:
-            raise ValueError('source point outside grid')
+            raise ValueError("source point outside grid")
         root = self._at_cell(x, y)
         if root is None:
-            raise ValueError('source point does not fall on physical land')
+            raise ValueError("source point does not fall on physical land")
         return root
 
     def component_at(self, longitude, latitude):
@@ -129,7 +135,7 @@ class ComponentGrid:
 
     def _at_cell(self, x, y):
         spans = self.row(y)
-        index = int(np.searchsorted(spans[:, 1], x, side='right'))
+        index = int(np.searchsorted(spans[:, 1], x, side="right"))
         if index == len(spans) or not int(spans[index, 0]) <= x < int(spans[index, 1]):
             return None
         return int(spans[index, 2])
@@ -137,8 +143,12 @@ class ComponentGrid:
     def profile(self, geometry, *, rows_per_batch=64):
         """Count component centers within a polygon, including holes and wrapping."""
         if type(rows_per_batch) is not int or rows_per_batch <= 0:
-            raise ValueError('row batch must be positive')
-        reject_boundary_centers(geometry, self.grid)
+            raise ValueError("row batch must be positive")
+        reject_boundary_centers(
+            geometry,
+            self.grid,
+            selected=lambda x, y: self._at_cell(x % self.grid.width, y) is not None,
+        )
         (x0, x1, y0, y1), _ = wrapped_grid_bounds(
             geometry, self.grid.width, self.grid.height, self.grid.step
         )
@@ -157,7 +167,9 @@ class ComponentGrid:
                         lo, hi, root = max(int(lo), a), min(int(hi), b), int(root)
                         offset = (a - x0) % self.grid.width
                         count = int(
-                            np.count_nonzero(mask[y - first, offset + lo - a : offset + hi - a])
+                            np.count_nonzero(
+                                mask[y - first, offset + lo - a : offset + hi - a]
+                            )
                         )
                         if count:
                             counts[root] = counts.get(root, 0) + count
@@ -178,16 +190,18 @@ class ComponentGrid:
         candidates = set(candidates)
         if not candidates:
             return {}
-        definitions = {record['id']: record for record in operations['operations']}
-        order = operations['operation_preference']
+        definitions = {record["id"]: record for record in operations["operations"]}
+        order = operations["operation_preference"]
         if len(set(order)) != len(order) or set(order) != set(definitions):
-            raise ValueError('coordinate operations need one complete preference order')
+            raise ValueError("coordinate operations need one complete preference order")
         transforms = [
-            (definitions[key], Transformer.from_pipeline(definitions[key]['pipeline']))
+            (definitions[key], Transformer.from_pipeline(definitions[key]["pipeline"]))
             for key in order
         ]
         source = shape(geometry)
-        counts = {root: {'inside': 0, 'boundary': 0, 'unknown': 0} for root in candidates}
+        counts = {
+            root: {"inside": 0, "boundary": 0, "unknown": 0} for root in candidates
+        }
         for y in range(self.grid.height):
             for a, b, root in self.row(y):
                 root = int(root)
@@ -197,17 +211,17 @@ class ComponentGrid:
                 latitude = np.full(len(longitude), float(self.grid.latitude(y)))
                 available = np.ones(len(longitude), dtype=bool)
                 for definition, transform in transforms:
-                    area = definition['area_bounds']
+                    area = definition["area_bounds"]
                     inside_lon = (
-                        (longitude >= area['west']) & (longitude <= area['east'])
-                        if area['west'] <= area['east']
-                        else (longitude >= area['west']) | (longitude <= area['east'])
+                        (longitude >= area["west"]) & (longitude <= area["east"])
+                        if area["west"] <= area["east"]
+                        else (longitude >= area["west"]) | (longitude <= area["east"])
                     )
                     chosen = (
                         available
                         & inside_lon
-                        & (latitude >= area['south'])
-                        & (latitude <= area['north'])
+                        & (latitude >= area["south"])
+                        & (latitude <= area["north"])
                     )
                     if not chosen.any():
                         continue
@@ -218,11 +232,13 @@ class ComponentGrid:
                         errcheck=True,
                     )
                     if not (np.isfinite(x).all() and np.isfinite(z).all()):
-                        raise ValueError('coordinate operation produced invalid source coordinates')
+                        raise ValueError(
+                            "coordinate operation produced invalid source coordinates"
+                        )
                     inside = contains_xy(source, x, z)
                     boundary = intersects_xy(source, x, z) & ~inside
-                    counts[root]['inside'] += int(inside.sum())
-                    counts[root]['boundary'] += int(boundary.sum())
+                    counts[root]["inside"] += int(inside.sum())
+                    counts[root]["boundary"] += int(boundary.sum())
                     available[chosen] = False
-                counts[root]['unknown'] += int(available.sum())
+                counts[root]["unknown"] += int(available.sum())
         return counts

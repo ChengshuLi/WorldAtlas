@@ -53,8 +53,23 @@ def resolve_assignments(rules, features, components, bindings, *, protected=()):
             ):
                 raise ValueError("point-component selection needs a point")
             return {components.point(*value["coordinates"])}
-        if relation not in ("intersects_component", "contains_component"):
+        if relation not in (
+            "intersects_component",
+            "contains_component",
+            "majority_component",
+        ):
             raise ValueError("unsupported component selection relation")
+
+        def accepts(count, root):
+            if relation == "intersects_component":
+                return count > 0
+            total = components.totals()[root]
+            return (
+                count * 2 > total
+                if relation == "majority_component"
+                else count == total
+            )
+
         if value["type"] not in ("Polygon", "MultiPolygon"):
             raise ValueError("polygon-component selection needs a polygon")
         if by_id[ident].get("coordinate_reference", "OGC:CRS84") != "OGC:CRS84":
@@ -83,19 +98,12 @@ def resolve_assignments(rules, features, components, bindings, *, protected=()):
                 for root, values in counts.items()
                 if not values["unknown"]
                 and not values["boundary"]
-                and (
-                    values["inside"] > 0
-                    if relation == "intersects_component"
-                    else values["inside"] == components.totals()[root]
-                )
+                and accepts(values["inside"], root)
             }
         if ident not in profiles:
             profiles[ident] = components.profile(value)
         counts = profiles[ident]
-        if relation == "intersects_component":
-            return set(counts)
-        totals = components.totals()
-        return {root for root, count in counts.items() if count == totals[root]}
+        return {root for root, count in counts.items() if accepts(count, root)}
 
     claims, assigned, identifiers = [], {}, set()
     for rule in rules:

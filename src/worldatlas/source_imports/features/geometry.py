@@ -1,4 +1,5 @@
 """Canonical geographic geometry and atomic storage of source-derived features."""
+
 import hashlib
 import json
 import math
@@ -9,8 +10,13 @@ from shapely.geometry import shape
 
 def geometry_bytes(geometry):
     """Hash the coordinate representation retained by PostgreSQL JSONB."""
-    return json.dumps(storage_geometry(geometry), sort_keys=True, separators=(',', ':'),
-                      ensure_ascii=False, allow_nan=False).encode()
+    return json.dumps(
+        storage_geometry(geometry),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode()
 
 
 def geometry_hash(geometry):
@@ -24,57 +30,136 @@ def storage_geometry(geometry):
         if isinstance(value, (list, tuple)):
             return [coordinates(child) for child in value]
         return 0.0 if type(value) is float and value == 0 else value
-    return {'type': geometry['type'], 'coordinates': coordinates(geometry['coordinates'])}
+
+    return {
+        "type": geometry["type"],
+        "coordinates": coordinates(geometry["coordinates"]),
+    }
 
 
 def validate_geometry(geometry):
-    if (not isinstance(geometry, dict) or set(geometry) != {'type', 'coordinates'}
-            or geometry['type'] not in {'Point', 'MultiPoint', 'LineString',
-                                        'MultiLineString', 'Polygon', 'MultiPolygon'}):
-        raise ValueError('expected a point, line or polygon geometry')
+    if (
+        not isinstance(geometry, dict)
+        or set(geometry) != {"type", "coordinates"}
+        or geometry["type"]
+        not in {
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+        }
+    ):
+        raise ValueError("expected a point, line or polygon geometry")
+
     def coordinates(values):
         if not isinstance(values, (tuple, list)) or not values:
-            raise ValueError('geometry coordinates must be nonempty arrays')
+            raise ValueError("geometry coordinates must be nonempty arrays")
         if isinstance(values[0], (tuple, list)):
             for child in values:
                 coordinates(child)
-        elif (len(values) != 2 or any(type(value) not in (int, float)
-                                     or not math.isfinite(value) for value in values)):
-            raise ValueError('expected finite two-dimensional numeric coordinates')
+        elif len(values) != 2 or any(
+            type(value) not in (int, float) or not math.isfinite(value)
+            for value in values
+        ):
+            raise ValueError("expected finite two-dimensional numeric coordinates")
         elif not (-180 <= values[0] <= 180 and -90 <= values[1] <= 90):
-            raise ValueError('coordinates are outside WGS84 longitude/latitude ranges')
-    coordinates(geometry['coordinates'])
+            raise ValueError("coordinates are outside WGS84 longitude/latitude ranges")
+
+    coordinates(geometry["coordinates"])
     result = shape(geometry)
     if result.is_empty or not result.is_valid or result.has_z:
-        raise ValueError('expected valid, nonempty two-dimensional geometry')
+        raise ValueError("expected valid, nonempty two-dimensional geometry")
+    return result
+
+
+def feature_footprint(geometry, mode="source"):
+    """Keep source geometry or construct an explicit whole-group bounding extent."""
+    if mode == "source":
+        return geometry
+    if mode != "bounding_box":
+        raise ValueError("unsupported feature footprint")
+    import numpy as np
+    from shapely import get_coordinates, transform
+    from shapely.affinity import translate
+    from shapely.geometry import LineString, MultiPolygon, mapping
+    from shapely.ops import split
+
+    source = validate_geometry(geometry)
+    if source.geom_type not in ("Polygon", "MultiPolygon"):
+        raise ValueError("a geographic envelope needs polygon members")
+    xs = get_coordinates(source)[:, 0]
+    if np.ptp(xs) >= 180:
+        pieces = list(source.geoms) if source.geom_type == "MultiPolygon" else [source]
+        if any(np.ptp(get_coordinates(part)[:, 0]) >= 180 for part in pieces):
+            raise ValueError("group envelope has ambiguous longitude coverage")
+        ordered = np.unique(xs)
+        gaps = np.diff(np.r_[ordered, ordered[0] + 360])
+        start = ordered[(int(np.argmax(gaps)) + 1) % len(ordered)]
+
+        def unwrap(values):
+            result = values.copy()
+            result[:, 0] = np.where(
+                values[:, 0] < start, values[:, 0] + 360, values[:, 0]
+            )
+            return result
+
+        source = transform(source, unwrap)
+        if source.bounds[2] - source.bounds[0] >= 180:
+            raise ValueError(
+                "group envelope must occupy less than 180 degrees longitude"
+            )
+    envelope = source.envelope
+    if envelope.bounds[2] > 180:
+        pieces = split(envelope, LineString([(180, -90), (180, 90)])).geoms
+        envelope = MultiPolygon(
+            [
+                translate(part, xoff=-360) if part.bounds[0] >= 180 else part
+                for part in pieces
+            ]
+        )
+    result = mapping(envelope)
+    validate_geometry(result)
     return result
 
 
 def save_features(database, features, recipe):
     """Save a complete import atomically; existing relationships survive."""
-    identifiers = [feature['feature_id'] for feature in features]
-    if (not identifiers or any(not isinstance(value, str) or not value.strip() for value in identifiers)
-            or len(set(identifiers)) != len(identifiers)):
-        raise ValueError('feature IDs must be nonempty and unique')
+    identifiers = [feature["feature_id"] for feature in features]
+    if (
+        not identifiers
+        or any(not isinstance(value, str) or not value.strip() for value in identifiers)
+        or len(set(identifiers)) != len(identifiers)
+    ):
+        raise ValueError("feature IDs must be nonempty and unique")
     records, hashes = [], {}
     for feature in features:
-        validate_geometry(feature['geometry'])
-        geometry = storage_geometry(feature['geometry'])
+        validate_geometry(feature["geometry"])
+        geometry = storage_geometry(feature["geometry"])
         digest = geometry_hash(geometry)
-        hashes[feature['feature_id']] = digest
-        records.append((feature['feature_id'], feature['source_id'], feature['source_feature_id'],
-                        Jsonb(geometry),
-                        recipe['recipe_id']))
+        hashes[feature["feature_id"]] = digest
+        records.append(
+            (
+                feature["feature_id"],
+                feature["source_id"],
+                feature["source_feature_id"],
+                Jsonb(geometry),
+                recipe["recipe_id"],
+            )
+        )
     with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(
-                'INSERT INTO atlas.source_features '
-                '(feature_id,source_id,source_feature_id,'
-                'geometry,construction_id) '
-                'VALUES (%s,%s,%s,%s,%s) '
-                'ON CONFLICT (feature_id) DO UPDATE SET '
-                'source_id=EXCLUDED.source_id,'
-                'source_feature_id=EXCLUDED.source_feature_id,'
-                'geometry=EXCLUDED.geometry,'
-                'construction_id=EXCLUDED.construction_id', records)
+                "INSERT INTO atlas.source_features "
+                "(feature_id,source_id,source_feature_id,"
+                "geometry,construction_id) "
+                "VALUES (%s,%s,%s,%s,%s) "
+                "ON CONFLICT (feature_id) DO UPDATE SET "
+                "source_id=EXCLUDED.source_id,"
+                "source_feature_id=EXCLUDED.source_feature_id,"
+                "geometry=EXCLUDED.geometry,"
+                "construction_id=EXCLUDED.construction_id",
+                records,
+            )
     return hashes

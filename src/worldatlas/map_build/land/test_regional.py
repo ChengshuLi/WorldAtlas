@@ -239,6 +239,51 @@ class RegionalTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "grid edge"):
                 components.point(90, 22.5)
 
+    def test_component_profile_ignores_water_boundary_contacts_but_rejects_land_ties(
+        self,
+    ):
+        with self.components() as components:
+            self.assertEqual(components.profile(polygon(-22.5, -45, 45, 45)), {})
+            with self.assertRaisesRegex(ValueError, "cell center"):
+                components.profile(polygon(-67.5, -45, 45, 45))
+
+    def test_majority_matching_selects_whole_islands_without_selecting_large_neighbors(
+        self,
+    ):
+        self.physical[1, 3] = 17
+        write_layer(
+            self.root / "three-cell-physical",
+            self.grid,
+            patch_rows(self.physical, self.grid.bounds, self.grid),
+        )
+        runs = np.fromfile(self.root / "components/runs.u32le", dtype="<u4").reshape(
+            -1, 3
+        )
+        runs[0, 1] = 4
+        runs.tofile(self.root / "components/runs.u32le")
+        area = feature("most", polygon(-90, 0, 0, 45))
+        rule = dict(
+            assignment_id="group",
+            entity_id=81,
+            selection=dict(feature_id="most", relation="majority_component"),
+        )
+        with ComponentGrid(
+            self.root / "three-cell-physical", self.root / "components", self.grid
+        ) as components:
+            result = resolve_assignments([rule], [area], components, self.bindings)
+            self.assertEqual(result["component_entities"], {7: 81})
+            rule["selection"]["relation"] = "contains_component"
+            with self.assertRaisesRegex(ValueError, "no current"):
+                resolve_assignments([rule], [area], components, self.bindings)
+        runs[0, 1] = 3
+        runs.tofile(self.root / "components/runs.u32le")
+        rule["selection"] = dict(feature_id="partial", relation="majority_component")
+        with (
+            self.components() as components,
+            self.assertRaisesRegex(ValueError, "no current"),
+        ):
+            resolve_assignments([rule], self.features, components, self.bindings)
+
     def test_scoped_partition_is_composed_once_and_cannot_change_water(self):
         partition = dict(
             geometry=polygon(-180, -45, -135, 0), entity_id=42, component_ids={42}

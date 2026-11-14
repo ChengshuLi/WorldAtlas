@@ -2,24 +2,25 @@
 
 import argparse
 import hashlib
-from contextlib import ExitStack, closing
 import json
 import logging
 import os
+from contextlib import ExitStack, closing
 from pathlib import Path
 
 from worldatlas.source_imports.atlas_sources.catalog import read_recipe
 from worldatlas.source_imports.contracts import Runtime, bind_document
-from worldatlas.source_imports.traces.build_boundary import smooth_latitude_trace
-from worldatlas.source_imports.osm.build_boundary import osm_way_chain
-from worldatlas.source_imports.iho.build_routes import s130_rhumb_routes
-from worldatlas.source_imports.watersheds.build_boundary import watershed_boundary
 from worldatlas.source_imports.features.build_features import (
-    selected_vector_features,
-    selected_table_points,
-    selected_osm_features,
     s130_areas,
+    selected_osm_features,
+    selected_table_points,
+    selected_vector_features,
 )
+from worldatlas.source_imports.features.composition import composed_area
+from worldatlas.source_imports.iho.build_routes import s130_rhumb_routes
+from worldatlas.source_imports.osm.build_boundary import osm_way_chain
+from worldatlas.source_imports.traces.build_boundary import smooth_latitude_trace
+from worldatlas.source_imports.watersheds.build_boundary import watershed_boundary
 
 IMPORTERS = {
     constructor.__name__: constructor
@@ -32,13 +33,14 @@ IMPORTERS = {
         selected_table_points,
         selected_osm_features,
         s130_areas,
+        composed_area,
     )
 }
 
 
 def selected_constructions(database):
     """Find constructions referenced by working geometry."""
-    return [
+    selected = [
         row[0]
         for row in database.execute(
             "SELECT DISTINCT construction_id FROM ("
@@ -50,6 +52,21 @@ def selected_constructions(database):
             "WHERE construction_id IS NOT NULL ORDER BY construction_id"
         ).fetchall()
     ]
+    from graphlib import TopologicalSorter
+
+    documents = dict(
+        database.execute("SELECT source_id,document FROM atlas.construction_records")
+    )
+    owners = dict(
+        database.execute("SELECT feature_id,construction_id FROM atlas.source_features")
+    )
+    graph = {}
+    for ident in selected:
+        references = documents[ident].get("input_feature_ids", [])
+        if set(references) - owners.keys():
+            raise ValueError("construction refers to a missing input feature")
+        graph[ident] = sorted({owners[feature] for feature in references})
+    return list(TopologicalSorter(graph).static_order())
 
 
 def run_import(
@@ -61,7 +78,9 @@ def run_import(
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
     if importer is None:
         raise ValueError(f"unsupported source construction method: {method!r}")
-    if method != "smooth_latitude_trace" and (storage is None or work_dir is None):
+    if method not in ("smooth_latitude_trace", "composed_area") and (
+        storage is None or work_dir is None
+    ):
         raise ValueError("this method requires --r2-endpoint and --work-dir")
     if expected_geometry_sha256 is not None and method != "osm_way_chain":
         raise ValueError(

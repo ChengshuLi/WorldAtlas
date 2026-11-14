@@ -47,7 +47,8 @@ DO $$ DECLARE invalid jsonb; BEGIN
  FOREACH invalid IN ARRAY ARRAY[
   '{"feature_id":"__feature","relation":"point_component"}'::jsonb,
   '{"feature_id":"__feature","relation":"contains_component"}'::jsonb,
-  '{"feature_id":"__feature","relation":"intersects_component"}'::jsonb
+  '{"feature_id":"__feature","relation":"intersects_component"}'::jsonb,
+  '{"feature_id":"__feature","relation":"majority_component"}'::jsonb
  ] LOOP
   UPDATE atlas.geographic_assignments SET selection=invalid;
  END LOOP;

@@ -29,7 +29,9 @@ same display color.
 
 `source_features` stores imported points, polygons and constructed source-figure
 lines, with their raw-source and construction links. All five columns are
-required. Geometry is always WGS84 longitude first, latitude second, in degrees.
+required. Composed areas retain their contributing feature IDs in the construction
+record; the source columns identify their primary provider contribution.
+Geometry is always WGS84 longitude first, latitude second, in degrees.
 Its database checks enforce supported shape
 types, coordinate nesting, finite two-dimensional values, WGS84 ranges and closed
 polygon rings. Importers also check geometric validity with GEOS. They select
@@ -42,6 +44,9 @@ is exactly one object with `relation` and `feature_id`. Supported relations are
 `point_component` (the land component containing a point), `contains_component`
 (all of a component's land-cell centers inside a polygon), and
 `intersects_component` (at least one land-cell center inside a polygon).
+`majority_component` selects a whole component when more than half its land-cell
+centers are inside the area. This matches broad group outlines without requiring
+every coastal cell to fit a coarse source boundary. An exact half is not a match.
 Independent alternatives are separate rows. There are no case groups, compound
 AND/OR selectors or unrestricted evidence objects in working assignments.
 

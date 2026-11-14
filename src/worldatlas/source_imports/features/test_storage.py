@@ -80,6 +80,93 @@ class StorageTests(unittest.TestCase):
             "FROM atlas.source_features ORDER BY feature_id"
         ).fetchall()
 
+    def test_composed_area_retains_sources_and_orders_inputs_before_outputs(self):
+        from shapely.geometry import shape
+
+        raw = json.dumps(
+            {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {"id": "a"},
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]],
+                        },
+                    },
+                    {
+                        "type": "Feature",
+                        "properties": {"id": "b"},
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[[2, 0], [3, 0], [3, 1], [2, 1], [2, 0]]],
+                        },
+                    },
+                ],
+            }
+        ).encode()
+        self.add_source("polygons", raw, "polygons.geojson")
+        doc = dict(
+            method="selected_vector_features",
+            source_id="polygons",
+            basis="Two source areas",
+            id_field="id",
+            selections=[
+                dict(feature_id="part-a", source_feature_id="a"),
+                dict(feature_id="part-b", source_feature_id="b"),
+            ],
+        )
+        self.database.execute(
+            "INSERT INTO atlas.construction_records VALUES (%s,%s)",
+            ("__polygons", Jsonb(doc)),
+        )
+        self.storage.get_object.side_effect = lambda **_: {"Body": io.BytesIO(raw)}
+        connect = lambda: nullcontext(self.database)
+        run_import(connect, "__polygons", storage=self.storage, work_dir=self.work)
+        composed = dict(
+            method="composed_area",
+            feature_id="group",
+            input_feature_ids=["part-a", "part-b"],
+            basis="One geographic family",
+        )
+        self.database.execute(
+            "INSERT INTO atlas.construction_records VALUES (%s,%s)",
+            ("__composed", Jsonb(composed)),
+        )
+        result = run_import(connect, "__composed")
+        order = selected_constructions(self.database)
+        self.assertLess(order.index("__polygons"), order.index("__composed"))
+        row = self.database.execute(
+            "SELECT source_id,geometry FROM atlas.source_features WHERE feature_id='group'"
+        ).fetchone()
+        self.assertEqual(row[0], "polygons")
+        self.assertEqual(shape(row[1]).area, 2)
+        self.assertEqual(
+            self.database.execute(
+                "SELECT count(*) FROM atlas.source_features"
+            ).fetchone()[0],
+            3,
+        )
+        self.assertEqual(
+            run_import(connect, "__composed")["geometry_sha256"],
+            result["geometry_sha256"],
+        )
+        # An invalid new input must leave the previous successful area unchanged.
+        composed["input_feature_ids"].append("missing")
+        self.database.execute(
+            "UPDATE atlas.construction_records SET document=%s WHERE source_id=%s",
+            (Jsonb(composed), "__composed"),
+        )
+        with self.assertRaisesRegex(ValueError, "missing source feature"):
+            run_import(connect, "__composed")
+        self.assertEqual(
+            self.database.execute(
+                "SELECT geometry FROM atlas.source_features WHERE feature_id='group'"
+            ).fetchone()[0],
+            row[1],
+        )
+
     def test_repeat_and_recipe_edit_preserve_links_and_other_records(self):
         first = self.build()
         self.database.execute(
@@ -144,6 +231,16 @@ class StorageTests(unittest.TestCase):
 
     def test_signed_zero_preserves_longitude_latitude_coordinates(self):
         geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
-        save_features(self.database, [dict(feature_id="zero", source_id="raw",
-            source_feature_id="a", geometry=geometry)], dict(self.recipe, recipe_id="__features"))
+        save_features(
+            self.database,
+            [
+                dict(
+                    feature_id="zero",
+                    source_id="raw",
+                    source_feature_id="a",
+                    geometry=geometry,
+                )
+            ],
+            dict(self.recipe, recipe_id="__features"),
+        )
         self.assertEqual(json.dumps(self.rows()[0][1]["coordinates"]), "[0.0, 1e-24]")

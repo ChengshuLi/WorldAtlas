@@ -35,7 +35,7 @@ A `selected_vector_features` construction contains `source_id`,
 `basis`, `id_field` and `selections`. Each selection supplies `feature_id` and
 `source_feature_id`. Imports verify the cataloged raw bytes and selected IDs;
 there is no separate expected-geometry checksum setting. Floating-point negative
-zero becomes positive zero for storage; other coordinate values are unchanged.
+zero becomes positive zero for storage; source-mode coordinates otherwise remain unchanged.
 Select `member` for an archived dataset and `layer` when a file contains several
 layers. An explicit `coordinate_operation` is
 available when a source needs a particular documented CRS conversion.
@@ -70,3 +70,32 @@ it does not reopen the provider table.
 `test_vector.py` checks selection, identity, archives, conversion and malformed
 geometry. `test_storage.py` checks transactional saves, repeat imports, preserved
 relationships and rollback using disposable PostgreSQL.
+
+## Whole island-group areas
+
+Vector and OSM selections may set `footprint` to `bounding_box`
+when the chosen geographic interpretation is an area enclosing a complete group.
+The default `source` preserves the imported geometry. Extents come from provider
+coordinates; they do not use map labels or saved component IDs. Dateline-crossing
+areas are unwrapped and split back into WGS84 polygons. An ambiguous global
+extent is rejected. These operations are choices in Neon, not automatic changes
+to every imported polygon.
+
+`composed_area` constructs one geographic family's area from contributing
+`input_feature_ids`. For example, a coarse group outline can be supplemented by a
+documented member it omits. The construction stores the output `feature_id`,
+`basis`, input IDs and optional `footprint`. Inputs remain separate structured
+records with their raw-source and construction links. The output carries the
+first input's primary provider identity; the construction records its complete
+lineage. Inputs are read and locked together with the atomic save.
+
+The complete import command orders constructions by these feature dependencies:
+
+```bash
+worldatlas-import --all --r2-endpoint R2_ENDPOINT \
+  --work-dir /absolute/path/to/worldatlas-work/inputs
+```
+
+Running a single `composed_area` recipe combines its current structured inputs.
+Running `--all` regenerates upstream inputs before their dependent areas. Cycles
+or missing inputs stop before the full import begins.

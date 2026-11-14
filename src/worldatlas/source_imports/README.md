@@ -1,6 +1,7 @@
 # Source imports
 
 These tools read raw geographic files from R2 and save geographic records in Neon.
+They also assemble geographic areas from contributing structured features.
 The source catalog identifies each exact file by one immutable `source_id`, its
 R2 location, byte size and checksum. Changed raw bytes get a new source ID.
 
@@ -65,6 +66,9 @@ Receipts under `inputs/receipts/` identify the construction and its result.
 
 The map builder uses the same verified raw-file cache. Both commands check the
 catalog's byte sizes and checksums before reusing downloads.
+
+Source-backed area compositions run after their input constructions. All ordering
+comes from the saved `input_feature_ids`; no per-region command sequence is required.
 
 ## Document validation
 

@@ -16,7 +16,8 @@ function draw() {
     const shifts = [-data.grid.width, 0, data.grid.width];
     function spans(values, color, rowHeight) {
       context.fillStyle = color;
-      for (const [a, b, row] of values) {
+      for (const [a, b, row, entity] of values) {
+        context.fillStyle = entity === undefined ? color : data.entity_colors[entity];
         if (row + rowHeight < view[1] || row > view[1] + view[3]) continue;
         for (const shift of shifts) {
           if (b + shift < view[0] || a + shift > view[0] + view[2]) continue;
@@ -56,7 +57,7 @@ function draw() {
       }
     }
     context.fillStyle = '#183242'; context.font = 'bold 15px system-ui';
-    context.fillText(panel ? `Assigned to ${data.entity}` : 'Source geometry', 14, 24);
+    context.fillText(panel ? `Assigned to ${data.entity}` : 'Selection geometry', 14, 24);
   });
   const lon = x => ((data.grid.west + x * data.grid.step + 180) % 360 + 360) % 360 - 180;
   document.getElementById('extent').textContent =

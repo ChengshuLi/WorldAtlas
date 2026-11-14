@@ -48,7 +48,9 @@ Inferred satellites cannot become anchors for other satellites.
 Working assignments read `atlas.geographic_assignments`. Each row has one
 `selection` object containing exactly `relation` and `feature_id`, a target entity
 and a rationale. Alternative selections are separate rows. Every selected whole
-component receives the target's land code. Empty selections, missing features,
+component receives the target's land code. Broad geographic areas can use
+`majority_component`: more than half the component centers must fall inside, and the entire component receives the label.
+Empty selections, missing features,
 protected mainland selections and disagreeing targets fail before composition.
 
 Current imported features use WGS84 longitude/latitude. Retained release inputs
@@ -66,10 +68,12 @@ python -m worldatlas.map_build.land.assignment_report \
   --output /absolute/path/to/review-report
 ```
 
-The report shows the source geometry, actual selected cell runs, component and
+The report shows the selection geometry, actual selected cell runs, component and
 cell counts, other rules selecting the same components, and each rule's uniquely
 covered components. It uses the run's grid and entity colors. Open `index.html`;
-no database credentials or server are required.
+no database credentials or server are required. Add `--previous-selection` and
+`--map-comparison` to show the earlier rules and an actual final-grid comparison.
+The existing regional line/group policy is shown alongside explicit assignments.
 
 ## Tests
 

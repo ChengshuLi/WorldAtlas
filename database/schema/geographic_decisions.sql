@@ -59,7 +59,7 @@ CREATE TABLE atlas.geographic_assignments (
         CASE WHEN jsonb_typeof(selection) = 'object' THEN COALESCE(
             selection ?& ARRAY['relation','feature_id']
             AND selection - ARRAY['relation','feature_id'] = '{}'::jsonb
-            AND selection->>'relation' IN ('point_component','intersects_component','contains_component')
+            AND selection->>'relation' IN ('point_component','intersects_component','contains_component','majority_component')
             AND jsonb_typeof(selection->'feature_id') = 'string'
             AND length(trim(selection->>'feature_id')) > 0,
             false) ELSE false END

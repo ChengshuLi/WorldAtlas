@@ -8,7 +8,7 @@ def assignment_selection(rule, features):
         not isinstance(selection, dict)
         or set(selection) != {"relation", "feature_id"}
         or selection["relation"]
-        not in ("point_component", "intersects_component", "contains_component")
+        not in ("point_component", "intersects_component", "contains_component", "majority_component")
         or not isinstance(selection["feature_id"], str)
         or not selection["feature_id"].strip()
     ):

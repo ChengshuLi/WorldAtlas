@@ -137,3 +137,10 @@ python .github/scripts/run_tests.py --suite source_imports
 The runner creates a disposable database and includes the database write tests.
 Those tests cover complete builds, repeat runs, source updates, preservation of
 notes and supporting evidence, unrelated records, and failed-write rollbacks.
+
+Provider-defined geographic `group` and `collection` relations can produce one
+island-group feature. The reader includes direct polygon ways and nested polygon
+relations, preserves child holes, and unions overlapping members. Construction
+settings explicitly identify ignored metadata roles. Missing members and cycles
+fail; a parent `/full` response alone may omit nested geometry, so the archived
+input must contain the complete recursive graph.

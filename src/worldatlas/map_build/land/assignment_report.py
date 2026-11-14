@@ -1,11 +1,11 @@
 """Show numbered geographic rules, source geometry and their actual assigned cells."""
 
 import argparse
+import json
+import time
 from collections import Counter
 from html import escape
-import json
 from pathlib import Path
-import time
 
 import numpy as np
 
@@ -53,6 +53,7 @@ for (const table of document.querySelectorAll('table')) {
   });
 }
 </script></body></html>"""
+
 
 def cell_spans(components, roots):
     """Index only requested components; keep every selected native-grid cell."""
@@ -146,7 +147,58 @@ def _selected_rules(selection):
     ]
 
 
-def write_report(selection, components, directory, *, previous=None):
+def _regional_claims(frozen, domain, rules, result, components):
+    """Show independently inferred line/group coverage alongside explicit rules."""
+    from worldatlas.map_build.land.islands import resolve_islands
+    from worldatlas.map_build.land.witnesses import resolve_witnesses
+
+    selected = frozen.get("regional_partitions", [])
+    if not selected:
+        return
+    features = {f["feature_id"]: f for f in domain["features"]}
+    mainland = geographic_domain(frozen, "mainland")
+    groups = resolve_witnesses(mainland, components)["groups"]
+    protected = {g["component_id"] for g in groups.values() if g["role"] == "mainland"}
+    explicit = dict(result["component_entities"])
+    for record in selected:
+        line = features[record["feature_id"]]
+        inferred = resolve_islands(
+            record["policy"],
+            line,
+            domain["features"],
+            frozen["raw_sources"],
+            components,
+            {},
+            domain["category_bindings"],
+            protected=protected,
+        )
+        entities = {
+            root: target
+            for root, target in inferred["component_entities"].items()
+            if root not in explicit or explicit[root] == target
+        }
+        ident = "regional-policy:" + record["rule_set_id"]
+        rules.append(
+            dict(
+                assignment_id=ident,
+                entity_id=None,
+                rationale="Existing regional policy: assign complete islands by the selected line, source-backed island groups and direct satellites. Explicit geographic assignments take precedence.",
+                selection=dict(
+                    relation="regional_line_groups_and_satellites",
+                    feature_id=line["feature_id"],
+                ),
+                _component_entities=entities,
+            )
+        )
+        result["claims"].append(
+            dict(assignment_id=ident, entity_id=None, component_ids=sorted(entities))
+        )
+        result["component_entities"].update(entities)
+
+
+def write_report(
+    selection, components, directory, *, previous=None, map_comparison=None
+):
     """Write a local interactive report and machine-readable coverage inventory."""
     started = time.monotonic()
     directory = Path(directory)
@@ -154,12 +206,21 @@ def write_report(selection, components, directory, *, previous=None):
     for name in ("assignment_report.js", "assignment_report.css"):
         (directory / name).write_text((ASSETS / name).read_text())
     groups = [("current", selection)] + ([("previous", previous)] if previous else [])
+    documents_by_section = {
+        label: {
+            r["source_id"]: r["document"]
+            for r in frozen.get("construction_records", [])
+        }
+        for label, frozen in groups
+    }
     resolved = []
     for label, frozen in groups:
         domain, rules = _selected_rules(frozen)
+        rules = list(rules)
         result = resolve_assignments(
             rules, domain["features"], components, domain["category_bindings"]
         )
+        _regional_claims(frozen, domain, rules, result, components)
         resolved.append((label, domain, rules, result))
     all_roots = {
         root for _, _, _, result in resolved for root in result["component_entities"]
@@ -197,11 +258,17 @@ def write_report(selection, components, directory, *, previous=None):
             bounds = view_bounds(geometries, selected, components.grid)
             background, stride = context_spans(components, bounds)
             entity = entities.get(rule["entity_id"], {})
+            targets = rule.get("_component_entities")
+            entity_name = (
+                " / ".join(entities[e]["name"] for e in sorted(set(targets.values())))
+                if targets
+                else entity.get("name", str(rule["entity_id"]))
+            )
             record = dict(
                 number=number,
                 assignment_id=ident,
                 entity_id=rule["entity_id"],
-                entity=entity.get("name", str(rule["entity_id"])),
+                entity=entity_name,
                 component_count=len(roots),
                 cell_count=sum(totals[r] for r in roots),
                 unique_component_count=sum(supporters[r] == 1 for r in roots),
@@ -211,15 +278,15 @@ def write_report(selection, components, directory, *, previous=None):
                     if k != ident and set(roots) & set(c["component_ids"])
                 ),
                 matched_current_components=sum(
-                    current.get(r) == rule["entity_id"] for r in roots
+                    current.get(r) == (targets[r] if targets else rule["entity_id"])
+                    for r in roots
                 ),
                 conditions=conditions,
                 combine="all" if "selection" in rule else legacy["combine"],
                 current_rule_numbers=[
                     n
                     for n, c in enumerate(resolved[0][3]["claims"], 1)
-                    if c["entity_id"] == rule["entity_id"]
-                    and set(roots) & set(c["component_ids"])
+                    if set(roots) & set(c["component_ids"])
                 ],
             )
             summaries.append(dict(section=label, **record))
@@ -228,23 +295,68 @@ def write_report(selection, components, directory, *, previous=None):
                 grid=vars(components.grid),
                 bounds=bounds,
                 geometries=geometries,
-                cells=selected.tolist(),
+                cells=selected.tolist()
+                if not targets
+                else [
+                    [int(a), int(b), int(y), targets[root]]
+                    for root in roots
+                    for a, b, y in spans[root]
+                ],
                 context=background,
                 context_stride=stride,
                 color=entity.get("color_rgb") or "#3769a0",
+                entity_colors={
+                    e: record.get("color_rgb") or "#3769a0"
+                    for e, record in entities.items()
+                },
             )
             content = json.dumps(
                 payload, separators=(",", ":"), ensure_ascii=False
             ).replace("<", "\\u003c")
+            documents = documents_by_section[label]
+            details = []
+            for condition in conditions:
+                feature = features[condition["feature_id"]]
+                construction = feature.get("construction_id")
+                document = documents.get(construction)
+                if document is not None:
+                    details.append(
+                        "<h3>"
+                        + escape(condition["feature_id"])
+                        + "</h3><p>"
+                        + escape(document["basis"])
+                        + "</p><pre>"
+                        + escape(json.dumps(document, indent=2, ensure_ascii=False))
+                        + "</pre>"
+                    )
+            construction_details = (
+                (
+                    "<details><summary>Area construction and contributing source regions</summary>"
+                    + "".join(details)
+                    + "</details>"
+                )
+                if details
+                else ""
+            )
+            explanations = {
+                'point_component': 'Select the whole land component containing this point.',
+                'intersects_component': 'Select each whole land component with at least one land-cell center inside the area.',
+                'contains_component': 'Select each whole land component whose land-cell centers all lie inside the area.',
+                'majority_component': 'Select each whole land component with more than half its land-cell centers inside the area. Its coastal tips can extend beyond the outline.',
+                'regional_line_groups_and_satellites': 'Use the dividing line, source-backed island groups and direct nearby named anchors to assign complete islands.'
+            }
+            explanation = ' AND '.join(explanations[c['relation']] for c in conditions) if record['combine']=='all' else ' OR '.join(explanations[c['relation']] for c in conditions)
             heading = f"{number}. {ident}"
             html = f"""<!doctype html><html lang="en"><meta charset="utf-8">
 <title>{escape(heading)}</title><link rel="stylesheet" href="../assignment_report.css">
 <body><h1>{escape(heading)}</h1><p>{escape(rule.get("rationale", ""))}</p>
 <p><strong>{escape(record["entity"])}</strong> · {len(roots):,} components · {record["cell_count"]:,} cells ·
 {record["unique_component_count"]:,} components uniquely selected by this rule</p>
+<p>{escape(explanation)}</p>
 <pre>{escape(json.dumps(rule["selection"] if "selection" in rule else legacy, indent=2))}</pre>
-<p>Left: source geometry. Right: actual assigned land cells in the entity color.
-Blue outlines/markers show source polygons/points. Gray is background land.
+{construction_details}
+<p>Left: selection geometry. Right: actual assigned land cells in the entity color.
+Blue outlines/markers show the selected geographic area, point or line. Gray is background land.
 Drag to pan; scroll to zoom. Both views move together.</p>
 <button id="reset">Reset view</button><button id="save">Save comparison image</button>
 <div class="maps"><canvas id="source"></canvas><canvas id="result"></canvas></div>
@@ -272,17 +384,23 @@ Drag to pan; scroll to zoom. Both views move together.</p>
         changed = sum(totals[r] for r in changed_roots)
     summary = dict(
         rules=summaries,
-        changed_assignment_cells=changed,
+        changed_explicit_coverage_cells=changed,
+        map_comparison=map_comparison,
         processing_seconds=time.monotonic() - started,
     )
     (directory / "coverage.json").write_text(json.dumps(summary, indent=2) + "\n")
     (directory / "index.html").write_text(
         """<!doctype html><html lang="en"><meta charset="utf-8"><title>Geographic assignment review</title>
 <link rel="stylesheet" href="assignment_report.css"><body><h1>Geographic assignment review</h1>
-<p>Each numbered row opens its source geometry and actual assigned cells. Unique components are selected by no other rule in that section.
-This report covers whole-component assignments; mainland partitions and regional line/group policies are separate inputs.</p>"""
+<p>Each numbered row opens its selection geometry and actual assigned cells. Unique components are selected by no other rule in that section.
+This report includes explicit whole-component assignments and the existing regional line/group policy. Mainland partitions and distance defaults remain separate pipeline stages.</p>"""
         + (
-            f"<p><strong>{changed:,} assignment cells changed.</strong></p>"
+            (
+                f"<p><strong>{map_comparison['changed_cells']:,} final map cells changed.</strong> "
+                "Table counts show the land selected by each rule.</p>"
+                if map_comparison is not None
+                else f"<p>{changed:,} cells changed explicit rule coverage; this is not a final-map comparison.</p>"
+            )
             if changed is not None
             else ""
         )
@@ -290,7 +408,6 @@ This report covers whole-component assignments; mainland partitions and regional
         + "".join(index)
         + '</nav><iframe name="detail" title="Rule details" src="current/001.html"></iframe></div>'
         + INDEX_SCRIPT
-
     )
     return summary
 
@@ -299,6 +416,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--selection", required=True, type=Path)
     parser.add_argument("--previous-selection", type=Path)
+    parser.add_argument(
+        "--map-comparison",
+        type=Path,
+        help="final-grid comparison report from the map pipeline",
+    )
     parser.add_argument("--physical", required=True, type=Path)
     parser.add_argument("--components", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
@@ -309,6 +431,9 @@ def main():
             read_saved(args.selection),
             components,
             args.output,
+            map_comparison=json.loads(args.map_comparison.read_text())
+            if args.map_comparison
+            else None,
             previous=read_saved(args.previous_selection)
             if args.previous_selection
             else None,
