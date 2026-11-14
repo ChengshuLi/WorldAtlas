@@ -263,6 +263,21 @@ class RegionalTests(unittest.TestCase):
         )
         self.assertEqual(report['islands'][0]['review'][42], 'crosses_or_touches_line')
 
+    def test_current_partition_references_one_shared_line_feature(self):
+        selection = self.island_selection()
+        selected = selection.pop('regional_partition')
+        line = selected.pop('line')
+        line.pop('line_id')
+        line.pop('geometry_sha256')
+        line.pop('coordinate_reference')
+        selected['policy'].pop('line_id')
+        selected['feature_id'] = line['feature_id']
+        selection['domains']['regional']['features'].append(line)
+        selection['regional_partitions'] = [selected]
+        result = build_regional(selection, self.grid, self.root / 'physical',
+            self.root / 'components', self.root / 'baseline', self.root / 'current-grouped')
+        self.assertEqual(result['counts'], {'301': 2, '999': 3})
+
     def test_opposing_complete_group_choices_stop_before_final_land_is_written(self):
         for targets in ((81, 42), (42, 81)):
             with self.subTest(order=targets):

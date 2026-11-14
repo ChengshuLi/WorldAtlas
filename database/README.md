@@ -27,9 +27,10 @@ map-code bindings also distinguish land from water.
 classes. Water ownership remains distinct even when every water cell uses the
 same display color.
 
-`source_features` stores imported geometry and its raw-source and construction
-links. All five columns are required. Geometry is always WGS84 longitude first, latitude
-second, in degrees. Its database checks enforce supported shape
+`source_features` stores imported points, polygons and constructed source-figure
+lines, with their raw-source and construction links. All five columns are
+required. Geometry is always WGS84 longitude first, latitude second, in degrees.
+Its database checks enforce supported shape
 types, coordinate nesting, finite two-dimensional values, WGS84 ranges and closed
 polygon rings. Importers also check geometric validity with GEOS. They select
 provider IDs from checksum-verified raw files without copying provider attributes

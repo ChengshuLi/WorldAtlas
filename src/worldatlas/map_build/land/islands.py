@@ -1,8 +1,5 @@
 """Apply selected line, geographic-group and direct-satellite island rules."""
 
-import hashlib
-import json
-
 from shapely.geometry import Point, shape
 
 from worldatlas.map_build.core.distances import run_pair
@@ -30,14 +27,7 @@ def resolve_islands(
     codes = {b['entity_id']: b['code'] for b in bindings if b['physical_class'] == 'land'}
     features = {f['feature_id']: f for f in features}
     sources = {s['source_id']: s for s in sources}
-    geometry = line_record['geometry']
-    checksum = hashlib.sha256(
-        json.dumps(
-            geometry, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False
-        ).encode()
-    ).hexdigest()
-    if checksum != line_record['geometry_sha256'] or line_record['line_id'] != policy['line_id']:
-        raise ValueError('selected geographic line identity or geometry differs')
+    geometry = feature_geometry(line_record, ('LineString',))
     line = LatitudeLine(geometry, policy['boundary_tolerance_degrees'])
     scope = policy['bounds_lon_lat']
     satellite = policy['satellite_policy']

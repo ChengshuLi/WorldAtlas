@@ -43,10 +43,13 @@ def build_regional(
         # Read earlier frozen selections without changing their stored bytes.
         if 'regional_partition' in selection:
             policies = [selection['regional_partition']]
+        features = {f['feature_id']: f for f in domain['features']}
         for selected in policies:
+            # Earlier archives carry their line inline; new selections reference the shared feature.
+            line = selected['line'] if 'line' in selected else features[selected['feature_id']]
             result = resolve_islands(
                 selected['policy'],
-                selected['line'],
+                line,
                 domain['features'],
                 selection['raw_sources'],
                 components,
@@ -66,7 +69,7 @@ def build_regional(
             }
             if conflicts:
                 raise ValueError(
-                    f"conflicting regional assignments for {selected['policy']['line_id']}: {conflicts}"
+                    f"conflicting regional assignments for {selected.get('rule_set_id', 'regional rule')}: {conflicts}"
                 )
             for root, entity in result['component_entities'].items():
                 if root in entities and entities[root] != entity:

@@ -129,26 +129,16 @@ def read_selection(database, *, raw_sources=(), constructions=()):
                 if item.get("construction_id") is not None
             )
         result["regional_partitions"] = []
-        for rule_set_id, line_id, definition in database.execute(
-            "SELECT rule_set_id,line_id,definition FROM atlas.regional_island_rule_sets "
+        for rule_set_id, feature_id, definition in database.execute(
+            "SELECT rule_set_id,feature_id,definition FROM atlas.regional_island_rule_sets "
             "WHERE enabled ORDER BY rule_set_id"
         ).fetchall():
-            row = database.execute(
-                "SELECT to_jsonb(l)-'created_at' FROM atlas.geographic_line_observations l WHERE line_id=%s",
-                (line_id,),
-            ).fetchone()
-            if row is None:
+            if feature_id not in features:
                 raise ValueError("selected geographic line is missing")
-            line = row[0]
             result["regional_partitions"].append(
-                {"rule_set_id": rule_set_id, "line": line, "policy": definition}
+                {"rule_set_id": rule_set_id, "feature_id": feature_id, "policy": definition}
             )
-            references.add(line["source_id"])
-            if line.get("construction_id") is not None:
-                document_refs.add(line["construction_id"])
-            references.update(
-                source["source_id"] for source in definition.get("sources", [])
-            )
+            references.update(source["source_id"] for source in definition.get("sources", []))
         rows = database.execute(
             "SELECT to_jsonb(a)-'created_at' FROM atlas.source_assets a "
             "WHERE source_id=ANY(%s) ORDER BY source_id",

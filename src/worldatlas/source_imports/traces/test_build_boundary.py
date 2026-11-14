@@ -25,7 +25,8 @@ class DatabaseTests(unittest.TestCase):
         self.recipe = dict(
             method="smooth_latitude_trace",
             source_id="raw",
-            line_id="line",
+            feature_id="line",
+            source_feature_id="Figure 1",
             basis="Chosen points",
             points=[[10.0, 1.0], [9.0, 0.0], [8.0, -1.0]],
             step_latitude_degrees=0.01,
@@ -39,36 +40,33 @@ class DatabaseTests(unittest.TestCase):
             (Jsonb(self.recipe),),
         )
 
-    def build(self, expected=None):
+    def build(self):
         return run_import(
-            lambda: nullcontext(self.db), "trace", expected_geometry_sha256=expected
+            lambda: nullcontext(self.db), "trace"
         )
 
     def row(self):
         return self.db.execute(
-            "SELECT geometry,geometry_sha256,provenance,construction_id FROM atlas.geographic_line_observations WHERE line_id='line'"
+            "SELECT geometry,source_feature_id,construction_id FROM atlas.source_features WHERE feature_id='line'"
         ).fetchone()
 
-    def test_repeat_and_edit_preserve_notes_and_old_coordinate_copy(self):
+    def test_repeat_and_edit_preserve_links_and_old_coordinate_copy(self):
         first = self.build()
         before = self.row()
         self.assertEqual(self.build(), first)
-        self.db.execute(
-            'UPDATE atlas.geographic_line_observations SET provenance=provenance || \'{"note":"keep"}\''
-        )
+        self.db.execute("INSERT INTO atlas.regional_island_rule_sets "
+                        "(rule_set_id,feature_id,definition,evidence) VALUES ('rule','line','{}','{}')")
         self.recipe["points"] = [[12.0, 1.0], [11.0, 0.0], [10.0, -1.0]]
         self.store()
         self.build()
         self.assertEqual(before[0]["coordinates"][0], [10.0, 1.0])
         self.assertEqual(self.row()[0]["coordinates"][0], [12.0, 1.0])
-        self.assertEqual(self.row()[2]["note"], "keep")
-        self.assertEqual(self.row()[3], "trace")
+        self.assertEqual(self.row()[2], "trace")
+        self.assertEqual(self.db.execute("SELECT feature_id FROM atlas.regional_island_rule_sets").fetchone()[0], "line")
 
-    def test_expected_mismatch_and_bad_source_preserve_previous_geometry(self):
+    def test_bad_source_preserves_previous_geometry(self):
         self.build()
         before = self.row()
-        with self.assertRaisesRegex(ValueError, "expected geometry"):
-            self.build("0" * 64)
         self.recipe["source_id"] = "missing"
         self.store()
         with self.assertRaisesRegex(ValueError, "raw source is missing"):

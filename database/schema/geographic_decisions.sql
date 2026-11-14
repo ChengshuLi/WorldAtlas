@@ -49,22 +49,6 @@ CREATE TABLE atlas.source_features (
     CONSTRAINT source_features_geometry_check CHECK (atlas.valid_source_geometry(geometry))
 );
 
-CREATE TABLE atlas.geographic_line_observations (
-    line_id text NOT NULL,
-    source_id text NOT NULL,
-    geometry jsonb NOT NULL,
-    geometry_sha256 text NOT NULL,
-    coordinate_reference text NOT NULL,
-    provenance jsonb NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    construction_id text,
-    CONSTRAINT geographic_line_observations_geometry_check CHECK (((geometry ->> 'type'::text) = ANY (ARRAY['LineString'::text, 'MultiLineString'::text]))),
-    CONSTRAINT geographic_line_observations_geometry_sha256_check CHECK ((geometry_sha256 ~ '^[0-9a-f]{64}$'::text)),
-    CONSTRAINT geographic_line_observations_pkey PRIMARY KEY (line_id),
-    CONSTRAINT geographic_line_observations_construction_id_construction__fkey FOREIGN KEY (construction_id) REFERENCES atlas.construction_records(source_id),
-    CONSTRAINT geographic_line_observations_source_id_fkey FOREIGN KEY (source_id) REFERENCES atlas.source_assets(source_id)
-);
-
 CREATE TABLE atlas.decision_cases (
     case_id text NOT NULL,
     title text NOT NULL,
@@ -106,7 +90,7 @@ CREATE TABLE atlas.decision_affiliations (
 
 CREATE TABLE atlas.regional_island_rule_sets (
     rule_set_id text NOT NULL,
-    line_id text NOT NULL,
+    feature_id text NOT NULL,
     definition jsonb NOT NULL,
     evidence jsonb NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -115,7 +99,7 @@ CREATE TABLE atlas.regional_island_rule_sets (
     CONSTRAINT regional_island_rule_sets_evidence_check CHECK ((jsonb_typeof(evidence) = 'object'::text)),
     CONSTRAINT regional_island_rule_sets_rule_set_id_check CHECK ((length(btrim(rule_set_id)) > 0)),
     CONSTRAINT regional_island_rule_sets_pkey PRIMARY KEY (rule_set_id),
-    CONSTRAINT regional_island_rule_sets_line_id_fkey FOREIGN KEY (line_id) REFERENCES atlas.geographic_line_observations(line_id)
+    CONSTRAINT regional_island_rule_sets_feature_id_fkey FOREIGN KEY (feature_id) REFERENCES atlas.source_features(feature_id)
 );
 
 CREATE TABLE atlas.decision_endpoints (

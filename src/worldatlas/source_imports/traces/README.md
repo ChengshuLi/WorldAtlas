@@ -24,7 +24,8 @@ are JSON keys inside its `document` column, not separate table columns. The
 | --- | --- |
 | `method` | `smooth_latitude_trace` |
 | `source_id` | The original source in Neon's raw-source catalog |
-| `line_id` | The final record in `atlas.geographic_line_observations` |
+| `feature_id` | The output line in `atlas.source_features` |
+| `source_feature_id` | The selected figure or other identifiable part of the raw document |
 | `basis` | How the figure was interpreted, including inferred connections and extensions |
 | `points` | Selected `[longitude, latitude]` points, ordered north to south |
 | `step_latitude_degrees` | Maximum latitude spacing between generated coordinates |
@@ -63,10 +64,10 @@ worldatlas-import \
   --recipe lydekker-boundary-construction
 ```
 
-The command saves the geometry, checksum, raw-source reference, and construction
-record ID together. Existing notes and links from other Neon records
-are retained. `--expected-geometry-sha256 SHA256` optionally checks the generated
-geometry before saving.
+The command uses the shared feature storage to save the geometry, raw-source
+reference, figure identifier and construction ID together. Existing links from
+other Neon records remain intact. Regional assignment rules reference this
+feature separately; the geometry contains no continent-assignment policy.
 
 ## Tests
 

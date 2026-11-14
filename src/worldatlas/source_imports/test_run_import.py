@@ -10,7 +10,7 @@ from worldatlas.source_imports.run_import import IMPORTERS, run_import
 
 DOCUMENTS = {
     'smooth_latitude_trace': dict(source_id='raw', basis='Chosen points',
-        line_id='line', points=[[1, 1], [0, 0]], step_latitude_degrees=.01, smoothing_latitude_degrees=.1),
+        feature_id='line', source_feature_id='Figure 1', points=[[1, 1], [0, 0]], step_latitude_degrees=.01, smoothing_latitude_degrees=.1),
     'osm_way_chain': dict(source_id='raw', basis='Join ways', boundary_id='boundary'),
     's130_rhumb_routes': dict(source_id='raw', basis='Selected routes',
         gml_member='source.gml', gml_sha256='a'*64, max_step_km=.05,
@@ -58,9 +58,9 @@ class ImportSelectionTests(unittest.TestCase):
         with patch.dict(IMPORTERS, {'smooth_latitude_trace': trace}), \
                 patch('worldatlas.source_imports.run_import.read_recipe',
                       return_value=dict(DOCUMENTS['smooth_latitude_trace'], method='smooth_latitude_trace')):
-            runtime = run_import(self.connect, 'trace', expected_geometry_sha256='expected')
+            runtime = run_import(self.connect, 'trace')
         self.assertIsNone(runtime.storage)
-        self.assertEqual(runtime.expected_geometry_sha256, 'expected')
+        self.assertIsNone(runtime.expected_geometry_sha256)
 
     def test_unsupported_methods_stop_before_downloading(self):
         for method in (None, {}, ['osm_way_chain'], 'some.python.function'):

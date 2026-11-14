@@ -37,7 +37,7 @@ IMPORTERS = {
 
 
 def selected_constructions(database):
-    """Find constructions referenced by working geometry and enabled line rules."""
+    """Find constructions referenced by working geometry."""
     return [
         row[0]
         for row in database.execute(
@@ -46,8 +46,7 @@ def selected_constructions(database):
             "UNION ALL SELECT construction_id FROM atlas.decision_mainland_boundaries "
             "UNION ALL SELECT construction_id FROM atlas.decision_routes "
             "UNION ALL SELECT construction_id FROM atlas.decision_endpoints "
-            "UNION ALL SELECT l.construction_id FROM atlas.regional_island_rule_sets r "
-            "JOIN atlas.geographic_line_observations l USING(line_id) WHERE r.enabled) c "
+            ") c "
             "WHERE construction_id IS NOT NULL ORDER BY construction_id"
         ).fetchall()
     ]
@@ -64,12 +63,9 @@ def run_import(
         raise ValueError(f"unsupported source construction method: {method!r}")
     if method != "smooth_latitude_trace" and (storage is None or work_dir is None):
         raise ValueError("this method requires --r2-endpoint and --work-dir")
-    if expected_geometry_sha256 is not None and method not in (
-        "smooth_latitude_trace",
-        "osm_way_chain",
-    ):
+    if expected_geometry_sha256 is not None and method != "osm_way_chain":
         raise ValueError(
-            "an expected geometry checksum applies to traced and OSM boundaries"
+            "an expected geometry checksum applies to OSM way-chain boundaries"
         )
     arguments = bind_document(importer, document)
     return importer(
