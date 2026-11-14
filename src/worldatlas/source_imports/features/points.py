@@ -85,8 +85,7 @@ def read_points(path, settings):
             if expected and geometry_hash(geometry) != expected:
                 raise ValueError('selected point geometry checksum differs')
             results[key] = {'feature_id': selected['feature_id'], 'source_feature_id': key,
-                            'geometry': geometry, 'evidence': {'provider_properties': row,
-                            'source_coordinate_reference': settings['coordinate_reference']}}
+                            'geometry': geometry, 'coordinate_reference': settings['coordinate_reference']}
     if wanted.keys() - results.keys():
         raise ValueError('selected provider point is missing')
     return [results[key] for key in [*wanted, *sorted(results.keys() - wanted.keys())]]

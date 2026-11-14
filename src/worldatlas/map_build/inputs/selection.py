@@ -18,6 +18,7 @@ def validate_bindings(domains):
     revision names may differ when their entity/code meanings are identical.
     """
     expected = None
+    first = None
     for name, domain in domains.items():
         rows = domain.get("category_bindings")
         if not isinstance(rows, list):
@@ -109,7 +110,7 @@ def read_selection(database, *, raw_sources=(), constructions=()):
         features = {feature["feature_id"]: feature for feature in data["features"]}
         with database.cursor(name="selected_features") as cursor:
             cursor.execute(
-                "SELECT feature_id,geometry::text FROM atlas.decision_features "
+                "SELECT feature_id,geometry::text FROM atlas.source_features "
                 "WHERE geometry IS NOT NULL ORDER BY feature_id"
             )
             for feature_id, geometry in cursor:

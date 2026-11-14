@@ -8,7 +8,7 @@ from worldatlas.map_build.inputs.features import feature_geometry
 
 
 def resolve_witnesses(domain, components):
-    """Check selected point identities, neighborhoods and group relationships."""
+    """Check selected point containment, neighborhoods and group relationships."""
     features = {item['feature_id']: item for item in domain['features']}
     witnesses = {}
     grid = components.grid
@@ -17,16 +17,7 @@ def resolve_witnesses(domain, components):
         area = features[selected['identity_feature_id']]
         geometry = feature_geometry(point, ('Point',))
         polygon = feature_geometry(area, ('Polygon', 'MultiPolygon'))
-        properties = area['evidence']['provider_properties']
-        if (
-            str(properties[selected['identity_id_property']]) != area['source_feature_id']
-            or properties[selected['identity_name_property']] != selected['identity_name']
-            or properties[selected['identity_class_property']] != selected['identity_class']
-            or point['evidence']['provider_properties']['name'] != selected['point_name']
-            or str(point['evidence']['provider_properties'][selected['id_property']])
-            != point['source_feature_id']
-            or not shape(polygon).contains(Point(geometry['coordinates']))
-        ):
+        if not shape(polygon).contains(Point(geometry['coordinates'])):
             raise ValueError('mainland witness does not match its selected source identity')
         lon, lat = geometry['coordinates']
         root = components.point(lon, lat)

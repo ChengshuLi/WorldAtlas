@@ -109,25 +109,6 @@ class SeaAreas:
             self.mrns.get(parent) == self.mrns[ident]
             for parent in self.references(ident, 'theComponent'))}
 
-    def parents(self, mrn):
-        """Return provider parent MRNs, including ancestors through multipart areas."""
-        roots = [ident for ident, value in self.roots().items() if value == mrn]
-        if len(roots) != 1:
-            raise ValueError('MRN must identify one complete S-130 area')
-
-        def visit(ident, ancestors=()):
-            if ident not in self.areas or ident in ancestors:
-                raise ValueError('cyclic or missing S-130 parent')
-            result = set()
-            for parent in self.references(ident, 'theComponent'):
-                if parent not in self.areas:
-                    raise ValueError('missing S-130 parent')
-                result.add(self.mrns[parent])
-                result.update(visit(parent, (*ancestors, ident)))
-            return result
-
-        return sorted(visit(roots[0]) - {mrn})
-
     def geometry(self, mrn):
         roots = [ident for ident, value in self.roots().items() if value == mrn]
         if len(roots) != 1:
@@ -153,10 +134,7 @@ def read_areas(path, source, recipe):
     reader = SeaAreas(document)
     result = []
     for selection in recipe['selections']:
-        geometry, ident = reader.geometry(selection['source_feature_id'])
+        geometry, _ = reader.geometry(selection['source_feature_id'])
         result.append({'feature_id': selection['feature_id'],
-                       'source_feature_id': selection['source_feature_id'], 'geometry': geometry,
-                       'evidence': {'gml_feature_id': ident, 'gml_sha256': recipe['gml_sha256'],
-                                    'source_parent_feature_ids': reader.parents(selection['source_feature_id']),
-                                    'representation': 'provider_encoded_surface'}})
+                       'source_feature_id': selection['source_feature_id'], 'geometry': geometry})
     return result

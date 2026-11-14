@@ -1,22 +1,30 @@
 # Selected geographic features
 
-Import selected source geometry into `atlas.decision_features`. Map building
-reads these polygons and points instead of reopening their raw archives.
+Import selected source geometry into `atlas.source_features`. Each row contains
+`feature_id`, `source_id`, `source_feature_id`, `geometry`, `coordinate_reference`
+and `construction_id`; all six are required. Map building reads these polygons
+and points instead of reopening their raw archives.
+
+Provider attributes are checked during import using the construction selections.
+They remain in the raw source rather than being copied into an unrestricted
+metadata column. Map building still checks spatial relationships against the
+current grid. Database constraints reject malformed coordinate structures;
+imports also reject invalid shapes, such as self-intersecting polygons.
 
 [`vector.py`](vector.py) reads selected provider IDs with GDAL, checks optional
 identity properties and converts coordinates to WGS84 longitude/latitude.
-[`geometry.py`](geometry.py) validates, checksums and saves the geometry.
+[`geometry.py`](geometry.py) validates and saves the geometry.
 [`build_features.py`](build_features.py) declares one typed entry point per feature
 method and shares catalog lookup, the verified R2 cache and transactional storage.
 Its signatures and nested types define the fields accepted by
 [shared Python and database validation](../README.md#document-validation).
-Unrelated evidence and relationships survive repeat imports; a failed import
+Existing relationships survive repeat imports; a failed import
 leaves all selected records unchanged.
 
 Use the common command:
 
 ```bash
-worldatlas-import \
+worldatlas-import --recipe CONSTRUCTION_ID \
   --r2-endpoint R2_ENDPOINT --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
@@ -61,4 +69,4 @@ it does not reopen the provider table.
 
 `test_vector.py` checks selection, identity, archives, conversion and malformed
 geometry. `test_storage.py` checks transactional saves, repeat imports, preserved
-relationships, schema upgrades and rollback using disposable PostgreSQL.
+relationships and rollback using disposable PostgreSQL.

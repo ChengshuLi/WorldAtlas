@@ -55,6 +55,23 @@ class OceanRunnerTests(unittest.TestCase):
             ],
         }
 
+    def test_source_area_seed_requires_its_imported_polygon_and_strict_interior(self):
+        s = self.snapshot()
+        endpoint = next(e for e in s['endpoints'] if e['endpoint_id'] == 'sp0')
+        endpoint['derivation'] = dict(method='source_area_interior_point', feature_id='area')
+        s['features'] = [dict(feature_id='area', coordinate_reference='OGC:CRS84', geometry={
+            'type': 'Polygon', 'coordinates': [[[-170, 60], [-140, 60], [-140, 80], [-170, 80], [-170, 60]]]
+        })]
+        r.load_config(s, 8, 4)
+        for lon in [-170, -130]:
+            endpoint['longitude'] = str(lon)
+            with self.assertRaisesRegex(ValueError, 'inside'):
+                r.load_config(s, 8, 4)
+        endpoint['longitude'] = '-157.5'
+        s['features'] = []
+        with self.assertRaisesRegex(ValueError, 'missing source area'):
+            r.load_config(s, 8, 4)
+
     def grid(self, root, name, code):
         rows = root / (name + '-rows')
         runs = root / (name + '-runs')

@@ -194,6 +194,17 @@ def load_config(snapshot, width, height, *, physical=None):
             lat = endpoint_coordinate(e, 'latitude')
         if not -180 <= lon <= 180 or not (90 - height * step) <= lat <= 90:
             raise ValueError(f'endpoint outside grid: {ident}')
+        if derivation.get('method') == 'source_area_interior_point':
+            from shapely.geometry import Point, shape
+            from worldatlas.map_build.inputs.features import feature_geometry
+
+            features = {f['feature_id']: f for f in snapshot.get('features', [])}
+            feature = features.get(derivation.get('feature_id'))
+            if feature is None:
+                raise ValueError('ocean seed refers to a missing source area')
+            area = feature_geometry(feature, ('Polygon', 'MultiPolygon'))
+            if not shape(area).contains(Point(lon, lat)):
+                raise ValueError('ocean seed must be inside its selected source area')
         return lon, lat
 
     paths = []

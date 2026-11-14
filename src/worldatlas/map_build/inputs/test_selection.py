@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-import hashlib
 from copy import deepcopy
 
 import psycopg
@@ -101,7 +100,6 @@ class BindingTests(unittest.TestCase):
 )
 class SelectionTests(unittest.TestCase):
     def setUp(self):
-        from psycopg.types.json import Jsonb
 
         self.url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
         self.writer = psycopg.connect(self.url, autocommit=True)
@@ -118,16 +116,20 @@ class SelectionTests(unittest.TestCase):
             ("a" * 64,),
         )
         self.geometry = {"type": "Point", "coordinates": [10.0, 20.0]}
-        from worldatlas.source_imports.features.geometry import geometry_hash
-
         self.writer.execute(
-            "INSERT INTO atlas.decision_features(feature_id,source_id,source_feature_id,geometry_sha256,evidence,geometry,coordinate_reference) VALUES ('__selected_point','__selected_raw','provider',%s,'{}',%s,'OGC:CRS84')",
-            (geometry_hash(self.geometry), Jsonb(self.geometry)),
+            "INSERT INTO atlas.construction_records VALUES ('__selected_recipe',%s)",
+            (Jsonb(dict(method="selected_vector_features", source_id="__selected_raw",
+                        basis="First", id_field="id", selections=[dict(
+                            feature_id="__selected_point", source_feature_id="provider")])),),
+        )
+        self.writer.execute(
+            "INSERT INTO atlas.source_features VALUES ('__selected_point','__selected_raw','provider',%s,'OGC:CRS84','__selected_recipe')",
+            (Jsonb(self.geometry),),
         )
 
     def remove(self):
         self.writer.execute(
-            "DELETE FROM atlas.decision_features WHERE feature_id='__selected_point'"
+            "DELETE FROM atlas.source_features WHERE feature_id='__selected_point'"
         )
         self.writer.execute(
             "DELETE FROM atlas.construction_records WHERE source_id='__selected_recipe'"
@@ -162,13 +164,11 @@ class SelectionTests(unittest.TestCase):
 
     def test_later_working_edit_does_not_change_saved_inputs(self):
         first = self.read()
-        from psycopg.types.json import Jsonb
-        from worldatlas.source_imports.features.geometry import geometry_hash
 
         changed = {"type": "Point", "coordinates": [11.0, 21.0]}
         self.writer.execute(
-            "UPDATE atlas.decision_features SET geometry=%s,geometry_sha256=%s WHERE feature_id=%s",
-            (Jsonb(changed), geometry_hash(changed), "__selected_point"),
+            "UPDATE atlas.source_features SET geometry=%s WHERE feature_id=%s",
+            (Jsonb(changed), "__selected_point"),
         )
         second = self.read()
         with tempfile.TemporaryDirectory() as temp:
@@ -181,21 +181,6 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(second["geography"]["features"][0]["geometry"], changed)
 
     def test_construction_edits_are_copied_into_each_build(self):
-        from psycopg.types.json import Jsonb
-
-        document = dict(
-            method="osm_way_chain",
-            source_id="__selected_raw",
-            boundary_id="boundary",
-            basis="First",
-        )
-        self.writer.execute(
-            "INSERT INTO atlas.construction_records VALUES ('__selected_recipe',%s)",
-            (Jsonb(document),),
-        )
-        self.writer.execute(
-            "UPDATE atlas.decision_features SET construction_id='__selected_recipe' WHERE feature_id='__selected_point'"
-        )
         first = self.read()
         self.writer.execute(
             "UPDATE atlas.construction_records SET document=document || '{\"basis\":\"Second\"}' WHERE source_id='__selected_recipe'"

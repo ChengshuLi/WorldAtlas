@@ -76,13 +76,6 @@ CREATE TABLE atlas.decision_mainland_witnesses (
     witness_id text NOT NULL,
     point_feature_id text NOT NULL,
     identity_feature_id text NOT NULL,
-    point_name text NOT NULL,
-    identity_name text NOT NULL,
-    identity_class text NOT NULL,
-    id_property text NOT NULL,
-    identity_id_property text NOT NULL,
-    identity_name_property text NOT NULL,
-    identity_class_property text NOT NULL,
     radius_cells integer NOT NULL,
     max_water_cells integer NOT NULL,
     rationale text NOT NULL,
@@ -90,8 +83,8 @@ CREATE TABLE atlas.decision_mainland_witnesses (
     CONSTRAINT decision_mainland_witnesses_max_water_cells_check CHECK ((max_water_cells >= 0)),
     CONSTRAINT decision_mainland_witnesses_radius_cells_check CHECK (((radius_cells >= 0) AND (radius_cells <= 100))),
     CONSTRAINT decision_mainland_witnesses_pkey PRIMARY KEY (witness_id),
-    CONSTRAINT decision_mainland_witnesses_identity_feature_id_fkey FOREIGN KEY (identity_feature_id) REFERENCES atlas.decision_features(feature_id),
-    CONSTRAINT decision_mainland_witnesses_point_feature_id_fkey FOREIGN KEY (point_feature_id) REFERENCES atlas.decision_features(feature_id)
+    CONSTRAINT decision_mainland_witnesses_identity_feature_id_fkey FOREIGN KEY (identity_feature_id) REFERENCES atlas.source_features(feature_id),
+    CONSTRAINT decision_mainland_witnesses_point_feature_id_fkey FOREIGN KEY (point_feature_id) REFERENCES atlas.source_features(feature_id)
 );
 
 CREATE TABLE atlas.decision_mainland_witness_groups (

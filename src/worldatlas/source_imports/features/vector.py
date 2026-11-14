@@ -105,7 +105,7 @@ def read_features(path, settings):
             raise ValueError('source collection does not contain the expected number of features')
         if not selection.get('collection') and len(fids[key]) != 1:
             raise ValueError('selected provider feature is duplicated')
-        values, properties = [], []
+        values = []
         for fid in fids[key]:
             row = layer.GetFeature(fid)
             if row is None:
@@ -125,7 +125,6 @@ def read_features(path, settings):
                      else json.loads(geometry.ExportToJson(options=options)))
             validate_geometry(value, reference)
             values.append(value)
-            properties.append(attributes)
         if selection.get('collection'):
             from shapely.geometry import mapping, shape
             from shapely import union_all
@@ -138,7 +137,5 @@ def read_features(path, settings):
             raise ValueError('selected source geometry checksum differs')
         result.append({'feature_id': selection['feature_id'], 'source_feature_id': key,
                        'geometry': value,
-                       'coordinate_reference': reference,
-                       'evidence': {'source_coordinate_reference': original.ExportToWkt(),
-                                    'provider_properties': properties if selection.get('collection') else properties[0]}})
+                       'coordinate_reference': reference})
     return result

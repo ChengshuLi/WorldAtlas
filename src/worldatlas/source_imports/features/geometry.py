@@ -51,7 +51,7 @@ def validate_geometry(geometry, coordinate_reference='OGC:CRS84'):
 
 
 def save_features(database, features, recipe):
-    """Save a complete import together; unrelated evidence and links survive."""
+    """Save a complete import atomically; existing relationships survive."""
     identifiers = [feature['feature_id'] for feature in features]
     if (not identifiers or any(not isinstance(value, str) or not value.strip() for value in identifiers)
             or len(set(identifiers)) != len(identifiers)):
@@ -65,22 +65,20 @@ def save_features(database, features, recipe):
         geometry = storage_geometry(feature['geometry'])
         digest = geometry_hash(geometry)
         hashes[feature['feature_id']] = digest
-        evidence = dict(feature.get('evidence', {}), basis=recipe['basis'])
         records.append((feature['feature_id'], feature['source_id'], feature['source_feature_id'],
-                        digest, Jsonb(geometry), reference, Jsonb(evidence),
+                        Jsonb(geometry), reference,
                         recipe['recipe_id']))
     with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(
-                'INSERT INTO atlas.decision_features '
+                'INSERT INTO atlas.source_features '
                 '(feature_id,source_id,source_feature_id,'
-                'geometry_sha256,geometry,coordinate_reference,evidence,construction_id) '
-                'VALUES (%s,%s,%s,%s,%s,%s,%s,%s) '
+                'geometry,coordinate_reference,construction_id) '
+                'VALUES (%s,%s,%s,%s,%s,%s) '
                 'ON CONFLICT (feature_id) DO UPDATE SET '
                 'source_id=EXCLUDED.source_id,'
                 'source_feature_id=EXCLUDED.source_feature_id,'
-                'geometry_sha256=EXCLUDED.geometry_sha256,geometry=EXCLUDED.geometry,'
+                'geometry=EXCLUDED.geometry,'
                 'coordinate_reference=EXCLUDED.coordinate_reference,'
-                'construction_id=EXCLUDED.construction_id,'
-                'evidence=atlas.decision_features.evidence || EXCLUDED.evidence', records)
+                'construction_id=EXCLUDED.construction_id', records)
     return hashes

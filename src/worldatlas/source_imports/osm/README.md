@@ -1,7 +1,7 @@
 # OpenStreetMap imports
 
 [`features.py`](features.py) imports selected nodes, closed ways and relation
-polygons into `atlas.decision_features`. It reads each archived object graph
+polygons into `atlas.source_features`. It reads each archived object graph
 once through osmium's Python API. [`features/build_features.py`](../features/build_features.py)
 handles catalog lookup, verified downloads and transactional storage.
 

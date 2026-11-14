@@ -115,30 +115,13 @@ class SeedBuildTests(unittest.TestCase):
             ('east', 56.25, [30, 0, 110, 30]),
         ]:
             point = feature(ident + '-point', dict(type='Point', coordinates=[lon, 11.25]))
-            point.update(
-                source_feature_id=ident + '-point',
-                evidence={'provider_properties': {'name': ident, 'id': ident + '-point'}},
-            )
             area = feature(ident + '-area', polygon(*bounds))
-            area.update(
-                source_feature_id=ident + '-area',
-                evidence={
-                    'provider_properties': {'id': ident + '-area', 'name': ident, 'kind': 'Region'}
-                },
-            )
             self.features += [point, area]
             witnesses.append(
                 dict(
                     witness_id=ident,
                     point_feature_id=point['feature_id'],
                     identity_feature_id=area['feature_id'],
-                    id_property='id',
-                    identity_id_property='id',
-                    identity_name_property='name',
-                    identity_class_property='kind',
-                    point_name=ident,
-                    identity_name=ident,
-                    identity_class='Region',
                     radius_cells=0,
                     max_water_cells=0,
                 )
@@ -233,12 +216,14 @@ class SeedBuildTests(unittest.TestCase):
             result = build_seeds(self.domain, components, self.root / 'current-seeds', workers=1)
         self.assertEqual(result['category_cell_counts'], {'77': 2, '301': 1, '999': 1})
 
-    def test_wrong_source_identity_and_closure_crossing_land_fail_before_output(self):
-        self.domain['mainland_witnesses'][0]['point_name'] = 'wrong'
+    def test_point_outside_identity_area_and_closure_crossing_land_fail_before_output(self):
+        point = self.features[0]
+        original = point['geometry']
+        point['geometry'] = {'type': 'Point', 'coordinates': [170, -60]}
         with self.components() as components, self.assertRaisesRegex(ValueError, 'source identity'):
             build_seeds(self.domain, components, self.root / 'bad-identity')
         self.assertFalse((self.root / 'bad-identity').exists())
-        self.domain['mainland_witnesses'][0]['point_name'] = 'west'
+        point['geometry'] = original
         route = self.domain['routes'][0]
         route['geometry']['coordinates'] = [
             [-90.0, -22.5],

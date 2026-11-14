@@ -25,7 +25,7 @@ class PointTableTests(unittest.TestCase):
         features = read_points(self.path, self.settings)
         self.assertEqual([f['feature_id'] for f in features], ['point-one', 'point-two'])
         self.assertEqual(features[0]['geometry'], {'type': 'Point', 'coordinates': [5.5, -2.25]})
-        self.assertEqual(features[1]['evidence']['provider_properties']['name'], 'Second')
+        self.assertNotIn('evidence', features[1])
         self.settings['selections'][0]['expected_geometry_sha256'] = geometry_hash(features[0]['geometry'])
         self.assertEqual(read_points(self.path, self.settings), features)
 

@@ -13,7 +13,7 @@ from unittest.mock import Mock
 import psycopg
 from psycopg.types.json import Jsonb
 from worldatlas.source_imports.run_import import run_import, selected_constructions
-from worldatlas.source_imports.features.geometry import save_features, geometry_hash
+from worldatlas.source_imports.features.geometry import save_features
 
 
 @unittest.skipUnless(
@@ -76,15 +76,12 @@ class StorageTests(unittest.TestCase):
 
     def rows(self):
         return self.database.execute(
-            "SELECT feature_id,geometry,geometry_sha256,evidence,construction_id "
-            "FROM atlas.decision_features ORDER BY feature_id"
+            "SELECT feature_id,geometry,coordinate_reference,construction_id "
+            "FROM atlas.source_features ORDER BY feature_id"
         ).fetchall()
 
-    def test_repeat_and_recipe_edit_preserve_notes_links_and_other_records(self):
+    def test_repeat_and_recipe_edit_preserve_links_and_other_records(self):
         first = self.build()
-        self.database.execute(
-            'UPDATE atlas.decision_features SET evidence=evidence || \'{"note":"keep"}\''
-        )
         self.database.execute(
             "INSERT INTO atlas.decision_basins VALUES ('basin','point-a','test','{}','{}')"
         )
@@ -92,9 +89,7 @@ class StorageTests(unittest.TestCase):
         self.store()
         self.build()
         after = self.rows()[0]
-        self.assertEqual(after[3]["note"], "keep")
-        self.assertEqual(after[3]["basis"], "Updated explanation")
-        self.assertEqual(after[4], "__features")
+        self.assertEqual(after[3], "__features")
         self.assertEqual(self.build()["geometry_sha256"], first["geometry_sha256"])
         self.assertEqual(self.storage.get_object.call_count, 1)
         self.assertEqual(selected_constructions(self.database), ["__features"])
@@ -168,7 +163,6 @@ class StorageTests(unittest.TestCase):
                 ],
                 dict(self.recipe, recipe_id="__features"),
             )
-        for _, geometry, digest, _, _ in self.rows():
-            self.assertEqual(geometry_hash(geometry), digest)
+        self.assertEqual({row[2] for row in self.rows()}, {"OGC:CRS84", "EPSG:3857"})
         zero = next(r for r in self.rows() if r[0] == "zero")
         self.assertEqual(json.dumps(zero[1]["coordinates"]), "[0.0, 1e-24]")

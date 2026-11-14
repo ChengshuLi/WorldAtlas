@@ -27,6 +27,12 @@ map-code bindings also distinguish land from water.
 classes. Water ownership remains distinct even when every water cell uses the
 same display color.
 
+`source_features` stores imported geometry and its raw-source and construction
+links. All six columns are required. Its database checks enforce supported shape
+types, coordinate nesting, finite two-dimensional values, WGS84 ranges and closed
+polygon rings. Importers also check geometric validity with GEOS. Provider
+identity attributes are verified during import and are not copied into this table.
+
 Each table's constraints and supporting functions are kept beside its definition.
 These files define structure only. Source records, colors, geographic choices and
 construction settings are loaded separately into Neon.

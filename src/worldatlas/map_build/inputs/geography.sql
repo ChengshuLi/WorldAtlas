@@ -1,6 +1,6 @@
 WITH source_refs(source_id) AS
   (SELECT source_id
-   FROM atlas.decision_features
+   FROM atlas.source_features
    UNION SELECT source_id
    FROM atlas.decision_mainland_boundary_sources
    UNION SELECT s.source_id
@@ -40,7 +40,7 @@ SELECT jsonb_build_object(
     COALESCE(
                (SELECT jsonb_agg(to_jsonb(f)-'geometry'
                                  ORDER BY f.feature_id)
-                FROM atlas.decision_features f
+                FROM atlas.source_features f
                 ),'[]'::jsonb),
   'endpoints',
     COALESCE(
@@ -87,11 +87,11 @@ SELECT jsonb_build_object(
     COALESCE(
                (SELECT jsonb_agg(jsonb_build_object('id',
                                    b.basin_id, 'feature_id', b.feature_id, 'source_id', f.source_id, 'source_feature_id', f.source_feature_id,
-                                   'geometry_sha256', f.geometry_sha256, 'assignment_method', b.method, 'tie_rules', b.tie_rules,
+                                   'assignment_method', b.method, 'tie_rules', b.tie_rules,
                                    'evidence', b.evidence)
                                  ORDER BY b.basin_id)
                 FROM atlas.decision_basins b
-                JOIN atlas.decision_features f USING(feature_id)
+                JOIN atlas.source_features f USING(feature_id)
                 ),'[]'::jsonb),
   'affiliations',
     COALESCE(

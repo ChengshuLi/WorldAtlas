@@ -56,21 +56,6 @@ class AreaTests(unittest.TestCase):
                                   area('child', 'small', patch([(x / 2, y / 2) for x, y in SQUARE]), parent='parent')))
         self.assertEqual(shape(reader.geometry('large')[0]).area, 4)
         self.assertEqual(shape(reader.geometry('small')[0]).area, 1)
-        self.assertEqual(reader.parents('small'), ['large'])
-        self.assertEqual(reader.parents('large'), [])
-
-    def test_parent_identity_traverses_collection_parts(self):
-        reader = SeaAreas(document(
-            area('ocean', 'ocean-mrn', patch(SQUARE), children=['part']),
-            area('part', 'ocean-mrn', parent='ocean', children=['sea']),
-            area('sea', 'sea-mrn', patch(SQUARE), parent='part')))
-        self.assertEqual(reader.parents('sea-mrn'), ['ocean-mrn'])
-
-    def test_parent_cycle_is_rejected(self):
-        reader = SeaAreas(document(area('a', 'a-mrn', patch(SQUARE), parent='b'),
-                                  area('b', 'b-mrn', patch(SQUARE), parent='a')))
-        with self.assertRaisesRegex(ValueError, 'cyclic'):
-            reader.parents('a-mrn')
 
     def test_dateline_splits_without_world_spanning_interior(self):
         points = [(179, 0), (-179, 0), (-179, 2), (179, 2), (179, 0)]

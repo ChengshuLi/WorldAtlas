@@ -1,7 +1,7 @@
 # IHO S-130 geographic geometry
 
 [`areas.py`](areas.py) imports selected complete sea areas into
-`atlas.decision_features` through the common
+`atlas.source_features` through the common
 [`feature import workflow`](../features/README.md). Select areas by their stable
 provider MRN. Linked parts sharing one MRN are combined; a parent with its own
 surface retains that surface. Holes, dateline crossings and explicit polar caps
@@ -14,6 +14,12 @@ imports apply each selected construction line's declared rhumb interpolation.
 An `s130_areas` construction supplies `source_id`, `basis`,
 `gml_member`, `gml_sha256` and `selections`. Each selection specifies the output
 `feature_id` and provider MRN in `source_feature_id`.
+
+The same `s130_areas` method can import ocean polygons used to verify selected
+interior starting points. These polygons remain ocean inputs; they are not added
+to the active nearest-continent basin list. An endpoint with derivation
+`source_area_interior_point` names its imported `feature_id`; ocean assignment
+checks that the point is strictly inside that polygon.
 
 ## Ocean boundary routes
 

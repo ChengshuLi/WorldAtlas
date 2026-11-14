@@ -180,6 +180,5 @@ def read_features(path, settings):
         if selection.get('expected_geometry_sha256', geometry_hash(geometry)) != geometry_hash(geometry):
             raise ValueError('selected OSM geometry checksum differs')
         result.append(dict(feature_id=selection['feature_id'], source_feature_id=selection['source_feature_id'],
-                           geometry=geometry, evidence={'provider_tags': record['tags'],
-                           'provider_object_type': kind, 'provider_object_version': record['version']}))
+                           geometry=geometry))
     return result

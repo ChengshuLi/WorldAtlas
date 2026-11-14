@@ -1,22 +1,55 @@
 -- Source-backed geometry, geographic choices, citations and assignment policies.
 
-CREATE TABLE atlas.decision_features (
-    feature_id text NOT NULL,
-    source_id text NOT NULL,
-    source_feature_id text NOT NULL,
-    geometry_sha256 text NOT NULL,
-    evidence jsonb NOT NULL,
-    geometry jsonb,
-    coordinate_reference text,
-    construction_id text,
-    CONSTRAINT decision_features_evidence_check CHECK ((jsonb_typeof(evidence) = 'object'::text)),
-    CONSTRAINT decision_features_feature_id_check CHECK ((length(TRIM(BOTH FROM feature_id)) > 0)),
-    CONSTRAINT decision_features_geometry CHECK (COALESCE((((geometry IS NULL) AND (coordinate_reference IS NULL)) OR ((geometry IS NOT NULL) AND (jsonb_typeof(geometry) = 'object'::text) AND (geometry ? 'type'::text) AND (geometry ? 'coordinates'::text) AND (coordinate_reference IS NOT NULL) AND (length(TRIM(BOTH FROM coordinate_reference)) > 0))), false)),
-    CONSTRAINT decision_features_geometry_sha256_check CHECK ((geometry_sha256 ~ '^[0-9a-f]{64}$'::text)),
-    CONSTRAINT decision_features_source_feature_id_check CHECK ((length(TRIM(BOTH FROM source_feature_id)) > 0)),
-    CONSTRAINT decision_features_pkey PRIMARY KEY (feature_id),
-    CONSTRAINT decision_features_construction_id_fkey FOREIGN KEY (construction_id) REFERENCES atlas.construction_records(source_id),
-    CONSTRAINT decision_features_source_id_fkey FOREIGN KEY (source_id) REFERENCES atlas.source_assets(source_id)
+-- Check the coordinate structure here; imports also check geometric validity with GEOS.
+CREATE FUNCTION atlas.valid_source_coordinates(value jsonb, kind text, geographic boolean)
+RETURNS boolean LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE AS $$
+DECLARE child jsonb; child_kind text; minimum integer; x numeric; y numeric;
+BEGIN
+  IF jsonb_typeof(value) IS DISTINCT FROM 'array' THEN RETURN false; END IF;
+  IF kind = 'Point' THEN
+    IF jsonb_array_length(value) <> 2
+       OR jsonb_typeof(value->0) IS DISTINCT FROM 'number'
+       OR jsonb_typeof(value->1) IS DISTINCT FROM 'number' THEN RETURN false; END IF;
+    x := (value->>0)::numeric; y := (value->>1)::numeric;
+    RETURN abs(x) <= 1.7976931348623157e308 AND abs(y) <= 1.7976931348623157e308
+      AND (NOT geographic OR (x BETWEEN -180 AND 180 AND y BETWEEN -90 AND 90));
+  END IF;
+  CASE kind
+    WHEN 'MultiPoint' THEN child_kind := 'Point'; minimum := 1;
+    WHEN 'LineString' THEN child_kind := 'Point'; minimum := 2;
+    WHEN 'Ring' THEN child_kind := 'Point'; minimum := 4;
+    WHEN 'MultiLineString' THEN child_kind := 'LineString'; minimum := 1;
+    WHEN 'Polygon' THEN child_kind := 'Ring'; minimum := 1;
+    WHEN 'MultiPolygon' THEN child_kind := 'Polygon'; minimum := 1;
+    ELSE RETURN false;
+  END CASE;
+  IF jsonb_array_length(value) < minimum THEN RETURN false; END IF;
+  IF kind = 'Ring' AND value->0 <> value->-1 THEN RETURN false; END IF;
+  FOR child IN SELECT jsonb_array_elements(value) LOOP
+    IF NOT atlas.valid_source_coordinates(child, child_kind, geographic) THEN RETURN false; END IF;
+  END LOOP;
+  RETURN true;
+END; $$;
+
+CREATE FUNCTION atlas.valid_source_geometry(geometry jsonb, coordinate_reference text)
+RETURNS boolean LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $$
+  SELECT CASE WHEN jsonb_typeof(geometry) = 'object' THEN COALESCE(
+    geometry ?& ARRAY['type','coordinates']
+    AND geometry - ARRAY['type','coordinates'] = '{}'::jsonb
+    AND geometry->>'type' IN ('Point','MultiPoint','LineString','MultiLineString','Polygon','MultiPolygon')
+    AND coordinate_reference ~ '^(OGC:CRS84|EPSG:[1-9][0-9]*)$'
+    AND atlas.valid_source_coordinates(geometry->'coordinates', geometry->>'type', coordinate_reference = 'OGC:CRS84'),
+    false) ELSE false END;
+$$;
+
+CREATE TABLE atlas.source_features (
+    feature_id text PRIMARY KEY CHECK (length(trim(feature_id)) > 0),
+    source_id text NOT NULL REFERENCES atlas.source_assets(source_id),
+    source_feature_id text NOT NULL CHECK (length(trim(source_feature_id)) > 0),
+    geometry jsonb NOT NULL,
+    coordinate_reference text NOT NULL,
+    construction_id text NOT NULL REFERENCES atlas.construction_records(source_id),
+    CONSTRAINT source_features_geometry_check CHECK (atlas.valid_source_geometry(geometry, coordinate_reference))
 );
 
 CREATE TABLE atlas.geographic_line_observations (
@@ -167,5 +200,5 @@ CREATE TABLE atlas.decision_basins (
     CONSTRAINT decision_basins_method_check CHECK ((length(TRIM(BOTH FROM method)) > 0)),
     CONSTRAINT decision_basins_tie_rules_check CHECK ((jsonb_typeof(tie_rules) = 'object'::text)),
     CONSTRAINT decision_basins_pkey PRIMARY KEY (basin_id),
-    CONSTRAINT decision_basins_feature_id_fkey FOREIGN KEY (feature_id) REFERENCES atlas.decision_features(feature_id)
+    CONSTRAINT decision_basins_feature_id_fkey FOREIGN KEY (feature_id) REFERENCES atlas.source_features(feature_id)
 );

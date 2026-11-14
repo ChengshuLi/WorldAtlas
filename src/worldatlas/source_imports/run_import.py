@@ -42,7 +42,7 @@ def selected_constructions(database):
         row[0]
         for row in database.execute(
             "SELECT DISTINCT construction_id FROM ("
-            "SELECT construction_id FROM atlas.decision_features "
+            "SELECT construction_id FROM atlas.source_features "
             "UNION ALL SELECT construction_id FROM atlas.decision_mainland_boundaries "
             "UNION ALL SELECT construction_id FROM atlas.decision_routes "
             "UNION ALL SELECT construction_id FROM atlas.decision_endpoints "
