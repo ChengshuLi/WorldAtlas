@@ -14,7 +14,7 @@ export default {
         status: "ready",
       });
     }
-    if (["/", "/index.html", "/review/index.html"].includes(url.pathname)) {
+    if (["/", "/index.html"].includes(url.pathname)) {
       const index = await env.ATLAS.get("index.html");
       if (!index) {
         return new Response(
@@ -35,11 +35,7 @@ export default {
       });
     }
     if (url.pathname.includes("%")) return new Response("Not found", { status: 404 });
-    // Keep existing public URLs working while storage has one release layout.
-    const sourcePage = /^\/(v[0-9]+\.[0-9]+)\/sources(?:\.html)?$/.exec(url.pathname);
-    let key = sourcePage ? `releases/${sourcePage[1]}/sources.html` : url.pathname.slice(1);
-    key = key.replace(/^review\/releases\//, "releases/")
-      .replace(/^review\/(v[0-9]+\.[0-9]+)\//, "releases/$1/");
+    const key = url.pathname.slice(1);
     if (!/^releases\/v[0-9]+\.[0-9]+(?:-rc\.?[1-9][0-9]*)?\/[A-Za-z0-9_.\/-]+$/.test(key)
         || key.split("/").some(part => part === "." || part === "..")) {
       return new Response("Not found", { status: 404 });

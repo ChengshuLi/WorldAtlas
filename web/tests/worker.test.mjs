@@ -80,19 +80,6 @@ test('invalid, multi-part and outside ranges are rejected', async () => {
 });
 
 
-test("V8 sources aliases expose only the known public source page", async () => {
-  const seen = [];
-  const bound = { ATLAS: { get: async key => { seen.push(key); return { body: "source page", httpEtag: "\"abc\"", writeHttpMetadata: h => h.set("Content-Type", "text/html") }; } } };
-  for (const path of ["/v8.0/sources", "/v8.0/sources.html", "/review/v8.0/sources.html", "/releases/v8.0/sources.html"]) {
-    const result = await worker.fetch(request(path), bound);
-    assert.equal(result.status, 200);
-    assert.equal(await result.text(), "source page");
-  }
-  assert.deepEqual(seen, Array(4).fill("releases/v8.0/sources.html"));
-  for (const path of ["/v8.0/private", "/v8.0/sources%2Fsecret"]) assert.equal((await worker.fetch(request(path), env)).status, 404);
-  assert.equal((await worker.fetch(request("/v8.0/sources", "POST"), env)).status, 405);
-});
-
 test("numbered candidates stay separate from the published homepage", async () => {
   const requested = [];
   const storage = { ATLAS: { get: async (key) => {
@@ -119,13 +106,8 @@ test("numbered candidates stay separate from the published homepage", async () =
   ]);
 });
 
-test("old review URLs resolve to canonical release objects", async () => {
-  const seen = [];
-  const storage = { ATLAS: { get: async key => {
-    seen.push(key);
-    return {body:"unchanged",httpEtag:'"a"',writeHttpMetadata:h=>h.set("Content-Type","text/html")};
-  } } };
-  for (const path of ["/review/releases/v8.2-rc.5/index.html", "/releases/v8.2-rc.5/index.html"])
-    assert.equal(await (await worker.fetch(request(path), storage)).text(), "unchanged");
-  assert.deepEqual(seen, Array(2).fill("releases/v8.2-rc.5/index.html"));
+test("retired review and version shortcuts are not routed", async () => {
+  for (const path of ["/review/index.html", "/review/releases/v8.2-rc.5/index.html",
+                      "/review/v8.0/sources.html", "/v8.0/sources", "/v8.0/sources.html"])
+    assert.equal((await worker.fetch(request(path), env)).status, 404);
 });

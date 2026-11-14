@@ -426,7 +426,7 @@ def main():
                 endpoint = manifest['inputs'].get('r2_endpoint')
             else:
                 row = db.execute(
-                    "SELECT COALESCE(manifest#>>'{inputs,r2_endpoint}',manifest#>>'{inputs,configuration,physical_controls,source_staging,endpoint_url}') "
+                    "SELECT manifest#>>'{inputs,r2_endpoint}' "
                     'FROM atlas.map_releases WHERE release_id=%s AND approved_at IS NOT NULL',
                     (args.candidate,),
                 ).fetchone()

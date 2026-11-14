@@ -47,8 +47,9 @@ available. Input files in active candidates are temporary review/build records.
 
 Publishing does not rebuild or recolor the map. Interrupted publication or
 candidate cleanup can be retried with the same command. Published versions remain
-available and cannot be redirected to a different candidate. Existing `/review/`
-URLs still work through the Worker; R2 stores only the canonical paths.
+available and cannot be redirected to a different candidate. The Worker serves
+only `/`, `/index.html` and `/releases/RELEASE_ID/...`; retired `/review/` URLs
+and version shortcuts return 404.
 Deploying the Worker itself is separate: `npx wrangler deploy`.
 
 ## Restore inputs
