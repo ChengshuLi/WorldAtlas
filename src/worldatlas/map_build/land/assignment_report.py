@@ -11,7 +11,10 @@ import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.inputs.selection import geographic_domain, read_saved
-from worldatlas.map_build.inputs.features import selection_feature_ids
+from worldatlas.map_build.inputs.features import (
+    assignment_selection,
+    selection_feature_ids,
+)
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.geographic_assignments import resolve_assignments
 
@@ -202,7 +205,13 @@ def _regional_claims(frozen, domain, rules, result, components):
 
 
 def write_report(
-    selection, components, directory, *, previous=None, map_comparison=None
+    selection,
+    components,
+    directory,
+    *,
+    previous=None,
+    map_comparison=None,
+    feature_audit=None,
 ):
     """Write a local interactive report and machine-readable coverage inventory."""
     started = time.monotonic()
@@ -241,6 +250,10 @@ def write_report(
             current_references[number] = f"P{policy_number}"
         else:
             current_references[number] = str(number)
+    audited = {
+        (row["assignment_id"], row["feature_id"]): row
+        for row in (feature_audit or {}).get("retained", [])
+    }
     summaries = []
     index = []
     for label, domain, rules, result in resolved:
@@ -266,7 +279,11 @@ def write_report(
                 rule.get("evidence", {}).get("component_selection"),
             )
             conditions = (
-                [rule["selection"]] if "selection" in rule else legacy["conditions"]
+                [rule["selection"]]
+                if "_component_entities" in rule
+                else [assignment_selection(rule, features.keys())]
+                if "assignment_id" in rule
+                else legacy["conditions"]
             )
             geometries = [
                 features[ident]["geometry"]
@@ -292,6 +309,11 @@ def write_report(
                 assignment_id=ident,
                 entity_id=rule["entity_id"],
                 entity=entity_name,
+                feature_count=len(
+                    {ident for c in conditions for ident in selection_feature_ids(c)}
+                )
+                if targets is None
+                else None,
                 component_count=len(roots),
                 cell_count=sum(totals[r] for r in roots),
                 unique_component_count=sum(supporters[r] == 1 for r in roots),
@@ -305,7 +327,7 @@ def write_report(
                     for r in roots
                 ),
                 conditions=conditions,
-                combine="all" if "selection" in rule else legacy["combine"],
+                combine="all" if "assignment_id" in rule else legacy["combine"],
                 current_rule_numbers=[
                     n
                     for n, c in enumerate(resolved[0][3]["claims"], 1)
@@ -354,6 +376,31 @@ def write_report(
                         + escape(json.dumps(document, indent=2, ensure_ascii=False))
                         + "</pre>"
                     )
+            necessity = ""
+            if label == "current" and audited and targets is None:
+                feature_ids = list(
+                    dict.fromkeys(
+                        ident for c in conditions for ident in selection_feature_ids(c)
+                    )
+                )
+                missing = [fid for fid in feature_ids if (ident, fid) not in audited]
+                if missing:
+                    raise ValueError(
+                        "feature audit is missing selected references: " + str(missing)
+                    )
+                necessity = (
+                    "<h2>Feature necessity</h2><p>Each row shows map cells that change continent if this feature is omitted, keeping the other features and geographic rules.</p>"
+                    "<table><thead><tr><th>Feature ID</th><th>Changed cells if omitted</th></tr></thead><tbody>"
+                    + "".join(
+                        "<tr><td>"
+                        + escape(fid)
+                        + "</td><td>"
+                        + f"{audited[ident, fid]['changed_cells']:,}"
+                        + "</td></tr>"
+                        for fid in feature_ids
+                    )
+                    + "</tbody></table>"
+                )
             construction_details = (
                 (
                     "<details><summary>Area construction and contributing source regions</summary>"
@@ -375,14 +422,19 @@ def write_report(
                 if record["combine"] == "all"
                 else " OR ".join(explanations[c["relation"]] for c in conditions)
             )
+            feature_summary = (
+                f"{record['feature_count']:,} features"
+                if record["feature_count"] is not None
+                else "regional policy"
+            )
             heading = f"{reference}. {display_name}"
             html = f"""<!doctype html><html lang="en"><meta charset="utf-8">
 <title>{escape(heading)}</title><link rel="stylesheet" href="../assignment_report.css">
 <body><h1>{escape(heading)}</h1><p>{escape(rule.get("rationale", ""))}</p>
-<p><strong>{escape(record["entity"])}</strong> · {len(roots):,} components · {record["cell_count"]:,} cells ·
+<p><strong>{escape(record["entity"])}</strong> · {feature_summary} · {len(roots):,} components · {record["cell_count"]:,} cells ·
 {record["unique_component_count"]:,} components uniquely selected by this rule</p>
 <p>{escape(explanation)} When several areas are listed, their union is used before selecting components.</p>
-<pre>{escape(json.dumps(rule["selection"] if "selection" in rule else legacy, indent=2))}</pre>
+<details><summary>Selected source features</summary><pre>{escape(json.dumps({"feature_ids": rule["feature_ids"]} if "feature_ids" in rule else rule["selection"] if "selection" in rule else legacy, indent=2))}</pre></details>
 {construction_details}
 <p>Left: selection geometry. Right: actual assigned land cells in the entity color.
 Blue outlines/markers show the selected geographic area, point or line. Gray is background land.
@@ -390,13 +442,14 @@ Drag to pan; scroll to zoom. Both views move together.</p>
 <button id="reset">Reset view</button><button id="save">Save comparison image</button>
 <div class="maps"><canvas id="source"></canvas><canvas id="result"></canvas></div>
 <p id="extent"></p><p>Selected cells retain the full grid resolution. Background land is sampled for orientation.</p>
+{necessity}
 <p>Current rules covering these components: {escape(", ".join("#" + current_references[n] for n in record["current_rule_numbers"]))}.</p>
 <p>Other rules sharing selected components: {escape(", ".join(record["other_assignments"]) or "none")}.</p>
 <script id="data" type="application/json">{content}</script><script src="../assignment_report.js"></script></body></html>"""
             (folder / f"{number:03d}.html").write_text(html)
             (policy_rows if targets is not None else assignment_rows).append(
                 f'<tr><td>{reference}</td><td><a target="detail" href="{label}/{number:03d}.html">{escape(display_name)}</a></td>'
-                f"<td>{escape(record['entity'])}</td><td>{len(roots):,}</td><td>{record['cell_count']:,}</td>"
+                f"<td>{escape(record['entity'])}</td><td>{record['feature_count'] if record['feature_count'] is not None else '—'}</td><td>{len(roots):,}</td><td>{record['cell_count']:,}</td>"
                 f"<td>{record['unique_component_count']:,}</td></tr>"
             )
         for title, rows in (
@@ -405,7 +458,7 @@ Drag to pan; scroll to zoom. Both views move together.</p>
         ):
             if rows:
                 index.append(
-                    f"<h2>{label.title()} {title} ({len(rows)})</h2><table><thead><tr><th>#</th><th>Rule</th><th>Entity</th><th>Components</th><th>Cells</th><th>Unique components</th></tr></thead><tbody>"
+                    f"<h2>{label.title()} {title} ({len(rows)})</h2><table><thead><tr><th>#</th><th>Rule</th><th>Entity</th><th>Features</th><th>Components</th><th>Cells</th><th>Unique components</th></tr></thead><tbody>"
                     + "".join(rows)
                     + "</tbody></table>"
                 )
@@ -455,6 +508,11 @@ def main():
         type=Path,
         help="final-grid comparison report from the map pipeline",
     )
+    parser.add_argument(
+        "--feature-audit",
+        type=Path,
+        help="per-feature removal comparison, for the current selection",
+    )
     parser.add_argument("--physical", required=True, type=Path)
     parser.add_argument("--components", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
@@ -467,6 +525,9 @@ def main():
             args.output,
             map_comparison=json.loads(args.map_comparison.read_text())
             if args.map_comparison
+            else None,
+            feature_audit=json.loads(args.feature_audit.read_text())
+            if args.feature_audit
             else None,
             previous=read_saved(args.previous_selection)
             if args.previous_selection

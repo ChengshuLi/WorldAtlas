@@ -250,6 +250,22 @@ class RegionalTests(unittest.TestCase):
             ):
                 resolve_assignments([rule], self.features, components, self.bindings)
 
+    def test_current_assignments_have_feature_ids_and_fixed_majority_matching(self):
+        rule = dict(assignment_id="current", entity_id=81, feature_ids=["left"])
+        with self.components() as components:
+            result = resolve_assignments(
+                [rule], self.features, components, self.bindings
+            )
+            self.assertEqual(result["component_entities"], {7: 81})
+        for ids in ([], ["left", "left"], [None], [" "]):
+            rule["feature_ids"] = ids
+            with (
+                self.subTest(ids=ids),
+                self.components() as components,
+                self.assertRaises(ValueError),
+            ):
+                resolve_assignments([rule], self.features, components, self.bindings)
+
     def test_single_feature_frozen_assignment_replays_without_mutation(self):
         rule = dict(
             assignment_id="frozen",
@@ -304,6 +320,7 @@ class RegionalTests(unittest.TestCase):
             result = write_report(current, components, self.root / "review")
         self.assertEqual([r["number"] for r in result["rules"]], [1, 2, 3])
         self.assertEqual([r["cell_count"] for r in result["rules"]], [2, 1, 2])
+        self.assertEqual([r["feature_count"] for r in result["rules"]], [1, 1, 1])
         self.assertEqual(
             [r["unique_component_count"] for r in result["rules"]], [0, 1, 0]
         )

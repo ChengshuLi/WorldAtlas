@@ -74,56 +74,6 @@ def validate_geometry(geometry):
     return result
 
 
-def feature_footprint(geometry, mode="source"):
-    """Keep source geometry or construct an explicit whole-group bounding extent."""
-    if mode == "source":
-        return geometry
-    if mode != "bounding_box":
-        raise ValueError("unsupported feature footprint")
-    import numpy as np
-    from shapely import get_coordinates, transform
-    from shapely.affinity import translate
-    from shapely.geometry import LineString, MultiPolygon, mapping
-    from shapely.ops import split
-
-    source = validate_geometry(geometry)
-    if source.geom_type not in ("Polygon", "MultiPolygon"):
-        raise ValueError("a geographic envelope needs polygon members")
-    xs = get_coordinates(source)[:, 0]
-    if np.ptp(xs) >= 180:
-        pieces = list(source.geoms) if source.geom_type == "MultiPolygon" else [source]
-        if any(np.ptp(get_coordinates(part)[:, 0]) >= 180 for part in pieces):
-            raise ValueError("group envelope has ambiguous longitude coverage")
-        ordered = np.unique(xs)
-        gaps = np.diff(np.r_[ordered, ordered[0] + 360])
-        start = ordered[(int(np.argmax(gaps)) + 1) % len(ordered)]
-
-        def unwrap(values):
-            result = values.copy()
-            result[:, 0] = np.where(
-                values[:, 0] < start, values[:, 0] + 360, values[:, 0]
-            )
-            return result
-
-        source = transform(source, unwrap)
-        if source.bounds[2] - source.bounds[0] >= 180:
-            raise ValueError(
-                "group envelope must occupy less than 180 degrees longitude"
-            )
-    envelope = source.envelope
-    if envelope.bounds[2] > 180:
-        pieces = split(envelope, LineString([(180, -90), (180, 90)])).geoms
-        envelope = MultiPolygon(
-            [
-                translate(part, xoff=-360) if part.bounds[0] >= 180 else part
-                for part in pieces
-            ]
-        )
-    result = mapping(envelope)
-    validate_geometry(result)
-    return result
-
-
 def save_features(database, features, recipe):
     """Save a complete import atomically; existing relationships survive."""
     identifiers = [feature["feature_id"] for feature in features]

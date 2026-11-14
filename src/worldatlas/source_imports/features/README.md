@@ -71,16 +71,10 @@ it does not reopen the provider table.
 geometry. `test_storage.py` checks transactional saves, repeat imports, preserved
 relationships and rollback using disposable PostgreSQL.
 
-## Whole island-group areas
+## Geographic areas
 
-Vector and OSM selections may set `footprint` to `bounding_box`
-when the chosen geographic interpretation is an area enclosing a complete group.
-The default `source` preserves the imported geometry. Extents come from provider
-coordinates; they do not use map labels or saved component IDs. Dateline-crossing
-areas are unwrapped and split back into WGS84 polygons. An ambiguous global
-extent is rejected. These operations are choices in Neon, not automatic changes
-to every imported polygon.
-
-Geographic assignments can group several imported features directly. Map building
-combines their areas while calculating component membership; source imports do
-not create additional Neon features merely to group existing records.
+Imports retain selected provider outlines and holes after coordinate conversion.
+They do not replace polygons with bounding boxes. Geographic assignments can
+reference several imported polygons directly; map building unions those areas
+while calculating component membership. Additional island coverage uses another
+source-backed feature rather than enlarging an imported outline.

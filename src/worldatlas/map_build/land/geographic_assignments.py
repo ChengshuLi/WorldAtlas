@@ -14,7 +14,7 @@ from worldatlas.map_build.inputs.features import (
 def resolve_assignments(rules, features, components, bindings, *, protected=()):
     """Return current component claims from source-neutral geographic operations.
 
-    Working rules have one relation and imported feature. Archived inputs retain
+    Working rules use majority coverage of their imported polygon union. Archived inputs retain
     their original compound selections, exclusions and projected-coordinate queries.
     """
     by_id = {f["feature_id"]: f for f in features}

@@ -7,7 +7,6 @@ import osmium
 from shapely.geometry import Polygon
 
 from worldatlas.source_imports.features.geometry import (
-    feature_footprint,
     validate_geometry,
 )
 
@@ -295,7 +294,6 @@ def read_features(path, settings):
             if kind == "node"
             else polygon_geometry(graph, selection, record)
         )
-        geometry = feature_footprint(geometry, selection.get("footprint", "source"))
         validate_geometry(geometry)
         result.append(
             dict(

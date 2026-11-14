@@ -7,7 +7,6 @@ from zipfile import ZipFile
 from osgeo import ogr, osr
 
 from worldatlas.source_imports.features.geometry import (
-    feature_footprint,
     validate_geometry,
 )
 
@@ -156,7 +155,6 @@ def read_features(path, settings):
             validate_geometry(value)
         else:
             value = values[0]
-        value = feature_footprint(value, selection.get("footprint", "source"))
         result.append(
             {
                 "feature_id": selection["feature_id"],

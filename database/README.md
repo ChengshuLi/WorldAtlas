@@ -39,18 +39,14 @@ provider IDs from checksum-verified raw files without copying provider attribute
 or maintaining duplicate attribute expectations in Neon.
 
 `geographic_assignments` stores one independently editable whole-component rule
-per row: `assignment_id`, `entity_id`, `rationale` and `selection`. The selection
-is exactly one object with `relation` and a nonempty, duplicate-free `feature_ids` list. Supported relations are
-`point_component` (the land component containing a point), `contains_component`
-(all of a component's land-cell centers inside a polygon), and
-`intersects_component` (at least one land-cell center inside a polygon).
-`majority_component` selects a whole component when more than half its land-cell
-centers are inside the area. This matches broad group outlines without requiring
-every coastal cell to fit a coarse source boundary. An exact half is not a match.
-An assignment groups nearby geography with the same destination. Its input areas
-are unioned during map building, before applying the relation. A point relation
-selects the components containing the listed points. There are no case groups, compound
-AND/OR selectors or unrestricted evidence objects in working assignments.
+per row: `assignment_id`, `entity_id`, `rationale` and `feature_ids`. The last column
+is a nonempty, one-dimensional `text[]` with distinct, nonempty feature IDs.
+
+Every assignment uses the same calculation: union its original imported polygons,
+then select whole land components with more than half their land-cell centers
+inside. An exact half does not match. Nearby geography with the same destination
+shares an assignment. There is no JSON selector, per-row relation, AND/OR option
+or derived geometry record for grouping.
 
 `geographic_assignment_sources` links each assignment to its supporting raw
 sources, with a citation section and an interpretation that includes any relevant

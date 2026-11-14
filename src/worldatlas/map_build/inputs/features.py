@@ -12,7 +12,11 @@ def selection_feature_ids(selection):
 
 def assignment_selection(rule, features):
     """Validate one operation over the union of existing imported features."""
-    selection = rule.get("selection")
+    selection = (
+        {"relation": "majority_component", "feature_ids": rule["feature_ids"]}
+        if "feature_ids" in rule
+        else rule.get("selection")
+    )
     # Read the earlier frozen format without mutating the archived selection.
     if isinstance(selection, dict) and set(selection) == {"relation", "feature_id"}:
         selection = {

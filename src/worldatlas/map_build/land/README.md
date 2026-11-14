@@ -45,16 +45,20 @@ Entity IDs, category bindings, geographic extents, selected features, witnesses
 and distance policies come from Neon. Component IDs are temporary run data.
 Inferred satellites cannot become anchors for other satellites.
 
-Working assignments read `atlas.geographic_assignments`. Each row has one
-`selection` object containing exactly `relation` and `feature_ids`, a target entity
-and a rationale. `feature_ids` is a nonempty list of distinct imported feature IDs.
-Areas are unioned before evaluating component coverage; point selections identify
-the components containing the listed points. This groups nearby geography without
-creating extra features or source-construction records in Neon. Every selected whole
-component receives the target's land code. Broad geographic areas can use
-`majority_component`: more than half the component centers must fall inside, and the entire component receives the label.
-Empty selections, missing features,
-protected mainland selections and disagreeing targets fail before composition.
+Working assignments read `atlas.geographic_assignments`. Each row contains
+`assignment_id`, a target `entity_id`, a human-readable `rationale`, and
+`feature_ids`: a nonempty array of distinct imported polygon feature IDs.
+
+Map building unions the selected polygons, then assigns each whole component
+with more than half its land-cell centers inside that union. An exact half does
+not match. This is one shared rule, without per-assignment relation options.
+Source polygons retain their original outlines and holes; the importer does not
+replace them with bounding rectangles. Missing island coverage is represented
+by another necessary source feature in the same assignment.
+
+Empty selections, missing features, protected mainland selections and
+disagreeing targets fail before composition. Retained release inputs preserve
+their original single-feature, compound and projected-coordinate selections.
 
 Current imported features use WGS84 longitude/latitude. Retained release inputs
 may contain earlier single-feature or compound rules and projected geometry. Replay reads those
@@ -72,7 +76,7 @@ python -m worldatlas.map_build.land.assignment_report \
 ```
 
 The report shows the selection geometry, actual selected cell runs, component and
-cell counts, other rules selecting the same components, and each rule's uniquely
+cell counts, feature counts, other rules selecting the same components, and each rule's uniquely
 covered components. It uses the run's grid and entity colors. Open `index.html`;
 no database credentials or server are required. Add `--previous-selection` and
 `--map-comparison` to show the earlier rules and an actual final-grid comparison.
@@ -85,3 +89,8 @@ codes and region counts, complete seed construction, exact distance comparisons,
 longitude wrapping, source-group conflicts, direct satellites and final
 composition. Small independent cell calculations check the optimized algorithms.
 The main-command tests also exercise the direct stage chain and checkpoint reuse.
+
+Use `--feature-audit /absolute/path/to/feature-audit.json` to include measured
+per-feature removal effects. The audit supplies a `retained` list with
+`assignment_id`, `feature_id` and `changed_cells` for each current reference.
+The report rejects an audit missing a selected feature.

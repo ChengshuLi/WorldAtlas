@@ -50,30 +50,21 @@ CREATE TABLE atlas.source_features (
 );
 
 -- An assignment selects whole components using the union of imported features.
-CREATE FUNCTION atlas.valid_assignment_selection(selection jsonb)
-RETURNS boolean LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE AS $$
-DECLARE identifiers jsonb;
-BEGIN
-    IF jsonb_typeof(selection) IS DISTINCT FROM 'object' THEN RETURN false; END IF;
-    IF NOT selection ?& ARRAY['relation','feature_ids']
-       OR selection - ARRAY['relation','feature_ids'] <> '{}'::jsonb
-       OR COALESCE(selection->>'relation' IN ('point_component','intersects_component','contains_component','majority_component'), false) = false
-       THEN RETURN false; END IF;
-    identifiers := selection->'feature_ids';
-    IF jsonb_typeof(identifiers) IS DISTINCT FROM 'array' THEN RETURN false; END IF;
-    IF jsonb_array_length(identifiers) = 0 THEN RETURN false; END IF;
-    RETURN NOT EXISTS (
-        SELECT FROM jsonb_array_elements(identifiers) item
-        WHERE jsonb_typeof(item) <> 'string' OR (item #>> '{}') !~ '[^[:space:]]'
-    ) AND (SELECT count(DISTINCT item) = count(*) FROM jsonb_array_elements(identifiers) item);
-END; $$;
+CREATE FUNCTION atlas.valid_feature_ids(identifiers text[])
+RETURNS boolean LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $$
+    SELECT COALESCE(
+        array_ndims(identifiers) = 1 AND cardinality(identifiers) > 0
+        AND NOT EXISTS (SELECT FROM unnest(identifiers) ident
+                        WHERE ident IS NULL OR ident !~ '[^[:space:]]')
+        AND cardinality(identifiers) = (SELECT count(DISTINCT ident) FROM unnest(identifiers) ident),
+        false);
+$$;
 
 CREATE TABLE atlas.geographic_assignments (
     assignment_id text PRIMARY KEY CHECK (length(trim(assignment_id)) > 0),
     entity_id bigint NOT NULL REFERENCES atlas.geographic_entities(id),
     rationale text NOT NULL CHECK (length(trim(rationale)) > 0),
-    selection jsonb NOT NULL,
-    CONSTRAINT geographic_assignments_selection_check CHECK (atlas.valid_assignment_selection(selection))
+    feature_ids text[] NOT NULL CHECK (atlas.valid_feature_ids(feature_ids))
 );
 
 CREATE TABLE atlas.geographic_assignment_sources (

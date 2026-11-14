@@ -17,11 +17,7 @@ class FeatureIdentity(TypedDict):
     source_feature_id: NonEmptyText | int
 
 
-class FootprintSelection(TypedDict):
-    footprint: NotRequired[Literal["source", "bounding_box"]]
-
-
-class VectorSelection(FeatureIdentity, FootprintSelection):
+class VectorSelection(FeatureIdentity):
     collection: NotRequired[bool]
     expected_feature_count: NotRequired[int]
 
@@ -40,7 +36,7 @@ class RingAnchor(TypedDict):
     expected_tags: dict[str, str]
 
 
-class OsmSelection(FootprintSelection):
+class OsmSelection(TypedDict):
     feature_id: NonEmptyText
     source_feature_id: NonEmptyText | int
     object_type: Literal["node", "way", "relation"]
