@@ -85,7 +85,7 @@ def read_features(path, settings):
     original = original.Clone()
     original.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
     target = osr.SpatialReference()
-    reference = settings.get('coordinate_reference', 'OGC:CRS84')
+    reference = 'OGC:CRS84'
     if target.SetFromUserInput(reference) != 0:
         raise ValueError('unsupported output coordinate reference')
     target.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
@@ -110,10 +110,6 @@ def read_features(path, settings):
             row = layer.GetFeature(fid)
             if row is None:
                 raise ValueError('selected provider feature is missing')
-            attributes = row.items()
-            if any(attributes.get(name) != value for name, value in
-                   selection.get('expected_properties', {}).items()):
-                raise ValueError('source feature identity properties do not match')
             geometry = row.GetGeometryRef()
             if geometry is None:
                 raise ValueError('source feature has no geometry')
@@ -123,19 +119,18 @@ def read_features(path, settings):
             options = ['SIGNIFICANT_FIGURES=17'] if source.GetDriver().GetName() == 'GeoJSON' else []
             value = (source_geometries[key] if source_geometries is not None
                      else json.loads(geometry.ExportToJson(options=options)))
-            validate_geometry(value, reference)
+            validate_geometry(value)
             values.append(value)
         if selection.get('collection'):
             from shapely.geometry import mapping, shape
             from shapely import union_all
             value = json.loads(json.dumps(mapping(union_all([shape(v) for v in values]))))
-            validate_geometry(value, reference)
+            validate_geometry(value)
         else:
             value = values[0]
         expected = selection.get('expected_geometry_sha256')
         if expected and geometry_hash(value) != expected:
             raise ValueError('selected source geometry checksum differs')
         result.append({'feature_id': selection['feature_id'], 'source_feature_id': key,
-                       'geometry': value,
-                       'coordinate_reference': reference})
+                       'geometry': value})
     return result

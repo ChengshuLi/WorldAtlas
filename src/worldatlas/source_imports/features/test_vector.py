@@ -17,8 +17,7 @@ class VectorTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.path = Path(self.temp.name) / 'worldatlas.source_imports.features.geojson'
         self.recipe = {'id_field': 'provider_id', 'selections': [
-            {'feature_id': 'selected', 'source_feature_id': 'a',
-             'expected_properties': {'name': 'First'}}]}
+            {'feature_id': 'selected', 'source_feature_id': 'a'}]}
         self.write()
 
     def write(self, ids=('a', 'b')):
@@ -38,18 +37,13 @@ class VectorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'checksum'):
             read_features(self.path, self.recipe)
 
-    def test_missing_duplicate_and_wrong_identity(self):
+    def test_missing_and_duplicate_provider_ids(self):
         self.write(('b',))
         with self.assertRaisesRegex(ValueError, 'missing'):
             read_features(self.path, self.recipe)
         self.write(('a', 'a'))
         with self.assertRaisesRegex(ValueError, 'duplicated'):
             read_features(self.path, self.recipe)
-        self.write()
-        self.recipe['selections'][0]['expected_properties']['name'] = 'Other'
-        with self.assertRaisesRegex(ValueError, 'identity'):
-            read_features(self.path, self.recipe)
-
     def test_provider_geometry_can_backfill_distinct_existing_feature_ids(self):
         self.recipe['selections'].append({'feature_id': 'existing-alias', 'source_feature_id': 'a'})
         result = read_features(self.path, self.recipe)
@@ -89,7 +83,7 @@ class VectorTests(unittest.TestCase):
         self.assertAlmostEqual(geometry['coordinates'][0], 10.)
         self.assertAlmostEqual(geometry['coordinates'][1], 0.)
 
-    def test_complete_collection_can_retain_its_declared_native_coordinates(self):
+    def test_complete_projected_collection_is_converted_to_longitude_latitude(self):
         polygons = []
         for left, right in ((1000, 2000), (2000, 3000)):
             polygons.append({'type': 'Feature', 'properties': {'provider_id': 'a', 'name': 'First'},
@@ -98,11 +92,11 @@ class VectorTests(unittest.TestCase):
                                   [left, 2000], [left, 1000]]]}})
         self.path.write_text(json.dumps({'type': 'FeatureCollection',
             'crs': {'type': 'name', 'properties': {'name': 'EPSG:3857'}}, 'features': polygons}))
-        self.recipe['coordinate_reference'] = 'EPSG:3857'
         self.recipe['selections'][0].update(collection=True, expected_feature_count=2)
         result = read_features(self.path, self.recipe)[0]
-        self.assertEqual(result['coordinate_reference'], 'EPSG:3857')
-        self.assertEqual(validate_geometry(result['geometry'], 'EPSG:3857').area, 2000000)
+        self.assertNotIn('coordinate_reference', result)
+        self.assertTrue(validate_geometry(result['geometry']).is_valid)
+        self.assertAlmostEqual(validate_geometry(result['geometry']).bounds[0], 0.00898315284)
         self.recipe['selections'][0]['expected_feature_count'] = 3
         with self.assertRaisesRegex(ValueError, 'number of features'):
             read_features(self.path, self.recipe)
@@ -121,7 +115,6 @@ class VectorTests(unittest.TestCase):
         feature.SetGeometry(geometry)
         layer.CreateFeature(feature)
         source = None
-        self.recipe['selections'][0].pop('expected_properties')
         result = read_features(path, self.recipe)[0]
         self.assertAlmostEqual(result['geometry']['coordinates'][0], 10)
         self.assertAlmostEqual(result['geometry']['coordinates'][1], 0)

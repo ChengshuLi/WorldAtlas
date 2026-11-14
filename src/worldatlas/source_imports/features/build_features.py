@@ -1,7 +1,7 @@
 """Import selected source features into existing Neon decision records."""
 
 import time
-from typing import Any, Literal, NotRequired, TypedDict
+from typing import Literal, NotRequired, TypedDict
 
 from worldatlas.source_imports.contracts import NonEmptyText, Runtime
 from worldatlas.source_imports.atlas_sources.catalog import (
@@ -19,7 +19,6 @@ class FeatureIdentity(TypedDict):
 
 class Selection(FeatureIdentity):
     expected_geometry_sha256: NotRequired[NonEmptyText]
-    expected_properties: NotRequired[dict[str, Any]]
 
 
 class VectorSelection(Selection):
@@ -89,10 +88,9 @@ def selected_vector_features(
     selections: list[VectorSelection],
     member: NonEmptyText | None = None,
     layer: NonEmptyText | None = None,
-    coordinate_reference: NonEmptyText = "OGC:CRS84",
     coordinate_operation: NonEmptyText | None = None,
 ):
-    """Select provider vector features and convert them to the chosen coordinate reference."""
+    """Select provider vector features and convert them to WGS84 longitude/latitude."""
     arguments = locals()
     from worldatlas.source_imports.features.vector import read_features
 
@@ -109,7 +107,6 @@ def selected_table_points(
     id_field: NonEmptyText,
     longitude_field: NonEmptyText,
     latitude_field: NonEmptyText,
-    coordinate_reference: Literal["OGC:CRS84"],
     selections: list[Selection] | None = None,
     member: NonEmptyText | None = None,
     columns: list[NonEmptyText] | None = None,

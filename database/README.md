@@ -28,10 +28,12 @@ classes. Water ownership remains distinct even when every water cell uses the
 same display color.
 
 `source_features` stores imported geometry and its raw-source and construction
-links. All six columns are required. Its database checks enforce supported shape
+links. All five columns are required. Geometry is always WGS84 longitude first, latitude
+second, in degrees. Its database checks enforce supported shape
 types, coordinate nesting, finite two-dimensional values, WGS84 ranges and closed
-polygon rings. Importers also check geometric validity with GEOS. Provider
-identity attributes are verified during import and are not copied into this table.
+polygon rings. Importers also check geometric validity with GEOS. They select
+provider IDs from checksum-verified raw files without copying provider attributes
+or maintaining duplicate attribute expectations in Neon.
 
 Each table's constraints and supporting functions are kept beside its definition.
 These files define structure only. Source records, colors, geographic choices and

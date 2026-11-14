@@ -1,18 +1,21 @@
 # Selected geographic features
 
 Import selected source geometry into `atlas.source_features`. Each row contains
-`feature_id`, `source_id`, `source_feature_id`, `geometry`, `coordinate_reference`
-and `construction_id`; all six are required. Map building reads these polygons
-and points instead of reopening their raw archives.
+`feature_id`, `source_id`, `source_feature_id`, `geometry` and `construction_id`;
+all five are required. Geometry always uses WGS84 `[longitude, latitude]` in
+degrees. Map building reads these polygons and points instead of reopening their
+raw archives.
 
-Provider attributes are checked during import using the construction selections.
-They remain in the raw source rather than being copied into an unrestricted
-metadata column. Map building still checks spatial relationships against the
-current grid. Database constraints reject malformed coordinate structures;
-imports also reject invalid shapes, such as self-intersecting polygons.
+Raw files are pinned by their cataloged size and checksum. Vector and table
+imports select explicit provider IDs and reject missing or ambiguous matches.
+Provider attributes remain in the raw source; these methods do not maintain
+copied attribute expectations in Neon.
+Map building checks spatial relationships against the current grid. Database
+constraints reject malformed coordinate structures; imports also reject invalid
+shapes, such as self-intersecting polygons.
 
-[`vector.py`](vector.py) reads selected provider IDs with GDAL, checks optional
-identity properties and converts coordinates to WGS84 longitude/latitude.
+[`vector.py`](vector.py) reads selected provider IDs with GDAL and converts
+coordinates to WGS84 longitude/latitude.
 [`geometry.py`](geometry.py) validates and saves the geometry.
 [`build_features.py`](build_features.py) declares one typed entry point per feature
 method and shares catalog lookup, the verified R2 cache and transactional storage.
@@ -30,8 +33,8 @@ worldatlas-import --recipe CONSTRUCTION_ID \
 
 A `selected_vector_features` construction contains `source_id`,
 `basis`, `id_field` and `selections`. Each selection supplies `feature_id` and
-`source_feature_id`; it may check `expected_properties` or an
-`expected_geometry_sha256`. Checksums use the stored coordinate representation:
+`source_feature_id`; it may check an `expected_geometry_sha256`. Checksums use
+the stored coordinate representation:
 floating-point negative zero becomes positive zero; other values are unchanged.
 Select `member` for an archived dataset and `layer` when a file contains several
 layers. An explicit `coordinate_operation` is
@@ -43,9 +46,8 @@ For a provider area stored as several records with the same identifier, set
 `collection: true` on its selection. All matching polygons are included; an
 optional `expected_feature_count` checks collection completeness.
 
-Outputs normally use `OGC:CRS84`. Set `coordinate_reference` to retain another
-declared CRS when grid queries need the original projected polygon edges.
-The saved geometry declares that reference explicitly.
+Vector inputs may use other coordinate systems. The importer reads the source
+CRS and converts its coordinates to WGS84 longitude/latitude before saving.
 
 The `s130_areas` method uses the same storage workflow and
 [`iho/areas.py`](../iho/areas.py) for complete S-130 surfaces and collections.
@@ -54,12 +56,11 @@ selected OSM points and polygons through that same storage workflow.
 
 `selected_table_points` uses [`points.py`](points.py) for CSV, TSV and other
 delimited point tables. Its construction supplies `id_field`, `longitude_field`,
-`latitude_field` and `coordinate_reference: OGC:CRS84`, plus the same selections
-and optional identity/checksum checks. Set `delimiter` for a non-comma separator,
+`latitude_field`, plus the same selections
+and optional geometry-checksum checks. Set `delimiter` for a non-comma separator,
 `columns` for a headerless table, and `member` for a table inside a ZIP archive.
-For example, a GeoNames construction names its published columns and checks each
-selected record's name, feature type and country; those choices are data, not
-separate island/airport implementations.
+A GeoNames construction names its published columns and selected IDs; it uses
+the same table reader as other delimited point sources.
 
 To import a selected set of candidate points, use `where` with exact property
 matches, `feature_id_prefix` for the output IDs and optional `bounds_lon_lat`.

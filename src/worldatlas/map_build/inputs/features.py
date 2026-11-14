@@ -36,7 +36,7 @@ def feature_geometry(feature, types, *, coordinate_reference='OGC:CRS84'):
     if (
         not isinstance(geometry, dict)
         or geometry.get('type') not in types
-        or feature.get('coordinate_reference') != coordinate_reference
+        or feature.get('coordinate_reference', 'OGC:CRS84') != coordinate_reference
     ):
         raise ValueError(f'feature needs imported geometry in {coordinate_reference}')
     return geometry

@@ -34,8 +34,6 @@ def read_points(path, settings):
     if columns is not None and (not columns or len(columns) != len(set(columns))
                                 or any(not isinstance(c, str) or not c for c in columns)):
         raise ValueError('table columns must have unique names')
-    if settings.get('coordinate_reference') != 'OGC:CRS84':
-        raise ValueError('point table must declare WGS84 longitude/latitude coordinates')
     fields = [settings[name] for name in ('id_field', 'longitude_field', 'latitude_field')]
     results = {}
     path = Path(path)
@@ -68,8 +66,6 @@ def read_points(path, settings):
                 raise ValueError('selected point needs a provider ID')
             selected = wanted[key] if explicit else dict(
                 feature_id=settings['feature_id_prefix'] + key, source_feature_id=key)
-            if any(row.get(name) != value for name, value in selected.get('expected_properties', {}).items()):
-                raise ValueError('source point identity properties do not match')
             try:
                 geometry = {'type': 'Point', 'coordinates': [float(row[fields[1]]), float(row[fields[2]])]}
             except (TypeError, ValueError):
@@ -85,7 +81,7 @@ def read_points(path, settings):
             if expected and geometry_hash(geometry) != expected:
                 raise ValueError('selected point geometry checksum differs')
             results[key] = {'feature_id': selected['feature_id'], 'source_feature_id': key,
-                            'geometry': geometry, 'coordinate_reference': settings['coordinate_reference']}
+                            'geometry': geometry}
     if wanted.keys() - results.keys():
         raise ValueError('selected provider point is missing')
     return [results[key] for key in [*wanted, *sorted(results.keys() - wanted.keys())]]

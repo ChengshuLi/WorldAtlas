@@ -20,7 +20,7 @@ DOCUMENTS = {
     'selected_vector_features': dict(source_id='raw', basis='Selected features',
         id_field='id', selections=[dict(feature_id='feature', source_feature_id='123')]),
     'selected_table_points': dict(source_id='raw', basis='Selected points',
-        id_field='id', longitude_field='lon', latitude_field='lat', coordinate_reference='OGC:CRS84',
+        id_field='id', longitude_field='lon', latitude_field='lat',
         selections=[dict(feature_id='feature', source_feature_id='123')]),
     'selected_osm_features': dict(source_id='raw', basis='Selected OSM features',
         selections=[dict(feature_id='feature', source_feature_id='123', object_type='way', object_version='1')]),

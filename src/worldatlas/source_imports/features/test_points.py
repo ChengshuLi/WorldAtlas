@@ -16,9 +16,8 @@ class PointTableTests(unittest.TestCase):
         self.path = Path(temporary.name) / 'points.tsv'
         self.path.write_text('id\tname\tlon\tlat\n2\tSecond\t-20.25\t11.5\n1\tFirst\t5.5\t-2.25\n')
         self.settings = {'delimiter': '\t', 'id_field': 'id', 'longitude_field': 'lon',
-                         'latitude_field': 'lat', 'coordinate_reference': 'OGC:CRS84',
-                         'selections': [dict(feature_id='point-one', source_feature_id='1',
-                                             expected_properties={'name': 'First'}),
+                         'latitude_field': 'lat',
+                         'selections': [dict(feature_id='point-one', source_feature_id='1'),
                                         dict(feature_id='point-two', source_feature_id='2')]}
 
     def test_header_table_is_selected_by_identity_in_requested_order(self):
@@ -67,10 +66,9 @@ class PointTableTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'archive member'):
             read_points(archive, self.settings)
 
-    def test_missing_duplicate_and_changed_identity_are_rejected(self):
+    def test_missing_duplicate_and_bad_columns_are_rejected(self):
         cases = [('id\tname\tlon\tlat\n1\tFirst\t5.5\t2\n', 'missing'),
                  ('id\tname\tlon\tlat\n1\tFirst\t5.5\t2\n1\tFirst\t5.5\t2\n', 'duplicated'),
-                 ('id\tname\tlon\tlat\n1\tWrong\t5.5\t2\n', 'identity'),
                  ('id\tname\tlon\tlat\n1\tFirst\t5.5\t2\textra\n', 'number of columns')]
         for contents, reason in cases:
             with self.subTest(reason=reason), self.assertRaisesRegex(ValueError, reason):
@@ -84,7 +82,7 @@ class PointTableTests(unittest.TestCase):
                 self.path.write_text(f'id\tname\tlon\tlat\n1\tFirst\t{lon}\t{lat}\n')
                 read_points(self.path, self.settings)
         for update in ({'columns': ['id', 'id', 'lon', 'lat']},
-                       {'longitude_field': 'missing'}, {'coordinate_reference': 'unknown'}):
+                       {'longitude_field': 'missing'}):
             with self.subTest(update=update), self.assertRaises(ValueError):
                 read_points(self.path, dict(self.settings, **update))
 

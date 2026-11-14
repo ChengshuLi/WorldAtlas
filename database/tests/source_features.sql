@@ -15,11 +15,11 @@ BEGIN
   {"type":"Polygon","coordinates":[[[0,0],[3,0],[3,3],[0,0]],[[1,1],[2,1],[2,2],[1,1]]]},
   {"type":"MultiPolygon","coordinates":[[[[0,0],[1,0],[1,1],[0,0]]]]}
  ]'::jsonb) LOOP
-  INSERT INTO atlas.source_features VALUES ('__geometry','__geometry_raw','provider',candidate,'OGC:CRS84','__geometry_recipe');
+  INSERT INTO atlas.source_features VALUES ('__geometry','__geometry_raw','provider',candidate,'__geometry_recipe');
   DELETE FROM atlas.source_features WHERE feature_id='__geometry';
  END LOOP;
  INSERT INTO atlas.source_features VALUES ('__geometry','__geometry_raw','provider',
-  '{"type":"Point","coordinates":[1000000,-2000000]}','EPSG:3338','__geometry_recipe');
+  '{"type":"Point","coordinates":[10,20]}','__geometry_recipe');
  FOR candidate IN SELECT jsonb_array_elements('[
   null, [], "point", {},
   {"type":"Point","coordinates":[0,0],"extra":true},
@@ -43,7 +43,7 @@ BEGIN
   {"type":"GeometryCollection","coordinates":[]}
  ]'::jsonb) LOOP
   BEGIN
-   UPDATE atlas.source_features SET geometry=candidate,coordinate_reference='OGC:CRS84' WHERE feature_id='__geometry';
+   UPDATE atlas.source_features SET geometry=candidate WHERE feature_id='__geometry';
    RAISE EXCEPTION 'invalid geometry accepted: %',candidate;
   EXCEPTION WHEN check_violation THEN NULL; END;
  END LOOP;
@@ -60,9 +60,5 @@ BEGIN
   UPDATE atlas.source_features SET construction_id='missing';
   RAISE EXCEPTION 'missing construction accepted';
  EXCEPTION WHEN foreign_key_violation THEN NULL; END;
- BEGIN
-  UPDATE atlas.source_features SET coordinate_reference='unknown';
-  RAISE EXCEPTION 'invalid coordinate reference accepted';
- EXCEPTION WHEN check_violation THEN NULL; END;
 END $$;
 ROLLBACK;

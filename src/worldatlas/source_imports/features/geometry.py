@@ -27,7 +27,7 @@ def storage_geometry(geometry):
     return {'type': geometry['type'], 'coordinates': coordinates(geometry['coordinates'])}
 
 
-def validate_geometry(geometry, coordinate_reference='OGC:CRS84'):
+def validate_geometry(geometry):
     if (not isinstance(geometry, dict) or set(geometry) != {'type', 'coordinates'}
             or geometry['type'] not in {'Point', 'MultiPoint', 'LineString',
                                         'MultiLineString', 'Polygon', 'MultiPolygon'}):
@@ -41,7 +41,7 @@ def validate_geometry(geometry, coordinate_reference='OGC:CRS84'):
         elif (len(values) != 2 or any(type(value) not in (int, float)
                                      or not math.isfinite(value) for value in values)):
             raise ValueError('expected finite two-dimensional numeric coordinates')
-        elif coordinate_reference == 'OGC:CRS84' and not (-180 <= values[0] <= 180 and -90 <= values[1] <= 90):
+        elif not (-180 <= values[0] <= 180 and -90 <= values[1] <= 90):
             raise ValueError('coordinates are outside WGS84 longitude/latitude ranges')
     coordinates(geometry['coordinates'])
     result = shape(geometry)
@@ -58,27 +58,23 @@ def save_features(database, features, recipe):
         raise ValueError('feature IDs must be nonempty and unique')
     records, hashes = [], {}
     for feature in features:
-        reference = feature.get('coordinate_reference', 'OGC:CRS84')
-        if not isinstance(reference, str) or not reference.strip():
-            raise ValueError('feature coordinate reference is required')
-        validate_geometry(feature['geometry'], reference)
+        validate_geometry(feature['geometry'])
         geometry = storage_geometry(feature['geometry'])
         digest = geometry_hash(geometry)
         hashes[feature['feature_id']] = digest
         records.append((feature['feature_id'], feature['source_id'], feature['source_feature_id'],
-                        Jsonb(geometry), reference,
+                        Jsonb(geometry),
                         recipe['recipe_id']))
     with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(
                 'INSERT INTO atlas.source_features '
                 '(feature_id,source_id,source_feature_id,'
-                'geometry,coordinate_reference,construction_id) '
-                'VALUES (%s,%s,%s,%s,%s,%s) '
+                'geometry,construction_id) '
+                'VALUES (%s,%s,%s,%s,%s) '
                 'ON CONFLICT (feature_id) DO UPDATE SET '
                 'source_id=EXCLUDED.source_id,'
                 'source_feature_id=EXCLUDED.source_feature_id,'
                 'geometry=EXCLUDED.geometry,'
-                'coordinate_reference=EXCLUDED.coordinate_reference,'
                 'construction_id=EXCLUDED.construction_id', records)
     return hashes

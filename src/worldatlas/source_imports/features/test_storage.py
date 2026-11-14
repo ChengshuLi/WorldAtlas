@@ -76,7 +76,7 @@ class StorageTests(unittest.TestCase):
 
     def rows(self):
         return self.database.execute(
-            "SELECT feature_id,geometry,coordinate_reference,construction_id "
+            "SELECT feature_id,geometry,construction_id "
             "FROM atlas.source_features ORDER BY feature_id"
         ).fetchall()
 
@@ -89,7 +89,7 @@ class StorageTests(unittest.TestCase):
         self.store()
         self.build()
         after = self.rows()[0]
-        self.assertEqual(after[3], "__features")
+        self.assertEqual(after[2], "__features")
         self.assertEqual(self.build()["geometry_sha256"], first["geometry_sha256"])
         self.assertEqual(self.storage.get_object.call_count, 1)
         self.assertEqual(selected_constructions(self.database), ["__features"])
@@ -123,7 +123,7 @@ class StorageTests(unittest.TestCase):
             )
         self.assertEqual(self.rows(), before)
 
-    def test_table_import_and_identity_failure(self):
+    def test_table_import_and_missing_provider_failure(self):
         self.raw = b"id,name,lon,lat\na,First,-20.25,11.5\n"
         self.add_source("table", self.raw, "source.csv")
         self.recipe.update(
@@ -131,38 +131,19 @@ class StorageTests(unittest.TestCase):
             source_id="table",
             longitude_field="lon",
             latitude_field="lat",
-            coordinate_reference="OGC:CRS84",
         )
-        self.recipe["selections"][0]["expected_properties"] = {"name": "First"}
         self.store()
         self.build()
         before = self.rows()
         self.assertEqual(before[0][1]["coordinates"], [-20.25, 11.5])
-        self.recipe["selections"][0]["expected_properties"]["name"] = "Wrong"
+        self.recipe["selections"][0]["source_feature_id"] = "missing"
         self.store()
-        with self.assertRaisesRegex(ValueError, "identity"):
+        with self.assertRaisesRegex(ValueError, "missing"):
             self.build()
         self.assertEqual(self.rows(), before)
 
-    def test_signed_zero_and_native_coordinate_storage(self):
-        for ident, reference, coordinates in [
-            ("zero", "OGC:CRS84", [-0.0, 1e-24]),
-            ("native", "EPSG:3857", [1000, 2000]),
-        ]:
-            geometry = {"type": "Point", "coordinates": coordinates}
-            save_features(
-                self.database,
-                [
-                    dict(
-                        feature_id=ident,
-                        source_id="raw",
-                        source_feature_id="a",
-                        coordinate_reference=reference,
-                        geometry=geometry,
-                    )
-                ],
-                dict(self.recipe, recipe_id="__features"),
-            )
-        self.assertEqual({row[2] for row in self.rows()}, {"OGC:CRS84", "EPSG:3857"})
-        zero = next(r for r in self.rows() if r[0] == "zero")
-        self.assertEqual(json.dumps(zero[1]["coordinates"]), "[0.0, 1e-24]")
+    def test_signed_zero_preserves_longitude_latitude_coordinates(self):
+        geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
+        save_features(self.database, [dict(feature_id="zero", source_id="raw",
+            source_feature_id="a", geometry=geometry)], dict(self.recipe, recipe_id="__features"))
+        self.assertEqual(json.dumps(self.rows()[0][1]["coordinates"]), "[0.0, 1e-24]")

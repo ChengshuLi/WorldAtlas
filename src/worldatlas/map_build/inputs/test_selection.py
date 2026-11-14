@@ -123,7 +123,7 @@ class SelectionTests(unittest.TestCase):
                             feature_id="__selected_point", source_feature_id="provider")])),),
         )
         self.writer.execute(
-            "INSERT INTO atlas.source_features VALUES ('__selected_point','__selected_raw','provider',%s,'OGC:CRS84','__selected_recipe')",
+            "INSERT INTO atlas.source_features VALUES ('__selected_point','__selected_raw','provider',%s,'__selected_recipe')",
             (Jsonb(self.geometry),),
         )
 

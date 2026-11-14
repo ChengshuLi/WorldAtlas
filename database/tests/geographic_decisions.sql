@@ -7,12 +7,12 @@ DO $$ BEGIN
  INSERT INTO atlas.construction_records VALUES ('__feature_recipe',
  '{"method":"selected_vector_features","source_id":"__source","basis":"Selected point","id_field":"id","selections":[{"feature_id":"__feature","source_feature_id":"provider"}]}');
  BEGIN
-  INSERT INTO atlas.source_features(feature_id,source_id,source_feature_id,geometry,coordinate_reference,construction_id)
-  VALUES ('__missing','absent','provider','{"type":"Point","coordinates":[0,0]}','OGC:CRS84','__feature_recipe');
+  INSERT INTO atlas.source_features(feature_id,source_id,source_feature_id,geometry,construction_id)
+  VALUES ('__missing','absent','provider','{"type":"Point","coordinates":[0,0]}','__feature_recipe');
   RAISE EXCEPTION 'missing feature source accepted';
  EXCEPTION WHEN foreign_key_violation THEN NULL; END;
- INSERT INTO atlas.source_features(feature_id,source_id,source_feature_id,geometry,coordinate_reference,construction_id)
- VALUES ('__feature','__source','provider','{"type":"Point","coordinates":[0,0]}','OGC:CRS84','__feature_recipe');
+ INSERT INTO atlas.source_features(feature_id,source_id,source_feature_id,geometry,construction_id)
+ VALUES ('__feature','__source','provider','{"type":"Point","coordinates":[0,0]}','__feature_recipe');
  INSERT INTO atlas.decision_basins VALUES ('__basin','__feature','nearest_participating_shore','{}','{}');
  INSERT INTO atlas.decision_cases VALUES ('__case','Title','Shared geographic reasoning');
  INSERT INTO atlas.decision_case_sources VALUES ('__case','__source','Section 1','Interpretation',ARRAY[]::text[]);

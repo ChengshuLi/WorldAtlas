@@ -27,7 +27,7 @@ def resolve_affiliations(rules, features, components, bindings, *, protected=())
             value = feature_geometry(
                 by_id[ident],
                 ('Point', 'Polygon', 'MultiPolygon'),
-                coordinate_reference=by_id[ident]['coordinate_reference'],
+                coordinate_reference=by_id[ident].get('coordinate_reference', 'OGC:CRS84'),
             )
             parsed = shape(value)
             if parsed.is_empty or not parsed.is_valid:
@@ -39,16 +39,16 @@ def resolve_affiliations(rules, features, components, bindings, *, protected=())
         ident, relation = record['feature_id'], record['relation']
         value = geometry(ident)
         if relation == 'point_component':
-            if value['type'] != 'Point' or by_id[ident]['coordinate_reference'] != 'OGC:CRS84':
+            if value['type'] != 'Point' or by_id[ident].get('coordinate_reference', 'OGC:CRS84') != 'OGC:CRS84':
                 raise ValueError('point-component selection needs a point')
             return {components.point(*value['coordinates'])}
         if relation not in ('intersects_component', 'contains_component'):
             raise ValueError('unsupported component selection relation')
         if value['type'] not in ('Polygon', 'MultiPolygon'):
             raise ValueError('polygon-component selection needs a polygon')
-        if by_id[ident]['coordinate_reference'] != 'OGC:CRS84':
+        if by_id[ident].get('coordinate_reference', 'OGC:CRS84') != 'OGC:CRS84':
             operations = record['coordinate_operations']
-            if operations['source_coordinate_reference'] != by_id[ident]['coordinate_reference']:
+            if operations['source_coordinate_reference'] != by_id[ident].get('coordinate_reference', 'OGC:CRS84'):
                 raise ValueError(
                     'coordinate operation does not match the imported source coordinates'
                 )
