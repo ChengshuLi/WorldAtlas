@@ -1,4 +1,6 @@
 """Calculate water assignments from one saved selection and final land grid."""
+from worldatlas.map_build.inputs.selection import geographic_domain, selection_domains
+
 
 from contextlib import ExitStack
 import json
@@ -26,7 +28,7 @@ def build_water(selection, grid, physical_directory, land_directory, directory):
     """
     snapshot = water_snapshot(selection)
     coastal_policy, pairs, tolerance, _, _ = policy(snapshot)
-    domain = selection['domains']['water']
+    domain = geographic_domain(selection, 'water')
     basins = selected_basins(domain)
     order = [
         p['definition']['order'] for p in domain['policies'] if p['kind'] == 'layer_precedence'

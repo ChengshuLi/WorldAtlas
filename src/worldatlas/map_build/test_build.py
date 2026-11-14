@@ -39,14 +39,14 @@ class TimingTests(unittest.TestCase):
             self.assertEqual(result['reused_from'], '/source/run')
             self.assertIsNone(result['producer_processing_elapsed_seconds'])
 
-    def test_selected_configuration_has_portable_sources_and_working_geographic_revisions(self):
+    def test_selected_configuration_has_portable_sources(self):
         path = Path(pipeline.__file__).parent / 'config.json'
         cfg = pipeline.read(path)
         self.assertNotIn('/workspace/', path.read_text())
         self.assertNotIn('/tmp/', path.read_text())
         self.assertNotIn('input_root', cfg)
         self.assertEqual(cfg['sources']['raw_manifest']['json']['file_count'], 32)
-        self.assertEqual(set(cfg['decision_revisions']), {'mainland', 'regional', 'water', 'ocean'})
+        self.assertNotIn('decision_revisions', cfg)
         self.assertEqual(set(cfg['sources']), {'land_config', 'water_config', 'raw_manifest'})
 
     def test_interval_union_excludes_idle_gaps_and_parallel_double_count(self):
@@ -130,6 +130,13 @@ class Fixture(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name).resolve()
+        from contextlib import nullcontext
+        self.frozen = {'schema':'worldatlas-input-selection-v3', 'geography':{
+            'features':[], 'basins':[], 'affiliations':[], 'routes':[], 'category_bindings':[]}, 'raw_sources':[]}
+        for mocking in (patch.dict('os.environ',{'NEON_DATABASE_URL':'fixture'}),
+                        patch('psycopg.connect',side_effect=lambda *a,**kw:nullcontext(object())),
+                        patch.object(pipeline,'read_selection',side_effect=lambda *a,**kw:json.loads(json.dumps(self.frozen)))):
+            mocking.start();self.addCleanup(mocking.stop)
         self.inputs = self.root / 'inputs'
         self.inputs.mkdir()
         self.sentinel = pipeline.write(self.inputs / 'sentinel.json', {})
@@ -298,17 +305,17 @@ class Fixture(unittest.TestCase):
         }
         calls = []
         with (
-            patch.object(pipeline.Pipeline, 'neon_raw_catalog', return_value=[row]) as lookup,
+            patch.object(pipeline.Pipeline, 'neon_raw_catalog', return_value=[(('fixture','v1'),dict(source_id='fixture',**raw))]) as lookup,
             self.fake_r2({raw['r2_key']: payload}, calls),
         ):
             runner = self.make()
-        lookup.assert_called_once_with([('fixture', 'v1')])
+        lookup.assert_called_once_with({('fixture', 'v1')})
         self.assertEqual(calls, [raw['r2_key']])
         self.assertEqual(runner.sources['water_config'].read_bytes(), payload)
         manifest = pipeline.read(runner.sources['raw_manifest'])
         size = raw.pop('size_bytes')
         self.assertEqual(
-            manifest['files'], [{'path': 'raw/fixture', 'size': size, **identity, **raw}]
+            manifest['files'], [{'path': 'raw/fixture', 'size': size, 'source_id': identity['source_id'], **raw}]
         )
 
     def test_one_configuration_fetches_pinned_r2_inputs_into_selected_work_directory(self):

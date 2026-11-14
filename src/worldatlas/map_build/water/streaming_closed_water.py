@@ -46,7 +46,7 @@ def open_database(path):
     return db
 
 
-def ingest_partition(db, path, width, height, snapshot_sha, inputs, revision):
+def ingest_partition(db, path, width, height, snapshot_sha, inputs):
     def insert(c):
         if 'ocean_code' not in c or (
             c['ocean_code'] is not None
@@ -82,10 +82,8 @@ def ingest_partition(db, path, width, height, snapshot_sha, inputs, revision):
     pin = meta.get('inputs', {})
     if (
         pin.get('decision_snapshot_sha256') != snapshot_sha
-        or pin.get('decision_revision') != revision.get('id')
-        or pin.get('entity_revision') != revision.get('entity_revision')
     ):
-        raise ValueError('partition snapshot or historical-label lineage mismatch')
+        raise ValueError('partition snapshot mismatch')
     for key in (
         'physical_rows_sha256',
         'physical_runs_sha256',
@@ -581,7 +579,6 @@ def run(
             height,
             snapshot_sha,
             inputs,
-            snapshot['decision_revision'],
         )
         cells, nspans = measure(
             'ingest_spans', ingest_spans, db, component_rows, component_spans, width, height, meta
@@ -645,8 +642,6 @@ def run(
                 'policy_definition': decision['definition'],
                 'policy_sha256': snapshot_sha,
                 'decision_snapshot_sha256': snapshot_sha,
-                'decision_revision': snapshot['decision_revision']['id'],
-                'entity_revision': snapshot['decision_revision']['entity_revision'],
             },
             **stats,
             'input_span_count': nspans,

@@ -29,7 +29,7 @@ def resolve_islands(
     """
     codes = {b['entity_id']: b['code'] for b in bindings if b['physical_class'] == 'land'}
     features = {f['feature_id']: f for f in features}
-    sources = {(s['source_id'], s['version']): s for s in sources}
+    sources = {s['source_id']: s for s in sources}
     geometry = line_record['geometry']
     checksum = hashlib.sha256(
         json.dumps(
@@ -52,11 +52,10 @@ def resolve_islands(
     windows, explicit_anchors = [], {}
 
     def source_anchor(feature, code, description):
-        source = sources[feature['source_id'], feature['source_version']]
+        source = sources[feature['source_id']]
         return dict(
             code=code,
             source_id=feature['source_id'],
-            source_version=feature['source_version'],
             source_feature_id=feature['source_feature_id'],
             source_sha256=source['sha256'],
             main_island_evidence=description,
@@ -78,7 +77,6 @@ def resolve_islands(
                     point = item['coordinates']
                     witness = dict(
                         source_id=item['source_id'],
-                        source_version=item['source_version'],
                         source_feature_id=item['source_feature_id'],
                     )
                 if not shape(polygon).contains(Point(point)):

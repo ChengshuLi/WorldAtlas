@@ -1,4 +1,6 @@
 """Fill ocean and enclosed water after coastal and named-basin assignment."""
+from worldatlas.map_build.inputs.selection import geographic_domain, selection_domains
+
 
 from contextlib import ExitStack
 import hashlib
@@ -14,13 +16,10 @@ from worldatlas.map_build.water import streaming_closed_water as enclosed
 
 
 def water_snapshot(selection):
-    validate_bindings(selection['domains'])
-    water, oceans = (selection['domains'][name] for name in ('water', 'ocean'))
-    digest = hashlib.sha256(canonical_bytes(selection)).hexdigest()
+    validate_bindings(selection_domains(selection))
+    water, oceans = (geographic_domain(selection, name) for name in ('water', 'ocean'))
     return {
         'source': 'saved-selection',
-        'decision_revision': {'id': digest, 'entity_revision': water['entity_revision']['id']},
-        'entity_revision': {'id': water['entity_revision']['id']},
         'category_bindings': water['category_bindings'],
         'endpoints': oceans['endpoints'],
         'routes': oceans['routes'],

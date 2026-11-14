@@ -23,11 +23,12 @@ class ExecutorResumeTests(unittest.TestCase):
         }
         cfg['sources']['raw_manifest'] = pipeline.pin(self.source_path(inputs))
         self.config = pipeline.write(inputs / 'request.json', cfg)
+        self.saved_selection=pipeline.write(inputs/'selection.json',{'schema':'worldatlas-input-selection-v3','geography':{'features':[],'basins':[],'affiliations':[],'routes':[],'category_bindings':[]},'raw_sources':[]})
         self.out = self.root / 'run'
         self.source = inputs / 'source.bin'
 
     def runner(self, resume=False):
-        runner = pipeline.Pipeline(self.config, self.out, resume=resume)
+        runner = pipeline.Pipeline(self.config, self.out, resume=resume, selection=self.saved_selection)
         self.addCleanup(runner.close)
         return runner
 

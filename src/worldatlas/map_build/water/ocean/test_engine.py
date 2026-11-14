@@ -139,10 +139,6 @@ class OceanRunnerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             r.load_config(s, 8, 4)
         s = self.snapshot()
-        s['entity_revision']['id'] = 'different-registry'
-        with self.assertRaises(ValueError):
-            r.load_config(s, 8, 4)
-        s = self.snapshot()
         s['policies'][0]['definition']['route_ids'].append('missing')
         with self.assertRaisesRegex(ValueError, 'unknown route'):
             r.load_config(s, 8, 4)

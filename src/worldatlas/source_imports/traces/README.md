@@ -16,14 +16,14 @@ types. [Shared validation](../README.md#document-validation) enforces these in
 Python and PostgreSQL; the example below explains the settings.
 
 Use the existing `atlas.construction_records` table. Its `source_id` identifies
-the construction record and `version` selects its version. The following fields
+the editable construction record. The following fields
 are JSON keys inside its `document` column, not separate table columns. The
 `source_id` inside that JSON identifies the raw source figure.
 
 | Field | Meaning |
 | --- | --- |
 | `method` | `smooth_latitude_trace` |
-| `source_id`, `source_version` | The original source in Neon's raw-source catalog |
+| `source_id` | The original source in Neon's raw-source catalog |
 | `line_id` | The final record in `atlas.geographic_line_observations` |
 | `basis` | How the figure was interpreted, including inferred connections and extensions |
 | `points` | Selected `[longitude, latitude]` points, ordered north to south |
@@ -43,8 +43,7 @@ construction records as appropriate.
 
 The final boundary is generated directly from the chosen points. Intermediate
 traces and smoothed boundaries are not required inputs or separately saved
-outputs. To edit the construction, insert a new version of its record and run
-that version.
+outputs. To edit the construction, edit its record and rerun the same ID.
 
 ## Run
 
@@ -53,7 +52,7 @@ Use the shared [project environment](../../../../environment.yml). Set
 
 ```bash
 worldatlas-import \
-  --recipe CONSTRUCTION_ID VERSION
+  --recipe CONSTRUCTION_ID
 ```
 
 The shared entry point reads `method: smooth_latitude_trace` and selects this
@@ -61,11 +60,11 @@ constructor. For example:
 
 ```bash
 worldatlas-import \
-  --recipe lydekker-boundary-construction 1
+  --recipe lydekker-boundary-construction
 ```
 
 The command saves the geometry, checksum, raw-source reference, and construction
-record ID/version together. Existing notes and links from other Neon records
+record ID together. Existing notes and links from other Neon records
 are retained. `--expected-geometry-sha256 SHA256` optionally checks the generated
 geometry before saving.
 

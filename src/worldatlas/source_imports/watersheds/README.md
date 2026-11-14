@@ -15,7 +15,7 @@ selections live in the construction record.
 | [`waterways.py`](waterways.py) | Read natural waterways and source basin polygons. |
 | [`sources.py`](sources.py) | Read source GeoJSON lines, OSM ways and river relations. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
-| [`../atlas_sources/catalog.py`](../atlas_sources/catalog.py) | Resolve catalog versions and verify downloaded or multipart files. |
+| [`../atlas_sources/catalog.py`](../atlas_sources/catalog.py) | Resolve catalog IDs and verify downloaded or multipart files. |
 | [`../source_io.py`](../source_io.py) | Save boundary geometry and source links together; refresh assembled region checksums. |
 
 The split follows the work: read source features, prepare terrain, calculate
@@ -36,13 +36,12 @@ Set `NEON_DATABASE_URL` and an AWS credential profile outside the code. Then run
 
 ```bash
 worldatlas-import \
-  --recipe CONSTRUCTION_ID VERSION \
-  --revision DECISION_REVISION \
+  --recipe CONSTRUCTION_ID \
   --r2-endpoint R2_ENDPOINT \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-The command reads `atlas.construction_records` and resolves exact source versions
+The command reads `atlas.construction_records` and resolves exact source IDs
 through `atlas.source_assets`. A large provider file can reference ordered,
 individually cataloged byte parts. Each download and the assembled file are
 checked against their sizes and SHA-256 hashes.
@@ -59,7 +58,7 @@ database-write times. R2 transfer time is reported separately; cached verificati
 and multipart reassembly count as source processing.
 
 The current construction IDs are `caucasus-boundary-construction` and
-`ural-boundary-construction`. Their versioned geographic choices and exact source
+`ural-boundary-construction`. Their editable geographic choices and exact source
 selections are in `atlas.construction_records`.
 
 ## Construction settings
@@ -67,7 +66,7 @@ selections are in `atlas.construction_records`.
 The record's method is `watershed_boundary`. It contains:
 
 - `boundary_id` and `basis`: the editable boundary and a plain-language explanation.
-- `sources`: local aliases for exact catalog source IDs and versions.
+- `sources`: local aliases for exact catalog source IDs.
 - `lines`: one complete GeoJSON feature, OSM way or river relation per named line.
   Joining different source features belongs in `sections` with explicit joins.
 - `terrains`: primary and secondary sources, height conversion, analysis domains,
@@ -99,7 +98,7 @@ valid. Unrelated unresolved rivers elsewhere in a provider extract do not block
 the calculation. Missing coordinates on a relevant river also stop the run.
 If source evidence establishes that a mapped way points upstream, list its ID in
 `reverse_waterways`. The constructor reverses its direction before tracing the
-network; its coordinates and source version stay unchanged. Keep the supporting
+network; its coordinates and source ID stay unchanged. Keep the supporting
 measurements and reason in the construction record.
 The receipt lists unresolved and ambiguous ways in the analysis domains;
 unrelated waterways elsewhere in a larger provider extract are excluded from
@@ -124,7 +123,7 @@ intersecting ways without clipping their geometry or downstream relationships.
 
 Use the provider's 10 m ArcticDEM mosaics where available and Copernicus
 GLO-30 elsewhere. Copernicus also fills missing ArcticDEM heights after height
-conversion. Construction records select exact catalog versions and coverage.
+conversion. Construction records select exact catalog assets and coverage.
 
 Keep the primary grid's native cell alignment and valid heights. Fill missing
 cells only from the selected secondary source, bilinearly aligned to that grid.

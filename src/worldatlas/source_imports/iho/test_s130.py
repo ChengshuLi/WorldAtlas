@@ -30,7 +30,7 @@ def fixture(directory, gml=GML):
     archive = Path(directory) / 'source.zip'
     with ZipFile(archive, 'w') as packed:
         packed.writestr('dataset.gml', raw)
-    recipe = dict(method='s130_rhumb_routes', source_id='iho-test', source_version='1',
+    recipe = dict(method='s130_rhumb_routes', source_id='iho-test',
                   gml_member='dataset.gml', gml_sha256=hashlib.sha256(raw).hexdigest(),
                   max_step_km=0.05, basis='Extract the selected source lines in their chosen direction.',
                   routes=[dict(route_id='route-a', construction_line_id='line-a', reverse=True,

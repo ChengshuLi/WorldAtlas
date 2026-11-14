@@ -3,8 +3,8 @@
 [`catalog.py`](catalog.py) provides the shared input functions for source imports
 and map building:
 
-- Read a versioned construction document and verify its stored bytes.
-- Look up an exact raw source version and its R2 location.
+- Read an editable construction document by ID.
+- Look up an exact raw source ID and its R2 location.
 - Stream complete R2 objects with byte-length checks and cooperative cancellation.
 - Download or reuse size- and checksum-verified local files.
 - Join ordered, individually cataloged parts into a checked provider file.

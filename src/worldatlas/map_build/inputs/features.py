@@ -66,7 +66,7 @@ def selected_basins(domain):
         if feature['geometry_sha256'] != basin['geometry_sha256']:
             raise ValueError('basin geometry checksum differs from its selected feature')
         identity = tuple(
-            feature[key] for key in ('source_id', 'source_version', 'source_feature_id')
+            feature[key] for key in ('source_id', 'source_feature_id')
         )
         if identity in identities:
             raise ValueError('a provider area is selected more than once')
@@ -74,6 +74,6 @@ def selected_basins(domain):
         result.append((basin, feature))
     for _, feature in result:
         for parent in feature.get('evidence', {}).get('source_parent_feature_ids', []):
-            if (feature['source_id'], feature['source_version'], parent) in identities:
+            if (feature['source_id'], parent) in identities:
                 raise ValueError('a basin and its provider parent cannot both be active')
     return result

@@ -10,15 +10,13 @@ so another worker's edits cannot enter partway through a build. Executing code
 and runtime versions are separate provenance; a code change does not require
 permission to resume.
 
-[`geography.sql`](geography.sql) selects any of the four decision domains by a
-bound revision parameter. It uses the same tables and policy representation for
-all domains. The selected catalog is frozen once, together with the JSON values of
-contributing construction documents. Construction records carry their ID, version and
-content without per-document checksums or sizes. Boundary-to-source relationships
-and case citations remain part of the saved provenance.
+[`geography.sql`](geography.sql) exports working records once. New selections use
+format v3 with one geography collection, entity colors, contributing construction
+settings and exact raw-file catalog records. Stage views distinguish ocean barriers
+from mainland closure lines without independent database revisions.
 
-New selections use format v2. Retained v1 selections remain readable without
-rewriting their original files.
+Retained v1/v2 selections remain readable without rewriting their bytes or reading
+current Neon data. Their old labels are historical metadata, not working selectors.
 
 Provider endpoint decimals are exported as text to preserve their exact values.
 Stored GeoJSON coordinates remain numeric. Source versions, sizes and hashes
@@ -34,6 +32,5 @@ replay and missing selections. Source-import integration tests also exercise the
 real mainland and geography queries against newly imported records.
 
 Generated JSON cache entries are published as complete files, so builds can share
-the input directory and retry interrupted writes. Water rules come from the
-selected water revision; ocean-fill rules come from the selected ocean revision.
-These revisions may be the same.
+verified inputs and retry interrupted writes. Water and ocean calculations use the
+same frozen working selection.

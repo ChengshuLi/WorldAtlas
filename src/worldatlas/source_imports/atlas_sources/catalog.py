@@ -9,12 +9,12 @@ from tempfile import NamedTemporaryFile
 import time
 
 
-def read_recipe(database, recipe_id, version):
+def read_recipe(database, recipe_id):
     """Read a versioned construction record from the construction table."""
     row = database.execute(
         'SELECT document FROM atlas.construction_records '
-        'WHERE source_id=%s AND version=%s',
-        (recipe_id, version),
+        'WHERE source_id=%s',
+        (recipe_id,),
     ).fetchone()
     if row is None:
         raise ValueError('construction record is missing from Neon')
@@ -24,19 +24,18 @@ def read_recipe(database, recipe_id, version):
     return recipe
 
 
-def catalog_source(database, source_id, version):
+def catalog_source(database, source_id):
     """Look up an exact raw source version and its R2 location."""
     row = database.execute(
         "SELECT r2_bucket,r2_key,sha256,size_bytes FROM atlas.source_assets "
-        "WHERE source_id=%s AND version=%s",
-        (source_id, version),
+        "WHERE source_id=%s",
+        (source_id,),
     ).fetchone()
     if row is None:
-        raise ValueError('raw source version is missing from the Neon catalog')
+        raise ValueError('raw source is missing from the Neon catalog')
     return dict(
         zip(('r2_bucket', 'r2_key', 'sha256', 'size_bytes'), row),
         source_id=source_id,
-        version=version,
     )
 
 

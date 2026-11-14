@@ -149,14 +149,6 @@ def spherical_rhumb_points(points, step_km):
 
 
 def load_config(snapshot, width, height, *, physical=None):
-    revision = snapshot.get('decision_revision', {})
-    registry = snapshot.get('entity_revision', {})
-    if (
-        not revision.get('id')
-        or not revision.get('entity_revision')
-        or registry.get('id') != revision['entity_revision']
-    ):
-        raise ValueError('matching decision and entity revisions are required')
     policies = [p for p in snapshot.get('policies', []) if p.get('kind') == 'ocean_fill']
     if len(policies) != 1:
         raise ValueError('one ocean_fill policy is required')
@@ -381,8 +373,6 @@ def run(
     pins = {
         **inputs,
         'decision_snapshot_sha256': snapshot_hash,
-        'decision_revision': snapshot['decision_revision']['id'],
-        'entity_revision': snapshot['decision_revision']['entity_revision'],
         'source_cut_edges_sha256': sha(cut_path),
         'route_ids': policy['route_ids'],
         'seed_ids': policy['seed_ids'],

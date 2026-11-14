@@ -17,11 +17,10 @@ Use the common command:
 
 ```bash
 worldatlas-import \
-  --recipe CONSTRUCTION_ID VERSION --revision DECISION_REVISION \
   --r2-endpoint R2_ENDPOINT --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-A `selected_vector_features` construction contains `source_id`, `source_version`,
+A `selected_vector_features` construction contains `source_id`,
 `basis`, `id_field` and `selections`. Each selection supplies `feature_id` and
 `source_feature_id`; it may check `expected_properties` or an
 `expected_geometry_sha256`. Checksums use the stored coordinate representation:

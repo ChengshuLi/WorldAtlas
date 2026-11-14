@@ -50,7 +50,7 @@ def validate_geometry(geometry, coordinate_reference='OGC:CRS84'):
     return result
 
 
-def save_features(database, revision, features, recipe):
+def save_features(database, features, recipe):
     """Save a complete import together; unrelated evidence and links survive."""
     identifiers = [feature['feature_id'] for feature in features]
     if (not identifiers or any(not isinstance(value, str) or not value.strip() for value in identifiers)
@@ -66,22 +66,21 @@ def save_features(database, revision, features, recipe):
         digest = geometry_hash(geometry)
         hashes[feature['feature_id']] = digest
         evidence = dict(feature.get('evidence', {}), basis=recipe['basis'])
-        records.append((revision, feature['feature_id'], feature['source_id'],
-                        feature['source_version'], feature['source_feature_id'],
+        records.append((feature['feature_id'], feature['source_id'], feature['source_feature_id'],
                         digest, Jsonb(geometry), reference, Jsonb(evidence),
-                        recipe['recipe_id'], recipe['recipe_version']))
+                        recipe['recipe_id']))
     with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(
                 'INSERT INTO atlas.decision_features '
-                '(revision,feature_id,source_id,source_version,source_feature_id,'
-                'geometry_sha256,geometry,coordinate_reference,evidence,construction_id,construction_version) '
-                'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) '
-                'ON CONFLICT (revision,feature_id) DO UPDATE SET '
-                'source_id=EXCLUDED.source_id,source_version=EXCLUDED.source_version,'
+                '(feature_id,source_id,source_feature_id,'
+                'geometry_sha256,geometry,coordinate_reference,evidence,construction_id) '
+                'VALUES (%s,%s,%s,%s,%s,%s,%s,%s) '
+                'ON CONFLICT (feature_id) DO UPDATE SET '
+                'source_id=EXCLUDED.source_id,'
                 'source_feature_id=EXCLUDED.source_feature_id,'
                 'geometry_sha256=EXCLUDED.geometry_sha256,geometry=EXCLUDED.geometry,'
                 'coordinate_reference=EXCLUDED.coordinate_reference,'
-                'construction_id=EXCLUDED.construction_id,construction_version=EXCLUDED.construction_version,'
+                'construction_id=EXCLUDED.construction_id,'
                 'evidence=atlas.decision_features.evidence || EXCLUDED.evidence', records)
     return hashes

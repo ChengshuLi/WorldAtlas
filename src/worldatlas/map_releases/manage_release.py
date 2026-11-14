@@ -13,7 +13,7 @@ import shutil
 import tempfile
 
 from worldatlas.map_build.execution.runtime import digest, json_bytes, pin, verify_pins
-from worldatlas.map_build.inputs.selection import canonical_bytes, read_saved, validate_bindings
+from worldatlas.map_build.inputs.selection import entity_colors, geographic_domain, selection_domains, canonical_bytes, read_saved, validate_bindings
 from worldatlas.map_releases.inputs import FILENAME as INPUTS_FILE, read_inputs, restore_inputs, write_inputs
 
 STREAMS = ('rows', 'runs')
@@ -37,14 +37,13 @@ def read(path):
 
 
 def release_categories(selection):
-    validate_bindings(selection['domains'])
-    snapshot = selection['domains']['mainland']
+    validate_bindings(selection_domains(selection))
+    snapshot = geographic_domain(selection, 'mainland')
     names = {entity['id']: entity['name'] for entity in snapshot['entities']}
     bindings = snapshot['category_bindings']
-    registry = snapshot['decision_revision']['entity_revision']
     colors = {
         row['entity_id']: list(bytes.fromhex(row['color_rgb'][1:]))
-        for row in selection['registry_colors'][registry]
+        for row in entity_colors(selection)
         if row['color_rgb'] is not None
     }
     land_ids = {b['entity_id'] for b in bindings if b['physical_class'] == 'land'}

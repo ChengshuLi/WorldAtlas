@@ -1,24 +1,20 @@
--- Working geographic policies can be edited directly.
 BEGIN;
 DO $$ BEGIN
- INSERT INTO atlas.entity_registry_revisions(revision) VALUES ('__policies');
- INSERT INTO atlas.decision_revisions VALUES ('__policies','__policies','{}');
  INSERT INTO atlas.decision_policies VALUES
- ('__policies','coast','coastline_assignment','{}','{}'),
- ('__policies','ocean','ocean_fill','{}','{}'),
- ('__policies','land','mainland_assignment','{"tie_tolerance_metres":0.00001}','{}');
- UPDATE atlas.decision_policies SET evidence='{"note":"editable"}' WHERE revision='__policies';
+ ('__coast','coastline_assignment','{}','{}'),('__ocean','ocean_fill','{}','{}'),
+ ('__land','mainland_assignment','{"tie_tolerance_metres":0.00001}','{}');
+ UPDATE atlas.decision_policies SET evidence='{"note":"editable"}';
  BEGIN
-  INSERT INTO atlas.decision_policies VALUES ('__policies','unknown','unknown','{}','{}');
+  INSERT INTO atlas.decision_policies VALUES ('__unknown','unknown','{}','{}');
   RAISE EXCEPTION 'unknown policy operation accepted';
  EXCEPTION WHEN check_violation THEN NULL; END;
  BEGIN
-  INSERT INTO atlas.decision_policies VALUES ('__policies','invalid','ocean_fill','[]','{}');
+  INSERT INTO atlas.decision_policies VALUES ('__invalid','scoped_land_partition','[]','{}');
   RAISE EXCEPTION 'non-object policy definition accepted';
  EXCEPTION WHEN check_violation THEN NULL; END;
  BEGIN
-  INSERT INTO atlas.decision_policies VALUES ('__policies','coast','ocean_fill','{}','{}');
-  RAISE EXCEPTION 'duplicate policy identity accepted';
+  INSERT INTO atlas.decision_policies VALUES ('__other_ocean','ocean_fill','{}','{}');
+  RAISE EXCEPTION 'two active ocean policies accepted';
  EXCEPTION WHEN unique_violation THEN NULL; END;
 END $$;
 ROLLBACK;

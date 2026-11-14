@@ -29,7 +29,7 @@ ways. Local processing and the Neon/R2 workflow are separate:
 
 - [`ways.py`](ways.py): read local archives and manifests, check source
   files, join ways into a GeoJSON line, and optionally check its geometry checksum.
-- [`build_boundary.py`](build_boundary.py): look up a raw source version
+- [`build_boundary.py`](build_boundary.py): look up a raw source ID
   in Neon, download it from R2, assemble the line, and save the boundary and source link
   in Neon. Existing notes and supporting source links are retained.
 - [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) supplies the document, catalog, and download
@@ -69,20 +69,18 @@ The workflow also requires `psycopg` and `boto3`. Set `NEON_DATABASE_URL` to the
 working database and configure R2 credentials through `AWS_PROFILE`.
 
 Run from the repository root, replacing the uppercase placeholders with your
-Neon record IDs, version, and R2 account ID, and choosing a local work directory:
+Neon record IDs, and R2 account ID, and choosing a local work directory:
 
 ```bash
 worldatlas-import \
-  --recipe CONSTRUCTION_ID VERSION \
-  --revision DECISION_REVISION \
+  --recipe CONSTRUCTION_ID \
   --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
 | Argument | Meaning |
 | --- | --- |
-| `--recipe ID VERSION` | Construction record's `source_id` and `version` in `atlas.construction_records`. |
-| `--revision` | Existing group of editable decisions in Neon where the boundary is saved. |
+| `--recipe ID` | Construction record's `source_id` in `atlas.construction_records`. |
 | `--r2-endpoint` | Address used to access the Cloudflare R2 account. The catalog supplies the bucket and object path. |
 | `--work-dir` | Local directory for downloading and reusing the source archive. |
 | `--expected-geometry-sha256` | Optional checksum of the expected boundary geometry. A mismatch stops the command before saving. Omit it when building a changed boundary. |
@@ -94,7 +92,6 @@ The construction record is a JSON object in the existing
 {
   "method": "osm_way_chain",
   "source_id": "raw-source-id",
-  "source_version": "raw-source-version",
   "boundary_id": "boundary-id",
   "basis": "A plain-English explanation of how the boundary is built."
 }
@@ -103,12 +100,10 @@ The construction record is a JSON object in the existing
 `osm_way_chain` selects the typed function in [`build_boundary.py`](build_boundary.py),
 which calls the assembly function in `ways.py`. Its signature defines required
 fields and types; [shared validation](../README.md#document-validation) checks
-them in Python and PostgreSQL. Each stored
-document version is immutable. To change settings, insert a new version and
-select it in the command.
+them in Python and PostgreSQL. The construction record is editable. Change its settings and rerun its ID.
 
 `worldatlas-import` reads and validates the record, then `osm_way_chain()` looks up its exact
-raw source version in `atlas.source_assets`,
+raw source ID in `atlas.source_assets`,
 downloads its R2 object into the work directory, checks its size and checksum,
 and assembles the boundary. A checked local download is reused on later runs.
 An optional expected geometry checksum supports replaying an existing result.
@@ -116,12 +111,12 @@ An optional expected geometry checksum supports replaying an existing result.
 It saves the geometry in `atlas.decision_mainland_boundaries` and its construction
 source link in `atlas.decision_mainland_boundary_sources`, in one transaction.
 The construction description is saved in the boundary's `provenance.basis` field.
-The selected record ID and version are saved in the boundary’s
-`construction_id` and `construction_version` columns. The source link identifies
+The selected record ID is saved in the boundary’s
+`construction_id` column. The source link identifies
 the catalog entry with the raw file’s R2 location, size and checksum.
-The destination revision must already exist. Repeating the command updates the
+Repeating the command updates the
 same boundary, retaining other notes and supporting source links. Changing the
-source version replaces the previous construction source link.
+source ID replaces the previous construction source link.
 
 For another boundary using this method, add a construction record and run the
 same command.
@@ -141,4 +136,4 @@ python .github/scripts/run_tests.py --suite source_imports
 
 The runner creates a disposable database and includes the database write tests.
 Those tests cover complete builds, repeat runs, source updates, preservation of
-notes and supporting evidence, revision isolation, and failed-write rollbacks.
+notes and supporting evidence, unrelated records, and failed-write rollbacks.

@@ -46,10 +46,10 @@ def resolve_sources(database, recipe):
     for alias, selection in recipe['sources'].items():
         if 'parts' in selection:
             resolved[alias] = dict(selection, parts=[
-                catalog_source(database, part['source_id'], part['version'])
+                catalog_source(database, part['source_id'])
                 for part in selection['parts']])
         else:
-            resolved[alias] = catalog_source(database, selection['source_id'], selection['version'])
+            resolved[alias] = catalog_source(database, selection['source_id'])
     return resolved
 
 
@@ -280,11 +280,8 @@ def watershed_boundary(runtime: Runtime, *, boundary_id: NonEmptyText, basis: No
     recipe = runtime.recipe(locals())
     started = time.monotonic()
     with runtime.connect() as database, database.transaction():
-        if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
-                            (runtime.revision,)).fetchone() is None:
-            raise ValueError('destination decision revision does not exist')
         selections = resolve_sources(database, recipe)
-        evidence = [dict(catalog_source(database, item['source_id'], item['version']),
+        evidence = [dict(catalog_source(database, item['source_id']),
                          relationship='supporting_evidence')
                     for item in recipe.get('evidence_sources', [])]
     catalog_seconds = time.monotonic() - started
@@ -300,10 +297,10 @@ def watershed_boundary(runtime: Runtime, *, boundary_id: NonEmptyText, basis: No
         for name, terrain in report['terrain'].items() if terrain['network']['shared_sections']}
     provenance['river_validation'] = report['river_checks']
     started = time.monotonic()
-    with runtime.connect() as database:
-        digest = save_boundary(database, runtime.revision, boundary_id, geometry, provenance,
-                               [*references, *evidence], construction=(runtime.recipe_id, runtime.version))
-    report.update(revision=runtime.revision, boundary_id=boundary_id, sha256=digest,
+    with runtime.connect() as database, runtime.saving(database):
+        digest = save_boundary(database, boundary_id, geometry, provenance,
+                               [*references, *evidence], construction=runtime.recipe_id)
+    report.update(boundary_id=boundary_id, sha256=digest,
                   vertices=len(geometry['coordinates']), catalog_seconds=catalog_seconds,
                   source_staging_seconds=staging_seconds,
                   download_seconds=acquisition.get('download_seconds', 0.),

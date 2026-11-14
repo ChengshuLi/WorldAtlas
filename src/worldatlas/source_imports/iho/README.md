@@ -11,7 +11,7 @@ S-130 encodes area surfaces as `LinearRing` vertices and supplies separate
 construction-line records. Area imports preserve the encoded surface. Route
 imports apply each selected construction line's declared rhumb interpolation.
 
-An `s130_areas` construction supplies `source_id`, `source_version`, `basis`,
+An `s130_areas` construction supplies `source_id`, `basis`,
 `gml_member`, `gml_sha256` and `selections`. Each selection specifies the output
 `feature_id` and provider MRN in `source_feature_id`.
 
@@ -34,13 +34,12 @@ types. [Shared validation](../README.md#document-validation) enforces these in
 Python and PostgreSQL; the example below explains the settings.
 
 Store the geographic selections in the existing `atlas.construction_records`
-table. Each record version contains a JSON object like this:
+table. Each record contains a JSON object like this:
 
 ```json
 {
   "method": "s130_rhumb_routes",
   "source_id": "raw-source-id",
-  "source_version": "raw-source-version",
   "gml_member": "path/inside/archive.gml",
   "gml_sha256": "GML_FILE_SHA256",
   "max_step_km": 0.05,
@@ -69,7 +68,7 @@ derivation. The map builder extends it to the outer edge of the final grid row.
 It requires the source endpoint to fall within that row.
 
 Add selections to the list to process more lines from the same dataset.
-To change an immutable construction record, insert a new version.
+Edit the construction record and rerun the same ID.
 
 ## Run
 
@@ -80,13 +79,12 @@ work path with your settings:
 
 ```bash
 worldatlas-import \
-  --recipe CONSTRUCTION_ID VERSION \
-  --revision DECISION_REVISION \
+  --recipe CONSTRUCTION_ID \
   --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-The selected record identifies the raw source version in `atlas.source_assets`.
+The selected record identifies the raw source ID in `atlas.source_assets`.
 The download is checked against that catalog entry and reused on later runs.
 
 The command saves the selected records in `atlas.decision_endpoints`,

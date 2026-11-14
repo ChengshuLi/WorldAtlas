@@ -60,12 +60,10 @@ Verified physical outputs can instead be reused with `--physical-from`.
 
 ## Inputs and stages
 
-The configuration selects four working revisions: mainland, regional land,
-named water and oceans. At startup, the pipeline reads them and their source
-catalog references in one repeatable-read, read-only transaction. It saves that
-selection and closes the transaction before downloads or computation.
-Every selected stage must map each grid code to the same entity and land/water
-class. Row order and registry names do not affect this check.
+The pipeline reads working mainland, regional, water and ocean records in one
+repeatable-read, read-only transaction. It freezes geometry, construction settings,
+entity bindings/colors and raw catalog records, then closes the transaction before
+computation. Workers edit records by their IDs; the build needs no revision labels.
 
 Use `--selection /absolute/path/to/input-selection.json` to replay a saved
 selection. Resume uses the run's saved selection rather than rereading Neon.

@@ -1,6 +1,6 @@
 # Database
 
-Neon holds editable geography, versioned construction settings and the catalog
+Neon holds editable geography, editable construction settings and the catalog
 of raw R2 files. The website reads completed release files. Building a new map
 freezes the selected Neon records before calculating cells.
 
@@ -11,9 +11,9 @@ It loads these files in dependency order, within one transaction:
 
 | File | Contents |
 | --- | --- |
-| [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and versioned construction documents. |
+| [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and editable construction documents. |
 | [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated checks for typed construction parameters. |
-| [`entities.sql`](schema/entities.sql) | Stable entity IDs/colors, revisioned names/parents and grid-code bindings. |
+| [`entities.sql`](schema/entities.sql) | Stable entity IDs/colors, editable names/parents and grid-code bindings. |
 | [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, decisions, shared explanations, citations, ocean routes and assignment policies. |
 | [`mainland.sql`](schema/mainland.sql) | Editable boundaries, raw-source links, assembled seed regions and component witnesses. |
 | [`releases.sql`](schema/releases.sql) | Immutable release manifests, approval and official-version/homepage pointers. |
@@ -38,41 +38,26 @@ The working database is already initialized. Creating the schema does not load
 the data required to build a map. Restore a database backup to recover existing
 records, or load new records through the supported source-import workflow.
 
-## Change an existing database
+## Updating the working database
 
-Update the relevant schema definition. When an existing database needs an
-upgrade, put the explicit change under `database/migrations/` in the same PR.
-Preserve applied upgrade scripts rather than editing their meaning afterward.
+`schema.sql` and its included files describe the complete current database.
+There is no migration chain to run after creating a fresh database.
 
-Test the upgrade against a disposable copy of working data before applying it.
-Check that upgrading and creating a fresh database produce the same intended
-structure. Schema upgrades stay separate from geographic data imports.
+For an existing working database, back up its data and test the specific schema
+transition on a disposable copy before applying it. Keep one-off transition
+scripts with the local maintenance backup, and update the authoritative schema
+in the same change as its code and tests. Geographic values are loaded through
+imports or edited in Neon, not embedded in schema SQL.
 
-Applied upgrades are retained in `migrations/`:
+`construction_records` contains one editable recipe per ID. Its structural checks
+are generated from the Python constructor signatures and nested types. See
+[source-import validation](../src/worldatlas/source_imports/README.md#document-validation).
+A changed validator must be applied to the working database and must recheck
+existing rows. CI rejects stale generated schema checks.
 
-| Upgrade | Existing-database change |
-| --- | --- |
-| `001_remove_source_provenance.sql` | Remove unused raw-source metadata. |
-| `002_simplify_structured_documents.sql` | Remove redundant document checksums/sizes and use JSONB. |
-| `003_rename_construction_records.sql` | Rename the construction table and its supporting objects. |
-| `004_validate_construction_parameters.sql` | Install generated checks and validate existing construction documents. |
-
-Apply only upgrades that the existing database has not received. Fresh databases
-already have their final schema. Back up and test existing data before an upgrade.
-Historical input archival/removal is a separate data backfill, after verified R2
-uploads; it is not geographic data embedded in the schema SQL.
-
-`construction_records` holds current versioned construction instructions.
-Its method/field/type checks are generated from the registered constructors'
-Python signatures and nested types. The command uses those same definitions;
-there is no separate handwritten SQL field list. Regeneration and upgrade steps
-are documented in [source imports](../src/worldatlas/source_imports/README.md#document-validation).
-CI rejects a stale generated file. Changing a validator requires revalidating
-existing rows, which the generated upgrade does when replacing the constraint.
-Original/intermediate geographic records still in use remain in their own tables.
-Historical release snapshots and superseded pipeline inputs live in the release's
-R2 `inputs.json.gz`, tracked by `map_releases`. The archive preserves their original
-IDs and versions. Its captured data is separate from editable working records.
+Builds freeze complete working records. Historical release snapshots live in
+R2 `inputs.json.gz` files tracked by `map_releases`; they are not working records
+in Neon. Restoring an archive never replaces today's editable geography.
 
 ## Tests
 
@@ -81,7 +66,7 @@ SQL checks cover database guarantees:
 | Check | Purpose |
 | --- | --- |
 | `source_catalog.sql` | Raw-file identity, metadata corrections and source references. |
-| `construction_records.sql` | Valid construction shapes, required fields, JSON types and immutable versions. |
+| `construction_records.sql` | Valid construction shapes, required fields, JSON types and editable recipes. |
 | `entity_registry.sql` | Stable IDs, hierarchy relationships and grid-code bindings. |
 | `geographic_entity_colors.sql` | Optional colors and valid RGB values. |
 | `geographic_decisions.sql` | Geometry records, shared explanations, citations and entity targets. |
@@ -106,30 +91,22 @@ CI runs all suites on macOS and Linux without live Neon credentials.
 
 ## Find and regenerate a construction
 
-A construction version describes how to regenerate geometry. A decision revision
-selects editable records. A release freezes a completed result.
-
-Features, mainland boundaries, ocean endpoints/routes and selected geographic
-lines reference their construction through `construction_id` and
-`construction_version`. For example:
+One construction ID identifies one editable recipe. Geometry references it by
+`construction_id`. Raw assets have immutable IDs; changed bytes get a new ID.
+Builds freeze the complete records they read, and releases archive those inputs.
 
 ```sql
-SELECT revision, boundary_id, construction_id, construction_version
-FROM atlas.decision_mainland_boundaries
-ORDER BY revision, boundary_id;
-
-SELECT document FROM atlas.construction_records
-WHERE source_id = 'CONSTRUCTION_ID' AND version = 'VERSION';
+SELECT boundary_id, construction_id FROM atlas.decision_mainland_boundaries;
+SELECT document FROM atlas.construction_records WHERE source_id = 'CONSTRUCTION_ID';
 ```
 
-Use that exact version with the [source-import command](../src/worldatlas/source_imports/README.md).
-The document's `method` selects the constructor. Changed settings get a new
-construction version. Successful imports save geometry and its references
-together, preserving unrelated notes and relationships. Failed imports leave
-the previous record intact. Original supporting
-observations can remain without an automatic constructor.
+Run that ID through the [source-import command](../src/worldatlas/source_imports/README.md).
+The document's `method` selects the constructor. Edit settings and rerun the ID
+to update working geometry. The old coordinates and settings remain in retained
+build/release inputs. Successful imports save geometry and references together;
+failed imports preserve existing results and unrelated notes/relationships.
 
 Working decisions are editable directly. Publication approval applies to an
 exact release bundle. Raw-file identities remain immutable. Source titles and
 credit descriptions can be corrected without uploading duplicate bytes. The raw
-catalog has no catch-all metadata column. Construction settings belong in versioned construction records.
+catalog has no catch-all metadata column. Construction settings belong in editable construction records.

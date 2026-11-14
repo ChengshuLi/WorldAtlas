@@ -1,134 +1,109 @@
 # Source imports
 
-These tools read raw geographic sources and save the selected geometry and
-construction decisions in Neon. Raw source files stay in R2; Neon's source
-catalog identifies their versions and checksums.
+These tools read raw geographic files from R2 and save geographic records in Neon.
+The source catalog identifies each exact file by one immutable `source_id`, its
+R2 location, byte size and checksum. Changed raw bytes get a new source ID.
 
-- [`osm/`](osm/README.md): assemble archived OpenStreetMap boundaries and selected features.
-- [`iho/`](iho/README.md): import selected IHO S-130 routes and sea areas.
-- [`features/`](features/README.md): import selected vector and point-table geometry into Neon.
-- [`traces/`](traces/README.md): construct final boundaries from reviewed points
-  traced from source figures.
-- [`watersheds/`](watersheds/README.md): construct boundaries from elevation,
-  natural waterways and source basin geometry.
-- [`atlas_sources/`](atlas_sources/README.md): shared Neon recipe/catalog reads and verified
-  R2 downloads.
+- [`osm/`](osm/README.md): archived OpenStreetMap boundaries and selected features.
+- [`iho/`](iho/README.md): IHO S-130 routes and sea areas.
+- [`features/`](features/README.md): selected vector and point-table geometry.
+- [`traces/`](traces/README.md): boundaries from reviewed points on source figures.
+- [`watersheds/`](watersheds/README.md): boundaries from terrain and natural drainage.
+- [`atlas_sources/`](atlas_sources/README.md): catalog lookup and verified downloads.
 
-Geographic selections belong in Neon construction records. Reusable parsing and
-construction code belongs here. The [map builder](../map_build/README.md)
-uses the selected structured records, together with large raw raster/vector
-inputs, to produce map cells.
+Geographic choices live in editable `atlas.construction_records.document` values.
+Each construction has one ID and one current recipe. Imported geometry links to
+that construction by `construction_id`. There are no decision revisions or recipe
+versions to select. Each map build freezes the full recipes, geometry and raw
+catalog records it used; release archives retain those copies for replay.
 
-## Code organization
+## Run one construction
 
-`run_import.py` selects the method. After installing the project, use `worldatlas-import`. Each method's `build_*.py` coordinates its
-Neon/R2 workflow; the other modules implement the calculations. `atlas_sources`
-contains the catalog and verified-file functions also used by map building.
-`source_io.py` saves mainland boundaries and validates their assembled regions. Calculation modules do not query Neon or R2.
-Workers calculate independently. Saves affecting the same mainland region wait
-for one another so validation sees both committed edits.
-The assembled region must close and form a valid polygon before the save commits.
-
-Tests live beside the code they exercise. The root `test_run_import.py` covers
-method selection; `test_contracts.py` checks Python/PostgreSQL agreement and direct SQL rejection.
-`atlas_sources/test_catalog.py` covers downloads and multipart files.
-Each package README identifies its calculation and storage tests.
-The `__init__.py` files mark importable packages and enable test discovery.
-
-The project [`environment.yml`](../../../environment.yml) pins Python, GDAL/PROJ and Python
-packages for these importers. It also installs PostgreSQL for disposable database
-tests and the dependencies used by related pipeline checks in CI. One file
-defines the environment; a separate Python requirements file is unnecessary.
-
-## Choose a construction record
-
-Use one entry point for all construction methods:
+Install the project using the root [environment](../../../environment.yml).
+Set `NEON_DATABASE_URL` and the required AWS profile outside the code.
 
 ```bash
-worldatlas-import \
-  --recipe CONSTRUCTION_ID VERSION
+worldatlas-import --recipe CONSTRUCTION_ID \
+  --r2-endpoint R2_ENDPOINT \
+  --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-The command reads the record from `atlas.construction_records`. Its JSON
-`method` selects the constructor through the authoritative
-[`IMPORTERS` mapping in `run_import.py`](run_import.py). The supported methods
-and their handlers are maintained there; this README does not duplicate the list.
-
-The record ID identifies data; its name does not select Python code.
-All file-backed imports additionally require `--revision`,
-`--r2-endpoint` and `--work-dir`. Traced boundaries need only the record ID and
-version. Set `NEON_DATABASE_URL` and any required AWS profile outside the code.
-A supplied work directory also receives a JSON receipt after a successful run.
-
-Use the [database queries](../../../database/README.md#find-and-regenerate-a-construction)
-to find the construction ID/version selected by an editable record. Use that
-reference rather than assuming that the largest version number is selected.
-The destination revision is the record's revision, also selected by the map
-configuration. Import changed source geometry first, then run map building.
-
-For example, the Lydekker construction record can be run with:
+Figure traces need only the construction ID:
 
 ```bash
-worldatlas-import \
-  --recipe lydekker-boundary-construction 1
+worldatlas-import --recipe lydekker-boundary-construction
 ```
+
+The document's `method` selects a typed function registered once in
+[`run_import.py`](run_import.py). A record's name does not select Python code.
+Read the referenced construction rather than assuming a name or remembering a
+command from a previous chat:
+
+```sql
+SELECT boundary_id, construction_id FROM atlas.decision_mainland_boundaries;
+SELECT document FROM atlas.construction_records WHERE source_id = 'CONSTRUCTION_ID';
+```
+
+Edit the recipe and rerun the same ID to update working geometry. Successful
+imports save geometry and source relationships together, retaining unrelated
+notes and links. A failed calculation or write leaves previous geometry intact.
+Workers calculate independently; writes to boundaries sharing a region wait for
+one another so region validation sees committed changes.
+
+## Regenerate working geometry
+
+```bash
+worldatlas-import --all \
+  --r2-endpoint R2_ENDPOINT \
+  --work-dir /absolute/path/to/worldatlas-work/inputs
+```
+
+The command follows construction links from features, boundaries, ocean routes,
+endpoints and enabled geographic line rules. Each construction runs once. Each
+successful import commits independently, so an interrupted batch can be repeated.
+Receipts under `inputs/receipts/` identify the construction and its result.
+
+The map builder uses the same verified raw-file cache. Both commands check the
+catalog's byte sizes and checksums before reusing downloads.
 
 ## Document validation
 
-Each constructor in `build_*.py` declares its document fields as typed keyword-only
-arguments. An argument without a default is required; a default makes it optional.
-`NonEmptyText` rejects empty text and text containing only spaces, tabs or line
-breaks. Nested `TypedDict` definitions describe selected features and routes.
-The function's name supplies `method`; `IMPORTERS` registers the functions once.
+Each constructor's typed keyword-only arguments define its fields. An argument
+without a default is required; a default makes it optional. `NonEmptyText` rejects
+empty or whitespace-only text. Nested `TypedDict` definitions describe feature
+and route selections. `runtime` supplies connections, work paths and the
+construction ID; it is not a field in the stored document.
 
-[`contracts.py`](contracts.py) reads those signatures for both command validation
-and generated PostgreSQL checks. Unknown methods, unknown fields, missing required
-fields and incorrect JSON types are rejected, including direct SQL inserts.
-Defaults are applied when Python calls the constructor. `runtime` contains the
-connections, work directory, destination revision and construction identity;
-it is created by the command and is not part of the stored document.
+[`contracts.py`](contracts.py) derives command validation and PostgreSQL checks
+from those signatures. Both reject unknown methods/fields, missing required
+fields and incorrect types. Algorithms additionally check source identities,
+coordinates, joins and the relationships between geographic choices.
 
-The constructors still check source identity, coordinates, selections and joins
-while calculating geometry. Typed fields do not replace those geographic checks.
-For compound geographic operations, dictionary settings are interpreted and
-checked by the corresponding algorithm.
-
-After changing a signature or its nested types, regenerate the database checks:
+After changing signatures or nested types, regenerate the initial-schema checks:
 
 ```bash
 python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql
 ```
 
-Update the initial schema and add an explicit, transactional upgrade under
-`database/migrations/` containing the generated SQL. Applying that upgrade
-rechecks every existing construction. CI compares the generated SQL with the
-committed file before running tests. Do not edit generated predicates or keep
-another field list in a validator. Use the constructor signature for the current
-required fields, optional fields and types; examples below explain their use.
+For the existing working database, back up and test a one-off upgrade before
+applying the changed validator. Replacing it must recheck existing rows. Keep the
+transition script with that maintenance backup. The initial-schema file only
+creates the function and constraint.
+CI fails if the committed generated file differs from the Python declarations.
+Do not maintain another field list in a validator or README.
 
-## Regenerate the selected inputs
+## Code and tests
 
-To rerun every construction contributing to selected decision revisions:
+`run_import.py` reads the recipe and dispatches to a typed function in a
+`build_*.py` module. Those modules handle Neon/R2; other modules implement
+calculations. `source_io.py` saves mainland boundaries and validates their assembled
+regions. `__init__.py` files define importable packages and enable test discovery.
+
+Tests live beside their code. `test_run_import.py` checks dispatch;
+`test_contracts.py` checks Python/PostgreSQL agreement and direct SQL writes;
+`atlas_sources/test_catalog.py` checks file acquisition. Package READMEs describe
+their algorithm and storage tests.
 
 ```bash
-worldatlas-import \
-  --revisions MAINLAND_REVISION REGIONAL_REVISION WATER_REVISION OCEAN_REVISION \
-  --r2-endpoint R2_ENDPOINT \
-  --work-dir /absolute/path/to/worldatlas-work/inputs
+python .github/scripts/run_tests.py --suite source_imports
 ```
-
-Use the revisions from the map configuration. The command follows each record's
-construction foreign key and uses that exact version. It includes enabled line
-partitions and avoids repeating a construction selected by several output rows.
-Each import saves atomically; if a later one fails, earlier successful imports
-remain available and the command can be repeated. Then run the map builder.
-
-Receipts include the construction ID, version and destination revision. Their
-filenames are derived from the construction identity so provider identifiers cannot become file paths.
-
-## Local source cache
-
-Use `/absolute/path/to/worldatlas-work/inputs` as `--work-dir` for source
-imports. The map command uses that same `inputs/` directory beneath its work
-directory. Both tools verify the cataloged sizes and checksums and reuse the
-same raw bytes. Import receipts live under `inputs/receipts/`.

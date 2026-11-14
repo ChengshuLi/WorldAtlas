@@ -183,8 +183,6 @@ def apply_satellites(
             and a['source_id']
             and isinstance(a.get('source_feature_id'), str)
             and a['source_feature_id']
-            and isinstance(a.get('source_version'), str)
-            and a['source_version']
             and isinstance(a.get('source_sha256'), str)
             and len(a['source_sha256']) == 64
             and all(ch in '0123456789abcdef' for ch in a['source_sha256'])
@@ -407,7 +405,6 @@ def apply_satellites(
                 'distance_m': anchor_distance,
                 'source_id': anchors[parent]['source_id'],
                 'source_feature_id': anchors[parent]['source_feature_id'],
-                'source_version': anchors[parent]['source_version'],
                 'source_sha256': anchors[parent]['source_sha256'],
                 'main_island_evidence': anchors[parent]['main_island_evidence'],
                 'nearer_unanchored_land': True,
@@ -426,7 +423,6 @@ def apply_satellites(
             'distance_m': minimum,
             'source_id': anchors[parent]['source_id'],
             'source_feature_id': anchors[parent]['source_feature_id'],
-            'source_version': anchors[parent]['source_version'],
             'source_sha256': anchors[parent]['source_sha256'],
             'main_island_evidence': anchors[parent]['main_island_evidence'],
         }

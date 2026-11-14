@@ -28,9 +28,9 @@ class ContractTests(unittest.TestCase):
         for name in ('runtime', 'recipe_id', 'recipe_version', 'revision', 'work_dir'):
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'unknown construction fields'):
                 bind_document(function, dict(DOCUMENTS['osm_way_chain'], method='osm_way_chain', **{name: 'unexpected'}))
-        runtime = Runtime(None, None, 'construction', '1', 'osm_way_chain')
+        runtime = Runtime(None, None, 'construction', 'osm_way_chain')
         self.assertEqual(runtime.recipe(dict(runtime=runtime, title='Hello', optional=None)),
-                         dict(method='osm_way_chain', recipe_id='construction', recipe_version='1', title='Hello'))
+                         dict(method='osm_way_chain', recipe_id='construction', title='Hello'))
 
     def test_supported_annotations_do_not_coerce_json_values(self):
         class Object(TypedDict):
@@ -78,10 +78,10 @@ class DatabaseContractTests(unittest.TestCase):
         self.assertIs(database_valid, expected, (method, document))
         if expected:
             with self.database.transaction(force_rollback=True):
-                self.database.execute("INSERT INTO atlas.construction_records VALUES ('__contract','test',%s)", (Jsonb(document),))
+                self.database.execute("INSERT INTO atlas.construction_records VALUES ('__contract',%s)", (Jsonb(document),))
         else:
             with self.assertRaises(psycopg.errors.CheckViolation), self.database.transaction():
-                self.database.execute("INSERT INTO atlas.construction_records VALUES ('__contract','test',%s)", (Jsonb(document),))
+                self.database.execute("INSERT INTO atlas.construction_records VALUES ('__contract',%s)", (Jsonb(document),))
 
     def test_every_method_rejects_missing_required_fields_wrong_types_and_unknown_keys(self):
         for method, constructor in IMPORTERS.items():

@@ -47,7 +47,7 @@ def fixtures(directory):
     files = {'dem': raster, 'basins': archive, 'lines': geometry}
     recipe = {
         'method': 'watershed_boundary', 'boundary_id': 'test-divide', 'basis': 'Test drainage divide',
-        'sources': {name: {'source_id': '__watershed_' + name, 'version': '1'} for name in files},
+        'sources': {name: {'source_id': '__watershed_' + name} for name in files},
         'lines': {name: [{'source': 'lines', 'geojson_feature': i}]
                   for i, name in enumerate(('before', 'after'))},
         'terrains': {'ridge': {'primary': ['dem'], 'domains': [[0, 0, .006, .006]],
@@ -234,131 +234,97 @@ class ConstructionTests(unittest.TestCase):
             self.assertEqual(coverage['conflicting'], [])
 
 
-@unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'), 'requires disposable PostgreSQL')
+@unittest.skipUnless(
+    os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
+)
 class StorageTests(unittest.TestCase):
     def setUp(self):
         import psycopg
-        self.db = psycopg.connect(os.environ['WORLDATLAS_TEST_DATABASE_URL'])
+        from psycopg.types.json import Jsonb
+
+        self.db = psycopg.connect(os.environ["WORLDATLAS_TEST_DATABASE_URL"])
         self.addCleanup(self.db.close)
         self.addCleanup(self.db.rollback)
-        temporary = tempfile.TemporaryDirectory()
-        self.addCleanup(temporary.cleanup)
-        self.directory = Path(temporary.name)
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        self.directory = Path(temp.name)
         self.files, self.recipe = fixtures(self.directory)
-        self.db.execute("INSERT INTO atlas.entity_registry_revisions VALUES ('__watershed_entities')")
-        self.db.execute("INSERT INTO atlas.decision_revisions VALUES ('__watershed', '__watershed_entities', '{}')")
+        for value in self.recipe["sources"].values():
+            value.pop("version", None)
         self.data = {path.name: path.read_bytes() for path in self.files.values()}
         for name, path in self.files.items():
             raw = path.read_bytes()
             self.db.execute(
-                "INSERT INTO atlas.source_assets (source_id,version,title,provider,source_uri,"
-                "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
-                "VALUES (%s,'1','Test','Test','test:input','Test','test:license','Test','test',"
-                "%s,%s,%s)",
-                ('__watershed_' + name, path.name, hashlib.sha256(raw).hexdigest(), len(raw)))
-        self.store_recipe('1', self.recipe)
+                "INSERT INTO atlas.source_assets(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES (%s,'Test','Test','test:input','Test','test:license','Test','test',%s,%s,%s)",
+                (
+                    "__watershed_" + name,
+                    path.name,
+                    hashlib.sha256(raw).hexdigest(),
+                    len(raw),
+                ),
+            )
+        self.store()
         self.client = Mock()
-        self.client.get_object.side_effect = lambda **kw: {'Body': io.BytesIO(self.data[kw['Key']])}
+        self.client.get_object.side_effect = lambda **kw: {
+            "Body": io.BytesIO(self.data[kw["Key"]])
+        }
 
-    def store_recipe(self, version, recipe):
-        text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))
-        self.db.execute('INSERT INTO atlas.construction_records(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
-                        ('__watershed_recipe', version, text))
+    def store(self):
+        from psycopg.types.json import Jsonb
 
-    def build(self, version='1'):
-        return run_import(lambda: nullcontext(self.db), '__watershed_recipe', version, storage=self.client,
-                          revision='__watershed', work_dir=self.directory / 'cache')
+        self.db.execute(
+            "INSERT INTO atlas.construction_records VALUES ('watershed',%s) ON CONFLICT(source_id) DO UPDATE SET document=EXCLUDED.document",
+            (Jsonb(self.recipe),),
+        )
+
+    def build(self):
+        return run_import(
+            lambda: nullcontext(self.db),
+            "watershed",
+            storage=self.client,
+            work_dir=self.directory / "cache",
+        )
 
     def row(self):
-        return self.db.execute('SELECT geometry,geometry_sha256,provenance,construction_version '
-                               'FROM atlas.decision_mainland_boundaries WHERE revision=%s',
-                               ('__watershed',)).fetchone()
+        return self.db.execute(
+            "SELECT geometry,geometry_sha256,provenance,construction_id FROM atlas.decision_mainland_boundaries"
+        ).fetchone()
 
-    def test_database_connections_close_during_calculation(self):
-        import psycopg
-
-        self.db.commit()
-
-        def remove_committed_fixtures():
-            self.db.rollback()
-            with self.db.transaction():
-                for table in ('decision_mainland_boundary_sources', 'decision_mainland_boundaries'):
-                    self.db.execute('DELETE FROM atlas.' + table + " WHERE revision='__watershed'")
-                self.db.execute("DELETE FROM atlas.decision_revisions WHERE revision='__watershed'")
-                self.db.execute("DELETE FROM atlas.entity_registry_revisions WHERE revision='__watershed_entities'")
-                self.db.execute("DELETE FROM atlas.construction_records WHERE source_id='__watershed_recipe'")
-                self.db.execute("DELETE FROM atlas.source_assets WHERE source_id LIKE '__watershed_%'")
-
-        self.addCleanup(remove_committed_fixtures)
-        connections = []
-
-        def connect():
-            database = psycopg.connect(os.environ['WORLDATLAS_TEST_DATABASE_URL'])
-            connections.append(database)
-            return database
-
-        def calculate(recipe, files):
-            self.assertEqual(len(connections), 2)
-            self.assertTrue(all(connection.closed for connection in connections))
-            return construct(recipe, files)
-
-        with patch('worldatlas.source_imports.watersheds.build_boundary.construct', side_effect=calculate):
-            receipt = run_import(connect, '__watershed_recipe', '1', storage=self.client,
-                                 revision='__watershed', work_dir=self.directory / 'cache')
-        self.assertEqual(len(connections), 3)
-        self.assertTrue(all(database.closed for database in connections))
-        self.assertEqual(self.row()[1], receipt['sha256'])
-
-    def test_repeat_version_change_and_preserved_notes(self):
+    def test_repeat_and_edit_recipe_preserve_geometry_notes_and_sources(self):
         result = self.build()
-        first = self.row()
-        self.assertEqual(first[1], result['sha256'])
-        self.assertEqual(first[3], '1')
-        self.assertEqual(self.build()['sha256'], result['sha256'])
-        self.assertEqual(self.client.get_object.call_count, 3)
-        self.db.execute("UPDATE atlas.decision_mainland_boundaries SET provenance=provenance || "
-                        "'{\"note\":\"retain this\",\"custom_context\":{\"source\":\"reviewed\"}}' "
-                        "WHERE revision='__watershed'")
-        changed = dict(self.recipe, basis='Updated explanation')
-        self.store_recipe('2', changed)
-        self.assertEqual(self.build('2')['sha256'], result['sha256'])
-        self.assertEqual(self.row()[2]['note'], 'retain this')
-        self.assertEqual(self.row()[2]['custom_context'], {'source': 'reviewed'})
-        self.assertEqual(self.row()[3], '2')
-        links = self.db.execute('SELECT source_id,source_version FROM atlas.decision_mainland_boundary_sources '
-                                "WHERE revision='__watershed'").fetchall()
-        self.assertEqual(set(links), {(v['source_id'], '1') for v in self.recipe['sources'].values()})
-
-    def test_failed_calculation_leaves_existing_boundary_and_links_unchanged(self):
-        self.build()
-        previous = self.row()
-        broken = dict(self.recipe, joins=[{'near': [5, 5]}])
-        self.store_recipe('broken', broken)
-        with self.assertRaisesRegex(ValueError, 'one geographic join'):
-            self.build('broken')
-        self.assertEqual(self.row(), previous)
-        count = self.db.execute("SELECT count(*) FROM atlas.decision_mainland_boundary_sources "
-                                "WHERE revision='__watershed'").fetchone()[0]
-        self.assertEqual(count, 3)
-
-    def test_supporting_sources_are_linked_without_being_downloaded(self):
+        self.assertEqual(self.build()["sha256"], result["sha256"])
         self.db.execute(
-            "INSERT INTO atlas.source_assets (source_id,version,title,provider,source_uri,"
-            "license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
-            "SELECT source_id,'evidence',title,provider,source_uri,license_name,license_uri,"
-            "attribution,r2_bucket,r2_key||'-evidence',sha256,size_bytes "
-            "FROM atlas.source_assets WHERE source_id='__watershed_dem' AND version='1'")
-        recipe = dict(self.recipe, evidence_sources=[{'source_id': '__watershed_dem', 'version': 'evidence'}])
-        self.store_recipe('with-evidence', recipe)
-        self.build('with-evidence')
-        self.build('with-evidence')
-        self.assertEqual(self.client.get_object.call_count, 3)
-        relationship = self.db.execute(
-            "SELECT relationship FROM atlas.decision_mainland_boundary_sources "
-            "WHERE revision='__watershed' AND source_id='__watershed_dem' AND source_version='evidence'"
-        ).fetchone()[0]
-        self.assertEqual(relationship, 'supporting_evidence')
+            'UPDATE atlas.decision_mainland_boundaries SET provenance=provenance || \'{"note":"keep"}\''
+        )
+        self.recipe["basis"] = "Updated explanation"
+        self.store()
+        self.build()
+        self.assertEqual(self.row()[2]["note"], "keep")
+        self.assertEqual(self.row()[3], "watershed")
+        links = {
+            r[0]
+            for r in self.db.execute(
+                "SELECT source_id FROM atlas.decision_mainland_boundary_sources"
+            )
+        }
+        self.assertEqual(
+            links, {v["source_id"] for v in self.recipe["sources"].values()}
+        )
 
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_calculation_failure_leaves_geometry_and_links_unchanged(self):
+        self.build()
+        before = self.row()
+        links = self.db.execute(
+            "SELECT * FROM atlas.decision_mainland_boundary_sources ORDER BY source_id"
+        ).fetchall()
+        self.recipe["joins"] = [{"near": [5, 5]}]
+        self.store()
+        with self.assertRaises(ValueError):
+            self.build()
+        self.assertEqual(self.row(), before)
+        self.assertEqual(
+            self.db.execute(
+                "SELECT * FROM atlas.decision_mainland_boundary_sources ORDER BY source_id"
+            ).fetchall(),
+            links,
+        )

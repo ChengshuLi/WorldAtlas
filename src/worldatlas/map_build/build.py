@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from worldatlas.map_build.inputs.selection import geographic_domain, selection_domains
+
 import argparse
 import copy
 from contextlib import closing
@@ -123,13 +125,13 @@ def catalog_keys(value):
         identity = spec['r2_source']
         if (
             not isinstance(identity, dict)
-            or set(identity) != {'source_id', 'version'}
+            or not {'source_id'} <= set(identity) <= {'source_id', 'version'}
             or any(not isinstance(v, str) or not v.strip() for v in identity.values())
             or {'r2_bucket', 'r2_key', 'source_id', 'version', 'sha256', 'size_bytes', 'size'}
             & spec.keys()
         ):
             raise ValueError('invalid raw catalog reference')
-        requested.add((identity['source_id'], identity['version']))
+        requested.add((identity['source_id'], identity.get('version')))
     return requested
 
 
@@ -158,7 +160,14 @@ def physical_reference(run, sources):
         previous = Path(identity[key]['path'])
         if sha(previous) != identity[key]['sha256']:
             raise ValueError('physical source configuration changed: ' + key)
-        data = lambda value: {k: v for k, v in value.items() if k != 'selection_notes'}
+        def data(value):
+            if isinstance(value, list):
+                return [data(item) for item in value]
+            if isinstance(value, dict):
+                # Old catalog labels do not change pinned bytes or rasterization.
+                return {key: data(item) for key, item in value.items()
+                        if key != 'selection_notes' and not (key == 'version' and 'source_id' in value)}
+            return value
         if data(read(previous)) != data(read(sources[selected])):
             raise ValueError('physical input differs from the source run: ' + key)
     output = root / 'physical'
@@ -196,7 +205,6 @@ class Pipeline:
         *,
         resume=False,
         work_dir=None,
-        land_revision=None,
         compare_release=None,
         physical_from=None,
         selection=None,
@@ -237,32 +245,22 @@ class Pipeline:
         self.acquisition_intervals = []
         self.selection = None
         selected_path = self.out / 'input-selection.json'
-        revisions = copy.deepcopy(self.cfg.get('decision_revisions'))
-        if land_revision is not None and revisions is not None:
-            revisions['mainland'] = land_revision
         if resume and selected_path.is_file():
-            self.selection = read_saved(selected_path, revisions)
-            if selection is not None and canonical_bytes(read_saved(selection)) != canonical_bytes(
-                self.selection
-            ):
+            self.selection = read_saved(selected_path)
+            if selection is not None and canonical_bytes(read_saved(selection)) != canonical_bytes(self.selection):
                 raise ValueError('resume uses a different saved geographic selection')
         elif selection is not None:
-            self.selection = read_saved(selection, revisions)
-        elif revisions:
+            self.selection = read_saved(selection)
+        else:
             import psycopg
-
             connection = os.environ.get('NEON_DATABASE_URL')
             if not connection:
-                raise ValueError('set NEON_DATABASE_URL to freeze the working geographic selection')
+                raise ValueError('set NEON_DATABASE_URL to freeze working geography, or supply --selection')
             with psycopg.connect(connection, connect_timeout=15) as database:
-                references = catalog_keys(self.cfg.get('sources', {}))
-                self.selection = read_selection(database, revisions, raw_sources=references)
-        if self.selection is not None:
-            if set(self.selection['domains']) != {'mainland', 'regional', 'water', 'ocean'}:
-                raise ValueError('a map build needs mainland, regional, water and ocean selections')
-            selected_revision = self.selection['revisions']['mainland']
-            if land_revision is not None and land_revision != selected_revision:
-                raise ValueError('mainland argument differs from the saved selection')
+                references = {key[0] for key in catalog_keys(self.cfg.get('sources', {}))}
+                self.selection = read_selection(database, raw_sources=references)
+        if set(selection_domains(self.selection)) != {'mainland', 'regional', 'water', 'ocean'}:
+            raise ValueError('a map build needs mainland, regional, water and ocean selections')
         required = {'land_config', 'water_config', 'raw_manifest'}
         selections = self.cfg.get('sources', {})
         if (
@@ -420,53 +418,33 @@ class Pipeline:
 
         requested = catalog_keys(resolved)
 
-        rows = sorted(self.neon_raw_catalog(sorted(requested)))
-        catalog = {(row[0], row[1]): row for row in rows}
+        rows = self.neon_raw_catalog(requested)
+        catalog = {key: row for key, row in rows}
         if catalog.keys() != requested:
-            raise ValueError('Neon raw catalog is missing selected source versions')
+            raise ValueError('raw catalog is missing selected sources')
         for spec, size_field in references:
             identity = spec.pop('r2_source')
-            source_id, version, bucket, key, digest, size = catalog[
-                identity['source_id'], identity['version']
-            ]
-            spec.update(
-                source_id=source_id, version=version, r2_bucket=bucket, r2_key=key, sha256=digest
-            )
-            spec[size_field] = size
+            source = catalog[identity['source_id'], identity.get('version')]
+            spec.update({key: source[key] for key in ('source_id', 'r2_bucket', 'r2_key', 'sha256')})
+            spec[size_field] = source['size_bytes']
         return resolved
 
     def neon_raw_catalog(self, requested):
         if self.selection is not None:
-            wanted = set(requested)
-            return [
-                tuple(
-                    source[key]
-                    for key in (
-                        'source_id',
-                        'version',
-                        'r2_bucket',
-                        'r2_key',
-                        'sha256',
-                        'size_bytes',
-                    )
-                )
-                for source in self.selection['raw_sources']
-                if (source['source_id'], source['version']) in wanted
-            ]
+            # Older archives can contain multiple captures under one source ID.
+            # Match their saved version metadata without querying today's catalog.
+            return [(key, source) for key in requested for source in self.selection['raw_sources']
+                    if source['source_id'] == key[0]
+                    and (key[1] is None or source.get('version') == key[1])]
         import psycopg
-
         connection = os.environ.get('NEON_DATABASE_URL')
         if not connection:
-            raise ValueError('set NEON_DATABASE_URL for read-only access to the raw source catalog')
-        source_ids, versions = zip(*requested, strict=True)
+            raise ValueError('set NEON_DATABASE_URL for read-only catalog access')
         with psycopg.connect(connection) as database:
             database.execute('SET TRANSACTION READ ONLY')
-            return database.execute(
-                "SELECT a.source_id, a.version, a.r2_bucket, a.r2_key, a.sha256, a.size_bytes "
-                "FROM atlas.source_assets AS a "
-                "JOIN unnest(%s::text[], %s::text[]) AS selected(source_id, version) USING (source_id, version)",
-                (list(source_ids), list(versions)),
-            ).fetchall()
+            rows = database.execute("SELECT to_jsonb(a) FROM atlas.source_assets a WHERE source_id=ANY(%s)",
+                                    (sorted({key[0] for key in requested}),)).fetchall()
+        return [((row[0]['source_id'], None), row[0]) for row in rows]
 
     def cloud_file(self, spec):
         """Resolve one pinned R2 file or ZIP member locally."""
@@ -816,7 +794,7 @@ class Pipeline:
         from worldatlas.map_build.land.regional import build_regional
 
         grid = Grid(**read(physical / 'report.json')['grid'])
-        selected = self.selection['domains']['mainland']
+        selected = geographic_domain(self.selection, 'mainland')
         common = [pin(self.out / 'input-selection.json'), pin(physical / 'report.json')]
         common += [pin(physical / name) for name in ('rows.u32le', 'runs.u32le')]
         component_directory = self.out / 'components'
@@ -1044,10 +1022,6 @@ def main():
         help='validate and continue the same checkpoint-enabled run',
     )
     p.add_argument('--selection', type=Path, help='replay a saved complete geographic selection')
-    p.add_argument(
-        '--land-revision',
-        help='build a candidate from the selected working mainland revision in Neon',
-    )
     p.add_argument('--compare-release', help='compare with an official version or numbered candidate in Neon')
     p.add_argument(
         '--physical-from',
@@ -1060,7 +1034,6 @@ def main():
         a.output,
         resume=a.resume,
         work_dir=a.work_dir,
-        land_revision=a.land_revision,
         compare_release=a.compare_release,
         physical_from=a.physical_from,
         selection=a.selection,

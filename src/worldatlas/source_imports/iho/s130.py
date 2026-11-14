@@ -17,7 +17,7 @@ def validate_recipe(recipe):
     from worldatlas.source_imports.contracts import bind_document
     from worldatlas.source_imports.iho.build_routes import s130_rhumb_routes
     bind_document(s130_rhumb_routes, {key: value for key, value in recipe.items()
-                                    if key not in ('recipe_id', 'recipe_version')})
+                                    if key not in ('recipe_id',)})
     if not 0 < recipe['max_step_km'] <= 1:
         raise ValueError('max_step_km must be in (0,1]')
     if not recipe['routes']:

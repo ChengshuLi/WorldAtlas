@@ -1,4 +1,6 @@
 """Apply selected structured geographic records to current land components."""
+from worldatlas.map_build.inputs.selection import geographic_domain, selection_domains
+
 
 import json
 from pathlib import Path
@@ -26,8 +28,8 @@ def build_regional(
 ):
     """Resolve working geographic rules and return final land paths and counts."""
     started = time.monotonic()
-    validate_bindings(selection['domains'])
-    domain = selection['domains']['regional']
+    validate_bindings(selection_domains(selection))
+    domain = geographic_domain(selection, 'regional')
     rules = domain['affiliations']
     directory = Path(directory)
     directory.mkdir()
@@ -72,8 +74,8 @@ def build_regional(
                 entities[root] = entity
             islands.append(result)
         geographic = (
-            build_partitions(selection['domains']['mainland'])
-            if 'mainland' in selection['domains']
+            build_partitions(geographic_domain(selection, 'mainland'))
+            if 'mainland' in selection_domains(selection)
             else []
         )
         result = compose_land(

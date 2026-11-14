@@ -63,7 +63,7 @@ worldatlas-build src/worldatlas/map_build/config.json \
   --work-dir /absolute/path/to/worldatlas-work
 ```
 
-The configuration selects versioned geographic decisions and source records in
+The pipeline freezes working geographic decisions and exact source records from
 Neon. The pipeline downloads the raw bytes from R2 and builds the physical grid,
 then assigns land and water categories. The final grid has 131,072 columns and
 54,614 rows. The pipeline guide covers credentials, the GDAL and PROJ versions
@@ -98,9 +98,8 @@ and decoded checksums are verified. See the
 ## Entity registry
 
 The [initial schema](database/schema.sql) defines stable entity
-IDs and colors, revisioned names and parent relationships, and the bindings from map
-category codes to entities. Use the registry revision selected by the
-decision snapshot.
+IDs and colors, editable names and parent relationships, and the bindings from map
+category codes to entities. Each build freezes the working records before computation.
 
 Apply the [initial schema](database/schema.sql) only to an empty database.
 The working database is already initialized. The [database guide](database/README.md)
