@@ -254,7 +254,9 @@ def sql_object(value, fields, depth=0):
                 f"(NOT {value} ? {literal(name)} OR COALESCE({expression}, FALSE))"
             )
         else:
-            expression = f"COALESCE({expression}, FALSE)"
+            expression = (
+                f"({value} ? {literal(name)} AND COALESCE({expression}, FALSE))"
+            )
         conditions.append(expression)
     return (
         f"CASE WHEN jsonb_typeof({value}) = 'object' THEN (\n    "

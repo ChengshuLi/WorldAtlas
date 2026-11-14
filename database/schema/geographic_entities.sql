@@ -22,26 +22,31 @@ CREATE TABLE atlas.geographic_entities (
 CREATE FUNCTION atlas.check_geographic_entity_parent() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
-DECLARE parent_level text;
+DECLARE
+  entity atlas.geographic_entities%ROWTYPE;
+  parent_level text;
 BEGIN
-  IF NEW.parent_id IS NOT NULL THEN
+  -- Deferred events may describe an earlier edit, or a row deleted later.
+  SELECT * INTO entity FROM atlas.geographic_entities WHERE id = NEW.id;
+  IF NOT FOUND THEN RETURN NULL; END IF;
+  IF entity.parent_id IS NOT NULL THEN
     SELECT level INTO parent_level FROM atlas.geographic_entities
-      WHERE id = NEW.parent_id;
-    IF parent_level IS DISTINCT FROM (CASE NEW.level
+      WHERE id = entity.parent_id FOR SHARE;
+    IF parent_level IS DISTINCT FROM (CASE entity.level
       WHEN 'subcontinent' THEN 'continent' WHEN 'region' THEN 'subcontinent'
       WHEN 'area' THEN 'region' WHEN 'province' THEN 'area'
       WHEN 'location' THEN 'province' END) THEN
-      RAISE EXCEPTION 'invalid parent level for entity %', NEW.id;
+      RAISE EXCEPTION 'invalid parent level for entity %', entity.id;
     END IF;
   END IF;
   -- A parent's level change must not invalidate existing children.
   IF EXISTS (SELECT 1 FROM atlas.geographic_entities c
-    WHERE c.parent_id = NEW.id
-      AND NEW.level IS DISTINCT FROM (CASE c.level
+    WHERE c.parent_id = entity.id
+      AND entity.level IS DISTINCT FROM (CASE c.level
         WHEN 'subcontinent' THEN 'continent' WHEN 'region' THEN 'subcontinent'
         WHEN 'area' THEN 'region' WHEN 'province' THEN 'area'
         WHEN 'location' THEN 'province' END)) THEN
-    RAISE EXCEPTION 'invalid child level for entity %', NEW.id;
+    RAISE EXCEPTION 'invalid child level for entity %', entity.id;
   END IF;
   RETURN NULL;
 END; $$;
@@ -49,13 +54,13 @@ END; $$;
 
 CREATE CONSTRAINT TRIGGER geographic_entity_parent_check AFTER INSERT OR UPDATE ON atlas.geographic_entities DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_entity_parent();
 
-CREATE TABLE atlas.review_category_bindings (
+CREATE TABLE atlas.map_category_bindings (
     code bigint NOT NULL,
     entity_id bigint NOT NULL,
     physical_class text NOT NULL,
-    CONSTRAINT review_category_bindings_code_check CHECK (((code >= 1) AND (code <= '4294967295'::bigint))),
-    CONSTRAINT review_category_bindings_physical_class_check CHECK ((physical_class = ANY (ARRAY['land'::text, 'water'::text]))),
-    CONSTRAINT review_category_bindings_pkey PRIMARY KEY (code),
-    CONSTRAINT review_category_bindings_entity_id_physical_class_key UNIQUE (entity_id, physical_class),
-    CONSTRAINT review_category_bindings_entity_id_fkey FOREIGN KEY (entity_id) REFERENCES atlas.geographic_entities(id)
+    CONSTRAINT map_category_bindings_code_check CHECK (((code >= 1) AND (code <= '4294967295'::bigint))),
+    CONSTRAINT map_category_bindings_physical_class_check CHECK ((physical_class = ANY (ARRAY['land'::text, 'water'::text]))),
+    CONSTRAINT map_category_bindings_pkey PRIMARY KEY (code),
+    CONSTRAINT map_category_bindings_entity_id_physical_class_key UNIQUE (entity_id, physical_class),
+    CONSTRAINT map_category_bindings_entity_id_fkey FOREIGN KEY (entity_id) REFERENCES atlas.geographic_entities(id)
 );

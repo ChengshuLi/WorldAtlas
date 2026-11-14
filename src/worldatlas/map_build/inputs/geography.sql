@@ -34,7 +34,7 @@ SELECT jsonb_build_object(
     COALESCE(
                (SELECT jsonb_agg(to_jsonb(b)
                                  ORDER BY b.code)
-                FROM atlas.review_category_bindings b
+                FROM atlas.map_category_bindings b
                 ),'[]'::jsonb),
   'features',
     COALESCE(

@@ -23,6 +23,10 @@ color together. The top hierarchy level currently uses `continent` for both
 continents and top-level oceans. Location-level entities have a land/water class;
 map-code bindings also distinguish land from water.
 
+`map_category_bindings` maps grid codes to geographic entities and land/water
+classes. Water ownership remains distinct even when every water cell uses the
+same display color.
+
 Each table's constraints and supporting functions are kept beside its definition.
 These files define structure only. Source records, colors, geographic choices and
 construction settings are loaded separately into Neon.

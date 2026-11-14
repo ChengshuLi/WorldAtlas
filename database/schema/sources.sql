@@ -44,7 +44,6 @@ CREATE TRIGGER source_asset_immutable BEFORE UPDATE ON atlas.source_assets FOR E
 CREATE TABLE atlas.construction_records (
     source_id text NOT NULL,
     document jsonb NOT NULL,
-    CONSTRAINT construction_records_document_check CHECK ((jsonb_typeof(document) = 'object'::text)),
     CONSTRAINT construction_records_source_id_check CHECK ((length(btrim(source_id)) > 0)),
     CONSTRAINT construction_records_pkey PRIMARY KEY (source_id)
 );

@@ -111,7 +111,7 @@ class SelectionTests(unittest.TestCase):
             "INSERT INTO atlas.geographic_entities(id,name,level,color_rgb) VALUES (970000001,'Selected entity','continent','#123456')"
         )
         self.writer.execute(
-            "INSERT INTO atlas.review_category_bindings VALUES (17,970000001,'land')"
+            "INSERT INTO atlas.map_category_bindings VALUES (17,970000001,'land')"
         )
         self.writer.execute(
             "INSERT INTO atlas.source_assets(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES ('__selected_raw','Test','Test','test:source','Test','test:license','Test','test','source.geojson',%s,1)",
@@ -136,7 +136,7 @@ class SelectionTests(unittest.TestCase):
             "DELETE FROM atlas.source_assets WHERE source_id='__selected_raw'"
         )
         self.writer.execute(
-            "DELETE FROM atlas.review_category_bindings WHERE entity_id=970000001"
+            "DELETE FROM atlas.map_category_bindings WHERE entity_id=970000001"
         )
         self.writer.execute("DELETE FROM atlas.geographic_entities WHERE id=970000001")
 
@@ -236,3 +236,65 @@ class SelectionTests(unittest.TestCase):
             first = read_selection(ConcurrentEdit())
         self.assertEqual(entity_colors(first)[0]["color_rgb"], "#123456")
         self.assertEqual(entity_colors(self.read())[0]["color_rgb"], "#654321")
+
+
+@unittest.skipUnless(
+    os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
+)
+class HierarchyConcurrencyTests(unittest.TestCase):
+    def test_parent_change_and_child_insert_cannot_commit_an_invalid_hierarchy(self):
+        from concurrent.futures import ThreadPoolExecutor
+        import threading
+        import time
+
+        url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
+        ids = [970100001, 970100002, 970100003]
+        with psycopg.connect(url, autocommit=True) as setup:
+            setup.execute(
+                "INSERT INTO atlas.geographic_entities(id,name,level) VALUES (%s,'First','continent'),(%s,'Second','continent')",
+                ids[:2],
+            )
+        try:
+            with (
+                psycopg.connect(url) as parent,
+                psycopg.connect(url) as child,
+                psycopg.connect(url, autocommit=True) as observer,
+                ThreadPoolExecutor(1) as workers,
+            ):
+                parent.execute(
+                    "UPDATE atlas.geographic_entities SET level='subcontinent',parent_id=%s WHERE id=%s",
+                    (ids[1], ids[0]),
+                )
+                parent.execute("SET CONSTRAINTS ALL IMMEDIATE")
+
+                def add_child():
+                    child.execute(
+                        "INSERT INTO atlas.geographic_entities(id,name,level,parent_id) VALUES (%s,'Child','subcontinent',%s)",
+                        (ids[2], ids[0]),
+                    )
+                    child.commit()
+
+                result = workers.submit(add_child)
+                deadline = time.monotonic() + 5
+                while not result.done():
+                    blockers = observer.execute(
+                        "SELECT pg_blocking_pids(%s)", (child.info.backend_pid,)
+                    ).fetchone()[0]
+                    if parent.info.backend_pid in blockers:
+                        break
+                    if time.monotonic() >= deadline:
+                        parent.rollback()
+                        self.fail(
+                            "child insertion did not resolve or wait for the parent edit"
+                        )
+                    threading.Event().wait(0.01)
+                parent.commit()
+                with self.assertRaisesRegex(
+                    psycopg.errors.RaiseException, "invalid parent level"
+                ):
+                    result.result(timeout=5)
+        finally:
+            with psycopg.connect(url) as cleanup:
+                cleanup.execute(
+                    "DELETE FROM atlas.geographic_entities WHERE id=ANY(%s)", (ids,)
+                )
