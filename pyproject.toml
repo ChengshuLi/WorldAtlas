@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "worldatlas"
+version = "0.1.0"
+description = "Construct geographic records and versioned maps from cataloged sources"
+requires-python = ">=3.13"
+
+[project.scripts]
+worldatlas-import = "worldatlas.source_imports.run_import:main"
+worldatlas-build = "worldatlas.map_build.build:main"
+worldatlas-release = "worldatlas.map_releases.manage_release:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["worldatlas*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"*" = ["*.md"]
+"worldatlas.map_build" = ["config.json"]
+"worldatlas.map_build.inputs" = ["geography.sql"]
+"worldatlas.map_build.land" = ["assignment_report.js", "assignment_report.css"]
+
+# Ship the same setup definitions used from a checkout; no duplicate copies to maintain.
+[tool.setuptools.data-files]
+"share/worldatlas" = ["environment.yml", "pyproject.toml", "README.md"]

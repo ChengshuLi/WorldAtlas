@@ -1,0 +1,51 @@
+name: Checks
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-file: environment.yml
+          cache-environment: true
+          cache-environment-key: sources-${{ runner.arch }}-${{ hashFiles('environment.yml') }}
+      - name: Install WorldAtlas
+        shell: bash -el {0}
+        run: python -m pip install --no-deps --force-reinstall .
+      - name: Run Python and database tests in parallel
+        shell: bash -el {0}
+        env:
+          TMPDIR: ${{ runner.temp }}
+          PROJ_NETWORK: 'OFF'
+        run: python .github/scripts/run_tests.py
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Run website tests in parallel
+        env:
+          PLAYWRIGHT_CHANNEL: chrome
+        run: |
+          npm test & unit_tests=$!
+          npm run test:browser & browser_tests=$!
+          status=0
+          wait "$unit_tests" || status=1
+          wait "$browser_tests" || status=1
+          exit "$status"

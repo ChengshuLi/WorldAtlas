@@ -1,11 +1,19 @@
 # WorldAtlas Data Strategy
 
+This document describes the design for the full project. The [pipeline guide](../src/worldatlas/map_build/README.md) describes the current build.
+
 ## Contents
 
 - [1. General](#1-general)
   - [Architecture and data lifecycle](#architecture-and-data-lifecycle)
 - [2. Geography](#2-geography)
   - [Geographic framework and grid](#geographic-framework-and-grid)
+    - [Map projection and dimensions](#map-projection-and-dimensions)
+    - [Geographic hierarchy](#geographic-hierarchy)
+    - [Classifying and assigning cells](#classifying-and-assigning-cells)
+    - [Land rules](#land-rules)
+    - [Water rules](#water-rules)
+    - [Editable records and published grid](#editable-records-and-published-grid)
   - [Research, cell review, publication, and rivers](#research-cell-review-publication-and-rivers)
   - [Derived geographic relationships](#derived-geographic-relationships)
   - [Map rendering](#map-rendering)
@@ -18,6 +26,8 @@
     - [Time-dependent location attributes](#time-dependent-location-attributes)
     - [Time-agnostic location attributes](#time-agnostic-location-attributes)
   - [C. Political entities](#c-political-entities)
+    - [Subordination relationship](#subordination-relationship)
+    - [Primary government type](#primary-government-type)
   - [D. Trade relationships](#d-trade-relationships)
   - [E. App representation](#e-app-representation)
 
@@ -25,43 +35,71 @@
 
 ### Architecture and data lifecycle
 
-Geography and historical attributes use three logical responsibilities:
+Geography and historical attributes use three kinds of records.
 
-1. **Evidence** retains original sources, conflicting claims, and their links to conclusions. Store original files of any size in R2; Neon tracks references, dates, and checksums without duplicating source files.
-2. **Research** stores versioned geometry, values, reasoning, provenance, and review state.
-3. **Published data** exposes only accepted records to the app.
+1. **Evidence** retains original sources, conflicting claims, and their links to conclusions. Store original files of any size in R2. Neon records their references, dates, and checksums.
+2. **Editable data** stores geometry, values, reasoning and provenance in Neon. Versioned construction records describe how to regenerate source-derived geography.
+3. **Published releases** contain the reviewed map, viewer and metadata for an exact saved input selection.
 
-These are logical roles, not a requirement for three separate databases or duplicate copies. Drafts stay out of the app. Keep the accepted revision visible until a replacement is validated, reviewed, and accepted; make acceptance and app visibility atomic.
+Workers can edit separate areas in parallel. Those edits do not change the published website, which reads immutable release files from R2. Build a numbered candidate, review its exact files and inputs, then publish those same files. Approval belongs to the candidate; individual editable records do not need a separate draft/accepted workflow.
 
-GitHub tracks code, schemas, documentation, and task issues; the user merges pull requests.
+GitHub tracks code, schemas, documentation, and task issues. The user merges pull requests.
 
 ## 2. Geography
 
 ### Geographic framework and grid
 
-Use a flat, 2D equirectangular (Plate Carrée) map with equal longitude and latitude steps. The fixed, time-agnostic geographic hierarchy is **location → province → area → region → subcontinent → continent**. Use reasonably recent reliable administrative boundaries, older where necessary; record source dates and allow different reference dates by location, with no common reference year. Freeze chosen footprints across history. Use one fixed, current-reference display name for each unit.
+#### Map projection and dimensions
 
-Start with six land continents, excluding Antarctica, plus ocean groups. Every cell within the chosen map coverage belongs to exactly one land or non-river-water location. Land-continent groups include nearby seas, island-region waters, and lakes; ocean groups cover remaining ocean waters. Broad waters may be grouped with relevant continents, and large seas may be shared by adjacent groups. Non-river-water locations are named and selectable. Small lakes and islands may not resolve at this scale. Flag inhabited islands too small to resolve during the first continent review and assess whether a higher resolution is warranted.
+Use a flat, 2D equirectangular (Plate Carrée) map with equal longitude and latitude steps of 0.00274658203125°. The full-world reference grid is 131,072 × 65,536. Keep the northern edge at 90°N and crop the map at about 60°S. Aligning the crop to a row edge gives a final grid of 131,072 × 54,614 cells (7,158,366,208), with a southern edge of 60.0018310546875°S.
 
-Every land cell belongs to an ordinary location. Research sparse areas in proportion to their significance; locations have no imposed maximum size. User-approved subdivisions fully cover their parent cells without gaps, overlaps, or cells outside the parent. Check lower-level administrative boundaries for compatibility before approving a higher-level division. Investigate source-polygon gaps and overlaps, and document any approximation rule and its consequences.
+#### Geographic hierarchy
 
-Assign a cell’s land or water type by the greatest total covered area; land wins an exact tie. Within the winning type, assign the location with the greatest overlap; stable location IDs break remaining ties.
+Use the same geographic hierarchy throughout history. From smallest to largest, the levels are **location → province → area → region → subcontinent → continent**. Start with six land continents, excluding Antarctica, plus ocean groups. Give each unit one fixed display name based on the current reference.
 
-Use equal equirectangular steps of 0.02197265625°. The full-world reference grid is 16,384 × 8,192; crop at nominal 60°S while retaining 90°N. Row alignment gives a final grid of 16,384 × 6,827 cells (111,853,568), with a southern edge of 60.00732421875°S. Store one canonical, losslessly compressed grid, initially unpartitioned. Each unsigned 16-bit value is the numeric location ID itself; reserve 0 during construction, leaving 65,535 usable values, and widen to 32-bit if needed. Every published cell is assigned. Compression size is unmeasured.
+#### Classifying and assigning cells
 
-Editable geography records in Neon/PostGIS use stable numeric IDs, names, hierarchy levels and parents, and source polygons; locations also record land or water type. Code derives approved hierarchy, app tables, river display/selection data, and the canonical cell grid. Approved hierarchy and metadata are in Neon; the canonical cell-ID grid is in R2.
+Use each cell’s center to determine whether it is land or water and which location it belongs to. If a cell’s center falls exactly on a boundary shared by two or more locations, assign it to the location with the lowest stable numeric ID. Every cell within the map’s coverage belongs to exactly one land or non-river-water location.
+
+Investigate gaps and overlaps in source polygons before using them. Document any approximation and its consequences.
+
+#### Land rules
+
+Assign every land cell to an ordinary location. Use reasonably recent, reliable administrative boundaries, with older boundaries where necessary. Record each source date. Locations can use different reference dates with no common reference year. Keep the chosen boundaries fixed across history.
+
+Research sparse areas in proportion to their significance. Locations have no imposed maximum size. Check lower-level administrative boundaries for compatibility before approving a higher-level division. User-approved subdivisions must cover every cell in their parent area without gaps, overlaps, or cells outside the parent.
+
+We chose a grid resolution fine enough to give every important inhabited island and every island of historical or geographic significance at least one land cell.
+
+#### Water rules
+
+Non-river-water locations are named and selectable. Land-continent groups include nearby seas, island-region waters, and lakes. Ocean groups cover the remaining ocean waters. Broad waters may be grouped with relevant continents. Adjacent groups may share large seas. Some lakes may be too small to appear at this resolution.
+
+**Bounded and shared seas.** Group these seas separately using documented geographic limits, including their bays, sounds, and passages. List the waters that belong to each sea group. A source dataset may draw the main sea, its bays, and its passages separately. Apply the chosen geographic boundary convention consistently when source conventions differ.
+
+**Open coasts.** Use a uniform 12-nautical-mile (22.224-km) buffer. Measure the shortest distance along the WGS84 ellipsoid between the center of each water cell and the centers of coastal land cells on the grid. Where buffers overlap, use the nearer coast. Source islands absent from the land grid do not generate buffers. The buffer defines a geographic grouping for this map.
+
+**Ocean assignments and connections.** Verify ocean labels and check which cells connect by shared edges, across all oceans and within each one. Include connections where the map’s left and right edges meet. Explain any expected separations.
+
+**Enclosed water.** If a connected patch of water marked as ocean is surrounded by one continent, assign it to that continent. If the patch borders several continents and it is unclear which one it belongs to, review it before assigning it.
+
+#### Editable records and published grid
+
+Store editable geography records in Neon/PostGIS with stable numeric IDs, names, hierarchy levels and parents, and source polygons. Each location also records whether it is land or water. Code derives the approved hierarchy, app tables, river display and selection data, and the canonical cell grid. Neon holds the approved hierarchy and metadata. R2 holds the canonical cell-ID grid.
+
+Store one canonical logical grid. Use a compact lossless encoding such as row runs so the builder can write the grid incrementally and the viewer can load it all up front. In the location grid, each unsigned 16-bit value stores a location ID. Reserve 0 during construction, leaving 65,535 usable values, and widen to 32 bits if needed. Every published cell has an assignment. Compression size depends on the final geography.
 
 ### Research, cell review, publication, and rivers
 
-Generate candidate cell assignments from polygons and research inputs. Save parent-bounded proposal versions with sources, reasoning, review status, and a base revision; incomplete or invalid drafts may be retained for correction. Validate IDs, hierarchy, source-geometry usability, and the partition against approved parent cells: every parent cell is assigned once, with no gaps, overlaps, or cells outside the parent. Investigate source-polygon gaps and overlaps. Check conflicts only against affected records and relevant parent boundaries so separate areas can proceed concurrently; intermediate levels do not require worldwide completion.
+Generate candidate cell assignments from polygons and research inputs. For each proposal, record the geographic unit being divided, such as the province when proposing its locations. Store each proposal in Neon with its sources, reasoning, review status, and starting revision. Use the same approach at every level of the hierarchy. Keep incomplete or invalid drafts when they can be corrected. Check IDs, hierarchy, and whether the source geometry can be used. Each cell in the approved parent area must belong to exactly one child area, and every child cell must be inside the parent. Investigate source-polygon gaps and overlaps. Check conflicts against the affected records and relevant parent boundaries. Separate areas can proceed in parallel, and work can continue in one area while the same level is still being completed elsewhere.
 
 Each geography-research scope has one accountable owner from research through validation and delivery; separate areas can proceed concurrently.
 
-Rasterize each proposal to actual map cells at the chosen resolution, using IDs for that hierarchy level. These previews are transient; only the final location grid is canonical. At every level, the user reviews and approves the rendered cell map, not polygons or vertices: show the approved parent-cell boundary and labeled, color-coded child cells, with zoom/pan, selectable sources and rationale, and highlighted issues or inhabited-island exceptions. Only valid, user-approved proposals feed the next level or publication. A change to an approved parent requires renewed cell-map approval.
+Rasterize each proposal to actual map cells at the chosen resolution, using IDs for that hierarchy level. The previews are temporary. The final location grid is canonical. At each level, the user approves the rendered cell map. Show the approved parent boundary and labeled, color-coded child cells. Let the user zoom, pan, and inspect sources and reasoning. Highlight issues and inhabited-island exceptions. Only valid, user-approved proposals feed the next level or publication. A change to an approved parent requires renewed cell-map approval.
 
-Serialize shared-grid publication: derive from approved geography, upload a versioned grid to R2, recheck relevant revisions, then transactionally commit matching Neon results and the grid reference. Failed publication leaves the previous revision active; the app reads matching revisions.
+Build one release candidate from the selected geography and viewer code. Review the rendered candidate and record approval for its exact files and inputs. Publish shared-grid updates one at a time. Verify the candidate files, record the release and its grid references in Neon, then switch the homepage to those same files. The working geography remains editable for future releases.
 
-After all locations are finalized, complete a dedicated river-data and map-review pass before historical attribute research. Rivers are selectable line overlays with names and details, practical hit tolerance, and minimum visible width. River overlays preserve underlying cell location IDs. Store river IDs, names, source lines, and geographic access links.
+After all locations are finalized, complete a dedicated river-data and map-review pass before historical attribute research. Rivers are selectable line overlays with names and details, enough tolerance to select a river near its line, and minimum visible width. River overlays preserve underlying cell location IDs. Store river IDs, names, source lines, and geographic access links.
 
 ### Derived geographic relationships
 
@@ -71,7 +109,7 @@ For land locations, derive lake access from neighboring locations classified as 
 
 ### Map rendering
 
-Load and reuse the single compressed grid with local cell picking by ID, viewer-device WebGL/GPU rendering, and pan/zoom redraws. Keep rivers, labels, highlights, and details as generic overlays loaded as needed. Use readable geographic names and familiar climate class names. Verify desktop and mobile responsiveness during implementation.
+Present one continuous world map with horizontal longitude wrapping and vertically clamped panning. Load and verify the complete native-resolution cell data up front before enabling map interaction, retaining a compact lossless representation rather than expanding the whole world into a dense bitmap. Zooming, panning, and cell picking operate entirely on the loaded data, with viewer-device WebGL/GPU rendering; do not fetch new geographic detail or substitute a different-resolution overview as the user navigates. Show a loading state until the map is ready. Keep rivers, labels, highlights, and details as generic overlays loaded as needed. Use readable geographic names and familiar climate class names. Verify desktop and mobile responsiveness during implementation.
 
 ## 3. History research
 
@@ -83,7 +121,7 @@ Every attribute—location or political entity, time-dependent or time-agnostic�
 
 Use whole years from 3000 BC through the current reference year, 2026. Display BC/AD dates with no year zero; interval start and end years are inclusive, so a period ending in 1600 is followed by one beginning in 1601. Represent approximate dates with a best-estimate year and preserve uncertainty in the evidence. Values may be intervals or point estimates; an annual record for every year is not required. For years between researched dates, use the best educated estimate with a method appropriate to the attribute.
 
-Each location attribute declares land, water, or both applicability. Time-dependent location attributes 1–15, including political control, port functions, and production, apply to land. Among time-agnostic attributes, Topography and Climate apply to land; Water type applies to water. The database rejects assignments that conflict with declared applicability. Water locations show Not applicable for land-only attributes. Population-dependent attributes 8–10 are Not applicable when population is zero. The app distinguishes Not applicable from Unknown. Each newly added attribute declares its applicability individually.
+Each location attribute declares land, water, or both applicability. Time-dependent location attributes 1–15, including political control, port functions, and production, apply to land. Among time-agnostic attributes, Topography and Climate apply to land; Water type applies to water. The database rejects assignments that conflict with declared applicability. Water locations show Not applicable for land-only attributes. Attributes 3–6 and 8–10 are Not applicable when population is zero, as specified below. The app distinguishes Not applicable from Unknown. Each newly added attribute declares its applicability individually.
 
 Historical research and published values may share versioned tables. An accepted-record view or pointer selects published values from research history.
 
@@ -111,7 +149,7 @@ All time-dependent location values retain their sources and estimate basis.
 
 1. **Population:** Total residents within the fixed location boundary at the selected time, including urban, suburban, and rural residents. Use supported counts or justified educated estimates, including zero, without double-counting residents. Population is researched independently and remains a fixed input to other calculations; it is not inferred from other attributes or adjusted to reconcile them. Use Unknown when no estimate is justified.
 
-2. **Location rank:** Classify the whole location as Uninhabited, Rural, Town, City, or Unknown according to historical character. Uninhabited means population zero; use it only when supported by evidence or a justified estimate. Sparse records, lack of permanent settlement, and present-day population alone do not establish uninhabited status; consider historical and seasonal habitation. Rural covers inhabited non-urban locations, including nomadic populations. A Town or City may include suburban areas and countryside. Rank is independent of total population.
+2. **Location rank:** Classify the whole location as Uninhabited, Rural, Town, City, or Unknown according to historical character. Uninhabited means population zero; use it only when supported by evidence or a justified estimate. Sparse records, lack of permanent settlement, and present-day population alone do not establish uninhabited status; consider historical and seasonal habitation. Rural covers inhabited non-urban locations, including nomadic populations. A Town or City may include suburban areas and countryside. For inhabited locations, population size alone does not determine rank.
 
 ##### Shared rules for attributes 3–5
 
@@ -133,7 +171,7 @@ Optional share breakdowns use one structure: **complete** accounts for the popul
 
 ##### Shared rules for attributes 8–9
 
-Research both measures for the same location, year, and fixed boundary, using independently researched Population (#1). When definitions and units are compatible, derive Total GDP as GDP per person × Population or GDP per person as Total GDP ÷ Population. If both measures are supportable, use the higher-confidence value and derive the other; if one is supportable, derive its counterpart; if neither is supportable, mark both Unknown. Retain all source evidence and the selection rationale.
+Research both measures for the same location, year, and fixed boundary. Use the independently researched Population (#1). With compatible definitions and units and a known positive population, calculate Total GDP as GDP per person × Population, or GDP per person as Total GDP ÷ Population. If both measures are supported, use the one with stronger evidence as the basis for the calculation. If only one is supported, use it to calculate the other when possible. Mark a value Unknown when the evidence and calculation cannot establish it. At zero population, both are Not applicable. Retain all source evidence and the reason for the choice.
 
 8. **GDP per person:** Annual economic output per resident for the fixed location and selected year, in constant 2021 international dollars using GDP purchasing-power parity (GDP-PPP). Record source and estimate basis; document a compatible conversion when using older source measures.
 
@@ -169,7 +207,7 @@ Research both measures for the same location, year, and fixed boundary, using in
    - **Continental, no dry season:** Dfa — Hot-summer humid continental; Dfb — Warm-summer humid continental; Dfc — Subarctic, no dry season; Dfd — Extremely cold subarctic, no dry season.
    - **Polar:** ET — Tundra; EF — Ice cap.
 
-   Sources: [GloH2O Köppen–Geiger maps](https://www.gloh2o.org/koppen/) and [Beck et al. (2023)](https://www.nature.com/articles/s41597-023-02549-6).
+   See the [GloH2O Köppen–Geiger dataset](https://www.gloh2o.org/koppen/) and [Beck et al. (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10593765/).
 
 ### C. Political entities
 
@@ -196,7 +234,9 @@ When descriptions overlap, select the best-fitting type as primary.
 
 ### D. Trade relationships
 
-Notable production (#15) and trade reference the same product catalog by stable ID; it may expand as research identifies notable goods. Qualitative production and trade records are the foundation; add product quantities when supported. Each quantity specifies product, amount, unit, and measurement year or period, distinguishing annual output from a shipment or multi-year total. Prefer product-specific units; convert only when justified, retaining the original measurement and conversion or estimate basis. Unknown means no defensible quantity, not zero. Trade quantities refer to a specified year within the connection’s active period.
+Notable production (#15) and trade reference the same product catalog by stable ID; it may expand as research identifies notable goods. Qualitative production and trade records are the foundation; add product quantities when supported. For each measured quantity, record the product, amount, unit, and year or period it covers. Distinguish annual output, individual shipments, and multi-year totals. Prefer product-specific units. When a conversion or estimate is justified, retain the original measurement and how the new value was calculated. Use Unknown when there is no defensible quantity. Use zero only when evidence or a justified estimate supports it.
+
+Each trade quantity belongs to one year within the connection’s active period. Keep multi-year totals as source evidence. Record a figure for a particular year only when the evidence supports that year’s figure or a justified estimate.
 
 Record significant directed connections between existing geographic units (location, province, area, region, subcontinent, or continent) or political entities. Endpoints may use different levels. Record from/to endpoints, active year or inclusive year span, one or more shared product IDs, transport by land, river, sea, or a known combination, and evidence or estimate basis. A location may trade goods it does not produce locally.
 
