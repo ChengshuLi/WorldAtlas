@@ -188,6 +188,7 @@ def _regional_claims(frozen, domain, rules, result, components):
                     feature_id=line["feature_id"],
                 ),
                 _component_entities=entities,
+                _display_name=record["rule_set_id"].replace("-", " ").replace("_", " ").capitalize(),
             )
         )
         result["claims"].append(
@@ -228,6 +229,14 @@ def write_report(
     spans = cell_spans(components, all_roots)
     totals = components.totals()
     current = resolved[0][3]["component_entities"]
+    current_references = {}
+    policy_number = 0
+    for number, rule in enumerate(resolved[0][2], 1):
+        if "_component_entities" in rule:
+            policy_number += 1
+            current_references[number] = f"P{policy_number}"
+        else:
+            current_references[number] = str(number)
     summaries = []
     index = []
     for label, domain, rules, result in resolved:
@@ -239,7 +248,8 @@ def write_report(
         claims = {
             c.get("assignment_id", c.get("affiliation_id")): c for c in result["claims"]
         }
-        section = []
+        assignment_rows, policy_rows = [], []
+        policy_number = 0
         folder = directory / label
         folder.mkdir(exist_ok=True)
         for number, rule in enumerate(rules, 1):
@@ -259,6 +269,10 @@ def write_report(
             background, stride = context_spans(components, bounds)
             entity = entities.get(rule["entity_id"], {})
             targets = rule.get("_component_entities")
+            if targets is not None:
+                policy_number += 1
+            reference = f"P{policy_number}" if targets is not None else str(number)
+            display_name = rule.get("_display_name", ident)
             entity_name = (
                 " / ".join(entities[e]["name"] for e in sorted(set(targets.values())))
                 if targets
@@ -266,6 +280,7 @@ def write_report(
             )
             record = dict(
                 number=number,
+                reference=reference,
                 assignment_id=ident,
                 entity_id=rule["entity_id"],
                 entity=entity_name,
@@ -346,7 +361,7 @@ def write_report(
                 'regional_line_groups_and_satellites': 'Use the dividing line, source-backed island groups and direct nearby named anchors to assign complete islands.'
             }
             explanation = ' AND '.join(explanations[c['relation']] for c in conditions) if record['combine']=='all' else ' OR '.join(explanations[c['relation']] for c in conditions)
-            heading = f"{number}. {ident}"
+            heading = f"{reference}. {display_name}"
             html = f"""<!doctype html><html lang="en"><meta charset="utf-8">
 <title>{escape(heading)}</title><link rel="stylesheet" href="../assignment_report.css">
 <body><h1>{escape(heading)}</h1><p>{escape(rule.get("rationale", ""))}</p>
@@ -361,20 +376,22 @@ Drag to pan; scroll to zoom. Both views move together.</p>
 <button id="reset">Reset view</button><button id="save">Save comparison image</button>
 <div class="maps"><canvas id="source"></canvas><canvas id="result"></canvas></div>
 <p id="extent"></p><p>Selected cells retain the full grid resolution. Background land is sampled for orientation.</p>
-<p>Current rules covering these components: {escape(", ".join("#" + str(n) for n in record["current_rule_numbers"]))}.</p>
+<p>Current rules covering these components: {escape(", ".join("#" + current_references[n] for n in record["current_rule_numbers"]))}.</p>
 <p>Other rules sharing selected components: {escape(", ".join(record["other_assignments"]) or "none")}.</p>
 <script id="data" type="application/json">{content}</script><script src="../assignment_report.js"></script></body></html>"""
             (folder / f"{number:03d}.html").write_text(html)
-            section.append(
-                f'<tr><td>{number}</td><td><a target="detail" href="{label}/{number:03d}.html">{escape(ident)}</a></td>'
+            (policy_rows if targets is not None else assignment_rows).append(
+                f'<tr><td>{reference}</td><td><a target="detail" href="{label}/{number:03d}.html">{escape(display_name)}</a></td>'
                 f"<td>{escape(record['entity'])}</td><td>{len(roots):,}</td><td>{record['cell_count']:,}</td>"
                 f"<td>{record['unique_component_count']:,}</td></tr>"
             )
-        index.append(
-            f"<h2>{label.title()} rules ({len(rules)})</h2><table><thead><tr><th>#</th><th>Rule</th><th>Entity</th><th>Components</th><th>Cells</th><th>Unique components</th></tr></thead><tbody>"
-            + "".join(section)
-            + "</tbody></table>"
-        )
+        for title, rows in (("assignments", assignment_rows), ("regional policies", policy_rows)):
+            if rows:
+                index.append(
+                    f"<h2>{label.title()} {title} ({len(rows)})</h2><table><thead><tr><th>#</th><th>Rule</th><th>Entity</th><th>Components</th><th>Cells</th><th>Unique components</th></tr></thead><tbody>"
+                    + "".join(rows)
+                    + "</tbody></table>"
+                )
     changed = None
     if previous:
         before = resolved[1][3]["component_entities"]
@@ -392,8 +409,8 @@ Drag to pan; scroll to zoom. Both views move together.</p>
     (directory / "index.html").write_text(
         """<!doctype html><html lang="en"><meta charset="utf-8"><title>Geographic assignment review</title>
 <link rel="stylesheet" href="assignment_report.css"><body><h1>Geographic assignment review</h1>
-<p>Each numbered row opens its selection geometry and actual assigned cells. Unique components are selected by no other rule in that section.
-This report includes explicit whole-component assignments and the existing regional line/group policy. Mainland partitions and distance defaults remain separate pipeline stages.</p>"""
+<p>Each numbered row opens its selection geometry and actual assigned cells. Unique components are selected by no other assignment or regional policy in the same current/previous dataset.
+Assignment rows and regional policies are shown in separate tables. A regional policy can assign different islands to different continents; each island still receives one continent. Mainland partitions and distance defaults remain separate pipeline stages.</p>"""
         + (
             (
                 f"<p><strong>{map_comparison['changed_cells']:,} final map cells changed.</strong> "
