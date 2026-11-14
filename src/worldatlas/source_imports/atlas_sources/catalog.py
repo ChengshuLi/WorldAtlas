@@ -12,7 +12,7 @@ import time
 def read_recipe(database, recipe_id, version):
     """Read a versioned construction record from the existing document table."""
     row = database.execute(
-        'SELECT document FROM atlas.structured_documents '
+        'SELECT document FROM atlas.construction_records '
         'WHERE source_id=%s AND version=%s',
         (recipe_id, version),
     ).fetchone()

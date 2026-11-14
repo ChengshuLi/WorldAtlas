@@ -10,7 +10,8 @@ from unittest.mock import Mock
 
 from worldatlas.map_build.execution.runtime import pin
 from worldatlas.map_build.inputs.selection import canonical_bytes
-from worldatlas.map_releases.manage_release import build_bundle, release_categories, stage, verify_object, version
+from worldatlas.map_releases.manage_release import build_bundle, release_categories, retire_previews, stage, verify_object, version
+from worldatlas.map_releases.inputs import FILENAME, read_inputs, restore_inputs, write_inputs
 
 
 class BundleTests(unittest.TestCase):
@@ -99,7 +100,7 @@ class BundleTests(unittest.TestCase):
     def test_bundle_uses_exact_output_files_and_one_asset_base(self):
         manifest = build_bundle('v9.0-rc.1', self.run, self.viewer, self.output)
         self.assertIn(
-            '<base href="/review/releases/v9.0-rc.1/">', (self.output / 'index.html').read_text()
+            '<base href="/releases/v9.0-rc.1/">', (self.output / 'index.html').read_text()
         )
         self.assertEqual(gzip.decompress((self.output / 'rows.u32le.gz').read_bytes()), self.rows)
         self.assertEqual(gzip.decompress((self.output / 'runs.u32le.gz').read_bytes()), self.runs)
@@ -141,11 +142,46 @@ class BundleTests(unittest.TestCase):
 
     def test_colors_are_read_from_the_saved_selection(self):
         manifest = build_bundle('v9.0-rc1', self.run, self.viewer, self.output)
-        reference = manifest['inputs']['selection']
-        decoded = gzip.decompress((self.output / reference['object']).read_bytes())
-        self.assertEqual(json.loads(decoded), self.selection)
-        self.assertEqual(hashlib.sha256(decoded).hexdigest(), reference['decoded_sha256'])
-        self.assertIn(reference['object'], manifest['objects'])
+        self.assertEqual(manifest['inputs']['archive'], FILENAME)
+        self.assertEqual(manifest['inputs'].keys(), {'archive'})
+        archived = read_inputs((self.output / FILENAME).read_bytes(), 'v9.0-rc1')
+        self.assertEqual(archived['selection'], self.selection)
+        self.assertEqual(archived['configuration'], json.loads((self.run.parent / 'config.json').read_text()))
+        self.assertEqual(archived['report']['status'], 'complete')
+        self.assertIn(FILENAME, manifest['objects'])
+        self.assertNotIn('configuration', manifest['inputs'])
+
+    def test_input_archive_is_repeatable_and_restores_without_database(self):
+        manifest = build_bundle('v9.0-rc1', self.run, self.viewer, self.output)
+        body = (self.output / FILENAME).read_bytes()
+        archived = read_inputs(body, 'v9.0-rc1')
+        with self.assertRaisesRegex(ValueError, 'identity'):
+            read_inputs(body, 'v9.0-rc2')
+        restored = self.output / 'restored'
+        restore_inputs(archived, restored)
+        self.assertEqual(json.loads((restored / 'selection.json').read_bytes()), self.selection)
+        with self.assertRaises(FileExistsError):
+            restore_inputs(archived, restored)
+        again = self.output / 'again.gz'
+        write_inputs(again, release_id=archived['release_id'], configuration=archived['configuration'],
+                     selection=archived['selection'], run=archived['run'], report=archived['report'])
+        self.assertEqual(again.read_bytes(), body)
+
+
+    def test_historical_restore_applies_locations_without_rewriting_original_records(self):
+        body = self.output / FILENAME
+        write_inputs(body, release_id='v8.0', configuration={'source': 'evidence/a'},
+                     selection=None, run=None, report=None,
+                     records=[{'source_id':'old','document_text':'original text'}],
+                     raw_sources=[{'r2_key':'evidence/a'}], notes=['Original code was not recorded.'],
+                     relocations={'evidence/a':'sources/a'})
+        saved = read_inputs(body.read_bytes(), 'v8.0')
+        destination = self.output / 'restored'
+        restore_inputs(saved, destination)
+        self.assertEqual(saved['configuration']['source'], 'evidence/a')
+        self.assertEqual(json.loads((destination/'configuration.json').read_bytes())['source'], 'sources/a')
+        self.assertFalse((destination/'selection.json').exists())
+        self.assertEqual(json.loads((destination/'supporting_records.json').read_bytes()), saved['supporting_records'])
 
     def test_release_rejects_a_code_with_different_meanings_between_stages(self):
         self.selection['domains']['regional'] = {
@@ -187,7 +223,7 @@ class R2VerificationTests(unittest.TestCase):
     def test_staging_writes_only_the_numbered_candidate(self):
         class Storage:
             def __init__(self):
-                self.objects = {'review/index.html': b'published'}
+                self.objects = {'index.html': b'published'}
 
             def put_object(self, **options):
                 assert options['IfNoneMatch'] == '*'
@@ -208,7 +244,7 @@ class R2VerificationTests(unittest.TestCase):
             manifest = {
                 'objects': {
                     'index.html': {
-                        'r2_key': 'review/releases/v9.0-rc.1/index.html',
+                        'r2_key': 'releases/v9.0-rc.1/index.html',
                         'size_bytes': len(body),
                         'content_type': 'text/html',
                         'sha256': hashlib.sha256(body).hexdigest(),
@@ -220,7 +256,7 @@ class R2VerificationTests(unittest.TestCase):
             stage(db, storage, 'test', 'v9.0-rc.1', bundle, manifest)
             self.assertEqual(
                 storage.objects,
-                {'review/index.html': b'published', 'review/releases/v9.0-rc.1/index.html': body},
+                {'index.html': b'published', 'releases/v9.0-rc.1/index.html': body},
             )
 
     def test_matching_size_alone_cannot_pass_release_verification(self):
@@ -239,3 +275,40 @@ class R2VerificationTests(unittest.TestCase):
                     'sha256': hashlib.sha256(b'good').hexdigest(),
                 },
             )
+
+
+class PreviewRetirementTests(unittest.TestCase):
+    def test_only_superseded_candidates_of_a_published_version_are_retired(self):
+        db, storage = Mock(), Mock()
+        db.execute.return_value.fetchone.return_value = ('v9.0-rc3',)
+        db.execute.return_value.fetchall.return_value = [
+            ('v9.0-rc1','test',{'objects': {'index.html': {'r2_key':'releases/v9.0-rc1/index.html'}}}),
+            ('v9.0-rc2','test',{'objects': {'index.html': {'r2_key':'releases/v9.0-rc2/index.html'}}}),
+        ]
+        self.assertEqual(retire_previews(db,storage,'v9.0'), ['v9.0-rc1','v9.0-rc2'])
+        self.assertEqual([c.kwargs['Key'] for c in storage.delete_object.call_args_list],
+                         ['releases/v9.0-rc1/index.html','releases/v9.0-rc2/index.html'])
+        query, parameters = db.execute.call_args_list[1].args
+        self.assertEqual(parameters, ('v9.0','v9.0-rc3'))
+
+    def test_unpublished_versions_and_files_outside_candidate_folder_are_preserved(self):
+        db, storage = Mock(), Mock()
+        db.execute.return_value.fetchone.return_value = None
+        with self.assertRaisesRegex(ValueError, 'publish a final'):
+            retire_previews(db,storage,'v9.0')
+        db.execute.return_value.fetchone.return_value = ('v9.0-rc2',)
+        db.execute.return_value.fetchall.return_value = [('v9.0-rc1','test',
+            {'objects': {'raw': {'r2_key':'sources/raw.zip'}}})]
+        with self.assertRaisesRegex(ValueError, 'outside its own'):
+            retire_previews(db,storage,'v9.0')
+        storage.delete_object.assert_not_called()
+
+    def test_interrupted_retirement_keeps_the_manifest_for_retry(self):
+        db, storage = Mock(), Mock()
+        db.execute.return_value.fetchone.return_value = ('v9.0-rc2',)
+        db.execute.return_value.fetchall.return_value = [('v9.0-rc1','test',
+            {'objects': {'map': {'r2_key':'releases/v9.0-rc1/runs.u32le.gz'}}})]
+        storage.delete_object.side_effect = OSError('connection lost')
+        with self.assertRaises(OSError):
+            retire_previews(db,storage,'v9.0')
+        self.assertFalse(any('DELETE FROM' in c.args[0] for c in db.execute.call_args_list))

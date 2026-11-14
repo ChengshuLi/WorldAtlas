@@ -31,6 +31,7 @@ from worldatlas.map_build.execution.runtime import (
     Checkpoints,
     RunLock,
     code_identity,
+    repository_identity,
     json_bytes,
     verify_pins,
     verify_anchor,
@@ -291,11 +292,13 @@ class Pipeline:
                 p for p in self.physical_reuse['pins'] if p not in self.source_pins
             )
         self.code = code_identity(PACKAGE_ROOT)
+        self.repository = repository_identity(PACKAGE_ROOT)
         self.identity = {
             'schema': 'worldatlas-end-to-end-run-identity-v1',
             'request': self.config_pin,
             'source_pins': self.source_pins,
             'code': self.code,
+            'repository': self.repository,
             'scripts_root': str(PACKAGE_ROOT),
             'output': str(self.out),
             'runtime': self.runtime,
@@ -321,7 +324,7 @@ class Pipeline:
             identity_path = self.out / 'run-identity.json'
             if resume:
                 previous = read(identity_path)
-                provenance = {'code', 'runtime', 'runtime_paths', 'scripts_root'}
+                provenance = {'code', 'repository', 'runtime', 'runtime_paths', 'scripts_root'}
                 selection = lambda value: {k: v for k, v in value.items() if k not in provenance}
                 if selection(previous) != selection(self.identity):
                     raise ValueError('resume request, input selection or output identity changed')
@@ -334,7 +337,8 @@ class Pipeline:
             self.attempt_dir.mkdir()
             write(
                 self.attempt_dir / 'producer.json',
-                {'code': self.code, 'runtime': self.runtime, 'scripts_root': str(PACKAGE_ROOT)},
+                {'code': self.code, 'repository': self.repository,
+                 'runtime': self.runtime, 'scripts_root': str(PACKAGE_ROOT)},
             )
             self.checkpoints = Checkpoints(self.out / 'checkpoints', self.attempt)
             self.checkpoints.verify_all()

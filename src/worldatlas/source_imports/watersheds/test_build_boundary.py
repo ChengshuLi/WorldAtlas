@@ -261,7 +261,7 @@ class StorageTests(unittest.TestCase):
 
     def store_recipe(self, version, recipe):
         text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))
-        self.db.execute('INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+        self.db.execute('INSERT INTO atlas.construction_records(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
                         ('__watershed_recipe', version, text))
 
     def build(self, version='1'):
@@ -285,7 +285,7 @@ class StorageTests(unittest.TestCase):
                     self.db.execute('DELETE FROM atlas.' + table + " WHERE revision='__watershed'")
                 self.db.execute("DELETE FROM atlas.decision_revisions WHERE revision='__watershed'")
                 self.db.execute("DELETE FROM atlas.entity_registry_revisions WHERE revision='__watershed_entities'")
-                self.db.execute("DELETE FROM atlas.structured_documents WHERE source_id='__watershed_recipe'")
+                self.db.execute("DELETE FROM atlas.construction_records WHERE source_id='__watershed_recipe'")
                 self.db.execute("DELETE FROM atlas.source_assets WHERE source_id LIKE '__watershed_%'")
 
         self.addCleanup(remove_committed_fixtures)

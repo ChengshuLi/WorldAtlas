@@ -11,7 +11,7 @@ separate correction or adjustment stage.
 
 ## Construction record
 
-Use the existing `atlas.structured_documents` table. Its `source_id` identifies
+Use the existing `atlas.construction_records` table. Its `source_id` identifies
 the construction record and `version` selects its version. The following fields
 are JSON keys inside its `document` column, not separate table columns. The
 `source_id` inside that JSON identifies the raw source figure.

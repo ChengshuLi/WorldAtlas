@@ -47,24 +47,25 @@ Test the upgrade against a disposable copy of working data before applying it.
 Check that upgrading and creating a fresh database produce the same intended
 structure. Schema upgrades stay separate from geographic data imports.
 
-Existing databases that still have `source_assets.provenance` can apply
-[`001_remove_source_provenance.sql`](migrations/001_remove_source_provenance.sql)
-after backing up the source catalog. For databases that still store checksums
-and sizes in `structured_documents`, apply
-[`002_simplify_structured_documents.sql`](migrations/002_simplify_structured_documents.sql)
-after backing up those rows. It also converts `document` to `jsonb`. Fresh
-databases already have both changes:
+Applied upgrades are retained in `migrations/`:
 
-```bash
-psql "$NEON_DATABASE_URL" -X -v ON_ERROR_STOP=1 -f database/migrations/001_remove_source_provenance.sql
-psql "$NEON_DATABASE_URL" -X -v ON_ERROR_STOP=1 -f database/migrations/002_simplify_structured_documents.sql
-```
+| Upgrade | Existing-database change |
+| --- | --- |
+| `001_remove_source_provenance.sql` | Remove unused raw-source metadata. |
+| `002_simplify_structured_documents.sql` | Remove redundant document checksums/sizes and use JSONB. |
+| `003_rename_construction_records.sql` | Rename the construction table and its supporting objects. |
 
-Documents store their ID, version and `jsonb` content. Importers validate the
-settings. Spacing and object-key order do not identify a document. Frozen build
-selections include the document values without per-document checksums or sizes.
-Existing saved selections and released files remain unchanged. Retain original
-contributing records and released input selections when assessing data for deletion.
+Apply only upgrades that the existing database has not received. Fresh databases
+already have their final schema. Back up and test existing data before an upgrade.
+Historical input archival/removal is a separate data backfill, after verified R2
+uploads; it is not geographic data embedded in the schema SQL.
+
+`construction_records` holds current versioned construction instructions. Importers
+validate their settings; no method-specific database validation has been added.
+Original/intermediate geographic records still in use remain in their own tables.
+Historical release snapshots and superseded pipeline inputs live in the release's
+R2 `inputs.json.gz`, tracked by `map_releases`. The archive preserves their original
+IDs and versions. Its captured data is separate from editable working records.
 
 ## Tests
 
@@ -73,7 +74,7 @@ SQL checks cover database guarantees:
 | Check | Purpose |
 | --- | --- |
 | `source_catalog.sql` | Raw-file identity, metadata corrections and source references. |
-| `structured_documents.sql` | JSON values, formatting-independent content and immutable document versions. |
+| `construction_records.sql` | JSON values, formatting-independent content and immutable document versions. |
 | `entity_registry.sql` | Stable IDs, hierarchy relationships and grid-code bindings. |
 | `geographic_entity_colors.sql` | Optional colors and valid RGB values. |
 | `geographic_decisions.sql` | Geometry records, shared explanations, citations and entity targets. |
@@ -110,7 +111,7 @@ SELECT revision, boundary_id, construction_id, construction_version
 FROM atlas.decision_mainland_boundaries
 ORDER BY revision, boundary_id;
 
-SELECT document FROM atlas.structured_documents
+SELECT document FROM atlas.construction_records
 WHERE source_id = 'CONSTRUCTION_ID' AND version = 'VERSION';
 ```
 

@@ -5,8 +5,8 @@ This folder contains the WorldAtlas interface. The checked-in `config.json` hold
 The displayed combined SHA-256 is calculated over the decompressed little-endian u32 row-offset bytes followed immediately by the decompressed little-endian u32 run bytes. The client verifies the row and run hashes before use.
 
 The Cloudflare Worker serves viewer files and map data from R2. Each candidate
-has an immutable directory at `review/releases/CANDIDATE/`. Publishing copies
-that candidate's homepage to `review/index.html`, which the Worker serves at
+has a directory at `releases/CANDIDATE/`. Publishing copies
+that candidate's homepage to `index.html`, which the Worker serves at
 `/`. The homepage's base URL selects its release files. Data sources opens
 the release's `sources.html`, including OpenStreetMap and IHO attributions.
 

@@ -73,7 +73,7 @@ class DatabaseTest(unittest.TestCase):
         recipe.update(changes)
         text = json.dumps(recipe, sort_keys=True, separators=(',', ':'))
         self.database.execute(
-            'INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+            'INSERT INTO atlas.construction_records(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
             ('__osm_recipe', version, text),
         )
         return dict(recipe, recipe_id='__osm_recipe', recipe_version=version)
@@ -184,7 +184,7 @@ class DatabaseTest(unittest.TestCase):
         self.storage.get_object.assert_not_called()
 
     def test_incomplete_recipe_stops_before_download(self):
-        self.database.execute("INSERT INTO atlas.structured_documents VALUES "
+        self.database.execute("INSERT INTO atlas.construction_records VALUES "
                               "('__osm_recipe','incomplete','{}')")
         with self.assertRaisesRegex(ValueError, 'invalid OSM construction record'):
             self.build(version='incomplete')
@@ -318,7 +318,7 @@ class DatabaseTest(unittest.TestCase):
                               'decision_revisions'):
                     self.database.execute('DELETE FROM atlas.' + table + " WHERE revision IN ('__osm_a','__osm_b')")
                 self.database.execute("DELETE FROM atlas.entity_registry_revisions WHERE revision='__osm_entities'")
-                self.database.execute("DELETE FROM atlas.structured_documents WHERE source_id='__osm_recipe'")
+                self.database.execute("DELETE FROM atlas.construction_records WHERE source_id='__osm_recipe'")
                 self.database.execute("DELETE FROM atlas.source_assets WHERE source_id='osm-test'")
 
         self.addCleanup(cleanup)

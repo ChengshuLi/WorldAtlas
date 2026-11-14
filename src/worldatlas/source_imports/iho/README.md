@@ -29,7 +29,7 @@ endpoints, route definitions, and ordered endpoint links in Neon.
 
 ## Construction record
 
-Store the geographic selections in the existing `atlas.structured_documents`
+Store the geographic selections in the existing `atlas.construction_records`
 table. Each record version contains a JSON object like this:
 
 ```json

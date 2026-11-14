@@ -4,7 +4,6 @@ import argparse
 from contextlib import closing
 import gzip
 import hashlib
-import io
 import json
 import mimetypes
 import os
@@ -15,10 +14,11 @@ import tempfile
 
 from worldatlas.map_build.execution.runtime import digest, json_bytes, pin, verify_pins
 from worldatlas.map_build.inputs.selection import canonical_bytes, read_saved, validate_bindings
+from worldatlas.map_releases.inputs import FILENAME as INPUTS_FILE, read_inputs, restore_inputs, write_inputs
 
 STREAMS = ('rows', 'runs')
 CANDIDATE = re.compile(r'(?P<version>v[0-9]+\.[0-9]+)-rc\.?[1-9][0-9]*')
-HOMEPAGE = 'review/index.html'
+HOMEPAGE = 'index.html'
 
 
 def version(candidate):
@@ -29,7 +29,7 @@ def version(candidate):
 
 
 def prefix(candidate):
-    return f'review/releases/{candidate}'
+    return f'releases/{candidate}'
 
 
 def read(path):
@@ -184,33 +184,14 @@ def build_bundle(candidate, run, viewer, bundle):
     )
     config.write_bytes(json_bytes(viewer_config))
 
-    selection_name = 'inputs/selection.json.gz'
-    selection_path = bundle / selection_name
-    selection_path.parent.mkdir()
-    with selection_path.open('xb') as output, gzip.GzipFile(
-        filename='', fileobj=output, mode='wb', mtime=0, compresslevel=6
-    ) as compressed, io.TextIOWrapper(compressed, encoding='utf-8', newline='\n') as text:
-        json.dump(
-            selection,
-            text,
-            sort_keys=True,
-            separators=(',', ':'),
-            ensure_ascii=False,
-            allow_nan=False,
-        )
-        text.write('\n')
-    inputs = {
-        'configuration': request,
-        'run': identity,
-        'selection': {
-            'object': selection_name,
-            'decoded_sha256': identity['input_selection_sha256'],
-        },
-        'report_sha256': digest(run / 'report.json'),
-    }
-    if report['comparison']:
-        verify_pins([report['comparison']])
-        inputs['comparison'] = read(Path(report['comparison']['path']))
+    attempts = [read(path) for path in sorted((run / 'attempts').glob('*/producer.json'))]
+    captured_run = dict(identity, attempts=attempts)
+    write_inputs(bundle / INPUTS_FILE, release_id=candidate, configuration=request,
+                 selection=selection, run=captured_run, report=report)
+    endpoint = request.get('physical_controls', {}).get('source_staging', {}).get('endpoint_url')
+    inputs = {'archive': INPUTS_FILE}
+    if endpoint is not None:
+        inputs['r2_endpoint'] = endpoint
 
     objects = {
         path.relative_to(bundle).as_posix(): {
@@ -261,6 +242,30 @@ def upload_bundle(storage, bucket, candidate, bundle, manifest):
                 if exc.response['ResponseMetadata']['HTTPStatusCode'] != 412:
                     raise
         verify_object(storage, bucket, key, asset)
+
+
+def retire_previews(db, storage, map_version):
+    """Keep the published candidate; remove only its superseded preview folders."""
+    published = db.execute(
+        'SELECT release_id FROM atlas.map_publications WHERE map_version=%s', (map_version,)
+    ).fetchone()
+    if published is None:
+        raise ValueError('publish a final candidate before retiring previews')
+    rows = db.execute(
+        'SELECT release_id,r2_bucket,manifest FROM atlas.map_releases '
+        'WHERE map_version=%s AND release_id<>%s ORDER BY release_id',
+        (map_version, published[0]),
+    ).fetchall()
+    for candidate, bucket, manifest in rows:
+        keys = [asset['r2_key'] for asset in manifest['objects'].values()]
+        if any(not key.startswith(prefix(candidate) + '/') for key in keys):
+            raise ValueError('preview has files outside its own release folder')
+        # R2 deletion is idempotent. Keep the row until all files are removed so
+        # an interrupted cleanup can be retried with the same manifest.
+        for key in keys:
+            storage.delete_object(Bucket=bucket, Key=key)
+        db.execute('DELETE FROM atlas.map_releases WHERE release_id=%s', (candidate,))
+    return [row[0] for row in rows]
 
 
 def put_homepage(storage, bucket, key, html, **condition):
@@ -323,6 +328,8 @@ def publish(db, storage, candidate):
     if row is None:
         raise ValueError('approve this exact candidate before publishing')
     map_version, bucket, manifest = row
+    if INPUTS_FILE not in manifest['objects']:
+        raise ValueError('release has no frozen input archive')
     condition = homepage_condition(storage, bucket)
     with db.transaction():
         existing = db.execute(
@@ -351,6 +358,7 @@ def publish(db, storage, candidate):
                    (HOMEPAGE,))
         db.execute('UPDATE atlas.map_publications SET homepage_key=%s WHERE map_version=%s',
                    (HOMEPAGE, map_version))
+    retire_previews(db, storage, map_version)
 
 
 def main():
@@ -366,8 +374,12 @@ def main():
     approve_args.add_argument('--reviewer', required=True)
     publish_args = actions.add_parser('publish')
     publish_args.add_argument('candidate')
+    restore_args = actions.add_parser('restore-inputs')
+    restore_args.add_argument('candidate')
+    restore_args.add_argument('output', type=Path)
     args = parser.parse_args()
-    version(args.candidate)
+    if args.action != 'restore-inputs':
+        version(args.candidate)
     if not (connection := os.environ.get('NEON_DATABASE_URL')):
         parser.error('set NEON_DATABASE_URL to the release catalog database')
 
@@ -380,6 +392,25 @@ def main():
     with tempfile.TemporaryDirectory() as temp:
         bundle = Path(temp)
         with psycopg.connect(connection, autocommit=True) as db:
+            if args.action == 'restore-inputs':
+                row = db.execute('SELECT r2_bucket,manifest FROM atlas.map_releases WHERE release_id=%s',
+                                 (args.candidate,)).fetchone()
+                if row is None:
+                    raise ValueError('release is missing')
+                bucket, saved = row
+                from worldatlas.map_build.physical import build as physical
+                from worldatlas.map_build import build as map_build
+                endpoint = saved.get('inputs', {}).get('r2_endpoint')
+                if endpoint is None:
+                    endpoint = read(Path(map_build.__file__).with_name('config.json'))['physical_controls']['source_staging']['endpoint_url']
+                with closing(physical.make_r2_client(endpoint)) as storage:
+                    asset = saved['objects'].get(INPUTS_FILE)
+                    if asset is None:
+                        raise ValueError('release has no input archive')
+                    raw = verify_object(storage, bucket, asset['r2_key'], asset, return_bytes=True)
+                restore_inputs(read_inputs(raw, args.candidate), args.output)
+                print(f'Restored inputs to {args.output}')
+                return
             if args.action == 'stage':
                 manifest = build_bundle(
                     args.candidate, args.run.resolve(), args.viewer.resolve(), bundle
@@ -392,18 +423,19 @@ def main():
             from worldatlas.map_build.physical import build as physical
 
             if args.action == 'stage':
-                endpoint = manifest['inputs']['configuration']['physical_controls'][
-                    'source_staging'
-                ]['endpoint_url']
+                endpoint = manifest['inputs'].get('r2_endpoint')
             else:
                 row = db.execute(
-                    "SELECT manifest#>>'{inputs,configuration,physical_controls,source_staging,endpoint_url}' "
+                    "SELECT COALESCE(manifest#>>'{inputs,r2_endpoint}',manifest#>>'{inputs,configuration,physical_controls,source_staging,endpoint_url}') "
                     'FROM atlas.map_releases WHERE release_id=%s AND approved_at IS NOT NULL',
                     (args.candidate,),
                 ).fetchone()
                 if row is None:
                     raise ValueError('approve this exact candidate before publishing')
                 endpoint = row[0]
+            if endpoint is None:
+                from worldatlas.map_build import build as map_build
+                endpoint = read(Path(map_build.__file__).with_name('config.json'))['physical_controls']['source_staging']['endpoint_url']
             with closing(physical.make_r2_client(endpoint)) as storage:
                 if args.action == 'stage':
                     stage(db, storage, args.bucket, args.candidate, bundle, manifest)

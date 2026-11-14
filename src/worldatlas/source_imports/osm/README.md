@@ -81,14 +81,14 @@ worldatlas-import \
 
 | Argument | Meaning |
 | --- | --- |
-| `--recipe ID VERSION` | Construction record's `source_id` and `version` in `atlas.structured_documents`. |
+| `--recipe ID VERSION` | Construction record's `source_id` and `version` in `atlas.construction_records`. |
 | `--revision` | Existing group of editable decisions in Neon where the boundary is saved. |
 | `--r2-endpoint` | Address used to access the Cloudflare R2 account. The catalog supplies the bucket and object path. |
 | `--work-dir` | Local directory for downloading and reusing the source archive. |
 | `--expected-geometry-sha256` | Optional checksum of the expected boundary geometry. A mismatch stops the command before saving. Omit it when building a changed boundary. |
 
 The construction record is a JSON object in the existing
-`atlas.structured_documents` table:
+`atlas.construction_records` table:
 
 ```json
 {

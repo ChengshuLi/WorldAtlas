@@ -84,7 +84,11 @@ When changing the Worker's server code or configuration, deploy it with
 streams, viewer, configuration, legends and frozen inputs. `atlas.map_publications`
 connects official versions to those releases and identifies the homepage.
 The legend contains entity names, colors and counts for that release. The source
-catalog tracks raw files, including archive parts.
+catalog tracks raw files, including archive parts. R2 has one layout: raw files
+under `sources/`, release bundles under `releases/RELEASE_ID/`, and `index.html`
+for the published homepage. Each bundle has an `inputs.json.gz` frozen-input
+archive. Only the final selected RC is retained for each published version.
+Working construction instructions live in `atlas.construction_records`.
 
 The grid's `rows` stream stores row offsets; `runs` stores run endpoints and
 category codes. Both are registered together in the manifest after their stored

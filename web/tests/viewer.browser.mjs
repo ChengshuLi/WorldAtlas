@@ -12,8 +12,8 @@ const viewer = new URL("../viewer/", import.meta.url);
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const mapWidth = 120;
 const mapHeight = 60;
-const published = "review/releases/v8.0-rc.1";
-const candidate = "review/releases/v9.0-rc.1";
+const published = "releases/v8.0-rc.1";
+const candidate = "releases/v9.0-rc.1";
 const objects = new Map();
 
 function store(key, bytes, type) {
@@ -133,9 +133,9 @@ let browser;
 let server;
 let origin;
 before(async () => {
-  store("review/index.html", bundle(published, "v8.0", 17), "text/html");
+  store("index.html", bundle(published, "v8.0", 17), "text/html");
   store(`${candidate}/index.html`, bundle(candidate, "v9.0", 18), "text/html");
-  const corrupt = "review/releases/v9.1-rc.1";
+  const corrupt = "releases/v9.1-rc.1";
   store(`${corrupt}/index.html`, bundle(corrupt, "v9.1", 18), "text/html");
   // Valid gzip with different decoded bytes exercises the viewer's checksum.
   store(
@@ -143,10 +143,10 @@ before(async () => {
     gzipSync(words([1, 17])),
     "application/gzip",
   );
-  const missing = "review/releases/v9.2-rc.1";
+  const missing = "releases/v9.2-rc.1";
   store(`${missing}/index.html`, bundle(missing, "v9.2", 18), "text/html");
   objects.delete(`${missing}/rows.u32le.gz`);
-  const missingLegend = "review/releases/v9.3-rc.1";
+  const missingLegend = "releases/v9.3-rc.1";
   store(
     `${missingLegend}/index.html`,
     bundle(missingLegend, "v9.3", 18),
@@ -154,7 +154,7 @@ before(async () => {
   );
   objects.delete(`${missingLegend}/legend/continents.json`);
 
-  const sparse = "review/releases/v9.4-rc1";
+  const sparse = "releases/v9.4-rc1";
   bundle(sparse, "v9.4", 18);
   const remap = new Map([
     [1, 301],
@@ -326,8 +326,8 @@ for (const { name, options, fallback, sparse } of [
         await loaded(
           page,
           sparse
-            ? "/review/releases/v9.4-rc1/index.html"
-            : "/review/releases/v9.0-rc.1/index.html",
+            ? "/releases/v9.4-rc1/index.html"
+            : "/releases/v9.0-rc.1/index.html",
           sparse ? "v9.4" : "v9.0",
         );
         const canvas = page.locator("#canvas");
@@ -455,7 +455,7 @@ test(
     try {
       for (const [path, version, prefix, name] of [
         ["/", "v8.0", published, "Africa"],
-        ["/review/releases/v9.0-rc.1/index.html", "v9.0", candidate, "Asia"],
+        ["/releases/v9.0-rc.1/index.html", "v9.0", candidate, "Asia"],
         [`/${candidate}/index.html`, "v9.0", candidate, "Asia"],
         ["/", "v8.0", published, "Africa"],
       ]) {
@@ -494,11 +494,11 @@ test(
     try {
       for (const [path, message] of [
         [
-          "/review/releases/v9.1-rc.1/index.html",
+          "/releases/v9.1-rc.1/index.html",
           "Native map checksum mismatch",
         ],
-        ["/review/releases/v9.2-rc.1/index.html", "Native map could not load"],
-        ["/review/releases/v9.3-rc.1/index.html", "Map legend could not load"],
+        ["/releases/v9.2-rc.1/index.html", "Native map could not load"],
+        ["/releases/v9.3-rc.1/index.html", "Map legend could not load"],
       ]) {
         await page.goto(origin + path);
         await page.locator("#status.error").waitFor();

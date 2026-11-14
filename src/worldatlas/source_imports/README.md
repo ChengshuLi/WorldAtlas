@@ -48,7 +48,7 @@ worldatlas-import \
   --recipe CONSTRUCTION_ID VERSION
 ```
 
-The command reads the record from `atlas.structured_documents`. Its JSON
+The command reads the record from `atlas.construction_records`. Its JSON
 `method` selects the constructor through the explicit `IMPORTERS` mapping in
 [`run_import.py`](run_import.py):
 

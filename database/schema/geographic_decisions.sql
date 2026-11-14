@@ -30,7 +30,7 @@ CREATE TABLE atlas.decision_features (
     CONSTRAINT decision_features_geometry_sha256_check CHECK ((geometry_sha256 ~ '^[0-9a-f]{64}$'::text)),
     CONSTRAINT decision_features_source_feature_id_check CHECK ((length(TRIM(BOTH FROM source_feature_id)) > 0)),
     CONSTRAINT decision_features_pkey PRIMARY KEY (revision, feature_id),
-    CONSTRAINT decision_features_construction_id_construction_version_fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.structured_documents(source_id, version),
+    CONSTRAINT decision_features_construction_id_construction_version_fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.construction_records(source_id, version),
     CONSTRAINT decision_features_revision_fkey FOREIGN KEY (revision) REFERENCES atlas.decision_revisions(revision),
     CONSTRAINT decision_features_source_id_source_version_fkey FOREIGN KEY (source_id, source_version) REFERENCES atlas.source_assets(source_id, version)
 );
@@ -50,7 +50,7 @@ CREATE TABLE atlas.geographic_line_observations (
     CONSTRAINT geographic_line_observations_geometry_check CHECK (((geometry ->> 'type'::text) = ANY (ARRAY['LineString'::text, 'MultiLineString'::text]))),
     CONSTRAINT geographic_line_observations_geometry_sha256_check CHECK ((geometry_sha256 ~ '^[0-9a-f]{64}$'::text)),
     CONSTRAINT geographic_line_observations_pkey PRIMARY KEY (line_id),
-    CONSTRAINT geographic_line_observations_construction_id_construction__fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.structured_documents(source_id, version),
+    CONSTRAINT geographic_line_observations_construction_id_construction__fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.construction_records(source_id, version),
     CONSTRAINT geographic_line_observations_source_id_source_version_fkey FOREIGN KEY (source_id, source_version) REFERENCES atlas.source_assets(source_id, version)
 );
 
@@ -134,7 +134,7 @@ CREATE TABLE atlas.decision_endpoints (
     CONSTRAINT decision_endpoints_longitude_check CHECK (((longitude >= ('-180'::integer)::numeric) AND (longitude <= (180)::numeric))),
     CONSTRAINT decision_endpoints_name_check CHECK ((length(TRIM(BOTH FROM name)) > 0)),
     CONSTRAINT decision_endpoints_pkey PRIMARY KEY (revision, endpoint_id),
-    CONSTRAINT decision_endpoints_construction_id_construction_version_fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.structured_documents(source_id, version),
+    CONSTRAINT decision_endpoints_construction_id_construction_version_fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.construction_records(source_id, version),
     CONSTRAINT decision_endpoints_revision_fkey FOREIGN KEY (revision) REFERENCES atlas.decision_revisions(revision)
 );
 
@@ -152,7 +152,7 @@ CREATE TABLE atlas.decision_routes (
     CONSTRAINT decision_routes_route_id_check CHECK ((length(TRIM(BOTH FROM route_id)) > 0)),
     CONSTRAINT decision_routes_route_type_check CHECK ((length(TRIM(BOTH FROM route_type)) > 0)),
     CONSTRAINT decision_routes_pkey PRIMARY KEY (revision, route_id),
-    CONSTRAINT decision_routes_construction_id_construction_version_fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.structured_documents(source_id, version),
+    CONSTRAINT decision_routes_construction_id_construction_version_fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.construction_records(source_id, version),
     CONSTRAINT decision_routes_revision_fkey FOREIGN KEY (revision) REFERENCES atlas.decision_revisions(revision)
 );
 

@@ -54,7 +54,7 @@ def canonical_bytes(value):
     ).encode()
 
 
-def read_selection(database, revisions, *, raw_sources=(), documents=()):
+def read_selection(database, revisions, *, raw_sources=(), constructions=()):
     """Return the selected domains, catalogs and colors, then end the transaction.
 
     Call with an idle connection. Computation and downloads happen after this
@@ -75,7 +75,7 @@ def read_selection(database, revisions, *, raw_sources=(), documents=()):
     with database.transaction():
         database.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY')
         references = set(raw_sources)
-        document_refs = set(documents)
+        document_refs = set(constructions)
         registries = set()
         for domain, revision in revisions.items():
             row = database.execute(QUERY.read_text(), {'revision': revision}).fetchone()
@@ -146,14 +146,14 @@ def read_selection(database, revisions, *, raw_sources=(), documents=()):
         requested_documents = sorted(document_refs)
         rows = database.execute(
             'SELECT source_id,version,document '
-            'FROM atlas.structured_documents WHERE (source_id,version) IN '
+            'FROM atlas.construction_records WHERE (source_id,version) IN '
             '(SELECT * FROM unnest(%s::text[],%s::text[])) ORDER BY source_id,version',
             ([key[0] for key in requested_documents], [key[1] for key in requested_documents]),
         ).fetchall()
         missing = document_refs - {(row[0], row[1]) for row in rows}
         if missing:
             raise ValueError('selected document is missing: ' + str(sorted(missing)))
-        result['documents'] = [dict(source_id=source_id, version=version, document=document)
+        result['construction_records'] = [dict(source_id=source_id, version=version, document=document)
                                for source_id, version, document in rows]
         rows = database.execute(
             'SELECT e.revision,jsonb_agg(jsonb_build_object('

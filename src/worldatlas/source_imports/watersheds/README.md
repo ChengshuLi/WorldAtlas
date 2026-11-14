@@ -41,7 +41,7 @@ worldatlas-import \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-The command reads `atlas.structured_documents` and resolves exact source versions
+The command reads `atlas.construction_records` and resolves exact source versions
 through `atlas.source_assets`. A large provider file can reference ordered,
 individually cataloged byte parts. Each download and the assembled file are
 checked against their sizes and SHA-256 hashes.
@@ -59,7 +59,7 @@ and multipart reassembly count as source processing.
 
 The current construction IDs are `caucasus-boundary-construction` and
 `ural-boundary-construction`. Their versioned geographic choices and exact source
-selections are in `atlas.structured_documents`.
+selections are in `atlas.construction_records`.
 
 ## Construction settings
 

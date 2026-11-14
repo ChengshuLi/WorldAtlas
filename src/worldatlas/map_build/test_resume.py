@@ -59,7 +59,8 @@ class ExecutorResumeTests(unittest.TestCase):
         first = self.runner()
         original = pipeline.pin(self.out / 'run-identity.json')
         first.close()
-        with patch.object(pipeline, 'code_identity', return_value={'changed.py': '0' * 64}):
+        with patch.object(pipeline, 'code_identity', return_value={'changed.py': '0' * 64}), \
+                patch.object(pipeline, 'repository_identity', return_value={'commit': 'changed'}):
             resumed = self.runner(resume=True)
             self.assertEqual(pipeline.pin(self.out / 'run-identity.json'), original)
             self.assertEqual(

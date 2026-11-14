@@ -16,7 +16,7 @@ CREATE TABLE atlas.decision_mainland_boundaries (
     CONSTRAINT decision_mainland_boundaries_geometry_sha256_check CHECK ((geometry_sha256 ~ '^[0-9a-f]{64}$'::text)),
     CONSTRAINT decision_mainland_boundaries_provenance_check CHECK ((jsonb_typeof(provenance) = 'object'::text)),
     CONSTRAINT decision_mainland_boundaries_pkey PRIMARY KEY (revision, boundary_id),
-    CONSTRAINT decision_mainland_boundaries_construction_id_construction__fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.structured_documents(source_id, version),
+    CONSTRAINT decision_mainland_boundaries_construction_id_construction__fkey FOREIGN KEY (construction_id, construction_version) REFERENCES atlas.construction_records(source_id, version),
     CONSTRAINT decision_mainland_boundaries_revision_fkey FOREIGN KEY (revision) REFERENCES atlas.decision_revisions(revision)
 );
 

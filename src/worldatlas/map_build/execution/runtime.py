@@ -7,6 +7,7 @@ import json
 import math
 import os
 from pathlib import Path
+import subprocess
 import threading
 import time
 import traceback
@@ -125,6 +126,21 @@ def code_identity(scripts):
         and '__pycache__' not in path.parts
         and path.suffix in {'.py', '.cpp', '.c', '.h', '.hpp', '.sh'}
     }
+
+
+def repository_identity(package):
+    """Record available source revision and setup; this never gates resume."""
+    root = next((p for p in Path(package).resolve().parents if (p / '.git').exists()), None)
+    if root is None:
+        return None
+    def git(*args):
+        result = subprocess.run(['git', '-C', str(root), *args], capture_output=True, text=True)
+        return result.stdout if result.returncode == 0 else None
+    result = {'commit': (git('rev-parse', 'HEAD') or '').strip(),
+              'working_changes': git('diff', '--binary', 'HEAD')}
+    result['setup'] = {name: (root / name).read_text() for name in
+                       ('environment.yml', 'pyproject.toml') if (root / name).is_file()}
+    return result
 
 
 def elapsed_union(intervals):

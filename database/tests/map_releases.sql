@@ -43,7 +43,7 @@ BEGIN
   INSERT INTO atlas.map_publications VALUES ('v99.2','v99.0-rc1',NULL);
   RAISE EXCEPTION 'unrelated version name accepted';
  EXCEPTION WHEN foreign_key_violation THEN NULL; END;
- INSERT INTO atlas.map_publications VALUES ('v99.0','v99.0-rc1','review/index.html'),('v99.1','v99.1-rc.1',NULL);
+ INSERT INTO atlas.map_publications VALUES ('v99.0','v99.0-rc1','index.html'),('v99.1','v99.1-rc.1',NULL);
  BEGIN
   UPDATE atlas.map_publications SET release_id='v99.0-rc2' WHERE map_version='v99.0';
   RAISE EXCEPTION 'official version replaced';
@@ -51,7 +51,7 @@ BEGIN
   IF SQLERRM<>'published versions are immutable' THEN RAISE; END IF;
  END;
  BEGIN
-  UPDATE atlas.map_publications SET homepage_key='review/index.html' WHERE map_version='v99.1';
+  UPDATE atlas.map_publications SET homepage_key='index.html' WHERE map_version='v99.1';
   RAISE EXCEPTION 'two publications own one homepage';
  EXCEPTION WHEN unique_violation THEN NULL; END;
  BEGIN

@@ -288,7 +288,7 @@ class SelectionTests(unittest.TestCase):
                 (digest, Jsonb(geometry)),
             )
             document = '{ "method": "selected_vector_features", "basis": "Selected source — côte" }'
-            self.writer.execute('INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+            self.writer.execute('INSERT INTO atlas.construction_records(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
                                 ('__selected_construction','1',document))
             self.writer.execute("UPDATE atlas.decision_features SET construction_id='__selected_construction',construction_version='1' "
                                 "WHERE revision='__selection_water'")
@@ -300,24 +300,24 @@ class SelectionTests(unittest.TestCase):
             self.assertEqual(feature['source_feature_id'], 'provider-point')
             self.assertEqual(result['raw_sources'][0]['source_id'], '__selection_raw')
             self.assertEqual(result['schema'], 'worldatlas-input-selection-v2')
-            self.assertEqual(result['documents'], [dict(
+            self.assertEqual(result['construction_records'], [dict(
                 source_id='__selected_construction', version='1', document=json.loads(document))])
             self.writer.execute(
-                'INSERT INTO atlas.structured_documents(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
+                'INSERT INTO atlas.construction_records(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
                 ('__selected_construction','2',json.dumps(json.loads(document), sort_keys=True, indent=2)),
             )
             self.writer.execute("UPDATE atlas.decision_features SET construction_version='2' "
                                 "WHERE revision='__selection_water'")
             with psycopg.connect(self.url) as database:
                 reordered = read_selection(database, {'water': '__selection_water'})
-            self.assertEqual(reordered['documents'][0]['document'], result['documents'][0]['document'])
-            self.assertEqual(reordered['documents'][0]['version'], '2')
+            self.assertEqual(reordered['construction_records'][0]['document'], result['construction_records'][0]['document'])
+            self.assertEqual(reordered['construction_records'][0]['version'], '2')
             with self.assertRaises(psycopg.errors.ForeignKeyViolation), self.writer.transaction():
-                self.writer.execute("DELETE FROM atlas.structured_documents WHERE source_id='__selected_construction'")
+                self.writer.execute("DELETE FROM atlas.construction_records WHERE source_id='__selected_construction'")
 
         finally:
             self.writer.execute(
                 "DELETE FROM atlas.decision_features WHERE revision='__selection_water'"
             )
-            self.writer.execute("DELETE FROM atlas.structured_documents WHERE source_id='__selected_construction'")
+            self.writer.execute("DELETE FROM atlas.construction_records WHERE source_id='__selected_construction'")
             self.writer.execute("DELETE FROM atlas.source_assets WHERE source_id='__selection_raw'")

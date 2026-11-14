@@ -45,23 +45,23 @@ END $$;
 
 CREATE TRIGGER source_asset_immutable BEFORE UPDATE ON atlas.source_assets FOR EACH ROW EXECUTE FUNCTION atlas.guard_source_identity();
 
-CREATE TABLE atlas.structured_documents (
+CREATE TABLE atlas.construction_records (
     source_id text NOT NULL,
     version text NOT NULL,
     document jsonb NOT NULL,
-    CONSTRAINT structured_documents_document_check CHECK ((jsonb_typeof(document) = 'object'::text)),
-    CONSTRAINT structured_documents_source_id_check CHECK ((length(btrim(source_id)) > 0)),
-    CONSTRAINT structured_documents_version_check CHECK ((length(btrim(version)) > 0)),
-    CONSTRAINT structured_documents_pkey PRIMARY KEY (source_id, version)
+    CONSTRAINT construction_records_document_check CHECK ((jsonb_typeof(document) = 'object'::text)),
+    CONSTRAINT construction_records_source_id_check CHECK ((length(btrim(source_id)) > 0)),
+    CONSTRAINT construction_records_version_check CHECK ((length(btrim(version)) > 0)),
+    CONSTRAINT construction_records_pkey PRIMARY KEY (source_id, version)
 );
 
-CREATE FUNCTION atlas.reject_source_change() RETURNS trigger
+CREATE FUNCTION atlas.reject_construction_change() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
-  RAISE EXCEPTION 'source records are immutable; use a new source version';
+  RAISE EXCEPTION 'construction records are immutable; use a new version';
 END; $$;
 
-COMMENT ON TABLE atlas.structured_documents IS 'Immutable versioned JSON inputs identified by source_id and version.';
+COMMENT ON TABLE atlas.construction_records IS 'Immutable versioned construction settings identified by source_id and version.';
 
-CREATE TRIGGER structured_document_immutable BEFORE UPDATE ON atlas.structured_documents FOR EACH ROW EXECUTE FUNCTION atlas.reject_source_change();
+CREATE TRIGGER construction_record_immutable BEFORE UPDATE ON atlas.construction_records FOR EACH ROW EXECUTE FUNCTION atlas.reject_construction_change();

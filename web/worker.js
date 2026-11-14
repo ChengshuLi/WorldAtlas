@@ -1,4 +1,4 @@
-// Only deliberately published review assets are exposed. Evidence stays private.
+// Serve release files only. Raw sources remain private.
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -14,8 +14,8 @@ export default {
         status: "ready",
       });
     }
-    if (url.pathname === "/") {
-      const index = await env.ATLAS.get("review/index.html");
+    if (["/", "/index.html", "/review/index.html"].includes(url.pathname)) {
+      const index = await env.ATLAS.get("index.html");
       if (!index) {
         return new Response(
           "WorldAtlas has no published map yet.",
@@ -34,11 +34,16 @@ export default {
         },
       });
     }
-    const sourcesAlias = url.pathname === "/v8.0/sources" || url.pathname === "/v8.0/sources.html";
-    if ((!url.pathname.startsWith("/review/") && !sourcesAlias) || url.pathname.includes("%")) {
+    if (url.pathname.includes("%")) return new Response("Not found", { status: 404 });
+    // Keep existing public URLs working while storage has one release layout.
+    const sourcePage = /^\/(v[0-9]+\.[0-9]+)\/sources(?:\.html)?$/.exec(url.pathname);
+    let key = sourcePage ? `releases/${sourcePage[1]}/sources.html` : url.pathname.slice(1);
+    key = key.replace(/^review\/releases\//, "releases/")
+      .replace(/^review\/(v[0-9]+\.[0-9]+)\//, "releases/$1/");
+    if (!/^releases\/v[0-9]+\.[0-9]+(?:-rc\.?[1-9][0-9]*)?\/[A-Za-z0-9_.\/-]+$/.test(key)
+        || key.split("/").some(part => part === "." || part === "..")) {
       return new Response("Not found", { status: 404 });
     }
-    const key = sourcesAlias ? "review/v8.0/sources.html" : url.pathname.slice(1);
     const rangeHeader = request.headers.get("Range");
     let range;
     if (rangeHeader) {
