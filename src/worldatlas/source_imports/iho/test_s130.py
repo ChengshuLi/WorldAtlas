@@ -76,7 +76,7 @@ class ExtractTests(unittest.TestCase):
     def test_endpoint_ids_must_be_unique_and_nonempty(self):
         for ids in (['same', 'same'], ['', 'end'], ['start'], ['route-b-endpoint-0', 'end']):
             self.recipe['routes'][0]['endpoint_ids'] = ids
-            with self.subTest(ids=ids), self.assertRaisesRegex(ValueError, 'endpoint IDs'):
+            with self.subTest(ids=ids), self.assertRaisesRegex(ValueError, 'endpoint IDs|construction field: routes'):
                 self.extract()
 
     def test_south_grid_rule_preserves_the_raw_coordinate(self):
@@ -120,7 +120,7 @@ class ExtractTests(unittest.TestCase):
 
     def test_unknown_settings_are_rejected(self):
         self.recipe['routes'][0]['route_type'] = 'wgs84_geodesic'
-        with self.assertRaisesRegex(ValueError, 'invalid S-130 route selection'):
+        with self.assertRaisesRegex(ValueError, 'invalid construction field: routes'):
             self.extract()
 
     def test_wrong_coordinate_system(self):

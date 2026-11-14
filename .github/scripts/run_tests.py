@@ -13,6 +13,7 @@ import traceback
 import psycopg
 from psycopg import sql
 from psycopg.conninfo import make_conninfo
+from worldatlas.source_imports.contracts import database_checks
 
 import worldatlas
 
@@ -54,6 +55,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--suite', choices=SUITES, help='run one suite; defaults to all suites')
     args = parser.parse_args()
+    if (ROOT / "database/schema/construction_contracts.sql").read_text() != database_checks():
+        parser.error("construction checks are stale; regenerate database/schema/construction_contracts.sql")
     selected = (args.suite,) if args.suite else tuple(SUITES)
     # Unix socket paths must stay short on macOS; Python fixtures use their
     # ordinary temporary directories independently of this server directory.

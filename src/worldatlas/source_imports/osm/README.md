@@ -100,11 +100,14 @@ The construction record is a JSON object in the existing
 }
 ```
 
-`osm_way_chain` selects the assembly function in `ways.py`. Each stored
+`osm_way_chain` selects the typed function in [`build_boundary.py`](build_boundary.py),
+which calls the assembly function in `ways.py`. Its signature defines required
+fields and types; [shared validation](../README.md#document-validation) checks
+them in Python and PostgreSQL. Each stored
 document version is immutable. To change settings, insert a new version and
 select it in the command.
 
-`build_boundary()` reads and checks the construction record, looks up its exact
+`worldatlas-import` reads and validates the record, then `osm_way_chain()` looks up its exact
 raw source version in `atlas.source_assets`,
 downloads its R2 object into the work directory, checks its size and checksum,
 and assembles the boundary. A checked local download is reused on later runs.

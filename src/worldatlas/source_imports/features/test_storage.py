@@ -9,7 +9,8 @@ from unittest.mock import Mock
 
 import psycopg
 
-from worldatlas.source_imports.features.build_features import build_features
+from contextlib import nullcontext
+from worldatlas.source_imports.run_import import run_import
 from worldatlas.source_imports.features.geometry import geometry_hash, save_features
 
 
@@ -25,7 +26,7 @@ class StorageTests(unittest.TestCase):
         self.database.execute("INSERT INTO atlas.entity_registry_revisions VALUES ('__feature_entities')")
         for revision in ('__features_a', '__features_b'):
             self.database.execute("INSERT INTO atlas.decision_revisions VALUES (%s,'__feature_entities','{}')", (revision,))
-        self.recipe = dict(method='selected_vector_features', recipe_id='__features', recipe_version='1',
+        self.recipe = dict(method='selected_vector_features',
                            source_id='__feature_raw', source_version='1', basis='Selected provider points.',
                            id_field='provider_id', selections=[dict(feature_id='point-a', source_feature_id='a')])
         raw = json.dumps({'type': 'FeatureCollection', 'features': [
@@ -42,13 +43,13 @@ class StorageTests(unittest.TestCase):
         self.storage.get_object.side_effect = lambda **_: {'Body': io.BytesIO(raw)}
 
     def register(self, version):
-        self.recipe['recipe_version'] = version
         text = json.dumps(self.recipe, sort_keys=True, separators=(',', ':'))
         self.database.execute('INSERT INTO atlas.construction_records(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
                               ('__features', version, text))
 
     def build(self, version='1', revision='__features_a'):
-        return build_features(self.database, self.storage, '__features', version, revision, self.work)
+        return run_import(lambda: nullcontext(self.database), '__features', version, storage=self.storage,
+                          revision=revision, work_dir=self.work)
 
     def snapshot(self, revision='__features_a'):
         return self.database.execute('SELECT feature_id,geometry,coordinate_reference,geometry_sha256,evidence,construction_id,construction_version '
@@ -97,7 +98,7 @@ class StorageTests(unittest.TestCase):
                     dict(feature_id='point-b', source_id='missing', source_version='1',
                          source_feature_id='b', geometry={'type': 'Point', 'coordinates': [12, 22]})]
         with self.assertRaises(psycopg.errors.ForeignKeyViolation):
-            save_features(self.database, '__features_a', features, self.recipe)
+            save_features(self.database, '__features_a', features, dict(self.recipe, recipe_id='__features', recipe_version='1'))
         self.assertEqual(self.snapshot(), before)
 
     def test_table_import_uses_the_same_atomic_storage_and_cache(self):
@@ -129,7 +130,7 @@ class StorageTests(unittest.TestCase):
     def test_signed_zero_checksum_matches_the_geometry_read_back_from_jsonb(self):
         save_features(self.database, '__features_a', [dict(
             feature_id='zero', source_id='__feature_raw', source_version='1', source_feature_id='a',
-            geometry={'type': 'Point', 'coordinates': [-0.0, 0.0]})], self.recipe)
+            geometry={'type': 'Point', 'coordinates': [-0.0, 0.0]})], dict(self.recipe, recipe_id='__features', recipe_version='1'))
         row = self.snapshot()[0]
         self.assertEqual(geometry_hash(row[1]), row[3])
 
@@ -171,7 +172,7 @@ class StorageTests(unittest.TestCase):
     def test_native_geometry_retains_its_declared_coordinate_reference(self):
         save_features(self.database, '__features_a', [dict(
             feature_id='native', source_id='__feature_raw', source_version='1', source_feature_id='a',
-            coordinate_reference='EPSG:3857', geometry={'type': 'Point', 'coordinates': [1000, 2000]})], self.recipe)
+            coordinate_reference='EPSG:3857', geometry={'type': 'Point', 'coordinates': [1000, 2000]})], dict(self.recipe, recipe_id='__features', recipe_version='1'))
         row = self.snapshot()[0]
         self.assertEqual(row[1], {'type': 'Point', 'coordinates': [1000, 2000]})
         self.assertEqual(row[2], 'EPSG:3857')

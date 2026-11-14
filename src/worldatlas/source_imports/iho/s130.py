@@ -13,45 +13,24 @@ EPSG_4326 = 'http://www.opengis.net/def/crs/EPSG/0/4326'
 
 
 def validate_recipe(recipe):
-    """Check the selections needed by this S-130 construction method."""
-    if not isinstance(recipe, dict):
-        raise ValueError('invalid S-130 construction record')
-    strings = ('source_id', 'source_version', 'gml_member', 'gml_sha256', 'basis')
-    fields = set(strings) | {'method', 'max_step_km', 'routes'}
-    if set(recipe) - {'recipe_id', 'recipe_version'} != fields:
-        raise ValueError('invalid S-130 construction record fields')
-    if recipe.get('method') != 's130_rhumb_routes':
-        raise ValueError('unsupported S-130 construction method')
-    if any(not isinstance(recipe.get(key), str) or not recipe[key].strip() for key in strings):
-        raise ValueError('invalid S-130 construction record')
-    step = recipe.get('max_step_km')
-    if type(step) not in (float, int) or not 0 < step <= 1:
+    """Validate shared parameter types, then geographic step and identity relationships."""
+    from worldatlas.source_imports.contracts import bind_document
+    from worldatlas.source_imports.iho.build_routes import s130_rhumb_routes
+    bind_document(s130_rhumb_routes, {key: value for key, value in recipe.items()
+                                    if key not in ('recipe_id', 'recipe_version')})
+    if not 0 < recipe['max_step_km'] <= 1:
         raise ValueError('max_step_km must be in (0,1]')
-    routes = recipe.get('routes')
-    if not isinstance(routes, list) or not routes:
+    if not recipe['routes']:
         raise ValueError('missing S-130 route selections')
     ids, endpoint_ids = set(), set()
-    for route in routes:
-        required = {'route_id', 'construction_line_id', 'reverse', 'endpoint_names'}
-        if (not isinstance(route, dict)
-                or not required <= set(route) <= required | {'extend_to_south_grid_edge', 'endpoint_ids'}
-                or any(not isinstance(route.get(key), str) or not route[key].strip()
-                       for key in ('route_id', 'construction_line_id'))
-                or type(route.get('reverse')) is not bool
-                or type(route.get('extend_to_south_grid_edge', False)) is not bool
-                or not isinstance(route.get('endpoint_names'), list)
-                or len(route['endpoint_names']) != 2
-                or any(not isinstance(name, str) or not name.strip() for name in route['endpoint_names'])):
-            raise ValueError('invalid S-130 route selection')
+    for route in recipe['routes']:
         if route['route_id'] in ids:
             raise ValueError('duplicate route selection')
         ids.add(route['route_id'])
         selected_ids = route.get('endpoint_ids',
                                  [f"{route['route_id']}-endpoint-{i}" for i in range(2)])
-        if (not isinstance(selected_ids, list) or len(selected_ids) != 2
-                or any(not isinstance(ident, str) or not ident.strip() for ident in selected_ids)
-                or len(set(selected_ids)) != 2 or endpoint_ids.intersection(selected_ids)):
-            raise ValueError('invalid or duplicate endpoint IDs')
+        if len(set(selected_ids)) != 2 or endpoint_ids.intersection(selected_ids):
+            raise ValueError('duplicate endpoint IDs')
         endpoint_ids.update(selected_ids)
 
 

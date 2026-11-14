@@ -4,6 +4,7 @@ BEGIN;
 CREATE SCHEMA atlas;
 
 \ir schema/sources.sql
+\ir schema/construction_contracts.sql
 \ir schema/entities.sql
 \ir schema/geographic_decisions.sql
 \ir schema/mainland.sql

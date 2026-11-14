@@ -12,6 +12,7 @@ It loads these files in dependency order, within one transaction:
 | File | Contents |
 | --- | --- |
 | [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and versioned construction documents. |
+| [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated checks for typed construction parameters. |
 | [`entities.sql`](schema/entities.sql) | Stable entity IDs/colors, revisioned names/parents and grid-code bindings. |
 | [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, decisions, shared explanations, citations, ocean routes and assignment policies. |
 | [`mainland.sql`](schema/mainland.sql) | Editable boundaries, raw-source links, assembled seed regions and component witnesses. |
@@ -54,14 +55,20 @@ Applied upgrades are retained in `migrations/`:
 | `001_remove_source_provenance.sql` | Remove unused raw-source metadata. |
 | `002_simplify_structured_documents.sql` | Remove redundant document checksums/sizes and use JSONB. |
 | `003_rename_construction_records.sql` | Rename the construction table and its supporting objects. |
+| `004_validate_construction_parameters.sql` | Install generated checks and validate existing construction documents. |
 
 Apply only upgrades that the existing database has not received. Fresh databases
 already have their final schema. Back up and test existing data before an upgrade.
 Historical input archival/removal is a separate data backfill, after verified R2
 uploads; it is not geographic data embedded in the schema SQL.
 
-`construction_records` holds current versioned construction instructions. Importers
-validate their settings; no method-specific database validation has been added.
+`construction_records` holds current versioned construction instructions.
+Its method/field/type checks are generated from the registered constructors'
+Python signatures and nested types. The command uses those same definitions;
+there is no separate handwritten SQL field list. Regeneration and upgrade steps
+are documented in [source imports](../src/worldatlas/source_imports/README.md#document-validation).
+CI rejects a stale generated file. Changing a validator requires revalidating
+existing rows, which the generated upgrade does when replacing the constraint.
 Original/intermediate geographic records still in use remain in their own tables.
 Historical release snapshots and superseded pipeline inputs live in the release's
 R2 `inputs.json.gz`, tracked by `map_releases`. The archive preserves their original
@@ -74,7 +81,7 @@ SQL checks cover database guarantees:
 | Check | Purpose |
 | --- | --- |
 | `source_catalog.sql` | Raw-file identity, metadata corrections and source references. |
-| `construction_records.sql` | JSON values, formatting-independent content and immutable document versions. |
+| `construction_records.sql` | Valid construction shapes, required fields, JSON types and immutable versions. |
 | `entity_registry.sql` | Stable IDs, hierarchy relationships and grid-code bindings. |
 | `geographic_entity_colors.sql` | Optional colors and valid RGB values. |
 | `geographic_decisions.sql` | Geometry records, shared explanations, citations and entity targets. |

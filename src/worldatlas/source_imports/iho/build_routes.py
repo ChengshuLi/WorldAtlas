@@ -1,9 +1,12 @@
 """Build selected IHO S-130 routes from a Neon construction record and raw R2 data."""
 
 from psycopg.types.json import Jsonb
+from typing import NotRequired, TypedDict
 
-from worldatlas.source_imports.iho.s130 import extract_routes, validate_recipe
-from worldatlas.source_imports.atlas_sources.catalog import read_recipe, catalog_source, download_source
+from worldatlas.source_imports.contracts import NonEmptyText, Runtime
+
+from worldatlas.source_imports.iho.s130 import extract_routes
+from worldatlas.source_imports.atlas_sources.catalog import catalog_source, download_source
 
 
 def save_routes(database, revision, result, source, recipe):
@@ -47,16 +50,28 @@ def save_routes(database, revision, result, source, recipe):
                 )
 
 
-def build_routes(database, client, recipe_id, recipe_version, revision, work_dir):
-    with database.transaction():
-        if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
-                            (revision,)).fetchone() is None:
-            raise ValueError('destination decision revision does not exist')
-        recipe = read_recipe(database, recipe_id, recipe_version)
-        validate_recipe(recipe)
-        source = catalog_source(database, recipe['source_id'], recipe['source_version'])
-    archive = download_source(client, source, work_dir)
-    result = extract_routes(archive, source['sha256'], recipe)
-    save_routes(database, revision, result, source, recipe)
-    return dict(revision=revision, route_ids=[route['route_id'] for route in result['routes']],
+class Route(TypedDict):
+    route_id: NonEmptyText
+    construction_line_id: NonEmptyText
+    reverse: bool
+    endpoint_names: tuple[NonEmptyText, NonEmptyText]
+    endpoint_ids: NotRequired[tuple[NonEmptyText, NonEmptyText]]
+    extend_to_south_grid_edge: NotRequired[bool]
+
+
+def s130_rhumb_routes(runtime: Runtime, *, source_id: NonEmptyText, source_version: NonEmptyText,
+                      gml_member: NonEmptyText, gml_sha256: NonEmptyText, basis: NonEmptyText,
+                      max_step_km: float, routes: list[Route]):
+    """Extract selected S-130 rhumb routes in their chosen direction."""
+    recipe = runtime.recipe(locals())
+    with runtime.connect() as database:
+        with database.transaction():
+            if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
+                                (runtime.revision,)).fetchone() is None:
+                raise ValueError('destination decision revision does not exist')
+            source = catalog_source(database, source_id, source_version)
+        archive = download_source(runtime.storage, source, runtime.work_dir)
+        result = extract_routes(archive, source['sha256'], recipe)
+        save_routes(database, runtime.revision, result, source, recipe)
+    return dict(revision=runtime.revision, route_ids=[route['route_id'] for route in result['routes']],
                 endpoint_count=len(result['endpoints']), archive=str(archive))

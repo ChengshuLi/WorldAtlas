@@ -5,7 +5,7 @@ import os
 import unittest
 
 import psycopg
-from worldatlas.source_imports.traces.build_boundary import build_boundary
+from worldatlas.source_imports.run_import import run_import
 
 
 @unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'),
@@ -33,7 +33,8 @@ class DatabaseTests(unittest.TestCase):
                               ('__trace_construction', version, text))
 
     def build(self, version='1', expected=None):
-        return build_boundary(self.database, '__trace_construction', version, expected)
+        return run_import(lambda: nullcontext(self.database), '__trace_construction', version,
+                          expected_geometry_sha256=expected)
 
     def row(self):
         return self.database.execute("SELECT line_id,source_id,source_version,geometry,geometry_sha256,coordinate_reference,provenance,construction_id,construction_version FROM atlas.geographic_line_observations "
@@ -108,12 +109,6 @@ class DatabaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'smoothed trace'):
             self.build('invalid-output')
         self.assertEqual(self.row(), before)
-
-    def test_unknown_method_does_not_write(self):
-        self.register('2', dict(self.recipe, method='some.python.function'))
-        with self.assertRaisesRegex(ValueError, 'unsupported'):
-            self.build('2')
-        self.assertIsNone(self.row())
 
     def test_missing_record_does_not_write(self):
         with self.assertRaisesRegex(ValueError, 'construction record is missing'):

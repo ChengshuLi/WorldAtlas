@@ -11,7 +11,9 @@ from unittest.mock import Mock
 import psycopg
 from psycopg.types.json import Jsonb
 
-from worldatlas.source_imports.iho.build_routes import build_routes, save_routes
+from contextlib import nullcontext
+from worldatlas.source_imports.run_import import run_import
+from worldatlas.source_imports.iho.build_routes import save_routes
 from worldatlas.source_imports.iho.s130 import extract_routes
 from worldatlas.source_imports.iho.test_s130 import fixture, GML
 
@@ -56,8 +58,8 @@ class BuildTests(unittest.TestCase):
                               ('__iho_recipe', version, text))
 
     def build(self, version='1', revision='__iho_a'):
-        return build_routes(self.database, self.storage, '__iho_recipe', version,
-                            revision, self.work / 'downloads')
+        return run_import(lambda: nullcontext(self.database), '__iho_recipe', version,
+                          storage=self.storage, revision=revision, work_dir=self.work / 'downloads')
 
     def snapshot(self, revision='__iho_a'):
         return [self.database.execute(f'SELECT * FROM atlas.{table} WHERE revision=%s ORDER BY 2,3',

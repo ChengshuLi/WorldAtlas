@@ -5,12 +5,15 @@ import logging
 from pathlib import Path
 import platform
 import time
+from typing import Any
+
+from worldatlas.source_imports.contracts import NonEmptyText, Runtime
 
 import numpy as np
 from pyproj import Transformer
 from shapely.geometry import LineString
 
-from worldatlas.source_imports.atlas_sources.catalog import assemble_parts, catalog_source, download_source, read_recipe
+from worldatlas.source_imports.atlas_sources.catalog import assemble_parts, catalog_source, download_source
 from worldatlas.source_imports.source_io import save_boundary
 from worldatlas.source_imports.watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
 from worldatlas.source_imports.watersheds.drainage import compute_flow, possible_destinations, single_destinations
@@ -265,16 +268,21 @@ def construct(recipe, files):
     return geometry, report
 
 
-def build_boundary(connect, client, recipe_id, recipe_version, revision, work_dir):
-    """Read immutable inputs, calculate, then save the final result atomically."""
+def watershed_boundary(runtime: Runtime, *, boundary_id: NonEmptyText, basis: NonEmptyText,
+                       sources: dict[NonEmptyText, dict[str, Any]],
+                       lines: dict[NonEmptyText, list[dict[str, Any]]],
+                       sections: list[dict[str, Any]], joins: list[dict[str, Any]],
+                       start: dict[str, Any], end: dict[str, Any],
+                       terrains: dict[NonEmptyText, dict[str, Any]] | None = None,
+                       evidence_sources: list[dict[str, NonEmptyText]] | None = None,
+                       geographic_choices: dict[str, Any] | None = None):
+    """Construct ordered source lines, drainage divides, rivers and geographic joins."""
+    recipe = runtime.recipe(locals())
     started = time.monotonic()
-    with connect() as database, database.transaction():
+    with runtime.connect() as database, database.transaction():
         if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
-                            (revision,)).fetchone() is None:
+                            (runtime.revision,)).fetchone() is None:
             raise ValueError('destination decision revision does not exist')
-        recipe = read_recipe(database, recipe_id, recipe_version)
-        if recipe.get('method') != 'watershed_boundary' or not recipe.get('basis') or not recipe.get('boundary_id'):
-            raise ValueError('invalid watershed construction record')
         selections = resolve_sources(database, recipe)
         evidence = [dict(catalog_source(database, item['source_id'], item['version']),
                          relationship='supporting_evidence')
@@ -282,24 +290,24 @@ def build_boundary(connect, client, recipe_id, recipe_version, revision, work_di
     catalog_seconds = time.monotonic() - started
     started = time.monotonic()
     acquisition = {}
-    files, references = stage_sources(client, selections, work_dir, timing=acquisition)
+    files, references = stage_sources(runtime.storage, selections, runtime.work_dir, timing=acquisition)
     staging_seconds = time.monotonic() - started
     geometry, report = construct(recipe, files)
-    runtime = runtime_versions()
+    versions = runtime_versions()
     provenance = {'basis': recipe['basis']}
     provenance['shared_drainage'] = {
         name: terrain['network']['shared_sections']
         for name, terrain in report['terrain'].items() if terrain['network']['shared_sections']}
     provenance['river_validation'] = report['river_checks']
     started = time.monotonic()
-    with connect() as database:
-        digest = save_boundary(database, revision, recipe['boundary_id'], geometry, provenance,
-                               [*references, *evidence], construction=(recipe_id, recipe_version))
-    report.update(revision=revision, boundary_id=recipe['boundary_id'], sha256=digest,
+    with runtime.connect() as database:
+        digest = save_boundary(database, runtime.revision, boundary_id, geometry, provenance,
+                               [*references, *evidence], construction=(runtime.recipe_id, runtime.version))
+    report.update(revision=runtime.revision, boundary_id=boundary_id, sha256=digest,
                   vertices=len(geometry['coordinates']), catalog_seconds=catalog_seconds,
                   source_staging_seconds=staging_seconds,
                   download_seconds=acquisition.get('download_seconds', 0.),
                   source_processing_seconds=staging_seconds - acquisition.get('download_seconds', 0.),
                   save_seconds=time.monotonic() - started)
-    report['runtime'] = runtime
+    report['runtime'] = versions
     return report

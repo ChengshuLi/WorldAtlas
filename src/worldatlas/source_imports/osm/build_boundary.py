@@ -1,7 +1,8 @@
 """Build an editable Neon boundary from an OSM way archive cataloged in Neon."""
 
+from worldatlas.source_imports.contracts import NonEmptyText, Runtime
 from worldatlas.source_imports.osm.ways import assemble_archive
-from worldatlas.source_imports.atlas_sources.catalog import read_recipe, catalog_source, download_source
+from worldatlas.source_imports.atlas_sources.catalog import catalog_source, download_source
 from worldatlas.source_imports.source_io import save_boundary as save_mainland_boundary
 
 
@@ -13,25 +14,18 @@ def save_boundary(database, revision, geometry, source, recipe):
                                   construction=(recipe['recipe_id'], recipe['recipe_version']))
 
 
-def build_boundary(database, client, recipe_id, recipe_version, revision,
-                   work_dir, expected_geometry_sha256=None):
-    """Look up, download, assemble, and save one boundary in the requested revision."""
-    with database.transaction():
-        if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
-                            (revision,)).fetchone() is None:
-            raise ValueError('destination decision revision does not exist')
-        recipe = read_recipe(database, recipe_id, recipe_version)
-        fields = {'method', 'source_id', 'source_version', 'boundary_id', 'basis',
-                  'recipe_id', 'recipe_version'}
-        if (set(recipe) != fields
-                or any(not isinstance(value, str) or not value.strip() for value in recipe.values())):
-            raise ValueError('invalid OSM construction record')
-        if recipe['method'] != 'osm_way_chain':
-            raise ValueError('unsupported construction method')
-        source = catalog_source(database, recipe['source_id'], recipe['source_version'])
-    archive = download_source(client, source, work_dir)
-    geometry = assemble_archive(archive, source['sha256'], expected_geometry_sha256)
-    digest = save_boundary(database, revision, geometry, source, recipe)
-    return {'revision': revision, 'boundary_id': recipe['boundary_id'],
-            'vertices': len(geometry['coordinates']), 'sha256': digest,
-            'archive': str(archive)}
+def osm_way_chain(runtime: Runtime, *, source_id: NonEmptyText, source_version: NonEmptyText,
+                  boundary_id: NonEmptyText, basis: NonEmptyText):
+    """Join archived OSM border segments at shared node IDs, preserving coordinates."""
+    recipe = runtime.recipe(locals())
+    with runtime.connect() as database:
+        with database.transaction():
+            if database.execute('SELECT 1 FROM atlas.decision_revisions WHERE revision=%s',
+                                (runtime.revision,)).fetchone() is None:
+                raise ValueError('destination decision revision does not exist')
+            source = catalog_source(database, source_id, source_version)
+        archive = download_source(runtime.storage, source, runtime.work_dir)
+        geometry = assemble_archive(archive, source['sha256'], runtime.expected_geometry_sha256)
+        digest = save_boundary(database, runtime.revision, geometry, source, recipe)
+    return {'revision': runtime.revision, 'boundary_id': boundary_id,
+            'vertices': len(geometry['coordinates']), 'sha256': digest, 'archive': str(archive)}

@@ -10,7 +10,9 @@ import zipfile
 
 from psycopg.types.json import Jsonb
 
-from worldatlas.source_imports.osm.build_boundary import build_boundary, save_boundary
+from contextlib import nullcontext
+from worldatlas.source_imports.run_import import run_import
+from worldatlas.source_imports.osm.build_boundary import save_boundary
 
 
 def source_fixture(endpoint=(1, 1), *, coordinates=None):
@@ -79,8 +81,9 @@ class DatabaseTest(unittest.TestCase):
         return dict(recipe, recipe_id='__osm_recipe', recipe_version=version)
 
     def build(self, revision='__osm_a', version='1', expected=None):
-        return build_boundary(self.database, self.storage, '__osm_recipe', version,
-                              revision, self.directory, expected)
+        return run_import(lambda: nullcontext(self.database), '__osm_recipe', version,
+                          storage=self.storage, revision=revision, work_dir=self.directory,
+                          expected_geometry_sha256=expected)
 
     def boundary(self, revision='__osm_a'):
         return self.database.execute(
@@ -183,23 +186,13 @@ class DatabaseTest(unittest.TestCase):
             self.build(version='missing')
         self.storage.get_object.assert_not_called()
 
-    def test_incomplete_recipe_stops_before_download(self):
-        self.database.execute("INSERT INTO atlas.construction_records VALUES "
-                              "('__osm_recipe','incomplete','{}')")
-        with self.assertRaisesRegex(ValueError, 'invalid OSM construction record'):
-            self.build(version='incomplete')
-        self.storage.get_object.assert_not_called()
-
-    def test_unknown_method_stops_before_download(self):
-        self.add_recipe('unknown-method', method='some.python.function')
-        with self.assertRaisesRegex(ValueError, 'unsupported construction method'):
-            self.build(version='unknown-method')
-        self.storage.get_object.assert_not_called()
-
-    def test_empty_description_stops_before_download(self):
-        self.add_recipe('empty-basis', basis='')
-        with self.assertRaisesRegex(ValueError, 'invalid OSM construction record'):
-            self.build(version='empty-basis')
+    def test_malformed_recipes_are_rejected_when_inserted(self):
+        import psycopg
+        for changes in ({'method': 'some.python.function'}, {'basis': ''}, {'extra': 1}):
+            with self.subTest(changes=changes), self.assertRaises(psycopg.errors.CheckViolation), self.database.transaction():
+                self.add_recipe('invalid', **changes)
+        with self.assertRaises(psycopg.errors.CheckViolation), self.database.transaction():
+            self.database.execute("INSERT INTO atlas.construction_records VALUES ('__osm_recipe','incomplete','{}')")
         self.storage.get_object.assert_not_called()
 
     def test_corrupt_download_does_not_create_boundary(self):

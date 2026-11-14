@@ -10,7 +10,7 @@ import time
 
 
 def read_recipe(database, recipe_id, version):
-    """Read a versioned construction record from the existing document table."""
+    """Read a versioned construction record from the construction table."""
     row = database.execute(
         'SELECT document FROM atlas.construction_records '
         'WHERE source_id=%s AND version=%s',
@@ -21,7 +21,7 @@ def read_recipe(database, recipe_id, version):
     recipe = row[0]
     if not isinstance(recipe, dict):
         raise ValueError('invalid construction record')
-    return dict(recipe, recipe_id=recipe_id, recipe_version=version)
+    return recipe
 
 
 def catalog_source(database, source_id, version):

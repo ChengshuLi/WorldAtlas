@@ -29,6 +29,10 @@ endpoints, route definitions, and ordered endpoint links in Neon.
 
 ## Construction record
 
+The typed constructor signature defines required fields, optional fields and
+types. [Shared validation](../README.md#document-validation) enforces these in
+Python and PostgreSQL; the example below explains the settings.
+
 Store the geographic selections in the existing `atlas.construction_records`
 table. Each record version contains a JSON object like this:
 
@@ -69,7 +73,7 @@ To change an immutable construction record, insert a new version.
 
 ## Run
 
-Use Python 3.11 or later with `boto3` and `psycopg`. Set `NEON_DATABASE_URL` to
+Use the shared [project environment](../../../../environment.yml). Set `NEON_DATABASE_URL` to
 the working database and configure R2 access through `AWS_PROFILE`.
 Run from the repository root, replacing the uppercase placeholders and local
 work path with your settings:

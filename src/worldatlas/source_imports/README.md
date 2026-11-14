@@ -30,7 +30,8 @@ for one another so validation sees both committed edits.
 The assembled region must close and form a valid polygon before the save commits.
 
 Tests live beside the code they exercise. The root `test_run_import.py` covers
-method selection; `atlas_sources/test_catalog.py` covers downloads and multipart files.
+method selection; `test_contracts.py` checks Python/PostgreSQL agreement and direct SQL rejection.
+`atlas_sources/test_catalog.py` covers downloads and multipart files.
 Each package README identifies its calculation and storage tests.
 The `__init__.py` files mark importable packages and enable test discovery.
 
@@ -59,7 +60,7 @@ All file-backed imports additionally require `--revision`,
 version. Set `NEON_DATABASE_URL` and any required AWS profile outside the code.
 A supplied work directory also receives a JSON receipt after a successful run.
 
-Use the [database queries](../../../database/README.md#find-the-selected-construction)
+Use the [database queries](../../../database/README.md#find-and-regenerate-a-construction)
 to find the construction ID/version selected by an editable record. Use that
 reference rather than assuming that the largest version number is selected.
 The destination revision is the record's revision, also selected by the map
@@ -71,6 +72,39 @@ For example, the Lydekker construction record can be run with:
 worldatlas-import \
   --recipe lydekker-boundary-construction 1
 ```
+
+## Document validation
+
+Each constructor in `build_*.py` declares its document fields as typed keyword-only
+arguments. An argument without a default is required; a default makes it optional.
+`NonEmptyText` rejects empty text and text containing only spaces, tabs or line
+breaks. Nested `TypedDict` definitions describe selected features and routes.
+The function's name supplies `method`; `IMPORTERS` registers the functions once.
+
+[`contracts.py`](contracts.py) reads those signatures for both command validation
+and generated PostgreSQL checks. Unknown methods, unknown fields, missing required
+fields and incorrect JSON types are rejected, including direct SQL inserts.
+Defaults are applied when Python calls the constructor. `runtime` contains the
+connections, work directory, destination revision and construction identity;
+it is created by the command and is not part of the stored document.
+
+The constructors still check source identity, coordinates, selections and joins
+while calculating geometry. Typed fields do not replace those geographic checks.
+For compound geographic operations, dictionary settings are interpreted and
+checked by the corresponding algorithm.
+
+After changing a signature or its nested types, regenerate the database checks:
+
+```bash
+python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql
+```
+
+Update the initial schema and add an explicit, transactional upgrade under
+`database/migrations/` containing the generated SQL. Applying that upgrade
+rechecks every existing construction. CI compares the generated SQL with the
+committed file before running tests. Do not edit generated predicates or keep
+another field list in a validator. Use the constructor signature for the current
+required fields, optional fields and types; examples below explain their use.
 
 ## Regenerate the selected inputs
 

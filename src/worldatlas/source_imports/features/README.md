@@ -6,8 +6,10 @@ reads these polygons and points instead of reopening their raw archives.
 [`vector.py`](vector.py) reads selected provider IDs with GDAL, checks optional
 identity properties and converts coordinates to WGS84 longitude/latitude.
 [`geometry.py`](geometry.py) validates, checksums and saves the geometry.
-[`build_features.py`](build_features.py) resolves the construction and raw source
-in Neon, uses the verified R2 cache and saves the complete import in one transaction.
+[`build_features.py`](build_features.py) declares one typed entry point per feature
+method and shares catalog lookup, the verified R2 cache and transactional storage.
+Its signatures and nested types define the fields accepted by
+[shared Python and database validation](../README.md#document-validation).
 Unrelated evidence and relationships survive repeat imports; a failed import
 leaves all selected records unchanged.
 

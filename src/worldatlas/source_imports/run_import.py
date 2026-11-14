@@ -10,45 +10,19 @@ from pathlib import Path
 from worldatlas.source_imports.atlas_sources.catalog import read_recipe
 
 
-def _trace(connect, storage, recipe_id, version, revision, work_dir, expected):
-    from worldatlas.source_imports.traces.build_boundary import build_boundary
-    with connect() as database:
-        return build_boundary(database, recipe_id, version, expected)
+from worldatlas.source_imports.contracts import Runtime, bind_document
+from worldatlas.source_imports.traces.build_boundary import smooth_latitude_trace
+from worldatlas.source_imports.osm.build_boundary import osm_way_chain
+from worldatlas.source_imports.iho.build_routes import s130_rhumb_routes
+from worldatlas.source_imports.watersheds.build_boundary import watershed_boundary
+from worldatlas.source_imports.features.build_features import (
+    selected_vector_features, selected_table_points, selected_osm_features, s130_areas,
+)
 
-
-def _osm(connect, storage, recipe_id, version, revision, work_dir, expected):
-    from worldatlas.source_imports.osm.build_boundary import build_boundary
-    with connect() as database:
-        return build_boundary(database, storage, recipe_id, version, revision, work_dir, expected)
-
-
-def _iho(connect, storage, recipe_id, version, revision, work_dir, expected):
-    from worldatlas.source_imports.iho.build_routes import build_routes
-    with connect() as database:
-        return build_routes(database, storage, recipe_id, version, revision, work_dir)
-
-
-def _watershed(connect, storage, recipe_id, version, revision, work_dir, expected):
-    from worldatlas.source_imports.watersheds.build_boundary import build_boundary
-    return build_boundary(connect, storage, recipe_id, version, revision, work_dir)
-
-
-def _features(connect, storage, recipe_id, version, revision, work_dir, expected):
-    from worldatlas.source_imports.features.build_features import build_features
-    with connect() as database:
-        return build_features(database, storage, recipe_id, version, revision, work_dir)
-
-
-IMPORTERS = {
-    'smooth_latitude_trace': _trace,
-    'osm_way_chain': _osm,
-    's130_rhumb_routes': _iho,
-    'watershed_boundary': _watershed,
-    'selected_vector_features': _features,
-    'selected_table_points': _features,
-    'selected_osm_features': _features,
-    's130_areas': _features,
-}
+IMPORTERS = {constructor.__name__: constructor for constructor in (
+    smooth_latitude_trace, osm_way_chain, s130_rhumb_routes, watershed_boundary,
+    selected_vector_features, selected_table_points, selected_osm_features, s130_areas,
+)}
 
 
 def selected_constructions(database, revisions):
@@ -74,7 +48,8 @@ def run_import(connect, recipe_id, version, *, storage=None, revision=None,
                work_dir=None, expected_geometry_sha256=None):
     """Read the method, check required inputs, and call its Python constructor."""
     with connect() as database:
-        method = read_recipe(database, recipe_id, version).get('method')
+        document = read_recipe(database, recipe_id, version)
+    method = document.get('method')
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
     if importer is None:
         raise ValueError(f'unsupported source construction method: {method!r}')
@@ -83,8 +58,10 @@ def run_import(connect, recipe_id, version, *, storage=None, revision=None,
     if (expected_geometry_sha256 is not None and
             method not in ('smooth_latitude_trace', 'osm_way_chain')):
         raise ValueError('an expected geometry checksum applies to traced and OSM boundaries')
-    return importer(connect, storage, recipe_id, version, revision, work_dir,
-                    expected_geometry_sha256)
+    arguments = bind_document(importer, document)
+    runtime = Runtime(connect, storage, recipe_id, version, method, revision, work_dir,
+                      expected_geometry_sha256)
+    return importer(runtime, **arguments)
 
 
 def main():

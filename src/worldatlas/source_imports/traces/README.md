@@ -11,6 +11,10 @@ separate correction or adjustment stage.
 
 ## Construction record
 
+The typed constructor signature defines required fields, optional fields and
+types. [Shared validation](../README.md#document-validation) enforces these in
+Python and PostgreSQL; the example below explains the settings.
+
 Use the existing `atlas.construction_records` table. Its `source_id` identifies
 the construction record and `version` selects its version. The following fields
 are JSON keys inside its `document` column, not separate table columns. The
@@ -44,7 +48,7 @@ that version.
 
 ## Run
 
-Use Python 3.11 or later with NumPy, SciPy, and psycopg. Set
+Use the shared [project environment](../../../../environment.yml). Set
 `NEON_DATABASE_URL` to the working database, then run from the repository root:
 
 ```bash

@@ -287,7 +287,9 @@ class SelectionTests(unittest.TestCase):
                 "VALUES ('__selection_water','point','__selection_raw','1','provider-point',%s,%s,'OGC:CRS84','{}')",
                 (digest, Jsonb(geometry)),
             )
-            document = '{ "method": "selected_vector_features", "basis": "Selected source — côte" }'
+            document = json.dumps(dict(method='selected_vector_features', basis='Selected source — côte',
+                                       source_id='__selection_raw', source_version='1', id_field='id',
+                                       selections=[dict(feature_id='point', source_feature_id='provider-point')]))
             self.writer.execute('INSERT INTO atlas.construction_records(source_id,version,document) VALUES (%s,%s,%s::jsonb)',
                                 ('__selected_construction','1',document))
             self.writer.execute("UPDATE atlas.decision_features SET construction_id='__selected_construction',construction_version='1' "

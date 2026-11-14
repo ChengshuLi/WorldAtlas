@@ -15,7 +15,8 @@ from osgeo import gdal
 from pyproj import CRS, Transformer
 import shapefile
 
-from worldatlas.source_imports.watersheds.build_boundary import build_boundary, construct
+from worldatlas.source_imports.run_import import run_import
+from worldatlas.source_imports.watersheds.build_boundary import construct
 
 
 def fixtures(directory):
@@ -265,8 +266,8 @@ class StorageTests(unittest.TestCase):
                         ('__watershed_recipe', version, text))
 
     def build(self, version='1'):
-        return build_boundary(lambda: nullcontext(self.db), self.client, '__watershed_recipe', version,
-                              '__watershed', self.directory / 'cache')
+        return run_import(lambda: nullcontext(self.db), '__watershed_recipe', version, storage=self.client,
+                          revision='__watershed', work_dir=self.directory / 'cache')
 
     def row(self):
         return self.db.execute('SELECT geometry,geometry_sha256,provenance,construction_version '
@@ -297,14 +298,14 @@ class StorageTests(unittest.TestCase):
             return database
 
         def calculate(recipe, files):
-            self.assertEqual(len(connections), 1)
-            self.assertTrue(connections[0].closed)
+            self.assertEqual(len(connections), 2)
+            self.assertTrue(all(connection.closed for connection in connections))
             return construct(recipe, files)
 
         with patch('worldatlas.source_imports.watersheds.build_boundary.construct', side_effect=calculate):
-            receipt = build_boundary(connect, self.client, '__watershed_recipe', '1',
-                                     '__watershed', self.directory / 'cache')
-        self.assertEqual(len(connections), 2)
+            receipt = run_import(connect, '__watershed_recipe', '1', storage=self.client,
+                                 revision='__watershed', work_dir=self.directory / 'cache')
+        self.assertEqual(len(connections), 3)
         self.assertTrue(all(database.closed for database in connections))
         self.assertEqual(self.row()[1], receipt['sha256'])
 

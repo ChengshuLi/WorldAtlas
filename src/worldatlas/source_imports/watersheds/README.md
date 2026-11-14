@@ -19,7 +19,8 @@ selections live in the construction record.
 | [`../source_io.py`](../source_io.py) | Save boundary geometry and source links together; refresh assembled region checksums. |
 
 The split follows the work: read source features, prepare terrain, calculate
-drainage, then assemble the boundary. `build_boundary.py` connects those steps to
+drainage, then assemble the boundary. The typed `watershed_boundary()` entry point
+in `build_boundary.py` declares the construction fields and connects those steps to
 Neon and R2. `waterways.py` keeps river networks and basin polygons together
 because both establish drainage destinations. Source reading does not join
 separate features; that responsibility belongs to boundary assembly.
