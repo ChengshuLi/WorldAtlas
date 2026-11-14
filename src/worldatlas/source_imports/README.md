@@ -49,19 +49,9 @@ worldatlas-import \
 ```
 
 The command reads the record from `atlas.construction_records`. Its JSON
-`method` selects the constructor through the explicit `IMPORTERS` mapping in
-[`run_import.py`](run_import.py):
-
-| Record method | Constructor |
-| --- | --- |
-| `osm_way_chain` | `osm.build_boundary` |
-| `s130_rhumb_routes` | `iho.build_routes` |
-| `smooth_latitude_trace` | `traces.build_boundary` |
-| `watershed_boundary` | `watersheds.build_boundary` |
-| `selected_vector_features` | `features.build_features` |
-| `selected_table_points` | `features.build_features` with `features.points` |
-| `selected_osm_features` | `features.build_features` with `osm.features` |
-| `s130_areas` | `features.build_features` with `iho.areas` |
+`method` selects the constructor through the authoritative
+[`IMPORTERS` mapping in `run_import.py`](run_import.py). The supported methods
+and their handlers are maintained there; this README does not duplicate the list.
 
 The record ID identifies data; its name does not select Python code.
 All file-backed imports additionally require `--revision`,
