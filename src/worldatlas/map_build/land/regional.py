@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import time
 
-from worldatlas.map_build.land.affiliations import resolve_affiliations
+from worldatlas.map_build.land.geographic_assignments import resolve_assignments
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.composition import compose_land
 from worldatlas.map_build.land.islands import resolve_islands
@@ -30,11 +30,11 @@ def build_regional(
     started = time.monotonic()
     validate_bindings(selection_domains(selection))
     domain = geographic_domain(selection, 'regional')
-    rules = domain['affiliations']
+    rules = domain['assignments'] if 'assignments' in domain else domain['affiliations']
     directory = Path(directory)
     directory.mkdir()
     with ComponentGrid(physical_directory, component_directory, grid) as components:
-        resolved = resolve_affiliations(
+        resolved = resolve_assignments(
             rules, domain['features'], components, domain['category_bindings'], protected=protected
         )
         entities = dict(resolved['component_entities'])

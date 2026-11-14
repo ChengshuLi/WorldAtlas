@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 
-from worldatlas.map_build.inputs.features import affiliation_selection, selected_basins
+from worldatlas.map_build.inputs.features import assignment_selection, affiliation_selection, selected_basins
 
 HERE = Path(__file__).resolve().parent
 DOMAINS = {"mainland", "regional", "water", "ocean"}
@@ -163,8 +163,11 @@ def read_selection(database, *, raw_sources=(), constructions=()):
 
 
 def validate_feature_references(domain):
-    """Check every executable affiliation reference before lengthy processing."""
+    """Check every executable assignment reference before lengthy processing."""
     features = {feature["feature_id"] for feature in domain.get("features", [])}
+    for rule in domain.get("assignments", []):
+        assignment_selection(rule, features)
+    # Retained release inputs still use the earlier affiliation format.
     for rule in domain.get("affiliations", []):
         affiliation_selection(rule, features)
 

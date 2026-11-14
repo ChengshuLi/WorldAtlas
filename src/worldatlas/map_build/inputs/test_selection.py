@@ -118,16 +118,43 @@ class SelectionTests(unittest.TestCase):
         self.geometry = {"type": "Point", "coordinates": [10.0, 20.0]}
         self.writer.execute(
             "INSERT INTO atlas.construction_records VALUES ('__selected_recipe',%s)",
-            (Jsonb(dict(method="selected_vector_features", source_id="__selected_raw",
-                        basis="First", id_field="id", selections=[dict(
-                            feature_id="__selected_point", source_feature_id="provider")])),),
+            (
+                Jsonb(
+                    dict(
+                        method="selected_vector_features",
+                        source_id="__selected_raw",
+                        basis="First",
+                        id_field="id",
+                        selections=[
+                            dict(
+                                feature_id="__selected_point",
+                                source_feature_id="provider",
+                            )
+                        ],
+                    )
+                ),
+            ),
         )
         self.writer.execute(
             "INSERT INTO atlas.source_features VALUES ('__selected_point','__selected_raw','provider',%s,'__selected_recipe')",
             (Jsonb(self.geometry),),
         )
 
+        self.writer.execute(
+            "INSERT INTO atlas.geographic_assignments VALUES ('__selected_assignment',970000001,'A geographic decision',%s)",
+            (Jsonb(dict(relation="point_component", feature_id="__selected_point")),),
+        )
+        self.writer.execute(
+            "INSERT INTO atlas.geographic_assignment_sources VALUES ('__selected_assignment','__selected_raw','Section 1','A supporting citation')"
+        )
+
     def remove(self):
+        self.writer.execute(
+            "DELETE FROM atlas.geographic_assignment_sources WHERE assignment_id='__selected_assignment'"
+        )
+        self.writer.execute(
+            "DELETE FROM atlas.geographic_assignments WHERE assignment_id='__selected_assignment'"
+        )
         self.writer.execute(
             "DELETE FROM atlas.source_features WHERE feature_id='__selected_point'"
         )
@@ -160,6 +187,28 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(selected["raw_sources"][0]["sha256"], "a" * 64)
         self.assertEqual(
             entity_colors(selected), [dict(entity_id=970000001, color_rgb="#123456")]
+        )
+
+    def test_freezes_assignments_and_citations_without_case_or_evidence_copies(self):
+        selected = self.read()["geography"]
+        self.assertNotIn("affiliations", selected)
+        self.assertNotIn("cases", selected)
+        self.assertNotIn("case_sources", selected)
+        self.assertEqual(
+            selected["assignments"],
+            [
+                dict(
+                    assignment_id="__selected_assignment",
+                    entity_id=970000001,
+                    rationale="A geographic decision",
+                    selection=dict(
+                        relation="point_component", feature_id="__selected_point"
+                    ),
+                )
+            ],
+        )
+        self.assertEqual(
+            selected["assignment_sources"][0]["source_id"], "__selected_raw"
         )
 
     def test_later_working_edit_does_not_change_saved_inputs(self):

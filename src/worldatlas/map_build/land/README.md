@@ -33,7 +33,7 @@ Scoped partitions never change mainland seeds or distance-search domains.
 | `certificates.py` | Prove a hint wins when complete spatial bounds exclude all competing categories. |
 | `exact_search.py`, `search_engine.py` | Search remaining possibilities using complete WGS84 distances. |
 | `assignments.py` | Connect the distance calculations and write component-to-entity results. |
-| `affiliations.py` | Resolve selected point/component and polygon/component relationships. |
+| `geographic_assignments.py` | Resolve selected point/component and polygon/component relationships. |
 | `line_groups.py` | Count complete components on either side of selected latitude-monotonic lines. |
 | `source_groups.py` | Apply selected source-backed island-group choices. |
 | `satellites.py` | Find direct nearby named anchors, including every relevant competing component. |
@@ -45,10 +45,31 @@ Entity IDs, category bindings, geographic extents, selected features, witnesses
 and distance policies come from Neon. Component IDs are temporary run data.
 Inferred satellites cannot become anchors for other satellites.
 
-Imported geometry normally uses WGS84 longitude/latitude. A source may retain its
-native projection when converting its edges would approximate them. Projected
-queries transform cell centers with the selected coordinate operations and
-coverage. Unknown coverage and boundary contacts remain explicit.
+Working assignments read `atlas.geographic_assignments`. Each row has one
+`selection` object containing exactly `relation` and `feature_id`, a target entity
+and a rationale. Alternative selections are separate rows. Every selected whole
+component receives the target's land code. Empty selections, missing features,
+protected mainland selections and disagreeing targets fail before composition.
+
+Current imported features use WGS84 longitude/latitude. Retained release inputs
+may contain earlier compound rules and projected geometry. Replay reads those
+frozen formats without rewriting their stored records; they are not accepted as
+new working assignments.
+
+Generate a numbered visual review of working assignments with:
+
+```bash
+python -m worldatlas.map_build.land.assignment_report \
+  --selection /absolute/path/to/run/input-selection.json \
+  --physical /absolute/path/to/run/physical/physical \
+  --components /absolute/path/to/run/components \
+  --output /absolute/path/to/review-report
+```
+
+The report shows the source geometry, actual selected cell runs, component and
+cell counts, other rules selecting the same components, and each rule's uniquely
+covered components. It uses the run's grid and entity colors. Open `index.html`;
+no database credentials or server are required.
 
 ## Tests
 

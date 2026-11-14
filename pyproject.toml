@@ -22,6 +22,7 @@ namespaces = false
 "*" = ["*.md"]
 "worldatlas.map_build" = ["config.json"]
 "worldatlas.map_build.inputs" = ["geography.sql"]
+"worldatlas.map_build.land" = ["assignment_report.js", "assignment_report.css"]
 
 # Ship the same setup definitions used from a checkout; no duplicate copies to maintain.
 [tool.setuptools.data-files]

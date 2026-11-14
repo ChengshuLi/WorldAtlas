@@ -49,43 +49,29 @@ CREATE TABLE atlas.source_features (
     CONSTRAINT source_features_geometry_check CHECK (atlas.valid_source_geometry(geometry))
 );
 
-CREATE TABLE atlas.decision_cases (
-    case_id text NOT NULL,
-    title text NOT NULL,
-    reason text NOT NULL,
-    CONSTRAINT decision_cases_case_id_check CHECK ((length(TRIM(BOTH FROM case_id)) > 0)),
-    CONSTRAINT decision_cases_reason_check CHECK ((length(TRIM(BOTH FROM reason)) > 0)),
-    CONSTRAINT decision_cases_title_check CHECK ((length(TRIM(BOTH FROM title)) > 0)),
-    CONSTRAINT decision_cases_pkey PRIMARY KEY (case_id)
+-- Each assignment selects whole current land components using one imported feature.
+CREATE TABLE atlas.geographic_assignments (
+    assignment_id text PRIMARY KEY CHECK (length(trim(assignment_id)) > 0),
+    entity_id bigint NOT NULL REFERENCES atlas.geographic_entities(id),
+    rationale text NOT NULL CHECK (length(trim(rationale)) > 0),
+    selection jsonb NOT NULL,
+    CONSTRAINT geographic_assignments_selection_check CHECK (
+        CASE WHEN jsonb_typeof(selection) = 'object' THEN COALESCE(
+            selection ?& ARRAY['relation','feature_id']
+            AND selection - ARRAY['relation','feature_id'] = '{}'::jsonb
+            AND selection->>'relation' IN ('point_component','intersects_component','contains_component')
+            AND jsonb_typeof(selection->'feature_id') = 'string'
+            AND length(trim(selection->>'feature_id')) > 0,
+            false) ELSE false END
+    )
 );
 
-CREATE TABLE atlas.decision_case_sources (
-    case_id text NOT NULL,
-    source_id text NOT NULL,
-    citation_section text NOT NULL,
-    interpretation text NOT NULL,
-    limitations text[] DEFAULT '{}'::text[] NOT NULL,
-    CONSTRAINT decision_case_sources_citation_section_check CHECK ((length(TRIM(BOTH FROM citation_section)) > 0)),
-    CONSTRAINT decision_case_sources_interpretation_check CHECK ((length(TRIM(BOTH FROM interpretation)) > 0)),
-    CONSTRAINT decision_case_sources_pkey PRIMARY KEY (case_id, source_id),
-    CONSTRAINT decision_case_sources_case_id_fkey FOREIGN KEY (case_id) REFERENCES atlas.decision_cases(case_id),
-    CONSTRAINT decision_case_sources_source_id_fkey FOREIGN KEY (source_id) REFERENCES atlas.source_assets(source_id)
-);
-
-CREATE TABLE atlas.decision_affiliations (
-    affiliation_id text NOT NULL,
-    entity_id bigint NOT NULL,
-    rationale text NOT NULL,
-    evidence jsonb NOT NULL,
-    case_id text,
-    component_selection jsonb NOT NULL,
-    CONSTRAINT decision_affiliations_affiliation_id_check CHECK ((length(TRIM(BOTH FROM affiliation_id)) > 0)),
-    CONSTRAINT decision_affiliations_component_selection_check CHECK ((jsonb_typeof(component_selection) = 'object'::text)),
-    CONSTRAINT decision_affiliations_evidence_check CHECK ((jsonb_typeof(evidence) = 'object'::text)),
-    CONSTRAINT decision_affiliations_rationale_check CHECK ((length(TRIM(BOTH FROM rationale)) > 0)),
-    CONSTRAINT decision_affiliations_pkey PRIMARY KEY (affiliation_id),
-    CONSTRAINT decision_affiliations_entity_id_fkey FOREIGN KEY (entity_id) REFERENCES atlas.geographic_entities(id),
-    CONSTRAINT decision_affiliations_case_id_fkey FOREIGN KEY (case_id) REFERENCES atlas.decision_cases(case_id)
+CREATE TABLE atlas.geographic_assignment_sources (
+    assignment_id text NOT NULL REFERENCES atlas.geographic_assignments(assignment_id),
+    source_id text NOT NULL REFERENCES atlas.source_assets(source_id),
+    citation_section text NOT NULL CHECK (length(trim(citation_section)) > 0),
+    interpretation text NOT NULL CHECK (length(trim(interpretation)) > 0),
+    PRIMARY KEY (assignment_id, source_id)
 );
 
 CREATE TABLE atlas.regional_island_rule_sets (

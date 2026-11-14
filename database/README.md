@@ -14,7 +14,7 @@ It loads these files in dependency order, within one transaction:
 | [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and editable construction documents. |
 | [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated checks for typed construction parameters. |
 | [`geographic_entities.sql`](schema/geographic_entities.sql) | Entities with generated IDs, names, hierarchy links and colors, plus grid-code bindings. |
-| [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, decisions, shared explanations, citations, ocean routes and assignment policies. |
+| [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, geographic assignments and citations, ocean routes and assignment policies. |
 | [`mainland.sql`](schema/mainland.sql) | Editable boundaries, raw-source links, assembled seed regions and component witnesses. |
 | [`releases.sql`](schema/releases.sql) | Immutable release manifests, approval and official-version/homepage pointers. |
 
@@ -35,6 +35,21 @@ types, coordinate nesting, finite two-dimensional values, WGS84 ranges and close
 polygon rings. Importers also check geometric validity with GEOS. They select
 provider IDs from checksum-verified raw files without copying provider attributes
 or maintaining duplicate attribute expectations in Neon.
+
+`geographic_assignments` stores one independently editable whole-component rule
+per row: `assignment_id`, `entity_id`, `rationale` and `selection`. The selection
+is exactly one object with `relation` and `feature_id`. Supported relations are
+`point_component` (the land component containing a point), `contains_component`
+(all of a component's land-cell centers inside a polygon), and
+`intersects_component` (at least one land-cell center inside a polygon).
+Independent alternatives are separate rows. There are no case groups, compound
+AND/OR selectors or unrestricted evidence objects in working assignments.
+
+`geographic_assignment_sources` links each assignment to its supporting raw
+sources, with a citation section and an interpretation that includes any relevant
+limitations. A feature's raw-source link establishes where its geometry came
+from; an assignment citation supports why the selected land belongs to its
+chosen entity. Those are different relationships.
 
 Each table's constraints and supporting functions are kept beside its definition.
 These files define structure only. Source records, colors, geographic choices and
@@ -87,7 +102,7 @@ SQL checks cover database guarantees:
 | `construction_records.sql` | Valid construction shapes, required fields, JSON types and editable recipes. |
 | `entity_registry.sql` | Stable IDs, hierarchy relationships and grid-code bindings. |
 | `geographic_entity_colors.sql` | Optional colors and valid RGB values. |
-| `geographic_decisions.sql` | Geometry records, shared explanations, citations and entity targets. |
+| `geographic_decisions.sql` | Geometry records, single-feature assignments, citations and entity targets. |
 | `editable_boundaries.sql` | Editable lines, construction references and retained source links. |
 | `policies.sql` | Editable assignment policies and valid policy definitions. |
 | `map_releases.sql` | Immutable bundles, approval and publication relationships. |

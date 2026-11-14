@@ -3,12 +3,8 @@ WITH source_refs(source_id) AS
    FROM atlas.source_features
    UNION SELECT source_id
    FROM atlas.decision_mainland_boundary_sources
-   UNION SELECT s.source_id
-   FROM atlas.decision_case_sources s
-   WHERE EXISTS
-       (SELECT 1
-        FROM atlas.decision_affiliations a
-        WHERE a.case_id=s.case_id)
+   UNION SELECT source_id
+   FROM atlas.geographic_assignment_sources
    UNION SELECT ref->>'source_id'
    FROM
      (SELECT evidence
@@ -93,30 +89,12 @@ SELECT jsonb_build_object(
                 FROM atlas.decision_basins b
                 JOIN atlas.source_features f USING(feature_id)
                 ),'[]'::jsonb),
-  'affiliations',
-    COALESCE(
-               (SELECT jsonb_agg(to_jsonb(a)
-                                 ORDER BY affiliation_id)
-                FROM atlas.decision_affiliations a
-                ),'[]'::jsonb),
-  'cases',
-    COALESCE(
-               (SELECT jsonb_agg(to_jsonb(c)
-                                 ORDER BY case_id)
-                FROM atlas.decision_cases c
-                WHERE EXISTS
-                    (SELECT 1
-                     FROM atlas.decision_affiliations a
-                     WHERE a.case_id=c.case_id)),'[]'::jsonb),
-  'case_sources',
-    COALESCE(
-               (SELECT jsonb_agg(to_jsonb(s)
-                                 ORDER BY case_id, source_id)
-                FROM atlas.decision_case_sources s
-                WHERE EXISTS
-                    (SELECT 1
-                     FROM atlas.decision_affiliations a
-                     WHERE a.case_id=s.case_id)),'[]'::jsonb),
+  'assignments',
+    COALESCE((SELECT jsonb_agg(to_jsonb(a) ORDER BY assignment_id)
+              FROM atlas.geographic_assignments a), '[]'::jsonb),
+  'assignment_sources',
+    COALESCE((SELECT jsonb_agg(to_jsonb(s) ORDER BY assignment_id, source_id)
+              FROM atlas.geographic_assignment_sources s), '[]'::jsonb),
   'ocean_seeds',
     COALESCE(
                (SELECT jsonb_agg(to_jsonb(s)
