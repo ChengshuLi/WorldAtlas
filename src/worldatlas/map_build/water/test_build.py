@@ -106,10 +106,16 @@ def selection():
     ocean = {
         'entity_revision': {'id': 'entities'},
         'category_bindings': bindings,
+        'features': [dict(feature_id='ocean-area', geometry={
+            'type': 'Polygon',
+            'coordinates': [[[90, 70], [110, 70], [110, 89], [90, 89], [90, 70]]],
+        })],
         'endpoints': [
             dict(endpoint_id='top', longitude='-180', latitude='90'),
             dict(endpoint_id='bottom', longitude='-180', latitude='-90'),
-            dict(endpoint_id='seed', longitude='100', latitude='80'),
+            dict(endpoint_id='seed', longitude='100', latitude='80', derivation={
+                'method': 'source_area_interior_point', 'feature_id': 'ocean-area',
+            }),
         ],
         'routes': [
             dict(
@@ -155,7 +161,8 @@ class WaterBuildTests(unittest.TestCase):
             ]
             shared = selection()
             water, ocean = (shared['domains'][key] for key in ('water', 'ocean'))
-            combined = {**water, **ocean, 'policies': water['policies'] + ocean['policies']}
+            combined = {**water, **ocean, 'policies': water['policies'] + ocean['policies'],
+                        'features': water['features'] + ocean['features']}
             shared['domains'] = {'water': deepcopy(combined), 'ocean': deepcopy(combined)}
             reports.append(build_water(shared, grid, root / 'physical', root / 'land', root / 'shared'))
             with open_grid(reports[0]['final'], grid) as data:
@@ -176,6 +183,12 @@ class WaterBuildTests(unittest.TestCase):
                                      file_hash(Path(report['final']) / name))
             self.assertEqual(sum(reports[0]['counts'].values()), grid.width * grid.height)
             self.assertEqual(reports[0]['download_seconds'], 0)
+
+    def test_missing_ocean_seed_area_is_rejected_before_processing(self):
+        chosen = selection()
+        chosen['domains']['ocean']['features'] = []
+        with self.assertRaisesRegex(ValueError, 'ocean seed refers to a missing source area'):
+            water_snapshot(chosen)
 
     def test_policies_come_from_their_selected_domain_without_hiding_missing_or_duplicate_rules(self):
         chosen = selection()

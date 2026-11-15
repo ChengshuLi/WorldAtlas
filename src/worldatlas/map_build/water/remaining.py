@@ -18,12 +18,18 @@ from worldatlas.map_build.water import streaming_closed_water as enclosed
 def water_snapshot(selection):
     validate_bindings(selection_domains(selection))
     water, oceans = (geographic_domain(selection, name) for name in ('water', 'ocean'))
+    area_ids = {e['derivation']['feature_id'] for e in oceans['endpoints']
+                if e.get('derivation', {}).get('method') == 'source_area_interior_point'}
+    areas = [f for f in oceans.get('features', []) if f['feature_id'] in area_ids]
+    if {f['feature_id'] for f in areas} != area_ids:
+        raise ValueError('ocean seed refers to a missing source area')
     return {
         'source': 'saved-selection',
         'category_bindings': water['category_bindings'],
         'endpoints': oceans['endpoints'],
         'routes': oceans['routes'],
         'ocean_seeds': oceans['ocean_seeds'],
+        'features': areas,
         'policies': [p for p in water['policies'] if p['kind'] != 'ocean_fill']
         + [p for p in oceans['policies'] if p['kind'] == 'ocean_fill'],
     }
