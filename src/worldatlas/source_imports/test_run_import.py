@@ -10,14 +10,13 @@ from worldatlas.source_imports.run_import import IMPORTERS, run_import
 
 
 DOCUMENTS = {
-    "smooth_latitude_trace": dict(
+    "geodesic_trace": dict(
         source_id="raw",
         basis="Chosen points",
         feature_id="line",
         source_feature_id="Figure 1",
         points=[[1, 1], [0, 0]],
-        step_latitude_degrees=0.01,
-        smoothing_latitude_degrees=0.1,
+        max_step_metres=1000,
     ),
     "osm_way_chain": dict(source_id="raw", basis="Join ways", boundary_id="boundary"),
     "s130_rhumb_routes": dict(
@@ -114,18 +113,18 @@ class ImportSelectionTests(unittest.TestCase):
                 self.assertIs(runtime.storage, self.storage)
 
     def test_trace_needs_no_storage_revision_or_cache(self):
-        constructor = IMPORTERS["smooth_latitude_trace"]
+        constructor = IMPORTERS["geodesic_trace"]
 
         @wraps(constructor)
         def trace(runtime, **arguments):
             return runtime
 
         with (
-            patch.dict(IMPORTERS, {"smooth_latitude_trace": trace}),
+            patch.dict(IMPORTERS, {"geodesic_trace": trace}),
             patch(
                 "worldatlas.source_imports.run_import.read_recipe",
                 return_value=dict(
-                    DOCUMENTS["smooth_latitude_trace"], method="smooth_latitude_trace"
+                    DOCUMENTS["geodesic_trace"], method="geodesic_trace"
                 ),
             ),
         ):

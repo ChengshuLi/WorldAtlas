@@ -1,11 +1,11 @@
 # Boundaries traced from source figures
 
-Build one final boundary from reviewed control points stored in Neon. The points
-already include the intended path through gaps and around islands. There is no
-separate correction or adjustment stage.
+Build one final boundary by joining reviewed control points stored in Neon with
+WGS84 geodesics. Every control point is preserved. The points include the intended
+path through gaps and around islands; there is no later adjustment stage.
 
-- [`curve.py`](curve.py) interpolates longitude by latitude, smooths the curve,
-  and preserves its endpoints.
+- [`geodesic.py`](geodesic.py) joins consecutive control points without smoothing.
+  [`../geodesy.py`](../geodesy.py) samples the same WGS84 segments used by watershed connectors.
 - [`build_boundary.py`](build_boundary.py) reads a construction record and its
   raw-source catalog entry, then writes the final geometry to Neon.
 
@@ -22,19 +22,17 @@ are JSON keys inside its `document` column, not separate table columns. The
 
 | Field | Meaning |
 | --- | --- |
-| `method` | `smooth_latitude_trace` |
+| `method` | `geodesic_trace` |
 | `source_id` | The original source in Neon's raw-source catalog |
 | `feature_id` | The output line in `atlas.source_features` |
 | `source_feature_id` | The selected figure or other identifiable part of the raw document |
 | `basis` | How the figure was interpreted, including inferred connections and extensions |
-| `points` | Selected `[longitude, latitude]` points, ordered north to south |
-| `step_latitude_degrees` | Maximum latitude spacing between generated coordinates |
-| `smoothing_latitude_degrees` | Width of the Gaussian smoothing filter |
+| `points` | Selected `[longitude, latitude]` points in boundary order |
+| `max_step_metres` | Maximum spacing between generated coordinates along each geodesic |
 
-This method requires latitude to decrease along the line. Use another
-construction method for a boundary that doubles back northward.
-The generated line must retain valid longitudes without crossing the
-antimeridian. Invalid smoothing or sampling results stop before saving.
+The path may run in any direction. Consecutive points must be distinct, and the
+boundary must not cross or retrace itself. Longitude-seam crossings require split
+source geometry. Invalid coordinates or sampling settings stop before saving.
 
 The original source figure stays in R2. A person reads it and records the chosen
 points and geographic decisions in the construction record. The automatic
@@ -56,7 +54,7 @@ worldatlas-import \
   --recipe CONSTRUCTION_ID
 ```
 
-The shared entry point reads `method: smooth_latitude_trace` and selects this
+The shared entry point reads `method: geodesic_trace` and selects this
 constructor. For example:
 
 ```bash
@@ -71,7 +69,7 @@ feature separately; the geometry contains no continent-assignment policy.
 
 ## Tests
 
-`test_curve.py` checks interpolation, smoothing, endpoint preservation and
+`test_geodesic.py` checks geodesic paths, control-point preservation, spacing and
 invalid geometry. `test_build_boundary.py` checks stored constructions, source
 references, repeat runs and failed writes.
 

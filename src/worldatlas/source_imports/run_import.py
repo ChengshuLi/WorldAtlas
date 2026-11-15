@@ -18,13 +18,13 @@ from worldatlas.source_imports.features.build_features import (
 )
 from worldatlas.source_imports.iho.build_routes import s130_rhumb_routes
 from worldatlas.source_imports.osm.build_boundary import osm_way_chain
-from worldatlas.source_imports.traces.build_boundary import smooth_latitude_trace
+from worldatlas.source_imports.traces.build_boundary import geodesic_trace
 from worldatlas.source_imports.watersheds.build_boundary import watershed_boundary
 
 IMPORTERS = {
     constructor.__name__: constructor
     for constructor in (
-        smooth_latitude_trace,
+        geodesic_trace,
         osm_way_chain,
         s130_rhumb_routes,
         watershed_boundary,
@@ -61,7 +61,7 @@ def run_import(
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
     if importer is None:
         raise ValueError(f"unsupported source construction method: {method!r}")
-    if method != "smooth_latitude_trace" and (storage is None or work_dir is None):
+    if method != "geodesic_trace" and (storage is None or work_dir is None):
         raise ValueError("this method requires --r2-endpoint and --work-dir")
     if expected_geometry_sha256 is not None and method != "osm_way_chain":
         raise ValueError(

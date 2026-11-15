@@ -23,14 +23,13 @@ class DatabaseTests(unittest.TestCase):
             ("a" * 64,),
         )
         self.recipe = dict(
-            method="smooth_latitude_trace",
+            method="geodesic_trace",
             source_id="raw",
             feature_id="line",
             source_feature_id="Figure 1",
             basis="Chosen points",
             points=[[10.0, 1.0], [9.0, 0.0], [8.0, -1.0]],
-            step_latitude_degrees=0.01,
-            smoothing_latitude_degrees=0.08,
+            max_step_metres=1000,
         )
         self.store()
 
@@ -76,9 +75,9 @@ class DatabaseTests(unittest.TestCase):
     def test_invalid_points_preserve_previous_geometry(self):
         self.build()
         before = self.row()
-        self.recipe["points"] = [[0, 0], [0, 1]]
+        self.recipe["points"] = [[0, 0], [0, 0]]
         self.store()
-        with self.assertRaisesRegex(ValueError, "north to south"):
+        with self.assertRaises(ValueError):
             self.build()
         self.assertEqual(self.row(), before)
 

@@ -254,8 +254,8 @@ class DatabaseContractTests(unittest.TestCase):
                 ),
                 False,
             ),
-            ("smooth_latitude_trace", dict(points=[[1, True], [0, 0]]), False),
-            ("smooth_latitude_trace", dict(points=[[1, 1, 1], [0, 0]]), False),
+            ("geodesic_trace", dict(points=[[1, True], [0, 0]]), False),
+            ("geodesic_trace", dict(points=[[1, 1, 1], [0, 0]]), False),
         ]
         for method, changes, expected in cases:
             with self.subTest(method=method, changes=changes):

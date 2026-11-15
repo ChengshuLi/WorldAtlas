@@ -12,6 +12,7 @@ from shapely.ops import substring
 from shapely.strtree import STRtree
 
 from worldatlas.source_imports.watersheds.drainage import upstream_order
+from worldatlas.source_imports.geodesy import geodesic
 
 GEOD = Geod(ellps='WGS84')
 
@@ -204,17 +205,6 @@ def intersection(left, right, near):
     if not candidates:
         raise ValueError('adjacent sections have no source-supported intersection')
     return min(candidates, key=lambda join: (distance(join.point, near), join.point))
-
-
-def geodesic(first, last, max_step_m):
-    if not math.isfinite(max_step_m) or max_step_m <= 0:
-        raise ValueError('positive geodesic spacing is required')
-    azimuth, _, length = GEOD.inv(*first, *last)
-    if not math.isfinite(length) or length == 0:
-        raise ValueError('distinct finite connector endpoints are required')
-    count = max(1, math.ceil(length / max_step_m))
-    return [tuple(first)] + [GEOD.fwd(*first, azimuth, length * i / count)[:2]
-                            for i in range(1, count)] + [tuple(last)]
 
 
 def connect_waypoints(line, points, max_step_m):
