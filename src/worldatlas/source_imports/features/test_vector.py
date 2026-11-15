@@ -114,6 +114,80 @@ class VectorTests(unittest.TestCase):
         result = read_features(self.path, self.recipe)[0]["geometry"]
         self.assertEqual(json.dumps(result), json.dumps(geometry))
 
+    def test_polygon_part_selection_preserves_original_rings_not_the_largest_part(self):
+        small = [
+            [[0, 0], [3, 0], [3, 3], [0, 3], [0, 0]],
+            [[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]],
+        ]
+        large = [[[10, 0], [20, 0], [20, 10], [10, 10], [10, 0]]]
+        document = dict(
+            type="FeatureCollection",
+            features=[
+                dict(
+                    type="Feature",
+                    properties=dict(provider_id="a"),
+                    geometry=dict(type="MultiPolygon", coordinates=[large, small]),
+                )
+            ],
+        )
+        original = json.dumps(document)
+        self.path.write_text(original)
+        self.recipe["selections"][0]["polygon_containing"] = [0.5, 0.5]
+        result = read_features(self.path, self.recipe)[0]["geometry"]
+        self.assertEqual(result, dict(type="Polygon", coordinates=small))
+        self.assertEqual(self.path.read_text(), original)
+        for point in ([1.5, 1.5], [0, 0.5], [30, 30]):
+            self.recipe["selections"][0]["polygon_containing"] = point
+            with (
+                self.subTest(point=point),
+                self.assertRaisesRegex(ValueError, "strictly inside"),
+            ):
+                read_features(self.path, self.recipe)
+
+    def test_polygon_selection_point_uses_wgs84_after_source_conversion(self):
+        document = dict(
+            type="FeatureCollection",
+            crs={"type": "name", "properties": {"name": "EPSG:3857"}},
+            features=[
+                dict(
+                    type="Feature",
+                    properties=dict(provider_id="a"),
+                    geometry=dict(
+                        type="MultiPolygon",
+                        coordinates=[
+                            [
+                                [
+                                    [1000, 1000],
+                                    [2000, 1000],
+                                    [2000, 2000],
+                                    [1000, 2000],
+                                    [1000, 1000],
+                                ]
+                            ],
+                            [
+                                [
+                                    [3000, 1000],
+                                    [4000, 1000],
+                                    [4000, 2000],
+                                    [3000, 2000],
+                                    [3000, 1000],
+                                ]
+                            ],
+                        ],
+                    ),
+                )
+            ],
+        )
+        self.path.write_text(json.dumps(document))
+        self.recipe["selections"][0]["polygon_containing"] = [0.012, 0.012]
+        result = validate_geometry(read_features(self.path, self.recipe)[0]["geometry"])
+        self.assertEqual(result.geom_type, "Polygon")
+        self.assertAlmostEqual(result.bounds[0], 0.00898315284)
+        self.assertAlmostEqual(result.bounds[2], 0.01796630568)
+        self.write()
+        with self.assertRaisesRegex(ValueError, "needs polygon geometry"):
+            read_features(self.path, self.recipe)
+
     def test_projected_geojson_is_converted_instead_of_retaining_source_coordinates(
         self,
     ):

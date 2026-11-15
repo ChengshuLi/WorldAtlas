@@ -22,4 +22,17 @@ BEGIN
   EXCEPTION WHEN check_violation THEN NULL; END;
  END LOOP;
 END $$;
+DO $$
+DECLARE input jsonb := '{"method":"selected_vector_features","source_id":"raw","basis":"Select a polygon part","id_field":"id","selections":[{"feature_id":"part","source_feature_id":"provider","polygon_containing":[1,2]}]}';
+ invalid jsonb;
+BEGIN
+ INSERT INTO atlas.construction_records VALUES ('__polygon_part',input);
+ FOREACH invalid IN ARRAY ARRAY['null'::jsonb,'[1]'::jsonb,'[1,2,3]'::jsonb,'[1,"2"]'::jsonb] LOOP
+  BEGIN
+   UPDATE atlas.construction_records SET document=jsonb_set(input,'{selections,0,polygon_containing}',invalid)
+   WHERE source_id='__polygon_part';
+   RAISE EXCEPTION 'invalid polygon selection point accepted';
+  EXCEPTION WHEN check_violation THEN NULL; END;
+ END LOOP;
+END $$;
 ROLLBACK;

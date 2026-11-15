@@ -46,6 +46,13 @@ For a provider area stored as several records with the same identifier, set
 `collection: true` on its selection. All matching polygons are included; an
 optional `expected_feature_count` checks collection completeness.
 
+To select one polygon from a multipart provider feature, set
+`polygon_containing: [longitude, latitude]` on its selection. The point always
+uses WGS84 coordinates, after source conversion. It must lie strictly inside
+one polygon; points in holes, on boundaries or outside every part are rejected.
+The selected polygon keeps its original coordinates and holes. No part is chosen
+by size or ranking.
+
 Vector inputs may use other coordinate systems. The importer reads the source
 CRS and converts its coordinates to WGS84 longitude/latitude before saving.
 

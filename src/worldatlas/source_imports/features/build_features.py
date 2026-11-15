@@ -20,6 +20,7 @@ class FeatureIdentity(TypedDict):
 class VectorSelection(FeatureIdentity):
     collection: NotRequired[bool]
     expected_feature_count: NotRequired[int]
+    polygon_containing: NotRequired[tuple[float, float]]
 
 
 class ParentRelation(TypedDict):

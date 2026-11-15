@@ -52,6 +52,26 @@ def geojson_geometries(path, member, id_field, wanted):
     return result
 
 
+def polygon_containing(geometry, coordinates):
+    """Select an original polygon part by an interior WGS84 point; keep its rings."""
+    from shapely.geometry import Polygon
+
+    point = validate_geometry({"type": "Point", "coordinates": coordinates})
+    if geometry["type"] not in ("Polygon", "MultiPolygon"):
+        raise ValueError("polygon_containing needs polygon geometry")
+    parts = (
+        [geometry["coordinates"]]
+        if geometry["type"] == "Polygon"
+        else geometry["coordinates"]
+    )
+    selected = [
+        rings for rings in parts if Polygon(rings[0], rings[1:]).contains(point)
+    ]
+    if len(selected) != 1:
+        raise ValueError("selection point must be strictly inside one source polygon")
+    return {"type": "Polygon", "coordinates": selected[0]}
+
+
 def read_features(path, settings):
     """Extract requested provider IDs once; no continent or grid decisions."""
     selected = settings["selections"]
@@ -155,6 +175,8 @@ def read_features(path, settings):
             validate_geometry(value)
         else:
             value = values[0]
+        if "polygon_containing" in selection:
+            value = polygon_containing(value, selection["polygon_containing"])
         result.append(
             {
                 "feature_id": selection["feature_id"],
