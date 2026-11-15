@@ -81,6 +81,8 @@ covered components. It uses the run's grid and entity colors. Open `index.html`;
 no database credentials or server are required. Add `--previous-selection` and
 `--map-comparison` to show the earlier rules and an actual final-grid comparison.
 The existing regional line/group policy is shown alongside explicit assignments.
+Source features have distinct colors and a matching legend. Uncheck a feature
+to hide its outline; this does not change the assigned cells.
 
 ## Tests
 

@@ -1,6 +1,22 @@
 /* Local report: draw real native-grid cell runs and keep both maps synchronized. */
 const data = JSON.parse(document.getElementById('data').textContent);
 const canvases = ['source', 'result'].map(id => document.getElementById(id));
+const featureIds = data.conditions.flatMap(condition => condition.feature_ids || [condition.feature_id]);
+const uniqueIds = [...new Set(featureIds)];
+const colors = new Map(uniqueIds.map((id, index) => [id,
+  `hsl(${(index * 137.508 % 360).toFixed(2)} 72% ${36 + index % 3 * 8}%)`]));
+const visible = new Set(uniqueIds);
+const legend = document.getElementById('feature-legend');
+for (const [index, id] of uniqueIds.entries()) {
+  const label = document.createElement('label');
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox'; checkbox.checked = true;
+  checkbox.onchange = () => { checkbox.checked ? visible.add(id) : visible.delete(id); draw(); };
+  const swatch = document.createElement('span');
+  swatch.className = 'feature-swatch'; swatch.style.backgroundColor = colors.get(id);
+  const name = document.createElement('span'); name.textContent = `${index + 1}. ${id}`;
+  label.append(checkbox, swatch, name); legend.append(label);
+}
 let view = [...data.bounds];
 function draw() {
   canvases.forEach((canvas, panel) => {
@@ -27,18 +43,28 @@ function draw() {
     }
     spans(data.context, '#d2d7db', data.context_stride);
     if (panel) spans(data.cells, data.color, 1);
-    context.strokeStyle = '#235a9c'; context.lineWidth = panel ? 1 : 1.8;
+    context.lineWidth = panel ? 1.2 : 2;
     function path(points, shift, close) {
-      context.beginPath();
       points.forEach(([lon, lat], i) => {
         const px = x((lon - data.grid.west) / data.grid.step + shift);
         const py = y((data.grid.north - lat) / data.grid.step);
         if (i) context.lineTo(px, py); else context.moveTo(px, py);
       });
       if (close) context.closePath();
+    }
+    function polygon(rings, shift) {
+      context.beginPath();
+      rings.forEach(ring => path(ring, shift, true));
+      if (!panel) {
+        context.save(); context.globalAlpha = 0.12;
+        context.fill('evenodd'); context.restore();
+      }
       context.stroke();
     }
-    for (const geometry of data.geometries) {
+    for (const [index, geometry] of data.geometries.entries()) {
+      const id = featureIds[index];
+      if (!visible.has(id)) continue;
+      context.strokeStyle = colors.get(id); context.fillStyle = colors.get(id);
       for (const shift of shifts) {
         if (geometry.type === 'Point') {
           const [lon, lat] = geometry.coordinates;
@@ -48,11 +74,11 @@ function draw() {
           context.beginPath(); context.moveTo(px - 9, py); context.lineTo(px + 9, py);
           context.moveTo(px, py - 9); context.lineTo(px, py + 9); context.stroke();
         } else if (geometry.type === 'Polygon') {
-          geometry.coordinates.forEach(ring => path(ring, shift, true));
+          polygon(geometry.coordinates, shift);
         } else if (geometry.type === 'MultiPolygon') {
-          geometry.coordinates.forEach(polygon => polygon.forEach(ring => path(ring, shift, true)));
+          geometry.coordinates.forEach(rings => polygon(rings, shift));
         } else if (geometry.type === 'LineString') {
-          path(geometry.coordinates, shift, false);
+          context.beginPath(); path(geometry.coordinates, shift, false); context.stroke();
         }
       }
     }

@@ -437,10 +437,11 @@ def write_report(
 <details><summary>Selected source features</summary><pre>{escape(json.dumps({"feature_ids": rule["feature_ids"]} if "feature_ids" in rule else rule["selection"] if "selection" in rule else legacy, indent=2))}</pre></details>
 {construction_details}
 <p>Left: selection geometry. Right: actual assigned land cells in the entity color.
-Blue outlines/markers show the selected geographic area, point or line. Gray is background land.
+Each source feature has its own color. The legend can hide individual outlines; assigned cells keep their continent color. Gray is background land.
 Drag to pan; scroll to zoom. Both views move together.</p>
 <button id="reset">Reset view</button><button id="save">Save comparison image</button>
 <div class="maps"><canvas id="source"></canvas><canvas id="result"></canvas></div>
+<div id="feature-legend" class="feature-legend" aria-label="Feature colors"></div>
 <p id="extent"></p><p>Selected cells retain the full grid resolution. Background land is sampled for orientation.</p>
 {necessity}
 <p>Current rules covering these components: {escape(", ".join("#" + current_references[n] for n in record["current_rule_numbers"]))}.</p>
