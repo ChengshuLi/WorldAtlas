@@ -848,7 +848,6 @@ class Pipeline:
                 assign_components,
                 (components, seed_report, index, selected['category_bindings'], assignments),
                 kwargs=dict(
-                    tie_metres=float(selected['land_baseline_policy']['tie_tolerance_metres']),
                     guard_metres=controls['numerical_guard_metres'],
                     chunk_columns=controls['chunk_columns'],
                 ),

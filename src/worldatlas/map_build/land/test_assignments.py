@@ -16,6 +16,7 @@ from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.land.regional import build_regional
 from worldatlas.map_build.land.seed_index import build_seed_index
+from worldatlas.map_build.land.search_engine import finalize
 
 
 class AssignmentTests(unittest.TestCase):
@@ -59,7 +60,6 @@ class AssignmentTests(unittest.TestCase):
                 root / 'index',
                 bindings,
                 root / 'assignments',
-                tie_metres=1e-5,
             )
             observed = read_assignments(report)
             cells = defaultdict(list)
@@ -83,11 +83,9 @@ class AssignmentTests(unittest.TestCase):
                 )
                 for yy, xx, code, _ in seed_cells
             }
-            best = min(distances.values())
-            winner = min(code for code, distance in distances.items() if distance <= best + 1e-5)
+            winner = min(distances, key=lambda code: (distances[code], code))
             expected[ident] = next(b['entity_id'] for b in bindings if b['code'] == winner)
         self.assertEqual(observed, expected)
-        self.assertTrue(report['ties'])
         selection = dict(
             domains={'regional': dict(features=[], affiliations=[], category_bindings=bindings)}
         )
@@ -137,10 +135,14 @@ class AssignmentTests(unittest.TestCase):
                 root / 'index',
                 bindings,
                 root / 'assignments',
-                tie_metres=1e-5,
             )
         self.assertEqual(read_assignments(result), {})
         self.assertEqual(result['exact_queries'], 0)
+
+    def test_a_smaller_distance_wins_even_below_the_old_tie_threshold(self):
+        values = finalize([301, 301], [True, True],
+                          np.array([[10.0, 10.0 - 1e-6], [10.0, 10.0]]), [301, 999])
+        self.assertEqual(values.tolist(), [999, 301])
 
 
 if __name__ == '__main__':

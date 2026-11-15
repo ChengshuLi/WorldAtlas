@@ -106,8 +106,7 @@ SELECT jsonb_build_object(
                (SELECT jsonb_agg(jsonb_build_object('id',
                                    policy_id, 'kind', kind, 'definition', definition, 'evidence', evidence)
                                  ORDER BY policy_id)
-                FROM atlas.decision_policies
-                WHERE kind<>'mainland_assignment'),'[]'::jsonb),
+                FROM atlas.decision_policies),'[]'::jsonb),
   'mainland_boundaries',
     COALESCE(
                (SELECT jsonb_agg(to_jsonb(b)||jsonb_build_object('source_refs',
@@ -122,20 +121,13 @@ SELECT jsonb_build_object(
                 FROM atlas.decision_mainland_boundaries b
                 ),'[]'::jsonb),
   'land_baseline_policy',
-    (SELECT definition||jsonb_build_object('region_ids',
-
-                            COALESCE(
-                                       (SELECT jsonb_agg(region_id
-                                                         ORDER BY region_id)
-                                        FROM atlas.decision_mainland_seed_regions
-                                        ),'[]'::jsonb), 'mainland_rule_ids',
-                            COALESCE(
-                                       (SELECT jsonb_agg(rule_id
-                                                         ORDER BY rule_id)
-                                        FROM atlas.decision_mainland_component_rules
-                                        ),'[]'::jsonb))
-       FROM atlas.decision_policies
-       WHERE kind='mainland_assignment'),
+    jsonb_build_object(
+      'region_ids', COALESCE(
+        (SELECT jsonb_agg(region_id ORDER BY region_id)
+         FROM atlas.decision_mainland_seed_regions), '[]'::jsonb),
+      'mainland_rule_ids', COALESCE(
+        (SELECT jsonb_agg(rule_id ORDER BY rule_id)
+         FROM atlas.decision_mainland_component_rules), '[]'::jsonb)),
   'seed_regions',
     COALESCE(
                (SELECT jsonb_agg(to_jsonb(r)||jsonb_build_object('segments',

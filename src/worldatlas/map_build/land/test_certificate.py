@@ -12,7 +12,7 @@ def build(seeds, w=360):
     return CertificateIndex(w, w // 2, 360 / w, 90, tiles, seeds, tile_cells=1)
 
 
-def brute(runs, seeds, w=360, tol=0.001):
+def brute(runs, seeds, w=360):
     step = 360 / w
     best = {}
     for y, a, b in runs:
@@ -26,7 +26,7 @@ def brute(runs, seeds, w=360, tol=0.001):
                 )[2]
                 best[c] = min(best.get(c, math.inf), d)
     z = min(best.values())
-    return {c for c, d in best.items() if d <= z + tol}
+    return {c for c, d in best.items() if d == z}
 
 
 class Cert(unittest.TestCase):
@@ -35,7 +35,7 @@ class Cert(unittest.TestCase):
         upper, _ = idx.witnesses([runs[0][0]], [runs[0][1]], [hint])
         a = np.asarray(runs)
         ok = idx.certify_runs(
-            a[:, 0], a[:, 1], a[:, 2], np.full(len(a), upper[0]), np.full(len(a), hint), 0.001
+            a[:, 0], a[:, 1], a[:, 2], np.full(len(a), upper[0]), np.full(len(a), hint)
         )
         if np.all(ok):
             self.assertEqual(brute(runs, seeds, w), {hint})
@@ -69,7 +69,7 @@ class Cert(unittest.TestCase):
         self.check(seeds, [(60, 11, 12)], 20)
         x = build(seeds)
         u, _ = x.witnesses([60], [11], [20])
-        self.assertFalse(x.certify_runs([60], [11], [12], u, [20], 0.001)[0])
+        self.assertFalse(x.certify_runs([60], [11], [12], u, [20])[0])
 
     def test_competitor_only_last_run(self):
         seeds = [
@@ -82,7 +82,7 @@ class Cert(unittest.TestCase):
         ]
         x = build(seeds)
         u, _ = x.witnesses([60], [11], [17])
-        z = x.certify_runs([60, 60], [11, 60], [12, 61], [u[0], u[0]], [17, 17], 0.001)
+        z = x.certify_runs([60, 60], [11, 60], [12, 61], [u[0], u[0]], [17, 17])
         self.assertTrue(z[0])
         self.assertFalse(z[1])
 
@@ -139,12 +139,12 @@ class Cert(unittest.TestCase):
         ends = starts + 1
         hints = np.full(30, 17)
         upper = coarse.witnesses(rows, starts, hints)[0]
-        known = coarse.certify_runs(rows, starts, ends, upper, hints, 0.001)
-        refined = fine.certify_runs(rows, starts, ends, upper, hints, 0.001)
+        known = coarse.certify_runs(rows, starts, ends, upper, hints)
+        refined = fine.certify_runs(rows, starts, ends, upper, hints)
         self.assertTrue(known.any())
         self.assertTrue((~known).any())
         with patch.object(fine, '_certify_points', wraps=fine._certify_points) as search:
-            actual = hierarchy.certify_runs(rows, starts, ends, upper, hints, 0.001)
+            actual = hierarchy.certify_runs(rows, starts, ends, upper, hints)
             np.testing.assert_array_equal(actual, known | refined)
             self.assertEqual(len(search.call_args.args[0]), int((~known).sum()))
             candidates = search.call_args.args[-1]

@@ -150,12 +150,12 @@ CREATE TABLE atlas.decision_policies (
     evidence jsonb NOT NULL,
     CONSTRAINT decision_policies_definition_check CHECK ((jsonb_typeof(definition) = 'object'::text)),
     CONSTRAINT decision_policies_evidence_check CHECK ((jsonb_typeof(evidence) = 'object'::text)),
-    CONSTRAINT decision_policies_kind_check CHECK ((kind = ANY (ARRAY['layer_precedence'::text, 'coastline_assignment'::text, 'scoped_land_partition'::text, 'ocean_fill'::text, 'closed_water_assignment'::text, 'mainland_assignment'::text]))),
+    CONSTRAINT decision_policies_kind_check CHECK ((kind = ANY (ARRAY['layer_precedence'::text, 'coastline_assignment'::text, 'scoped_land_partition'::text, 'ocean_fill'::text, 'closed_water_assignment'::text]))),
     CONSTRAINT decision_policies_policy_id_check CHECK ((length(TRIM(BOTH FROM policy_id)) > 0)),
     CONSTRAINT decision_policies_pkey PRIMARY KEY (policy_id)
 );
 
-CREATE UNIQUE INDEX decision_single_assignment_policy ON atlas.decision_policies USING btree (kind) WHERE (kind = ANY (ARRAY['mainland_assignment'::text, 'ocean_fill'::text, 'coastline_assignment'::text, 'closed_water_assignment'::text, 'layer_precedence'::text]));
+CREATE UNIQUE INDEX decision_single_assignment_policy ON atlas.decision_policies USING btree (kind) WHERE (kind = ANY (ARRAY['ocean_fill'::text, 'coastline_assignment'::text, 'closed_water_assignment'::text, 'layer_precedence'::text]));
 
 CREATE TABLE atlas.decision_basins (
     basin_id text NOT NULL,

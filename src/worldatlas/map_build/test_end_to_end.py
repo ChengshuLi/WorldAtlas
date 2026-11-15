@@ -82,7 +82,6 @@ class EndToEndTests(unittest.TestCase):
             if 'tie_rules' in policy['definition']:
                 policy['definition']['tie_rules']['priority_entity_ids'] = [81, 42, 707]
         self.domain['category_bindings'] = bindings
-        self.domain['land_baseline_policy']['tie_tolerance_metres'] = '0.00001'
         selected['domains'].update(
             mainland=self.domain,
             regional=dict(features=[], affiliations=[], category_bindings=bindings),

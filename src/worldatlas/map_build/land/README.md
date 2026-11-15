@@ -19,6 +19,10 @@ Distance assignments supply defaults. Explicit geographic decisions take
 precedence. Conflicting explicit decisions fail; physical water stays zero.
 Scoped partitions never change mainland seeds or distance-search domains.
 
+Distance assignment chooses the smallest calculated WGS84 distance. Only exactly
+equal distances use the first map code in numeric order; there is no near-equality
+threshold or editable mainland tie policy.
+
 ## Files
 
 | Files | Responsibility |

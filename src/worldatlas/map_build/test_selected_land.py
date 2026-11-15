@@ -12,7 +12,6 @@ from worldatlas.map_build import build as run_pipeline
 class SelectedLandTests(unittest.TestCase):
     def setUp(self):
         fixtures.SeedBuildTests.setUp(self)
-        self.domain['land_baseline_policy']['tie_tolerance_metres'] = '0.00001'
         self.runner = run_pipeline.Pipeline.__new__(run_pipeline.Pipeline)
         self.runner.selection = dict(
             domains={

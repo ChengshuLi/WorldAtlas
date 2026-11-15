@@ -163,7 +163,7 @@ class ExactIndex:
             self.leaf_cache[i] = data
         return self.leaf_cache[i]
 
-    def nearest_run(self, y, a, b, upper, tolerance=1e-5):
+    def nearest_run(self, y, a, b, upper):
         if not (
             type(y) is int
             and type(a) is int
@@ -172,8 +172,6 @@ class ExactIndex:
             and 0 <= a < b <= self.w
             and math.isfinite(upper)
             and upper >= 0
-            and math.isfinite(tolerance)
-            and tolerance >= 0
         ):
             raise ValueError('invalid query')
         lat = self.north - (y + 0.5) * self.step
@@ -181,7 +179,7 @@ class ExactIndex:
         point = _unit(np.array([lat]), np.array([lon]))[0]
         qr = (b - a - 1) * self.step * math.pi / 360
         self.prepare_leaves()
-        limit = (upper + tolerance + self.guard) / M_MIN + self.leaf_maxrad + qr
+        limit = (upper + self.guard) / M_MIN + self.leaf_maxrad + qr
         indices = (
             np.arange(len(self.leaves), dtype=np.int64)
             if limit >= math.pi
@@ -214,7 +212,7 @@ class ExactIndex:
             # or tie. Since M_MIN is a conservative WGS84 lower-bound radius, this
             # tighter test only removes tiles that cannot affect the final label.
             incumbent = min(upper, min(out.values(), default=upper))
-            lim = (incumbent + tolerance + self.guard) / M_MIN + self.leaf_radii[i] + qr
+            lim = (incumbent + self.guard) / M_MIN + self.leaf_radii[i] + qr
             if lim < math.pi and c > 2 * math.sin(lim / 2):
                 continue
             data = self._load_leaf(int(i))
@@ -235,7 +233,7 @@ class ExactIndex:
             dp = p2 - p1
             hav = np.sin(dp / 2) ** 2 + math.cos(p1) * np.cos(p2) * np.sin(dl / 2) ** 2
             angle = 2 * np.arcsin(np.sqrt(np.clip(hav, 0, 1)))
-            selected = np.flatnonzero(angle * M_MIN <= incumbent + tolerance + self.guard)
+            selected = np.flatnonzero(angle * M_MIN <= incumbent + self.guard)
             ds, count = run_pairs_batch(
                 y,
                 a,
@@ -244,7 +242,6 @@ class ExactIndex:
                 self.w,
                 north=self.north,
                 incumbent=incumbent,
-                tol=tolerance,
             )
             tested += count
             for code, d in ds.items():

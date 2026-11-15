@@ -26,7 +26,7 @@ class Exact(unittest.TestCase):
         cert = CertificateIndex(w, w // 2, 360 / w, 90, ctiles, seeds, tile_cells=C)
         return t, idx, cert
 
-    def oracle(self, runs, seeds, w, tol):
+    def oracle(self, runs, seeds, w):
         best = {}
         step = 360 / w
         for y, a, b in runs:
@@ -39,21 +39,19 @@ class Exact(unittest.TestCase):
                         90 - (yy + 0.5) * step,
                     )[2]
                     best[c] = min(best.get(c, math.inf), v)
-        m = min(best.values())
-        return {c for c, v in best.items() if v <= m + tol}
+        return min(best, key=lambda code: (best[code], code))
 
-    def run_case(self, seeds, runs, hint, w=36, tol=0.00001):
+    def run_case(self, seeds, runs, hint, w=36):
         tmp, idx, cert = self.make(seeds, w)
         self.addCleanup(tmp.cleanup)
         u, _ = cert.witnesses([runs[0][0]], [runs[0][1]], [hint])
         best = {hint: float(u[0])}
         for y, a, b in runs:
-            v, _ = idx.nearest_run(y, a, b, min(best.values()), tol)
+            v, _ = idx.nearest_run(y, a, b, min(best.values()))
             for c, d in v.items():
                 best[c] = min(best.get(c, math.inf), d)
-        m = min(best.values())
         self.assertEqual(
-            {c for c, d in best.items() if d <= m + tol}, self.oracle(runs, seeds, w, tol)
+            min(best, key=lambda code: (best[code], code)), self.oracle(runs, seeds, w)
         )
 
     def test_random(self):
@@ -104,13 +102,12 @@ class Exact(unittest.TestCase):
                 u, _ = cert.witnesses([runs[0][0]], [runs[0][1]], [hint])
                 best = {hint: float(u[0])}
                 for y, a, b in runs:
-                    values, _ = idx.nearest_run(y, a, b, min(best.values()), 0.00001)
+                    values, _ = idx.nearest_run(y, a, b, min(best.values()))
                     for c, v in values.items():
                         best[c] = min(best.get(c, math.inf), v)
-                m = min(best.values())
                 self.assertEqual(
-                    {c for c, v in best.items() if v <= m + 0.00001},
-                    self.oracle(runs, seeds, w, 0.00001),
+                    min(best, key=lambda code: (best[code], code)),
+                    self.oracle(runs, seeds, w),
                 )
 
     def test_antimeridian_poles(self):

@@ -1,8 +1,7 @@
 BEGIN;
 DO $$ BEGIN
  INSERT INTO atlas.decision_policies VALUES
- ('__coast','coastline_assignment','{}','{}'),('__ocean','ocean_fill','{}','{}'),
- ('__land','mainland_assignment','{"tie_tolerance_metres":0.00001}','{}');
+ ('__coast','coastline_assignment','{}','{}'),('__ocean','ocean_fill','{}','{}');
  UPDATE atlas.decision_policies SET evidence='{"note":"editable"}';
  BEGIN
   INSERT INTO atlas.decision_policies VALUES ('__unknown','unknown','{}','{}');

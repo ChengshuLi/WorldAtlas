@@ -21,7 +21,6 @@ def assign_components(
     bindings,
     directory,
     *,
-    tie_metres,
     guard_metres=1000.0,
     chunk_columns=1024
 ):
@@ -29,8 +28,8 @@ def assign_components(
     started = time.monotonic()
     grid, index_directory, directory = components.grid, Path(index_directory), Path(directory)
     metadata = json.loads((index_directory / 'report.json').read_text())
-    if metadata['grid'] != vars(grid) or not np.isfinite(tie_metres) or tie_metres < 0:
-        raise ValueError('distance policy or seed index grid differs')
+    if metadata['grid'] != vars(grid):
+        raise ValueError('seed index grid differs')
     representatives_path = index_directory / 'representatives.u32le'
     if file_hash(representatives_path) != metadata['representatives_sha256']:
         raise ValueError('representative seed cells differ from their index')
@@ -73,7 +72,7 @@ def assign_components(
     roots = np.array(sorted(components.totals().keys() - mainland), dtype=np.uint32)
     times = dict(index_seconds=time.monotonic() - started)
     codes = np.empty(0, dtype=np.uint32)
-    ambiguous, exact_queries, certificate_queries, ties = np.zeros(len(roots), dtype=bool), 0, 0, []
+    ambiguous, exact_queries, certificate_queries = np.zeros(len(roots), dtype=bool), 0, 0
     if len(roots):
         stamp = time.monotonic()
         # Both the samples and the component coordinates are actual grid cells.
@@ -120,7 +119,6 @@ def assign_components(
             hints,
             ambiguous,
             chunk=chunk_columns,
-            tolerance=tie_metres,
         )
         times['certificate_seconds'] = time.monotonic() - stamp
         best = np.full((len(roots), len(exact.codes)), np.inf)
@@ -136,9 +134,8 @@ def assign_components(
             ambiguous,
             best,
             chunk=chunk_columns,
-            tolerance=tie_metres,
         )
-        codes, ties = engine.finalize(hints, ambiguous, best, exact.codes, tolerance=tie_metres)
+        codes = engine.finalize(hints, ambiguous, best, exact.codes)
         times['exact_seconds'] = time.monotonic() - stamp
     entities = {b['code']: b['entity_id'] for b in bindings if b['physical_class'] == 'land'}
     directory.mkdir()
@@ -154,7 +151,6 @@ def assign_components(
         exact_components=int(ambiguous.sum()),
         certificate_queries=certificate_queries,
         exact_queries=exact_queries,
-        ties=ties,
         phase_seconds=times,
         processing_seconds=time.monotonic() - started,
         download_seconds=0.0,

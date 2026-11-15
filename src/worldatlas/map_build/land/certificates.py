@@ -148,7 +148,7 @@ class CertificateIndex:
             raise ValueError('invalid WGS84 upper')
         return upper, chosen
 
-    def certify_runs(self, rows, starts, ends, uppers, hints, tolerance_m):
+    def certify_runs(self, rows, starts, ends, uppers, hints):
         rows = np.asarray(rows, dtype=np.int64)
         starts = np.asarray(starts, dtype=np.int64)
         ends = np.asarray(ends, dtype=np.int64)
@@ -157,8 +157,6 @@ class CertificateIndex:
         n = len(rows)
         if (
             any(z.ndim != 1 or len(z) != n for z in (rows, starts, ends, uppers, hints))
-            or not math.isfinite(tolerance_m)
-            or tolerance_m < 0
             or np.any(
                 (rows < 0)
                 | (rows >= self.h)
@@ -175,9 +173,9 @@ class CertificateIndex:
         lon = -180 + ((starts + ends - 1) / 2 + 0.5) * self.step
         xyz = _unit(lat, lon)
         qr = (ends - starts - 1) * self.step * math.pi / 360
-        return self._certify_points(xyz, qr, uppers, hints, tolerance_m)
+        return self._certify_points(xyz, qr, uppers, hints)
 
-    def _certify_points(self, xyz, qr, uppers, hints, tolerance_m, candidates=None):
+    def _certify_points(self, xyz, qr, uppers, hints, candidates=None):
         # Only this method forwards candidate masks, after its own conservative
         # bounds have ruled out every omitted category. Fine trees therefore never
         # search the faraway continents already excluded by a cheap coarse tree.
@@ -191,7 +189,7 @@ class CertificateIndex:
                 continue
             chord, _ = self.trees[code].query(xyz[selected], k=1, workers=1)
             limit = (
-                (uppers[selected] + self.guard + tolerance_m) / M_MIN
+                (uppers[selected] + self.guard) / M_MIN
                 + self.radii[code]
                 + qr[selected]
             )
@@ -207,7 +205,6 @@ class CertificateIndex:
                     qr[selected],
                     uppers[selected],
                     hints[selected],
-                    tolerance_m,
                     danger[selected],
                 )
         return good

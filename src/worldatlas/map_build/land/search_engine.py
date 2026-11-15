@@ -221,7 +221,6 @@ def certificate_pass(
     amb,
     cursor=0,
     chunk=1024,
-    tolerance=1e-5,
     guard=lambda: None,
     progress=lambda *x: None,
     block_records=100000,
@@ -241,7 +240,7 @@ def certificate_pass(
     endcursor = cursor
     for off, a in blocks(path, cursor, block_records, guard):
         for y, x, z, p in expanded(a, off, co, roots, seed_roots, chunk):
-            good = index.certify_runs(y, x, z, upper[p], hints[p], tolerance)
+            good = index.certify_runs(y, x, z, upper[p], hints[p])
             np.logical_or.at(amb, p, ~good)
             count += len(p)
         endcursor = off + len(a)
@@ -262,7 +261,6 @@ def exact_pass(
     best,
     cursor=0,
     chunk=1024,
-    tolerance=1e-5,
     guard=lambda: None,
     progress=lambda *x: None,
     block_records=10000,
@@ -286,7 +284,7 @@ def exact_pass(
                 guard()
                 p = int(pos[i])
                 upper = float(np.min(best[p]))
-                ds, _ = index.nearest_run(int(ys[i]), int(xs[i]), int(ends[i]), upper, tolerance)
+                ds, _ = index.nearest_run(int(ys[i]), int(xs[i]), int(ends[i]), upper)
                 for code, d in ds.items():
                     if code not in index.codes or not np.isfinite(d) or d < 0:
                         raise ValueError('invalid exact distance')
@@ -300,34 +298,24 @@ def exact_pass(
     return best, count, endcursor
 
 
-def finalize(hints, amb, best, category_codes, tolerance=1e-5):
-    """Choose the lowest bound code within the selected distance tie policy."""
+def finalize(hints, amb, best, category_codes):
+    """Choose the actual minimum; exact equality uses the first ordered code."""
     hints = np.asarray(hints, dtype=np.uint32)
     amb = np.asarray(amb, dtype=bool)
     categories = np.asarray(category_codes, dtype=np.uint32)
     if (
         best.shape != (len(hints), len(categories))
         or len(amb) != len(hints)
-        or tolerance < 0
         or not len(categories)
         or np.any(categories[1:] <= categories[:-1])
     ):
         raise ValueError('invalid final state')
     codes = hints.copy()
-    ties = []
-    for i in np.flatnonzero(amb):
-        values = best[i]
-        minimum = float(np.min(values))
-        if not np.isfinite(minimum):
+    positions = np.flatnonzero(amb)
+    if len(positions):
+        values = best[positions]
+        winners = np.argmin(values, axis=1)
+        if not np.all(np.isfinite(values[np.arange(len(positions)), winners])):
             raise ValueError('no WGS84 witness')
-        winners = np.flatnonzero(values <= minimum + tolerance)
-        codes[i] = categories[winners[0]]
-        if len(winners) > 1:
-            ties.append(
-                {
-                    'position': int(i),
-                    'codes': list(map(int, categories[winners])),
-                    'minimum_m': minimum,
-                }
-            )
-    return codes, ties
+        codes[positions] = categories[winners]
+    return codes
