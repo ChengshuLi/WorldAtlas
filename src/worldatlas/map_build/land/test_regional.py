@@ -15,13 +15,7 @@ from worldatlas.map_build.land.geographic_assignments import resolve_assignments
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.composition import compose_land
 from worldatlas.map_build.land.regional import build_regional
-from worldatlas.map_build.land.line_groups import (
-    LatitudeLine,
-    buffered_bounds,
-    collect_runs,
-    scan_components,
-)
-from worldatlas.map_build.land.partitions import build_partitions
+from worldatlas.map_build.land.partitions import build_partitions, resolve_component_partitions
 from worldatlas.map_build.water.shared_nearest import crop
 
 
@@ -485,143 +479,43 @@ class RegionalTests(unittest.TestCase):
                 partitions=[partition],
             )
 
-    def island_selection(self, targets=(42,)):
-        line = feature(
-            "divider", {"type": "LineString", "coordinates": [[0, 80], [0, -80]]}
-        )
-        line["line_id"] = "divider"
-        policy = dict(
-            line_id="divider",
-            boundary_tolerance_degrees=0,
-            bounds_lon_lat=[-179, -44, 179, 44],
-            side_entity_ids={"west": 81, "east": 42},
-            anchor_feature_ids=[],
-            anchor_assignment_bases=[
-                "selected_affiliation",
-                "whole_component_line_side",
-            ],
-            satellite_policy=dict(
-                max_satellite_cells=1,
-                max_gap_m=5000,
-                tie_m=0,
-                allow_anchored_over_unknown_nearer=True,
-            ),
-            groups=[
-                dict(
-                    group_id=f"source-group-{i}",
-                    mode="geographic_extent",
-                    bounds_lon_lat=[-130, 0, -50, 45],
-                    target_entity_id=entity,
-                )
-                for i, entity in enumerate(targets)
-            ],
-        )
-        return dict(
-            domains={
-                "regional": dict(
-                    features=self.features,
-                    assignments=self.rules[1:],
-                    category_bindings=self.bindings,
-                )
-            },
-            regional_partition=dict(line=line, policy=policy),
-            raw_sources=[],
-        )
+    def component_partition(self):
+        return dict(id='divider', feature_id='divider', bounds_lon_lat=[-130, -44, 130, 44],
+                    side_a_entity_id=81, side_a_witness=[-60, 10],
+                    side_b_entity_id=42, side_b_witness=[60, 10], rationale='Selected divide')
 
-    def test_line_groups_and_affiliations_are_resolved_before_one_composition(self):
-        report = build_regional(
-            self.island_selection(),
-            self.grid,
-            self.root / "physical",
-            self.root / "components",
-            self.root / "baseline",
-            self.root / "grouped",
-        )
-        self.assertEqual(report["counts"], {"301": 2, "999": 3})
-        self.assertEqual(
-            report["islands"][0]["proposals"][7]["basis"],
-            "inferred_source_extent_group_convention",
-        )
-        self.assertEqual(report["islands"][0]["review"][42], "crosses_or_touches_line")
+    def test_whole_component_partition_uses_entities_and_preserves_physical_water(self):
+        line = feature('divider', dict(type='LineString', coordinates=[[0,80],[0,-80]]))
+        domain = dict(features=[*self.features,line], assignments=[], category_bindings=self.bindings,
+                      partitions=[self.component_partition()])
+        result = build_regional(dict(domains={'regional':domain}), self.grid,
+                                self.root/'physical', self.root/'components', self.root/'baseline',
+                                self.root/'partitioned')
+        self.assertEqual(result['counts'], {'301':4, '999':1})
+        self.assertEqual(result['partitions'][0]['component_entities'], {7:81,90000:42})
 
-    def test_current_partition_references_one_shared_line_feature(self):
-        selection = self.island_selection()
-        selected = selection.pop("regional_partition")
-        line = selected.pop("line")
-        line.pop("line_id")
-        line.pop("geometry_sha256")
-        line.pop("coordinate_reference")
-        selected["policy"].pop("line_id")
-        selected["feature_id"] = line["feature_id"]
-        selection["domains"]["regional"]["features"].append(line)
-        selection["regional_partitions"] = [selected]
-        result = build_regional(
-            selection,
-            self.grid,
-            self.root / "physical",
-            self.root / "components",
-            self.root / "baseline",
-            self.root / "current-grouped",
-        )
-        self.assertEqual(result["counts"], {"301": 2, "999": 3})
-
-    def test_opposing_complete_group_choices_stop_before_final_land_is_written(self):
-        for targets in ((81, 42), (42, 81)):
-            with self.subTest(order=targets):
-                output = self.root / f"conflict-{targets[0]}"
-                with self.assertRaisesRegex(
-                    ValueError, "conflicting regional assignments.*7"
-                ):
-                    build_regional(
-                        self.island_selection(targets),
-                        self.grid,
-                        self.root / "physical",
-                        self.root / "components",
-                        self.root / "baseline",
-                        output,
-                    )
-                self.assertFalse((output / "land").exists())
-
-    def test_agreeing_groups_and_explicit_affiliation_priority_still_build(self):
-        for targets, affiliations, expected in (
-            ((42, 42), self.rules[1:], 999),
-            ((81, 42), self.rules, 301),
-        ):
-            with self.subTest(groups=targets):
-                selected = self.island_selection(targets)
-                selected["domains"]["regional"]["assignments"] = affiliations
-                report = build_regional(
-                    selected,
-                    self.grid,
-                    self.root / "physical",
-                    self.root / "components",
-                    self.root / "baseline",
-                    self.root / f"valid-{expected}",
-                )
-                with open_grid(report["land"], self.grid) as data:
-                    self.assertEqual(
-                        crop(*data, 1, 1, 3, 8).tolist(), [expected, expected]
-                    )
-
-    def test_line_scans_complete_counts_and_wrapped_competitor_runs(self):
-        line = LatitudeLine(
-            {"type": "LineString", "coordinates": [[0, 80], [0, -80]]}, 0
-        )
+    def test_component_partition_reports_scope_edges_and_rejects_land_crossings(self):
+        line = feature('divider', dict(type='LineString', coordinates=[[-90,80],[-90,-80]]))
+        record = self.component_partition()
+        record['side_a_witness'] = [-110,10]
         with self.components() as components:
-            stats = scan_components(components, [130, -44, -130, 44], line)
-            self.assertEqual(
-                stats[42],
-                dict(
-                    total=2, in_scope=2, west=1, east=1, boundary=0, outside_latitude=0
-                ),
-            )
-            self.assertEqual(
-                collect_runs(components, {42}), {42: [(2, 0, 1), (2, 7, 8)]}
-            )
-        self.assertIsNone(line.longitude(81))
-        self.assertEqual(line.longitude(0), 0)
-        bounds = buffered_bounds([170, -10, 179, 10], 500000)
-        self.assertGreater(bounds[0], bounds[2])
+            with self.assertRaisesRegex(ValueError, 'crosses land component 7'):
+                resolve_component_partitions([record], [line], components, self.bindings)
+            protected = resolve_component_partitions([record], [line], components,
+                                                     self.bindings, protected=[7])
+            self.assertNotIn(7, protected['component_entities'])
+            record['bounds_lon_lat'][0] = -100
+            record['side_a_witness'] = [-95,10]
+            result = resolve_component_partitions([record], [line], components, self.bindings)
+            self.assertEqual(result['claims'][0]['scope_edge_components'], [7])
+            self.assertNotIn(7, result['component_entities'])
+
+    def test_opposing_partition_claims_are_rejected(self):
+        line = feature('divider', dict(type='LineString', coordinates=[[0,80],[0,-80]]))
+        a = self.component_partition()
+        b = dict(a, id='opposite', side_a_entity_id=42, side_b_entity_id=81)
+        with self.components() as components, self.assertRaisesRegex(ValueError, 'different entities'):
+            resolve_component_partitions([a,b], [line], components, self.bindings)
 
     def test_selected_lines_produce_two_witnessed_partition_faces(self):
         a = feature("a", {"type": "LineString", "coordinates": [[0, 80], [0, 0]]})

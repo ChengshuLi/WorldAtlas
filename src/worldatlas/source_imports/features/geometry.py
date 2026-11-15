@@ -92,7 +92,6 @@ def save_features(database, features, recipe):
         records.append(
             (
                 feature["feature_id"],
-                feature["source_id"],
                 feature["source_feature_id"],
                 Jsonb(geometry),
                 recipe["recipe_id"],
@@ -102,11 +101,10 @@ def save_features(database, features, recipe):
         with database.cursor() as cursor:
             cursor.executemany(
                 "INSERT INTO atlas.source_features "
-                "(feature_id,source_id,source_feature_id,"
+                "(id,source_feature_id,"
                 "geometry,construction_id) "
-                "VALUES (%s,%s,%s,%s,%s) "
-                "ON CONFLICT (feature_id) DO UPDATE SET "
-                "source_id=EXCLUDED.source_id,"
+                "VALUES (%s,%s,%s,%s) "
+                "ON CONFLICT (id) DO UPDATE SET "
                 "source_feature_id=EXCLUDED.source_feature_id,"
                 "geometry=EXCLUDED.geometry,"
                 "construction_id=EXCLUDED.construction_id",

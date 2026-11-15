@@ -9,8 +9,7 @@ import time
 from worldatlas.map_build.land.geographic_assignments import resolve_assignments
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.composition import compose_land
-from worldatlas.map_build.land.islands import resolve_islands
-from worldatlas.map_build.land.partitions import build_partitions
+from worldatlas.map_build.land.partitions import build_partitions, resolve_component_partitions
 from worldatlas.map_build.inputs.selection import validate_bindings
 
 
@@ -38,44 +37,16 @@ def build_regional(
             rules, domain['features'], components, domain['category_bindings'], protected=protected
         )
         entities = dict(resolved['component_entities'])
-        islands = []
-        policies = selection.get('regional_partitions', [])
-        # Read earlier frozen selections without changing their stored bytes.
-        if 'regional_partition' in selection:
-            policies = [selection['regional_partition']]
-        features = {f['feature_id']: f for f in domain['features']}
-        for selected in policies:
-            # Earlier archives carry their line inline; new selections reference the shared feature.
-            line = selected['line'] if 'line' in selected else features[selected['feature_id']]
-            result = resolve_islands(
-                selected['policy'],
-                line,
-                domain['features'],
-                selection['raw_sources'],
-                components,
-                resolved['component_entities'],
-                domain['category_bindings'],
-                protected=protected,
-            )
-            conflicts = {
-                root: reason
-                for root, reason in result['review'].items()
-                if reason
-                in {
-                    'conflicting_regional_group_conventions',
-                    'conflicting_group_and_anchor',
-                    'conflicting_nearest_land_targets',
-                }
-            }
-            if conflicts:
-                raise ValueError(
-                    f"conflicting regional assignments for {selected.get('rule_set_id', 'regional rule')}: {conflicts}"
-                )
-            for root, entity in result['component_entities'].items():
-                if root in entities and entities[root] != entity:
-                    raise ValueError('regional line rules conflict with a selected affiliation')
-                entities[root] = entity
-            islands.append(result)
+        if selection.get('regional_partitions') or selection.get('regional_partition'):
+            raise ValueError('historical regional rules require the release archive\'s captured code')
+        inferred = resolve_component_partitions(
+            domain.get('partitions', []), domain['features'], components,
+            domain['category_bindings'], protected=protected,
+        )
+        for root, entity in inferred['component_entities'].items():
+            if root in entities and entities[root] != entity:
+                raise ValueError('geographic partition conflicts with an explicit assignment')
+            entities[root] = entity
         geographic = (
             build_partitions(geographic_domain(selection, 'mainland'))
             if 'mainland' in selection_domains(selection)
@@ -94,7 +65,7 @@ def build_regional(
         'land': str(directory / 'land'),
         'claims': resolved['claims'],
         'counts': result['counts'],
-        'islands': islands,
+        'partitions': inferred['claims'],
         'processing_seconds': time.monotonic() - started,
         'download_seconds': 0.0,
     }

@@ -47,7 +47,7 @@ def fixtures(directory):
     files = {'dem': raster, 'basins': archive, 'lines': geometry}
     recipe = {
         'method': 'watershed_boundary', 'boundary_id': 'test-divide', 'basis': 'Test drainage divide',
-        'sources': {name: {'source_id': '__watershed_' + name} for name in files},
+        'sources': {name: '__watershed_' + name for name in files},
         'lines': {name: [{'source': 'lines', 'geojson_feature': i}]
                   for i, name in enumerate(('before', 'after'))},
         'terrains': {'ridge': {'primary': ['dem'], 'domains': [[0, 0, .006, .006]],
@@ -249,13 +249,11 @@ class StorageTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         self.directory = Path(temp.name)
         self.files, self.recipe = fixtures(self.directory)
-        for value in self.recipe["sources"].values():
-            value.pop("version", None)
         self.data = {path.name: path.read_bytes() for path in self.files.values()}
         for name, path in self.files.items():
             raw = path.read_bytes()
             self.db.execute(
-                "INSERT INTO atlas.source_assets(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES (%s,'Test','Test','test:input','Test','test:license','Test','test',%s,%s,%s)",
+                "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES (%s,'Test','Test','test:input','Test','test:license','Test','test',%s,%s,%s)",
                 (
                     "__watershed_" + name,
                     path.name,
@@ -273,7 +271,7 @@ class StorageTests(unittest.TestCase):
         from psycopg.types.json import Jsonb
 
         self.db.execute(
-            "INSERT INTO atlas.construction_records VALUES ('watershed',%s) ON CONFLICT(source_id) DO UPDATE SET document=EXCLUDED.document",
+            "INSERT INTO atlas.construction_records VALUES ('watershed',%s) ON CONFLICT(id) DO UPDATE SET document=EXCLUDED.document",
             (Jsonb(self.recipe),),
         )
 
@@ -308,7 +306,7 @@ class StorageTests(unittest.TestCase):
             )
         }
         self.assertEqual(
-            links, {v["source_id"] for v in self.recipe["sources"].values()}
+            links, set(self.recipe["sources"].values())
         )
 
     def test_calculation_failure_leaves_geometry_and_links_unchanged(self):

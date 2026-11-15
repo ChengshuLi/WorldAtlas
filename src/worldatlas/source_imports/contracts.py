@@ -21,6 +21,7 @@ from typing import (
 )
 
 NonEmptyText = Annotated[str, "nonempty"]
+SourceId = Annotated[str, "source-id"]
 
 
 @dataclass(frozen=True)
@@ -52,7 +53,7 @@ class Runtime:
         """Save against the recipe that was actually calculated, holding only a short lock."""
         with database.transaction():
             row = database.execute(
-                "SELECT document FROM atlas.construction_records WHERE source_id=%s FOR SHARE",
+                "SELECT document FROM atlas.construction_records WHERE id=%s FOR SHARE",
                 (self.recipe_id,),
             ).fetchone()
             if row is None or row[0] != self.document:
@@ -92,7 +93,7 @@ def matches(value, annotation):
     """Check JSON-compatible Python values without coercion."""
     origin, args = get_origin(annotation), get_args(annotation)
     if origin is Annotated:
-        if args[1:] != ("nonempty",) or args[0] is not str:
+        if args[1:] not in (("nonempty",), ("source-id",)) or args[0] is not str:
             raise TypeError("unsupported construction annotation metadata")
         return matches(value, str) and bool(value.strip(" \t\n\r\f\v"))
     if annotation is Any:
@@ -174,7 +175,7 @@ def sql_type(value, annotation, depth=0):
     origin, args = get_origin(annotation), get_args(annotation)
     if origin is Annotated:
         base = sql_type(value, args[0], depth)
-        if args[1:] != ("nonempty",) or args[0] is not str:
+        if args[1:] not in (("nonempty",), ("source-id",)) or args[0] is not str:
             raise TypeError("unsupported construction annotation metadata")
         return f"({base} AND ({value} #>> '{{}}') COLLATE \"C\" ~ '[^[:space:]]')"
     if annotation is Any:
@@ -265,16 +266,51 @@ def sql_object(value, fields, depth=0):
     )
 
 
+def source_paths(annotation, path="$"):
+    """Locate source references from declared types, never from field-name guesses."""
+    import json
+
+    origin, args = get_origin(annotation), get_args(annotation)
+    if origin is Annotated:
+        return [path] if args[1:] == ("source-id",) else []
+    if origin in (Union, types.UnionType):
+        return sorted({p for kind in args for p in source_paths(kind, path)})
+    if origin in (NotRequired, Required):
+        return source_paths(args[0], path)
+    if origin is list:
+        return source_paths(args[0], path + "[*]")
+    if origin is tuple:
+        return [p for i, kind in enumerate(args)
+                for p in source_paths(kind, path + f"[{i}]")]
+    if origin is dict:
+        if source_paths(args[0]):
+            raise TypeError("source IDs must be values, not JSON object keys")
+        return source_paths(args[1], path + ".*")
+    if is_typeddict(annotation):
+        return [p for name, kind in get_type_hints(annotation, include_extras=True).items()
+                for p in source_paths(kind, path + "." + json.dumps(name))]
+    return []
+
+
 def database_checks():
     from worldatlas.source_imports.run_import import IMPORTERS
 
-    choices = []
+    import json
+
+    choices, sources = [], []
     for method, constructor in sorted(IMPORTERS.items()):
         fields = {
             "method": (Literal[method], inspect.Parameter.empty),
             **parameters(constructor),
         }
         choices.append(f"WHEN {literal(method)} THEN {sql_object('document', fields)}")
+        paths = sorted({path for name, (kind, _) in fields.items()
+                        for path in source_paths(kind, '$.' + json.dumps(name))})
+        if paths:
+            sources.append(
+                f"WHEN {literal(method)} THEN ARRAY["
+                + ",".join(literal("lax " + path) for path in paths) + "]::jsonpath[]"
+            )
     return (
         "-- Generated from constructor signatures. Do not edit; see source_imports.contracts.\n"
         "CREATE FUNCTION atlas.valid_construction_record(document jsonb)\n"
@@ -284,6 +320,14 @@ def database_checks():
         + "\nELSE FALSE END;\n$contract$;\n"
         "ALTER TABLE atlas.construction_records ADD CONSTRAINT construction_document_valid\n"
         "CHECK (atlas.valid_construction_record(document));\n"
+        "\nCREATE FUNCTION atlas.construction_source_ids(document jsonb)\n"
+        "RETURNS SETOF text LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $sources$\n"
+        "SELECT DISTINCT value #>> '{}' FROM unnest(CASE document ->> 'method'\n"
+        + "\n".join(sources)
+        + "\nELSE ARRAY[]::jsonpath[] END) AS paths(path)\n"
+        "CROSS JOIN LATERAL jsonb_path_query(document,path,'{}'::jsonb,true) AS refs(value)\n"
+        "WHERE jsonb_typeof(value)='string';\n"
+        "$sources$;\n"
     )
 
 

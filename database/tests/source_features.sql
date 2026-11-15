@@ -3,7 +3,7 @@ BEGIN;
 DO $$
 DECLARE candidate jsonb;
 BEGIN
- INSERT INTO atlas.source_assets(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes)
+ INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes)
  VALUES ('__geometry_raw','Test','Test','test:raw','Test','test:license','Test','test','geometry',repeat('a',64),1);
  INSERT INTO atlas.construction_records VALUES ('__geometry_recipe',
  '{"method":"selected_vector_features","source_id":"__geometry_raw","basis":"Selected geometry","id_field":"id","selections":[{"feature_id":"__geometry","source_feature_id":"provider"}]}');
@@ -15,10 +15,10 @@ BEGIN
   {"type":"Polygon","coordinates":[[[0,0],[3,0],[3,3],[0,0]],[[1,1],[2,1],[2,2],[1,1]]]},
   {"type":"MultiPolygon","coordinates":[[[[0,0],[1,0],[1,1],[0,0]]]]}
  ]'::jsonb) LOOP
-  INSERT INTO atlas.source_features VALUES ('__geometry','__geometry_raw','provider',candidate,'__geometry_recipe');
-  DELETE FROM atlas.source_features WHERE feature_id='__geometry';
+  INSERT INTO atlas.source_features VALUES ('__geometry','provider',candidate,'__geometry_recipe');
+  DELETE FROM atlas.source_features WHERE id='__geometry';
  END LOOP;
- INSERT INTO atlas.source_features VALUES ('__geometry','__geometry_raw','provider',
+ INSERT INTO atlas.source_features VALUES ('__geometry','provider',
   '{"type":"Point","coordinates":[10,20]}','__geometry_recipe');
  FOR candidate IN SELECT jsonb_array_elements('[
   null, [], "point", {},
@@ -43,7 +43,7 @@ BEGIN
   {"type":"GeometryCollection","coordinates":[]}
  ]'::jsonb) LOOP
   BEGIN
-   UPDATE atlas.source_features SET geometry=candidate WHERE feature_id='__geometry';
+   UPDATE atlas.source_features SET geometry=candidate WHERE id='__geometry';
    RAISE EXCEPTION 'invalid geometry accepted: %',candidate;
   EXCEPTION WHEN check_violation THEN NULL; END;
  END LOOP;

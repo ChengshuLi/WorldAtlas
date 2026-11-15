@@ -55,12 +55,12 @@ END; $$;
 CREATE CONSTRAINT TRIGGER geographic_entity_parent_check AFTER INSERT OR UPDATE ON atlas.geographic_entities DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_entity_parent();
 
 CREATE TABLE atlas.map_category_bindings (
-    code bigint NOT NULL,
+    id bigint NOT NULL,
     entity_id bigint NOT NULL,
     physical_class text NOT NULL,
-    CONSTRAINT map_category_bindings_code_check CHECK (((code >= 1) AND (code <= '4294967295'::bigint))),
+    CONSTRAINT map_category_bindings_id_check CHECK (((id >= 1) AND (id <= '4294967295'::bigint))),
     CONSTRAINT map_category_bindings_physical_class_check CHECK ((physical_class = ANY (ARRAY['land'::text, 'water'::text]))),
-    CONSTRAINT map_category_bindings_pkey PRIMARY KEY (code),
+    CONSTRAINT map_category_bindings_pkey PRIMARY KEY (id),
     CONSTRAINT map_category_bindings_entity_id_physical_class_key UNIQUE (entity_id, physical_class),
     CONSTRAINT map_category_bindings_entity_id_fkey FOREIGN KEY (entity_id) REFERENCES atlas.geographic_entities(id)
 );

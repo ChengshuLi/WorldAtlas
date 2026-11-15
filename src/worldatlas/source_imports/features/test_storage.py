@@ -54,7 +54,7 @@ class StorageTests(unittest.TestCase):
     def add_source(self, ident, raw, key):
         self.database.execute(
             "INSERT INTO atlas.source_assets "
-            "(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
+            "(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
             "VALUES (%s,'Test','Test','test:source','Test','test:license','Test','test',%s,%s,%s)",
             (ident, key, hashlib.sha256(raw).hexdigest(), len(raw)),
         )
@@ -62,7 +62,7 @@ class StorageTests(unittest.TestCase):
     def store(self):
         self.database.execute(
             "INSERT INTO atlas.construction_records VALUES (%s,%s) "
-            "ON CONFLICT(source_id) DO UPDATE SET document=EXCLUDED.document",
+            "ON CONFLICT(id) DO UPDATE SET document=EXCLUDED.document",
             ("__features", Jsonb(self.recipe)),
         )
 
@@ -76,8 +76,8 @@ class StorageTests(unittest.TestCase):
 
     def rows(self):
         return self.database.execute(
-            "SELECT feature_id,geometry,construction_id "
-            "FROM atlas.source_features ORDER BY feature_id"
+            "SELECT id,geometry,construction_id "
+            "FROM atlas.source_features ORDER BY id"
         ).fetchall()
 
     def test_repeat_and_recipe_edit_preserve_links_and_other_records(self):
@@ -100,7 +100,7 @@ class StorageTests(unittest.TestCase):
             1,
         )
 
-    def test_missing_source_rolls_back_the_complete_feature_batch(self):
+    def test_missing_construction_rolls_back_the_complete_feature_batch(self):
         self.build()
         before = self.rows()
         features = [
@@ -119,7 +119,7 @@ class StorageTests(unittest.TestCase):
         ]
         with self.assertRaises(psycopg.errors.ForeignKeyViolation):
             save_features(
-                self.database, features, dict(self.recipe, recipe_id="__features")
+                self.database, features, dict(self.recipe, recipe_id="missing")
             )
         self.assertEqual(self.rows(), before)
 

@@ -22,19 +22,19 @@ def save_boundary(database, boundary_id, geometry, provenance, sources, *, const
         # Boundaries of one region may be saved by different workers. Serialize
         # their short writes so polygon validation includes every committed edit.
         database.execute(
-            'SELECT r.region_id FROM atlas.decision_mainland_seed_regions r '
+            'SELECT r.id FROM atlas.decision_mainland_seed_regions r '
             'WHERE EXISTS ('
             'SELECT 1 FROM atlas.decision_mainland_region_segments s '
-            'WHERE s.region_id=r.region_id AND s.boundary_id=%s) '
-            'ORDER BY r.region_id FOR UPDATE',
+            'WHERE s.region_id=r.id AND s.boundary_id=%s) '
+            'ORDER BY r.id FOR UPDATE',
             (boundary_id,),
         ).fetchall()
         database.execute(
             'INSERT INTO atlas.decision_mainland_boundaries '
-            '(boundary_id,geometry,geometry_sha256,'
+            '(id,geometry,geometry_sha256,'
             'coordinate_reference,provenance,construction_id) '
             "VALUES (%s,%s,%s,'OGC:CRS84',%s,%s) "
-            'ON CONFLICT (boundary_id) DO UPDATE SET '
+            'ON CONFLICT (id) DO UPDATE SET '
             'geometry=EXCLUDED.geometry,geometry_sha256=EXCLUDED.geometry_sha256,'
             'construction_id=EXCLUDED.construction_id,'
             'provenance=atlas.decision_mainland_boundaries.provenance || EXCLUDED.provenance',
@@ -72,9 +72,9 @@ def _validate_regions(database, boundary_id):
             'SELECT s.reverse,coalesce(b.geometry,r.geometry) '
             'FROM atlas.decision_mainland_region_segments s '
             "LEFT JOIN atlas.decision_mainland_boundaries b ON s.kind='boundary' "
-            'AND b.boundary_id=s.boundary_id '
+            'AND b.id=s.boundary_id '
             "LEFT JOIN atlas.decision_mainland_closure_routes r ON s.kind='route' "
-            'AND r.route_id=s.route_id '
+            'AND r.id=s.route_id '
             'WHERE s.region_id=%s ORDER BY s.ordinal',
             (region_id,),
         ).fetchall()

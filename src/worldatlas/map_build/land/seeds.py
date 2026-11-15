@@ -19,6 +19,13 @@ from worldatlas.map_build.land.witnesses import resolve_witnesses
 def selected_rules(domain, groups):
     policy = domain['land_baseline_policy']
     selected = {r['rule_id']: r for r in domain['mainland_component_rules']}
+    for partition in domain.get('partitions', []):
+        if partition.get('mainland_group_id') is not None:
+            selected[partition['id']] = dict(
+                rule_id=partition['id'], group_id=partition['mainland_group_id'],
+                region_id=partition['mainland_region_id'],
+                inside_entity_id=partition['side_a_entity_id'],
+                outside_entity_id=partition['side_b_entity_id'])
     codes = {
         b['entity_id']: b['code']
         for b in domain['category_bindings']

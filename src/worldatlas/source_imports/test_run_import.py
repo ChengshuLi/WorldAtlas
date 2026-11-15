@@ -19,6 +19,8 @@ DOCUMENTS = {
         max_step_metres=1000,
     ),
     "osm_way_chain": dict(source_id="raw", basis="Join ways", boundary_id="boundary"),
+    "osm_way_chain_feature": dict(source_id="raw", basis="Join ways and offshore points",
+                                  feature_id="boundary", source_feature_id="manifest.json"),
     "s130_rhumb_routes": dict(
         source_id="raw",
         basis="Selected routes",

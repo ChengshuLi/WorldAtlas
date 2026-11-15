@@ -112,7 +112,7 @@ class SelectionTests(unittest.TestCase):
             "INSERT INTO atlas.map_category_bindings VALUES (17,970000001,'land')"
         )
         self.writer.execute(
-            "INSERT INTO atlas.source_assets(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES ('__selected_raw','Test','Test','test:source','Test','test:license','Test','test','source.geojson',%s,1)",
+            "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES ('__selected_raw','Test','Test','test:source','Test','test:license','Test','test','source.geojson',%s,1)",
             ("a" * 64,),
         )
         self.geometry = {"type": "Point", "coordinates": [10.0, 20.0]}
@@ -136,7 +136,7 @@ class SelectionTests(unittest.TestCase):
             ),
         )
         self.writer.execute(
-            "INSERT INTO atlas.source_features VALUES ('__selected_point','__selected_raw','provider',%s,'__selected_recipe')",
+            "INSERT INTO atlas.source_features VALUES ('__selected_point','provider',%s,'__selected_recipe')",
             (Jsonb(self.geometry),),
         )
 
@@ -153,16 +153,16 @@ class SelectionTests(unittest.TestCase):
             "DELETE FROM atlas.geographic_assignment_sources WHERE assignment_id='__selected_assignment'"
         )
         self.writer.execute(
-            "DELETE FROM atlas.geographic_assignments WHERE assignment_id='__selected_assignment'"
+            "DELETE FROM atlas.geographic_assignments WHERE id='__selected_assignment'"
         )
         self.writer.execute(
-            "DELETE FROM atlas.source_features WHERE feature_id='__selected_point'"
+            "DELETE FROM atlas.source_features WHERE id='__selected_point'"
         )
         self.writer.execute(
-            "DELETE FROM atlas.construction_records WHERE source_id='__selected_recipe'"
+            "DELETE FROM atlas.construction_records WHERE id='__selected_recipe'"
         )
         self.writer.execute(
-            "DELETE FROM atlas.source_assets WHERE source_id='__selected_raw'"
+            "DELETE FROM atlas.source_assets WHERE id='__selected_raw'"
         )
         self.writer.execute(
             "DELETE FROM atlas.map_category_bindings WHERE entity_id=970000001"
@@ -185,6 +185,8 @@ class SelectionTests(unittest.TestCase):
             selected["geography"]["features"][0]["geometry"], self.geometry
         )
         self.assertEqual(selected["raw_sources"][0]["sha256"], "a" * 64)
+        self.assertEqual(selected["raw_sources"][0]["source_id"], "__selected_raw")
+        self.assertEqual(selected["construction_records"][0]["id"], "__selected_recipe")
         self.assertEqual(
             entity_colors(selected), [dict(entity_id=970000001, color_rgb="#123456")]
         )
@@ -214,7 +216,7 @@ class SelectionTests(unittest.TestCase):
 
         changed = {"type": "Point", "coordinates": [11.0, 21.0]}
         self.writer.execute(
-            "UPDATE atlas.source_features SET geometry=%s WHERE feature_id=%s",
+            "UPDATE atlas.source_features SET geometry=%s WHERE id=%s",
             (Jsonb(changed), "__selected_point"),
         )
         second = self.read()
@@ -230,7 +232,7 @@ class SelectionTests(unittest.TestCase):
     def test_construction_edits_are_copied_into_each_build(self):
         first = self.read()
         self.writer.execute(
-            "UPDATE atlas.construction_records SET document=document || '{\"basis\":\"Second\"}' WHERE source_id='__selected_recipe'"
+            "UPDATE atlas.construction_records SET document=document || '{\"basis\":\"Second\"}' WHERE id='__selected_recipe'"
         )
         second = self.read()
         self.assertEqual(first["construction_records"][0]["document"]["basis"], "First")
@@ -259,7 +261,7 @@ class SelectionTests(unittest.TestCase):
 
                 def execute(self, query, params=None):
                     result = db.execute(query, params)
-                    if query.startswith("SELECT to_jsonb(a)"):
+                    if "FROM atlas.source_assets a" in query:
                         outer.writer.execute(
                             "UPDATE atlas.geographic_entities SET color_rgb='#654321' WHERE id=970000001"
                         )

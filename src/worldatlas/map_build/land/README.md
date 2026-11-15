@@ -38,19 +38,14 @@ threshold or editable mainland tie policy.
 | `exact_search.py`, `search_engine.py` | Search remaining possibilities using complete WGS84 distances. |
 | `assignments.py` | Connect the distance calculations and write component-to-entity results. |
 | `geographic_assignments.py` | Resolve selected point/component and polygon/component relationships. |
-| `line_groups.py` | Count complete components on either side of selected latitude-monotonic lines. |
-| `source_groups.py` | Apply selected source-backed island-group choices. |
-| `satellites.py` | Find direct nearby named anchors, including every relevant competing component. |
-| `islands.py` | Connect line, group and satellite operations using Neon choices. |
-| `partitions.py` | Construct scoped land partitions from selected lines and side witnesses. |
+| `partitions.py` | Split scopes using imported lines and side witnesses; assign complete components or scoped mainland cells. |
 | `composition.py`, `regional.py` | Combine the assignments and write final land in one composition. |
 
 Entity IDs, category bindings, geographic extents, selected features, witnesses
 and distance policies come from Neon. Component IDs are temporary run data.
-Inferred satellites cannot become anchors for other satellites.
 
 Working assignments read `atlas.geographic_assignments`. Each row contains
-`assignment_id`, a target `entity_id`, a human-readable `rationale`, and
+`id`, a target `entity_id`, a human-readable `rationale`, and
 `feature_ids`: a nonempty array of distinct imported polygon feature IDs.
 
 Map building unions the selected polygons, then assigns each whole component
@@ -84,7 +79,7 @@ cell counts, feature counts, other rules selecting the same components, and each
 covered components. It uses the run's grid and entity colors. Open `index.html`;
 no database credentials or server are required. Add `--previous-selection` and
 `--map-comparison` to show the earlier rules and an actual final-grid comparison.
-The existing regional line/group policy is shown alongside explicit assignments.
+Two-sided geographic partitions are shown alongside island-group assignments.
 Source features have distinct colors and a matching legend. Uncheck a feature
 to hide its outline; this does not change the assigned cells.
 
@@ -92,7 +87,7 @@ to hide its outline; this does not change the assigned cells.
 
 The tests beside these modules cover component identity and coverage, arbitrary
 codes and region counts, complete seed construction, exact distance comparisons,
-longitude wrapping, source-group conflicts, direct satellites and final
+longitude wrapping, two-sided partitions, conflicting claims and final
 composition. Small independent cell calculations check the optimized algorithms.
 The main-command tests also exercise the direct stage chain and checkpoint reuse.
 

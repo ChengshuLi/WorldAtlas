@@ -109,7 +109,13 @@ def selected_basins(domain):
         if feature is None:
             raise ValueError("basin refers to a missing geographic feature")
         feature_geometry(feature, ("Polygon", "MultiPolygon"))
-        identity = tuple(feature[key] for key in ("source_id", "source_feature_id"))
+        # Released selections retain their original direct raw-source reference.
+        sources = (feature['source_id'],) if 'source_id' in feature else tuple(sorted(
+            link['source_id'] for link in domain['construction_sources']
+            if link['construction_id'] == feature['construction_id']))
+        if not sources:
+            raise ValueError('basin construction has no raw source references')
+        identity = (sources, feature['source_feature_id'])
         if identity in identities:
             raise ValueError("a provider area is selected more than once")
         identities.add(identity)

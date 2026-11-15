@@ -63,7 +63,7 @@ class DatabaseTests(unittest.TestCase):
             self.responses[label + ".zip"] = raw
             self.database.execute(
                 "INSERT INTO atlas.source_assets "
-                "(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
+                "(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
                 "VALUES (%s,'Test','Test','test:source','Test','test:license','Test','test',%s,%s,%s)",
                 (ident, label + ".zip", source["sha256"], source["size_bytes"]),
             )
@@ -83,7 +83,7 @@ class DatabaseTests(unittest.TestCase):
 
     def store(self):
         self.database.execute(
-            "INSERT INTO atlas.construction_records VALUES (%s,%s) ON CONFLICT(source_id) DO UPDATE SET document=EXCLUDED.document",
+            "INSERT INTO atlas.construction_records VALUES (%s,%s) ON CONFLICT(id) DO UPDATE SET document=EXCLUDED.document",
             (
                 "__osm_recipe",
                 Jsonb({k: v for k, v in self.recipe.items() if k != "recipe_id"}),
@@ -101,7 +101,7 @@ class DatabaseTests(unittest.TestCase):
 
     def boundary(self):
         return self.database.execute(
-            "SELECT geometry,geometry_sha256,provenance,construction_id FROM atlas.decision_mainland_boundaries WHERE boundary_id='border'"
+            "SELECT geometry,geometry_sha256,provenance,construction_id FROM atlas.decision_mainland_boundaries WHERE id='border'"
         ).fetchone()
 
     def links(self):
@@ -123,6 +123,30 @@ class DatabaseTests(unittest.TestCase):
         self.assertEqual(self.boundary()[2]["note"], "keep")
         self.assertEqual(self.links(), [("osm-test-2", "construction_input")])
 
+    def test_chain_feature_preserves_source_vertices_and_builds_extensions_once(self):
+        self.recipe = dict(method='osm_way_chain_feature', source_id='osm-test-1',
+                           feature_id='complete-boundary', source_feature_id='manifest.json',
+                           basis='Preserve source chain and add selected geodesic extensions',
+                           before=[[-1,0]], after=[[2,1]], max_step_metres=100000,
+                           evidence_source_ids=['osm-test-2'])
+        self.store()
+        first = self.build()
+        self.assertEqual(self.build(), first)
+        geometry = self.database.execute("SELECT geometry FROM atlas.source_features WHERE id='complete-boundary'").fetchone()[0]
+        points = geometry['coordinates']
+        self.assertEqual(points[0], [-1,0])
+        self.assertEqual(points[-1], [2,1])
+        start = points.index([0,0])
+        self.assertEqual(points[start:start+2], [[0,0],[1,1]])
+        refs = self.database.execute("SELECT source_id FROM atlas.construction_sources WHERE construction_id='__osm_recipe' ORDER BY source_id").fetchall()
+        self.assertEqual(refs, [('osm-test-1',),('osm-test-2',)])
+        self.assertEqual(self.storage.get_object.call_count, 1)
+        self.recipe['before'] = [[0,0]]
+        self.store()
+        with self.assertRaises(ValueError):
+            self.build()
+        self.assertEqual(self.database.execute("SELECT geometry FROM atlas.source_features WHERE id='complete-boundary'").fetchone()[0], geometry)
+
     def test_expected_geometry_mismatch_preserves_existing_boundary(self):
         self.build()
         before = self.boundary()
@@ -139,7 +163,7 @@ class DatabaseTests(unittest.TestCase):
 
         def calculate(*args):
             self.database.execute(
-                "UPDATE atlas.construction_records SET document=document || '{\"basis\":\"Edited concurrently\"}' WHERE source_id='__osm_recipe'"
+                "UPDATE atlas.construction_records SET document=document || '{\"basis\":\"Edited concurrently\"}' WHERE id='__osm_recipe'"
             )
             return assemble_archive(*args)
 
@@ -286,10 +310,10 @@ class DatabaseTests(unittest.TestCase):
                 ):
                     self.database.execute("DELETE FROM atlas." + table)
                 self.database.execute(
-                    "DELETE FROM atlas.construction_records WHERE source_id='__osm_recipe'"
+                    "DELETE FROM atlas.construction_records WHERE id='__osm_recipe'"
                 )
                 self.database.execute(
-                    "DELETE FROM atlas.source_assets WHERE source_id LIKE 'osm-test-%'"
+                    "DELETE FROM atlas.source_assets WHERE id LIKE 'osm-test-%'"
                 )
 
         self.addCleanup(cleanup)
@@ -360,7 +384,7 @@ class DatabaseTests(unittest.TestCase):
 
         saved = dict(
             self.database.execute(
-                "SELECT boundary_id,geometry FROM atlas.decision_mainland_boundaries "
+                "SELECT id,geometry FROM atlas.decision_mainland_boundaries "
             ).fetchall()
         )
         self.assertEqual(saved, {"border": first, "return": second})

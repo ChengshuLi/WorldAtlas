@@ -110,8 +110,8 @@ def read_selection(database, *, raw_sources=(), constructions=()):
         features = {feature["feature_id"]: feature for feature in data["features"]}
         with database.cursor(name="selected_features") as cursor:
             cursor.execute(
-                "SELECT feature_id,geometry::text FROM atlas.source_features "
-                "WHERE geometry IS NOT NULL ORDER BY feature_id"
+                "SELECT id,geometry::text FROM atlas.source_features "
+                "WHERE geometry IS NOT NULL ORDER BY id"
             )
             for feature_id, geometry in cursor:
                 features[feature_id]["geometry"] = json.loads(geometry)
@@ -128,28 +128,17 @@ def read_selection(database, *, raw_sources=(), constructions=()):
                 for item in data.get(key, [])
                 if item.get("construction_id") is not None
             )
-        result["regional_partitions"] = []
-        for rule_set_id, feature_id, definition in database.execute(
-            "SELECT rule_set_id,feature_id,definition FROM atlas.regional_island_rule_sets "
-            "WHERE enabled ORDER BY rule_set_id"
-        ).fetchall():
-            if feature_id not in features:
-                raise ValueError("selected geographic line is missing")
-            result["regional_partitions"].append(
-                {"rule_set_id": rule_set_id, "feature_id": feature_id, "policy": definition}
-            )
-            references.update(source["source_id"] for source in definition.get("sources", []))
         rows = database.execute(
-            "SELECT to_jsonb(a)-'created_at' FROM atlas.source_assets a "
-            "WHERE source_id=ANY(%s) ORDER BY source_id",
+            "SELECT (to_jsonb(a)-'created_at'-'id') || jsonb_build_object('source_id',a.id) "
+            "FROM atlas.source_assets a WHERE id=ANY(%s) ORDER BY id",
             (sorted(references),),
         ).fetchall()
         result["raw_sources"] = [row[0] for row in rows]
         if missing := references - {row["source_id"] for row in result["raw_sources"]}:
             raise ValueError("selected raw source is missing: " + str(sorted(missing)))
         rows = database.execute(
-            "SELECT source_id,document FROM atlas.construction_records "
-            "WHERE source_id=ANY(%s) ORDER BY source_id",
+            "SELECT id,document FROM atlas.construction_records "
+            "WHERE id=ANY(%s) ORDER BY id",
             (sorted(document_refs),),
         ).fetchall()
         if missing := document_refs - {row[0] for row in rows}:
@@ -157,7 +146,7 @@ def read_selection(database, *, raw_sources=(), constructions=()):
                 "selected construction is missing: " + str(sorted(missing))
             )
         result["construction_records"] = [
-            dict(source_id=ident, document=document) for ident, document in rows
+            dict(id=ident, document=document) for ident, document in rows
         ]
     return result
 

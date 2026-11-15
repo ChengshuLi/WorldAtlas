@@ -10,10 +10,10 @@ import time
 
 
 def read_recipe(database, recipe_id):
-    """Read a versioned construction record from the construction table."""
+    """Read an editable construction record by its ID."""
     row = database.execute(
         'SELECT document FROM atlas.construction_records '
-        'WHERE source_id=%s',
+        'WHERE id=%s',
         (recipe_id,),
     ).fetchone()
     if row is None:
@@ -28,7 +28,7 @@ def catalog_source(database, source_id):
     """Look up an exact raw source version and its R2 location."""
     row = database.execute(
         "SELECT r2_bucket,r2_key,sha256,size_bytes FROM atlas.source_assets "
-        "WHERE source_id=%s",
+        "WHERE id=%s",
         (source_id,),
     ).fetchone()
     if row is None:

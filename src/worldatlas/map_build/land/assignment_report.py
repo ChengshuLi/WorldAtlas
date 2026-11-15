@@ -152,56 +152,32 @@ def _selected_rules(selection):
 
 
 def _regional_claims(frozen, domain, rules, result, components):
-    """Show independently inferred line/group coverage alongside explicit rules."""
-    from worldatlas.map_build.land.islands import resolve_islands
+    """Show source-backed continent partitions alongside island-group assignments."""
+    from worldatlas.map_build.land.partitions import resolve_component_partitions
     from worldatlas.map_build.land.witnesses import resolve_witnesses
 
-    selected = frozen.get("regional_partitions", [])
+    selected = domain.get('partitions', [])
     if not selected:
         return
-    features = {f["feature_id"]: f for f in domain["features"]}
-    mainland = geographic_domain(frozen, "mainland")
-    groups = resolve_witnesses(mainland, components)["groups"]
-    protected = {g["component_id"] for g in groups.values() if g["role"] == "mainland"}
-    explicit = dict(result["component_entities"])
-    for record in selected:
-        line = features[record["feature_id"]]
-        inferred = resolve_islands(
-            record["policy"],
-            line,
-            domain["features"],
-            frozen["raw_sources"],
-            components,
-            {},
-            domain["category_bindings"],
-            protected=protected,
-        )
-        entities = {
-            root: target
-            for root, target in inferred["component_entities"].items()
-            if root not in explicit or explicit[root] == target
-        }
-        ident = "regional-policy:" + record["rule_set_id"]
-        rules.append(
-            dict(
-                assignment_id=ident,
-                entity_id=None,
-                rationale="Existing regional policy: assign complete islands by the selected line, source-backed island groups and direct satellites. Explicit geographic assignments take precedence.",
-                selection=dict(
-                    relation="regional_line_groups_and_satellites",
-                    feature_id=line["feature_id"],
-                ),
-                _component_entities=entities,
-                _display_name=record["rule_set_id"]
-                .replace("-", " ")
-                .replace("_", " ")
-                .capitalize(),
-            )
-        )
-        result["claims"].append(
-            dict(assignment_id=ident, entity_id=None, component_ids=sorted(entities))
-        )
-        result["component_entities"].update(entities)
+    mainland = geographic_domain(frozen, 'mainland')
+    groups = resolve_witnesses(mainland, components)['groups']
+    protected = {g['component_id'] for g in groups.values() if g['role'] == 'mainland'}
+    inferred = resolve_component_partitions(selected, domain['features'], components,
+                                           domain['category_bindings'], protected=protected)
+    for record, claim in zip(selected, inferred['claims']):
+        entities = claim['component_entities']
+        if any(root in result['component_entities'] and result['component_entities'][root] != entity
+               for root, entity in entities.items()):
+            raise ValueError('geographic partition conflicts with an explicit assignment')
+        ident = 'partition:' + record['id']
+        rules.append(dict(assignment_id=ident, entity_id=None, rationale=record['rationale'],
+                          selection=dict(relation='whole_component_line_side',
+                                         feature_id=record['feature_id']),
+                          _component_entities=entities,
+                          _display_name=record['id'].replace('-', ' ').capitalize()))
+        result['claims'].append(dict(assignment_id=ident, entity_id=None,
+                                     component_ids=sorted(entities)))
+        result['component_entities'].update(entities)
 
 
 def write_report(
@@ -222,7 +198,8 @@ def write_report(
     groups = [("current", selection)] + ([("previous", previous)] if previous else [])
     documents_by_section = {
         label: {
-            r["source_id"]: r["document"]
+            # Earlier frozen selections used source_id for a construction's ID.
+            (r["id"] if "id" in r else r["source_id"]): r["document"]
             for r in frozen.get("construction_records", [])
         }
         for label, frozen in groups

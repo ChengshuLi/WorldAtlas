@@ -7,6 +7,7 @@ import psycopg
 from psycopg.types.json import Jsonb
 
 from worldatlas.map_build.inputs.releases import read_release_streams
+from worldatlas.map_releases.manage_release import approve
 
 
 @unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'), 'requires disposable PostgreSQL')
@@ -18,7 +19,7 @@ class ReleaseLookupTests(unittest.TestCase):
                        size_bytes=12, content_type='application/gzip') for stream in ('rows', 'runs')}
             manifest = dict(objects=objects, decoded_sha256=dict(rows='b' * 64, runs='c' * 64))
             try:
-                db.execute('INSERT INTO atlas.map_releases(release_id,r2_bucket,manifest) VALUES (%s,%s,%s)',
+                db.execute('INSERT INTO atlas.map_releases(id,r2_bucket,manifest) VALUES (%s,%s,%s)',
                            ('v97.0-rc1', 'test', Jsonb(manifest)))
                 with patch.dict(os.environ, NEON_DATABASE_URL=url):
                     candidate = read_release_streams('v97.0-rc1')
@@ -26,11 +27,11 @@ class ReleaseLookupTests(unittest.TestCase):
                     self.assertEqual(candidate[0][1:4], ('test', 'test/rows', 12))
                     with self.assertRaisesRegex(ValueError, 'missing row or run'):
                         read_release_streams('v97.0')
-                    db.execute("UPDATE atlas.map_releases SET approved_by='Reviewer',approved_at=now() WHERE release_id='v97.0-rc1'")
+                    approve(db, 'v97.0-rc1', 'Reviewer')
                     db.execute("INSERT INTO atlas.map_publications VALUES ('v97.0','v97.0-rc1',NULL)")
                     self.assertEqual(read_release_streams('v97.0'), candidate)
                     with self.assertRaises(psycopg.errors.ForeignKeyViolation):
-                        db.execute("DELETE FROM atlas.map_releases WHERE release_id='v97.0-rc1'")
+                        db.execute("DELETE FROM atlas.map_releases WHERE id='v97.0-rc1'")
             finally:
-                db.execute("DELETE FROM atlas.map_publications WHERE map_version='v97.0'")
-                db.execute("DELETE FROM atlas.map_releases WHERE release_id='v97.0-rc1'")
+                db.execute("DELETE FROM atlas.map_publications WHERE id='v97.0'")
+                db.execute("DELETE FROM atlas.map_releases WHERE id='v97.0-rc1'")

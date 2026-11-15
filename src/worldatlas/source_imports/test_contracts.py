@@ -11,10 +11,12 @@ from psycopg.types.json import Jsonb
 
 from worldatlas.source_imports.contracts import (
     NonEmptyText,
+    SourceId,
     Runtime,
     bind_document,
     matches,
     parameters,
+    source_paths,
     sql_type,
 )
 from worldatlas.source_imports.run_import import IMPORTERS
@@ -22,6 +24,16 @@ from worldatlas.source_imports.test_run_import import DOCUMENTS
 
 
 class ContractTests(unittest.TestCase):
+    def test_source_paths_follow_types_instead_of_names(self):
+        class Inputs(TypedDict):
+            elevation: SourceId
+            rivers: list[SourceId]
+            source_id: str
+
+        self.assertEqual(source_paths(Inputs), ['$.' + '"elevation"', '$."rivers"[*]'])
+        self.assertEqual(source_paths(dict[str, SourceId]), ['$.*'])
+        self.assertEqual(source_paths(Any), [])
+
     def test_defaults_define_optional_fields_and_python_supplies_the_default(self):
         def example(runtime, *, title: NonEmptyText, enabled: bool = True):
             return title, enabled
@@ -112,6 +124,11 @@ class DatabaseContractTests(unittest.TestCase):
         self.database = psycopg.connect(os.environ["WORLDATLAS_TEST_DATABASE_URL"])
         self.addCleanup(self.database.close)
         self.addCleanup(self.database.rollback)
+        self.database.execute(
+            "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
+            "VALUES ('raw','Test','Test','test:raw','Test','test:license','Test','test','raw',%s,1)",
+            ('a' * 64,),
+        )
 
     def check(self, method, document, expected):
         try:
@@ -140,6 +157,40 @@ class DatabaseContractTests(unittest.TestCase):
                     (Jsonb(document),),
                 )
 
+    def test_nested_multipart_and_evidence_sources_are_linked_once(self):
+        for ident in ('other', 'evidence'):
+            self.database.execute(
+                "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
+                "VALUES (%s,'Test','Test','test:raw','Test','test:license','Test','test',%s,%s,1)",
+                (ident, ident, 'a' * 64),
+            )
+        document = dict(DOCUMENTS['watershed_boundary'], method='watershed_boundary',
+                        sources={'single': 'raw', 'same': 'raw',
+                                 'multipart': dict(parts=['raw', 'other'], sha256='a' * 64,
+                                                   size_bytes=2, filename='terrain.tif')},
+                        evidence_sources=['evidence', 'raw'],
+                        geographic_choices={'source_id': 'ordinary-untyped-text'})
+        bind_document(IMPORTERS['watershed_boundary'], document)
+        self.database.execute("INSERT INTO atlas.construction_records VALUES ('__links',%s)",
+                              (Jsonb(document),))
+
+        def links():
+            return [row[0] for row in self.database.execute(
+                "SELECT source_id FROM atlas.construction_sources WHERE construction_id='__links' ORDER BY source_id")]
+
+        self.assertEqual(links(), ['evidence', 'other', 'raw'])
+        with self.assertRaises(psycopg.errors.ForeignKeyViolation), self.database.transaction():
+            self.database.execute("DELETE FROM atlas.source_assets WHERE id='other'")
+        changed = dict(document, sources={'only': 'raw'}, evidence_sources=[])
+        self.database.execute("UPDATE atlas.construction_records SET document=%s WHERE id='__links'", (Jsonb(changed),))
+        self.assertEqual(links(), ['raw'])
+        with self.assertRaises(psycopg.errors.ForeignKeyViolation), self.database.transaction():
+            self.database.execute("UPDATE atlas.construction_records SET document=%s WHERE id='__links'",
+                                  (Jsonb(dict(changed, sources={'missing': 'absent'})),))
+        self.assertEqual(links(), ['raw'])
+        self.assertEqual(self.database.execute("SELECT document FROM atlas.construction_records WHERE id='__links'").fetchone()[0], changed)
+        self.database.execute("DELETE FROM atlas.construction_records WHERE id='__links'")
+        self.assertEqual(links(), [])
     def test_every_method_rejects_missing_required_fields_wrong_types_and_unknown_keys(
         self,
     ):

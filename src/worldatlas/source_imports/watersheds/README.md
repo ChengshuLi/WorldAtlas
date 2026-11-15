@@ -66,7 +66,9 @@ selections are in `atlas.construction_records`.
 The record's method is `watershed_boundary`. It contains:
 
 - `boundary_id` and `basis`: the editable boundary and a plain-language explanation.
-- `sources`: local aliases for exact catalog source IDs.
+- `sources`: local file names mapped directly to catalog source-ID strings.
+  Multipart inputs instead specify ordered source-ID strings in `parts`, the
+  complete file's checksum, size and filename. There are no one-field wrappers.
 - `lines`: one complete GeoJSON feature, OSM way or river relation per named line.
   Joining different source features belongs in `sections` with explicit joins.
 - `terrains`: primary and secondary sources, height conversion, analysis domains,
@@ -76,7 +78,7 @@ The record's method is `watershed_boundary`. It contains:
 - `joins`: geographic anchors for choosing actual intersections between sections.
 - `start` and `end`: source endpoints, selected intersections or explicit geographic points.
 
-Optional `evidence_sources` name catalog records supporting geographic review.
+Optional `evidence_sources` is a list of catalog source-ID strings supporting geographic review.
 They are linked to the boundary but are not downloaded during construction.
 Files read by the calculation belong in `sources`.
 

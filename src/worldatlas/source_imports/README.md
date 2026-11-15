@@ -1,7 +1,6 @@
 # Source imports
 
 These tools read raw geographic files from R2 and save geographic records in Neon.
-They also assemble geographic areas from contributing structured features.
 The source catalog identifies each exact file by one immutable `source_id`, its
 R2 location, byte size and checksum. Changed raw bytes get a new source ID.
 
@@ -17,6 +16,14 @@ Each construction has one ID and one current recipe. Imported geometry links to
 that construction by `construction_id`. There are no decision revisions or recipe
 versions to select. Each map build freezes the full recipes, geometry and raw
 catalog records it used; release archives retain those copies for replay.
+
+Raw-source arguments use the `SourceId` type. The generated database code follows
+those declared fields through typed objects and lists, then synchronizes
+`atlas.construction_sources` on each document save. These foreign-key links make
+every feature's dependencies queryable through its construction. Source IDs are
+ordinary strings passed directly to Python; no wrapper or separate primary
+source is stored on a feature. Lists preserve calculation order; dependency links
+are unique. Untyped descriptive JSON is not searched for possible source IDs.
 
 ## Run one construction
 
@@ -41,8 +48,8 @@ Read the referenced construction rather than assuming a name or remembering a
 command from a previous chat:
 
 ```sql
-SELECT boundary_id, construction_id FROM atlas.decision_mainland_boundaries;
-SELECT document FROM atlas.construction_records WHERE source_id = 'CONSTRUCTION_ID';
+SELECT id, construction_id FROM atlas.decision_mainland_boundaries;
+SELECT document FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 
 Edit the recipe and rerun the same ID to update working geometry. Successful
@@ -60,7 +67,7 @@ worldatlas-import --all \
 ```
 
 The command follows construction links from features, boundaries, ocean routes,
-endpoints and enabled geographic line rules. Each construction runs once. Each
+and endpoints. Each construction runs once. Each
 successful import commits independently, so an interrupted batch can be repeated.
 Receipts under `inputs/receipts/` identify the construction and its result.
 

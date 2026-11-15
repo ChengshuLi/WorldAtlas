@@ -3,7 +3,7 @@
 from psycopg.types.json import Jsonb
 from typing import NotRequired, TypedDict
 
-from worldatlas.source_imports.contracts import NonEmptyText, Runtime
+from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
 
 from worldatlas.source_imports.iho.s130 import extract_routes
 from worldatlas.source_imports.atlas_sources.catalog import (
@@ -22,8 +22,8 @@ def save_routes(database, result, source, recipe):
         for endpoint in result["endpoints"]:
             database.execute(
                 "INSERT INTO atlas.decision_endpoints "
-                "(endpoint_id,name,longitude,latitude,derivation,evidence,construction_id) "
-                "VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (endpoint_id) "
+                "(id,name,longitude,latitude,derivation,evidence,construction_id) "
+                "VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (id) "
                 "DO UPDATE SET name=EXCLUDED.name,longitude=EXCLUDED.longitude,"
                 "latitude=EXCLUDED.latitude,derivation=EXCLUDED.derivation,"
                 "construction_id=EXCLUDED.construction_id,"
@@ -41,8 +41,8 @@ def save_routes(database, result, source, recipe):
         for route in result["routes"]:
             database.execute(
                 "INSERT INTO atlas.decision_routes "
-                "(route_id,route_type,parameters,evidence,construction_id) VALUES (%s,%s,%s,%s,%s) "
-                "ON CONFLICT (route_id) DO UPDATE SET route_type=EXCLUDED.route_type,"
+                "(id,route_type,parameters,evidence,construction_id) VALUES (%s,%s,%s,%s,%s) "
+                "ON CONFLICT (id) DO UPDATE SET route_type=EXCLUDED.route_type,"
                 "parameters=EXCLUDED.parameters,"
                 "construction_id=EXCLUDED.construction_id,"
                 "evidence=atlas.decision_routes.evidence || EXCLUDED.evidence",
@@ -80,7 +80,7 @@ class Route(TypedDict):
 def s130_rhumb_routes(
     runtime: Runtime,
     *,
-    source_id: NonEmptyText,
+    source_id: SourceId,
     gml_member: NonEmptyText,
     gml_sha256: NonEmptyText,
     basis: NonEmptyText,

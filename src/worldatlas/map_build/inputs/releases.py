@@ -17,10 +17,10 @@ def read_release_streams(version):
             rows = database.execute(
                 "SELECT stream,r.r2_bucket,asset->>'r2_key',(asset->>'size_bytes')::bigint,"
                 "asset->>'sha256',r.manifest->'decoded_sha256'->>stream "
-                'FROM atlas.map_releases r LEFT JOIN atlas.map_publications p USING(release_id) '
+                'FROM atlas.map_releases r LEFT JOIN atlas.map_publications p ON p.release_id=r.id '
                 "CROSS JOIN (VALUES ('rows'),('runs')) streams(stream) "
                 "CROSS JOIN LATERAL (SELECT r.manifest->'objects'->(stream||'.u32le.gz') asset) a "
-                'WHERE p.map_version=%s OR r.release_id=%s ORDER BY stream',
+                'WHERE p.id=%s OR r.id=%s ORDER BY stream',
                 (version, version),
             ).fetchall()
     except psycopg.Error:

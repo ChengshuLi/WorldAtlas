@@ -1,7 +1,7 @@
 # Selected geographic features
 
 Import selected source geometry into `atlas.source_features`. Each row contains
-`feature_id`, `source_id`, `source_feature_id`, `geometry` and `construction_id`;
+`id`, `source_feature_id`, `geometry` and `construction_id`;
 all five are required. Geometry always uses WGS84 `[longitude, latitude]` in
 degrees. Map building reads these polygons and points instead of reopening their
 raw archives.

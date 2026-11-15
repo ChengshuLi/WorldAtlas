@@ -80,7 +80,7 @@ worldatlas-import \
 
 | Argument | Meaning |
 | --- | --- |
-| `--recipe ID` | Construction record's `source_id` in `atlas.construction_records`. |
+| `--recipe ID` | Construction record's `id` in `atlas.construction_records`. |
 | `--r2-endpoint` | Address used to access the Cloudflare R2 account. The catalog supplies the bucket and object path. |
 | `--work-dir` | Local directory for downloading and reusing the source archive. |
 | `--expected-geometry-sha256` | Optional checksum of the expected boundary geometry. A mismatch stops the command before saving. Omit it when building a changed boundary. |
@@ -120,6 +120,21 @@ source ID replaces the previous construction source link.
 
 For another boundary using this method, add a construction record and run the
 same command.
+
+## Complete lines with offshore connections
+
+`osm_way_chain_feature` uses the same verified archive assembly and writes the
+complete result to `source_features`. Its construction identifies the source,
+output feature, provider selector and basis. Optional `before` and `after` control
+points extend the archived chain with WGS84 geodesics; `max_step_metres` controls
+their sampling. Every archived chain coordinate is preserved. There is no later
+adjustment step.
+
+Optional `evidence_source_ids` references supporting publications. These are
+cataloged dependencies; their text is not read by the geometric calculation.
+All raw source arguments use `SourceId` annotations, generating the construction's
+foreign-key source links automatically. Run this method through the same
+`worldatlas-import --recipe CONSTRUCTION_ID` command.
 
 ## Tests
 

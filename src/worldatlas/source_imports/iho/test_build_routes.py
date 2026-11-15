@@ -33,7 +33,7 @@ class BuildTests(unittest.TestCase):
         self.source = dict(source_id=self.recipe["source_id"], sha256=self.digest)
         raw = self.path.read_bytes()
         self.database.execute(
-            "INSERT INTO atlas.source_assets(source_id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES (%s,'Test','Test','test:source','Test','test:license','Test','test','source.zip',%s,%s)",
+            "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES (%s,'Test','Test','test:source','Test','test:license','Test','test','source.zip',%s,%s)",
             (self.source["source_id"], self.digest, len(raw)),
         )
         self.store()
@@ -42,7 +42,7 @@ class BuildTests(unittest.TestCase):
 
     def store(self):
         self.database.execute(
-            "INSERT INTO atlas.construction_records VALUES ('routes',%s) ON CONFLICT(source_id) DO UPDATE SET document=EXCLUDED.document",
+            "INSERT INTO atlas.construction_records VALUES ('routes',%s) ON CONFLICT(id) DO UPDATE SET document=EXCLUDED.document",
             (Jsonb(self.recipe),),
         )
 
@@ -74,7 +74,7 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(self.storage.get_object.call_count, 1)
         self.assertEqual(
             self.database.execute(
-                "SELECT longitude::text,latitude::text FROM atlas.decision_endpoints WHERE endpoint_id='route-a-endpoint-0'"
+                "SELECT longitude::text,latitude::text FROM atlas.decision_endpoints WHERE id='route-a-endpoint-0'"
             ).fetchone(),
             ("40", "30"),
         )
@@ -88,7 +88,7 @@ class BuildTests(unittest.TestCase):
         self.store()
         self.build()
         name, evidence = self.database.execute(
-            "SELECT name,evidence FROM atlas.decision_endpoints WHERE endpoint_id='route-a-endpoint-0'"
+            "SELECT name,evidence FROM atlas.decision_endpoints WHERE id='route-a-endpoint-0'"
         ).fetchone()
         self.assertEqual(name, "Renamed")
         self.assertEqual(evidence["note"], "keep")

@@ -5,9 +5,9 @@ import logging
 from pathlib import Path
 import platform
 import time
-from typing import Any
+from typing import Any, TypedDict
 
-from worldatlas.source_imports.contracts import NonEmptyText, Runtime
+from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
 
 import numpy as np
 from pyproj import Transformer
@@ -22,6 +22,13 @@ from worldatlas.source_imports.watersheds.terrain import align, prepare
 from worldatlas.source_imports.watersheds.waterways import Basins, seed_grid
 
 LOGGER = logging.getLogger(__name__)
+
+
+class MultipartSource(TypedDict):
+    parts: list[SourceId]
+    sha256: NonEmptyText
+    size_bytes: int
+    filename: NonEmptyText
 
 
 def runtime_versions():
@@ -44,12 +51,12 @@ def resolve_sources(database, recipe):
     """Resolve exact catalog versions, including the parts of large provider files."""
     resolved = {}
     for alias, selection in recipe['sources'].items():
-        if 'parts' in selection:
+        if isinstance(selection, dict):
             resolved[alias] = dict(selection, parts=[
-                catalog_source(database, part['source_id'])
+                catalog_source(database, part)
                 for part in selection['parts']])
         else:
-            resolved[alias] = catalog_source(database, selection['source_id'])
+            resolved[alias] = catalog_source(database, selection)
     return resolved
 
 
@@ -269,19 +276,19 @@ def construct(recipe, files):
 
 
 def watershed_boundary(runtime: Runtime, *, boundary_id: NonEmptyText, basis: NonEmptyText,
-                       sources: dict[NonEmptyText, dict[str, Any]],
+                       sources: dict[NonEmptyText, SourceId | MultipartSource],
                        lines: dict[NonEmptyText, list[dict[str, Any]]],
                        sections: list[dict[str, Any]], joins: list[dict[str, Any]],
                        start: dict[str, Any], end: dict[str, Any],
                        terrains: dict[NonEmptyText, dict[str, Any]] | None = None,
-                       evidence_sources: list[dict[str, NonEmptyText]] | None = None,
+                       evidence_sources: list[SourceId] | None = None,
                        geographic_choices: dict[str, Any] | None = None):
     """Construct ordered source lines, drainage divides, rivers and geographic joins."""
     recipe = runtime.recipe(locals())
     started = time.monotonic()
     with runtime.connect() as database, database.transaction():
         selections = resolve_sources(database, recipe)
-        evidence = [dict(catalog_source(database, item['source_id']),
+        evidence = [dict(catalog_source(database, item),
                          relationship='supporting_evidence')
                     for item in recipe.get('evidence_sources', [])]
     catalog_seconds = time.monotonic() - started

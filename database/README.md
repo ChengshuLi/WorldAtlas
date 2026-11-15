@@ -16,6 +16,7 @@ It loads these files in dependency order, within one transaction:
 | [`geographic_entities.sql`](schema/geographic_entities.sql) | Entities with generated IDs, names, hierarchy links and colors, plus grid-code bindings. |
 | [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, geographic assignments and citations, ocean routes and assignment policies. |
 | [`mainland.sql`](schema/mainland.sql) | Editable boundaries, raw-source links, assembled seed regions and component witnesses. |
+| [`geographic_partitions.sql`](schema/geographic_partitions.sql) | Source-backed two-sided continent assignments, including shared mainland choices. |
 | [`releases.sql`](schema/releases.sql) | Immutable release manifests, approval and official-version/homepage pointers. |
 
 `geographic_entities` stores each entity's generated ID, name, hierarchy links and
@@ -28,7 +29,7 @@ classes. Water ownership remains distinct even when every water cell uses the
 same display color.
 
 `source_features` stores imported points, polygons and constructed source-figure
-lines, with their raw-source and construction links. All five columns are
+lines, with their construction link. All four columns are
 required. Construction records turn cataloged raw inputs into these features;
 assignments group imported areas directly without storing additional derived geometry.
 Geometry is always WGS84 longitude first, latitude second, in degrees.
@@ -39,7 +40,7 @@ provider IDs from checksum-verified raw files without copying provider attribute
 or maintaining duplicate attribute expectations in Neon.
 
 `geographic_assignments` stores one independently editable whole-component rule
-per row: `assignment_id`, `entity_id`, `rationale` and `feature_ids`. The last column
+per row: `id`, `entity_id`, `rationale` and `feature_ids`. The last column
 is a nonempty, one-dimensional `text[]` with distinct, nonempty feature IDs.
 
 Every assignment uses the same calculation: union its original imported polygons,
@@ -57,6 +58,35 @@ chosen entity. Those are different relationships.
 Each table's constraints and supporting functions are kept beside its definition.
 These files define structure only. Source records, colors, geographic choices and
 construction settings are loaded separately into Neon.
+
+Each table's single-column primary key is named `id`. Foreign keys name their
+relationship: `source_features.construction_id` references `construction_records.id`.
+Link tables keep composite keys. Constructor fields and frozen map inputs retain
+descriptive references such as `source_id`, `feature_id` and grid `code`.
+
+`construction_sources` links each construction to all its raw files. Python
+`SourceId` annotations generate the source-extraction SQL alongside document
+validation. A trigger synchronizes these links when a document is saved. Missing
+sources reject the complete save; a source cannot be deleted while referenced.
+Source IDs remain in the typed document arguments, with no manually maintained
+second list or designated primary source. Source lists retain their processing
+order; the link table stores each dependency once.
+
+To find the raw files supporting a feature:
+
+```sql
+SELECT s.* FROM atlas.source_features f
+JOIN atlas.construction_sources c ON c.construction_id=f.construction_id
+JOIN atlas.source_assets s ON s.id=c.source_id
+WHERE f.id='FEATURE_ID';
+```
+
+`geographic_partitions` selects a line, geographic scope, two side witnesses and
+their entity IDs. It assigns complete physical land components on each side.
+Components extending beyond the scope retain their existing assignment and are
+reported. A line cutting a selected island is rejected. Optional mainland group
+and seed-region references let the same continent split supply its mainland
+choice; its side A is the seed region's inside entity.
 
 ## Initialize an empty database
 
@@ -85,7 +115,7 @@ scripts with the local maintenance backup, and update the authoritative schema
 in the same change as its code and tests. Geographic values are loaded through
 imports or edited in Neon, not embedded in schema SQL.
 
-`construction_records` contains one editable recipe per ID. Its structural checks
+`construction_records` contains one editable recipe per `id`. Its structural checks
 are generated from the Python constructor signatures and nested types. See
 [source-import validation](../src/worldatlas/source_imports/README.md#document-validation).
 A changed validator must be applied to the working database and must recheck
@@ -132,8 +162,8 @@ One construction ID identifies one editable recipe. Geometry references it by
 Builds freeze the complete records they read, and releases archive those inputs.
 
 ```sql
-SELECT boundary_id, construction_id FROM atlas.decision_mainland_boundaries;
-SELECT document FROM atlas.construction_records WHERE source_id = 'CONSTRUCTION_ID';
+SELECT id, construction_id FROM atlas.decision_mainland_boundaries;
+SELECT document FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 
 Run that ID through the [source-import command](../src/worldatlas/source_imports/README.md).

@@ -15,7 +15,7 @@ The typed constructor signature defines required fields, optional fields and
 types. [Shared validation](../README.md#document-validation) enforces these in
 Python and PostgreSQL; the example below explains the settings.
 
-Use the existing `atlas.construction_records` table. Its `source_id` identifies
+Use the existing `atlas.construction_records` table. Its `id` identifies
 the editable construction record. The following fields
 are JSON keys inside its `document` column, not separate table columns. The
 `source_id` inside that JSON identifies the raw source figure.

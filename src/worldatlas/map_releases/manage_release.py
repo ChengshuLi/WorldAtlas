@@ -255,13 +255,13 @@ def upload_bundle(storage, bucket, candidate, bundle, manifest):
 def retire_previews(db, storage, map_version):
     """Keep the published candidate; remove only its superseded preview folders."""
     published = db.execute(
-        'SELECT release_id FROM atlas.map_publications WHERE map_version=%s', (map_version,)
+        'SELECT release_id FROM atlas.map_publications WHERE id=%s', (map_version,)
     ).fetchone()
     if published is None:
         raise ValueError('publish a final candidate before retiring previews')
     rows = db.execute(
-        'SELECT release_id,r2_bucket,manifest FROM atlas.map_releases '
-        'WHERE map_version=%s AND release_id<>%s ORDER BY release_id',
+        'SELECT id,r2_bucket,manifest FROM atlas.map_releases '
+        'WHERE map_version=%s AND id<>%s ORDER BY id',
         (map_version, published[0]),
     ).fetchall()
     for candidate, bucket, manifest in rows:
@@ -272,7 +272,7 @@ def retire_previews(db, storage, map_version):
         # an interrupted cleanup can be retried with the same manifest.
         for key in keys:
             storage.delete_object(Bucket=bucket, Key=key)
-        db.execute('DELETE FROM atlas.map_releases WHERE release_id=%s', (candidate,))
+        db.execute('DELETE FROM atlas.map_releases WHERE id=%s', (candidate,))
     return [row[0] for row in rows]
 
 
@@ -302,7 +302,7 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
     from psycopg.types.json import Jsonb
 
     row = db.execute(
-        'SELECT r2_bucket,manifest FROM atlas.map_releases WHERE release_id=%s',
+        'SELECT r2_bucket,manifest FROM atlas.map_releases WHERE id=%s',
         (candidate,),
     ).fetchone()
     if row is not None and row != (bucket, manifest):
@@ -310,7 +310,7 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
     upload_bundle(storage, bucket, candidate, bundle, manifest)
     if row is None:
         db.execute(
-            'INSERT INTO atlas.map_releases (release_id,r2_bucket,manifest) VALUES (%s,%s,%s)',
+            'INSERT INTO atlas.map_releases (id,r2_bucket,manifest) VALUES (%s,%s,%s)',
             (candidate, bucket, Jsonb(manifest)),
         )
 
@@ -320,7 +320,7 @@ def approve(db, candidate, reviewer):
         raise ValueError('reviewer name is required')
     row = db.execute(
         'UPDATE atlas.map_releases SET approved_by=%s,approved_at=now() '
-        'WHERE release_id=%s AND approved_at IS NULL RETURNING release_id',
+        'WHERE id=%s AND approved_at IS NULL RETURNING id',
         (reviewer, candidate),
     ).fetchone()
     if row is None:
@@ -330,7 +330,7 @@ def approve(db, candidate, reviewer):
 def publish(db, storage, candidate):
     row = db.execute(
         'SELECT map_version,r2_bucket,manifest FROM atlas.map_releases '
-        'WHERE release_id=%s AND approved_at IS NOT NULL',
+        'WHERE id=%s AND approved_at IS NOT NULL',
         (candidate,),
     ).fetchone()
     if row is None:
@@ -341,7 +341,7 @@ def publish(db, storage, candidate):
     condition = homepage_condition(storage, bucket)
     with db.transaction():
         existing = db.execute(
-            'SELECT release_id FROM atlas.map_publications WHERE map_version=%s',
+            'SELECT release_id FROM atlas.map_publications WHERE id=%s',
             (map_version,),
         ).fetchone()
         if existing is not None and existing[0] != candidate:
@@ -355,8 +355,8 @@ def publish(db, storage, candidate):
         if html is None:
             raise ValueError('release has no viewer homepage')
         db.execute(
-            'INSERT INTO atlas.map_publications(map_version,release_id) VALUES (%s,%s) '
-            'ON CONFLICT (map_version) DO NOTHING', (map_version, candidate),
+            'INSERT INTO atlas.map_publications(id,release_id) VALUES (%s,%s) '
+            'ON CONFLICT (id) DO NOTHING', (map_version, candidate),
         )
     # R2 is the website switch. Retrying the same release reconciles its pointer
     # if the connection fails after the conditional write succeeds.
@@ -364,7 +364,7 @@ def publish(db, storage, candidate):
     with db.transaction():
         db.execute('UPDATE atlas.map_publications SET homepage_key=NULL WHERE homepage_key=%s',
                    (HOMEPAGE,))
-        db.execute('UPDATE atlas.map_publications SET homepage_key=%s WHERE map_version=%s',
+        db.execute('UPDATE atlas.map_publications SET homepage_key=%s WHERE id=%s',
                    (HOMEPAGE, map_version))
     retire_previews(db, storage, map_version)
 
@@ -401,7 +401,7 @@ def main():
         bundle = Path(temp)
         with psycopg.connect(connection, autocommit=True) as db:
             if args.action == 'restore-inputs':
-                row = db.execute('SELECT r2_bucket,manifest FROM atlas.map_releases WHERE release_id=%s',
+                row = db.execute('SELECT r2_bucket,manifest FROM atlas.map_releases WHERE id=%s',
                                  (args.candidate,)).fetchone()
                 if row is None:
                     raise ValueError('release is missing')
@@ -435,7 +435,7 @@ def main():
             else:
                 row = db.execute(
                     "SELECT manifest#>>'{inputs,r2_endpoint}' "
-                    'FROM atlas.map_releases WHERE release_id=%s AND approved_at IS NOT NULL',
+                    'FROM atlas.map_releases WHERE id=%s AND approved_at IS NOT NULL',
                     (args.candidate,),
                 ).fetchone()
                 if row is None:

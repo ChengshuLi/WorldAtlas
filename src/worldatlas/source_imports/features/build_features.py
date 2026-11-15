@@ -3,7 +3,7 @@
 import time
 from typing import Literal, NotRequired, TypedDict
 
-from worldatlas.source_imports.contracts import NonEmptyText, Runtime
+from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
 from worldatlas.source_imports.atlas_sources.catalog import (
     catalog_source,
     download_source,
@@ -60,8 +60,6 @@ def _build(runtime, reader, arguments):
         path = download_source(runtime.storage, source, runtime.work_dir, timing=timing)
         features = reader(path, source, recipe)
         check_source(path, source)
-        for feature in features:
-            feature.update(source_id=source["source_id"])
         with runtime.saving(database):
             hashes = save_features(database, features, recipe)
     elapsed = time.monotonic() - started
@@ -78,7 +76,7 @@ def _build(runtime, reader, arguments):
 def selected_vector_features(
     runtime: Runtime,
     *,
-    source_id: NonEmptyText,
+    source_id: SourceId,
     basis: NonEmptyText,
     id_field: NonEmptyText,
     selections: list[VectorSelection],
@@ -98,7 +96,7 @@ def selected_vector_features(
 def selected_table_points(
     runtime: Runtime,
     *,
-    source_id: NonEmptyText,
+    source_id: SourceId,
     basis: NonEmptyText,
     id_field: NonEmptyText,
     longitude_field: NonEmptyText,
@@ -124,7 +122,7 @@ def selected_table_points(
 def selected_osm_features(
     runtime: Runtime,
     *,
-    source_id: NonEmptyText,
+    source_id: SourceId,
     basis: NonEmptyText,
     selections: list[OsmSelection],
 ):
@@ -140,7 +138,7 @@ def selected_osm_features(
 def s130_areas(
     runtime: Runtime,
     *,
-    source_id: NonEmptyText,
+    source_id: SourceId,
     basis: NonEmptyText,
     gml_member: NonEmptyText,
     gml_sha256: NonEmptyText,

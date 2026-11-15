@@ -190,6 +190,16 @@ class SeedBuildTests(unittest.TestCase):
             ),
         )
 
+    def test_partition_supplies_mainland_choice_without_duplicate_rule(self):
+        from worldatlas.map_build.land.seeds import selected_rules
+        groups = dict(west=dict(component_id=7, role='mainland', target_entity_ids=[81,42]),
+                      east=dict(component_id=8, role='mainland', target_entity_ids=[707]))
+        expected = selected_rules(self.domain, groups)
+        self.domain['mainland_component_rules'] = self.domain['mainland_component_rules'][1:]
+        self.domain['partitions'] = [dict(id='west-rule', mainland_group_id='west',
+            mainland_region_id='selected-region', side_a_entity_id=81, side_b_entity_id=42)]
+        self.assertEqual(selected_rules(self.domain, groups), expected)
+
     def components(self):
         return ComponentGrid(self.root / 'physical', self.root / 'components', self.grid)
 

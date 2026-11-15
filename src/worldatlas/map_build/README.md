@@ -81,8 +81,8 @@ The calculation is:
    physical land/water mask.
 2. **Land:** build connected components, identify selected mainland groups,
    assemble mainland seeds and calculate WGS84 component distances. Apply
-   explicit affiliations, geographic lines, island groups, direct satellites and
-   scoped partitions during one final land composition.
+   island-group assignments, source-backed two-sided continent partitions and
+   scoped cell partitions during one final land composition.
 3. **Water:** build one complete shoreline index. Assign coastal water first,
    then remaining selected basin water, followed by oceans and enclosed water.
    Basin participants come from current physical shores and final land.

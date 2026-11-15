@@ -37,7 +37,7 @@ BEGIN
  EXCEPTION WHEN foreign_key_violation THEN NULL; END;
  UPDATE atlas.geographic_entities SET name='Subcontinent renamed' WHERE id=4294967294;
  IF NOT EXISTS (SELECT FROM atlas.map_category_bindings b JOIN atlas.geographic_entities e ON e.id=b.entity_id
- WHERE b.code=17 AND e.name='Subcontinent renamed') THEN RAISE EXCEPTION 'rename lost its map code'; END IF;
+ WHERE b.id=17 AND e.name='Subcontinent renamed') THEN RAISE EXCEPTION 'rename lost its map code'; END IF;
  -- Deferred validation must check the final row, not an earlier edit's values.
  INSERT INTO atlas.geographic_entities(id,name,level,parent_id)
  VALUES (4294967295,'Region','region',4294967294);

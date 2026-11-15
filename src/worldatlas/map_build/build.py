@@ -446,7 +446,8 @@ class Pipeline:
             raise ValueError('set NEON_DATABASE_URL for read-only catalog access')
         with psycopg.connect(connection) as database:
             database.execute('SET TRANSACTION READ ONLY')
-            rows = database.execute("SELECT to_jsonb(a) FROM atlas.source_assets a WHERE source_id=ANY(%s)",
+            rows = database.execute("SELECT (to_jsonb(a)-'id') || jsonb_build_object('source_id',a.id) "
+                                    "FROM atlas.source_assets a WHERE id=ANY(%s)",
                                     (sorted({key[0] for key in requested}),)).fetchall()
         return [((row[0]['source_id'], None), row[0]) for row in rows]
 
