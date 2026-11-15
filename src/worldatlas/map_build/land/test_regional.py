@@ -322,6 +322,32 @@ class RegionalTests(unittest.TestCase):
         self.assertTrue((self.root / "review/current/001.html").is_file())
         self.assertTrue((self.root / "review/index.html").is_file())
 
+    def test_numbered_report_includes_both_sides_of_an_imported_line(self):
+        from worldatlas.map_build.land.assignment_report import write_report
+
+        domain = dict(
+            features=[*self.features, feature('divider', dict(
+                type='LineString', coordinates=[[0, -20], [0, 80]]))],
+            assignments=[], category_bindings=self.bindings,
+            entities=[dict(id=81, name='First', color_rgb='#123456'),
+                      dict(id=42, name='Second', color_rgb='#654321')],
+            mainland_witnesses=[], mainland_witness_groups=[], distinct_groups=[],
+            partitions=[dict(id='divide', method='land_components', feature_id='divider',
+                bounds_lon_lat=[-120, 0, 120, 70], side_a_entity_id=81,
+                side_a_witness=[-90, 20], side_b_entity_id=42,
+                side_b_witness=[70, 20], rationale='Assign each complete island by line side.')],
+        )
+        with self.components() as components:
+            result = write_report(dict(geography=domain), components, self.root / 'line-review')
+        self.assertEqual(len(result['rules']), 1)
+        record = result['rules'][0]
+        self.assertEqual(record['component_count'], 2)
+        self.assertEqual(record['cell_count'], 3)
+        self.assertEqual(record['entity'], 'Second / First')
+        page = (self.root / 'line-review/current/001.html').read_text()
+        self.assertIn('opposite side', page)
+        self.assertIn('whole_component_line_side', page)
+
     def test_partial_coverage_wrapping_and_native_point_queries(self):
         with self.components() as components:
             self.assertEqual(components.totals(), {7: 2, 42: 2, 90000: 1})

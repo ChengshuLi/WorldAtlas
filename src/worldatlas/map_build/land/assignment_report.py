@@ -392,6 +392,7 @@ def write_report(
                 "intersects_component": "Select each whole land component with at least one land-cell center inside the area.",
                 "contains_component": "Select each whole land component whose land-cell centers all lie inside the area.",
                 "majority_component": "Select each whole land component with more than half its land-cell centers inside the area. Its coastal tips can extend beyond the outline.",
+                "whole_component_line_side": "Use the line and opposite side witnesses to assign complete islands. Islands reaching the scope edge retain their existing assignment.",
                 "regional_line_groups_and_satellites": "Use the dividing line, source-backed island groups and direct nearby named anchors to assign complete islands.",
             }
             explanation = (
