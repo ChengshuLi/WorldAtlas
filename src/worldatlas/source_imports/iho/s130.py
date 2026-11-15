@@ -9,6 +9,7 @@ from worldatlas.source_imports.geodesy import spherical_rhumb_points
 
 NS = {'s130': 'http://www.iho.int/S130/2.0', 'gml': 'http://www.opengis.net/gml/3.2'}
 GML_ID = '{http://www.opengis.net/gml/3.2}id'
+XLINK_HREF = '{http://www.w3.org/1999/xlink}href'
 EPSG_4326 = 'http://www.opengis.net/def/crs/EPSG/0/4326'
 
 
