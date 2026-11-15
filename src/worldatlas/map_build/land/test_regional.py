@@ -480,7 +480,7 @@ class RegionalTests(unittest.TestCase):
             )
 
     def component_partition(self):
-        return dict(id='divider', feature_id='divider', bounds_lon_lat=[-130, -44, 130, 44],
+        return dict(id='divider', method='land_components', feature_id='divider', bounds_lon_lat=[-130, -44, 130, 44],
                     side_a_entity_id=81, side_a_witness=[-60, 10],
                     side_b_entity_id=42, side_b_witness=[60, 10], rationale='Selected divide')
 
@@ -517,38 +517,18 @@ class RegionalTests(unittest.TestCase):
         with self.components() as components, self.assertRaisesRegex(ValueError, 'different entities'):
             resolve_component_partitions([a,b], [line], components, self.bindings)
 
-    def test_selected_lines_produce_two_witnessed_partition_faces(self):
-        a = feature("a", {"type": "LineString", "coordinates": [[0, 80], [0, 0]]})
-        b = feature("b", {"type": "LineString", "coordinates": [[0, 0], [0, -80]]})
-        a["boundary_id"], b["route_id"] = "a", "b"
-        definition = dict(
-            bounds_lon_lat=[-120, -40, 120, 40],
-            sections=[dict(kind="boundary", id="a"), dict(kind="route", id="b")],
-            sides=[
-                dict(coordinates=[-60, 10], entity_id=81),
-                dict(coordinates=[60, 10], entity_id=42),
-            ],
-        )
-        domain = dict(
-            mainland_boundaries=[a],
-            routes=[b],
-            policies=[
-                dict(id="scope", kind="scoped_land_partition", definition=definition)
-            ],
-        )
-        partitions = build_partitions(domain)
-        from shapely.geometry import Point, shape
-
-        self.assertTrue(shape(partitions[0]["geometry"]).contains(Point(-60, 10)))
-        self.assertTrue(shape(partitions[1]["geometry"]).contains(Point(60, 10)))
-        definition["sides"][1]["coordinates"] = [-30, 10]
-        with self.assertRaisesRegex(ValueError, "opposite"):
-            build_partitions(domain)
-        definition["sides"][1]["coordinates"] = [60, 10]
-        b["geometry"]["coordinates"][0] = [1, 0]
-        b["geometry_sha256"] = feature("b", b["geometry"])["geometry_sha256"]
-        with self.assertRaisesRegex(ValueError, "do not join"):
-            build_partitions(domain)
+    def test_selected_region_produces_two_witnessed_cell_partition_faces(self):
+        domain=dict(partitions=[dict(id='scope',method='land_cells',mainland_region_id='region',
+            bounds_lon_lat=[-120,-40,120,40],side_a_entity_id=81,side_a_witness=[-60,10],
+            side_b_entity_id=42,side_b_witness=[60,10])])
+        regions={'region':dict(geometry=polygon(-160,-80,0,80))}
+        partitions=build_partitions(domain,regions)
+        from shapely.geometry import Point,shape
+        self.assertTrue(shape(partitions[0]['geometry']).contains(Point(-60,10)))
+        self.assertTrue(shape(partitions[1]['geometry']).contains(Point(60,10)))
+        domain['partitions'][0]['side_b_witness']=[-30,10]
+        with self.assertRaisesRegex(ValueError,'opposite'):
+            build_partitions(domain,regions)
 
     def test_projected_source_contact_uses_declared_operations_and_reports_unknown(
         self,

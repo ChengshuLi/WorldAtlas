@@ -12,20 +12,20 @@ permission to resume.
 
 [`geography.sql`](geography.sql) exports working records once. New selections use
 format v3 with one geography collection (including entity colors), contributing construction
-settings and exact raw-file catalog records. Stage views distinguish ocean barriers
-from mainland closure lines without independent database revisions.
+settings and exact raw-file catalog records. Its geography collection uses format
+v4: imported geometry is separate from two-sided partition methods and
+computational mainland closures.
 
 Retained v1/v2 selections remain readable without rewriting their bytes or reading
 current Neon data. Their old labels are historical metadata, not working selectors.
 
-Provider endpoint decimals are exported as text to preserve their exact values.
-Stored GeoJSON coordinates remain numeric. Source versions, sizes and hashes
-come from the same database view as the decisions.
+Imported GeoJSON coordinates remain numeric. Source IDs, sizes and hashes come
+from the same database view as the decisions.
 
 Large feature geometries are read as individual records in that same
 transaction. PostgreSQL does not need to assemble all coordinates into one JSON
-aggregate before sending them. Basin checks reject changed geometry checksums,
-wrong coordinate references and duplicate provider parent/child selections.
+aggregate before sending them. Basin checks reject missing or invalid geometry
+and duplicate provider parent/child selections.
 
 `test_selection.py` uses disposable PostgreSQL to check concurrent edits, saved
 replay and missing selections. Source-import integration tests also exercise the

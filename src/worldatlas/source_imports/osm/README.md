@@ -22,7 +22,7 @@ and invalid geometry.
 
 ## Boundary lines
 
-Construction records in Neon choose the sources, destination boundary IDs, and
+Construction records in Neon choose the sources, output feature IDs, and
 construction descriptions.
 Reuse these functions for boundaries made from a single chain of OpenStreetMap
 ways. Local processing and the Neon/R2 workflow are separate:
@@ -30,8 +30,8 @@ ways. Local processing and the Neon/R2 workflow are separate:
 - [`ways.py`](ways.py): read local archives and manifests, check source
   files, join ways into a GeoJSON line, and optionally check its geometry checksum.
 - [`build_boundary.py`](build_boundary.py): look up a raw source ID
-  in Neon, download it from R2, assemble the line, and save the boundary and source link
-  in Neon. Existing notes and supporting source links are retained.
+  in Neon, download it from R2, assemble the line, and save its geometry and construction reference
+  in Neon. Existing relationships are retained.
 - [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) supplies the document, catalog, and download
   functions also used by other source processors.
 
@@ -92,7 +92,8 @@ The construction record is a JSON object in the existing
 {
   "method": "osm_way_chain",
   "source_id": "raw-source-id",
-  "boundary_id": "boundary-id",
+  "feature_id": "boundary-id",
+  "source_feature_id": "manifest.json",
   "basis": "A plain-English explanation of how the boundary is built."
 }
 ```
@@ -108,33 +109,23 @@ downloads its R2 object into the work directory, checks its size and checksum,
 and assembles the boundary. A checked local download is reused on later runs.
 An optional expected geometry checksum supports replaying an existing result.
 
-It saves the geometry in `atlas.decision_mainland_boundaries` and its construction
-source link in `atlas.decision_mainland_boundary_sources`, in one transaction.
-The construction description is saved in the boundary's `provenance.basis` field.
-The selected record ID is saved in the boundary’s
-`construction_id` column. The source link identifies
-the catalog entry with the raw file’s R2 location, size and checksum.
-Repeating the command updates the
-same boundary, retaining other notes and supporting source links. Changing the
-source ID replaces the previous construction source link.
+It saves the complete line in `atlas.source_features`. Its construction reference
+links to all cataloged inputs through `construction_sources`. Existing geographic
+partition and seed-region references survive repeat imports. Saving a line used
+by a seed region also checks that the region still joins and closes correctly;
+workers editing the same region serialize their short writes.
 
-For another boundary using this method, add a construction record and run the
-same command.
+Optional `before` and `after` control points extend the archived chain with WGS84
+geodesics. `max_step_metres` controls their sampling. Every archived chain
+coordinate is preserved, and the complete line is produced in one import.
+Optional `evidence_source_ids` references supporting publications; their text is
+not read by the geometric calculation. The construction's `basis` records the
+human interpretation. These source arguments generate foreign-key dependency
+links from their Python `SourceId` annotations.
 
-## Complete lines with offshore connections
-
-`osm_way_chain_feature` uses the same verified archive assembly and writes the
-complete result to `source_features`. Its construction identifies the source,
-output feature, provider selector and basis. Optional `before` and `after` control
-points extend the archived chain with WGS84 geodesics; `max_step_metres` controls
-their sampling. Every archived chain coordinate is preserved. There is no later
-adjustment step.
-
-Optional `evidence_source_ids` references supporting publications. These are
-cataloged dependencies; their text is not read by the geometric calculation.
-All raw source arguments use `SourceId` annotations, generating the construction's
-foreign-key source links automatically. Run this method through the same
-`worldatlas-import --recipe CONSTRUCTION_ID` command.
+For another boundary, create a construction record and run the same command.
+There is one OSM chain method, with optional extensions rather than a second
+constructor or a later adjustment step.
 
 ## Tests
 
@@ -151,7 +142,7 @@ python .github/scripts/run_tests.py --suite source_imports
 
 The runner creates a disposable database and includes the database write tests.
 Those tests cover complete builds, repeat runs, source updates, preservation of
-notes and supporting evidence, unrelated records, and failed-write rollbacks.
+construction and geographic relationships, unrelated records, and failed-write rollbacks.
 
 Provider-defined geographic `group` and `collection` relations can produce one
 island-group feature. The reader includes direct polygon ways and nested polygon

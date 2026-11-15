@@ -93,32 +93,6 @@ def selected_vector_features(
     )
 
 
-def selected_table_points(
-    runtime: Runtime,
-    *,
-    source_id: SourceId,
-    basis: NonEmptyText,
-    id_field: NonEmptyText,
-    longitude_field: NonEmptyText,
-    latitude_field: NonEmptyText,
-    selections: list[FeatureIdentity] | None = None,
-    member: NonEmptyText | None = None,
-    columns: list[NonEmptyText] | None = None,
-    delimiter: str = ",",
-    encoding: NonEmptyText = "utf-8",
-    where: dict[NonEmptyText, str] | None = None,
-    feature_id_prefix: NonEmptyText | None = None,
-    bounds_lon_lat: tuple[float, float, float, float] | None = None,
-):
-    """Select provider table points by ID or property matches, optionally within bounds."""
-    arguments = locals()
-    from worldatlas.source_imports.features.points import read_points
-
-    return _build(
-        runtime, lambda path, source, settings: read_points(path, settings), arguments
-    )
-
-
 def selected_osm_features(
     runtime: Runtime,
     *,

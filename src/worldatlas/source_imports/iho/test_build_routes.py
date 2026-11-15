@@ -12,7 +12,7 @@ from unittest.mock import Mock
 import psycopg
 from psycopg.types.json import Jsonb
 from worldatlas.source_imports.run_import import run_import
-from worldatlas.source_imports.iho.build_routes import save_routes
+from worldatlas.source_imports.features.geometry import save_features
 from worldatlas.source_imports.iho.s130 import extract_routes
 from worldatlas.source_imports.iho.test_s130 import fixture
 
@@ -55,62 +55,39 @@ class BuildTests(unittest.TestCase):
         )
 
     def rows(self):
-        return [
-            self.database.execute(
-                "SELECT * FROM atlas." + name + " ORDER BY 1,2"
-            ).fetchall()
-            for name in (
-                "decision_endpoints",
-                "decision_routes",
-                "decision_route_points",
-            )
-        ]
+        return self.database.execute('SELECT * FROM atlas.source_features ORDER BY id').fetchall()
 
     def test_build_and_cached_repeat(self):
-        result = self.build()
-        before = self.rows()
-        self.assertEqual(self.build(), result)
-        self.assertEqual(self.rows(), before)
-        self.assertEqual(self.storage.get_object.call_count, 1)
-        self.assertEqual(
-            self.database.execute(
-                "SELECT longitude::text,latitude::text FROM atlas.decision_endpoints WHERE id='route-a-endpoint-0'"
-            ).fetchone(),
-            ("40", "30"),
-        )
+        result=self.build()
+        before=self.rows()
+        self.assertEqual(self.build(),result)
+        self.assertEqual(self.rows(),before)
+        self.assertEqual(self.storage.get_object.call_count,1)
+        geometry=self.database.execute("SELECT geometry FROM atlas.source_features WHERE id='route-a'").fetchone()[0]
+        self.assertEqual(geometry['coordinates'][0],[40,30])
+        self.assertIn([30,20],geometry['coordinates'])
 
-    def test_recipe_edit_preserves_unrelated_notes_and_links(self):
+    def test_recipe_edit_preserves_partition_reference(self):
         self.build()
-        self.database.execute(
-            'UPDATE atlas.decision_endpoints SET evidence=evidence || \'{"note":"keep","selector":"old"}\''
-        )
-        self.recipe["routes"][0]["endpoint_names"][0] = "Renamed"
+        self.database.execute("INSERT INTO atlas.geographic_entities(id,name,level) VALUES (81,'A','continent'),(42,'B','continent')")
+        self.database.execute("INSERT INTO atlas.geographic_partitions(id,method,feature_id,side_a_entity_id,side_b_entity_id,rationale) VALUES ('p','ocean_barrier','route-a',81,42,'Selected source divider')")
+        self.recipe['basis']='Updated description'
         self.store()
         self.build()
-        name, evidence = self.database.execute(
-            "SELECT name,evidence FROM atlas.decision_endpoints WHERE id='route-a-endpoint-0'"
-        ).fetchone()
-        self.assertEqual(name, "Renamed")
-        self.assertEqual(evidence["note"], "keep")
-        self.assertNotIn("selector", evidence)
+        self.assertEqual(self.database.execute("SELECT feature_id FROM atlas.geographic_partitions WHERE id='p'").fetchone()[0],'route-a')
 
     def test_link_failure_rolls_back_the_entire_import(self):
         self.build()
-        before = self.rows()
-        result = extract_routes(self.path, self.digest, self.recipe)
-        result["endpoints"][0]["name"] = "Must roll back"
-        result["routes"][1]["points"][1]["endpoint_id"] = "missing"
-        with self.assertRaises(psycopg.errors.ForeignKeyViolation):
-            save_routes(
-                self.database,
-                result,
-                self.source,
-                dict(self.recipe, recipe_id="routes"),
-            )
-        self.assertEqual(self.rows(), before)
+        before=self.rows()
+        features=extract_routes(self.path,self.digest,self.recipe)
+        features[0]['source_feature_id']='must roll back'
+        features[1]['source_feature_id']=None
+        with self.assertRaises(psycopg.errors.NotNullViolation):
+            save_features(self.database,features,dict(recipe_id='routes'))
+        self.assertEqual(self.rows(),before)
 
     def test_corrupt_archive_does_not_save(self):
         self.storage.get_object.side_effect = lambda **kw: {"Body": io.BytesIO(b"bad")}
         with self.assertRaisesRegex(ValueError, "size or hash"):
             self.build()
-        self.assertEqual(self.rows(), [[], [], []])
+        self.assertEqual(self.rows(), [])

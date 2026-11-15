@@ -1,56 +1,13 @@
-"""Build an editable Neon boundary from an OSM way archive cataloged in Neon."""
+"""Assemble archived OSM ways and optional source-backed offshore continuations."""
 
 from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
 from worldatlas.source_imports.osm.ways import assemble_archive
-from worldatlas.source_imports.atlas_sources.catalog import (
-    catalog_source,
-    download_source,
-)
-from worldatlas.source_imports.source_io import save_boundary as save_mainland_boundary
-from worldatlas.source_imports.features.geometry import save_features, validate_geometry
+from worldatlas.source_imports.atlas_sources.catalog import catalog_source, download_source
+from worldatlas.source_imports.features.geometry import geometry_hash, save_features, validate_geometry
 from worldatlas.source_imports.traces.geodesic import construct
 
 
-def save_boundary(database, geometry, source, recipe):
-    """Save geometry and its construction source together, retaining other evidence."""
-    provenance = {"basis": recipe["basis"]}
-    return save_mainland_boundary(
-        database,
-        recipe["boundary_id"],
-        geometry,
-        provenance,
-        [source],
-        construction=recipe["recipe_id"],
-    )
-
-
 def osm_way_chain(
-    runtime: Runtime,
-    *,
-    source_id: SourceId,
-    boundary_id: NonEmptyText,
-    basis: NonEmptyText,
-):
-    """Join archived OSM border segments at shared node IDs, preserving coordinates."""
-    recipe = runtime.recipe(locals())
-    with runtime.connect() as database:
-        with database.transaction():
-            source = catalog_source(database, source_id)
-        archive = download_source(runtime.storage, source, runtime.work_dir)
-        geometry = assemble_archive(
-            archive, source["sha256"], runtime.expected_geometry_sha256
-        )
-        with runtime.saving(database):
-            digest = save_boundary(database, geometry, source, recipe)
-    return {
-        "boundary_id": boundary_id,
-        "vertices": len(geometry["coordinates"]),
-        "sha256": digest,
-        "archive": str(archive),
-    }
-
-
-def osm_way_chain_feature(
     runtime: Runtime, *, source_id: SourceId, feature_id: NonEmptyText,
     source_feature_id: NonEmptyText, basis: NonEmptyText,
     before: list[tuple[float, float]] | None = None,
@@ -76,6 +33,9 @@ def osm_way_chain_feature(
         line = validate_geometry(geometry)
         if not line.is_simple or line.is_closed:
             raise ValueError('assembled boundary must be open without crossings or retracing')
+        if (runtime.expected_geometry_sha256 is not None
+                and geometry_hash(geometry) != runtime.expected_geometry_sha256):
+            raise ValueError('assembled boundary differs from the expected geometry checksum')
         with runtime.saving(database):
             hashes = save_features(database, [dict(feature_id=feature_id,
                 source_feature_id=source_feature_id, geometry=geometry)],

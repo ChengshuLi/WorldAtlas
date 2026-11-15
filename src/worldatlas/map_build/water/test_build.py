@@ -110,22 +110,8 @@ def selection():
             'type': 'Polygon',
             'coordinates': [[[90, 70], [110, 70], [110, 89], [90, 89], [90, 70]]],
         })],
-        'endpoints': [
-            dict(endpoint_id='top', longitude='-180', latitude='90'),
-            dict(endpoint_id='bottom', longitude='-180', latitude='-90'),
-            dict(endpoint_id='seed', longitude='100', latitude='80', derivation={
-                'method': 'source_area_interior_point', 'feature_id': 'ocean-area',
-            }),
-        ],
-        'routes': [
-            dict(
-                route_id='edge',
-                route_type='meridian',
-                parameters={},
-                points=[dict(ordinal=0, endpoint_id='top'), dict(ordinal=1, endpoint_id='bottom')],
-            )
-        ],
-        'ocean_seeds': [dict(seed_id='ocean', endpoint_id='seed', entity_id=808)],
+        'partitions': [],
+        'ocean_seeds': [dict(entity_id=808,feature_id='ocean-area',witness=[100,80])],
         'policies': [
             dict(
                 id='ocean',
@@ -135,8 +121,6 @@ def selection():
                     wrap_longitude=True,
                     barrier_tie_rule='left-of-oriented-route',
                     unseeded_policy='report-only',
-                    route_ids=['edge'],
-                    seed_ids=['ocean'],
                 ),
             )
         ],
@@ -187,7 +171,7 @@ class WaterBuildTests(unittest.TestCase):
     def test_missing_ocean_seed_area_is_rejected_before_processing(self):
         chosen = selection()
         chosen['domains']['ocean']['features'] = []
-        with self.assertRaisesRegex(ValueError, 'ocean seed refers to a missing source area'):
+        with self.assertRaisesRegex(ValueError, 'ocean rule refers to a missing source feature or area'):
             water_snapshot(chosen)
 
     def test_policies_come_from_their_selected_domain_without_hiding_missing_or_duplicate_rules(self):

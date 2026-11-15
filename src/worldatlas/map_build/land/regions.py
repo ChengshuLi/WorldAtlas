@@ -63,8 +63,8 @@ def verify_closure(record, coordinates, records, components):
 
 def assemble_regions(domain, components):
     """Build the selected ordered rings from current geometry, with no repairs."""
-    records = {('boundary', item['boundary_id']): item for item in domain['mainland_boundaries']}
-    records.update({('route', item['route_id']): item for item in domain['routes']})
+    records = {('boundary', item['feature_id']): item for item in domain['features']}
+    records.update({('route', item['route_id']): item for item in domain['region_closures']})
     selected = domain['land_baseline_policy']['region_ids']
     regions = {item['region_id']: item for item in domain['seed_regions']}
     result, checked_routes = {}, {}

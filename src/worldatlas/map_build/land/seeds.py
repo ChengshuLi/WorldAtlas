@@ -17,50 +17,41 @@ from worldatlas.map_build.land.witnesses import resolve_witnesses
 
 
 def selected_rules(domain, groups):
-    policy = domain['land_baseline_policy']
-    selected = {r['rule_id']: r for r in domain['mainland_component_rules']}
+    """Uniform targets come from witness groups; two-sided choices come from partitions."""
+    selected = {}
     for partition in domain.get('partitions', []):
-        if partition.get('mainland_group_id') is not None:
-            selected[partition['id']] = dict(
-                rule_id=partition['id'], group_id=partition['mainland_group_id'],
-                region_id=partition['mainland_region_id'],
-                inside_entity_id=partition['side_a_entity_id'],
-                outside_entity_id=partition['side_b_entity_id'])
-    codes = {
-        b['entity_id']: b['code']
-        for b in domain['category_bindings']
-        if b['physical_class'] == 'land'
-    }
-    rules, used_groups, used_regions = [], set(), set()
-    for ident in policy['mainland_rule_ids']:
-        choice = selected[ident]
-        group = groups[choice['group_id']]
-        inside, outside = choice['inside_entity_id'], choice['outside_entity_id']
-        region = choice['region_id']
-        if (
-            choice['group_id'] in used_groups
-            or group['role'] != 'mainland'
-            or set(group['target_entity_ids']) != {inside, outside}
-            or (region is None) != (inside == outside)
-        ):
-            raise ValueError('mainland component rule conflicts with its selected witness group')
-        if region is not None:
+        group = partition.get('mainland_group_id')
+        if group is not None:
+            if group in selected:
+                raise ValueError('mainland group has multiple geographic partitions')
+            selected[group] = partition
+    codes = {b['entity_id']:b['code'] for b in domain['category_bindings']
+             if b['physical_class']=='land'}
+    rules, used_regions, used_partitions = [],set(),set()
+    for ident,group in sorted(groups.items()):
+        if group['role'] != 'mainland':
+            continue
+        targets = group['target_entity_ids']
+        partition = selected.get(ident)
+        if len(targets)==1 and partition is None:
+            inside=outside=targets[0]
+            region=None
+            rule_id=ident
+        elif partition is not None:
+            inside,outside=partition['side_a_entity_id'],partition['side_b_entity_id']
+            region=partition['mainland_region_id']
+            if region is None or inside==outside or set(targets)!={inside,outside}:
+                raise ValueError('mainland partition conflicts with its selected witness group')
             used_regions.add(region)
-        used_groups.add(choice['group_id'])
-        rules.append(
-            dict(
-                rule_id=ident,
-                component_id=group['component_id'],
-                region_id=region,
-                inside_code=codes[inside],
-                outside_code=codes[outside],
-            )
-        )
-    if (
-        used_regions != set(policy['region_ids'])
-        or used_groups != {ident for ident, group in groups.items() if group['role'] == 'mainland'}
-        or {r[key] for r in rules for key in ('inside_code', 'outside_code')} != set(codes.values())
-    ):
+            used_partitions.add(ident)
+            rule_id=partition['id']
+        else:
+            raise ValueError('mainland group needs a uniform target or geographic partition')
+        rules.append(dict(rule_id=rule_id,component_id=group['component_id'],
+                          region_id=region,inside_code=codes[inside],outside_code=codes[outside]))
+    if (used_regions != set(domain['land_baseline_policy']['region_ids'])
+            or used_partitions != set(selected)
+            or {r[k] for r in rules for k in ('inside_code','outside_code')} != set(codes.values())):
         raise ValueError('selected mainland rules leave an active group, region or category unused')
     return rules
 

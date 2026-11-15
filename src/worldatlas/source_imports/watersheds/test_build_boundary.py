@@ -46,7 +46,7 @@ def fixtures(directory):
     ]}))
     files = {'dem': raster, 'basins': archive, 'lines': geometry}
     recipe = {
-        'method': 'watershed_boundary', 'boundary_id': 'test-divide', 'basis': 'Test drainage divide',
+        'method': 'watershed_boundary', 'feature_id': 'test-divide', 'basis': 'Test drainage divide',
         'sources': {name: '__watershed_' + name for name in files},
         'lines': {name: [{'source': 'lines', 'geojson_feature': i}]
                   for i, name in enumerate(('before', 'after'))},
@@ -285,24 +285,20 @@ class StorageTests(unittest.TestCase):
 
     def row(self):
         return self.db.execute(
-            "SELECT geometry,geometry_sha256,provenance,construction_id FROM atlas.decision_mainland_boundaries"
+            "SELECT geometry,construction_id FROM atlas.source_features"
         ).fetchone()
 
-    def test_repeat_and_edit_recipe_preserve_geometry_notes_and_sources(self):
+    def test_repeat_and_edit_recipe_preserve_geometry_and_sources(self):
         result = self.build()
         self.assertEqual(self.build()["sha256"], result["sha256"])
-        self.db.execute(
-            'UPDATE atlas.decision_mainland_boundaries SET provenance=provenance || \'{"note":"keep"}\''
-        )
         self.recipe["basis"] = "Updated explanation"
         self.store()
         self.build()
-        self.assertEqual(self.row()[2]["note"], "keep")
-        self.assertEqual(self.row()[3], "watershed")
+        self.assertEqual(self.row()[1], "watershed")
         links = {
             r[0]
             for r in self.db.execute(
-                "SELECT source_id FROM atlas.decision_mainland_boundary_sources"
+                "SELECT source_id FROM atlas.construction_sources"
             )
         }
         self.assertEqual(
@@ -313,7 +309,7 @@ class StorageTests(unittest.TestCase):
         self.build()
         before = self.row()
         links = self.db.execute(
-            "SELECT * FROM atlas.decision_mainland_boundary_sources ORDER BY source_id"
+            "SELECT * FROM atlas.construction_sources ORDER BY source_id"
         ).fetchall()
         self.recipe["joins"] = [{"near": [5, 5]}]
         self.store()
@@ -322,7 +318,7 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(self.row(), before)
         self.assertEqual(
             self.db.execute(
-                "SELECT * FROM atlas.decision_mainland_boundary_sources ORDER BY source_id"
+                "SELECT * FROM atlas.construction_sources ORDER BY source_id"
             ).fetchall(),
             links,
         )

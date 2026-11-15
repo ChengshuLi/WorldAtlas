@@ -42,6 +42,8 @@ def resolve_component_partitions(records, features, components, bindings, *, pro
     protected, assigned, claims, ids = set(protected), {}, [], set()
     totals = components.totals()
     for record in records:
+        if record['method'] != 'land_components':
+            continue
         ident = record['id']
         if ident in ids:
             raise ValueError('duplicate geographic partition')
@@ -73,24 +75,24 @@ def resolve_component_partitions(records, features, components, bindings, *, pro
     return dict(component_entities=assigned, claims=claims)
 
 
-def build_partitions(domain):
-    """Build scoped cell partitions from selected mainland lines and routes."""
-    records = {('boundary', item['boundary_id']): item for item in domain['mainland_boundaries']}
-    records.update({('route', item['route_id']): item for item in domain['routes']})
+def build_partitions(domain, regions):
+    """Apply selected region sides to final land cells within an explicit scope."""
+    from shapely.geometry import shape
     result = []
-    for policy in domain.get('policies', []):
-        if policy['kind'] != 'scoped_land_partition':
+    for record in domain.get('partitions', []):
+        if record['method'] != 'land_cells':
             continue
-        definition, points = policy['definition'], []
-        for section in definition['sections']:
-            record = records[section['kind'], section['id']]
-            coordinates = feature_geometry(record, ('LineString',))['coordinates']
-            if section.get('reverse', False):
-                coordinates = list(reversed(coordinates))
-            if points and points[-1] != coordinates[0]:
-                raise ValueError('selected land partition lines do not join')
-            points.extend(coordinates if not points else coordinates[1:])
-        for face in partition_faces(dict(type='LineString', coordinates=points),
-                                    definition['bounds_lon_lat'], definition['sides']):
-            result.append(dict(face, policy_id=policy['id']))
+        region = shape(regions[record['mainland_region_id']]['geometry'])
+        scope = box(*record['bounds_lon_lat'])
+        for side, inside in [('a', True), ('b', False)]:
+            witness = Point(record['side_' + side + '_witness'])
+            if (not scope.contains(witness) or region.boundary.intersects(witness)
+                    or region.contains(witness) != inside):
+                raise ValueError('partition witnesses must be inside opposite region faces')
+            face = scope.intersection(region) if inside else scope.difference(region)
+            if face.is_empty or not face.is_valid:
+                raise ValueError('scoped geographic partition has an empty or invalid side')
+            result.append(dict(geometry=mapping(face),
+                               entity_id=record['side_' + side + '_entity_id'],
+                               policy_id=record['id']))
     return result

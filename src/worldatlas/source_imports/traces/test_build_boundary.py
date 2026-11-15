@@ -24,7 +24,7 @@ class DatabaseTests(unittest.TestCase):
         )
         self.recipe = dict(
             method="geodesic_trace",
-            source_id="raw",
+            source_ids=["raw"],
             feature_id="line",
             source_feature_id="Figure 1",
             basis="Chosen points",
@@ -54,7 +54,7 @@ class DatabaseTests(unittest.TestCase):
         before = self.row()
         self.assertEqual(self.build(), first)
         self.db.execute("INSERT INTO atlas.geographic_entities(id,name,level) VALUES (81,'First','continent'),(42,'Second','continent')")
-        self.db.execute("INSERT INTO atlas.geographic_partitions(id,feature_id,bounds_lon_lat,side_a_entity_id,side_a_witness,side_b_entity_id,side_b_witness,rationale) VALUES ('rule','line',ARRAY[0,-10,20,10],81,ARRAY[1,1],42,ARRAY[19,1],'Selected divide')")
+        self.db.execute("INSERT INTO atlas.geographic_partitions(id,method,feature_id,bounds_lon_lat,side_a_entity_id,side_a_witness,side_b_entity_id,side_b_witness,rationale) VALUES ('rule','land_components','line',ARRAY[0,-10,20,10],81,ARRAY[1,1],42,ARRAY[19,1],'Selected divide')")
         self.recipe["points"] = [[12.0, 1.0], [11.0, 0.0], [10.0, -1.0]]
         self.store()
         self.build()
@@ -66,7 +66,7 @@ class DatabaseTests(unittest.TestCase):
     def test_bad_source_preserves_previous_geometry(self):
         self.build()
         before = self.row()
-        self.recipe["source_id"] = "missing"
+        self.recipe["source_ids"] = ["missing"]
         with self.assertRaises(psycopg.errors.ForeignKeyViolation), self.db.transaction():
             self.store()
         self.assertEqual(self.row(), before)

@@ -74,58 +74,12 @@ CREATE TABLE atlas.geographic_assignment_sources (
     PRIMARY KEY (assignment_id, source_id)
 );
 
-CREATE TABLE atlas.decision_endpoints (
-    id text NOT NULL,
-    name text NOT NULL,
-    longitude numeric NOT NULL,
-    latitude numeric NOT NULL,
-    derivation jsonb NOT NULL,
-    evidence jsonb NOT NULL,
-    construction_id text,
-    CONSTRAINT decision_endpoints_derivation_check CHECK ((jsonb_typeof(derivation) = 'object'::text)),
-    CONSTRAINT decision_endpoints_id_check CHECK ((length(TRIM(BOTH FROM id)) > 0)),
-    CONSTRAINT decision_endpoints_evidence_check CHECK ((jsonb_typeof(evidence) = 'object'::text)),
-    CONSTRAINT decision_endpoints_latitude_check CHECK (((latitude >= ('-90'::integer)::numeric) AND (latitude <= (90)::numeric))),
-    CONSTRAINT decision_endpoints_longitude_check CHECK (((longitude >= ('-180'::integer)::numeric) AND (longitude <= (180)::numeric))),
-    CONSTRAINT decision_endpoints_name_check CHECK ((length(TRIM(BOTH FROM name)) > 0)),
-    CONSTRAINT decision_endpoints_pkey PRIMARY KEY (id),
-    CONSTRAINT decision_endpoints_construction_id_fkey FOREIGN KEY (construction_id) REFERENCES atlas.construction_records(id)
-);
-
-CREATE TABLE atlas.decision_routes (
-    id text NOT NULL,
-    route_type text NOT NULL,
-    parameters jsonb NOT NULL,
-    evidence jsonb NOT NULL,
-    construction_id text,
-    CONSTRAINT decision_routes_evidence_check CHECK ((jsonb_typeof(evidence) = 'object'::text)),
-    CONSTRAINT decision_routes_parameters_check CHECK ((jsonb_typeof(parameters) = 'object'::text)),
-    CONSTRAINT decision_routes_id_check CHECK ((length(TRIM(BOTH FROM id)) > 0)),
-    CONSTRAINT decision_routes_route_type_check CHECK ((length(TRIM(BOTH FROM route_type)) > 0)),
-    CONSTRAINT decision_routes_pkey PRIMARY KEY (id),
-    CONSTRAINT decision_routes_construction_id_fkey FOREIGN KEY (construction_id) REFERENCES atlas.construction_records(id)
-);
-
-CREATE TABLE atlas.decision_route_points (
-    route_id text NOT NULL,
-    ordinal integer NOT NULL,
-    endpoint_id text NOT NULL,
-    CONSTRAINT decision_route_points_ordinal_check CHECK ((ordinal >= 0)),
-    CONSTRAINT decision_route_points_pkey PRIMARY KEY (route_id, ordinal),
-    CONSTRAINT decision_route_points_endpoint_id_fkey FOREIGN KEY (endpoint_id) REFERENCES atlas.decision_endpoints(id),
-    CONSTRAINT decision_route_points_route_id_fkey FOREIGN KEY (route_id) REFERENCES atlas.decision_routes(id)
-);
-
-CREATE TABLE atlas.decision_ocean_seeds (
-    id text NOT NULL,
-    endpoint_id text NOT NULL,
-    entity_id bigint NOT NULL,
-    evidence jsonb NOT NULL,
-    CONSTRAINT decision_ocean_seeds_evidence_check CHECK ((jsonb_typeof(evidence) = 'object'::text)),
-    CONSTRAINT decision_ocean_seeds_id_check CHECK ((length(TRIM(BOTH FROM id)) > 0)),
-    CONSTRAINT decision_ocean_seeds_pkey PRIMARY KEY (id),
-    CONSTRAINT decision_ocean_seeds_entity_id_fkey FOREIGN KEY (entity_id) REFERENCES atlas.geographic_entities(id),
-    CONSTRAINT decision_ocean_seeds_endpoint_id_fkey FOREIGN KEY (endpoint_id) REFERENCES atlas.decision_endpoints(id)
+-- Interior witnesses seed ocean fill; the selected source polygon establishes identity.
+CREATE TABLE atlas.ocean_seeds (
+    id bigint PRIMARY KEY REFERENCES atlas.geographic_entities(id),
+    feature_id text NOT NULL REFERENCES atlas.source_features(id),
+    witness double precision[] NOT NULL,
+    CHECK (atlas.valid_source_coordinates(to_jsonb(witness),'Point'))
 );
 
 CREATE TABLE atlas.decision_policies (
@@ -135,7 +89,7 @@ CREATE TABLE atlas.decision_policies (
     evidence jsonb NOT NULL,
     CONSTRAINT decision_policies_definition_check CHECK ((jsonb_typeof(definition) = 'object'::text)),
     CONSTRAINT decision_policies_evidence_check CHECK ((jsonb_typeof(evidence) = 'object'::text)),
-    CONSTRAINT decision_policies_kind_check CHECK ((kind = ANY (ARRAY['layer_precedence'::text, 'coastline_assignment'::text, 'scoped_land_partition'::text, 'ocean_fill'::text, 'closed_water_assignment'::text]))),
+    CONSTRAINT decision_policies_kind_check CHECK ((kind = ANY (ARRAY['layer_precedence'::text, 'coastline_assignment'::text, 'ocean_fill'::text, 'closed_water_assignment'::text]))),
     CONSTRAINT decision_policies_id_check CHECK ((length(TRIM(BOTH FROM id)) > 0)),
     CONSTRAINT decision_policies_pkey PRIMARY KEY (id)
 );

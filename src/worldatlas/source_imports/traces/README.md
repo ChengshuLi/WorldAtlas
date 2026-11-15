@@ -7,7 +7,7 @@ path through gaps and around islands; there is no later adjustment stage.
 - [`geodesic.py`](geodesic.py) joins consecutive control points without smoothing.
   [`../geodesy.py`](../geodesy.py) samples the same WGS84 segments used by watershed connectors.
 - [`build_boundary.py`](build_boundary.py) reads a construction record and its
-  raw-source catalog entry, then writes the final geometry to Neon.
+  raw-source catalog entries, then writes the final geometry to Neon.
 
 ## Construction record
 
@@ -18,12 +18,12 @@ Python and PostgreSQL; the example below explains the settings.
 Use the existing `atlas.construction_records` table. Its `id` identifies
 the editable construction record. The following fields
 are JSON keys inside its `document` column, not separate table columns. The
-`source_id` inside that JSON identifies the raw source figure.
+`source_ids` inside that JSON identifies all contributing raw sources.
 
 | Field | Meaning |
 | --- | --- |
 | `method` | `geodesic_trace` |
-| `source_id` | The original source in Neon's raw-source catalog |
+| `source_ids` | The contributing raw sources in Neon's catalog; a nonempty list without duplicates |
 | `feature_id` | The output line in `atlas.source_features` |
 | `source_feature_id` | The selected figure or other identifiable part of the raw document |
 | `basis` | How the figure was interpreted, including inferred connections and extensions |

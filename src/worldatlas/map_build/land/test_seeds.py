@@ -139,7 +139,7 @@ class SeedBuildTests(unittest.TestCase):
         )
         closure.update(route_id='closure', closure_method='physical_water_closure_v1')
         self.domain = dict(
-            features=self.features,
+            features=[*self.features,divider],
             mainland_witnesses=witnesses,
             mainland_witness_groups=[
                 dict(
@@ -157,8 +157,7 @@ class SeedBuildTests(unittest.TestCase):
                 dict(entity_id=entity, code=code, physical_class='land')
                 for entity, code in [(81, 301), (42, 999), (707, 77)]
             ],
-            mainland_boundaries=[divider],
-            routes=[closure],
+            region_closures=[closure],
             seed_regions=[
                 dict(
                     region_id='selected-region',
@@ -169,36 +168,23 @@ class SeedBuildTests(unittest.TestCase):
                     witnesses=[dict(lon=-101.25, lat=11.25, inside=True)],
                 )
             ],
-            mainland_component_rules=[
-                dict(
-                    rule_id='west-rule',
-                    group_id='west',
-                    region_id='selected-region',
-                    inside_entity_id=81,
-                    outside_entity_id=42,
-                ),
-                dict(
-                    rule_id='east-rule',
-                    group_id='east',
-                    region_id=None,
-                    inside_entity_id=707,
-                    outside_entity_id=707,
-                ),
-            ],
+            partitions=[dict(id='west-rule',method='mainland_seeds',mainland_group_id='west',
+                mainland_region_id='selected-region',side_a_entity_id=81,side_b_entity_id=42)],
             land_baseline_policy=dict(
-                region_ids=['selected-region'], mainland_rule_ids=['west-rule', 'east-rule']
+                region_ids=['selected-region']
             ),
         )
 
-    def test_partition_supplies_mainland_choice_without_duplicate_rule(self):
+    def test_mainland_choices_come_from_uniform_targets_or_one_partition(self):
         from worldatlas.map_build.land.seeds import selected_rules
-        groups = dict(west=dict(component_id=7, role='mainland', target_entity_ids=[81,42]),
-                      east=dict(component_id=8, role='mainland', target_entity_ids=[707]))
-        expected = selected_rules(self.domain, groups)
-        self.domain['mainland_component_rules'] = self.domain['mainland_component_rules'][1:]
-        self.domain['partitions'] = [dict(id='west-rule', mainland_group_id='west',
-            mainland_region_id='selected-region', side_a_entity_id=81, side_b_entity_id=42)]
-        self.assertEqual(selected_rules(self.domain, groups), expected)
+        groups=dict(west=dict(component_id=7,role='mainland',target_entity_ids=[81,42]),
+                    east=dict(component_id=8,role='mainland',target_entity_ids=[707]))
+        rules=selected_rules(self.domain,groups)
+        self.assertEqual({r['rule_id'] for r in rules},{'west-rule','east'})
+        self.assertEqual(next(r for r in rules if r['rule_id']=='east')['inside_code'],77)
+        self.domain['partitions'].append(dict(self.domain['partitions'][0],id='duplicate'))
+        with self.assertRaisesRegex(ValueError,'multiple geographic partitions'):
+            selected_rules(self.domain,groups)
 
     def components(self):
         return ComponentGrid(self.root / 'physical', self.root / 'components', self.grid)
@@ -234,7 +220,7 @@ class SeedBuildTests(unittest.TestCase):
             build_seeds(self.domain, components, self.root / 'bad-identity')
         self.assertFalse((self.root / 'bad-identity').exists())
         point['geometry'] = original
-        route = self.domain['routes'][0]
+        route = self.domain['region_closures'][0]
         route['geometry']['coordinates'] = [
             [-90.0, -22.5],
             [-101.25, 11.25],

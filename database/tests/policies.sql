@@ -8,7 +8,7 @@ DO $$ BEGIN
   RAISE EXCEPTION 'unknown policy operation accepted';
  EXCEPTION WHEN check_violation THEN NULL; END;
  BEGIN
-  INSERT INTO atlas.decision_policies VALUES ('__invalid','scoped_land_partition','[]','{}');
+  INSERT INTO atlas.decision_policies VALUES ('__invalid','ocean_fill','[]','{}');
   RAISE EXCEPTION 'non-object policy definition accepted';
  EXCEPTION WHEN check_violation THEN NULL; END;
  BEGIN

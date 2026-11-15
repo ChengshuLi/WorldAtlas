@@ -2,11 +2,11 @@
 
 Import selected source geometry into `atlas.source_features`. Each row contains
 `id`, `source_feature_id`, `geometry` and `construction_id`;
-all five are required. Geometry always uses WGS84 `[longitude, latitude]` in
+all four are required. Geometry always uses WGS84 `[longitude, latitude]` in
 degrees. Map building reads these polygons and points instead of reopening their
 raw archives.
 
-Raw files are pinned by their cataloged size and checksum. Vector and table
+Raw files are pinned by their cataloged size and checksum. Vector
 imports select explicit provider IDs and reject missing or ambiguous matches.
 Provider attributes remain in the raw source; these methods do not maintain
 copied attribute expectations in Neon.
@@ -60,19 +60,6 @@ The `s130_areas` method uses the same storage workflow and
 [`iho/areas.py`](../iho/areas.py) for complete S-130 surfaces and collections.
 `selected_osm_features` uses [`osm/features.py`](../osm/features.py) to assemble
 selected OSM points and polygons through that same storage workflow.
-
-`selected_table_points` uses [`points.py`](points.py) for CSV, TSV and other
-delimited point tables. Its construction supplies `id_field`, `longitude_field`,
-`latitude_field`, plus the same selections. Set `delimiter` for a non-comma separator,
-`columns` for a headerless table, and `member` for a table inside a ZIP archive.
-A GeoNames construction names its published columns and selected IDs; it uses
-the same table reader as other delimited point sources.
-
-To import a selected set of candidate points, use `where` with exact property
-matches, `feature_id_prefix` for the output IDs and optional `bounds_lon_lat`.
-Any explicit `selections` are retained as well, including outside those bounds.
-Map building then resolves these imported points against the current components;
-it does not reopen the provider table.
 
 `test_vector.py` checks selection, identity, archives, conversion and malformed
 geometry. `test_storage.py` checks transactional saves, repeat imports, preserved

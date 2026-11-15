@@ -9,6 +9,7 @@ import time
 from worldatlas.map_build.land.geographic_assignments import resolve_assignments
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.composition import compose_land
+from worldatlas.map_build.land.regions import assemble_regions
 from worldatlas.map_build.land.partitions import build_partitions, resolve_component_partitions
 from worldatlas.map_build.inputs.selection import validate_bindings
 
@@ -47,11 +48,13 @@ def build_regional(
             if root in entities and entities[root] != entity:
                 raise ValueError('geographic partition conflicts with an explicit assignment')
             entities[root] = entity
-        geographic = (
-            build_partitions(geographic_domain(selection, 'mainland'))
-            if 'mainland' in selection_domains(selection)
-            else []
-        )
+        mainland = (geographic_domain(selection, 'mainland')
+                    if 'mainland' in selection_domains(selection) else None)
+        geographic = []
+        if mainland is not None and any(p['method'] == 'land_cells'
+                                        for p in mainland.get('partitions', [])):
+            regions, _ = assemble_regions(mainland, components)
+            geographic = build_partitions(mainland, regions)
         result = compose_land(
             components,
             mainland_directory,

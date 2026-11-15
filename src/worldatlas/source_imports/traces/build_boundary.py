@@ -8,15 +8,18 @@ from worldatlas.source_imports.features.geometry import save_features
 from worldatlas.source_imports.traces.geodesic import construct
 
 
-def geodesic_trace(runtime: Runtime, *, source_id: SourceId,
+def geodesic_trace(runtime: Runtime, *, source_ids: list[SourceId],
                           source_feature_id: NonEmptyText, feature_id: NonEmptyText,
                           basis: NonEmptyText, points: list[tuple[float, float]],
                           max_step_metres: float,
                           source_location: dict[str, Any] | str | None = None):
     """Join source-figure control points on WGS84, preserving every point."""
+    if not source_ids or len(set(source_ids)) != len(source_ids):
+        raise ValueError("trace sources must be nonempty and distinct")
     geometry = construct(points, max_step_metres)
     with runtime.connect() as database:
-        catalog_source(database, source_id)
+        for source_id in source_ids:
+            catalog_source(database, source_id)
         with runtime.saving(database):
             hashes = save_features(database, [dict(
                 feature_id=feature_id,

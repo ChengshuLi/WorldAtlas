@@ -254,17 +254,6 @@ class DatabaseContractTests(unittest.TestCase):
                 False,
             ),
             (
-                "selected_table_points",
-                dict(
-                    bounds_lon_lat=[0, 0, 1, 1],
-                    where={"kind": "island"},
-                    feature_id_prefix="island-",
-                ),
-                True,
-            ),
-            ("selected_table_points", dict(bounds_lon_lat=[0, 0, 1]), False),
-            ("selected_table_points", dict(where={"kind": 1}), False),
-            (
                 "selected_osm_features",
                 dict(
                     selections=[
@@ -296,7 +285,7 @@ class DatabaseContractTests(unittest.TestCase):
                 dict(
                     routes=[
                         dict(
-                            route_id="r",
+                            feature_id="r",
                             construction_line_id="c",
                             reverse=1,
                             endpoint_names=["A", "B"],

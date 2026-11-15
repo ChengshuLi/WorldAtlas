@@ -16,7 +16,7 @@ selections live in the construction record.
 | [`sources.py`](sources.py) | Read source GeoJSON lines, OSM ways and river relations. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
 | [`../atlas_sources/catalog.py`](../atlas_sources/catalog.py) | Resolve catalog IDs and verify downloaded or multipart files. |
-| [`../source_io.py`](../source_io.py) | Save boundary geometry and source links together; refresh assembled region checksums. |
+| [`../features/geometry.py`](../features/geometry.py) | Save geometry and its construction reference; validate affected seed-region joins. |
 
 The split follows the work: read source features, prepare terrain, calculate
 drainage, then assemble the boundary. The typed `watershed_boundary()` entry point
@@ -46,9 +46,9 @@ through `atlas.source_assets`. A large provider file can reference ordered,
 individually cataloged byte parts. Each download and the assembled file are
 checked against their sizes and SHA-256 hashes.
 
-The result updates `atlas.decision_mainland_boundaries` and its raw-source links
-in one transaction. Existing notes and unrelated source relationships remain.
-Region references and derived polygon hashes update in that same transaction.
+The result updates `atlas.source_features` in one transaction. Its construction
+links to the raw inputs through `construction_sources`. Existing geographic
+relationships remain, and affected seed regions are validated before commit.
 A failed calculation or invalid join leaves the existing boundary unchanged.
 Database connections are open only while reading inputs or saving the result;
 terrain calculation does not keep an idle cloud connection open.
@@ -65,7 +65,7 @@ selections are in `atlas.construction_records`.
 
 The record's method is `watershed_boundary`. It contains:
 
-- `boundary_id` and `basis`: the editable boundary and a plain-language explanation.
+- `feature_id` and `basis`: the editable boundary and a plain-language explanation.
 - `sources`: local file names mapped directly to catalog source-ID strings.
   Multipart inputs instead specify ordered source-ID strings in `parts`, the
   complete file's checksum, size and filename. There are no one-field wrappers.
@@ -90,7 +90,8 @@ real junctions, independently of how the provider divides a river into way recor
 An incoming section feeding two drainage groups retains both destinations.
 Shared drainage is known information; an unknown destination has no known route.
 Receipts identify shared sections by source way, node IDs and destination groups.
-The saved boundary's `provenance.shared_drainage` retains those references in Neon.
+The receipt retains the shared-drainage and river-crossing checks; the construction
+record retains the choices required to reproduce them.
 Unassigned and incomplete networks are also reported.
 Before terrain processing, check the rivers intersecting the analysis areas and
 their downstream connections. If any route is unresolved, including one branch

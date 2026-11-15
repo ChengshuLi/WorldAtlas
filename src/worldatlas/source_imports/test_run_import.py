@@ -11,16 +11,14 @@ from worldatlas.source_imports.run_import import IMPORTERS, run_import
 
 DOCUMENTS = {
     "geodesic_trace": dict(
-        source_id="raw",
+        source_ids=["raw"],
         basis="Chosen points",
         feature_id="line",
         source_feature_id="Figure 1",
         points=[[1, 1], [0, 0]],
         max_step_metres=1000,
     ),
-    "osm_way_chain": dict(source_id="raw", basis="Join ways", boundary_id="boundary"),
-    "osm_way_chain_feature": dict(source_id="raw", basis="Join ways and offshore points",
-                                  feature_id="boundary", source_feature_id="manifest.json"),
+    "osm_way_chain": dict(source_id="raw", basis="Join ways", feature_id="boundary", source_feature_id="manifest.json"),
     "s130_rhumb_routes": dict(
         source_id="raw",
         basis="Selected routes",
@@ -29,15 +27,14 @@ DOCUMENTS = {
         max_step_km=0.05,
         routes=[
             dict(
-                route_id="route",
+                feature_id="route",
                 construction_line_id="line",
                 reverse=False,
-                endpoint_names=["A", "B"],
             )
         ],
     ),
     "watershed_boundary": dict(
-        boundary_id="boundary",
+        feature_id="boundary",
         basis="Drainage divide",
         sources={},
         lines={},
@@ -50,14 +47,6 @@ DOCUMENTS = {
         source_id="raw",
         basis="Selected features",
         id_field="id",
-        selections=[dict(feature_id="feature", source_feature_id="123")],
-    ),
-    "selected_table_points": dict(
-        source_id="raw",
-        basis="Selected points",
-        id_field="id",
-        longitude_field="lon",
-        latitude_field="lat",
         selections=[dict(feature_id="feature", source_feature_id="123")],
     ),
     "selected_osm_features": dict(

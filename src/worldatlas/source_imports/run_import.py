@@ -13,11 +13,10 @@ from worldatlas.source_imports.contracts import Runtime, bind_document
 from worldatlas.source_imports.features.build_features import (
     s130_areas,
     selected_osm_features,
-    selected_table_points,
     selected_vector_features,
 )
 from worldatlas.source_imports.iho.build_routes import s130_rhumb_routes
-from worldatlas.source_imports.osm.build_boundary import osm_way_chain, osm_way_chain_feature
+from worldatlas.source_imports.osm.build_boundary import osm_way_chain
 from worldatlas.source_imports.traces.build_boundary import geodesic_trace
 from worldatlas.source_imports.watersheds.build_boundary import watershed_boundary
 
@@ -26,11 +25,9 @@ IMPORTERS = {
     for constructor in (
         geodesic_trace,
         osm_way_chain,
-        osm_way_chain_feature,
         s130_rhumb_routes,
         watershed_boundary,
         selected_vector_features,
-        selected_table_points,
         selected_osm_features,
         s130_areas,
     )
@@ -42,13 +39,7 @@ def selected_constructions(database):
     return [
         row[0]
         for row in database.execute(
-            "SELECT DISTINCT construction_id FROM ("
-            "SELECT construction_id FROM atlas.source_features "
-            "UNION ALL SELECT construction_id FROM atlas.decision_mainland_boundaries "
-            "UNION ALL SELECT construction_id FROM atlas.decision_routes "
-            "UNION ALL SELECT construction_id FROM atlas.decision_endpoints "
-            ") c "
-            "WHERE construction_id IS NOT NULL ORDER BY construction_id"
+            "SELECT DISTINCT construction_id FROM atlas.source_features ORDER BY construction_id"
         ).fetchall()
     ]
 

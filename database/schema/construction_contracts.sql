@@ -3,9 +3,9 @@ CREATE FUNCTION atlas.valid_construction_record(document jsonb)
 RETURNS boolean LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $contract$
 SELECT CASE document ->> 'method'
 WHEN 'geodesic_trace' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
-    document - ARRAY['method', 'source_id', 'source_feature_id', 'feature_id', 'basis', 'points', 'max_step_metres', 'source_location']::text[] = '{}'::jsonb
+    document - ARRAY['method', 'source_ids', 'source_feature_id', 'feature_id', 'basis', 'points', 'max_step_metres', 'source_location']::text[] = '{}'::jsonb
     AND (document ? 'method' AND COALESCE(((document -> 'method') = '"geodesic_trace"'::jsonb), FALSE))
-    AND (document ? 'source_id' AND COALESCE((jsonb_typeof((document -> 'source_id')) = 'string' AND ((document -> 'source_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
+    AND (document ? 'source_ids' AND COALESCE(CASE WHEN jsonb_typeof((document -> 'source_ids')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((document -> 'source_ids')) AS item0(value) WHERE NOT COALESCE((jsonb_typeof(item0.value) = 'string' AND (item0.value #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))) ELSE FALSE END, FALSE))
     AND (document ? 'source_feature_id' AND COALESCE((jsonb_typeof((document -> 'source_feature_id')) = 'string' AND ((document -> 'source_feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
     AND (document ? 'feature_id' AND COALESCE((jsonb_typeof((document -> 'feature_id')) = 'string' AND ((document -> 'feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
     AND (document ? 'basis' AND COALESCE((jsonb_typeof((document -> 'basis')) = 'string' AND ((document -> 'basis') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
@@ -13,14 +13,8 @@ WHEN 'geodesic_trace' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
     AND (document ? 'max_step_metres' AND COALESCE(jsonb_typeof((document -> 'max_step_metres')) = 'number', FALSE))
     AND (NOT document ? 'source_location' OR COALESCE((CASE WHEN jsonb_typeof((document -> 'source_location')) = 'object' THEN NOT EXISTS (SELECT 1 FROM jsonb_each((document -> 'source_location')) AS item0 WHERE NOT COALESCE((jsonb_typeof(to_jsonb(item0.key)) = 'string' AND TRUE), FALSE)) ELSE FALSE END OR jsonb_typeof((document -> 'source_location')) = 'string' OR jsonb_typeof((document -> 'source_location')) = 'null'), FALSE))) ELSE FALSE END
 WHEN 'osm_way_chain' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
-    document - ARRAY['method', 'source_id', 'boundary_id', 'basis']::text[] = '{}'::jsonb
-    AND (document ? 'method' AND COALESCE(((document -> 'method') = '"osm_way_chain"'::jsonb), FALSE))
-    AND (document ? 'source_id' AND COALESCE((jsonb_typeof((document -> 'source_id')) = 'string' AND ((document -> 'source_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (document ? 'boundary_id' AND COALESCE((jsonb_typeof((document -> 'boundary_id')) = 'string' AND ((document -> 'boundary_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (document ? 'basis' AND COALESCE((jsonb_typeof((document -> 'basis')) = 'string' AND ((document -> 'basis') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))) ELSE FALSE END
-WHEN 'osm_way_chain_feature' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
     document - ARRAY['method', 'source_id', 'feature_id', 'source_feature_id', 'basis', 'before', 'after', 'max_step_metres', 'evidence_source_ids']::text[] = '{}'::jsonb
-    AND (document ? 'method' AND COALESCE(((document -> 'method') = '"osm_way_chain_feature"'::jsonb), FALSE))
+    AND (document ? 'method' AND COALESCE(((document -> 'method') = '"osm_way_chain"'::jsonb), FALSE))
     AND (document ? 'source_id' AND COALESCE((jsonb_typeof((document -> 'source_id')) = 'string' AND ((document -> 'source_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
     AND (document ? 'feature_id' AND COALESCE((jsonb_typeof((document -> 'feature_id')) = 'string' AND ((document -> 'feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
     AND (document ? 'source_feature_id' AND COALESCE((jsonb_typeof((document -> 'source_feature_id')) = 'string' AND ((document -> 'source_feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
@@ -49,13 +43,10 @@ WHEN 's130_rhumb_routes' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
     AND (document ? 'basis' AND COALESCE((jsonb_typeof((document -> 'basis')) = 'string' AND ((document -> 'basis') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
     AND (document ? 'max_step_km' AND COALESCE(jsonb_typeof((document -> 'max_step_km')) = 'number', FALSE))
     AND (document ? 'routes' AND COALESCE(CASE WHEN jsonb_typeof((document -> 'routes')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((document -> 'routes')) AS item0(value) WHERE NOT COALESCE(CASE WHEN jsonb_typeof(item0.value) = 'object' THEN (
-    item0.value - ARRAY['route_id', 'construction_line_id', 'reverse', 'endpoint_names', 'endpoint_ids', 'extend_to_south_grid_edge']::text[] = '{}'::jsonb
-    AND (item0.value ? 'route_id' AND COALESCE((jsonb_typeof((item0.value -> 'route_id')) = 'string' AND ((item0.value -> 'route_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
+    item0.value - ARRAY['feature_id', 'construction_line_id', 'reverse']::text[] = '{}'::jsonb
+    AND (item0.value ? 'feature_id' AND COALESCE((jsonb_typeof((item0.value -> 'feature_id')) = 'string' AND ((item0.value -> 'feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
     AND (item0.value ? 'construction_line_id' AND COALESCE((jsonb_typeof((item0.value -> 'construction_line_id')) = 'string' AND ((item0.value -> 'construction_line_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (item0.value ? 'reverse' AND COALESCE(jsonb_typeof((item0.value -> 'reverse')) = 'boolean', FALSE))
-    AND (item0.value ? 'endpoint_names' AND COALESCE(CASE WHEN jsonb_typeof((item0.value -> 'endpoint_names')) = 'array' THEN (jsonb_array_length((item0.value -> 'endpoint_names')) = 2 AND (jsonb_typeof(((item0.value -> 'endpoint_names') -> 0)) = 'string' AND (((item0.value -> 'endpoint_names') -> 0) #>> '{}') COLLATE "C" ~ '[^[:space:]]') AND (jsonb_typeof(((item0.value -> 'endpoint_names') -> 1)) = 'string' AND (((item0.value -> 'endpoint_names') -> 1) #>> '{}') COLLATE "C" ~ '[^[:space:]]')) ELSE FALSE END, FALSE))
-    AND (NOT item0.value ? 'endpoint_ids' OR COALESCE(CASE WHEN jsonb_typeof((item0.value -> 'endpoint_ids')) = 'array' THEN (jsonb_array_length((item0.value -> 'endpoint_ids')) = 2 AND (jsonb_typeof(((item0.value -> 'endpoint_ids') -> 0)) = 'string' AND (((item0.value -> 'endpoint_ids') -> 0) #>> '{}') COLLATE "C" ~ '[^[:space:]]') AND (jsonb_typeof(((item0.value -> 'endpoint_ids') -> 1)) = 'string' AND (((item0.value -> 'endpoint_ids') -> 1) #>> '{}') COLLATE "C" ~ '[^[:space:]]')) ELSE FALSE END, FALSE))
-    AND (NOT item0.value ? 'extend_to_south_grid_edge' OR COALESCE(jsonb_typeof((item0.value -> 'extend_to_south_grid_edge')) = 'boolean', FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END
+    AND (item0.value ? 'reverse' AND COALESCE(jsonb_typeof((item0.value -> 'reverse')) = 'boolean', FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END
 WHEN 'selected_osm_features' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
     document - ARRAY['method', 'source_id', 'basis', 'selections']::text[] = '{}'::jsonb
     AND (document ? 'method' AND COALESCE(((document -> 'method') = '"selected_osm_features"'::jsonb), FALSE))
@@ -83,25 +74,6 @@ WHEN 'selected_osm_features' THEN CASE WHEN jsonb_typeof(document) = 'object' TH
     AND (item2.value ? 'expected_tags' AND COALESCE(CASE WHEN jsonb_typeof((item2.value -> 'expected_tags')) = 'object' THEN NOT EXISTS (SELECT 1 FROM jsonb_each((item2.value -> 'expected_tags')) AS item4 WHERE NOT COALESCE((jsonb_typeof(to_jsonb(item4.key)) = 'string' AND jsonb_typeof(item4.value) = 'string'), FALSE)) ELSE FALSE END, FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END, FALSE))
     AND (NOT item0.value ? 'holes' OR COALESCE(((item0.value -> 'holes') = '"preserve"'::jsonb OR (item0.value -> 'holes') = '"outer_envelope"'::jsonb), FALSE))
     AND (NOT item0.value ? 'geometry_type' OR COALESCE(((item0.value -> 'geometry_type') = '"Polygon"'::jsonb OR (item0.value -> 'geometry_type') = '"MultiPolygon"'::jsonb), FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END
-WHEN 'selected_table_points' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
-    document - ARRAY['method', 'source_id', 'basis', 'id_field', 'longitude_field', 'latitude_field', 'selections', 'member', 'columns', 'delimiter', 'encoding', 'where', 'feature_id_prefix', 'bounds_lon_lat']::text[] = '{}'::jsonb
-    AND (document ? 'method' AND COALESCE(((document -> 'method') = '"selected_table_points"'::jsonb), FALSE))
-    AND (document ? 'source_id' AND COALESCE((jsonb_typeof((document -> 'source_id')) = 'string' AND ((document -> 'source_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (document ? 'basis' AND COALESCE((jsonb_typeof((document -> 'basis')) = 'string' AND ((document -> 'basis') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (document ? 'id_field' AND COALESCE((jsonb_typeof((document -> 'id_field')) = 'string' AND ((document -> 'id_field') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (document ? 'longitude_field' AND COALESCE((jsonb_typeof((document -> 'longitude_field')) = 'string' AND ((document -> 'longitude_field') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (document ? 'latitude_field' AND COALESCE((jsonb_typeof((document -> 'latitude_field')) = 'string' AND ((document -> 'latitude_field') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (NOT document ? 'selections' OR COALESCE((CASE WHEN jsonb_typeof((document -> 'selections')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((document -> 'selections')) AS item0(value) WHERE NOT COALESCE(CASE WHEN jsonb_typeof(item0.value) = 'object' THEN (
-    item0.value - ARRAY['feature_id', 'source_feature_id']::text[] = '{}'::jsonb
-    AND (item0.value ? 'feature_id' AND COALESCE((jsonb_typeof((item0.value -> 'feature_id')) = 'string' AND ((item0.value -> 'feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (item0.value ? 'source_feature_id' AND COALESCE(((jsonb_typeof((item0.value -> 'source_feature_id')) = 'string' AND ((item0.value -> 'source_feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]') OR CASE WHEN jsonb_typeof((item0.value -> 'source_feature_id')) = 'number' THEN trunc(((item0.value -> 'source_feature_id') #>> '{}')::numeric) = ((item0.value -> 'source_feature_id') #>> '{}')::numeric ELSE FALSE END), FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END OR jsonb_typeof((document -> 'selections')) = 'null'), FALSE))
-    AND (NOT document ? 'member' OR COALESCE(((jsonb_typeof((document -> 'member')) = 'string' AND ((document -> 'member') #>> '{}') COLLATE "C" ~ '[^[:space:]]') OR jsonb_typeof((document -> 'member')) = 'null'), FALSE))
-    AND (NOT document ? 'columns' OR COALESCE((CASE WHEN jsonb_typeof((document -> 'columns')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((document -> 'columns')) AS item0(value) WHERE NOT COALESCE((jsonb_typeof(item0.value) = 'string' AND (item0.value #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))) ELSE FALSE END OR jsonb_typeof((document -> 'columns')) = 'null'), FALSE))
-    AND (NOT document ? 'delimiter' OR COALESCE(jsonb_typeof((document -> 'delimiter')) = 'string', FALSE))
-    AND (NOT document ? 'encoding' OR COALESCE((jsonb_typeof((document -> 'encoding')) = 'string' AND ((document -> 'encoding') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
-    AND (NOT document ? 'where' OR COALESCE((CASE WHEN jsonb_typeof((document -> 'where')) = 'object' THEN NOT EXISTS (SELECT 1 FROM jsonb_each((document -> 'where')) AS item0 WHERE NOT COALESCE(((jsonb_typeof(to_jsonb(item0.key)) = 'string' AND (to_jsonb(item0.key) #>> '{}') COLLATE "C" ~ '[^[:space:]]') AND jsonb_typeof(item0.value) = 'string'), FALSE)) ELSE FALSE END OR jsonb_typeof((document -> 'where')) = 'null'), FALSE))
-    AND (NOT document ? 'feature_id_prefix' OR COALESCE(((jsonb_typeof((document -> 'feature_id_prefix')) = 'string' AND ((document -> 'feature_id_prefix') #>> '{}') COLLATE "C" ~ '[^[:space:]]') OR jsonb_typeof((document -> 'feature_id_prefix')) = 'null'), FALSE))
-    AND (NOT document ? 'bounds_lon_lat' OR COALESCE((CASE WHEN jsonb_typeof((document -> 'bounds_lon_lat')) = 'array' THEN (jsonb_array_length((document -> 'bounds_lon_lat')) = 4 AND jsonb_typeof(((document -> 'bounds_lon_lat') -> 0)) = 'number' AND jsonb_typeof(((document -> 'bounds_lon_lat') -> 1)) = 'number' AND jsonb_typeof(((document -> 'bounds_lon_lat') -> 2)) = 'number' AND jsonb_typeof(((document -> 'bounds_lon_lat') -> 3)) = 'number') ELSE FALSE END OR jsonb_typeof((document -> 'bounds_lon_lat')) = 'null'), FALSE))) ELSE FALSE END
 WHEN 'selected_vector_features' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
     document - ARRAY['method', 'source_id', 'basis', 'id_field', 'selections', 'member', 'layer', 'coordinate_operation']::text[] = '{}'::jsonb
     AND (document ? 'method' AND COALESCE(((document -> 'method') = '"selected_vector_features"'::jsonb), FALSE))
@@ -119,9 +91,9 @@ WHEN 'selected_vector_features' THEN CASE WHEN jsonb_typeof(document) = 'object'
     AND (NOT document ? 'layer' OR COALESCE(((jsonb_typeof((document -> 'layer')) = 'string' AND ((document -> 'layer') #>> '{}') COLLATE "C" ~ '[^[:space:]]') OR jsonb_typeof((document -> 'layer')) = 'null'), FALSE))
     AND (NOT document ? 'coordinate_operation' OR COALESCE(((jsonb_typeof((document -> 'coordinate_operation')) = 'string' AND ((document -> 'coordinate_operation') #>> '{}') COLLATE "C" ~ '[^[:space:]]') OR jsonb_typeof((document -> 'coordinate_operation')) = 'null'), FALSE))) ELSE FALSE END
 WHEN 'watershed_boundary' THEN CASE WHEN jsonb_typeof(document) = 'object' THEN (
-    document - ARRAY['method', 'boundary_id', 'basis', 'sources', 'lines', 'sections', 'joins', 'start', 'end', 'terrains', 'evidence_sources', 'geographic_choices']::text[] = '{}'::jsonb
+    document - ARRAY['method', 'feature_id', 'basis', 'sources', 'lines', 'sections', 'joins', 'start', 'end', 'terrains', 'evidence_sources', 'geographic_choices']::text[] = '{}'::jsonb
     AND (document ? 'method' AND COALESCE(((document -> 'method') = '"watershed_boundary"'::jsonb), FALSE))
-    AND (document ? 'boundary_id' AND COALESCE((jsonb_typeof((document -> 'boundary_id')) = 'string' AND ((document -> 'boundary_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
+    AND (document ? 'feature_id' AND COALESCE((jsonb_typeof((document -> 'feature_id')) = 'string' AND ((document -> 'feature_id') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
     AND (document ? 'basis' AND COALESCE((jsonb_typeof((document -> 'basis')) = 'string' AND ((document -> 'basis') #>> '{}') COLLATE "C" ~ '[^[:space:]]'), FALSE))
     AND (document ? 'sources' AND COALESCE(CASE WHEN jsonb_typeof((document -> 'sources')) = 'object' THEN NOT EXISTS (SELECT 1 FROM jsonb_each((document -> 'sources')) AS item0 WHERE NOT COALESCE(((jsonb_typeof(to_jsonb(item0.key)) = 'string' AND (to_jsonb(item0.key) #>> '{}') COLLATE "C" ~ '[^[:space:]]') AND ((jsonb_typeof(item0.value) = 'string' AND (item0.value #>> '{}') COLLATE "C" ~ '[^[:space:]]') OR CASE WHEN jsonb_typeof(item0.value) = 'object' THEN (
     item0.value - ARRAY['parts', 'sha256', 'size_bytes', 'filename']::text[] = '{}'::jsonb
@@ -145,13 +117,11 @@ CHECK (atlas.valid_construction_record(document));
 CREATE FUNCTION atlas.construction_source_ids(document jsonb)
 RETURNS SETOF text LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $sources$
 SELECT DISTINCT value #>> '{}' FROM unnest(CASE document ->> 'method'
-WHEN 'geodesic_trace' THEN ARRAY['lax $."source_id"']::jsonpath[]
-WHEN 'osm_way_chain' THEN ARRAY['lax $."source_id"']::jsonpath[]
-WHEN 'osm_way_chain_feature' THEN ARRAY['lax $."evidence_source_ids"[*]','lax $."source_id"']::jsonpath[]
+WHEN 'geodesic_trace' THEN ARRAY['lax $."source_ids"[*]']::jsonpath[]
+WHEN 'osm_way_chain' THEN ARRAY['lax $."evidence_source_ids"[*]','lax $."source_id"']::jsonpath[]
 WHEN 's130_areas' THEN ARRAY['lax $."source_id"']::jsonpath[]
 WHEN 's130_rhumb_routes' THEN ARRAY['lax $."source_id"']::jsonpath[]
 WHEN 'selected_osm_features' THEN ARRAY['lax $."source_id"']::jsonpath[]
-WHEN 'selected_table_points' THEN ARRAY['lax $."source_id"']::jsonpath[]
 WHEN 'selected_vector_features' THEN ARRAY['lax $."source_id"']::jsonpath[]
 WHEN 'watershed_boundary' THEN ARRAY['lax $."evidence_sources"[*]','lax $."sources".*','lax $."sources".*."parts"[*]']::jsonpath[]
 ELSE ARRAY[]::jsonpath[] END) AS paths(path)

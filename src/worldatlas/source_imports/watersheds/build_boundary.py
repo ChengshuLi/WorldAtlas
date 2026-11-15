@@ -14,7 +14,7 @@ from pyproj import Transformer
 from shapely.geometry import LineString
 
 from worldatlas.source_imports.atlas_sources.catalog import assemble_parts, catalog_source, download_source
-from worldatlas.source_imports.source_io import save_boundary
+from worldatlas.source_imports.features.geometry import save_features
 from worldatlas.source_imports.watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
 from worldatlas.source_imports.watersheds.drainage import compute_flow, possible_destinations, single_destinations
 from worldatlas.source_imports.watersheds.sources import Sources
@@ -61,16 +61,14 @@ def resolve_sources(database, recipe):
 
 
 def stage_sources(client, selections, work_dir, *, timing=None):
-    files, references = {}, []
+    files = {}
     for alias, source in selections.items():
         if 'parts' in source:
             files[alias] = assemble_parts(client, source['parts'], source['sha256'],
                                           source['size_bytes'], source['filename'], work_dir, timing=timing)
-            references.extend(source['parts'])
         else:
             files[alias] = download_source(client, source, work_dir, timing=timing)
-            references.append(source)
-    return files, references
+    return files
 
 
 def construct(recipe, files):
@@ -275,7 +273,7 @@ def construct(recipe, files):
     return geometry, report
 
 
-def watershed_boundary(runtime: Runtime, *, boundary_id: NonEmptyText, basis: NonEmptyText,
+def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: NonEmptyText,
                        sources: dict[NonEmptyText, SourceId | MultipartSource],
                        lines: dict[NonEmptyText, list[dict[str, Any]]],
                        sections: list[dict[str, Any]], joins: list[dict[str, Any]],
@@ -288,26 +286,21 @@ def watershed_boundary(runtime: Runtime, *, boundary_id: NonEmptyText, basis: No
     started = time.monotonic()
     with runtime.connect() as database, database.transaction():
         selections = resolve_sources(database, recipe)
-        evidence = [dict(catalog_source(database, item),
-                         relationship='supporting_evidence')
-                    for item in recipe.get('evidence_sources', [])]
+        for item in recipe.get('evidence_sources', []):
+            catalog_source(database, item)
     catalog_seconds = time.monotonic() - started
     started = time.monotonic()
     acquisition = {}
-    files, references = stage_sources(runtime.storage, selections, runtime.work_dir, timing=acquisition)
+    files = stage_sources(runtime.storage, selections, runtime.work_dir, timing=acquisition)
     staging_seconds = time.monotonic() - started
     geometry, report = construct(recipe, files)
     versions = runtime_versions()
-    provenance = {'basis': recipe['basis']}
-    provenance['shared_drainage'] = {
-        name: terrain['network']['shared_sections']
-        for name, terrain in report['terrain'].items() if terrain['network']['shared_sections']}
-    provenance['river_validation'] = report['river_checks']
     started = time.monotonic()
     with runtime.connect() as database, runtime.saving(database):
-        digest = save_boundary(database, boundary_id, geometry, provenance,
-                               [*references, *evidence], construction=runtime.recipe_id)
-    report.update(boundary_id=boundary_id, sha256=digest,
+        hashes = save_features(database, [dict(feature_id=feature_id,
+            source_feature_id=feature_id, geometry=geometry)], dict(recipe_id=runtime.recipe_id))
+        digest = hashes[feature_id]
+    report.update(feature_id=feature_id, sha256=digest,
                   vertices=len(geometry['coordinates']), catalog_seconds=catalog_seconds,
                   source_staging_seconds=staging_seconds,
                   download_seconds=acquisition.get('download_seconds', 0.),

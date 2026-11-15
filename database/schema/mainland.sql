@@ -1,30 +1,4 @@
--- Editable boundaries, assembled regions and physical-component witnesses.
-
-CREATE TABLE atlas.decision_mainland_boundaries (
-    id text NOT NULL,
-    geometry jsonb NOT NULL,
-    geometry_sha256 text NOT NULL,
-    coordinate_reference text NOT NULL,
-    provenance jsonb NOT NULL,
-    construction_id text,
-    CONSTRAINT decision_mainland_boundaries_id_check CHECK ((length(TRIM(BOTH FROM id)) > 0)),
-    CONSTRAINT decision_mainland_boundaries_coordinate_reference_check CHECK ((coordinate_reference = 'OGC:CRS84'::text)),
-    CONSTRAINT decision_mainland_boundaries_geometry_check CHECK (COALESCE(((jsonb_typeof(geometry) = 'object'::text) AND ((geometry ->> 'type'::text) = 'LineString'::text) AND (jsonb_typeof((geometry -> 'coordinates'::text)) = 'array'::text) AND (jsonb_array_length((geometry -> 'coordinates'::text)) >= 2)), false)),
-    CONSTRAINT decision_mainland_boundaries_geometry_sha256_check CHECK ((geometry_sha256 ~ '^[0-9a-f]{64}$'::text)),
-    CONSTRAINT decision_mainland_boundaries_provenance_check CHECK ((jsonb_typeof(provenance) = 'object'::text)),
-    CONSTRAINT decision_mainland_boundaries_pkey PRIMARY KEY (id),
-    CONSTRAINT decision_mainland_boundaries_construction_id_construction__fkey FOREIGN KEY (construction_id) REFERENCES atlas.construction_records(id)
-);
-
-CREATE TABLE atlas.decision_mainland_boundary_sources (
-    boundary_id text NOT NULL,
-    source_id text NOT NULL,
-    relationship text NOT NULL,
-    CONSTRAINT decision_mainland_boundary_sources_relationship_check CHECK ((length(TRIM(BOTH FROM relationship)) > 0)),
-    CONSTRAINT decision_mainland_boundary_sources_pkey PRIMARY KEY (boundary_id, source_id),
-    CONSTRAINT decision_mainland_boundary_source_source_id_fkey FOREIGN KEY (source_id) REFERENCES atlas.source_assets(id),
-    CONSTRAINT decision_mainland_boundary_sources_boundary_id_fkey FOREIGN KEY (boundary_id) REFERENCES atlas.decision_mainland_boundaries(id)
-);
+-- Computational seed-region closures, ordered regions and physical-component witnesses.
 
 CREATE TABLE atlas.decision_mainland_closure_routes (
     id text NOT NULL,
@@ -45,8 +19,8 @@ CREATE TABLE atlas.decision_mainland_closure_routes (
     CONSTRAINT decision_mainland_closure_routes_provenance_check CHECK ((jsonb_typeof(provenance) = 'object'::text)),
     CONSTRAINT decision_mainland_closure_routes_start_endpoint_check CHECK ((start_endpoint = ANY (ARRAY['start'::text, 'end'::text]))),
     CONSTRAINT decision_mainland_closure_routes_pkey PRIMARY KEY (id),
-    CONSTRAINT decision_mainland_closure_route_start_boundary_id_fkey FOREIGN KEY (start_boundary_id) REFERENCES atlas.decision_mainland_boundaries(id),
-    CONSTRAINT decision_mainland_closure_routes_end_boundary_id_fkey FOREIGN KEY (end_boundary_id) REFERENCES atlas.decision_mainland_boundaries(id)
+    CONSTRAINT decision_mainland_closure_route_start_boundary_id_fkey FOREIGN KEY (start_boundary_id) REFERENCES atlas.source_features(id),
+    CONSTRAINT decision_mainland_closure_routes_end_boundary_id_fkey FOREIGN KEY (end_boundary_id) REFERENCES atlas.source_features(id)
 );
 
 CREATE TABLE atlas.decision_mainland_seed_regions (
@@ -67,7 +41,7 @@ CREATE TABLE atlas.decision_mainland_region_segments (
     CONSTRAINT decision_mainland_region_segments_kind_check CHECK ((kind = ANY (ARRAY['boundary'::text, 'route'::text]))),
     CONSTRAINT decision_mainland_region_segments_ordinal_check CHECK ((ordinal >= 0)),
     CONSTRAINT decision_mainland_region_segments_pkey PRIMARY KEY (region_id, ordinal),
-    CONSTRAINT decision_mainland_region_segments_boundary_id_fkey FOREIGN KEY (boundary_id) REFERENCES atlas.decision_mainland_boundaries(id),
+    CONSTRAINT decision_mainland_region_segments_boundary_id_fkey FOREIGN KEY (boundary_id) REFERENCES atlas.source_features(id),
     CONSTRAINT decision_mainland_region_segments_region_id_fkey FOREIGN KEY (region_id) REFERENCES atlas.decision_mainland_seed_regions(id),
     CONSTRAINT decision_mainland_region_segments_route_id_fkey FOREIGN KEY (route_id) REFERENCES atlas.decision_mainland_closure_routes(id)
 );
@@ -121,19 +95,4 @@ CREATE TABLE atlas.decision_mainland_distinct_groups (
     CONSTRAINT decision_mainland_distinct_groups_pkey PRIMARY KEY (group_a, group_b),
     CONSTRAINT decision_mainland_distinct_groups_group_a_fkey FOREIGN KEY (group_a) REFERENCES atlas.decision_mainland_witness_groups(id),
     CONSTRAINT decision_mainland_distinct_groups_group_b_fkey FOREIGN KEY (group_b) REFERENCES atlas.decision_mainland_witness_groups(id)
-);
-
-CREATE TABLE atlas.decision_mainland_component_rules (
-    id text NOT NULL,
-    group_id text NOT NULL,
-    region_id text,
-    inside_entity_id bigint NOT NULL,
-    outside_entity_id bigint NOT NULL,
-    CONSTRAINT decision_mainland_component_rules_check CHECK ((((region_id IS NULL) AND (inside_entity_id = outside_entity_id)) OR ((region_id IS NOT NULL) AND (inside_entity_id <> outside_entity_id)))),
-    CONSTRAINT decision_mainland_component_rules_pkey PRIMARY KEY (id),
-    CONSTRAINT decision_mainland_component_rules_group_id_key UNIQUE (group_id),
-    CONSTRAINT decision_mainland_component_r_inside_entit_fkey FOREIGN KEY (inside_entity_id) REFERENCES atlas.geographic_entities(id),
-    CONSTRAINT decision_mainland_component_r_outside_enti_fkey FOREIGN KEY (outside_entity_id) REFERENCES atlas.geographic_entities(id),
-    CONSTRAINT decision_mainland_component_rules_group_id_fkey FOREIGN KEY (group_id) REFERENCES atlas.decision_mainland_witness_groups(id),
-    CONSTRAINT decision_mainland_component_rules_region_id_fkey FOREIGN KEY (region_id) REFERENCES atlas.decision_mainland_seed_regions(id)
 );

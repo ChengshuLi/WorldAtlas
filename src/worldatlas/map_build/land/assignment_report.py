@@ -156,7 +156,7 @@ def _regional_claims(frozen, domain, rules, result, components):
     from worldatlas.map_build.land.partitions import resolve_component_partitions
     from worldatlas.map_build.land.witnesses import resolve_witnesses
 
-    selected = domain.get('partitions', [])
+    selected = [p for p in domain.get('partitions', []) if p['method']=='land_components']
     if not selected:
         return
     mainland = geographic_domain(frozen, 'mainland')

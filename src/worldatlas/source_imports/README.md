@@ -6,7 +6,7 @@ R2 location, byte size and checksum. Changed raw bytes get a new source ID.
 
 - [`osm/`](osm/README.md): archived OpenStreetMap boundaries and selected features.
 - [`iho/`](iho/README.md): IHO S-130 routes and sea areas.
-- [`features/`](features/README.md): selected vector and point-table geometry.
+- [`features/`](features/README.md): selected vector points and polygons.
 - [`traces/`](traces/README.md): boundaries from reviewed points on source figures.
 - [`watersheds/`](watersheds/README.md): boundaries from terrain and natural drainage.
 - [`atlas_sources/`](atlas_sources/README.md): catalog lookup and verified downloads.
@@ -48,7 +48,7 @@ Read the referenced construction rather than assuming a name or remembering a
 command from a previous chat:
 
 ```sql
-SELECT id, construction_id FROM atlas.decision_mainland_boundaries;
+SELECT id, construction_id FROM atlas.source_features;
 SELECT document FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 
@@ -66,8 +66,8 @@ worldatlas-import --all \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-The command follows construction links from features, boundaries, ocean routes,
-and endpoints. Each construction runs once. Each
+The command follows construction links from `source_features`. Each construction
+runs once. Each
 successful import commits independently, so an interrupted batch can be repeated.
 Receipts under `inputs/receipts/` identify the construction and its result.
 
@@ -108,8 +108,8 @@ Do not maintain another field list in a validator or README.
 
 `run_import.py` reads the recipe and dispatches to a typed function in a
 `build_*.py` module. Those modules handle Neon/R2; other modules implement
-calculations. `source_io.py` saves mainland boundaries and validates their assembled
-regions. `__init__.py` files define importable packages and enable test discovery.
+calculations. `features/geometry.py` saves every imported geometry and validates
+any seed region that uses an edited line. `__init__.py` files define importable packages and enable test discovery.
 
 Tests live beside their code. `test_run_import.py` checks dispatch;
 `test_contracts.py` checks Python/PostgreSQL agreement and direct SQL writes;

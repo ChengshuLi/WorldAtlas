@@ -3,11 +3,7 @@
 
 from __future__ import annotations
 import hashlib, json, math, re, struct, time
-from bisect import bisect_right
 from pathlib import Path
-from decimal import Decimal, InvalidOperation
-from fractions import Fraction
-from worldatlas.map_build.core.geodesy import GEOD
 from worldatlas.map_build.water.ocean.partition_core import rasterize_barriers, floodfill_run_graph
 from worldatlas.map_build.water.ocean.rle_inputs import RunRasterU32LE, make_prefill_adapters
 from worldatlas.map_build.execution.outputs import (
@@ -50,241 +46,80 @@ def num(x):
     return n
 
 
-def coast_edge_latitude(physical, longitude, reference_latitude):
-    """Find the nearest south-facing coast edge straddling the meridian."""
-    step = Fraction(360, physical.width)
-    west_cell = math.floor((longitude + 180) / step - Fraction(1, 2))
-    if not 0 <= west_cell < physical.width - 1:
-        raise ValueError('coast endpoint requires two cells bracketing its meridian')
+def load_config(snapshot, width, height):
+    """Rasterize imported divider geometry and validate source-backed ocean witnesses."""
+    from shapely.geometry import Point, shape
+    from worldatlas.map_build.inputs.features import feature_geometry
 
-    def codes(y):
-        row = physical.row(y)
-        return tuple(
-            row[bisect_right(row, x, key=lambda run: run[0])][1] for x in (west_cell, west_cell + 1)
-        )
-
-    north_codes = codes(0)
-    nearest = None
-    for y in range(1, physical.height):
-        south_codes = codes(y)
-        if north_codes == (17, 17) and south_codes == (1, 1):
-            latitude = 90 - y * step
-            distance = abs(latitude - reference_latitude)
-            if nearest is None or distance < nearest[0]:
-                nearest = distance, latitude
-        north_codes = south_codes
-    if nearest is None:
-        raise ValueError('no south-facing coast edge at the selected meridian')
-    return nearest[1]
-
-
-def endpoint_coordinate(endpoint, axis):
-    raw = endpoint.get(axis)
-    derivation = endpoint.get('derivation', {})
-    if not isinstance(derivation, dict):
-        raise ValueError('invalid endpoint derivation')
-    if derivation.get('method') not in (
-        'source_dms_exact_rational',
-        'source_decimal_exact_rational',
-        'preserved_grid_edge',
-        'grid_south_edge',
-    ):
-        return num(raw)
-    pair = derivation.get(axis + '_fraction')
-    if (
-        not isinstance(pair, list)
-        or len(pair) != 2
-        or any(type(x) is not int for x in pair)
-        or pair[1] <= 0
-        or any(abs(x).bit_length() > 128 for x in pair)
-    ):
-        raise ValueError('invalid exact endpoint fraction')
-    try:
-        decimal = Decimal(str(raw))
-        if not decimal.is_finite():
-            raise ValueError('invalid endpoint decimal')
-        exact = Fraction(pair[0], pair[1])
-        if abs(Fraction(decimal) - exact) > Fraction(1, 2 * 10**15):
-            raise ValueError('endpoint fraction disagrees with rounded database coordinate')
-        return float(exact)
-    except (InvalidOperation, TypeError, ZeroDivisionError) as e:
-        raise ValueError('invalid endpoint coordinate') from e
-
-
-def spherical_rhumb_points(points, step_km):
-    """Densify rhumb segments straight in spherical Mercator coordinates.
-
-    This matches the interpolated construction lines in IHO S-130 Ed.1.0.0.
-    The conservative step bound limits arc length on a sphere of radius 6378137m.
-    The original longitude/latitude endpoints are retained exactly.
-    """
-    if not 0 < step_km <= 1:
-        raise ValueError('rhumb max_step_km must be in (0,1]')
-
-    def psi(phi):
-        return math.asinh(math.tan(phi))
-
-    dense = []
-    for start, end in zip(points, points[1:]):
-        if abs(end[0] - start[0]) > 180:
-            raise ValueError('antimeridian-crossing rhumb unsupported')
-        if abs(start[1]) >= 90 or abs(end[1]) >= 90:
-            raise ValueError('rhumb endpoints at a pole unsupported')
-        p0, p1 = psi(math.radians(start[1])), psi(math.radians(end[1]))
-        dlambda = math.radians(end[0] - start[0])
-        # Spherical Mercator's scale is at least one, so planar length is an upper bound.
-        bound_m = 6378137.0 * math.hypot(p1 - p0, dlambda)
-        count = max(1, math.ceil(bound_m / (1000 * step_km)))
-        dense.append(start)
-        for i in range(1, count):
-            t = i / count
-            dense.append(
-                (
-                    start[0] + (end[0] - start[0]) * t,
-                    math.degrees(math.atan(math.sinh(p0 + (p1 - p0) * t))),
-                )
-            )
-    dense.append(points[-1])
-    return dense
-
-
-def load_config(snapshot, width, height, *, physical=None):
     policies = [p for p in snapshot.get('policies', []) if p.get('kind') == 'ocean_fill']
     if len(policies) != 1:
         raise ValueError('one ocean_fill policy is required')
-    policy = policies[0].get('definition', {})
-    if (
-        policy.get('connectivity') != 4
-        or type(policy.get('wrap_longitude')) is not bool
-        or policy.get('barrier_tie_rule') != 'left-of-oriented-route'
-        or policy.get('unseeded_policy') != 'report-only'
-    ):
+    policy = policies[0]['definition']
+    if (policy.get('connectivity') != 4 or type(policy.get('wrap_longitude')) is not bool
+            or policy.get('barrier_tie_rule') != 'left-of-oriented-route'
+            or policy.get('unseeded_policy') != 'report-only'):
         raise ValueError('unsupported ocean-fill policy')
-    endpoints = unique_by(snapshot.get('endpoints'), 'endpoint_id')
-    routes = unique_by(snapshot.get('routes'), 'route_id')
-    seed_rows = unique_by(snapshot.get('ocean_seeds'), 'seed_id')
-    bindings = snapshot.get('category_bindings', [])
-    route_ids = policy.get('route_ids')
-    seed_ids = policy.get('seed_ids')
-    if not isinstance(route_ids, list) or len(set(route_ids)) != len(route_ids) or not route_ids:
-        raise ValueError('policy requires explicit unique routes')
-    if not isinstance(seed_ids, list) or len(set(seed_ids)) != len(seed_ids) or not seed_ids:
-        raise ValueError('policy requires unique nonempty seeds')
+    features = unique_by(snapshot.get('features', []), 'feature_id')
+    partitions = unique_by([p for p in snapshot.get('partitions', [])
+                            if p['method'] == 'ocean_barrier'], 'id')
+    seed_rows = snapshot.get('ocean_seeds', [])
+    if not seed_rows:
+        raise ValueError('ocean fill needs source-backed seeds')
     step = 360.0 / width
-
-    def coord(ident):
-        if ident not in endpoints:
-            raise ValueError(f'unknown endpoint {ident}')
-        e = endpoints[ident]
-        lon = endpoint_coordinate(e, 'longitude')
-        derivation = e.get('derivation', {})
-        if derivation.get('method') == 'physical_coast_edge':
-            if physical is None or (physical.width, physical.height) != (width, height):
-                raise ValueError('coast endpoint requires the current physical grid')
-            reference = Fraction(str(derivation['reference_latitude']))
-            if not -90 <= reference <= 90:
-                raise ValueError('invalid coast endpoint reference latitude')
-            lat = float(coast_edge_latitude(physical, Fraction(str(e['longitude'])), reference))
-        elif derivation.get('method') == 'grid_south_edge':
-            reference = endpoint_coordinate(e, 'latitude')
-            lat = float(Fraction(90) - Fraction(height * 360, width))
-            if not lat <= reference < lat + step:
-                raise ValueError('south-grid endpoint must lie in the final grid row')
-        else:
-            lat = endpoint_coordinate(e, 'latitude')
-        if not -180 <= lon <= 180 or not (90 - height * step) <= lat <= 90:
-            raise ValueError(f'endpoint outside grid: {ident}')
-        if derivation.get('method') == 'source_area_interior_point':
-            from shapely.geometry import Point, shape
-            from worldatlas.map_build.inputs.features import feature_geometry
-
-            features = {f['feature_id']: f for f in snapshot.get('features', [])}
-            feature = features.get(derivation.get('feature_id'))
-            if feature is None:
-                raise ValueError('ocean seed refers to a missing source area')
-            area = feature_geometry(feature, ('Polygon', 'MultiPolygon'))
-            if not shape(area).contains(Point(lon, lat)):
-                raise ValueError('ocean seed must be inside its selected source area')
-        return lon, lat
-
+    south = 90 - height * step
     paths = []
-    for rid in route_ids:
-        if rid not in routes:
-            raise ValueError(f'unknown route {rid}')
-        r = routes[rid]
-        kind = r.get('route_type')
-        points = r.get('points', [])
-        if kind not in ('lonlat_polyline', 'meridian', 'wgs84_geodesic', 'spherical_rhumb'):
-            raise ValueError(f'unsupported boundary route type: {kind}')
-        if len(points) < 2 or [p.get('ordinal') for p in points] != list(range(len(points))):
-            raise ValueError('route points must be contiguous and ordered')
-        ll = [coord(p.get('endpoint_id')) for p in points]
-        if kind == 'meridian' and any(abs(x - ll[0][0]) > 1e-12 for x, _ in ll):
-            raise ValueError('meridian longitudes differ')
-        if kind == 'spherical_rhumb':
-            ll = spherical_rhumb_points(ll, num(r.get('parameters', {}).get('max_step_km')))
-        if kind == 'wgs84_geodesic':
-            # Geographic interpolation is prescribed by the decision, never inferred.
-            params = r.get('parameters', {})
-            step_km = num(params.get('max_step_km'))
-            if not 0 < step_km <= 1:
-                raise ValueError('geodesic max_step_km must be in (0,1]')
-            dense = []
-            for a, b in zip(ll, ll[1:]):
-                if abs(b[0] - a[0]) > 180:
-                    raise ValueError('antimeridian-crossing geodesic unsupported')
-                _, _, distance = GEOD.inv(a[0], a[1], b[0], b[1])
-                count = max(1, math.ceil(distance / (1000 * step_km)))
-                dense.append(a)
-                if count > 1:
-                    dense.extend(GEOD.npts(a[0], a[1], b[0], b[1], count - 1))
-            dense.append(ll[-1])
-            ll = dense
+    for record in partitions.values():
+        feature = features.get(record['feature_id'])
+        if feature is None:
+            raise ValueError('ocean partition refers to a missing source feature')
+        ll = [list(p) for p in feature_geometry(feature, ('LineString',))['coordinates']]
+        if record.get('extend_to_south_grid_edge', False):
+            i = 0 if ll[0][1] < ll[-1][1] else -1
+            if not south <= ll[i][1] < south + step:
+                raise ValueError('south-grid endpoint must lie in the final grid row')
+            if any(p[0] != ll[0][0] for p in ll):
+                raise ValueError('south-grid extension requires a meridian')
+            ll[i][1] = south
         path = []
         for (lon0, lat0), (lon1, lat1) in zip(ll, ll[1:]):
-            if abs(lon1 - lon0) > 180:
-                raise ValueError('antimeridian-crossing route requires explicit supported handling')
-            x0, y0 = (lon0 + 180) / step, (90 - lat0) / step
-            x1, y1 = (lon1 + 180) / step, (90 - lat1) / step
-            # Short linear segments bound rasterization cost while preserving route shape.
-            n = max(1, math.ceil(max(abs(x1 - x0), abs(y1 - y0))))
-            if n > width + height:
-                raise ValueError('route segment unexpectedly long')
-            path.extend((x0 + (x1 - x0) * i / n, y0 + (y1 - y0) * i / n) for i in range(n))
-        path.append(((ll[-1][0] + 180) / step, (90 - ll[-1][1]) / step))
+            if (abs(lon1-lon0) > 180 or not south <= lat0 <= 90
+                    or not south <= lat1 <= 90):
+                raise ValueError('ocean divider leaves the supported grid')
+            x0, y0 = (lon0+180)/step, (90-lat0)/step
+            x1, y1 = (lon1+180)/step, (90-lat1)/step
+            n = max(1, math.ceil(max(abs(x1-x0), abs(y1-y0))))
+            path.extend((x0+(x1-x0)*i/n,y0+(y1-y0)*i/n) for i in range(n))
+        path.append(((ll[-1][0]+180)/step,(90-ll[-1][1])/step))
         paths.append(path)
-    seeds = {}
-    metadata = {}
-    for sid in seed_ids:
-        if sid not in seed_rows:
-            raise ValueError(f'unknown seed {sid}')
-        s = seed_rows[sid]
-        found = [
-            x
-            for x in bindings
-            if x.get('entity_id') == s.get('entity_id') and x.get('physical_class') == 'water'
-        ]
-        if (
-            len(found) != 1
-            or type(found[0].get('code')) is not int
-            or not 0 < found[0]['code'] < 2**32
-        ):
+    bindings = snapshot.get('category_bindings', [])
+    seeds, metadata, entities = {}, {}, set()
+    for seed in seed_rows:
+        entity = seed['entity_id']
+        found = [b['code'] for b in bindings
+                 if b['entity_id'] == entity and b['physical_class'] == 'water']
+        if len(found) != 1 or type(found[0]) is not int or not 0 < found[0] < 2**32:
             raise ValueError('seed must bind uniquely to a water code')
-        code = found[0]['code']
-        lon, lat = coord(s['endpoint_id'])
-        x = math.floor((lon + 180) / step)
-        y = math.floor((90 - lat) / step)
-        if not (0 <= x < width and 0 <= y < height) or code in seeds:
+        feature = features.get(seed['feature_id'])
+        if feature is None:
+            raise ValueError('ocean seed refers to a missing source area')
+        area = feature_geometry(feature, ('Polygon','MultiPolygon'))
+        lon, lat = map(num,seed['witness'])
+        if not shape(area).contains(Point(lon,lat)):
+            raise ValueError('ocean seed must be inside its selected source area')
+        x,y = math.floor((lon+180)/step), math.floor((90-lat)/step)
+        code = found[0]
+        if not (0 <= x < width and 0 <= y < height) or code in seeds or entity in entities:
             raise ValueError('duplicate code or seed outside grid')
-        seeds[code] = (x, y)
-        metadata[code] = {
-            'seed_id': sid,
-            'endpoint_id': s['endpoint_id'],
-            'entity_id': s['entity_id'],
-            'nominal_longitude_deg': lon,
-            'nominal_latitude_deg': lat,
-        }
-    return policy, paths, seeds, metadata
+        seeds[code] = (x,y)
+        entities.add(entity)
+        metadata[code] = dict(seed_id=str(entity), entity_id=entity,
+                              feature_id=seed['feature_id'],
+                              nominal_longitude_deg=lon,nominal_latitude_deg=lat)
+    for record in partitions.values():
+        pair = {record['side_a_entity_id'],record['side_b_entity_id']}
+        if len(pair) != 2 or not pair <= entities:
+            raise ValueError('ocean partition must separate two seeded entities')
+    return policy,paths,seeds,metadata
 
 
 def export_layer(partition, out, width, height, metadata, inputs, tile_height=256):
@@ -360,8 +195,7 @@ def run(
 ):
     if processing_started is None:
         processing_started = time.perf_counter()
-    with RunRasterU32LE(physical_rows, physical_runs, width, height) as physical:
-        policy, paths, seeds, metadata = load_config(snapshot, width, height, physical=physical)
+    policy, paths, seeds, metadata = load_config(snapshot, width, height)
     if tile_height <= 0:
         raise ValueError('tile height must be positive')
     create_directory_exclusive(out)
@@ -375,20 +209,13 @@ def run(
         name: sha(here / name) for name in ('engine.py', 'partition_core.py', 'rle_inputs.py')
     }
     code_pins['outputs.py'] = sha(Path(outputs.__file__))
-    software = {}
-    routes = unique_by(snapshot.get('routes'), 'route_id')
-    if any(routes[rid]['route_type'] == 'wgs84_geodesic' for rid in policy['route_ids']):
-        import pyproj
-
-        software = {'pyproj': pyproj.__version__, 'proj': pyproj.proj_version_str}
     pins = {
         **inputs,
         'decision_snapshot_sha256': snapshot_hash,
         'source_cut_edges_sha256': sha(cut_path),
-        'route_ids': policy['route_ids'],
-        'seed_ids': policy['seed_ids'],
+        'partition_ids': [p['id'] for p in snapshot['partitions'] if p['method']=='ocean_barrier'],
+        'seed_entity_ids': [s['entity_id'] for s in snapshot['ocean_seeds']],
         'candidate_code_sha256': code_pins,
-        'geodesic_software': software,
     }
     with RunRasterU32LE(physical_rows, physical_runs, width, height) as physical, RunRasterU32LE(
         prefill_rows, prefill_runs, width, height

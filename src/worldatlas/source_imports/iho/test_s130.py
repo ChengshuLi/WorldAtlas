@@ -32,11 +32,9 @@ def fixture(directory, gml=GML):
         packed.writestr('dataset.gml', raw)
     recipe = dict(method='s130_rhumb_routes', source_id='iho-test',
                   gml_member='dataset.gml', gml_sha256=hashlib.sha256(raw).hexdigest(),
-                  max_step_km=0.05, basis='Extract the selected source lines in their chosen direction.',
-                  routes=[dict(route_id='route-a', construction_line_id='line-a', reverse=True,
-                               endpoint_names=['First', 'Second']),
-                          dict(route_id='route-b', construction_line_id='line-b', reverse=False,
-                               endpoint_names=['Third', 'Fourth'])])
+                  max_step_km=1.0, basis='Extract the selected source lines in their chosen direction.',
+                  routes=[dict(feature_id='route-a', construction_line_id='line-a', reverse=True),
+                          dict(feature_id='route-b', construction_line_id='line-b', reverse=False)])
     return archive, hashlib.sha256(archive.read_bytes()).hexdigest(), recipe
 
 
@@ -49,47 +47,20 @@ class ExtractTests(unittest.TestCase):
     def extract(self, recipe=None):
         return extract_routes(self.path, self.digest, recipe or self.recipe)
 
-    def test_reverse_preserves_line_coordinate_and_fraction(self):
-        result = self.extract()
-        endpoint = result['endpoints'][0]
-        self.assertEqual((endpoint['name'], endpoint['latitude'], endpoint['longitude']),
-                         ('First', '30', '40'))
-        self.assertEqual(endpoint['evidence']['point_id'], 'point-b')
-        self.assertEqual(endpoint['derivation']['longitude_fraction'], [40, 1])
-        self.assertEqual(result['routes'][0]['points'][0]['endpoint_id'], 'route-a-endpoint-0')
-        self.assertEqual(result['routes'][0]['parameters'], {'max_step_km': 0.05})
+    def test_reverse_preserves_all_provider_vertices(self):
+        feature=self.extract()[0]
+        coordinates=feature['geometry']['coordinates']
+        self.assertEqual(feature['feature_id'],'route-a')
+        self.assertEqual(feature['source_feature_id'],'line-a')
+        self.assertEqual(coordinates[0],[40,30])
+        self.assertEqual(coordinates[-1],[20,10])
+        self.assertIn([30,20],coordinates)
 
-    def test_forward_line_can_have_only_one_contributing_point(self):
-        result = self.extract()
-        first, last = result['endpoints'][2:]
-        self.assertEqual(first['evidence']['point_id'], 'point-c')
-        self.assertEqual((last['latitude'], last['longitude']), ('-60', '60'))
-        self.assertNotIn('point_id', last['evidence'])
-
-    def test_existing_endpoint_ids_are_preserved(self):
-        self.recipe['routes'][0]['endpoint_ids'] = ['existing-start', 'existing-end']
-        result = self.extract()
-        self.assertEqual([p['endpoint_id'] for p in result['routes'][0]['points']],
-                         ['existing-start', 'existing-end'])
-        self.assertEqual(result['endpoints'][0]['endpoint_id'], 'existing-start')
-
-    def test_endpoint_ids_must_be_unique_and_nonempty(self):
-        for ids in (['same', 'same'], ['', 'end'], ['start'], ['route-b-endpoint-0', 'end']):
-            self.recipe['routes'][0]['endpoint_ids'] = ids
-            with self.subTest(ids=ids), self.assertRaisesRegex(ValueError, 'endpoint IDs|construction field: routes'):
-                self.extract()
-
-    def test_south_grid_rule_preserves_the_raw_coordinate(self):
-        self.recipe['routes'][1]['extend_to_south_grid_edge'] = True
-        endpoint = self.extract()['endpoints'][-1]
-        self.assertEqual(endpoint['latitude'], '-60')
-        self.assertEqual(endpoint['derivation']['latitude_fraction'], [-60, 1])
-        self.assertEqual(endpoint['derivation']['method'], 'grid_south_edge')
-
-    def test_south_grid_extension_requires_a_meridian(self):
-        self.recipe['routes'][0]['extend_to_south_grid_edge'] = True
-        with self.assertRaisesRegex(ValueError, 'requires a meridian'):
-            self.extract()
+    def test_meridian_preserves_both_provider_endpoints(self):
+        coordinates=self.extract()[1]['geometry']['coordinates']
+        self.assertEqual(coordinates[0],[60,5])
+        self.assertEqual(coordinates[-1],[60,-60])
+        self.assertTrue(all(point[0]==60 for point in coordinates))
 
     def test_wrong_archive_checksum(self):
         with self.assertRaisesRegex(ValueError, 'archive SHA-256'):
@@ -110,7 +81,7 @@ class ExtractTests(unittest.TestCase):
 
     def test_duplicate_route_selection(self):
         self.recipe['routes'].append(copy.deepcopy(self.recipe['routes'][0]))
-        with self.assertRaisesRegex(ValueError, 'duplicate route'):
+        with self.assertRaisesRegex(ValueError, 'distinct'):
             self.extract()
 
     def test_invalid_sampling_step(self):

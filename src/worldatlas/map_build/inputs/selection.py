@@ -67,14 +67,7 @@ def geographic_domain(selection, name):
     """Expose stage inputs from one working snapshot or an unchanged archived selection."""
     if "geography" not in selection:
         return selection["domains"][name]
-    geography = selection["geography"]
-    # Ocean barriers and mainland closure lines have different consumers.
-    routes = [
-        route
-        for route in geography["routes"]
-        if ("closure_method" in route) == (name == "mainland")
-    ]
-    return dict(geography, routes=routes)
+    return selection["geography"]
 
 
 def selection_domains(selection):
@@ -122,7 +115,7 @@ def read_selection(database, *, raw_sources=(), constructions=()):
             source["source_id"] for source in data["sources"]
         }
         document_refs = set(constructions)
-        for key in ("features", "mainland_boundaries", "endpoints", "routes"):
+        for key in ("features",):
             document_refs.update(
                 item["construction_id"]
                 for item in data.get(key, [])

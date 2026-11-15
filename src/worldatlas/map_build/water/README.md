@@ -13,6 +13,13 @@ The coastal distance, tie priority, basin selection, ocean barriers and seeds co
 from the saved selection. Provider-specific source extraction belongs in source
 imports. Basin participants and shoreline counts are calculated for each build.
 
+Explicit ocean dividers use the same `atlas.geographic_partitions` table as land
+dividers, with `method: ocean_barrier` and two ocean entity IDs. Their complete
+lines are imported into `atlas.source_features`; map building only turns those
+lines into blocked grid edges. `atlas.ocean_seeds` supplies each ocean's imported
+area and an interior witness. Coast-to-ocean ownership is calculated from the
+coastal band and named basins, so it needs no additional stored boundary line.
+
 ```bash
 python3 -m worldatlas.map_build.water.build \
   --selection /absolute/path/to/input-selection.json \

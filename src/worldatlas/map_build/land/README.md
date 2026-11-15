@@ -19,6 +19,13 @@ Distance assignments supply defaults. Explicit geographic decisions take
 precedence. Conflicting explicit decisions fail; physical water stays zero.
 Scoped partitions never change mainland seeds or distance-search domains.
 
+Explicit two-sided rules share `atlas.geographic_partitions`. Its `method`
+selects whole-component line sides (`land_components`), scoped mainland cells
+(`land_cells`), or a selected mainland seed region (`mainland_seeds`). Geometry
+comes from `atlas.source_features`; the same imported boundary can contribute to
+both a seed region and a whole-component partition. Region closures only close
+the seed polygons and do not define additional continent boundaries.
+
 Distance assignment chooses the smallest calculated WGS84 distance. Only exactly
 equal distances use the first map code in numeric order; there is no near-equality
 threshold or editable mainland tie policy.

@@ -14,9 +14,9 @@ It loads these files in dependency order, within one transaction:
 | [`sources.sql`](schema/sources.sql) | Raw-file identities, source credits and editable construction documents. |
 | [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated checks for typed construction parameters. |
 | [`geographic_entities.sql`](schema/geographic_entities.sql) | Entities with generated IDs, names, hierarchy links and colors, plus grid-code bindings. |
-| [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, geographic assignments and citations, ocean routes and assignment policies. |
-| [`mainland.sql`](schema/mainland.sql) | Editable boundaries, raw-source links, assembled seed regions and component witnesses. |
-| [`geographic_partitions.sql`](schema/geographic_partitions.sql) | Source-backed two-sided continent assignments, including shared mainland choices. |
+| [`geographic_decisions.sql`](schema/geographic_decisions.sql) | Imported geometry, geographic assignments and citations, ocean seeds and general assignment policies. |
+| [`mainland.sql`](schema/mainland.sql) | Computational seed-region closures, ordered seed regions and component witnesses. |
+| [`geographic_partitions.sql`](schema/geographic_partitions.sql) | Explicit two-sided land and ocean partitions, including mainland seed choices. |
 | [`releases.sql`](schema/releases.sql) | Immutable release manifests, approval and official-version/homepage pointers. |
 
 `geographic_entities` stores each entity's generated ID, name, hierarchy links and
@@ -81,12 +81,33 @@ JOIN atlas.source_assets s ON s.id=c.source_id
 WHERE f.id='FEATURE_ID';
 ```
 
-`geographic_partitions` selects a line, geographic scope, two side witnesses and
-their entity IDs. It assigns complete physical land components on each side.
-Components extending beyond the scope retain their existing assignment and are
-reported. A line cutting a selected island is rejected. Optional mainland group
-and seed-region references let the same continent split supply its mainland
-choice; its side A is the seed region's inside entity.
+`geographic_partitions` stores explicit two-sided decisions. Geometry is referenced
+from `source_features`; no separate mainland-boundary or ocean-route geometry
+exists. Its `method` identifies one real calculation:
+
+| Method | Inputs and behavior |
+| --- | --- |
+| `land_components` | A line, scope and opposite side witnesses assign complete islands. Scope-edge pieces retain their current assignment; land crossings fail. |
+| `land_cells` | A selected seed region and scope assign final land-cell centers. This does not change distance seeds or search domains. |
+| `mainland_seeds` | A selected region splits one connected mainland witness group before distance assignment. |
+| `ocean_barrier` | An imported line separates two seeded oceans during residual-water fill. |
+
+Constraints require the fields belonging to each method and reject incompatible
+combinations. A component partition can also supply its connected-mainland seed
+choice, so the Americas split is not duplicated. Uniform mainland targets come
+directly from witness-group targets.
+
+`ocean_seeds` has one row per ocean: `id` references its entity, `feature_id`
+references its imported source area, and `witness` supplies an interior
+`[longitude, latitude]` point. Map building checks containment.
+
+Seed-region closures are computational paths used to close mainland polygons.
+They are not continent boundaries. Their three helper records retain physical
+water and terminal-join checks. The actual source-derived boundaries they join
+are ordinary source features.
+
+Pairs separated by nearest-shore, named-basin or enclosed-water calculation do
+not need explicit partition rows. Non-neighboring pairs need none either.
 
 ## Initialize an empty database
 
@@ -136,7 +157,7 @@ SQL checks cover database guarantees:
 | `entity_registry.sql` | Stable IDs, hierarchy relationships and grid-code bindings. |
 | `geographic_entity_colors.sql` | Optional colors and valid RGB values. |
 | `geographic_decisions.sql` | Geometry records, single-feature assignments, citations and entity targets. |
-| `editable_boundaries.sql` | Editable lines, construction references and retained source links. |
+| `geographic_partitions.sql` | Valid partition methods, required fields and entity/feature references. |
 | `policies.sql` | Editable assignment policies and valid policy definitions. |
 | `map_releases.sql` | Immutable bundles, approval and publication relationships. |
 
@@ -162,7 +183,7 @@ One construction ID identifies one editable recipe. Geometry references it by
 Builds freeze the complete records they read, and releases archive those inputs.
 
 ```sql
-SELECT id, construction_id FROM atlas.decision_mainland_boundaries;
+SELECT id, construction_id FROM atlas.source_features;
 SELECT document FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 

@@ -123,25 +123,6 @@ class StorageTests(unittest.TestCase):
             )
         self.assertEqual(self.rows(), before)
 
-    def test_table_import_and_missing_provider_failure(self):
-        self.raw = b"id,name,lon,lat\na,First,-20.25,11.5\n"
-        self.add_source("table", self.raw, "source.csv")
-        self.recipe.update(
-            method="selected_table_points",
-            source_id="table",
-            longitude_field="lon",
-            latitude_field="lat",
-        )
-        self.store()
-        self.build()
-        before = self.rows()
-        self.assertEqual(before[0][1]["coordinates"], [-20.25, 11.5])
-        self.recipe["selections"][0]["source_feature_id"] = "missing"
-        self.store()
-        with self.assertRaisesRegex(ValueError, "missing"):
-            self.build()
-        self.assertEqual(self.rows(), before)
-
     def test_signed_zero_preserves_longitude_latitude_coordinates(self):
         geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
         save_features(
