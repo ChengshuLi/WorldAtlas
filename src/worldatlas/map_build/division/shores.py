@@ -103,10 +103,13 @@ class ShoreGeometry:
                 continue
             geometry = complete_row(
                 grid.width,
-                [
-                    (int(a), int(b), 1)
-                    for a, b in zip(source.starts[lo:hi], source.ends[lo:hi])
-                ],
+                np.column_stack(
+                    (
+                        source.starts[lo:hi],
+                        source.ends[lo:hi],
+                        np.ones(hi - lo, dtype=np.uint32),
+                    )
+                ),
             )
             a, b, (shore, owner) = overlay(geometry, row(ownership, y, grid.width))
             keep = (shore != 0) & (owner != 0)

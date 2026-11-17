@@ -357,7 +357,7 @@ def continuous_face_links(path, offsets, paths, dsu, grid):
             nodes._mmap.close()
 
 
-def divide_regions(eligible_rows, grid, cuts, labels, directory):
+def divide_regions(eligible_rows, grid, cuts, labels, directory, *, rows=None):
     """Build labelled faces without expanding the domain into individual cells.
 
     Labels are (entity_id, x, y); several labels may identify the same owner or
@@ -379,8 +379,13 @@ def divide_regions(eligible_rows, grid, cuts, labels, directory):
     offsets = [0]
     previous = []
     label_nodes = {}
+    rows = range(grid.height) if rows is None else rows
     with (directory / "nodes.u32le").open("xb") as output:
         for y in range(grid.height):
+            if y not in rows:
+                offsets.append(len(dsu.parent))
+                previous = []
+                continue
             raw = list(eligible_rows(y))
             if raw != sorted(raw) or any(a[1] > b[0] for a, b in zip(raw, raw[1:])):
                 raise ValueError("partition scope intervals overlap or are unordered")

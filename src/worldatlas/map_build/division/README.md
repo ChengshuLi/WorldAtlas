@@ -29,6 +29,10 @@ alone fragments a thin strip beside water. This adds no geographic labels.
 Physical shores are extracted once. Their attached owners and distance indexes
 are reused. Nearest operations share exact WGS84 kernels with conservative
 spatial certificates; unresolved certificates perform complete searches.
+Source polygons are prepared once for repeated raster windows. Scope bounds skip
+empty rows while retaining the full extent of majority-selected components.
+Component intervals and owner lookups use arrays directly rather than repeatedly
+expanding them into individual Python records.
 Strictly smaller computed distances win, including tiny differences. Exact
 equality uses the category binding order. A coastal cutoff includes its exact
 threshold. Conservative search margins never change those decisions.

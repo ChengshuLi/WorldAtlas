@@ -4,6 +4,7 @@ import unittest
 import numpy as np
 
 from worldatlas.map_build.division.intervals import Eligibility, combine, prepare
+from worldatlas.map_build.division.scope import complete_row
 
 
 def rle(ends, values):
@@ -11,6 +12,23 @@ def rle(ends, values):
 
 
 class ScopeAndClaims(unittest.TestCase):
+    def test_sparse_arrays_preserve_gaps_and_merge_adjacent_equal_values(self):
+        records = np.array([[1, 3, 807], [3, 5, 807], [6, 7, 101]], dtype=np.uint32)
+        ends, values = complete_row(8, records)
+        self.assertEqual(ends.tolist(), [1, 5, 6, 7, 8])
+        self.assertEqual(values.tolist(), [0, 807, 0, 101, 0])
+        dense = np.repeat(values, np.diff(np.r_[0, ends]))
+        self.assertEqual(dense.tolist(), [0, 807, 807, 807, 807, 0, 101, 0])
+
+    def test_sparse_arrays_reject_overlap_and_out_of_range_values(self):
+        with self.assertRaises(ValueError):
+            complete_row(8, [[0, 4, 1], [3, 5, 2]])
+        with self.assertRaises(ValueError):
+            complete_row(8, [[0, 1, 2**32]])
+        ends, values = complete_row(8, [[0, 8, 2**32 - 1]])
+        self.assertEqual(values.tolist(), [2**32 - 1])
+        self.assertEqual(ends.tolist(), [8])
+
     def setUp(self):
         self.physical = rle([3, 8], [17, 1])
         self.parent = rle([7, 8], [1, 0])

@@ -16,7 +16,7 @@ def assign_area(scope, target, directory):
     """Give one child every eligible cell in the supplied scope."""
 
     def rows():
-        for y in range(scope.grid.height):
+        for y in scope.query_rows():
             ends, values = scope.query_row(y)
             starts = np.r_[0, ends[:-1]]
             output = np.where(values != 0, target, 0).astype(np.uint32)
@@ -62,7 +62,7 @@ def component_owners(scope, faces):
     results = {}
     counts = defaultdict(int)
     eligible = scope.eligible_components()
-    for y in range(scope.grid.height):
+    for y in scope.query_rows():
         face = faces.row(y)
         for kind, roots in eligible.items():
             components = scope.components(kind)
@@ -119,7 +119,12 @@ def divide_area(scope, boundaries, targets, directory):
         )
     cuts = geographic_cuts([f["geometry"] for f in boundaries], grid)
     owners = divide_regions(
-        scope.context_intervals, grid, cuts, labels, directory / "faces"
+        scope.context_intervals,
+        grid,
+        cuts,
+        labels,
+        directory / "faces",
+        rows=scope.context_rows(),
     )
     faces = Faces(directory / "faces", owners, grid)
     try:
@@ -138,7 +143,7 @@ def divide_area(scope, boundaries, targets, directory):
                 )
 
         def rows():
-            for y in range(grid.height):
+            for y in scope.query_rows():
                 query = scope.query_row(y)
                 if by_component is None:
                     proposed = faces.row(y)

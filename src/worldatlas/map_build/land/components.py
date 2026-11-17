@@ -6,7 +6,10 @@ from pathlib import Path
 
 import numpy as np
 
-from worldatlas.map_build.core.geometry import rasterize, reject_boundary_centers
+from worldatlas.map_build.core.geometry import (
+    PolygonRasterizer,
+    reject_boundary_centers,
+)
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 
@@ -70,7 +73,7 @@ class ComponentGrid:
         if type(y) is not int or not 0 <= y < self.grid.height:
             raise ValueError("component row outside grid")
         first, last = map(int, self.offsets[y : y + 2])
-        spans = self.runs[first:last]
+        spans = np.asarray(self.runs[first:last])
         if self.validated[y]:
             return spans
         ends, codes = row(self.physical, y, self.grid.width)
@@ -113,6 +116,16 @@ class ComponentGrid:
                 int(root): int(total) for root, total in zip(roots, totals)
             }
         return self.populations
+
+    def row_bounds(self, roots):
+        """Locate the full selected components, including cells outside a polygon."""
+        positions = np.flatnonzero(np.isin(self.runs[:, 2], roots))
+        if not len(positions):
+            return 0, 0
+        first, last = (
+            np.searchsorted(self.offsets, positions[[0, -1]], side="right") - 1
+        )
+        return int(first), int(last) + 1
 
     def point(self, longitude, latitude):
         step = Fraction(str(self.grid.step))
@@ -163,9 +176,10 @@ class ComponentGrid:
         windows = [(x0, min(x1, self.grid.width))]
         if x1 > self.grid.width:
             windows.append((0, x1 - self.grid.width))
+        rasterizer = PolygonRasterizer(geometry, self.grid)
         for first in range(y0, y1, rows_per_batch):
             last = min(first + rows_per_batch, y1)
-            _, mask = rasterize(geometry, self.grid, (x0, x1, first, last))
+            _, mask = rasterizer.rasterize((x0, x1, first, last))
             for y in range(first, last):
                 spans = self.row(y)
                 for a, b in windows:

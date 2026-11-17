@@ -18,12 +18,13 @@ def query_roots(scope):
         return scope._query_roots
     components = scope.components("land")
     found = set()
-    for y in range(scope.grid.height):
+    for y in scope.query_rows():
         parts = components.row(y)
         if not len(parts):
             continue
         roots = complete_row(
-            scope.grid.width, [(int(a), int(b), int(root) + 1) for a, b, root in parts]
+            scope.grid.width,
+            np.column_stack((parts[:, :2], parts[:, 2] + np.uint32(1))),
         )
         _, _, (eligible, root) = overlay(scope.query_row(y), roots)
         found.update(int(r) - 1 for r in np.unique(root[(eligible != 0) & (root != 0)]))
@@ -57,15 +58,14 @@ def component_queries(scope, references, directory):
     entities = np.asarray([owners[int(root)] for root in ids], dtype=np.uint32)
 
     def rows():
-        for y in range(scope.grid.height):
+        for y in scope.query_rows():
             parts = scope.components("land").row(y)
             parts = parts[selected(parts[:, 2], ids)]
             claimed = complete_row(
                 scope.grid.width,
-                [
-                    (int(a), int(b), int(entities[np.searchsorted(ids, root)]))
-                    for a, b, root in parts
-                ],
+                np.column_stack(
+                    (parts[:, :2], entities[np.searchsorted(ids, parts[:, 2])])
+                ),
             )
             starts, ends, (eligible, owned) = overlay(scope.query_row(y), claimed)
             records = spans(starts, ends, np.where(eligible != 0, owned, 0))
@@ -107,11 +107,8 @@ def nearest(scope, reference_cells, unit, distance_limit=None, *, directory):
     def rows():
         # Skip rows excluded by source geometry. Crop query buffers to actual
         # eligible intervals; references still cover their complete shore sets.
-        y0, y1 = (
-            (scope.bounds[2], scope.bounds[3])
-            if scope.bounds and not any(len(p) for p in scope.points.values())
-            else (0, grid.height)
-        )
+        query_rows = scope.query_rows()
+        y0, y1 = query_rows.start, query_rows.stop
         for first in range(y0, y1, 64):
             last = min(first + 64, y1)
             queries = []

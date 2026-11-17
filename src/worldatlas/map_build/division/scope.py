@@ -6,7 +6,7 @@ import numpy as np
 from shapely.geometry import mapping, shape
 from shapely import union_all
 
-from worldatlas.map_build.core.geometry import rasterize
+from worldatlas.map_build.core.geometry import PolygonRasterizer
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.division.intervals import overlay, prepare
@@ -22,28 +22,34 @@ def selected(values, identifiers):
 
 
 def complete_row(width, records):
-    """Convert sparse disjoint spans into a complete canonical RLE row."""
-    stops = []
-    values = []
-    cursor = 0
-
-    def append(end, value):
-        if values and values[-1] == value:
-            stops[-1] = end
-        else:
-            stops.append(end)
-            values.append(value)
-
-    for a, b, value in records:
-        if not cursor <= a < b <= width:
-            raise ValueError("scope intervals overlap or escape the grid")
-        if a > cursor:
-            append(a, 0)
-        append(b, value)
-        cursor = b
-    if cursor < width:
-        append(width, 0)
-    return np.asarray(stops, dtype=np.uint32), np.asarray(values, dtype=np.uint32)
+    """Fill gaps and coalesce sparse intervals without per-run Python appends."""
+    if not len(records):
+        return np.array([width], dtype=np.uint32), np.array([0], dtype=np.uint32)
+    items = np.asarray(records)
+    if (
+        items.ndim != 2
+        or items.shape[1] != 3
+        or not np.issubdtype(items.dtype, np.integer)
+    ):
+        raise ValueError("scope intervals require integer start, end and value")
+    starts, ends, values = items.T
+    if (
+        np.any(starts < 0)
+        or np.any(starts >= ends)
+        or np.any(ends > width)
+        or np.any(starts[1:] < ends[:-1])
+        or np.any(values < 0)
+        or np.any(values > np.iinfo(np.uint32).max)
+    ):
+        raise ValueError("scope intervals overlap or escape the grid")
+    stops = np.r_[np.column_stack((starts, ends)).ravel(), width]
+    codes = np.r_[
+        np.column_stack((np.zeros(len(items), dtype=np.uint32), values)).ravel(), 0
+    ]
+    nonempty = stops > np.r_[0, stops[:-1]]
+    stops, codes = stops[nonempty], codes[nonempty]
+    last = np.r_[codes[:-1] != codes[1:], True]
+    return stops[last].astype(np.uint32), codes[last].astype(np.uint32)
 
 
 class Scope:
@@ -72,7 +78,17 @@ class Scope:
         )
         self.batch = None
         self.area_buffer = None
+        self.rasterizer = None
         self.populations = {}
+        positions = np.flatnonzero(parent[1][1::2])
+        if len(positions):
+            first, last = (
+                np.searchsorted(parent[0], positions[[0, -1]], side="right") - 1
+            )
+            self.parent_rows = int(first), int(last) + 1
+        else:
+            self.parent_rows = 0, 0
+        self._context_rows = self._query_rows = None
         for point in inputs.get("scope_component", ()):
             lon, lat = point["geometry"]["coordinates"]
             x = math.floor((lon - grid.west) / grid.step) % grid.width
@@ -95,6 +111,49 @@ class Scope:
             for kind, roots in self.points.items()
         }
 
+    def context_rows(self):
+        """Bound geometric context without applying ownership or physical filters."""
+        if self._context_rows is None:
+            ranges = []
+            if not self.restricted:
+                ranges.append(self.parent_rows)
+            if self.bounds:
+                ranges.append(self.bounds[2:])
+            ranges.extend(
+                self.components(kind).row_bounds(ids)
+                for kind, ids in self.points.items()
+                if len(ids)
+            )
+            ranges = [(a, b) for a, b in ranges if a < b]
+            self._context_rows = (
+                (
+                    max(self.parent_rows[0], min(a for a, _ in ranges)),
+                    min(self.parent_rows[1], max(b for _, b in ranges)),
+                )
+                if ranges
+                else (0, 0)
+            )
+        return range(*self._context_rows)
+
+    def query_rows(self):
+        """Skip empty rows; majority-selected components keep their full extent."""
+        if self._query_rows is None:
+            if self.rule["unit"] == "cell" or not self.restricted:
+                rows = self.context_rows()
+                self._query_rows = rows.start, rows.stop
+            else:
+                bounds = [
+                    self.components(kind).row_bounds(ids)
+                    for kind, ids in self.eligible_components().items()
+                    if len(ids)
+                ]
+                self._query_rows = (
+                    (min(a for a, _ in bounds), max(b for _, b in bounds))
+                    if bounds
+                    else (0, 0)
+                )
+        return range(*self._query_rows)
+
     def area_row(self, y):
         if self.geometry is None:
             return complete_row(self.grid.width, ())
@@ -107,9 +166,11 @@ class Scope:
             first = y0 + (y - y0) // 64 * 64
             last = min(first + 64, y1)
             if self.batch is None or self.batch[0] != first:
+                if self.rasterizer is None:
+                    self.rasterizer = PolygonRasterizer(self.geometry, self.grid)
                 self.batch = (
                     first,
-                    rasterize(self.geometry, self.grid, (x0, x1, first, last))[1],
+                    self.rasterizer.rasterize((x0, x1, first, last))[1],
                 )
             values = self.batch[1][y - first]
         records = []
@@ -129,10 +190,20 @@ class Scope:
         for kind, ids in roots.items():
             if not len(ids):
                 continue
-            spans = self.components(kind).row(y)
-            for a, b, _ in spans[selected(spans[:, 2], ids)]:
-                records.append((int(a), int(b), 1))
-        return complete_row(self.grid.width, sorted(records))
+            parts = self.components(kind).row(y)
+            parts = parts[selected(parts[:, 2], ids)]
+            if len(parts):
+                records.append(
+                    np.column_stack(
+                        (parts[:, :2], np.ones(len(parts), dtype=np.uint32))
+                    )
+                )
+        if not records:
+            return complete_row(self.grid.width, ())
+        parts = np.concatenate(records)
+        return complete_row(
+            self.grid.width, parts[np.argsort(parts[:, 0], kind="stable")]
+        )
 
     def context_row(self, y):
         if not self.restricted:
@@ -172,7 +243,7 @@ class Scope:
     def query_row(self, y):
         chosen = (
             self.context_row(y)
-            if self.rule["unit"] == "cell"
+            if self.rule["unit"] == "cell" or not self.restricted
             else self.component_row(y, self.eligible_components())
         )
         result = prepare(
@@ -186,7 +257,7 @@ class Scope:
         return complete_row(self.grid.width, result)
 
     def has_output(self):
-        return any(np.any(self.query_row(y)[1]) for y in range(self.grid.height))
+        return any(np.any(self.query_row(y)[1]) for y in self.query_rows())
 
     def context_intervals(self, y):
         ends, values = self.context_row(y)
