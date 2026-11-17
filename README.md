@@ -48,6 +48,12 @@ export PROJ_NETWORK=OFF
 Set the database URL in your shell or secret manager. Credentials stay outside
 GitHub and Neon construction records. Connector logins are separate from the
 credentials used by these Python commands.
+On the configured Mac, the existing direct URL is stored privately in
+`~/.config/worldatlas/neon-connection`. Load it without printing it:
+
+```bash
+export NEON_DATABASE_URL="$(cat "$HOME/.config/worldatlas/neon-connection")"
+```
 
 - [Import source geography](src/worldatlas/source_imports) from raw sources. These tools reconstruct and verify boundary geometry and other inputs for review and registration in Neon.
 - [Build the map](src/worldatlas/map_build/README.md) from selected Neon records and the raw R2 inputs the build reads directly. This includes the physical land and water grid, land and water assignment, and final composition.
