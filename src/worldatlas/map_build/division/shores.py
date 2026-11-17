@@ -48,12 +48,9 @@ class ReferenceCells(ShoreSpans):
             if lo != hi:
                 yield (
                     y,
-                    [
-                        (int(a), int(b), int(e))
-                        for a, b, e in zip(
-                            self.starts[lo:hi], self.ends[lo:hi], self.codes[lo:hi]
-                        )
-                    ],
+                    np.column_stack(
+                        (self.starts[lo:hi], self.ends[lo:hi], self.codes[lo:hi])
+                    ),
                 )
 
     def filtered(self, owners):

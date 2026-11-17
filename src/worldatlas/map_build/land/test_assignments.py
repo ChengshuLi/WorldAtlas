@@ -8,6 +8,7 @@ import unittest
 import numpy as np
 from pyproj import Geod
 
+from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
 from worldatlas.map_build.land.assignments import assign_components, read_assignments
@@ -15,6 +16,16 @@ from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.land.reference_index import build_reference_index
 from worldatlas.map_build.land.search_engine import finalize
+
+
+def reference_rows(path, grid):
+    with open_grid(path, grid) as data:
+        for y in range(grid.height):
+            ends, owners = row(data, y, grid.width)
+            starts = np.r_[0, ends[:-1]]
+            active = owners != 0
+            if active.any():
+                yield y, np.column_stack((starts[active], ends[active], owners[active]))
 
 
 class AssignmentTests(unittest.TestCase):
@@ -43,7 +54,9 @@ class AssignmentTests(unittest.TestCase):
         root, grid, seed_cells, bindings = self.fixture(
             [(10, 1), (10, 2), (7, 16), (13, 29), (13, 30), (8, 35)]
         )
-        build_reference_index(grid, root / "seeds", root / "index", tile_cells=8)
+        build_reference_index(
+            grid, reference_rows(root / "seeds", grid), root / "index", tile_cells=8
+        )
         with ComponentGrid(root / "physical", root / "components", grid) as components:
             mainland = {
                 components.point(float(grid.longitude(x)), float(grid.latitude(y)))
@@ -90,7 +103,9 @@ class AssignmentTests(unittest.TestCase):
 
     def test_all_land_already_seeded_needs_no_island_distance_search(self):
         root, grid, seed_cells, bindings = self.fixture([])
-        build_reference_index(grid, root / "seeds", root / "index", tile_cells=8)
+        build_reference_index(
+            grid, reference_rows(root / "seeds", grid), root / "index", tile_cells=8
+        )
         with ComponentGrid(root / "physical", root / "components", grid) as components:
             mainland = {
                 components.point(float(grid.longitude(x)), float(grid.latitude(y)))

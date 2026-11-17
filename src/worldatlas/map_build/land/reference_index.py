@@ -1,6 +1,5 @@
-"""Index complete seed runs and select real sample cells for distance bounds."""
+"""Index complete reference intervals; real sampled cells supply upper bounds."""
 
-from collections import defaultdict
 import hashlib
 import json
 from pathlib import Path
@@ -8,67 +7,113 @@ import time
 
 import numpy as np
 
-from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.core.layers import file_hash
 
 
 def build_reference_index(
-    grid, seeds, directory, *, tile_cells=1024, samples_per_category=32
+    grid, rows, directory, *, tile_cells=1024, samples_per_category=32
 ):
-    """Write complete spatial tiles; sampled cells provide upper bounds only."""
+    """Index ordered (row, [start,end,owner] array) inputs without an intermediate map."""
     if (
         type(tile_cells) is not int
         or tile_cells <= 0
         or type(samples_per_category) is not int
         or samples_per_category <= 0
     ):
-        raise ValueError("seed index needs positive tile and sample sizes")
+        raise ValueError("reference index needs positive tile and sample sizes")
     started = time.monotonic()
     directory = Path(directory)
     directory.mkdir()
-    tiles, representatives = [], []
-    with open_grid(seeds, grid) as source:
-        for first in range(0, grid.height, tile_cells):
-            buffers = defaultdict(list)
-            for y in range(first, min(grid.height, first + tile_cells)):
-                ends, codes = row(source, y, grid.width)
-                left = 0
-                for right, code in zip(map(int, ends), map(int, codes)):
-                    if code:
-                        a = left
-                        while a < right:
-                            tx = a // tile_cells
-                            b = min(right, (tx + 1) * tile_cells)
-                            buffers[tx].append((y, a, b, code))
-                            a = b
-                    left = right
-            ty = first // tile_cells
-            for tx, records in sorted(buffers.items()):
-                values = np.asarray(records, dtype="<u4")
-                data = values.tobytes()
-                (directory / f"{ty:05d}-{tx:05d}.bin").write_bytes(data)
-                codes = sorted(set(map(int, values[:, 3])))
-                tiles.append(
-                    (ty, tx, codes, len(records), hashlib.sha256(data).hexdigest())
+    tiles, representatives, buffers = [], [], []
+    current_tile = None
+    previous_row = -1
+
+    def flush():
+        if not buffers:
+            return
+        values = np.concatenate(buffers)
+        columns = values[:, 1] // tile_cells
+        order = np.argsort(columns, kind="stable")
+        values, columns = values[order], columns[order]
+        firsts = np.r_[0, np.flatnonzero(columns[1:] != columns[:-1]) + 1]
+        for first, last in zip(firsts, np.r_[firsts[1:], len(values)]):
+            tx = int(columns[first])
+            records = values[first:last].astype("<u4", copy=False)
+            data = records.tobytes()
+            (directory / f"{current_tile:05d}-{tx:05d}.bin").write_bytes(data)
+            codes = list(map(int, np.unique(records[:, 3])))
+            tiles.append(
+                (
+                    current_tile,
+                    tx,
+                    codes,
+                    len(records),
+                    hashlib.sha256(data).hexdigest(),
                 )
-                for code in codes:
-                    selected = np.flatnonzero(values[:, 3] == code)
-                    picked = selected[
-                        np.unique(
-                            np.linspace(
-                                0,
-                                len(selected) - 1,
-                                min(samples_per_category, len(selected)),
-                                dtype=int,
-                            )
+            )
+            for code in codes:
+                selected = np.flatnonzero(records[:, 3] == code)
+                picked = selected[
+                    np.unique(
+                        np.linspace(
+                            0,
+                            len(selected) - 1,
+                            min(samples_per_category, len(selected)),
+                            dtype=int,
                         )
-                    ]
-                    for y, a, b, _ in values[picked]:
-                        representatives.append(
-                            (int(y), (int(a) + int(b) - 1) // 2, code)
-                        )
+                    )
+                ]
+                for y, a, b, _ in records[picked]:
+                    representatives.append((int(y), (int(a) + int(b) - 1) // 2, code))
+        buffers.clear()
+
+    for y, intervals in rows:
+        if type(y) is not int or not previous_row < y < grid.height:
+            raise ValueError(
+                "reference rows must be ordered, unique and within the grid"
+            )
+        previous_row = y
+        parts = np.asarray(intervals)
+        if not len(parts):
+            continue
+        if (
+            parts.ndim != 2
+            or parts.shape[1] != 3
+            or not np.issubdtype(parts.dtype, np.integer)
+        ):
+            raise ValueError("reference intervals require integer start, end and owner")
+        left, right, codes = parts.T
+        if (
+            np.any(left < 0)
+            or np.any(left >= right)
+            or np.any(right > grid.width)
+            or np.any(left[1:] < right[:-1])
+            or np.any(codes <= 0)
+            or np.any(codes >= 2**32)
+        ):
+            raise ValueError("invalid reference intervals")
+        ty = y // tile_cells
+        if ty != current_tile:
+            flush()
+            current_tile = ty
+        first_tiles, last_tiles = left // tile_cells, (right - 1) // tile_cells
+        lengths = (last_tiles - first_tiles + 1).astype(np.int64)
+        source = np.repeat(np.arange(len(parts)), lengths)
+        offsets = np.repeat(np.cumsum(lengths) - lengths, lengths)
+        tx = np.repeat(first_tiles, lengths) + np.arange(len(source)) - offsets
+        buffers.append(
+            np.column_stack(
+                (
+                    np.full(len(source), y),
+                    np.maximum(left[source], tx * tile_cells),
+                    np.minimum(right[source], (tx + 1) * tile_cells),
+                    codes[source],
+                )
+            )
+        )
+    flush()
     if not tiles:
-        raise ValueError("cannot index an empty mainland seed")
+        raise ValueError("cannot index empty reference cells")
     np.asarray(representatives, dtype="<u4").tofile(directory / "representatives.u32le")
     result = dict(
         grid=vars(grid),

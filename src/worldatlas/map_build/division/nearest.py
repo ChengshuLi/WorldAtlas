@@ -38,10 +38,8 @@ def component_queries(scope, references, directory):
         return write_layer(directory, scope.grid, ())
     directory = Path(directory)
     directory.mkdir()
-    reference_directory = directory / "reference-cells"
-    write_layer(reference_directory, scope.grid, references.layer_rows())
     index = directory / "reference-index"
-    build_reference_index(scope.grid, reference_directory, index)
+    build_reference_index(scope.grid, references.layer_rows(), index)
     bindings = [
         dict(code=e, entity_id=e, physical_class="land") for e, _, _ in references.pairs
     ]

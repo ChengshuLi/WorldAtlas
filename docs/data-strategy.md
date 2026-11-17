@@ -81,7 +81,7 @@ Non-river-water locations are named and selectable. Land-continent groups includ
 
 **Ocean assignments and connections.** Verify ocean labels and check which cells connect by shared edges, across all oceans and within each one. Include connections where the map’s left and right edges meet. Explain any expected separations.
 
-**Enclosed water.** If a connected patch of water marked as ocean is surrounded by one continent, assign it to that continent. If the patch borders several continents and it is unclear which one it belongs to, review it before assigning it.
+**Remaining water.** After coastal, named-basin and ocean assignments, assign any remaining water to the continent with the nearest physical shore, including island shores. Review unexpected assignments against the source geography.
 
 #### Editable records and published grid
 
@@ -91,7 +91,7 @@ Store one canonical logical grid. Use a compact lossless encoding such as row ru
 
 ### Research, cell review, publication, and rivers
 
-Generate candidate cell assignments from polygons and research inputs. For each proposal, record the geographic unit being divided, such as the province when proposing its locations. Store each proposal in Neon with its sources, reasoning, review status, and starting revision. Use the same approach at every level of the hierarchy. Keep incomplete or invalid drafts when they can be corrected. Check IDs, hierarchy, and whether the source geometry can be used. Each cell in the approved parent area must belong to exactly one child area, and every child cell must be inside the parent. Investigate source-polygon gaps and overlaps. Check conflicts against the affected records and relevant parent boundaries. Separate areas can proceed in parallel, and work can continue in one area while the same level is still being completed elsewhere.
+Generate candidate cell assignments from polygons and research inputs. For each proposal, record the geographic unit being divided, such as the province when proposing its locations. Store its editable definitions, sources and reasoning in Neon; freeze the exact inputs with each candidate build for review. Use the same approach at every level of the hierarchy. Keep incomplete or invalid work when it can be corrected. Check IDs, hierarchy, and whether the source geometry can be used. Each cell in the approved parent area must belong to exactly one child area, and every child cell must be inside the parent. Investigate source-polygon gaps and overlaps. Check conflicts against the affected records and relevant parent boundaries. Separate areas can proceed in parallel, and work can continue in one area while the same level is still being completed elsewhere.
 
 Each geography-research scope has one accountable owner from research through validation and delivery; separate areas can proceed concurrently.
 

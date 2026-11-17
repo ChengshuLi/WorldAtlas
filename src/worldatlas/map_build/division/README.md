@@ -32,7 +32,8 @@ spatial certificates; unresolved certificates perform complete searches.
 Source polygons are prepared once for repeated raster windows. Scope bounds skip
 empty rows while retaining the full extent of majority-selected components.
 Component intervals and owner lookups use arrays directly rather than repeatedly
-expanding them into individual Python records.
+expanding them into individual Python records. Reference intervals feed the
+distance index directly, without writing and rereading a temporary map stream.
 Strictly smaller computed distances win, including tiny differences. Exact
 equality uses the category binding order. A coastal cutoff includes its exact
 threshold. Conservative search margins never change those decisions.
