@@ -110,7 +110,10 @@ def execute_rule(context, rule, snapshot_directory, directory):
             result = divide_area(
                 scope, rule["features"]["input_geometry"], rule["targets"], directory
             )
-        elif operation != "nearest_land" and not scope.has_output():
+        elif (
+            operation not in ("nearest_land", "nearest_basin_water")
+            and not scope.has_output()
+        ):
             result = write_layer(directory, context.grid, ())
         else:
             result = {

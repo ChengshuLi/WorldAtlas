@@ -60,6 +60,14 @@ def layer_rows(path, grid, codes):
     ):
         raise ValueError("assignment layer uses a different grid")
     streams = [tile_rows(path, tile, grid, codes) for tile in manifest["tiles"]]
+    yield from merge_rows(streams)
+
+
+def merge_rows(streams):
+    """Merge disjoint row streams, including the two sides of a wrapped window."""
+    if len(streams) == 1:
+        yield from streams[0]
+        return
     merged = heapq.merge(*streams, key=lambda item: item[0])
     for y, records in itertools.groupby(merged, key=lambda item: item[0]):
         spans = sorted(span for _, values in records for span in values)

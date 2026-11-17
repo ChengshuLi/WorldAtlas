@@ -84,7 +84,7 @@ class Scope:
             else None
         )
         self.batch = None
-        self.area_buffer = None
+        self.eligible_area = None
         self.rasterizer = None
         self.populations = {}
         positions = np.flatnonzero(parent[1][1::2])
@@ -167,19 +167,35 @@ class Scope:
         x0, x1, y0, y1 = self.bounds
         if not y0 <= y < y1:
             return complete_row(self.grid.width, ())
-        if self.area_buffer is not None:
-            values = self.area_buffer[y - y0]
-        else:
-            first = y0 + (y - y0) // 64 * 64
-            last = min(first + 64, y1)
-            if self.batch is None or self.batch[0] != first:
-                if self.rasterizer is None:
-                    self.rasterizer = PolygonRasterizer(self.geometry, self.grid)
-                self.batch = (
-                    first,
-                    self.rasterizer.rasterize((x0, x1, first, last))[1],
-                )
-            values = self.batch[1][y - first]
+        first = y0 + (y - y0) // 64 * 64
+        last = min(first + 64, y1)
+        if self.batch is None or self.batch[0] != first:
+            if self.rasterizer is None:
+                self.rasterizer = PolygonRasterizer(self.geometry, self.grid)
+            self.batch = (
+                first,
+                self.rasterizer.rasterize((x0, x1, first, last))[1],
+            )
+        return self.mask_row(self.batch[1][y - first])
+
+    def set_eligible_area(self, values, bounds):
+        """Reuse a complete area already clipped to physical class and parent.
+
+        This is an output-query representation, not geometric construction
+        context. Ownership filtering and connectivity remain separate.
+        """
+        if (
+            self.rule["unit"] != "cell"
+            or self.rule["features"].get("scope_component")
+            or tuple(bounds) != self.bounds
+            or values.dtype != np.bool_
+            or values.shape != (bounds[3] - bounds[2], bounds[1] - bounds[0])
+        ):
+            raise ValueError("prepared area does not represent this cell scope")
+        self.eligible_area = values
+
+    def mask_row(self, values):
+        x0, x1 = self.bounds[:2]
         records = []
         for a, b in ((x0, min(x1, self.grid.width)), (0, max(0, x1 - self.grid.width))):
             if a == b:
@@ -249,12 +265,26 @@ class Scope:
 
     def query_row(self, y):
         chosen = (
-            self.context_row(y)
-            if self.rule["unit"] == "cell" or not self.restricted
-            else self.component_row(y, self.eligible_components())
+            self.mask_row(self.eligible_area[y - self.bounds[2]])
+            if self.eligible_area is not None
+            else (
+                self.context_row(y)
+                if self.rule["unit"] == "cell" or not self.restricted
+                else self.component_row(y, self.eligible_components())
+            )
         )
         references = self.rule["features"].get("connected_to")
         if not references:
+            if self.eligible_area is not None:
+                if not self.rule["unassigned_only"]:
+                    return chosen
+                a, b, (mask, owners) = overlay(
+                    chosen, row(self.snapshot, y, self.grid.width)
+                )
+                return complete_row(
+                    self.grid.width,
+                    np.column_stack((a, b, (mask != 0) & (owners == 0))),
+                )
             result = prepare(
                 row(self.physical, y, self.grid.width),
                 row(self.parent, y, self.grid.width),
@@ -308,6 +338,57 @@ class Scope:
         )
         a, b, (chosen, within) = overlay(eligible, connected)
         return complete_row(self.grid.width, np.column_stack((a, b, chosen & within)))
+
+    def query_windows(self, rows_per_batch=64):
+        """Yield row batches and disjoint dense windows without needless recoding."""
+        rows = self.query_rows()
+        for first in range(rows.start, rows.stop, rows_per_batch):
+            last = min(first + rows_per_batch, rows.stop)
+            if self.eligible_area is not None and not self.rule["features"].get(
+                "connected_to"
+            ):
+                x0, x1, y0, _ = self.bounds
+                windows = []
+                for left, right in (
+                    (x0, min(x1, self.grid.width)),
+                    (0, max(0, x1 - self.grid.width)),
+                ):
+                    if left == right:
+                        continue
+                    offset = (left - x0) % self.grid.width
+                    mask = self.eligible_area[
+                        first - y0 : last - y0, offset : offset + right - left
+                    ]
+                    if self.rule["unassigned_only"]:
+                        from worldatlas.map_build.water.shared_nearest import crop
+
+                        owners = np.stack(
+                            [
+                                crop(*self.snapshot, y, left, right, self.grid.width)
+                                for y in range(first, last)
+                            ]
+                        )
+                        mask = mask & (owners == 0)
+                    if mask.any():
+                        windows.append((left, right, mask))
+                if windows:
+                    yield first, last, windows
+                continue
+            queries = [self.query_row(y) for y in range(first, last)]
+            active = [
+                (np.r_[0, ends[:-1]][values != 0], ends[values != 0])
+                for ends, values in queries
+            ]
+            if not any(len(a) for a, _ in active):
+                continue
+            left = min(int(a[0]) for a, _ in active if len(a))
+            right = max(int(b[-1]) for a, b in active if len(a))
+            masks = []
+            for ends, values in queries:
+                cuts = np.r_[left, ends[(ends > left) & (ends < right)], right]
+                chosen = values[np.searchsorted(ends, cuts[:-1], side="right")]
+                masks.append(np.repeat(chosen != 0, np.diff(cuts)))
+            yield first, last, [(left, right, np.asarray(masks, dtype=bool))]
 
     def has_output(self):
         return any(np.any(self.query_row(y)[1]) for y in self.query_rows())

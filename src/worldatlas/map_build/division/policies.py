@@ -34,7 +34,9 @@ def nearest_basin_water(context, scope, directory):
     feature = scope.rule["features"]["scope_area"][0]
     bounds, mask = rasterize(feature["geometry"], scope.grid)
     water = physical_water(mask, bounds, context.parent_physical, scope.grid)
-    scope.area_buffer = water
+    scope.set_eligible_area(water, bounds)
+    if not scope.has_output():
+        return write_layer(directory, scope.grid, ())
     shores = context.water_shores()
     counts = participants(
         water,

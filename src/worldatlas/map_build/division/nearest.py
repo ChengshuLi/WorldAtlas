@@ -4,7 +4,8 @@ from pathlib import Path
 
 import numpy as np
 
-from worldatlas.map_build.core.layers import patch_rows, write_layer
+from worldatlas.map_build.core.layers import merge_rows, patch_rows, write_layer
+from worldatlas.map_build.division.areas import assign_area
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.scope import complete_row, selected
 from worldatlas.map_build.land.assignments import assign_components, read_assignments
@@ -103,6 +104,11 @@ def nearest(
     grid = scope.grid
     pairs = reference_cells.pairs
     reused = 0
+    if len(pairs) == 1 and distance_limit is None:
+        result = assign_area(scope, pairs[0][0], directory)
+        if superset_winners is not None:
+            result["reused_superset_winner_cells"] = 0
+        return result
 
     def points(lat, lon):
         codes, stats = shared_nearest.classify_wgs84(
@@ -120,36 +126,11 @@ def nearest(
 
     def rows():
         nonlocal reused
-        # Skip rows excluded by source geometry. Crop query buffers to actual
-        # eligible intervals; references still cover their complete shore sets.
-        query_rows = scope.query_rows()
-        y0, y1 = query_rows.start, query_rows.stop
-        for first in range(y0, y1, 64):
-            last = min(first + 64, y1)
-            queries = []
-            left = grid.width
-            right = 0
-            for y in range(first, last):
-                ends, values = scope.query_row(y)
-                queries.append((ends, values))
-                starts = np.r_[0, ends[:-1]]
-                active = np.flatnonzero(values != 0)
-                if len(active):
-                    left = min(left, int(starts[active[0]]))
-                    right = max(right, int(ends[active[-1]]))
-            if left >= right:
-                continue
-            masks = []
-            for ends, values in queries:
-                cuts = np.r_[left, ends[(ends > left) & (ends < right)], right]
-                chosen = values[np.searchsorted(ends, cuts[:-1], side="right")]
-                masks.append(np.repeat(chosen != 0, np.diff(cuts)))
-            mask = np.asarray(masks, dtype=bool)
-            if not pairs:
-                raise ValueError("selected cells have no eligible reference shores")
-            if len(pairs) == 1 and distance_limit is None:
-                values = np.where(mask, pairs[0][0], 0).astype(np.uint32)
-            else:
+        for first, last, windows in scope.query_windows():
+            streams = []
+            for left, right, mask in windows:
+                if not pairs:
+                    raise ValueError("selected cells have no eligible reference shores")
                 known = None
                 if superset_winners is not None:
                     if distance_limit is not None:
@@ -169,22 +150,26 @@ def nearest(
                     )
                     reused += int(np.count_nonzero(known))
                 pending = mask if known is None else mask & (known == 0)
-                values, _ = classify(
-                    pending,
-                    left,
-                    first,
-                    grid.bounds,
-                    grid.width,
-                    grid.height,
-                    grid.step,
-                    pairs,
-                    reference_cells.indexes,
-                    points,
-                    band=distance_limit,
-                )
-                if known is not None:
-                    values = np.where(known != 0, known, values)
-            yield from patch_rows(values, (left, right, first, last), grid)
+                if pending.any():
+                    values, _ = classify(
+                        pending,
+                        left,
+                        first,
+                        grid.bounds,
+                        grid.width,
+                        grid.height,
+                        grid.step,
+                        pairs,
+                        reference_cells.indexes,
+                        points,
+                        band=distance_limit,
+                    )
+                    if known is not None:
+                        values = np.where(known != 0, known, values)
+                else:
+                    values = known
+                streams.append(patch_rows(values, (left, right, first, last), grid))
+            yield from merge_rows(streams)
 
     result = write_layer(directory, grid, rows())
     if superset_winners is not None:
