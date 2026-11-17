@@ -186,7 +186,7 @@ def build_bundle(candidate, run, viewer, bundle):
         entry["count"] += counts.get(str(category["id"]), 0)
         if category["physical_class"] == "land":
             entry["color"] = category["rgb"]
-    legend_path = bundle / "legend" / "continents.json"
+    legend_path = bundle / "legend" / "entities.json"
     legend_path.parent.mkdir(exist_ok=True)
     legend_path.write_bytes(json_bytes(list(legend.values())))
     viewer_config.update(
@@ -196,7 +196,7 @@ def build_bundle(candidate, run, viewer, bundle):
         map_version=version(candidate),
         local_grid=grid_config,
         combined_sha256=combined.hexdigest(),
-        legend="legend/continents.json",
+        legend="legend/entities.json",
         categories=[
             {key: category[key] for key in ("id", "entity_id", "physical_class")}
             for category in categories

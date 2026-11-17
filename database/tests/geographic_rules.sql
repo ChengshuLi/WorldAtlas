@@ -20,6 +20,8 @@ INSERT INTO atlas.geographic_rules VALUES
 INSERT INTO atlas.geographic_rule_features VALUES
  ('divide','line','input_geometry'),('divide','point','scope_component'),
  ('group','area','scope_area'),('remaining','point','distance_reference'),('basin','area','scope_area');
+INSERT INTO atlas.geographic_rule_features VALUES
+ ('group','area','connected_to'),('water','point','connected_to');
 INSERT INTO atlas.geographic_rule_targets VALUES ('divide-asia','divide',2,'point'),('group-asia','group',2,NULL);
 INSERT INTO atlas.geographic_rule_sources VALUES ('group','raw','Section 1','Geographic affiliation');
 SET CONSTRAINTS ALL IMMEDIATE;
@@ -34,6 +36,13 @@ INSERT INTO atlas.geographic_rule_targets VALUES ('water-target','mixed-filter',
 SET CONSTRAINTS ALL IMMEDIATE;
 SET CONSTRAINTS ALL DEFERRED;
 DO $$ BEGIN
+ BEGIN
+  INSERT INTO atlas.geographic_rule_features VALUES ('water','line','connected_to');
+  SET CONSTRAINTS ALL IMMEDIATE;
+  RAISE EXCEPTION 'a line was accepted as a connectivity reference';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM NOT LIKE 'invalid feature geometry%' THEN RAISE; END IF;
+ END;
  BEGIN
   DELETE FROM atlas.geographic_rule_features WHERE rule_id='divide' AND role='input_geometry';
   SET CONSTRAINTS ALL IMMEDIATE;

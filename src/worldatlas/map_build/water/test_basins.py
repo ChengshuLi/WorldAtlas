@@ -26,7 +26,15 @@ class BasinTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         self.path = Path(temp.name)
 
-    def calculate(self, *, bounds=(11, 16, 7, 11), snapshot=None, remaining=False):
+    def calculate(
+        self,
+        *,
+        bounds=(11, 16, 7, 11),
+        snapshot=None,
+        remaining=False,
+        eligible=None,
+        superset=None,
+    ):
         p, l = rle(self.physical), rle(self.land)
         parent = rle(np.ones_like(self.physical))
         x0, x1, y0, y1 = bounds
@@ -60,11 +68,15 @@ class BasinTests(unittest.TestCase):
             rle(self.land if snapshot is None else snapshot),
             lambda kind: None,
         )
-        shores = ShoreGeometry(p, self.grid).attach(l, [81, 42])
+        shores = ShoreGeometry(p, self.grid).attach(
+            l, [81, 42], reference_owners=eligible
+        )
         context = SimpleNamespace(
             grid=self.grid,
             parent_physical=p,
             land_ownership=l,
+            shore_order=[81, 42],
+            coastal_winners=None if superset is None else rle(superset),
             water_shores=lambda: shores,
         )
         directory = self.path / str(len(list(self.path.iterdir())))
@@ -98,9 +110,51 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(result["participant_shore_edges"], {81: 8})
         self.assertTrue(np.all(values[7:11, 11:16] == 81))
 
+    def test_land_only_child_is_not_a_water_assignment_candidate(self):
+        result, values = self.calculate(eligible={81})
+        self.assertEqual(result["participant_shore_edges"], {81: 4})
+        self.assertTrue(np.all(values[7:11, 11:16] == 81))
+
     def test_no_participant_with_eligible_water_is_an_error(self):
         with self.assertRaisesRegex(ValueError, "no eligible reference shores"):
             self.calculate(bounds=(12, 15, 7, 11))
+
+    def test_reusing_retained_superset_winners_keeps_the_complete_basin_claim(self):
+        _, expected = self.calculate()
+        known = np.zeros_like(self.land)
+        known[7:11, 11] = 81
+        known[7:11, 15] = 42
+        result, actual = self.calculate(superset=known)
+        np.testing.assert_array_equal(actual, expected)
+        self.assertEqual(result["reused_superset_winner_cells"], 8)
+        self.assertEqual(sum(result["counts"].values()), 20)
+        snapshot = self.land.copy()
+        snapshot[7:11, [11, 15]] = 99
+        result, actual = self.calculate(
+            superset=known, snapshot=snapshot, remaining=True
+        )
+        self.assertEqual(result["reused_superset_winner_cells"], 0)
+        self.assertFalse(actual[7:11, [11, 15]].any())
+
+    def test_a_superset_winner_outside_the_participant_set_is_recomputed(self):
+        _, expected = self.calculate()
+        known = np.zeros_like(self.land)
+        known[7:11, 11:16] = 99
+        result, actual = self.calculate(superset=known)
+        self.assertEqual(result["reused_superset_winner_cells"], 0)
+        np.testing.assert_array_equal(actual, expected)
+        from worldatlas.map_build.division.intervals import Eligibility, combine
+
+        with self.assertRaisesRegex(ValueError, "ownership conflict"):
+            combine(
+                (np.array([1]), np.array([1])),
+                (np.array([1]), np.array([1])),
+                (np.array([1]), np.array([0])),
+                [(np.array([1]), np.array([99])), (np.array([1]), np.array([81]))],
+                y=0,
+                rules=["coastal", "basin"],
+                allowed=Eligibility({99: "mixed", 81: "mixed"}),
+            )
 
     def test_assignment_matches_complete_independent_distances(self):
         from pyproj import Geod

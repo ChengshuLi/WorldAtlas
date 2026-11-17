@@ -81,7 +81,7 @@ Non-river-water locations are named and selectable. Land-continent groups includ
 
 **Ocean assignments and connections.** Verify ocean labels and check which cells connect by shared edges, across all oceans and within each one. Include connections where the map’s left and right edges meet. Explain any expected separations.
 
-**Remaining water.** After coastal, named-basin and ocean assignments, assign any remaining water to the continent with the nearest physical shore, including island shores. Review unexpected assignments against the source geography.
+**Remaining water.** After coastal and named-basin assignments, use ocean reference points derived from source polygons to identify the connected open-water areas. Apply ocean ownership within those areas. Assign the remaining pockets to the continent with the nearest physical shore, including island shores. Review unexpected assignments against the source geography.
 
 #### Editable records and published grid
 

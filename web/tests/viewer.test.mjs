@@ -116,7 +116,7 @@ async function fixture() {
     width: 131072,
     height: 54614,
     step: 360 / 131072,
-    legend: "legend/continents.json",
+    legend: "legend/entities.json",
     categories: fixtureCategories.map(({ id, entity_id, physical_class }) => ({
       id,
       entity_id,
@@ -141,7 +141,7 @@ async function fixture() {
   const fetch = async (url) =>
     new Response(
       JSON.stringify(
-        String(url).endsWith("legend/continents.json") ? entries : meta,
+        String(url).endsWith("legend/entities.json") ? entries : meta,
       ),
     );
   const createRenderer = () => ({

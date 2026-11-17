@@ -10,7 +10,7 @@ import numpy as np
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.contracts import compile_rules
-from worldatlas.map_build.division.engine import ParentDivision
+from worldatlas.map_build.division.engine import ParentDivision, land_groups
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.shores import ShoreGeometry
 from worldatlas.map_build.execution.runtime import json_bytes, pin, verify_pins, write
@@ -47,9 +47,13 @@ def selected_parents(geography, requested):
     return sorted(selected, key=lambda ident: (depth(ident), ident))
 
 
-def definition(geography, parent, grid, physical, membership, configuration):
+def definition(
+    geography, parent, grid, physical, membership, configuration, *, land_only=False
+):
     """Only operative inputs determine reuse; notes, colors and sibling edits do not."""
     children, rules = compile_rules(geography, parent)
+    if land_only:
+        rules = [rule for _, group in land_groups(rules) for rule in group]
     operative = []
     for rule in rules:
         operative.append(
@@ -237,6 +241,17 @@ class HierarchyDivision:
                 output = Path(saved["directory"])
                 receipt = dict(saved, reused=True)
             else:
+                land_settings = definition(
+                    self.geography,
+                    parent,
+                    self.grid,
+                    self.physical,
+                    parent_directory,
+                    self.configuration,
+                    land_only=True,
+                )
+                land_identity = hashlib.sha256(json_bytes(land_settings)).hexdigest()
+                prior_land = saved.get("land") if saved else None
                 context = ParentDivision(
                     self.geography,
                     parent,
@@ -251,7 +266,21 @@ class HierarchyDivision:
                     shore_provider=self.shores,
                 )
                 try:
-                    context.land()
+                    if prior_land and prior_land["definition_sha256"] == land_identity:
+                        verify_pins(prior_land["outputs"])
+                        land = context.use_land(prior_land["directory"])
+                        land_receipt = dict(prior_land, reused=True)
+                    else:
+                        land = context.land()
+                        land_receipt = dict(
+                            directory=str(land),
+                            definition_sha256=land_identity,
+                            outputs=[
+                                pin(Path(land) / name)
+                                for name in ("rows.u32le", "runs.u32le", "report.json")
+                            ],
+                            reused=False,
+                        )
                     output = context.water()
                 finally:
                     context.close()
@@ -259,6 +288,7 @@ class HierarchyDivision:
                     directory=str(output),
                     definition_sha256=identity,
                     reused=False,
+                    land=land_receipt,
                     outputs=[
                         pin(output / name)
                         for name in ("rows.u32le", "runs.u32le", "report.json")

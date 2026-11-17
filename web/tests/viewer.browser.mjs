@@ -55,7 +55,7 @@ function bundle(prefix, version, east) {
     height: mapHeight,
     step: 360 / mapWidth,
     map_version: version,
-    legend: "legend/continents.json",
+    legend: "legend/entities.json",
     categories: [
       { id: 1, entity_id: 1, physical_class: "water" },
       { id: 2, entity_id: 2, physical_class: "water" },
@@ -73,7 +73,7 @@ function bundle(prefix, version, east) {
     combined_sha256: sha256(Buffer.concat([rows, runs])),
   });
   store(
-    `${prefix}/legend/continents.json`,
+    `${prefix}/legend/entities.json`,
     JSON.stringify([
       {
         id: 1,
@@ -152,7 +152,7 @@ before(async () => {
     bundle(missingLegend, "v9.3", 18),
     "text/html",
   );
-  objects.delete(`${missingLegend}/legend/continents.json`);
+  objects.delete(`${missingLegend}/legend/entities.json`);
 
   const sparse = "releases/v9.4-rc.1";
   bundle(sparse, "v9.4", 18);
@@ -170,7 +170,7 @@ before(async () => {
   );
   const config = JSON.parse(objects.get(`${sparse}/config.json`).body);
   const legend = JSON.parse(
-    objects.get(`${sparse}/legend/continents.json`).body,
+    objects.get(`${sparse}/legend/entities.json`).body,
   );
   for (const category of config.categories)
     category.id = remap.get(category.id);
@@ -192,7 +192,7 @@ before(async () => {
   config.combined_sha256 = sha256(Buffer.concat([rows, runs]));
   store(`${sparse}/config.json`, JSON.stringify(config), "application/json");
   store(
-    `${sparse}/legend/continents.json`,
+    `${sparse}/legend/entities.json`,
     JSON.stringify(legend),
     "application/json",
   );

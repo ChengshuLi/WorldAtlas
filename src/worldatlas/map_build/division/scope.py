@@ -10,6 +10,7 @@ from worldatlas.map_build.core.geometry import PolygonRasterizer
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.division.intervals import overlay, prepare
+from worldatlas.map_build.division.connectivity import reference_points
 
 
 def selected(values, identifiers):
@@ -60,10 +61,16 @@ class Scope:
     limits. Reference sets and component populations never use the ownership mask.
     """
 
-    def __init__(self, rule, grid, physical, parent, snapshot, components):
+    def __init__(
+        self, rule, grid, physical, parent, snapshot, components, *, connectivity=None
+    ):
         self.rule, self.grid = rule, grid
         self.physical, self.parent, self.snapshot = physical, parent, snapshot
         self.components = components
+        self.connectivity = connectivity
+        self.connectivity_domain = None
+        self.connected = None
+        self.connectivity_receipt = []
         self.points = {"land": set(), "water": set()}
         inputs = rule["features"]
         self.restricted = bool(
@@ -246,15 +253,61 @@ class Scope:
             if self.rule["unit"] == "cell" or not self.restricted
             else self.component_row(y, self.eligible_components())
         )
-        result = prepare(
-            row(self.physical, y, self.grid.width),
-            row(self.parent, y, self.grid.width),
-            chosen,
-            row(self.snapshot, y, self.grid.width),
-            physical_class=self.rule["physical_class"],
-            unassigned_only=self.rule["unassigned_only"],
+        references = self.rule["features"].get("connected_to")
+        if not references:
+            result = prepare(
+                row(self.physical, y, self.grid.width),
+                row(self.parent, y, self.grid.width),
+                chosen,
+                row(self.snapshot, y, self.grid.width),
+                physical_class=self.rule["physical_class"],
+                unassigned_only=self.rule["unassigned_only"],
+            )
+            return complete_row(self.grid.width, result)
+        if self.connectivity_domain is None:
+            if self.connectivity is None:
+                raise ValueError("connected_to requires eligible parent connectivity")
+            self.connectivity_domain = self.connectivity(
+                self.rule["physical_class"], self.rule["unassigned_only"]
+            )
+        data = self.connectivity_domain
+        # The shared domain already applies parent, physical and ownership
+        # eligibility. Intersect with geometry without filtering ownership again.
+        a, b, (selected_scope, domain) = overlay(
+            chosen, row(data.physical, y, self.grid.width)
         )
-        return complete_row(self.grid.width, result)
+        eligible = complete_row(
+            self.grid.width, np.column_stack((a, b, selected_scope & domain))
+        )
+        if not np.any(eligible[1]):
+            return eligible
+        if self.connected is None:
+            roots = set()
+            for lon, lat in reference_points(references):
+                root = data.component_at(lon, lat)
+                if root is None:
+                    raise ValueError(
+                        f"rule {self.rule['id']}: connectivity reference {lon},{lat} is not eligible parent territory"
+                    )
+                roots.add(root)
+                self.connectivity_receipt.append(
+                    dict(
+                        longitude=lon,
+                        latitude=lat,
+                        component=root,
+                        component_cells=data.totals()[root],
+                    )
+                )
+            self.connected = data, np.asarray(sorted(roots), dtype=np.uint32)
+        data, roots = self.connected
+        parts = data.row(y)
+        parts = parts[selected(parts[:, 2], roots)]
+        connected = complete_row(
+            self.grid.width,
+            np.column_stack((parts[:, :2], np.ones(len(parts), dtype=np.uint32))),
+        )
+        a, b, (chosen, within) = overlay(eligible, connected)
+        return complete_row(self.grid.width, np.column_stack((a, b, chosen & within)))
 
     def has_output(self):
         return any(np.any(self.query_row(y)[1]) for y in self.query_rows())

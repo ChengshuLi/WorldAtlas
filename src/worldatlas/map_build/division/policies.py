@@ -42,10 +42,21 @@ def nearest_basin_water(context, scope, directory):
         context.parent_physical,
         context.land_ownership,
         scope.grid,
-        shores.pairs,
+        [
+            (e, e, e)
+            for e in getattr(context, "shore_order", [p[0] for p in shores.pairs])
+        ],
     )
+    eligible = {p[0] for p in shores.pairs}
+    counts = {owner: n for owner, n in counts.items() if owner in eligible}
     references = shores.filtered(set(counts))
-    result = nearest(scope, references, "cell", directory=directory)
+    result = nearest(
+        scope,
+        references,
+        "cell",
+        directory=directory,
+        superset_winners=getattr(context, "coastal_winners", None),
+    )
     result["participant_shore_edges"] = counts
     result["physical_water_cells"] = int(water.sum())
     return result

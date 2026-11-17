@@ -15,7 +15,7 @@ CREATE TABLE atlas.geographic_rules (
 CREATE TABLE atlas.geographic_rule_features (
     rule_id text NOT NULL REFERENCES atlas.geographic_rules(id) ON DELETE CASCADE,
     feature_id text NOT NULL REFERENCES atlas.source_features(id),
-    role text NOT NULL CHECK (role IN ('input_geometry','scope_area','scope_component','distance_reference')),
+    role text NOT NULL CHECK (role IN ('input_geometry','scope_area','scope_component','distance_reference','connected_to')),
     PRIMARY KEY (rule_id, feature_id, role)
 );
 CREATE TABLE atlas.geographic_rule_targets (
@@ -44,6 +44,7 @@ BEGIN
     WHERE l.rule_id=r.id AND NOT CASE l.role
       WHEN 'input_geometry' THEN f.geometry->>'type' IN ('LineString','MultiLineString')
       WHEN 'scope_area' THEN f.geometry->>'type' IN ('Polygon','MultiPolygon')
+      WHEN 'connected_to' THEN f.geometry->>'type' IN ('Point','Polygon','MultiPolygon')
       ELSE f.geometry->>'type'='Point' END
   ) THEN RAISE EXCEPTION 'invalid feature geometry for rule %', r.id; END IF;
   SELECT count(*) FILTER (WHERE role='input_geometry'), count(*) FILTER (WHERE role='scope_area'),

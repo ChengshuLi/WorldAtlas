@@ -153,7 +153,7 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(config["map_version"], "v9.0")
         self.assertEqual(config["water_rgb"], [84, 141, 183])
         self.assertNotIn("counts", config)
-        self.assertEqual(config["legend"], "legend/continents.json")
+        self.assertEqual(config["legend"], "legend/entities.json")
         self.assertEqual(
             config["categories"],
             [

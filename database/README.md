@@ -36,7 +36,9 @@ families do not require a database-wide entity lock.
 
 `geographic_rules` selects one of six operations. `geographic_rule_features`
 provides source areas, component-identifying points, boundaries or distance
-references. `geographic_rule_targets` identifies direct-child owners and, for
+references. Optional `connected_to` links restrict eligible query connectivity
+using direct points or an interior point derived from combined polygon features.
+`geographic_rule_targets` identifies direct-child owners and, for
 divisions, their label points. `geographic_rule_sources` retains the supporting
 geographic rationale and citations. Ordinary foreign keys and deferred checks
 reject missing/forbidden roles, incorrect geometry types and invalid targets.

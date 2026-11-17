@@ -34,6 +34,18 @@ empty rows while retaining the full extent of majority-selected components.
 Component intervals and owner lookups use arrays directly rather than repeatedly
 expanding them into individual Python records. Reference intervals feed the
 distance index directly, without writing and rereading a temporary map stream.
+
+An optional `connected_to` feature link filters query cells by eligible parent
+connectivity. Point features supply reference locations directly; linked polygons
+are combined to derive one interior point. Components are built over the parent,
+physical class and ownership snapshot before area selectors narrow the query.
+The same snapshot's component index is shared across rules. Invalid references
+stop the calculation; an empty eligible query needs no reference.
+
+The four World ocean rules use this filter to retain open-water components.
+Their S-130 polygons determine ocean ownership within those components. Remaining
+pockets reach the final `nearest_water` rule. No separate ocean-seed records,
+location-specific exceptions or new assignment method are involved.
 Strictly smaller computed distances win, including tiny differences. Exact
 equality uses the category binding order. A coastal cutoff includes its exact
 threshold. Conservative search margins never change those decisions.
@@ -52,3 +64,10 @@ threshold. Conservative search margins never change those decisions.
 Keep geographic choices in Neon and algorithms here. Generality and efficiency
 are equally required: reuse immutable geometry/indexes and vectorized intervals,
 measure substantial costs, and retain complete input coverage.
+
+Coastal winners can certify basin cells when the winner remains in the basin's
+reference set. Basins still emit complete claims against the original snapshot;
+excluded winners are recomputed and disagreement still fails consolidation. This
+is computation reuse, not coastal priority. Land-stage receipts separately pin
+their actual definitions and outputs, so water-only edits can reuse verified land
+without reusing an outdated final parent division.

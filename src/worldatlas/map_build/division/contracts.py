@@ -17,6 +17,7 @@ ROLE_TYPES = {
     "scope_area": frozenset(("Polygon", "MultiPolygon")),
     "scope_component": frozenset(("Point",)),
     "distance_reference": frozenset(("Point",)),
+    "connected_to": frozenset(("Point", "Polygon", "MultiPolygon")),
 }
 
 

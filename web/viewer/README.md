@@ -13,7 +13,7 @@ the release's `sources.html`, including OpenStreetMap and IHO attributions.
 Use the [release workflow](../../src/worldatlas/map_releases/README.md)
 to package the browser modules with a completed build. The candidate bundle
 contains the viewer’s release-specific configuration and base URL.
-Staging generates `legend/continents.json` with one entry per entity containing
+Staging generates `legend/entities.json` with one entry per entity containing
 its ID, name, color, and cell count. Names come from the build's selected Neon
 snapshot and land colors come from the stable entity records in Neon. Counts
 come from the completed grid report, adding land and water for each continent.

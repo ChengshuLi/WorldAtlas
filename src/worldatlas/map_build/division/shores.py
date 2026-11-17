@@ -76,7 +76,15 @@ class ShoreGeometry:
             physical, physical, grid.width, grid.height, land_codes=[17]
         )
 
-    def attach(self, ownership, order, *, components=None, reference_components=None):
+    def attach(
+        self,
+        ownership,
+        order,
+        *,
+        components=None,
+        reference_components=None,
+        reference_owners=None,
+    ):
         """Overlay child ownership; optionally select physical reference components.
 
         Geometry remains fixed. Reattaching island labels never scans neighbours
@@ -91,6 +99,11 @@ class ShoreGeometry:
         roots = (
             np.asarray(sorted(reference_components), dtype=np.uint32)
             if reference_components is not None
+            else None
+        )
+        eligible_owners = (
+            np.asarray(sorted(reference_owners), dtype=np.uint32)
+            if reference_owners is not None and set(order) - set(reference_owners)
             else None
         )
         for y in range(grid.height):
@@ -110,6 +123,8 @@ class ShoreGeometry:
             )
             a, b, (shore, owner) = overlay(geometry, row(ownership, y, grid.width))
             keep = (shore != 0) & (owner != 0)
+            if eligible_owners is not None:
+                keep &= np.isin(owner, eligible_owners)
             if roots is not None and keep.any():
                 if components is None:
                     raise ValueError(

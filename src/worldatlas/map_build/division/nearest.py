@@ -75,11 +75,26 @@ def component_queries(scope, references, directory):
     return result
 
 
-def nearest(scope, reference_cells, unit, distance_limit=None, *, directory):
-    """Assign the prepared query scope; never filter ownership a second time."""
+def nearest(
+    scope,
+    reference_cells,
+    unit,
+    distance_limit=None,
+    *,
+    directory,
+    superset_winners=None,
+):
+    """Assign prepared queries, optionally reusing winners from a reference superset.
+
+    The caller must establish identical shore geometry, distance and tie semantics.
+    A superset winner retained in these references is also their exact winner.
+    Zero/absent winners still require the complete calculation.
+    """
     if unit not in ("cell", "component"):
         raise ValueError("nearest requires a cell or component decision unit")
     if unit == "component":
+        if superset_winners is not None:
+            raise ValueError("cell winners cannot certify a component distance")
         if distance_limit is not None:
             raise ValueError(
                 "component nearest does not support a coastal distance limit"
@@ -87,6 +102,7 @@ def nearest(scope, reference_cells, unit, distance_limit=None, *, directory):
         return component_queries(scope, reference_cells, directory)
     grid = scope.grid
     pairs = reference_cells.pairs
+    reused = 0
 
     def points(lat, lon):
         codes, stats = shared_nearest.classify_wgs84(
@@ -103,6 +119,7 @@ def nearest(scope, reference_cells, unit, distance_limit=None, *, directory):
         return codes, stats["bounded"], stats["exact"]
 
     def rows():
+        nonlocal reused
         # Skip rows excluded by source geometry. Crop query buffers to actual
         # eligible intervals; references still cover their complete shore sets.
         query_rows = scope.query_rows()
@@ -133,8 +150,27 @@ def nearest(scope, reference_cells, unit, distance_limit=None, *, directory):
             if len(pairs) == 1 and distance_limit is None:
                 values = np.where(mask, pairs[0][0], 0).astype(np.uint32)
             else:
+                known = None
+                if superset_winners is not None:
+                    if distance_limit is not None:
+                        raise ValueError(
+                            "winner reuse without recorded distances needs an unrestricted query"
+                        )
+                    known = np.stack(
+                        [
+                            shared_nearest.crop(
+                                *superset_winners, y, left, right, grid.width
+                            )
+                            for y in range(first, last)
+                        ]
+                    )
+                    known = np.where(
+                        mask & np.isin(known, [p[0] for p in pairs]), known, 0
+                    )
+                    reused += int(np.count_nonzero(known))
+                pending = mask if known is None else mask & (known == 0)
                 values, _ = classify(
-                    mask,
+                    pending,
                     left,
                     first,
                     grid.bounds,
@@ -146,6 +182,11 @@ def nearest(scope, reference_cells, unit, distance_limit=None, *, directory):
                     points,
                     band=distance_limit,
                 )
+                if known is not None:
+                    values = np.where(known != 0, known, values)
             yield from patch_rows(values, (left, right, first, last), grid)
 
-    return write_layer(directory, grid, rows())
+    result = write_layer(directory, grid, rows())
+    if superset_winners is not None:
+        result["reused_superset_winner_cells"] = reused
+    return result

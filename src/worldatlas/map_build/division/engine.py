@@ -17,12 +17,30 @@ from worldatlas.map_build.division.areas import assign_area, divide_area
 from worldatlas.map_build.division.contracts import compile_rules
 from worldatlas.map_build.division.intervals import Eligibility, combine, overlay, spans
 from worldatlas.map_build.division.scope import Scope
+from worldatlas.map_build.division.connectivity import build_domain
 from worldatlas.map_build.division.shores import ShoreGeometry
 from worldatlas.map_build.division import policies
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import pin
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
+
+
+def land_groups(rules):
+    """Declare actual land-stage dependencies once for execution and reuse."""
+    area = lambda r: r["operation"] in ("assign_area", "divide_area")
+    return (
+        ("explicit", [r for r in rules if area(r) and not r["unassigned_only"]]),
+        (
+            "geographic-land-fill",
+            [
+                r
+                for r in rules
+                if area(r) and r["unassigned_only"] and r["physical_class"] != "water"
+            ],
+        ),
+        ("nearest-land", [r for r in rules if r["operation"] == "nearest_land"]),
+    )
 
 
 def merge_claims(
@@ -81,6 +99,9 @@ def execute_rule(context, rule, snapshot_directory, directory):
             context.parent,
             snapshot,
             context.components,
+            connectivity=lambda kind, unassigned: context.scope_components(
+                snapshot_directory, kind, unassigned
+            ),
         )
         operation = rule["operation"]
         if operation == "assign_area":
@@ -104,6 +125,11 @@ def execute_rule(context, rule, snapshot_directory, directory):
         operation=operation,
         processing_seconds=time.monotonic() - started,
         download_seconds=0.0,
+        **(
+            {"connectivity_references": scope.connectivity_receipt}
+            if scope.connectivity_receipt
+            else {}
+        ),
     )
 
 
@@ -139,8 +165,10 @@ class ParentDivision:
         self.resources = ExitStack()
         self.lock = threading.RLock()
         self.component_grids = {}
+        self.scope_component_grids = {}
         self._shores = None
         self._water_shores = None
+        self.coastal_winners = None
         self.shore_provider = shore_provider
         self.land_ownership = None
         self.land_directory = None
@@ -192,6 +220,7 @@ class ParentDivision:
                 open_grid(self.parent_physical_directory, grid)
             )
             empty = self.directory / "empty"
+            self.empty_directory = empty
             self.task(
                 "empty",
                 "land",
@@ -282,16 +311,62 @@ class ParentDivision:
                 )
             if self._water_shores is None:
                 self._water_shores = self.shore_geometry.attach(
-                    self.land_ownership, self.shore_order
+                    self.land_ownership,
+                    self.shore_order,
+                    reference_owners={
+                        e
+                        for e, child in self.children.items()
+                        if child["physical_class"] != "land"
+                    },
                 )
             return self._water_shores
 
-    def group(self, name, rules, stage):
-        if not rules:
-            return
-        snapshot = self.current
+    def scope_components(self, snapshot_directory, physical_class, unassigned_only):
+        """Share immutable domain connectivity across all rules using a snapshot."""
+        key = (str(snapshot_directory), physical_class, unassigned_only)
+        with self.lock:
+            if key not in self.scope_component_grids:
+                name = "connectivity-" + hashlib.sha256(repr(key).encode()).hexdigest()
+                directory = self.directory / name
+                with open_grid(snapshot_directory, self.grid) as snapshot:
+                    self.task(
+                        name,
+                        physical_class,
+                        build_domain,
+                        (
+                            self.grid,
+                            self.physical,
+                            self.parent,
+                            snapshot,
+                            physical_class,
+                            unassigned_only,
+                            directory,
+                        ),
+                        [directory],
+                        inputs=self.input_pins
+                        + self.pins(snapshot_directory)
+                        + self.pins(self.parent_directory)
+                        + self.pins(self.physical_directory),
+                    )
+                data = self.resources.enter_context(
+                    ComponentGrid(
+                        directory / "domain",
+                        directory / "components",
+                        self.grid,
+                        physical_code=1,
+                    )
+                )
+                data.totals()
+                self.scope_component_grids[key] = data
+            return self.scope_component_grids[key]
+
+    def calculate(self, rules, snapshot, stage, *, extra_inputs=()):
+        """Calculate independent claims against one immutable ownership snapshot."""
         inputs = (
-            self.input_pins + self.pins(snapshot) + self.pins(self.parent_directory)
+            self.input_pins
+            + self.pins(snapshot)
+            + self.pins(self.parent_directory)
+            + list(extra_inputs)
         )
 
         def run(rule):
@@ -313,7 +388,14 @@ class ParentDivision:
             raise ValueError("division_workers must be positive")
         with ThreadPoolExecutor(max_workers=workers) as executor:
             futures = [executor.submit(copy_context().run, run, r) for r in rules]
-            claims = [future.result() for future in futures]
+            return [future.result() for future in futures]
+
+    def consolidate(self, name, snapshot, claims, stage):
+        if not claims:
+            return
+        inputs = (
+            self.input_pins + self.pins(snapshot) + self.pins(self.parent_directory)
+        )
         directory = self.directory / name
         claim_pins = [p for _, r in claims for p in self.pins(r["directory"])]
         result = self.task(
@@ -334,6 +416,13 @@ class ParentDivision:
         )
         self.current = Path(result["directory"])
 
+    def group(self, name, rules, stage):
+        if rules:
+            snapshot = self.current
+            self.consolidate(
+                name, snapshot, self.calculate(rules, snapshot, stage), stage
+            )
+
     def require_coverage(self, kind=None):
         with open_grid(self.current, self.grid) as owners:
             for y in range(self.grid.height):
@@ -353,26 +442,8 @@ class ParentDivision:
                     )
 
     def land(self):
-        area = lambda r: r["operation"] in ("assign_area", "divide_area")
-        self.group(
-            "explicit",
-            [r for r in self.rules if area(r) and not r["unassigned_only"]],
-            "land",
-        )
-        self.group(
-            "geographic-land-fill",
-            [
-                r
-                for r in self.rules
-                if area(r) and r["unassigned_only"] and r["physical_class"] != "water"
-            ],
-            "land",
-        )
-        self.group(
-            "nearest-land",
-            [r for r in self.rules if r["operation"] == "nearest_land"],
-            "land",
-        )
+        for name, rules in land_groups(self.rules):
+            self.group(name, rules, "land")
         self.require_coverage("land")
         return self.use_land(self.current)
 
@@ -389,15 +460,50 @@ class ParentDivision:
     def water(self):
         if self.land_ownership is None:
             raise ValueError("prepare land ownership before water calculations")
-        self.group(
-            "shore-water",
-            [
-                r
-                for r in self.rules
-                if r["operation"] in ("nearest_coastal_water", "nearest_basin_water")
-            ],
+        snapshot = self.current
+        coastal = self.calculate(
+            [r for r in self.rules if r["operation"] == "nearest_coastal_water"],
+            snapshot,
             "water",
         )
+        coastal_pins = []
+        if coastal:
+            if len(coastal) == 1:
+                directory = Path(coastal[0][1]["directory"])
+            else:
+                directory = self.directory / "coastal-claims"
+                self.task(
+                    "coastal-claims",
+                    "water",
+                    merge_claims,
+                    (
+                        self.grid,
+                        self.physical_directory,
+                        self.parent_directory,
+                        self.empty_directory,
+                        coastal,
+                        directory,
+                        self.allowed,
+                    ),
+                    [directory],
+                    inputs=self.input_pins
+                    + [
+                        p
+                        for _, result in coastal
+                        for p in self.pins(result["directory"])
+                    ],
+                )
+            self.coastal_winners = self.resources.enter_context(
+                open_grid(directory, self.grid)
+            )
+            coastal_pins = self.pins(directory)
+        basins = self.calculate(
+            [r for r in self.rules if r["operation"] == "nearest_basin_water"],
+            snapshot,
+            "water",
+            extra_inputs=coastal_pins,
+        )
+        self.consolidate("shore-water", snapshot, coastal + basins, "water")
         self.group(
             "geographic-water-fill",
             [
