@@ -4,50 +4,36 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 
-from worldatlas.map_build.inputs.features import assignment_selection, affiliation_selection, selected_basins
+from worldatlas.map_build.division.contracts import compile_rules
+from worldatlas.source_imports.features.geometry import validate_geometry
 
 HERE = Path(__file__).resolve().parent
-DOMAINS = {"mainland", "regional", "water", "ocean"}
+
 QUERY = HERE / "geography.sql"
 
 
-def validate_bindings(domains):
-    """Require every selected stage to give each map code the same meaning.
-
-    Row order and descriptive metadata do not affect a binding. Registry
-    revision names may differ when their entity/code meanings are identical.
-    """
-    expected = None
-    first = None
-    for name, domain in domains.items():
-        rows = domain.get("category_bindings")
-        if not isinstance(rows, list):
-            raise ValueError(f"{name} selection needs category bindings")
-        bindings, entities = {}, set()
-        for row in rows:
-            if not isinstance(row, dict):
-                raise ValueError(f"{name} selection has an invalid category binding")
-            code, entity, kind = (
-                row.get(key) for key in ("code", "entity_id", "physical_class")
-            )
-            if (
-                type(code) is not int
-                or not 0 < code < 2**32
-                or type(entity) is not int
-                or entity <= 0
-                or kind not in ("land", "water")
-                or code in bindings
-                or (entity, kind) in entities
-            ):
-                raise ValueError(
-                    f"{name} selection has invalid or duplicate category bindings"
-                )
-            bindings[code] = (entity, kind)
-            entities.add((entity, kind))
-        if expected is not None and bindings != expected:
-            raise ValueError(f"{name} category bindings differ from {first}")
-        if expected is None:
-            first, expected = name, bindings
+def validate_bindings(geography):
+    """Require unique code meanings compatible with existing geographic entities."""
+    entities = {entity["id"]: entity for entity in geography["entities"]}
+    codes, pairs = set(), set()
+    for binding in geography["category_bindings"]:
+        code, entity, kind = (
+            binding.get(k) for k in ("code", "entity_id", "physical_class")
+        )
+        if (
+            type(code) is not int
+            or not 0 < code < 2**32
+            or type(entity) is not int
+            or entity not in entities
+            or entity == 0
+            or kind not in ("land", "water")
+            or code in codes
+            or (entity, kind) in pairs
+            or entities[entity]["physical_class"] not in ("mixed", kind)
+        ):
+            raise ValueError("invalid or duplicate category binding")
+        codes.add(code)
+        pairs.add((entity, kind))
 
 
 def canonical_bytes(value):
@@ -63,52 +49,48 @@ def canonical_bytes(value):
     ).encode()
 
 
-def geographic_domain(selection, name):
-    """Expose stage inputs from one working snapshot or an unchanged archived selection."""
-    if "geography" not in selection:
-        return selection["domains"][name]
-    return selection["geography"]
-
-
-def selection_domains(selection):
-    if "geography" in selection:
-        return {name: geographic_domain(selection, name) for name in DOMAINS}
-    return selection["domains"]
-
-
 def entity_colors(selection):
-    if "entity_colors" in selection:
-        return selection["entity_colors"]
-    if "geography" in selection:
-        return [
-            {"entity_id": entity["id"], "color_rgb": entity.get("color_rgb")}
-            for entity in selection["geography"]["entities"]
-        ]
-    # Retained archives have registry-keyed colors; never query current Neon.
-    snapshot = selection["domains"]["mainland"]
-    return selection["registry_colors"][
-        snapshot["decision_revision"]["entity_revision"]
+    return [
+        {"entity_id": e["id"], "color_rgb": e.get("color_rgb")}
+        for e in selection["geography"]["entities"]
     ]
 
 
-def read_selection(database, *, raw_sources=(), constructions=()):
+def read_selection(database, *, raw_sources=(), constructions=(), parents=None):
     """Freeze working records and their catalog in one short read-only transaction."""
     result = {
-        "schema": "worldatlas-input-selection-v3",
+        "schema": "worldatlas-input-selection-v4",
         "selected_at": datetime.now(timezone.utc).isoformat(),
     }
     with database.transaction():
         database.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
-        data = json.loads(database.execute(QUERY.read_text()).fetchone()[0])
-        features = {feature["feature_id"]: feature for feature in data["features"]}
+        if parents is not None:
+            found = database.execute(
+                """
+                WITH RECURSIVE required AS (
+                  SELECT id,parent_id FROM atlas.geographic_entities WHERE id=ANY(%s)
+                  UNION SELECT e.id,e.parent_id FROM atlas.geographic_entities e
+                    JOIN required r ON e.id=r.parent_id
+                ) SELECT id FROM required
+            """,
+                (parents,),
+            ).fetchall()
+            ancestors = {r[0] for r in found}
+            if set(parents) - ancestors:
+                raise ValueError("requested parent does not exist")
+            parents = sorted(ancestors)
+        data = json.loads(
+            database.execute(QUERY.read_text(), (parents, parents)).fetchone()[0]
+        )
+        features = {feature["id"]: feature for feature in data["features"]}
         with database.cursor(name="selected_features") as cursor:
             cursor.execute(
                 "SELECT id,geometry::text FROM atlas.source_features "
-                "WHERE geometry IS NOT NULL ORDER BY id"
+                "WHERE id=ANY(%s) ORDER BY id",
+                (sorted(features),),
             )
             for feature_id, geometry in cursor:
                 features[feature_id]["geometry"] = json.loads(geometry)
-        selected_basins(data)
         validate_feature_references(data)
         result["geography"] = data
         references = set(raw_sources) | {
@@ -145,28 +127,25 @@ def read_selection(database, *, raw_sources=(), constructions=()):
 
 
 def validate_feature_references(domain):
-    """Check every executable assignment reference before lengthy processing."""
-    features = {feature["feature_id"] for feature in domain.get("features", [])}
-    for rule in domain.get("assignments", []):
-        assignment_selection(rule, features)
-    # Retained release inputs still use the earlier affiliation format.
-    for rule in domain.get("affiliations", []):
-        affiliation_selection(rule, features)
+    """Validate frozen geometry and every declared operation before processing."""
+    if domain.get("schema") != "worldatlas-geographic-division-v1":
+        raise ValueError(
+            "unsupported geographic selection; restore the release's captured code"
+        )
+    for feature in domain["features"]:
+        validate_geometry(feature["geometry"])
+    parents = {r["parent_id"] for r in domain["rules"]}
+    for parent in parents:
+        compile_rules(domain, parent)
+    validate_bindings(domain)
 
 
 def read_saved(path):
-    """Read frozen values without rewriting historical archives or consulting Neon."""
+    """Use exact frozen values without consulting or modifying today's Neon."""
     result = json.loads(Path(path).read_bytes())
-    if result.get("schema") not in (
-        "worldatlas-input-selection-v1",
-        "worldatlas-input-selection-v2",
-        "worldatlas-input-selection-v3",
-    ):
-        raise ValueError("unsupported saved input selection")
-    domains = selection_domains(result)
-    validate_bindings(domains)
-    for domain in domains.values():
-        validate_feature_references(domain)
-    if "water" in domains:
-        selected_basins(domains["water"])
+    if result.get("schema") != "worldatlas-input-selection-v4":
+        raise ValueError(
+            "this selection requires its release archive's captured implementation"
+        )
+    validate_feature_references(result["geography"])
     return result

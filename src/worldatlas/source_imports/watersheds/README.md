@@ -16,7 +16,7 @@ selections live in the construction record.
 | [`sources.py`](sources.py) | Read source GeoJSON lines, OSM ways and river relations. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
 | [`../atlas_sources/catalog.py`](../atlas_sources/catalog.py) | Resolve catalog IDs and verify downloaded or multipart files. |
-| [`../features/geometry.py`](../features/geometry.py) | Save geometry and its construction reference; validate affected seed-region joins. |
+| [`../features/geometry.py`](../features/geometry.py) | Validate and save geometry with its construction reference. |
 
 The split follows the work: read source features, prepare terrain, calculate
 drainage, then assemble the boundary. The typed `watershed_boundary()` entry point
@@ -48,8 +48,9 @@ checked against their sizes and SHA-256 hashes.
 
 The result updates `atlas.source_features` in one transaction. Its construction
 links to the raw inputs through `construction_sources`. Existing geographic
-relationships remain, and affected seed regions are validated before commit.
-A failed calculation or invalid join leaves the existing boundary unchanged.
+relationships remain. A failed calculation or invalid geometry leaves the
+existing boundary unchanged. Map building validates the selected lines and joins
+against its current division scope.
 Database connections are open only while reading inputs or saving the result;
 terrain calculation does not keep an idle cloud connection open.
 This command does not publish a website.

@@ -6,9 +6,8 @@ CREATE SCHEMA atlas;
 \ir schema/sources.sql
 \ir schema/construction_contracts.sql
 \ir schema/geographic_entities.sql
-\ir schema/geographic_decisions.sql
-\ir schema/mainland.sql
-\ir schema/geographic_partitions.sql
+\ir schema/source_features.sql
+\ir schema/geographic_rules.sql
 \ir schema/releases.sql
 
 COMMIT;

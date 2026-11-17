@@ -1,7 +1,7 @@
 # Frozen build inputs
 
-[`selection.py`](selection.py) reads the selected mainland, regional, named-water
-and ocean decisions, their raw-source catalog references and entity colors in
+[`selection.py`](selection.py) reads the selected parent divisions, their rules,
+geometry, raw-source catalog references and entity colors in
 one repeatable-read, read-only transaction. The transaction ends before downloads
 or map calculations begin.
 
@@ -11,13 +11,13 @@ and runtime versions are separate provenance; a code change does not require
 permission to resume.
 
 [`geography.sql`](geography.sql) exports working records once. New selections use
-format v3 with one geography collection (including entity colors), contributing construction
-settings and exact raw-file catalog records. Its geography collection uses format
-v4: imported geometry is separate from two-sided partition methods and
-computational mainland closures.
+format v4 with one geography collection (including entity colors), contributing
+construction settings and exact raw-file catalog records. Imported geometry is
+separate from the rules that assign parent cells to children.
 
-Retained v1/v2 selections remain readable without rewriting their bytes or reading
-current Neon data. Their old labels are historical metadata, not working selectors.
+Historical releases retain their original selection bytes and captured code.
+Replay them with that implementation rather than converting them to today's
+working schema or reading current Neon records.
 
 Imported GeoJSON coordinates remain numeric. Source IDs, sizes and hashes come
 from the same database view as the decisions.
@@ -25,11 +25,11 @@ from the same database view as the decisions.
 Large feature geometries are read as individual records in that same
 transaction. PostgreSQL does not need to assemble all coordinates into one JSON
 aggregate before sending them. Basin checks reject missing or invalid geometry
-and duplicate provider parent/child selections.
+and overlapping contradictory assignments.
 
 `test_selection.py` uses disposable PostgreSQL to check concurrent edits, saved
 replay and missing selections. Source-import integration tests also exercise the
-real mainland and geography queries against newly imported records.
+real geography queries against newly imported records.
 
 Generated JSON cache entries are published as complete files, so builds can share
 verified inputs and retry interrupted writes. Water and ocean calculations use the

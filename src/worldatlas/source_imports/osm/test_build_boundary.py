@@ -19,9 +19,18 @@ from worldatlas.source_imports.atlas_sources.catalog import catalog_source
 
 def save_boundary(database, geometry, source, recipe):
     with database.transaction():
-        catalog_source(database, source['source_id'])
-        return save_features(database, [dict(feature_id=recipe['feature_id'],
-            source_feature_id=recipe['source_feature_id'],geometry=geometry)], recipe)
+        catalog_source(database, source["source_id"])
+        return save_features(
+            database,
+            [
+                dict(
+                    feature_id=recipe["feature_id"],
+                    source_feature_id=recipe["source_feature_id"],
+                    geometry=geometry,
+                )
+            ],
+            recipe,
+        )
 
 
 def source_fixture(endpoint=(1, 1), *, coordinates=None):
@@ -110,7 +119,7 @@ class DatabaseTests(unittest.TestCase):
 
     def boundary(self):
         return self.database.execute(
-            "SELECT geometry,construction_id,source_feature_id FROM atlas.source_features WHERE id='border'"
+            "SELECT geometry,construction_id FROM atlas.source_features WHERE id='border'"
         ).fetchone()
 
     def links(self):
@@ -126,33 +135,48 @@ class DatabaseTests(unittest.TestCase):
         self.store()
         self.build()
         self.assertEqual(self.boundary()[0]["coordinates"], [[0.0, 0.0], [2.0, 2.0]])
-        self.assertEqual(self.boundary()[1:], ("__osm_recipe","manifest.json"))
+        self.assertEqual(self.boundary()[1:], ("__osm_recipe",))
         self.assertEqual(self.links(), [("osm-test-2",)])
 
     def test_chain_feature_preserves_source_vertices_and_builds_extensions_once(self):
-        self.recipe = dict(method='osm_way_chain', source_id='osm-test-1',
-                           feature_id='complete-boundary', source_feature_id='manifest.json',
-                           basis='Preserve source chain and add selected geodesic extensions',
-                           before=[[-1,0]], after=[[2,1]], max_step_metres=100000,
-                           evidence_source_ids=['osm-test-2'])
+        self.recipe = dict(
+            method="osm_way_chain",
+            source_id="osm-test-1",
+            feature_id="complete-boundary",
+            source_feature_id="manifest.json",
+            basis="Preserve source chain and add selected geodesic extensions",
+            before=[[-1, 0]],
+            after=[[2, 1]],
+            max_step_metres=100000,
+            evidence_source_ids=["osm-test-2"],
+        )
         self.store()
         first = self.build()
         self.assertEqual(self.build(), first)
-        geometry = self.database.execute("SELECT geometry FROM atlas.source_features WHERE id='complete-boundary'").fetchone()[0]
-        self.assertEqual(self.build(expected=first['sha256']), first)
-        points = geometry['coordinates']
-        self.assertEqual(points[0], [-1,0])
-        self.assertEqual(points[-1], [2,1])
-        start = points.index([0,0])
-        self.assertEqual(points[start:start+2], [[0,0],[1,1]])
-        refs = self.database.execute("SELECT source_id FROM atlas.construction_sources WHERE construction_id='__osm_recipe' ORDER BY source_id").fetchall()
-        self.assertEqual(refs, [('osm-test-1',),('osm-test-2',)])
+        geometry = self.database.execute(
+            "SELECT geometry FROM atlas.source_features WHERE id='complete-boundary'"
+        ).fetchone()[0]
+        self.assertEqual(self.build(expected=first["sha256"]), first)
+        points = geometry["coordinates"]
+        self.assertEqual(points[0], [-1, 0])
+        self.assertEqual(points[-1], [2, 1])
+        start = points.index([0, 0])
+        self.assertEqual(points[start : start + 2], [[0, 0], [1, 1]])
+        refs = self.database.execute(
+            "SELECT source_id FROM atlas.construction_sources WHERE construction_id='__osm_recipe' ORDER BY source_id"
+        ).fetchall()
+        self.assertEqual(refs, [("osm-test-1",), ("osm-test-2",)])
         self.assertEqual(self.storage.get_object.call_count, 1)
-        self.recipe['before'] = [[0,0]]
+        self.recipe["before"] = [[0, 0]]
         self.store()
         with self.assertRaises(ValueError):
             self.build()
-        self.assertEqual(self.database.execute("SELECT geometry FROM atlas.source_features WHERE id='complete-boundary'").fetchone()[0], geometry)
+        self.assertEqual(
+            self.database.execute(
+                "SELECT geometry FROM atlas.source_features WHERE id='complete-boundary'"
+            ).fetchone()[0],
+            geometry,
+        )
 
     def test_expected_geometry_mismatch_preserves_existing_boundary(self):
         self.build()
@@ -193,7 +217,7 @@ class DatabaseTests(unittest.TestCase):
     def test_missing_source_rolls_back_boundary_and_links(self):
         self.build()
         before = self.boundary()
-        with self.assertRaisesRegex(ValueError,"missing from the Neon catalog"):
+        with self.assertRaisesRegex(ValueError, "missing from the Neon catalog"):
             save_boundary(
                 self.database,
                 {"type": "LineString", "coordinates": [[0, 0], [2, 2]]},
@@ -203,203 +227,12 @@ class DatabaseTests(unittest.TestCase):
         self.assertEqual(self.boundary(), before)
         self.assertEqual(self.links(), [("osm-test-1",)])
 
-    def test_working_export_contains_saved_boundary_coordinates(self):
-        from worldatlas.map_build.inputs.selection import read_selection
-
+    def test_changed_vertex_count_preserves_other_features(self):
         self.build()
-        self.database.commit()
-        try:
-            with psycopg.connect(os.environ["WORLDATLAS_TEST_DATABASE_URL"]) as db:
-                selected = read_selection(db)
-            line = next(
-                b
-                for b in selected["geography"]["features"]
-                if b["feature_id"] == "border"
-            )
-            self.assertEqual(line["geometry"], self.boundary()[0])
-        finally:
-            self.database.rollback()
-            with self.database.transaction():
-                self.database.execute(
-                    "DELETE FROM atlas.construction_sources"
-                )
-                self.database.execute("DELETE FROM atlas.source_features")
-                self.database.execute("DELETE FROM atlas.construction_records")
-                self.database.execute("DELETE FROM atlas.source_assets")
-
-    def region_fixture(self):
-        self.build()
-        save_boundary(
-            self.database,
-            {"type": "LineString", "coordinates": [[1.0, 1.0], [1.0, 0.0], [0.0, 0.0]]},
-            self.source,
-            dict(self.recipe, feature_id="return"),
-        )
-        self.database.execute(
-            "INSERT INTO atlas.decision_mainland_seed_regions VALUES ('region','[]')"
-        )
-        self.database.execute(
-            "INSERT INTO atlas.decision_mainland_region_segments VALUES "
-            "('region',0,'boundary','border',NULL,false),"
-            "('region',1,'boundary','return',NULL,false)"
-        )
-
-    def region_sections(self):
-        return self.database.execute(
-            "SELECT * FROM atlas.decision_mainland_region_segments ORDER BY ordinal"
-        ).fetchall()
-
-    def test_changed_vertex_count_needs_no_region_reference_updates(self):
-        self.region_fixture()
-        sections = self.region_sections()
-        geometry = {
-            "type": "LineString",
-            "coordinates": [[0.0, 0.0], [0.4, 0.6], [1.0, 1.0]],
-        }
+        geometry = {"type": "LineString", "coordinates": [[0, 0], [0.4, 0.6], [1, 1]]}
         save_boundary(self.database, geometry, self.source, self.recipe)
         self.assertEqual(self.boundary()[0], geometry)
-        self.assertEqual(self.region_sections(), sections)
 
-    def test_broken_region_join_rolls_back_boundary_and_source_links(self):
-        self.region_fixture()
-        before, sections = self.boundary(), self.region_sections()
-        with self.assertRaisesRegex(ValueError, "does not join"):
-            save_boundary(
-                self.database,
-                {
-                    "type": "LineString",
-                    "coordinates": [[0.0, 0.0], [0.4, 0.6], [2.0, 2.0]],
-                },
-                self.source,
-                self.recipe,
-            )
-        self.assertEqual(self.boundary(), before)
-        self.assertEqual(self.links(), [("osm-test-1",)])
-        self.assertEqual(self.region_sections(), sections)
 
-    def test_simple_boundary_crossing_another_region_section_rolls_back(self):
-        from shapely.geometry import LineString, Polygon
-
-        self.region_fixture()
-        before, sections = self.boundary(), self.region_sections()
-        coordinates = [[0.0, 0.0], [2.0, 0.5], [1.0, 1.0]]
-        self.assertTrue(LineString(coordinates).is_simple)
-        self.assertFalse(Polygon([*coordinates, [1.0, 0.0], [0.0, 0.0]]).is_valid)
-        with self.assertRaisesRegex(ValueError, "invalid region polygon"):
-            save_boundary(
-                self.database,
-                {"type": "LineString", "coordinates": coordinates},
-                self.source,
-                self.recipe,
-            )
-        self.assertEqual(self.boundary(), before)
-        self.assertEqual(self.links(), [("osm-test-1",)])
-        self.assertEqual(self.region_sections(), sections)
-
-    def test_parallel_boundary_updates_validate_the_latest_committed_region(self):
-        from concurrent.futures import ThreadPoolExecutor
-        from threading import Event
-        import time
-
-        import psycopg
-
-        self.region_fixture()
-        self.database.commit()
-
-        def cleanup():
-            self.database.rollback()
-            with self.database.transaction():
-                for table in (
-                    "decision_mainland_region_segments",
-                    "decision_mainland_seed_regions",
-                    "construction_sources",
-                    "source_features",
-                ):
-                    self.database.execute("DELETE FROM atlas." + table)
-                self.database.execute(
-                    "DELETE FROM atlas.construction_records WHERE id='__osm_recipe'"
-                )
-                self.database.execute(
-                    "DELETE FROM atlas.source_assets WHERE id LIKE 'osm-test-%'"
-                )
-
-        self.addCleanup(cleanup)
-        paused, release = Event(), Event()
-
-        class PauseBeforeValidation:
-            def __init__(self, database):
-                self.database = database
-
-            def cursor(self):
-                return self.database.cursor()
-
-            def transaction(self):
-                return self.database.transaction()
-
-            def execute(self, sql, parameters):
-                if sql.startswith("SELECT s.reverse,coalesce"):
-                    paused.set()
-                    if not release.wait(5):
-                        raise AssertionError("test did not release the first writer")
-                return self.database.execute(sql, parameters)
-
-        first = {
-            "type": "LineString",
-            "coordinates": [[0.0, 0.0], [0.4, 0.6], [1.0, 1.0]],
-        }
-        second = {
-            "type": "LineString",
-            "coordinates": [[1.0, 1.0], [1.2, -0.2], [0.0, 0.0]],
-        }
-
-        def write(database, geometry, boundary_id):
-            return save_boundary(
-                database,
-                geometry,
-                self.source,
-                dict(self.recipe, feature_id=boundary_id),
-            )
-
-        url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
-        with (
-            psycopg.connect(url) as a,
-            psycopg.connect(url) as b,
-            psycopg.connect(url, autocommit=True) as observer,
-            ThreadPoolExecutor(2) as workers,
-        ):
-            try:
-                first_result = workers.submit(
-                    write, PauseBeforeValidation(a), first, "border"
-                )
-                self.assertTrue(paused.wait(5))
-                second_result = workers.submit(write, b, second, "return")
-                deadline = time.monotonic() + 5
-                while not second_result.done():
-                    blockers = observer.execute(
-                        "SELECT pg_blocking_pids(%s)", (b.info.backend_pid,)
-                    ).fetchone()[0]
-                    if a.info.backend_pid in blockers:
-                        break
-                    if time.monotonic() >= deadline:
-                        self.fail(
-                            "second writer neither completed nor waited for the first writer"
-                        )
-                    release.wait(0.01)
-            finally:
-                release.set()
-            first_result.result(timeout=5)
-            second_result.result(timeout=5)
-
-        from shapely.geometry import Polygon
-
-        saved = dict(
-            self.database.execute(
-                "SELECT id,geometry FROM atlas.source_features "
-            ).fetchall()
-        )
-        self.assertEqual(saved, {"border": first, "return": second})
-        self.assertTrue(
-            Polygon(
-                [*saved["border"]["coordinates"], *saved["return"]["coordinates"][1:]]
-            ).is_valid
-        )
+if __name__ == "__main__":
+    unittest.main()

@@ -15,7 +15,7 @@ from worldatlas.source_imports.features.build_features import (
     selected_osm_features,
     selected_vector_features,
 )
-from worldatlas.source_imports.iho.build_routes import s130_rhumb_routes
+from worldatlas.source_imports.features.interpreted import interpreted_geometry
 from worldatlas.source_imports.osm.build_boundary import osm_way_chain
 from worldatlas.source_imports.traces.build_boundary import geodesic_trace
 from worldatlas.source_imports.watersheds.build_boundary import watershed_boundary
@@ -25,11 +25,11 @@ IMPORTERS = {
     for constructor in (
         geodesic_trace,
         osm_way_chain,
-        s130_rhumb_routes,
         watershed_boundary,
         selected_vector_features,
         selected_osm_features,
         s130_areas,
+        interpreted_geometry,
     )
 }
 

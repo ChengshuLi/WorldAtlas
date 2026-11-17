@@ -30,8 +30,8 @@ class ContractTests(unittest.TestCase):
             rivers: list[SourceId]
             source_id: str
 
-        self.assertEqual(source_paths(Inputs), ['$.' + '"elevation"', '$."rivers"[*]'])
-        self.assertEqual(source_paths(dict[str, SourceId]), ['$.*'])
+        self.assertEqual(source_paths(Inputs), ["$." + '"elevation"', '$."rivers"[*]'])
+        self.assertEqual(source_paths(dict[str, SourceId]), ["$.*"])
         self.assertEqual(source_paths(Any), [])
 
     def test_defaults_define_optional_fields_and_python_supplies_the_default(self):
@@ -127,7 +127,7 @@ class DatabaseContractTests(unittest.TestCase):
         self.database.execute(
             "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
             "VALUES ('raw','Test','Test','test:raw','Test','test:license','Test','test','raw',%s,1)",
-            ('a' * 64,),
+            ("a" * 64,),
         )
 
     def check(self, method, document, expected):
@@ -158,39 +158,74 @@ class DatabaseContractTests(unittest.TestCase):
                 )
 
     def test_nested_multipart_and_evidence_sources_are_linked_once(self):
-        for ident in ('other', 'evidence'):
+        for ident in ("other", "evidence"):
             self.database.execute(
                 "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
                 "VALUES (%s,'Test','Test','test:raw','Test','test:license','Test','test',%s,%s,1)",
-                (ident, ident, 'a' * 64),
+                (ident, ident, "a" * 64),
             )
-        document = dict(DOCUMENTS['watershed_boundary'], method='watershed_boundary',
-                        sources={'single': 'raw', 'same': 'raw',
-                                 'multipart': dict(parts=['raw', 'other'], sha256='a' * 64,
-                                                   size_bytes=2, filename='terrain.tif')},
-                        evidence_sources=['evidence', 'raw'],
-                        geographic_choices={'source_id': 'ordinary-untyped-text'})
-        bind_document(IMPORTERS['watershed_boundary'], document)
-        self.database.execute("INSERT INTO atlas.construction_records VALUES ('__links',%s)",
-                              (Jsonb(document),))
+        document = dict(
+            DOCUMENTS["watershed_boundary"],
+            method="watershed_boundary",
+            sources={
+                "single": "raw",
+                "same": "raw",
+                "multipart": dict(
+                    parts=["raw", "other"],
+                    sha256="a" * 64,
+                    size_bytes=2,
+                    filename="terrain.tif",
+                ),
+            },
+            evidence_sources=["evidence", "raw"],
+            geographic_choices={"source_id": "ordinary-untyped-text"},
+        )
+        bind_document(IMPORTERS["watershed_boundary"], document)
+        self.database.execute(
+            "INSERT INTO atlas.construction_records VALUES ('__links',%s)",
+            (Jsonb(document),),
+        )
 
         def links():
-            return [row[0] for row in self.database.execute(
-                "SELECT source_id FROM atlas.construction_sources WHERE construction_id='__links' ORDER BY source_id")]
+            return [
+                row[0]
+                for row in self.database.execute(
+                    "SELECT source_id FROM atlas.construction_sources WHERE construction_id='__links' ORDER BY source_id"
+                )
+            ]
 
-        self.assertEqual(links(), ['evidence', 'other', 'raw'])
-        with self.assertRaises(psycopg.errors.ForeignKeyViolation), self.database.transaction():
+        self.assertEqual(links(), ["evidence", "other", "raw"])
+        with (
+            self.assertRaises(psycopg.errors.ForeignKeyViolation),
+            self.database.transaction(),
+        ):
             self.database.execute("DELETE FROM atlas.source_assets WHERE id='other'")
-        changed = dict(document, sources={'only': 'raw'}, evidence_sources=[])
-        self.database.execute("UPDATE atlas.construction_records SET document=%s WHERE id='__links'", (Jsonb(changed),))
-        self.assertEqual(links(), ['raw'])
-        with self.assertRaises(psycopg.errors.ForeignKeyViolation), self.database.transaction():
-            self.database.execute("UPDATE atlas.construction_records SET document=%s WHERE id='__links'",
-                                  (Jsonb(dict(changed, sources={'missing': 'absent'})),))
-        self.assertEqual(links(), ['raw'])
-        self.assertEqual(self.database.execute("SELECT document FROM atlas.construction_records WHERE id='__links'").fetchone()[0], changed)
-        self.database.execute("DELETE FROM atlas.construction_records WHERE id='__links'")
+        changed = dict(document, sources={"only": "raw"}, evidence_sources=[])
+        self.database.execute(
+            "UPDATE atlas.construction_records SET document=%s WHERE id='__links'",
+            (Jsonb(changed),),
+        )
+        self.assertEqual(links(), ["raw"])
+        with (
+            self.assertRaises(psycopg.errors.ForeignKeyViolation),
+            self.database.transaction(),
+        ):
+            self.database.execute(
+                "UPDATE atlas.construction_records SET document=%s WHERE id='__links'",
+                (Jsonb(dict(changed, sources={"missing": "absent"})),),
+            )
+        self.assertEqual(links(), ["raw"])
+        self.assertEqual(
+            self.database.execute(
+                "SELECT document FROM atlas.construction_records WHERE id='__links'"
+            ).fetchone()[0],
+            changed,
+        )
+        self.database.execute(
+            "DELETE FROM atlas.construction_records WHERE id='__links'"
+        )
         self.assertEqual(links(), [])
+
     def test_every_method_rejects_missing_required_fields_wrong_types_and_unknown_keys(
         self,
     ):
@@ -275,20 +310,6 @@ class DatabaseContractTests(unittest.TestCase):
                             feature_id="f",
                             source_feature_id="urn:mrn:1",
                             expected_properties={},
-                        )
-                    ]
-                ),
-                False,
-            ),
-            (
-                "s130_rhumb_routes",
-                dict(
-                    routes=[
-                        dict(
-                            feature_id="r",
-                            construction_line_id="c",
-                            reverse=1,
-                            endpoint_names=["A", "B"],
                         )
                     ]
                 ),

@@ -1,54 +1,33 @@
-WITH source_refs(source_id) AS (
-  SELECT source_id FROM atlas.construction_sources
-  UNION SELECT source_id FROM atlas.geographic_assignment_sources
+WITH selected_rules AS (
+  SELECT * FROM atlas.geographic_rules WHERE %s::bigint[] IS NULL OR parent_id=ANY(%s)
+), selected_entities AS (
+  SELECT * FROM atlas.geographic_entities WHERE id IN (SELECT parent_id FROM selected_rules)
+    OR parent_id IN (SELECT parent_id FROM selected_rules)
+), selected_features(id) AS (
+  SELECT feature_id FROM atlas.geographic_rule_features WHERE rule_id IN (SELECT id FROM selected_rules)
+  UNION SELECT label_point_id FROM atlas.geographic_rule_targets WHERE label_point_id IS NOT NULL AND rule_id IN (SELECT id FROM selected_rules)
+), selected_constructions(id) AS (
+  SELECT DISTINCT construction_id FROM atlas.source_features WHERE id IN (SELECT id FROM selected_features)
+), source_refs(source_id) AS (
+  SELECT source_id FROM atlas.construction_sources WHERE construction_id IN (SELECT id FROM selected_constructions)
+  UNION SELECT source_id FROM atlas.geographic_rule_sources WHERE rule_id IN (SELECT id FROM selected_rules)
 )
 SELECT jsonb_build_object(
-  'schema', 'worldatlas-geography-selection-v4',
-  'sources', COALESCE((SELECT jsonb_agg(jsonb_build_object('source_id',source_id)
-                                     ORDER BY source_id) FROM source_refs),'[]'::jsonb),
-  'entities', COALESCE((SELECT jsonb_agg(to_jsonb(e) ORDER BY id)
-                       FROM atlas.geographic_entities e),'[]'::jsonb),
-  'category_bindings', COALESCE((SELECT jsonb_agg((to_jsonb(b)-'id') || jsonb_build_object('code',id)
-                                                ORDER BY id) FROM atlas.map_category_bindings b),'[]'::jsonb),
-  'features', COALESCE((SELECT jsonb_agg((to_jsonb(f)-'geometry'-'id') || jsonb_build_object('feature_id',id)
-                                       ORDER BY id) FROM atlas.source_features f),'[]'::jsonb),
-  'partitions', COALESCE((SELECT jsonb_agg(to_jsonb(p) ORDER BY id)
-                         FROM atlas.geographic_partitions p),'[]'::jsonb),
-  'construction_sources', COALESCE((SELECT jsonb_agg(to_jsonb(s) ORDER BY construction_id,source_id)
-                                   FROM atlas.construction_sources s),'[]'::jsonb),
-  'region_closures', COALESCE((SELECT jsonb_agg((to_jsonb(r)-'id') || jsonb_build_object(
-      'route_id',id,
-      'start_terminal',jsonb_build_object('boundary_id',start_boundary_id,'endpoint',start_endpoint),
-      'end_terminal',jsonb_build_object('boundary_id',end_boundary_id,'endpoint',end_endpoint))
-      ORDER BY id) FROM atlas.decision_mainland_closure_routes r),'[]'::jsonb),
-  'basins', COALESCE((SELECT jsonb_agg(jsonb_build_object(
-      'id',b.id,'feature_id',b.feature_id,'source_feature_id',f.source_feature_id,
-      'assignment_method',b.method,'tie_rules',b.tie_rules,'evidence',b.evidence) ORDER BY b.id)
-      FROM atlas.decision_basins b JOIN atlas.source_features f ON f.id=b.feature_id),'[]'::jsonb),
-  'assignments', COALESCE((SELECT jsonb_agg((to_jsonb(a)-'id') || jsonb_build_object('assignment_id',id)
-                                          ORDER BY id) FROM atlas.geographic_assignments a),'[]'::jsonb),
-  'assignment_sources', COALESCE((SELECT jsonb_agg(to_jsonb(s) ORDER BY assignment_id,source_id)
-                                 FROM atlas.geographic_assignment_sources s),'[]'::jsonb),
-  'ocean_seeds', COALESCE((SELECT jsonb_agg((to_jsonb(s)-'id') || jsonb_build_object('entity_id',id)
-                                          ORDER BY id) FROM atlas.ocean_seeds s),'[]'::jsonb),
-  'policies', COALESCE((SELECT jsonb_agg(to_jsonb(p) ORDER BY id)
-                       FROM atlas.decision_policies p),'[]'::jsonb),
-  'land_baseline_policy', jsonb_build_object('region_ids',
-      COALESCE((SELECT jsonb_agg(id ORDER BY id) FROM atlas.decision_mainland_seed_regions),'[]'::jsonb)),
-  'seed_regions', COALESCE((SELECT jsonb_agg((to_jsonb(r)-'id') || jsonb_build_object(
-      'region_id',r.id,'segments',COALESCE((SELECT jsonb_agg(jsonb_build_object(
-          'kind',kind,'id',COALESCE(boundary_id,route_id),'reverse',reverse) ORDER BY ordinal)
-          FROM atlas.decision_mainland_region_segments s WHERE s.region_id=r.id),'[]'::jsonb))
-      ORDER BY r.id) FROM atlas.decision_mainland_seed_regions r),'[]'::jsonb),
-  'mainland_witnesses', COALESCE((SELECT jsonb_agg((to_jsonb(w)-'id') || jsonb_build_object('witness_id',id)
-                                                ORDER BY id) FROM atlas.decision_mainland_witnesses w),'[]'::jsonb),
-  'mainland_witness_groups', COALESCE((SELECT jsonb_agg((to_jsonb(g)-'id') || jsonb_build_object(
-      'group_id',g.id,
-      'witness_ids',COALESCE((SELECT jsonb_agg(witness_id ORDER BY witness_id)
-          FROM atlas.decision_mainland_witness_group_members m WHERE m.group_id=g.id),'[]'::jsonb),
-      'target_entity_ids',COALESCE((SELECT jsonb_agg(entity_id ORDER BY entity_id)
-          FROM atlas.decision_mainland_witness_group_targets t WHERE t.group_id=g.id),'[]'::jsonb))
-      ORDER BY g.id) FROM atlas.decision_mainland_witness_groups g),'[]'::jsonb),
-  'distinct_groups', COALESCE((SELECT jsonb_agg(jsonb_build_array(group_a,group_b) ORDER BY group_a,group_b)
-                              FROM atlas.decision_mainland_distinct_groups),'[]'::jsonb)
+  'schema','worldatlas-geographic-division-v1',
+  'levels',COALESCE((SELECT jsonb_agg(to_jsonb(l) ORDER BY id) FROM atlas.geographic_levels l),'[]'::jsonb),
+  'entities',COALESCE((SELECT jsonb_agg(to_jsonb(e) ORDER BY id) FROM selected_entities e),'[]'::jsonb),
+  'category_bindings',COALESCE((SELECT jsonb_agg((to_jsonb(b)-'id')||jsonb_build_object('code',id)
+      ORDER BY id) FROM atlas.map_category_bindings b WHERE entity_id IN (SELECT id FROM selected_entities)),'[]'::jsonb),
+  'rules',COALESCE((SELECT jsonb_agg(to_jsonb(r) ORDER BY id) FROM selected_rules r),'[]'::jsonb),
+  'rule_features',COALESCE((SELECT jsonb_agg(to_jsonb(l) ORDER BY rule_id,role,feature_id)
+      FROM atlas.geographic_rule_features l WHERE rule_id IN (SELECT id FROM selected_rules)),'[]'::jsonb),
+  'rule_targets',COALESCE((SELECT jsonb_agg(to_jsonb(t) ORDER BY id) FROM atlas.geographic_rule_targets t WHERE rule_id IN (SELECT id FROM selected_rules)),'[]'::jsonb),
+  'rule_sources',COALESCE((SELECT jsonb_agg(to_jsonb(s) ORDER BY rule_id,source_id)
+      FROM atlas.geographic_rule_sources s WHERE rule_id IN (SELECT id FROM selected_rules)),'[]'::jsonb),
+  'features',COALESCE((SELECT jsonb_agg(jsonb_build_object('id',f.id,'construction_id',f.construction_id)
+      ORDER BY f.id) FROM atlas.source_features f WHERE f.id IN (SELECT id FROM selected_features)),'[]'::jsonb),
+  'construction_sources',COALESCE((SELECT jsonb_agg(to_jsonb(s) ORDER BY construction_id,source_id)
+      FROM atlas.construction_sources s WHERE construction_id IN (SELECT id FROM selected_constructions)),'[]'::jsonb),
+  'sources',COALESCE((SELECT jsonb_agg(jsonb_build_object('source_id',source_id) ORDER BY source_id)
+      FROM source_refs),'[]'::jsonb)
 )::text;

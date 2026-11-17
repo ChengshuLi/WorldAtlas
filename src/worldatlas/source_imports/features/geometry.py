@@ -75,11 +75,11 @@ def validate_geometry(geometry):
 
 
 def save_features(database, features, recipe):
-    """Save a complete import atomically; existing relationships survive."""
+    """Save an import atomically without duplicating its provider selectors."""
     identifiers = [feature["feature_id"] for feature in features]
     if (
         not identifiers
-        or any(not isinstance(value, str) or not value.strip() for value in identifiers)
+        or any(not isinstance(v, str) or not v.strip() for v in identifiers)
         or len(set(identifiers)) != len(identifiers)
     ):
         raise ValueError("feature IDs must be nonempty and unique")
@@ -87,71 +87,16 @@ def save_features(database, features, recipe):
     for feature in features:
         validate_geometry(feature["geometry"])
         geometry = storage_geometry(feature["geometry"])
-        digest = geometry_hash(geometry)
-        hashes[feature["feature_id"]] = digest
-        records.append(
-            (
-                feature["feature_id"],
-                feature["source_feature_id"],
-                Jsonb(geometry),
-                recipe["recipe_id"],
-            )
-        )
+        hashes[feature["feature_id"]] = geometry_hash(geometry)
+        records.append((feature["feature_id"], Jsonb(geometry), recipe["recipe_id"]))
     with database.transaction():
-        # Serialize edits of lines in the same assembled seed region.
-        database.execute(
-            'SELECT r.id FROM atlas.decision_mainland_seed_regions r '
-            'WHERE EXISTS (SELECT 1 FROM atlas.decision_mainland_region_segments s '
-            'WHERE s.region_id=r.id AND s.boundary_id=ANY(%s)) '
-            'ORDER BY r.id FOR UPDATE', (identifiers,),
-        ).fetchall()
         with database.cursor() as cursor:
             cursor.executemany(
-                "INSERT INTO atlas.source_features "
-                "(id,source_feature_id,"
-                "geometry,construction_id) "
-                "VALUES (%s,%s,%s,%s) "
-                "ON CONFLICT (id) DO UPDATE SET "
-                "source_feature_id=EXCLUDED.source_feature_id,"
-                "geometry=EXCLUDED.geometry,"
-                "construction_id=EXCLUDED.construction_id",
+                "INSERT INTO atlas.source_features (id,geometry,construction_id) VALUES (%s,%s,%s) "
+                "ON CONFLICT (id) DO UPDATE SET geometry=EXCLUDED.geometry "
+                "WHERE atlas.source_features.construction_id=EXCLUDED.construction_id",
                 records,
             )
-        for feature_id in identifiers:
-            _validate_regions(database, feature_id)
+            if cursor.rowcount != len(records):
+                raise ValueError("feature ID already belongs to another construction")
     return hashes
-
-
-def _validate_regions(database, feature_id):
-    """Reject edits that break a selected region's joins or polygon validity."""
-    from shapely.geometry import Polygon
-
-    regions = database.execute(
-        'SELECT DISTINCT region_id FROM atlas.decision_mainland_region_segments '
-        'WHERE boundary_id=%s', (feature_id,),
-    ).fetchall()
-    for (region_id,) in regions:
-        rows = database.execute(
-            'SELECT s.reverse,coalesce(b.geometry,r.geometry) '
-            'FROM atlas.decision_mainland_region_segments s '
-            "LEFT JOIN atlas.source_features b ON s.kind='boundary' "
-            'AND b.id=s.boundary_id '
-            "LEFT JOIN atlas.decision_mainland_closure_routes r ON s.kind='route' "
-            'AND r.id=s.route_id '
-            'WHERE s.region_id=%s ORDER BY s.ordinal',
-            (region_id,),
-        ).fetchall()
-        ring = []
-        for reverse, geometry in rows:
-            if geometry is None or geometry.get('type') != 'LineString':
-                raise ValueError('region references a missing or non-line feature')
-            points = [[float(x), float(y)] for x, y in geometry['coordinates']]
-            if reverse:
-                points.reverse()
-            if len(points) < 2 or (ring and ring[-1] != points[0]):
-                raise ValueError('updated boundary does not join its region exactly')
-            ring.extend(points if not ring else points[1:])
-        if len(ring) < 4 or ring[0] != ring[-1]:
-            raise ValueError('updated boundary does not form a closed region')
-        if not Polygon(ring).is_valid:
-            raise ValueError('updated boundary creates an invalid region polygon')

@@ -111,9 +111,8 @@ An optional expected geometry checksum supports replaying an existing result.
 
 It saves the complete line in `atlas.source_features`. Its construction reference
 links to all cataloged inputs through `construction_sources`. Existing geographic
-partition and seed-region references survive repeat imports. Saving a line used
-by a seed region also checks that the region still joins and closes correctly;
-workers editing the same region serialize their short writes.
+rule references survive repeat imports. Map building checks how the selected
+lines divide its current scope before accepting cell assignments.
 
 Optional `before` and `after` control points extend the archived chain with WGS84
 geodesics. `max_step_metres` controls their sampling. Every archived chain

@@ -1,8 +1,8 @@
 # Selected geographic features
 
 Import selected source geometry into `atlas.source_features`. Each row contains
-`id`, `source_feature_id`, `geometry` and `construction_id`;
-all four are required. Geometry always uses WGS84 `[longitude, latitude]` in
+`id`, `geometry` and `construction_id`;
+all three are required. Geometry always uses WGS84 `[longitude, latitude]` in
 degrees. Map building reads these polygons and points instead of reopening their
 raw archives.
 
@@ -72,3 +72,14 @@ They do not replace polygons with bounding boxes. Geographic assignments can
 reference several imported polygons directly; map building unions those areas
 while calculating component membership. Additional island coverage uses another
 source-backed feature rather than enlarging an imported outline.
+
+`holes: "outer_envelope"` explicitly selects exterior rings for an area interpretation,
+such as islands within a marine area. The provider's outer outline is preserved;
+the construction records the choice. The default `holes: "preserve"` retains holes.
+
+`interpreted_geometry` in [`interpreted.py`](interpreted.py) stores explicitly
+selected Point and Polygon interpretations, such as region labels and computation
+scopes. Its document contains typed `source_ids`, `basis` and `selections`, each
+with `feature_id` and `geometry`. It verifies the cataloged source bytes and saves
+through the same atomic storage helper. It does not read or combine other Neon
+features. Geographic selections remain in the construction record.

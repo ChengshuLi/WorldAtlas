@@ -15,10 +15,10 @@ BEGIN
   {"type":"Polygon","coordinates":[[[0,0],[3,0],[3,3],[0,0]],[[1,1],[2,1],[2,2],[1,1]]]},
   {"type":"MultiPolygon","coordinates":[[[[0,0],[1,0],[1,1],[0,0]]]]}
  ]'::jsonb) LOOP
-  INSERT INTO atlas.source_features VALUES ('__geometry','provider',candidate,'__geometry_recipe');
+  INSERT INTO atlas.source_features VALUES ('__geometry',candidate,'__geometry_recipe');
   DELETE FROM atlas.source_features WHERE id='__geometry';
  END LOOP;
- INSERT INTO atlas.source_features VALUES ('__geometry','provider',
+ INSERT INTO atlas.source_features VALUES ('__geometry',
   '{"type":"Point","coordinates":[10,20]}','__geometry_recipe');
  FOR candidate IN SELECT jsonb_array_elements('[
   null, [], "point", {},

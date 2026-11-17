@@ -76,14 +76,22 @@ class StorageTests(unittest.TestCase):
 
     def rows(self):
         return self.database.execute(
-            "SELECT id,geometry,construction_id "
-            "FROM atlas.source_features ORDER BY id"
+            "SELECT id,geometry,construction_id FROM atlas.source_features ORDER BY id"
         ).fetchall()
 
     def test_repeat_and_recipe_edit_preserve_links_and_other_records(self):
         first = self.build()
         self.database.execute(
-            "INSERT INTO atlas.decision_basins VALUES ('basin','point-a','test','{}','{}')"
+            "INSERT INTO atlas.geographic_levels VALUES ('world',NULL)"
+        )
+        self.database.execute(
+            "INSERT INTO atlas.geographic_entities(id,name,level_id,physical_class) VALUES (0,'World','world','mixed')"
+        )
+        self.database.execute(
+            "INSERT INTO atlas.geographic_rules VALUES ('related',0,'nearest_land','land','component',true,'Reference')"
+        )
+        self.database.execute(
+            "INSERT INTO atlas.geographic_rule_features VALUES ('related','point-a','distance_reference')"
         )
         self.recipe["basis"] = "Updated explanation"
         self.store()
@@ -95,7 +103,7 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(selected_constructions(self.database), ["__features"])
         self.assertEqual(
             self.database.execute(
-                "SELECT count(*) FROM atlas.decision_basins"
+                "SELECT count(*) FROM atlas.geographic_rule_features"
             ).fetchone()[0],
             1,
         )

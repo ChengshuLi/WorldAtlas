@@ -1,62 +1,38 @@
--- A published version points to one complete immutable manifest and approved candidate.
+-- One official bundle per version and exactly one current bundle at most.
 BEGIN;
-DO $$
-DECLARE
- bundle jsonb:=jsonb_build_object('objects',jsonb_build_object(
- 'index.html',jsonb_build_object('r2_key','test/index.html','sha256',repeat('a',64),'size_bytes',1,'content_type','text/html'),
- 'rows.u32le.gz',jsonb_build_object('r2_key','test/rows','sha256',repeat('b',64),'size_bytes',2,'content_type','application/gzip'),
- 'runs.u32le.gz',jsonb_build_object('r2_key','test/runs','sha256',repeat('c',64),'size_bytes',3,'content_type','application/gzip')),
- 'decoded_sha256',jsonb_build_object('rows',repeat('d',64),'runs',repeat('e',64)));
-BEGIN
- INSERT INTO atlas.map_releases(id,r2_bucket,manifest) VALUES
- ('v99.0-rc1','test',bundle),('v99.0-rc2','test',bundle),('v99.1-rc.1','test',bundle);
- IF (SELECT map_version FROM atlas.map_releases WHERE id='v99.1-rc.1')<>'v99.1' THEN
+INSERT INTO atlas.map_releases(id,r2_bucket,r2_prefix,manifest_sha256) VALUES
+ ('v8.2-rc.5','test','releases/v8.2-rc.5/',repeat('a',64)),
+ ('v8.3-rc.1','test','releases/v8.3-rc.1/',repeat('b',64)),
+ ('v8.3-rc.2','test','releases/v8.3-rc.2/',repeat('c',64));
+UPDATE atlas.map_releases SET is_official=true,is_current=true WHERE id='v8.2-rc.5';
+DO $$ BEGIN
+ IF (SELECT map_version FROM atlas.map_releases WHERE id='v8.3-rc.1')<>'v8.3' THEN
   RAISE EXCEPTION 'candidate version extraction failed'; END IF;
  BEGIN
-  INSERT INTO atlas.map_releases(id,r2_bucket,manifest) VALUES ('v99.2-rc1','test',bundle#-'{objects,runs.u32le.gz}');
-  RAISE EXCEPTION 'a release without both streams was accepted';
+  UPDATE atlas.map_releases SET is_current=true WHERE id='v8.3-rc.1';
+  RAISE EXCEPTION 'an unofficial candidate became current';
  EXCEPTION WHEN check_violation THEN NULL; END;
  BEGIN
-  INSERT INTO atlas.map_publications VALUES ('v99.0','v99.0-rc1',NULL);
-  RAISE EXCEPTION 'unapproved release published';
- EXCEPTION WHEN raise_exception THEN
-  IF SQLERRM<>'approve the exact release before publishing' THEN RAISE; END IF;
- END;
+  UPDATE atlas.map_releases SET is_official=true,is_current=true WHERE id='v8.3-rc.1';
+  RAISE EXCEPTION 'two current releases accepted';
+ EXCEPTION WHEN unique_violation THEN NULL; END;
+ UPDATE atlas.map_releases SET is_official=true WHERE id='v8.3-rc.1';
  BEGIN
-  UPDATE atlas.map_releases SET manifest=manifest||'{"changed":true}' WHERE id='v99.0-rc1';
-  RAISE EXCEPTION 'staged contents changed';
- EXCEPTION WHEN raise_exception THEN
-  IF SQLERRM<>'only an unapproved release can receive approval' THEN RAISE; END IF;
- END;
- BEGIN
-  UPDATE atlas.map_releases SET approved_by=' ',approved_at=now() WHERE id='v99.0-rc1';
-  RAISE EXCEPTION 'blank reviewer accepted';
- EXCEPTION WHEN check_violation THEN NULL; END;
- UPDATE atlas.map_releases SET approved_by='Reviewer',approved_at=now() WHERE id LIKE 'v99.%';
- BEGIN
-  UPDATE atlas.map_releases SET approved_by='Another reviewer' WHERE id='v99.0-rc1';
-  RAISE EXCEPTION 'approval changed';
- EXCEPTION WHEN raise_exception THEN
-  IF SQLERRM<>'only an unapproved release can receive approval' THEN RAISE; END IF;
- END;
- BEGIN
-  INSERT INTO atlas.map_publications VALUES ('v99.2','v99.0-rc1',NULL);
-  RAISE EXCEPTION 'unrelated version name accepted';
- EXCEPTION WHEN foreign_key_violation THEN NULL; END;
- INSERT INTO atlas.map_publications VALUES ('v99.0','v99.0-rc1','index.html'),('v99.1','v99.1-rc.1',NULL);
- BEGIN
-  UPDATE atlas.map_publications SET release_id='v99.0-rc2' WHERE id='v99.0';
-  RAISE EXCEPTION 'official version replaced';
- EXCEPTION WHEN raise_exception THEN
-  IF SQLERRM<>'published versions are immutable' THEN RAISE; END IF;
- END;
- BEGIN
-  UPDATE atlas.map_publications SET homepage_key='index.html' WHERE id='v99.1';
-  RAISE EXCEPTION 'two publications own one homepage';
+  UPDATE atlas.map_releases SET is_official=true WHERE id='v8.3-rc.2';
+  RAISE EXCEPTION 'two official releases for the same version accepted';
  EXCEPTION WHEN unique_violation THEN NULL; END;
  BEGIN
-  DELETE FROM atlas.map_releases WHERE id='v99.0-rc1';
-  RAISE EXCEPTION 'published manifest deleted';
- EXCEPTION WHEN foreign_key_violation THEN NULL; END;
+  UPDATE atlas.map_releases SET manifest_sha256=repeat('d',64) WHERE id='v8.3-rc.1';
+  RAISE EXCEPTION 'immutable bundle changed';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM<>'release bundle identity is immutable' THEN RAISE; END IF;
+ END;
+ BEGIN
+  INSERT INTO atlas.map_releases(id,r2_bucket,r2_prefix,manifest_sha256)
+  VALUES ('v8.3-rc3','test','releases/v8.3-rc3/',repeat('e',64));
+  RAISE EXCEPTION 'inconsistent candidate spelling accepted';
+ EXCEPTION WHEN check_violation THEN NULL; END;
+ UPDATE atlas.map_releases SET is_current=false WHERE is_current;
+ UPDATE atlas.map_releases SET is_current=true WHERE id='v8.3-rc.1';
 END $$;
 ROLLBACK;

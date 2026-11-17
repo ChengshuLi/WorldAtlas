@@ -1,98 +1,65 @@
+"""Freeze one coherent dependency selection and validate its executable contracts."""
+
+from concurrent.futures import ThreadPoolExecutor
+from copy import deepcopy
 import json
 import os
 from pathlib import Path
 import tempfile
+import threading
 import unittest
-from copy import deepcopy
 
 import psycopg
 from psycopg.types.json import Jsonb
 
 from worldatlas.map_build.inputs.selection import (
-    entity_colors,
     canonical_bytes,
-    read_selection,
     read_saved,
+    read_selection,
     validate_bindings,
 )
+from worldatlas.map_build.test_support import selection
 
 
 class BindingTests(unittest.TestCase):
     def setUp(self):
-        bindings = [
-            dict(code=301, entity_id=81, physical_class="land"),
-            dict(code=999, entity_id=42, physical_class="land"),
-            dict(code=4321, entity_id=81, physical_class="water"),
+        self.frozen = selection()
+        self.geography = self.frozen["geography"]
+        self.geography["entities"].append(
+            dict(
+                id=2,
+                name="Asia",
+                parent_id=0,
+                level_id="continent",
+                physical_class="mixed",
+                color_rgb="#123456",
+            )
+        )
+        self.geography["category_bindings"] = [
+            dict(code=18, entity_id=2, physical_class="land"),
+            dict(code=2, entity_id=2, physical_class="water"),
         ]
-        self.selection = dict(
-            schema="worldatlas-input-selection-v1",
-            domains={
-                name: dict(category_bindings=deepcopy(bindings))
-                for name in ("mainland", "regional", "water", "ocean")
-            },
-        )
-        self.selection["domains"]["water"].update(features=[], basins=[])
 
-    def test_reordered_rows_and_different_registry_names_keep_the_same_meanings(self):
-        for name, domain in self.selection["domains"].items():
-            domain["entity_revision"] = {"id": name}
-            domain["category_bindings"].reverse()
-        validate_bindings(self.selection["domains"])
-
-    def test_saved_replay_preserves_legacy_document_metadata(self):
-        selected = dict(
-            self.selection,
-            documents=[
-                dict(
-                    source_id="saved-construction",
-                    version="1",
-                    document_text=' {"a": 1}\n',
-                    sha256="a" * 64,
-                    size_bytes=10,
-                )
-            ],
-        )
-        with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "selection.json"
-            path.write_text(json.dumps(selected))
-            self.assertEqual(read_saved(path), selected)
-
-    def test_replay_rejects_swapped_entity_meanings_in_every_stage(self):
-        for name in self.selection["domains"]:
-            with self.subTest(stage=name), tempfile.TemporaryDirectory() as directory:
-                selected = deepcopy(self.selection)
-                bindings = selected["domains"][name]["category_bindings"]
-                bindings[0]["entity_id"], bindings[1]["entity_id"] = (
-                    bindings[1]["entity_id"],
-                    bindings[0]["entity_id"],
-                )
-                path = Path(directory) / "selection.json"
-                path.write_text(json.dumps(selected))
-                with self.assertRaisesRegex(ValueError, "category bindings differ"):
-                    read_saved(path)
-
-    def test_physical_classes_and_missing_rows_are_part_of_the_mapping(self):
-        for change in ("class", "missing"):
-            with self.subTest(change=change):
-                selected = deepcopy(self.selection)
-                bindings = selected["domains"]["regional"]["category_bindings"]
-                if change == "class":
-                    bindings[1]["physical_class"] = "water"
-                else:
-                    bindings.pop()
-                with self.assertRaisesRegex(ValueError, "category bindings differ"):
-                    validate_bindings(selected["domains"])
-
-    def test_duplicate_codes_or_entity_classes_cannot_hide_a_disagreement(self):
-        for duplicate in (
-            dict(code=301, entity_id=42, physical_class="water"),
-            dict(code=123, entity_id=81, physical_class="land"),
+    def test_duplicate_code_or_entity_class_and_missing_entity_fail(self):
+        for bad in (
+            dict(code=18, entity_id=2, physical_class="water"),
+            dict(code=4, entity_id=2, physical_class="land"),
+            dict(code=4, entity_id=999, physical_class="land"),
         ):
-            with self.subTest(binding=duplicate):
-                selected = deepcopy(self.selection)
-                selected["domains"]["regional"]["category_bindings"].append(duplicate)
-                with self.assertRaisesRegex(ValueError, "duplicate category bindings"):
-                    validate_bindings(selected["domains"])
+            geography = deepcopy(self.geography)
+            geography["category_bindings"].append(bad)
+            with self.assertRaisesRegex(ValueError, "category binding"):
+                validate_bindings(geography)
+
+    def test_saved_values_are_read_without_querying_neon(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "selection.json"
+            path.write_bytes(canonical_bytes(self.frozen))
+            self.assertEqual(read_saved(path), self.frozen)
+            self.frozen["schema"] = "worldatlas-input-selection-v1"
+            path.write_text(json.dumps(self.frozen))
+            with self.assertRaisesRegex(ValueError, "captured implementation"):
+                read_saved(path)
 
 
 @unittest.skipUnless(
@@ -100,235 +67,190 @@ class BindingTests(unittest.TestCase):
 )
 class SelectionTests(unittest.TestCase):
     def setUp(self):
-
         self.url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
         self.writer = psycopg.connect(self.url, autocommit=True)
         self.addCleanup(self.writer.close)
         self.addCleanup(self.remove)
-        self.writer.execute(
-            "INSERT INTO atlas.geographic_entities(id,name,level,color_rgb) VALUES (970000001,'Selected entity','continent','#123456')"
+        self.geometry = dict(type="Point", coordinates=[10.0, 20.0])
+        self.recipe = dict(
+            method="selected_vector_features",
+            source_id="__selection_raw",
+            basis="First",
+            id_field="id",
+            selections=[
+                dict(feature_id="__selection_point", source_feature_id="provider")
+            ],
         )
-        self.writer.execute(
-            "INSERT INTO atlas.map_category_bindings VALUES (17,970000001,'land')"
-        )
-        self.writer.execute(
-            "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES ('__selected_raw','Test','Test','test:source','Test','test:license','Test','test','source.geojson',%s,1)",
-            ("a" * 64,),
-        )
-        self.geometry = {"type": "Point", "coordinates": [10.0, 20.0]}
-        self.writer.execute(
-            "INSERT INTO atlas.construction_records VALUES ('__selected_recipe',%s)",
-            (
-                Jsonb(
-                    dict(
-                        method="selected_vector_features",
-                        source_id="__selected_raw",
-                        basis="First",
-                        id_field="id",
-                        selections=[
-                            dict(
-                                feature_id="__selected_point",
-                                source_feature_id="provider",
-                            )
-                        ],
-                    )
-                ),
-            ),
-        )
-        self.writer.execute(
-            "INSERT INTO atlas.source_features VALUES ('__selected_point','provider',%s,'__selected_recipe')",
-            (Jsonb(self.geometry),),
-        )
-
-        self.writer.execute(
-            "INSERT INTO atlas.geographic_assignments VALUES ('__selected_assignment',970000001,'A geographic decision',%s)",
-            (["__selected_point"],),
-        )
-        self.writer.execute(
-            "INSERT INTO atlas.geographic_assignment_sources VALUES ('__selected_assignment','__selected_raw','Section 1','A supporting citation')"
-        )
+        with self.writer.transaction():
+            self.writer.execute(
+                "INSERT INTO atlas.geographic_levels VALUES ('world',NULL),('continent','world')"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.geographic_entities(id,name,level_id,parent_id,physical_class,color_rgb) VALUES (0,'World','world',NULL,'mixed',NULL),(2,'Asia','continent',0,'mixed','#123456')"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.map_category_bindings VALUES (18,2,'land'),(2,2,'water')"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES ('__selection_raw','First','Test','test:raw','Test','test:license','Test','test','selected',%s,1)",
+                ("a" * 64,),
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.construction_records VALUES ('__selection_recipe',%s)",
+                (Jsonb(self.recipe),),
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.source_features VALUES ('__selection_point',%s,'__selection_recipe')",
+                (Jsonb(self.geometry),),
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.geographic_rules VALUES ('__selection_rule',0,'assign_area','land','component',false,'Geographic decision')"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.geographic_rule_features VALUES ('__selection_rule','__selection_point','scope_component')"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.geographic_rule_targets VALUES ('__selection_target','__selection_rule',2,NULL)"
+            )
+            self.writer.execute(
+                "INSERT INTO atlas.geographic_rule_sources VALUES ('__selection_rule','__selection_raw','Section 1','Supporting geographic interpretation')"
+            )
 
     def remove(self):
-        self.writer.execute(
-            "DELETE FROM atlas.geographic_assignment_sources WHERE assignment_id='__selected_assignment'"
-        )
-        self.writer.execute(
-            "DELETE FROM atlas.geographic_assignments WHERE id='__selected_assignment'"
-        )
-        self.writer.execute(
-            "DELETE FROM atlas.source_features WHERE id='__selected_point'"
-        )
-        self.writer.execute(
-            "DELETE FROM atlas.construction_records WHERE id='__selected_recipe'"
-        )
-        self.writer.execute(
-            "DELETE FROM atlas.source_assets WHERE id='__selected_raw'"
-        )
-        self.writer.execute(
-            "DELETE FROM atlas.map_category_bindings WHERE entity_id=970000001"
-        )
-        self.writer.execute("DELETE FROM atlas.geographic_entities WHERE id=970000001")
+        with self.writer.transaction():
+            self.writer.execute(
+                "DELETE FROM atlas.geographic_rules WHERE id='__selection_rule'"
+            )
+            self.writer.execute(
+                "DELETE FROM atlas.source_features WHERE id='__selection_point'"
+            )
+            self.writer.execute(
+                "DELETE FROM atlas.construction_records WHERE id='__selection_recipe'"
+            )
+            self.writer.execute(
+                "DELETE FROM atlas.source_assets WHERE id='__selection_raw'"
+            )
+            self.writer.execute(
+                "DELETE FROM atlas.map_category_bindings WHERE entity_id=2"
+            )
+            self.writer.execute(
+                "DELETE FROM atlas.geographic_entities WHERE id IN (0,2)"
+            )
+            self.writer.execute(
+                "DELETE FROM atlas.geographic_levels WHERE id IN ('world','continent')"
+            )
 
-    def read(self, **options):
-        with psycopg.connect(self.url) as db:
-            result = read_selection(db, **options)
+    def read(self, **kwargs):
+        with psycopg.connect(self.url) as database:
+            result = read_selection(database, **kwargs)
             self.assertEqual(
-                db.info.transaction_status, psycopg.pq.TransactionStatus.IDLE
+                database.info.transaction_status, psycopg.pq.TransactionStatus.IDLE
             )
             return result
 
-    def test_freezes_coordinates_catalog_bindings_and_colors(self):
-        selected = self.read()
-        self.assertEqual(selected["schema"], "worldatlas-input-selection-v3")
-        self.assertNotIn("revisions", selected)
-        self.assertEqual(
-            selected["geography"]["features"][0]["geometry"], self.geometry
-        )
-        self.assertEqual(selected["raw_sources"][0]["sha256"], "a" * 64)
-        self.assertEqual(selected["raw_sources"][0]["source_id"], "__selected_raw")
-        self.assertEqual(selected["construction_records"][0]["id"], "__selected_recipe")
-        self.assertEqual(
-            entity_colors(selected), [dict(entity_id=970000001, color_rgb="#123456")]
-        )
-
-    def test_freezes_assignments_and_citations_without_case_or_evidence_copies(self):
-        selected = self.read()["geography"]
-        self.assertNotIn("affiliations", selected)
-        self.assertNotIn("cases", selected)
-        self.assertNotIn("case_sources", selected)
-        self.assertEqual(
-            selected["assignments"],
-            [
-                dict(
-                    assignment_id="__selected_assignment",
-                    entity_id=970000001,
-                    rationale="A geographic decision",
-                    feature_ids=["__selected_point"],
-                )
-            ],
-        )
-        self.assertEqual(
-            selected["assignment_sources"][0]["source_id"], "__selected_raw"
-        )
-
-    def test_later_working_edit_does_not_change_saved_inputs(self):
-        first = self.read()
-
-        changed = {"type": "Point", "coordinates": [11.0, 21.0]}
+    def test_geometry_construction_raw_metadata_and_links_are_frozen(self):
+        frozen = self.read()
+        geography = frozen["geography"]
+        self.assertEqual(geography["features"][0]["geometry"], self.geometry)
+        self.assertEqual(frozen["construction_records"][0]["document"], self.recipe)
+        self.assertEqual(frozen["raw_sources"][0]["sha256"], "a" * 64)
+        self.assertEqual(geography["rule_sources"][0]["source_id"], "__selection_raw")
+        self.assertEqual(geography["category_bindings"][1]["code"], 18)
+        first = canonical_bytes(frozen)
         self.writer.execute(
-            "UPDATE atlas.source_features SET geometry=%s WHERE id=%s",
-            (Jsonb(changed), "__selected_point"),
+            'UPDATE atlas.source_features SET geometry=\' {"type":"Point","coordinates":[11,21]}\' WHERE id=\'__selection_point\''
         )
-        second = self.read()
-        with tempfile.TemporaryDirectory() as temp:
-            path = Path(temp) / "selection.json"
-            path.write_bytes(canonical_bytes(first))
-            restored = read_saved(path)
+        self.assertEqual(canonical_bytes(frozen), first)
         self.assertEqual(
-            restored["geography"]["features"][0]["geometry"], self.geometry
-        )
-        self.assertEqual(second["geography"]["features"][0]["geometry"], changed)
-
-    def test_construction_edits_are_copied_into_each_build(self):
-        first = self.read()
-        self.writer.execute(
-            "UPDATE atlas.construction_records SET document=document || '{\"basis\":\"Second\"}' WHERE id='__selected_recipe'"
-        )
-        second = self.read()
-        self.assertEqual(first["construction_records"][0]["document"]["basis"], "First")
-        self.assertEqual(
-            second["construction_records"][0]["document"]["basis"], "Second"
+            self.read()["geography"]["features"][0]["geometry"]["coordinates"], [11, 21]
         )
 
-    def test_missing_explicit_inputs_fail(self):
-        for options in (dict(raw_sources=["missing"]), dict(constructions=["missing"])):
-            with (
-                self.subTest(options=options),
-                self.assertRaisesRegex(ValueError, "missing"),
-            ):
-                self.read(**options)
+    def test_repeatable_read_never_mixes_concurrent_edits(self):
+        writer = self.writer
 
-    def test_concurrent_edits_do_not_mix_database_snapshots(self):
-        with psycopg.connect(self.url) as db:
-            outer = self
+        class Interleave:
+            def __init__(self, database):
+                self.database = database
+                self.changed = False
 
-            class ConcurrentEdit:
-                def transaction(self):
-                    return db.transaction()
+            def __getattr__(self, name):
+                return getattr(self.database, name)
 
-                def cursor(self, **kw):
-                    return db.cursor(**kw)
-
-                def execute(self, query, params=None):
-                    result = db.execute(query, params)
-                    if "FROM atlas.source_assets a" in query:
-                        outer.writer.execute(
-                            "UPDATE atlas.geographic_entities SET color_rgb='#654321' WHERE id=970000001"
+            def execute(self, query, *args):
+                cursor = self.database.execute(query, *args)
+                if "WITH selected_rules" in query and not self.changed:
+                    self.changed = True
+                    with writer.transaction():
+                        writer.execute(
+                            'UPDATE atlas.source_features SET geometry=\'{"type":"Point","coordinates":[11,21]}\' WHERE id=\'__selection_point\''
                         )
-                    return result
+                        writer.execute(
+                            "UPDATE atlas.source_assets SET title='Second' WHERE id='__selection_raw'"
+                        )
+                        writer.execute(
+                            "UPDATE atlas.construction_records SET document=document||'{\"basis\":\"Second\"}' WHERE id='__selection_recipe'"
+                        )
+                return cursor
 
-            first = read_selection(ConcurrentEdit())
-        self.assertEqual(entity_colors(first)[0]["color_rgb"], "#123456")
-        self.assertEqual(entity_colors(self.read())[0]["color_rgb"], "#654321")
+        with psycopg.connect(self.url) as database:
+            frozen = read_selection(Interleave(database))
+        self.assertEqual(frozen["geography"]["features"][0]["geometry"], self.geometry)
+        self.assertEqual(frozen["raw_sources"][0]["title"], "First")
+        self.assertEqual(
+            frozen["construction_records"][0]["document"]["basis"], "First"
+        )
+        self.assertEqual(
+            self.read()["construction_records"][0]["document"]["basis"], "Second"
+        )
+
+    def test_requested_missing_catalog_or_construction_fails(self):
+        for option in ("raw_sources", "constructions"):
+            with self.assertRaisesRegex(ValueError, "missing"):
+                self.read(**{option: ["absent"]})
 
 
 @unittest.skipUnless(
     os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
 )
 class HierarchyConcurrencyTests(unittest.TestCase):
-    def test_parent_change_and_child_insert_cannot_commit_an_invalid_hierarchy(self):
-        from concurrent.futures import ThreadPoolExecutor
-        import threading
-        import time
-
+    def test_parent_edit_and_child_insert_cannot_commit_an_incompatible_family(self):
         url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
-        ids = [970100001, 970100002, 970100003]
+        started = threading.Event()
         with psycopg.connect(url, autocommit=True) as setup:
-            setup.execute(
-                "INSERT INTO atlas.geographic_entities(id,name,level) VALUES (%s,'First','continent'),(%s,'Second','continent')",
-                ids[:2],
-            )
-        try:
-            with (
-                psycopg.connect(url) as parent,
-                psycopg.connect(url) as child,
-                psycopg.connect(url, autocommit=True) as observer,
-                ThreadPoolExecutor(1) as workers,
-            ):
-                parent.execute(
-                    "UPDATE atlas.geographic_entities SET level='subcontinent',parent_id=%s WHERE id=%s",
-                    (ids[1], ids[0]),
+            with setup.transaction():
+                setup.execute(
+                    "INSERT INTO atlas.geographic_levels VALUES ('world',NULL),('continent','world')"
                 )
-                parent.execute("SET CONSTRAINTS ALL IMMEDIATE")
-
-                def add_child():
-                    child.execute(
-                        "INSERT INTO atlas.geographic_entities(id,name,level,parent_id) VALUES (%s,'Child','subcontinent',%s)",
-                        (ids[2], ids[0]),
+                setup.execute(
+                    "INSERT INTO atlas.geographic_entities(id,name,level_id,physical_class) VALUES (0,'World','world','mixed')"
+                )
+            try:
+                with psycopg.connect(url) as parent:
+                    parent.execute(
+                        "UPDATE atlas.geographic_entities SET physical_class='land' WHERE id=0"
                     )
-                    child.commit()
 
-                result = workers.submit(add_child)
-                deadline = time.monotonic() + 5
-                while not result.done():
-                    blockers = observer.execute(
-                        "SELECT pg_blocking_pids(%s)", (child.info.backend_pid,)
-                    ).fetchone()[0]
-                    if parent.info.backend_pid in blockers:
-                        break
-                    if time.monotonic() >= deadline:
-                        parent.rollback()
-                        self.fail(
-                            "child insertion did not resolve or wait for the parent edit"
-                        )
-                    threading.Event().wait(0.01)
-                parent.commit()
-                with self.assertRaisesRegex(
-                    psycopg.errors.RaiseException, "invalid parent level"
-                ):
-                    result.result(timeout=5)
-        finally:
-            with psycopg.connect(url) as cleanup:
-                cleanup.execute(
-                    "DELETE FROM atlas.geographic_entities WHERE id=ANY(%s)", (ids,)
-                )
+                    def insert():
+                        try:
+                            with psycopg.connect(url) as child:
+                                child.execute(
+                                    "INSERT INTO atlas.geographic_entities(id,name,level_id,parent_id,physical_class) VALUES (7,'Atlantic','continent',0,'water')"
+                                )
+                                started.set()
+                            return "committed"
+                        except psycopg.errors.RaiseException:
+                            return "rejected"
+
+                    with ThreadPoolExecutor(max_workers=1) as pool:
+                        future = pool.submit(insert)
+                        self.assertTrue(started.wait(5))
+                        parent.commit()
+                        self.assertEqual(future.result(timeout=5), "rejected")
+            finally:
+                with setup.transaction():
+                    setup.execute(
+                        "DELETE FROM atlas.geographic_entities WHERE id IN (0,7)"
+                    )
+                    setup.execute(
+                        "DELETE FROM atlas.geographic_levels WHERE id IN ('world','continent')"
+                    )

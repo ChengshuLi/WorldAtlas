@@ -177,6 +177,20 @@ def read_features(path, settings):
             value = values[0]
         if "polygon_containing" in selection:
             value = polygon_containing(value, selection["polygon_containing"])
+        if selection.get("holes", "preserve") == "outer_envelope":
+            from shapely import union_all
+            from shapely.geometry import Polygon, mapping
+
+            if value["type"] not in ("Polygon", "MultiPolygon"):
+                raise ValueError("outer_envelope requires a polygon source")
+            parts = (
+                [value["coordinates"]]
+                if value["type"] == "Polygon"
+                else value["coordinates"]
+            )
+            value = mapping(union_all([Polygon(rings[0]) for rings in parts]))
+            value = json.loads(json.dumps(value, allow_nan=False))
+            validate_geometry(value)
         result.append(
             {
                 "feature_id": selection["feature_id"],

@@ -5,7 +5,7 @@ The source catalog identifies each exact file by one immutable `source_id`, its
 R2 location, byte size and checksum. Changed raw bytes get a new source ID.
 
 - [`osm/`](osm/README.md): archived OpenStreetMap boundaries and selected features.
-- [`iho/`](iho/README.md): IHO S-130 routes and sea areas.
+- [`iho/`](iho/README.md): Complete IHO S-130 sea areas.
 - [`features/`](features/README.md): selected vector points and polygons.
 - [`traces/`](traces/README.md): boundaries from reviewed points on source figures.
 - [`watersheds/`](watersheds/README.md): boundaries from terrain and natural drainage.
@@ -55,8 +55,8 @@ SELECT document FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 Edit the recipe and rerun the same ID to update working geometry. Successful
 imports save geometry and source relationships together, retaining unrelated
 notes and links. A failed calculation or write leaves previous geometry intact.
-Workers calculate independently; writes to boundaries sharing a region wait for
-one another so region validation sees committed changes.
+Workers calculate independently. Each save verifies the construction is unchanged,
+keeps its feature IDs associated with that construction, and preserves unrelated links.
 
 ## Regenerate working geometry
 
@@ -82,8 +82,7 @@ belongs to geographic assignments in map building.
 
 Each constructor's typed keyword-only arguments define its fields. An argument
 without a default is required; a default makes it optional. `NonEmptyText` rejects
-empty or whitespace-only text. Nested `TypedDict` definitions describe feature
-and route selections. `runtime` supplies connections, work paths and the
+empty or whitespace-only text. Nested `TypedDict` definitions describe feature selections. `runtime` supplies connections, work paths and the
 construction ID; it is not a field in the stored document.
 
 [`contracts.py`](contracts.py) derives command validation and PostgreSQL checks
@@ -108,8 +107,7 @@ Do not maintain another field list in a validator or README.
 
 `run_import.py` reads the recipe and dispatches to a typed function in a
 `build_*.py` module. Those modules handle Neon/R2; other modules implement
-calculations. `features/geometry.py` saves every imported geometry and validates
-any seed region that uses an edited line. `__init__.py` files define importable packages and enable test discovery.
+calculations. `features/geometry.py` validates and atomically saves imported geometry. `__init__.py` files define importable packages and enable test discovery.
 
 Tests live beside their code. `test_run_import.py` checks dispatch;
 `test_contracts.py` checks Python/PostgreSQL agreement and direct SQL writes;

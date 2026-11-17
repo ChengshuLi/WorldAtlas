@@ -1,37 +1,76 @@
-"""Official and candidate comparison streams share one immutable manifest."""
+"""Candidate and official lookups read a pinned manifest outside the database transaction."""
+
+import hashlib
+import io
+import json
 import os
 import unittest
 from unittest.mock import patch
-
 import psycopg
-from psycopg.types.json import Jsonb
 
 from worldatlas.map_build.inputs.releases import read_release_streams
-from worldatlas.map_releases.manage_release import approve
 
 
-@unittest.skipUnless(os.environ.get('WORLDATLAS_TEST_DATABASE_URL'), 'requires disposable PostgreSQL')
+@unittest.skipUnless(
+    os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
+)
 class ReleaseLookupTests(unittest.TestCase):
-    def test_candidate_then_official_lookup_and_release_protection(self):
-        url = os.environ['WORLDATLAS_TEST_DATABASE_URL']
-        with psycopg.connect(url, autocommit=True) as db:
-            objects = {stream + '.u32le.gz': dict(r2_key='test/' + stream, sha256='a' * 64,
-                       size_bytes=12, content_type='application/gzip') for stream in ('rows', 'runs')}
-            manifest = dict(objects=objects, decoded_sha256=dict(rows='b' * 64, runs='c' * 64))
+    def test_candidate_and_official_resolve_the_same_pinned_streams(self):
+        url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
+        identity = "v97.0-rc.1"
+        folder = "releases/" + identity + "/"
+        objects = {
+            name: dict(
+                r2_key=folder + name,
+                sha256="a" * 64,
+                size_bytes=12,
+                content_type="application/gzip",
+            )
+            for name in ("rows.u32le.gz", "runs.u32le.gz")
+        }
+        raw = json.dumps(
+            dict(objects=objects, decoded_sha256=dict(rows="b" * 64, runs="c" * 64))
+        ).encode()
+
+        class Storage:
+            def close(self):
+                pass
+
+            def get_object(self, **kw):
+                self.key = kw["Key"]
+                return dict(Body=io.BytesIO(raw))
+
+        storage = Storage()
+        with psycopg.connect(url, autocommit=True) as database:
+            database.execute(
+                "INSERT INTO atlas.map_releases(id,r2_bucket,r2_prefix,manifest_sha256) VALUES (%s,%s,%s,%s)",
+                (identity, "test", folder, hashlib.sha256(raw).hexdigest()),
+            )
             try:
-                db.execute('INSERT INTO atlas.map_releases(id,r2_bucket,manifest) VALUES (%s,%s,%s)',
-                           ('v97.0-rc1', 'test', Jsonb(manifest)))
-                with patch.dict(os.environ, NEON_DATABASE_URL=url):
-                    candidate = read_release_streams('v97.0-rc1')
-                    self.assertEqual([row[0] for row in candidate], ['rows', 'runs'])
-                    self.assertEqual(candidate[0][1:4], ('test', 'test/rows', 12))
-                    with self.assertRaisesRegex(ValueError, 'missing row or run'):
-                        read_release_streams('v97.0')
-                    approve(db, 'v97.0-rc1', 'Reviewer')
-                    db.execute("INSERT INTO atlas.map_publications VALUES ('v97.0','v97.0-rc1',NULL)")
-                    self.assertEqual(read_release_streams('v97.0'), candidate)
-                    with self.assertRaises(psycopg.errors.ForeignKeyViolation):
-                        db.execute("DELETE FROM atlas.map_releases WHERE id='v97.0-rc1'")
+                with (
+                    patch.dict(os.environ, NEON_DATABASE_URL=url),
+                    patch(
+                        "worldatlas.map_build.physical.build.make_r2_client",
+                        return_value=storage,
+                    ),
+                ):
+                    candidate = read_release_streams(identity)
+                    self.assertEqual(
+                        candidate[0][1:4], ("test", folder + "rows.u32le.gz", 12)
+                    )
+                    self.assertEqual(storage.key, folder + "manifest.json")
+                    with self.assertRaisesRegex(ValueError, "no unique release"):
+                        read_release_streams("v97.0")
+                    database.execute(
+                        "UPDATE atlas.map_releases SET is_official=true WHERE id=%s",
+                        (identity,),
+                    )
+                    self.assertEqual(read_release_streams("v97.0"), candidate)
+                    database.execute(
+                        "UPDATE atlas.map_releases SET manifest_sha256=manifest_sha256 WHERE id=%s",
+                        (identity,),
+                    )
             finally:
-                db.execute("DELETE FROM atlas.map_publications WHERE id='v97.0'")
-                db.execute("DELETE FROM atlas.map_releases WHERE id='v97.0-rc1'")
+                database.execute(
+                    "DELETE FROM atlas.map_releases WHERE id=%s", (identity,)
+                )

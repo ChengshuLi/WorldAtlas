@@ -10,6 +10,13 @@ from worldatlas.source_imports.run_import import IMPORTERS, run_import
 
 
 DOCUMENTS = {
+    "interpreted_geometry": dict(
+        source_ids=["raw"],
+        basis="Selected context",
+        selections=[
+            dict(feature_id="context", geometry=dict(type="Point", coordinates=[1, 2]))
+        ],
+    ),
     "geodesic_trace": dict(
         source_ids=["raw"],
         basis="Chosen points",
@@ -18,20 +25,11 @@ DOCUMENTS = {
         points=[[1, 1], [0, 0]],
         max_step_metres=1000,
     ),
-    "osm_way_chain": dict(source_id="raw", basis="Join ways", feature_id="boundary", source_feature_id="manifest.json"),
-    "s130_rhumb_routes": dict(
+    "osm_way_chain": dict(
         source_id="raw",
-        basis="Selected routes",
-        gml_member="source.gml",
-        gml_sha256="a" * 64,
-        max_step_km=0.05,
-        routes=[
-            dict(
-                feature_id="route",
-                construction_line_id="line",
-                reverse=False,
-            )
-        ],
+        basis="Join ways",
+        feature_id="boundary",
+        source_feature_id="manifest.json",
     ),
     "watershed_boundary": dict(
         feature_id="boundary",
@@ -114,9 +112,7 @@ class ImportSelectionTests(unittest.TestCase):
             patch.dict(IMPORTERS, {"geodesic_trace": trace}),
             patch(
                 "worldatlas.source_imports.run_import.read_recipe",
-                return_value=dict(
-                    DOCUMENTS["geodesic_trace"], method="geodesic_trace"
-                ),
+                return_value=dict(DOCUMENTS["geodesic_trace"], method="geodesic_trace"),
             ),
         ):
             runtime = run_import(self.connect, "trace")

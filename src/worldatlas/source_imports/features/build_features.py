@@ -21,6 +21,7 @@ class VectorSelection(FeatureIdentity):
     collection: NotRequired[bool]
     expected_feature_count: NotRequired[int]
     polygon_containing: NotRequired[tuple[float, float]]
+    holes: NotRequired[Literal["preserve", "outer_envelope"]]
 
 
 class ParentRelation(TypedDict):

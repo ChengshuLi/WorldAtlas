@@ -34,8 +34,8 @@ BEGIN
  EXCEPTION WHEN check_violation THEN NULL; END;
  INSERT INTO atlas.construction_records VALUES ('__feature_recipe',
  '{"method":"selected_vector_features","source_id":"__source","basis":"Selected point","id_field":"id","selections":[{"feature_id":"__feature","source_feature_id":"provider"}]}');
- INSERT INTO atlas.source_features(id,source_feature_id,geometry,construction_id)
- VALUES ('__feature','provider-id','{"type":"Point","coordinates":[0,0]}','__feature_recipe');
+ INSERT INTO atlas.source_features(id,geometry,construction_id)
+ VALUES ('__feature','{"type":"Point","coordinates":[0,0]}','__feature_recipe');
  BEGIN
   DELETE FROM atlas.source_assets WHERE id='__source';
   RAISE EXCEPTION 'contributing raw source deleted';

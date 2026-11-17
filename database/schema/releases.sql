@@ -1,72 +1,24 @@
--- Immutable map bundles, publication approval and official-version pointers.
-
-CREATE FUNCTION atlas.valid_release_assets(objects jsonb) RETURNS boolean
-    LANGUAGE sql IMMUTABLE
-    AS $_$
- SELECT jsonb_typeof(objects)='object' AND NOT EXISTS (
-  SELECT 1 FROM jsonb_each(CASE WHEN jsonb_typeof(objects)='object' THEN objects ELSE '{}'::jsonb END) o
-  WHERE NOT COALESCE(jsonb_typeof(value)='object'
-   AND jsonb_typeof(value->'r2_key')='string' AND length(value->>'r2_key')>0
-   AND value->>'sha256' ~ '^[0-9a-f]{64}$'
-   AND jsonb_typeof(value->'content_type')='string' AND length(value->>'content_type')>0
-   AND CASE WHEN jsonb_typeof(value->'size_bytes')='number' THEN
-    (value->>'size_bytes')::numeric>=0 AND trunc((value->>'size_bytes')::numeric)=(value->>'size_bytes')::numeric
-    ELSE false END,false))
-$_$;
-
+-- An immutable bundle pins its R2 manifest; publication only changes flags.
 CREATE TABLE atlas.map_releases (
-    id text NOT NULL,
-    map_version text GENERATED ALWAYS AS (regexp_replace(id, '-rc\.?[1-9][0-9]*$'::text, ''::text)) STORED,
-    r2_bucket text NOT NULL,
-    manifest jsonb NOT NULL,
-    approved_by text,
-    approved_at timestamp with time zone,
-    CONSTRAINT map_releases_approved_by_check CHECK ((length(btrim(approved_by)) > 0)),
-    CONSTRAINT map_releases_check CHECK (((approved_by IS NULL) = (approved_at IS NULL))),
-    CONSTRAINT map_releases_manifest_check CHECK (COALESCE(((jsonb_typeof(manifest) = 'object'::text) AND atlas.valid_release_assets((manifest -> 'objects'::text)) AND ((manifest -> 'objects'::text) ?& ARRAY['rows.u32le.gz'::text, 'runs.u32le.gz'::text]) AND ((manifest #>> '{decoded_sha256,rows}'::text[]) ~ '^[0-9a-f]{64}$'::text) AND ((manifest #>> '{decoded_sha256,runs}'::text[]) ~ '^[0-9a-f]{64}$'::text)), false)),
-    CONSTRAINT map_releases_r2_bucket_check CHECK ((length(btrim(r2_bucket)) > 0)),
-    CONSTRAINT map_releases_id_check CHECK ((id ~ '^v[0-9]+\.[0-9]+(-rc\.?[1-9][0-9]*)?$'::text)),
-    CONSTRAINT map_releases_pkey PRIMARY KEY (id),
-    CONSTRAINT map_releases_id_map_version_key UNIQUE (id, map_version)
+    id text PRIMARY KEY CHECK (id ~ '^v[0-9]+\.[0-9]+(-rc\.[1-9][0-9]*)?$'),
+    map_version text GENERATED ALWAYS AS (split_part(id,'-rc.',1)) STORED,
+    r2_bucket text NOT NULL CHECK (length(btrim(r2_bucket)) > 0),
+    r2_prefix text NOT NULL CHECK (r2_prefix='releases/'||id||'/'),
+    manifest_sha256 text NOT NULL CHECK (manifest_sha256 ~ '^[0-9a-f]{64}$'),
+    is_official boolean NOT NULL DEFAULT false,
+    is_current boolean NOT NULL DEFAULT false,
+    UNIQUE (r2_bucket,r2_prefix),
+    CHECK (NOT is_current OR is_official)
 );
-
-CREATE FUNCTION atlas.guard_map_release() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
+CREATE UNIQUE INDEX map_release_official_version ON atlas.map_releases(map_version) WHERE is_official;
+CREATE UNIQUE INDEX map_release_current ON atlas.map_releases ((true)) WHERE is_current;
+CREATE FUNCTION atlas.guard_map_release() RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN
- IF TG_OP='INSERT' THEN
-  IF NEW.approved_at IS NOT NULL THEN RAISE EXCEPTION 'stage the release before approving it'; END IF;
- ELSIF OLD.approved_at IS NOT NULL OR NEW.approved_at IS NULL
-  OR (NEW.id,NEW.r2_bucket,NEW.manifest) IS DISTINCT FROM (OLD.id,OLD.r2_bucket,OLD.manifest) THEN
-  RAISE EXCEPTION 'only an unapproved release can receive approval';
- END IF;
- RETURN NEW;
+  IF (NEW.id,NEW.r2_bucket,NEW.r2_prefix,NEW.manifest_sha256) IS DISTINCT FROM
+     (OLD.id,OLD.r2_bucket,OLD.r2_prefix,OLD.manifest_sha256) THEN
+    RAISE EXCEPTION 'release bundle identity is immutable';
+  END IF;
+  RETURN NEW;
 END $$;
-
-CREATE TRIGGER map_release_guard BEFORE INSERT OR UPDATE ON atlas.map_releases FOR EACH ROW EXECUTE FUNCTION atlas.guard_map_release();
-
-CREATE TABLE atlas.map_publications (
-    id text NOT NULL,
-    release_id text NOT NULL,
-    homepage_key text,
-    CONSTRAINT map_publications_homepage_key_check CHECK (((homepage_key IS NULL) OR (length(btrim(homepage_key)) > 0))),
-    CONSTRAINT map_publications_homepage_key_key UNIQUE (homepage_key),
-    CONSTRAINT map_publications_pkey PRIMARY KEY (id),
-    CONSTRAINT map_publications_release_fkey FOREIGN KEY (release_id, id) REFERENCES atlas.map_releases(id, map_version)
-);
-
-CREATE FUNCTION atlas.guard_map_publication() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
- IF TG_OP='UPDATE' AND (NEW.id,NEW.release_id) IS DISTINCT FROM (OLD.id,OLD.release_id) THEN
-  RAISE EXCEPTION 'published versions are immutable';
- END IF;
- IF TG_OP='INSERT' AND NOT EXISTS (
-  SELECT 1 FROM atlas.map_releases WHERE id=NEW.release_id AND approved_at IS NOT NULL) THEN
-  RAISE EXCEPTION 'approve the exact release before publishing';
- END IF;
- RETURN NEW;
-END $$;
-
-CREATE TRIGGER map_publication_guard BEFORE INSERT OR UPDATE ON atlas.map_publications FOR EACH ROW EXECUTE FUNCTION atlas.guard_map_publication();
+CREATE TRIGGER map_release_guard BEFORE UPDATE ON atlas.map_releases
+FOR EACH ROW EXECUTE FUNCTION atlas.guard_map_release();
