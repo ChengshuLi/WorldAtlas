@@ -25,14 +25,17 @@ def compile_rules(geography, parent_id):
     """Resolve IDs once, before any full-grid calculations or network downloads."""
     entities = {e["id"]: e for e in geography["entities"]}
     features = {f["id"]: f for f in geography["features"]}
-    if len(entities) != len(geography["entities"]) or len(features) != len(
-        geography["features"]
+    rules = {r["id"]: r for r in geography["rules"]}
+    if (
+        len(entities) != len(geography["entities"])
+        or len(features) != len(geography["features"])
+        or len(rules) != len(geography["rules"])
     ):
-        raise ValueError("duplicate entity or feature identity")
+        raise ValueError("duplicate entity, feature or rule identity")
     if parent_id not in entities:
         raise ValueError("missing geographic parent")
     children = {k: v for k, v in entities.items() if v["parent_id"] == parent_id}
-    selected = {r["id"]: r for r in geography["rules"] if r["parent_id"] == parent_id}
+    selected = {ident: r for ident, r in rules.items() if r["parent_id"] == parent_id}
     if not children or not selected:
         raise ValueError("a division needs child entities and rules")
     links, targets = defaultdict(lambda: defaultdict(list)), defaultdict(list)

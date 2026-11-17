@@ -32,8 +32,10 @@ spatial certificates; unresolved certificates perform complete searches.
 Source polygons are prepared once for repeated raster windows. Scope bounds skip
 empty rows while retaining the full extent of majority-selected components.
 Component intervals and owner lookups use arrays directly rather than repeatedly
-expanding them into individual Python records. Reference intervals feed the
-distance index directly, without writing and rereading a temporary map stream.
+expanding them into individual Python records. Boundary divisions read face
+intervals from mapped arrays and attach their owners in batches. Reference
+intervals feed the distance index directly, without writing and rereading a
+temporary map stream.
 Basin masks are rasterized once and reused for participant discovery and query
 windows, including windows across longitude wrapping. A single eligible owner
 uses direct area assignment rather than a distance calculation.

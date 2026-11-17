@@ -69,7 +69,7 @@ def prepare(physical, parent, selected, snapshot, *, physical_class, unassigned_
     return spans(starts, ends, eligible.astype(np.uint32))
 
 
-def combine(physical, parent, snapshot, claims, *, y, rules, allowed, complete=False):
+def combine(physical, parent, snapshot, claims, *, y, rules, allowed):
     """Merge independent claims; an earlier claim can never conceal a conflict."""
     starts, ends, values = overlay(physical, parent, snapshot, *claims)
     kind, within, previous, *proposed = values
@@ -99,7 +99,4 @@ def combine(physical, parent, snapshot, claims, *, y, rules, allowed, complete=F
         fresh = active & (owners == 0)
         owners[active] = new[active]
         contributors[fresh] = index
-    if complete and np.any((within != 0) & (owners == 0)):
-        x = int(starts[np.flatnonzero((within != 0) & (owners == 0))[0]])
-        raise ValueError(f"parent cell has no child owner at {x},{y}")
     return spans(starts, ends, owners)

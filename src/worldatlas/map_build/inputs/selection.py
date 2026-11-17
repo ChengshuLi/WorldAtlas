@@ -56,7 +56,7 @@ def entity_colors(selection):
     ]
 
 
-def read_selection(database, *, raw_sources=(), constructions=(), parents=None):
+def read_selection(database, *, raw_sources=(), parents=None):
     """Freeze working records and their catalog in one short read-only transaction."""
     result = {
         "schema": "worldatlas-input-selection-v4",
@@ -96,13 +96,7 @@ def read_selection(database, *, raw_sources=(), constructions=(), parents=None):
         references = set(raw_sources) | {
             source["source_id"] for source in data["sources"]
         }
-        document_refs = set(constructions)
-        for key in ("features",):
-            document_refs.update(
-                item["construction_id"]
-                for item in data.get(key, [])
-                if item.get("construction_id") is not None
-            )
+        document_refs = {feature["construction_id"] for feature in features.values()}
         rows = database.execute(
             "SELECT (to_jsonb(a)-'created_at'-'id') || jsonb_build_object('source_id',a.id) "
             "FROM atlas.source_assets a WHERE id=ANY(%s) ORDER BY id",

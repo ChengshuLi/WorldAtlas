@@ -44,7 +44,7 @@ class Faces:
         self.nodes._mmap.close()
 
     def row(self, y):
-        nodes = self.nodes[int(self.offsets[y]) : int(self.offsets[y + 1])]
+        nodes = np.asarray(self.nodes[int(self.offsets[y]) : int(self.offsets[y + 1])])
         if not len(nodes):
             return complete_row(self.grid.width, ())
         positions = np.searchsorted(self.roots, nodes[:, 2])
@@ -53,7 +53,7 @@ class Faces:
         owners = np.where(matched, self.owners[safe], 0)
         return complete_row(
             self.grid.width,
-            [(int(a), int(b), int(e)) for (a, b, _), e in zip(nodes, owners)],
+            np.column_stack((nodes[:, :2], owners)),
         )
 
 
@@ -72,7 +72,7 @@ def component_owners(scope, faces):
                 continue
             component = complete_row(
                 scope.grid.width,
-                [(int(a), int(b), int(root) + 1) for a, b, root in chosen],
+                np.column_stack((chosen[:, :2], chosen[:, 2].astype(np.uint64) + 1)),
             )
             starts, ends, (r, owner) = overlay(component, face)
             valid = (r != 0) & (owner != 0)

@@ -24,8 +24,9 @@ from the same database view as the decisions.
 
 Large feature geometries are read as individual records in that same
 transaction. PostgreSQL does not need to assemble all coordinates into one JSON
-aggregate before sending them. Basin checks reject missing or invalid geometry
-and overlapping contradictory assignments.
+aggregate before sending them. Before calculation, the builder checks working
+and saved selections for valid geometry and unique entity, feature, and rule IDs.
+Assignment checks reject conflicting claims.
 
 `test_selection.py` uses disposable PostgreSQL to check concurrent edits, saved
 replay and missing selections. Source-import integration tests also exercise the

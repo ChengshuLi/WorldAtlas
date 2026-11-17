@@ -83,7 +83,6 @@ class ScopeAndClaims(unittest.TestCase):
             y=9,
             rules=["first", "second"],
             allowed=self.allowed,
-            complete=True,
         )
         self.assertEqual(result, [(0, 3, 101), (3, 7, 807)])
         conflicting = rle([3, 7, 8], [101, 101, 0])
@@ -108,17 +107,4 @@ class ScopeAndClaims(unittest.TestCase):
                 y=0,
                 rules=["water"],
                 allowed=self.allowed,
-            )
-
-    def test_completion_rejects_an_unowned_parent_cell(self):
-        with self.assertRaisesRegex(ValueError, "no child owner at 2,0"):
-            combine(
-                self.physical,
-                self.parent,
-                self.snapshot,
-                [],
-                y=0,
-                rules=[],
-                allowed=self.allowed,
-                complete=True,
             )

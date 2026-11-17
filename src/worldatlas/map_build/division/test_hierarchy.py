@@ -21,6 +21,38 @@ from worldatlas.map_build.test_support import selection
 
 
 class HierarchyTests(unittest.TestCase):
+    def test_finished_division_rejects_unassigned_parent_water(self):
+        grid = Grid(24, 12, 15)
+        geo = selection()["geography"]
+        geo["entities"].append(dict(id=101, parent_id=0, physical_class="land"))
+        geo["category_bindings"].append(
+            dict(code=17, entity_id=101, physical_class="land")
+        )
+        geo["rules"].append(
+            dict(
+                id="land",
+                parent_id=0,
+                operation="assign_area",
+                physical_class="land",
+                unit="cell",
+                unassigned_only=False,
+            )
+        )
+        geo["rule_targets"].append(
+            dict(rule_id="land", entity_id=101, label_point_id=None)
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            physical = np.ones((grid.height, grid.width), dtype=np.uint32)
+            physical[0, 0] = 17
+            write_layer(
+                root / "physical", grid, patch_rows(physical, grid.bounds, grid)
+            )
+            with self.assertRaisesRegex(ValueError, "unassigned geographic cell 1,0"):
+                HierarchyDivision(
+                    geo, grid, root / "physical", root / "division", {}
+                ).run()
+
     def test_water_edit_reuses_verified_land_and_a_land_edit_invalidates_it(self):
         grid = Grid(24, 12, 15)
         geo = selection()["geography"]
