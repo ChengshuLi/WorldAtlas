@@ -51,7 +51,7 @@ GitHub tracks code, schemas, documentation, and task issues. The user merges pul
 
 #### Map projection and dimensions
 
-Use a flat, 2D equirectangular (Plate Carrée) map with equal longitude and latitude steps of 0.00274658203125°. The full-world reference grid is 131,072 × 65,536. Keep the northern edge at 90°N and crop the map at about 60°S. Aligning the crop to a row edge gives a final grid of 131,072 × 54,614 cells (7,158,366,208), with a southern edge of 60.0018310546875°S.
+Use a flat, 2D equirectangular (Plate Carrée) map with equal longitude and latitude steps of 0.00274658203125°. The full-world reference grid is 131,072 × 65,536. Keep the northern edge at 90°N and crop the map just north of 60°S, within the ocean source's coverage. Aligning the crop to a row edge gives a final grid of 131,072 × 54,613 cells (7,158,235,136), with a southern edge of 59.99908447265625°S.
 
 #### Geographic hierarchy
 

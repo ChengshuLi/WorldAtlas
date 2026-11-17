@@ -154,7 +154,7 @@ before(async () => {
   );
   objects.delete(`${missingLegend}/legend/continents.json`);
 
-  const sparse = "releases/v9.4-rc1";
+  const sparse = "releases/v9.4-rc.1";
   bundle(sparse, "v9.4", 18);
   const remap = new Map([
     [1, 301],
@@ -326,7 +326,7 @@ for (const { name, options, fallback, sparse } of [
         await loaded(
           page,
           sparse
-            ? "/releases/v9.4-rc1/index.html"
+            ? "/releases/v9.4-rc.1/index.html"
             : "/releases/v9.0-rc.1/index.html",
           sparse ? "v9.4" : "v9.0",
         );

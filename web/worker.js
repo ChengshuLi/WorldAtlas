@@ -36,7 +36,7 @@ export default {
     }
     if (url.pathname.includes("%")) return new Response("Not found", { status: 404 });
     const key = url.pathname.slice(1);
-    if (!/^releases\/v[0-9]+\.[0-9]+(?:-rc\.?[1-9][0-9]*)?\/[A-Za-z0-9_.\/-]+$/.test(key)
+    if (!/^releases\/v[0-9]+\.[0-9]+(?:-rc\.[1-9][0-9]*)?\/[A-Za-z0-9_.\/-]+$/.test(key)
         || key.split("/").some(part => part === "." || part === "..")) {
       return new Response("Not found", { status: 404 });
     }

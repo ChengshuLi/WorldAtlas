@@ -66,14 +66,14 @@ worldatlas-build src/worldatlas/map_build/config.json \
 The pipeline freezes working geographic decisions and exact source records from
 Neon. The pipeline downloads the raw bytes from R2 and builds the physical grid,
 then assigns land and water categories. The final grid has 131,072 columns and
-54,614 rows. The pipeline guide covers credentials, the GDAL and PROJ versions
+54,613 rows. The pipeline guide covers credentials, the GDAL and PROJ versions
 for exact reproduction, and stage timings.
 
 ## Preview and publish
 
 The [release workflow](src/worldatlas/map_releases/README.md)
 puts each candidate at its own address while the homepage serves the published
-map. Approval records the exact candidate. Publishing serves its existing viewer
+map. Publishing records the selected candidate and serves its existing viewer
 and map files at the homepage.
 
 Use the release command to publish the reviewed viewer and map files.
@@ -81,7 +81,7 @@ When changing the Worker's server code or configuration, deploy it with
 `npx wrangler deploy`. Its `ATLAS` binding connects it to the `worldatlas` R2 bucket.
 
 `atlas.map_releases` stores each release's immutable R2 asset manifest: map
-streams, viewer, configuration, legends and frozen inputs. `atlas.map_publications`
+streams, viewer, configuration, legends and frozen inputs. `atlas.map_releases.is_current`
 connects official versions to those releases and identifies the homepage.
 The legend contains entity names, colors and counts for that release. The source
 catalog tracks raw files, including archive parts. R2 has one layout: raw files

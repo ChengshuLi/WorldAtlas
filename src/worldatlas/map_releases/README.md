@@ -5,11 +5,11 @@ numbered candidate and publishes that same candidate after review. Use the proje
 environment, `NEON_DATABASE_URL` and the R2 credentials used by map building.
 
 ```bash
-worldatlas-release stage v9.0-rc1 \
+worldatlas-release stage v9.0-rc.1 \
   /absolute/path/to/worldatlas-work/runs/preview --viewer web/viewer
 ```
 
-The preview is at `/releases/v9.0-rc1/index.html`. The homepage continues to show
+The preview is at `/releases/v9.0-rc.1/index.html`. The homepage continues to show
 the published release. Changed contents require a new candidate number.
 
 ## Release files and input archive
@@ -22,22 +22,25 @@ Run identity includes runtime versions and available source revision/setup
 information. Resumed builds retain the recorded identities of their attempts.
 Packaging reads the saved run, never today's editable geography in Neon.
 
-Raw files remain under `sources/`, shared across releases. Their cataloged versions,
+Raw files remain under `sources/`, shared across releases. Their cataloged identities,
 size and SHA-256 identify the bytes needed by each build. Keep any raw source
 needed by working geography or a retained release.
 
-Neon's `map_releases` row lists the release files and their R2 keys, sizes,
-checksums and media types. Large input data belongs in the archive, not that row.
-`map_publications` selects the final RC for each official version. Its homepage
-pointer identifies which version is served at `/` through R2's `index.html`.
+Neon's `map_releases` row contains the bundle ID, R2 bucket/folder, manifest
+checksum and publication-state flags. The folder's `manifest.json` lists file
+locations, sizes, checksums and media types. Neon pins the manifest; the manifest
+pins the files and does not contain its own checksum.
+
+`is_official` records the selected final candidate for a version. `is_current`
+identifies the official release served at `/` through R2's fixed `index.html`.
+Staging sets both flags to false and leaves the homepage unchanged.
 
 ## Publish and retire previews
 
 After the user reviews and approves the candidate:
 
 ```bash
-worldatlas-release approve v9.0-rc1 --reviewer NAME
-worldatlas-release publish v9.0-rc1
+worldatlas-release publish v9.0-rc.1
 ```
 
 Publication verifies the files, points the homepage to that exact bundle and
@@ -55,7 +58,7 @@ Deploying the Worker itself is separate: `npx wrangler deploy`.
 ## Archived code
 
 New build attempts capture the installed WorldAtlas source files and the project
-`environment.yml`, `pyproject.toml` and README before computation. Staging includes
+`environment.yml`, `pyproject.toml`, schema and README before computation. Staging includes
 those captured bytes in `inputs.json.gz`; it does not copy code from the checkout
 at staging time. Git history is not needed to recover them.
 
@@ -73,7 +76,7 @@ snapshot adds approximately 0.5 MB compressed per distinct code version.
 ## Restore inputs
 
 ```bash
-worldatlas-release restore-inputs v9.0-rc1 /absolute/path/to/restored-inputs
+worldatlas-release restore-inputs v9.0-rc.1 /absolute/path/to/restored-inputs
 worldatlas-build /absolute/path/to/restored-inputs/configuration.json \
   --work-dir /absolute/path/to/worldatlas-work/replay \
   --selection /absolute/path/to/restored-inputs/selection.json
