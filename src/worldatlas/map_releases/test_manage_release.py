@@ -446,3 +446,32 @@ class PreviewRetirementTests(unittest.TestCase):
         self.assertFalse(
             any("DELETE FROM" in c.args[0] for c in db.execute.call_args_list)
         )
+
+    def test_retry_after_manifest_deletion_requires_an_empty_folder(self):
+        from botocore.exceptions import ClientError
+
+        candidate, folder = "v9.0-rc.1", "releases/v9.0-rc.1/"
+        for remaining in ([], [{"Key": folder + "index.html"}]):
+            with self.subTest(remaining=remaining):
+                db, storage = Mock(), Mock()
+                db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
+                db.execute.return_value.fetchall.return_value = [
+                    (candidate, "test", folder, "a" * 64)
+                ]
+                storage.get_object.side_effect = ClientError(
+                    {"Error": {"Code": "NoSuchKey"}}, "GetObject"
+                )
+                storage.list_objects_v2.return_value = {"Contents": remaining}
+                if remaining:
+                    with self.assertRaises(ClientError):
+                        retire_previews(db, storage, "v9.0")
+                    self.assertFalse(
+                        any("DELETE FROM" in c.args[0] for c in db.execute.call_args_list)
+                    )
+                else:
+                    self.assertEqual(retire_previews(db, storage, "v9.0"), [candidate])
+                    self.assertIn("DELETE FROM", db.execute.call_args.args[0])
+                storage.list_objects_v2.assert_called_once_with(
+                    Bucket="test", Prefix=folder, MaxKeys=1
+                )
+                storage.delete_object.assert_not_called()

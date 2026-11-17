@@ -34,7 +34,9 @@ def open_grid(directory, grid):
             or np.any(rows[1:] <= rows[:-1])
         ):
             raise ValueError('invalid row-run stream offsets')
-        yield rows, runs
+        # Keep the mappings open here. Plain views share their read-only bytes
+        # without carrying the memmap subclass through each slice and operation.
+        yield np.asarray(rows), np.asarray(runs)
     finally:
         for array in arrays:
             array._mmap.close()

@@ -22,9 +22,10 @@ Create the `runs/` parent directory first. The work directory holds the reusable
 
 For identical physical inputs, add
 `--reuse-from /absolute/path/to/previous-run`. The pipeline verifies the
-existing physical grid and reuses an aligned northern prefix when the selected grid is shorter. Unchanged parent outputs are also reused when their operative geometry, parent
-membership, bindings and physical inputs match. Changed descendants do not
-invalidate an unchanged ancestor.
+physical grid and can reuse its aligned northern rows when the selected grid is
+shorter. It also reuses a parent division when its geometry, membership,
+bindings and physical inputs match. A water-only edit can reuse that parent's
+verified land assignments. A descendant edit can reuse its unchanged ancestors.
 
 ### Exact physical rasterization
 
@@ -57,7 +58,7 @@ This replaces the environment's native GDAL library; its existing Python
 bindings use the same ABI. Do not point `DYLD_LIBRARY_PATH`, `LD_LIBRARY_PATH`,
 or `PROJ_DATA` at a different installation. Reinstalling the Conda GDAL package
 replaces this custom build. See the [GDAL build guide](https://gdal.org/en/stable/development/building_from_source.html).
-Verified physical outputs can instead be reused with `--physical-from`.
+Use `--reuse-from` to reuse verified physical outputs.
 
 ## Inputs and stages
 
@@ -89,8 +90,9 @@ The calculation is:
 3. **Water:** extract physical shores once and attach final land owners. Coastal
    and complete named-basin claims use the same ownership snapshot and must
    agree wherever they overlap. Basin participants come from actual shores
-   beside the original full basin. Explicit ocean areas then claim residual
-   water together; nearest eligible shore completes the remaining cells.
+   beside the original full basin. The ocean rules assign residual water
+   inside their source polygons and connected open-water components. Nearest
+   eligible shore completes the remaining cells.
 4. **Package and comparison:** encode entity/physical-class pairs through the
    selected category bindings. Optionally compare with `--compare-release` or
    explicit reference streams, reporting removed grid rows separately.
@@ -130,10 +132,10 @@ outputs, consolidated ownership and encoding.
 A producer with its own partial checkpoints can resume those units. Other partial
 outputs are preserved before that phase restarts.
 
-`timing-events.jsonl` records durable start/completion events. Stage totals use
-elapsed wall-clock time, with overlapping child work counted once. Downloads are
-reported separately. Reusing an earlier physical result charges this run's
-verification time rather than the earlier run's processing or downloads.
+`timing-events.jsonl` records start and completion events for stages, rules and
+checkpointed work. `report.json` summarizes stage wall time. Overlapping rule
+times count once in the stage total. Downloads are reported separately. When
+reusing physical data, the run records its own verification time.
 
 Durations never subtract clocks from different attempts. Downtime between
 attempts is excluded. If an abrupt interruption loses a completion event, the

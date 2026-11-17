@@ -7,7 +7,8 @@ handles catalog lookup, verified downloads and transactional storage.
 
 Use the common command below with a `selected_osm_features` construction. Each
 selection identifies an output `feature_id`, provider `source_feature_id`,
-`object_type` (`node`, `way` or `relation`), `object_version` and identity tags.
+`object_type` (`node`, `way` or `relation`) and `object_version`. Optional
+`expected_tags` verify provider tags.
 The constructor joins member ways at shared node IDs in stable way-ID order.
 
 Relations preserve inner rings by default. An explicit `holes: outer_envelope`
@@ -56,7 +57,7 @@ antimeridian need a separate construction method that splits them there.
 Coordinates are longitude followed by latitude. Source checksums identify the
 exact response files used.
 
-Import these functions from `osm.ways`:
+Import these functions from `worldatlas.source_imports.osm.ways`:
 
 | Function | Input and result |
 | --- | --- |

@@ -18,8 +18,8 @@ claims. This folder contains its reusable numerical helpers.
   accounting is batched rather than repeated for every excluded rectangle.
 
 The common engine extracts shore geometry once, intersects those shore spans
-with current land ownership,
-and reuses filtered reference indexes. Coastal water uses the configured 22224 m
+with current land ownership, and reuses filtered reference indexes. Coastal
+water uses the configured 22,224 m
 limit. Named basins use all shores of their bordering owners. Remaining water
 uses all eligible assigned shores without a distance limit.
 Land-only children are excluded from water-owner candidates using the entity's

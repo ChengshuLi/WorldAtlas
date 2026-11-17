@@ -34,9 +34,9 @@ review-image tools accept compatible updates. Boto3 selects its own matching
 Botocore dependency. Each build records the actual runtime versions. CMake is
 needed only when compiling GDAL and stays outside the runtime environment.
 
-Set `NEON_DATABASE_URL` to the direct connection URL for the existing working
-`worldatlas` database. The [database guide](database/README.md) explains how to
-identify the working branch and inspect its construction records.
+Set `NEON_DATABASE_URL` to the direct connection URL for the working
+`worldatlas` database. Use the working branch's connection details from your
+Neon project. See the [database guide](database/README.md) for its schema.
 For R2, reuse the `worldatlas-r2` profile in `~/.aws/credentials`, or set
 `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. With the profile:
 
@@ -86,9 +86,10 @@ Use the release command to publish the reviewed viewer and map files.
 When changing the Worker's server code or configuration, deploy it with
 `npx wrangler deploy`. Its `ATLAS` binding connects it to the `worldatlas` R2 bucket.
 
-`atlas.map_releases` stores each release's immutable R2 asset manifest: map
-streams, viewer, configuration, legends and frozen inputs. `atlas.map_releases.is_current`
-connects official versions to those releases and identifies the homepage.
+`atlas.map_releases` points to each release's R2 folder and records its manifest
+checksum. The manifest lists the map streams, viewer, configuration, legend and
+frozen inputs. `is_official` selects the release for a version, and `is_current`
+identifies the release on the homepage.
 The legend contains entity names, colors and counts for that release. The source
 catalog tracks raw files, including archive parts. R2 has one layout: raw files
 under `sources/`, release bundles under `releases/RELEASE_ID/`, and `index.html`

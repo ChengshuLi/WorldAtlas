@@ -29,6 +29,7 @@ are JSON keys inside its `document` column, not separate table columns. The
 | `basis` | How the figure was interpreted, including inferred connections and extensions |
 | `points` | Selected `[longitude, latitude]` points in boundary order |
 | `max_step_metres` | Maximum spacing between generated coordinates along each geodesic |
+| `source_location` | Optional location or calibration notes for the source figure |
 
 The path may run in any direction. Consecutive points must be distinct, and the
 boundary must not cross or retrace itself. Longitude-seam crossings require split
@@ -62,10 +63,9 @@ worldatlas-import \
   --recipe lydekker-boundary-construction
 ```
 
-The command uses the shared feature storage to save the geometry, raw-source
-reference, figure identifier and construction ID together. Existing links from
-other Neon records remain intact. Regional assignment rules reference this
-feature separately; the geometry contains no continent-assignment policy.
+The command saves the geometry and its construction ID. The figure identifier
+stays in the construction document. Source links connect the construction to its
+raw files. Regional assignment rules reference the saved feature separately.
 
 ## Tests
 
@@ -77,6 +77,5 @@ references, repeat runs and failed writes.
 python .github/scripts/run_tests.py --suite source_imports
 ```
 
-Set `WORLDATLAS_TEST_DATABASE_URL` to a disposable local PostgreSQL database with
-the [initial schema](../../../../database/schema.sql) to
-include database writes, repeat runs, edits, and rollback checks.
+The runner provisions a disposable PostgreSQL database and includes database
+writes, repeat runs, edits and rollback checks.

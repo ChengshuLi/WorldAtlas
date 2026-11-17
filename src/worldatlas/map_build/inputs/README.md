@@ -15,9 +15,9 @@ format v4 with one geography collection (including entity colors), contributing
 construction settings and exact raw-file catalog records. Imported geometry is
 separate from the rules that assign parent cells to children.
 
-Historical releases retain their original selection bytes and captured code.
-Replay them with that implementation rather than converting them to today's
-working schema or reading current Neon records.
+Release archives retain their original inputs and any code captured at build
+time. Replay with those records and that code. Historical backfills document
+gaps in the data or code they could recover.
 
 Imported GeoJSON coordinates remain numeric. Source IDs, sizes and hashes come
 from the same database view as the decisions.

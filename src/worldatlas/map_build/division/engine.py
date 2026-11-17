@@ -434,7 +434,6 @@ class ParentDivision:
     def land(self):
         for name, rules in land_groups(self.rules):
             self.group(name, rules)
-        self.require_coverage("land")
         return self.use_land(self.current)
 
     def use_land(self, directory):

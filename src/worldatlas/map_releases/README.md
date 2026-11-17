@@ -24,7 +24,9 @@ Packaging reads the saved run, never today's editable geography in Neon.
 
 Raw files remain under `sources/`, shared across releases. Their cataloged identities,
 size and SHA-256 identify the bytes needed by each build. Keep any raw source
-needed by working geography or a retained release.
+needed by working geography or a retained release. After retiring previews,
+check the working inputs and all surviving archives again before removing a raw
+object and its Neon catalog row.
 
 Neon's `map_releases` row contains the bundle ID, R2 bucket/folder, manifest
 checksum and publication-state flags. The folder's `manifest.json` lists file
@@ -46,13 +48,13 @@ worldatlas-release publish v9.0-rc.1
 Publication verifies the files, points the homepage to that exact bundle and
 removes superseded candidate folders/rows for the same version. Only the selected
 RC is retained permanently. Candidates of a version still under development stay
-available. Input files in active candidates are temporary review/build records.
+available. Preview retirement removes the release bundles and catalog pointers.
+Shared raw sources under `sources/` require a separate dependency check.
 
 Publishing does not rebuild or recolor the map. Interrupted publication or
 candidate cleanup can be retried with the same command. Published versions remain
-available and cannot be redirected to a different candidate. The Worker serves
-only `/`, `/index.html` and `/releases/RELEASE_ID/...`; retired `/review/` URLs
-and version shortcuts return 404.
+available at their original candidate URLs. The Worker serves `/`, `/index.html`
+and `/releases/RELEASE_ID/...`.
 Deploying the Worker itself is separate: `npx wrangler deploy`.
 
 ## Archived code

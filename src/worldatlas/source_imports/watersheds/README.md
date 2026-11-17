@@ -12,8 +12,8 @@ selections live in the construction record.
 | [`build_boundary.py`](build_boundary.py) | Read settings, call the functions, and save the result. |
 | [`terrain.py`](terrain.py) | Crop native grids and fill missing heights from real secondary data. |
 | [`drainage.py`](drainage.py) | Calculate eight-neighbor flow and downstream destinations. |
-| [`waterways.py`](waterways.py) | Read natural waterways and source basin polygons. |
-| [`sources.py`](sources.py) | Read source GeoJSON lines, OSM ways and river relations. |
+| [`waterways.py`](waterways.py) | Read natural waterways and trace their drainage destinations. |
+| [`sources.py`](sources.py) | Read source features, including basin polygons and river relations. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
 | [`../atlas_sources/catalog.py`](../atlas_sources/catalog.py) | Resolve catalog IDs and verify downloaded or multipart files. |
 | [`../features/geometry.py`](../features/geometry.py) | Validate and save geometry with its construction reference. |
@@ -21,9 +21,9 @@ selections live in the construction record.
 The split follows the work: read source features, prepare terrain, calculate
 drainage, then assemble the boundary. The typed `watershed_boundary()` entry point
 in `build_boundary.py` declares the construction fields and connects those steps to
-Neon and R2. `waterways.py` keeps river networks and basin polygons together
-because both establish drainage destinations. Source reading does not join
-separate features; that responsibility belongs to boundary assembly.
+Neon and R2. It uses source basin polygons and river networks to establish
+drainage destinations. Boundary assembly joins the selected source features
+and calculated sections.
 `__init__.py` marks the Python package and lets our test discovery find its tests.
 
 ## Run
@@ -201,9 +201,9 @@ coordinates are not stored settings to retune after a source changes.
 The constructor checks the complete final line against the drainage reference
 rivers before saving. A crossing through a river section fails the run. Contact
 at a real fork, confluence or river endpoint is allowed; an arbitrary OSM record
-split does not create an allowed contact. The same general checker runs in tests
-and production, with no location-specific exemptions. Following a river along
-its length is allowed. Receipts and Neon provenance record the check results.
+split does not create an allowed contact. The same checker runs in tests and
+production. Following a river along its length is allowed. The import receipt
+records the results.
 A shared mapped node alone does not establish whether a physical bifurcation exists.
 
 Where source grids have different native resolutions, a connector endpoint can

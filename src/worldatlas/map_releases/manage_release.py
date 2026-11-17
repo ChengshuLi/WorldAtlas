@@ -298,6 +298,8 @@ def upload_bundle(storage, bucket, candidate, bundle, manifest):
 
 def retire_previews(db, storage, map_version):
     """Retire unpublished siblings only after a final candidate is official."""
+    from botocore.exceptions import ClientError
+
     from worldatlas.map_releases.catalog import read_manifest
 
     official = db.execute(
@@ -315,11 +317,20 @@ def retire_previews(db, storage, map_version):
         release = dict(
             id=candidate, r2_bucket=bucket, r2_prefix=folder, manifest_sha256=checksum
         )
-        manifest = read_manifest(storage, release)
-        for asset in manifest["objects"].values():
-            storage.delete_object(Bucket=bucket, Key=asset["r2_key"])
-        # Keep the manifest and row until data deletion succeeds, allowing retries.
-        storage.delete_object(Bucket=bucket, Key=folder + "manifest.json")
+        try:
+            manifest = read_manifest(storage, release)
+        except ClientError as exc:
+            if exc.response["Error"]["Code"] != "NoSuchKey":
+                raise
+            # An interrupted cleanup can leave the Neon row after the last
+            # object was deleted. A nonempty folder still needs its manifest.
+            remaining = storage.list_objects_v2(Bucket=bucket, Prefix=folder, MaxKeys=1)
+            if remaining.get("Contents") or remaining.get("IsTruncated"):
+                raise
+        else:
+            for asset in manifest["objects"].values():
+                storage.delete_object(Bucket=bucket, Key=asset["r2_key"])
+            storage.delete_object(Bucket=bucket, Key=folder + "manifest.json")
         db.execute(
             "DELETE FROM atlas.map_releases WHERE id=%s AND NOT is_official",
             (candidate,),

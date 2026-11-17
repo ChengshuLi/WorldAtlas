@@ -52,11 +52,12 @@ SELECT id, construction_id FROM atlas.source_features;
 SELECT document FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 
-Edit the recipe and rerun the same ID to update working geometry. Successful
-imports save geometry and source relationships together, retaining unrelated
-notes and links. A failed calculation or write leaves previous geometry intact.
-Workers calculate independently. Each save verifies the construction is unchanged,
-keeps its feature IDs associated with that construction, and preserves unrelated links.
+Edit the recipe and rerun the same ID to update working geometry. A successful
+import saves the geometry under its construction ID. Neon maintains the raw
+source links when the construction document changes. A failed import leaves its
+previous geometry intact. Workers calculate independently. At save time, the
+import verifies the construction is still the one it read and keeps existing
+feature IDs associated with that construction.
 
 ## Regenerate working geometry
 
@@ -67,8 +68,7 @@ worldatlas-import --all \
 ```
 
 The command follows construction links from `source_features`. Each construction
-runs once. Each
-successful import commits independently, so an interrupted batch can be repeated.
+runs once and commits independently, so an interrupted batch can be repeated.
 Receipts under `inputs/receipts/` identify the construction and its result.
 
 The map builder uses the same verified raw-file cache. Both commands check the

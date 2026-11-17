@@ -38,7 +38,7 @@ This document describes the design for the full project. The [pipeline guide](..
 Geography and historical attributes use three kinds of records.
 
 1. **Evidence** retains original sources, conflicting claims, and their links to conclusions. Store original files of any size in R2. Neon records their references, dates, and checksums.
-2. **Editable data** stores geometry, values, reasoning and provenance in Neon. Versioned construction records describe how to regenerate source-derived geography.
+2. **Editable data** stores geometry, values, reasoning and provenance in Neon. Construction records describe how to regenerate source-derived geography. Each release preserves the records used for that build.
 3. **Published releases** contain the reviewed map, viewer and metadata for an exact saved input selection.
 
 Workers can edit separate areas in parallel. Those edits do not change the published website, which reads immutable release files from R2. Build a numbered candidate, review its exact files and inputs, then publish those same files. Approval belongs to the candidate; individual editable records do not need a separate draft/accepted workflow.
@@ -85,9 +85,9 @@ Non-river-water locations are named and selectable. Land-continent groups includ
 
 #### Editable records and published grid
 
-Store editable geography records in Neon/PostGIS with stable numeric IDs, names, hierarchy levels and parents, and source polygons. Each location also records whether it is land or water. Code derives the approved hierarchy, app tables, river display and selection data, and the canonical cell grid. Neon holds the approved hierarchy and metadata. R2 holds the canonical cell-ID grid.
+Store editable geographic entities in Neon with stable numeric IDs, names, hierarchy levels, parent IDs and physical eligibility. Store imported geometry as WGS84 GeoJSON and link it to the rules that use it. Each location will record whether it is land or water. Code derives the approved hierarchy, app tables, river display and selection data, and the canonical cell grid. Store the published grid in R2.
 
-Store one canonical logical grid. Use a compact lossless encoding such as row runs so the builder can write the grid incrementally and the viewer can load it all up front. In the location grid, each unsigned 16-bit value stores a location ID. Reserve 0 during construction, leaving 65,535 usable values, and widen to 32 bits if needed. Every published cell has an assignment. Compression size depends on the final geography.
+Store one canonical logical grid. Row runs let the builder write the grid incrementally and the viewer load it all up front. The current grid stores unsigned 32-bit category codes that link to entities and physical classes. For the future location grid, choose the code width after counting the locations. Unsigned 16-bit codes can represent up to 65,535 locations with 0 reserved during construction. Every published cell has an assignment.
 
 ### Research, cell review, publication, and rivers
 

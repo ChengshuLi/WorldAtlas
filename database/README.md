@@ -39,8 +39,9 @@ provides source areas, component-identifying points, boundaries or distance
 references. Optional `connected_to` links restrict eligible query connectivity
 using direct points or an interior point derived from combined polygon features.
 `geographic_rule_targets` identifies direct-child owners and, for
-divisions, their label points. `geographic_rule_sources` retains the supporting
-geographic rationale and citations. Ordinary foreign keys and deferred checks
+divisions, their label points. Each rule stores its rationale.
+`geographic_rule_sources` links supporting raw sources and records the cited
+section and interpretation for each one. Ordinary foreign keys and deferred checks
 reject missing/forbidden roles, incorrect geometry types and invalid targets.
 See the [division guide](../src/worldatlas/map_build/division/README.md).
 
@@ -65,7 +66,7 @@ python -m worldatlas.source_imports.contracts database/schema/construction_contr
 
 For an existing database, back up its data, rehearse the transition locally, then
 apply the tested change in one transaction. Keep one-off transition scripts with
-the maintenance backup. This PR's authoritative schema is consolidated here.
+the maintenance backup. Keep the authoritative schema in the files above.
 
 ## Tests
 
