@@ -9,19 +9,22 @@ claims. This folder contains its reusable numerical helpers.
 - `basins.py` clips a basin to physical water and counts adjacent owned shores.
   Discovery uses the full original basin before any ownership filtering.
 - `shared_nearest.py` performs complete WGS84 point searches. Coarse real shore
-  witnesses bound distant searches; exact distances decide ownership.
+  witnesses bound distant searches. When the tree cannot prove a winner from
+  nearby candidates, the search carries its best exact distance into a scan of
+  the full reference set. Exact distances decide ownership.
 - `rectangle_nearest.py` shares proven distance certificates over rectangles and
   falls back to complete point searches where needed. Cell counts use compact local
   prefix tables instead of strided whole-width scans. Coverage
   accounting is batched rather than repeated for every excluded rectangle.
 
-The common engine extracts shore geometry once, attaches current land owners,
+The common engine extracts shore geometry once, intersects those shore spans
+with current land ownership,
 and reuses filtered reference indexes. Coastal water uses the configured 22224 m
 limit. Named basins use all shores of their bordering owners. Remaining water
 uses all eligible assigned shores without a distance limit.
 Land-only children are excluded from water-owner candidates using the entity's
-stored physical eligibility. A basin may reuse a coastal winner only when that
-owner remains in its reference set; it still emits and validates the full claim.
+stored physical eligibility. Coastal and basin claims run independently against
+the same land ownership and must agree where they overlap.
 
 Ocean areas are ordinary `assign_area` rules on one shared residual-water
 snapshot. Their `connected_to` links select components containing interior points

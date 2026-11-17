@@ -1,12 +1,10 @@
 """Extract physical shores once; attach owners and select reference views."""
 
-from array import array
 import threading
 import numpy as np
 
 from worldatlas.map_build.core.rle import row
-from worldatlas.map_build.division.intervals import overlay, spans
-from worldatlas.map_build.division.scope import complete_row, selected
+from worldatlas.map_build.division.scope import selected
 from worldatlas.map_build.water.shore_spans import ShoreSpans
 from worldatlas.map_build.water.shore_index import ShoreIndex
 from worldatlas.map_build.water.shared_nearest import make_indexes
@@ -92,10 +90,8 @@ class ShoreGeometry:
         """
         grid = self.grid
         source = self.spans
-        offsets = array("Q", [0])
-        starts = array("I")
-        ends = array("I")
-        owners = array("I")
+        offsets = [0]
+        starts, ends, owners = [], [], []
         roots = (
             np.asarray(sorted(reference_components), dtype=np.uint32)
             if reference_components is not None
@@ -111,18 +107,23 @@ class ShoreGeometry:
             if lo == hi:
                 offsets.append(offsets[-1])
                 continue
-            geometry = complete_row(
-                grid.width,
-                np.column_stack(
-                    (
-                        source.starts[lo:hi],
-                        source.ends[lo:hi],
-                        np.ones(hi - lo, dtype=np.uint32),
-                    )
-                ),
-            )
-            a, b, (shore, owner) = overlay(geometry, row(ownership, y, grid.width))
-            keep = (shore != 0) & (owner != 0)
+            a, b = source.starts[lo:hi], source.ends[lo:hi]
+            stops, codes = row(ownership, y, grid.width)
+            first = np.searchsorted(stops, a, side="right")
+            last = np.searchsorted(stops, b, side="left")
+            if np.any(first != last):
+                # A shore span can cross an ownership boundary on continuous land.
+                # Expand only by overlapping owner runs, never by grid cells.
+                lengths = last - first + 1
+                index = np.repeat(np.arange(len(a)), lengths)
+                offsets_in_span = np.arange(len(index)) - np.repeat(
+                    lengths.cumsum() - lengths, lengths
+                )
+                first = first[index] + offsets_in_span
+                a = np.maximum(a[index], np.r_[0, stops[:-1]][first])
+                b = np.minimum(b[index], stops[first])
+            owner = codes[first]
+            keep = owner != 0
             if eligible_owners is not None:
                 keep &= np.isin(owner, eligible_owners)
             if roots is not None and keep.any():
@@ -138,16 +139,28 @@ class ShoreGeometry:
                     raise ValueError("owned shore is outside parent land components")
                 allowed = selected(records[safe, 2], roots)
                 keep[np.flatnonzero(keep)] = allowed
-            records = spans(a, b, np.where(keep, owner, 0))
-            starts.extend(r[0] for r in records)
-            ends.extend(r[1] for r in records)
-            owners.extend(r[2] for r in records)
-            offsets.append(len(starts))
+            a, b, owner = a[keep], b[keep], owner[keep]
+            if len(a):
+                joins = (b[:-1] == a[1:]) & (owner[:-1] == owner[1:])
+                starts.append(a[np.r_[True, ~joins]])
+                ends.append(b[np.r_[~joins, True]])
+                owners.append(owner[np.r_[True, ~joins]])
+                offsets.append(offsets[-1] + len(starts[-1]))
+            else:
+                offsets.append(offsets[-1])
+
+        def combine(parts):
+            return (
+                np.concatenate(parts, dtype=np.uint32)
+                if parts
+                else np.empty(0, dtype=np.uint32)
+            )
+
         return ReferenceCells(
             grid,
             np.asarray(offsets, dtype=np.uint64),
-            np.asarray(starts, dtype=np.uint32),
-            np.asarray(ends, dtype=np.uint32),
-            np.asarray(owners, dtype=np.uint32),
+            combine(starts),
+            combine(ends),
+            combine(owners),
             order,
         )

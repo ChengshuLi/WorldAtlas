@@ -15,6 +15,18 @@ from worldatlas.map_build.water.tests.helpers import rle
 
 
 class BasinTests(unittest.TestCase):
+    def test_shore_span_splits_at_an_ownership_boundary(self):
+        physical = np.ones_like(self.physical)
+        physical[8, 5:13] = 17
+        ownership = np.zeros_like(self.land)
+        ownership[8, 5:8] = 81
+        ownership[8, 8:13] = 42
+        refs = ShoreGeometry(rle(physical), self.grid).attach(rle(ownership), [81, 42])
+        self.assertEqual(
+            [(y, spans.tolist()) for y, spans in refs.layer_rows()],
+            [(8, [[5, 8, 81], [8, 13, 42]])],
+        )
+
     def setUp(self):
         self.grid = Grid(36, 18, 10)
         self.physical = np.ones((18, 36), dtype=np.uint32)

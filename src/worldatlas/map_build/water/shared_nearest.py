@@ -197,64 +197,29 @@ def nearest_class_bounds(lat, lon, points, pairs, indexes, *, upper_limit=None):
     return lower, best, upper
 
 
-def exact_minimum_by_ordered_chord(point, lon, lat, data, tree):
-    """Exact WGS84 minimum with complete-input streaming for wide searches.
-
-    Small nearest-neighbor prefixes often prove the answer quickly. If not,
-    iterate over *every* shoreline center in ordinary blocks, using only a
-    conservative chord-derived WGS84 lower bound to avoid unnecessary inverse
-    calls. Block size changes temporary-array shape, never input coverage.
-    """
-    n = int(tree.n)
-    if n <= 0:
-        return math.inf
-    take = min(16, n)
-    best = math.inf
-    while True:
-        request = min(n, take + 1)
-        chords, ids = tree.query(point, k=request, workers=1)
-        chords = np.atleast_1d(chords)
-        ids = np.atleast_1d(ids)
-        part = ids[:take]
-        if len(part):
-            ds = geodesic_distances(
-                np.full(len(part), lon),
-                np.full(len(part), lat),
-                data["lon"][part],
-                data["lat"][part],
+def scan_exact_minimum(point, lon, lat, data, best):
+    """Finish a wide search in blocks using its already measured upper bound."""
+    for first in range(0, len(data["mids"]), 4096):
+        last = first + 4096
+        # MIN_RADIUS times the central angle is a distance lower bound. Express
+        # the upper witness as a unit-sphere chord so each block needs only
+        # squared distances. The margins expand the search, never decide a tie.
+        angle = min(math.pi, (best + 0.01) / MIN_RADIUS)
+        chord = 2 * math.sin(angle / 2) + 1e-12
+        delta = data["mids"][first:last] - point
+        keep = np.flatnonzero(np.einsum("ij,ij->i", delta, delta) <= chord * chord)
+        if len(keep):
+            indices = keep + first
+            distances = geodesic_distances(
+                np.full(len(keep), lon),
+                np.full(len(keep), lat),
+                data["lon"][indices],
+                data["lat"][indices],
             )
-            if np.any(~np.isfinite(ds)):
+            if np.any(~np.isfinite(distances)):
                 raise ValueError("invalid inverse geodesic")
-            best = min(best, float(np.min(ds)))
-        if take == n:
-            return best
-        angle = 2 * math.asin(min(1.0, max(0.0, float(chords[take]) / 2)))
-        lower = max(0.0, MIN_RADIUS * angle - 0.001)
-        if lower > best + 0.000001:
-            return best
-        if take >= 4096:
-            # Visit every point, including all equal-chord ties. Use a generous
-            # floating-point margin; exact inverse distance decides the result.
-            for first in range(0, n, 4096):
-                last = min(first + 4096, n)
-                diff = data["mids"][first:last] - point
-                chord = np.sqrt(np.sum(diff * diff, axis=1))
-                # Chord <= central angle, even at the antipode. Avoid asin
-                # sensitivity near chord 2 and keep a conservative margin.
-                lower = np.maximum(0, MIN_RADIUS * chord - 0.01)
-                keep = np.flatnonzero(lower <= best + 0.000001) + first
-                if len(keep):
-                    ds = geodesic_distances(
-                        np.full(len(keep), lon),
-                        np.full(len(keep), lat),
-                        data["lon"][keep],
-                        data["lat"][keep],
-                    )
-                    if np.any(~np.isfinite(ds)):
-                        raise ValueError("invalid inverse geodesic")
-                    best = min(best, float(np.min(ds)))
-            return best
-        take = min(n, take * 2)
+            best = min(best, float(distances.min()))
+    return best
 
 
 def exact_minima_by_ordered_chord(points, lon, lat, data, tree):
@@ -262,7 +227,7 @@ def exact_minima_by_ordered_chord(points, lon, lat, data, tree):
 
     Neighbor prefixes grow only for queries whose conservative lower bound
     cannot prove the minimum. Wide unresolved searches still visit the entire
-    shore through the scalar streaming implementation; no candidate is capped.
+    shore in ordinary blocks, using the best distance already measured.
     """
     count = len(points)
     result = np.full(count, np.inf)
@@ -296,8 +261,8 @@ def exact_minima_by_ordered_chord(points, lon, lat, data, tree):
         active = active[lower <= result[active] + 0.000001]
         if take >= 4096:
             for q in active:
-                result[q] = exact_minimum_by_ordered_chord(
-                    points[q], float(lon[q]), float(lat[q]), data, tree
+                result[q] = scan_exact_minimum(
+                    points[q], lon[q], lat[q], data, result[q]
                 )
             break
         take = min(n, take * 2)

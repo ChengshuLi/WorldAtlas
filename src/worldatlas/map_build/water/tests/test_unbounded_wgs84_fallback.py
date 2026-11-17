@@ -21,7 +21,9 @@ def run(lat, lon, qlat, qlon):
             return t.query(*args, **kwargs)
 
     t2 = Track()
-    got = s.exact_minimum_by_ordered_chord(p, qlon, qlat, d, t2)
+    got = s.exact_minima_by_ordered_chord(
+        p[None], np.array([qlon]), np.array([qlat]), d, t2
+    )[0]
     expect = float(
         np.min(
             s.geodesic_distances(
@@ -79,7 +81,9 @@ class Tests(unittest.TestCase):
                 )
                 return (np.full(k, chord), np.asarray(order[:k]))
 
-        got = s.exact_minimum_by_ordered_chord(point, 0.0, 0.0, data, TiedTree())
+        got = s.exact_minima_by_ordered_chord(
+            point[None], np.array([0.0]), np.array([0.0]), data, TiedTree()
+        )[0]
         expected = float(s.geodesic_distances([0.0], [0.0], [0.0], [10.0])[0])
         self.assertAlmostEqual(got, expected, places=6)
 
