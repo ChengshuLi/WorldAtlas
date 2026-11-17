@@ -20,16 +20,21 @@ class RunPairBatchTests(unittest.TestCase):
             (100, 330, 360, 2e7),
             (30, 5, 60, 1e5),
         ] + [
-            (rng.randrange(180), rng.randrange(340), rng.randrange(340, 361), rng.uniform(1e4, 2e7))
+            (
+                rng.randrange(180),
+                rng.randrange(340),
+                rng.randrange(340, 361),
+                rng.uniform(1e4, 2e7),
+            )
             for _ in range(15)
         ]:
             want = {}
             for yy, c, d, code in records:
-                v, _ = run_pair(y, a, b, yy, c, d, width, incumbent=upper, tol=1e-5)
+                v, _ = run_pair(y, a, b, yy, c, d, width, incumbent=upper)
                 if v is not None:
                     want[code] = min(want.get(code, math.inf), v)
             got, n = run_pairs_batch(
-                y, a, b, np.array(records, dtype=np.uint32), width, incumbent=upper, tol=1e-5
+                y, a, b, np.array(records, dtype=np.uint32), width, incumbent=upper
             )
             self.assertEqual(n, len(records))
             self.assertEqual(set(got), set(want))
@@ -44,5 +49,5 @@ class RunPairBatchTests(unittest.TestCase):
             run_pairs_batch(0, 0, 1, [(0, 1, 2, 17)], 360, incumbent=math.inf)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

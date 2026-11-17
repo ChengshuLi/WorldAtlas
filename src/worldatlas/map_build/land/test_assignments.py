@@ -10,12 +10,10 @@ from pyproj import Geod
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
-from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.land.assignments import assign_components, read_assignments
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
-from worldatlas.map_build.land.regional import build_regional
-from worldatlas.map_build.land.seed_index import build_seed_index
+from worldatlas.map_build.land.reference_index import build_reference_index
 from worldatlas.map_build.land.search_engine import finalize
 
 
@@ -32,41 +30,38 @@ class AssignmentTests(unittest.TestCase):
             physical[y, x], seeds[y, x] = 17, code
         for y, x in extra:
             physical[y, x] = 17
-        for name, values in [('physical', physical), ('seeds', seeds)]:
+        for name, values in [("physical", physical), ("seeds", seeds)]:
             write_layer(root / name, grid, patch_rows(values, grid.bounds, grid))
-        build_components(grid, root / 'physical', root / 'components')
+        build_components(grid, root / "physical", root / "components")
         bindings = [
-            dict(entity_id=entity, code=code, physical_class='land')
+            dict(entity_id=entity, code=code, physical_class="land")
             for _, _, code, entity in seed_cells
         ]
         return root, grid, seed_cells, bindings
 
-    def test_complete_component_distances_match_brute_force_and_compose_with_seeds(self):
+    def test_complete_component_distances_match_brute_force(self):
         root, grid, seed_cells, bindings = self.fixture(
             [(10, 1), (10, 2), (7, 16), (13, 29), (13, 30), (8, 35)]
         )
-        build_seed_index(grid, root / 'seeds', root / 'index', tile_cells=8)
-        with ComponentGrid(root / 'physical', root / 'components', grid) as components:
+        build_reference_index(grid, root / "seeds", root / "index", tile_cells=8)
+        with ComponentGrid(root / "physical", root / "components", grid) as components:
             mainland = {
                 components.point(float(grid.longitude(x)), float(grid.latitude(y)))
                 for y, x, _, _ in seed_cells
             }
-            seed_report = dict(
-                groups={str(r): dict(role='mainland', component_id=r) for r in mainland}
-            )
             report = assign_components(
                 components,
-                seed_report,
-                root / 'index',
+                root / "index",
                 bindings,
-                root / 'assignments',
+                root / "assignments",
+                roots=set(components.totals()) - mainland,
             )
             observed = read_assignments(report)
             cells = defaultdict(list)
             for y in range(grid.height):
                 for a, b, ident in components.row(y):
                     cells[int(ident)] += [(y, x) for x in range(int(a), int(b))]
-        geod = Geod(ellps='WGS84')
+        geod = Geod(ellps="WGS84")
         expected = {}
         for ident, points in cells.items():
             if ident in mainland:
@@ -84,66 +79,42 @@ class AssignmentTests(unittest.TestCase):
                 for yy, xx, code, _ in seed_cells
             }
             winner = min(distances, key=lambda code: (distances[code], code))
-            expected[ident] = next(b['entity_id'] for b in bindings if b['code'] == winner)
+            expected[ident] = next(
+                b["entity_id"] for b in bindings if b["code"] == winner
+            )
         self.assertEqual(observed, expected)
-        selection = dict(
-            domains={'regional': dict(features=[], affiliations=[], category_bindings=bindings)}
-        )
-        result = build_regional(
-            selection,
-            grid,
-            root / 'physical',
-            root / 'components',
-            root / 'seeds',
-            root / 'regional',
-            protected=mainland,
-            component_defaults=observed,
-        )
-        with open_grid(result['land'], grid) as data:
-            for y in range(grid.height):
-                ends, codes = row(data, y, grid.width)
-                values = codes[np.searchsorted(ends, np.arange(grid.width), side='right')]
-                for ident, points in cells.items():
-                    for yy, x in points:
-                        if yy == y:
-                            code = next(
-                                (code for sy, sx, code, _ in seed_cells if (yy, x) == (sy, sx)),
-                                None,
-                            )
-                            if code is None:
-                                code = next(
-                                    b['code'] for b in bindings if b['entity_id'] == observed[ident]
-                                )
-                            self.assertEqual(values[x], code)
-                self.assertTrue(np.all(np.isin(values, [0, 301, 999, 5555])))
-        path = Path(report['entities'])
-        path.write_bytes(path.read_bytes() + b'changed')
-        with self.assertRaisesRegex(ValueError, 'assignment file differs'):
+        path = Path(report["entities"])
+        path.write_bytes(path.read_bytes() + b"changed")
+        with self.assertRaisesRegex(ValueError, "assignment file differs"):
             read_assignments(report)
 
     def test_all_land_already_seeded_needs_no_island_distance_search(self):
         root, grid, seed_cells, bindings = self.fixture([])
-        build_seed_index(grid, root / 'seeds', root / 'index', tile_cells=8)
-        with ComponentGrid(root / 'physical', root / 'components', grid) as components:
+        build_reference_index(grid, root / "seeds", root / "index", tile_cells=8)
+        with ComponentGrid(root / "physical", root / "components", grid) as components:
             mainland = {
                 components.point(float(grid.longitude(x)), float(grid.latitude(y)))
                 for y, x, _, _ in seed_cells
             }
             result = assign_components(
                 components,
-                dict(groups={str(r): dict(role='mainland', component_id=r) for r in mainland}),
-                root / 'index',
+                root / "index",
                 bindings,
-                root / 'assignments',
+                root / "assignments",
+                roots=[],
             )
         self.assertEqual(read_assignments(result), {})
-        self.assertEqual(result['exact_queries'], 0)
+        self.assertEqual(result["exact_queries"], 0)
 
     def test_a_smaller_distance_wins_even_below_the_old_tie_threshold(self):
-        values = finalize([301, 301], [True, True],
-                          np.array([[10.0, 10.0 - 1e-6], [10.0, 10.0]]), [301, 999])
+        values = finalize(
+            [301, 301],
+            [True, True],
+            np.array([[10.0, 10.0 - 1e-6], [10.0, 10.0]]),
+            [301, 999],
+        )
         self.assertEqual(values.tolist(), [999, 301])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

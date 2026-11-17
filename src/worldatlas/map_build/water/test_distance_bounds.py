@@ -3,7 +3,7 @@ import unittest
 
 import numpy as np
 
-from worldatlas.map_build.water import coastal_core, shared_nearest
+from worldatlas.map_build.water import shared_nearest
 
 
 class CoastalDistanceBoundTests(unittest.TestCase):

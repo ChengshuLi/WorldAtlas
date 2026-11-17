@@ -14,29 +14,37 @@ import sys
 def _read(path):
     path = Path(path)
     if path.stat().st_size % 4:
-        raise ValueError('misaligned u32 stream')
-    values = array('I')
+        raise ValueError("misaligned u32 stream")
+    values = array("I")
     if values.itemsize != 4:
-        raise RuntimeError('32-bit unsigned array elements required')
-    with path.open('rb') as stream:
+        raise RuntimeError("32-bit unsigned array elements required")
+    with path.open("rb") as stream:
         values.fromfile(stream, path.stat().st_size // 4)
-    if sys.byteorder != 'little':
+    if sys.byteorder != "little":
         values.byteswap()
     return values
 
 
 def _write(path, values):
-    if sys.byteorder != 'little':
-        values = array('I', values)
+    if sys.byteorder != "little":
+        values = array("I", values)
         values.byteswap()
-    with Path(path).open('xb') as stream:
+    with Path(path).open("xb") as stream:
         values.tofile(stream)
         stream.flush()
         os.fsync(stream.fileno())
 
 
 def build(
-    width, height, physical_rows, physical_runs, output_rows, output_runs, *, guard=lambda: None
+    width,
+    height,
+    physical_rows,
+    physical_runs,
+    output_rows,
+    output_runs,
+    *,
+    physical_code=17,
+    guard=lambda: None,
 ):
     """Build complete run-level components in-process, without a dense grid."""
     if (
@@ -45,12 +53,19 @@ def build(
         or not 0 < width <= 0xFFFFFFFF
         or not 0 < height <= 0xFFFFFFFF
     ):
-        raise ValueError('invalid dimensions')
+        raise ValueError("invalid dimensions")
+    if physical_code not in (1, 17):
+        raise ValueError("components require a physical land or water class")
     rows, runs = _read(physical_rows), _read(physical_runs)
-    if len(rows) != height + 1 or rows[0] != 0 or len(runs) % 2 or rows[-1] != len(runs) // 2:
-        raise ValueError('invalid stream lengths')
-    parents, sizes = array('I'), array('I')
-    outrows, spans = array('I', [0]), array('I')
+    if (
+        len(rows) != height + 1
+        or rows[0] != 0
+        or len(runs) % 2
+        or rows[-1] != len(runs) // 2
+    ):
+        raise ValueError("invalid stream lengths")
+    parents, sizes = array("I"), array("I")
+    outrows, spans = array("I", [0]), array("I")
     previous = []
     cells = 0
 
@@ -72,17 +87,17 @@ def build(
     for y in range(height):
         guard()
         if not rows[y] <= rows[y + 1] <= len(runs) // 2:
-            raise ValueError('nonmonotonic row offsets')
+            raise ValueError("nonmonotonic row offsets")
         current = []
-        x = last_code = 0
+        x, last_code = 0, None
         for i in range(rows[y] * 2, rows[y + 1] * 2, 2):
             end, code = runs[i], runs[i + 1]
-            if not x < end <= width or code not in (1, 17) or code == last_code:
-                raise ValueError('invalid or noncanonical physical run')
-            if code == 17:
+            if not x < end <= width or code not in (0, 1, 17) or code == last_code:
+                raise ValueError("invalid or noncanonical physical run")
+            if code == physical_code:
                 node = len(parents)
                 if node == 0xFFFFFFFF:
-                    raise ValueError('too many component runs')
+                    raise ValueError("too many component runs")
                 parents.append(node)
                 sizes.append(1)
                 current.append((x, end, node))
@@ -90,7 +105,7 @@ def build(
                 cells += end - x
             x, last_code = end, code
         if x != width:
-            raise ValueError('incomplete physical row')
+            raise ValueError("incomplete physical row")
         i = j = 0
         while i < len(previous) and j < len(current):
             a, b = previous[i], current[j]
@@ -115,10 +130,10 @@ def build(
         components += root == node
     _write(output_rows, outrows)
     _write(output_runs, spans)
-    return {'runs': len(parents), 'components': components, 'land_cells': cells}
+    return {"runs": len(parents), "components": components, "land_cells": cells}
 
 
-def build_components(grid, physical_directory, directory):
+def build_components(grid, physical_directory, directory, *, physical_code=17):
     """Return current components and their measured output record."""
     import json
     import time
@@ -130,16 +145,20 @@ def build_components(grid, physical_directory, directory):
     result = build(
         grid.width,
         grid.height,
-        physical_directory / 'rows.u32le',
-        physical_directory / 'runs.u32le',
-        directory / 'rows.u32le',
-        directory / 'runs.u32le',
+        physical_directory / "rows.u32le",
+        physical_directory / "runs.u32le",
+        directory / "rows.u32le",
+        directory / "runs.u32le",
+        physical_code=physical_code,
     )
     report = dict(
         result,
         grid=vars(grid),
-        output_sha256={name: file_hash(directory / name) for name in ('rows.u32le', 'runs.u32le')},
+        physical_code=physical_code,
+        output_sha256={
+            name: file_hash(directory / name) for name in ("rows.u32le", "runs.u32le")
+        },
         processing_seconds=time.monotonic() - started,
     )
-    (directory / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
+    (directory / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     return report

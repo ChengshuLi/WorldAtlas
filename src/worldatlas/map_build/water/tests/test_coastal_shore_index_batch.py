@@ -2,8 +2,10 @@ import unittest
 from unittest.mock import patch
 import numpy as np
 
-from worldatlas.map_build.water.coastal_shore_index import CoastalShoreIndex
-from worldatlas.map_build.water.coastal_shore_index_batch import BatchedCoastalShoreIndex
+from worldatlas.map_build.water.tests.shore_reference import (
+    ReferenceShoreIndex as CoastalShoreIndex,
+)
+from worldatlas.map_build.water.shore_index import ShoreIndex
 from worldatlas.map_build.water.tests.helpers import rle
 
 
@@ -12,8 +14,8 @@ class BatchIndexTests(unittest.TestCase):
         height, width = physical.shape
         p, l = rle(physical), rle(land)
         expected = CoastalShoreIndex(p, l, width, height)
-        actual = BatchedCoastalShoreIndex(p, l, width, height, rows_per_batch=rows_per_batch)
-        for key in ('offsets', 'starts', 'ends', 'codes'):
+        actual = ShoreIndex(p, l, width, height, rows_per_batch=rows_per_batch)
+        for key in ("offsets", "starts", "ends", "codes"):
             a, b = getattr(actual, key), getattr(expected, key)
             self.assertEqual(a.dtype, b.dtype)
             self.assertEqual(a.tobytes(), b.tobytes())
@@ -24,12 +26,12 @@ class BatchIndexTests(unittest.TestCase):
         for trial in range(120):
             width = int(rng.integers(1, 80))
             height = int(rng.integers(1, 45))
-            physical = np.where(rng.random((height, width)) < rng.uniform(0, 1), 1, 17).astype(
-                np.uint32
-            )
-            land = np.where(physical == 17, rng.integers(17, 23, (height, width)), 0).astype(
-                np.uint32
-            )
+            physical = np.where(
+                rng.random((height, width)) < rng.uniform(0, 1), 1, 17
+            ).astype(np.uint32)
+            land = np.where(
+                physical == 17, rng.integers(17, 23, (height, width)), 0
+            ).astype(np.uint32)
             with self.subTest(trial=trial):
                 self.compare(physical, land, int(rng.integers(1, height + 3)))
 
@@ -48,8 +50,8 @@ class BatchIndexTests(unittest.TestCase):
         for changed, at in ((p, (2, 5)), (l, (1, 2))):
             original = int(changed[at])
             changed[at] = 273
-            with self.assertRaisesRegex(ValueError, 'invalid physical or land'):
-                BatchedCoastalShoreIndex(
+            with self.assertRaisesRegex(ValueError, "invalid physical or land"):
+                ShoreIndex(
                     rle(p), rle(l), 8, 4, rows_per_batch=2, land_codes=range(17, 23)
                 )
             changed[at] = original
@@ -58,7 +60,11 @@ class BatchIndexTests(unittest.TestCase):
 
     def test_noncoalesced_rle_and_readonly_inputs_are_not_special_cased(self):
         p = np.asarray(
-            [[17, 17, 1, 1, 1, 17, 1], [1, 17, 17, 1, 17, 17, 1], [1, 1, 1, 1, 1, 1, 1]],
+            [
+                [17, 17, 1, 1, 1, 17, 1],
+                [1, 17, 17, 1, 17, 17, 1],
+                [1, 1, 1, 1, 1, 1, 1],
+            ],
             dtype=np.uint32,
         )
         l = np.where(p == 17, 18, 0).astype(np.uint32)
@@ -67,7 +73,10 @@ class BatchIndexTests(unittest.TestCase):
         def cells(array):
             offsets = np.arange(height + 1, dtype=np.uint32) * width
             runs = np.column_stack(
-                (np.tile(np.arange(1, width + 1, dtype=np.uint32), height), array.ravel())
+                (
+                    np.tile(np.arange(1, width + 1, dtype=np.uint32), height),
+                    array.ravel(),
+                )
             ).ravel()
             return offsets, runs
 
@@ -76,12 +85,14 @@ class BatchIndexTests(unittest.TestCase):
                 for array in (*physical, *land):
                     array.flags.writeable = False
                 old = CoastalShoreIndex(physical, land, width, height)
-                new = BatchedCoastalShoreIndex(physical, land, width, height, rows_per_batch=2)
-                for key in ('offsets', 'starts', 'ends', 'codes'):
-                    self.assertEqual(getattr(old, key).tobytes(), getattr(new, key).tobytes())
+                new = ShoreIndex(physical, land, width, height, rows_per_batch=2)
+                for key in ("offsets", "starts", "ends", "codes"):
+                    self.assertEqual(
+                        getattr(old, key).tobytes(), getattr(new, key).tobytes()
+                    )
 
     def test_query_method_is_the_unchanged_reference_method(self):
-        self.assertIs(BatchedCoastalShoreIndex.centers_for_crop, CoastalShoreIndex.centers_for_crop)
+        self.assertIs(ShoreIndex.centers_for_crop, CoastalShoreIndex.centers_for_crop)
 
     def test_empty_batches_between_polar_shores_preserve_row_offsets(self):
         p = np.ones((21, 9), dtype=np.uint32)
@@ -100,19 +111,27 @@ class BatchIndexTests(unittest.TestCase):
         offsets = np.asarray([0, 2, 3, 5], dtype=np.uint32)
         physical = (
             offsets,
-            np.asarray([half, 17, width, 1, width, 1, half, 1, width, 17], dtype=np.uint32),
+            np.asarray(
+                [half, 17, width, 1, width, 1, half, 1, width, 17], dtype=np.uint32
+            ),
         )
         land = (
             offsets,
-            np.asarray([half, 18, width, 0, width, 0, half, 0, width, 22], dtype=np.uint32),
+            np.asarray(
+                [half, 18, width, 0, width, 0, half, 0, width, 22], dtype=np.uint32
+            ),
         )
         expected = CoastalShoreIndex(physical, land, width, 3)
-        with patch.object(np, 'searchsorted', side_effect=AssertionError('reuse common cut ranks')):
-            actual = BatchedCoastalShoreIndex(physical, land, width, 3, rows_per_batch=2)
-        for key in ('offsets', 'starts', 'ends', 'codes'):
-            self.assertEqual(getattr(expected, key).tobytes(), getattr(actual, key).tobytes())
+        with patch.object(
+            np, "searchsorted", side_effect=AssertionError("reuse common cut ranks")
+        ):
+            actual = ShoreIndex(physical, land, width, 3, rows_per_batch=2)
+        for key in ("offsets", "starts", "ends", "codes"):
+            self.assertEqual(
+                getattr(expected, key).tobytes(), getattr(actual, key).tobytes()
+            )
         self.assertEqual(len(actual.starts), 2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

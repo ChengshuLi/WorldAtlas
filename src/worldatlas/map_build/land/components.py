@@ -19,8 +19,11 @@ class ComponentGrid:
     only within these streams.
     """
 
-    def __init__(self, physical_directory, component_directory, grid):
+    def __init__(
+        self, physical_directory, component_directory, grid, *, physical_code=17
+    ):
         self.grid = grid
+        self.physical_code = physical_code
         self.directory = Path(component_directory)
         self.resources = ExitStack()
         self.validated = np.zeros(grid.height, dtype=bool)
@@ -72,7 +75,7 @@ class ComponentGrid:
             return spans
         ends, codes = row(self.physical, y, self.grid.width)
         starts = np.r_[np.uint32(0), ends[:-1]]
-        if np.any(~np.isin(codes, [1, 17])):
+        if np.any(~np.isin(codes, [0, 1, 17])):
             raise ValueError("invalid physical class")
         lo, hi, roots = spans.T
         if (
@@ -88,10 +91,12 @@ class ComponentGrid:
                 return a, b
             return a[np.r_[True, a[1:] != b[:-1]]], b[np.r_[b[:-1] != a[1:], True]]
 
-        expected = union(starts[codes == 17], ends[codes == 17])
+        expected = union(
+            starts[codes == self.physical_code], ends[codes == self.physical_code]
+        )
         actual = union(lo, hi)
         if any(not np.array_equal(a, b) for a, b in zip(expected, actual)):
-            raise ValueError("component coverage differs from physical land")
+            raise ValueError("component coverage differs from its physical class")
         self.validated[y] = True
         return spans
 
@@ -120,7 +125,9 @@ class ComponentGrid:
             raise ValueError("source point outside grid")
         root = self._at_cell(x, y)
         if root is None:
-            raise ValueError("source point does not fall on physical land")
+            raise ValueError(
+                "source point does not fall on the selected physical component class"
+            )
         return root
 
     def component_at(self, longitude, latitude):

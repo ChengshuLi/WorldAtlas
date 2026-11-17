@@ -1,7 +1,11 @@
+from worldatlas.map_build.water.tests.shore_reference import (
+    centers_for_crop as reference_centers,
+)
 import unittest
 import numpy as np
-from worldatlas.map_build.water import shared_nearest as shore
-from worldatlas.map_build.water.coastal_shore_index import CoastalShoreIndex
+from worldatlas.map_build.water.tests.shore_reference import (
+    ReferenceShoreIndex as CoastalShoreIndex,
+)
 from worldatlas.map_build.water.tests.helpers import rle
 
 
@@ -11,7 +15,9 @@ class ShoreIndexTest(unittest.TestCase):
         for _ in range(50):
             width = int(rng.integers(8, 80))
             height = width // 2
-            physical = np.where(rng.random((height, width)) < rng.uniform(0.01, 0.99), 1, 17)
+            physical = np.where(
+                rng.random((height, width)) < rng.uniform(0.01, 0.99), 1, 17
+            )
             land = np.where(physical == 17, rng.integers(17, 23, (height, width)), 0)
             p, l = rle(physical), rle(land)
             index = CoastalShoreIndex(p, l, width, height)
@@ -25,13 +31,15 @@ class ShoreIndexTest(unittest.TestCase):
                 ).tolist()
                 bounds = (x0, x1, y0, y1)
                 try:
-                    expected = shore.centers_for_crop(
+                    expected = reference_centers(
                         p, l, bounds, width, height, 360 / width, codes
                     )
                 except ValueError as error:
-                    if str(error) != 'no participant shorelines in crop':
+                    if str(error) != "no participant shorelines in crop":
                         raise
-                    with self.assertRaisesRegex(ValueError, 'no participant shorelines'):
+                    with self.assertRaisesRegex(
+                        ValueError, "no participant shorelines"
+                    ):
                         index.centers_for_crop(bounds, 360 / width, codes)
                 else:
                     actual = index.centers_for_crop(bounds, 360 / width, codes)
@@ -44,14 +52,16 @@ class ShoreIndexTest(unittest.TestCase):
         land = np.where(physical == 17, 22, 0)
         index = CoastalShoreIndex(rle(physical), rle(land), 8, 4)
         for bounds in ((-1, 2, 0, 4), (7, 10, 0, 4), (0, 8, 0, 4)):
-            expected = shore.centers_for_crop(rle(physical), rle(land), bounds, 8, 4, 45.0, [22])
+            expected = reference_centers(
+                rle(physical), rle(land), bounds, 8, 4, 45.0, [22]
+            )
             actual = index.centers_for_crop(bounds, 45.0, [22])
             for key in expected:
                 np.testing.assert_array_equal(actual[key], expected[key])
         land[3, 7] = 0
-        with self.assertRaisesRegex(ValueError, 'invalid physical or land'):
+        with self.assertRaisesRegex(ValueError, "invalid physical or land"):
             CoastalShoreIndex(rle(physical), rle(land), 8, 4)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

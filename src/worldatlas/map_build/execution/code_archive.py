@@ -49,16 +49,26 @@ def capture_source(package):
     )
     if project is not None:
         paths.update({name: project / name for name in SETUP})
+        paths.update(
+            {
+                p.relative_to(project).as_posix(): p
+                for p in sorted((project / "database").rglob("*.sql"))
+            }
+        )
     else:
         installed = distribution("worldatlas")
         for item in installed.files or ():
-            if (
-                item.as_posix().endswith("/share/worldatlas/" + item.name)
-                and item.name in SETUP
-            ):
-                paths[item.name] = Path(installed.locate_file(item))
+            marker = "share/worldatlas/"
+            if marker in item.as_posix():
+                relative = item.as_posix().split(marker, 1)[1]
+                if relative in SETUP or (
+                    relative.startswith("database/") and relative.endswith(".sql")
+                ):
+                    paths[relative] = Path(installed.locate_file(item))
     if not set(SETUP) <= paths.keys():
         raise ValueError("installed WorldAtlas is missing its build setup files")
+    if "database/schema.sql" not in paths:
+        raise ValueError("installed WorldAtlas is missing its database schema")
     files = {}
     for name, path in sorted(paths.items()):
         if path.is_symlink():

@@ -21,9 +21,10 @@ Create the `runs/` parent directory first. The work directory holds the reusable
 `inputs/` cache; each build has its own output directory.
 
 For identical physical inputs, add
-`--physical-from /absolute/path/to/previous-run`. The pipeline verifies the
-existing physical grid and reuses it. Geographic decision edits then require
-land and water assignment, without another physical rasterization.
+`--reuse-from /absolute/path/to/previous-run`. The pipeline verifies the
+existing physical grid and reuses an aligned northern prefix when the selected grid is shorter. Unchanged parent outputs are also reused when their operative geometry, parent
+membership, bindings and physical inputs match. Changed descendants do not
+invalidate an unchanged ancestor.
 
 ### Exact physical rasterization
 
@@ -60,14 +61,14 @@ Verified physical outputs can instead be reused with `--physical-from`.
 
 ## Inputs and stages
 
-The pipeline reads working mainland, regional, water and ocean records in one
+The pipeline reads working hierarchy, rules, features and source records in one
 repeatable-read, read-only transaction. It freezes geometry, construction settings,
 entity bindings/colors and raw catalog records, then closes the transaction before
 computation. Workers edit records by their IDs; the build needs no revision labels.
 
 Use `--selection /absolute/path/to/input-selection.json` to replay a saved
 selection. Resume uses the run's saved selection rather than rereading Neon.
-Source IDs and exact versions resolve through `atlas.source_assets`; downloads
+Source IDs resolve through `atlas.source_assets`; downloads
 are checked against the catalog's byte sizes and SHA-256 checksums.
 
 The three physical inputs are `land_config`, `water_config` and `raw_manifest`.
@@ -75,22 +76,34 @@ They select the global coastline polygons and complete inland-water shard set.
 They may contain inline JSON, local file pins, cataloged R2 references or selected
 archive members. The endpoint is in `physical_controls.source_staging`.
 
+Use repeatable `--divide PARENT_ID` to select divisions; necessary ancestors are
+included. The default evaluates all parents with selected subdivision rules.
+
 The calculation is:
 
-1. **Physical:** rasterize coastline and inland-water sources, then compose the
-   physical land/water mask.
-2. **Land:** build connected components, identify selected mainland groups,
-   assemble mainland seeds and calculate WGS84 component distances. Apply
-   island-group assignments, source-backed two-sided continent partitions and
-   scoped cell partitions during one final land composition.
-3. **Water:** build one complete shoreline index. Assign coastal water first,
-   then remaining selected basin water, followed by oceans and enclosed water.
-   Basin participants come from current physical shores and final land.
-4. **Comparison:** optionally compare every final cell with the release selected
-   by `--compare-release VERSION_OR_CANDIDATE` or explicit reference streams.
+1. **Physical:** rasterize coastline and inland-water sources into the one grid
+   selected in build configuration, then compose the physical land/water mask.
+2. **Land:** evaluate explicit area and boundary divisions together, rejecting
+   disagreeing claims. Assign remaining components to the nearest selected
+   reference shores. Every eligible land cell must have a child owner.
+3. **Water:** extract physical shores once and attach final land owners. Coastal
+   and complete named-basin claims use the same ownership snapshot and must
+   agree wherever they overlap. Basin participants come from actual shores
+   beside the original full basin. Explicit ocean areas then claim residual
+   water together; nearest eligible shore completes the remaining cells.
+4. **Package and comparison:** encode entity/physical-class pairs through the
+   selected category bindings. Optionally compare with `--compare-release` or
+   explicit reference streams, reporting removed grid rows separately.
 
-Conflicting applicable regional assignments stop the build. Components outside
-a regional rule's scope keep their normal mainland or nearest-land assignment.
+All geographic operations share the same parent and scope contract. A rule's
+`unassigned_only` setting filters its output scope once; it never changes
+component populations, geometric faces or reference shores. Independent rules
+in one group read the same snapshot, so execution order cannot hide conflicts.
+
+The six operations and their preparation are documented in
+[division](division/README.md). The coastal distance is the single
+`coastal_band_metres` setting in build configuration. Strictly smaller computed
+WGS84 distances win; exact equality follows category-code order.
 
 Geographic features are imported beforehand through the supported
 [source imports](../source_imports/README.md). Map building reads their saved
@@ -112,8 +125,8 @@ Continue an interrupted run with the same configuration and `--resume`. The
 pipeline checks the actual saved inputs, grid and completed outputs. Code changes
 are recorded as provenance and do not prevent reuse of compatible data.
 
-Checkpoints retain completed physical units, components, mainland seeds, seed
-indexes, distance assignments, regional land and the complete water calculation.
+Checkpoints retain completed physical units, parent components, individual rule
+outputs, consolidated ownership and encoding.
 A producer with its own partial checkpoints can resume those units. Other partial
 outputs are preserved before that phase restarts.
 
@@ -137,8 +150,9 @@ the user approves that candidate.
 - `inputs/`: freeze the selected Neon records and validate imported geometry.
 - `core/`: grid coordinates, wrapping, row-run streams and WGS84 geometry.
 - `physical/`: rasterize global coastline and inland-water inputs.
-- `land/`: components, seeds, distances and final geographic rules.
-- `water/`: coastal bands, basins, oceans and enclosed water.
+- `land/`: connected components and complete component-distance searches.
+- `water/`: physical shores, basin participants and exact distance certificates.
+- `division/`: shared scopes, six rule operations and ownership consolidation.
 - `execution/`: phase checkpoints, cancellation and durable timing.
 - `review/`: generate basin comparison images from completed map grids.
 

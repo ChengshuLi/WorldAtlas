@@ -27,6 +27,8 @@ class SourceArchiveTests(unittest.TestCase):
         (self.package / "module.py").write_bytes(b"value = 42\r\n")
         for name in ("environment.yml", "pyproject.toml", "README.md"):
             (self.project / name).write_text("setup: " + name)
+        (self.project / "database").mkdir()
+        (self.project / "database/schema.sql").write_text("CREATE SCHEMA atlas;\n")
 
     def test_capture_and_restore_preserve_bytes_without_git(self):
         captured = capture_source(self.package)
@@ -51,10 +53,17 @@ class SourceArchiveTests(unittest.TestCase):
         (package / "__init__.py").write_text("")
         files = [
             PurePosixPath("../../../share/worldatlas/" + name)
-            for name in ("environment.yml", "pyproject.toml", "README.md")
+            for name in (
+                "environment.yml",
+                "pyproject.toml",
+                "README.md",
+                "database/schema.sql",
+            )
         ]
         installed = Mock(files=files)
-        installed.locate_file.side_effect = lambda item: self.project / item.name
+        installed.locate_file.side_effect = lambda item: (
+            self.project / item.as_posix().split("share/worldatlas/")[1]
+        )
         with patch(
             "worldatlas.map_build.execution.code_archive.distribution",
             return_value=installed,

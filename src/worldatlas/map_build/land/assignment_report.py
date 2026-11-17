@@ -1,22 +1,18 @@
-"""Show numbered geographic rules, source geometry and their actual assigned cells."""
+"""Review source-area component assignments from the current frozen rule format."""
 
 import argparse
-import json
-import time
 from collections import Counter
 from html import escape
+import json
 from pathlib import Path
-
+import time
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.inputs.selection import geographic_domain, read_saved
-from worldatlas.map_build.inputs.features import (
-    assignment_selection,
-    selection_feature_ids,
-)
+from worldatlas.map_build.division.contracts import compile_rules
+from worldatlas.map_build.division.scope import Scope
+from worldatlas.map_build.inputs.selection import read_saved
 from worldatlas.map_build.land.components import ComponentGrid
-from worldatlas.map_build.land.geographic_assignments import resolve_assignments
 
 ASSETS = Path(__file__).parent
 
@@ -144,375 +140,135 @@ def context_spans(components, bounds):
     return result, stride
 
 
-def _selected_rules(selection):
-    domain = geographic_domain(selection, "regional")
-    return domain, domain["assignments"] if "assignments" in domain else domain[
-        "affiliations"
-    ]
-
-
-def _regional_claims(frozen, domain, rules, result, components):
-    """Show source-backed continent partitions alongside island-group assignments."""
-    from worldatlas.map_build.land.partitions import resolve_component_partitions
-    from worldatlas.map_build.land.witnesses import resolve_witnesses
-
-    selected = [p for p in domain.get('partitions', []) if p['method']=='land_components']
-    if not selected:
-        return
-    mainland = geographic_domain(frozen, 'mainland')
-    groups = resolve_witnesses(mainland, components)['groups']
-    protected = {g['component_id'] for g in groups.values() if g['role'] == 'mainland'}
-    inferred = resolve_component_partitions(selected, domain['features'], components,
-                                           domain['category_bindings'], protected=protected)
-    for record, claim in zip(selected, inferred['claims']):
-        entities = claim['component_entities']
-        if any(root in result['component_entities'] and result['component_entities'][root] != entity
-               for root, entity in entities.items()):
-            raise ValueError('geographic partition conflicts with an explicit assignment')
-        ident = 'partition:' + record['id']
-        rules.append(dict(assignment_id=ident, entity_id=None, rationale=record['rationale'],
-                          selection=dict(relation='whole_component_line_side',
-                                         feature_id=record['feature_id']),
-                          _component_entities=entities,
-                          _display_name=record['id'].replace('-', ' ').capitalize()))
-        result['claims'].append(dict(assignment_id=ident, entity_id=None,
-                                     component_ids=sorted(entities)))
-        result['component_entities'].update(entities)
-
-
 def write_report(
-    selection,
-    components,
-    directory,
-    *,
-    previous=None,
-    map_comparison=None,
-    feature_audit=None,
+    selection, components, directory, *, parent_id=None, parent_membership=None
 ):
-    """Write a local interactive report and machine-readable coverage inventory."""
+    """Use the same scope/majority calculation as production assignment."""
     started = time.monotonic()
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
+    geography = selection["geography"]
+    grid = components.grid
+    if parent_id is None:
+        roots = [e["id"] for e in geography["entities"] if e["parent_id"] is None]
+        if len(roots) != 1:
+            raise ValueError("select one geographic parent")
+        parent_id = roots[0]
+    children, rules = compile_rules(geography, parent_id)
+    parent = parent_membership
+    if parent is None:
+        entity = next(e for e in geography["entities"] if e["id"] == parent_id)
+        if entity["parent_id"] is not None:
+            raise ValueError("a non-root report needs its parent membership")
+        parent = (
+            np.arange(grid.height + 1, dtype=np.uint32),
+            np.tile([grid.width, 1], grid.height).astype(np.uint32),
+        )
+    snapshot = (
+        np.arange(grid.height + 1, dtype=np.uint32),
+        np.tile([grid.width, 0], grid.height).astype(np.uint32),
+    )
+    selected = []
+    for rule in rules:
+        if (
+            rule["operation"] != "assign_area"
+            or rule["unit"] != "component"
+            or rule["physical_class"] != "land"
+            or not rule["features"].get("scope_area")
+        ):
+            continue
+        scope = Scope(
+            rule, grid, components.physical, parent, snapshot, lambda kind: components
+        )
+        roots = set(map(int, scope.eligible_components()["land"]))
+        selected.append((rule, roots))
+    spans = cell_spans(components, set().union(*(roots for _, roots in selected)))
+    totals = components.totals()
+    supporters = Counter(root for _, roots in selected for root in roots)
     for name in ("assignment_report.js", "assignment_report.css"):
         (directory / name).write_text((ASSETS / name).read_text())
-    groups = [("current", selection)] + ([("previous", previous)] if previous else [])
-    documents_by_section = {
-        label: {
-            # Earlier frozen selections used source_id for a construction's ID.
-            (r["id"] if "id" in r else r["source_id"]): r["document"]
-            for r in frozen.get("construction_records", [])
-        }
-        for label, frozen in groups
-    }
-    resolved = []
-    for label, frozen in groups:
-        domain, rules = _selected_rules(frozen)
-        rules = list(rules)
-        result = resolve_assignments(
-            rules, domain["features"], components, domain["category_bindings"]
-        )
-        _regional_claims(frozen, domain, rules, result, components)
-        resolved.append((label, domain, rules, result))
-    all_roots = {
-        root for _, _, _, result in resolved for root in result["component_entities"]
-    }
-    spans = cell_spans(components, all_roots)
-    totals = components.totals()
-    current = resolved[0][3]["component_entities"]
-    current_references = {}
-    policy_number = 0
-    for number, rule in enumerate(resolved[0][2], 1):
-        if "_component_entities" in rule:
-            policy_number += 1
-            current_references[number] = f"P{policy_number}"
-        else:
-            current_references[number] = str(number)
-    audited = {
-        (row["assignment_id"], row["feature_id"]): row
-        for row in (feature_audit or {}).get("retained", [])
-    }
+    folder = directory / "rules"
+    folder.mkdir(exist_ok=True)
     summaries = []
     index = []
-    for label, domain, rules, result in resolved:
-        features = {f["feature_id"]: f for f in domain["features"]}
-        entities = {e["id"]: e for e in domain.get("entities", [])}
-        supporters = Counter(
-            root for c in result["claims"] for root in c["component_ids"]
+    for number, (rule, roots) in enumerate(selected, 1):
+        if not roots:
+            raise ValueError(
+                "selected area rule has no current land components: " + rule["id"]
+            )
+        entity = children[rule["targets"][0]["entity_id"]]
+        pieces = np.concatenate([spans[root] for root in sorted(roots)])
+        features = rule["features"]["scope_area"]
+        geometries = [f["geometry"] for f in features]
+        bounds = view_bounds(geometries, pieces, grid)
+        background, stride = context_spans(components, bounds)
+        record = dict(
+            number=number,
+            assignment_id=rule["id"],
+            entity_id=entity["id"],
+            entity=entity["name"],
+            feature_count=len(features),
+            component_count=len(roots),
+            cell_count=sum(totals[r] for r in roots),
+            unique_component_count=sum(supporters[r] == 1 for r in roots),
         )
-        claims = {
-            c.get("assignment_id", c.get("affiliation_id")): c for c in result["claims"]
-        }
-        assignment_rows, policy_rows = [], []
-        policy_number = 0
-        folder = directory / label
-        folder.mkdir(exist_ok=True)
-        for number, rule in enumerate(rules, 1):
-            ident = rule.get("assignment_id", rule.get("affiliation_id"))
-            claim = claims[ident]
-            roots = claim["component_ids"]
-            selected = np.concatenate([spans[root] for root in roots])
-            legacy = rule.get(
-                "component_selection",
-                rule.get("evidence", {}).get("component_selection"),
-            )
-            conditions = (
-                [rule["selection"]]
-                if "_component_entities" in rule
-                else [assignment_selection(rule, features.keys())]
-                if "assignment_id" in rule
-                else legacy["conditions"]
-            )
-            geometries = [
-                features[ident]["geometry"]
-                for c in conditions
-                for ident in selection_feature_ids(c)
-            ]
-            bounds = view_bounds(geometries, selected, components.grid)
-            background, stride = context_spans(components, bounds)
-            entity = entities.get(rule["entity_id"], {})
-            targets = rule.get("_component_entities")
-            if targets is not None:
-                policy_number += 1
-            reference = f"P{policy_number}" if targets is not None else str(number)
-            display_name = rule.get("_display_name", ident)
-            entity_name = (
-                " / ".join(entities[e]["name"] for e in sorted(set(targets.values())))
-                if targets
-                else entity.get("name", str(rule["entity_id"]))
-            )
-            record = dict(
-                number=number,
-                reference=reference,
-                assignment_id=ident,
-                entity_id=rule["entity_id"],
-                entity=entity_name,
-                feature_count=len(
-                    {ident for c in conditions for ident in selection_feature_ids(c)}
-                )
-                if targets is None
-                else None,
-                component_count=len(roots),
-                cell_count=sum(totals[r] for r in roots),
-                unique_component_count=sum(supporters[r] == 1 for r in roots),
-                other_assignments=sorted(
-                    k
-                    for k, c in claims.items()
-                    if k != ident and set(roots) & set(c["component_ids"])
-                ),
-                matched_current_components=sum(
-                    current.get(r) == (targets[r] if targets else rule["entity_id"])
-                    for r in roots
-                ),
-                conditions=conditions,
-                combine="all" if "assignment_id" in rule else legacy["combine"],
-                current_rule_numbers=[
-                    n
-                    for n, c in enumerate(resolved[0][3]["claims"], 1)
-                    if set(roots) & set(c["component_ids"])
-                ],
-            )
-            summaries.append(dict(section=label, **record))
-            payload = dict(
-                **record,
-                grid=vars(components.grid),
-                bounds=bounds,
-                geometries=geometries,
-                cells=selected.tolist()
-                if not targets
-                else [
-                    [int(a), int(b), int(y), targets[root]]
-                    for root in roots
-                    for a, b, y in spans[root]
-                ],
-                context=background,
-                context_stride=stride,
-                color=entity.get("color_rgb") or "#3769a0",
-                entity_colors={
-                    e: record.get("color_rgb") or "#3769a0"
-                    for e, record in entities.items()
-                },
-            )
-            content = json.dumps(
-                payload, separators=(",", ":"), ensure_ascii=False
-            ).replace("<", "\\u003c")
-            documents = documents_by_section[label]
-            details = []
-            for feature_id in dict.fromkeys(
-                ident for c in conditions for ident in selection_feature_ids(c)
-            ):
-                feature = features[feature_id]
-                construction = feature.get("construction_id")
-                document = documents.get(construction)
-                if document is not None:
-                    details.append(
-                        "<h3>"
-                        + escape(feature_id)
-                        + "</h3><p>"
-                        + escape(document["basis"])
-                        + "</p><pre>"
-                        + escape(json.dumps(document, indent=2, ensure_ascii=False))
-                        + "</pre>"
-                    )
-            necessity = ""
-            if label == "current" and audited and targets is None:
-                feature_ids = list(
-                    dict.fromkeys(
-                        ident for c in conditions for ident in selection_feature_ids(c)
-                    )
-                )
-                missing = [fid for fid in feature_ids if (ident, fid) not in audited]
-                if missing:
-                    raise ValueError(
-                        "feature audit is missing selected references: " + str(missing)
-                    )
-                necessity = (
-                    "<h2>Feature necessity</h2><p>Each row shows map cells that change continent if this feature is omitted, keeping the other features and geographic rules.</p>"
-                    "<table><thead><tr><th>Feature ID</th><th>Changed cells if omitted</th></tr></thead><tbody>"
-                    + "".join(
-                        "<tr><td>"
-                        + escape(fid)
-                        + "</td><td>"
-                        + f"{audited[ident, fid]['changed_cells']:,}"
-                        + "</td></tr>"
-                        for fid in feature_ids
-                    )
-                    + "</tbody></table>"
-                )
-            construction_details = (
-                (
-                    "<details><summary>Area construction and contributing source regions</summary>"
-                    + "".join(details)
-                    + "</details>"
-                )
-                if details
-                else ""
-            )
-            explanations = {
-                "point_component": "Select the whole land component containing this point.",
-                "intersects_component": "Select each whole land component with at least one land-cell center inside the area.",
-                "contains_component": "Select each whole land component whose land-cell centers all lie inside the area.",
-                "majority_component": "Select each whole land component with more than half its land-cell centers inside the area. Its coastal tips can extend beyond the outline.",
-                "whole_component_line_side": "Use the line and opposite side witnesses to assign complete islands. Islands reaching the scope edge retain their existing assignment.",
-                "regional_line_groups_and_satellites": "Use the dividing line, source-backed island groups and direct nearby named anchors to assign complete islands.",
-            }
-            explanation = (
-                " AND ".join(explanations[c["relation"]] for c in conditions)
-                if record["combine"] == "all"
-                else " OR ".join(explanations[c["relation"]] for c in conditions)
-            )
-            feature_summary = (
-                f"{record['feature_count']:,} features"
-                if record["feature_count"] is not None
-                else "regional policy"
-            )
-            heading = f"{reference}. {display_name}"
-            html = f"""<!doctype html><html lang="en"><meta charset="utf-8">
-<title>{escape(heading)}</title><link rel="stylesheet" href="../assignment_report.css">
-<body><h1>{escape(heading)}</h1><p>{escape(rule.get("rationale", ""))}</p>
-<p><strong>{escape(record["entity"])}</strong> · {feature_summary} · {len(roots):,} components · {record["cell_count"]:,} cells ·
-{record["unique_component_count"]:,} components uniquely selected by this rule</p>
-<p>{escape(explanation)} When several areas are listed, their union is used before selecting components.</p>
-<details><summary>Selected source features</summary><pre>{escape(json.dumps({"feature_ids": rule["feature_ids"]} if "feature_ids" in rule else rule["selection"] if "selection" in rule else legacy, indent=2))}</pre></details>
-{construction_details}
-<p>Left: selection geometry. Right: actual assigned land cells in the entity color.
-Each source feature has its own color. The legend can hide individual outlines; assigned cells keep their continent color. Gray is background land.
-Drag to pan; scroll to zoom. Both views move together.</p>
-<button id="reset">Reset view</button><button id="save">Save comparison image</button>
+        payload = dict(
+            **record,
+            grid=vars(grid),
+            bounds=bounds,
+            geometries=geometries,
+            conditions=[dict(feature_ids=[f["id"] for f in features])],
+            cells=pieces.tolist(),
+            context=background,
+            context_stride=stride,
+            color=entity["color_rgb"],
+            entity_colors={e: child["color_rgb"] for e, child in children.items()},
+        )
+        content = json.dumps(payload, separators=(",", ":")).replace("<", "\\u003c")
+        page = f"""<!doctype html><html lang="en"><meta charset="utf-8">
+<title>{number}. {escape(rule["id"])}</title><link rel="stylesheet" href="../assignment_report.css">
+<h1>{number}. {escape(rule["id"])}</h1><p>{escape(rule["rationale"])}</p>
+<p>{escape(entity["name"])}: {record["cell_count"]:,} cells; {len(roots):,} components; {len(features)} source features.</p>
+<p>The union of these source areas selects components by strict majority of their land cells.</p>
+<button id="reset">Reset view</button><button id="save">Save image</button>
 <div class="maps"><canvas id="source"></canvas><canvas id="result"></canvas></div>
-<div id="feature-legend" class="feature-legend" aria-label="Feature colors"></div>
-<p id="extent"></p><p>Selected cells retain the full grid resolution. Background land is sampled for orientation.</p>
-{necessity}
-<p>Current rules covering these components: {escape(", ".join("#" + current_references[n] for n in record["current_rule_numbers"]))}.</p>
-<p>Other rules sharing selected components: {escape(", ".join(record["other_assignments"]) or "none")}.</p>
-<script id="data" type="application/json">{content}</script><script src="../assignment_report.js"></script></body></html>"""
-            (folder / f"{number:03d}.html").write_text(html)
-            (policy_rows if targets is not None else assignment_rows).append(
-                f'<tr><td>{reference}</td><td><a target="detail" href="{label}/{number:03d}.html">{escape(display_name)}</a></td>'
-                f"<td>{escape(record['entity'])}</td><td>{record['feature_count'] if record['feature_count'] is not None else '—'}</td><td>{len(roots):,}</td><td>{record['cell_count']:,}</td>"
-                f"<td>{record['unique_component_count']:,}</td></tr>"
-            )
-        for title, rows in (
-            ("assignments", assignment_rows),
-            ("regional policies", policy_rows),
-        ):
-            if rows:
-                index.append(
-                    f"<h2>{label.title()} {title} ({len(rows)})</h2><table><thead><tr><th>#</th><th>Rule</th><th>Entity</th><th>Features</th><th>Components</th><th>Cells</th><th>Unique components</th></tr></thead><tbody>"
-                    + "".join(rows)
-                    + "</tbody></table>"
-                )
-    changed = None
-    if previous:
-        before = resolved[1][3]["component_entities"]
-        changed_roots = {
-            r for r in set(before) | set(current) if before.get(r) != current.get(r)
-        }
-        changed = sum(totals[r] for r in changed_roots)
-    summary = dict(
-        rules=summaries,
-        changed_explicit_coverage_cells=changed,
-        map_comparison=map_comparison,
-        processing_seconds=time.monotonic() - started,
-    )
-    (directory / "coverage.json").write_text(json.dumps(summary, indent=2) + "\n")
-    (directory / "index.html").write_text(
-        """<!doctype html><html lang="en"><meta charset="utf-8"><title>Geographic assignment review</title>
-<link rel="stylesheet" href="assignment_report.css"><body><h1>Geographic assignment review</h1>
-<p>Each numbered row opens its selection geometry and actual assigned cells. Unique components are selected by no other assignment or regional policy in the same current/previous dataset.
-Assignment rows and regional policies are shown in separate tables. A regional policy can assign different islands to different continents; each island still receives one continent. Mainland partitions and distance defaults remain separate pipeline stages.</p>"""
-        + (
-            (
-                f"<p><strong>{map_comparison['changed_cells']:,} final map cells changed.</strong> "
-                "Table counts show the land selected by each rule.</p>"
-                if map_comparison is not None
-                else f"<p>{changed:,} cells changed explicit rule coverage; this is not a final-map comparison.</p>"
-            )
-            if changed is not None
-            else ""
+<div id="feature-legend" class="feature-legend"></div><p id="extent"></p>
+<script id="data" type="application/json">{content}</script><script src="../assignment_report.js"></script></html>"""
+        (folder / f"{number:03d}.html").write_text(page)
+        summaries.append(record)
+        index.append(
+            f'<tr><td>{number}</td><td><a target="detail" href="rules/{number:03d}.html">{escape(rule["id"])}</a></td>'
+            f"<td>{escape(entity['name'])}</td><td>{len(features)}</td><td>{len(roots):,}</td><td>{record['cell_count']:,}</td><td>{record['unique_component_count']:,}</td></tr>"
         )
-        + '<input id="search" placeholder="Filter rules by name, entity or number"><div class="layout"><nav>'
+    (directory / "index.html").write_text(
+        '<!doctype html><html lang="en"><meta charset="utf-8"><link rel="stylesheet" href="assignment_report.css">'
+        '<title>Geographic area assignments</title><h1>Geographic area assignments</h1><input id="search" placeholder="Filter rules">'
+        '<div class="review-layout"><nav><table><thead><tr><th>#</th><th>Rule</th><th>Entity</th><th>Features</th><th>Components</th><th>Cells</th><th>Unique components</th></tr></thead><tbody>'
         + "".join(index)
-        + '</nav><iframe name="detail" title="Rule details" src="current/001.html"></iframe></div>'
+        + '</tbody></table></nav><iframe name="detail" title="Rule details" src="rules/001.html"></iframe></div>'
         + INDEX_SCRIPT
     )
-    return summary
+    result = dict(rules=summaries, processing_seconds=time.monotonic() - started)
+    (directory / "summary.json").write_text(json.dumps(result, indent=2) + "\n")
+    return result
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--selection", required=True, type=Path)
-    parser.add_argument("--previous-selection", type=Path)
-    parser.add_argument(
-        "--map-comparison",
-        type=Path,
-        help="final-grid comparison report from the map pipeline",
-    )
-    parser.add_argument(
-        "--feature-audit",
-        type=Path,
-        help="per-feature removal comparison, for the current selection",
-    )
-    parser.add_argument("--physical", required=True, type=Path)
-    parser.add_argument("--components", required=True, type=Path)
-    parser.add_argument("--output", required=True, type=Path)
+    for name in ("selection", "physical", "components", "output"):
+        parser.add_argument("--" + name, required=True, type=Path)
     args = parser.parse_args()
     grid = Grid(**json.loads((args.components / "report.json").read_text())["grid"])
     with ComponentGrid(args.physical, args.components, grid) as components:
-        result = write_report(
-            read_saved(args.selection),
-            components,
-            args.output,
-            map_comparison=json.loads(args.map_comparison.read_text())
-            if args.map_comparison
-            else None,
-            feature_audit=json.loads(args.feature_audit.read_text())
-            if args.feature_audit
-            else None,
-            previous=read_saved(args.previous_selection)
-            if args.previous_selection
-            else None,
+        result = write_report(read_saved(args.selection), components, args.output)
+    print(
+        json.dumps(
+            dict(
+                rule_count=len(result["rules"]),
+                processing_seconds=result["processing_seconds"],
+            )
         )
-    print(json.dumps({k: v for k, v in result.items() if k != "rules"}))
+    )
 
 
 if __name__ == "__main__":

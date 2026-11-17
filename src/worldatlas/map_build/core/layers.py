@@ -12,37 +12,39 @@ import numpy as np
 
 
 def file_hash(path):
-    with Path(path).open('rb') as source:
-        return hashlib.file_digest(source, 'sha256').hexdigest()
+    with Path(path).open("rb") as source:
+        return hashlib.file_digest(source, "sha256").hexdigest()
 
 
 def tile_rows(path, tile, grid, codes):
-    first, last = tile['core_rows']
-    left, right = tile['core_cols']
+    first, last = tile["core_rows"]
+    left, right = tile["core_cols"]
     if not (0 <= first < last <= grid.height and 0 <= left < right <= grid.width):
-        raise ValueError('assignment tile escapes the grid')
-    info = tile['span_file']
-    source = (path.parent / info['path']).resolve(strict=True)
-    if file_hash(source) != info['sha256']:
-        raise ValueError('assignment file checksum differs')
-    opener = gzip.open if source.suffix == '.gz' else open
+        raise ValueError("assignment tile escapes the grid")
+    info = tile["span_file"]
+    source = (path.parent / info["path"]).resolve(strict=True)
+    if file_hash(source) != info["sha256"]:
+        raise ValueError("assignment file checksum differs")
+    opener = gzip.open if source.suffix == ".gz" else open
     previous = first - 1
-    with opener(source, 'rt') as stream:
+    with opener(source, "rt") as stream:
         for line in stream:
             record = json.loads(line)
-            y = record['row']
+            y = record["row"]
             if type(y) is not int or not first <= y < last or y <= previous:
-                raise ValueError('assignment rows must be ordered and unique within a tile')
+                raise ValueError(
+                    "assignment rows must be ordered and unique within a tile"
+                )
             previous = y
             spans, stop = [], left
-            for item in record['spans']:
-                a, b, code = (item[key] for key in ('start', 'end', 'code'))
+            for item in record["spans"]:
+                a, b, code = (item[key] for key in ("start", "end", "code"))
                 if (
                     any(type(v) is not int for v in (a, b, code))
                     or not stop <= a < b <= right
                     or code not in codes
                 ):
-                    raise ValueError('invalid assignment span or unbound category code')
+                    raise ValueError("invalid assignment span or unbound category code")
                 spans.append((a, b, code))
                 stop = b
             if spans:
@@ -52,14 +54,17 @@ def tile_rows(path, tile, grid, codes):
 def layer_rows(path, grid, codes):
     path = Path(path)
     manifest = json.loads(path.read_text())
-    if (manifest['grid']['width'], manifest['grid']['height']) != (grid.width, grid.height):
-        raise ValueError('assignment layer uses a different grid')
-    streams = [tile_rows(path, tile, grid, codes) for tile in manifest['tiles']]
+    if (manifest["grid"]["width"], manifest["grid"]["height"]) != (
+        grid.width,
+        grid.height,
+    ):
+        raise ValueError("assignment layer uses a different grid")
+    streams = [tile_rows(path, tile, grid, codes) for tile in manifest["tiles"]]
     merged = heapq.merge(*streams, key=lambda item: item[0])
     for y, records in itertools.groupby(merged, key=lambda item: item[0]):
         spans = sorted(span for _, values in records for span in values)
         if any(a[1] > b[0] for a, b in zip(spans, spans[1:])):
-            raise ValueError('assignment tiles overlap')
+            raise ValueError("assignment tiles overlap")
         yield y, spans
 
 
@@ -71,11 +76,35 @@ def write_layer(directory, grid, rows):
     current = next(iterator, None)
     offsets = [0]
     counts = Counter()
-    with (directory / 'runs.u32le').open('xb') as output:
-        for y in range(grid.height):
-            if current is not None and (type(current[0]) is not int or current[0] < y):
-                raise ValueError('layer rows must be ordered and unique')
-            spans = current[1] if current is not None and current[0] == y else ()
+    assigned_bounds = None
+    with (directory / "runs.u32le").open("xb") as output:
+        y = 0
+        while y < grid.height:
+            if current is not None and (
+                type(current[0]) is not int or not y <= current[0] < grid.height
+            ):
+                raise ValueError(
+                    "layer rows must be ordered and unique, and inside the grid"
+                )
+            if current is None or current[0] > y:
+                stop = grid.height if current is None else current[0]
+                length = stop - y
+                np.tile(np.asarray([grid.width, 0], dtype="<u4"), length).tofile(output)
+                offsets.extend(range(offsets[-1] + 1, offsets[-1] + length + 1))
+                y = stop
+                continue
+            spans = current[1]
+            if spans:
+                bounds = [int(spans[0][0]), int(spans[-1][1]), y, y + 1]
+                if assigned_bounds is None:
+                    assigned_bounds = bounds
+                else:
+                    assigned_bounds = [
+                        min(assigned_bounds[0], bounds[0]),
+                        max(assigned_bounds[1], bounds[1]),
+                        assigned_bounds[2],
+                        y + 1,
+                    ]
             pairs = []
             stop = 0
 
@@ -91,7 +120,7 @@ def write_layer(directory, grid, rows):
                     or not stop <= a < b <= grid.width
                     or not 0 < code < 2**32
                 ):
-                    raise ValueError('invalid output span')
+                    raise ValueError("invalid output span")
                 if a > stop:
                     append(a, 0)
                 append(b, code)
@@ -99,21 +128,23 @@ def write_layer(directory, grid, rows):
                 stop = b
             if stop < grid.width:
                 append(grid.width, 0)
-            np.asarray(pairs, dtype='<u4').tofile(output)
+            np.asarray(pairs, dtype="<u4").tofile(output)
             offsets.append(offsets[-1] + len(pairs))
             if offsets[-1] >= 2**32:
-                raise ValueError('run offsets exceed the u32 representation')
-            if current is not None and current[0] == y:
-                current = next(iterator, None)
+                raise ValueError("run offsets exceed the u32 representation")
+            current = next(iterator, None)
+            y += 1
         if current is not None:
-            raise ValueError('assignment row outside the grid')
-    np.asarray(offsets, dtype='<u4').tofile(directory / 'rows.u32le')
+            raise ValueError("assignment row outside the grid")
+    np.asarray(offsets, dtype="<u4").tofile(directory / "rows.u32le")
     report = {
-        'grid': {'width': grid.width, 'height': grid.height, 'step': grid.step},
-        'counts': dict(counts),
-        'run_count': offsets[-1],
+        "directory": str(directory.resolve()),
+        "assigned_bounds": assigned_bounds,
+        "grid": {"width": grid.width, "height": grid.height, "step": grid.step},
+        "counts": dict(counts),
+        "run_count": offsets[-1],
     }
-    (directory / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
+    (directory / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     return report
 
 
@@ -121,7 +152,7 @@ def patch_rows(values, bounds, grid):
     """Emit a possibly wrapped rectangular assignment without expanding the globe."""
     x0, x1, y0, y1 = bounds
     if values.shape != (y1 - y0, x1 - x0):
-        raise ValueError('assignment dimensions differ from its bounds')
+        raise ValueError("assignment dimensions differ from its bounds")
     for y, row in enumerate(values, y0):
         spans = []
         for a, b in ((x0, min(x1, grid.width)), (0, max(0, x1 - grid.width))):
