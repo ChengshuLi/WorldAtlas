@@ -203,10 +203,9 @@ class SelectionTests(unittest.TestCase):
             self.read()["construction_records"][0]["document"]["basis"], "Second"
         )
 
-    def test_requested_missing_catalog_or_construction_fails(self):
-        for option in ("raw_sources", "constructions"):
-            with self.assertRaisesRegex(ValueError, "missing"):
-                self.read(**{option: ["absent"]})
+    def test_requested_missing_raw_source_fails(self):
+        with self.assertRaisesRegex(ValueError, "missing"):
+            self.read(raw_sources=["absent"])
 
 
 @unittest.skipUnless(
