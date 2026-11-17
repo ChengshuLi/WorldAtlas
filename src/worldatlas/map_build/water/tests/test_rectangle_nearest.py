@@ -5,6 +5,34 @@ from worldatlas.map_build.water import shared_nearest as s
 
 
 class RectangleNearest(unittest.TestCase):
+    def test_block_counts_match_direct_sums_including_partial_edges(self):
+        rng = np.random.default_rng(1729)
+        for shape, block in (
+            ((95, 197), 64),
+            ((1, 137), 64),
+            ((37, 1), 9),
+            ((3, 7), 100),
+        ):
+            water = rng.random(shape) > 0.4
+            if shape == (95, 197):
+                water[:64, :64] = True
+                water[:64, 64:128] = False
+            count = r.rectangle_counts(water, block)
+            rectangles = []
+            for y in range(0, shape[0], block):
+                for x in range(0, shape[1], block):
+                    for _ in range(20):
+                        a = int(rng.integers(y, min(y + block, shape[0])))
+                        b = int(rng.integers(a + 1, min(y + block, shape[0]) + 1))
+                        c = int(rng.integers(x, min(x + block, shape[1])))
+                        d = int(rng.integers(c + 1, min(x + block, shape[1]) + 1))
+                        rectangles.append((a, b, c, d))
+            coordinates = np.array(rectangles).T
+            expected = [water[a:b, c:d].sum() for a, b, c, d in rectangles]
+            np.testing.assert_array_equal(count(*coordinates), expected)
+            a, b, c, d = rectangles[0]
+            self.assertEqual(count(a, b, c, d), water[a:b, c:d].sum())
+
     def test_optional_coastal_band_and_missing_classes(self):
         pairs = [("a", 17, 1), ("b", 18, 2), ("absent", 19, 3)]
         (lat, lon) = (np.array([0.5, 0.5]), np.array([-0.5, 5.5]))

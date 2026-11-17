@@ -11,7 +11,9 @@ claims. This folder contains its reusable numerical helpers.
 - `shared_nearest.py` performs complete WGS84 point searches. Coarse real shore
   witnesses bound distant searches; exact distances decide ownership.
 - `rectangle_nearest.py` shares proven distance certificates over rectangles and
-  falls back to complete point searches where needed.
+  falls back to complete point searches where needed. Cell counts use local
+  prefix tables only for mixed blocks; empty/full blocks need no table. Coverage
+  accounting is batched rather than repeated for every excluded rectangle.
 
 The common engine extracts shore geometry once, attaches current land owners,
 and reuses filtered reference indexes. Coastal water uses the configured 22224 m

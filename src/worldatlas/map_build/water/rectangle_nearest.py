@@ -11,6 +11,54 @@ from worldatlas.map_build.water import shared_nearest as s
 MAX_RADIUS = s.A / (1 - s.F)
 
 
+def rectangle_counts(mask, block):
+    """Count selected cells inside rectangles contained in one root block.
+
+    Subdivision never crosses a root-block edge. Empty/full blocks need no
+    prefix table; mixed blocks use compact tables with block-sized counts.
+    """
+    nr, nc = mask.shape
+    h, w = min(block, nr), min(block, nc)
+    ny, nx = math.ceil(nr / h), math.ceil(nc / w)
+    padded = np.pad(mask, ((0, ny * h - nr), (0, nx * w - nc)))
+    tiles = np.ascontiguousarray(padded.reshape(ny, h, nx, w).transpose(0, 2, 1, 3))
+    dtype = np.int32 if h * w <= np.iinfo(np.int32).max else np.int64
+    totals = tiles.sum(axis=(2, 3), dtype=dtype)
+    mixed = (totals != 0) & (totals != h * w)
+    positions = np.full((ny, nx), -1, dtype=np.intp)
+    positions[mixed] = np.arange(np.count_nonzero(mixed))
+    table = np.pad(
+        tiles[mixed].cumsum(axis=2, dtype=dtype).cumsum(axis=1, dtype=dtype),
+        ((0, 0), (1, 0), (1, 0)),
+    )
+
+    def count(a, b, c, d):
+        ty, tx = a // h, c // w
+        ids = positions[ty, tx]
+        result = np.where(totals[ty, tx] != 0, (b - a) * (d - c), 0)
+        chosen = ids >= 0
+        if np.any(chosen):
+            a, b, c, d = (
+                np.asarray(value - origin)[chosen]
+                for value, origin in (
+                    (a, ty * h),
+                    (b, ty * h),
+                    (c, tx * w),
+                    (d, tx * w),
+                )
+            )
+            ids = ids[chosen]
+            result[chosen] = (
+                table[ids, b, d]
+                - table[ids, a, d]
+                - table[ids, b, c]
+                + table[ids, a, c]
+            )
+        return result
+
+    return count
+
+
 def exact_certificate_possible(lower, best, upper, radius, boundary):
     """Skip expensive exact probes when even optimistic class gaps cannot win.
 
@@ -111,13 +159,7 @@ def classify(
     }
     if not total:
         return output, stats
-    sat = np.pad(
-        water.cumsum(axis=0, dtype=np.int64).cumsum(axis=1, dtype=np.int64),
-        ((1, 0), (1, 0)),
-    )
-
-    def wet(a, b, c, d):
-        return sat[b, d] - sat[a, d] - sat[b, c] + sat[a, c]
+    wet = rectangle_counts(water, block)
 
     ys, xs = np.meshgrid(
         np.arange(0, nr, block), np.arange(0, nc, block), indexing="ij"
@@ -225,10 +267,9 @@ def classify(
         elif band is not None:
             outside = inside_crop & (boundary - radius > threshold)
         good = inside | outside
-        for i in np.flatnonzero(good):
-            if inside[i]:
-                output[a[i] : b[i], c[i] : d[i]] = available[int(best[i])][2]
-            stats["certified_cells"] += int(wet(a[i], b[i], c[i], d[i]))
+        stats["certified_cells"] += int(wet(a[good], b[good], c[good], d[good]).sum())
+        for i in np.flatnonzero(inside):
+            output[a[i] : b[i], c[i] : d[i]] = available[int(best[i])][2]
         pending = ~good
         leaf = pending & (b - a == 1) & (d - c == 1)
         if np.any(leaf):
