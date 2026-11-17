@@ -1,7 +1,6 @@
-"""Read checksum-verified assignment tiles and write ordinary row-run layers."""
+"""Merge sparse assignment rows and write complete row-run layers."""
 
 from collections import Counter
-import gzip
 import hashlib
 import heapq
 import itertools
@@ -14,53 +13,6 @@ import numpy as np
 def file_hash(path):
     with Path(path).open("rb") as source:
         return hashlib.file_digest(source, "sha256").hexdigest()
-
-
-def tile_rows(path, tile, grid, codes):
-    first, last = tile["core_rows"]
-    left, right = tile["core_cols"]
-    if not (0 <= first < last <= grid.height and 0 <= left < right <= grid.width):
-        raise ValueError("assignment tile escapes the grid")
-    info = tile["span_file"]
-    source = (path.parent / info["path"]).resolve(strict=True)
-    if file_hash(source) != info["sha256"]:
-        raise ValueError("assignment file checksum differs")
-    opener = gzip.open if source.suffix == ".gz" else open
-    previous = first - 1
-    with opener(source, "rt") as stream:
-        for line in stream:
-            record = json.loads(line)
-            y = record["row"]
-            if type(y) is not int or not first <= y < last or y <= previous:
-                raise ValueError(
-                    "assignment rows must be ordered and unique within a tile"
-                )
-            previous = y
-            spans, stop = [], left
-            for item in record["spans"]:
-                a, b, code = (item[key] for key in ("start", "end", "code"))
-                if (
-                    any(type(v) is not int for v in (a, b, code))
-                    or not stop <= a < b <= right
-                    or code not in codes
-                ):
-                    raise ValueError("invalid assignment span or unbound category code")
-                spans.append((a, b, code))
-                stop = b
-            if spans:
-                yield y, spans
-
-
-def layer_rows(path, grid, codes):
-    path = Path(path)
-    manifest = json.loads(path.read_text())
-    if (manifest["grid"]["width"], manifest["grid"]["height"]) != (
-        grid.width,
-        grid.height,
-    ):
-        raise ValueError("assignment layer uses a different grid")
-    streams = [tile_rows(path, tile, grid, codes) for tile in manifest["tiles"]]
-    yield from merge_rows(streams)
 
 
 def merge_rows(streams):
