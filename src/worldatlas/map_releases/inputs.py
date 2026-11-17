@@ -102,6 +102,11 @@ def restore_inputs(content, output):
                 if key in ("configuration", "selection", "raw_sources")
                 else content[key]
             )
+            if key == "configuration" and isinstance(value.get("sources"), dict):
+                # Comparisons validate an earlier run; they do not produce map
+                # cells. Their local paths need not exist on the replay machine.
+                value["sources"].pop("reference_rows", None)
+                value["sources"].pop("reference_runs", None)
             (output / (key + ".json")).write_bytes(json_bytes(value))
 
     for identity, code in content.get("source_code", {}).items():

@@ -100,6 +100,10 @@ Compare its output with the archived release's recorded checksums. Use the
 recorded code and environment when reproducing an older result. Source location changes
 recorded by an archive are applied to the extracted configuration/selection;
 original captured records and reports are preserved.
+Restored configuration omits optional comparison streams from the earlier
+machine; those files validate a result but do not generate its cells. The
+archive retains the original configuration. Use `--compare-release` when a new
+comparison is wanted.
 
 Historical backfills use the same archive format. They can contain supporting
 records from older pipelines and notes describing unavailable configuration,
