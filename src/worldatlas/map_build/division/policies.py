@@ -57,7 +57,6 @@ def nearest_basin_water(context, scope, directory):
         references,
         "cell",
         directory=directory,
-        superset_winners=getattr(context, "coastal_winners", None),
     )
     result["participant_shore_edges"] = counts
     result["physical_water_cells"] = int(water.sum())

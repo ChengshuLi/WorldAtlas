@@ -20,6 +20,13 @@ come from the completed grid report, adding land and water for each continent.
 The deployed config and legend file are generated release data stored in R2.
 GitHub tracks their generator and the viewer source.
 
+Future modes share this same legend panel. Switching mode changes the map and
+legend together: continent mode lists continents worldwide, subcontinent mode
+lists subcontinents worldwide, and religion mode lists religions worldwide. Each
+release will supply the corresponding mode dataset. Counts are map cells for now;
+once location boundaries exist, the intended display is the number of locations.
+Those additional modes and location counts are not implemented yet.
+
 Selecting entries keeps their fills at full brightness and dims the other
 colors. A white outline surrounds the combined selected land and water, with
 no line between adjacent selected entities. Hovering another legend entry

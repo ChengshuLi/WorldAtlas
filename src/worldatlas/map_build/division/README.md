@@ -68,9 +68,8 @@ Keep geographic choices in Neon and algorithms here. Generality and efficiency
 are equally required: reuse immutable geometry/indexes and vectorized intervals,
 measure substantial costs, and retain complete input coverage.
 
-Coastal winners can certify basin cells when the winner remains in the basin's
-reference set. Basins still emit complete claims against the original snapshot;
-excluded winners are recomputed and disagreement still fails consolidation. This
-is computation reuse, not coastal priority. Land-stage receipts separately pin
-their actual definitions and outputs, so water-only edits can reuse verified land
-without reusing an outdated final parent division.
+Coastal and basin claims run independently against the same ownership snapshot,
+sharing shore positions and indexes. Their overlapping claims must agree.
+Land-stage receipts separately pin their actual definitions and outputs, so
+water-only edits can reuse verified land without reusing an outdated final parent
+division.

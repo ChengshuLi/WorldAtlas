@@ -76,26 +76,11 @@ def component_queries(scope, references, directory):
     return result
 
 
-def nearest(
-    scope,
-    reference_cells,
-    unit,
-    distance_limit=None,
-    *,
-    directory,
-    superset_winners=None,
-):
-    """Assign prepared queries, optionally reusing winners from a reference superset.
-
-    The caller must establish identical shore geometry, distance and tie semantics.
-    A superset winner retained in these references is also their exact winner.
-    Zero/absent winners still require the complete calculation.
-    """
+def nearest(scope, reference_cells, unit, distance_limit=None, *, directory):
+    """Assign prepared queries using complete eligible shore references."""
     if unit not in ("cell", "component"):
         raise ValueError("nearest requires a cell or component decision unit")
     if unit == "component":
-        if superset_winners is not None:
-            raise ValueError("cell winners cannot certify a component distance")
         if distance_limit is not None:
             raise ValueError(
                 "component nearest does not support a coastal distance limit"
@@ -103,12 +88,8 @@ def nearest(
         return component_queries(scope, reference_cells, directory)
     grid = scope.grid
     pairs = reference_cells.pairs
-    reused = 0
     if len(pairs) == 1 and distance_limit is None:
-        result = assign_area(scope, pairs[0][0], directory)
-        if superset_winners is not None:
-            result["reused_superset_winner_cells"] = 0
-        return result
+        return assign_area(scope, pairs[0][0], directory)
 
     def points(lat, lon):
         codes, stats = shared_nearest.classify_wgs84(
@@ -125,53 +106,25 @@ def nearest(
         return codes, stats["bounded"], stats["exact"]
 
     def rows():
-        nonlocal reused
         for first, last, windows in scope.query_windows():
             streams = []
             for left, right, mask in windows:
                 if not pairs:
                     raise ValueError("selected cells have no eligible reference shores")
-                known = None
-                if superset_winners is not None:
-                    if distance_limit is not None:
-                        raise ValueError(
-                            "winner reuse without recorded distances needs an unrestricted query"
-                        )
-                    known = np.stack(
-                        [
-                            shared_nearest.crop(
-                                *superset_winners, y, left, right, grid.width
-                            )
-                            for y in range(first, last)
-                        ]
-                    )
-                    known = np.where(
-                        mask & np.isin(known, [p[0] for p in pairs]), known, 0
-                    )
-                    reused += int(np.count_nonzero(known))
-                pending = mask if known is None else mask & (known == 0)
-                if pending.any():
-                    values, _ = classify(
-                        pending,
-                        left,
-                        first,
-                        grid.bounds,
-                        grid.width,
-                        grid.height,
-                        grid.step,
-                        pairs,
-                        reference_cells.indexes,
-                        points,
-                        band=distance_limit,
-                    )
-                    if known is not None:
-                        values = np.where(known != 0, known, values)
-                else:
-                    values = known
+                values, _ = classify(
+                    mask,
+                    left,
+                    first,
+                    grid.bounds,
+                    grid.width,
+                    grid.height,
+                    grid.step,
+                    pairs,
+                    reference_cells.indexes,
+                    points,
+                    band=distance_limit,
+                )
                 streams.append(patch_rows(values, (left, right, first, last), grid))
             yield from merge_rows(streams)
 
-    result = write_layer(directory, grid, rows())
-    if superset_winners is not None:
-        result["reused_superset_winner_cells"] = reused
-    return result
+    return write_layer(directory, grid, rows())

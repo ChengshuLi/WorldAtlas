@@ -171,7 +171,6 @@ class ParentDivision:
         self.scope_component_grids = {}
         self._shores = None
         self._water_shores = None
-        self.coastal_winners = None
         self.shore_provider = shore_provider
         self.land_ownership = None
         self.land_directory = None
@@ -190,7 +189,6 @@ class ParentDivision:
                 parent_directory = self.directory / "parent-membership"
                 self.task(
                     "parent-membership",
-                    "land",
                     write_layer,
                     (
                         parent_directory,
@@ -213,7 +211,6 @@ class ParentDivision:
             if self.parent_physical_directory != self.physical_directory:
                 self.task(
                     "parent-physical",
-                    "land",
                     self._prepare_physical,
                     (),
                     [self.parent_physical_directory],
@@ -226,7 +223,6 @@ class ParentDivision:
             self.empty_directory = empty
             self.task(
                 "empty",
-                "land",
                 write_layer,
                 (empty, grid, ()),
                 [empty],
@@ -243,7 +239,7 @@ class ParentDivision:
     def pins(self, directory):
         return [pin(Path(directory) / name) for name in ("rows.u32le", "runs.u32le")]
 
-    def task(self, name, group, function, args, outputs, *, inputs, kwargs=None):
+    def task(self, name, function, args, outputs, *, inputs, kwargs=None):
         if self.checkpoints is None:
             return function(*args, **(kwargs or {}))
         return self.checkpoints.run_function(
@@ -277,7 +273,6 @@ class ParentDivision:
                 directory = self.directory / (kind + "-components")
                 self.task(
                     kind + "-components",
-                    "land",
                     build_components,
                     (self.grid, self.parent_physical_directory, directory),
                     [directory],
@@ -334,7 +329,6 @@ class ParentDivision:
                 with open_grid(snapshot_directory, self.grid) as snapshot:
                     self.task(
                         name,
-                        physical_class,
                         build_domain,
                         (
                             self.grid,
@@ -363,13 +357,10 @@ class ParentDivision:
                 self.scope_component_grids[key] = data
             return self.scope_component_grids[key]
 
-    def calculate(self, rules, snapshot, stage, *, extra_inputs=()):
+    def calculate(self, rules, snapshot):
         """Calculate independent claims against one immutable ownership snapshot."""
         inputs = (
-            self.input_pins
-            + self.pins(snapshot)
-            + self.pins(self.parent_directory)
-            + list(extra_inputs)
+            self.input_pins + self.pins(snapshot) + self.pins(self.parent_directory)
         )
 
         def run(rule):
@@ -378,7 +369,6 @@ class ParentDivision:
             directory = self.directory / ("rule-" + key)
             result = self.task(
                 "rule-" + key,
-                stage,
                 execute_rule,
                 (self, rule, snapshot, directory),
                 [directory],
@@ -393,7 +383,7 @@ class ParentDivision:
             futures = [executor.submit(copy_context().run, run, r) for r in rules]
             return [future.result() for future in futures]
 
-    def consolidate(self, name, snapshot, claims, stage):
+    def consolidate(self, name, snapshot, claims):
         if not claims:
             return
         inputs = (
@@ -403,7 +393,6 @@ class ParentDivision:
         claim_pins = [p for _, r in claims for p in self.pins(r["directory"])]
         result = self.task(
             name,
-            stage,
             merge_claims,
             (
                 self.grid,
@@ -419,12 +408,10 @@ class ParentDivision:
         )
         self.current = Path(result["directory"])
 
-    def group(self, name, rules, stage):
+    def group(self, name, rules):
         if rules:
             snapshot = self.current
-            self.consolidate(
-                name, snapshot, self.calculate(rules, snapshot, stage), stage
-            )
+            self.consolidate(name, snapshot, self.calculate(rules, snapshot))
 
     def require_coverage(self, kind=None):
         with open_grid(self.current, self.grid) as owners:
@@ -446,7 +433,7 @@ class ParentDivision:
 
     def land(self):
         for name, rules in land_groups(self.rules):
-            self.group(name, rules, "land")
+            self.group(name, rules)
         self.require_coverage("land")
         return self.use_land(self.current)
 
@@ -463,50 +450,14 @@ class ParentDivision:
     def water(self):
         if self.land_ownership is None:
             raise ValueError("prepare land ownership before water calculations")
-        snapshot = self.current
-        coastal = self.calculate(
-            [r for r in self.rules if r["operation"] == "nearest_coastal_water"],
-            snapshot,
-            "water",
+        self.group(
+            "shore-water",
+            [
+                r
+                for r in self.rules
+                if r["operation"] in ("nearest_coastal_water", "nearest_basin_water")
+            ],
         )
-        coastal_pins = []
-        if coastal:
-            if len(coastal) == 1:
-                directory = Path(coastal[0][1]["directory"])
-            else:
-                directory = self.directory / "coastal-claims"
-                self.task(
-                    "coastal-claims",
-                    "water",
-                    merge_claims,
-                    (
-                        self.grid,
-                        self.physical_directory,
-                        self.parent_directory,
-                        self.empty_directory,
-                        coastal,
-                        directory,
-                        self.allowed,
-                    ),
-                    [directory],
-                    inputs=self.input_pins
-                    + [
-                        p
-                        for _, result in coastal
-                        for p in self.pins(result["directory"])
-                    ],
-                )
-            self.coastal_winners = self.resources.enter_context(
-                open_grid(directory, self.grid)
-            )
-            coastal_pins = self.pins(directory)
-        basins = self.calculate(
-            [r for r in self.rules if r["operation"] == "nearest_basin_water"],
-            snapshot,
-            "water",
-            extra_inputs=coastal_pins,
-        )
-        self.consolidate("shore-water", snapshot, coastal + basins, "water")
         self.group(
             "geographic-water-fill",
             [
@@ -516,12 +467,10 @@ class ParentDivision:
                 and r["unassigned_only"]
                 and r["physical_class"] == "water"
             ],
-            "water",
         )
         self.group(
             "nearest-water",
             [r for r in self.rules if r["operation"] == "nearest_water"],
-            "water",
         )
         self.require_coverage()
         return self.current

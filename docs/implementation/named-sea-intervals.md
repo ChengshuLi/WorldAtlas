@@ -22,10 +22,10 @@ It measures the shortest distance along the WGS84 ellipsoid from the center of t
 2. If one continent’s shore is far enough ahead to win everywhere in the rectangle, give all the selected water cells there to that continent.
 3. If the result is uncertain, split the rectangle and try again. Check any cells that remain unresolved individually.
 
-The build also reuses coastal results. If the globally nearest coastal owner is
-one of a basin's participants, removing other candidates cannot change that
-winner. The basin retains this as its own claim. Other cells are calculated
-normally, and all overlapping claims must still agree.
+Coastal and basin claims run independently against the same ownership snapshot.
+They reuse the same physical shores and distance indexes, and their overlapping
+claims must agree. Basin query masks are prepared once. A basin with one eligible
+owner uses direct assignment instead of distance searches.
 
 The shortcut gives the same assignments as checking every cell separately. For example, suppose one shore is 10 km closer at the middle of a rectangle. If every cell is within 2 km of the middle, the lead can shrink by at most 4 km. At least 6 km of the lead remains, so the same shore wins throughout the rectangle.
 

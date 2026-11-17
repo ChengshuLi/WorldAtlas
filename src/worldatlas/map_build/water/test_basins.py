@@ -33,7 +33,6 @@ class BasinTests(unittest.TestCase):
         snapshot=None,
         remaining=False,
         eligible=None,
-        superset=None,
     ):
         p, l = rle(self.physical), rle(self.land)
         parent = rle(np.ones_like(self.physical))
@@ -76,7 +75,6 @@ class BasinTests(unittest.TestCase):
             parent_physical=p,
             land_ownership=l,
             shore_order=[81, 42],
-            coastal_winners=None if superset is None else rle(superset),
             water_shores=lambda: shores,
         )
         directory = self.path / str(len(list(self.path.iterdir())))
@@ -119,30 +117,7 @@ class BasinTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "no eligible reference shores"):
             self.calculate(bounds=(12, 15, 7, 11))
 
-    def test_reusing_retained_superset_winners_keeps_the_complete_basin_claim(self):
-        _, expected = self.calculate()
-        known = np.zeros_like(self.land)
-        known[7:11, 11] = 81
-        known[7:11, 15] = 42
-        result, actual = self.calculate(superset=known)
-        np.testing.assert_array_equal(actual, expected)
-        self.assertEqual(result["reused_superset_winner_cells"], 8)
-        self.assertEqual(sum(result["counts"].values()), 20)
-        snapshot = self.land.copy()
-        snapshot[7:11, [11, 15]] = 99
-        result, actual = self.calculate(
-            superset=known, snapshot=snapshot, remaining=True
-        )
-        self.assertEqual(result["reused_superset_winner_cells"], 0)
-        self.assertFalse(actual[7:11, [11, 15]].any())
-
-    def test_a_superset_winner_outside_the_participant_set_is_recomputed(self):
-        _, expected = self.calculate()
-        known = np.zeros_like(self.land)
-        known[7:11, 11:16] = 99
-        result, actual = self.calculate(superset=known)
-        self.assertEqual(result["reused_superset_winner_cells"], 0)
-        np.testing.assert_array_equal(actual, expected)
+    def test_independent_coastal_and_basin_claims_must_agree(self):
         from worldatlas.map_build.division.intervals import Eligibility, combine
 
         with self.assertRaisesRegex(ValueError, "ownership conflict"):
