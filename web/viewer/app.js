@@ -9,7 +9,7 @@ import {
 
 const $ = (selector) => document.querySelector(selector);
 const map = $("#map");
-const canvas = $("#canvas");
+let canvas = $("#canvas");
 const status = $("#status");
 
 let meta, data, renderer;
@@ -196,7 +196,9 @@ function bindMapControls() {
   $("#tool-out").addEventListener("click", () => zoom(0.5));
   $("#tool-world").addEventListener("click", fitWorld);
   $("#tool-sources").addEventListener("click", () => $("#sources-dialog").showModal());
+}
 
+function bindCanvasControls() {
   canvas.addEventListener("pointerdown", (event) => {
     if (!data) return;
     canvas.focus({ preventScroll: true });
@@ -267,6 +269,15 @@ function bindMapControls() {
       requestDraw();
     }
   });
+  canvas.addEventListener("webglcontextlost", (event) => {
+    event.preventDefault();
+    renderer?.destroy();
+    renderer = null;
+    data = null;
+    drag = null;
+    status.textContent = "Graphics context lost. Reload to restore the map.";
+    status.classList.add("error");
+  });
 }
 
 async function startViewer() {
@@ -288,13 +299,16 @@ async function startViewer() {
       category.name = entity.name;
       meta.palette.set(category.id, rgb);
     }
-    data = await loadLocalGrid(meta, configURL);
+    const grid = await loadLocalGrid(meta, configURL);
     if (meta.map_version) {
       const release = $("#map-release");
       release.textContent = `${meta.map_version.toUpperCase()} · SHA-256 ${meta.combined_sha256.slice(0, 12)}`;
       release.title = `SHA-256 of the decoded rows and runs. Full hash: ${meta.combined_sha256}`;
     }
-    renderer = createRenderer(canvas, meta, data);
+    renderer = createRenderer(canvas, meta, grid);
+    canvas = renderer.canvas;
+    data = grid;
+    bindCanvasControls();
     renderLegend();
     resize();
     fitWorld();
@@ -310,14 +324,6 @@ bindMapControls();
 new ResizeObserver(resize).observe(map);
 await startViewer();
 
-canvas.addEventListener("webglcontextlost", (event) => {
-  event.preventDefault();
-  renderer?.destroy?.();
-  renderer = null;
-  data = null;
-  status.textContent = "Graphics context lost. Reload to restore the map.";
-  status.classList.add("error");
-});
 window.addEventListener("pagehide", (event) => {
   if (!event.persisted) renderer?.destroy();
 });

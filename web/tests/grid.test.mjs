@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { cellValue, validateGrid, wrapColumn } from "../viewer/grid-data.js";
-import { gridFitsTexture, renderPixels } from "../viewer/grid-renderer.js";
+import { gridTextureWidth, renderPixels } from "../viewer/grid-renderer.js";
 import { activeCategoryCodes } from "../viewer/legend-model.js";
 
 const meta = {
@@ -70,8 +70,14 @@ test("the CPU renderer repeats the map at the dateline and mutes filtered cells"
       id === 17 ? rgb(id) : rgb(Math.round(id * 0.55)),
     ),
   );
-  assert.equal(gridFitsTexture(4, 16, 16), true);
-  assert.equal(gridFitsTexture(4, 16, 17), false);
+});
+
+test("grid textures use wider rows when needed to fit the GPU dimensions", () => {
+  assert.equal(gridTextureWidth(4, 16, 16), 4);
+  assert.equal(gridTextureWidth(4, 16, 17), 0);
+  assert.equal(gridTextureWidth(4096, 54614, 54428706, 17), 0);
+  assert.equal(gridTextureWidth(8192, 54614, 54428706, 17), 6645);
+  assert.equal(gridTextureWidth(16384, 54614, 54428706, 17), 4096);
 });
 
 test("the outline follows selection coverage across land, water, and adjacent entities", () => {

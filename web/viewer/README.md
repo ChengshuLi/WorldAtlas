@@ -4,6 +4,8 @@ This folder contains the WorldAtlas interface. The checked-in `config.json` hold
 
 The displayed combined SHA-256 is calculated over the decompressed little-endian u32 row-offset bytes followed immediately by the decompressed little-endian u32 run bytes. The client verifies the row and run hashes before use.
 
+The viewer sizes WebGL textures to fit the device. When the grid exceeds those limits or graphics setup fails, Canvas draws from the same verified grid already in memory.
+
 The Cloudflare Worker serves viewer files and map data from R2. Each candidate has a directory at `releases/CANDIDATE/`. Publishing copies that candidate's homepage to `index.html`, which the Worker serves at `/`. The homepage's base URL selects its release files. The Data sources dialog shows OpenStreetMap, Overture Maps, and IHO attributions over the map.
 
 Use the [release workflow](../../src/worldatlas/map_releases/README.md) to package the browser modules with a completed build. The candidate bundle contains the viewer’s release-specific configuration and base URL. Staging generates `legend/entities.json` with one entry per entity containing its ID, name, color, and cell count. Names come from the build's selected Neon snapshot and land colors come from the stable entity records in Neon. Counts come from the completed grid report, adding land and water for each continent. The deployed config and legend file are generated release data stored in R2. GitHub tracks their generator and the viewer source.

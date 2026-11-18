@@ -145,7 +145,8 @@ async function fixture() {
         String(url).endsWith("legend/entities.json") ? entries : meta,
       ),
     );
-  const createRenderer = () => ({
+  const createRenderer = (canvas) => ({
+    canvas,
     draw: (x) => draws.push({ ...x }),
     destroy() {},
   });

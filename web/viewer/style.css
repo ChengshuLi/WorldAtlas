@@ -2,6 +2,8 @@
   box-sizing: border-box;
 }
 body {
+  --small-text-size: 12px;
+  --title-text-size: 20px;
   margin: 0;
   background: #eaf0f2;
   color: #1b3341;
@@ -20,11 +22,11 @@ header {
   gap: 12px;
 }
 h1 {
-  font-size: 19px;
+  font-size: var(--title-text-size);
   margin: 0;
 }
 .brand p {
-  font-size: 12px;
+  font-size: var(--small-text-size);
   color: #617481;
   margin: 2px 0 0;
 }
@@ -34,6 +36,9 @@ h1 {
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
+  max-width: 48%;
+  flex-shrink: 0;
+  font-size: var(--small-text-size);
 }
 a {
   color: #315d73;
@@ -159,7 +164,7 @@ button:disabled {
 .legend-count {
   font-variant-numeric: tabular-nums;
   color: #5f737e;
-  font-size: 11px;
+  font-size: var(--small-text-size);
   white-space: nowrap;
 }
 .legend-empty {
@@ -174,7 +179,7 @@ button:disabled {
   border-radius: 6px;
   box-shadow: 0 2px 8px #17394a25;
   padding: 7px 9px;
-  font-size: 12px;
+  font-size: var(--small-text-size);
 }
 .selection {
   bottom: 10px;
@@ -208,13 +213,15 @@ button:disabled {
   border: 0;
 }
 @media (max-width: 600px) {
+  body {
+    --small-text-size: 11px;
+  }
   header {
     height: 86px;
     padding: 8px 10px;
   }
   .brand p {
     max-width: 215px;
-    font-size: 11px;
   }
   #map {
     height: calc(100dvh - 86px);
@@ -229,38 +236,24 @@ button:disabled {
   .legend-item {
     padding: 4px 6px;
   }
-  .legend-count {
-    font-size: 10px;
-  }
   .selection {
     max-width: calc(100% - 20px);
-    font-size: 11px;
   }
 }
 .brand {
   min-width: 0;
 }
-.identity {
-  max-width: 48%;
-  flex-shrink: 0;
-}
-
 .digest-label {
-  font:
-    12px ui-monospace,
-    monospace;
+  font-family: ui-monospace, monospace;
   color: #425d6b;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
-}
-@media (max-width: 600px) {
-  .digest-label {
-    font-size: 10px;
-  }
 }
 
 #tool-sources {
   padding: 2px 6px;
-  font-size: 11px;
 }
 #sources-dialog {
   width: min(560px, calc(100% - 32px));
@@ -282,11 +275,11 @@ button:disabled {
 }
 .sources-heading h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--title-text-size);
 }
 #sources-dialog h3 {
   margin: 18px 0 6px;
-  font-size: 15px;
+  font-size: inherit;
 }
 #sources-dialog ul {
   margin: 0;

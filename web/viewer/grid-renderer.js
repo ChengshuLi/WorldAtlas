@@ -122,6 +122,7 @@ function canvasRenderer(canvas, meta, data) {
     disposed = false;
   if (!ctx) throw Error("No supported map rendering context");
   return {
+    canvas,
     draw({
       scale,
       ox,
@@ -203,45 +204,50 @@ function canvasRenderer(canvas, meta, data) {
     },
   };
 }
-export function gridFitsTexture(
+export function gridTextureWidth(
   maxSize,
   rowWords,
   runWords,
   categoryCount = 0,
 ) {
-  const width = Math.min(4096, maxSize);
-  return (
-    width > 0 &&
-    Math.ceil(rowWords / width) <= maxSize &&
-    Math.ceil(runWords / width) <= maxSize &&
-    Math.ceil(categoryCount / width) <= maxSize
+  if (maxSize <= 0) return 0;
+  const minimum = Math.ceil(
+    Math.max(rowWords, runWords, categoryCount) / maxSize,
   );
+  return minimum <= maxSize ? Math.max(Math.min(4096, maxSize), minimum) : 0;
 }
 export function createRenderer(canvas, meta, data) {
-  // Check capacity before binding the display canvas to WebGL: a canvas cannot
-  // switch to a 2D context afterward. Low-capacity GPUs use the same RLE data.
-  const probe =
-    typeof OffscreenCanvas !== "undefined"
-      ? new OffscreenCanvas(1, 1)
-      : document.createElement("canvas");
-  const probeGL = probe.getContext("webgl2");
-  const fits =
-    probeGL &&
-    gridFitsTexture(
-      probeGL.getParameter(probeGL.MAX_TEXTURE_SIZE),
-      data.rows.length,
-      data.runs.length,
-      meta.palette.size + 1,
-    );
-  if (probeGL) probeGL.getExtension("WEBGL_lose_context")?.loseContext();
-  if (!fits) return canvasRenderer(canvas, meta, data);
-  let gl = canvas.getContext("webgl2", {
+  const gl = canvas.getContext("webgl2", {
     alpha: false,
     antialias: false,
     depth: false,
     stencil: false,
   });
   if (!gl) return canvasRenderer(canvas, meta, data);
+
+  try {
+    const width = gridTextureWidth(
+      gl.getParameter(gl.MAX_TEXTURE_SIZE),
+      data.rows.length,
+      data.runs.length,
+      meta.palette.size + 1,
+    );
+    if (width) return webglRenderer(canvas, gl, width, meta, data);
+  } catch (error) {
+    console.warn("WebGL map setup failed. Using Canvas.", error);
+  }
+
+  // A canvas with a WebGL context cannot open a 2D context.
+  gl.getExtension("WEBGL_lose_context")?.loseContext();
+  const replacement = canvas.cloneNode(false);
+  const fallback = canvasRenderer(replacement, meta, data);
+  const focused = canvas.ownerDocument.activeElement === canvas;
+  canvas.replaceWith(replacement);
+  if (focused) replacement.focus({ preventScroll: true });
+  return fallback;
+}
+
+function webglRenderer(canvas, gl, width, meta, data) {
   const vertex = `#version 300 es
   void main() {
     vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
@@ -330,14 +336,11 @@ export function createRenderer(canvas, meta, data) {
   gl.deleteShader(vs);
   gl.deleteShader(fs);
   gl.useProgram(program);
-  const width = Math.min(4096, gl.getParameter(gl.MAX_TEXTURE_SIZE)),
-    textures = [];
+  const textures = [];
   const categoryIds = [...meta.palette.keys()];
   const slots = new Map(categoryIds.map((code, index) => [code, index + 1]));
   function texture(values, unit, name, remap = false) {
     const height = Math.ceil(values.length / width);
-    if (height > gl.getParameter(gl.MAX_TEXTURE_SIZE))
-      throw Error("Native grid exceeds this GPU texture capacity");
     const padded = new Uint32Array(width * height);
     padded.set(values);
     // GPU slots are local render indexes. The stored map and picking keep their
@@ -364,6 +367,7 @@ export function createRenderer(canvas, meta, data) {
       gl.UNSIGNED_INT,
       padded,
     );
+    if (gl.getError() !== gl.NO_ERROR) throw Error("GPU native map upload failed");
     gl.uniform1i(gl.getUniformLocation(program, name), unit);
   }
   texture(data.rows, 0, "uRows");
@@ -415,6 +419,7 @@ export function createRenderer(canvas, meta, data) {
   meta = null;
   let disposed = false;
   return {
+    canvas,
     draw({
       scale,
       ox,

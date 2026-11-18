@@ -271,7 +271,7 @@ async function visiblePixel(page, position) {
   }, png.toString("base64"));
 }
 
-for (const { name, options, fallback, sparse } of [
+for (const { name, options, fallback, sparse, uploadFailure } of [
   {
     name: "desktop WebGL",
     options: { viewport: { width: 1024, height: 720 } },
@@ -298,6 +298,12 @@ for (const { name, options, fallback, sparse } of [
     fallback: true,
     sparse: true,
   },
+  {
+    name: "Canvas after WebGL upload failure",
+    options: { viewport: { width: 1024, height: 720 } },
+    fallback: true,
+    uploadFailure: true,
+  },
 ]) {
   test(
     `${name} renders, selects cells, and filters the legend`,
@@ -305,7 +311,24 @@ for (const { name, options, fallback, sparse } of [
     async () => {
       const page = await browser.newPage(options);
       try {
-        if (fallback)
+        const gridRequests = [];
+        if (uploadFailure) {
+          page.on("request", (request) => {
+            const path = new URL(request.url()).pathname;
+            if (path.endsWith(".u32le.gz")) gridRequests.push(path);
+          });
+          await page.addInitScript(() => {
+            const { texImage2D, getError } = WebGL2RenderingContext.prototype;
+            const failed = new WeakSet();
+            WebGL2RenderingContext.prototype.texImage2D = function (...args) {
+              failed.add(this);
+              texImage2D.apply(this, args);
+            };
+            WebGL2RenderingContext.prototype.getError = function () {
+              return failed.delete(this) ? this.OUT_OF_MEMORY : getError.call(this);
+            };
+          });
+        } else if (fallback)
           await page.addInitScript(() => {
             for (const type of [HTMLCanvasElement, OffscreenCanvas]) {
               const getContext = type.prototype.getContext;
@@ -326,6 +349,12 @@ for (const { name, options, fallback, sparse } of [
           sparse ? "v9.4" : "v9.0",
         );
         const canvas = page.locator("#canvas");
+        if (uploadFailure) {
+          assert.deepEqual(gridRequests.sort(), [
+            `/${candidate}/rows.u32le.gz`,
+            `/${candidate}/runs.u32le.gz`,
+          ]);
+        }
         assert.equal(
           await canvas.evaluate(
             (element, type) => Boolean(element.getContext(type)),
@@ -338,6 +367,19 @@ for (const { name, options, fallback, sparse } of [
             () => document.documentElement.scrollWidth === innerWidth,
           ),
           true,
+        );
+        assert.equal(
+          await page.evaluate(() => {
+            const labels = [
+              ".brand p", "#tool-sources", "#map-release", ".legend-count",
+              "#selection", "#status",
+            ];
+            const sizes = labels.map(
+              (selector) => getComputedStyle(document.querySelector(selector)).fontSize,
+            );
+            return new Set(sizes).size;
+          }),
+          1,
         );
         const legend = page.getByRole("region", { name: "Map legend" });
         await legend.getByRole("button", { name: "Collapse legend" }).click();
