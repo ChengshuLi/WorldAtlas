@@ -22,7 +22,9 @@ CREATE TABLE atlas.geographic_rule_targets (
     id text PRIMARY KEY CHECK (atlas.nonblank(id)),
     rule_id text NOT NULL REFERENCES atlas.geographic_rules(id) ON DELETE CASCADE,
     entity_id bigint NOT NULL REFERENCES atlas.geographic_entities(id),
-    label_point_id text REFERENCES atlas.source_features(id)
+    label_point_id text REFERENCES atlas.source_features(id),
+    CONSTRAINT geographic_rule_targets_unique_label
+      UNIQUE (rule_id, label_point_id) DEFERRABLE INITIALLY DEFERRED
 );
 CREATE TABLE atlas.geographic_rule_sources (
     rule_id text NOT NULL REFERENCES atlas.geographic_rules(id) ON DELETE CASCADE,

@@ -48,6 +48,11 @@ BEGIN
   END;
  END LOOP;
  BEGIN
+  INSERT INTO atlas.geographic_rule_targets VALUES ('divide-europe','divide',3,'point');
+  SET CONSTRAINTS atlas.geographic_rule_targets_unique_label IMMEDIATE;
+  RAISE EXCEPTION 'a divided-face label point was assigned twice';
+ EXCEPTION WHEN unique_violation THEN NULL; END;
+ BEGIN
   DELETE FROM atlas.geographic_rule_features WHERE rule_id='divide' AND role='boundary_line';
   SET CONSTRAINTS ALL IMMEDIATE;
   RAISE EXCEPTION 'a division without boundaries was accepted';
