@@ -21,10 +21,12 @@ let scale = 1;
 let ox = 0;
 let oy = 0;
 let dpr = 1;
+let viewportWidth = map.clientWidth;
+let viewportHeight = map.clientHeight;
 let drawing = false;
 
-function minScale() {
-  return Math.min(map.clientWidth / meta.width, map.clientHeight / meta.height);
+function minScale(width = viewportWidth, height = viewportHeight) {
+  return Math.min(width / meta.width, height / meta.height);
 }
 
 function constrain() {
@@ -35,7 +37,6 @@ function constrain() {
   if (ox > 0) ox -= period;
 
   const height = meta.height * scale;
-  const viewportHeight = map.clientHeight;
   oy =
     height <= viewportHeight
       ? (viewportHeight - height) / 2
@@ -45,16 +46,16 @@ function constrain() {
 function fitWorld() {
   if (!meta) return;
   scale = minScale();
-  ox = (map.clientWidth - meta.width * scale) / 2;
-  oy = (map.clientHeight - meta.height * scale) / 2;
+  ox = (viewportWidth - meta.width * scale) / 2;
+  oy = (viewportHeight - meta.height * scale) / 2;
   constrain();
   requestDraw();
 }
 
 function zoom(
   factor,
-  x = map.clientWidth / 2,
-  y = map.clientHeight / 2,
+  x = viewportWidth / 2,
+  y = viewportHeight / 2,
   nextX = x,
   nextY = y,
 ) {
@@ -87,9 +88,24 @@ function requestDraw() {
 }
 
 function resize() {
+  const width = map.clientWidth;
+  const height = map.clientHeight;
+  if (!width || !height) return;
+
+  if (renderer && (width !== viewportWidth || height !== viewportHeight)) {
+    const newMinimum = minScale(width, height);
+    const nextScale = scale === minScale() ? newMinimum : Math.max(newMinimum, scale);
+    const ratio = nextScale / scale;
+    ox = width / 2 - (viewportWidth / 2 - ox) * ratio;
+    oy = height / 2 - (viewportHeight / 2 - oy) * ratio;
+    scale = nextScale;
+  }
+  viewportWidth = width;
+  viewportHeight = height;
+
   dpr = Math.min(devicePixelRatio || 1, 2);
-  canvas.width = Math.round(map.clientWidth * dpr);
-  canvas.height = Math.round(map.clientHeight * dpr);
+  canvas.width = Math.round(width * dpr);
+  canvas.height = Math.round(height * dpr);
   if (renderer) requestDraw();
 }
 

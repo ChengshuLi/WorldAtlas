@@ -559,6 +559,59 @@ test("the legend leaves room for wrapped cell details", async () => {
   }
 });
 
+test("rotation refits the world and preserves a zoomed location", async () => {
+  const portrait = { width: 390, height: 750 };
+  const landscape = { width: 750, height: 340 };
+  const page = await browser.newPage({ viewport: portrait, isMobile: true, hasTouch: true });
+  try {
+    await loaded(page, `/${candidate}/index.html`, "v9.0");
+    await page.getByRole("button", { name: "Collapse legend" }).tap();
+    const canvas = page.locator("#canvas");
+
+    async function inspect(offsetX = 0) {
+      const box = await canvas.boundingBox();
+      await page.touchscreen.tap(box.x + box.width / 2 + offsetX, box.y + box.height / 2);
+      const details = await page.locator("#selection").textContent();
+      return details.match(/^Cell \d+, \d+/)?.[0];
+    }
+    async function resize(viewport) {
+      await page.setViewportSize(viewport);
+      await page.waitForFunction(() => {
+        const canvas = document.querySelector("#canvas");
+        return canvas.width === canvas.clientWidth && canvas.height === canvas.clientHeight;
+      });
+    }
+
+    const worldCenter = await inspect();
+    const portraitCell = await inspect(90);
+    assert.equal(worldCenter, "Cell 60, 30");
+    assert.equal(portraitCell, "Cell 87, 30");
+    await resize(landscape);
+    assert.equal(await inspect(), worldCenter);
+    assert.equal(await inspect(90), "Cell 80, 30");
+    await resize(portrait);
+    assert.equal(await inspect(90), portraitCell);
+
+    const zoomIn = page.getByRole("button", { name: "Zoom in" });
+    await zoomIn.tap();
+    await zoomIn.tap();
+    await canvas.focus();
+    await page.keyboard.press("d");
+    await page.keyboard.press("s");
+    const zoomedCenter = await inspect();
+    const zoomedCell = await inspect(90);
+    assert.match(zoomedCenter, /^Cell /);
+    assert.notEqual(zoomedCenter, worldCenter);
+    await resize(landscape);
+    assert.equal(await inspect(), zoomedCenter);
+    assert.equal(await inspect(90), zoomedCell);
+    await resize(portrait);
+    assert.equal(await inspect(), zoomedCenter);
+  } finally {
+    await page.close();
+  }
+});
+
 test("two fingers zoom the map around their moving midpoint", async () => {
   const page = await browser.newPage({
     viewport: { width: 390, height: 700 },
