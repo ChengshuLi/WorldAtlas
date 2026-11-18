@@ -420,7 +420,11 @@ for (const { name, options, fallback, sparse, uploadFailure } of [
         const search = page.getByRole("searchbox", {
           name: "Search continents",
         });
-        await page.getByRole("button", { name: "Legend", exact: true }).click();
+        const openLegend = page.getByRole("button", { name: "Legend", exact: true });
+        if (options.hasTouch) await openLegend.tap();
+        else await openLegend.click();
+        assert.equal(await legend.evaluate((element) => element === document.activeElement), true);
+        await page.keyboard.press("Tab");
         assert.equal(
           await search.evaluate(
             (element) => element === document.activeElement,

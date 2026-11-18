@@ -174,13 +174,14 @@ function renderLegend() {
 }
 
 function setLegend(open) {
-  $("#legend-panel").hidden = !open;
+  const panel = $("#legend-panel");
+  panel.hidden = !open;
   const toggle = $("#legend-toggle");
   toggle.hidden = open;
   toggle.setAttribute("aria-expanded", String(open));
   hoveredGroup = null;
   requestDraw();
-  (open ? $("#legend-search") : toggle).focus({ preventScroll: true });
+  (open ? panel : toggle).focus({ preventScroll: true });
 }
 
 function bindLegendControls() {
