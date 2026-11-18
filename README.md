@@ -1,6 +1,9 @@
 # WorldAtlas
 
-The settled project contract is in [the data strategy](docs/data-strategy.md).
+WorldAtlas builds and publishes versioned maps from raw source data and editable
+geographic records in Neon.
+
+[Open the live map](https://worldatlas.chengshu-li-web.workers.dev/) · [Read the data strategy](docs/data-strategy.md)
 
 ## Map viewer
 
@@ -77,30 +80,23 @@ for exact reproduction, and stage timings.
 
 ## Preview and publish
 
-The [release workflow](src/worldatlas/map_releases/README.md)
-puts each candidate at its own address while the homepage serves the published
-map. Publishing records the selected candidate and serves its existing viewer
-and map files at the homepage.
+Stage a completed build as a numbered candidate.
 
-Use the release command to publish the reviewed viewer and map files.
-When changing the Worker's server code or configuration, deploy it with
-`npx wrangler deploy`. Its `ATLAS` binding connects it to the `worldatlas` R2 bucket.
+```bash
+worldatlas-release stage v9.0-rc.1 \
+  /absolute/path/to/worldatlas-work/run --viewer web/viewer
+```
 
-`atlas.map_releases` points to each release's R2 folder and records its manifest
-checksum. The manifest lists the map streams, viewer, configuration, legend and
-frozen inputs. `is_official` selects the release for a version, and `is_current`
-identifies the release on the homepage.
-The legend contains entity names, colors and counts for that release. The source
-catalog tracks raw files, including archive parts. R2 has one layout: raw files
-under `sources/`, release bundles under `releases/RELEASE_ID/`, and `index.html`
-for the published homepage. Each bundle has an `inputs.json.gz` frozen-input
-archive. Only the final selected RC is retained for each published version.
-Working construction instructions live in `atlas.construction_records`.
+Review the preview at `/releases/v9.0-rc.1/index.html`, then publish the approved candidate.
 
-The grid's `rows` stream stores row offsets; `runs` stores run endpoints and
-category codes. Both are registered together in the manifest after their stored
-and decoded checksums are verified. See the
-[database guide](database/README.md).
+```bash
+worldatlas-release publish v9.0-rc.1
+```
+
+Publishing serves that bundle at the homepage and retires superseded candidates
+for the same version. The [release guide](src/worldatlas/map_releases/README.md)
+covers bundle contents and reproduction. Deploy changes to the Worker code or
+configuration with `npx wrangler deploy`.
 
 ## Entity registry
 

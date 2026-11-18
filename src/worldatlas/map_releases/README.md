@@ -16,6 +16,10 @@ the published release. Changed contents require a new candidate number.
 
 Each release has one R2 folder, `releases/RELEASE_ID/`, containing its viewer,
 compressed map streams, generated configuration, legend and `inputs.json.gz`.
+The `rows` stream stores row offsets, and `runs` stores run endpoints and
+category codes. The manifest records checksums for both the stored files and
+the decoded streams.
+
 The archive holds the actual saved configuration, geographic selection,
 construction settings, source catalog references, run identity and build report.
 Run identity includes runtime versions and available source revision/setup

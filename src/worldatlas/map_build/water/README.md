@@ -12,10 +12,19 @@ claims. This folder contains its reusable numerical helpers.
   witnesses bound distant searches. When the tree cannot prove a winner from
   nearby candidates, the search carries its best exact distance into a scan of
   the full reference set. Exact distances decide ownership.
-- `rectangle_nearest.py` shares proven distance certificates over rectangles and
+- [`rectangle_nearest.py`](rectangle_nearest.py) shares proven distance certificates over rectangles and
   falls back to complete point searches where needed. Cell counts use compact local
   prefix tables instead of strided whole-width scans. Coverage
   accounting is batched rather than repeated for every excluded rectangle.
+
+The rectangle shortcut uses the triangle inequality. If every selected cell
+center is at most `r` from the rectangle center, an owner's nearest-shore
+distance can change by at most `r` within the rectangle. A candidate with upper
+distance bound `U` at the center wins throughout if `U + 2 × r < L` for every
+competing owner's lower bound `L`. The candidate can get farther away by `r`
+while a competitor gets closer by `r`, so the strict inequality proves a winner
+for every cell. When the bounds leave the result uncertain, the engine splits
+the rectangle or checks individual cells.
 
 The common engine extracts shore geometry once, intersects those shore spans
 with current land ownership, and reuses filtered reference indexes. Coastal
