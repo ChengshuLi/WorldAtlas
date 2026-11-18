@@ -10,7 +10,6 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.connectivity import reference_points
 from worldatlas.map_build.division.engine import ParentDivision, execute_rule
 from worldatlas.map_build.test_support import selection
 
@@ -21,7 +20,7 @@ class ConnectedScopes(unittest.TestCase):
     def point(self, x, y):
         return dict(type="Point", coordinates=[-180 + x * 15, 90 - y * 15])
 
-    def setup_scope(self, root, stack, *, point=None, assigned=False, parent=None):
+    def setup_scope(self, root, stack, *, points=None, assigned=False, parent=None):
         grid = self.grid
         physical = np.ones((12, 24), dtype=np.uint32)
         snapshot = np.full_like(physical, 101) if assigned else np.zeros_like(physical)
@@ -39,8 +38,12 @@ class ConnectedScopes(unittest.TestCase):
             dict(id=e, parent_id=0, physical_class="mixed") for e in (101, 807)
         ]
         geo["features"] = [dict(id="extent", geometry=polygon)]
-        if point:
-            geo["features"].append(dict(id="reference", geometry=point))
+        if points is None:
+            points = [self.point(12.5, 5.5)]
+        references = [
+            dict(id=f"reference-{i}", geometry=point) for i, point in enumerate(points)
+        ]
+        geo["features"].extend(references)
         for ident in ("first", "second"):
             geo["rules"].append(
                 dict(
@@ -55,14 +58,13 @@ class ConnectedScopes(unittest.TestCase):
             geo["rule_targets"].append(
                 dict(rule_id=ident, entity_id=807, label_point_id=None)
             )
-            geo["rule_features"] += [
-                dict(rule_id=ident, feature_id="extent", role="scope_area"),
-                dict(
-                    rule_id=ident,
-                    feature_id="reference" if point else "extent",
-                    role="connected_to",
-                ),
-            ]
+            geo["rule_features"].append(
+                dict(rule_id=ident, feature_id="extent", role="scope_area")
+            )
+            geo["rule_features"].extend(
+                dict(rule_id=ident, feature_id=feature["id"], role="connected_to")
+                for feature in references
+            )
         parent_directory = None
         if parent is not None:
             parent_directory = root / "parent"
@@ -87,7 +89,7 @@ class ConnectedScopes(unittest.TestCase):
             ]
         )
 
-    def test_area_reference_excludes_pocket_and_shares_snapshot_components(self):
+    def test_reference_excludes_pocket_and_shares_snapshot_components(self):
         with tempfile.TemporaryDirectory() as temp, ExitStack() as stack:
             root = Path(temp)
             context = self.setup_scope(root, stack)
@@ -107,7 +109,7 @@ class ConnectedScopes(unittest.TestCase):
     def test_explicit_point_can_select_the_other_component(self):
         with tempfile.TemporaryDirectory() as temp, ExitStack() as stack:
             root = Path(temp)
-            context = self.setup_scope(root, stack, point=self.point(8.5, 5.5))
+            context = self.setup_scope(root, stack, points=[self.point(8.5, 5.5)])
             result = execute_rule(
                 context, context.rules[0], root / "snapshot", root / "claims"
             )
@@ -122,7 +124,7 @@ class ConnectedScopes(unittest.TestCase):
             ):
                 root = Path(temp)
                 context = self.setup_scope(
-                    root, stack, point=self.point(7.5, 5.5), assigned=assigned
+                    root, stack, points=[self.point(7.5, 5.5)], assigned=assigned
                 )
                 if assigned:
                     result = execute_rule(
@@ -146,7 +148,7 @@ class ConnectedScopes(unittest.TestCase):
             parent = np.zeros((12, 24), dtype=np.uint32)
             parent[3, [0, 23]] = 1
             context = self.setup_scope(
-                root, stack, point=self.point(0.5, 3.5), parent=parent
+                root, stack, points=[self.point(0.5, 3.5)], parent=parent
             )
             # No area restriction: use the exact inherited parent membership.
             for rule in context.rules:
@@ -156,16 +158,17 @@ class ConnectedScopes(unittest.TestCase):
             )
             self.assertEqual(result["counts"], {"807": 2})
 
-    def test_polygon_reference_point_is_inside_holed_combined_geometry(self):
-        from shapely.geometry import Point, shape
-
-        polygon = dict(
-            type="Polygon",
-            coordinates=[
-                [[0, 0], [10, 0], [10, 10], [0, 10], [0, 0]],
-                [[2, 2], [8, 2], [8, 8], [2, 8], [2, 2]],
-            ],
-        )
-        points = reference_points([dict(geometry=polygon)])
-        self.assertEqual(len(points), 1)
-        self.assertTrue(shape(polygon).contains(Point(points[0])))
+    def test_multiple_points_select_either_connected_component(self):
+        with tempfile.TemporaryDirectory() as temp, ExitStack() as stack:
+            root = Path(temp)
+            context = self.setup_scope(
+                root, stack, points=[self.point(8.5, 5.5), self.point(12.5, 5.5)]
+            )
+            result = execute_rule(
+                context, context.rules[0], root / "snapshot", root / "claims"
+            )
+            value = self.values(result["directory"], stack)
+            self.assertEqual(value(8, 5), 807)
+            self.assertEqual(value(12, 5), 807)
+            self.assertEqual(value(7, 5), 0)
+            self.assertEqual(len(result["connectivity_references"]), 2)

@@ -7,7 +7,7 @@ def selection():
         raw_sources=[],
         construction_records=[],
         geography=dict(
-            schema="worldatlas-geographic-division-v1",
+            schema="worldatlas-geographic-division-v2",
             levels=[dict(id="world", parent_id=None)],
             entities=[
                 dict(

@@ -17,7 +17,7 @@ ROLE_TYPES = {
     "scope_area": frozenset(("Polygon", "MultiPolygon")),
     "scope_component": frozenset(("Point",)),
     "distance_reference": frozenset(("Point",)),
-    "connected_to": frozenset(("Point", "Polygon", "MultiPolygon")),
+    "connected_to": frozenset(("Point",)),
 }
 
 
@@ -44,9 +44,6 @@ def compile_rules(geography, parent_id):
         if link["rule_id"] not in selected:
             continue
         role, ident = link["role"], link["feature_id"]
-        if role == "input_geometry":
-            # Existing frozen selections retain the former name.
-            role = "boundary_line"
         key = (link["rule_id"], role, ident)
         if key in seen or role not in ROLE_TYPES or ident not in features:
             raise ValueError("duplicate or unresolved rule feature link")

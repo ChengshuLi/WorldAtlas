@@ -2,28 +2,10 @@
 
 from pathlib import Path
 
-from shapely import union_all
-from shapely.geometry import shape
-
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.division.intervals import prepare
 from worldatlas.map_build.land.connected import build_components
-
-
-def reference_points(features):
-    """Keep explicit points; derive one interior point from combined areas."""
-    points, areas = [], []
-    for feature in features:
-        geometry = feature["geometry"]
-        if geometry["type"] == "Point":
-            points.append(tuple(geometry["coordinates"]))
-        else:
-            areas.append(shape(geometry))
-    if areas:
-        point = union_all(areas).representative_point()
-        points.append((point.x, point.y))
-    return points
 
 
 def build_domain(

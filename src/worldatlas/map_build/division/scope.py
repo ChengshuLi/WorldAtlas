@@ -10,7 +10,6 @@ from worldatlas.map_build.core.geometry import PolygonRasterizer
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.division.intervals import overlay, prepare
-from worldatlas.map_build.division.connectivity import reference_points
 
 
 def selected(values, identifiers):
@@ -313,7 +312,8 @@ class Scope:
             return eligible
         if self.connected is None:
             roots = set()
-            for lon, lat in reference_points(references):
+            for feature in references:
+                lon, lat = feature["geometry"]["coordinates"]
                 root = data.component_at(lon, lat)
                 if root is None:
                     raise ValueError(

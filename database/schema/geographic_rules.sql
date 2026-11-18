@@ -44,7 +44,6 @@ BEGIN
     WHERE l.rule_id=r.id AND NOT CASE l.role
       WHEN 'boundary_line' THEN f.geometry->>'type' IN ('LineString','MultiLineString')
       WHEN 'scope_area' THEN f.geometry->>'type' IN ('Polygon','MultiPolygon')
-      WHEN 'connected_to' THEN f.geometry->>'type' IN ('Point','Polygon','MultiPolygon')
       ELSE f.geometry->>'type'='Point' END
   ) THEN RAISE EXCEPTION 'invalid feature geometry for rule %', r.id; END IF;
   SELECT count(*) FILTER (WHERE role='boundary_line'), count(*) FILTER (WHERE role='scope_area'),

@@ -123,7 +123,7 @@ def read_selection(database, *, raw_sources=(), parents=None):
 
 def validate_feature_references(domain):
     """Validate frozen geometry and every declared operation before processing."""
-    if domain.get("schema") != "worldatlas-geographic-division-v1":
+    if domain.get("schema") != "worldatlas-geographic-division-v2":
         raise ValueError(
             "unsupported geographic selection; restore the release's captured code"
         )

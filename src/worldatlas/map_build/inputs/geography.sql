@@ -13,7 +13,7 @@ WITH selected_rules AS (
   UNION SELECT source_id FROM atlas.geographic_rule_sources WHERE rule_id IN (SELECT id FROM selected_rules)
 )
 SELECT jsonb_build_object(
-  'schema','worldatlas-geographic-division-v1',
+  'schema','worldatlas-geographic-division-v2',
   'levels',COALESCE((SELECT jsonb_agg(to_jsonb(l) ORDER BY id) FROM atlas.geographic_levels l),'[]'::jsonb),
   'entities',COALESCE((SELECT jsonb_agg(to_jsonb(e) ORDER BY id) FROM selected_entities e),'[]'::jsonb),
   'category_bindings',COALESCE((SELECT jsonb_agg((to_jsonb(b)-'id')||jsonb_build_object('code',id)

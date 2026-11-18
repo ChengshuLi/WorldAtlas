@@ -4,7 +4,7 @@
 
 Save that result with the run. Resume and explicit replay read the saved selection, so another worker's edits cannot enter partway through a build. Executing code and runtime versions are separate provenance; a code change does not require permission to resume.
 
-[`geography.sql`](geography.sql) exports working records once. New selections use format v4 with one geography collection (including entity colors), contributing construction settings and exact raw-file catalog records. Imported geometry is separate from the rules that assign parent cells to children.
+[`geography.sql`](geography.sql) exports working records once. New selections use format v4 with geography version 2, which uses explicit points for `connected_to`. The selection includes entity colors, contributing construction settings and exact raw-file catalog records. Imported geometry is separate from the rules that assign parent cells to children.
 
 Release archives retain their original inputs and any code captured at build time. Replay with those records and that code. Historical backfills document gaps in the data or code they could recover.
 

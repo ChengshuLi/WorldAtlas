@@ -11,6 +11,6 @@ The rectangle shortcut uses the triangle inequality. If every selected cell cent
 
 The common engine extracts shore geometry once, intersects those shore spans with current land ownership, and reuses filtered reference indexes. Coastal water uses the configured 22,224 m limit. Named basins use all shores of their bordering owners. Remaining water uses all eligible assigned shores without a distance limit. Land-only children are excluded from water-owner candidates using the entity's stored physical eligibility. Coastal and basin claims run independently against the same land ownership and must agree where they overlap.
 
-Ocean areas are ordinary `assign_area` rules on one shared residual-water snapshot. Their `connected_to` links select components containing interior points derived from source geometry, leaving enclosed pockets for `nearest_water`. Conflicting claims fail; no separate ocean-seed records or enclosed-water assignment operation is needed.
+Ocean areas are `assign_area` rules on one shared residual-water snapshot. Their `connected_to` links select components containing the explicit points stored in Neon, leaving enclosed pockets for `nearest_water`. Conflicting claims fail.
 
 Tests compare optimized calculations with complete independent distance searches, including dateline wrapping, exact ties, cutoff edges and omitted-shore proofs.
