@@ -92,6 +92,14 @@ class OsmFeatureTests(unittest.TestCase):
             [len(p) for p in self.read()["geometry"]["coordinates"]], [1, 1]
         )
 
+    def test_whole_number_versions_match_the_archived_osm_version(self):
+        expected = self.read()
+        for version in (3, 3.0):
+            with self.subTest(version=version):
+                self.assertEqual(
+                    self.read(dict(self.selection, object_version=version)), expected
+                )
+
     def test_anchor_selects_one_ring_without_discarding_or_misassigning_other_holes(
         self,
     ):

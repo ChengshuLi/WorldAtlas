@@ -90,6 +90,8 @@ def assemble_rings(ways):
 
 
 def selected_object(records, ident, version, tags):
+    if isinstance(version, float) and version.is_integer():
+        version = int(version)
     record = records.get(int(ident))
     if record is None or record["deleted"] or record["version"] != str(version):
         raise ValueError("selected OSM object or version is missing")
