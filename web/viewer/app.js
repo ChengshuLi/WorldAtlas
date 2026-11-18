@@ -196,7 +196,7 @@ function bindLegendControls() {
     selectedGroups.clear();
     hoveredGroup = null;
     renderLegend();
-    $("#legend-search").focus({ preventScroll: true });
+    $("#legend-panel").focus({ preventScroll: true });
     requestDraw();
   });
 }

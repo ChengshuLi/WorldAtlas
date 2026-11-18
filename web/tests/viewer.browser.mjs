@@ -478,7 +478,11 @@ for (const { name, options, fallback, sparse, uploadFailure } of [
         );
 
         await page.getByRole("button", { name: "Legend", exact: true }).click();
-        await legend.getByRole("button", { name: "Clear filter" }).click();
+        const clear = legend.getByRole("button", { name: "Clear selection" });
+        if (options.hasTouch) await clear.tap();
+        else await clear.click();
+        assert.equal(await search.inputValue(), "asia");
+        assert.equal(await page.evaluate(() => document.activeElement.id), "legend-panel");
         await search.fill("africa");
         assert.equal(await africa.getAttribute("aria-pressed"), "false");
         assert.deepEqual(errors, []);
@@ -601,9 +605,12 @@ test("keyboard focus and map drawing survive legend edits and page caching", asy
 
     const search = page.getByRole("searchbox", { name: "Search continents" });
     await search.fill("unmatched");
-    const clear = page.getByRole("button", { name: "Clear filter" });
-    await clear.click();
+    const clear = page.getByRole("button", { name: "Clear selection" });
+    await clear.focus();
+    await page.keyboard.press("Space");
     assert.equal(await clear.isVisible(), false);
+    assert.equal(await page.evaluate(() => document.activeElement.id), "legend-panel");
+    await page.keyboard.press("Tab");
     assert.equal(await search.evaluate((element) => element === document.activeElement), true);
   } finally {
     await page.close();

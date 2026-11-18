@@ -105,14 +105,6 @@ async function fixture() {
       delete this.handlers[t];
     },
   };
-  const timers = new Map();
-  let timerId = 0;
-  const setTimeout = (fn, ms) => {
-    assert.equal(ms, 5000);
-    timers.set(++timerId, fn);
-    return timerId;
-  };
-  const clearTimeout = (id) => timers.delete(id);
   const meta = {
     ...JSON.parse(read("config.json")),
     width: 131072,
@@ -175,8 +167,6 @@ async function fixture() {
     location: { href: "https://example.test/" },
     devicePixelRatio: 1,
     ResizeObserver,
-    setTimeout,
-    clearTimeout,
     requestAnimationFrame: (f) => f(),
     window: { addEventListener() {} },
     console,
@@ -185,7 +175,7 @@ async function fixture() {
   };
   vm.createContext(ctx);
   await vm.runInContext("(async()=>{" + app + "})()", ctx);
-  return { el, draws, document, timers };
+  return { el, draws, document };
 }
 test("current map controls preserve selection, toggle legend and reset world", async () => {
   const { el, draws, document } = await fixture();

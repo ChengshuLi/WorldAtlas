@@ -156,8 +156,7 @@ function canvasRenderer(canvas, meta, data) {
         0,
       );
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const w = canvas.width / dpr,
-        h = canvas.height / dpr;
+      const w = canvas.width / dpr;
       if (scale >= 9) {
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.fillStyle = "#ffffff66";
