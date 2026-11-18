@@ -41,6 +41,14 @@ BEGIN
   -- Lock only the edited definition, not every unrelated rule.
   SELECT * INTO r FROM atlas.geographic_rules WHERE id=ident FOR UPDATE;
   IF NOT FOUND THEN RETURN; END IF;
+  -- Keep feature types stable until this change commits.
+  PERFORM f.id FROM atlas.source_features f
+  WHERE f.id IN (
+    SELECT feature_id FROM atlas.geographic_rule_features WHERE rule_id=r.id
+    UNION ALL
+    SELECT label_point_id FROM atlas.geographic_rule_targets WHERE rule_id=r.id
+  )
+  ORDER BY f.id FOR SHARE OF f;
   IF EXISTS (
     SELECT FROM atlas.geographic_rule_features l JOIN atlas.source_features f ON f.id=l.feature_id
     WHERE l.rule_id=r.id AND NOT CASE l.role
@@ -110,6 +118,8 @@ ON atlas.geographic_rule_features DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXE
 CREATE CONSTRAINT TRIGGER geographic_rule_target_check AFTER INSERT OR UPDATE OR DELETE
 ON atlas.geographic_rule_targets DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_rule_links();
 CREATE CONSTRAINT TRIGGER geographic_rule_geometry_check AFTER UPDATE OF geometry
-ON atlas.source_features DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_rule_links();
+ON atlas.source_features DEFERRABLE INITIALLY DEFERRED FOR EACH ROW
+WHEN ((OLD.geometry->>'type') IS DISTINCT FROM (NEW.geometry->>'type'))
+EXECUTE FUNCTION atlas.check_geographic_rule_links();
 CREATE CONSTRAINT TRIGGER geographic_rule_entity_check AFTER UPDATE OR DELETE
 ON atlas.geographic_entities DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_rule_links();

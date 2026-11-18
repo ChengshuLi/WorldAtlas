@@ -119,7 +119,7 @@ class SelectionTests(unittest.TestCase):
                 "DELETE FROM atlas.geographic_rules WHERE id='__selection_rule'"
             )
             self.writer.execute(
-                "DELETE FROM atlas.source_features WHERE id='__selection_point'"
+                "DELETE FROM atlas.source_features WHERE construction_id='__selection_recipe'"
             )
             self.writer.execute(
                 "DELETE FROM atlas.construction_records WHERE id='__selection_recipe'"
@@ -209,6 +209,65 @@ class SelectionTests(unittest.TestCase):
     def test_requested_missing_raw_source_fails(self):
         with self.assertRaisesRegex(ValueError, "missing"):
             self.read(raw_sources=["absent"])
+
+    def test_geometry_edit_that_preserves_type_can_commit_during_rule_edit(self):
+        with psycopg.connect(self.url) as rule, psycopg.connect(self.url) as feature:
+            rule.execute(
+                "UPDATE atlas.geographic_rules SET rationale='Second' WHERE id='__selection_rule'"
+            )
+            feature.execute("SET LOCAL lock_timeout='150ms'")
+            feature.execute(
+                "UPDATE atlas.source_features SET geometry=%s WHERE id='__selection_point'",
+                (Jsonb(dict(type="Point", coordinates=[11, 21])),),
+            )
+            feature.commit()
+
+    def test_concurrent_feature_type_edit_and_link_cannot_both_commit(self):
+        polygon = Jsonb(
+            dict(type="Polygon", coordinates=[[[0, 0], [2, 0], [2, 2], [0, 0]]])
+        )
+
+        def edit(database, ident):
+            database.execute(
+                "UPDATE atlas.source_features SET geometry=%s WHERE id=%s",
+                (polygon, ident),
+            )
+
+        def link(database, ident):
+            database.execute(
+                "INSERT INTO atlas.geographic_rule_features VALUES ('__selection_rule',%s,'scope_component')",
+                (ident,),
+            )
+
+        for first_change, second_change in ((edit, link), (link, edit)):
+            with self.subTest(first=first_change.__name__):
+                ident = "__concurrent_feature_" + first_change.__name__
+                self.writer.execute(
+                    "INSERT INTO atlas.source_features VALUES (%s,%s,'__selection_recipe')",
+                    (ident, Jsonb(self.geometry)),
+                )
+                with (
+                    psycopg.connect(self.url) as first,
+                    psycopg.connect(self.url) as second,
+                ):
+                    first_change(first, ident)
+                    first.execute("SET CONSTRAINTS ALL IMMEDIATE")
+                    with (
+                        self.assertRaises(psycopg.errors.LockNotAvailable),
+                        second.transaction(),
+                    ):
+                        second.execute("SET LOCAL lock_timeout='150ms'")
+                        second_change(second, ident)
+                        second.execute("SET CONSTRAINTS ALL IMMEDIATE")
+                    first.commit()
+                    with (
+                        self.assertRaisesRegex(
+                            psycopg.errors.RaiseException, "invalid feature geometry"
+                        ),
+                        second.transaction(),
+                    ):
+                        second_change(second, ident)
+                        second.execute("SET CONSTRAINTS ALL IMMEDIATE")
 
 
 @unittest.skipUnless(
