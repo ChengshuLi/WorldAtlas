@@ -9,7 +9,7 @@ from contextlib import ExitStack, closing
 from pathlib import Path
 
 from worldatlas.source_imports.atlas_sources.catalog import read_recipe
-from worldatlas.source_imports.contracts import Runtime, bind_document
+from worldatlas.source_imports.contracts import Runtime, validate_arguments
 from worldatlas.source_imports.features.build_features import (
     s130_areas,
     selected_osm_features,
@@ -48,8 +48,7 @@ def run_import(
     connect, recipe_id, *, storage=None, work_dir=None, expected_geometry_sha256=None
 ):
     with connect() as database:
-        document = read_recipe(database, recipe_id)
-    method = document.get("method")
+        method, arguments = read_recipe(database, recipe_id)
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
     if importer is None:
         raise ValueError(f"unsupported source construction method: {method!r}")
@@ -59,7 +58,7 @@ def run_import(
         raise ValueError(
             "an expected geometry checksum applies to OSM way-chain boundaries"
         )
-    arguments = bind_document(importer, document)
+    validate_arguments(importer, arguments)
     return importer(
         Runtime(
             connect,
@@ -68,7 +67,7 @@ def run_import(
             method,
             work_dir,
             expected_geometry_sha256,
-            document=document,
+            arguments=arguments,
         ),
         **arguments,
     )

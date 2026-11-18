@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 from worldatlas.source_imports.run_import import IMPORTERS, run_import
 
 
-DOCUMENTS = {
+ARGUMENTS = {
     "interpreted_geometry": dict(
         source_ids=["raw"],
         basis="Selected context",
@@ -75,29 +75,28 @@ class ImportSelectionTests(unittest.TestCase):
         self.storage = Mock()
         self.options = dict(storage=self.storage, work_dir=Path("/test/cache"))
 
-    def test_every_registered_signature_receives_document_arguments_and_separate_runtime(
+    def test_every_registered_signature_receives_arguments_and_separate_runtime(
         self,
     ):
-        self.assertEqual(set(DOCUMENTS), set(IMPORTERS))
+        self.assertEqual(set(ARGUMENTS), set(IMPORTERS))
         for method, constructor in IMPORTERS.copy().items():
 
             @wraps(constructor)
             def record(runtime, **arguments):
                 return runtime, arguments
 
-            document = dict(DOCUMENTS[method], method=method)
             with (
                 self.subTest(method=method),
                 patch.dict(IMPORTERS, {method: record}),
                 patch(
                     "worldatlas.source_imports.run_import.read_recipe",
-                    return_value=document,
+                    return_value=(method, ARGUMENTS[method]),
                 ),
             ):
                 runtime, arguments = run_import(
                     self.connect, "arbitrary-record-name", **self.options
                 )
-                self.assertEqual(arguments, DOCUMENTS[method])
+                self.assertEqual(arguments, ARGUMENTS[method])
                 self.assertEqual(runtime.recipe_id, "arbitrary-record-name")
                 self.assertIs(runtime.storage, self.storage)
 
@@ -112,7 +111,7 @@ class ImportSelectionTests(unittest.TestCase):
             patch.dict(IMPORTERS, {"geodesic_trace": trace}),
             patch(
                 "worldatlas.source_imports.run_import.read_recipe",
-                return_value=dict(DOCUMENTS["geodesic_trace"], method="geodesic_trace"),
+                return_value=("geodesic_trace", ARGUMENTS["geodesic_trace"]),
             ),
         ):
             runtime = run_import(self.connect, "trace")
@@ -125,7 +124,7 @@ class ImportSelectionTests(unittest.TestCase):
                 self.subTest(method=method),
                 patch(
                     "worldatlas.source_imports.run_import.read_recipe",
-                    return_value={"method": method},
+                    return_value=(method, {}),
                 ),
             ):
                 with self.assertRaisesRegex(
@@ -145,9 +144,7 @@ class ImportSelectionTests(unittest.TestCase):
                 self.subTest(changes=changes),
                 patch(
                     "worldatlas.source_imports.run_import.read_recipe",
-                    return_value=dict(
-                        DOCUMENTS["osm_way_chain"], method="osm_way_chain", **changes
-                    ),
+                    return_value=("osm_way_chain", dict(ARGUMENTS["osm_way_chain"], **changes)),
                 ),
             ):
                 with self.assertRaisesRegex(ValueError, "construction field"):
@@ -157,7 +154,7 @@ class ImportSelectionTests(unittest.TestCase):
     def test_required_download_inputs_and_inapplicable_checksum_are_rejected(self):
         with patch(
             "worldatlas.source_imports.run_import.read_recipe",
-            return_value=dict(DOCUMENTS["osm_way_chain"], method="osm_way_chain"),
+            return_value=("osm_way_chain", ARGUMENTS["osm_way_chain"]),
         ):
             for name in self.options:
                 with (
@@ -169,7 +166,7 @@ class ImportSelectionTests(unittest.TestCase):
                     )
         with patch(
             "worldatlas.source_imports.run_import.read_recipe",
-            return_value=dict(DOCUMENTS["s130_areas"], method="s130_areas"),
+            return_value=("s130_areas", ARGUMENTS["s130_areas"]),
         ):
             with self.assertRaisesRegex(ValueError, "checksum applies"):
                 run_import(

@@ -4,7 +4,7 @@ Import selected source geometry into `atlas.source_features`. Each row contains 
 
 Raw files are pinned by their cataloged size and checksum. Vector imports select explicit provider IDs and reject missing or ambiguous matches. Provider attributes remain in the raw source; these methods do not maintain copied attribute expectations in Neon. Map building checks spatial relationships against the current grid. Database constraints reject malformed coordinate structures; imports also reject invalid shapes, such as self-intersecting polygons.
 
-[`vector.py`](vector.py) reads selected provider IDs with GDAL and converts coordinates to WGS84 longitude/latitude. [`geometry.py`](geometry.py) validates and saves the geometry. [`build_features.py`](build_features.py) declares one typed entry point per feature method and shares catalog lookup, the verified R2 cache and transactional storage. Its signatures and nested types define the fields accepted by [shared Python and database validation](../README.md#document-validation). Existing relationships survive repeat imports; a failed import leaves all selected records unchanged.
+[`vector.py`](vector.py) reads selected provider IDs with GDAL and converts coordinates to WGS84 longitude/latitude. [`geometry.py`](geometry.py) validates and saves the geometry. [`build_features.py`](build_features.py) declares one typed entry point per feature method and shares catalog lookup, the verified R2 cache and transactional storage. Its signatures and nested types define the fields accepted by [shared Python and database validation](../README.md#argument-validation). Existing relationships survive repeat imports; a failed import leaves all selected records unchanged.
 
 Use the common command:
 

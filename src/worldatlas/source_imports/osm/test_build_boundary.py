@@ -86,7 +86,6 @@ class DatabaseTests(unittest.TestCase):
             )
         self.source = dict(source_id="osm-test-1")
         self.recipe = dict(
-            method="osm_way_chain",
             source_id="osm-test-1",
             feature_id="border",
             source_feature_id="manifest.json",
@@ -101,7 +100,8 @@ class DatabaseTests(unittest.TestCase):
 
     def store(self):
         self.database.execute(
-            "INSERT INTO atlas.construction_records VALUES (%s,%s) ON CONFLICT(id) DO UPDATE SET document=EXCLUDED.document",
+            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES (%s,'osm_way_chain',%s) "
+            "ON CONFLICT(id) DO UPDATE SET arguments=EXCLUDED.arguments",
             (
                 "__osm_recipe",
                 Jsonb({k: v for k, v in self.recipe.items() if k != "recipe_id"}),
@@ -140,7 +140,6 @@ class DatabaseTests(unittest.TestCase):
 
     def test_chain_feature_preserves_source_vertices_and_builds_extensions_once(self):
         self.recipe = dict(
-            method="osm_way_chain",
             source_id="osm-test-1",
             feature_id="complete-boundary",
             source_feature_id="manifest.json",
@@ -194,7 +193,7 @@ class DatabaseTests(unittest.TestCase):
 
         def calculate(*args):
             self.database.execute(
-                "UPDATE atlas.construction_records SET document=document || '{\"basis\":\"Edited concurrently\"}' WHERE id='__osm_recipe'"
+                "UPDATE atlas.construction_records SET arguments=arguments || '{\"basis\":\"Edited concurrently\"}' WHERE id='__osm_recipe'"
             )
             return assemble_archive(*args)
 

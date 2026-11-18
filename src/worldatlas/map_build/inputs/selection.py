@@ -106,7 +106,7 @@ def read_selection(database, *, raw_sources=(), parents=None):
         if missing := references - {row["source_id"] for row in result["raw_sources"]}:
             raise ValueError("selected raw source is missing: " + str(sorted(missing)))
         rows = database.execute(
-            "SELECT id,document FROM atlas.construction_records "
+            "SELECT id,method,arguments FROM atlas.construction_records "
             "WHERE id=ANY(%s) ORDER BY id",
             (sorted(document_refs),),
         ).fetchall()
@@ -115,7 +115,8 @@ def read_selection(database, *, raw_sources=(), parents=None):
                 "selected construction is missing: " + str(sorted(missing))
             )
         result["construction_records"] = [
-            dict(id=ident, document=document) for ident, document in rows
+            dict(id=ident, method=method, arguments=arguments)
+            for ident, method, arguments in rows
         ]
     return result
 

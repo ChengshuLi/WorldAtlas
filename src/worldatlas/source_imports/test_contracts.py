@@ -1,4 +1,4 @@
-"""Document contracts apply equally to command calls and direct SQL writes."""
+"""Construction contracts apply equally to command calls and direct SQL writes."""
 
 import copy
 import inspect
@@ -13,14 +13,14 @@ from worldatlas.source_imports.contracts import (
     NonEmptyText,
     SourceId,
     Runtime,
-    bind_document,
     matches,
     parameters,
     source_paths,
     sql_type,
+    validate_arguments,
 )
 from worldatlas.source_imports.run_import import IMPORTERS
-from worldatlas.source_imports.test_run_import import DOCUMENTS
+from worldatlas.source_imports.test_run_import import ARGUMENTS
 
 
 class ContractTests(unittest.TestCase):
@@ -38,31 +38,31 @@ class ContractTests(unittest.TestCase):
         def example(runtime, *, title: NonEmptyText, enabled: bool = True):
             return title, enabled
 
-        arguments = bind_document(example, dict(method="example", title="Valid"))
+        arguments = dict(title="Valid")
+        validate_arguments(example, arguments)
         self.assertEqual(example(None, **arguments), ("Valid", True))
         with self.assertRaisesRegex(ValueError, "missing construction field: title"):
-            bind_document(example, dict(method="example"))
+            validate_arguments(example, {})
         self.assertEqual(parameters(example)["enabled"], (bool, True))
 
     def test_runtime_parameters_do_not_leak_into_the_document(self):
         function = IMPORTERS["osm_way_chain"]
-        for name in ("runtime", "recipe_id", "recipe_version", "revision", "work_dir"):
+        for name in ("method", "runtime", "recipe_id", "recipe_version", "revision", "work_dir"):
             with (
                 self.subTest(name=name),
                 self.assertRaisesRegex(ValueError, "unknown construction fields"),
             ):
-                bind_document(
+                validate_arguments(
                     function,
                     dict(
-                        DOCUMENTS["osm_way_chain"],
-                        method="osm_way_chain",
+                        ARGUMENTS["osm_way_chain"],
                         **{name: "unexpected"},
                     ),
                 )
         runtime = Runtime(None, None, "construction", "osm_way_chain")
         self.assertEqual(
             runtime.recipe(dict(runtime=runtime, title="Hello", optional=None)),
-            dict(method="osm_way_chain", recipe_id="construction", title="Hello"),
+            dict(recipe_id="construction", title="Hello"),
         )
 
     def test_supported_annotations_do_not_coerce_json_values(self):
@@ -130,22 +130,23 @@ class DatabaseContractTests(unittest.TestCase):
             ("a" * 64,),
         )
 
-    def check(self, method, document, expected):
-        try:
-            bind_document(IMPORTERS[method], document)
-            python_valid = True
-        except ValueError:
-            python_valid = False
-        self.assertEqual(python_valid, expected, (method, document))
+    def check(self, method, arguments, expected):
+        if method in IMPORTERS:
+            try:
+                validate_arguments(IMPORTERS[method], arguments)
+                python_valid = True
+            except ValueError:
+                python_valid = False
+            self.assertEqual(python_valid, expected, (method, arguments))
         (database_valid,) = self.database.execute(
-            "SELECT atlas.valid_construction_record(%s)", (Jsonb(document),)
+            "SELECT atlas.valid_construction_record(%s,%s)", (method, Jsonb(arguments))
         ).fetchone()
-        self.assertIs(database_valid, expected, (method, document))
+        self.assertIs(database_valid, expected, (method, arguments))
         if expected:
             with self.database.transaction(force_rollback=True):
                 self.database.execute(
-                    "INSERT INTO atlas.construction_records VALUES ('__contract',%s)",
-                    (Jsonb(document),),
+                    "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__contract',%s,%s)",
+                    (method, Jsonb(arguments)),
                 )
         else:
             with (
@@ -153,8 +154,8 @@ class DatabaseContractTests(unittest.TestCase):
                 self.database.transaction(),
             ):
                 self.database.execute(
-                    "INSERT INTO atlas.construction_records VALUES ('__contract',%s)",
-                    (Jsonb(document),),
+                    "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__contract',%s,%s)",
+                    (method, Jsonb(arguments)),
                 )
 
     def test_nested_multipart_and_evidence_sources_are_linked_once(self):
@@ -164,9 +165,8 @@ class DatabaseContractTests(unittest.TestCase):
                 "VALUES (%s,'Test','Test','test:raw','Test','test:license','Test','test',%s,%s,1)",
                 (ident, ident, "a" * 64),
             )
-        document = dict(
-            DOCUMENTS["watershed_boundary"],
-            method="watershed_boundary",
+        arguments = dict(
+            ARGUMENTS["watershed_boundary"],
             sources={
                 "single": "raw",
                 "same": "raw",
@@ -180,10 +180,10 @@ class DatabaseContractTests(unittest.TestCase):
             evidence_sources=["evidence", "raw"],
             geographic_choices={"source_id": "ordinary-untyped-text"},
         )
-        bind_document(IMPORTERS["watershed_boundary"], document)
+        validate_arguments(IMPORTERS["watershed_boundary"], arguments)
         self.database.execute(
-            "INSERT INTO atlas.construction_records VALUES ('__links',%s)",
-            (Jsonb(document),),
+            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__links','watershed_boundary',%s)",
+            (Jsonb(arguments),),
         )
 
         def links():
@@ -200,9 +200,9 @@ class DatabaseContractTests(unittest.TestCase):
             self.database.transaction(),
         ):
             self.database.execute("DELETE FROM atlas.source_assets WHERE id='other'")
-        changed = dict(document, sources={"only": "raw"}, evidence_sources=[])
+        changed = dict(arguments, sources={"only": "raw"}, evidence_sources=[])
         self.database.execute(
-            "UPDATE atlas.construction_records SET document=%s WHERE id='__links'",
+            "UPDATE atlas.construction_records SET arguments=%s WHERE id='__links'",
             (Jsonb(changed),),
         )
         self.assertEqual(links(), ["raw"])
@@ -211,16 +211,21 @@ class DatabaseContractTests(unittest.TestCase):
             self.database.transaction(),
         ):
             self.database.execute(
-                "UPDATE atlas.construction_records SET document=%s WHERE id='__links'",
+                "UPDATE atlas.construction_records SET arguments=%s WHERE id='__links'",
                 (Jsonb(dict(changed, sources={"missing": "absent"})),),
             )
         self.assertEqual(links(), ["raw"])
         self.assertEqual(
             self.database.execute(
-                "SELECT document FROM atlas.construction_records WHERE id='__links'"
+                "SELECT arguments FROM atlas.construction_records WHERE id='__links'"
             ).fetchone()[0],
             changed,
         )
+        self.database.execute(
+            "UPDATE atlas.construction_records SET method='osm_way_chain',arguments=%s WHERE id='__links'",
+            (Jsonb(dict(ARGUMENTS["osm_way_chain"], source_id="evidence")),),
+        )
+        self.assertEqual(links(), ["evidence"])
         self.database.execute(
             "DELETE FROM atlas.construction_records WHERE id='__links'"
         )
@@ -230,22 +235,23 @@ class DatabaseContractTests(unittest.TestCase):
         self,
     ):
         for method, constructor in IMPORTERS.items():
-            document = dict(DOCUMENTS[method], method=method)
+            arguments = ARGUMENTS[method]
             with self.subTest(method=method):
-                self.check(method, document, True)
+                self.check(method, arguments, True)
                 for name, (annotation, default) in parameters(constructor).items():
                     if default is inspect.Parameter.empty:
                         self.check(
                             method,
-                            {k: v for k, v in document.items() if k != name},
+                            {k: v for k, v in arguments.items() if k != name},
                             False,
                         )
                         for bad in (False, 123, "wrong type", None, [], {}):
                             if not matches(bad, annotation):
-                                self.check(method, dict(document, **{name: bad}), False)
-                self.check(method, dict(document, method="unknown"), False)
-                self.check(method, dict(document, unexpected="unused"), False)
-                self.check(method, dict(document, basis=" \t\n"), False)
+                                self.check(method, dict(arguments, **{name: bad}), False)
+                self.check(method, dict(arguments, method=method), False)
+                self.check(method, dict(arguments, unexpected="unused"), False)
+                self.check(method, dict(arguments, basis=" \t\n"), False)
+        self.check("unknown", ARGUMENTS["osm_way_chain"], False)
 
     def test_required_freeform_json_cannot_be_omitted(self):
         from worldatlas.source_imports.contracts import sql_object
@@ -322,6 +328,6 @@ class DatabaseContractTests(unittest.TestCase):
             with self.subTest(method=method, changes=changes):
                 self.check(
                     method,
-                    dict(copy.deepcopy(DOCUMENTS[method]), method=method, **changes),
+                    dict(copy.deepcopy(ARGUMENTS[method]), **changes),
                     expected,
                 )

@@ -29,7 +29,7 @@ These twelve tables have distinct purposes. A feature stores geometry; its const
 
 Raw identity, storage location, size, checksum and capture time are immutable; correctable descriptive metadata remains editable. Changed source bytes require a new source ID. Construction settings, geometry and geographic rules are editable. Released input archives retain their exact earlier values and code.
 
-Construction document fields come from typed Python signatures. Regenerate their checks after changing a constructor:
+`construction_records.method` selects the importer and `arguments` stores its named inputs as JSONB. The importer registry and typed Python signatures define their checks. Regenerate those checks after changing a constructor:
 
 ```bash
 python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql

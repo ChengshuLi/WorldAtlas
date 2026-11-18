@@ -12,16 +12,13 @@ import time
 def read_recipe(database, recipe_id):
     """Read an editable construction record by its ID."""
     row = database.execute(
-        'SELECT document FROM atlas.construction_records '
+        'SELECT method,arguments FROM atlas.construction_records '
         'WHERE id=%s',
         (recipe_id,),
     ).fetchone()
     if row is None:
         raise ValueError('construction record is missing from Neon')
-    recipe = row[0]
-    if not isinstance(recipe, dict):
-        raise ValueError('invalid construction record')
-    return recipe
+    return row
 
 
 def catalog_source(database, source_id):

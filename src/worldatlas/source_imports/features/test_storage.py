@@ -43,7 +43,6 @@ class StorageTests(unittest.TestCase):
         self.add_source("raw", self.raw, "source.geojson")
         self.storage.get_object.side_effect = lambda **_: {"Body": io.BytesIO(self.raw)}
         self.recipe = dict(
-            method="selected_vector_features",
             source_id="raw",
             basis="Selected source point",
             id_field="id",
@@ -61,8 +60,8 @@ class StorageTests(unittest.TestCase):
 
     def store(self):
         self.database.execute(
-            "INSERT INTO atlas.construction_records VALUES (%s,%s) "
-            "ON CONFLICT(id) DO UPDATE SET document=EXCLUDED.document",
+            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES (%s,'selected_vector_features',%s) "
+            "ON CONFLICT(id) DO UPDATE SET arguments=EXCLUDED.arguments",
             ("__features", Jsonb(self.recipe)),
         )
 

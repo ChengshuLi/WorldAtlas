@@ -1,4 +1,4 @@
-"""Derive construction document checks from the constructors' typed signatures."""
+"""Derive construction argument checks from the constructors' typed signatures."""
 
 import argparse
 from dataclasses import dataclass
@@ -34,7 +34,7 @@ class Runtime:
     method: str
     work_dir: Path | None = None
     expected_geometry_sha256: str | None = None
-    document: dict | None = None
+    arguments: dict | None = None
 
     def recipe(self, arguments):
         """Forward bound function arguments to algorithms that consume settings dictionaries."""
@@ -44,7 +44,6 @@ class Runtime:
                 for key, value in arguments.items()
                 if key != "runtime" and value is not None
             },
-            method=self.method,
             recipe_id=self.recipe_id,
         )
 
@@ -53,10 +52,10 @@ class Runtime:
         """Save against the recipe that was actually calculated, holding only a short lock."""
         with database.transaction():
             row = database.execute(
-                "SELECT document FROM atlas.construction_records WHERE id=%s FOR SHARE",
+                "SELECT method,arguments FROM atlas.construction_records WHERE id=%s FOR SHARE",
                 (self.recipe_id,),
             ).fetchone()
-            if row is None or row[0] != self.document:
+            if row != (self.method, self.arguments):
                 raise ValueError(
                     "construction changed during calculation; rerun its current settings"
                 )
@@ -64,7 +63,7 @@ class Runtime:
 
 
 def parameters(constructor):
-    """Only keyword-only arguments belong in a construction document."""
+    """Only typed keyword-only arguments are stored in a construction."""
     signature = inspect.signature(constructor)
     arguments = list(signature.parameters.values())
     if not arguments or arguments[0].name != "runtime":
@@ -149,21 +148,20 @@ def matches(value, annotation):
     raise TypeError(f"unsupported construction annotation: {annotation!r}")
 
 
-def bind_document(constructor, document):
+def validate_arguments(constructor, arguments):
     """Validate the stored fields, leaving defaults to ordinary Python argument binding."""
     fields = parameters(constructor)
-    if not isinstance(document, dict) or document.get("method") != constructor.__name__:
-        raise ValueError("invalid construction method")
-    extra = document.keys() - fields.keys() - {"method"}
+    if not isinstance(arguments, dict):
+        raise ValueError("construction arguments must be an object")
+    extra = arguments.keys() - fields.keys()
     if extra:
         raise ValueError("unknown construction fields: " + ", ".join(sorted(extra)))
     for name, (annotation, default) in fields.items():
-        if name not in document:
+        if name not in arguments:
             if default is inspect.Parameter.empty:
                 raise ValueError(f"missing construction field: {name}")
-        elif not matches(document[name], annotation):
+        elif not matches(arguments[name], annotation):
             raise ValueError(f"invalid construction field: {name}")
-    return {key: value for key, value in document.items() if key != "method"}
 
 
 def literal(value):
@@ -299,11 +297,8 @@ def database_checks():
 
     choices, sources = [], []
     for method, constructor in sorted(IMPORTERS.items()):
-        fields = {
-            "method": (Literal[method], inspect.Parameter.empty),
-            **parameters(constructor),
-        }
-        choices.append(f"WHEN {literal(method)} THEN {sql_object('document', fields)}")
+        fields = parameters(constructor)
+        choices.append(f"WHEN {literal(method)} THEN {sql_object('arguments', fields)}")
         paths = sorted({path for name, (kind, _) in fields.items()
                         for path in source_paths(kind, '$.' + json.dumps(name))})
         if paths:
@@ -313,19 +308,19 @@ def database_checks():
             )
     return (
         "-- Generated from constructor signatures. Do not edit; see source_imports.contracts.\n"
-        "CREATE FUNCTION atlas.valid_construction_record(document jsonb)\n"
+        "CREATE FUNCTION atlas.valid_construction_record(method text, arguments jsonb)\n"
         "RETURNS boolean LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $contract$\n"
-        "SELECT CASE document ->> 'method'\n"
+        "SELECT CASE method\n"
         + "\n".join(choices)
         + "\nELSE FALSE END;\n$contract$;\n"
-        "ALTER TABLE atlas.construction_records ADD CONSTRAINT construction_document_valid\n"
-        "CHECK (atlas.valid_construction_record(document));\n"
-        "\nCREATE FUNCTION atlas.construction_source_ids(document jsonb)\n"
+        "ALTER TABLE atlas.construction_records ADD CONSTRAINT construction_arguments_valid\n"
+        "CHECK (atlas.valid_construction_record(method, arguments));\n"
+        "\nCREATE FUNCTION atlas.construction_source_ids(method text, arguments jsonb)\n"
         "RETURNS SETOF text LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $sources$\n"
-        "SELECT DISTINCT value #>> '{}' FROM unnest(CASE document ->> 'method'\n"
+        "SELECT DISTINCT value #>> '{}' FROM unnest(CASE method\n"
         + "\n".join(sources)
         + "\nELSE ARRAY[]::jsonpath[] END) AS paths(path)\n"
-        "CROSS JOIN LATERAL jsonb_path_query(document,path,'{}'::jsonb,true) AS refs(value)\n"
+        "CROSS JOIN LATERAL jsonb_path_query(arguments,path,'{}'::jsonb,true) AS refs(value)\n"
         "WHERE jsonb_typeof(value)='string';\n"
         "$sources$;\n"
     )

@@ -7,13 +7,12 @@ Build one final boundary by joining reviewed control points stored in Neon with 
 
 ## Construction record
 
-The typed constructor signature defines required fields, optional fields and types. [Shared validation](../README.md#document-validation) enforces these in Python and PostgreSQL; the example below explains the settings.
+The typed constructor signature defines required fields, optional fields and types. [Shared validation](../README.md#argument-validation) enforces them in Python and PostgreSQL.
 
-Use the existing `atlas.construction_records` table. Its `id` identifies the editable construction record. The following fields are JSON keys inside its `document` column, not separate table columns. The `source_ids` inside that JSON identifies all contributing raw sources.
+Set `method` to `geodesic_trace` on the construction row. Store the settings below in its `arguments` column.
 
 | Field | Meaning |
 | --- | --- |
-| `method` | `geodesic_trace` |
 | `source_ids` | The contributing raw sources in Neon's catalog; a nonempty list without duplicates |
 | `feature_id` | The output line in `atlas.source_features` |
 | `source_feature_id` | The selected figure or other identifiable part of the raw document |
@@ -44,7 +43,7 @@ worldatlas-import \
   --recipe lydekker-boundary-construction
 ```
 
-The command saves the geometry and its construction ID. The figure identifier stays in the construction document. Source links connect the construction to its raw files. Regional assignment rules reference the saved feature separately.
+The command saves the geometry and its construction ID. The figure identifier stays in the construction arguments. Source links connect the construction to its raw files. Regional assignment rules reference the saved feature separately.
 
 ## Tests
 

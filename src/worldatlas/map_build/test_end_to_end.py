@@ -117,7 +117,6 @@ class EndToEndTests(unittest.TestCase):
                     ),
                 )
                 recipe = dict(
-                    method="selected_vector_features",
                     source_id="__e2e_raw",
                     basis="Selected point records",
                     id_field="id",
@@ -130,7 +129,8 @@ class EndToEndTests(unittest.TestCase):
                     ],
                 )
                 db.execute(
-                    "INSERT INTO atlas.construction_records VALUES ('__e2e_import',%s)",
+                    "INSERT INTO atlas.construction_records(id,method,arguments) "
+                    "VALUES ('__e2e_import','selected_vector_features',%s)",
                     (Jsonb(recipe),),
                 )
             try:

@@ -9,9 +9,9 @@ These tools read raw geographic files from R2 and save geographic records in Neo
 - [`watersheds/`](watersheds/README.md): boundaries from terrain and natural drainage.
 - [`atlas_sources/`](atlas_sources/README.md): catalog lookup and verified downloads.
 
-Geographic choices live in editable `atlas.construction_records.document` values. Each construction has one ID and one current recipe. Imported geometry links to that construction by `construction_id`. There are no decision revisions or recipe versions to select. Each map build freezes the full recipes, geometry and raw catalog records it used; release archives retain those copies for replay.
+Each row in `atlas.construction_records` contains an `id`, a `method` and its named `arguments` in JSONB. Imported geometry links to that construction by `construction_id`. Each map build freezes the recipes, geometry and raw catalog records it used. Release archives retain those copies for replay.
 
-Raw-source arguments use the `SourceId` type. The generated database code follows those declared fields through typed objects and lists, then synchronizes `atlas.construction_sources` on each document save. These foreign-key links make every feature's dependencies queryable through its construction. Source IDs are ordinary strings passed directly to Python; no wrapper or separate primary source is stored on a feature. Lists preserve calculation order; dependency links are unique. Untyped descriptive JSON is not searched for possible source IDs.
+Raw-source arguments use the `SourceId` type. The generated database code follows those declared fields through typed objects and lists, then synchronizes `atlas.construction_sources` when the method or arguments are saved. These foreign-key links make every feature's dependencies queryable through its construction. Source IDs are ordinary strings passed directly to Python; no wrapper or separate primary source is stored on a feature. Lists preserve calculation order; dependency links are unique. Untyped descriptive JSON is not searched for possible source IDs.
 
 ## Run one construction
 
@@ -29,11 +29,11 @@ Figure traces need only the construction ID:
 worldatlas-import --recipe lydekker-boundary-construction
 ```
 
-The document's `method` selects a typed function registered once in [`run_import.py`](run_import.py). A record's name does not select Python code. Read the referenced construction rather than assuming a name or remembering a command from a previous chat:
+The `method` column selects a typed function registered in [`run_import.py`](run_import.py). Query the construction that produced a feature to see the method and the arguments it takes.
 
 ```sql
 SELECT id, construction_id FROM atlas.source_features;
-SELECT document FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
+SELECT method, arguments FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 
 Edit the recipe and rerun the same ID to update working geometry. A successful import saves the geometry under its construction ID. Neon maintains the raw source links when the construction document changes. A failed import leaves its previous geometry intact. Workers calculate independently. At save time, the import verifies the construction is still the one it read and keeps existing feature IDs associated with that construction.
@@ -52,9 +52,9 @@ The map builder uses the same verified raw-file cache. Both commands check the c
 
 Every construction consumes cataloged raw sources and its interpretation settings. No construction depends on another structured feature; grouping existing features belongs to geographic assignments in map building.
 
-## Document validation
+## Argument validation
 
-Each constructor's typed keyword-only arguments define its fields. An argument without a default is required; a default makes it optional. `NonEmptyText` rejects empty or whitespace-only text. Nested `TypedDict` definitions describe feature selections. `runtime` supplies connections, work paths and the construction ID; it is not a field in the stored document.
+Each constructor's typed keyword-only parameters define the keys in `arguments`. A parameter without a default is required. A default makes it optional. `NonEmptyText` rejects empty or whitespace-only text. Nested `TypedDict` definitions describe feature selections. The command supplies `runtime` separately with connections, work paths and the construction ID.
 
 [`contracts.py`](contracts.py) derives command validation and PostgreSQL checks from those signatures. Both reject unknown methods/fields, missing required fields and incorrect types. Algorithms additionally check source identities, coordinates, joins and the relationships between geographic choices.
 

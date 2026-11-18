@@ -42,8 +42,9 @@ END $$;
 CREATE TRIGGER source_asset_immutable BEFORE UPDATE ON atlas.source_assets FOR EACH ROW EXECUTE FUNCTION atlas.guard_source_identity();
 
 CREATE TABLE atlas.construction_records (
-    id text NOT NULL,
-    document jsonb NOT NULL,
+    id text,
+    method text NOT NULL,
+    arguments jsonb NOT NULL,
     CONSTRAINT construction_records_id_check CHECK (atlas.nonblank(id)),
     CONSTRAINT construction_records_pkey PRIMARY KEY (id)
 );
@@ -60,7 +61,7 @@ LANGUAGE plpgsql AS $$
 DECLARE sources text[];
 BEGIN
  SELECT coalesce(array_agg(source_id), ARRAY[]::text[]) INTO sources
- FROM atlas.construction_source_ids(NEW.document) AS refs(source_id);
+ FROM atlas.construction_source_ids(NEW.method, NEW.arguments) AS refs(source_id);
  DELETE FROM atlas.construction_sources
  WHERE construction_id=NEW.id AND NOT source_id=ANY(sources);
  INSERT INTO atlas.construction_sources(construction_id,source_id)
@@ -69,5 +70,5 @@ BEGIN
  RETURN NULL;
 END $$;
 
-CREATE TRIGGER construction_sources_sync AFTER INSERT OR UPDATE OF document
+CREATE TRIGGER construction_sources_sync AFTER INSERT OR UPDATE OF method, arguments
 ON atlas.construction_records FOR EACH ROW EXECUTE FUNCTION atlas.sync_construction_sources();

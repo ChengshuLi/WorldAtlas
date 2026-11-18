@@ -23,7 +23,6 @@ class DatabaseTests(unittest.TestCase):
             ("a" * 64,),
         )
         self.recipe = dict(
-            method="geodesic_trace",
             source_ids=["raw"],
             feature_id="line",
             source_feature_id="Figure 1",
@@ -35,7 +34,8 @@ class DatabaseTests(unittest.TestCase):
 
     def store(self):
         self.db.execute(
-            "INSERT INTO atlas.construction_records VALUES ('trace',%s) ON CONFLICT(id) DO UPDATE SET document=EXCLUDED.document",
+            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('trace','geodesic_trace',%s) "
+            "ON CONFLICT(id) DO UPDATE SET arguments=EXCLUDED.arguments",
             (Jsonb(self.recipe),),
         )
 

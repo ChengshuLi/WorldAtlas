@@ -14,7 +14,7 @@ Construction records in Neon choose the sources, output feature IDs, and constru
 
 - [`ways.py`](ways.py): read local archives and manifests, check source files, join ways into a GeoJSON line, and optionally check its geometry checksum.
 - [`build_boundary.py`](build_boundary.py): look up a raw source ID in Neon, download it from R2, assemble the line, and save its geometry and construction reference in Neon. Existing relationships are retained.
-- [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) supplies the document, catalog, and download functions also used by other source processors.
+- [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) supplies the recipe lookup, catalog, and download functions also used by other source processors.
 
 ## Local processing
 
@@ -56,11 +56,10 @@ worldatlas-import \
 | `--work-dir` | Local directory for downloading and reusing the source archive. |
 | `--expected-geometry-sha256` | Optional checksum of the expected boundary geometry. A mismatch stops the command before saving. Omit it when building a changed boundary. |
 
-The construction record is a JSON object in the existing `atlas.construction_records` table:
+Set the `method` column on the construction row to `osm_way_chain` and supply its `arguments` as JSONB.
 
 ```json
 {
-  "method": "osm_way_chain",
   "source_id": "raw-source-id",
   "feature_id": "boundary-id",
   "source_feature_id": "manifest.json",
@@ -68,7 +67,7 @@ The construction record is a JSON object in the existing `atlas.construction_rec
 }
 ```
 
-`osm_way_chain` selects the typed function in [`build_boundary.py`](build_boundary.py), which calls the assembly function in `ways.py`. Its signature defines required fields and types; [shared validation](../README.md#document-validation) checks them in Python and PostgreSQL. The construction record is editable. Change its settings and rerun its ID.
+`osm_way_chain` selects the typed function in [`build_boundary.py`](build_boundary.py), which calls the assembly function in `ways.py`. Its signature defines required fields and types. [Shared validation](../README.md#argument-validation) checks them in Python and PostgreSQL. To change the construction, edit its arguments and rerun its ID.
 
 `worldatlas-import` reads and validates the record, then `osm_way_chain()` looks up its exact raw source ID in `atlas.source_assets`, downloads its R2 object into the work directory, checks its size and checksum, and assembles the boundary. A checked local download is reused on later runs. An optional expected geometry checksum supports replaying an existing result.
 

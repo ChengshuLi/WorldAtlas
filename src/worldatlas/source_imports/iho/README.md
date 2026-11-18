@@ -2,7 +2,7 @@
 
 `areas.py` reads complete geographic surfaces from the cataloged S-130 archive. The `s130_areas` constructor in [`../features/build_features.py`](../features/build_features.py) saves them in `atlas.source_features`. Map building consumes that stored geometry.
 
-Each construction document supplies `source_id`, `basis`, `gml_member`, `gml_sha256` and `selections`. A selection identifies the output `feature_id` and the provider MRN in `source_feature_id`. Complete linked surfaces sharing an MRN are retained, including holes, dateline crossings and polar caps. Imported coordinates keep the provider's representation.
+Each construction supplies `source_id`, `basis`, `gml_member`, `gml_sha256` and `selections`. A selection identifies the output `feature_id` and the provider MRN in `source_feature_id`. Complete linked surfaces sharing an MRN are retained, including holes, dateline crossings and polar caps. Imported coordinates keep the provider's representation.
 
 Run through the common entry point:
 

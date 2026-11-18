@@ -2,7 +2,8 @@
 BEGIN;
 INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes)
 VALUES ('raw','Test','Test','test:raw','Test','test:license','Test','test','raw',repeat('a',64),1);
-INSERT INTO atlas.construction_records VALUES ('context','{"method":"interpreted_geometry","source_ids":["raw"],"basis":"Selected context","selections":[{"feature_id":"point","geometry":{"type":"Point","coordinates":[1,1]}}]}');
+INSERT INTO atlas.construction_records(id,method,arguments) VALUES
+ ('context','interpreted_geometry','{"source_ids":["raw"],"basis":"Selected context","selections":[{"feature_id":"point","geometry":{"type":"Point","coordinates":[1,1]}}]}');
 INSERT INTO atlas.source_features VALUES
  ('point','{"type":"Point","coordinates":[1,1]}','context'),
  ('line','{"type":"LineString","coordinates":[[0,0],[2,2]]}','context'),
