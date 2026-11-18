@@ -165,6 +165,7 @@ async function fixture() {
     createRenderer,
     document,
     fetch,
+    AbortController,
     URL,
     Response,
     location: { href: "https://example.test/" },

@@ -41,9 +41,9 @@ export function cellValue(rows, runs, x, y) {
   }
   return runs[2 * lo + 1];
 }
-export async function loadLocalGrid(meta, base) {
+export async function loadLocalGrid(meta, base, signal) {
   async function load(name) {
-    const response = await fetch(new URL(meta.local_grid[name], base));
+    const response = await fetch(new URL(meta.local_grid[name], base), { signal });
     if (!response.ok) throw Error("Native map could not load");
     const stream = response.body.pipeThrough(new DecompressionStream("gzip"));
     const buffer = await new Response(stream).arrayBuffer();

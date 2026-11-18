@@ -839,6 +839,28 @@ test("WebGL agrees with Canvas at distant subpixel boundaries", async () => {
   }
 });
 
+test("grid downloads start while the legend response is pending", async () => {
+  const page = await browser.newPage();
+  try {
+    const legend = Promise.withResolvers();
+    await page.route("**/legend/entities.json", (route) => legend.resolve(route));
+    const [route] = await Promise.all([
+      legend.promise,
+      page.waitForRequest("**/rows.u32le.gz", { timeout: 5000 }),
+      page.waitForRequest("**/runs.u32le.gz", { timeout: 5000 }),
+      page.goto(`${origin}/${candidate}/index.html`, { waitUntil: "commit" }),
+    ]);
+    assert.equal(await page.locator("#status").textContent(), "Loading map…");
+    await route.continue();
+    await page.waitForFunction(
+      () => document.querySelector("#status").textContent !== "Loading map…",
+    );
+    assert.equal(await page.locator("#status").textContent(), "");
+  } finally {
+    await page.close();
+  }
+});
+
 test(
   "missing or corrupted map data leaves a clear error and no selectable map",
   { timeout: 30_000 },

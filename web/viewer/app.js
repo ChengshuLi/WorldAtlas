@@ -367,14 +367,19 @@ function showError(error) {
 }
 
 async function startViewer() {
+  const controller = new AbortController();
+  const { signal } = controller;
   try {
     const configURL = new URL("./config.json", import.meta.url);
     const response = await fetch(configURL);
     if (!response.ok) throw Error("Map configuration could not load");
     meta = await response.json();
-    const legendResponse = await fetch(new URL(meta.legend, configURL));
-    if (!legendResponse.ok) throw Error("Map legend could not load");
-    items = makeLegendItems(await legendResponse.json(), meta.categories);
+    const legend = fetch(new URL(meta.legend, configURL), { signal }).then((response) => {
+      if (!response.ok) throw Error("Map legend could not load");
+      return response.json();
+    });
+    const [entries, grid] = await Promise.all([legend, loadLocalGrid(meta, configURL, signal)]);
+    items = makeLegendItems(entries, meta.categories);
     const entities = new Map(items.map((item) => [item.id, item]));
     meta.palette = new Map();
     for (const category of meta.categories) {
@@ -385,7 +390,6 @@ async function startViewer() {
       category.name = entity.name;
       meta.palette.set(category.id, rgb);
     }
-    const grid = await loadLocalGrid(meta, configURL);
     if (meta.map_version) {
       const release = $("#map-release");
       release.textContent = `${meta.map_version.toUpperCase()} · SHA-256 ${meta.combined_sha256.slice(0, 12)}`;
@@ -398,6 +402,7 @@ async function startViewer() {
     fitWorld();
     status.textContent = "";
   } catch (error) {
+    controller.abort();
     showError(error);
   }
 }
