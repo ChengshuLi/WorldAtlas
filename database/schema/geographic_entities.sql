@@ -1,8 +1,7 @@
 -- Geographic hierarchy and stable entity/physical-class map codes.
 CREATE TABLE atlas.geographic_levels (
     id text PRIMARY KEY CHECK (atlas.nonblank(id)),
-    parent_id text REFERENCES atlas.geographic_levels(id) DEFERRABLE INITIALLY DEFERRED,
-    CHECK (id <> parent_id)
+    parent_id text REFERENCES atlas.geographic_levels(id) DEFERRABLE INITIALLY DEFERRED
 );
 CREATE UNIQUE INDEX geographic_level_root ON atlas.geographic_levels ((true)) WHERE parent_id IS NULL;
 

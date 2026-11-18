@@ -36,6 +36,13 @@ BEGIN
   IF SQLERRM NOT LIKE 'invalid parent for entity%' THEN RAISE; END IF;
  END;
  BEGIN
+  UPDATE atlas.geographic_levels SET parent_id='continent' WHERE id='continent';
+  SET CONSTRAINTS atlas.geographic_level_check IMMEDIATE;
+  RAISE EXCEPTION 'level accepted itself as its parent';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM<>'geographic levels contain a cycle' THEN RAISE; END IF;
+ END;
+ BEGIN
   UPDATE atlas.geographic_levels SET parent_id='continent' WHERE id='world';
   SET CONSTRAINTS ALL IMMEDIATE;
   RAISE EXCEPTION 'hierarchy cycle accepted';
