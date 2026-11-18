@@ -1,4 +1,4 @@
-"""OSM archive imports, editable recipes, atomic saves and concurrent region validation."""
+"""OSM way imports, editable recipes and atomic saves."""
 
 from contextlib import nullcontext
 import hashlib
@@ -9,7 +9,6 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import Mock
-import zipfile
 import psycopg
 from psycopg.types.json import Jsonb
 from worldatlas.source_imports.run_import import run_import
@@ -25,7 +24,6 @@ def save_boundary(database, geometry, source, recipe):
             [
                 dict(
                     feature_id=recipe["feature_id"],
-                    source_feature_id=recipe["source_feature_id"],
                     geometry=geometry,
                 )
             ],
@@ -33,33 +31,13 @@ def save_boundary(database, geometry, source, recipe):
         )
 
 
-def source_fixture(endpoint=(1, 1), *, coordinates=None):
-    points = coordinates if coordinates is not None else [(0, 0), endpoint]
+def source_fixture(way_id, start_node, points):
     elements = [
         {"type": "node", "id": i, "lon": x, "lat": y}
-        for i, (x, y) in enumerate(points, 1)
+        for i, (x, y) in enumerate(points, start_node)
     ]
-    elements.append({"type": "way", "id": 3, "nodes": list(range(1, len(points) + 1))})
-    response = json.dumps({"elements": elements}).encode()
-    manifest = {
-        "start_node": 1,
-        "ways": [
-            {"id": 3, "file": "3.json", "sha256": hashlib.sha256(response).hexdigest()}
-        ],
-    }
-    output = io.BytesIO()
-    with zipfile.ZipFile(output, "w") as archive:
-        archive.writestr("manifest.json", json.dumps(manifest))
-        archive.writestr("3.json", response)
-    raw = output.getvalue()
-    return raw, {
-        "source_id": "osm-test",
-        "version": "1",
-        "r2_bucket": "test",
-        "r2_key": "source.zip",
-        "sha256": hashlib.sha256(raw).hexdigest(),
-        "size_bytes": len(raw),
-    }
+    elements.append({"type": "way", "id": way_id, "nodes": list(range(start_node, start_node + len(points)))})
+    return json.dumps({"elements": elements}).encode()
 
 
 @unittest.skipUnless(
@@ -74,21 +52,26 @@ class DatabaseTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         self.directory = Path(temp.name)
         self.responses = {}
-        for label, endpoint in [("1", (1, 1)), ("2", (2, 2))]:
-            raw, source = source_fixture(endpoint)
-            ident = "osm-test-" + label
-            self.responses[label + ".zip"] = raw
+        for way_id, start, points in (
+            (1, 1, [(0, 0), (1, 1)]),
+            (2, 1, [(0, 0), (2, 2)]),
+            (3, 2, [(1, 1), (2, 2)]),
+        ):
+            raw = source_fixture(way_id, start, points)
+            ident = f"osm-test-{way_id}"
+            key = f"{way_id}.json"
+            self.responses[key] = raw
             self.database.execute(
                 "INSERT INTO atlas.source_assets "
                 "(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
                 "VALUES (%s,'Test','Test','test:source','Test','test:license','Test','test',%s,%s,%s)",
-                (ident, label + ".zip", source["sha256"], source["size_bytes"]),
+                (ident, key, hashlib.sha256(raw).hexdigest(), len(raw)),
             )
         self.source = dict(source_id="osm-test-1")
         self.recipe = dict(
-            source_id="osm-test-1",
+            way_source_ids=["osm-test-1"],
+            start_node_id=1,
             feature_id="border",
-            source_feature_id="manifest.json",
             basis="Test construction description",
             recipe_id="__osm_recipe",
         )
@@ -131,51 +114,27 @@ class DatabaseTests(unittest.TestCase):
         first = self.build()
         self.assertEqual(self.build(), first)
         self.assertEqual(self.storage.get_object.call_count, 1)
-        self.recipe.update(source_id="osm-test-2", basis="New source")
+        self.recipe.update(way_source_ids=["osm-test-2"], basis="New source")
         self.store()
         self.build()
         self.assertEqual(self.boundary()[0]["coordinates"], [[0.0, 0.0], [2.0, 2.0]])
         self.assertEqual(self.boundary()[1:], ("__osm_recipe",))
         self.assertEqual(self.links(), [("osm-test-2",)])
 
-    def test_chain_feature_preserves_source_vertices_and_builds_extensions_once(self):
-        self.recipe = dict(
-            source_id="osm-test-1",
-            feature_id="complete-boundary",
-            source_feature_id="manifest.json",
-            basis="Preserve source chain and add selected geodesic extensions",
-            before=[[-1, 0]],
-            after=[[2, 1]],
-            max_step_metres=100000,
-            evidence_source_ids=["osm-test-2"],
-        )
+    def test_chain_uses_both_cataloged_responses_in_endpoint_order(self):
+        self.recipe.update(way_source_ids=["osm-test-3", "osm-test-1"])
         self.store()
-        first = self.build()
-        self.assertEqual(self.build(), first)
-        geometry = self.database.execute(
-            "SELECT geometry FROM atlas.source_features WHERE id='complete-boundary'"
-        ).fetchone()[0]
-        self.assertEqual(self.build(expected=first["sha256"]), first)
-        points = geometry["coordinates"]
-        self.assertEqual(points[0], [-1, 0])
-        self.assertEqual(points[-1], [2, 1])
-        start = points.index([0, 0])
-        self.assertEqual(points[start : start + 2], [[0, 0], [1, 1]])
-        refs = self.database.execute(
-            "SELECT source_id FROM atlas.construction_sources WHERE construction_id='__osm_recipe' ORDER BY source_id"
-        ).fetchall()
-        self.assertEqual(refs, [("osm-test-1",), ("osm-test-2",)])
-        self.assertEqual(self.storage.get_object.call_count, 1)
-        self.recipe["before"] = [[0, 0]]
+        self.build()
+        self.assertEqual(self.boundary()[0]["coordinates"], [[0, 0], [1, 1], [2, 2]])
+        self.assertEqual(self.links(), [("osm-test-1",), ("osm-test-3",)])
+        self.assertEqual(self.storage.get_object.call_count, 2)
+
+    def test_evidence_source_is_linked_without_downloading_it(self):
+        self.recipe.update(evidence_source_ids=["osm-test-2"])
         self.store()
-        with self.assertRaises(ValueError):
-            self.build()
-        self.assertEqual(
-            self.database.execute(
-                "SELECT geometry FROM atlas.source_features WHERE id='complete-boundary'"
-            ).fetchone()[0],
-            geometry,
-        )
+        self.build()
+        self.assertEqual(self.links(), [("osm-test-1",), ("osm-test-2",)])
+        self.storage.get_object.assert_called_once_with(Bucket="test", Key="1.json")
 
     def test_expected_geometry_mismatch_preserves_existing_boundary(self):
         self.build()
@@ -186,7 +145,7 @@ class DatabaseTests(unittest.TestCase):
 
     def test_recipe_edit_during_calculation_does_not_save_stale_geometry(self):
         from unittest.mock import patch
-        from worldatlas.source_imports.osm.ways import assemble_archive
+        from worldatlas.source_imports.osm.ways import assemble
 
         self.build()
         before = self.boundary()
@@ -195,10 +154,10 @@ class DatabaseTests(unittest.TestCase):
             self.database.execute(
                 "UPDATE atlas.construction_records SET arguments=arguments || '{\"basis\":\"Edited concurrently\"}' WHERE id='__osm_recipe'"
             )
-            return assemble_archive(*args)
+            return assemble(*args)
 
         with patch(
-            "worldatlas.source_imports.osm.build_boundary.assemble_archive",
+            "worldatlas.source_imports.osm.build_boundary.assemble",
             side_effect=calculate,
         ):
             with self.assertRaisesRegex(
@@ -208,7 +167,7 @@ class DatabaseTests(unittest.TestCase):
         self.assertEqual(self.boundary(), before)
 
     def test_corrupt_source_does_not_write(self):
-        self.responses["1.zip"] = b"corrupt"
+        self.responses["1.json"] = b"corrupt"
         with self.assertRaisesRegex(ValueError, "size or hash"):
             self.build()
         self.assertIsNone(self.boundary())

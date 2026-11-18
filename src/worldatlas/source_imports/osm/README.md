@@ -10,80 +10,28 @@ Relations preserve inner rings by default. An explicit `holes: outer_envelope` s
 
 ## Boundary lines
 
-Construction records in Neon choose the sources, output feature IDs, and construction descriptions. Reuse these functions for boundaries made from a single chain of OpenStreetMap ways. Local processing and the Neon/R2 workflow are separate:
-
-- [`ways.py`](ways.py): read local archives and manifests, check source files, join ways into a GeoJSON line, and optionally check its geometry checksum.
-- [`build_boundary.py`](build_boundary.py): look up a raw source ID in Neon, download it from R2, assemble the line, and save its geometry and construction reference in Neon. Existing relationships are retained.
-- [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) supplies the recipe lookup, catalog, and download functions also used by other source processors.
-
-## Local processing
-
-Use the shared [project environment](../../../../environment.yml). `ways.py` uses Shapely to reject a line that crosses itself. An archive is a ZIP containing `manifest.json` and the OpenStreetMap JSON responses it names. Each response contains a way and the coordinates of its nodes. The manifest identifies the ways to join and the starting endpoint:
+Use `osm_way_chain` to join individual archived `/api/0.6/way/{id}/full.json` responses. Each file contains one OSM way and its nodes and has its own record in `atlas.source_assets`. The construction record supplies the selection and starting node.
 
 ```json
 {
-  "start_node": 1,
-  "ways": [{"id": 3, "file": "3.json", "sha256": "<response file SHA-256>"}]
-}
-```
-
-The ways must form one continuous, unbranched line and meet at shared node IDs. The assembled line must not revisit a node or cross itself. Lines crossing the antimeridian need a separate construction method that splits them there. Coordinates are longitude followed by latitude. Source checksums identify the exact response files used.
-
-Import these functions from `worldatlas.source_imports.osm.ways`:
-
-| Function | Input and result |
-| --- | --- |
-| `assemble(manifest, directory)` | Read the responses named in a parsed manifest and return a GeoJSON `LineString`. |
-| `assemble_archive(archive, archive_sha256, expected_geometry_sha256=None)` | Check the ZIP checksum and contents, then return the assembled line. Supply the optional geometry checksum to verify an existing result. |
-
-## Neon and R2 workflow
-
-The workflow also requires `psycopg` and `boto3`. Set `NEON_DATABASE_URL` to the working database and configure R2 credentials through `AWS_PROFILE`.
-
-Run from the repository root, replacing the uppercase placeholders with your Neon record IDs, and R2 account ID, and choosing a local work directory:
-
-```bash
-worldatlas-import \
-  --recipe CONSTRUCTION_ID \
-  --r2-endpoint https://ACCOUNT_ID.r2.cloudflarestorage.com \
-  --work-dir /absolute/path/to/worldatlas-work/inputs
-```
-
-| Argument | Meaning |
-| --- | --- |
-| `--recipe ID` | Construction record's `id` in `atlas.construction_records`. |
-| `--r2-endpoint` | Address used to access the Cloudflare R2 account. The catalog supplies the bucket and object path. |
-| `--work-dir` | Local directory for downloading and reusing the source archive. |
-| `--expected-geometry-sha256` | Optional checksum of the expected boundary geometry. A mismatch stops the command before saving. Omit it when building a changed boundary. |
-
-Set the `method` column on the construction row to `osm_way_chain` and supply its `arguments` as JSONB.
-
-```json
-{
-  "source_id": "raw-source-id",
+  "way_source_ids": ["first-archived-way", "second-archived-way"],
+  "start_node_id": 100,
   "feature_id": "boundary-id",
-  "source_feature_id": "manifest.json",
-  "basis": "A plain-English explanation of how the boundary is built."
+  "basis": "Join the selected OpenStreetMap ways into a boundary."
 }
 ```
 
-`osm_way_chain` selects the typed function in [`build_boundary.py`](build_boundary.py), which calls the assembly function in `ways.py`. Its signature defines required fields and types. [Shared validation](../README.md#argument-validation) checks them in Python and PostgreSQL. To change the construction, edit its arguments and rerun its ID.
+The order of `way_source_ids` has no effect. [`ways.py`](ways.py) starts at the supplied endpoint, follows shared node IDs, and reverses individual ways as needed. It preserves the coordinates and requires one open, continuous, unbranched line without self-intersections.
 
-`worldatlas-import` reads and validates the record, then `osm_way_chain()` looks up its exact raw source ID in `atlas.source_assets`, downloads its R2 object into the work directory, checks its size and checksum, and assembles the boundary. A checked local download is reused on later runs. An optional expected geometry checksum supports replaying an existing result.
+Run the [common import command](../README.md) with the construction ID, R2 endpoint and work directory. [`build_boundary.py`](build_boundary.py) resolves and verifies each file through the shared source catalog and saves the complete line in `atlas.source_features`. The typed source list generates the database links to each way file. Checked local files are reused. An optional `--expected-geometry-sha256` checks the complete line before saving.
 
-It saves the complete line in `atlas.source_features`. Its construction reference links to all cataloged inputs through `construction_sources`. Existing geographic rule references survive repeat imports. Map building checks how the selected lines divide its current scope before accepting cell assignments.
-
-Optional `before` and `after` control points extend the archived chain with WGS84 geodesics. `max_step_metres` controls their sampling. Every archived chain coordinate is preserved, and the complete line is produced in one import. Optional `evidence_source_ids` references supporting publications; their text is not read by the geometric calculation. The construction's `basis` records the human interpretation. These source arguments generate foreign-key dependency links from their Python `SourceId` annotations.
-
-For another boundary, create a construction record and run the same command. There is one OSM chain method, with optional extensions rather than a second constructor or a later adjustment step.
+Use `evidence_source_ids` to cite additional sources that explain the selection.
 
 ## Tests
 
-`test_ways.py` checks chain assembly, source verification and invalid geometry. `test_build_boundary.py` checks the Neon/R2 workflow and database transactions.
+`test_ways.py` checks chain assembly, direction and invalid geometry. `test_build_boundary.py` checks the Neon/R2 workflow and database transactions.
 
-Run the tests from the repository root:
-
-The map-builder integration test also uses GDAL's Python bindings.
+Run the tests from the repository root.
 
 ```bash
 python .github/scripts/run_tests.py --suite source_imports

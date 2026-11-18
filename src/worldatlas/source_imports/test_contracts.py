@@ -223,7 +223,7 @@ class DatabaseContractTests(unittest.TestCase):
         )
         self.database.execute(
             "UPDATE atlas.construction_records SET method='osm_way_chain',arguments=%s WHERE id='__links'",
-            (Jsonb(dict(ARGUMENTS["osm_way_chain"], source_id="evidence")),),
+            (Jsonb(dict(ARGUMENTS["osm_way_chain"], way_source_ids=["evidence"])),),
         )
         self.assertEqual(links(), ["evidence"])
         self.database.execute(

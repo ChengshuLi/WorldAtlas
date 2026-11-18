@@ -26,14 +26,11 @@ WHEN 'interpreted_geometry' THEN CASE WHEN jsonb_typeof(arguments) = 'object' TH
     AND ((item0.value -> 'geometry') ? 'type' AND COALESCE((((item0.value -> 'geometry') -> 'type') = '"Polygon"'::jsonb), FALSE))
     AND ((item0.value -> 'geometry') ? 'coordinates' AND COALESCE(CASE WHEN jsonb_typeof(((item0.value -> 'geometry') -> 'coordinates')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements(((item0.value -> 'geometry') -> 'coordinates')) AS item3(value) WHERE NOT COALESCE(CASE WHEN jsonb_typeof(item3.value) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements(item3.value) AS item4(value) WHERE NOT COALESCE(CASE WHEN jsonb_typeof(item4.value) = 'array' THEN (jsonb_array_length(item4.value) = 2 AND jsonb_typeof((item4.value -> 0)) = 'number' AND jsonb_typeof((item4.value -> 1)) = 'number') ELSE FALSE END, FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END), FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END, FALSE))) ELSE FALSE END
 WHEN 'osm_way_chain' THEN CASE WHEN jsonb_typeof(arguments) = 'object' THEN (
-    arguments - ARRAY['source_id', 'feature_id', 'source_feature_id', 'basis', 'before', 'after', 'max_step_metres', 'evidence_source_ids']::text[] = '{}'::jsonb
-    AND (arguments ? 'source_id' AND COALESCE((jsonb_typeof((arguments -> 'source_id')) = 'string' AND atlas.nonblank((arguments -> 'source_id') #>> '{}')), FALSE))
+    arguments - ARRAY['way_source_ids', 'start_node_id', 'feature_id', 'basis', 'evidence_source_ids']::text[] = '{}'::jsonb
+    AND (arguments ? 'way_source_ids' AND COALESCE(CASE WHEN jsonb_typeof((arguments -> 'way_source_ids')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((arguments -> 'way_source_ids')) AS item0(value) WHERE NOT COALESCE((jsonb_typeof(item0.value) = 'string' AND atlas.nonblank(item0.value #>> '{}')), FALSE))) ELSE FALSE END, FALSE))
+    AND (arguments ? 'start_node_id' AND COALESCE(CASE WHEN jsonb_typeof((arguments -> 'start_node_id')) = 'number' THEN trunc(((arguments -> 'start_node_id') #>> '{}')::numeric) = ((arguments -> 'start_node_id') #>> '{}')::numeric ELSE FALSE END, FALSE))
     AND (arguments ? 'feature_id' AND COALESCE((jsonb_typeof((arguments -> 'feature_id')) = 'string' AND atlas.nonblank((arguments -> 'feature_id') #>> '{}')), FALSE))
-    AND (arguments ? 'source_feature_id' AND COALESCE((jsonb_typeof((arguments -> 'source_feature_id')) = 'string' AND atlas.nonblank((arguments -> 'source_feature_id') #>> '{}')), FALSE))
     AND (arguments ? 'basis' AND COALESCE((jsonb_typeof((arguments -> 'basis')) = 'string' AND atlas.nonblank((arguments -> 'basis') #>> '{}')), FALSE))
-    AND (NOT arguments ? 'before' OR COALESCE((CASE WHEN jsonb_typeof((arguments -> 'before')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((arguments -> 'before')) AS item0(value) WHERE NOT COALESCE(CASE WHEN jsonb_typeof(item0.value) = 'array' THEN (jsonb_array_length(item0.value) = 2 AND jsonb_typeof((item0.value -> 0)) = 'number' AND jsonb_typeof((item0.value -> 1)) = 'number') ELSE FALSE END, FALSE))) ELSE FALSE END OR jsonb_typeof((arguments -> 'before')) = 'null'), FALSE))
-    AND (NOT arguments ? 'after' OR COALESCE((CASE WHEN jsonb_typeof((arguments -> 'after')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((arguments -> 'after')) AS item0(value) WHERE NOT COALESCE(CASE WHEN jsonb_typeof(item0.value) = 'array' THEN (jsonb_array_length(item0.value) = 2 AND jsonb_typeof((item0.value -> 0)) = 'number' AND jsonb_typeof((item0.value -> 1)) = 'number') ELSE FALSE END, FALSE))) ELSE FALSE END OR jsonb_typeof((arguments -> 'after')) = 'null'), FALSE))
-    AND (NOT arguments ? 'max_step_metres' OR COALESCE(jsonb_typeof((arguments -> 'max_step_metres')) = 'number', FALSE))
     AND (NOT arguments ? 'evidence_source_ids' OR COALESCE((CASE WHEN jsonb_typeof((arguments -> 'evidence_source_ids')) = 'array' THEN (NOT EXISTS (SELECT 1 FROM jsonb_array_elements((arguments -> 'evidence_source_ids')) AS item0(value) WHERE NOT COALESCE((jsonb_typeof(item0.value) = 'string' AND atlas.nonblank(item0.value #>> '{}')), FALSE))) ELSE FALSE END OR jsonb_typeof((arguments -> 'evidence_source_ids')) = 'null'), FALSE))) ELSE FALSE END
 WHEN 's130_areas' THEN CASE WHEN jsonb_typeof(arguments) = 'object' THEN (
     arguments - ARRAY['source_id', 'basis', 'gml_member', 'gml_sha256', 'selections']::text[] = '{}'::jsonb
@@ -115,7 +112,7 @@ RETURNS SETOF text LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $sources$
 SELECT DISTINCT value #>> '{}' FROM unnest(CASE method
 WHEN 'geodesic_trace' THEN ARRAY['lax $."source_ids"[*]']::jsonpath[]
 WHEN 'interpreted_geometry' THEN ARRAY['lax $."source_ids"[*]']::jsonpath[]
-WHEN 'osm_way_chain' THEN ARRAY['lax $."evidence_source_ids"[*]','lax $."source_id"']::jsonpath[]
+WHEN 'osm_way_chain' THEN ARRAY['lax $."evidence_source_ids"[*]','lax $."way_source_ids"[*]']::jsonpath[]
 WHEN 's130_areas' THEN ARRAY['lax $."source_id"']::jsonpath[]
 WHEN 'selected_osm_features' THEN ARRAY['lax $."source_id"']::jsonpath[]
 WHEN 'selected_vector_features' THEN ARRAY['lax $."source_id"']::jsonpath[]

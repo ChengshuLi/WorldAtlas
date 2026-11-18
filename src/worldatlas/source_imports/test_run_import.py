@@ -26,10 +26,10 @@ ARGUMENTS = {
         max_step_metres=1000,
     ),
     "osm_way_chain": dict(
-        source_id="raw",
+        way_source_ids=["raw"],
+        start_node_id=1,
         basis="Join ways",
         feature_id="boundary",
-        source_feature_id="manifest.json",
     ),
     "watershed_boundary": dict(
         feature_id="boundary",
@@ -138,7 +138,8 @@ class ImportSelectionTests(unittest.TestCase):
             {"basis": ""},
             {"boundary_id": None},
             {"extra": "unused"},
-            {"source_id": 1},
+            {"way_source_ids": [1]},
+            {"start_node_id": 1.5},
         ):
             with (
                 self.subTest(changes=changes),
