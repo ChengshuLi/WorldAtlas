@@ -485,6 +485,52 @@ for (const { name, options, fallback, sparse, uploadFailure } of [
   );
 }
 
+test("two fingers zoom the map around their moving midpoint", async () => {
+  const page = await browser.newPage({
+    viewport: { width: 390, height: 700 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  try {
+    await loaded(page, `/${candidate}/index.html`, "v9.0");
+    await page.getByRole("button", { name: "Collapse legend" }).tap();
+    const canvas = await page.locator("#canvas").boundingBox();
+    const middle = Math.round(canvas.x + canvas.width * 0.6);
+    const y = Math.round(canvas.y + canvas.height / 2);
+    const selection = page.locator("#selection");
+    const touch = await page.context().newCDPSession(page);
+
+    async function inspect(x) {
+      await page.touchscreen.tap(x, y);
+      return selection.textContent();
+    }
+    function fingers(x, radius) {
+      return [{ x: x - radius, y, id: 0 }, { x: x + radius, y, id: 1 }];
+    }
+    async function pinch(from, to) {
+      await touch.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: from });
+      await touch.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: to });
+      await touch.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    }
+
+    const anchor = await inspect(middle);
+    const beforeZoom = await inspect(middle + 80);
+    assert.match(anchor, /^Cell /);
+    assert.notEqual(beforeZoom, anchor);
+
+    await pinch(fingers(middle, 30), fingers(middle + 8, 60));
+    assert.equal(await selection.textContent(), beforeZoom);
+    assert.equal(await page.evaluate(() => visualViewport.scale), 1);
+    assert.equal(await inspect(middle + 8), anchor);
+    assert.notEqual(await inspect(middle + 80), beforeZoom);
+
+    await pinch(fingers(middle + 8, 60), fingers(middle, 30));
+    assert.equal(await inspect(middle + 80), beforeZoom);
+  } finally {
+    await page.close();
+  }
+});
+
 test(
   "homepage and preview keep their own map when opening data sources",
   { timeout: 30_000 },

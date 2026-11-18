@@ -69,7 +69,6 @@ button:disabled {
   position: relative;
   height: calc(100dvh - 76px);
   overflow: hidden;
-  touch-action: none;
 }
 #canvas {
   display: block;
@@ -77,6 +76,7 @@ button:disabled {
   height: 100%;
   outline-offset: -3px;
   cursor: grab;
+  touch-action: none;
 }
 #canvas:active {
   cursor: grabbing;

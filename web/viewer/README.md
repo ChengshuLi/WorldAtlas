@@ -14,6 +14,8 @@ Future modes share this same legend panel. Switching mode changes the map and le
 
 Selecting entries keeps their fills at full brightness and dims the other colors. A white outline surrounds the combined selected land and water, with no line between adjacent selected entities. Hovering another legend entry temporarily brightens it while preserving the selection outline.
 
+On a touchscreen, tap to inspect a cell, drag with one finger to pan, and pinch with two fingers to zoom around their midpoint.
+
 From the repository root, run `npm test` for grid, viewer, and Worker checks that need only Node. For browser tests, install the development dependencies and Chromium, then run the separate suite.
 
 ```bash

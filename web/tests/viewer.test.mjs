@@ -49,6 +49,7 @@ class Element {
     (this.handlers[t] ??= []).push(f);
   }
   dispatch(t, e = {}) {
+    e.type ??= t;
     e.target ??= this;
     e.preventDefault ??= () => {
       e.prevented = true;

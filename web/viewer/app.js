@@ -21,7 +21,6 @@ let scale = 1;
 let ox = 0;
 let oy = 0;
 let dpr = 1;
-let drag = null;
 let drawing = false;
 
 function minScale() {
@@ -52,11 +51,17 @@ function fitWorld() {
   requestDraw();
 }
 
-function zoom(factor, x = map.clientWidth / 2, y = map.clientHeight / 2) {
+function zoom(
+  factor,
+  x = map.clientWidth / 2,
+  y = map.clientHeight / 2,
+  nextX = x,
+  nextY = y,
+) {
   if (!meta) return;
   const nextScale = Math.max(minScale(), Math.min(36, scale * factor));
-  ox = x - ((x - ox) * nextScale) / scale;
-  oy = y - ((y - oy) * nextScale) / scale;
+  ox = nextX - ((x - ox) * nextScale) / scale;
+  oy = nextY - ((y - oy) * nextScale) / scale;
   scale = nextScale;
   constrain();
   requestDraw();
@@ -203,38 +208,72 @@ function bindMapControls() {
 }
 
 function bindCanvasControls() {
+  const pointers = new Map();
+  let drag = null;
+  let pinch = null;
+  const startDrag = ({ x, y }, panning = false) => ({ x, y, ox, oy, panning });
+
+  function measurePinch() {
+    const [a, b] = pointers.values();
+    return {
+      x: (a.x + b.x) / 2,
+      y: (a.y + b.y) / 2,
+      distance: Math.hypot(b.x - a.x, b.y - a.y),
+    };
+  }
+
   canvas.addEventListener("pointerdown", (event) => {
-    if (!data) return;
+    if (!data || event.button > 0 || pointers.size === 2) return;
+    const active = pointers.values().next().value;
+    if (active && (active.type !== "touch" || event.pointerType !== "touch")) return;
+
+    const point = { x: event.offsetX, y: event.offsetY, type: event.pointerType };
     canvas.focus({ preventScroll: true });
     canvas.setPointerCapture(event.pointerId);
-    drag = {
-      id: event.pointerId,
-      x: event.offsetX,
-      y: event.offsetY,
-      ox,
-      oy,
-      panning: false,
-    };
+    pointers.set(event.pointerId, point);
+    if (pointers.size === 2) {
+      pinch = measurePinch();
+      drag = null;
+    } else {
+      drag = startDrag(point);
+    }
   });
   canvas.addEventListener("pointermove", (event) => {
-    if (!data || drag?.id !== event.pointerId) return;
-    const dx = event.offsetX - drag.x;
-    const dy = event.offsetY - drag.y;
+    const point = pointers.get(event.pointerId);
+    if (!data || !point) return;
+    point.x = event.offsetX;
+    point.y = event.offsetY;
+    if (pinch) {
+      const next = measurePinch();
+      if (pinch.distance && next.distance) {
+        zoom(next.distance / pinch.distance, pinch.x, pinch.y, next.x, next.y);
+      }
+      pinch = next;
+      return;
+    }
+    const dx = point.x - drag.x;
+    const dy = point.y - drag.y;
     if (!drag.panning && Math.hypot(dx, dy) < 5) return;
     drag.panning = true;
     ox = drag.ox + dx;
     oy = drag.oy + dy;
     requestDraw();
   });
-  canvas.addEventListener("pointerup", (event) => {
-    if (drag?.id === event.pointerId && !drag.panning) {
+  function finishPointer(event) {
+    if (!pointers.delete(event.pointerId)) return;
+    if (pinch) {
+      pinch = null;
+      drag = startDrag(pointers.values().next().value, true);
+      return;
+    }
+    if (event.type === "pointerup" && !drag.panning) {
       selectCell(cellAt(event.offsetX, event.offsetY));
     }
     drag = null;
-  });
-  canvas.addEventListener("pointercancel", () => {
-    drag = null;
-  });
+  }
+  canvas.addEventListener("pointerup", finishPointer);
+  canvas.addEventListener("pointercancel", finishPointer);
+  canvas.addEventListener("lostpointercapture", finishPointer);
   canvas.addEventListener(
     "wheel",
     (event) => {
@@ -276,7 +315,7 @@ function bindCanvasControls() {
   });
   canvas.addEventListener("webglcontextlost", (event) => {
     event.preventDefault();
-    drag = null;
+    pointers.clear();
     renderer.destroy();
     try {
       setRenderer(replaceWithCanvas(canvas, meta, data));
