@@ -112,6 +112,8 @@ function selectCell(cell) {
 function renderLegend() {
   const list = $("#legend-list");
   list.replaceChildren();
+  const clear = $("#legend-clear");
+  clear.hidden = selectedGroups.size === 0;
   const visible = matchingLegendItems(items, $("#legend-search").value);
   if (!visible.length) {
     const empty = document.createElement("div");
@@ -158,13 +160,12 @@ function renderLegend() {
     button.addEventListener("click", () => {
       selectedGroups = toggleSelection(selectedGroups, item.id);
       hoveredGroup = null;
-      renderLegend();
+      button.setAttribute("aria-pressed", String(selectedGroups.has(item.id)));
+      clear.hidden = selectedGroups.size === 0;
       requestDraw();
     });
     list.append(button);
   }
-
-  $("#legend-clear").hidden = selectedGroups.size === 0;
 }
 
 function setLegend(open) {
@@ -185,6 +186,7 @@ function bindLegendControls() {
     selectedGroups.clear();
     hoveredGroup = null;
     renderLegend();
+    $("#legend-search").focus({ preventScroll: true });
     requestDraw();
   });
 }
@@ -193,6 +195,7 @@ function bindMapControls() {
   $("#tool-in").addEventListener("click", () => zoom(2));
   $("#tool-out").addEventListener("click", () => zoom(0.5));
   $("#tool-world").addEventListener("click", fitWorld);
+  $("#tool-sources").addEventListener("click", () => $("#sources-dialog").showModal());
 
   canvas.addEventListener("pointerdown", (event) => {
     if (!data) return;
@@ -245,11 +248,6 @@ function bindMapControls() {
     )
       return;
     const key = event.key.toLowerCase();
-    if (key === "tab" && !event.shiftKey) {
-      event.preventDefault();
-      fitWorld();
-      return;
-    }
     if (key === "+" || key === "=") {
       event.preventDefault();
       zoom(2);
@@ -320,6 +318,6 @@ canvas.addEventListener("webglcontextlost", (event) => {
   status.textContent = "Graphics context lost. Reload to restore the map.";
   status.classList.add("error");
 });
-window.addEventListener("pagehide", () => renderer?.destroy?.(), {
-  once: true,
+window.addEventListener("pagehide", (event) => {
+  if (!event.persisted) renderer?.destroy();
 });

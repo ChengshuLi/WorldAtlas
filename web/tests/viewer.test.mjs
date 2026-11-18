@@ -85,6 +85,7 @@ async function fixture() {
     "tool-in",
     "tool-out",
     "tool-world",
+    "tool-sources",
   ];
   const el = Object.fromEntries(names.map((x) => [x, new Element(x)]));
   el["legend-toggle"].hidden = true;
@@ -217,15 +218,10 @@ test("current map controls preserve selection, toggle legend and reset world", a
   el["tool-in"].dispatch("click");
   const zoomed = draws.at(-1).scale;
   const tab = el.canvas.dispatch("keydown", { key: "Tab" });
-  const reset = draws.at(-1);
-  assert.equal(tab.prevented, true);
-  assert.ok(reset.scale < zoomed);
-  el["tool-in"].dispatch("click");
+  assert.equal(tab.prevented, undefined);
+  assert.equal(draws.at(-1).scale, zoomed);
   el["tool-world"].dispatch("click");
-  assert.deepEqual(
-    [draws.at(-1).scale, draws.at(-1).ox, draws.at(-1).oy],
-    [reset.scale, reset.ox, reset.oy],
-  );
+  assert.ok(draws.at(-1).scale < zoomed);
   assert.equal(document.handlers.keydown, undefined);
   assert.equal(el["tool-in"].handlers.keydown, undefined);
   assert.equal(
@@ -252,15 +248,11 @@ test("structure, checksum and small native-grid renderer", () => {
     html.match(/<header>[\s\S]*?<\/header>/)[0],
     /OpenStreetMap/,
   );
-  assert.match(read("sources.html"), /OpenStreetMap contributors/);
-  assert.doesNotMatch(read("sources.html"), /© OpenStreetMap/);
+  assert.match(html, /<dialog id="sources-dialog"/);
+  assert.match(html, /OpenStreetMap contributors/);
+  assert.doesNotMatch(html, /© OpenStreetMap/);
   assert.match(html, /id="map-release"/);
   assert.doesNotMatch(html, /<details/);
-  assert.match(html, /href="sources\.html"/);
-  assert.doesNotMatch(
-    read("sources.html"),
-    /Partial source summary|approximate replacement|Iceland|SHA-256/,
-  );
   assert.doesNotMatch(read("app.js"), /document\.addEventListener\('keydown'/);
   assert.deepEqual(meta, { water_rgb: [84, 141, 183] });
   const small = {

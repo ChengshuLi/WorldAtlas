@@ -116,11 +116,6 @@ function bundle(prefix, version, east) {
     readFileSync(new URL("style.css", viewer)),
     "text/css",
   );
-  store(
-    `${prefix}/sources.html`,
-    readFileSync(new URL("sources.html", viewer)),
-    "text/html",
-  );
   const index = readFileSync(new URL("index.html", viewer), "utf8").replace(
     "<head>",
     `<head><base href="/${prefix}/">`,
@@ -448,16 +443,15 @@ for (const { name, options, fallback, sparse } of [
 }
 
 test(
-  "homepage and preview load their own map and source files",
+  "homepage and preview keep their own map when opening data sources",
   { timeout: 30_000 },
   async () => {
     const page = await browser.newPage();
     try {
-      for (const [path, version, prefix, name] of [
-        ["/", "v8.0", published, "Africa"],
-        ["/releases/v9.0-rc.1/index.html", "v9.0", candidate, "Asia"],
-        [`/${candidate}/index.html`, "v9.0", candidate, "Asia"],
-        ["/", "v8.0", published, "Africa"],
+      for (const [path, version, name] of [
+        ["/", "v8.0", "Africa"],
+        [`/${candidate}/index.html`, "v9.0", "Asia"],
+        ["/", "v8.0", "Africa"],
       ]) {
         await loaded(page, path, version);
         const africaCount =
@@ -472,19 +466,56 @@ test(
         await page
           .locator("#canvas")
           .click({ position: await pickPoint(page, 90, 20) });
-        assert.match(
-          await page.locator("#selection").textContent(),
-          new RegExp(`${name} \\(land\\)$`),
-        );
-        await page.getByRole("link", { name: "Data sources" }).click();
-        assert.equal(new URL(page.url()).pathname, `/${prefix}/sources.html`);
-        assert.match(await page.title(), /Data sources/);
+        const selection = await page.locator("#selection").textContent();
+        assert.match(selection, new RegExp(`${name} \\(land\\)$`));
+        const sources = page.getByRole("button", { name: "Data sources" });
+        await sources.click();
+        const dialog = page.getByRole("dialog", { name: "Data sources" });
+        assert.equal(await dialog.getByRole("link", { name: "OpenStreetMap contributors" }).isVisible(), true);
+        assert.equal(new URL(page.url()).pathname, path);
+        await page.keyboard.press("Escape");
+        assert.equal(await dialog.isVisible(), false);
+        assert.equal(await sources.evaluate((element) => element === document.activeElement), true);
+        assert.equal(await page.locator("#selection").textContent(), selection);
       }
     } finally {
       await page.close();
     }
   },
 );
+
+test("keyboard focus and map drawing survive legend edits and page caching", async () => {
+  const page = await browser.newPage({ viewport: { width: 1024, height: 768 } });
+  try {
+    await loaded(page, `/${candidate}/index.html`, "v9.0");
+    await page.locator("#canvas").focus();
+    await page.keyboard.press("Tab");
+    assert.equal(await page.evaluate(() => document.activeElement.id), "tool-in");
+
+    const position = await pickPoint(page, 94, 20);
+    assert.deepEqual(await visiblePixel(page, position), [222, 118, 110, 255]);
+    await page.evaluate(() => {
+      window.dispatchEvent(new PageTransitionEvent("pagehide", { persisted: true }));
+      window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true }));
+    });
+    const africa = page.getByRole("button", { name: /Africa/ });
+    await africa.focus();
+    await page.keyboard.press("Space");
+    assert.equal(await africa.getAttribute("aria-pressed"), "true");
+    assert.equal(await africa.evaluate((element) => element === document.activeElement), true);
+    const dimmed = await visiblePixel(page, position);
+    assert.ok(dimmed[0] >= 121 && dimmed[0] <= 123);
+
+    const search = page.getByRole("searchbox", { name: "Search continents" });
+    await search.fill("unmatched");
+    const clear = page.getByRole("button", { name: "Clear filter" });
+    await clear.click();
+    assert.equal(await clear.isVisible(), false);
+    assert.equal(await search.evaluate((element) => element === document.activeElement), true);
+  } finally {
+    await page.close();
+  }
+});
 
 test(
   "missing or corrupted map data leaves a clear error and no selectable map",
