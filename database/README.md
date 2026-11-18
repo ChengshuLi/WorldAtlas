@@ -25,6 +25,8 @@ Inserting a child entity also creates its map codes. Land and water entities get
 
 `geographic_rules` selects one of six operations. `geographic_rule_features` provides source areas, component-identifying points, boundaries or distance references. Optional `connected_to` links retain cells connected to any of the linked points. `geographic_rule_targets` identifies direct-child owners and, for divisions, their label points. Each rule stores its rationale. `geographic_rule_sources` links supporting raw sources and records the cited section and interpretation for each one. Ordinary foreign keys and deferred checks reject missing/forbidden roles, incorrect geometry types and invalid targets. See the [division guide](../src/worldatlas/map_build/division/README.md).
 
+Add a rule citation when it helps a reviewer understand a current decision beyond what the feature's construction already documents. Keep the decision in `rationale` and use each citation's `interpretation` to state what that source establishes. Review the citations alongside the rule when changing its scope.
+
 `map_releases` points to a release folder and pins `manifest.json` by SHA-256. The manifest pins each release file. At most one bundle is official per version; at most one official bundle is current. Publication changes flags and the fixed R2 homepage separately from map calculation. See [release commands](../src/worldatlas/map_releases/README.md).
 
 ## Editing and replay
