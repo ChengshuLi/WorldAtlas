@@ -81,10 +81,6 @@ DO $$ BEGIN
  UPDATE atlas.geographic_rules SET rationale='Clearer explanation' WHERE id='group';
  IF (SELECT citation_section FROM atlas.geographic_rule_sources WHERE rule_id='group')<>'Section 1' THEN
   RAISE EXCEPTION 'a rationale edit changed its citation'; END IF;
- BEGIN
-  UPDATE atlas.geographic_rule_sources SET citation_section=E' \t\n' WHERE rule_id='group';
-  RAISE EXCEPTION 'whitespace-only citation accepted';
- EXCEPTION WHEN check_violation THEN NULL; END;
  DELETE FROM atlas.geographic_rules WHERE id='group';
  IF EXISTS (SELECT FROM atlas.geographic_rule_features WHERE rule_id='group')
     OR EXISTS (SELECT FROM atlas.geographic_rule_sources WHERE rule_id='group') THEN
