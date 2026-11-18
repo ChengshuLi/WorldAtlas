@@ -117,8 +117,8 @@ a temporary local database, installs the schema, and runs the database checks.
 
 ## Viewer tools and tests
 
-Use Node 22 or newer. From the repository root, install the locked dependencies
-and run the Node tests.
+Use the Node version in [`.node-version`](.node-version), which CI also reads.
+From the repository root, install the locked dependencies and run the Node tests.
 
 ```bash
 npm ci
