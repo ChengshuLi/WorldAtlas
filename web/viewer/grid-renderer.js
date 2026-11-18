@@ -237,8 +237,12 @@ export function createRenderer(canvas, meta, data) {
     console.warn("WebGL map setup failed. Using Canvas.", error);
   }
 
-  // A canvas with a WebGL context cannot open a 2D context.
   gl.getExtension("WEBGL_lose_context")?.loseContext();
+  return replaceWithCanvas(canvas, meta, data);
+}
+
+export function replaceWithCanvas(canvas, meta, data) {
+  // A canvas with a WebGL context cannot open a 2D context.
   const replacement = canvas.cloneNode(false);
   const fallback = canvasRenderer(replacement, meta, data);
   const focused = canvas.ownerDocument.activeElement === canvas;
@@ -261,6 +265,7 @@ function webglRenderer(canvas, gl, width, meta, data) {
   uniform usampler2D uRuns;
   uniform int uTextureWidth;
   uniform ivec2 uWorld;
+  uniform ivec2 uOriginCell;
   uniform vec2 uViewport;
   uniform vec2 uOffset;
   uniform float uScale;
@@ -273,7 +278,7 @@ function webglRenderer(canvas, gl, width, meta, data) {
   uint runWord(int i) { return texelFetch(uRuns, ivec2(i % uTextureWidth, i / uTextureWidth), 0).r; }
   uvec4 category(uint i) { return texelFetch(uPalette, ivec2(int(i) % uTextureWidth, int(i) / uTextureWidth), 0); }
   uint codeAt(vec2 screen) {
-    ivec2 cell = ivec2(floor((screen - uOffset) / uScale));
+    ivec2 cell = uOriginCell + ivec2(floor((screen - uOffset) / uScale));
     cell.x=((cell.x % uWorld.x)+uWorld.x)%uWorld.x;
     if (cell.y < 0 || cell.y >= uWorld.y) return 0u;
     int lo = int(rowWord(cell.y)), hi = int(rowWord(cell.y + 1));
@@ -304,8 +309,9 @@ function webglRenderer(canvas, gl, width, meta, data) {
     }
     if (uSelected.x >= 0) {
       float ratio=uScale/uCssScale;
-      float selectedX=float(uSelected.x)+floor((position.x-float(uSelected.x))/float(uWorld.x)+0.5)*float(uWorld.x);
-      vec2 q=(position-vec2(selectedX,float(uSelected.y)))*uScale;
+      vec2 selectedCell=vec2(uSelected-uOriginCell);
+      selectedCell.x+=floor((position.x-selectedCell.x)/float(uWorld.x)+0.5)*float(uWorld.x);
+      vec2 q=(position-selectedCell)*uScale;
       float side=max(uScale,3.0*ratio);
       if(q.x>=0.0 && q.y>=0.0 && q.x<side && q.y<side && min(min(q.x,q.y),min(side-q.x,side-q.y))<1.5*ratio) rgb=vec3(0.09,0.17,0.23);
     }
@@ -341,13 +347,6 @@ function webglRenderer(canvas, gl, width, meta, data) {
   const slots = new Map(categoryIds.map((code, index) => [code, index + 1]));
   function texture(values, unit, name, remap = false) {
     const height = Math.ceil(values.length / width);
-    const padded = new Uint32Array(width * height);
-    padded.set(values);
-    // GPU slots are local render indexes. The stored map and picking keep their
-    // original uint32 codes; sparse large codes never allocate sparse palettes.
-    if (remap)
-      for (let i = 1; i < values.length; i += 2)
-        padded[i] = slots.get(values[i]);
     const t = gl.createTexture();
     textures.push(t);
     gl.activeTexture(gl.TEXTURE0 + unit);
@@ -356,17 +355,30 @@ function webglRenderer(canvas, gl, width, meta, data) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texImage2D(
-      gl.TEXTURE_2D,
-      0,
-      gl.R32UI,
-      width,
+    gl.texStorage2D(gl.TEXTURE_2D, 1, gl.R32UI, width, height);
+    if (gl.getError() !== gl.NO_ERROR) throw Error("GPU native map allocation failed");
+
+    const rowsPerBatch = Math.min(
       height,
-      0,
-      gl.RED_INTEGER,
-      gl.UNSIGNED_INT,
-      padded,
+      Math.max(1, Math.floor((4 << 20) / (width * Uint32Array.BYTES_PER_ELEMENT))),
     );
+    const batch = new Uint32Array(width * rowsPerBatch);
+    for (let y = 0; y < height; y += rowsPerBatch) {
+      const batchHeight = Math.min(rowsPerBatch, height - y);
+      const start = y * width;
+      const words = width * batchHeight;
+      const source = values.subarray(start, start + words);
+      batch.set(source);
+      batch.fill(0, source.length, words);
+      // Preserve the endpoint/code pairs across batches, including odd row widths.
+      if (remap)
+        for (let i = 1 - (start % 2); i < source.length; i += 2)
+          batch[i] = slots.get(source[i]);
+      gl.texSubImage2D(
+        gl.TEXTURE_2D, 0, 0, y, width, batchHeight,
+        gl.RED_INTEGER, gl.UNSIGNED_INT, batch,
+      );
+    }
     if (gl.getError() !== gl.NO_ERROR) throw Error("GPU native map upload failed");
     gl.uniform1i(gl.getUniformLocation(program, name), unit);
   }
@@ -404,6 +416,7 @@ function webglRenderer(canvas, gl, width, meta, data) {
   let uniforms = Object.fromEntries(
     [
       "uViewport",
+      "uOriginCell",
       "uOffset",
       "uScale",
       "uCssScale",
@@ -433,7 +446,16 @@ function webglRenderer(canvas, gl, width, meta, data) {
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.useProgram(program);
       gl.uniform2f(uniforms.uViewport, canvas.width, canvas.height);
-      gl.uniform2f(uniforms.uOffset, ox * dpr, oy * dpr);
+      // Keep fractional screen coordinates close to the viewport so the shader
+      // does not round away subpixel boundaries at distant grid columns or rows.
+      const column = Math.floor(-ox / scale);
+      const row = Math.max(0, Math.floor(-oy / scale));
+      gl.uniform2i(uniforms.uOriginCell, column, row);
+      gl.uniform2f(
+        uniforms.uOffset,
+        (ox + column * scale) * dpr,
+        (oy + row * scale) * dpr,
+      );
       gl.uniform1f(uniforms.uScale, scale * dpr);
       gl.uniform1f(uniforms.uCssScale, scale);
       gl.uniform2i(uniforms.uSelected, selected?.x ?? -1, selected?.y ?? -1);

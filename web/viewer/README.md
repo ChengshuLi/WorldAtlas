@@ -4,7 +4,7 @@ This folder contains the WorldAtlas interface. The checked-in `config.json` hold
 
 The displayed combined SHA-256 is calculated over the decompressed little-endian u32 row-offset bytes followed immediately by the decompressed little-endian u32 run bytes. The client verifies the row and run hashes before use.
 
-The viewer sizes WebGL textures to fit the device. When the grid exceeds those limits or graphics setup fails, Canvas draws from the same verified grid already in memory.
+The viewer sizes WebGL textures to fit the device and uploads the grid in batches to reduce temporary memory. When the grid exceeds those limits, graphics setup fails, or the browser loses WebGL after loading, Canvas draws from the same verified grid already in memory.
 
 The Cloudflare Worker serves viewer files and map data from R2. Each candidate has a directory at `releases/CANDIDATE/`. Publishing copies that candidate's homepage to `index.html`, which the Worker serves at `/`. The homepage's base URL selects its release files. The Data sources dialog shows OpenStreetMap, Overture Maps, and IHO attributions over the map.
 

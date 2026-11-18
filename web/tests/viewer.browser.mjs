@@ -195,12 +195,13 @@ before(async () => {
 
   server = createServer(async (request, reply) => {
     try {
+      const read = async (key) => objects.get(key);
       const response = await worker.fetch(
         new Request(new URL(request.url, origin), {
           method: request.method,
           headers: request.headers,
         }),
-        { ATLAS: { get: async (key) => objects.get(key) } },
+        { ATLAS: { get: read, head: read } },
       );
       reply.writeHead(response.status, Object.fromEntries(response.headers));
       reply.end(Buffer.from(await response.arrayBuffer()));
@@ -318,11 +319,11 @@ for (const { name, options, fallback, sparse, uploadFailure } of [
             if (path.endsWith(".u32le.gz")) gridRequests.push(path);
           });
           await page.addInitScript(() => {
-            const { texImage2D, getError } = WebGL2RenderingContext.prototype;
+            const { texSubImage2D, getError } = WebGL2RenderingContext.prototype;
             const failed = new WeakSet();
-            WebGL2RenderingContext.prototype.texImage2D = function (...args) {
+            WebGL2RenderingContext.prototype.texSubImage2D = function (...args) {
               failed.add(this);
-              texImage2D.apply(this, args);
+              texSubImage2D.apply(this, args);
             };
             WebGL2RenderingContext.prototype.getError = function () {
               return failed.delete(this) ? this.OUT_OF_MEMORY : getError.call(this);
@@ -554,6 +555,92 @@ test("keyboard focus and map drawing survive legend edits and page caching", asy
     await clear.click();
     assert.equal(await clear.isVisible(), false);
     assert.equal(await search.evaluate((element) => element === document.activeElement), true);
+  } finally {
+    await page.close();
+  }
+});
+
+test("legend search clears hover from a removed entry", async () => {
+  const page = await browser.newPage({ viewport: { width: 1024, height: 768 } });
+  try {
+    await loaded(page, `/${candidate}/index.html`, "v9.0");
+    const point = await pickPoint(page, 74, 20);
+    const color = await visiblePixel(page, point);
+    await page.getByRole("button", { name: /Africa/ }).hover();
+    assert.notDeepEqual(await visiblePixel(page, point), color);
+    await page.getByRole("searchbox").fill("unmatched");
+    assert.deepEqual(await visiblePixel(page, point), color);
+  } finally {
+    await page.close();
+  }
+});
+
+test("running map recovers in Canvas after losing WebGL", async () => {
+  const page = await browser.newPage({ viewport: { width: 1024, height: 768 } });
+  try {
+    let gridRequests = 0;
+    page.on("request", (request) => {
+      if (new URL(request.url()).pathname.endsWith(".u32le.gz")) gridRequests++;
+    });
+    await loaded(page, `/${candidate}/index.html`, "v9.0");
+    const point = await pickPoint(page, 90, 20);
+    const canvas = page.locator("#canvas");
+    const asia = page.getByRole("button", { name: /Asia/ });
+    await asia.click();
+    await page.getByRole("button", { name: "Zoom in" }).click();
+    await canvas.click({ position: point });
+    const selected = await page.locator("#selection").textContent();
+    assert.match(selected, /^Cell 75, 25 ·/);
+
+    await canvas.evaluate((surface) => {
+      surface.getContext("webgl2").getExtension("WEBGL_lose_context").loseContext();
+    });
+    await page.waitForFunction(() => Boolean(document.querySelector("#canvas").getContext("2d")));
+    assert.equal(await page.locator("#status").textContent(), "");
+    assert.equal(await asia.getAttribute("aria-pressed"), "true");
+    assert.equal(await page.locator("#selection").textContent(), selected);
+    await canvas.click({ position: { x: point.x - 36, y: point.y } });
+    assert.notEqual(await page.locator("#selection").textContent(), selected);
+    await canvas.click({ position: point });
+    assert.equal(await page.locator("#selection").textContent(), selected);
+    assert.equal(gridRequests, 2);
+  } finally {
+    await page.close();
+  }
+});
+
+test("WebGL agrees with Canvas at distant subpixel boundaries", async () => {
+  const page = await browser.newPage();
+  try {
+    await page.goto(`${origin}/health`);
+    const { gpu, cpu } = await page.evaluate(async (prefix) => {
+      const { createRenderer, renderPixels } = await import(`/${prefix}/grid-renderer.js`);
+      const canvas = document.createElement("canvas");
+      canvas.width = 32;
+      canvas.height = 1;
+      const meta = {
+        width: 131072,
+        height: 1,
+        palette: new Map([[1, [244, 10, 14]], [2, [10, 24, 234]]]),
+      };
+      const data = {
+        rows: Uint32Array.of(0, 2),
+        runs: Uint32Array.of(100000, 1, 131072, 2),
+      };
+      const renderer = createRenderer(canvas, meta, data);
+      const gl = canvas.getContext("webgl2");
+      const scale = 7.37;
+      const ox = 16.55 - scale * 100000;
+      renderer.draw({ scale, ox, oy: 0, dpr: 1 });
+      const actual = new Uint8Array(32 * 4);
+      gl.readPixels(0, 0, 32, 1, gl.RGBA, gl.UNSIGNED_BYTE, actual);
+      renderer.destroy();
+      return {
+        gpu: Array.from(actual),
+        cpu: Array.from(new Uint8Array(renderPixels(meta, data, 32, 1, scale, ox, 0).buffer)),
+      };
+    }, candidate);
+    assert.deepEqual(gpu, cpu);
   } finally {
     await page.close();
   }

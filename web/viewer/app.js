@@ -1,5 +1,5 @@
 import { loadLocalGrid, cellValue, wrapColumn } from "./grid-data.js";
-import { createRenderer } from "./grid-renderer.js";
+import { createRenderer, replaceWithCanvas } from "./grid-renderer.js";
 import {
   makeLegendItems,
   matchingLegendItems,
@@ -181,7 +181,11 @@ function setLegend(open) {
 function bindLegendControls() {
   $("#legend-collapse").addEventListener("click", () => setLegend(false));
   $("#legend-toggle").addEventListener("click", () => setLegend(true));
-  $("#legend-search").addEventListener("input", renderLegend);
+  $("#legend-search").addEventListener("input", () => {
+    hoveredGroup = null;
+    renderLegend();
+    requestDraw();
+  });
   $("#legend-clear").addEventListener("click", () => {
     selectedGroups.clear();
     hoveredGroup = null;
@@ -271,13 +275,28 @@ function bindCanvasControls() {
   });
   canvas.addEventListener("webglcontextlost", (event) => {
     event.preventDefault();
-    renderer?.destroy();
-    renderer = null;
-    data = null;
     drag = null;
-    status.textContent = "Graphics context lost. Reload to restore the map.";
-    status.classList.add("error");
-  });
+    renderer.destroy();
+    try {
+      setRenderer(replaceWithCanvas(canvas, meta, data));
+      requestDraw();
+    } catch (error) {
+      renderer = null;
+      data = null;
+      showError(error);
+    }
+  }, { once: true });
+}
+
+function setRenderer(next) {
+  renderer = next;
+  canvas = renderer.canvas;
+  bindCanvasControls();
+}
+
+function showError(error) {
+  status.textContent = error?.message || String(error);
+  status.classList.add("error");
 }
 
 async function startViewer() {
@@ -305,17 +324,14 @@ async function startViewer() {
       release.textContent = `${meta.map_version.toUpperCase()} · SHA-256 ${meta.combined_sha256.slice(0, 12)}`;
       release.title = `SHA-256 of the decoded rows and runs. Full hash: ${meta.combined_sha256}`;
     }
-    renderer = createRenderer(canvas, meta, grid);
-    canvas = renderer.canvas;
+    setRenderer(createRenderer(canvas, meta, grid));
     data = grid;
-    bindCanvasControls();
     renderLegend();
     resize();
     fitWorld();
     status.textContent = "";
   } catch (error) {
-    status.textContent = error?.message || String(error);
-    status.classList.add("error");
+    showError(error);
   }
 }
 

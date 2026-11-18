@@ -10,6 +10,9 @@ test("health reports service readiness", async () => {
   const result = await worker.fetch(request("/health"), env);
   assert.equal(result.status, 200);
   assert.deepEqual(await result.json(), { project: "worldatlas", status: "ready" });
+  const head = await worker.fetch(request("/health", "HEAD"), env);
+  assert.equal(head.headers.get("Content-Type"), "application/json");
+  assert.equal(head.body, null);
 });
 
 test("evidence and arbitrary bucket paths are not publicly routed", async () => {
@@ -41,10 +44,10 @@ test("release assets keep their stored media type and support HEAD", async () =>
   const seen = [];
   const bound = {
     ATLAS: {
-      get: async (key) => {
+      get: async () => { throw Error("HEAD must use bucket metadata"); },
+      head: async (key) => {
         seen.push(key);
         return {
-          body: "example",
           httpEtag: '"abc"',
           writeHttpMetadata: (h) => h.set("Content-Type", "application/gzip"),
         };
@@ -63,7 +66,7 @@ test("release assets keep their stored media type and support HEAD", async () =>
 
 test("numbered candidates stay separate from the published homepage", async () => {
   const requested = [];
-  const storage = { ATLAS: { get: async (key) => {
+  function read(key) {
     requested.push(key);
     if (key === "index.html") return { body: "V8" };
     if (key === "releases/v9.0-rc.1/index.html" || key === "releases/v9.0-rc.2/index.html") {
@@ -71,14 +74,17 @@ test("numbered candidates stay separate from the published homepage", async () =
         httpEtag: '"candidate"', writeHttpMetadata: h => h.set("Content-Type", "text/html") };
     }
     return null;
-  } } };
+  }
+  const storage = { ATLAS: { get: read, head: read } };
   assert.equal(await (await worker.fetch(request("/"), storage)).text(), "V8");
+  assert.equal((await worker.fetch(request("/", "HEAD"), storage)).body, null);
   assert.equal(await (await worker.fetch(request("/releases/v9.0-rc.1/index.html"), storage)).text(), "First candidate");
   assert.equal(await (await worker.fetch(request("/releases/v9.0-rc.2/index.html"), storage)).text(), "Second candidate");
   assert.equal(await (await worker.fetch(request("/releases/v9.0-rc.1/index.html", "HEAD"), storage)).text(), "");
   assert.equal((await worker.fetch(request("/v9.0-rc"), storage)).status, 404);
   assert.equal((await worker.fetch(request("/releases/v9.0-rc.3/index.html"), storage)).status, 404);
   assert.deepEqual(requested, [
+    "index.html",
     "index.html",
     "releases/v9.0-rc.1/index.html",
     "releases/v9.0-rc.2/index.html",
