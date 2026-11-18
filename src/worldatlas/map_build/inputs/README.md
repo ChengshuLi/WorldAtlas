@@ -1,37 +1,17 @@
 # Frozen build inputs
 
-[`selection.py`](selection.py) reads the selected parent divisions, their rules,
-geometry, raw-source catalog references and entity colors in
-one repeatable-read, read-only transaction. The transaction ends before downloads
-or map calculations begin.
+[`selection.py`](selection.py) reads the selected parent divisions, their rules, geometry, raw-source catalog references and entity colors in one repeatable-read, read-only transaction. The transaction ends before downloads or map calculations begin.
 
-Save that result with the run. Resume and explicit replay read the saved selection,
-so another worker's edits cannot enter partway through a build. Executing code
-and runtime versions are separate provenance; a code change does not require
-permission to resume.
+Save that result with the run. Resume and explicit replay read the saved selection, so another worker's edits cannot enter partway through a build. Executing code and runtime versions are separate provenance; a code change does not require permission to resume.
 
-[`geography.sql`](geography.sql) exports working records once. New selections use
-format v4 with one geography collection (including entity colors), contributing
-construction settings and exact raw-file catalog records. Imported geometry is
-separate from the rules that assign parent cells to children.
+[`geography.sql`](geography.sql) exports working records once. New selections use format v4 with one geography collection (including entity colors), contributing construction settings and exact raw-file catalog records. Imported geometry is separate from the rules that assign parent cells to children.
 
-Release archives retain their original inputs and any code captured at build
-time. Replay with those records and that code. Historical backfills document
-gaps in the data or code they could recover.
+Release archives retain their original inputs and any code captured at build time. Replay with those records and that code. Historical backfills document gaps in the data or code they could recover.
 
-Imported GeoJSON coordinates remain numeric. Source IDs, sizes and hashes come
-from the same database view as the decisions.
+Imported GeoJSON coordinates remain numeric. Source IDs, sizes and hashes come from the same database view as the decisions.
 
-Large feature geometries are read as individual records in that same
-transaction. PostgreSQL does not need to assemble all coordinates into one JSON
-aggregate before sending them. Before calculation, the builder checks working
-and saved selections for valid geometry and unique entity, feature, and rule IDs.
-Assignment checks reject conflicting claims.
+Large feature geometries are read as individual records in that same transaction. PostgreSQL does not need to assemble all coordinates into one JSON aggregate before sending them. Before calculation, the builder checks working and saved selections for valid geometry and unique entity, feature, and rule IDs. Assignment checks reject conflicting claims.
 
-`test_selection.py` uses disposable PostgreSQL to check concurrent edits, saved
-replay and missing selections. Source-import integration tests also exercise the
-real geography queries against newly imported records.
+`test_selection.py` uses disposable PostgreSQL to check concurrent edits, saved replay and missing selections. Source-import integration tests also exercise the real geography queries against newly imported records.
 
-Generated JSON cache entries are published as complete files, so builds can share
-verified inputs and retry interrupted writes. Water and ocean calculations use the
-same frozen working selection.
+Generated JSON cache entries are published as complete files, so builds can share verified inputs and retry interrupted writes. Water and ocean calculations use the same frozen working selection.

@@ -1,45 +1,25 @@
 # Preview, publish and restore a map
 
-Map building calculates cells. This command packages a completed build, stages a
-numbered candidate and publishes that same candidate after review. Use the project
-environment, `NEON_DATABASE_URL` and the R2 credentials used by map building.
+Map building calculates cells. This command packages a completed build, stages a numbered candidate and publishes that same candidate after review. Use the project environment, `NEON_DATABASE_URL` and the R2 credentials used by map building.
 
 ```bash
 worldatlas-release stage v9.0-rc.1 \
   /absolute/path/to/worldatlas-work/runs/preview --viewer web/viewer
 ```
 
-The preview is at `/releases/v9.0-rc.1/index.html`. The homepage continues to show
-the published release. Changed contents require a new candidate number.
+The preview is at `/releases/v9.0-rc.1/index.html`. The homepage continues to show the published release. Changed contents require a new candidate number.
 
 ## Release files and input archive
 
-Each release has one R2 folder, `releases/RELEASE_ID/`, containing its viewer,
-compressed map streams, generated configuration, legend and `inputs.json.gz`.
-The `rows` stream stores row offsets, and `runs` stores run endpoints and
-category codes. The manifest records checksums for both the stored files and
-the decoded streams.
+Each release has one R2 folder, `releases/RELEASE_ID/`, containing its viewer, compressed map streams, generated configuration, legend and `inputs.json.gz`. The `rows` stream stores row offsets, and `runs` stores run endpoints and category codes. The manifest records checksums for both the stored files and the decoded streams.
 
-The archive holds the actual saved configuration, geographic selection,
-construction settings, source catalog references, run identity and build report.
-Run identity includes runtime versions and available source revision/setup
-information. Resumed builds retain the recorded identities of their attempts.
-Packaging reads the saved run, never today's editable geography in Neon.
+The archive holds the actual saved configuration, geographic selection, construction settings, source catalog references, run identity and build report. Run identity includes runtime versions and available source revision/setup information. Resumed builds retain the recorded identities of their attempts. Packaging reads the saved run, never today's editable geography in Neon.
 
-Raw files remain under `sources/`, shared across releases. Their cataloged identities,
-size and SHA-256 identify the bytes needed by each build. Keep any raw source
-needed by working geography or a retained release. After retiring previews,
-check the working inputs and all surviving archives again before removing a raw
-object and its Neon catalog row.
+Raw files remain under `sources/`, shared across releases. Their cataloged identities, size and SHA-256 identify the bytes needed by each build. Keep any raw source needed by working geography or a retained release. After retiring previews, check the working inputs and all surviving archives again before removing a raw object and its Neon catalog row.
 
-Neon's `map_releases` row contains the bundle ID, R2 bucket/folder, manifest
-checksum and publication-state flags. The folder's `manifest.json` lists file
-locations, sizes, checksums and media types. Neon pins the manifest; the manifest
-pins the files and does not contain its own checksum.
+Neon's `map_releases` row contains the bundle ID, R2 bucket/folder, manifest checksum and publication-state flags. The folder's `manifest.json` lists file locations, sizes, checksums and media types. Neon pins the manifest; the manifest pins the files and does not contain its own checksum.
 
-`is_official` records the selected final candidate for a version. `is_current`
-identifies the official release served at `/` through R2's fixed `index.html`.
-Staging sets both flags to false and leaves the homepage unchanged.
+`is_official` records the selected final candidate for a version. `is_current` identifies the official release served at `/` through R2's fixed `index.html`. Staging sets both flags to false and leaves the homepage unchanged.
 
 ## Publish and retire previews
 
@@ -49,35 +29,17 @@ After the user reviews and approves the candidate:
 worldatlas-release publish v9.0-rc.1
 ```
 
-Publication verifies the files, points the homepage to that exact bundle and
-removes superseded candidate folders/rows for the same version. Only the selected
-RC is retained permanently. Candidates of a version still under development stay
-available. Preview retirement removes the release bundles and catalog pointers.
-Shared raw sources under `sources/` require a separate dependency check.
+Publication verifies the files, points the homepage to that exact bundle and removes superseded candidate folders/rows for the same version. Only the selected RC is retained permanently. Candidates of a version still under development stay available. Preview retirement removes the release bundles and catalog pointers. Shared raw sources under `sources/` require a separate dependency check.
 
-Publishing does not rebuild or recolor the map. Interrupted publication or
-candidate cleanup can be retried with the same command. Published versions remain
-available at their original candidate URLs. The Worker serves `/`, `/index.html`
-and `/releases/RELEASE_ID/...`.
-Deploying the Worker itself is separate: `npx wrangler deploy`.
+Publishing does not rebuild or recolor the map. Interrupted publication or candidate cleanup can be retried with the same command. Published versions remain available at their original candidate URLs. The Worker serves `/`, `/index.html` and `/releases/RELEASE_ID/...`. Deploying the Worker itself is separate: `npx wrangler deploy`.
 
 ## Archived code
 
-New build attempts capture the installed WorldAtlas source files and the project
-`environment.yml`, `pyproject.toml`, schema and README before computation. Staging includes
-those captured bytes in `inputs.json.gz`; it does not copy code from the checkout
-at staging time. Git history is not needed to recover them.
+New build attempts capture the installed WorldAtlas source files and the project `environment.yml`, `pyproject.toml`, schema and README before computation. Staging includes those captured bytes in `inputs.json.gz`; it does not copy code from the checkout at staging time. Git history is not needed to recover them.
 
-Each attempt's producer record identifies its source archive. Identical snapshots
-are stored once per release; resumed attempts using different code retain each
-snapshot. Keep code unchanged while an attempt runs; edits between attempts are
-captured on resume. This does not add a restriction on resuming with changed code.
+Each attempt's producer record identifies its source archive. Identical snapshots are stored once per release; resumed attempts using different code retain each snapshot. Keep code unchanged while an attempt runs; edits between attempts are captured on resume. This does not add a restriction on resuming with changed code.
 
-The snapshot includes source and setup definitions, not raw datasets, Git history,
-Python or native-library binaries. Raw data remains in R2; the run records runtime
-versions and hashes. Reproduction uses that recorded environment and the native
-GDAL setup described in the archived map-building guide. The current source
-snapshot adds approximately 0.5 MB compressed per distinct code version.
+The snapshot includes source and setup definitions, not raw datasets, Git history, Python or native-library binaries. Raw data remains in R2; the run records runtime versions and hashes. Reproduction uses that recorded environment and the native GDAL setup described in the archived map-building guide. The current source snapshot adds approximately 0.5 MB compressed per distinct code version.
 
 ## Restore inputs
 
@@ -88,10 +50,7 @@ worldatlas-build /absolute/path/to/restored-inputs/configuration.json \
   --selection /absolute/path/to/restored-inputs/selection.json
 ```
 
-Restoration verifies the R2 archive and writes a new directory. Code snapshots
-are extracted under `restored-inputs/code/CODE_ID/`, alongside configuration,
-selection and run records. `run.json` connects attempts to their code IDs through
-the source-archive checksums. To use a restored code snapshot:
+Restoration verifies the R2 archive and writes a new directory. Code snapshots are extracted under `restored-inputs/code/CODE_ID/`, alongside configuration, selection and run records. `run.json` connects attempts to their code IDs through the source-archive checksums. To use a restored code snapshot:
 
 ```bash
 cd /absolute/path/to/restored-inputs/code/CODE_ID
@@ -100,21 +59,8 @@ micromamba activate worldatlas
 python -m pip install --no-deps .
 ```
 
-Follow its archived map-building README for the recorded native GDAL setup,
-then run the build command above using the restored configuration and selection.
-Compare its output with the archived release's recorded checksums. Use the
-recorded code and environment when reproducing an older result. Source location changes
-recorded by an archive are applied to the extracted configuration/selection;
-original captured records and reports are preserved.
-Restored configuration omits optional comparison streams from the earlier
-machine; those files validate a result but do not generate its cells. The
-archive retains the original configuration. Use `--compare-release` when a new
-comparison is wanted.
+Follow its archived map-building README for the recorded native GDAL setup, then run the build command above using the restored configuration and selection. Compare its output with the archived release's recorded checksums. Use the recorded code and environment when reproducing an older result. Source location changes recorded by an archive are applied to the extracted configuration/selection; original captured records and reports are preserved. Restored configuration omits optional comparison streams from the earlier machine; those files validate a result but do not generate its cells. The archive retains the original configuration. Use `--compare-release` when a new comparison is wanted.
 
-Historical backfills use the same archive format. They can contain supporting
-records from older pipelines and notes describing unavailable configuration,
-code or reports. They do not invent missing inputs from today's Neon records.
-An archive without a modern `selection` requires its historical implementation;
-the restore command still extracts all available records and notes.
+Historical backfills use the same archive format. They can contain supporting records from older pipelines and notes describing unavailable configuration, code or reports. They do not invent missing inputs from today's Neon records. An archive without a modern `selection` requires its historical implementation; the restore command still extracts all available records and notes.
 
 Run tests with `python .github/scripts/run_tests.py --suite map_releases`.

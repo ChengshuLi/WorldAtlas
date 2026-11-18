@@ -1,48 +1,24 @@
 # OpenStreetMap imports
 
-[`features.py`](features.py) imports selected nodes, closed ways and relation
-polygons into `atlas.source_features`. It reads each archived object graph
-once through osmium's Python API. [`features/build_features.py`](../features/build_features.py)
-handles catalog lookup, verified downloads and transactional storage.
+[`features.py`](features.py) imports selected nodes, closed ways and relation polygons into `atlas.source_features`. It reads each archived object graph once through osmium's Python API. [`features/build_features.py`](../features/build_features.py) handles catalog lookup, verified downloads and transactional storage.
 
-Use the common command below with a `selected_osm_features` construction. Each
-selection identifies an output `feature_id`, provider `source_feature_id`,
-`object_type` (`node`, `way` or `relation`) and `object_version`. Optional
-`expected_tags` verify provider tags.
-The constructor joins member ways at shared node IDs in stable way-ID order.
+Use the common command below with a `selected_osm_features` construction. Each selection identifies an output `feature_id`, provider `source_feature_id`, `object_type` (`node`, `way` or `relation`) and `object_version`. Optional `expected_tags` verify provider tags. The constructor joins member ways at shared node IDs in stable way-ID order.
 
-Relations preserve inner rings by default. An explicit `holes: outer_envelope`
-selects the outer envelope, while `ignored_member_roles` identifies non-geometric
-members such as label nodes. Optional `ring_anchors` select particular rings by
-tagged node ID/version and member way; `parent_relation` checks a selected
-membership. These interpretations live in the construction record. The same
-implementation handles administrative, reef and archipelago sources.
+Relations preserve inner rings by default. An explicit `holes: outer_envelope` selects the outer envelope, while `ignored_member_roles` identifies non-geometric members such as label nodes. Optional `ring_anchors` select particular rings by tagged node ID/version and member way; `parent_relation` checks a selected membership. These interpretations live in the construction record. The same implementation handles administrative, reef and archipelago sources.
 
-`test_features.py` covers joining, holes, anchors, membership, source identity
-and invalid geometry.
+`test_features.py` covers joining, holes, anchors, membership, source identity and invalid geometry.
 
 ## Boundary lines
 
-Construction records in Neon choose the sources, output feature IDs, and
-construction descriptions.
-Reuse these functions for boundaries made from a single chain of OpenStreetMap
-ways. Local processing and the Neon/R2 workflow are separate:
+Construction records in Neon choose the sources, output feature IDs, and construction descriptions. Reuse these functions for boundaries made from a single chain of OpenStreetMap ways. Local processing and the Neon/R2 workflow are separate:
 
-- [`ways.py`](ways.py): read local archives and manifests, check source
-  files, join ways into a GeoJSON line, and optionally check its geometry checksum.
-- [`build_boundary.py`](build_boundary.py): look up a raw source ID
-  in Neon, download it from R2, assemble the line, and save its geometry and construction reference
-  in Neon. Existing relationships are retained.
-- [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) supplies the document, catalog, and download
-  functions also used by other source processors.
+- [`ways.py`](ways.py): read local archives and manifests, check source files, join ways into a GeoJSON line, and optionally check its geometry checksum.
+- [`build_boundary.py`](build_boundary.py): look up a raw source ID in Neon, download it from R2, assemble the line, and save its geometry and construction reference in Neon. Existing relationships are retained.
+- [`atlas_sources/catalog.py`](../atlas_sources/catalog.py) supplies the document, catalog, and download functions also used by other source processors.
 
 ## Local processing
 
-Use the shared [project environment](../../../../environment.yml).
-`ways.py` uses Shapely to reject a line that crosses itself.
-An archive is a ZIP containing `manifest.json` and the OpenStreetMap JSON
-responses it names. Each response contains a way and the coordinates of its
-nodes. The manifest identifies the ways to join and the starting endpoint:
+Use the shared [project environment](../../../../environment.yml). `ways.py` uses Shapely to reject a line that crosses itself. An archive is a ZIP containing `manifest.json` and the OpenStreetMap JSON responses it names. Each response contains a way and the coordinates of its nodes. The manifest identifies the ways to join and the starting endpoint:
 
 ```json
 {
@@ -51,11 +27,7 @@ nodes. The manifest identifies the ways to join and the starting endpoint:
 }
 ```
 
-The ways must form one continuous, unbranched line and meet at shared node IDs.
-The assembled line must not revisit a node or cross itself. Lines crossing the
-antimeridian need a separate construction method that splits them there.
-Coordinates are longitude followed by latitude. Source checksums identify the
-exact response files used.
+The ways must form one continuous, unbranched line and meet at shared node IDs. The assembled line must not revisit a node or cross itself. Lines crossing the antimeridian need a separate construction method that splits them there. Coordinates are longitude followed by latitude. Source checksums identify the exact response files used.
 
 Import these functions from `worldatlas.source_imports.osm.ways`:
 
@@ -66,11 +38,9 @@ Import these functions from `worldatlas.source_imports.osm.ways`:
 
 ## Neon and R2 workflow
 
-The workflow also requires `psycopg` and `boto3`. Set `NEON_DATABASE_URL` to the
-working database and configure R2 credentials through `AWS_PROFILE`.
+The workflow also requires `psycopg` and `boto3`. Set `NEON_DATABASE_URL` to the working database and configure R2 credentials through `AWS_PROFILE`.
 
-Run from the repository root, replacing the uppercase placeholders with your
-Neon record IDs, and R2 account ID, and choosing a local work directory:
+Run from the repository root, replacing the uppercase placeholders with your Neon record IDs, and R2 account ID, and choosing a local work directory:
 
 ```bash
 worldatlas-import \
@@ -86,8 +56,7 @@ worldatlas-import \
 | `--work-dir` | Local directory for downloading and reusing the source archive. |
 | `--expected-geometry-sha256` | Optional checksum of the expected boundary geometry. A mismatch stops the command before saving. Omit it when building a changed boundary. |
 
-The construction record is a JSON object in the existing
-`atlas.construction_records` table:
+The construction record is a JSON object in the existing `atlas.construction_records` table:
 
 ```json
 {
@@ -99,38 +68,19 @@ The construction record is a JSON object in the existing
 }
 ```
 
-`osm_way_chain` selects the typed function in [`build_boundary.py`](build_boundary.py),
-which calls the assembly function in `ways.py`. Its signature defines required
-fields and types; [shared validation](../README.md#document-validation) checks
-them in Python and PostgreSQL. The construction record is editable. Change its settings and rerun its ID.
+`osm_way_chain` selects the typed function in [`build_boundary.py`](build_boundary.py), which calls the assembly function in `ways.py`. Its signature defines required fields and types; [shared validation](../README.md#document-validation) checks them in Python and PostgreSQL. The construction record is editable. Change its settings and rerun its ID.
 
-`worldatlas-import` reads and validates the record, then `osm_way_chain()` looks up its exact
-raw source ID in `atlas.source_assets`,
-downloads its R2 object into the work directory, checks its size and checksum,
-and assembles the boundary. A checked local download is reused on later runs.
-An optional expected geometry checksum supports replaying an existing result.
+`worldatlas-import` reads and validates the record, then `osm_way_chain()` looks up its exact raw source ID in `atlas.source_assets`, downloads its R2 object into the work directory, checks its size and checksum, and assembles the boundary. A checked local download is reused on later runs. An optional expected geometry checksum supports replaying an existing result.
 
-It saves the complete line in `atlas.source_features`. Its construction reference
-links to all cataloged inputs through `construction_sources`. Existing geographic
-rule references survive repeat imports. Map building checks how the selected
-lines divide its current scope before accepting cell assignments.
+It saves the complete line in `atlas.source_features`. Its construction reference links to all cataloged inputs through `construction_sources`. Existing geographic rule references survive repeat imports. Map building checks how the selected lines divide its current scope before accepting cell assignments.
 
-Optional `before` and `after` control points extend the archived chain with WGS84
-geodesics. `max_step_metres` controls their sampling. Every archived chain
-coordinate is preserved, and the complete line is produced in one import.
-Optional `evidence_source_ids` references supporting publications; their text is
-not read by the geometric calculation. The construction's `basis` records the
-human interpretation. These source arguments generate foreign-key dependency
-links from their Python `SourceId` annotations.
+Optional `before` and `after` control points extend the archived chain with WGS84 geodesics. `max_step_metres` controls their sampling. Every archived chain coordinate is preserved, and the complete line is produced in one import. Optional `evidence_source_ids` references supporting publications; their text is not read by the geometric calculation. The construction's `basis` records the human interpretation. These source arguments generate foreign-key dependency links from their Python `SourceId` annotations.
 
-For another boundary, create a construction record and run the same command.
-There is one OSM chain method, with optional extensions rather than a second
-constructor or a later adjustment step.
+For another boundary, create a construction record and run the same command. There is one OSM chain method, with optional extensions rather than a second constructor or a later adjustment step.
 
 ## Tests
 
-`test_ways.py` checks chain assembly, source verification and invalid geometry.
-`test_build_boundary.py` checks the Neon/R2 workflow and database transactions.
+`test_ways.py` checks chain assembly, source verification and invalid geometry. `test_build_boundary.py` checks the Neon/R2 workflow and database transactions.
 
 Run the tests from the repository root:
 
@@ -140,13 +90,6 @@ The map-builder integration test also uses GDAL's Python bindings.
 python .github/scripts/run_tests.py --suite source_imports
 ```
 
-The runner creates a disposable database and includes the database write tests.
-Those tests cover complete builds, repeat runs, source updates, preservation of
-construction and geographic relationships, unrelated records, and failed-write rollbacks.
+The runner creates a disposable database and includes the database write tests. Those tests cover complete builds, repeat runs, source updates, preservation of construction and geographic relationships, unrelated records, and failed-write rollbacks.
 
-Provider-defined geographic `group` and `collection` relations can produce one
-island-group feature. The reader includes direct polygon ways and nested polygon
-relations, preserves child holes, and unions overlapping members. Construction
-settings explicitly identify ignored metadata roles. Missing members and cycles
-fail; a parent `/full` response alone may omit nested geometry, so the archived
-input must contain the complete recursive graph.
+Provider-defined geographic `group` and `collection` relations can produce one island-group feature. The reader includes direct polygon ways and nested polygon relations, preserves child holes, and unions overlapping members. Construction settings explicitly identify ignored metadata roles. Missing members and cycles fail; a parent `/full` response alone may omit nested geometry, so the archived input must contain the complete recursive graph.

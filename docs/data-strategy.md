@@ -45,8 +45,7 @@ Workers can edit separate areas in parallel. Those edits do not change the publi
 
 GitHub tracks code, schemas, documentation, and task issues. The user merges pull requests.
 
-Use everyday models for geography and history research. Use frontier models for
-coding and independent research review.
+Use everyday models for geography and history research. Use frontier models for coding and independent research review.
 
 ## 2. Geography
 
