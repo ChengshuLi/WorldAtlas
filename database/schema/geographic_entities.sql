@@ -23,19 +23,25 @@ CREATE TABLE atlas.map_category_bindings (
     UNIQUE (entity_id, physical_class)
 );
 
-CREATE FUNCTION atlas.add_map_category_bindings() RETURNS trigger LANGUAGE plpgsql AS $$
+CREATE FUNCTION atlas.sync_map_category_bindings() RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN
+  DELETE FROM atlas.map_category_bindings
+  WHERE entity_id=NEW.id AND NEW.physical_class NOT IN (physical_class, 'mixed');
+
   INSERT INTO atlas.map_category_bindings (entity_id, physical_class)
   SELECT NEW.id, kind
   FROM (VALUES ('land'), ('water')) AS classes(kind)
   WHERE NEW.physical_class IN (kind, 'mixed')
+    AND NOT EXISTS (
+      SELECT FROM atlas.map_category_bindings WHERE entity_id=NEW.id AND physical_class=kind
+    )
   ORDER BY kind;
   RETURN NULL;
 END $$;
 
-CREATE TRIGGER map_category_bindings_on_entity_insert AFTER INSERT
+CREATE TRIGGER map_category_bindings_sync AFTER INSERT OR UPDATE OF physical_class
 ON atlas.geographic_entities FOR EACH ROW WHEN (NEW.parent_id IS NOT NULL)
-EXECUTE FUNCTION atlas.add_map_category_bindings();
+EXECUTE FUNCTION atlas.sync_map_category_bindings();
 
 CREATE FUNCTION atlas.validate_geographic_entity(ident bigint) RETURNS void LANGUAGE plpgsql AS $$
 DECLARE e atlas.geographic_entities%ROWTYPE; p atlas.geographic_entities%ROWTYPE;
@@ -82,15 +88,15 @@ BEGIN
       PERFORM atlas.validate_geographic_entity(ident);
     END LOOP;
   ELSIF TG_TABLE_NAME='map_category_bindings' THEN
-    IF TG_OP<>'DELETE' THEN PERFORM atlas.validate_geographic_entity(NEW.entity_id); END IF;
+    PERFORM atlas.validate_geographic_entity(NEW.entity_id);
   ELSE
-    IF TG_OP<>'DELETE' THEN PERFORM atlas.validate_geographic_entity(NEW.id); END IF;
+    PERFORM atlas.validate_geographic_entity(NEW.id);
   END IF;
   RETURN NULL;
 END $$;
 CREATE CONSTRAINT TRIGGER geographic_level_check AFTER INSERT OR UPDATE OR DELETE
 ON atlas.geographic_levels DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_hierarchy();
-CREATE CONSTRAINT TRIGGER geographic_entity_check AFTER INSERT OR UPDATE OR DELETE
+CREATE CONSTRAINT TRIGGER geographic_entity_check AFTER INSERT OR UPDATE
 ON atlas.geographic_entities DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_hierarchy();
-CREATE CONSTRAINT TRIGGER map_binding_check AFTER INSERT OR UPDATE OR DELETE
+CREATE CONSTRAINT TRIGGER map_binding_check AFTER INSERT OR UPDATE
 ON atlas.map_category_bindings DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_hierarchy();
