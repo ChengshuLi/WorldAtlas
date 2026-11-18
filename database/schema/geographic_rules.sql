@@ -27,7 +27,7 @@ CREATE TABLE atlas.geographic_rule_targets (
 CREATE TABLE atlas.geographic_rule_sources (
     rule_id text NOT NULL REFERENCES atlas.geographic_rules(id) ON DELETE CASCADE,
     source_id text NOT NULL REFERENCES atlas.source_assets(id),
-    citation_section text NOT NULL,
+    citation_section text NOT NULL CHECK (atlas.nonblank(citation_section)),
     interpretation text NOT NULL CHECK (atlas.nonblank(interpretation)),
     PRIMARY KEY (rule_id, source_id)
 );
