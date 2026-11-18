@@ -108,7 +108,7 @@ def execute_rule(context, rule, snapshot_directory, directory):
             result = assign_area(scope, rule["targets"][0]["entity_id"], directory)
         elif operation == "divide_area":
             result = divide_area(
-                scope, rule["features"]["input_geometry"], rule["targets"], directory
+                scope, rule["features"]["boundary_line"], rule["targets"], directory
             )
         elif (
             operation not in ("nearest_land", "nearest_basin_water")

@@ -61,7 +61,7 @@ class DatabaseTests(unittest.TestCase):
             "INSERT INTO atlas.geographic_rules VALUES ('rule',0,'divide_area','land','cell',false,'Selected divide')"
         )
         self.db.execute(
-            "INSERT INTO atlas.geographic_rule_features VALUES ('rule','line','input_geometry')"
+            "INSERT INTO atlas.geographic_rule_features VALUES ('rule','line','boundary_line')"
         )
         self.recipe["points"] = [[12.0, 1.0], [11.0, 0.0], [10.0, -1.0]]
         self.store()

@@ -19,7 +19,7 @@ INSERT INTO atlas.geographic_rules VALUES
  ('coastal',0,'nearest_coastal_water','water','cell',false,'Shared coastal distance'),
  ('water',0,'nearest_water','water','cell',true,'Complete remaining water');
 INSERT INTO atlas.geographic_rule_features VALUES
- ('divide','line','input_geometry'),('divide','point','scope_component'),
+ ('divide','line','boundary_line'),('divide','point','scope_component'),
  ('group','area','scope_area'),('remaining','point','distance_reference'),('basin','area','scope_area');
 INSERT INTO atlas.geographic_rule_features VALUES
  ('group','area','connected_to'),('water','point','connected_to');
@@ -45,7 +45,7 @@ DO $$ BEGIN
   IF SQLERRM NOT LIKE 'invalid feature geometry%' THEN RAISE; END IF;
  END;
  BEGIN
-  DELETE FROM atlas.geographic_rule_features WHERE rule_id='divide' AND role='input_geometry';
+  DELETE FROM atlas.geographic_rule_features WHERE rule_id='divide' AND role='boundary_line';
   SET CONSTRAINTS ALL IMMEDIATE;
   RAISE EXCEPTION 'a division without boundaries was accepted';
  EXCEPTION WHEN raise_exception THEN

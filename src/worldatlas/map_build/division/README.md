@@ -5,7 +5,7 @@ Read the parent's children and rules from the frozen input selection. Prepare it
 | Operation | Calculation |
 | --- | --- |
 | `assign_area` | Give eligible scope cells or components to one child. |
-| `divide_area` | Split using imported lines; imported label points identify child owners. |
+| `divide_area` | Split along the imported `boundary_line` features; imported label points identify child owners. |
 | `nearest_land` | Assign each remaining whole component by its minimum WGS84 distance to selected reference shores. |
 | `nearest_coastal_water` | Assign water within the configured coastal distance to its nearest assigned physical shore. |
 | `nearest_basin_water` | Discover bordering owners from the full basin, then assign its water by their nearest shores. |

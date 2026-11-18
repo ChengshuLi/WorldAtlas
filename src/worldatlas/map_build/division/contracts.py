@@ -13,7 +13,7 @@ OPERATIONS = frozenset(
     )
 )
 ROLE_TYPES = {
-    "input_geometry": frozenset(("LineString", "MultiLineString")),
+    "boundary_line": frozenset(("LineString", "MultiLineString")),
     "scope_area": frozenset(("Polygon", "MultiPolygon")),
     "scope_component": frozenset(("Point",)),
     "distance_reference": frozenset(("Point",)),
@@ -44,6 +44,9 @@ def compile_rules(geography, parent_id):
         if link["rule_id"] not in selected:
             continue
         role, ident = link["role"], link["feature_id"]
+        if role == "input_geometry":
+            # Existing frozen selections retain the former name.
+            role = "boundary_line"
         key = (link["rule_id"], role, ident)
         if key in seen or role not in ROLE_TYPES or ident not in features:
             raise ValueError("duplicate or unresolved rule feature link")
@@ -77,7 +80,7 @@ def compile_rules(geography, parent_id):
             or rule["physical_class"] not in ("land", "water", "mixed")
         ):
             raise ValueError(f"invalid operation settings for {ident}")
-        if bool(inputs["input_geometry"]) != (operation == "divide_area"):
+        if bool(inputs["boundary_line"]) != (operation == "divide_area"):
             raise ValueError(f"invalid boundary links for {ident}")
         if bool(inputs["distance_reference"]) != (operation == "nearest_land"):
             raise ValueError(f"invalid distance-reference links for {ident}")
