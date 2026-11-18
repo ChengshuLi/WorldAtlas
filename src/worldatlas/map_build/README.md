@@ -56,7 +56,7 @@ The calculation is:
 1. **Physical:** rasterize coastline and inland-water sources into the one grid selected in build configuration, then compose the physical land/water mask.
 2. **Land:** evaluate explicit area and boundary divisions together, rejecting disagreeing claims. Assign remaining components to the nearest selected reference shores. Every eligible land cell must have a child owner.
 3. **Water:** extract physical shores once and attach final land owners. Coastal and complete named-basin claims use the same ownership snapshot and must agree wherever they overlap. Basin participants come from actual shores beside the original full basin. The ocean rules assign residual water inside their source polygons and connected open-water components. Nearest eligible shore completes the remaining cells.
-4. **Package and comparison:** encode entity/physical-class pairs through the selected category bindings. Optionally compare with `--compare-release` or explicit reference streams, reporting removed grid rows separately.
+4. **Package and comparison:** encode entity/physical-class pairs through the selected category bindings. `--compare-release` compares cell owners and physical classes using each release's bindings when available. Explicit reference streams and historical releases without bindings are compared by code. Comparisons report removed grid rows separately.
 
 All geographic operations share the same parent and scope contract. A rule's `unassigned_only` setting filters its output scope once; it never changes component populations, geometric faces or reference shores. Independent rules in one group read the same snapshot, so execution order cannot hide conflicts.
 

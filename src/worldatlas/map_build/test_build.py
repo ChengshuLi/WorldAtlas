@@ -275,7 +275,7 @@ class Fixture(unittest.TestCase):
             self.assertEqual(resumed.identity["input_selection_sha256"], original)
             resumed.close()
 
-    def test_release_comparison_downloads_and_verifies_both_streams(self):
+    def test_release_comparison_downloads_and_verifies_streams_and_config(self):
         config = pipeline.write(self.inputs / "request.json", self.cfg)
         digest = lambda data: hashlib.sha256(data).hexdigest()
         decoded = {name: name.encode() for name in ("rows", "runs")}
@@ -287,9 +287,12 @@ class Fixture(unittest.TestCase):
             (name, "worldatlas", key, len(data), digest(data), digest(decoded[name]))
             for name, (key, data) in zip(decoded, stored.items())
         ]
+        release_config = b'{"categories":[]}'
+        config_asset = self.cloud(release_config, "review/config.json")
+        stored[config_asset["r2_key"]] = release_config
         calls = []
         with (
-            patch.object(pipeline, "read_release_streams", return_value=catalog),
+            patch.object(pipeline, "read_release_assets", return_value=(catalog, config_asset)),
             self.fake_r2(stored, calls),
         ):
             runner = pipeline.Pipeline(config, compare_release="v8.0")
@@ -298,6 +301,7 @@ class Fixture(unittest.TestCase):
                     self.assertEqual(
                         runner.sources["reference_" + name].read_bytes(), data
                     )
+                self.assertEqual(runner.sources["reference_config"].read_bytes(), release_config)
             finally:
                 runner.close()
             resumed = pipeline.Pipeline(config, compare_release="v8.0", resume=True)

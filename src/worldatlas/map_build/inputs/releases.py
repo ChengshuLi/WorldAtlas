@@ -8,7 +8,7 @@ from pathlib import Path
 from worldatlas.map_releases.catalog import lookup_release, read_manifest
 
 
-def read_release_streams(identity):
+def read_release_assets(identity):
     connection = os.environ.get("NEON_DATABASE_URL")
     if not connection:
         raise ValueError("set NEON_DATABASE_URL to the release catalog database")
@@ -39,4 +39,7 @@ def read_release_streams(identity):
                 manifest["decoded_sha256"][stream],
             )
         )
-    return result
+    config = manifest["objects"].get("config.json")
+    if config is not None:
+        config = dict(config, r2_bucket=release["r2_bucket"])
+    return result, config

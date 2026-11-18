@@ -21,6 +21,8 @@ These twelve tables have distinct purposes. A feature stores geometry; its const
 
 `geographic_levels` describes the hierarchy; `geographic_entities` links each entity to its level and parent, records its physical eligibility, and stores its color. World has ID zero. Deferred constraints validate the final state of a transaction, including edits involving a parent and its children. Independent families do not require a database-wide entity lock.
 
+Inserting a child entity also creates its map codes. Land and water entities get one binding each, and mixed entities get both. Release bundles keep the mappings used by their grids.
+
 `geographic_rules` selects one of six operations. `geographic_rule_features` provides source areas, component-identifying points, boundaries or distance references. Optional `connected_to` links restrict eligible query connectivity using direct points or an interior point derived from combined polygon features. `geographic_rule_targets` identifies direct-child owners and, for divisions, their label points. Each rule stores its rationale. `geographic_rule_sources` links supporting raw sources and records the cited section and interpretation for each one. Ordinary foreign keys and deferred checks reject missing/forbidden roles, incorrect geometry types and invalid targets. See the [division guide](../src/worldatlas/map_build/division/README.md).
 
 `map_releases` points to a release folder and pins `manifest.json` by SHA-256. The manifest pins each release file. At most one bundle is official per version; at most one official bundle is current. Publication changes flags and the fixed R2 homepage separately from map calculation. See [release commands](../src/worldatlas/map_releases/README.md).

@@ -107,7 +107,10 @@ class EndToEndTests(unittest.TestCase):
                     "INSERT INTO atlas.geographic_entities(id,name,level_id,parent_id,physical_class,color_rgb) VALUES (0,'World','world',NULL,'mixed',NULL),(81,'First','continent',0,'mixed','#FF8000'),(42,'Second','continent',0,'mixed','#0080FF')"
                 )
                 db.execute(
-                    "INSERT INTO atlas.map_category_bindings VALUES (301,81,'land'),(999,42,'land'),(4321,81,'water'),(70000,42,'water')"
+                    "UPDATE atlas.map_category_bindings b SET id=fixture.code "
+                    "FROM (VALUES (301,81,'land'),(999,42,'land'),(4321,81,'water'),(70000,42,'water')) "
+                    "AS fixture(code,entity_id,physical_class) "
+                    "WHERE (b.entity_id,b.physical_class)=(fixture.entity_id,fixture.physical_class)"
                 )
                 db.execute(
                     "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES ('__e2e_raw','Fixture','Fixture','test:raw','Test','test:license','Test','test','coast.geojson',%s,%s)",

@@ -12,8 +12,49 @@ from worldatlas.map_build.core.layers import file_hash
 from worldatlas.map_build.core.rle import open_grid, row
 
 
-def compare(candidate, reference, grid, directory, reference_sha256):
+def reference_lookup(reference_bindings, candidate_bindings):
+    """Translate reference codes to candidate codes by entity and physical class."""
+
+    def by_code(bindings):
+        return {
+            b["code"]: (b["entity_id"], b["physical_class"]) for b in bindings
+        }
+
+    reference = by_code(reference_bindings)
+    candidate = by_code(candidate_bindings)
+    if reference == candidate:
+        return None
+    candidate_codes = {category: code for code, category in candidate.items()}
+    codes = sorted(reference)
+    return (
+        np.asarray([0, *codes], dtype=np.uint32),
+        np.asarray(
+            [0, *(candidate_codes.get(reference[c], -1) for c in codes)],
+            dtype=np.int64,
+        ),
+    )
+
+
+def comparable_codes(codes, lookup):
+    if lookup is None:
+        return codes
+    keys, translated = lookup
+    indices = np.searchsorted(keys, codes)
+    if np.any(indices == len(keys)) or np.any(keys[indices] != codes):
+        raise ValueError("reference grid uses an unknown map category code")
+    return translated[indices]
+
+
+def compare(
+    candidate, reference, grid, directory, reference_sha256, *,
+    reference_bindings=None, candidate_bindings=None,
+):
     candidate, reference, directory = map(Path, (candidate, reference, directory))
+    if (reference_bindings is None) != (candidate_bindings is None):
+        raise ValueError("both category mappings are required to compare assignments")
+    lookup = None
+    if reference_bindings is not None:
+        lookup = reference_lookup(reference_bindings, candidate_bindings)
     names = ("rows.u32le", "runs.u32le")
     if set(reference_sha256) != set(names):
         raise ValueError("both reference stream checksums are required")
@@ -39,13 +80,15 @@ def compare(candidate, reference, grid, directory, reference_sha256):
     ):
         for y in range(grid.height):
             a, b = row(old, y, grid.width), row(new, y, grid.width)
+            translated = comparable_codes(a[1], lookup)
             records = []
-            if not (np.array_equal(a[0], b[0]) and np.array_equal(a[1], b[1])):
+            if not (np.array_equal(a[0], b[0]) and np.array_equal(translated, b[1])):
                 ends = np.union1d(a[0], b[0])
                 starts = np.r_[np.uint32(0), ends[:-1]]
-                av = a[1][np.searchsorted(a[0], starts, side="right")]
+                ai = np.searchsorted(a[0], starts, side="right")
+                av = a[1][ai]
                 bv = b[1][np.searchsorted(b[0], starts, side="right")]
-                for i in np.flatnonzero(av != bv):
+                for i in np.flatnonzero(translated[ai] != bv):
                     left, right, prior, after = map(
                         int, (starts[i], ends[i], av[i], bv[i])
                     )
@@ -79,6 +122,7 @@ def compare(candidate, reference, grid, directory, reference_sha256):
         "grid": {"width": grid.width, "height": grid.height, "step": grid.step},
         "changed_cells": changed,
         "reference_grid": vars(reference_grid),
+        "compared_by": "map_code" if reference_bindings is None else "entity_and_physical_class",
         "removed_cells": sum(removed.values()),
         "removed_cells_by_code": dict(sorted(removed.items())),
         "assignments_identical_on_retained_grid": changed == 0,

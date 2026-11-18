@@ -10,6 +10,41 @@ from worldatlas.map_build.core.layers import file_hash, write_layer
 
 
 class ComparisonTests(unittest.TestCase):
+    def test_release_comparison_uses_category_meaning_and_reports_original_codes(self):
+        grid = Grid(6, 1, 60)
+        old = [
+            dict(code=17, entity_id=1, physical_class="land"),
+            dict(code=18, entity_id=2, physical_class="land"),
+            dict(code=2, entity_id=2, physical_class="water"),
+        ]
+        new = [dict(old[0], code=11), dict(old[1], code=17), dict(old[2], code=12)]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name, runs in (
+                ("before", [(0, 2, 17), (2, 4, 18), (4, 6, 2)]),
+                ("recoded", [(0, 2, 11), (2, 4, 17), (4, 6, 12)]),
+                ("changed", [(0, 1, 11), (1, 4, 17), (4, 5, 12), (5, 6, 17)]),
+            ):
+                write_layer(root / name, grid, [(0, runs)])
+            hashes = {
+                name: file_hash(root / "before" / name)
+                for name in ("rows.u32le", "runs.u32le")
+            }
+            for output, pairs in (("recoded", {}), ("changed", {"17->17": 1, "2->17": 1})):
+                with self.subTest(output=output):
+                    report = compare(
+                        root / output,
+                        root / "before",
+                        grid,
+                        root / (output + "-diff"),
+                        hashes,
+                        reference_bindings=old,
+                        candidate_bindings=new,
+                    )
+                    self.assertEqual(report["pair_counts"], pairs)
+                    self.assertEqual(report["changed_cells"], sum(pairs.values()))
+                    self.assertFalse(report["byte_identical"])
+
     def test_removed_southern_rows_are_reported_separately(self):
         original, cropped = Grid(4, 2, 90), Grid(4, 1, 90)
         with tempfile.TemporaryDirectory() as directory:

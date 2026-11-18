@@ -88,9 +88,6 @@ class SelectionTests(unittest.TestCase):
                 "INSERT INTO atlas.geographic_entities(id,name,level_id,parent_id,physical_class,color_rgb) VALUES (0,'World','world',NULL,'mixed',NULL),(2,'Asia','continent',0,'mixed','#123456')"
             )
             self.writer.execute(
-                "INSERT INTO atlas.map_category_bindings VALUES (18,2,'land'),(2,2,'water')"
-            )
-            self.writer.execute(
                 "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES ('__selection_raw','First','Test','test:raw','Test','test:license','Test','test','selected',%s,1)",
                 ("a" * 64,),
             )
@@ -158,7 +155,10 @@ class SelectionTests(unittest.TestCase):
         )
         self.assertEqual(frozen["raw_sources"][0]["sha256"], "a" * 64)
         self.assertEqual(geography["rule_sources"][0]["source_id"], "__selection_raw")
-        self.assertEqual(geography["category_bindings"][1]["code"], 18)
+        self.assertEqual(
+            {(b["entity_id"], b["physical_class"]) for b in geography["category_bindings"]},
+            {(2, "land"), (2, "water")},
+        )
         first = canonical_bytes(frozen)
         self.writer.execute(
             'UPDATE atlas.source_features SET geometry=\' {"type":"Point","coordinates":[11,21]}\' WHERE id=\'__selection_point\''

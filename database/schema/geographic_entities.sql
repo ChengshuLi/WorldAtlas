@@ -23,6 +23,20 @@ CREATE TABLE atlas.map_category_bindings (
     UNIQUE (entity_id, physical_class)
 );
 
+CREATE FUNCTION atlas.add_map_category_bindings() RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+  INSERT INTO atlas.map_category_bindings (entity_id, physical_class)
+  SELECT NEW.id, kind
+  FROM (VALUES ('land'), ('water')) AS classes(kind)
+  WHERE NEW.physical_class IN (kind, 'mixed')
+  ORDER BY kind;
+  RETURN NULL;
+END $$;
+
+CREATE TRIGGER map_category_bindings_on_entity_insert AFTER INSERT
+ON atlas.geographic_entities FOR EACH ROW WHEN (NEW.parent_id IS NOT NULL)
+EXECUTE FUNCTION atlas.add_map_category_bindings();
+
 CREATE FUNCTION atlas.validate_geographic_entity(ident bigint) RETURNS void LANGUAGE plpgsql AS $$
 DECLARE e atlas.geographic_entities%ROWTYPE; p atlas.geographic_entities%ROWTYPE;
         expected_level text;

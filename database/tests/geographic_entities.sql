@@ -2,16 +2,21 @@
 BEGIN;
 INSERT INTO atlas.geographic_levels VALUES ('world',NULL),('continent','world');
 INSERT INTO atlas.geographic_entities(id,name,level_id,parent_id,physical_class)
-VALUES (0,'World','world',NULL,'mixed'),(2,'Asia','continent',0,'mixed'),(7,'Atlantic','continent',0,'water');
-INSERT INTO atlas.map_category_bindings VALUES (2,2,'water'),(18,2,'land'),(7,7,'water');
+VALUES (0,'World','world',NULL,'mixed'),(2,'Asia','continent',0,'mixed'),
+       (7,'Atlantic','continent',0,'water'),(8,'Dry region','continent',0,'land');
 SET CONSTRAINTS ALL IMMEDIATE;
 SET CONSTRAINTS ALL DEFERRED;
 DO $$
+DECLARE land_code bigint;
 BEGIN
+ IF (SELECT array_agg(entity_id || ':' || physical_class ORDER BY entity_id,physical_class)
+     FROM atlas.map_category_bindings) IS DISTINCT FROM ARRAY['2:land','2:water','7:water','8:land'] THEN
+  RAISE EXCEPTION 'new entities received incorrect map bindings'; END IF;
+ SELECT id INTO land_code FROM atlas.map_category_bindings WHERE entity_id=2 AND physical_class='land';
  IF (SELECT color_rgb FROM atlas.geographic_entities WHERE id=2) IS NOT NULL THEN
   RAISE EXCEPTION 'new entities must not receive an invented color'; END IF;
  UPDATE atlas.geographic_entities SET color_rgb='#0078FF',name='Asia renamed' WHERE id=2;
- IF (SELECT entity_id FROM atlas.map_category_bindings WHERE id=18)<>2 THEN
+ IF (SELECT id FROM atlas.map_category_bindings WHERE entity_id=2 AND physical_class='land') IS DISTINCT FROM land_code THEN
   RAISE EXCEPTION 'renaming an entity changed its encoding'; END IF;
  BEGIN
   UPDATE atlas.geographic_entities SET color_rgb='#0078GG' WHERE id=2;

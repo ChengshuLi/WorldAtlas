@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 import psycopg
 
-from worldatlas.map_build.inputs.releases import read_release_streams
+from worldatlas.map_build.inputs.releases import read_release_assets
 
 
 @unittest.skipUnless(
@@ -28,6 +28,10 @@ class ReleaseLookupTests(unittest.TestCase):
             )
             for name in ("rows.u32le.gz", "runs.u32le.gz")
         }
+        objects["config.json"] = dict(
+            r2_key=folder + "config.json", sha256="d" * 64, size_bytes=50,
+            content_type="application/json",
+        )
         raw = json.dumps(
             dict(objects=objects, decoded_sha256=dict(rows="b" * 64, runs="c" * 64))
         ).encode()
@@ -54,18 +58,20 @@ class ReleaseLookupTests(unittest.TestCase):
                         return_value=storage,
                     ),
                 ):
-                    candidate = read_release_streams(identity)
+                    candidate = read_release_assets(identity)
+                    streams, config = candidate
                     self.assertEqual(
-                        candidate[0][1:4], ("test", folder + "rows.u32le.gz", 12)
+                        streams[0][1:4], ("test", folder + "rows.u32le.gz", 12)
                     )
+                    self.assertEqual(config, dict(objects["config.json"], r2_bucket="test"))
                     self.assertEqual(storage.key, folder + "manifest.json")
                     with self.assertRaisesRegex(ValueError, "no unique release"):
-                        read_release_streams("v97.0")
+                        read_release_assets("v97.0")
                     database.execute(
                         "UPDATE atlas.map_releases SET is_official=true WHERE id=%s",
                         (identity,),
                     )
-                    self.assertEqual(read_release_streams("v97.0"), candidate)
+                    self.assertEqual(read_release_assets("v97.0"), candidate)
                     database.execute(
                         "UPDATE atlas.map_releases SET manifest_sha256=manifest_sha256 WHERE id=%s",
                         (identity,),

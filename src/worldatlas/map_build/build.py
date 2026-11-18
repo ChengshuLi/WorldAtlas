@@ -43,7 +43,7 @@ from worldatlas.map_build.inputs.selection import (
     read_saved,
     read_selection,
 )
-from worldatlas.map_build.inputs.releases import read_release_streams
+from worldatlas.map_build.inputs.releases import read_release_assets
 
 from worldatlas.map_build.execution.control import stage as stage_context
 
@@ -733,7 +733,7 @@ class Pipeline:
         return path
 
     def release_reference(self, version):
-        streams = read_release_streams(version)
+        streams, config = read_release_assets(version)
         digest = hashlib.sha256(json_bytes(streams)).hexdigest()
         directory = (self.root / "inputs" / ("release-" + digest)).resolve()
         if not directory.is_relative_to(self.root) or directory.is_relative_to(
@@ -772,6 +772,8 @@ class Pipeline:
             reference["reference_" + stream] = self.resolve_pins(
                 {"path": str(path), "sha256": decoded_hash}
             )
+        if config is not None:
+            reference["reference_config"] = self.cloud_file(config)
         return reference
 
     def resolve_source(self, name, spec):
@@ -1042,6 +1044,20 @@ class Pipeline:
             for root in (final, rows.parent)
             for name in ("rows.u32le", "runs.u32le")
         ]
+        bindings = {}
+        if config := self.sources.get("reference_config"):
+            inputs += [pin(config), pin(self.out / "input-selection.json")]
+            bindings = dict(
+                reference_bindings=[
+                    dict(
+                        code=category["id"],
+                        entity_id=category["entity_id"],
+                        physical_class=category["physical_class"],
+                    )
+                    for category in read(config)["categories"]
+                ],
+                candidate_bindings=self.selection["geography"]["category_bindings"],
+            )
         result = self.checkpoints.run_function(
             "compare",
             "verification",
@@ -1056,6 +1072,7 @@ class Pipeline:
             timing=self.timing,
             inputs=inputs,
             outputs=[self.out / "comparison"],
+            kwargs=bindings,
         )
         report = self.out / "comparison.json"
         if not report.exists():
