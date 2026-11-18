@@ -592,6 +592,23 @@ test("rotation refits the world and preserves a zoomed location", async () => {
     await resize(portrait);
     assert.equal(await inspect(90), portraitCell);
 
+    const touch = await page.context().newCDPSession(page);
+    const box = await canvas.boundingBox();
+    const x = box.x + box.width / 2;
+    const y = box.y + box.height / 2;
+    const fingers = (radius) => [{ x: x - radius, y, id: 0 }, { x: x + radius, y, id: 1 }];
+    await touch.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: fingers(50) });
+    await touch.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: fingers(60) });
+    await touch.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    const pinchedCell = await inspect(90);
+    assert.equal(pinchedCell, "Cell 83, 30");
+    await resize(landscape);
+    assert.equal(await inspect(90), "Cell 80, 30");
+    await resize(portrait);
+    assert.equal(await inspect(90), pinchedCell);
+    await page.getByRole("button", { name: "World", exact: true }).tap();
+    assert.equal(await inspect(90), portraitCell);
+
     const zoomIn = page.getByRole("button", { name: "Zoom in" });
     await zoomIn.tap();
     await zoomIn.tap();

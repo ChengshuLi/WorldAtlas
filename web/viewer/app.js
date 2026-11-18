@@ -18,6 +18,7 @@ let selectedGroups = new Set();
 let hoveredGroup = null;
 let selectedCell = null;
 let scale = 1;
+let requestedScale = null; // World view follows the viewport's fit scale.
 let ox = 0;
 let oy = 0;
 let dpr = 1;
@@ -45,6 +46,7 @@ function constrain() {
 
 function fitWorld() {
   if (!meta) return;
+  requestedScale = null;
   scale = minScale();
   ox = (viewportWidth - meta.width * scale) / 2;
   oy = (viewportHeight - meta.height * scale) / 2;
@@ -60,7 +62,9 @@ function zoom(
   nextY = y,
 ) {
   if (!meta) return;
-  const nextScale = Math.max(minScale(), Math.min(36, scale * factor));
+  const minimum = minScale();
+  const nextScale = Math.max(minimum, Math.min(36, scale * factor));
+  if (factor !== 1) requestedScale = nextScale === minimum ? null : nextScale;
   ox = nextX - ((x - ox) * nextScale) / scale;
   oy = nextY - ((y - oy) * nextScale) / scale;
   scale = nextScale;
@@ -93,8 +97,7 @@ function resize() {
   if (!width || !height) return;
 
   if (renderer && (width !== viewportWidth || height !== viewportHeight)) {
-    const newMinimum = minScale(width, height);
-    const nextScale = scale === minScale() ? newMinimum : Math.max(newMinimum, scale);
+    const nextScale = Math.max(minScale(width, height), requestedScale ?? 0);
     const ratio = nextScale / scale;
     ox = width / 2 - (viewportWidth / 2 - ox) * ratio;
     oy = height / 2 - (viewportHeight / 2 - oy) * ratio;

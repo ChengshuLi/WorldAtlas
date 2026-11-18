@@ -2,8 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import worker from "../worker.js";
 
-const request = (path, method = "GET") =>
-  new Request(`https://atlas.example${path}`, { method });
+const request = (path, method = "GET", headers) =>
+  new Request(`https://atlas.example${path}`, { method, headers });
 const env = { ATLAS: { get: async () => null } };
 
 test("health reports service readiness", async () => {
@@ -62,6 +62,42 @@ test("release assets keep their stored media type and support HEAD", async () =>
   assert.equal(response.headers.get("Content-Type"), "application/gzip");
   assert.equal(response.headers.get("Content-Encoding"), null);
   assert.equal(await response.text(), "");
+});
+
+test("release downloads revalidate cached files by ETag", async () => {
+  const path = "/releases/v9.0-rc.1/runs.u32le.gz";
+  const metadata = {
+    httpEtag: '"current"',
+    writeHttpMetadata: (h) => h.set("Content-Type", "application/gzip"),
+  };
+  const storage = {
+    ATLAS: {
+      async get(key, options) {
+        if (key !== path.slice(1)) return null;
+        const condition = options?.onlyIf;
+        assert.equal(condition?.has("If-Match") ?? false, false);
+        return condition?.get("If-None-Match") === metadata.httpEtag
+          ? metadata
+          : { ...metadata, body: "grid" };
+      },
+    },
+  };
+  const matches = await worker.fetch(request(path, "GET", {
+    "If-None-Match": '"current"',
+    "If-Match": '"ignore"',
+  }), storage);
+  assert.equal(matches.status, 304);
+  assert.equal(matches.body, null);
+  assert.equal(matches.headers.get("ETag"), '"current"');
+  assert.equal(matches.headers.get("Cache-Control"), "public, max-age=300");
+
+  const stale = await worker.fetch(request(path, "GET", { "If-None-Match": '"old"' }), storage);
+  assert.equal(stale.status, 200);
+  assert.equal(await stale.text(), "grid");
+  const missing = await worker.fetch(request(path.replace("runs", "missing"), "GET", {
+    "If-None-Match": '"current"',
+  }), storage);
+  assert.equal(missing.status, 404);
 });
 
 test("numbered candidates stay separate from the published homepage", async () => {
