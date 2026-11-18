@@ -213,20 +213,21 @@ function bindCanvasControls() {
       y: event.offsetY,
       ox,
       oy,
-      moved: 0,
+      panning: false,
     };
   });
   canvas.addEventListener("pointermove", (event) => {
     if (!data || drag?.id !== event.pointerId) return;
     const dx = event.offsetX - drag.x;
     const dy = event.offsetY - drag.y;
-    drag.moved = Math.max(drag.moved, Math.hypot(dx, dy));
+    if (!drag.panning && Math.hypot(dx, dy) < 5) return;
+    drag.panning = true;
     ox = drag.ox + dx;
     oy = drag.oy + dy;
     requestDraw();
   });
   canvas.addEventListener("pointerup", (event) => {
-    if (drag?.id === event.pointerId && drag.moved < 5) {
+    if (drag?.id === event.pointerId && !drag.panning) {
       selectCell(cellAt(event.offsetX, event.offsetY));
     }
     drag = null;

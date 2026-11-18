@@ -232,6 +232,28 @@ test("current map controls preserve selection, toggle legend and reset world", a
   el["legend-list"].children[0].dispatch("click");
   assert.ok(draws.at(-1).activeCodes.size > 0);
 });
+test("a tap selects without panning and a drag pans without selecting", async () => {
+  const { el, draws } = await fixture();
+  const origin = draws.at(-1).ox;
+  const pointer = (type, offsetX) => {
+    el.canvas.dispatch(type, { pointerId: 1, offsetX, offsetY: 300 });
+  };
+
+  pointer("pointerdown", 500);
+  pointer("pointermove", 503);
+  pointer("pointerup", 503);
+  assert.equal(draws.at(-1).ox, origin);
+  const selection = el.selection.textContent;
+  assert.match(selection, /^Cell /);
+
+  pointer("pointerdown", 500);
+  pointer("pointermove", 510);
+  assert.notEqual(draws.at(-1).ox, origin);
+  pointer("pointermove", 502);
+  pointer("pointerup", 502);
+  assert.equal(el.selection.textContent, selection);
+});
+
 test("structure, checksum and small native-grid renderer", () => {
   const html = read("index.html"),
     meta = JSON.parse(read("config.json"));
