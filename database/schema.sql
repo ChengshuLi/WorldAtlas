@@ -3,6 +3,11 @@
 BEGIN;
 CREATE SCHEMA atlas;
 
+CREATE FUNCTION atlas.nonblank(value text) RETURNS boolean
+LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE AS $$
+ SELECT value COLLATE "C" ~ '[^[:space:]]';
+$$;
+
 \ir schema/sources.sql
 \ir schema/construction_contracts.sql
 \ir schema/geographic_entities.sql

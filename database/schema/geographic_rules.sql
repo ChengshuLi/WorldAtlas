@@ -1,13 +1,13 @@
 -- Geographic algorithms reference imported geometry and direct-child targets.
 CREATE TABLE atlas.geographic_rules (
-    id text PRIMARY KEY CHECK (length(btrim(id)) > 0),
+    id text PRIMARY KEY CHECK (atlas.nonblank(id)),
     parent_id bigint NOT NULL REFERENCES atlas.geographic_entities(id),
     operation text NOT NULL CHECK (operation IN (
       'assign_area','divide_area','nearest_land','nearest_coastal_water','nearest_basin_water','nearest_water')),
     physical_class text NOT NULL CHECK (physical_class IN ('land','water','mixed')),
     unit text NOT NULL CHECK (unit IN ('cell','component')),
     unassigned_only boolean NOT NULL DEFAULT false,
-    rationale text NOT NULL CHECK (length(btrim(rationale)) > 0),
+    rationale text NOT NULL CHECK (atlas.nonblank(rationale)),
     CHECK (operation <> 'nearest_land' OR (physical_class='land' AND unit='component')),
     CHECK (operation NOT IN ('nearest_coastal_water','nearest_basin_water','nearest_water')
            OR (physical_class='water' AND unit='cell'))
@@ -19,7 +19,7 @@ CREATE TABLE atlas.geographic_rule_features (
     PRIMARY KEY (rule_id, feature_id, role)
 );
 CREATE TABLE atlas.geographic_rule_targets (
-    id text PRIMARY KEY CHECK (length(btrim(id)) > 0),
+    id text PRIMARY KEY CHECK (atlas.nonblank(id)),
     rule_id text NOT NULL REFERENCES atlas.geographic_rules(id) ON DELETE CASCADE,
     entity_id bigint NOT NULL REFERENCES atlas.geographic_entities(id),
     label_point_id text REFERENCES atlas.source_features(id)
@@ -28,7 +28,7 @@ CREATE TABLE atlas.geographic_rule_sources (
     rule_id text NOT NULL REFERENCES atlas.geographic_rules(id) ON DELETE CASCADE,
     source_id text NOT NULL REFERENCES atlas.source_assets(id),
     citation_section text NOT NULL,
-    interpretation text NOT NULL CHECK (length(btrim(interpretation)) > 0),
+    interpretation text NOT NULL CHECK (atlas.nonblank(interpretation)),
     PRIMARY KEY (rule_id, source_id)
 );
 

@@ -41,7 +41,7 @@ RETURNS boolean LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $$
 $$;
 
 CREATE TABLE atlas.source_features (
-    id text PRIMARY KEY CHECK (length(trim(id)) > 0),
+    id text PRIMARY KEY CHECK (atlas.nonblank(id)),
     geometry jsonb NOT NULL,
     construction_id text NOT NULL REFERENCES atlas.construction_records(id),
     CONSTRAINT source_features_geometry_check CHECK (atlas.valid_source_geometry(geometry))

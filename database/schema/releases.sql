@@ -2,7 +2,7 @@
 CREATE TABLE atlas.map_releases (
     id text PRIMARY KEY CHECK (id ~ '^v[0-9]+\.[0-9]+(-rc\.[1-9][0-9]*)?$'),
     map_version text GENERATED ALWAYS AS (split_part(id,'-rc.',1)) STORED,
-    r2_bucket text NOT NULL CHECK (length(btrim(r2_bucket)) > 0),
+    r2_bucket text NOT NULL CHECK (atlas.nonblank(r2_bucket)),
     r2_prefix text NOT NULL CHECK (r2_prefix='releases/'||id||'/'),
     manifest_sha256 text NOT NULL CHECK (manifest_sha256 ~ '^[0-9a-f]{64}$'),
     is_official boolean NOT NULL DEFAULT false,

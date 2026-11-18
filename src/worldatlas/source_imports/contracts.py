@@ -177,7 +177,7 @@ def sql_type(value, annotation, depth=0):
         base = sql_type(value, args[0], depth)
         if args[1:] not in (("nonempty",), ("source-id",)) or args[0] is not str:
             raise TypeError("unsupported construction annotation metadata")
-        return f"({base} AND ({value} #>> '{{}}') COLLATE \"C\" ~ '[^[:space:]]')"
+        return f"({base} AND atlas.nonblank({value} #>> '{{}}'))"
     if annotation is Any:
         return "TRUE"  # Every stored JSONB value is already valid JSON.
     if origin in (Union, types.UnionType):

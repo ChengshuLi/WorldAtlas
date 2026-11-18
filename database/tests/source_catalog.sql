@@ -23,6 +23,10 @@ BEGIN
  source_uri='test:corrected',license_name='Corrected terms',license_uri='test:terms-corrected',attribution='Corrected credit'
  WHERE id='__source';
  BEGIN
+  UPDATE atlas.source_assets SET title=E'\t\n' WHERE id='__source';
+  RAISE EXCEPTION 'whitespace-only title accepted';
+ EXCEPTION WHEN check_violation THEN NULL; END;
+ BEGIN
   INSERT INTO atlas.source_assets SELECT '__duplicate',title,provider,source_uri,license_name,
    license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes,created_at FROM atlas.source_assets WHERE id='__source';
   RAISE EXCEPTION 'one R2 object was registered twice';
