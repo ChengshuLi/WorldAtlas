@@ -45,6 +45,9 @@ Workers can edit separate areas in parallel. Those edits do not change the publi
 
 GitHub tracks code, schemas, documentation, and task issues. The user merges pull requests.
 
+Use everyday models for geography and history research. Use frontier models for
+coding and independent research review.
+
 ## 2. Geography
 
 ### Geographic framework and grid
@@ -127,7 +130,7 @@ Historical research and published values may share versioned tables. An accepted
 
 #### Research and review
 
-Complete geography, including its river pass, before historical attribute research. Afterward, independent research scopes can proceed in parallel, with dependencies enforced only where relevant. Use multiple Luna-class research agents with an independent 6.1-Sol-level reviewer; scale the ratio to workload rather than fixing it. Scope batches by locations or entities, attributes, years, sources, values, and reasoning. Each batch has one accountable owner through validation and delivery.
+Complete geography, including its river pass, before historical attribute research. Afterward, independent research scopes can proceed in parallel, with dependencies enforced only where relevant. Scale research and review capacity to the workload. Scope batches by locations or entities, attributes, years, sources, values, and reasoning. Each batch has one accountable owner through validation and delivery.
 
 Automatic checks cover IDs, applicability, units and value ranges, share constraints, conflicting intervals, and cross-attribute dependencies. The reviewer evaluates sources, estimates, and historical interpretation, then accepts a batch or requests corrections. Attribute work does not require routine user approval. Escalate uncertain judgments to the user with a concise issue, options, and recommendation; pause only dependent work while unrelated scopes continue.
 
