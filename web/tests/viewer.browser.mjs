@@ -493,6 +493,72 @@ for (const { name, options, fallback, sparse, uploadFailure } of [
   );
 }
 
+test("selection matches the displayed pixel at a land-water boundary", async () => {
+  for (const deviceScaleFactor of [1, 2]) {
+    const page = await browser.newPage({
+      viewport: { width: 320, height: 568 },
+      deviceScaleFactor,
+    });
+    try {
+      if (deviceScaleFactor === 2) {
+        await page.addInitScript(() => {
+          const getContext = HTMLCanvasElement.prototype.getContext;
+          HTMLCanvasElement.prototype.getContext = function (type, ...args) {
+            return type === "webgl2" ? null : getContext.call(this, type, ...args);
+          };
+        });
+      }
+      await loaded(page, `/${candidate}/index.html`, "v9.0");
+      await page.getByRole("button", { name: "Collapse legend" }).click();
+      const canvas = page.locator("#canvas");
+      const boundary = { x: 213, y: (await pickPoint(page, 80, 20)).y };
+      // The coast crosses this CSS pixel at x = 213⅓. Its first backing pixel
+      // samples land at 1× (x = 213.5) and water at 2× (x = 213.25).
+      const land = deviceScaleFactor === 1;
+      assert.deepEqual(
+        await visiblePixel(page, boundary),
+        land ? [222, 118, 110, 255] : [84, 141, 183, 255],
+      );
+      await canvas.click({ position: { ...boundary, x: land ? 213 : 213.4 } });
+      assert.match(
+        await page.locator("#selection").textContent(),
+        land ? /Asia \(land\)$/ : /Asia \(water\)$/,
+      );
+    } finally {
+      await page.close();
+    }
+  }
+});
+
+test("the legend leaves room for wrapped cell details", async () => {
+  const page = await browser.newPage({
+    viewport: { width: 320, height: 568 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  try {
+    await loaded(page, `/${candidate}/index.html`, "v9.0");
+    const selection = page.locator("#selection");
+    const short = await selection.boundingBox();
+    await selection.evaluate((element) => {
+      element.textContent = "Cell 28672, 14608 · 49.87656°, -101.24863° · North America (land)";
+    });
+    const wrapped = await selection.boundingBox();
+    assert.ok(wrapped.height > short.height);
+    assert.ok(wrapped.x >= 0 && wrapped.x + wrapped.width <= 320);
+    const panel = page.getByRole("region", { name: "Map legend" });
+    const assertAboveReadout = async (legend) => {
+      const box = await legend.boundingBox();
+      assert.ok(box.y + box.height < wrapped.y);
+    };
+    await assertAboveReadout(panel);
+    await page.getByRole("button", { name: "Collapse legend" }).tap();
+    await assertAboveReadout(page.getByRole("button", { name: "Legend", exact: true }));
+  } finally {
+    await page.close();
+  }
+});
+
 test("two fingers zoom the map around their moving midpoint", async () => {
   const page = await browser.newPage({
     viewport: { width: 390, height: 700 },

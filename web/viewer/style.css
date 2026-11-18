@@ -91,13 +91,22 @@ button:disabled {
 .tools button {
   box-shadow: 0 2px 8px #17394a33;
 }
-.legend-dock {
+.map-footer {
   position: absolute;
+  inset: auto 12px 10px;
   z-index: 4;
-  left: 12px;
-  bottom: 48px;
-  width: min(300px, calc(100% - 24px));
-  max-height: min(58vh, 520px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.legend-dock {
+  width: min(300px, 100%);
+}
+.legend-toggle,
+.legend-panel,
+.selection {
+  pointer-events: auto;
 }
 .legend-toggle {
   box-shadow: 0 2px 10px #17394a40;
@@ -173,7 +182,6 @@ button:disabled {
 }
 .selection,
 .status {
-  position: absolute;
   background: #fffffff0;
   border: 1px solid #b9cbd3;
   border-radius: 6px;
@@ -182,15 +190,14 @@ button:disabled {
   font-size: var(--small-text-size);
 }
 .selection {
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  align-self: center;
   width: max-content;
-  max-width: calc(100% - 24px);
+  max-width: 100%;
   overflow-wrap: anywhere;
   text-align: center;
 }
 .status {
+  position: absolute;
   top: 12px;
   left: 12px;
 }
@@ -227,17 +234,13 @@ button:disabled {
     height: calc(100dvh - 86px);
   }
   .legend-dock {
-    width: min(240px, calc(100% - 24px));
-    max-height: 45vh;
+    width: min(240px, 100%);
   }
   .legend-panel {
     max-height: 45vh;
   }
   .legend-item {
     padding: 4px 6px;
-  }
-  .selection {
-    max-width: calc(100% - 20px);
   }
 }
 .brand {

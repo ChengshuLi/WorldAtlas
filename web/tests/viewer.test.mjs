@@ -70,6 +70,9 @@ class Element {
     this.focused = true;
   }
   setPointerCapture() {}
+  getBoundingClientRect() {
+    return { left: 0, top: 0, width: this.clientWidth, height: this.clientHeight };
+  }
 }
 async function fixture() {
   const names = [
@@ -188,11 +191,11 @@ test("current map controls preserve selection, toggle legend and reset world", a
     offsetY: 300,
   });
   assert.equal(el.canvas.focused, true);
-  el.canvas.dispatch("pointerup", { pointerId: 1, offsetX: 500, offsetY: 300 });
+  el.canvas.dispatch("pointerup", { pointerId: 1, clientX: 500, clientY: 300 });
   const selected = el.selection.textContent;
   assert.match(
     selected,
-    /^Cell 65536, 27307 · 14\.99771°, 0\.00137° · Africa \(land\)$/,
+    /^Cell 65601, 27372 · 14\.81918°, 0\.17990° · Africa \(land\)$/,
   );
   assert.doesNotMatch(selected, /longitude|latitude/i);
   el.canvas.dispatch("pointermove", {
@@ -227,7 +230,9 @@ test("a tap selects without panning and a drag pans without selecting", async ()
   const { el, draws } = await fixture();
   const origin = draws.at(-1).ox;
   const pointer = (type, offsetX) => {
-    el.canvas.dispatch(type, { pointerId: 1, offsetX, offsetY: 300 });
+    el.canvas.dispatch(type, {
+      pointerId: 1, offsetX, offsetY: 300, clientX: offsetX, clientY: 300,
+    });
   };
 
   pointer("pointerdown", 500);

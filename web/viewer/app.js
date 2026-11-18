@@ -93,9 +93,16 @@ function resize() {
   if (renderer) requestDraw();
 }
 
-function cellAt(px, py) {
-  const x = wrapColumn(Math.floor((px - ox) / scale), meta.width);
-  const y = Math.floor((py - oy) / scale);
+function cellAt(clientX, clientY) {
+  const bounds = canvas.getBoundingClientRect();
+  const px = Math.floor((clientX - bounds.left) * canvas.width / bounds.width);
+  const py = Math.floor((clientY - bounds.top) * canvas.height / bounds.height);
+  if (px < 0 || px >= canvas.width || py < 0 || py >= canvas.height) return null;
+
+  // Both renderers sample the center of each backing pixel.
+  const pixelScale = scale * dpr;
+  const x = wrapColumn(Math.floor((px + 0.5 - ox * dpr) / pixelScale), meta.width);
+  const y = Math.floor((py + 0.5 - oy * dpr) / pixelScale);
   return y >= 0 && y < meta.height ? { x, y } : null;
 }
 
@@ -268,7 +275,7 @@ function bindCanvasControls() {
       return;
     }
     if (event.type === "pointerup" && !drag.panning) {
-      selectCell(cellAt(event.offsetX, event.offsetY));
+      selectCell(cellAt(event.clientX, event.clientY));
     }
     drag = null;
   }
