@@ -81,10 +81,18 @@ button:disabled {
 #canvas:active {
   cursor: grabbing;
 }
+.map-controls {
+  position: absolute;
+  inset: 12px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
 .tools {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 0;
+  right: 0;
   display: flex;
   gap: 6px;
 }
@@ -92,17 +100,18 @@ button:disabled {
   box-shadow: 0 2px 8px #17394a33;
 }
 .map-footer {
-  position: absolute;
-  inset: auto 12px 10px;
-  z-index: 4;
+  margin-top: auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  pointer-events: none;
 }
 .legend-dock {
   width: min(300px, 100%);
+  min-height: 0;
+  display: flex;
 }
+.tools button,
 .legend-toggle,
 .legend-panel,
 .selection {
@@ -125,6 +134,7 @@ button:disabled {
   backdrop-filter: blur(7px);
 }
 .legend-head {
+  flex: none;
   padding: 8px;
   display: flex;
   gap: 5px;
@@ -190,6 +200,7 @@ button:disabled {
   font-size: var(--small-text-size);
 }
 .selection {
+  flex: none;
   align-self: center;
   width: max-content;
   max-width: 100%;
@@ -232,6 +243,11 @@ button:disabled {
   }
   #map {
     height: calc(100dvh - 86px);
+  }
+  .tools {
+    position: static;
+    align-self: flex-end;
+    flex: none;
   }
   .legend-dock {
     width: min(240px, 100%);

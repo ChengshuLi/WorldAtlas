@@ -530,7 +530,7 @@ test("selection matches the displayed pixel at a land-water boundary", async () 
   }
 });
 
-test("the legend leaves room for wrapped cell details", async () => {
+test("the legend and map controls fit in narrow and short windows", async () => {
   const page = await browser.newPage({
     viewport: { width: 320, height: 568 },
     isMobile: true,
@@ -546,14 +546,35 @@ test("the legend leaves room for wrapped cell details", async () => {
     const wrapped = await selection.boundingBox();
     assert.ok(wrapped.height > short.height);
     assert.ok(wrapped.x >= 0 && wrapped.x + wrapped.width <= 320);
+
+    const map = page.locator("#map");
+    const toolbar = page.locator(".tools");
     const panel = page.getByRole("region", { name: "Map legend" });
-    const assertAboveReadout = async (legend) => {
+    const collapse = page.getByRole("button", { name: "Collapse legend" });
+    const toggle = page.getByRole("button", { name: "Legend", exact: true });
+    const list = panel.getByRole("group");
+    const assertFits = async (legend) => {
+      const area = await map.boundingBox();
+      const tools = await toolbar.boundingBox();
       const box = await legend.boundingBox();
-      assert.ok(box.y + box.height < wrapped.y);
+      const readout = await selection.boundingBox();
+      assert.ok(box.y >= area.y);
+      assert.ok(box.y + box.height < readout.y);
+      if (box.x + box.width > tools.x) assert.ok(box.y >= tools.y + tools.height);
     };
-    await assertAboveReadout(panel);
-    await page.getByRole("button", { name: "Collapse legend" }).tap();
-    await assertAboveReadout(page.getByRole("button", { name: "Legend", exact: true }));
+    await assertFits(panel);
+    for (const viewport of [{ width: 667, height: 240 }, { width: 320, height: 320 }]) {
+      await page.setViewportSize(viewport);
+      await assertFits(panel);
+      assert.equal(await list.evaluate((element) => {
+        element.scrollTop = element.scrollHeight;
+        return element.scrollTop > 0;
+      }), true);
+      await collapse.tap();
+      await assertFits(toggle);
+      await toggle.tap();
+      await assertFits(panel);
+    }
   } finally {
     await page.close();
   }
