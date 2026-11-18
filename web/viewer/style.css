@@ -185,10 +185,10 @@ button:disabled {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
+  width: max-content;
   max-width: calc(100% - 24px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 .status {
   top: 12px;
