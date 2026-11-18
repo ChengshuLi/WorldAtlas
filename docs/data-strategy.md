@@ -78,7 +78,7 @@ We chose a grid resolution fine enough to give every important inhabited island 
 
 Non-river-water locations are named and selectable. Land-continent groups include nearby seas, island-region waters, and lakes. Ocean groups cover the remaining ocean waters. Broad waters may be grouped with relevant continents. Adjacent groups may share large seas. Some lakes may be too small to appear at this resolution.
 
-**Bounded and shared seas.** Group these seas separately using documented geographic limits, including their bays, sounds, and passages. List the waters that belong to each sea group. A source dataset may draw the main sea, its bays, and its passages separately. Apply the chosen geographic boundary convention consistently when source conventions differ.
+**Bounded and shared seas.** Group these seas separately using documented geographic limits, including their bays, sounds, and passages. List the waters that belong to each sea group. A source dataset may draw the main sea, its bays, and its passages separately. Apply the chosen geographic boundary convention consistently when source conventions differ. For a shared sea, identify the continents whose physical shores border it. Assign each water cell to the continent with the nearest physical shore among those continents.
 
 **Open coasts.** Use a uniform 12-nautical-mile (22.224-km) buffer. Measure the shortest distance along the WGS84 ellipsoid between the center of each water cell and the centers of coastal land cells on the grid. Where buffers overlap, use the nearer coast. Source islands absent from the land grid do not generate buffers. The buffer defines a geographic grouping for this map.
 
