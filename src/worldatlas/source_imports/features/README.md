@@ -29,4 +29,4 @@ Imports retain selected provider outlines and holes after coordinate conversion.
 
 `holes: "outer_envelope"` explicitly selects exterior rings for an area interpretation, such as islands within a marine area. The provider's outer outline is preserved; the construction records the choice. The default `holes: "preserve"` retains holes.
 
-`interpreted_geometry` in [`interpreted.py`](interpreted.py) stores explicitly selected Point and Polygon interpretations, such as region labels and computation scopes. Its document contains typed `source_ids`, `basis` and `selections`, each with `feature_id` and `geometry`. It verifies the cataloged source bytes and saves through the same atomic storage helper. It does not read or combine other Neon features. Geographic selections remain in the construction record.
+`interpreted_geometry` in [`interpreted.py`](interpreted.py) saves points and polygons supplied in the construction record, such as region labels and computation scopes. It checks the cited source IDs in Neon and saves the given coordinates. Run it with `worldatlas-import --recipe CONSTRUCTION_ID`.

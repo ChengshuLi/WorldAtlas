@@ -52,7 +52,9 @@ def run_import(
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
     if importer is None:
         raise ValueError(f"unsupported source construction method: {method!r}")
-    if method != "geodesic_trace" and (storage is None or work_dir is None):
+    if method not in ("geodesic_trace", "interpreted_geometry") and (
+        storage is None or work_dir is None
+    ):
         raise ValueError("this method requires --r2-endpoint and --work-dir")
     if expected_geometry_sha256 is not None and method != "osm_way_chain":
         raise ValueError(

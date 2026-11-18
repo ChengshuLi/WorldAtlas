@@ -78,6 +78,21 @@ class StorageTests(unittest.TestCase):
             "SELECT id,geometry,construction_id FROM atlas.source_features ORDER BY id"
         ).fetchall()
 
+    def test_interpreted_geometry_imports_from_neon_without_r2(self):
+        geometry = {"type": "Point", "coordinates": [10, 20]}
+        self.database.execute(
+            "INSERT INTO atlas.construction_records(id,method,arguments) "
+            "VALUES ('__interpreted','interpreted_geometry',%s)",
+            (Jsonb(dict(
+                source_ids=["raw"],
+                basis="Selected point",
+                selections=[dict(feature_id="label", geometry=geometry)],
+            )),),
+        )
+        result = run_import(lambda: nullcontext(self.database), "__interpreted")
+        self.assertEqual(self.rows(), [("label", geometry, "__interpreted")])
+        self.assertEqual(result["timing"]["download_seconds"], 0)
+
     def test_repeat_and_recipe_edit_preserve_links_and_other_records(self):
         first = self.build()
         self.database.execute(

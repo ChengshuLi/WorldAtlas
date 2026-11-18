@@ -23,7 +23,7 @@ worldatlas-import --recipe CONSTRUCTION_ID \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-Figure traces need only the construction ID:
+Figure traces and explicitly stored geometry need only the construction ID:
 
 ```bash
 worldatlas-import --recipe lydekker-boundary-construction
@@ -50,7 +50,7 @@ The command follows construction links from `source_features`. Each construction
 
 The map builder uses the same verified raw-file cache. Both commands check the catalog's byte sizes and checksums before reusing downloads.
 
-Every construction consumes cataloged raw sources and its interpretation settings. No construction depends on another structured feature; grouping existing features belongs to geographic assignments in map building.
+Every construction cites cataloged raw sources. Figure traces and explicitly stored geometry use coordinates from the construction record. Other methods read the cataloged files. Grouping existing features belongs to geographic assignments in map building.
 
 ## Argument validation
 
