@@ -108,8 +108,11 @@ def main():
                     )
                 )
             )
-        with connect() as database:
-            identities = selected_constructions(database) if args.all else [args.recipe]
+        if args.all:
+            with connect() as database:
+                identities = selected_constructions(database)
+        else:
+            identities = [args.recipe]
         results = []
         for ident in identities:
             result = run_import(
@@ -129,7 +132,3 @@ def main():
                     + "\n"
                 )
     print(json.dumps(results if args.all else results[0]))
-
-
-if __name__ == "__main__":
-    main()
