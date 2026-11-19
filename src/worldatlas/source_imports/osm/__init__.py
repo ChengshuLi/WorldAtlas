@@ -1,1 +1,1 @@
-"""OpenStreetMap boundary extraction and Neon import."""
+"""Import OpenStreetMap points, polygons, and boundary lines."""
