@@ -199,6 +199,7 @@ class AreaTests(unittest.TestCase):
 
     def test_missing_cyclic_or_ambiguous_collection_is_rejected(self):
         examples = [
+            document(area("p", "mrn")),
             document(area("p", "mrn", children=["missing"])),
             document(area("p", "mrn", children=["p"])),
             document(area("a", "mrn", patch(SQUARE)), area("b", "mrn", patch(SQUARE))),
@@ -233,3 +234,8 @@ class AreaTests(unittest.TestCase):
         )
         self.assertTrue(result.is_valid)
         self.assertEqual(result.bounds, (-180, 70, 180, 90))
+
+    def test_ring_that_winds_around_pole_requires_an_explicit_pole_edge(self):
+        points = [(-135, 80), (-45, 82), (45, 83), (135, 81), (-135, 80)]
+        with self.assertRaisesRegex(ValueError, "does not close after unwrapping"):
+            read_polygon_patch(document(patch(points))[0])
