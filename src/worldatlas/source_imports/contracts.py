@@ -1,9 +1,12 @@
-"""Generate PostgreSQL construction checks and source references from Python types.
+"""Generate ``database/schema/construction_contracts.sql``.
 
-Each construction record stores a registered method name and a JSON object
-of arguments. The method's signature defines which arguments are required,
-their types, and which values refer to raw sources. Regenerating the SQL
-updates the construction checks and the shared nonblank text predicate.
+Read each registered importer's typed signature to generate PostgreSQL
+functions that validate stored construction arguments and extract the raw
+source IDs they reference. The same SQL defines the shared nonblank check
+for ordinary text columns and uses its pattern in construction JSON Schema.
+
+To regenerate from the repository root, run
+``python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql``.
 """
 
 import argparse
@@ -227,8 +230,8 @@ def database_checks():
     trigger uses them to maintain ``atlas.construction_sources``, whose
     foreign key requires each ID to exist in ``atlas.source_assets``.
 
-    Sort the method names and paths so the output can be compared directly
-    with the committed ``database/schema/construction_contracts.sql`` file.
+    Sort the method names and paths so ``--check`` can compare the output
+    with the committed SQL byte for byte.
     """
     from worldatlas.source_imports.run_import import IMPORTERS
 
