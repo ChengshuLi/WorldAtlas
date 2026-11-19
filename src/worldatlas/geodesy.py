@@ -1,10 +1,12 @@
-"""WGS84 geodesic segments shared by boundary constructors."""
+"""Provide WGS84 geodesic calculations and ellipsoid curvature bounds."""
 
 import math
 
 from pyproj import Geod
 
 GEOD = Geod(ellps="WGS84")
+MIN_RADIUS = GEOD.a * (1 - GEOD.f * (2 - GEOD.f))
+MAX_RADIUS = GEOD.a / (1 - GEOD.f)
 
 
 def geodesic(first, last, max_step_m):

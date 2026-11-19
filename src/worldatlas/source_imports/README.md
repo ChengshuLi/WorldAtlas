@@ -7,7 +7,8 @@ These tools read raw geographic files from R2 and save geographic records in Neo
 - [`features/`](features/README.md): selected vector points and polygons.
 - [`traces/`](traces/README.md): boundaries from reviewed points on source figures.
 - [`watersheds/`](watersheds/README.md): boundaries from terrain and natural drainage.
-- [`atlas_sources/`](atlas_sources/README.md): catalog lookup and verified downloads.
+
+[`worldatlas.source_assets`](../source_assets/README.md) provides catalog lookup and verified downloads for both source imports and map building.
 
 Each row in `atlas.construction_records` contains an `id`, a `method` and its named `arguments` in JSONB. Imported geometry links to that construction by `construction_id`. Each map build freezes the recipes, geometry and raw catalog records it used. Release archives retain those copies for replay.
 
@@ -60,7 +61,7 @@ For the existing working database, back up and test a one-off upgrade before app
 
 The `IMPORTERS` registry in [`run_import.py`](run_import.py) shows which function runs each method. Constructors coordinate file access, calculations, and saving. [`features/geometry.py`](features/geometry.py) validates and saves imported geometry in one transaction.
 
-Tests live beside their code. `test_run_import.py` checks dispatch, `test_contracts.py` checks the generated constraints against database writes, and `atlas_sources/test_catalog.py` checks file acquisition. Package READMEs describe their algorithm and storage tests.
+Tests live beside their code. `test_run_import.py` checks dispatch, `test_contracts.py` checks the generated constraints against database writes, and `worldatlas.source_assets.test_source_assets` checks file acquisition. Package READMEs describe their algorithm and storage tests.
 
 ```bash
 python .github/scripts/run_tests.py --suite source_imports

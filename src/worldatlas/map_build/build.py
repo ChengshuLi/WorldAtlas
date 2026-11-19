@@ -647,9 +647,7 @@ class Pipeline:
                         raise ValueError("concurrent cloud input changed") from None
                 partial.unlink()
             else:
-                from worldatlas.source_imports.atlas_sources.catalog import (
-                    download_source,
-                )
+                from worldatlas.source_assets import download_source
                 from worldatlas.map_build.physical.build import make_r2_client
 
                 staging = self.cfg.get("physical_controls", {}).get(

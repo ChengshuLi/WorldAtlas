@@ -13,7 +13,7 @@ import numpy as np
 from pyproj import Transformer
 from shapely.geometry import LineString
 
-from worldatlas.source_imports.atlas_sources.catalog import assemble_parts, catalog_source, download_source
+from worldatlas.source_assets import assemble_parts, catalog_source, download_source
 from worldatlas.source_imports.features.geometry import save_features
 from worldatlas.source_imports.watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
 from worldatlas.source_imports.watersheds.drainage import compute_flow, possible_destinations, single_destinations

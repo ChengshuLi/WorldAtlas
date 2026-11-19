@@ -14,7 +14,6 @@ from pathlib import Path
 
 import psycopg
 
-from worldatlas.source_imports.atlas_sources.catalog import read_recipe
 from worldatlas.source_imports.contracts import Runtime
 from worldatlas.source_imports.features.build_features import (
     s130_areas,
@@ -38,6 +37,29 @@ IMPORTERS = {
         interpreted_geometry,
     )
 }
+
+
+def read_recipe(database, recipe_id):
+    """Return the stored method and arguments for a construction ID.
+
+    Args:
+        database: The caller's PostgreSQL connection.
+        recipe_id: Construction ID to look up.
+
+    Returns:
+        A pair containing the method name and its argument dictionary.
+
+    Raises:
+        ValueError: The construction record is missing.
+    """
+    row = database.execute(
+        'SELECT method,arguments FROM atlas.construction_records '
+        'WHERE id=%s',
+        (recipe_id,),
+    ).fetchone()
+    if row is None:
+        raise ValueError('construction record is missing from Neon')
+    return row
 
 
 def run_import(connect, recipe_id, *, storage=None, work_dir=None):

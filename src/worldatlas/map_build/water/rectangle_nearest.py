@@ -6,9 +6,8 @@ share proofs across rows; uncertain cells use the complete point classifier.
 
 import math
 import numpy as np
+from worldatlas.geodesy import MAX_RADIUS, MIN_RADIUS
 from worldatlas.map_build.water import shared_nearest as s
-
-MAX_RADIUS = s.A / (1 - s.F)
 
 
 def rectangle_counts(mask, block):
@@ -51,8 +50,8 @@ def exact_certificate_possible(lower, best, upper, radius, boundary):
     a replacement for exact minima or the final interval certificate.
     """
     maximum = np.where(
-        lower < s.MIN_RADIUS * 1.98,
-        MAX_RADIUS / s.MIN_RADIUS * (lower + 0.001) + 0.01,
+        lower < MIN_RADIUS * 1.98,
+        MAX_RADIUS / MIN_RADIUS * (lower + 0.001) + 0.01,
         math.pi * MAX_RADIUS + 0.01,
     )
     rows = np.arange(len(lower))

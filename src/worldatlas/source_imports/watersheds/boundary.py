@@ -5,16 +5,14 @@ import heapq
 import math
 
 import numpy as np
-from pyproj import CRS, Geod, Transformer
+from pyproj import CRS, Transformer
 from shapely import linestrings
 from shapely.geometry import LineString, Point
 from shapely.ops import substring
 from shapely.strtree import STRtree
 
 from worldatlas.source_imports.watersheds.drainage import upstream_order
-from worldatlas.source_imports.geodesy import geodesic
-
-GEOD = Geod(ellps='WGS84')
+from worldatlas.geodesy import GEOD, geodesic
 
 
 def distance(first, second):

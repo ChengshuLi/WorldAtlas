@@ -10,9 +10,9 @@ import os
 
 import numpy as np
 from numba import njit
-from pyproj import CRS, Geod, Transformer
+from pyproj import CRS, Transformer
 
-GEOD = Geod(ellps='WGS84')
+from worldatlas.geodesy import GEOD
 UNKNOWN = -1
 
 

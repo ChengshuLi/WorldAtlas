@@ -62,7 +62,7 @@ def make_r2_client(endpoint):
 
 def download_r2(endpoint, entry, destination):
     """Write a streamed response exclusively. Keep partial files for inspection."""
-    from worldatlas.source_imports.atlas_sources.catalog import stream_source
+    from worldatlas.source_assets import stream_source
 
     control.check_cancelled()
     with closing(make_r2_client(endpoint)) as client, destination.open('xb') as stream:

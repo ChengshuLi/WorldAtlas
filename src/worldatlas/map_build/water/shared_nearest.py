@@ -9,12 +9,7 @@ from __future__ import annotations
 import math
 import numpy as np
 from scipy.spatial import cKDTree
-from pyproj import Geod
-
-A = 6378137.0
-F = 1 / 298.257223563
-MIN_RADIUS = A * (1 - F * (2 - F))
-GEOD = Geod(a=A, f=F)
+from worldatlas.geodesy import GEOD, MIN_RADIUS
 
 
 def unit(lat, lon):

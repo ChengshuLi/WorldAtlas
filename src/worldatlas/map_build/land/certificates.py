@@ -3,7 +3,7 @@
 import math
 import numpy as np
 from scipy.spatial import cKDTree
-from worldatlas.map_build.core.geodesy import GEOD, MIN_RADIUS as M_MIN
+from worldatlas.geodesy import GEOD, MIN_RADIUS as M_MIN
 
 
 def _unit(lat, lon):

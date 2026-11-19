@@ -8,7 +8,7 @@ import time
 from typing import Literal, NotRequired, TypedDict
 
 from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
-from worldatlas.source_imports.atlas_sources.catalog import (
+from worldatlas.source_assets import (
     catalog_source,
     download_source,
     check_source,

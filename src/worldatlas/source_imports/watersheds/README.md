@@ -12,7 +12,7 @@
 | [`waterways.py`](waterways.py) | Read natural waterways and trace their drainage destinations. |
 | [`sources.py`](sources.py) | Read source features, including basin polygons and river relations. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
-| [`../atlas_sources/catalog.py`](../atlas_sources/catalog.py) | Resolve catalog IDs and verify downloaded or multipart files. |
+| [`worldatlas.source_assets`](../../source_assets/README.md) | Resolve catalog IDs and verify downloaded or multipart files. |
 | [`../features/geometry.py`](../features/geometry.py) | Validate and save geometry with its construction reference. |
 
 The split follows the work: read source features, prepare terrain, calculate drainage, then assemble the boundary. The typed `watershed_boundary()` entry point in `build_boundary.py` declares the construction fields and connects those steps to Neon and R2. It uses source basin polygons and river networks to establish drainage destinations. Boundary assembly joins the selected source features and calculated sections. `__init__.py` marks the Python package and lets our test discovery find its tests.

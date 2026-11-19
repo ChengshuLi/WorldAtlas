@@ -9,29 +9,6 @@ from tempfile import NamedTemporaryFile
 import time
 
 
-def read_recipe(database, recipe_id):
-    """Return the stored method and arguments for a construction ID.
-
-    Args:
-        database: The caller's PostgreSQL connection.
-        recipe_id: Construction ID to look up.
-
-    Returns:
-        A pair containing the method name and its argument dictionary.
-
-    Raises:
-        ValueError: The construction record is missing.
-    """
-    row = database.execute(
-        'SELECT method,arguments FROM atlas.construction_records '
-        'WHERE id=%s',
-        (recipe_id,),
-    ).fetchone()
-    if row is None:
-        raise ValueError('construction record is missing from Neon')
-    return row
-
-
 def catalog_source(database, source_id):
     """Resolve a raw source ID into its R2 location and expected file identity.
 

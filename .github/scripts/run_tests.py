@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = Path(worldatlas.__file__).resolve().parent
 SUITES = {
     'database': True,
+    'source_assets': False,
     'source_imports': True,
     'map_build': True,
     'map_releases': False,

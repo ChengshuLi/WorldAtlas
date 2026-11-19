@@ -1,3 +1,5 @@
+"""Test verified R2 downloads, cache reuse, and multipart assembly."""
+
 import hashlib
 import io
 from pathlib import Path
@@ -5,10 +7,13 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from worldatlas.source_imports.atlas_sources.catalog import download_source, assemble_parts
+from worldatlas import source_assets
+from worldatlas.source_assets import assemble_parts, download_source
 
 
 class DownloadTest(unittest.TestCase):
+    """Exercise the file cache with temporary files and an in-memory R2 client."""
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -45,10 +50,8 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(self.storage.get_object.call_count, 1)
 
     def test_download_time_excludes_verification_and_cached_reuse(self):
-        import worldatlas.source_imports.atlas_sources.catalog as catalog
-
         clock, timing = [0.0], {}
-        original = catalog.check_source
+        original = source_assets.check_source
 
         def retrieve(**kwargs):
             clock[0] += 3.0
@@ -59,8 +62,8 @@ class DownloadTest(unittest.TestCase):
             original(path, source)
 
         self.storage.get_object.side_effect = retrieve
-        with patch('worldatlas.source_imports.atlas_sources.catalog.time.monotonic', side_effect=lambda: clock[0]), patch(
-            'worldatlas.source_imports.atlas_sources.catalog.check_source', side_effect=verify
+        with patch('worldatlas.source_assets.time.monotonic', side_effect=lambda: clock[0]), patch(
+            'worldatlas.source_assets.check_source', side_effect=verify
         ):
             download_source(self.storage, self.source, self.directory, timing=timing)
             download_source(self.storage, self.source, self.directory, timing=timing)
@@ -127,7 +130,7 @@ class DownloadTest(unittest.TestCase):
     def test_multipart_download_times_accumulate_without_charging_reassembly(self):
         parts, whole, digest = self.parts()
         timing = {}
-        with patch('worldatlas.source_imports.atlas_sources.catalog.time.monotonic', side_effect=[0.0, 2.0, 4.0, 7.0]):
+        with patch('worldatlas.source_assets.time.monotonic', side_effect=[0.0, 2.0, 4.0, 7.0]):
             assemble_parts(
                 self.storage,
                 parts,
