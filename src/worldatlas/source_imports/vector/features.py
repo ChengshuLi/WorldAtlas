@@ -183,7 +183,10 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
         and original.IsSame(target, ["IGNORE_DATA_AXIS_TO_SRS_AXIS_MAPPING=YES"])
     )
     if not use_native_coordinates:
-        conversion = osr.CreateCoordinateTransformation(original, target)
+        with osr.ExceptionMgr(useExceptions=False):
+            conversion = osr.CreateCoordinateTransformation(original, target)
+        if conversion is None:
+            raise ValueError("source coordinate reference cannot be converted to WGS84")
     export_options = ["SIGNIFICANT_FIGURES=17"] if is_geojson else []
 
     result = []

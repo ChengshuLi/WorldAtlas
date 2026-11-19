@@ -344,6 +344,23 @@ class VectorTests(unittest.TestCase):
                 selections=[dict(feature_id="point", source_feature_id=0)],
             )
 
+    def test_rejects_a_local_grid_without_a_wgs84_conversion(self):
+        reference = osr.SpatialReference()
+        reference.SetLocalCS("Site grid")
+        reference.SetLinearUnits("metre", 1)
+        path = self.write_point_shapefile(reference)
+        for use_exceptions in (False, True):
+            with (
+                self.subTest(use_exceptions=use_exceptions),
+                osr.ExceptionMgr(useExceptions=use_exceptions),
+                self.assertRaisesRegex(ValueError, "coordinate reference cannot be converted to WGS84"),
+            ):
+                read_features(
+                    path,
+                    id_field="@fid",
+                    selections=[dict(feature_id="point", source_feature_id=0)],
+                )
+
     def test_fails_if_gdal_cannot_initialize_wgs84(self):
         with (
             patch.object(osr.SpatialReference, "SetFromUserInput", return_value=1),
