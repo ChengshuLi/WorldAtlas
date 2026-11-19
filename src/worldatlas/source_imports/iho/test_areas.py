@@ -26,7 +26,16 @@ from worldatlas.source_imports.iho.areas import (
 from worldatlas.source_imports.run_import import main
 
 
-def patch(coordinates, hole=None):
+def polygon_xml(outline, hole=None):
+    """Build a GML polygon fixture from longitude-first coordinates.
+
+    Args:
+        outline: Closed sequence of longitude and latitude pairs.
+        hole: Optional closed sequence of pairs describing an interior ring.
+
+    Returns:
+        XML text with latitude-first coordinates as used by the S-130 archive.
+    """
     def ring(points, kind):
         return (
             f'<g:{kind}><g:LinearRing><g:posList srsName="{EPSG_4326}">'
@@ -36,30 +45,51 @@ def patch(coordinates, hole=None):
 
     return (
         "<g:PolygonPatch>"
-        + ring(coordinates, "exterior")
+        + ring(outline, "exterior")
         + (ring(hole, "interior") if hole else "")
         + "</g:PolygonPatch>"
     )
 
 
-def area(ident, mrn, geometry="", parent=None, children=()):
+def sea_area_xml(xml_id, provider_id, polygons="", containing_id=None, piece_ids=()):
+    """Build an S-130 sea-area record for a test document.
+
+    Args:
+        xml_id: ID that other XML records use to link to this record.
+        provider_id: IHO ID that a recipe uses to select the whole sea area.
+        polygons: XML text for polygon elements stored directly in the record.
+        containing_id: XML ID of the containing area, if supplied.
+        piece_ids: XML IDs of pieces listed by this record.
+
+    Returns:
+        XML text for the sea-area record.
+    """
     return (
-        f'<s:GlobalSeaArea g:id="{ident}"><s:featureIdentifier>{mrn}</s:featureIdentifier>'
-        + (f'<s:theComponent x:href="#{parent}"/>' if parent else "")
-        + "".join(f'<s:theCollection x:href="#{child}"/>' for child in children)
-        + geometry
+        f'<s:GlobalSeaArea g:id="{xml_id}">'
+        f"<s:featureIdentifier>{provider_id}</s:featureIdentifier>"
+        + (f'<s:theComponent x:href="#{containing_id}"/>' if containing_id else "")
+        + "".join(f'<s:theCollection x:href="#{piece_id}"/>' for piece_id in piece_ids)
+        + polygons
         + "</s:GlobalSeaArea>"
     )
 
 
-def document(*areas):
+def parse_document(*elements):
+    """Parse XML fixtures under a shared root that declares their namespaces.
+
+    Args:
+        *elements: XML fragments to include in the given order.
+
+    Returns:
+        The parsed root element.
+    """
     return ElementTree.fromstring(
         '<root xmlns:s="'
         + NS["s130"]
         + '" xmlns:g="'
         + NS["gml"]
         + '" xmlns:x="http://www.w3.org/1999/xlink">'
-        + "".join(areas)
+        + "".join(elements)
         + "</root>"
     )
 
@@ -74,7 +104,7 @@ class ImportTests(unittest.TestCase):
     """Exercise the command with a real database and a minimal S-130 archive."""
 
     def test_command_imports_only_the_selected_gml_member(self):
-        gml = ElementTree.tostring(document(area("area", "urn:mrn:example", patch(SQUARE))))
+        gml = ElementTree.tostring(parse_document(sea_area_xml("area", "urn:mrn:example", polygon_xml(SQUARE))))
         archive = BytesIO()
         with ZipFile(archive, "w") as output:
             output.writestr("unused.gml", b"unused member")
@@ -138,33 +168,32 @@ class AreaTests(unittest.TestCase):
 
     def test_hole_is_preserved(self):
         hole = [(0.5, 0.5), (1.5, 0.5), (1.5, 1.5), (0.5, 1.5), (0.5, 0.5)]
-        reader = SeaAreas(document(area("a", "mrn", patch(SQUARE, hole))))
-        geometry = reader.geometry("mrn")
-        self.assertEqual(shape(geometry).area, 3)
+        reader = SeaAreas(parse_document(sea_area_xml("a", "mrn", polygon_xml(SQUARE, hole))))
+        actual = shape(reader.geometry("mrn"))
+        self.assertTrue(actual.equals(Polygon(SQUARE, holes=[hole])))
 
     def test_complete_shared_mrn_collection_keeps_every_piece(self):
         second = [(x + 5, y) for x, y in SQUARE]
         reader = SeaAreas(
-            document(
+            parse_document(
                 '<s:DataCoverage g:id="coverage"/>',
-                area("parent", "mrn", children=["a", "b"]),
-                area("a", "mrn", patch(SQUARE), parent="parent"),
-                area("b", "mrn", patch(second), parent="parent"),
+                sea_area_xml("parent", "mrn", piece_ids=["a", "b"]),
+                sea_area_xml("a", "mrn", polygon_xml(SQUARE), containing_id="parent"),
+                sea_area_xml("b", "mrn", polygon_xml(second), containing_id="parent"),
             )
         )
-        geometry = reader.geometry("mrn")
-        self.assertEqual(shape(geometry).area, 8)
-        self.assertEqual(len(shape(geometry).geoms), 2)
+        expected = MultiPolygon([Polygon(SQUARE), Polygon(second)])
+        self.assertTrue(shape(reader.geometry("mrn")).equals(expected))
 
     def test_parent_with_its_own_surface_is_not_replaced_by_subseas(self):
         reader = SeaAreas(
-            document(
-                area("parent", "large", patch(SQUARE), children=["child"]),
-                area(
+            parse_document(
+                sea_area_xml("parent", "large", polygon_xml(SQUARE), piece_ids=["child"]),
+                sea_area_xml(
                     "child",
                     "small",
-                    patch([(x / 2, y / 2) for x, y in SQUARE]),
-                    parent="parent",
+                    polygon_xml([(x / 2, y / 2) for x, y in SQUARE]),
+                    containing_id="parent",
                 ),
             )
         )
@@ -176,7 +205,7 @@ class AreaTests(unittest.TestCase):
         expected = MultiPolygon([box(179, 0, 180, 2), box(-180, 0, -179, 2)])
         for ring in (points, [(-longitude, latitude) for longitude, latitude in points]):
             with self.subTest(start=ring[0]):
-                result = read_polygon_patch(document(patch(ring))[0])
+                result = read_polygon_patch(parse_document(polygon_xml(ring))[0])
                 self.assertTrue(result.is_valid)
                 self.assertEqual(result.geom_type, "MultiPolygon")
                 self.assertTrue(result.equals(expected))
@@ -190,8 +219,8 @@ class AreaTests(unittest.TestCase):
 
     def test_duplicate_xml_ids_and_missing_provider_ids_are_rejected(self):
         cases = (
-            (document(area("a", "first"), area("a", "second")), "duplicate GML feature ID"),
-            (document(area("a", "")), "S-130 area has no provider area ID"),
+            (parse_document(sea_area_xml("a", "first"), sea_area_xml("a", "second")), "duplicate GML feature ID"),
+            (parse_document(sea_area_xml("a", "")), "S-130 area has no provider area ID"),
         )
         for value, message in cases:
             with self.subTest(case=message), self.assertRaisesRegex(ValueError, message):
@@ -199,10 +228,10 @@ class AreaTests(unittest.TestCase):
 
     def test_missing_cyclic_or_ambiguous_collection_is_rejected(self):
         examples = [
-            document(area("p", "mrn")),
-            document(area("p", "mrn", children=["missing"])),
-            document(area("p", "mrn", children=["p"])),
-            document(area("a", "mrn", patch(SQUARE)), area("b", "mrn", patch(SQUARE))),
+            parse_document(sea_area_xml("p", "mrn")),
+            parse_document(sea_area_xml("p", "mrn", piece_ids=["missing"])),
+            parse_document(sea_area_xml("p", "mrn", piece_ids=["p"])),
+            parse_document(sea_area_xml("a", "mrn", polygon_xml(SQUARE)), sea_area_xml("b", "mrn", polygon_xml(SQUARE))),
         ]
         for value in examples:
             with self.subTest(value=value), self.assertRaises(ValueError):
@@ -211,16 +240,16 @@ class AreaTests(unittest.TestCase):
     def test_bad_ring_is_rejected(self):
         for points in (SQUARE[:-1], [(0, 0), (1, 1), (0, 1), (1, 0), (0, 0)]):
             with self.subTest(points=points), self.assertRaises(ValueError):
-                SeaAreas(document(area("a", "mrn", patch(points)))).geometry("mrn")
+                SeaAreas(parse_document(sea_area_xml("a", "mrn", polygon_xml(points)))).geometry("mrn")
 
     def test_ring_rejects_wrong_coordinate_system(self):
-        position = document('<g:posList srsName="EPSG:3857">0 0</g:posList>')[0]
+        position = parse_document('<g:posList srsName="EPSG:3857">0 0</g:posList>')[0]
         with self.assertRaisesRegex(ValueError, "expected S-130 latitude/longitude"):
             read_ring_coordinates(position)
 
     def test_ring_requires_at_least_four_complete_coordinate_pairs(self):
         for values in ("0 0 0 1 0 0", "0 0 0 2 2 2 2 0 0"):
-            position = document(f'<g:posList srsName="{EPSG_4326}">{values}</g:posList>')[0]
+            position = parse_document(f'<g:posList srsName="{EPSG_4326}">{values}</g:posList>')[0]
             with (
                 self.subTest(coordinates=values),
                 self.assertRaisesRegex(ValueError, "invalid S-130 ring coordinates"),
@@ -230,7 +259,7 @@ class AreaTests(unittest.TestCase):
     def test_explicit_polar_cap_preserves_both_world_edges(self):
         points = [(180, 70), (0, 75), (-180, 70), (-180, 90), (180, 90), (180, 70)]
         result = shape(
-            SeaAreas(document(area("a", "mrn", patch(points)))).geometry("mrn")
+            SeaAreas(parse_document(sea_area_xml("a", "mrn", polygon_xml(points)))).geometry("mrn")
         )
         self.assertTrue(result.is_valid)
         self.assertEqual(result.bounds, (-180, 70, 180, 90))
@@ -238,4 +267,4 @@ class AreaTests(unittest.TestCase):
     def test_ring_that_winds_around_pole_requires_an_explicit_pole_edge(self):
         points = [(-135, 80), (-45, 82), (45, 83), (135, 81), (-135, 80)]
         with self.assertRaisesRegex(ValueError, "does not close after unwrapping"):
-            read_polygon_patch(document(patch(points))[0])
+            read_polygon_patch(parse_document(polygon_xml(points))[0])
