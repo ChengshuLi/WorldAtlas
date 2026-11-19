@@ -139,20 +139,30 @@ class RecipeSchema(GenerateJsonSchema):
     def typed_dict_schema(self, schema):
         """Generate a schema that rejects every undeclared field name.
 
-        Take Pydantic's core ``schema`` for a typed dictionary and return
-        the JSON Schema with unknown fields forbidden. This catches typos
-        in top-level arguments and nested objects, including optional keys.
+        This catches typos in top-level arguments and nested objects,
+        including misspelled optional keys.
+
+        Args:
+            schema: Pydantic core schema for a ``TypedDict``.
+
+        Returns:
+            A JSON Schema dictionary with ``additionalProperties`` set to false.
         """
         return super().typed_dict_schema(schema) | {"additionalProperties": False}
 
     def dict_schema(self, schema):
         """Generate JSON Schema for a mapping, enforcing any key pattern.
 
-        Convert Pydantic's core mapping ``schema`` to JSON Schema.
         ``patternProperties`` validates values under matching keys.
         Setting ``additionalProperties`` to false also rejects keys that
         fail the pattern, such as a blank name in a watershed's ``sources``.
-        Keep Pydantic's generated value rules for maps without a key pattern.
+
+        Args:
+            schema: Pydantic core schema for a Python mapping.
+
+        Returns:
+            The JSON Schema dictionary with nonmatching keys forbidden
+            if there is a key pattern. Otherwise, Pydantic's schema as generated.
         """
         result = super().dict_schema(schema)
         if "patternProperties" in result:
@@ -228,7 +238,7 @@ def source_paths(annotation, path="$"):
 
 
 def database_checks():
-    """Return the complete SQL text generated from the importer registry.
+    """Generate SQL checks and source reference extraction for the registry.
 
     ``atlas.nonblank`` uses the same Unicode whitespace pattern as
     ``NonEmptyText`` so plain SQL columns and JSON arguments agree.
@@ -245,6 +255,9 @@ def database_checks():
 
     Sort the method names and paths so ``--check`` can compare the output
     with the committed SQL byte for byte.
+
+    Returns:
+        The SQL script containing all three generated function definitions.
     """
     from worldatlas.source_imports.run_import import IMPORTERS
 

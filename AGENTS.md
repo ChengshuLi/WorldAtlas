@@ -3,7 +3,7 @@
 These rules apply to every agent working in this repository.
 
 - Keep code, documentation, and reports concise and human-readable.
-- Follow [PEP 257](https://peps.python.org/pep-0257/) for Python docstrings. Give public modules, classes, and functions a short summary. For nontrivial functions, document inputs by name, return values, side effects, and relevant exceptions. Use `Args`, `Returns`, and `Raises` sections when they make the interface easier to scan.
+- Follow [PEP 257](https://peps.python.org/pep-0257/) for Python docstrings. Give public modules, classes, and functions a short summary. Use an explicit `Args` section for caller-supplied parameters and a `Returns` section for returned values, including for short functions. Document side effects and relevant exceptions. Omit empty sections.
 - Follow [PEP 8](https://peps.python.org/pep-0008/#comments) for comments. Use complete sentences and keep comments in sync with the code. Use inline comments sparingly and explain decisions or constraints that the code alone does not show.
 - Treat correctness and performance as core requirements. Avoid unnecessary computation and memory use, and measure performance when a change could materially affect it.
 - When blocked or slowed down, always first ask whether the blocking mechanism is needed. Remove it completely if unnecessary. If it is needed, choose the appropriate fix, including a justified exception when warranted.

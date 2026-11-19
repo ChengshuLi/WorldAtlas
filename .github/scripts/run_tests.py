@@ -71,7 +71,9 @@ def main():
 
     Check that the generated SQL is current, prepare isolated database
     fixtures where needed, and stop the temporary server on exit.
-    Return zero when all selected suites pass or one if any suite fails.
+
+    Returns:
+        Zero when all selected suites pass or one if any suite fails.
     """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--suite', choices=SUITES, help='run one suite; defaults to all suites')
