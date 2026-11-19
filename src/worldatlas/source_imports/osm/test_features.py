@@ -84,12 +84,6 @@ class OsmFeatureTests(unittest.TestCase):
         self.assertEqual(len(polygons[0]), 2)
         self.assertEqual(len(polygons[1]), 1)
 
-    def test_outer_envelope_is_an_explicit_construction_choice(self):
-        self.selection["holes"] = "outer_envelope"
-        self.assertEqual(
-            [len(p) for p in self.read()["geometry"]["coordinates"]], [1, 1]
-        )
-
     def test_whole_number_versions_match_the_archived_osm_version(self):
         expected = self.read()
         for version in (3, 3.0):
@@ -98,48 +92,16 @@ class OsmFeatureTests(unittest.TestCase):
                     self.read(dict(self.selection, object_version=version)), expected
                 )
 
-    def test_anchor_selects_one_ring_without_discarding_or_misassigning_other_holes(
-        self,
-    ):
-        self.selection.update(
-            geometry_type="Polygon",
-            ring_anchors=[
-                dict(
-                    node_id="21",
-                    node_version="1",
-                    way_id="40",
-                    expected_tags={"name": "Selected"},
-                )
-            ],
-        )
-        geometry = self.read()["geometry"]
-        self.assertEqual(
-            geometry,
-            {
-                "type": "Polygon",
-                "coordinates": [
-                    [[20.0, 0.0], [30.0, 0.0], [30.0, 10.0], [20.0, 10.0], [20.0, 0.0]]
-                ],
-            },
-        )
-        self.selection["ring_anchors"][0]["way_id"] = "10"
-        with self.assertRaisesRegex(ValueError, "anchor"):
-            self.read()
-
-    def test_nodes_closed_ways_and_parent_membership(self):
+    def test_nodes_and_closed_ways(self):
         node = dict(
             feature_id="point",
             source_feature_id="1",
             object_type="node",
             object_version="1",
-            parent_relation={"id": "100", "version": "3", "role": "label"},
         )
         self.assertEqual(
             self.read(node)["geometry"], {"type": "Point", "coordinates": [0.0, 0.0]}
         )
-        node["parent_relation"]["role"] = "other"
-        with self.assertRaisesRegex(ValueError, "parent"):
-            self.read(node)
         way = dict(
             feature_id="closed",
             source_feature_id="40",

@@ -8,7 +8,7 @@ Both methods use the [common import command](../README.md#run-one-construction) 
 
 Each selection identifies an output `feature_id`, provider `source_feature_id`, `object_type` (`node`, `way` or `relation`) and `object_version`. Optional `expected_tags` verify provider tags. The constructor joins member ways at shared node IDs in stable way-ID order.
 
-Relations preserve inner rings by default. An explicit `holes: outer_envelope` selects the outer envelope, while `ignored_member_roles` identifies non-geometric members such as label nodes. Optional `ring_anchors` select particular rings by tagged node ID/version and member way; `parent_relation` checks a selected membership. These interpretations live in the construction record. The same implementation handles administrative, reef and archipelago sources.
+Polygon imports preserve holes and return a `MultiPolygon`. Use `ignored_member_roles` to identify non-geometric members such as label nodes. The same implementation handles administrative, reef and archipelago sources.
 
 Provider-defined geographic `group` and `collection` relations can produce one island-group feature. The reader includes direct polygon ways and nested polygon relations, preserves child holes, and unions overlapping members. Construction settings explicitly identify ignored metadata roles. Missing members and cycles fail. A parent `/full` response alone may omit nested geometry, so the archived input must contain the complete recursive graph.
 
@@ -33,7 +33,7 @@ Use `evidence_source_ids` to cite additional sources that explain the selection.
 
 ## Tests
 
-[`test_features.py`](test_features.py) covers joining, holes, anchors, membership, source identity, and invalid geometry. [`test_ways.py`](test_ways.py) checks chain assembly, direction, and invalid geometry. [`test_way_import.py`](test_way_import.py) checks the Neon/R2 workflow and database transactions.
+[`test_features.py`](test_features.py) covers joining, holes, nested groups, source identity, and invalid geometry. [`test_ways.py`](test_ways.py) checks chain assembly, direction, and invalid geometry. [`test_way_import.py`](test_way_import.py) checks the Neon/R2 workflow and database transactions.
 
 Run the tests from the repository root.
 

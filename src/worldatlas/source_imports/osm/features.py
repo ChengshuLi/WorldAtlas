@@ -15,24 +15,6 @@ from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import feature_result, save_features
 
 
-class ParentRelation(TypedDict):
-    """Require membership in an exact archived OSM relation."""
-
-    id: NonEmptyText | int
-    version: NonEmptyText | int
-    role: str
-    expected_tags: NotRequired[dict[str, str]]
-
-
-class RingAnchor(TypedDict):
-    """Select an outer ring by its tagged node and member way."""
-
-    node_id: NonEmptyText | int
-    way_id: NonEmptyText | int
-    node_version: NonEmptyText | int
-    expected_tags: dict[str, str]
-
-
 class OsmSelection(TypedDict):
     """Select a versioned OSM object and how to interpret its geometry."""
 
@@ -41,11 +23,7 @@ class OsmSelection(TypedDict):
     object_type: Literal["node", "way", "relation"]
     object_version: NonEmptyText | int
     expected_tags: NotRequired[dict[str, str]]
-    parent_relation: NotRequired[ParentRelation]
     ignored_member_roles: NotRequired[list[tuple[Literal["n", "w", "r"], str]]]
-    ring_anchors: NotRequired[list[RingAnchor]]
-    holes: NotRequired[Literal["preserve", "outer_envelope"]]
-    geometry_type: NotRequired[Literal["Polygon", "MultiPolygon"]]
 
 
 @dataclass
@@ -175,16 +153,16 @@ def selected_object(records, ident, version, tags):
 
 
 def polygon_geometry(graph, selected, record, ancestry=()):
-    """Assemble a source polygon with its selected rings and hole treatment.
+    """Assemble the complete selected polygon, preserving its holes.
 
     Args:
         graph: Nodes, ways, and relations from the archived extract.
-        selected: Geometry type, member roles, and optional ring selections.
+        selected: Selected object identity and ignored member roles.
         record: Chosen OSM way or relation.
         ancestry: Parent relation IDs used to detect cycles.
 
     Returns:
-        The selected GeoJSON polygon or multipolygon.
+        The selected GeoJSON MultiPolygon.
     """
     if selected["object_type"] == "relation" and record["tags"].get("type") in (
         "group",
@@ -215,24 +193,6 @@ def polygon_geometry(graph, selected, record, ancestry=()):
                 raise ValueError("unsupported OSM geometric or metadata member role")
     rings = assemble_rings(outer)
     holes = assemble_rings(inner) if inner else []
-    chosen = None
-    if anchors := selected.get("ring_anchors"):
-        chosen = []
-        for anchor in sorted(anchors, key=lambda a: int(a["node_id"])):
-            node, way = int(anchor["node_id"]), int(anchor["way_id"])
-            selected_object(
-                graph.nodes, node, anchor["node_version"], anchor["expected_tags"]
-            )
-            if [ident for ident, refs in outer.items() if node in refs] != [
-                way
-            ] or outer[way].count(node) != 1:
-                raise ValueError(
-                    "OSM anchor must belong to exactly its selected outer way"
-                )
-            matches = [ring for ring in rings if ring.count(node) == 1]
-            if len(matches) != 1 or matches[0] in chosen:
-                raise ValueError("OSM anchor does not select one distinct ring")
-            chosen.append(matches[0])
 
     def coordinates(ring):
         if any(n not in graph.nodes or graph.nodes[n]["deleted"] for n in ring):
@@ -255,21 +215,9 @@ def polygon_geometry(graph, selected, record, ancestry=()):
         if len(owners) != 1:
             raise ValueError("OSM inner ring needs exactly one containing outer ring")
         owners[0].append(points)
-    complete = {"type": "MultiPolygon", "coordinates": polygons}
-    validate_geometry(complete)
-    if chosen is not None:
-        polygons = [polygons[rings.index(ring)] for ring in chosen]
-    treatment = selected.get("holes", "preserve")
-    if treatment == "outer_envelope":
-        polygons = [[polygon[0]] for polygon in polygons]
-    elif treatment != "preserve":
-        raise ValueError("unsupported OSM hole treatment")
-    kind = selected.get("geometry_type", "MultiPolygon")
-    if kind == "Polygon" and len(polygons) == 1:
-        return {"type": kind, "coordinates": polygons[0]}
-    if kind != "MultiPolygon":
-        raise ValueError("polygon output needs one polygon or a multipolygon")
-    return {"type": kind, "coordinates": polygons}
+    geometry = {"type": "MultiPolygon", "coordinates": polygons}
+    validate_geometry(geometry)
+    return geometry
 
 
 def group_geometry(graph, selected, record, ancestry):
@@ -277,12 +225,12 @@ def group_geometry(graph, selected, record, ancestry):
 
     Args:
         graph: Nodes, ways, and relations from the archived extract.
-        selected: Geometry type, ignored roles, and hole treatment.
+        selected: Selected object identity and ignored member roles.
         record: Chosen OSM group or collection relation.
         ancestry: Parent relation IDs used to detect cycles.
 
     Returns:
-        The combined GeoJSON polygon or multipolygon.
+        The combined GeoJSON MultiPolygon.
     """
     from shapely import union_all
     from shapely.geometry import mapping, shape
@@ -326,31 +274,11 @@ def group_geometry(graph, selected, record, ancestry):
     result = union_all(polygons)
     if result.geom_type not in ("Polygon", "MultiPolygon"):
         raise ValueError("OSM geographic group needs polygon geometry")
-    geometry = mapping(result)
-    if selected.get("holes", "preserve") == "outer_envelope":
-        parts = (
-            [geometry["coordinates"]]
-            if result.geom_type == "Polygon"
-            else geometry["coordinates"]
-        )
-        geometry = dict(type="MultiPolygon", coordinates=[[part[0]] for part in parts])
-    elif selected.get("holes", "preserve") != "preserve":
-        raise ValueError("unsupported OSM hole treatment")
-    if selected.get("ring_anchors"):
-        raise ValueError(
-            "ring anchors apply to individual polygons, not geographic groups"
-        )
-    wanted = selected.get("geometry_type", "MultiPolygon")
-    if geometry["type"] == "Polygon" and wanted == "MultiPolygon":
-        geometry = dict(type="MultiPolygon", coordinates=[geometry["coordinates"]])
-    elif (
-        geometry["type"] == "MultiPolygon"
-        and wanted == "Polygon"
-        and len(geometry["coordinates"]) == 1
-    ):
-        geometry = dict(type="Polygon", coordinates=geometry["coordinates"][0])
-    if geometry["type"] != wanted:
-        raise ValueError("group does not have the requested polygon type")
+    coordinates = mapping(result)["coordinates"]
+    geometry = {
+        "type": "MultiPolygon",
+        "coordinates": [coordinates] if result.geom_type == "Polygon" else coordinates,
+    }
     validate_geometry(geometry)
     return geometry
 
@@ -378,22 +306,6 @@ def read_features(path, selections):
             selection["object_version"],
             selection.get("expected_tags", {}),
         )
-        if parent := selection.get("parent_relation"):
-            relation = selected_object(
-                graph.relations,
-                parent["id"],
-                parent["version"],
-                parent.get("expected_tags", {}),
-            )
-            member = (
-                {"node": "n", "way": "w", "relation": "r"}[kind],
-                int(selection["source_feature_id"]),
-                parent["role"],
-            )
-            if relation["members"].count(member) != 1:
-                raise ValueError(
-                    "selected OSM object must be one member of its selected parent"
-                )
         geometry = (
             {"type": "Point", "coordinates": list(record["coordinates"])}
             if kind == "node"
@@ -408,7 +320,6 @@ def read_features(path, selections):
             )
         )
     return result
-
 
 
 def selected_osm_features(
