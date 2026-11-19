@@ -144,7 +144,6 @@ def read_features(path, selections):
     return [
         dict(
             feature_id=selection["feature_id"],
-            source_feature_id=selection["source_feature_id"],
             geometry=geometries[key],
         )
         for key, selection in requested.items()
