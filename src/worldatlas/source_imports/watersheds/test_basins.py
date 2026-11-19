@@ -90,6 +90,11 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(terminals[0, 0], 3)
         self.assertEqual(terminals[1, 1], -1)
 
+    def test_batched_outlet_lookup_keeps_a_shared_edge_with_an_unselected_basin_unknown(self):
+        grid = Grid(np.zeros((1, 3)), (.25, .5, 0., 1.5, 0., -1.), 'EPSG:4326')
+        labels = self.basins({3: [100]}).terminals(grid, np.full((1, 3), -1))
+        np.testing.assert_array_equal(labels, [[3, -1, -1]])
+
     def test_observed_ocean_creates_land_outlets_without_classifying_the_sea(self):
         grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
         ocean = np.zeros((4, 4), dtype=bool)

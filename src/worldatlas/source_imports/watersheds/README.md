@@ -51,7 +51,7 @@ Optional `evidence_sources` is a list of catalog source-ID strings supporting ge
 
 Source basin values identify drainage groups. A group can include several basins, and group IDs need not be consecutive. The value `-1` represents unknown drainage. Use `waterway_groups` for explicitly identified downstream ways. The constructor traces other waterways to their source-backed exit basins and tracks destinations between actual junctions. A section feeding two known groups retains both destinations.
 
-When `basins` selects a Shapefile in a ZIP, GDAL opens the selected `.shp` member and reads its companion files inside the archive. The provider attribute named by `basin_attribute` supplies the IDs used in `groups`.
+When `basins` selects a Shapefile in a ZIP, GDAL opens the selected `.shp` member and reads its companion files inside the archive. The provider attribute named by `basin_attribute` supplies the IDs used in `groups`. Basin lookups for terrain exits and coastal land outlets are batched, with all basin matches retained for each cell.
 
 Before processing terrain, the constructor checks rivers that intersect the analysis areas and follows their downstream connections. Missing coordinates or an unresolved route stop the run with the relevant way and node IDs. This includes a fork with one known branch and one unresolved branch. Correct the raw data or the source-backed destination references and rerun. Unrelated waterways outside the analysis do not block construction.
 
@@ -61,7 +61,7 @@ The result includes the river-crossing check, shared sections with their source 
 
 Mapped rivers can continue through several estuary ways beyond the basin polygons. Trace back through that uncovered geometry to the downstream-most basin intersection on each path. Report the selected way, group and intersection. Stop at an unselected or ambiguous source basin; a path without a source-backed destination remains unassigned.
 
-Pyosmium reads both OSM XML and PBF. ZIP members are unpacked to temporary files for the same streaming reader. For natural drainage, the reader merges way versions from all files before loading the node coordinates they reference. This lets a way use points supplied by another file. Natural drainage includes rivers and streams. Shared nodes and way endpoints preserve downstream connections without turning every shape vertex into a separate graph junction. Raster seeding selects intersecting ways without clipping their geometry or downstream relationships.
+Pyosmium reads both OSM XML and PBF. ZIP members are unpacked to temporary files for the same streaming reader. For natural drainage, the reader merges way versions from all files before loading the node coordinates they reference. This lets a way use points supplied by another file. Natural drainage includes rivers and streams. Shared nodes and way endpoints preserve downstream connections without turning every shape vertex into a separate graph junction. Raster seeding selects intersecting ways without clipping their geometry or downstream relationships. GDAL receives the line coordinates in binary form and marks each terrain cell they touch.
 
 ## Terrain and flow
 

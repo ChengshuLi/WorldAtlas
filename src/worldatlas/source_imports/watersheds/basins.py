@@ -1,9 +1,11 @@
 """Classify watershed outlets using the selected provider basin polygons."""
 
+from collections import defaultdict
+
 import numpy as np
 from osgeo import gdal
 from pyproj import CRS, Transformer
-from shapely import from_wkb, get_coordinates, transform as transform_geometry
+from shapely import from_wkb, get_coordinates, points, transform as transform_geometry
 from shapely.geometry import Point
 from shapely.strtree import STRtree
 
@@ -100,6 +102,20 @@ class Basins:
         last = [item for item in exits if item[0] == station]
         return self.group({item[1] for item in last}), min(item[2] for item in last)
 
+    def _groups_at_cells(self, grid, rows, columns):
+        """Look up cell centers in one spatial query and preserve unknown groups."""
+        to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
+        lon, lat = to_geo.transform(*grid.coordinates(rows, columns), errcheck=True)
+        locations, polygons = self.tree.query(points(lon, lat), predicate='covered_by')
+        # A point on a shared edge can be covered by more than one basin.
+        basin_ids = defaultdict(set)
+        for location, polygon in zip(locations, polygons, strict=True):
+            basin_ids[location].add(self.values[polygon])
+        groups = np.full(len(rows), -1, dtype='int64')
+        for location, values in basin_ids.items():
+            groups[location] = self.group(values)
+        return groups
+
     def terminals(self, grid, flow):
         """Classify terminal cells at the boundary of the terrain grid.
 
@@ -112,13 +128,10 @@ class Basins:
         """
         result = np.full(flow.shape, -1, dtype='int64')
         height, width = flow.shape
-        to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
-        for rr, cc in np.argwhere(flow == -1):
-            row, column = int(rr), int(cc)
-            if row not in (0, height - 1) and column not in (0, width - 1):
-                continue
-            point = to_geo.transform(*grid.coordinates(row, column), errcheck=True)
-            result[row, column] = self.at(point)
+        rows, columns = np.nonzero(flow == -1)
+        edge = (rows == 0) | (rows == height - 1) | (columns == 0) | (columns == width - 1)
+        rows, columns = rows[edge], columns[edge]
+        result[rows, columns] = self._groups_at_cells(grid, rows, columns)
         return result
 
     def coastal_outlets(self, grid, ocean):
@@ -148,10 +161,8 @@ class Basins:
                 shore[first] |= ocean[second]
         shore &= ~ocean
         labels = np.full(ocean.shape, -1, dtype='int64')
-        to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
-        for rr, cc in np.argwhere(shore):
-            point = to_geo.transform(*grid.coordinates(rr, cc), errcheck=True)
-            labels[rr, cc] = self.at(point)
+        rows, columns = np.nonzero(shore)
+        labels[rows, columns] = self._groups_at_cells(grid, rows, columns)
         return ocean | shore, labels
 
     def uncovered_exits(self, grid, flow, exits, labels, seeds):

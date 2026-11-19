@@ -1,7 +1,6 @@
 """Read pinned OSM objects and assign natural waterways by downstream topology."""
 from collections import defaultdict
 from dataclasses import dataclass
-import json
 import math
 from pathlib import Path
 import shutil
@@ -13,6 +12,7 @@ import osmium
 from osgeo import gdal, ogr, osr
 from pyproj import CRS
 from pyproj import Transformer
+from shapely import to_wkb
 from shapely.geometry import LineString, Point, box
 from shapely.strtree import STRtree
 
@@ -359,7 +359,15 @@ class Waterways:
 
 
 def rasterize(lines, grid):
-    """Burn WGS84 line geometries onto a native geographic or projected grid."""
+    """Burn WGS84 lines onto a native geographic or projected grid.
+
+    Args:
+        lines: Iterable of Shapely lines in longitude and latitude.
+        grid: Native terrain grid to receive the river mask.
+
+    Returns:
+        A Boolean array marking every cell touched by a line.
+    """
     height, width = grid.elevation.shape
     destination = gdal.GetDriverByName('MEM').Create('', width, height, 1, gdal.GDT_Byte)
     destination.SetGeoTransform(grid.transform)
@@ -369,9 +377,10 @@ def rasterize(lines, grid):
     source_crs.ImportFromEPSG(4326)
     source_crs.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
     layer = vector.CreateLayer('lines', source_crs, ogr.wkbLineString)
-    for line in lines:
-        feature = ogr.Feature(layer.GetLayerDefn())
-        feature.SetGeometry(ogr.CreateGeometryFromJson(json.dumps(line.__geo_interface__)))
+    definition = layer.GetLayerDefn()
+    for geometry in to_wkb(list(lines)):
+        feature = ogr.Feature(definition)
+        feature.SetGeometry(ogr.CreateGeometryFromWkb(geometry))
         layer.CreateFeature(feature)
     if layer.GetFeatureCount():
         gdal.RasterizeLayer(destination, [1], layer, burn_values=[1], options=['ALL_TOUCHED=TRUE'])
