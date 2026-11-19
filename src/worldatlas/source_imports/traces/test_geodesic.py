@@ -1,3 +1,5 @@
+"""Test geodesic sampling and line validation for traced boundaries."""
+
 import unittest
 
 from pyproj import Geod
@@ -7,6 +9,8 @@ from worldatlas.source_imports.traces.geodesic import construct
 
 
 class GeodesicTraceTests(unittest.TestCase):
+    """Check the geometry generated from small sets of control points."""
+
     def test_keeps_every_control_point_and_limits_segment_spacing(self):
         points = [[10., 1.], [9., 0.], [8., -1.]]
         coordinates = construct(points, 1000)["coordinates"]

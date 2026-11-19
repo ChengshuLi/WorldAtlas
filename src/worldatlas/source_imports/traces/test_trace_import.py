@@ -1,4 +1,4 @@
-"""Editable trace recipes update working geometry without changing earlier snapshots."""
+"""Test imports, recipe edits, and links for traced boundaries."""
 
 from contextlib import nullcontext
 import os
@@ -12,6 +12,8 @@ from worldatlas.source_imports.run_import import run_import
     os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
 )
 class DatabaseTests(unittest.TestCase):
+    """Run the trace importer against a disposable PostgreSQL database."""
+
     def setUp(self):
         self.db = psycopg.connect(os.environ["WORLDATLAS_TEST_DATABASE_URL"])
         self.addCleanup(self.db.close)
@@ -44,9 +46,10 @@ class DatabaseTests(unittest.TestCase):
             "SELECT geometry,construction_id FROM atlas.source_features WHERE id='line'"
         ).fetchone()
 
-    def test_repeat_and_edit_preserve_links_and_old_coordinate_copy(self):
+    def test_repeat_and_edit_preserve_source_and_rule_links(self):
         first = self.build()
         before = self.row()
+        self.assertEqual(before[0]["coordinates"][0], [10.0, 1.0])
         self.assertEqual(self.build(), first)
         self.assertEqual(self.row(), before)
         self.db.execute(
@@ -64,9 +67,15 @@ class DatabaseTests(unittest.TestCase):
         self.recipe["points"] = [[12.0, 1.0], [11.0, 0.0], [10.0, -1.0]]
         self.store()
         self.build()
-        self.assertEqual(before[0]["coordinates"][0], [10.0, 1.0])
-        self.assertEqual(self.row()[0]["coordinates"][0], [12.0, 1.0])
-        self.assertEqual(self.row()[1], "trace")
+        geometry, construction_id = self.row()
+        self.assertEqual(geometry["coordinates"][0], [12.0, 1.0])
+        self.assertEqual(construction_id, "trace")
+        self.assertEqual(
+            self.db.execute(
+                "SELECT source_id FROM atlas.construction_sources WHERE construction_id='trace'"
+            ).fetchall(),
+            [("raw",)],
+        )
         self.assertEqual(
             self.db.execute(
                 "SELECT feature_id FROM atlas.geographic_rule_features"

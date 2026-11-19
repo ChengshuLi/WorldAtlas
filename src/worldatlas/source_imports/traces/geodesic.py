@@ -70,6 +70,10 @@ def geodesic_trace(
 
     Returns:
         Saved feature ID and vertex count.
+
+    Raises:
+        ValueError: The trace is invalid, a cited source is missing or
+            repeated, or the geometry cannot be saved for the current recipe.
     """
     if not source_ids or len(set(source_ids)) != len(source_ids):
         raise ValueError("trace sources must be nonempty and distinct")

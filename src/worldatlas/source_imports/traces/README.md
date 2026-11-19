@@ -1,8 +1,6 @@
 # Boundaries traced from source figures
 
-Build one final boundary by joining reviewed control points stored in Neon with WGS84 geodesics. Every control point is preserved. The points include the intended path through gaps and around islands; there is no later adjustment stage.
-
-[`geodesic.py`](geodesic.py) contains `geodesic_trace` and the calculation that joins consecutive control points. The [shared WGS84 sampler](../../geodesy/wgs84.py) also serves watershed connectors. The constructor checks the cited raw sources and saves the final geometry to Neon.
+[`geodesic.py`](geodesic.py) checks `source_ids` against the Neon source catalog and uses `points` and `max_step_metres` to generate one boundary. The [shared WGS84 sampler](../../geodesy/wgs84.py) joins consecutive control points while preserving each point and limiting the spacing along the line.
 
 ## Construction record
 
@@ -19,9 +17,7 @@ Set `method` to `geodesic_trace` on the construction row. Use `basis` to record 
 
 The path may run in any direction. Consecutive points must be distinct, and the boundary must not cross or retrace itself. The constructor produces one LineString and rejects paths that cross the antimeridian. Invalid coordinates or sampling settings stop before saving.
 
-The original source figure stays in R2. A reviewer reads it and records the chosen points in `arguments` and the rationale in `basis`. The constructor uses the saved points directly.
-
-The final boundary is generated directly from the chosen points. Intermediate traces and smoothed boundaries are not required inputs or separately saved outputs. To edit the construction, edit its record and rerun the same ID.
+The original figure stays in R2. To revise its interpretation, update the control points in `arguments` and the rationale in `basis`, then rerun the same construction ID.
 
 ## Run
 
@@ -35,10 +31,8 @@ The command saves the geometry and its construction ID. Source links connect the
 
 ## Tests
 
-[`test_geodesic.py`](test_geodesic.py) checks geodesic paths, control-point preservation, spacing, and invalid geometry. [`test_trace_import.py`](test_trace_import.py) checks stored constructions, source references, repeat runs, and failed writes.
+[`test_geodesic.py`](test_geodesic.py) checks the sampled paths and rejects invalid geometry. [`test_trace_import.py`](test_trace_import.py) uses disposable PostgreSQL to check repeat imports, preserved links, and rejected edits.
 
 ```bash
 python .github/scripts/run_tests.py --suite source_imports
 ```
-
-The runner provisions a disposable PostgreSQL database and includes database writes, repeat runs, edits and rollback checks.
