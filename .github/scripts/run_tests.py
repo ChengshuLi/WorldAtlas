@@ -18,7 +18,7 @@ import traceback
 import psycopg
 from psycopg import sql
 from psycopg.conninfo import make_conninfo
-from worldatlas.source_imports.contracts import database_checks
+from worldatlas.source_imports.shared.contracts import database_checks
 
 import worldatlas
 

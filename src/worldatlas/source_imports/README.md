@@ -2,11 +2,12 @@
 
 These tools read raw geographic files from R2 and save geographic records in Neon. The source catalog identifies each exact file by one immutable `source_id`, its R2 location, byte size and checksum. Changed raw bytes get a new source ID.
 
-- [`osm/`](osm/README.md): archived OpenStreetMap boundaries and selected features.
-- [`iho/`](iho/README.md): Complete IHO S-130 sea areas.
-- [`features/`](features/README.md): selected vector points and polygons.
-- [`traces/`](traces/README.md): boundaries from reviewed points on source figures.
-- [`watersheds/`](watersheds/README.md): boundaries from terrain and natural drainage.
+- [`vector/`](vector/README.md) implements `selected_vector_features` for provider vector datasets.
+- [`interpreted/`](interpreted/README.md) implements `interpreted_geometry` for reviewed coordinates stored in a recipe.
+- [`osm/`](osm/README.md) implements `selected_osm_features` and `osm_way_chain` for archived OpenStreetMap objects.
+- [`iho/`](iho/README.md) implements `s130_areas` for complete IHO sea areas.
+- [`traces/`](traces/README.md) implements `geodesic_trace` for lines from reviewed source-figure points.
+- [`watersheds/`](watersheds/README.md) implements `watershed_boundary` for lines derived from terrain and natural drainage.
 
 [`worldatlas.source_assets`](../source_assets/README.md) provides catalog lookup and verified downloads for both source imports and map building.
 
@@ -47,21 +48,21 @@ Every construction cites cataloged raw sources. Figure traces and explicitly sto
 
 Each constructor's typed keyword-only parameters define the keys in `arguments`. A parameter without a default is required. A default makes it optional. `NonEmptyText` rejects empty or whitespace-only text. Nested `TypedDict` definitions describe feature selections. The command supplies `runtime` separately with connections, work paths and the construction ID.
 
-[`contracts.py`](contracts.py) uses Pydantic to turn the signatures into JSON Schema and generates the SQL that calls `pg_jsonschema`. Neon rejects unknown methods and fields, missing required fields, and incorrect types when a recipe is saved. Constructors check source identities, coordinates, joins, and the relationships between geographic choices when the recipe runs.
+[`shared/contracts.py`](shared/contracts.py) uses Pydantic to turn the signatures into JSON Schema and generates the SQL that calls `pg_jsonschema`. Neon rejects unknown methods and fields, missing required fields, and incorrect types when a recipe is saved. Constructors check source identities, coordinates, joins, and the relationships between geographic choices when the recipe runs.
 
 After changing signatures or nested types, regenerate the initial-schema checks:
 
 ```bash
-python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql
+python -m worldatlas.source_imports.shared.contracts database/schema/construction_contracts.sql
 ```
 
 For the existing working database, back up and test a one-off upgrade before applying the new argument validator and source-ID extractor. Recheck existing rows against the new validator. Keep the transition script with that maintenance backup. CI checks that the generated SQL matches the Python declarations.
 
 ## Code and tests
 
-The `IMPORTERS` registry in [`run_import.py`](run_import.py) shows which function runs each method. Constructors coordinate file access, calculations, and saving. [`features/geometry.py`](features/geometry.py) validates and saves imported geometry in one transaction.
+The `IMPORTERS` registry in [`run_import.py`](run_import.py) points to each typed method. [`shared/sources.py`](shared/sources.py) resolves the method's file and evidence IDs in one catalog query, then acquires the files it reads. [`shared/storage.py`](shared/storage.py) validates the output and saves it in one transaction after checking the recipe snapshot.
 
-Tests live beside their code. `test_run_import.py` checks dispatch, `test_contracts.py` checks the generated constraints against database writes, and `worldatlas.source_assets.test_source_assets` checks file acquisition. Package READMEs describe their algorithm and storage tests.
+Tests live beside their code. `test_run_import.py` checks dispatch, `shared/test_contracts.py` checks the generated constraints against database writes, and `shared/test_storage.py` checks atomic feature saves. `worldatlas.source_assets.test_source_assets` checks the raw-file cache. Package READMEs describe their construction tests.
 
 ```bash
 python .github/scripts/run_tests.py --suite source_imports

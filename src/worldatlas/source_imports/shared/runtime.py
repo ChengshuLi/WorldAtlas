@@ -1,0 +1,25 @@
+"""Supply connections and the recipe snapshot to source constructors."""
+
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+
+@dataclass(frozen=True)
+class Runtime:
+    """Give a constructor the resources and record snapshot for one import.
+
+    ``connect`` opens a PostgreSQL connection. ``storage`` provides access
+    to raw objects in R2, and ``work_dir`` locates the download cache when
+    one is configured. The importer passes this object separately from the
+    JSON arguments. ``recipe_id``, ``method``, and ``arguments`` identify
+    the record and the settings it used, so shared storage can confirm the
+    settings still match when the constructor writes its results.
+    """
+
+    connect: Any
+    storage: Any
+    recipe_id: str
+    method: str
+    arguments: dict
+    work_dir: Path | None = None

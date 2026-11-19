@@ -5,16 +5,17 @@ import logging
 from pathlib import Path
 import platform
 import time
-from typing import Any, TypedDict
+from typing import Any
 
-from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
+from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
 
 import numpy as np
 from pyproj import Transformer
 from shapely.geometry import LineString
 
-from worldatlas.source_assets.catalog import assemble_parts, catalog_source, download_source
-from worldatlas.source_imports.features.geometry import save_features
+from worldatlas.source_imports.shared.runtime import Runtime
+from worldatlas.source_imports.shared.sources import MultipartSource, acquire_sources
+from worldatlas.source_imports.shared.storage import save_features
 from worldatlas.source_imports.watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
 from worldatlas.source_imports.watersheds.drainage import compute_flow, possible_destinations, single_destinations
 from worldatlas.source_imports.watersheds.sources import Sources
@@ -22,13 +23,6 @@ from worldatlas.source_imports.watersheds.terrain import align, prepare
 from worldatlas.source_imports.watersheds.waterways import Basins, seed_grid
 
 LOGGER = logging.getLogger(__name__)
-
-
-class MultipartSource(TypedDict):
-    parts: list[SourceId]
-    sha256: NonEmptyText
-    size_bytes: int
-    filename: NonEmptyText
 
 
 def runtime_versions():
@@ -45,30 +39,6 @@ def runtime_versions():
                                           osr.GetPROJVersionMicro()))),
             'shapely_geos': shapely.geos_version_string,
             'proj_database_sha256': hashlib.sha256(database.read_bytes()).hexdigest()}
-
-
-def resolve_sources(database, recipe):
-    """Resolve exact catalog versions, including the parts of large provider files."""
-    resolved = {}
-    for alias, selection in recipe['sources'].items():
-        if isinstance(selection, dict):
-            resolved[alias] = dict(selection, parts=[
-                catalog_source(database, part)
-                for part in selection['parts']])
-        else:
-            resolved[alias] = catalog_source(database, selection)
-    return resolved
-
-
-def stage_sources(client, selections, work_dir, *, timing=None):
-    files = {}
-    for alias, source in selections.items():
-        if 'parts' in source:
-            files[alias] = assemble_parts(client, source['parts'], source['sha256'],
-                                          source['size_bytes'], source['filename'], work_dir, timing=timing)
-        else:
-            files[alias] = download_source(client, source, work_dir, timing=timing)
-    return files
 
 
 def construct(recipe, files):
@@ -283,27 +253,18 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: Non
                        geographic_choices: dict[str, Any] | None = None):
     """Construct ordered source lines, drainage divides, rivers and geographic joins."""
     recipe = runtime.arguments
-    started = time.monotonic()
-    with runtime.connect() as database, database.transaction():
-        selections = resolve_sources(database, recipe)
-        for item in evidence_sources or []:
-            catalog_source(database, item)
-    catalog_seconds = time.monotonic() - started
-    started = time.monotonic()
     acquisition = {}
-    files = stage_sources(runtime.storage, selections, runtime.work_dir, timing=acquisition)
-    staging_seconds = time.monotonic() - started
+    paths = acquire_sources(runtime, list(sources.values()), evidence_source_ids=evidence_sources or (),
+                            timing=acquisition)
+    files = dict(zip(sources, paths, strict=True))
     geometry, report = construct(recipe, files)
     versions = runtime_versions()
     started = time.monotonic()
-    with runtime.connect() as database, runtime.saving(database):
-        hashes = save_features(
-            database, [dict(feature_id=feature_id, geometry=geometry)],
-            construction_id=runtime.recipe_id,
-        )
-        digest = hashes[feature_id]
+    hashes = save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
+    digest = hashes[feature_id]
+    staging_seconds = acquisition['source_staging_seconds']
     report.update(feature_id=feature_id, sha256=digest,
-                  vertices=len(geometry['coordinates']), catalog_seconds=catalog_seconds,
+                  vertices=len(geometry['coordinates']), catalog_seconds=acquisition['catalog_seconds'],
                   source_staging_seconds=staging_seconds,
                   download_seconds=acquisition.get('download_seconds', 0.),
                   source_processing_seconds=staging_seconds - acquisition.get('download_seconds', 0.),

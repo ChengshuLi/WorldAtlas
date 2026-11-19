@@ -1,4 +1,5 @@
-import hashlib
+"""Test vector selection, geometry checks, and CRS conversion."""
+
 import json
 from pathlib import Path
 import tempfile
@@ -7,12 +8,8 @@ from zipfile import ZipFile
 
 from osgeo import ogr, osr
 
-from worldatlas.source_imports.features.geometry import (
-    geometry_bytes,
-    geometry_hash,
-    validate_geometry,
-)
-from worldatlas.source_imports.features.vector import dataset_path, read_features
+from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.source_imports.vector.features import dataset_path, read_features
 
 
 class VectorTests(unittest.TestCase):
@@ -44,7 +41,7 @@ class VectorTests(unittest.TestCase):
         )
 
     def test_selected_point_and_identity(self):
-        rows = read_features(self.path, self.recipe)
+        rows = read_features(self.path, **self.recipe)
         self.assertEqual(len(rows), 1)
         self.assertEqual(
             rows[0]["geometry"], {"type": "Point", "coordinates": [20, 10]}
@@ -54,23 +51,23 @@ class VectorTests(unittest.TestCase):
     def test_missing_and_duplicate_provider_ids(self):
         self.write(("b",))
         with self.assertRaisesRegex(ValueError, "missing"):
-            read_features(self.path, self.recipe)
+            read_features(self.path, **self.recipe)
         self.write(("a", "a"))
         with self.assertRaisesRegex(ValueError, "duplicated"):
-            read_features(self.path, self.recipe)
+            read_features(self.path, **self.recipe)
 
     def test_provider_geometry_can_backfill_distinct_existing_feature_ids(self):
         self.recipe["selections"].append(
             {"feature_id": "existing-alias", "source_feature_id": "a"}
         )
-        result = read_features(self.path, self.recipe)
+        result = read_features(self.path, **self.recipe)
         self.assertEqual(
             [r["feature_id"] for r in result], ["selected", "existing-alias"]
         )
         self.assertEqual(result[0]["geometry"], result[1]["geometry"])
         self.recipe["selections"][1]["feature_id"] = "selected"
         with self.assertRaisesRegex(ValueError, "unique"):
-            read_features(self.path, self.recipe)
+            read_features(self.path, **self.recipe)
 
     def test_geojson_preserves_provider_numbers_and_integer_feature_ids(self):
         geometry = {"type": "Point", "coordinates": [-180, 1e-24]}
@@ -93,7 +90,7 @@ class VectorTests(unittest.TestCase):
             id_field="@fid",
             selections=[dict(feature_id="point", source_feature_id="42")],
         )
-        self.assertEqual(read_features(self.path, recipe)[0]["geometry"], geometry)
+        self.assertEqual(read_features(self.path, **recipe)[0]["geometry"], geometry)
 
     def test_geojson_preserves_small_coordinates_and_signed_zero(self):
         geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
@@ -111,7 +108,7 @@ class VectorTests(unittest.TestCase):
                 }
             )
         )
-        result = read_features(self.path, self.recipe)[0]["geometry"]
+        result = read_features(self.path, **self.recipe)[0]["geometry"]
         self.assertEqual(json.dumps(result), json.dumps(geometry))
 
     def test_polygon_part_selection_preserves_original_rings_not_the_largest_part(self):
@@ -133,7 +130,7 @@ class VectorTests(unittest.TestCase):
         original = json.dumps(document)
         self.path.write_text(original)
         self.recipe["selections"][0]["polygon_containing"] = [0.5, 0.5]
-        result = read_features(self.path, self.recipe)[0]["geometry"]
+        result = read_features(self.path, **self.recipe)[0]["geometry"]
         self.assertEqual(result, dict(type="Polygon", coordinates=small))
         self.assertEqual(self.path.read_text(), original)
         for point in ([1.5, 1.5], [0, 0.5], [30, 30]):
@@ -142,7 +139,7 @@ class VectorTests(unittest.TestCase):
                 self.subTest(point=point),
                 self.assertRaisesRegex(ValueError, "strictly inside"),
             ):
-                read_features(self.path, self.recipe)
+                read_features(self.path, **self.recipe)
 
     def test_polygon_selection_point_uses_wgs84_after_source_conversion(self):
         document = dict(
@@ -180,13 +177,13 @@ class VectorTests(unittest.TestCase):
         )
         self.path.write_text(json.dumps(document))
         self.recipe["selections"][0]["polygon_containing"] = [0.012, 0.012]
-        result = validate_geometry(read_features(self.path, self.recipe)[0]["geometry"])
+        result = validate_geometry(read_features(self.path, **self.recipe)[0]["geometry"])
         self.assertEqual(result.geom_type, "Polygon")
         self.assertAlmostEqual(result.bounds[0], 0.00898315284)
         self.assertAlmostEqual(result.bounds[2], 0.01796630568)
         self.write()
         with self.assertRaisesRegex(ValueError, "needs polygon geometry"):
-            read_features(self.path, self.recipe)
+            read_features(self.path, **self.recipe)
 
     def test_projected_geojson_is_converted_instead_of_retaining_source_coordinates(
         self,
@@ -209,7 +206,7 @@ class VectorTests(unittest.TestCase):
                 }
             )
         )
-        geometry = read_features(self.path, self.recipe)[0]["geometry"]
+        geometry = read_features(self.path, **self.recipe)[0]["geometry"]
         self.assertAlmostEqual(geometry["coordinates"][0], 10.0)
         self.assertAlmostEqual(geometry["coordinates"][1], 0.0)
 
@@ -244,7 +241,7 @@ class VectorTests(unittest.TestCase):
             )
         )
         self.recipe["selections"][0].update(collection=True, expected_feature_count=2)
-        result = read_features(self.path, self.recipe)[0]
+        result = read_features(self.path, **self.recipe)[0]
         self.assertNotIn("coordinate_reference", result)
         self.assertTrue(validate_geometry(result["geometry"]).is_valid)
         self.assertAlmostEqual(
@@ -252,7 +249,7 @@ class VectorTests(unittest.TestCase):
         )
         self.recipe["selections"][0]["expected_feature_count"] = 3
         with self.assertRaisesRegex(ValueError, "number of features"):
-            read_features(self.path, self.recipe)
+            read_features(self.path, **self.recipe)
 
     def test_projected_source_is_converted_with_xy_axis_order(self):
         path = self.path.with_suffix(".gpkg")
@@ -268,7 +265,7 @@ class VectorTests(unittest.TestCase):
         feature.SetGeometry(geometry)
         layer.CreateFeature(feature)
         source = None
-        result = read_features(path, self.recipe)[0]
+        result = read_features(path, **self.recipe)[0]
         self.assertAlmostEqual(result["geometry"]["coordinates"][0], 10)
         self.assertAlmostEqual(result["geometry"]["coordinates"][1], 0)
 
@@ -278,7 +275,7 @@ class VectorTests(unittest.TestCase):
             archive.write(self.path, "nested/source.geojson")
         self.recipe["member"] = "nested/source.geojson"
         self.assertEqual(
-            read_features(path, self.recipe)[0]["geometry"]["coordinates"], [20, 10]
+            read_features(path, **self.recipe)[0]["geometry"]["coordinates"], [20, 10]
         )
         with self.assertRaisesRegex(ValueError, "missing"):
             dataset_path(path, "missing")
@@ -300,32 +297,3 @@ class VectorTests(unittest.TestCase):
         ):
             with self.subTest(geometry=geometry), self.assertRaises(ValueError):
                 validate_geometry(geometry)
-
-
-class GeometryChecksumTests(unittest.TestCase):
-    def test_nested_signed_zero_uses_storage_form_without_mutating_or_rounding(self):
-        point = [-0.0, 1e-24]
-        for kind, coordinates in (
-            ("Point", point),
-            ("MultiPoint", [point]),
-            ("LineString", [point, [1, 2]]),
-            ("MultiLineString", [[point, [1, 2]]]),
-            ("Polygon", [[point, [1, 0], [1, 2], point]]),
-            ("MultiPolygon", [[[point, [1, 0], [1, 2], point]]]),
-        ):
-            with self.subTest(kind=kind):
-                geometry = dict(type=kind, coordinates=coordinates)
-                original = json.dumps(geometry)
-                expected = json.loads(original.replace("-0.0", "0.0"))
-                expected_bytes = json.dumps(
-                    expected, sort_keys=True, separators=(",", ":")
-                ).encode()
-                self.assertEqual(geometry_bytes(geometry), expected_bytes)
-                self.assertEqual(
-                    geometry_hash(geometry), hashlib.sha256(expected_bytes).hexdigest()
-                )
-                self.assertEqual(json.dumps(geometry), original)
-        self.assertNotEqual(
-            geometry_hash(dict(type="Point", coordinates=[0, 1])),
-            geometry_hash(dict(type="Point", coordinates=[0.0, 1])),
-        )

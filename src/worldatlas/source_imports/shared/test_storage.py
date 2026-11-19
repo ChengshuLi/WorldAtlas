@@ -12,7 +12,7 @@ from unittest.mock import Mock
 
 import psycopg
 from psycopg.types.json import Jsonb
-from worldatlas.source_imports.features.geometry import save_features
+from worldatlas.source_imports.shared.storage import _write_features, geometry_bytes, geometry_hash
 from worldatlas.source_imports.run_import import run_import
 
 
@@ -78,21 +78,6 @@ class StorageTests(unittest.TestCase):
             "SELECT id,geometry,construction_id FROM atlas.source_features ORDER BY id"
         ).fetchall()
 
-    def test_interpreted_geometry_imports_from_neon_without_r2(self):
-        geometry = {"type": "Point", "coordinates": [10, 20]}
-        self.database.execute(
-            "INSERT INTO atlas.construction_records(id,method,arguments) "
-            "VALUES ('__interpreted','interpreted_geometry',%s)",
-            (Jsonb(dict(
-                source_ids=["raw"],
-                basis="Selected point",
-                selections=[dict(feature_id="label", geometry=geometry)],
-            )),),
-        )
-        result = run_import(lambda: nullcontext(self.database), "__interpreted")
-        self.assertEqual(self.rows(), [("label", geometry, "__interpreted")])
-        self.assertEqual(result["timing"]["download_seconds"], 0)
-
     def test_repeat_and_recipe_edit_preserve_links_and_other_records(self):
         first = self.build()
         self.database.execute(
@@ -139,12 +124,12 @@ class StorageTests(unittest.TestCase):
             ),
         ]
         with self.assertRaises(psycopg.errors.ForeignKeyViolation):
-            save_features(self.database, features, construction_id="missing")
+            _write_features(self.database, features, construction_id="missing")
         self.assertEqual(self.rows(), before)
 
     def test_signed_zero_preserves_longitude_latitude_coordinates(self):
         geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
-        save_features(
+        _write_features(
             self.database,
             [
                 dict(
@@ -157,3 +142,48 @@ class StorageTests(unittest.TestCase):
             construction_id="__features",
         )
         self.assertEqual(json.dumps(self.rows()[0][1]["coordinates"]), "[0.0, 1e-24]")
+
+    def test_conflicting_feature_owner_rolls_back_an_earlier_insert(self):
+        self.build()
+        before = self.rows()
+        recipe = dict(self.recipe, selections=[
+            dict(feature_id="point-b", source_feature_id="a"),
+            dict(feature_id="point-a", source_feature_id="a"),
+        ])
+        self.database.execute(
+            "INSERT INTO atlas.construction_records VALUES ('__other','selected_vector_features',%s)",
+            (Jsonb(recipe),),
+        )
+        with self.assertRaisesRegex(ValueError, "feature ID already belongs to another construction"):
+            run_import(lambda: nullcontext(self.database), "__other", storage=self.storage,
+                       work_dir=self.work)
+        self.assertEqual(self.rows(), before)
+
+
+class GeometryChecksumTests(unittest.TestCase):
+    def test_nested_signed_zero_uses_storage_form_without_mutating_or_rounding(self):
+        point = [-0.0, 1e-24]
+        for kind, coordinates in (
+            ("Point", point),
+            ("MultiPoint", [point]),
+            ("LineString", [point, [1, 2]]),
+            ("MultiLineString", [[point, [1, 2]]]),
+            ("Polygon", [[point, [1, 0], [1, 2], point]]),
+            ("MultiPolygon", [[[point, [1, 0], [1, 2], point]]]),
+        ):
+            with self.subTest(kind=kind):
+                geometry = dict(type=kind, coordinates=coordinates)
+                original = json.dumps(geometry)
+                expected = json.loads(original.replace("-0.0", "0.0"))
+                expected_bytes = json.dumps(
+                    expected, sort_keys=True, separators=(",", ":")
+                ).encode()
+                self.assertEqual(geometry_bytes(geometry), expected_bytes)
+                self.assertEqual(
+                    geometry_hash(geometry), hashlib.sha256(expected_bytes).hexdigest()
+                )
+                self.assertEqual(json.dumps(geometry), original)
+        self.assertNotEqual(
+            geometry_hash(dict(type="Point", coordinates=[0, 1])),
+            geometry_hash(dict(type="Point", coordinates=[0.0, 1])),
+        )

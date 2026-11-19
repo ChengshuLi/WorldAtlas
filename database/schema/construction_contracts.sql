@@ -1,4 +1,4 @@
--- Generated from constructor signatures. Do not edit; see source_imports.contracts.
+-- Generated from constructor signatures. Do not edit; see source_imports.shared.contracts.
 CREATE FUNCTION atlas.nonblank(value text) RETURNS boolean
 LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE AS $nonblank$
  SELECT value COLLATE "C" ~  E'[^\\u0009-\\u000d\\u0020\\u0085\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000]';

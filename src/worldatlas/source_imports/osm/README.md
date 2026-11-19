@@ -1,6 +1,6 @@
 # OpenStreetMap imports
 
-[`features.py`](features.py) imports selected nodes, closed ways and relation polygons into `atlas.source_features`. It reads each archived object graph once through osmium's Python API. [`features/build_features.py`](../features/build_features.py) handles catalog lookup, verified downloads and transactional storage.
+[`features.py`](features.py) contains `selected_osm_features` and its reader for selected nodes, closed ways, and relation polygons. It reads each archived object graph once through osmium's Python API and saves the result through the shared import workflow.
 
 Use the common command below with a `selected_osm_features` construction. Each selection identifies an output `feature_id`, provider `source_feature_id`, `object_type` (`node`, `way` or `relation`) and `object_version`. Optional `expected_tags` verify provider tags. The constructor joins member ways at shared node IDs in stable way-ID order.
 
@@ -23,13 +23,13 @@ Use `osm_way_chain` to join individual archived `/api/0.6/way/{id}/full.json` re
 
 The order of `way_source_ids` has no effect. [`ways.py`](ways.py) starts at the supplied endpoint, follows shared node IDs, and reverses individual ways as needed. It preserves the coordinates and requires one open, continuous, unbranched line without self-intersections.
 
-Run the [common import command](../README.md) with the construction ID, R2 endpoint and work directory. [`build_boundary.py`](build_boundary.py) resolves and verifies each file through the shared source catalog and saves the complete line in `atlas.source_features`. The typed source list generates the database links to each way file. Checked local files are reused. The import result includes the saved line's SHA-256.
+Run the [common import command](../README.md) with the construction ID, R2 endpoint, and work directory. [`ways.py`](ways.py) contains `osm_way_chain` and its assembler. The typed source list generates the database links to each way file. Checked local files are reused. The import result includes the saved line's SHA-256.
 
 Use `evidence_source_ids` to cite additional sources that explain the selection.
 
 ## Tests
 
-`test_ways.py` checks chain assembly, direction and invalid geometry. `test_build_boundary.py` checks the Neon/R2 workflow and database transactions.
+[`test_ways.py`](test_ways.py) checks chain assembly, direction, and invalid geometry. [`test_way_import.py`](test_way_import.py) checks the Neon/R2 workflow and database transactions.
 
 Run the tests from the repository root.
 

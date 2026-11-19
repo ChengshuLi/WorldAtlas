@@ -14,15 +14,13 @@ from pathlib import Path
 
 import psycopg
 
-from worldatlas.source_imports.contracts import Runtime
-from worldatlas.source_imports.features.build_features import (
-    s130_areas,
-    selected_osm_features,
-    selected_vector_features,
-)
-from worldatlas.source_imports.features.interpreted import interpreted_geometry
-from worldatlas.source_imports.osm.build_boundary import osm_way_chain
-from worldatlas.source_imports.traces.build_boundary import geodesic_trace
+from worldatlas.source_imports.iho.areas import s130_areas
+from worldatlas.source_imports.interpreted.geometry import interpreted_geometry
+from worldatlas.source_imports.osm.features import selected_osm_features
+from worldatlas.source_imports.osm.ways import osm_way_chain
+from worldatlas.source_imports.shared.runtime import Runtime
+from worldatlas.source_imports.traces.geodesic import geodesic_trace
+from worldatlas.source_imports.vector.features import selected_vector_features
 from worldatlas.source_imports.watersheds.build_boundary import watershed_boundary
 
 IMPORTERS = {
@@ -86,10 +84,6 @@ def run_import(connect, recipe_id, *, storage=None, work_dir=None):
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
     if importer is None:
         raise ValueError(f"unsupported source construction method: {method!r}")
-    if method not in ("geodesic_trace", "interpreted_geometry") and (
-        storage is None or work_dir is None
-    ):
-        raise ValueError("this method requires --r2-endpoint and --work-dir")
     return importer(
         Runtime(
             connect=connect,

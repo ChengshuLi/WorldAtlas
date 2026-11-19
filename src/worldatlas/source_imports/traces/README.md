@@ -2,12 +2,11 @@
 
 Build one final boundary by joining reviewed control points stored in Neon with WGS84 geodesics. Every control point is preserved. The points include the intended path through gaps and around islands; there is no later adjustment stage.
 
-- [`geodesic.py`](geodesic.py) joins consecutive control points without smoothing. The [shared WGS84 sampler](../../geodesy/wgs84.py) also serves watershed connectors.
-- [`build_boundary.py`](build_boundary.py) reads a construction record and its raw-source catalog entries, then writes the final geometry to Neon.
+[`geodesic.py`](geodesic.py) contains `geodesic_trace` and the calculation that joins consecutive control points. The [shared WGS84 sampler](../../geodesy/wgs84.py) also serves watershed connectors. The constructor checks the cited raw sources and saves the final geometry to Neon.
 
 ## Construction record
 
-The typed constructor signature defines required fields, optional fields and types. [Shared validation](../README.md#argument-validation) enforces them in Python and PostgreSQL.
+The typed constructor signature defines required fields, optional fields, and types. [Neon validates the arguments](../README.md#argument-validation) when the recipe is saved. The constructor checks the geometry when it runs.
 
 Set `method` to `geodesic_trace` on the construction row. Store the settings below in its `arguments` column.
 
@@ -47,7 +46,7 @@ The command saves the geometry and its construction ID. The figure identifier st
 
 ## Tests
 
-`test_geodesic.py` checks geodesic paths, control-point preservation, spacing and invalid geometry. `test_build_boundary.py` checks stored constructions, source references, repeat runs and failed writes.
+[`test_geodesic.py`](test_geodesic.py) checks geodesic paths, control-point preservation, spacing, and invalid geometry. [`test_trace_import.py`](test_trace_import.py) checks stored constructions, source references, repeat runs, and failed writes.
 
 ```bash
 python .github/scripts/run_tests.py --suite source_imports

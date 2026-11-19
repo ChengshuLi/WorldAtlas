@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from worldatlas.map_build.division.contracts import compile_rules
-from worldatlas.source_imports.features.geometry import validate_geometry
+from worldatlas.geodesy.geojson import validate_geometry
 
 HERE = Path(__file__).resolve().parent
 

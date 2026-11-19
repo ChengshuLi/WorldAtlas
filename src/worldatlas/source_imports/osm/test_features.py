@@ -71,9 +71,7 @@ class OsmFeatureTests(unittest.TestCase):
         )
 
     def read(self, selection=None):
-        return read_features(self.path, {"selections": [selection or self.selection]})[
-            0
-        ]
+        return read_features(self.path, [selection or self.selection])[0]
 
     def test_unordered_and_reversed_way_members_join_with_holes_preserved(self):
         result = self.read()

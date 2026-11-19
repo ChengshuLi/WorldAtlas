@@ -7,7 +7,7 @@ import unittest
 import psycopg
 from psycopg.types.json import Jsonb
 
-from worldatlas.source_imports.contracts import (
+from worldatlas.source_imports.shared.contracts import (
     NonEmptyText,
     SourceId,
     parameters,

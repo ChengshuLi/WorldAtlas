@@ -1,10 +1,23 @@
-import unittest
-from xml.etree import ElementTree
+"""Test S-130 surface parsing and import of a selected GML member."""
 
+from contextlib import nullcontext, redirect_stdout
+import hashlib
+from io import BytesIO, StringIO
+import json
+import os
+import tempfile
+import unittest
+from unittest.mock import Mock, patch as mock_patch
+from xml.etree import ElementTree
+from zipfile import ZipFile
+
+import psycopg
+from psycopg.types.json import Jsonb
 from shapely.geometry import shape
 
 from worldatlas.source_imports.iho.areas import SeaAreas, surface
 from worldatlas.source_imports.iho.areas import NS, EPSG_4326
+from worldatlas.source_imports.run_import import main
 
 
 def patch(coordinates, hole=None):
@@ -46,6 +59,72 @@ def document(*areas):
 
 
 SQUARE = [(0, 0), (2, 0), (2, 2), (0, 2), (0, 0)]
+
+
+@unittest.skipUnless(
+    os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
+)
+class ImportTests(unittest.TestCase):
+    """Exercise the command with a real database and a minimal S-130 archive."""
+
+    def test_command_selects_and_verifies_the_saved_gml_member(self):
+        gml = ElementTree.tostring(document(area("area", "urn:mrn:example", patch(SQUARE))))
+        archive = BytesIO()
+        with ZipFile(archive, "w") as output:
+            output.writestr("unused.gml", b"unused member")
+            output.writestr("selected.gml", gml)
+        raw = archive.getvalue()
+        recipe = dict(
+            source_id="iho-test", basis="Select one archived area", gml_member="selected.gml",
+            gml_sha256=hashlib.sha256(gml).hexdigest(),
+            selections=[dict(feature_id="test-sea", source_feature_id="urn:mrn:example")],
+        )
+        client = Mock()
+        client.get_object.return_value = {"Body": BytesIO(raw)}
+
+        url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
+        with tempfile.TemporaryDirectory() as work, psycopg.connect(url) as database:
+            with database.transaction(force_rollback=True):
+                database.execute(
+                    "INSERT INTO atlas.source_assets "
+                    "(id,title,provider,source_uri,license_name,license_uri,attribution,"
+                    "r2_bucket,r2_key,sha256,size_bytes) "
+                    "VALUES ('iho-test','Test','IHO','test:source','Test','test:license','Test',"
+                    "'test','s130.zip',%s,%s)",
+                    (hashlib.sha256(raw).hexdigest(), len(raw)),
+                )
+                database.execute(
+                    "INSERT INTO atlas.construction_records VALUES ('iho-recipe','s130_areas',%s)",
+                    (Jsonb(recipe),),
+                )
+                argv = ["worldatlas-import", "--recipe", "iho-recipe", "--r2-endpoint",
+                        "https://example.test", "--work-dir", work]
+                output = StringIO()
+                with (
+                    mock_patch.dict(os.environ, NEON_DATABASE_URL=url),
+                    mock_patch("sys.argv", argv),
+                    mock_patch("psycopg.connect", side_effect=lambda *_args, **_kw: nullcontext(database)),
+                    mock_patch("boto3.client", return_value=client),
+                    redirect_stdout(output),
+                ):
+                    main()
+                    stored = "SELECT geometry FROM atlas.source_features WHERE id='test-sea'"
+                    geometry, = database.execute(stored).fetchone()
+                    self.assertEqual(shape(geometry).area, 4)
+                    result = json.loads(output.getvalue())
+                    self.assertEqual(list(result["geometry_sha256"]), ["test-sea"])
+                    self.assertEqual(database.execute(
+                        "SELECT source_id FROM atlas.construction_sources WHERE construction_id='iho-recipe'"
+                    ).fetchall(), [("iho-test",)])
+
+                    database.execute(
+                        "UPDATE atlas.construction_records SET arguments=%s WHERE id='iho-recipe'",
+                        (Jsonb(dict(recipe, gml_sha256="0" * 64)),),
+                    )
+                    with self.assertRaisesRegex(ValueError, "IHO GML SHA-256 mismatch"):
+                        main()
+                    self.assertEqual(database.execute(stored).fetchone(), (geometry,))
+                client.get_object.assert_called_once_with(Bucket="test", Key="s130.zip")
 
 
 class AreaTests(unittest.TestCase):

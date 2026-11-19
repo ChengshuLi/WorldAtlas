@@ -4,11 +4,25 @@ import math
 from collections import defaultdict
 
 from shapely.geometry import LineString
-from worldatlas.source_imports.features.geometry import storage_geometry
+from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.runtime import Runtime
+from worldatlas.source_imports.shared.sources import acquire_sources
+from worldatlas.source_imports.shared.storage import save_features, storage_geometry
 
 
 def assemble(paths, start_node_id):
-    """Traverse one open chain from its specified endpoint, regardless of input order."""
+    """Traverse one open chain starting at the specified endpoint.
+
+    Args:
+        paths: Verified local archives containing one OSM way each.
+        start_node_id: The first node of the final line.
+
+    Returns:
+        GeoJSON LineString with the archived coordinates in chain order.
+
+    Raises:
+        ValueError: The selected ways cannot form one valid open chain.
+    """
     nodes, ways = {}, {}
     for path in paths:
         with path.open(encoding='utf-8') as source:
@@ -69,3 +83,29 @@ def assemble(paths, start_node_id):
     if any(abs(a[0] - b[0]) > 180 for a, b in zip(coords, coords[1:])):
         raise ValueError('antimeridian-crossing boundaries require a split source line')
     return storage_geometry({'type': 'LineString', 'coordinates': coords})
+
+
+def osm_way_chain(
+    runtime: Runtime, *, way_source_ids: list[SourceId], start_node_id: int,
+    feature_id: NonEmptyText, basis: NonEmptyText,
+    evidence_source_ids: list[SourceId] | None = None,
+):
+    """Join archived OSM ways into one boundary and save their coordinates.
+
+    Args:
+        runtime: Import resources and saved recipe snapshot.
+        way_source_ids: Distinct catalog IDs of the archived ways.
+        start_node_id: Endpoint that starts the final chain.
+        feature_id: Output feature ID in Neon.
+        basis: Human-readable explanation retained in the recipe.
+        evidence_source_ids: Additional raw sources cited for provenance.
+
+    Returns:
+        Saved feature ID, vertex count, and geometry checksum.
+    """
+    if not way_source_ids or len(set(way_source_ids)) != len(way_source_ids):
+        raise ValueError('way_source_ids must list distinct OSM way sources')
+    paths = acquire_sources(runtime, way_source_ids, evidence_source_ids=evidence_source_ids or ())
+    geometry = assemble(paths, start_node_id)
+    hashes = save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
+    return dict(feature_id=feature_id, vertices=len(geometry['coordinates']), sha256=hashes[feature_id])

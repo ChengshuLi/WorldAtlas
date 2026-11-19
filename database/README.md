@@ -17,7 +17,7 @@ Neon stores editable geography and construction settings, raw-file identities, a
 
 These twelve tables have distinct purposes. A feature stores geometry; its construction describes how raw sources produce it. A rule explains how geometry assigns parent cells to children. Category bindings encode the resulting owner and physical class; display colors do not determine ownership.
 
-Required nonblank text must contain at least one character outside Unicode's `White_Space` set, which includes tabs, nonbreaking spaces and ideographic spaces. Ordinary text columns and typed construction arguments use the same pattern from [`contracts.py`](../src/worldatlas/source_imports/contracts.py).
+Required nonblank text must contain at least one character outside Unicode's `White_Space` set, which includes tabs, nonbreaking spaces and ideographic spaces. Ordinary text columns and typed construction arguments use the same pattern from [`shared/contracts.py`](../src/worldatlas/source_imports/shared/contracts.py).
 
 `source_features` has three required columns: `id`, `geometry`, `construction_id`. Geometry is GeoJSON using WGS84 longitude first, latitude second, in degrees. Database checks validate types, nesting, coordinate ranges and polygon closure. Importers also check geometric validity. Provider feature selectors remain in construction settings rather than being copied into output rows.
 
@@ -38,7 +38,7 @@ Raw identity, storage location, size, checksum and capture time are immutable; c
 `construction_records.method` selects the importer and `arguments` stores its named inputs as JSONB. Edit raw-source IDs in those arguments. The database maintains `construction_sources` from them. The importer registry and typed Python signatures define the argument and source-reference checks. Regenerate those checks after changing a constructor:
 
 ```bash
-python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql
+python -m worldatlas.source_imports.shared.contracts database/schema/construction_contracts.sql
 ```
 
 For an existing database, back up its data, rehearse the transition locally, then apply the tested change in one transaction. Keep one-off transition scripts with the maintenance backup. Keep the authoritative schema in the files above.

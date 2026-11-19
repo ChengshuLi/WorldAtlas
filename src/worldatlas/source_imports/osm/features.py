@@ -2,23 +2,73 @@
 
 from collections import defaultdict
 from dataclasses import dataclass, field
+import time
+from typing import Literal, NotRequired, TypedDict
 
 import osmium
 from shapely.geometry import Polygon
 
-from worldatlas.source_imports.features.geometry import (
-    validate_geometry,
-)
+from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.runtime import Runtime
+from worldatlas.source_imports.shared.sources import acquire_sources
+from worldatlas.source_imports.shared.storage import feature_result, save_features
+
+
+class ParentRelation(TypedDict):
+    """Require membership in an exact archived OSM relation."""
+
+    id: NonEmptyText | int
+    version: NonEmptyText | int
+    role: str
+    expected_tags: NotRequired[dict[str, str]]
+
+
+class RingAnchor(TypedDict):
+    """Select an outer ring by its tagged node and member way."""
+
+    node_id: NonEmptyText | int
+    way_id: NonEmptyText | int
+    node_version: NonEmptyText | int
+    expected_tags: dict[str, str]
+
+
+class OsmSelection(TypedDict):
+    """Select a versioned OSM object and how to interpret its geometry."""
+
+    feature_id: NonEmptyText
+    source_feature_id: NonEmptyText | int
+    object_type: Literal["node", "way", "relation"]
+    object_version: NonEmptyText | int
+    expected_tags: NotRequired[dict[str, str]]
+    parent_relation: NotRequired[ParentRelation]
+    ignored_member_roles: NotRequired[list[tuple[Literal["n", "w", "r"], str]]]
+    ring_anchors: NotRequired[list[RingAnchor]]
+    holes: NotRequired[Literal["preserve", "outer_envelope"]]
+    geometry_type: NotRequired[Literal["Polygon", "MultiPolygon"]]
 
 
 @dataclass
 class Graph:
+    """Hold the nodes, ways, and relations from one archived OSM extract."""
+
     nodes: dict = field(default_factory=dict)
     ways: dict = field(default_factory=dict)
     relations: dict = field(default_factory=dict)
 
 
 def read_graph(path):
+    """Read one OSM extract while preserving object versions and tags.
+
+    Args:
+        path: Local extract understood by osmium.
+
+    Returns:
+        Nodes, ways, and relations keyed by their provider object IDs.
+
+    Raises:
+        ValueError: An object ID, tag, or node position is invalid.
+    """
     graph = Graph()
 
     class Reader(osmium.SimpleHandler):
@@ -54,7 +104,17 @@ def read_graph(path):
 
 
 def assemble_rings(ways):
-    """Follow degree-two way endpoints in stable provider-ID order."""
+    """Join way endpoints into closed rings in stable provider-ID order.
+
+    Args:
+        ways: Mapping from way IDs to ordered node IDs.
+
+    Returns:
+        Closed rings of node IDs.
+
+    Raises:
+        ValueError: The ways don't form complete, unambiguous rings.
+    """
     owners, rings, remaining = defaultdict(list), [], set()
     for ident, nodes in ways.items():
         if len(nodes) < 2:
@@ -90,6 +150,20 @@ def assemble_rings(ways):
 
 
 def selected_object(records, ident, version, tags):
+    """Read the selected object after checking its identity and attributes.
+
+    Args:
+        records: Archive objects keyed by integer ID.
+        ident: Selected object ID.
+        version: Expected archive object version.
+        tags: Expected values for selected provider tags.
+
+    Returns:
+        The matching object record.
+
+    Raises:
+        ValueError: The object is missing, deleted, or fails an identity check.
+    """
     if isinstance(version, float) and version.is_integer():
         version = int(version)
     record = records.get(int(ident))
@@ -101,7 +175,17 @@ def selected_object(records, ident, version, tags):
 
 
 def polygon_geometry(graph, selected, record, ancestry=()):
-    """Assemble source rings; choices about envelopes and anchors are data."""
+    """Assemble a source polygon with its selected rings and hole treatment.
+
+    Args:
+        graph: Nodes, ways, and relations from the archived extract.
+        selected: Geometry type, member roles, and optional ring selections.
+        record: Chosen OSM way or relation.
+        ancestry: Parent relation IDs used to detect cycles.
+
+    Returns:
+        The selected GeoJSON polygon or multipolygon.
+    """
     if selected["object_type"] == "relation" and record["tags"].get("type") in (
         "group",
         "collection",
@@ -189,7 +273,17 @@ def polygon_geometry(graph, selected, record, ancestry=()):
 
 
 def group_geometry(graph, selected, record, ancestry):
-    """Union the polygon members of a provider-defined geographic collection."""
+    """Union the polygon members of a provider-defined geographic group.
+
+    Args:
+        graph: Nodes, ways, and relations from the archived extract.
+        selected: Geometry type, ignored roles, and hole treatment.
+        record: Chosen OSM group or collection relation.
+        ancestry: Parent relation IDs used to detect cycles.
+
+    Returns:
+        The combined GeoJSON polygon or multipolygon.
+    """
     from shapely import union_all
     from shapely.geometry import mapping, shape
 
@@ -261,10 +355,19 @@ def group_geometry(graph, selected, record, ancestry):
     return geometry
 
 
-def read_features(path, settings):
+def read_features(path, selections):
+    """Assemble the selected points and polygons from an archived OSM graph.
+
+    Args:
+        path: Verified local OSM extract.
+        selections: Provider object IDs, versions, and geometry options.
+
+    Returns:
+        Selected features with their output IDs, provider IDs, and geometries.
+    """
     graph = read_graph(path)
     result = []
-    for selection in settings["selections"]:
+    for selection in selections:
         kind = selection["object_type"]
         objects = {"node": graph.nodes, "way": graph.ways, "relation": graph.relations}
         if kind not in objects:
@@ -305,3 +408,29 @@ def read_features(path, settings):
             )
         )
     return result
+
+
+
+def selected_osm_features(
+    runtime: Runtime,
+    *,
+    source_id: SourceId,
+    basis: NonEmptyText,
+    selections: list[OsmSelection],
+):
+    """Import selected OSM nodes, closed ways, and relation polygons.
+
+    Args:
+        runtime: Import resources and saved recipe snapshot.
+        source_id: Catalog ID of the archived OSM extract.
+        basis: Human-readable explanation retained in the recipe.
+        selections: Provider objects and their output IDs and options.
+
+    Returns:
+        Saved geometry checksums, the local source path, and timings.
+    """
+    started, timing = time.monotonic(), {}
+    path, = acquire_sources(runtime, [source_id], timing=timing)
+    hashes = save_features(runtime, read_features(path, selections))
+    return feature_result(hashes, time.monotonic() - started, source=path,
+                          download_seconds=timing.get("download_seconds", 0.0))

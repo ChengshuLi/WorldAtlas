@@ -12,14 +12,14 @@ from unittest.mock import Mock
 import psycopg
 from psycopg.types.json import Jsonb
 from worldatlas.source_imports.run_import import run_import
-from worldatlas.source_imports.features.geometry import geometry_hash, save_features
-from worldatlas.source_assets.catalog import catalog_source
+from worldatlas.source_imports.shared.storage import _write_features, geometry_hash
+from worldatlas.source_assets.catalog import catalog_sources
 
 
 def save_boundary(database, geometry, source, recipe):
     with database.transaction():
-        catalog_source(database, source["source_id"])
-        return save_features(
+        catalog_sources(database, [source["source_id"]])
+        return _write_features(
             database,
             [
                 dict(
@@ -150,7 +150,7 @@ class DatabaseTests(unittest.TestCase):
             return assemble(*args)
 
         with patch(
-            "worldatlas.source_imports.osm.build_boundary.assemble",
+            "worldatlas.source_imports.osm.ways.assemble",
             side_effect=calculate,
         ):
             with self.assertRaisesRegex(

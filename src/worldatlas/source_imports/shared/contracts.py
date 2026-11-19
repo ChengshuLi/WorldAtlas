@@ -6,19 +6,16 @@ source IDs they reference. The same SQL defines the shared nonblank check
 for ordinary text columns and uses its pattern in construction JSON Schema.
 
 To regenerate from the repository root, run
-``python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql``.
+``python -m worldatlas.source_imports.shared.contracts database/schema/construction_contracts.sql``.
 """
 
 import argparse
-from dataclasses import dataclass
-from contextlib import contextmanager
 import inspect
 import json
 from pathlib import Path
 import types
 from typing import (
     Annotated,
-    Any,
     NotRequired,
     Required,
     TypedDict,
@@ -43,50 +40,11 @@ NonEmptyText = Annotated[str, StringConstraints(pattern=NONBLANK_PATTERN)]
 SourceId = Annotated[NonEmptyText, "source-id"]
 
 
-@dataclass(frozen=True)
-class Runtime:
-    """Give a constructor the resources and record snapshot for one import.
+class FeatureIdentity(TypedDict):
+    """Select a provider record and name its output feature."""
 
-    ``connect`` opens a PostgreSQL connection. ``storage`` provides access
-    to raw objects in R2, and ``work_dir`` locates the download cache when
-    one is configured. The importer passes this object separately from the
-    JSON arguments. ``recipe_id``, ``method``, and ``arguments`` identify
-    the record and the settings it used, so ``saving()`` can confirm the
-    settings still match when the constructor writes its results.
-    """
-
-    connect: Any
-    storage: Any
-    recipe_id: str
-    method: str
-    arguments: dict
-    work_dir: Path | None = None
-
-    @contextmanager
-    def saving(self, database):
-        """Check and lock the construction while the caller saves geometry.
-
-        Read the current method and arguments under a shared row lock and
-        compare them with the snapshot used for the calculation. The lock
-        lasts until the enclosing transaction finishes. An exception inside
-        the context rolls back the save.
-
-        Args:
-            database: PostgreSQL connection used to save the result.
-
-        Raises:
-            ValueError: The construction was edited or deleted during calculation.
-        """
-        with database.transaction():
-            row = database.execute(
-                "SELECT method,arguments FROM atlas.construction_records WHERE id=%s FOR SHARE",
-                (self.recipe_id,),
-            ).fetchone()
-            if row != (self.method, self.arguments):
-                raise ValueError(
-                    "construction changed during calculation; rerun its current settings"
-                )
-            yield
+    feature_id: NonEmptyText
+    source_feature_id: NonEmptyText | int
 
 
 def parameters(constructor):
@@ -148,7 +106,11 @@ class RecipeSchema(GenerateJsonSchema):
         Returns:
             A JSON Schema dictionary with ``additionalProperties`` set to false.
         """
-        return super().typed_dict_schema(schema) | {"additionalProperties": False}
+        result = super().typed_dict_schema(schema)
+        # Keep Python docstrings separate from the database contract.
+        result.pop("description", None)
+        result["additionalProperties"] = False
+        return result
 
     def dict_schema(self, schema):
         """Generate JSON Schema for a mapping, enforcing any key pattern.
@@ -276,7 +238,7 @@ def database_checks():
                 + ",".join(quote("lax " + path) for path in paths) + "]::jsonpath[]"
             )
     return (
-        "-- Generated from constructor signatures. Do not edit; see source_imports.contracts.\n"
+        "-- Generated from constructor signatures. Do not edit; see source_imports.shared.contracts.\n"
         "CREATE FUNCTION atlas.nonblank(value text) RETURNS boolean\n"
         "LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE AS $nonblank$\n"
         f' SELECT value COLLATE "C" ~ {quote(NONBLANK_PATTERN)};\n'

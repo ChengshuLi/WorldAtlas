@@ -2,16 +2,39 @@
 
 import json
 from pathlib import Path
+import time
+from typing import Literal, NotRequired
 from zipfile import ZipFile
 
-from osgeo import ogr, osr
+from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.source_imports.shared.contracts import FeatureIdentity, NonEmptyText, SourceId
+from worldatlas.source_imports.shared.runtime import Runtime
+from worldatlas.source_imports.shared.sources import acquire_sources
+from worldatlas.source_imports.shared.storage import feature_result, save_features
 
-from worldatlas.source_imports.features.geometry import (
-    validate_geometry,
-)
+
+class VectorSelection(FeatureIdentity):
+    """Select one provider geometry or the records in a provider collection."""
+
+    collection: NotRequired[bool]
+    expected_feature_count: NotRequired[int]
+    polygon_containing: NotRequired[tuple[float, float]]
+    holes: NotRequired[Literal["preserve", "outer_envelope"]]
 
 
 def dataset_path(path, member=None):
+    """Find the dataset path understood by GDAL.
+
+    Args:
+        path: Local vector file or ZIP archive.
+        member: Optional dataset path inside the archive.
+
+    Returns:
+        A filesystem path or GDAL virtual ZIP path.
+
+    Raises:
+        ValueError: The archive selection is missing or ambiguous.
+    """
     path = Path(path).resolve(strict=True)
     if path.suffix.lower() != ".zip":
         if member is not None:
@@ -30,7 +53,17 @@ def dataset_path(path, member=None):
 
 
 def geojson_geometries(path, member, id_field, wanted):
-    """Preserve source coordinate values, including integer JSON numbers."""
+    """Read original GeoJSON coordinates with their JSON number representation.
+
+    Args:
+        path: Local GeoJSON file or ZIP archive.
+        member: GeoJSON member name for archived inputs.
+        id_field: Provider attribute or ``@fid`` used to identify records.
+        wanted: Provider IDs to select, converted to strings.
+
+    Returns:
+        Original geometry dictionaries keyed by selected provider ID.
+    """
     path = Path(path)
     if member is not None:
         with ZipFile(path) as archive:
@@ -53,7 +86,19 @@ def geojson_geometries(path, member, id_field, wanted):
 
 
 def polygon_containing(geometry, coordinates):
-    """Select an original polygon part by an interior WGS84 point; keep its rings."""
+    """Select an original polygon part by an interior WGS84 point.
+
+    Args:
+        geometry: Polygon or multipolygon to search.
+        coordinates: Longitude and latitude of the selection point.
+
+    Returns:
+        The selected polygon, including its original rings.
+
+    Raises:
+        ValueError: The point is invalid or falls inside anything other
+            than one polygon interior.
+    """
     from shapely.geometry import Polygon
 
     point = validate_geometry({"type": "Point", "coordinates": coordinates})
@@ -72,9 +117,26 @@ def polygon_containing(geometry, coordinates):
     return {"type": "Polygon", "coordinates": selected[0]}
 
 
-def read_features(path, settings):
-    """Extract requested provider IDs once; no continent or grid decisions."""
-    selected = settings["selections"]
+def read_features(path, *, id_field, selections, member=None, layer=None, coordinate_operation=None):
+    """Extract selected vector records and convert their geometry to WGS84.
+
+    Args:
+        path: Verified local vector dataset or archive.
+        id_field: Provider ID attribute or ``@fid`` for the native feature ID.
+        selections: Output feature IDs paired with provider records and options.
+        member: Optional dataset member inside a ZIP archive.
+        layer: Optional dataset layer name.
+        coordinate_operation: Optional explicit CRS transformation.
+
+    Returns:
+        Selected features with their output IDs, provider IDs, and geometries.
+
+    Raises:
+        ValueError: A dataset, selection, CRS, or geometry is invalid.
+    """
+    from osgeo import ogr, osr
+
+    selected = selections
     wanted = {str(item["source_feature_id"]) for item in selected}
     collections = {
         str(item["source_feature_id"]) for item in selected if item.get("collection")
@@ -82,16 +144,15 @@ def read_features(path, settings):
     identifiers = [item["feature_id"] for item in selected]
     if not wanted or len(set(identifiers)) != len(selected):
         raise ValueError("output feature selections must be unique")
-    source = ogr.Open(dataset_path(path, settings.get("member")), 0)
+    source = ogr.Open(dataset_path(path, member), 0)
     if source is None:
         raise ValueError("source vector dataset cannot be opened")
-    layer_name = settings.get("layer")
+    layer_name = layer
     if layer_name is None and source.GetLayerCount() != 1:
         raise ValueError("select one source vector layer")
     layer = source.GetLayerByName(layer_name) if layer_name else source.GetLayer(0)
     if layer is None:
         raise ValueError("selected vector layer is missing")
-    id_field = settings["id_field"]
     if id_field == "@fid":
         fids = {key: [int(key)] for key in wanted}
     else:
@@ -118,7 +179,7 @@ def read_features(path, settings):
     if target.SetFromUserInput(reference) != 0:
         raise ValueError("unsupported output coordinate reference")
     target.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    operation = settings.get("coordinate_operation")
+    operation = coordinate_operation
     options = osr.CoordinateTransformationOptions()
     if operation:
         options.SetOperation(operation)
@@ -130,9 +191,7 @@ def read_features(path, settings):
         and not collections
         and original.IsSame(target, ["IGNORE_DATA_AXIS_TO_SRS_AXIS_MAPPING=YES"])
     ):
-        source_geometries = geojson_geometries(
-            path, settings.get("member"), id_field, wanted
-        )
+        source_geometries = geojson_geometries(path, member, id_field, wanted)
     result = []
     for selection in selected:
         key = str(selection["source_feature_id"])
@@ -199,3 +258,38 @@ def read_features(path, settings):
             }
         )
     return result
+
+
+def selected_vector_features(
+    runtime: Runtime,
+    *,
+    source_id: SourceId,
+    basis: NonEmptyText,
+    id_field: NonEmptyText,
+    selections: list[VectorSelection],
+    member: NonEmptyText | None = None,
+    layer: NonEmptyText | None = None,
+    coordinate_operation: NonEmptyText | None = None,
+):
+    """Import selected vector features as WGS84 GeoJSON.
+
+    Args:
+        runtime: Import resources and saved recipe snapshot.
+        source_id: Catalog ID of the vector source.
+        basis: Human-readable explanation retained in the recipe.
+        id_field: Provider ID attribute or ``@fid``.
+        selections: Provider features and their output IDs and options.
+        member: Optional dataset member inside a ZIP archive.
+        layer: Optional dataset layer name.
+        coordinate_operation: Optional explicit CRS transformation.
+
+    Returns:
+        Saved geometry checksums, the local source path, and timings.
+    """
+    started, timing = time.monotonic(), {}
+    path, = acquire_sources(runtime, [source_id], timing=timing)
+    features = read_features(path, id_field=id_field, selections=selections, member=member,
+                             layer=layer, coordinate_operation=coordinate_operation)
+    hashes = save_features(runtime, features)
+    return feature_result(hashes, time.monotonic() - started, source=path,
+                          download_seconds=timing.get("download_seconds", 0.0))

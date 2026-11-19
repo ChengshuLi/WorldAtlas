@@ -1,13 +1,29 @@
 """Connect reviewed source-figure points with WGS84 geodesics."""
 
 import math
+from typing import Any
 
-from worldatlas.source_imports.features.geometry import validate_geometry
+from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.geodesy.wgs84 import geodesic
+from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.runtime import Runtime
+from worldatlas.source_imports.shared.sources import acquire_sources
+from worldatlas.source_imports.shared.storage import save_features
 
 
 def construct(points, max_step_metres):
-    """Keep every control point; sampling adds coordinates along each segment."""
+    """Sample the geodesic segments connecting consecutive control points.
+
+    Args:
+        points: Ordered WGS84 longitude and latitude pairs.
+        max_step_metres: Maximum spacing between adjacent output vertices.
+
+    Returns:
+        A GeoJSON LineString that includes every supplied control point.
+
+    Raises:
+        ValueError: The points or spacing do not define a valid simple trace.
+    """
     if (type(max_step_metres) not in (int, float)
             or not math.isfinite(max_step_metres) or max_step_metres <= 0):
         raise ValueError("max_step_metres must be a finite positive number")
@@ -25,3 +41,31 @@ def construct(points, max_step_metres):
     if not validate_geometry(geometry).is_simple:
         raise ValueError("boundary trace must not cross or retrace itself")
     return geometry
+
+
+def geodesic_trace(runtime: Runtime, *, source_ids: list[SourceId],
+                          source_feature_id: NonEmptyText, feature_id: NonEmptyText,
+                          basis: NonEmptyText, points: list[tuple[float, float]],
+                          max_step_metres: float,
+                          source_location: dict[str, Any] | str | None = None):
+    """Save the WGS84 trace of reviewed source-figure control points.
+
+    Args:
+        runtime: Import resources and saved recipe snapshot.
+        source_ids: Distinct catalog IDs for the supporting source figures.
+        source_feature_id: Figure or locator described by the recipe.
+        feature_id: Output feature ID in Neon.
+        basis: Human-readable explanation retained in the recipe.
+        points: Ordered WGS84 longitude and latitude pairs.
+        max_step_metres: Maximum spacing between adjacent output vertices.
+        source_location: Optional location or calibration notes in the recipe.
+
+    Returns:
+        Saved feature ID, vertex count, and geometry checksum.
+    """
+    if not source_ids or len(set(source_ids)) != len(source_ids):
+        raise ValueError("trace sources must be nonempty and distinct")
+    geometry = construct(points, max_step_metres)
+    acquire_sources(runtime, [], evidence_source_ids=source_ids)
+    hashes = save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
+    return dict(feature_id=feature_id, vertices=len(geometry['coordinates']), sha256=hashes[feature_id])
