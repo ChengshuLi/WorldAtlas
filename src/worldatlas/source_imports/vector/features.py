@@ -6,7 +6,7 @@ import time
 from typing import NotRequired
 from zipfile import ZipFile
 
-from osgeo import gdal, osr
+from osgeo import gdal, ogr, osr
 from shapely import union_all
 from shapely.geometry import Polygon, mapping
 
@@ -45,6 +45,7 @@ def dataset_path(path, member=None):
     with ZipFile(path) as archive:
         names = archive.namelist()
         if member is None:
+            # The .shp is the entry point. GDAL finds its companion files in the ZIP.
             candidates = [name for name in names if name.lower().endswith(".shp")]
             if len(candidates) != 1:
                 raise ValueError("select one vector dataset archive member")
@@ -126,13 +127,16 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
     """
     wanted = {str(item["source_feature_id"]) for item in selections}
     identifiers = [item["feature_id"] for item in selections]
+    # A source record can be saved under several IDs. Each output ID is unique.
     if not wanted or len(set(identifiers)) != len(selections):
         raise ValueError("output feature selections must be unique")
     # Request each GeoJSON feature's original JSON. The @ makes the option
     # optional for drivers that do not support it.
-    source = gdal.OpenEx(
-        dataset_path(path, member), gdal.OF_VECTOR, open_options=["@NATIVE_DATA=YES"]
-    )
+    # Use return codes here regardless of GDAL's exception setting elsewhere.
+    with gdal.ExceptionMgr(useExceptions=False):
+        source = gdal.OpenEx(
+            dataset_path(path, member), gdal.OF_VECTOR, open_options=["@NATIVE_DATA=YES"]
+        )
     if source is None:
         raise ValueError("source vector dataset cannot be opened")
     layer_name = layer
@@ -146,6 +150,8 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
     else:
         if layer.GetLayerDefn().GetFieldIndex(id_field) < 0:
             raise ValueError("selected provider ID field is missing")
+        # Match the requested attribute values exactly, then ask GDAL for
+        # geometry only when fetching the matched records by their native IDs.
         layer.SetIgnoredFields(["OGR_GEOMETRY"])
         fids = {}
         for row in layer:
@@ -161,13 +167,17 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
     if original is None:
         raise ValueError("vector source has no coordinate reference")
     original = original.Clone()
+    # GeoJSON requires longitude first even when a CRS declares latitude first.
     original.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
     target = osr.SpatialReference()
     reference = "OGC:CRS84"
-    if target.SetFromUserInput(reference) != 0:
+    with osr.ExceptionMgr(useExceptions=False):
+        status = target.SetFromUserInput(reference)
+    if status != 0:
         raise ValueError("unsupported output coordinate reference")
     target.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
     is_geojson = source.GetDriver().ShortName == "GeoJSON"
+    # Skip coordinate conversion when the source already has the required values.
     use_native_coordinates = (
         is_geojson
         and original.IsSame(target, ["IGNORE_DATA_AXIS_TO_SRS_AXIS_MAPPING=YES"])
@@ -189,10 +199,13 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
             value = native_geojson_geometry(row, path, member)
         else:
             geometry = geometry.Clone()
-            if geometry.Transform(conversion) != 0:
+            with ogr.ExceptionMgr(useExceptions=False):
+                status = geometry.Transform(conversion)
+            if status != 0:
                 raise ValueError("source geometry coordinate conversion failed")
             value = json.loads(geometry.ExportToJson(options=export_options))
         validate_geometry(value)
+        # Test containment against the original holes before filling any of them.
         if "polygon_containing" in selection:
             value = polygon_containing(value, selection["polygon_containing"])
         if selection.get("fill_holes", False):
@@ -203,6 +216,8 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
                 if value["type"] == "Polygon"
                 else value["coordinates"]
             )
+            # Build from exterior rings only. A union also merges parts that
+            # overlap once their holes are filled.
             value = mapping(union_all([Polygon(rings[0]) for rings in parts]))
             value = json.loads(json.dumps(value, allow_nan=False))
             validate_geometry(value)

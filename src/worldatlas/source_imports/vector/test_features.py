@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 from zipfile import ZipFile
 
 from osgeo import ogr, osr
@@ -13,6 +14,8 @@ from worldatlas.source_imports.vector.features import dataset_path, read_feature
 
 
 class VectorTests(unittest.TestCase):
+    """Exercise GDAL selection and conversion with small local datasets."""
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -24,6 +27,11 @@ class VectorTests(unittest.TestCase):
         self.write()
 
     def write(self, ids=("a", "b")):
+        """Write the default GeoJSON selection fixture.
+
+        Args:
+            ids: Provider IDs for the features in file order.
+        """
         self.path.write_text(
             json.dumps(
                 {
@@ -40,6 +48,26 @@ class VectorTests(unittest.TestCase):
             )
         )
 
+    def write_point_shapefile(self, source_crs=None):
+        """Create a one-point Shapefile with its companion files.
+
+        Args:
+            source_crs: Optional GDAL coordinate reference for the layer.
+
+        Returns:
+            Path to the .shp member.
+        """
+        path = self.path.with_name("points.shp")
+        source = ogr.GetDriverByName("ESRI Shapefile").CreateDataSource(str(path))
+        layer = source.CreateLayer("points", source_crs, ogr.wkbPoint)
+        feature = ogr.Feature(layer.GetLayerDefn())
+        point = ogr.Geometry(ogr.wkbPoint)
+        point.AddPoint_2D(20, 10)
+        feature.SetGeometry(point)
+        self.assertEqual(layer.CreateFeature(feature), 0)
+        source = None
+        return path
+
     def test_selects_point_by_provider_id(self):
         rows = read_features(self.path, **self.recipe)
         self.assertEqual(len(rows), 1)
@@ -53,6 +81,31 @@ class VectorTests(unittest.TestCase):
             read_features(self.path, **self.recipe)
         self.write(("a", "a"))
         with self.assertRaisesRegex(ValueError, "duplicated"):
+            read_features(self.path, **self.recipe)
+
+    def test_missing_id_field_or_native_feature(self):
+        cases = (
+            (dict(id_field="absent"), "selected provider ID field is missing"),
+            (
+                dict(id_field="@fid", selections=[dict(feature_id="label", source_feature_id=999)]),
+                "selected provider feature is missing",
+            ),
+        )
+        for options, message in cases:
+            with self.subTest(options=options), self.assertRaisesRegex(ValueError, message):
+                read_features(self.path, **dict(self.recipe, **options))
+
+    def test_unrecognized_vector_file_is_rejected(self):
+        path = self.path.with_suffix(".txt")
+        path.write_text("This is not a vector dataset.")
+        with self.assertRaisesRegex(ValueError, "source vector dataset cannot be opened"):
+            read_features(path, **self.recipe)
+
+    def test_selected_record_requires_geometry(self):
+        document = json.loads(self.path.read_text())
+        document["features"][0]["geometry"] = None
+        self.path.write_text(json.dumps(document))
+        with self.assertRaisesRegex(ValueError, "source feature has no geometry"):
             read_features(self.path, **self.recipe)
 
     def test_provider_geometry_can_backfill_distinct_existing_feature_ids(self):
@@ -272,10 +325,39 @@ class VectorTests(unittest.TestCase):
         geometry.AddPoint_2D(1113194.9079327357, 0)
         feature.SetGeometry(geometry)
         layer.CreateFeature(feature)
+        source.CreateLayer("other_points", crs, ogr.wkbPoint)
         source = None
-        result = read_features(path, **self.recipe)[0]
+        with self.assertRaisesRegex(ValueError, "select one source vector layer"):
+            read_features(path, **self.recipe)
+        with self.assertRaisesRegex(ValueError, "selected vector layer is missing"):
+            read_features(path, layer="absent", **self.recipe)
+        result = read_features(path, layer="points", **self.recipe)[0]
         self.assertAlmostEqual(result["geometry"]["coordinates"][0], 10)
         self.assertAlmostEqual(result["geometry"]["coordinates"][1], 0)
+
+    def test_shapefile_requires_a_coordinate_reference(self):
+        path = self.write_point_shapefile()
+        with self.assertRaisesRegex(ValueError, "vector source has no coordinate reference"):
+            read_features(
+                path,
+                id_field="@fid",
+                selections=[dict(feature_id="point", source_feature_id=0)],
+            )
+
+    def test_fails_if_gdal_cannot_initialize_wgs84(self):
+        with (
+            patch.object(osr.SpatialReference, "SetFromUserInput", return_value=1),
+            self.assertRaisesRegex(ValueError, "unsupported output coordinate reference"),
+        ):
+            read_features(self.path, **self.recipe)
+
+    def test_rejects_a_point_outside_its_source_projection(self):
+        document = json.loads(self.path.read_text())
+        document["crs"] = dict(type="name", properties={"name": "EPSG:32631"})
+        document["features"][0]["geometry"]["coordinates"] = [1e12, 0]
+        self.path.write_text(json.dumps(document))
+        with self.assertRaisesRegex(ValueError, "source geometry coordinate conversion failed"):
+            read_features(self.path, **self.recipe)
 
     def test_archive_member_selection(self):
         path = self.path.with_suffix(".zip")
@@ -289,3 +371,25 @@ class VectorTests(unittest.TestCase):
             dataset_path(path, "missing")
         with self.assertRaisesRegex(ValueError, "non-archive"):
             dataset_path(self.path, "member")
+
+    def test_zip_with_one_shapefile_can_select_it_automatically(self):
+        reference = osr.SpatialReference()
+        reference.ImportFromEPSG(4326)
+        shapefile = self.write_point_shapefile(reference)
+        path = self.path.with_suffix(".zip")
+        members = list(shapefile.parent.glob(f"{shapefile.stem}.*"))
+        with ZipFile(path, "w") as archive:
+            for member in members:
+                archive.write(member, f"nested/{member.name}")
+        result = read_features(
+            path,
+            id_field="@fid",
+            selections=[dict(feature_id="point", source_feature_id=0)],
+        )
+        self.assertEqual(result[0]["geometry"], dict(type="Point", coordinates=[20, 10]))
+
+        with ZipFile(path, "a") as archive:
+            for member in members:
+                archive.write(member, f"other/{member.name}")
+        with self.assertRaisesRegex(ValueError, "select one vector dataset archive member"):
+            dataset_path(path)
