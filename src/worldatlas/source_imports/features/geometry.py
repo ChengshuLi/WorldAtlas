@@ -74,7 +74,7 @@ def validate_geometry(geometry):
     return result
 
 
-def save_features(database, features, recipe):
+def save_features(database, features, *, construction_id):
     """Save an import atomically without duplicating its provider selectors."""
     identifiers = [feature["feature_id"] for feature in features]
     if (
@@ -88,7 +88,7 @@ def save_features(database, features, recipe):
         validate_geometry(feature["geometry"])
         geometry = storage_geometry(feature["geometry"])
         hashes[feature["feature_id"]] = geometry_hash(geometry)
-        records.append((feature["feature_id"], Jsonb(geometry), recipe["recipe_id"]))
+        records.append((feature["feature_id"], Jsonb(geometry), construction_id))
     with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(

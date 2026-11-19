@@ -107,7 +107,7 @@ class StorageTests(unittest.TestCase):
         self.database.execute(
             "INSERT INTO atlas.geographic_rule_features VALUES ('related','point-a','distance_reference')"
         )
-        self.recipe["basis"] = "Updated explanation"
+        self.recipe.update(basis="Updated explanation", member=None, layer=None)
         self.store()
         self.build()
         after = self.rows()[0]
@@ -139,9 +139,7 @@ class StorageTests(unittest.TestCase):
             ),
         ]
         with self.assertRaises(psycopg.errors.ForeignKeyViolation):
-            save_features(
-                self.database, features, dict(self.recipe, recipe_id="missing")
-            )
+            save_features(self.database, features, construction_id="missing")
         self.assertEqual(self.rows(), before)
 
     def test_signed_zero_preserves_longitude_latitude_coordinates(self):
@@ -156,6 +154,6 @@ class StorageTests(unittest.TestCase):
                     geometry=geometry,
                 )
             ],
-            dict(self.recipe, recipe_id="__features"),
+            construction_id="__features",
         )
         self.assertEqual(json.dumps(self.rows()[0][1]["coordinates"]), "[0.0, 1e-24]")

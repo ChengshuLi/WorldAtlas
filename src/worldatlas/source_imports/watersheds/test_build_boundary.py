@@ -292,7 +292,7 @@ class StorageTests(unittest.TestCase):
     def test_repeat_and_edit_recipe_preserve_geometry_and_sources(self):
         result = self.build()
         self.assertEqual(self.build()["sha256"], result["sha256"])
-        self.recipe["basis"] = "Updated explanation"
+        self.recipe.update(basis="Updated explanation", evidence_sources=None)
         self.store()
         self.build()
         self.assertEqual(self.row()[1], "watershed")

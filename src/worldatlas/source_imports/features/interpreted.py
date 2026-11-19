@@ -44,7 +44,7 @@ def interpreted_geometry(
             catalog_source(database, source_id)
         with runtime.saving(database):
             hashes = save_features(
-                database, selections, dict(recipe_id=runtime.recipe_id)
+                database, selections, construction_id=runtime.recipe_id
             )
     return dict(
         geometry_sha256=hashes,

@@ -27,7 +27,7 @@ def save_boundary(database, geometry, source, recipe):
                     geometry=geometry,
                 )
             ],
-            recipe,
+            construction_id=recipe["recipe_id"],
         )
 
 

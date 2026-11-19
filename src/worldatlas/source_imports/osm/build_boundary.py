@@ -21,6 +21,8 @@ def osm_way_chain(
         paths = [download_source(runtime.storage, source, runtime.work_dir) for source in sources]
         geometry = assemble(paths, start_node_id)
         with runtime.saving(database):
-            hashes = save_features(database, [dict(feature_id=feature_id, geometry=geometry)],
-                dict(recipe_id=runtime.recipe_id))
+            hashes = save_features(
+                database, [dict(feature_id=feature_id, geometry=geometry)],
+                construction_id=runtime.recipe_id,
+            )
     return dict(feature_id=feature_id, vertices=len(geometry['coordinates']), sha256=hashes[feature_id])

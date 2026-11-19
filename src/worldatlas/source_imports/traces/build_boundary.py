@@ -21,8 +21,8 @@ def geodesic_trace(runtime: Runtime, *, source_ids: list[SourceId],
         for source_id in source_ids:
             catalog_source(database, source_id)
         with runtime.saving(database):
-            hashes = save_features(database, [dict(
-                feature_id=feature_id,
-                source_feature_id=source_feature_id, geometry=geometry,
-            )], dict(recipe_id=runtime.recipe_id))
+            hashes = save_features(
+                database, [dict(feature_id=feature_id, geometry=geometry)],
+                construction_id=runtime.recipe_id,
+            )
     return dict(feature_id=feature_id, vertices=len(geometry['coordinates']), sha256=hashes[feature_id])

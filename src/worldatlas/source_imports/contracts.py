@@ -32,19 +32,8 @@ class Runtime:
     storage: Any
     recipe_id: str
     method: str
+    arguments: dict
     work_dir: Path | None = None
-    arguments: dict | None = None
-
-    def recipe(self, arguments):
-        """Forward bound function arguments to algorithms that consume settings dictionaries."""
-        return dict(
-            {
-                key: value
-                for key, value in arguments.items()
-                if key != "runtime" and value is not None
-            },
-            recipe_id=self.recipe_id,
-        )
 
     @contextmanager
     def saving(self, database):

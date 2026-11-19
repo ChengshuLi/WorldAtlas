@@ -1,4 +1,8 @@
-"""Import selected source features into existing Neon decision records."""
+"""Import selected source features into Neon.
+
+Constructor signatures define the database contracts. The shared builder
+passes the saved arguments to each reader.
+"""
 
 import time
 from typing import Literal, NotRequired, TypedDict
@@ -51,18 +55,17 @@ class OsmSelection(TypedDict):
     geometry_type: NotRequired[Literal["Polygon", "MultiPolygon"]]
 
 
-def _build(runtime, reader, arguments):
+def _build(runtime, reader):
     started = time.monotonic()
-    recipe = runtime.recipe(arguments)
     with runtime.connect() as database:
         with database.transaction():
-            source = catalog_source(database, recipe["source_id"])
+            source = catalog_source(database, runtime.arguments["source_id"])
         timing = {}
         path = download_source(runtime.storage, source, runtime.work_dir, timing=timing)
-        features = reader(path, source, recipe)
+        features = reader(path, source, runtime.arguments)
         check_source(path, source)
         with runtime.saving(database):
-            hashes = save_features(database, features, recipe)
+            hashes = save_features(database, features, construction_id=runtime.recipe_id)
     elapsed = time.monotonic() - started
     return {
         "geometry_sha256": hashes,
@@ -86,12 +89,9 @@ def selected_vector_features(
     coordinate_operation: NonEmptyText | None = None,
 ):
     """Select provider vector features and convert them to WGS84 longitude/latitude."""
-    arguments = locals()
     from worldatlas.source_imports.features.vector import read_features
 
-    return _build(
-        runtime, lambda path, source, settings: read_features(path, settings), arguments
-    )
+    return _build(runtime, lambda path, source, settings: read_features(path, settings))
 
 
 def selected_osm_features(
@@ -102,12 +102,9 @@ def selected_osm_features(
     selections: list[OsmSelection],
 ):
     """Assemble selected archived OSM nodes, ways and relations."""
-    arguments = locals()
     from worldatlas.source_imports.osm.features import read_features
 
-    return _build(
-        runtime, lambda path, source, settings: read_features(path, settings), arguments
-    )
+    return _build(runtime, lambda path, source, settings: read_features(path, settings))
 
 
 def s130_areas(
@@ -120,7 +117,6 @@ def s130_areas(
     selections: list[FeatureIdentity],
 ):
     """Import complete S-130 geographic areas, including linked surfaces and holes."""
-    arguments = locals()
     from worldatlas.source_imports.iho.areas import read_areas
 
-    return _build(runtime, read_areas, arguments)
+    return _build(runtime, read_areas)

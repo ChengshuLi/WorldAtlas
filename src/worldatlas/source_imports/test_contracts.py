@@ -12,7 +12,6 @@ from psycopg.types.json import Jsonb
 from worldatlas.source_imports.contracts import (
     NonEmptyText,
     SourceId,
-    Runtime,
     parameters,
     source_paths,
     sql_object,
@@ -40,13 +39,6 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(
             parameters(example),
             {"title": (NonEmptyText, inspect.Parameter.empty), "enabled": (bool, True)},
-        )
-
-    def test_runtime_recipe_omits_execution_resources_and_unset_values(self):
-        runtime = Runtime(None, None, "construction", "osm_way_chain")
-        self.assertEqual(
-            runtime.recipe(dict(runtime=runtime, title="Hello", optional=None)),
-            dict(recipe_id="construction", title="Hello"),
         )
 
     def test_untyped_or_variadic_parameters_are_not_silently_ignored(self):

@@ -83,7 +83,7 @@ def construct(recipe, files):
     lines = {name: sources.line(parts) for name, parts in recipe['lines'].items()}
     report['source_geometry_seconds'] = time.monotonic() - started
     divides, connections, networks = {}, {}, []
-    for name, settings in recipe.get('terrains', {}).items():
+    for name, settings in (recipe.get('terrains') or {}).items():
         phase = time.monotonic()
         domains = settings['domains']
         if not domains:
@@ -282,11 +282,11 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: Non
                        evidence_sources: list[SourceId] | None = None,
                        geographic_choices: dict[str, Any] | None = None):
     """Construct ordered source lines, drainage divides, rivers and geographic joins."""
-    recipe = runtime.recipe(locals())
+    recipe = runtime.arguments
     started = time.monotonic()
     with runtime.connect() as database, database.transaction():
         selections = resolve_sources(database, recipe)
-        for item in recipe.get('evidence_sources', []):
+        for item in evidence_sources or []:
             catalog_source(database, item)
     catalog_seconds = time.monotonic() - started
     started = time.monotonic()
@@ -297,8 +297,10 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: Non
     versions = runtime_versions()
     started = time.monotonic()
     with runtime.connect() as database, runtime.saving(database):
-        hashes = save_features(database, [dict(feature_id=feature_id,
-            source_feature_id=feature_id, geometry=geometry)], dict(recipe_id=runtime.recipe_id))
+        hashes = save_features(
+            database, [dict(feature_id=feature_id, geometry=geometry)],
+            construction_id=runtime.recipe_id,
+        )
         digest = hashes[feature_id]
     report.update(feature_id=feature_id, sha256=digest,
                   vertices=len(geometry['coordinates']), catalog_seconds=catalog_seconds,

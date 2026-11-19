@@ -48,12 +48,12 @@ def run_import(connect, recipe_id, *, storage=None, work_dir=None):
         raise ValueError("this method requires --r2-endpoint and --work-dir")
     return importer(
         Runtime(
-            connect,
-            storage,
-            recipe_id,
-            method,
-            work_dir,
+            connect=connect,
+            storage=storage,
+            recipe_id=recipe_id,
+            method=method,
             arguments=arguments,
+            work_dir=work_dir,
         ),
         **arguments,
     )
