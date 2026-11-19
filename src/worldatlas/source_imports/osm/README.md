@@ -23,7 +23,7 @@ Use `osm_way_chain` to join individual archived `/api/0.6/way/{id}/full.json` re
 
 The order of `way_source_ids` has no effect. [`ways.py`](ways.py) starts at the supplied endpoint, follows shared node IDs, and reverses individual ways as needed. It preserves the coordinates and requires one open, continuous, unbranched line without self-intersections.
 
-Run the [common import command](../README.md) with the construction ID, R2 endpoint, and work directory. [`ways.py`](ways.py) contains `osm_way_chain` and its assembler. The typed source list generates the database links to each way file. Checked local files are reused. The import result includes the saved line's SHA-256.
+Run the [common import command](../README.md) with the construction ID, R2 endpoint, and work directory. [`ways.py`](ways.py) contains `osm_way_chain` and its assembler. The typed source list generates the database links to each way file. Checked local files are reused. The import result reports the saved feature ID and vertex count.
 
 Use `evidence_source_ids` to cite additional sources that explain the selection.
 
