@@ -1,4 +1,10 @@
-"""Derive construction argument checks from the constructors' typed signatures."""
+"""Generate PostgreSQL construction checks and source references from Python types.
+
+Each construction record stores a registered method name and a JSON object
+of arguments. The method's signature defines which arguments are required,
+their types, and which values refer to raw sources. Regenerating the SQL
+updates both database functions from those declarations.
+"""
 
 import argparse
 from dataclasses import dataclass
@@ -24,13 +30,23 @@ from psycopg.sql import quote
 from pydantic import StringConstraints, TypeAdapter
 from pydantic.json_schema import GenerateJsonSchema
 
+# Require at least one character outside the listed whitespace characters.
 NonEmptyText = Annotated[str, StringConstraints(pattern=r"[^ \t\n\r\f\x0b]")]
+# Keep the string constraint and mark this value as a reference to source_assets.id.
 SourceId = Annotated[NonEmptyText, "source-id"]
 
 
 @dataclass(frozen=True)
 class Runtime:
-    """Execution resources and identities, supplied by the command rather than Neon JSON."""
+    """Give a constructor the resources and record snapshot for one import.
+
+    ``connect`` opens a PostgreSQL connection. ``storage`` provides access
+    to raw objects in R2, and ``work_dir`` locates the download cache when
+    one is configured. The importer passes this object separately from the
+    JSON arguments. ``recipe_id``, ``method``, and ``arguments`` identify
+    the record and the settings it used, so ``saving()`` can confirm the
+    settings still match when the constructor writes its results.
+    """
 
     connect: Any
     storage: Any
@@ -64,13 +80,19 @@ class Runtime:
 
 
 def parameters(constructor):
-    """Describe the JSON argument fields used to generate the SQL checks.
+    """Return the argument types and presence requirements of a constructor.
 
-    Return a mapping from field names to (annotation, required) pairs. The
-    annotation is the parameter's declared Python type, such as int or
-    list[SourceId]. The required flag is true when the parameter has no default.
-    The importer supplies runtime separately. Recipe parameters must be typed
-    and keyword-only.
+    Each entry maps a JSON field name to ``(annotation, required)``. The
+    annotation is the declared Python type, such as ``int`` or
+    ``list[SourceId]``, including metadata used for validation and reference
+    extraction. ``required`` is true when the parameter has no default.
+    A type that permits ``None`` controls whether JSON null is allowed
+    when the key is present. The default controls whether the key can be omitted.
+
+    Raise ``TypeError`` if the first parameter is missing or has a name
+    other than ``runtime``, or if any subsequent parameter lacks a type
+    annotation or is not keyword-only. The importer supplies ``runtime``
+    separately, so it is excluded from the returned fields.
     """
     signature = inspect.signature(constructor)
     arguments = list(signature.parameters.values())
@@ -92,12 +114,32 @@ def parameters(constructor):
 
 
 class RecipeSchema(GenerateJsonSchema):
-    """Keep construction objects closed and enforce patterns on mapping keys."""
+    """Customize Pydantic's JSON Schema for construction objects and mappings.
+
+    A ``TypedDict`` declares a fixed set of allowed field names. A ``dict``
+    can have names chosen by the recipe, such as the labels in a watershed's
+    ``sources`` mapping. The generated schema enforces each kind of key rule.
+    """
 
     def typed_dict_schema(self, schema):
+        """Generate a schema that rejects every undeclared field name.
+
+        Pydantic supplies the field types and required keys. The extra
+        restriction catches typos even when the intended field is optional.
+        It applies to the top-level arguments and to nested typed objects.
+        """
         return super().typed_dict_schema(schema) | {"additionalProperties": False}
 
     def dict_schema(self, schema):
+        """Require each mapping key to match Pydantic's pattern when present.
+
+        ``patternProperties`` validates values under matching keys. JSON
+        Schema still allows nonmatching keys by default. Setting
+        ``additionalProperties`` to false rejects them, so a watershed
+        source named ``"primary"`` can have a valid source reference, while
+        a source named ``"   "`` fails the nonblank key constraint. Mappings
+        without a key pattern keep Pydantic's generated value rules.
+        """
         result = super().dict_schema(schema)
         if "patternProperties" in result:
             result["additionalProperties"] = False
@@ -105,6 +147,14 @@ class RecipeSchema(GenerateJsonSchema):
 
 
 def recipe_schema(method, fields):
+    """Return the Draft 2020-12 JSON Schema for one method's arguments.
+
+    ``fields`` is the mapping returned by ``parameters()``. Use it to build
+    a temporary ``TypedDict``, wrapping fields with defaults in
+    ``NotRequired``. Pydantic converts that object type into JSON Schema
+    using ``RecipeSchema``. ``method`` names the type and appears as the
+    schema title. The database stores it separately from ``arguments``.
+    """
     arguments = TypedDict(
         method,
         {
@@ -119,7 +169,22 @@ def recipe_schema(method, fields):
 
 
 def source_paths(annotation, path="$"):
-    """Locate source references from declared types, never from field-name guesses."""
+    """Return the PostgreSQL JSON paths to values declared as ``SourceId``.
+
+    ``annotation`` is a declared Python type and ``path`` identifies the
+    JSON value at that type, starting at ``$`` for the root. For example,
+    an ``osm_way_chain`` argument typed as ``list[SourceId]`` yields
+    ``$."way_source_ids"[*]`` when starting at ``$."way_source_ids"``.
+
+    Follow each union alternative, unwrap required and optional fields,
+    and descend through list elements, tuple positions, mapping values,
+    and typed object fields. Raise ``TypeError`` for source IDs declared
+    as mapping keys. A field named ``source_id`` contributes a path only
+    if its type carries the source reference marker.
+
+    These paths describe where to look. PostgreSQL later applies them to
+    the actual JSON arguments to collect the IDs for the source links.
+    """
     origin, args = get_origin(annotation), get_args(annotation)
     if origin is Annotated:
         return [path] if "source-id" in args[1:] else []
@@ -143,6 +208,21 @@ def source_paths(annotation, path="$"):
 
 
 def database_checks():
+    """Return the complete SQL text generated from the importer registry.
+
+    ``atlas.valid_construction_record`` picks the registered method's JSON
+    Schema and validates ``arguments`` with ``pg_jsonschema``. The table's
+    check constraint uses this function to reject unknown methods and
+    malformed arguments on insert or update.
+
+    ``atlas.construction_source_ids`` applies the declared source paths to
+    the arguments and returns distinct source ID strings. The source-link
+    trigger uses them to maintain ``atlas.construction_sources``, whose
+    foreign key requires each ID to exist in ``atlas.source_assets``.
+
+    Sort the method names and paths so the output can be compared directly
+    with the committed ``database/schema/construction_contracts.sql`` file.
+    """
     from worldatlas.source_imports.run_import import IMPORTERS
 
     choices, sources = [], []
@@ -180,6 +260,12 @@ def database_checks():
 
 
 def main():
+    """Generate the construction SQL at the output path supplied on the command line.
+
+    With ``--check``, compare the generated text with the existing file and
+    exit with an error if they differ. Without it, write the generated text
+    to the requested file.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument(
