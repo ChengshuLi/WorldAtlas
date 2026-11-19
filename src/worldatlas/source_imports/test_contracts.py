@@ -1,9 +1,9 @@
-"""Construction contracts apply equally to command calls and direct SQL writes."""
+"""Generate construction contracts from signatures and enforce them in PostgreSQL."""
 
 import copy
 import inspect
 import os
-from typing import Any, Literal, NotRequired, TypedDict
+from typing import Any, TypedDict
 import unittest
 
 import psycopg
@@ -13,11 +13,10 @@ from worldatlas.source_imports.contracts import (
     NonEmptyText,
     SourceId,
     Runtime,
-    matches,
     parameters,
     source_paths,
+    sql_object,
     sql_type,
-    validate_arguments,
 )
 from worldatlas.source_imports.run_import import IMPORTERS
 from worldatlas.source_imports.test_run_import import ARGUMENTS
@@ -34,70 +33,21 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(source_paths(dict[str, SourceId]), ["$.*"])
         self.assertEqual(source_paths(Any), [])
 
-    def test_defaults_define_optional_fields_and_python_supplies_the_default(self):
+    def test_signature_distinguishes_required_parameters_from_defaults(self):
         def example(runtime, *, title: NonEmptyText, enabled: bool = True):
             return title, enabled
 
-        arguments = dict(title="Valid")
-        validate_arguments(example, arguments)
-        self.assertEqual(example(None, **arguments), ("Valid", True))
-        with self.assertRaisesRegex(ValueError, "missing construction field: title"):
-            validate_arguments(example, {})
-        self.assertEqual(parameters(example)["enabled"], (bool, True))
+        self.assertEqual(
+            parameters(example),
+            {"title": (NonEmptyText, inspect.Parameter.empty), "enabled": (bool, True)},
+        )
 
-    def test_runtime_parameters_do_not_leak_into_the_document(self):
-        function = IMPORTERS["osm_way_chain"]
-        for name in ("method", "runtime", "recipe_id", "recipe_version", "revision", "work_dir"):
-            with (
-                self.subTest(name=name),
-                self.assertRaisesRegex(ValueError, "unknown construction fields"),
-            ):
-                validate_arguments(
-                    function,
-                    dict(
-                        ARGUMENTS["osm_way_chain"],
-                        **{name: "unexpected"},
-                    ),
-                )
+    def test_runtime_recipe_omits_execution_resources_and_unset_values(self):
         runtime = Runtime(None, None, "construction", "osm_way_chain")
         self.assertEqual(
             runtime.recipe(dict(runtime=runtime, title="Hello", optional=None)),
             dict(recipe_id="construction", title="Hello"),
         )
-
-    def test_supported_annotations_do_not_coerce_json_values(self):
-        class Object(TypedDict):
-            title: NonEmptyText
-            flag: NotRequired[bool]
-
-        cases = [
-            (NonEmptyText, "Hi", True),
-            (NonEmptyText, " \t\n", False),
-            (NonEmptyText, 3, False),
-            (int, 1.0, True),
-            (int, True, False),
-            (int, 1.5, False),
-            (float, 1, True),
-            (float, True, False),
-            (float, float("inf"), False),
-            (bool, 1, False),
-            (Literal["node", "way"], "way", True),
-            (Literal["node"], "relation", False),
-            (str | None, None, True),
-            (list[int], [1, 2], True),
-            (list[int], [1, "2"], False),
-            (tuple[float, float], [1, 2, 3], False),
-            (dict[str, bool], {"a": False}, True),
-            (dict[str, bool], {"a": 0}, False),
-            (Object, {"title": "A"}, True),
-            (Object, {"flag": True}, False),
-            (Object, {"title": "A", "unused": 1}, False),
-            (Any, {"a": [1, None]}, True),
-            (Any, {"a": float("nan")}, False),
-        ]
-        for annotation, value, expected in cases:
-            with self.subTest(annotation=annotation, value=value):
-                self.assertEqual(matches(value, annotation), expected)
 
     def test_untyped_or_variadic_parameters_are_not_silently_ignored(self):
         def untyped(runtime, *, field):
@@ -106,10 +56,7 @@ class ContractTests(unittest.TestCase):
         def variadic(runtime, **fields: str):
             pass
 
-        def invalid_default(runtime, *, enabled: bool = 1):
-            pass
-
-        for function in (untyped, variadic, invalid_default):
+        for function in (untyped, variadic):
             with self.assertRaises(TypeError):
                 parameters(function)
         with self.assertRaises(TypeError):
@@ -131,32 +78,21 @@ class DatabaseContractTests(unittest.TestCase):
         )
 
     def check(self, method, arguments, expected):
-        if method in IMPORTERS:
-            try:
-                validate_arguments(IMPORTERS[method], arguments)
-                python_valid = True
-            except ValueError:
-                python_valid = False
-            self.assertEqual(python_valid, expected, (method, arguments))
-        (database_valid,) = self.database.execute(
-            "SELECT atlas.valid_construction_record(%s,%s)", (method, Jsonb(arguments))
-        ).fetchone()
-        self.assertIs(database_valid, expected, (method, arguments))
-        if expected:
-            with self.database.transaction(force_rollback=True):
-                self.database.execute(
-                    "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__contract',%s,%s)",
-                    (method, Jsonb(arguments)),
-                )
-        else:
+        insert = (
+            "INSERT INTO atlas.construction_records(id,method,arguments) "
+            "VALUES ('__contract',%s,%s)"
+        )
+        with self.subTest(method=method, arguments=arguments, expected=expected):
+            if expected:
+                with self.database.transaction(force_rollback=True):
+                    self.database.execute(insert, (method, Jsonb(arguments)))
+                return
             with (
-                self.assertRaises(psycopg.errors.CheckViolation),
+                self.assertRaises(psycopg.errors.CheckViolation) as error,
                 self.database.transaction(),
             ):
-                self.database.execute(
-                    "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__contract',%s,%s)",
-                    (method, Jsonb(arguments)),
-                )
+                self.database.execute(insert, (method, Jsonb(arguments)))
+            self.assertEqual(error.exception.diag.constraint_name, "construction_arguments_valid")
 
     def test_nested_multipart_and_evidence_sources_are_linked_once(self):
         for ident in ("other", "evidence"):
@@ -180,7 +116,6 @@ class DatabaseContractTests(unittest.TestCase):
             evidence_sources=["evidence", "raw"],
             geographic_choices={"source_id": "ordinary-untyped-text"},
         )
-        validate_arguments(IMPORTERS["watershed_boundary"], arguments)
         self.database.execute(
             "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__links','watershed_boundary',%s)",
             (Jsonb(arguments),),
@@ -238,24 +173,21 @@ class DatabaseContractTests(unittest.TestCase):
             arguments = ARGUMENTS[method]
             with self.subTest(method=method):
                 self.check(method, arguments, True)
-                for name, (annotation, default) in parameters(constructor).items():
+                for name, (_, default) in parameters(constructor).items():
                     if default is inspect.Parameter.empty:
                         self.check(
                             method,
                             {k: v for k, v in arguments.items() if k != name},
                             False,
                         )
-                        for bad in (False, 123, "wrong type", None, [], {}):
-                            if not matches(bad, annotation):
-                                self.check(method, dict(arguments, **{name: bad}), False)
                 self.check(method, dict(arguments, method=method), False)
+                self.check(method, dict(arguments, runtime="unexpected"), False)
                 self.check(method, dict(arguments, unexpected="unused"), False)
+                self.check(method, dict(arguments, basis=False), False)
                 self.check(method, dict(arguments, basis=" \t\n"), False)
         self.check("unknown", ARGUMENTS["osm_way_chain"], False)
 
     def test_required_freeform_json_cannot_be_omitted(self):
-        from worldatlas.source_imports.contracts import sql_object
-
         fields = {"value": (Any, inspect.Parameter.empty)}
         expression = sql_object("input.document", fields)
         for document, expected in [
@@ -274,6 +206,8 @@ class DatabaseContractTests(unittest.TestCase):
 
     def test_optional_fields_nested_fields_and_numeric_values(self):
         cases = [
+            ("osm_way_chain", dict(start_node_id=1.5), False),
+            ("osm_way_chain", dict(way_source_ids=[1]), False),
             (
                 "selected_vector_features",
                 dict(member="source.shp", layer="points"),

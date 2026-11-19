@@ -5,7 +5,6 @@ from dataclasses import dataclass
 from contextlib import contextmanager
 import inspect
 import json
-import math
 from pathlib import Path
 import types
 from typing import (
@@ -80,88 +79,8 @@ def parameters(constructor):
             )
         if parameter.name == "method":
             raise TypeError("method is supplied by the constructor registry")
-        if parameter.default is not inspect.Parameter.empty and not matches(
-            parameter.default, hints[parameter.name]
-        ):
-            raise TypeError("construction defaults must match their annotations")
         result[parameter.name] = (hints[parameter.name], parameter.default)
     return result
-
-
-def matches(value, annotation):
-    """Check JSON-compatible Python values without coercion."""
-    origin, args = get_origin(annotation), get_args(annotation)
-    if origin is Annotated:
-        if args[1:] not in (("nonempty",), ("source-id",)) or args[0] is not str:
-            raise TypeError("unsupported construction annotation metadata")
-        return matches(value, str) and bool(value.strip(" \t\n\r\f\v"))
-    if annotation is Any:
-        if value is None or type(value) in (str, bool, int):
-            return True
-        if type(value) is float:
-            return math.isfinite(value)
-        if type(value) is list:
-            return all(matches(item, Any) for item in value)
-        if type(value) is dict:
-            return all(
-                type(key) is str and matches(item, Any) for key, item in value.items()
-            )
-        return False
-    if origin in (Union, types.UnionType):
-        return any(matches(value, choice) for choice in args)
-    if origin is Literal:
-        return any(type(value) is type(choice) and value == choice for choice in args)
-    if annotation is type(None):
-        return value is None
-    if annotation in (str, bool):
-        return type(value) is annotation
-    if annotation is int:
-        # PostgreSQL JSONB does not distinguish 1 from 1.0.
-        return type(value) is int or (
-            type(value) is float and math.isfinite(value) and value.is_integer()
-        )
-    if annotation is float:
-        return type(value) in (float, int) and (
-            type(value) is int or math.isfinite(value)
-        )
-    if origin is list:
-        return type(value) is list and all(matches(item, args[0]) for item in value)
-    if origin is tuple:
-        return (
-            type(value) is list
-            and len(value) == len(args)
-            and all(matches(item, kind) for item, kind in zip(value, args))
-        )
-    if origin is dict:
-        return type(value) is dict and all(
-            matches(k, args[0]) and matches(v, args[1]) for k, v in value.items()
-        )
-    if is_typeddict(annotation):
-        hints = get_type_hints(annotation, include_extras=True)
-        return (
-            type(value) is dict
-            and annotation.__required_keys__ <= value.keys() <= hints.keys()
-            and all(matches(item, hints[key]) for key, item in value.items())
-        )
-    if origin in (NotRequired, Required):
-        return matches(value, args[0])
-    raise TypeError(f"unsupported construction annotation: {annotation!r}")
-
-
-def validate_arguments(constructor, arguments):
-    """Validate the stored fields, leaving defaults to ordinary Python argument binding."""
-    fields = parameters(constructor)
-    if not isinstance(arguments, dict):
-        raise ValueError("construction arguments must be an object")
-    extra = arguments.keys() - fields.keys()
-    if extra:
-        raise ValueError("unknown construction fields: " + ", ".join(sorted(extra)))
-    for name, (annotation, default) in fields.items():
-        if name not in arguments:
-            if default is inspect.Parameter.empty:
-                raise ValueError(f"missing construction field: {name}")
-        elif not matches(arguments[name], annotation):
-            raise ValueError(f"invalid construction field: {name}")
 
 
 def literal(value):

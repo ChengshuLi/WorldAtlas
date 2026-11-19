@@ -1,7 +1,6 @@
-"""Dispatch and validate stored constructions before calling an algorithm."""
+"""Dispatch stored constructions and supply their execution resources."""
 
 from contextlib import nullcontext
-from functools import wraps
 from pathlib import Path
 import unittest
 from unittest.mock import Mock, patch
@@ -79,9 +78,8 @@ class ImportSelectionTests(unittest.TestCase):
         self,
     ):
         self.assertEqual(set(ARGUMENTS), set(IMPORTERS))
-        for method, constructor in IMPORTERS.copy().items():
+        for method in IMPORTERS.copy():
 
-            @wraps(constructor)
             def record(runtime, **arguments):
                 return runtime, arguments
 
@@ -101,9 +99,6 @@ class ImportSelectionTests(unittest.TestCase):
                 self.assertIs(runtime.storage, self.storage)
 
     def test_trace_needs_no_storage_or_cache(self):
-        constructor = IMPORTERS["geodesic_trace"]
-
-        @wraps(constructor)
         def trace(runtime, **arguments):
             return runtime
 
@@ -130,25 +125,6 @@ class ImportSelectionTests(unittest.TestCase):
                 with self.assertRaisesRegex(
                     ValueError, "unsupported source construction method"
                 ):
-                    run_import(self.connect, "record", **self.options)
-        self.storage.get_object.assert_not_called()
-
-    def test_invalid_fields_stop_before_constructor_or_download(self):
-        for changes in (
-            {"basis": ""},
-            {"boundary_id": None},
-            {"extra": "unused"},
-            {"way_source_ids": [1]},
-            {"start_node_id": 1.5},
-        ):
-            with (
-                self.subTest(changes=changes),
-                patch(
-                    "worldatlas.source_imports.run_import.read_recipe",
-                    return_value=("osm_way_chain", dict(ARGUMENTS["osm_way_chain"], **changes)),
-                ),
-            ):
-                with self.assertRaisesRegex(ValueError, "construction field"):
                     run_import(self.connect, "record", **self.options)
         self.storage.get_object.assert_not_called()
 

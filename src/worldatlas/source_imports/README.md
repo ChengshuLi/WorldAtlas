@@ -46,7 +46,7 @@ Every construction cites cataloged raw sources. Figure traces and explicitly sto
 
 Each constructor's typed keyword-only parameters define the keys in `arguments`. A parameter without a default is required. A default makes it optional. `NonEmptyText` rejects empty or whitespace-only text. Nested `TypedDict` definitions describe feature selections. The command supplies `runtime` separately with connections, work paths and the construction ID.
 
-[`contracts.py`](contracts.py) derives command validation and PostgreSQL checks from those signatures. Both reject unknown methods/fields, missing required fields and incorrect types. Algorithms additionally check source identities, coordinates, joins and the relationships between geographic choices.
+[`contracts.py`](contracts.py) generates PostgreSQL checks from those signatures. Neon rejects unknown methods and fields, missing required fields, and incorrect types when a recipe is saved. Constructors check source identities, coordinates, joins, and the relationships between geographic choices when the recipe runs.
 
 After changing signatures or nested types, regenerate the initial-schema checks:
 
@@ -60,7 +60,7 @@ For the existing working database, back up and test a one-off upgrade before app
 
 The `IMPORTERS` registry in [`run_import.py`](run_import.py) shows which function runs each method. Constructors coordinate file access, calculations, and saving. [`features/geometry.py`](features/geometry.py) validates and saves imported geometry in one transaction.
 
-Tests live beside their code. `test_run_import.py` checks dispatch; `test_contracts.py` checks Python/PostgreSQL agreement and direct SQL writes; `atlas_sources/test_catalog.py` checks file acquisition. Package READMEs describe their algorithm and storage tests.
+Tests live beside their code. `test_run_import.py` checks dispatch, `test_contracts.py` checks the generated constraints against database writes, and `atlas_sources/test_catalog.py` checks file acquisition. Package READMEs describe their algorithm and storage tests.
 
 ```bash
 python .github/scripts/run_tests.py --suite source_imports

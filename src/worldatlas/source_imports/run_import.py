@@ -10,7 +10,7 @@ from pathlib import Path
 import psycopg
 
 from worldatlas.source_imports.atlas_sources.catalog import read_recipe
-from worldatlas.source_imports.contracts import Runtime, validate_arguments
+from worldatlas.source_imports.contracts import Runtime
 from worldatlas.source_imports.features.build_features import (
     s130_areas,
     selected_osm_features,
@@ -36,6 +36,7 @@ IMPORTERS = {
 
 
 def run_import(connect, recipe_id, *, storage=None, work_dir=None):
+    """Run a recipe whose method and arguments were validated when saved in Neon."""
     with connect() as database:
         method, arguments = read_recipe(database, recipe_id)
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
@@ -45,7 +46,6 @@ def run_import(connect, recipe_id, *, storage=None, work_dir=None):
         storage is None or work_dir is None
     ):
         raise ValueError("this method requires --r2-endpoint and --work-dir")
-    validate_arguments(importer, arguments)
     return importer(
         Runtime(
             connect,
