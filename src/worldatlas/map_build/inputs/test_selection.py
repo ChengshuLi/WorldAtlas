@@ -128,9 +128,6 @@ class SelectionTests(unittest.TestCase):
                 "DELETE FROM atlas.source_assets WHERE id='__selection_raw'"
             )
             self.writer.execute(
-                "DELETE FROM atlas.map_category_bindings WHERE entity_id=2"
-            )
-            self.writer.execute(
                 "DELETE FROM atlas.geographic_entities WHERE id IN (0,2)"
             )
             self.writer.execute(
@@ -264,7 +261,6 @@ class HierarchyConcurrencyTests(unittest.TestCase):
                 self.assertEqual(entities, [(10, 3, "mixed"), (20, 10, "land")])
             finally:
                 with setup.transaction():
-                    setup.execute("DELETE FROM atlas.map_category_bindings WHERE entity_id IN (2,3,10,20)")
                     setup.execute("DELETE FROM atlas.geographic_entities WHERE id IN (0,2,3,10,20)")
                     setup.execute("DELETE FROM atlas.geographic_levels WHERE id IN ('world','continent','subcontinent','region')")
 

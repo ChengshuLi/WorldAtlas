@@ -89,6 +89,10 @@ BEGIN
  -- Deferred events inspect final rows, including an edit that was undone.
  UPDATE atlas.geographic_entities SET level_id='world' WHERE id=2;
  UPDATE atlas.geographic_entities SET level_id='continent' WHERE id=2;
+ DELETE FROM atlas.geographic_entities WHERE id=8;
  SET CONSTRAINTS ALL IMMEDIATE;
+ IF EXISTS (SELECT FROM atlas.map_category_bindings WHERE entity_id=8)
+    OR NOT EXISTS (SELECT FROM atlas.map_category_bindings WHERE id=land_code AND entity_id=2)
+ THEN RAISE EXCEPTION 'deleting an entity must remove only its own map bindings'; END IF;
 END $$;
 ROLLBACK;

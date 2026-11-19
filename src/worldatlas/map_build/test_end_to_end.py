@@ -262,9 +262,6 @@ class EndToEndTests(unittest.TestCase):
                     )
                     db.execute("DELETE FROM atlas.source_assets WHERE id='__e2e_raw'")
                     db.execute(
-                        "DELETE FROM atlas.map_category_bindings WHERE entity_id IN (81,42)"
-                    )
-                    db.execute(
                         "DELETE FROM atlas.geographic_entities WHERE id IN (0,81,42)"
                     )
                     db.execute(
