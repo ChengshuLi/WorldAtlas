@@ -8,7 +8,7 @@ Both methods use the [common import command](../README.md#run-one-construction) 
 
 Each selection identifies an output `feature_id`, provider `source_feature_id`, and `object_type` (`node`, `way` or `relation`). Select each object at most once per recipe. The raw-file checksum pins the extract. Optional `expected_tags` verify provider tags.
 
-Polygon imports preserve holes. Select a closed way or a relation tagged `type=multipolygon` or `type=boundary`. The archived extract must contain the ways and nodes that form the outline. Osmium assembles outer and inner rings and skips relation label nodes.
+Select a closed way or a relation tagged `type=multipolygon` or `type=boundary`. The archived extract must contain the ways and nodes that form the outline. Osmium assembles rings, uses their geometry to identify holes, and skips relation label nodes. An inconsistent `inner` role can therefore yield a separate polygon when its ring lies outside the other rings.
 
 ## Boundary lines
 
@@ -29,7 +29,7 @@ Use `evidence_source_ids` to cite additional sources that explain the selection.
 
 ## Tests
 
-[`test_features.py`](test_features.py) covers selected points, closed ways, multipolygons with holes, source identity, and invalid geometry. [`test_ways.py`](test_ways.py) checks chain assembly, direction, and invalid geometry. [`test_way_import.py`](test_way_import.py) checks the Neon/R2 workflow and database transactions.
+[`test_features.py`](test_features.py) covers selected points, closed ways, multipolygons with holes, source identity, invalid geometry, and saving a selected relation with its source link. [`test_ways.py`](test_ways.py) checks chain assembly, direction, and invalid geometry. [`test_way_import.py`](test_way_import.py) checks cache reuse, recipe edits, source links, and preservation of existing geometry on failed imports.
 
 Run the tests from the repository root.
 
@@ -37,4 +37,4 @@ Run the tests from the repository root.
 python .github/scripts/run_tests.py --suite source_imports
 ```
 
-The runner creates a disposable database and includes the database write tests. Those tests cover complete builds, repeat runs, source updates, preservation of construction and geographic relationships, unrelated records, and failed-write rollbacks.
+The runner creates a disposable PostgreSQL database. The OSM import tests use small fixture files served by a fake R2 client, so they require no network downloads.

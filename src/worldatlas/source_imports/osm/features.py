@@ -40,7 +40,9 @@ def read_features(path, selections):
 
     Nodes become Points. A selected closed way already has one complete ring,
     so its coordinates become a MultiPolygon directly. Polygon relations also
-    become MultiPolygons. Use ``osm_way_chain`` for LineString features.
+    become MultiPolygons. Osmium determines which rings are holes from their
+    geometry. A ring outside all other rings can become a separate polygon
+    even when its declared role is ``inner``. Use ``osm_way_chain`` for lines.
 
     Args:
         path: Verified local OSM extract.
@@ -156,7 +158,7 @@ def selected_osm_features(
     source_id: SourceId,
     selections: list[OsmSelection],
 ):
-    """Import OSM points and areas as Point and MultiPolygon features.
+    """Download an OSM extract and save its selected features in Neon.
 
     Args:
         runtime: Import resources and saved recipe snapshot.
@@ -165,6 +167,9 @@ def selected_osm_features(
 
     Returns:
         Saved feature IDs, the local source path, and timings.
+
+    Raises:
+        ValueError: The source, selection, or save fails validation.
     """
     started, timing = time.monotonic(), {}
     path, = acquire_sources(runtime, [source_id], timing=timing)

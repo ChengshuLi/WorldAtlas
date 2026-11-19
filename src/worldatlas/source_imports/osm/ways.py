@@ -118,6 +118,9 @@ def osm_way_chain(
 
     Returns:
         Saved feature ID and vertex count.
+
+    Raises:
+        ValueError: The source files, assembled line, or save fails validation.
     """
     paths = acquire_sources(runtime, way_source_ids, evidence_source_ids=evidence_source_ids or ())
     geometry = assemble(paths)

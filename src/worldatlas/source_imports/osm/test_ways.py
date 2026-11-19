@@ -1,3 +1,5 @@
+"""Test deterministic joining and validation of archived OSM boundary ways."""
+
 import json
 import tempfile
 import unittest
@@ -7,6 +9,8 @@ from worldatlas.source_imports.osm.ways import assemble
 
 
 class AssemblyTest(unittest.TestCase):
+    """Build small way archives independently of the catalog and database."""
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.directory = Path(self.temp.name)
@@ -16,6 +20,13 @@ class AssemblyTest(unittest.TestCase):
         self.temp.cleanup()
 
     def way(self, way_id, refs, nodes):
+        """Append one way archive to the input paths.
+
+        Args:
+            way_id: ID of the way in the archive.
+            refs: Node IDs in the way's order.
+            nodes: Node ID, longitude, and latitude triples to include.
+        """
         elements = [{'type': 'node', 'id': n, 'lon': x, 'lat': y} for n, x, y in nodes]
         elements.append({'type': 'way', 'id': way_id, 'nodes': refs})
         path = self.directory / f'{way_id}.json'
@@ -35,6 +46,18 @@ class AssemblyTest(unittest.TestCase):
         self.paths[0].write_text(json.dumps(payload))
         with self.assertRaisesRegex(ValueError, 'exactly one OSM way'):
             assemble(self.paths)
+
+    def test_reject_empty_way_chain(self):
+        with self.assertRaisesRegex(ValueError, 'missing way inputs'):
+            assemble([])
+
+    def test_reject_malformed_way(self):
+        for way_id, refs in [('11', [1, 2]), (11, [1]), (11, [1, '2'])]:
+            with self.subTest(way_id=way_id, refs=refs):
+                self.paths.clear()
+                self.way(way_id, refs, [(1, 0, 0), (2, 1, 1)])
+                with self.assertRaisesRegex(ValueError, 'invalid OSM way'):
+                    assemble(self.paths)
 
     def test_reject_duplicate_way(self):
         self.way(11, [1, 2], [(1, 0, 0), (2, 1, 1)])
