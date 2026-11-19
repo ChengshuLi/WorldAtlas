@@ -13,7 +13,7 @@ from shapely.geometry import Polygon, mapping
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.contracts import FeatureIdentity, NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
-from worldatlas.source_imports.shared.sources import acquire_sources
+from worldatlas.source_imports.shared.sources import acquire_sources, vector_dataset_path
 from worldatlas.source_imports.shared.storage import feature_result, save_features
 
 
@@ -22,37 +22,6 @@ class VectorSelection(FeatureIdentity):
 
     polygon_containing: NotRequired[tuple[float, float]]
     fill_holes: NotRequired[bool]
-
-
-def dataset_path(path, member=None):
-    """Find the dataset path understood by GDAL.
-
-    Args:
-        path: Local vector file or ZIP archive.
-        member: Optional dataset path inside the archive.
-
-    Returns:
-        A filesystem path or GDAL virtual ZIP path.
-
-    Raises:
-        ValueError: The archive selection is missing or ambiguous.
-    """
-    path = Path(path).resolve(strict=True)
-    if path.suffix.lower() != ".zip":
-        if member is not None:
-            raise ValueError("archive member supplied for a non-archive source")
-        return str(path)
-    with ZipFile(path) as archive:
-        names = archive.namelist()
-        if member is None:
-            # The .shp is the entry point. GDAL finds its companion files in the ZIP.
-            candidates = [name for name in names if name.lower().endswith(".shp")]
-            if len(candidates) != 1:
-                raise ValueError("select one vector dataset archive member")
-            member = candidates[0]
-        if names.count(member) != 1:
-            raise ValueError("selected vector archive member is missing or duplicated")
-    return "/vsizip/" + str(path) + "/" + member
 
 
 def native_geojson_geometry(feature, path, member):
@@ -135,7 +104,7 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
     # Use return codes here regardless of GDAL's exception setting elsewhere.
     with gdal.ExceptionMgr(useExceptions=False):
         source = gdal.OpenEx(
-            dataset_path(path, member), gdal.OF_VECTOR, open_options=["@NATIVE_DATA=YES"]
+            vector_dataset_path(path, member), gdal.OF_VECTOR, open_options=["@NATIVE_DATA=YES"]
         )
     if source is None:
         raise ValueError("source vector dataset cannot be opened")

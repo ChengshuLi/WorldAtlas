@@ -40,7 +40,7 @@ def runtime_versions():
     database = Path(pyproj.datadir.get_data_dir()) / 'proj.db'
     return {'python': platform.python_version(),
             'packages': {name: version(name) for name in (
-                'numpy', 'pyproj', 'shapely', 'numba', 'llvmlite', 'pyshp', 'osmium', 'boto3', 'psycopg')},
+                'numpy', 'pyproj', 'shapely', 'scipy', 'numba', 'llvmlite', 'osmium', 'boto3', 'psycopg')},
             'gdal': gdal.VersionInfo('RELEASE_NAME'), 'pyproj_proj': pyproj.proj_version_str,
             'gdal_proj': '.'.join(map(str, (osr.GetPROJVersionMajor(), osr.GetPROJVersionMinor(),
                                           osr.GetPROJVersionMicro()))),
@@ -92,7 +92,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
                       min(bounds[1], min(p[1] for p in network.nodes.values())),
                       max(bounds[2], max(p[0] for p in network.nodes.values())),
                       max(bounds[3], max(p[1] for p in network.nodes.values()))]
-        basins = Basins(paths(settings['basins']), settings['basin_attribute'],
+        basins = Basins([sources.vector_path(source) for source in settings['basins']], settings['basin_attribute'],
                         settings['groups'], bounds)
         assigned, network_report = (network.groups(settings['waterway_groups'])
                                     if 'waterway_groups' in settings else network.basin_groups(basins))

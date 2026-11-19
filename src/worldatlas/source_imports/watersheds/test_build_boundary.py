@@ -13,10 +13,27 @@ import zipfile
 import numpy as np
 from osgeo import gdal
 from pyproj import CRS, Transformer
-import shapefile
+from shapely.geometry import box
 
 from worldatlas.source_imports.run_import import run_import
 from worldatlas.source_imports.watersheds.build_boundary import construct
+from worldatlas.source_imports.watersheds.test_basins import write_basin_shapefile
+
+
+def write_basin_archive(archive, *, north=.02):
+    """Write the two fixture basins to the archive used by the construction.
+
+    Args:
+        archive: Destination ZIP path in the fixture directory.
+        north: Northern latitude of both source polygons.
+    """
+    basin = archive.with_suffix('.shp')
+    write_basin_shapefile(basin, 'BASIN', [(41, box(-.01, -.01, .003, north)),
+                                         (99, box(.003, -.01, .02, north))])
+    with zipfile.ZipFile(archive, 'w') as output:
+        for suffix in ('.shp', '.shx', '.dbf', '.prj'):
+            member = basin.with_suffix(suffix)
+            output.write(member, member.name)
 
 
 def fixtures(directory):
@@ -26,17 +43,8 @@ def fixtures(directory):
     ds.SetProjection(CRS.from_epsg(4326).to_wkt())
     ds.GetRasterBand(1).WriteArray(np.tile([0, 1, 2, 2, 1, 0], (6, 1)))
     ds = None
-    basin = directory / 'basins'
-    with shapefile.Writer(str(basin)) as writer:
-        writer.field('BASIN', 'N')
-        for ident, west, east in ((41, -.01, .003), (99, .003, .02)):
-            writer.poly([[(west, -.01), (west, .02), (east, .02), (east, -.01), (west, -.01)]])
-            writer.record(ident)
-    basin.with_suffix('.prj').write_text(CRS.from_epsg(4326).to_wkt())
     archive = directory / 'basins.zip'
-    with zipfile.ZipFile(archive, 'w') as output:
-        for suffix in ('.shp', '.shx', '.dbf', '.prj'):
-            output.write(basin.with_suffix(suffix), 'basins' + suffix)
+    write_basin_archive(archive)
     geometry = directory / 'lines.geojson'
     geometry.write_text(json.dumps({'type': 'FeatureCollection', 'features': [
         {'type': 'Feature', 'properties': {}, 'geometry': {'type': 'LineString',
@@ -175,6 +183,7 @@ class ConstructionTests(unittest.TestCase):
             self.assertEqual(report['terrain']['ridge']['domains'][0]['unknown_cells'], 0)
             self.assertEqual(report['joins'], [[.003, .005], [.003, .001]])
             self.assertEqual(build_fixture(recipe, files)[0], geometry)
+            self.assertFalse((files['basins'].parent / 'extracted').exists())
 
     def test_explicit_output_area_keeps_the_native_construction_unchanged(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -226,15 +235,7 @@ class ConstructionTests(unittest.TestCase):
             ds.GetRasterBand(1).WriteArray(np.tile([0, 1, 2, 2, 1, 0], (6, 1)) +
                                          np.arange(6)[:, None] * 10)
             ds = None
-            with shapefile.Writer(str(directory / 'basins')) as writer:
-                writer.field('BASIN', 'N')
-                for ident, west, east in ((41, -.01, .003), (99, .003, .02)):
-                    writer.poly([[(west, -.01), (west, .004), (east, .004),
-                                  (east, -.01), (west, -.01)]])
-                    writer.record(ident)
-            with zipfile.ZipFile(files['basins'], 'w') as output:
-                for suffix in ('.shp', '.shx', '.dbf', '.prj'):
-                    output.write(directory / ('basins' + suffix), 'basins' + suffix)
+            write_basin_archive(files['basins'], north=.004)
             files['water'] = directory / 'water.tif'
             ds = gdal.GetDriverByName('GTiff').Create(str(files['water']), 6, 6, 1, gdal.GDT_Byte)
             ds.SetGeoTransform((0., .001, 0., .006, 0., -.001))

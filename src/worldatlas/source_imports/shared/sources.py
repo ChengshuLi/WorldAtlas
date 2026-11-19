@@ -1,7 +1,9 @@
-"""Acquire verified files and check cited sources for construction methods."""
+"""Acquire verified inputs and locate selected datasets for construction methods."""
 
+from pathlib import Path, PurePosixPath
 import time
 from typing import TypedDict
+from zipfile import ZipFile
 
 from worldatlas.source_assets.catalog import assemble_parts, catalog_sources, download_source
 from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
@@ -14,6 +16,40 @@ class MultipartSource(TypedDict):
     sha256: NonEmptyText
     size_bytes: int
     filename: NonEmptyText
+
+
+def vector_dataset_path(path, member=None):
+    """Find the vector dataset path understood by GDAL.
+
+    Args:
+        path: Local vector file or ZIP archive.
+        member: Optional dataset path inside the archive.
+
+    Returns:
+        A filesystem path or GDAL virtual ZIP path.
+
+    Raises:
+        ValueError: The archive selection is invalid, missing, or ambiguous.
+    """
+    path = Path(path).resolve(strict=True)
+    if path.suffix.lower() != ".zip":
+        if member is not None:
+            raise ValueError("archive member supplied for a non-archive source")
+        return str(path)
+    with ZipFile(path) as archive:
+        names = archive.namelist()
+    if member is None:
+        # GDAL finds the companion files from the Shapefile entry point.
+        candidates = [name for name in names if name.lower().endswith(".shp")]
+        if len(candidates) != 1:
+            raise ValueError("select one vector dataset archive member")
+        member = candidates[0]
+    member_path = PurePosixPath(member)
+    if member_path.is_absolute() or ".." in member_path.parts:
+        raise ValueError("invalid source archive member")
+    if names.count(member) != 1:
+        raise ValueError("selected vector archive member is missing or duplicated")
+    return f"/vsizip/{path}/{member}"
 
 
 def acquire_sources(runtime, requests, *, evidence_source_ids=(), timing=None):

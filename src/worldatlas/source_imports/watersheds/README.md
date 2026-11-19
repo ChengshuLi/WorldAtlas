@@ -10,7 +10,7 @@ The watershed importer reads a construction record from Neon, downloads its veri
 | [`terrain.py`](terrain.py) | Crop native grids and fill missing heights from real secondary data. |
 | [`drainage.py`](drainage.py) | Calculate eight-neighbor flow and downstream destinations. |
 | [`waterways.py`](waterways.py) | Read natural waterways and trace their drainage destinations. |
-| [`basins.py`](basins.py) | Look up provider basins and classify terrain outlets. |
+| [`basins.py`](basins.py) | Read provider basin polygons with GDAL and classify terrain outlets. |
 | [`sources.py`](sources.py) | Select lines and points from local provider files and archives. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
 | [`worldatlas.source_assets`](../../source_assets/README.md) | Resolve catalog IDs and verify downloaded or multipart files. |
@@ -51,6 +51,8 @@ Optional `evidence_sources` is a list of catalog source-ID strings supporting ge
 
 Source basin values identify drainage groups. A group can include several basins, and group IDs need not be consecutive. The value `-1` represents unknown drainage. Use `waterway_groups` for explicitly identified downstream ways. The constructor traces other waterways to their source-backed exit basins and tracks destinations between actual junctions. A section feeding two known groups retains both destinations.
 
+When `basins` selects a Shapefile in a ZIP, GDAL opens the selected `.shp` member and reads its companion files inside the archive. The provider attribute named by `basin_attribute` supplies the IDs used in `groups`.
+
 Before processing terrain, the constructor checks rivers that intersect the analysis areas and follows their downstream connections. Missing coordinates or an unresolved route stop the run with the relevant way and node IDs. This includes a fork with one known branch and one unresolved branch. Correct the raw data or the source-backed destination references and rerun. Unrelated waterways outside the analysis do not block construction.
 
 If source evidence establishes that a mapped way points upstream, list its ID in `reverse_waterways` and record the supporting measurements and reason in the construction record. The constructor reverses the direction for tracing while preserving the way's coordinates and source ID.
@@ -79,7 +81,7 @@ For overlapping calculation areas, a domain can specify `bounds` for its full te
 
 ## Boundary assembly and tests
 
-Construct the complete interface between selected drainage groups. SciPy finds the shortest connected route between the selected intersections using WGS84 edge lengths. The search includes branches and loops. Disconnected joins fail the construction. For shared drainage, both outer catchment edges remain possible routes. A catchment with identical destinations on both sides contributes no interior divide. The declared joins select the route without forcing the upstream area into one group. Repeated consecutive source coordinates appear once in the final line.
+Construct the complete interface between selected drainage groups. Shapely finds intersections in batches and retains the original grid-edge IDs. SciPy finds the shortest connected route between the selected intersections using WGS84 edge lengths. The search includes branches and loops. Disconnected joins fail the construction. For shared drainage, both outer catchment edges remain possible routes. A catchment with identical destinations on both sides contributes no interior divide. The declared joins select the route without forcing the upstream area into one group. Repeated consecutive source coordinates appear once in the final line.
 
 A stream-head connection follows a real drainage path and adds a geodesic to the exact selected source point. The result includes the connector length. The source point need not fall in the cell traversed by raster drainage. Explicit connectors are construction choices, assembled with the other sections in one pass. This also supports a selected mapped junction where streams assigned to different groups meet. List its source node in a divide section's ordered `via` points and set `max_step_m` for the geodesic connections. Attachments are derived from the current ordered divide, extending the replaced interval to enclose connector crossings of that divide. Nearby overlapping connections retain their declared point order. Source endpoints and coordinates outside the replaced intervals stay unchanged. The result includes the calculated attachments and lengths. The constructor recalculates the attachments on each run.
 

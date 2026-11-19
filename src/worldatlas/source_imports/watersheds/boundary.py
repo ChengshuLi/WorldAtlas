@@ -6,7 +6,7 @@ import numpy as np
 from pyproj import CRS, Transformer
 from scipy.sparse import csr_array
 from scipy.sparse.csgraph import dijkstra
-from shapely import linestrings
+from shapely import intersection as intersect_geometries, linestrings
 from shapely.geometry import LineString, Point
 from shapely.ops import substring
 from shapely.strtree import STRtree
@@ -89,8 +89,14 @@ class Divide:
                 self.edges.add(tuple(sorted(edge)))
 
     def segments(self):
+        """Create line geometries in the same order as their grid-edge identifiers.
+
+        Returns:
+            The ordered edge identifiers and a parallel array of Shapely lines.
+        """
         edges = sorted(self.edges)
-        return edges, [LineString([self.coordinates[a], self.coordinates[b]]) for a, b in edges]
+        coordinates = np.asarray([(self.coordinates[a], self.coordinates[b]) for a, b in edges])
+        return edges, linestrings(coordinates.reshape(-1, 2, 2))
 
     def nearest_vertex(self, point):
         """Select a native divide corner for an explicit geographic connector."""
@@ -169,22 +175,32 @@ def intersection(left, right, near):
 
     A divide join retains its grid edge identity, so inserting the computed
     intersection needs no rounding or approximate coordinate matching.
+
+    Args:
+        left: First source line or divide graph.
+        right: Second source line or divide graph.
+        near: WGS84 point used to choose among the intersections.
+
+    Returns:
+        The chosen point and its edge on each participating divide.
+
+    Raises:
+        ValueError: The two sections have no intersection.
     """
-    candidates = []
     if isinstance(left, Divide):
         edges, lines = left.segments()
         if isinstance(right, Divide):
             other_edges, other_lines = right.segments()
-            tree = STRtree(other_lines)
-            for edge, line in zip(edges, lines):
-                for index in tree.query(line, predicate='intersects'):
-                    for point in _points(line.intersection(other_lines[int(index)])):
-                        candidates.append(Join(point, {left: edge, right: other_edges[int(index)]}))
+            first, second = STRtree(other_lines).query(lines, predicate='intersects')
+            hits = intersect_geometries(lines[first], other_lines[second])
+            candidates = [Join(point, {left: edges[i], right: other_edges[j]})
+                          for i, j, hit in zip(first, second, hits, strict=True)
+                          for point in _points(hit)]
         else:
-            tree = STRtree(lines)
-            for index in tree.query(right, predicate='intersects'):
-                for point in _points(lines[int(index)].intersection(right)):
-                    candidates.append(Join(point, {left: edges[int(index)]}))
+            indices = STRtree(lines).query(right, predicate='intersects')
+            hits = intersect_geometries(lines[indices], right)
+            candidates = [Join(point, {left: edges[i]})
+                          for i, hit in zip(indices, hits, strict=True) for point in _points(hit)]
     elif isinstance(right, Divide):
         return intersection(right, left, near)
     else:

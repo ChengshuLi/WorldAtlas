@@ -100,6 +100,17 @@ class BoundaryTests(unittest.TestCase):
         route = graph.route(first, last)
         self.assertEqual(list(route.coords), [(0., 0.), (.01, 0.), (.02, 0.)])
 
+    def test_divide_intersection_keeps_the_edges_on_both_graphs(self):
+        horizontal = self.graph()
+        vertical = Divide()
+        west_edge, east_edge = ((0, 0), (1, 0)), ((0, 1), (1, 1))
+        vertical.coordinates = {(0, 0): (.005, -.01), (1, 0): (.005, .02),
+                                (0, 1): (.015, -.01), (1, 1): (.015, .02)}
+        vertical.edges = {west_edge, east_edge}
+        join = intersection(horizontal, vertical, (.015, 0.))
+        self.assertEqual(join.point, (.015, 0.))
+        self.assertEqual(join.edges, {horizontal: ((0, 1), (0, 2)), vertical: east_edge})
+
     def test_two_fractional_joins_on_the_same_reversed_edge(self):
         graph = Divide()
         graph.coordinates = {(0, 0): (.01, 0.), (0, 1): (0., 0.)}

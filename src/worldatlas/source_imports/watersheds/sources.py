@@ -8,6 +8,7 @@ import zipfile
 import numpy as np
 from shapely.geometry import LineString
 
+from worldatlas.source_imports.shared.sources import vector_dataset_path
 from worldatlas.source_imports.watersheds.waterways import Waterways
 
 
@@ -25,26 +26,34 @@ class Sources:
             raise ValueError('invalid source archive member')
         directory = self.files[source].parent / 'extracted'
         directory.mkdir(exist_ok=True)
-        with zipfile.ZipFile(self.files[source]) as archive:
-            names = [name]
-            if name.endswith('.shp'):
-                names = [str(Path(name).with_suffix(ext)) for ext in ('.shp', '.shx', '.dbf', '.prj')]
-            for member in names:
-                destination = directory / member
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                temporary = NamedTemporaryFile(dir=directory, prefix='extract-', delete=False)
-                try:
-                    with temporary, archive.open(member) as stream:
-                        shutil.copyfileobj(stream, temporary, 1 << 20)
-                    Path(temporary.name).replace(destination)
-                finally:
-                    Path(temporary.name).unlink(missing_ok=True)
-        self.extracted[key] = directory / name
-        return self.extracted[key]
+        destination = directory / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        temporary = NamedTemporaryFile(dir=directory, prefix='extract-', delete=False)
+        try:
+            with temporary, zipfile.ZipFile(self.files[source]) as archive, archive.open(name) as stream:
+                shutil.copyfileobj(stream, temporary, 1 << 20)
+            Path(temporary.name).replace(destination)
+        finally:
+            Path(temporary.name).unlink(missing_ok=True)
+        self.extracted[key] = destination
+        return destination
 
     def path(self, specification):
         source = specification['source']
         return self.member(source, specification['member']) if 'member' in specification else self.files[source]
+
+    def vector_path(self, selection):
+        """Resolve a vector file or its selected ZIP member for GDAL.
+
+        Args:
+            selection: A source alias or a mapping with ``source`` and an optional ``member``.
+
+        Returns:
+            The GDAL dataset path.
+        """
+        if isinstance(selection, str):
+            return vector_dataset_path(self.files[selection])
+        return vector_dataset_path(self.files[selection['source']], selection.get('member'))
 
     def network(self, sources, *, natural_only=False, reverse=()):
         paths = [self.path(source) if isinstance(source, dict) else self.files[source]

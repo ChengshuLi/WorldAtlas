@@ -1,12 +1,10 @@
 """Classify watershed outlets using the selected provider basin polygons."""
 
-from pathlib import Path
-
 import numpy as np
+from osgeo import gdal
 from pyproj import CRS, Transformer
-import shapefile
-from shapely import get_coordinates, transform as transform_geometry
-from shapely.geometry import Point, shape
+from shapely import from_wkb, get_coordinates, transform as transform_geometry
+from shapely.geometry import Point
 from shapely.strtree import STRtree
 
 from worldatlas.source_imports.watersheds.drainage import upstream_links
@@ -19,7 +17,7 @@ class Basins:
         """Index provider basin polygons in the area of interest.
 
         Args:
-            paths: Shapefile paths with their projection files alongside them.
+            paths: GDAL vector dataset paths, including Shapefiles inside ZIP archives.
             attribute: Provider field identifying an individual basin.
             groups: Mapping from drainage group IDs to provider basin IDs.
             bounds: WGS84 west, south, east, and north bounds in degrees.
@@ -31,21 +29,27 @@ class Basins:
         if any(a & b for i, a in enumerate(self.groups.values())
                for b in list(self.groups.values())[i + 1:]):
             raise ValueError('a source basin cannot belong to multiple drainage groups')
+        wgs84 = CRS.from_epsg(4326)
         for path in paths:
-            projection = Path(path).with_suffix('.prj')
-            if not projection.exists():
-                raise ValueError('basin source requires its coordinate reference file')
-            source_crs = CRS.from_wkt(projection.read_text())
-            to_geo = Transformer.from_crs(source_crs, 4326, always_xy=True)
-            source_bounds = Transformer.from_crs(4326, source_crs, always_xy=True).transform_bounds(
-                *bounds, densify_pts=21, errcheck=True)
-            with shapefile.Reader(path) as layer:
-                for feature in layer.iterShapeRecords(bbox=source_bounds):
-                    polygon = shape(feature.shape.__geo_interface__)
-                    if not source_crs.equals(CRS.from_epsg(4326), ignore_axis_order=True):
+            with gdal.ExceptionMgr(), gdal.OpenEx(str(path), gdal.OF_VECTOR) as source:
+                if source.GetLayerCount() != 1:
+                    raise ValueError('basin source requires one vector layer')
+                layer = source.GetLayer(0)
+                reference = layer.GetSpatialRef()
+                if reference is None:
+                    raise ValueError('basin source requires its coordinate reference')
+                source_crs = CRS.from_wkt(reference.ExportToWkt())
+                to_geo = Transformer.from_crs(source_crs, wgs84, always_xy=True)
+                source_bounds = Transformer.from_crs(wgs84, source_crs, always_xy=True).transform_bounds(
+                    *bounds, densify_pts=21, errcheck=True)
+                layer.SetSpatialFilterRect(*source_bounds)
+                project = not source_crs.equals(wgs84, ignore_axis_order=True)
+                for feature in layer:
+                    polygon = from_wkb(bytes(feature.GetGeometryRef().ExportToWkb()))
+                    if project:
                         polygon = transform_geometry(polygon, to_geo.transform, interleaved=False)
                     self.polygons.append(polygon)
-                    self.values.append(feature.record.as_dict()[attribute])
+                    self.values.append(feature[attribute])
         self.tree = STRtree(self.polygons)
         self.mapped = set().union(*self.groups.values())
 

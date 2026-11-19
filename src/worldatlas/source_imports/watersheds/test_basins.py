@@ -1,15 +1,33 @@
+import json
 from pathlib import Path
 import tempfile
 import unittest
 
 import numpy as np
-from pyproj import CRS
-import shapefile
-from shapely.geometry import LineString
+from osgeo import gdal
+from shapely.geometry import LineString, box
 
 from worldatlas.source_imports.watersheds.terrain import Grid
 from worldatlas.source_imports.watersheds.basins import Basins
 from worldatlas.source_imports.watersheds.waterways import Waterways, seed_grid
+
+
+def write_basin_shapefile(path, attribute, polygons, *, crs='EPSG:4326'):
+    """Write test basin polygons and their provider IDs with GDAL.
+
+    Args:
+        path: Destination Shapefile path in the fixture directory.
+        attribute: Provider field that identifies a basin.
+        polygons: Pairs of basin IDs and Shapely polygons in longitude and latitude.
+        crs: Coordinate reference for the written Shapefile.
+    """
+    geojson = path.with_suffix('.geojson')
+    geojson.write_text(json.dumps({'type': 'FeatureCollection', 'features': [
+        {'type': 'Feature', 'properties': {attribute: ident}, 'geometry': polygon.__geo_interface__}
+        for ident, polygon in polygons
+    ]}))
+    gdal.VectorTranslate(str(path), str(geojson), format='ESRI Shapefile', dstSRS=crs,
+                         accessMode='overwrite').Close()
 
 
 class BasinTests(unittest.TestCase):
@@ -18,12 +36,7 @@ class BasinTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.path = self.root / 'basins.shp'
-        with shapefile.Writer(self.path, shapeType=shapefile.POLYGON) as layer:
-            layer.field('DEST', 'N', decimal=0)
-            for first, last, ident in [(0., 1., 100), (1., 2., 200)]:
-                layer.poly([[(first, 0), (first, 2), (last, 2), (last, 0), (first, 0)]])
-                layer.record(ident)
-        self.path.with_suffix('.prj').write_text(CRS.from_epsg(4326).to_wkt())
+        write_basin_shapefile(self.path, 'DEST', [(100, box(0, 0, 1, 2)), (200, box(1, 0, 2, 2))])
 
     def basins(self, groups=None):
         return Basins([self.path], 'DEST', groups or {3: [100], 7: [200]}, [0, 0, 2, 2])
@@ -32,6 +45,14 @@ class BasinTests(unittest.TestCase):
         basins = self.basins()
         self.assertEqual(basins.at((.5, 1)), 3)
         self.assertEqual(basins.at((1.5, 1)), 7)
+
+    def test_projected_basin_source_uses_wgs84_bounds_and_lookup_points(self):
+        path = self.root / 'projected.shp'
+        write_basin_shapefile(path, 'DEST', [(100, box(0, 0, 1, 2)), (200, box(3, 0, 4, 2))],
+                             crs='EPSG:3857')
+        basins = Basins([path], 'DEST', {3: [100], 7: [200]}, [0, 0, 2, 2])
+        self.assertEqual(basins.at((.5, 1)), 3)
+        self.assertEqual(basins.values, [100])
 
     def test_polygon_boundary_and_missing_coverage_remain_unknown(self):
         basins = self.basins()
