@@ -19,7 +19,7 @@ Set `method` to `geodesic_trace` on the construction row and describe the interp
 | `max_step_metres` | Maximum spacing between generated coordinates along each geodesic |
 | `source_location` | Optional location or calibration notes for the source figure |
 
-The path may run in any direction. Consecutive points must be distinct, and the boundary must not cross or retrace itself. Longitude-seam crossings require split source geometry. Invalid coordinates or sampling settings stop before saving.
+The path may run in any direction. Consecutive points must be distinct, and the boundary must not cross or retrace itself. The constructor produces one LineString and rejects paths that cross the antimeridian. Invalid coordinates or sampling settings stop before saving.
 
 The original source figure stays in R2. A person reads it and records the chosen points and geographic decisions in the construction record. The automatic constructor reads those choices directly; it does not download or retrace the figure. Preserve source-location and calibration details with the source and construction records as appropriate.
 
@@ -27,18 +27,10 @@ The final boundary is generated directly from the chosen points. Intermediate tr
 
 ## Run
 
-Use the shared [project environment](../../../../environment.yml). Set `NEON_DATABASE_URL` to the working database, then run from the repository root:
+Use the shared [project environment](../../../../environment.yml) and set `NEON_DATABASE_URL` to the working database. The working recipes are `lydekker-boundary-construction` for Lydekker’s line and `aegean-boundary-construction` for the Aegean boundary. The command reads the recipe’s `method` and calls `geodesic_trace`.
 
 ```bash
-worldatlas-import \
-  --recipe CONSTRUCTION_ID
-```
-
-The shared entry point reads `method: geodesic_trace` and selects this constructor. For example:
-
-```bash
-worldatlas-import \
-  --recipe lydekker-boundary-construction
+worldatlas-import --recipe lydekker-boundary-construction
 ```
 
 The command saves the geometry and its construction ID. The figure identifier stays in the construction arguments. Source links connect the construction to its raw files. Regional assignment rules reference the saved feature separately.
