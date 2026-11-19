@@ -6,9 +6,9 @@ Both methods use the [common import command](../README.md#run-one-construction) 
 
 [`features.py`](features.py) contains `selected_osm_features` and its reader for selected nodes, closed ways, and relation polygons. It reads each archived object graph once through osmium's Python API and saves the result through the shared import workflow.
 
-Each selection identifies an output `feature_id`, provider `source_feature_id`, `object_type` (`node`, `way` or `relation`) and `object_version`. Optional `expected_tags` verify provider tags. The constructor joins member ways at shared node IDs in stable way-ID order.
+Each selection identifies an output `feature_id`, provider `source_feature_id`, and `object_type` (`node`, `way` or `relation`). The raw-file checksum pins the extract. Optional `expected_tags` verify provider tags. The constructor joins member ways at shared node IDs in stable way-ID order.
 
-Polygon imports preserve holes and return a `MultiPolygon`. Use `ignored_member_roles` to identify non-geometric members such as label nodes. The same implementation handles administrative, reef and archipelago sources.
+Polygon imports preserve holes and return a `MultiPolygon`. A relation's `label` nodes are skipped automatically when assembling the outline. The same implementation handles administrative, reef and archipelago sources.
 
 Provider-defined geographic `group` and `collection` relations can produce one island-group feature. The reader includes direct polygon ways and nested polygon relations, preserves child holes, and unions overlapping members. Construction settings explicitly identify ignored metadata roles. Missing members and cycles fail. A parent `/full` response alone may omit nested geometry, so the archived input must contain the complete recursive graph.
 

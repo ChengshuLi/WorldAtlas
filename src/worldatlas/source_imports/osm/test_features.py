@@ -65,9 +65,7 @@ class OsmFeatureTests(unittest.TestCase):
             feature_id="islands",
             source_feature_id="100",
             object_type="relation",
-            object_version="3",
             expected_tags={"name": "Selected"},
-            ignored_member_roles=[["n", "label"]],
         )
 
     def read(self, selection=None):
@@ -84,20 +82,18 @@ class OsmFeatureTests(unittest.TestCase):
         self.assertEqual(len(polygons[0]), 2)
         self.assertEqual(len(polygons[1]), 1)
 
-    def test_whole_number_versions_match_the_archived_osm_version(self):
+    def test_label_reference_does_not_require_node_coordinates(self):
         expected = self.read()
-        for version in (3, 3.0):
-            with self.subTest(version=version):
-                self.assertEqual(
-                    self.read(dict(self.selection, object_version=version)), expected
-                )
+        self.path.write_text(
+            self.path.read_text().replace('ref="1" role="label"', 'ref="999" role="label"')
+        )
+        self.assertEqual(self.read(), expected)
 
     def test_nodes_and_closed_ways(self):
         node = dict(
             feature_id="point",
             source_feature_id="1",
             object_type="node",
-            object_version="1",
         )
         self.assertEqual(
             self.read(node)["geometry"], {"type": "Point", "coordinates": [0.0, 0.0]}
@@ -106,19 +102,16 @@ class OsmFeatureTests(unittest.TestCase):
             feature_id="closed",
             source_feature_id="40",
             object_type="way",
-            object_version="2",
         )
         self.assertEqual(len(self.read(way)["geometry"]["coordinates"]), 1)
         way["source_feature_id"] = "10"
         with self.assertRaisesRegex(ValueError, "open or branched"):
             self.read(way)
 
-    def test_missing_versions_identity_and_unselected_roles_fail(self):
+    def test_missing_objects_and_tag_mismatches_fail(self):
         for update, message in [
             ({"source_feature_id": "999"}, "missing"),
-            ({"object_version": "4"}, "version"),
             ({"expected_tags": {"name": "Other"}}, "identity"),
-            ({"ignored_member_roles": []}, "member role"),
         ]:
             with (
                 self.subTest(update=update),
@@ -126,11 +119,17 @@ class OsmFeatureTests(unittest.TestCase):
             ):
                 self.read(dict(self.selection, **update))
 
+    def test_unrecognized_member_roles_fail(self):
+        self.path.write_text(self.path.read_text().replace('role="label"', 'role="unknown"'))
+        with self.assertRaisesRegex(ValueError, "member role"):
+            self.read()
+
     def test_geographic_group_includes_direct_ways_and_nested_relations(self):
         group = (
             '<relation id="200" version="1">'
             '<member type="relation" ref="100" role=""/>'
             '<member type="way" ref="40" role="outer"/>'
+            '<member type="node" ref="1" role="label"/>'
             '<tag k="type" v="group"/></relation>'
         )
         self.path.write_text(self.path.read_text().replace("</osm>", group + "</osm>"))
@@ -138,8 +137,6 @@ class OsmFeatureTests(unittest.TestCase):
             feature_id="group",
             source_feature_id="200",
             object_type="relation",
-            object_version="1",
-            ignored_member_roles=[["n", "label"]],
         )
         from shapely.geometry import shape
 
@@ -154,7 +151,6 @@ class OsmFeatureTests(unittest.TestCase):
             feature_id="group",
             source_feature_id="200",
             object_type="relation",
-            object_version="1",
         )
         for member, message in [(999, "missing OSM group member"), (200, "cyclic")]:
             group = (

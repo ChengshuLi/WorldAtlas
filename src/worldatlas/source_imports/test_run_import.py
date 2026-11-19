@@ -52,7 +52,6 @@ ARGUMENTS = {
                 feature_id="feature",
                 source_feature_id="123",
                 object_type="way",
-                object_version="1",
             )
         ],
     ),

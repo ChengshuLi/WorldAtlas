@@ -284,11 +284,21 @@ class DatabaseContractTests(unittest.TestCase):
                             feature_id="f",
                             source_feature_id=123,
                             object_type="way",
-                            object_version=1.0,
+                            expected_tags={"name": "Selected way"},
                         )
                     ]
                 ),
                 True,
+            ),
+            (
+                "selected_osm_features",
+                dict(selections=[dict(ARGUMENTS["selected_osm_features"]["selections"][0], object_version=1)]),
+                False,
+            ),
+            (
+                "selected_osm_features",
+                dict(selections=[dict(ARGUMENTS["selected_osm_features"]["selections"][0], ignored_member_roles=[])]),
+                False,
             ),
             (
                 "s130_areas",

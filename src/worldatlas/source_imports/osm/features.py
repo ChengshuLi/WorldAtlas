@@ -6,7 +6,8 @@ import time
 from typing import Literal, NotRequired, TypedDict
 
 import osmium
-from shapely.geometry import Polygon
+from shapely import union_all
+from shapely.geometry import Polygon, mapping, shape
 
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
@@ -16,7 +17,7 @@ from worldatlas.source_imports.shared.storage import feature_result, save_featur
 
 
 class OsmSelection(TypedDict):
-    """Select a versioned OSM object and how to interpret its geometry."""
+    """Identify an OSM object in one archived extract."""
 
     # ID of the feature saved in Neon.
     feature_id: NonEmptyText
@@ -24,12 +25,8 @@ class OsmSelection(TypedDict):
     source_feature_id: NonEmptyText | int
     # OSM nodes produce points. Closed ways and polygon relations produce areas.
     object_type: Literal["node", "way", "relation"]
-    # Version of the OSM object expected in the archive.
-    object_version: NonEmptyText | int
     # Optional OSM tag names and values that the selected object must match.
     expected_tags: NotRequired[dict[str, str]]
-    # Optional member type and role pairs to skip. For example, ["n", "label"] skips label nodes.
-    ignored_member_roles: NotRequired[list[tuple[Literal["n", "w", "r"], str]]]
 
 
 @dataclass
@@ -42,7 +39,7 @@ class Graph:
 
 
 def read_graph(path):
-    """Read one OSM extract while preserving object versions and tags.
+    """Read one OSM extract and omit label nodes from relation memberships.
 
     Args:
         path: Local extract understood by osmium.
@@ -62,9 +59,7 @@ def read_graph(path):
             tags = dict(obj.tags)
             if len(tags) != len(obj.tags):
                 raise ValueError("duplicate OSM tag")
-            records[obj.id] = dict(
-                version=str(obj.version), tags=tags, deleted=obj.deleted, **values
-            )
+            records[obj.id] = dict(tags=tags, deleted=obj.deleted, **values)
 
         def node(self, obj):
             if not obj.location.valid():
@@ -80,7 +75,12 @@ def read_graph(path):
             self.record(
                 obj,
                 graph.relations,
-                members=[(m.type, m.ref, m.role) for m in obj.members],
+                # Label nodes position map text and do not form polygon outlines.
+                members=[
+                    (m.type, m.ref, m.role)
+                    for m in obj.members
+                    if (m.type, m.role) != ("n", "label")
+                ],
             )
 
     Reader().apply_file(str(path))
@@ -133,13 +133,12 @@ def assemble_rings(ways):
     return result
 
 
-def selected_object(records, ident, version, tags):
+def selected_object(records, ident, tags):
     """Read the selected object after checking its identity and attributes.
 
     Args:
         records: Archive objects keyed by integer ID.
         ident: Selected object ID.
-        version: Expected archive object version.
         tags: Expected values for selected provider tags.
 
     Returns:
@@ -148,11 +147,9 @@ def selected_object(records, ident, version, tags):
     Raises:
         ValueError: The object is missing, deleted, or fails an identity check.
     """
-    if isinstance(version, float) and version.is_integer():
-        version = int(version)
     record = records.get(int(ident))
-    if record is None or record["deleted"] or record["version"] != str(version):
-        raise ValueError("selected OSM object or version is missing")
+    if record is None or record["deleted"]:
+        raise ValueError("selected OSM object is missing")
     if any(record["tags"].get(key) != value for key, value in tags.items()):
         raise ValueError("selected OSM identity tags differ")
     return record
@@ -163,7 +160,7 @@ def polygon_geometry(graph, selected, record, ancestry=()):
 
     Args:
         graph: Nodes, ways, and relations from the archived extract.
-        selected: Selected object identity and ignored member roles.
+        selected: Selected object type and ID.
         record: Chosen OSM way or relation.
         ancestry: Parent relation IDs used to detect cycles.
 
@@ -180,7 +177,6 @@ def polygon_geometry(graph, selected, record, ancestry=()):
         inner = {}
     else:
         outer, inner = {}, {}
-        ignored = {tuple(item) for item in selected.get("ignored_member_roles", [])}
         for kind, ident, role in record["members"]:
             if kind == "w" and role in ("outer", "inner"):
                 target = outer if role == "outer" else inner
@@ -189,12 +185,6 @@ def polygon_geometry(graph, selected, record, ancestry=()):
                 if graph.ways[ident]["deleted"]:
                     raise ValueError("selected OSM member is deleted")
                 target[ident] = graph.ways[ident]["nodes"]
-            elif (kind, role) in ignored:
-                records = {"n": graph.nodes, "w": graph.ways, "r": graph.relations}[
-                    kind
-                ]
-                if ident not in records or records[ident]["deleted"]:
-                    raise ValueError("selected OSM metadata member is missing")
             else:
                 raise ValueError("unsupported OSM geometric or metadata member role")
     rings = assemble_rings(outer)
@@ -231,35 +221,28 @@ def group_geometry(graph, selected, record, ancestry):
 
     Args:
         graph: Nodes, ways, and relations from the archived extract.
-        selected: Selected object identity and ignored member roles.
+        selected: Selected relation ID.
         record: Chosen OSM group or collection relation.
         ancestry: Parent relation IDs used to detect cycles.
 
     Returns:
         The combined GeoJSON MultiPolygon.
     """
-    from shapely import union_all
-    from shapely.geometry import mapping, shape
-
     ident = int(selected["source_feature_id"])
     if ident in ancestry:
         raise ValueError("cyclic OSM geographic group")
     ancestry = (*ancestry, ident)
-    ignored = {tuple(item) for item in selected.get("ignored_member_roles", [])}
     polygons, ways = [], []
     for kind, member, role in record["members"]:
         records = {"n": graph.nodes, "w": graph.ways, "r": graph.relations}[kind]
         if member not in records or records[member]["deleted"]:
             raise ValueError("missing OSM group member")
-        if (kind, role) in ignored:
-            continue
         if kind == "w" and role in ("", "outer"):
             ways.append(("w", member, "outer"))
         elif kind == "r" and role in ("", "outer"):
             child = dict(
                 object_type="relation",
                 source_feature_id=str(member),
-                ignored_member_roles=selected.get("ignored_member_roles", []),
             )
             polygons.append(
                 shape(polygon_geometry(graph, child, records[member], ancestry))
@@ -294,7 +277,7 @@ def read_features(path, selections):
 
     Args:
         path: Verified local OSM extract.
-        selections: Provider object IDs, versions, and geometry options.
+        selections: Object types and IDs, with optional tag checks.
 
     Returns:
         Selected features with their output IDs, provider IDs, and geometries.
@@ -309,7 +292,6 @@ def read_features(path, selections):
         record = selected_object(
             objects[kind],
             selection["source_feature_id"],
-            selection["object_version"],
             selection.get("expected_tags", {}),
         )
         geometry = (
@@ -339,7 +321,7 @@ def selected_osm_features(
     Args:
         runtime: Import resources and saved recipe snapshot.
         source_id: Catalog ID of the archived OSM extract.
-        selections: Provider objects and their output IDs and options.
+        selections: Provider objects, output IDs, and optional tag checks.
 
     Returns:
         Saved feature IDs, the local source path, and timings.
