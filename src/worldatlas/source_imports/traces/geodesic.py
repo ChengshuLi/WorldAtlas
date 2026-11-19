@@ -53,15 +53,21 @@ def geodesic_trace(runtime: Runtime, *, source_ids: list[SourceId],
     Args:
         runtime: Import resources and saved recipe snapshot.
         source_ids: Distinct catalog IDs for the supporting source figures.
-        source_feature_id: Figure or locator described by the recipe.
+        source_feature_id: Identifier for the figure or passage a reviewer
+            can find in the cited source.
         feature_id: Output feature ID in Neon.
         points: Ordered WGS84 longitude and latitude pairs.
         max_step_metres: Maximum spacing between adjacent output vertices.
-        source_location: Optional location or calibration notes in the recipe.
+        source_location: Optional page references or calibration notes that
+            explain where and how the figure was read.
 
     Returns:
         Saved feature ID and vertex count.
     """
+    # The recipe retains these details so a reviewer can find the figure.
+    # The recorded points and spacing determine the geometry.
+    del source_feature_id, source_location
+
     if not source_ids or len(set(source_ids)) != len(source_ids):
         raise ValueError("trace sources must be nonempty and distinct")
     geometry = construct(points, max_step_metres)
