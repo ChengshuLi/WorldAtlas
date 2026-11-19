@@ -1,6 +1,6 @@
 # Selected vector features
 
-Import selected source geometry into `atlas.source_features`. Each row has three required fields, `id`, `geometry`, and `construction_id`. Geometry uses WGS84 `[longitude, latitude]` in degrees. Map building reads the stored geometry to check spatial relationships against the current grid.
+Import features whose geometry is already encoded in a vector file such as a Shapefile, GeoJSON, or GeoPackage. The importer saves each feature in `atlas.source_features` with its `id`, `geometry`, and `construction_id`. Geometry uses WGS84 `[longitude, latitude]` in degrees. Map building reads the stored geometry to check spatial relationships against the current grid.
 
 Raw files are pinned by their cataloged size and checksum. Neon checks the [recipe's argument names and types](../README.md#argument-validation) and the structure of stored coordinates. The importer checks that selected features exist and rejects invalid geometry, such as self-intersecting polygons.
 
@@ -15,9 +15,9 @@ worldatlas-import --recipe CONSTRUCTION_ID \
 
 ## Vector selections
 
-The construction arguments contain `source_id`, `id_field`, and `selections`. Each selection identifies the provider record with `source_feature_id` and names the saved record with `feature_id`. Different output IDs can select the same provider feature. Provider attributes stay in the raw file.
+The construction arguments contain `source_id`, `id_field`, and `selections`. Set `id_field` to the name of the source attribute that identifies features, or use `@fid` for the native feature ID reported by GDAL. Each selection supplies the ID to look up in `source_feature_id` and the ID to save in `feature_id`. Different output IDs can select the same provider feature. Provider attributes stay in the raw file.
 
-- Set `member` to select an archived dataset and `layer` to select a layer in a file that contains several.
+- For a ZIP, set `member` to the dataset path inside the archive. You can omit it when the archive contains exactly one `.shp` file. Set `layer` when the selected dataset contains multiple layers.
 - Vector imports convert the source CRS to the stored coordinate system. Use `coordinate_operation` when the source needs a specific documented transformation. WGS84 GeoJSON retains its numeric coordinate values when no explicit transformation or collection operation is requested. Storage normalizes `-0.0` to `0.0`.
 - A provider ID must select exactly one record by default. Set `collection: true` to combine all records that share the ID. `expected_feature_count` checks how many records matched.
 - Set `polygon_containing: [longitude, latitude]` to select one part using a point in the stored coordinate system. The point must be strictly inside exactly one polygon. Points on boundaries or in holes fail the selection.
