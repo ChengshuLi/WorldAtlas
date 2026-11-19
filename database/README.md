@@ -43,8 +43,11 @@ For an existing database, back up its data, rehearse the transition locally, the
 
 ## Tests
 
+Put PostgreSQL 17 or 18 tools on your path. Install `pg_jsonschema` once for that PostgreSQL installation. On macOS, the install command builds the native extension using the Xcode command-line tools and Rust's `cargo`. On Debian and Ubuntu, it extracts the matching upstream package using `dpkg-deb`. You can also pass the absolute path to a different installation's `pg_config`.
+
 ```bash
+bash database/tests/install_pg_jsonschema.sh
 python .github/scripts/run_tests.py --suite database
 ```
 
-Run with Docker available. The runner starts a disposable PostgreSQL 18 container with `pg_jsonschema` and gives each database-using suite its own database. SQL checks cover raw immutability, generated construction contracts, geometry, hierarchy, geographic rule relationships and release-state constraints. Python integration tests cover atomic imports, consistent snapshots, concurrent edits, run reuse and release file verification. Use `--without-database` to run the Python tests that work without PostgreSQL.
+The runner starts a disposable native PostgreSQL server and gives each database-using suite its own database. SQL checks cover raw immutability, generated construction contracts, geometry, hierarchy, geographic rule relationships and release-state constraints. Python integration tests cover atomic imports, consistent snapshots, concurrent edits, run reuse and release file verification. Tests never use the working Neon database.

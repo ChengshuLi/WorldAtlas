@@ -2,7 +2,6 @@
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import contextmanager
 from pathlib import Path
 import os
 import subprocess
@@ -52,85 +51,54 @@ def run_suite(name, directory, databases):
     return name, code, time.monotonic() - started, log
 
 
-@contextmanager
-def test_databases(selected, enabled):
-    if not enabled or not any(SUITES[name] for name in selected):
-        yield {}
-        return
-
-    image = subprocess.check_output(
-        ['docker', 'build', '--quiet', str(ROOT / 'database/tests')], text=True
-    ).strip()
-    container = subprocess.check_output(
-        ['docker', 'run', '--detach', '--publish', '127.0.0.1::5432',
-         '--env', 'POSTGRES_HOST_AUTH_METHOD=trust',
-         '--volume', f'{ROOT / "database"}:/worldatlas-database:ro', image],
-        text=True,
-    ).strip()
-    try:
-        address = subprocess.check_output(
-            ['docker', 'port', container, '5432/tcp'], text=True
-        ).strip()
-        port = address.rsplit(':', 1)[1]
-        base = make_conninfo(host='127.0.0.1', port=port, user='postgres',
-                             dbname='postgres', connect_timeout=2)
-        deadline = time.monotonic() + 20
-        while True:
-            try:
-                server = psycopg.connect(base, autocommit=True)
-                break
-            except psycopg.OperationalError:
-                if time.monotonic() >= deadline:
-                    subprocess.run(['docker', 'logs', container], check=False)
-                    raise
-                time.sleep(0.2)
-        databases = {}
-        with server:
-            for name in selected:
-                if not SUITES[name]:
-                    continue
-                server.execute(sql.SQL('CREATE DATABASE {}').format(sql.Identifier(name)))
-                subprocess.run(
-                    ['docker', 'exec', container, 'psql', '-Xq', '-U', 'postgres',
-                     '-d', name, '-f', '/worldatlas-database/schema.sql'],
-                    check=True,
-                )
-                databases[name] = make_conninfo(base, dbname=name)
-        yield databases
-    finally:
-        subprocess.run(['docker', 'rm', '--force', '--volumes', container],
-                       stdout=subprocess.DEVNULL, check=True)
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--suite', choices=SUITES, help='run one suite; defaults to all suites')
-    parser.add_argument('--without-database', action='store_true',
-                        help='run Python tests that can run without PostgreSQL')
     args = parser.parse_args()
-    if args.without_database and args.suite == 'database':
-        parser.error('the database suite requires PostgreSQL')
     if (ROOT / "database/schema/construction_contracts.sql").read_text() != database_checks():
         parser.error("construction checks are stale; regenerate database/schema/construction_contracts.sql")
-    selected = (args.suite,) if args.suite else tuple(
-        name for name in SUITES if name != 'database' or not args.without_database
-    )
-    with (
-        tempfile.TemporaryDirectory(prefix='worldatlas-tests-') as temp,
-        test_databases(selected, not args.without_database) as databases,
-    ):
+    selected = (args.suite,) if args.suite else tuple(SUITES)
+    # Unix socket paths must stay short on macOS; Python fixtures use their
+    # ordinary temporary directories independently of this server directory.
+    with tempfile.TemporaryDirectory(prefix='worldatlas-tests-', dir='/tmp') as temp:
         directory = Path(temp)
-        started = time.monotonic()
-        failed = False
-        with ThreadPoolExecutor(max_workers=len(selected)) as executor:
-            futures = [executor.submit(run_suite, name, directory, databases) for name in selected]
-            for future in as_completed(futures):
-                name, code, elapsed, log = future.result()
-                failed |= code != 0
-                print(f'\n{name}: {"FAILED" if code else "passed"} ({elapsed:.2f}s)', flush=True)
-                print(log.read_text(), end='', flush=True)
-        print(f'\nAll suites finished in {time.monotonic() - started:.2f}s wall time.', flush=True)
-        return int(failed)
+        data = directory / 'data'
+        needs_database = any(SUITES[name] for name in selected)
+        if needs_database:
+            subprocess.run(['initdb', '-D', str(data), '-U', 'postgres', '-A', 'trust',
+                            '--no-locale', '--encoding=UTF8'], check=True)
+            subprocess.run(['pg_ctl', '-D', str(data), '-l', str(directory / 'postgres.log'),
+                            '-o', f"-k {directory} -p 5432 -c listen_addresses=''", '-w', 'start'],
+                           check=True)
+        try:
+            databases = {}
+            if needs_database:
+                base = make_conninfo(user='postgres', dbname='postgres', host=str(directory))
+                with psycopg.connect(base, autocommit=True) as server:
+                    for name in selected:
+                        if not SUITES[name]:
+                            continue
+                        server.execute(sql.SQL('CREATE DATABASE {}').format(sql.Identifier(name)))
+                        url = make_conninfo(base, dbname=name)
+                        subprocess.run(
+                            ['psql', '-Xq', '--dbname', url, '-f', str(ROOT / 'database/schema.sql')],
+                            check=True,
+                        )
+                        databases[name] = url
+            started = time.monotonic()
+            failed = False
+            with ThreadPoolExecutor(max_workers=len(selected)) as executor:
+                futures = [executor.submit(run_suite, name, directory, databases) for name in selected]
+                for future in as_completed(futures):
+                    name, code, elapsed, log = future.result()
+                    failed |= code != 0
+                    print(f'\n{name}: {"FAILED" if code else "passed"} ({elapsed:.2f}s)', flush=True)
+                    print(log.read_text(), end='', flush=True)
+            print(f'\nAll suites finished in {time.monotonic() - started:.2f}s wall time.', flush=True)
+            return int(failed)
+        finally:
+            if needs_database:
+                subprocess.run(['pg_ctl', '-D', str(data), '-m', 'fast', '-w', 'stop'], check=True)
 
 
 if __name__ == '__main__':

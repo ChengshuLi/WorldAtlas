@@ -74,7 +74,7 @@ Publishing serves that bundle at the homepage and retires superseded candidates 
 
 The [initial schema](database/schema.sql) defines stable entity IDs and colors, editable names and parent relationships, and the bindings from map category codes to entities. Each build freezes the working records before computation.
 
-Apply the [initial schema](database/schema.sql) only to an empty PostgreSQL database with `pg_jsonschema` available. The working database is already initialized. The [database guide](database/README.md) covers existing-database upgrades and testing. With Docker available, run the [database tests](database/tests) with `python .github/scripts/run_tests.py --suite database`.
+Apply the [initial schema](database/schema.sql) only to an empty PostgreSQL database with `pg_jsonschema` available. The working database is already initialized. The [database guide](database/README.md) covers existing-database upgrades and native test setup. Run the [database tests](database/tests) with `python .github/scripts/run_tests.py --suite database`.
 
 ## Viewer tools and tests
 
@@ -94,4 +94,4 @@ The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 - Python source-import, map-building, release and SQL database suites concurrently on macOS and Linux.
 - Node and Chromium browser tests on Linux.
 
-CI tests a regular installation, including its SQL and configuration resources. Linux runs all Python and database suites against an isolated PostgreSQL container. macOS runs the Python tests that work without a database. The website job runs alongside the Python jobs. CI caches installed environments, uses local fixtures, and needs no cloud credentials. The website job uses Chrome already installed on GitHub's runner. Its Node and browser suites also run concurrently. New pushes cancel superseded runs. Documentation-only updates also run the checks. Full-size map builds and geographic review remain separate.
+CI tests a regular installation, including its SQL and configuration resources. macOS and Linux both run the Python and database suites against native PostgreSQL. Each database-using suite has its own disposable database on one temporary server per OS job. CI caches installed environments and the native macOS extension, uses local fixtures, and needs no cloud credentials. The website job uses Chrome already installed on GitHub's runner and runs alongside the Python jobs. Its Node and browser suites also run concurrently. New pushes cancel superseded runs. Documentation-only updates also run the checks. Full-size map builds and geographic review remain separate.
