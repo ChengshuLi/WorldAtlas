@@ -3,7 +3,7 @@
 from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
 from worldatlas.source_imports.osm.ways import assemble
 from worldatlas.source_imports.atlas_sources.catalog import catalog_source, download_source
-from worldatlas.source_imports.features.geometry import geometry_hash, save_features
+from worldatlas.source_imports.features.geometry import save_features
 
 
 def osm_way_chain(
@@ -20,9 +20,6 @@ def osm_way_chain(
             catalog_source(database, ident)
         paths = [download_source(runtime.storage, source, runtime.work_dir) for source in sources]
         geometry = assemble(paths, start_node_id)
-        if (runtime.expected_geometry_sha256 is not None
-                and geometry_hash(geometry) != runtime.expected_geometry_sha256):
-            raise ValueError('assembled boundary differs from the expected geometry checksum')
         with runtime.saving(database):
             hashes = save_features(database, [dict(feature_id=feature_id, geometry=geometry)],
                 dict(recipe_id=runtime.recipe_id))

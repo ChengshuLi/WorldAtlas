@@ -33,7 +33,6 @@ class Runtime:
     recipe_id: str
     method: str
     work_dir: Path | None = None
-    expected_geometry_sha256: str | None = None
     arguments: dict | None = None
 
     def recipe(self, arguments):

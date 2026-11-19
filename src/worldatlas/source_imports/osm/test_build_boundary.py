@@ -12,7 +12,7 @@ from unittest.mock import Mock
 import psycopg
 from psycopg.types.json import Jsonb
 from worldatlas.source_imports.run_import import run_import
-from worldatlas.source_imports.features.geometry import save_features
+from worldatlas.source_imports.features.geometry import geometry_hash, save_features
 from worldatlas.source_imports.atlas_sources.catalog import catalog_source
 
 
@@ -91,13 +91,12 @@ class DatabaseTests(unittest.TestCase):
             ),
         )
 
-    def build(self, expected=None):
+    def build(self):
         return run_import(
             lambda: nullcontext(self.database),
             "__osm_recipe",
             storage=self.storage,
             work_dir=self.directory,
-            expected_geometry_sha256=expected,
         )
 
     def boundary(self):
@@ -112,6 +111,7 @@ class DatabaseTests(unittest.TestCase):
 
     def test_build_repeat_and_edit_recipe(self):
         first = self.build()
+        self.assertEqual(first["sha256"], geometry_hash(self.boundary()[0]))
         self.assertEqual(self.build(), first)
         self.assertEqual(self.storage.get_object.call_count, 1)
         self.recipe.update(way_source_ids=["osm-test-2"], basis="New source")
@@ -135,13 +135,6 @@ class DatabaseTests(unittest.TestCase):
         self.build()
         self.assertEqual(self.links(), [("osm-test-1",), ("osm-test-2",)])
         self.storage.get_object.assert_called_once_with(Bucket="test", Key="1.json")
-
-    def test_expected_geometry_mismatch_preserves_existing_boundary(self):
-        self.build()
-        before = self.boundary()
-        with self.assertRaisesRegex(ValueError, "expected geometry"):
-            self.build(expected="0" * 64)
-        self.assertEqual(self.boundary(), before)
 
     def test_recipe_edit_during_calculation_does_not_save_stale_geometry(self):
         from unittest.mock import patch

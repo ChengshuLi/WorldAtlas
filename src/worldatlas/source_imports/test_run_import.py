@@ -100,7 +100,7 @@ class ImportSelectionTests(unittest.TestCase):
                 self.assertEqual(runtime.recipe_id, "arbitrary-record-name")
                 self.assertIs(runtime.storage, self.storage)
 
-    def test_trace_needs_no_storage_revision_or_cache(self):
+    def test_trace_needs_no_storage_or_cache(self):
         constructor = IMPORTERS["geodesic_trace"]
 
         @wraps(constructor)
@@ -116,7 +116,7 @@ class ImportSelectionTests(unittest.TestCase):
         ):
             runtime = run_import(self.connect, "trace")
         self.assertIsNone(runtime.storage)
-        self.assertIsNone(runtime.expected_geometry_sha256)
+        self.assertIsNone(runtime.work_dir)
 
     def test_unsupported_methods_stop_before_downloading(self):
         for method in (None, {}, ["osm_way_chain"], "some.python.function"):
@@ -152,7 +152,7 @@ class ImportSelectionTests(unittest.TestCase):
                     run_import(self.connect, "record", **self.options)
         self.storage.get_object.assert_not_called()
 
-    def test_required_download_inputs_and_inapplicable_checksum_are_rejected(self):
+    def test_missing_required_download_inputs_are_rejected(self):
         with patch(
             "worldatlas.source_imports.run_import.read_recipe",
             return_value=("osm_way_chain", ARGUMENTS["osm_way_chain"]),
@@ -165,15 +165,4 @@ class ImportSelectionTests(unittest.TestCase):
                     run_import(
                         self.connect, "record", **dict(self.options, **{name: None})
                     )
-        with patch(
-            "worldatlas.source_imports.run_import.read_recipe",
-            return_value=("s130_areas", ARGUMENTS["s130_areas"]),
-        ):
-            with self.assertRaisesRegex(ValueError, "checksum applies"):
-                run_import(
-                    self.connect,
-                    "record",
-                    **self.options,
-                    expected_geometry_sha256="expected",
-                )
         self.storage.get_object.assert_not_called()

@@ -34,9 +34,7 @@ IMPORTERS = {
 }
 
 
-def run_import(
-    connect, recipe_id, *, storage=None, work_dir=None, expected_geometry_sha256=None
-):
+def run_import(connect, recipe_id, *, storage=None, work_dir=None):
     with connect() as database:
         method, arguments = read_recipe(database, recipe_id)
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
@@ -46,10 +44,6 @@ def run_import(
         storage is None or work_dir is None
     ):
         raise ValueError("this method requires --r2-endpoint and --work-dir")
-    if expected_geometry_sha256 is not None and method != "osm_way_chain":
-        raise ValueError(
-            "an expected geometry checksum applies to OSM way-chain boundaries"
-        )
     validate_arguments(importer, arguments)
     return importer(
         Runtime(
@@ -58,7 +52,6 @@ def run_import(
             recipe_id,
             method,
             work_dir,
-            expected_geometry_sha256,
             arguments=arguments,
         ),
         **arguments,
@@ -73,7 +66,6 @@ def main():
     )
     parser.add_argument("--r2-endpoint")
     parser.add_argument("--work-dir", type=Path)
-    parser.add_argument("--expected-geometry-sha256")
     args = parser.parse_args()
     if not (connection := os.environ.get("NEON_DATABASE_URL")):
         parser.error("set NEON_DATABASE_URL to the working database")
@@ -97,7 +89,6 @@ def main():
             args.recipe,
             storage=storage,
             work_dir=args.work_dir,
-            expected_geometry_sha256=args.expected_geometry_sha256,
         )
         if args.work_dir is not None:
             name = hashlib.sha256(args.recipe.encode()).hexdigest()
