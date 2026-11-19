@@ -6,6 +6,10 @@ import time
 from typing import Literal, NotRequired
 from zipfile import ZipFile
 
+from osgeo import gdal, osr
+from shapely import union_all
+from shapely.geometry import Polygon, mapping, shape
+
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.contracts import FeatureIdentity, NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
@@ -52,37 +56,28 @@ def dataset_path(path, member=None):
     return "/vsizip/" + str(path) + "/" + member
 
 
-def geojson_geometries(path, member, id_field, wanted):
-    """Read original GeoJSON coordinates with their JSON number representation.
+def native_geojson_geometry(feature, path, member):
+    """Read original coordinates for the feature GDAL selected.
 
     Args:
+        feature: Feature from a GeoJSON dataset opened with native data enabled.
         path: Local GeoJSON file or ZIP archive.
         member: GeoJSON member name for archived inputs.
-        id_field: Provider attribute or ``@fid`` used to identify records.
-        wanted: Provider IDs to select, converted to strings.
 
     Returns:
-        Original geometry dictionaries keyed by selected provider ID.
+        The original geometry dictionary for this feature.
     """
+    native = feature.GetNativeData()
+    if native is not None:
+        return json.loads(native)["geometry"]
+
+    # For a file containing just a geometry, GDAL supplies a feature with no
+    # native data. The entire original JSON document is the selected geometry.
     path = Path(path)
     if member is not None:
         with ZipFile(path) as archive:
-            document = json.loads(archive.read(member))
-    else:
-        document = json.loads(path.read_bytes())
-    rows = (
-        document["features"] if document["type"] == "FeatureCollection" else [document]
-    )
-    result = {}
-    for ordinal, row in enumerate(rows):
-        ident = row.get("id")
-        fid = ident if type(ident) is int else ordinal
-        key = str(
-            fid if id_field == "@fid" else row.get("properties", {}).get(id_field)
-        )
-        if key in wanted:
-            result[key] = row["geometry"] if row["type"] == "Feature" else row
-    return result
+            return json.loads(archive.read(member))
+    return json.loads(path.read_bytes())
 
 
 def polygon_containing(geometry, coordinates):
@@ -99,8 +94,6 @@ def polygon_containing(geometry, coordinates):
         ValueError: The point is invalid or falls inside anything other
             than one polygon interior.
     """
-    from shapely.geometry import Polygon
-
     point = validate_geometry({"type": "Point", "coordinates": coordinates})
     if geometry["type"] not in ("Polygon", "MultiPolygon"):
         raise ValueError("polygon_containing needs polygon geometry")
@@ -129,22 +122,23 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
         coordinate_operation: Optional explicit CRS transformation.
 
     Returns:
-        Selected features with their output IDs, provider IDs, and geometries.
+        Selected features with their output IDs and geometries.
 
     Raises:
         ValueError: A dataset, selection, CRS, or geometry is invalid.
     """
-    from osgeo import ogr, osr
-
-    selected = selections
-    wanted = {str(item["source_feature_id"]) for item in selected}
+    wanted = {str(item["source_feature_id"]) for item in selections}
     collections = {
-        str(item["source_feature_id"]) for item in selected if item.get("collection")
+        str(item["source_feature_id"]) for item in selections if item.get("collection")
     }
-    identifiers = [item["feature_id"] for item in selected]
-    if not wanted or len(set(identifiers)) != len(selected):
+    identifiers = [item["feature_id"] for item in selections]
+    if not wanted or len(set(identifiers)) != len(selections):
         raise ValueError("output feature selections must be unique")
-    source = ogr.Open(dataset_path(path, member), 0)
+    # Request each GeoJSON feature's original JSON. The @ makes the option
+    # optional for drivers that do not support it.
+    source = gdal.OpenEx(
+        dataset_path(path, member), gdal.OF_VECTOR, open_options=["@NATIVE_DATA=YES"]
+    )
     if source is None:
         raise ValueError("source vector dataset cannot be opened")
     layer_name = layer
@@ -179,21 +173,22 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
     if target.SetFromUserInput(reference) != 0:
         raise ValueError("unsupported output coordinate reference")
     target.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    operation = coordinate_operation
-    options = osr.CoordinateTransformationOptions()
-    if operation:
-        options.SetOperation(operation)
-    conversion = osr.CreateCoordinateTransformation(original, target, options)
-    source_geometries = None
-    if (
-        source.GetDriver().GetName() == "GeoJSON"
-        and not operation
+    is_geojson = source.GetDriver().ShortName == "GeoJSON"
+    use_native_coordinates = (
+        is_geojson
+        and not coordinate_operation
         and not collections
         and original.IsSame(target, ["IGNORE_DATA_AXIS_TO_SRS_AXIS_MAPPING=YES"])
-    ):
-        source_geometries = geojson_geometries(path, member, id_field, wanted)
+    )
+    if not use_native_coordinates:
+        options = osr.CoordinateTransformationOptions()
+        if coordinate_operation:
+            options.SetOperation(coordinate_operation)
+        conversion = osr.CreateCoordinateTransformation(original, target, options)
+    export_options = ["SIGNIFICANT_FIGURES=17"] if is_geojson else []
+
     result = []
-    for selection in selected:
+    for selection in selections:
         key = str(selection["source_feature_id"])
         if selection.get("expected_feature_count", len(fids[key])) != len(fids[key]):
             raise ValueError(
@@ -209,25 +204,16 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
             geometry = row.GetGeometryRef()
             if geometry is None:
                 raise ValueError("source feature has no geometry")
-            geometry = geometry.Clone()
-            if source_geometries is None and geometry.Transform(conversion) != 0:
-                raise ValueError("source geometry coordinate conversion failed")
-            options = (
-                ["SIGNIFICANT_FIGURES=17"]
-                if source.GetDriver().GetName() == "GeoJSON"
-                else []
-            )
-            value = (
-                source_geometries[key]
-                if source_geometries is not None
-                else json.loads(geometry.ExportToJson(options=options))
-            )
+            if use_native_coordinates:
+                value = native_geojson_geometry(row, path, member)
+            else:
+                geometry = geometry.Clone()
+                if geometry.Transform(conversion) != 0:
+                    raise ValueError("source geometry coordinate conversion failed")
+                value = json.loads(geometry.ExportToJson(options=export_options))
             validate_geometry(value)
             values.append(value)
         if selection.get("collection"):
-            from shapely.geometry import mapping, shape
-            from shapely import union_all
-
             value = json.loads(
                 json.dumps(mapping(union_all([shape(v) for v in values])))
             )
@@ -237,9 +223,6 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
         if "polygon_containing" in selection:
             value = polygon_containing(value, selection["polygon_containing"])
         if selection.get("holes", "preserve") == "outer_envelope":
-            from shapely import union_all
-            from shapely.geometry import Polygon, mapping
-
             if value["type"] not in ("Polygon", "MultiPolygon"):
                 raise ValueError("outer_envelope requires a polygon source")
             parts = (
@@ -253,7 +236,6 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
         result.append(
             {
                 "feature_id": selection["feature_id"],
-                "source_feature_id": key,
                 "geometry": value,
             }
         )

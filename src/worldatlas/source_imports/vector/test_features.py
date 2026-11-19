@@ -40,13 +40,12 @@ class VectorTests(unittest.TestCase):
             )
         )
 
-    def test_selected_point_and_identity(self):
+    def test_selects_point_by_provider_id(self):
         rows = read_features(self.path, **self.recipe)
         self.assertEqual(len(rows), 1)
         self.assertEqual(
             rows[0]["geometry"], {"type": "Point", "coordinates": [20, 10]}
         )
-        self.assertEqual(rows[0]["source_feature_id"], "a")
 
     def test_missing_and_duplicate_provider_ids(self):
         self.write(("b",))
@@ -110,6 +109,43 @@ class VectorTests(unittest.TestCase):
         )
         result = read_features(self.path, **self.recipe)[0]["geometry"]
         self.assertEqual(json.dumps(result), json.dumps(geometry))
+
+    def test_native_ids_select_correct_geometry_when_only_some_features_have_ids(self):
+        first = {"type": "Point", "coordinates": [10, 20]}
+        second = {"type": "Point", "coordinates": [30, 40]}
+        self.path.write_text(json.dumps({
+            "type": "FeatureCollection",
+            "features": [
+                {"type": "Feature", "id": 1, "properties": {}, "geometry": first},
+                {"type": "Feature", "properties": {}, "geometry": second},
+            ],
+        }))
+        result = read_features(
+            self.path,
+            id_field="@fid",
+            selections=[
+                dict(feature_id="first", source_feature_id=1),
+                dict(feature_id="second", source_feature_id=2),
+            ],
+        )
+        self.assertEqual([item["geometry"] for item in result], [first, second])
+
+    def test_geojson_can_store_a_geometry_without_a_feature_wrapper(self):
+        geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
+        self.path.write_text(json.dumps(geometry))
+        zipped = self.path.with_suffix(".zip")
+        member = "nested/point.geojson"
+        with ZipFile(zipped, "w") as archive:
+            archive.write(self.path, member)
+        for path, selected_member in ((self.path, None), (zipped, member)):
+            with self.subTest(path=path):
+                result = read_features(
+                    path,
+                    member=selected_member,
+                    id_field="@fid",
+                    selections=[dict(feature_id="point", source_feature_id=0)],
+                )
+                self.assertEqual(json.dumps(result[0]["geometry"]), json.dumps(geometry))
 
     def test_polygon_part_selection_preserves_original_rings_not_the_largest_part(self):
         small = [
