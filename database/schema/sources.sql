@@ -61,8 +61,12 @@ CREATE FUNCTION atlas.sync_construction_sources() RETURNS trigger
 LANGUAGE plpgsql AS $$
 DECLARE sources text[];
 BEGIN
- SELECT coalesce(array_agg(source_id), ARRAY[]::text[]) INTO sources
+ SELECT array_agg(source_id) INTO sources
  FROM atlas.construction_source_ids(NEW.method, NEW.arguments) AS refs(source_id);
+ IF sources IS NULL THEN
+  RAISE check_violation USING MESSAGE = 'construction must cite at least one raw source',
+   CONSTRAINT = 'construction_requires_source';
+ END IF;
  DELETE FROM atlas.construction_sources
  WHERE construction_id=NEW.id AND NOT source_id=ANY(sources);
  INSERT INTO atlas.construction_sources(construction_id,source_id)

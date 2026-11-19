@@ -81,6 +81,11 @@ class DownloadTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'size or hash'):
             download_source(self.storage, dict(self.source, size_bytes=1), self.directory)
 
+    def test_reject_download_filename_outside_cache_directory(self):
+        with self.assertRaisesRegex(ValueError, 'plain filename'):
+            download_source(self.storage, self.source, self.directory, filename='../terrain.tif')
+        self.storage.get_object.assert_not_called()
+
     def test_reject_corrupt_cache(self):
         path = download_source(self.storage, self.source, self.directory)
         path.write_bytes(b'corrupt')
@@ -88,26 +93,43 @@ class DownloadTest(unittest.TestCase):
             download_source(self.storage, self.source, self.directory)
         self.assertEqual(self.storage.get_object.call_count, 1)
 
-    def test_verifies_cache_file_published_by_a_competing_download(self):
+    def assert_competing_cache_write_is_verified(self, acquire, destination, expected):
+        """Publish fixtures just before the caller tries to link the same path."""
         link = catalog.os.link
-        self.storage.get_object.side_effect = lambda **_: {'Body': io.BytesIO(self.raw)}
-        for name, competing_bytes in (('valid', self.raw), ('corrupt', b'x' * len(self.raw))):
-            directory = self.directory / name
-            destination = directory / self.source['sha256'] / 'source.zip'
-
+        for valid, competing_bytes in ((True, expected), (False, b'x' * len(expected))):
             def competing_publish(partial, final):
-                final.write_bytes(competing_bytes)
+                if final == destination:
+                    final.write_bytes(competing_bytes)
                 link(partial, final)
 
-            with self.subTest(name=name), patch.object(catalog.os, 'link', side_effect=competing_publish):
-                if name == 'valid':
-                    self.assertEqual(download_source(self.storage, self.source, directory), destination)
+            with self.subTest(valid=valid), patch.object(catalog.os, 'link', side_effect=competing_publish):
+                if valid:
+                    self.assertEqual(acquire(), destination)
                 else:
                     with self.assertRaisesRegex(ValueError, 'size or hash'):
-                        download_source(self.storage, self.source, directory)
+                        acquire()
 
             self.assertEqual(destination.read_bytes(), competing_bytes)
-            self.assertFalse(list(directory.rglob('download-*')))
+            self.assertFalse(list(destination.parent.glob('download-*')))
+            self.assertFalse(list(destination.parent.glob('assembly-*')))
+            destination.unlink()
+
+    def test_verifies_cache_file_published_by_a_competing_download(self):
+        self.storage.get_object.side_effect = lambda **_: {'Body': io.BytesIO(self.raw)}
+        destination = self.directory / self.source['sha256'] / 'source.zip'
+        self.assert_competing_cache_write_is_verified(
+            lambda: download_source(self.storage, self.source, self.directory), destination, self.raw
+        )
+
+    def test_verifies_alternate_filename_published_by_a_competing_import(self):
+        cached = download_source(self.storage, self.source, self.directory)
+        destination = cached.with_name('provider.zip')
+        self.assert_competing_cache_write_is_verified(
+            lambda: download_source(self.storage, self.source, self.directory, filename=destination.name),
+            destination, self.raw,
+        )
+        self.assertEqual(cached.read_bytes(), self.raw)
+        self.assertEqual(self.storage.get_object.call_count, 1)
 
     def test_download_error_removes_partial(self):
         self.storage.get_object.side_effect = OSError('connection interrupted')
@@ -149,6 +171,23 @@ class DownloadTest(unittest.TestCase):
             path,
         )
         self.assertEqual(self.storage.get_object.call_count, 2)
+
+    def test_verifies_complete_file_published_by_a_competing_assembly(self):
+        parts, whole, digest = self.parts()
+        destination = self.directory / digest / 'provider.tif'
+        self.assert_competing_cache_write_is_verified(
+            lambda: assemble_parts(self.storage, parts, digest, len(whole), destination.name, self.directory),
+            destination, whole,
+        )
+        self.assertEqual(self.storage.get_object.call_count, 2)
+
+    def test_rejects_multipart_requests_with_no_parts_or_invalid_filename(self):
+        parts, whole, digest = self.parts()
+        for requested, filename in (([], 'provider.tif'), (parts, '../provider.tif')):
+            with (self.subTest(part_count=len(requested), filename=filename),
+                  self.assertRaisesRegex(ValueError, 'ordered source parts and a plain filename')):
+                assemble_parts(self.storage, requested, digest, len(whole), filename, self.directory)
+        self.storage.get_object.assert_not_called()
 
     def test_multipart_download_times_accumulate_without_charging_reassembly(self):
         parts, whole, digest = self.parts()

@@ -42,10 +42,8 @@ def acquire_sources(runtime, requests, *, evidence_source_ids=(), timing=None):
     ids = list(evidence_source_ids)
     for request in requests:
         ids.extend(request['parts'] if isinstance(request, dict) else [request])
-    sources = {}
-    if ids:
-        with runtime.connect() as database:
-            sources = catalog_sources(database, ids)
+    with runtime.connect() as database:
+        sources = catalog_sources(database, ids)
     if timing is not None:
         timing['catalog_seconds'] = time.monotonic() - started
 

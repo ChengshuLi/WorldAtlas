@@ -1,11 +1,14 @@
 """Test how the importer dispatches saved construction records."""
 
-from contextlib import nullcontext
+from contextlib import nullcontext, redirect_stderr
+import io
+import os
 from pathlib import Path
+import sys
 import unittest
 from unittest.mock import Mock, patch
 
-from worldatlas.source_imports.run_import import IMPORTERS, run_import
+from worldatlas.source_imports.run_import import IMPORTERS, main, run_import
 
 
 # The database contract tests also use these valid argument shapes.
@@ -34,7 +37,7 @@ ARGUMENTS = {
     "watershed_boundary": dict(
         feature_id="boundary",
         basis="Drainage divide",
-        sources={},
+        sources={"terrain": "raw"},
         lines={},
         sections=[],
         joins=[],
@@ -141,6 +144,18 @@ class ImportSelectionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "construction record is missing"):
             run_import(lambda: nullcontext(database), "absent", **self.options)
         self.storage.get_object.assert_not_called()
+
+    def test_command_reports_missing_database_setting(self):
+        errors = io.StringIO()
+        with (
+            patch.object(sys, "argv", ["worldatlas-import", "--recipe", "example"]),
+            patch.dict(os.environ, clear=True),
+            redirect_stderr(errors),
+            self.assertRaises(SystemExit) as failure,
+        ):
+            main()
+        self.assertEqual(failure.exception.code, 2)
+        self.assertIn("set NEON_DATABASE_URL", errors.getvalue())
 
     def test_missing_required_download_inputs_are_rejected(self):
         with patch(

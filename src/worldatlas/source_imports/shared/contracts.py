@@ -232,11 +232,10 @@ def database_checks():
         )
         paths = sorted({path for name, (kind, _) in fields.items()
                         for path in source_paths(kind, '$.' + json.dumps(name))})
-        if paths:
-            sources.append(
-                f"WHEN {quote(method)} THEN ARRAY["
-                + ",".join(quote("lax " + path) for path in paths) + "]::jsonpath[]"
-            )
+        sources.append(
+            f"WHEN {quote(method)} THEN ARRAY["
+            + ",".join(quote("lax " + path) for path in paths) + "]::jsonpath[]"
+        )
     return (
         "-- Generated from constructor signatures. Do not edit; see source_imports.shared.contracts.\n"
         "CREATE FUNCTION atlas.nonblank(value text) RETURNS boolean\n"

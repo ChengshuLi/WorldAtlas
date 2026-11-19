@@ -1,14 +1,12 @@
 """Test signature-derived contracts and their enforcement in PostgreSQL."""
 
-from contextlib import redirect_stderr
-import io
 import os
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 from typing import Any, TypedDict
 import unittest
-from unittest.mock import patch
 
 import psycopg
 from psycopg.types.json import Jsonb
@@ -16,7 +14,6 @@ from psycopg.types.json import Jsonb
 from worldatlas.source_imports.shared.contracts import (
     NonEmptyText,
     SourceId,
-    main,
     parameters,
     recipe_schema,
     source_paths,
@@ -38,6 +35,10 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(source_paths(dict[str, SourceId]), ["$.*"])
         self.assertEqual(source_paths(Any), [])
 
+    def test_source_ids_must_be_object_values(self):
+        with self.assertRaisesRegex(TypeError, 'source IDs must be values'):
+            source_paths(dict[SourceId, str])
+
     def test_signature_distinguishes_required_parameters_from_defaults(self):
         def example(runtime, *, title: NonEmptyText, enabled: bool = True):
             return title, enabled
@@ -58,19 +59,24 @@ class ContractTests(unittest.TestCase):
             with self.assertRaises(TypeError):
                 parameters(function)
 
+    def test_signature_requires_leading_runtime(self):
+        def example(*, title: str):
+            return title
+
+        with self.assertRaisesRegex(TypeError, 'must start with runtime'):
+            parameters(example)
+
     def test_contract_command_generates_and_checks_sql(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'construction_contracts.sql'
-            arguments = ['construction_contracts', str(path)]
-            with patch.object(sys, 'argv', arguments):
-                main()
+            command = [sys.executable, '-m', 'worldatlas.source_imports.shared.contracts', str(path)]
+            subprocess.run(command, check=True)
             self.assertIn('CREATE FUNCTION atlas.construction_source_ids', path.read_text())
-            with patch.object(sys, 'argv', [*arguments, '--check']):
-                main()
-                path.write_text('stale SQL\n')
-                with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as failure:
-                    main()
-            self.assertEqual(failure.exception.code, 1)
+            subprocess.run([*command, '--check'], check=True)
+            path.write_text('stale SQL\n')
+            failure = subprocess.run([*command, '--check'], capture_output=True, text=True)
+            self.assertEqual(failure.returncode, 1)
+            self.assertIn('Construction checks are stale', failure.stderr)
             self.assertEqual(path.read_text(), 'stale SQL\n')
 
 
@@ -114,6 +120,26 @@ class DatabaseContractTests(unittest.TestCase):
             ):
                 self.database.execute(insert, (method, Jsonb(arguments)))
             self.assertEqual(error.exception.diag.constraint_name, "construction_arguments_valid")
+
+    def test_requires_a_source_when_inserting_or_editing(self):
+        insert = ("INSERT INTO atlas.construction_records VALUES "
+                  "('__evidence_required','osm_way_chain',%s)")
+        update = ("UPDATE atlas.construction_records SET arguments=%s "
+                  "WHERE id='__evidence_required'")
+        arguments = ARGUMENTS["osm_way_chain"]
+        source_free = Jsonb(dict(arguments, way_source_ids=[], evidence_source_ids=[]))
+
+        with self.assertRaises(psycopg.errors.CheckViolation) as failure, self.database.transaction():
+            self.database.execute(insert, (source_free,))
+        self.assertEqual(failure.exception.diag.constraint_name, "construction_requires_source")
+
+        self.database.execute(insert, (Jsonb(arguments),))
+        with self.assertRaises(psycopg.errors.CheckViolation) as failure, self.database.transaction():
+            self.database.execute(update, (source_free,))
+        self.assertEqual(failure.exception.diag.constraint_name, "construction_requires_source")
+        self.assertEqual(self.database.execute(
+            "SELECT source_id FROM atlas.construction_sources WHERE construction_id='__evidence_required'"
+        ).fetchall(), [("raw",)])
 
     def test_nested_multipart_and_evidence_sources_are_linked_once(self):
         for ident in ("other", "evidence"):

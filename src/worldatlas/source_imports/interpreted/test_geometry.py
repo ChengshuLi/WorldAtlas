@@ -1,13 +1,17 @@
 """Test saving directly selected coordinates without downloading evidence."""
 
-from contextlib import nullcontext
+from contextlib import nullcontext, redirect_stdout
+import io
+import json
 import os
+import sys
 import unittest
+from unittest.mock import patch
 
 import psycopg
 from psycopg.types.json import Jsonb
 
-from worldatlas.source_imports.run_import import run_import
+from worldatlas.source_imports.run_import import main
 
 
 @unittest.skipUnless(
@@ -36,7 +40,17 @@ class InterpretedGeometryTests(unittest.TestCase):
                     "INSERT INTO atlas.construction_records VALUES ('recipe','interpreted_geometry',%s)",
                     (Jsonb(arguments),),
                 )
-                result = run_import(lambda: nullcontext(database), "recipe")
+                output = io.StringIO()
+                with (
+                    patch.object(sys, "argv", ["worldatlas-import", "--recipe", "recipe"]),
+                    patch.dict(os.environ, NEON_DATABASE_URL=os.environ["WORLDATLAS_TEST_DATABASE_URL"]),
+                    patch("psycopg.connect", return_value=nullcontext(database)),
+                    patch("boto3.client") as r2_client,
+                    redirect_stdout(output),
+                ):
+                    main()
+                r2_client.assert_not_called()
+                result = json.loads(output.getvalue())
                 self.assertEqual(result["feature_ids"], ["label"])
                 self.assertEqual(result["timing"]["download_seconds"], 0)
                 self.assertEqual(database.execute(
