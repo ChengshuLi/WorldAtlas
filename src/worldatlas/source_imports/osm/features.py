@@ -32,10 +32,11 @@ OBJECT_TYPES = {"node": "n", "way": "w", "relation": "r"}
 def read_features(path, selections):
     """Read the requested objects and return their GeoJSON features.
 
-    Osmium can emit both an original relation and a separate area assembled
-    from its members. The original relation supplies the tags to check. The
-    assembled area supplies the coordinates. Both match the same selection
-    by the original relation ID.
+    With ``with_areas()``, Osmium yields original OSM objects and emits a
+    separate Area object of type ``"a"`` when it assembles a polygon. For a
+    selected relation, the original object of type ``"r"`` supplies the tags
+    to check. The generated ``"a"`` object supplies the polygon coordinates.
+    Both match the same selection by the original relation ID.
 
     Nodes become Points. A selected closed way already has one complete ring,
     so its coordinates become a MultiPolygon directly. Polygon relations also
@@ -74,6 +75,7 @@ def read_features(path, selections):
     # relation tells us nothing about whether its members formed an area.
     seen, geometries = set(), {}
     for obj in processor:
+        # is_area() identifies the separate "a" objects emitted by Osmium.
         if obj.is_area():
             # Osmium can also emit a separate area for a closed way. The way
             # branch below works for any selected closed way, even one that
