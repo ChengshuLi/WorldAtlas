@@ -250,7 +250,7 @@ class DatabaseContractTests(unittest.TestCase):
 
     def test_optional_fields_nested_fields_and_numeric_values(self):
         cases = [
-            ("osm_way_chain", dict(start_node_id=1.5), False),
+            ("osm_way_chain", dict(start_node_id=1), False),
             ("osm_way_chain", dict(way_source_ids=[1]), False),
             ("osm_way_chain", dict(way_source_ids=[" \t"]), False),
             ("watershed_boundary", dict(sources={" ": "raw"}), False),

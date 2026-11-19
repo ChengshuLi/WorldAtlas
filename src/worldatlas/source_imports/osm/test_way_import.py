@@ -70,7 +70,6 @@ class DatabaseTests(unittest.TestCase):
         self.source = dict(source_id="osm-test-1")
         self.recipe = dict(
             way_source_ids=["osm-test-1"],
-            start_node_id=1,
             feature_id="border",
             recipe_id="__osm_recipe",
         )
@@ -148,7 +147,7 @@ class DatabaseTests(unittest.TestCase):
 
         def calculate(*args):
             self.database.execute(
-                "UPDATE atlas.construction_records SET arguments=arguments || '{\"start_node_id\":2}' "
+                "UPDATE atlas.construction_records SET arguments=arguments || '{\"way_source_ids\":[\"osm-test-2\"]}' "
                 "WHERE id='__osm_recipe'"
             )
             return assemble(*args)

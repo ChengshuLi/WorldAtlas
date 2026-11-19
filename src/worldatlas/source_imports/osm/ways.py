@@ -1,21 +1,21 @@
 """Assemble boundary geometry from individual OpenStreetMap way responses."""
 import json
 import math
-from collections import defaultdict
+from collections import Counter
 
-from shapely.geometry import LineString
+from shapely import line_merge
+from shapely.geometry import MultiLineString
 from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import save_features
 
 
-def assemble(paths, start_node_id):
-    """Traverse one open chain starting at the specified endpoint.
+def assemble(paths):
+    """Traverse one open chain from its lower-ID endpoint.
 
     Args:
         paths: Verified local archives containing one OSM way each.
-        start_node_id: The first node of the final line.
 
     Returns:
         GeoJSON LineString with the archived coordinates in chain order.
@@ -47,46 +47,37 @@ def assemble(paths, start_node_id):
                 nodes[e['id']] = point
     if not ways:
         raise ValueError('missing way inputs')
-    ends = defaultdict(list)
-    for way_id, refs in ways.items():
-        ends[refs[0]].append(way_id)
-        ends[refs[-1]].append(way_id)
-    terminals = [n for n, refs in ends.items() if len(refs) == 1]
-    if len(terminals) != 2 or any(len(refs) > 2 for refs in ends.values()):
+    ends = Counter(node for refs in ways.values() for node in (refs[0], refs[-1]))
+    terminals = [node for node, count in ends.items() if count == 1]
+    if len(terminals) != 2 or any(count > 2 for count in ends.values()):
         raise ValueError('ways do not form one unbranched chain')
-    start = start_node_id
-    if start not in terminals:
-        raise ValueError('start node is not a chain terminal')
-    current, remaining, chain = start, set(ways), []
-    while remaining:
-        candidates = [i for i in ends[current] if i in remaining]
-        if len(candidates) != 1:
-            raise ValueError('disconnected or ambiguous chain')
-        way_id = candidates[0]
-        remaining.remove(way_id)
-        refs = ways[way_id]
-        refs = refs if refs[0] == current else refs[::-1]
-        chain.extend(refs if not chain else refs[1:])
-        current = refs[-1]
-    if current == start or current not in terminals or any(n not in nodes for n in chain):
-        raise ValueError('invalid terminal or missing node')
-    if len(set(chain)) != len(chain):
-        raise ValueError('boundary revisits a node')
-    coords = [[float(v) for v in nodes[n]] for n in chain]
-    if any(a == b for a, b in zip(coords, coords[1:])):
-        raise ValueError('duplicate adjacent coordinates')
-    line = LineString(coords)
-    if line.is_closed:
-        raise ValueError('assembled boundary must be open')
+    parts = []
+    for refs in ways.values():
+        if any(node not in nodes for node in refs):
+            raise ValueError('missing node in selected OSM way')
+        coordinates = [nodes[node] for node in refs]
+        if any(a == b for a, b in zip(coordinates, coordinates[1:])):
+            raise ValueError('duplicate adjacent coordinates')
+        parts.append(coordinates)
+    # Shapely merges by coordinate. Require each endpoint coordinate to identify one OSM node.
+    if len({nodes[node] for node in ends}) != len(ends):
+        raise ValueError('distinct OSM endpoints share coordinates')
+    line = line_merge(MultiLineString(parts))
+    if line.geom_type != 'LineString':
+        raise ValueError('disconnected OSM ways')
     if not line.is_simple:
         raise ValueError('assembled boundary has a self-intersection')
+    coords = list(line.coords)
+    # Choose a stable coordinate order even if Shapely starts at the other endpoint.
+    if coords[0] != nodes[min(terminals)]:
+        coords.reverse()
     if any(abs(a[0] - b[0]) > 180 for a, b in zip(coords, coords[1:])):
         raise ValueError('antimeridian-crossing boundaries require a split source line')
-    return {'type': 'LineString', 'coordinates': coords}
+    return {'type': 'LineString', 'coordinates': [list(point) for point in coords]}
 
 
 def osm_way_chain(
-    runtime: Runtime, *, way_source_ids: list[SourceId], start_node_id: int,
+    runtime: Runtime, *, way_source_ids: list[SourceId],
     feature_id: NonEmptyText,
     evidence_source_ids: list[SourceId] | None = None,
 ):
@@ -95,7 +86,6 @@ def osm_way_chain(
     Args:
         runtime: Import resources and saved recipe snapshot.
         way_source_ids: Distinct catalog IDs of the archived ways.
-        start_node_id: Endpoint that starts the final chain.
         feature_id: Output feature ID in Neon.
         evidence_source_ids: Additional raw sources cited for provenance.
 
@@ -105,6 +95,6 @@ def osm_way_chain(
     if not way_source_ids or len(set(way_source_ids)) != len(way_source_ids):
         raise ValueError('way_source_ids must list distinct OSM way sources')
     paths = acquire_sources(runtime, way_source_ids, evidence_source_ids=evidence_source_ids or ())
-    geometry = assemble(paths, start_node_id)
+    geometry = assemble(paths)
     save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
     return dict(feature_id=feature_id, vertices=len(geometry['coordinates']))

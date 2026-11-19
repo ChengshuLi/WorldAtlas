@@ -5,7 +5,7 @@ VALUES ('raw','Test','Test','test:raw','Test','test:license','Test','test','raw'
        ('other','Test','Test','test:other','Test','test:license','Test','test','other',repeat('b',64),1);
 DO $$
 DECLARE
- input jsonb := '{"way_source_ids":["raw"],"start_node_id":1,"feature_id":"boundary"}';
+ input jsonb := '{"way_source_ids":["raw"],"feature_id":"boundary"}';
  invalid jsonb;
  explanation text;
 BEGIN
@@ -25,8 +25,8 @@ BEGIN
   VALUES ('__construction','osm_way_chain',input,'Join source segments');
   RAISE EXCEPTION 'duplicate construction ID accepted';
  EXCEPTION WHEN unique_violation THEN NULL; END;
- FOREACH invalid IN ARRAY ARRAY['[]'::jsonb,'{}'::jsonb,input-'feature_id',input-'start_node_id',
- input || '{"start_node_id":1.5}',input || '{"way_source_ids":[1]}',
+ FOREACH invalid IN ARRAY ARRAY['[]'::jsonb,'{}'::jsonb,input-'feature_id',input-'way_source_ids',
+ input || '{"way_source_ids":[1]}',
  input || '{"method":"osm_way_chain"}',input || '{"basis":"Duplicated explanation"}',input || '{"extra":true}'] LOOP
   BEGIN
    UPDATE atlas.construction_records SET arguments=invalid WHERE id='__construction';

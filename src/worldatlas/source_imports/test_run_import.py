@@ -28,7 +28,6 @@ ARGUMENTS = {
     ),
     "osm_way_chain": dict(
         way_source_ids=["raw"],
-        start_node_id=1,
         feature_id="boundary",
     ),
     "watershed_boundary": dict(

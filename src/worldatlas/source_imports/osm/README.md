@@ -12,17 +12,16 @@ Polygon imports preserve holes. Select a closed way or a relation tagged `type=m
 
 ## Boundary lines
 
-Use `osm_way_chain` to join individual archived `/api/0.6/way/{id}/full.json` responses. Each file contains one OSM way and its nodes and has its own record in `atlas.source_assets`. Store the explanation in the construction row's `basis` column and the selection and starting node in `arguments`.
+Use `osm_way_chain` to join individual archived `/api/0.6/way/{id}/full.json` responses. Each file contains one OSM way and its nodes and has its own record in `atlas.source_assets`. Store the explanation in the construction row's `basis` column and list the selected ways in `arguments`.
 
 ```json
 {
   "way_source_ids": ["first-archived-way", "second-archived-way"],
-  "start_node_id": 100,
   "feature_id": "boundary-id"
 }
 ```
 
-The order of `way_source_ids` has no effect. [`ways.py`](ways.py) starts at the supplied endpoint, follows shared node IDs, and reverses individual ways as needed. It preserves the coordinates and requires one open, continuous, unbranched line without self-intersections.
+The order of `way_source_ids` has no effect. [`ways.py`](ways.py) checks that joins identify the same OSM nodes, then uses Shapely to merge the ways into one open, continuous, unbranched line. The output starts at the endpoint with the lower OSM node ID. Self-intersections fail validation.
 
 The typed source list generates the database links to each way file. Checked local files are reused. The import result reports the saved feature ID and vertex count.
 
