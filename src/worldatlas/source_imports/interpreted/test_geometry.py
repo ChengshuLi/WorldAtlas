@@ -37,6 +37,7 @@ class InterpretedGeometryTests(unittest.TestCase):
                     (Jsonb(arguments),),
                 )
                 result = run_import(lambda: nullcontext(database), "recipe")
+                self.assertEqual(result["feature_ids"], ["label"])
                 self.assertEqual(result["timing"]["download_seconds"], 0)
                 self.assertEqual(database.execute(
                     "SELECT geometry, construction_id FROM atlas.source_features WHERE id='label'"

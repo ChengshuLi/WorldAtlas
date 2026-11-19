@@ -61,11 +61,11 @@ def geodesic_trace(runtime: Runtime, *, source_ids: list[SourceId],
         source_location: Optional location or calibration notes in the recipe.
 
     Returns:
-        Saved feature ID, vertex count, and geometry checksum.
+        Saved feature ID and vertex count.
     """
     if not source_ids or len(set(source_ids)) != len(source_ids):
         raise ValueError("trace sources must be nonempty and distinct")
     geometry = construct(points, max_step_metres)
     acquire_sources(runtime, [], evidence_source_ids=source_ids)
-    hashes = save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
-    return dict(feature_id=feature_id, vertices=len(geometry['coordinates']), sha256=hashes[feature_id])
+    save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
+    return dict(feature_id=feature_id, vertices=len(geometry['coordinates']))

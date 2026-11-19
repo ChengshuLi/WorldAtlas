@@ -282,12 +282,12 @@ def s130_areas(
         selections: Provider MRNs and their output IDs in Neon.
 
     Returns:
-        Saved geometry checksums, the local source path, and timings.
+        Saved feature IDs, the local source path, and timings.
     """
     started, timing = time.monotonic(), {}
     path, = acquire_sources(runtime, [source_id], timing=timing)
     features = read_areas(path, gml_member=gml_member, gml_sha256=gml_sha256,
                           selections=selections)
-    hashes = save_features(runtime, features)
-    return feature_result(hashes, time.monotonic() - started, source=path,
+    feature_ids = save_features(runtime, features)
+    return feature_result(feature_ids, time.monotonic() - started, source=path,
                           download_seconds=timing.get("download_seconds", 0.0))

@@ -12,14 +12,14 @@ from unittest.mock import Mock
 import psycopg
 from psycopg.types.json import Jsonb
 from worldatlas.source_imports.run_import import run_import
-from worldatlas.source_imports.shared.storage import _write_features, geometry_hash
+from worldatlas.source_imports.shared.storage import _write_features
 from worldatlas.source_assets.catalog import catalog_sources
 
 
 def save_boundary(database, geometry, source, recipe):
     with database.transaction():
         catalog_sources(database, [source["source_id"]])
-        return _write_features(
+        _write_features(
             database,
             [
                 dict(
@@ -111,8 +111,11 @@ class DatabaseTests(unittest.TestCase):
 
     def test_build_repeat_and_edit_recipe(self):
         first = self.build()
-        self.assertEqual(first["sha256"], geometry_hash(self.boundary()[0]))
+        self.assertEqual(first, {"feature_id": "border", "vertices": 2})
+        before = self.boundary()
+        self.assertEqual(before[0]["coordinates"], [[0.0, 0.0], [1.0, 1.0]])
         self.assertEqual(self.build(), first)
+        self.assertEqual(self.boundary(), before)
         self.assertEqual(self.storage.get_object.call_count, 1)
         self.recipe.update(way_source_ids=["osm-test-2"], basis="New source")
         self.store()

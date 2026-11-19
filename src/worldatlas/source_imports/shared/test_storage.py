@@ -12,7 +12,7 @@ from unittest.mock import Mock
 
 import psycopg
 from psycopg.types.json import Jsonb
-from worldatlas.source_imports.shared.storage import _write_features, geometry_bytes, geometry_hash
+from worldatlas.source_imports.shared.storage import _write_features
 from worldatlas.source_imports.run_import import run_import
 
 
@@ -79,7 +79,8 @@ class StorageTests(unittest.TestCase):
         ).fetchall()
 
     def test_repeat_and_recipe_edit_preserve_links_and_other_records(self):
-        first = self.build()
+        self.assertEqual(self.build()["feature_ids"], ["point-a"])
+        before = self.rows()
         self.database.execute(
             "INSERT INTO atlas.geographic_levels VALUES ('world',NULL)"
         )
@@ -95,9 +96,7 @@ class StorageTests(unittest.TestCase):
         self.recipe.update(basis="Updated explanation", member=None, layer=None)
         self.store()
         self.build()
-        after = self.rows()[0]
-        self.assertEqual(after[2], "__features")
-        self.assertEqual(self.build()["geometry_sha256"], first["geometry_sha256"])
+        self.assertEqual(self.rows(), before)
         self.assertEqual(self.storage.get_object.call_count, 1)
         self.assertEqual(
             self.database.execute(
@@ -127,7 +126,7 @@ class StorageTests(unittest.TestCase):
             _write_features(self.database, features, construction_id="missing")
         self.assertEqual(self.rows(), before)
 
-    def test_signed_zero_preserves_longitude_latitude_coordinates(self):
+    def test_save_preserves_small_coordinates(self):
         geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
         _write_features(
             self.database,
@@ -141,7 +140,7 @@ class StorageTests(unittest.TestCase):
             ],
             construction_id="__features",
         )
-        self.assertEqual(json.dumps(self.rows()[0][1]["coordinates"]), "[0.0, 1e-24]")
+        self.assertEqual(self.rows()[0][1], geometry)
 
     def test_conflicting_feature_owner_rolls_back_an_earlier_insert(self):
         self.build()
@@ -158,32 +157,3 @@ class StorageTests(unittest.TestCase):
             run_import(lambda: nullcontext(self.database), "__other", storage=self.storage,
                        work_dir=self.work)
         self.assertEqual(self.rows(), before)
-
-
-class GeometryChecksumTests(unittest.TestCase):
-    def test_nested_signed_zero_uses_storage_form_without_mutating_or_rounding(self):
-        point = [-0.0, 1e-24]
-        for kind, coordinates in (
-            ("Point", point),
-            ("MultiPoint", [point]),
-            ("LineString", [point, [1, 2]]),
-            ("MultiLineString", [[point, [1, 2]]]),
-            ("Polygon", [[point, [1, 0], [1, 2], point]]),
-            ("MultiPolygon", [[[point, [1, 0], [1, 2], point]]]),
-        ):
-            with self.subTest(kind=kind):
-                geometry = dict(type=kind, coordinates=coordinates)
-                original = json.dumps(geometry)
-                expected = json.loads(original.replace("-0.0", "0.0"))
-                expected_bytes = json.dumps(
-                    expected, sort_keys=True, separators=(",", ":")
-                ).encode()
-                self.assertEqual(geometry_bytes(geometry), expected_bytes)
-                self.assertEqual(
-                    geometry_hash(geometry), hashlib.sha256(expected_bytes).hexdigest()
-                )
-                self.assertEqual(json.dumps(geometry), original)
-        self.assertNotEqual(
-            geometry_hash(dict(type="Point", coordinates=[0, 1])),
-            geometry_hash(dict(type="Point", coordinates=[0.0, 1])),
-        )

@@ -1,8 +1,6 @@
 """Editable trace recipes update working geometry without changing earlier snapshots."""
 
 from contextlib import nullcontext
-import hashlib
-import json
 import os
 import unittest
 import psycopg
@@ -51,6 +49,7 @@ class DatabaseTests(unittest.TestCase):
         first = self.build()
         before = self.row()
         self.assertEqual(self.build(), first)
+        self.assertEqual(self.row(), before)
         self.db.execute(
             "INSERT INTO atlas.geographic_levels VALUES ('world',NULL),('continent','world')"
         )
@@ -96,17 +95,10 @@ class DatabaseTests(unittest.TestCase):
             self.build()
         self.assertEqual(self.row(), before)
 
-    def test_signed_zero_hash_matches_stored_json(self):
-        self.recipe["points"] = [[10.0, -0.0], [9.0, -1.0]]
-        self.store()
-        result = self.build()
-        raw = json.dumps(
-            self.row()[0], sort_keys=True, separators=(",", ":"), allow_nan=False
-        ).encode()
-        self.assertEqual(hashlib.sha256(raw).hexdigest(), result["sha256"])
-
     def test_description_does_not_change_geometry(self):
-        first = self.build()
+        self.build()
+        before = self.row()
         self.recipe["source_location"] = "Figure caption"
         self.store()
-        self.assertEqual(self.build(), first)
+        self.build()
+        self.assertEqual(self.row(), before)

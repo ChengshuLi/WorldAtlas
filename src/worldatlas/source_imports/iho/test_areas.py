@@ -112,7 +112,7 @@ class ImportTests(unittest.TestCase):
                     geometry, = database.execute(stored).fetchone()
                     self.assertEqual(shape(geometry).area, 4)
                     result = json.loads(output.getvalue())
-                    self.assertEqual(list(result["geometry_sha256"]), ["test-sea"])
+                    self.assertEqual(result["feature_ids"], ["test-sea"])
                     self.assertEqual(database.execute(
                         "SELECT source_id FROM atlas.construction_sources WHERE construction_id='iho-recipe'"
                     ).fetchall(), [("iho-test",)])

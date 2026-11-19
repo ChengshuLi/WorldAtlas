@@ -284,12 +284,12 @@ def selected_vector_features(
         coordinate_operation: Optional explicit CRS transformation.
 
     Returns:
-        Saved geometry checksums, the local source path, and timings.
+        Saved feature IDs, the local source path, and timings.
     """
     started, timing = time.monotonic(), {}
     path, = acquire_sources(runtime, [source_id], timing=timing)
     features = read_features(path, id_field=id_field, selections=selections, member=member,
                              layer=layer, coordinate_operation=coordinate_operation)
-    hashes = save_features(runtime, features)
-    return feature_result(hashes, time.monotonic() - started, source=path,
+    feature_ids = save_features(runtime, features)
+    return feature_result(feature_ids, time.monotonic() - started, source=path,
                           download_seconds=timing.get("download_seconds", 0.0))

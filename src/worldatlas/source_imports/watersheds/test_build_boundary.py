@@ -307,12 +307,14 @@ class StorageTests(unittest.TestCase):
         ).fetchone()
 
     def test_repeat_and_edit_recipe_preserve_geometry_and_sources(self):
-        result = self.build()
-        self.assertEqual(self.build()["sha256"], result["sha256"])
+        self.build()
+        before = self.row()
+        self.build()
+        self.assertEqual(self.row(), before)
         self.recipe.update(basis="Updated explanation", evidence_sources=None)
         self.store()
         self.build()
-        self.assertEqual(self.row()[1], "watershed")
+        self.assertEqual(self.row(), before)
         links = {
             r[0]
             for r in self.db.execute(

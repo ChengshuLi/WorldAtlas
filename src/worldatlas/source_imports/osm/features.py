@@ -427,10 +427,10 @@ def selected_osm_features(
         selections: Provider objects and their output IDs and options.
 
     Returns:
-        Saved geometry checksums, the local source path, and timings.
+        Saved feature IDs, the local source path, and timings.
     """
     started, timing = time.monotonic(), {}
     path, = acquire_sources(runtime, [source_id], timing=timing)
-    hashes = save_features(runtime, read_features(path, selections))
-    return feature_result(hashes, time.monotonic() - started, source=path,
+    feature_ids = save_features(runtime, read_features(path, selections))
+    return feature_result(feature_ids, time.monotonic() - started, source=path,
                           download_seconds=timing.get("download_seconds", 0.0))

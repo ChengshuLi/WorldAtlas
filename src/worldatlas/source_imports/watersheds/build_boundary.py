@@ -285,7 +285,7 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: Non
         geographic_choices: Optional geographic rationale retained in the recipe.
 
     Returns:
-        Saved boundary identity, geometry checksum, and construction report.
+        Saved boundary identity, vertex count, and construction report.
     """
     acquisition = {}
     paths = acquire_sources(runtime, list(sources.values()), evidence_source_ids=evidence_sources or (),
@@ -295,10 +295,9 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: Non
                                  joins=joins, start=start, end=end, terrains=terrains)
     versions = runtime_versions()
     started = time.monotonic()
-    hashes = save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
-    digest = hashes[feature_id]
+    save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
     staging_seconds = acquisition['source_staging_seconds']
-    report.update(feature_id=feature_id, sha256=digest,
+    report.update(feature_id=feature_id,
                   vertices=len(geometry['coordinates']), catalog_seconds=acquisition['catalog_seconds'],
                   source_staging_seconds=staging_seconds,
                   download_seconds=acquisition.get('download_seconds', 0.),

@@ -46,11 +46,11 @@ def interpreted_geometry(
         selections: Output IDs and their explicit WGS84 geometry.
 
     Returns:
-        Saved geometry checksums and timings.
+        Saved feature IDs and timings.
     """
     if not source_ids or len(set(source_ids)) != len(source_ids) or not selections:
         raise ValueError("interpreted geometry needs distinct sources and selections")
     started = time.monotonic()
     acquire_sources(runtime, [], evidence_source_ids=source_ids)
-    hashes = save_features(runtime, selections)
-    return feature_result(hashes, time.monotonic() - started)
+    feature_ids = save_features(runtime, selections)
+    return feature_result(feature_ids, time.monotonic() - started)

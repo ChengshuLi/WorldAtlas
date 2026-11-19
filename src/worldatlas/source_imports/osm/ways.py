@@ -7,7 +7,7 @@ from shapely.geometry import LineString
 from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
-from worldatlas.source_imports.shared.storage import save_features, storage_geometry
+from worldatlas.source_imports.shared.storage import save_features
 
 
 def assemble(paths, start_node_id):
@@ -82,7 +82,7 @@ def assemble(paths, start_node_id):
         raise ValueError('assembled boundary has a self-intersection')
     if any(abs(a[0] - b[0]) > 180 for a, b in zip(coords, coords[1:])):
         raise ValueError('antimeridian-crossing boundaries require a split source line')
-    return storage_geometry({'type': 'LineString', 'coordinates': coords})
+    return {'type': 'LineString', 'coordinates': coords}
 
 
 def osm_way_chain(
@@ -101,11 +101,11 @@ def osm_way_chain(
         evidence_source_ids: Additional raw sources cited for provenance.
 
     Returns:
-        Saved feature ID, vertex count, and geometry checksum.
+        Saved feature ID and vertex count.
     """
     if not way_source_ids or len(set(way_source_ids)) != len(way_source_ids):
         raise ValueError('way_source_ids must list distinct OSM way sources')
     paths = acquire_sources(runtime, way_source_ids, evidence_source_ids=evidence_source_ids or ())
     geometry = assemble(paths, start_node_id)
-    hashes = save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
-    return dict(feature_id=feature_id, vertices=len(geometry['coordinates']), sha256=hashes[feature_id])
+    save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
+    return dict(feature_id=feature_id, vertices=len(geometry['coordinates']))
