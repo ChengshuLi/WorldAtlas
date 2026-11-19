@@ -30,54 +30,6 @@ LINKS_TO_AREA_PIECES = "s130:theCollection"
 RING_COORDINATES = "gml:LinearRing/gml:posList"
 
 
-def s130_areas(
-    runtime: Runtime,
-    *,
-    source_id: SourceId,
-    gml_member: NonEmptyText,
-    selections: list[FeatureIdentity],
-):
-    """Import complete S-130 sea areas with linked surfaces and holes.
-
-    Args:
-        runtime: Import resources and saved recipe snapshot.
-        source_id: Catalog ID of the S-130 archive.
-        gml_member: Exact GML member name inside the archive.
-        selections: Provider MRNs and their output IDs in Neon.
-
-    Returns:
-        Saved feature IDs, the local source path, and timings.
-    """
-    started, timing = time.monotonic(), {}
-    path, = acquire_sources(runtime, [source_id], timing=timing)
-    features = read_areas(path, gml_member=gml_member, selections=selections)
-    feature_ids = save_features(runtime, features)
-    return feature_result(feature_ids, time.monotonic() - started, source=path,
-                          download_seconds=timing.get("download_seconds", 0.0))
-
-
-def read_areas(path, *, gml_member, selections):
-    """Read complete S-130 areas from a verified archive.
-
-    Args:
-        path: Local path of the verified S-130 archive.
-        gml_member: Exact GML member name inside the archive.
-        selections: Provider MRNs paired with output feature IDs.
-
-    Returns:
-        Features containing the selected areas and their output IDs.
-    """
-    document = read_document(path, gml_member)
-    reader = SeaAreas(document)
-    return [
-        {
-            "feature_id": selection["feature_id"],
-            "geometry": reader.geometry(selection["source_feature_id"]),
-        }
-        for selection in selections
-    ]
-
-
 def read_document(path, member):
     """Parse the selected GML file from a verified archive.
 
@@ -97,6 +49,124 @@ def read_document(path, member):
             raise ValueError(f"expected exactly one IHO GML member named {member!r}")
         with archive.open(member) as source:
             return ElementTree.parse(source).getroot()
+
+
+def polygon_parts(geometry):
+    """Collect the polygon pieces of a geometry after longitude clipping.
+
+    Args:
+        geometry: Shapely result that may include lines where a polygon
+            only touches a clipping edge.
+
+    Returns:
+        A list of nonempty polygons.
+    """
+    if geometry.is_empty:
+        return []
+    if geometry.geom_type == "Polygon":
+        return [geometry]
+    if hasattr(geometry, "geoms"):
+        return [part for child in geometry.geoms for part in polygon_parts(child)]
+    return []
+
+
+def read_ring_coordinates(position):
+    """Read an outline or hole and keep its longitudes continuous.
+
+    Args:
+        position: GML coordinate list in WGS84, with latitude first.
+
+    Returns:
+        Longitude and latitude pairs in boundary order. Longitudes may extend
+        past 180 degrees so a short crossing stays short when building a polygon.
+
+    Raises:
+        ValueError: The coordinates are malformed, invalid, or open.
+    """
+    if position is None or position.get("srsName") != EPSG_4326:
+        raise ValueError("expected S-130 latitude/longitude in EPSG:4326")
+    values = list(map(float, (position.text or "").split()))
+    if len(values) < 8 or len(values) % 2:
+        raise ValueError("invalid S-130 ring coordinates")
+    # GML lists latitude first. Shapely uses longitude as its x coordinate.
+    points = [(values[i + 1], values[i]) for i in range(0, len(values), 2)]
+    if points[0] != points[-1] or any(
+        not (-180 <= longitude <= 180 and -90 <= latitude <= 90)
+        for longitude, latitude in points
+    ):
+        raise ValueError("invalid or open S-130 ring")
+    unwrapped = [points[0]]
+    for longitude, latitude in points[1:]:
+        previous_longitude, previous_latitude = unwrapped[-1]
+        # A polar outline can use both map edges to close across the pole.
+        # Leave those edges in place even though all longitudes meet at the pole.
+        if abs(latitude) != 90 and abs(previous_latitude) != 90:
+            while longitude - previous_longitude > 180:
+                longitude -= 360
+            while longitude - previous_longitude < -180:
+                longitude += 360
+        unwrapped.append((longitude, latitude))
+    # Shapely would close an open ring by adding a straight edge. For a ring
+    # that winds around a pole, that edge would cross the whole longitude grid.
+    if unwrapped[0] != unwrapped[-1]:
+        raise ValueError("S-130 ring does not close after unwrapping; check the pole edge")
+    return unwrapped
+
+
+def read_polygon_patch(patch):
+    """Read one source polygon with its holes and split it at the dateline.
+
+    Args:
+        patch: GML element containing an outer ring and any holes.
+
+    Returns:
+        A Shapely polygon or multipolygon within the WGS84 longitude range.
+
+    Raises:
+        ValueError: An outline or hole is malformed, or the polygon is invalid.
+    """
+    exterior = read_ring_coordinates(patch.find(f"gml:exterior/{RING_COORDINATES}", NS))
+    outer_mean_longitude = sum(longitude for longitude, _ in exterior) / len(exterior)
+    holes = []
+    for interior in patch.findall("gml:interior", NS):
+        hole = read_ring_coordinates(interior.find(RING_COORDINATES, NS))
+        hole_mean_longitude = sum(longitude for longitude, _ in hole) / len(hole)
+        # The outline and hole were unwrapped independently. Bring them into
+        # the same longitude range before building the polygon.
+        shift = 360 * round((outer_mean_longitude - hole_mean_longitude) / 360)
+        holes.append([(x + shift, y) for x, y in hole])
+    polygon = Polygon(exterior, holes)
+    if polygon.is_empty or not polygon.is_valid:
+        raise ValueError("S-130 source surface is empty or invalid")
+    west, _, east, _ = polygon.bounds
+    if west >= -180 and east <= 180:
+        return polygon
+
+    # Clip every shifted copy that intersects the standard longitude range.
+    world = box(-180, -90, 180, 90)
+    first_turn = math.ceil((-180 - east) / 360)
+    last_turn = math.floor((180 - west) / 360)
+    pieces = []
+    for turn in range(first_turn, last_turn + 1):
+        shifted = translate(polygon, xoff=360 * turn)
+        pieces.extend(polygon_parts(shifted.intersection(world)))
+    return union_all(pieces)
+
+
+def _linked_record_ids(record, link_tag):
+    """Read the target XML IDs for links of one kind.
+
+    Args:
+        record: XML record containing the links.
+        link_tag: Tag that points to the containing record or its pieces.
+
+    Returns:
+        Target IDs in source order. A link such as "#M.0120" becomes "M.0120".
+    """
+    return [
+        link.get(XLINK_HREF, "").removeprefix("#")
+        for link in record.findall(link_tag, NS)
+    ]
 
 
 class SeaAreas:
@@ -197,119 +267,49 @@ class SeaAreas:
         return polygons
 
 
-def _linked_record_ids(record, link_tag):
-    """Read the target XML IDs for links of one kind.
+def read_areas(path, *, gml_member, selections):
+    """Read complete S-130 areas from a verified archive.
 
     Args:
-        record: XML record containing the links.
-        link_tag: Tag that points to the containing record or its pieces.
+        path: Local path of the verified S-130 archive.
+        gml_member: Exact GML member name inside the archive.
+        selections: Provider MRNs paired with output feature IDs.
 
     Returns:
-        Target IDs in source order. A link such as "#M.0120" becomes "M.0120".
+        Features containing the selected areas and their output IDs.
     """
+    document = read_document(path, gml_member)
+    reader = SeaAreas(document)
     return [
-        link.get(XLINK_HREF, "").removeprefix("#")
-        for link in record.findall(link_tag, NS)
+        {
+            "feature_id": selection["feature_id"],
+            "geometry": reader.geometry(selection["source_feature_id"]),
+        }
+        for selection in selections
     ]
 
 
-def read_polygon_patch(patch):
-    """Read one source polygon with its holes and split it at the dateline.
+def s130_areas(
+    runtime: Runtime,
+    *,
+    source_id: SourceId,
+    gml_member: NonEmptyText,
+    selections: list[FeatureIdentity],
+):
+    """Import complete S-130 sea areas with linked surfaces and holes.
 
     Args:
-        patch: GML element containing an outer ring and any holes.
+        runtime: Import resources and saved recipe snapshot.
+        source_id: Catalog ID of the S-130 archive.
+        gml_member: Exact GML member name inside the archive.
+        selections: Provider MRNs and their output IDs in Neon.
 
     Returns:
-        A Shapely polygon or multipolygon within the WGS84 longitude range.
-
-    Raises:
-        ValueError: An outline or hole is malformed, or the polygon is invalid.
+        Saved feature IDs, the local source path, and timings.
     """
-    exterior = read_ring_coordinates(patch.find(f"gml:exterior/{RING_COORDINATES}", NS))
-    outer_mean_longitude = sum(longitude for longitude, _ in exterior) / len(exterior)
-    holes = []
-    for interior in patch.findall("gml:interior", NS):
-        hole = read_ring_coordinates(interior.find(RING_COORDINATES, NS))
-        hole_mean_longitude = sum(longitude for longitude, _ in hole) / len(hole)
-        # The outline and hole were unwrapped independently. Bring them into
-        # the same longitude range before building the polygon.
-        shift = 360 * round((outer_mean_longitude - hole_mean_longitude) / 360)
-        holes.append([(x + shift, y) for x, y in hole])
-    polygon = Polygon(exterior, holes)
-    if polygon.is_empty or not polygon.is_valid:
-        raise ValueError("S-130 source surface is empty or invalid")
-    west, _, east, _ = polygon.bounds
-    if west >= -180 and east <= 180:
-        return polygon
-
-    # Clip every shifted copy that intersects the standard longitude range.
-    world = box(-180, -90, 180, 90)
-    first_turn = math.ceil((-180 - east) / 360)
-    last_turn = math.floor((180 - west) / 360)
-    pieces = []
-    for turn in range(first_turn, last_turn + 1):
-        shifted = translate(polygon, xoff=360 * turn)
-        pieces.extend(polygon_parts(shifted.intersection(world)))
-    return union_all(pieces)
-
-
-def read_ring_coordinates(position):
-    """Read an outline or hole and keep its longitudes continuous.
-
-    Args:
-        position: GML coordinate list in WGS84, with latitude first.
-
-    Returns:
-        Longitude and latitude pairs in boundary order. Longitudes may extend
-        past 180 degrees so a short crossing stays short when building a polygon.
-
-    Raises:
-        ValueError: The coordinates are malformed, invalid, or open.
-    """
-    if position is None or position.get("srsName") != EPSG_4326:
-        raise ValueError("expected S-130 latitude/longitude in EPSG:4326")
-    values = list(map(float, (position.text or "").split()))
-    if len(values) < 8 or len(values) % 2:
-        raise ValueError("invalid S-130 ring coordinates")
-    # GML lists latitude first. Shapely uses longitude as its x coordinate.
-    points = [(values[i + 1], values[i]) for i in range(0, len(values), 2)]
-    if points[0] != points[-1] or any(
-        not (-180 <= longitude <= 180 and -90 <= latitude <= 90)
-        for longitude, latitude in points
-    ):
-        raise ValueError("invalid or open S-130 ring")
-    unwrapped = [points[0]]
-    for longitude, latitude in points[1:]:
-        previous_longitude, previous_latitude = unwrapped[-1]
-        # A polar outline can use both map edges to close across the pole.
-        # Leave those edges in place even though all longitudes meet at the pole.
-        if abs(latitude) != 90 and abs(previous_latitude) != 90:
-            while longitude - previous_longitude > 180:
-                longitude -= 360
-            while longitude - previous_longitude < -180:
-                longitude += 360
-        unwrapped.append((longitude, latitude))
-    # Shapely would close an open ring by adding a straight edge. For a ring
-    # that winds around a pole, that edge would cross the whole longitude grid.
-    if unwrapped[0] != unwrapped[-1]:
-        raise ValueError("S-130 ring does not close after unwrapping; check the pole edge")
-    return unwrapped
-
-
-def polygon_parts(geometry):
-    """Collect the polygon pieces of a geometry after longitude clipping.
-
-    Args:
-        geometry: Shapely result that may include lines where a polygon
-            only touches a clipping edge.
-
-    Returns:
-        A list of nonempty polygons.
-    """
-    if geometry.is_empty:
-        return []
-    if geometry.geom_type == "Polygon":
-        return [geometry]
-    if hasattr(geometry, "geoms"):
-        return [part for child in geometry.geoms for part in polygon_parts(child)]
-    return []
+    started, timing = time.monotonic(), {}
+    path, = acquire_sources(runtime, [source_id], timing=timing)
+    features = read_areas(path, gml_member=gml_member, selections=selections)
+    feature_ids = save_features(runtime, features)
+    return feature_result(feature_ids, time.monotonic() - started, source=path,
+                          download_seconds=timing.get("download_seconds", 0.0))
