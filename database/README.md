@@ -9,7 +9,7 @@ Neon stores editable geography and construction settings, raw-file identities, a
 | File | Tables and responsibilities |
 | --- | --- |
 | [`sources.sql`](schema/sources.sql) | `source_assets`: one immutable raw-file capture; `construction_records`: typed editable import settings; `construction_sources`: generated raw-source links. |
-| [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated validation and source-reference extraction from Python signatures. |
+| [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated JSON Schemas for `pg_jsonschema` and source-reference paths from Python signatures. |
 | [`source_features.sql`](schema/source_features.sql) | Imported geometry and its producing construction. |
 | [`geographic_entities.sql`](schema/geographic_entities.sql) | Hierarchy levels, geographic entities, and entity/physical-class map codes. |
 | [`geographic_rules.sql`](schema/geographic_rules.sql) | Parent-division rules and their feature, child-target and supporting-source links. |
@@ -47,4 +47,4 @@ For an existing database, back up its data, rehearse the transition locally, the
 python .github/scripts/run_tests.py --suite database
 ```
 
-The runner creates disposable PostgreSQL databases. SQL checks cover raw immutability, generated construction contracts, geometry, hierarchy, geographic rule relationships and release-state constraints. Python integration tests cover atomic imports, consistent snapshots, concurrent edits, run reuse and release file verification. Tests never use the working Neon database.
+Run with Docker available. The runner starts a disposable PostgreSQL 18 container with `pg_jsonschema` and gives each database-using suite its own database. SQL checks cover raw immutability, generated construction contracts, geometry, hierarchy, geographic rule relationships and release-state constraints. Python integration tests cover atomic imports, consistent snapshots, concurrent edits, run reuse and release file verification. Use `--without-database` to run the Python tests that work without PostgreSQL.

@@ -46,7 +46,7 @@ Every construction cites cataloged raw sources. Figure traces and explicitly sto
 
 Each constructor's typed keyword-only parameters define the keys in `arguments`. A parameter without a default is required. A default makes it optional. `NonEmptyText` rejects empty or whitespace-only text. Nested `TypedDict` definitions describe feature selections. The command supplies `runtime` separately with connections, work paths and the construction ID.
 
-[`contracts.py`](contracts.py) generates PostgreSQL checks from those signatures. Neon rejects unknown methods and fields, missing required fields, and incorrect types when a recipe is saved. Constructors check source identities, coordinates, joins, and the relationships between geographic choices when the recipe runs.
+[`contracts.py`](contracts.py) uses Pydantic to turn the signatures into JSON Schema and generates the SQL that calls `pg_jsonschema`. Neon rejects unknown methods and fields, missing required fields, and incorrect types when a recipe is saved. Constructors check source identities, coordinates, joins, and the relationships between geographic choices when the recipe runs.
 
 After changing signatures or nested types, regenerate the initial-schema checks:
 

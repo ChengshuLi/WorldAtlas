@@ -12,9 +12,8 @@ from worldatlas.source_imports.contracts import (
     NonEmptyText,
     SourceId,
     parameters,
+    recipe_schema,
     source_paths,
-    sql_object,
-    sql_type,
 )
 from worldatlas.source_imports.run_import import IMPORTERS
 from worldatlas.source_imports.test_run_import import ARGUMENTS
@@ -50,8 +49,6 @@ class ContractTests(unittest.TestCase):
         for function in (untyped, variadic):
             with self.assertRaises(TypeError):
                 parameters(function)
-        with self.assertRaises(TypeError):
-            sql_type("value", set[str])
 
 
 @unittest.skipUnless(
@@ -179,8 +176,7 @@ class DatabaseContractTests(unittest.TestCase):
         self.check("unknown", ARGUMENTS["osm_way_chain"], False)
 
     def test_required_freeform_json_cannot_be_omitted(self):
-        fields = {"value": (Any, True)}
-        expression = sql_object("input.document", fields)
+        schema = recipe_schema("example", {"value": (Any, True)})
         for document, expected in [
             ({}, False),
             ({"value": None}, True),
@@ -188,10 +184,8 @@ class DatabaseContractTests(unittest.TestCase):
         ]:
             with self.subTest(document=document):
                 (actual,) = self.database.execute(
-                    "SELECT "
-                    + expression
-                    + " FROM (SELECT %s::jsonb AS document) input",
-                    (Jsonb(document),),
+                    "SELECT public.jsonb_matches_schema(%s::json, %s::jsonb)",
+                    (Jsonb(schema), Jsonb(document)),
                 ).fetchone()
                 self.assertIs(actual, expected)
 
@@ -199,6 +193,9 @@ class DatabaseContractTests(unittest.TestCase):
         cases = [
             ("osm_way_chain", dict(start_node_id=1.5), False),
             ("osm_way_chain", dict(way_source_ids=[1]), False),
+            ("osm_way_chain", dict(way_source_ids=[" \t"]), False),
+            ("watershed_boundary", dict(sources={" ": "raw"}), False),
+            ("watershed_boundary", dict(sources={"valid": None}), False),
             (
                 "selected_vector_features",
                 dict(member="source.shp", layer="points"),

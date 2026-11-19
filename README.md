@@ -22,7 +22,7 @@ micromamba run -n worldatlas bash
 
 Run the commands below from the repository root in that shell. For exact physical-grid reproduction, complete the [GDAL setup](src/worldatlas/map_build/README.md#exact-physical-rasterization).
 
-Geographic and numerical libraries use tested exact versions because upgrades can change map coordinates or cells. Python accepts patch updates within 3.13; the database tests support PostgreSQL 17 and 18. Storage/database clients and review-image tools accept compatible updates. Boto3 selects its own matching Botocore dependency. Each build records the actual runtime versions. CMake is needed only when compiling GDAL and stays outside the runtime environment.
+Geographic and numerical libraries use tested exact versions because upgrades can change map coordinates or cells. Python accepts patch updates within 3.13. Pydantic uses a fixed version so it generates the same JSON Schema in each environment. Storage/database clients and review-image tools accept compatible updates. Boto3 selects its own matching Botocore dependency. Each build records the actual runtime versions. CMake is needed only when compiling GDAL and stays outside the runtime environment.
 
 Set `NEON_DATABASE_URL` to the direct connection URL for the working `worldatlas` database. Use the working branch's connection details from your Neon project. See the [database guide](database/README.md) for its schema. For R2, reuse the `worldatlas-r2` profile in `~/.aws/credentials`, or set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. With the profile:
 
@@ -74,7 +74,7 @@ Publishing serves that bundle at the homepage and retires superseded candidates 
 
 The [initial schema](database/schema.sql) defines stable entity IDs and colors, editable names and parent relationships, and the bindings from map category codes to entities. Each build freezes the working records before computation.
 
-Apply the [initial schema](database/schema.sql) only to an empty database. The working database is already initialized. The [database guide](database/README.md) covers existing-database upgrades and loading data separately from the schema. Run the [database tests](database/tests) with `python .github/scripts/run_tests.py --suite database`. Have PostgreSQL's `initdb`, `pg_ctl`, and `psql` on your path. The runner starts a temporary local database, installs the schema, and runs the database checks.
+Apply the [initial schema](database/schema.sql) only to an empty PostgreSQL database with `pg_jsonschema` available. The working database is already initialized. The [database guide](database/README.md) covers existing-database upgrades and testing. With Docker available, run the [database tests](database/tests) with `python .github/scripts/run_tests.py --suite database`.
 
 ## Viewer tools and tests
 
@@ -94,4 +94,4 @@ The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 - Python source-import, map-building, release and SQL database suites concurrently on macOS and Linux.
 - Node and Chromium browser tests on Linux.
 
-CI tests a regular installation, including its SQL and configuration resources. Each database-using suite has its own disposable database on one temporary server per OS job. The website job runs alongside the Python jobs. CI caches installed environments, uses local fixtures, and needs no cloud credentials. The website job uses Chrome already installed on GitHub's runner. Its Node and browser suites also run concurrently. New pushes cancel superseded runs. Documentation-only updates also run the checks. Full-size map builds and geographic review remain separate.
+CI tests a regular installation, including its SQL and configuration resources. Linux runs all Python and database suites against an isolated PostgreSQL container. macOS runs the Python tests that work without a database. The website job runs alongside the Python jobs. CI caches installed environments, uses local fixtures, and needs no cloud credentials. The website job uses Chrome already installed on GitHub's runner. Its Node and browser suites also run concurrently. New pushes cancel superseded runs. Documentation-only updates also run the checks. Full-size map builds and geographic review remain separate.

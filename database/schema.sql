@@ -2,6 +2,7 @@
 \set ON_ERROR_STOP on
 BEGIN;
 CREATE SCHEMA atlas;
+CREATE EXTENSION pg_jsonschema WITH SCHEMA public;
 
 CREATE FUNCTION atlas.nonblank(value text) RETURNS boolean
 LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE AS $$

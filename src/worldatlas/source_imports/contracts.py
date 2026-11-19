@@ -10,9 +10,9 @@ import types
 from typing import (
     Annotated,
     Any,
-    Literal,
     NotRequired,
     Required,
+    TypedDict,
     Union,
     get_args,
     get_origin,
@@ -21,9 +21,11 @@ from typing import (
 )
 
 from psycopg.sql import quote
+from pydantic import StringConstraints, TypeAdapter
+from pydantic.json_schema import GenerateJsonSchema
 
-NonEmptyText = Annotated[str, "nonempty"]
-SourceId = Annotated[str, "source-id"]
+NonEmptyText = Annotated[str, StringConstraints(pattern=r"[^ \t\n\r\f\x0b]")]
+SourceId = Annotated[NonEmptyText, "source-id"]
 
 
 @dataclass(frozen=True)
@@ -89,101 +91,38 @@ def parameters(constructor):
     return result
 
 
-def sql_type(value, annotation, depth=0):
-    """Compile annotations to PostgreSQL predicates; CASE guards all type-specific operations."""
-    origin, args = get_origin(annotation), get_args(annotation)
-    if origin is Annotated:
-        base = sql_type(value, args[0], depth)
-        if args[1:] not in (("nonempty",), ("source-id",)) or args[0] is not str:
-            raise TypeError("unsupported construction annotation metadata")
-        return f"({base} AND atlas.nonblank({value} #>> '{{}}'))"
-    if annotation is Any:
-        return "TRUE"  # Every stored JSONB value is already valid JSON.
-    if origin in (Union, types.UnionType):
-        return "(" + " OR ".join(sql_type(value, kind, depth) for kind in args) + ")"
-    if origin is Literal:
-        return (
-            "("
-            + " OR ".join(
-                f"{value} = {quote(json.dumps(choice))}::jsonb" for choice in args
-            )
-            + ")"
-        )
-    if annotation in (str, bool, float, int, type(None)):
-        kind = {
-            str: "string",
-            bool: "boolean",
-            float: "number",
-            int: "number",
-            type(None): "null",
-        }[annotation]
-        condition = f"jsonb_typeof({value}) = {quote(kind)}"
-        if annotation is int:
-            number = f"({value} #>> '{{}}')::numeric"
-            return (
-                f"CASE WHEN {condition} THEN trunc({number}) = {number} ELSE FALSE END"
-            )
-        return condition
-    if origin in (list, tuple):
-        if origin is tuple:
-            conditions = [f"jsonb_array_length({value}) = {len(args)}"]
-            conditions += [
-                sql_type(f"({value} -> {i})", kind, depth + 1)
-                for i, kind in enumerate(args)
-            ]
-            body = " AND ".join(conditions)
-        else:
-            alias = f"item{depth}"
-            condition = sql_type(f"{alias}.value", args[0], depth + 1)
-            body = f"NOT EXISTS (SELECT 1 FROM jsonb_array_elements({value}) AS {alias}(value) WHERE NOT COALESCE({condition}, FALSE))"
-        return f"CASE WHEN jsonb_typeof({value}) = 'array' THEN ({body}) ELSE FALSE END"
-    if origin is dict:
-        alias = f"item{depth}"
-        key = sql_type(f"to_jsonb({alias}.key)", args[0], depth + 1)
-        item = sql_type(f"{alias}.value", args[1], depth + 1)
-        return (
-            f"CASE WHEN jsonb_typeof({value}) = 'object' THEN NOT EXISTS "
-            f"(SELECT 1 FROM jsonb_each({value}) AS {alias} WHERE NOT COALESCE(({key} AND {item}), FALSE)) ELSE FALSE END"
-        )
-    if is_typeddict(annotation):
-        hints = get_type_hints(annotation, include_extras=True)
-        fields = {
-            name: (kind, name in annotation.__required_keys__)
-            for name, kind in hints.items()
-        }
-        return sql_object(value, fields, depth + 1)
-    if origin in (NotRequired, Required):
-        return sql_type(value, args[0], depth)
-    raise TypeError(f"unsupported construction annotation: {annotation!r}")
+class RecipeSchema(GenerateJsonSchema):
+    """Keep construction objects closed and enforce patterns on mapping keys."""
+
+    def typed_dict_schema(self, schema):
+        return super().typed_dict_schema(schema) | {"additionalProperties": False}
+
+    def dict_schema(self, schema):
+        result = super().dict_schema(schema)
+        if "patternProperties" in result:
+            result["additionalProperties"] = False
+        return result
 
 
-def sql_object(value, fields, depth=0):
-    allowed = ", ".join(quote(key) for key in fields)
-    conditions = [f"{value} - ARRAY[{allowed}]::text[] = '{{}}'::jsonb"]
-    for name, (annotation, required) in fields.items():
-        key = quote(name)
-        expression = sql_type(f"({value} -> {key})", annotation, depth)
-        if required:
-            expression = (
-                f"({value} ? {key} AND COALESCE({expression}, FALSE))"
-            )
-        else:
-            expression = (
-                f"(NOT {value} ? {key} OR COALESCE({expression}, FALSE))"
-            )
-        conditions.append(expression)
-    return (
-        f"CASE WHEN jsonb_typeof({value}) = 'object' THEN (\n    "
-        + "\n    AND ".join(conditions)
-        + ") ELSE FALSE END"
+def recipe_schema(method, fields):
+    arguments = TypedDict(
+        method,
+        {
+            name: kind if required else NotRequired[kind]
+            for name, (kind, required) in fields.items()
+        },
     )
+    return {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        **TypeAdapter(arguments).json_schema(schema_generator=RecipeSchema),
+    }
 
 
 def source_paths(annotation, path="$"):
     """Locate source references from declared types, never from field-name guesses."""
     origin, args = get_origin(annotation), get_args(annotation)
     if origin is Annotated:
-        return [path] if args[1:] == ("source-id",) else []
+        return [path] if "source-id" in args[1:] else []
     if origin in (Union, types.UnionType):
         return sorted({p for kind in args for p in source_paths(kind, path)})
     if origin in (NotRequired, Required):
@@ -209,7 +148,10 @@ def database_checks():
     choices, sources = [], []
     for method, constructor in sorted(IMPORTERS.items()):
         fields = parameters(constructor)
-        choices.append(f"WHEN {quote(method)} THEN {sql_object('arguments', fields)}")
+        schema = quote(json.dumps(recipe_schema(method, fields), separators=(",", ":")))
+        choices.append(
+            f"WHEN {quote(method)} THEN public.jsonb_matches_schema({schema}::json, arguments)"
+        )
         paths = sorted({path for name, (kind, _) in fields.items()
                         for path in source_paths(kind, '$.' + json.dumps(name))})
         if paths:
