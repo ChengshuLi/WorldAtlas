@@ -57,7 +57,6 @@ ARGUMENTS = {
     "s130_areas": dict(
         source_id="raw",
         gml_member="source.gml",
-        gml_sha256="a" * 64,
         selections=[dict(feature_id="feature", source_feature_id="urn:mrn:123")],
     ),
 }

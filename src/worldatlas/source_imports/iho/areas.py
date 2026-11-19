@@ -1,17 +1,14 @@
-"""Read complete S-130 sea areas, preserving source surfaces and collection identity."""
+"""Import complete sea areas from IHO's S-130 XML archive."""
 
-import hashlib
-import json
 import math
 import time
 from xml.etree import ElementTree
 from zipfile import ZipFile
 
+from shapely import union_all
 from shapely.affinity import translate
 from shapely.geometry import Polygon, box, mapping
-from shapely.ops import unary_union
 
-from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.contracts import FeatureIdentity, NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
@@ -22,38 +19,43 @@ GML_ID = "{http://www.opengis.net/gml/3.2}id"
 XLINK_HREF = "{http://www.w3.org/1999/xlink}href"
 EPSG_4326 = "http://www.opengis.net/def/crs/EPSG/0/4326"
 
+# These are the XML names used by the S-130 file format.
+SEA_AREA_ELEMENT = f"{{{NS['s130']}}}GlobalSeaArea"
+LINK_TO_CONTAINING_AREA = "s130:theComponent"
+LINKS_TO_AREA_PIECES = "s130:theCollection"
+RING_COORDINATES = "gml:LinearRing/gml:posList"
 
-def read_document(path, member, gml_sha256):
-    """Verify and parse the selected GML member of a verified archive.
+
+def read_document(path, member):
+    """Parse the selected GML file from a verified archive.
 
     Args:
         path: Local path of the verified S-130 ZIP archive.
         member: Exact GML member name inside the archive.
-        gml_sha256: Expected SHA-256 of the member bytes.
 
     Returns:
         Root element of the parsed XML document.
 
     Raises:
-        ValueError: The member is missing, duplicated, or fails verification.
+        ValueError: The member is missing or duplicated.
+        ElementTree.ParseError: The selected member is invalid XML.
     """
     with ZipFile(path) as archive:
         if archive.namelist().count(member) != 1:
-            raise ValueError("expected one selected IHO GML member")
-        raw = archive.read(member)
-    if hashlib.sha256(raw).hexdigest() != gml_sha256:
-        raise ValueError("IHO GML SHA-256 mismatch")
-    return ElementTree.fromstring(raw)
+            raise ValueError(f"expected exactly one IHO GML member named {member!r}")
+        with archive.open(member) as source:
+            return ElementTree.parse(source).getroot()
 
 
-def ring(position):
-    """Read a closed S-130 ring as unwrapped longitude and latitude pairs.
+def read_ring_coordinates(position):
+    """Read an outline or hole and keep its longitudes continuous.
 
     Args:
-        position: GML position list declaring EPSG:4326 latitude first.
+        position: GML coordinate list in WGS84, with latitude first.
 
     Returns:
-        Closed ring with continuous longitudes, including across the dateline.
+        Longitude and latitude pairs in boundary order. Longitudes may extend
+        past 180 degrees so a short crossing stays short when building a polygon.
 
     Raises:
         ValueError: The coordinates are malformed, invalid, or open.
@@ -63,6 +65,7 @@ def ring(position):
     values = list(map(float, (position.text or "").split()))
     if len(values) < 8 or len(values) % 2:
         raise ValueError("invalid S-130 ring coordinates")
+    # GML lists latitude first. Shapely uses longitude as its x coordinate.
     points = [(values[i + 1], values[i]) for i in range(0, len(values), 2)]
     if points[0] != points[-1] or any(
         not math.isfinite(x)
@@ -72,17 +75,17 @@ def ring(position):
         for x, y in points
     ):
         raise ValueError("invalid or open S-130 ring")
-    # Unwrap antimeridian crossings before constructing the polygon.
     unwrapped = [points[0]]
-    for x, y in points[1:]:
-        # At a pole every longitude meets. Preserve an explicitly encoded
-        # world-edge cap instead of collapsing its two meridians together.
-        if abs(y) != 90 and abs(unwrapped[-1][1]) != 90:
-            while x - unwrapped[-1][0] > 180:
-                x -= 360
-            while x - unwrapped[-1][0] < -180:
-                x += 360
-        unwrapped.append((x, y))
+    for longitude, latitude in points[1:]:
+        previous_longitude, previous_latitude = unwrapped[-1]
+        # A polar outline can use both map edges to close across the pole.
+        # Leave those edges in place even though all longitudes meet at the pole.
+        if abs(latitude) != 90 and abs(previous_latitude) != 90:
+            while longitude - previous_longitude > 180:
+                longitude -= 360
+            while longitude - previous_longitude < -180:
+                longitude += 360
+        unwrapped.append((longitude, latitude))
     return unwrapped
 
 
@@ -90,7 +93,8 @@ def polygon_parts(geometry):
     """Collect the polygon pieces of a geometry after longitude clipping.
 
     Args:
-        geometry: Shapely result that may include lower-dimensional pieces.
+        geometry: Shapely result that may include lines where a polygon
+            only touches a clipping edge.
 
     Returns:
         A list of nonempty polygons.
@@ -104,162 +108,164 @@ def polygon_parts(geometry):
     return []
 
 
-def surface(patch):
-    """Build an S-130 surface with its interior rings and dateline splits.
+def read_polygon_patch(patch):
+    """Read one source polygon with its holes and split it at the dateline.
 
     Args:
-        patch: Provider GML polygon patch.
+        patch: GML element containing an outer ring and any holes.
 
     Returns:
         A Shapely polygon or multipolygon within the WGS84 longitude range.
+
+    Raises:
+        ValueError: An outline or hole is malformed, or the polygon is invalid.
     """
-    exterior = ring(patch.find("gml:exterior/gml:LinearRing/gml:posList", NS))
+    exterior = read_ring_coordinates(patch.find(f"gml:exterior/{RING_COORDINATES}", NS))
+    outer_center = sum(longitude for longitude, _ in exterior) / len(exterior)
     holes = []
-    middle = sum(p[0] for p in exterior) / len(exterior)
-    interiors = patch.findall("gml:interior", NS)
-    for interior in interiors:
-        position = interior.find("gml:LinearRing/gml:posList", NS)
-        hole = ring(position)
-        shift = 360 * round((middle - sum(p[0] for p in hole) / len(hole)) / 360)
+    for interior in patch.findall("gml:interior", NS):
+        hole = read_ring_coordinates(interior.find(RING_COORDINATES, NS))
+        hole_center = sum(longitude for longitude, _ in hole) / len(hole)
+        # The outline and hole were unwrapped independently. Bring them into
+        # the same longitude range before building the polygon.
+        shift = 360 * round((outer_center - hole_center) / 360)
         holes.append([(x + shift, y) for x, y in hole])
     polygon = Polygon(exterior, holes)
     if polygon.is_empty or not polygon.is_valid:
         raise ValueError("S-130 source surface is empty or invalid")
-    if polygon.bounds[0] >= -180 and polygon.bounds[2] <= 180:
+    west, _, east, _ = polygon.bounds
+    if west >= -180 and east <= 180:
         return polygon
-    low, _, high, _ = polygon.bounds
+
+    # Clip every shifted copy that intersects the standard longitude range.
+    world = box(-180, -90, 180, 90)
+    first_turn = math.ceil((-180 - east) / 360)
+    last_turn = math.floor((180 - west) / 360)
     pieces = []
-    for turn in range(
-        math.ceil((-180 - high) / 360), math.floor((180 - low) / 360) + 1
-    ):
-        pieces.extend(
-            polygon_parts(
-                translate(polygon, xoff=360 * turn).intersection(
-                    box(-180, -90, 180, 90)
-                )
-            )
-        )
-    return unary_union(pieces)
+    for turn in range(first_turn, last_turn + 1):
+        shifted = translate(polygon, xoff=360 * turn)
+        pieces.extend(polygon_parts(shifted.intersection(world)))
+    return union_all(pieces)
 
 
 class SeaAreas:
-    """Index one S-130 document and reconstruct areas from linked surfaces."""
+    """Find sea areas by IHO ID and assemble the polygons for each area."""
 
     def __init__(self, document):
-        """Index all identified features and their provider area names.
+        """Index XML records and find the record for each whole sea area.
+
+        A Maritime Resource Name (MRN) identifies the sea area. The record
+        for the whole area and its individual polygon records can share it.
+        Each XML record also has its own ID, which other records link to.
 
         Args:
             document: Root element of the parsed S-130 GML.
-        """
-        self.features = {}
-        for element in document.iter():
-            ident = element.get(GML_ID)
-            if ident:
-                if ident in self.features:
-                    raise ValueError("duplicate GML feature ID")
-                self.features[ident] = element
-        self.areas = {
-            key: element
-            for key, element in self.features.items()
-            if element.tag == "{" + NS["s130"] + "}GlobalSeaArea"
-        }
-        self.mrns = {
-            key: element.findtext("s130:featureIdentifier", namespaces=NS)
-            for key, element in self.areas.items()
-        }
-        if any(not value for value in self.mrns.values()):
-            raise ValueError("S-130 area has no provider identity")
-
-    def references(self, ident, role):
-        """Read the GML IDs linked under an area relation.
-
-        Args:
-            ident: ID of the area to inspect.
-            role: S-130 relation name such as ``theCollection``.
-
-        Returns:
-            Linked IDs in document order.
-        """
-        return [
-            ref.get(XLINK_HREF, "").removeprefix("#")
-            for ref in self.areas[ident].findall("s130:" + role, NS)
-        ]
-
-    def roots(self):
-        """Return area IDs and MRNs for roots of complete provider areas."""
-        return {
-            ident: self.mrns[ident]
-            for ident in self.areas
-            if not any(
-                self.mrns.get(parent) == self.mrns[ident]
-                for parent in self.references(ident, "theComponent")
-            )
-        }
-
-    def geometry(self, mrn):
-        """Reconstruct all surfaces belonging to one provider area.
-
-        Args:
-            mrn: Provider identity of the selected area.
-
-        Returns:
-            Complete GeoJSON geometry and its root GML ID.
 
         Raises:
-            ValueError: The MRN lacks one complete and valid area.
+            ValueError: An XML ID is repeated or a sea area has no IHO ID.
         """
-        roots = [ident for ident, value in self.roots().items() if value == mrn]
-        if len(roots) != 1:
-            raise ValueError("MRN must identify one complete S-130 area")
+        seen_xml_ids = set()
+        self.areas_by_xml_id = {}
+        for element in document.iter():
+            xml_id = element.get(GML_ID)
+            if not xml_id:
+                continue
+            if xml_id in seen_xml_ids:
+                raise ValueError("duplicate GML feature ID")
+            seen_xml_ids.add(xml_id)
+            if element.tag == SEA_AREA_ELEMENT:
+                self.areas_by_xml_id[xml_id] = element
 
-        def collect(ident, ancestors=()):
-            if ident in ancestors or ident not in self.areas:
-                raise ValueError("cyclic or missing S-130 area component")
-            patches = self.areas[ident].findall(".//gml:PolygonPatch", NS)
+        self.provider_ids = {
+            xml_id: area.findtext("s130:featureIdentifier", namespaces=NS)
+            for xml_id, area in self.areas_by_xml_id.items()
+        }
+        if any(not provider_id for provider_id in self.provider_ids.values()):
+            raise ValueError("S-130 area has no provider area ID")
+
+        self.whole_records_by_provider_id = {}
+        for xml_id, provider_id in self.provider_ids.items():
+            containing_areas = self._linked_area_ids(xml_id, LINK_TO_CONTAINING_AREA)
+            # A piece shares the ID of its containing area. A named subdivision
+            # with its own provider ID can be selected independently.
+            if all(
+                self.provider_ids.get(area_id) != provider_id
+                for area_id in containing_areas
+            ):
+                self.whole_records_by_provider_id.setdefault(provider_id, []).append(xml_id)
+
+    def _linked_area_ids(self, xml_id, link_tag):
+        """Read the target XML IDs for one kind of link.
+
+        Args:
+            xml_id: XML ID of the record containing the links.
+            link_tag: XML tag that points to the containing area or its pieces.
+
+        Returns:
+            Target IDs in document order, with the leading "#" removed.
+        """
+        return [
+            link.get(XLINK_HREF, "").removeprefix("#")
+            for link in self.areas_by_xml_id[xml_id].findall(link_tag, NS)
+        ]
+
+    def geometry(self, provider_id):
+        """Assemble the complete geometry of one sea area.
+
+        Args:
+            provider_id: IHO's Maritime Resource Name (MRN) for the area.
+
+        Returns:
+            Complete GeoJSON geometry.
+
+        Raises:
+            ValueError: The ID is missing or ambiguous, or its polygons
+                are missing or invalid.
+        """
+        whole_area_ids = self.whole_records_by_provider_id.get(provider_id, ())
+        if len(whole_area_ids) != 1:
+            raise ValueError(f"IHO area ID must identify one complete area: {provider_id!r}")
+
+        def collect_polygons(xml_id, link_path=()):
+            if xml_id in link_path:
+                raise ValueError(f"S-130 area links back to itself: {xml_id!r}")
+            patches = self.areas_by_xml_id[xml_id].findall(".//gml:PolygonPatch", NS)
             if patches:
-                return [surface(patch) for patch in patches]
-            children = self.references(ident, "theCollection")
-            if not children or any(self.mrns.get(child) != mrn for child in children):
-                raise ValueError(
-                    "S-130 collection lacks its complete surface components"
-                )
+                return [read_polygon_patch(patch) for patch in patches]
+            piece_ids = self._linked_area_ids(xml_id, LINKS_TO_AREA_PIECES)
+            if not piece_ids or any(
+                self.provider_ids.get(piece_id) != provider_id for piece_id in piece_ids
+            ):
+                raise ValueError(f"missing or mismatched polygon pieces for S-130 area {xml_id!r}")
             return [
-                part
-                for child in children
-                for part in collect(child, (*ancestors, ident))
+                polygon
+                for piece_id in piece_ids
+                for polygon in collect_polygons(piece_id, (*link_path, xml_id))
             ]
 
-        result = unary_union(collect(roots[0]))
-        value = json.loads(json.dumps(mapping(result), allow_nan=False))
-        validate_geometry(value)
-        return value, roots[0]
+        return mapping(union_all(collect_polygons(whole_area_ids[0])))
 
 
-def read_areas(path, *, gml_member, gml_sha256, selections):
+def read_areas(path, *, gml_member, selections):
     """Read complete S-130 areas from a verified archive.
 
     Args:
         path: Local path of the verified S-130 archive.
         gml_member: Exact GML member name inside the archive.
-        gml_sha256: Expected SHA-256 of the GML member.
         selections: Provider MRNs paired with output feature IDs.
 
     Returns:
         Features containing the selected areas and their output IDs.
     """
-    document = read_document(path, gml_member, gml_sha256)
+    document = read_document(path, gml_member)
     reader = SeaAreas(document)
-    result = []
-    for selection in selections:
-        geometry, _ = reader.geometry(selection["source_feature_id"])
-        result.append(
-            {
-                "feature_id": selection["feature_id"],
-                "source_feature_id": selection["source_feature_id"],
-                "geometry": geometry,
-            }
-        )
-    return result
+    return [
+        {
+            "feature_id": selection["feature_id"],
+            "geometry": reader.geometry(selection["source_feature_id"]),
+        }
+        for selection in selections
+    ]
 
 
 def s130_areas(
@@ -267,7 +273,6 @@ def s130_areas(
     *,
     source_id: SourceId,
     gml_member: NonEmptyText,
-    gml_sha256: NonEmptyText,
     selections: list[FeatureIdentity],
 ):
     """Import complete S-130 sea areas with linked surfaces and holes.
@@ -276,7 +281,6 @@ def s130_areas(
         runtime: Import resources and saved recipe snapshot.
         source_id: Catalog ID of the S-130 archive.
         gml_member: Exact GML member name inside the archive.
-        gml_sha256: Expected SHA-256 of the GML member.
         selections: Provider MRNs and their output IDs in Neon.
 
     Returns:
@@ -284,8 +288,7 @@ def s130_areas(
     """
     started, timing = time.monotonic(), {}
     path, = acquire_sources(runtime, [source_id], timing=timing)
-    features = read_areas(path, gml_member=gml_member, gml_sha256=gml_sha256,
-                          selections=selections)
+    features = read_areas(path, gml_member=gml_member, selections=selections)
     feature_ids = save_features(runtime, features)
     return feature_result(feature_ids, time.monotonic() - started, source=path,
                           download_seconds=timing.get("download_seconds", 0.0))

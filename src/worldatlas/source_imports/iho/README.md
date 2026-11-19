@@ -1,16 +1,24 @@
 # IHO S-130 areas
 
-[`areas.py`](areas.py) contains `s130_areas` and its GML reader. It imports complete geographic surfaces from the cataloged S-130 archive into `atlas.source_features`. Map building consumes that stored geometry.
+[`areas.py`](areas.py) reads sea areas from the XML file (GML) inside the cataloged S-130 ZIP and saves their polygons in `atlas.source_features`. Map building uses that geometry to assign ocean and named-basin water.
 
-Each construction supplies `source_id`, `gml_member`, `gml_sha256` and `selections` as arguments. A selection identifies the output `feature_id` and the provider MRN in `source_feature_id`. Complete linked surfaces sharing an MRN are retained, including holes, dateline crossings and polar caps. Imported coordinates keep the provider's representation.
+Each construction supplies `source_id`, `gml_member` and `selections` as arguments. Each selection pairs an output `feature_id` with the IHO area ID, called a Maritime Resource Name (MRN), in `source_feature_id`. The reader assembles the complete area from its linked surfaces and preserves holes and polar caps. It converts the source's latitude-first coordinates to longitude-first GeoJSON and splits polygons at the antimeridian.
 
-Run through the common entry point:
+For example, the Arctic Ocean selection uses `urn:mrn:iho:00AA:01810:173944174678`. In the archived XML, the record for the whole area (`M.0012`) links to the records for its two polygon pieces (`M.0119` and `M.0120`). All three records share the same IHO area ID. Only the whole area is selectable by that ID.
+
+Run the [common import command](../README.md#run-one-construction) with `s130-selected-basins-construction` for named basins or `s130-ocean-features-construction` for ocean areas.
 
 ```bash
 worldatlas-import --recipe CONSTRUCTION_ID \
   --r2-endpoint R2_ENDPOINT --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-Shared acquisition checks the archive's size and checksum. The S-130 reader verifies the selected GML member separately. [`test_areas.py`](test_areas.py) checks the command, member verification, collection completeness, holes, polar coverage, and longitude wrapping.
+Shared acquisition checks the archive's size and checksum, which also fixes the bytes of each member. The S-130 reader requires the exact GML member name to appear once.
 
-Ocean ownership and named-basin shore assignment are separate choices in `geographic_rules`; the importer uses the same area reader for both.
+## Tests
+
+[`test_areas.py`](test_areas.py) checks the import command, member selection, XML IDs and links, holes, polar coverage, and both directions of dateline crossing. The command test uses a disposable PostgreSQL database and a small local ZIP in place of an R2 download.
+
+```bash
+python .github/scripts/run_tests.py --suite source_imports
+```

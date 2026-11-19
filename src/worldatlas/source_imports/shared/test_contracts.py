@@ -313,6 +313,7 @@ class DatabaseContractTests(unittest.TestCase):
                 ),
                 False,
             ),
+            ("s130_areas", dict(gml_sha256="a" * 64), False),
             ("geodesic_trace", dict(points=[[1, True], [0, 0]]), False),
             ("geodesic_trace", dict(points=[[1, 1, 1], [0, 0]]), False),
         ]

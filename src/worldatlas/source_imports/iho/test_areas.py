@@ -13,10 +13,16 @@ from zipfile import ZipFile
 
 import psycopg
 from psycopg.types.json import Jsonb
-from shapely.geometry import shape
+from shapely.geometry import GeometryCollection, LineString, MultiPolygon, Polygon, box, shape
 
-from worldatlas.source_imports.iho.areas import SeaAreas, surface
-from worldatlas.source_imports.iho.areas import NS, EPSG_4326
+from worldatlas.source_imports.iho.areas import (
+    EPSG_4326,
+    NS,
+    SeaAreas,
+    polygon_parts,
+    read_polygon_patch,
+    read_ring_coordinates,
+)
 from worldatlas.source_imports.run_import import main
 
 
@@ -67,7 +73,7 @@ SQUARE = [(0, 0), (2, 0), (2, 2), (0, 2), (0, 0)]
 class ImportTests(unittest.TestCase):
     """Exercise the command with a real database and a minimal S-130 archive."""
 
-    def test_command_selects_and_verifies_the_saved_gml_member(self):
+    def test_command_imports_only_the_selected_gml_member(self):
         gml = ElementTree.tostring(document(area("area", "urn:mrn:example", patch(SQUARE))))
         archive = BytesIO()
         with ZipFile(archive, "w") as output:
@@ -76,7 +82,6 @@ class ImportTests(unittest.TestCase):
         raw = archive.getvalue()
         recipe = dict(
             source_id="iho-test", gml_member="selected.gml",
-            gml_sha256=hashlib.sha256(gml).hexdigest(),
             selections=[dict(feature_id="test-sea", source_feature_id="urn:mrn:example")],
         )
         client = Mock()
@@ -120,34 +125,34 @@ class ImportTests(unittest.TestCase):
 
                     database.execute(
                         "UPDATE atlas.construction_records SET arguments=%s WHERE id='iho-recipe'",
-                        (Jsonb(dict(recipe, gml_sha256="0" * 64)),),
+                        (Jsonb(dict(recipe, gml_member="missing.gml")),),
                     )
-                    with self.assertRaisesRegex(ValueError, "IHO GML SHA-256 mismatch"):
+                    with self.assertRaisesRegex(ValueError, "expected exactly one IHO GML member"):
                         main()
                     self.assertEqual(database.execute(stored).fetchone(), (geometry,))
                 client.get_object.assert_called_once_with(Bucket="test", Key="s130.zip")
 
 
 class AreaTests(unittest.TestCase):
+    """Check sea-area assembly and polygon math on small XML fixtures."""
+
     def test_hole_is_preserved(self):
         hole = [(0.5, 0.5), (1.5, 0.5), (1.5, 1.5), (0.5, 1.5), (0.5, 0.5)]
         reader = SeaAreas(document(area("a", "mrn", patch(SQUARE, hole))))
-        geometry, ident = reader.geometry("mrn")
-        self.assertEqual(ident, "a")
+        geometry = reader.geometry("mrn")
         self.assertEqual(shape(geometry).area, 3)
 
     def test_complete_shared_mrn_collection_keeps_every_piece(self):
         second = [(x + 5, y) for x, y in SQUARE]
         reader = SeaAreas(
             document(
+                '<s:DataCoverage g:id="coverage"/>',
                 area("parent", "mrn", children=["a", "b"]),
                 area("a", "mrn", patch(SQUARE), parent="parent"),
                 area("b", "mrn", patch(second), parent="parent"),
             )
         )
-        geometry, ident = reader.geometry("mrn")
-        self.assertEqual(reader.roots(), {"parent": "mrn"})
-        self.assertEqual(ident, "parent")
+        geometry = reader.geometry("mrn")
         self.assertEqual(shape(geometry).area, 8)
         self.assertEqual(len(shape(geometry).geoms), 2)
 
@@ -163,25 +168,34 @@ class AreaTests(unittest.TestCase):
                 ),
             )
         )
-        self.assertEqual(shape(reader.geometry("large")[0]).area, 4)
-        self.assertEqual(shape(reader.geometry("small")[0]).area, 1)
+        self.assertEqual(shape(reader.geometry("large")).area, 4)
+        self.assertEqual(shape(reader.geometry("small")).area, 1)
 
     def test_dateline_splits_without_world_spanning_interior(self):
         points = [(179, 0), (-179, 0), (-179, 2), (179, 2), (179, 0)]
-        result = surface(
-            ElementTree.fromstring(
-                patch(points)
-                .replace("<g:", "<g:")
-                .replace(
-                    "<g:PolygonPatch>",
-                    '<g:PolygonPatch xmlns:g="' + NS["gml"] + '">',
-                    1,
-                )
-            )
+        expected = MultiPolygon([box(179, 0, 180, 2), box(-180, 0, -179, 2)])
+        for ring in (points, [(-longitude, latitude) for longitude, latitude in points]):
+            with self.subTest(start=ring[0]):
+                result = read_polygon_patch(document(patch(ring))[0])
+                self.assertTrue(result.is_valid)
+                self.assertEqual(result.geom_type, "MultiPolygon")
+                self.assertTrue(result.equals(expected))
+
+    def test_clipping_keeps_polygon_area_and_discards_edge_contacts(self):
+        polygon = box(179, 0, 180, 1)
+        clipped = GeometryCollection(
+            [polygon, LineString([(180, 2), (180, 3)]), Polygon()]
         )
-        self.assertEqual(result.area, 4)
-        self.assertEqual(len(result.geoms), 2)
-        self.assertTrue(result.is_valid)
+        self.assertEqual(polygon_parts(clipped), [polygon])
+
+    def test_duplicate_xml_ids_and_missing_provider_ids_are_rejected(self):
+        cases = (
+            (document(area("a", "first"), area("a", "second")), "duplicate GML feature ID"),
+            (document(area("a", "")), "S-130 area has no provider area ID"),
+        )
+        for value, message in cases:
+            with self.subTest(case=message), self.assertRaisesRegex(ValueError, message):
+                SeaAreas(value)
 
     def test_missing_cyclic_or_ambiguous_collection_is_rejected(self):
         examples = [
@@ -198,10 +212,24 @@ class AreaTests(unittest.TestCase):
             with self.subTest(points=points), self.assertRaises(ValueError):
                 SeaAreas(document(area("a", "mrn", patch(points)))).geometry("mrn")
 
+    def test_ring_rejects_wrong_coordinate_system(self):
+        position = document('<g:posList srsName="EPSG:3857">0 0</g:posList>')[0]
+        with self.assertRaisesRegex(ValueError, "expected S-130 latitude/longitude"):
+            read_ring_coordinates(position)
+
+    def test_ring_requires_at_least_four_complete_coordinate_pairs(self):
+        for values in ("0 0 0 1 0 0", "0 0 0 2 2 2 2 0 0"):
+            position = document(f'<g:posList srsName="{EPSG_4326}">{values}</g:posList>')[0]
+            with (
+                self.subTest(coordinates=values),
+                self.assertRaisesRegex(ValueError, "invalid S-130 ring coordinates"),
+            ):
+                read_ring_coordinates(position)
+
     def test_explicit_polar_cap_preserves_both_world_edges(self):
         points = [(180, 70), (0, 75), (-180, 70), (-180, 90), (180, 90), (180, 70)]
         result = shape(
-            SeaAreas(document(area("a", "mrn", patch(points)))).geometry("mrn")[0]
+            SeaAreas(document(area("a", "mrn", patch(points)))).geometry("mrn")
         )
         self.assertTrue(result.is_valid)
         self.assertEqual(result.bounds, (-180, 70, 180, 90))
