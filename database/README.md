@@ -27,7 +27,7 @@ Inserting a child entity also creates its map codes. Land and water entities get
 
 Add a rule citation when it helps a reviewer understand a current decision beyond what the feature's construction already documents. Keep the decision in `rationale` and use each citation's `interpretation` to state what that source establishes. Review the citations alongside the rule when changing its scope.
 
-`map_releases` points to a release folder and pins `manifest.json` by SHA-256. The manifest pins each release file. At most one bundle is official per version; at most one official bundle is current. Publication changes flags and the fixed R2 homepage separately from map calculation. See [release commands](../src/worldatlas/map_releases/README.md).
+`map_releases` records a bundle's R2 bucket and pins `manifest.json` by SHA-256. The folder path comes from the bundle ID, and the manifest pins each release file. Each version can have one permanent official bundle, and at most one official bundle is current. Publication changes flags and the fixed R2 homepage separately from map calculation. See [release commands](../src/worldatlas/map_releases/README.md).
 
 ## Editing and replay
 

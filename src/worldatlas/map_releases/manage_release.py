@@ -19,6 +19,12 @@ from worldatlas.map_build.inputs.selection import (
     read_saved,
     validate_bindings,
 )
+from worldatlas.map_releases.catalog import (
+    lookup_release,
+    read_manifest,
+    release_prefix,
+    validate_manifest,
+)
 from worldatlas.map_releases.inputs import (
     FILENAME as INPUTS_FILE,
     read_inputs,
@@ -36,10 +42,6 @@ def version(candidate):
     if not match:
         raise ValueError("candidate must look like v9.0-rc.1")
     return match["version"]
-
-
-def prefix(candidate):
-    return f"releases/{candidate}"
 
 
 def read(path):
@@ -144,7 +146,7 @@ def build_bundle(candidate, run, viewer, bundle):
     if html.count("<head>") != 1 or re.search(r"<base\b", html, re.I):
         raise ValueError("the viewer homepage must have a single head and no base URL")
     index.write_text(
-        html.replace("<head>", f'<head><base href="/{prefix(candidate)}/">', 1)
+        html.replace("<head>", f'<head><base href="/{release_prefix(candidate)}">', 1)
     )
 
     combined = hashlib.sha256()
@@ -239,7 +241,7 @@ def build_bundle(candidate, run, viewer, bundle):
 
     objects = {
         path.relative_to(bundle).as_posix(): {
-            "r2_key": f"{prefix(candidate)}/{path.relative_to(bundle).as_posix()}",
+            "r2_key": release_prefix(candidate) + path.relative_to(bundle).as_posix(),
             "sha256": digest(path),
             "size_bytes": path.stat().st_size,
             "content_type": (
@@ -300,8 +302,6 @@ def retire_previews(db, storage, map_version):
     """Retire unpublished siblings only after a final candidate is official."""
     from botocore.exceptions import ClientError
 
-    from worldatlas.map_releases.catalog import read_manifest
-
     official = db.execute(
         "SELECT id FROM atlas.map_releases WHERE map_version=%s AND is_official",
         (map_version,),
@@ -309,14 +309,13 @@ def retire_previews(db, storage, map_version):
     if official is None:
         raise ValueError("publish a final candidate before retiring previews")
     rows = db.execute(
-        "SELECT id,r2_bucket,r2_prefix,manifest_sha256 FROM atlas.map_releases "
+        "SELECT id,r2_bucket,manifest_sha256 FROM atlas.map_releases "
         "WHERE map_version=%s AND NOT is_official ORDER BY id",
         (map_version,),
     ).fetchall()
-    for candidate, bucket, folder, checksum in rows:
-        release = dict(
-            id=candidate, r2_bucket=bucket, r2_prefix=folder, manifest_sha256=checksum
-        )
+    for candidate, bucket, checksum in rows:
+        folder = release_prefix(candidate)
+        release = dict(id=candidate, r2_bucket=bucket, manifest_sha256=checksum)
         try:
             manifest = read_manifest(storage, release)
         except ClientError as exc:
@@ -362,23 +361,21 @@ def homepage_condition(storage, bucket):
 
 def stage(db, storage, bucket, candidate, bundle, manifest):
     version(candidate)
-    from worldatlas.map_releases.catalog import validate_manifest
-
-    validate_manifest(manifest, dict(r2_prefix=prefix(candidate) + "/"))
+    validate_manifest(manifest, candidate)
     if INPUTS_FILE not in manifest["objects"]:
         raise ValueError("release has no frozen input archive")
     data = json_bytes(manifest)
     checksum = hashlib.sha256(data).hexdigest()
     row = db.execute(
-        "SELECT r2_bucket,r2_prefix,manifest_sha256 FROM atlas.map_releases WHERE id=%s",
+        "SELECT r2_bucket,manifest_sha256 FROM atlas.map_releases WHERE id=%s",
         (candidate,),
     ).fetchone()
-    identity = (bucket, prefix(candidate) + "/", checksum)
+    identity = (bucket, checksum)
     if row is not None and row != identity:
         raise ValueError("that candidate already exists with different contents")
     upload_bundle(storage, bucket, candidate, bundle, manifest)
     asset = dict(
-        r2_key=prefix(candidate) + "/manifest.json",
+        r2_key=release_prefix(candidate) + "manifest.json",
         sha256=checksum,
         size_bytes=len(data),
         content_type="application/json",
@@ -400,14 +397,12 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
     verify_object(storage, bucket, asset["r2_key"], asset)
     if row is None:
         db.execute(
-            "INSERT INTO atlas.map_releases(id,r2_bucket,r2_prefix,manifest_sha256) VALUES (%s,%s,%s,%s)",
+            "INSERT INTO atlas.map_releases(id,r2_bucket,manifest_sha256) VALUES (%s,%s,%s)",
             (candidate, *identity),
         )
 
 
 def publish(db, storage, candidate):
-    from worldatlas.map_releases.catalog import lookup_release, read_manifest
-
     release = lookup_release(db, candidate)
     manifest = read_manifest(storage, release)
     bucket = release["r2_bucket"]
@@ -473,11 +468,6 @@ def main():
         bundle = Path(temp)
         with psycopg.connect(connection, autocommit=True) as db:
             if args.action == "restore-inputs":
-                from worldatlas.map_releases.catalog import (
-                    lookup_release,
-                    read_manifest,
-                )
-
                 release = lookup_release(db, args.candidate)
                 bucket = release["r2_bucket"]
                 from worldatlas.map_build.physical import build as physical
@@ -523,7 +513,7 @@ def main():
             with closing(physical.make_r2_client(endpoint)) as storage:
                 if args.action == "stage":
                     stage(db, storage, args.bucket, args.candidate, bundle, manifest)
-                    print(f"Preview: /{prefix(args.candidate)}/index.html")
+                    print(f"Preview: /{release_prefix(args.candidate)}index.html")
                 else:
                     publish(db, storage, args.candidate)
                     print(f"Published {args.candidate} at /")

@@ -17,9 +17,9 @@ The archive holds the actual saved configuration, geographic selection, construc
 
 Raw files remain under `sources/`, shared across releases. Their cataloged identities, size and SHA-256 identify the bytes needed by each build. Keep any raw source needed by working geography or a retained release. After retiring previews, check the working inputs and all surviving archives again before removing a raw object and its Neon catalog row.
 
-Neon's `map_releases` row contains the bundle ID, R2 bucket/folder, manifest checksum and publication-state flags. The folder's `manifest.json` lists file locations, sizes, checksums and media types. Neon pins the manifest; the manifest pins the files and does not contain its own checksum.
+Neon's `map_releases` row contains the bundle ID, R2 bucket, manifest checksum and publication-state flags. The release command derives the folder path from the bundle ID. The folder's `manifest.json` lists file locations, sizes, checksums and media types. Neon pins the manifest, and the manifest pins the files.
 
-`is_official` records the selected final candidate for a version. `is_current` identifies the official release served at `/` through R2's fixed `index.html`. Staging sets both flags to false and leaves the homepage unchanged.
+`is_official` records the permanent selection of a release for a version. Neon prevents demoting or deleting an official release. `is_current` identifies the official release served at `/` through R2's fixed `index.html`. Staging sets both flags to false.
 
 ## Publish and retire previews
 

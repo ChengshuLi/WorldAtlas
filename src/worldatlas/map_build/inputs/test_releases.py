@@ -9,6 +9,7 @@ from unittest.mock import patch
 import psycopg
 
 from worldatlas.map_build.inputs.releases import read_release_assets
+from worldatlas.map_releases.catalog import lookup_release
 
 
 @unittest.skipUnless(
@@ -47,8 +48,8 @@ class ReleaseLookupTests(unittest.TestCase):
         storage = Storage()
         with psycopg.connect(url, autocommit=True) as database:
             database.execute(
-                "INSERT INTO atlas.map_releases(id,r2_bucket,r2_prefix,manifest_sha256) VALUES (%s,%s,%s,%s)",
-                (identity, "test", folder, hashlib.sha256(raw).hexdigest()),
+                "INSERT INTO atlas.map_releases(id,r2_bucket,manifest_sha256) VALUES (%s,%s,%s)",
+                (identity, "test", hashlib.sha256(raw).hexdigest()),
             )
             try:
                 with (
@@ -67,14 +68,13 @@ class ReleaseLookupTests(unittest.TestCase):
                     self.assertEqual(storage.key, folder + "manifest.json")
                     with self.assertRaisesRegex(ValueError, "no unique release"):
                         read_release_assets("v97.0")
+                with database.transaction(force_rollback=True):
                     database.execute(
                         "UPDATE atlas.map_releases SET is_official=true WHERE id=%s",
                         (identity,),
                     )
-                    self.assertEqual(read_release_assets("v97.0"), candidate)
-                    database.execute(
-                        "UPDATE atlas.map_releases SET manifest_sha256=manifest_sha256 WHERE id=%s",
-                        (identity,),
+                    self.assertEqual(
+                        lookup_release(database, "v97.0"), lookup_release(database, identity)
                     )
             finally:
                 database.execute(

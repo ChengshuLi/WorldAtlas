@@ -404,10 +404,10 @@ class PreviewRetirementTests(unittest.TestCase):
         db, storage = Mock(), Mock()
         db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
         db.execute.return_value.fetchall.return_value = [
-            ("v9.0-rc.1", "test", "releases/v9.0-rc.1/", "a" * 64)
+            ("v9.0-rc.1", "test", "a" * 64)
         ]
         with patch(
-            "worldatlas.map_releases.catalog.read_manifest",
+            "worldatlas.map_releases.manage_release.read_manifest",
             return_value=self.manifest("v9.0-rc.1"),
         ):
             self.assertEqual(retire_previews(db, storage, "v9.0"), ["v9.0-rc.1"])
@@ -434,11 +434,11 @@ class PreviewRetirementTests(unittest.TestCase):
         db, storage = Mock(), Mock()
         db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
         db.execute.return_value.fetchall.return_value = [
-            ("v9.0-rc.1", "test", "releases/v9.0-rc.1/", "a" * 64)
+            ("v9.0-rc.1", "test", "a" * 64)
         ]
         storage.delete_object.side_effect = OSError("interrupted")
         with patch(
-            "worldatlas.map_releases.catalog.read_manifest",
+            "worldatlas.map_releases.manage_release.read_manifest",
             return_value=self.manifest("v9.0-rc.1"),
         ):
             with self.assertRaises(OSError):
@@ -456,7 +456,7 @@ class PreviewRetirementTests(unittest.TestCase):
                 db, storage = Mock(), Mock()
                 db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
                 db.execute.return_value.fetchall.return_value = [
-                    (candidate, "test", folder, "a" * 64)
+                    (candidate, "test", "a" * 64)
                 ]
                 storage.get_object.side_effect = ClientError(
                     {"Error": {"Code": "NoSuchKey"}}, "GetObject"
