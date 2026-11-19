@@ -30,10 +30,16 @@ OBJECT_TYPES = {"node": "n", "way": "w", "relation": "r"}
 
 
 def read_features(path, selections):
-    """Read selected OSM points and assemble areas through Osmium.
+    """Read the requested objects and return their GeoJSON features.
 
-    Nodes produce Point geometry. Closed ways and polygon relations produce
-    MultiPolygon geometry. Use ``osm_way_chain`` for LineString features.
+    Osmium can emit both an original relation and a separate area assembled
+    from its members. The original relation supplies the tags to check. The
+    assembled area supplies the coordinates. Both match the same selection
+    by the original relation ID.
+
+    Nodes become Points. A selected closed way already has one complete ring,
+    so its coordinates become a MultiPolygon directly. Polygon relations also
+    become MultiPolygons. Use ``osm_way_chain`` for LineString features.
 
     Args:
         path: Verified local OSM extract.
@@ -45,7 +51,7 @@ def read_features(path, selections):
     Raises:
         ValueError: A selected object is missing, duplicated, or invalid.
     """
-    # Index selections by OSM identity. Insertion order also gives the output order.
+    # Index by OSM type and numeric ID. The dictionary also preserves recipe order.
     requested = {}
     for selection in selections:
         kind = OBJECT_TYPES.get(selection["object_type"])
@@ -56,17 +62,22 @@ def read_features(path, selections):
             raise ValueError(f"OSM {selection['object_type']} {key[1]} is selected more than once")
         requested[key] = selection
 
-    # Relation assembly also loads node locations for any selected ways.
+    # Area assembly also loads node locations. A way-only request just needs
+    # those locations because its nodes are already in outline order.
     processor = osmium.FileProcessor(str(path))
     if any(kind == "r" for kind, _ in requested):
         processor = processor.with_areas()
     elif any(kind == "w" for kind, _ in requested):
         processor = processor.with_locations()
     factory = osmium.geom.GeoJSONFactory()
+    # Track source objects and geometries separately. Finding the original
+    # relation tells us nothing about whether its members formed an area.
     seen, geometries = set(), {}
     for obj in processor:
         if obj.is_area():
-            # Selected closed ways use their original node coordinates below.
+            # Osmium can also emit a separate area for a closed way. The way
+            # branch below works for any selected closed way, even one that
+            # does not get a separate area.
             if obj.from_way():
                 continue
             # The assembled area has a synthetic ID. The recipe uses the source relation ID.
@@ -78,7 +89,8 @@ def read_features(path, selections):
                     raise ValueError(f"Osmium returned an invalid area for {key}") from error
             continue
 
-        # Check identities and tags on the original OSM objects.
+        # Use the original objects for identity and tag checks, including when
+        # Osmium supplies the geometry in a separate area object.
         key = obj.type_str(), obj.id
         if key not in requested:
             continue
@@ -99,7 +111,8 @@ def read_features(path, selections):
         elif obj.is_way():
             if not obj.is_closed():
                 raise ValueError(f"selected OSM way {obj.id} is open")
-            # The recipe can select a closed way even when its tags do not mark it as an area.
+            # Ask Osmium for the outline's coordinates and use that closed
+            # loop as the exterior ring of one polygon.
             try:
                 ring = json.loads(factory.create_linestring(obj.nodes))["coordinates"]
             except (RuntimeError, osmium.InvalidLocationError) as error:
@@ -114,7 +127,6 @@ def read_features(path, selections):
     for key in requested:
         if key not in seen:
             raise ValueError(f"selected OSM object {key} is missing")
-        # A relation may be present even when its members are too incomplete to form an area.
         if key not in geometries:
             raise ValueError(f"Osmium could not assemble selected OSM area {key}")
         geometry = geometries[key]
