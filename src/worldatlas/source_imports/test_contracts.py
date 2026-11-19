@@ -1,6 +1,5 @@
 """Generate construction contracts from signatures and enforce them in PostgreSQL."""
 
-import copy
 import os
 from typing import Any, TypedDict
 import unittest
@@ -26,7 +25,7 @@ class ContractTests(unittest.TestCase):
             rivers: list[SourceId]
             source_id: str
 
-        self.assertEqual(source_paths(Inputs), ["$." + '"elevation"', '$."rivers"[*]'])
+        self.assertEqual(source_paths(Inputs), ['$."elevation"', '$."rivers"[*]'])
         self.assertEqual(source_paths(dict[str, SourceId]), ["$.*"])
         self.assertEqual(source_paths(Any), [])
 
@@ -253,6 +252,6 @@ class DatabaseContractTests(unittest.TestCase):
             with self.subTest(method=method, changes=changes):
                 self.check(
                     method,
-                    dict(copy.deepcopy(ARGUMENTS[method]), **changes),
+                    dict(ARGUMENTS[method], **changes),
                     expected,
                 )
