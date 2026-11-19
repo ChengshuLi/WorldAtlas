@@ -1,32 +1,35 @@
 # Selected geographic features
 
-Import selected source geometry into `atlas.source_features`. Each row contains `id`, `geometry` and `construction_id`; all three are required. Geometry always uses WGS84 `[longitude, latitude]` in degrees. Map building reads these polygons and points instead of reopening their raw archives.
+Import selected source geometry into `atlas.source_features`. Each row has three required fields, `id`, `geometry`, and `construction_id`. Geometry uses WGS84 `[longitude, latitude]` in degrees. Map building reads the stored geometry to check spatial relationships against the current grid.
 
-Raw files are pinned by their cataloged size and checksum. Vector imports select explicit provider IDs and reject missing or ambiguous matches. Provider attributes remain in the raw source; these methods do not maintain copied attribute expectations in Neon. Map building checks spatial relationships against the current grid. Database constraints reject malformed coordinate structures; imports also reject invalid shapes, such as self-intersecting polygons.
+Raw files are pinned by their cataloged size and checksum. Neon checks the [recipe's argument names and types](../README.md#argument-validation) and the structure of stored coordinates. The importer checks that selected features exist and rejects invalid geometry, such as self-intersecting polygons.
 
-[`vector.py`](vector.py) reads selected provider IDs with GDAL and converts coordinates to WGS84 longitude/latitude. [`geometry.py`](geometry.py) validates and saves the geometry. [`build_features.py`](build_features.py) declares one typed entry point per feature method and shares catalog lookup, the verified R2 cache and transactional storage. Its signatures and nested types define the fields accepted by [shared Python and database validation](../README.md#argument-validation). Existing relationships survive repeat imports; a failed import leaves all selected records unchanged.
+[`build_features.py`](build_features.py) declares the typed methods for vector, OSM, and S-130 imports and shares their catalog lookup and verified R2 cache. [`geometry.py`](geometry.py) validates and saves each method's results in one transaction. Repeat imports preserve existing relationships, and failed imports leave selected records intact.
 
-Use the common command:
+Run any of these three methods with the common import command.
 
 ```bash
 worldatlas-import --recipe CONSTRUCTION_ID \
   --r2-endpoint R2_ENDPOINT --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-A `selected_vector_features` construction contains `source_id`, `basis`, `id_field` and `selections`. Each selection supplies `feature_id` and `source_feature_id`. Imports verify the cataloged raw bytes and selected IDs; there is no separate expected-geometry checksum setting. Floating-point negative zero becomes positive zero for storage; source-mode coordinates otherwise remain unchanged. Select `member` for an archived dataset and `layer` when a file contains several layers. An explicit `coordinate_operation` is available when a source needs a particular documented CRS conversion. WGS84 GeoJSON coordinates retain their original numeric values. Distinct existing output IDs may select the same provider feature when backfilling current records; provider IDs must still identify one source feature. For a provider area stored as several records with the same identifier, set `collection: true` on its selection. All matching polygons are included; an optional `expected_feature_count` checks collection completeness.
+## Vector selections
 
-To select one polygon from a multipart provider feature, set `polygon_containing: [longitude, latitude]` on its selection. The point always uses WGS84 coordinates, after source conversion. It must lie strictly inside one polygon; points in holes, on boundaries or outside every part are rejected. The selected polygon keeps its original coordinates and holes. No part is chosen by size or ranking.
+`selected_vector_features` uses [`vector.py`](vector.py) to read provider records with GDAL. The recipe contains `source_id`, `basis`, `id_field`, and `selections`. Each selection identifies the provider record with `source_feature_id` and names the saved record with `feature_id`. Different output IDs can select the same provider feature. Provider attributes stay in the raw file.
 
-Vector inputs may use other coordinate systems. The importer reads the source CRS and converts its coordinates to WGS84 longitude/latitude before saving.
+- Set `member` to select an archived dataset and `layer` to select a layer in a file that contains several.
+- Vector imports convert the source CRS to the stored coordinate system. Use `coordinate_operation` when the source needs a specific documented transformation. WGS84 GeoJSON retains its numeric coordinate values when no explicit transformation or collection operation is requested. Storage normalizes `-0.0` to `0.0`.
+- A provider ID must select exactly one record by default. Set `collection: true` to combine all records that share the ID. `expected_feature_count` checks how many records matched.
+- Set `polygon_containing: [longitude, latitude]` to select one part using a point in the stored coordinate system. The point must be strictly inside exactly one polygon. Points on boundaries or in holes fail the selection.
 
-The `s130_areas` method uses the same storage workflow and [`iho/areas.py`](../iho/areas.py) for complete S-130 surfaces and collections. `selected_osm_features` uses [`osm/features.py`](../osm/features.py) to assemble selected OSM points and polygons through that same storage workflow.
+Vector and OSM polygons retain holes by default (`holes: "preserve"`). Set `holes: "outer_envelope"` to use the exterior rings and fill holes. For vector selections, this happens after `polygon_containing` picks a part. Geographic assignments can reference several imported polygons directly. Map building combines those areas when checking component membership.
 
-`test_vector.py` checks selection, identity, archives, conversion and malformed geometry. `test_storage.py` checks transactional saves, repeat imports, preserved relationships and rollback using disposable PostgreSQL.
+## Other feature methods
 
-## Geographic areas
+- `selected_osm_features` uses [`osm/features.py`](../osm/features.py) to assemble selected OSM points and polygons. A selection can use `expected_tags` to check specific attributes of the archived object.
+- `s130_areas` uses [`iho/areas.py`](../iho/areas.py) to import complete S-130 surfaces and collections.
+- `interpreted_geometry` uses [`interpreted.py`](interpreted.py) to save points and polygons supplied in the recipe, such as region labels and computation scopes. It checks the cited source IDs in Neon. Run it with `worldatlas-import --recipe CONSTRUCTION_ID`.
 
-Imports retain selected provider outlines and holes after coordinate conversion. They do not replace polygons with bounding boxes. Geographic assignments can reference several imported polygons directly; map building unions those areas while calculating component membership. Additional island coverage uses another source-backed feature rather than enlarging an imported outline.
+## Tests
 
-`holes: "outer_envelope"` explicitly selects exterior rings for an area interpretation, such as islands within a marine area. The provider's outer outline is preserved; the construction records the choice. The default `holes: "preserve"` retains holes.
-
-`interpreted_geometry` in [`interpreted.py`](interpreted.py) saves points and polygons supplied in the construction record, such as region labels and computation scopes. It checks the cited source IDs in Neon and saves the given coordinates. Run it with `worldatlas-import --recipe CONSTRUCTION_ID`.
+[`test_vector.py`](test_vector.py) checks selection, archives, coordinate conversion, and malformed geometry. [`test_storage.py`](test_storage.py) checks transactional saves, repeat imports, preserved relationships, and rollback using disposable PostgreSQL.
