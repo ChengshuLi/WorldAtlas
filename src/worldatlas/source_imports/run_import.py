@@ -1,7 +1,6 @@
 """Run a working construction record through its typed source importer."""
 
 import argparse
-import hashlib
 import json
 import logging
 import os
@@ -67,7 +66,7 @@ def main():
         "--recipe", metavar="ID", required=True, help="construction ID in Neon"
     )
     parser.add_argument("--r2-endpoint")
-    parser.add_argument("--work-dir", type=Path)
+    parser.add_argument("--work-dir", type=Path, help="local cache for raw source files")
     args = parser.parse_args()
     if not (connection := os.environ.get("NEON_DATABASE_URL")):
         parser.error("set NEON_DATABASE_URL to the working database")
@@ -90,12 +89,4 @@ def main():
             storage=storage,
             work_dir=args.work_dir,
         )
-        if args.work_dir is not None:
-            name = hashlib.sha256(args.recipe.encode()).hexdigest()
-            receipt = args.work_dir / "receipts" / (name + ".json")
-            receipt.parent.mkdir(parents=True, exist_ok=True)
-            receipt.write_text(
-                json.dumps(dict(construction_id=args.recipe, result=result), indent=2)
-                + "\n"
-            )
     print(json.dumps(result))
