@@ -57,7 +57,12 @@ class AssemblyTest(unittest.TestCase):
     def test_reject_disconnected_cycle(self):
         self.way(11, [1, 2], [(1, 0, 0), (2, 1, 1)])
         self.way(12, [3, 4, 5, 3], [(3, 2, 2), (4, 3, 3), (5, 4, 4)])
-        with self.assertRaisesRegex(ValueError, 'disconnected'):
+        with self.assertRaisesRegex(ValueError, 'one open, unbranched chain'):
+            assemble(self.paths)
+
+    def test_reject_closed_chain(self):
+        self.way(11, [1, 2, 3, 1], [(1, 0, 0), (2, 1, 0), (3, 0, 1)])
+        with self.assertRaisesRegex(ValueError, 'one open, unbranched chain'):
             assemble(self.paths)
 
     def test_starts_with_the_lower_endpoint_id(self):
@@ -92,8 +97,9 @@ class AssemblyTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'self-intersection'):
             assemble(self.paths)
 
-    def test_reject_closed_geometry_with_distinct_terminal_ids(self):
-        self.way(11, [1, 2, 3, 4], [(1, 0, 0), (2, 1, 0), (3, 0, 1), (4, 0, 0)])
+    def test_reject_coincident_endpoints_with_distinct_ids(self):
+        self.way(11, [1, 2], [(1, 0, 0), (2, 1, 1)])
+        self.way(12, [3, 4], [(3, 1, 1), (4, 2, 2)])
         with self.assertRaisesRegex(ValueError, 'distinct OSM endpoints share coordinates'):
             assemble(self.paths)
 
