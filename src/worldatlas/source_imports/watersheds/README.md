@@ -49,7 +49,13 @@ Set the record's method to `watershed_boundary` and describe the geographic choi
 
 Optional `evidence_sources` is a list of catalog source-ID strings supporting geographic review. They are linked to the boundary but are not downloaded during construction. Files read by the calculation belong in `sources`.
 
-Source basin values identify drainage groups; unknown drainage has its own value, `-1`. Group IDs need not be consecutive. A group can contain several source basins. Use `waterway_groups` for explicitly identified downstream ways; otherwise natural networks are traced to their source-backed exit basins. Track destinations between real junctions, independently of how the provider divides a river into way records. An incoming section feeding two drainage groups retains both destinations. Shared drainage is known information; an unknown destination has no known route. The result identifies shared sections by source way, node IDs and destination groups. The result includes the shared-drainage and river-crossing checks. The construction record holds the choices required to reproduce them. Unassigned and incomplete networks are also reported. Before terrain processing, check the rivers intersecting the analysis areas and their downstream connections. If any route is unresolved, including one branch of an otherwise known fork, stop with its way and node IDs. Fix the source data or source-backed destination references and rerun. Two known destinations are valid. Unrelated unresolved rivers elsewhere in a provider extract do not block the calculation. Missing coordinates on a relevant river also stop the run. If source evidence establishes that a mapped way points upstream, list its ID in `reverse_waterways`. The constructor reverses its direction before tracing the network; its coordinates and source ID stay unchanged. Keep the supporting measurements and reason in the construction record. The result lists unresolved and ambiguous ways in the analysis domains; unrelated waterways elsewhere in a larger provider extract are excluded from those lists. Counts refer to OSM ways, not distinct rivers or drainage groups.
+Source basin values identify drainage groups. A group can include several basins, and group IDs need not be consecutive. The value `-1` represents unknown drainage. Use `waterway_groups` for explicitly identified downstream ways. The constructor traces other waterways to their source-backed exit basins and tracks destinations between actual junctions. A section feeding two known groups retains both destinations.
+
+Before processing terrain, the constructor checks rivers that intersect the analysis areas and follows their downstream connections. Missing coordinates or an unresolved route stop the run with the relevant way and node IDs. This includes a fork with one known branch and one unresolved branch. Correct the raw data or the source-backed destination references and rerun. Unrelated waterways outside the analysis do not block construction.
+
+If source evidence establishes that a mapped way points upstream, list its ID in `reverse_waterways` and record the supporting measurements and reason in the construction record. The constructor reverses the direction for tracing while preserving the way's coordinates and source ID.
+
+The result includes the river-crossing check, shared sections with their source way IDs, node IDs and destination groups, and unresolved or ambiguous ways within the analysis domains. Counts are for OSM ways, which can each represent only part of a river.
 
 Mapped rivers can continue through several estuary ways beyond the basin polygons. Trace back through that uncovered geometry to the downstream-most basin intersection on each path. Report the selected way, group and intersection. Stop at an unselected or ambiguous source basin; a path without a source-backed destination remains unassigned.
 
@@ -95,7 +101,7 @@ Each test file covers a distinct responsibility:
 | `test_boundary.py` | Connected routes, joins, geographic connections and final geometry. |
 | `test_build_boundary.py` | The steps working together, early failures, database writes and rollback. |
 
-Run all source-import tests:
+Follow the [database test setup](../../../../database/README.md#tests) to make PostgreSQL and `pg_jsonschema` available. Then run all source-import tests:
 
 ```bash
 python .github/scripts/run_tests.py --suite source_imports
