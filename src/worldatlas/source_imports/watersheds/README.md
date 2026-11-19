@@ -1,6 +1,6 @@
 # Watershed boundaries
 
-**TL;DR:** Read a construction record from Neon, download its verified raw files from R2, calculate drainage on the source elevation grid, and save the complete boundary in Neon. The same code handles different boundaries. Geographic selections live in the construction record.
+The watershed importer reads a construction record from Neon, downloads its verified raw files from R2, calculates drainage on the source elevation grid, and saves the complete boundary in Neon. The same code handles different boundaries. Geographic selections live in the construction record.
 
 ## Code
 
