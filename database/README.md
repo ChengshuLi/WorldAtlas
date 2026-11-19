@@ -21,7 +21,7 @@ These twelve tables have distinct purposes. A feature stores geometry; its const
 
 `geographic_levels` describes the hierarchy; `geographic_entities` links each entity to its level and parent, records its physical eligibility, and stores its color. World has ID zero. Deferred constraints validate the final state of a transaction, including edits involving a parent and its children. Independent families do not require a database-wide entity lock.
 
-Inserting a child entity also creates its map codes. Land and water entities get one binding each, and mixed entities get both. When the physical class changes, bindings for classes that still apply keep their codes. Release bundles keep the mappings used by their grids.
+Edit the entity to change the land or water classes it supports. The database maintains one map code for each supported class and preserves the codes for classes that still apply. Release bundles keep the mappings used by their grids.
 
 `geographic_rules` selects one of six operations. `geographic_rule_features` provides source areas, component-identifying points, boundaries or distance references. Optional `connected_to` links retain cells connected to any of the linked points. `geographic_rule_targets` identifies direct-child owners and, for divisions, their label points. Each rule stores its rationale. `geographic_rule_sources` links supporting raw sources and records the cited section and interpretation for each one. Ordinary foreign keys and deferred checks reject missing/forbidden roles, incorrect geometry types and invalid targets. See the [division guide](../src/worldatlas/map_build/division/README.md).
 
@@ -33,7 +33,7 @@ Add a rule citation when it helps a reviewer understand a current decision beyon
 
 Raw identity, storage location, size, checksum and capture time are immutable; correctable descriptive metadata remains editable. Changed source bytes require a new source ID. Construction settings, geometry and geographic rules are editable. Released input archives retain their exact earlier values and code.
 
-`construction_records.method` selects the importer and `arguments` stores its named inputs as JSONB. The importer registry and typed Python signatures define their checks. Regenerate those checks after changing a constructor:
+`construction_records.method` selects the importer and `arguments` stores its named inputs as JSONB. Edit raw-source IDs in those arguments. The database maintains `construction_sources` from them. The importer registry and typed Python signatures define the argument and source-reference checks. Regenerate those checks after changing a constructor:
 
 ```bash
 python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql

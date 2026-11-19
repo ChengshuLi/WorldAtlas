@@ -1,6 +1,13 @@
 -- Hierarchy, physical eligibility, colors and stable encoding are independent.
 BEGIN;
 INSERT INTO atlas.geographic_levels VALUES ('world',NULL),('continent','world');
+DO $$ BEGIN
+ BEGIN
+  INSERT INTO atlas.geographic_entities(id,name,level_id,physical_class)
+  VALUES (1,'World','world','mixed');
+  RAISE EXCEPTION 'a nonzero root ID was accepted';
+ EXCEPTION WHEN check_violation THEN NULL; END;
+END $$;
 INSERT INTO atlas.geographic_entities(id,name,level_id,parent_id,physical_class)
 VALUES (0,'World','world',NULL,'mixed'),(2,'Asia','continent',0,'mixed'),
        (7,'Atlantic','continent',0,'water'),(8,'Dry region','continent',0,'land');
@@ -41,7 +48,22 @@ BEGIN
   SET CONSTRAINTS ALL IMMEDIATE;
   RAISE EXCEPTION 'a water-only entity received a land encoding';
  EXCEPTION WHEN raise_exception THEN
-  IF SQLERRM NOT LIKE 'map binding is incompatible%' THEN RAISE; END IF;
+  IF SQLERRM <> 'map bindings do not match entity 7' THEN RAISE; END IF;
+ END;
+ BEGIN
+  DELETE FROM atlas.map_category_bindings WHERE entity_id=2 AND physical_class='water';
+  SET CONSTRAINTS ALL IMMEDIATE;
+  RAISE EXCEPTION 'an entity lost its required water code';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM <> 'map bindings do not match entity 2' THEN RAISE; END IF;
+ END;
+ BEGIN
+  DELETE FROM atlas.map_category_bindings WHERE entity_id=8 AND physical_class='land';
+  UPDATE atlas.map_category_bindings SET entity_id=8 WHERE entity_id=2 AND physical_class='land';
+  SET CONSTRAINTS ALL IMMEDIATE;
+  RAISE EXCEPTION 'an entity lost its required land code when it was moved';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM <> 'map bindings do not match entity 2' THEN RAISE; END IF;
  END;
  BEGIN
   UPDATE atlas.geographic_entities SET level_id='world' WHERE id=2;

@@ -72,3 +72,25 @@ END $$;
 
 CREATE TRIGGER construction_sources_sync AFTER INSERT OR UPDATE OF method, arguments
 ON atlas.construction_records FOR EACH ROW EXECUTE FUNCTION atlas.sync_construction_sources();
+
+CREATE FUNCTION atlas.check_construction_source_link() RETURNS trigger
+LANGUAGE plpgsql AS $$
+BEGIN
+ IF EXISTS (
+  SELECT FROM (VALUES (OLD.construction_id,OLD.source_id),
+                      (NEW.construction_id,NEW.source_id)) AS changed(construction_id,source_id)
+  JOIN atlas.construction_records c ON c.id=changed.construction_id
+  WHERE EXISTS (
+   SELECT FROM atlas.construction_sources s
+   WHERE s.construction_id=c.id AND s.source_id=changed.source_id
+  ) IS DISTINCT FROM EXISTS (
+   SELECT FROM atlas.construction_source_ids(c.method,c.arguments) AS expected(source_id)
+   WHERE expected.source_id=changed.source_id
+  )
+ ) THEN RAISE EXCEPTION 'construction source links must match the construction arguments'; END IF;
+ RETURN NULL;
+END $$;
+
+CREATE CONSTRAINT TRIGGER construction_source_link_check AFTER INSERT OR UPDATE OR DELETE
+ON atlas.construction_sources DEFERRABLE INITIALLY DEFERRED FOR EACH ROW
+EXECUTE FUNCTION atlas.check_construction_source_link();

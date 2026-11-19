@@ -227,6 +227,47 @@ class SelectionTests(unittest.TestCase):
     os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
 )
 class HierarchyConcurrencyTests(unittest.TestCase):
+    def test_compatible_parent_and_child_edits_both_commit(self):
+        url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
+        edits_started = threading.Barrier(2, timeout=5)
+
+        def edit(statement):
+            with psycopg.connect(url) as database:
+                database.execute("SET LOCAL lock_timeout='3s'")
+                database.execute(statement)
+                edits_started.wait()
+
+        with psycopg.connect(url, autocommit=True) as setup:
+            with setup.transaction():
+                setup.execute(
+                    "INSERT INTO atlas.geographic_levels VALUES "
+                    "('world',NULL),('continent','world'),"
+                    "('subcontinent','continent'),('region','subcontinent')"
+                )
+                setup.execute(
+                    "INSERT INTO atlas.geographic_entities(id,name,level_id,parent_id,physical_class) VALUES "
+                    "(0,'World','world',NULL,'mixed'),(2,'First','continent',0,'mixed'),"
+                    "(3,'Second','continent',0,'mixed'),(10,'Parent','subcontinent',2,'mixed'),"
+                    "(20,'Child','region',10,'mixed')"
+                )
+            try:
+                with ThreadPoolExecutor(max_workers=2) as pool:
+                    edits = (
+                        "UPDATE atlas.geographic_entities SET parent_id=3 WHERE id=10",
+                        "UPDATE atlas.geographic_entities SET physical_class='land' WHERE id=20",
+                    )
+                    list(pool.map(edit, edits))
+                entities = setup.execute(
+                    "SELECT id,parent_id,physical_class FROM atlas.geographic_entities "
+                    "WHERE id IN (10,20) ORDER BY id"
+                ).fetchall()
+                self.assertEqual(entities, [(10, 3, "mixed"), (20, 10, "land")])
+            finally:
+                with setup.transaction():
+                    setup.execute("DELETE FROM atlas.map_category_bindings WHERE entity_id IN (2,3,10,20)")
+                    setup.execute("DELETE FROM atlas.geographic_entities WHERE id IN (0,2,3,10,20)")
+                    setup.execute("DELETE FROM atlas.geographic_levels WHERE id IN ('world','continent','subcontinent','region')")
+
     def test_parent_edit_and_child_insert_cannot_commit_an_incompatible_family(self):
         url = os.environ["WORLDATLAS_TEST_DATABASE_URL"]
         started = threading.Event()

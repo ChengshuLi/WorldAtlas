@@ -1,7 +1,8 @@
 -- One editable recipe per construction ID; structural checks apply to edits too.
 BEGIN;
 INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes)
-VALUES ('raw','Test','Test','test:raw','Test','test:license','Test','test','raw',repeat('a',64),1);
+VALUES ('raw','Test','Test','test:raw','Test','test:license','Test','test','raw',repeat('a',64),1),
+       ('other','Test','Test','test:other','Test','test:license','Test','test','other',repeat('b',64),1);
 DO $$
 DECLARE
  input jsonb := '{"way_source_ids":["raw"],"start_node_id":1,"feature_id":"boundary","basis":"Join source segments"}';
@@ -37,5 +38,26 @@ BEGIN
    RAISE EXCEPTION 'invalid polygon selection point accepted';
   EXCEPTION WHEN check_violation THEN NULL; END;
  END LOOP;
+END $$;
+DO $$ BEGIN
+ BEGIN
+  DELETE FROM atlas.construction_sources WHERE construction_id='__construction' AND source_id='raw';
+  SET CONSTRAINTS atlas.construction_source_link_check IMMEDIATE;
+  RAISE EXCEPTION 'a construction lost a required raw-source link';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM <> 'construction source links must match the construction arguments' THEN RAISE; END IF;
+ END;
+ BEGIN
+  INSERT INTO atlas.construction_sources VALUES ('__construction','other');
+  SET CONSTRAINTS atlas.construction_source_link_check IMMEDIATE;
+  RAISE EXCEPTION 'a construction gained an unrelated raw-source link';
+ EXCEPTION WHEN raise_exception THEN
+  IF SQLERRM <> 'construction source links must match the construction arguments' THEN RAISE; END IF;
+ END;
+ UPDATE atlas.construction_records SET arguments=jsonb_set(arguments,'{way_source_ids}','["other"]')
+ WHERE id='__construction';
+ SET CONSTRAINTS atlas.construction_source_link_check IMMEDIATE;
+ IF (SELECT array_agg(source_id) FROM atlas.construction_sources WHERE construction_id='__construction')
+   IS DISTINCT FROM ARRAY['other'] THEN RAISE EXCEPTION 'editing construction arguments did not update the links'; END IF;
 END $$;
 ROLLBACK;
