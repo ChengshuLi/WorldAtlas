@@ -88,6 +88,27 @@ class DownloadTest(unittest.TestCase):
             download_source(self.storage, self.source, self.directory)
         self.assertEqual(self.storage.get_object.call_count, 1)
 
+    def test_verifies_cache_file_published_by_a_competing_download(self):
+        link = catalog.os.link
+        self.storage.get_object.side_effect = lambda **_: {'Body': io.BytesIO(self.raw)}
+        for name, competing_bytes in (('valid', self.raw), ('corrupt', b'x' * len(self.raw))):
+            directory = self.directory / name
+            destination = directory / self.source['sha256'] / 'source.zip'
+
+            def competing_publish(partial, final):
+                final.write_bytes(competing_bytes)
+                link(partial, final)
+
+            with self.subTest(name=name), patch.object(catalog.os, 'link', side_effect=competing_publish):
+                if name == 'valid':
+                    self.assertEqual(download_source(self.storage, self.source, directory), destination)
+                else:
+                    with self.assertRaisesRegex(ValueError, 'size or hash'):
+                        download_source(self.storage, self.source, directory)
+
+            self.assertEqual(destination.read_bytes(), competing_bytes)
+            self.assertFalse(list(directory.rglob('download-*')))
+
     def test_download_error_removes_partial(self):
         self.storage.get_object.side_effect = OSError('connection interrupted')
         with self.assertRaisesRegex(OSError, 'interrupted'):
