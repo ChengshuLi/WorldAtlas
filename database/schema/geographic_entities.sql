@@ -96,7 +96,7 @@ BEGIN
 END $$;
 CREATE CONSTRAINT TRIGGER geographic_level_check AFTER INSERT OR UPDATE OR DELETE
 ON atlas.geographic_levels DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_hierarchy();
-CREATE CONSTRAINT TRIGGER geographic_entity_check AFTER INSERT OR UPDATE
+CREATE CONSTRAINT TRIGGER geographic_entity_check AFTER INSERT OR UPDATE OF id,level_id,parent_id,physical_class
 ON atlas.geographic_entities DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_hierarchy();
-CREATE CONSTRAINT TRIGGER map_binding_check AFTER INSERT OR UPDATE
+CREATE CONSTRAINT TRIGGER map_binding_check AFTER INSERT OR UPDATE OF entity_id,physical_class
 ON atlas.map_category_bindings DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION atlas.check_geographic_hierarchy();
