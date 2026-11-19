@@ -51,7 +51,12 @@ class Runtime:
 
 
 def parameters(constructor):
-    """Only typed keyword-only arguments are stored in a construction."""
+    """Describe the JSON argument fields used to generate the SQL checks.
+
+    Return a mapping from field names to (annotation, required). The importer
+    supplies runtime separately. The remaining parameters must be typed and
+    keyword-only, and each parameter without a default is required.
+    """
     signature = inspect.signature(constructor)
     arguments = list(signature.parameters.values())
     if not arguments or arguments[0].name != "runtime":
@@ -66,9 +71,8 @@ def parameters(constructor):
             raise TypeError(
                 "construction parameters must be typed, keyword-only arguments"
             )
-        if parameter.name == "method":
-            raise TypeError("method is supplied by the constructor registry")
-        result[parameter.name] = (hints[parameter.name], parameter.default)
+        required = parameter.default is inspect.Parameter.empty
+        result[parameter.name] = (hints[parameter.name], required)
     return result
 
 
@@ -135,12 +139,7 @@ def sql_type(value, annotation, depth=0):
     if is_typeddict(annotation):
         hints = get_type_hints(annotation, include_extras=True)
         fields = {
-            name: (
-                kind,
-                inspect.Parameter.empty
-                if name in annotation.__required_keys__
-                else None,
-            )
+            name: (kind, name in annotation.__required_keys__)
             for name, kind in hints.items()
         }
         return sql_object(value, fields, depth + 1)
@@ -152,15 +151,15 @@ def sql_type(value, annotation, depth=0):
 def sql_object(value, fields, depth=0):
     allowed = ", ".join(literal(key) for key in fields)
     conditions = [f"{value} - ARRAY[{allowed}]::text[] = '{{}}'::jsonb"]
-    for name, (annotation, default) in fields.items():
+    for name, (annotation, required) in fields.items():
         expression = sql_type(f"({value} -> {literal(name)})", annotation, depth)
-        if default is not inspect.Parameter.empty:
+        if required:
             expression = (
-                f"(NOT {value} ? {literal(name)} OR COALESCE({expression}, FALSE))"
+                f"({value} ? {literal(name)} AND COALESCE({expression}, FALSE))"
             )
         else:
             expression = (
-                f"({value} ? {literal(name)} AND COALESCE({expression}, FALSE))"
+                f"(NOT {value} ? {literal(name)} OR COALESCE({expression}, FALSE))"
             )
         conditions.append(expression)
     return (

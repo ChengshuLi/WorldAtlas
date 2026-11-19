@@ -1,7 +1,6 @@
 """Generate construction contracts from signatures and enforce them in PostgreSQL."""
 
 import copy
-import inspect
 import os
 from typing import Any, TypedDict
 import unittest
@@ -38,7 +37,7 @@ class ContractTests(unittest.TestCase):
 
         self.assertEqual(
             parameters(example),
-            {"title": (NonEmptyText, inspect.Parameter.empty), "enabled": (bool, True)},
+            {"title": (NonEmptyText, True), "enabled": (bool, False)},
         )
 
     def test_untyped_or_variadic_parameters_are_not_silently_ignored(self):
@@ -165,8 +164,8 @@ class DatabaseContractTests(unittest.TestCase):
             arguments = ARGUMENTS[method]
             with self.subTest(method=method):
                 self.check(method, arguments, True)
-                for name, (_, default) in parameters(constructor).items():
-                    if default is inspect.Parameter.empty:
+                for name, (_, required) in parameters(constructor).items():
+                    if required:
                         self.check(
                             method,
                             {k: v for k, v in arguments.items() if k != name},
@@ -180,7 +179,7 @@ class DatabaseContractTests(unittest.TestCase):
         self.check("unknown", ARGUMENTS["osm_way_chain"], False)
 
     def test_required_freeform_json_cannot_be_omitted(self):
-        fields = {"value": (Any, inspect.Parameter.empty)}
+        fields = {"value": (Any, True)}
         expression = sql_object("input.document", fields)
         for document, expected in [
             ({}, False),
