@@ -85,6 +85,17 @@ class DatabaseTests(unittest.TestCase):
             self.store()
         self.assertEqual(self.row(), before)
 
+    def test_duplicate_source_ids_preserve_previous_geometry(self):
+        self.build()
+        before = self.row()
+        self.recipe["source_ids"] = ["raw", "raw"]
+        self.store()
+
+        with self.assertRaisesRegex(ValueError, "trace sources must be nonempty and distinct"):
+            self.build()
+
+        self.assertEqual(self.row(), before)
+
     def test_invalid_points_preserve_previous_geometry(self):
         self.build()
         before = self.row()
