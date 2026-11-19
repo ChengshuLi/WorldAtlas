@@ -96,7 +96,10 @@ class ImportSelectionTests(unittest.TestCase):
                 )
                 self.assertEqual(arguments, ARGUMENTS[method])
                 self.assertEqual(runtime.recipe_id, "arbitrary-record-name")
+                self.assertEqual(runtime.method, method)
+                self.assertEqual(runtime.arguments, ARGUMENTS[method])
                 self.assertIs(runtime.storage, self.storage)
+                self.assertEqual(runtime.work_dir, self.options["work_dir"])
 
     def test_trace_needs_no_storage_or_cache(self):
         def trace(runtime, **arguments):
