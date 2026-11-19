@@ -84,7 +84,7 @@ class ConstructionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
             river = Path(directory) / 'rivers.osm'
-            river.write_text('<osm><node id="1" lon=".001" lat=".005"/>'
+            river.write_text('<osm version="0.6"><node id="1" lon=".001" lat=".005"/>'
                              '<node id="2" lon=".002" lat=".003"/>'
                              '<node id="3" lon=".001" lat=".001"/>'
                              '<node id="4" lon=".005" lat=".001"/>'
@@ -102,7 +102,7 @@ class ConstructionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
             river = Path(directory) / 'river.osm'
-            river.write_text('<osm><node id="1" lon=".002" lat=".0022"/>'
+            river.write_text('<osm version="0.6"><node id="1" lon=".002" lat=".0022"/>'
                              '<node id="2" lon=".002" lat=".0038"/>'
                              '<way id="10"><nd ref="1"/><nd ref="2"/>'
                              '<tag k="waterway" v="stream"/></way></osm>')

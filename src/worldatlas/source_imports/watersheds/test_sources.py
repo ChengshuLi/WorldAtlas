@@ -27,7 +27,7 @@ class SourceGeometryTests(unittest.TestCase):
 
     def test_relation_order_is_reconstructed_from_its_selected_source_members(self):
         path = self.root / 'river.osm'
-        path.write_text('<osm><node id="1" lon="0" lat="0"/>'
+        path.write_text('<osm version="0.6"><node id="1" lon="0" lat="0"/>'
                         '<node id="2" lon="1" lat="1"/><node id="3" lon="2" lat="0"/>'
                         '<way id="20"><nd ref="2"/><nd ref="3"/></way>'
                         '<way id="10"><nd ref="2"/><nd ref="1"/></way>'
@@ -80,7 +80,7 @@ class SourceGeometryTests(unittest.TestCase):
 
     def test_network_cache_keeps_reviewed_directions_separate(self):
         path = self.root / 'rivers.osm'
-        path.write_text('<osm><node id="1" lon="0" lat="0"/>'
+        path.write_text('<osm version="0.6"><node id="1" lon="0" lat="0"/>'
                         '<node id="2" lon="1" lat="1"/>'
                         '<way id="10"><nd ref="1"/><nd ref="2"/>'
                         '<tag k="waterway" v="river"/></way></osm>')

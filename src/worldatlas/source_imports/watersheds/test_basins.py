@@ -150,7 +150,7 @@ class BasinTests(unittest.TestCase):
 
     def test_disconnected_natural_networks_use_their_actual_exit_basins(self):
         path = self.root / 'rivers.osm'
-        path.write_text('<osm><node id="1" lon="0.2" lat="1.5"/>'
+        path.write_text('<osm version="0.6"><node id="1" lon="0.2" lat="1.5"/>'
                         '<node id="2" lon="0.3" lat="0.5"/>'
                         '<node id="3" lon="1.2" lat="1.5"/>'
                         '<node id="4" lon="1.3" lat="0.5"/>'
@@ -177,7 +177,7 @@ class BasinTests(unittest.TestCase):
         for name, parts in [('unsplit', [way(10, [1, 2, 3]), way(20, [2, 4])]),
                             ('split', [way(10, [1, 2]), way(11, [2, 3]), way(20, [2, 4])])]:
             path = self.root / (name + '.osm')
-            path.write_text('<osm>' + nodes + ''.join(parts) + '</osm>')
+            path.write_text('<osm version="0.6">' + nodes + ''.join(parts) + '</osm>')
             network = Waterways([path])
             assigned, report = network.basin_groups(self.basins())
             self.assertEqual(assigned, {('1', '2'): (3, 7), ('2', '3'): (3,), ('2', '4'): (7,)})
@@ -201,7 +201,7 @@ class BasinTests(unittest.TestCase):
                            ''.join(f'<nd ref="{n}"/>' for n in part) +
                            '<tag k="waterway" v="stream"/></way>' for i, part in enumerate(members))
             path = self.root / (name + '.osm')
-            path.write_text('<osm>' + nodes + body + '</osm>')
+            path.write_text('<osm version="0.6">' + nodes + body + '</osm>')
             network = Waterways([path])
             assigned, _ = network.basin_groups(self.basins())
             results.append(seed_grid(network, assigned, grid)[0])
@@ -210,7 +210,7 @@ class BasinTests(unittest.TestCase):
 
     def test_downstream_trace_can_cross_several_uncovered_estuary_ways(self):
         path = self.root / 'estuary.osm'
-        path.write_text('<osm><node id="1" lon="0.5" lat="1"/>'
+        path.write_text('<osm version="0.6"><node id="1" lon="0.5" lat="1"/>'
                         '<node id="2" lon="1.5" lat="1"/>'
                         '<node id="3" lon="3" lat="1"/>'
                         '<node id="4" lon="4" lat="1"/>'
@@ -230,7 +230,7 @@ class BasinTests(unittest.TestCase):
 
     def test_closed_waterway_cycle_does_not_gain_an_invented_destination(self):
         path = self.root / 'cycle.osm'
-        path.write_text('<osm><node id="1" lon="0.2" lat="1"/>'
+        path.write_text('<osm version="0.6"><node id="1" lon="0.2" lat="1"/>'
                         '<node id="2" lon="0.3" lat="1"/>'
                         '<way id="10"><nd ref="1"/><nd ref="2"/><nd ref="1"/>'
                         '<tag k="waterway" v="stream"/></way></osm>')

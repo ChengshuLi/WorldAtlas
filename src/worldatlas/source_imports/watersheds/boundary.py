@@ -1,11 +1,11 @@
 """Join source lines, drainage divides and explicit geodesic connectors once."""
-from collections import defaultdict
 from dataclasses import dataclass, field
-import heapq
 import math
 
 import numpy as np
 from pyproj import CRS, Transformer
+from scipy.sparse import csr_array
+from scipy.sparse.csgraph import dijkstra
 from shapely import linestrings
 from shapely.geometry import LineString, Point
 from shapely.ops import substring
@@ -132,37 +132,26 @@ class Divide:
                 coordinates[terminal] = join.point
                 split[edge].append((fraction, terminal))
             terminals.append(terminal)
-        adjacent = defaultdict(list)
+        nodes = list(coordinates)
+        node_ids = {node: index for index, node in enumerate(nodes)}
+        rows, columns, lengths = [], [], []
         for edge in sorted(split):
             pieces = sorted(split[edge], key=lambda item: item[0])
             for (_, a), (_, b) in zip(pieces, pieces[1:]):
-                length = distance(coordinates[a], coordinates[b])
-                adjacent[a].append((b, length))
-                adjacent[b].append((a, length))
-        source, target = terminals
-        lengths, parents = {source: 0.}, {}
-        queue, order = [(0., 0, source)], 0
-        while queue:
-            length, _, node = heapq.heappop(queue)
-            if length != lengths[node]:
-                continue
-            if node == target:
-                break
-            for other, weight in adjacent[node]:
-                proposed = length + weight
-                if proposed < lengths.get(other, float('inf')):
-                    lengths[other], parents[other] = proposed, node
-                    order += 1
-                    heapq.heappush(queue, (proposed, order, other))
-        if target not in lengths:
+                rows.append(node_ids[a])
+                columns.append(node_ids[b])
+                lengths.append(distance(coordinates[a], coordinates[b]))
+        # Each divide edge is traversable in both directions.
+        graph = csr_array((lengths + lengths, (rows + columns, columns + rows)),
+                          shape=(len(nodes), len(nodes)))
+        source, target = (node_ids[node] for node in terminals)
+        distances, previous = dijkstra(graph, indices=source, return_predecessors=True)
+        if not np.isfinite(distances[target]):
             raise ValueError('selected joins are on disconnected divide pieces')
         path = [target]
         while path[-1] != source:
-            path.append(parents[path[-1]])
-        points = [coordinates[node] for node in reversed(path)]
-        if len(points) < 2:
-            raise ValueError('divide joins coincide')
-        return LineString(points)
+            path.append(previous[path[-1]])
+        return LineString([coordinates[nodes[index]] for index in reversed(path)])
 
 
 def _points(geometry):

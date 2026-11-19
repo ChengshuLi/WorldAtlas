@@ -1,19 +1,37 @@
 """Read pinned OSM objects and assign natural waterways by downstream topology."""
 from collections import defaultdict
-from contextlib import ExitStack
 from dataclasses import dataclass
 import json
 import math
 from pathlib import Path
-import xml.etree.ElementTree as ET
+import shutil
+from tempfile import TemporaryDirectory
 import zipfile
 
 import numpy as np
+import osmium
 from osgeo import gdal, ogr, osr
 from pyproj import CRS
 from pyproj import Transformer
 from shapely.geometry import LineString, Point, box
 from shapely.strtree import STRtree
+
+
+def _osm_files(paths, directory):
+    """Stage XML members of ZIP archives for Pyosmium's streaming reader."""
+    for index, path in enumerate(map(Path, paths)):
+        if not zipfile.is_zipfile(path):
+            yield osmium.io.File(str(path), 'pbf' if path.suffix.lower() == '.pbf' else 'osm')
+            continue
+        with zipfile.ZipFile(path) as archive:
+            members = [item for item in archive.infolist() if item.filename.endswith(('.osm', '.xml'))]
+            if not members:
+                raise ValueError('OSM archive has no XML responses')
+            for member_index, member in enumerate(members):
+                unpacked = directory / f'{index}-{member_index}.osm'
+                with archive.open(member) as source, unpacked.open('wb') as output:
+                    shutil.copyfileobj(source, output)
+                yield osmium.io.File(str(unpacked), 'osm')
 
 
 @dataclass
@@ -37,46 +55,20 @@ class Waterways:
         self.nodes, self.ways, self.relations = {}, {}, {}
         self.natural_only = natural_only
         self._node_versions, self._way_versions = {}, {}
-        pbf_paths = []
-        for path in paths:
-            if Path(path).suffix == '.pbf':
-                self._read_pbf_memberships(path)
-                pbf_paths.append(path)
-                continue
-            with ExitStack() as stack:
-                if zipfile.is_zipfile(path):
-                    archive = stack.enter_context(zipfile.ZipFile(path))
-                    names = [name for name in archive.namelist() if name.endswith(('.osm', '.xml'))]
-                    if not names:
-                        raise ValueError('OSM archive has no XML responses')
-                    streams = [stack.enter_context(archive.open(name)) for name in names]
-                else:
-                    streams = [stack.enter_context(open(path, 'rb'))]
-                for stream in streams:
-                    for _, element in ET.iterparse(stream, events=('end',)):
-                        ident = element.get('id')
-                        if element.tag == 'node':
-                            version = int(element.get('version', '0'))
-                            point = (float(element.get('lon')), float(element.get('lat')))
-                            self._node(ident, version, point)
-                            element.clear()
-                        elif element.tag == 'way':
-                            way = Way(tuple(n.get('ref') for n in element.findall('nd')),
-                                      {tag.get('k'): tag.get('v') for tag in element.findall('tag')},
-                                      int(element.get('version', '0')))
-                            self._way(ident, way)
-                            element.clear()
-                        elif element.tag == 'relation':
-                            relation = (int(element.get('version', '0')),
-                                        tuple((m.get('type'), m.get('ref'), m.get('role'))
-                                              for m in element.findall('member')))
-                            self._relation(ident, relation)
-                            element.clear()
-        wanted = {node for way in self.ways.values() for node in way.nodes} if natural_only else None
-        for path in pbf_paths:
-            self._read_pbf_nodes(path, wanted)
-        if natural_only:
-            self.nodes = {node: point for node, point in self.nodes.items() if node in wanted}
+        with TemporaryDirectory(prefix='watershed-osm-') as directory:
+            files = list(_osm_files(paths, Path(directory)))
+            entities = osmium.osm.WAY if natural_only else osmium.osm.OBJECT
+            for file in files:
+                self._read_objects(osmium.FileProcessor(file, entities))
+            if natural_only:
+                # Merge all way versions before deciding which nodes to read.
+                # A selected way can reference nodes in a different extract.
+                wanted = {int(node) for way in self.ways.values() for node in way.nodes}
+                if wanted:
+                    node_filter = osmium.filter.IdFilter(wanted)
+                    for file in files:
+                        reader = osmium.FileProcessor(file, osmium.osm.NODE).with_filter(node_filter)
+                        self._read_objects(reader)
         del self._node_versions, self._way_versions
         # Apply reviewed direction corrections after merging source versions so
         # the corrections apply to the selected version of each way.
@@ -141,37 +133,19 @@ class Waterways:
         if old is None or relation[0] >= old[0]:
             self.relations[ident] = relation
 
-    def _read_pbf_memberships(self, path):
-        """Merge memberships from every source before filtering any PBF nodes."""
-        import osmium
-
-        owner = self
-
-        class Memberships(osmium.SimpleHandler):
-            def way(self, way):
-                owner._way(str(way.id), Way(tuple(str(n.ref) for n in way.nodes),
-                                           dict(way.tags), way.version))
-
-            def relation(self, relation):
-                if not owner.natural_only:
-                    kinds = {'n': 'node', 'w': 'way', 'r': 'relation'}
-                    owner._relation(str(relation.id), (relation.version, tuple(
-                        (kinds[m.type], str(m.ref), m.role) for m in relation.members)))
-
-        Memberships().apply_file(str(path))
-
-    def _read_pbf_nodes(self, path, wanted):
-        """Read coordinates needed by the final, merged source memberships."""
-        import osmium
-
-        owner = self
-
-        class Coordinates(osmium.SimpleHandler):
-            def node(self, node):
-                owner._node(str(node.id), node.version, (node.lon, node.lat))
-
-        filters = [osmium.filter.IdFilter({int(node) for node in wanted})] if self.natural_only else []
-        Coordinates().apply_file(str(path), filters=filters)
+    def _read_objects(self, objects):
+        """Copy the object values needed after Pyosmium advances the reader."""
+        member_types = {'n': 'node', 'w': 'way', 'r': 'relation'}
+        for obj in objects:
+            ident = str(obj.id)
+            if obj.is_node():
+                self._node(ident, obj.version, (obj.lon, obj.lat))
+            elif obj.is_way():
+                self._way(ident, Way(tuple(str(node.ref) for node in obj.nodes),
+                                     dict(obj.tags), obj.version))
+            else:
+                members = tuple((member_types[m.type], str(m.ref), m.role) for m in obj.members)
+                self._relation(ident, (obj.version, members))
 
     def segments(self, way_id):
         """Source index/node pairs delimiting each directed topology segment."""
