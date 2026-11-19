@@ -6,7 +6,7 @@ Raw files are pinned by their cataloged size and checksum. Neon checks the [reci
 
 [`build_features.py`](build_features.py) declares the typed methods for vector, OSM, and S-130 imports and shares their catalog lookup and verified R2 cache. [`geometry.py`](geometry.py) validates and saves each method's results in one transaction. Repeat imports preserve existing relationships, and failed imports leave selected records intact.
 
-Run any of these three methods with the common import command.
+Use the common import command for `selected_vector_features`, `selected_osm_features`, and `s130_areas`.
 
 ```bash
 worldatlas-import --recipe CONSTRUCTION_ID \
