@@ -173,6 +173,8 @@ class DatabaseContractTests(unittest.TestCase):
                 self.check(method, dict(arguments, unexpected="unused"), False)
                 self.check(method, dict(arguments, basis=False), False)
                 self.check(method, dict(arguments, basis=" \t\n"), False)
+                self.check(method, dict(arguments, basis="\u0085\u00a0\u3000"), False)
+                self.check(method, dict(arguments, basis="\u00a0東京\u3000"), True)
         self.check("unknown", ARGUMENTS["osm_way_chain"], False)
 
     def test_required_freeform_json_cannot_be_omitted(self):
@@ -195,6 +197,7 @@ class DatabaseContractTests(unittest.TestCase):
             ("osm_way_chain", dict(way_source_ids=[1]), False),
             ("osm_way_chain", dict(way_source_ids=[" \t"]), False),
             ("watershed_boundary", dict(sources={" ": "raw"}), False),
+            ("watershed_boundary", dict(sources={"\u00a0": "raw"}), False),
             ("watershed_boundary", dict(sources={"valid": None}), False),
             (
                 "selected_vector_features",

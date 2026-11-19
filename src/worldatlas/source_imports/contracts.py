@@ -3,7 +3,7 @@
 Each construction record stores a registered method name and a JSON object
 of arguments. The method's signature defines which arguments are required,
 their types, and which values refer to raw sources. Regenerating the SQL
-updates both database functions from those declarations.
+updates the construction checks and the shared nonblank text predicate.
 """
 
 import argparse
@@ -30,8 +30,12 @@ from psycopg.sql import quote
 from pydantic import StringConstraints, TypeAdapter
 from pydantic.json_schema import GenerateJsonSchema
 
-# Require at least one character outside the listed whitespace characters.
-NonEmptyText = Annotated[str, StringConstraints(pattern=r"[^ \t\n\r\f\x0b]")]
+# Unicode White_Space code points. Spell out the set once so all regex engines agree.
+NONBLANK_PATTERN = (
+    r"[^\u0009-\u000d\u0020\u0085\u00a0\u1680\u2000-\u200a"
+    r"\u2028\u2029\u202f\u205f\u3000]"
+)
+NonEmptyText = Annotated[str, StringConstraints(pattern=NONBLANK_PATTERN)]
 # Keep the string constraint and mark this value as a reference to source_assets.id.
 SourceId = Annotated[NonEmptyText, "source-id"]
 
@@ -210,6 +214,9 @@ def source_paths(annotation, path="$"):
 def database_checks():
     """Return the complete SQL text generated from the importer registry.
 
+    ``atlas.nonblank`` uses the same Unicode whitespace pattern as
+    ``NonEmptyText`` so plain SQL columns and JSON arguments agree.
+
     ``atlas.valid_construction_record`` picks the registered method's JSON
     Schema and validates ``arguments`` with ``pg_jsonschema``. The table's
     check constraint uses this function to reject unknown methods and
@@ -241,13 +248,15 @@ def database_checks():
             )
     return (
         "-- Generated from constructor signatures. Do not edit; see source_imports.contracts.\n"
+        "CREATE FUNCTION atlas.nonblank(value text) RETURNS boolean\n"
+        "LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE AS $nonblank$\n"
+        f' SELECT value COLLATE "C" ~ {quote(NONBLANK_PATTERN)};\n'
+        "$nonblank$;\n\n"
         "CREATE FUNCTION atlas.valid_construction_record(method text, arguments jsonb)\n"
         "RETURNS boolean LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $contract$\n"
         "SELECT CASE method\n"
         + "\n".join(choices)
         + "\nELSE FALSE END;\n$contract$;\n"
-        "ALTER TABLE atlas.construction_records ADD CONSTRAINT construction_arguments_valid\n"
-        "CHECK (atlas.valid_construction_record(method, arguments));\n"
         "\nCREATE FUNCTION atlas.construction_source_ids(method text, arguments jsonb)\n"
         "RETURNS SETOF text LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $sources$\n"
         "SELECT DISTINCT value #>> '{}' FROM unnest(CASE method\n"

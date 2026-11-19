@@ -8,14 +8,16 @@ Neon stores editable geography and construction settings, raw-file identities, a
 
 | File | Tables and responsibilities |
 | --- | --- |
+| [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated nonblank check, construction argument validation, and source-reference extraction. |
 | [`sources.sql`](schema/sources.sql) | `source_assets`: one immutable raw-file capture; `construction_records`: typed editable import settings; `construction_sources`: generated raw-source links. |
-| [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated JSON Schemas for `pg_jsonschema` and source-reference paths from Python signatures. |
 | [`source_features.sql`](schema/source_features.sql) | Imported geometry and its producing construction. |
 | [`geographic_entities.sql`](schema/geographic_entities.sql) | Hierarchy levels, geographic entities, and entity/physical-class map codes. |
 | [`geographic_rules.sql`](schema/geographic_rules.sql) | Parent-division rules and their feature, child-target and supporting-source links. |
 | [`releases.sql`](schema/releases.sql) | Immutable R2 bundle identity and publication-state flags. |
 
 These twelve tables have distinct purposes. A feature stores geometry; its construction describes how raw sources produce it. A rule explains how geometry assigns parent cells to children. Category bindings encode the resulting owner and physical class; display colors do not determine ownership.
+
+Required nonblank text must contain at least one character outside Unicode's `White_Space` set, which includes tabs, nonbreaking spaces and ideographic spaces. Ordinary text columns and typed construction arguments use the same pattern from [`contracts.py`](../src/worldatlas/source_imports/contracts.py).
 
 `source_features` has three required columns: `id`, `geometry`, `construction_id`. Geometry is GeoJSON using WGS84 longitude first, latitude second, in degrees. Database checks validate types, nesting, coordinate ranges and polygon closure. Importers also check geometric validity. Provider feature selectors remain in construction settings rather than being copied into output rows.
 
