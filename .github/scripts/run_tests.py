@@ -1,4 +1,9 @@
-"""Run the installed Python suites concurrently, each with isolated database fixtures."""
+"""Run the installed WorldAtlas test suites concurrently.
+
+Run ``python .github/scripts/run_tests.py`` from the repository root.
+Use ``--suite`` to select one suite. Suites that need PostgreSQL each
+get their own database on a temporary local server.
+"""
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -28,6 +33,16 @@ SUITES = {
 
 
 def run_suite(name, directory, databases):
+    """Run one suite and capture its output in a log file.
+
+    Args:
+        name: Suite name from ``SUITES``.
+        directory: Temporary directory for the log and test working files.
+        databases: Connection strings keyed by suites that need PostgreSQL.
+
+    Returns:
+        The suite name, exit code, elapsed seconds, and log path.
+    """
     started = time.monotonic()
     log = directory / (name + '.log')
     with log.open('w') as output:
@@ -52,14 +67,20 @@ def run_suite(name, directory, databases):
 
 
 def main():
+    """Run the requested suites and return their combined exit status.
+
+    Check that the generated SQL is current, prepare isolated database
+    fixtures where needed, and stop the temporary server on exit.
+    Return zero when all selected suites pass or one if any suite fails.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--suite', choices=SUITES, help='run one suite; defaults to all suites')
     args = parser.parse_args()
     if (ROOT / "database/schema/construction_contracts.sql").read_text() != database_checks():
         parser.error("construction checks are stale; regenerate database/schema/construction_contracts.sql")
     selected = (args.suite,) if args.suite else tuple(SUITES)
-    # Unix socket paths must stay short on macOS; Python fixtures use their
-    # ordinary temporary directories independently of this server directory.
+    # Keep the socket path short enough for macOS. Python fixtures use
+    # their ordinary temporary directories independently of the server.
     with tempfile.TemporaryDirectory(prefix='worldatlas-tests-', dir='/tmp') as temp:
         directory = Path(temp)
         data = directory / 'data'

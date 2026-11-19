@@ -1,4 +1,4 @@
-"""Generate construction contracts from signatures and enforce them in PostgreSQL."""
+"""Test signature-derived contracts and their enforcement in PostgreSQL."""
 
 import os
 from typing import Any, TypedDict
@@ -19,6 +19,8 @@ from worldatlas.source_imports.test_run_import import ARGUMENTS
 
 
 class ContractTests(unittest.TestCase):
+    """Test how the generator reads types and defaults from signatures."""
+
     def test_source_paths_follow_types_instead_of_names(self):
         class Inputs(TypedDict):
             elevation: SourceId
@@ -54,7 +56,10 @@ class ContractTests(unittest.TestCase):
     os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
 )
 class DatabaseContractTests(unittest.TestCase):
+    """Exercise argument validation and source links in a disposable database."""
+
     def setUp(self):
+        """Open a connection and add a raw source within a test transaction."""
         self.database = psycopg.connect(os.environ["WORLDATLAS_TEST_DATABASE_URL"])
         self.addCleanup(self.database.close)
         self.addCleanup(self.database.rollback)
@@ -65,6 +70,13 @@ class DatabaseContractTests(unittest.TestCase):
         )
 
     def check(self, method, arguments, expected):
+        """Check whether the argument constraint accepts a construction.
+
+        Args:
+            method: Construction method name to insert.
+            arguments: JSON arguments to insert for the method.
+            expected: Whether the database should accept the row.
+        """
         insert = (
             "INSERT INTO atlas.construction_records(id,method,arguments) "
             "VALUES ('__contract',%s,%s)"

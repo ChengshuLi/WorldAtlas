@@ -1,4 +1,4 @@
-"""Dispatch stored constructions and supply their execution resources."""
+"""Test how the importer dispatches saved construction records."""
 
 from contextlib import nullcontext
 from pathlib import Path
@@ -8,6 +8,7 @@ from unittest.mock import Mock, patch
 from worldatlas.source_imports.run_import import IMPORTERS, run_import
 
 
+# The database contract tests also use these valid argument shapes.
 ARGUMENTS = {
     "interpreted_geometry": dict(
         source_ids=["raw"],
@@ -69,7 +70,10 @@ ARGUMENTS = {
 
 
 class ImportSelectionTests(unittest.TestCase):
+    """Check argument forwarding and resource requirements for dispatch."""
+
     def setUp(self):
+        """Supply stand-ins for the database connection and R2 cache options."""
         self.connect = lambda: nullcontext(object())
         self.storage = Mock()
         self.options = dict(storage=self.storage, work_dir=Path("/test/cache"))

@@ -12,8 +12,15 @@ import time
 def read_recipe(database, recipe_id):
     """Return the stored method and arguments for a construction ID.
 
-    Use the caller's PostgreSQL connection and transaction. Raise
-    ``ValueError`` if the construction record is missing.
+    Args:
+        database: The caller's PostgreSQL connection.
+        recipe_id: Construction ID to look up.
+
+    Returns:
+        A pair containing the method name and its argument dictionary.
+
+    Raises:
+        ValueError: The construction record is missing.
     """
     row = database.execute(
         'SELECT method,arguments FROM atlas.construction_records '
@@ -28,8 +35,16 @@ def read_recipe(database, recipe_id):
 def catalog_source(database, source_id):
     """Resolve a raw source ID into its R2 location and expected file identity.
 
-    Return a dictionary with the source ID, bucket, object key, byte size,
-    and SHA-256. Raise ``ValueError`` if the catalog entry is missing.
+    Args:
+        database: The caller's PostgreSQL connection.
+        source_id: Raw source ID to look up.
+
+    Returns:
+        A dictionary containing ``source_id``, ``r2_bucket``, ``r2_key``,
+        ``size_bytes``, and ``sha256``.
+
+    Raises:
+        ValueError: The catalog entry is missing.
     """
     row = database.execute(
         "SELECT r2_bucket,r2_key,sha256,size_bytes FROM atlas.source_assets "
@@ -47,8 +62,14 @@ def catalog_source(database, source_id):
 def check_source(path, source):
     """Check a local file against the expected byte size and SHA-256.
 
-    Check the size of the open file before reading it for the hash. Raise
-    ``ValueError`` when either value differs from the source record.
+    Check the size of the open file before reading it for the hash.
+
+    Args:
+        path: Local file path.
+        source: Metadata containing the expected ``size_bytes`` and ``sha256``.
+
+    Raises:
+        ValueError: The file's size or hash differs from the expected value.
     """
     with path.open('rb') as stream:
         size = os.fstat(stream.fileno()).st_size
@@ -62,10 +83,17 @@ def check_source(path, source):
 def stream_source(client, source, output, *, check_cancelled=lambda: None):
     """Copy an R2 object to the caller's open binary output in chunks.
 
-    ``source`` supplies the R2 bucket, object key, and expected byte size.
-    Check cancellation before the request and before each chunk. Close
-    the response body and reject any byte-length mismatch. The caller
-    owns the output and performs SHA-256 verification separately.
+    Close the R2 response body after reading it. The caller owns the
+    output and performs SHA-256 verification separately.
+
+    Args:
+        client: R2 client with an S3-compatible ``get_object`` method.
+        source: Catalog entry with bucket, object key, and expected byte size.
+        output: Open binary output that receives the object's bytes.
+        check_cancelled: Optional callback before the request and each chunk.
+
+    Raises:
+        ValueError: The response length differs from the expected size.
     """
     check_cancelled()
     response = client.get_object(Bucket=source['r2_bucket'], Key=source['r2_key'])
@@ -88,14 +116,24 @@ def stream_source(client, source, output, *, check_cancelled=lambda: None):
 def download_source(client, source, work_dir, *, timing=None, filename=None):
     """Return a verified local path for a cataloged R2 object.
 
-    Cache the file under ``work_dir / sha256`` using the supplied plain
-    filename or a default such as ``source.zip``. Reuse verified cached
-    content, sharing it by hard link when the two callers use different
-    names. A corrupt cache entry raises an error. On a cache miss, verify
-    the temporary download before linking it into the cache.
+    Verify cached content before reuse. Share the bytes by hard link when
+    the cache has them under the default or provider filename. Verify a
+    new download before making the final cache path available.
 
-    If supplied, ``timing`` accumulates transfer durations and intervals.
-    Verification and cached reuse are outside those measurements.
+    Args:
+        client: R2 client with an S3-compatible ``get_object`` method.
+        source: Catalog entry with R2 location, byte size, and SHA-256.
+        work_dir: Local cache root.
+        timing: Optional dictionary that accumulates transfer durations and
+            intervals, excluding verification and cached reuse.
+        filename: Optional plain filename. Defaults to ``source`` with the
+            object's suffix, or ``source.bin`` when it has no suffix.
+
+    Returns:
+        The cached ``Path`` under ``work_dir / sha256``.
+
+    Raises:
+        ValueError: The filename is invalid or the file fails verification.
     """
     directory = Path(work_dir) / source['sha256']
     directory.mkdir(parents=True, exist_ok=True)
@@ -107,8 +145,7 @@ def download_source(client, source, work_dir, *, timing=None, filename=None):
     if destination.exists():
         check_source(destination, source)
         return destination
-    # Both callers use the same content directory. Preserve their established
-    # filenames without downloading or copying bytes already cached by the other.
+    # A map build may have cached the same bytes under the provider filename.
     for name in dict.fromkeys((standard, Path(source['r2_key']).name)):
         existing = directory / name
         if existing != destination and existing.is_file():
@@ -143,13 +180,26 @@ def download_source(client, source, work_dir, *, timing=None, filename=None):
 
 
 def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir, *, timing=None):
-    """Reassemble a provider file from cataloged byte parts and verify the whole.
+    """Reassemble and verify a provider file stored as multiple R2 objects.
 
-    ``parts`` contains the catalog entries in byte order. Their sizes
-    must sum to ``size_bytes``. Reuse a verified assembly if present.
-    Otherwise download or reuse each part, concatenate them, and verify
-    the complete file before caching it. Return the path under the
-    complete file's SHA-256. Report only part transfers in ``timing``.
+    Reuse a verified assembly when present. Otherwise concatenate the
+    verified parts in byte order and check the complete file before caching it.
+
+    Args:
+        client: R2 client with an S3-compatible ``get_object`` method.
+        parts: Catalog entries in the order of their bytes in the full file.
+        sha256: Expected SHA-256 of the complete file.
+        size_bytes: Expected size of the complete file in bytes.
+        filename: Plain local filename for the assembled file.
+        work_dir: Local cache root for the parts and complete file.
+        timing: Optional dictionary that accumulates part transfer timings.
+
+    Returns:
+        The cached ``Path`` at ``work_dir / sha256 / filename``.
+
+    Raises:
+        ValueError: No parts were supplied, the filename is invalid, or the
+            part sizes or file contents fail verification.
     """
     if not parts or not filename or Path(filename).name != filename or filename in ('.', '..'):
         raise ValueError('ordered source parts and a plain filename are required')

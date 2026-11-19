@@ -33,13 +33,13 @@ from psycopg.sql import quote
 from pydantic import StringConstraints, TypeAdapter
 from pydantic.json_schema import GenerateJsonSchema
 
-# Unicode White_Space code points. Spell out the set once so all regex engines agree.
+# Use the same explicit Unicode White_Space set in every regex engine.
 NONBLANK_PATTERN = (
     r"[^\u0009-\u000d\u0020\u0085\u00a0\u1680\u2000-\u200a"
     r"\u2028\u2029\u202f\u205f\u3000]"
 )
 NonEmptyText = Annotated[str, StringConstraints(pattern=NONBLANK_PATTERN)]
-# Keep the string constraint and mark this value as a reference to source_assets.id.
+# Mark raw source IDs so the generator can derive database links from the type.
 SourceId = Annotated[NonEmptyText, "source-id"]
 
 
@@ -64,15 +64,18 @@ class Runtime:
 
     @contextmanager
     def saving(self, database):
-        """Check the recipe and hold it stable while the caller saves geometry.
+        """Check and lock the construction while the caller saves geometry.
 
         Read the current method and arguments under a shared row lock and
-        compare them with the snapshot used for the calculation. Raise
-        ValueError before saving if the recipe changed or was deleted.
+        compare them with the snapshot used for the calculation. The lock
+        lasts until the enclosing transaction finishes. An exception inside
+        the context rolls back the save.
 
-        The caller writes the geometry inside this context. The row lock
-        prevents recipe edits until the enclosing transaction finishes.
-        An exception inside the context rolls back the save.
+        Args:
+            database: PostgreSQL connection used to save the result.
+
+        Raises:
+            ValueError: The construction was edited or deleted during calculation.
         """
         with database.transaction():
             row = database.execute(
@@ -89,17 +92,22 @@ class Runtime:
 def parameters(constructor):
     """Return the argument types and presence requirements of a constructor.
 
-    Each entry maps a JSON field name to ``(annotation, required)``. The
-    annotation is the declared Python type, such as ``int`` or
-    ``list[SourceId]``, including metadata used for validation and reference
-    extraction. ``required`` is true when the parameter has no default.
-    A type that permits ``None`` controls whether JSON null is allowed
-    when the key is present. The default controls whether the key can be omitted.
+    The importer supplies ``runtime`` separately. A parameter's default
+    controls whether its JSON key can be omitted, and its type controls
+    which values, including JSON null, are allowed when it is present.
 
-    Raise ``TypeError`` if the first parameter is missing or has a name
-    other than ``runtime``, or if any subsequent parameter lacks a type
-    annotation or is not keyword-only. The importer supplies ``runtime``
-    separately, so it is excluded from the returned fields.
+    Args:
+        constructor: Importer function with ``runtime`` as its first parameter.
+
+    Returns:
+        A mapping from stored field names to ``(annotation, required)``.
+        The annotation is the declared Python type, such as ``int`` or
+        ``list[SourceId]``, with its metadata. ``required`` is true when
+        the parameter has no default.
+
+    Raises:
+        TypeError: The signature lacks the leading ``runtime`` parameter,
+            or a stored parameter lacks a type or is not keyword-only.
     """
     signature = inspect.signature(constructor)
     arguments = list(signature.parameters.values())
@@ -131,21 +139,20 @@ class RecipeSchema(GenerateJsonSchema):
     def typed_dict_schema(self, schema):
         """Generate a schema that rejects every undeclared field name.
 
-        Pydantic supplies the field types and required keys. The extra
-        restriction catches typos even when the intended field is optional.
-        It applies to the top-level arguments and to nested typed objects.
+        Take Pydantic's core ``schema`` for a typed dictionary and return
+        the JSON Schema with unknown fields forbidden. This catches typos
+        in top-level arguments and nested objects, including optional keys.
         """
         return super().typed_dict_schema(schema) | {"additionalProperties": False}
 
     def dict_schema(self, schema):
-        """Require each mapping key to match Pydantic's pattern when present.
+        """Generate JSON Schema for a mapping, enforcing any key pattern.
 
-        ``patternProperties`` validates values under matching keys. JSON
-        Schema still allows nonmatching keys by default. Setting
-        ``additionalProperties`` to false rejects them, so a watershed
-        source named ``"primary"`` can have a valid source reference, while
-        a source named ``"   "`` fails the nonblank key constraint. Mappings
-        without a key pattern keep Pydantic's generated value rules.
+        Convert Pydantic's core mapping ``schema`` to JSON Schema.
+        ``patternProperties`` validates values under matching keys.
+        Setting ``additionalProperties`` to false also rejects keys that
+        fail the pattern, such as a blank name in a watershed's ``sources``.
+        Keep Pydantic's generated value rules for maps without a key pattern.
         """
         result = super().dict_schema(schema)
         if "patternProperties" in result:
@@ -156,11 +163,15 @@ class RecipeSchema(GenerateJsonSchema):
 def recipe_schema(method, fields):
     """Return the Draft 2020-12 JSON Schema for one method's arguments.
 
-    ``fields`` is the mapping returned by ``parameters()``. Use it to build
-    a temporary ``TypedDict``, wrapping fields with defaults in
-    ``NotRequired``. Pydantic converts that object type into JSON Schema
-    using ``RecipeSchema``. ``method`` names the type and appears as the
-    schema title. The database stores it separately from ``arguments``.
+    Build a temporary ``TypedDict`` with ``NotRequired`` for fields with
+    defaults, then pass it to Pydantic's schema generator.
+
+    Args:
+        method: Registered method name used as the schema title.
+        fields: Field types and presence requirements from ``parameters()``.
+
+    Returns:
+        A Python dictionary describing the stored ``arguments`` object.
     """
     arguments = TypedDict(
         method,
@@ -178,19 +189,21 @@ def recipe_schema(method, fields):
 def source_paths(annotation, path="$"):
     """Return the PostgreSQL JSON paths to values declared as ``SourceId``.
 
-    ``annotation`` is a declared Python type and ``path`` identifies the
-    JSON value at that type, starting at ``$`` for the root. For example,
-    an ``osm_way_chain`` argument typed as ``list[SourceId]`` yields
-    ``$."way_source_ids"[*]`` when starting at ``$."way_source_ids"``.
+    For example, ``list[SourceId]`` at ``$."way_source_ids"`` yields
+    ``$."way_source_ids"[*]``. PostgreSQL uses those paths to extract IDs
+    from the actual JSON arguments. The type marker controls extraction
+    even when the field has a name like ``source_id``.
 
-    Follow each union alternative, unwrap required and optional fields,
-    and descend through list elements, tuple positions, mapping values,
-    and typed object fields. Raise ``TypeError`` for source IDs declared
-    as mapping keys. A field named ``source_id`` contributes a path only
-    if its type carries the source reference marker.
+    Args:
+        annotation: Declared Python type of the value at ``path``.
+        path: JSON path prefix, starting at ``$`` by default.
 
-    These paths describe where to look. PostgreSQL later applies them to
-    the actual JSON arguments to collect the IDs for the source links.
+    Returns:
+        A list of paths through unions, containers, and typed objects to
+        source ID strings. An annotation with no source IDs yields an empty list.
+
+    Raises:
+        TypeError: A mapping declares source IDs as keys.
     """
     origin, args = get_origin(annotation), get_args(annotation)
     if origin is Annotated:

@@ -8,11 +8,20 @@ GEOD = Geod(ellps="WGS84")
 
 
 def geodesic(first, last, max_step_m):
-    """Return points along a shortest WGS84 path between the supplied endpoints.
+    """Sample a shortest geodesic on WGS84.
 
-    Supply ``first`` and ``last`` as ``(longitude, latitude)`` in degrees.
-    The returned list preserves both endpoints in order and adds evenly
-    spaced points so each step is at most ``max_step_m`` metres.
+    Args:
+        first: Starting ``(longitude, latitude)`` in degrees.
+        last: Ending ``(longitude, latitude)`` in degrees.
+        max_step_m: Maximum spacing between adjacent points in metres.
+
+    Returns:
+        A list of evenly spaced coordinate pairs in path order, including
+        both original endpoints.
+
+    Raises:
+        ValueError: The spacing is nonpositive or nonfinite, or the
+            endpoints coincide or do not define a finite geodesic.
     """
     if not math.isfinite(max_step_m) or max_step_m <= 0:
         raise ValueError("positive geodesic spacing is required")

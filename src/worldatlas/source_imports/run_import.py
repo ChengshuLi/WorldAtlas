@@ -1,4 +1,9 @@
-"""Run a working construction record through its typed source importer."""
+"""Run a saved construction through its registered source importer.
+
+Set ``NEON_DATABASE_URL`` and run ``worldatlas-import --recipe ID``.
+For methods that read raw files, also supply ``--r2-endpoint`` and
+``--work-dir``.
+"""
 
 import argparse
 import json
@@ -36,7 +41,24 @@ IMPORTERS = {
 
 
 def run_import(connect, recipe_id, *, storage=None, work_dir=None):
-    """Run a recipe whose method and arguments were validated when saved in Neon."""
+    """Run a construction validated when it was saved in Neon.
+
+    Pass the saved keyword arguments and a separate ``Runtime`` object
+    to the registered importer. The importer writes the resulting geometry.
+
+    Args:
+        connect: Callable that opens a PostgreSQL connection.
+        recipe_id: Construction ID to read from Neon.
+        storage: R2 client, required for methods that read raw files.
+        work_dir: Local cache directory, required when ``storage`` is needed.
+
+    Returns:
+        The result reported by the selected importer.
+
+    Raises:
+        ValueError: The construction is missing, the method is unsupported,
+            or required download settings are absent.
+    """
     with connect() as database:
         method, arguments = read_recipe(database, recipe_id)
     importer = IMPORTERS.get(method) if isinstance(method, str) else None
@@ -60,6 +82,7 @@ def run_import(connect, recipe_id, *, storage=None, work_dir=None):
 
 
 def main():
+    """Run the requested import and print its result as JSON."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
