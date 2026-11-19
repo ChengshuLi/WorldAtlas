@@ -4,13 +4,11 @@ Both methods use the [common import command](../README.md#run-one-construction) 
 
 ## Points and polygons
 
-[`features.py`](features.py) contains `selected_osm_features` and its reader for selected nodes, closed ways, and relation polygons. It reads each archived object graph once through osmium's Python API and saves the result through the shared import workflow.
+[`features.py`](features.py) contains `selected_osm_features`. It uses Osmium's geometry API to read selected nodes and closed outlines and assemble polygon relations. The resulting geometries go through the shared import workflow.
 
-Each selection identifies an output `feature_id`, provider `source_feature_id`, and `object_type` (`node`, `way` or `relation`). The raw-file checksum pins the extract. Optional `expected_tags` verify provider tags. The constructor joins member ways at shared node IDs in stable way-ID order.
+Each selection identifies an output `feature_id`, provider `source_feature_id`, and `object_type` (`node`, `way` or `relation`). The raw-file checksum pins the extract. Optional `expected_tags` verify provider tags.
 
-Polygon imports preserve holes and return a `MultiPolygon`. A relation's `label` nodes are skipped automatically when assembling the outline. The same implementation handles administrative, reef and archipelago sources.
-
-Provider-defined geographic `group` and `collection` relations can produce one island-group feature. The reader includes direct polygon ways and nested polygon relations, preserves child holes, and unions overlapping members. Construction settings explicitly identify ignored metadata roles. Missing members and cycles fail. A parent `/full` response alone may omit nested geometry, so the archived input must contain the complete recursive graph.
+Polygon imports preserve holes and return a `MultiPolygon`. Select a closed way or a relation tagged `type=multipolygon` or `type=boundary`. The archived extract must contain the ways and nodes that form the outline. Osmium assembles outer and inner rings and skips relation label nodes.
 
 ## Boundary lines
 
@@ -32,7 +30,7 @@ Use `evidence_source_ids` to cite additional sources that explain the selection.
 
 ## Tests
 
-[`test_features.py`](test_features.py) covers joining, holes, nested groups, source identity, and invalid geometry. [`test_ways.py`](test_ways.py) checks chain assembly, direction, and invalid geometry. [`test_way_import.py`](test_way_import.py) checks the Neon/R2 workflow and database transactions.
+[`test_features.py`](test_features.py) covers selected points, closed ways, multipolygons with holes, source identity, and invalid geometry. [`test_ways.py`](test_ways.py) checks chain assembly, direction, and invalid geometry. [`test_way_import.py`](test_way_import.py) checks the Neon/R2 workflow and database transactions.
 
 Run the tests from the repository root.
 

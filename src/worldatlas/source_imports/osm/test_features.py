@@ -2,7 +2,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from worldatlas.source_imports.osm.features import assemble_rings, read_features
+from shapely.geometry import MultiPolygon, Polygon, shape
+
+from worldatlas.source_imports.osm.features import read_features
 
 
 class OsmFeatureTests(unittest.TestCase):
@@ -73,14 +75,16 @@ class OsmFeatureTests(unittest.TestCase):
 
     def test_unordered_and_reversed_way_members_join_with_holes_preserved(self):
         result = self.read()
-        polygons = result["geometry"]["coordinates"]
         self.assertEqual(result["geometry"]["type"], "MultiPolygon")
-        self.assertEqual(
-            polygons[0][0],
-            [[0.0, 0.0], [10.0, 0.0], [10.0, 10.0], [0.0, 10.0], [0.0, 0.0]],
-        )
-        self.assertEqual(len(polygons[0]), 2)
-        self.assertEqual(len(polygons[1]), 1)
+        area = shape(result["geometry"])
+        expected = MultiPolygon([
+            Polygon(
+                [(0, 0), (10, 0), (10, 10), (0, 10)],
+                holes=[[(2, 2), (3, 2), (3, 3), (2, 3)]],
+            ),
+            Polygon([(20, 0), (30, 0), (30, 10), (20, 10)]),
+        ])
+        self.assertTrue(area.equals(expected))
 
     def test_label_reference_does_not_require_node_coordinates(self):
         expected = self.read()
@@ -88,6 +92,19 @@ class OsmFeatureTests(unittest.TestCase):
             self.path.read_text().replace('ref="1" role="label"', 'ref="999" role="label"')
         )
         self.assertEqual(self.read(), expected)
+
+    def test_mixed_selections_keep_recipe_order(self):
+        selections = [
+            self.selection,
+            dict(feature_id="way", source_feature_id=40, object_type="way"),
+            dict(feature_id="label", source_feature_id=1, object_type="node"),
+            dict(self.selection, feature_id="same-islands"),
+        ]
+        results = read_features(self.path, selections)
+        self.assertEqual([item["feature_id"] for item in results],
+                         ["islands", "way", "label", "same-islands"])
+        self.assertEqual(results[0]["geometry"], results[3]["geometry"])
+        self.assertEqual(results[2]["geometry"], {"type": "Point", "coordinates": [0, 0]})
 
     def test_nodes_and_closed_ways(self):
         node = dict(
@@ -105,7 +122,7 @@ class OsmFeatureTests(unittest.TestCase):
         )
         self.assertEqual(len(self.read(way)["geometry"]["coordinates"]), 1)
         way["source_feature_id"] = "10"
-        with self.assertRaisesRegex(ValueError, "open or branched"):
+        with self.assertRaisesRegex(ValueError, "is open"):
             self.read(way)
 
     def test_missing_objects_and_tag_mismatches_fail(self):
@@ -124,59 +141,16 @@ class OsmFeatureTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "member role"):
             self.read()
 
-    def test_geographic_group_includes_direct_ways_and_nested_relations(self):
-        group = (
-            '<relation id="200" version="1">'
-            '<member type="relation" ref="100" role=""/>'
-            '<member type="way" ref="40" role="outer"/>'
-            '<member type="node" ref="1" role="label"/>'
-            '<tag k="type" v="group"/></relation>'
-        )
-        self.path.write_text(self.path.read_text().replace("</osm>", group + "</osm>"))
-        selected = dict(
-            feature_id="group",
-            source_feature_id="200",
-            object_type="relation",
-        )
-        from shapely.geometry import shape
-
-        geometry = self.read(selected)["geometry"]
-        self.assertEqual(geometry["type"], "MultiPolygon")
-        self.assertEqual(shape(geometry).area, 199)
-        self.assertEqual(len(geometry["coordinates"]), 2)
-
-    def test_geographic_groups_reject_missing_members_and_cycles(self):
+    def test_incomplete_or_crossing_outer_rings_fail(self):
         original = self.path.read_text()
-        selected = dict(
-            feature_id="group",
-            source_feature_id="200",
-            object_type="relation",
-        )
-        for member, message in [(999, "missing OSM group member"), (200, "cyclic")]:
-            group = (
-                '<relation id="200" version="1">'
-                f'<member type="relation" ref="{member}" role=""/>'
-                '<tag k="type" v="group"/></relation>'
-            )
-            self.path.write_text(original.replace("</osm>", group + "</osm>"))
-            with self.assertRaisesRegex(ValueError, message):
-                self.read(selected)
-
-    def test_open_branches_missing_nodes_and_self_intersections_fail(self):
-        for ways in ({1: [1, 2]}, {1: [1, 2], 2: [2, 3], 3: [2, 1]}):
-            with self.assertRaisesRegex(ValueError, "open or branched"):
-                assemble_rings(ways)
-        original = self.path.read_text()
-        self.path.write_text(original.replace('<nd ref="22"/>', '<nd ref="999"/>'))
-        with self.assertRaisesRegex(ValueError, "missing nodes"):
-            self.read()
-        self.path.write_text(
-            original.replace(
-                '<nd ref="21"/><nd ref="22"/>', '<nd ref="22"/><nd ref="21"/>'
-            )
-        )
-        with self.assertRaisesRegex(ValueError, "valid"):
-            self.read()
+        for old, new in (
+            ('<nd ref="22"/>', '<nd ref="999"/>'),
+            ('type="way" ref="40" role="outer"', 'type="way" ref="999" role="outer"'),
+            ('<nd ref="21"/><nd ref="22"/>', '<nd ref="22"/><nd ref="21"/>'),
+        ):
+            self.path.write_text(original.replace(old, new))
+            with self.subTest(change=new), self.assertRaises(ValueError):
+                self.read()
 
 
 if __name__ == "__main__":
