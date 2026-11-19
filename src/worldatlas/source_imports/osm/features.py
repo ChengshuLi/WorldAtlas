@@ -32,6 +32,9 @@ OBJECT_TYPES = {"node": "n", "way": "w", "relation": "r"}
 def read_features(path, selections):
     """Read selected OSM points and assemble areas through Osmium.
 
+    Nodes produce Point geometry. Closed ways and polygon relations produce
+    MultiPolygon geometry. Use ``osm_way_chain`` for LineString features.
+
     Args:
         path: Verified local OSM extract.
         selections: Unique object types and IDs, with optional tag checks.
@@ -140,7 +143,7 @@ def selected_osm_features(
     source_id: SourceId,
     selections: list[OsmSelection],
 ):
-    """Import selected OSM nodes, closed ways, and relation polygons.
+    """Import OSM points and areas as Point and MultiPolygon features.
 
     Args:
         runtime: Import resources and saved recipe snapshot.
