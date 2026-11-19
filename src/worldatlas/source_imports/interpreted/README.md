@@ -2,7 +2,7 @@
 
 [`geometry.py`](geometry.py) contains `interpreted_geometry`. It saves the reviewed GeoJSON `Point` and `Polygon` geometries in the recipe. A point can label an area. A polygon can limit where a geographic rule applies.
 
-Store the explanation in the construction row's `basis` column. In `arguments`, `source_ids` cites supporting evidence and `selections` pairs each output `feature_id` with its `geometry`. Coordinates are WGS84 longitude first, latitude second. The importer checks evidence IDs against the Neon catalog. It reads the coordinates from the recipe and needs no R2 download.
+Store the explanation in the construction row's `basis` column. In `arguments`, `source_ids` lists one or more distinct evidence IDs and `selections` pairs each output `feature_id` with its `geometry`. Supply at least one selection. Coordinates are WGS84 longitude first, latitude second. The importer checks evidence IDs against the Neon catalog. It reads the coordinates from the recipe and needs no R2 download.
 
 ## Example
 

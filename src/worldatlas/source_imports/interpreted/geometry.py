@@ -45,9 +45,16 @@ def interpreted_geometry(
 
     Returns:
         Saved feature IDs and timings.
+
+    Raises:
+        ValueError: The recipe has invalid sources or selections, or its
+            features cannot be saved for the current recipe.
     """
-    if not source_ids or len(set(source_ids)) != len(source_ids) or not selections:
-        raise ValueError("interpreted geometry needs distinct sources and selections")
+    if not source_ids or len(set(source_ids)) != len(source_ids):
+        raise ValueError("interpreted geometry needs a nonempty list of distinct source IDs")
+    if not selections:
+        raise ValueError("interpreted geometry needs at least one selection")
+
     started = time.monotonic()
     acquire_sources(runtime, [], evidence_source_ids=source_ids)
     feature_ids = save_features(runtime, selections)
