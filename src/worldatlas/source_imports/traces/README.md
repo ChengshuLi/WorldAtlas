@@ -8,20 +8,18 @@ Build one final boundary by joining reviewed control points stored in Neon with 
 
 The typed constructor signature defines required fields, optional fields, and types. [Neon validates the arguments](../README.md#argument-validation) when the recipe is saved. The constructor checks the geometry when it runs.
 
-Set `method` to `geodesic_trace` on the construction row and describe the interpretation and any inferred connections in `basis`. Store the settings below in its `arguments` column.
+Set `method` to `geodesic_trace` on the construction row. Use `basis` to record the figure and page references, how the points were chosen, and any inferred connections. Store the settings below in the `arguments` column.
 
 | Field | Meaning |
 | --- | --- |
 | `source_ids` | The contributing raw sources in Neon's catalog; a nonempty list without duplicates |
 | `feature_id` | The output line in `atlas.source_features` |
-| `source_feature_id` | The selected figure or other identifiable part of the raw document |
 | `points` | Selected `[longitude, latitude]` points in boundary order |
 | `max_step_metres` | Maximum spacing between generated coordinates along each geodesic |
-| `source_location` | Optional location or calibration notes for the source figure |
 
 The path may run in any direction. Consecutive points must be distinct, and the boundary must not cross or retrace itself. The constructor produces one LineString and rejects paths that cross the antimeridian. Invalid coordinates or sampling settings stop before saving.
 
-The original source figure stays in R2. A person reads it and records the chosen points and geographic decisions in the construction record. The automatic constructor reads those choices directly; it does not download or retrace the figure. Preserve source-location and calibration details with the source and construction records as appropriate.
+The original source figure stays in R2. A reviewer reads it and records the chosen points in `arguments` and the rationale in `basis`. The constructor uses the saved points directly.
 
 The final boundary is generated directly from the chosen points. Intermediate traces and smoothed boundaries are not required inputs or separately saved outputs. To edit the construction, edit its record and rerun the same ID.
 
@@ -33,7 +31,7 @@ Use the shared [project environment](../../../../environment.yml) and set `NEON_
 worldatlas-import --recipe lydekker-boundary-construction
 ```
 
-The command saves the geometry and its construction ID. The figure identifier stays in the construction arguments. Source links connect the construction to its raw files. Regional assignment rules reference the saved feature separately.
+The command saves the geometry and its construction ID. Source links connect the construction to its raw files. Regional assignment rules reference the saved feature separately.
 
 ## Tests
 

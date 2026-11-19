@@ -23,7 +23,6 @@ class DatabaseTests(unittest.TestCase):
         self.recipe = dict(
             source_ids=["raw"],
             feature_id="line",
-            source_feature_id="Figure 1",
             points=[[10.0, 1.0], [9.0, 0.0], [8.0, -1.0]],
             max_step_metres=1000,
         )
@@ -98,7 +97,9 @@ class DatabaseTests(unittest.TestCase):
     def test_description_does_not_change_geometry(self):
         self.build()
         before = self.row()
-        self.recipe["source_location"] = "Figure caption"
-        self.store()
+        self.db.execute(
+            "UPDATE atlas.construction_records SET basis=%s WHERE id='trace'",
+            ("Chosen points from the Figure 1 caption",),
+        )
         self.build()
         self.assertEqual(self.row(), before)

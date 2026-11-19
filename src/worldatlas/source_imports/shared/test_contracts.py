@@ -316,6 +316,8 @@ class DatabaseContractTests(unittest.TestCase):
             ("s130_areas", dict(gml_sha256="a" * 64), False),
             ("geodesic_trace", dict(points=[[1, True], [0, 0]]), False),
             ("geodesic_trace", dict(points=[[1, 1, 1], [0, 0]]), False),
+            ("geodesic_trace", dict(source_feature_id="Figure 1"), False),
+            ("geodesic_trace", dict(source_location="Page 2"), False),
         ]
         for method, changes, expected in cases:
             with self.subTest(method=method, changes=changes):

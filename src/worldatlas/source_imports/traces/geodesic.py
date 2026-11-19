@@ -1,7 +1,6 @@
 """Connect reviewed source-figure points with WGS84 geodesics."""
 
 import math
-from typing import Any
 
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.geodesy.wgs84 import geodesic
@@ -29,10 +28,19 @@ def construct(points, max_step_metres):
         raise ValueError("max_step_metres must be a finite positive number")
     if not isinstance(points, list) or len(points) < 2:
         raise ValueError("at least two control points are required")
-    if not validate_geometry({"type": "LineString", "coordinates": points}).is_simple:
-        raise ValueError("boundary trace must not cross or retrace itself")
+    # Validate the control coordinates before sampling. The crossing check
+    # belongs on the sampled line because geodesics can curve in longitude
+    # and latitude.
+    validate_geometry({"type": "LineString", "coordinates": points})
     coordinates = []
+    seen_segments = set()
     for first, last in zip(points, points[1:]):
+        # Sampling the same geodesic in reverse can differ by floating-point
+        # roundoff. Check the unordered endpoints to catch an exact retrace.
+        endpoints = frozenset((tuple(first), tuple(last)))
+        if endpoints in seen_segments:
+            raise ValueError("boundary trace must not cross or retrace itself")
+        seen_segments.add(endpoints)
         segment = geodesic(first, last, max_step_metres)
         coordinates.extend(segment if not coordinates else segment[1:])
     if any(abs(a[0] - b[0]) > 180 for a, b in zip(coordinates, coordinates[1:])):
@@ -43,31 +51,26 @@ def construct(points, max_step_metres):
     return geometry
 
 
-def geodesic_trace(runtime: Runtime, *, source_ids: list[SourceId],
-                          source_feature_id: NonEmptyText, feature_id: NonEmptyText,
-                          points: list[tuple[float, float]],
-                          max_step_metres: float,
-                          source_location: dict[str, Any] | str | None = None):
+def geodesic_trace(
+    runtime: Runtime,
+    *,
+    source_ids: list[SourceId],
+    feature_id: NonEmptyText,
+    points: list[tuple[float, float]],
+    max_step_metres: float,
+):
     """Save the WGS84 trace of reviewed source-figure control points.
 
     Args:
         runtime: Import resources and saved recipe snapshot.
         source_ids: Distinct catalog IDs for the supporting source figures.
-        source_feature_id: Identifier for the figure or passage a reviewer
-            can find in the cited source.
         feature_id: Output feature ID in Neon.
         points: Ordered WGS84 longitude and latitude pairs.
         max_step_metres: Maximum spacing between adjacent output vertices.
-        source_location: Optional page references or calibration notes that
-            explain where and how the figure was read.
 
     Returns:
         Saved feature ID and vertex count.
     """
-    # The recipe retains these details so a reviewer can find the figure.
-    # The recorded points and spacing determine the geometry.
-    del source_feature_id, source_location
-
     if not source_ids or len(set(source_ids)) != len(source_ids):
         raise ValueError("trace sources must be nonempty and distinct")
     geometry = construct(points, max_step_metres)

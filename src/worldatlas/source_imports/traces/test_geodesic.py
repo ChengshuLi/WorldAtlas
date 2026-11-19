@@ -1,6 +1,7 @@
 import unittest
 
 from pyproj import Geod
+from shapely.geometry import LineString
 
 from worldatlas.source_imports.traces.geodesic import construct
 
@@ -48,9 +49,23 @@ class GeodesicTraceTests(unittest.TestCase):
                 construct([[0, 1], [1, 0]], value)
 
     def test_rejects_coincident_points_and_retracing(self):
-        for points in ([[0, 0], [0, 0]], [[0, 0], [1, 1], [0, 0]]):
-            with self.subTest(points=points), self.assertRaises(ValueError):
-                construct(points, 100000)
+        with self.assertRaises(ValueError):
+            construct([[0, 0], [0, 0]], 100000)
+        with self.assertRaisesRegex(ValueError, "must not cross or retrace itself"):
+            construct([[0, 0], [1, 1], [0, 0]], 100000)
+
+    def test_accepts_a_geodesic_that_avoids_a_crossing_between_control_points(self):
+        points = [[-60, 30], [60, 30], [0, 28], [0, 32]]
+        self.assertFalse(LineString(points).is_simple)
+        coordinates = construct(points, 100000)["coordinates"]
+        self.assertTrue(LineString(coordinates).is_simple)
+        self.assertEqual(coordinates[-1], points[-1])
+
+    def test_rejects_a_crossing_introduced_by_the_geodesic(self):
+        points = [[-60, 30], [60, 30], [0, 48], [0, 51]]
+        self.assertTrue(LineString(points).is_simple)
+        with self.assertRaisesRegex(ValueError, "must not cross or retrace itself"):
+            construct(points, 100000)
 
     def test_longitude_seam_requires_split_geometry(self):
         with self.assertRaisesRegex(ValueError, "longitude-seam"):

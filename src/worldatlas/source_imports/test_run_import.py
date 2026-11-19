@@ -22,7 +22,6 @@ ARGUMENTS = {
     "geodesic_trace": dict(
         source_ids=["raw"],
         feature_id="line",
-        source_feature_id="Figure 1",
         points=[[1, 1], [0, 0]],
         max_step_metres=1000,
     ),
