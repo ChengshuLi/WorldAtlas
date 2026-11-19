@@ -87,7 +87,7 @@ def assemble(paths, start_node_id):
 
 def osm_way_chain(
     runtime: Runtime, *, way_source_ids: list[SourceId], start_node_id: int,
-    feature_id: NonEmptyText, basis: NonEmptyText,
+    feature_id: NonEmptyText,
     evidence_source_ids: list[SourceId] | None = None,
 ):
     """Join archived OSM ways into one boundary and save their coordinates.
@@ -97,7 +97,6 @@ def osm_way_chain(
         way_source_ids: Distinct catalog IDs of the archived ways.
         start_node_id: Endpoint that starts the final chain.
         feature_id: Output feature ID in Neon.
-        basis: Human-readable explanation retained in the recipe.
         evidence_source_ids: Additional raw sources cited for provenance.
 
     Returns:

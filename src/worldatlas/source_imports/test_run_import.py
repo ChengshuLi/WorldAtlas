@@ -15,14 +15,12 @@ from worldatlas.source_imports.run_import import IMPORTERS, main, run_import
 ARGUMENTS = {
     "interpreted_geometry": dict(
         source_ids=["raw"],
-        basis="Selected context",
         selections=[
             dict(feature_id="context", geometry=dict(type="Point", coordinates=[1, 2]))
         ],
     ),
     "geodesic_trace": dict(
         source_ids=["raw"],
-        basis="Chosen points",
         feature_id="line",
         source_feature_id="Figure 1",
         points=[[1, 1], [0, 0]],
@@ -31,12 +29,10 @@ ARGUMENTS = {
     "osm_way_chain": dict(
         way_source_ids=["raw"],
         start_node_id=1,
-        basis="Join ways",
         feature_id="boundary",
     ),
     "watershed_boundary": dict(
         feature_id="boundary",
-        basis="Drainage divide",
         sources={"terrain": "raw"},
         lines={},
         sections=[],
@@ -46,13 +42,11 @@ ARGUMENTS = {
     ),
     "selected_vector_features": dict(
         source_id="raw",
-        basis="Selected features",
         id_field="id",
         selections=[dict(feature_id="feature", source_feature_id="123")],
     ),
     "selected_osm_features": dict(
         source_id="raw",
-        basis="Selected OSM features",
         selections=[
             dict(
                 feature_id="feature",
@@ -64,7 +58,6 @@ ARGUMENTS = {
     ),
     "s130_areas": dict(
         source_id="raw",
-        basis="Complete areas",
         gml_member="source.gml",
         gml_sha256="a" * 64,
         selections=[dict(feature_id="feature", source_feature_id="urn:mrn:123")],

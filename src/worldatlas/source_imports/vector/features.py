@@ -264,7 +264,6 @@ def selected_vector_features(
     runtime: Runtime,
     *,
     source_id: SourceId,
-    basis: NonEmptyText,
     id_field: NonEmptyText,
     selections: list[VectorSelection],
     member: NonEmptyText | None = None,
@@ -276,7 +275,6 @@ def selected_vector_features(
     Args:
         runtime: Import resources and saved recipe snapshot.
         source_id: Catalog ID of the vector source.
-        basis: Human-readable explanation retained in the recipe.
         id_field: Provider ID attribute or ``@fid``.
         selections: Provider features and their output IDs and options.
         member: Optional dataset member inside a ZIP archive.

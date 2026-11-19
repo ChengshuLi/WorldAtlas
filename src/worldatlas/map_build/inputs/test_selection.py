@@ -74,7 +74,6 @@ class SelectionTests(unittest.TestCase):
         self.geometry = dict(type="Point", coordinates=[10.0, 20.0])
         self.recipe = dict(
             source_id="__selection_raw",
-            basis="First",
             id_field="id",
             selections=[
                 dict(feature_id="__selection_point", source_feature_id="provider")
@@ -92,8 +91,8 @@ class SelectionTests(unittest.TestCase):
                 ("a" * 64,),
             )
             self.writer.execute(
-                "INSERT INTO atlas.construction_records(id,method,arguments) "
-                "VALUES ('__selection_recipe','selected_vector_features',%s)",
+                "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+                "VALUES ('__selection_recipe','selected_vector_features',%s,'First')",
                 (Jsonb(self.recipe),),
             )
             self.writer.execute(
@@ -148,7 +147,7 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(geography["features"][0]["geometry"], self.geometry)
         self.assertEqual(
             frozen["construction_records"],
-            [dict(id="__selection_recipe", method="selected_vector_features", arguments=self.recipe)],
+            [dict(id="__selection_recipe", method="selected_vector_features", arguments=self.recipe, basis="First")],
         )
         self.assertEqual(frozen["raw_sources"][0]["sha256"], "a" * 64)
         self.assertEqual(geography["rule_sources"][0]["source_id"], "__selection_raw")
@@ -188,7 +187,7 @@ class SelectionTests(unittest.TestCase):
                             "UPDATE atlas.source_assets SET title='Second' WHERE id='__selection_raw'"
                         )
                         writer.execute(
-                            "UPDATE atlas.construction_records SET arguments=arguments||'{\"basis\":\"Second\"}' WHERE id='__selection_recipe'"
+                            "UPDATE atlas.construction_records SET basis='Second' WHERE id='__selection_recipe'"
                         )
                 return cursor
 
@@ -197,10 +196,10 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(frozen["geography"]["features"][0]["geometry"], self.geometry)
         self.assertEqual(frozen["raw_sources"][0]["title"], "First")
         self.assertEqual(
-            frozen["construction_records"][0]["arguments"]["basis"], "First"
+            frozen["construction_records"][0]["basis"], "First"
         )
         self.assertEqual(
-            self.read()["construction_records"][0]["arguments"]["basis"], "Second"
+            self.read()["construction_records"][0]["basis"], "Second"
         )
 
     def test_requested_missing_raw_source_fails(self):

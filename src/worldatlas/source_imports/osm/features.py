@@ -18,11 +18,17 @@ from worldatlas.source_imports.shared.storage import feature_result, save_featur
 class OsmSelection(TypedDict):
     """Select a versioned OSM object and how to interpret its geometry."""
 
+    # ID of the feature saved in Neon.
     feature_id: NonEmptyText
+    # ID of the OSM object in the archived extract.
     source_feature_id: NonEmptyText | int
+    # OSM nodes produce points. Closed ways and polygon relations produce areas.
     object_type: Literal["node", "way", "relation"]
+    # Version of the OSM object expected in the archive.
     object_version: NonEmptyText | int
+    # Optional OSM tag names and values that the selected object must match.
     expected_tags: NotRequired[dict[str, str]]
+    # Optional member type and role pairs to skip. For example, ["n", "label"] skips label nodes.
     ignored_member_roles: NotRequired[list[tuple[Literal["n", "w", "r"], str]]]
 
 
@@ -326,7 +332,6 @@ def selected_osm_features(
     runtime: Runtime,
     *,
     source_id: SourceId,
-    basis: NonEmptyText,
     selections: list[OsmSelection],
 ):
     """Import selected OSM nodes, closed ways, and relation polygons.
@@ -334,7 +339,6 @@ def selected_osm_features(
     Args:
         runtime: Import resources and saved recipe snapshot.
         source_id: Catalog ID of the archived OSM extract.
-        basis: Human-readable explanation retained in the recipe.
         selections: Provider objects and their output IDs and options.
 
     Returns:

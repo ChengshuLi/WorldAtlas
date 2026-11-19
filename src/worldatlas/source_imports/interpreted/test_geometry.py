@@ -23,7 +23,7 @@ class InterpretedGeometryTests(unittest.TestCase):
     def test_saves_recipe_coordinates_and_links_evidence_without_r2(self):
         geometry = dict(type="Point", coordinates=[10, 20])
         arguments = dict(
-            source_ids=["evidence"], basis="Selected point",
+            source_ids=["evidence"],
             selections=[dict(feature_id="label", geometry=geometry)],
         )
         with psycopg.connect(os.environ["WORLDATLAS_TEST_DATABASE_URL"]) as database:
@@ -37,7 +37,8 @@ class InterpretedGeometryTests(unittest.TestCase):
                     ("a" * 64,),
                 )
                 database.execute(
-                    "INSERT INTO atlas.construction_records VALUES ('recipe','interpreted_geometry',%s)",
+                    "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+                    "VALUES ('recipe','interpreted_geometry',%s,'Selected point')",
                     (Jsonb(arguments),),
                 )
                 output = io.StringIO()

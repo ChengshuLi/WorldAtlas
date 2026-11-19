@@ -44,7 +44,6 @@ class StorageTests(unittest.TestCase):
         self.storage.get_object.side_effect = lambda **_: {"Body": io.BytesIO(self.raw)}
         self.recipe = dict(
             source_id="raw",
-            basis="Selected source point",
             id_field="id",
             selections=[dict(feature_id="point-a", source_feature_id="a")],
         )
@@ -60,7 +59,8 @@ class StorageTests(unittest.TestCase):
 
     def store(self):
         self.database.execute(
-            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES (%s,'selected_vector_features',%s) "
+            "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+            "VALUES (%s,'selected_vector_features',%s,'Selected source point') "
             "ON CONFLICT(id) DO UPDATE SET arguments=EXCLUDED.arguments",
             ("__features", Jsonb(self.recipe)),
         )
@@ -93,7 +93,7 @@ class StorageTests(unittest.TestCase):
         self.database.execute(
             "INSERT INTO atlas.geographic_rule_features VALUES ('related','point-a','distance_reference')"
         )
-        self.recipe.update(basis="Updated explanation", member=None, layer=None)
+        self.recipe.update(member=None, layer=None)
         self.store()
         self.build()
         self.assertEqual(self.rows(), before)
@@ -158,7 +158,8 @@ class StorageTests(unittest.TestCase):
             dict(feature_id="point-a", source_feature_id="a"),
         ])
         self.database.execute(
-            "INSERT INTO atlas.construction_records VALUES ('__other','selected_vector_features',%s)",
+            "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+            "VALUES ('__other','selected_vector_features',%s,'Select the fixture point')",
             (Jsonb(recipe),),
         )
         with self.assertRaisesRegex(ValueError, "feature ID already belongs to another construction"):

@@ -8,14 +8,13 @@ Build one final boundary by joining reviewed control points stored in Neon with 
 
 The typed constructor signature defines required fields, optional fields, and types. [Neon validates the arguments](../README.md#argument-validation) when the recipe is saved. The constructor checks the geometry when it runs.
 
-Set `method` to `geodesic_trace` on the construction row. Store the settings below in its `arguments` column.
+Set `method` to `geodesic_trace` on the construction row and describe the interpretation and any inferred connections in `basis`. Store the settings below in its `arguments` column.
 
 | Field | Meaning |
 | --- | --- |
 | `source_ids` | The contributing raw sources in Neon's catalog; a nonempty list without duplicates |
 | `feature_id` | The output line in `atlas.source_features` |
 | `source_feature_id` | The selected figure or other identifiable part of the raw document |
-| `basis` | How the figure was interpreted, including inferred connections and extensions |
 | `points` | Selected `[longitude, latitude]` points in boundary order |
 | `max_step_metres` | Maximum spacing between generated coordinates along each geodesic |
 | `source_location` | Optional location or calibration notes for the source figure |

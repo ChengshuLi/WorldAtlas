@@ -260,7 +260,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
     return geometry, report
 
 
-def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: NonEmptyText,
+def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
                        sources: dict[NonEmptyText, SourceId | MultipartSource],
                        lines: dict[NonEmptyText, list[dict[str, Any]]],
                        sections: list[dict[str, Any]], joins: list[dict[str, Any]],
@@ -273,7 +273,6 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: Non
     Args:
         runtime: Import resources and saved recipe snapshot.
         feature_id: Output boundary ID in Neon.
-        basis: Human-readable explanation retained in the recipe.
         sources: Source aliases mapped to catalog IDs or multipart files.
         lines: Provider feature selections keyed by line name.
         sections: Ordered source lines, divides, flow paths, or connectors.

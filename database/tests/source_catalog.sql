@@ -32,8 +32,8 @@ BEGIN
    license_uri,attribution,r2_bucket,'invalid','bad',size_bytes,created_at FROM atlas.source_assets WHERE id='__source';
   RAISE EXCEPTION 'malformed hash accepted';
  EXCEPTION WHEN check_violation THEN NULL; END;
- INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__feature_recipe','selected_vector_features',
- '{"source_id":"__source","basis":"Selected point","id_field":"id","selections":[{"feature_id":"__feature","source_feature_id":"provider"}]}');
+ INSERT INTO atlas.construction_records(id,method,arguments,basis) VALUES ('__feature_recipe','selected_vector_features',
+ '{"source_id":"__source","id_field":"id","selections":[{"feature_id":"__feature","source_feature_id":"provider"}]}','Selected point');
  INSERT INTO atlas.source_features(id,geometry,construction_id)
  VALUES ('__feature','{"type":"Point","coordinates":[0,0]}','__feature_recipe');
  BEGIN

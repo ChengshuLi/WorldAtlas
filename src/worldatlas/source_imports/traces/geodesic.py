@@ -45,7 +45,7 @@ def construct(points, max_step_metres):
 
 def geodesic_trace(runtime: Runtime, *, source_ids: list[SourceId],
                           source_feature_id: NonEmptyText, feature_id: NonEmptyText,
-                          basis: NonEmptyText, points: list[tuple[float, float]],
+                          points: list[tuple[float, float]],
                           max_step_metres: float,
                           source_location: dict[str, Any] | str | None = None):
     """Save the WGS84 trace of reviewed source-figure control points.
@@ -55,7 +55,6 @@ def geodesic_trace(runtime: Runtime, *, source_ids: list[SourceId],
         source_ids: Distinct catalog IDs for the supporting source figures.
         source_feature_id: Figure or locator described by the recipe.
         feature_id: Output feature ID in Neon.
-        basis: Human-readable explanation retained in the recipe.
         points: Ordered WGS84 longitude and latitude pairs.
         max_step_metres: Maximum spacing between adjacent output vertices.
         source_location: Optional location or calibration notes in the recipe.

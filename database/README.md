@@ -35,7 +35,7 @@ Add a rule citation when it helps a reviewer understand a current decision beyon
 
 Raw identity, storage location, size, checksum and capture time are immutable; correctable descriptive metadata remains editable. Changed source bytes require a new source ID. Construction settings, geometry and geographic rules are editable. Released input archives retain their exact earlier values and code.
 
-`construction_records.method` selects the importer and `arguments` stores its named inputs as JSONB. Each construction must cite at least one raw source through those arguments. The database maintains `construction_sources` from them. The importer registry and typed Python signatures define the argument and source-reference checks. Regenerate those checks after changing a constructor:
+`construction_records.method` selects the importer, `basis` stores the required explanation, and `arguments` stores the method's named inputs as JSONB. Each construction must cite at least one raw source through those arguments. The database maintains `construction_sources` from them. The importer registry and typed Python signatures define the argument and source-reference checks. Regenerate those checks after changing a constructor:
 
 ```bash
 python -m worldatlas.source_imports.shared.contracts database/schema/construction_contracts.sql

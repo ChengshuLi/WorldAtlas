@@ -46,7 +46,7 @@ def fixtures(directory):
     ]}))
     files = {'dem': raster, 'basins': archive, 'lines': geometry}
     recipe = {
-        'feature_id': 'test-divide', 'basis': 'Test drainage divide',
+        'feature_id': 'test-divide',
         'sources': {name: '__watershed_' + name for name in files},
         'lines': {name: [{'source': 'lines', 'geojson_feature': i}]
                   for i, name in enumerate(('before', 'after'))},
@@ -288,7 +288,8 @@ class StorageTests(unittest.TestCase):
         from psycopg.types.json import Jsonb
 
         self.db.execute(
-            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('watershed','watershed_boundary',%s) "
+            "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+            "VALUES ('watershed','watershed_boundary',%s,'Test drainage divide') "
             "ON CONFLICT(id) DO UPDATE SET arguments=EXCLUDED.arguments",
             (Jsonb(self.recipe),),
         )
@@ -311,7 +312,7 @@ class StorageTests(unittest.TestCase):
         before = self.row()
         self.build()
         self.assertEqual(self.row(), before)
-        self.recipe.update(basis="Updated explanation", evidence_sources=None)
+        self.recipe.update(evidence_sources=None)
         self.store()
         self.build()
         self.assertEqual(self.row(), before)

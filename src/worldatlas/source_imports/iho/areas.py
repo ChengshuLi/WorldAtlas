@@ -266,7 +266,6 @@ def s130_areas(
     runtime: Runtime,
     *,
     source_id: SourceId,
-    basis: NonEmptyText,
     gml_member: NonEmptyText,
     gml_sha256: NonEmptyText,
     selections: list[FeatureIdentity],
@@ -276,7 +275,6 @@ def s130_areas(
     Args:
         runtime: Import resources and saved recipe snapshot.
         source_id: Catalog ID of the S-130 archive.
-        basis: Human-readable explanation retained in the recipe.
         gml_member: Exact GML member name inside the archive.
         gml_sha256: Expected SHA-256 of the GML member.
         selections: Provider MRNs and their output IDs in Neon.

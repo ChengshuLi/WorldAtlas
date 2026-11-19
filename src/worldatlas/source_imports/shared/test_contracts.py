@@ -106,8 +106,8 @@ class DatabaseContractTests(unittest.TestCase):
             expected: Whether the database should accept the row.
         """
         insert = (
-            "INSERT INTO atlas.construction_records(id,method,arguments) "
-            "VALUES ('__contract',%s,%s)"
+            "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+            "VALUES ('__contract',%s,%s,'Test construction')"
         )
         with self.subTest(method=method, arguments=arguments, expected=expected):
             if expected:
@@ -122,8 +122,8 @@ class DatabaseContractTests(unittest.TestCase):
             self.assertEqual(error.exception.diag.constraint_name, "construction_arguments_valid")
 
     def test_requires_a_source_when_inserting_or_editing(self):
-        insert = ("INSERT INTO atlas.construction_records VALUES "
-                  "('__evidence_required','osm_way_chain',%s)")
+        insert = ("INSERT INTO atlas.construction_records(id,method,arguments,basis) VALUES "
+                  "('__evidence_required','osm_way_chain',%s,'Join source ways')")
         update = ("UPDATE atlas.construction_records SET arguments=%s "
                   "WHERE id='__evidence_required'")
         arguments = ARGUMENTS["osm_way_chain"]
@@ -164,7 +164,8 @@ class DatabaseContractTests(unittest.TestCase):
             geographic_choices={"source_id": "ordinary-untyped-text"},
         )
         self.database.execute(
-            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__links','watershed_boundary',%s)",
+            "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+            "VALUES ('__links','watershed_boundary',%s,'Test drainage divide')",
             (Jsonb(arguments),),
         )
 
@@ -230,10 +231,7 @@ class DatabaseContractTests(unittest.TestCase):
                 self.check(method, dict(arguments, method=method), False)
                 self.check(method, dict(arguments, runtime="unexpected"), False)
                 self.check(method, dict(arguments, unexpected="unused"), False)
-                self.check(method, dict(arguments, basis=False), False)
-                self.check(method, dict(arguments, basis=" \t\n"), False)
-                self.check(method, dict(arguments, basis="\u0085\u00a0\u3000"), False)
-                self.check(method, dict(arguments, basis="\u00a0東京\u3000"), True)
+                self.check(method, dict(arguments, basis="Explanation belongs on the row"), False)
         self.check("unknown", ARGUMENTS["osm_way_chain"], False)
 
     def test_required_freeform_json_cannot_be_omitted(self):

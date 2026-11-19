@@ -75,7 +75,7 @@ class ImportTests(unittest.TestCase):
             output.writestr("selected.gml", gml)
         raw = archive.getvalue()
         recipe = dict(
-            source_id="iho-test", basis="Select one archived area", gml_member="selected.gml",
+            source_id="iho-test", gml_member="selected.gml",
             gml_sha256=hashlib.sha256(gml).hexdigest(),
             selections=[dict(feature_id="test-sea", source_feature_id="urn:mrn:example")],
         )
@@ -94,7 +94,8 @@ class ImportTests(unittest.TestCase):
                     (hashlib.sha256(raw).hexdigest(), len(raw)),
                 )
                 database.execute(
-                    "INSERT INTO atlas.construction_records VALUES ('iho-recipe','s130_areas',%s)",
+                    "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+                    "VALUES ('iho-recipe','s130_areas',%s,'Select one archived area')",
                     (Jsonb(recipe),),
                 )
                 argv = ["worldatlas-import", "--recipe", "iho-recipe", "--r2-endpoint",

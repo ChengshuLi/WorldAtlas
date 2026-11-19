@@ -34,7 +34,6 @@ def interpreted_geometry(
     runtime: Runtime,
     *,
     source_ids: list[SourceId],
-    basis: NonEmptyText,
     selections: list[Selection],
 ):
     """Store reviewed label points and computation scopes from the recipe.
@@ -42,7 +41,6 @@ def interpreted_geometry(
     Args:
         runtime: Import resources and saved recipe snapshot.
         source_ids: Distinct catalog IDs for the supporting evidence.
-        basis: Human-readable explanation retained in the recipe.
         selections: Output IDs and their explicit WGS84 geometry.
 
     Returns:

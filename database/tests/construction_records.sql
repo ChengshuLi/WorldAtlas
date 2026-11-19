@@ -5,21 +5,29 @@ VALUES ('raw','Test','Test','test:raw','Test','test:license','Test','test','raw'
        ('other','Test','Test','test:other','Test','test:license','Test','test','other',repeat('b',64),1);
 DO $$
 DECLARE
- input jsonb := '{"way_source_ids":["raw"],"start_node_id":1,"feature_id":"boundary","basis":"Join source segments"}';
+ input jsonb := '{"way_source_ids":["raw"],"start_node_id":1,"feature_id":"boundary"}';
  invalid jsonb;
+ explanation text;
 BEGIN
- INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__construction','osm_way_chain',input);
- UPDATE atlas.construction_records SET arguments=input || '{"basis":"Updated explanation"}' WHERE id='__construction';
- IF (SELECT arguments->>'basis' FROM atlas.construction_records WHERE id='__construction') <> 'Updated explanation' THEN
-  RAISE EXCEPTION 'construction edit was not saved'; END IF;
+ INSERT INTO atlas.construction_records(id,method,arguments,basis)
+ VALUES ('__construction','osm_way_chain',input,'Join source segments');
+ UPDATE atlas.construction_records SET basis=U&'\00a0東京\3000' WHERE id='__construction';
+ IF (SELECT basis FROM atlas.construction_records WHERE id='__construction') IS DISTINCT FROM U&'\00a0東京\3000' THEN
+  RAISE EXCEPTION 'construction explanation edit was not saved'; END IF;
+ FOREACH explanation IN ARRAY ARRAY[NULL::text,'',E' \t\n',U&'\0085\00a0\3000'] LOOP
+  BEGIN
+   UPDATE atlas.construction_records SET basis=explanation WHERE id='__construction';
+   RAISE EXCEPTION 'null or blank construction explanation accepted';
+  EXCEPTION WHEN check_violation OR not_null_violation THEN NULL; END;
+ END LOOP;
  BEGIN
-  INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__construction','osm_way_chain',input);
+  INSERT INTO atlas.construction_records(id,method,arguments,basis)
+  VALUES ('__construction','osm_way_chain',input,'Join source segments');
   RAISE EXCEPTION 'duplicate construction ID accepted';
  EXCEPTION WHEN unique_violation THEN NULL; END;
  FOREACH invalid IN ARRAY ARRAY['[]'::jsonb,'{}'::jsonb,input-'feature_id',input-'start_node_id',
  input || '{"start_node_id":1.5}',input || '{"way_source_ids":[1]}',
- input || '{"method":"osm_way_chain"}',input || '{"basis":null}',input || '{"basis":42}',
- input || '{"basis":""}',input || jsonb_build_object('basis',E' \t\n'),input || '{"extra":true}'] LOOP
+ input || '{"method":"osm_way_chain"}',input || '{"basis":"Duplicated explanation"}',input || '{"extra":true}'] LOOP
   BEGIN
    UPDATE atlas.construction_records SET arguments=invalid WHERE id='__construction';
    RAISE EXCEPTION 'invalid construction edit accepted: %',invalid;
@@ -27,10 +35,11 @@ BEGIN
  END LOOP;
 END $$;
 DO $$
-DECLARE input jsonb := '{"source_id":"raw","basis":"Select a polygon part","id_field":"id","selections":[{"feature_id":"part","source_feature_id":"provider","polygon_containing":[1,2]}]}';
+DECLARE input jsonb := '{"source_id":"raw","id_field":"id","selections":[{"feature_id":"part","source_feature_id":"provider","polygon_containing":[1,2]}]}';
  invalid jsonb;
 BEGIN
- INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__polygon_part','selected_vector_features',input);
+ INSERT INTO atlas.construction_records(id,method,arguments,basis)
+ VALUES ('__polygon_part','selected_vector_features',input,'Select a polygon part');
  FOREACH invalid IN ARRAY ARRAY['null'::jsonb,'[1]'::jsonb,'[1,2,3]'::jsonb,'[1,"2"]'::jsonb] LOOP
   BEGIN
    UPDATE atlas.construction_records SET arguments=jsonb_set(input,'{selections,0,polygon_containing}',invalid)

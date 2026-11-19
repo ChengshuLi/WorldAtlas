@@ -45,6 +45,7 @@ CREATE TABLE atlas.construction_records (
     id text,
     method text NOT NULL,
     arguments jsonb NOT NULL,
+    basis text NOT NULL CHECK (atlas.nonblank(basis)),
     CONSTRAINT construction_records_id_check CHECK (atlas.nonblank(id)),
     CONSTRAINT construction_arguments_valid CHECK (atlas.valid_construction_record(method, arguments)),
     CONSTRAINT construction_records_pkey PRIMARY KEY (id)

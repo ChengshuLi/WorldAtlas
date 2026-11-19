@@ -14,14 +14,13 @@ Provider-defined geographic `group` and `collection` relations can produce one i
 
 ## Boundary lines
 
-Use `osm_way_chain` to join individual archived `/api/0.6/way/{id}/full.json` responses. Each file contains one OSM way and its nodes and has its own record in `atlas.source_assets`. The construction record supplies the selection and starting node.
+Use `osm_way_chain` to join individual archived `/api/0.6/way/{id}/full.json` responses. Each file contains one OSM way and its nodes and has its own record in `atlas.source_assets`. Store the explanation in the construction row's `basis` column and the selection and starting node in `arguments`.
 
 ```json
 {
   "way_source_ids": ["first-archived-way", "second-archived-way"],
   "start_node_id": 100,
-  "feature_id": "boundary-id",
-  "basis": "Join the selected OpenStreetMap ways into a boundary."
+  "feature_id": "boundary-id"
 }
 ```
 

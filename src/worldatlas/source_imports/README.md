@@ -11,7 +11,7 @@ These tools read raw geographic files from R2 and save geographic records in Neo
 
 [`shared/`](shared/) holds the recipe contracts, input acquisition, and storage workflow used by the import methods. Source imports and map building use [`worldatlas.source_assets`](../source_assets/README.md) for catalog lookup and verified downloads and [`worldatlas.geodesy.geojson`](../geodesy/geojson.py) for GeoJSON validation.
 
-Each row in `atlas.construction_records` contains an `id`, a `method` and its named `arguments` in JSONB. Imported geometry links to that construction by `construction_id`. Each map build freezes the recipes, geometry and raw catalog records it used. Release archives retain those copies for replay.
+Each row in `atlas.construction_records` has an `id`, a `method`, a nonblank `basis` explaining the construction, and the method's named `arguments` in JSONB. The importer passes the arguments to the method. Imported geometry links to the construction by `construction_id`. Each map build freezes the recipes and their explanations along with the geometry and raw catalog records it used. Release archives retain those copies for replay.
 
 Raw-source arguments use the `SourceId` type. The generated database code follows those declared fields through typed objects and lists, then synchronizes `atlas.construction_sources` when the method or arguments are saved. These foreign-key links make every feature's dependencies queryable through its construction. Source IDs are ordinary strings passed directly to Python; no wrapper or separate primary source is stored on a feature. Lists preserve calculation order; dependency links are unique. Untyped descriptive JSON is not searched for possible source IDs.
 
@@ -35,7 +35,7 @@ The `method` column selects a typed function registered in [`run_import.py`](run
 
 ```sql
 SELECT id, construction_id FROM atlas.source_features;
-SELECT method, arguments FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
+SELECT method, basis, arguments FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 
 Edit the recipe and rerun the same construction ID to update working geometry. A construction can produce several features. Each feature is saved under its own ID and links back to the construction. Neon updates the raw-source links when the construction arguments change. A failed import leaves the previous geometry intact. At save time, the importer checks that the recipe still matches the one it used and rejects any feature ID already linked to another construction.

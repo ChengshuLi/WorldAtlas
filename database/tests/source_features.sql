@@ -5,8 +5,8 @@ DECLARE candidate jsonb;
 BEGIN
  INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes)
  VALUES ('__geometry_raw','Test','Test','test:raw','Test','test:license','Test','test','geometry',repeat('a',64),1);
- INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('__geometry_recipe','selected_vector_features',
- '{"source_id":"__geometry_raw","basis":"Selected geometry","id_field":"id","selections":[{"feature_id":"__geometry","source_feature_id":"provider"}]}');
+ INSERT INTO atlas.construction_records(id,method,arguments,basis) VALUES ('__geometry_recipe','selected_vector_features',
+ '{"source_id":"__geometry_raw","id_field":"id","selections":[{"feature_id":"__geometry","source_feature_id":"provider"}]}','Selected geometry');
  FOR candidate IN SELECT jsonb_array_elements('[
   {"type":"Point","coordinates":[-180,90]},
   {"type":"MultiPoint","coordinates":[[0,0],[1,1]]},

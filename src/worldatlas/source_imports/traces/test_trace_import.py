@@ -24,7 +24,6 @@ class DatabaseTests(unittest.TestCase):
             source_ids=["raw"],
             feature_id="line",
             source_feature_id="Figure 1",
-            basis="Chosen points",
             points=[[10.0, 1.0], [9.0, 0.0], [8.0, -1.0]],
             max_step_metres=1000,
         )
@@ -32,7 +31,8 @@ class DatabaseTests(unittest.TestCase):
 
     def store(self):
         self.db.execute(
-            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES ('trace','geodesic_trace',%s) "
+            "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+            "VALUES ('trace','geodesic_trace',%s,'Chosen points') "
             "ON CONFLICT(id) DO UPDATE SET arguments=EXCLUDED.arguments",
             (Jsonb(self.recipe),),
         )

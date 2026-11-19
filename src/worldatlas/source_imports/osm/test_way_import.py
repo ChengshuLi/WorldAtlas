@@ -72,7 +72,6 @@ class DatabaseTests(unittest.TestCase):
             way_source_ids=["osm-test-1"],
             start_node_id=1,
             feature_id="border",
-            basis="Test construction description",
             recipe_id="__osm_recipe",
         )
         self.store()
@@ -83,7 +82,8 @@ class DatabaseTests(unittest.TestCase):
 
     def store(self):
         self.database.execute(
-            "INSERT INTO atlas.construction_records(id,method,arguments) VALUES (%s,'osm_way_chain',%s) "
+            "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+            "VALUES (%s,'osm_way_chain',%s,'Test construction description') "
             "ON CONFLICT(id) DO UPDATE SET arguments=EXCLUDED.arguments",
             (
                 "__osm_recipe",
@@ -117,7 +117,7 @@ class DatabaseTests(unittest.TestCase):
         self.assertEqual(self.build(), first)
         self.assertEqual(self.boundary(), before)
         self.assertEqual(self.storage.get_object.call_count, 1)
-        self.recipe.update(way_source_ids=["osm-test-2"], basis="New source")
+        self.recipe.update(way_source_ids=["osm-test-2"])
         self.store()
         self.build()
         self.assertEqual(self.boundary()[0]["coordinates"], [[0.0, 0.0], [2.0, 2.0]])
@@ -148,7 +148,8 @@ class DatabaseTests(unittest.TestCase):
 
         def calculate(*args):
             self.database.execute(
-                "UPDATE atlas.construction_records SET arguments=arguments || '{\"basis\":\"Edited concurrently\"}' WHERE id='__osm_recipe'"
+                "UPDATE atlas.construction_records SET arguments=arguments || '{\"start_node_id\":2}' "
+                "WHERE id='__osm_recipe'"
             )
             return assemble(*args)
 
@@ -161,6 +162,20 @@ class DatabaseTests(unittest.TestCase):
             ):
                 self.build()
         self.assertEqual(self.boundary(), before)
+
+    def test_basis_edit_during_calculation_allows_the_save(self):
+        def retrieve(*, Bucket, Key):
+            self.database.execute(
+                "UPDATE atlas.construction_records SET basis='New explanation' WHERE id='__osm_recipe'"
+            )
+            return {"Body": io.BytesIO(self.responses[Key])}
+
+        self.storage.get_object.side_effect = retrieve
+        self.assertEqual(self.build()["feature_id"], "border")
+        self.assertEqual(self.boundary()[0]["coordinates"], [[0.0, 0.0], [1.0, 1.0]])
+        self.assertEqual(self.database.execute(
+            "SELECT basis FROM atlas.construction_records WHERE id='__osm_recipe'"
+        ).fetchone(), ("New explanation",))
 
     def test_corrupt_source_does_not_write(self):
         self.responses["1.json"] = b"corrupt"

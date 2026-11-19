@@ -37,9 +37,9 @@ The current construction IDs are `caucasus-boundary-construction` and `ural-boun
 
 ## Construction settings
 
-The record's method is `watershed_boundary`. It contains:
+Set the record's method to `watershed_boundary` and describe the geographic choices in its `basis` column. The construction arguments are listed below.
 
-- `feature_id` and `basis`: the editable boundary and a plain-language explanation.
+- `feature_id`: the ID of the editable boundary.
 - `sources`: local file names mapped directly to catalog source-ID strings. Multipart inputs instead specify ordered source-ID strings in `parts`, the complete file's checksum, size and filename. There are no one-field wrappers.
 - `lines`: one complete GeoJSON feature, OSM way or river relation per named line. Joining different source features belongs in `sections` with explicit joins.
 - `terrains`: primary and secondary sources, height conversion, analysis domains, drainage groups, waterway references and the group pairs whose divides are needed.

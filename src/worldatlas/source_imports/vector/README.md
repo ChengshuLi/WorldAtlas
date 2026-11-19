@@ -15,7 +15,7 @@ worldatlas-import --recipe CONSTRUCTION_ID \
 
 ## Vector selections
 
-The recipe contains `source_id`, `basis`, `id_field`, and `selections`. Each selection identifies the provider record with `source_feature_id` and names the saved record with `feature_id`. Different output IDs can select the same provider feature. Provider attributes stay in the raw file.
+The construction arguments contain `source_id`, `id_field`, and `selections`. Each selection identifies the provider record with `source_feature_id` and names the saved record with `feature_id`. Different output IDs can select the same provider feature. Provider attributes stay in the raw file.
 
 - Set `member` to select an archived dataset and `layer` to select a layer in a file that contains several.
 - Vector imports convert the source CRS to the stored coordinate system. Use `coordinate_operation` when the source needs a specific documented transformation. WGS84 GeoJSON retains its numeric coordinate values when no explicit transformation or collection operation is requested. Storage normalizes `-0.0` to `0.0`.
