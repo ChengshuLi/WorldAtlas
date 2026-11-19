@@ -2,22 +2,35 @@
 set -euo pipefail
 
 version=0.3.4
-pg_config=$(command -v "${1:-pg_config}")
+if ! pg_config=$(command -v "${1:-pg_config}"); then
+    echo "Put pg_config on PATH or pass its absolute path." >&2
+    exit 1
+fi
 pg_config="$(cd "$(dirname "$pg_config")" && pwd)/$(basename "$pg_config")"
 lib_dir=$("$pg_config" --pkglibdir)
 extension_dir=$("$pg_config" --sharedir)/extension
+control="$extension_dir/pg_jsonschema.control"
 sql_file=pg_jsonschema--$version.sql
 
-if [[ $(uname -s) == Darwin ]]; then
+platform=$(uname -s)
+if [[ "$platform" == Darwin ]]; then
     suffix=dylib
 else
     suffix=so
 fi
 library=pg_jsonschema.$suffix
 
-if [[ -f "$lib_dir/$library" && -f "$extension_dir/$sql_file" &&
-      -f "$extension_dir/pg_jsonschema.control" ]]; then
-    exit 0
+if [[ -f "$control" ]]; then
+    installed_version=$(awk -F "'" '$1 ~ /^[[:space:]]*default_version[[:space:]]*=/ {print $2; exit}' "$control")
+    if [[ "$installed_version" != "$version" ]]; then
+        printf 'pg_jsonschema already uses version %s in %s. Use a separate PostgreSQL install for %s.\n' \
+            "${installed_version:-unknown}" "$extension_dir" "$version" >&2
+        exit 1
+    fi
+    if [[ -f "$lib_dir/$library" && -f "$extension_dir/$sql_file" ]]; then
+        printf 'Using pg_jsonschema %s in %s\n' "$version" "$extension_dir"
+        exit 0
+    fi
 fi
 
 scratch=$(mktemp -d)
@@ -27,7 +40,7 @@ pg_major=${pg_version#PostgreSQL }
 pg_major=${pg_major%%.*}
 release=https://github.com/supabase/pg_jsonschema/releases/download/v$version
 
-case "$(uname -s)" in
+case "$platform" in
     Darwin)
         curl -fsSL --retry 3 "https://codeload.github.com/supabase/pg_jsonschema/tar.gz/refs/tags/v$version" -o "$scratch/source.tar.gz"
         mkdir "$scratch/source"
@@ -59,4 +72,5 @@ case "$(uname -s)" in
 esac
 
 install -m 755 "$package_lib/$library" "$lib_dir/"
-install -m 644 "$package_extension/pg_jsonschema.control" "$package_extension/$sql_file" "$extension_dir/"
+install -m 644 "$package_extension/$sql_file" "$package_extension/pg_jsonschema.control" "$extension_dir/"
+printf 'Installed pg_jsonschema %s in %s\n' "$version" "$extension_dir"

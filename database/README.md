@@ -43,7 +43,7 @@ For an existing database, back up its data, rehearse the transition locally, the
 
 ## Tests
 
-Put PostgreSQL 17 or 18 tools on your path. Install `pg_jsonschema` once for that PostgreSQL installation. On macOS, the install command builds the native extension using the Xcode command-line tools and Rust's `cargo`. On Debian and Ubuntu, it extracts the matching upstream package using `dpkg-deb`. You can also pass the absolute path to a different installation's `pg_config`.
+Put PostgreSQL 17 or 18 tools on your path. Install `pg_jsonschema` once for that PostgreSQL installation. On macOS, the install command builds the native extension using the Xcode command-line tools and Rust's `cargo`. On Debian and Ubuntu, it extracts the matching upstream package using `dpkg-deb`. You can also pass the path to a different installation's `pg_config`. If that installation already has a different `pg_jsonschema` version, use the project PostgreSQL environment.
 
 ```bash
 bash database/tests/install_pg_jsonschema.sh
