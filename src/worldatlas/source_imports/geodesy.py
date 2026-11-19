@@ -8,7 +8,12 @@ GEOD = Geod(ellps="WGS84")
 
 
 def geodesic(first, last, max_step_m):
-    """Sample a shortest geodesic, preserving both supplied endpoints."""
+    """Return points along a shortest WGS84 path between the supplied endpoints.
+
+    Supply ``first`` and ``last`` as ``(longitude, latitude)`` in degrees.
+    The returned list preserves both endpoints in order and adds evenly
+    spaced points so each step is at most ``max_step_m`` metres.
+    """
     if not math.isfinite(max_step_m) or max_step_m <= 0:
         raise ValueError("positive geodesic spacing is required")
     azimuth, _, length = GEOD.inv(*first, *last)
