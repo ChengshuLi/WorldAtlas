@@ -8,7 +8,8 @@ import shapefile
 from shapely.geometry import LineString
 
 from worldatlas.source_imports.watersheds.terrain import Grid
-from worldatlas.source_imports.watersheds.waterways import Basins, Waterways, seed_grid
+from worldatlas.source_imports.watersheds.basins import Basins
+from worldatlas.source_imports.watersheds.waterways import Waterways, seed_grid
 
 
 class BasinTests(unittest.TestCase):

@@ -62,6 +62,23 @@ def fixtures(directory):
     return files, recipe
 
 
+def build_fixture(recipe, files):
+    """Run the watershed calculation with the fixture's construction settings.
+
+    Args:
+        recipe: Fixture recipe containing the selected sections and terrain.
+        files: Verified local source paths keyed by source alias.
+
+    Returns:
+        Constructed boundary and its calculation report.
+    """
+    return construct(
+        files, line_selections=recipe['lines'], sections=recipe['sections'],
+        joins=recipe['joins'], start=recipe['start'], end=recipe['end'],
+        terrains=recipe.get('terrains'),
+    )
+
+
 class ConstructionTests(unittest.TestCase):
     def test_unresolved_river_stops_before_terrain_processing(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -78,7 +95,7 @@ class ConstructionTests(unittest.TestCase):
             recipe['terrains']['ridge'].update(waterways=['rivers'], waterway_groups={3: ['20']})
             with patch('worldatlas.source_imports.watersheds.build_boundary.prepare') as terrain:
                 with self.assertRaisesRegex(ValueError, 'unresolved downstream route'):
-                    construct(recipe, files)
+                    build_fixture(recipe, files)
                 terrain.assert_not_called()
 
     def test_final_connector_crossing_is_rejected_by_the_pipeline(self):
@@ -93,14 +110,14 @@ class ConstructionTests(unittest.TestCase):
             recipe['terrains']['ridge']['waterways'] = ['river']
             recipe['sections'][1].update(via=[{'point': [.001, .003]}], max_step_m=10.)
             with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
-                construct(recipe, files)
+                build_fixture(recipe, files)
 
     def test_divide_waypoints_need_no_stored_attachment_coordinates(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
             points = [[.0032, .004], [.0028, .002]]
             recipe['sections'][1].update(via=[{'point': p} for p in points], max_step_m=10.)
-            geometry, report = construct(recipe, files)
+            geometry, report = build_fixture(recipe, files)
             coordinates = geometry['coordinates']
             self.assertEqual(coordinates[0], [.001, .005])
             self.assertEqual(coordinates[-1], [.005, .001])
@@ -110,11 +127,11 @@ class ConstructionTests(unittest.TestCase):
     def test_closed_sink_is_applied_only_to_domains_that_contain_it(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
-            expected, _ = construct(recipe, files)
+            expected, _ = build_fixture(recipe, files)
             recipe['terrains']['ridge']['domains'] = [[0, .003, .006, .006], [0, 0, .006, .003]]
             recipe['terrains']['ridge']['closed_sinks'] = [
                 {'point': {'point': [.001, .005]}, 'group': 3}]
-            actual, _ = construct(recipe, files)
+            actual, _ = build_fixture(recipe, files)
             self.assertEqual(actual, expected)
 
     def test_closed_sink_outside_all_domains_is_reported(self):
@@ -123,7 +140,7 @@ class ConstructionTests(unittest.TestCase):
             recipe['terrains']['ridge']['closed_sinks'] = [
                 {'point': {'point': [.02, .02]}, 'group': 3}]
             with self.assertRaisesRegex(ValueError, 'outside every analysis domain'):
-                construct(recipe, files)
+                build_fixture(recipe, files)
 
     def test_boundary_can_start_and_end_on_a_selected_divide(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -132,7 +149,7 @@ class ConstructionTests(unittest.TestCase):
             recipe['joins'] = []
             recipe['start'] = {'nearest_divide': 'ridge', 'near': {'point': [.003, .005]}}
             recipe['end'] = {'nearest_divide': 'ridge', 'near': {'point': [.003, .001]}}
-            geometry, _ = construct(recipe, files)
+            geometry, _ = build_fixture(recipe, files)
             self.assertEqual(geometry['coordinates'][0], [.003, .005])
             self.assertEqual(geometry['coordinates'][-1], [.003, .001])
 
@@ -145,27 +162,27 @@ class ConstructionTests(unittest.TestCase):
             files['lines'].write_text(json.dumps(document))
             recipe['lines']['crossing'] = [{'source': 'lines', 'geojson_feature': 2}]
             recipe['start'] = {'intersection': ['before', 'crossing'], 'near': [.002, .005]}
-            geometry, _ = construct(recipe, files)
+            geometry, _ = build_fixture(recipe, files)
             self.assertEqual(geometry['coordinates'][0], [.002, .005])
 
     def test_complete_native_divide_and_source_joins(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
-            geometry, report = construct(recipe, files)
+            geometry, report = build_fixture(recipe, files)
             points = geometry['coordinates']
             self.assertEqual(points[0], [.001, .005])
             self.assertEqual(points[-1], [.005, .001])
             self.assertEqual(report['terrain']['ridge']['domains'][0]['unknown_cells'], 0)
             self.assertEqual(report['joins'], [[.003, .005], [.003, .001]])
-            self.assertEqual(construct(recipe, files)[0], geometry)
+            self.assertEqual(build_fixture(recipe, files)[0], geometry)
 
     def test_explicit_output_area_keeps_the_native_construction_unchanged(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
-            original = construct(recipe, files)[0]
+            original = build_fixture(recipe, files)[0]
             recipe['terrains']['ridge']['domains'] = [
                 {'bounds': [0, 0, .006, .006], 'output_bounds': [0, 0, .006, .006]}]
-            geometry, report = construct(recipe, files)
+            geometry, report = build_fixture(recipe, files)
             self.assertEqual(geometry, original)
             self.assertEqual(report['terrain']['ridge']['domains'][0]['output_bounds'],
                              [0, 0, .006, .006])
@@ -173,12 +190,12 @@ class ConstructionTests(unittest.TestCase):
     def test_projected_analysis_bounds_use_geographic_sources_and_joins(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
-            original = construct(recipe, files)[0]
+            original = build_fixture(recipe, files)[0]
             bounds = Transformer.from_crs(4326, 3857, always_xy=True).transform_bounds(
                 .00001, .00001, .00599, .00599)
             recipe['terrains']['ridge']['domains'] = [
                 {'crs': 'EPSG:3857', 'bounds': bounds, 'output_bounds': bounds}]
-            geometry, report = construct(recipe, files)
+            geometry, report = build_fixture(recipe, files)
             self.assertEqual(geometry, original)
             self.assertEqual(report['terrain']['ridge']['domains'][0]['bounds_crs'], 'EPSG:3857')
 
@@ -195,7 +212,7 @@ class ConstructionTests(unittest.TestCase):
             ds = None
             files['water'] = water
             recipe['terrains']['ridge']['ocean_mask'] = {'sources': ['water'], 'values': [1]}
-            geometry, report = construct(recipe, files)
+            geometry, report = build_fixture(recipe, files)
             self.assertIn([.003, .005], geometry['coordinates'])
             self.assertEqual(report['terrain']['ridge']['domains'][0]['coast'],
                              {'ocean_cells': 6, 'land_outlet_cells': 6, 'river_basin_conflicts': 0,
@@ -227,7 +244,7 @@ class ConstructionTests(unittest.TestCase):
             ds.GetRasterBand(1).WriteArray(water)
             ds = None
             recipe['terrains']['ridge']['ocean_mask'] = {'sources': ['water'], 'values': [1]}
-            geometry, report = construct(recipe, files)
+            geometry, report = build_fixture(recipe, files)
             self.assertIn([.003, .005], geometry['coordinates'])
             coverage = report['terrain']['ridge']['domains'][0]['coast']['source_coverage']
             self.assertEqual({item['group'] for item in coverage['resolved']}, {3, 100})

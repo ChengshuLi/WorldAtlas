@@ -16,7 +16,7 @@ class VectorTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.path = Path(self.temp.name) / "worldatlas.source_imports.features.geojson"
+        self.path = Path(self.temp.name) / "features.geojson"
         self.recipe = {
             "id_field": "provider_id",
             "selections": [{"feature_id": "selected", "source_feature_id": "a"}],

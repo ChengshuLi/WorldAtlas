@@ -10,7 +10,8 @@
 | [`terrain.py`](terrain.py) | Crop native grids and fill missing heights from real secondary data. |
 | [`drainage.py`](drainage.py) | Calculate eight-neighbor flow and downstream destinations. |
 | [`waterways.py`](waterways.py) | Read natural waterways and trace their drainage destinations. |
-| [`sources.py`](sources.py) | Read source features, including basin polygons and river relations. |
+| [`basins.py`](basins.py) | Look up provider basins and classify terrain outlets. |
+| [`sources.py`](sources.py) | Select lines and points from local provider files and archives. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
 | [`worldatlas.source_assets`](../../source_assets/README.md) | Resolve catalog IDs and verify downloaded or multipart files. |
 | [`../shared/storage.py`](../shared/storage.py) | Validate and save geometry with its construction reference. |

@@ -7,25 +7,33 @@ import platform
 import time
 from typing import Any
 
-from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
-
 import numpy as np
 from pyproj import Transformer
 from shapely.geometry import LineString
 
+from worldatlas.geodesy.wgs84 import geodesic
+from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import MultipartSource, acquire_sources
 from worldatlas.source_imports.shared.storage import save_features
-from worldatlas.source_imports.watersheds.boundary import Divide, assemble, cell_at, distance, flow_to_point, geodesic, intersection
+from worldatlas.source_imports.watersheds.basins import Basins
+from worldatlas.source_imports.watersheds.boundary import (
+    Divide, assemble, cell_at, distance, flow_to_point, intersection,
+)
 from worldatlas.source_imports.watersheds.drainage import compute_flow, possible_destinations, single_destinations
 from worldatlas.source_imports.watersheds.sources import Sources
 from worldatlas.source_imports.watersheds.terrain import align, prepare
-from worldatlas.source_imports.watersheds.waterways import Basins, seed_grid
+from worldatlas.source_imports.watersheds.waterways import seed_grid
 
 LOGGER = logging.getLogger(__name__)
 
 
 def runtime_versions():
+    """Record the dependency versions used for a watershed calculation.
+
+    Returns:
+        Versions of the Python and native libraries and the PROJ database checksum.
+    """
     from osgeo import gdal, osr
     import pyproj
     import shapely
@@ -41,19 +49,28 @@ def runtime_versions():
             'proj_database_sha256': hashlib.sha256(database.read_bytes()).hexdigest()}
 
 
-def construct(recipe, files):
-    """Calculate independent sections, choose their shared joins, then assemble once.
+def construct(files, *, line_selections, sections, joins, start, end, terrains=None):
+    """Calculate watershed sections and assemble one final line.
 
-    Source IDs, drainage identities, domains and geographic route choices are
-    construction data. Algorithms do not depend on the boundary's name.
+    Args:
+        files: Verified local paths keyed by the recipe's source aliases.
+        line_selections: Provider feature selections keyed by line name.
+        sections: Ordered source lines, divides, flow paths, or connectors.
+        joins: Geographic anchors for intersections between adjacent sections.
+        start: Selection for the first point of the boundary.
+        end: Selection for the last point of the boundary.
+        terrains: Analysis domains and drainage settings keyed by terrain name.
+
+    Returns:
+        The final GeoJSON boundary and a report of inputs, checks, and timings.
     """
     started = time.monotonic()
     report = {'terrain': {}, 'connections': {}}
     sources = Sources(files)
-    lines = {name: sources.line(parts) for name, parts in recipe['lines'].items()}
+    lines = {name: sources.line(parts) for name, parts in line_selections.items()}
     report['source_geometry_seconds'] = time.monotonic() - started
     divides, connections, networks = {}, {}, []
-    for name, settings in (recipe.get('terrains') or {}).items():
+    for name, settings in (terrains or {}).items():
         phase = time.monotonic()
         domains = settings['domains']
         if not domains:
@@ -84,7 +101,7 @@ def construct(recipe, files):
         if network not in networks:
             networks.append(network)
         network_seconds = time.monotonic() - phase
-        required = [(i, section['flow']) for i, section in enumerate(recipe['sections'])
+        required = [(i, section['flow']) for i, section in enumerate(sections)
                     if 'flow' in section and section['flow']['terrain'] == name]
         if required and len(domains) != 1:
             raise ValueError('a stream-head connection requires one continuous terrain domain')
@@ -209,35 +226,35 @@ def construct(recipe, files):
             return sources.point(specification, lines)
         return join if retain_join else join.point
 
-    sections, waypoints = [], {}
-    for index, section in enumerate(recipe['sections']):
+    section_lines, waypoints = [], {}
+    for index, section in enumerate(sections):
         if 'line' in section:
-            sections.append(lines[section['line']])
+            section_lines.append(lines[section['line']])
         elif 'divide' in section:
-            sections.append(divides[section['divide']])
+            section_lines.append(divides[section['divide']])
             if section.get('via'):
                 waypoints[index] = {'points': [sources.point(p, lines) for p in section['via']],
                                     'max_step_m': section['max_step_m']}
         elif 'flow' in section:
-            sections.append(connections[index])
+            section_lines.append(connections[index])
         elif 'geodesic' in section:
             choice = section['geodesic']
             first, last = selected_point(choice['start']), selected_point(choice['end'])
-            sections.append(LineString(geodesic(first, last, choice['max_step_m'])))
+            section_lines.append(LineString(geodesic(first, last, choice['max_step_m'])))
             report.setdefault('connectors', {})[str(index)] = {
                 'start': list(first), 'end': list(last), 'length_m': distance(first, last)}
         else:
             raise ValueError('unknown boundary section type')
-    if len(recipe['joins']) != len(sections) - 1:
+    if len(joins) != len(section_lines) - 1:
         raise ValueError('one geographic join selection is required between adjacent sections')
-    joins = [intersection(a, b, choice['near'])
-             for a, b, choice in zip(sections, sections[1:], recipe['joins'])]
-    geometry = assemble(sections, joins, selected_point(recipe['start'], retain_join=True),
-                        selected_point(recipe['end'], retain_join=True),
+    chosen_joins = [intersection(a, b, choice['near'])
+                    for a, b, choice in zip(section_lines, section_lines[1:], joins)]
+    geometry = assemble(section_lines, chosen_joins, selected_point(start, retain_join=True),
+                        selected_point(end, retain_join=True),
                         waypoints=waypoints, connections=report['connections'])
     final_line = LineString(geometry['coordinates'])
     report['river_checks'] = [network.check_crossings(final_line) for network in networks]
-    report['joins'] = [list(join.point) for join in joins]
+    report['joins'] = [list(join.point) for join in chosen_joins]
     report['assembly_seconds'] = time.monotonic() - phase
     report['construction_seconds'] = time.monotonic() - started
     return geometry, report
@@ -251,13 +268,31 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText, basis: Non
                        terrains: dict[NonEmptyText, dict[str, Any]] | None = None,
                        evidence_sources: list[SourceId] | None = None,
                        geographic_choices: dict[str, Any] | None = None):
-    """Construct ordered source lines, drainage divides, rivers and geographic joins."""
-    recipe = runtime.arguments
+    """Construct and save the final watershed boundary.
+
+    Args:
+        runtime: Import resources and saved recipe snapshot.
+        feature_id: Output boundary ID in Neon.
+        basis: Human-readable explanation retained in the recipe.
+        sources: Source aliases mapped to catalog IDs or multipart files.
+        lines: Provider feature selections keyed by line name.
+        sections: Ordered source lines, divides, flow paths, or connectors.
+        joins: Geographic anchors for intersections between adjacent sections.
+        start: Selection for the first point of the boundary.
+        end: Selection for the last point of the boundary.
+        terrains: Optional analysis domains and drainage settings.
+        evidence_sources: Additional catalog IDs cited as supporting evidence.
+        geographic_choices: Optional geographic rationale retained in the recipe.
+
+    Returns:
+        Saved boundary identity, geometry checksum, and construction report.
+    """
     acquisition = {}
     paths = acquire_sources(runtime, list(sources.values()), evidence_source_ids=evidence_sources or (),
                             timing=acquisition)
     files = dict(zip(sources, paths, strict=True))
-    geometry, report = construct(recipe, files)
+    geometry, report = construct(files, line_selections=lines, sections=sections,
+                                 joins=joins, start=start, end=end, terrains=terrains)
     versions = runtime_versions()
     started = time.monotonic()
     hashes = save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])

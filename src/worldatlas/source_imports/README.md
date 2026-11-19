@@ -9,7 +9,7 @@ These tools read raw geographic files from R2 and save geographic records in Neo
 - [`traces/`](traces/README.md) implements `geodesic_trace` for lines from reviewed source-figure points.
 - [`watersheds/`](watersheds/README.md) implements `watershed_boundary` for lines derived from terrain and natural drainage.
 
-[`worldatlas.source_assets`](../source_assets/README.md) provides catalog lookup and verified downloads for both source imports and map building.
+[`shared/`](shared/) holds the recipe contracts, input acquisition, and storage workflow used by the import methods. Source imports and map building use [`worldatlas.source_assets`](../source_assets/README.md) for catalog lookup and verified downloads and [`worldatlas.geodesy.geojson`](../geodesy/geojson.py) for GeoJSON validation.
 
 Each row in `atlas.construction_records` contains an `id`, a `method` and its named `arguments` in JSONB. Imported geometry links to that construction by `construction_id`. Each map build freezes the recipes, geometry and raw catalog records it used. Release archives retain those copies for replay.
 
