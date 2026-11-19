@@ -6,7 +6,7 @@ Both methods use the [common import command](../README.md#run-one-construction) 
 
 [`features.py`](features.py) contains `selected_osm_features`. It uses Osmium's geometry API to read selected nodes and closed outlines and assemble polygon relations. The resulting geometries go through the shared import workflow.
 
-Each selection identifies an output `feature_id`, provider `source_feature_id`, and `object_type` (`node`, `way` or `relation`). The raw-file checksum pins the extract. Optional `expected_tags` verify provider tags.
+Each selection identifies an output `feature_id`, provider `source_feature_id`, and `object_type` (`node`, `way` or `relation`). Select each object at most once per recipe. The raw-file checksum pins the extract. Optional `expected_tags` verify provider tags.
 
 Polygon imports preserve holes and return a `MultiPolygon`. Select a closed way or a relation tagged `type=multipolygon` or `type=boundary`. The archived extract must contain the ways and nodes that form the outline. Osmium assembles outer and inner rings and skips relation label nodes.
 

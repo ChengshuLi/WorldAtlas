@@ -25,6 +25,7 @@ class OsmFeatureTests(unittest.TestCase):
             21: (30, 0),
             22: (30, 10),
             23: (20, 10),
+            40: (32, 12),
         }
         nodes = [
             f'<node id="{i}" version="1" lon="{lon}" lat="{lat}">'
@@ -97,14 +98,17 @@ class OsmFeatureTests(unittest.TestCase):
         selections = [
             self.selection,
             dict(feature_id="way", source_feature_id=40, object_type="way"),
-            dict(feature_id="label", source_feature_id=1, object_type="node"),
-            dict(self.selection, feature_id="same-islands"),
+            dict(feature_id="label", source_feature_id=40, object_type="node"),
         ]
         results = read_features(self.path, selections)
         self.assertEqual([item["feature_id"] for item in results],
-                         ["islands", "way", "label", "same-islands"])
-        self.assertEqual(results[0]["geometry"], results[3]["geometry"])
-        self.assertEqual(results[2]["geometry"], {"type": "Point", "coordinates": [0, 0]})
+                         ["islands", "way", "label"])
+        self.assertEqual(results[2]["geometry"], {"type": "Point", "coordinates": [32, 12]})
+
+    def test_rejects_the_same_osm_object_under_two_feature_ids(self):
+        duplicate = dict(self.selection, feature_id="duplicate", source_feature_id=100)
+        with self.assertRaisesRegex(ValueError, "relation 100 is selected more than once"):
+            read_features(self.path, [self.selection, duplicate])
 
     def test_nodes_and_closed_ways(self):
         node = dict(

@@ -1,6 +1,5 @@
 """Import selected points and areas from an archived OpenStreetMap extract."""
 
-from collections import defaultdict
 import json
 import time
 from typing import Literal, NotRequired, TypedDict
@@ -35,7 +34,7 @@ def read_features(path, selections):
 
     Args:
         path: Verified local OSM extract.
-        selections: Object types and IDs, with optional tag checks.
+        selections: Unique object types and IDs, with optional tag checks.
 
     Returns:
         Selected features in recipe order, with output IDs and geometries.
@@ -43,14 +42,15 @@ def read_features(path, selections):
     Raises:
         ValueError: A selected object is missing, duplicated, or invalid.
     """
-    requested, ordered = defaultdict(list), []
+    requested = {}
     for selection in selections:
         kind = OBJECT_TYPES.get(selection["object_type"])
         if kind is None:
             raise ValueError("unsupported selected OSM object type")
         key = kind, int(selection["source_feature_id"])
-        requested[key].append(selection.get("expected_tags", {}))
-        ordered.append((key, selection))
+        if key in requested:
+            raise ValueError(f"OSM {selection['object_type']} {key[1]} is selected more than once")
+        requested[key] = selection
 
     processor = osmium.FileProcessor(str(path))
     if any(kind == "r" for kind, _ in requested):
@@ -79,8 +79,7 @@ def read_features(path, selections):
         seen.add(key)
         if any(
             obj.tags.get(name) != value
-            for tags in requested[key]
-            for name, value in tags.items()
+            for name, value in requested[key].get("expected_tags", {}).items()
         ):
             raise ValueError(f"selected OSM identity tags differ for {key}")
         if obj.is_node():
@@ -123,7 +122,7 @@ def read_features(path, selections):
             source_feature_id=selection["source_feature_id"],
             geometry=geometries[key],
         )
-        for key, selection in ordered
+        for key, selection in requested.items()
     ]
 
 
