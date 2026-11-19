@@ -2,7 +2,7 @@
 
 Build one final boundary by joining reviewed control points stored in Neon with WGS84 geodesics. Every control point is preserved. The points include the intended path through gaps and around islands; there is no later adjustment stage.
 
-- [`geodesic.py`](geodesic.py) joins consecutive control points without smoothing. [`../geodesy.py`](../geodesy.py) samples the same WGS84 segments used by watershed connectors.
+- [`geodesic.py`](geodesic.py) joins consecutive control points without smoothing. The [shared WGS84 sampler](../../geodesy/wgs84.py) also serves watershed connectors.
 - [`build_boundary.py`](build_boundary.py) reads a construction record and its raw-source catalog entries, then writes the final geometry to Neon.
 
 ## Construction record

@@ -1,4 +1,4 @@
-"""Provide WGS84 geodesic calculations and ellipsoid curvature bounds."""
+"""Define the WGS84 ellipsoid and sample geodesic segments on it."""
 
 import math
 

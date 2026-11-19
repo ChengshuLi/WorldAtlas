@@ -7,8 +7,8 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from worldatlas import source_assets
 from worldatlas.source_assets import assemble_parts, download_source
+from worldatlas.source_assets import catalog
 
 
 class DownloadTest(unittest.TestCase):
@@ -51,7 +51,7 @@ class DownloadTest(unittest.TestCase):
 
     def test_download_time_excludes_verification_and_cached_reuse(self):
         clock, timing = [0.0], {}
-        original = source_assets.check_source
+        original = catalog.check_source
 
         def retrieve(**kwargs):
             clock[0] += 3.0
@@ -62,8 +62,8 @@ class DownloadTest(unittest.TestCase):
             original(path, source)
 
         self.storage.get_object.side_effect = retrieve
-        with patch('worldatlas.source_assets.time.monotonic', side_effect=lambda: clock[0]), patch(
-            'worldatlas.source_assets.check_source', side_effect=verify
+        with patch.object(catalog.time, 'monotonic', side_effect=lambda: clock[0]), patch.object(
+            catalog, 'check_source', side_effect=verify
         ):
             download_source(self.storage, self.source, self.directory, timing=timing)
             download_source(self.storage, self.source, self.directory, timing=timing)
@@ -71,10 +71,11 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(clock[0], 17.0)
 
     def test_reject_corrupt_download_and_remove_partial(self):
-        self.storage.get_object.return_value = {'Body': io.BytesIO(b'corrupt')}
+        self.storage.get_object.return_value = {'Body': io.BytesIO(b'x' * len(self.raw))}
         with self.assertRaisesRegex(ValueError, 'size or hash'):
             download_source(self.storage, self.source, self.directory)
-        self.assertEqual(list(self.directory.rglob('*.*')), [])
+        self.assertFalse(list(self.directory.rglob('download-*')))
+        self.assertFalse((self.directory / self.source['sha256'] / 'source.zip').exists())
 
     def test_reject_wrong_catalog_size(self):
         with self.assertRaisesRegex(ValueError, 'size or hash'):
@@ -91,7 +92,8 @@ class DownloadTest(unittest.TestCase):
         self.storage.get_object.side_effect = OSError('connection interrupted')
         with self.assertRaisesRegex(OSError, 'interrupted'):
             download_source(self.storage, self.source, self.directory)
-        self.assertEqual(list(self.directory.rglob('*.*')), [])
+        self.assertFalse(list(self.directory.rglob('download-*')))
+        self.assertFalse((self.directory / self.source['sha256'] / 'source.zip').exists())
 
     def test_ordinary_raster_keeps_its_extension(self):
         source = dict(self.source, r2_key='provider/elevation.tif')
@@ -130,7 +132,7 @@ class DownloadTest(unittest.TestCase):
     def test_multipart_download_times_accumulate_without_charging_reassembly(self):
         parts, whole, digest = self.parts()
         timing = {}
-        with patch('worldatlas.source_assets.time.monotonic', side_effect=[0.0, 2.0, 4.0, 7.0]):
+        with patch.object(catalog.time, 'monotonic', side_effect=[0.0, 2.0, 4.0, 7.0]):
             assemble_parts(
                 self.storage,
                 parts,
