@@ -8,6 +8,8 @@ import os
 from contextlib import ExitStack, closing
 from pathlib import Path
 
+import psycopg
+
 from worldatlas.source_imports.atlas_sources.catalog import read_recipe
 from worldatlas.source_imports.contracts import Runtime, validate_arguments
 from worldatlas.source_imports.features.build_features import (
@@ -69,8 +71,6 @@ def main():
     args = parser.parse_args()
     if not (connection := os.environ.get("NEON_DATABASE_URL")):
         parser.error("set NEON_DATABASE_URL to the working database")
-    import psycopg
-
     connect = lambda: psycopg.connect(connection, connect_timeout=15)
     with ExitStack() as stack:
         storage = None
