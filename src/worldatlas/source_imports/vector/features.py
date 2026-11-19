@@ -8,7 +8,7 @@ from zipfile import ZipFile
 
 from osgeo import gdal, osr
 from shapely import union_all
-from shapely.geometry import Polygon, mapping, shape
+from shapely.geometry import Polygon, mapping
 
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.contracts import FeatureIdentity, NonEmptyText, SourceId
@@ -18,10 +18,8 @@ from worldatlas.source_imports.shared.storage import feature_result, save_featur
 
 
 class VectorSelection(FeatureIdentity):
-    """Select one provider geometry or the records in a provider collection."""
+    """Select one provider geometry and optionally refine its polygon."""
 
-    collection: NotRequired[bool]
-    expected_feature_count: NotRequired[int]
     polygon_containing: NotRequired[tuple[float, float]]
     holes: NotRequired[Literal["preserve", "outer_envelope"]]
 
@@ -110,7 +108,7 @@ def polygon_containing(geometry, coordinates):
     return {"type": "Polygon", "coordinates": selected[0]}
 
 
-def read_features(path, *, id_field, selections, member=None, layer=None, coordinate_operation=None):
+def read_features(path, *, id_field, selections, member=None, layer=None):
     """Extract selected vector records and convert their geometry to WGS84.
 
     Args:
@@ -119,7 +117,6 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
         selections: Output feature IDs paired with provider records and options.
         member: Optional dataset member inside a ZIP archive.
         layer: Optional dataset layer name.
-        coordinate_operation: Optional explicit CRS transformation.
 
     Returns:
         Selected features with their output IDs and geometries.
@@ -128,9 +125,6 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
         ValueError: A dataset, selection, CRS, or geometry is invalid.
     """
     wanted = {str(item["source_feature_id"]) for item in selections}
-    collections = {
-        str(item["source_feature_id"]) for item in selections if item.get("collection")
-    }
     identifiers = [item["feature_id"] for item in selections]
     if not wanted or len(set(identifiers)) != len(selections):
         raise ValueError("output feature selections must be unique")
@@ -148,7 +142,7 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
     if layer is None:
         raise ValueError("selected vector layer is missing")
     if id_field == "@fid":
-        fids = {key: [int(key)] for key in wanted}
+        fids = {key: int(key) for key in wanted}
     else:
         if layer.GetLayerDefn().GetFieldIndex(id_field) < 0:
             raise ValueError("selected provider ID field is missing")
@@ -157,9 +151,9 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
         for row in layer:
             key = str(row.GetField(id_field))
             if key in wanted:
-                if key in fids and key not in collections:
+                if key in fids:
                     raise ValueError("selected provider feature is duplicated")
-                fids.setdefault(key, []).append(row.GetFID())
+                fids[key] = row.GetFID()
         layer.SetIgnoredFields([])
     if fids.keys() != wanted:
         raise ValueError("selected provider feature is missing")
@@ -176,50 +170,29 @@ def read_features(path, *, id_field, selections, member=None, layer=None, coordi
     is_geojson = source.GetDriver().ShortName == "GeoJSON"
     use_native_coordinates = (
         is_geojson
-        and not coordinate_operation
-        and not collections
         and original.IsSame(target, ["IGNORE_DATA_AXIS_TO_SRS_AXIS_MAPPING=YES"])
     )
     if not use_native_coordinates:
-        options = osr.CoordinateTransformationOptions()
-        if coordinate_operation:
-            options.SetOperation(coordinate_operation)
-        conversion = osr.CreateCoordinateTransformation(original, target, options)
+        conversion = osr.CreateCoordinateTransformation(original, target)
     export_options = ["SIGNIFICANT_FIGURES=17"] if is_geojson else []
 
     result = []
     for selection in selections:
         key = str(selection["source_feature_id"])
-        if selection.get("expected_feature_count", len(fids[key])) != len(fids[key]):
-            raise ValueError(
-                "source collection does not contain the expected number of features"
-            )
-        if not selection.get("collection") and len(fids[key]) != 1:
-            raise ValueError("selected provider feature is duplicated")
-        values = []
-        for fid in fids[key]:
-            row = layer.GetFeature(fid)
-            if row is None:
-                raise ValueError("selected provider feature is missing")
-            geometry = row.GetGeometryRef()
-            if geometry is None:
-                raise ValueError("source feature has no geometry")
-            if use_native_coordinates:
-                value = native_geojson_geometry(row, path, member)
-            else:
-                geometry = geometry.Clone()
-                if geometry.Transform(conversion) != 0:
-                    raise ValueError("source geometry coordinate conversion failed")
-                value = json.loads(geometry.ExportToJson(options=export_options))
-            validate_geometry(value)
-            values.append(value)
-        if selection.get("collection"):
-            value = json.loads(
-                json.dumps(mapping(union_all([shape(v) for v in values])))
-            )
-            validate_geometry(value)
+        row = layer.GetFeature(fids[key])
+        if row is None:
+            raise ValueError("selected provider feature is missing")
+        geometry = row.GetGeometryRef()
+        if geometry is None:
+            raise ValueError("source feature has no geometry")
+        if use_native_coordinates:
+            value = native_geojson_geometry(row, path, member)
         else:
-            value = values[0]
+            geometry = geometry.Clone()
+            if geometry.Transform(conversion) != 0:
+                raise ValueError("source geometry coordinate conversion failed")
+            value = json.loads(geometry.ExportToJson(options=export_options))
+        validate_geometry(value)
         if "polygon_containing" in selection:
             value = polygon_containing(value, selection["polygon_containing"])
         if selection.get("holes", "preserve") == "outer_envelope":
@@ -250,7 +223,6 @@ def selected_vector_features(
     selections: list[VectorSelection],
     member: NonEmptyText | None = None,
     layer: NonEmptyText | None = None,
-    coordinate_operation: NonEmptyText | None = None,
 ):
     """Import selected vector features as WGS84 GeoJSON.
 
@@ -261,15 +233,14 @@ def selected_vector_features(
         selections: Provider features and their output IDs and options.
         member: Optional dataset member inside a ZIP archive.
         layer: Optional dataset layer name.
-        coordinate_operation: Optional explicit CRS transformation.
 
     Returns:
         Saved feature IDs, the local source path, and timings.
     """
     started, timing = time.monotonic(), {}
     path, = acquire_sources(runtime, [source_id], timing=timing)
-    features = read_features(path, id_field=id_field, selections=selections, member=member,
-                             layer=layer, coordinate_operation=coordinate_operation)
+    features = read_features(path, id_field=id_field, selections=selections,
+                             member=member, layer=layer)
     feature_ids = save_features(runtime, features)
     return feature_result(feature_ids, time.monotonic() - started, source=path,
                           download_seconds=timing.get("download_seconds", 0.0))

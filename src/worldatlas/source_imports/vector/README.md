@@ -18,8 +18,8 @@ worldatlas-import --recipe CONSTRUCTION_ID \
 The construction arguments contain `source_id`, `id_field`, and `selections`. Set `id_field` to the name of the source attribute that identifies features, or use `@fid` for the native feature ID reported by GDAL. Each selection supplies the ID to look up in `source_feature_id` and the ID to save in `feature_id`. Different output IDs can select the same provider feature. Provider attributes stay in the raw file.
 
 - For a ZIP, set `member` to the dataset path inside the archive. You can omit it when the archive contains exactly one `.shp` file. Set `layer` when the selected dataset contains multiple layers.
-- Vector imports convert the source CRS to the stored coordinate system. Use `coordinate_operation` when the source needs a specific documented transformation. WGS84 GeoJSON retains its numeric coordinate values when no explicit transformation or collection operation is requested. Storage normalizes `-0.0` to `0.0`.
-- A provider ID must select exactly one record by default. Set `collection: true` to combine all records that share the ID. `expected_feature_count` checks how many records matched.
+- GDAL converts coordinates from the source's declared coordinate system to WGS84. For GeoJSON already in WGS84, the importer reads the original coordinate values. PostgreSQL normalizes `-0.0` to `0.0` when saving.
+- Each provider ID must match exactly one record in the selected layer.
 - Set `polygon_containing: [longitude, latitude]` to select one part using a point in the stored coordinate system. The point must be strictly inside exactly one polygon. Points on boundaries or in holes fail the selection.
 
 Polygons retain holes by default (`holes: "preserve"`). Set `holes: "outer_envelope"` to use the exterior rings and fill holes after `polygon_containing` picks a part. Geographic assignments can reference several imported polygons directly. Map building combines those areas when checking component membership.

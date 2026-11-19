@@ -262,6 +262,17 @@ class DatabaseContractTests(unittest.TestCase):
                 True,
             ),
             ("selected_vector_features", dict(member=None), True),
+            ("selected_vector_features", dict(coordinate_operation="unused"), False),
+            (
+                "selected_vector_features",
+                dict(selections=[dict(feature_id="feature", source_feature_id="1", collection=True)]),
+                False,
+            ),
+            (
+                "selected_vector_features",
+                dict(selections=[dict(feature_id="feature", source_feature_id="1", expected_feature_count=1)]),
+                False,
+            ),
             (
                 "selected_vector_features",
                 dict(selections=[dict(feature_id="feature")]),

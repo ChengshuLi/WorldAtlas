@@ -246,47 +246,6 @@ class VectorTests(unittest.TestCase):
         self.assertAlmostEqual(geometry["coordinates"][0], 10.0)
         self.assertAlmostEqual(geometry["coordinates"][1], 0.0)
 
-    def test_complete_projected_collection_is_converted_to_longitude_latitude(self):
-        polygons = []
-        for left, right in ((1000, 2000), (2000, 3000)):
-            polygons.append(
-                {
-                    "type": "Feature",
-                    "properties": {"provider_id": "a", "name": "First"},
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [
-                            [
-                                [left, 1000],
-                                [right, 1000],
-                                [right, 2000],
-                                [left, 2000],
-                                [left, 1000],
-                            ]
-                        ],
-                    },
-                }
-            )
-        self.path.write_text(
-            json.dumps(
-                {
-                    "type": "FeatureCollection",
-                    "crs": {"type": "name", "properties": {"name": "EPSG:3857"}},
-                    "features": polygons,
-                }
-            )
-        )
-        self.recipe["selections"][0].update(collection=True, expected_feature_count=2)
-        result = read_features(self.path, **self.recipe)[0]
-        self.assertNotIn("coordinate_reference", result)
-        self.assertTrue(validate_geometry(result["geometry"]).is_valid)
-        self.assertAlmostEqual(
-            validate_geometry(result["geometry"]).bounds[0], 0.00898315284
-        )
-        self.recipe["selections"][0]["expected_feature_count"] = 3
-        with self.assertRaisesRegex(ValueError, "number of features"):
-            read_features(self.path, **self.recipe)
-
     def test_projected_source_is_converted_with_xy_axis_order(self):
         path = self.path.with_suffix(".gpkg")
         source = ogr.GetDriverByName("GPKG").CreateDataSource(str(path))
