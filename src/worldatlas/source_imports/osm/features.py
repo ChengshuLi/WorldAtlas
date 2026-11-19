@@ -62,9 +62,7 @@ def read_features(path, selections):
     factory = osmium.geom.GeoJSONFactory()
     seen, geometries = set(), {}
     for obj in processor:
-        if obj.is_area():
-            if obj.from_way():
-                continue
+        if obj.is_area() and not obj.from_way():
             # Osmium gives each assembled area a synthetic ID. Match its source relation.
             key = "r", obj.orig_id()
             if key in requested:
@@ -74,7 +72,7 @@ def read_features(path, selections):
                     raise ValueError(f"Osmium returned an invalid area for {key}") from error
             continue
 
-        # The original object supplies its identity and tags.
+        # Only original node, way, and relation types appear in the recipe lookup.
         key = obj.type_str(), obj.id
         if key not in requested:
             continue
