@@ -12,8 +12,8 @@ from unittest.mock import Mock
 
 import psycopg
 from psycopg.types.json import Jsonb
-from worldatlas.source_imports.run_import import run_import, selected_constructions
 from worldatlas.source_imports.features.geometry import save_features
+from worldatlas.source_imports.run_import import run_import
 
 
 @unittest.skipUnless(
@@ -114,7 +114,6 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(after[2], "__features")
         self.assertEqual(self.build()["geometry_sha256"], first["geometry_sha256"])
         self.assertEqual(self.storage.get_object.call_count, 1)
-        self.assertEqual(selected_constructions(self.database), ["__features"])
         self.assertEqual(
             self.database.execute(
                 "SELECT count(*) FROM atlas.geographic_rule_features"

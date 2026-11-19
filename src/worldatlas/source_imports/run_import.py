@@ -34,16 +34,6 @@ IMPORTERS = {
 }
 
 
-def selected_constructions(database):
-    """Find constructions referenced by working geometry."""
-    return [
-        row[0]
-        for row in database.execute(
-            "SELECT DISTINCT construction_id FROM atlas.source_features ORDER BY construction_id"
-        ).fetchall()
-    ]
-
-
 def run_import(
     connect, recipe_id, *, storage=None, work_dir=None, expected_geometry_sha256=None
 ):
@@ -78,12 +68,8 @@ def run_import(
 def main():
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     parser = argparse.ArgumentParser(description=__doc__)
-    selection = parser.add_mutually_exclusive_group(required=True)
-    selection.add_argument("--recipe", metavar="ID")
-    selection.add_argument(
-        "--all",
-        action="store_true",
-        help="regenerate all constructions referenced by working records",
+    parser.add_argument(
+        "--recipe", metavar="ID", required=True, help="construction ID in Neon"
     )
     parser.add_argument("--r2-endpoint")
     parser.add_argument("--work-dir", type=Path)
@@ -91,8 +77,6 @@ def main():
     args = parser.parse_args()
     if not (connection := os.environ.get("NEON_DATABASE_URL")):
         parser.error("set NEON_DATABASE_URL to the working database")
-    if args.all and args.expected_geometry_sha256:
-        parser.error("an expected checksum applies to a single construction")
     import psycopg
 
     connect = lambda: psycopg.connect(connection, connect_timeout=15)
@@ -108,27 +92,19 @@ def main():
                     )
                 )
             )
-        if args.all:
-            with connect() as database:
-                identities = selected_constructions(database)
-        else:
-            identities = [args.recipe]
-        results = []
-        for ident in identities:
-            result = run_import(
-                connect,
-                ident,
-                storage=storage,
-                work_dir=args.work_dir,
-                expected_geometry_sha256=args.expected_geometry_sha256,
+        result = run_import(
+            connect,
+            args.recipe,
+            storage=storage,
+            work_dir=args.work_dir,
+            expected_geometry_sha256=args.expected_geometry_sha256,
+        )
+        if args.work_dir is not None:
+            name = hashlib.sha256(args.recipe.encode()).hexdigest()
+            receipt = args.work_dir / "receipts" / (name + ".json")
+            receipt.parent.mkdir(parents=True, exist_ok=True)
+            receipt.write_text(
+                json.dumps(dict(construction_id=args.recipe, result=result), indent=2)
+                + "\n"
             )
-            results.append(result)
-            if args.work_dir is not None:
-                name = hashlib.sha256(ident.encode()).hexdigest()
-                receipt = args.work_dir / "receipts" / (name + ".json")
-                receipt.parent.mkdir(parents=True, exist_ok=True)
-                receipt.write_text(
-                    json.dumps(dict(construction_id=ident, result=result), indent=2)
-                    + "\n"
-                )
-    print(json.dumps(results if args.all else results[0]))
+    print(json.dumps(result))

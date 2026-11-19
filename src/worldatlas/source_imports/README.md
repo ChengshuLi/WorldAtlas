@@ -38,17 +38,7 @@ SELECT method, arguments FROM atlas.construction_records WHERE id = 'CONSTRUCTIO
 
 Edit the recipe and rerun the same construction ID to update working geometry. A construction can produce several features. Each feature is saved under its own ID and links back to the construction. Neon updates the raw-source links when the construction arguments change. A failed import leaves the previous geometry intact. At save time, the importer checks that the recipe still matches the one it used and rejects any feature ID already linked to another construction.
 
-## Regenerate working geometry
-
-```bash
-worldatlas-import --all \
-  --r2-endpoint R2_ENDPOINT \
-  --work-dir /absolute/path/to/worldatlas-work/inputs
-```
-
-Use `--recipe` for a new construction's first run. The batch command follows construction links from existing `source_features` rows. Each construction runs once and commits independently, so an interrupted batch can be repeated. With `--work-dir`, the command writes receipts under that directory's `receipts/` folder.
-
-The map builder uses the same verified raw-file cache. Both commands check the catalog's byte sizes and checksums before reusing downloads.
+With `--work-dir`, the command writes a result receipt in that directory's `receipts/` folder. The map builder shares the raw-file cache. Both commands check the catalog's byte sizes and checksums before reusing downloads.
 
 Every construction cites cataloged raw sources. Figure traces and explicitly stored geometry use coordinates from the construction record. Other methods read the cataloged files. Grouping existing features belongs to geographic assignments in map building.
 
