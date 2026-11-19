@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 import time
-from typing import Literal, NotRequired
+from typing import NotRequired
 from zipfile import ZipFile
 
 from osgeo import gdal, osr
@@ -21,7 +21,7 @@ class VectorSelection(FeatureIdentity):
     """Select one provider geometry and optionally refine its polygon."""
 
     polygon_containing: NotRequired[tuple[float, float]]
-    holes: NotRequired[Literal["preserve", "outer_envelope"]]
+    fill_holes: NotRequired[bool]
 
 
 def dataset_path(path, member=None):
@@ -195,9 +195,9 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
         validate_geometry(value)
         if "polygon_containing" in selection:
             value = polygon_containing(value, selection["polygon_containing"])
-        if selection.get("holes", "preserve") == "outer_envelope":
+        if selection.get("fill_holes", False):
             if value["type"] not in ("Polygon", "MultiPolygon"):
-                raise ValueError("outer_envelope requires a polygon source")
+                raise ValueError("fill_holes requires a polygon source")
             parts = (
                 [value["coordinates"]]
                 if value["type"] == "Polygon"

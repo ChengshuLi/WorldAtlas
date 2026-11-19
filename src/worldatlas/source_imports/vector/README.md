@@ -22,7 +22,7 @@ The construction arguments contain `source_id`, `id_field`, and `selections`. Se
 - Each provider ID must match exactly one record in the selected layer.
 - Set `polygon_containing: [longitude, latitude]` to select one part using a point in the stored coordinate system. The point must be strictly inside exactly one polygon. Points on boundaries or in holes fail the selection.
 
-Polygons retain holes by default (`holes: "preserve"`). Set `holes: "outer_envelope"` to use the exterior rings and fill holes after `polygon_containing` picks a part. Geographic assignments can reference several imported polygons directly. Map building combines those areas when checking component membership.
+Polygons retain holes by default (`fill_holes: false`). Set `fill_holes: true` to keep only the exterior rings. If the selection also uses `polygon_containing`, the importer picks the part first. Geographic assignments can reference several imported polygons directly. Map building combines those areas when checking component membership.
 
 ## Tests
 

@@ -165,17 +165,30 @@ class VectorTests(unittest.TestCase):
         )
         original = json.dumps(document)
         self.path.write_text(original)
-        self.recipe["selections"][0]["polygon_containing"] = [0.5, 0.5]
+        selection = self.recipe["selections"][0]
+        selection["polygon_containing"] = [0.5, 0.5]
         result = read_features(self.path, **self.recipe)[0]["geometry"]
         self.assertEqual(result, dict(type="Polygon", coordinates=small))
+        selection["fill_holes"] = False
+        result = read_features(self.path, **self.recipe)[0]["geometry"]
+        self.assertEqual(result, dict(type="Polygon", coordinates=small))
+        selection["fill_holes"] = True
+        result = read_features(self.path, **self.recipe)[0]["geometry"]
+        expected = dict(type="Polygon", coordinates=[small[0]])
+        self.assertTrue(validate_geometry(result).equals(validate_geometry(expected)))
         self.assertEqual(self.path.read_text(), original)
         for point in ([1.5, 1.5], [0, 0.5], [30, 30]):
-            self.recipe["selections"][0]["polygon_containing"] = point
+            selection["polygon_containing"] = point
             with (
                 self.subTest(point=point),
                 self.assertRaisesRegex(ValueError, "strictly inside"),
             ):
                 read_features(self.path, **self.recipe)
+
+    def test_fill_holes_requires_polygon_geometry(self):
+        self.recipe["selections"][0]["fill_holes"] = True
+        with self.assertRaisesRegex(ValueError, "fill_holes requires a polygon source"):
+            read_features(self.path, **self.recipe)
 
     def test_polygon_selection_point_uses_wgs84_after_source_conversion(self):
         document = dict(
