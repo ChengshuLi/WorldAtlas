@@ -42,6 +42,7 @@ def read_features(path, selections):
     Raises:
         ValueError: A selected object is missing, duplicated, or invalid.
     """
+    # Index selections by OSM identity. Insertion order also gives the output order.
     requested = {}
     for selection in selections:
         kind = OBJECT_TYPES.get(selection["object_type"])
@@ -52,6 +53,7 @@ def read_features(path, selections):
             raise ValueError(f"OSM {selection['object_type']} {key[1]} is selected more than once")
         requested[key] = selection
 
+    # Relation assembly also loads node locations for any selected ways.
     processor = osmium.FileProcessor(str(path))
     if any(kind == "r" for kind, _ in requested):
         processor = processor.with_areas()
@@ -61,6 +63,7 @@ def read_features(path, selections):
     seen, geometries = set(), {}
     for obj in processor:
         if obj.is_area():
+            # Osmium gives each assembled area a synthetic ID. Match its source relation.
             key = "r", obj.orig_id()
             if not obj.from_way() and key in requested:
                 try:
@@ -69,6 +72,7 @@ def read_features(path, selections):
                     raise ValueError(f"Osmium returned an invalid area for {key}") from error
             continue
 
+        # The original object supplies its identity and tags.
         key = obj.type_str(), obj.id
         if key not in requested:
             continue
@@ -104,6 +108,7 @@ def read_features(path, selections):
     for key in requested:
         if key not in seen:
             raise ValueError(f"selected OSM object {key} is missing")
+        # A relation may be present even when its members are too incomplete to form an area.
         if key not in geometries:
             raise ValueError(f"Osmium could not assemble selected OSM area {key}")
         geometry = geometries[key]
