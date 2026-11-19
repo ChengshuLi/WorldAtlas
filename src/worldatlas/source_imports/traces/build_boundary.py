@@ -3,7 +3,7 @@
 from typing import Any
 
 from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
-from worldatlas.source_assets import catalog_source
+from worldatlas.source_assets.catalog import catalog_source
 from worldatlas.source_imports.features.geometry import save_features
 from worldatlas.source_imports.traces.geodesic import construct
 

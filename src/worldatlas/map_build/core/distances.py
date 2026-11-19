@@ -4,7 +4,7 @@ No land policy. Enumerate attainable *longitude gaps*, not all cell pairs.
 """
 
 import math, numpy as np
-from worldatlas.geodesy import GEOD, MIN_RADIUS
+from worldatlas.geodesy.wgs84 import GEOD, MIN_RADIUS
 
 # Keep more candidates for the exact calculation when pruning by lower bounds.
 CUSHION_M = 1000.0

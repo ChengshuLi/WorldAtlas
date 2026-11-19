@@ -13,7 +13,7 @@ import psycopg
 from psycopg.types.json import Jsonb
 from worldatlas.source_imports.run_import import run_import
 from worldatlas.source_imports.features.geometry import geometry_hash, save_features
-from worldatlas.source_assets import catalog_source
+from worldatlas.source_assets.catalog import catalog_source
 
 
 def save_boundary(database, geometry, source, recipe):

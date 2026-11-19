@@ -3,7 +3,7 @@
 import math
 
 from worldatlas.source_imports.features.geometry import validate_geometry
-from worldatlas.geodesy import geodesic
+from worldatlas.geodesy.wgs84 import geodesic
 
 
 def construct(points, max_step_metres):

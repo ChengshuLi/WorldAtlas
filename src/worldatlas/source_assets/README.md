@@ -1,6 +1,6 @@
 # Cataloged source files
 
-[`catalog.py`](catalog.py) implements the raw-file helpers that source imports and map building use through `worldatlas.source_assets`.
+[`catalog.py`](catalog.py) provides raw-file helpers for both source imports and map building. Import them from `worldatlas.source_assets.catalog`.
 
 - Look up an exact raw source ID and its R2 location.
 - `stream_source()` checks the byte length of a complete R2 object and supports cooperative cancellation.

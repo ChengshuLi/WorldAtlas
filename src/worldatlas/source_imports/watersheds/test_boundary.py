@@ -5,7 +5,7 @@ from shapely.geometry import LineString
 
 from worldatlas.source_imports.watersheds.boundary import Divide, Join, assemble, connect_waypoints, distance, flow_to_point, intersection
 from worldatlas.source_imports.watersheds.terrain import Grid
-from worldatlas.geodesy import geodesic
+from worldatlas.geodesy.wgs84 import geodesic
 
 
 class BoundaryTests(unittest.TestCase):

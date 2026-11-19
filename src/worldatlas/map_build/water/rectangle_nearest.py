@@ -6,7 +6,7 @@ share proofs across rows; uncertain cells use the complete point classifier.
 
 import math
 import numpy as np
-from worldatlas.geodesy import MAX_RADIUS, MIN_RADIUS
+from worldatlas.geodesy.wgs84 import MAX_RADIUS, MIN_RADIUS
 from worldatlas.map_build.water import shared_nearest as s
 
 

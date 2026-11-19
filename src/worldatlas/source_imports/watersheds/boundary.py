@@ -12,7 +12,7 @@ from shapely.ops import substring
 from shapely.strtree import STRtree
 
 from worldatlas.source_imports.watersheds.drainage import upstream_order
-from worldatlas.geodesy import GEOD, geodesic
+from worldatlas.geodesy.wgs84 import GEOD, geodesic
 
 
 def distance(first, second):

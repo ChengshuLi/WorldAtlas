@@ -2,7 +2,7 @@
 
 from worldatlas.source_imports.contracts import NonEmptyText, Runtime, SourceId
 from worldatlas.source_imports.osm.ways import assemble
-from worldatlas.source_assets import catalog_source, download_source
+from worldatlas.source_assets.catalog import catalog_source, download_source
 from worldatlas.source_imports.features.geometry import save_features
 
 

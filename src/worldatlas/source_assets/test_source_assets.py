@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from worldatlas.source_assets import assemble_parts, download_source
+from worldatlas.source_assets.catalog import assemble_parts, download_source
 from worldatlas.source_assets import catalog
 
 

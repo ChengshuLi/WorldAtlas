@@ -12,7 +12,7 @@ import numpy as np
 from numba import njit
 from pyproj import CRS, Transformer
 
-from worldatlas.geodesy import GEOD
+from worldatlas.geodesy.wgs84 import GEOD
 UNKNOWN = -1
 
 

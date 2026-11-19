@@ -5,6 +5,7 @@ These rules apply to every agent working in this repository.
 - Keep code, documentation, and reports concise and human-readable.
 - Follow [PEP 257](https://peps.python.org/pep-0257/) for Python docstrings. Give public modules, classes, and functions a short summary. Use an explicit `Args` section for caller-supplied parameters and a `Returns` section for returned values, including for short functions. Document side effects and relevant exceptions. Omit empty sections.
 - Follow [PEP 8](https://peps.python.org/pep-0008/#comments) for comments. Use complete sentences and keep comments in sync with the code. Use inline comments sparingly and explain decisions or constraints that the code alone does not show.
+- Import from the module that defines the name. Keep package `__init__.py` files empty or docstring-only by default. Expose names at package level when the package has a deliberate public interface.
 - Treat correctness and performance as core requirements. Avoid unnecessary computation and memory use, and measure performance when a change could materially affect it.
 - When blocked or slowed down, always first ask whether the blocking mechanism is needed. Remove it completely if unnecessary. If it is needed, choose the appropriate fix, including a justified exception when warranted.
 - Do not spawn subagents or create Codex chats unless the user explicitly requests it.

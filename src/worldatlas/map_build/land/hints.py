@@ -2,7 +2,7 @@
 
 import math
 import numpy as np
-from worldatlas.geodesy import GEOD, MIN_RADIUS as MIN_CURVATURE_RADIUS
+from worldatlas.geodesy.wgs84 import GEOD, MIN_RADIUS as MIN_CURVATURE_RADIUS
 
 BOUND_CUSHION_M = 0.001
 DISTANCE_BATCH = 65536
