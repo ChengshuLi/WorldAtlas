@@ -63,9 +63,11 @@ def read_features(path, selections):
     seen, geometries = set(), {}
     for obj in processor:
         if obj.is_area():
+            if obj.from_way():
+                continue
             # Osmium gives each assembled area a synthetic ID. Match its source relation.
             key = "r", obj.orig_id()
-            if not obj.from_way() and key in requested:
+            if key in requested:
                 try:
                     geometries[key] = json.loads(factory.create_multipolygon(obj))
                 except RuntimeError as error:
