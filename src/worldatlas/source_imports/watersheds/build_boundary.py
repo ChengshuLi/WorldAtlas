@@ -8,7 +8,10 @@ import time
 from typing import Any
 
 import numpy as np
+from osgeo import gdal, osr
+import pyproj
 from pyproj import Transformer
+import shapely
 from shapely.geometry import LineString
 
 from worldatlas.geodesy.wgs84 import geodesic
@@ -34,10 +37,6 @@ def runtime_versions():
     Returns:
         Versions of the Python and native libraries and the PROJ database checksum.
     """
-    from osgeo import gdal, osr
-    import pyproj
-    import shapely
-
     database = Path(pyproj.datadir.get_data_dir()) / 'proj.db'
     return {'python': platform.python_version(),
             'packages': {name: version(name) for name in (
