@@ -10,7 +10,11 @@ import time
 
 
 def read_recipe(database, recipe_id):
-    """Read an editable construction record by its ID."""
+    """Return the stored method and arguments for a construction ID.
+
+    Use the caller's PostgreSQL connection and transaction. Raise
+    ``ValueError`` if the construction record is missing.
+    """
     row = database.execute(
         'SELECT method,arguments FROM atlas.construction_records '
         'WHERE id=%s',
@@ -22,7 +26,11 @@ def read_recipe(database, recipe_id):
 
 
 def catalog_source(database, source_id):
-    """Look up an exact raw source version and its R2 location."""
+    """Resolve a raw source ID into its R2 location and expected file identity.
+
+    Return a dictionary with the source ID, bucket, object key, byte size,
+    and SHA-256. Raise ``ValueError`` if the catalog entry is missing.
+    """
     row = database.execute(
         "SELECT r2_bucket,r2_key,sha256,size_bytes FROM atlas.source_assets "
         "WHERE id=%s",
@@ -37,14 +45,28 @@ def catalog_source(database, source_id):
 
 
 def check_source(path, source):
+    """Check a local file against the expected byte size and SHA-256.
+
+    Check the size of the open file before reading it for the hash. Raise
+    ``ValueError`` when either value differs from the source record.
+    """
     with path.open('rb') as stream:
-        digest = hashlib.file_digest(stream, 'sha256').hexdigest()
-    if (path.stat().st_size, digest) != (source['size_bytes'], source['sha256']):
-        raise ValueError('source file size or hash differs from the Neon catalog')
+        size = os.fstat(stream.fileno()).st_size
+        if (
+            size != source['size_bytes']
+            or hashlib.file_digest(stream, 'sha256').hexdigest() != source['sha256']
+        ):
+            raise ValueError('source file size or hash differs from the Neon catalog')
 
 
 def stream_source(client, source, output, *, check_cancelled=lambda: None):
-    """Copy a complete R2 object and enforce its cataloged byte length."""
+    """Copy an R2 object to the caller's open binary output in chunks.
+
+    ``source`` supplies the R2 bucket, object key, and expected byte size.
+    Check cancellation before the request and before each chunk. Close
+    the response body and reject any byte-length mismatch. The caller
+    owns the output and performs SHA-256 verification separately.
+    """
     check_cancelled()
     response = client.get_object(Bucket=source['r2_bucket'], Key=source['r2_key'])
     expected = source['size_bytes']
@@ -64,7 +86,17 @@ def stream_source(client, source, output, *, check_cancelled=lambda: None):
 
 
 def download_source(client, source, work_dir, *, timing=None, filename=None):
-    """Download and check a cataloged R2 file, or reuse a verified local copy."""
+    """Return a verified local path for a cataloged R2 object.
+
+    Cache the file under ``work_dir / sha256`` using the supplied plain
+    filename or a default such as ``source.zip``. Reuse verified cached
+    content, sharing it by hard link when the two callers use different
+    names. A corrupt cache entry raises an error. On a cache miss, verify
+    the temporary download before linking it into the cache.
+
+    If supplied, ``timing`` accumulates transfer durations and intervals.
+    Verification and cached reuse are outside those measurements.
+    """
     directory = Path(work_dir) / source['sha256']
     directory.mkdir(parents=True, exist_ok=True)
     standard = 'source' + (Path(source['r2_key']).suffix or '.bin')
@@ -113,8 +145,11 @@ def download_source(client, source, work_dir, *, timing=None, filename=None):
 def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir, *, timing=None):
     """Reassemble a provider file from cataloged byte parts and verify the whole.
 
-    Each physical R2 object has its own catalog record. The construction records
-    their order and the complete provider file's size and checksum.
+    ``parts`` contains the catalog entries in byte order. Their sizes
+    must sum to ``size_bytes``. Reuse a verified assembly if present.
+    Otherwise download or reuse each part, concatenate them, and verify
+    the complete file before caching it. Return the path under the
+    complete file's SHA-256. Report only part transfers in ``timing``.
     """
     if not parts or not filename or Path(filename).name != filename or filename in ('.', '..'):
         raise ValueError('ordered source parts and a plain filename are required')
