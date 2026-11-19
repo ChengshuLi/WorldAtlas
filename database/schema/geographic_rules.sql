@@ -38,8 +38,8 @@ CREATE FUNCTION atlas.validate_geographic_rule(ident text) RETURNS void LANGUAGE
 DECLARE r atlas.geographic_rules%ROWTYPE; lines integer; areas integer;
         components integer; refs integer; targets integer;
 BEGIN
-  -- Lock only the edited definition, not every unrelated rule.
-  SELECT * INTO r FROM atlas.geographic_rules WHERE id=ident FOR UPDATE;
+  -- Serialize validation without blocking foreign-key references to this rule.
+  SELECT * INTO r FROM atlas.geographic_rules WHERE id=ident FOR NO KEY UPDATE;
   IF NOT FOUND THEN RETURN; END IF;
   IF EXISTS (
     SELECT FROM atlas.geographic_rule_features l JOIN atlas.source_features f ON f.id=l.feature_id
@@ -77,25 +77,24 @@ BEGIN
 END $$;
 
 CREATE FUNCTION atlas.check_geographic_rule_links() RETURNS trigger LANGUAGE plpgsql AS $$
-DECLARE ident text; changed jsonb; previous jsonb;
+DECLARE ident text;
 BEGIN
-  changed := to_jsonb(NEW); previous := to_jsonb(OLD);
   IF TG_TABLE_NAME='geographic_rules' THEN
-    PERFORM atlas.validate_geographic_rule(changed->>'id');
+    PERFORM atlas.validate_geographic_rule(NEW.id);
   ELSIF TG_TABLE_NAME IN ('geographic_rule_features','geographic_rule_targets') THEN
-    PERFORM atlas.validate_geographic_rule(changed->>'rule_id');
-    IF previous->>'rule_id' IS DISTINCT FROM changed->>'rule_id' THEN
-      PERFORM atlas.validate_geographic_rule(previous->>'rule_id');
+    PERFORM atlas.validate_geographic_rule(NEW.rule_id);
+    IF OLD.rule_id IS DISTINCT FROM NEW.rule_id THEN
+      PERFORM atlas.validate_geographic_rule(OLD.rule_id);
     END IF;
   ELSIF TG_TABLE_NAME='source_features' THEN
     FOR ident IN
-      SELECT rule_id FROM atlas.geographic_rule_features WHERE feature_id=changed->>'id'
-      UNION SELECT rule_id FROM atlas.geographic_rule_targets WHERE label_point_id=changed->>'id'
+      SELECT rule_id FROM atlas.geographic_rule_features WHERE feature_id=NEW.id
+      UNION SELECT rule_id FROM atlas.geographic_rule_targets WHERE label_point_id=NEW.id
     LOOP PERFORM atlas.validate_geographic_rule(ident); END LOOP;
   ELSE
     FOR ident IN
-      SELECT id FROM atlas.geographic_rules WHERE parent_id=(changed->>'id')::bigint
-      UNION SELECT rule_id FROM atlas.geographic_rule_targets WHERE entity_id=(changed->>'id')::bigint
+      SELECT id FROM atlas.geographic_rules WHERE parent_id=NEW.id
+      UNION SELECT rule_id FROM atlas.geographic_rule_targets WHERE entity_id=NEW.id
     LOOP PERFORM atlas.validate_geographic_rule(ident); END LOOP;
   END IF;
   RETURN NULL;
