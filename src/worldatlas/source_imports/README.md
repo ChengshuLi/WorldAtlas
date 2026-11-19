@@ -15,7 +15,7 @@ Raw-source arguments use the `SourceId` type. The generated database code follow
 
 ## Run one construction
 
-Install the project using the root [environment](../../../environment.yml). Set `NEON_DATABASE_URL` and the required AWS profile outside the code.
+Follow the [project setup instructions](../../../README.md#pipeline-code) to install the package and set `NEON_DATABASE_URL`. Methods that download files also need R2 credentials, an endpoint, and a local work directory.
 
 ```bash
 worldatlas-import --recipe CONSTRUCTION_ID \
@@ -23,7 +23,7 @@ worldatlas-import --recipe CONSTRUCTION_ID \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-Figure traces and explicitly stored geometry need only the construction ID:
+Figure traces and explicitly stored geometry use coordinates from the construction record. For these methods, `--recipe` is the only flag needed.
 
 ```bash
 worldatlas-import --recipe lydekker-boundary-construction
@@ -36,7 +36,7 @@ SELECT id, construction_id FROM atlas.source_features;
 SELECT method, arguments FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 
-Edit the recipe and rerun the same ID to update working geometry. A successful import saves the geometry under its construction ID. Neon maintains the raw source links when the construction document changes. A failed import leaves its previous geometry intact. Workers calculate independently. At save time, the import verifies the construction is still the one it read and keeps existing feature IDs associated with that construction.
+Edit the recipe and rerun the same construction ID to update working geometry. A construction can produce several features. Each feature is saved under its own ID and links back to the construction. Neon updates the raw-source links when the construction arguments change. A failed import leaves the previous geometry intact. At save time, the importer checks that the recipe still matches the one it used and rejects any feature ID already linked to another construction.
 
 ## Regenerate working geometry
 
@@ -46,7 +46,7 @@ worldatlas-import --all \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-The command follows construction links from `source_features`. Each construction runs once and commits independently, so an interrupted batch can be repeated. Receipts under `inputs/receipts/` identify the construction and its result.
+Use `--recipe` for a new construction's first run. The batch command follows construction links from existing `source_features` rows. Each construction runs once and commits independently, so an interrupted batch can be repeated. With `--work-dir`, the command writes receipts under that directory's `receipts/` folder.
 
 The map builder uses the same verified raw-file cache. Both commands check the catalog's byte sizes and checksums before reusing downloads.
 
@@ -64,11 +64,11 @@ After changing signatures or nested types, regenerate the initial-schema checks:
 python -m worldatlas.source_imports.contracts database/schema/construction_contracts.sql
 ```
 
-For the existing working database, back up and test a one-off upgrade before applying the changed validator. Replacing it must recheck existing rows. Keep the transition script with that maintenance backup. The initial-schema file only creates the function and constraint. CI fails if the committed generated file differs from the Python declarations. Do not maintain another field list in a validator or README.
+For the existing working database, back up and test a one-off upgrade before applying the new argument validator and source-ID extractor. Recheck existing rows against the new validator. Keep the transition script with that maintenance backup. CI checks that the generated SQL matches the Python declarations.
 
 ## Code and tests
 
-`run_import.py` reads the recipe and dispatches to a typed function in a `build_*.py` module. Those modules handle Neon/R2; other modules implement calculations. `features/geometry.py` validates and atomically saves imported geometry. `__init__.py` files define importable packages and enable test discovery.
+The `IMPORTERS` registry in [`run_import.py`](run_import.py) shows which function runs each method. Constructors coordinate file access, calculations, and saving. [`features/geometry.py`](features/geometry.py) validates and saves imported geometry in one transaction.
 
 Tests live beside their code. `test_run_import.py` checks dispatch; `test_contracts.py` checks Python/PostgreSQL agreement and direct SQL writes; `atlas_sources/test_catalog.py` checks file acquisition. Package READMEs describe their algorithm and storage tests.
 
