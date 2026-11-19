@@ -161,7 +161,7 @@ class DatabaseContractTests(unittest.TestCase):
                 ),
             },
             evidence_sources=["evidence", "raw"],
-            geographic_choices={"source_id": "ordinary-untyped-text"},
+            lines={"boundary": [{"source_id": "ordinary-untyped-text"}]},
         )
         self.database.execute(
             "INSERT INTO atlas.construction_records(id,method,arguments,basis) "

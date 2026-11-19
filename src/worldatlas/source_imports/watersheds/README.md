@@ -37,7 +37,7 @@ The current construction IDs are `caucasus-boundary-construction` and `ural-boun
 
 ## Construction settings
 
-Set the record's method to `watershed_boundary` and describe the geographic choices in its `basis` column. The construction arguments are listed below.
+Set the record's method to `watershed_boundary`. Put the geographic reasoning and supporting measurements in its `basis` column. The construction arguments specify inputs to the calculation and catalog links for supporting evidence.
 
 - `feature_id`: the ID of the editable boundary.
 - `sources`: local file names mapped directly to catalog source-ID strings. Multipart inputs instead specify ordered source-ID strings in `parts`, the complete file's checksum, size and filename. There are no one-field wrappers.

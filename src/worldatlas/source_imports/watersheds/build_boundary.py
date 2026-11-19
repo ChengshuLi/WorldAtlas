@@ -128,7 +128,9 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
                 present = {g for g, cells in seeds.items() if cells[row, column]}
                 if present and present != {group}:
                     raise ValueError(message)
-                seeds.setdefault(group, np.zeros(grid.elevation.shape, dtype=bool))[row, column] = True
+                if group not in seeds:
+                    seeds[group] = np.zeros(grid.elevation.shape, dtype=bool)
+                seeds[group][row, column] = True
             for _, flow_settings in required:
                 point = sources.point(flow_settings['point'], lines)
                 row, column = cell_at(grid, point)
@@ -266,8 +268,7 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
                        sections: list[dict[str, Any]], joins: list[dict[str, Any]],
                        start: dict[str, Any], end: dict[str, Any],
                        terrains: dict[NonEmptyText, dict[str, Any]] | None = None,
-                       evidence_sources: list[SourceId] | None = None,
-                       geographic_choices: dict[str, Any] | None = None):
+                       evidence_sources: list[SourceId] | None = None):
     """Construct and save the final watershed boundary.
 
     Args:
@@ -281,7 +282,6 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
         end: Selection for the last point of the boundary.
         terrains: Optional analysis domains and drainage settings.
         evidence_sources: Additional catalog IDs cited as supporting evidence.
-        geographic_choices: Optional geographic rationale retained in the recipe.
 
     Returns:
         Saved boundary identity, vertex count, and construction report.
