@@ -4,6 +4,7 @@ import argparse
 from dataclasses import dataclass
 from contextlib import contextmanager
 import inspect
+import json
 import math
 from pathlib import Path
 import types
@@ -180,8 +181,6 @@ def sql_type(value, annotation, depth=0):
     if origin in (Union, types.UnionType):
         return "(" + " OR ".join(sql_type(value, kind, depth) for kind in args) + ")"
     if origin is Literal:
-        import json
-
         return (
             "("
             + " OR ".join(
@@ -265,8 +264,6 @@ def sql_object(value, fields, depth=0):
 
 def source_paths(annotation, path="$"):
     """Locate source references from declared types, never from field-name guesses."""
-    import json
-
     origin, args = get_origin(annotation), get_args(annotation)
     if origin is Annotated:
         return [path] if args[1:] == ("source-id",) else []
@@ -291,8 +288,6 @@ def source_paths(annotation, path="$"):
 
 def database_checks():
     from worldatlas.source_imports.run_import import IMPORTERS
-
-    import json
 
     choices, sources = [], []
     for method, constructor in sorted(IMPORTERS.items()):
