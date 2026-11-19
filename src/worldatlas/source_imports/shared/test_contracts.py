@@ -1,8 +1,14 @@
 """Test signature-derived contracts and their enforcement in PostgreSQL."""
 
+from contextlib import redirect_stderr
+import io
 import os
+from pathlib import Path
+import sys
+import tempfile
 from typing import Any, TypedDict
 import unittest
+from unittest.mock import patch
 
 import psycopg
 from psycopg.types.json import Jsonb
@@ -10,6 +16,7 @@ from psycopg.types.json import Jsonb
 from worldatlas.source_imports.shared.contracts import (
     NonEmptyText,
     SourceId,
+    main,
     parameters,
     recipe_schema,
     source_paths,
@@ -50,6 +57,21 @@ class ContractTests(unittest.TestCase):
         for function in (untyped, variadic):
             with self.assertRaises(TypeError):
                 parameters(function)
+
+    def test_contract_command_generates_and_checks_sql(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'construction_contracts.sql'
+            arguments = ['construction_contracts', str(path)]
+            with patch.object(sys, 'argv', arguments):
+                main()
+            self.assertIn('CREATE FUNCTION atlas.construction_source_ids', path.read_text())
+            with patch.object(sys, 'argv', [*arguments, '--check']):
+                main()
+                path.write_text('stale SQL\n')
+                with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as failure:
+                    main()
+            self.assertEqual(failure.exception.code, 1)
+            self.assertEqual(path.read_text(), 'stale SQL\n')
 
 
 @unittest.skipUnless(

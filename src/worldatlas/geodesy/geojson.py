@@ -21,14 +21,14 @@ def validate_geometry(geometry):
         not isinstance(geometry, dict)
         or set(geometry) != {"type", "coordinates"}
         or geometry["type"]
-        not in {
+        not in (
             "Point",
             "MultiPoint",
             "LineString",
             "MultiLineString",
             "Polygon",
             "MultiPolygon",
-        }
+        )
     ):
         raise ValueError("expected a point, line or polygon geometry")
 

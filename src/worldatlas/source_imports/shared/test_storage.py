@@ -142,6 +142,14 @@ class StorageTests(unittest.TestCase):
         )
         self.assertEqual(self.rows()[0][1], geometry)
 
+    def test_duplicate_feature_ids_leave_existing_geometry_intact(self):
+        self.build()
+        before = self.rows()
+        feature = dict(feature_id="point-a", geometry={"type": "Point", "coordinates": [11, 21]})
+        with self.assertRaisesRegex(ValueError, "feature IDs must be nonempty and unique"):
+            _write_features(self.database, [feature, feature], construction_id="__features")
+        self.assertEqual(self.rows(), before)
+
     def test_conflicting_feature_owner_rolls_back_an_earlier_insert(self):
         self.build()
         before = self.rows()

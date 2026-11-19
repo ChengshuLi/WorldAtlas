@@ -62,7 +62,7 @@ For the existing working database, back up and test a one-off upgrade before app
 
 The `IMPORTERS` registry in [`run_import.py`](run_import.py) points to each typed method. [`shared/sources.py`](shared/sources.py) resolves the method's file and evidence IDs in one catalog query, then acquires the files it reads. [`shared/storage.py`](shared/storage.py) validates the output and saves it in one transaction after checking the recipe snapshot.
 
-Tests live beside their code. `test_run_import.py` checks dispatch, `shared/test_contracts.py` checks the generated constraints against database writes, and `shared/test_storage.py` checks atomic feature saves. `worldatlas.source_assets.test_source_assets` checks the raw-file cache. Package READMEs describe their construction tests.
+Tests live beside their code. `test_run_import.py` checks dispatch. The tests in `shared/` cover generated SQL and database constraints, mixed file acquisition, and atomic feature saves. `worldatlas.source_assets.test_source_assets` checks the raw-file cache. Package READMEs describe their construction tests.
 
 ```bash
 python .github/scripts/run_tests.py --suite source_imports

@@ -281,19 +281,3 @@ class VectorTests(unittest.TestCase):
             dataset_path(path, "missing")
         with self.assertRaisesRegex(ValueError, "non-archive"):
             dataset_path(self.path, "member")
-
-    def test_invalid_geometry_is_rejected(self):
-        for geometry in (
-            {"type": "Point", "coordinates": [float("nan"), 1]},
-            {"type": "Point", "coordinates": [1, 2, 3]},
-            {"type": "Point", "coordinates": [True, 2]},
-            {"type": "Point", "coordinates": ["1", 2]},
-            {"type": "Point", "coordinates": [181, 2]},
-            {"type": "Point", "coordinates": [1, -91]},
-            {
-                "type": "Polygon",
-                "coordinates": [[[0, 0], [1, 1], [0, 1], [1, 0], [0, 0]]],
-            },
-        ):
-            with self.subTest(geometry=geometry), self.assertRaises(ValueError):
-                validate_geometry(geometry)

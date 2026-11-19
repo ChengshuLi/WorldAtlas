@@ -135,6 +135,13 @@ class ImportSelectionTests(unittest.TestCase):
                     run_import(self.connect, "record", **self.options)
         self.storage.get_object.assert_not_called()
 
+    def test_missing_recipe_stops_before_downloading(self):
+        database = Mock()
+        database.execute.return_value.fetchone.return_value = None
+        with self.assertRaisesRegex(ValueError, "construction record is missing"):
+            run_import(lambda: nullcontext(database), "absent", **self.options)
+        self.storage.get_object.assert_not_called()
+
     def test_missing_required_download_inputs_are_rejected(self):
         with patch(
             "worldatlas.source_imports.run_import.read_recipe",
