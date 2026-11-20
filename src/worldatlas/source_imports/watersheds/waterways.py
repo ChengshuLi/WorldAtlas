@@ -1,4 +1,4 @@
-"""Read pinned OSM objects and assign natural waterways by downstream topology."""
+"""Read OSM extracts and trace where rivers and streams drain."""
 from collections import defaultdict
 from dataclasses import dataclass
 from itertools import pairwise
@@ -55,6 +55,15 @@ def _point_intersections(hit):
             yield from _point_intersections(part)
 
 
+def _rectangles_from_wgs84_bounds(bounds):
+    """Build one rectangle, or split it at 180° longitude if it wraps."""
+    west, south, east, north = bounds
+    if west <= east:
+        return (box(west, south, east, north),)
+    # A single Shapely box would cover the long way around through 0° longitude.
+    return (box(west, south, 180, north), box(-180, south, east, north))
+
+
 def _vertices_around_point(line, coordinates, point):
     """Find the vertices immediately before and after an interior line point."""
     matches = np.flatnonzero(np.all(coordinates[1:-1] == point, axis=1))
@@ -97,6 +106,15 @@ class Way:
     tags: dict
     version: int
 
+    @property
+    def is_river_or_stream(self):
+        """Check how OSM classifies this way for drainage tracing.
+
+        Returns:
+            Whether the ``waterway`` tag is ``river`` or ``stream``.
+        """
+        return self.tags.get('waterway') in ('river', 'stream')
+
 
 class Waterways:
     """Index OSM waterways by shared nodes for drainage and crossing checks."""
@@ -107,7 +125,7 @@ class Waterways:
         Args:
             paths: Local OSM XML, XML archives, PBF files, or ``(archive, member)`` selections.
             rivers_and_streams_only: Whether to retain only rivers and streams and their nodes.
-            reverse: IDs of natural waterways with reviewed direction corrections.
+            reverse: IDs of rivers and streams with reviewed direction corrections.
         """
         # The same numeric ID can name a node, a way, and a relation.
         self.nodes, self.ways, self.relations = {}, {}, {}
@@ -133,14 +151,14 @@ class Waterways:
         # Apply reviewed direction corrections after merging source versions so
         # the corrections apply to the selected version of each way.
         for ident in sorted(set(map(str, reverse))):
-            if ident not in self.ways or self.ways[ident].tags.get('waterway') not in ('river', 'stream'):
-                raise ValueError(f'reversed natural waterway {ident} is missing')
+            if ident not in self.ways or not self.ways[ident].is_river_or_stream:
+                raise ValueError(f'river or stream {ident} is missing from the ways available to reverse')
             way = self.ways[ident]
             # Reversing the node order changes the flow direction while preserving the line's shape.
             self.ways[ident] = Way(tuple(reversed(way.nodes)), way.tags, way.version)
         self.river_and_stream_ids = {
             ident for ident, way in self.ways.items()
-            if way.tags.get('waterway') in ('river', 'stream')
+            if way.is_river_or_stream
         }
         # Flag an incomplete way if a known point lies in the analysis area
         # or it shares a node with a river or stream that intersects the area.
@@ -187,7 +205,7 @@ class Waterways:
         self.nodes[ident], self._node_versions[ident] = point, version
 
     def _merge_way(self, ident, way):
-        is_river_or_stream = way.tags.get('waterway') in ('river', 'stream')
+        is_river_or_stream = way.is_river_or_stream
         previous_version, previous_is_river_or_stream = self._way_versions.get(ident, (None, None))
         if previous_version is not None and way.version <= previous_version:
             if way.version == previous_version and (
@@ -297,21 +315,22 @@ class Waterways:
         Returns:
             Sorted IDs of complete mapped rivers and streams intersecting the rectangle.
         """
+        return self._way_ids_intersecting_shapes(_rectangles_from_wgs84_bounds(bounds))
+
+    def _way_ids_intersecting_shapes(self, shapes):
+        """Use one index for both rectangle searches and line searches."""
         if self._waterway_index is None:
             self._indexed_way_ids = sorted(self.river_and_stream_ids - self.incomplete)
             self._waterway_index = STRtree([self.way_line(way_id) for way_id in self._indexed_way_ids])
-        west, south, east, north = bounds
-        areas = [box(west, south, east, north)] if west <= east else [
-            box(west, south, 180, north), box(-180, south, east, north)]
         indices = {
             int(index)
-            for area in areas
-            for index in self._waterway_index.query(area, predicate='intersects')
+            for shape in shapes
+            for index in self._waterway_index.query(shape, predicate='intersects')
         }
         return [self._indexed_way_ids[index] for index in sorted(indices)]
 
     def require_known_drainage_in_bounds(self, bounds, report):
-        """Check that relevant natural waterways have known downstream routes.
+        """Check that relevant rivers and streams have known downstream routes.
 
         Args:
             bounds: WGS84 rectangles covered by the terrain calculation.
@@ -320,22 +339,20 @@ class Waterways:
         Raises:
             ValueError: A relevant way has missing geometry or an unresolved route.
         """
-        relevant = set().union(*(self.way_ids_intersecting_bounds(rectangle) for rectangle in bounds))
+        areas = [area for rectangle in bounds for area in _rectangles_from_wgs84_bounds(rectangle)]
+        relevant = set(self._way_ids_intersecting_shapes(areas))
         relevant_nodes = {node for ident in relevant for node in self.ways[ident].nodes}
-        areas = [area for w, s, e, n in bounds
-                 for area in ([box(w, s, e, n)] if w <= e else
-                              [box(w, s, 180, n), box(-180, s, e, n)])]
         for ident in sorted(self.incomplete):
             nodes = self.ways[ident].nodes
             if (relevant_nodes.intersection(nodes) or
                     any(node in self.nodes and any(area.covers(Point(self.nodes[node])) for area in areas)
                         for node in nodes)):
-                raise ValueError(f'natural waterway {ident} has missing source coordinates; repair the source')
+                raise ValueError(f'river or stream {ident} has missing source coordinates; repair the source')
         for section in report['unresolved_sections']:
             affected = [way for way, _, _ in section['source_segments'] if way in relevant]
             if affected:
                 raise ValueError(
-                    f'natural waterway {affected[0]} has an unresolved downstream route '
+                    f'river or stream {affected[0]} has an unresolved downstream route '
                     f'from node {section["nodes"][1]}; known groups={section["groups"]}; '
                     f'first unresolved node={section["unresolved_node"]}; repair the source')
 
@@ -382,11 +399,7 @@ class Waterways:
         shared_forks = shared_forks or {}
         coordinates = np.asarray(geometry.coords)
         endpoints = {tuple(coordinates[0]), tuple(coordinates[-1])}
-        self.way_ids_intersecting_bounds(geometry.bounds)
-        ways = [
-            self._indexed_way_ids[index]
-            for index in self._waterway_index.query(geometry, predicate='intersects')
-        ]
+        ways = self._way_ids_intersecting_shapes((geometry,))
         hits = defaultdict(set)
         for ident in ways:
             for point in _point_intersections(geometry.intersection(self.way_line(ident))):
@@ -447,7 +460,7 @@ class Waterways:
                     junctions.add(node)
                 elif len(neighbors) == 1:
                     river_ends.add(node)
-        result = {'checked_natural_ways': len(self._indexed_way_ids),
+        result = {'indexed_river_and_stream_ways': len(self._indexed_way_ids),
                   'junction_contacts': sorted(junctions), 'river_endpoint_contacts': sorted(river_ends),
                   'shared_drainage_contacts': [
                       {'node': node, 'groups': shared[node]} for node in sorted(shared)],
@@ -455,11 +468,11 @@ class Waterways:
                                 for point, ways in sorted(crossings.items())]}
         if crossings:
             first = result['crossings'][0]
-            raise ValueError(f'boundary crosses natural waterway {first["ways"]} at {first["point"]}')
+            raise ValueError(f'boundary crosses a river or stream {first["ways"]} at {first["point"]}')
         return result
 
     def trace_destinations_from_ways(self, groups):
-        """Include all mapped natural tributaries reaching the selected ways.
+        """Trace all mapped rivers and streams reaching the selected ways.
 
         Args:
             groups: Mapping from drainage group IDs to selected downstream OSM ways.
@@ -477,7 +490,7 @@ class Waterways:
             seen = set()
             for ident in map(str, ways):
                 if ident not in self.river_and_stream_ids or ident in self.incomplete:
-                    raise ValueError(f'selected natural waterway {ident} is missing or incomplete')
+                    raise ValueError(f'selected river or stream {ident} is missing or incomplete')
                 # The selected downstream endpoint is the reference. Walking
                 # upstream already reaches every earlier node of this way.
                 seen.add(self.ways[ident].nodes[-1])
@@ -485,7 +498,7 @@ class Waterways:
         return self._trace_upstream_destinations(roots)
 
     def trace_destinations_from_basins(self, basins):
-        """Trace the natural stream network to destinations identified by basin polygons.
+        """Trace rivers and streams to destinations identified by basin polygons.
 
         Args:
             basins: Source basin index with the recipe's group mapping.

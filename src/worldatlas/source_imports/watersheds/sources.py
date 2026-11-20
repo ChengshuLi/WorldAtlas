@@ -90,7 +90,7 @@ class Sources:
 
         Args:
             sources: Source aliases or selections of specific archive members.
-            rivers_and_streams_only: Whether to retain only natural rivers and streams.
+            rivers_and_streams_only: Whether to retain only ways tagged as rivers or streams.
             reverse: IDs of ways whose source-backed downstream direction is reversed.
 
         Returns:
@@ -134,7 +134,7 @@ class Sources:
                 return self.read_osm_network([source]).nodes[node]
             key = source, node
             if key not in self.points:
-                # An isolated node in a PBF may have no natural river referencing it.
+                # An isolated PBF node may belong to no river or stream way.
                 selected = []
 
                 class Coordinates(osmium.SimpleHandler):

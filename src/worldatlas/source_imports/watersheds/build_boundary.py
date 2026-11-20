@@ -288,8 +288,8 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
             if any(way in relevant_ways for way, _, _ in section['source_segments'])]
         # The early check established that all relevant routes are resolved.
         network_report.pop('unresolved_sections')
-        network_report['natural_ways_in_domains'] = len(relevant_ways)
-        network_report['natural_ways_in_sources'] = len(network.river_and_stream_ids)
+        network_report['river_and_stream_ways_in_domains'] = len(relevant_ways)
+        network_report['river_and_stream_ways_in_sources'] = len(network.river_and_stream_ids)
         network_report['reversed_waterways'] = {
             ident: network.ways[ident].version for ident in reversed_ways}
         report['terrain'][name] = {'domains': domain_reports, 'network': network_report,

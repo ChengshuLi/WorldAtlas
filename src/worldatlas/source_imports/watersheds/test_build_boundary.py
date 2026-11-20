@@ -155,7 +155,7 @@ class ConstructionTests(unittest.TestCase):
             files['river'] = river
             recipe['terrains']['ridge']['waterways'] = ['river']
             recipe['sections'][1].update(via=[{'point': [.001, .003]}], max_step_m=10.)
-            with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
+            with self.assertRaisesRegex(ValueError, 'boundary crosses a river or stream'):
                 build_fixture(recipe, files)
 
     def test_divide_waypoints_need_no_stored_attachment_coordinates(self):

@@ -186,7 +186,7 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(result[0, 2], -1)
         self.assertEqual(report['conflicting'][0]['groups'], [3, 7])
 
-    def test_disconnected_natural_networks_use_their_actual_exit_basins(self):
+    def test_disconnected_river_networks_use_their_actual_exit_basins(self):
         path = self.root / 'rivers.osm'
         path.write_text('<osm version="0.6"><node id="1" lon="0.2" lat="1.5"/>'
                         '<node id="2" lon="0.3" lat="0.5"/>'

@@ -9,7 +9,7 @@ The watershed importer reads a construction record from Neon, downloads its veri
 | [`build_boundary.py`](build_boundary.py) | Read settings, call the functions, and save the result. |
 | [`terrain.py`](terrain.py) | Crop native grids and fill missing heights from real secondary data. |
 | [`drainage.py`](drainage.py) | Calculate eight-neighbor flow and downstream destinations. |
-| [`waterways.py`](waterways.py) | Read natural waterways and trace their drainage destinations. |
+| [`waterways.py`](waterways.py) | Read OSM rivers and streams and trace where they drain. |
 | [`basins.py`](basins.py) | Read provider basin polygons with GDAL and classify terrain outlets. |
 | [`sources.py`](sources.py) | Select source lines and points and resolve the files needed by each reader. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
@@ -65,7 +65,7 @@ The result includes the river-crossing check, shared sections with their source 
 
 Mapped rivers can continue through several estuary ways beyond the basin polygons. Trace back through that uncovered geometry to the downstream-most basin intersection on each path. Report the selected way, group and intersection. Stop at an unselected or ambiguous source basin; a path without a source-backed destination remains unassigned.
 
-Pyosmium reads both OSM XML and PBF. ZIP members are unpacked to temporary files for the same streaming reader. For natural drainage, the reader merges way versions from all files before loading the node coordinates they reference. This lets a way use points supplied by another file. Natural drainage includes rivers and streams. Shared nodes and way endpoints preserve downstream connections without turning every shape vertex into a separate graph junction. Raster seeding selects intersecting ways without clipping their geometry or downstream relationships. The shared GDAL writer passes all lines in one Arrow batch, and GDAL marks each terrain cell they touch.
+Pyosmium reads both OSM XML and PBF. ZIP members are unpacked to temporary files for the same streaming reader. For drainage tracing, the reader uses ways tagged `waterway=river` or `waterway=stream`. It merges way versions across all files before loading the referenced node coordinates. This lets a way use points supplied by another file. Shared nodes and way endpoints preserve downstream connections without turning every shape vertex into a separate graph junction. Raster seeding selects intersecting ways without clipping their geometry or downstream relationships. The shared GDAL writer passes all lines in one Arrow batch, and GDAL marks each terrain cell they touch.
 
 ## Terrain and flow
 
@@ -73,9 +73,9 @@ Use the provider's 10 m ArcticDEM mosaics where available and Copernicus GLO-30 
 
 Keep the primary grid's native cell alignment and valid heights. Fill missing cells only from the selected secondary source, bilinearly aligned to that grid. Add the cataloged height-reference offset before combining different height systems. Reject any remaining missing or non-finite elevations.
 
-Flow chooses the steepest downhill neighbor using WGS84 distances. This works for geographic and projected source grids. Independent row blocks calculate the exact distances across available CPU cores. Edge cells can flow inward; the edge alone does not identify a drainage destination. Source basin polygons can identify an exit when mapped natural waterways do not.
+Flow chooses the steepest downhill neighbor using WGS84 distances. This works for geographic and projected source grids. Independent row blocks calculate the exact distances across available CPU cores. Edge cells can flow inward; the edge alone does not identify a drainage destination. Source basin polygons can identify an exit when mapped rivers and streams do not.
 
-Depression filling creates a separate working surface up to each spill elevation. Exact flat cells follow the priority-flood route to a reachable outlet. The source heights remain unchanged. Known closed drainage destinations can be supplied as `closed_sinks`, each with a source point and group ID. Canals and drains are excluded from natural drainage; an explicitly selected geographic boundary can still follow their source geometry. Apply a closed sink only in crops containing it; report a sink outside every analysis crop instead of silently omitting it.
+Depression filling creates a separate working surface up to each spill elevation. Exact flat cells follow the priority-flood route to a reachable outlet. The source heights remain unchanged. Known closed drainage destinations can be supplied as `closed_sinks`, each with a source point and group ID. Drainage tracing skips canals and drains. A recipe can still select one of those ways as a boundary line. Apply a closed sink only in crops containing it; report a sink outside every analysis crop instead of silently omitting it.
 
 For coastal terrain, `ocean_mask` selects provider mask sources and their ocean codes. Read categorical masks with nearest-neighbor alignment. Stop drainage at observed ocean cells and adjoining land outlets; do not route across flat sea cells to an arbitrary crop edge. Basin identities classify the land outlets, with mapped river destinations taking precedence. Unknown outlets stay unknown. If the basin polygons stop inland of that shoreline, follow the outlet's actual incoming flow paths back to the first mapped river or source-covered cells. Use their destination only when the references agree. Missing or conflicting references remain unknown; an unconnected nearby basin supplies no destination.
 
