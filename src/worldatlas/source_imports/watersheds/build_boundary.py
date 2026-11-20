@@ -126,7 +126,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
         bounds = [min(b[0] for b in geographic_bounds), min(b[1] for b in geographic_bounds),
                   max(b[2] for b in geographic_bounds), max(b[3] for b in geographic_bounds)]
         reversed_ways = [str(ident) for ident in settings.get('reverse_waterways', [])]
-        network = sources.network(settings.get('waterways', []), natural_only=True,
+        network = sources.network(settings.get('waterways', []), rivers_and_streams_only=True,
                                   reverse=reversed_ways)
         if network.nodes:
             # Complete ways can end outside the terrain crop. Include those
@@ -270,7 +270,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
         # The early check established that all relevant routes are resolved.
         network_report.pop('unresolved_sections')
         network_report['natural_ways_in_domains'] = len(relevant_ways)
-        network_report['natural_ways_in_sources'] = len(network.natural)
+        network_report['natural_ways_in_sources'] = len(network.river_and_stream_ids)
         network_report['reversed_waterways'] = {
             ident: network.ways[ident].version for ident in reversed_ways}
         report['terrain'][name] = {'domains': domain_reports, 'network': network_report,

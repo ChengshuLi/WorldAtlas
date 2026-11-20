@@ -98,23 +98,23 @@ class Way:
 class Waterways:
     """Index OSM waterways by shared nodes for drainage and crossing checks."""
 
-    def __init__(self, paths, *, natural_only=False, reverse=()):
+    def __init__(self, paths, *, rivers_and_streams_only=False, reverse=()):
         """Read OSM extracts and connect rivers and streams downstream.
 
         Args:
             paths: Local OSM XML, XML archives, PBF files, or ``(archive, member)`` selections.
-            natural_only: Whether to retain only rivers and streams and their nodes.
+            rivers_and_streams_only: Whether to retain only rivers and streams and their nodes.
             reverse: IDs of natural waterways with reviewed direction corrections.
         """
         self.nodes, self.ways, self.relations = {}, {}, {}
-        self.natural_only = natural_only
+        self.rivers_and_streams_only = rivers_and_streams_only
         self._node_versions, self._way_versions = {}, {}
         with TemporaryDirectory(prefix='watershed-osm-') as directory:
             files = list(_osm_files(paths, Path(directory)))
-            entities = osmium.osm.WAY if natural_only else osmium.osm.OBJECT
+            entities = osmium.osm.WAY if rivers_and_streams_only else osmium.osm.OBJECT
             for file in files:
                 self._read_objects(osmium.FileProcessor(file, entities))
-            if natural_only:
+            if rivers_and_streams_only:
                 # Merge all way versions before deciding which nodes to read.
                 # A selected way can reference nodes in a different extract.
                 wanted = {int(node) for way in self.ways.values() for node in way.nodes}
@@ -131,16 +131,18 @@ class Waterways:
                 raise ValueError(f'reversed natural waterway {ident} is missing')
             way = self.ways[ident]
             self.ways[ident] = Way(tuple(reversed(way.nodes)), way.tags, way.version)
-        self.natural = {ident for ident, way in self.ways.items()
-                        if way.tags.get('waterway') in ('river', 'stream')}
-        self.incomplete = {ident for ident in self.natural
+        self.river_and_stream_ids = {
+            ident for ident, way in self.ways.items()
+            if way.tags.get('waterway') in ('river', 'stream')
+        }
+        self.incomplete = {ident for ident in self.river_and_stream_ids
                            if len(self.ways[ident].nodes) < 2 or
                            any(n not in self.nodes for n in self.ways[ident].nodes)}
         self.upstream, self.downstream = defaultdict(set), defaultdict(set)
         self.edge_sources = defaultdict(list)
         seen, junctions = set(), set()
         # Single-use shape vertices describe curves. Endpoints and shared nodes connect routes.
-        for ident in sorted(self.natural - self.incomplete):
+        for ident in sorted(self.river_and_stream_ids - self.incomplete):
             nodes = self.ways[ident].nodes
             junctions.update((nodes[0], nodes[-1]))
             for node in nodes:
@@ -150,7 +152,7 @@ class Waterways:
         for ident in self.incomplete:
             junctions.update(node for node in self.ways[ident].nodes if node in seen)
         self.topology_nodes = junctions
-        for ident in sorted(self.natural - self.incomplete):
+        for ident in sorted(self.river_and_stream_ids - self.incomplete):
             for (start, first), (end, second) in self.segments(ident):
                 self.upstream[second].add(first)
                 self.downstream[first].add(second)
@@ -160,33 +162,37 @@ class Waterways:
     def _node(self, ident, version, point):
         if not all(map(math.isfinite, point)) or not (-180 <= point[0] <= 180 and -90 <= point[1] <= 90):
             raise ValueError('invalid OSM node coordinates')
-        old = self._node_versions.get(ident, -1)
-        if version == old and self.nodes[ident] != point:
-            raise ValueError('conflicting same-version OSM node')
-        if version >= old:
-            self.nodes[ident], self._node_versions[ident] = point, version
+        previous_version = self._node_versions.get(ident)
+        if previous_version is not None and version <= previous_version:
+            if version == previous_version and self.nodes[ident] != point:
+                raise ValueError('conflicting same-version OSM node')
+            return
+        self.nodes[ident], self._node_versions[ident] = point, version
 
     def _way(self, ident, way):
-        natural = way.tags.get('waterway') in ('river', 'stream')
-        old = self._way_versions.get(ident)
-        if old and old[0] == way.version:
-            if old[1] != natural or (ident in self.ways and self.ways[ident] != way):
+        is_river_or_stream = way.tags.get('waterway') in ('river', 'stream')
+        previous_version, previous_is_river_or_stream = self._way_versions.get(ident, (None, None))
+        if previous_version is not None and way.version <= previous_version:
+            if way.version == previous_version and (
+                previous_is_river_or_stream != is_river_or_stream
+                or (ident in self.ways and self.ways[ident] != way)
+            ):
                 raise ValueError('conflicting same-version OSM way')
-        if old is None or way.version >= old[0]:
-            self._way_versions[ident] = (way.version, natural)
-            if not self.natural_only or natural:
-                self.ways[ident] = way
-            else:
-                self.ways.pop(ident, None)
-
-    def _relation(self, ident, relation):
-        if self.natural_only:
             return
-        old = self.relations.get(ident)
-        if old and old[0] == relation[0] and old != relation:
-            raise ValueError('conflicting same-version OSM relation')
-        if old is None or relation[0] >= old[0]:
-            self.relations[ident] = relation
+        # Even an excluded way's version prevents older copies from returning.
+        self._way_versions[ident] = (way.version, is_river_or_stream)
+        if self.rivers_and_streams_only and not is_river_or_stream:
+            self.ways.pop(ident, None)
+        else:
+            self.ways[ident] = way
+
+    def _relation(self, ident, version, members):
+        previous_version, previous_members = self.relations.get(ident, (None, None))
+        if previous_version is not None and version <= previous_version:
+            if version == previous_version and previous_members != members:
+                raise ValueError('conflicting same-version OSM relation')
+            return
+        self.relations[ident] = (version, members)
 
     def _read_objects(self, objects):
         """Copy the object values needed after Pyosmium advances the reader."""
@@ -200,7 +206,7 @@ class Waterways:
                                      dict(obj.tags), obj.version))
             else:
                 members = tuple((member_types[m.type], str(m.ref), m.role) for m in obj.members)
-                self._relation(ident, (obj.version, members))
+                self._relation(ident, obj.version, members)
 
     def segments(self, way_id):
         """Find the consecutive network junctions along an ordered way.
@@ -267,7 +273,7 @@ class Waterways:
             Sorted IDs of complete mapped rivers and streams intersecting the rectangle.
         """
         if self._spatial is None:
-            self._spatial_ids = sorted(self.natural - self.incomplete)
+            self._spatial_ids = sorted(self.river_and_stream_ids - self.incomplete)
             self._spatial = STRtree([self.line(ident) for ident in self._spatial_ids])
         west, south, east, north = bounds
         areas = [box(west, south, east, north)] if west <= east else [
@@ -438,7 +444,7 @@ class Waterways:
                 raise ValueError('nonnegative group IDs and downstream ways are required')
             seen = set()
             for ident in map(str, ways):
-                if ident not in self.natural or ident in self.incomplete:
+                if ident not in self.river_and_stream_ids or ident in self.incomplete:
                     raise ValueError(f'selected natural waterway {ident} is missing or incomplete')
                 # The selected downstream endpoint is the reference. Walking
                 # upstream already reaches every earlier node of this way.

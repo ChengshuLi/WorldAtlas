@@ -83,12 +83,12 @@ class Sources:
             return gdal_dataset_path(self.files[selection])
         return gdal_dataset_path(self.files[selection['source']], selection.get('member'))
 
-    def network(self, sources, *, natural_only=False, reverse=()):
+    def network(self, sources, *, rivers_and_streams_only=False, reverse=()):
         """Read and reuse an OSM network for these source files and directions.
 
         Args:
             sources: Source aliases or selections of specific archive members.
-            natural_only: Whether to retain only natural rivers and streams.
+            rivers_and_streams_only: Whether to retain only natural rivers and streams.
             reverse: IDs of ways whose source-backed downstream direction is reversed.
 
         Returns:
@@ -103,9 +103,9 @@ class Sources:
                 paths.append((path, selection['member']) if 'member' in selection else path)
         reverse = tuple(sorted(set(map(str, reverse))))
         # One set of files can support both raw source lines and corrected drainage.
-        key = tuple(paths), natural_only, reverse
+        key = tuple(paths), rivers_and_streams_only, reverse
         if key not in self.networks:
-            self.networks[key] = Waterways(paths, natural_only=natural_only, reverse=reverse)
+            self.networks[key] = Waterways(paths, rivers_and_streams_only=rivers_and_streams_only, reverse=reverse)
         return self.networks[key]
 
     def point(self, specification, lines):
@@ -168,11 +168,11 @@ class Sources:
         Raises:
             ValueError: The selector is unsupported or the line has invalid coordinates.
         """
-        if 'way' in part:
+        if 'way' in part:  # An OsmWayLine selects one OSM way.
             points = list(self.network([part['source']]).line(part['way']).coords)
-        elif 'relation' in part:
+        elif 'relation' in part:  # An OsmRiverLine joins selected relation members.
             points = self.river(part)
-        elif 'geojson_feature' in part:
+        elif 'geojson_feature' in part:  # A GeoJSONLine selects a feature by position.
             path = self.files[part['source']]
             if 'member' in part:
                 with ZipFile(path) as archive, archive.open(archive_member(archive, part['member'])) as stream:
@@ -186,11 +186,12 @@ class Sources:
             points = geometry['coordinates']
         else:
             raise ValueError('unsupported source line selection')
-        coordinates = [tuple(map(float, point)) for point in points]
-        if len(coordinates) < 2:
+        if len(points) < 2:
             raise ValueError('source line needs at least two selected points')
-        values = np.asarray(coordinates)
-        if values.shape != (len(coordinates), 2) or not np.isfinite(values).all() or np.any(np.abs(values[:, 0]) > 180) or np.any(np.abs(values[:, 1]) > 90):
+        coordinates = np.asarray(points, dtype=float)
+        if (coordinates.shape != (len(points), 2) or not np.isfinite(coordinates).all()
+                or np.any(np.abs(coordinates[:, 0]) > 180)
+                or np.any(np.abs(coordinates[:, 1]) > 90)):
             raise ValueError('source line requires finite WGS84 longitude/latitude pairs')
         return LineString(coordinates)
 

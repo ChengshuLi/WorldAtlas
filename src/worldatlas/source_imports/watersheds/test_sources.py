@@ -71,7 +71,7 @@ class SourceGeometryTests(unittest.TestCase):
         sources = Sources({'provider': archive})
         for member in ('nested/way.osm.pbf', 'nested/way.osm'):
             with self.subTest(member=member):
-                network = sources.network([{'source': 'provider', 'member': member}], natural_only=True)
+                network = sources.network([{'source': 'provider', 'member': member}], rivers_and_streams_only=True)
                 self.assertEqual(list(network.line(10).coords), [(0., 0.), (1., 1.)])
         self.assertFalse((self.root / 'extracted').exists())
 
@@ -108,11 +108,11 @@ class SourceGeometryTests(unittest.TestCase):
                         '<way id="10"><nd ref="1"/><nd ref="2"/>'
                         '<tag k="waterway" v="river"/></way></osm>')
         sources = Sources({'rivers': path})
-        normal = sources.network(['rivers'], natural_only=True)
-        reverse = sources.network(['rivers'], natural_only=True, reverse=['10'])
+        normal = sources.network(['rivers'], rivers_and_streams_only=True)
+        reverse = sources.network(['rivers'], rivers_and_streams_only=True, reverse=['10'])
         self.assertEqual(normal.ways['10'].nodes, ('1', '2'))
         self.assertEqual(reverse.ways['10'].nodes, ('2', '1'))
-        self.assertIs(normal, sources.network(['rivers'], natural_only=True))
+        self.assertIs(normal, sources.network(['rivers'], rivers_and_streams_only=True))
 
 
 if __name__ == '__main__':

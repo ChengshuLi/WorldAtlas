@@ -207,6 +207,19 @@ class WaterwayTests(unittest.TestCase):
         new = self.write('new.osm', self.node(1, 2, 1, 2))
         self.assertEqual(Waterways([new, old]).nodes['1'], (2., 1.))
 
+    def test_relation_uses_newest_members_and_rejects_conflicting_same_version(self):
+        old_members = '<member type="way" ref="10" role="main_stream"/>'
+        new_members = '<member type="way" ref="20" role="main_stream"/>'
+        old = self.write('old.osm', f'<relation id="1" version="1">{old_members}</relation>')
+        new = self.write('new.osm', f'<relation id="1" version="2">{new_members}</relation>')
+        for paths in ([old, new], [new, new, old]):
+            with self.subTest(paths=paths):
+                self.assertEqual(Waterways(paths).relations['1'], (2, (('way', '20', 'main_stream'),)))
+
+        conflict = self.write('conflict.osm', f'<relation id="1" version="2">{old_members}</relation>')
+        with self.assertRaisesRegex(ValueError, 'same-version OSM relation'):
+            Waterways([new, conflict])
+
     def test_later_memberships_can_reference_nodes_in_an_earlier_pbf(self):
         first = self.root / 'first.osm.pbf'
         with osmium.SimpleWriter(str(first)) as writer:
@@ -223,7 +236,7 @@ class WaterwayTests(unittest.TestCase):
         for later in (second, xml):
             for paths in ([first, later], [later, first]):
                 with self.subTest(later=later.suffix, order=paths):
-                    network = Waterways(paths, natural_only=True)
+                    network = Waterways(paths, rivers_and_streams_only=True)
                     self.assertEqual(network.incomplete, set())
                     self.assertEqual(network.ways['10'].version, 2)
                     self.assertEqual(list(network.line(10).coords), [(1., 0.), (3., 0.)])
@@ -240,7 +253,7 @@ class WaterwayTests(unittest.TestCase):
                                                      tags={'waterway': 'stream'}))
             paths.append(path)
         with self.assertRaisesRegex(ValueError, 'same-version OSM node'):
-            Waterways(paths, natural_only=True)
+            Waterways(paths, rivers_and_streams_only=True)
 
     def test_latest_pbf_classification_can_remove_all_natural_memberships(self):
         paths = []
@@ -254,7 +267,7 @@ class WaterwayTests(unittest.TestCase):
                                                      tags={'waterway': kind}))
             paths.append(path)
         for ordered in (paths, paths[::-1]):
-            network = Waterways(ordered, natural_only=True)
+            network = Waterways(ordered, rivers_and_streams_only=True)
             self.assertEqual(network.ways, {})
             self.assertEqual(network.nodes, {})
             self.assertEqual(network.incomplete, set())
@@ -316,20 +329,20 @@ class WaterwayTests(unittest.TestCase):
 
         Copy().apply_file(str(path))
         writer.close()
-        for natural_only in (False, True):
-            xml = Waterways([path], natural_only=natural_only)
-            packed = Waterways([pbf], natural_only=natural_only)
+        for rivers_and_streams_only in (False, True):
+            xml = Waterways([path], rivers_and_streams_only=rivers_and_streams_only)
+            packed = Waterways([pbf], rivers_and_streams_only=rivers_and_streams_only)
             self.assertEqual(packed.nodes, xml.nodes)
             self.assertEqual(packed.ways, xml.ways)
             self.assertEqual(packed.relations, xml.relations)
             self.assertEqual(packed.groups({3: ['10']}), xml.groups({3: ['10']}))
-        self.assertEqual(set(Waterways([pbf], natural_only=True).nodes), {'1', '2'})
+        self.assertEqual(set(Waterways([pbf], rivers_and_streams_only=True).nodes), {'1', '2'})
 
     def test_later_artificial_classification_retires_an_older_natural_way(self):
         first = self.write('old.osm', self.node(1) + self.node(2, 2) + self.way(10, [1, 2]))
         other = self.write('new.osm', self.way(10, [1, 2], 'canal').replace('version="1"', 'version="2"'))
         for files in ([first, other], [other, first]):
-            self.assertEqual(Waterways(files, natural_only=True).ways, {})
+            self.assertEqual(Waterways(files, rivers_and_streams_only=True).ways, {})
 
     def test_seed_raster_uses_actual_ids_and_native_cell_positions(self):
         path = self.write('network.osm', self.node(1, .1, 1.5) + self.node(2, 1.9, 1.5) +
@@ -348,7 +361,7 @@ class WaterwayTests(unittest.TestCase):
                           self.way(10, [1, 2], 'coastline'))
         graph = Waterways([path])
         self.assertEqual(list(graph.line(10).coords), [(.1, 1.5), (1.9, 1.5)])
-        self.assertEqual(graph.natural, set())
+        self.assertEqual(graph.river_and_stream_ids, set())
 
 
 if __name__ == '__main__':
