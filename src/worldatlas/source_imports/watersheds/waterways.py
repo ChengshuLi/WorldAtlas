@@ -13,8 +13,8 @@ import osmium
 from osgeo import gdal, osr
 import pyarrow as pa
 from pyproj import Transformer
-from shapely import to_wkb
-from shapely.geometry import LineString, Point, box
+from shapely import line_merge, to_wkb
+from shapely.geometry import LineString, MultiLineString, Point, box
 from shapely.strtree import STRtree
 
 from worldatlas.geodesy.ogr import geometry_layer
@@ -46,13 +46,28 @@ def _stage_osm_files(paths, directory):
                 yield osmium.io.File(str(unpacked), kind)
 
 
-def _point_intersections(hit):
-    """Yield isolated point intersections, leaving shared line sections alone."""
-    if hit.geom_type == 'Point' and not hit.is_empty:
-        yield tuple(hit.coords[0])
-    elif hit.geom_type in ('MultiPoint', 'GeometryCollection'):
+def _intersection_parts(hit):
+    """Yield the individual points and lines where two lines meet."""
+    if hit.is_empty:
+        return
+    if hit.geom_type in ('Point', 'LineString'):
+        yield hit
+    else:
         for part in hit.geoms:
-            yield from _point_intersections(part)
+            yield from _intersection_parts(part)
+
+
+def _shared_segment_ends(start, end, shared_line):
+    """Yield the shared stretches of one source segment in flow direction."""
+    if start == end:
+        return
+    parts = _intersection_parts(LineString([start, end]).intersection(shared_line))
+    stretches = MultiLineString([part for part in parts if part.geom_type == 'LineString'])
+    for stretch in _intersection_parts(line_merge(stretches)):
+        first, last = stretch.coords[0], stretch.coords[-1]
+        if math.dist(start, first) > math.dist(start, last):
+            first, last = last, first
+        yield first, last
 
 
 def _rectangles_from_wgs84_bounds(bounds):
@@ -342,12 +357,16 @@ class Waterways:
         areas = [area for rectangle in bounds for area in _rectangles_from_wgs84_bounds(rectangle)]
         relevant = set(self._way_ids_intersecting_shapes(areas))
         relevant_nodes = {node for ident in relevant for node in self.ways[ident].nodes}
+        # An incomplete way can still affect the crop if a known point lies
+        # inside it or the way shares a node with a river that touches it.
         for ident in sorted(self.incomplete):
             nodes = self.ways[ident].nodes
             if (relevant_nodes.intersection(nodes) or
                     any(node in self.nodes and any(area.covers(Point(self.nodes[node])) for area in areas)
                         for node in nodes)):
                 raise ValueError(f'river or stream {ident} has missing source coordinates; repair the source')
+        # A known outlet on one branch does not resolve another branch.
+        # Stop only if the uncertainty affects a way that touches a crop.
         for section in report['unresolved_sections']:
             affected = [way for way, _, _ in section['source_segments'] if way in relevant]
             if affected:
@@ -371,43 +390,69 @@ class Waterways:
         for downstream in self.downstream.get(node, ()):
             edge = node, downstream
             groups = assigned.get(edge, ())
+            # To allow this boundary contact, we need one known destination
+            # for every outgoing branch.
             if len(groups) != 1:
                 return {}
             group, = groups
             for way, start, _ in self.edge_sources[edge]:
+                # The next network junction may be far away. The crossing
+                # check uses the first OSM node after the fork to find which
+                # side of the boundary the branch leaves on.
                 neighbor = self.ways[way].nodes[start + 1]
+                # If two routes share that first node, their groups must agree.
                 if destinations.setdefault(neighbor, group) != group:
                     return {}
         return destinations
 
-    def check_boundary_crossings(self, geometry, *, shared_forks=None):
-        """Reject downstream crossings at isolated river/boundary intersections.
+    def check_boundary_crossings(self, geometry, *, shared_forks=None, followed_source_line=None):
+        """Check whether water crosses the finished boundary.
+
+        A river can touch the boundary and turn back to the same side. A
+        selected fork can also sit on the boundary if water arrives from
+        one side and the outgoing branches on opposite sides lead to two
+        different known drainage groups.
 
         Args:
-            geometry: The final simple WGS84 boundary line.
-            shared_forks: Selected fork IDs and their source-backed outgoing
-                neighbor IDs and drainage groups.
+            geometry: The finished boundary line in WGS84 longitude and latitude.
+            shared_forks: Map from each selected fork's OSM node ID to the
+                drainage group of each immediate downstream OSM node.
+            followed_source_line: Assembled portions that deliberately follow
+                a mapped source line. A river can receive and release water
+                on both sides of a reach chosen as the boundary.
 
         Returns:
-            The crossing check, including allowed endpoint, junction, and
-            shared-drainage contacts.
+            A report of stream ends and junctions that touch the boundary,
+            including any selected forks that passed the check.
 
         Raises:
-            ValueError: Water flows across the boundary at an isolated point
-                without a selected fork that separates distinct drainage groups.
+            ValueError: Water crosses at an unapproved point or follows the
+                boundary and leaves on the opposite side. The error gives the
+                coordinates and OSM way IDs of the first crossing.
         """
         shared_forks = shared_forks or {}
         coordinates = np.asarray(geometry.coords)
         endpoints = {tuple(coordinates[0]), tuple(coordinates[-1])}
         ways = self._way_ids_intersecting_shapes((geometry,))
+        # A river can cross at one point or follow the boundary for a while
+        # before leaving on the other side. Keep both kinds of intersection.
         hits = defaultdict(set)
+        overlaps = defaultdict(list)
         for ident in ways:
-            for point in _point_intersections(geometry.intersection(self.way_line(ident))):
-                if point not in endpoints:
-                    hits[point].add(ident)
+            for part in _intersection_parts(geometry.intersection(self.way_line(ident))):
+                if part.geom_type == 'LineString':
+                    overlaps[ident].append(part)
+                else:
+                    point = tuple(part.coords[0])
+                    if point not in endpoints:
+                        hits[point].add(ident)
 
-        # Join arms by OSM node ID. Two unrelated streams can touch the same
-        # coordinate, and a single stream can be split across several ways.
+        crossings, along_boundary_arms = self._crossings_along_boundary(
+            geometry, ways, overlaps, followed_source_line)
+
+        # If water flows through nodes 1, 2, and 3 in that order and node 2
+        # is on the boundary, record node 1 as incoming and node 3 as outgoing.
+        # Group branches from different ways when they share the same OSM node.
         arms = defaultdict(lambda: defaultdict(set))
         vertex_hits = defaultdict(set)
         for ident in ways:
@@ -422,13 +467,17 @@ class Waterways:
                 if index + 1 < len(nodes):
                     arms[point][node].add((ident, nodes[index + 1], True))
 
-        crossings, junctions, river_ends, shared = defaultdict(set), set(), set(), {}
+        junctions, river_ends, shared = set(), set(), {}
         for point, hit_ways in sorted(hits.items()):
+            # Use the boundary just before and after this point to tell
+            # which side each branch is on, even where the boundary bends.
             before, after = _vertices_around_point(geometry, coordinates, point)
 
             def side(neighbor):
                 return _boundary_side(point, before, after, neighbor)
 
+            # The river can also meet the boundary between two saved OSM
+            # points. Check the sides of the two points it runs between.
             for ident in hit_ways - vertex_hits[point]:
                 river = self.way_line(ident)
                 entry, exit = _vertices_around_point(river, np.asarray(river.coords), point)
@@ -438,15 +487,21 @@ class Waterways:
             for node, branches in arms[point].items():
                 incoming, outgoing = set(), {}
                 neighbors = {neighbor for _, neighbor, _ in branches}
-                for _, neighbor, leaves in branches:
-                    sector = side(self.nodes[neighbor])
+                for ident, neighbor, leaves in branches:
+                    arm = ident, node, neighbor, leaves
+                    sector = 0 if arm in along_boundary_arms else side(self.nodes[neighbor])
                     if leaves:
                         outgoing[neighbor] = sector
                     else:
                         incoming.add(sector)
+                # A crossing needs water arriving from one side and leaving
+                # on the other. Side 0 means the branch points along the boundary.
                 crosses = any(-sector in incoming for sector in outgoing.values() if sector)
                 if crosses:
-                    # An approved fork must still separate two known destination groups.
+                    # Allow a selected fork when water arrives from one side
+                    # and leaves on both. All branches leaving on a given
+                    # side must lead to the same known group, and the two
+                    # sides must lead to different groups.
                     groups = shared_forks.get(node, {})
                     if len(incoming) == 1 and set(outgoing.values()) == {-1, 1} and groups.keys() == outgoing.keys():
                         by_side = {sector: {groups[n] for n in outgoing if outgoing[n] == sector}
@@ -456,6 +511,8 @@ class Waterways:
                             junctions.add(node)
                             continue
                     crossings[point].update(ident for ident, _, _ in branches)
+                # For contacts without a crossing, report junctions and stream
+                # ends. A stream that touches and turns back needs no entry.
                 elif len(neighbors) > 2:
                     junctions.add(node)
                 elif len(neighbors) == 1:
@@ -471,14 +528,106 @@ class Waterways:
             raise ValueError(f'boundary crosses a river or stream {first["ways"]} at {first["point"]}')
         return result
 
+    def _crossings_along_boundary(self, boundary, ways, overlaps, followed_source_line):
+        """Find routes that enter a shared stretch and leave on the other side."""
+        crossings, shared_arms = defaultdict(set), set()
+        if not overlaps:
+            return crossings, shared_arms
+
+        downstream = defaultdict(set)
+        points = {}
+        arrivals, departures = defaultdict(set), defaultdict(set)
+        coordinates = np.asarray(boundary.coords)
+        endpoints = {tuple(coordinates[0]), tuple(coordinates[-1])}
+        boundary_neighbors = {}
+
+        def record_branch(branches, contact, neighbor, way):
+            point = points[contact]
+            # Water can go around the end of the boundary.
+            if point in endpoints:
+                return
+            if point not in boundary_neighbors:
+                boundary_neighbors[point] = _vertices_around_point(boundary, coordinates, point)
+            side = _boundary_side(point, *boundary_neighbors[point], neighbor)
+            if side:
+                branches[contact].add((side, way))
+
+        # Keep the direction of each shared stretch. Use OSM node IDs to
+        # connect ways. A cut in the middle of a segment belongs to that
+        # segment alone, even if another stream passes through the same spot.
+        for way, lines in overlaps.items():
+            shared_line = MultiLineString(lines)
+            # A recipe can explicitly place the border along a river. That
+            # reach is a boundary in its own right, even if it has side channels.
+            if followed_source_line is not None:
+                shared_line = shared_line.difference(followed_source_line)
+                if shared_line.is_empty:
+                    continue
+            for index, (upstream, downstream_node) in enumerate(pairwise(self.ways[way].nodes)):
+                start, end = self.nodes[upstream], self.nodes[downstream_node]
+                for first, last in _shared_segment_ends(start, end, shared_line):
+                    entry = upstream if first == start else (way, index, first)
+                    exit = downstream_node if last == end else (way, index, last)
+                    points[entry], points[exit] = first, last
+                    downstream[entry].add(exit)
+                    if first == start:
+                        shared_arms.add((way, upstream, downstream_node, True))
+                    else:
+                        record_branch(arrivals, entry, start, way)
+                    if last == end:
+                        shared_arms.add((way, downstream_node, upstream, False))
+                    else:
+                        record_branch(departures, exit, end, way)
+
+        # At shared OSM nodes, other stream segments can bring water onto the
+        # boundary or carry it away. Count only the branches off the boundary.
+        for way in ways:
+            for upstream, downstream_node in pairwise(self.ways[way].nodes):
+                start, end = self.nodes[upstream], self.nodes[downstream_node]
+                if start == end:
+                    continue
+                if upstream in points and (way, upstream, downstream_node, True) not in shared_arms:
+                    record_branch(departures, upstream, end, way)
+                if downstream_node in points and (way, downstream_node, upstream, False) not in shared_arms:
+                    record_branch(arrivals, downstream_node, start, way)
+
+        # Follow water arriving from each side. Report where it leaves on
+        # the opposite side, even if it passed through several OSM ways.
+        for entry_side in (-1, 1):
+            # Take at least one shared stretch. Crossings that occur at a
+            # single point are handled by the normal junction check.
+            reached = {neighbor for node, branches in arrivals.items()
+                       if any(side == entry_side for side, _ in branches)
+                       for neighbor in downstream[node]}
+            pending = list(reached)
+            while pending:
+                node = pending.pop()
+                if points[node] in endpoints:
+                    continue
+                for side, way in departures.get(node, ()):
+                    if side == -entry_side:
+                        crossings[points[node]].add(way)
+                for neighbor in downstream[node] - reached:
+                    reached.add(neighbor)
+                    pending.append(neighbor)
+        return crossings, shared_arms
+
     def trace_destinations_from_ways(self, groups):
-        """Trace all mapped rivers and streams reaching the selected ways.
+        """Find which streams flow to the ends of the selected OSM ways.
 
         Args:
-            groups: Mapping from drainage group IDs to selected downstream OSM ways.
+            groups: Map from drainage group IDs to lists of OSM way IDs.
+                For example, ``{3: ['10']}`` uses the end of way 10 as a
+                known destination for group 3.
 
         Returns:
-            Possible group IDs on each directed edge and a tracing report.
+            The pair ``(assigned, report)``. In ``assigned``, an entry like
+            ``{('101', '103'): (3,)}`` says water flowing from node 101 to
+            node 103 can reach group 3. A stretch can reach several groups.
+            Stretches with no known group are absent from ``assigned``.
+            The ``report`` lists ways with missing coordinates and stretches
+            that reach multiple groups or have an unresolved downstream route,
+            including stretches with no known group.
 
         Raises:
             ValueError: A group ID is invalid or a selected way is missing or incomplete.

@@ -127,7 +127,7 @@ class WaterwayTests(unittest.TestCase):
         network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2, 3, 4]))])
         boundary = LineString([(0, 0), (1, 0), (1.5, 1), (2.5, -1), (3, -1)])
         with self.assertRaisesRegex(ValueError, 'boundary crosses a river or stream'):
-            network.check_boundary_crossings(boundary)
+            network.check_boundary_crossings(boundary, followed_source_line=LineString([(0, 0), (1, 0)]))
 
     def test_followed_river_and_a_real_tributary_contact_are_allowed(self):
         nodes = self.node(1, -2, 0) + self.node(2, 0, 0) + self.node(3, 2, 0) + self.node(4, 0, 2)
@@ -135,6 +135,47 @@ class WaterwayTests(unittest.TestCase):
         result = network.check_boundary_crossings(LineString([(-1, 0), (1, 0)]))
         self.assertEqual(result['crossings'], [])
         self.assertEqual(result['junction_contacts'], ['2'])
+
+    def test_crossing_along_the_boundary_depends_on_entry_and_exit_sides(self):
+        boundary = LineString([(-2, 0), (2, 0)])
+        for split in (False, True):
+            ways = (self.way(10, [1, 2]) + self.way(20, [2, 3]) + self.way(30, [3, 4])
+                    if split else self.way(10, [1, 2, 3, 4]))
+            for exit_latitude in (-1, 1):
+                with self.subTest(split=split, exit_latitude=exit_latitude):
+                    points = [(-1, 1), (-1, 0), (1, 0), (1, exit_latitude)]
+                    nodes = ''.join(self.node(i, *p) for i, p in enumerate(points, 1))
+                    network = Waterways([self.write('river.osm', nodes + ways)])
+                    if exit_latitude < 0:
+                        with self.assertRaisesRegex(ValueError, 'boundary crosses a river or stream'):
+                            network.check_boundary_crossings(boundary)
+                        followed = LineString([(-1, 0), (1, 0)])
+                        self.assertEqual(network.check_boundary_crossings(
+                            boundary, followed_source_line=followed)['crossings'], [])
+                    else:
+                        self.assertEqual(network.check_boundary_crossings(boundary)['crossings'], [])
+
+    def test_shared_stretch_can_begin_and_end_between_saved_river_points(self):
+        nodes = self.node(1, -1.5, 0) + self.node(2, 1.5, 0)
+        network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2]))])
+        for exit_latitude in (-1, 1):
+            with self.subTest(exit_latitude=exit_latitude):
+                boundary = LineString([(-2, 1), (-1, 0), (0, 0), (1, 0), (2, exit_latitude)])
+                if exit_latitude < 0:
+                    with self.assertRaisesRegex(ValueError, 'boundary crosses a river or stream'):
+                        network.check_boundary_crossings(boundary)
+                else:
+                    self.assertEqual(network.check_boundary_crossings(boundary)['crossings'], [])
+
+    def test_overlap_crossing_requires_a_connected_downstream_route(self):
+        points = [(-1, 1), (-1, 0), (1, 0), (1, -1), (1, 0)]
+        nodes = ''.join(self.node(i, *p) for i, p in enumerate(points, 1))
+        boundary = LineString([(-2, 0), (2, 0)])
+        for exit_node, shared_nodes in [(5, [2, 3]), (3, [3, 2])]:
+            with self.subTest(exit_node=exit_node):
+                ways = self.way(10, [1, 2]) + self.way(20, shared_nodes) + self.way(30, [exit_node, 4])
+                network = Waterways([self.write('river.osm', nodes + ways)])
+                self.assertEqual(network.check_boundary_crossings(boundary)['crossings'], [])
 
     def test_a_closed_way_start_is_not_a_real_river_endpoint(self):
         nodes = ''.join(self.node(i, *p) for i, p in enumerate([(0, 0), (1, 0), (1, 1), (0, 1)], 1))

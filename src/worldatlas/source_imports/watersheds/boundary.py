@@ -362,7 +362,8 @@ def route_line_through_waypoints(line, points, max_step_m):
     return connected, receipts
 
 
-def assemble_boundary_line(sections, joins, start, end, *, waypoints=None, connections=None):
+def assemble_boundary_line(sections, joins, start, end, *, waypoints=None,
+                           connections=None, source_sections=()):
     """Cut sections at their shared joins and assemble one boundary.
 
     Args:
@@ -372,9 +373,10 @@ def assemble_boundary_line(sections, joins, start, end, *, waypoints=None, conne
         end: Last point, supplied as coordinates or a resolved join.
         waypoints: Optional point selections and spacing keyed by section index.
         connections: Optional report updated with the waypoint attachments and lengths.
+        source_sections: Indices of sections that deliberately follow a source line.
 
     Returns:
-        The completed WGS84 GeoJSON LineString.
+        The completed WGS84 GeoJSON LineString and the trimmed source sections.
 
     Raises:
         ValueError: Sections cannot meet at the declared joins or form an invalid line.
@@ -383,7 +385,7 @@ def assemble_boundary_line(sections, joins, start, end, *, waypoints=None, conne
         raise ValueError('one join is required between each pair of sections')
     ends = [start if isinstance(start, Join) else Join(tuple(start)),
             *joins, end if isinstance(end, Join) else Join(tuple(end))]
-    coordinates = []
+    coordinates, followed_sources = [], []
     for index, section in enumerate(sections):
         first, last = ends[index], ends[index + 1]
         if isinstance(section, Divide):
@@ -400,13 +402,15 @@ def assemble_boundary_line(sections, joins, start, end, *, waypoints=None, conne
         points = list(cut.coords)
         points[0], points[-1] = first.point, last.point
         coordinates.extend(points)
+        if index in source_sections:
+            followed_sources.append(LineString(points))
     line = remove_repeated_points(LineString(coordinates), tolerance=0)
     values = get_coordinates(line)
     if (not line.is_simple or not line.is_valid or not np.isfinite(values).all() or
             np.any(np.abs(values[:, 0]) > 180) or np.any(np.abs(values[:, 1]) > 90) or
             np.any(np.abs(np.diff(values[:, 0])) > 180)):
         raise ValueError('assembled boundary is not a finite simple WGS84 line without a longitude discontinuity')
-    return {'type': 'LineString', 'coordinates': values.tolist()}
+    return {'type': 'LineString', 'coordinates': values.tolist()}, followed_sources
 
 
 def cell_containing_point(grid, point, *, required=True):

@@ -328,14 +328,17 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
         raise ValueError('one geographic join selection is required between adjacent sections')
     chosen_joins = [choose_intersection_join(a, b, choice['near'])
                      for (a, b), choice in zip(pairwise(section_lines), joins, strict=True)]
-    geometry = assemble_boundary_line(
+    geometry, followed_sources = assemble_boundary_line(
         section_lines, chosen_joins, resolve_section_point(start, retain_join=True),
         resolve_section_point(end, retain_join=True),
         waypoints=waypoints, connections=report['connections'],
+        source_sections={index for index, section in enumerate(sections) if 'line' in section},
     )
     final_line = LineString(geometry['coordinates'])
+    followed_source_line = shapely.union_all(followed_sources) if followed_sources else None
     report['river_checks'] = [
-        network.check_boundary_crossings(final_line, shared_forks=forks)
+        network.check_boundary_crossings(final_line, shared_forks=forks,
+                                         followed_source_line=followed_source_line)
         for network, forks in networks.items()
     ]
     report['joins'] = [list(join.point) for join in chosen_joins]

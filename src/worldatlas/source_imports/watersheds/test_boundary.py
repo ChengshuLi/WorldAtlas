@@ -188,7 +188,7 @@ class BoundaryTests(unittest.TestCase):
         before = LineString([(-.01, -.01), (0., 0.), (0., .01)])
         after = LineString([(.02, -.01), (.02, 0.), (.03, .01)])
         joins = [choose_intersection_join(before, graph, (0., 0.)), choose_intersection_join(graph, after, (.02, 0.))]
-        geometry = assemble_boundary_line([before, graph, after], joins, (-.01, -.01), (.03, .01))
+        geometry, _ = assemble_boundary_line([before, graph, after], joins, (-.01, -.01), (.03, .01))
         self.assertEqual(geometry['coordinates'][0], [-.01, -.01])
         self.assertEqual(geometry['coordinates'][-1], [.03, .01])
         self.assertEqual(geometry['coordinates'].count([0., 0.]), 1)
@@ -196,14 +196,16 @@ class BoundaryTests(unittest.TestCase):
 
     def test_repeated_source_coordinates_do_not_create_zero_length_output_segments(self):
         source = LineString([(0., 0.), (.01, 0.), (.01, 0.), (.02, .01)])
-        geometry = assemble_boundary_line([source], [], (0., 0.), (.02, .01))
+        geometry, _ = assemble_boundary_line([source], [], (0., 0.), (.02, .01))
         self.assertEqual(geometry['coordinates'], [[0., 0.], [.01, 0.], [.02, .01]])
         self.assertTrue(LineString(geometry['coordinates']).equals(source))
 
     def test_source_line_can_be_cut_at_an_actual_interior_endpoint(self):
         source = LineString([(0., 0.), (.01, 0.), (.02, 0.)])
-        geometry = assemble_boundary_line([source], [], (.005, 0.), (.015, 0.))
+        geometry, followed = assemble_boundary_line(
+            [source], [], (.005, 0.), (.015, 0.), source_sections={0})
         self.assertEqual(geometry['coordinates'], [[.005, 0.], [.01, 0.], [.015, 0.]])
+        self.assertEqual([list(line.coords) for line in followed], [[(.005, 0.), (.01, 0.), (.015, 0.)]])
 
     def test_invalid_latitude_and_uncut_longitude_discontinuity_are_rejected(self):
         for points in [[(0., 91.), (1., 89.)], [(179., 0.), (-179., 1.)]]:
