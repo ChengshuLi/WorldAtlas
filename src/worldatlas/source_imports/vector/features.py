@@ -13,7 +13,7 @@ from shapely.geometry import Polygon, mapping
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.contracts import FeatureIdentity, NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
-from worldatlas.source_imports.shared.sources import acquire_sources, vector_dataset_path
+from worldatlas.source_imports.shared.sources import acquire_sources, gdal_dataset_path
 from worldatlas.source_imports.shared.storage import feature_result, save_features
 
 
@@ -104,7 +104,7 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
     # Use return codes here regardless of GDAL's exception setting elsewhere.
     with gdal.ExceptionMgr(useExceptions=False):
         source = gdal.OpenEx(
-            vector_dataset_path(path, member), gdal.OF_VECTOR, open_options=["@NATIVE_DATA=YES"]
+            gdal_dataset_path(path, member), gdal.OF_VECTOR, open_options=["@NATIVE_DATA=YES"]
         )
     if source is None:
         raise ValueError("source vector dataset cannot be opened")

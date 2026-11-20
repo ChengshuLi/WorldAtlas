@@ -3,7 +3,7 @@
 from pathlib import Path, PurePosixPath
 import time
 from typing import TypedDict
-from zipfile import ZipFile
+from zipfile import ZipFile, is_zipfile
 
 from worldatlas.source_assets.catalog import assemble_parts, catalog_sources, download_source
 from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
@@ -18,12 +18,35 @@ class MultipartSource(TypedDict):
     filename: NonEmptyText
 
 
-def vector_dataset_path(path, member=None):
-    """Find the vector dataset path understood by GDAL.
+def archive_member(archive, name):
+    """Select one relative file path in an open ZIP archive.
 
     Args:
-        path: Local vector file or ZIP archive.
-        member: Optional dataset path inside the archive.
+        archive: Open ``ZipFile`` containing the cataloged source.
+        name: Path inside the ZIP.
+
+    Returns:
+        The matching ZIP member.
+
+    Raises:
+        ValueError: The path is invalid, missing, or duplicated.
+    """
+    member_path = PurePosixPath(name or "")
+    if not name or member_path.is_absolute() or ".." in member_path.parts:
+        raise ValueError("invalid source archive member")
+    matches = [item for item in archive.infolist() if item.filename == name and not item.is_dir()]
+    if len(matches) != 1:
+        raise ValueError("selected archive member is missing or duplicated")
+    return matches[0]
+
+
+def gdal_dataset_path(path, member=None):
+    """Resolve a local dataset or an archive member for GDAL.
+
+    Args:
+        path: Local dataset or ZIP archive.
+        member: Dataset path inside the archive. An omitted ZIP member selects
+            the sole Shapefile in the archive.
 
     Returns:
         A filesystem path or GDAL virtual ZIP path.
@@ -33,23 +56,19 @@ def vector_dataset_path(path, member=None):
     """
     path = Path(path).resolve(strict=True)
     if path.suffix.lower() != ".zip":
-        if member is not None:
+        if member is None:
+            return str(path)
+        if not is_zipfile(path):
             raise ValueError("archive member supplied for a non-archive source")
-        return str(path)
     with ZipFile(path) as archive:
-        names = archive.namelist()
-    if member is None:
-        # GDAL finds the companion files from the Shapefile entry point.
-        candidates = [name for name in names if name.lower().endswith(".shp")]
-        if len(candidates) != 1:
-            raise ValueError("select one vector dataset archive member")
-        member = candidates[0]
-    member_path = PurePosixPath(member)
-    if member_path.is_absolute() or ".." in member_path.parts:
-        raise ValueError("invalid source archive member")
-    if names.count(member) != 1:
-        raise ValueError("selected vector archive member is missing or duplicated")
-    return f"/vsizip/{path}/{member}"
+        if member is None:
+            # GDAL finds the companion files from the Shapefile entry point.
+            candidates = [name for name in archive.namelist() if name.lower().endswith(".shp")]
+            if len(candidates) != 1:
+                raise ValueError("select one vector dataset archive member")
+            member = candidates[0]
+        selected = archive_member(archive, member)
+    return f"/vsizip/{{{path}}}/{selected.filename}"
 
 
 def acquire_sources(runtime, requests, *, evidence_source_ids=(), timing=None):

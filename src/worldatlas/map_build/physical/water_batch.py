@@ -15,6 +15,8 @@ import pyarrow as pa
 import pyarrow.compute as pc
 from osgeo import gdal, gdal_array, ogr
 
+import worldatlas.geodesy.ogr as geometry_io
+
 
 def finite_points(data, starts, lengths, selected):
     """Recognize only exact finite standard 2D Point WKB, in either byte order."""
@@ -77,20 +79,6 @@ def strip_wkb(source, top, bottom, step, coordinates, key):
     return struct.pack('<BII', 1, 3, len(rings)) + b''.join(rings)
 
 
-def tile_layer(geometry, srs):
-    """Populate a GDAL layer through its batch Arrow Python API."""
-    dataset = ogr.GetDriverByName('Memory').CreateDataSource('')
-    layer = dataset.CreateLayer('water', srs, ogr.wkbUnknown)
-    schema = pa.schema(
-        [pa.field('wkb_geometry', geometry.type, metadata={b'ARROW:extension:name': b'ogc.wkb'})]
-    )
-    if layer.WriteArrow(pa.record_batch([geometry], schema=schema)):
-        raise ValueError('GDAL Arrow tile layer write failed')
-    if layer.GetFeatureCount() != len(geometry):
-        raise ValueError('GDAL Arrow tile layer count mismatch')
-    return dataset, layer
-
-
 class WaterBatch:
     def __init__(self, output=None, method='hybrid'):
         if method not in ('hybrid', 'tiled'):
@@ -101,7 +89,9 @@ class WaterBatch:
         self.provenance = {
             'implementation': 'python-gdal-api-v2',
             'method': method,
-            'binding_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'binding_sha256': hashlib.sha256(
+                Path(__file__).read_bytes() + Path(geometry_io.__file__).read_bytes()
+            ).hexdigest(),
             'gdal': gdal.VersionInfo(),
         }
         self.timings = {'parse_validate_index_seconds': 0.0, 'tile_burn_seconds': 0.0}
@@ -240,7 +230,7 @@ class WaterBatch:
                 raise ValueError('GDAL tile transform failed')
             if srs is not None:
                 target.SetSpatialRef(srs)
-            dataset, layer = tile_layer(pc.take(geometry, pa.array(indices, type=pa.int64())), srs)
+            dataset, layer = geometry_io.geometry_layer(pc.take(geometry, pa.array(indices, type=pa.int64())), srs)
             if gdal.RasterizeLayer(target, [1], layer, burn_values=[1]):
                 raise ValueError('GDAL water geometry rasterization failed')
             layer = None

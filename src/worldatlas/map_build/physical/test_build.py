@@ -271,6 +271,8 @@ class PipelineTests(unittest.TestCase):
 
         def changed(path):
             path = Path(path)
+            if path == Path(b.geometry_io.__file__):
+                return 'd' * 64
             return (
                 'c' * 64
                 if path.parent == Path(b.__file__).parent and path.suffix == '.py'
@@ -280,7 +282,9 @@ class PipelineTests(unittest.TestCase):
         with mock.patch.object(b, 'sha', side_effect=changed):
             report = b.run(self.config, out, resume=True)
         self.assertEqual(report['status'], 'candidate-only')
-        self.assertTrue(all(value == 'c' * 64 for value in report['script_sha256'].values()))
+        scripts = report['script_sha256']
+        self.assertEqual(scripts['geodesy/ogr.py'], 'd' * 64)
+        self.assertTrue(all(value == 'c' * 64 for name, value in scripts.items() if name != 'geodesy/ogr.py'))
 
     def test_completed_resume_revalidates_shard_inventory(self):
         out = self.root / 'finished'

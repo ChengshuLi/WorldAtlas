@@ -9,29 +9,37 @@ import zipfile
 
 import numpy as np
 import osmium
-from osgeo import gdal, ogr, osr
+from osgeo import gdal, osr
+import pyarrow as pa
 from pyproj import CRS
 from pyproj import Transformer
 from shapely import to_wkb
 from shapely.geometry import LineString, Point, box
 from shapely.strtree import STRtree
 
+from worldatlas.geodesy.ogr import geometry_layer
+from worldatlas.source_imports.shared.sources import archive_member
+
 
 def _osm_files(paths, directory):
-    """Stage XML members of ZIP archives for Pyosmium's streaming reader."""
-    for index, path in enumerate(map(Path, paths)):
-        if not zipfile.is_zipfile(path):
+    """Stage archived extracts for Pyosmium's streaming reader."""
+    for index, selection in enumerate(paths):
+        path, name = selection if isinstance(selection, tuple) else (selection, None)
+        path = Path(path)
+        if name is None and not zipfile.is_zipfile(path):
             yield osmium.io.File(str(path), 'pbf' if path.suffix.lower() == '.pbf' else 'osm')
             continue
         with zipfile.ZipFile(path) as archive:
-            members = [item for item in archive.infolist() if item.filename.endswith(('.osm', '.xml'))]
+            members = ([archive_member(archive, name)] if name is not None else
+                       [item for item in archive.infolist() if item.filename.endswith(('.osm', '.xml'))])
             if not members:
                 raise ValueError('OSM archive has no XML responses')
             for member_index, member in enumerate(members):
-                unpacked = directory / f'{index}-{member_index}.osm'
+                kind = 'pbf' if member.filename.lower().endswith('.pbf') else 'osm'
+                unpacked = directory / f'{index}-{member_index}.{kind}'
                 with archive.open(member) as source, unpacked.open('wb') as output:
                     shutil.copyfileobj(source, output)
-                yield osmium.io.File(str(unpacked), 'osm')
+                yield osmium.io.File(str(unpacked), kind)
 
 
 @dataclass
@@ -48,7 +56,7 @@ class Waterways:
         """Read OSM extracts and connect rivers and streams downstream.
 
         Args:
-            paths: Local OSM XML, XML archive, or PBF files.
+            paths: Local OSM XML, XML archives, PBF files, or ``(archive, member)`` selections.
             natural_only: Whether to retain only rivers and streams and their nodes.
             reverse: IDs of natural waterways with reviewed direction corrections.
         """
@@ -372,17 +380,12 @@ def rasterize(lines, grid):
     destination = gdal.GetDriverByName('MEM').Create('', width, height, 1, gdal.GDT_Byte)
     destination.SetGeoTransform(grid.transform)
     destination.SetProjection(CRS.from_user_input(grid.crs).to_wkt())
-    vector = ogr.GetDriverByName('Memory').CreateDataSource('')
     source_crs = osr.SpatialReference()
     source_crs.ImportFromEPSG(4326)
     source_crs.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    layer = vector.CreateLayer('lines', source_crs, ogr.wkbLineString)
-    definition = layer.GetLayerDefn()
-    for geometry in to_wkb(list(lines)):
-        feature = ogr.Feature(definition)
-        feature.SetGeometry(ogr.CreateGeometryFromWkb(geometry))
-        layer.CreateFeature(feature)
-    if layer.GetFeatureCount():
+    geometry = pa.array(to_wkb(list(lines)), type=pa.binary())
+    if len(geometry):
+        vector, layer = geometry_layer(geometry, source_crs)
         gdal.RasterizeLayer(destination, [1], layer, burn_values=[1], options=['ALL_TOUCHED=TRUE'])
     return destination.ReadAsArray().astype(bool)
 

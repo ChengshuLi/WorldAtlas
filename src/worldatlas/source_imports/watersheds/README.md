@@ -11,7 +11,7 @@ The watershed importer reads a construction record from Neon, downloads its veri
 | [`drainage.py`](drainage.py) | Calculate eight-neighbor flow and downstream destinations. |
 | [`waterways.py`](waterways.py) | Read natural waterways and trace their drainage destinations. |
 | [`basins.py`](basins.py) | Read provider basin polygons with GDAL and classify terrain outlets. |
-| [`sources.py`](sources.py) | Select lines and points from local provider files and archives. |
+| [`sources.py`](sources.py) | Select source lines and points and resolve the files needed by each reader. |
 | [`boundary.py`](boundary.py) | Find connected divides and shared joins, then assemble the final line. |
 | [`worldatlas.source_assets`](../../source_assets/README.md) | Resolve catalog IDs and verify downloaded or multipart files. |
 | [`../shared/storage.py`](../shared/storage.py) | Validate and save geometry with its construction reference. |
@@ -53,6 +53,8 @@ Source basin values identify drainage groups. A group can include several basins
 
 When `basins` selects a Shapefile in a ZIP, GDAL opens the selected `.shp` member and reads its companion files inside the archive. The provider attribute named by `basin_attribute` supplies the IDs used in `groups`. Basin lookups for terrain exits and coastal land outlets are batched, with all basin matches retained for each cell.
 
+Terrain readers also open selected ZIP members through GDAL. GeoJSON readers stream selected members through Python's ZIP library.
+
 Before processing terrain, the constructor checks rivers that intersect the analysis areas and follows their downstream connections. Missing coordinates or an unresolved route stop the run with the relevant way and node IDs. This includes a fork with one known branch and one unresolved branch. Correct the raw data or the source-backed destination references and rerun. Unrelated waterways outside the analysis do not block construction.
 
 If source evidence establishes that a mapped way points upstream, list its ID in `reverse_waterways` and record the supporting measurements and reason in the construction record. The constructor reverses the direction for tracing while preserving the way's coordinates and source ID.
@@ -61,7 +63,7 @@ The result includes the river-crossing check, shared sections with their source 
 
 Mapped rivers can continue through several estuary ways beyond the basin polygons. Trace back through that uncovered geometry to the downstream-most basin intersection on each path. Report the selected way, group and intersection. Stop at an unselected or ambiguous source basin; a path without a source-backed destination remains unassigned.
 
-Pyosmium reads both OSM XML and PBF. ZIP members are unpacked to temporary files for the same streaming reader. For natural drainage, the reader merges way versions from all files before loading the node coordinates they reference. This lets a way use points supplied by another file. Natural drainage includes rivers and streams. Shared nodes and way endpoints preserve downstream connections without turning every shape vertex into a separate graph junction. Raster seeding selects intersecting ways without clipping their geometry or downstream relationships. GDAL receives the line coordinates in binary form and marks each terrain cell they touch.
+Pyosmium reads both OSM XML and PBF. ZIP members are unpacked to temporary files for the same streaming reader. For natural drainage, the reader merges way versions from all files before loading the node coordinates they reference. This lets a way use points supplied by another file. Natural drainage includes rivers and streams. Shared nodes and way endpoints preserve downstream connections without turning every shape vertex into a separate graph junction. Raster seeding selects intersecting ways without clipping their geometry or downstream relationships. The shared GDAL writer passes all lines in one Arrow batch, and GDAL marks each terrain cell they touch.
 
 ## Terrain and flow
 

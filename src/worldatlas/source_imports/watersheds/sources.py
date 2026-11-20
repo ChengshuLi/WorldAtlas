@@ -1,46 +1,31 @@
 """Read selected provider vertices, ways and river relations from verified files."""
 import json
-from pathlib import Path
-from tempfile import NamedTemporaryFile
-import shutil
-import zipfile
+from zipfile import ZipFile
 
 import numpy as np
 from shapely.geometry import LineString
 
-from worldatlas.source_imports.shared.sources import vector_dataset_path
+from worldatlas.source_imports.shared.sources import archive_member, gdal_dataset_path
 from worldatlas.source_imports.watersheds.waterways import Waterways
 
 
 class Sources:
     def __init__(self, files):
         self.files = files
-        self.networks, self.extracted = {}, {}
+        self.networks = {}
         self.points = {}
 
-    def member(self, source, name):
-        key = (source, name)
-        if key in self.extracted:
-            return self.extracted[key]
-        if not name or '..' in Path(name).parts or Path(name).is_absolute():
-            raise ValueError('invalid source archive member')
-        directory = self.files[source].parent / 'extracted'
-        directory.mkdir(exist_ok=True)
-        destination = directory / name
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        temporary = NamedTemporaryFile(dir=directory, prefix='extract-', delete=False)
-        try:
-            with temporary, zipfile.ZipFile(self.files[source]) as archive, archive.open(name) as stream:
-                shutil.copyfileobj(stream, temporary, 1 << 20)
-            Path(temporary.name).replace(destination)
-        finally:
-            Path(temporary.name).unlink(missing_ok=True)
-        self.extracted[key] = destination
-        return destination
-
     def path(self, specification):
-        source = specification['source']
-        return self.member(source, specification['member']) if 'member' in specification else self.files[source]
+        """Resolve a terrain file or selected ZIP member for GDAL.
+
+        Args:
+            specification: A source alias in ``source`` and an optional ZIP member.
+
+        Returns:
+            The local file or GDAL virtual path.
+        """
+        path = self.files[specification['source']]
+        return gdal_dataset_path(path, specification['member']) if 'member' in specification else path
 
     def vector_path(self, selection):
         """Resolve a vector file or its selected ZIP member for GDAL.
@@ -52,12 +37,17 @@ class Sources:
             The GDAL dataset path.
         """
         if isinstance(selection, str):
-            return vector_dataset_path(self.files[selection])
-        return vector_dataset_path(self.files[selection['source']], selection.get('member'))
+            return gdal_dataset_path(self.files[selection])
+        return gdal_dataset_path(self.files[selection['source']], selection.get('member'))
 
     def network(self, sources, *, natural_only=False, reverse=()):
-        paths = [self.path(source) if isinstance(source, dict) else self.files[source]
-                 for source in sources]
+        paths = []
+        for selection in sources:
+            if isinstance(selection, str):
+                paths.append(self.files[selection])
+            else:
+                path = self.files[selection['source']]
+                paths.append((path, selection['member']) if 'member' in selection else path)
         reverse = tuple(sorted(set(map(str, reverse))))
         key = tuple(paths), natural_only, reverse
         if key not in self.networks:
@@ -114,7 +104,13 @@ class Sources:
             points = self.river(part)
         elif 'geojson_feature' in part:
             allowed = {'source', 'member', 'geojson_feature'}
-            document = json.loads(self.path(part).read_bytes())
+            path = self.files[part['source']]
+            if 'member' in part:
+                with ZipFile(path) as archive, archive.open(archive_member(archive, part['member'])) as stream:
+                    document = json.load(stream)
+            else:
+                with path.open('rb') as stream:
+                    document = json.load(stream)
             geometry = document['features'][part['geojson_feature']]['geometry']
             if geometry['type'] != 'LineString':
                 raise ValueError('selected GeoJSON feature must be a line')

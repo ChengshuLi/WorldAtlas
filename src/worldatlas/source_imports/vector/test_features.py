@@ -10,7 +10,7 @@ from zipfile import ZipFile
 from osgeo import ogr, osr
 
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.source_imports.shared.sources import vector_dataset_path
+from worldatlas.source_imports.shared.sources import gdal_dataset_path
 from worldatlas.source_imports.vector.features import read_features
 
 
@@ -386,12 +386,12 @@ class VectorTests(unittest.TestCase):
             read_features(path, **self.recipe)[0]["geometry"]["coordinates"], [20, 10]
         )
         with self.assertRaisesRegex(ValueError, "missing"):
-            vector_dataset_path(path, "missing")
+            gdal_dataset_path(path, "missing")
         for member in ("../source.geojson", "/source.geojson"):
             with self.subTest(member=member), self.assertRaisesRegex(ValueError, "invalid source archive member"):
-                vector_dataset_path(path, member)
+                gdal_dataset_path(path, member)
         with self.assertRaisesRegex(ValueError, "non-archive"):
-            vector_dataset_path(self.path, "member")
+            gdal_dataset_path(self.path, "member")
 
     def test_zip_with_one_shapefile_can_select_it_automatically(self):
         reference = osr.SpatialReference()
@@ -413,4 +413,4 @@ class VectorTests(unittest.TestCase):
             for member in members:
                 archive.write(member, f"other/{member.name}")
         with self.assertRaisesRegex(ValueError, "select one vector dataset archive member"):
-            vector_dataset_path(path)
+            gdal_dataset_path(path)

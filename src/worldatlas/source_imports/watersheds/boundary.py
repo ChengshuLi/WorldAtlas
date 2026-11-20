@@ -6,7 +6,7 @@ import numpy as np
 from pyproj import CRS, Transformer
 from scipy.sparse import csr_array
 from scipy.sparse.csgraph import dijkstra
-from shapely import intersection as intersect_geometries, linestrings
+from shapely import get_coordinates, intersection as intersect_geometries, linestrings, remove_repeated_points
 from shapely.geometry import LineString, Point
 from shapely.ops import substring
 from shapely.strtree import STRtree
@@ -313,16 +313,14 @@ def assemble(sections, joins, start, end, *, waypoints=None, connections=None):
                 connections[str(index)] = {'waypoints': receipts}
         points = list(cut.coords)
         points[0], points[-1] = first.point, last.point
-        for point in points:
-            if not coordinates or coordinates[-1] != point:
-                coordinates.append(point)
-    line = LineString(coordinates)
-    values = np.asarray(coordinates)
+        coordinates.extend(points)
+    line = remove_repeated_points(LineString(coordinates), tolerance=0)
+    values = get_coordinates(line)
     if (not line.is_simple or not line.is_valid or not np.isfinite(values).all() or
             np.any(np.abs(values[:, 0]) > 180) or np.any(np.abs(values[:, 1]) > 90) or
             np.any(np.abs(np.diff(values[:, 0])) > 180)):
         raise ValueError('assembled boundary is not a finite simple WGS84 line without a longitude discontinuity')
-    return {'type': 'LineString', 'coordinates': [list(map(float, point)) for point in coordinates]}
+    return {'type': 'LineString', 'coordinates': values.tolist()}
 
 
 def cell_at(grid, point, *, required=True):

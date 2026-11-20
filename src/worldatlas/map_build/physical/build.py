@@ -18,6 +18,7 @@ import threading
 import time
 import uuid
 
+import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.execution import control
 from worldatlas.map_build.physical import land, water, union as water_union, composition
 
@@ -369,6 +370,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             'composition.py',
         )
     }
+    scripts['geodesy/ogr.py'] = sha(geometry_io.__file__)
     output = Path(output).resolve()
     inputs = [manifest_path, land_path, water_path, source_path] + [x[0] for x in raw]
     inputs += [Path(item['path']).resolve() for spec in land_cfg['land'] for item in spec['files']]

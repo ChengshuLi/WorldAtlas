@@ -185,6 +185,19 @@ class ConstructionTests(unittest.TestCase):
             self.assertEqual(build_fixture(recipe, files)[0], geometry)
             self.assertFalse((files['basins'].parent / 'extracted').exists())
 
+    def test_native_terrain_can_be_read_directly_from_a_zip_member(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            original, _ = build_fixture(recipe, files)
+            archive = Path(directory) / 'terrain.zip'
+            with zipfile.ZipFile(archive, 'w') as output:
+                output.write(files['dem'], 'nested/dem.tif')
+            files['dem'] = archive
+            recipe['terrains']['ridge']['primary'] = [{'source': 'dem', 'member': 'nested/dem.tif'}]
+            geometry, _ = build_fixture(recipe, files)
+            self.assertEqual(geometry, original)
+            self.assertFalse((archive.parent / 'extracted').exists())
+
     def test_explicit_output_area_keeps_the_native_construction_unchanged(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))

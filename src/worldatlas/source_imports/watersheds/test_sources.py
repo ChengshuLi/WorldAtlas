@@ -37,14 +37,39 @@ class SourceGeometryTests(unittest.TestCase):
         line = sources.line([dict(source='river', relation='30', role='main_stream', start_node='1')])
         self.assertEqual(list(line.coords), [(0., 0.), (1., 1.), (2., 0.)])
 
-    def test_archive_member_cannot_escape_its_source_directory(self):
+    def test_selected_geojson_archive_member_is_read_without_extraction(self):
         archive = self.root / 'provider.zip'
+        geometry = {'type': 'LineString', 'coordinates': [[0, 0], [1, 1]]}
+        document = json.dumps({'features': [{'geometry': geometry}]})
         with zipfile.ZipFile(archive, 'w') as output:
-            output.writestr('nested/source.txt', 'source data')
+            output.writestr('nested/source.geojson', document)
+            output.writestr('../source.geojson', document)
         sources = Sources({'provider': archive})
-        self.assertEqual(sources.member('provider', 'nested/source.txt').read_text(), 'source data')
+        selection = {'source': 'provider', 'geojson_feature': 0, 'member': 'nested/source.geojson'}
+        self.assertEqual(list(sources.line([selection]).coords), [(0., 0.), (1., 1.)])
         with self.assertRaisesRegex(ValueError, 'invalid source archive member'):
-            sources.member('provider', '../lines.shp')
+            sources.line([dict(selection, member='../source.geojson')])
+        self.assertEqual(list(self.root.iterdir()), [archive])
+
+    def test_network_reads_the_selected_pbf_or_xml_member_of_an_archive(self):
+        archive = self.root / 'provider.zip'
+        pbf = self.root / 'way.osm.pbf'
+        with osmium.SimpleWriter(str(pbf)) as writer:
+            writer.add_node(osmium.osm.mutable.Node(id=1, location=(0., 0.)))
+            writer.add_node(osmium.osm.mutable.Node(id=2, location=(1., 1.)))
+            writer.add_way(osmium.osm.mutable.Way(id=10, nodes=[1, 2], tags={'waterway': 'stream'}))
+        with zipfile.ZipFile(archive, 'w') as output:
+            output.write(pbf, 'nested/way.osm.pbf')
+            output.writestr('nested/way.osm', '<osm version="0.6"><node id="1" lon="0" lat="0"/>'
+                            '<node id="2" lon="1" lat="1"/><way id="10"><nd ref="1"/><nd ref="2"/>'
+                            '<tag k="waterway" v="stream"/></way></osm>')
+            output.writestr('unused.osm', 'not an OSM document')
+        sources = Sources({'provider': archive})
+        for member in ('nested/way.osm.pbf', 'nested/way.osm'):
+            with self.subTest(member=member):
+                network = sources.network([{'source': 'provider', 'member': member}], natural_only=True)
+                self.assertEqual(list(network.line(10).coords), [(0., 0.), (1., 1.)])
+        self.assertFalse((self.root / 'extracted').exists())
 
     def test_unused_shapefile_line_selection_is_not_silently_accepted(self):
         sources = Sources({})
