@@ -43,6 +43,41 @@ def _osm_files(paths, directory):
                 yield osmium.io.File(str(unpacked), kind)
 
 
+def _point_intersections(hit):
+    """Yield isolated point intersections, leaving shared line sections alone."""
+    if hit.geom_type == 'Point' and not hit.is_empty:
+        yield tuple(hit.coords[0])
+    elif hit.geom_type in ('MultiPoint', 'GeometryCollection'):
+        for part in hit.geoms:
+            yield from _point_intersections(part)
+
+
+def _line_neighbors(line, coordinates, point):
+    """Find the vertices immediately before and after an interior line point."""
+    matches = np.flatnonzero(np.all(coordinates[1:-1] == point, axis=1))
+    if matches.size:
+        index = matches[0]
+        return coordinates[index], coordinates[index + 2]
+    steps = np.diff(coordinates, axis=0)
+    station = line.project(Point(point))
+    index = np.searchsorted(np.cumsum(np.hypot(steps[:, 0], steps[:, 1])), station)
+    index = min(index, len(coordinates) - 2)
+    return coordinates[index], coordinates[index + 1]
+
+
+def _boundary_side(point, before, after, neighbor):
+    """Return which of the boundary's two local sectors contains a river arm."""
+    def angle(vertex):
+        return math.atan2(vertex[1] - point[1], vertex[0] - point[0])
+
+    start = angle(before)
+    end = (angle(after) - start) % math.tau
+    arm = (angle(neighbor) - start) % math.tau
+    if arm == 0 or arm == end:
+        return 0
+    return 1 if arm < end else -1
+
+
 @dataclass
 class Way:
     nodes: tuple
@@ -215,48 +250,114 @@ class Waterways:
                     f'from node {section["nodes"][1]}; known groups={section["groups"]}; '
                     f'first unresolved node={section["unresolved_node"]}; repair the source')
 
-    def check_crossings(self, geometry):
-        """Check the final line against river interiors, allowing real endpoints.
+    def fork_destinations(self, node, assigned):
+        """Get the known drainage group of each immediate downstream arm.
 
-        A natural fork or confluence ends a river section. An arbitrary OSM way
-        split with two incident neighbours does not. No locations are exempted.
+        Args:
+            node: OSM node ID of the selected fork.
+            assigned: Known destinations keyed by directed network edge.
+
+        Returns:
+            Downstream neighbor IDs and their groups, or an empty mapping if
+            any arm lacks one unambiguous group.
         """
-        ports = defaultdict(set)
-        for references in self.edge_sources.values():
-            for ident, first, last in references:
-                nodes = self.ways[ident].nodes
-                ports[nodes[first]].add(nodes[first + 1])
-                ports[nodes[last]].add(nodes[last - 1])
-        contacts = defaultdict(list)
-        for node, neighbors in ports.items():
-            if len(neighbors) != 2:
-                contacts[self.nodes[node]].append((node, len(neighbors)))
-        endpoints = {tuple(geometry.coords[0]), tuple(geometry.coords[-1])}
+        destinations = {}
+        for downstream in self.downstream.get(node, ()):
+            edge = node, downstream
+            groups = assigned.get(edge, ())
+            if len(groups) != 1:
+                return {}
+            group, = groups
+            for way, start, _ in self.edge_sources[edge]:
+                neighbor = self.ways[way].nodes[start + 1]
+                if destinations.setdefault(neighbor, group) != group:
+                    return {}
+        return destinations
+
+    def check_crossings(self, geometry, *, shared_forks=None):
+        """Reject downstream crossings at isolated river/boundary intersections.
+
+        Args:
+            geometry: The final simple WGS84 boundary line.
+            shared_forks: Selected fork IDs and their source-backed outgoing
+                neighbor IDs and drainage groups.
+
+        Returns:
+            The crossing check, including allowed endpoint, junction, and
+            shared-drainage contacts.
+
+        Raises:
+            ValueError: Water flows across the boundary at an isolated point
+                without a selected fork that separates distinct drainage groups.
+        """
+        shared_forks = shared_forks or {}
+        coordinates = np.asarray(geometry.coords)
+        endpoints = {tuple(coordinates[0]), tuple(coordinates[-1])}
         self.in_bounds(geometry.bounds)
-        crossings, junctions, river_ends = {}, set(), set()
+        ways = [self._spatial_ids[index] for index in self._spatial.query(geometry, predicate='intersects')]
+        hits = defaultdict(set)
+        for ident in ways:
+            for point in _point_intersections(geometry.intersection(self.line(ident))):
+                if point not in endpoints:
+                    hits[point].add(ident)
 
-        def intersection_points(hit):
-            if hit.geom_type == 'Point':
-                yield tuple(hit.coords[0])
-            elif hit.geom_type in ('MultiPoint', 'GeometryCollection'):
-                for part in hit.geoms:
-                    yield from intersection_points(part)
-            # Following a river along a line is not a transverse crossing.
-
-        for index in self._spatial.query(geometry, predicate='intersects'):
-            ident = self._spatial_ids[int(index)]
-            for point in intersection_points(geometry.intersection(self.line(ident))):
-                if point in endpoints:
+        # Join arms by OSM node ID. Two unrelated streams can touch the same
+        # coordinate, and a single stream can be split across several ways.
+        arms = defaultdict(lambda: defaultdict(set))
+        vertex_hits = defaultdict(set)
+        for ident in ways:
+            nodes = self.ways[ident].nodes
+            for index, node in enumerate(nodes):
+                point = self.nodes[node]
+                if point not in hits:
                     continue
-                matching = [(node, degree) for node, degree in contacts.get(point, [])
-                            if node in self.ways[ident].nodes]
-                if matching:
-                    for node, degree in matching:
-                        (junctions if degree > 2 else river_ends).add(node)
-                else:
-                    crossings.setdefault(point, set()).add(ident)
+                vertex_hits[point].add(ident)
+                if index:
+                    arms[point][node].add((ident, nodes[index - 1], False))
+                if index + 1 < len(nodes):
+                    arms[point][node].add((ident, nodes[index + 1], True))
+
+        crossings, junctions, river_ends, shared = defaultdict(set), set(), set(), {}
+        for point, hit_ways in sorted(hits.items()):
+            before, after = _line_neighbors(geometry, coordinates, point)
+
+            def side(neighbor):
+                return _boundary_side(point, before, after, neighbor)
+
+            for ident in hit_ways - vertex_hits[point]:
+                river = self.line(ident)
+                entry, exit = _line_neighbors(river, np.asarray(river.coords), point)
+                if side(entry) * side(exit) == -1:
+                    crossings[point].add(ident)
+
+            for node, branches in arms[point].items():
+                incoming, outgoing = set(), {}
+                neighbors = {neighbor for _, neighbor, _ in branches}
+                for _, neighbor, leaves in branches:
+                    sector = side(self.nodes[neighbor])
+                    if leaves:
+                        outgoing[neighbor] = sector
+                    else:
+                        incoming.add(sector)
+                crosses = any(-sector in incoming for sector in outgoing.values() if sector)
+                if crosses:
+                    groups = shared_forks.get(node, {})
+                    if len(incoming) == 1 and set(outgoing.values()) == {-1, 1} and groups.keys() == outgoing.keys():
+                        by_side = {sector: {groups[n] for n in outgoing if outgoing[n] == sector}
+                                   for sector in (-1, 1)}
+                        if all(len(values) == 1 for values in by_side.values()) and by_side[-1] != by_side[1]:
+                            shared[node] = sorted(set(groups.values()))
+                            junctions.add(node)
+                            continue
+                    crossings[point].update(ident for ident, _, _ in branches)
+                elif len(neighbors) > 2:
+                    junctions.add(node)
+                elif len(neighbors) == 1:
+                    river_ends.add(node)
         result = {'checked_natural_ways': len(self._spatial_ids),
                   'junction_contacts': sorted(junctions), 'river_endpoint_contacts': sorted(river_ends),
+                  'shared_drainage_contacts': [
+                      {'node': node, 'groups': shared[node]} for node in sorted(shared)],
                   'crossings': [{'point': list(point), 'ways': sorted(ways)}
                                 for point, ways in sorted(crossings.items())]}
         if crossings:

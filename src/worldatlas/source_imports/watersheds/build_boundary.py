@@ -99,7 +99,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
     sources = Sources(files)
     lines = {name: sources.line(selection) for name, selection in line_selections.items()}
     report['source_geometry_seconds'] = time.monotonic() - started
-    divides, connections, networks = {}, {}, []
+    divides, connections, networks = {}, {}, {}
     for name, settings in (terrains or {}).items():
         phase = time.monotonic()
         domains = settings['domains']
@@ -127,8 +127,19 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
         assigned, network_report = (network.groups(settings['waterway_groups'])
                                     if 'waterway_groups' in settings else network.basin_groups(basins))
         network.require_destinations(geographic_bounds, network_report)
-        if network not in networks:
-            networks.append(network)
+        shared_forks = networks.setdefault(network, {})
+        for section in sections:
+            if section.get('divide') != name:
+                continue
+            for waypoint in section.get('via', ()):
+                if 'node' not in waypoint:
+                    continue
+                node = str(waypoint['node'])
+                destinations = network.fork_destinations(node, assigned)
+                groups = set(destinations.values())
+                if (len(groups) == 2 and any(groups == set(map(int, pair)) for pair in settings['interfaces'])
+                        and network.nodes[node] == sources.point(waypoint, lines)):
+                    shared_forks[node] = destinations
         network_seconds = time.monotonic() - phase
         required = [(i, section['flow']) for i, section in enumerate(sections)
                     if 'flow' in section and section['flow']['terrain'] == name]
@@ -285,7 +296,8 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
                         selected_point(end, retain_join=True),
                         waypoints=waypoints, connections=report['connections'])
     final_line = LineString(geometry['coordinates'])
-    report['river_checks'] = [network.check_crossings(final_line) for network in networks]
+    report['river_checks'] = [network.check_crossings(final_line, shared_forks=forks)
+                              for network, forks in networks.items()]
     report['joins'] = [list(join.point) for join in chosen_joins]
     report['assembly_seconds'] = time.monotonic() - phase
     report['construction_seconds'] = time.monotonic() - started

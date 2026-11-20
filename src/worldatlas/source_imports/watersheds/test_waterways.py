@@ -31,16 +31,40 @@ class WaterwayTests(unittest.TestCase):
                 ''.join(f'<nd ref="{n}"/>' for n in nodes) +
                 f'<tag k="waterway" v="{kind}"/></way>')
 
-    def test_real_junction_contact_is_allowed_independently_of_way_splits(self):
-        nodes = (self.node(1, 0, 2) + self.node(2, 0, 0) +
-                 self.node(3, -2, -2) + self.node(4, 2, -2))
-        boundary = LineString([(-1, -.2), (0, 0), (1, -.2)])
+    def test_selected_shared_drainage_fork_passes_independently_of_way_splits(self):
+        nodes = (self.node(1, -2, 2) + self.node(2, 0, 0) +
+                 self.node(3, 2, 2) + self.node(4, 2, -2))
+        boundary = LineString([(-1, 0), (1, 0)])
         for name, ways in [('whole', self.way(10, [1, 2, 3])),
                            ('split', self.way(10, [1, 2]) + self.way(11, [2, 3]))]:
             network = Waterways([self.write(name + '.osm', nodes + ways + self.way(20, [2, 4]))])
-            result = network.check_crossings(boundary)
+            continuing = '10' if name == 'whole' else '11'
+            for selections in ({3: [continuing, '20']}, {3: [continuing], 7: ['20']}):
+                assigned, _ = network.groups(selections)
+                reviewed = {'2': network.fork_destinations('2', assigned)}
+                if len(selections) == 1:
+                    with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
+                        network.check_crossings(boundary, shared_forks=reviewed)
+            with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
+                network.check_crossings(boundary)
+            result = network.check_crossings(boundary, shared_forks=reviewed)
             self.assertEqual(result['crossings'], [])
             self.assertEqual(result['junction_contacts'], ['2'])
+            self.assertEqual(result['shared_drainage_contacts'], [{'node': '2', 'groups': [3, 7]}])
+
+    def test_tributary_at_the_crossing_does_not_exempt_the_main_channel(self):
+        nodes = (self.node(1, 0, 2) + self.node(2, 0, 0) +
+                 self.node(3, 0, -2) + self.node(4, 2, 2))
+        ways = self.way(10, [1, 2, 3]) + self.way(20, [4, 2])
+        network = Waterways([self.write('confluence.osm', nodes + ways)])
+        with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
+            network.check_crossings(LineString([(-1, 0), (1, 0)]))
+
+    def test_a_point_touch_stays_on_one_side(self):
+        nodes = self.node(1, 0, -2) + self.node(2, 0, 2)
+        network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2]))])
+        boundary = LineString([(-1, -1), (0, 0), (-1, 1)])
+        self.assertEqual(network.check_crossings(boundary)['crossings'], [])
 
     def test_crossing_at_an_arbitrary_way_split_is_still_rejected(self):
         nodes = self.node(1, 0, 2) + self.node(2, 0, 0) + self.node(3, 0, -2)
