@@ -12,6 +12,10 @@ import re
 import shutil
 import tempfile
 
+from botocore.exceptions import ClientError
+from psycopg.conninfo import conninfo_to_dict
+import psycopg
+
 from worldatlas.map_build.execution.runtime import digest, json_bytes, pin, verify_pins
 from worldatlas.map_build.inputs.selection import (
     entity_colors,
@@ -31,6 +35,10 @@ from worldatlas.map_releases.inputs import (
     restore_inputs,
     write_inputs,
 )
+from worldatlas.map_build import build as map_build
+from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.execution.code_archive import read_source
+from worldatlas.map_build.physical import build as physical
 
 STREAMS = ("rows", "runs")
 CANDIDATE = re.compile(r"(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*")
@@ -117,8 +125,6 @@ def build_bundle(candidate, run, viewer, bundle):
 
     request = read(Path(request_pin["path"]))
     summary = read(final_directory / "report.json")
-    from worldatlas.map_build.core.grid import Grid
-
     grid = vars(Grid(**summary["grid"]))
     counts = summary["counts"]
     if sum(counts.values()) != grid["width"] * grid["height"]:
@@ -206,8 +212,6 @@ def build_bundle(candidate, run, viewer, bundle):
     )
     config.write_bytes(json_bytes(viewer_config))
 
-    from worldatlas.map_build.execution.code_archive import read_source
-
     attempts, source_code = [], {}
     for producer in sorted((run / "attempts").glob("*/producer.json")):
         attempt = read(producer)
@@ -279,8 +283,6 @@ def verify_object(storage, bucket, key, expected, *, return_bytes=False):
 
 
 def upload_bundle(storage, bucket, candidate, bundle, manifest):
-    from botocore.exceptions import ClientError
-
     for name, asset in manifest["objects"].items():
         key = asset["r2_key"]
         with (bundle / name).open("rb") as body:
@@ -300,8 +302,6 @@ def upload_bundle(storage, bucket, candidate, bundle, manifest):
 
 def retire_previews(db, storage, map_version):
     """Retire unpublished siblings only after a final candidate is official."""
-    from botocore.exceptions import ClientError
-
     official = db.execute(
         "SELECT id FROM atlas.map_releases WHERE map_version=%s AND is_official",
         (map_version,),
@@ -349,8 +349,6 @@ def put_homepage(storage, bucket, key, html, **condition):
 
 
 def homepage_condition(storage, bucket):
-    from botocore.exceptions import ClientError
-
     try:
         return {"IfMatch": storage.head_object(Bucket=bucket, Key=HOMEPAGE)["ETag"]}
     except ClientError as exc:
@@ -381,8 +379,6 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
         content_type="application/json",
     )
     # Publish the manifest after all its immutable assets exist.
-    from botocore.exceptions import ClientError
-
     try:
         storage.put_object(
             Bucket=bucket,
@@ -458,9 +454,6 @@ def main():
     if not (connection := os.environ.get("NEON_DATABASE_URL")):
         parser.error("set NEON_DATABASE_URL to the release catalog database")
 
-    import psycopg
-    from psycopg.conninfo import conninfo_to_dict
-
     if "-pooler." in conninfo_to_dict(connection).get("host", ""):
         parser.error("use a direct Neon connection for the release lock")
 
@@ -470,9 +463,6 @@ def main():
             if args.action == "restore-inputs":
                 release = lookup_release(db, args.candidate)
                 bucket = release["r2_bucket"]
-                from worldatlas.map_build.physical import build as physical
-                from worldatlas.map_build import build as map_build
-
                 endpoint = read(Path(map_build.__file__).with_name("config.json"))[
                     "physical_controls"
                 ]["source_staging"]["endpoint_url"]
@@ -498,15 +488,11 @@ def main():
                 db.execute(
                     "SELECT pg_advisory_lock(hashtext('atlas.release_publication'))"
                 )
-            from worldatlas.map_build.physical import build as physical
-
             if args.action == "stage":
                 endpoint = manifest["inputs"].get("r2_endpoint")
             else:
                 endpoint = None
             if endpoint is None:
-                from worldatlas.map_build import build as map_build
-
                 endpoint = read(Path(map_build.__file__).with_name("config.json"))[
                     "physical_controls"
                 ]["source_staging"]["endpoint_url"]

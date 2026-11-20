@@ -5,6 +5,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 import numpy as np
+from pyproj import Geod
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import open_grid, row
@@ -12,6 +13,7 @@ from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.division.shores import ShoreGeometry
 from worldatlas.map_build.division.policies import nearest_basin_water
 from worldatlas.map_build.water.tests.helpers import rle
+from worldatlas.map_build.division.intervals import Eligibility, combine
 
 
 class BasinTests(unittest.TestCase):
@@ -130,8 +132,6 @@ class BasinTests(unittest.TestCase):
             self.calculate(bounds=(12, 15, 7, 11))
 
     def test_independent_coastal_and_basin_claims_must_agree(self):
-        from worldatlas.map_build.division.intervals import Eligibility, combine
-
         with self.assertRaisesRegex(ValueError, "ownership conflict"):
             combine(
                 (np.array([1]), np.array([1])),
@@ -144,8 +144,6 @@ class BasinTests(unittest.TestCase):
             )
 
     def test_assignment_matches_complete_independent_distances(self):
-        from pyproj import Geod
-
         _, values = self.calculate()
         geod = Geod(ellps="WGS84")
         for y in range(7, 11):

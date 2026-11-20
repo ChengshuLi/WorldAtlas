@@ -11,6 +11,17 @@ gdal.UseExceptions()
 
 @dataclass
 class Grid:
+    """Hold a terrain crop and the information needed to locate its cells.
+
+    Args:
+        elevation: Heights in metres, indexed by row and column.
+        transform: GDAL coefficients that map crop indices to source coordinates.
+        crs: Coordinate reference of the source raster.
+        secondary_cells: Number of primary heights filled from secondary terrain.
+        native_origin: The same coefficients for the uncropped reference grid, if known.
+        window_offset: Row and column of the crop's first cell in that grid.
+    """
+
     elevation: np.ndarray
     transform: tuple
     crs: str
@@ -19,7 +30,18 @@ class Grid:
     window_offset: tuple = (0, 0)
 
     def coordinates(self, rows, columns, center=True):
+        """Convert crop-relative grid positions to source coordinates.
+
+        Args:
+            rows: Row indices, as a scalar or an array.
+            columns: Column indices, with a shape compatible with rows.
+            center: Whether integer indices denote cell centers or upper-left corners.
+
+        Returns:
+            The x and y coordinates in the grid's coordinate reference.
+        """
         offset = .5 if center else 0.
+        # Use the common origin so overlapping crops compute identical coordinates.
         x, a, b, y, d, e = self.native_origin or self.transform
         rows, columns = rows + self.window_offset[0], columns + self.window_offset[1]
         return (x + (columns + offset) * a + (rows + offset) * b,
@@ -29,9 +51,20 @@ class Grid:
 def read_native(paths, bounds, *, bounds_crs=4326):
     """Crop aligned source tiles without changing their cell positions or values.
 
-    Bounds use bounds_crs (WGS84 by default). Native projected rectangles avoid
-    enlarging a crop through an unnecessary round trip through longitude and
-    latitude. Later valid tiles take precedence in the selected source order.
+    Native projected rectangles avoid enlarging a crop through a round trip
+    through longitude and latitude. Later valid tiles take precedence in the
+    selected source order.
+
+    Args:
+        paths: Aligned primary raster dataset paths, in compositing order.
+        bounds: West, south, east, and north limits in the bounds coordinate reference.
+        bounds_crs: Coordinate reference of those limits, WGS84 by default.
+
+    Returns:
+        The native grid window, with missing heights represented by NaN.
+
+    Raises:
+        ValueError: The requested bounds or primary tile grid is invalid.
     """
     if not paths or len(bounds) != 4 or not np.isfinite(bounds).all():
         raise ValueError('source tiles and finite analysis bounds are required')
@@ -51,6 +84,7 @@ def read_native(paths, bounds, *, bounds_crs=4326):
         raise ValueError('a finite north-up native grid is required')
     left, bottom, right, top = Transformer.from_crs(
         bounds_crs, reference, always_xy=True).transform_bounds(*bounds, densify_pts=21, errcheck=True)
+    # Round outward to include every native cell intersecting the requested area.
     col0 = math.floor((left - origin[0]) / origin[1])
     col1 = math.ceil((right - origin[0]) / origin[1])
     row0 = math.floor((top - origin[3]) / origin[5])
@@ -98,7 +132,16 @@ def raster_on_grid(values, grid):
 
 
 def align(paths, grid, *, resampling='bilinear'):
-    """Interpolate secondary raster values onto the unchanged primary grid."""
+    """Read other raster values at the primary grid's cell positions.
+
+    Args:
+        paths: Raster dataset paths to align.
+        grid: Destination grid and coordinate reference.
+        resampling: GDAL sampling method. Use nearest-neighbor for category codes.
+
+    Returns:
+        The aligned array, with NaN where the sources provide no value.
+    """
     values = np.full(grid.elevation.shape, np.nan)
     destination = raster_on_grid(values, grid)
     destination.GetRasterBand(1).SetNoDataValue(np.nan)
@@ -108,10 +151,23 @@ def align(paths, grid, *, resampling='bilinear'):
 
 
 def prepare(primary, bounds, secondary=(), height_offset=None, *, bounds_crs=4326):
-    """Fill gaps only; height_offset contains secondary-to-primary offsets in metres.
+    """Read primary terrain and fill gaps from secondary terrain.
 
     For EGM2008 heights converted to WGS84 ellipsoidal heights, the offset is
     the EGM2008 geoid undulation. Its source is selected and cataloged normally.
+
+    Args:
+        primary: Aligned native raster paths in compositing order.
+        bounds: West, south, east, and north limits for the crop.
+        secondary: Optional raster paths supplying missing heights.
+        height_offset: Optional raster of offsets in metres to add to secondary heights.
+        bounds_crs: Coordinate reference of the requested bounds.
+
+    Returns:
+        The primary grid with finite heights and a count of filled cells.
+
+    Raises:
+        ValueError: The combined terrain sources leave cells without a finite height.
     """
     grid = read_native(primary, bounds, bounds_crs=bounds_crs)
     missing = ~np.isfinite(grid.elevation)

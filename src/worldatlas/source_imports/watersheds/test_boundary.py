@@ -1,3 +1,5 @@
+"""Test selecting, connecting, and validating native watershed divide sections."""
+
 import unittest
 
 import numpy as np
@@ -9,6 +11,8 @@ from worldatlas.geodesy.wgs84 import geodesic
 
 
 class BoundaryTests(unittest.TestCase):
+    """Check that joins and routes preserve the selected source geometry."""
+
     def test_a_shared_catchment_has_no_invented_divide_inside_it(self):
         grid = Grid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
         graph = Divide()
@@ -85,6 +89,11 @@ class BoundaryTests(unittest.TestCase):
             connect_waypoints(line, [(.004, 0.)], 20.)
 
     def graph(self):
+        """Build a fixture divide with branches for routing tests.
+
+        Returns:
+            The divide graph, ready for each test to select its own joins.
+        """
         graph = Divide()
         graph.coordinates = {(0, 0): (0., 0.), (0, 1): (.01, 0.),
                              (0, 2): (.02, 0.), (1, 1): (.01, .01),

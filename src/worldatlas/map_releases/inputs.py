@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from worldatlas.map_build.execution.runtime import json_bytes
+from worldatlas.map_build.execution.code_archive import source_files, restore_source
 
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
@@ -64,8 +65,6 @@ def read_inputs(raw, release_id):
 
 def restore_inputs(content, output):
     """Extract saved configuration and selection for the ordinary build command."""
-    from worldatlas.map_build.execution.code_archive import source_files, restore_source
-
     for identity, code in content.get("source_code", {}).items():
         if (
             not isinstance(identity, str)

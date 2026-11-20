@@ -49,7 +49,9 @@ Set the record's method to `watershed_boundary`. Put the geographic reasoning an
 
 Optional `evidence_sources` is a list of catalog source-ID strings supporting geographic review. They are linked to the boundary but are not downloaded during construction. Files read by the calculation belong in `sources`.
 
-Source basin values identify drainage groups. A group can include several basins, and group IDs need not be consecutive. The value `-1` represents unknown drainage. Use `waterway_groups` for explicitly identified downstream ways. The constructor traces other waterways to their source-backed exit basins and tracks destinations between actual junctions. A section feeding two known groups retains both destinations.
+The recipe groups source basin values by the side of the intended boundary they drain toward. For example, `groups = {"3": [41, 42], "100": [99]}` and `interfaces = [[3, 100]]` describe one divide between groups 3 and 100. The divide between basins 41 and 42 contributes no edges because they are in the same group. When HydroBASINS is selected, `MAIN_BAS` identifies the main basin containing the source polygon, so several polygons can have the same value.
+
+Group IDs are local to the recipe. The value `-1` represents unknown drainage. Use `waterway_groups` for explicitly identified downstream ways. The constructor traces other waterways to their source-backed exit basins and tracks destinations between actual junctions. A section feeding two known groups retains both destinations.
 
 When `basins` selects a Shapefile in a ZIP, GDAL opens the selected `.shp` member and reads its companion files inside the archive. The provider attribute named by `basin_attribute` supplies the IDs used in `groups`. Basin lookups for terrain exits and coastal land outlets are batched, with all basin matches retained for each cell.
 

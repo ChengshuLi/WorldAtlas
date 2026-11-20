@@ -11,7 +11,7 @@ from shapely import union_all
 from shapely.geometry import Polygon, mapping
 
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.source_imports.shared.contracts import FeatureIdentity, NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import FeatureIdentity, NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources, gdal_dataset_path
 from worldatlas.source_imports.shared.storage import feature_result, save_features

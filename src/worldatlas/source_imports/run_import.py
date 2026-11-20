@@ -13,6 +13,7 @@ from contextlib import ExitStack, closing
 from pathlib import Path
 
 import psycopg
+import boto3
 
 from worldatlas.source_imports.iho.areas import s130_areas
 from worldatlas.source_imports.interpreted.geometry import interpreted_geometry
@@ -113,8 +114,6 @@ def main():
     with ExitStack() as stack:
         storage = None
         if args.r2_endpoint:
-            import boto3
-
             storage = stack.enter_context(
                 closing(
                     boto3.client(

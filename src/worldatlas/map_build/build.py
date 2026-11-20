@@ -3,15 +3,12 @@
 
 from __future__ import annotations
 
-
 import argparse
 import copy
 from contextlib import closing
 from datetime import datetime, timezone
 import gzip
 import hashlib
-import importlib
-import importlib.util
 import json
 import math
 import os
@@ -24,9 +21,19 @@ import time
 import uuid
 import zipfile
 
-HERE = Path(__file__).resolve().parent
-PACKAGE_ROOT = HERE.parent
+import numpy
+from osgeo import gdal
+import psycopg
+import pyarrow
+import pyproj
+import scipy
 
+from worldatlas.map_build.core.comparison import compare
+from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.division.encoding import encode
+from worldatlas.map_build.division.hierarchy import HierarchyDivision
+from worldatlas.map_build.execution.code_archive import capture_source, write_source
+from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
     Timing,
     Checkpoints,
@@ -38,44 +45,31 @@ from worldatlas.map_build.execution.runtime import (
     verify_anchor,
     write,
 )
+from worldatlas.map_build.inputs.releases import read_release_assets
 from worldatlas.map_build.inputs.selection import (
     canonical_bytes,
     read_saved,
     read_selection,
 )
-from worldatlas.map_build.inputs.releases import read_release_assets
+from worldatlas.map_build.physical import build as physical_build
+from worldatlas.map_build.physical.crop import crop_physical
+from worldatlas.source_assets.catalog import download_source
 
-from worldatlas.map_build.execution.control import stage as stage_context
+HERE = Path(__file__).resolve().parent
+PACKAGE_ROOT = HERE.parent
 
 
 def validate_runtime():
-    missing = [
-        name
-        for name in ("numpy", "scipy", "pyproj", "osgeo", "pyarrow")
-        if importlib.util.find_spec(name) is None
-    ]
-    if missing:
-        raise ValueError(
-            "runtime prerequisites missing from this interpreter/PATH: "
-            + ", ".join(missing)
-        )
+    """Disable implicit downloads of coordinate transformation grids."""
     # All selected coordinate operations use the pinned local database. Never
     # fetch a grid implicitly, including when pyproj was imported by a caller.
     os.environ["PROJ_NETWORK"] = "OFF"
-    import pyproj
-
     pyproj.network.set_network_enabled(False)
     if pyproj.network.is_network_enabled():
         raise ValueError("PROJ network must be disabled")
 
 
 def runtime_identity():
-    import numpy
-    import scipy
-    import pyproj
-    import pyarrow
-    from osgeo import gdal
-
     return {
         "executable": sys.executable,
         "version": sys.version,
@@ -194,8 +188,6 @@ def physical_reference(run, sources):
             raise ValueError("physical input differs from the source run: " + key)
     output = root / "physical"
     produced = read(output / "report.json")
-    from worldatlas.map_build.core.grid import Grid
-
     old_grid = Grid(**produced["grid"])
     grid = Grid(**read(sources["land_config"])["grid"])
     if (
@@ -250,8 +242,6 @@ class Pipeline:
         self.cfg = read(self.config_path)
         if self.cfg.get("schema") != "worldatlas-end-to-end-pipeline-v2":
             raise ValueError("unsupported end-to-end configuration")
-        from worldatlas.map_build.core.grid import Grid
-
         self.grid = Grid(**self.cfg["grid"])
         if work_dir is None and "input_root" not in self.cfg:
             raise ValueError("choose a local input/run directory with --work-dir")
@@ -304,8 +294,6 @@ class Pipeline:
         elif selection is not None:
             self.selection = read_saved(selection)
         else:
-            import psycopg
-
             connection = os.environ.get("NEON_DATABASE_URL")
             if not connection:
                 raise ValueError(
@@ -423,11 +411,6 @@ class Pipeline:
             self.attempt = uuid.uuid4().hex
             self.attempt_dir = self.out / "attempts" / self.attempt
             self.attempt_dir.mkdir()
-            from worldatlas.map_build.execution.code_archive import (
-                capture_source,
-                write_source,
-            )
-
             source_archive = self.attempt_dir / "source-code.json.gz"
             write_source(source_archive, capture_source(PACKAGE_ROOT))
             write(
@@ -547,8 +530,6 @@ class Pipeline:
                 if source["source_id"] == key[0]
                 and (key[1] is None or source.get("version") == key[1])
             ]
-        import psycopg
-
         connection = os.environ.get("NEON_DATABASE_URL")
         if not connection:
             raise ValueError("set NEON_DATABASE_URL for read-only catalog access")
@@ -647,15 +628,12 @@ class Pipeline:
                         raise ValueError("concurrent cloud input changed") from None
                 partial.unlink()
             else:
-                from worldatlas.source_assets.catalog import download_source
-                from worldatlas.map_build.physical.build import make_r2_client
-
                 staging = self.cfg.get("physical_controls", {}).get(
                     "source_staging", {}
                 )
                 transfer = {}
                 try:
-                    with closing(make_r2_client(staging.get("endpoint_url"))) as client:
+                    with closing(physical_build.make_r2_client(staging.get("endpoint_url"))) as client:
                         download_source(
                             client,
                             spec,
@@ -912,9 +890,6 @@ class Pipeline:
         if self.physical_reuse is not None:
             verify_pins(self.physical_reuse["pins"])
             source = Path(self.physical_reuse["source_run"]) / "physical" / "physical"
-            from worldatlas.map_build.core.grid import Grid
-            from worldatlas.map_build.physical.crop import crop_physical
-
             grid = Grid(**self.cfg["grid"])
             if Grid(**read(source / "report.json")["grid"]) == grid:
                 return source
@@ -942,8 +917,6 @@ class Pipeline:
                 ]
             },
         }
-        from worldatlas.map_build.physical.build import run
-
         request = self.document("physical", cfg)
         marker = self.out / "physical/pipeline-identity.json"
         previous = self.physical_attempts()
@@ -958,7 +931,7 @@ class Pipeline:
                 self.checkpoints.run_function(
                     "physical",
                     "physical",
-                    run,
+                    physical_build.run,
                     (request, self.out / "physical"),
                     kwargs={"resume": marker.is_file()},
                     timing=self.timing,
@@ -972,9 +945,6 @@ class Pipeline:
         return self.out / "physical" / "physical"
 
     def divide(self, physical):
-        from worldatlas.map_build.core.grid import Grid
-        from worldatlas.map_build.division.hierarchy import HierarchyDivision
-
         previous = self.reuse_from / "division" if self.reuse_from is not None else None
         if previous is not None and not (previous / "report.json").exists():
             previous = None
@@ -992,9 +962,6 @@ class Pipeline:
         return Path(operation.run()["directory"])
 
     def package(self, physical, ownership):
-        from worldatlas.map_build.core.grid import Grid
-        from worldatlas.map_build.division.encoding import encode
-
         output = self.out / "final"
         inputs = [pin(self.out / "input-selection.json")]
         inputs += [
@@ -1033,9 +1000,6 @@ class Pipeline:
             raise ValueError(
                 "reference must use rows.u32le and runs.u32le in one directory"
             )
-        from worldatlas.map_build.core.grid import Grid
-        from worldatlas.map_build.core.comparison import compare
-
         grid = Grid(**read(physical / "report.json")["grid"])
         inputs = [
             pin(root / name)

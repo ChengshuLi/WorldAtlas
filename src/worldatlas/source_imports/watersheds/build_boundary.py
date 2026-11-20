@@ -16,7 +16,7 @@ import shapely
 from shapely.geometry import LineString
 
 from worldatlas.geodesy.wgs84 import geodesic
-from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import MultipartSource, acquire_sources
 from worldatlas.source_imports.shared.storage import save_features
@@ -35,7 +35,12 @@ Bounds = tuple[float, float, float, float]
 
 
 class TerrainDomain(TypedDict):
-    """Select a terrain crop and optionally narrow its contributing area."""
+    """Choose the rectangle used for flow and the part used for divide edges.
+
+    The input bounds include upstream and downstream context. The optional
+    output bounds let adjacent crops contribute edges without using their
+    outer margins. Both rectangles use the declared CRS, or WGS84 by default.
+    """
 
     bounds: Bounds
     crs: NotRequired[NonEmptyText | int]
@@ -43,7 +48,12 @@ class TerrainDomain(TypedDict):
 
 
 class TerrainSettings(TypedDict):
-    """Describe terrain inputs and the drainage divides to calculate."""
+    """Describe inputs and group interfaces for one native terrain grid.
+
+    The basin attribute maps provider polygons to downstream identities.
+    Groups collect those identities by the side of the intended divide.
+    Interfaces select which group pairs can contribute boundary edges.
+    """
 
     domains: list[TerrainDomain]
     primary: list[NonEmptyText | FileSelection]
@@ -93,6 +103,9 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
 
     Returns:
         The final GeoJSON boundary and a report of inputs, checks, and timings.
+
+    Raises:
+        ValueError: The evidence or recipe does not produce a valid connected boundary.
     """
     started = time.monotonic()
     report = {'terrain': {}, 'connections': {}}
@@ -128,6 +141,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
                                     if 'waterway_groups' in settings else network.basin_groups(basins))
         network.require_destinations(geographic_bounds, network_report)
         shared_forks = networks.setdefault(network, {})
+        # Allow a selected fork only when its mapped outlets support this divide's groups.
         for section in sections:
             if section.get('divide') != name:
                 continue
@@ -165,6 +179,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
             step = time.monotonic()
             seeds, seed_report = seed_grid(network, assigned, grid)
             relevant_ways.update(network.nearby(grid))
+
             def seed_point(row, column, group, message):
                 present = {g for g, cells in seeds.items() if cells[row, column]}
                 if present and present != {group}:
@@ -209,6 +224,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
                 coastal_labels, coverage_report = basins.uncovered_exits(
                     grid, flow, outlets & ~ocean, coastal_labels, seeds)
                 coast_report['source_coverage'] = coverage_report
+                # Use the shoreline evidence for terminals covered by the ocean mask.
                 terminals[outlets] = coastal_labels[outlets]
             labels = possible_destinations(flow, seeds, terminals)
             drainage_seconds = time.monotonic() - step
@@ -261,6 +277,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
                                    'network_seconds': network_seconds,
                                    'seconds': time.monotonic() - phase}
     phase = time.monotonic()
+
     def selected_point(specification, *, retain_join=False):
         if 'nearest_divide' in specification:
             target = sources.point(specification['near'], lines)
@@ -327,6 +344,9 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
 
     Returns:
         Saved boundary identity, vertex count, and construction report.
+
+    Raises:
+        ValueError: Source acquisition, boundary construction, or save validation fails.
     """
     acquisition = {}
     paths = acquire_sources(runtime, list(sources.values()), evidence_source_ids=evidence_sources or (),
@@ -336,6 +356,7 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
                                  joins=joins, start=start, end=end, terrains=terrains)
     versions = runtime_versions()
     started = time.monotonic()
+    # Save only after the complete line passes the drainage and crossing checks.
     save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
     staging_seconds = acquisition['source_staging_seconds']
     report.update(feature_id=feature_id,

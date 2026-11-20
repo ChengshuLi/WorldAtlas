@@ -13,6 +13,8 @@ import zipfile
 
 import numpy as np
 from osgeo import gdal
+import psycopg
+from psycopg.types.json import Jsonb
 from pyproj import CRS, Transformer
 from shapely.geometry import box
 
@@ -41,6 +43,14 @@ def write_basin_archive(archive, *, north=.02):
 
 
 def fixtures(directory):
+    """Write a six-cell-wide ridge, two basin polygons, and two source lines.
+
+    Args:
+        directory: Temporary directory for the source files.
+
+    Returns:
+        The local source paths and the corresponding construction arguments.
+    """
     raster = directory / 'dem.tif'
     ds = gdal.GetDriverByName('GTiff').Create(str(raster), 6, 6, 1, gdal.GDT_Float32)
     ds.SetGeoTransform((0., .001, 0., .006, 0., -.001))
@@ -92,6 +102,8 @@ def build_fixture(recipe, files):
 
 
 class ConstructionTests(unittest.TestCase):
+    """Calculate small native-grid boundaries from local source files."""
+
     def test_numeric_and_text_waterway_reversals_produce_the_same_result(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
@@ -330,10 +342,9 @@ class ConstructionTests(unittest.TestCase):
     os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
 )
 class StorageTests(unittest.TestCase):
-    def setUp(self):
-        import psycopg
-        from psycopg.types.json import Jsonb
+    """Check how the importer saves or rejects a complete construction."""
 
+    def setUp(self):
         self.db = psycopg.connect(os.environ["WORLDATLAS_TEST_DATABASE_URL"])
         self.addCleanup(self.db.close)
         self.addCleanup(self.db.rollback)
@@ -360,8 +371,7 @@ class StorageTests(unittest.TestCase):
         }
 
     def store(self):
-        from psycopg.types.json import Jsonb
-
+        """Store the current fixture recipe in the disposable database."""
         self.db.execute(
             "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
             "VALUES ('watershed','watershed_boundary',%s,'Test drainage divide') "
@@ -370,6 +380,11 @@ class StorageTests(unittest.TestCase):
         )
 
     def build(self):
+        """Run the registered importer against the local source and database fixtures.
+
+        Returns:
+            The importer report for the saved geometry.
+        """
         return run_import(
             lambda: nullcontext(self.db),
             "watershed",
@@ -378,6 +393,11 @@ class StorageTests(unittest.TestCase):
         )
 
     def row(self):
+        """Read the imported feature from the fixture database.
+
+        Returns:
+            A geometry and construction ID pair, or None before the first save.
+        """
         return self.db.execute(
             "SELECT geometry,construction_id FROM atlas.source_features"
         ).fetchone()

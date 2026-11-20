@@ -17,13 +17,25 @@ UNKNOWN = -1
 
 
 def neighbor_distances(grid):
-    """Measure each undirected E/S/SE/SW edge once, in metres on WGS84."""
+    """Measure distances between all horizontally, vertically, or diagonally adjacent cells.
+
+    Args:
+        grid: Terrain grid with its native coordinates and coordinate reference.
+
+    Returns:
+        Four arrays indexed by row and column, for east, south, southeast, and
+        southwest edges in WGS84 metres. Reverse directions share the same distances.
+
+    Raises:
+        ValueError: A transformed coordinate or neighboring-cell distance is invalid.
+    """
     height, width = grid.elevation.shape
     to_geo = Transformer.from_crs(CRS.from_user_input(grid.crs), 4326, always_xy=True)
     distances = np.zeros((4, height, width), dtype='float64')
 
     def calculate_rows(first):
         last = min(height, first + 128)
+        # Include the next row so this block can measure across its southern edge.
         stop = min(height, last + 1)
         columns, rows = np.meshgrid(np.arange(width), np.arange(first, stop))
         lon, lat = to_geo.transform(*grid.coordinates(rows, columns), errcheck=True)
@@ -50,11 +62,13 @@ def neighbor_distances(grid):
 
 @njit(cache=True)
 def _flow(elevation, distances, closed):
+    """Fill depressions and assign each cell one downstream neighbor."""
     height, width = elevation.shape
     working = np.full(elevation.shape, np.inf)
     parent = np.full(elevation.size, -2, dtype=np.int64)
     heap = [(0., 0)]
     heap.pop()
+    # Start with cells that can drain out of the crop and source-backed terminals.
     for row in range(height):
         for column in range(width):
             if row == 0 or column == 0 or row == height - 1 or column == width - 1 or closed[row, column]:
@@ -71,10 +85,12 @@ def _flow(elevation, distances, closed):
                 if (dr or dc) and 0 <= rr < height and 0 <= cc < width:
                     other = rr * width + cc
                     if parent[other] == -2:
+                        # A depression fills to the lowest height it must reach to spill.
                         parent[other] = index
                         working[rr, cc] = max(value, elevation[rr, cc])
                         heapq.heappush(heap, (working[rr, cc], other))
     flow = parent.copy().reshape(elevation.shape)
+    # Keep the outlet route on exact flats. A strictly downhill slope takes precedence.
     for row in range(height):
         for column in range(width):
             if closed[row, column]:
@@ -100,6 +116,20 @@ def _flow(elevation, distances, closed):
 
 
 def compute_flow(grid, closed_sinks=(), *, outlets=None):
+    """Calculate terrain flow using the elevation grid and known stopping points.
+
+    Args:
+        grid: Terrain grid with a finite elevation at each cell.
+        closed_sinks: Row and column pairs where water stops inland.
+        outlets: Optional Boolean grid marking other terminals, such as the shore.
+
+    Returns:
+        The depression-filled working heights and the next-cell indices. Each
+        next-cell index counts cells in row order. A value of -1 marks a terminal.
+
+    Raises:
+        ValueError: The terrain, terminal mask, or selected sink cell is invalid.
+    """
     elevation = np.asarray(grid.elevation, dtype='float64')
     if elevation.ndim != 2 or not elevation.size or not np.isfinite(elevation).all():
         raise ValueError('a complete finite two-dimensional elevation grid is required')
@@ -117,6 +147,7 @@ def compute_flow(grid, closed_sinks=(), *, outlets=None):
 
 @njit(cache=True)
 def _destinations(flow, seeds, terminals):
+    """Trace unknown cells until they reach a known destination, outlet, or cycle."""
     links = flow.ravel()
     labels = seeds.ravel().copy()
     state = np.zeros(links.size, np.uint8)
@@ -136,6 +167,7 @@ def _destinations(flow, seeds, terminals):
             path[count] = index
             count += 1
             index = links[index]
+        # Cache the answer for every cell on this path before starting another trace.
         destination = labels[index] if index >= 0 and state[index] == 2 else -1
         for i in range(count):
             labels[path[i]] = destination
@@ -148,6 +180,17 @@ def destinations(flow, seeds, terminals=None):
 
     River seeds take precedence. Source-backed domain exits or closed sinks can
     supply terminal groups. An unclassified pit, exit or cycle stays unknown.
+
+    Args:
+        flow: Next-cell indices in row order, with -1 for terminal cells.
+        seeds: Grid of initial group IDs, with -1 where no river supplies one.
+        terminals: Group IDs at known exits, with -1 where no destination is known.
+
+    Returns:
+        The group ID at each cell, with -1 where flow did not establish one.
+
+    Raises:
+        ValueError: The inputs contain invalid indices or labels, or have mismatched shapes.
     """
     flow, seeds = np.asarray(flow), np.asarray(seeds)
     if terminals is None:
@@ -167,6 +210,13 @@ def single_destinations(memberships, shape):
 
     This view is for operations requiring a unique destination. It does not
     replace the memberships, which retain shared drainage separately from unknown.
+
+    Args:
+        memberships: Mapping from group IDs to Boolean grids marking their catchments.
+        shape: Row and column dimensions of the output grid.
+
+    Returns:
+        A grid of group IDs, with -1 for both unknown and shared drainage.
     """
     labels = np.full(shape, UNKNOWN, dtype='int64')
     count = np.zeros(shape, dtype='int64')
@@ -183,6 +233,17 @@ def possible_destinations(flow, seeds, terminals):
     Each group's Boolean grid records whether that destination is possible.
     Two true memberships mean two known routes; no true membership means unknown.
     A seed containing several groups stops tracing with all of those groups.
+
+    Args:
+        flow: Next-cell indices in row order, with -1 for terminal cells.
+        seeds: Mapping from known group IDs to cells touched by their mapped rivers.
+        terminals: Grid of known group IDs at outlets, with -1 elsewhere.
+
+    Returns:
+        A Boolean catchment grid for each known group.
+
+    Raises:
+        ValueError: A flow or destination grid contains invalid values or has the wrong shape.
     """
     flow, terminals = np.asarray(flow), np.asarray(terminals)
     shape = flow.shape
@@ -201,6 +262,7 @@ def possible_destinations(flow, seeds, terminals):
     result = {}
     for group in groups:
         present = seeds.get(group, np.zeros(shape, dtype=bool))
+        # Stop at every known seed. Only seeds in the current group give a true result.
         seed = np.where(known, present.astype('int64'), UNKNOWN)
         terminal = np.where(terminals >= 0, (terminals == group).astype('int64'), UNKNOWN)
         result[group] = destinations(flow, seed, terminal) == 1
@@ -209,7 +271,16 @@ def possible_destinations(flow, seeds, terminals):
 
 @njit(cache=True)
 def upstream_links(flow):
-    """Index the actual incoming flow edges once for upstream tracing."""
+    """Index incoming flow edges for every cell.
+
+    Args:
+        flow: Grid of next-cell indices, with -1 for terminal cells.
+
+    Returns:
+        Two arrays. The first gives the first cell draining into each cell.
+        The second gives the next cell draining to that same destination.
+        Both use -1 to mark the end of a list.
+    """
     links = flow.ravel()
     heads = np.full(links.size, -1, np.int64)
     following = np.full(links.size, -1, np.int64)
@@ -223,7 +294,16 @@ def upstream_links(flow):
 
 @njit(cache=True)
 def upstream_order(flow, terminal):
-    """Visit every cell whose flow reaches terminal, starting at that terminal."""
+    """Visit cells upstream of the selected destination.
+
+    Args:
+        flow: Grid of next-cell indices, with -1 for terminal cells.
+        terminal: Row-order index of the cell to start from.
+
+    Returns:
+        Cell indices starting with the selected cell. Each upstream cell comes
+        after the cell it flows into on the traversal.
+    """
     links = flow.ravel()
     heads, following = upstream_links(flow)
     queue = np.empty(links.size, np.int64)

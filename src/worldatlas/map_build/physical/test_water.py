@@ -6,6 +6,8 @@ import unittest
 import weakref
 from pathlib import Path
 from unittest import mock
+import ctypes
+import subprocess
 import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -211,9 +213,6 @@ class WaterShardTests(unittest.TestCase):
             self.assertEqual(status.tolist(), [1, 5, 0])
 
     def test_batch_backend_does_not_compile_or_start_processes(self):
-        import ctypes
-        import subprocess
-
         p, digest = self.fixture()
         with mock.patch.object(
             subprocess, 'Popen', side_effect=AssertionError('unexpected subprocess')

@@ -3,8 +3,13 @@
 from contextlib import ExitStack
 from fractions import Fraction
 from pathlib import Path
+import math
 
 import numpy as np
+from pyproj import Transformer
+from pyproj.enums import TransformDirection
+from shapely import contains_xy, intersects_xy
+from shapely.geometry import shape
 
 from worldatlas.map_build.core.geometry import (
     PolygonRasterizer,
@@ -145,8 +150,6 @@ class ComponentGrid:
 
     def component_at(self, longitude, latitude):
         """Locate a candidate source point with the grid's floor convention."""
-        import math
-
         x = math.floor((float(longitude) - self.grid.west) / self.grid.step)
         y = math.floor((self.grid.north - float(latitude)) / self.grid.step)
         if not 0 <= x < self.grid.width or not 0 <= y < self.grid.height:
@@ -203,11 +206,6 @@ class ComponentGrid:
         polygon edges as straight longitude/latitude lines. Operations and their
         geographic areas are source metadata supplied by the selected rule.
         """
-        from pyproj import Transformer
-        from pyproj.enums import TransformDirection
-        from shapely import contains_xy, intersects_xy
-        from shapely.geometry import shape
-
         candidates = set(candidates)
         if not candidates:
             return {}

@@ -6,7 +6,10 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
+import shutil
+
+from botocore.exceptions import ClientError
 
 from worldatlas.map_build.execution.runtime import pin
 from worldatlas.map_build.inputs.selection import canonical_bytes
@@ -24,6 +27,8 @@ from worldatlas.map_releases.inputs import (
     restore_inputs,
     write_inputs,
 )
+from worldatlas.map_build.execution.code_archive import capture_source, write_source
+from worldatlas.map_build.test_support import selection
 
 
 class BundleTests(unittest.TestCase):
@@ -38,8 +43,6 @@ class BundleTests(unittest.TestCase):
             directory.mkdir(parents=True)
         request = root / "config.json"
         self.snapshot = self.run / "input-selection.json"
-        from worldatlas.map_build.test_support import selection
-
         self.selection = selection()
         self.selection["geography"]["entities"].append(
             dict(
@@ -90,11 +93,6 @@ class BundleTests(unittest.TestCase):
         (final / "report.json").write_text(
             '{"counts":{"1":1,"17":1},"run_count":2,"grid":{"width":2,"height":1,"step":180}}'
         )
-        from worldatlas.map_build.execution.code_archive import (
-            capture_source,
-            write_source,
-        )
-
         project = root / "source-project"
         package = project / "src/worldatlas"
         package.mkdir(parents=True)
@@ -226,8 +224,6 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(again.read_bytes(), body)
 
     def test_release_keeps_captured_code_and_deduplicates_unchanged_attempts(self):
-        import shutil
-
         second = self.run / "attempts/second"
         second.mkdir()
         shutil.copyfile(
@@ -399,8 +395,6 @@ class PreviewRetirementTests(unittest.TestCase):
         )
 
     def test_only_unpublished_siblings_are_deleted(self):
-        from unittest.mock import patch
-
         db, storage = Mock(), Mock()
         db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
         db.execute.return_value.fetchall.return_value = [
@@ -429,8 +423,6 @@ class PreviewRetirementTests(unittest.TestCase):
         storage.delete_object.assert_not_called()
 
     def test_failed_deletion_keeps_manifest_and_catalog_row_for_retry(self):
-        from unittest.mock import patch
-
         db, storage = Mock(), Mock()
         db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
         db.execute.return_value.fetchall.return_value = [
@@ -448,8 +440,6 @@ class PreviewRetirementTests(unittest.TestCase):
         )
 
     def test_retry_after_manifest_deletion_requires_an_empty_folder(self):
-        from botocore.exceptions import ClientError
-
         candidate, folder = "v9.0-rc.1", "releases/v9.0-rc.1/"
         for remaining in ([], [{"Key": folder + "index.html"}]):
             with self.subTest(remaining=remaining):

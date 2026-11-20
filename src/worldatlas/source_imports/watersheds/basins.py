@@ -13,16 +13,19 @@ from worldatlas.source_imports.watersheds.drainage import upstream_links
 
 
 class Basins:
-    """Source basin polygons grouped by explicitly selected attribute values."""
+    """Look up drainage groups using the recipe's source polygon attributes."""
 
     def __init__(self, paths, attribute, groups, bounds):
         """Index provider basin polygons in the area of interest.
 
         Args:
             paths: GDAL vector dataset paths, including Shapefiles inside ZIP archives.
-            attribute: Provider field identifying an individual basin.
-            groups: Mapping from drainage group IDs to provider basin IDs.
+            attribute: Provider field identifying each polygon's drainage destination.
+            groups: Mapping from local drainage group IDs to provider destination IDs.
             bounds: WGS84 west, south, east, and north bounds in degrees.
+
+        Raises:
+            ValueError: The groups overlap, or a source lacks one georeferenced layer.
         """
         self.polygons, self.values = [], []
         self.groups = {int(group): set(values) for group, values in groups.items()}
@@ -44,6 +47,7 @@ class Basins:
                 to_geo = Transformer.from_crs(source_crs, wgs84, always_xy=True)
                 source_bounds = Transformer.from_crs(wgs84, source_crs, always_xy=True).transform_bounds(
                     *bounds, densify_pts=21, errcheck=True)
+                # Filter in the provider's coordinates before converting polygons for lookup.
                 layer.SetSpatialFilterRect(*source_bounds)
                 project = not source_crs.equals(wgs84, ignore_axis_order=True)
                 for feature in layer:
@@ -56,15 +60,36 @@ class Basins:
         self.mapped = set().union(*self.groups.values())
 
     def at(self, point):
-        """Return the group for a WGS84 longitude-latitude point, or -1."""
+        """Identify the drainage group at a point.
+
+        Args:
+            point: Longitude and latitude in WGS84 degrees.
+
+        Returns:
+            The local group ID, or -1 if coverage cannot establish one group.
+        """
         return self.group(self.values_at(point))
 
     def values_at(self, point):
-        """Return provider basin IDs covering a WGS84 longitude-latitude point."""
+        """Find all provider drainage identities covering a point.
+
+        Args:
+            point: Longitude and latitude in WGS84 degrees.
+
+        Returns:
+            Provider field values for every covering polygon, including shared edges.
+        """
         return {self.values[i] for i in self.tree.query(Point(*point), predicate='covered_by')}
 
     def group(self, values):
-        """Return the common drainage group for the basin IDs, or -1."""
+        """Translate provider identities to one recipe group.
+
+        Args:
+            values: Set of provider destination IDs found at the location.
+
+        Returns:
+            The common group ID if every value maps to it, or -1 otherwise.
+        """
         matches = {group for group, selected in self.groups.items() if values & selected}
         return next(iter(matches)) if len(matches) == 1 and values <= self.mapped else -1
 
@@ -96,6 +121,7 @@ class Basins:
                 exits.append((line.project(Point(point)), self.values[index], point))
         if not exits:
             return -1, None
+        # Station is distance along the ordered line. The largest is farthest downstream.
         station = max(item[0] for item in exits)
         last = [item for item in exits if item[0] == station]
         return self.group({item[1] for item in last}), min(item[2] for item in last)
@@ -127,6 +153,7 @@ class Basins:
         result = np.full(flow.shape, -1, dtype='int64')
         height, width = flow.shape
         rows, columns = np.nonzero(flow == -1)
+        # Only perimeter terminals can leave the crop. A pit may also have no next cell.
         edge = (rows == 0) | (rows == height - 1) | (columns == 0) | (columns == width - 1)
         rows, columns = rows[edge], columns[edge]
         result[rows, columns] = self._groups_at_cells(grid, rows, columns)
@@ -142,12 +169,16 @@ class Basins:
         Returns:
             The combined ocean and shore mask, and drainage group labels for
             the shore cells. Unclassified cells have label -1.
+
+        Raises:
+            ValueError: The ocean mask and elevation grid have different shapes.
         """
         ocean = np.asarray(ocean, dtype=bool)
         if ocean.shape != grid.elevation.shape:
             raise ValueError('ocean mask and terrain grid must match')
         height, width = ocean.shape
         shore = np.zeros(ocean.shape, dtype=bool)
+        # Look in all eight flow directions without joining opposite crop edges.
         for dr in (-1, 0, 1):
             for dc in (-1, 0, 1):
                 if not (dr or dc):
@@ -181,6 +212,9 @@ class Basins:
         Returns:
             A copy of the labels with resolved outlets filled, and a report
             of resolved, conflicting, and unreferenced outlets.
+
+        Raises:
+            ValueError: Inputs use different grid shapes or select nonterminal exits.
         """
         if any(np.asarray(a).shape != flow.shape for a in (exits, labels, *seeds.values())):
             raise ValueError('outlets, labels and terrain flow must share one grid')
@@ -213,6 +247,7 @@ class Basins:
                     groups.update(seed_groups or {group})
                     basin_values.update(values)
                     references.setdefault(group, location)
+                    # Stop this branch at its first reference, including unselected basins.
                     continue
                 child = heads[index]
                 while child >= 0:

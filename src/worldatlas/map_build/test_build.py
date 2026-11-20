@@ -2,7 +2,7 @@
 
 import json
 from concurrent.futures import ThreadPoolExecutor
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 import gzip
 import hashlib
 import io
@@ -13,8 +13,17 @@ import threading
 import unittest
 from unittest.mock import Mock, patch
 
+import numpy as np
+from osgeo import ogr
+import pyarrow as pa
+import pyarrow.parquet as pq
+
 from worldatlas.map_build import build as pipeline
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.runtime import elapsed_union
+from worldatlas.map_build.land.connected import build_components
+from worldatlas.map_build.physical import build as physical_build
+from worldatlas.map_build.test_support import selection
 
 
 class TimingTests(unittest.TestCase):
@@ -150,9 +159,6 @@ class Fixture(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name).resolve()
-        from contextlib import nullcontext
-        from worldatlas.map_build.test_support import selection
-
         self.frozen = selection()
         for mocking in (
             patch.dict("os.environ", {"NEON_DATABASE_URL": "fixture"}),
@@ -255,17 +261,15 @@ class Fixture(unittest.TestCase):
         self.assertFalse((self.root / "run").exists())
 
     def test_saved_complete_selection_is_used_for_initialization_and_resume(self):
-        from worldatlas.map_build.test_support import selection as make_selection
-
-        selected = make_selection()
+        selected = selection()
         config = pipeline.write(self.inputs / "request.json", self.cfg)
-        selection = pipeline.write(self.inputs / "selection.json", selected)
+        selection_path = pipeline.write(self.inputs / "selection.json", selected)
         with patch.object(
             pipeline,
             "read_selection",
             side_effect=AssertionError("unexpected live database read"),
         ):
-            runner = pipeline.Pipeline(config, selection=selection)
+            runner = pipeline.Pipeline(config, selection=selection_path)
             original = runner.identity["input_selection_sha256"]
             self.assertEqual(
                 pipeline.read(runner.out / "input-selection.json"), selected
@@ -318,8 +322,6 @@ class Fixture(unittest.TestCase):
 
     @contextmanager
     def fake_r2(self, payloads, calls):
-        from worldatlas.map_build.physical import build as module
-
         def download(endpoint, entry, destination):
             calls.append(entry["r2_key"])
             destination.write_bytes(payloads[entry["r2_key"]])
@@ -332,8 +334,8 @@ class Fixture(unittest.TestCase):
         client = Mock()
         client.get_object.side_effect = retrieve
         with (
-            patch.object(module, "download_r2", side_effect=download),
-            patch.object(module, "make_r2_client", return_value=client),
+            patch.object(physical_build, "download_r2", side_effect=download),
+            patch.object(physical_build, "make_r2_client", return_value=client),
         ):
             yield client.get_object
 
@@ -542,11 +544,6 @@ class Fixture(unittest.TestCase):
         self.assertFalse(failure["stages"]["package"]["complete"])
 
     def test_actual_raw_sources_to_fresh_components_in_process(self):
-        import pyarrow as pa
-        import pyarrow.parquet as pq
-        from osgeo import ogr
-        import numpy as np
-
         grid = {"width": 8, "height": 4, "west": -180, "north": 90, "step": 45}
         raw = self.root / "raw"
         raw.mkdir()
@@ -649,8 +646,6 @@ class Fixture(unittest.TestCase):
         )
         self.addCleanup(reused.close)
         producer_report = (physical / "report.json").read_bytes()
-        from worldatlas.map_build.physical import build as physical_build
-
         with patch.object(
             physical_build,
             "run",
@@ -687,9 +682,6 @@ class Fixture(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "checkpoint/input hash mismatch"):
             reused.physical()
         mask.write_bytes(original)
-        from worldatlas.map_build.core.grid import Grid
-        from worldatlas.map_build.land.connected import build_components
-
         components = runner.out / "components"
         result = build_components(Grid(**grid), physical, components)
         self.assertEqual(result["land_cells"], 5)
@@ -759,9 +751,6 @@ class Fixture(unittest.TestCase):
             self.addCleanup(runner.close)
             physical = runner.physical()
         components = runner.out / "components"
-        from worldatlas.map_build.core.grid import Grid
-        from worldatlas.map_build.land.connected import build_components
-
         build_components(Grid(**land["grid"]), physical, components)
         for local, cloud in [
             (self.root / "run/physical/physical", physical),

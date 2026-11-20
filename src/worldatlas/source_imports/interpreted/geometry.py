@@ -3,7 +3,7 @@
 import time
 from typing import Literal, TypedDict
 
-from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import feature_result, save_features

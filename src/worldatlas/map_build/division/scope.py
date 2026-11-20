@@ -10,6 +10,7 @@ from worldatlas.map_build.core.geometry import PolygonRasterizer
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.division.intervals import overlay, prepare
+from worldatlas.map_build.water.shared_nearest import crop
 
 
 def selected(values, identifiers):
@@ -360,8 +361,6 @@ class Scope:
                         first - y0 : last - y0, offset : offset + right - left
                     ]
                     if self.rule["unassigned_only"]:
-                        from worldatlas.map_build.water.shared_nearest import crop
-
                         owners = np.stack(
                             [
                                 crop(*self.snapshot, y, left, right, self.grid.width)

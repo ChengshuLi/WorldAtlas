@@ -18,9 +18,12 @@ import threading
 import time
 import uuid
 
+import boto3
+
 import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.execution import control
 from worldatlas.map_build.physical import land, water, union as water_union, composition
+from worldatlas.source_assets.catalog import stream_source
 
 HERE = Path(__file__).resolve().parent
 
@@ -54,17 +57,11 @@ def validate_r2_endpoint(endpoint):
 
 def make_r2_client(endpoint):
     validate_r2_endpoint(endpoint)
-    try:
-        import boto3
-    except ImportError as exc:
-        raise ValueError('R2 staging requires boto3 in the pipeline Python environment') from exc
     return boto3.client('s3', endpoint_url=endpoint, region_name='auto')
 
 
 def download_r2(endpoint, entry, destination):
     """Write a streamed response exclusively. Keep partial files for inspection."""
-    from worldatlas.source_assets.catalog import stream_source
-
     control.check_cancelled()
     with closing(make_r2_client(endpoint)) as client, destination.open('xb') as stream:
         try:

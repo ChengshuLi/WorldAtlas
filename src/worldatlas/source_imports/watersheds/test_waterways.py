@@ -1,3 +1,5 @@
+"""Test OSM topology, destination tracing, and river-crossing decisions."""
+
 from pathlib import Path
 import tempfile
 import unittest
@@ -13,20 +15,52 @@ from worldatlas.source_imports.watersheds.waterways import Waterways, seed_grid
 
 
 class WaterwayTests(unittest.TestCase):
+    """Use small archived stream networks with known connections and directions."""
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
 
     def write(self, name, body):
+        """Write fixture OSM objects to an XML extract.
+
+        Args:
+            name: Filename under the fixture directory.
+            body: Serialized OSM objects to place within the root element.
+
+        Returns:
+            The path to the extract.
+        """
         path = self.root / name
         path.write_text('<osm version="0.6">' + body + '</osm>')
         return path
 
     def node(self, ident, lon=1, lat=1, version=1):
+        """Create one OSM node for an XML fixture.
+
+        Args:
+            ident: OSM node ID.
+            lon: Longitude in degrees.
+            lat: Latitude in degrees.
+            version: OSM version of the node.
+
+        Returns:
+            The node as XML text.
+        """
         return f'<node id="{ident}" version="{version}" lon="{lon}" lat="{lat}"/>'
 
     def way(self, ident, nodes, kind='river'):
+        """Create one OSM way with an ordered list of nodes.
+
+        Args:
+            ident: OSM way ID.
+            nodes: Node IDs in source order.
+            kind: Value of the OSM waterway tag.
+
+        Returns:
+            The way as XML text.
+        """
         return (f'<way id="{ident}" version="1">' +
                 ''.join(f'<nd ref="{n}"/>' for n in nodes) +
                 f'<tag k="waterway" v="{kind}"/></way>')

@@ -6,7 +6,7 @@ from typing import TypedDict
 from zipfile import ZipFile, is_zipfile
 
 from worldatlas.source_assets.catalog import assemble_parts, catalog_sources, download_source
-from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 
 
 class MultipartSource(TypedDict):

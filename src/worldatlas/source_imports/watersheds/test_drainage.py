@@ -1,3 +1,5 @@
+"""Test terrain flow and its propagation of known drainage destinations."""
+
 import unittest
 
 import numpy as np
@@ -9,6 +11,8 @@ from worldatlas.source_imports.watersheds.terrain import Grid
 
 
 class DrainageTests(unittest.TestCase):
+    """Compare small flow grids against expected routes and destinations."""
+
     def test_shared_river_destinations_are_preserved_upstream(self):
         flow = np.array([[1, 2, -1, -1]])
         seeds = {37: np.array([[False, True, False, False]]),
@@ -56,6 +60,16 @@ class DrainageTests(unittest.TestCase):
             possible_destinations(np.array([[-1]]), {3: np.array([[1]])}, np.array([[-1]]))
 
     def grid(self, values, crs='EPSG:4326', transform=(44., .001, 0., 43., 0., -.001)):
+        """Make a grid with known heights and spacing.
+
+        Args:
+            values: Rows of elevation values.
+            crs: Coordinate reference of the fixture grid.
+            transform: GDAL coefficients defining the fixture grid location and spacing.
+
+        Returns:
+            The test terrain grid.
+        """
         return Grid(np.array(values, dtype=float), transform, crs)
 
     def test_edge_can_flow_toward_a_lower_interior_cell(self):

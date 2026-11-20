@@ -4,7 +4,7 @@ import re
 
 from psycopg.types.json import Jsonb
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.source_imports.shared.contracts import NONBLANK_PATTERN
+from worldatlas.source_imports.shared.recipe_types import NONBLANK_PATTERN
 
 
 def save_features(runtime, features):

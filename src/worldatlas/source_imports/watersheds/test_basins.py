@@ -1,3 +1,5 @@
+"""Test provider basin lookups and the evidence used to classify drainage outlets."""
+
 import json
 from pathlib import Path
 import tempfile
@@ -31,6 +33,8 @@ def write_basin_shapefile(path, attribute, polygons, *, crs='EPSG:4326'):
 
 
 class BasinTests(unittest.TestCase):
+    """Check that outlet labels follow the selected source coverage."""
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -39,6 +43,14 @@ class BasinTests(unittest.TestCase):
         write_basin_shapefile(self.path, 'DEST', [(100, box(0, 0, 1, 2)), (200, box(1, 0, 2, 2))])
 
     def basins(self, groups=None):
+        """Index the two fixture basins.
+
+        Args:
+            groups: Optional recipe mapping that replaces the usual two groups.
+
+        Returns:
+            A basin index for both fixture polygons.
+        """
         return Basins([self.path], 'DEST', groups or {3: [100], 7: [200]}, [0, 0, 2, 2])
 
     def test_source_values_map_to_actual_construction_groups(self):

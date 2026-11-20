@@ -9,6 +9,10 @@ from array import array
 from pathlib import Path
 import os
 import sys
+import json
+import time
+
+from worldatlas.map_build.core.layers import file_hash
 
 
 def _read(path):
@@ -135,10 +139,6 @@ def build(
 
 def build_components(grid, physical_directory, directory, *, physical_code=17):
     """Return current components and their measured output record."""
-    import json
-    import time
-    from worldatlas.map_build.core.layers import file_hash
-
     started = time.monotonic()
     physical_directory, directory = Path(physical_directory), Path(directory)
     directory.mkdir()

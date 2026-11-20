@@ -1,3 +1,5 @@
+"""Test exact source selectors without depending on an earlier boundary."""
+
 import json
 from pathlib import Path
 import tempfile
@@ -10,6 +12,8 @@ from worldatlas.source_imports.watersheds.sources import Sources
 
 
 class SourceGeometryTests(unittest.TestCase):
+    """Exercise GeoJSON, ZIP member, and OSM node and line selections."""
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

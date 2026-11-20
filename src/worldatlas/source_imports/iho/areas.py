@@ -13,7 +13,7 @@ from shapely import union_all
 from shapely.affinity import translate
 from shapely.geometry import Polygon, box, mapping
 
-from worldatlas.source_imports.shared.contracts import FeatureIdentity, NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import FeatureIdentity, NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import feature_result, save_features

@@ -5,7 +5,7 @@ import json
 from shapely import line_merge
 from shapely.geometry import MultiLineString
 
-from worldatlas.source_imports.shared.contracts import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import save_features

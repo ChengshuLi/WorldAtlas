@@ -22,6 +22,8 @@ import pyarrow.compute as pc
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr, osr
 
+from worldatlas.map_build.physical.water_batch import WaterBatch
+
 gdal.UseExceptions()
 ogr.UseExceptions()
 
@@ -249,8 +251,6 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
     out = Path(output)
     kernel = None
     if engine == 'gdal':
-        from worldatlas.map_build.physical.water_batch import WaterBatch
-
         kernel = WaterBatch(out, cfg.get('batch_method', 'hybrid'))
     raster = gdal.GetDriverByName('GTiff').Create(
         str(out / 'water.tif'),

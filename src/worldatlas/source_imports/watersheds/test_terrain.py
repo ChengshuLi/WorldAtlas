@@ -1,3 +1,5 @@
+"""Test native raster crops, overlaps, and gaps with small local datasets."""
+
 from pathlib import Path
 import tempfile
 import unittest
@@ -10,12 +12,25 @@ from worldatlas.source_imports.watersheds.terrain import align, prepare, read_na
 
 
 class TerrainTests(unittest.TestCase):
+    """Check that replacement heights leave the primary grid and valid heights intact."""
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
 
     def raster(self, name, values, transform=(0., 1., 0., 2., 0., -1.), crs=4326):
+        """Write a georeferenced test raster.
+
+        Args:
+            name: Filename under the fixture directory.
+            values: Rows of raster values.
+            transform: GDAL coefficients for the fixture grid.
+            crs: Coordinate reference of the raster.
+
+        Returns:
+            The path of the written raster.
+        """
         values = np.array(values, dtype='float64')
         path = self.root / name
         dataset = gdal.GetDriverByName('GTiff').Create(str(path), values.shape[1],

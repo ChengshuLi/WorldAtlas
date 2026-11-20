@@ -27,24 +27,11 @@ from typing import (
 )
 
 from psycopg.sql import quote
-from pydantic import StringConstraints, TypeAdapter
+from pydantic import TypeAdapter
 from pydantic.json_schema import GenerateJsonSchema
 
-# Use the same explicit Unicode White_Space set in every regex engine.
-NONBLANK_PATTERN = (
-    r"[^\u0009-\u000d\u0020\u0085\u00a0\u1680\u2000-\u200a"
-    r"\u2028\u2029\u202f\u205f\u3000]"
-)
-NonEmptyText = Annotated[str, StringConstraints(pattern=NONBLANK_PATTERN)]
-# Mark raw source IDs so the generator can derive database links from the type.
-SourceId = Annotated[NonEmptyText, "source-id"]
-
-
-class FeatureIdentity(TypedDict):
-    """Select a provider record and name its output feature."""
-
-    feature_id: NonEmptyText
-    source_feature_id: NonEmptyText | int
+from worldatlas.source_imports.run_import import IMPORTERS
+from worldatlas.source_imports.shared.recipe_types import NONBLANK_PATTERN
 
 
 def parameters(constructor):
@@ -221,8 +208,6 @@ def database_checks():
     Returns:
         The SQL script containing all three generated function definitions.
     """
-    from worldatlas.source_imports.run_import import IMPORTERS
-
     choices, sources = [], []
     for method, constructor in sorted(IMPORTERS.items()):
         fields = parameters(constructor)

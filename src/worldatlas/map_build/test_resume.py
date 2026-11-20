@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from worldatlas.map_build import build as pipeline
+from worldatlas.map_build.test_support import selection
 
 
 class ExecutorResumeTests(unittest.TestCase):
@@ -24,8 +25,6 @@ class ExecutorResumeTests(unittest.TestCase):
         }
         cfg["sources"]["raw_manifest"] = pipeline.pin(self.source_path(inputs))
         self.config = pipeline.write(inputs / "request.json", cfg)
-        from worldatlas.map_build.test_support import selection
-
         self.saved_selection = pipeline.write(inputs / "selection.json", selection())
         self.out = self.root / "run"
         self.source = inputs / "source.bin"

@@ -12,11 +12,23 @@ from shapely.geometry import LineString, Point
 from shapely.ops import substring
 from shapely.strtree import STRtree
 
-from worldatlas.source_imports.watersheds.drainage import upstream_order
 from worldatlas.geodesy.wgs84 import GEOD, geodesic
+from worldatlas.source_imports.watersheds.drainage import upstream_order
 
 
 def distance(first, second):
+    """Measure the distance between two points on the WGS84 ellipsoid.
+
+    Args:
+        first: Starting longitude and latitude in degrees.
+        second: Ending longitude and latitude in degrees.
+
+    Returns:
+        The shortest surface distance in metres.
+
+    Raises:
+        ValueError: The coordinates do not yield a finite distance.
+    """
     value = GEOD.inv(*first, *second)[2]
     if not math.isfinite(value):
         raise ValueError('invalid WGS84 boundary coordinates')
@@ -25,12 +37,19 @@ def distance(first, second):
 
 @dataclass
 class Join:
+    """Record a shared point and the exact divide edges it lies on.
+
+    Args:
+        point: WGS84 longitude and latitude of the join.
+        edges: Optional mapping from each participating divide to its edge ID.
+    """
+
     point: tuple
     edges: dict = field(default_factory=dict)
 
 
 class Divide:
-    """A grid-edge graph; connected pieces may meet at branches or form loops."""
+    """Store candidate boundary edges and their connected native grid corners."""
     def __init__(self):
         self.coordinates = {}
         self.edges = set()
@@ -38,6 +57,18 @@ class Divide:
         self.crs = None
 
     def add_grid(self, grid, labels, pairs, output_bounds=None, *, bounds_crs=4326):
+        """Add native cell edges that separate the selected drainage groups.
+
+        Args:
+            grid: Terrain crop, aligned with any previous crops in this divide.
+            labels: Boolean catchment grids keyed by drainage group ID.
+            pairs: Group ID pairs whose shared frontiers can contribute edges.
+            output_bounds: Optional west, south, east, and north limits for edge midpoints.
+            bounds_crs: Coordinate reference of the output limits.
+
+        Raises:
+            ValueError: The crop, group labels, group pairs, or output limits are invalid.
+        """
         if any(np.asarray(cells).shape != grid.elevation.shape or np.asarray(cells).dtype != bool
                for cells in labels.values()):
             raise ValueError('basin labels and terrain grid must match')
@@ -59,6 +90,7 @@ class Divide:
                 raise ValueError('divide output bounds require a finite geographic rectangle')
 
         def node(row, column):
+            # Use positions on the uncropped grid to join edges from overlapping crops.
             key = (row + grid.window_offset[0], column + grid.window_offset[1])
             if key not in self.coordinates:
                 point = to_geo.transform(*grid.coordinates(row, column, center=False), errcheck=True)
@@ -100,7 +132,17 @@ class Divide:
         return edges, linestrings(coordinates.reshape(-1, 2, 2))
 
     def nearest_vertex(self, point):
-        """Select a native divide corner for an explicit geographic connector."""
+        """Select the closest native divide corner to a geographic reference.
+
+        Args:
+            point: Reference longitude and latitude in WGS84 degrees.
+
+        Returns:
+            A join at the selected corner with its incident edge ID.
+
+        Raises:
+            ValueError: The divide is empty or the reference gives invalid distances.
+        """
         if not self.coordinates:
             raise ValueError('selected divide is empty')
         keys = sorted(self.coordinates)
@@ -114,7 +156,18 @@ class Divide:
         return Join(self.coordinates[key], {self: edge})
 
     def route(self, start, end):
-        """Find a WGS84 shortest connected path between the chosen intersections."""
+        """Find the shortest connected path along candidate divide edges.
+
+        Args:
+            start: Join identifying the start point and its divide edge.
+            end: Join identifying the end point and its divide edge.
+
+        Returns:
+            A WGS84 line from start to end, with length measured along its edges.
+
+        Raises:
+            ValueError: The joins are invalid, coincide, or lie on disconnected pieces.
+        """
         if start.point == end.point:
             raise ValueError('divide joins coincide')
         coordinates = dict(self.coordinates)
@@ -130,6 +183,7 @@ class Divide:
             elif join.point == coordinates[b]:
                 terminal = b
             else:
+                # Split the identified edge so routing starts at the exact intersection.
                 terminal = ('join', index)
                 first, last = coordinates[a], coordinates[b]
                 axis = 0 if abs(last[0] - first[0]) >= abs(last[1] - first[1]) else 1
@@ -217,11 +271,22 @@ def intersection(left, right, near):
 
 
 def connect_waypoints(line, points, max_step_m):
-    """Derive ordered attachments to geographic points on the current divide.
+    """Replace short parts of the divide to pass through selected points.
 
     Enclose every intersection of each connector with the source route. The
     attachment interval grows only at existing vertices, so this terminates
     without a search radius, numerical tolerance or stored attachment coordinates.
+
+    Args:
+        line: The ordered divide line to modify.
+        points: WGS84 waypoints in their intended order along the divide.
+        max_step_m: Maximum spacing between samples on the added geodesics.
+
+    Returns:
+        The connected line and a report of chosen attachments and connector lengths.
+
+    Raises:
+        ValueError: The waypoints are invalid, out of order, or produce a self-crossing line.
     """
     if not math.isfinite(max_step_m) or max_step_m <= 0:
         raise ValueError('positive geodesic spacing is required')
@@ -298,7 +363,22 @@ def connect_waypoints(line, points, max_step_m):
 
 
 def assemble(sections, joins, start, end, *, waypoints=None, connections=None):
-    """Cut independent sections at their shared joins and assemble the final line."""
+    """Cut sections at their shared joins and assemble one boundary.
+
+    Args:
+        sections: Ordered source lines, connectors, or divide graphs.
+        joins: One resolved join for each consecutive pair of sections.
+        start: First point, supplied as coordinates or a resolved join.
+        end: Last point, supplied as coordinates or a resolved join.
+        waypoints: Optional point selections and spacing keyed by section index.
+        connections: Optional report updated with the waypoint attachments and lengths.
+
+    Returns:
+        The completed WGS84 GeoJSON LineString.
+
+    Raises:
+        ValueError: Sections cannot meet at the declared joins or form an invalid line.
+    """
     if not sections or len(joins) != len(sections) - 1:
         raise ValueError('one join is required between each pair of sections')
     ends = [start if isinstance(start, Join) else Join(tuple(start)),
@@ -330,7 +410,19 @@ def assemble(sections, joins, start, end, *, waypoints=None, connections=None):
 
 
 def cell_at(grid, point, *, required=True):
-    """Find a source point's cell; optional selections may lie in another crop."""
+    """Find the grid cell containing a geographic point.
+
+    Args:
+        grid: Terrain crop and coordinate reference.
+        point: Longitude and latitude in WGS84 degrees.
+        required: Whether a point outside the crop should raise an error.
+
+    Returns:
+        The row and column, or None for an optional point outside the crop.
+
+    Raises:
+        ValueError: A required point is outside the crop.
+    """
     x, y = Transformer.from_crs(4326, grid.crs, always_xy=True).transform(*point, errcheck=True)
     left, a, _, top, _, e = grid.transform
     row, column = math.floor((y - top) / e), math.floor((x - left) / a)
@@ -344,10 +436,24 @@ def cell_at(grid, point, *, required=True):
 def flow_to_point(grid, flow, labels, point, inside_group, outside_groups, max_step_m):
     """Connect a divide to a known stream head using its actual upstream flow.
 
-    Find the closest cell reached by flow from the selected divide, follow its
-    actual upstream route and connect its center to the exact source point.
-    A vector point need not fall in the cell traversed by raster drainage.
-    No pixel search radius or modified elevation is needed.
+    Select a cell on a flow path from the divide near the mapped stream head.
+    Follow the grid's flow to that cell and connect its center to the source point.
+
+    Args:
+        grid: Terrain crop and coordinate reference.
+        flow: Grid of downstream cell indices, with -1 at terminals.
+        labels: Grid giving each cell its unique drainage group or -1.
+        point: WGS84 coordinate of the source stream head.
+        inside_group: Destination associated with the stream head.
+        outside_groups: Opposing destinations whose interfaces can start the path.
+        max_step_m: Maximum spacing of points in the geodesic connector, in metres.
+
+    Returns:
+        The path from the divide through the selected flow cells to the stream head,
+        and a report containing the interface cells and connector length.
+
+    Raises:
+        ValueError: Available flow and labels do not establish a path from the divide.
     """
     row, column = cell_at(grid, point)
     if labels[row, column] != inside_group:
@@ -368,6 +474,7 @@ def flow_to_point(grid, flow, labels, point, inside_group, outside_groups, max_s
         interface[source] |= ((labels[source] == inside_group) &
                               np.isin(labels[neighbor], outside_groups))
     reached = interface.ravel().copy()
+    # Limit the choice near the source point to cells reachable from a known divide.
     todo = list(map(int, np.flatnonzero(reached)))
     while todo:
         following = int(flow.ravel()[todo.pop()])
@@ -384,6 +491,7 @@ def flow_to_point(grid, flow, labels, point, inside_group, outside_groups, max_s
     terminal = int(eligible[np.argmin(lengths_to_point)])
     lengths = {terminal: 0.}
     candidates = []
+    # Search upstream of the selected cell and use the shortest eligible interface path.
     for value in upstream_order(flow, terminal):
         index = int(value)
         rr, cc = divmod(index, width)

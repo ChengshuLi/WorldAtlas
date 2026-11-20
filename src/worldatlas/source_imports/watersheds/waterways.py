@@ -59,6 +59,7 @@ def _line_neighbors(line, coordinates, point):
         index = matches[0]
         return coordinates[index], coordinates[index + 2]
     steps = np.diff(coordinates, axis=0)
+    # A crossing can lie inside a segment, with no vertex recorded at its position.
     station = line.project(Point(point))
     index = np.searchsorted(np.cumsum(np.hypot(steps[:, 0], steps[:, 1])), station)
     index = min(index, len(coordinates) - 2)
@@ -71,6 +72,7 @@ def _boundary_side(point, before, after, neighbor):
         return math.atan2(vertex[1] - point[1], vertex[0] - point[0])
 
     start = angle(before)
+    # At a boundary corner, the two rays divide the area into unequal sectors.
     end = (angle(after) - start) % math.tau
     arm = (angle(neighbor) - start) % math.tau
     if arm == 0 or arm == end:
@@ -80,6 +82,14 @@ def _boundary_side(point, before, after, neighbor):
 
 @dataclass
 class Way:
+    """Keep the values needed after Pyosmium advances beyond a way.
+
+    Args:
+        nodes: Ordered OSM node IDs, normally from upstream to downstream.
+        tags: Provider attributes, including the waterway classification.
+        version: OSM object version in the archive.
+    """
+
     nodes: tuple
     tags: dict
     version: int
@@ -129,6 +139,7 @@ class Waterways:
         self.upstream, self.downstream = defaultdict(set), defaultdict(set)
         self.edge_sources = defaultdict(list)
         seen, junctions = set(), set()
+        # Single-use shape vertices describe curves. Endpoints and shared nodes connect routes.
         for ident in sorted(self.natural - self.incomplete):
             nodes = self.ways[ident].nodes
             junctions.update((nodes[0], nodes[-1]))
@@ -192,13 +203,33 @@ class Waterways:
                 self._relation(ident, (obj.version, members))
 
     def segments(self, way_id):
-        """Source index/node pairs delimiting each directed topology segment."""
+        """Find the consecutive network junctions along an ordered way.
+
+        Args:
+            way_id: OSM way ID.
+
+        Returns:
+            An iterator of start and end pairs, each carrying the source
+            vertex index and OSM node ID.
+        """
         anchors = [(i, node) for i, node in enumerate(self.ways[str(way_id)].nodes)
                    if node in self.topology_nodes]
         return pairwise(anchors)
 
     def line(self, way_id, start=0, end=None):
-        """Keep original coordinates from start through end, including both indices."""
+        """Read a way or its selected section in original vertex order.
+
+        Args:
+            way_id: OSM way ID.
+            start: Index of the first included node.
+            end: Index of the last included node, or None to include the way's end.
+
+        Returns:
+            A Shapely LineString with the source coordinates.
+
+        Raises:
+            ValueError: The way is too short or its archive lacks referenced nodes.
+        """
         way_id = str(way_id)
         way = self.ways[way_id]
         end = len(way.nodes) - 1 if end is None else end
@@ -211,7 +242,14 @@ class Waterways:
         return self._lines[key]
 
     def nearby(self, grid):
-        """Select ways intersecting the grid, preserving each complete geometry."""
+        """Select complete natural ways that intersect a terrain crop's extent.
+
+        Args:
+            grid: Terrain crop and coordinate reference.
+
+        Returns:
+            The matching way IDs. Downstream geometry outside the crop is retained.
+        """
         x, a, _, y, _, e = grid.transform
         height, width = grid.elevation.shape
         bounds = Transformer.from_crs(grid.crs, 4326, always_xy=True).transform_bounds(
@@ -219,7 +257,15 @@ class Waterways:
         return self.in_bounds(bounds)
 
     def in_bounds(self, bounds):
-        """Find complete natural ways in a WGS84 rectangle, including wrapping."""
+        """Find complete natural ways in a WGS84 rectangle.
+
+        Args:
+            bounds: West, south, east, and north limits. If the west limit
+                exceeds the east limit, the rectangle crosses the antimeridian.
+
+        Returns:
+            Sorted IDs of complete mapped rivers and streams intersecting the rectangle.
+        """
         if self._spatial is None:
             self._spatial_ids = sorted(self.natural - self.incomplete)
             self._spatial = STRtree([self.line(ident) for ident in self._spatial_ids])
@@ -230,7 +276,15 @@ class Waterways:
         return [self._spatial_ids[index] for index in sorted(indices)]
 
     def require_destinations(self, bounds, report):
-        """Reject unresolved relevant rivers before calculating terrain drainage."""
+        """Check that relevant natural waterways have known downstream routes.
+
+        Args:
+            bounds: WGS84 rectangles covered by the terrain calculation.
+            report: Downstream tracing report with unresolved sections.
+
+        Raises:
+            ValueError: A relevant way has missing geometry or an unresolved route.
+        """
         relevant = set().union(*(self.in_bounds(rectangle) for rectangle in bounds))
         relevant_nodes = {node for ident in relevant for node in self.ways[ident].nodes}
         areas = [area for w, s, e, n in bounds
@@ -341,6 +395,7 @@ class Waterways:
                         incoming.add(sector)
                 crosses = any(-sector in incoming for sector in outgoing.values() if sector)
                 if crosses:
+                    # An approved fork must still separate two known destination groups.
                     groups = shared_forks.get(node, {})
                     if len(incoming) == 1 and set(outgoing.values()) == {-1, 1} and groups.keys() == outgoing.keys():
                         by_side = {sector: {groups[n] for n in outgoing if outgoing[n] == sector}
@@ -368,8 +423,14 @@ class Waterways:
     def groups(self, groups):
         """Include all mapped natural tributaries reaching the selected ways.
 
-        Keys are actual construction group IDs; values are selected downstream
-        way IDs. Ways reaching multiple groups are reported as ambiguous.
+        Args:
+            groups: Mapping from drainage group IDs to selected downstream OSM ways.
+
+        Returns:
+            Possible group IDs on each directed edge and a tracing report.
+
+        Raises:
+            ValueError: A group ID is invalid or a selected way is missing or incomplete.
         """
         roots = {}
         for group, ways in groups.items():
@@ -386,7 +447,14 @@ class Waterways:
         return self._assign(roots)
 
     def basin_groups(self, basins):
-        """Trace every mapped natural network to source-backed exit basins."""
+        """Trace the natural stream network to destinations identified by basin polygons.
+
+        Args:
+            basins: Source basin index with the recipe's group mapping.
+
+        Returns:
+            Possible group IDs on each directed edge and a report of the traced routes.
+        """
         roots = defaultdict(set)
         coastal, seen = [], set()
         todo = sorted(node for node in self.topology_nodes if not self.downstream[node])
@@ -419,6 +487,7 @@ class Waterways:
         return assigned, report
 
     def _assign(self, roots):
+        """Trace known destinations and unresolved branches upstream separately."""
         reaches = {}
         for group, initial in roots.items():
             seen = set(initial)
@@ -491,7 +560,17 @@ def rasterize(lines, grid):
 
 
 def seed_grid(network, assigned, grid):
-    """Retain every known destination when burning natural river sections."""
+    """Mark terrain cells touched by mapped rivers with known destinations.
+
+    Args:
+        network: Mapped stream network containing the original way coordinates.
+        assigned: Known destination group IDs keyed by directed network edge.
+        grid: Native terrain to receive the masks.
+
+    Returns:
+        A Boolean mask for each destination group and a report of seeded cells.
+        A cell may appear in several masks when its mapped river drains to several groups.
+    """
     groups = sorted({group for possible in assigned.values() for group in possible})
     nearby = network.nearby(grid)
     seeds = {}
