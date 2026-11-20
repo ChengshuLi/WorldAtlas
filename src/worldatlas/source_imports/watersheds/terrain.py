@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import math
 
 import numpy as np
-from osgeo import gdal
+from osgeo import gdal, gdal_array
 from pyproj import CRS, Transformer
 
 gdal.UseExceptions()
@@ -81,18 +81,30 @@ def read_native(paths, bounds, *, bounds_crs=4326):
     return Grid(elevation, transform, crs, native_origin=origin, window_offset=(row0, col0))
 
 
-def align(paths, grid, *, resampling='bilinear'):
-    """Interpolate secondary raster values onto the unchanged primary grid."""
-    height, width = grid.elevation.shape
-    destination = gdal.GetDriverByName('MEM').Create('', width, height, 1, gdal.GDT_Float64)
+def raster_on_grid(values, grid):
+    """Give GDAL a writable view of a NumPy raster on the terrain grid.
+
+    Args:
+        values: NumPy array with the terrain grid's shape.
+        grid: Terrain coordinate reference and affine transform.
+
+    Returns:
+        An in-memory GDAL dataset backed by the supplied array.
+    """
+    destination = gdal_array.OpenArray(values)
     destination.SetGeoTransform(grid.transform)
     destination.SetProjection(CRS.from_user_input(grid.crs).to_wkt())
-    band = destination.GetRasterBand(1)
-    band.SetNoDataValue(float('nan'))
-    band.Fill(float('nan'))
+    return destination
+
+
+def align(paths, grid, *, resampling='bilinear'):
+    """Interpolate secondary raster values onto the unchanged primary grid."""
+    values = np.full(grid.elevation.shape, np.nan)
+    destination = raster_on_grid(values, grid)
+    destination.GetRasterBand(1).SetNoDataValue(np.nan)
     gdal.Warp(destination, [str(path) for path in paths],
-              resampleAlg=resampling, dstNodata=float('nan'))
-    return band.ReadAsArray()
+              resampleAlg=resampling, dstNodata=np.nan)
+    return values
 
 
 def prepare(primary, bounds, secondary=(), height_offset=None, *, bounds_crs=4326):

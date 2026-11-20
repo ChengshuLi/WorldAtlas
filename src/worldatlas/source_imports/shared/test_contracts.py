@@ -161,7 +161,8 @@ class DatabaseContractTests(unittest.TestCase):
                 ),
             },
             evidence_sources=["evidence", "raw"],
-            lines={"boundary": [{"source_id": "ordinary-untyped-text"}]},
+            lines={"boundary": {"source": "single", "way": 1}},
+            start={"source_id": "ordinary-untyped-text"},
         )
         self.database.execute(
             "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
@@ -247,6 +248,20 @@ class DatabaseContractTests(unittest.TestCase):
                     (Jsonb(schema), Jsonb(document)),
                 ).fetchone()
                 self.assertIs(actual, expected)
+
+    def test_watershed_lines_and_crops_require_the_new_object_format(self):
+        method = 'watershed_boundary'
+        line = {'source': 'raw', 'way': 42}
+        bounds = [0, 0, 1, 1]
+        terrain = dict(domains=[{'bounds': bounds}], primary=['raw'], basins=['raw'],
+                       basin_attribute='ID', groups={'1': [40], '2': [50]}, interfaces=[[1, 2]])
+        arguments = dict(ARGUMENTS[method], lines={'coast': line}, terrains={'divide': terrain})
+        self.check(method, arguments, True)
+        self.check(method, dict(arguments, lines={'coast': [line]}), False)
+        self.check(method, dict(arguments, lines={'coast': dict(line, geojson_feature=0)}), False)
+        for domain in (bounds, {'bounds': bounds[:3]}, {'bounds': bounds, 'projection': 4326}):
+            with self.subTest(domain=domain):
+                self.check(method, dict(arguments, terrains={'divide': dict(terrain, domains=[domain])}), False)
 
     def test_optional_fields_nested_fields_and_numeric_values(self):
         cases = [

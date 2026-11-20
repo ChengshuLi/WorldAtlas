@@ -56,9 +56,9 @@ def fixtures(directory):
     recipe = {
         'feature_id': 'test-divide',
         'sources': {name: '__watershed_' + name for name in files},
-        'lines': {name: [{'source': 'lines', 'geojson_feature': i}]
+        'lines': {name: {'source': 'lines', 'geojson_feature': i}
                   for i, name in enumerate(('before', 'after'))},
-        'terrains': {'ridge': {'primary': ['dem'], 'domains': [[0, 0, .006, .006]],
+        'terrains': {'ridge': {'primary': ['dem'], 'domains': [{'bounds': [0, 0, .006, .006]}],
                     'basins': [{'source': 'basins', 'member': 'basins.shp'}],
                     'basin_attribute': 'BASIN', 'groups': {'3': [41], '100': [99]},
                     'interfaces': [[3, 100]]}},
@@ -136,7 +136,8 @@ class ConstructionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
             expected, _ = build_fixture(recipe, files)
-            recipe['terrains']['ridge']['domains'] = [[0, .003, .006, .006], [0, 0, .006, .003]]
+            recipe['terrains']['ridge']['domains'] = [
+                {'bounds': [0, .003, .006, .006]}, {'bounds': [0, 0, .006, .003]}]
             recipe['terrains']['ridge']['closed_sinks'] = [
                 {'point': {'point': [.001, .005]}, 'group': 3}]
             actual, _ = build_fixture(recipe, files)
@@ -168,7 +169,7 @@ class ConstructionTests(unittest.TestCase):
             document['features'].append({'type': 'Feature', 'properties': {}, 'geometry': {
                 'type': 'LineString', 'coordinates': [[.001, .004], [.003, .006]]}})
             files['lines'].write_text(json.dumps(document))
-            recipe['lines']['crossing'] = [{'source': 'lines', 'geojson_feature': 2}]
+            recipe['lines']['crossing'] = {'source': 'lines', 'geojson_feature': 2}
             recipe['start'] = {'intersection': ['before', 'crossing'], 'near': [.002, .005]}
             geometry, _ = build_fixture(recipe, files)
             self.assertEqual(geometry['coordinates'][0], [.002, .005])

@@ -41,7 +41,7 @@ Set the record's method to `watershed_boundary`. Put the geographic reasoning an
 
 - `feature_id`: the ID of the editable boundary.
 - `sources`: local file names mapped directly to catalog source-ID strings. Multipart inputs instead specify ordered source-ID strings in `parts`, the complete file's checksum, size and filename. There are no one-field wrappers.
-- `lines`: one complete GeoJSON feature, OSM way or river relation per named line. Joining different source features belongs in `sections` with explicit joins.
+- `lines`: one selector object per named line, such as `{"coast": {"source": "anapa", "way": 396539058}}`. Each selector identifies a complete GeoJSON feature, OSM way or river relation. Joining different source features belongs in `sections` with explicit joins.
 - `terrains`: primary and secondary sources, height conversion, analysis domains, drainage groups, waterway references and the group pairs whose divides are needed.
 - `sections`: the final ordered source lines, calculated divides, drainage paths or explicit geodesic connectors.
 - `joins`: geographic anchors for choosing actual intersections between sections.
@@ -79,7 +79,7 @@ For coastal terrain, `ocean_mask` selects provider mask sources and their ocean 
 
 Check the chosen boundary against larger terrain domains when sources or construction settings change. Once that comparison passes, reuse the validated domains. An ordinary run does not perform an automatic crop-expansion search.
 
-For overlapping calculation areas, a domain can specify `bounds` for its full terrain context and `output_bounds` for the portion contributing divide edges. Both rectangles use WGS84 by default. Use adjoining output areas and overlapping context; this keeps inconsistent interfaces at calculation edges out of the assembled graph. Larger-crop validation expands the context while retaining those output areas and the native grid. Domains may specify `crs` when their bounds and output areas are projected rectangles. This avoids enlarging a native raster crop by converting its rectangle to longitude and latitude and back. Source lookups and final coordinates still use WGS84; elevation cells retain their original positions and values.
+Each item in a terrain's `domains` is an object with `bounds` in `[west, south, east, north]` order, such as `{"bounds": [37.2, 44.5, 38.1, 45.1]}`. An optional `output_bounds` rectangle limits which edges the crop contributes. Both rectangles use WGS84 unless the domain sets `crs`. Use adjoining output areas and overlapping context to keep calculation-edge artifacts out of the assembled graph. Larger-crop validation expands the context while retaining those output areas and the native grid. Projected bounds avoid changing the extent through a round trip to longitude and latitude. Source lookups and final coordinates still use WGS84.
 
 ## Boundary assembly and tests
 

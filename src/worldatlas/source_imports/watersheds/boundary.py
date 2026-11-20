@@ -140,15 +140,20 @@ class Divide:
             terminals.append(terminal)
         nodes = list(coordinates)
         node_ids = {node: index for index, node in enumerate(nodes)}
-        rows, columns, lengths = [], [], []
+        rows, columns = [], []
         for edge in sorted(split):
             pieces = sorted(split[edge], key=lambda item: item[0])
             for (_, a), (_, b) in zip(pieces, pieces[1:]):
                 rows.append(node_ids[a])
                 columns.append(node_ids[b])
-                lengths.append(distance(coordinates[a], coordinates[b]))
+        positions = np.asarray(list(coordinates.values()))
+        lon1, lat1 = positions[rows].T
+        lon2, lat2 = positions[columns].T
+        lengths = GEOD.inv(lon1, lat1, lon2, lat2)[2]
+        if not np.isfinite(lengths).all():
+            raise ValueError('invalid WGS84 boundary coordinates')
         # Each divide edge is traversable in both directions.
-        graph = csr_array((lengths + lengths, (rows + columns, columns + rows)),
+        graph = csr_array((np.concatenate((lengths, lengths)), (rows + columns, columns + rows)),
                           shape=(len(nodes), len(nodes)))
         source, target = (node_ids[node] for node in terminals)
         distances, previous = dijkstra(graph, indices=source, return_predecessors=True)

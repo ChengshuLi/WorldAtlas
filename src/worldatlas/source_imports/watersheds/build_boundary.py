@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 import platform
 import time
-from typing import Any
+from typing import Any, NotRequired, TypedDict
 
 import numpy as np
 from osgeo import gdal, osr
@@ -24,11 +24,39 @@ from worldatlas.source_imports.watersheds.boundary import (
     Divide, assemble, cell_at, distance, flow_to_point, intersection,
 )
 from worldatlas.source_imports.watersheds.drainage import compute_flow, possible_destinations, single_destinations
-from worldatlas.source_imports.watersheds.sources import Sources
+from worldatlas.source_imports.watersheds.sources import FileSelection, SourceLine, Sources
 from worldatlas.source_imports.watersheds.terrain import align, prepare
 from worldatlas.source_imports.watersheds.waterways import seed_grid
 
 LOGGER = logging.getLogger(__name__)
+
+Bounds = tuple[float, float, float, float]
+
+
+class TerrainDomain(TypedDict):
+    """Select a terrain crop and optionally narrow its contributing area."""
+
+    bounds: Bounds
+    crs: NotRequired[NonEmptyText | int]
+    output_bounds: NotRequired[Bounds | None]
+
+
+class TerrainSettings(TypedDict):
+    """Describe terrain inputs and the drainage divides to calculate."""
+
+    domains: list[TerrainDomain]
+    primary: list[NonEmptyText | FileSelection]
+    basins: list[NonEmptyText | FileSelection]
+    basin_attribute: NonEmptyText
+    groups: dict[NonEmptyText, list[Any]]
+    interfaces: list[tuple[int | NonEmptyText, int | NonEmptyText]]
+    secondary: NotRequired[list[NonEmptyText | FileSelection]]
+    waterways: NotRequired[list[NonEmptyText | FileSelection]]
+    reverse_waterways: NotRequired[list[NonEmptyText | int]]
+    waterway_groups: NotRequired[dict[NonEmptyText, list[NonEmptyText | int]]]
+    height_offset: NotRequired[NonEmptyText]
+    closed_sinks: NotRequired[list[dict[str, Any]]]
+    ocean_mask: NotRequired[dict[str, Any]]
 
 
 def runtime_versions():
@@ -66,7 +94,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
     started = time.monotonic()
     report = {'terrain': {}, 'connections': {}}
     sources = Sources(files)
-    lines = {name: sources.line(parts) for name, parts in line_selections.items()}
+    lines = {name: sources.line(selection) for name, selection in line_selections.items()}
     report['source_geometry_seconds'] = time.monotonic() - started
     divides, connections, networks = {}, {}, []
     for name, settings in (terrains or {}).items():
@@ -74,12 +102,10 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
         domains = settings['domains']
         if not domains:
             raise ValueError('terrain requires at least one analysis domain')
-        bounds_of = lambda domain: domain['bounds'] if isinstance(domain, dict) else domain
-        crs_of = lambda domain: domain.get('crs', 4326) if isinstance(domain, dict) else 4326
         paths = lambda selected: [sources.path({'source': item} if isinstance(item, str) else item)
                                   for item in selected]
-        geographic_bounds = [Transformer.from_crs(crs_of(domain), 4326, always_xy=True)
-                             .transform_bounds(*bounds_of(domain), densify_pts=21, errcheck=True)
+        geographic_bounds = [Transformer.from_crs(domain.get('crs', 4326), 4326, always_xy=True)
+                             .transform_bounds(*domain['bounds'], densify_pts=21, errcheck=True)
                              for domain in domains]
         bounds = [min(b[0] for b in geographic_bounds), min(b[1] for b in geographic_bounds),
                   max(b[2] for b in geographic_bounds), max(b[3] for b in geographic_bounds)]
@@ -111,14 +137,15 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
             raise ValueError('closed drainage destinations require known group IDs')
         covered_sinks = set()
         for domain in domains:
-            bounds = bounds_of(domain)
-            output_bounds = domain.get('output_bounds') if isinstance(domain, dict) else None
+            bounds = domain['bounds']
+            output_bounds = domain.get('output_bounds')
+            bounds_crs = domain.get('crs', 4326)
             tick = time.monotonic()
             grid = prepare(paths(settings['primary']), bounds,
                            paths(settings.get('secondary', [])),
                            sources.path({'source': settings['height_offset']})
                            if 'height_offset' in settings else None,
-                           bounds_crs=crs_of(domain))
+                           bounds_crs=bounds_crs)
             terrain_seconds = time.monotonic() - tick
             step = time.monotonic()
             seeds, seed_report = seed_grid(network, assigned, grid)
@@ -172,7 +199,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
             drainage_seconds = time.monotonic() - step
             step = time.monotonic()
             graph.add_grid(grid, labels, settings['interfaces'], output_bounds,
-                           bounds_crs=crs_of(domain))
+                           bounds_crs=bounds_crs)
             for index, flow_settings in required:
                 curve, receipt = flow_to_point(
                     grid, flow, single_destinations(labels, flow.shape),
@@ -186,7 +213,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
                 destination_count += cells
             domain_reports.append({
                 'bounds': bounds, 'output_bounds': output_bounds, 'shape': list(flow.shape),
-                'bounds_crs': crs_of(domain),
+                'bounds_crs': bounds_crs,
                 'secondary_cells': grid.secondary_cells,
                 'unknown_cells': int((destination_count == 0).sum()),
                 'shared_drainage_cells': int((destination_count > 1).sum()),
@@ -263,10 +290,10 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
 
 def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
                        sources: dict[NonEmptyText, SourceId | MultipartSource],
-                       lines: dict[NonEmptyText, list[dict[str, Any]]],
+                       lines: dict[NonEmptyText, SourceLine],
                        sections: list[dict[str, Any]], joins: list[dict[str, Any]],
                        start: dict[str, Any], end: dict[str, Any],
-                       terrains: dict[NonEmptyText, dict[str, Any]] | None = None,
+                       terrains: dict[NonEmptyText, TerrainSettings] | None = None,
                        evidence_sources: list[SourceId] | None = None):
     """Construct and save the final watershed boundary.
 

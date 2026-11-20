@@ -11,7 +11,6 @@ import numpy as np
 import osmium
 from osgeo import gdal, osr
 import pyarrow as pa
-from pyproj import CRS
 from pyproj import Transformer
 from shapely import to_wkb
 from shapely.geometry import LineString, Point, box
@@ -19,6 +18,7 @@ from shapely.strtree import STRtree
 
 from worldatlas.geodesy.ogr import geometry_layer
 from worldatlas.source_imports.shared.sources import archive_member
+from worldatlas.source_imports.watersheds.terrain import raster_on_grid
 
 
 def _osm_files(paths, directory):
@@ -376,10 +376,8 @@ def rasterize(lines, grid):
     Returns:
         A Boolean array marking every cell touched by a line.
     """
-    height, width = grid.elevation.shape
-    destination = gdal.GetDriverByName('MEM').Create('', width, height, 1, gdal.GDT_Byte)
-    destination.SetGeoTransform(grid.transform)
-    destination.SetProjection(CRS.from_user_input(grid.crs).to_wkt())
+    values = np.zeros(grid.elevation.shape, dtype='uint8')
+    destination = raster_on_grid(values, grid)
     source_crs = osr.SpatialReference()
     source_crs.ImportFromEPSG(4326)
     source_crs.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
@@ -387,7 +385,7 @@ def rasterize(lines, grid):
     if len(geometry):
         vector, layer = geometry_layer(geometry, source_crs)
         gdal.RasterizeLayer(destination, [1], layer, burn_values=[1], options=['ALL_TOUCHED=TRUE'])
-    return destination.ReadAsArray().astype(bool)
+    return values.astype(bool)
 
 
 def seed_grid(network, assigned, grid):

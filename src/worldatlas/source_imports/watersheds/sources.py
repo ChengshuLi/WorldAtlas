@@ -1,12 +1,46 @@
 """Read selected provider vertices, ways and river relations from verified files."""
 import json
+from typing import NotRequired, TypedDict
 from zipfile import ZipFile
 
 import numpy as np
 from shapely.geometry import LineString
 
+from worldatlas.source_imports.shared.contracts import NonEmptyText
 from worldatlas.source_imports.shared.sources import archive_member, gdal_dataset_path
 from worldatlas.source_imports.watersheds.waterways import Waterways
+
+
+class FileSelection(TypedDict):
+    """Select a recipe source and optionally one of its ZIP members."""
+
+    source: NonEmptyText
+    member: NotRequired[NonEmptyText]
+
+
+class GeoJSONLine(FileSelection):
+    """Select a line by its position in a GeoJSON feature collection."""
+
+    geojson_feature: int
+
+
+class OsmWayLine(TypedDict):
+    """Select a complete way from an OSM extract."""
+
+    source: NonEmptyText
+    way: NonEmptyText | int
+
+
+class OsmRiverLine(TypedDict):
+    """Select and orient a river relation's member ways."""
+
+    source: NonEmptyText
+    relation: NonEmptyText | int
+    role: str
+    start_node: NonEmptyText | int
+
+
+SourceLine = GeoJSONLine | OsmWayLine | OsmRiverLine
 
 
 class Sources:
@@ -91,19 +125,20 @@ class Sources:
             return intersection(lines[first], lines[second], specification['near']).point
         raise ValueError('unknown source point selection')
 
-    def line(self, parts):
-        """Read one complete source feature; boundary assembly joins sections."""
-        if len(parts) != 1:
-            raise ValueError('select one source feature per line; join separate sections in boundary assembly')
-        part, = parts
+    def line(self, part: SourceLine):
+        """Read one complete source line for boundary assembly.
+
+        Args:
+            part: A GeoJSON feature, OSM way, or OSM river relation selection.
+
+        Returns:
+            The selected Shapely line in WGS84.
+        """
         if 'way' in part:
-            allowed = {'source', 'way'}
             points = list(self.network([part['source']]).line(part['way']).coords)
         elif 'relation' in part:
-            allowed = {'source', 'relation', 'role', 'start_node'}
             points = self.river(part)
         elif 'geojson_feature' in part:
-            allowed = {'source', 'member', 'geojson_feature'}
             path = self.files[part['source']]
             if 'member' in part:
                 with ZipFile(path) as archive, archive.open(archive_member(archive, part['member'])) as stream:
@@ -117,8 +152,6 @@ class Sources:
             points = geometry['coordinates']
         else:
             raise ValueError('unsupported source line selection')
-        if set(part) - allowed:
-            raise ValueError('unsupported source line options')
         coordinates = [tuple(map(float, point)) for point in points]
         if len(coordinates) < 2:
             raise ValueError('source line needs at least two selected points')
