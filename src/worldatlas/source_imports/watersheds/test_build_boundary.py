@@ -22,7 +22,7 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.division.areas import divide_area
 from worldatlas.map_build.division.scope import complete_row
 from worldatlas.source_imports.run_import import run_import
-from worldatlas.source_imports.watersheds.build_boundary import construct
+from worldatlas.source_imports.watersheds.build_boundary import construct_boundary
 from worldatlas.source_imports.watersheds.test_basins import write_basin_shapefile
 
 
@@ -94,7 +94,7 @@ def build_fixture(recipe, files):
     Returns:
         Constructed boundary and its calculation report.
     """
-    return construct(
+    return construct_boundary(
         files, line_selections=recipe['lines'], sections=recipe['sections'],
         joins=recipe['joins'], start=recipe['start'], end=recipe['end'],
         terrains=recipe.get('terrains'),
@@ -139,7 +139,7 @@ class ConstructionTests(unittest.TestCase):
                              '<way id="30"><nd ref="2"/><nd ref="4"/><tag k="waterway" v="stream"/></way></osm>')
             files['rivers'] = river
             recipe['terrains']['ridge'].update(waterways=['rivers'], waterway_groups={3: ['20']})
-            with patch('worldatlas.source_imports.watersheds.build_boundary.prepare') as terrain:
+            with patch('worldatlas.source_imports.watersheds.build_boundary.prepare_elevation_grid') as terrain:
                 with self.assertRaisesRegex(ValueError, 'unresolved downstream route'):
                     build_fixture(recipe, files)
                 terrain.assert_not_called()

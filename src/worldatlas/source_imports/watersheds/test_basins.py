@@ -11,7 +11,7 @@ from shapely.geometry import LineString, box
 
 from worldatlas.source_imports.watersheds.terrain import Grid
 from worldatlas.source_imports.watersheds.basins import Basins
-from worldatlas.source_imports.watersheds.waterways import Waterways, seed_grid
+from worldatlas.source_imports.watersheds.waterways import Waterways, rasterize_waterway_destinations
 
 
 def write_basin_shapefile(path, attribute, polygons, *, crs='EPSG:4326'):
@@ -55,26 +55,26 @@ class BasinTests(unittest.TestCase):
 
     def test_source_values_map_to_actual_construction_groups(self):
         basins = self.basins()
-        self.assertEqual(basins.at((.5, 1)), 3)
-        self.assertEqual(basins.at((1.5, 1)), 7)
+        self.assertEqual(basins.group_at_point((.5, 1)), 3)
+        self.assertEqual(basins.group_at_point((1.5, 1)), 7)
 
     def test_projected_basin_source_uses_wgs84_bounds_and_lookup_points(self):
         path = self.root / 'projected.shp'
         write_basin_shapefile(path, 'DEST', [(100, box(0, 0, 1, 2)), (200, box(3, 0, 4, 2))],
                              crs='EPSG:3857')
         basins = Basins([path], 'DEST', {3: [100], 7: [200]}, [0, 0, 2, 2])
-        self.assertEqual(basins.at((.5, 1)), 3)
+        self.assertEqual(basins.group_at_point((.5, 1)), 3)
         self.assertEqual(basins.values, [100])
 
     def test_polygon_boundary_and_missing_coverage_remain_unknown(self):
         basins = self.basins()
-        self.assertEqual(basins.at((1, 1)), -1)
-        self.assertEqual(basins.at((3, 1)), -1)
+        self.assertEqual(basins.group_at_point((1, 1)), -1)
+        self.assertEqual(basins.group_at_point((3, 1)), -1)
 
     def test_unmapped_source_basin_does_not_become_a_guessed_group(self):
         basins = self.basins({0: [100]})
-        self.assertEqual(basins.at((.5, 1)), 0)
-        self.assertEqual(basins.at((1.5, 1)), -1)
+        self.assertEqual(basins.group_at_point((.5, 1)), 0)
+        self.assertEqual(basins.group_at_point((1.5, 1)), -1)
 
     def test_source_values_cannot_be_assigned_to_two_groups(self):
         with self.assertRaisesRegex(ValueError, 'multiple drainage groups'):
@@ -82,36 +82,36 @@ class BasinTests(unittest.TestCase):
 
     def test_terminal_way_beyond_shore_uses_its_last_actual_basin_intersection(self):
         line = LineString([(.5, 1.), (1.5, 1.), (3., 1.)])
-        group, point = self.basins().exit_group(line)
+        group, point = self.basins().group_at_river_exit(line)
         self.assertEqual(group, 7)
         self.assertEqual(point, (2., 1.))
 
     def test_unselected_downstream_basin_cannot_fall_back_to_an_upstream_group(self):
         basins = self.basins({3: [100]})
         for endpoint in (1.5, 3.):
-            self.assertEqual(basins.exit_group(LineString([(.5, 1.), (endpoint, 1.)]))[0], -1)
+            self.assertEqual(basins.group_at_river_exit(LineString([(.5, 1.), (endpoint, 1.)]))[0], -1)
 
     def test_uncovered_way_and_shared_basin_edge_stay_unknown(self):
         basins = self.basins()
-        self.assertEqual(basins.exit_group(LineString([(3., 1.), (4., 1.)])), (-1, None))
-        self.assertEqual(basins.exit_group(LineString([(1., 1.), (1., 3.)]))[0], -1)
+        self.assertEqual(basins.group_at_river_exit(LineString([(3., 1.), (4., 1.)])), (-1, None))
+        self.assertEqual(basins.group_at_river_exit(LineString([(1., 1.), (1., 3.)]))[0], -1)
 
     def test_only_domain_exits_receive_basin_fallback(self):
         grid = Grid(np.zeros((3, 3)), (0., .5, 0., 1.5, 0., -.5), 'EPSG:4326')
-        terminals = self.basins().terminals(grid, np.full((3, 3), -1))
+        terminals = self.basins().classify_crop_exits(grid, np.full((3, 3), -1))
         self.assertEqual(terminals[0, 0], 3)
         self.assertEqual(terminals[1, 1], -1)
 
     def test_batched_outlet_lookup_keeps_a_shared_edge_with_an_unselected_basin_unknown(self):
         grid = Grid(np.zeros((1, 3)), (.25, .5, 0., 1.5, 0., -1.), 'EPSG:4326')
-        labels = self.basins({3: [100]}).terminals(grid, np.full((1, 3), -1))
+        labels = self.basins({3: [100]}).classify_crop_exits(grid, np.full((1, 3), -1))
         np.testing.assert_array_equal(labels, [[3, -1, -1]])
 
     def test_observed_ocean_creates_land_outlets_without_classifying_the_sea(self):
         grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
         ocean = np.zeros((4, 4), dtype=bool)
         ocean[0] = True
-        outlets, labels = self.basins().coastal_outlets(grid, ocean)
+        outlets, labels = self.basins().classify_coastal_outlets(grid, ocean)
         np.testing.assert_array_equal(outlets[:2], np.ones((2, 4), dtype=bool))
         self.assertFalse(outlets[2:].any())
         np.testing.assert_array_equal(labels[0], [-1, -1, -1, -1])
@@ -123,7 +123,7 @@ class BasinTests(unittest.TestCase):
         grid = Grid(np.zeros((3, 3)), (3., .5, 0., 2., 0., -.5), 'EPSG:4326')
         ocean = np.zeros((3, 3), dtype=bool)
         ocean[0] = True
-        _, labels = self.basins().coastal_outlets(grid, ocean)
+        _, labels = self.basins().classify_coastal_outlets(grid, ocean)
         np.testing.assert_array_equal(labels, np.full((3, 3), -1))
 
     def test_uncovered_outlet_uses_the_first_basin_reached_along_its_upstream_flow(self):
@@ -131,7 +131,7 @@ class BasinTests(unittest.TestCase):
         flow = np.array([[1, 2, 3, 4, -1]])
         exits = np.array([[False, False, False, False, True]])
         labels = np.full(flow.shape, -1)
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, {})
+        result, report = self.basins().classify_uncovered_outlets(grid, flow, exits, labels, {})
         self.assertEqual(result[0, 4], 7)
         self.assertEqual(report['resolved'][0]['basin_values'], [200])
         self.assertEqual(report['resolved'][0]['upstream_reference'], (1.5, 1.))
@@ -144,7 +144,7 @@ class BasinTests(unittest.TestCase):
         exits = np.zeros(flow.shape, dtype=bool)
         exits[0, 2] = True
         labels = np.full(flow.shape, -1)
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, {})
+        result, report = self.basins().classify_uncovered_outlets(grid, flow, exits, labels, {})
         self.assertEqual(result[0, 2], -1)
         self.assertEqual(report['conflicting'][0]['groups'], [3, 7])
 
@@ -153,7 +153,7 @@ class BasinTests(unittest.TestCase):
         flow = np.array([[1, 2, 3, -1]])
         exits = np.array([[False, False, False, True]])
         labels = np.full(flow.shape, -1)
-        result, report = self.basins({3: [100]}).uncovered_exits(grid, flow, exits, labels, {})
+        result, report = self.basins({3: [100]}).classify_uncovered_outlets(grid, flow, exits, labels, {})
         self.assertEqual(result[0, 3], -1)
         self.assertEqual(report['conflicting'][0]['basin_values'], [200])
 
@@ -162,7 +162,7 @@ class BasinTests(unittest.TestCase):
         flow = np.full((1, 4), -1)
         exits = np.array([[False, False, False, True]])
         labels = np.full(flow.shape, -1)
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, {})
+        result, report = self.basins().classify_uncovered_outlets(grid, flow, exits, labels, {})
         self.assertEqual(result[0, 3], -1)
         self.assertEqual(report['unreferenced'], 1)
 
@@ -172,7 +172,7 @@ class BasinTests(unittest.TestCase):
         labels = np.full(flow.shape, -1)
         seeds = {12345: np.array([[True, False, False]])}
         exits = np.array([[False, False, True]])
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, seeds)
+        result, report = self.basins().classify_uncovered_outlets(grid, flow, exits, labels, seeds)
         self.assertEqual(result[0, 2], 12345)
         self.assertEqual(report['resolved'][0]['basin_values'], [])
 
@@ -182,7 +182,7 @@ class BasinTests(unittest.TestCase):
         labels = np.full(flow.shape, -1)
         seeds = {g: np.array([[True, False, False]]) for g in (3, 7)}
         exits = np.array([[False, False, True]])
-        result, report = self.basins().uncovered_exits(grid, flow, exits, labels, seeds)
+        result, report = self.basins().classify_uncovered_outlets(grid, flow, exits, labels, seeds)
         self.assertEqual(result[0, 2], -1)
         self.assertEqual(report['conflicting'][0]['groups'], [3, 7])
 
@@ -196,7 +196,7 @@ class BasinTests(unittest.TestCase):
                         '<tag k="waterway" v="stream"/></way>'
                         '<way id="20"><nd ref="3"/><nd ref="4"/>'
                         '<tag k="waterway" v="stream"/></way></osm>')
-        assigned, report = Waterways([path]).basin_groups(self.basins())
+        assigned, report = Waterways([path]).trace_destinations_from_basins(self.basins())
         self.assertEqual(assigned, {('1', '2'): (3,), ('3', '4'): (7,)})
         self.assertEqual(report['unassigned'], [])
 
@@ -217,10 +217,10 @@ class BasinTests(unittest.TestCase):
             path = self.root / (name + '.osm')
             path.write_text('<osm version="0.6">' + nodes + ''.join(parts) + '</osm>')
             network = Waterways([path])
-            assigned, report = network.basin_groups(self.basins())
+            assigned, report = network.trace_destinations_from_basins(self.basins())
             self.assertEqual(assigned, {('1', '2'): (3, 7), ('2', '3'): (3,), ('2', '4'): (7,)})
             self.assertIn('10', report['ambiguous'])
-            seeds.append(seed_grid(network, assigned, grid)[0])
+            seeds.append(rasterize_waterway_destinations(network, assigned, grid)[0])
         for group in seeds[0]:
             np.testing.assert_array_equal(seeds[0][group], seeds[1][group])
         self.assertTrue(seeds[0][3][0, 2])
@@ -241,8 +241,8 @@ class BasinTests(unittest.TestCase):
             path = self.root / (name + '.osm')
             path.write_text('<osm version="0.6">' + nodes + body + '</osm>')
             network = Waterways([path])
-            assigned, _ = network.basin_groups(self.basins())
-            results.append(seed_grid(network, assigned, grid)[0])
+            assigned, _ = network.trace_destinations_from_basins(self.basins())
+            results.append(rasterize_waterway_destinations(network, assigned, grid)[0])
         for group in results[0]:
             np.testing.assert_array_equal(results[0][group], results[1][group])
 
@@ -259,12 +259,12 @@ class BasinTests(unittest.TestCase):
                         '<way id="30"><nd ref="3"/><nd ref="4"/>'
                         '<tag k="waterway" v="river"/></way></osm>')
         network = Waterways([path])
-        assigned, report = network.basin_groups(self.basins())
+        assigned, report = network.trace_destinations_from_basins(self.basins())
         self.assertEqual(assigned[('1', '2')], (7,))
         self.assertEqual(assigned[('2', '3')], (7,))
         self.assertIn({'way': '20', 'group': 7, 'point': [2., 1.]},
                       report['basin_exit_before_way_endpoint'])
-        self.assertEqual(network.basin_groups(self.basins({3: [100]}))[0], {})
+        self.assertEqual(network.trace_destinations_from_basins(self.basins({3: [100]}))[0], {})
 
     def test_closed_waterway_cycle_does_not_gain_an_invented_destination(self):
         path = self.root / 'cycle.osm'
@@ -272,7 +272,7 @@ class BasinTests(unittest.TestCase):
                         '<node id="2" lon="0.3" lat="1"/>'
                         '<way id="10"><nd ref="1"/><nd ref="2"/><nd ref="1"/>'
                         '<tag k="waterway" v="stream"/></way></osm>')
-        assigned, report = Waterways([path]).basin_groups(self.basins())
+        assigned, report = Waterways([path]).trace_destinations_from_basins(self.basins())
         self.assertEqual(assigned, {})
         self.assertEqual(report['unassigned'], ['10'])
 

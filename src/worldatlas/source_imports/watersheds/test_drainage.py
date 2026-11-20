@@ -5,8 +5,8 @@ import unittest
 import numpy as np
 from pyproj import Geod, Transformer
 
-from worldatlas.source_imports.watersheds.drainage import (compute_flow, destinations, neighbor_distances,
-                                 possible_destinations, single_destinations)
+from worldatlas.source_imports.watersheds.drainage import (compute_cell_flow, trace_cell_group_labels, neighbor_distances_metres,
+                                 trace_destination_masks, unique_destination_labels)
 from worldatlas.source_imports.watersheds.terrain import Grid
 
 
@@ -17,19 +17,19 @@ class DrainageTests(unittest.TestCase):
         flow = np.array([[1, 2, -1, -1]])
         seeds = {37: np.array([[False, True, False, False]]),
                  9000000001: np.array([[False, True, False, False]])}
-        labels = possible_destinations(flow, seeds, np.full(flow.shape, -1))
+        labels = trace_destination_masks(flow, seeds, np.full(flow.shape, -1))
         for group in seeds:
             np.testing.assert_array_equal(labels[group], [[True, True, False, False]])
         # Shared drainage remains known in both masks; unique-only operations
         # cannot silently turn it into one destination.
-        np.testing.assert_array_equal(single_destinations(labels, flow.shape), [[-1, -1, -1, -1]])
+        np.testing.assert_array_equal(unique_destination_labels(labels, flow.shape), [[-1, -1, -1, -1]])
 
     def test_three_real_groups_and_a_shared_seed_do_not_need_consecutive_ids(self):
         flow = np.array([[1, -1, 3, -1, -1]])
         seeds = {7: np.array([[False, True, False, False, False]]),
                  100: np.array([[False, True, False, False, False]])}
         terminals = np.array([[-1, -1, -1, 9999999999, -1]])
-        result = possible_destinations(flow, seeds, terminals)
+        result = trace_destination_masks(flow, seeds, terminals)
         np.testing.assert_array_equal(result[7], [[True, True, False, False, False]])
         np.testing.assert_array_equal(result[100], result[7])
         np.testing.assert_array_equal(result[9999999999], [[False, False, True, True, False]])
@@ -37,16 +37,16 @@ class DrainageTests(unittest.TestCase):
     def test_unique_river_seed_stops_tracing_before_a_different_terminal(self):
         flow = np.array([[1, 2, -1]])
         seeds = {7: np.array([[False, True, False]])}
-        result = possible_destinations(flow, seeds, np.array([[-1, -1, 100]]))
+        result = trace_destination_masks(flow, seeds, np.array([[-1, -1, 100]]))
         np.testing.assert_array_equal(result[7], [[True, True, False]])
         np.testing.assert_array_equal(result[100], [[False, False, True]])
 
     def test_unseeded_cycles_stay_unknown_and_seeded_cycles_keep_both_destinations(self):
         flow = np.array([[1, 0]])
         terminals = np.full(flow.shape, -1)
-        self.assertEqual(possible_destinations(flow, {}, terminals), {})
+        self.assertEqual(trace_destination_masks(flow, {}, terminals), {})
         seeds = {g: np.array([[True, False]]) for g in (3, 7)}
-        for cells in possible_destinations(flow, seeds, terminals).values():
+        for cells in trace_destination_masks(flow, seeds, terminals).values():
             self.assertTrue(cells.all())
 
     def test_invalid_shared_destination_inputs_are_rejected_even_without_seeds(self):
@@ -55,9 +55,9 @@ class DrainageTests(unittest.TestCase):
                                 (np.array([[-1.]]), np.array([[-1]])),
                                 (np.array([[-1]]), np.array([[-1], [-1]]))]:
             with self.subTest(flow=flow, terminals=terminals), self.assertRaises(ValueError):
-                possible_destinations(flow, {}, terminals)
+                trace_destination_masks(flow, {}, terminals)
         with self.assertRaises(ValueError):
-            possible_destinations(np.array([[-1]]), {3: np.array([[1]])}, np.array([[-1]]))
+            trace_destination_masks(np.array([[-1]]), {3: np.array([[1]])}, np.array([[-1]]))
 
     def grid(self, values, crs='EPSG:4326', transform=(44., .001, 0., 43., 0., -.001)):
         """Make a grid with known heights and spacing.
@@ -74,7 +74,7 @@ class DrainageTests(unittest.TestCase):
 
     def test_edge_can_flow_toward_a_lower_interior_cell(self):
         grid = self.grid([[4, 3, 4], [3, 2, 3], [2, 1, 2]])
-        _, flow = compute_flow(grid)
+        _, flow = compute_cell_flow(grid)
         self.assertEqual(flow[0, 1], 4)
 
     def test_all_eight_downhill_directions(self):
@@ -83,14 +83,14 @@ class DrainageTests(unittest.TestCase):
                 heights = np.full((3, 3), 5.)
                 heights[1, 1] = 4.
                 heights.ravel()[neighbor] = 0.
-                _, flow = compute_flow(self.grid(heights))
+                _, flow = compute_cell_flow(self.grid(heights))
                 self.assertEqual(flow[1, 1], neighbor)
 
     def test_fill_preserves_source_and_routes_flats_to_an_exit(self):
         raw = np.full((5, 5), 10.)
         raw[2, 2] = 0.
         grid = self.grid(raw)
-        working, flow = compute_flow(grid)
+        working, flow = compute_cell_flow(grid)
         np.testing.assert_array_equal(grid.elevation, raw)
         self.assertEqual(working[2, 2], 10.)
         seen = set()
@@ -107,12 +107,12 @@ class DrainageTests(unittest.TestCase):
     def test_source_backed_closed_sink_is_not_filled(self):
         raw = np.full((5, 5), 10.)
         raw[2, 2] = 0.
-        working, flow = compute_flow(self.grid(raw), closed_sinks=[(2, 2)])
+        working, flow = compute_cell_flow(self.grid(raw), closed_sinks=[(2, 2)])
         self.assertEqual(working[2, 2], 0.)
         self.assertEqual(flow[2, 2], -1)
         seeds = np.full(raw.shape, -1, dtype='int64')
         seeds[2, 2] = 17
-        labels = destinations(flow, seeds)
+        labels = trace_cell_group_labels(flow, seeds)
         np.testing.assert_array_equal(labels[1:4, 1:4], np.full((3, 3), 17))
         # Flat cells at the crop edge can exit the domain; their destination is
         # not established merely by the presence of a known sink farther in.
@@ -121,14 +121,14 @@ class DrainageTests(unittest.TestCase):
     def test_known_water_outlets_stop_flat_routing_through_the_ocean(self):
         grid = self.grid([[5, 0, 0], [4, 0, 0], [3, 0, 0]])
         outlets = grid.elevation == 0
-        working, flow = compute_flow(grid, outlets=outlets)
+        working, flow = compute_cell_flow(grid, outlets=outlets)
         np.testing.assert_array_equal(flow[outlets], np.full(outlets.sum(), -1))
         self.assertTrue(np.isin(flow[:, 0], [1, 4, 7]).all())
         np.testing.assert_array_equal(working, grid.elevation)
 
     def test_geographic_and_projected_neighbor_distances_are_supported(self):
-        geographic = neighbor_distances(self.grid(np.zeros((3, 3))))
-        projected = neighbor_distances(self.grid(np.zeros((3, 3)), 'EPSG:32640',
+        geographic = neighbor_distances_metres(self.grid(np.zeros((3, 3))))
+        projected = neighbor_distances_metres(self.grid(np.zeros((3, 3)), 'EPSG:32640',
                                                (500000., 15., 0., 7000000., 0., -15.)))
         self.assertTrue(70 < geographic[0, 1, 1] < 100)
         self.assertTrue(14 < projected[0, 1, 1] < 16)
@@ -140,7 +140,7 @@ class DrainageTests(unittest.TestCase):
                                ('EPSG:3413', (2150000., 10., 0., 890000., 0., -10.))]:
             with self.subTest(crs=crs):
                 grid = self.grid(np.zeros((270, 4)), crs, transform)
-                actual = neighbor_distances(grid)
+                actual = neighbor_distances_metres(grid)
                 to_geo = Transformer.from_crs(crs, 4326, always_xy=True)
                 for plane, dr, dc in ((0, 0, 1), (1, 1, 0), (2, 1, 1), (3, 1, -1)):
                     for row in (0, 126, 127, 128, 129, 254, 255, 256, 268, 269):
@@ -148,49 +148,49 @@ class DrainageTests(unittest.TestCase):
                             if row + dr >= 270 or not 0 <= column + dc < 4:
                                 self.assertEqual(actual[plane, row, column], 0.)
                                 continue
-                            first = to_geo.transform(*grid.coordinates(row, column))
-                            last = to_geo.transform(*grid.coordinates(row + dr, column + dc))
+                            first = to_geo.transform(*grid.cell_coordinates(row, column))
+                            last = to_geo.transform(*grid.cell_coordinates(row + dr, column + dc))
                             self.assertEqual(actual[plane, row, column], geod.inv(*first, *last)[2])
 
     def test_coordinate_error_in_a_later_row_block_is_reported(self):
         grid = self.grid(np.zeros((270, 2)), transform=(44., .001, 0., 80., 0., -1.))
         with self.assertRaises((ValueError, RuntimeError)):
-            neighbor_distances(grid)
+            neighbor_distances_metres(grid)
 
     def test_actual_group_ids_include_zero_three_and_large_numbers(self):
         flow = np.array([[1, 2, -1], [4, 5, -1], [7, 8, -1]])
         seeds = np.array([[-1, -1, 0], [-1, -1, 3], [-1, -1, 3120001840]])
         expected = np.array([[0, 0, 0], [3, 3, 3], [3120001840] * 3])
-        np.testing.assert_array_equal(destinations(flow, seeds), expected)
+        np.testing.assert_array_equal(trace_cell_group_labels(flow, seeds), expected)
 
     def test_unknown_exit_is_not_a_third_basin(self):
         flow = np.array([[1, -1], [3, -1]])
         seeds = np.full(flow.shape, -1, dtype='int64')
         terminals = seeds.copy()
         terminals[0, 1] = 3
-        np.testing.assert_array_equal(destinations(flow, seeds, terminals), [[3, 3], [-1, -1]])
+        np.testing.assert_array_equal(trace_cell_group_labels(flow, seeds, terminals), [[3, 3], [-1, -1]])
 
     def test_river_seed_precedes_the_later_terminal_destination(self):
         flow = np.array([[1, 2, -1]])
         seeds = np.array([[-1, 9, -1]])
         terminals = np.array([[-1, -1, 4]])
-        np.testing.assert_array_equal(destinations(flow, seeds, terminals), [[9, 9, 4]])
+        np.testing.assert_array_equal(trace_cell_group_labels(flow, seeds, terminals), [[9, 9, 4]])
 
     def test_cycle_remains_unknown(self):
-        np.testing.assert_array_equal(destinations(np.array([[1, 0]]),
+        np.testing.assert_array_equal(trace_cell_group_labels(np.array([[1, 0]]),
                                                   np.array([[-1, -1]])), [[-1, -1]])
 
     def test_missing_height_and_bad_links_are_rejected(self):
         with self.assertRaisesRegex(ValueError, 'complete finite'):
-            compute_flow(self.grid([[1, np.nan]]))
+            compute_cell_flow(self.grid([[1, np.nan]]))
         with self.assertRaisesRegex(ValueError, 'invalid flow'):
-            destinations(np.array([[2]]), np.array([[-1]]))
+            trace_cell_group_labels(np.array([[2]]), np.array([[-1]]))
         with self.assertRaisesRegex(ValueError, 'integers'):
-            destinations(np.array([[-1]]), np.array([[1.5]]))
+            trace_cell_group_labels(np.array([[-1]]), np.array([[1.5]]))
 
     def test_invalid_coordinate_is_rejected(self):
         with self.assertRaises((ValueError, RuntimeError)):
-            neighbor_distances(self.grid([[0, 0]], transform=(44., .001, 0., 100., 0., -.001)))
+            neighbor_distances_metres(self.grid([[0, 0]], transform=(44., .001, 0., 100., 0., -.001)))
 
 
 if __name__ == '__main__':

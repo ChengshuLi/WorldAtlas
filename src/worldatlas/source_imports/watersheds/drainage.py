@@ -16,7 +16,7 @@ from worldatlas.geodesy.wgs84 import GEOD
 UNKNOWN = -1
 
 
-def neighbor_distances(grid):
+def neighbor_distances_metres(grid):
     """Measure distances between all horizontally, vertically, or diagonally adjacent cells.
 
     Args:
@@ -38,7 +38,7 @@ def neighbor_distances(grid):
         # Include the next row so this block can measure across its southern edge.
         stop = min(height, last + 1)
         columns, rows = np.meshgrid(np.arange(width), np.arange(first, stop))
-        lon, lat = to_geo.transform(*grid.coordinates(rows, columns), errcheck=True)
+        lon, lat = to_geo.transform(*grid.cell_coordinates(rows, columns), errcheck=True)
         if not np.isfinite(lon).all() or not np.isfinite(lat).all() or np.any(np.abs(lat) > 90):
             raise ValueError('invalid WGS84 cell coordinates')
         count = last - first
@@ -61,7 +61,7 @@ def neighbor_distances(grid):
 
 
 @njit(cache=True)
-def _flow(elevation, distances, closed):
+def _fill_depressions_and_route_flow(elevation, distances, closed):
     """Fill depressions and assign each cell one downstream neighbor."""
     height, width = elevation.shape
     working = np.full(elevation.shape, np.inf)
@@ -115,7 +115,7 @@ def _flow(elevation, distances, closed):
     return working, flow
 
 
-def compute_flow(grid, closed_sinks=(), *, outlets=None):
+def compute_cell_flow(grid, closed_sinks=(), *, outlets=None):
     """Calculate terrain flow using the elevation grid and known stopping points.
 
     Args:
@@ -142,11 +142,11 @@ def compute_flow(grid, closed_sinks=(), *, outlets=None):
         if not (0 <= row < elevation.shape[0] and 0 <= column < elevation.shape[1]):
             raise ValueError('closed sink is outside the elevation grid')
         closed[row, column] = True
-    return _flow(elevation, neighbor_distances(grid), closed)
+    return _fill_depressions_and_route_flow(elevation, neighbor_distances_metres(grid), closed)
 
 
 @njit(cache=True)
-def _destinations(flow, seeds, terminals):
+def _trace_cell_group_labels(flow, seeds, terminals):
     """Trace unknown cells until they reach a known destination, outlet, or cycle."""
     links = flow.ravel()
     labels = seeds.ravel().copy()
@@ -175,7 +175,7 @@ def _destinations(flow, seeds, terminals):
     return labels.reshape(flow.shape)
 
 
-def destinations(flow, seeds, terminals=None):
+def trace_cell_group_labels(flow, seeds, terminals=None):
     """Follow flow to any supplied group ID; -1 means an unknown destination.
 
     River seeds take precedence. Source-backed domain exits or closed sinks can
@@ -202,10 +202,10 @@ def destinations(flow, seeds, terminals=None):
         raise ValueError('flow links and destination IDs must be integers')
     if np.any(flow < -1) or np.any(flow >= flow.size) or np.any(seeds < -1) or np.any(terminals < -1):
         raise ValueError('invalid flow link or destination ID')
-    return _destinations(flow.astype('int64'), seeds.astype('int64'), terminals.astype('int64'))
+    return _trace_cell_group_labels(flow.astype('int64'), seeds.astype('int64'), terminals.astype('int64'))
 
 
-def single_destinations(memberships, shape):
+def unique_destination_labels(memberships, shape):
     """Return a group only where exactly one destination is known.
 
     This view is for operations requiring a unique destination. It does not
@@ -227,7 +227,7 @@ def single_destinations(memberships, shape):
     return labels
 
 
-def possible_destinations(flow, seeds, terminals):
+def trace_destination_masks(flow, seeds, terminals):
     """Follow all known river destinations, including genuine split flow.
 
     Each group's Boolean grid records whether that destination is possible.
@@ -265,12 +265,12 @@ def possible_destinations(flow, seeds, terminals):
         # Stop at every known seed. Only seeds in the current group give a true result.
         seed = np.where(known, present.astype('int64'), UNKNOWN)
         terminal = np.where(terminals >= 0, (terminals == group).astype('int64'), UNKNOWN)
-        result[group] = destinations(flow, seed, terminal) == 1
+        result[group] = trace_cell_group_labels(flow, seed, terminal) == 1
     return result
 
 
 @njit(cache=True)
-def upstream_links(flow):
+def index_upstream_cells(flow):
     """Index incoming flow edges for every cell.
 
     Args:
@@ -293,7 +293,7 @@ def upstream_links(flow):
 
 
 @njit(cache=True)
-def upstream_order(flow, terminal):
+def upstream_cells_from_outlet(flow, terminal):
     """Visit cells upstream of the selected destination.
 
     Args:
@@ -305,7 +305,7 @@ def upstream_order(flow, terminal):
         after the cell it flows into on the traversal.
     """
     links = flow.ravel()
-    heads, following = upstream_links(flow)
+    heads, following = index_upstream_cells(flow)
     queue = np.empty(links.size, np.int64)
     visited = np.zeros(links.size, np.bool_)
     queue[0], visited[terminal] = terminal, True

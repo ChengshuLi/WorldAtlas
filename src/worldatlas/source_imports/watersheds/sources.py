@@ -10,7 +10,7 @@ from shapely.geometry import LineString
 
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText
 from worldatlas.source_imports.shared.sources import archive_member, gdal_dataset_path
-from worldatlas.source_imports.watersheds.boundary import intersection
+from worldatlas.source_imports.watersheds.boundary import choose_intersection_join
 from worldatlas.source_imports.watersheds.waterways import Waterways
 
 
@@ -55,10 +55,12 @@ class Sources:
 
     def __init__(self, files):
         self.files = files
+        # Cache reads by file and selection so separate steps can share results.
+        # The constructor separately keeps the names the recipe gives its lines.
         self.networks = {}
         self.points = {}
 
-    def path(self, specification):
+    def resolve_raster_path(self, specification):
         """Resolve a terrain file or explicitly selected ZIP member for GDAL.
 
         Args:
@@ -70,7 +72,7 @@ class Sources:
         path = self.files[specification['source']]
         return gdal_dataset_path(path, specification['member']) if 'member' in specification else path
 
-    def vector_path(self, selection):
+    def resolve_vector_path(self, selection):
         """Resolve a vector file or a Shapefile inside its ZIP for GDAL.
 
         Args:
@@ -83,7 +85,7 @@ class Sources:
             return gdal_dataset_path(self.files[selection])
         return gdal_dataset_path(self.files[selection['source']], selection.get('member'))
 
-    def network(self, sources, *, rivers_and_streams_only=False, reverse=()):
+    def read_osm_network(self, sources, *, rivers_and_streams_only=False, reverse=()):
         """Read and reuse an OSM network for these source files and directions.
 
         Args:
@@ -101,6 +103,7 @@ class Sources:
             else:
                 path = self.files[selection['source']]
                 paths.append((path, selection['member']) if 'member' in selection else path)
+        # Normalize the IDs so equivalent reversal lists reuse the same network.
         reverse = tuple(sorted(set(map(str, reverse))))
         # One set of files can support both raw source lines and corrected drainage.
         key = tuple(paths), rivers_and_streams_only, reverse
@@ -108,7 +111,7 @@ class Sources:
             self.networks[key] = Waterways(paths, rivers_and_streams_only=rivers_and_streams_only, reverse=reverse)
         return self.networks[key]
 
-    def point(self, specification, lines):
+    def read_selected_point(self, specification, lines):
         """Resolve a recipe point to WGS84 longitude and latitude.
 
         Args:
@@ -128,7 +131,7 @@ class Sources:
             source, node = specification['source'], str(specification['node'])
             path = self.files[source]
             if path.suffix != '.pbf':
-                return self.network([source]).nodes[node]
+                return self.read_osm_network([source]).nodes[node]
             key = source, node
             if key not in self.points:
                 # An isolated node in a PBF may have no natural river referencing it.
@@ -153,10 +156,10 @@ class Sources:
             return tuple(line.coords[0 if specification['endpoint'] == 'start' else -1])
         if 'intersection' in specification:
             first, second = specification['intersection']
-            return intersection(lines[first], lines[second], specification['near']).point
+            return choose_intersection_join(lines[first], lines[second], specification['near']).point
         raise ValueError('unknown source point selection')
 
-    def line(self, part: SourceLine):
+    def read_selected_line(self, part: SourceLine):
         """Read one complete source line for boundary assembly.
 
         Args:
@@ -169,9 +172,10 @@ class Sources:
             ValueError: The selector is unsupported or the line has invalid coordinates.
         """
         if 'way' in part:  # An OsmWayLine selects one OSM way.
-            points = list(self.network([part['source']]).line(part['way']).coords)
+            # Allow all way types here because a source line can be a coastline.
+            points = list(self.read_osm_network([part['source']]).way_line(part['way']).coords)
         elif 'relation' in part:  # An OsmRiverLine joins selected relation members.
-            points = self.river(part)
+            points = self.assemble_river_relation(part)
         elif 'geojson_feature' in part:  # A GeoJSONLine selects a feature by position.
             path = self.files[part['source']]
             if 'member' in part:
@@ -180,6 +184,7 @@ class Sources:
             else:
                 with path.open('rb') as stream:
                     document = json.load(stream)
+            # geojson_feature is the zero-based position in the feature list.
             geometry = document['features'][part['geojson_feature']]['geometry']
             if geometry['type'] != 'LineString':
                 raise ValueError('selected GeoJSON feature must be a line')
@@ -188,6 +193,7 @@ class Sources:
             raise ValueError('unsupported source line selection')
         if len(points) < 2:
             raise ValueError('source line needs at least two selected points')
+        # Validate one longitude/latitude pair per vertex, then use the same array in Shapely.
         coordinates = np.asarray(points, dtype=float)
         if (coordinates.shape != (len(points), 2) or not np.isfinite(coordinates).all()
                 or np.any(np.abs(coordinates[:, 0]) > 180)
@@ -195,7 +201,7 @@ class Sources:
             raise ValueError('source line requires finite WGS84 longitude/latitude pairs')
         return LineString(coordinates)
 
-    def river(self, specification):
+    def assemble_river_relation(self, specification):
         """Order a river relation's selected member ways from a known end.
 
         Args:
@@ -207,7 +213,7 @@ class Sources:
         Raises:
             ValueError: The selected members do not form one open, connected chain.
         """
-        network = self.network([specification['source']])
+        network = self.read_osm_network([specification['source']])
         _, members = network.relations[str(specification['relation'])]
         adjacent = {}
         for kind, reference, role in members:

@@ -29,7 +29,7 @@ class Grid:
     native_origin: tuple | None = None
     window_offset: tuple = (0, 0)
 
-    def coordinates(self, rows, columns, center=True):
+    def cell_coordinates(self, rows, columns, center=True):
         """Convert crop-relative grid positions to source coordinates.
 
         Args:
@@ -48,7 +48,7 @@ class Grid:
                 y + (columns + offset) * d + (rows + offset) * e)
 
 
-def read_native(paths, bounds, *, bounds_crs=4326):
+def read_native_elevation(paths, bounds, *, bounds_crs=4326):
     """Crop aligned source tiles without changing their cell positions or values.
 
     Native projected rectangles avoid enlarging a crop through a round trip
@@ -115,7 +115,7 @@ def read_native(paths, bounds, *, bounds_crs=4326):
     return Grid(elevation, transform, crs, native_origin=origin, window_offset=(row0, col0))
 
 
-def raster_on_grid(values, grid):
+def wrap_array_as_raster(values, grid):
     """Give GDAL a writable view of a NumPy raster on the terrain grid.
 
     Args:
@@ -131,7 +131,7 @@ def raster_on_grid(values, grid):
     return destination
 
 
-def align(paths, grid, *, resampling='bilinear'):
+def align_raster_to_grid(paths, grid, *, resampling='bilinear'):
     """Read other raster values at the primary grid's cell positions.
 
     Args:
@@ -143,14 +143,14 @@ def align(paths, grid, *, resampling='bilinear'):
         The aligned array, with NaN where the sources provide no value.
     """
     values = np.full(grid.elevation.shape, np.nan)
-    destination = raster_on_grid(values, grid)
+    destination = wrap_array_as_raster(values, grid)
     destination.GetRasterBand(1).SetNoDataValue(np.nan)
     gdal.Warp(destination, [str(path) for path in paths],
               resampleAlg=resampling, dstNodata=np.nan)
     return values
 
 
-def prepare(primary, bounds, secondary=(), height_offset=None, *, bounds_crs=4326):
+def prepare_elevation_grid(primary, bounds, secondary=(), height_offset=None, *, bounds_crs=4326):
     """Read primary terrain and fill gaps from secondary terrain.
 
     For EGM2008 heights converted to WGS84 ellipsoidal heights, the offset is
@@ -169,13 +169,13 @@ def prepare(primary, bounds, secondary=(), height_offset=None, *, bounds_crs=432
     Raises:
         ValueError: The combined terrain sources leave cells without a finite height.
     """
-    grid = read_native(primary, bounds, bounds_crs=bounds_crs)
+    grid = read_native_elevation(primary, bounds, bounds_crs=bounds_crs)
     missing = ~np.isfinite(grid.elevation)
     grid.secondary_cells = int(missing.sum())
     if missing.any() and secondary:
-        values = align(secondary, grid)
+        values = align_raster_to_grid(secondary, grid)
         if height_offset is not None:
-            values += align([height_offset], grid)
+            values += align_raster_to_grid([height_offset], grid)
         grid.elevation[missing] = values[missing]
     remaining = int((~np.isfinite(grid.elevation)).sum())
     if remaining:

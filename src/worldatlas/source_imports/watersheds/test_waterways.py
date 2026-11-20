@@ -10,8 +10,8 @@ import osmium
 from shapely.geometry import LineString
 
 from worldatlas.source_imports.watersheds.terrain import Grid
-from worldatlas.source_imports.watersheds.drainage import single_destinations
-from worldatlas.source_imports.watersheds.waterways import Waterways, seed_grid
+from worldatlas.source_imports.watersheds.drainage import unique_destination_labels
+from worldatlas.source_imports.watersheds.waterways import Waterways, rasterize_waterway_destinations
 
 
 class WaterwayTests(unittest.TestCase):
@@ -74,14 +74,14 @@ class WaterwayTests(unittest.TestCase):
             network = Waterways([self.write(name + '.osm', nodes + ways + self.way(20, [2, 4]))])
             continuing = '10' if name == 'whole' else '11'
             for selections in ({3: [continuing, '20']}, {3: [continuing], 7: ['20']}):
-                assigned, _ = network.groups(selections)
-                reviewed = {'2': network.fork_destinations('2', assigned)}
+                assigned, _ = network.trace_destinations_from_ways(selections)
+                reviewed = {'2': network.fork_outlet_groups('2', assigned)}
                 if len(selections) == 1:
                     with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
-                        network.check_crossings(boundary, shared_forks=reviewed)
+                        network.check_boundary_crossings(boundary, shared_forks=reviewed)
             with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
-                network.check_crossings(boundary)
-            result = network.check_crossings(boundary, shared_forks=reviewed)
+                network.check_boundary_crossings(boundary)
+            result = network.check_boundary_crossings(boundary, shared_forks=reviewed)
             self.assertEqual(result['crossings'], [])
             self.assertEqual(result['junction_contacts'], ['2'])
             self.assertEqual(result['shared_drainage_contacts'], [{'node': '2', 'groups': [3, 7]}])
@@ -92,13 +92,13 @@ class WaterwayTests(unittest.TestCase):
         ways = self.way(10, [1, 2, 3]) + self.way(20, [4, 2])
         network = Waterways([self.write('confluence.osm', nodes + ways)])
         with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
-            network.check_crossings(LineString([(-1, 0), (1, 0)]))
+            network.check_boundary_crossings(LineString([(-1, 0), (1, 0)]))
 
     def test_a_point_touch_stays_on_one_side(self):
         nodes = self.node(1, 0, -2) + self.node(2, 0, 2)
         network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2]))])
         boundary = LineString([(-1, -1), (0, 0), (-1, 1)])
-        self.assertEqual(network.check_crossings(boundary)['crossings'], [])
+        self.assertEqual(network.check_boundary_crossings(boundary)['crossings'], [])
 
     def test_crossing_at_an_arbitrary_way_split_is_still_rejected(self):
         nodes = self.node(1, 0, 2) + self.node(2, 0, 0) + self.node(3, 0, -2)
@@ -106,12 +106,12 @@ class WaterwayTests(unittest.TestCase):
                            ('split', self.way(10, [1, 2]) + self.way(11, [2, 3]))]:
             network = Waterways([self.write(name + '.osm', nodes + ways)])
             with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
-                network.check_crossings(LineString([(-1, 0), (1, 0)]))
+                network.check_boundary_crossings(LineString([(-1, 0), (1, 0)]))
 
     def test_real_river_head_contact_is_not_an_interior_crossing(self):
         network = Waterways([self.write('river.osm', self.node(1, 0, 0) + self.node(2, 0, 2) +
                                        self.way(10, [1, 2]))])
-        result = network.check_crossings(LineString([(-1, 0), (1, 0)]))
+        result = network.check_boundary_crossings(LineString([(-1, 0), (1, 0)]))
         self.assertEqual(result['crossings'], [])
         self.assertEqual(result['river_endpoint_contacts'], ['1'])
 
@@ -120,19 +120,19 @@ class WaterwayTests(unittest.TestCase):
                                        self.node(3, 0, -2) + self.node(9, 0, 0) + self.node(10, 2, 1) +
                                        self.way(20, [1, 2, 3]) + self.way(30, [9, 10]))])
         with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
-            network.check_crossings(LineString([(-1, 0), (1, 0)]))
+            network.check_boundary_crossings(LineString([(-1, 0), (1, 0)]))
 
     def test_following_a_river_does_not_hide_a_separate_crossing(self):
         nodes = ''.join(self.node(i + 1, i, 0) for i in range(4))
         network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2, 3, 4]))])
         boundary = LineString([(0, 0), (1, 0), (1.5, 1), (2.5, -1), (3, -1)])
         with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
-            network.check_crossings(boundary)
+            network.check_boundary_crossings(boundary)
 
     def test_followed_river_and_a_real_tributary_contact_are_allowed(self):
         nodes = self.node(1, -2, 0) + self.node(2, 0, 0) + self.node(3, 2, 0) + self.node(4, 0, 2)
         network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2, 3]) + self.way(20, [4, 2]))])
-        result = network.check_crossings(LineString([(-1, 0), (1, 0)]))
+        result = network.check_boundary_crossings(LineString([(-1, 0), (1, 0)]))
         self.assertEqual(result['crossings'], [])
         self.assertEqual(result['junction_contacts'], ['2'])
 
@@ -140,25 +140,25 @@ class WaterwayTests(unittest.TestCase):
         nodes = ''.join(self.node(i, *p) for i, p in enumerate([(0, 0), (1, 0), (1, 1), (0, 1)], 1))
         network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2, 3, 4, 1]))])
         with self.assertRaisesRegex(ValueError, 'boundary crosses natural waterway'):
-            network.check_crossings(LineString([(-.5, -.5), (.5, .5)]))
+            network.check_boundary_crossings(LineString([(-.5, -.5), (.5, .5)]))
 
     def test_partly_unknown_fork_fails_early_and_two_known_destinations_pass(self):
         nodes = ''.join(self.node(i, *p) for i, p in enumerate([(.5, .9), (.5, .5), (.1, .1), (.9, .1)], 1))
         network = Waterways([self.write('fork.osm', nodes + self.way(10, [1, 2]) +
                                        self.way(20, [2, 3]) + self.way(30, [2, 4]))])
-        _, report = network.groups({3: ['20']})
+        _, report = network.trace_destinations_from_ways({3: ['20']})
         with self.assertRaisesRegex(ValueError, '10.*unresolved downstream route'):
-            network.require_destinations([[0, 0, 1, 1]], report)
-        groups, report = network.groups({3: ['20'], 7: ['30']})
-        network.require_destinations([[0, 0, 1, 1]], report)
+            network.require_known_drainage_in_bounds([[0, 0, 1, 1]], report)
+        groups, report = network.trace_destinations_from_ways({3: ['20'], 7: ['30']})
+        network.require_known_drainage_in_bounds([[0, 0, 1, 1]], report)
         self.assertEqual(groups[('1', '2')], (3, 7))
 
     def test_unrelated_unknown_rivers_do_not_block_the_selected_area(self):
         nodes = self.node(1, .2, .8) + self.node(2, .2, .2) + self.node(3, 10, 11) + self.node(4, 10, 10)
         network = Waterways([self.write('rivers.osm', nodes + self.way(10, [1, 2]) + self.way(20, [3, 4]))])
-        _, report = network.groups({3: ['10']})
+        _, report = network.trace_destinations_from_ways({3: ['10']})
         self.assertTrue(report['unresolved_sections'])
-        network.require_destinations([[0, 0, 1, 1]], report)
+        network.require_known_drainage_in_bounds([[0, 0, 1, 1]], report)
 
     def test_known_destination_before_uncovered_estuary_does_not_fail_upstream(self):
         nodes = ''.join(self.node(i, *p) for i, p in enumerate([(.5, .9), (.5, .5), (.1, .1), (.9, .1)], 1))
@@ -166,30 +166,30 @@ class WaterwayTests(unittest.TestCase):
                                        self.way(20, [2, 3]) + self.way(30, [2, 4]))])
         # The downstream reference already establishes this area's destination.
         # Uncovered estuary branches outside the calculation area do not undo it.
-        assigned, report = network.groups({3: ['10']})
-        network.require_destinations([[0, .6, 1, 1]], report)
+        assigned, report = network.trace_destinations_from_ways({3: ['10']})
+        network.require_known_drainage_in_bounds([[0, .6, 1, 1]], report)
         self.assertEqual(assigned[('1', '2')], (3,))
 
     def test_relevant_missing_coordinates_are_rejected(self):
         nodes = self.node(1, .2, .8) + self.node(2, .2, .5) + self.node(3, .2, .2)
         network = Waterways([self.write('rivers.osm', nodes + self.way(10, [1, 2, 3]) + self.way(20, [2, 99]))])
-        _, report = network.groups({3: ['10']})
+        _, report = network.trace_destinations_from_ways({3: ['10']})
         with self.assertRaisesRegex(ValueError, '20.*missing source coordinates'):
-            network.require_destinations([[0, 0, 1, 1]], report)
+            network.require_known_drainage_in_bounds([[0, 0, 1, 1]], report)
 
     def test_all_natural_tributaries_are_included_and_artificial_ones_excluded(self):
         nodes = ''.join(self.node(i, lon=i / 10) for i in range(1, 7))
         path = self.write('network.osm', nodes + self.way(10, [1, 2]) +
                           self.way(11, [3, 1], 'stream') + self.way(12, [4, 3], 'stream') +
                           self.way(13, [5, 4], 'canal') + self.way(14, [6, 5], 'ditch'))
-        groups, report = Waterways([path]).groups({37: ['10']})
+        groups, report = Waterways([path]).trace_destinations_from_ways({37: ['10']})
         self.assertEqual(groups, {('1', '2'): (37,), ('3', '1'): (37,), ('4', '3'): (37,)})
         self.assertEqual(report, {'ambiguous': [], 'unassigned': [], 'incomplete': [], 'shared_sections': [], 'unresolved_sections': []})
 
     def test_conflicting_downstream_groups_remain_ambiguous(self):
         path = self.write('network.osm', ''.join(self.node(i, lon=i / 10) for i in [1, 2, 3]) +
                           self.way(10, [1, 2]) + self.way(20, [2, 3]))
-        assigned, report = Waterways([path]).groups({1: ['10'], 2: ['20']})
+        assigned, report = Waterways([path]).trace_destinations_from_ways({1: ['10'], 2: ['20']})
         self.assertEqual(assigned[('1', '2')], (1, 2))
         self.assertIn('10', report['ambiguous'])
 
@@ -197,10 +197,10 @@ class WaterwayTests(unittest.TestCase):
         path = self.write('network.osm', ''.join(self.node(i, lon=i / 10) for i in range(1, 6)) +
                           self.way(10, [1, 2, 3, 4]) + self.way(20, [5, 3], 'stream'))
         graph = Waterways([path])
-        assigned, report = graph.groups({37: ['10']})
+        assigned, report = graph.trace_destinations_from_ways({37: ['10']})
         self.assertEqual(assigned, {('1', '3'): (37,), ('3', '4'): (37,), ('5', '3'): (37,)})
         self.assertEqual(report['unassigned'], [])
-        self.assertEqual(list(graph.line(10).coords), [(i / 10, 1.) for i in range(1, 5)])
+        self.assertEqual(list(graph.way_line(10).coords), [(i / 10, 1.) for i in range(1, 5)])
 
     def test_latest_pinned_object_version_is_used_regardless_of_file_order(self):
         old = self.write('old.osm', self.node(1, 1, 1, 1))
@@ -239,8 +239,8 @@ class WaterwayTests(unittest.TestCase):
                     network = Waterways(paths, rivers_and_streams_only=True)
                     self.assertEqual(network.incomplete, set())
                     self.assertEqual(network.ways['10'].version, 2)
-                    self.assertEqual(list(network.line(10).coords), [(1., 0.), (3., 0.)])
-                    self.assertEqual(network.groups({7: ['10']})[0], {('1', '3'): (7,)})
+                    self.assertEqual(list(network.way_line(10).coords), [(1., 0.), (3., 0.)])
+                    self.assertEqual(network.trace_destinations_from_ways({7: ['10']})[0], {('1', '3'): (7,)})
 
     def test_conflicting_same_version_nodes_across_pbfs_are_rejected(self):
         paths = []
@@ -276,10 +276,10 @@ class WaterwayTests(unittest.TestCase):
         path = self.write('network.osm', ''.join(self.node(i, lon=i / 10) for i in range(1, 5)) +
                           self.way(10, [1, 2, 3]) + self.way(20, [2, 4], 'stream'))
         network = Waterways([path], reverse=['20', '20'])
-        assigned, report = network.groups({37: ['10']})
+        assigned, report = network.trace_destinations_from_ways({37: ['10']})
         self.assertEqual(assigned, {('1', '2'): (37,), ('2', '3'): (37,), ('4', '2'): (37,)})
         self.assertEqual(report['ambiguous'], [])
-        self.assertEqual(list(network.line(20).coords), [(.4, 1.), (.2, 1.)])
+        self.assertEqual(list(network.way_line(20).coords), [(.4, 1.), (.2, 1.)])
         self.assertEqual(network.ways['20'].version, 1)
 
     def test_reviewed_reverse_requires_a_present_natural_way(self):
@@ -300,7 +300,7 @@ class WaterwayTests(unittest.TestCase):
         graph = Waterways([path])
         self.assertEqual(graph.incomplete, {'10'})
         with self.assertRaisesRegex(ValueError, 'missing or incomplete'):
-            graph.groups({1: ['10']})
+            graph.trace_destinations_from_ways({1: ['10']})
 
     def test_archive_responses_and_plain_xml_use_the_same_reader(self):
         path = self.write('network.osm', self.node(1) + self.node(2, 2) + self.way(10, [1, 2]))
@@ -335,7 +335,7 @@ class WaterwayTests(unittest.TestCase):
             self.assertEqual(packed.nodes, xml.nodes)
             self.assertEqual(packed.ways, xml.ways)
             self.assertEqual(packed.relations, xml.relations)
-            self.assertEqual(packed.groups({3: ['10']}), xml.groups({3: ['10']}))
+            self.assertEqual(packed.trace_destinations_from_ways({3: ['10']}), xml.trace_destinations_from_ways({3: ['10']}))
         self.assertEqual(set(Waterways([pbf], rivers_and_streams_only=True).nodes), {'1', '2'})
 
     def test_later_artificial_classification_retires_an_older_natural_way(self):
@@ -350,9 +350,9 @@ class WaterwayTests(unittest.TestCase):
                           self.way(10, [1, 2]) + self.way(20, [3, 4]))
         grid = Grid(np.zeros((2, 2)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
         network = Waterways([path])
-        assigned, _ = network.groups({3: ['10'], 9876543210: ['20']})
-        seeds, report = seed_grid(network, assigned, grid)
-        np.testing.assert_array_equal(single_destinations(seeds, grid.elevation.shape),
+        assigned, _ = network.trace_destinations_from_ways({3: ['10'], 9876543210: ['20']})
+        seeds, report = rasterize_waterway_destinations(network, assigned, grid)
+        np.testing.assert_array_equal(unique_destination_labels(seeds, grid.elevation.shape),
                                       [[3, 3], [9876543210, 9876543210]])
         self.assertEqual(report['shared_seed_cells'], 0)
 
@@ -360,7 +360,7 @@ class WaterwayTests(unittest.TestCase):
         path = self.write('coast.osm', self.node(1, .1, 1.5) + self.node(2, 1.9, 1.5) +
                           self.way(10, [1, 2], 'coastline'))
         graph = Waterways([path])
-        self.assertEqual(list(graph.line(10).coords), [(.1, 1.5), (1.9, 1.5)])
+        self.assertEqual(list(graph.way_line(10).coords), [(.1, 1.5), (1.9, 1.5)])
         self.assertEqual(graph.river_and_stream_ids, set())
 
 

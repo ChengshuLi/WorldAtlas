@@ -24,8 +24,8 @@ class SourceGeometryTests(unittest.TestCase):
         path.write_text(json.dumps({'features': [{'geometry': {
             'type': 'LineString', 'coordinates': [[0, 0], [1, 1], [2, 0]]}}]}))
         sources = Sources({'provider': path})
-        line = sources.line(dict(source='provider', geojson_feature=0))
-        self.assertEqual(sources.point({'line': 'selected', 'endpoint': 'end'},
+        line = sources.read_selected_line(dict(source='provider', geojson_feature=0))
+        self.assertEqual(sources.read_selected_point({'line': 'selected', 'endpoint': 'end'},
                                        {'selected': line}), (2., 0.))
         self.assertEqual(list(line.coords), [(0., 0.), (1., 1.), (2., 0.)])
 
@@ -38,7 +38,7 @@ class SourceGeometryTests(unittest.TestCase):
                         '<relation id="30"><member type="way" ref="20" role="main_stream"/>'
                         '<member type="way" ref="10" role="main_stream"/></relation></osm>')
         sources = Sources({'river': path})
-        line = sources.line(dict(source='river', relation='30', role='main_stream', start_node='1'))
+        line = sources.read_selected_line(dict(source='river', relation='30', role='main_stream', start_node='1'))
         self.assertEqual(list(line.coords), [(0., 0.), (1., 1.), (2., 0.)])
 
     def test_selected_geojson_archive_member_is_read_without_extraction(self):
@@ -50,9 +50,9 @@ class SourceGeometryTests(unittest.TestCase):
             output.writestr('../source.geojson', document)
         sources = Sources({'provider': archive})
         selection = {'source': 'provider', 'geojson_feature': 0, 'member': 'nested/source.geojson'}
-        self.assertEqual(list(sources.line(selection).coords), [(0., 0.), (1., 1.)])
+        self.assertEqual(list(sources.read_selected_line(selection).coords), [(0., 0.), (1., 1.)])
         with self.assertRaisesRegex(ValueError, 'invalid source archive member'):
-            sources.line(dict(selection, member='../source.geojson'))
+            sources.read_selected_line(dict(selection, member='../source.geojson'))
         self.assertEqual(list(self.root.iterdir()), [archive])
 
     def test_network_reads_the_selected_pbf_or_xml_member_of_an_archive(self):
@@ -71,14 +71,14 @@ class SourceGeometryTests(unittest.TestCase):
         sources = Sources({'provider': archive})
         for member in ('nested/way.osm.pbf', 'nested/way.osm'):
             with self.subTest(member=member):
-                network = sources.network([{'source': 'provider', 'member': member}], rivers_and_streams_only=True)
-                self.assertEqual(list(network.line(10).coords), [(0., 0.), (1., 1.)])
+                network = sources.read_osm_network([{'source': 'provider', 'member': member}], rivers_and_streams_only=True)
+                self.assertEqual(list(network.way_line(10).coords), [(0., 0.), (1., 1.)])
         self.assertFalse((self.root / 'extracted').exists())
 
     def test_unused_shapefile_line_selection_is_not_silently_accepted(self):
         sources = Sources({})
         with self.assertRaisesRegex(ValueError, 'unsupported source line selection'):
-            sources.line({'source': 'unused', 'feature_field': 'ID', 'feature': 42})
+            sources.read_selected_line({'source': 'unused', 'feature_field': 'ID', 'feature': 42})
 
     def test_invalid_source_coordinates_are_rejected(self):
         path = self.root / 'invalid.geojson'
@@ -86,7 +86,7 @@ class SourceGeometryTests(unittest.TestCase):
             'type': 'LineString', 'coordinates': [[0, 0], [0, 100]]}}]}))
         sources = Sources({'provider': path})
         with self.assertRaisesRegex(ValueError, 'finite WGS84'):
-            sources.line({'source': 'provider', 'geojson_feature': 0})
+            sources.read_selected_line({'source': 'provider', 'geojson_feature': 0})
 
     def test_pbf_point_selection_includes_isolated_nodes_without_loading_ways(self):
         path = self.root / 'provider.osm.pbf'
@@ -95,11 +95,11 @@ class SourceGeometryTests(unittest.TestCase):
             writer.add_node(osmium.osm.mutable.Node(id=99, location=(45., 44.), version=1))
         sources = Sources({'provider': path})
         specification = {'source': 'provider', 'node': 42}
-        self.assertEqual(sources.point(specification, {}), (44., 43.))
-        self.assertEqual(sources.point(specification, {}), (44., 43.))
+        self.assertEqual(sources.read_selected_point(specification, {}), (44., 43.))
+        self.assertEqual(sources.read_selected_point(specification, {}), (44., 43.))
         self.assertEqual(sources.networks, {})
         with self.assertRaisesRegex(ValueError, 'missing'):
-            sources.point({'source': 'provider', 'node': 100}, {})
+            sources.read_selected_point({'source': 'provider', 'node': 100}, {})
 
     def test_network_cache_keeps_reviewed_directions_separate(self):
         path = self.root / 'rivers.osm'
@@ -108,11 +108,11 @@ class SourceGeometryTests(unittest.TestCase):
                         '<way id="10"><nd ref="1"/><nd ref="2"/>'
                         '<tag k="waterway" v="river"/></way></osm>')
         sources = Sources({'rivers': path})
-        normal = sources.network(['rivers'], rivers_and_streams_only=True)
-        reverse = sources.network(['rivers'], rivers_and_streams_only=True, reverse=['10'])
+        normal = sources.read_osm_network(['rivers'], rivers_and_streams_only=True)
+        reverse = sources.read_osm_network(['rivers'], rivers_and_streams_only=True, reverse=['10'])
         self.assertEqual(normal.ways['10'].nodes, ('1', '2'))
         self.assertEqual(reverse.ways['10'].nodes, ('2', '1'))
-        self.assertIs(normal, sources.network(['rivers'], rivers_and_streams_only=True))
+        self.assertIs(normal, sources.read_osm_network(['rivers'], rivers_and_streams_only=True))
 
 
 if __name__ == '__main__':

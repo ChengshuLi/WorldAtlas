@@ -13,10 +13,10 @@ from shapely.ops import substring
 from shapely.strtree import STRtree
 
 from worldatlas.geodesy.wgs84 import GEOD, geodesic
-from worldatlas.source_imports.watersheds.drainage import upstream_order
+from worldatlas.source_imports.watersheds.drainage import upstream_cells_from_outlet
 
 
-def distance(first, second):
+def geodesic_distance(first, second):
     """Measure the distance between two points on the WGS84 ellipsoid.
 
     Args:
@@ -56,7 +56,7 @@ class Divide:
         self.origin = None
         self.crs = None
 
-    def add_grid(self, grid, labels, pairs, output_bounds=None, *, bounds_crs=4326):
+    def add_catchment_edges(self, grid, labels, pairs, output_bounds=None, *, bounds_crs=4326):
         """Add native cell edges that separate the selected drainage groups.
 
         Args:
@@ -93,7 +93,7 @@ class Divide:
             # Use positions on the uncropped grid to join edges from overlapping crops.
             key = (row + grid.window_offset[0], column + grid.window_offset[1])
             if key not in self.coordinates:
-                point = to_geo.transform(*grid.coordinates(row, column, center=False), errcheck=True)
+                point = to_geo.transform(*grid.cell_coordinates(row, column, center=False), errcheck=True)
                 if not np.isfinite(point).all() or not -90 <= point[1] <= 90:
                     raise ValueError('invalid divide coordinates')
                 self.coordinates[key] = tuple(map(float, point))
@@ -111,7 +111,7 @@ class Divide:
             for rr, cc in np.argwhere(selected):
                 row, column = int(rr), int(cc)
                 if output_bounds is not None:
-                    midpoint = grid.coordinates(row + (.5 if dc else 1),
+                    midpoint = grid.cell_coordinates(row + (.5 if dc else 1),
                                                 column + (1 if dc else .5), center=False)
                     x, y = to_output.transform(*midpoint, errcheck=True)
                     west, south, east, north = output_bounds
@@ -121,7 +121,7 @@ class Divide:
                         (node(row + 1, column), node(row + 1, column + 1)))
                 self.edges.add(tuple(sorted(edge)))
 
-    def segments(self):
+    def edges_as_lines(self):
         """Create line geometries in the same order as their grid-edge identifiers.
 
         Returns:
@@ -131,7 +131,7 @@ class Divide:
         coordinates = np.asarray([(self.coordinates[a], self.coordinates[b]) for a, b in edges])
         return edges, linestrings(coordinates.reshape(-1, 2, 2))
 
-    def nearest_vertex(self, point):
+    def nearest_vertex_join(self, point):
         """Select the closest native divide corner to a geographic reference.
 
         Args:
@@ -155,7 +155,7 @@ class Divide:
         edge = min(edge for edge in self.edges if key in edge)
         return Join(self.coordinates[key], {self: edge})
 
-    def route(self, start, end):
+    def shortest_divide_path(self, start, end):
         """Find the shortest connected path along candidate divide edges.
 
         Args:
@@ -220,17 +220,17 @@ class Divide:
         return LineString([coordinates[nodes[index]] for index in reversed(path)])
 
 
-def _points(geometry):
+def _join_candidate_points(geometry):
     if geometry.is_empty:
         return []
     if geometry.geom_type == 'Point':
         return [tuple(geometry.coords[0])]
     if geometry.geom_type == 'LineString':
         return [tuple(geometry.coords[0]), tuple(geometry.coords[-1])]
-    return [point for part in geometry.geoms for point in _points(part)]
+    return [point for part in geometry.geoms for point in _join_candidate_points(part)]
 
 
-def intersection(left, right, near):
+def choose_intersection_join(left, right, near):
     """Choose an actual source intersection using its WGS84 distance to an anchor.
 
     A divide join retains its grid edge identity, so inserting the computed
@@ -248,29 +248,29 @@ def intersection(left, right, near):
         ValueError: The two sections have no intersection.
     """
     if isinstance(left, Divide):
-        edges, lines = left.segments()
+        edges, lines = left.edges_as_lines()
         if isinstance(right, Divide):
-            other_edges, other_lines = right.segments()
+            other_edges, other_lines = right.edges_as_lines()
             first, second = STRtree(other_lines).query(lines, predicate='intersects')
             hits = intersect_geometries(lines[first], other_lines[second])
             candidates = [Join(point, {left: edges[i], right: other_edges[j]})
                           for i, j, hit in zip(first, second, hits, strict=True)
-                          for point in _points(hit)]
+                          for point in _join_candidate_points(hit)]
         else:
             indices = STRtree(lines).query(right, predicate='intersects')
             hits = intersect_geometries(lines[indices], right)
             candidates = [Join(point, {left: edges[i]})
-                          for i, hit in zip(indices, hits, strict=True) for point in _points(hit)]
+                          for i, hit in zip(indices, hits, strict=True) for point in _join_candidate_points(hit)]
     elif isinstance(right, Divide):
-        return intersection(right, left, near)
+        return choose_intersection_join(right, left, near)
     else:
-        candidates = [Join(point) for point in _points(left.intersection(right))]
+        candidates = [Join(point) for point in _join_candidate_points(left.intersection(right))]
     if not candidates:
         raise ValueError('adjacent sections have no source-supported intersection')
-    return min(candidates, key=lambda join: (distance(join.point, near), join.point))
+    return min(candidates, key=lambda join: (geodesic_distance(join.point, near), join.point))
 
 
-def connect_waypoints(line, points, max_step_m):
+def route_line_through_waypoints(line, points, max_step_m):
     """Replace short parts of the divide to pass through selected points.
 
     Enclose every intersection of each connector with the source route. The
@@ -354,7 +354,7 @@ def connect_waypoints(line, points, max_step_m):
         position = group['last'] + 1
         receipts.append({'points': [list(p) for p in group['points']],
                          'start': list(curve[0]), 'end': list(curve[-1]),
-                         'length_m': sum(distance(a, b) for a, b in pairwise(curve))})
+                         'length_m': sum(geodesic_distance(a, b) for a, b in pairwise(curve))})
     result.extend(map(tuple, coordinates[position:]))
     connected = LineString(result)
     if not connected.is_simple:
@@ -362,7 +362,7 @@ def connect_waypoints(line, points, max_step_m):
     return connected, receipts
 
 
-def assemble(sections, joins, start, end, *, waypoints=None, connections=None):
+def assemble_boundary_line(sections, joins, start, end, *, waypoints=None, connections=None):
     """Cut sections at their shared joins and assemble one boundary.
 
     Args:
@@ -387,14 +387,14 @@ def assemble(sections, joins, start, end, *, waypoints=None, connections=None):
     for index, section in enumerate(sections):
         first, last = ends[index], ends[index + 1]
         if isinstance(section, Divide):
-            cut = section.route(first, last)
+            cut = section.shortest_divide_path(first, last)
         else:
             cut = substring(section, section.project(Point(first.point)), section.project(Point(last.point)))
         if cut.geom_type != 'LineString' or cut.is_empty:
             raise ValueError('boundary section has coincident or invalid joins')
         if waypoints and index in waypoints:
             choice = waypoints[index]
-            cut, receipts = connect_waypoints(cut, choice['points'], choice['max_step_m'])
+            cut, receipts = route_line_through_waypoints(cut, choice['points'], choice['max_step_m'])
             if connections is not None:
                 connections[str(index)] = {'waypoints': receipts}
         points = list(cut.coords)
@@ -409,7 +409,7 @@ def assemble(sections, joins, start, end, *, waypoints=None, connections=None):
     return {'type': 'LineString', 'coordinates': values.tolist()}
 
 
-def cell_at(grid, point, *, required=True):
+def cell_containing_point(grid, point, *, required=True):
     """Find the grid cell containing a geographic point.
 
     Args:
@@ -433,7 +433,7 @@ def cell_at(grid, point, *, required=True):
     return row, column
 
 
-def flow_to_point(grid, flow, labels, point, inside_group, outside_groups, max_step_m):
+def connect_divide_to_stream_head(grid, flow, labels, point, inside_group, outside_groups, max_step_m):
     """Connect a divide to a known stream head using its actual upstream flow.
 
     Select a cell on a flow path from the divide near the mapped stream head.
@@ -455,7 +455,7 @@ def flow_to_point(grid, flow, labels, point, inside_group, outside_groups, max_s
     Raises:
         ValueError: Available flow and labels do not establish a path from the divide.
     """
-    row, column = cell_at(grid, point)
+    row, column = cell_containing_point(grid, point)
     if labels[row, column] != inside_group:
         raise ValueError('source stream head is not assigned to its declared drainage group')
     height, width = labels.shape
@@ -463,7 +463,7 @@ def flow_to_point(grid, flow, labels, point, inside_group, outside_groups, max_s
 
     def center(index):
         rr, cc = divmod(int(index), width)
-        return tuple(to_geo.transform(*grid.coordinates(rr, cc), errcheck=True))
+        return tuple(to_geo.transform(*grid.cell_coordinates(rr, cc), errcheck=True))
 
     interface = np.zeros(labels.shape, dtype=bool)
     for dr, dc in ((-1, 0), (0, -1), (0, 1), (1, 0)):
@@ -485,26 +485,26 @@ def flow_to_point(grid, flow, labels, point, inside_group, outside_groups, max_s
     if not len(eligible):
         raise ValueError('no source-backed divide flows to the selected drainage group')
     rows, columns = np.divmod(eligible, width)
-    lon, lat = to_geo.transform(*grid.coordinates(rows, columns), errcheck=True)
+    lon, lat = to_geo.transform(*grid.cell_coordinates(rows, columns), errcheck=True)
     lengths_to_point = GEOD.inv(lon, lat, np.full(lon.shape, point[0]),
                               np.full(lat.shape, point[1]))[2]
     terminal = int(eligible[np.argmin(lengths_to_point)])
     lengths = {terminal: 0.}
     candidates = []
     # Search upstream of the selected cell and use the shortest eligible interface path.
-    for value in upstream_order(flow, terminal):
+    for value in upstream_cells_from_outlet(flow, terminal):
         index = int(value)
         rr, cc = divmod(index, width)
         if index != terminal:
             parent = int(flow.ravel()[index])
-            lengths[index] = lengths[parent] + distance(center(index), center(parent))
+            lengths[index] = lengths[parent] + geodesic_distance(center(index), center(parent))
         if labels[rr, cc] != inside_group:
             continue
         for dr, dc in ((-1, 0), (0, -1), (0, 1), (1, 0)):
             nr, nc = rr + dr, cc + dc
             if 0 <= nr < height and 0 <= nc < width and labels[nr, nc] in outside_groups:
                 neighbor = nr * width + nc
-                cost = lengths[index] + .5 * distance(center(neighbor), center(index))
+                cost = lengths[index] + .5 * geodesic_distance(center(neighbor), center(index))
                 candidates.append((cost, index, neighbor))
     if not candidates:
         raise ValueError('no source-backed divide flows to the selected stream head')
@@ -513,7 +513,7 @@ def flow_to_point(grid, flow, labels, point, inside_group, outside_groups, max_s
     while cells[-1] != terminal:
         cells.append(int(flow.ravel()[cells[-1]]))
     centers = [center(value) for value in cells]
-    snap = distance(centers[-1], point)
+    snap = geodesic_distance(centers[-1], point)
     connector = geodesic(centers[-1], point, max_step_m) if snap else [tuple(point)]
     coordinates = [center(neighbor), *centers, *connector[1:]]
     return LineString(coordinates), {'flow_cells': len(cells), 'point_snap_m': snap,

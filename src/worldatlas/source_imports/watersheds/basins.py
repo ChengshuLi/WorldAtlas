@@ -9,7 +9,7 @@ from shapely import from_wkb, get_coordinates, points, transform as transform_ge
 from shapely.geometry import Point
 from shapely.strtree import STRtree
 
-from worldatlas.source_imports.watersheds.drainage import upstream_links
+from worldatlas.source_imports.watersheds.drainage import index_upstream_cells
 
 
 class Basins:
@@ -59,7 +59,7 @@ class Basins:
         self.tree = STRtree(self.polygons)
         self.mapped = set().union(*self.groups.values())
 
-    def at(self, point):
+    def group_at_point(self, point):
         """Identify the drainage group at a point.
 
         Args:
@@ -68,9 +68,9 @@ class Basins:
         Returns:
             The local group ID, or -1 if coverage cannot establish one group.
         """
-        return self.group(self.values_at(point))
+        return self.group_for_basin_ids(self.basin_ids_at_point(point))
 
-    def values_at(self, point):
+    def basin_ids_at_point(self, point):
         """Find all provider drainage identities covering a point.
 
         Args:
@@ -81,7 +81,7 @@ class Basins:
         """
         return {self.values[i] for i in self.tree.query(Point(*point), predicate='covered_by')}
 
-    def group(self, values):
+    def group_for_basin_ids(self, values):
         """Translate provider identities to one recipe group.
 
         Args:
@@ -93,7 +93,7 @@ class Basins:
         matches = {group for group, selected in self.groups.items() if values & selected}
         return next(iter(matches)) if len(matches) == 1 and values <= self.mapped else -1
 
-    def exit_group(self, line):
+    def group_at_river_exit(self, line):
         """Use the last source basin on a complete downstream river way.
 
         Basin polygons can stop at the shore while river geometry continues
@@ -112,7 +112,7 @@ class Basins:
         endpoint = Point(line.coords[-1])
         values = {self.values[int(i)] for i in self.tree.query(endpoint, predicate='intersects')}
         if values:
-            return self.group(values), None
+            return self.group_for_basin_ids(values), None
         exits = []
         for index in self.tree.query(line, predicate='intersects'):
             index = int(index)
@@ -124,12 +124,12 @@ class Basins:
         # Station is distance along the ordered line. The largest is farthest downstream.
         station = max(item[0] for item in exits)
         last = [item for item in exits if item[0] == station]
-        return self.group({item[1] for item in last}), min(item[2] for item in last)
+        return self.group_for_basin_ids({item[1] for item in last}), min(item[2] for item in last)
 
-    def _groups_at_cells(self, grid, rows, columns):
+    def _groups_at_cell_centers(self, grid, rows, columns):
         """Look up cell centers in one spatial query and preserve unknown groups."""
         to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
-        lon, lat = to_geo.transform(*grid.coordinates(rows, columns), errcheck=True)
+        lon, lat = to_geo.transform(*grid.cell_coordinates(rows, columns), errcheck=True)
         locations, polygons = self.tree.query(points(lon, lat), predicate='covered_by')
         # A point on a shared edge can be covered by more than one basin.
         basin_ids = defaultdict(set)
@@ -137,10 +137,10 @@ class Basins:
             basin_ids[location].add(self.values[polygon])
         groups = np.full(len(rows), -1, dtype='int64')
         for location, values in basin_ids.items():
-            groups[location] = self.group(values)
+            groups[location] = self.group_for_basin_ids(values)
         return groups
 
-    def terminals(self, grid, flow):
+    def classify_crop_exits(self, grid, flow):
         """Classify terminal cells at the boundary of the terrain grid.
 
         Args:
@@ -156,10 +156,10 @@ class Basins:
         # Only perimeter terminals can leave the crop. A pit may also have no next cell.
         edge = (rows == 0) | (rows == height - 1) | (columns == 0) | (columns == width - 1)
         rows, columns = rows[edge], columns[edge]
-        result[rows, columns] = self._groups_at_cells(grid, rows, columns)
+        result[rows, columns] = self._groups_at_cell_centers(grid, rows, columns)
         return result
 
-    def coastal_outlets(self, grid, ocean):
+    def classify_coastal_outlets(self, grid, ocean):
         """Stop at observed ocean cells and classify adjacent land exits.
 
         Args:
@@ -191,10 +191,10 @@ class Basins:
         shore &= ~ocean
         labels = np.full(ocean.shape, -1, dtype='int64')
         rows, columns = np.nonzero(shore)
-        labels[rows, columns] = self._groups_at_cells(grid, rows, columns)
+        labels[rows, columns] = self._groups_at_cell_centers(grid, rows, columns)
         return ocean | shore, labels
 
-    def uncovered_exits(self, grid, flow, exits, labels, seeds):
+    def classify_uncovered_outlets(self, grid, flow, exits, labels, seeds):
         """Classify uncovered outlets through their actual upstream flow paths.
 
         Basin polygons can end inland of a water mask's shoreline. Walk each
@@ -225,13 +225,13 @@ class Basins:
         report = {'resolved': [], 'conflicting': [], 'unreferenced': 0}
         if not unresolved.size:
             return result, report
-        heads, following = upstream_links(flow)
+        heads, following = index_upstream_cells(flow)
         width = flow.shape[1]
         to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
 
         def point(index):
             row, column = divmod(int(index), width)
-            return tuple(map(float, to_geo.transform(*grid.coordinates(row, column), errcheck=True)))
+            return tuple(map(float, to_geo.transform(*grid.cell_coordinates(row, column), errcheck=True)))
 
         for terminal in unresolved:
             todo = [int(terminal)]
@@ -241,9 +241,9 @@ class Basins:
                 seed_groups = {group for group, cells in seeds.items() if cells.ravel()[index]}
                 group = next(iter(seed_groups)) if len(seed_groups) == 1 else -1
                 location = point(index)
-                values = set() if seed_groups else self.values_at(location)
+                values = set() if seed_groups else self.basin_ids_at_point(location)
                 if seed_groups or values:
-                    group = group if group >= 0 else self.group(values)
+                    group = group if group >= 0 else self.group_for_basin_ids(values)
                     groups.update(seed_groups or {group})
                     basin_values.update(values)
                     references.setdefault(group, location)
