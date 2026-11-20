@@ -61,9 +61,7 @@ class Basins:
 
     def values_at(self, point):
         """Return provider basin IDs covering a WGS84 longitude-latitude point."""
-        location = Point(*point)
-        return {self.values[int(i)] for i in self.tree.query(location)
-                if self.polygons[int(i)].covers(location)}
+        return {self.values[i] for i in self.tree.query(Point(*point), predicate='covered_by')}
 
     def group(self, values):
         """Return the common drainage group for the basin IDs, or -1."""

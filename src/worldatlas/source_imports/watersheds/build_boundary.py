@@ -1,6 +1,7 @@
 """Regenerate an editable mainland boundary from a Neon construction record."""
 import hashlib
 from importlib.metadata import version
+from itertools import pairwise
 import logging
 from pathlib import Path
 import platform
@@ -66,6 +67,8 @@ def runtime_versions():
         Versions of the Python and native libraries and the PROJ database checksum.
     """
     database = Path(pyproj.datadir.get_data_dir()) / 'proj.db'
+    with database.open('rb') as stream:
+        database_sha256 = hashlib.file_digest(stream, 'sha256').hexdigest()
     return {'python': platform.python_version(),
             'packages': {name: version(name) for name in (
                 'numpy', 'pyproj', 'shapely', 'scipy', 'numba', 'llvmlite', 'osmium', 'boto3', 'psycopg')},
@@ -73,7 +76,7 @@ def runtime_versions():
             'gdal_proj': '.'.join(map(str, (osr.GetPROJVersionMajor(), osr.GetPROJVersionMinor(),
                                           osr.GetPROJVersionMicro()))),
             'shapely_geos': shapely.geos_version_string,
-            'proj_database_sha256': hashlib.sha256(database.read_bytes()).hexdigest()}
+            'proj_database_sha256': database_sha256}
 
 
 def construct(files, *, line_selections, sections, joins, start, end, terrains=None):
@@ -109,8 +112,9 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
                              for domain in domains]
         bounds = [min(b[0] for b in geographic_bounds), min(b[1] for b in geographic_bounds),
                   max(b[2] for b in geographic_bounds), max(b[3] for b in geographic_bounds)]
+        reversed_ways = [str(ident) for ident in settings.get('reverse_waterways', [])]
         network = sources.network(settings.get('waterways', []), natural_only=True,
-                                  reverse=settings.get('reverse_waterways', []))
+                                  reverse=reversed_ways)
         if network.nodes:
             # Complete ways can end outside the terrain crop. Include those
             # destinations when looking up source basin identities.
@@ -241,7 +245,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
         network_report['natural_ways_in_domains'] = len(relevant_ways)
         network_report['natural_ways_in_sources'] = len(network.natural)
         network_report['reversed_waterways'] = {
-            ident: network.ways[ident].version for ident in settings.get('reverse_waterways', [])}
+            ident: network.ways[ident].version for ident in reversed_ways}
         report['terrain'][name] = {'domains': domain_reports, 'network': network_report,
                                    'network_seconds': network_seconds,
                                    'seconds': time.monotonic() - phase}
@@ -276,7 +280,7 @@ def construct(files, *, line_selections, sections, joins, start, end, terrains=N
     if len(joins) != len(section_lines) - 1:
         raise ValueError('one geographic join selection is required between adjacent sections')
     chosen_joins = [intersection(a, b, choice['near'])
-                    for a, b, choice in zip(section_lines, section_lines[1:], joins)]
+                     for (a, b), choice in zip(pairwise(section_lines), joins, strict=True)]
     geometry = assemble(section_lines, chosen_joins, selected_point(start, retain_join=True),
                         selected_point(end, retain_join=True),
                         waypoints=waypoints, connections=report['connections'])

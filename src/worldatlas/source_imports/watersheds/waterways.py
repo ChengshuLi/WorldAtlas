@@ -1,6 +1,7 @@
 """Read pinned OSM objects and assign natural waterways by downstream topology."""
 from collections import defaultdict
 from dataclasses import dataclass
+from itertools import pairwise
 import math
 from pathlib import Path
 import shutil
@@ -159,7 +160,7 @@ class Waterways:
         """Source index/node pairs delimiting each directed topology segment."""
         anchors = [(i, node) for i, node in enumerate(self.ways[str(way_id)].nodes)
                    if node in self.topology_nodes]
-        return zip(anchors, anchors[1:])
+        return pairwise(anchors)
 
     def line(self, way_id, start=0, end=None):
         """Keep original coordinates from start through end, including both indices."""

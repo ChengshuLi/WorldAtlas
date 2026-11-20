@@ -1,4 +1,5 @@
 """Read selected provider vertices, ways and river relations from verified files."""
+from itertools import pairwise
 import json
 from typing import NotRequired, TypedDict
 from zipfile import ZipFile
@@ -167,7 +168,7 @@ class Sources:
         for kind, reference, role in members:
             if kind == 'way' and role == specification['role']:
                 nodes = network.ways[reference].nodes
-                for first, last in zip(nodes, nodes[1:]):
+                for first, last in pairwise(nodes):
                     adjacent.setdefault(first, set()).add(last)
                     adjacent.setdefault(last, set()).add(first)
         node = str(specification['start_node'])

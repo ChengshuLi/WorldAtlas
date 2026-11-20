@@ -1,5 +1,6 @@
 """Join source lines, drainage divides and explicit geodesic connectors once."""
 from dataclasses import dataclass, field
+from itertools import pairwise
 import math
 
 import numpy as np
@@ -143,7 +144,7 @@ class Divide:
         rows, columns = [], []
         for edge in sorted(split):
             pieces = sorted(split[edge], key=lambda item: item[0])
-            for (_, a), (_, b) in zip(pieces, pieces[1:]):
+            for (_, a), (_, b) in pairwise(pieces):
                 rows.append(node_ids[a])
                 columns.append(node_ids[b])
         positions = np.asarray(list(coordinates.values()))
@@ -248,7 +249,7 @@ def connect_waypoints(line, points, max_step_m):
         chain = [tuple(coordinates[group['first']]), *group['points'],
                  tuple(coordinates[group['last']])]
         result = [chain[0]]
-        for first, last in zip(chain, chain[1:]):
+        for first, last in pairwise(chain):
             if first != last:
                 result.extend(geodesic(first, last, max_step_m)[1:])
         return result
@@ -288,7 +289,7 @@ def connect_waypoints(line, points, max_step_m):
         position = group['last'] + 1
         receipts.append({'points': [list(p) for p in group['points']],
                          'start': list(curve[0]), 'end': list(curve[-1]),
-                         'length_m': sum(distance(a, b) for a, b in zip(curve, curve[1:]))})
+                         'length_m': sum(distance(a, b) for a, b in pairwise(curve))})
     result.extend(map(tuple, coordinates[position:]))
     connected = LineString(result)
     if not connected.is_simple:

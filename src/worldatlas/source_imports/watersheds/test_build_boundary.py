@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
 import zipfile
@@ -15,6 +16,9 @@ from osgeo import gdal
 from pyproj import CRS, Transformer
 from shapely.geometry import box
 
+from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.division.areas import divide_area
+from worldatlas.map_build.division.scope import complete_row
 from worldatlas.source_imports.run_import import run_import
 from worldatlas.source_imports.watersheds.build_boundary import construct
 from worldatlas.source_imports.watersheds.test_basins import write_basin_shapefile
@@ -88,6 +92,28 @@ def build_fixture(recipe, files):
 
 
 class ConstructionTests(unittest.TestCase):
+    def test_numeric_and_text_waterway_reversals_produce_the_same_result(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            river = Path(directory) / 'river.osm'
+            river.write_text('<osm version="0.6"><node id="1" lon=".001" lat=".005" version="1"/>'
+                             '<node id="2" lon=".001" lat=".001" version="1"/>'
+                             '<way id="11" version="1"><nd ref="1"/><nd ref="2"/>'
+                             '<tag k="waterway" v="stream"/></way></osm>')
+            files['river'] = river
+            terrain = recipe['terrains']['ridge']
+            terrain.update(waterways=['river'], waterway_groups={'3': ['11']})
+            for way_id in (11, '11'):
+                with self.subTest(way_id=way_id):
+                    terrain['reverse_waterways'] = [way_id]
+                    geometry, report = build_fixture(recipe, files)
+                    self.assertEqual(geometry['coordinates'][1:-1], [
+                        [.003, .005], [.003, .004], [.003, .003], [.003, .002], [.003, .001],
+                    ])
+                    self.assertEqual(
+                        report['terrain']['ridge']['network']['reversed_waterways'], {'11': 1},
+                    )
+
     def test_unresolved_river_stops_before_terrain_processing(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
@@ -161,6 +187,40 @@ class ConstructionTests(unittest.TestCase):
             geometry, _ = build_fixture(recipe, files)
             self.assertEqual(geometry['coordinates'][0], [.003, .005])
             self.assertEqual(geometry['coordinates'][-1], [.003, .001])
+
+    def test_local_watershed_partitions_cells_when_it_reaches_the_scope_edges(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            files, recipe = fixtures(directory)
+            recipe.update(
+                sections=[{'divide': 'ridge'}], joins=[],
+                start={'nearest_divide': 'ridge', 'near': {'point': [.003, .005]}},
+                end={'nearest_divide': 'ridge', 'near': {'point': [.003, .001]}},
+            )
+            geometry, _ = build_fixture(recipe, files)
+            # The global grid contains this local six-column scope near 0°E, 0°N.
+            grid = Grid(360_000, 90_000, .001)
+            west, east, north, south = 180_000, 180_006, 89_995, 89_999
+            query = complete_row(grid.width, [(west, east, 1)])
+            scope = SimpleNamespace(
+                grid=grid,
+                rule={'id': 'local-watershed', 'unit': 'cell'},
+                context_intervals=lambda _: [(west, east)],
+                context_rows=lambda: range(north, south),
+                query_rows=lambda: range(north, south),
+                query_row=lambda _: query,
+            )
+            targets = [
+                {'entity_id': owner, 'point': {'geometry': {'coordinates': [lon, .0035]}}}
+                for owner, lon in [(301, .0015), (909, .0045)]
+            ]
+            boundaries = [{'geometry': geometry}]
+            result = divide_area(scope, boundaries, targets, directory / 'locations')
+            self.assertEqual(result['counts'], {'301': 12, '909': 12})
+            # One extra row allows both sides to connect around the line's end.
+            north -= 1
+            with self.assertRaisesRegex(ValueError, 'conflicting labels 301 and 909 share a face'):
+                divide_area(scope, boundaries, targets, directory / 'extended-scope')
 
     def test_boundary_can_start_at_a_calculated_source_intersection(self):
         with tempfile.TemporaryDirectory() as directory:
