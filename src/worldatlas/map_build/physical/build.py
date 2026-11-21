@@ -60,6 +60,40 @@ def make_r2_client(endpoint):
     return boto3.client('s3', endpoint_url=endpoint, region_name='auto')
 
 
+def validate_shard_staging(configuration, *, require_r2=False):
+    """Check the water-shard worker count and how the shards are supplied.
+
+    Args:
+        configuration: Physical settings with optional ``max_parallel_shards``
+            and ``source_staging`` fields.
+        require_r2: Require R2 staging for a replay that starts with an empty cache.
+
+    Returns:
+        The worker count and the R2 settings. The settings are None when the
+        build reads local shards.
+
+    Raises:
+        ValueError: The worker count or R2 staging configuration is invalid.
+    """
+    workers = configuration.get('max_parallel_shards', 2)
+    if type(workers) is not int or workers < 1:
+        raise ValueError('max_parallel_shards must be a positive integer')
+    staging = configuration.get('source_staging')
+    if staging is None:
+        if require_r2:
+            raise ValueError('release replay requires R2 staging for raw-water shards')
+    else:
+        if (
+            not isinstance(staging, dict)
+            or set(staging) != {'mode', 'endpoint_url'}
+            or staging['mode'] != 'r2-s3'
+            or workers != 1
+        ):
+            raise ValueError('R2 staging requires r2-s3 mode, endpoint_url and one shard worker')
+        validate_r2_endpoint(staging['endpoint_url'])
+    return workers, staging
+
+
 def validate_r2_shard_location(entry):
     """Check whether a frozen raw-water shard can be downloaded from R2.
 
@@ -306,19 +340,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     # Keep the worker count configurable; use complete-source profiles to
     # balance CPU throughput against disk headroom for on-demand shard staging.
-    workers = cfg.get('max_parallel_shards', 2)
-    if type(workers) is not int or workers < 1:
-        raise ValueError('max_parallel_shards must be a positive integer')
-    staging = cfg.get('source_staging')
-    if staging is not None:
-        if (
-            not isinstance(staging, dict)
-            or set(staging) != {'mode', 'endpoint_url'}
-            or staging['mode'] != 'r2-s3'
-            or workers != 1
-        ):
-            raise ValueError('R2 staging requires r2-s3 mode, endpoint_url and one shard worker')
-        validate_r2_endpoint(staging['endpoint_url'])
+    workers, staging = validate_shard_staging(cfg)
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
     land_path, land_bytes, land_cfg = read_pin(cfg['land_config'])

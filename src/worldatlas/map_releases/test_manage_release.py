@@ -91,7 +91,10 @@ class BundleTests(unittest.TestCase):
                             sha256="c" * 64, size=10,
                         )]}},
                     },
-                    "physical_controls": {"source_staging": {"mode": "r2-s3"}},
+                    "physical_controls": {
+                        "max_parallel_shards": 1,
+                        "source_staging": {"mode": "r2-s3", "endpoint_url": release_endpoint()},
+                    },
                 }
             )
         )

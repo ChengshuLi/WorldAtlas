@@ -22,7 +22,10 @@ class ReplaySourcesTests(unittest.TestCase):
             "water_config": {"json": {}},
             "raw_manifest": {"json": {"files": [self.shard]}},
         }
-        self.configuration = dict(sources=self.sources, physical_controls={"source_staging": {"mode": "r2-s3"}})
+        self.configuration = dict(sources=self.sources, physical_controls={
+            "max_parallel_shards": 1,
+            "source_staging": {"mode": "r2-s3", "endpoint_url": "https://" + "a" * 32 + ".r2.cloudflarestorage.com"},
+        })
         self.selection = {"raw_sources": [{"source_id": "coast"}, {"source_id": "inland"}]}
 
     def test_inline_documents_resolve_catalog_references_and_archive_members(self):
@@ -51,6 +54,19 @@ class ReplaySourcesTests(unittest.TestCase):
         self.configuration.pop("physical_controls")
         with self.assertRaisesRegex(ValueError, "requires R2 staging"):
             validate_replay_sources(self.configuration, self.selection, [])
+
+    def test_replay_requires_a_valid_r2_endpoint_and_one_shard_worker(self):
+        controls = self.configuration["physical_controls"]
+        staging = controls["source_staging"]
+        cases = (
+            ({"source_staging": {"mode": "r2-s3"}}, "endpoint_url"),
+            ({"source_staging": dict(staging, endpoint_url="https://example.com")}, "Cloudflare R2"),
+            ({"max_parallel_shards": 2}, "one shard worker"),
+        )
+        for overrides, message in cases:
+            with self.subTest(overrides=overrides), self.assertRaisesRegex(ValueError, message):
+                configuration = dict(self.configuration, physical_controls=controls | overrides)
+                validate_replay_sources(configuration, self.selection, [])
 
     def test_direct_water_shard_pin_requires_a_byte_size(self):
         self.sources["raw_manifest"]["json"]["files"] = [dict(
