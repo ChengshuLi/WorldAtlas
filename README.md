@@ -18,7 +18,7 @@ micromamba run -n worldatlas python -m pip install --no-deps -e .
 micromamba run -n worldatlas bash
 ```
 
-Run the commands below from the repository root in that shell. For exact physical-grid reproduction, complete the [GDAL setup](src/worldatlas/map_build/README.md#exact-physical-rasterization).
+Run the commands below from the repository root in that shell. For exact release replays, use the environment documented in the [restored release archive](src/worldatlas/map_releases/README.md#restore-inputs).
 
 Geographic and numerical libraries use tested exact versions because upgrades can change map coordinates or cells. Python accepts patch updates within 3.13. Pydantic uses a fixed version so it generates the same JSON Schema in each environment. Storage and database clients accept compatible updates. Boto3 selects its own matching Botocore dependency. Each build records the actual runtime versions. CMake is needed only when compiling GDAL and stays outside the runtime environment.
 

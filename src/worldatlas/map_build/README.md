@@ -129,31 +129,11 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 
 **Stopping and resuming.** Press Ctrl+C to stop a build. Run the same command with `--resume` to continue from verified checkpoints. If a rule fails, the builder cancels queued rules in that group and asks running rules to stop between batches.
 
-## Exact physical rasterization
+## GDAL and release replays
 
-Use this setup to rebuild the physical grid byte for byte. The project environment provides GDAL 3.10.3 and PROJ 9.6.0. Build GDAL with `-ffp-contract=off` because a prebuilt library can round a polygon edge differently. Reusing a verified physical grid skips rasterization.
+New builds use the GDAL and PROJ packages from Conda Forge in the project environment. Python loads the GDAL library from that environment, and PROJ uses the data installed there. Reusing a verified physical grid skips rasterization. [Project environment](../../../environment.yml)
 
-Install CMake, a C/C++ compiler and Git. Set the work directory below, then run these commands once from the activated project environment.
-
-```bash
-export WORLDATLAS_WORK=/absolute/path/to/worldatlas-work
-mkdir -p "$WORLDATLAS_WORK/runtime"
-git clone --depth 1 --branch v3.10.3 https://github.com/OSGeo/gdal.git \
-  "$WORLDATLAS_WORK/runtime/gdal-source"
-cmake -S "$WORLDATLAS_WORK/runtime/gdal-source" \
-  -B "$WORLDATLAS_WORK/runtime/gdal-build" \
-  -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$CONDA_PREFIX" \
-  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_INSTALL_LIBDIR=lib \
-  -DCMAKE_INSTALL_RPATH="$CONDA_PREFIX/lib" \
-  -DCMAKE_C_FLAGS=-ffp-contract=off -DCMAKE_CXX_FLAGS=-ffp-contract=off \
-  -DBUILD_TESTING=OFF -DBUILD_APPS=OFF \
-  -DBUILD_PYTHON_BINDINGS=OFF -DBUILD_JAVA_BINDINGS=OFF -DBUILD_CSHARP_BINDINGS=OFF
-cmake --build "$WORLDATLAS_WORK/runtime/gdal-build" --parallel
-cmake --install "$WORLDATLAS_WORK/runtime/gdal-build"
-python3 -c 'from osgeo import gdal; print(gdal.VersionInfo("RELEASE_NAME"))'
-```
-
-The existing Python bindings load the new GDAL library. Keep other GDAL installations out of `DYLD_LIBRARY_PATH` and `LD_LIBRARY_PATH`. Leave `PROJ_DATA` unset to use the project environment’s PROJ files. Reinstalling the Conda GDAL package replaces the custom library. [GDAL build guide](https://gdal.org/en/stable/development/building_from_source.html)
+To reproduce an existing release byte for byte, follow the map-building instructions in its restored source archive. V8.3 uses GDAL 3.10.3 compiled with `-ffp-contract=off`. Different builds of the same GDAL version can round polygon edges differently. [Restore a release](../map_releases/README.md#restore-inputs)
 
 ## Code and tests
 
