@@ -7,6 +7,7 @@ from pathlib import Path
 
 from worldatlas.map_build.execution.code_archive import restore_source, source_files
 from worldatlas.map_build.execution.runtime import json_bytes
+from worldatlas.map_build.physical.build import validate_r2_shard_location
 
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
@@ -73,17 +74,22 @@ def validate_replay_sources(configuration, selection, source_pins):
         require_source(f"land_config.land[{index}].dataset", layer["dataset"], inline=True)
         for file_index, spec in enumerate(layer["files"]):
             require_source(f"land_config.land[{index}].files[{file_index}]", spec, inline=True)
-    raw = read_document("raw_manifest", sources["raw_manifest"])
+    raw_spec = sources["raw_manifest"]
+    raw = read_document("raw_manifest", raw_spec)
+    # The builder resolves catalog references in the request before fetching
+    # any external documents. A fetched manifest already needs R2 locations.
+    inline_manifest = "json" in raw_spec
     staging = configuration.get("physical_controls", {}).get("source_staging") or {}
     # Each shard's ``path`` names a place in the build's cache. The catalog
     # reference or the direct R2 key and byte size tell a fresh build what to fetch.
     for index, spec in enumerate(raw["files"]):
         name = f"raw_manifest.files[{index}]"
         require_source(name, spec)
-        if "r2_source" not in spec and (
-            type(spec.get("size")) is not int or spec["size"] < 0 or "archive" in spec
-        ):
-            raise ValueError(f"release replay requires an R2 object and byte size for {name}")
+        if not (inline_manifest and "r2_source" in spec):
+            try:
+                validate_r2_shard_location(spec)
+            except ValueError as error:
+                raise ValueError(f"release replay requires an R2 object and byte size for {name}") from error
         # The physical stage only downloads uncached shards in R2 staging mode.
         if staging.get("mode") != "r2-s3":
             raise ValueError(f"release replay requires R2 staging for {name}")

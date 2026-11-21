@@ -53,6 +53,7 @@ from worldatlas.map_build.inputs.selection import (
 )
 from worldatlas.map_build.physical import build as physical_build
 from worldatlas.map_build.physical.crop import crop_physical
+from worldatlas.map_releases.catalog import release_endpoint
 from worldatlas.source_assets.catalog import download_source
 
 HERE = Path(__file__).resolve().parent
@@ -542,8 +543,16 @@ class Pipeline:
             ).fetchall()
         return [((row[0]["source_id"], None), row[0]) for row in rows]
 
-    def cloud_file(self, spec):
-        """Resolve one pinned R2 file or ZIP member locally."""
+    def cloud_file(self, spec, *, endpoint=None):
+        """Resolve one pinned R2 file or ZIP member locally.
+
+        Args:
+            spec: Object metadata or a pinned member within an archive.
+            endpoint: R2 account URL. Defaults to the build's physical-source endpoint.
+
+        Returns:
+            The local path to the verified bytes.
+        """
         expected = spec.get("sha256")
         size = spec.get("size_bytes")
         if (
@@ -555,7 +564,7 @@ class Pipeline:
         ):
             raise ValueError("cloud inputs require explicit SHA-256 and byte size")
         if "archive" in spec:
-            archive = self.cloud_file(spec["archive"])
+            archive = self.cloud_file(spec["archive"], endpoint=endpoint)
             member = spec["member"]
             if not isinstance(member, str):
                 raise ValueError("unsafe ZIP member")
@@ -628,12 +637,12 @@ class Pipeline:
                         raise ValueError("concurrent cloud input changed") from None
                 partial.unlink()
             else:
-                staging = self.cfg.get("physical_controls", {}).get(
-                    "source_staging", {}
-                )
+                if endpoint is None:
+                    staging = self.cfg.get("physical_controls", {}).get("source_staging", {})
+                    endpoint = staging.get("endpoint_url")
                 transfer = {}
                 try:
-                    with closing(physical_build.make_r2_client(staging.get("endpoint_url"))) as client:
+                    with closing(physical_build.make_r2_client(endpoint)) as client:
                         download_source(
                             client,
                             spec,
@@ -710,6 +719,7 @@ class Pipeline:
 
     def release_reference(self, version):
         streams, config = read_release_assets(version)
+        endpoint = release_endpoint()
         digest = hashlib.sha256(json_bytes(streams)).hexdigest()
         directory = (self.root / "inputs" / ("release-" + digest)).resolve()
         if not directory.is_relative_to(self.root) or directory.is_relative_to(
@@ -728,7 +738,8 @@ class Pipeline:
                     "r2_key": key,
                     "size_bytes": size,
                     "sha256": stored_hash,
-                }
+                },
+                endpoint=endpoint,
             )
             if not path.exists():
                 partial = path.with_name(
@@ -749,7 +760,7 @@ class Pipeline:
                 {"path": str(path), "sha256": decoded_hash}
             )
         if config is not None:
-            reference["reference_config"] = self.cloud_file(config)
+            reference["reference_config"] = self.cloud_file(config, endpoint=endpoint)
         return reference
 
     def resolve_source(self, name, spec):

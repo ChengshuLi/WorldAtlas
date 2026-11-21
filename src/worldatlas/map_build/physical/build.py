@@ -60,6 +60,26 @@ def make_r2_client(endpoint):
     return boto3.client('s3', endpoint_url=endpoint, region_name='auto')
 
 
+def validate_r2_shard_location(entry):
+    """Check whether a frozen raw-water shard can be downloaded from R2.
+
+    Args:
+        entry: Raw manifest entry after any catalog reference has been resolved.
+
+    Raises:
+        ValueError: The R2 bucket, object key, or byte size is missing or invalid.
+    """
+    if (
+        not isinstance(entry.get('r2_bucket'), str)
+        or not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,62}', entry['r2_bucket'])
+        or not isinstance(entry.get('r2_key'), str)
+        or not entry['r2_key']
+        or type(entry.get('size')) is not int
+        or entry['size'] < 0
+    ):
+        raise ValueError('missing or invalid pinned R2 source metadata')
+
+
 def download_r2(endpoint, entry, destination):
     """Write a streamed response exclusively. Keep partial files for inspection."""
     control.check_cancelled()
@@ -343,15 +363,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         ):
             raise ValueError('invalid raw source digest')
         if staging is not None and not path.is_file():
-            if (
-                not isinstance(entry.get('r2_bucket'), str)
-                or not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,62}', entry['r2_bucket'])
-                or not isinstance(entry.get('r2_key'), str)
-                or not entry['r2_key']
-                or type(entry.get('size')) is not int
-                or entry['size'] < 0
-            ):
-                raise ValueError('missing or invalid pinned R2 source metadata')
+            validate_r2_shard_location(entry)
         raw.append((path, digest, entry))
     if len({x[0] for x in raw}) != len(raw) or len({x[1] for x in raw}) != len(raw):
         raise ValueError('raw source paths and hashes must be unique')

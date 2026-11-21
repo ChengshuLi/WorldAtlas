@@ -59,6 +59,21 @@ class ReplaySourcesTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "requires an R2 object and byte size"):
             validate_replay_sources(self.configuration, self.selection, [])
 
+    def test_fetched_water_manifest_requires_direct_shard_locations(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "raw-manifest.json"
+            # This ID exists in the saved catalog, but the physical stage sees
+            # only the shard metadata inside this downloaded manifest.
+            document = {"files": [dict(self.shard, sha256="a" * 64)]}
+            path.write_text(json.dumps(document))
+            checksum = hashlib.sha256(path.read_bytes()).hexdigest()
+            self.sources["raw_manifest"] = dict(
+                r2_bucket="test", r2_key="raw-manifest.json", sha256=checksum,
+                size_bytes=path.stat().st_size,
+            )
+            with self.assertRaisesRegex(ValueError, r"requires an R2 object and byte size for raw_manifest\.files\[0\]"):
+                validate_replay_sources(self.configuration, self.selection, [{"path": str(path), "sha256": checksum}])
+
     def test_cataloged_manifest_is_read_from_the_verified_build_cache(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "manifest.json"

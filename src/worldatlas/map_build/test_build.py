@@ -280,6 +280,11 @@ class Fixture(unittest.TestCase):
             resumed.close()
 
     def test_release_comparison_downloads_and_verifies_streams_and_config(self):
+        raw_endpoint = "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.r2.cloudflarestorage.com"
+        release_endpoint = "https://bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.r2.cloudflarestorage.com"
+        raw_key = "sources/raw-manifest.json"
+        self.cfg["sources"]["raw_manifest"] = self.cloud(b"{}", raw_key)
+        self.cfg["physical_controls"] = {"source_staging": {"endpoint_url": raw_endpoint}}
         config = pipeline.write(self.inputs / "request.json", self.cfg)
         digest = lambda data: hashlib.sha256(data).hexdigest()
         decoded = {name: name.encode() for name in ("rows", "runs")}
@@ -297,7 +302,8 @@ class Fixture(unittest.TestCase):
         calls = []
         with (
             patch.object(pipeline, "read_release_assets", return_value=(catalog, config_asset)),
-            self.fake_r2(stored, calls),
+            patch.object(pipeline, "release_endpoint", return_value=release_endpoint),
+            self.fake_r2(stored | {raw_key: b"{}"}, calls),
         ):
             runner = pipeline.Pipeline(config, compare_release="v8.0")
             try:
@@ -310,7 +316,11 @@ class Fixture(unittest.TestCase):
                 runner.close()
             resumed = pipeline.Pipeline(config, compare_release="v8.0", resume=True)
             resumed.close()
-        self.assertEqual(calls, list(stored))
+            self.assertEqual(
+                [call.args[0] for call in physical_build.make_r2_client.call_args_list],
+                [raw_endpoint] + [release_endpoint] * len(stored),
+            )
+        self.assertEqual(calls, [raw_key, *stored])
 
     def cloud(self, payload, key="sources/input.json"):
         return {
