@@ -1,4 +1,5 @@
 from pathlib import Path
+import subprocess
 import threading
 import tempfile
 import unittest
@@ -8,6 +9,38 @@ from worldatlas.map_build.execution.runtime import (
     Checkpoints, Timing, inventory, journal_anchor, repository_identity, verify_anchor,
 )
 from worldatlas.shared.files import pin_file
+
+
+class RepositoryIdentityTests(unittest.TestCase):
+    def test_records_commit_and_local_changes_in_a_source_checkout(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            package = root / 'src' / 'worldatlas'
+            package.mkdir(parents=True)
+
+            def git(*args):
+                return subprocess.run(
+                    ['git', '-C', str(root), *args],
+                    check=True, capture_output=True, text=True,
+                ).stdout.strip()
+
+            git('init')
+            self.assertEqual(
+                repository_identity(package),
+                {'commit': '', 'working_changes': None, 'setup': {}},
+            )
+            setup = root / 'environment.yml'
+            setup.write_text('name: original\n')
+            git('add', setup.name)
+            git(
+                '-c', 'user.name=WorldAtlas Test', '-c', 'user.email=test@example.invalid',
+                '-c', 'core.hooksPath=/dev/null', 'commit', '--no-gpg-sign', '-m', 'Initial setup',
+            )
+            setup.write_text('name: changed\n')
+            identity = repository_identity(package)
+            self.assertEqual(identity['commit'], git('rev-parse', 'HEAD'))
+            self.assertIn('+name: changed', identity['working_changes'])
+            self.assertEqual(identity['setup'], {'environment.yml': 'name: changed\n'})
 
 
 class FunctionCheckpointTests(unittest.TestCase):
