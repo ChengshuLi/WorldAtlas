@@ -35,12 +35,11 @@ class OsmWayLine(TypedDict):
 
 
 class OsmRiverLine(TypedDict):
-    """Select and orient a river relation's member ways."""
+    """Select a river relation's member ways by role."""
 
     source: NonEmptyText
     relation: NonEmptyText | int
     role: str
-    start_node: NonEmptyText | int
 
 
 SourceLine = GeoJSONLine | OsmWayLine | OsmRiverLine
@@ -202,13 +201,14 @@ class Sources:
         return LineString(coordinates)
 
     def assemble_river_relation(self, specification):
-        """Order a river relation's selected member ways from a known end.
+        """Join the selected OSM ways into one continuous river line.
 
         Args:
-            specification: The source alias, relation ID, member role, and start node ID.
+            specification: The source alias, relation ID, and member role.
 
         Returns:
-            Ordered WGS84 coordinates from the selected ways.
+            WGS84 coordinates ordered from the endpoint with the lower OSM
+            node ID. The boundary recipe chooses its own geographic endpoints.
 
         Raises:
             ValueError: The selected members do not form one open, connected chain.
@@ -222,10 +222,12 @@ class Sources:
                 for first, last in pairwise(nodes):
                     adjacent.setdefault(first, set()).add(last)
                     adjacent.setdefault(last, set()).add(first)
-        node = str(specification['start_node'])
-        # A valid start has one neighbor. Interior nodes have two.
-        if node not in adjacent or len(adjacent[node]) != 1 or any(len(v) > 2 for v in adjacent.values()):
+        # A single open line has two ends with one neighbor apiece. Three
+        # neighbors at any node would leave a choice of which branch to draw.
+        endpoints = [node for node, neighbors in adjacent.items() if len(neighbors) == 1]
+        if len(endpoints) != 2 or any(len(neighbors) > 2 for neighbors in adjacent.values()):
             raise ValueError('selected river members do not form an unbranched chain')
+        node = min(endpoints, key=int)
         order, seen = [node], {node}
         while adjacent[order[-1]] - seen:
             following, = adjacent[order[-1]] - seen

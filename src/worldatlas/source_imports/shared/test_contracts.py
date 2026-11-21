@@ -258,6 +258,9 @@ class DatabaseContractTests(unittest.TestCase):
         self.check(method, arguments, True)
         self.check(method, dict(arguments, lines={'coast': [line]}), False)
         self.check(method, dict(arguments, lines={'coast': dict(line, geojson_feature=0)}), False)
+        river = {'source': 'raw', 'relation': 42, 'role': 'main_stream'}
+        self.check(method, dict(arguments, lines={'river': river}, end={'source': 'raw', 'node': 20}), True)
+        self.check(method, dict(arguments, lines={'river': dict(river, start_node=10)}), False)
         for domain in (bounds, {'bounds': bounds[:3]}, {'bounds': bounds, 'projection': 4326}):
             with self.subTest(domain=domain):
                 self.check(method, dict(arguments, terrains={'divide': dict(terrain, domains=[domain])}), False)

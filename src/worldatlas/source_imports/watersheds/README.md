@@ -47,6 +47,8 @@ Set the record's method to `watershed_boundary`. Put the geographic reasoning an
 - `joins`: geographic anchors for choosing actual intersections between sections.
 - `start` and `end`: source endpoints, selected intersections or explicit geographic points.
 
+When selecting an OSM river relation, give its relation ID and the member role, such as `main_stream`. The reader joins the ways at shared OSM nodes and starts the coordinate list at the endpoint with the lower node ID. To end the actual boundary at a particular OSM point, use a selector like `{"source": "river", "node": 241464871}`. The boundary assembler puts the selected section in order from its first join to its last join or endpoint.
+
 Optional `evidence_sources` is a list of catalog source-ID strings supporting geographic review. They are linked to the boundary but are not downloaded during construction. Files read by the calculation belong in `sources`.
 
 The recipe groups source basin values by the side of the intended boundary they drain toward. For example, `groups = {"3": [41, 42], "100": [99]}` and `interfaces = [[3, 100]]` describe one divide between groups 3 and 100. The divide between basins 41 and 42 contributes no edges because they are in the same group. When HydroBASINS is selected, `MAIN_BAS` identifies the main basin containing the source polygon, so several polygons can have the same value.

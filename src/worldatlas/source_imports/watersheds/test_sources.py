@@ -38,7 +38,7 @@ class SourceGeometryTests(unittest.TestCase):
                         '<relation id="30"><member type="way" ref="20" role="main_stream"/>'
                         '<member type="way" ref="10" role="main_stream"/></relation></osm>')
         sources = Sources({'river': path})
-        line = sources.read_selected_line(dict(source='river', relation='30', role='main_stream', start_node='1'))
+        line = sources.read_selected_line(dict(source='river', relation='30', role='main_stream'))
         self.assertEqual(list(line.coords), [(0., 0.), (1., 1.), (2., 0.)])
 
     def test_selected_geojson_archive_member_is_read_without_extraction(self):
