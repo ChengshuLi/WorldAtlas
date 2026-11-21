@@ -46,6 +46,7 @@ python -m pip install --no-deps .
 
 ```bash
 worldatlas-build /absolute/path/to/restored-inputs/configuration.json \
+  /absolute/path/to/worldatlas-work/replay/run \
   --work-dir /absolute/path/to/worldatlas-work/replay \
   --selection /absolute/path/to/restored-inputs/selection.json
 ```

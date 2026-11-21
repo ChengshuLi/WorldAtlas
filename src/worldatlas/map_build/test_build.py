@@ -176,8 +176,23 @@ class CommandTests(unittest.TestCase):
             disable.assert_called_once_with(False)
             self.assertEqual(os.environ["PROJ_NETWORK"], "OFF")
 
+    def test_build_requires_an_explicit_output(self):
+        for options in ([], ["--resume"]):
+            args = ["worldatlas-build", "config.json", *options]
+            with (
+                self.subTest(options=options),
+                patch("sys.argv", args),
+                patch.object(pipeline, "Pipeline") as builder,
+                redirect_stderr(io.StringIO()) as error,
+            ):
+                with self.assertRaises(SystemExit) as stop:
+                    pipeline.main()
+                self.assertEqual(stop.exception.code, 2)
+                self.assertIn("the following arguments are required: output", error.getvalue())
+                builder.assert_not_called()
+
     def test_recompute_requires_a_prior_run(self):
-        args = ["worldatlas-build", "config.json", "--recompute-division"]
+        args = ["worldatlas-build", "config.json", "run", "--recompute-division"]
         with patch("sys.argv", args), redirect_stderr(io.StringIO()) as error:
             with self.assertRaises(SystemExit) as stop:
                 pipeline.main()
@@ -196,7 +211,7 @@ class CommandTests(unittest.TestCase):
 
                 runner.run.side_effect = interrupt_running_build
                 with (
-                    patch("sys.argv", ["worldatlas-build", "config.json"]),
+                    patch("sys.argv", ["worldatlas-build", "config.json", "run"]),
                     patch.object(pipeline, "Pipeline", return_value=runner),
                     patch.object(pipeline.signal, "signal", install),
                 ):
@@ -325,7 +340,7 @@ class Fixture(unittest.TestCase):
                     dict(self.cfg, sources=sources),
                 )
                 with self.assertRaisesRegex(ValueError, f"{name} .* inline"):
-                    pipeline.Pipeline(config)
+                    pipeline.Pipeline(config, self.root / "run")
 
     def test_rejects_invalid_run_options_before_creating_output(self):
         config = self.inputs / "build.json"
@@ -345,7 +360,7 @@ class Fixture(unittest.TestCase):
             with self.subTest(error=error):
                 config.write_text(json.dumps(definition))
                 with self.assertRaisesRegex(ValueError, error):
-                    pipeline.Pipeline(config, **options)
+                    pipeline.Pipeline(config, **({"output": output} | options))
                 self.assertFalse(output.exists())
 
         config.write_text(json.dumps(self.cfg))
@@ -357,7 +372,7 @@ class Fixture(unittest.TestCase):
         config = write_json(self.inputs / "build.json", self.cfg)
         with patch.dict(os.environ, {"NEON_DATABASE_URL": ""}):
             with self.assertRaisesRegex(ValueError, "supply --selection"):
-                pipeline.Pipeline(config)
+                pipeline.Pipeline(config, self.root / "run")
         self.assertFalse((self.root / "run").exists())
 
     def test_compare_requires_two_streams_and_a_single_reference_source(self):
@@ -374,7 +389,7 @@ class Fixture(unittest.TestCase):
         ):
             with self.subTest(options=options):
                 with self.assertRaisesRegex(ValueError, message):
-                    pipeline.Pipeline(config, **options)
+                    pipeline.Pipeline(config, self.root / "run", **options)
 
     def test_source_pin_requires_a_file(self):
         with self.assertRaisesRegex(ValueError, "not a file"):
@@ -403,7 +418,7 @@ class Fixture(unittest.TestCase):
         self.cfg["sources"]["reference_rows"] = "rows.u32le"
         config = write_json(self.inputs / "build.json", self.cfg)
         with self.assertRaisesRegex(ValueError, "explicit path/SHA-256 pins"):
-            pipeline.Pipeline(config)
+            pipeline.Pipeline(config, self.root / "run")
 
     def test_local_comparison_requires_both_named_streams_in_one_directory(self):
         second = self.inputs / "unrelated"
@@ -433,7 +448,7 @@ class Fixture(unittest.TestCase):
                 config.write_text(json.dumps(self.cfg))
                 with self.fake_r2({}, []) as download:
                     with self.assertRaisesRegex(ValueError, message):
-                        pipeline.Pipeline(config)
+                        pipeline.Pipeline(config, self.root / "run")
                 download.assert_not_called()
 
     def test_saved_complete_selection_is_used_for_initialization_and_resume(self):
@@ -445,13 +460,13 @@ class Fixture(unittest.TestCase):
             "read_selection",
             side_effect=AssertionError("unexpected live database read"),
         ):
-            runner = pipeline.Pipeline(config, selection=selection_path)
+            runner = pipeline.Pipeline(config, self.root / "run", selection=selection_path)
             original = runner.identity["input_selection_sha256"]
             self.assertEqual(
                 read_json(runner.out / "input-selection.json"), selected
             )
             runner.close()
-            resumed = pipeline.Pipeline(config, resume=True)
+            resumed = pipeline.Pipeline(config, runner.out, resume=True)
             self.assertEqual(resumed.identity["input_selection_sha256"], original)
             resumed.close()
 
@@ -498,7 +513,7 @@ class Fixture(unittest.TestCase):
             patch.object(pipeline, "release_endpoint", return_value=release_endpoint),
             self.fake_r2(stored | {raw_key: b"{}"}, calls),
         ):
-            runner = pipeline.Pipeline(config, compare_release="v8.0")
+            runner = pipeline.Pipeline(config, self.root / "run", compare_release="v8.0")
             try:
                 for name, data in decoded.items():
                     self.assertEqual(
@@ -510,23 +525,23 @@ class Fixture(unittest.TestCase):
             release_lookup.side_effect = AssertionError("preview is no longer cataloged")
             for _, _, key, _, checksum, _ in catalog:
                 (self.inputs / checksum / Path(key).name).unlink()
-            resumed = pipeline.Pipeline(config, resume=True)
+            resumed = pipeline.Pipeline(config, runner.out, resume=True)
             try:
                 self.assertEqual(resumed.identity["compare_release"], "v8.0")
                 self.assertEqual(resumed.sources, runner.sources)
             finally:
                 resumed.close()
             with self.assertRaisesRegex(ValueError, "different --compare-release"):
-                pipeline.Pipeline(config, compare_release="v8.1", resume=True)
+                pipeline.Pipeline(config, runner.out, compare_release="v8.1", resume=True)
             runner.sources["reference_rows"].write_bytes(b"changed comparison")
             with self.assertRaisesRegex(ValueError, "source pin mismatch"):
-                pipeline.Pipeline(config, resume=True)
+                pipeline.Pipeline(config, runner.out, resume=True)
             identity_path = runner.out / "run-identity.json"
             identity = read_json(identity_path)
             identity.pop("comparison_inputs")
             identity_path.write_text(json.dumps(identity))
             with self.assertRaisesRegex(ValueError, "resume is missing saved comparison files"):
-                pipeline.Pipeline(config, resume=True)
+                pipeline.Pipeline(config, runner.out, resume=True)
             self.assertEqual(
                 [call.args[0] for call in physical_build.make_r2_client.call_args_list],
                 [raw_endpoint] + [release_endpoint] * len(stored),
@@ -645,7 +660,7 @@ class Fixture(unittest.TestCase):
         with self.fake_r2({"sources/input.json": payload}, calls):
             for name in ("computer-one", "computer-two"):
                 root = self.root / name
-                runner = pipeline.Pipeline(config, work_dir=root)
+                runner = pipeline.Pipeline(config, root / "run", work_dir=root)
                 try:
                     self.assertEqual(runner.out, root / "run")
                     layer = read_json(runner.sources["land_config"])["land"][0]
@@ -1165,7 +1180,8 @@ class Fixture(unittest.TestCase):
         config = write_json(self.inputs / "single-cloud-config.json", cfg)
         calls = []
         with self.fake_r2(payloads, calls):
-            runner = pipeline.Pipeline(config, work_dir=self.root / "another-computer")
+            other = self.root / "another-computer"
+            runner = pipeline.Pipeline(config, other / "run", work_dir=other)
             self.addCleanup(runner.close)
             physical = runner.physical()
         components = runner.out / "components"

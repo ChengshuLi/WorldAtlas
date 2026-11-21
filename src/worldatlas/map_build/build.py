@@ -264,7 +264,7 @@ class Pipeline:
     def __init__(
         self,
         config: Path | str,
-        output: Path | str | None = None,
+        output: Path | str,
         *,
         resume: bool = False,
         work_dir: Path | str | None = None,
@@ -278,7 +278,7 @@ class Pipeline:
 
         Args:
             config: Path to the JSON build settings.
-            output: Run directory. Defaults to the run folder in the work directory.
+            output: Directory inside the workspace for this build's results.
             resume: Continue a run that already has an identity file.
             work_dir: Directory for raw file caches and runs.
             compare_release: Release name to compare with the finished map.
@@ -329,7 +329,7 @@ class Pipeline:
         self.root = root.resolve()
         if work_dir is not None:
             self.root.mkdir(parents=True, exist_ok=True)
-        self.out = Path(output).resolve() if output is not None else self.root / "run"
+        self.out = Path(output).resolve()
         if (
             not self.root.is_dir()
             or (self.out.exists() != resume)
@@ -1323,8 +1323,7 @@ def main() -> None:
     p.add_argument(
         "output",
         type=Path,
-        nargs="?",
-        help="new run directory inside input_root; defaults to WORK_DIR/run",
+        help="run directory inside the workspace; must exist only when resuming",
     )
     p.add_argument(
         "--work-dir",

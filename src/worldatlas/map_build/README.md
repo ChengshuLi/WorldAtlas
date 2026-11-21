@@ -14,7 +14,7 @@ worldatlas-build \
   --work-dir /absolute/path/to/worldatlas-work
 ```
 
-The work directory holds the shared `inputs/` cache. Choose a new output directory inside it for each new build. The default output is `WORK_DIR/run`. Open the finished run’s `report.json` for the map file paths and timings.
+The work directory holds the shared `inputs/` cache. Supply an output directory inside it for every build. Choose a new directory for a fresh run and the existing run directory when resuming. Open the finished run’s `report.json` for the map file paths and timings.
 
 | Option | When to use it |
 | --- | --- |
