@@ -332,9 +332,7 @@ def build_bundle(candidate, run, viewer, bundle):
         for path in sorted(bundle.rglob("*"))
         if path.is_file()
     }
-    manifest = {"inputs": {"archive": INPUTS_FILE}, "decoded_sha256": decoded, "objects": objects}
-    (bundle / "manifest.json").write_bytes(json_bytes(manifest))
-    return manifest
+    return {"inputs": {"archive": INPUTS_FILE}, "decoded_sha256": decoded, "objects": objects}
 
 
 def verify_object(storage, bucket, key, expected, *, return_bytes=False):
