@@ -1,9 +1,7 @@
 """Read current land components and answer source-neutral geographic queries."""
 
 from contextlib import ExitStack
-from fractions import Fraction
 from pathlib import Path
-import math
 
 import numpy as np
 
@@ -130,29 +128,18 @@ class ComponentGrid:
         )
         return int(first), int(last) + 1
 
-    def point(self, longitude, latitude):
-        step = Fraction(str(self.grid.step))
-        x = (Fraction(str(longitude)) - Fraction(str(self.grid.west))) / step
-        y = (Fraction(str(self.grid.north)) - Fraction(str(latitude))) / step
-        if x.denominator == 1 or y.denominator == 1:
-            raise ValueError("source point lies on a grid edge")
-        x, y = int(x // 1), int(y // 1)
-        if not 0 <= x < self.grid.width or not 0 <= y < self.grid.height:
-            raise ValueError("source point outside grid")
-        root = self._at_cell(x, y)
-        if root is None:
-            raise ValueError(
-                "source point does not fall on the selected physical component class"
-            )
-        return root
-
     def component_at(self, longitude, latitude):
-        """Locate a candidate source point with the grid's floor convention."""
-        x = math.floor((float(longitude) - self.grid.west) / self.grid.step)
-        y = math.floor((self.grid.north - float(latitude)) / self.grid.step)
-        if not 0 <= x < self.grid.width or not 0 <= y < self.grid.height:
-            return None
-        return self._at_cell(x, y)
+        """Locate a geographic point's physical component.
+
+        Args:
+            longitude: WGS84 longitude in degrees.
+            latitude: WGS84 latitude in degrees.
+
+        Returns:
+            The component ID, or None if the point does not identify one.
+        """
+        cell = self.grid.cell_at(longitude, latitude)
+        return self._at_cell(*cell) if cell is not None else None
 
     def _at_cell(self, x, y):
         spans = self.row(y)

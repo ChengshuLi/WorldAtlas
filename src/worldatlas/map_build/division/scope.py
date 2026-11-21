@@ -1,7 +1,5 @@
 """Resolve geographic selectors independently of ownership and distance policy."""
 
-import math
-
 import numpy as np
 from shapely.geometry import mapping, shape
 from shapely import union_all
@@ -99,10 +97,10 @@ class Scope:
         self._context_rows = self._query_rows = None
         for point in inputs.get("scope_component", ()):
             lon, lat = point["geometry"]["coordinates"]
-            x = math.floor((lon - grid.west) / grid.step) % grid.width
-            y = math.floor((grid.north - lat) / grid.step)
-            if not 0 <= y < grid.height:
+            cell = grid.cell_at(lon, lat)
+            if cell is None:
                 raise ValueError("scope component point is outside the grid")
+            x, y = cell
             ends, codes = row(physical, y, grid.width)
             code = int(codes[np.searchsorted(ends, x, side="right")])
             kind = {17: "land", 1: "water"}.get(code)

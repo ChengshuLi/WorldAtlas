@@ -26,6 +26,20 @@ from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
 
 
+def rule_directory(calculation, rule_id):
+    """Locate the saved claim directory for a rule.
+
+    Args:
+        calculation: The parent calculation directory.
+        rule_id: The ID of the rule that produced the claim.
+
+    Returns:
+        The rule's output path.
+    """
+    key = hashlib.sha256(rule_id.encode()).hexdigest()
+    return Path(calculation) / ("rule-" + key)
+
+
 def land_groups(rules):
     """Declare actual land-stage dependencies once for execution and reuse."""
     area = lambda r: r["operation"] in ("assign_area", "divide_area")
@@ -373,11 +387,10 @@ class ParentDivision:
             def run(rule):
                 nonlocal failure
                 check_cancelled()
-                key = hashlib.sha256(rule["id"].encode()).hexdigest()
-                directory = self.directory / ("rule-" + key)
+                directory = rule_directory(self.directory, rule["id"])
                 try:
                     result = self.task(
-                        "rule-" + key,
+                        directory.name,
                         execute_rule,
                         (self, rule, snapshot, directory),
                         [directory],

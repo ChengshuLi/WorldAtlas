@@ -9,8 +9,9 @@ import time
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.contracts import compile_rules
-from worldatlas.map_build.division.scope import Scope
+from worldatlas.map_build.division.engine import rule_directory
 from worldatlas.map_build.inputs.selection import read_saved
 from worldatlas.map_build.land.components import ComponentGrid
 
@@ -55,16 +56,41 @@ for (const table of document.querySelectorAll('table')) {
 </script></body></html>"""
 
 
-def cell_spans(components, roots):
-    """Index only requested components; keep every selected native-grid cell."""
-    positions = np.flatnonzero(np.isin(components.runs[:, 2], list(roots)))
-    positions = positions[np.argsort(components.runs[positions, 2], kind="stable")]
-    selected = components.runs[positions]
-    rows = np.searchsorted(components.offsets, positions, side="right") - 1
-    values = np.column_stack((selected[:, :2], rows)).astype(np.uint32)
-    ids, first = np.unique(selected[:, 2], return_index=True)
-    ends = np.r_[first[1:], len(selected)]
-    return {int(root): values[a:b] for root, a, b in zip(ids, first, ends)}
+def claim_cells(components, claim_directory):
+    """Read saved land claims and identify the components they cover.
+
+    Args:
+        components: Land components for the parent that produced the claims.
+        claim_directory: Directory containing the rule's row-run streams.
+
+    Returns:
+        An array of (start column, end column, row) spans and the claimed
+        component IDs.
+    """
+    grid = components.grid
+    bounds = json.loads((claim_directory / "report.json").read_bytes())["assigned_bounds"]
+    first, last = bounds[2:] if bounds is not None else (0, 0)
+    pieces = []
+    roots = set()
+    with open_grid(claim_directory, grid) as claims:
+        for y in range(first, last):
+            ends, owners = row(claims, y, grid.width)
+            selected = owners != 0
+            starts = np.r_[0, ends[:-1]][selected]
+            stops = ends[selected]
+            if not len(starts):
+                continue
+            land = components.row(y)
+            indices = np.searchsorted(land[:, 1], starts, side="right")
+            if np.any(indices == len(land)):
+                raise ValueError("claim falls outside the parent land components")
+            matched = land[indices]
+            if np.any((starts < matched[:, 0]) | (stops > matched[:, 1])):
+                raise ValueError("claim falls outside the parent land components")
+            roots.update(map(int, matched[:, 2]))
+            pieces.append(np.column_stack((starts, stops, np.full(len(starts), y))))
+    spans = np.concatenate(pieces) if pieces else np.empty((0, 3), dtype=np.uint32)
+    return spans, roots
 
 
 def view_bounds(geometries, spans, grid):
@@ -110,8 +136,10 @@ def view_bounds(geometries, spans, grid):
     x1 = merged[i][1]
     if x1 < x0:
         x1 += grid.width
-    y0 = min(float(ys.min()), float(spans[:, 2].min()))
-    y1 = max(float(ys.max()), float(spans[:, 2].max() + 1))
+    y0, y1 = float(ys.min()), float(ys.max())
+    if len(spans):
+        y0 = min(y0, float(spans[:, 2].min()))
+        y1 = max(y1, float(spans[:, 2].max() + 1))
     padding = max(4, max(x1 - x0, y1 - y0) * 0.06)
     return [
         x0 - padding,
@@ -140,34 +168,24 @@ def context_spans(components, bounds):
     return result, stride
 
 
-def write_report(
-    selection, components, directory, *, parent_id=None, parent_membership=None
-):
-    """Use the same scope/majority calculation as production assignment."""
+def write_report(selection, components, calculation, directory, *, parent_id):
+    """Render saved polygon-based land claims for a selected parent.
+
+    Args:
+        selection: The build's frozen geography.
+        components: The land components used for the parent division.
+        calculation: The directory where the parent saved its rule claims.
+        directory: Destination for the HTML report and its summary.
+        parent_id: ID of the geographic parent to report.
+
+    Returns:
+        The reported counts by rule and the report generation time.
+    """
     started = time.monotonic()
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
-    geography = selection["geography"]
     grid = components.grid
-    if parent_id is None:
-        roots = [e["id"] for e in geography["entities"] if e["parent_id"] is None]
-        if len(roots) != 1:
-            raise ValueError("select one geographic parent")
-        parent_id = roots[0]
-    children, rules = compile_rules(geography, parent_id)
-    parent = parent_membership
-    if parent is None:
-        entity = next(e for e in geography["entities"] if e["id"] == parent_id)
-        if entity["parent_id"] is not None:
-            raise ValueError("a non-root report needs its parent membership")
-        parent = (
-            np.arange(grid.height + 1, dtype=np.uint32),
-            np.tile([grid.width, 1], grid.height).astype(np.uint32),
-        )
-    snapshot = (
-        np.arange(grid.height + 1, dtype=np.uint32),
-        np.tile([grid.width, 0], grid.height).astype(np.uint32),
-    )
+    children, rules = compile_rules(selection["geography"], parent_id)
     selected = []
     for rule in rules:
         if (
@@ -177,28 +195,22 @@ def write_report(
             or not rule["features"].get("scope_area")
         ):
             continue
-        scope = Scope(
-            rule, grid, components.physical, parent, snapshot, lambda kind: components
-        )
-        roots = set(map(int, scope.eligible_components()["land"]))
-        selected.append((rule, roots))
-    spans = cell_spans(components, set().union(*(roots for _, roots in selected)))
-    totals = components.totals()
-    supporters = Counter(root for _, roots in selected for root in roots)
+        pieces, roots = claim_cells(components, rule_directory(calculation, rule["id"]))
+        selected.append((rule, pieces, roots))
+    supporters = Counter(root for _, _, roots in selected for root in roots)
     for name in ("assignment_report.js", "assignment_report.css"):
         (directory / name).write_text((ASSETS / name).read_text())
     folder = directory / "rules"
     folder.mkdir(exist_ok=True)
     summaries = []
     index = []
-    for number, (rule, roots) in enumerate(selected, 1):
-        if not roots:
-            raise ValueError(
-                "selected area rule has no current land components: " + rule["id"]
-            )
+    for number, (rule, pieces, roots) in enumerate(selected, 1):
         entity = children[rule["targets"][0]["entity_id"]]
-        pieces = np.concatenate([spans[root] for root in sorted(roots)])
-        features = rule["features"]["scope_area"]
+        features = list({
+            feature["id"]: feature
+            for role in ("scope_area", "scope_component", "connected_to")
+            for feature in rule["features"].get(role, ())
+        }.values())
         geometries = [f["geometry"] for f in features]
         bounds = view_bounds(geometries, pieces, grid)
         background, stride = context_spans(components, bounds)
@@ -209,7 +221,7 @@ def write_report(
             entity=entity["name"],
             feature_count=len(features),
             component_count=len(roots),
-            cell_count=sum(totals[r] for r in roots),
+            cell_count=int((pieces[:, 1] - pieces[:, 0]).sum()),
             unique_component_count=sum(supporters[r] == 1 for r in roots),
         )
         payload = dict(
@@ -229,7 +241,7 @@ def write_report(
 <title>{number}. {escape(rule["id"])}</title><link rel="stylesheet" href="../assignment_report.css">
 <h1>{number}. {escape(rule["id"])}</h1><p>{escape(rule["rationale"])}</p>
 <p>{escape(entity["name"])}: {record["cell_count"]:,} cells; {len(roots):,} components; {len(features)} source features.</p>
-<p>The union of these source areas selects components by strict majority of their land cells.</p>
+<p>The result shows the cells this rule claimed in the build.</p>
 <button id="reset">Reset view</button><button id="save">Save image</button>
 <div class="maps"><canvas id="source"></canvas><canvas id="result"></canvas></div>
 <div id="feature-legend" class="feature-legend"></div><p id="extent"></p>
@@ -245,7 +257,9 @@ def write_report(
         '<title>Geographic area assignments</title><h1>Geographic area assignments</h1><input id="search" placeholder="Filter rules">'
         '<div class="review-layout"><nav><table><thead><tr><th>#</th><th>Rule</th><th>Entity</th><th>Features</th><th>Components</th><th>Cells</th><th>Unique components</th></tr></thead><tbody>'
         + "".join(index)
-        + '</tbody></table></nav><iframe name="detail" title="Rule details" src="rules/001.html"></iframe></div>'
+        + '</tbody></table></nav>'
+        + ('<iframe name="detail" title="Rule details" src="rules/001.html"></iframe>' if selected else '')
+        + '</div>'
         + INDEX_SCRIPT
     )
     result = dict(rules=summaries, processing_seconds=time.monotonic() - started)
@@ -255,12 +269,31 @@ def write_report(
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    for name in ("selection", "physical", "components", "output"):
-        parser.add_argument("--" + name, required=True, type=Path)
+    parser.add_argument("--run", required=True, type=Path)
+    parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--parent", type=int, help="geographic parent ID (defaults to the root)")
     args = parser.parse_args()
-    grid = Grid(**json.loads((args.components / "report.json").read_text())["grid"])
-    with ComponentGrid(args.physical, args.components, grid) as components:
-        result = write_report(read_saved(args.selection), components, args.output)
+    selection = read_saved(args.run / "input-selection.json")
+    parent_id = args.parent
+    if parent_id is None:
+        parent_id = next(
+            e["id"] for e in selection["geography"]["entities"] if e["parent_id"] is None
+        )
+    division = json.loads((args.run / "division/report.json").read_bytes())
+    receipt = division["parents"].get(str(parent_id))
+    if receipt is None:
+        raise ValueError("this run has no division for the selected parent")
+    # The land receipt follows the actual producer even after partial reuse.
+    calculation = Path(receipt["land"]["directory"]).parent
+    physical = calculation / "parent-physical"
+    if not physical.is_dir():
+        run = json.loads((args.run / "report.json").read_bytes())
+        physical = Path(run["physical_directory"])
+    grid = Grid(**division["grid"])
+    with ComponentGrid(physical, calculation / "land-components", grid) as components:
+        result = write_report(
+            selection, components, calculation, args.output, parent_id=parent_id
+        )
     print(
         json.dumps(
             dict(

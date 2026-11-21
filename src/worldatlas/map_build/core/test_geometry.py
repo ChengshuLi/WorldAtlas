@@ -1,5 +1,6 @@
 """Prepared polygons retain holes/wrapping and do not repeat source parsing."""
 
+import math
 from unittest.mock import patch
 import unittest
 import numpy as np
@@ -13,6 +14,13 @@ def ring(west, south, east, north):
 
 
 class PreparedRasterization(unittest.TestCase):
+    def test_point_lookup_wraps_only_the_actual_antimeridian(self):
+        grid = Grid(36, 9, 10)
+        self.assertEqual(grid.cell_at(-180, 5), (0, 8))
+        self.assertEqual(grid.cell_at(180, 5), (0, 8))
+        self.assertEqual(grid.cell_at(math.nextafter(180, -math.inf), 5), (35, 8))
+        self.assertIsNone(grid.cell_at(0, -5))
+
     def test_repeated_windows_match_known_cells_including_holes_and_seam(self):
         grid = Grid(36, 18, 10)
         geometry = dict(

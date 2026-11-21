@@ -59,7 +59,7 @@ class AssignmentTests(unittest.TestCase):
         )
         with ComponentGrid(root / "physical", root / "components", grid) as components:
             mainland = {
-                components.point(float(grid.longitude(x)), float(grid.latitude(y)))
+                components.component_at(float(grid.longitude(x)), float(grid.latitude(y)))
                 for y, x, _, _ in seed_cells
             }
             report = assign_components(
@@ -108,7 +108,7 @@ class AssignmentTests(unittest.TestCase):
         )
         with ComponentGrid(root / "physical", root / "components", grid) as components:
             mainland = {
-                components.point(float(grid.longitude(x)), float(grid.latitude(y)))
+                components.component_at(float(grid.longitude(x)), float(grid.latitude(y)))
                 for y, x, _, _ in seed_cells
             }
             result = assign_components(

@@ -4,19 +4,18 @@ Geographic rules run through the common [parent-division engine](../division/REA
 
 ## Use
 
-Generate a numbered, sortable report from the frozen selection and the root parent’s component output.
+Generate a numbered, sortable report from a completed build. Omit `--parent` to use the root parent.
 
 ```bash
 python -m worldatlas.map_build.land.assignment_report \
-  --selection RUN/input-selection.json --physical PHYSICAL_OUTPUT \
-  --components PARENT_COMPONENT_OUTPUT --output REPORT_DIRECTORY
+  --run RUN --parent PARENT_ID --output REPORT_DIRECTORY
 ```
 
 ## How it works
 
 Reference cells are the selected components' actual physical shores. Distances are between cell centres; a source point only identifies a component. Whole query-component context remains available even when the emitted query scope contains only unassigned cells. Strictly smaller distances win; exact equality uses the supplied category order. Sample witnesses and pruning bounds never replace a complete search when the answer is unproved.
 
-The report uses the production component-majority calculation to show geometric selections. Each rule is evaluated from an empty ownership layer. Each source feature has its own outline color; the two maps show its original geometry and selected cells. The table and synchronized detail view share one page. Definitions remain in Neon and frozen inputs, rather than being copied into this code.
+The report reads each polygon-based land rule's saved claim grid. The counts and filled cells include the effects of the rule’s connectivity and unassigned-cell filters. A reused land stage uses its original claim files. Each source feature has its own outline color; the two maps show its original geometry and selected cells. The table and synchronized detail view share one page. Definitions remain in Neon and frozen inputs, rather than being copied into this code.
 
 ## Code and tests
 

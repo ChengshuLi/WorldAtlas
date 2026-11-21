@@ -1,7 +1,6 @@
 """Uniform-area and multi-face assignment over the same prepared scope."""
 
 from collections import defaultdict
-import math
 from pathlib import Path
 
 import numpy as np
@@ -120,13 +119,10 @@ def divide_area(scope, boundaries, targets, directory):
     labels = []
     for target in targets:
         lon, lat = target["point"]["geometry"]["coordinates"]
-        labels.append(
-            (
-                target["entity_id"],
-                math.floor((lon - grid.west) / grid.step) % grid.width,
-                math.floor((grid.north - lat) / grid.step),
-            )
-        )
+        cell = grid.cell_at(lon, lat)
+        if cell is None:
+            raise ValueError("divided-face label is outside the grid")
+        labels.append((target["entity_id"], *cell))
     cuts = geographic_cuts([f["geometry"] for f in boundaries], grid)
     owners = divide_regions(
         scope.context_intervals,
