@@ -32,9 +32,9 @@ class CertificateIndex:
             or height < 1
             or not math.isfinite(step)
             or step <= 0
-            or abs(width * step - 360) > 1e-8
+            or step != 360 / width
             or north > 90
-            or north - height * step < -90 - 1e-8
+            or north - height * step < -90
         ):
             raise ValueError('invalid global grid')
         if (

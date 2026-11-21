@@ -112,7 +112,7 @@ def classify(
         or isinstance(step, (bool, np.bool_))
         or not math.isfinite(step)
         or step <= 0
-        or abs(step * width - 360) > 1e-8
+        or step != 360 / width
         or not callable(point_classifier)
     ):
         raise ValueError("invalid grid or classifier")

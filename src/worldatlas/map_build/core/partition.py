@@ -3,6 +3,7 @@
 from array import array
 from bisect import bisect_left
 from collections import defaultdict
+from fractions import Fraction
 import math
 from pathlib import Path
 
@@ -33,153 +34,111 @@ class CutEdges:
         self.wrap.add(int(y))
 
 
-def _cross(ax, ay, bx, by):
-    return ax * by - ay * bx
+def _scaled_segment(first, last):
+    """Express stored coordinates and half-cell centres on one exact scale."""
+    coordinates = (*first, *last)
+    scale = math.lcm(2, *(value.denominator for value in coordinates))
+    x0, y0, x1, y1 = (
+        value.numerator * (scale // value.denominator) for value in coordinates
+    )
+    return x0, y0, x1, y1, scale
 
 
-def _point_on_segment(p, a, b, eps=1e-10):
-    px, py = p
-    ax, ay = a
-    bx, by = b
-    dx = bx - ax
-    dy = by - ay
-    if abs(_cross(dx, dy, px - ax, py - ay)) > eps * max(1.0, abs(dx) + abs(dy)):
-        return False
-    dot = (px - ax) * dx + (py - ay) * dy
-    ll = dx * dx + dy * dy
-    return -eps <= dot <= ll + eps
+def _scan_crossings(x0, y0, x1, y1, scale, row_count, first_edge, last_edge):
+    """Find the crossed graph edge on each row of cell centres.
 
-
-def _intersection_nonvertex(p, q, a, b, eps=1e-10):
-    """True iff line segment pq intersects edge ab away from a/b graph vertices.
-
-    Intersections at cell-center graph vertices are handled by the deterministic
-    tie rule in rasterize_barriers. A source edge overlapping an entire graph
-    edge is also assigned by those endpoint ties, so it is not cut here.
+    Return row indices, edge indices, and whether a crossing hits the centre
+    at the start of the edge. A line along a row cuts partially covered edges.
+    Fully covered edges stay connected along the line.
     """
-    px, py = p
-    qx, qy = q
-    ax, ay = a
-    bx, by = b
-    rx, ry = qx - px, qy - py
-    sx, sy = bx - ax, by - ay
-    den = _cross(rx, ry, sx, sy)
-    apx, apy = ax - px, ay - py
-    if abs(den) <= eps:
-        if abs(_cross(apx, apy, rx, ry)) > eps * max(1.0, abs(rx) + abs(ry)):
-            return False
-        rr = rx * rx + ry * ry
-        if rr == 0:
-            return False
-        t0 = (apx * rx + apy * ry) / rr
-        t1 = ((bx - px) * rx + (by - py) * ry) / rr
-        lo = max(0.0, min(t0, t1))
-        hi = min(1.0, max(t0, t1))
-        if hi < lo - eps:
-            return False
-        # If both edge endpoints are on the source route, use the vertex tie.
-        if _point_on_segment(a, p, q, eps) and _point_on_segment(b, p, q, eps):
-            return False
-        # Any positive-length partial overlap or a touch of edge interior is a cut.
-        return hi - lo > eps or (
-            lo >= -eps
-            and lo <= 1 + eps
-            and (
-                eps < min(abs(lo), abs(1 - lo))
-                or _point_on_segment(p, a, b, eps)
-                or _point_on_segment(q, a, b, eps)
-            )
-        )
-    t = _cross(apx, apy, sx, sy) / den
-    u = _cross(apx, apy, rx, ry) / den
-    if t < -eps or t > 1 + eps or u < -eps or u > 1 + eps:
-        return False
-    ix = px + t * rx
-    iy = py + t * ry
-    # A graph-center endpoint hit is deferred to the tie handler.
-    if math.hypot(ix - ax, iy - ay) <= eps or math.hypot(ix - bx, iy - by) <= eps:
-        return False
-    return True
+    half = scale // 2
+    if y0 == y1:
+        row, remainder = divmod(y0 - half, scale)
+        if remainder == 0 and 0 <= row < row_count:
+            for endpoint in sorted({x0, x1}):
+                edge, remainder = divmod(endpoint - half, scale)
+                if remainder and first_edge <= edge <= last_edge:
+                    yield row, edge, False
+        return
+    if y0 > y1:
+        x0, y0, x1, y1 = x1, y1, x0, y0
+
+    first_row = max(0, (y0 + half - 1) // scale)
+    last_row = min(row_count - 1, (y1 - half) // scale)
+    dx, dy = x1 - x0, y1 - y0
+    denominator = scale * dy
+    for row in range(first_row, last_row + 1):
+        # x at the crossing is (x0 * dy + offset * dx) / dy.
+        # Subtract half a cell before division to index centre-to-centre edges.
+        offset = row * scale + half - y0
+        edge, remainder = divmod((x0 - half) * dy + offset * dx, denominator)
+        if first_edge <= edge <= last_edge:
+            yield row, edge, remainder == 0
 
 
-def rasterize_barriers(paths, width, height, eps=1e-10):
-    """Convert polyline paths in grid-edge (x,y) coordinates into blocked graph edges.
+def rasterize_barriers(paths, width, height):
+    """Block four-neighbor paths that cross a source line.
 
-    At a source-line hit on a cell-center graph vertex, the tie cell is assigned
-    to the left side of the oriented route; only edges to its right-side
-    neighbors are blocked. This prevents diagonal leakage without dropping any
-    cell. Shared boundary-aligned cell-center edges stay connected on that same
-    tie side. Paths use longitude-unwrapped grid coordinates. The wrapper adds periodic
-    copies and explicit seam cuts for longitude wrapping.
+    Args:
+        paths: Polylines in grid coordinates, with centres at half-integers.
+        width: Number of columns.
+        height: Number of rows.
+
+    Returns:
+        Blocked horizontal, vertical and longitude seam edges. A cell centre
+        exactly on a line stays on the left of a canonical line direction.
     """
     cuts = CutEdges()
-    tie_vectors = defaultdict(lambda: [0.0, 0.0])
+    tangents = defaultdict(lambda: (0, 0))
+
+    def horizontal(row, edge):
+        if edge == -1:
+            cuts.add_wrap(row)
+        elif edge < width - 1:
+            cuts.add_h(row, edge)
+
     for path in paths:
         check_cancelled()
-        pts = [(float(x), float(y)) for x, y in path]
-        for p, q in zip(pts, pts[1:]):
-            x0, y0 = p
-            x1, y1 = q
-            dx = x1 - x0
-            dy = y1 - y0
-            if abs(dx) + abs(dy) <= eps:
+        points = tuple((Fraction(x), Fraction(y)) for x, y in path)
+        points = min(points, points[::-1])
+        cuts.paths.append(points)
+        for first, last in zip(points, points[1:]):
+            if first == last:
                 continue
-            # Collect graph-center vertices on the route; store oriented tangents.
-            ix0 = math.ceil(min(x0, x1) - 0.5 - eps)
-            ix1 = math.floor(max(x0, x1) - 0.5 + eps)
-            iy0 = math.ceil(min(y0, y1) - 0.5 - eps)
-            iy1 = math.floor(max(y0, y1) - 0.5 + eps)
-            for iy in range(iy0, iy1 + 1):
-                cy = iy + 0.5
-                for ix in range(ix0, ix1 + 1):
-                    cx = ix + 0.5
-                    if _point_on_segment((cx, cy), p, q, eps):
-                        v = tie_vectors[(ix, iy)]
-                        v[0] += dx
-                        v[1] += dy
-            # Candidate east/west graph edges, endpoints at cell centers.
-            j0 = max(0, math.ceil(min(y0, y1) - 0.5 - eps))
-            j1 = min(height - 1, math.floor(max(y0, y1) - 0.5 + eps))
-            i0 = max(0, math.floor(min(x0, x1) - 1.5))
-            i1 = min(width - 2, math.ceil(max(x0, x1) - 0.5))
-            for j in range(j0, j1 + 1):
-                yy = j + 0.5
-                for i in range(i0, i1 + 1):
-                    a = (i + 0.5, yy)
-                    b = (i + 1.5, yy)
-                    if _intersection_nonvertex(p, q, a, b, eps):
-                        cuts.add_h(j, i)
-            # Candidate north/south graph edges.
-            i0 = max(0, math.ceil(min(x0, x1) - 0.5 - eps))
-            i1 = min(width - 1, math.floor(max(x0, x1) - 0.5 + eps))
-            j0 = max(0, math.floor(min(y0, y1) - 1.5))
-            j1 = min(height - 2, math.ceil(max(y0, y1) - 0.5))
-            for i in range(i0, i1 + 1):
-                xx = i + 0.5
-                for j in range(j0, j1 + 1):
-                    a = (xx, j + 0.5)
-                    b = (xx, j + 1.5)
-                    if _intersection_nonvertex(p, q, a, b, eps):
-                        cuts.add_v(j, i)
-    # Deterministic graph-vertex tie handling after tangents have been combined.
-    for (ix, iy), (dx, dy) in tie_vectors.items():
-        if abs(dx) + abs(dy) <= eps:
-            continue
-        cx, cy = ix + 0.5, iy + 0.5
-        for ox, oy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
-            nx, ny = cx + ox, cy + oy
-            side = _cross(dx, dy, nx - cx, ny - cy)
-            if side >= -eps:
-                continue  # keep left/on-line neighbors in same tie class
-            if ox == 1 and 0 <= ix < width - 1:
-                cuts.add_h(iy, ix)
-            elif ox == -1 and 0 <= ix - 1 < width - 1:
-                cuts.add_h(iy, ix - 1)
-            elif oy == 1 and 0 <= iy < height - 1:
-                cuts.add_v(iy, ix)
-            elif oy == -1 and 0 <= iy - 1 < height - 1:
-                cuts.add_v(iy - 1, ix)
-    cuts.paths = paths
+            x0, y0, x1, y1, scale = _scaled_segment(first, last)
+            dx, dy = x1 - x0, y1 - y0
+            for y, x, on_centre in _scan_crossings(
+                x0, y0, x1, y1, scale, height, -1, width - 1
+            ):
+                if on_centre:
+                    if x >= 0:
+                        vx, vy = tangents[x, y]
+                        tangents[x, y] = (
+                            vx + Fraction(dx, scale),
+                            vy + Fraction(dy, scale),
+                        )
+                else:
+                    horizontal(y, x)
+            for x, y, on_centre in _scan_crossings(
+                y0, x0, y1, x1, scale, width, 0, height - 1
+            ):
+                if on_centre:
+                    # A sloping segment has already supplied this tangent.
+                    if dy == 0:
+                        vx, vy = tangents[x, y]
+                        tangents[x, y] = (vx + Fraction(dx, scale), vy)
+                elif y < height - 1:
+                    cuts.add_v(y, x)
+
+    for (x, y), (dx, dy) in tangents.items():
+        if dy > 0:
+            horizontal(y, x if x < width - 1 else -1)
+        elif dy < 0:
+            horizontal(y, x - 1)
+        if dx < 0 and y < height - 1:
+            cuts.add_v(y, x)
+        elif dx > 0 and y > 0:
+            cuts.add_v(y - 1, x)
     return cuts
 
 
@@ -238,6 +197,7 @@ def _blocked_count(sorted_x, lo, hi):
 def geographic_cuts(geometries, grid):
     """Use source lines as graph cuts, including periodic longitude neighbours."""
     paths = []
+    west, north, step = map(Fraction, (grid.west, grid.north, grid.step))
     for geometry in geometries:
         lines = (
             [geometry["coordinates"]]
@@ -245,27 +205,35 @@ def geographic_cuts(geometries, grid):
             else geometry["coordinates"]
         )
         for line in lines:
-            longitude = np.rad2deg(np.unwrap(np.deg2rad(np.asarray(line)[:, 0])))
-            x = (longitude - grid.west) / grid.step
-            y = (grid.north - np.asarray(line)[:, 1]) / grid.step
-            paths.append(list(zip(x, y)))
+            coordinates = tuple(map(tuple, line))
+            coordinates = min(coordinates, coordinates[::-1])
+            path = []
+            previous = None
+            offset = 0
+            for lon, lat in coordinates:
+                longitude = Fraction(lon)
+                if previous is not None:
+                    difference = longitude - previous
+                    if difference > 180:
+                        offset -= 360
+                    elif difference < -180:
+                        offset += 360
+                path.append(
+                    (
+                        (longitude + offset - west) / step,
+                        (north - Fraction(lat)) / step,
+                    )
+                )
+                previous = longitude
+            paths.append(path)
     copies = [
         [(x + shift, y) for x, y in path]
         for path in paths
         for shift in (-grid.width, 0, grid.width)
-        if any(-1 <= x + shift <= grid.width + 1 for x, _ in path)
+        if min(x for x, _ in path) + shift <= grid.width + 1
+        and max(x for x, _ in path) + shift >= -1
     ]
-    cuts = rasterize_barriers(copies, grid.width, grid.height)
-    for path in copies:
-        for a, b in zip(path, path[1:]):
-            if min(a[0], b[0]) > 0.5 or max(a[0], b[0]) < -0.5:
-                continue
-            first = max(0, math.ceil(min(a[1], b[1]) - 0.5))
-            last = min(grid.height - 1, math.floor(max(a[1], b[1]) - 0.5))
-            for row in range(first, last + 1):
-                if _intersection_nonvertex(a, b, (-0.5, row + 0.5), (0.5, row + 0.5)):
-                    cuts.add_wrap(row)
-    return cuts
+    return rasterize_barriers(copies, grid.width, grid.height)
 
 
 def continuous_face_links(path, offsets, paths, dsu, grid):

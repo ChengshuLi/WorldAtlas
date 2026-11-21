@@ -22,7 +22,7 @@ class Grid:
             or self.height <= 0
             or not math.isfinite(self.step)
             or self.step <= 0
-            or abs(self.width * self.step - 360) > 1e-8
+            or self.step != 360 / self.width
             or self.height * self.step > 180
             or self.west != -180
             or self.north != 90

@@ -81,9 +81,9 @@ def main(config_path, output, *, emit=None):
         or not all(isinstance(x, (int, float)) and math.isfinite(x) for x in (west, north, step))
         or step <= 0
         or west < -180
-        or west + w * step > 180.0000001
+        or west + w * step > 180
         or north > 90
-        or north - h * step < -90.0000001
+        or north - h * step < -90
     ):
         raise ValueError('invalid grid')
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))

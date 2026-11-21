@@ -101,13 +101,16 @@ def read_native_elevation_crop(paths, bounds, *, bounds_crs=4326):
         actual = dataset.GetGeoTransform()
         if CRS.from_user_input(dataset.GetProjection()) != reference or actual[1:3] != origin[1:3] or actual[4:] != origin[4:]:
             raise ValueError('primary tiles must share one native grid and CRS')
-        offsets = ((actual[0] - transform[0]) / origin[1],
-                   (actual[3] - transform[3]) / origin[5])
+        native_column = round((actual[0] - origin[0]) / origin[1])
+        native_row = round((actual[3] - origin[3]) / origin[5])
         # A tile may start 20 cells over. A shift of 20.5 would put its
         # cell centers between the primary grid's centers.
-        if not np.allclose(offsets, np.rint(offsets), rtol=0, atol=1e-7):
+        if (actual[0], actual[3]) != (
+            origin[0] + native_column * origin[1],
+            origin[3] + native_row * origin[5],
+        ):
             raise ValueError('primary tile origins are not aligned')
-        column, row = map(round, offsets)
+        column, row = native_column - col0, native_row - row0
         x0, y0 = max(0, column), max(0, row)
         x1 = min(elevation.shape[1], column + dataset.RasterXSize)
         y1 = min(elevation.shape[0], row + dataset.RasterYSize)

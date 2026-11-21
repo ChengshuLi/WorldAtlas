@@ -273,7 +273,7 @@ def classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes, *, ban
         and step > 0
     ):
         raise ValueError("invalid crop or grid")
-    if abs(step * width - 360) > 1e-8:
+    if step != 360 / width:
         raise ValueError("step does not match world width")
     if not len(lat):
         return np.empty(0, dtype=np.uint32), {"bounded": 0, "exact": 0}
@@ -282,10 +282,10 @@ def classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes, *, ban
     x = (lon + 180) / step
     x = x + np.ceil((x0 - x) / width) * width
     if (
-        np.any(y < y0 - 1e-8)
-        or np.any(y > y1 + 1e-8)
-        or np.any(x < x0 - 1e-8)
-        or np.any(x > x1 + 1e-8)
+        np.any(y < y0)
+        or np.any(y > y1)
+        or np.any(x < x0)
+        or np.any(x > x1)
     ):
         raise ValueError("query lies outside crop")
     points = unit(lat, lon)

@@ -7,6 +7,7 @@ These rules apply to every agent working in this repository.
 - Follow [PEP 8](https://peps.python.org/pep-0008/#comments) for comments. Use complete sentences and keep comments in sync with the code. Use inline comments sparingly and explain decisions or constraints that the code alone does not show.
 - Import from the module that defines the name. Keep package `__init__.py` files empty or docstring-only by default. Expose names at package level when the package has a deliberate public interface.
 - Treat correctness and performance as core requirements. Avoid unnecessary computation and memory use, and measure performance when a change could materially affect it.
+- Use strict numeric comparisons for equality and tie decisions. Conservative bounds may retain extra search candidates. Use their actual values to select the winner.
 - When blocked or slowed down, always first ask whether the blocking mechanism is needed. Remove it completely if unnecessary. If it is needed, choose the appropriate fix, including a justified exception when warranted.
 - Do not spawn subagents or create Codex chats unless the user explicitly requests it.
 - Make each change in a small pull request with a clear summary and relevant test results. The user reviews and comments; workers should be ready to revise based on that feedback. The user manually merges. Never push directly to `main`, enable auto-merge, or merge any PR.

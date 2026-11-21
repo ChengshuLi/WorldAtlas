@@ -10,15 +10,14 @@ def _pairs(x):
         and all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in x[:2])
     ):
         lon, lat = map(float, x[:2])
-        eps = 1e-10
         if not (
             math.isfinite(lon)
             and math.isfinite(lat)
-            and -180 - eps <= lon <= 180 + eps
-            and -90 - eps <= lat <= 90 + eps
+            and -180 <= lon <= 180
+            and -90 <= lat <= 90
         ):
             raise ValueError('invalid coordinates')
-        yield max(-180.0, min(180.0, lon)), max(-90.0, min(90.0, lat))
+        yield lon, lat
     elif isinstance(x, (list, tuple)):
         for a in x:
             yield from _pairs(a)
@@ -46,7 +45,7 @@ def wrapped_grid_bounds(feature, width, height, step):
         or height <= 0
         or not math.isfinite(step)
         or step <= 0
-        or abs(width * step - 360) > 1e-8
+        or step != 360 / width
     ):
         raise ValueError('invalid grid')
     g = feature.get('geometry', feature)

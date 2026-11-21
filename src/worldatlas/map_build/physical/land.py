@@ -38,9 +38,9 @@ def run(config_path, output, *, emit=print):
         )
         or step <= 0
         or west < -180
-        or west + width * step > 180.0000001
+        or west + width * step > 180
         or north > 90
-        or north - height * step < -90.0000001
+        or north - height * step < -90
     ):
         raise ValueError('invalid grid')
     specs = cfg['land']

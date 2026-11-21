@@ -1,12 +1,41 @@
 """Continuous line-face identity and missing-label behavior on a numerical grid."""
 
+import math
 from pathlib import Path
 import tempfile
 import unittest
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.partition import divide_regions, rasterize_barriers
+from worldatlas.map_build.core.partition import geographic_cuts, divide_regions, rasterize_barriers
+
+
+class ExactCrossings(unittest.TestCase):
+    grid = Grid(24, 12, 15)
+
+    def test_one_float_step_to_each_side_of_a_cell_centre(self):
+        for longitude, edge in (
+            (math.nextafter(7.5, -math.inf), 11),
+            (math.nextafter(7.5, math.inf), 12),
+        ):
+            with self.subTest(longitude=longitude):
+                line = dict(type="LineString", coordinates=[[longitude, 45], [longitude, 0]])
+                cuts = geographic_cuts([line], self.grid)
+                self.assertEqual(cuts.horizontal[4], {edge})
+
+    def test_exact_centre_hits_are_independent_of_line_direction(self):
+        line = [(12.5, 2), (12.5, 10)]
+        forward = rasterize_barriers([line], self.grid.width, self.grid.height)
+        reverse = rasterize_barriers([line[::-1]], self.grid.width, self.grid.height)
+        self.assertTrue(forward.horizontal)
+        self.assertEqual(forward.horizontal, reverse.horizontal)
+        self.assertEqual(forward.vertical, reverse.vertical)
+        self.assertEqual(forward.wrap, reverse.wrap)
+
+    def test_a_boundary_at_the_antimeridian_cuts_the_wrap_edges(self):
+        line = dict(type="LineString", coordinates=[[-180, 45], [-180, 0]])
+        cuts = geographic_cuts([line], self.grid)
+        self.assertEqual(cuts.wrap, {3, 4, 5})
 
 
 class ContinuousFaces(unittest.TestCase):

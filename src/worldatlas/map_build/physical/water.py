@@ -218,9 +218,9 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         or not all(isinstance(x, (int, float)) and math.isfinite(x) for x in (west, north, step))
         or step <= 0
         or west < -180
-        or west + width * step > 180.0000001
+        or west + width * step > 180
         or north > 90
-        or north - height * step < -90.0000001
+        or north - height * step < -90
     ):
         raise ValueError('invalid grid or tile size')
     if policy != {'method': 'overture-inland-subtype-v1'}:

@@ -26,7 +26,7 @@ class ExactIndex:
         if (
             width < 2
             or height < 1
-            or abs(width * step - 360) > 1e-8
+            or step != 360 / width
             or tile_cells < 1
             or guard_m < 1000
         ):

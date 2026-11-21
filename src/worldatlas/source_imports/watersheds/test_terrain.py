@@ -132,10 +132,12 @@ class TerrainTests(unittest.TestCase):
 
     def test_misaligned_primary_tiles_are_rejected(self):
         first = self.raster('first.tif', [[1, 2], [3, 4]])
-        second = self.raster('second.tif', [[5, 6], [7, 8]],
-                             transform=(.5, 1., 0., 2., 0., -1.))
-        with self.assertRaisesRegex(ValueError, 'not aligned'):
-            read_native_elevation_crop([first, second], [0, 0, 2, 2])
+        for shifted_origin in (.5, np.nextafter(2.0, np.inf)):
+            with self.subTest(shifted_origin=shifted_origin):
+                second = self.raster('second.tif', [[5, 6], [7, 8]],
+                                     transform=(shifted_origin, 1., 0., 2., 0., -1.))
+                with self.assertRaisesRegex(ValueError, 'not aligned'):
+                    read_native_elevation_crop([first, second], [0, 0, 4, 2])
 
     def test_overlapping_crops_share_native_grid_node_identity(self):
         path = self.raster('primary.tif', np.arange(16).reshape(4, 4),
