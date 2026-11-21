@@ -1,4 +1,4 @@
-"""Define the WGS84 ellipsoid and sample geodesic segments on it."""
+"""Measure distances and sample paths on the WGS84 ellipsoid."""
 
 import math
 
@@ -7,6 +7,25 @@ from pyproj import Geod
 GEOD = Geod(ellps="WGS84")
 MIN_RADIUS = GEOD.a * (1 - GEOD.f * (2 - GEOD.f))
 MAX_RADIUS = GEOD.a / (1 - GEOD.f)
+
+
+def geodesic_distance(first, second):
+    """Measure the shortest surface distance between two WGS84 points.
+
+    Args:
+        first: First ``(longitude, latitude)`` pair in degrees.
+        second: Second ``(longitude, latitude)`` pair in degrees.
+
+    Returns:
+        The distance in metres, or zero for coincident points.
+
+    Raises:
+        ValueError: The points do not yield a finite distance.
+    """
+    value = GEOD.inv(*first, *second)[2]
+    if not math.isfinite(value):
+        raise ValueError("invalid WGS84 coordinates")
+    return value
 
 
 def geodesic(first, last, max_step_m):

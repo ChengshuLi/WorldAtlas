@@ -5,9 +5,16 @@ import unittest
 import numpy as np
 from shapely.geometry import LineString
 
-from worldatlas.source_imports.watersheds.boundary import Divide, Join, assemble_boundary_line, route_line_through_waypoints, geodesic_distance, connect_divide_to_stream_head, choose_intersection_join
+from worldatlas.geodesy.wgs84 import geodesic, geodesic_distance
+from worldatlas.source_imports.watersheds.boundary import (
+    Divide,
+    Join,
+    assemble_boundary_line,
+    choose_intersection_join,
+    connect_divide_to_stream_head,
+    route_line_through_waypoints,
+)
 from worldatlas.source_imports.watersheds.terrain import Grid
-from worldatlas.geodesy.wgs84 import geodesic
 
 
 class BoundaryTests(unittest.TestCase):

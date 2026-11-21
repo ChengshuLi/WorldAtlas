@@ -12,27 +12,8 @@ from shapely.geometry import LineString, Point
 from shapely.ops import substring
 from shapely.strtree import STRtree
 
-from worldatlas.geodesy.wgs84 import GEOD, geodesic
+from worldatlas.geodesy.wgs84 import GEOD, geodesic, geodesic_distance
 from worldatlas.source_imports.watersheds.drainage import cells_draining_to
-
-
-def geodesic_distance(first, second):
-    """Measure the distance between two points on the WGS84 ellipsoid.
-
-    Args:
-        first: Starting longitude and latitude in degrees.
-        second: Ending longitude and latitude in degrees.
-
-    Returns:
-        The shortest surface distance in metres.
-
-    Raises:
-        ValueError: The coordinates do not yield a finite distance.
-    """
-    value = GEOD.inv(*first, *second)[2]
-    if not math.isfinite(value):
-        raise ValueError('invalid WGS84 boundary coordinates')
-    return value
 
 
 @dataclass

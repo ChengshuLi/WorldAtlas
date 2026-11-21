@@ -15,7 +15,7 @@ from pyproj import Transformer
 import shapely
 from shapely.geometry import LineString
 
-from worldatlas.geodesy.wgs84 import geodesic
+from worldatlas.geodesy.wgs84 import geodesic, geodesic_distance
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import MultipartSource, acquire_sources
@@ -27,7 +27,6 @@ from worldatlas.source_imports.watersheds.boundary import (
     cell_containing_point,
     choose_intersection_join,
     connect_divide_to_stream_head,
-    geodesic_distance,
 )
 from worldatlas.source_imports.watersheds.drainage import (
     compute_cell_flow,

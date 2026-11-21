@@ -1,12 +1,21 @@
-"""Test shortest-path sampling on the WGS84 ellipsoid."""
+"""Test distances and shortest-path sampling on the WGS84 ellipsoid."""
 
+from math import pi
 import unittest
 
-from worldatlas.geodesy.wgs84 import GEOD, geodesic
+from worldatlas.geodesy.wgs84 import GEOD, geodesic, geodesic_distance
 
 
 class GeodesicTests(unittest.TestCase):
     """Cover segment spacing, longitude wrapping, and invalid inputs."""
+
+    def test_geodesic_distance_on_the_equator(self):
+        self.assertAlmostEqual(geodesic_distance((0, 0), (1, 0)), pi * GEOD.a / 180, places=6)
+        self.assertEqual(geodesic_distance((0, 0), (0, 0)), 0)
+
+    def test_geodesic_distance_rejects_invalid_latitude(self):
+        with self.assertRaisesRegex(ValueError, "invalid WGS84 coordinates"):
+            geodesic_distance((0, 0), (1, 91))
 
     def test_samples_the_short_geodesic_across_the_antimeridian(self):
         first, last = (179.0, 10.0), (-179.0, 10.0)
