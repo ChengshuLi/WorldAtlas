@@ -1,4 +1,9 @@
-"""Read OSM extracts and trace where rivers and streams drain."""
+"""Read OSM streams, find where they drain, and check the finished boundary.
+
+An OSM node is a saved point. An OSM way lists the nodes that draw a
+line, in order. For drainage, this module follows ways tagged as rivers
+or streams and keeps their original points for drawing on the terrain grid.
+"""
 from collections import defaultdict
 from dataclasses import dataclass
 from itertools import pairwise
@@ -23,23 +28,24 @@ from worldatlas.source_imports.watersheds.terrain import wrap_array_as_raster
 
 
 def _stage_osm_files(paths, directory):
-    """Stage archived extracts for Pyosmium's streaming reader."""
+    """Give Pyosmium files it can open again for a second reading pass."""
     for index, selection in enumerate(paths):
         path, name = selection if isinstance(selection, tuple) else (selection, None)
         path = Path(path)
         if name is None and not zipfile.is_zipfile(path):
-            # A standalone input can be opened in place.
+            # Pyosmium can open a standalone file directly from its existing path.
             yield osmium.io.File(str(path), 'pbf' if path.suffix.lower() == '.pbf' else 'osm')
             continue
         with zipfile.ZipFile(path) as archive:
-            # An explicit member picks one file. Otherwise read every XML response in the archive.
+            # A selection like ('rivers.zip', 'north.osm') reads just north.osm.
+            # With only the ZIP path, read every .osm and .xml file inside it.
             members = ([archive_member(archive, name)] if name is not None else
                        [item for item in archive.infolist() if item.filename.endswith(('.osm', '.xml'))])
             if not members:
                 raise ValueError('OSM archive has no XML responses')
             for member_index, member in enumerate(members):
                 kind = 'pbf' if member.filename.lower().endswith('.pbf') else 'osm'
-                # Give Pyosmium a temporary file it can open on each pass.
+                # Unpack once so the way pass and the node pass can read the same file.
                 unpacked = directory / f'{index}-{member_index}.{kind}'
                 with archive.open(member) as source, unpacked.open('wb') as output:
                     shutil.copyfileobj(source, output)
@@ -47,24 +53,30 @@ def _stage_osm_files(paths, directory):
 
 
 def _intersection_parts(hit):
-    """Yield the individual points and lines where two lines meet."""
+    """Yield each point or shared stretch where two lines meet."""
     if hit.is_empty:
         return
     if hit.geom_type in ('Point', 'LineString'):
         yield hit
     else:
+        # One stream can run along the boundary, then cross at a separate spot.
+        # Shapely can return both the shared line and the crossing point together.
         for part in hit.geoms:
             yield from _intersection_parts(part)
 
 
 def _shared_segment_ends(start, end, shared_line):
-    """Yield the shared stretches of one source segment in flow direction."""
+    """Yield where the stream joins and leaves each shared stretch."""
     if start == end:
         return
     parts = _intersection_parts(LineString([start, end]).intersection(shared_line))
     stretches = MultiLineString([part for part in parts if part.geom_type == 'LineString'])
+    # An extra saved point on the boundary can split one shared stretch into
+    # two pieces. Join them so we compare the two ends of the whole stretch.
     for stretch in _intersection_parts(line_merge(stretches)):
         first, last = stretch.coords[0], stretch.coords[-1]
+        # If the water flows A → D and follows the boundary from B to C,
+        # return (B, C), even if Shapely gave us the points in reverse order.
         if math.dist(start, first) > math.dist(start, last):
             first, last = last, first
         yield first, last
@@ -75,18 +87,21 @@ def _rectangles_from_wgs84_bounds(bounds):
     west, south, east, north = bounds
     if west <= east:
         return (box(west, south, east, north),)
-    # A single Shapely box would cover the long way around through 0° longitude.
+    # A search from 179°E to 179°W needs two narrow strips next to 180°.
+    # One box between those numbers would run through 0° instead.
     return (box(west, south, 180, north), box(-180, south, east, north))
 
 
 def _vertices_around_point(line, coordinates, point):
     """Find the vertices immediately before and after an interior line point."""
+    # On A → B → C, a contact at the saved point B needs A and C.
     matches = np.flatnonzero(np.all(coordinates[1:-1] == point, axis=1))
     if matches.size:
         index = matches[0]
         return coordinates[index], coordinates[index + 2]
+    # If the contact is between A and B, find its distance along the line
+    # and compare it with the distance to each saved point.
     steps = np.diff(coordinates, axis=0)
-    # A crossing can lie inside a segment, with no vertex recorded at its position.
     station = line.project(Point(point))
     index = np.searchsorted(np.cumsum(np.hypot(steps[:, 0], steps[:, 1])), station)
     index = min(index, len(coordinates) - 2)
@@ -94,14 +109,18 @@ def _vertices_around_point(line, coordinates, point):
 
 
 def _boundary_side(point, before, after, neighbor):
-    """Return which of the boundary's two local sectors contains a river arm."""
+    """Tell which side of the boundary the next stream point is on."""
     def angle(vertex):
         return math.atan2(vertex[1] - point[1], vertex[0] - point[0])
 
     start = angle(before)
-    # At a boundary corner, the two rays divide the area into unequal sectors.
+    # Look out from the contact toward the two nearby boundary points.
+    # Their directions split the full circle in two, even at a sharp bend.
+    # Measure the stream direction from the same starting direction.
     end = (angle(after) - start) % math.tau
     arm = (angle(neighbor) - start) % math.tau
+    # The signs label the two sides. For a straight boundary drawn from
+    # west to east, -1 is north, 1 is south, and 0 points along the line.
     if arm == 0 or arm == end:
         return 0
     return 1 if arm < end else -1
@@ -132,7 +151,7 @@ class Way:
 
 
 class Waterways:
-    """Index OSM waterways by shared nodes for drainage and crossing checks."""
+    """Connect streams at shared OSM nodes and keep their shapes for map checks."""
 
     def __init__(self, paths, *, rivers_and_streams_only=False, reverse=()):
         """Read OSM extracts and connect rivers and streams downstream.
@@ -148,7 +167,8 @@ class Waterways:
         self._node_versions, self._way_versions = {}, {}
         with TemporaryDirectory(prefix='watershed-osm-') as directory:
             files = list(_stage_osm_files(paths, Path(directory)))
-            # Drainage reads ways first. A general source read takes all OSM object types.
+            # For drainage, first find the rivers and streams. Then read only
+            # the points they use. Reading a source line can need all object types.
             entities = osmium.osm.WAY if rivers_and_streams_only else osmium.osm.OBJECT
             for file in files:
                 self._merge_osm_objects(osmium.FileProcessor(file, entities))
@@ -161,22 +181,22 @@ class Waterways:
                     for file in files:
                         reader = osmium.FileProcessor(file, osmium.osm.NODE).with_filter(node_filter)
                         self._merge_osm_objects(reader)
-        # The version lookups have finished merging the extracts. Later code reads the kept objects.
+        # Version tracking is only needed while merging the input files.
         del self._node_versions, self._way_versions
-        # Apply reviewed direction corrections after merging source versions so
-        # the corrections apply to the selected version of each way.
+        # The recipe can correct a mapped flow direction. Wait until we know
+        # which version of the way we kept.
         for ident in sorted(set(map(str, reverse))):
             if ident not in self.ways or not self.ways[ident].is_river_or_stream:
                 raise ValueError(f'river or stream {ident} is missing from the ways available to reverse')
             way = self.ways[ident]
-            # Reversing the node order changes the flow direction while preserving the line's shape.
+            # Reversing A → B → C to C → B → A draws the same line.
             self.ways[ident] = Way(tuple(reversed(way.nodes)), way.tags, way.version)
         self.river_and_stream_ids = {
             ident for ident, way in self.ways.items()
             if way.is_river_or_stream
         }
-        # Flag an incomplete way if a known point lies in the analysis area
-        # or it shares a node with a river or stream that intersects the area.
+        # Find ways we cannot draw. A later check decides whether the missing
+        # points are close enough to the area we are studying to stop the build.
         self.incomplete = {ident for ident in self.river_and_stream_ids
                            if len(self.ways[ident].nodes) < 2 or
                            any(n not in self.nodes for n in self.ways[ident].nodes)}
@@ -194,17 +214,16 @@ class Waterways:
         for way_id in self.incomplete:
             shared_point_ids = complete_point_ids.intersection(self.ways[way_id].nodes)
             connection_point_ids.update(shared_point_ids)
-        # The finished set holds the points we use to trace flow.
-        # 1. Keep the first and last point of every complete river or stream way.
-        # 2. Keep any point ID used more than once in complete ways.
-        # 3. Keep points shared by a complete and an incomplete way so we can
-        #    flag the branch with missing data later.
+        # If a stream runs A → B → C, the flow lookup can go straight from A
+        # to C when B only draws a bend. Keep B as a stop when it appears
+        # more than once, including when a way with missing points uses it.
         self.topology_nodes = connection_point_ids
         for ident in complete_way_ids:
             for (start, first), (end, second) in self.iter_way_connection_pairs(ident):
                 self.upstream[second].add(first)  # At second, water arrives from first.
                 self.downstream[first].add(second)  # At first, water flows next to second.
-                # Keep the original way and point positions to recover the full stream shape.
+                # Keep the source positions so we can draw A → B → C when
+                # the flow lookup only stores A → C.
                 self.edge_sources[first, second].append((ident, start, end))
         self._lines, self._waterway_index = {}, None
 
@@ -216,7 +235,6 @@ class Waterways:
             if version == previous_version and self.nodes[ident] != point:
                 raise ValueError('conflicting same-version OSM node')
             return
-        # Callers that draw a way can read the coordinate pair directly.
         self.nodes[ident], self._node_versions[ident] = point, version
 
     def _merge_way(self, ident, way):
@@ -229,7 +247,8 @@ class Waterways:
             ):
                 raise ValueError('conflicting same-version OSM way')
             return
-        # Even an excluded way's version prevents older copies from returning.
+        # If version 5 changed a stream to a canal, remember version 5 even
+        # when we only keep streams. Version 4 cannot add the old stream back.
         self._way_versions[ident] = (way.version, is_river_or_stream)
         if self.rivers_and_streams_only and not is_river_or_stream:
             self.ways.pop(ident, None)
@@ -237,7 +256,7 @@ class Waterways:
             self.ways[ident] = way
 
     def _merge_relation(self, ident, version, members):
-        # Relations have no per-record filter, so the kept entry can carry its version.
+        # We keep all relations we read, so each saved relation can hold its own version.
         previous_version, previous_members = self.relations.get(ident, (None, None))
         if previous_version is not None and version <= previous_version:
             if version == previous_version and previous_members != members:
@@ -261,22 +280,22 @@ class Waterways:
                 self._merge_relation(ident, obj.version, members)
 
     def iter_way_connection_pairs(self, way_id):
-        """Find the consecutive network junctions along an ordered way.
+        """Find the stretches between points where we stop to trace flow.
 
         Args:
             way_id: OSM way ID.
 
         Returns:
-            An iterator of pairs of consecutive connection points in the way.
-            For example, ``((0, "10"), (2, "12"))`` spans positions 0 through 2
-            of the original way, from OSM node 10 to OSM node 12.
+            Pairs of ``(position, OSM node ID)`` values. For a way with nodes
+            10, 11, and 12, ``((0, "10"), (2, "12"))`` describes one stretch
+            from node 10 to node 12. Node 11 still draws the bend in the line.
         """
         anchors = [(i, node) for i, node in enumerate(self.ways[str(way_id)].nodes)
                    if node in self.topology_nodes]
         return pairwise(anchors)
 
     def way_line(self, way_id, start=0, end=None):
-        """Read a way or its selected section in original vertex order.
+        """Draw a way or a selected stretch in the order we store its points.
 
         Args:
             way_id: OSM way ID.
@@ -334,6 +353,8 @@ class Waterways:
 
     def _way_ids_intersecting_shapes(self, shapes):
         """Use one index for both rectangle searches and line searches."""
+        # Build the lookup on the first search. Later searches reuse it.
+        # The tree returns line positions, so keep their OSM IDs in that order.
         if self._waterway_index is None:
             self._indexed_way_ids = sorted(self.river_and_stream_ids - self.incomplete)
             self._waterway_index = STRtree([self.way_line(way_id) for way_id in self._indexed_way_ids])
@@ -357,8 +378,8 @@ class Waterways:
         areas = [area for rectangle in bounds for area in _rectangles_from_wgs84_bounds(rectangle)]
         relevant = set(self._way_ids_intersecting_shapes(areas))
         relevant_nodes = {node for ident in relevant for node in self.ways[ident].nodes}
-        # An incomplete way can still affect the crop if a known point lies
-        # inside it or the way shares a node with a river that touches it.
+        # Say a stream uses A → B but B is missing. Stop if A lies in the
+        # crop or joins a complete stream that reaches the crop.
         for ident in sorted(self.incomplete):
             nodes = self.ways[ident].nodes
             if (relevant_nodes.intersection(nodes) or
@@ -376,15 +397,16 @@ class Waterways:
                     f'first unresolved node={section["unresolved_node"]}; repair the source')
 
     def fork_outlet_groups(self, node, assigned):
-        """Get the known drainage group of each immediate downstream arm.
+        """Find the destination of each branch leaving the fork.
 
         Args:
             node: OSM node ID of the selected fork.
-            assigned: Known destinations keyed by directed network edge.
+            assigned: Known groups for each ``(upstream node, downstream node)`` stretch.
 
         Returns:
-            Downstream neighbor IDs and their groups, or an empty mapping if
-            any arm lacks one unambiguous group.
+            A map like ``{'3': 1, '4': 2}``. Water leaving toward node 3
+            drains to group 1 and water leaving toward node 4 drains to group 2.
+            Return an empty map if any branch lacks exactly one known group.
         """
         destinations = {}
         for downstream in self.downstream.get(node, ()):
@@ -434,8 +456,9 @@ class Waterways:
         coordinates = np.asarray(geometry.coords)
         endpoints = {tuple(coordinates[0]), tuple(coordinates[-1])}
         ways = self._way_ids_intersecting_shapes((geometry,))
-        # A river can cross at one point or follow the boundary for a while
-        # before leaving on the other side. Keep both kinds of intersection.
+        # Keep isolated meeting points in hits and shared lines in overlaps.
+        # A stream can change sides at one spot or after following the boundary.
+        # At a boundary endpoint, water can go around the end.
         hits = defaultdict(set)
         overlaps = defaultdict(list)
         for ident in ways:
@@ -450,9 +473,9 @@ class Waterways:
         crossings, along_boundary_arms = self._crossings_along_boundary(
             geometry, ways, overlaps, followed_source_line)
 
-        # If water flows through nodes 1, 2, and 3 in that order and node 2
-        # is on the boundary, record node 1 as incoming and node 3 as outgoing.
-        # Group branches from different ways when they share the same OSM node.
+        # For 1 → 2 → 3 with node 2 on the boundary, record the branch toward
+        # node 1 as incoming (False) and the branch toward node 3 as outgoing
+        # (True). Ways that share node 2 are part of the same junction.
         arms = defaultdict(lambda: defaultdict(set))
         vertex_hits = defaultdict(set)
         for ident in ways:
@@ -476,8 +499,9 @@ class Waterways:
             def side(neighbor):
                 return _boundary_side(point, before, after, neighbor)
 
-            # The river can also meet the boundary between two saved OSM
-            # points. Check the sides of the two points it runs between.
+            # Water can flow straight from A above the boundary to B below,
+            # with no saved river point on the boundary. Opposite sides
+            # multiply to -1.
             for ident in hit_ways - vertex_hits[point]:
                 river = self.way_line(ident)
                 entry, exit = _vertices_around_point(river, np.asarray(river.coords), point)
@@ -511,8 +535,8 @@ class Waterways:
                             junctions.add(node)
                             continue
                     crossings[point].update(ident for ident, _, _ in branches)
-                # For contacts without a crossing, report junctions and stream
-                # ends. A stream that touches and turns back needs no entry.
+                # Three or more neighbors make a junction. One means the
+                # stream starts or ends here. Skip an ordinary touch with two.
                 elif len(neighbors) > 2:
                     junctions.add(node)
                 elif len(neighbors) == 1:
@@ -534,6 +558,8 @@ class Waterways:
         if not overlaps:
             return crossings, shared_arms
 
+        # If a stream joins the boundary at B, follows it to C, and leaves
+        # at C, record B → C here. Other branches may join or leave at either end.
         downstream = defaultdict(set)
         points = {}
         arrivals, departures = defaultdict(set), defaultdict(set)
@@ -552,13 +578,14 @@ class Waterways:
             if side:
                 branches[contact].add((side, way))
 
-        # Keep the direction of each shared stretch. Use OSM node IDs to
-        # connect ways. A cut in the middle of a segment belongs to that
-        # segment alone, even if another stream passes through the same spot.
+        # Connect shared stretches by saved OSM node ID. If the stream joins
+        # in the middle of an OSM segment, identify that spot by the way,
+        # segment position, and coordinates so it only connects to its own way.
         for way, lines in overlaps.items():
             shared_line = MultiLineString(lines)
-            # A recipe can explicitly place the border along a river. That
-            # reach is a boundary in its own right, even if it has side channels.
+            # The Ural recipe uses the main river as the boundary. A side
+            # channel can leave that river, so skip the stretches the recipe
+            # chose here. The check for crossings at individual points still runs.
             if followed_source_line is not None:
                 shared_line = shared_line.difference(followed_source_line)
                 if shared_line.is_empty:
@@ -579,8 +606,9 @@ class Waterways:
                     else:
                         record_branch(departures, exit, end, way)
 
-        # At shared OSM nodes, other stream segments can bring water onto the
-        # boundary or carry it away. Count only the branches off the boundary.
+        # An incoming branch may be in a different way from the shared line.
+        # If A → B reaches the boundary and B → C follows it, record A → B
+        # as an arrival. B → C is already stored in downstream.
         for way in ways:
             for upstream, downstream_node in pairwise(self.ways[way].nodes):
                 start, end = self.nodes[upstream], self.nodes[downstream_node]
@@ -591,8 +619,8 @@ class Waterways:
                 if downstream_node in points and (way, downstream_node, upstream, False) not in shared_arms:
                     record_branch(arrivals, downstream_node, start, way)
 
-        # Follow water arriving from each side. Report where it leaves on
-        # the opposite side, even if it passed through several OSM ways.
+        # Follow water arriving from each side. For water that joined from
+        # above, an exit below counts as crossing and an exit above is fine.
         for entry_side in (-1, 1):
             # Take at least one shared stretch. Crossings that occur at a
             # single point are handled by the normal junction check.
@@ -647,16 +675,20 @@ class Waterways:
         return self._trace_upstream_destinations(roots)
 
     def trace_destinations_from_basins(self, basins):
-        """Trace rivers and streams to destinations identified by basin polygons.
+        """Find each stream's drainage group using the basin map at its end.
 
         Args:
-            basins: Source basin index with the recipe's group mapping.
+            basins: Source basin polygons and the drainage groups assigned by the recipe.
 
         Returns:
-            Possible group IDs on each directed edge and a report of the traced routes.
+            ``(assigned, report)``, with the same stretch-to-group map as
+            ``trace_destinations_from_ways``. The report also records where
+            a stream left a basin before its mapped line ended.
         """
         roots = defaultdict(set)
         coastal, seen = [], set()
+        # Start where an OSM stream ends. The basin covering the end point
+        # can tell us where all connected streams upstream drain.
         todo = sorted(node for node in self.topology_nodes if not self.downstream[node])
         while todo:
             node = todo.pop()
@@ -669,9 +701,10 @@ class Waterways:
                 if group >= 0:
                     roots[group].add(node)
                 continue
-            # Several complete ways can continue through estuary water beyond
-            # the basin polygons. Walk upstream only through that uncovered
-            # geometry, stopping at the first source-backed basin on each path.
+            # Say the river flows A → B → C. The basin ends at B, but the
+            # mapped river reaches C in the estuary. Walk backward until we
+            # find B and use the basin there. If that basin has no known
+            # group, stop there instead of looking for a different basin.
             for parent in sorted(self.upstream[node]):
                 for ident, start, end in self.edge_sources[parent, node]:
                     way = self.ways[ident]
@@ -687,8 +720,10 @@ class Waterways:
         return assigned, report
 
     def _trace_upstream_destinations(self, roots):
-        """Trace known destinations and unresolved branches upstream separately."""
+        """Find which stream stretches can reach known and unknown destinations."""
         reaches = {}
+        # If A → B → C and C drains to group 3, work backward from C.
+        # Both B and A can reach group 3. Repeat separately for each group.
         for group, initial in roots.items():
             seen = set(initial)
             todo = list(sorted(seen))
@@ -698,9 +733,14 @@ class Waterways:
                         seen.add(node)
                         todo.append(node)
             reaches[int(group)] = seen
+        # Now work backward from the unknown ends. If B also flows to D and
+        # we do not know where D drains, A → B has an unresolved route even
+        # though it can also reach group 3.
         known = set().union(*reaches.values()) if reaches else set()
         supported = set().union(*roots.values()) if roots else set()
         unresolved = {node: node for node in self.topology_nodes - known}
+        # A way with missing coordinates may hide a route from a junction.
+        # Start the same backward search at the junction where it connects.
         for ident in self.incomplete:
             unresolved.update((node, node) for node in self.ways[ident].nodes
                               if node in self.topology_nodes)
@@ -708,15 +748,16 @@ class Waterways:
         while todo:
             node = todo.pop()
             for parent in sorted(self.upstream[node]):
-                # Do not look beyond an established destination reference.
-                # Uncovered estuary geometry downstream does not invalidate
-                # the basin identity already established by the source.
+                # Once a point is an accepted destination, uncertainty
+                # farther downstream does not undo the known group there.
                 if parent in supported:
                     continue
                 if parent not in unresolved:
                     unresolved[parent] = unresolved[node]
                     todo.append(parent)
         assigned, ambiguous, unassigned, shared, missing = {}, set(), set(), [], []
+        # For A → B, read B's destinations. Record both group 3 and the
+        # unresolved branch when B can reach C and D in the example above.
         for edge, references in sorted(self.edge_sources.items()):
             matches = tuple(sorted(group for group, nodes in reaches.items() if edge[1] in nodes))
             if matches:
@@ -738,14 +779,15 @@ class Waterways:
 
 
 def rasterize_waterway_lines(lines, grid):
-    """Burn WGS84 lines onto a native geographic or projected grid.
+    """Mark the elevation cells that a stream line touches.
 
     Args:
-        lines: Iterable of Shapely lines in longitude and latitude.
-        grid: Native terrain grid to receive the river mask.
+        lines: Stream lines in longitude and latitude.
+        grid: Elevation grid that supplies cell positions and sizes.
 
     Returns:
-        A Boolean array marking every cell touched by a line.
+        A grid with the same shape as the elevation grid. True means a line
+        touches that cell.
     """
     values = np.zeros(grid.elevation.shape, dtype='uint8')
     destination = wrap_array_as_raster(values, grid)
@@ -755,6 +797,7 @@ def rasterize_waterway_lines(lines, grid):
     geometry = pa.array(to_wkb(list(lines)), type=pa.binary())
     if len(geometry):
         vector, layer = geometry_layer(geometry, source_crs)
+        # A line that clips a cell's corner still touches that cell.
         gdal.RasterizeLayer(destination, [1], layer, burn_values=[1], options=['ALL_TOUCHED=TRUE'])
     return values.astype(bool)
 
@@ -764,21 +807,25 @@ def rasterize_waterway_destinations(network, assigned, grid):
 
     Args:
         network: Mapped stream network containing the original way coordinates.
-        assigned: Known destination group IDs keyed by directed network edge.
-        grid: Native terrain to receive the masks.
+        assigned: Known destination groups for each ``(upstream node, downstream node)`` pair.
+        grid: Elevation grid on which to mark those stretches.
 
     Returns:
-        A Boolean mask for each destination group and a report of seeded cells.
-        A cell may appear in several masks when its mapped river drains to several groups.
+        A map from group ID to a grid of True and False values, plus a cell-count
+        report. If a stream reaches groups 3 and 7, each cell it touches is
+        marked True in both grids.
     """
     groups = sorted({group for possible in assigned.values() for group in possible})
     way_ids = network.way_ids_intersecting_grid_bounds(grid)
     seeds = {}
+    # Draw a separate grid for each group so one cell can belong to both.
     for group in groups:
         lines = [network.way_line(ident, start, end) for ident in way_ids
                  for (start, first), (end, last) in network.iter_way_connection_pairs(ident)
                  if group in assigned.get((first, last), ())]
         seeds[group] = rasterize_waterway_lines(lines, grid)
+    # A cell marked for groups 3 and 7 adds one to each group's total
+    # and counts once as a shared cell.
     count = np.zeros(grid.elevation.shape, dtype='int64')
     for cells in seeds.values():
         count += cells
