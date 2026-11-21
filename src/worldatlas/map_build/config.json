@@ -293,7 +293,7 @@
   },
   "physical_controls": {
     "minimum_free_bytes": 2147483648,
-    "max_parallel_shards": 1,
+    "max_parallel_shards": 2,
     "union_rows_per_block": 512,
     "physical_rows_per_block": 512,
     "source_staging": {
@@ -309,5 +309,5 @@
     "width": 131072
   },
   "coastal_band_metres": 22224,
-  "division_workers": 4
+  "division_workers": 6
 }

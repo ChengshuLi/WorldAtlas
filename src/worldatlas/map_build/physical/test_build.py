@@ -5,6 +5,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import unittest
 from unittest import mock
@@ -60,17 +61,40 @@ class PipelineTests(unittest.TestCase):
             self.assertGreaterEqual(r['recorded_processing_elapsed_seconds'], 15)
             self.assertLess(r['recorded_processing_elapsed_seconds'], 20)
 
+    def test_overlapping_transfers_and_processing_share_wall_time(self):
+        with tempfile.TemporaryDirectory() as temp:
+            journal = b.ProcessingJournal(Path(temp), time.perf_counter(), False)
+            for attempt in ('interrupted', 'older'):
+                journal.add(dict(event='attempt_start', attempt=attempt))
+            for start, end in ((0, 8), (2, 16)):
+                journal.add(dict(
+                    event='download_complete', attempt='interrupted', seconds=end - start,
+                    start_monotonic_seconds=start, end_monotonic_seconds=end,
+                ))
+            journal.add(dict(event='download_complete', attempt='older', seconds=2))
+            for start, end in ((5, 15), (10, 25)):
+                journal.add(dict(
+                    event='unit_complete', attempt='interrupted',
+                    start_monotonic_seconds=start, end_monotonic_seconds=end,
+                ))
+            journal.finish('complete')
+            self.assertEqual(journal.recorded_time('interrupted'), (20, 5))
+            self.assertEqual(journal.summary()['source_download_elapsed_seconds'], 7)
+
     def test_corrupt_processing_journal_is_rejected(self):
         for change, message in (
             ([dict(event='unknown', attempt='current')], 'unknown processing journal event'),
             ([dict(event='attempt_start', attempt='current')], 'invalid processing journal attempts'),
             ([dict(event='download_complete', attempt='missing', seconds=1)], 'event without attempt'),
-            ([dict(event='download_complete', attempt='current', seconds=-1)], 'invalid processing journal download duration'),
+            ([
+                dict(event='attempt_start', attempt='older'),
+                dict(event='download_complete', attempt='older', seconds=-1),
+            ], 'invalid processing journal download duration'),
             ([
                 dict(event='attempt_start', attempt='interrupted'),
                 dict(event='unit_complete', attempt='interrupted',
                      start_monotonic_seconds=2, end_monotonic_seconds=1),
-            ], 'invalid processing journal interval'),
+            ], 'invalid processing interval'),
         ):
             with self.subTest(message=message), tempfile.TemporaryDirectory() as temp:
                 journal = b.ProcessingJournal(Path(temp), time.perf_counter(), False)
@@ -492,7 +516,7 @@ class PipelineTests(unittest.TestCase):
                 self.assertFalse((output / 'report.json').exists())
                 path.write_bytes(content)
 
-    def test_r2_staging_is_serial_verified_timed_and_owned(self):
+    def test_r2_staging_is_verified_timed_and_owned(self):
         shard = self.raw / 'water.parquet'
         content = shard.read_bytes()
         digest = sha256_file(shard)
@@ -551,10 +575,71 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(shard.read_bytes(), content)
         self.assertEqual(json.loads((local / 'report.json').read_text())['staged_shard_count'], 0)
         self.assertEqual(sha256_file(local / 'physical/runs.u32le'), sha256_file(out / 'physical/runs.u32le'))
+
+    def test_r2_overlaps_download_and_rasterization_and_matches_serial(self):
+        first = self.raw / 'water.parquet'
+        second = self.raw / 'other' / first.name
+        second.parent.mkdir()
+        table = pq.read_table(first)
+        row = {**table.to_pylist()[0], 'id': 'second-lake'}
+        pq.write_table(
+            pa.Table.from_pylist([row]).replace_schema_metadata(table.schema.metadata), second
+        )
+        payloads = {p.relative_to(self.raw).as_posix(): p.read_bytes() for p in (first, second)}
+        files = [
+            dict(path=key, sha256=sha256_file(self.raw / key), size=len(data),
+                 r2_bucket='atlas', r2_key=key)
+            for key, data in payloads.items()
+        ]
+        source = Path(self.cfg['source_manifest']['path'])
+        source.write_text(json.dumps(dict(file_count=len(files), files=files)))
+        self.cfg['source_manifest']['sha256'] = sha256_file(source)
+        self.cfg['max_parallel_shards'] = 1
+        self.config.write_text(json.dumps(self.cfg))
+        serial = b.run(self.config, self.root / 'serial')
+        for path in (first, second):
+            path.unlink()
+
+        self.cfg['source_staging'] = {
+            'mode': 'r2-s3',
+            'endpoint_url': 'https://' + 'a' * 32 + '.r2.cloudflarestorage.com',
+        }
         self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'one shard worker'):
-            b.run(self.config, self.root / 'unsafe-parallel')
+        first_downloading = threading.Event()
+        second_downloading = threading.Event()
+        first_rasterized = threading.Event()
+        run_stage = b.run_stage
+
+        def get_object(*, Bucket, Key):
+            self.assertEqual(Bucket, 'atlas')
+            if first_downloading.is_set():
+                second_downloading.set()
+                self.assertTrue(first_rasterized.wait(timeout=10))
+            else:
+                first_downloading.set()
+            data = payloads[Key]
+            return dict(Body=io.BytesIO(data), ContentLength=len(data))
+
+        def notify_after_first_raster(function, *args):
+            if function is b.water.run and not first_rasterized.is_set():
+                self.assertTrue(second_downloading.wait(timeout=10))
+                result = run_stage(function, *args)
+                first_rasterized.set()
+                return result
+            return run_stage(function, *args)
+
+        client = mock.Mock()
+        client.get_object.side_effect = get_object
+        output = self.root / 'parallel'
+        with (
+            mock.patch.object(b, 'make_r2_client', return_value=client),
+            mock.patch.object(b, 'run_stage', side_effect=notify_after_first_raster),
+        ):
+            parallel = b.run(self.config, output)
+        self.assertEqual(parallel['staged_shard_count'], 2)
+        self.assertEqual(parallel['physical_output_sha256'], serial['physical_output_sha256'])
+        self.assertEqual(list((output / 'source-staging').rglob('*.parquet')), [])
 
     def test_r2_bad_hash_retains_evidence_and_does_not_publish(self):
         shard = self.raw / 'water.parquet'

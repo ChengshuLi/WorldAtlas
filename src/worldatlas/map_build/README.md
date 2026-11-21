@@ -41,6 +41,8 @@ The build configuration sets the grid, physical inputs, coastal distance and pro
 
 Neon’s source catalog gives the builder each raw file’s R2 location, expected size and checksum. The builder checks the files before using them. `physical_controls.source_staging` supplies the R2 endpoint.
 
+`physical_controls.max_parallel_shards` sets how many water files can be in progress at once. With R2, two workers let one download run while the other file rasterizes. `division_workers` sets how many independent rules within a group can run at once.
+
 #### Geographic assignments
 
 Source imports save the coordinates of boundaries, areas and reference points in Neon. The builder reads the coordinates, rules, entity hierarchy, map codes and source records in one read-only transaction, so they all come from the same snapshot. It closes the transaction before downloading files or processing the grid and saves the selected records in `input-selection.json`. [Source imports](../source_imports/README.md) · [Input selection code](inputs/selection.py)

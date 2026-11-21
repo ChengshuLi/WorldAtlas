@@ -17,7 +17,7 @@ Use `--resume` after interruption. Completed land, water shards, union and compo
 
 The final `physical/` directory contains `physical-dry.tif`, `rows.u32le`, `runs.u32le` and `report.json`. Physical streams use code 17 for land and code 1 for water. Entity assignments are calculated later using registry bindings.
 
-R2 uses the normal boto3 credential chain, with credentials outside the code. Downloads are timed separately from processing. Missing inputs, invalid source classification and inconsistent output coverage stop the build.
+R2 uses the normal boto3 credential chain, with credentials outside the code. The builder can download the next water file while it rasterizes the current file. It removes each temporary copy after recording the completed output. The timing report counts time spent rasterizing as processing, even during a download. Missing inputs, invalid source classification and inconsistent output coverage stop the build.
 
 ## Code and tests
 

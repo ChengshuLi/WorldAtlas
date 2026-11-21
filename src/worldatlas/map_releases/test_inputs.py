@@ -51,18 +51,20 @@ class ReplaySourcesTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "requires R2 staging"):
             validate_replay_sources(self.configuration, self.selection)
 
-    def test_replay_requires_a_valid_r2_endpoint_and_one_shard_worker(self):
+    def test_replay_checks_r2_endpoint_and_accepts_parallel_shard_workers(self):
         controls = self.configuration["physical_controls"]
         staging = controls["source_staging"]
         cases = (
             ({"source_staging": {"mode": "r2-s3"}}, "endpoint_url"),
             ({"source_staging": dict(staging, endpoint_url="https://example.com")}, "Cloudflare R2"),
-            ({"max_parallel_shards": 2}, "one shard worker"),
+            ({"max_parallel_shards": 0}, "max_parallel_shards"),
         )
         for overrides, message in cases:
             with self.subTest(overrides=overrides), self.assertRaisesRegex(ValueError, message):
                 configuration = dict(self.configuration, physical_controls=controls | overrides)
                 validate_replay_sources(configuration, self.selection)
+        parallel = dict(self.configuration, physical_controls=controls | {"max_parallel_shards": 4})
+        validate_replay_sources(parallel, self.selection)
 
     def test_direct_water_shard_pin_requires_a_byte_size(self):
         self.sources["inland_water"]["files"] = [dict(

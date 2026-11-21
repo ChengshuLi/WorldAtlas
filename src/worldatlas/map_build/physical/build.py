@@ -15,7 +15,7 @@ import time
 import uuid
 from collections.abc import Callable, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import closing
+from contextlib import closing, nullcontext
 from contextvars import copy_context
 from pathlib import Path
 from typing import Any
@@ -25,6 +25,7 @@ from botocore.client import BaseClient
 
 import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.execution import control
+from worldatlas.map_build.execution.runtime import elapsed_union
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
 from worldatlas.shared.files import read_json, sha256_file, sync_directory, write_json
@@ -125,11 +126,8 @@ def validate_shard_staging(
             not isinstance(staging, dict)
             or set(staging) != {'mode', 'endpoint_url'}
             or staging['mode'] != 'r2-s3'
-            or workers != 1
         ):
-            raise ValueError(
-                'R2 staging requires r2-s3 mode, endpoint_url and one shard worker'
-            )
+            raise ValueError('R2 staging requires r2-s3 mode and endpoint_url')
         validate_r2_endpoint(staging['endpoint_url'])
     return workers, staging
 
@@ -198,7 +196,6 @@ class ProcessingJournal:
         self.started = started
         self.attempt = uuid.uuid4().hex
         self.lock = threading.Lock()
-        self.download = 0.0
         self.finished = False
         self.events = []
         if resume:
@@ -267,16 +264,53 @@ class ProcessingJournal:
         )
 
     def download_done(self, started: float) -> None:
-        """Add a download's duration to the current attempt's transfer time.
+        """Record when a shard download began and ended.
 
         Args:
             started: Clock reading before the transfer.
         """
-        elapsed = time.perf_counter() - started
-        self.download += elapsed
+        ended = time.perf_counter()
         self.add(
-            {'event': 'download_complete', 'attempt': self.attempt, 'seconds': elapsed}
+            {
+                'event': 'download_complete',
+                'attempt': self.attempt,
+                'start_monotonic_seconds': started,
+                'end_monotonic_seconds': ended,
+                'seconds': ended - started,
+            }
         )
+
+    def recorded_time(self, attempt: str) -> tuple[float, float]:
+        """Count recorded processing and download-only time for one attempt.
+
+        Args:
+            attempt: ID of the physical build attempt.
+
+        Returns:
+            (processing_seconds, download_only_seconds). Concurrent transfers
+            count once, and time spent rasterizing counts as processing.
+        """
+        processing = []
+        downloads = []
+        serial_downloads = 0.0
+        for event in self.events:
+            if event['attempt'] != attempt:
+                continue
+            if event['event'] == 'unit_complete':
+                intervals = processing
+            elif event['event'] == 'download_complete':
+                # Older journals measured serial transfers by duration alone.
+                if 'start_monotonic_seconds' not in event:
+                    serial_downloads += event['seconds']
+                    continue
+                intervals = downloads
+            else:
+                continue
+            intervals.append(
+                (event['start_monotonic_seconds'], event['end_monotonic_seconds'])
+            )
+        active = elapsed_union(processing)
+        return active, elapsed_union(processing + downloads) - active + serial_downloads
 
     def finish(self, status: str) -> None:
         """Record the attempt's final duration and status.
@@ -287,15 +321,16 @@ class ProcessingJournal:
         if self.finished:
             raise ValueError('attempt already ended')
         elapsed = time.perf_counter() - self.started
-        if not math.isfinite(elapsed) or elapsed < self.download:
+        _, download_only = self.recorded_time(self.attempt)
+        if not math.isfinite(elapsed) or elapsed < download_only:
             raise ValueError('invalid attempt timing')
         self.add(
             {
                 'event': 'attempt_end',
                 'attempt': self.attempt,
                 'status': status,
-                'processing_elapsed_seconds': elapsed - self.download,
-                'source_download_elapsed_seconds': self.download,
+                'processing_elapsed_seconds': elapsed - download_only,
+                'source_download_elapsed_seconds': download_only,
             }
         )
         self.finished = True
@@ -348,27 +383,11 @@ class ProcessingJournal:
             raise ValueError('invalid processing journal download duration')
         missing = starts - set(ends)
         lower = sum(e['processing_elapsed_seconds'] for e in ends.values())
-        for attempt in missing:
-            intervals = sorted(
-                (e['start_monotonic_seconds'], e['end_monotonic_seconds'])
-                for e in self.events
-                if e.get('event') == 'unit_complete' and e['attempt'] == attempt
-            )
-            merged = []
-            for start, end in intervals:
-                if not (math.isfinite(start) and math.isfinite(end) and end >= start):
-                    raise ValueError('invalid processing journal interval')
-                if merged and start <= merged[-1][1]:
-                    merged[-1][1] = max(end, merged[-1][1])
-                else:
-                    merged.append([start, end])
-            lower += sum(end - start for start, end in merged)
         download = sum(e['source_download_elapsed_seconds'] for e in ends.values())
-        download += sum(
-            e['seconds']
-            for e in self.events
-            if e.get('event') == 'download_complete' and e['attempt'] in missing
-        )
+        for attempt in missing:
+            processing, download_only = self.recorded_time(attempt)
+            lower += processing
+            download += download_only
         return {
             'timing_complete': not missing,
             'processing_elapsed_seconds': lower if not missing else None,
@@ -709,7 +728,9 @@ def _run(
         journal.unit(
             'land', unit_start, land_dir / 'report.json', land_dir / 'land.tif'
         )
-    staged_count = 0
+
+    download_slot = threading.Lock()
+    raster_slot = threading.Lock() if staging is not None else nullcontext()
 
     def build_shard(
         item: tuple[int, tuple[Path, str, dict[str, Any]]],
@@ -723,9 +744,10 @@ def _run(
             Dictionary with verified raster and report paths and digests.
         """
         control.check_cancelled()
-        nonlocal staged_count
         i, (path, digest, entry) = item
         destination = output / 'shards' / f'{i:05d}'
+        # Keep the manifest's directory structure so equal basenames can run together.
+        staged = output / 'source-staging' / path.relative_to(source_path.parent)
         checkpoint = prior(f'shard-{i:05d}') if resume else None
         if checkpoint:
             report_path = destination / 'report.json'
@@ -743,7 +765,6 @@ def _run(
                 or report.get('output_sha256') != checkpoint['output_sha256']
             ):
                 raise ValueError(f'shard checkpoint mismatch: {i}')
-            staged = output / 'source-staging' / path.name
             if (
                 staged.is_file()
                 and staged.stat().st_size == entry.get('size')
@@ -763,9 +784,7 @@ def _run(
             quarantine(destination)
         owned = False
         if not path.is_file() and staging is not None:
-            stage_dir = output / 'source-staging'
-            stage_dir.mkdir(mode=0o700, exist_ok=True)
-            staged = stage_dir / path.name
+            staged.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
             if staged.exists() and (
                 not staged.is_file()
                 or staged.stat().st_size != entry['size']
@@ -773,12 +792,12 @@ def _run(
             ):
                 quarantine(staged)
             if not staged.exists():
-                started = time.perf_counter()
-                try:
-                    download_r2(staging['endpoint_url'], entry, staged)
-                finally:
-                    journal.download_done(started)
-                staged_count += 1
+                with download_slot:
+                    started = time.perf_counter()
+                    try:
+                        download_r2(staging['endpoint_url'], entry, staged)
+                    finally:
+                        journal.download_done(started)
             if (
                 not staged.is_file()
                 or staged.stat().st_size != entry['size']
@@ -787,8 +806,10 @@ def _run(
                 raise ValueError(f'staged source size/hash mismatch: {path}')
             path = staged
             owned = True
-        unit_start = time.perf_counter()
-        run_stage(water.run, path, digest, destination, water_path, batch_size)
+        with raster_slot:
+            control.check_cancelled()
+            unit_start = time.perf_counter()
+            run_stage(water.run, path, digest, destination, water_path, batch_size)
         report_path = destination / 'report.json'
         report = read_json(report_path)
         if (
@@ -810,10 +831,14 @@ def _run(
             'report': {'path': str(report_path), 'sha256': sha256_file(report_path)},
         }
 
-    # Independent child outputs are kept in manifest order. On failure,
-    # cancel work not yet started; running children finish and remain auditable.
+    # R2 staging overlaps one download with one rasterization. Local shards
+    # can rasterize concurrently without a download slot.
+    # Keep masks in manifest order regardless of when each worker finishes.
     shards: list[dict[str, Any] | None] = [None] * len(raw)
-    with ThreadPoolExecutor(max_workers=min(workers, len(raw))) as pool:
+    with (
+        control.stage() as cancelled,
+        ThreadPoolExecutor(max_workers=min(workers, len(raw))) as pool,
+    ):
         futures = {
             pool.submit(copy_context().run, build_shard, item): item[0]
             for item in enumerate(raw)
@@ -821,7 +846,8 @@ def _run(
         try:
             for future in as_completed(futures):
                 shards[futures[future]] = future.result()
-        except Exception:
+        except BaseException:
+            cancelled.set()
             for future in futures:
                 future.cancel()
             raise
@@ -976,7 +1002,10 @@ def _run(
         'physical_output_sha256': physical['output_sha256'],
         'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
     }
-    report['staged_shard_count'] = staged_count
+    report['staged_shard_count'] = sum(
+        event['event'] == 'download_complete' and event['attempt'] == journal.attempt
+        for event in journal.events
+    )
     report['staged_shard_count_scope'] = 'current invocation'
     journal.finish('complete')
     report.update(journal.summary())
