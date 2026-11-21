@@ -2,11 +2,11 @@ import unittest
 from unittest.mock import patch
 import numpy as np
 
-from worldatlas.map_build.water.tests.shore_reference import (
+from worldatlas.map_build.water.test_shore_reference import (
     ReferenceShoreIndex as CoastalShoreIndex,
 )
 from worldatlas.map_build.water.shore_index import ShoreIndex
-from worldatlas.map_build.water.tests.helpers import rle
+from worldatlas.map_build.water.test_helpers import rle
 
 
 class BatchIndexTests(unittest.TestCase):

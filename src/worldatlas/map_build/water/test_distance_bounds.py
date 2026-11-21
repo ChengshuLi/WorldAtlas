@@ -1,4 +1,4 @@
-from worldatlas.map_build.water.tests.helpers import index_present
+from worldatlas.map_build.water.test_helpers import index_present
 import unittest
 from unittest.mock import patch
 

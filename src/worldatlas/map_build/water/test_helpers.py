@@ -1,3 +1,5 @@
+"""Build small grids and shore lookup tables for water assignment tests."""
+
 import numpy as np
 from scipy.spatial import cKDTree
 

@@ -12,7 +12,7 @@ from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.division.shores import ShoreGeometry
 from worldatlas.map_build.division.policies import nearest_basin_water
-from worldatlas.map_build.water.tests.helpers import rle
+from worldatlas.map_build.water.test_helpers import rle
 from worldatlas.map_build.division.intervals import Eligibility, combine
 
 

@@ -1,4 +1,4 @@
-from worldatlas.map_build.water.tests.shore_reference import (
+from worldatlas.map_build.water.test_shore_reference import (
     centers_for_crop as reference_centers,
 )
 import unittest
@@ -7,7 +7,7 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.water.basins import participants
 from worldatlas.map_build.water.shore_index import ShoreIndex
 from worldatlas.map_build.water.shared_nearest import crop
-from worldatlas.map_build.water.tests.helpers import rle
+from worldatlas.map_build.water.test_helpers import rle
 
 
 class ShoreIndexTest(unittest.TestCase):

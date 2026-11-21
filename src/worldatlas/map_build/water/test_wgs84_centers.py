@@ -1,10 +1,10 @@
-from worldatlas.map_build.water.tests.shore_reference import (
+from worldatlas.map_build.water.test_shore_reference import (
     centers_for_crop as reference_centers,
 )
 import unittest
 import numpy as np
 from pyproj import Geod
-from worldatlas.map_build.water.tests.helpers import rle
+from worldatlas.map_build.water.test_helpers import rle
 from worldatlas.map_build.water import shared_nearest as s
 
 
