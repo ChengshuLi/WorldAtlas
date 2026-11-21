@@ -1,6 +1,6 @@
 """Exercise release packaging, staging, publication and cleanup without cloud writes."""
 
-from contextlib import nullcontext, redirect_stderr, redirect_stdout
+from contextlib import contextmanager, nullcontext, redirect_stderr, redirect_stdout
 import gzip
 import hashlib
 import io
@@ -96,6 +96,7 @@ class BundleTests(unittest.TestCase):
             json.dumps(
                 {
                     "request": pin(request),
+                    "divide": [0, 12],
                     "input_selection_sha256": hashlib.sha256(
                         canonical_bytes(self.selection)
                     ).hexdigest(),
@@ -310,6 +311,7 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(
             json.loads((restored / "selection.json").read_bytes()), self.selection
         )
+        self.assertEqual(json.loads((restored / "run.json").read_bytes())["divide"], [0, 12])
         with self.assertRaises(FileExistsError):
             restore_inputs(archived, restored)
         again = self.output / "again.gz"
@@ -591,6 +593,7 @@ class PublicationTests(unittest.TestCase):
         self.storage = Mock()
         self.storage.head_object.return_value = {"ETag": '"current"'}
         self.storage.get_object.side_effect = self.get_object
+        self.storage.get_paginator.return_value.paginate.return_value = []
 
     def set_release(self, *, official=False, current=False, bucket=RELEASE_BUCKET, previews=()):
         raw = json.dumps(self.manifest).encode()
@@ -613,6 +616,19 @@ class PublicationTests(unittest.TestCase):
         return dict(Body=io.BytesIO(content), ContentLength=len(content), ContentType="application/octet-stream")
 
     def test_publish_installs_verified_homepage_and_selects_candidate(self):
+        committed = False
+
+        @contextmanager
+        def catalog_transaction():
+            nonlocal committed
+            yield
+            committed = True
+
+        def write_homepage(**_):
+            self.assertTrue(committed)
+
+        self.db.transaction.side_effect = catalog_transaction
+        self.storage.put_object.side_effect = write_homepage
         self.db.execute.return_value.fetchone.side_effect = [None, (self.candidate,)]
         self.assertTrue(publish(self.db, self.storage, self.candidate))
         self.storage.put_object.assert_called_once_with(
@@ -624,6 +640,29 @@ class PublicationTests(unittest.TestCase):
         self.assertIn("SET is_current=false", updates[0][0])
         self.assertIn("SET is_official=true,is_current=true", updates[1][0])
         self.assertEqual([args for _, args in updates], [(self.candidate,)] * 2)
+
+    def test_failed_catalog_commit_never_writes_the_homepage(self):
+        @contextmanager
+        def catalog_transaction():
+            yield
+            raise OSError("catalog commit interrupted")
+
+        self.db.transaction.side_effect = catalog_transaction
+        with self.assertRaisesRegex(OSError, "catalog commit interrupted"):
+            publish(self.db, self.storage, self.candidate)
+        self.storage.put_object.assert_not_called()
+        self.storage.get_paginator.assert_not_called()
+
+    def test_failed_homepage_update_can_retry_while_release_is_current(self):
+        self.storage.put_object.side_effect = OSError("homepage write interrupted")
+        with self.assertRaisesRegex(OSError, "homepage write interrupted"):
+            publish(self.db, self.storage, self.candidate)
+        self.assertIn("SET is_official=true,is_current=true", self.db.execute.call_args.args[0])
+        self.storage.get_paginator.assert_not_called()
+        self.set_release(official=True, current=True)
+        self.storage.put_object.side_effect = None
+        self.assertTrue(publish(self.db, self.storage, self.candidate))
+        self.assertEqual(self.storage.put_object.call_count, 2)
 
     def test_retry_for_older_official_release_never_rewrites_homepage(self):
         preview = "v9.0-rc.2"
@@ -683,6 +722,7 @@ class PreviewRetirementTests(unittest.TestCase):
 
     def test_only_unpublished_siblings_are_deleted(self):
         db, storage = Mock(), Mock()
+        storage.get_paginator.return_value.paginate.return_value = []
         db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
         db.execute.return_value.fetchall.return_value = [
             ("v9.0-rc.1", "test", "a" * 64)
@@ -701,6 +741,35 @@ class PreviewRetirementTests(unittest.TestCase):
             ],
         )
         self.assertIn("NOT is_official", db.execute.call_args_list[1].args[0])
+
+    def test_abandoned_uploads_are_removed_only_for_the_exact_official_version(self):
+        db, storage = Mock(), Mock()
+        db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
+        db.execute.return_value.fetchall.return_value = []
+        abandoned = "releases/v9.0-rc.2/"
+        other_abandoned = "releases/v9.0-rc.10/"
+        keys = [abandoned + "index.html", abandoned + "legend/entities.json"]
+        second_keys = [other_abandoned + "rows.u32le.gz"]
+        paginate = storage.get_paginator.return_value.paginate
+
+        def list_pages(*, Bucket, Prefix, Delimiter=None):
+            self.assertEqual(Bucket, RELEASE_BUCKET)
+            if Delimiter == "/":
+                self.assertEqual(Prefix, "releases/v9.0-rc.")
+                return [
+                    {"CommonPrefixes": [{"Prefix": abandoned}, {"Prefix": "releases/v9.0-rc.3/"}]},
+                    {"CommonPrefixes": [{"Prefix": folder} for folder in (
+                        other_abandoned, "releases/v9.0-rc.03/", "releases/v9.01-rc.1/",
+                    )]},
+                ]
+            self.assertIn(Prefix, (abandoned, other_abandoned))
+            return [{"Contents": [{"Key": key}]} for key in (keys if Prefix == abandoned else second_keys)]
+
+        paginate.side_effect = list_pages
+        self.assertEqual(retire_previews(db, storage, "v9.0"), ["v9.0-rc.10", "v9.0-rc.2"])
+        self.assertEqual([call.kwargs["Key"] for call in storage.delete_object.call_args_list], second_keys + keys)
+        storage.get_object.assert_not_called()
+        self.assertEqual(db.execute.call_count, 2)
 
     def test_unpublished_family_is_preserved(self):
         db, storage = Mock(), Mock()
@@ -731,6 +800,7 @@ class PreviewRetirementTests(unittest.TestCase):
         for remaining in ([], [{"Key": folder + "index.html"}]):
             with self.subTest(remaining=remaining):
                 db, storage = Mock(), Mock()
+                storage.get_paginator.return_value.paginate.return_value = []
                 db.execute.return_value.fetchone.return_value = ("v9.0-rc.3",)
                 db.execute.return_value.fetchall.return_value = [
                     (candidate, "test", "a" * 64)

@@ -310,8 +310,18 @@ def upload_bundle(storage, bucket, bundle, manifest):
 
 
 def retire_previews(db, storage, map_version):
-    """Retire unpublished siblings only after a final candidate is official."""
-    if official_candidate(db, map_version) is None:
+    """Remove previews, including partial uploads, after a version is official.
+
+    Args:
+        db: Connection holding the release write lock.
+        storage: Client for the project's release storage.
+        map_version: Version family whose previews can be removed.
+
+    Returns:
+        The sorted release IDs removed from the catalog or R2.
+    """
+    official = official_candidate(db, map_version)
+    if official is None:
         raise ValueError("publish a final candidate before retiring previews")
     rows = db.execute(
         "SELECT id,r2_bucket,manifest_sha256 FROM atlas.map_releases "
@@ -339,7 +349,31 @@ def retire_previews(db, storage, map_version):
             "DELETE FROM atlas.map_releases WHERE id=%s AND NOT is_official",
             (candidate,),
         )
-    return [r[0] for r in rows]
+
+    retired = {row[0] for row in rows}
+    # An interrupted stage can leave objects before the catalog row exists.
+    # Finish listing each prefix before deleting objects from it.
+    family = f"releases/{map_version}-rc."
+    pages = storage.get_paginator("list_objects_v2")
+    folders = sorted(
+        item["Prefix"]
+        for page in pages.paginate(Bucket=RELEASE_BUCKET, Prefix=family, Delimiter="/")
+        for item in page.get("CommonPrefixes", ())
+    )
+    for folder in folders:
+        candidate = folder.removeprefix("releases/").removesuffix("/")
+        match = CANDIDATE.fullmatch(candidate)
+        if not match or match["version"] != map_version or candidate == official:
+            continue
+        keys = [
+            item["Key"]
+            for page in pages.paginate(Bucket=RELEASE_BUCKET, Prefix=folder)
+            for item in page.get("Contents", ())
+        ]
+        for key in keys:
+            storage.delete_object(Bucket=RELEASE_BUCKET, Key=key)
+        retired.add(candidate)
+    return sorted(retired)
 
 
 def put_homepage(storage, bucket, key, html, **condition):
@@ -466,10 +500,9 @@ def publish(db, storage, candidate):
             html = data
     if html is None:
         raise ValueError("release has no viewer homepage")
+    # Commit the approved choice before updating R2. If R2 fails, a retry can
+    # update the homepage while this choice is current, even after a restart.
     with db.transaction():
-        # R2 and PostgreSQL are separate services. A retry of this same candidate
-        # reconciles metadata if the website switch succeeds before a DB failure.
-        put_homepage(storage, bucket, HOMEPAGE, html, **condition)
         db.execute(
             "UPDATE atlas.map_releases SET is_current=false WHERE is_current AND id<>%s",
             (candidate,),
@@ -478,6 +511,7 @@ def publish(db, storage, candidate):
             "UPDATE atlas.map_releases SET is_official=true,is_current=true WHERE id=%s",
             (candidate,),
         )
+    put_homepage(storage, bucket, HOMEPAGE, html, **condition)
     retire_previews(db, storage, map_version)
     return True
 

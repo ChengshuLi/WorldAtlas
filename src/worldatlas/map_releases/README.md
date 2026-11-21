@@ -19,7 +19,7 @@ Raw files remain under `sources/`, shared across releases. Their cataloged ident
 
 Neon's `map_releases` row contains the bundle ID, R2 bucket, manifest checksum and publication-state flags. The release command derives the folder path from the bundle ID. The folder's `manifest.json` lists file locations, sizes, checksums and media types. Neon pins the manifest, and the manifest pins the files.
 
-`is_official` records the permanent selection of a release for a version. Neon prevents demoting or deleting an official release. `is_current` identifies the official release served at `/` through R2's fixed `index.html`. Staging sets both flags to false.
+`is_official` records the permanent selection of a release for a version. Neon prevents demoting or deleting an official release. `is_current` identifies the official release selected for the homepage. Publication commits this choice in Neon, then updates R2's `index.html`. The homepage can still show the previous release if the R2 update fails. Staging sets both flags to false.
 
 ## Publish and retire previews
 
@@ -29,9 +29,9 @@ After the user reviews and approves the candidate:
 worldatlas-release publish v9.0-rc.1
 ```
 
-Publication verifies the files, points the homepage to that exact bundle and removes superseded candidate folders/rows for the same version. Only the selected RC is retained permanently. Candidates of a version still under development stay available. Preview retirement removes the release bundles and catalog pointers. Shared raw sources under `sources/` require a separate dependency check.
+Publication verifies the files, commits the approved release in Neon and updates the homepage. Once the homepage update succeeds, it removes the other candidate folders and rows for that version, including partial uploads that stopped before registration. Candidates of a version still under development stay available. Shared raw sources under `sources/` require a separate dependency check.
 
-Publishing serves the existing grid and legend. Retry an interrupted publication or candidate cleanup with the same command. If a newer version is already live, retrying an older official release only cleans up that older version's remaining previews. Published versions remain available at their original candidate URLs. The Worker serves `/`, `/index.html` and `/releases/RELEASE_ID/...`. Use `npx wrangler deploy` to deploy changes to the Worker itself.
+Publishing serves the existing grid and legend. Retry an interrupted publication or candidate cleanup with the same command. If Neon has since selected a different release for the homepage, retrying the older official release only cleans up its remaining previews. Published versions remain available at their original candidate URLs. The Worker serves `/`, `/index.html` and `/releases/RELEASE_ID/...`. Use `npx wrangler deploy` to deploy changes to the Worker itself.
 
 ## Archived code
 
@@ -65,6 +65,8 @@ worldatlas-build /absolute/path/to/restored-inputs/configuration.json \
   --work-dir /absolute/path/to/worldatlas-work/replay \
   --selection /absolute/path/to/restored-inputs/selection.json
 ```
+
+Check the `divide` field in the restored `run.json`. If it lists parent IDs, add one `--divide` argument for each ID when you rebuild. For example, `[0, 12]` means add `--divide 0 --divide 12`. If the field is null or absent, use the command as shown.
 
 The extracted configuration and selection apply any source relocations recorded by the archive. Optional comparison paths from the original machine are omitted from the extracted configuration. The archive preserves the original records and reports.
 
