@@ -5,8 +5,10 @@ import unittest
 import numpy as np
 from pyproj import Geod, Transformer
 
-from worldatlas.source_imports.watersheds.drainage import (compute_cell_flow, trace_cell_group_labels, neighbor_distances_metres,
-                                 trace_destination_masks, unique_destination_labels)
+from worldatlas.source_imports.watersheds.drainage import (
+    cells_draining_to, compute_cell_flow, neighbor_distances_metres, trace_cell_group_labels,
+    trace_destination_masks, unique_destination_labels,
+)
 from worldatlas.source_imports.watersheds.terrain import Grid
 
 
@@ -187,6 +189,26 @@ class DrainageTests(unittest.TestCase):
             trace_cell_group_labels(np.array([[2]]), np.array([[-1]]))
         with self.assertRaisesRegex(ValueError, 'integers'):
             trace_cell_group_labels(np.array([[-1]]), np.array([[1.5]]))
+        with self.assertRaisesRegex(ValueError, 'matching shapes'):
+            trace_cell_group_labels(np.array([[-1]]), np.array([[-1, -1]]))
+
+    def test_outlet_and_sink_must_fit_the_grid(self):
+        grid = self.grid([[1, 2]])
+        with self.assertRaisesRegex(ValueError, 'outlets and terrain grid must match'):
+            compute_cell_flow(grid, outlets=[[True]])
+        with self.assertRaisesRegex(ValueError, 'closed sink is outside'):
+            compute_cell_flow(grid, closed_sinks=[(0, 2)])
+
+    def test_single_cell_has_no_neighbors(self):
+        np.testing.assert_array_equal(neighbor_distances_metres(self.grid([[0]])), np.zeros((4, 1, 1)))
+
+    def test_repeated_cell_centers_are_rejected(self):
+        grid = self.grid([[0, 0]], transform=(44., 0., 0., 43., 0., -.001))
+        with self.assertRaisesRegex(ValueError, 'invalid neighboring-cell distance'):
+            neighbor_distances_metres(grid)
+
+    def test_upstream_search_does_not_revisit_a_cycle(self):
+        np.testing.assert_array_equal(cells_draining_to(np.array([[1, 0, 1]]), 0), [0, 1, 2])
 
     def test_invalid_coordinate_is_rejected(self):
         with self.assertRaises((ValueError, RuntimeError)):

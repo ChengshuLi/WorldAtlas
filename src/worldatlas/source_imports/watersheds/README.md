@@ -20,7 +20,7 @@ Start with `watershed_boundary()` in `build_boundary.py` to follow the work in c
 
 ## Run
 
-Use the [pipeline's Python/GDAL environment](../../map_build/README.md). The shared [project environment](../../../../environment.yml) pins both Python packages and native libraries. It also provides the disposable PostgreSQL used by tests and the packages needed by related pipeline checks in CI. Set `NEON_DATABASE_URL` and an AWS credential profile outside the code. Then run:
+Use the shared [project environment](../../../../environment.yml) for Python, GDAL and PostgreSQL. Set `NEON_DATABASE_URL` and configure R2 credentials as described in the [source-import instructions](../README.md). Then run:
 
 ```bash
 worldatlas-import \
@@ -31,7 +31,7 @@ worldatlas-import \
 
 The command reads `atlas.construction_records` and resolves exact source IDs through `atlas.source_assets`. A large provider file can reference ordered, individually cataloged byte parts. Each download and the assembled file are checked against their sizes and SHA-256 hashes.
 
-The result updates `atlas.source_features` in one transaction. Its construction links to the raw inputs through `construction_sources`. Existing geographic relationships remain. A failed calculation or invalid geometry leaves the existing boundary unchanged. Map building validates the selected lines and joins against its current division scope. Database connections are open only while reading inputs or saving the result; terrain calculation does not keep an idle cloud connection open. This command does not publish a website. The JSON result reports catalog lookup, source verification, construction phases and database-write times. R2 transfer time is reported separately; cached verification and multipart reassembly count as source processing.
+The importer checks the joins and river crossings before saving the finished line to `atlas.source_features` in one transaction. The construction links to the raw inputs through `atlas.construction_sources`. A failed calculation or invalid geometry leaves the existing boundary unchanged. Map building uses the saved line when it divides the rule's scope. The JSON result reports catalog lookup, source verification, construction phases and database-write times. R2 transfer time is reported separately from cached verification and multipart reassembly.
 
 The current construction IDs are `caucasus-boundary-construction` and `ural-boundary-construction`. Their editable geographic choices and exact source selections are in `atlas.construction_records`.
 
@@ -64,7 +64,7 @@ Terrain readers also open selected ZIP members through GDAL. GeoJSON readers str
 
 Before processing terrain, the constructor checks rivers that intersect the analysis areas and follows their downstream connections. Missing coordinates or an unresolved route stop the run with the relevant way and node IDs. This includes a fork with one known branch and one unresolved branch. Correct the raw data or the source-backed destination references and rerun. Unrelated waterways outside the analysis do not block construction.
 
-If source evidence establishes that a mapped way points upstream, list its ID in `reverse_waterways` and record the supporting measurements and reason in the construction record. The constructor reverses the direction for tracing while preserving the way's coordinates and source ID.
+If source evidence establishes that a mapped way points upstream, list its ID in the drainage definition's `reverse_waterways` and record the supporting measurements and reason in the construction record. The constructor reverses the direction for tracing while preserving the way's coordinates and source ID.
 
 The result includes the river-crossing check, shared sections with their source way IDs, node IDs and destination groups, and unresolved or ambiguous ways within the analysis domains. Counts are for OSM ways, which can each represent only part of a river.
 
@@ -110,7 +110,7 @@ Each test file covers a distinct responsibility:
 | `test_basins.py` | Basin identities, source coverage and coastal outlet classification. |
 | `test_sources.py` | Exact source-feature selection, archive access and river-relation order. |
 | `test_boundary.py` | Connected routes, joins, geographic connections and final geometry. |
-| `test_build_boundary.py` | The steps working together, early failures, database writes and rollback. |
+| `test_build_boundary.py` | The steps working together, shared and distinct drainage definitions, early failures, database writes and rollback. |
 
 Follow the [database test setup](../../../../database/README.md#tests) to make PostgreSQL and `pg_jsonschema` available. Then run all source-import tests:
 

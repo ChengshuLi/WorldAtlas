@@ -175,15 +175,16 @@ class Sources:
 
                 class Coordinates(osmium.SimpleHandler):
                     def node(self, value):
-                        selected.append((value.lon, value.lat))
+                        # Osmium raises when reading lon or lat from an invalid location.
+                        location = value.location
+                        if not location.valid():
+                            raise ValueError('invalid OSM node coordinates')
+                        selected.append((location.lon, location.lat))
 
                 Coordinates().apply_file(str(path), filters=[osmium.filter.IdFilter([int(node)])])
                 if len(selected) != 1:
                     raise ValueError('selected OSM node is missing or duplicated')
-                point = selected[0]
-                if not np.isfinite(point).all() or not (-180 <= point[0] <= 180 and -90 <= point[1] <= 90):
-                    raise ValueError('invalid OSM node coordinates')
-                self.points[key] = point
+                self.points[key] = selected[0]
             return self.points[key]
         if 'intersection' in specification:
             first, second = specification['intersection']
@@ -274,6 +275,6 @@ class Sources:
             order.append(following)
             seen.add(following)
         # A separate loop can leave us with two ends but still leave points unvisited.
-        if len(seen) != len(adjacent) or len(adjacent[order[-1]]) != 1:
+        if len(seen) != len(adjacent):
             raise ValueError('selected river chain is disconnected or closed')
         return [network.nodes[node] for node in order]

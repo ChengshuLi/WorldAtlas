@@ -74,11 +74,10 @@ def _shared_segment_ends(start, end, shared_line):
     # An extra saved point on the boundary can split one shared stretch into
     # two pieces. Join them so we compare the two ends of the whole stretch.
     for stretch in _intersection_parts(line_merge(stretches)):
-        first, last = stretch.coords[0], stretch.coords[-1]
         # If the water flows A → D and follows the boundary from B to C,
         # return (B, C), even if Shapely gave us the points in reverse order.
-        if math.dist(start, first) > math.dist(start, last):
-            first, last = last, first
+        ends = stretch.coords
+        first, last = sorted((ends[0], ends[-1]), key=lambda point: math.dist(start, point))
         yield first, last
 
 
@@ -228,8 +227,6 @@ class Waterways:
         self._lines, self._waterway_index = {}, None
 
     def _merge_node(self, ident, version, point):
-        if not all(map(math.isfinite, point)) or not (-180 <= point[0] <= 180 and -90 <= point[1] <= 90):
-            raise ValueError('invalid OSM node coordinates')
         previous_version = self._node_versions.get(ident)
         if previous_version is not None and version <= previous_version:
             if version == previous_version and self.nodes[ident] != point:
@@ -271,7 +268,10 @@ class Waterways:
             # Pyosmium's object is valid only until the reader advances.
             ident = str(obj.id)
             if obj.is_node():
-                self._merge_node(ident, obj.version, (obj.lon, obj.lat))
+                location = obj.location
+                if not location.valid():
+                    raise ValueError('invalid OSM node coordinates')
+                self._merge_node(ident, obj.version, (location.lon, location.lat))
             elif obj.is_way():
                 self._merge_way(ident, Way(tuple(str(node.ref) for node in obj.nodes),
                                      dict(obj.tags), obj.version))
@@ -422,9 +422,9 @@ class Waterways:
                 # check uses the first OSM node after the fork to find which
                 # side of the boundary the branch leaves on.
                 neighbor = self.ways[way].nodes[start + 1]
-                # If two routes share that first node, their groups must agree.
-                if destinations.setdefault(neighbor, group) != group:
-                    return {}
+                # A node used by several routes is itself a network stop.
+                # Those routes therefore share this edge and its group.
+                destinations[neighbor] = group
         return destinations
 
     def check_boundary_crossings(self, geometry, *, shared_forks=None, followed_source_line=None):

@@ -10,6 +10,7 @@ from worldatlas.source_imports.watersheds.boundary import (
     Divide,
     Join,
     assemble_boundary_line,
+    cell_containing_point,
     choose_intersection_join,
     connect_divide_to_stream_head,
     route_line_through_waypoints,
@@ -152,6 +153,42 @@ class BoundaryTests(unittest.TestCase):
         self.assertEqual(join.point, graph.coordinates[(1, 1)])
         self.assertIn((1, 1), join.edges[graph])
 
+    def test_divide_requires_matching_labels_distinct_groups_and_valid_bounds(self):
+        grid = Grid(np.zeros((1, 2)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        labels = {3: np.array([[True, False]]), 7: np.array([[False, True]])}
+        for memberships, groups, bounds, error in (
+            ({3: np.ones((2, 2), dtype=bool)}, [(3, 7)], None, 'labels and terrain grid'),
+            (labels, [(3, 3)], None, 'distinct known drainage groups'),
+            (labels, [(3, 7)], [1, 0, 0, 1], 'output bounds require a finite'),
+        ):
+            with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
+                Divide().add_catchment_edges(grid, memberships, groups, bounds)
+        divide = Divide()
+        divide.add_catchment_edges(grid, labels, [(3, 7)])
+        shifted = Grid(grid.elevation, (.01, .01, 0., .03, 0., -.01), grid.crs)
+        with self.assertRaisesRegex(ValueError, 'share one native grid'):
+            divide.add_catchment_edges(shifted, labels, [(3, 7)])
+        outside_wgs84 = Grid(grid.elevation, (0., .01, 0., 92., 0., -.01), grid.crs)
+        with self.assertRaisesRegex(ValueError, 'invalid divide coordinates'):
+            Divide().add_catchment_edges(outside_wgs84, labels, [(3, 7)])
+
+    def test_divide_rejects_unusable_joins_and_anchors(self):
+        graph = self.graph()
+        first_edge = ((0, 0), (0, 1))
+        first = Join((0., 0.), {graph: first_edge})
+        for last, error in (
+            (first, 'joins coincide'),
+            (Join((.01, 0.)), 'does not identify a divide edge'),
+            (Join((.02, 0.), {graph: first_edge}), 'outside its divide edge'),
+            (Join((.005, 91.), {graph: first_edge}), 'invalid WGS84 boundary coordinates'),
+        ):
+            with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
+                graph.shortest_divide_path(first, last)
+        with self.assertRaisesRegex(ValueError, 'selected divide is empty'):
+            Divide().join_at_nearest_corner((0., 0.))
+        with self.assertRaisesRegex(ValueError, 'invalid geographic connector anchor'):
+            graph.join_at_nearest_corner((0., 91.))
+
     def test_native_overlapping_domains_share_the_same_grid_edges(self):
         origin = (0., .01, 0., .03, 0., -.01)
         first = Grid(np.zeros((2, 2)), origin, 'EPSG:4326', native_origin=origin)
@@ -231,6 +268,41 @@ class BoundaryTests(unittest.TestCase):
     def test_missing_source_intersection_is_reported(self):
         with self.assertRaisesRegex(ValueError, 'no source-supported intersection'):
             choose_intersection_join(LineString([(0, 0), (1, 0)]), LineString([(0, 1), (1, 1)]), (.5, .5))
+
+    def test_multiple_intersections_include_the_ends_of_shared_stretches(self):
+        first = LineString([(0, 0), (4, 0)])
+        second = LineString([(0, 1), (1, -1), (2, 0), (3, 0), (4, 1)])
+        self.assertEqual(choose_intersection_join(first, second, (.5, 0.)).point, (.5, 0.))
+        self.assertEqual(choose_intersection_join(first, second, (3., 0.)).point, (3., 0.))
+
+    def test_assembly_rejects_missing_and_coincident_joins(self):
+        line = LineString([(0., 0.), (.01, 0.)])
+        with self.assertRaisesRegex(ValueError, 'one join is required'):
+            assemble_boundary_line([line, line], [], (0., 0.), (.01, 0.))
+        with self.assertRaisesRegex(ValueError, 'coincident or invalid joins'):
+            assemble_boundary_line([line], [], (.005, 0.), (.005, 0.))
+
+    def test_assembly_routes_through_waypoints_without_a_receipt_mapping(self):
+        line = LineString([(0., 0.), (.02, 0.)])
+        point = [.01, .001]
+        geometry, _ = assemble_boundary_line([line], [], (0., 0.), (.02, 0.),
+                                             waypoints={0: {'points': [point], 'max_step_m': 40.}})
+        self.assertIn(point, geometry['coordinates'])
+
+    def test_required_stream_head_must_be_inside_its_grid_and_group(self):
+        grid = Grid(np.zeros((1, 2)), (0., .01, 0., .01, 0., -.01), 'EPSG:4326')
+        with self.assertRaisesRegex(ValueError, 'outside the terrain domain'):
+            cell_containing_point(grid, (.1, 0.))
+        with self.assertRaisesRegex(ValueError, 'not assigned to its declared drainage group'):
+            connect_divide_to_stream_head(grid, np.array([[-1, -1]]), np.array([[1, 2]]),
+                                          (.005, .005), 2, [1], 20.)
+
+    def test_upstream_cells_of_another_group_are_not_stream_head_candidates(self):
+        grid = Grid(np.zeros((1, 3)), (0., .01, 0., .01, 0., -.01), 'EPSG:4326')
+        curve, report = connect_divide_to_stream_head(grid, np.array([[1, -1, 1]]), np.array([[1, 2, 3]]),
+                                                      (.015, .005), 2, [1], 20.)
+        self.assertEqual(report['interface_cells'], [[0, 1], [0, 0]])
+        self.assertEqual(tuple(curve.coords[-1]), (.015, .005))
 
     def test_stream_head_connection_is_built_directly_from_flow_and_exact_source_point(self):
         grid = Grid(np.zeros((3, 3)), (44., .001, 0., 43., 0., -.001), 'EPSG:4326')

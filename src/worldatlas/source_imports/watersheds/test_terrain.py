@@ -46,6 +46,34 @@ class TerrainTests(unittest.TestCase):
         path = self.raster('primary.tif', [[1, 2], [3, 4]])
         grid = read_native_elevation_crop([path], [.4, .4, 1.6, 1.6])
         np.testing.assert_array_equal(grid.elevation, [[1, 2], [3, 4]])
+
+    def test_invalid_crop_requests_are_rejected(self):
+        path = self.raster('primary.tif', [[1, 2], [3, 4]])
+        for paths, bounds, error in (
+            ([], [0, 0, 2, 2], 'source tiles and finite analysis bounds'),
+            ([path], [0, 0, float('nan'), 2], 'source tiles and finite analysis bounds'),
+            ([path], [2, 0, 1, 2], 'invalid analysis bounds'),
+            ([path], [0, 0, 2, 91], 'invalid WGS84 analysis bounds'),
+        ):
+            with self.subTest(bounds=bounds, paths=paths), self.assertRaisesRegex(ValueError, error):
+                read_native_elevation_crop(paths, bounds)
+
+    def test_rotated_primary_grid_is_rejected(self):
+        path = self.raster('rotated.tif', [[1, 2], [3, 4]], transform=(0., 1., .1, 2., 0., -1.))
+        with self.assertRaisesRegex(ValueError, 'north-up native grid'):
+            read_native_elevation_crop([path], [0, 0, 2, 2])
+
+    def test_different_primary_crs_is_rejected(self):
+        primary = self.raster('primary.tif', [[1, 2], [3, 4]])
+        other = self.raster('other.tif', [[5, 6], [7, 8]], crs=3857)
+        with self.assertRaisesRegex(ValueError, 'share one native grid and CRS'):
+            read_native_elevation_crop([primary, other], [0, 0, 2, 2])
+
+    def test_primary_tile_outside_crop_leaves_inside_values_unchanged(self):
+        primary = self.raster('primary.tif', [[1, 2], [3, 4]])
+        outside = self.raster('outside.tif', [[5, 6]], transform=(5., 1., 0., 2., 0., -1.))
+        grid = read_native_elevation_crop([primary, outside], [0, 0, 2, 2])
+        np.testing.assert_array_equal(grid.elevation, [[1, 2], [3, 4]])
         self.assertEqual(grid.transform, (0., 1., 0., 2., 0., -1.))
 
     def test_projected_bounds_select_the_exact_native_cells(self):

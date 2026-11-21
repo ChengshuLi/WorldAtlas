@@ -11,7 +11,9 @@ from shapely.geometry import LineString
 
 from worldatlas.source_imports.watersheds.terrain import Grid
 from worldatlas.source_imports.watersheds.drainage import unique_destination_labels
-from worldatlas.source_imports.watersheds.waterways import Waterways, rasterize_waterway_destinations
+from worldatlas.source_imports.watersheds.waterways import (
+    Waterways, rasterize_waterway_destinations, rasterize_waterway_lines,
+)
 
 
 class WaterwayTests(unittest.TestCase):
@@ -179,6 +181,33 @@ class WaterwayTests(unittest.TestCase):
                 network = Waterways([self.write('river.osm', nodes + ways)])
                 self.assertEqual(network.check_boundary_crossings(boundary)['crossings'], [])
 
+    def test_crossing_follows_more_than_one_shared_stretch(self):
+        points = [(-1, 1), (-1, 0), (0, 0), (1, 0), (1, -1), (-1.5, 1)]
+        nodes = ''.join(self.node(i, *p) for i, p in enumerate(points, 1))
+        # A repeated source node adds no length and cannot break the route.
+        # A second tributary joins at the same point as the first.
+        for route in ([1, 2, 3, 3, 4, 5], [5, 4, 3, 3, 2, 1]):
+            ways = self.way(10, route) + self.way(20, [6, 2])
+            network = Waterways([self.write('river.osm', nodes + ways)])
+            with self.subTest(route=route), self.assertRaisesRegex(ValueError, 'boundary crosses a river or stream'):
+                network.check_boundary_crossings(LineString([(-2, 0), (2, 0)]))
+
+    def test_followed_part_of_a_shared_stretch_interrupts_the_crossing_check(self):
+        points = [(-1, 1), (-1, 0), (1, 0), (1, -1)]
+        nodes = ''.join(self.node(i, *p) for i, p in enumerate(points, 1))
+        network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2, 3, 4]))])
+        boundary = LineString([(-2, 0), (2, 0)])
+        source = LineString([(-1, 0), (0, 0)])
+        with self.assertRaisesRegex(ValueError, 'boundary crosses a river or stream'):
+            network.check_boundary_crossings(boundary)
+        self.assertEqual(network.check_boundary_crossings(boundary, followed_source_line=source)['crossings'], [])
+
+    def test_river_can_follow_the_line_past_both_boundary_endpoints(self):
+        nodes = ''.join(self.node(i, *p) for i, p in enumerate([(-2, 0), (2, 0), (2, -1)], 1))
+        network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2, 3]))])
+        result = network.check_boundary_crossings(LineString([(-1, 0), (1, 0)]))
+        self.assertEqual(result['crossings'], [])
+
     def test_a_closed_way_start_is_not_a_real_river_endpoint(self):
         nodes = ''.join(self.node(i, *p) for i, p in enumerate([(0, 0), (1, 0), (1, 1), (0, 1)], 1))
         network = Waterways([self.write('river.osm', nodes + self.way(10, [1, 2, 3, 4, 1]))])
@@ -189,7 +218,8 @@ class WaterwayTests(unittest.TestCase):
         nodes = ''.join(self.node(i, *p) for i, p in enumerate([(.5, .9), (.5, .5), (.1, .1), (.9, .1)], 1))
         network = Waterways([self.write('fork.osm', nodes + self.way(10, [1, 2]) +
                                        self.way(20, [2, 3]) + self.way(30, [2, 4]))])
-        _, report = network.trace_destinations_from_ways({3: ['20']})
+        partly_known, report = network.trace_destinations_from_ways({3: ['20']})
+        self.assertEqual(network.drainage_groups_by_outgoing_node('2', partly_known), {})
         with self.assertRaisesRegex(ValueError, '10.*unresolved downstream route'):
             network.require_known_drainage_in_bounds([[0, 0, 1, 1]], report)
         groups, report = network.trace_destinations_from_ways({3: ['20'], 7: ['30']})
@@ -401,6 +431,39 @@ class WaterwayTests(unittest.TestCase):
         other = self.write('new.osm', self.way(10, [1, 2], 'canal').replace('version="1"', 'version="2"'))
         for files in ([first, other], [other, first]):
             self.assertEqual(Waterways(files, rivers_and_streams_only=True).ways, {})
+
+    def test_archive_requires_osm_files(self):
+        path = self.root / 'empty.zip'
+        with zipfile.ZipFile(path, 'w') as archive:
+            archive.writestr('README.txt', 'No OSM extract here.')
+        with self.assertRaisesRegex(ValueError, 'no XML responses'):
+            Waterways([path])
+
+    def test_way_geometry_requires_valid_coordinates_and_complete_nodes(self):
+        invalid = self.write('invalid.osm', self.node(1, 0, 91) + self.node(2, 0, 0) + self.way(10, [1, 2]))
+        with self.assertRaisesRegex(ValueError, 'invalid OSM node coordinates'):
+            Waterways([invalid])
+        incomplete = self.write('incomplete.osm', self.node(1) + self.way(10, [1, 2]))
+        network = Waterways([incomplete])
+        with self.assertRaisesRegex(ValueError, 'selected OSM way has missing nodes'):
+            network.way_line(10)
+        _, report = network.trace_destinations_from_ways({})
+        network.require_known_drainage_in_bounds([[10, 10, 12, 12]], report)
+
+    def test_same_version_way_must_have_the_same_members_and_tags(self):
+        first = self.write('first.osm', self.node(1) + self.node(2, 2) + self.way(10, [1, 2]))
+        for nodes, kind in (([2, 1], 'river'), ([1, 2], 'canal')):
+            with self.subTest(nodes=nodes, kind=kind), self.assertRaisesRegex(ValueError, 'conflicting same-version OSM way'):
+                Waterways([first, self.write('other.osm', self.way(10, nodes, kind))], rivers_and_streams_only=True)
+
+    def test_way_destination_requires_a_known_group_with_a_source(self):
+        for groups in ({-1: ['10']}, {3: []}):
+            with self.subTest(groups=groups), self.assertRaisesRegex(ValueError, 'nonnegative group IDs and downstream ways'):
+                Waterways([]).trace_destinations_from_ways(groups)
+
+    def test_empty_waterway_raster_has_no_seed_cells(self):
+        grid = Grid(np.zeros((1, 2)), (0., 1., 0., 1., 0., -1.), 'EPSG:4326')
+        np.testing.assert_array_equal(rasterize_waterway_lines([], grid), [[False, False]])
 
     def test_seed_raster_uses_actual_ids_and_native_cell_positions(self):
         path = self.write('network.osm', self.node(1, .1, 1.5) + self.node(2, 1.9, 1.5) +

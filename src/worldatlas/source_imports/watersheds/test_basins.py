@@ -58,6 +58,23 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(basins.group_at_point((.5, 1)), 3)
         self.assertEqual(basins.group_at_point((1.5, 1)), 7)
 
+    def test_each_known_group_requires_a_nonnegative_id_and_source_values(self):
+        for groups in ({}, {-1: [100]}, {3: []}):
+            with self.subTest(groups=groups), self.assertRaisesRegex(ValueError, 'known group IDs'):
+                Basins([self.path], 'DEST', groups, [0, 0, 2, 2])
+
+    def test_basin_source_requires_one_georeferenced_layer(self):
+        path = self.root / 'basins.gpkg'
+        with gdal.GetDriverByName('GPKG').Create(str(path), 0, 0, 0, gdal.GDT_Unknown) as dataset:
+            dataset.CreateLayer('first')
+            dataset.CreateLayer('second')
+        with self.assertRaisesRegex(ValueError, 'requires one vector layer'):
+            Basins([path], 'DEST', {3: [100]}, [0, 0, 2, 2])
+        # Shapefile stores its coordinate reference in a separate file.
+        self.path.with_suffix('.prj').unlink()
+        with self.assertRaisesRegex(ValueError, 'requires its coordinate reference'):
+            self.basins()
+
     def test_projected_basin_source_uses_wgs84_bounds_and_lookup_points(self):
         path = self.root / 'projected.shp'
         write_basin_shapefile(path, 'DEST', [(100, box(0, 0, 1, 2)), (200, box(3, 0, 4, 2))],
@@ -75,6 +92,28 @@ class BasinTests(unittest.TestCase):
         basins = self.basins({0: [100]})
         self.assertEqual(basins.group_at_point((.5, 1)), 0)
         self.assertEqual(basins.group_at_point((1.5, 1)), -1)
+
+    def test_fork_outside_coverage_does_not_inherit_a_group_from_an_unselected_basin(self):
+        path = self.root / 'river.osm'
+        path.write_text('<osm version="0.6"><node id="1" lon="1.5" lat="1"/>'
+                        '<node id="2" lon="3" lat="1"/><node id="3" lon="4" lat="1.5"/>'
+                        '<node id="4" lon="4" lat="0.5"/>'
+                        '<way id="10"><nd ref="1"/><nd ref="2"/><tag k="waterway" v="stream"/></way>'
+                        '<way id="20"><nd ref="2"/><nd ref="3"/><tag k="waterway" v="stream"/></way>'
+                        '<way id="30"><nd ref="2"/><nd ref="4"/><tag k="waterway" v="stream"/></way></osm>')
+        assigned, report = Waterways([path]).trace_destinations_from_basins(self.basins({3: [100]}))
+        self.assertEqual(assigned, {})
+        self.assertEqual(report['basin_exit_before_way_endpoint'], [])
+        self.assertEqual(set(report['unassigned']), {'10', '20', '30'})
+
+    def test_stream_ending_inside_an_unselected_basin_has_no_group(self):
+        path = self.root / 'river.osm'
+        path.write_text('<osm version="0.6"><node id="1" lon="0.5" lat="1"/>'
+                        '<node id="2" lon="1.5" lat="1"/>'
+                        '<way id="10"><nd ref="1"/><nd ref="2"/><tag k="waterway" v="stream"/></way></osm>')
+        assigned, report = Waterways([path]).trace_destinations_from_basins(self.basins({3: [100]}))
+        self.assertEqual(assigned, {})
+        self.assertEqual(report['unassigned'], ['10'])
 
     def test_source_values_cannot_be_assigned_to_two_groups(self):
         with self.assertRaisesRegex(ValueError, 'multiple drainage groups'):
@@ -125,6 +164,17 @@ class BasinTests(unittest.TestCase):
         ocean[0] = True
         _, labels = self.basins().classify_coastal_outlets(grid, ocean)
         np.testing.assert_array_equal(labels, np.full((3, 3), -1))
+
+    def test_coastal_outlet_inputs_must_match_the_terrain_and_flow(self):
+        basins = self.basins()
+        grid = Grid(np.zeros((1, 2)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        with self.assertRaisesRegex(ValueError, 'ocean mask and terrain grid must match'):
+            basins.classify_coastal_outlets(grid, [[True]])
+        flow, labels = np.array([[1, -1]]), np.array([[-1, -1]])
+        with self.assertRaisesRegex(ValueError, 'must share one grid'):
+            basins.classify_uncovered_outlets(grid, flow, [[True]], labels, {})
+        with self.assertRaisesRegex(ValueError, 'must be flow terminals'):
+            basins.classify_uncovered_outlets(grid, flow, [[True, False]], labels, {})
 
     def test_uncovered_outlet_uses_the_first_basin_reached_along_its_upstream_flow(self):
         grid = Grid(np.zeros((1, 5)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')

@@ -173,6 +173,28 @@ class ConstructionTests(unittest.TestCase):
             self.assertLess(coordinates.index(points[0]), coordinates.index(points[1]))
             self.assertIn('waypoints', report['connections']['1'])
 
+    def test_divide_can_pass_through_a_fork_with_distinct_destinations(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            river = Path(directory) / 'fork.osm'
+            river.write_text('<osm version="0.6"><node id="1" lon=".0028" lat=".0035"/>'
+                             '<node id="2" lon=".003" lat=".003"/>'
+                             '<node id="3" lon=".001" lat=".0025"/>'
+                             '<node id="4" lon=".005" lat=".0025"/>'
+                             '<way id="10"><nd ref="1"/><nd ref="2"/><tag k="waterway" v="stream"/></way>'
+                             '<way id="20"><nd ref="2"/><nd ref="3"/><tag k="waterway" v="stream"/></way>'
+                             '<way id="30"><nd ref="2"/><nd ref="4"/><tag k="waterway" v="stream"/></way></osm>')
+            files['river'] = river
+            drainage = recipe['drainage']['local']
+            drainage.update(waterways=['river'], waterway_groups={'3': [20], '100': [30]})
+            recipe['sections'][1].update(via=[{'source': 'river', 'node': 2}], max_step_m=10.)
+            geometry, report = build_fixture(recipe, files)
+            self.assertIn([.003, .003], geometry['coordinates'])
+            self.assertEqual(report['river_checks'][0]['shared_drainage_contacts'], [{'node': '2', 'groups': [3, 100]}])
+            drainage['waterway_groups'] = {'3': [20, 30]}
+            _, report = build_fixture(recipe, files)
+            self.assertEqual(report['river_checks'][0]['shared_drainage_contacts'], [])
+
     def test_closed_sink_is_applied_only_to_domains_that_contain_it(self):
         with tempfile.TemporaryDirectory() as directory:
             files, recipe = fixtures(Path(directory))
@@ -190,6 +212,68 @@ class ConstructionTests(unittest.TestCase):
             recipe['terrains']['ridge']['closed_sinks'] = [
                 {'point': {'point': [.02, .02]}, 'group': 3}]
             with self.assertRaisesRegex(ValueError, 'outside every analysis domain'):
+                build_fixture(recipe, files)
+
+    def test_terrain_requires_a_domain_and_known_sink_groups(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            terrain = recipe['terrains']['ridge']
+            valid_domains = terrain['domains']
+            terrain['domains'] = []
+            with self.assertRaisesRegex(ValueError, 'at least one analysis domain'):
+                build_fixture(recipe, files)
+            terrain['domains'] = valid_domains
+            terrain['closed_sinks'] = [{'point': {'point': [.001, .002]}, 'group': -1}]
+            with self.assertRaisesRegex(ValueError, 'known group IDs'):
+                build_fixture(recipe, files)
+
+    def test_closed_sink_must_agree_with_mapped_stream(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            river = Path(directory) / 'river.osm'
+            river.write_text('<osm version="0.6"><node id="1" lon=".0012" lat=".0045"/>'
+                             '<node id="2" lon=".0012" lat=".0015"/>'
+                             '<way id="11"><nd ref="1"/><nd ref="2"/>'
+                             '<tag k="waterway" v="stream"/></way></osm>')
+            files['river'] = river
+            recipe['drainage']['local'].update(waterways=['river'], waterway_groups={'3': [11]})
+            expected, _ = build_fixture(recipe, files)
+            sink = {'point': {'point': [.0012, .0035]}, 'group': 3}
+            recipe['terrains']['ridge']['closed_sinks'] = [sink]
+            actual, _ = build_fixture(recipe, files)
+            self.assertEqual(actual, expected)
+            sink['group'] = 100
+            with self.assertRaisesRegex(ValueError, 'closed drainage destination conflicts'):
+                build_fixture(recipe, files)
+
+    def test_boundary_can_use_a_stream_head_and_explicit_geodesic_connector(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            point = {'point': [.0045, .0035]}
+            last = {'point': [.0055, .0035]}
+            head = {'terrain': 'ridge', 'point': point, 'inside_group': 100,
+                    'outside_groups': [3], 'max_step_m': 30.}
+            recipe.update(
+                sections=[{'divide': 'ridge'}, {'flow': head},
+                          {'geodesic': {'start': point, 'end': last, 'max_step_m': 30.}}],
+                joins=[{'near': [.003, .0035]}, {'near': point['point']}],
+                start={'nearest_divide': 'ridge', 'near': {'point': [.003, .005]}}, end=last,
+            )
+            geometry, report = build_fixture(recipe, files)
+            self.assertIn(point['point'], geometry['coordinates'])
+            self.assertEqual(geometry['coordinates'][-1], last['point'])
+            self.assertGreater(report['connections']['1']['flow_cells'], 0)
+            self.assertEqual(report['connectors']['2']['start'], point['point'])
+            domains = recipe['terrains']['ridge']['domains']
+            domains.append({'bounds': [0, .003, .006, .006]})
+            with self.assertRaisesRegex(ValueError, 'requires one continuous terrain domain'):
+                build_fixture(recipe, files)
+
+    def test_unknown_boundary_section_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            recipe['sections'][0] = {'unknown': 'before'}
+            with self.assertRaisesRegex(ValueError, 'unknown boundary section type'):
                 build_fixture(recipe, files)
 
     def test_boundary_can_start_and_end_on_a_selected_divide(self):

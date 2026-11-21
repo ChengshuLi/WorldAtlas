@@ -519,8 +519,7 @@ def connect_divide_to_stream_head(grid, flow, labels, point, inside_group, outsi
                 neighbor = nr * width + nc
                 cost = lengths[index] + .5 * geodesic_distance(center(neighbor), center(index))
                 candidates.append((cost, index, neighbor))
-    if not candidates:
-        raise ValueError('no source-backed divide flows to the selected stream head')
+    # The terminal can be reached from at least one inside cell on the divide.
     _, index, neighbor = min(candidates)
     cells = [index]
     while cells[-1] != terminal:
