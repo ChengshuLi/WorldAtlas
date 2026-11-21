@@ -114,8 +114,8 @@ class Sources:
         """Resolve a recipe point to WGS84 longitude and latitude.
 
         Args:
-            specification: A coordinate pair, OSM node, named line endpoint, or
-                intersection of two named lines with a point near the intended join.
+            specification: A coordinate pair, an OSM node, or an intersection
+                of two named lines chosen using a nearby point.
             lines: Parsed source lines keyed by the names used in the recipe.
 
         Returns:
@@ -148,11 +148,6 @@ class Sources:
                     raise ValueError('invalid OSM node coordinates')
                 self.points[key] = point
             return self.points[key]
-        if 'line' in specification:
-            line = lines[specification['line']]
-            if specification['endpoint'] not in ('start', 'end'):
-                raise ValueError('source endpoint must be start or end')
-            return tuple(line.coords[0 if specification['endpoint'] == 'start' else -1])
         if 'intersection' in specification:
             first, second = specification['intersection']
             return choose_intersection_join(lines[first], lines[second], specification['near']).point

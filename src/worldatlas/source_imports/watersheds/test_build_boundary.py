@@ -78,8 +78,8 @@ def fixtures(directory):
                     'interfaces': [[3, 100]]}},
         'sections': [{'line': 'before'}, {'divide': 'ridge'}, {'line': 'after'}],
         'joins': [{'near': [.003, .005]}, {'near': [.003, .001]}],
-        'start': {'line': 'before', 'endpoint': 'start'},
-        'end': {'line': 'after', 'endpoint': 'end'},
+        'start': {'point': [.001, .005]},
+        'end': {'point': [.005, .001]},
     }
     return files, recipe
 

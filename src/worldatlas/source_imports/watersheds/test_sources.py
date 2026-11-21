@@ -25,8 +25,6 @@ class SourceGeometryTests(unittest.TestCase):
             'type': 'LineString', 'coordinates': [[0, 0], [1, 1], [2, 0]]}}]}))
         sources = Sources({'provider': path})
         line = sources.read_selected_line(dict(source='provider', geojson_feature=0))
-        self.assertEqual(sources.read_selected_point({'line': 'selected', 'endpoint': 'end'},
-                                       {'selected': line}), (2., 0.))
         self.assertEqual(list(line.coords), [(0., 0.), (1., 1.), (2., 0.)])
 
     def test_relation_order_is_reconstructed_from_its_selected_source_members(self):

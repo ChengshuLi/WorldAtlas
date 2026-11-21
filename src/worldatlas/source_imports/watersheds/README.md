@@ -45,7 +45,7 @@ Set the record's method to `watershed_boundary`. Put the geographic reasoning an
 - `terrains`: primary and secondary sources, height conversion, analysis domains, drainage groups, waterway references and the group pairs whose divides are needed.
 - `sections`: the final ordered source lines, calculated divides, drainage paths or explicit geodesic connectors.
 - `joins`: geographic anchors for choosing actual intersections between sections.
-- `start` and `end`: source endpoints, selected intersections or explicit geographic points.
+- `start` and `end`: the geographic points where the boundary begins and ends. Select coordinates, an OSM node, an intersection, or a divide corner.
 
 When selecting an OSM river relation, give its relation ID and the member role, such as `main_stream`. The reader joins the ways at shared OSM nodes and starts the coordinate list at the endpoint with the lower node ID. To end the actual boundary at a particular OSM point, use a selector like `{"source": "river", "node": 241464871}`. The boundary assembler puts the selected section in order from its first join to its last join or endpoint.
 
