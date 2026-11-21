@@ -42,7 +42,8 @@ Set the record's method to `watershed_boundary`. Put the geographic reasoning an
 - `feature_id`: the ID of the editable boundary.
 - `sources`: local file names mapped directly to catalog source-ID strings. Multipart inputs instead specify ordered source-ID strings in `parts`, the complete file's checksum, size and filename. There are no one-field wrappers.
 - `lines`: one selector object per named line, such as `{"coast": {"source": "anapa", "way": 396539058}}`. Each selector identifies a complete GeoJSON feature, OSM way or river relation. Joining different source features belongs in `sections` with explicit joins.
-- `terrains`: primary and secondary sources, height conversion, analysis domains, drainage groups, waterway references and the group pairs whose divides are needed.
+- `terrains`: primary and secondary elevation sources, height conversion, analysis domains, the name of a drainage definition and the group pairs whose divides are needed.
+- `drainage`: named definitions of basin sources, the provider field that identifies each basin, and how to group basins by destination. Each definition can also select waterways, correct their directions and supply known stream destinations.
 - `sections`: the final ordered source lines, calculated divides, drainage paths or explicit geodesic connectors.
 - `joins`: geographic anchors for choosing actual intersections between sections.
 - `start` and `end`: the geographic points where the boundary begins and ends. Select coordinates, an OSM node, an intersection, or a divide corner.
@@ -51,7 +52,9 @@ When selecting an OSM river relation, give its relation ID and the member role, 
 
 Optional `evidence_sources` is a list of catalog source-ID strings supporting geographic review. They are linked to the boundary but are not downloaded during construction. Files read by the calculation belong in `sources`.
 
-The recipe groups source basin values by the side of the intended boundary they drain toward. For example, `groups = {"3": [41, 42], "100": [99]}` and `interfaces = [[3, 100]]` describe one divide between groups 3 and 100. The divide between basins 41 and 42 contributes no edges because they are in the same group. When HydroBASINS is selected, `MAIN_BAS` identifies the main basin containing the source polygon, so several polygons can have the same value.
+Each terrain selects one definition by name. For example, the Ural recipe's `arctic`, `copernicus`, and `spring` terrains all set `"drainage": "ural"`. They use different elevation settings and share the basin and stream choices stored once under `drainage.ural`. A terrain that needs different basin or stream data can select a different definition in the same recipe.
+
+The drainage definition groups source basin values by where they drain. For example, `groups = {"3": [41, 42], "100": [99]}` puts basins 41 and 42 in group 3 and basin 99 in group 100. A terrain using that definition can set `interfaces = [[3, 100]]` to draw the divide between the two groups. The divide between basins 41 and 42 contributes no edges because they are in the same group. When HydroBASINS is selected, `MAIN_BAS` identifies the main basin containing the source polygon, so several polygons can have the same value.
 
 Group IDs are local to the recipe. A stream’s group can come from the basin covering its outlet, or the recipe can name known destinations with `waterway_groups`. For example, if `A → B` reaches a fork at B and the two branches drain to groups 3 and 7, the stretch from A to B belongs to both groups. An unknown destination uses `-1` where the code needs a single label.
 

@@ -252,10 +252,13 @@ class DatabaseContractTests(unittest.TestCase):
         method = 'watershed_boundary'
         line = {'source': 'raw', 'way': 42}
         bounds = [0, 0, 1, 1]
-        terrain = dict(domains=[{'bounds': bounds}], primary=['raw'], basins=['raw'],
-                       basin_attribute='ID', groups={'1': [40], '2': [50]}, interfaces=[[1, 2]])
-        arguments = dict(ARGUMENTS[method], lines={'coast': line}, terrains={'divide': terrain})
+        drainage = dict(basins=['raw'], basin_attribute='ID', groups={'1': [40], '2': [50]})
+        terrain = dict(domains=[{'bounds': bounds}], primary=['raw'], drainage='local', interfaces=[[1, 2]])
+        arguments = dict(ARGUMENTS[method], lines={'coast': line}, terrains={'divide': terrain},
+                         drainage={'local': drainage})
         self.check(method, arguments, True)
+        self.check(method, dict(arguments, terrains={'divide': dict(terrain, drainage=' ')}), False)
+        self.check(method, dict(arguments, drainage={'local': dict(drainage, basin_attribute=42)}), False)
         self.check(method, dict(arguments, lines={'coast': [line]}), False)
         self.check(method, dict(arguments, lines={'coast': dict(line, geojson_feature=0)}), False)
         river = {'source': 'raw', 'relation': 42, 'role': 'main_stream'}

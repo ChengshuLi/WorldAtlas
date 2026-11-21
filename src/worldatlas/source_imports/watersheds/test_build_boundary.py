@@ -75,10 +75,10 @@ def fixtures(directory):
         'sources': {name: '__watershed_' + name for name in files},
         'lines': {name: {'source': 'lines', 'geojson_feature': i}
                   for i, name in enumerate(('before', 'after'))},
+        'drainage': {'local': {'basins': [{'source': 'basins', 'member': 'basins.shp'}],
+                     'basin_attribute': 'BASIN', 'groups': {'3': [41], '100': [99]}}},
         'terrains': {'ridge': {'primary': ['dem'], 'domains': [{'bounds': [0, 0, .006, .006]}],
-                    'basins': [{'source': 'basins', 'member': 'basins.shp'}],
-                    'basin_attribute': 'BASIN', 'groups': {'3': [41], '100': [99]},
-                    'interfaces': [[3, 100]]}},
+                    'drainage': 'local', 'interfaces': [[3, 100]]}},
         'sections': [{'line': 'before'}, {'divide': 'ridge'}, {'line': 'after'}],
         'joins': [{'near': [.003, .005]}, {'near': [.003, .001]}],
         'start': {'point': [.001, .005]},
@@ -100,7 +100,7 @@ def build_fixture(recipe, files):
     return construct_boundary(
         files, line_selections=recipe['lines'], sections=recipe['sections'],
         joins=recipe['joins'], start=recipe['start'], end=recipe['end'],
-        terrains=recipe.get('terrains'),
+        terrains=recipe.get('terrains'), drainage=recipe.get('drainage'),
     )
 
 
@@ -116,11 +116,11 @@ class ConstructionTests(unittest.TestCase):
                              '<way id="11" version="1"><nd ref="1"/><nd ref="2"/>'
                              '<tag k="waterway" v="stream"/></way></osm>')
             files['river'] = river
-            terrain = recipe['terrains']['ridge']
-            terrain.update(waterways=['river'], waterway_groups={'3': ['11']})
+            drainage = recipe['drainage']['local']
+            drainage.update(waterways=['river'], waterway_groups={'3': ['11']})
             for way_id in (11, '11'):
                 with self.subTest(way_id=way_id):
-                    terrain['reverse_waterways'] = [way_id]
+                    drainage['reverse_waterways'] = [way_id]
                     geometry, report = build_fixture(recipe, files)
                     self.assertEqual(geometry['coordinates'][1:-1], [
                         [.003, .005], [.003, .004], [.003, .003], [.003, .002], [.003, .001],
@@ -141,7 +141,7 @@ class ConstructionTests(unittest.TestCase):
                              '<way id="20"><nd ref="2"/><nd ref="3"/><tag k="waterway" v="stream"/></way>'
                              '<way id="30"><nd ref="2"/><nd ref="4"/><tag k="waterway" v="stream"/></way></osm>')
             files['rivers'] = river
-            recipe['terrains']['ridge'].update(waterways=['rivers'], waterway_groups={3: ['20']})
+            recipe['drainage']['local'].update(waterways=['rivers'], waterway_groups={3: ['20']})
             with patch('worldatlas.source_imports.watersheds.build_boundary.prepare_elevation_grid') as terrain:
                 with self.assertRaisesRegex(ValueError, 'unresolved downstream route'):
                     build_fixture(recipe, files)
@@ -156,7 +156,7 @@ class ConstructionTests(unittest.TestCase):
                              '<way id="10"><nd ref="1"/><nd ref="2"/>'
                              '<tag k="waterway" v="stream"/></way></osm>')
             files['river'] = river
-            recipe['terrains']['ridge']['waterways'] = ['river']
+            recipe['drainage']['local']['waterways'] = ['river']
             recipe['sections'][1].update(via=[{'point': [.001, .003]}], max_step_m=10.)
             with self.assertRaisesRegex(ValueError, 'boundary crosses a river or stream'):
                 build_fixture(recipe, files)
@@ -260,6 +260,38 @@ class ConstructionTests(unittest.TestCase):
             self.assertEqual(report['joins'], [[.003, .005], [.003, .001]])
             self.assertEqual(build_fixture(recipe, files)[0], geometry)
             self.assertFalse((files['basins'].parent / 'extracted').exists())
+
+    def test_terrains_can_share_drainage_settings_or_select_separate_settings(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            river = Path(directory) / 'river.osm'
+            river.write_text('<osm version="0.6"><node id="1" lon=".001" lat=".005"/>'
+                             '<node id="2" lon=".001" lat=".001"/>'
+                             '<way id="11"><nd ref="1"/><nd ref="2"/>'
+                             '<tag k="waterway" v="stream"/></way></osm>')
+            files['river'] = river
+            local = recipe['drainage']['local']
+            local.update(waterways=['river'], waterway_groups={'3': [11]})
+            ridge = recipe['terrains']['ridge']
+            recipe['drainage']['alternate'] = dict(
+                local, groups={'7': [41], '8': [99]}, waterway_groups={'7': [11]},
+            )
+            recipe['terrains'].update(
+                same=dict(ridge), other=dict(ridge, drainage='alternate', interfaces=[[7, 8]]),
+            )
+            _, report = build_fixture(recipe, files)
+            seeds = {name: terrain['domains'][0]['seeds']['seed_cells']
+                     for name, terrain in report['terrain'].items()}
+            self.assertGreater(seeds['ridge']['3'], 0)
+            self.assertEqual(seeds['same'], seeds['ridge'])
+            self.assertEqual(seeds['other'], {'7': seeds['ridge']['3']})
+
+    def test_terrain_requires_named_drainage_settings(self):
+        with tempfile.TemporaryDirectory() as directory:
+            files, recipe = fixtures(Path(directory))
+            recipe['terrains']['ridge']['drainage'] = 'missing'
+            with self.assertRaisesRegex(ValueError, "terrain 'ridge' refers to unknown drainage settings 'missing'"):
+                build_fixture(recipe, files)
 
     def test_native_terrain_can_be_read_directly_from_a_zip_member(self):
         with tempfile.TemporaryDirectory() as directory:

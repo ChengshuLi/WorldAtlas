@@ -55,25 +55,35 @@ class TerrainDomain(TypedDict):
     output_bounds: NotRequired[Bounds | None]
 
 
-class TerrainSettings(TypedDict):
-    """Name the maps, streams, and drainage groups for one terrain grid.
+class DrainageSettings(TypedDict):
+    """Identify the basin and stream data used to label drainage destinations.
 
     For example, if ``basin_attribute`` is ``MAIN_BAS``, read each polygon's
-    basin ID from that field. With groups ``{"3": [41, 42], "7": [99]}``
-    and interfaces ``[[3, 7]]``, the builder looks for the divide between
-    group 3 and group 7.
+    basin ID from that field. Groups ``{"3": [41, 42], "7": [99]}`` label
+    water reaching basins 41 or 42 as group 3 and basin 99 as group 7.
+    """
+
+    basins: list[NonEmptyText | FileSelection]
+    basin_attribute: NonEmptyText
+    groups: dict[NonEmptyText, list[Any]]
+    waterways: NotRequired[list[NonEmptyText | FileSelection]]
+    reverse_waterways: NotRequired[list[NonEmptyText | int]]
+    waterway_groups: NotRequired[dict[NonEmptyText, list[NonEmptyText | int]]]
+
+
+class TerrainSettings(TypedDict):
+    """Select elevation inputs, calculation windows, and divides to extract.
+
+    ``drainage`` names the settings for classifying where water goes.
+    ``interfaces`` selects which divides to build from those groups. For
+    example, ``[[3, 7]]`` selects the divide between groups 3 and 7.
     """
 
     domains: list[TerrainDomain]
     primary: list[NonEmptyText | FileSelection]
-    basins: list[NonEmptyText | FileSelection]
-    basin_attribute: NonEmptyText
-    groups: dict[NonEmptyText, list[Any]]
+    drainage: NonEmptyText
     interfaces: list[tuple[int | NonEmptyText, int | NonEmptyText]]
     secondary: NotRequired[list[NonEmptyText | FileSelection]]
-    waterways: NotRequired[list[NonEmptyText | FileSelection]]
-    reverse_waterways: NotRequired[list[NonEmptyText | int]]
-    waterway_groups: NotRequired[dict[NonEmptyText, list[NonEmptyText | int]]]
     height_offset: NotRequired[NonEmptyText]
     closed_sinks: NotRequired[list[dict[str, Any]]]
     ocean_mask: NotRequired[dict[str, Any]]
@@ -98,7 +108,7 @@ def runtime_versions():
             'proj_database_sha256': database_sha256}
 
 
-def construct_boundary(files, *, line_selections, sections, joins, start, end, terrains=None):
+def construct_boundary(files, *, line_selections, sections, joins, start, end, terrains=None, drainage=None):
     """Trace drainage, find the divide, and join the boundary sections.
 
     For a recipe with a coastline, a calculated divide, and a river,
@@ -113,7 +123,8 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
             of neighboring sections.
         start: Selection for the first point of the boundary.
         end: Selection for the last point of the boundary.
-        terrains: Analysis domains and drainage settings keyed by terrain name.
+        terrains: Elevation inputs and analysis domains keyed by terrain name.
+        drainage: Basin and stream settings keyed by the names used by terrains.
 
     Returns:
         The final GeoJSON boundary and a report of inputs, checks, and timings.
@@ -128,8 +139,13 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
     lines = {name: sources.read_source_line(selection) for name, selection in line_selections.items()}
     report['source_geometry_seconds'] = time.monotonic() - started
     divides, connections, networks = {}, {}, {}
+    drainage_by_name = drainage or {}
     for name, settings in (terrains or {}).items():
         phase = time.monotonic()
+        drainage_name = settings['drainage']
+        if drainage_name not in drainage_by_name:
+            raise ValueError(f'terrain {name!r} refers to unknown drainage settings {drainage_name!r}')
+        destination_settings = drainage_by_name[drainage_name]
         domains = settings['domains']
         if not domains:
             raise ValueError('terrain requires at least one analysis domain')
@@ -142,9 +158,9 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
                              for domain in domains]
         bounds = [min(b[0] for b in geographic_bounds), min(b[1] for b in geographic_bounds),
                   max(b[2] for b in geographic_bounds), max(b[3] for b in geographic_bounds)]
-        reversed_ways = [str(ident) for ident in settings.get('reverse_waterways', [])]
+        reversed_ways = [str(ident) for ident in destination_settings.get('reverse_waterways', [])]
         network = sources.read_osm_network(
-            settings.get('waterways', []), rivers_and_streams_only=True, reverse=reversed_ways,
+            destination_settings.get('waterways', []), rivers_and_streams_only=True, reverse=reversed_ways,
         )
         if network.nodes:
             # A stream can cross our terrain crop and reach its outlet
@@ -154,12 +170,12 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
                       max(bounds[2], max(p[0] for p in network.nodes.values())),
                       max(bounds[3], max(p[1] for p in network.nodes.values()))]
         basins = Basins(
-            [sources.resolve_vector_path(source) for source in settings['basins']],
-            settings['basin_attribute'], settings['groups'], bounds,
+            [sources.resolve_vector_path(source) for source in destination_settings['basins']],
+            destination_settings['basin_attribute'], destination_settings['groups'], bounds,
         )
         assigned, network_report = (
-            network.trace_destinations_from_ways(settings['waterway_groups'])
-            if 'waterway_groups' in settings else network.trace_destinations_from_basins(basins)
+            network.trace_destinations_from_ways(destination_settings['waterway_groups'])
+            if 'waterway_groups' in destination_settings else network.trace_destinations_from_basins(basins)
         )
         network.require_known_drainage_in_bounds(geographic_bounds, network_report)
         shared_forks = networks.setdefault(network, {})
@@ -370,6 +386,7 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
                        sections: list[dict[str, Any]], joins: list[dict[str, Any]],
                        start: dict[str, Any], end: dict[str, Any],
                        terrains: dict[NonEmptyText, TerrainSettings] | None = None,
+                       drainage: dict[NonEmptyText, DrainageSettings] | None = None,
                        evidence_sources: list[SourceId] | None = None):
     """Read the recipe's files, build the boundary, and save it to Neon.
 
@@ -382,7 +399,8 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
         joins: Geographic anchors for intersections between adjacent sections.
         start: Selection for the first point of the boundary.
         end: Selection for the last point of the boundary.
-        terrains: Optional analysis domains and drainage settings.
+        terrains: Optional elevation inputs and analysis domains.
+        drainage: Named basin and stream settings referenced by the terrains.
         evidence_sources: Additional catalog IDs to cite, such as a study
             supporting the location of a stream fork.
 
@@ -399,7 +417,7 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
     files = dict(zip(sources, paths, strict=True))
     geometry, report = construct_boundary(
         files, line_selections=lines, sections=sections,
-        joins=joins, start=start, end=end, terrains=terrains,
+        joins=joins, start=start, end=end, terrains=terrains, drainage=drainage,
     )
     versions = runtime_versions()
     started = time.monotonic()
