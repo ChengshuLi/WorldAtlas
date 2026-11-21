@@ -1,5 +1,7 @@
 """Test signature-derived contracts and their enforcement in PostgreSQL."""
 
+from contextlib import redirect_stderr
+from io import StringIO
 import os
 from pathlib import Path
 import subprocess
@@ -7,11 +9,13 @@ import sys
 import tempfile
 from typing import Any, TypedDict
 import unittest
+from unittest.mock import patch
 
 import psycopg
 from psycopg.types.json import Jsonb
 
 from worldatlas.source_imports.shared.contracts import (
+    main,
     parameters,
     recipe_schema,
     source_paths,
@@ -71,12 +75,17 @@ class ContractTests(unittest.TestCase):
             command = [sys.executable, '-m', 'worldatlas.source_imports.shared.contracts', str(path)]
             subprocess.run(command, check=True)
             self.assertIn('CREATE FUNCTION atlas.construction_source_ids', path.read_text())
-            subprocess.run([*command, '--check'], check=True)
-            path.write_text('stale SQL\n')
-            failure = subprocess.run([*command, '--check'], capture_output=True, text=True)
-            self.assertEqual(failure.returncode, 1)
-            self.assertIn('Construction checks are stale', failure.stderr)
-            self.assertEqual(path.read_text(), 'stale SQL\n')
+
+            # Check both file states without starting Python again for each check.
+            with patch.object(sys, 'argv', ['contracts', str(path), '--check']):
+                main()
+                path.write_text('stale SQL\n')
+                stderr = StringIO()
+                with redirect_stderr(stderr), self.assertRaises(SystemExit) as failure:
+                    main()
+                self.assertEqual(failure.exception.code, 1)
+                self.assertIn('Construction checks are stale', stderr.getvalue())
+                self.assertEqual(path.read_text(), 'stale SQL\n')
 
 
 @unittest.skipUnless(

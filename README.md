@@ -115,7 +115,7 @@ Coverage includes production Python lines and branches across the test subproces
 [Checks](.github/workflows/ci.yml) runs every fast automated suite on each PR update and on manual runs:
 
 - Python source-import, map-building, release and SQL database suites concurrently on macOS and Linux.
-- Production Python formatting, docstrings, annotations, type checking, and 100% line and branch coverage on Linux.
+- Production Python formatting, docstrings, annotations, and type checks alongside the Linux test suites, which enforce 100% line and branch coverage.
 - Node and Chromium browser tests on Linux.
 
 CI tests a regular installation, including its SQL and configuration resources. macOS and Linux both run the Python and database suites against native PostgreSQL. Each database-using suite has its own disposable database on one temporary server per OS job. CI caches installed environments and the native macOS extension, uses local fixtures, and needs no cloud credentials. The website job uses Chrome already installed on GitHub's runner and runs alongside the Python jobs. Its Node and browser suites also run concurrently. New pushes cancel superseded runs. Documentation-only updates also run the checks. Full-size map builds and geographic review remain separate.
