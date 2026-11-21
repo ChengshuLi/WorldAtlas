@@ -1,4 +1,4 @@
-"""Restored map inputs are independent of an earlier machine's comparison files."""
+"""Check that archived map inputs can be restored and used on another machine."""
 
 import gzip
 import hashlib
@@ -11,7 +11,10 @@ from worldatlas.map_releases.inputs import SCHEMA, read_inputs, restore_inputs, 
 
 
 class ReplaySourcesTests(unittest.TestCase):
+    """Distinguish portable physical inputs from files tied to the build cache."""
+
     def setUp(self):
+        """Prepare an inline request with a cataloged coastline and water shard."""
         self.shape = {"archive": {"r2_source": {"source_id": "coast"}}, "member": "shore.shp"}
         self.shard = {"path": "shard.parquet", "r2_source": {"source_id": "inland"}}
         self.sources = {
@@ -70,6 +73,8 @@ class ReplaySourcesTests(unittest.TestCase):
                 with self.subTest(spec=spec):
                     self.sources["raw_manifest"] = spec
                     validate_replay_sources(self.configuration, self.selection, [pin])
+            # Staging inspects the copy the build used. The replay can fetch
+            # that document by its pinned R2 location.
             with self.assertRaisesRegex(ValueError, "cached R2 document for raw_manifest"):
                 validate_replay_sources(self.configuration, self.selection, [])
             path.write_text("changed")
@@ -78,6 +83,8 @@ class ReplaySourcesTests(unittest.TestCase):
 
 
 class ReplayConfiguration(unittest.TestCase):
+    """Verify which archived values are copied or adjusted during extraction."""
+
     def test_comparison_paths_are_omitted_without_changing_captured_values(self):
         configuration = dict(
             sources=dict(

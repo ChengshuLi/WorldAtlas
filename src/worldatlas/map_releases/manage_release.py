@@ -1,4 +1,9 @@
-"""Stage immutable release bundles; publish only at the user's instruction."""
+"""Package, stage, publish, and restore completed WorldAtlas builds.
+
+A preview has its own numbered folder in R2. After review and approval,
+publication records the chosen release in Neon and switches the homepage to it.
+Restore extracts the saved inputs for a separate map build.
+"""
 
 import argparse
 from contextlib import closing
@@ -47,6 +52,17 @@ HOMEPAGE = "index.html"
 
 
 def version(candidate):
+    """Get the map version from a numbered release candidate.
+
+    Args:
+        candidate: Numbered release ID, such as ``v8.4-rc.1``.
+
+    Returns:
+        The version shared by its candidates, such as ``v8.4``.
+
+    Raises:
+        ValueError: The ID is missing a valid candidate number.
+    """
     match = CANDIDATE.fullmatch(candidate)
     if not match:
         raise ValueError("candidate must look like v9.0-rc.1")
@@ -54,10 +70,34 @@ def version(candidate):
 
 
 def read(path):
+    """Read a local JSON file used by release packaging.
+
+    Args:
+        path: Path to the JSON file.
+
+    Returns:
+        The parsed JSON value.
+
+    Raises:
+        OSError: The file could not be opened or read.
+        ValueError: The file does not contain valid JSON.
+    """
     return json.loads(path.read_bytes())
 
 
 def release_categories(selection):
+    """Build the viewer's category records from the build's frozen geography.
+
+    Args:
+        selection: Saved build selection containing entities and category bindings.
+
+    Returns:
+        Records sorted by map code, with the entity ID, display name, physical
+        class, and RGB color for land categories.
+
+    Raises:
+        ValueError: A category binding is invalid or a land entity lacks a color.
+    """
     validate_bindings(selection["geography"])
     snapshot = selection["geography"]
     names = {entity["id"]: entity["name"] for entity in snapshot["entities"]}
@@ -97,6 +137,10 @@ def build_bundle(candidate, run, viewer, bundle):
 
     Returns:
         The manifest of packaged files and their verified checksums.
+
+    Raises:
+        ValueError: The build is incomplete, a pinned input or output differs,
+            or a release asset fails validation.
     """
     report = read(run / "report.json")
     if (
@@ -117,6 +161,8 @@ def build_bundle(candidate, run, viewer, bundle):
         raise ValueError("build configuration does not match the run")
     final = report["final"]
     verify_pins([request_pin, final["report"]])
+    # The report identifies the final outputs. A run can also contain streams
+    # from physical rasterization and intermediate divisions.
     final_directory = Path(final["report"]["path"]).parent
     for name, filename in (
         ("rows", "rows.u32le"),
@@ -166,12 +212,16 @@ def build_bundle(candidate, run, viewer, bundle):
     html = index.read_text()
     if html.count("<head>") != 1 or re.search(r"<base\b", html, re.I):
         raise ValueError("the viewer homepage must have a single head and no base URL")
+    # The same HTML is served at / and under the candidate URL. In both places,
+    # relative script, legend, and map URLs must resolve inside this release.
     index.write_text(
         html.replace("<head>", f'<head><base href="/{release_prefix(candidate)}">', 1)
     )
 
     combined = hashlib.sha256()
     grid_config = {"run_count": summary["run_count"]}
+    # There is one 32-bit offset per row plus a final end offset. Each run
+    # has two 32-bit values, its end column and its category code.
     stream_sizes = {"rows": 4 * (grid["height"] + 1), "runs": 8 * summary["run_count"]}
     decoded = {}
     for stream in STREAMS:
@@ -184,6 +234,8 @@ def build_bundle(candidate, run, viewer, bundle):
             output.open("xb") as dst,
             gzip.GzipFile(filename="", fileobj=dst, mode="wb", mtime=0) as compressed,
         ):
+            # Hash the decoded bytes during compression to verify the streams
+            # without reading the large uncompressed files a second time.
             while chunk := src.read(4 << 20):
                 size += len(chunk)
                 checksum.update(chunk)
@@ -197,6 +249,8 @@ def build_bundle(candidate, run, viewer, bundle):
 
     config = bundle / "config.json"
     viewer_config = read(config)
+    # A mixed entity has separate land and water codes but one legend entry.
+    # Add the counts for both codes and use the entity's land color in the legend.
     legend = {}
     for category in categories:
         entity_id = category["entity_id"]
@@ -241,6 +295,8 @@ def build_bundle(candidate, run, viewer, bundle):
             ):
                 raise ValueError("source archive must be inside its build attempt")
             verify_pins([source])
+            # A resumed build can use different code. Keep every attempt's
+            # reference while storing identical captured bytes just once.
             source_code[source["sha256"]] = read_source(Path(source["path"]))
     captured_run = dict(identity, attempts=attempts)
     write_inputs(
@@ -252,6 +308,8 @@ def build_bundle(candidate, run, viewer, bundle):
         report=report,
         source_code=source_code,
     )
+    # The manifest pins stored object bytes. The decoded stream hashes above
+    # let the viewer and a later rebuild verify the uncompressed map.
     objects = {
         path.relative_to(bundle).as_posix(): {
             "r2_key": release_prefix(candidate) + path.relative_to(bundle).as_posix(),
@@ -272,6 +330,22 @@ def build_bundle(candidate, run, viewer, bundle):
 
 
 def verify_object(storage, bucket, key, expected, *, return_bytes=False):
+    """Verify an R2 object's size, content type, encoding, and checksum.
+
+    Args:
+        storage: Open R2 client.
+        bucket: Bucket containing the object.
+        key: Exact object key within that bucket.
+        expected: Manifest entry containing the byte size, content type, and SHA-256.
+        return_bytes: Keep the verified body in memory for callers that need it.
+
+    Returns:
+        The object's bytes if requested, or None after streaming the checksum.
+
+    Raises:
+        ValueError: The object's metadata or bytes differ from the manifest.
+        ClientError: R2 could not return the object.
+    """
     response = storage.get_object(Bucket=bucket, Key=key)
     with closing(response["Body"]) as body:
         if response["ContentLength"] != expected["size_bytes"] or response.get(
@@ -292,6 +366,18 @@ def verify_object(storage, bucket, key, expected, *, return_bytes=False):
 
 
 def upload_bundle(storage, bucket, bundle, manifest):
+    """Upload and verify the release assets listed in a prepared manifest.
+
+    Args:
+        storage: Open R2 client.
+        bucket: Destination bucket.
+        bundle: Local directory containing the prepared assets.
+        manifest: Asset entries keyed by their relative file names.
+
+    Raises:
+        ValueError: A stored asset differs from the manifest.
+        ClientError: An upload or verification request fails.
+    """
     for name, asset in manifest["objects"].items():
         key = asset["r2_key"]
         with (bundle / name).open("rb") as body:
@@ -304,6 +390,8 @@ def upload_bundle(storage, bucket, bundle, manifest):
                     ContentType=asset["content_type"],
                 )
             except ClientError as exc:
+                # On a staging retry this key may already exist. Leave those
+                # bytes in place and verify them against the same manifest.
                 if exc.response["ResponseMetadata"]["HTTPStatusCode"] != 412:
                     raise
         verify_object(storage, bucket, key, asset)
@@ -319,6 +407,10 @@ def retire_previews(db, storage, map_version):
 
     Returns:
         The sorted release IDs removed from the catalog or R2.
+
+    Raises:
+        ValueError: The version has no official release or a preview manifest is invalid.
+        ClientError: R2 listing, verification, or deletion fails.
     """
     official = official_candidate(db, map_version)
     if official is None:
@@ -342,6 +434,7 @@ def retire_previews(db, storage, map_version):
             if remaining.get("Contents") or remaining.get("IsTruncated"):
                 raise
         else:
+            # Keep the list of assets available until every asset is deleted.
             for asset in manifest["objects"].values():
                 storage.delete_object(Bucket=bucket, Key=asset["r2_key"])
             storage.delete_object(Bucket=bucket, Key=folder + "manifest.json")
@@ -377,6 +470,18 @@ def retire_previews(db, storage, map_version):
 
 
 def put_homepage(storage, bucket, key, html, **condition):
+    """Serve the released HTML at the homepage key with cache revalidation.
+
+    Args:
+        storage: Open R2 client.
+        bucket: Bucket read by the website Worker.
+        key: Homepage object key, normally ``index.html``.
+        html: Verified HTML bytes from the candidate bundle.
+        **condition: R2 precondition from ``homepage_condition``.
+
+    Raises:
+        ClientError: The write fails or its precondition no longer holds.
+    """
     storage.put_object(
         Bucket=bucket,
         Key=key,
@@ -388,6 +493,19 @@ def put_homepage(storage, bucket, key, html, **condition):
 
 
 def homepage_condition(storage, bucket):
+    """Get the precondition for replacing or creating the homepage object.
+
+    Args:
+        storage: Open R2 client.
+        bucket: Bucket containing the homepage.
+
+    Returns:
+        An ``IfMatch`` condition for the observed ETag, or ``IfNoneMatch``
+        to create the homepage only if the key is still empty.
+
+    Raises:
+        ClientError: R2 returned an error other than a missing homepage.
+    """
     try:
         return {"IfMatch": storage.head_object(Bucket=bucket, Key=HOMEPAGE)["ETag"]}
     except ClientError as exc:
@@ -422,6 +540,11 @@ def stage(db, storage, candidate, bundle, manifest):
         candidate: Numbered release ID for the preview.
         bundle: Local directory containing the prepared release files.
         manifest: Expected asset keys and checksums for the bundle.
+
+    Raises:
+        ValueError: The version has a different official candidate, the saved
+            candidate differs from the bundle, or an asset fails verification.
+        ClientError: A required R2 operation fails.
     """
     selected = official_candidate(db, version(candidate))
     if selected is not None and selected != candidate:
@@ -445,7 +568,8 @@ def stage(db, storage, candidate, bundle, manifest):
         size_bytes=len(data),
         content_type="application/json",
     )
-    # Publish the manifest after all its immutable assets exist.
+    # Upload the manifest after verifying its assets. The Neon row is added
+    # last so a catalog lookup can immediately follow its manifest pin.
     try:
         storage.put_object(
             Bucket=RELEASE_BUCKET,
@@ -475,6 +599,10 @@ def publish(db, storage, candidate):
 
     Returns:
         True if the homepage was written, or False for a cleanup-only retry.
+
+    Raises:
+        ValueError: The candidate cannot be published or an asset fails verification.
+        ClientError: A required R2 operation fails.
     """
     release = lookup_release(db, candidate)
     map_version = release["map_version"]
@@ -517,6 +645,12 @@ def publish(db, storage, candidate):
 
 
 def main():
+    """Run the requested release operation and print its result.
+
+    Stage prepares a local bundle before taking the shared release lock.
+    Publish uses the same lock for the homepage switch and preview cleanup.
+    Restore reads the catalog and archive and writes only to the local output directory.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     actions = parser.add_subparsers(dest="action", required=True)
     stage_args = actions.add_parser("stage")

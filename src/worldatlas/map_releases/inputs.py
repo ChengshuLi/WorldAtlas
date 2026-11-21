@@ -13,12 +13,13 @@ SCHEMA = "worldatlas-release-inputs-v1"
 
 
 def validate_replay_sources(configuration, selection, source_pins):
-    """Require staged builds to obtain physical inputs from the archive or R2.
+    """Check that physical inputs can be read again on a fresh machine.
 
     Args:
         configuration: Original build request to include in the archive.
         selection: Frozen source catalog and geographic records.
-        source_pins: Local copies of physical inputs verified by the build.
+        source_pins: Local paths and checksums recorded by the build. These
+            let staging inspect R2-backed input documents already on disk.
 
     Raises:
         ValueError: A physical input would require files from the build machine.
@@ -26,6 +27,8 @@ def validate_replay_sources(configuration, selection, source_pins):
     cached_paths = {pin["sha256"]: Path(pin["path"]) for pin in source_pins}
     sources = configuration["sources"]
     catalog_rows = selection["raw_sources"]
+    # Current source IDs identify exact bytes. Older frozen selections can
+    # also carry a version, which must match when a request specifies one.
     catalog = {(row["source_id"], None): row for row in catalog_rows}
     catalog.update({(row["source_id"], row.get("version")): row for row in catalog_rows})
 
@@ -34,6 +37,7 @@ def validate_replay_sources(configuration, selection, source_pins):
         return catalog.get((reference["source_id"], reference.get("version")))
 
     def r2_source(spec):
+        """Recognize a catalog reference, a pinned object, or an archive member."""
         if not isinstance(spec, dict):
             return False
         if "r2_source" in spec:
@@ -49,6 +53,7 @@ def validate_replay_sources(configuration, selection, source_pins):
         raise ValueError(f"release replay requires {options} for {name}")
 
     def read_document(name, spec):
+        """Inspect inline JSON or reuse the exact R2 document cached by the build."""
         require_source(name, spec, inline=True)
         if "json" in spec:
             return spec["json"]
@@ -70,6 +75,8 @@ def validate_replay_sources(configuration, selection, source_pins):
             require_source(f"land_config.land[{index}].files[{file_index}]", spec, inline=True)
     raw = read_document("raw_manifest", sources["raw_manifest"])
     staging = configuration.get("physical_controls", {}).get("source_staging") or {}
+    # Each shard's ``path`` names a place in the build's cache. The catalog
+    # reference or the direct R2 key and byte size tell a fresh build what to fetch.
     for index, spec in enumerate(raw["files"]):
         name = f"raw_manifest.files[{index}]"
         require_source(name, spec)
@@ -97,7 +104,25 @@ def write_inputs(
     metadata=None,
     source_code=None,
 ):
-    """Use captured run data. Historical gaps are recorded rather than guessed."""
+    """Write the frozen build inputs as a new gzip-compressed JSON file.
+
+    Args:
+        path: Destination file, which must be new.
+        release_id: Exact release ID recorded inside the archive.
+        configuration: Saved map build request.
+        selection: Frozen geographic records and raw source catalog entries.
+        run: Saved run identity and attempt records.
+        report: Saved build report with output references and timings.
+        records: Optional supporting records retained during a historical backfill.
+        raw_sources: Optional raw source records stored separately by a backfill.
+        notes: Optional notes on the provenance or gaps in a historical archive.
+        relocations: Optional mapping from old source locations to new locations.
+        metadata: Optional archive metadata, such as its historical origin.
+        source_code: Captured code snapshots keyed by their archive checksums.
+
+    Raises:
+        FileExistsError: The destination file already exists.
+    """
     content = dict(
         schema=SCHEMA,
         release_id=release_id,
@@ -118,6 +143,7 @@ def write_inputs(
         content["relocations"] = relocations
     if metadata:
         content["metadata"] = metadata
+    # Omit per-run gzip metadata so a staging retry can match the stored bytes.
     with (
         Path(path).open("xb") as output,
         gzip.GzipFile(
@@ -128,6 +154,19 @@ def write_inputs(
 
 
 def read_inputs(raw, release_id):
+    """Read a verified input archive and check its release identity.
+
+    Args:
+        raw: Gzip-compressed JSON bytes already checked against the manifest.
+        release_id: Release ID expected inside the archive.
+
+    Returns:
+        Parsed configuration, selection, and any other saved records.
+
+    Raises:
+        ValueError: The archive format or release ID differs from the expected value.
+        OSError: The gzip stream is invalid.
+    """
     content = json.loads(gzip.decompress(raw))
     if content.get("schema") != SCHEMA or content.get("release_id") != release_id:
         raise ValueError("input archive has a different format or release identity")
@@ -135,7 +174,17 @@ def read_inputs(raw, release_id):
 
 
 def restore_inputs(content, output):
-    """Extract saved configuration and selection for the ordinary build command."""
+    """Extract the saved inputs that a separate map build can use for replay.
+
+    Args:
+        content: Parsed release archive from ``read_inputs``.
+        output: New directory for the saved JSON records and code snapshots.
+
+    Raises:
+        FileExistsError: The destination already exists.
+        ValueError: A captured code snapshot has an invalid identity or contents.
+    """
+    # Check all code snapshots before creating any output files.
     for identity, code in content.get("source_code", {}).items():
         if (
             not isinstance(identity, str)
@@ -148,6 +197,7 @@ def restore_inputs(content, output):
     output.mkdir(parents=True, exist_ok=False)
 
     def relocated(value):
+        """Copy a JSON value while replacing any recorded source locations."""
         if isinstance(value, dict):
             return {key: relocated(item) for key, item in value.items()}
         if isinstance(value, list):
@@ -167,6 +217,8 @@ def restore_inputs(content, output):
         "metadata",
     ):
         if content.get(key) is not None:
+            # Update replay inputs. Keep the historical report and run record
+            # as captured so their paths still describe what the original run did.
             value = (
                 relocated(content[key])
                 if key in ("configuration", "selection", "raw_sources")

@@ -47,7 +47,10 @@ from worldatlas.map_releases.manage_release import (
 
 
 class BundleTests(unittest.TestCase):
+    """Package a completed build from its pinned files and frozen geography."""
+
     def setUp(self):
+        """Create a two-cell build and record its inputs and outputs as pins."""
         work = tempfile.TemporaryDirectory()
         self.addCleanup(work.cleanup)
         root = Path(work.name).resolve()
@@ -107,6 +110,7 @@ class BundleTests(unittest.TestCase):
             "<html><head></head><body></body></html>"
         )
         (self.viewer / "config.json").write_text('{"water_rgb":[84,141,183]}')
+        # The only row contains one water cell and one land cell, both in Africa.
         self.rows = struct.pack("<2I", 0, 2)
         self.runs = struct.pack("<4I", 1, 1, 2, 17)
         final = self.run / "final"
@@ -423,8 +427,12 @@ class BundleTests(unittest.TestCase):
 
 
 class R2VerificationTests(unittest.TestCase):
+    """Check that staging retries preserve exact bytes and file metadata."""
+
     def test_staging_writes_only_its_candidate_and_pins_manifest_last(self):
         class Storage:
+            """Keep object bytes in memory and reject replacement writes."""
+
             def __init__(self):
                 self.objects = {"index.html": b"published"}
                 self.types = {}
@@ -549,6 +557,8 @@ class R2VerificationTests(unittest.TestCase):
 
 
 class CatalogTests(unittest.TestCase):
+    """Check release identities and manifest pins before operating on objects."""
+
     def test_lookups_require_one_release_identity(self):
         database = Mock()
         database.execute.return_value.fetchall.return_value = []
@@ -579,7 +589,10 @@ class CatalogTests(unittest.TestCase):
 
 
 class PublicationTests(unittest.TestCase):
+    """Verify the order of catalog commits, homepage writes, and cleanup."""
+
     def setUp(self):
+        """Prepare a verified candidate and a distinct existing homepage ETag."""
         self.candidate = "v9.0-rc.1"
         self.folder = "releases/" + self.candidate + "/"
         self.files = {
@@ -596,6 +609,14 @@ class PublicationTests(unittest.TestCase):
         self.storage.get_paginator.return_value.paginate.return_value = []
 
     def set_release(self, *, official=False, current=False, bucket=RELEASE_BUCKET, previews=()):
+        """Set the release and preview rows returned by the mock catalog.
+
+        Args:
+            official: Whether this candidate is already official for its version.
+            current: Whether Neon selected this candidate for the homepage.
+            bucket: Bucket recorded in the candidate's catalog row.
+            previews: Unpublished catalog rows found during preview cleanup.
+        """
         raw = json.dumps(self.manifest).encode()
         self.db.execute.return_value.fetchall.side_effect = [
             [(self.candidate, "v9.0", bucket, hashlib.sha256(raw).hexdigest(), official, current)],
@@ -604,11 +625,25 @@ class PublicationTests(unittest.TestCase):
         self.db.execute.return_value.fetchone.return_value = (self.candidate,) if official else None
 
     def assets(self):
+        """Build manifest entries for the publication fixture.
+
+        Returns:
+            Asset records keyed by filename, with metadata matching the fixture bytes.
+        """
         return {name: dict(r2_key=self.folder + name, size_bytes=len(body),
                            sha256=hashlib.sha256(body).hexdigest(), content_type="application/octet-stream")
                 for name, body in self.files.items()}
 
     def get_object(self, *, Bucket, Key):
+        """Return a fresh body for each fake R2 read.
+
+        Args:
+            Bucket: Bucket passed to the fake R2 client.
+            Key: Manifest or asset key within the test candidate's folder.
+
+        Returns:
+            The response body and asset metadata used by the real verifier.
+        """
         name = Key.removeprefix(self.folder)
         if name == "manifest.json":
             return {"Body": io.BytesIO(json.dumps(self.manifest).encode())}
@@ -712,7 +747,17 @@ class PublicationTests(unittest.TestCase):
 
 
 class PreviewRetirementTests(unittest.TestCase):
+    """Exercise cleanup of registered previews and interrupted uploads."""
+
     def manifest(self, identity):
+        """List the objects to delete for a registered preview.
+
+        Args:
+            identity: Preview ID used to form its object keys.
+
+        Returns:
+            The asset keys a verified manifest would supply to cleanup.
+        """
         return dict(
             objects={
                 name: dict(r2_key="releases/" + identity + "/" + name)
@@ -753,6 +798,8 @@ class PreviewRetirementTests(unittest.TestCase):
         paginate = storage.get_paginator.return_value.paginate
 
         def list_pages(*, Bucket, Prefix, Delimiter=None):
+            # The first listing finds candidate folders. Later listings return
+            # each abandoned folder's files, including nested assets.
             self.assertEqual(Bucket, RELEASE_BUCKET)
             if Delimiter == "/":
                 self.assertEqual(Prefix, "releases/v9.0-rc.")
@@ -835,6 +882,8 @@ class PreviewRetirementTests(unittest.TestCase):
 
 
 class CommandTests(unittest.TestCase):
+    """Check how command arguments select the storage, lock, and operation."""
+
     def test_module_entry_point_displays_help(self):
         with patch.object(sys, "argv", ["worldatlas-release", "--help"]), redirect_stdout(io.StringIO()) as output:
             with self.assertRaises(SystemExit) as result:
