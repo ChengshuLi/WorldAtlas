@@ -1348,7 +1348,11 @@ def main() -> None:
         "--divide",
         type=int,
         action="append",
-        help="divide this parent and its necessary ancestors; repeatable",
+        metavar="PARENT_ID",
+        help=(
+            "divide this parent and its ancestors; repeat to select several parents "
+            "(default: divide every parent with saved rules)"
+        ),
     )
     p.add_argument(
         "--reuse-from",

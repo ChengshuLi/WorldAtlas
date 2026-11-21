@@ -18,7 +18,7 @@ The work directory holds the shared `inputs/` cache. Supply an output directory 
 
 | Option | When to use it |
 | --- | --- |
-| `--divide PARENT_ID` | Divide this parent and its ancestors. Repeat for several parents. By default, divide every parent with rules in the saved selection. |
+| `--divide PARENT_ID` | Optional. By default, divide every parent with rules in the saved selection. Supply a parent entity ID to run only its division and the ancestor divisions it needs. For example, `--divide 0` divides World into continents. Repeat the option to select several parents. |
 | `--reuse-from PREVIOUS_RUN` | Start a new build using the physical grid from an earlier local run. The grid and physical inputs must match. By default, the builder tries to reuse all compatible geographic assignments. It checks each complete parent division first and can reuse the land assignments alone if only the water rules changed. |
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
 | `--resume` | Add to the original command to continue an interrupted build in the same output directory. |
