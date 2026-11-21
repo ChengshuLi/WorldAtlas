@@ -286,8 +286,10 @@ class Pipeline:
                 working selection.
             divide: Parent entity IDs to divide, including their necessary
                 ancestors. Defaults to all configured divisions.
-            reuse_from: Earlier run whose matching outputs may be reused.
-            recompute_division: Reuse the physical grid and recompute ownership.
+            reuse_from: Earlier run whose physical grid and all compatible
+                geographic assignments may be reused.
+            recompute_division: Reuse only the physical grid from the earlier run.
+                By default, compatible geographic assignments are also reused.
 
         Raises:
             ValueError: Settings, pinned inputs, or resume options are incompatible.
@@ -1351,12 +1353,18 @@ def main() -> None:
     p.add_argument(
         "--reuse-from",
         type=Path,
-        help="reuse verified physical outputs and compatible geographic calculations",
+        help=(
+            "reuse the verified physical grid and all compatible geographic "
+            "assignments unless --recompute-division is set"
+        ),
     )
     p.add_argument(
         "--recompute-division",
         action="store_true",
-        help="recalculate geographic assignments while reusing the physical grid",
+        help=(
+            "with --reuse-from, reuse only the physical grid and recalculate "
+            "geographic assignments (off by default)"
+        ),
     )
     a = p.parse_args()
     if a.recompute_division and a.reuse_from is None and not a.resume:

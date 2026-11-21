@@ -19,8 +19,8 @@ The work directory holds the shared `inputs/` cache. Supply an output directory 
 | Option | When to use it |
 | --- | --- |
 | `--divide PARENT_ID` | Divide this parent and its ancestors. Repeat for several parents. By default, divide every parent with rules in the saved selection. |
-| `--reuse-from PREVIOUS_RUN` | Start a new build using the physical grid from an earlier local run. The grid and physical inputs must match. The builder also reuses compatible parent divisions and land assignments. |
-| `--recompute-division` | Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
+| `--reuse-from PREVIOUS_RUN` | Start a new build using the physical grid from an earlier local run. The grid and physical inputs must match. By default, the builder tries to reuse all compatible geographic assignments. It checks each complete parent division first and can reuse the land assignments alone if only the water rules changed. |
+| `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
 | `--resume` | Add to the original command to continue an interrupted build in the same output directory. |
 | `--selection INPUT_SELECTION.json` | Use a saved geographic selection in place of reading working records from Neon. To rebuild a release, use its restored configuration, selection and captured code. |
 | `--compare-release VERSION_OR_RC` | Compare every cell with an official release or numbered candidate on the same grid. This needs Neon and R2 access. |
