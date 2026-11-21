@@ -2,8 +2,11 @@ from worldatlas.map_build.water.tests.helpers import index_present
 import unittest
 
 import numpy as np
+from pyproj import Geod
 
 from worldatlas.map_build.water import shared_nearest
+
+REFERENCE_GEOD = Geod(ellps="WGS84")
 
 
 class CoastalDistanceBoundTests(unittest.TestCase):
@@ -26,7 +29,7 @@ class CoastalDistanceBoundTests(unittest.TestCase):
         for i in range(len(lat)):
             for col, (_, code, _) in enumerate(pairs):
                 take = categories == code
-                exact = shared_nearest.GEOD.inv(
+                exact = REFERENCE_GEOD.inv(
                     np.full(int(take.sum()), lon[i]),
                     np.full(int(take.sum()), lat[i]),
                     shore_lon[take],

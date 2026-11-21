@@ -11,7 +11,7 @@ import numpy as np
 from numba import njit
 from pyproj import CRS, Transformer
 
-from worldatlas.geodesy.wgs84 import GEOD
+from worldatlas.geodesy.wgs84 import geodesic_distances
 UNKNOWN = -1
 
 
@@ -49,8 +49,7 @@ def neighbor_distances_metres(grid):
             b = slice(max(0, dc), min(width, width + dc))
             if n == 0 or width <= abs(dc):
                 continue
-            length = GEOD.inv(lon[:n, a], lat[:n, a],
-                              lon[dr:n + dr, b], lat[dr:n + dr, b])[2]
+            length = geodesic_distances(lon[:n, a], lat[:n, a], lon[dr:n + dr, b], lat[dr:n + dr, b])
             if not np.isfinite(length).all() or np.any(length <= 0):
                 raise ValueError('invalid neighboring-cell distance')
             distances[plane, first:first + n, a] = length

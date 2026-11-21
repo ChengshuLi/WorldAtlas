@@ -4,7 +4,7 @@ No land policy. Enumerate attainable *longitude gaps*, not all cell pairs.
 """
 
 import math, numpy as np
-from worldatlas.geodesy.wgs84 import GEOD, MIN_RADIUS
+from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances
 
 # Keep more candidates for the exact calculation when pruning by lower bounds.
 CUSHION_M = 1000.0
@@ -12,14 +12,7 @@ CUSHION_M = 1000.0
 
 def inverse(lat1, lat2, gaps, step):
     gaps = np.asarray(gaps, dtype=np.float64)
-    lon = gaps * step
-    if len(gaps) == 1:
-        return np.asarray([GEOD.inv(0, float(lat1), float(lon[0]), float(lat2))[2]])
-    return np.asarray(
-        GEOD.inv(
-            np.zeros(len(gaps)), np.full(len(gaps), lat1), lon, np.full(len(gaps), lat2)
-        )[2]
-    )
+    return geodesic_distances(0.0, lat1, gaps * step, lat2)
 
 
 def run_pair(y, a, b, yy, c, d, width, north=90.0, incumbent=math.inf):
@@ -119,14 +112,7 @@ def run_pairs_batch(y, a, b, records, width, north=90.0, incumbent=math.inf):
     keep = np.flatnonzero(angles * MIN_RADIUS <= incumbent + CUSHION_M)
     if not len(keep):
         return {}, len(r)
-    gg = gap[keep] * step
-    ll = lat2[keep]
-    if len(keep) == 1:
-        ds = np.asarray([GEOD.inv(0.0, lat1, float(gg[0]), float(ll[0]))[2]])
-    else:
-        ds = np.asarray(
-            GEOD.inv(np.zeros(len(keep)), np.full(len(keep), lat1), gg, ll)[2]
-        )
+    ds = geodesic_distances(0.0, lat1, gap[keep] * step, lat2[keep])
     selected_codes = codes[keep]
     result = {}
     for code in np.unique(selected_codes):

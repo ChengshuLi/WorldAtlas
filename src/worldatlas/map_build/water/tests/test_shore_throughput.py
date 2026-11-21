@@ -5,6 +5,7 @@ from worldatlas.map_build.water.tests.shore_reference import (
 """Independent dense/brute-force checks for sparse shore execution."""
 import unittest
 import numpy as np
+from worldatlas.geodesy.wgs84 import geodesic_distances
 from worldatlas.map_build.water import shared_nearest as shore
 from worldatlas.map_build.water.tests.helpers import rle
 
@@ -82,7 +83,7 @@ class SparseShoreTests(unittest.TestCase):
         qlon = np.r_[rng.uniform(-180, 180, 50), 180.0, -180.0, 180.0, -180.0]
         expected = np.array(
             [
-                shore.geodesic_distances(
+                geodesic_distances(
                     np.full(len(lat), x), np.full(len(lat), y), lon, lat
                 ).min()
                 for (y, x) in zip(qlat, qlon)
@@ -103,7 +104,7 @@ class SparseShoreTests(unittest.TestCase):
             "category": np.full(len(lat), 17, dtype=np.uint8),
         }
         (_, tree) = shore.make_indexes(data, [("a", 17, 1)])[17]
-        expected = shore.geodesic_distances([0.0], [0.0], [0.0], [1.003])[0]
+        expected = geodesic_distances([0.0], [0.0], [0.0], [1.003])[0]
         actual = shore.exact_minima_by_ordered_chord(
             shore.unit([0.0], [0.0]), np.array([0.0]), np.array([0.0]), data, tree
         )

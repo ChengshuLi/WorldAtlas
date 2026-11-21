@@ -9,7 +9,7 @@ from __future__ import annotations
 import math
 import numpy as np
 from scipy.spatial import cKDTree
-from worldatlas.geodesy.wgs84 import GEOD, MIN_RADIUS
+from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances
 
 
 def unit(lat, lon):
@@ -17,28 +17,6 @@ def unit(lat, lon):
     lon = np.deg2rad(lon)
     c = np.cos(lat)
     return np.column_stack((c * np.cos(lon), c * np.sin(lon), np.sin(lat)))
-
-
-def geodesic_distances(lon, lat, target_lon, target_lat):
-    lon, lat, target_lon, target_lat = np.broadcast_arrays(
-        *[np.asarray(v, dtype=np.float64) for v in (lon, lat, target_lon, target_lat)]
-    )
-    if lon.ndim != 1:
-        raise ValueError("distance inputs must be one-dimensional")
-    if not len(lon):
-        return np.empty(0, dtype=np.float64)
-    if len(lon) == 1:
-        return np.asarray(
-            [
-                GEOD.inv(
-                    float(lon[0]),
-                    float(lat[0]),
-                    float(target_lon[0]),
-                    float(target_lat[0]),
-                )[2]
-            ]
-        )
-    return np.asarray(GEOD.inv(lon, lat, target_lon, target_lat)[2], dtype=np.float64)
 
 
 def crop(rows, runs, y, x0, x1, width):
@@ -206,8 +184,8 @@ def scan_exact_minimum(point, lon, lat, data, best):
         if len(keep):
             indices = keep + first
             distances = geodesic_distances(
-                np.full(len(keep), lon),
-                np.full(len(keep), lat),
+                lon,
+                lat,
                 data["lon"][indices],
                 data["lat"][indices],
             )

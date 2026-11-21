@@ -12,7 +12,7 @@ from shapely.geometry import LineString, Point
 from shapely.ops import substring
 from shapely.strtree import STRtree
 
-from worldatlas.geodesy.wgs84 import GEOD, geodesic, geodesic_distance
+from worldatlas.geodesy.wgs84 import geodesic, geodesic_distance, geodesic_distances
 from worldatlas.source_imports.watersheds.drainage import cells_draining_to
 
 
@@ -138,8 +138,7 @@ class Divide:
             raise ValueError('selected divide is empty')
         keys = sorted(self.coordinates)
         coordinates = np.asarray([self.coordinates[key] for key in keys])
-        lengths = GEOD.inv(coordinates[:, 0], coordinates[:, 1],
-                           np.full(len(keys), point[0]), np.full(len(keys), point[1]))[2]
+        lengths = geodesic_distances(coordinates[:, 0], coordinates[:, 1], point[0], point[1])
         if not np.isfinite(lengths).all():
             raise ValueError('invalid geographic connector anchor')
         key = keys[int(np.argmin(lengths))]
@@ -197,7 +196,7 @@ class Divide:
         positions = np.asarray(list(coordinates.values()))
         lon1, lat1 = positions[rows].T
         lon2, lat2 = positions[columns].T
-        lengths = GEOD.inv(lon1, lat1, lon2, lat2)[2]
+        lengths = geodesic_distances(lon1, lat1, lon2, lat2)
         if not np.isfinite(lengths).all():
             raise ValueError('invalid WGS84 boundary coordinates')
         # Each divide edge is traversable in both directions.
@@ -295,8 +294,7 @@ def route_line_through_waypoints(line, points, max_step_m):
         if (len(point) != 2 or not np.isfinite(point).all() or
                 abs(point[0]) > 180 or abs(point[1]) > 90):
             raise ValueError('waypoints require finite WGS84 coordinates')
-        lengths = GEOD.inv(coordinates[:, 0], coordinates[:, 1],
-                           np.full(len(coordinates), point[0]), np.full(len(coordinates), point[1]))[2]
+        lengths = geodesic_distances(coordinates[:, 0], coordinates[:, 1], point[0], point[1])
         index = int(np.argmin(lengths))
         if index < previous:
             raise ValueError('waypoints must follow the ordered divide')
@@ -501,8 +499,7 @@ def connect_divide_to_stream_head(grid, flow, labels, point, inside_group, outsi
         raise ValueError('no source-backed divide flows to the selected drainage group')
     rows, columns = np.divmod(eligible, width)
     lon, lat = to_geo.transform(*grid.cell_coordinates(rows, columns), errcheck=True)
-    lengths_to_point = GEOD.inv(lon, lat, np.full(lon.shape, point[0]),
-                              np.full(lat.shape, point[1]))[2]
+    lengths_to_point = geodesic_distances(lon, lat, point[0], point[1])
     terminal = int(eligible[np.argmin(lengths_to_point)])
     lengths = {terminal: 0.}
     candidates = []

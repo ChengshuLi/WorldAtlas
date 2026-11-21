@@ -1,6 +1,7 @@
 import unittest
 import numpy as np
 from scipy.spatial import cKDTree
+from worldatlas.geodesy.wgs84 import geodesic_distances
 from worldatlas.map_build.water import shared_nearest as s
 
 
@@ -26,7 +27,7 @@ def run(lat, lon, qlat, qlon):
     )[0]
     expect = float(
         np.min(
-            s.geodesic_distances(
+            geodesic_distances(
                 np.full(len(lat), qlon), np.full(len(lat), qlat), d["lon"], d["lat"]
             )
         )
@@ -84,7 +85,7 @@ class Tests(unittest.TestCase):
         got = s.exact_minima_by_ordered_chord(
             point[None], np.array([0.0]), np.array([0.0]), data, TiedTree()
         )[0]
-        expected = float(s.geodesic_distances([0.0], [0.0], [0.0], [10.0])[0])
+        expected = float(geodesic_distances([0.0], [0.0], [0.0], [10.0])[0])
         self.assertAlmostEqual(got, expected, places=6)
 
     def test_antipodal_near_ties_and_poles(self):

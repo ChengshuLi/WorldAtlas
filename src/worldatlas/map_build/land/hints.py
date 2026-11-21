@@ -2,7 +2,7 @@
 
 import math
 import numpy as np
-from worldatlas.geodesy.wgs84 import GEOD, MIN_RADIUS as MIN_CURVATURE_RADIUS
+from worldatlas.geodesy.wgs84 import MIN_RADIUS as MIN_CURVATURE_RADIUS, geodesic_distances
 
 BOUND_CUSHION_M = 0.001
 DISTANCE_BATCH = 65536
@@ -12,15 +12,6 @@ def _xyz(lat, lon):
     a = np.deg2rad(lat)
     b = np.deg2rad(lon)
     return np.column_stack((np.cos(a) * np.cos(b), np.cos(a) * np.sin(b), np.sin(a)))
-
-
-def _inverse_distances(lon1, lat1, lon2, lat2):
-    if len(lon1) == 1:
-        return np.asarray(
-            [GEOD.inv(float(lon1[0]), float(lat1[0]), float(lon2[0]), float(lat2[0]))[2]],
-            dtype=np.float64,
-        )
-    return np.asarray(GEOD.inv(lon1, lat1, lon2, lat2)[2], dtype=np.float64)
 
 
 def wgs84_nearest_categories(tree, latitudes, longitudes, codes, query_lat, query_lon):
@@ -58,7 +49,7 @@ def wgs84_nearest_categories(tree, latitudes, longitudes, codes, query_lat, quer
     xyz = _xyz(qlat, qlon)
     _, first = tree.query(xyz, k=1, workers=1)
     first = np.asarray(first, dtype=np.int64)
-    upper = _inverse_distances(qlon, qlat, lon[first], lat[first])
+    upper = geodesic_distances(qlon, qlat, lon[first], lat[first])
     if np.any(~np.isfinite(upper)) or np.any(upper < 0):
         raise ValueError('invalid WGS84 upper bound')
     angle = np.minimum(math.pi, (upper + BOUND_CUSHION_M) / MIN_CURVATURE_RADIUS)
@@ -77,7 +68,7 @@ def wgs84_nearest_categories(tree, latitudes, longitudes, codes, query_lat, quer
             return
         qi = np.concatenate(queries)
         ix = np.concatenate(samples)
-        distances = _inverse_distances(qlon[qi], qlat[qi], lon[ix], lat[ix])
+        distances = geodesic_distances(qlon[qi], qlat[qi], lon[ix], lat[ix])
         if np.any(~np.isfinite(distances)) or np.any(distances < 0):
             raise ValueError('invalid WGS84 distance')
         previous = best.copy()

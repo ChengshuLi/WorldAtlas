@@ -3,7 +3,7 @@
 import math
 import numpy as np
 from scipy.spatial import cKDTree
-from worldatlas.geodesy.wgs84 import GEOD, MIN_RADIUS as M_MIN
+from worldatlas.geodesy.wgs84 import MIN_RADIUS as M_MIN, geodesic_distances
 
 
 def _unit(lat, lon):
@@ -138,12 +138,7 @@ class CertificateIndex:
             _, ix = self.reptrees[code].query(xyz[k], k=1, workers=1)
             p = self.repcoords[code][ix]
             chosen[k] = p
-            if len(k) == 1:
-                upper[k] = GEOD.inv(
-                    float(lon[k[0]]), float(lat[k[0]]), float(p[0, 1]), float(p[0, 0])
-                )[2]
-            else:
-                upper[k] = GEOD.inv(lon[k], lat[k], p[:, 1], p[:, 0])[2]
+            upper[k] = geodesic_distances(lon[k], lat[k], p[:, 1], p[:, 0])
         if not np.all(np.isfinite(upper)) or np.any(upper < 0):
             raise ValueError('invalid WGS84 upper')
         return upper, chosen
