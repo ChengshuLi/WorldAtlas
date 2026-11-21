@@ -265,22 +265,40 @@ class Pipeline:
             raise ValueError(
                 "new output inside input_root, outside its input files, required"
             )
-        if resume and not (self.out / "run-identity.json").is_file():
+        identity_path = self.out / "run-identity.json"
+        if resume and not identity_path.is_file():
             raise ValueError(
                 "run has no supported checkpoint identity; preserve it and start a fresh run"
             )
+        previous = read(identity_path) if resume else None
+        if previous is not None:
+            if divide is not None and divide != previous.get("divide"):
+                raise ValueError("resume uses a different --divide selection")
+            if (
+                compare_release is not None
+                and compare_release != previous.get("compare_release")
+            ):
+                raise ValueError("resume uses a different --compare-release selection")
+            divide = previous.get("divide")
+            compare_release = previous.get("compare_release")
+        if physical_from is not None and reuse_from is not None:
+            raise ValueError("choose --reuse-from once")
+        reuse = reuse_from or physical_from
+        if reuse is not None:
+            reuse = str(Path(reuse).resolve())
+        if previous is not None:
+            if "reuse_from" in previous:
+                if reuse is not None and reuse != previous["reuse_from"]:
+                    raise ValueError("resume uses a different --reuse-from run")
+                reuse = previous["reuse_from"]
+            elif reuse is None:
+                # Older identities recorded only the underlying physical producer.
+                reuse = previous.get("physical_reuse", {}).get("source_run")
+        self.reuse_from = Path(reuse) if reuse is not None else None
         validate_runtime()
         self.runtime = runtime_identity()
         self.resume = resume
         self.requested_parents = divide
-        if physical_from is not None and reuse_from is not None:
-            raise ValueError("choose --reuse-from once")
-        self.reuse_from = (
-            Path(reuse_from or physical_from).resolve()
-            if reuse_from or physical_from
-            else None
-        )
-        physical_from = self.reuse_from
         self.source_pins = []
         self.input_cache = {}
         self.acquisition_intervals = []
@@ -344,14 +362,8 @@ class Pipeline:
         ):
             raise ValueError("both reference stream pins are required")
         self.collect_source_files()
-        if resume and physical_from is None:
-            physical_from = (
-                read(self.out / "run-identity.json")
-                .get("physical_reuse", {})
-                .get("source_run")
-            )
         self.physical_reuse = (
-            physical_reference(physical_from, self.sources) if physical_from else None
+            physical_reference(self.reuse_from, self.sources) if self.reuse_from else None
         )
         if self.physical_reuse is not None:
             self.source_pins.extend(
@@ -380,6 +392,8 @@ class Pipeline:
             ).hexdigest()
         if compare_release is not None:
             self.identity["compare_release"] = compare_release
+        if previous is None or "reuse_from" in previous:
+            self.identity["reuse_from"] = reuse
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
         if not resume:
@@ -388,9 +402,7 @@ class Pipeline:
                 write(selected_path, self.selection)
         self.run_lock = RunLock(self.out / "run.lock")
         try:
-            identity_path = self.out / "run-identity.json"
             if resume:
-                previous = read(identity_path)
                 provenance = {
                     "code",
                     "repository",

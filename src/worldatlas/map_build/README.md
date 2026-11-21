@@ -20,7 +20,7 @@ The work directory holds the shared `inputs/` cache. Each new build needs a new 
 | --- | --- |
 | `--divide PARENT_ID` | Select a parent and its required ancestors. Repeat for several parents. By default, divide all parents with rules in the frozen selection. |
 | `--reuse-from PREVIOUS_RUN` | Start a new build using verified physical outputs. The builder can reuse a shorter, aligned northern grid, an unchanged parent division, or an unchanged land calculation after a water-only edit. |
-| `--resume` | Continue the same output directory with its saved selection and checkpoints. Repeat the original `--divide` and `--compare-release` options if given. Repeat `--reuse-from` to keep the same geographic reuse source. |
+| `--resume` | Continue the same output directory with its saved selection, checkpoints, parent choices, comparison and reuse source. Resume accepts the saved options when repeated and rejects different choices. |
 | `--selection INPUT_SELECTION.json` | Rebuild using saved geographic values. For a retained release, first [restore its inputs](../map_releases/README.md#restore-inputs) and use its configuration and captured code. |
 | `--compare-release VERSION_OR_RC` | Compare with an official version or numbered candidate from the release catalog. This option also needs database and R2 access for the comparison. |
 
@@ -68,7 +68,7 @@ This replaces the environment's native GDAL library; its existing Python binding
 
 ### Inside one parent division
 
-A rule can select polygons and physical connected components within its parent. Multiple selectors form a union. With neither selector, use the parent. The geometric scope determines where boundary lines divide the domain. Physical class and `unassigned_only` constrain the cells the rule can claim. In component mode, a polygon selects the whole component when it covers more than half its cells. A division in component mode counts how many of the component’s cells fall in faces labelled for each child. It assigns the whole component to a child with a strict majority.
+A rule can select polygons and physical connected components within its parent. Multiple selectors form a union. With neither selector, use the parent. The geometric scope determines where boundary lines divide the domain. Physical class and `unassigned_only` constrain the cells the rule can claim. In component mode, a polygon selects the whole component when it covers more than half its cells. A division in component mode assigns the whole component to the child labelling the single face that contains more than half of its cells.
 
 | Order | Rule operations | Calculation |
 | --- | --- | --- |

@@ -314,8 +314,14 @@ class Fixture(unittest.TestCase):
                 self.assertEqual(runner.sources["reference_config"].read_bytes(), release_config)
             finally:
                 runner.close()
-            resumed = pipeline.Pipeline(config, compare_release="v8.0", resume=True)
-            resumed.close()
+            resumed = pipeline.Pipeline(config, resume=True)
+            try:
+                self.assertEqual(resumed.identity["compare_release"], "v8.0")
+                self.assertEqual(resumed.sources, runner.sources)
+            finally:
+                resumed.close()
+            with self.assertRaisesRegex(ValueError, "different --compare-release"):
+                pipeline.Pipeline(config, compare_release="v8.1", resume=True)
             self.assertEqual(
                 [call.args[0] for call in physical_build.make_r2_client.call_args_list],
                 [raw_endpoint] + [release_endpoint] * len(stored),

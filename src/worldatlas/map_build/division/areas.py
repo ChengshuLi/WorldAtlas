@@ -43,17 +43,27 @@ class Faces:
         self.offsets._mmap.close()
         self.nodes._mmap.close()
 
-    def row(self, y):
+    def row(self, y, *, by_face=False):
+        """Read one row of labelled faces.
+
+        Args:
+            y: Grid row index.
+            by_face: Return distinct face IDs instead of their child entity IDs.
+
+        Returns:
+            Run ends and values covering the row. Zero marks unlabelled cells.
+        """
         nodes = np.asarray(self.nodes[int(self.offsets[y]) : int(self.offsets[y + 1])])
         if not len(nodes):
             return complete_row(self.grid.width, ())
         positions = np.searchsorted(self.roots, nodes[:, 2])
         safe = np.minimum(positions, len(self.roots) - 1)
         matched = (positions < len(self.roots)) & (self.roots[safe] == nodes[:, 2])
-        owners = np.where(matched, self.owners[safe], 0)
+        # Use one-based label positions so zero always means unlabelled.
+        values = np.where(matched, safe + 1 if by_face else self.owners[safe], 0)
         return complete_row(
             self.grid.width,
-            np.column_stack((nodes[:, :2], owners)),
+            np.column_stack((nodes[:, :2], values)),
         )
 
 
@@ -63,7 +73,7 @@ def component_owners(scope, faces):
     counts = defaultdict(int)
     eligible = scope.eligible_components()
     for y in scope.query_rows():
-        face = faces.row(y)
+        face = faces.row(y, by_face=True)
         for kind, roots in eligible.items():
             components = scope.components(kind)
             records = components.row(y)
@@ -74,11 +84,10 @@ def component_owners(scope, faces):
                 scope.grid.width,
                 np.column_stack((chosen[:, :2], chosen[:, 2].astype(np.uint64) + 1)),
             )
-            starts, ends, (r, owner) = overlay(component, face)
-            valid = (r != 0) & (owner != 0)
-            keys = ((r[valid].astype(np.uint64) - 1) << 32) | owner[valid].astype(
-                np.uint64
-            )
+            starts, ends, (component_ids, face_ids) = overlay(component, face)
+            valid = (component_ids != 0) & (face_ids != 0)
+            component_roots = component_ids[valid].astype(np.uint64) - 1
+            keys = (component_roots << 32) | face_ids[valid].astype(np.uint64)
             unique, inverse = np.unique(keys, return_inverse=True)
             lengths = np.zeros(len(unique), dtype=np.uint64)
             np.add.at(lengths, inverse, (ends[valid] - starts[valid]).astype(np.uint64))
@@ -86,18 +95,16 @@ def component_owners(scope, faces):
                 counts[kind, int(key) >> 32, int(key) & 0xFFFFFFFF] += int(n)
     for kind, roots in eligible.items():
         totals = scope.components(kind).totals()
-        by_root = defaultdict(list)
-        for (which, root, owner), n in counts.items():
-            if which == kind and n * 2 > totals[root]:
-                by_root[root].append(owner)
-        result = {}
+        result = {
+            root: int(faces.owners[face_id - 1])
+            for (which, root, face_id), n in counts.items()
+            if which == kind and n * 2 > totals[root]
+        }
         for root in map(int, roots):
-            candidates = by_root[root]
-            if len(candidates) != 1:
+            if root not in result:
                 raise ValueError(
                     f"rule {scope.rule['id']}: component {root} lacks one majority face"
                 )
-            result[root] = candidates[0]
         results[kind] = result
     return results
 

@@ -248,6 +248,38 @@ class EndToEndTests(unittest.TestCase):
                     (root / "reused/division/report.json").read_text()
                 )
                 self.assertTrue(division["parents"]["0"]["reused"])
+
+                interrupted = Pipeline(
+                    cfg,
+                    root / "continued",
+                    work_dir=root,
+                    selection=selected,
+                    divide=[0],
+                    reuse_from=root / "reused",
+                )
+                interrupted.close()
+                resumed = Pipeline(cfg, root / "continued", work_dir=root, resume=True)
+                self.assertEqual(resumed.requested_parents, [0])
+                self.assertEqual(resumed.reuse_from, (root / "reused").resolve())
+                self.assertEqual(
+                    resumed.physical_reuse["source_run"], str((root / "run").resolve())
+                )
+                self.assertEqual(
+                    resumed.run()["final"]["runs"]["sha256"],
+                    report["final"]["runs"]["sha256"],
+                )
+                with self.assertRaisesRegex(ValueError, "different --divide"):
+                    Pipeline(
+                        cfg, root / "continued", work_dir=root, resume=True, divide=[81]
+                    )
+                with self.assertRaisesRegex(ValueError, "different --reuse-from"):
+                    Pipeline(
+                        cfg,
+                        root / "continued",
+                        work_dir=root,
+                        resume=True,
+                        reuse_from=root / "run",
+                    )
             finally:
                 with psycopg.connect(url) as db:
                     db.execute(

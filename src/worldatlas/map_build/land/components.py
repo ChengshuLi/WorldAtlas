@@ -6,10 +6,6 @@ from pathlib import Path
 import math
 
 import numpy as np
-from pyproj import Transformer
-from pyproj.enums import TransformDirection
-from shapely import contains_xy, intersects_xy
-from shapely.geometry import shape
 
 from worldatlas.map_build.core.geometry import (
     PolygonRasterizer,
@@ -197,67 +193,4 @@ class ComponentGrid:
                         )
                         if count:
                             counts[root] = counts.get(root, 0) + count
-        return counts
-
-    def profile_projected(self, geometry, operations, candidates):
-        """Query native source geometry using declared WGS84-to-source operations.
-
-        Keeping the source's native segments avoids approximating projected
-        polygon edges as straight longitude/latitude lines. Operations and their
-        geographic areas are source metadata supplied by the selected rule.
-        """
-        candidates = set(candidates)
-        if not candidates:
-            return {}
-        definitions = {record["id"]: record for record in operations["operations"]}
-        order = operations["operation_preference"]
-        if len(set(order)) != len(order) or set(order) != set(definitions):
-            raise ValueError("coordinate operations need one complete preference order")
-        transforms = [
-            (definitions[key], Transformer.from_pipeline(definitions[key]["pipeline"]))
-            for key in order
-        ]
-        source = shape(geometry)
-        counts = {
-            root: {"inside": 0, "boundary": 0, "unknown": 0} for root in candidates
-        }
-        for y in range(self.grid.height):
-            for a, b, root in self.row(y):
-                root = int(root)
-                if root not in candidates:
-                    continue
-                longitude = self.grid.longitude(np.arange(int(a), int(b)))
-                latitude = np.full(len(longitude), float(self.grid.latitude(y)))
-                available = np.ones(len(longitude), dtype=bool)
-                for definition, transform in transforms:
-                    area = definition["area_bounds"]
-                    inside_lon = (
-                        (longitude >= area["west"]) & (longitude <= area["east"])
-                        if area["west"] <= area["east"]
-                        else (longitude >= area["west"]) | (longitude <= area["east"])
-                    )
-                    chosen = (
-                        available
-                        & inside_lon
-                        & (latitude >= area["south"])
-                        & (latitude <= area["north"])
-                    )
-                    if not chosen.any():
-                        continue
-                    x, z = transform.transform(
-                        longitude[chosen],
-                        latitude[chosen],
-                        direction=TransformDirection.INVERSE,
-                        errcheck=True,
-                    )
-                    if not (np.isfinite(x).all() and np.isfinite(z).all()):
-                        raise ValueError(
-                            "coordinate operation produced invalid source coordinates"
-                        )
-                    inside = contains_xy(source, x, z)
-                    boundary = intersects_xy(source, x, z) & ~inside
-                    counts[root]["inside"] += int(inside.sum())
-                    counts[root]["boundary"] += int(boundary.sum())
-                    available[chosen] = False
-                counts[root]["unknown"] += int(available.sum())
         return counts

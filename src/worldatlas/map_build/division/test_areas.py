@@ -12,6 +12,8 @@ from worldatlas.map_build.core.layers import patch_rows, write_layer
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.areas import divide_area
 from worldatlas.map_build.division.scope import Scope
+from worldatlas.map_build.land.components import ComponentGrid
+from worldatlas.map_build.land.connected import build_components
 
 
 class AreaOperations(unittest.TestCase):
@@ -29,21 +31,24 @@ class AreaOperations(unittest.TestCase):
             type=kind, coordinates=[coordinates] if kind == "Polygon" else coordinates
         )
 
-    def solve(self, root, labels, *, unit="cell"):
+    def solve(self, root, labels, *, unit="cell", physical=None, cuts=None):
         grid = self.grid
         scope_area = self.geometry(
             "Polygon", [(4, 2), (20, 2), (20, 10), (4, 10), (4, 2)]
         )
         rule = dict(
             id="four-faces",
-            physical_class="mixed",
+            physical_class="land" if unit == "component" else "mixed",
             unit=unit,
             unassigned_only=False,
             features={"scope_area": [dict(geometry=scope_area)]},
         )
-        physical = np.ones((12, 24), dtype=np.uint32)
-        physical[3:5, 6:10] = 17
-        physical[7:9, 15:18] = 17
+        if physical is None:
+            physical = np.ones((12, 24), dtype=np.uint32)
+            physical[3:5, 6:10] = 17
+            physical[7:9, 15:18] = 17
+        if cuts is None:
+            cuts = ([(12, 2), (12, 10)], [(4, 6), (12, 6), (20, 6)])
         for name, data in [
             ("physical", physical),
             ("parent", np.ones_like(physical)),
@@ -51,6 +56,18 @@ class AreaOperations(unittest.TestCase):
         ]:
             write_layer(root / name, grid, patch_rows(data, grid.bounds, grid))
         with ExitStack() as stack:
+            components = None
+            if unit == "component":
+                build_components(grid, root / "physical", root / "components")
+                components = stack.enter_context(
+                    ComponentGrid(root / "physical", root / "components", grid)
+                )
+
+            def component_grid(kind):
+                self.assertEqual(kind, "land")
+                self.assertIsNotNone(components)
+                return components
+
             data = [
                 stack.enter_context(open_grid(root / name, grid))
                 for name in ("physical", "parent", "snapshot")
@@ -59,11 +76,11 @@ class AreaOperations(unittest.TestCase):
                 rule,
                 grid,
                 *data,
-                lambda kind: self.fail("cell mode needs no components"),
+                component_grid,
             )
             lines = [
                 dict(geometry=self.geometry("LineString", positions))
-                for positions in ([(12, 2), (12, 10)], [(4, 6), (12, 6), (20, 6)])
+                for positions in cuts
             ]
             targets = [
                 dict(
@@ -99,3 +116,25 @@ class AreaOperations(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaisesRegex(ValueError, "has no face label"):
                 self.solve(Path(temp), [(101, 8, 4), (807, 16, 4), (503, 8, 8)])
+
+    def test_component_majority_requires_a_single_face(self):
+        physical = np.ones((12, 24), dtype=np.uint32)
+        physical[4, 5:15] = 17
+        labels = [(101, 6, 4), (202, 10, 4), (101, 14, 4)]
+
+        def solve(root, second_cut):
+            return self.solve(
+                root,
+                labels,
+                unit="component",
+                physical=physical,
+                cuts=([(8, 2), (8, 10)], [(second_cut, 2), (second_cut, 10)]),
+            )
+
+        with tempfile.TemporaryDirectory() as temp:
+            # The two 3-cell faces with the same owner cannot win together.
+            with self.assertRaisesRegex(ValueError, "lacks one majority face"):
+                solve(Path(temp), 12)
+        with tempfile.TemporaryDirectory() as temp:
+            # The middle face now contains 6 of the component's 10 cells.
+            self.assertEqual(solve(Path(temp), 14)["counts"], {"202": 10})
