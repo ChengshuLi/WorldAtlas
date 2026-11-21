@@ -1,4 +1,4 @@
-"""Test terrain flow and its propagation of known drainage destinations."""
+"""Test where water goes on small grids with known heights and outlets."""
 
 import unittest
 
@@ -20,8 +20,8 @@ class DrainageTests(unittest.TestCase):
         labels = trace_destination_masks(flow, seeds, np.full(flow.shape, -1))
         for group in seeds:
             np.testing.assert_array_equal(labels[group], [[True, True, False, False]])
-        # Shared drainage remains known in both masks; unique-only operations
-        # cannot silently turn it into one destination.
+        # The first two cells reach both groups. They cannot be labeled
+        # with a single group, so the single-label grid shows -1.
         np.testing.assert_array_equal(unique_destination_labels(labels, flow.shape), [[-1, -1, -1, -1]])
 
     def test_three_real_groups_and_a_shared_seed_do_not_need_consecutive_ids(self):
@@ -114,8 +114,8 @@ class DrainageTests(unittest.TestCase):
         seeds[2, 2] = 17
         labels = trace_cell_group_labels(flow, seeds)
         np.testing.assert_array_equal(labels[1:4, 1:4], np.full((3, 3), 17))
-        # Flat cells at the crop edge can exit the domain; their destination is
-        # not established merely by the presence of a known sink farther in.
+        # The corner cell stops at the edge. Its route never reaches the
+        # known sink in the middle, so the corner remains unknown.
         self.assertEqual(labels[0, 0], -1)
 
     def test_known_water_outlets_stop_flat_routing_through_the_ocean(self):

@@ -1,4 +1,4 @@
-"""Run a real native-grid construction and its database writes with small sources."""
+"""Build a small boundary from files and check how the importer saves it."""
 from contextlib import nullcontext
 import hashlib
 import io
@@ -43,7 +43,10 @@ def write_basin_archive(archive, *, north=.02):
 
 
 def fixtures(directory):
-    """Write a six-cell-wide ridge, two basin polygons, and two source lines.
+    """Write the tiny maps needed for a complete boundary test.
+
+    Each row of heights is 0, 1, 2, 2, 1, 0. Water drains away from
+    the two middle columns toward the two different basins.
 
     Args:
         directory: Temporary directory for the source files.
@@ -380,7 +383,7 @@ class StorageTests(unittest.TestCase):
         )
 
     def build(self):
-        """Run the registered importer against the local source and database fixtures.
+        """Run the importer using the test files and disposable database.
 
         Returns:
             The importer report for the saved geometry.

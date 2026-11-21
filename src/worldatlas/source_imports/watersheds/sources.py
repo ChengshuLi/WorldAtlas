@@ -1,4 +1,4 @@
-"""Read selected provider vertices, ways and river relations from verified files."""
+"""Find the files, points, and lines named in a watershed recipe."""
 from itertools import pairwise
 import json
 from typing import NotRequired, TypedDict
@@ -15,27 +15,42 @@ from worldatlas.source_imports.watersheds.waterways import Waterways
 
 
 class FileSelection(TypedDict):
-    """Select a recipe source and optionally one of its ZIP members."""
+    """Name a source file and optionally a file inside its ZIP.
+
+    For example, ``{"source": "dem", "member": "north.tif"}`` selects
+    north.tif inside the file named dem in the recipe.
+    """
 
     source: NonEmptyText
     member: NotRequired[NonEmptyText]
 
 
 class GeoJSONLine(FileSelection):
-    """Select a line by its position in a GeoJSON feature collection."""
+    """Pick a line from a GeoJSON file by its position.
+
+    For example, ``{"source": "author", "geojson_feature": 2}`` picks the
+    third feature in the file. The first feature is at position 0.
+    """
 
     geojson_feature: int
 
 
 class OsmWayLine(TypedDict):
-    """Select a complete way from an OSM extract."""
+    """Pick one OSM way, such as ``{"source": "coast", "way": 42}``.
+
+    A way is an ordered list of saved points. Together they draw the line.
+    """
 
     source: NonEmptyText
     way: NonEmptyText | int
 
 
 class OsmRiverLine(TypedDict):
-    """Select a river relation's member ways by role."""
+    """Pick the pieces of a river that share a role in an OSM relation.
+
+    A relation groups related OSM objects. A recipe can select the ways
+    marked ``main_stream`` to draw the main river channel.
+    """
 
     source: NonEmptyText
     relation: NonEmptyText | int
@@ -46,54 +61,70 @@ SourceLine = GeoJSONLine | OsmWayLine | OsmRiverLine
 
 
 class Sources:
-    """Resolve source aliases and reuse the geometry read from their files.
+    """Look up the local files and map features a recipe names.
 
     Args:
-        files: Verified local paths keyed by the recipe's source aliases.
+        files: Verified local files by recipe name. For example, the name
+            ``dem`` might refer to the local file ``elevation.tif``.
     """
 
     def __init__(self, files):
         self.files = files
-        # Cache reads by file and selection so separate steps can share results.
-        # The constructor separately keeps the names the recipe gives its lines.
+        # Reuse an OSM network or a PBF point if another step asks for it again.
         self.networks = {}
         self.points = {}
 
     def resolve_raster_path(self, specification):
-        """Resolve a terrain file or explicitly selected ZIP member for GDAL.
+        """Tell GDAL where to open an elevation file.
 
         Args:
-            specification: A source alias in ``source`` and an optional ZIP member.
+            specification: The recipe's file name in ``source``. If it is
+                stored inside a ZIP, give its name there in ``member``.
 
         Returns:
-            The local file or GDAL virtual path.
+            The local path or an address GDAL uses to open a file inside a ZIP.
+            For example, ``/vsizip/{/data/dem.zip}/north.tif`` names north.tif
+            inside dem.zip.
+
+        Raises:
+            ValueError: The selected file inside the archive is invalid or missing.
         """
         path = self.files[specification['source']]
         return gdal_dataset_path(path, specification['member']) if 'member' in specification else path
 
     def resolve_vector_path(self, selection):
-        """Resolve a vector file or a Shapefile inside its ZIP for GDAL.
+        """Tell GDAL where to open the file that contains the basin shapes.
 
         Args:
-            selection: A source alias or a mapping with ``source`` and an optional ``member``.
+            selection: A recipe file name such as ``"basins"``, or a selection
+                like ``{"source": "basins", "member": "north.shp"}``.
 
         Returns:
-            The GDAL dataset path.
+            The local path or an address GDAL can open inside a ZIP. Given
+            only the ZIP source, select its sole Shapefile.
+
+        Raises:
+            ValueError: The requested archive file is invalid, missing, or ambiguous.
         """
         if isinstance(selection, str):
             return gdal_dataset_path(self.files[selection])
         return gdal_dataset_path(self.files[selection['source']], selection.get('member'))
 
     def read_osm_network(self, sources, *, rivers_and_streams_only=False, reverse=()):
-        """Read and reuse an OSM network for these source files and directions.
+        """Read the OSM files and remember the result for later lookups.
 
         Args:
-            sources: Source aliases or selections of specific archive members.
+            sources: Recipe file names or selections of files inside ZIPs.
             rivers_and_streams_only: Whether to retain only ways tagged as rivers or streams.
-            reverse: IDs of ways whose source-backed downstream direction is reversed.
+            reverse: IDs of streams whose saved point order needs reversing
+                so it follows the known direction of flow.
 
         Returns:
-            A Waterways instance cached for the requested files and options.
+            A Waterways object for the selected files and options. Repeated
+            requests with those same settings reuse the object.
+
+        Raises:
+            ValueError: The OSM data is inconsistent or a stream to reverse is missing.
         """
         paths = []
         for selection in sources:
@@ -102,38 +133,44 @@ class Sources:
             else:
                 path = self.files[selection['source']]
                 paths.append((path, selection['member']) if 'member' in selection else path)
-        # Normalize the IDs so equivalent reversal lists reuse the same network.
+        # Way 42 and way "42" refer to the same stream. Sort and remove
+        # duplicates so lists with the same corrections share one read.
         reverse = tuple(sorted(set(map(str, reverse))))
-        # One set of files can support both raw source lines and corrected drainage.
+        # A coastline lookup may need every way. A drainage lookup may keep
+        # only rivers and streams and reverse some. Cache those reads separately.
         key = tuple(paths), rivers_and_streams_only, reverse
         if key not in self.networks:
             self.networks[key] = Waterways(paths, rivers_and_streams_only=rivers_and_streams_only, reverse=reverse)
         return self.networks[key]
 
-    def read_selected_point(self, specification, lines):
-        """Resolve a recipe point to WGS84 longitude and latitude.
+    def resolve_recipe_point(self, specification, lines):
+        """Find the longitude and latitude of a point named in the recipe.
 
         Args:
-            specification: A coordinate pair, an OSM node, or an intersection
-                of two named lines chosen using a nearby point.
-            lines: Parsed source lines keyed by the names used in the recipe.
+            specification: Coordinates such as ``{"point": [51.5, 46.8]}``,
+                an OSM point such as ``{"source": "river", "node": 42}``, or
+                two line names in ``intersection`` and a coordinate pair in ``near``.
+            lines: The drawn lines by recipe name, used for intersections.
 
         Returns:
             The selected longitude and latitude in degrees.
 
         Raises:
-            ValueError: The selector is unsupported or the selected point is invalid.
+            ValueError: The selection is unsupported, the PBF point is missing,
+                duplicated, or invalid, or the selected lines never meet.
         """
         if 'point' in specification:
             return tuple(map(float, specification['point']))
         if 'node' in specification:
             source, node = specification['source'], str(specification['node'])
             path = self.files[source]
+            # The general OSM reader handles standalone files and archives.
+            # For a .pbf file, scan for just this node to avoid storing a whole network.
             if path.suffix != '.pbf':
                 return self.read_osm_network([source]).nodes[node]
             key = source, node
             if key not in self.points:
-                # An isolated PBF node may belong to no river or stream way.
+                # Filter by node ID so we can also find points that belong to no way.
                 selected = []
 
                 class Coordinates(osmium.SimpleHandler):
@@ -150,26 +187,29 @@ class Sources:
             return self.points[key]
         if 'intersection' in specification:
             first, second = specification['intersection']
+            # When a river meets a coastline twice, near tells us which
+            # of the two meeting points the recipe intends to use.
             return choose_intersection_join(lines[first], lines[second], specification['near']).point
         raise ValueError('unknown source point selection')
 
-    def read_selected_line(self, part: SourceLine):
+    def read_source_line(self, part: SourceLine):
         """Read one complete source line for boundary assembly.
 
         Args:
             part: A GeoJSON feature, OSM way, or OSM river relation selection.
 
         Returns:
-            The selected Shapely line in WGS84.
+            A Shapely line with the selected longitude and latitude pairs.
 
         Raises:
             ValueError: The selector is unsupported or the line has invalid coordinates.
         """
         if 'way' in part:  # An OsmWayLine selects one OSM way.
-            # Allow all way types here because a source line can be a coastline.
+            # A recipe can draw the boundary along a coastline, so keep ways
+            # with any tag for this lookup.
             points = list(self.read_osm_network([part['source']]).way_line(part['way']).coords)
         elif 'relation' in part:  # An OsmRiverLine joins selected relation members.
-            points = self.assemble_river_relation(part)
+            points = self.join_river_relation_ways(part)
         elif 'geojson_feature' in part:  # A GeoJSONLine selects a feature by position.
             path = self.files[part['source']]
             if 'member' in part:
@@ -178,7 +218,6 @@ class Sources:
             else:
                 with path.open('rb') as stream:
                     document = json.load(stream)
-            # geojson_feature is the zero-based position in the feature list.
             geometry = document['features'][part['geojson_feature']]['geometry']
             if geometry['type'] != 'LineString':
                 raise ValueError('selected GeoJSON feature must be a line')
@@ -187,7 +226,8 @@ class Sources:
             raise ValueError('unsupported source line selection')
         if len(points) < 2:
             raise ValueError('source line needs at least two selected points')
-        # Validate one longitude/latitude pair per vertex, then use the same array in Shapely.
+        # All three readers must give us one longitude and one latitude per
+        # point. For example, [10, 95] fails because latitude stops at 90°.
         coordinates = np.asarray(points, dtype=float)
         if (coordinates.shape != (len(points), 2) or not np.isfinite(coordinates).all()
                 or np.any(np.abs(coordinates[:, 0]) > 180)
@@ -195,21 +235,25 @@ class Sources:
             raise ValueError('source line requires finite WGS84 longitude/latitude pairs')
         return LineString(coordinates)
 
-    def assemble_river_relation(self, specification):
-        """Join the selected OSM ways into one continuous river line.
+    def join_river_relation_ways(self, specification):
+        """Join the selected pieces of a river at their shared OSM points.
 
         Args:
-            specification: The source alias, relation ID, and member role.
+            specification: The recipe file name, OSM relation ID, and role
+                of the pieces to keep, such as ``main_stream``.
 
         Returns:
-            WGS84 coordinates ordered from the endpoint with the lower OSM
-            node ID. The boundary recipe chooses its own geographic endpoints.
+            Longitude and latitude pairs in line order. Start at the end
+            with the smaller OSM node ID so the result is repeatable. The
+            boundary recipe supplies the locations where its own line stops.
 
         Raises:
             ValueError: The selected members do not form one open, connected chain.
         """
         network = self.read_osm_network([specification['source']])
         _, members = network.relations[str(specification['relation'])]
+        # If the pieces are 20–30 and 10–20, node 20 has neighbors 10 and 30.
+        # Save both directions so we can walk the same line from either end.
         adjacent = {}
         for kind, reference, role in members:
             if kind == 'way' and role == specification['role']:
@@ -217,17 +261,19 @@ class Sources:
                 for first, last in pairwise(nodes):
                     adjacent.setdefault(first, set()).add(last)
                     adjacent.setdefault(last, set()).add(first)
-        # A single open line has two ends with one neighbor apiece. Three
-        # neighbors at any node would leave a choice of which branch to draw.
+        # In 10–20–30, nodes 10 and 30 each have one neighbor, so they
+        # are the ends. A node with three neighbors would be a fork.
         endpoints = [node for node, neighbors in adjacent.items() if len(neighbors) == 1]
         if len(endpoints) != 2 or any(len(neighbors) > 2 for neighbors in adjacent.values()):
             raise ValueError('selected river members do not form an unbranched chain')
         node = min(endpoints, key=int)
         order, seen = [node], {node}
+        # After walking from 10 to 20, skip the point we came from and go to 30.
         while adjacent[order[-1]] - seen:
             following, = adjacent[order[-1]] - seen
             order.append(following)
             seen.add(following)
+        # A separate loop can leave us with two ends but still leave points unvisited.
         if len(seen) != len(adjacent) or len(adjacent[order[-1]]) != 1:
             raise ValueError('selected river chain is disconnected or closed')
         return [network.nodes[node] for node in order]

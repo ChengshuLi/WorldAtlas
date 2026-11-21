@@ -1,4 +1,4 @@
-"""Test selecting, connecting, and validating native watershed divide sections."""
+"""Test how cell edges and mapped lines become one connected boundary."""
 
 import unittest
 
@@ -22,6 +22,8 @@ class BoundaryTests(unittest.TestCase):
 
     def test_shared_catchment_edges_remain_possible_boundary_routes(self):
         grid = Grid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        # The middle column drains to both groups. Either side of it can
+        # supply an edge for the finished boundary.
         first = np.tile([True, True, False], (3, 1))
         second = np.tile([False, True, True], (3, 1))
         graph = Divide()
@@ -89,10 +91,10 @@ class BoundaryTests(unittest.TestCase):
             route_line_through_waypoints(line, [(.004, 0.)], 20.)
 
     def graph(self):
-        """Build a fixture divide with branches for routing tests.
+        """Build a small divide with both a straight route and a detour.
 
         Returns:
-            The divide graph, ready for each test to select its own joins.
+            Cell edges that go straight across the top or loop down one row.
         """
         graph = Divide()
         graph.coordinates = {(0, 0): (0., 0.), (0, 1): (.01, 0.),
@@ -139,7 +141,7 @@ class BoundaryTests(unittest.TestCase):
 
     def test_connector_selection_uses_native_vertices_without_coordinate_rounding(self):
         graph = self.graph()
-        join = graph.nearest_vertex_join((.01001, .00999))
+        join = graph.join_at_nearest_corner((.01001, .00999))
         self.assertEqual(join.point, graph.coordinates[(1, 1)])
         self.assertIn((1, 1), join.edges[graph])
 
@@ -179,8 +181,8 @@ class BoundaryTests(unittest.TestCase):
             partitioned.add_catchment_edges(grid, {group: labels == group for group in (1, 3)}, [(1, 3)], bounds, bounds_crs=3413)
         self.assertEqual(partitioned.edges, complete.edges)
         self.assertEqual(partitioned.coordinates, complete.coordinates)
-        route = partitioned.shortest_divide_path(partitioned.nearest_vertex_join(complete.coordinates[(0, 1)]),
-                                  partitioned.nearest_vertex_join(complete.coordinates[(4, 1)]))
+        route = partitioned.shortest_divide_path(partitioned.join_at_nearest_corner(complete.coordinates[(0, 1)]),
+                                  partitioned.join_at_nearest_corner(complete.coordinates[(4, 1)]))
         self.assertTrue(route.is_simple)
 
     def test_final_assembly_preserves_endpoints_and_has_shared_joins(self):

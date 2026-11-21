@@ -1,4 +1,4 @@
-"""Test exact source selectors without depending on an earlier boundary."""
+"""Test reading the points and lines named in a recipe from small source files."""
 
 import json
 from pathlib import Path
@@ -24,11 +24,13 @@ class SourceGeometryTests(unittest.TestCase):
         path.write_text(json.dumps({'features': [{'geometry': {
             'type': 'LineString', 'coordinates': [[0, 0], [1, 1], [2, 0]]}}]}))
         sources = Sources({'provider': path})
-        line = sources.read_selected_line(dict(source='provider', geojson_feature=0))
+        line = sources.read_source_line(dict(source='provider', geojson_feature=0))
         self.assertEqual(list(line.coords), [(0., 0.), (1., 1.), (2., 0.)])
 
     def test_relation_order_is_reconstructed_from_its_selected_source_members(self):
         path = self.root / 'river.osm'
+        # The relation lists the ways out of order, and both start at node 2.
+        # The source line still follows 1 → 2 → 3.
         path.write_text('<osm version="0.6"><node id="1" lon="0" lat="0"/>'
                         '<node id="2" lon="1" lat="1"/><node id="3" lon="2" lat="0"/>'
                         '<way id="20"><nd ref="2"/><nd ref="3"/></way>'
@@ -36,7 +38,7 @@ class SourceGeometryTests(unittest.TestCase):
                         '<relation id="30"><member type="way" ref="20" role="main_stream"/>'
                         '<member type="way" ref="10" role="main_stream"/></relation></osm>')
         sources = Sources({'river': path})
-        line = sources.read_selected_line(dict(source='river', relation='30', role='main_stream'))
+        line = sources.read_source_line(dict(source='river', relation='30', role='main_stream'))
         self.assertEqual(list(line.coords), [(0., 0.), (1., 1.), (2., 0.)])
 
     def test_selected_geojson_archive_member_is_read_without_extraction(self):
@@ -48,9 +50,9 @@ class SourceGeometryTests(unittest.TestCase):
             output.writestr('../source.geojson', document)
         sources = Sources({'provider': archive})
         selection = {'source': 'provider', 'geojson_feature': 0, 'member': 'nested/source.geojson'}
-        self.assertEqual(list(sources.read_selected_line(selection).coords), [(0., 0.), (1., 1.)])
+        self.assertEqual(list(sources.read_source_line(selection).coords), [(0., 0.), (1., 1.)])
         with self.assertRaisesRegex(ValueError, 'invalid source archive member'):
-            sources.read_selected_line(dict(selection, member='../source.geojson'))
+            sources.read_source_line(dict(selection, member='../source.geojson'))
         self.assertEqual(list(self.root.iterdir()), [archive])
 
     def test_network_reads_the_selected_pbf_or_xml_member_of_an_archive(self):
@@ -76,7 +78,7 @@ class SourceGeometryTests(unittest.TestCase):
     def test_unused_shapefile_line_selection_is_not_silently_accepted(self):
         sources = Sources({})
         with self.assertRaisesRegex(ValueError, 'unsupported source line selection'):
-            sources.read_selected_line({'source': 'unused', 'feature_field': 'ID', 'feature': 42})
+            sources.read_source_line({'source': 'unused', 'feature_field': 'ID', 'feature': 42})
 
     def test_invalid_source_coordinates_are_rejected(self):
         path = self.root / 'invalid.geojson'
@@ -84,7 +86,7 @@ class SourceGeometryTests(unittest.TestCase):
             'type': 'LineString', 'coordinates': [[0, 0], [0, 100]]}}]}))
         sources = Sources({'provider': path})
         with self.assertRaisesRegex(ValueError, 'finite WGS84'):
-            sources.read_selected_line({'source': 'provider', 'geojson_feature': 0})
+            sources.read_source_line({'source': 'provider', 'geojson_feature': 0})
 
     def test_pbf_point_selection_includes_isolated_nodes_without_loading_ways(self):
         path = self.root / 'provider.osm.pbf'
@@ -93,11 +95,11 @@ class SourceGeometryTests(unittest.TestCase):
             writer.add_node(osmium.osm.mutable.Node(id=99, location=(45., 44.), version=1))
         sources = Sources({'provider': path})
         specification = {'source': 'provider', 'node': 42}
-        self.assertEqual(sources.read_selected_point(specification, {}), (44., 43.))
-        self.assertEqual(sources.read_selected_point(specification, {}), (44., 43.))
+        self.assertEqual(sources.resolve_recipe_point(specification, {}), (44., 43.))
+        self.assertEqual(sources.resolve_recipe_point(specification, {}), (44., 43.))
         self.assertEqual(sources.networks, {})
         with self.assertRaisesRegex(ValueError, 'missing'):
-            sources.read_selected_point({'source': 'provider', 'node': 100}, {})
+            sources.resolve_recipe_point({'source': 'provider', 'node': 100}, {})
 
     def test_network_cache_keeps_reviewed_directions_separate(self):
         path = self.root / 'rivers.osm'

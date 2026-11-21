@@ -1,5 +1,5 @@
-"""Construct one boundary from terrain drainage and selected source geometry.
+"""Build a boundary from elevation maps, rivers, and other selected lines.
 
-The source-import registry calls build_boundary.watershed_boundary with the
-saved recipe. The other modules calculate geometry without writing to Neon.
+Start at ``build_boundary.watershed_boundary``. It reads the recipe,
+asks the other modules to calculate the line, and saves the result.
 """

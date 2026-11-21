@@ -1,4 +1,4 @@
-"""Test OSM topology, destination tracing, and river-crossing decisions."""
+"""Test how streams connect, where they drain, and when they cross a boundary."""
 
 from pathlib import Path
 import tempfile
@@ -75,7 +75,7 @@ class WaterwayTests(unittest.TestCase):
             continuing = '10' if name == 'whole' else '11'
             for selections in ({3: [continuing, '20']}, {3: [continuing], 7: ['20']}):
                 assigned, _ = network.trace_destinations_from_ways(selections)
-                reviewed = {'2': network.fork_outlet_groups('2', assigned)}
+                reviewed = {'2': network.drainage_groups_by_outgoing_node('2', assigned)}
                 if len(selections) == 1:
                     with self.assertRaisesRegex(ValueError, 'boundary crosses a river or stream'):
                         network.check_boundary_crossings(boundary, shared_forks=reviewed)
@@ -137,6 +137,8 @@ class WaterwayTests(unittest.TestCase):
         self.assertEqual(result['junction_contacts'], ['2'])
 
     def test_crossing_along_the_boundary_depends_on_entry_and_exit_sides(self):
+        # Water starts above this line and follows it from x = -1 to x = 1.
+        # It crosses only when it leaves below. Try one way and three pieces.
         boundary = LineString([(-2, 0), (2, 0)])
         for split in (False, True):
             ways = (self.way(10, [1, 2]) + self.way(20, [2, 3]) + self.way(30, [3, 4])

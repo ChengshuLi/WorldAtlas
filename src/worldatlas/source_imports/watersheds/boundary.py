@@ -1,4 +1,4 @@
-"""Join source lines, drainage divides and explicit geodesic connectors once."""
+"""Find the line between drainage groups and join it to other boundary sections."""
 from dataclasses import dataclass, field
 from itertools import pairwise
 import math
@@ -13,7 +13,7 @@ from shapely.ops import substring
 from shapely.strtree import STRtree
 
 from worldatlas.geodesy.wgs84 import GEOD, geodesic
-from worldatlas.source_imports.watersheds.drainage import upstream_cells_from_outlet
+from worldatlas.source_imports.watersheds.drainage import cells_draining_to
 
 
 def geodesic_distance(first, second):
@@ -37,7 +37,10 @@ def geodesic_distance(first, second):
 
 @dataclass
 class Join:
-    """Record a shared point and the exact divide edges it lies on.
+    """Remember where two boundary sections meet.
+
+    A join in the middle of a terrain edge stores that edge so the route
+    can start at the exact meeting point.
 
     Args:
         point: WGS84 longitude and latitude of the join.
@@ -49,7 +52,7 @@ class Join:
 
 
 class Divide:
-    """Store candidate boundary edges and their connected native grid corners."""
+    """Keep the cell edges that the boundary can follow."""
     def __init__(self):
         self.coordinates = {}
         self.edges = set()
@@ -57,12 +60,17 @@ class Divide:
         self.crs = None
 
     def add_catchment_edges(self, grid, labels, pairs, output_bounds=None, *, bounds_crs=4326):
-        """Add native cell edges that separate the selected drainage groups.
+        """Add the edges between cells that drain to the chosen groups.
+
+        For instance, put an edge between a cell that drains to group 3
+        and its neighbor that drains to group 7. Those edges give the
+        boundary a set of connected routes to choose from.
 
         Args:
             grid: Terrain crop, aligned with any previous crops in this divide.
-            labels: Boolean catchment grids keyed by drainage group ID.
-            pairs: Group ID pairs whose shared frontiers can contribute edges.
+            labels: A True/False grid for each drainage group. A cell may
+                drain to two groups when a river splits.
+            pairs: The pairs to separate, such as ``[(3, 7)]``.
             output_bounds: Optional west, south, east, and north limits for edge midpoints.
             bounds_crs: Coordinate reference of the output limits.
 
@@ -90,7 +98,8 @@ class Divide:
                 raise ValueError('divide output bounds require a finite geographic rectangle')
 
         def node(row, column):
-            # Use positions on the uncropped grid to join edges from overlapping crops.
+            # The same corner can have a different local row and column in
+            # two crops. Its full-grid position gives both crops the same key.
             key = (row + grid.window_offset[0], column + grid.window_offset[1])
             if key not in self.coordinates:
                 point = to_geo.transform(*grid.cell_coordinates(row, column, center=False), errcheck=True)
@@ -100,15 +109,16 @@ class Divide:
             return key
 
         for dr, dc in ((0, 1), (1, 0)):
-            selected = np.zeros((height - dr, width - dc), dtype=bool)
+            selected_edges = np.zeros((height - dr, width - dc), dtype=bool)
             for a, b in pairs:
-                aa, bb = labels.get(a, missing), labels.get(b, missing)
-                af, at = aa[:height - dr, :width - dc], aa[dr:, dc:]
-                bf, bt = bb[:height - dr, :width - dc], bb[dr:, dc:]
-                # Follow catchment frontiers, including shared drainage. A shared
-                # catchment's interior is not an invented drainage divide.
-                selected |= ((af & bt) | (bf & at)) & ((af != at) | (bf != bt))
-            for rr, cc in np.argwhere(selected):
+                group_a_cells, group_b_cells = labels.get(a, missing), labels.get(b, missing)
+                a_here, a_next = group_a_cells[:height - dr, :width - dc], group_a_cells[dr:, dc:]
+                b_here, b_next = group_b_cells[:height - dr, :width - dc], group_b_cells[dr:, dc:]
+                # A cell that drains only to 3 can share an edge with a cell
+                # draining to both 3 and 7. Two cells draining to both have
+                # the same destinations, so leave their shared edge out.
+                selected_edges |= ((a_here & b_next) | (b_here & a_next)) & ((a_here != a_next) | (b_here != b_next))
+            for rr, cc in np.argwhere(selected_edges):
                 row, column = int(rr), int(cc)
                 if output_bounds is not None:
                     midpoint = grid.cell_coordinates(row + (.5 if dc else 1),
@@ -121,7 +131,7 @@ class Divide:
                         (node(row + 1, column), node(row + 1, column + 1)))
                 self.edges.add(tuple(sorted(edge)))
 
-    def edges_as_lines(self):
+    def edge_ids_and_lines(self):
         """Create line geometries in the same order as their grid-edge identifiers.
 
         Returns:
@@ -131,7 +141,7 @@ class Divide:
         coordinates = np.asarray([(self.coordinates[a], self.coordinates[b]) for a, b in edges])
         return edges, linestrings(coordinates.reshape(-1, 2, 2))
 
-    def nearest_vertex_join(self, point):
+    def join_at_nearest_corner(self, point):
         """Select the closest native divide corner to a geographic reference.
 
         Args:
@@ -156,14 +166,15 @@ class Divide:
         return Join(self.coordinates[key], {self: edge})
 
     def shortest_divide_path(self, start, end):
-        """Find the shortest connected path along candidate divide edges.
+        """Find the shortest route between two joins along the saved cell edges.
 
         Args:
             start: Join identifying the start point and its divide edge.
             end: Join identifying the end point and its divide edge.
 
         Returns:
-            A WGS84 line from start to end, with length measured along its edges.
+            A WGS84 line from start to end, with distance measured in metres
+            along the connected edges.
 
         Raises:
             ValueError: The joins are invalid, coincide, or lie on disconnected pieces.
@@ -183,7 +194,8 @@ class Divide:
             elif join.point == coordinates[b]:
                 terminal = b
             else:
-                # Split the identified edge so routing starts at the exact intersection.
+                # If the join lies halfway along A–B, make two edges,
+                # A–join and join–B, so the route can start at the join.
                 terminal = ('join', index)
                 first, last = coordinates[a], coordinates[b]
                 axis = 0 if abs(last[0] - first[0]) >= abs(last[1] - first[1]) else 1
@@ -214,6 +226,8 @@ class Divide:
         distances, previous = dijkstra(graph, indices=source, return_predecessors=True)
         if not np.isfinite(distances[target]):
             raise ValueError('selected joins are on disconnected divide pieces')
+        # SciPy tells us how we reached each point. Follow that trail
+        # backward from the end, then reverse it to draw from start to end.
         path = [target]
         while path[-1] != source:
             path.append(previous[path[-1]])
@@ -231,10 +245,11 @@ def _join_candidate_points(geometry):
 
 
 def choose_intersection_join(left, right, near):
-    """Choose an actual source intersection using its WGS84 distance to an anchor.
+    """Pick the meeting point closest to the coordinate given in the recipe.
 
-    A divide join retains its grid edge identity, so inserting the computed
-    intersection needs no rounding or approximate coordinate matching.
+    A line can cross a divide twice. The nearby coordinate tells us which
+    crossing to use. If it lands inside a divide edge, save the exact
+    point and the edge so the route can start there.
 
     Args:
         left: First source line or divide graph.
@@ -248,9 +263,9 @@ def choose_intersection_join(left, right, near):
         ValueError: The two sections have no intersection.
     """
     if isinstance(left, Divide):
-        edges, lines = left.edges_as_lines()
+        edges, lines = left.edge_ids_and_lines()
         if isinstance(right, Divide):
-            other_edges, other_lines = right.edges_as_lines()
+            other_edges, other_lines = right.edge_ids_and_lines()
             first, second = STRtree(other_lines).query(lines, predicate='intersects')
             hits = intersect_geometries(lines[first], other_lines[second])
             candidates = [Join(point, {left: edges[i], right: other_edges[j]})
@@ -271,11 +286,12 @@ def choose_intersection_join(left, right, near):
 
 
 def route_line_through_waypoints(line, points, max_step_m):
-    """Replace short parts of the divide to pass through selected points.
+    """Make the divide pass through the points named in the recipe.
 
-    Enclose every intersection of each connector with the source route. The
-    attachment interval grows only at existing vertices, so this terminates
-    without a search radius, numerical tolerance or stored attachment coordinates.
+    Say the divide runs A–B–C–D and we want to pass through P near B.
+    Choose two points on the divide and draw a new stretch through P.
+    If that stretch cuts the old divide farther away, move the
+    attachments outward until the cut falls inside the part being replaced.
 
     Args:
         line: The ordered divide line to modify.
@@ -304,6 +320,8 @@ def route_line_through_waypoints(line, points, max_step_m):
         if index < previous:
             raise ValueError('waypoints must follow the ordered divide')
         previous = index
+        # A waypoint already on a saved corner can use that corner for
+        # both attachments. Otherwise start with the neighboring corners.
         first, last = (index, index) if tuple(coordinates[index]) == point else (
             max(0, index - 1), min(len(coordinates) - 1, index + 1))
         groups.append({'first': first, 'last': last, 'points': [point]})
@@ -333,11 +351,15 @@ def route_line_through_waypoints(line, points, max_step_m):
                 allowed = Point(coordinates[first if index < first else last])
                 if edges[index].intersection(geometry).difference(allowed).is_empty:
                     continue
+                # Replace the old edge we crossed as well. Leaving it in
+                # place could make the finished line cross itself.
                 group['first'] = min(group['first'], index)
                 group['last'] = max(group['last'], index + 1)
             changed |= (first, last) != (group['first'], group['last'])
         merged = []
         for group in groups:
+            # If two replacements touch or overlap, use one connector
+            # through both sets of waypoints in recipe order.
             if merged and merged[-1]['last'] >= group['first']:
                 merged[-1]['first'] = min(merged[-1]['first'], group['first'])
                 merged[-1]['last'] = max(merged[-1]['last'], group['last'])
@@ -364,15 +386,19 @@ def route_line_through_waypoints(line, points, max_step_m):
 
 def assemble_boundary_line(sections, joins, start, end, *, waypoints=None,
                            connections=None, source_sections=()):
-    """Cut sections at their shared joins and assemble one boundary.
+    """Trim each section at its joins and put the pieces together.
+
+    If the source line is A–B–C–D and the joins are B and C, keep B–C.
+    A calculated divide may offer several routes between those points,
+    so use its shortest connected route.
 
     Args:
         sections: Ordered source lines, connectors, or divide graphs.
         joins: One resolved join for each consecutive pair of sections.
         start: First point, supplied as coordinates or a resolved join.
         end: Last point, supplied as coordinates or a resolved join.
-        waypoints: Optional point selections and spacing keyed by section index.
-        connections: Optional report updated with the waypoint attachments and lengths.
+        waypoints: Points to include and connector spacing for each selected section.
+        connections: Optional report. Add the waypoint attachment points and lengths.
         source_sections: Indices of sections that deliberately follow a source line.
 
     Returns:
@@ -404,6 +430,7 @@ def assemble_boundary_line(sections, joins, start, end, *, waypoints=None,
         coordinates.extend(points)
         if index in source_sections:
             followed_sources.append(LineString(points))
+    # Both sections contribute the same shared point. Keep it once.
     line = remove_repeated_points(LineString(coordinates), tolerance=0)
     values = get_coordinates(line)
     if (not line.is_simple or not line.is_valid or not np.isfinite(values).all() or
@@ -438,10 +465,12 @@ def cell_containing_point(grid, point, *, required=True):
 
 
 def connect_divide_to_stream_head(grid, flow, labels, point, inside_group, outside_groups, max_step_m):
-    """Connect a divide to a known stream head using its actual upstream flow.
+    """Find a route from the divide to the mapped start of a stream.
 
-    Select a cell on a flow path from the divide near the mapped stream head.
-    Follow the grid's flow to that cell and connect its center to the source point.
+    A nearby cell may drain somewhere else. First find the cells water can
+    reach from the chosen divide, then pick the one closest to the mapped
+    stream start. Follow the terrain flow to that cell and connect its center
+    to the exact mapped point.
 
     Args:
         grid: Terrain crop and coordinate reference.
@@ -478,7 +507,8 @@ def connect_divide_to_stream_head(grid, flow, labels, point, inside_group, outsi
         interface[source] |= ((labels[source] == inside_group) &
                               np.isin(labels[neighbor], outside_groups))
     reached = interface.ravel().copy()
-    # Limit the choice near the source point to cells reachable from a known divide.
+    # Start on the inside cells touching the divide, then follow their water
+    # downhill. Only reached cells are candidates near the mapped point.
     todo = list(map(int, np.flatnonzero(reached)))
     while todo:
         following = int(flow.ravel()[todo.pop()])
@@ -495,8 +525,9 @@ def connect_divide_to_stream_head(grid, flow, labels, point, inside_group, outsi
     terminal = int(eligible[np.argmin(lengths_to_point)])
     lengths = {terminal: 0.}
     candidates = []
-    # Search upstream of the selected cell and use the shortest eligible interface path.
-    for value in upstream_cells_from_outlet(flow, terminal):
+    # Work back from the chosen cell. Measure each path back to a cell
+    # touching the divide and keep the shortest one.
+    for value in cells_draining_to(flow, terminal):
         index = int(value)
         rr, cc = divmod(index, width)
         if index != terminal:
@@ -519,6 +550,8 @@ def connect_divide_to_stream_head(grid, flow, labels, point, inside_group, outsi
     centers = [center(value) for value in cells]
     snap = geodesic_distance(centers[-1], point)
     connector = geodesic(centers[-1], point, max_step_m) if snap else [tuple(point)]
+    # Start at the center across the divide so this line meets the divide
+    # edge. Boundary assembly trims the line at that meeting point.
     coordinates = [center(neighbor), *centers, *connector[1:]]
     return LineString(coordinates), {'flow_cells': len(cells), 'point_snap_m': snap,
                                       'interface_cells': [list(divmod(index, width)),

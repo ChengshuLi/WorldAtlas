@@ -1,4 +1,4 @@
-"""Test provider basin lookups and the evidence used to classify drainage outlets."""
+"""Test how the basin map gives drainage groups to streams and outlets."""
 
 import json
 from pathlib import Path
@@ -33,7 +33,7 @@ def write_basin_shapefile(path, attribute, polygons, *, crs='EPSG:4326'):
 
 
 class BasinTests(unittest.TestCase):
-    """Check that outlet labels follow the selected source coverage."""
+    """Use small basin maps to check what the source can tell us about each outlet."""
 
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -82,19 +82,19 @@ class BasinTests(unittest.TestCase):
 
     def test_terminal_way_beyond_shore_uses_its_last_actual_basin_intersection(self):
         line = LineString([(.5, 1.), (1.5, 1.), (3., 1.)])
-        group, point = self.basins().group_at_river_exit(line)
+        group, point = self.basins().river_exit_group_and_point(line)
         self.assertEqual(group, 7)
         self.assertEqual(point, (2., 1.))
 
     def test_unselected_downstream_basin_cannot_fall_back_to_an_upstream_group(self):
         basins = self.basins({3: [100]})
         for endpoint in (1.5, 3.):
-            self.assertEqual(basins.group_at_river_exit(LineString([(.5, 1.), (endpoint, 1.)]))[0], -1)
+            self.assertEqual(basins.river_exit_group_and_point(LineString([(.5, 1.), (endpoint, 1.)]))[0], -1)
 
     def test_uncovered_way_and_shared_basin_edge_stay_unknown(self):
         basins = self.basins()
-        self.assertEqual(basins.group_at_river_exit(LineString([(3., 1.), (4., 1.)])), (-1, None))
-        self.assertEqual(basins.group_at_river_exit(LineString([(1., 1.), (1., 3.)]))[0], -1)
+        self.assertEqual(basins.river_exit_group_and_point(LineString([(3., 1.), (4., 1.)])), (-1, None))
+        self.assertEqual(basins.river_exit_group_and_point(LineString([(1., 1.), (1., 3.)]))[0], -1)
 
     def test_only_domain_exits_receive_basin_fallback(self):
         grid = Grid(np.zeros((3, 3)), (0., .5, 0., 1.5, 0., -.5), 'EPSG:4326')
@@ -139,7 +139,8 @@ class BasinTests(unittest.TestCase):
 
     def test_conflicting_upstream_source_destinations_leave_the_outlet_unknown(self):
         grid = Grid(np.zeros((2, 3)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
-        # One incoming branch first reaches basin 100, the other basin 200.
+        # Water reaches this outlet from basins 100 and 200, which belong
+        # to different groups. The outlet should stay unknown.
         flow = np.array([[2, -1, -1], [-1, 5, 2]])
         exits = np.zeros(flow.shape, dtype=bool)
         exits[0, 2] = True

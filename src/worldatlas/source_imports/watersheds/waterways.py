@@ -92,7 +92,7 @@ def _rectangles_from_wgs84_bounds(bounds):
     return (box(west, south, 180, north), box(-180, south, east, north))
 
 
-def _vertices_around_point(line, coordinates, point):
+def _line_points_before_and_after(line, coordinates, point):
     """Find the vertices immediately before and after an interior line point."""
     # On A → B → C, a contact at the saved point B needs A and C.
     matches = np.flatnonzero(np.all(coordinates[1:-1] == point, axis=1))
@@ -102,8 +102,8 @@ def _vertices_around_point(line, coordinates, point):
     # If the contact is between A and B, find its distance along the line
     # and compare it with the distance to each saved point.
     steps = np.diff(coordinates, axis=0)
-    station = line.project(Point(point))
-    index = np.searchsorted(np.cumsum(np.hypot(steps[:, 0], steps[:, 1])), station)
+    distance_along_line = line.project(Point(point))
+    index = np.searchsorted(np.cumsum(np.hypot(steps[:, 0], steps[:, 1])), distance_along_line)
     index = min(index, len(coordinates) - 2)
     return coordinates[index], coordinates[index + 1]
 
@@ -343,8 +343,8 @@ class Waterways:
         """Find complete rivers and streams that intersect a WGS84 rectangle.
 
         Args:
-            bounds: West, south, east, and north limits. If the west limit
-                exceeds the east limit, the rectangle crosses the antimeridian.
+            bounds: West, south, east, and north limits. For example,
+                ``(179, -1, -179, 1)`` spans the two degrees around 180°.
 
         Returns:
             Sorted IDs of complete mapped rivers and streams intersecting the rectangle.
@@ -366,7 +366,7 @@ class Waterways:
         return [self._indexed_way_ids[index] for index in sorted(indices)]
 
     def require_known_drainage_in_bounds(self, bounds, report):
-        """Check that relevant rivers and streams have known downstream routes.
+        """Stop if missing stream data could change the divide in a crop.
 
         Args:
             bounds: WGS84 rectangles covered by the terrain calculation.
@@ -396,7 +396,7 @@ class Waterways:
                     f'from node {section["nodes"][1]}; known groups={section["groups"]}; '
                     f'first unresolved node={section["unresolved_node"]}; repair the source')
 
-    def fork_outlet_groups(self, node, assigned):
+    def drainage_groups_by_outgoing_node(self, node, assigned):
         """Find the destination of each branch leaving the fork.
 
         Args:
@@ -456,10 +456,10 @@ class Waterways:
         coordinates = np.asarray(geometry.coords)
         endpoints = {tuple(coordinates[0]), tuple(coordinates[-1])}
         ways = self._way_ids_intersecting_shapes((geometry,))
-        # Keep isolated meeting points in hits and shared lines in overlaps.
+        # Keep isolated meeting points in point_hits and shared lines in overlaps.
         # A stream can change sides at one spot or after following the boundary.
         # At a boundary endpoint, water can go around the end.
-        hits = defaultdict(set)
+        point_hits = defaultdict(set)
         overlaps = defaultdict(list)
         for ident in ways:
             for part in _intersection_parts(geometry.intersection(self.way_line(ident))):
@@ -468,7 +468,7 @@ class Waterways:
                 else:
                     point = tuple(part.coords[0])
                     if point not in endpoints:
-                        hits[point].add(ident)
+                        point_hits[point].add(ident)
 
         crossings, along_boundary_arms = self._crossings_along_boundary(
             geometry, ways, overlaps, followed_source_line)
@@ -477,24 +477,24 @@ class Waterways:
         # node 1 as incoming (False) and the branch toward node 3 as outgoing
         # (True). Ways that share node 2 are part of the same junction.
         arms = defaultdict(lambda: defaultdict(set))
-        vertex_hits = defaultdict(set)
+        ways_with_saved_points = defaultdict(set)
         for ident in ways:
             nodes = self.ways[ident].nodes
             for index, node in enumerate(nodes):
                 point = self.nodes[node]
-                if point not in hits:
+                if point not in point_hits:
                     continue
-                vertex_hits[point].add(ident)
+                ways_with_saved_points[point].add(ident)
                 if index:
                     arms[point][node].add((ident, nodes[index - 1], False))
                 if index + 1 < len(nodes):
                     arms[point][node].add((ident, nodes[index + 1], True))
 
         junctions, river_ends, shared = set(), set(), {}
-        for point, hit_ways in sorted(hits.items()):
+        for point, hit_ways in sorted(point_hits.items()):
             # Use the boundary just before and after this point to tell
             # which side each branch is on, even where the boundary bends.
-            before, after = _vertices_around_point(geometry, coordinates, point)
+            before, after = _line_points_before_and_after(geometry, coordinates, point)
 
             def side(neighbor):
                 return _boundary_side(point, before, after, neighbor)
@@ -502,9 +502,9 @@ class Waterways:
             # Water can flow straight from A above the boundary to B below,
             # with no saved river point on the boundary. Opposite sides
             # multiply to -1.
-            for ident in hit_ways - vertex_hits[point]:
+            for ident in hit_ways - ways_with_saved_points[point]:
                 river = self.way_line(ident)
-                entry, exit = _vertices_around_point(river, np.asarray(river.coords), point)
+                entry, exit = _line_points_before_and_after(river, np.asarray(river.coords), point)
                 if side(entry) * side(exit) == -1:
                     crossings[point].add(ident)
 
@@ -513,14 +513,14 @@ class Waterways:
                 neighbors = {neighbor for _, neighbor, _ in branches}
                 for ident, neighbor, leaves in branches:
                     arm = ident, node, neighbor, leaves
-                    sector = 0 if arm in along_boundary_arms else side(self.nodes[neighbor])
+                    branch_side = 0 if arm in along_boundary_arms else side(self.nodes[neighbor])
                     if leaves:
-                        outgoing[neighbor] = sector
+                        outgoing[neighbor] = branch_side
                     else:
-                        incoming.add(sector)
+                        incoming.add(branch_side)
                 # A crossing needs water arriving from one side and leaving
                 # on the other. Side 0 means the branch points along the boundary.
-                crosses = any(-sector in incoming for sector in outgoing.values() if sector)
+                crosses = any(-branch_side in incoming for branch_side in outgoing.values() if branch_side)
                 if crosses:
                     # Allow a selected fork when water arrives from one side
                     # and leaves on both. All branches leaving on a given
@@ -528,8 +528,10 @@ class Waterways:
                     # sides must lead to different groups.
                     groups = shared_forks.get(node, {})
                     if len(incoming) == 1 and set(outgoing.values()) == {-1, 1} and groups.keys() == outgoing.keys():
-                        by_side = {sector: {groups[n] for n in outgoing if outgoing[n] == sector}
-                                   for sector in (-1, 1)}
+                        by_side = {
+                            branch_side: {groups[n] for n in outgoing if outgoing[n] == branch_side}
+                            for branch_side in (-1, 1)
+                        }
                         if all(len(values) == 1 for values in by_side.values()) and by_side[-1] != by_side[1]:
                             shared[node] = sorted(set(groups.values()))
                             junctions.add(node)
@@ -573,7 +575,7 @@ class Waterways:
             if point in endpoints:
                 return
             if point not in boundary_neighbors:
-                boundary_neighbors[point] = _vertices_around_point(boundary, coordinates, point)
+                boundary_neighbors[point] = _line_points_before_and_after(boundary, coordinates, point)
             side = _boundary_side(point, *boundary_neighbors[point], neighbor)
             if side:
                 branches[contact].add((side, way))
@@ -709,7 +711,7 @@ class Waterways:
                 for ident, start, end in self.edge_sources[parent, node]:
                     way = self.ways[ident]
                     line = LineString([self.nodes[n] for n in way.nodes[start:end + 1]])
-                    group, point = basins.group_at_river_exit(line)
+                    group, point = basins.river_exit_group_and_point(line)
                     if group >= 0:
                         roots[group].add(node)
                         coastal.append({'way': ident, 'group': group, 'point': list(point)})

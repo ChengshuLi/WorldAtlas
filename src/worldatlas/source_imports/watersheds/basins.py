@@ -1,4 +1,8 @@
-"""Classify watershed outlets using the selected provider basin polygons."""
+"""Use basin maps to tell where streams and terrain cells drain.
+
+An outlet is where the mapped stream or calculated flow stops. The
+basin covering that point can identify the water's destination.
+"""
 
 from collections import defaultdict
 
@@ -9,19 +13,21 @@ from shapely import from_wkb, get_coordinates, points, transform as transform_ge
 from shapely.geometry import Point
 from shapely.strtree import STRtree
 
-from worldatlas.source_imports.watersheds.drainage import index_upstream_cells
+from worldatlas.source_imports.watersheds.drainage import index_incoming_flow
 
 
 class Basins:
-    """Look up drainage groups using the recipe's source polygon attributes."""
+    """Look up the drainage group of a point using basin outlines."""
 
     def __init__(self, paths, attribute, groups, bounds):
-        """Index provider basin polygons in the area of interest.
+        """Load the basin outlines we might need for this boundary.
 
         Args:
             paths: GDAL vector dataset paths, including Shapefiles inside ZIP archives.
-            attribute: Provider field identifying each polygon's drainage destination.
-            groups: Mapping from local drainage group IDs to provider destination IDs.
+            attribute: Field in the source file, such as ``MAIN_BAS``, that
+                identifies which larger basin each polygon drains into.
+            groups: Source IDs grouped by destination. For example,
+                ``{"3": [41, 42], "7": [99]}`` puts 41 and 42 in group 3.
             bounds: WGS84 west, south, east, and north bounds in degrees.
 
         Raises:
@@ -31,6 +37,7 @@ class Basins:
         self.groups = {int(group): set(values) for group, values in groups.items()}
         if not self.groups or any(group < 0 or not values for group, values in self.groups.items()):
             raise ValueError('known group IDs and source basin values are required')
+        # If 42 appears under both 3 and 7, a lookup for 42 has two answers.
         if any(a & b for i, a in enumerate(self.groups.values())
                for b in list(self.groups.values())[i + 1:]):
             raise ValueError('a source basin cannot belong to multiple drainage groups')
@@ -47,7 +54,8 @@ class Basins:
                 to_geo = Transformer.from_crs(source_crs, wgs84, always_xy=True)
                 source_bounds = Transformer.from_crs(wgs84, source_crs, always_xy=True).transform_bounds(
                     *bounds, densify_pts=21, errcheck=True)
-                # Filter in the provider's coordinates before converting polygons for lookup.
+                # GDAL searches in the file's units, which may be metres.
+                # Convert the search box first, then load and convert just those shapes.
                 layer.SetSpatialFilterRect(*source_bounds)
                 project = not source_crs.equals(wgs84, ignore_axis_order=True)
                 for feature in layer:
@@ -56,6 +64,8 @@ class Basins:
                         polygon = transform_geometry(polygon, to_geo.transform, interleaved=False)
                     self.polygons.append(polygon)
                     self.values.append(feature[attribute])
+        # The search tree returns positions in the list of outlines. Use
+        # those same positions in self.values to get the source IDs.
         self.tree = STRtree(self.polygons)
         self.mapped = set().union(*self.groups.values())
 
@@ -71,43 +81,44 @@ class Basins:
         return self.group_for_basin_ids(self.basin_ids_at_point(point))
 
     def basin_ids_at_point(self, point):
-        """Find all provider drainage identities covering a point.
+        """Find the source basin IDs at a point.
 
         Args:
             point: Longitude and latitude in WGS84 degrees.
 
         Returns:
-            Provider field values for every covering polygon, including shared edges.
+            The source IDs of all outlines covering the point. A point
+            on the line between two basins can return both IDs.
         """
         return {self.values[i] for i in self.tree.query(Point(*point), predicate='covered_by')}
 
-    def group_for_basin_ids(self, values):
-        """Translate provider identities to one recipe group.
+    def group_for_basin_ids(self, basin_ids):
+        """Give a point one group when all its source basin IDs agree.
 
         Args:
-            values: Set of provider destination IDs found at the location.
+            basin_ids: Set of source basin IDs found at the location.
 
         Returns:
-            The common group ID if every value maps to it, or -1 otherwise.
+            The common group, or -1 when unknown. If 41 and 42 both map
+            to group 3, then ``{41, 42}`` gives 3.
         """
-        matches = {group for group, selected in self.groups.items() if values & selected}
-        return next(iter(matches)) if len(matches) == 1 and values <= self.mapped else -1
+        matches = {group for group, group_basin_ids in self.groups.items() if basin_ids & group_basin_ids}
+        return next(iter(matches)) if len(matches) == 1 and basin_ids <= self.mapped else -1
 
-    def group_at_river_exit(self, line):
-        """Use the last source basin on a complete downstream river way.
+    def river_exit_group_and_point(self, line):
+        """Find the last mapped basin a river passes through.
 
-        Basin polygons can stop at the shore while river geometry continues
-        into an estuary. A covered but unselected destination stays unknown;
-        missing polygon coverage is resolved only by an actual intersection
-        of this same terminal way with the basin source.
+        Say the river flows A → B → C. Its mapped basin ends at B, but the
+        river line ends farther out at C. Look at B when C has no covering
+        basin. If C has a basin whose group is unknown, use that answer.
 
         Args:
-            line: Terminal river way in WGS84, ordered downstream.
+            line: The last stretch of the river, with WGS84 points in flow order.
 
         Returns:
-            A pair of the group ID (-1 if unknown) and the last covered
-            point, with None for the point if the endpoint was used or the
-            line had no basin coverage.
+            ``(group, point)``. The group is -1 when unknown. The point is B
+            in the example above. It is None when the river ends inside a
+            basin or the whole stretch lies outside the basin map.
         """
         endpoint = Point(line.coords[-1])
         values = {self.values[int(i)] for i in self.tree.query(endpoint, predicate='intersects')}
@@ -121,19 +132,19 @@ class Basins:
                 exits.append((line.project(Point(point)), self.values[index], point))
         if not exits:
             return -1, None
-        # Station is distance along the ordered line. The largest is farthest downstream.
-        station = max(item[0] for item in exits)
-        last = [item for item in exits if item[0] == station]
+        # Choose the point farthest along the river, even if it winds back.
+        last_distance = max(item[0] for item in exits)
+        last = [item for item in exits if item[0] == last_distance]
         return self.group_for_basin_ids({item[1] for item in last}), min(item[2] for item in last)
 
     def _groups_at_cell_centers(self, grid, rows, columns):
         """Look up cell centers in one spatial query and preserve unknown groups."""
         to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
         lon, lat = to_geo.transform(*grid.cell_coordinates(rows, columns), errcheck=True)
-        locations, polygons = self.tree.query(points(lon, lat), predicate='covered_by')
+        cell_indices, polygon_indices = self.tree.query(points(lon, lat), predicate='covered_by')
         # A point on a shared edge can be covered by more than one basin.
         basin_ids = defaultdict(set)
-        for location, polygon in zip(locations, polygons, strict=True):
+        for location, polygon in zip(cell_indices, polygon_indices, strict=True):
             basin_ids[location].add(self.values[polygon])
         groups = np.full(len(rows), -1, dtype='int64')
         for location, values in basin_ids.items():
@@ -141,7 +152,7 @@ class Basins:
         return groups
 
     def classify_crop_exits(self, grid, flow):
-        """Classify terminal cells at the boundary of the terrain grid.
+        """Find the basin groups of cells where flow stops at the crop edge.
 
         Args:
             grid: Terrain grid with its native coordinates and CRS.
@@ -153,14 +164,15 @@ class Basins:
         result = np.full(flow.shape, -1, dtype='int64')
         height, width = flow.shape
         rows, columns = np.nonzero(flow == -1)
-        # Only perimeter terminals can leave the crop. A pit may also have no next cell.
+        # A pit in the middle can also have no next cell. Only edge cells
+        # can count as places where water leaves this crop.
         edge = (rows == 0) | (rows == height - 1) | (columns == 0) | (columns == width - 1)
         rows, columns = rows[edge], columns[edge]
         result[rows, columns] = self._groups_at_cell_centers(grid, rows, columns)
         return result
 
     def classify_coastal_outlets(self, grid, ocean):
-        """Stop at observed ocean cells and classify adjacent land exits.
+        """Mark the ocean and the land cells touching it as places flow stops.
 
         Args:
             grid: Terrain grid with its native coordinates and CRS.
@@ -178,7 +190,8 @@ class Basins:
             raise ValueError('ocean mask and terrain grid must match')
         height, width = ocean.shape
         shore = np.zeros(ocean.shape, dtype=bool)
-        # Look in all eight flow directions without joining opposite crop edges.
+        # A land cell counts as shore even if it touches ocean at a corner.
+        # Stop at the crop edges so the left edge never sees the right edge.
         for dr in (-1, 0, 1):
             for dc in (-1, 0, 1):
                 if not (dr or dc):
@@ -195,12 +208,12 @@ class Basins:
         return ocean | shore, labels
 
     def classify_uncovered_outlets(self, grid, flow, exits, labels, seeds):
-        """Classify uncovered outlets through their actual upstream flow paths.
+        """Look upstream for evidence when an outlet's group is unknown.
 
-        Basin polygons can end inland of a water mask's shoreline. Walk each
-        incoming branch to its first mapped river or covered source-basin cell.
-        Agreeing references identify the outlet; conflicting or absent references
-        leave it unknown.
+        If the basin map ends before the shore, start at the unlabeled shore
+        cell and follow the cells that drain into it. Stop each branch at the
+        first mapped river or basin. If branches find groups 3 and 7, the
+        outlet stays unknown.
 
         Args:
             grid: Terrain grid with its native coordinates and CRS.
@@ -225,7 +238,7 @@ class Basins:
         report = {'resolved': [], 'conflicting': [], 'unreferenced': 0}
         if not unresolved.size:
             return result, report
-        heads, following = index_upstream_cells(flow)
+        heads, following = index_incoming_flow(flow)
         width = flow.shape[1]
         to_geo = Transformer.from_crs(grid.crs, 4326, always_xy=True)
 
@@ -247,7 +260,8 @@ class Basins:
                     groups.update(seed_groups or {group})
                     basin_values.update(values)
                     references.setdefault(group, location)
-                    # Stop this branch at its first reference, including unselected basins.
+                    # Even a basin with an unknown group is the first basin
+                    # on this branch. Looking farther back could pick the wrong one.
                     continue
                 child = heads[index]
                 while child >= 0:
