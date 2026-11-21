@@ -5,6 +5,7 @@ import gzip
 import hashlib
 import io
 import json
+import mimetypes
 import os
 from pathlib import Path
 import runpy
@@ -260,15 +261,30 @@ class BundleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "single head and no base URL"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
-    def test_readmes_are_excluded_and_old_attempts_without_code_are_retained(self):
+    def test_viewer_readmes_are_excluded(self):
         (self.viewer / "docs").mkdir()
         (self.viewer / "docs" / "README.md").write_text("viewer documentation")
-        (self.attempt / "producer.json").write_text("{}")
         manifest = build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         self.assertNotIn("docs/README.md", manifest["objects"])
-        saved = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc.1")
-        self.assertEqual(saved["run"]["attempts"], [{"attempt_id": "first"}])
-        self.assertNotIn("source_code", saved)
+
+    def test_bundle_requires_captured_code(self):
+        producer = self.attempt / "producer.json"
+        producer.write_text("{}")
+        with self.assertRaisesRegex(ValueError, "build attempt first has no captured code snapshot"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        producer.unlink()
+        with self.assertRaisesRegex(ValueError, "completed build has no captured code snapshot"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_bundle_media_types_are_independent_of_host_settings(self):
+        (self.viewer / "app.js").write_text("export const value = 1;\n")
+        first = build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        other = self.output.with_name("other-bundle")
+        other.mkdir()
+        with patch.dict(mimetypes.types_map, {".js": "application/javascript"}):
+            second = build_bundle("v9.0-rc.1", self.run, self.viewer, other)
+        self.assertEqual(first["objects"]["app.js"]["content_type"], "text/javascript")
+        self.assertEqual(first, second)
 
     def test_changed_saved_selection_blocks_staging(self):
         self.selection["geography"]["entities"][1]["name"] = "changed"

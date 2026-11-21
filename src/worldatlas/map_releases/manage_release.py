@@ -49,6 +49,8 @@ from worldatlas.map_build.physical import build as physical
 STREAMS = ("rows", "runs")
 CANDIDATE = re.compile(r"(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*")
 HOMEPAGE = "index.html"
+# Use Python's built-in media types to keep manifests stable across machines.
+MEDIA_TYPES = mimetypes.MimeTypes()
 
 
 def version(candidate):
@@ -196,6 +198,27 @@ def build_bundle(candidate, run, viewer, bundle):
     }:
         raise ValueError("geographic snapshot is missing categories used by the map")
 
+    attempts, source_code = [], {}
+    for producer in sorted((run / "attempts").glob("*/producer.json")):
+        attempt_id = producer.parent.name
+        attempt = read(producer)
+        source = attempt.get("source_archive")
+        if not source:
+            raise ValueError(f"build attempt {attempt_id} has no captured code snapshot")
+        if (
+            Path(source["path"]).resolve()
+            != (producer.parent / "source-code.json.gz").resolve()
+        ):
+            raise ValueError("source archive must be inside its build attempt")
+        verify_pins([source])
+        attempts.append(dict(attempt, attempt_id=attempt_id))
+        # A resumed build can use different code. Keep each attempt's reference
+        # while storing identical captured bytes just once.
+        source_code[source["sha256"]] = read_source(Path(source["path"]))
+    if not attempts:
+        raise ValueError("completed build has no captured code snapshot")
+    captured_run = dict(identity, attempts=attempts)
+
     for source in sorted(viewer.rglob("*")):
         rel = source.relative_to(viewer)
         if source.is_symlink() or not all(
@@ -284,21 +307,6 @@ def build_bundle(candidate, run, viewer, bundle):
     )
     config.write_bytes(json_bytes(viewer_config))
 
-    attempts, source_code = [], {}
-    for producer in sorted((run / "attempts").glob("*/producer.json")):
-        attempt = read(producer)
-        attempts.append(dict(attempt, attempt_id=producer.parent.name))
-        if source := attempt.get("source_archive"):
-            if (
-                Path(source["path"]).resolve()
-                != (producer.parent / "source-code.json.gz").resolve()
-            ):
-                raise ValueError("source archive must be inside its build attempt")
-            verify_pins([source])
-            # A resumed build can use different code. Keep every attempt's
-            # reference while storing identical captured bytes just once.
-            source_code[source["sha256"]] = read_source(Path(source["path"]))
-    captured_run = dict(identity, attempts=attempts)
     write_inputs(
         bundle / INPUTS_FILE,
         release_id=candidate,
@@ -318,7 +326,7 @@ def build_bundle(candidate, run, viewer, bundle):
             "content_type": (
                 "application/gzip"
                 if path.suffix == ".gz"
-                else mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+                else MEDIA_TYPES.guess_file_type(path)[0] or "application/octet-stream"
             ),
         }
         for path in sorted(bundle.rglob("*"))

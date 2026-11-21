@@ -35,7 +35,7 @@ Publishing serves the existing grid and legend. Retry an interrupted publication
 
 ## Archived code
 
-New build attempts capture the installed WorldAtlas source files and the project `environment.yml`, `pyproject.toml`, schema and README before computation. Staging includes those captured bytes in `inputs.json.gz`; it does not copy code from the checkout at staging time. Git history is not needed to recover them.
+New build attempts capture the installed WorldAtlas source files and the project `environment.yml`, `pyproject.toml`, schema and README before computation. Staging requires a captured snapshot for every recorded build attempt and includes those bytes in `inputs.json.gz`. The archive contains the code captured by the build, which can be restored independently of Git history.
 
 Each attempt's producer record identifies its source archive. Identical snapshots are stored once per release; resumed attempts using different code retain each snapshot. Keep code unchanged while an attempt runs; edits between attempts are captured on resume. This does not add a restriction on resuming with changed code.
 
