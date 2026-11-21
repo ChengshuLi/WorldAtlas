@@ -20,12 +20,13 @@ from worldatlas.map_build.execution.runtime import digest, json_bytes, pin, veri
 from worldatlas.map_build.inputs.selection import (
     entity_colors,
     canonical_bytes,
-    read_saved,
     validate_bindings,
 )
 from worldatlas.map_releases.catalog import (
+    RELEASE_BUCKET,
     lookup_release,
     read_manifest,
+    release_endpoint,
     release_prefix,
     validate_manifest,
 )
@@ -33,9 +34,9 @@ from worldatlas.map_releases.inputs import (
     FILENAME as INPUTS_FILE,
     read_inputs,
     restore_inputs,
+    validate_replay_sources,
     write_inputs,
 )
-from worldatlas.map_build import build as map_build
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.code_archive import read_source
 from worldatlas.map_build.physical import build as physical
@@ -86,6 +87,17 @@ def release_categories(selection):
 
 
 def build_bundle(candidate, run, viewer, bundle):
+    """Package a completed build and its captured inputs in a local directory.
+
+    Args:
+        candidate: Numbered release ID used in asset URLs.
+        run: Directory containing the completed build and its frozen inputs.
+        viewer: Directory containing the unbundled website files.
+        bundle: Empty directory that will receive the release files.
+
+    Returns:
+        The manifest of packaged files and their verified checksums.
+    """
     report = read(run / "report.json")
     if (
         report.get("schema") != "worldatlas-end-to-end-report-v2"
@@ -104,7 +116,7 @@ def build_bundle(candidate, run, viewer, bundle):
     if request_pin != identity["request"]:
         raise ValueError("build configuration does not match the run")
     final = report["final"]
-    verify_pins([request_pin, *final.values()])
+    verify_pins([request_pin, final["report"]])
     final_directory = Path(final["report"]["path"]).parent
     for name, filename in (
         ("rows", "rows.u32le"),
@@ -116,7 +128,9 @@ def build_bundle(candidate, run, viewer, bundle):
             raise ValueError(
                 "expected final outputs together inside the build directory"
             )
-    selection = read_saved(run / "input-selection.json")
+    # The build already validated the rules. Packaging uses the frozen selection
+    # as provenance and reads the category bindings needed by the viewer.
+    selection = read(run / "input-selection.json")
     if (
         hashlib.sha256(canonical_bytes(selection)).hexdigest()
         != identity["input_selection_sha256"]
@@ -124,6 +138,7 @@ def build_bundle(candidate, run, viewer, bundle):
         raise ValueError("the saved geographic selection changed after the build")
 
     request = read(Path(request_pin["path"]))
+    validate_replay_sources(request, selection, identity.get("source_pins", ()))
     summary = read(final_directory / "report.json")
     grid = vars(Grid(**summary["grid"]))
     counts = summary["counts"]
@@ -157,22 +172,25 @@ def build_bundle(candidate, run, viewer, bundle):
 
     combined = hashlib.sha256()
     grid_config = {"run_count": summary["run_count"]}
+    stream_sizes = {"rows": 4 * (grid["height"] + 1), "runs": 8 * summary["run_count"]}
     decoded = {}
     for stream in STREAMS:
         output = bundle / f"{stream}.u32le.gz"
         raw = Path(final[stream]["path"])
         checksum = hashlib.sha256()
+        size = 0
         with (
             raw.open("rb") as src,
             output.open("xb") as dst,
             gzip.GzipFile(filename="", fileobj=dst, mode="wb", mtime=0) as compressed,
         ):
             while chunk := src.read(4 << 20):
+                size += len(chunk)
                 checksum.update(chunk)
                 combined.update(chunk)
                 compressed.write(chunk)
-        if checksum.hexdigest() != final[stream]["sha256"]:
-            raise ValueError(f"{stream} changed while preparing the release")
+        if size != stream_sizes[stream] or checksum.hexdigest() != final[stream]["sha256"]:
+            raise ValueError(f"{stream} size or checksum differs from the completed build")
         decoded[stream] = checksum.hexdigest()
         grid_config[stream] = output.name
         grid_config[stream + "_sha256"] = decoded[stream]
@@ -234,15 +252,6 @@ def build_bundle(candidate, run, viewer, bundle):
         report=report,
         source_code=source_code,
     )
-    endpoint = (
-        request.get("physical_controls", {})
-        .get("source_staging", {})
-        .get("endpoint_url")
-    )
-    inputs = {"archive": INPUTS_FILE}
-    if endpoint is not None:
-        inputs["r2_endpoint"] = endpoint
-
     objects = {
         path.relative_to(bundle).as_posix(): {
             "r2_key": release_prefix(candidate) + path.relative_to(bundle).as_posix(),
@@ -257,7 +266,7 @@ def build_bundle(candidate, run, viewer, bundle):
         for path in sorted(bundle.rglob("*"))
         if path.is_file()
     }
-    manifest = {"inputs": inputs, "decoded_sha256": decoded, "objects": objects}
+    manifest = {"inputs": {"archive": INPUTS_FILE}, "decoded_sha256": decoded, "objects": objects}
     (bundle / "manifest.json").write_bytes(json_bytes(manifest))
     return manifest
 
@@ -282,7 +291,7 @@ def verify_object(storage, bucket, key, expected, *, return_bytes=False):
     return data
 
 
-def upload_bundle(storage, bucket, candidate, bundle, manifest):
+def upload_bundle(storage, bucket, bundle, manifest):
     for name, asset in manifest["objects"].items():
         key = asset["r2_key"]
         with (bundle / name).open("rb") as body:
@@ -302,11 +311,7 @@ def upload_bundle(storage, bucket, candidate, bundle, manifest):
 
 def retire_previews(db, storage, map_version):
     """Retire unpublished siblings only after a final candidate is official."""
-    official = db.execute(
-        "SELECT id FROM atlas.map_releases WHERE map_version=%s AND is_official",
-        (map_version,),
-    ).fetchone()
-    if official is None:
+    if official_candidate(db, map_version) is None:
         raise ValueError("publish a final candidate before retiring previews")
     rows = db.execute(
         "SELECT id,r2_bucket,manifest_sha256 FROM atlas.map_releases "
@@ -357,8 +362,36 @@ def homepage_condition(storage, bucket):
         return {"IfNoneMatch": "*"}
 
 
-def stage(db, storage, bucket, candidate, bundle, manifest):
-    version(candidate)
+def official_candidate(db, map_version):
+    """Return the selected candidate ID for a map version, if one is official.
+
+    Args:
+        db: Connection to the release catalog.
+        map_version: Version family, such as ``v9.0``.
+
+    Returns:
+        The official release ID, or None if the version is still in review.
+    """
+    row = db.execute(
+        "SELECT id FROM atlas.map_releases WHERE map_version=%s AND is_official",
+        (map_version,),
+    ).fetchone()
+    return row[0] if row else None
+
+
+def stage(db, storage, candidate, bundle, manifest):
+    """Upload a numbered preview and register its manifest in the catalog.
+
+    Args:
+        db: Connection holding the release write lock.
+        storage: Client for the project's release storage.
+        candidate: Numbered release ID for the preview.
+        bundle: Local directory containing the prepared release files.
+        manifest: Expected asset keys and checksums for the bundle.
+    """
+    selected = official_candidate(db, version(candidate))
+    if selected is not None and selected != candidate:
+        raise ValueError(f"{selected} is already official; stage the preview under a new map version")
     validate_manifest(manifest, candidate)
     if INPUTS_FILE not in manifest["objects"]:
         raise ValueError("release has no frozen input archive")
@@ -368,10 +401,10 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
         "SELECT r2_bucket,manifest_sha256 FROM atlas.map_releases WHERE id=%s",
         (candidate,),
     ).fetchone()
-    identity = (bucket, checksum)
+    identity = (RELEASE_BUCKET, checksum)
     if row is not None and row != identity:
         raise ValueError("that candidate already exists with different contents")
-    upload_bundle(storage, bucket, candidate, bundle, manifest)
+    upload_bundle(storage, RELEASE_BUCKET, bundle, manifest)
     asset = dict(
         r2_key=release_prefix(candidate) + "manifest.json",
         sha256=checksum,
@@ -381,7 +414,7 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
     # Publish the manifest after all its immutable assets exist.
     try:
         storage.put_object(
-            Bucket=bucket,
+            Bucket=RELEASE_BUCKET,
             Key=asset["r2_key"],
             Body=data,
             ContentType="application/json",
@@ -390,7 +423,7 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
     except ClientError as exc:
         if exc.response["ResponseMetadata"]["HTTPStatusCode"] != 412:
             raise
-    verify_object(storage, bucket, asset["r2_key"], asset)
+    verify_object(storage, RELEASE_BUCKET, asset["r2_key"], asset)
     if row is None:
         db.execute(
             "INSERT INTO atlas.map_releases(id,r2_bucket,manifest_sha256) VALUES (%s,%s,%s)",
@@ -399,9 +432,28 @@ def stage(db, storage, bucket, candidate, bundle, manifest):
 
 
 def publish(db, storage, candidate):
+    """Publish an approved candidate or finish cleanup for an older release.
+
+    Args:
+        db: Connection holding the release write lock.
+        storage: Client for the project's release storage.
+        candidate: Exact numbered candidate ID approved for publication.
+
+    Returns:
+        True if the homepage was written, or False for a cleanup-only retry.
+    """
     release = lookup_release(db, candidate)
-    manifest = read_manifest(storage, release)
+    map_version = release["map_version"]
+    if release["is_official"] and not release["is_current"]:
+        retire_previews(db, storage, map_version)
+        return False
+    selected = official_candidate(db, map_version)
+    if selected is not None and selected != candidate:
+        raise ValueError("this version already has a different official candidate")
     bucket = release["r2_bucket"]
+    if bucket != RELEASE_BUCKET:
+        raise ValueError(f"the website serves releases from the {RELEASE_BUCKET!r} bucket")
+    manifest = read_manifest(storage, release)
     if INPUTS_FILE not in manifest["objects"]:
         raise ValueError("release has no frozen input archive")
     condition = homepage_condition(storage, bucket)
@@ -415,12 +467,6 @@ def publish(db, storage, candidate):
     if html is None:
         raise ValueError("release has no viewer homepage")
     with db.transaction():
-        existing = db.execute(
-            "SELECT id FROM atlas.map_releases WHERE map_version=%s AND is_official FOR UPDATE",
-            (release["map_version"],),
-        ).fetchone()
-        if existing is not None and existing[0] != candidate:
-            raise ValueError("this version already has a different official candidate")
         # R2 and PostgreSQL are separate services. A retry of this same candidate
         # reconciles metadata if the website switch succeeds before a DB failure.
         put_homepage(storage, bucket, HOMEPAGE, html, **condition)
@@ -432,7 +478,8 @@ def publish(db, storage, candidate):
             "UPDATE atlas.map_releases SET is_official=true,is_current=true WHERE id=%s",
             (candidate,),
         )
-    retire_previews(db, storage, release["map_version"])
+    retire_previews(db, storage, map_version)
+    return True
 
 
 def main():
@@ -442,7 +489,6 @@ def main():
     stage_args.add_argument("candidate")
     stage_args.add_argument("run", type=Path)
     stage_args.add_argument("--viewer", type=Path, required=True)
-    stage_args.add_argument("--bucket", default="worldatlas")
     publish_args = actions.add_parser("publish")
     publish_args.add_argument("candidate")
     restore_args = actions.add_parser("restore-inputs")
@@ -454,56 +500,36 @@ def main():
     if not (connection := os.environ.get("NEON_DATABASE_URL")):
         parser.error("set NEON_DATABASE_URL to the release catalog database")
 
-    if "-pooler." in conninfo_to_dict(connection).get("host", ""):
+    if args.action != "restore-inputs" and "-pooler." in conninfo_to_dict(connection).get("host", ""):
         parser.error("use a direct Neon connection for the release lock")
 
     with tempfile.TemporaryDirectory() as temp:
         bundle = Path(temp)
-        with psycopg.connect(connection, autocommit=True) as db:
+        if args.action == "stage":
+            manifest = build_bundle(args.candidate, args.run.resolve(), args.viewer.resolve(), bundle)
+        with (
+            psycopg.connect(connection, autocommit=True) as db,
+            closing(physical.make_r2_client(release_endpoint())) as storage,
+        ):
             if args.action == "restore-inputs":
                 release = lookup_release(db, args.candidate)
-                bucket = release["r2_bucket"]
-                endpoint = read(Path(map_build.__file__).with_name("config.json"))[
-                    "physical_controls"
-                ]["source_staging"]["endpoint_url"]
-                with closing(physical.make_r2_client(endpoint)) as storage:
-                    saved = read_manifest(storage, release)
-                    asset = saved["objects"].get(INPUTS_FILE)
-                    if asset is None:
-                        raise ValueError("release has no input archive")
-                    raw = verify_object(
-                        storage, bucket, asset["r2_key"], asset, return_bytes=True
-                    )
+                saved = read_manifest(storage, release)
+                asset = saved["objects"].get(INPUTS_FILE)
+                if asset is None:
+                    raise ValueError("release has no input archive")
+                raw = verify_object(storage, release["r2_bucket"], asset["r2_key"], asset, return_bytes=True)
                 restore_inputs(
                     read_inputs(raw, saved["inputs"].get("release_id", release["id"])),
                     args.output,
                 )
                 print(f"Restored inputs to {args.output}")
                 return
+            # Stage and publish share a lock so preview retirement cannot race an upload.
+            db.execute("SELECT pg_advisory_lock(hashtext('atlas.release_publication'))")
             if args.action == "stage":
-                manifest = build_bundle(
-                    args.candidate, args.run.resolve(), args.viewer.resolve(), bundle
-                )
-            if args.action == "publish":
-                db.execute(
-                    "SELECT pg_advisory_lock(hashtext('atlas.release_publication'))"
-                )
-            if args.action == "stage":
-                endpoint = manifest["inputs"].get("r2_endpoint")
+                stage(db, storage, args.candidate, bundle, manifest)
+                print(f"Preview: /{release_prefix(args.candidate)}index.html")
+            elif publish(db, storage, args.candidate):
+                print(f"Published {args.candidate} at /")
             else:
-                endpoint = None
-            if endpoint is None:
-                endpoint = read(Path(map_build.__file__).with_name("config.json"))[
-                    "physical_controls"
-                ]["source_staging"]["endpoint_url"]
-            with closing(physical.make_r2_client(endpoint)) as storage:
-                if args.action == "stage":
-                    stage(db, storage, args.bucket, args.candidate, bundle, manifest)
-                    print(f"Preview: /{release_prefix(args.candidate)}index.html")
-                else:
-                    publish(db, storage, args.candidate)
-                    print(f"Published {args.candidate} at /")
-
-
-if __name__ == "__main__":
-    main()
+                print(f"Finished preview cleanup for {args.candidate}")

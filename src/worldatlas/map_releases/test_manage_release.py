@@ -1,25 +1,32 @@
+"""Exercise release packaging, staging, publication and cleanup without cloud writes."""
+
+from contextlib import nullcontext, redirect_stderr, redirect_stdout
 import gzip
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
+import runpy
+import shutil
 import struct
+import sys
 import tempfile
 import unittest
 from unittest.mock import Mock, patch
-import shutil
 
 from botocore.exceptions import ClientError
 
+from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.execution.runtime import pin
 from worldatlas.map_build.inputs.selection import canonical_bytes
-from worldatlas.map_releases.manage_release import (
-    build_bundle,
-    release_categories,
-    retire_previews,
-    stage,
-    verify_object,
-    version,
+from worldatlas.map_build.test_support import selection
+from worldatlas.map_releases.catalog import (
+    RELEASE_BUCKET,
+    lookup_release,
+    read_manifest,
+    release_endpoint,
+    validate_manifest,
 )
 from worldatlas.map_releases.inputs import (
     FILENAME,
@@ -27,8 +34,16 @@ from worldatlas.map_releases.inputs import (
     restore_inputs,
     write_inputs,
 )
-from worldatlas.map_build.execution.code_archive import capture_source, write_source
-from worldatlas.map_build.test_support import selection
+from worldatlas.map_releases.manage_release import (
+    build_bundle,
+    main,
+    publish,
+    release_categories,
+    retire_previews,
+    stage,
+    verify_object,
+    version,
+)
 
 
 class BundleTests(unittest.TestCase):
@@ -66,7 +81,13 @@ class BundleTests(unittest.TestCase):
                         "land_config": {
                             "json": {"grid": {"width": 2, "height": 1, "step": 180}}
                         },
+                        "water_config": {"json": {}},
+                        "raw_manifest": {"json": {"files": [dict(
+                            path="raw/shard.parquet", r2_bucket="test", r2_key="sources/shard.parquet",
+                            sha256="c" * 64, size=10,
+                        )]}},
                     },
+                    "physical_controls": {"source_staging": {"mode": "r2-s3"}},
                 }
             )
         )
@@ -174,9 +195,75 @@ class BundleTests(unittest.TestCase):
         )
 
     def test_changed_map_output_cannot_be_staged(self):
-        (self.run / "final/runs.u32le").write_bytes(b"changed")
-        with self.assertRaisesRegex(ValueError, "checkpoint/input hash mismatch"):
+        (self.run / "final/runs.u32le").write_bytes(b"x" * len(self.runs))
+        with self.assertRaisesRegex(ValueError, "runs size or checksum differs"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_stage_checks_map_stream_size_when_checksum_matches(self):
+        rows = self.run / "final/rows.u32le"
+        rows.write_bytes(self.rows + b"\0" * 4)
+        report = json.loads(self.report.read_bytes())
+        report["final"]["rows"] = pin(rows)
+        self.report.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError, "rows size or checksum differs"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_bundle_requires_completed_stages_and_original_identity(self):
+        report = json.loads(self.report.read_bytes())
+        incomplete = dict(report, stages={})
+        self.report.write_text(json.dumps(incomplete))
+        with self.assertRaisesRegex(ValueError, "a completed map build is required"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        identity = self.run / "run-identity.json"
+        identity.write_text("{}")
+        self.report.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError, "build identity does not match"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        identity.write_text('{"request": {}}')
+        report["original_run_identity"] = pin(identity)
+        self.report.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError, "build configuration does not match"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_bundle_requires_outputs_together_under_the_run(self):
+        report = json.loads(self.report.read_bytes())
+        path = self.run.parent / "rows.u32le"
+        path.write_bytes(self.rows)
+        report["final"]["rows"] = pin(path)
+        self.report.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError, "outputs together inside the build directory"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_bundle_checks_map_count_coverage_and_category_ids(self):
+        report = json.loads(self.report.read_bytes())
+        path = self.run / "final/report.json"
+        summary = json.loads(path.read_bytes())
+        for counts, error in (({"1": 1}, "counts must cover"), ({"99": 2}, "missing categories")):
+            with self.subTest(counts=counts), self.assertRaisesRegex(ValueError, error):
+                path.write_text(json.dumps(dict(summary, counts=counts)))
+                report["final"]["report"] = pin(path)
+                self.report.write_text(json.dumps(report))
+                build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_viewer_requires_an_unversioned_homepage_and_regular_asset_paths(self):
+        asset = self.viewer / "script link.js"
+        asset.touch()
+        with self.assertRaisesRegex(ValueError, "invalid viewer asset path"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        asset.unlink()
+        (self.viewer / "index.html").write_text('<head><base href="/other/"></head>')
+        with self.assertRaisesRegex(ValueError, "single head and no base URL"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_readmes_are_excluded_and_old_attempts_without_code_are_retained(self):
+        (self.viewer / "docs").mkdir()
+        (self.viewer / "docs" / "README.md").write_text("viewer documentation")
+        (self.attempt / "producer.json").write_text("{}")
+        manifest = build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        self.assertNotIn("docs/README.md", manifest["objects"])
+        saved = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc.1")
+        self.assertEqual(saved["run"]["attempts"], [{"attempt_id": "first"}])
+        self.assertNotIn("source_code", saved)
 
     def test_changed_saved_selection_blocks_staging(self):
         self.selection["geography"]["entities"][1]["name"] = "changed"
@@ -197,6 +284,20 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(archived["report"]["status"], "complete")
         self.assertIn(FILENAME, manifest["objects"])
         self.assertNotIn("configuration", manifest["inputs"])
+
+    def test_bundle_does_not_reinterpret_the_frozen_geographic_rules(self):
+        self.selection["geography"]["schema"] = "worldatlas-geographic-division-v1"
+        self.snapshot.write_text(json.dumps(self.selection))
+        identity_file = self.run / "run-identity.json"
+        identity = json.loads(identity_file.read_bytes())
+        identity["input_selection_sha256"] = hashlib.sha256(canonical_bytes(self.selection)).hexdigest()
+        identity_file.write_text(json.dumps(identity))
+        report = json.loads(self.report.read_bytes())
+        report["original_run_identity"] = pin(identity_file)
+        self.report.write_text(json.dumps(report))
+        build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        archived = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc.1")
+        self.assertEqual(archived["selection"], self.selection)
 
     def test_input_archive_is_repeatable_and_restores_without_database(self):
         manifest = build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
@@ -247,6 +348,13 @@ class BundleTests(unittest.TestCase):
     def test_changed_code_archive_cannot_be_staged(self):
         (self.attempt / "source-code.json.gz").write_bytes(b"changed")
         with self.assertRaisesRegex(ValueError, "checkpoint/input hash mismatch"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_source_archive_must_belong_to_the_reported_attempt(self):
+        other = self.run.parent / "source-code.json.gz"
+        shutil.copyfile(self.attempt / "source-code.json.gz", other)
+        (self.attempt / "producer.json").write_text(json.dumps({"source_archive": pin(other)}))
+        with self.assertRaisesRegex(ValueError, "inside its build attempt"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
     def test_historical_restore_applies_locations_without_rewriting_original_records(
@@ -321,6 +429,8 @@ class R2VerificationTests(unittest.TestCase):
 
             def put_object(self, **options):
                 assert options["IfNoneMatch"] == "*"
+                if options["Key"] in self.objects:
+                    raise ClientError({"ResponseMetadata": {"HTTPStatusCode": 412}}, "PutObject")
                 body = options["Body"]
                 self.objects[options["Key"]] = (
                     body.read() if hasattr(body, "read") else body
@@ -358,12 +468,48 @@ class R2VerificationTests(unittest.TestCase):
             db = Mock()
             db.execute.return_value.fetchone.return_value = None
             storage = Storage()
-            stage(db, storage, "test", "v9.0-rc.1", bundle, manifest)
+            candidate = "v9.0-rc.1"
+            stage(db, storage, candidate, bundle, manifest)
             self.assertEqual(storage.objects["index.html"], b"published")
             self.assertEqual(list(storage.objects)[-1], folder + "manifest.json")
             self.assertEqual(
                 json.loads(storage.objects[folder + "manifest.json"]), manifest
             )
+            checksum = hashlib.sha256(storage.objects[folder + "manifest.json"]).hexdigest()
+            record = (RELEASE_BUCKET, checksum)
+            db.execute.reset_mock()
+            db.execute.return_value.fetchone.side_effect = [(candidate,), record]
+            stage(db, storage, candidate, bundle, manifest)
+            self.assertEqual(len(db.execute.call_args_list), 2)
+            db.execute.return_value.fetchone.side_effect = [None, record]
+            with self.assertRaisesRegex(ValueError, "already exists with different contents"):
+                stage(db, storage, candidate, bundle, dict(manifest, new_field=True))
+            inputs = objects.pop(FILENAME)
+            db.execute.return_value.fetchone.side_effect = [None]
+            with self.assertRaisesRegex(ValueError, "no frozen input archive"):
+                stage(db, storage, candidate, bundle, manifest)
+            objects[FILENAME] = inputs
+            class FailingStorage(Storage):
+                def put_object(self, **options):
+                    filename = options["Key"].removeprefix(folder)
+                    if filename == self.failure:
+                        raise ClientError({"ResponseMetadata": {"HTTPStatusCode": 403}}, "PutObject")
+                    super().put_object(**options)
+
+            for name in ("rows.u32le.gz", "manifest.json"):
+                failed = FailingStorage()
+                failed.failure = name
+                db.execute.return_value.fetchone.side_effect = [None, None]
+                with self.subTest(name=name), self.assertRaises(ClientError):
+                    stage(db, failed, candidate, bundle, manifest)
+                self.assertNotIn(folder + "manifest.json", failed.objects)
+
+    def test_no_new_candidate_can_be_staged_after_its_version_is_official(self):
+        db, storage = Mock(), Mock()
+        db.execute.return_value.fetchone.return_value = ("v9.0-rc.1",)
+        with self.assertRaisesRegex(ValueError, "v9.0-rc.1 is already official"):
+            stage(db, storage, "v9.0-rc.2", None, {})
+        storage.put_object.assert_not_called()
 
     def test_matching_size_cannot_pass_checksum_verification(self):
         class Storage:
@@ -383,6 +529,147 @@ class R2VerificationTests(unittest.TestCase):
                     sha256=hashlib.sha256(b"good").hexdigest(),
                 ),
             )
+
+    def test_asset_metadata_must_match_before_checking_body(self):
+        body = b"grid"
+        asset = dict(size_bytes=len(body), content_type="text/html", sha256=hashlib.sha256(body).hexdigest())
+        for metadata, error in (
+            ({"ContentLength": 2}, "wrong size or encoding"),
+            ({"ContentEncoding": "gzip"}, "wrong size or encoding"),
+            ({"ContentType": "text/plain"}, "wrong content type"),
+        ):
+            storage = Mock()
+            response = dict(ContentLength=len(body), ContentType="text/html", Body=io.BytesIO(body))
+            storage.get_object.return_value = response | metadata
+            with self.subTest(metadata=metadata), self.assertRaisesRegex(ValueError, error):
+                verify_object(storage, RELEASE_BUCKET, "index.html", asset)
+            self.assertTrue(response["Body"].closed)
+
+
+class CatalogTests(unittest.TestCase):
+    def test_lookups_require_one_release_identity(self):
+        database = Mock()
+        database.execute.return_value.fetchall.return_value = []
+        with self.assertRaisesRegex(ValueError, "no unique release for v9.0"):
+            lookup_release(database, "v9.0")
+
+    def test_manifest_checksum_must_match_the_catalog(self):
+        storage = Mock()
+        storage.get_object.return_value = {"Body": io.BytesIO(b"{}")}
+        release = dict(id="v9.0-rc.1", r2_bucket=RELEASE_BUCKET, manifest_sha256="0" * 64)
+        with self.assertRaisesRegex(ValueError, "Neon checksum"):
+            read_manifest(storage, release)
+
+    def test_manifest_requires_file_identities_within_its_release_folder(self):
+        candidate = "v9.0-rc.1"
+        asset = dict(r2_key=f"releases/{candidate}/rows.u32le.gz", sha256="a" * 64,
+                     size_bytes=4, content_type="application/gzip")
+        for manifest, error in (
+            ({}, "invalid release manifest"),
+            ({"objects": {"rows.u32le.gz": None}}, "invalid release object"),
+            ({"objects": {"../rows.u32le.gz": asset}}, "escapes its own immutable folder"),
+            ({"objects": {"rows.u32le.gz": dict(asset, r2_key="other/rows.u32le.gz")}}, "escapes"),
+            ({"objects": {"rows.u32le.gz": dict(asset, sha256="z" * 64)}}, "invalid release object byte identity"),
+            ({"objects": {"rows.u32le.gz": asset}}, "lacks map streams"),
+        ):
+            with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
+                validate_manifest(manifest, candidate)
+
+
+class PublicationTests(unittest.TestCase):
+    def setUp(self):
+        self.candidate = "v9.0-rc.1"
+        self.folder = "releases/" + self.candidate + "/"
+        self.files = {
+            name: name.encode()
+            for name in ("index.html", "rows.u32le.gz", "runs.u32le.gz", "inputs.json.gz")
+        }
+        self.manifest = {"objects": self.assets()}
+        self.db = Mock()
+        self.db.transaction.side_effect = nullcontext
+        self.set_release()
+        self.storage = Mock()
+        self.storage.head_object.return_value = {"ETag": '"current"'}
+        self.storage.get_object.side_effect = self.get_object
+
+    def set_release(self, *, official=False, current=False, bucket=RELEASE_BUCKET, previews=()):
+        raw = json.dumps(self.manifest).encode()
+        self.db.execute.return_value.fetchall.side_effect = [
+            [(self.candidate, "v9.0", bucket, hashlib.sha256(raw).hexdigest(), official, current)],
+            previews,
+        ]
+        self.db.execute.return_value.fetchone.return_value = (self.candidate,) if official else None
+
+    def assets(self):
+        return {name: dict(r2_key=self.folder + name, size_bytes=len(body),
+                           sha256=hashlib.sha256(body).hexdigest(), content_type="application/octet-stream")
+                for name, body in self.files.items()}
+
+    def get_object(self, *, Bucket, Key):
+        name = Key.removeprefix(self.folder)
+        if name == "manifest.json":
+            return {"Body": io.BytesIO(json.dumps(self.manifest).encode())}
+        content = self.files[name]
+        return dict(Body=io.BytesIO(content), ContentLength=len(content), ContentType="application/octet-stream")
+
+    def test_publish_installs_verified_homepage_and_selects_candidate(self):
+        self.db.execute.return_value.fetchone.side_effect = [None, (self.candidate,)]
+        self.assertTrue(publish(self.db, self.storage, self.candidate))
+        self.storage.put_object.assert_called_once_with(
+            Bucket=RELEASE_BUCKET, Key="index.html", Body=self.files["index.html"],
+            ContentType="text/html", CacheControl="no-cache", IfMatch='"current"',
+        )
+        updates = [call.args for call in self.db.execute.call_args_list if call.args[0].startswith("UPDATE")]
+        self.assertEqual(len(updates), 2)
+        self.assertIn("SET is_current=false", updates[0][0])
+        self.assertIn("SET is_official=true,is_current=true", updates[1][0])
+        self.assertEqual([args for _, args in updates], [(self.candidate,)] * 2)
+
+    def test_retry_for_older_official_release_never_rewrites_homepage(self):
+        preview = "v9.0-rc.2"
+        self.set_release(official=True, previews=[(preview, RELEASE_BUCKET, "a" * 64)])
+        with patch("worldatlas.map_releases.manage_release.read_manifest", return_value={"objects": {}}):
+            self.assertFalse(publish(self.db, self.storage, self.candidate))
+        self.storage.head_object.assert_not_called()
+        self.storage.put_object.assert_not_called()
+        self.db.transaction.assert_not_called()
+        self.storage.delete_object.assert_called_once_with(
+            Bucket=RELEASE_BUCKET, Key=f"releases/{preview}/manifest.json",
+        )
+
+    def test_publish_refuses_a_different_candidate_for_an_official_version(self):
+        self.db.execute.return_value.fetchone.return_value = ("v9.0-rc.2",)
+        with self.assertRaisesRegex(ValueError, "different official candidate"):
+            publish(self.db, self.storage, self.candidate)
+        self.storage.get_object.assert_not_called()
+        self.storage.put_object.assert_not_called()
+
+    def test_publish_requires_the_website_bucket(self):
+        self.set_release(bucket="other")
+        with self.assertRaisesRegex(ValueError, "website serves releases"):
+            publish(self.db, self.storage, self.candidate)
+        self.storage.put_object.assert_not_called()
+
+    def test_publish_requires_replay_inputs_and_a_homepage(self):
+        for name, error in (("inputs.json.gz", "frozen input archive"), ("index.html", "no viewer homepage")):
+            with self.subTest(name=name):
+                asset = self.manifest["objects"].pop(name)
+                self.set_release()
+                with self.assertRaisesRegex(ValueError, error):
+                    publish(self.db, self.storage, self.candidate)
+                self.manifest["objects"][name] = asset
+        self.storage.put_object.assert_not_called()
+
+    def test_first_publication_creates_homepage_and_unexpected_errors_stop(self):
+        self.storage.head_object.side_effect = ClientError({"ResponseMetadata": {"HTTPStatusCode": 403}}, "HeadObject")
+        with self.assertRaises(ClientError):
+            publish(self.db, self.storage, self.candidate)
+        self.storage.put_object.assert_not_called()
+        self.storage.head_object.side_effect = ClientError({"ResponseMetadata": {"HTTPStatusCode": 404}}, "HeadObject")
+        self.set_release()
+        self.db.execute.return_value.fetchone.side_effect = [None, (self.candidate,)]
+        self.assertTrue(publish(self.db, self.storage, self.candidate))
+        self.assertEqual(self.storage.put_object.call_args.kwargs["IfNoneMatch"], "*")
 
 
 class PreviewRetirementTests(unittest.TestCase):
@@ -465,3 +752,88 @@ class PreviewRetirementTests(unittest.TestCase):
                     Bucket="test", Prefix=folder, MaxKeys=1
                 )
                 storage.delete_object.assert_not_called()
+
+    def test_unexpected_manifest_read_error_stops_cleanup(self):
+        db, storage = Mock(), Mock()
+        db.execute.return_value.fetchone.return_value = ("v9.0-rc.2",)
+        db.execute.return_value.fetchall.return_value = [("v9.0-rc.1", "test", "a" * 64)]
+        storage.get_object.side_effect = ClientError({"Error": {"Code": "AccessDenied"}}, "GetObject")
+        with self.assertRaises(ClientError):
+            retire_previews(db, storage, "v9.0")
+        storage.delete_object.assert_not_called()
+        storage.list_objects_v2.assert_not_called()
+
+
+class CommandTests(unittest.TestCase):
+    def test_module_entry_point_displays_help(self):
+        with patch.object(sys, "argv", ["worldatlas-release", "--help"]), redirect_stdout(io.StringIO()) as output:
+            with self.assertRaises(SystemExit) as result:
+                runpy.run_module("worldatlas.map_releases", run_name="__main__")
+        self.assertEqual(result.exception.code, 0)
+        self.assertIn("restore-inputs", output.getvalue())
+
+    def test_write_commands_require_a_direct_catalog_connection(self):
+        for url, error in (("", "set NEON_DATABASE_URL"), ("host=atlas-pooler.example.org", "use a direct Neon connection")):
+            with (self.subTest(error=error), patch.dict(os.environ, NEON_DATABASE_URL=url),
+                  patch.object(sys, "argv", ["worldatlas-release", "publish", "v9.0-rc.1"]),
+                  redirect_stderr(io.StringIO()) as output, self.assertRaises(SystemExit)):
+                main()
+            self.assertIn(error, output.getvalue())
+
+    def test_write_commands_share_the_release_endpoint_and_lock(self):
+        command = "worldatlas.map_releases.manage_release"
+        candidate = "v9.0-rc.1"
+        endpoint = release_endpoint()
+        for action, arguments, published, receipt in (
+            ("stage", ["run", "--viewer", "viewer"], False, "Preview:"),
+            ("publish", [], True, "Published"),
+            ("publish", [], False, "Finished preview cleanup"),
+        ):
+            db, storage = Mock(), Mock()
+            lock = "SELECT pg_advisory_lock(hashtext('atlas.release_publication'))"
+
+            def after_lock(*_):
+                db.execute.assert_called_once_with(lock)
+                return published
+
+            with (self.subTest(action=action, published=published),
+                  patch.object(sys, "argv", ["worldatlas-release", action, candidate, *arguments]),
+                  patch.dict(os.environ, NEON_DATABASE_URL="host=test"),
+                  patch(command + ".psycopg.connect", return_value=nullcontext(db)),
+                  patch(command + ".physical.make_r2_client", return_value=storage) as client,
+                  patch(command + ".build_bundle", return_value={"inputs": {"r2_endpoint": "old-raw-endpoint"}}),
+                  patch(f"{command}.{action}", side_effect=after_lock) as operation,
+                  redirect_stdout(io.StringIO()) as output):
+                main()
+            client.assert_called_once_with(endpoint)
+            operation.assert_called_once()
+            self.assertIn(receipt, output.getvalue())
+
+    def test_restore_extracts_pinned_files_without_taking_a_write_lock(self):
+        command = "worldatlas.map_releases.manage_release"
+        candidate = "v9.0-rc.1"
+        db, storage = Mock(), Mock()
+        with tempfile.TemporaryDirectory() as temp:
+            archive, output = Path(temp) / FILENAME, Path(temp) / "restored"
+            write_inputs(archive, release_id=candidate, configuration={}, selection={"coordinates": [0, 1]},
+                         run=None, report=None)
+            body = archive.read_bytes()
+            asset = dict(r2_key=f"releases/{candidate}/{FILENAME}", size_bytes=len(body),
+                         sha256=hashlib.sha256(body).hexdigest(), content_type="application/gzip")
+            release = dict(id=candidate, r2_bucket=RELEASE_BUCKET)
+            storage.get_object.return_value = dict(Body=io.BytesIO(body), ContentLength=len(body), ContentType="application/gzip")
+            manifest = dict(inputs={}, objects={FILENAME: asset})
+            with (patch.object(sys, "argv", ["worldatlas-release", "restore-inputs", candidate, str(output)]),
+                  patch.dict(os.environ, NEON_DATABASE_URL="host=atlas-pooler.example.org"),
+                  patch(command + ".psycopg.connect", return_value=nullcontext(db)),
+                  patch(command + ".physical.make_r2_client", return_value=storage) as client,
+                  patch(command + ".lookup_release", return_value=release),
+                  patch(command + ".read_manifest", return_value=manifest), redirect_stdout(io.StringIO())):
+                main()
+                manifest["objects"].clear()
+                with self.assertRaisesRegex(ValueError, "no input archive"):
+                    main()
+            self.assertEqual(client.call_count, 2)
+            client.assert_called_with(release_endpoint())
+            db.execute.assert_not_called()
+            self.assertEqual(json.loads((output / "selection.json").read_bytes()), {"coordinates": [0, 1]})

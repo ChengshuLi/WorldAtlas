@@ -2,9 +2,18 @@
 
 from contextlib import closing
 import hashlib
+from importlib.resources import files
 import json
 from pathlib import PurePosixPath
 import re
+
+RELEASE_BUCKET = "worldatlas"
+
+
+def release_endpoint():
+    """Return the R2 account endpoint used for the project's release bucket."""
+    config = json.loads(files("worldatlas.map_build").joinpath("config.json").read_bytes())
+    return config["physical_controls"]["source_staging"]["endpoint_url"]
 
 
 def release_prefix(release_id):

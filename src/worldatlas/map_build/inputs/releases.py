@@ -1,14 +1,12 @@
 """Resolve official releases and candidates through their pinned R2 manifests."""
 
 from contextlib import closing
-import json
 import os
-from pathlib import Path
 
 import psycopg
 
 from worldatlas.map_build.physical import build as physical_build
-from worldatlas.map_releases.catalog import lookup_release, read_manifest
+from worldatlas.map_releases.catalog import lookup_release, read_manifest, release_endpoint
 
 
 def read_release_assets(identity):
@@ -21,9 +19,7 @@ def read_release_assets(identity):
             release = lookup_release(database, identity)
     except psycopg.Error:
         raise ValueError("Neon release lookup failed; check database access") from None
-    config = json.loads(Path(__file__).parents[1].joinpath("config.json").read_text())
-    endpoint = config["physical_controls"]["source_staging"]["endpoint_url"]
-    with closing(physical_build.make_r2_client(endpoint)) as storage:
+    with closing(physical_build.make_r2_client(release_endpoint())) as storage:
         manifest = read_manifest(storage, release)
     result = []
     for stream in ("rows", "runs"):

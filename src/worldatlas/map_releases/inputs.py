@@ -1,14 +1,85 @@
 """Capture and restore a release's frozen inputs without querying working geography."""
 
 import gzip
+import hashlib
 import json
 from pathlib import Path
 
+from worldatlas.map_build.execution.code_archive import restore_source, source_files
 from worldatlas.map_build.execution.runtime import json_bytes
-from worldatlas.map_build.execution.code_archive import source_files, restore_source
 
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
+
+
+def validate_replay_sources(configuration, selection, source_pins):
+    """Require staged builds to obtain physical inputs from the archive or R2.
+
+    Args:
+        configuration: Original build request to include in the archive.
+        selection: Frozen source catalog and geographic records.
+        source_pins: Local copies of physical inputs verified by the build.
+
+    Raises:
+        ValueError: A physical input would require files from the build machine.
+    """
+    cached_paths = {pin["sha256"]: Path(pin["path"]) for pin in source_pins}
+    sources = configuration["sources"]
+    catalog_rows = selection["raw_sources"]
+    catalog = {(row["source_id"], None): row for row in catalog_rows}
+    catalog.update({(row["source_id"], row.get("version")): row for row in catalog_rows})
+
+    def catalog_asset(spec):
+        reference = spec["r2_source"]
+        return catalog.get((reference["source_id"], reference.get("version")))
+
+    def r2_source(spec):
+        if not isinstance(spec, dict):
+            return False
+        if "r2_source" in spec:
+            return catalog_asset(spec) is not None
+        if "archive" in spec:
+            return r2_source(spec["archive"])
+        return all(spec.get(key) for key in ("r2_bucket", "r2_key", "sha256"))
+
+    def require_source(name, spec, *, inline=False):
+        if r2_source(spec) or (inline and isinstance(spec, dict) and set(spec) == {"json"}):
+            return
+        options = "inline JSON or an R2 pin" if inline else "an R2 pin"
+        raise ValueError(f"release replay requires {options} for {name}")
+
+    def read_document(name, spec):
+        require_source(name, spec, inline=True)
+        if "json" in spec:
+            return spec["json"]
+        pin = catalog_asset(spec) if "r2_source" in spec else spec
+        checksum = pin["sha256"]
+        path = cached_paths.get(checksum)
+        if path is None or not path.is_file():
+            raise ValueError(f"release replay needs the build's cached R2 document for {name}")
+        raw = path.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != checksum:
+            raise ValueError(f"cached R2 document changed after the build: {name}")
+        return json.loads(raw)
+
+    require_source("water_config", sources["water_config"], inline=True)
+    land = read_document("land_config", sources["land_config"])
+    for index, layer in enumerate(land.get("land", [])):
+        require_source(f"land_config.land[{index}].dataset", layer["dataset"], inline=True)
+        for file_index, spec in enumerate(layer["files"]):
+            require_source(f"land_config.land[{index}].files[{file_index}]", spec, inline=True)
+    raw = read_document("raw_manifest", sources["raw_manifest"])
+    staging = configuration.get("physical_controls", {}).get("source_staging") or {}
+    for index, spec in enumerate(raw["files"]):
+        name = f"raw_manifest.files[{index}]"
+        require_source(name, spec)
+        if "r2_source" not in spec and (
+            type(spec.get("size")) is not int or spec["size"] < 0 or "archive" in spec
+        ):
+            raise ValueError(f"release replay requires an R2 object and byte size for {name}")
+        # The physical stage only downloads uncached shards in R2 staging mode.
+        if staging.get("mode") != "r2-s3":
+            raise ValueError(f"release replay requires R2 staging for {name}")
 
 
 def write_inputs(
