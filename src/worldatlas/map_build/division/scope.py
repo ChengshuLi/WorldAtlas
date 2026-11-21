@@ -10,6 +10,7 @@ from worldatlas.map_build.core.geometry import PolygonRasterizer
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.division.intervals import overlay, prepare
+from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.water.shared_nearest import crop
 
 
@@ -264,6 +265,7 @@ class Scope:
         return self.populations
 
     def query_row(self, y):
+        check_cancelled()
         chosen = (
             self.mask_row(self.eligible_area[y - self.bounds[2]])
             if self.eligible_area is not None
@@ -344,6 +346,7 @@ class Scope:
         """Yield row batches and disjoint dense windows without needless recoding."""
         rows = self.query_rows()
         for first in range(rows.start, rows.stop, rows_per_batch):
+            check_cancelled()
             last = min(first + rows_per_batch, rows.stop)
             if self.eligible_area is not None and not self.rule["features"].get(
                 "connected_to"

@@ -24,6 +24,8 @@ The work directory holds the shared `inputs/` cache. Each new build needs a new 
 | `--selection INPUT_SELECTION.json` | Rebuild using saved geographic values. For a retained release, first [restore its inputs](../map_releases/README.md#restore-inputs) and use its configuration and captured code. |
 | `--compare-release VERSION_OR_RC` | Compare with an official version or numbered candidate from the release catalog. This option also needs database and R2 access for the comparison. |
 
+The first attempt caches the decoded comparison streams and any category mapping, and records their checksums. Resume uses the same files even if the comparison preview has since been retired.
+
 ### Exact physical rasterization
 
 The project environment provides GDAL 3.10.3, its Python bindings and PROJ 9.6.0. For byte-identical physical rasterization, build that GDAL library with `-ffp-contract=off`. A stock prebuilt library may round a raster boundary differently. Install CMake 3.16 or newer, a C/C++ compiler and Git separately; they are setup tools, not pipeline runtime dependencies. Then run once inside the project environment, choosing an absolute work directory:
@@ -97,6 +99,8 @@ The physical, ownership and final layers use row-run streams. `rows.u32le` gives
 `timing-events.jsonl` records stage, rule and checkpoint events. The build report summarizes wall time by stage and measures downloads separately. Concurrent work contributes overlapping time once to each stage total. When an interruption loses an endpoint, the report marks that time incomplete and records a lower bound. Time between attempts is excluded.
 
 Each attempt saves its WorldAtlas source and setup files in `attempts/ATTEMPT_ID/source-code.json.gz` and pins the archive in its producer record. Keep the code stable within each attempt. Resume records the code for the new attempt and verifies the saved inputs and completed outputs. [Release staging](../map_releases/README.md#archived-code) includes those snapshots in the release archive.
+
+To stop a build, interrupt it with Ctrl+C. Division workers check for cancellation between processing batches. Completed checkpoints remain available to resume.
 
 ## Code and tests
 

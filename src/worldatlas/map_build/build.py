@@ -351,12 +351,27 @@ class Pipeline:
             ):
                 document["grid"] = vars(self.grid)
                 self.sources[name] = self.save_source_document(document)
+        comparison_inputs = None
         if compare_release is not None:
             if {"reference_rows", "reference_runs"} & self.sources.keys():
                 raise ValueError(
                     "choose a published comparison release or local reference streams"
                 )
-            self.sources.update(self.release_reference(compare_release))
+            if previous is not None:
+                comparison_inputs = previous.get("comparison_inputs")
+            if comparison_inputs is not None:
+                self.sources.update(self.resolve_pins(comparison_inputs))
+            else:
+                start = len(self.source_pins)
+                files = self.release_reference(compare_release)
+                self.sources.update(files)
+                if previous is None:
+                    # Once decoded, the streams and mapping suffice for comparison.
+                    by_path = {p["path"]: p for p in self.source_pins}
+                    comparison_inputs = {
+                        name: by_path[str(files[name])] for name in sorted(files)
+                    }
+                    self.source_pins[start:] = list(comparison_inputs.values())
         if bool("reference_rows" in self.sources) != bool(
             "reference_runs" in self.sources
         ):
@@ -392,6 +407,8 @@ class Pipeline:
             ).hexdigest()
         if compare_release is not None:
             self.identity["compare_release"] = compare_release
+        if comparison_inputs is not None:
+            self.identity["comparison_inputs"] = comparison_inputs
         if previous is None or "reuse_from" in previous:
             self.identity["reuse_from"] = reuse
         if self.physical_reuse is not None:
@@ -516,8 +533,14 @@ class Pipeline:
 
         requested = catalog_keys(resolved)
 
-        rows = self.neon_raw_catalog(requested)
-        catalog = {key: row for key, row in rows}
+        # Older snapshots can contain multiple captures under one source ID.
+        catalog = {
+            key: source
+            for key in requested
+            for source in self.selection["raw_sources"]
+            if source["source_id"] == key[0]
+            and (key[1] is None or source.get("version") == key[1])
+        }
         if catalog.keys() != requested:
             raise ValueError("raw catalog is missing selected sources")
         for spec, size_field in references:
@@ -531,29 +554,6 @@ class Pipeline:
             )
             spec[size_field] = source["size_bytes"]
         return resolved
-
-    def neon_raw_catalog(self, requested):
-        if self.selection is not None:
-            # Older archives can contain multiple captures under one source ID.
-            # Match their saved version metadata without querying today's catalog.
-            return [
-                (key, source)
-                for key in requested
-                for source in self.selection["raw_sources"]
-                if source["source_id"] == key[0]
-                and (key[1] is None or source.get("version") == key[1])
-            ]
-        connection = os.environ.get("NEON_DATABASE_URL")
-        if not connection:
-            raise ValueError("set NEON_DATABASE_URL for read-only catalog access")
-        with psycopg.connect(connection) as database:
-            database.execute("SET TRANSACTION READ ONLY")
-            rows = database.execute(
-                "SELECT (to_jsonb(a)-'id') || jsonb_build_object('source_id',a.id) "
-                "FROM atlas.source_assets a WHERE id=ANY(%s)",
-                (sorted({key[0] for key in requested}),),
-            ).fetchall()
-        return [((row[0]["source_id"], None), row[0]) for row in rows]
 
     def cloud_file(self, spec, *, endpoint=None):
         """Resolve one pinned R2 file or ZIP member locally.
@@ -1086,7 +1086,10 @@ class Pipeline:
                 self.out / "physical/report.json"
             )
             self.timing.mark_complete("physical", physical_report=physical_report)
-            with self.timing.measure("division", "stage-total"):
+            with (
+                stage_context(self.cancelled),
+                self.timing.measure("division", "stage-total"),
+            ):
                 ownership = self.divide(physical)
             self.timing.mark_complete("division")
             with self.timing.measure("package", "stage-total"):

@@ -13,6 +13,7 @@ import json
 import time
 
 from worldatlas.map_build.core.layers import file_hash
+from worldatlas.map_build.execution.control import check_cancelled
 
 
 def _read(path):
@@ -48,7 +49,7 @@ def build(
     output_runs,
     *,
     physical_code=17,
-    guard=lambda: None,
+    guard=check_cancelled,
 ):
     """Build complete run-level components in-process, without a dense grid."""
     if (

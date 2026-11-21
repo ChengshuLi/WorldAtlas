@@ -13,6 +13,7 @@ from worldatlas.map_build.core.geometry import (
 )
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
+from worldatlas.map_build.execution.control import check_cancelled
 
 
 class ComponentGrid:
@@ -107,6 +108,7 @@ class ComponentGrid:
     def totals(self):
         if self.populations is None:
             for y in range(self.grid.height):
+                check_cancelled()
                 self.row(y)
             roots, inverse = np.unique(self.runs[:, 2], return_inverse=True)
             totals = np.zeros(len(roots), dtype=np.uint64)
@@ -177,6 +179,7 @@ class ComponentGrid:
             windows.append((0, x1 - self.grid.width))
         rasterizer = PolygonRasterizer(geometry, self.grid)
         for first in range(y0, y1, rows_per_batch):
+            check_cancelled()
             last = min(first + rows_per_batch, y1)
             _, mask = rasterizer.rasterize((x0, x1, first, last))
             for y in range(first, last):

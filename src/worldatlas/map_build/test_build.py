@@ -301,7 +301,9 @@ class Fixture(unittest.TestCase):
         stored[config_asset["r2_key"]] = release_config
         calls = []
         with (
-            patch.object(pipeline, "read_release_assets", return_value=(catalog, config_asset)),
+            patch.object(
+                pipeline, "read_release_assets", return_value=(catalog, config_asset)
+            ) as release_lookup,
             patch.object(pipeline, "release_endpoint", return_value=release_endpoint),
             self.fake_r2(stored | {raw_key: b"{}"}, calls),
         ):
@@ -314,6 +316,9 @@ class Fixture(unittest.TestCase):
                 self.assertEqual(runner.sources["reference_config"].read_bytes(), release_config)
             finally:
                 runner.close()
+            release_lookup.side_effect = AssertionError("preview is no longer cataloged")
+            for _, _, key, _, checksum, _ in catalog:
+                (self.inputs / checksum / Path(key).name).unlink()
             resumed = pipeline.Pipeline(config, resume=True)
             try:
                 self.assertEqual(resumed.identity["compare_release"], "v8.0")
@@ -322,6 +327,9 @@ class Fixture(unittest.TestCase):
                 resumed.close()
             with self.assertRaisesRegex(ValueError, "different --compare-release"):
                 pipeline.Pipeline(config, compare_release="v8.1", resume=True)
+            runner.sources["reference_rows"].write_bytes(b"changed comparison")
+            with self.assertRaisesRegex(ValueError, "source pin mismatch"):
+                pipeline.Pipeline(config, resume=True)
             self.assertEqual(
                 [call.args[0] for call in physical_build.make_r2_client.call_args_list],
                 [raw_endpoint] + [release_endpoint] * len(stored),
@@ -360,29 +368,17 @@ class Fixture(unittest.TestCase):
         raw = self.cloud(payload)
         identity = {"source_id": "fixture", "version": "v1"}
         reference = {"r2_source": identity}
-        row = (
-            "fixture",
-            "v1",
-            raw["r2_bucket"],
-            raw["r2_key"],
-            raw["sha256"],
-            len(payload),
-        )
+        self.frozen["raw_sources"] = [
+            dict(source_id="fixture", version="v1", **raw),
+            dict(source_id="fixture", version="v2", **self.cloud(b"other")),
+        ]
         self.cfg["sources"]["water_config"] = reference
         self.cfg["sources"]["raw_manifest"] = {
             "json": {"files": [{"path": "raw/fixture", **reference}]}
         }
         calls = []
-        with (
-            patch.object(
-                pipeline.Pipeline,
-                "neon_raw_catalog",
-                return_value=[(("fixture", "v1"), dict(source_id="fixture", **raw))],
-            ) as lookup,
-            self.fake_r2({raw["r2_key"]: payload}, calls),
-        ):
+        with self.fake_r2({raw["r2_key"]: payload}, calls):
             runner = self.make()
-        lookup.assert_called_once_with({("fixture", "v1")})
         self.assertEqual(calls, [raw["r2_key"]])
         self.assertEqual(runner.sources["water_config"].read_bytes(), payload)
         manifest = pipeline.read(runner.sources["raw_manifest"])

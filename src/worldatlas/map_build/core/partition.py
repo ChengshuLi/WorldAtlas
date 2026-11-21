@@ -11,6 +11,8 @@ from shapely import contains_xy, get_parts, polygonize, union_all
 
 import numpy as np
 
+from worldatlas.map_build.execution.control import check_cancelled
+
 
 class CutEdges:
     """Blocked four-neighbor graph edges. H: (row,x)-(row,x+1); V: (row,x)-(row+1,x)."""
@@ -113,6 +115,7 @@ def rasterize_barriers(paths, width, height, eps=1e-10):
     cuts = CutEdges()
     tie_vectors = defaultdict(lambda: [0.0, 0.0])
     for path in paths:
+        check_cancelled()
         pts = [(float(x), float(y)) for x, y in path]
         for p, q in zip(pts, pts[1:]):
             x0, y0 = p
@@ -336,6 +339,7 @@ def continuous_face_links(path, offsets, paths, dsu, grid):
                 for y in range(
                     max(0, math.floor(ymin)), min(grid.height, math.floor(ymax) + 1)
                 ):
+                    check_cancelled()
                     current = nodes[offsets[y] : offsets[y + 1]]
                     first = np.searchsorted(current[:, 1], xmin, side="right")
                     last = np.searchsorted(current[:, 0], xmax, side="left")
@@ -382,6 +386,7 @@ def divide_regions(eligible_rows, grid, cuts, labels, directory, *, rows=None):
     rows = range(grid.height) if rows is None else rows
     with (directory / "nodes.u32le").open("xb") as output:
         for y in range(grid.height):
+            check_cancelled()
             if y not in rows:
                 offsets.append(len(dsu.parent))
                 previous = []
@@ -427,8 +432,8 @@ def divide_regions(eligible_rows, grid, cuts, labels, directory, *, rows=None):
         (dsu.find(i) for i in range(len(dsu.parent))), dtype=np.uint32
     )
     distinct, inverse = np.unique(initial_roots, return_inverse=True)
-    labelled = {dsu.find(node) for _, node in label_nodes.values()}
-    if not set(map(int, distinct)) <= labelled:
+    # Reconcile fragmented faces before considering their labels.
+    if len(distinct) > 1:
         continuous_face_links(directory / "nodes.u32le", offsets, cuts.paths, dsu, grid)
     roots = np.fromiter((dsu.find(int(root)) for root in distinct), dtype=np.uint32)[
         inverse

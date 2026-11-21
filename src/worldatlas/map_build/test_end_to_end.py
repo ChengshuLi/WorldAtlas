@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import psycopg
 from psycopg.types.json import Jsonb
@@ -17,6 +17,7 @@ from osgeo import ogr
 
 from worldatlas.source_imports.run_import import run_import
 from worldatlas.map_build.build import Pipeline, pin, write
+from worldatlas.map_build.division import engine
 from worldatlas.map_build.inputs.selection import read_selection, canonical_bytes
 
 
@@ -206,6 +207,7 @@ class EndToEndTests(unittest.TestCase):
                         selection_notes="Input-contract fixture",
                         grid=grid,
                         coastal_band_metres=22224,
+                        division_workers=1,
                         physical_controls=dict(
                             minimum_free_bytes=0, max_parallel_shards=1
                         ),
@@ -217,6 +219,19 @@ class EndToEndTests(unittest.TestCase):
                     ),
                 )
                 runner = Pipeline(cfg, root / "run", work_dir=root, selection=selected)
+                execute_rule = engine.execute_rule
+                started_rules = []
+
+                def interrupt(context, rule, snapshot, directory):
+                    started_rules.append(rule["id"])
+                    runner.cancel()
+                    return execute_rule(context, rule, snapshot, directory)
+
+                with patch.object(engine, "execute_rule", new=interrupt):
+                    with self.assertRaisesRegex(InterruptedError, "pipeline cancelled"):
+                        runner.run()
+                self.assertEqual(len(started_rules), 1)
+                runner = Pipeline(cfg, root / "run", work_dir=root, resume=True)
                 report = runner.run()
                 self.assertEqual(report["status"], "complete")
                 self.assertTrue(

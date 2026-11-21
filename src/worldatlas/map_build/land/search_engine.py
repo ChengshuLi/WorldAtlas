@@ -3,6 +3,8 @@
 from pathlib import Path
 import numpy as np
 
+from worldatlas.map_build.execution.control import check_cancelled
+
 
 def positions(ids, roots):
     """Select query roots; other valid parent components are not query inputs."""
@@ -13,7 +15,7 @@ def positions(ids, roots):
     return pos, (pos < len(roots)) & (roots[safe] == ids)
 
 
-def blocks(path, cursor=0, block_records=100000, guard=lambda: None):
+def blocks(path, cursor=0, block_records=100000, guard=check_cancelled):
     size = Path(path).stat().st_size
     if size % 12 or cursor < 0 or cursor > size // 12 or block_records < 1:
         raise ValueError("invalid component stream/cursor")
@@ -32,7 +34,7 @@ def blocks(path, cursor=0, block_records=100000, guard=lambda: None):
             off += len(a)
 
 
-def first_points(path, co, roots, width, guard=lambda: None):
+def first_points(path, co, roots, width, guard=check_cancelled):
     roots = np.asarray(roots, dtype=np.uint32)
     ys = np.full(len(roots), -1, dtype=np.int32)
     xs = np.full(len(roots), -1, dtype=np.int32)
@@ -58,7 +60,7 @@ def first_points(path, co, roots, width, guard=lambda: None):
     return ys, xs
 
 
-def component_witnesses(path, co, roots, width, index, hints, guard=lambda: None):
+def component_witnesses(path, co, roots, width, index, hints, guard=check_cancelled):
     """Tighten each component upper bound with actual cells across its extent.
 
     A component's first northern cell can be far from its closest mainland.
@@ -214,7 +216,7 @@ def certificate_pass(
     amb,
     cursor=0,
     chunk=1024,
-    guard=lambda: None,
+    guard=check_cancelled,
     progress=lambda *x: None,
     block_records=100000,
 ):
@@ -253,7 +255,7 @@ def exact_pass(
     best,
     cursor=0,
     chunk=1024,
-    guard=lambda: None,
+    guard=check_cancelled,
     progress=lambda *x: None,
     block_records=10000,
 ):

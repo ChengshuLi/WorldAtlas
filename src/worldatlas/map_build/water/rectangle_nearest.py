@@ -7,6 +7,7 @@ share proofs across rows; uncertain cells use the complete point classifier.
 import math
 import numpy as np
 from worldatlas.geodesy.wgs84 import MAX_RADIUS, MIN_RADIUS
+from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.water import shared_nearest as s
 
 
@@ -153,6 +154,7 @@ def classify(
     available = [p for p in pairs if p[1] in indexes]
     complete = len(available) == len(pairs) or band is not None
     while len(a):
+        check_cancelled()
         lat = 90 - (y0 + (a + b) / 2) * step
         lon = -180 + (x0 + (c + d) / 2) * step
         points = s.unit(lat, lon)
@@ -281,6 +283,7 @@ def classify(
     # Ordinary point batches cover every unresolved selected cell, without an
     # input-size/candidate limit or any full-grid dense allocation.
     for first in range(0, len(yy), 5000):
+        check_cancelled()
         gy, gx = yy[first : first + 5000], xx[first : first + 5000]
         codes, bounded, exact = point_classifier(
             90 - (y0 + gy + 0.5) * step, -180 + (x0 + gx + 0.5) * step

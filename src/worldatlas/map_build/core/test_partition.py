@@ -46,3 +46,11 @@ class ContinuousFaces(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaisesRegex(ValueError, "conflicting labels"):
                 self.solve([(101, 1, 2), (807, 2, 2)], Path(temp) / "faces")
+
+    def test_conflicting_labels_in_separate_fragments_of_the_same_face_fail(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaisesRegex(ValueError, "conflicting labels"):
+                self.solve(
+                    [(101, 1, 2), (807, 1, 10), (999, 10, 5)],
+                    Path(temp) / "faces",
+                )
