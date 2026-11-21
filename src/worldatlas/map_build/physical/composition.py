@@ -1,45 +1,53 @@
 #!/usr/bin/python3
 """Compose candidate physical land/water grid; optionally compare to a baseline."""
 
-import hashlib, json, math, os, shutil, sys
+import hashlib
+import json
+import math
+import os
+import shutil
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any, BinaryIO, cast
+
 import numpy as np
 from osgeo import gdal, osr
 
+from worldatlas.map_build.physical.sources import (
+    compare_row,
+    open_mask,
+    validate_reference,
+)
+from worldatlas.shared.files import sha256_file
+
 gdal.UseExceptions()
-from worldatlas.map_build.physical.sources import sha, validate_reference, compare_row
 
 
-def open_mask(spec, grid):
-    path = Path(spec['path']).resolve()
-    if sha(path) != spec['sha256']:
-        raise ValueError(f'input hash mismatch: {path}')
-    ds = gdal.Open(str(path))
-    w, h, west, north, step = (grid[k] for k in ('width', 'height', 'west', 'north', 'step'))
-    if (
-        ds is None
-        or ds.RasterXSize != w
-        or ds.RasterYSize != h
-        or ds.GetGeoTransform() != (west, step, 0, north, 0, -step)
-    ):
-        raise ValueError(f'grid mismatch: {path}')
-    actual = ds.GetSpatialRef()
-    expected = osr.SpatialReference()
-    expected.ImportFromEPSG(4326)
-    if actual is None:
-        raise ValueError(f'missing CRS: {path}')
-    actual.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    expected.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    if not actual.IsSame(expected):
-        raise ValueError(f'CRS mismatch: {path}')
-    return ds
+def write_run_block(
+    codes: np.ndarray,
+    runs: BinaryIO,
+    offsets: list[int],
+    width: int,
+    *,
+    binary: bool = False,
+) -> None:
+    """Append a batch of physical rows as little-endian uint32 runs.
 
+    Args:
+        codes: Two-dimensional array of physical codes or binary land values.
+        runs: Open binary stream for (end_column, code) records.
+        offsets: Existing row offsets to extend.
+        width: Number of columns in each row.
+        binary: Convert binary water and land values to codes 1 and 17.
 
-def write_run_block(codes, runs, offsets, width, *, binary=False):
-    """Write row-major physical runs for a block of binary code rows."""
+    Raises:
+        ValueError: The final run offset is too large for uint32.
+    """
     row_count = codes.shape[0]
     row_index, left_column = np.nonzero(codes[:, 1:] != codes[:, :-1])
-    transitions = np.bincount(row_index, minlength=row_count).astype(np.int64, copy=False)
+    transitions = np.bincount(row_index, minlength=row_count).astype(
+        np.int64, copy=False
+    )
     run_counts = transitions + 1
     pairs = np.empty((int(run_counts.sum()), 2), dtype='<u4')
     # np.nonzero returns transitions in row-major order. Each preceding row adds
@@ -63,14 +71,33 @@ def write_run_block(codes, runs, offsets, width, *, binary=False):
     offsets.extend(next_offsets.tolist())
 
 
-def main(config_path, output, *, emit=None):
+def main(
+    config_path: Path | str,
+    output: Path | str,
+    *,
+    emit: Callable[..., None] | None = None,
+) -> dict[str, Any]:
+    """Combine the coastline land mask and inland water mask.
+
+    Args:
+        config_path: Pinned inputs, grid and composition settings.
+        output: New directory for the GeoTIFF and row-run files.
+        emit: Optional progress callback.
+
+    Returns:
+        Report with output digests, physical counts and optional comparison.
+    """
     config_path = Path(config_path).resolve()
     data = config_path.read_bytes()
     cfg = json.loads(data)
-    if cfg.get('schema') != 'candidate-physical-composition-v1' or not cfg.get('selection_notes'):
+    if cfg.get('schema') != 'candidate-physical-composition-v1' or not cfg.get(
+        'selection_notes'
+    ):
         raise ValueError('explicit schema and selection notes required')
     g = cfg['grid']
-    w, h, west, north, step = (g[k] for k in ('width', 'height', 'west', 'north', 'step'))
+    w, h, west, north, step = (
+        g[k] for k in ('width', 'height', 'west', 'north', 'step')
+    )
     if (
         not isinstance(w, int)
         or isinstance(w, bool)
@@ -78,7 +105,10 @@ def main(config_path, output, *, emit=None):
         or not isinstance(h, int)
         or isinstance(h, bool)
         or h <= 0
-        or not all(isinstance(x, (int, float)) and math.isfinite(x) for x in (west, north, step))
+        or not all(
+            isinstance(x, (int, float)) and math.isfinite(x)
+            for x in (west, north, step)
+        )
         or step <= 0
         or west < -180
         or west + w * step > 180
@@ -102,7 +132,10 @@ def main(config_path, output, *, emit=None):
         [config_path]
         + [Path(cfg[k]['path']).resolve() for k in keys]
         + (
-            [Path(cfg['reference_streams'][k]['path']).resolve() for k in ('rows', 'runs')]
+            [
+                Path(cfg['reference_streams'][k]['path']).resolve()
+                for k in ('rows', 'runs')
+            ]
             if has_ref
             else []
         )
@@ -110,9 +143,13 @@ def main(config_path, output, *, emit=None):
     if len(set(inputs)) != len(inputs):
         raise ValueError('inputs must be distinct')
     if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs):
-        raise ValueError('output must be outside input directories and must not contain inputs')
+        raise ValueError(
+            'output must be outside input directories and must not contain inputs'
+        )
     masks = [open_mask(cfg[k], g) for k in keys]
-    rr, rv = validate_reference(cfg['reference_streams'], w, h) if has_ref else (None, None)
+    rr, rv = (
+        validate_reference(cfg['reference_streams'], w, h) if has_ref else (None, None)
+    )
     os.mkdir(output)
     out = Path(output)
     tif = gdal.GetDriverByName('GTiff').Create(
@@ -139,12 +176,20 @@ def main(config_path, output, *, emit=None):
     extra = missing = 0
     candidate_count = historic_count = 0
     spancount = 0
-    with (out / 'runs.u32le').open('xb') as runs, (out / 'mismatch-spans.jsonl').open('x') as diff:
+    with (
+        (out / 'runs.u32le').open('xb') as runs,
+        (out / 'mismatch-spans.jsonl').open('x') as diff,
+    ):
         for y in range(0, h, rows_per_block):
             if shutil.disk_usage(out).free < reserve:
-                raise ValueError('free disk below configured reserve; partial output preserved')
+                raise ValueError(
+                    'free disk below configured reserve; partial output preserved'
+                )
             n = min(rows_per_block, h - y)
             arrays = [ds.ReadAsArray(0, y, w, n) for ds in masks]
+            if any(array is None for array in arrays):
+                raise ValueError('GDAL could not read a physical mask')
+            arrays = cast(list[np.ndarray], arrays)
             land, water = arrays[:2]
             ref = arrays[2] if has_ref else None
             if any(
@@ -161,12 +206,12 @@ def main(config_path, output, *, emit=None):
                 dry = np.logical_and(land == 1, water == 0).astype(np.uint8)
             tif.GetRasterBand(1).WriteArray(dry, 0, y)
             candidate_count += int(np.count_nonzero(dry))
-            if has_ref:
+            if ref is not None:
                 historic_count += int(np.count_nonzero(ref))
                 extra += int(np.count_nonzero((dry == 1) & (ref == 0)))
                 missing += int(np.count_nonzero((dry == 0) & (ref == 1)))
             write_run_block(dry, runs, offsets, w, binary=True)
-            if has_ref:
+            if ref is not None and rr is not None and rv is not None:
                 for j in range(n):
                     i = y + j
                     historic_codes = np.where(ref[j], 17, 1).astype(np.uint8)
@@ -211,7 +256,7 @@ def main(config_path, output, *, emit=None):
     with (out / 'rows.u32le').open('xb') as f:
         np.asarray(offsets, dtype='<u4').tofile(f)
     for key in keys:
-        if sha(cfg[key]['path']) != cfg[key]['sha256']:
+        if sha256_file(cfg[key]['path']) != cfg[key]['sha256']:
             raise ValueError(f'{key} changed during processing')
     if has_ref:
         validate_reference(cfg['reference_streams'], w, h)
@@ -228,9 +273,10 @@ def main(config_path, output, *, emit=None):
         'candidate_extra_land_cells': extra,
         'candidate_missing_land_cells': missing,
         'mismatch_spans': spancount,
-        'mismatch_spans_sha256': sha(out / 'mismatch-spans.jsonl'),
+        'mismatch_spans_sha256': sha256_file(out / 'mismatch-spans.jsonl'),
         'output_sha256': {
-            name: sha(out / name) for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
+            name: sha256_file(out / name)
+            for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
         },
         'limitations': 'Approximate physical land/water only, with continent assignments handled downstream. Review every mismatch before use.',
     }
@@ -252,12 +298,3 @@ def main(config_path, output, *, emit=None):
         json.dump(report, f, indent=2)
         f.write('\n')
     return report
-
-
-if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        sys.exit('usage: compose_physical.py CONFIG_JSON NEW_OUTPUT_DIRECTORY')
-    try:
-        print(json.dumps(main(sys.argv[1], sys.argv[2], emit=print), indent=2), flush=True)
-    except Exception as e:
-        sys.exit(f'failed: {e}')

@@ -1,12 +1,20 @@
 """Acquire verified inputs and locate selected datasets for construction methods."""
 
-from pathlib import Path, PurePosixPath
 import time
-from typing import TypedDict
-from zipfile import ZipFile, is_zipfile
+from collections.abc import Iterable, Sequence
+from pathlib import Path, PurePosixPath
+from typing import Any, TypedDict, cast
+from zipfile import ZipFile, ZipInfo, is_zipfile
 
-from worldatlas.source_assets.catalog import assemble_parts, catalog_sources, download_source
+from botocore.client import BaseClient
+
+from worldatlas.source_assets.catalog import (
+    assemble_parts,
+    catalog_sources,
+    download_source,
+)
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.runtime import Runtime
 
 
 class MultipartSource(TypedDict):
@@ -18,7 +26,7 @@ class MultipartSource(TypedDict):
     filename: NonEmptyText
 
 
-def archive_member(archive, name):
+def archive_member(archive: ZipFile, name: str | None) -> ZipInfo:
     """Select one relative file path in an open ZIP archive.
 
     Args:
@@ -34,13 +42,17 @@ def archive_member(archive, name):
     member_path = PurePosixPath(name or "")
     if not name or member_path.is_absolute() or ".." in member_path.parts:
         raise ValueError("invalid source archive member")
-    matches = [item for item in archive.infolist() if item.filename == name and not item.is_dir()]
+    matches = [
+        item
+        for item in archive.infolist()
+        if item.filename == name and not item.is_dir()
+    ]
     if len(matches) != 1:
         raise ValueError("selected archive member is missing or duplicated")
     return matches[0]
 
 
-def gdal_dataset_path(path, member=None):
+def gdal_dataset_path(path: Path | str, member: str | None = None) -> str:
     """Resolve a local dataset or an archive member for GDAL.
 
     Args:
@@ -63,7 +75,9 @@ def gdal_dataset_path(path, member=None):
     with ZipFile(path) as archive:
         if member is None:
             # GDAL finds the companion files from the Shapefile entry point.
-            candidates = [name for name in archive.namelist() if name.lower().endswith(".shp")]
+            candidates = [
+                name for name in archive.namelist() if name.lower().endswith(".shp")
+            ]
             if len(candidates) != 1:
                 raise ValueError("select one vector dataset archive member")
             member = candidates[0]
@@ -71,7 +85,13 @@ def gdal_dataset_path(path, member=None):
     return f"/vsizip/{{{path}}}/{selected.filename}"
 
 
-def acquire_sources(runtime, requests, *, evidence_source_ids=(), timing=None):
+def acquire_sources(
+    runtime: Runtime,
+    requests: Sequence[SourceId | MultipartSource],
+    *,
+    evidence_source_ids: Iterable[SourceId] = (),
+    timing: dict[str, Any] | None = None,
+) -> list[Path]:
     """Resolve every source together and stage the files needed for calculation.
 
     Release the database connection before downloading. Evidence IDs are
@@ -104,16 +124,21 @@ def acquire_sources(runtime, requests, *, evidence_source_ids=(), timing=None):
 
     started = time.monotonic()
     paths = []
+    storage = cast(BaseClient, runtime.storage)
+    work_dir = cast(Path, runtime.work_dir)
     for request in requests:
         if isinstance(request, dict):
             path = assemble_parts(
-                runtime.storage, [sources[ident] for ident in request['parts']],
-                request['sha256'], request['size_bytes'], request['filename'],
-                runtime.work_dir, timing=timing,
+                storage,
+                [sources[ident] for ident in request['parts']],
+                request['sha256'],
+                request['size_bytes'],
+                request['filename'],
+                work_dir,
+                timing=timing,
             )
         else:
-            path = download_source(runtime.storage, sources[request], runtime.work_dir,
-                                   timing=timing)
+            path = download_source(storage, sources[request], work_dir, timing=timing)
         paths.append(path)
     if timing is not None:
         timing['source_staging_seconds'] = time.monotonic() - started

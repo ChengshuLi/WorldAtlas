@@ -77,7 +77,8 @@ class OsmFeatureTests(unittest.TestCase):
             '<tag k="type" v="multipolygon"/><tag k="name" v="Selected"/></relation>'
         )
         self.path.write_text(
-            '<osm version="0.6">' + "".join(nodes + ways) + relation + "</osm>"
+            '<osm version="0.6">' + "".join(nodes + ways) + relation
+            + '<changeset id="900" num_changes="1"/>' + "</osm>"
         )
         self.selection = dict(
             feature_id="islands",

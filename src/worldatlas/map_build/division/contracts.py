@@ -1,6 +1,7 @@
 """Compile the six geographic operations and their relational input contracts."""
 
 from collections import defaultdict
+from typing import Any
 
 OPERATIONS = frozenset(
     (
@@ -21,8 +22,22 @@ ROLE_TYPES = {
 }
 
 
-def compile_rules(geography, parent_id):
-    """Resolve IDs once, before any full-grid calculations or network downloads."""
+def compile_rules(
+    geography: dict[str, Any], parent_id: int
+) -> tuple[dict[int, dict[str, Any]], list[dict[str, Any]]]:
+    """Resolve and validate the rules for one geographic parent.
+
+    Args:
+        geography: Frozen entities, rules, source features and links.
+        parent_id: Entity ID to divide.
+
+    Returns:
+        (children_by_id, rules). The rules have their source features and
+        target label points attached, in rule-ID order.
+
+    Raises:
+        ValueError: A required record is missing, duplicated or invalid.
+    """
     entities = {e["id"]: e for e in geography["entities"]}
     features = {f["id"]: f for f in geography["features"]}
     rules = {r["id"]: r for r in geography["rules"]}

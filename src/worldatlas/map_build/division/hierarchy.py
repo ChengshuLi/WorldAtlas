@@ -1,23 +1,45 @@
 """Apply the same parent division recursively, reusing verified unchanged outputs."""
 
-from contextlib import ExitStack
 import hashlib
-import json
+from collections.abc import Callable, Iterable, Iterator
+from contextlib import ExitStack
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.contracts import compile_rules
 from worldatlas.map_build.division.engine import ParentDivision, land_groups
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.shores import ShoreGeometry
-from worldatlas.map_build.execution.runtime import json_bytes, pin, verify_pins, write
+from worldatlas.map_build.execution.runtime import Checkpoints, Timing
+from worldatlas.shared.files import (
+    json_bytes,
+    pin_file,
+    read_json,
+    verify_pins,
+    write_json,
+)
 
 
-def selected_parents(geography, requested):
-    """Select requested divisions and the ancestors needed to establish their cells."""
+def selected_parents(
+    geography: dict[str, Any], requested: Iterable[int] | None
+) -> list[int]:
+    """Find the requested divisions and include their ancestors.
+
+    Args:
+        geography: Frozen entities and subdivision rules.
+        requested: Parent IDs to divide, or None for all configured parents.
+
+    Returns:
+        Entity IDs ordered with ancestors before descendants.
+
+    Raises:
+        ValueError: A parent needs missing rules or the hierarchy has a cycle.
+    """
     entities = {e["id"]: e for e in geography["entities"]}
     available = {r["parent_id"] for r in geography["rules"]}
     chosen = available if requested is None else set(requested)
@@ -35,7 +57,18 @@ def selected_parents(geography, requested):
     if selected - available:
         raise ValueError("a required ancestor has no selected subdivision rules")
 
-    def depth(ident):
+    def depth(ident: int | None) -> int:
+        """Count the path from an entity to the top of the hierarchy.
+
+        Args:
+            ident: Starting entity, or None above the root.
+
+        Returns:
+            Number of entities on the path, including the starting entity.
+
+        Raises:
+            ValueError: The path visits the same entity twice.
+        """
         seen = set()
         while ident is not None:
             if ident in seen:
@@ -48,9 +81,31 @@ def selected_parents(geography, requested):
 
 
 def definition(
-    geography, parent, grid, physical, membership, configuration, *, land_only=False
-):
-    """Only operative inputs determine reuse; notes, colors and sibling edits do not."""
+    geography: dict[str, Any],
+    parent: int,
+    grid: Grid,
+    physical: Path | str,
+    membership: Path | str | None,
+    configuration: dict[str, Any],
+    *,
+    land_only: bool = False,
+) -> dict[str, Any]:
+    """Record only the inputs that affect the parent's assignment.
+
+    Args:
+        geography: Frozen entities, rules, features and bindings.
+        parent: Entity to divide.
+        grid: Grid used by this parent.
+        physical: Directory with the physical row-run grid.
+        membership: Directory marking the parent's cells, or None for the whole
+            grid.
+        configuration: Build settings used by the selected rules.
+        land_only: Whether to record the land calculation separately.
+
+    Returns:
+        Dictionary of operative rule settings, geometry, binding order
+        and input file checksums. A wording or color edit leaves it unchanged.
+    """
     children, rules = compile_rules(geography, parent)
     if land_only:
         rules = [rule for _, group in land_groups(rules) for rule in group]
@@ -96,13 +151,13 @@ def definition(
             if b["entity_id"] in children
         ],
         physical={
-            name: pin(Path(physical) / name)["sha256"]
+            name: pin_file(Path(physical) / name)["sha256"]
             for name in ("rows.u32le", "runs.u32le")
         },
         membership=None
         if membership is None
         else {
-            name: pin(Path(membership) / name)["sha256"]
+            name: pin_file(Path(membership) / name)["sha256"]
             for name in ("rows.u32le", "runs.u32le")
         },
     )
@@ -111,10 +166,28 @@ def definition(
     return result
 
 
-def membership(grid, ownership_directory, parent, directory):
+def membership(
+    grid: Grid, ownership_directory: Path | str, parent: int, directory: Path | str
+) -> dict[str, Any]:
+    """Write a mask of the cells owned by one parent.
+
+    Args:
+        grid: Dimensions of the ownership grid.
+        ownership_directory: Input row-run ownership grid.
+        parent: Owner ID to select.
+        directory: New directory for the mask.
+
+    Returns:
+        Row-run layer report for the parent's membership mask.
+    """
     with open_grid(ownership_directory, grid) as owners:
 
-        def rows():
+        def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+            """Find the intervals owned by the parent in each row.
+
+            Yields:
+                (row, spans) with value 1 for cells owned by the parent.
+            """
             for y in range(grid.height):
                 ends, values = row(owners, y, grid.width)
                 records = spans(
@@ -126,13 +199,36 @@ def membership(grid, ownership_directory, parent, directory):
         return write_layer(directory, grid, rows())
 
 
-def substitute(grid, prior_directory, parent_directory, child_directory, directory):
+def substitute(
+    grid: Grid,
+    prior_directory: Path | str,
+    parent_directory: Path | str,
+    child_directory: Path | str,
+    directory: Path | str,
+) -> dict[str, Any]:
+    """Replace a parent's cells with the owners from its subdivision.
+
+    Args:
+        grid: Dimensions shared by all layers.
+        prior_directory: Ownership grid before the subdivision.
+        parent_directory: Mask of cells owned by the parent.
+        child_directory: Owners from the subdivision.
+        directory: New directory for the combined ownership layer.
+
+    Returns:
+        Layer report for the combined ownership.
+    """
     with ExitStack() as stack:
         prior = stack.enter_context(open_grid(prior_directory, grid))
         parent = stack.enter_context(open_grid(parent_directory, grid))
         children = stack.enter_context(open_grid(child_directory, grid))
 
-        def rows():
+        def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+            """Read each row and replace owners inside the divided parent.
+
+            Yields:
+                (row, spans) containing owner IDs before and after the substitution.
+            """
             for y in range(grid.height):
                 starts, ends, (old, within, new) = overlay(
                     row(prior, y, grid.width),
@@ -153,19 +249,34 @@ def substitute(grid, prior_directory, parent_directory, child_directory, directo
 
 
 class HierarchyDivision:
+    """Divide each configured parent after its own owner is known."""
+
     def __init__(
         self,
-        geography,
-        grid,
-        physical,
-        directory,
-        configuration,
+        geography: dict[str, Any],
+        grid: Grid,
+        physical: Path | str,
+        directory: Path | str,
+        configuration: dict[str, Any],
         *,
-        requested=None,
-        reuse=None,
-        checkpoints=None,
-        timing=None,
-    ):
+        requested: Iterable[int] | None = None,
+        reuse: Path | str | None = None,
+        checkpoints: Checkpoints | None = None,
+        timing: Timing | None = None,
+    ) -> None:
+        """Prepare the hierarchy, work directory, and optional reuse settings.
+
+        Args:
+            geography: Frozen geographic rules, entities and features.
+            grid: The build's physical grid dimensions.
+            physical: Directory containing physical row-run files.
+            directory: Output directory for division results.
+            configuration: Build settings used by the rules.
+            requested: Parent IDs to divide, or None for all.
+            reuse: Directory containing earlier division results.
+            checkpoints: Optional store for completed work.
+            timing: Optional timing log for the division.
+        """
         self.geography, self.grid, self.physical = geography, grid, Path(physical)
         self.directory = Path(directory)
         self.directory.mkdir(exist_ok=True)
@@ -173,19 +284,41 @@ class HierarchyDivision:
         self.checkpoints, self.timing = checkpoints, timing
         self.parents = selected_parents(geography, requested)
         self.reuse = (
-            {}
-            if reuse is None
-            else json.loads((Path(reuse) / "report.json").read_text())["parents"]
+            {} if reuse is None else read_json(Path(reuse) / "report.json")["parents"]
         )
         self._shores = None
 
-    def shores(self):
+    def shores(self) -> ShoreGeometry:
+        """Prepare and cache the grid's physical shore geometry.
+
+        Returns:
+            Shore geometry shared by divisions with the same physical grid.
+        """
         if self._shores is None:
             with open_grid(self.physical, self.grid) as physical:
                 self._shores = ShoreGeometry(physical, self.grid)
         return self._shores
 
-    def task(self, name, function, args, inputs, outputs):
+    def task(
+        self,
+        name: str,
+        function: Callable[..., Any],
+        args: tuple[Any, ...],
+        inputs: list[dict[str, str]],
+        outputs: list[Path],
+    ) -> Any:
+        """Run one division step or load its completed result.
+
+        Args:
+            name: Checkpoint name.
+            function: Function that performs the work.
+            args: Positional arguments for the function.
+            inputs: Input paths and checksums.
+            outputs: Files or directories the task produces.
+
+        Returns:
+            Step result, read from the checkpoint if one exists.
+        """
         if self.checkpoints is None:
             return function(*args)
         return self.checkpoints.run_function(
@@ -195,10 +328,16 @@ class HierarchyDivision:
             args,
             inputs=inputs,
             outputs=outputs,
-            timing=self.timing,
+            timing=cast(Timing, self.timing),
         )
 
-    def run(self):
+    def run(self) -> dict[str, Any]:
+        """Divide parents in order and combine the results into one ownership grid.
+
+        Returns:
+            Division report with the final layer directory and each parent's
+            output and reuse details.
+        """
         ownership = None
         receipts = {}
         for parent in self.parents:
@@ -211,7 +350,10 @@ class HierarchyDivision:
                     "membership-" + str(parent),
                     membership,
                     (self.grid, ownership, parent, parent_directory),
-                    [pin(ownership / name) for name in ("rows.u32le", "runs.u32le")],
+                    [
+                        pin_file(ownership / name)
+                        for name in ("rows.u32le", "runs.u32le")
+                    ],
                     [parent_directory],
                 )
             settings = definition(
@@ -229,10 +371,10 @@ class HierarchyDivision:
                 if selected.read_bytes() != data:
                     raise ValueError("parent definition changed on resume")
             else:
-                write(selected, settings)
+                write_json(selected, settings)
             receipt_path = directory / "result.json"
             saved = (
-                json.loads(receipt_path.read_text())
+                read_json(receipt_path)
                 if receipt_path.exists()
                 else self.reuse.get(str(parent))
             )
@@ -261,8 +403,8 @@ class HierarchyDivision:
                     self.configuration,
                     parent_directory=parent_directory,
                     checkpoints=self.checkpoints,
-                    timing=self.timing,
-                    input_pins=[pin(selected)],
+                    timing=cast(Timing, self.timing),
+                    input_pins=[pin_file(selected)],
                     shore_provider=self.shores,
                 )
                 try:
@@ -276,7 +418,7 @@ class HierarchyDivision:
                             directory=str(land),
                             definition_sha256=land_identity,
                             outputs=[
-                                pin(Path(land) / name)
+                                pin_file(Path(land) / name)
                                 for name in ("rows.u32le", "runs.u32le", "report.json")
                             ],
                             reused=False,
@@ -284,18 +426,18 @@ class HierarchyDivision:
                     output = context.water()
                 finally:
                     context.close()
-                receipt = dict(
+                receipt: dict[str, Any] = dict(
                     directory=str(output),
                     definition_sha256=identity,
                     reused=False,
                     land=land_receipt,
                     outputs=[
-                        pin(output / name)
+                        pin_file(output / name)
                         for name in ("rows.u32le", "runs.u32le", "report.json")
                     ],
                 )
             if not receipt_path.exists():
-                write(receipt_path, receipt)
+                write_json(receipt_path, receipt)
             receipts[str(parent)] = receipt
             if ownership is None:
                 ownership = output
@@ -306,10 +448,10 @@ class HierarchyDivision:
                     substitute,
                     (self.grid, ownership, parent_directory, output, merged),
                     [
-                        pin(selected),
+                        pin_file(selected),
                         *receipt["outputs"],
                         *[
-                            pin(ownership / name)
+                            pin_file(ownership / name)
                             for name in ("rows.u32le", "runs.u32le")
                         ],
                     ],
@@ -323,5 +465,5 @@ class HierarchyDivision:
         report = dict(directory=str(ownership), parents=receipts, grid=vars(self.grid))
         path = self.directory / "report.json"
         if not path.exists():
-            write(path, report)
+            write_json(path, report)
         return report

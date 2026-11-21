@@ -4,25 +4,26 @@
 The output directory must not already exist.
 """
 
-import argparse
 import gc
-from collections import Counter
 import hashlib
 import json
 import math
 import os
 import shutil
-from pathlib import Path
 import sys
+from collections import Counter
+from collections.abc import Callable, Sequence
+from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
-
 import pyarrow
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr, osr
 
 from worldatlas.map_build.physical.water_batch import WaterBatch
+from worldatlas.shared.files import sha256_file
 
 gdal.UseExceptions()
 ogr.UseExceptions()
@@ -50,16 +51,15 @@ PYTHON_WHITESPACE = ''.join(
 )
 
 
-def sha256(path):
-    h = hashlib.sha256()
-    with open(path, 'rb') as f:
-        for chunk in iter(lambda: f.read(4 << 20), b''):
-            h.update(chunk)
-    return h.hexdigest()
+def selected(subtype: object) -> str | None:
+    """Decide whether an Overture subtype belongs in the inland-water mask.
 
+    Args:
+        subtype: Value in the source's subtype column.
 
-def selected(subtype):
-    """Use Overture's inland-water subtype classification, not source tags."""
+    Returns:
+        None for eligible rows, or a count key for missing or excluded subtypes.
+    """
     if not isinstance(subtype, str) or not subtype.strip():
         return 'missing_classification'
     if subtype in ('ocean', 'physical'):
@@ -67,8 +67,29 @@ def selected(subtype):
     return None
 
 
-def python_batch(raster, batch, counts, invalid, grid, tile, srs):
-    """Retained feature-layer reference for exact Python API comparisons."""
+def python_batch(
+    raster: gdal.Dataset,
+    batch: pyarrow.RecordBatch,
+    counts: Counter[str],
+    invalid: list[str],
+    grid: tuple[int, int, float, float, float],
+    tile: int,
+    srs: osr.SpatialReference,
+) -> None:
+    """Rasterize one batch using a GDAL feature per source polygon.
+
+    Args:
+        raster: Output water mask to update in place.
+        batch: Source rows containing IDs, subtypes and WKB.
+        counts: Selection counts to update.
+        invalid: Invalid polygon IDs to append.
+        grid: (width, height, west, north, step) in grid cells and degrees.
+        tile: Number of cells along one side of each tile.
+        srs: Geographic coordinate reference for the features.
+
+    Raises:
+        ValueError: A selected geometry is missing, malformed or empty.
+    """
     width, height, west, north, step = grid
     tiles = {}
     for item in batch.to_pylist():
@@ -105,7 +126,9 @@ def python_batch(raster, batch, counts, invalid, grid, tile, srs):
         w, h = min(tile, width - x), min(tile, height - y)
         target = gdal.GetDriverByName('MEM').Create('', w, h, 1, gdal.GDT_Byte)
         target.SetGeoTransform((west + x * step, step, 0, north - y * step, 0, -step))
-        target.GetRasterBand(1).WriteArray(raster.GetRasterBand(1).ReadAsArray(x, y, w, h))
+        target.GetRasterBand(1).WriteArray(
+            raster.GetRasterBand(1).ReadAsArray(x, y, w, h)
+        )
         ds = driver.CreateDataSource('')
         layer = ds.CreateLayer('water', srs, ogr.wkbUnknown)
         definition = layer.GetLayerDefn()
@@ -117,25 +140,46 @@ def python_batch(raster, batch, counts, invalid, grid, tile, srs):
         raster.GetRasterBand(1).WriteArray(target.ReadAsArray(), x, y)
 
 
-def classifications(subtypes):
-    """Apply selected() in Arrow without constructing a Python string per row."""
+def classifications(subtypes: pyarrow.Array) -> tuple[np.ndarray, int, int]:
+    """Classify a batch of water subtypes with Arrow.
+
+    Args:
+        subtypes: Array of Overture subtype values.
+
+    Returns:
+        (eligible_mask, missing_count, excluded_count). The 1-D mask has a
+        true value for each row eligible for inland-water rasterization.
+    """
+    # Arrow registers these compute kernels dynamically when the module loads.
     if pyarrow.types.is_dictionary(subtypes.type):
-        subtypes = pc.dictionary_decode(subtypes)
-    if not (pyarrow.types.is_string(subtypes.type) or pyarrow.types.is_large_string(subtypes.type)):
+        subtypes = pc.dictionary_decode(subtypes)  # pyright: ignore[reportAttributeAccessIssue]
+    if not (
+        pyarrow.types.is_string(subtypes.type)
+        or pyarrow.types.is_large_string(subtypes.type)
+    ):
         return np.zeros(len(subtypes), dtype=np.uint8), len(subtypes), 0
-    trimmed = pc.utf8_trim(subtypes, characters=PYTHON_WHITESPACE)
-    missing = pc.or_(pc.is_null(subtypes), pc.fill_null(pc.equal(trimmed, ''), False))
-    excluded = pc.is_in(
+    trimmed = pc.utf8_trim(subtypes, characters=PYTHON_WHITESPACE)  # pyright: ignore[reportAttributeAccessIssue]
+    missing = pc.or_(pc.is_null(subtypes), pc.fill_null(pc.equal(trimmed, ''), False))  # pyright: ignore[reportAttributeAccessIssue]
+    excluded = pc.is_in(  # pyright: ignore[reportAttributeAccessIssue]
         subtypes, value_set=pyarrow.array(['ocean', 'physical'], type=subtypes.type)
     )
-    eligible = pc.invert(pc.or_(missing, excluded)).to_numpy(zero_copy_only=False)
-    return eligible, int(pc.sum(missing).as_py() or 0), int(pc.sum(excluded).as_py() or 0)
+    eligible = pc.invert(pc.or_(missing, excluded)).to_numpy(zero_copy_only=False)  # pyright: ignore[reportAttributeAccessIssue]
+    return (
+        eligible,
+        int(pc.sum(missing).as_py() or 0),  # pyright: ignore[reportAttributeAccessIssue]
+        int(pc.sum(excluded).as_py() or 0),  # pyright: ignore[reportAttributeAccessIssue]
+    )
 
 
 class SourceIds:
-    """Read IDs only for diagnostics, not for every successful geometry row."""
+    """Read source feature IDs only for rows needed in diagnostics."""
 
-    def __init__(self, parquet):
+    def __init__(self, parquet: pq.ParquetFile) -> None:
+        """Index the row groups in the source file.
+
+        Args:
+            parquet: Open water shard with an "id" column.
+        """
         self.parquet = parquet
         self.ends = np.cumsum(
             [
@@ -145,22 +189,56 @@ class SourceIds:
             dtype=np.int64,
         )
 
-    def get(self, indices):
+    def get(self, indices: Sequence[int] | np.ndarray) -> list[str | None]:
+        """Read selected feature IDs without opening unrelated row groups.
+
+        Args:
+            indices: Global zero-based row numbers with a known length.
+
+        Returns:
+            Feature IDs in input order, with None for a null ID.
+        """
         groups = {}
-        result = [None] * len(indices)
+        result: list[str | None] = [None] * len(indices)
         for output, row in enumerate(indices):
             group = int(np.searchsorted(self.ends, row, side='right'))
             start = int(self.ends[group - 1]) if group else 0
             groups.setdefault(group, []).append((output, int(row) - start))
         for group, requests in groups.items():
-            ids = self.parquet.read_row_group(group, columns=['id'], use_threads=False).column('id')
+            ids = self.parquet.read_row_group(
+                group, columns=['id'], use_threads=False
+            ).column('id')
             values = ids.take([row for _, row in requests]).to_pylist()
             for (output, _), value in zip(requests, values):
                 result[output] = value
         return result
 
 
-def gdal_batch(kernel, raster, batch, counts, invalid, grid, tile, ids):
+def gdal_batch(
+    kernel: WaterBatch,
+    raster: gdal.Dataset,
+    batch: pyarrow.RecordBatch,
+    counts: Counter[str],
+    invalid: list[str | None],
+    grid: tuple[int, int, float, float, float],
+    tile: int,
+    ids: SourceIds,
+) -> None:
+    """Rasterize one selected batch and update its statistics.
+
+    Args:
+        kernel: Batch rasterizer.
+        raster: Output raster to update.
+        batch: Source rows containing subtypes and WKB.
+        counts: Row and classification counts to update.
+        invalid: Feature IDs for invalid polygons to append.
+        grid: (width, height, west, north, step).
+        tile: Tile size in cells.
+        ids: Lookup for feature IDs used in diagnostics.
+
+    Raises:
+        ValueError: A selected geometry is missing or malformed.
+    """
     first = counts['rows']
     eligible, missing, excluded = classifications(batch.column('subtype'))
     counts['rows'] += len(batch)
@@ -171,7 +249,11 @@ def gdal_batch(kernel, raster, batch, counts, invalid, grid, tile, ids):
     status, failed = kernel.burn(raster, batch.column('geometry'), eligible, grid, tile)
     if failed is not None:
         feature_id = ids.get([first + failed])[0]
-        message = 'missing geometry' if status[failed] == 5 else 'invalid or empty WKB geometry'
+        message = (
+            'missing geometry'
+            if status[failed] == 5
+            else 'invalid or empty WKB geometry'
+        )
         raise ValueError(f'{message}: {feature_id}')
     for code, name in ((1, 'polygons'), (3, 'non_polygon'), (4, 'invalid_polygon')):
         count = int(np.count_nonzero(status == code))
@@ -180,7 +262,30 @@ def gdal_batch(kernel, raster, batch, counts, invalid, grid, tile, ids):
     invalid.extend(ids.get(first + np.flatnonzero(status == 4)))
 
 
-def run(source, expected, output, config_path, batch_size=None, engine=None, *, emit=print):
+def run(
+    source: Path | str,
+    expected: str,
+    output: Path | str,
+    config_path: Path | str,
+    batch_size: int | None = None,
+    engine: str | None = None,
+    *,
+    emit: Callable[..., None] = print,
+) -> dict[str, Any]:
+    """Verify one water shard and rasterize its eligible polygons.
+
+    Args:
+        source: Local source GeoParquet file.
+        expected: SHA-256 digest for the source file.
+        output: New directory for the shard mask and report.
+        config_path: Rasterization settings and grid.
+        batch_size: Optional number of features to read per Arrow batch.
+        engine: Optional rasterizer choice, "gdal" or "python".
+        emit: Progress callback.
+
+    Returns:
+        Shard report with counts, input and output digests, and timing.
+    """
     source = Path(source).resolve()
     config_path = Path(config_path).resolve()
     output = Path(output).resolve()
@@ -191,11 +296,17 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         or output.is_relative_to(source.parent)
         or output.is_relative_to(config_path.parent)
     ):
-        raise ValueError('output must be outside input directories and must not contain inputs')
+        raise ValueError(
+            'output must be outside input directories and must not contain inputs'
+        )
     config_bytes = config_path.read_bytes()
     cfg = json.loads(config_bytes)
-    if cfg.get('schema') != 'water-shard-candidate-v2' or not cfg.get('selection_notes'):
-        raise ValueError('explicit supported configuration and selection notes required')
+    if cfg.get('schema') != 'water-shard-candidate-v2' or not cfg.get(
+        'selection_notes'
+    ):
+        raise ValueError(
+            'explicit supported configuration and selection notes required'
+        )
     grid = cfg['grid']
     policy = cfg['policy']
     width, height, west, north, step = (
@@ -215,7 +326,10 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         or not isinstance(tile, int)
         or isinstance(tile, bool)
         or not 1 <= tile <= 4096
-        or not all(isinstance(x, (int, float)) and math.isfinite(x) for x in (west, north, step))
+        or not all(
+            isinstance(x, (int, float)) and math.isfinite(x)
+            for x in (west, north, step)
+        )
         or step <= 0
         or west < -180
         or west + width * step > 180
@@ -231,20 +345,29 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         raise ValueError('batch size must be a positive integer')
     engine = engine or cfg.get('rasterizer', 'gdal')
     if engine not in ('gdal', 'python'):
-        raise ValueError('rasterizer must be gdal or python; runtime native compilation is retired')
+        raise ValueError(
+            'rasterizer must be gdal or python; runtime native compilation is retired'
+        )
     if 'native_method' in cfg:
-        raise ValueError('retired native_method; select the in-process method with batch_method')
-    if len(expected) != 64 or sha256(source) != expected.lower():
+        raise ValueError(
+            'retired native_method; select the in-process method with batch_method'
+        )
+    if len(expected) != 64 or sha256_file(source) != expected.lower():
         raise ValueError('source SHA-256 does not match expected digest')
     pf = pq.ParquetFile(source, pre_buffer=False)
     md = pf.schema_arrow.metadata or {}
     geo = json.loads(md[b'geo'])
-    if geo['primary_column'] != 'geometry' or geo['columns']['geometry'].get('encoding') != 'WKB':
+    if (
+        geo['primary_column'] != 'geometry'
+        or geo['columns']['geometry'].get('encoding') != 'WKB'
+    ):
         raise ValueError('unexpected GeoParquet geometry encoding or column')
     # GeoParquet specifies OGC:CRS84 when crs is absent. Refuse a different or
     # explicitly null CRS rather than silently assume longitude/latitude.
     if 'crs' in geo['columns']['geometry']:
-        raise ValueError('unsupported explicit CRS; expected GeoParquet default OGC:CRS84')
+        raise ValueError(
+            'unsupported explicit CRS; expected GeoParquet default OGC:CRS84'
+        )
     if shutil.disk_usage(output.parent).free < reserve:
         raise ValueError('free disk below configured reserve')
     os.mkdir(output)
@@ -281,15 +404,28 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
     for batch_no, batch in enumerate(
         pf.iter_batches(
             batch_size=batch_size,
-            columns=['subtype', 'geometry'] if kernel else ['id', 'subtype', 'geometry'],
+            columns=['subtype', 'geometry']
+            if kernel
+            else ['id', 'subtype', 'geometry'],
             use_threads=False,
         )
     ):
         if shutil.disk_usage(out).free < reserve:
-            raise ValueError('free disk below configured reserve; partial output preserved')
+            raise ValueError(
+                'free disk below configured reserve; partial output preserved'
+            )
         dimensions = (width, height, west, north, step)
         if kernel:
-            gdal_batch(kernel, raster, batch, counts, invalid, dimensions, tile, ids)
+            gdal_batch(
+                kernel,
+                raster,
+                batch,
+                counts,
+                invalid,
+                dimensions,
+                tile,
+                cast(SourceIds, ids),
+            )
         else:
             python_batch(raster, batch, counts, invalid, dimensions, tile, srs)
         # The reference path creates Python feature objects. GDAL batches own
@@ -324,7 +460,7 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         )
     raster.FlushCache()
     raster = None
-    if sha256(source) != expected.lower():
+    if sha256_file(source) != expected.lower():
         raise ValueError('source changed during processing')
     if config_path.read_bytes() != config_bytes:
         raise ValueError('configuration changed during processing')
@@ -340,7 +476,7 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         'source': str(source),
         'source_sha256': expected.lower(),
         'rows_in_source': pf.metadata.num_rows,
-        'script_sha256': sha256(Path(__file__).resolve()),
+        'script_sha256': sha256_file(Path(__file__).resolve()),
         'rasterizer': engine,
         'gdal_kernel': kernel.provenance if kernel else None,
         'batch_timings': kernel.timings if kernel else None,
@@ -351,7 +487,13 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
         'selection_notes': cfg['selection_notes'],
         'configuration_sha256': hashlib.sha256(config_bytes).hexdigest(),
         'geometry_policy': 'GEOS validity checked; invalid geometries excluded and IDs reported; no repair',
-        'grid': {'width': width, 'height': height, 'west': west, 'north': north, 'step': step},
+        'grid': {
+            'width': width,
+            'height': height,
+            'west': west,
+            'north': north,
+            'step': step,
+        },
         'rasterization': f'GDAL default polygon rasterization, ALL_TOUCHED off; values unioned per batch on {tile}-cell tiles',
         'runtime': {
             'python': sys.version,
@@ -359,34 +501,16 @@ def run(source, expected, output, config_path, batch_size=None, engine=None, *, 
             'gdal': gdal.VersionInfo('--version'),
             'geos': '.'.join(
                 str(f())
-                for f in (ogr.GetGEOSVersionMajor, ogr.GetGEOSVersionMinor, ogr.GetGEOSVersionMicro)
+                for f in (
+                    ogr.GetGEOSVersionMajor,
+                    ogr.GetGEOSVersionMinor,
+                    ogr.GetGEOSVersionMicro,
+                )
             ),
         },
-        'output_sha256': sha256(out / 'water.tif'),
+        'output_sha256': sha256_file(out / 'water.tif'),
         'limitations': 'Candidate water mask only, not a historical or complete physical mask. Review invalid features and compare against preserved references before use.',
     }
     with (out / 'report.json').open('x') as f:
         f.write(json.dumps(report, indent=2) + '\n')
     return report
-
-
-if __name__ == '__main__':
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('source')
-    p.add_argument('sha256')
-    p.add_argument('config')
-    p.add_argument('new_output_directory')
-    p.add_argument('--batch-size', type=int, default=None, help='override batch_size in config')
-    p.add_argument('--engine', choices=('gdal', 'python'), help='override rasterizer in config')
-    a = p.parse_args()
-    try:
-        print(
-            json.dumps(
-                run(a.source, a.sha256, a.new_output_directory, a.config, a.batch_size, a.engine),
-                indent=2,
-            ),
-            flush=True,
-        )
-    except Exception as e:
-        print(f'failed: {e}', file=sys.stderr)
-        sys.exit(1)

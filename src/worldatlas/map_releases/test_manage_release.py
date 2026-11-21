@@ -19,7 +19,6 @@ from unittest.mock import Mock, patch
 from botocore.exceptions import ClientError
 
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
-from worldatlas.map_build.execution.runtime import pin
 from worldatlas.map_build.inputs.selection import canonical_bytes
 from worldatlas.map_build.test_support import selection
 from worldatlas.map_releases.catalog import (
@@ -45,6 +44,7 @@ from worldatlas.map_releases.manage_release import (
     verify_object,
     version,
 )
+from worldatlas.shared.files import pin_file
 
 
 class BundleTests(unittest.TestCase):
@@ -82,14 +82,14 @@ class BundleTests(unittest.TestCase):
             json.dumps(
                 {
                     "sources": {
-                        "land_config": {
-                            "json": {"grid": {"width": 2, "height": 1, "step": 180}}
+                        "land_config": {"land": []},
+                        "inland_water": {
+                            "rasterization": {},
+                            "files": [dict(
+                                path="raw/shard.parquet", r2_bucket="test", r2_key="sources/shard.parquet",
+                                sha256="c" * 64, size=10,
+                            )],
                         },
-                        "water_config": {"json": {}},
-                        "raw_manifest": {"json": {"files": [dict(
-                            path="raw/shard.parquet", r2_bucket="test", r2_key="sources/shard.parquet",
-                            sha256="c" * 64, size=10,
-                        )]}},
                     },
                     "physical_controls": {
                         "max_parallel_shards": 1,
@@ -102,7 +102,7 @@ class BundleTests(unittest.TestCase):
         identity.write_text(
             json.dumps(
                 {
-                    "request": pin(request),
+                    "request": pin_file(request),
                     "divide": [0, 12],
                     "input_selection_sha256": hashlib.sha256(
                         canonical_bytes(self.selection)
@@ -137,7 +137,7 @@ class BundleTests(unittest.TestCase):
         self.attempt.mkdir(parents=True)
         write_source(self.attempt / "source-code.json.gz", self.code)
         (self.attempt / "producer.json").write_text(
-            json.dumps({"source_archive": pin(self.attempt / "source-code.json.gz")})
+            json.dumps({"source_archive": pin_file(self.attempt / "source-code.json.gz")})
         )
         self.report = self.run / "report.json"
         self.report.write_text(
@@ -145,11 +145,11 @@ class BundleTests(unittest.TestCase):
                 {
                     "schema": "worldatlas-end-to-end-report-v2",
                     "status": "complete",
-                    "original_run_identity": pin(identity),
-                    "request": pin(request),
+                    "original_run_identity": pin_file(identity),
+                    "request": pin_file(request),
                     "comparison": None,
                     "final": {
-                        name: pin(final / filename)
+                        name: pin_file(final / filename)
                         for name, filename in [
                             ("rows", "rows.u32le"),
                             ("runs", "runs.u32le"),
@@ -212,7 +212,7 @@ class BundleTests(unittest.TestCase):
         rows = self.run / "final/rows.u32le"
         rows.write_bytes(self.rows + b"\0" * 4)
         report = json.loads(self.report.read_bytes())
-        report["final"]["rows"] = pin(rows)
+        report["final"]["rows"] = pin_file(rows)
         self.report.write_text(json.dumps(report))
         with self.assertRaisesRegex(ValueError, "rows size or checksum differs"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
@@ -229,7 +229,7 @@ class BundleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "build identity does not match"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         identity.write_text('{"request": {}}')
-        report["original_run_identity"] = pin(identity)
+        report["original_run_identity"] = pin_file(identity)
         self.report.write_text(json.dumps(report))
         with self.assertRaisesRegex(ValueError, "build configuration does not match"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
@@ -238,7 +238,7 @@ class BundleTests(unittest.TestCase):
         report = json.loads(self.report.read_bytes())
         path = self.run.parent / "rows.u32le"
         path.write_bytes(self.rows)
-        report["final"]["rows"] = pin(path)
+        report["final"]["rows"] = pin_file(path)
         self.report.write_text(json.dumps(report))
         with self.assertRaisesRegex(ValueError, "outputs together inside the build directory"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
@@ -250,7 +250,7 @@ class BundleTests(unittest.TestCase):
         for counts, error in (({"1": 1}, "counts must cover"), ({"99": 2}, "missing categories")):
             with self.subTest(counts=counts), self.assertRaisesRegex(ValueError, error):
                 path.write_text(json.dumps(dict(summary, counts=counts)))
-                report["final"]["report"] = pin(path)
+                report["final"]["report"] = pin_file(path)
                 self.report.write_text(json.dumps(report))
                 build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
@@ -317,7 +317,7 @@ class BundleTests(unittest.TestCase):
         identity["input_selection_sha256"] = hashlib.sha256(canonical_bytes(self.selection)).hexdigest()
         identity_file.write_text(json.dumps(identity))
         report = json.loads(self.report.read_bytes())
-        report["original_run_identity"] = pin(identity_file)
+        report["original_run_identity"] = pin_file(identity_file)
         self.report.write_text(json.dumps(report))
         build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         archived = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc.1")
@@ -356,7 +356,7 @@ class BundleTests(unittest.TestCase):
             self.attempt / "source-code.json.gz", second / "source-code.json.gz"
         )
         (second / "producer.json").write_text(
-            json.dumps({"source_archive": pin(second / "source-code.json.gz")})
+            json.dumps({"source_archive": pin_file(second / "source-code.json.gz")})
         )
         build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         archived = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc.1")
@@ -378,7 +378,7 @@ class BundleTests(unittest.TestCase):
     def test_source_archive_must_belong_to_the_reported_attempt(self):
         other = self.run.parent / "source-code.json.gz"
         shutil.copyfile(self.attempt / "source-code.json.gz", other)
-        (self.attempt / "producer.json").write_text(json.dumps({"source_archive": pin(other)}))
+        (self.attempt / "producer.json").write_text(json.dumps({"source_archive": pin_file(other)}))
         with self.assertRaisesRegex(ValueError, "inside its build attempt"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
@@ -427,7 +427,7 @@ class BundleTests(unittest.TestCase):
         ).hexdigest()
         identity_path.write_text(json.dumps(identity))
         report = json.loads(self.report.read_text())
-        report["original_run_identity"] = pin(identity_path)
+        report["original_run_identity"] = pin_file(identity_path)
         self.report.write_text(json.dumps(report))
         with self.assertRaisesRegex(ValueError, "missing for land entities"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)

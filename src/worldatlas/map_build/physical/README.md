@@ -4,7 +4,7 @@ Rasterize the selected global coastline polygons and inland-water shards on the 
 
 ## Use
 
-The supported map command calls these Python functions directly. For a focused physical build, pass the generated `RUN/configs/physical.json` request with its pinned inputs available at their recorded paths.
+The map builder calls these Python functions directly. For a focused physical build, pass the generated `RUN/physical-build-config.json` with its input files available at their recorded paths.
 
 ```bash
 python3 -m worldatlas.map_build.physical.build \
@@ -28,7 +28,6 @@ R2 uses the normal boto3 credential chain, with credentials outside the code. Do
 | `water.py` | Read GeoParquet water records and apply the selected inland-water policy. |
 | `water_batch.py` | Validate and rasterize ordinary batches through GDAL's Python API. |
 | `union.py` | Combine all water shards into one water mask. |
-| `crop.py` | Extract an aligned northern prefix from a verified physical grid. |
 | `composition.py` | Subtract inland water from land and write the physical grid. |
 | `build.py` | Connect the functions, stage missing R2 files, retain checkpoints and record timing. |
 

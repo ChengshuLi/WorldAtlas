@@ -1,49 +1,35 @@
 #!/usr/bin/env python3
 """Union explicitly pinned candidate masks; optionally compare to a pinned reference."""
 
-import hashlib, json, math, os, shutil, sys
+import hashlib
+import json
+import math
+import os
+import shutil
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
+
 import numpy as np
 from osgeo import gdal, osr
+
+from worldatlas.map_build.physical.sources import open_mask
+from worldatlas.shared.files import sha256_file
 
 gdal.UseExceptions()
 
 
-def sha(path):
-    h = hashlib.sha256()
-    with Path(path).open('rb') as f:
-        for b in iter(lambda: f.read(4 << 20), b''):
-            h.update(b)
-    return h.hexdigest()
+def union_mask(ds: gdal.Dataset, water: np.ndarray, y: int) -> None:
+    """Combine the raster's water cells into a batch in place.
 
+    Args:
+        ds: Single-band water raster with zero or one per cell.
+        water: Two-dimensional output block to update.
+        y: First row of the output block in the full raster.
 
-def open_mask(entry, grid):
-    path = Path(entry['path']).resolve()
-    if sha(path) != entry['sha256']:
-        raise ValueError(f'input hash mismatch: {path}')
-    ds = gdal.Open(str(path))
-    w, h, west, north, step = (grid[k] for k in ('width', 'height', 'west', 'north', 'step'))
-    if (
-        ds is None
-        or ds.RasterXSize != w
-        or ds.RasterYSize != h
-        or ds.GetGeoTransform() != (west, step, 0, north, 0, -step)
-    ):
-        raise ValueError(f'grid mismatch: {path}')
-    actual = ds.GetSpatialRef()
-    expected = osr.SpatialReference()
-    expected.ImportFromEPSG(4326)
-    if actual is None:
-        raise ValueError(f'missing CRS: {path}')
-    actual.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    expected.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    if not actual.IsSame(expected):
-        raise ValueError(f'CRS mismatch: {path}')
-    return ds
-
-
-def union_mask(ds, water, y):
-    """Union a mask, skipping only GeoTIFF blocks guaranteed to read as zero."""
+    Raises:
+        ValueError: The dataset has multiple bands or nonbinary values.
+    """
     width = water.shape[1]
     rows = water.shape[0]
     band = ds.GetRasterBand(1)
@@ -73,18 +59,32 @@ def union_mask(ds, water, y):
         np.bitwise_or(view, arr, out=view)
 
 
-def verify_lineage(cfg, grid):
-    """Bind every raster and report to one complete, pinned raw-source manifest."""
+def verify_lineage(cfg: dict[str, Any], grid: dict[str, Any]) -> None:
+    """Verify that the output masks came from the pinned complete shard set.
+
+    Args:
+        cfg: Union settings with the raw manifest and shard report pins.
+        grid: Shared grid expected in every report.
+
+    Raises:
+        ValueError: A shard, report, or source manifest is incomplete or mismatched.
+    """
     spec = cfg.get('source_manifest')
-    if not isinstance(spec, dict) or sha(spec['path']) != spec['sha256']:
+    if not isinstance(spec, dict) or sha256_file(spec['path']) != spec['sha256']:
         raise ValueError('pinned source manifest required')
     manifest = json.loads(Path(spec['path']).read_bytes())
     files = manifest.get('files')
-    if not isinstance(files, list) or manifest.get('file_count') != len(files) or not files:
+    if (
+        not isinstance(files, list)
+        or manifest.get('file_count') != len(files)
+        or not files
+    ):
         raise ValueError('source manifest must list every raw shard')
     expected = [f.get('sha256') for f in files]
     if any(
-        not isinstance(v, str) or len(v) != 64 or any(ch not in '0123456789abcdef' for ch in v)
+        not isinstance(v, str)
+        or len(v) != 64
+        or any(ch not in '0123456789abcdef' for ch in v)
         for v in expected
     ) or len(set(expected)) != len(expected):
         raise ValueError('source manifest hashes must be unique SHA-256 values')
@@ -94,7 +94,10 @@ def verify_lineage(cfg, grid):
     kernels = []
     for shard in cfg['shards']:
         report = shard.get('report')
-        if not isinstance(report, dict) or sha(report['path']) != report['sha256']:
+        if (
+            not isinstance(report, dict)
+            or sha256_file(report['path']) != report['sha256']
+        ):
             raise ValueError('pinned shard report required')
         doc = json.loads(Path(report['path']).read_bytes())
         row_count = doc.get('rows_in_source')
@@ -129,7 +132,8 @@ def verify_lineage(cfg, grid):
                     or any(ch not in '0123456789abcdef' for ch in native[k])
                     for k in ('source_sha256', 'binding_sha256', 'binary_sha256')
                 )
-                or sha(Path(report['path']).parent / 'water-native.so') != native['binary_sha256']
+                or sha256_file(Path(report['path']).parent / 'water-native.so')
+                != native['binary_sha256']
             ):
                 raise ValueError('invalid native water kernel')
             kernels.append(
@@ -154,7 +158,9 @@ def verify_lineage(cfg, grid):
                 or any(ch not in '0123456789abcdef' for ch in kernel['binding_sha256'])
             ):
                 raise ValueError('invalid in-process GDAL water kernel')
-            kernels.append(('gdal', kernel['method'], kernel['binding_sha256'], kernel.get('gdal')))
+            kernels.append(
+                ('gdal', kernel['method'], kernel['binding_sha256'], kernel.get('gdal'))
+            )
         else:
             if native is not None:
                 raise ValueError('unexpected native water kernel')
@@ -162,8 +168,14 @@ def verify_lineage(cfg, grid):
         seen.append(doc.get('source_sha256'))
         policies.append(doc.get('policy'))
         scripts.append(doc.get('script_sha256'))
-    if len(seen) != len(expected) or set(seen) != set(expected) or len(set(seen)) != len(seen):
-        raise ValueError('shard reports do not cover the pinned source manifest exactly')
+    if (
+        len(seen) != len(expected)
+        or set(seen) != set(expected)
+        or len(set(seen)) != len(seen)
+    ):
+        raise ValueError(
+            'shard reports do not cover the pinned source manifest exactly'
+        )
     if any(p != policies[0] for p in policies):
         raise ValueError('inconsistent shard selection policy')
     if any(p != scripts[0] for p in scripts):
@@ -172,15 +184,31 @@ def verify_lineage(cfg, grid):
         raise ValueError('inconsistent native water kernels')
 
 
-def run(config_path, output, *, emit=print):
+def run(
+    config_path: Path | str, output: Path | str, *, emit: Callable[..., None] = print
+) -> dict[str, Any]:
+    """Combine verified water shards into a single aligned raster.
+
+    Args:
+        config_path: JSON union settings and pinned source records.
+        output: New directory for the combined mask and report.
+        emit: Progress callback.
+
+    Returns:
+        Report with the combined water count and raster checksum.
+    """
     config_path = Path(config_path).resolve()
     data = config_path.read_bytes()
     cfg = json.loads(data)
     output = Path(output).resolve()
-    if cfg.get('schema') != 'water-union-comparison-v1' or not cfg.get('selection_notes'):
+    if cfg.get('schema') != 'water-union-comparison-v1' or not cfg.get(
+        'selection_notes'
+    ):
         raise ValueError('explicit schema and selection notes required')
     grid = cfg['grid']
-    w, h, west, north, step = (grid[k] for k in ('width', 'height', 'west', 'north', 'step'))
+    w, h, west, north, step = (
+        grid[k] for k in ('width', 'height', 'west', 'north', 'step')
+    )
     if (
         not isinstance(w, int)
         or isinstance(w, bool)
@@ -188,7 +216,10 @@ def run(config_path, output, *, emit=print):
         or not isinstance(h, int)
         or isinstance(h, bool)
         or h <= 0
-        or not all(isinstance(x, (int, float)) and math.isfinite(x) for x in (west, north, step))
+        or not all(
+            isinstance(x, (int, float)) and math.isfinite(x)
+            for x in (west, north, step)
+        )
         or step <= 0
         or west < -180
         or west + w * step > 180
@@ -200,7 +231,11 @@ def run(config_path, output, *, emit=print):
     reference = cfg.get('reference')
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     rows_per_block = cfg.get('rows_per_block', 128)
-    if not isinstance(shards, list) or not shards or cfg.get('shard_count') != len(shards):
+    if (
+        not isinstance(shards, list)
+        or not shards
+        or cfg.get('shard_count') != len(shards)
+    ):
         raise ValueError('complete explicit shard list required')
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
@@ -218,7 +253,9 @@ def run(config_path, output, *, emit=print):
     if len(set(inputs)) != len(inputs):
         raise ValueError('input paths must be unique')
     if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs):
-        raise ValueError('output must be outside input directories and must not contain inputs')
+        raise ValueError(
+            'output must be outside input directories and must not contain inputs'
+        )
     masks = [open_mask(s, grid) for s in shards]
     ref = open_mask(reference, grid) if reference else None
     os.mkdir(output)
@@ -246,7 +283,9 @@ def run(config_path, output, *, emit=print):
     with (output / 'mismatch-spans.jsonl').open('x') as out:
         for y in range(0, h, rows_per_block):
             if shutil.disk_usage(output).free < reserve:
-                raise ValueError('free disk below configured reserve; partial output preserved')
+                raise ValueError(
+                    'free disk below configured reserve; partial output preserved'
+                )
             n = min(rows_per_block, h - y)
             water = np.zeros((n, w), dtype=np.uint8)
             for ds in masks:
@@ -263,7 +302,9 @@ def run(config_path, output, *, emit=print):
             for offset, (a, b) in enumerate(zip(old, water) if old is not None else []):
                 if not np.any(a != b):
                     continue
-                cuts = np.flatnonzero(np.r_[True, (a[1:] != a[:-1]) | (b[1:] != b[:-1]), True])
+                cuts = np.flatnonzero(
+                    np.r_[True, (a[1:] != a[:-1]) | (b[1:] != b[:-1]), True]
+                )
                 for x0, x1 in zip(cuts[:-1], cuts[1:]):
                     if a[x0] != b[x0]:
                         out.write(
@@ -289,7 +330,7 @@ def run(config_path, output, *, emit=print):
     ref = None
     masks = []
     for item in shards + ([reference] if reference else []):
-        if sha(item['path']) != item['sha256']:
+        if sha256_file(item['path']) != item['sha256']:
             raise ValueError('input changed during comparison')
     if config_path.read_bytes() != data:
         raise ValueError('configuration changed during comparison')
@@ -307,8 +348,8 @@ def run(config_path, output, *, emit=print):
         'candidate_extra_cells': extra,
         'candidate_missing_cells': missing,
         'mismatch_spans': spans,
-        'mismatch_spans_sha256': sha(output / 'mismatch-spans.jsonl'),
-        'union_sha256': sha(output / 'water-union.tif'),
+        'mismatch_spans_sha256': sha256_file(output / 'mismatch-spans.jsonl'),
+        'union_sha256': sha256_file(output / 'water-union.tif'),
         'limitations': 'Grid comparison only; provenance, source equivalence, and decisions require independent review.',
     }
     if reference is None:
@@ -329,12 +370,3 @@ def run(config_path, output, *, emit=print):
         json.dump(report, f, indent=2)
         f.write('\n')
     return report
-
-
-if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        sys.exit('usage: aggregate_compare.py CONFIG.json NEW_OUTPUT_DIRECTORY')
-    try:
-        print(json.dumps(run(sys.argv[1], sys.argv[2]), indent=2), flush=True)
-    except Exception as e:
-        sys.exit(f'failed: {e}')

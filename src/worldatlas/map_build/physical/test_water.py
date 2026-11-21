@@ -5,6 +5,7 @@ import tempfile
 import unittest
 import weakref
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 import ctypes
 import subprocess
@@ -13,7 +14,9 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 from worldatlas.map_build.physical import water as build
+from worldatlas.map_build.physical import water_batch
 from worldatlas.map_build.physical.water_batch import WaterBatch
+from worldatlas.shared.files import sha256_file
 
 
 class WaterShardTests(unittest.TestCase):
@@ -178,7 +181,7 @@ class WaterShardTests(unittest.TestCase):
             )
         table = pa.Table.from_pylist(rows).replace_schema_metadata(table.schema.metadata)
         pq.write_table(table, p)
-        digest = build.sha256(p)
+        digest = sha256_file(p)
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
@@ -260,9 +263,9 @@ class WaterShardTests(unittest.TestCase):
             rows.append({'id': str(len(rows)), 'subtype': 'lake', 'geometry': value + b'extra'})
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
         for engine in ('python', 'gdal'):
-            build.run(p, build.sha256(p), self.path / engine, self.config, engine=engine)
+            build.run(p, sha256_file(p), self.path / engine, self.config, engine=engine)
         self.assertEqual(
-            build.sha256(self.path / 'python/water.tif'), build.sha256(self.path / 'gdal/water.tif')
+            sha256_file(self.path / 'python/water.tif'), sha256_file(self.path / 'gdal/water.tif')
         )
 
     def test_point_shortcut_matches_ogr_for_endianness_dimensions_and_nonfinite_values(self):
@@ -354,6 +357,77 @@ class WaterShardTests(unittest.TestCase):
         initial[2, 5:7] = 1
         np.testing.assert_array_equal(raster.ReadAsArray(), initial)
 
+    def test_water_kernel_accepts_tagged_wkb_and_rejects_other_arrow_arrays(self):
+        class Wkb(pa.ExtensionType):
+            def __init__(self):
+                super().__init__(pa.binary(), 'geoarrow.wkb')
+
+            def __arrow_ext_serialize__(self):
+                return b''
+
+        kernel = WaterBatch()
+        grid = (8, 4, -180, 90, 45)
+        raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
+        raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
+        point = ogr.CreateGeometryFromWkt('POINT (12 34)')
+        storage = pa.array([bytes(point.ExportToWkb())])
+        wrapped = pa.ExtensionArray.from_storage(Wkb(), storage)
+        status, failure = kernel.burn(raster, wrapped, [1], grid, 4)
+        self.assertEqual((status.tolist(), failure), ([3], None))
+        with self.assertRaisesRegex(ValueError, 'must be a binary WKB array'):
+            kernel.burn(raster, pa.array(['POINT (12 34)']), [1], grid, 4)
+        with self.assertRaisesRegex(ValueError, 'unexpected strip geometry type'):
+            water_batch.strip_wkb(point, 45, 0, 45, {}, ())
+
+    def test_tile_setup_and_rasterization_errors_do_not_write_water(self):
+        kernel = WaterBatch()
+        grid = (8, 4, -180, 90, 45)
+        raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
+        raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
+        polygon = ogr.CreateGeometryFromWkt(
+            'POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))'
+        )
+        geometry = pa.array([bytes(polygon.ExportToWkb())])
+        for owner, function, result, message in (
+            (water_batch.gdal_array, 'OpenArray', None, 'GDAL tile transform failed'),
+            (gdal, 'RasterizeLayer', 1, 'GDAL water geometry rasterization failed'),
+        ):
+            with self.subTest(function=function), mock.patch.object(owner, function, return_value=result):
+                with self.assertRaisesRegex(ValueError, message):
+                    kernel.burn(raster, geometry, [1], grid, 4)
+                self.assertFalse(raster.ReadAsArray().any())
+
+    def test_multipart_water_skips_empty_and_outside_parts(self):
+        kernel = WaterBatch()
+        grid = (8, 4, -180, 90, 45)
+        raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
+        raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
+        polygon = ogr.CreateGeometryFromWkt(
+            'MULTIPOLYGON (EMPTY, ((-180 90,-135 90,-135 0,-180 0,-180 90)), '
+            '((190 45,200 45,200 0,190 0,190 45)))'
+        )
+        geometry = pa.array([bytes(polygon.ExportToWkb())])
+        with mock.patch.object(water_batch, 'strip_wkb', return_value=None):
+            status, failure = kernel.burn(raster, geometry, [1], grid, 1)
+        self.assertEqual((status.tolist(), failure), ([1], None))
+        self.assertFalse(raster.ReadAsArray().any())
+        status, failure = kernel.burn(raster, geometry, [1], grid, 1)
+        self.assertEqual((status.tolist(), failure), ([1], None))
+        expected = np.zeros((4, 8), dtype=np.uint8)
+        expected[:2, 0] = 1
+        np.testing.assert_array_equal(raster.ReadAsArray(), expected)
+
+    def test_nonfinite_polygon_envelope_aborts_before_rasterization(self):
+        raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
+        polygon = ogr.CreateGeometryFromWkt(
+            'POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))'
+        )
+        geometry = pa.array([bytes(polygon.ExportToWkb())])
+        with mock.patch.object(ogr.Geometry, 'GetEnvelope', return_value=(np.nan, 0, 0, 0)):
+            status, failure = WaterBatch().burn(raster, geometry, [1], (8, 4, -180, 90, 45), 1)
+        self.assertEqual((status.tolist(), failure), ([6], 0))
+        self.assertFalse(raster.ReadAsArray().any())
+
     def test_hybrid_global_burn_matches_local_tiles_at_pixel_centers(self):
         p, _ = self.fixture()
         metadata = pq.read_schema(p).metadata
@@ -378,7 +452,7 @@ class WaterShardTests(unittest.TestCase):
                     )
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
         for engine in ('python', 'gdal'):
-            build.run(p, build.sha256(p), self.path / engine, self.config, 19, engine)
+            build.run(p, sha256_file(p), self.path / engine, self.config, 19, engine)
         np.testing.assert_array_equal(
             gdal.Open(str(self.path / 'python/water.tif')).ReadAsArray(),
             gdal.Open(str(self.path / 'gdal/water.tif')).ReadAsArray(),
@@ -486,7 +560,7 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
-            build.run(p, build.sha256(p), out, self.config, engine=engine)
+            build.run(p, sha256_file(p), out, self.config, engine=engine)
             reports.append(json.loads((out / 'report.json').read_text()))
             raster = gdal.Open(str(out / 'water.tif'))
             self.assertEqual(int(raster.ReadAsArray(75722, 8650, 1, 1)[0, 0]), 1)
@@ -532,7 +606,7 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
-            build.run(p, build.sha256(p), out, self.config, engine=engine)
+            build.run(p, sha256_file(p), out, self.config, engine=engine)
             reports.append(json.loads((out / 'report.json').read_text()))
         self.assertEqual(reports[0]['output_sha256'], reports[1]['output_sha256'])
 
@@ -600,30 +674,6 @@ class WaterShardTests(unittest.TestCase):
             build.run(p, digest, out, self.config)
         self.assertFalse(out.exists())
 
-    def test_invalid_geometry_is_reported_and_not_claimed_complete(self):
-        p, _ = self.fixture()
-        table = pq.read_table(p).to_pylist()
-        table[0]['geometry'] = bytes(
-            ogr.CreateGeometryFromWkt(
-                'POLYGON ((-170 80,-120 40,-170 40,-120 80,-170 80))'
-            ).ExportToWkb()
-        )
-        table = pa.Table.from_pylist(table).replace_schema_metadata(
-            {
-                b'geo': json.dumps(
-                    {'primary_column': 'geometry', 'columns': {'geometry': {'encoding': 'WKB'}}}
-                ).encode()
-            }
-        )
-        p = self.inputs / 'invalid.parquet'
-        pq.write_table(table, p)
-        digest = hashlib.sha256(p.read_bytes()).hexdigest()
-        out = self.path / 'invalid-output'
-        build.run(p, digest, out, self.config, 10)
-        report = json.loads((out / 'report.json').read_text())
-        self.assertEqual(report['status'], 'incomplete-input-issues')
-        self.assertEqual(json.loads((out / 'invalid-feature-ids.json').read_text()), ['lake'])
-
     def test_free_space_guard(self):
         p, digest = self.fixture()
         cfg = json.loads(self.config.read_text())
@@ -633,6 +683,128 @@ class WaterShardTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'free disk below configured reserve'):
             build.run(p, digest, out, self.config)
         self.assertFalse(out.exists())
+
+    def test_progress_can_report_rss_on_platforms_with_or_without_proc(self):
+        source, digest = self.fixture()
+        proc = Path('/proc/self/status')
+        normal_read = Path.read_text
+        for available in (False, True):
+            with self.subTest(available=available):
+                progress = []
+
+                def read(path, *args, **kwargs):
+                    if path != proc:
+                        return normal_read(path, *args, **kwargs)
+                    if not available:
+                        raise FileNotFoundError(proc)
+                    return 'Name:\tpython\nVmRSS:\t128 kB\n'
+
+                with mock.patch.object(Path, 'read_text', new=read):
+                    build.run(
+                        source, digest, self.path / f'proc-{available}', self.config,
+                        emit=lambda line, **_: progress.append(json.loads(line)),
+                    )
+                expected = 'VmRSS:\t128 kB' if available else 'unavailable'
+                self.assertTrue(progress)
+                self.assertTrue(all(item['rss'] == expected for item in progress))
+
+    def test_water_shard_leaves_no_report_when_disk_space_drops_during_rasterization(self):
+        source, digest = self.fixture()
+        cfg = json.loads(self.config.read_text())
+        self.config.write_text(json.dumps(dict(cfg, minimum_free_bytes=1)))
+        out = self.path / 'low-space'
+        with mock.patch.object(
+            build.shutil, 'disk_usage',
+            side_effect=lambda path: SimpleNamespace(free=0 if Path(path) == out.resolve() else 1024),
+        ):
+            with self.assertRaisesRegex(ValueError, 'partial output preserved'):
+                build.run(source, digest, out, self.config)
+        self.assertFalse((out / 'report.json').exists())
+
+    def test_water_report_requires_unchanged_source_and_config(self):
+        source, digest = self.fixture()
+        for path, message in (
+            (source, 'source changed during processing'),
+            (self.config, 'configuration changed during processing'),
+        ):
+            with self.subTest(path=path):
+                original = path.read_bytes()
+                out = self.path / (path.stem + '-changed')
+
+                def change(*_, **__):
+                    path.write_bytes(original + b'\n')
+
+                with self.assertRaisesRegex(ValueError, message):
+                    build.run(source, digest, out, self.config, emit=change)
+                self.assertFalse((out / 'report.json').exists())
+                path.write_bytes(original)
+
+    def test_reports_source_id_for_missing_and_empty_selected_geometry(self):
+        source, _ = self.fixture()
+        table = pq.read_table(source)
+        empty_polygon = bytes(ogr.CreateGeometryFromWkt('POLYGON EMPTY').ExportToWkb())
+        for replacement, message in (
+            (None, 'missing geometry: lake'),
+            (empty_polygon, 'invalid or empty WKB geometry: lake'),
+        ):
+            rows = table.to_pylist()
+            rows[0]['geometry'] = replacement
+            pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), source)
+            for engine in ('gdal', 'python'):
+                with self.subTest(engine=engine, message=message):
+                    out = self.path / f'{engine}-{replacement is None}'
+                    with self.assertRaisesRegex(ValueError, message):
+                        build.run(source, sha256_file(source), out, self.config, engine=engine)
+                    self.assertFalse((out / 'report.json').exists())
+
+    def test_python_rasterizer_reports_invalid_polygon_with_same_id_as_gdal(self):
+        source, _ = self.fixture()
+        table = pq.read_table(source)
+        rows = table.to_pylist()
+        rows[0]['geometry'] = bytes(
+            ogr.CreateGeometryFromWkt(
+                'POLYGON ((-170 80,-120 40,-170 40,-120 80,-170 80))'
+            ).ExportToWkb()
+        )
+        pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), source)
+        reports = []
+        for engine in ('gdal', 'python'):
+            out = self.path / engine
+            reports.append(build.run(source, sha256_file(source), out, self.config, engine=engine))
+            self.assertEqual(json.loads((out / 'invalid-feature-ids.json').read_text()), ['lake'])
+        self.assertEqual(reports[0]['counts'], reports[1]['counts'])
+        self.assertTrue(all(r['status'] == 'incomplete-input-issues' for r in reports))
+
+    def test_shard_input_declares_expected_grid_policy_and_geometry_format(self):
+        source, digest = self.fixture()
+        cfg = json.loads(self.config.read_text())
+        out = self.path / 'invalid'
+        for setting, value, message in (
+            ('minimum_free_bytes', -1, 'invalid free-space reserve'),
+            ('tile_size', 0, 'invalid grid or tile size'),
+            ('policy', {}, 'explicit Overture inland subtype policy'),
+            ('native_method', 'old', 'retired native_method'),
+        ):
+            with self.subTest(setting=setting):
+                self.config.write_text(json.dumps(dict(cfg, **{setting: value})))
+                with self.assertRaisesRegex(ValueError, message):
+                    build.run(source, digest, out, self.config)
+                self.assertFalse(out.exists())
+        self.config.write_text(json.dumps(cfg))
+        table = pq.read_table(source)
+        for column, message in (
+            (dict(encoding='WKT'), 'unexpected GeoParquet geometry encoding'),
+            (dict(encoding='WKB', crs=None), 'unsupported explicit CRS'),
+        ):
+            with self.subTest(column=column):
+                metadata = dict(primary_column='geometry', columns=dict(geometry=column))
+                pq.write_table(
+                    table.replace_schema_metadata({b'geo': json.dumps(metadata).encode()}),
+                    source,
+                )
+                with self.assertRaisesRegex(ValueError, message):
+                    build.run(source, sha256_file(source), out, self.config)
+                self.assertFalse(out.exists())
 
     def test_integrity_and_collision(self):
         p, digest = self.fixture()

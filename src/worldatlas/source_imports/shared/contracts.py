@@ -12,14 +12,17 @@ To regenerate from the repository root, run
 import argparse
 import inspect
 import json
-from pathlib import Path
 import types
+from collections.abc import Callable
+from pathlib import Path
 from typing import (
     Annotated,
+    Any,
     NotRequired,
     Required,
     TypedDict,
     Union,
+    cast,
     get_args,
     get_origin,
     get_type_hints,
@@ -28,13 +31,14 @@ from typing import (
 
 from psycopg.sql import quote
 from pydantic import TypeAdapter
-from pydantic.json_schema import GenerateJsonSchema
+from pydantic.json_schema import GenerateJsonSchema, JsonSchemaValue
+from pydantic_core.core_schema import DictSchema, TypedDictSchema
 
 from worldatlas.source_imports.run_import import IMPORTERS
 from worldatlas.source_imports.shared.recipe_types import NONBLANK_PATTERN
 
 
-def parameters(constructor):
+def parameters(constructor: Callable[..., Any]) -> dict[str, tuple[Any, bool]]:
     """Return the argument types and presence requirements of a constructor.
 
     The importer supplies ``runtime`` separately. A parameter's default
@@ -81,7 +85,7 @@ class RecipeSchema(GenerateJsonSchema):
     ``sources`` mapping. The generated schema enforces each kind of key rule.
     """
 
-    def typed_dict_schema(self, schema):
+    def typed_dict_schema(self, schema: TypedDictSchema) -> JsonSchemaValue:
         """Generate a schema that rejects every undeclared field name.
 
         This catches typos in top-level arguments and nested objects,
@@ -99,7 +103,7 @@ class RecipeSchema(GenerateJsonSchema):
         result["additionalProperties"] = False
         return result
 
-    def dict_schema(self, schema):
+    def dict_schema(self, schema: DictSchema) -> JsonSchemaValue:
         """Generate JSON Schema for a mapping, enforcing any key pattern.
 
         ``patternProperties`` validates values under matching keys.
@@ -119,7 +123,7 @@ class RecipeSchema(GenerateJsonSchema):
         return result
 
 
-def recipe_schema(method, fields):
+def recipe_schema(method: str, fields: dict[str, tuple[Any, bool]]) -> JsonSchemaValue:
     """Return the Draft 2020-12 JSON Schema for one method's arguments.
 
     Build a temporary ``TypedDict`` with ``NotRequired`` for fields with
@@ -132,7 +136,9 @@ def recipe_schema(method, fields):
     Returns:
         A Python dictionary describing the stored ``arguments`` object.
     """
-    arguments = TypedDict(
+    # The registry supplies the fields at runtime.
+    factory = cast(Callable[[str, dict[str, Any]], type], TypedDict)
+    arguments = factory(
         method,
         {
             name: kind if required else NotRequired[kind]
@@ -145,7 +151,7 @@ def recipe_schema(method, fields):
     }
 
 
-def source_paths(annotation, path="$"):
+def source_paths(annotation: Any, path: str = "$") -> list[str]:
     """Return the PostgreSQL JSON paths to values declared as ``SourceId``.
 
     For example, ``list[SourceId]`` at ``$."way_source_ids"`` yields
@@ -174,19 +180,25 @@ def source_paths(annotation, path="$"):
     if origin is list:
         return source_paths(args[0], path + "[*]")
     if origin is tuple:
-        return [p for i, kind in enumerate(args)
-                for p in source_paths(kind, path + f"[{i}]")]
+        return [
+            p
+            for i, kind in enumerate(args)
+            for p in source_paths(kind, path + f"[{i}]")
+        ]
     if origin is dict:
         if source_paths(args[0]):
             raise TypeError("source IDs must be values, not JSON object keys")
         return source_paths(args[1], path + ".*")
     if is_typeddict(annotation):
-        return [p for name, kind in get_type_hints(annotation, include_extras=True).items()
-                for p in source_paths(kind, path + "." + json.dumps(name))]
+        return [
+            p
+            for name, kind in get_type_hints(annotation, include_extras=True).items()
+            for p in source_paths(kind, path + "." + json.dumps(name))
+        ]
     return []
 
 
-def database_checks():
+def database_checks() -> str:
     """Generate SQL checks and source reference extraction for the registry.
 
     ``atlas.nonblank`` uses the same Unicode whitespace pattern as
@@ -215,11 +227,17 @@ def database_checks():
         choices.append(
             f"WHEN {quote(method)} THEN public.jsonb_matches_schema({schema}::json, arguments)"
         )
-        paths = sorted({path for name, (kind, _) in fields.items()
-                        for path in source_paths(kind, '$.' + json.dumps(name))})
+        paths = sorted(
+            {
+                path
+                for name, (kind, _) in fields.items()
+                for path in source_paths(kind, '$.' + json.dumps(name))
+            }
+        )
         sources.append(
             f"WHEN {quote(method)} THEN ARRAY["
-            + ",".join(quote("lax " + path) for path in paths) + "]::jsonpath[]"
+            + ",".join(quote("lax " + path) for path in paths)
+            + "]::jsonpath[]"
         )
     return (
         "-- Generated from constructor signatures. Do not edit; see source_imports.shared.contracts.\n"
@@ -229,9 +247,7 @@ def database_checks():
         "$nonblank$;\n\n"
         "CREATE FUNCTION atlas.valid_construction_record(method text, arguments jsonb)\n"
         "RETURNS boolean LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $contract$\n"
-        "SELECT CASE method\n"
-        + "\n".join(choices)
-        + "\nELSE FALSE END;\n$contract$;\n"
+        "SELECT CASE method\n" + "\n".join(choices) + "\nELSE FALSE END;\n$contract$;\n"
         "\nCREATE FUNCTION atlas.construction_source_ids(method text, arguments jsonb)\n"
         "RETURNS SETOF text LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $sources$\n"
         "SELECT DISTINCT value #>> '{}' FROM unnest(CASE method\n"
@@ -243,7 +259,7 @@ def database_checks():
     )
 
 
-def main():
+def main() -> None:
     """Generate the construction SQL at the output path supplied on the command line.
 
     With ``--check``, compare the generated text with the existing file and

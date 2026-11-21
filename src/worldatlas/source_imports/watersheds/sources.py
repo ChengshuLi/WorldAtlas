@@ -1,11 +1,16 @@
 """Find the files, points, and lines named in a watershed recipe."""
-from itertools import pairwise
+
 import json
-from typing import NotRequired, TypedDict
+from collections.abc import Iterable, Mapping
+from itertools import pairwise
+from pathlib import Path
+from typing import Any, NotRequired, TypedDict
 from zipfile import ZipFile
 
 import numpy as np
 import osmium
+from osmium.filter import IdFilter
+from osmium.osm import Node
 from shapely.geometry import LineString
 
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText
@@ -68,13 +73,18 @@ class Sources:
             ``dem`` might refer to the local file ``elevation.tif``.
     """
 
-    def __init__(self, files):
+    def __init__(self, files: Mapping[str, Path]) -> None:
+        """Store the verified local files and prepare the lookup caches.
+
+        Args:
+            files: Recipe file names mapped to local paths.
+        """
         self.files = files
         # Reuse an OSM network or a PBF point if another step asks for it again.
         self.networks = {}
         self.points = {}
 
-    def resolve_raster_path(self, specification):
+    def resolve_raster_path(self, specification: FileSelection) -> str | Path:
         """Tell GDAL where to open an elevation file.
 
         Args:
@@ -90,9 +100,13 @@ class Sources:
             ValueError: The selected file inside the archive is invalid or missing.
         """
         path = self.files[specification['source']]
-        return gdal_dataset_path(path, specification['member']) if 'member' in specification else path
+        return (
+            gdal_dataset_path(path, specification['member'])
+            if 'member' in specification
+            else path
+        )
 
-    def resolve_vector_path(self, selection):
+    def resolve_vector_path(self, selection: str | FileSelection) -> str:
         """Tell GDAL where to open the file that contains the basin shapes.
 
         Args:
@@ -108,9 +122,17 @@ class Sources:
         """
         if isinstance(selection, str):
             return gdal_dataset_path(self.files[selection])
-        return gdal_dataset_path(self.files[selection['source']], selection.get('member'))
+        return gdal_dataset_path(
+            self.files[selection['source']], selection.get('member')
+        )
 
-    def read_osm_network(self, sources, *, rivers_and_streams_only=False, reverse=()):
+    def read_osm_network(
+        self,
+        sources: Iterable[str | FileSelection],
+        *,
+        rivers_and_streams_only: bool = False,
+        reverse: Iterable[int | str] = (),
+    ) -> Waterways:
         """Read the OSM files and remember the result for later lookups.
 
         Args:
@@ -132,7 +154,9 @@ class Sources:
                 paths.append(self.files[selection])
             else:
                 path = self.files[selection['source']]
-                paths.append((path, selection['member']) if 'member' in selection else path)
+                paths.append(
+                    (path, selection['member']) if 'member' in selection else path
+                )
         # Way 42 and way "42" refer to the same stream. Sort and remove
         # duplicates so lists with the same corrections share one read.
         reverse = tuple(sorted(set(map(str, reverse))))
@@ -140,10 +164,14 @@ class Sources:
         # only rivers and streams and reverse some. Cache those reads separately.
         key = tuple(paths), rivers_and_streams_only, reverse
         if key not in self.networks:
-            self.networks[key] = Waterways(paths, rivers_and_streams_only=rivers_and_streams_only, reverse=reverse)
+            self.networks[key] = Waterways(
+                paths, rivers_and_streams_only=rivers_and_streams_only, reverse=reverse
+            )
         return self.networks[key]
 
-    def resolve_recipe_point(self, specification, lines):
+    def resolve_recipe_point(
+        self, specification: dict[str, Any], lines: Mapping[str, LineString]
+    ) -> tuple[float, float]:
         """Find the longitude and latitude of a point named in the recipe.
 
         Args:
@@ -160,7 +188,8 @@ class Sources:
                 duplicated, or invalid, or the selected lines never meet.
         """
         if 'point' in specification:
-            return tuple(map(float, specification['point']))
+            longitude, latitude = map(float, specification['point'])
+            return longitude, latitude
         if 'node' in specification:
             source, node = specification['source'], str(specification['node'])
             path = self.files[source]
@@ -174,14 +203,24 @@ class Sources:
                 selected = []
 
                 class Coordinates(osmium.SimpleHandler):
-                    def node(self, value):
+                    """Read one selected node from a large OSM file."""
+
+                    def node(self, value: Node) -> None:
                         # Osmium raises when reading lon or lat from an invalid location.
+                        """Copy the node's coordinates before the reader advances.
+
+                        Args:
+                            value: OSM node selected by ID.
+
+                        Raises:
+                            ValueError: The node's coordinates are invalid.
+                        """
                         location = value.location
                         if not location.valid():
                             raise ValueError('invalid OSM node coordinates')
                         selected.append((location.lon, location.lat))
 
-                Coordinates().apply_file(str(path), filters=[osmium.filter.IdFilter([int(node)])])
+                Coordinates().apply_file(str(path), filters=[IdFilter([int(node)])])
                 if len(selected) != 1:
                     raise ValueError('selected OSM node is missing or duplicated')
                 self.points[key] = selected[0]
@@ -190,10 +229,13 @@ class Sources:
             first, second = specification['intersection']
             # When a river meets a coastline twice, near tells us which
             # of the two meeting points the recipe intends to use.
-            return choose_intersection_join(lines[first], lines[second], specification['near']).point
+            longitude, latitude = choose_intersection_join(
+                lines[first], lines[second], specification['near']
+            ).point
+            return longitude, latitude
         raise ValueError('unknown source point selection')
 
-    def read_source_line(self, part: SourceLine):
+    def read_source_line(self, part: SourceLine) -> LineString:
         """Read one complete source line for boundary assembly.
 
         Args:
@@ -208,13 +250,18 @@ class Sources:
         if 'way' in part:  # An OsmWayLine selects one OSM way.
             # A recipe can draw the boundary along a coastline, so keep ways
             # with any tag for this lookup.
-            points = list(self.read_osm_network([part['source']]).way_line(part['way']).coords)
+            points = list(
+                self.read_osm_network([part['source']]).way_line(part['way']).coords
+            )
         elif 'relation' in part:  # An OsmRiverLine joins selected relation members.
             points = self.join_river_relation_ways(part)
         elif 'geojson_feature' in part:  # A GeoJSONLine selects a feature by position.
             path = self.files[part['source']]
             if 'member' in part:
-                with ZipFile(path) as archive, archive.open(archive_member(archive, part['member'])) as stream:
+                with (
+                    ZipFile(path) as archive,
+                    archive.open(archive_member(archive, part['member'])) as stream,
+                ):
                     document = json.load(stream)
             else:
                 with path.open('rb') as stream:
@@ -230,13 +277,20 @@ class Sources:
         # All three readers must give us one longitude and one latitude per
         # point. For example, [10, 95] fails because latitude stops at 90°.
         coordinates = np.asarray(points, dtype=float)
-        if (coordinates.shape != (len(points), 2) or not np.isfinite(coordinates).all()
-                or np.any(np.abs(coordinates[:, 0]) > 180)
-                or np.any(np.abs(coordinates[:, 1]) > 90)):
-            raise ValueError('source line requires finite WGS84 longitude/latitude pairs')
+        if (
+            coordinates.shape != (len(points), 2)
+            or not np.isfinite(coordinates).all()
+            or np.any(np.abs(coordinates[:, 0]) > 180)
+            or np.any(np.abs(coordinates[:, 1]) > 90)
+        ):
+            raise ValueError(
+                'source line requires finite WGS84 longitude/latitude pairs'
+            )
         return LineString(coordinates)
 
-    def join_river_relation_ways(self, specification):
+    def join_river_relation_ways(
+        self, specification: OsmRiverLine
+    ) -> list[tuple[float, float]]:
         """Join the selected pieces of a river at their shared OSM points.
 
         Args:
@@ -264,14 +318,18 @@ class Sources:
                     adjacent.setdefault(last, set()).add(first)
         # In 10–20–30, nodes 10 and 30 each have one neighbor, so they
         # are the ends. A node with three neighbors would be a fork.
-        endpoints = [node for node, neighbors in adjacent.items() if len(neighbors) == 1]
-        if len(endpoints) != 2 or any(len(neighbors) > 2 for neighbors in adjacent.values()):
+        endpoints = [
+            node for node, neighbors in adjacent.items() if len(neighbors) == 1
+        ]
+        if len(endpoints) != 2 or any(
+            len(neighbors) > 2 for neighbors in adjacent.values()
+        ):
             raise ValueError('selected river members do not form an unbranched chain')
         node = min(endpoints, key=int)
         order, seen = [node], {node}
         # After walking from 10 to 20, skip the point we came from and go to 30.
         while adjacent[order[-1]] - seen:
-            following, = adjacent[order[-1]] - seen
+            (following,) = adjacent[order[-1]] - seen
             order.append(following)
             seen.add(following)
         # A separate loop can leave us with two ends but still leave points unvisited.

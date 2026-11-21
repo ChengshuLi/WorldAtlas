@@ -19,6 +19,7 @@ from worldatlas.map_build.inputs.selection import (
     validate_bindings,
 )
 from worldatlas.map_build.test_support import selection
+from worldatlas.source_assets.catalog import catalog_sources
 
 
 class BindingTests(unittest.TestCase):
@@ -56,6 +57,10 @@ class BindingTests(unittest.TestCase):
             path = Path(temp) / "selection.json"
             path.write_bytes(canonical_bytes(self.frozen))
             self.assertEqual(read_saved(path), self.frozen)
+            other_geography = dict(self.geography, schema="obsolete")
+            path.write_text(json.dumps(dict(self.frozen, geography=other_geography)))
+            with self.assertRaisesRegex(ValueError, "unsupported geographic selection"):
+                read_saved(path)
             self.frozen["schema"] = "worldatlas-input-selection-v1"
             path.write_text(json.dumps(self.frozen))
             with self.assertRaisesRegex(ValueError, "captured implementation"):
@@ -205,6 +210,21 @@ class SelectionTests(unittest.TestCase):
     def test_requested_missing_raw_source_fails(self):
         with self.assertRaisesRegex(ValueError, "missing"):
             self.read(raw_sources=["absent"])
+
+    def test_requested_parent_includes_rules_for_its_ancestors(self):
+        frozen = self.read(parents=[2])
+        self.assertEqual([r['id'] for r in frozen['geography']['rules']], ['__selection_rule'])
+        self.assertEqual([f['id'] for f in frozen['geography']['features']], ['__selection_point'])
+        with self.assertRaisesRegex(ValueError, 'requested parent does not exist'):
+            self.read(parents=[999])
+
+    def test_import_catalog_resolves_distinct_ids_and_rejects_missing_assets(self):
+        with psycopg.connect(self.url) as database:
+            rows = catalog_sources(database, ['__selection_raw', '__selection_raw'])
+            self.assertEqual(list(rows), ['__selection_raw'])
+            self.assertEqual(rows['__selection_raw']['r2_key'], 'selected')
+            with self.assertRaisesRegex(ValueError, "raw source 'absent' is missing"):
+                catalog_sources(database, ['__selection_raw', 'absent'])
 
     def test_geometry_edit_that_preserves_type_can_commit_during_rule_edit(self):
         with psycopg.connect(self.url) as rule, psycopg.connect(self.url) as feature:

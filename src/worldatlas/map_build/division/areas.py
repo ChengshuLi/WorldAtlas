@@ -1,20 +1,38 @@
 """Uniform-area and multi-face assignment over the same prepared scope."""
 
 from collections import defaultdict
+from collections.abc import Iterator, Sequence
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
-from worldatlas.map_build.core.partition import geographic_cuts, divide_regions
+from worldatlas.map_build.core.partition import divide_regions, geographic_cuts
+from worldatlas.map_build.core.rle import close_memmap
 from worldatlas.map_build.division.intervals import overlay, spans
-from worldatlas.map_build.division.scope import complete_row, selected
+from worldatlas.map_build.division.scope import Scope, complete_row, selected
 
 
-def assign_area(scope, target, directory):
-    """Give one child every eligible cell in the supplied scope."""
+def assign_area(scope: Scope, target: int, directory: Path | str) -> dict[str, Any]:
+    """Give every eligible cell in the scope to one child.
 
-    def rows():
+    Args:
+        scope: Prepared geographic scope and output filters.
+        target: Child entity ID to assign.
+        directory: New directory for the rule's claim layer.
+
+    Returns:
+        Layer report with bounds, run count, and cell count for the child.
+    """
+
+    def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+        """Read eligible cells row by row and label them with the target.
+
+        Yields:
+            (row, spans) with the target entity ID on each span.
+        """
         for y in scope.query_rows():
             ends, values = scope.query_row(y)
             starts = np.r_[0, ends[:-1]]
@@ -27,30 +45,44 @@ def assign_area(scope, target, directory):
 
 
 class Faces:
-    def __init__(self, directory, owners, grid):
+    """Read the regions and owner labels produced by cutting a scope."""
+
+    def __init__(
+        self, directory: Path | str, owners: dict[int, int], grid: Grid
+    ) -> None:
+        """Open the division's region files and index their labels.
+
+        Args:
+            directory: Directory with node runs and row offsets.
+            owners: Region root IDs mapped to child entity IDs.
+            grid: Dimensions of the grid.
+        """
         self.grid = grid
         self.offsets = np.memmap(Path(directory) / "rows.u64le", dtype="<u8", mode="r")
-        self.nodes = np.memmap(
+        self._node_map = np.memmap(
             Path(directory) / "nodes.u32le", dtype="<u4", mode="r"
-        ).reshape(-1, 3)
+        )
+        self.nodes = self._node_map.reshape(-1, 3)
         self.roots = np.asarray(sorted(owners), dtype=np.uint32)
         self.owners = np.asarray(
             [owners[int(root)] for root in self.roots], dtype=np.uint32
         )
 
-    def close(self):
-        self.offsets._mmap.close()
-        self.nodes._mmap.close()
+    def close(self) -> None:
+        """Close the memory maps for the region files."""
+        close_memmap(self.offsets)
+        close_memmap(self._node_map)
 
-    def row(self, y, *, by_face=False):
-        """Read one row of labelled faces.
+    def row(self, y: int, *, by_face: bool = False) -> tuple[np.ndarray, np.ndarray]:
+        """Read one row of labelled regions.
 
         Args:
-            y: Grid row index.
-            by_face: Return distinct face IDs instead of their child entity IDs.
+            y: Zero-based row index.
+            by_face: Use distinct face IDs instead of child entity IDs.
 
         Returns:
-            Run ends and values covering the row. Zero marks unlabelled cells.
+            Two uint32 arrays of exclusive run ends and IDs. Unlabelled cells
+            have value zero.
         """
         nodes = np.asarray(self.nodes[int(self.offsets[y]) : int(self.offsets[y + 1])])
         if not len(nodes):
@@ -66,8 +98,19 @@ class Faces:
         )
 
 
-def component_owners(scope, faces):
-    """Require a majority of each eligible whole component in one labelled face."""
+def component_owners(scope: Scope, faces: Faces) -> dict[str, dict[int, int]]:
+    """Assign each selected component to the labelled face covering most of it.
+
+    Args:
+        scope: Rule scope giving eligible physical components.
+        faces: Labelled regions of the scope.
+
+    Returns:
+        Physical class mapped to dictionaries of component ID to child ID.
+
+    Raises:
+        ValueError: A component lacks a labelled face covering over half of it.
+    """
     results = {}
     counts = defaultdict(int)
     eligible = scope.eligible_components()
@@ -108,8 +151,31 @@ def component_owners(scope, faces):
     return results
 
 
-def divide_area(scope, boundaries, targets, directory):
-    """Split context first; physical/ownership filters affect emitted cells only."""
+def divide_area(
+    scope: Scope,
+    boundaries: Sequence[dict[str, Any]],
+    targets: Sequence[dict[str, Any]],
+    directory: Path | str,
+) -> dict[str, Any]:
+    """Cut the geographic scope along lines and assign each labelled region.
+
+    The cuts use the whole geographic scope. Physical class and existing
+    owners filter the cells the rule can claim after the split.
+
+    Args:
+        scope: Prepared area and output filters.
+        boundaries: Source features holding boundary lines.
+        targets: Child IDs and their label point features.
+        directory: New directory for face files and claim layer.
+
+    Returns:
+        Layer report with the assigned cells and number of labelled faces
+        when the scope is nonempty.
+
+    Raises:
+        ValueError: A label is invalid, two labels disagree, or an eligible
+            cell or component has no labelled face.
+    """
     context_rows = scope.context_rows()
     if not context_rows:
         return write_layer(directory, scope.grid, ())
@@ -148,7 +214,15 @@ def divide_area(scope, boundaries, targets, directory):
                     np.asarray([values[int(r)] for r in roots], dtype=np.uint32),
                 )
 
-        def rows():
+        def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+            """Read each eligible row and claim the owner chosen by the split.
+
+            Yields:
+                (row, spans) with child entity IDs.
+
+            Raises:
+                ValueError: An eligible cell has no owner.
+            """
             for y in scope.query_rows():
                 query = scope.query_row(y)
                 if by_component is None:

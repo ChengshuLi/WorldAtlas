@@ -1,47 +1,62 @@
 """Execute geographic parent divisions using explicit data dependencies."""
 
+from __future__ import annotations
+
+import hashlib
+import os
+import threading
+import time
+from collections.abc import Callable, Iterable, Iterator, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import ExitStack
 from contextvars import copy_context
-import hashlib
-import os
 from pathlib import Path
-import threading
-import time
+from typing import Any, cast
 
 import numpy as np
 
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.map_build.division import policies
 from worldatlas.map_build.division.areas import assign_area, divide_area
+from worldatlas.map_build.division.connectivity import build_domain
 from worldatlas.map_build.division.contracts import compile_rules
 from worldatlas.map_build.division.intervals import Eligibility, combine, overlay, spans
 from worldatlas.map_build.division.scope import Scope
-from worldatlas.map_build.division.connectivity import build_domain
-from worldatlas.map_build.division.shores import ShoreGeometry
-from worldatlas.map_build.division import policies
+from worldatlas.map_build.division.shores import ReferenceCells, ShoreGeometry
 from worldatlas.map_build.execution.control import check_cancelled, stage
-from worldatlas.map_build.execution.runtime import pin
+from worldatlas.map_build.execution.runtime import Checkpoints, Timing
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
+from worldatlas.shared.files import pin_file
 
 
-def rule_directory(calculation, rule_id):
-    """Locate the saved claim directory for a rule.
+def rule_directory(calculation: Path | str, rule_id: str) -> Path:
+    """Derive a stable output path for a rule.
 
     Args:
-        calculation: The parent calculation directory.
-        rule_id: The ID of the rule that produced the claim.
+        calculation: Parent division directory.
+        rule_id: Geographic rule identifier.
 
     Returns:
-        The rule's output path.
+        Subdirectory named by a hash of the rule ID.
     """
     key = hashlib.sha256(rule_id.encode()).hexdigest()
     return Path(calculation) / ("rule-" + key)
 
 
-def land_groups(rules):
-    """Declare actual land-stage dependencies once for execution and reuse."""
+def land_groups(
+    rules: Sequence[dict[str, Any]],
+) -> tuple[tuple[str, list[dict[str, Any]]], ...]:
+    """Group explicit assignments, geographic land fills, and nearest-land rules.
+
+    Args:
+        rules: Compiled rules for the parent.
+
+    Returns:
+        Ordered (group_name, rule_list) pairs.
+    """
     area = lambda r: r["operation"] in ("assign_area", "divide_area")
     return (
         ("explicit", [r for r in rules if area(r) and not r["unassigned_only"]]),
@@ -58,14 +73,31 @@ def land_groups(rules):
 
 
 def merge_claims(
-    grid,
-    physical_directory,
-    parent_directory,
-    snapshot_directory,
-    claims,
-    directory,
-    allowed,
-):
+    grid: Grid,
+    physical_directory: Path | str,
+    parent_directory: Path | str,
+    snapshot_directory: Path | str,
+    claims: Sequence[tuple[str, dict[str, Any]]],
+    directory: Path | str,
+    allowed: Eligibility,
+) -> dict[str, Any]:
+    """Combine a rule group's output with the previous ownership grid.
+
+    Args:
+        grid: Grid used by the inputs and output.
+        physical_directory: Physical land and water grid.
+        parent_directory: Mask of cells belonging to the parent.
+        snapshot_directory: Ownership grid before the group ran.
+        claims: Rule IDs and their output layer reports.
+        directory: New output directory.
+        allowed: Physical classes each child may own.
+
+    Returns:
+        Layer report including counts of cells claimed by each rule.
+
+    Raises:
+        ValueError: Two rules disagree or a claim is ineligible.
+    """
     with ExitStack() as resources:
         physical = resources.enter_context(open_grid(physical_directory, grid))
         parent = resources.enter_context(open_grid(parent_directory, grid))
@@ -75,7 +107,12 @@ def merge_claims(
             for _, result in claims
         ]
 
-        def rows():
+        def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+            """Read and combine only the claims that can affect each row.
+
+            Yields:
+                (row, spans) with owner IDs.
+            """
             for y in range(grid.height):
                 check_cancelled()
                 active = [
@@ -103,7 +140,23 @@ def merge_claims(
         return result
 
 
-def execute_rule(context, rule, snapshot_directory, directory):
+def execute_rule(
+    context: ParentDivision,
+    rule: dict[str, Any],
+    snapshot_directory: Path | str,
+    directory: Path | str,
+) -> dict[str, Any]:
+    """Prepare one rule's scope and write its proposed assignments.
+
+    Args:
+        context: Shared parent grid, components and shores.
+        rule: Resolved method, scope, references and targets.
+        snapshot_directory: Ownership grid before the rule group.
+        directory: New directory for the calculation and output.
+
+    Returns:
+        Rule report with the output layer, timing, and any connectivity references.
+    """
     started = time.monotonic()
     with open_grid(snapshot_directory, context.grid) as snapshot:
         scope = Scope(
@@ -151,21 +204,42 @@ def execute_rule(context, rule, snapshot_directory, directory):
 
 
 class ParentDivision:
+    """Assign one parent's cells to its direct children."""
+
     def __init__(
         self,
-        geography,
-        parent_id,
-        grid,
-        physical_directory,
-        directory,
-        configuration,
+        geography: dict[str, Any],
+        parent_id: int,
+        grid: Grid,
+        physical_directory: Path | str,
+        directory: Path | str,
+        configuration: dict[str, Any],
         *,
-        parent_directory=None,
-        checkpoints=None,
-        timing=None,
-        input_pins=(),
-        shore_provider=None,
-    ):
+        parent_directory: Path | str | None = None,
+        checkpoints: Checkpoints | None = None,
+        timing: Timing | None = None,
+        input_pins: Iterable[dict[str, str]] = (),
+        shore_provider: Callable[[], ShoreGeometry] | None = None,
+    ) -> None:
+        """Open the physical grid and prepare the parent's initial ownership.
+
+        Args:
+            geography: Saved rules and geographic entities.
+            parent_id: Entity to divide.
+            grid: Physical dimensions and coordinates.
+            physical_directory: Physical row-run grid directory.
+            directory: Directory for this division's outputs.
+            configuration: Build settings used by the rules.
+            parent_directory: Inherited mask of the parent's cells. Omit only for
+                the root.
+            checkpoints: Optional store for completed work.
+            timing: Optional timing log used by the checkpoint runner.
+            input_pins: Paths and SHA-256 digests for this division's inputs.
+            shore_provider: Optional shared physical shore calculation.
+
+        Raises:
+            ValueError: The parent's rules are invalid or its required mask is missing.
+        """
         self.geography = geography
         self.parent_id = parent_id
         self.grid = grid
@@ -247,13 +321,46 @@ class ParentDivision:
             self.close()
             raise
 
-    def close(self):
+    def close(self) -> None:
+        """Close the division's open maps and other resources."""
         self.resources.close()
 
-    def pins(self, directory):
-        return [pin(Path(directory) / name) for name in ("rows.u32le", "runs.u32le")]
+    def pins(self, directory: Path | str) -> list[dict[str, str]]:
+        """Hash a layer's two row-run files.
 
-    def task(self, name, function, args, outputs, *, inputs, kwargs=None):
+        Args:
+            directory: Layer directory.
+
+        Returns:
+            File pins for rows.u32le and runs.u32le in that order.
+        """
+        return [
+            pin_file(Path(directory) / name) for name in ("rows.u32le", "runs.u32le")
+        ]
+
+    def task(
+        self,
+        name: str,
+        function: Callable[..., Any],
+        args: tuple[Any, ...],
+        outputs: Iterable[Path | str],
+        *,
+        inputs: list[dict[str, str]],
+        kwargs: dict[str, Any] | None = None,
+    ) -> Any:
+        """Run a calculation or reuse its verified checkpoint.
+
+        Args:
+            name: Name of the task within this parent.
+            function: Calculation to perform.
+            args: Positional arguments to the function.
+            outputs: Paths the calculation writes.
+            inputs: File pins to verify before reuse.
+            kwargs: Additional keyword arguments.
+
+        Returns:
+            The calculation's result, or the equivalent saved JSON value.
+        """
         if self.checkpoints is None:
             return function(*args, **(kwargs or {}))
         return self.checkpoints.run_function(
@@ -263,12 +370,23 @@ class ParentDivision:
             args,
             inputs=inputs,
             outputs=outputs,
-            timing=self.timing,
+            timing=cast(Timing, self.timing),
             kwargs=kwargs,
         )
 
-    def _prepare_physical(self):
-        def rows():
+    def _prepare_physical(self) -> dict[str, Any]:
+        """Write land and water runs limited to the parent's cells.
+
+        Returns:
+            Layer report for the clipped physical grid.
+        """
+
+        def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+            """Find the physical runs inside the parent for each row.
+
+            Yields:
+                (row, spans) with land or water codes.
+            """
             for y in range(self.grid.height):
                 starts, ends, (kind, parent) = overlay(
                     row(self.physical, y, self.grid.width),
@@ -280,7 +398,15 @@ class ParentDivision:
 
         return write_layer(self.parent_physical_directory, self.grid, rows())
 
-    def components(self, kind):
+    def components(self, kind: str) -> ComponentGrid:
+        """Find or build the parent's physical components of one class.
+
+        Args:
+            kind: "land" or "water".
+
+        Returns:
+            Open component grid owned by this division.
+        """
         with self.lock:
             if kind not in self.component_grids:
                 code = {"land": 17, "water": 1}[kind]
@@ -305,7 +431,12 @@ class ParentDivision:
             return self.component_grids[kind]
 
     @property
-    def shore_geometry(self):
+    def shore_geometry(self) -> ShoreGeometry:
+        """Find or build the physical shore geometry for the grid.
+
+        Returns:
+            Cached geometry without ownership labels.
+        """
         with self.lock:
             if self._shores is None:
                 self._shores = (
@@ -315,7 +446,15 @@ class ParentDivision:
                 )
             return self._shores
 
-    def water_shores(self):
+    def water_shores(self) -> ReferenceCells:
+        """Attach land owners to shores that can assign water.
+
+        Returns:
+            Labelled shore runs for children that can own water.
+
+        Raises:
+            ValueError: Land ownership is not ready.
+        """
         with self.lock:
             if self.land_ownership is None:
                 raise ValueError(
@@ -333,8 +472,19 @@ class ParentDivision:
                 )
             return self._water_shores
 
-    def scope_components(self, snapshot_directory, physical_class, unassigned_only):
-        """Share immutable domain connectivity across all rules using a snapshot."""
+    def scope_components(
+        self, snapshot_directory: Path | str, physical_class: str, unassigned_only: bool
+    ) -> ComponentGrid:
+        """Find connected pieces of the parent's eligible domain.
+
+        Args:
+            snapshot_directory: Owners at the start of the rule group.
+            physical_class: Eligible class, or "mixed" for both.
+            unassigned_only: Whether to exclude cells already assigned.
+
+        Returns:
+            Cached component grid shared by rules that use the same domain.
+        """
         key = (str(snapshot_directory), physical_class, unassigned_only)
         with self.lock:
             if key not in self.scope_component_grids:
@@ -371,8 +521,21 @@ class ParentDivision:
                 self.scope_component_grids[key] = data
             return self.scope_component_grids[key]
 
-    def calculate(self, rules, snapshot):
-        """Calculate independent claims against one immutable ownership snapshot."""
+    def calculate(
+        self, rules: Sequence[dict[str, Any]], snapshot: Path
+    ) -> list[tuple[str, dict[str, Any]]]:
+        """Calculate a group of rules against the same ownership grid.
+
+        Args:
+            rules: Rules that can run independently.
+            snapshot: Ownership layer before this group.
+
+        Returns:
+            (rule_id, report) pairs in rule order.
+
+        Raises:
+            ValueError: The worker count is invalid.
+        """
         inputs = (
             self.input_pins + self.pins(snapshot) + self.pins(self.parent_directory)
         )
@@ -384,7 +547,15 @@ class ParentDivision:
         failure_lock = threading.Lock()
         with stage() as cancelled, ThreadPoolExecutor(max_workers=workers) as executor:
 
-            def run(rule):
+            def run(rule: dict[str, Any]) -> tuple[str, dict[str, Any]]:
+                """Calculate one rule and request cancellation if it fails.
+
+                Args:
+                    rule: Compiled geographic rule.
+
+                Returns:
+                    Rule ID and its output report.
+                """
                 nonlocal failure
                 check_cancelled()
                 directory = rule_directory(self.directory, rule["id"])
@@ -419,7 +590,16 @@ class ParentDivision:
                     raise failure from None
                 raise
 
-    def consolidate(self, name, snapshot, claims):
+    def consolidate(
+        self, name: str, snapshot: Path, claims: Sequence[tuple[str, dict[str, Any]]]
+    ) -> None:
+        """Check a group's claims and advance the current ownership grid.
+
+        Args:
+            name: Name of the rule group.
+            snapshot: Ownership layer before the group ran.
+            claims: Rule IDs and their layer reports.
+        """
         if not claims:
             return
         inputs = (
@@ -444,12 +624,26 @@ class ParentDivision:
         )
         self.current = Path(result["directory"])
 
-    def group(self, name, rules):
+    def group(self, name: str, rules: Sequence[dict[str, Any]]) -> None:
+        """Calculate and merge one group of rules.
+
+        Args:
+            name: Name of the rule group.
+            rules: Rules sharing one starting ownership layer.
+        """
         if rules:
             snapshot = self.current
             self.consolidate(name, snapshot, self.calculate(rules, snapshot))
 
-    def require_coverage(self, kind=None):
+    def require_coverage(self, kind: str | None = None) -> None:
+        """Check for unassigned cells inside the parent.
+
+        Args:
+            kind: Optional "land" or "water" filter. None checks both.
+
+        Raises:
+            ValueError: An eligible cell is missing its owner.
+        """
         with open_grid(self.current, self.grid) as owners:
             for y in range(self.grid.height):
                 starts, _, (physical, parent, assigned) = overlay(
@@ -467,13 +661,28 @@ class ParentDivision:
                         f"parent {self.parent_id}: unassigned {kind or 'geographic'} cell {x},{y}"
                     )
 
-    def land(self):
+    def land(self) -> Path:
+        """Run the land rule groups and check land coverage.
+
+        Returns:
+            Directory containing the ownership grid after the land groups.
+        """
         for name, rules in land_groups(self.rules):
             self.group(name, rules)
         return self.use_land(self.current)
 
-    def use_land(self, directory):
-        """Continue from verified complete land ownership on this parent/grid."""
+    def use_land(self, directory: Path | str) -> Path:
+        """Use a completed ownership layer as the source of land labels.
+
+        Args:
+            directory: Directory containing the saved layer.
+
+        Returns:
+            Path to the layer, which stays open during water assignment.
+
+        Raises:
+            ValueError: A land cell lacks an owner.
+        """
         self.current = Path(directory)
         self.require_coverage("land")
         self.land_directory = self.current
@@ -482,7 +691,15 @@ class ParentDivision:
         )
         return self.land_directory
 
-    def water(self):
+    def water(self) -> Path:
+        """Run the water rule groups and check coverage of the entire parent.
+
+        Returns:
+            Directory containing the completed ownership grid.
+
+        Raises:
+            ValueError: Land ownership is missing or a cell still lacks an owner.
+        """
         if self.land_ownership is None:
             raise ValueError("prepare land ownership before water calculations")
         self.group(

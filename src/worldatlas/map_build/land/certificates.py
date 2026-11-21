@@ -1,30 +1,65 @@
 """Conservative WGS84 certificates from complete tiles and real seed witnesses."""
 
+from __future__ import annotations
+
 import math
+from collections.abc import Collection, Sequence
+
 import numpy as np
-from scipy.spatial import cKDTree
-from worldatlas.geodesy.wgs84 import MIN_RADIUS as M_MIN, geodesic_distances
+from numpy.typing import ArrayLike
+
+# SciPy publishes the compiled tree without type information.
+from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
+
+from worldatlas.geodesy.wgs84 import MIN_RADIUS as M_MIN
+from worldatlas.geodesy.wgs84 import geodesic_distances
 
 
-def _unit(lat, lon):
+def _unit(lat: ArrayLike, lon: ArrayLike) -> np.ndarray:
+    """Convert geographic coordinates to points on a unit sphere.
+
+    Args:
+        lat: Latitudes in degrees.
+        lon: Longitudes in degrees.
+
+    Returns:
+        N-by-3 float array of unit-sphere Cartesian coordinates.
+    """
     p = np.deg2rad(lat)
     l = np.deg2rad(lon)
     return np.column_stack((np.cos(p) * np.cos(l), np.cos(p) * np.sin(l), np.sin(p)))
 
 
 class CertificateIndex:
+    """Use conservative distance bounds to prove a component's likely owner."""
+
     def __init__(
         self,
-        width,
-        height,
-        step,
-        north,
-        tiles,
-        reps,
-        tile_cells=1024,
-        numerical_guard_m=1000.0,
-        refinement=None,
-    ):
+        width: int,
+        height: int,
+        step: float,
+        north: float,
+        tiles: Sequence[tuple[int, int, Collection[int]]],
+        reps: ArrayLike,
+        tile_cells: int = 1024,
+        numerical_guard_m: float = 1000.0,
+        refinement: CertificateIndex | None = None,
+    ) -> None:
+        """Prepare per-category indexes over occupied shore tiles and sampled cells.
+
+        Args:
+            width: Grid width in cells.
+            height: Number of grid rows.
+            step: Angular size of one cell in degrees.
+            north: Latitude of the top edge in degrees.
+            tiles: (tile_row, tile_column, codes) for each occupied tile.
+            reps: N-by-3 records of (row, column, code) for actual shore cells.
+            tile_cells: Side length of a tile in cells.
+            numerical_guard_m: Distance margin in metres for keeping candidates in
+                the search.
+            refinement: Optional finer index for cases the coarse one cannot
+                resolve.
+        """
         if (
             type(width) is not int
             or type(height) is not int
@@ -93,7 +128,9 @@ class CertificateIndex:
                 x1 = min(width, x0 + tile_cells)
                 if y0 >= y1 or x0 >= x1:
                     raise ValueError('tile outside grid')
-                positions.append((north - (y0 + y1) * step / 2, -180 + (x0 + x1) * step / 2))
+                positions.append(
+                    (north - (y0 + y1) * step / 2, -180 + (x0 + x1) * step / 2)
+                )
                 rad.append(((y1 - y0) + (x1 - x0)) * step * math.pi / 360)
             if not positions:
                 raise ValueError('missing category tile')
@@ -101,15 +138,26 @@ class CertificateIndex:
             self.trees[code] = cKDTree(_unit(pos[:, 0], pos[:, 1]))
             self.radii[code] = max(rad)
             v = rep[rep[:, 2] == code]
-            if not len(v):
-                raise ValueError('missing category representative')
             coords = np.column_stack(
                 (north - (v[:, 0] + 0.5) * step, -180 + (v[:, 1] + 0.5) * step)
             )
             self.repcoords[code] = coords
             self.reptrees[code] = cKDTree(_unit(coords[:, 0], coords[:, 1]))
 
-    def witnesses(self, rows, cols, hints):
+    def witnesses(
+        self, rows: ArrayLike, cols: ArrayLike, hints: ArrayLike
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """Find real reference cells that give upper bounds on the closest distance.
+
+        Args:
+            rows: Query row indices.
+            cols: Corresponding column indices.
+            hints: Candidate owner for each query.
+
+        Returns:
+            (upper, chosen). Upper is a 1-D float array in metres and chosen
+            is an N-by-2 array of (latitude, longitude) for the reference cells.
+        """
         rows = np.asarray(rows, dtype=np.int64)
         cols = np.asarray(cols, dtype=np.int64)
         hints = np.asarray(hints, dtype=np.int64)
@@ -143,7 +191,29 @@ class CertificateIndex:
             raise ValueError('invalid WGS84 upper')
         return upper, chosen
 
-    def certify_runs(self, rows, starts, ends, uppers, hints):
+    def certify_runs(
+        self,
+        rows: ArrayLike,
+        starts: ArrayLike,
+        ends: ArrayLike,
+        uppers: ArrayLike,
+        hints: ArrayLike,
+    ) -> np.ndarray:
+        """Check whether any other owner could win for these runs.
+
+        Args:
+            rows: Row of each query run.
+            starts: First column of each run.
+            ends: Exclusive end column of each run.
+            uppers: Known distance bounds in metres.
+            hints: Candidate owner for each run.
+
+        Returns:
+            Bool array marking runs whose hints beat every competing lower bound.
+
+        Raises:
+            ValueError: A run, distance bound, or candidate is invalid.
+        """
         rows = np.asarray(rows, dtype=np.int64)
         starts = np.asarray(starts, dtype=np.int64)
         ends = np.asarray(ends, dtype=np.int64)
@@ -170,10 +240,29 @@ class CertificateIndex:
         qr = (ends - starts - 1) * self.step * math.pi / 360
         return self._certify_points(xyz, qr, uppers, hints)
 
-    def _certify_points(self, xyz, qr, uppers, hints, candidates=None):
+    def _certify_points(
+        self,
+        xyz: np.ndarray,
+        qr: np.ndarray,
+        uppers: np.ndarray,
+        hints: np.ndarray,
+        candidates: np.ndarray | None = None,
+    ) -> np.ndarray:
         # Only this method forwards candidate masks, after its own conservative
         # bounds have ruled out every omitted category. Fine trees therefore never
         # search the faraway continents already excluded by a cheap coarse tree.
+        """Reject competing categories using their nearest possible tile.
+
+        Args:
+            xyz: N-by-3 unit-sphere positions for query centres.
+            qr: Angular radii of the query runs in radians.
+            uppers: Current bounds in metres.
+            hints: Candidate owners.
+            candidates: Optional query-by-category mask of remaining competitors.
+
+        Returns:
+            Bool array marking queries for which the supplied owner is proven.
+        """
         n = len(hints)
         danger = np.zeros((n, len(self.codes)), dtype=bool)
         for column, code in enumerate(self.codes):

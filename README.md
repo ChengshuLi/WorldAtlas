@@ -20,7 +20,7 @@ micromamba run -n worldatlas bash
 
 Run the commands below from the repository root in that shell. For exact physical-grid reproduction, complete the [GDAL setup](src/worldatlas/map_build/README.md#exact-physical-rasterization).
 
-Geographic and numerical libraries use tested exact versions because upgrades can change map coordinates or cells. Python accepts patch updates within 3.13. Pydantic uses a fixed version so it generates the same JSON Schema in each environment. Storage/database clients and review-image tools accept compatible updates. Boto3 selects its own matching Botocore dependency. Each build records the actual runtime versions. CMake is needed only when compiling GDAL and stays outside the runtime environment.
+Geographic and numerical libraries use tested exact versions because upgrades can change map coordinates or cells. Python accepts patch updates within 3.13. Pydantic uses a fixed version so it generates the same JSON Schema in each environment. Storage and database clients accept compatible updates. Boto3 selects its own matching Botocore dependency. Each build records the actual runtime versions. CMake is needed only when compiling GDAL and stays outside the runtime environment.
 
 Set `NEON_DATABASE_URL` to the direct connection URL for the working `worldatlas` database. Use the working branch's connection details from your Neon project. See the [database guide](database/README.md) for its schema. For R2, reuse the `worldatlas-r2` profile in `~/.aws/credentials`, or set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. With the profile:
 
@@ -93,11 +93,29 @@ npm test
 
 The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 
+### Python checks
+
+From the project Python environment, run the same formatting, type and coverage checks as Linux CI. Set up local PostgreSQL first. [Database test setup](database/README.md#tests)
+
+```bash
+python -m pip install -e '.[checks]'
+python -m ruff check src/worldatlas .github/scripts
+python -m ruff format --check src/worldatlas .github/scripts
+npx --yes pyright@1.1.414 --pythonpath "$(command -v python)"
+python -m coverage erase
+NUMBA_DISABLE_JIT=1 PROJ_NETWORK=OFF python -m coverage run .github/scripts/run_tests.py
+python -m coverage combine
+python -m coverage report
+```
+
+Coverage includes production Python lines and branches across the test subprocesses. Disabling Numba compilation for coverage lets the tool see which terrain paths ran. The macOS CI job runs those same tests with compilation enabled.
+
 ### Continuous integration
 
 [Checks](.github/workflows/ci.yml) runs every fast automated suite on each PR update and on manual runs:
 
 - Python source-import, map-building, release and SQL database suites concurrently on macOS and Linux.
+- Production Python formatting, docstrings, annotations, type checking, and 100% line and branch coverage on Linux.
 - Node and Chromium browser tests on Linux.
 
 CI tests a regular installation, including its SQL and configuration resources. macOS and Linux both run the Python and database suites against native PostgreSQL. Each database-using suite has its own disposable database on one temporary server per OS job. CI caches installed environments and the native macOS extension, uses local fixtures, and needs no cloud credentials. The website job uses Chrome already installed on GitHub's runner and runs alongside the Python jobs. Its Node and browser suites also run concurrently. New pushes cancel superseded runs. Documentation-only updates also run the checks. Full-size map builds and geographic review remain separate.

@@ -392,6 +392,12 @@ class VectorTests(unittest.TestCase):
                 gdal_dataset_path(path, member)
         with self.assertRaisesRegex(ValueError, "non-archive"):
             gdal_dataset_path(self.path, "member")
+        # Cached archives may carry the provider's arbitrary file extension.
+        opaque = path.with_suffix(".download")
+        path.rename(opaque)
+        self.assertEqual(
+            read_features(opaque, **self.recipe)[0]["geometry"]["coordinates"], [20, 10]
+        )
 
     def test_zip_with_one_shapefile_can_select_it_automatically(self):
         reference = osr.SpatialReference()

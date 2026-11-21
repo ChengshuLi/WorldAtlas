@@ -1,6 +1,9 @@
 """Read the source's grid of heights and fill gaps from another elevation map."""
-from dataclasses import dataclass
+
 import math
+from collections.abc import Sequence
+from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 from osgeo import gdal, gdal_array
@@ -23,13 +26,18 @@ class Grid:
     """
 
     elevation: np.ndarray
-    transform: tuple
+    transform: tuple[float, float, float, float, float, float]
     crs: str
     secondary_cells: int = 0
-    native_origin: tuple | None = None
-    window_offset: tuple = (0, 0)
+    native_origin: tuple[float, float, float, float, float, float] | None = None
+    window_offset: tuple[int, int] = (0, 0)
 
-    def cell_coordinates(self, rows, columns, center=True):
+    def cell_coordinates(
+        self,
+        rows: int | float | np.ndarray,
+        columns: int | float | np.ndarray,
+        center: bool = True,
+    ) -> tuple[float | np.ndarray, float | np.ndarray]:
         """Find the map coordinates of a row and column.
 
         Row 0, column 0 is the first cell of the crop. Add half a cell in
@@ -43,16 +51,25 @@ class Grid:
         Returns:
             The x and y coordinates in the grid's coordinate reference.
         """
-        offset = .5 if center else 0.
+        offset = 0.5 if center else 0.0
         # Local (0, 0) in a crop starting at (100, 200) means full-grid
         # (100, 200). A different crop must get the same coordinates there.
-        left, x_per_column, x_per_row, top, y_per_column, y_per_row = self.native_origin or self.transform
+        left, x_per_column, x_per_row, top, y_per_column, y_per_row = (
+            self.native_origin or self.transform
+        )
         rows, columns = rows + self.window_offset[0], columns + self.window_offset[1]
-        return (left + (columns + offset) * x_per_column + (rows + offset) * x_per_row,
-                top + (columns + offset) * y_per_column + (rows + offset) * y_per_row)
+        return (
+            left + (columns + offset) * x_per_column + (rows + offset) * x_per_row,
+            top + (columns + offset) * y_per_column + (rows + offset) * y_per_row,
+        )
 
 
-def read_native_elevation_crop(paths, bounds, *, bounds_crs=4326):
+def read_native_elevation_crop(
+    paths: Sequence[str | Path],
+    bounds: tuple[float, float, float, float],
+    *,
+    bounds_crs: int | str | CRS = 4326,
+) -> Grid:
     """Crop aligned source tiles without changing their cell positions or values.
 
     If the crop limits already use the source grid's coordinates, use
@@ -77,29 +94,47 @@ def read_native_elevation_crop(paths, bounds, *, bounds_crs=4326):
     if not (west < east and south < north):
         raise ValueError('invalid analysis bounds')
     if bounds_crs.equals(CRS.from_epsg(4326), ignore_axis_order=True) and not (
-            -180 <= west < east <= 180 and -90 <= south < north <= 90):
+        -180 <= west < east <= 180 and -90 <= south < north <= 90
+    ):
         raise ValueError('invalid WGS84 analysis bounds')
     datasets = [gdal.Open(str(path)) for path in paths]
     first = datasets[0]
     crs = first.GetProjection()
     reference = CRS.from_user_input(crs)
     origin = first.GetGeoTransform()
-    if not np.isfinite(origin).all() or origin[1] <= 0 or origin[5] >= 0 or origin[2] or origin[4]:
+    if (
+        not np.isfinite(origin).all()
+        or origin[1] <= 0
+        or origin[5] >= 0
+        or origin[2]
+        or origin[4]
+    ):
         raise ValueError('a finite north-up native grid is required')
     left, bottom, right, top = Transformer.from_crs(
-        bounds_crs, reference, always_xy=True).transform_bounds(*bounds, densify_pts=21, errcheck=True)
+        bounds_crs, reference, always_xy=True
+    ).transform_bounds(*bounds, densify_pts=21, errcheck=True)
     # If the crop starts partway through column 10, keep column 10.
     # Round the far edge outward too so we keep every cell the crop touches.
     col0 = math.floor((left - origin[0]) / origin[1])
     col1 = math.ceil((right - origin[0]) / origin[1])
     row0 = math.floor((top - origin[3]) / origin[5])
     row1 = math.ceil((bottom - origin[3]) / origin[5])
-    transform = (origin[0] + col0 * origin[1], origin[1], 0.,
-                 origin[3] + row0 * origin[5], 0., origin[5])
+    transform = (
+        origin[0] + col0 * origin[1],
+        origin[1],
+        0.0,
+        origin[3] + row0 * origin[5],
+        0.0,
+        origin[5],
+    )
     elevation = np.full((row1 - row0, col1 - col0), np.nan, dtype='float64')
     for dataset in datasets:
         actual = dataset.GetGeoTransform()
-        if CRS.from_user_input(dataset.GetProjection()) != reference or actual[1:3] != origin[1:3] or actual[4:] != origin[4:]:
+        if (
+            CRS.from_user_input(dataset.GetProjection()) != reference
+            or actual[1:3] != origin[1:3]
+            or actual[4:] != origin[4:]
+        ):
             raise ValueError('primary tiles must share one native grid and CRS')
         native_column = round((actual[0] - origin[0]) / origin[1])
         native_row = round((actual[3] - origin[3]) / origin[5])
@@ -118,13 +153,17 @@ def read_native_elevation_crop(paths, bounds, *, bounds_crs=4326):
             continue
         band = dataset.GetRasterBand(1)
         values = band.ReadAsArray(x0 - column, y0 - row, x1 - x0, y1 - y0)
-        usable = band.GetMaskBand().ReadAsArray(x0 - column, y0 - row, x1 - x0, y1 - y0) != 0
+        usable = (
+            band.GetMaskBand().ReadAsArray(x0 - column, y0 - row, x1 - x0, y1 - y0) != 0
+        )
         usable &= np.isfinite(values)
         elevation[y0:y1, x0:x1][usable] = values[usable]
-    return Grid(elevation, transform, crs, native_origin=origin, window_offset=(row0, col0))
+    return Grid(
+        elevation, transform, crs, native_origin=origin, window_offset=(row0, col0)
+    )
 
 
-def wrap_array_as_raster(values, grid):
+def wrap_array_as_raster(values: np.ndarray, grid: Grid) -> gdal.Dataset:
     """Let GDAL write into an existing NumPy array at known map positions.
 
     Args:
@@ -135,12 +174,16 @@ def wrap_array_as_raster(values, grid):
         An in-memory GDAL dataset. Changes GDAL makes appear in ``values``.
     """
     destination = gdal_array.OpenArray(values)
+    if destination is None:
+        raise ValueError("GDAL could not open the terrain array")
     destination.SetGeoTransform(grid.transform)
     destination.SetProjection(CRS.from_user_input(grid.crs).to_wkt())
     return destination
 
 
-def align_raster_to_grid(paths, grid, *, resampling='bilinear'):
+def align_raster_to_grid(
+    paths: Sequence[str | Path], grid: Grid, *, resampling: str = 'bilinear'
+) -> np.ndarray:
     """Read a second map using the primary grid's cell positions.
 
     Args:
@@ -156,12 +199,23 @@ def align_raster_to_grid(paths, grid, *, resampling='bilinear'):
     values = np.full(grid.elevation.shape, np.nan)
     destination = wrap_array_as_raster(values, grid)
     destination.GetRasterBand(1).SetNoDataValue(np.nan)
-    gdal.Warp(destination, [str(path) for path in paths],
-              resampleAlg=resampling, dstNodata=np.nan)
+    gdal.Warp(
+        destination,
+        [str(path) for path in paths],
+        resampleAlg=resampling,
+        dstNodata=np.nan,
+    )
     return values
 
 
-def prepare_elevation_grid(primary, bounds, secondary=(), height_offset=None, *, bounds_crs=4326):
+def prepare_elevation_grid(
+    primary: Sequence[str | Path],
+    bounds: tuple[float, float, float, float],
+    secondary: Sequence[str | Path] = (),
+    height_offset: str | Path | None = None,
+    *,
+    bounds_crs: int | str | CRS = 4326,
+) -> Grid:
     """Read primary terrain and fill gaps from secondary terrain.
 
     Two maps can measure height from different zero levels. If the second

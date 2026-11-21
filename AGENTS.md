@@ -1,18 +1,34 @@
 # Working rules
 
-These rules apply to every agent working in this repository.
+These rules apply to every agent working in this repository. Keep code, documentation, and reports concise and readable.
 
-- Keep code, documentation, and reports concise and human-readable.
-- Follow [PEP 257](https://peps.python.org/pep-0257/) for Python docstrings. Give public modules, classes, and functions a short summary. Use an explicit `Args` section for caller-supplied parameters and a `Returns` section for returned values, including for short functions. Document side effects and relevant exceptions. Omit empty sections.
-- Follow [PEP 8](https://peps.python.org/pep-0008/#comments) for comments. Use complete sentences and keep comments in sync with the code. Use inline comments sparingly and explain decisions or constraints that the code alone does not show.
+## Python
+
+- Annotate parameters and return types in all production function and method signatures. Leave `self` and `cls` unannotated and use `-> None` for functions that return no value. Check changed annotations against real callers with Pyright in the project Python environment.
+- Follow [PEP 257](https://peps.python.org/pep-0257/) for docstrings. Give production modules, classes, functions, and methods a short summary, including private helpers. Use `Args`, `Returns`, and `Yields` where they apply. Explain units, array shapes, tuple order, errors callers need to handle, and effects such as writing a file or changing an input array.
+- Follow [PEP 8](https://peps.python.org/pep-0008/#comments) for comments. Use complete sentences and explain decisions or constraints that the code alone does not show.
+- Use plain, precise language in docstrings and comments. Give simple code a short explanation and use a concrete example when it helps explain complex code.
+- Use Ruff to format code and check docstring structure. Aim for 88 characters per line and wrap long signatures.
 - Import from the module that defines the name. Keep package `__init__.py` files empty or docstring-only by default. Expose names at package level when the package has a deliberate public interface.
-- Treat correctness and performance as core requirements. Avoid unnecessary computation and memory use, and measure performance when a change could materially affect it.
-- Use strict numeric comparisons for equality and tie decisions. Conservative bounds may retain extra search candidates. Use their actual values to select the winner.
-- When blocked or slowed down, always first ask whether the blocking mechanism is needed. Remove it completely if unnecessary. If it is needed, choose the appropriate fix, including a justified exception when warranted.
+
+## Tests and CI
+
+- Require 100% line and branch coverage of production code. Write tests that assert meaningful behavior. Document a specific reason for any exception.
+- Keep CI simple and fast. Run checks relevant to each change and avoid unnecessary full rebuilds.
+
+## Correctness and performance
+
+- Avoid unnecessary computation and memory use. Measure performance when a change could materially affect it.
+- Use strict numeric comparisons for equality and tie decisions. Conservative bounds may keep extra candidates in the search. Use actual values to select the winner.
+- Do not add application-imposed memory caps, floors, or watchdogs that stop or reject work based on memory use or availability. Do not use bounded caches as RAM ceilings. Streaming batches, chunks, and ordinary file buffering may process the full input. Keep input/output validation and operating-system constraints distinct from application memory limits.
+
+## Working practices
+
+- When a mechanism blocks or slows work, first check whether it is needed. Remove it if unnecessary. Otherwise fix it or make a justified exception.
+- Prefer code and command-line tools. Use a browser only when necessary. Ordinary public online sources and materials may be downloaded in any format without asking.
 - Do not spawn subagents or create Codex chats unless the user explicitly requests it.
-- Make each change in a small pull request with a clear summary and relevant test results. The user reviews and comments; workers should be ready to revise based on that feedback. The user manually merges. Never push directly to `main`, enable auto-merge, or merge any PR.
-- Only the user may submit GitHub reviews or post inline code-review comments, including replies in review threads. Open pull requests ready for review by default. Use draft status only when drafts skip CI to ease a long queue for ready PRs.
-- Keep CI as simple and minimal as possible. Use only fast checks relevant to each change, and avoid unnecessary full rebuilds.
-- Prefer code and command-line tools. Use a browser only when absolutely necessary.
-- You may download ordinary public online sources and materials in any format without asking.
-- Do not add application-imposed memory caps or floors, or memory watchdogs that stop or reject work based on memory use or availability. Ordinary streaming batches, chunks, and normal file buffering that process the full input are allowed; they are not memory caps. Do not use bounded caches as RAM ceilings. Keep ordinary input/output validation and operating-system/environment constraints distinct.
+
+## Pull requests
+
+- Keep pull requests small and include a clear summary and relevant test results. Open them ready for review by default and revise them in response to the user's feedback. Use draft status only when it skips CI to ease a long queue of ready pull requests.
+- The user submits GitHub reviews and inline review comments, including replies, and merges pull requests manually. Never push directly to `main`, enable auto-merge, or merge a pull request.

@@ -1,8 +1,11 @@
 import json, tempfile, unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 import numpy as np
 from osgeo import gdal, osr
 from worldatlas.map_build.physical import composition as b
+from worldatlas.shared.files import sha256_file
 
 
 class ComposeTests(unittest.TestCase):
@@ -32,7 +35,7 @@ class ComposeTests(unittest.TestCase):
             ds.SetSpatialRef(s)
             ds.GetRasterBand(1).WriteArray(values)
             ds = None
-            self.cfg[name] = {'path': str(path), 'sha256': b.sha(path)}
+            self.cfg[name] = {'path': str(path), 'sha256': sha256_file(path)}
         rows = [0]
         pairs = []
         for row in ref:
@@ -45,8 +48,8 @@ class ComposeTests(unittest.TestCase):
         np.asarray(rows, dtype='<u4').tofile(rp)
         np.asarray(pairs, dtype='<u4').tofile(up)
         self.cfg['reference_streams'] = {
-            'rows': {'path': str(rp), 'sha256': b.sha(rp)},
-            'runs': {'path': str(up), 'sha256': b.sha(up)},
+            'rows': {'path': str(rp), 'sha256': sha256_file(rp)},
+            'runs': {'path': str(up), 'sha256': sha256_file(up)},
         }
         self.p = self.inputs / 'config.json'
         self.p.write_text(json.dumps(self.cfg))
@@ -135,6 +138,82 @@ class ComposeTests(unittest.TestCase):
             b.main(self.p, self.d / 'partial')
         self.assertFalse((self.d / 'partial').exists())
 
+    def test_composition_checks_distinct_inputs_and_valid_controls(self):
+        for changes, message in (
+            ({'selection_notes': ''}, 'schema and selection notes'),
+            ({'minimum_free_bytes': -1}, 'invalid free-space reserve'),
+            ({'rows_per_block': 0}, 'invalid rows_per_block'),
+            ({'water': self.cfg['land']}, 'inputs must be distinct'),
+        ):
+            with self.subTest(changes=changes):
+                self.p.write_text(json.dumps(dict(self.cfg, **changes)))
+                out = self.d / 'invalid'
+                with self.assertRaisesRegex(ValueError, message):
+                    b.main(self.p, out)
+                self.assertFalse(out.exists())
+
+    def test_invalid_comparison_offsets_are_rejected_before_composition(self):
+        row_pin = self.cfg['reference_streams']['rows']
+        path = Path(row_pin['path'])
+        original = np.fromfile(path, dtype='<u4')
+        for values, message in (
+            (original[1:], 'invalid reference stream lengths/offsets'),
+            (original[[0, 2, 1, 3, 4]], 'reference offsets not monotone'),
+        ):
+            with self.subTest(values=values):
+                values.tofile(path)
+                row_pin['sha256'] = sha256_file(path)
+                self.p.write_text(json.dumps(self.cfg))
+                with self.assertRaisesRegex(ValueError, message):
+                    b.main(self.p, self.d / 'invalid')
+        path.write_bytes(b'changed')
+        with self.assertRaisesRegex(ValueError, 'reference rows digest mismatch'):
+            b.main(self.p, self.d / 'invalid')
+
+    def test_run_offsets_reject_overflow_before_appending_a_batch(self):
+        path = self.d / 'runs.u32le'
+        offsets = [2**32 - 1]
+        with path.open('wb') as stream:
+            with self.assertRaisesRegex(ValueError, 'too many runs for u32 offsets'):
+                b.write_run_block(np.array([[17]], dtype=np.uint8), stream, offsets, 1)
+        self.assertEqual(offsets, [2**32 - 1])
+        self.assertEqual(path.read_bytes(), b'')
+
+    def test_report_is_withheld_if_an_input_changes_during_composition(self):
+        for path, message in (
+            (self.p, 'config changed during processing'),
+            (Path(self.cfg['land']['path']), 'land changed during processing'),
+        ):
+            with self.subTest(path=path):
+                original = path.read_bytes()
+                output = self.d / (path.stem + '-changed')
+
+                def change(*_, **__):
+                    path.write_bytes(original + b'\n')
+
+                with self.assertRaisesRegex(ValueError, message):
+                    b.main(self.p, output, emit=change)
+                self.assertFalse((output / 'report.json').exists())
+                path.write_bytes(original)
+
+    def test_low_disk_space_or_failed_mask_read_leaves_composition_incomplete(self):
+        self.cfg['minimum_free_bytes'] = 1
+        self.p.write_text(json.dumps(self.cfg))
+        low_disk = self.d / 'low-disk'
+        with patch.object(
+            b.shutil, 'disk_usage',
+            side_effect=lambda path: SimpleNamespace(free=0 if Path(path) == low_disk.resolve() else 1024),
+        ):
+            with self.assertRaisesRegex(ValueError, 'partial output preserved'):
+                b.main(self.p, low_disk)
+        self.assertFalse((low_disk / 'report.json').exists())
+
+        unreadable = self.d / 'unreadable'
+        with patch.object(gdal.Dataset, 'ReadAsArray', return_value=None):
+            with self.assertRaisesRegex(ValueError, 'could not read a physical mask'):
+                b.main(self.p, unreadable)
+        self.assertFalse((unreadable / 'report.json').exists())
+
     def test_binary_float_and_signed_masks_keep_original_support(self):
         for name, kind in [('land', gdal.GDT_Float32), ('water', gdal.GDT_Int16)]:
             old = gdal.Open(self.cfg[name]['path'])
@@ -148,7 +227,7 @@ class ComposeTests(unittest.TestCase):
             ds.SetSpatialRef(sr)
             ds.GetRasterBand(1).WriteArray(values)
             ds = None
-            self.cfg[name] = {'path': str(p), 'sha256': b.sha(p)}
+            self.cfg[name] = {'path': str(p), 'sha256': sha256_file(p)}
         self.p.write_text(json.dumps(self.cfg))
         out = self.d / 'typed'
         b.main(self.p, out)
@@ -171,7 +250,7 @@ class ComposeTests(unittest.TestCase):
             a[0, 0] = -1
             ds.GetRasterBand(1).WriteArray(a)
             ds = None
-            self.cfg[name] = {'path': str(p), 'sha256': b.sha(p)}
+            self.cfg[name] = {'path': str(p), 'sha256': sha256_file(p)}
             self.p.write_text(json.dumps(self.cfg))
             with self.assertRaisesRegex(ValueError, 'nonbinary'):
                 b.main(self.p, self.d / ('bad-' + name))
@@ -182,7 +261,7 @@ class ComposeTests(unittest.TestCase):
         x = np.fromfile(p, dtype='<u4')
         x[0] = 0
         x.tofile(p)
-        self.cfg['reference_streams']['runs']['sha256'] = b.sha(p)
+        self.cfg['reference_streams']['runs']['sha256'] = sha256_file(p)
         self.p.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'invalid reference row'):
             b.main(self.p, self.d / 'zero-run')
@@ -207,7 +286,7 @@ class ComposeTests(unittest.TestCase):
         a[3, 3] = 1
         ds.GetRasterBand(1).WriteArray(a)
         ds = None
-        self.cfg['reference_mask']['sha256'] = b.sha(p)
+        self.cfg['reference_mask']['sha256'] = sha256_file(p)
         self.p.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'historic binary mask disagrees'):
             b.main(self.p, self.d / 'bad')

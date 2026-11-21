@@ -1,26 +1,32 @@
 """Resolve immutable release manifests from compact Neon catalog rows."""
 
-from contextlib import closing
 import hashlib
-from importlib.resources import files
 import json
-from pathlib import PurePosixPath
 import re
+from contextlib import closing
+from importlib.resources import files
+from pathlib import PurePosixPath
+from typing import Any
+
+from botocore.client import BaseClient
+from psycopg import Connection
 
 RELEASE_BUCKET = "worldatlas"
 
 
-def release_endpoint():
+def release_endpoint() -> str:
     """Read the project's release endpoint from the installed configuration.
 
     Returns:
         The R2 account URL used by the release commands and map comparisons.
     """
-    config = json.loads(files("worldatlas.map_build").joinpath("config.json").read_bytes())
+    config = json.loads(
+        files("worldatlas.map_build").joinpath("config.json").read_bytes()
+    )
     return config["physical_controls"]["source_staging"]["endpoint_url"]
 
 
-def release_prefix(release_id):
+def release_prefix(release_id: str) -> str:
     """Build the R2 key prefix for a release.
 
     Args:
@@ -32,7 +38,7 @@ def release_prefix(release_id):
     return f"releases/{release_id}/"
 
 
-def lookup_release(database, identity):
+def lookup_release(database: Connection, identity: str) -> dict[str, Any]:
     """Look up an exact release or the official choice for a map version.
 
     Args:
@@ -68,7 +74,7 @@ def lookup_release(database, identity):
     )
 
 
-def read_manifest(storage, release):
+def read_manifest(storage: BaseClient, release: dict[str, Any]) -> dict[str, Any]:
     """Fetch the manifest from R2 and check it against the catalog.
 
     Args:
@@ -93,7 +99,7 @@ def read_manifest(storage, release):
     return validate_manifest(manifest, release["id"])
 
 
-def validate_manifest(manifest, release_id):
+def validate_manifest(manifest: dict[str, Any], release_id: str) -> dict[str, Any]:
     """Check the manifest paths and file metadata before using its asset keys.
 
     Args:

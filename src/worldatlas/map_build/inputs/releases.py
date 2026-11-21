@@ -1,15 +1,35 @@
 """Resolve official releases and candidates through their pinned R2 manifests."""
 
-from contextlib import closing
 import os
+from contextlib import closing
+from typing import Any
 
 import psycopg
 
 from worldatlas.map_build.physical import build as physical_build
-from worldatlas.map_releases.catalog import lookup_release, read_manifest, release_endpoint
+from worldatlas.map_releases.catalog import (
+    lookup_release,
+    read_manifest,
+    release_endpoint,
+)
 
 
-def read_release_assets(identity):
+def read_release_assets(
+    identity: str,
+) -> tuple[list[tuple[str, str, str, int, str, str]], dict[str, Any] | None]:
+    """Read the map stream locations from a verified release manifest.
+
+    Args:
+        identity: Exact release ID or official map version.
+
+    Returns:
+        (streams, config). Each stream record holds its name, R2 bucket,
+        object key, byte count, stored SHA-256, and decompressed SHA-256.
+        Config is the viewer config's R2 metadata, or None if absent.
+
+    Raises:
+        ValueError: Database access is missing, or the release or manifest is invalid.
+    """
     connection = os.environ.get("NEON_DATABASE_URL")
     if not connection:
         raise ValueError("set NEON_DATABASE_URL to the release catalog database")

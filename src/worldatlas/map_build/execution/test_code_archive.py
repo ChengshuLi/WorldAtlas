@@ -60,6 +60,10 @@ class SourceArchiveTests(unittest.TestCase):
                 "database/schema.sql",
             )
         ]
+        files += [
+            PurePosixPath("../../../share/worldatlas/notes.txt"),
+            PurePosixPath("worldatlas.dist-info/METADATA"),
+        ]
         installed = Mock(files=files)
         installed.locate_file.side_effect = lambda item: (
             self.project / item.as_posix().split("share/worldatlas/")[1]
@@ -69,8 +73,28 @@ class SourceArchiveTests(unittest.TestCase):
             return_value=installed,
         ):
             result = capture_source(package)
+            for name, error in (
+                ("database/schema.sql", "missing its database schema"),
+                ("README.md", "missing its build setup files"),
+            ):
+                with self.subTest(name=name):
+                    item = PurePosixPath("../../../share/worldatlas/" + name)
+                    files.remove(item)
+                    with self.assertRaisesRegex(ValueError, error):
+                        capture_source(package)
+                    files.append(item)
         self.assertIn("environment.yml", result["files"])
         self.assertIn("src/worldatlas/__init__.py", result["files"])
+        self.assertNotIn("notes.txt", result["files"])
+        self.assertNotIn("worldatlas.dist-info/METADATA", result["files"])
+
+    def test_archive_format_requires_complete_current_setup(self):
+        content = capture_source(self.package)
+        with self.assertRaisesRegex(ValueError, "unsupported source archive"):
+            source_files(dict(content, schema="old"))
+        del content["files"]["pyproject.toml"]
+        with self.assertRaisesRegex(ValueError, "missing package or setup"):
+            source_files(content)
 
     def test_capture_omits_bytecode_and_rejects_source_symlinks(self):
         cache = self.package / "__pycache__"

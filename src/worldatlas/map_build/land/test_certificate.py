@@ -121,6 +121,39 @@ class Cert(unittest.TestCase):
         with self.assertRaises(ValueError):
             CertificateIndex(360, 180, 1, 90, [], [], tile_cells=1, numerical_guard_m=0)
 
+    def test_reference_index_rejects_missing_or_misaligned_reference_tiles(self):
+        samples = [(0, 0, 17)]
+        for step, tiles, reps, message in (
+            (2, [(0, 0, [17])], samples, 'invalid global grid'),
+            (1, [(0, 0, [17])], [], 'invalid representatives'),
+            (1, [(-1, 0, [17])], samples, 'invalid tile'),
+            (1, [(180, 0, [17])], samples, 'tile outside grid'),
+            (1, [(0, 0, [18])], samples, 'missing category tile'),
+        ):
+            with self.subTest(message=message):
+                with self.assertRaisesRegex(ValueError, message):
+                    CertificateIndex(360, 180, step, 90, tiles, reps, tile_cells=1)
+        with self.assertRaisesRegex(ValueError, 'certificate categories differ'):
+            CertificateIndex(
+                360, 180, 1, 90, [(0, 0, [17])], samples,
+                tile_cells=1, refinement=build([(0, 0, 18)]),
+            )
+
+    def test_bounds_and_hints_are_checked_before_a_certificate_is_issued(self):
+        index = build([(0, 0, 17)])
+        with self.assertRaisesRegex(ValueError, 'invalid query witnesses'):
+            index.witnesses([0], [0], [999])
+        with patch(
+            'worldatlas.map_build.land.certificates.geodesic_distances',
+            return_value=np.array([np.nan]),
+        ):
+            with self.assertRaisesRegex(ValueError, 'invalid WGS84 upper'):
+                index.witnesses([0], [0], [17])
+        for start, end, upper in ((2, 2, 1), (1, 2, np.inf), (1, 2, -1)):
+            with self.subTest(start=start, end=end, upper=upper):
+                with self.assertRaisesRegex(ValueError, 'invalid runs or bound'):
+                    index.certify_runs([0], [start], [end], [upper], [17])
+
     def test_hierarchy_only_refines_queries_that_coarse_bounds_cannot_prove(self):
         seeds = [
             (60, 12, 17),
@@ -149,6 +182,14 @@ class Cert(unittest.TestCase):
             self.assertEqual(len(search.call_args.args[0]), int((~known).sum()))
             candidates = search.call_args.args[-1]
             self.assertLess(int(candidates.sum()), len(candidates) * 5)
+            search.reset_mock()
+            np.testing.assert_array_equal(
+                hierarchy.certify_runs(
+                    rows[known], starts[known], ends[known], upper[known], hints[known],
+                ),
+                np.ones(int(known.sum()), dtype=bool),
+            )
+            search.assert_not_called()
         with self.assertRaisesRegex(ValueError, 'invalid certificate refinement'):
             CertificateIndex(720, 360, 0.5, 90, [], [], refinement=fine)
 

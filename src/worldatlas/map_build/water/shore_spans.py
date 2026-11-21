@@ -1,12 +1,41 @@
 """Read-only coastal spans and exact cell-centre views for selected crops."""
 
 import math
+from collections.abc import Sequence
+
 import numpy as np
+
 from worldatlas.map_build.water import shared_nearest as shore
 
 
 class ShoreSpans:
-    def centers_for_crop(self, bounds, step, land_codes):
+    """Read shore cell centres from precomputed horizontal runs."""
+
+    width: int
+    height: int
+    offsets: np.ndarray
+    starts: np.ndarray
+    ends: np.ndarray
+    codes: np.ndarray
+
+    def centers_for_crop(
+        self,
+        bounds: tuple[int, int, int, int],
+        step: float,
+        land_codes: Sequence[int] | np.ndarray,
+    ) -> dict[str, np.ndarray]:
+        """Expand eligible shore runs within a grid window.
+
+        Args:
+            bounds: (first_column, end_column, first_row, end_row), possibly
+                wrapping at ±180 degrees.
+            step: Cell size in degrees.
+            land_codes: Owner codes to include.
+
+        Returns:
+            Dictionary of arrays with latitude, longitude, and category for
+            each shore cell, plus the N-by-3 unit-sphere positions under "mids".
+        """
         x0, x1, y0, y1 = bounds
         width, height = self.width, self.height
         if not (

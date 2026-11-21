@@ -1,8 +1,12 @@
 """Supply connections and the recipe snapshot to source constructors."""
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+from botocore.client import BaseClient
+from psycopg import Connection
 
 
 @dataclass(frozen=True)
@@ -17,9 +21,9 @@ class Runtime:
     settings still match when the constructor writes its results.
     """
 
-    connect: Any
-    storage: Any
+    connect: Callable[[], Connection]
+    storage: BaseClient | None
     recipe_id: str
     method: str
-    arguments: dict
+    arguments: dict[str, Any]
     work_dir: Path | None = None

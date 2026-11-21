@@ -5,21 +5,38 @@ import hashlib
 import json
 import math
 import os
-from pathlib import Path
 import shutil
-import sys
+from collections.abc import Callable
+from pathlib import Path
+from typing import Any
 
 from osgeo import gdal, ogr, osr
-from worldatlas.map_build.physical.sources import checked_files, open_layer, sha
+
+from worldatlas.map_build.physical.sources import checked_files, open_layer
+from worldatlas.shared.files import sha256_file
 
 gdal.UseExceptions()
 
 
-def run(config_path, output, *, emit=print):
+def run(
+    config_path: Path | str, output: Path | str, *, emit: Callable[..., None] = print
+) -> dict[str, Any]:
+    """Mark each grid cell whose centre lies in a selected coastline polygon.
+
+    Args:
+        config_path: JSON settings with the grid and pinned coastline layers.
+        output: New directory for the land raster and report.
+        emit: Progress callback.
+
+    Returns:
+        Report with selected layer counts, the grid, and the land raster's SHA-256.
+    """
     config_path = Path(config_path).resolve()
     data = config_path.read_bytes()
     cfg = json.loads(data)
-    if cfg.get('schema') != 'land-raster-candidate-v1' or not cfg.get('selection_notes'):
+    if cfg.get('schema') != 'land-raster-candidate-v1' or not cfg.get(
+        'selection_notes'
+    ):
         raise ValueError('explicit schema and selection notes required')
     grid = cfg['grid']
     width, height, west, north, step = (
@@ -56,11 +73,15 @@ def run(config_path, output, *, emit=print):
     if feature_index not in ('row-fids', 'scan'):
         raise ValueError('feature_index must be row-fids or scan')
     output = Path(output).resolve()
-    paths = [config_path] + [Path(f['path']).resolve() for spec in specs for f in spec['files']]
+    paths = [config_path] + [
+        Path(f['path']).resolve() for spec in specs for f in spec['files']
+    ]
     if len(set(paths)) != len(paths):
         raise ValueError('input paths must be unique')
     if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in paths):
-        raise ValueError('output must be outside input directories and must not contain inputs')
+        raise ValueError(
+            'output must be outside input directories and must not contain inputs'
+        )
     # Validate all files, CRS, selection and geometries before creating outputs.
     for spec in specs:
         checked_files(spec)
@@ -74,9 +95,16 @@ def run(config_path, output, *, emit=print):
         )
         usable = True
 
-        def index_feature(feat, geometry):
+        def index_feature(feat: ogr.Feature, geometry: ogr.Geometry) -> None:
+            """Index a selected polygon in the tiles it can affect.
+
+            Args:
+                feat: Feature from the source vector layer.
+                geometry: Polygon or multipolygon attached to the feature.
+            """
             nonlocal usable
             fid = feat.GetFID()
+            assert rows is not None
             if fid < 0:
                 usable = False
                 return
@@ -89,9 +117,13 @@ def run(config_path, output, *, emit=print):
                 for row in range(first // strip, last // strip + 1):
                     rows[row].append(fid)
 
-        item = open_layer(spec, feature_callback=index_feature if rows is not None else None)
+        item = open_layer(
+            spec, feature_callback=index_feature if rows is not None else None
+        )
         opened.append(item)
-        indexes.append(rows if usable and item[1].TestCapability(ogr.OLCRandomRead) else None)
+        indexes.append(
+            rows if usable and item[1].TestCapability(ogr.OLCRandomRead) else None
+        )
     feature_counts = [item[2] for item in opened]
     os.mkdir(output)
     ds = gdal.GetDriverByName('GTiff').Create(
@@ -117,14 +149,18 @@ def run(config_path, output, *, emit=print):
     land_cells = 0
     for y in range(0, height, strip):
         if shutil.disk_usage(output).free < reserve:
-            raise ValueError('free disk below configured reserve; partial output preserved')
+            raise ValueError(
+                'free disk below configured reserve; partial output preserved'
+            )
         n = min(strip, height - y)
         top = north - y * step
         mem = gdal.GetDriverByName('MEM').Create('', width, n, 1, gdal.GDT_Byte)
         mem.SetGeoTransform((west, step, 0, top, 0, -step))
         for (_, layer, _), index in zip(opened, indexes):
             if index is None:
-                layer.SetSpatialFilterRect(west, top - n * step, west + width * step, top)
+                layer.SetSpatialFilterRect(
+                    west, top - n * step, west + width * step, top
+                )
                 layer.ResetReading()
                 gdal.RasterizeLayer(mem, [1], layer, burn_values=[1])
                 layer.SetSpatialFilter(None)
@@ -132,7 +168,9 @@ def run(config_path, output, *, emit=print):
                 # Preserve source order and coordinates. Envelope candidates may
                 # include a polygon that burns no pixels; GDAL clips it exactly.
                 vector = ogr.GetDriverByName('Memory').CreateDataSource('')
-                selected_layer = vector.CreateLayer('land', layer.GetSpatialRef(), ogr.wkbUnknown)
+                selected_layer = vector.CreateLayer(
+                    'land', layer.GetSpatialRef(), ogr.wkbUnknown
+                )
                 definition = selected_layer.GetLayerDefn()
                 for fid in index[y // strip]:
                     source = layer.GetFeature(fid)
@@ -163,7 +201,7 @@ def run(config_path, output, *, emit=print):
         'feature_index': feature_index,
         'indexed_layers': [index is not None for index in indexes],
         'land_cells': land_cells,
-        'land_sha256': sha(output / 'land.tif'),
+        'land_sha256': sha256_file(output / 'land.tif'),
         'gdal': gdal.VersionInfo('--version'),
         'rasterization': 'GDAL default polygon rasterization, ALL_TOUCHED off',
         'limitations': 'Candidate mask only; source decisions and geographic correctness require review.',
@@ -174,12 +212,3 @@ def run(config_path, output, *, emit=print):
         json.dump(report, f, indent=2)
         f.write('\n')
     return report
-
-
-if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        sys.exit('usage: rasterize_land.py CONFIG.json NEW_OUTPUT_DIRECTORY')
-    try:
-        print(json.dumps(run(sys.argv[1], sys.argv[2]), indent=2), flush=True)
-    except Exception as e:
-        sys.exit(f'failed: {e}')

@@ -1,9 +1,22 @@
 """Conservative grid envelopes for all polygon pieces across longitude wrapping."""
 
 import math
+from collections.abc import Iterator
+from typing import Any
 
 
-def _pairs(x):
+def _pairs(x: object) -> Iterator[tuple[float, float]]:
+    """Read all coordinate pairs in a nested GeoJSON array.
+
+    Args:
+        x: Coordinate pair, ring, or collection of rings.
+
+    Yields:
+        (longitude, latitude) in degrees.
+
+    Raises:
+        ValueError: A coordinate is malformed or out of range.
+    """
     if (
         isinstance(x, (list, tuple))
         and len(x) >= 2
@@ -25,18 +38,26 @@ def _pairs(x):
         raise ValueError('invalid coordinates')
 
 
-def wrapped_grid_bounds(feature, width, height, step):
-    """Bound a geographic polygon on the retained grid.
+def wrapped_grid_bounds(
+    feature: dict[str, Any], width: int, height: int, step: float
+) -> tuple[tuple[int, int, int, int], tuple[tuple[int, int], ...]]:
+    """Find the smallest grid window that encloses all polygon pieces.
 
     Args:
-        feature: Polygon or MultiPolygon geometry in longitude and latitude.
-        width: Number of grid columns.
-        height: Number of retained rows from the north.
-        step: Angular cell size in degrees.
+        feature: GeoJSON Polygon, MultiPolygon, or Feature holding either, in
+            WGS84.
+        width: Number of columns in the full grid.
+        height: Number of rows retained from the north.
+        step: Cell width and height in degrees.
 
     Returns:
-        Unwrapped column and row bounds, followed by canonical column windows.
-        A polygon south of the retained grid has an empty row interval.
+        (bounds, windows). Bounds are (first_column, end_column, first_row,
+        end_row) and can extend past the last column. Windows hold one or two
+        (first_column, end_column) pairs within the grid. Ends are exclusive.
+        A polygon south of the grid has an empty row interval.
+
+    Raises:
+        ValueError: The grid, geometry, or resulting window is invalid.
     """
     if (
         type(width) is not int

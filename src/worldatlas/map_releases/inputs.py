@@ -1,44 +1,64 @@
 """Capture and restore a release's frozen inputs without querying working geography."""
 
 import gzip
-import hashlib
 import json
+from collections.abc import Sequence
 from pathlib import Path
+from typing import Any
 
 from worldatlas.map_build.execution.code_archive import restore_source, source_files
-from worldatlas.map_build.execution.runtime import json_bytes
-from worldatlas.map_build.physical.build import validate_r2_shard_location, validate_shard_staging
+from worldatlas.map_build.physical.build import (
+    validate_r2_shard_location,
+    validate_shard_staging,
+)
+from worldatlas.shared.files import json_bytes
 
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
 
 
-def validate_replay_sources(configuration, selection, source_pins):
+def validate_replay_sources(
+    configuration: dict[str, Any], selection: dict[str, Any]
+) -> None:
     """Check that physical inputs can be read again on a fresh machine.
 
     Args:
         configuration: Original build request to include in the archive.
         selection: Frozen source catalog and geographic records.
-        source_pins: Local paths and checksums recorded by the build. These
-            let staging inspect R2-backed input documents already on disk.
 
     Raises:
         ValueError: A physical input or shard setting would prevent an empty-cache replay.
     """
-    cached_paths = {pin["sha256"]: Path(pin["path"]) for pin in source_pins}
     sources = configuration["sources"]
     catalog_rows = selection["raw_sources"]
     # Current source IDs identify exact bytes. Older frozen selections can
     # also carry a version, which must match when a request specifies one.
     catalog = {(row["source_id"], None): row for row in catalog_rows}
-    catalog.update({(row["source_id"], row.get("version")): row for row in catalog_rows})
+    catalog.update(
+        {(row["source_id"], row.get("version")): row for row in catalog_rows}
+    )
 
-    def catalog_asset(spec):
+    def catalog_asset(spec: dict[str, Any]) -> dict[str, Any] | None:
+        """Look up a physical input in the frozen raw source catalog.
+
+        Args:
+            spec: Input with an R2 source selector.
+
+        Returns:
+            Matching catalog dictionary, or None if the source is missing.
+        """
         reference = spec["r2_source"]
         return catalog.get((reference["source_id"], reference.get("version")))
 
-    def r2_source(spec):
-        """Recognize a catalog reference, a pinned object, or an archive member."""
+    def r2_source(spec: object) -> bool:
+        """Check whether a specification can be downloaded using the frozen inputs.
+
+        Args:
+            spec: Candidate physical input or archive member.
+
+        Returns:
+            True if the specification identifies an R2 object.
+        """
         if not isinstance(spec, dict):
             return False
         if "r2_source" in spec:
@@ -47,66 +67,53 @@ def validate_replay_sources(configuration, selection, source_pins):
             return r2_source(spec["archive"])
         return all(spec.get(key) for key in ("r2_bucket", "r2_key", "sha256"))
 
-    def require_source(name, spec, *, inline=False):
-        if r2_source(spec) or (inline and isinstance(spec, dict) and set(spec) == {"json"}):
-            return
-        options = "inline JSON or an R2 pin" if inline else "an R2 pin"
-        raise ValueError(f"release replay requires {options} for {name}")
+    def require_source(name: str, spec: object) -> None:
+        """Reject an input that a new machine could not download.
 
-    def read_document(name, spec):
-        """Inspect inline JSON or reuse the exact R2 document cached by the build."""
-        require_source(name, spec, inline=True)
-        if "json" in spec:
-            return spec["json"]
-        pin = catalog_asset(spec) if "r2_source" in spec else spec
-        checksum = pin["sha256"]
-        path = cached_paths.get(checksum)
-        if path is None or not path.is_file():
-            raise ValueError(f"release replay needs the build's cached R2 document for {name}")
-        raw = path.read_bytes()
-        if hashlib.sha256(raw).hexdigest() != checksum:
-            raise ValueError(f"cached R2 document changed after the build: {name}")
-        return json.loads(raw)
+        Args:
+            name: Input name for error messages.
+            spec: Candidate physical input.
 
-    require_source("water_config", sources["water_config"], inline=True)
-    land = read_document("land_config", sources["land_config"])
-    for index, layer in enumerate(land.get("land", [])):
-        require_source(f"land_config.land[{index}].dataset", layer["dataset"], inline=True)
+        Raises:
+            ValueError: The input specifies only a local file.
+        """
+        if not r2_source(spec):
+            raise ValueError(f"release replay requires an R2 pin for {name}")
+
+    for index, layer in enumerate(sources["land_config"]["land"]):
+        require_source(f"land_config.land[{index}].dataset", layer["dataset"])
         for file_index, spec in enumerate(layer["files"]):
-            require_source(f"land_config.land[{index}].files[{file_index}]", spec, inline=True)
-    raw_spec = sources["raw_manifest"]
-    raw = read_document("raw_manifest", raw_spec)
-    # The builder resolves catalog references in the request before fetching
-    # any external documents. A fetched manifest already needs R2 locations.
-    inline_manifest = "json" in raw_spec
+            require_source(f"land_config.land[{index}].files[{file_index}]", spec)
     validate_shard_staging(configuration.get("physical_controls", {}), require_r2=True)
     # Each shard's ``path`` names a place in the build's cache. The catalog
     # reference or the direct R2 key and byte size tell a fresh build what to fetch.
-    for index, spec in enumerate(raw["files"]):
-        name = f"raw_manifest.files[{index}]"
+    for index, spec in enumerate(sources["inland_water"]["files"]):
+        name = f"inland_water.files[{index}]"
         require_source(name, spec)
-        if not (inline_manifest and "r2_source" in spec):
+        if "r2_source" not in spec:
             try:
                 validate_r2_shard_location(spec)
             except ValueError as error:
-                raise ValueError(f"release replay requires an R2 object and byte size for {name}") from error
+                raise ValueError(
+                    f"release replay requires an R2 object and byte size for {name}"
+                ) from error
 
 
 def write_inputs(
-    path,
+    path: Path | str,
     *,
-    release_id,
-    configuration,
-    selection,
-    run,
-    report,
-    records=(),
-    raw_sources=(),
-    notes=(),
-    relocations=None,
-    metadata=None,
-    source_code=None,
-):
+    release_id: str,
+    configuration: dict[str, Any],
+    selection: dict[str, Any],
+    run: dict[str, Any],
+    report: dict[str, Any],
+    records: Sequence[dict[str, Any]] = (),
+    raw_sources: Sequence[dict[str, Any]] = (),
+    notes: Sequence[str] = (),
+    relocations: dict[str, str] | None = None,
+    metadata: dict[str, Any] | None = None,
+    source_code: dict[str, dict[str, Any]] | None = None,
+) -> None:
     """Write the frozen build inputs as a new gzip-compressed JSON file.
 
     Args:
@@ -126,7 +133,7 @@ def write_inputs(
     Raises:
         FileExistsError: The destination file already exists.
     """
-    content = dict(
+    content: dict[str, Any] = dict(
         schema=SCHEMA,
         release_id=release_id,
         configuration=configuration,
@@ -156,7 +163,7 @@ def write_inputs(
         compressed.write(json_bytes(content))
 
 
-def read_inputs(raw, release_id):
+def read_inputs(raw: bytes, release_id: str) -> dict[str, Any]:
     """Read a verified input archive and check its release identity.
 
     Args:
@@ -176,7 +183,7 @@ def read_inputs(raw, release_id):
     return content
 
 
-def restore_inputs(content, output):
+def restore_inputs(content: dict[str, Any], output: Path | str) -> None:
     """Extract the saved inputs that a separate map build can use for replay.
 
     Args:
@@ -199,8 +206,15 @@ def restore_inputs(content, output):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
 
-    def relocated(value):
-        """Copy a JSON value while replacing any recorded source locations."""
+    def relocated(value: object) -> Any:
+        """Copy a JSON value and update source locations.
+
+        Args:
+            value: Value from the saved release inputs.
+
+        Returns:
+            JSON-compatible copy with matching paths replaced.
+        """
         if isinstance(value, dict):
             return {key: relocated(item) for key, item in value.items()}
         if isinstance(value, list):

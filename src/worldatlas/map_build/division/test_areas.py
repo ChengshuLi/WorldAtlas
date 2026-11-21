@@ -31,11 +31,12 @@ class AreaOperations(unittest.TestCase):
             type=kind, coordinates=[coordinates] if kind == "Polygon" else coordinates
         )
 
-    def solve(self, root, labels, *, unit="cell", physical=None, cuts=None):
+    def solve(self, root, labels, *, unit="cell", physical=None, cuts=None, scope_area=None):
         grid = self.grid
-        scope_area = self.geometry(
-            "Polygon", [(4, 2), (20, 2), (20, 10), (4, 10), (4, 2)]
-        )
+        if scope_area is None:
+            scope_area = self.geometry(
+                "Polygon", [(4, 2), (20, 2), (20, 10), (4, 10), (4, 2)]
+            )
         rule = dict(
             id="four-faces",
             physical_class="land" if unit == "component" else "mixed",
@@ -116,6 +117,39 @@ class AreaOperations(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaisesRegex(ValueError, "has no face label"):
                 self.solve(Path(temp), [(101, 8, 4), (807, 16, 4), (503, 8, 8)])
+
+    def test_label_outside_the_grid_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaisesRegex(ValueError, "label is outside the grid"):
+                self.solve(Path(temp), [(101, -1, 4)])
+
+    def test_boundary_segments_may_meet_inside_the_division_scope(self):
+        with tempfile.TemporaryDirectory() as temp:
+            result = self.solve(
+                Path(temp), [(101, 8, 4), (807, 16, 4), (503, 8, 8), (999, 16, 8)],
+                cuts=([(12, 2), (12, 10)], [(4, 6), (12, 6)], [(12, 6), (20, 6)]),
+            )
+        self.assertEqual(result["counts"], {str(code): 32 for code in (101, 807, 503, 999)})
+
+    def test_disjoint_scope_keeps_empty_rows_between_faces(self):
+        patches = [
+            self.geometry("Polygon", [(4, y), (20, y), (20, y + 2), (4, y + 2), (4, y)])
+            for y in (2, 8)
+        ]
+        scope = dict(type="MultiPolygon", coordinates=[p["coordinates"] for p in patches])
+        physical = np.ones((12, 24), dtype=np.uint32)
+        physical[3, 5:7] = physical[8, 15:18] = 17
+        for unit, counts in (
+            ("cell", {"101": 32, "202": 32}),
+            ("component", {"101": 2, "202": 3}),
+        ):
+            with self.subTest(unit=unit), tempfile.TemporaryDirectory() as temp:
+                result = self.solve(
+                    Path(temp), [(101, 6, 3), (202, 16, 8)],
+                    unit=unit, physical=physical, cuts=([(4, 6), (20, 6)],),
+                    scope_area=scope,
+                )
+                self.assertEqual(result["counts"], counts)
 
     def test_component_majority_requires_a_single_face(self):
         physical = np.ones((12, 24), dtype=np.uint32)

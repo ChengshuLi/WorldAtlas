@@ -81,6 +81,15 @@ class DownloadTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'size or hash'):
             download_source(self.storage, dict(self.source, size_bytes=1), self.directory)
 
+    def test_rejects_transfer_shorter_than_announced_without_caching_it(self):
+        body = io.BytesIO(self.raw[:4])
+        self.storage.get_object.return_value = {'Body': body, 'ContentLength': len(self.raw)}
+        with self.assertRaisesRegex(ValueError, 'size or hash'):
+            download_source(self.storage, self.source, self.directory)
+        self.assertTrue(body.closed)
+        self.assertFalse((self.directory / self.source['sha256'] / 'source.zip').exists())
+        self.assertFalse(list(self.directory.rglob('download-*')))
+
     def test_reject_download_filename_outside_cache_directory(self):
         with self.assertRaisesRegex(ValueError, 'plain filename'):
             download_source(self.storage, self.source, self.directory, filename='../terrain.tif')

@@ -1,17 +1,48 @@
 """Complete WGS84 tile/run search with conservative bounds and no cache limit."""
 
+import hashlib
+import math
+from collections.abc import Collection, Sequence
 from pathlib import Path
-import hashlib, math
+
 import numpy as np
-from scipy.spatial import cKDTree
+
+# SciPy publishes the compiled tree without type information.
+from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
+
 from worldatlas.map_build.core.distances import run_pairs_batch
-from worldatlas.map_build.land.certificates import _unit, M_MIN
+from worldatlas.map_build.land.certificates import M_MIN, _unit
 
 
 class ExactIndex:
+    """Read tile runs and find exact WGS84 distances to reference shores."""
+
     def __init__(
-        self, directory, width, height, step, north, tiles, tile_cells=1024, guard_m=1000.0
-    ):
+        self,
+        directory: Path | str,
+        width: int,
+        height: int,
+        step: float,
+        north: float,
+        tiles: Sequence[tuple[int, int, Collection[int], int, str]],
+        tile_cells: int = 1024,
+        guard_m: float = 1000.0,
+    ) -> None:
+        """Index the position and extent of every occupied tile.
+
+        Args:
+            directory: Directory with the verified reference manifest and tiles.
+            width: Grid width in cells.
+            height: Number of grid rows.
+            step: Cell size in degrees.
+            north: Latitude of the northern edge in degrees.
+            tiles: Records of (tile_row, tile_column, codes, run_count, sha256).
+            tile_cells: Side length of a tile in cells.
+            guard_m: Margin in metres for keeping distance candidates.
+
+        Raises:
+            ValueError: Grid settings or the tile manifest are invalid.
+        """
         self.dir = Path(directory)
         self.w = width
         self.h = height
@@ -21,7 +52,7 @@ class ExactIndex:
         self.guard = guard_m
         self.cache = {}
         self.leaf_cells = min(tile_cells, 128)
-        self.leaves = None
+        self.leaves: list[tuple[tuple[int, int], int, int, int, int, np.ndarray]] = []
         self.leaf_cache = {}
         if (
             width < 2
@@ -57,7 +88,9 @@ class ExactIndex:
         if not self.ids:
             raise ValueError('empty tile index')
         self.codes = tuple(
-            sorted({code for codes, count, sha in self.records.values() for code in codes})
+            sorted(
+                {code for codes, count, sha in self.records.values() for code in codes}
+            )
         )
         pos = np.asarray(pos)
         self.xyz = _unit(pos[:, 0], pos[:, 1])
@@ -65,12 +98,25 @@ class ExactIndex:
         self.radii = np.asarray(radius)
         self.maxrad = float(self.radii.max())
 
-    def _load(self, key):
+    def _load(self, key: tuple[int, int]) -> np.ndarray:
+        """Read and verify a tile's reference runs, then cache them.
+
+        Args:
+            key: (tile_row, tile_column).
+
+        Returns:
+            N-by-4 uint32 array of (row, first_column, end_column, code).
+
+        Raises:
+            ValueError: The tile file differs from the manifest or has invalid runs.
+        """
         if key in self.cache:
             return self.cache[key]
         codes, count, sha = self.records[key]
         ty, tx = key
-        max_records = min(self.C, self.h - ty * self.C) * min(self.C, self.w - tx * self.C)
+        max_records = min(self.C, self.h - ty * self.C) * min(
+            self.C, self.w - tx * self.C
+        )
         path = self.dir / f'{ty:05d}-{tx:05d}.bin'
         if path.stat().st_size != count * 16 or count > max_records:
             raise ValueError('seed tile dimensions or record count differ')
@@ -78,7 +124,7 @@ class ExactIndex:
         if len(raw) != count * 16 or hashlib.sha256(raw).hexdigest() != sha:
             raise ValueError('tile integrity failure')
         x = np.frombuffer(raw, dtype='<u4').reshape(-1, 4)
-        if len(x) and (
+        if (
             np.any(x[:, 0] >= self.h)
             or np.any(x[:, 1] >= x[:, 2])
             or np.any(x[:, 2] > self.w)
@@ -91,15 +137,13 @@ class ExactIndex:
         self.cache[key] = x
         return x
 
-    def prepare_leaves(self):
-        """Index occupied fine leaves without changing the authenticated tile files.
+    def prepare_leaves(self) -> None:
+        """Index occupied subtiles using the original tile files.
 
-        A 1024-cell source tile is an I/O unit, not a useful search bound: a coastal
-        query otherwise scans thousands of unrelated mainland interior runs. Fine
-        leaves cover exactly the same seed cells. Their clipped runs are materialized
-        only when visited, while the original verified source tiles remain cached.
+        Smaller tiles give tighter bounds when the reference shore takes up
+        only a small part of the larger tile.
         """
-        if self.leaves is not None:
+        if self.leaves:
             return
         C = self.leaf_cells
         leaves = []
@@ -114,7 +158,10 @@ class ExactIndex:
             x0 = tx * self.C
             x1 = min(self.w, x0 + self.C)
             if np.any(
-                (data[:, 0] < y0) | (data[:, 0] >= y1) | (data[:, 1] < x0) | (data[:, 2] > x1)
+                (data[:, 0] < y0)
+                | (data[:, 0] >= y1)
+                | (data[:, 1] < x0)
+                | (data[:, 2] > x1)
             ):
                 raise ValueError('seed run outside authenticated tile')
             for sy in range(y0, y1, C):
@@ -130,31 +177,48 @@ class ExactIndex:
                         continue
                     leaves.append((key, sy, ey, sx, ex, selected))
                     positions.append(
-                        (self.north - (sy + ey) * self.step / 2, -180 + (sx + ex) * self.step / 2)
+                        (
+                            self.north - (sy + ey) * self.step / 2,
+                            -180 + (sx + ex) * self.step / 2,
+                        )
                     )
                     radii.append(((ey - sy) + (ex - sx)) * self.step * math.pi / 360)
                     codes.append(tuple(map(int, np.unique(data[selected, 3]))))
-        if not leaves:
-            raise ValueError('empty fine seed index')
         self.leaves = leaves
         self.leaf_codes = codes
-        self.leaf_xyz = _unit(*np.asarray(positions).T)
+        latitudes, longitudes = np.asarray(positions).T
+        self.leaf_xyz = _unit(latitudes, longitudes)
         self.leaf_tree = cKDTree(self.leaf_xyz)
         self.leaf_radii = np.asarray(radii)
         self.leaf_maxrad = float(max(radii))
 
     @property
-    def certificate_tiles(self):
+    def certificate_tiles(self) -> list[tuple[int, int, Collection[int]]]:
+        """List occupied subtiles and their owner codes.
+
+        Returns:
+            (tile_row, tile_column, codes) records on the finer tile grid.
+        """
         self.prepare_leaves()
         # Production source tiles are an exact multiple of the fine leaf grid.
         if self.C % self.leaf_cells:
             raise ValueError('unaligned fine seed index')
         return [
             (sy // self.leaf_cells, sx // self.leaf_cells, codes)
-            for (_, sy, ey, sx, ex, selected), codes in zip(self.leaves, self.leaf_codes)
+            for (_, sy, ey, sx, ex, selected), codes in zip(
+                self.leaves, self.leaf_codes
+            )
         ]
 
-    def _load_leaf(self, i):
+    def _load_leaf(self, i: int) -> np.ndarray:
+        """Read and cache the runs clipped to a finer tile.
+
+        Args:
+            i: Subtile index.
+
+        Returns:
+            N-by-4 uint32 array of (row, first_column, end_column, code).
+        """
         if i not in self.leaf_cache:
             key, sy, ey, sx, ex, selected = self.leaves[i]
             data = self._load(key)[selected].copy()
@@ -163,7 +227,23 @@ class ExactIndex:
             self.leaf_cache[i] = data
         return self.leaf_cache[i]
 
-    def nearest_run(self, y, a, b, upper):
+    def nearest_run(
+        self, y: int, a: int, b: int, upper: float
+    ) -> tuple[dict[int, float], dict[str, int]]:
+        """Compare one query run with all references that could improve its distance.
+
+        Args:
+            y: Query row.
+            a: First query column.
+            b: Exclusive end column.
+            upper: Known distance bound in metres.
+
+        Returns:
+            Minimum measured distances by code, and search counts for the report.
+
+        Raises:
+            ValueError: The query is outside the grid or has an invalid bound.
+        """
         if not (
             type(y) is int
             and type(a) is int
@@ -184,7 +264,9 @@ class ExactIndex:
             np.arange(len(self.leaves), dtype=np.int64)
             if limit >= math.pi
             else np.asarray(
-                self.leaf_tree.query_ball_point(point, 2 * math.sin(limit / 2), eps=0, workers=1),
+                self.leaf_tree.query_ball_point(
+                    point, 2 * math.sin(limit / 2), eps=0, workers=1
+                ),
                 dtype=np.int64,
             )
         )
@@ -217,15 +299,16 @@ class ExactIndex:
                 continue
             data = self._load_leaf(int(i))
             seen += len(data)
-            if not len(data):
-                continue
             # Minimum longitude gap of two circular integer intervals, vectorized.
             aa = data[:, 1].astype(np.int64)
             bb = data[:, 2].astype(np.int64)
             gap = np.full(len(data), self.w, dtype=np.int64)
             for shift in (-self.w, 0, self.w):
                 gap = np.minimum(
-                    gap, np.maximum(0, np.maximum(aa + shift - (b - 1), a - (bb - 1 + shift)))
+                    gap,
+                    np.maximum(
+                        0, np.maximum(aa + shift - (b - 1), a - (bb - 1 + shift))
+                    ),
                 )
             p1 = math.radians(lat)
             p2 = np.deg2rad(self.north - (data[:, 0].astype(float) + 0.5) * self.step)

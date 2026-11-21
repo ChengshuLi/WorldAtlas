@@ -5,33 +5,53 @@ builder, including equal-size ties. Component IDs are generation-local, but
 preserving them allows byte-for-byte comparison with existing evidence.
 """
 
-from array import array
-from pathlib import Path
+import json
 import os
 import sys
-import json
 import time
+from array import array
+from collections.abc import Callable
+from pathlib import Path
+from typing import Any
 
-from worldatlas.map_build.core.layers import file_hash
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
+from worldatlas.shared.files import sha256_file
 
 
-def _read(path):
+def _read(path: Path | str) -> array:
+    """Load a little-endian uint32 component input file.
+
+    Args:
+        path: File containing 32-bit unsigned integers.
+
+    Returns:
+        Array of unsigned integers in native byte order.
+    """
     path = Path(path)
     if path.stat().st_size % 4:
         raise ValueError("misaligned u32 stream")
     values = array("I")
-    if values.itemsize != 4:
+    # The supported Python environments use a 32-bit unsigned int.
+    if values.itemsize != 4:  # pragma: no cover
         raise RuntimeError("32-bit unsigned array elements required")
     with path.open("rb") as stream:
         values.fromfile(stream, path.stat().st_size // 4)
-    if sys.byteorder != "little":
+    if sys.byteorder != "little":  # pragma: no cover
+        # CI runs on little-endian processors.
         values.byteswap()
     return values
 
 
-def _write(path, values):
-    if sys.byteorder != "little":
+def _write(path: Path | str, values: array) -> None:
+    """Write unsigned values in little-endian byte order.
+
+    Args:
+        path: Destination for the stream.
+        values: Unsigned integer array to write.
+    """
+    if sys.byteorder != "little":  # pragma: no cover
+        # CI runs on little-endian processors.
         values = array("I", values)
         values.byteswap()
     with Path(path).open("xb") as stream:
@@ -41,17 +61,31 @@ def _write(path, values):
 
 
 def build(
-    width,
-    height,
-    physical_rows,
-    physical_runs,
-    output_rows,
-    output_runs,
+    width: int,
+    height: int,
+    physical_rows: Path | str,
+    physical_runs: Path | str,
+    output_rows: Path | str,
+    output_runs: Path | str,
     *,
-    physical_code=17,
-    guard=check_cancelled,
-):
-    """Build complete run-level components in-process, without a dense grid."""
+    physical_code: int = 17,
+    guard: Callable[[], None] = check_cancelled,
+) -> dict[str, int]:
+    """Find connected runs of one physical class without expanding to cells.
+
+    Args:
+        width: Number of columns including both sides of the longitude seam.
+        height: Number of grid rows.
+        physical_rows: Row-offset file for the physical grid.
+        physical_runs: Run file for the physical grid.
+        output_rows: New row-offset file for the components.
+        output_runs: New component run file.
+        physical_code: Physical code to include.
+        guard: Cancellation callback.
+
+    Returns:
+        Counts of runs, connected components, and cells of the selected class.
+    """
     if (
         type(width) is not int
         or type(height) is not int
@@ -74,13 +108,27 @@ def build(
     previous = []
     cells = 0
 
-    def find(node):
+    def find(node: int) -> int:
+        """Find the root shared by every run in a component.
+
+        Args:
+            node: Run index.
+
+        Returns:
+            Root index. Parent links are shortened during the lookup.
+        """
         while parents[node] != node:
             parents[node] = parents[parents[node]]
             node = parents[node]
         return node
 
-    def unite(a, b):
+    def unite(a: int, b: int) -> None:
+        """Join two touching runs in the same component.
+
+        Args:
+            a: Index of the first run.
+            b: Index of the second run.
+        """
         a, b = find(a), find(b)
         if a == b:
             return
@@ -101,7 +149,8 @@ def build(
                 raise ValueError("invalid or noncanonical physical run")
             if code == physical_code:
                 node = len(parents)
-                if node == 0xFFFFFFFF:
+                # Reaching this limit requires over four billion in-memory runs.
+                if node == 0xFFFFFFFF:  # pragma: no cover
                     raise ValueError("too many component runs")
                 parents.append(node)
                 sizes.append(1)
@@ -124,8 +173,8 @@ def build(
             unite(current[0][2], current[-1][2])
         outrows.append(len(parents))
         previous = current
-    # Resolve roots only after the whole graph is known. This retains seam and
-    # bridge unions that occur after an earlier row has already been scanned.
+    # A later row can join two pieces that looked separate earlier. Find each
+    # run’s final component after connecting every row and the longitude seam.
     components = 0
     for node in range(len(parents)):
         if node % 65536 == 0:
@@ -138,8 +187,24 @@ def build(
     return {"runs": len(parents), "components": components, "land_cells": cells}
 
 
-def build_components(grid, physical_directory, directory, *, physical_code=17):
-    """Return current components and their measured output record."""
+def build_components(
+    grid: Grid,
+    physical_directory: Path | str,
+    directory: Path | str,
+    *,
+    physical_code: int = 17,
+) -> dict[str, Any]:
+    """Build the connected components of one class on the given grid.
+
+    Args:
+        grid: Physical grid dimensions.
+        physical_directory: Directory with land and water row runs.
+        directory: New directory for component streams and their report.
+        physical_code: Code to treat as connected, normally land (17).
+
+    Returns:
+        Report with grid, counts, output digests, and elapsed seconds.
+    """
     started = time.monotonic()
     physical_directory, directory = Path(physical_directory), Path(directory)
     directory.mkdir()
@@ -157,7 +222,7 @@ def build_components(grid, physical_directory, directory, *, physical_code=17):
         grid=vars(grid),
         physical_code=physical_code,
         output_sha256={
-            name: file_hash(directory / name) for name in ("rows.u32le", "runs.u32le")
+            name: sha256_file(directory / name) for name in ("rows.u32le", "runs.u32le")
         },
         processing_seconds=time.monotonic() - started,
     )

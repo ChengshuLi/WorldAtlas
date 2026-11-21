@@ -1,18 +1,32 @@
 """Resolve geographic selectors independently of ownership and distance policy."""
 
+from collections.abc import Callable, Iterator, Sequence
+from typing import Any
+
 import numpy as np
-from shapely.geometry import mapping, shape
 from shapely import union_all
+from shapely.geometry import mapping, shape
 
 from worldatlas.map_build.core.geometry import PolygonRasterizer
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.division.intervals import overlay, prepare
 from worldatlas.map_build.execution.control import check_cancelled
+from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.water.shared_nearest import crop
 
 
-def selected(values, identifiers):
+def selected(values: np.ndarray, identifiers: Sequence[int] | np.ndarray) -> np.ndarray:
+    """Check each value against a sorted list of IDs.
+
+    Args:
+        values: 1-D array of IDs to check.
+        identifiers: Sorted allowed IDs.
+
+    Returns:
+        Bool array marking allowed values in input order.
+    """
     identifiers = np.asarray(identifiers, dtype=np.uint32)
     if not len(identifiers):
         return np.zeros(len(values), dtype=bool)
@@ -21,8 +35,22 @@ def selected(values, identifiers):
     return (positions < len(identifiers)) & (identifiers[safe] == values)
 
 
-def complete_row(width, records):
-    """Fill gaps and coalesce sparse intervals without per-run Python appends."""
+def complete_row(
+    width: int, records: Sequence[tuple[int, int, int]] | np.ndarray
+) -> tuple[np.ndarray, np.ndarray]:
+    """Fill the gaps between sparse intervals with zero.
+
+    Args:
+        width: Number of cells in the row.
+        records: Ordered (first_column, end_column, code) records.
+
+    Returns:
+        Two uint32 arrays of exclusive end columns and codes. Adjacent
+        runs with the same code share one entry.
+
+    Raises:
+        ValueError: Records are malformed, overlap, or extend past the row.
+    """
     if not len(records):
         return np.array([width], dtype=np.uint32), np.array([0], dtype=np.uint32)
     items = np.asarray(records)
@@ -53,16 +81,39 @@ def complete_row(width, records):
 
 
 class Scope:
-    """Keep geometric construction context intact while filtering output cells.
+    """Prepare the geographic scope and eligible cells of one rule.
 
-    components(kind) returns the parent's physical ComponentGrid for land/water.
-    Geometry batches are ordinary streaming rasterization buffers, not resource
-    limits. Reference sets and component populations never use the ownership mask.
+    The geographic scope is where lines can divide the grid. A rule's class,
+    component selection, and previous owners determine which cells can receive
+    its assignment.
     """
 
     def __init__(
-        self, rule, grid, physical, parent, snapshot, components, *, connectivity=None
-    ):
+        self,
+        rule: dict[str, Any],
+        grid: Grid,
+        physical: tuple[np.ndarray, np.ndarray],
+        parent: tuple[np.ndarray, np.ndarray],
+        snapshot: tuple[np.ndarray, np.ndarray],
+        components: Callable[[str], ComponentGrid],
+        *,
+        connectivity: Callable[[str, bool], ComponentGrid] | None = None,
+    ) -> None:
+        """Resolve a rule's polygon and component selectors.
+
+        Args:
+            rule: Compiled rule with its scope features and output filters.
+            grid: Dimensions and coordinates of the build grid.
+            physical: Physical row offsets and run data.
+            parent: Row-run mask of the parent's cells.
+            snapshot: Ownership streams from before this rule group.
+            components: Look up the parent's land or water components by class.
+            connectivity: Optional lookup for the connected components in the rule's
+                eligible domain.
+
+        Raises:
+            ValueError: A scope point does not identify a compatible component.
+        """
         self.rule, self.grid = rule, grid
         self.physical, self.parent, self.snapshot = physical, parent, snapshot
         self.components = components
@@ -70,7 +121,7 @@ class Scope:
         self.connectivity_domain = None
         self.connected = None
         self.connectivity_receipt = []
-        self.points = {"land": set(), "water": set()}
+        point_roots: dict[str, set[int]] = {"land": set(), "water": set()}
         inputs = rule["features"]
         self.restricted = bool(
             inputs.get("scope_area") or inputs.get("scope_component")
@@ -79,7 +130,7 @@ class Scope:
         self.geometry = mapping(union_all(areas)) if areas else None
         self.bounds = (
             wrapped_grid_bounds(self.geometry, grid.width, grid.height, grid.step)[0]
-            if areas
+            if self.geometry is not None
             else None
         )
         self.batch = None
@@ -94,7 +145,8 @@ class Scope:
             self.parent_rows = int(first), int(last) + 1
         else:
             self.parent_rows = 0, 0
-        self._context_rows = self._query_rows = None
+        self._context_rows: tuple[int, int] | None = None
+        self._query_rows: tuple[int, int] | None = None
         for point in inputs.get("scope_component", ()):
             lon, lat = point["geometry"]["coordinates"]
             cell = grid.cell_at(lon, lat)
@@ -111,14 +163,19 @@ class Scope:
             root = components(kind).component_at(lon, lat)
             if root is None:
                 raise ValueError("scope component point is outside the parent")
-            self.points[kind].add(root)
+            point_roots[kind].add(root)
         self.points = {
             kind: np.asarray(sorted(roots), dtype=np.uint32)
-            for kind, roots in self.points.items()
+            for kind, roots in point_roots.items()
         }
+        self._query_roots: set[int]
 
-    def context_rows(self):
-        """Bound geometric context without applying ownership or physical filters."""
+    def context_rows(self) -> range:
+        """Find rows that can contain the rule's unfiltered geographic scope.
+
+        Returns:
+            Range of row indices, before filtering by class or current owner.
+        """
         if self._context_rows is None:
             ranges = []
             if not self.restricted:
@@ -141,8 +198,12 @@ class Scope:
             )
         return range(*self._context_rows)
 
-    def query_rows(self):
-        """Skip empty rows; majority-selected components keep their full extent."""
+    def query_rows(self) -> range:
+        """Find which rows may receive the rule's assignment.
+
+        Returns:
+            Range of row indices to check for eligible cells.
+        """
         if self._query_rows is None:
             if self.rule["unit"] == "cell" or not self.restricted:
                 rows = self.context_rows()
@@ -160,8 +221,16 @@ class Scope:
                 )
         return range(*self._query_rows)
 
-    def area_row(self, y):
-        if self.geometry is None:
+    def area_row(self, y: int) -> tuple[np.ndarray, np.ndarray]:
+        """Read the polygon coverage in one row, rasterizing a batch as needed.
+
+        Args:
+            y: Zero-based row index.
+
+        Returns:
+            Run ends and values as uint32 arrays. Value 1 marks a covered cell.
+        """
+        if self.geometry is None or self.bounds is None:
             return complete_row(self.grid.width, ())
         x0, x1, y0, y1 = self.bounds
         if not y0 <= y < y1:
@@ -177,11 +246,17 @@ class Scope:
             )
         return self.mask_row(self.batch[1][y - first])
 
-    def set_eligible_area(self, values, bounds):
-        """Reuse a complete area already clipped to physical class and parent.
+    def set_eligible_area(
+        self, values: np.ndarray, bounds: tuple[int, int, int, int]
+    ) -> None:
+        """Reuse an already rasterized scope, such as the water part of a basin.
 
-        This is an output-query representation, not geometric construction
-        context. Ownership filtering and connectivity remain separate.
+        Args:
+            values: Two-dimensional bool mask.
+            bounds: Grid window represented by the mask.
+
+        Raises:
+            ValueError: The supplied mask does not match this rule's area.
         """
         if (
             self.rule["unit"] != "cell"
@@ -193,7 +268,16 @@ class Scope:
             raise ValueError("prepared area does not represent this cell scope")
         self.eligible_area = values
 
-    def mask_row(self, values):
+    def mask_row(self, values: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """Convert a row of the scope mask to full-width runs.
+
+        Args:
+            values: Bool values in the polygon's window, which may wrap.
+
+        Returns:
+            Run ends and values as uint32 arrays, with zero beyond the mask.
+        """
+        assert self.bounds is not None
         x0, x1 = self.bounds[:2]
         records = []
         for a, b in ((x0, min(x1, self.grid.width)), (0, max(0, x1 - self.grid.width))):
@@ -207,7 +291,18 @@ class Scope:
             )
         return complete_row(self.grid.width, sorted(records))
 
-    def component_row(self, y, roots):
+    def component_row(
+        self, y: int, roots: dict[str, np.ndarray]
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """Mark cells in the selected physical components in one row.
+
+        Args:
+            y: Row index.
+            roots: Sorted component IDs for each physical class.
+
+        Returns:
+            Run ends and values as uint32 arrays. Selected cells have value 1.
+        """
         records = []
         for kind, ids in roots.items():
             if not len(ids):
@@ -227,7 +322,15 @@ class Scope:
             self.grid.width, parts[np.argsort(parts[:, 0], kind="stable")]
         )
 
-    def context_row(self, y):
+    def context_row(self, y: int) -> tuple[np.ndarray, np.ndarray]:
+        """Combine polygon and point-selected scope inside the parent.
+
+        Args:
+            y: Row index.
+
+        Returns:
+            Run ends and values as uint32 arrays. Value 1 marks the scope.
+        """
         if not self.restricted:
             return row(self.parent, y, self.grid.width)
         a, b, values = overlay(
@@ -241,7 +344,13 @@ class Scope:
             [(int(lo), int(hi), 1) for lo, hi, on in zip(a, b, mask) if on],
         )
 
-    def eligible_components(self):
+    def eligible_components(self) -> dict[str, np.ndarray]:
+        """Select whole components by point or majority polygon coverage.
+
+        Returns:
+            Physical classes mapped to sorted uint32 arrays of component IDs.
+            A polygon selects a component when it covers over half of its cells.
+        """
         if self.populations:
             return self.populations
         kinds = (
@@ -265,17 +374,24 @@ class Scope:
             self.populations[kind] = np.asarray(sorted(roots), dtype=np.uint32)
         return self.populations
 
-    def query_row(self, y):
+    def query_row(self, y: int) -> tuple[np.ndarray, np.ndarray]:
+        """Find the cells a rule can assign on a row.
+
+        Args:
+            y: Row index.
+
+        Returns:
+            Run ends and values as uint32 arrays. Value 1 marks eligible cells
+            after applying physical class, existing ownership, and connectivity.
+        """
         check_cancelled()
-        chosen = (
-            self.mask_row(self.eligible_area[y - self.bounds[2]])
-            if self.eligible_area is not None
-            else (
-                self.context_row(y)
-                if self.rule["unit"] == "cell" or not self.restricted
-                else self.component_row(y, self.eligible_components())
-            )
-        )
+        if self.eligible_area is not None:
+            assert self.bounds is not None
+            chosen = self.mask_row(self.eligible_area[y - self.bounds[2]])
+        elif self.rule["unit"] == "cell" or not self.restricted:
+            chosen = self.context_row(y)
+        else:
+            chosen = self.component_row(y, self.eligible_components())
         references = self.rule["features"].get("connected_to")
         if not references:
             if self.eligible_area is not None:
@@ -304,8 +420,8 @@ class Scope:
                 self.rule["physical_class"], self.rule["unassigned_only"]
             )
         data = self.connectivity_domain
-        # The shared domain already applies parent, physical and ownership
-        # eligibility. Intersect with geometry without filtering ownership again.
+        # The domain already contains only cells this rule can claim. Keep
+        # the cells that also lie within the selected polygon or component.
         a, b, (selected_scope, domain) = overlay(
             chosen, row(data.physical, y, self.grid.width)
         )
@@ -343,8 +459,18 @@ class Scope:
         a, b, (chosen, within) = overlay(eligible, connected)
         return complete_row(self.grid.width, np.column_stack((a, b, chosen & within)))
 
-    def query_windows(self, rows_per_batch=64):
-        """Yield row batches and disjoint dense windows without needless recoding."""
+    def query_windows(
+        self, rows_per_batch: int = 64
+    ) -> Iterator[tuple[int, int, list[tuple[int, int, np.ndarray]]]]:
+        """Read eligible cells in batches for nearest-shore calculations.
+
+        Args:
+            rows_per_batch: Number of rows to process together.
+
+        Yields:
+            (first_row, end_row, windows). Each window has its first column,
+            exclusive end column, and a 2-D bool mask.
+        """
         rows = self.query_rows()
         for first in range(rows.start, rows.stop, rows_per_batch):
             check_cancelled()
@@ -352,6 +478,7 @@ class Scope:
             if self.eligible_area is not None and not self.rule["features"].get(
                 "connected_to"
             ):
+                assert self.bounds is not None
                 x0, x1, y0, _ = self.bounds
                 windows = []
                 for left, right in (
@@ -393,10 +520,23 @@ class Scope:
                 masks.append(np.repeat(chosen != 0, np.diff(cuts)))
             yield first, last, [(left, right, np.asarray(masks, dtype=bool))]
 
-    def has_output(self):
+    def has_output(self) -> bool:
+        """Check whether a rule can claim any cell.
+
+        Returns:
+            True if any row contains eligible cells.
+        """
         return any(np.any(self.query_row(y)[1]) for y in self.query_rows())
 
-    def context_intervals(self, y):
+    def context_intervals(self, y: int) -> list[tuple[int, int]]:
+        """Read the parts of a row available for boundary division.
+
+        Args:
+            y: Row index.
+
+        Returns:
+            (first_column, end_column) spans in the geographic scope.
+        """
         ends, values = self.context_row(y)
         starts = np.r_[0, ends[:-1]]
         return [(int(a), int(b)) for a, b, v in zip(starts, ends, values) if v]

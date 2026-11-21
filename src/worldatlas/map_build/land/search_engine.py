@@ -1,13 +1,27 @@
 """Stream complete current components through certificates and exact WGS84 search."""
 
+from collections.abc import Callable, Iterator, Sequence
 from pathlib import Path
+
 import numpy as np
+from numpy.typing import ArrayLike
 
 from worldatlas.map_build.execution.control import check_cancelled
+from worldatlas.map_build.land.certificates import CertificateIndex
+from worldatlas.map_build.land.exact_search import ExactIndex
 
 
-def positions(ids, roots):
-    """Select query roots; other valid parent components are not query inputs."""
+def positions(ids: np.ndarray, roots: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Find selected component IDs in a sorted reference array.
+
+    Args:
+        ids: Component IDs to check.
+        roots: Sorted IDs of the components being assigned.
+
+    Returns:
+        (positions, found), with the insertion index and a bool match flag
+        for each input ID.
+    """
     if not len(roots):
         return np.zeros(len(ids), dtype=np.int64), np.zeros(len(ids), dtype=bool)
     pos = np.searchsorted(roots, ids)
@@ -15,7 +29,26 @@ def positions(ids, roots):
     return pos, (pos < len(roots)) & (roots[safe] == ids)
 
 
-def blocks(path, cursor=0, block_records=100000, guard=check_cancelled):
+def blocks(
+    path: Path | str,
+    cursor: int = 0,
+    block_records: int = 100000,
+    guard: Callable[[], None] = check_cancelled,
+) -> Iterator[tuple[int, np.ndarray]]:
+    """Read component runs without loading the entire file at once.
+
+    Args:
+        path: Little-endian uint32 component run file.
+        cursor: First run record index to read.
+        block_records: Maximum records to read together.
+        guard: Cancellation callback before each read.
+
+    Yields:
+        (first_record, array), with N-by-3 records of (start, end, component_id).
+
+    Raises:
+        ValueError: The cursor or file length is invalid.
+    """
     size = Path(path).stat().st_size
     if size % 12 or cursor < 0 or cursor > size // 12 or block_records < 1:
         raise ValueError("invalid component stream/cursor")
@@ -34,7 +67,25 @@ def blocks(path, cursor=0, block_records=100000, guard=check_cancelled):
             off += len(a)
 
 
-def first_points(path, co, roots, width, guard=check_cancelled):
+def first_points(
+    path: Path | str,
+    co: np.ndarray,
+    roots: ArrayLike,
+    width: int,
+    guard: Callable[[], None] = check_cancelled,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Find the first cell of each selected component.
+
+    Args:
+        path: Component run file.
+        co: Row offsets into the run file.
+        roots: Component IDs to locate.
+        width: Number of columns.
+        guard: Cancellation callback.
+
+    Returns:
+        Arrays of row and column indices in component order.
+    """
     roots = np.asarray(roots, dtype=np.uint32)
     ys = np.full(len(roots), -1, dtype=np.int32)
     xs = np.full(len(roots), -1, dtype=np.int32)
@@ -60,14 +111,28 @@ def first_points(path, co, roots, width, guard=check_cancelled):
     return ys, xs
 
 
-def component_witnesses(path, co, roots, width, index, hints, guard=check_cancelled):
-    """Tighten each component upper bound with actual cells across its extent.
+def component_witnesses(
+    path: Path | str,
+    co: np.ndarray,
+    roots: np.ndarray,
+    width: int,
+    index: CertificateIndex,
+    hints: np.ndarray,
+    guard: Callable[[], None] = check_cancelled,
+) -> np.ndarray:
+    """Tighten distance bounds using actual cells in the selected components.
 
-    A component's first northern cell can be far from its closest mainland.
-    Batched endpoint witnesses cost far less than proving a loose first-cell
-    bound against every run of a large island. These samples are upper bounds,
-    never decisions: both endpoints are actual component cells and every chosen
-    mainland representative has already been independently authenticated.
+    Args:
+        path: Component run file.
+        co: Row offsets into the run file.
+        roots: Selected component IDs.
+        width: Grid width in cells.
+        index: Index of representative reference cells.
+        hints: Candidate owner per selected component.
+        guard: Cancellation callback.
+
+    Returns:
+        1-D array with one distance bound in metres per selected component.
     """
     roots = np.asarray(roots, dtype=np.uint32)
     hints = np.asarray(hints, dtype=np.uint32)
@@ -104,8 +169,29 @@ def component_witnesses(path, co, roots, width, index, hints, guard=check_cancel
     return upper
 
 
-def oversized_run_queries(a, base, co, pos, index, chunk, max_queries):
-    """Stream one very long valid run without rejecting or dropping chunks."""
+def oversized_run_queries(
+    a: np.ndarray,
+    base: int,
+    co: np.ndarray,
+    pos: np.ndarray,
+    index: int,
+    chunk: int,
+    max_queries: int,
+) -> Iterator[tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
+    """Split one long component run into batches of smaller query intervals.
+
+    Args:
+        a: Block of component run records.
+        base: Index of the block's first record in the file.
+        co: Row offsets into the run file.
+        pos: Index of each input run's component in the selected roots.
+        index: Run index within the block.
+        chunk: Maximum length of a query interval, in cells.
+        max_queries: Number of intervals to emit together.
+
+    Yields:
+        Arrays of rows, first columns, end columns and component positions.
+    """
     start = int(a[index, 0])
     end = int(a[index, 1])
     row = int(np.searchsorted(co, base + index, side="right") - 1)
@@ -123,13 +209,38 @@ def oversized_run_queries(a, base, co, pos, index, chunk, max_queries):
         start = int(ends[-1])
 
 
-def expanded(a, base, co, roots, chunk=1024, max_queries=65536):
+def expanded(
+    a: np.ndarray,
+    base: int,
+    co: np.ndarray,
+    roots: np.ndarray,
+    chunk: int = 1024,
+    max_queries: int = 65536,
+    *,
+    ambiguous: np.ndarray | None = None,
+) -> Iterator[tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
+    """Split the selected runs into bounded length query intervals.
+
+    Args:
+        a: N-by-3 block of component runs.
+        base: Index of the first record in the file.
+        co: Row offsets into the run file.
+        roots: Sorted component IDs to search.
+        chunk: Maximum length of each interval in cells.
+        max_queries: Number of intervals to process per batch.
+        ambiguous: Optional mask limiting queries to unresolved components.
+
+    Yields:
+        Arrays of rows, first columns, end columns and selected component positions.
+    """
     if not (1 <= chunk <= 1024 and max_queries >= 128):
         raise ValueError("invalid query chunk")
     if np.any(a[:, 0] >= a[:, 1]):
         raise ValueError("bad component interval")
     pos, match = positions(a[:, 2], roots)
     idx = np.flatnonzero(match)
+    if ambiguous is not None:
+        idx = idx[ambiguous[pos[idx]]]
     last = 0
     # Process entire input block; each yielded query group is bounded.
     while last < len(idx):
@@ -160,66 +271,39 @@ def expanded(a, base, co, roots, chunk=1024, max_queries=65536):
         last += n
 
 
-def expanded_ambiguous(a, base, co, roots, amb, chunk=1024, max_queries=65536):
-    """Expand only runs belonging to components that need exact search.
-
-    The exact pass still validates every label in each source block, but most
-    component runs are already certified. Filtering before chunk expansion avoids
-    allocating query arrays for those irrelevant runs.
-    """
-    if not (1 <= chunk <= 1024 and max_queries >= 128):
-        raise ValueError("invalid query chunk")
-    if np.any(a[:, 0] >= a[:, 1]):
-        raise ValueError("bad component interval")
-    pos, match = positions(a[:, 2], roots)
-    chosen = np.flatnonzero(match)
-    if len(chosen):
-        chosen = chosen[np.asarray(amb, dtype=bool)[pos[chosen]]]
-    last = 0
-    while last < len(chosen):
-        lengths = a[chosen[last:], 1].astype(np.int64) - a[chosen[last:], 0].astype(
-            np.int64
-        )
-        counts = (lengths + chunk - 1) // chunk
-        if counts[0] > max_queries:
-            yield from oversized_run_queries(
-                a, base, co, pos, int(chosen[last]), chunk, max_queries
-            )
-            last += 1
-            continue
-        cum = np.cumsum(counts)
-        n = max(1, int(np.searchsorted(cum, max_queries, side="right")))
-        run_ix = chosen[last : last + n]
-        cc = counts[:n]
-        repeat = np.repeat(np.arange(n), cc)
-        within = np.arange(len(repeat)) - np.repeat(np.cumsum(cc) - cc, cc)
-        start = a[run_ix[repeat], 0].astype(np.int64) + within * chunk
-        end = np.minimum(a[run_ix[repeat], 1].astype(np.int64), start + chunk)
-        p = pos[run_ix[repeat]]
-        rows = np.searchsorted(co, base + run_ix[repeat], side="right") - 1
-        yield (
-            rows.astype(np.int32),
-            start.astype(np.int32),
-            end.astype(np.int32),
-            p.astype(np.int64),
-        )
-        last += n
-
-
 def certificate_pass(
-    path,
-    co,
-    roots,
-    index,
-    upper,
-    hints,
-    amb,
-    cursor=0,
-    chunk=1024,
-    guard=check_cancelled,
-    progress=lambda *x: None,
-    block_records=100000,
-):
+    path: Path | str,
+    co: np.ndarray,
+    roots: np.ndarray,
+    index: CertificateIndex,
+    upper: np.ndarray,
+    hints: np.ndarray,
+    amb: np.ndarray,
+    cursor: int = 0,
+    chunk: int = 1024,
+    guard: Callable[[], None] = check_cancelled,
+    progress: Callable[..., None] = lambda *x: None,
+    block_records: int = 100000,
+) -> tuple[np.ndarray, int, int]:
+    """Try to prove the candidate owner for every run of each component.
+
+    Args:
+        path: Component run file.
+        co: Row offsets into the run file.
+        roots: Sorted IDs of the selected components.
+        index: Index for bounding distances to reference cells.
+        upper: Measured upper distance bound per component, in metres.
+        hints: Candidate owner per component.
+        amb: Bool array to mark when a component needs exact search.
+        cursor: First run record index to read.
+        chunk: Maximum size of an interval, in cells.
+        guard: Cancellation callback.
+        progress: Optional progress callback.
+        block_records: Input run records per read.
+
+    Returns:
+        (ambiguity_mask, tested_interval_count, end_record_index).
+    """
     roots = np.asarray(roots, dtype=np.uint32)
     upper = np.asarray(upper, dtype=float)
     hints = np.asarray(hints, dtype=np.uint32)
@@ -246,19 +330,38 @@ def certificate_pass(
 
 
 def exact_pass(
-    path,
-    co,
-    roots,
-    index,
-    hints,
-    amb,
-    best,
-    cursor=0,
-    chunk=1024,
-    guard=check_cancelled,
-    progress=lambda *x: None,
-    block_records=10000,
-):
+    path: Path | str,
+    co: np.ndarray,
+    roots: np.ndarray,
+    index: ExactIndex,
+    hints: np.ndarray,
+    amb: np.ndarray,
+    best: np.ndarray,
+    cursor: int = 0,
+    chunk: int = 1024,
+    guard: Callable[[], None] = check_cancelled,
+    progress: Callable[..., None] = lambda *x: None,
+    block_records: int = 10000,
+) -> tuple[np.ndarray, int, int]:
+    """Find exact WGS84 distance minima for the components still unresolved.
+
+    Args:
+        path: Component run file.
+        co: Row offsets into the run file.
+        roots: Sorted component IDs.
+        index: Complete reference run index.
+        hints: Candidate owners.
+        amb: Bool array marking components needing exact distances.
+        best: Component-by-owner distance minima to update, in metres.
+        cursor: First input run record to process.
+        chunk: Maximum query interval length in cells.
+        guard: Cancellation callback.
+        progress: Optional progress callback.
+        block_records: Input run records per read.
+
+    Returns:
+        (distance_minima, tested_interval_count, end_record_index).
+    """
     roots = np.asarray(roots, dtype=np.uint32)
     hints = np.asarray(hints, dtype=np.uint32)
     amb = np.asarray(amb, dtype=bool)
@@ -268,14 +371,13 @@ def exact_pass(
         or best.shape != (len(roots), len(index.codes))
     ):
         raise ValueError("bad exact state")
-    if np.any(
-        ~np.isfinite(best[np.arange(len(roots)), np.searchsorted(index.codes, hints)])
-    ):
+    columns, found = positions(hints, np.asarray(index.codes, dtype=np.uint32))
+    if not found.all() or not np.isfinite(best[np.arange(len(roots)), columns]).all():
         raise ValueError("missing real upper witness")
     count = 0
     endcursor = cursor
     for off, a in blocks(path, cursor, block_records, guard):
-        for ys, xs, ends, pos in expanded_ambiguous(a, off, co, roots, amb, chunk):
+        for ys, xs, ends, pos in expanded(a, off, co, roots, chunk, ambiguous=amb):
             for i in range(len(pos)):
                 guard()
                 p = int(pos[i])
@@ -294,8 +396,30 @@ def exact_pass(
     return best, count, endcursor
 
 
-def finalize(hints, amb, best, category_codes, *, priority_codes=None):
-    """Choose the actual minimum; exact equality uses the first ordered code."""
+def finalize(
+    hints: np.ndarray,
+    amb: np.ndarray,
+    best: np.ndarray,
+    category_codes: ArrayLike,
+    *,
+    priority_codes: Sequence[int] | None = None,
+) -> np.ndarray:
+    """Keep proven owners and choose the shortest exact distance for the rest.
+
+    Args:
+        hints: Initial owner code per component.
+        amb: Bool array marking components that need exact results.
+        best: Component-by-owner matrix of measured distances in metres.
+        category_codes: Owner codes in the order of the distance columns.
+        priority_codes: Optional tie order. The first owner wins when the
+            measured distances are equal.
+
+    Returns:
+        Owner code array in component order.
+
+    Raises:
+        ValueError: The inputs disagree or an unresolved component has no distance.
+    """
     hints = np.asarray(hints, dtype=np.uint32)
     amb = np.asarray(amb, dtype=bool)
     categories = np.asarray(category_codes, dtype=np.uint32)

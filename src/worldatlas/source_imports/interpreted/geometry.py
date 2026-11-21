@@ -1,7 +1,7 @@
 """Import explicitly interpreted points and scope areas from cataloged sources."""
 
 import time
-from typing import Literal, TypedDict
+from typing import Any, Literal, TypedDict
 
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
@@ -35,7 +35,7 @@ def interpreted_geometry(
     *,
     source_ids: list[SourceId],
     selections: list[Selection],
-):
+) -> dict[str, Any]:
     """Store reviewed label points and computation scopes from the recipe.
 
     Args:
@@ -51,7 +51,9 @@ def interpreted_geometry(
             features cannot be saved for the current recipe.
     """
     if not source_ids or len(set(source_ids)) != len(source_ids):
-        raise ValueError("interpreted geometry needs a nonempty list of distinct source IDs")
+        raise ValueError(
+            "interpreted geometry needs a nonempty list of distinct source IDs"
+        )
     if not selections:
         raise ValueError("interpreted geometry needs at least one selection")
 

@@ -1,13 +1,19 @@
 """Validate and save constructed features in Neon."""
 
 import re
+from collections.abc import Mapping, Sequence
+from pathlib import Path
+from typing import Any
 
+from psycopg import Connection
 from psycopg.types.json import Jsonb
+
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.recipe_types import NONBLANK_PATTERN
+from worldatlas.source_imports.shared.runtime import Runtime
 
 
-def save_features(runtime, features):
+def save_features(runtime: Runtime, features: Sequence[Mapping[str, Any]]) -> list[str]:
     """Save one construction batch while its recipe is locked for reading.
 
     PostgreSQL's FOR SHARE row lock prevents edits to the recipe until the
@@ -36,7 +42,9 @@ def save_features(runtime, features):
         return _write_features(database, features, construction_id=runtime.recipe_id)
 
 
-def _write_features(database, features, *, construction_id):
+def _write_features(
+    database: Connection, features: Sequence[Mapping[str, Any]], *, construction_id: str
+) -> list[str]:
     """Write the complete batch atomically on the supplied connection.
 
     Args:
@@ -50,8 +58,10 @@ def _write_features(database, features, *, construction_id):
     identifiers = [feature["feature_id"] for feature in features]
     if (
         not identifiers
-        or any(not isinstance(ident, str) or not re.search(NONBLANK_PATTERN, ident)
-               for ident in identifiers)
+        or any(
+            not isinstance(ident, str) or not re.search(NONBLANK_PATTERN, ident)
+            for ident in identifiers
+        )
         or len(set(identifiers)) != len(identifiers)
     ):
         raise ValueError("feature IDs must be nonempty and unique")
@@ -73,7 +83,13 @@ def _write_features(database, features, *, construction_id):
     return identifiers
 
 
-def feature_result(feature_ids, elapsed, *, download_seconds=0.0, source=None):
+def feature_result(
+    feature_ids: list[str],
+    elapsed: float,
+    *,
+    download_seconds: float = 0.0,
+    source: Path | str | None = None,
+) -> dict[str, Any]:
     """Summarize the features, files, and timings of an import.
 
     Args:
@@ -85,7 +101,7 @@ def feature_result(feature_ids, elapsed, *, download_seconds=0.0, source=None):
     Returns:
         The JSON-serializable result reported by the import command.
     """
-    result = {"feature_ids": feature_ids}
+    result: dict[str, Any] = {"feature_ids": feature_ids}
     if source is not None:
         result["source"] = str(source)
     result["timing"] = {

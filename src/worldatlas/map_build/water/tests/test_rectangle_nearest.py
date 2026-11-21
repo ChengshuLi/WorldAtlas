@@ -1,10 +1,78 @@
 import unittest
+from unittest.mock import patch
 import numpy as np
 from worldatlas.map_build.water import rectangle_nearest as r
 from worldatlas.map_build.water import shared_nearest as s
 
 
 class RectangleNearest(unittest.TestCase):
+    def test_empty_selection_needs_no_point_calculations(self):
+        def unused(*_):
+            self.fail("empty selection called the point classifier")
+
+        result, totals = r.classify(
+            np.zeros((2, 3), dtype=bool), 0, 0, (0, 360, 0, 180),
+            360, 180, 1, [], {}, unused, band=22224,
+        )
+        self.assertFalse(result.any())
+        self.assertFalse(any(totals.values()))
+
+    def test_rejects_inconsistent_rectangle_inputs(self):
+        valid = dict(
+            water=np.ones((2, 3), dtype=bool), x0=0, y0=0,
+            bounds=(0, 360, 0, 180), width=360, height=180,
+            step=1, pairs=[("a", 1, 1), ("b", 2, 2)], indexes={},
+            point_classifier=lambda *_: self.fail("validation was skipped"),
+        )
+        for definitions, error in (
+            (dict(water=np.ones((2, 3))), "boolean selection grid required"),
+            (dict(pairs=[("a", 1, 1), ("b", 1, 2)]), "invalid participant classes"),
+            (dict(x0=359), "invalid grid or classifier"),
+            (dict(band=-1), "invalid coastal band"),
+            (dict(bounds=(0, 360)), "invalid crop"),
+            (dict(bounds=(0, 361, 0, 180)), "invalid crop"),
+            (dict(y0=181, height=184), "query latitude outside globe"),
+        ):
+            with self.subTest(definitions=definitions):
+                with self.assertRaisesRegex(ValueError, error):
+                    r.classify(**(valid | definitions))
+
+    def test_rectangle_requires_one_valid_point_result_per_uncertain_cell(self):
+        with self.assertRaisesRegex(ValueError, "invalid point classifier result"):
+            r.classify(
+                np.ones((1, 1), dtype=bool), 180, 89, (180, 360, 0, 180),
+                360, 180, 1, [("shore", 17, 1)], {}, lambda *_: ([99], 1, 0),
+                band=100000,
+            )
+
+    def test_unbounded_cells_use_point_search_if_rectangle_index_is_incomplete(self):
+        result, stats = r.classify(
+            np.ones((1, 2), dtype=bool), 180, 89, (180, 360, 0, 180),
+            360, 180, 1, [("east", 17, 1), ("west", 18, 2)], {},
+            lambda lat, lon: (np.full(lat.shape, 2), 0, len(lat)),
+        )
+        self.assertEqual(result.tolist(), [[2, 2]])
+        self.assertEqual(stats["exact_cells"], 2)
+
+    def test_incomplete_rectangle_search_never_publishes_codes(self):
+        pairs = [(1, 17, 1), (2, 18, 2)]
+        lat, lon = np.array([0, 0]), np.array([-5, 5])
+        indexes = s.make_indexes(
+            dict(lat=lat, lon=lon, category=np.array([17, 18]), mids=s.unit(lat, lon)),
+            pairs,
+        )
+        settings = (
+            np.ones((4, 4), dtype=bool), 179, 85, (0, 360, 0, 180),
+            360, 180, 1, pairs, indexes,
+            lambda *_: self.fail("should fail before classifying individual cells"),
+        )
+        with patch.object(s, "exact_minima_by_ordered_chord", return_value=np.array([np.inf])):
+            with self.assertRaisesRegex(RuntimeError, "invalid exact rectangle distances"):
+                r.classify(*settings, block=4)
+        with patch.object(r, "rectangle_counts", return_value=lambda a, *_: np.zeros_like(a)):
+            with self.assertRaisesRegex(RuntimeError, "rectangle classification accounting mismatch"):
+                r.classify(*settings, block=4)
+
     def test_block_counts_match_direct_sums_including_partial_edges(self):
         rng = np.random.default_rng(1729)
         for shape, block in (

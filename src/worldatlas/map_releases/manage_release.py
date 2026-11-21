@@ -6,27 +6,30 @@ Restore extracts the saved inputs for a separate map build.
 """
 
 import argparse
-from contextlib import closing
 import gzip
 import hashlib
-import json
 import mimetypes
 import os
-from pathlib import Path
 import re
 import shutil
 import tempfile
+from contextlib import closing
+from pathlib import Path
+from typing import Any, Literal, overload
 
+import psycopg
+from botocore.client import BaseClient
 from botocore.exceptions import ClientError
 from psycopg.conninfo import conninfo_to_dict
-import psycopg
 
-from worldatlas.map_build.execution.runtime import digest, json_bytes, pin, verify_pins
+from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.execution.code_archive import read_source
 from worldatlas.map_build.inputs.selection import (
-    entity_colors,
     canonical_bytes,
+    entity_colors,
     validate_bindings,
 )
+from worldatlas.map_build.physical import build as physical
 from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
     lookup_release,
@@ -37,14 +40,20 @@ from worldatlas.map_releases.catalog import (
 )
 from worldatlas.map_releases.inputs import (
     FILENAME as INPUTS_FILE,
+)
+from worldatlas.map_releases.inputs import (
     read_inputs,
     restore_inputs,
     validate_replay_sources,
     write_inputs,
 )
-from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.execution.code_archive import read_source
-from worldatlas.map_build.physical import build as physical
+from worldatlas.shared.files import (
+    json_bytes,
+    pin_file,
+    read_json,
+    sha256_file,
+    verify_pins,
+)
 
 STREAMS = ("rows", "runs")
 CANDIDATE = re.compile(r"(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*")
@@ -53,7 +62,7 @@ HOMEPAGE = "index.html"
 MEDIA_TYPES = mimetypes.MimeTypes()
 
 
-def version(candidate):
+def version(candidate: str) -> str:
     """Get the map version from a numbered release candidate.
 
     Args:
@@ -71,23 +80,7 @@ def version(candidate):
     return match["version"]
 
 
-def read(path):
-    """Read a local JSON file used by release packaging.
-
-    Args:
-        path: Path to the JSON file.
-
-    Returns:
-        The parsed JSON value.
-
-    Raises:
-        OSError: The file could not be opened or read.
-        ValueError: The file does not contain valid JSON.
-    """
-    return json.loads(path.read_bytes())
-
-
-def release_categories(selection):
+def release_categories(selection: dict[str, Any]) -> list[dict[str, Any]]:
     """Build the viewer's category records from the build's frozen geography.
 
     Args:
@@ -128,7 +121,9 @@ def release_categories(selection):
     return categories
 
 
-def build_bundle(candidate, run, viewer, bundle):
+def build_bundle(
+    candidate: str, run: Path, viewer: Path, bundle: Path
+) -> dict[str, Any]:
     """Package a completed build and its captured inputs in a local directory.
 
     Args:
@@ -144,7 +139,7 @@ def build_bundle(candidate, run, viewer, bundle):
         ValueError: The build is incomplete, a pinned input or output differs,
             or a release asset fails validation.
     """
-    report = read(run / "report.json")
+    report = read_json(run / "report.json")
     if (
         report.get("schema") != "worldatlas-end-to-end-report-v2"
         or report.get("status") != "complete"
@@ -155,9 +150,9 @@ def build_bundle(candidate, run, viewer, bundle):
     ):
         raise ValueError("a completed map build is required")
     identity_pin = report["original_run_identity"]
-    if identity_pin != pin(run / "run-identity.json"):
+    if identity_pin != pin_file(run / "run-identity.json"):
         raise ValueError("build identity does not match the report")
-    identity = read(run / "run-identity.json")
+    identity = read_json(run / "run-identity.json")
     request_pin = report["request"]
     if request_pin != identity["request"]:
         raise ValueError("build configuration does not match the run")
@@ -178,16 +173,16 @@ def build_bundle(candidate, run, viewer, bundle):
             )
     # The build already validated the rules. Packaging uses the frozen selection
     # as provenance and reads the category bindings needed by the viewer.
-    selection = read(run / "input-selection.json")
+    selection = read_json(run / "input-selection.json")
     if (
         hashlib.sha256(canonical_bytes(selection)).hexdigest()
         != identity["input_selection_sha256"]
     ):
         raise ValueError("the saved geographic selection changed after the build")
 
-    request = read(Path(request_pin["path"]))
-    validate_replay_sources(request, selection, identity.get("source_pins", ()))
-    summary = read(final_directory / "report.json")
+    request = read_json(Path(request_pin["path"]))
+    validate_replay_sources(request, selection)
+    summary = read_json(final_directory / "report.json")
     grid = vars(Grid(**summary["grid"]))
     counts = summary["counts"]
     if sum(counts.values()) != grid["width"] * grid["height"]:
@@ -201,10 +196,12 @@ def build_bundle(candidate, run, viewer, bundle):
     attempts, source_code = [], {}
     for producer in sorted((run / "attempts").glob("*/producer.json")):
         attempt_id = producer.parent.name
-        attempt = read(producer)
+        attempt = read_json(producer)
         source = attempt.get("source_archive")
         if not source:
-            raise ValueError(f"build attempt {attempt_id} has no captured code snapshot")
+            raise ValueError(
+                f"build attempt {attempt_id} has no captured code snapshot"
+            )
         if (
             Path(source["path"]).resolve()
             != (producer.parent / "source-code.json.gz").resolve()
@@ -264,14 +261,19 @@ def build_bundle(candidate, run, viewer, bundle):
                 checksum.update(chunk)
                 combined.update(chunk)
                 compressed.write(chunk)
-        if size != stream_sizes[stream] or checksum.hexdigest() != final[stream]["sha256"]:
-            raise ValueError(f"{stream} size or checksum differs from the completed build")
+        if (
+            size != stream_sizes[stream]
+            or checksum.hexdigest() != final[stream]["sha256"]
+        ):
+            raise ValueError(
+                f"{stream} size or checksum differs from the completed build"
+            )
         decoded[stream] = checksum.hexdigest()
         grid_config[stream] = output.name
         grid_config[stream + "_sha256"] = decoded[stream]
 
     config = bundle / "config.json"
-    viewer_config = read(config)
+    viewer_config = read_json(config)
     # A mixed entity has separate land and water codes but one legend entry.
     # Add the counts for both codes and use the entity's land color in the legend.
     legend = {}
@@ -321,7 +323,7 @@ def build_bundle(candidate, run, viewer, bundle):
     objects = {
         path.relative_to(bundle).as_posix(): {
             "r2_key": release_prefix(candidate) + path.relative_to(bundle).as_posix(),
-            "sha256": digest(path),
+            "sha256": sha256_file(path),
             "size_bytes": path.stat().st_size,
             "content_type": (
                 "application/gzip"
@@ -332,10 +334,45 @@ def build_bundle(candidate, run, viewer, bundle):
         for path in sorted(bundle.rglob("*"))
         if path.is_file()
     }
-    return {"inputs": {"archive": INPUTS_FILE}, "decoded_sha256": decoded, "objects": objects}
+    return {
+        "inputs": {"archive": INPUTS_FILE},
+        "decoded_sha256": decoded,
+        "objects": objects,
+    }
 
 
-def verify_object(storage, bucket, key, expected, *, return_bytes=False):
+@overload
+def verify_object(
+    storage: BaseClient,
+    bucket: str,
+    key: str,
+    expected: dict[str, Any],
+    *,
+    return_bytes: Literal[True],
+) -> bytes:
+    """Return the verified object's bytes."""
+
+
+@overload
+def verify_object(
+    storage: BaseClient,
+    bucket: str,
+    key: str,
+    expected: dict[str, Any],
+    *,
+    return_bytes: Literal[False] = False,
+) -> None:
+    """Verify the object without keeping its bytes."""
+
+
+def verify_object(
+    storage: BaseClient,
+    bucket: str,
+    key: str,
+    expected: dict[str, Any],
+    *,
+    return_bytes: bool = False,
+) -> bytes | None:
     """Verify an R2 object's size, content type, encoding, and checksum.
 
     Args:
@@ -363,7 +400,7 @@ def verify_object(storage, bucket, key, expected, *, return_bytes=False):
         data = body.read() if return_bytes else None
         checksum = (
             hashlib.sha256(data)
-            if return_bytes
+            if data is not None
             else hashlib.file_digest(body, "sha256")
         )
     if checksum.hexdigest() != expected["sha256"]:
@@ -371,7 +408,9 @@ def verify_object(storage, bucket, key, expected, *, return_bytes=False):
     return data
 
 
-def upload_bundle(storage, bucket, bundle, manifest):
+def upload_bundle(
+    storage: BaseClient, bucket: str, bundle: Path, manifest: dict[str, Any]
+) -> None:
     """Upload and verify the release assets listed in a prepared manifest.
 
     Args:
@@ -403,7 +442,9 @@ def upload_bundle(storage, bucket, bundle, manifest):
         verify_object(storage, bucket, key, asset)
 
 
-def retire_previews(db, storage, map_version):
+def retire_previews(
+    db: psycopg.Connection, storage: BaseClient, map_version: str
+) -> list[str]:
     """Remove previews, including partial uploads, after a version is official.
 
     Args:
@@ -475,7 +516,9 @@ def retire_previews(db, storage, map_version):
     return sorted(retired)
 
 
-def put_homepage(storage, bucket, key, html, **condition):
+def put_homepage(
+    storage: BaseClient, bucket: str, key: str, html: bytes, **condition: str
+) -> None:
     """Serve the released HTML at the homepage key with cache revalidation.
 
     Args:
@@ -498,7 +541,7 @@ def put_homepage(storage, bucket, key, html, **condition):
     )
 
 
-def homepage_condition(storage, bucket):
+def homepage_condition(storage: BaseClient, bucket: str) -> dict[str, str]:
     """Get the precondition for replacing or creating the homepage object.
 
     Args:
@@ -520,7 +563,7 @@ def homepage_condition(storage, bucket):
         return {"IfNoneMatch": "*"}
 
 
-def official_candidate(db, map_version):
+def official_candidate(db: psycopg.Connection, map_version: str) -> str | None:
     """Return the selected candidate ID for a map version, if one is official.
 
     Args:
@@ -537,7 +580,13 @@ def official_candidate(db, map_version):
     return row[0] if row else None
 
 
-def stage(db, storage, candidate, bundle, manifest):
+def stage(
+    db: psycopg.Connection,
+    storage: BaseClient,
+    candidate: str,
+    bundle: Path,
+    manifest: dict[str, Any],
+) -> None:
     """Upload a numbered preview and register its manifest in the catalog.
 
     Args:
@@ -554,7 +603,9 @@ def stage(db, storage, candidate, bundle, manifest):
     """
     selected = official_candidate(db, version(candidate))
     if selected is not None and selected != candidate:
-        raise ValueError(f"{selected} is already official; stage the preview under a new map version")
+        raise ValueError(
+            f"{selected} is already official; stage the preview under a new map version"
+        )
     validate_manifest(manifest, candidate)
     if INPUTS_FILE not in manifest["objects"]:
         raise ValueError("release has no frozen input archive")
@@ -568,7 +619,7 @@ def stage(db, storage, candidate, bundle, manifest):
     if row is not None and row != identity:
         raise ValueError("that candidate already exists with different contents")
     upload_bundle(storage, RELEASE_BUCKET, bundle, manifest)
-    asset = dict(
+    asset: dict[str, Any] = dict(
         r2_key=release_prefix(candidate) + "manifest.json",
         sha256=checksum,
         size_bytes=len(data),
@@ -595,7 +646,7 @@ def stage(db, storage, candidate, bundle, manifest):
         )
 
 
-def publish(db, storage, candidate):
+def publish(db: psycopg.Connection, storage: BaseClient, candidate: str) -> bool:
     """Publish an approved candidate or finish cleanup for an older release.
 
     Args:
@@ -620,7 +671,9 @@ def publish(db, storage, candidate):
         raise ValueError("this version already has a different official candidate")
     bucket = release["r2_bucket"]
     if bucket != RELEASE_BUCKET:
-        raise ValueError(f"the website serves releases from the {RELEASE_BUCKET!r} bucket")
+        raise ValueError(
+            f"the website serves releases from the {RELEASE_BUCKET!r} bucket"
+        )
     manifest = read_manifest(storage, release)
     if INPUTS_FILE not in manifest["objects"]:
         raise ValueError("release has no frozen input archive")
@@ -650,7 +703,7 @@ def publish(db, storage, candidate):
     return True
 
 
-def main():
+def main() -> None:
     """Run the requested release operation and print its result.
 
     Stage prepares a local bundle before taking the shared release lock.
@@ -674,13 +727,18 @@ def main():
     if not (connection := os.environ.get("NEON_DATABASE_URL")):
         parser.error("set NEON_DATABASE_URL to the release catalog database")
 
-    if args.action != "restore-inputs" and "-pooler." in conninfo_to_dict(connection).get("host", ""):
+    if args.action != "restore-inputs" and "-pooler." in str(
+        conninfo_to_dict(connection).get("host", "")
+    ):
         parser.error("use a direct Neon connection for the release lock")
 
     with tempfile.TemporaryDirectory() as temp:
         bundle = Path(temp)
+        manifest = None
         if args.action == "stage":
-            manifest = build_bundle(args.candidate, args.run.resolve(), args.viewer.resolve(), bundle)
+            manifest = build_bundle(
+                args.candidate, args.run.resolve(), args.viewer.resolve(), bundle
+            )
         with (
             psycopg.connect(connection, autocommit=True) as db,
             closing(physical.make_r2_client(release_endpoint())) as storage,
@@ -691,7 +749,13 @@ def main():
                 asset = saved["objects"].get(INPUTS_FILE)
                 if asset is None:
                     raise ValueError("release has no input archive")
-                raw = verify_object(storage, release["r2_bucket"], asset["r2_key"], asset, return_bytes=True)
+                raw = verify_object(
+                    storage,
+                    release["r2_bucket"],
+                    asset["r2_key"],
+                    asset,
+                    return_bytes=True,
+                )
                 restore_inputs(
                     read_inputs(raw, saved["inputs"].get("release_id", release["id"])),
                     args.output,
@@ -700,7 +764,7 @@ def main():
                 return
             # Stage and publish share a lock so preview retirement cannot race an upload.
             db.execute("SELECT pg_advisory_lock(hashtext('atlas.release_publication'))")
-            if args.action == "stage":
+            if manifest is not None:
                 stage(db, storage, args.candidate, bundle, manifest)
                 print(f"Preview: /{release_prefix(args.candidate)}index.html")
             elif publish(db, storage, args.candidate):

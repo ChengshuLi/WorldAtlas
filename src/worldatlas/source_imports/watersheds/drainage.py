@@ -3,19 +3,24 @@
 Each cell can send water to one of its eight neighbors. A mapped river
 can carry that water to more than one destination after the river splits.
 """
-from concurrent.futures import ThreadPoolExecutor
+
 import heapq
 import os
+from collections.abc import Iterable, Mapping
+from concurrent.futures import ThreadPoolExecutor
 
 import numpy as np
 from numba import njit
+from numpy.typing import ArrayLike
 from pyproj import CRS, Transformer
 
 from worldatlas.geodesy.wgs84 import geodesic_distances
+from worldatlas.source_imports.watersheds.terrain import Grid
+
 UNKNOWN = -1
 
 
-def neighbor_distances_metres(grid):
+def neighbor_distances_metres(grid: Grid) -> np.ndarray:
     """Measure distances between all horizontally, vertically, or diagonally adjacent cells.
 
     Args:
@@ -33,14 +38,25 @@ def neighbor_distances_metres(grid):
     to_geo = Transformer.from_crs(CRS.from_user_input(grid.crs), 4326, always_xy=True)
     distances = np.zeros((4, height, width), dtype='float64')
 
-    def calculate_rows(first):
+    def calculate_rows(first: int) -> None:
+        """Fill one batch of the grid's adjacent-cell distances.
+
+        Args:
+            first: First terrain row in the batch.
+        """
         last = min(height, first + 128)
         # A block ending at row 127 needs row 128 to measure the distances
         # from the last row to its neighbors below.
         stop = min(height, last + 1)
         columns, rows = np.meshgrid(np.arange(width), np.arange(first, stop))
-        lon, lat = to_geo.transform(*grid.cell_coordinates(rows, columns), errcheck=True)
-        if not np.isfinite(lon).all() or not np.isfinite(lat).all() or np.any(np.abs(lat) > 90):
+        lon, lat = to_geo.transform(
+            *grid.cell_coordinates(rows, columns), errcheck=True
+        )
+        if (
+            not np.isfinite(lon).all()
+            or not np.isfinite(lat).all()
+            or np.any(np.abs(lat) > 90)
+        ):
             raise ValueError('invalid WGS84 cell coordinates')
         count = last - first
         for plane, dr, dc in ((0, 0, 1), (1, 1, 0), (2, 1, 1), (3, 1, -1)):
@@ -49,10 +65,12 @@ def neighbor_distances_metres(grid):
             b = slice(max(0, dc), min(width, width + dc))
             if n == 0 or width <= abs(dc):
                 continue
-            length = geodesic_distances(lon[:n, a], lat[:n, a], lon[dr:n + dr, b], lat[dr:n + dr, b])
+            length = geodesic_distances(
+                lon[:n, a], lat[:n, a], lon[dr : n + dr, b], lat[dr : n + dr, b]
+            )
             if not np.isfinite(length).all() or np.any(length <= 0):
                 raise ValueError('invalid neighboring-cell distance')
-            distances[plane, first:first + n, a] = length
+            distances[plane, first : first + n, a] = length
 
     with ThreadPoolExecutor(max_workers=os.cpu_count() or 1) as executor:
         # Consume every result so errors in a worker reach the caller.
@@ -61,22 +79,40 @@ def neighbor_distances_metres(grid):
 
 
 @njit(cache=True)
-def _fill_depressions_and_route_flow(elevation, distances, closed):
-    """Raise pits to their spill height in a copy, then pick where each cell drains."""
+def _fill_depressions_and_route_flow(
+    elevation: np.ndarray, distances: np.ndarray, closed: np.ndarray
+) -> tuple[np.ndarray, np.ndarray]:
+    """Raise pits to their spill height in a copy, then route each cell downhill.
+
+    Args:
+        elevation: Two-dimensional grid of original heights in metres.
+        distances: Distance to each of eight neighbours, in metres.
+        closed: Bool grid marking where flow must stop.
+
+    Returns:
+        (working_heights, flow). Both arrays have the shape of elevation.
+        Flow stores the flat next-cell index, or -1 at a stopping cell.
+    """
     height, width = elevation.shape
     working = np.full(elevation.shape, np.inf)
     parent = np.full(elevation.size, -2, dtype=np.int64)
-    heap = [(0., 0)]
+    heap = [(0.0, 0)]
     heap.pop()
     # Start the search at the crop edges and places where the recipe says
     # water stops. Work inward, starting with the lowest available cell.
     for row in range(height):
         for column in range(width):
-            if row == 0 or column == 0 or row == height - 1 or column == width - 1 or closed[row, column]:
+            if (
+                row == 0
+                or column == 0
+                or row == height - 1
+                or column == width - 1
+                or closed[row, column]
+            ):
                 index = row * width + column
                 working[row, column] = elevation[row, column]
                 parent[index] = -1
-                heapq.heappush(heap, (working[row, column], index))
+                heapq.heappush(heap, (float(working[row, column]), index))
     while heap:
         value, index = heapq.heappop(heap)
         row, column = index // width, index % width
@@ -90,7 +126,7 @@ def _fill_depressions_and_route_flow(elevation, distances, closed):
                         # use 5 m here and remember the way out in parent.
                         parent[other] = index
                         working[rr, cc] = max(value, elevation[rr, cc])
-                        heapq.heappush(heap, (working[rr, cc], other))
+                        heapq.heappush(heap, (float(working[rr, cc]), other))
     flow = parent.copy().reshape(elevation.shape)
     # On flat ground, use the way out found above. If a neighbor is lower,
     # choose the steepest drop per metre. Edge cells can drain back inward.
@@ -98,19 +134,29 @@ def _fill_depressions_and_route_flow(elevation, distances, closed):
         for column in range(width):
             if closed[row, column]:
                 continue
-            best = 0.
+            best = 0.0
             for dr in range(-1, 2):
                 for dc in range(-1, 2):
                     rr, cc = row + dr, column + dc
                     if (dr or dc) and 0 <= rr < height and 0 <= cc < width:
                         if dr == 0:
-                            distance = distances[0, row, column if dc > 0 else column - 1]
+                            distance = distances[
+                                0, row, column if dc > 0 else column - 1
+                            ]
                         elif dc == 0:
                             distance = distances[1, row if dr > 0 else row - 1, column]
                         elif dr == dc:
-                            distance = distances[2, row if dr > 0 else row - 1, column if dc > 0 else column - 1]
+                            distance = distances[
+                                2,
+                                row if dr > 0 else row - 1,
+                                column if dc > 0 else column - 1,
+                            ]
                         else:
-                            distance = distances[3, row if dr > 0 else row - 1, column if dr > 0 else column + 1]
+                            distance = distances[
+                                3,
+                                row if dr > 0 else row - 1,
+                                column if dr > 0 else column + 1,
+                            ]
                         slope = (working[row, column] - working[rr, cc]) / distance
                         if slope > best:
                             best = slope
@@ -118,7 +164,12 @@ def _fill_depressions_and_route_flow(elevation, distances, closed):
     return working, flow
 
 
-def compute_cell_flow(grid, closed_sinks=(), *, outlets=None):
+def compute_cell_flow(
+    grid: Grid,
+    closed_sinks: Iterable[tuple[int, int]] = (),
+    *,
+    outlets: np.ndarray | None = None,
+) -> tuple[np.ndarray, np.ndarray]:
     """Calculate terrain flow using the elevation grid and known stopping points.
 
     Args:
@@ -146,12 +197,25 @@ def compute_cell_flow(grid, closed_sinks=(), *, outlets=None):
         if not (0 <= row < elevation.shape[0] and 0 <= column < elevation.shape[1]):
             raise ValueError('closed sink is outside the elevation grid')
         closed[row, column] = True
-    return _fill_depressions_and_route_flow(elevation, neighbor_distances_metres(grid), closed)
+    return _fill_depressions_and_route_flow(
+        elevation, neighbor_distances_metres(grid), closed
+    )
 
 
 @njit(cache=True)
-def _trace_cell_group_labels(flow, seeds, terminals):
-    """Follow each cell's flow until its destination is known or the route ends."""
+def _trace_cell_group_labels(
+    flow: np.ndarray, seeds: np.ndarray, terminals: np.ndarray
+) -> np.ndarray:
+    """Follow each cell until it reaches a known group or the route ends.
+
+    Args:
+        flow: Two-dimensional grid of flattened next-cell indices.
+        seeds: Known groups along mapped streams, with -1 elsewhere.
+        terminals: Known groups at stopping cells, with -1 elsewhere.
+
+    Returns:
+        Grid of destination IDs with the same shape as flow.
+    """
     links = flow.ravel()
     labels = seeds.ravel().copy()
     state = np.zeros(links.size, np.uint8)
@@ -182,7 +246,9 @@ def _trace_cell_group_labels(flow, seeds, terminals):
     return labels.reshape(flow.shape)
 
 
-def trace_cell_group_labels(flow, seeds, terminals=None):
+def trace_cell_group_labels(
+    flow: ArrayLike, seeds: ArrayLike, terminals: ArrayLike | None = None
+) -> np.ndarray:
     """Give each cell the group found by following its flow.
 
     A river with a known destination gives that answer to cells that reach
@@ -209,12 +275,21 @@ def trace_cell_group_labels(flow, seeds, terminals=None):
         raise ValueError('flow, seed and terminal grids must have matching shapes')
     if any(a.dtype.kind not in 'iu' for a in (flow, seeds, terminals)):
         raise ValueError('flow links and destination IDs must be integers')
-    if np.any(flow < -1) or np.any(flow >= flow.size) or np.any(seeds < -1) or np.any(terminals < -1):
+    if (
+        np.any(flow < -1)
+        or np.any(flow >= flow.size)
+        or np.any(seeds < -1)
+        or np.any(terminals < -1)
+    ):
         raise ValueError('invalid flow link or destination ID')
-    return _trace_cell_group_labels(flow.astype('int64'), seeds.astype('int64'), terminals.astype('int64'))
+    return _trace_cell_group_labels(
+        flow.astype('int64'), seeds.astype('int64'), terminals.astype('int64')
+    )
 
 
-def unique_destination_labels(memberships, shape):
+def unique_destination_labels(
+    memberships: Mapping[int, np.ndarray], shape: tuple[int, int]
+) -> np.ndarray:
     """Return a group only where exactly one destination is known.
 
     A cell marked for both groups 3 and 7 gets -1 in this single-label grid.
@@ -236,7 +311,9 @@ def unique_destination_labels(memberships, shape):
     return labels
 
 
-def trace_destination_masks(flow, seeds, terminals):
+def trace_destination_masks(
+    flow: ArrayLike, seeds: Mapping[int, np.ndarray], terminals: ArrayLike
+) -> dict[int, np.ndarray]:
     """Follow all known river destinations, including genuine split flow.
 
     If a river splits and drains to groups 3 and 7, every cell that reaches
@@ -256,14 +333,28 @@ def trace_destination_masks(flow, seeds, terminals):
     """
     flow, terminals = np.asarray(flow), np.asarray(terminals)
     shape = flow.shape
-    if (flow.ndim != 2 or terminals.shape != shape or
-            flow.dtype.kind not in 'iu' or terminals.dtype.kind not in 'iu' or
-            np.any(flow < -1) or np.any(flow >= flow.size) or np.any(terminals < -1)):
-        raise ValueError('flow links and terminal IDs require matching valid integer grids')
-    if any(not isinstance(group, (int, np.integer)) or group < 0 or
-           np.asarray(cells).shape != shape or np.asarray(cells).dtype != bool
-           for group, cells in seeds.items()):
-        raise ValueError('destination memberships require known IDs and matching Boolean grids')
+    if (
+        flow.ndim != 2
+        or terminals.shape != shape
+        or flow.dtype.kind not in 'iu'
+        or terminals.dtype.kind not in 'iu'
+        or np.any(flow < -1)
+        or np.any(flow >= flow.size)
+        or np.any(terminals < -1)
+    ):
+        raise ValueError(
+            'flow links and terminal IDs require matching valid integer grids'
+        )
+    if any(
+        not isinstance(group, (int, np.integer))
+        or group < 0
+        or np.asarray(cells).shape != shape
+        or np.asarray(cells).dtype != bool
+        for group, cells in seeds.items()
+    ):
+        raise ValueError(
+            'destination memberships require known IDs and matching Boolean grids'
+        )
     known = np.zeros(shape, dtype=bool)
     for cells in seeds.values():
         known |= cells
@@ -274,13 +365,15 @@ def trace_destination_masks(flow, seeds, terminals):
         # When checking group 3, a river marked only for group 7 answers
         # False here. It still stops the trace because its destination is known.
         seed = np.where(known, present.astype('int64'), UNKNOWN)
-        terminal = np.where(terminals >= 0, (terminals == group).astype('int64'), UNKNOWN)
+        terminal = np.where(
+            terminals >= 0, (terminals == group).astype('int64'), UNKNOWN
+        )
         result[group] = trace_cell_group_labels(flow, seed, terminal) == 1
     return result
 
 
 @njit(cache=True)
-def index_incoming_flow(flow):
+def index_incoming_flow(flow: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     """Record which cells send water directly into each cell.
 
     Args:
@@ -303,7 +396,7 @@ def index_incoming_flow(flow):
 
 
 @njit(cache=True)
-def cells_draining_to(flow, terminal):
+def cells_draining_to(flow: np.ndarray, terminal: int) -> np.ndarray:
     """Start at one cell and work backward through all cells that feed it.
 
     Args:

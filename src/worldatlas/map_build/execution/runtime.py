@@ -1,70 +1,45 @@
 """Durable pipeline identities, output checkpoints and attempt-local active timing."""
 
-from contextlib import contextmanager
+from __future__ import annotations
+
 import fcntl
 import hashlib
 import json
 import math
 import os
-from pathlib import Path
 import subprocess
 import threading
 import time
 import traceback
 import uuid
+from collections.abc import Callable, Iterable, Iterator
+from contextlib import contextmanager
+from pathlib import Path
+from typing import Any, cast
+
+from worldatlas.shared.files import (
+    pin_file,
+    read_json,
+    sha256_file,
+    sync_directory,
+    verify_pins,
+    write_json,
+)
 
 
-def digest(path):
-    h = hashlib.sha256()
-    with Path(path).open("rb") as stream:
-        for block in iter(lambda: stream.read(1 << 20), b""):
-            h.update(block)
-    return h.hexdigest()
+def journal_anchor(path: Path | str) -> dict[str, str | int]:
+    """Record the current bytes of an append-only timing log.
 
+    Args:
+        path: Timing log file.
 
-def sync_directory(path):
-    fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
+    Returns:
+        Dictionary with its absolute "path", byte count "bytes", and "sha256".
+        Future writes can append bytes without invalidating this record.
 
-
-def json_bytes(value):
-    return (
-        json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + "\n"
-    ).encode()
-
-
-def write(path, value):
-    """Publish a new complete JSON file atomically; interrupted temporaries stay."""
-    path = Path(path)
-    temporary = path.with_name("." + path.name + ".pending-" + uuid.uuid4().hex)
-    with temporary.open("xb") as stream:
-        stream.write(json_bytes(value))
-        stream.flush()
-        os.fsync(stream.fileno())
-    os.link(temporary, path)
-    sync_directory(path.parent)
-    temporary.unlink()
-    sync_directory(path.parent)
-    return path
-
-
-def pin(path):
-    path = Path(path).resolve(strict=True)
-    if not path.is_file():
-        raise ValueError("not a file: " + str(path))
-    return {"path": str(path), "sha256": digest(path)}
-
-
-def verify_pins(pins):
-    for expected in pins:
-        if pin(expected["path"])["sha256"] != expected["sha256"]:
-            raise ValueError("checkpoint/input hash mismatch: " + expected["path"])
-
-
-def journal_anchor(path):
+    Raises:
+        ValueError: The file shrank while it was being read.
+    """
     path = Path(path).resolve(strict=True)
     size = path.stat().st_size
     h = hashlib.sha256()
@@ -79,7 +54,16 @@ def journal_anchor(path):
     return {"path": str(path), "bytes": size, "sha256": h.hexdigest()}
 
 
-def verify_anchor(anchor, expected_path):
+def verify_anchor(anchor: dict[str, Any], expected_path: Path | str) -> None:
+    """Check that the recorded start of a timing log is unchanged.
+
+    Args:
+        anchor: Path, byte count and SHA-256 from journal_anchor.
+        expected_path: Timing log path for this run.
+
+    Raises:
+        ValueError: The recorded prefix changed or the record is invalid.
+    """
     if (
         set(anchor) != {"path", "bytes", "sha256"}
         or Path(anchor["path"]).resolve() != Path(expected_path).resolve()
@@ -100,15 +84,30 @@ def verify_anchor(anchor, expected_path):
         raise ValueError("timing journal checkpoint prefix changed")
 
 
-def inventory(paths):
-    """Seal regular output files; never follow an output symlink."""
+def inventory(paths: Iterable[Path | str]) -> list[dict[str, str]]:
+    """List and hash the regular files in the supplied outputs.
+
+    Args:
+        paths: Files or directories to scan in order.
+
+    Returns:
+        File pins in traversal order, with each directory sorted by filename.
+
+    Raises:
+        ValueError: A path is missing, a symlink, or not a regular file or directory.
+    """
     result = []
 
-    def visit(path):
+    def visit(path: Path) -> None:
+        """Collect file pins beneath one path.
+
+        Args:
+            path: File or directory to visit.
+        """
         if path.is_symlink():
             raise ValueError("symlink checkpoint output: " + str(path))
         elif path.is_file():
-            result.append(pin(path))
+            result.append(pin_file(path))
         elif path.is_dir():
             for child in sorted(path.iterdir()):
                 visit(child)
@@ -120,9 +119,17 @@ def inventory(paths):
     return result
 
 
-def code_identity(scripts):
+def code_identity(scripts: Path | str) -> dict[str, str]:
+    """Hash Python and native source files under a package.
+
+    Args:
+        scripts: Directory holding source files.
+
+    Returns:
+        Relative path strings mapped to lowercase SHA-256 digests.
+    """
     return {
-        str(path.relative_to(scripts)): digest(path)
+        str(path.relative_to(scripts)): sha256_file(path)
         for path in sorted(Path(scripts).rglob("*"))
         if path.is_file()
         and "__pycache__" not in path.parts
@@ -130,15 +137,31 @@ def code_identity(scripts):
     }
 
 
-def repository_identity(package):
-    """Record available source revision and setup; this never gates resume."""
+def repository_identity(package: Path | str) -> dict[str, Any] | None:
+    """Record the Git checkout and setup files used for this build.
+
+    Args:
+        package: Package directory in a possible Git checkout.
+
+    Returns:
+        Dictionary with commit, local diff, and setup file text, or None
+        when the package is outside a Git checkout.
+    """
     root = next(
         (p for p in Path(package).resolve().parents if (p / ".git").exists()), None
     )
     if root is None:
         return None
 
-    def git(*args):
+    def git(*args: str) -> str | None:
+        """Run Git in the source checkout without printing.
+
+        Args:
+            args: Git subcommand and its arguments.
+
+        Returns:
+            Command output text, or None if Git returns an error status.
+        """
         result = subprocess.run(
             ["git", "-C", str(root), *args], capture_output=True, text=True
         )
@@ -156,7 +179,19 @@ def repository_identity(package):
     return result
 
 
-def elapsed_union(intervals):
+def elapsed_union(intervals: Iterable[tuple[float, float]]) -> float:
+    """Count seconds covered by one or more time intervals.
+
+    Args:
+        intervals: (start, end) pairs from the same clock.
+
+    Returns:
+        Elapsed seconds, counting overlaps once. For example, (0, 5) and
+        (3, 8) cover eight seconds.
+
+    Raises:
+        ValueError: An interval is reversed or contains nonfinite times.
+    """
     merged = []
     for start, end in sorted(intervals):
         if not (math.isfinite(start) and math.isfinite(end) and end >= start):
@@ -168,8 +203,18 @@ def elapsed_union(intervals):
     return sum(end - start for start, end in merged)
 
 
-def outside(intervals, excluded):
-    """Duration in the first union outside the second union."""
+def outside(
+    intervals: Iterable[tuple[float, float]], excluded: Iterable[tuple[float, float]]
+) -> float:
+    """Count seconds in the first set of intervals outside the second.
+
+    Args:
+        intervals: Time intervals to count.
+        excluded: Time intervals to subtract from the first set.
+
+    Returns:
+        Elapsed seconds. For example, (0, 10) excluding (2, 8) gives 4.
+    """
     events = []
     for start, end in intervals:
         events.extend([(start, 1, 0), (end, -1, 0)])
@@ -188,7 +233,17 @@ def outside(intervals, excluded):
 
 
 class RunLock:
-    def __init__(self, path):
+    """Keep two processes from writing to the same build run."""
+
+    def __init__(self, path: Path | str) -> None:
+        """Take an exclusive lock on the run's local lock file.
+
+        Args:
+            path: Lock file to open or create.
+
+        Raises:
+            ValueError: Another runner holds the lock.
+        """
         self.stream = Path(path).open("a+b")
         try:
             fcntl.flock(self.stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -196,22 +251,42 @@ class RunLock:
             self.stream.close()
             raise ValueError("another pipeline runner still owns this run") from None
 
-    def close(self):
+    def close(self) -> None:
+        """Close the lock file and release the lock."""
         if not self.stream.closed:
             self.stream.close()
 
-    def __del__(self):
+    def __del__(self) -> None:
+        """Release the lock when the runner is collected."""
         self.close()
 
 
 class Checkpoints:
-    def __init__(self, root, attempt):
+    """Save and verify a build stage's completed outputs."""
+
+    def __init__(self, root: Path | str, attempt: str) -> None:
+        """Prepare the run's checkpoint directory.
+
+        Args:
+            root: Directory for stage checkpoint files.
+            attempt: Identifier of the current build attempt.
+        """
         self.root, self.attempt = Path(root).resolve(), attempt
         self.root.mkdir(exist_ok=True)
         self.preserved = self.root.parent / "preserved"
-        self.preserved.mkdir(exist_ok=True)
 
-    def stage(self, name):
+    def stage(self, name: str) -> Path:
+        """Create or open a named stage's checkpoint directory.
+
+        Args:
+            name: Stage ID using lowercase letters, digits, hyphens or underscores.
+
+        Returns:
+            Directory for the stage.
+
+        Raises:
+            ValueError: The stage name is invalid.
+        """
         if not name or any(
             c not in "abcdefghijklmnopqrstuvwxyz0123456789-_" for c in name
         ):
@@ -220,11 +295,26 @@ class Checkpoints:
         path.mkdir(exist_ok=True)
         return path
 
-    def completed(self, name, invocation, outputs):
+    def completed(
+        self, name: str, invocation: dict[str, Any], outputs: Iterable[Path | str]
+    ) -> bool:
+        """Verify the inputs and output files of a completed stage.
+
+        Args:
+            name: Stage ID.
+            invocation: Current stage inputs and expected output paths.
+            outputs: Files or directories the stage should have written.
+
+        Returns:
+            True after successful verification, or False if no receipt exists.
+
+        Raises:
+            ValueError: Timing, input, or output records do not match.
+        """
         path = self.stage(name) / "complete.json"
         if not path.exists():
             return False
-        receipt = json.loads(path.read_bytes())
+        receipt = read_json(path)
         verify_anchor(
             receipt["timing_anchor"], self.root.parent / "timing-events.jsonl"
         )
@@ -236,17 +326,38 @@ class Checkpoints:
         verify_pins(self.data_pins(receipt))
         if inventory(outputs) != receipt["outputs"]:
             raise ValueError("completed stage output changed: " + name)
-        verify_pins([receipt["log"]])
         return True
 
     @staticmethod
-    def data_pins(receipt):
+    def data_pins(receipt: dict[str, Any]) -> list[dict[str, str]]:
         # Earlier checkpoints also included the executable Python file among
         # their inputs. Preserve the receipt and verify its data inputs only.
+        """Find the input file pins that must still match on resume.
+
+        Args:
+            receipt: Completed stage record.
+
+        Returns:
+            Path and SHA-256 dictionaries for the stage's data files.
+        """
         code_path = receipt["invocation"].get("code", {}).get("path")
         return [pin for pin in receipt["inputs"] if pin["path"] != code_path]
 
-    def preserve(self, name, paths):
+    def preserve(
+        self, name: str, paths: Iterable[Path | str]
+    ) -> list[tuple[Path, Path]]:
+        """Move incomplete outputs aside for debugging.
+
+        Args:
+            name: Stage ID used to name the preserved directory.
+            paths: Output paths to move if present.
+
+        Returns:
+            List of (original_path, preserved_path) pairs.
+
+        Raises:
+            ValueError: A path is outside the current run.
+        """
         existing = list(
             dict.fromkeys(
                 Path(path)
@@ -257,7 +368,7 @@ class Checkpoints:
         if not existing:
             return []
         destination = self.preserved / (name + "-" + uuid.uuid4().hex)
-        destination.mkdir()
+        destination.mkdir(parents=True)
         moved = []
         for index, path in enumerate(existing):
             if (
@@ -273,31 +384,59 @@ class Checkpoints:
         sync_directory(destination.parent)
         return moved
 
-    def verify_all(self):
+    def verify_all(self) -> None:
+        """Verify the timing log and saved files for every completed stage.
+
+        Raises:
+            ValueError: A log prefix or file differs from its saved record.
+        """
         for path in self.root.glob("*/attempt-*/admitted.json"):
-            admission = json.loads(path.read_bytes())
+            admission = read_json(path)
             verify_anchor(
                 admission["timing_anchor"], self.root.parent / "timing-events.jsonl"
             )
         for path in self.root.glob("*/complete.json"):
-            receipt = json.loads(path.read_bytes())
+            receipt = read_json(path)
             verify_anchor(
                 receipt["timing_anchor"], self.root.parent / "timing-events.jsonl"
             )
             verify_pins(self.data_pins(receipt))
             if inventory(receipt["output_roots"]) != receipt["outputs"]:
                 raise ValueError("completed stage output changed: " + path.parent.name)
-            verify_pins([receipt["log"]])
 
-    def begin(self, name):
+    def begin(self, name: str) -> Path:
+        """Create a directory for one stage attempt.
+
+        Args:
+            name: Stage ID.
+
+        Returns:
+            Path to the new attempt directory.
+        """
         path = self.stage(name) / ("attempt-" + uuid.uuid4().hex)
         path.mkdir()
         sync_directory(path.parent)
         return path
 
-    def complete(self, name, invocation, outputs, inputs, log, timing_anchor):
+    def complete(
+        self,
+        name: str,
+        invocation: dict[str, Any],
+        outputs: list[Path],
+        inputs: list[dict[str, str]],
+        timing_anchor: dict[str, str | int],
+    ) -> None:
+        """Write a stage's completion record after verifying its saved outputs.
+
+        Args:
+            name: Stage ID.
+            invocation: Stage request used to check resume compatibility.
+            outputs: Directories and files to hash as completed outputs.
+            inputs: Expected path and SHA-256 pins for the inputs.
+            timing_anchor: Timing log path, prefix length and digest.
+        """
         verify_pins(inputs)
-        write(
+        write_json(
             self.stage(name) / "complete.json",
             {
                 "schema": "worldatlas-command-checkpoint-v1",
@@ -307,27 +446,41 @@ class Checkpoints:
                 "inputs": inputs,
                 "output_roots": [os.path.abspath(p) for p in outputs],
                 "outputs": inventory(outputs),
-                "log": pin(log),
             },
         )
 
     def run_function(
         self,
-        name,
-        group,
-        function,
-        args,
+        name: str,
+        group: str,
+        function: Callable[..., Any],
+        args: tuple[Any, ...],
         *,
-        timing,
-        inputs,
-        outputs,
-        kwargs=None,
-        resume_marker=None,
-    ):
-        """Call an ordinary Python stage and checkpoint its returned record.
+        timing: Timing,
+        inputs: list[dict[str, str]],
+        outputs: Iterable[Path | str],
+        kwargs: dict[str, Any] | None = None,
+        resume_marker: Path | str | None = None,
+    ) -> Any:
+        """Run a stage or load its verified result from a previous attempt.
 
-        Input/output identity controls reuse. The function's location is
-        provenance, so editing or moving code does not block resume.
+        Args:
+            name: Stage ID for the checkpoint.
+            group: Timing group that contains this stage.
+            function: Stage function returning JSON-compatible data.
+            args: Positional arguments to the stage function.
+            timing: Timing journal for the run.
+            inputs: Input file pins.
+            outputs: Output files and directories to verify.
+            kwargs: Additional keyword arguments to the function.
+            resume_marker: If present, keep partial outputs for a producer that can
+                resume its own work.
+
+        Returns:
+            The stage result decoded from its saved JSON file.
+
+        Raises:
+            ValueError: An output path escapes the run or saved data no longer matches.
         """
         outputs = [Path(path).absolute() for path in outputs]
         run = self.root.parent
@@ -346,7 +499,7 @@ class Checkpoints:
         }
         sealed = [*outputs, result_path]
         if self.completed(name, invocation, sealed):
-            return json.loads(result_path.read_bytes())
+            return read_json(result_path)
         if resume_marker is not None and Path(resume_marker).is_file():
             # The producer owns its validated internal checkpoints. Preserve
             # those outputs so it can continue completed shards or tiles.
@@ -354,36 +507,52 @@ class Checkpoints:
         else:
             self.preserve(name, sealed)
         attempt = self.begin(name)
-        logs = run / "logs"
-        logs.mkdir(exist_ok=True)
-        log = logs / (name + "-" + attempt.name + ".log")
         verify_pins(inputs)
-        with log.open("x") as stream:
-            write(
-                attempt / "admitted.json",
-                {
-                    "invocation": invocation,
-                    "inputs": inputs,
-                    "log": str(log),
-                    "timing_anchor": timing.anchor(),
-                },
-            )
-            try:
-                with timing.measure(group, name):
-                    result = function(*args, **(kwargs or {}))
-                write(result_path, result)
-                stream.write(json_bytes(result).decode())
-            except BaseException:
-                traceback.print_exc(file=stream)
-                raise
-        self.complete(name, invocation, sealed, inputs, log, timing.anchor())
-        return json.loads(result_path.read_bytes())
+        write_json(
+            attempt / "admitted.json",
+            {
+                "invocation": invocation,
+                "inputs": inputs,
+                "timing_anchor": timing.anchor(),
+            },
+        )
+        try:
+            with timing.measure(group, name):
+                result = function(*args, **(kwargs or {}))
+            write_json(result_path, result)
+        except BaseException:
+            (attempt / "error.log").write_text(traceback.format_exc(), encoding="utf-8")
+            raise
+        self.complete(name, invocation, sealed, inputs, timing.anchor())
+        return read_json(result_path)
 
 
 class Timing:
-    """Attempt-local monotonic intervals. No subtraction crosses a restart gap."""
+    """Record wall-clock durations within each build attempt.
 
-    def __init__(self, path, *, resume=False, attempt=None, heartbeat_seconds=0):
+    Durations are added across attempts. Gaps between attempts do not count.
+    """
+
+    def __init__(
+        self,
+        path: Path | str,
+        *,
+        resume: bool = False,
+        attempt: str | None = None,
+        heartbeat_seconds: float = 0,
+    ) -> None:
+        """Open a timing log and optionally start recording ongoing work.
+
+        Args:
+            path: Timing log in JSON Lines format.
+            resume: Continue an existing log. Back up an incomplete last line.
+            attempt: Attempt ID. Generate one if omitted.
+            heartbeat_seconds: Seconds between progress entries for active work.
+                Zero disables them.
+
+        Raises:
+            ValueError: A line before the last one is incomplete or invalid.
+        """
         self.path = Path(path)
         self.attempt = attempt or uuid.uuid4().hex
         self.lock = threading.RLock()
@@ -436,10 +605,20 @@ class Timing:
             )
             self.thread.start()
 
-    def event(self, value):
+    def event(self, value: dict[str, Any]) -> None:
+        """Append one event to the timing log.
+
+        Args:
+            value: JSON-compatible event fields.
+        """
         self.events([value])
 
-    def events(self, values):
+    def events(self, values: Iterable[dict[str, Any]]) -> None:
+        """Append a batch of events and flush them to disk.
+
+        Args:
+            values: Events to label with the current attempt ID.
+        """
         values = [{"attempt": self.attempt, **value} for value in values]
         if not values:
             return
@@ -453,7 +632,12 @@ class Timing:
                 os.fsync(stream.fileno())
             self.records.extend(values)
 
-    def _heartbeat(self, seconds):
+    def _heartbeat(self, seconds: float) -> None:
+        """Periodically record how far each active interval has progressed.
+
+        Args:
+            seconds: Time between progress entries.
+        """
         while not self.stopped.wait(seconds):
             with self.lock:
                 now = time.monotonic()
@@ -470,14 +654,28 @@ class Timing:
                     ]
                 )
 
-    def close(self):
+    def close(self) -> None:
+        """Stop and join the timing thread."""
         self.stopped.set()
         if self.thread is not None:
             self.thread.join()
             self.thread = None
 
     @contextmanager
-    def measure(self, group, name, *, kind="processing"):
+    def measure(
+        self, group: str, name: str, *, kind: str = "processing"
+    ) -> Iterator[dict[str, Any]]:
+        """Record when a piece of work starts and stops.
+
+        Args:
+            group: Parent stage to which this work contributes.
+            name: Name of the work within the stage.
+            kind: Timing category such as processing or command.
+
+        Yields:
+            The start-event dictionary. When the block ends, it also includes
+            "end_monotonic_seconds", even if the work failed.
+        """
         started = time.monotonic()
         token = uuid.uuid4().hex
         record = {
@@ -500,7 +698,17 @@ class Timing:
         else:
             self._finish(token, record, started, "complete")
 
-    def _finish(self, token, record, started, event):
+    def _finish(
+        self, token: str, record: dict[str, Any], started: float, event: str
+    ) -> None:
+        """Record an interval's end and remove it from active work.
+
+        Args:
+            token: Unique interval ID.
+            record: Start-event dictionary to update with the end time.
+            started: Monotonic clock reading at the start.
+            event: Outcome, either "complete" or "failed".
+        """
         with self.lock:
             ended = time.monotonic()
             record["end_monotonic_seconds"] = ended
@@ -517,13 +725,27 @@ class Timing:
             self.active.pop(token, None)
             self.open.discard(token)
 
-    def anchor(self):
+    def anchor(self) -> dict[str, str | int]:
+        """Hash the current timing log while writes are locked.
+
+        Returns:
+            Dictionary with the path, saved prefix length and SHA-256.
+        """
         with self.lock:
             return journal_anchor(self.path)
 
-    def mark_complete(self, group, *, physical_report=None):
+    def mark_complete(
+        self, group: str, *, physical_report: dict[str, Any] | None = None
+    ) -> None:
         # Publish the cumulative stage result with completion, rather than
         # making a reader mistake the last resumed interval for the full total.
+        """Record that a stage's output files are complete.
+
+        Args:
+            group: Stage whose results are ready.
+            physical_report: Physical producer timing report or reuse record, when
+                needed.
+        """
         with self.lock:
             summary = self.summary(physical_report)[group]
             summary.update(outputs_complete=True, complete=summary["timing_complete"])
@@ -537,16 +759,40 @@ class Timing:
             )
             self.completed_groups.add(group)
 
-    def intervals(self, group, *, kind=None):
+    def intervals(
+        self, group: str, *, kind: str | None = None
+    ) -> tuple[dict[str, list[tuple[float, float]]], list[dict[str, Any]]]:
+        """Read a stage's recorded active intervals.
+
+        Args:
+            group: Stage to summarize.
+            kind: Optional timing category filter.
+
+        Returns:
+            (intervals_by_attempt, incomplete_events). Each interval is a
+            (start, end) pair from its attempt's clock.
+        """
         intervals, missing, _ = self.interval_details(group, kind=kind)
         return intervals, missing
 
-    def interval_details(self, group, *, kind=None):
-        """Keep measurable interrupted prefixes and identify every unknown tail.
+    def interval_details(
+        self, group: str, *, kind: str | None = None
+    ) -> tuple[
+        dict[str, list[tuple[float, float]]], list[dict[str, Any]], list[dict[str, Any]]
+    ]:
+        """Read active times and explain which intervals lack a known end.
 
-        A heartbeat is a durable lower-bound endpoint, never a guessed stop
-        time. Nested interval details must not be summed; stage totals use the
-        attempt-local unions returned alongside them.
+        Args:
+            group: Stage to summarize.
+            kind: Optional timing category filter.
+
+        Returns:
+            (intervals_by_attempt, incomplete_events, interrupted_details).
+            A heartbeat gives an interrupted interval's last recorded time.
+            Its actual end remains unknown.
+
+        Raises:
+            ValueError: An interval ends before it starts.
         """
         starts, ends, beats = {}, {}, {}
         for record in self.records:
@@ -606,7 +852,19 @@ class Timing:
             by_attempt.setdefault(token[0], []).append((a, b))
         return by_attempt, incomplete, details
 
-    def summary(self, physical_report):
+    def summary(
+        self, physical_report: dict[str, Any] | None
+    ) -> dict[str, dict[str, Any]]:
+        """Summarize wall-clock time for each stage without counting overlap twice.
+
+        Args:
+            physical_report: Physical producer report, reuse record, or None before
+                output is ready.
+
+        Returns:
+            Stage names mapped to report dictionaries with processing seconds,
+            output readiness, and details of any intervals with unknown ends.
+        """
         groups = {}
         names = dict.fromkeys(
             (
@@ -623,6 +881,7 @@ class Timing:
             measured = sum(elapsed_union(items) for items in intervals.values())
             complete = not missing
             error = None
+            downloads = None
             reused = (
                 group == "physical"
                 and physical_report
@@ -643,8 +902,8 @@ class Timing:
                 )
                 if (
                     type(child) not in (int, float)
-                    or not math.isfinite(child)
-                    or child < 0
+                    or not math.isfinite(cast(float, child))
+                    or cast(float, child) < 0
                 ):
                     child = sum(
                         record["seconds"]
@@ -658,7 +917,7 @@ class Timing:
                     for record in self.records
                     if record["event"] == "physical-command-overhead"
                 )
-                measured = overhead + command_overhead + child
+                measured = overhead + command_overhead + cast(float, child)
                 complete = (
                     complete
                     and report.get("timing_complete", True)
@@ -667,8 +926,8 @@ class Timing:
                 downloads = report.get("source_download_elapsed_seconds")
                 if (
                     type(downloads) not in (int, float)
-                    or not math.isfinite(downloads)
-                    or downloads < 0
+                    or not math.isfinite(cast(float, downloads))
+                    or cast(float, downloads) < 0
                 ):
                     complete = False
                     error = "missing or invalid physical acquisition timing"
@@ -697,6 +956,6 @@ class Timing:
                         "timing_error": error,
                     }
                 )
-                if reused:
+                if reused and physical_report is not None:
                     groups[group]["reused_from"] = physical_report["source_run"]
         return groups

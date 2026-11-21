@@ -6,21 +6,21 @@ get their own database on a temporary local server.
 """
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
 import os
 import subprocess
 import sys
 import tempfile
 import time
 import traceback
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
 
 import psycopg
 from psycopg import sql
 from psycopg.conninfo import make_conninfo
-from worldatlas.source_imports.shared.contracts import database_checks
 
 import worldatlas
+from worldatlas.source_imports.shared.contracts import database_checks
 
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = Path(worldatlas.__file__).resolve().parent
@@ -34,7 +34,9 @@ SUITES = {
 }
 
 
-def run_suite(name, directory, databases):
+def run_suite(
+    name: str, directory: Path, databases: dict[str, str]
+) -> tuple[str, int, float, Path]:
     """Run one suite and capture its output in a log file.
 
     Args:
@@ -56,11 +58,24 @@ def run_suite(name, directory, databases):
                         print('PASS', check.name, file=output)
                 code = 0
             else:
-                env = dict(os.environ, WORLDATLAS_TEST_DATABASE_URL=databases.get(name, ''))
+                env = dict(
+                    os.environ, WORLDATLAS_TEST_DATABASE_URL=databases.get(name, '')
+                )
                 code = subprocess.run(
-                    [sys.executable, '-m', 'unittest', 'discover',
-                     '-s', str(PACKAGE / name), '-t', str(PACKAGE.parent)],
-                    env=env, cwd=directory, stdout=output, stderr=subprocess.STDOUT,
+                    [
+                        sys.executable,
+                        '-m',
+                        'unittest',
+                        'discover',
+                        '-s',
+                        str(PACKAGE / name),
+                        '-t',
+                        str(PACKAGE.parent),
+                    ],
+                    env=env,
+                    cwd=directory,
+                    stdout=output,
+                    stderr=subprocess.STDOUT,
                 ).returncode
         except Exception:
             traceback.print_exc(file=output)
@@ -68,7 +83,7 @@ def run_suite(name, directory, databases):
     return name, code, time.monotonic() - started, log
 
 
-def main():
+def main() -> int:
     """Run the requested suites and return their combined exit status.
 
     Check that the generated SQL is current, prepare isolated database
@@ -78,10 +93,16 @@ def main():
         Zero when all selected suites pass or one if any suite fails.
     """
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--suite', choices=SUITES, help='run one suite; defaults to all suites')
+    parser.add_argument(
+        '--suite', choices=SUITES, help='run one suite; defaults to all suites'
+    )
     args = parser.parse_args()
-    if (ROOT / "database/schema/construction_contracts.sql").read_text() != database_checks():
-        parser.error("construction checks are stale; regenerate database/schema/construction_contracts.sql")
+    if (
+        ROOT / "database/schema/construction_contracts.sql"
+    ).read_text() != database_checks():
+        parser.error(
+            "construction checks are stale; regenerate database/schema/construction_contracts.sql"
+        )
     selected = (args.suite,) if args.suite else tuple(SUITES)
     # Keep the socket path short enough for macOS. Python fixtures use
     # their ordinary temporary directories independently of the server.
@@ -90,40 +111,85 @@ def main():
         data = directory / 'data'
         needs_database = any(SUITES[name] for name in selected)
         if needs_database:
-            subprocess.run(['initdb', '-D', str(data), '-U', 'postgres', '-A', 'trust',
-                            '--no-locale', '--encoding=UTF8'], check=True)
-            subprocess.run(['pg_ctl', '-D', str(data), '-l', str(directory / 'postgres.log'),
-                            '-o', f"-k {directory} -p 5432 -c listen_addresses=''", '-w', 'start'],
-                           check=True)
+            subprocess.run(
+                [
+                    'initdb',
+                    '-D',
+                    str(data),
+                    '-U',
+                    'postgres',
+                    '-A',
+                    'trust',
+                    '--no-locale',
+                    '--encoding=UTF8',
+                ],
+                check=True,
+            )
+            subprocess.run(
+                [
+                    'pg_ctl',
+                    '-D',
+                    str(data),
+                    '-l',
+                    str(directory / 'postgres.log'),
+                    '-o',
+                    f"-k {directory} -p 5432 -c listen_addresses=''",
+                    '-w',
+                    'start',
+                ],
+                check=True,
+            )
         try:
             databases = {}
             if needs_database:
-                base = make_conninfo(user='postgres', dbname='postgres', host=str(directory))
+                base = make_conninfo(
+                    user='postgres', dbname='postgres', host=str(directory)
+                )
                 with psycopg.connect(base, autocommit=True) as server:
                     for name in selected:
                         if not SUITES[name]:
                             continue
-                        server.execute(sql.SQL('CREATE DATABASE {}').format(sql.Identifier(name)))
+                        server.execute(
+                            sql.SQL('CREATE DATABASE {}').format(sql.Identifier(name))
+                        )
                         url = make_conninfo(base, dbname=name)
                         subprocess.run(
-                            ['psql', '-Xq', '--dbname', url, '-f', str(ROOT / 'database/schema.sql')],
+                            [
+                                'psql',
+                                '-Xq',
+                                '--dbname',
+                                url,
+                                '-f',
+                                str(ROOT / 'database/schema.sql'),
+                            ],
                             check=True,
                         )
                         databases[name] = url
             started = time.monotonic()
             failed = False
             with ThreadPoolExecutor(max_workers=len(selected)) as executor:
-                futures = [executor.submit(run_suite, name, directory, databases) for name in selected]
+                futures = [
+                    executor.submit(run_suite, name, directory, databases)
+                    for name in selected
+                ]
                 for future in as_completed(futures):
                     name, code, elapsed, log = future.result()
                     failed |= code != 0
-                    print(f'\n{name}: {"FAILED" if code else "passed"} ({elapsed:.2f}s)', flush=True)
+                    print(
+                        f'\n{name}: {"FAILED" if code else "passed"} ({elapsed:.2f}s)',
+                        flush=True,
+                    )
                     print(log.read_text(), end='', flush=True)
-            print(f'\nAll suites finished in {time.monotonic() - started:.2f}s wall time.', flush=True)
+            print(
+                f'\nAll suites finished in {time.monotonic() - started:.2f}s wall time.',
+                flush=True,
+            )
             return int(failed)
         finally:
             if needs_database:
-                subprocess.run(['pg_ctl', '-D', str(data), '-m', 'fast', '-w', 'stop'], check=True)
+                subprocess.run(
+                    ['pg_ctl', '-D', str(data), '-m', 'fast', '-w', 'stop'], check=True
+                )
 
 
 if __name__ == '__main__':

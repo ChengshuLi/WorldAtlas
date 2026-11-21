@@ -2,18 +2,30 @@
 
 import json
 import math
+from collections.abc import Callable
 from fractions import Fraction
+from typing import Any
 
 import numpy as np
 from osgeo import gdal, ogr, osr
 
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 
 
 class PolygonRasterizer:
     """Prepare one validated source geometry for repeated native-grid windows."""
 
-    def __init__(self, geometry, grid):
+    def __init__(self, geometry: dict[str, Any], grid: Grid) -> None:
+        """Prepare a polygon once for use in multiple grid windows.
+
+        Args:
+            geometry: GeoJSON Polygon or MultiPolygon in WGS84.
+            grid: Grid on which to rasterize it.
+
+        Raises:
+            ValueError: The geometry is invalid or empty.
+        """
         self.grid = grid
         self.geometry = geometry
         self.bounds = None
@@ -32,8 +44,22 @@ class PolygonRasterizer:
             self.layer.CreateFeature(feature)
             self.projection = self.reference.ExportToWkt()
 
-    def rasterize(self, bounds=None):
-        """Rasterize all source pieces, preserving holes and longitude wrapping."""
+    def rasterize(
+        self, bounds: tuple[int, int, int, int] | None = None
+    ) -> tuple[tuple[int, int, int, int], np.ndarray]:
+        """Mark the cell centres covered by a polygon, including any holes.
+
+        Args:
+            bounds: (first_column, end_column, first_row, end_row), or None to
+                derive the bounds from the polygon. A window may wrap at ±180°.
+
+        Returns:
+            (bounds, mask). The 2-D bool mask has one entry for each cell in the
+            window, with True for the cells covered by the polygon.
+
+        Raises:
+            ValueError: The window is invalid or GDAL cannot rasterize the polygon.
+        """
         grid = self.grid
         if bounds is None:
             if self.bounds is None:
@@ -79,46 +105,75 @@ class PolygonRasterizer:
         return bounds, mask
 
 
-def rasterize(geometry, grid, bounds=None):
-    """Rasterize a single source window; repeated callers can prepare it once."""
+def rasterize(
+    geometry: dict[str, Any],
+    grid: Grid,
+    bounds: tuple[int, int, int, int] | None = None,
+) -> tuple[tuple[int, int, int, int], np.ndarray]:
+    """Mark cells covered by a polygon in a single grid window.
+
+    Args:
+        geometry: GeoJSON Polygon or MultiPolygon in WGS84.
+        grid: Grid on which to rasterize it.
+        bounds: Optional window with exclusive end column and row.
+
+    Returns:
+        (bounds, mask), where mask is a 2-D bool array marking covered cells.
+    """
     return PolygonRasterizer(geometry, grid).rasterize(bounds)
 
 
-def _ceil(n, d):
+def _ceil(n: int, d: int) -> int:
+    """Round the quotient up using exact integer division.
+
+    Args:
+        n: Numerator.
+        d: Nonzero denominator.
+
+    Returns:
+        Smallest integer greater than or equal to n / d.
+    """
     return -((-n) // d)
 
 
-def need(ok, message):
-    if not ok:
-        raise ValueError(message)
+def reject_boundary_centers(
+    geometry: dict[str, Any],
+    grid: Grid,
+    *,
+    selected: Callable[[int, int], bool] | None = None,
+) -> int:
+    """Reject selected cell centres that fall exactly on a polygon edge.
 
+    Express the stored coordinates exactly as fractions. A common denominator
+    lets the edge check use integers, so a centre close to an edge still
+    counts as distinct from the edge.
 
-def reject_boundary_centers(geometry, grid, *, selected=None):
-    """Solve exact segment/center incidence with integer congruences.
+    Args:
+        geometry: GeoJSON Polygon or MultiPolygon in WGS84.
+        grid: Grid of cell centres to check.
+        selected: Optional (column, row) test to ignore cells outside the
+            calculation.
 
-    Fraction in the reviewed algorithm denotes each supplied binary64 coordinate
-    exactly. ``selected(x,y)`` can restrict rejection to relevant cells, such as
-    physical land; contacts on other cells do not affect that calculation.
-    as_integer_ratio gives that same value. One conversion per vertex
-    and a common integer denominator per edge avoid repeated Fraction arithmetic.
+    Returns:
+        Number of candidate grid rows inspected across all polygon edges.
+
+    Raises:
+        ValueError: An included cell centre lies on an edge.
     """
-    grid = vars(grid)
-    step = Fraction(grid["step"])
-    w, h = grid["width"], grid["height"]
-    need(
-        type(w) is int
-        and type(h) is int
-        and w > 0
-        and h > 0
-        and Fraction(str(grid["west"])) == -180
-        and Fraction(str(grid["north"])) == 90
-        and step > 0
-        and h * step <= 180,
-        "invalid global grid",
-    )
+    step = Fraction(grid.step)
+    w, h = grid.width, grid.height
     sn, sd = step.numerator, step.denominator
 
-    def pixel(point):
+    def pixel(point: list[float] | tuple[float, float]) -> list[int]:
+        """Express one coordinate in exact cell-centre units.
+
+        Args:
+            point: Longitude and latitude in degrees.
+
+        Returns:
+            [x_numerator, x_denominator, y_numerator, y_denominator]. The
+            centre of the first cell is (0, 0) on this scale.
+        """
         values = []
         for value, origin, sign in ((point[0], 180, 1), (point[1], 90, -1)):
             n, d = (
@@ -197,14 +252,12 @@ def reject_boundary_centers(geometry, grid, *, selected=None):
                 residue = (-b // g * pow(a // g, -1, period)) % period
                 hit = residue + _ceil(lo - residue, period) * period
                 if hit <= hi:
-                    need(
-                        selected is not None,
-                        "polygon boundary crosses grid cell center",
-                    )
+                    if selected is None:
+                        raise ValueError("polygon boundary crosses grid cell center")
                     for y in range(hit, hi + 1, period):
                         x = (a * y + b) // denominator
-                        need(
-                            not selected(x, y),
-                            "polygon boundary crosses grid cell center",
-                        )
+                        if selected(x, y):
+                            raise ValueError(
+                                "polygon boundary crosses grid cell center"
+                            )
     return visits

@@ -50,7 +50,23 @@ class ReferenceIntervals(unittest.TestCase):
             [(1, [[0, 2, 1]]), (0, [[0, 2, 1]])],
             [(0, [[0, 5, 1], [4, 8, 2]])],
             [(0, [[0, 1, 0]])],
+            [(0, [[0.5, 2, 1]])],
+            [(0, [])],
         ):
             with self.subTest(rows=rows), tempfile.TemporaryDirectory() as temp:
                 with self.assertRaises(ValueError):
                     build_reference_index(Grid(36, 18, 10), rows, Path(temp) / "index")
+
+    def test_empty_reference_rows_do_not_add_shore_cells(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "index"
+            report = build_reference_index(
+                Grid(36, 18, 10), [(0, []), (1, [[0, 2, 5]])], root,
+            )
+            tile = report["tiles"][0]
+            self.assertEqual(tile[:4], (0, 0, [5], 1))
+            with self.assertRaisesRegex(ValueError, "needs positive tile and sample sizes"):
+                build_reference_index(
+                    Grid(36, 18, 10), [(0, [[0, 2, 5]])], Path(temp) / "invalid",
+                    tile_cells=0,
+                )

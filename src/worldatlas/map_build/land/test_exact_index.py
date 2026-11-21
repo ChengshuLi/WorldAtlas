@@ -140,6 +140,44 @@ class Exact(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'integrity'):
             idx.nearest_run(6, 2, 3, 20e6)
 
+    def test_tile_geometry_and_manifest_are_validated_before_use(self):
+        with tempfile.TemporaryDirectory() as temp:
+            p = pathlib.Path(temp) / '00000-00000.bin'
+            for data, count, message in (
+                ([(1, 1, 3, 17)], 2, 'dimensions or record count differ'),
+                ([(1, 3, 2, 17)], 1, 'invalid tile data'),
+                ([(1, 4, 7, 17)], 1, 'seed run outside authenticated tile'),
+            ):
+                with self.subTest(data=data):
+                    raw = np.array(data, dtype='<u4').tobytes()
+                    p.write_bytes(raw)
+                    record = (0, 0, [17], count, hashlib.sha256(raw).hexdigest())
+                    index = ExactIndex(temp, 36, 18, 10, 90, [record], tile_cells=4)
+                    with self.assertRaisesRegex(ValueError, message):
+                        index.prepare_leaves()
+            record = (0, 0, [17], 1, '0' * 64)
+            for tiles, step, message in (
+                ([record], 9, 'invalid config'),
+                ([record, record], 10, 'invalid tile manifest'),
+                ([(0, 99, *record[2:])], 10, 'tile outside grid'),
+                ([], 10, 'empty tile index'),
+            ):
+                with self.subTest(message=message):
+                    with self.assertRaisesRegex(ValueError, message):
+                        ExactIndex(temp, 36, 18, step, 90, tiles, tile_cells=4)
+
+    def test_fine_tiles_keep_only_reference_runs_in_each_subtile(self):
+        t, index, _ = self.make([(0, 150, 17)], w=512, C=256)
+        self.addCleanup(t.cleanup)
+        self.assertEqual(index.certificate_tiles, [(0, 1, (17,))])
+        self.assertEqual(index.nearest_run(0, 150, 151, 0)[0], {17: 0})
+        with self.assertRaisesRegex(ValueError, 'invalid query'):
+            index.nearest_run(-1, 150, 151, 0)
+        t, unaligned, _ = self.make([(0, 150, 17)], w=512, C=192)
+        self.addCleanup(t.cleanup)
+        with self.assertRaisesRegex(ValueError, 'unaligned fine seed index'):
+            unaligned.certificate_tiles
+
 
 if __name__ == '__main__':
     unittest.main()

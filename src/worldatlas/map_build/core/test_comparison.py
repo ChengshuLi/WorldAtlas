@@ -1,15 +1,55 @@
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 
-from worldatlas.map_build.core.comparison import compare
+from worldatlas.map_build.core.comparison import comparable_codes, compare, reference_lookup
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.layers import file_hash, write_layer
+from worldatlas.map_build.core.layers import write_layer
+from worldatlas.shared.files import sha256_file
 
 
 class ComparisonTests(unittest.TestCase):
+    def test_category_translation_handles_identity_removed_and_unknown_codes(self):
+        land = dict(code=3, entity_id=1, physical_class="land")
+        water = dict(code=6, entity_id=1, physical_class="water")
+        self.assertIsNone(reference_lookup([land], [land]))
+        lookup = reference_lookup([land, water], [dict(land, code=2)])
+        self.assertEqual(comparable_codes(np.array([0, 3, 6]), lookup).tolist(), [0, 2, -1])
+        for unknown in (4, 9):
+            with self.subTest(code=unknown), self.assertRaisesRegex(ValueError, "unknown"):
+                comparable_codes(np.array([unknown]), lookup)
+
+    def test_comparison_rejects_incomplete_and_changed_reference_pins(self):
+        grid = Grid(4, 1, 90)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            before, after = root / "before", root / "after"
+            write_layer(before, grid, [(0, [(0, 4, 7)])])
+            write_layer(after, grid, [(0, [(0, 4, 8)])])
+            pins = {name: sha256_file(before / name) for name in ("rows.u32le", "runs.u32le")}
+            cases = (
+                ({}, {}, "both reference stream checksums"),
+                (dict(pins, **{"runs.u32le": "bad"}), {}, "checksum differs"),
+                (pins, {"reference_bindings": []}, "both category mappings"),
+            )
+            for expected, options, error in cases:
+                with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
+                    compare(after, before, grid, root / "diff", expected, **options)
+
+            def hash_then_change(path):
+                if path == before / "rows.u32le" and (root / "diff/changes.u32le").exists():
+                    with (after / "runs.u32le").open("ab") as stream:
+                        stream.write(b"changed")
+                return sha256_file(path)
+
+            with patch("worldatlas.map_build.core.comparison.sha256_file", hash_then_change):
+                with self.assertRaisesRegex(ValueError, "input changed"):
+                    compare(after, before, grid, root / "diff", pins)
+            self.assertFalse((root / "diff/report.json").exists())
+
     def test_release_comparison_uses_category_meaning_and_reports_original_codes(self):
         grid = Grid(6, 1, 60)
         old = [
@@ -27,7 +67,7 @@ class ComparisonTests(unittest.TestCase):
             ):
                 write_layer(root / name, grid, [(0, runs)])
             hashes = {
-                name: file_hash(root / "before" / name)
+                name: sha256_file(root / "before" / name)
                 for name in ("rows.u32le", "runs.u32le")
             }
             for output, pairs in (("recoded", {}), ("changed", {"17->17": 1, "2->17": 1})):
@@ -45,25 +85,28 @@ class ComparisonTests(unittest.TestCase):
                     self.assertEqual(report["changed_cells"], sum(pairs.values()))
                     self.assertFalse(report["byte_identical"])
 
-    def test_removed_southern_rows_are_reported_separately(self):
-        original, cropped = Grid(4, 2, 90), Grid(4, 1, 90)
+    def test_comparison_rejects_different_row_counts(self):
+        tall, short = Grid(4, 2, 90), Grid(4, 1, 90)
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             write_layer(
-                root / "before", original, [(0, [(0, 4, 81)]), (1, [(0, 4, 11)])]
+                root / "tall", tall, [(0, [(0, 4, 81)]), (1, [(0, 4, 11)])]
             )
-            write_layer(root / "after", cropped, [(0, [(0, 4, 81)])])
-            hashes = {
-                name: file_hash(root / "before" / name)
-                for name in ("rows.u32le", "runs.u32le")
-            }
-            report = compare(
-                root / "after", root / "before", cropped, root / "diff", hashes
-            )
-            self.assertEqual(report["changed_cells"], 0)
-            self.assertEqual(report["removed_cells_by_code"], {"11": 4})
-            self.assertTrue(report["assignments_identical_on_retained_grid"])
-            self.assertFalse(report["byte_identical"])
+            write_layer(root / "short", short, [(0, [(0, 4, 81)])])
+            for candidate, reference, grid in (
+                ("short", "tall", short),
+                ("tall", "short", tall),
+            ):
+                with self.subTest(candidate=candidate):
+                    hashes = {
+                        name: sha256_file(root / reference / name)
+                        for name in ("rows.u32le", "runs.u32le")
+                    }
+                    with self.assertRaisesRegex(ValueError, "same row count"):
+                        compare(
+                            root / candidate, root / reference, grid, root / "diff", hashes
+                        )
+                    self.assertFalse((root / "diff").exists())
 
     def test_exact_changed_spans_and_row_offsets(self):
         grid = Grid(4, 2, 90.0)
@@ -76,7 +119,7 @@ class ComparisonTests(unittest.TestCase):
                 [(0, [(0, 1, 81), (1, 3, 70000), (3, 4, 81)]), (1, [(0, 4, 81)])],
             )
             hashes = {
-                name: file_hash(root / "before" / name)
+                name: sha256_file(root / "before" / name)
                 for name in ("rows.u32le", "runs.u32le")
             }
             report = compare(

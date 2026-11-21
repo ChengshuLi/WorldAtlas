@@ -9,11 +9,14 @@ import argparse
 import json
 import logging
 import os
+from collections.abc import Callable
 from contextlib import ExitStack, closing
 from pathlib import Path
+from typing import Any
 
-import psycopg
 import boto3
+import psycopg
+from botocore.client import BaseClient
 
 from worldatlas.source_imports.iho.areas import s130_areas
 from worldatlas.source_imports.interpreted.geometry import interpreted_geometry
@@ -38,7 +41,9 @@ IMPORTERS = {
 }
 
 
-def read_recipe(database, recipe_id):
+def read_recipe(
+    database: psycopg.Connection, recipe_id: str
+) -> tuple[str, dict[str, Any]]:
     """Return the stored method and arguments for a construction ID.
 
     Args:
@@ -52,8 +57,7 @@ def read_recipe(database, recipe_id):
         ValueError: The construction record is missing.
     """
     row = database.execute(
-        'SELECT method,arguments FROM atlas.construction_records '
-        'WHERE id=%s',
+        'SELECT method,arguments FROM atlas.construction_records WHERE id=%s',
         (recipe_id,),
     ).fetchone()
     if row is None:
@@ -61,7 +65,13 @@ def read_recipe(database, recipe_id):
     return row
 
 
-def run_import(connect, recipe_id, *, storage=None, work_dir=None):
+def run_import(
+    connect: Callable[[], psycopg.Connection],
+    recipe_id: str,
+    *,
+    storage: BaseClient | None = None,
+    work_dir: Path | None = None,
+) -> dict[str, Any]:
     """Run a construction validated when it was saved in Neon.
 
     Pass the saved keyword arguments and a separate ``Runtime`` object
@@ -98,7 +108,7 @@ def run_import(connect, recipe_id, *, storage=None, work_dir=None):
     )
 
 
-def main():
+def main() -> None:
     """Run the requested import and print its result as JSON."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     parser = argparse.ArgumentParser(description=__doc__)
@@ -106,7 +116,9 @@ def main():
         "--recipe", metavar="ID", required=True, help="construction ID in Neon"
     )
     parser.add_argument("--r2-endpoint")
-    parser.add_argument("--work-dir", type=Path, help="local cache for raw source files")
+    parser.add_argument(
+        "--work-dir", type=Path, help="local cache for raw source files"
+    )
     args = parser.parse_args()
     if not (connection := os.environ.get("NEON_DATABASE_URL")):
         parser.error("set NEON_DATABASE_URL to the working database")

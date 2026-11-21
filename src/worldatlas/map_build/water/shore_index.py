@@ -7,11 +7,26 @@ Batches are complete row ranges, not data/resource ceilings.
 """
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 from worldatlas.map_build.water.shore_spans import ShoreSpans
 
 
-def flat_rows(grid, first_row, end_row, width):
+def flat_rows(
+    grid: tuple[np.ndarray, np.ndarray], first_row: int, end_row: int, width: int
+) -> tuple[np.ndarray, np.ndarray, int]:
+    """Read several rows as runs over one flat sequence of grid cells.
+
+    Args:
+        grid: Row offsets and flattened run data.
+        first_row: First row to include.
+        end_row: Exclusive end row.
+        width: Number of columns.
+
+    Returns:
+        (end_cell_indices, codes, first_run_index). End indices include
+        the row's position in the full flattened grid.
+    """
     offsets, runs = grid
     first, last = int(offsets[first_row]), int(offsets[end_row])
     values = runs[2 * first : 2 * last]
@@ -32,9 +47,31 @@ def flat_rows(grid, first_row, end_row, width):
 
 
 class ShoreIndex(ShoreSpans):
+    """Find land cells that share an edge with physical water."""
+
     def __init__(
-        self, physical, land, width, height, *, rows_per_batch=256, land_codes=None
-    ):
+        self,
+        physical: tuple[np.ndarray, np.ndarray],
+        land: tuple[np.ndarray, np.ndarray],
+        width: int,
+        height: int,
+        *,
+        rows_per_batch: int = 256,
+        land_codes: ArrayLike | None = None,
+    ) -> None:
+        """Build shore runs in row batches.
+
+        Args:
+            physical: Row-run grid with land (17) and water (1).
+            land: Labels on the land cells.
+            width: Number of columns.
+            height: Number of rows.
+            rows_per_batch: Number of rows to process together.
+            land_codes: Optional set of valid land labels.
+
+        Raises:
+            ValueError: A row is invalid or a physical land cell lacks a valid label.
+        """
         if any(
             type(value) is not int or value <= 0
             for value in (width, height, rows_per_batch)
@@ -66,7 +103,16 @@ class ShoreIndex(ShoreSpans):
             if np.any((pv != 1) & (pv != 17)):
                 raise ValueError("invalid physical or land row")
 
-            def portion(a, b):
+            def portion(a: int, b: int) -> tuple[np.ndarray, np.ndarray]:
+                """Look up a subrange of the physical rows in the current batch.
+
+                Args:
+                    a: First row to include.
+                    b: Exclusive end row.
+
+                Returns:
+                    Flat end cell indices and physical codes.
+                """
                 a, b = int(prows[a]) - first, int(prows[b]) - first
                 return pe[a:b], pv[a:b]
 
@@ -96,8 +142,17 @@ class ShoreIndex(ShoreSpans):
                 ranks.append(inverse[offset : offset + len(group)])
                 offset += len(group)
 
-            def expand(values, end_ranks):
+            def expand(values: np.ndarray, end_ranks: np.ndarray) -> np.ndarray:
                 # Repeat over CUT intervals, never over individual grid cells.
+                """Repeat run values over the aligned intervals in the batch.
+
+                Args:
+                    values: Codes from one input stream.
+                    end_ranks: Positions of its run ends in the combined cuts.
+
+                Returns:
+                    Code array with one value per aligned interval.
+                """
                 return np.repeat(values, np.diff(np.r_[0, end_ranks]))
 
             starts, stops = cuts[:-1], cuts[1:]

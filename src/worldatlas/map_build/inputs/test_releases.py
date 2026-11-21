@@ -12,6 +12,19 @@ from worldatlas.map_build.inputs.releases import read_release_assets
 from worldatlas.map_releases.catalog import lookup_release
 
 
+class ReleaseAccessTests(unittest.TestCase):
+    def test_missing_or_unavailable_catalog_is_reported_without_credentials(self):
+        with patch.dict(os.environ, NEON_DATABASE_URL=""):
+            with self.assertRaisesRegex(ValueError, "set NEON_DATABASE_URL"):
+                read_release_assets("v97.0")
+        with (
+            patch.dict(os.environ, NEON_DATABASE_URL="invalid"),
+            patch.object(psycopg, "connect", side_effect=psycopg.OperationalError("failed")),
+        ):
+            with self.assertRaisesRegex(ValueError, "Neon release lookup failed"):
+                read_release_assets("v97.0")
+
+
 @unittest.skipUnless(
     os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
 )
@@ -66,6 +79,13 @@ class ReleaseLookupTests(unittest.TestCase):
                     )
                     self.assertEqual(config, dict(objects["config.json"], r2_bucket="test"))
                     self.assertEqual(storage.key, folder + "manifest.json")
+                    without_config = json.loads(raw)
+                    without_config["objects"].pop("config.json")
+                    with patch(
+                        "worldatlas.map_build.inputs.releases.read_manifest",
+                        return_value=without_config,
+                    ):
+                        self.assertEqual(read_release_assets(identity), (streams, None))
                     with self.assertRaisesRegex(ValueError, "no unique release"):
                         read_release_assets("v97.0")
                 with database.transaction(force_rollback=True):

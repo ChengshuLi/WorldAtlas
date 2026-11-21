@@ -10,7 +10,7 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.areas import assign_area, divide_area
-from worldatlas.map_build.division.policies import nearest_basin_water
+from worldatlas.map_build.division.policies import nearest_basin_water, nearest_land
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.land.components import ComponentGrid
@@ -20,6 +20,58 @@ from worldatlas.map_build.water.shared_nearest import crop
 
 
 class ScopeRows(unittest.TestCase):
+    def test_polygon_rows_reuse_the_rasterizer_beyond_the_first_batch(self):
+        grid = Grid(360, 180, 1)
+        offsets = np.arange(grid.height + 1, dtype=np.uint32)
+        water = offsets, np.tile(np.array([grid.width, 1], dtype=np.uint32), grid.height)
+        blank = offsets, np.tile(np.array([grid.width, 0], dtype=np.uint32), grid.height)
+        geometry = dict(type="Polygon", coordinates=[[
+            [0, -30], [2, -30], [2, 90], [0, 90], [0, -30],
+        ]])
+        rule = dict(
+            physical_class="water", unit="cell", unassigned_only=False,
+            features={"scope_area": [{"geometry": geometry}]},
+        )
+        scope = Scope(rule, grid, water, water, blank, lambda kind: None)
+        for y in (0, 100):
+            with self.subTest(y=y):
+                ends, on = scope.query_row(y)
+                self.assertEqual((ends.tolist(), on.tolist()), ([180, 182, 360], [0, 1, 0]))
+        self.assertEqual(scope.area_row(150)[1].tolist(), [0])
+
+        rejected = dict(rule, features={"connected_to": [
+            {"geometry": dict(type="Point", coordinates=[0, 0])}
+        ]})
+        scope = Scope(rejected, grid, water, water, blank, lambda kind: None)
+        with self.assertRaisesRegex(ValueError, "requires eligible parent connectivity"):
+            scope.query_row(0)
+
+        no_land = dict(rule, features={}, physical_class="land")
+        scope = Scope(no_land, grid, water, water, blank, lambda kind: None)
+        self.assertEqual(list(scope.query_windows()), [])
+
+    def test_points_are_checked_against_grid_physical_class_and_parent(self):
+        grid = Grid(24, 6, 15)
+        data = [
+            (np.arange(grid.height + 1, dtype=np.uint32),
+             np.tile(np.array([grid.width, code], dtype=np.uint32), grid.height))
+            for code in (0, 1, 17)
+        ]
+        missing_component = SimpleNamespace(component_at=lambda lon, lat: None)
+        for lat, physical, message in (
+            (-60, data[2], "outside the grid"),
+            (60, data[0], "outside the physical domain"),
+            (60, data[1], "incompatible physical class"),
+            (60, data[2], "outside the parent"),
+        ):
+            with self.subTest(message=message):
+                rule = dict(
+                    physical_class="land", unit="component", unassigned_only=False,
+                    features={"scope_component": [{"geometry": dict(type="Point", coordinates=[0, lat])}]},
+                )
+                with self.assertRaisesRegex(ValueError, message):
+                    Scope(rule, grid, physical, data[1], data[0], lambda kind: missing_component)
+
     def test_polygon_south_of_retained_grid_has_no_claims(self):
         grid = Grid(24, 6, 15)
         geometry = dict(
@@ -93,6 +145,8 @@ class ScopeRows(unittest.TestCase):
             mask = np.stack(
                 [crop(*data[0], y, x0, x1, grid.width) == 1 for y in range(y0, y1)]
             )
+            with self.assertRaisesRegex(ValueError, "prepared area does not represent"):
+                prepared.set_eligible_area(mask[:, :-1], prepared.bounds)
             prepared.set_eligible_area(mask, prepared.bounds)
             windows = list(prepared.query_windows())
             self.assertEqual(len(windows[0][2]), 2)
@@ -101,7 +155,15 @@ class ScopeRows(unittest.TestCase):
                     np.testing.assert_array_equal(a, b)
                 for a, b in zip(raw.context_row(y), prepared.context_row(y)):
                     np.testing.assert_array_equal(a, b)
-            references = ShoreGeometry(data[0], grid).attach(data[2], [101, 807])
+            shores = ShoreGeometry(data[0], grid)
+            with self.assertRaisesRegex(ValueError, "need physical components"):
+                shores.attach(data[2], [101, 807], reference_components={0})
+            with self.assertRaisesRegex(ValueError, "outside parent land components"):
+                shores.attach(
+                    data[2], [101, 807], reference_components={0},
+                    components=SimpleNamespace(row=lambda _: np.empty((0, 3), dtype=np.uint32)),
+                )
+            references = shores.attach(data[2], [101, 807])
             first = nearest(raw, references, "cell", directory=root / "raw")
             second = nearest(prepared, references, "cell", directory=root / "prepared")
             self.assertEqual(sum(first["counts"].values()), 2)
@@ -111,6 +173,11 @@ class ScopeRows(unittest.TestCase):
                     (root / "raw" / name).read_bytes(),
                     (root / "prepared" / name).read_bytes(),
                 )
+            no_gaps = Scope(dict(rule, unassigned_only=False), grid, *data, lambda kind: None)
+            no_gaps.set_eligible_area(mask, prepared.bounds)
+            self.assertEqual(sum(no_gaps.query_row(8)[1]), 2)
+            no_gaps.set_eligible_area(np.zeros_like(mask), prepared.bounds)
+            self.assertEqual(list(no_gaps.query_windows()), [])
 
     def test_component_selection_retains_rows_beyond_polygon_extent(self):
         grid = Grid(36, 18, 10)
@@ -148,6 +215,28 @@ class ScopeRows(unittest.TestCase):
             self.assertEqual(list(scope.query_rows()), [8, 9, 10])
             result = assign_area(scope, 807, root / "claims")
             self.assertEqual(result["counts"], {"807": 3})
+
+            point = dict(type="Point", coordinates=[5, 5])
+            by_point = dict(rule, unit="cell", features={"scope_component": [{"geometry": point}]})
+            scope = Scope(by_point, grid, *data, lambda kind: components)
+            self.assertEqual(scope.context_row(8)[1].tolist(), [0, 1, 0])
+            self.assertEqual(scope.context_row(1)[1].tolist(), [0])
+            unrestricted = Scope(dict(rule, features={}), grid, *data, lambda kind: components)
+            self.assertEqual(
+                unrestricted.eligible_components()["land"].tolist(),
+                sorted(components.totals()),
+            )
+            offshore = dict(
+                rule, features={"distance_reference": [
+                    {"geometry": dict(type="Point", coordinates=[-45, 45])}
+                ]}
+            )
+            scope = Scope(offshore, grid, *data, lambda kind: components)
+            with self.assertRaisesRegex(ValueError, "distance reference does not identify parent land"):
+                nearest_land(
+                    SimpleNamespace(components=lambda kind: components),
+                    scope, root / "offshore",
+                )
             with open_grid(result["directory"], grid) as claims:
                 ends, owners = row(claims, 10, grid.width)
                 self.assertEqual(

@@ -2,14 +2,21 @@
 
 import hashlib
 import os
+import shutil
+import time
+from collections.abc import Callable, Iterable, Sequence
 from contextlib import closing
 from pathlib import Path
-import shutil
 from tempfile import NamedTemporaryFile
-import time
+from typing import IO, Any
+
+from botocore.client import BaseClient
+from psycopg import Connection
 
 
-def catalog_sources(database, source_ids):
+def catalog_sources(
+    database: Connection, source_ids: Iterable[str]
+) -> dict[str, dict[str, Any]]:
     """Resolve raw source IDs in one catalog query.
 
     Args:
@@ -30,7 +37,13 @@ def catalog_sources(database, source_ids):
         (ids,),
     )
     sources = {
-        ident: dict(source_id=ident, r2_bucket=bucket, r2_key=key, sha256=digest, size_bytes=size)
+        ident: dict(
+            source_id=ident,
+            r2_bucket=bucket,
+            r2_key=key,
+            sha256=digest,
+            size_bytes=size,
+        )
         for ident, bucket, key, digest, size in rows
     }
     missing = next((ident for ident in ids if ident not in sources), None)
@@ -39,7 +52,7 @@ def catalog_sources(database, source_ids):
     return sources
 
 
-def check_source(path, source):
+def check_source(path: Path, source: dict[str, Any]) -> None:
     """Check a local file against the expected byte size and SHA-256.
 
     Check the size of the open file before reading it for the hash.
@@ -60,7 +73,13 @@ def check_source(path, source):
             raise ValueError('source file size or hash differs from the Neon catalog')
 
 
-def stream_source(client, source, output, *, check_cancelled=lambda: None):
+def stream_source(
+    client: BaseClient,
+    source: dict[str, Any],
+    output: IO[bytes],
+    *,
+    check_cancelled: Callable[[], None] = lambda: None,
+) -> None:
     """Copy an R2 object to the caller's open binary output in chunks.
 
     Close the R2 response body after reading it. The caller owns the
@@ -93,7 +112,14 @@ def stream_source(client, source, output, *, check_cancelled=lambda: None):
             raise ValueError('source file size or hash differs from the Neon catalog')
 
 
-def download_source(client, source, work_dir, *, timing=None, filename=None):
+def download_source(
+    client: BaseClient,
+    source: dict[str, Any],
+    work_dir: Path | str,
+    *,
+    timing: dict[str, Any] | None = None,
+    filename: str | None = None,
+) -> Path:
     """Return a verified local path for a cataloged R2 object.
 
     Verify cached content before reuse. Share the bytes by hard link when
@@ -141,7 +167,7 @@ def download_source(client, source, work_dir, *, timing=None, filename=None):
         with output:
             started = time.monotonic()
             try:
-                stream_source(client, source, output)
+                stream_source(client, source, output.file)
             finally:
                 if timing is not None:
                     ended = time.monotonic()
@@ -159,7 +185,16 @@ def download_source(client, source, work_dir, *, timing=None, filename=None):
     return destination
 
 
-def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir, *, timing=None):
+def assemble_parts(
+    client: BaseClient,
+    parts: Sequence[dict[str, Any]],
+    sha256: str,
+    size_bytes: int,
+    filename: str,
+    work_dir: Path | str,
+    *,
+    timing: dict[str, Any] | None = None,
+) -> Path:
     """Reassemble and verify a provider file stored as multiple R2 objects.
 
     Reuse a verified assembly when present. Otherwise concatenate the
@@ -181,7 +216,12 @@ def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir, *, tim
         ValueError: No parts were supplied, the filename is invalid, or the
             part sizes or file contents fail verification.
     """
-    if not parts or not filename or Path(filename).name != filename or filename in ('.', '..'):
+    if (
+        not parts
+        or not filename
+        or Path(filename).name != filename
+        or filename in ('.', '..')
+    ):
         raise ValueError('ordered source parts and a plain filename are required')
     if sum(part['size_bytes'] for part in parts) != size_bytes:
         raise ValueError('source part sizes do not match the complete file')
@@ -197,7 +237,9 @@ def assemble_parts(client, parts, sha256, size_bytes, filename, work_dir, *, tim
     try:
         with output:
             for part in parts:
-                with download_source(client, part, work_dir, timing=timing).open('rb') as stream:
+                with download_source(client, part, work_dir, timing=timing).open(
+                    'rb'
+                ) as stream:
                     shutil.copyfileobj(stream, output, 1 << 20)
         check_source(partial, source)
         try:

@@ -6,14 +6,21 @@ link the records that hold the polygons for one area.
 
 import math
 import time
+from pathlib import Path
+from typing import Any
 from xml.etree import ElementTree
 from zipfile import ZipFile
 
 from shapely import union_all
 from shapely.affinity import translate
-from shapely.geometry import Polygon, box, mapping
+from shapely.geometry import GeometryCollection, MultiPolygon, Polygon, box, mapping
+from shapely.geometry.base import BaseGeometry
 
-from worldatlas.source_imports.shared.recipe_types import FeatureIdentity, NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import (
+    FeatureIdentity,
+    NonEmptyText,
+    SourceId,
+)
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import feature_result, save_features
@@ -30,7 +37,7 @@ LINKS_TO_AREA_PIECES = "s130:theCollection"
 RING_COORDINATES = "gml:LinearRing/gml:posList"
 
 
-def read_document(path, member):
+def read_document(path: Path | str, member: str) -> ElementTree.Element:
     """Parse the selected GML file from a verified archive.
 
     Args:
@@ -51,7 +58,7 @@ def read_document(path, member):
             return ElementTree.parse(source).getroot()
 
 
-def polygon_parts(geometry):
+def polygon_parts(geometry: BaseGeometry) -> list[Polygon]:
     """Collect the polygon pieces of a geometry after longitude clipping.
 
     Args:
@@ -63,14 +70,16 @@ def polygon_parts(geometry):
     """
     if geometry.is_empty:
         return []
-    if geometry.geom_type == "Polygon":
+    if isinstance(geometry, Polygon):
         return [geometry]
-    if hasattr(geometry, "geoms"):
+    if isinstance(geometry, (MultiPolygon, GeometryCollection)):
         return [part for child in geometry.geoms for part in polygon_parts(child)]
     return []
 
 
-def read_ring_coordinates(position):
+def read_ring_coordinates(
+    position: ElementTree.Element | None,
+) -> list[tuple[float, float]]:
     """Read an outline or hole and keep its longitudes continuous.
 
     Args:
@@ -109,11 +118,13 @@ def read_ring_coordinates(position):
     # Shapely would close an open ring by adding a straight edge. For a ring
     # that winds around a pole, that edge would cross the whole longitude grid.
     if unwrapped[0] != unwrapped[-1]:
-        raise ValueError("S-130 ring does not close after unwrapping; check the pole edge")
+        raise ValueError(
+            "S-130 ring does not close after unwrapping; check the pole edge"
+        )
     return unwrapped
 
 
-def read_polygon_patch(patch):
+def read_polygon_patch(patch: ElementTree.Element) -> BaseGeometry:
     """Read one source polygon with its holes and split it at the dateline.
 
     Args:
@@ -153,7 +164,7 @@ def read_polygon_patch(patch):
     return union_all(pieces)
 
 
-def _linked_record_ids(record, link_tag):
+def _linked_record_ids(record: ElementTree.Element, link_tag: str) -> list[str]:
     """Read the target XML IDs for links of one kind.
 
     Args:
@@ -172,7 +183,7 @@ def _linked_record_ids(record, link_tag):
 class SeaAreas:
     """Find sea areas by IHO ID and assemble the polygons for each area."""
 
-    def __init__(self, document):
+    def __init__(self, document: ElementTree.Element) -> None:
         """Index XML records and find the record for each whole sea area.
 
         A Maritime Resource Name (MRN) identifies the sea area. The record
@@ -215,7 +226,7 @@ class SeaAreas:
             if not is_piece:
                 self._whole_record_ids.setdefault(provider_id, []).append(xml_id)
 
-    def geometry(self, provider_id):
+    def geometry(self, provider_id: str | int) -> dict[str, Any]:
         """Assemble the complete geometry of one sea area.
 
         Args:
@@ -230,11 +241,15 @@ class SeaAreas:
         """
         whole_area_ids = self._whole_record_ids.get(provider_id, ())
         if len(whole_area_ids) != 1:
-            raise ValueError(f"IHO area ID must identify one complete area: {provider_id!r}")
+            raise ValueError(
+                f"IHO area ID must identify one complete area: {provider_id!r}"
+            )
         polygons = self._read_record_polygons(whole_area_ids[0], ())
         return mapping(union_all(polygons))
 
-    def _read_record_polygons(self, xml_id, link_path):
+    def _read_record_polygons(
+        self, xml_id: str, link_path: tuple[str, ...]
+    ) -> list[BaseGeometry]:
         """Read polygons from a record, following links when it stores only pieces.
 
         Args:
@@ -256,18 +271,24 @@ class SeaAreas:
 
         piece_ids = _linked_record_ids(record, LINKS_TO_AREA_PIECES)
         if not piece_ids:
-            raise ValueError(f"S-130 record {xml_id!r} has no polygons or links to pieces")
+            raise ValueError(
+                f"S-130 record {xml_id!r} has no polygons or links to pieces"
+            )
         provider_id = self._provider_ids[xml_id]
         path = (*link_path, xml_id)
         polygons = []
         for piece_id in piece_ids:
             if self._provider_ids.get(piece_id) != provider_id:
-                raise ValueError(f"missing or mismatched S-130 piece {piece_id!r} in {xml_id!r}")
+                raise ValueError(
+                    f"missing or mismatched S-130 piece {piece_id!r} in {xml_id!r}"
+                )
             polygons.extend(self._read_record_polygons(piece_id, path))
         return polygons
 
 
-def read_areas(path, *, gml_member, selections):
+def read_areas(
+    path: Path | str, *, gml_member: str, selections: list[FeatureIdentity]
+) -> list[dict[str, Any]]:
     """Read complete S-130 areas from a verified archive.
 
     Args:
@@ -295,7 +316,7 @@ def s130_areas(
     source_id: SourceId,
     gml_member: NonEmptyText,
     selections: list[FeatureIdentity],
-):
+) -> dict[str, Any]:
     """Import complete S-130 sea areas with linked surfaces and holes.
 
     Args:
@@ -308,8 +329,12 @@ def s130_areas(
         Saved feature IDs, the local source path, and timings.
     """
     started, timing = time.monotonic(), {}
-    path, = acquire_sources(runtime, [source_id], timing=timing)
+    (path,) = acquire_sources(runtime, [source_id], timing=timing)
     features = read_areas(path, gml_member=gml_member, selections=selections)
     feature_ids = save_features(runtime, features)
-    return feature_result(feature_ids, time.monotonic() - started, source=path,
-                          download_seconds=timing.get("download_seconds", 0.0))
+    return feature_result(
+        feature_ids,
+        time.monotonic() - started,
+        source=path,
+        download_seconds=timing.get("download_seconds", 0.0),
+    )

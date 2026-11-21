@@ -2,9 +2,12 @@
 
 import json
 import time
-from typing import Literal, NotRequired, TypedDict
+from pathlib import Path
+from typing import Any, Literal, NotRequired, TypedDict
 
 import osmium
+from osmium.geom import GeoJSONFactory
+from osmium.osm import Area, Changeset, Node, Relation, Way
 
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
@@ -29,7 +32,9 @@ class OsmSelection(TypedDict):
 OBJECT_TYPES = {"node": "n", "way": "w", "relation": "r"}
 
 
-def read_features(path, selections):
+def read_features(
+    path: Path | str, selections: list[OsmSelection]
+) -> list[dict[str, Any]]:
     """Read the requested objects and return their GeoJSON features.
 
     With ``with_areas()``, Osmium yields original OSM objects and emits a
@@ -62,7 +67,9 @@ def read_features(path, selections):
             raise ValueError("unsupported selected OSM object type")
         key = kind, int(selection["source_feature_id"])
         if key in requested:
-            raise ValueError(f"OSM {selection['object_type']} {key[1]} is selected more than once")
+            raise ValueError(
+                f"OSM {selection['object_type']} {key[1]} is selected more than once"
+            )
         requested[key] = selection
 
     # Area assembly also loads node locations. A way-only request just needs
@@ -72,13 +79,13 @@ def read_features(path, selections):
         processor = processor.with_areas()
     elif any(kind == "w" for kind, _ in requested):
         processor = processor.with_locations()
-    factory = osmium.geom.GeoJSONFactory()
+    factory = GeoJSONFactory()
     # Track source objects and geometries separately. Finding the original
     # relation tells us nothing about whether its members formed an area.
     seen, geometries = set(), {}
     for obj in processor:
-        # is_area() identifies the separate "a" objects emitted by Osmium.
-        if obj.is_area():
+        # Area is the separate "a" object emitted by Osmium.
+        if isinstance(obj, Area):
             # Osmium can also emit a separate area for a closed way. The way
             # branch below works for any selected closed way, even one that
             # does not get a separate area.
@@ -90,11 +97,15 @@ def read_features(path, selections):
                 try:
                     geometries[key] = json.loads(factory.create_multipolygon(obj))
                 except RuntimeError as error:
-                    raise ValueError(f"Osmium returned an invalid area for {key}") from error
+                    raise ValueError(
+                        f"Osmium returned an invalid area for {key}"
+                    ) from error
             continue
 
         # Use the original objects for identity and tag checks, including when
         # Osmium supplies the geometry in a separate area object.
+        if isinstance(obj, Changeset):
+            continue
         key = obj.type_str(), obj.id
         if key not in requested:
             continue
@@ -108,11 +119,11 @@ def read_features(path, selections):
             for name, value in requested[key].get("expected_tags", {}).items()
         ):
             raise ValueError(f"selected OSM identity tags differ for {key}")
-        if obj.is_node():
+        if isinstance(obj, Node):
             if not obj.location.valid():
                 raise ValueError(f"selected OSM node {obj.id} has no valid coordinates")
             geometries[key] = json.loads(factory.create_point(obj.location))
-        elif obj.is_way():
+        elif isinstance(obj, Way):
             if not obj.is_closed():
                 raise ValueError(f"selected OSM way {obj.id} is open")
             # Ask Osmium for the outline's coordinates and use that closed
@@ -120,13 +131,18 @@ def read_features(path, selections):
             try:
                 ring = json.loads(factory.create_linestring(obj.nodes))["coordinates"]
             except (RuntimeError, osmium.InvalidLocationError) as error:
-                raise ValueError(f"Osmium could not read the outline of {key}") from error
+                raise ValueError(
+                    f"Osmium could not read the outline of {key}"
+                ) from error
             geometries[key] = {"type": "MultiPolygon", "coordinates": [[ring]]}
-        elif obj.is_relation() and any(
-            (member.type, member.role) not in (("w", "outer"), ("w", "inner"), ("n", "label"))
+        elif isinstance(obj, Relation) and any(
+            (member.type, member.role)
+            not in (("w", "outer"), ("w", "inner"), ("n", "label"))
             for member in obj.members
         ):
-            raise ValueError(f"unsupported member role in selected OSM relation {obj.id}")
+            raise ValueError(
+                f"unsupported member role in selected OSM relation {obj.id}"
+            )
 
     for key in requested:
         if key not in seen:
@@ -141,7 +157,9 @@ def read_features(path, selections):
             for ring in polygon
             for a, b in zip(ring, ring[1:])
         ):
-            raise ValueError("OSM ring crosses the longitude seam; an explicit wrapped construction is needed")
+            raise ValueError(
+                "OSM ring crosses the longitude seam; an explicit wrapped construction is needed"
+            )
 
     return [
         dict(
@@ -157,7 +175,7 @@ def selected_osm_features(
     *,
     source_id: SourceId,
     selections: list[OsmSelection],
-):
+) -> dict[str, Any]:
     """Download an OSM extract and save its selected features in Neon.
 
     Args:
@@ -172,7 +190,11 @@ def selected_osm_features(
         ValueError: The source, selection, or save fails validation.
     """
     started, timing = time.monotonic(), {}
-    path, = acquire_sources(runtime, [source_id], timing=timing)
+    (path,) = acquire_sources(runtime, [source_id], timing=timing)
     feature_ids = save_features(runtime, read_features(path, selections))
-    return feature_result(feature_ids, time.monotonic() - started, source=path,
-                          download_seconds=timing.get("download_seconds", 0.0))
+    return feature_result(
+        feature_ids,
+        time.monotonic() - started,
+        source=path,
+        download_seconds=timing.get("download_seconds", 0.0),
+    )

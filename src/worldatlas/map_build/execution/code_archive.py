@@ -2,11 +2,12 @@
 
 import base64
 import gzip
-from importlib.metadata import distribution
 import json
+from importlib.metadata import distribution
 from pathlib import Path, PurePosixPath
+from typing import Any
 
-from worldatlas.map_build.execution.runtime import json_bytes
+from worldatlas.shared.files import json_bytes
 
 SCHEMA = "worldatlas-source-code-v1"
 SOURCE_SUFFIXES = {
@@ -31,8 +32,19 @@ SOURCE_SUFFIXES = {
 SETUP = ("environment.yml", "pyproject.toml", "README.md")
 
 
-def capture_source(package):
-    """Capture the installed package and its shipped setup files, including local edits."""
+def capture_source(package: Path | str) -> dict[str, Any]:
+    """Capture the Python package and setup files used for this run.
+
+    Args:
+        package: Local worldatlas package directory.
+
+    Returns:
+        Archive dictionary with "schema" and "files". "files" maps relative
+        paths such as "src/worldatlas/__init__.py" to Base64 strings.
+
+    Raises:
+        ValueError: A required setup file is missing or an input is a symlink.
+    """
     package = Path(package).resolve()
     paths = {
         f"src/worldatlas/{p.relative_to(package).as_posix()}": p
@@ -64,7 +76,7 @@ def capture_source(package):
                 if relative in SETUP or (
                     relative.startswith("database/") and relative.endswith(".sql")
                 ):
-                    paths[relative] = Path(installed.locate_file(item))
+                    paths[relative] = Path(str(installed.locate_file(item)))
     if not set(SETUP) <= paths.keys():
         raise ValueError("installed WorldAtlas is missing its build setup files")
     if "database/schema.sql" not in paths:
@@ -77,19 +89,44 @@ def capture_source(package):
     return {"schema": SCHEMA, "files": files}
 
 
-def write_source(path, content):
+def write_source(path: Path | str, content: dict[str, Any]) -> None:
+    """Write a new gzip-compressed JSON source archive.
+
+    Args:
+        path: Destination. The file must not already exist.
+        content: Source archive dictionary.
+    """
     with Path(path).open("xb") as output:
         output.write(gzip.compress(json_bytes(content), compresslevel=6, mtime=0))
 
 
-def read_source(path):
+def read_source(path: Path | str) -> dict[str, Any]:
+    """Load and validate a gzip-compressed JSON source archive.
+
+    Args:
+        path: Archive file path.
+
+    Returns:
+        Archive dictionary with validated file paths and Base64 contents.
+    """
     content = json.loads(gzip.decompress(Path(path).read_bytes()))
     source_files(content)
     return content
 
 
-def source_files(content):
-    """Validate every path before writing any restored source files."""
+def source_files(content: dict[str, Any]) -> dict[str, bytes]:
+    """Validate every archive path and decode the corresponding file.
+
+    Args:
+        content: Archive dictionary with a schema tag and Base64 file values.
+
+    Returns:
+        Archive-relative paths mapped to decoded file bytes.
+
+    Raises:
+        ValueError: The archive uses an unsafe path, has invalid bytes,
+            or is missing required setup files.
+    """
     if (
         not isinstance(content, dict)
         or content.get("schema") != SCHEMA
@@ -123,7 +160,17 @@ def source_files(content):
     return files
 
 
-def restore_source(content, output):
+def restore_source(content: dict[str, Any], output: Path | str) -> None:
+    """Restore the archived files into a new directory.
+
+    Args:
+        content: Source archive to validate and extract.
+        output: Directory to create for the unpacked copy.
+
+    Raises:
+        ValueError: The archive is invalid.
+        FileExistsError: The output directory already exists.
+    """
     files = source_files(content)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)

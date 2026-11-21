@@ -5,10 +5,14 @@ import io
 import json
 import os
 from pathlib import Path
+import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
+import numpy as np
 import psycopg
 from psycopg.types.json import Jsonb
 import pyarrow as pa
@@ -16,9 +20,10 @@ import pyarrow.parquet as pq
 from osgeo import ogr
 
 from worldatlas.source_imports.run_import import run_import
-from worldatlas.map_build.build import Pipeline, pin, write
+from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
 from worldatlas.map_build.inputs.selection import read_selection, canonical_bytes
+from worldatlas.shared.files import pin_file, write_json
 
 
 @unittest.skipUnless(
@@ -36,6 +41,7 @@ class EndToEndTests(unittest.TestCase):
             for ident, (west, south, east, north), point in (
                 ("first", (-112.5, 0, -67.5, 22.5), [-90, 11.25]),
                 ("second", (45, 0, 90, 22.5), [60, 11.25]),
+                ("island", (-90, -45, -67.5, -22.5), [-78.75, -33.75]),
             ):
                 features.extend(
                     [
@@ -62,7 +68,7 @@ class EndToEndTests(unittest.TestCase):
                         ),
                     ]
                 )
-            coast = write(
+            coast = write_json(
                 raw / "coast.geojson", dict(type="FeatureCollection", features=features)
             )
             lake = bytes(
@@ -91,15 +97,10 @@ class EndToEndTests(unittest.TestCase):
                     ).encode()
                 }
             )
-            shard = raw / "water.parquet"
+            inputs = root / "inputs"
+            inputs.mkdir()
+            shard = inputs / "water.parquet"
             pq.write_table(table, shard)
-            manifest = write(
-                raw / "manifest.json",
-                dict(
-                    file_count=1,
-                    files=[dict(path=shard.name, sha256=pin(shard)["sha256"])],
-                ),
-            )
             with psycopg.connect(url) as db:
                 db.execute(
                     "INSERT INTO atlas.geographic_levels VALUES ('world',NULL),('continent','world')"
@@ -162,48 +163,46 @@ class EndToEndTests(unittest.TestCase):
                             ("__e2e_target_" + ident, "__e2e_" + ident, entity),
                         )
                     db.execute(
-                        "INSERT INTO atlas.geographic_rules VALUES ('__e2e_coast',0,'nearest_coastal_water','water','cell',false,'Shared coast'),('__e2e_water',0,'nearest_water','water','cell',true,'Complete water')"
+                        "INSERT INTO atlas.geographic_rules VALUES "
+                        "('__e2e_coast',0,'nearest_coastal_water','water','cell',false,'Shared coast'),"
+                        "('__e2e_water',0,'nearest_water','water','cell',true,'Complete water'),"
+                        "('__e2e_island',0,'nearest_land','land','component',true,'Nearest mainland shore')"
+                    )
+                    db.execute(
+                        "INSERT INTO atlas.geographic_rule_features VALUES "
+                        "('__e2e_island','__e2e_first','distance_reference'),"
+                        "('__e2e_island','__e2e_second','distance_reference')"
                     )
                 with psycopg.connect(url) as db:
                     frozen = read_selection(db)
                 selected = raw / "selection.json"
                 selected.write_bytes(canonical_bytes(frozen))
-                land_config = write(
-                    raw / "land.json",
-                    dict(
-                        schema="land-raster-candidate-v1",
-                        selection_notes="Fixture coast",
-                        grid=grid,
-                        strip_rows=4,
-                        minimum_free_bytes=0,
-                        feature_index="row-fids",
-                        land=[
-                            dict(
-                                dataset=str(coast),
-                                layer=None,
-                                where="kind = 'land'",
-                                files=[
-                                    dict(pin(coast), size_bytes=coast.stat().st_size)
-                                ],
-                            )
-                        ],
-                    ),
+                land_config = dict(
+                    schema="land-raster-candidate-v1",
+                    selection_notes="Fixture coast",
+                    strip_rows=4,
+                    minimum_free_bytes=0,
+                    feature_index="row-fids",
+                    land=[
+                        dict(
+                            dataset=str(coast),
+                            layer=None,
+                            where="kind = 'land'",
+                            files=[dict(pin_file(coast), size_bytes=coast.stat().st_size)],
+                        )
+                    ],
                 )
-                water_config = write(
-                    raw / "water.json",
-                    dict(
-                        schema="water-shard-candidate-v2",
-                        selection_notes="Fixture water",
-                        grid=grid,
-                        tile_size=4,
-                        minimum_free_bytes=0,
-                        policy=dict(method="overture-inland-subtype-v1"),
-                    ),
+                water_config = dict(
+                    schema="water-shard-candidate-v2",
+                    selection_notes="Fixture water",
+                    tile_size=4,
+                    minimum_free_bytes=0,
+                    policy=dict(method="overture-inland-subtype-v1"),
                 )
-                cfg = write(
+                cfg = write_json(
                     raw / "build.json",
                     dict(
-                        schema="worldatlas-end-to-end-pipeline-v2",
+                        schema="worldatlas-end-to-end-pipeline-v3",
                         selection_notes="Input-contract fixture",
                         grid=grid,
                         coastal_band_metres=22224,
@@ -212,9 +211,12 @@ class EndToEndTests(unittest.TestCase):
                             minimum_free_bytes=0, max_parallel_shards=1
                         ),
                         sources=dict(
-                            land_config=pin(land_config),
-                            water_config=pin(water_config),
-                            raw_manifest=pin(manifest),
+                            land_config=land_config,
+                            inland_water=dict(
+                                rasterization=water_config,
+                                file_count=1,
+                                files=[dict(path=shard.name, sha256=pin_file(shard)["sha256"])],
+                            ),
                         ),
                     ),
                 )
@@ -231,6 +233,9 @@ class EndToEndTests(unittest.TestCase):
                     with self.assertRaisesRegex(InterruptedError, "pipeline cancelled"):
                         runner.run()
                 self.assertEqual(len(started_rules), 1)
+                errors = list((root / "run/checkpoints").glob("*/attempt-*/error.log"))
+                self.assertTrue(any("InterruptedError" in path.read_text() for path in errors))
+                self.assertFalse((root / "run/logs").exists())
                 runner = Pipeline(cfg, root / "run", work_dir=root, resume=True)
                 report = runner.run()
                 self.assertEqual(report["status"], "complete")
@@ -242,12 +247,19 @@ class EndToEndTests(unittest.TestCase):
                 )["counts"]
                 self.assertEqual(sum(counts.values()), 128)
                 self.assertEqual(set(counts), {"301", "999", "4321", "70000"})
-                self.assertEqual(counts["301"], 2)
+                self.assertEqual(counts["301"], 3)
                 self.assertEqual(counts["999"], 2)
-                resumed = Pipeline(
-                    cfg, root / "run", work_dir=root, selection=selected, resume=True
+                resumed = subprocess.run(
+                    [
+                        sys.executable, "-m", "worldatlas.map_build.build",
+                        str(cfg), str(root / "run"), "--work-dir", str(root),
+                        "--selection", str(selected), "--resume",
+                    ],
+                    check=True,
+                    capture_output=True,
+                    text=True,
                 )
-                self.assertEqual(resumed.run(), report)
+                self.assertEqual(json.loads(resumed.stdout), report)
                 reused = Pipeline(
                     cfg,
                     root / "reused",
@@ -263,6 +275,14 @@ class EndToEndTests(unittest.TestCase):
                     (root / "reused/division/report.json").read_text()
                 )
                 self.assertTrue(division["parents"]["0"]["reused"])
+
+                standalone = root / "standalone-physical"
+                shutil.copytree(root / "run/physical", standalone / "physical")
+                result = Pipeline(
+                    cfg, root / "reuse-standalone", work_dir=root, selection=selected,
+                    reuse_from=standalone,
+                ).run()
+                self.assertEqual(result["final"]["runs"]["sha256"], report["final"]["runs"]["sha256"])
 
                 interrupted = Pipeline(
                     cfg,
@@ -295,25 +315,42 @@ class EndToEndTests(unittest.TestCase):
                         resume=True,
                         reuse_from=root / "run",
                     )
+                with self.assertRaisesRegex(ValueError, "different --recompute-division"):
+                    Pipeline(
+                        cfg,
+                        root / "continued",
+                        work_dir=root,
+                        resume=True,
+                        recompute_division=True,
+                    )
 
                 reference = Path(report["final"]["rows"]["path"]).parent
                 compare_cfg = json.loads(cfg.read_bytes())
                 compare_cfg["sources"].update(
-                    reference_rows=pin(reference / "rows.u32le"),
-                    reference_runs=pin(reference / "runs.u32le"),
+                    reference_rows=pin_file(reference / "rows.u32le"),
+                    reference_runs=pin_file(reference / "runs.u32le"),
                 )
-                compare_path = write(raw / "compare.json", compare_cfg)
+                compare_path = write_json(raw / "compare.json", compare_cfg)
                 physical_only = Pipeline(
                     compare_path,
                     root / "physical-only",
                     work_dir=root,
                     selection=selected,
-                    physical_from=root / "reused",
+                    reuse_from=root / "reused",
+                    recompute_division=True,
                 )
                 physical_only.close()
+                # A run started with the old physical-only flag can still
+                # resume using the same earlier physical grid.
+                path = physical_only.out / "run-identity.json"
+                earlier = json.loads(path.read_bytes())
+                earlier["physical_from"] = earlier.pop("reuse_from")
+                earlier.pop("recompute_division")
+                path.write_text(json.dumps(earlier))
                 resumed = Pipeline(
                     compare_path, root / "physical-only", work_dir=root, resume=True
                 )
+                self.assertTrue(resumed.recompute_division)
                 result = resumed.run()
                 self.assertEqual(result["physical_outputs"], report["physical_outputs"])
                 division = json.loads(
@@ -322,9 +359,73 @@ class EndToEndTests(unittest.TestCase):
                 self.assertFalse(division["parents"]["0"]["reused"])
                 self.assertFalse(division["parents"]["0"]["land"]["reused"])
                 comparison = root / "physical-only/comparison/report.json"
-                self.assertEqual(result["comparison"], pin(comparison))
+                self.assertEqual(result["comparison"], pin_file(comparison))
                 self.assertEqual(json.loads(comparison.read_bytes())["changed_cells"], 0)
                 self.assertFalse((root / "physical-only/comparison.json").exists())
+
+                release_folder = raw / "comparison-release"
+                release_folder.mkdir()
+                release_rows = release_folder / "rows.u32le"
+                release_runs = release_folder / "runs.u32le"
+                release_rows.write_bytes((reference / "rows.u32le").read_bytes())
+                runs = np.fromfile(reference / "runs.u32le", dtype="<u4").reshape(-1, 2)
+                runs[:, 1] += 100
+                runs.tofile(release_runs)
+                release_config = write_json(
+                    release_folder / "config.json",
+                    {"categories": [
+                        dict(id=binding["code"] + 100, entity_id=binding["entity_id"],
+                             physical_class=binding["physical_class"])
+                        for binding in frozen["geography"]["category_bindings"]
+                    ]},
+                )
+                def cached_release(runner, version):
+                    self.assertEqual(version, "v9.0")
+                    return runner.resolve_pins({
+                        "reference_rows": pin_file(release_rows),
+                        "reference_runs": pin_file(release_runs),
+                        "reference_config": pin_file(release_config),
+                    })
+
+                with patch.object(Pipeline, "release_reference", new=cached_release):
+                    compared = Pipeline(
+                        cfg, root / "semantic-compare", work_dir=root, selection=selected,
+                        reuse_from=root / "run", compare_release="v9.0",
+                    ).run()
+                self.assertEqual(
+                    json.loads(Path(compared["comparison"]["path"]).read_bytes())["changed_cells"], 0
+                )
+                changed = Pipeline(
+                    cfg, root / "changed-config", work_dir=root, selection=selected,
+                    reuse_from=root / "run",
+                )
+                original_config = cfg.read_bytes()
+                cfg.write_bytes(original_config + b"\n")
+                with self.assertRaisesRegex(ValueError, "source configuration changed during pipeline"):
+                    changed.run()
+                self.assertFalse((changed.out / "report.json").exists())
+                cfg.write_bytes(original_config)
+
+                unknown_stage = Pipeline(
+                    cfg, root / "unknown-stage", work_dir=root, selection=selected,
+                    reuse_from=root / "run",
+                )
+                with unknown_stage.timing.measure("unexpected", "unfinished stage"):
+                    pass
+                with self.assertRaisesRegex(ValueError, "all stage outputs must be complete"):
+                    unknown_stage.run()
+                self.assertFalse((unknown_stage.out / "report.json").exists())
+
+                physical_report = root / "run/physical/report.json"
+                original = physical_report.read_bytes()
+                physical_report.write_text(json.dumps(dict(json.loads(original), status="incomplete")))
+                with self.assertRaisesRegex(ValueError, "physical source run is incomplete"):
+                    physical_reference(root / "run", runner.sources)
+                physical_report.write_bytes(original)
+                settings = runner.sources["land_config"]
+                settings.write_bytes(settings.read_bytes() + b"\n")
+                with self.assertRaisesRegex(ValueError, "physical source configuration changed"):
+                    physical_reference(root / "run", runner.sources)
             finally:
                 with psycopg.connect(url) as db:
                     db.execute(

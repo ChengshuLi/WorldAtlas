@@ -1,41 +1,75 @@
 """Run-interval regions separated by boundary cuts between cell centres."""
 
+import math
 from array import array
 from bisect import bisect_left
 from collections import defaultdict
+from collections.abc import Callable, Collection, Iterable, Iterator, Sequence
 from fractions import Fraction
-import math
 from pathlib import Path
 
-from shapely.geometry import LineString, Point
-from shapely import contains_xy, get_parts, polygonize, union_all
-
 import numpy as np
+from shapely import contains_xy, get_parts, polygonize, union_all
+from shapely.geometry import LineString, Point
 
+from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.core.rle import close_memmap
 from worldatlas.map_build.execution.control import check_cancelled
 
 
 class CutEdges:
-    """Blocked four-neighbor graph edges. H: (row,x)-(row,x+1); V: (row,x)-(row+1,x)."""
+    """Store which adjacent cells a source line separates.
 
-    def __init__(self):
+    Horizontal cuts separate columns on one row. Vertical cuts separate
+    rows in one column. A seam cut separates the last and first columns.
+    """
+
+    def __init__(self) -> None:
+        """Start with no cuts or source paths."""
         self.horizontal = defaultdict(set)
         self.vertical = defaultdict(set)
         self.wrap = set()  # blocks (x=W-1) <-> (x=0) on this row
         self.paths = []
 
-    def add_h(self, y, x):
+    def add_h(self, y: int, x: int) -> None:
+        """Block the move between neighbouring columns.
+
+        Args:
+            y: Row of the blocked move.
+            x: Column on the left of the cut.
+        """
         self.horizontal[int(y)].add(int(x))
 
-    def add_v(self, y, x):
+    def add_v(self, y: int, x: int) -> None:
+        """Block the move between neighbouring rows.
+
+        Args:
+            y: Row above the cut.
+            x: Column of the blocked move.
+        """
         self.vertical[int(y)].add(int(x))
 
-    def add_wrap(self, y):
+    def add_wrap(self, y: int) -> None:
+        """Block the move between the last and first columns.
+
+        Args:
+            y: Row of the blocked move.
+        """
         self.wrap.add(int(y))
 
 
-def _scaled_segment(first, last):
-    """Express stored coordinates and half-cell centres on one exact scale."""
+def _scaled_segment(
+    first: tuple[Fraction, Fraction], last: tuple[Fraction, Fraction]
+) -> tuple[int, int, int, int, int]:
+    """Put both endpoints and half-cell centres on one exact integer scale.
+
+    Args:
+        first: First endpoint in grid coordinates.
+        last: Last endpoint in grid coordinates.
+
+    Returns:
+        (x0, y0, x1, y1, scale). Divide by scale to recover a coordinate.
+    """
     coordinates = (*first, *last)
     scale = math.lcm(2, *(value.denominator for value in coordinates))
     x0, y0, x1, y1 = (
@@ -44,12 +78,33 @@ def _scaled_segment(first, last):
     return x0, y0, x1, y1, scale
 
 
-def _scan_crossings(x0, y0, x1, y1, scale, row_count, first_edge, last_edge):
-    """Find the crossed graph edge on each row of cell centres.
+def _scan_crossings(
+    x0: int,
+    y0: int,
+    x1: int,
+    y1: int,
+    scale: int,
+    row_count: int,
+    first_edge: int,
+    last_edge: int,
+) -> Iterator[tuple[int, int, bool]]:
+    """Find where a segment cuts between cell centres on each row.
 
-    Return row indices, edge indices, and whether a crossing hits the centre
-    at the start of the edge. A line along a row cuts partially covered edges.
-    Fully covered edges stay connected along the line.
+    If a segment lies along a row, it blocks only the partially covered
+    connections at its ends. Connections fully on the line stay open.
+
+    Args:
+        x0: Scaled first endpoint column.
+        y0: Scaled first endpoint row.
+        x1: Scaled last endpoint column.
+        y1: Scaled last endpoint row.
+        scale: Integer units in one cell.
+        row_count: Number of grid rows.
+        first_edge: Smallest edge index to consider.
+        last_edge: Largest edge index to consider.
+
+    Yields:
+        (row, edge, hits_centre). Edge is the column on the left of the cut.
     """
     half = scale // 2
     if y0 == y1:
@@ -76,22 +131,36 @@ def _scan_crossings(x0, y0, x1, y1, scale, row_count, first_edge, last_edge):
             yield row, edge, remainder == 0
 
 
-def rasterize_barriers(paths, width, height):
-    """Block four-neighbor paths that cross a source line.
+def rasterize_barriers(
+    paths: Iterable[Iterable[tuple[Fraction | float, Fraction | float]]],
+    width: int,
+    height: int,
+) -> CutEdges:
+    """Block moves between adjacent cell centres that cross a source line.
 
     Args:
-        paths: Polylines in grid coordinates, with centres at half-integers.
-        width: Number of columns.
-        height: Number of rows.
+        paths: Polylines in grid coordinates, where each cell centre is at a
+            half-integer.
+        width: Number of grid columns.
+        height: Number of grid rows.
 
     Returns:
-        Blocked horizontal, vertical and longitude seam edges. A cell centre
-        exactly on a line stays on the left of a canonical line direction.
+        Horizontal, vertical and seam cuts. When a line hits a centre
+        exactly, its canonical direction makes the result independent of
+        the order of the supplied points.
     """
     cuts = CutEdges()
-    tangents = defaultdict(lambda: (0, 0))
+    tangents: defaultdict[tuple[int, int], tuple[Fraction | int, Fraction | int]] = (
+        defaultdict(lambda: (0, 0))
+    )
 
-    def horizontal(row, edge):
+    def horizontal(row: int, edge: int) -> None:
+        """Record a horizontal cut or a cut across the date line.
+
+        Args:
+            row: Row of the cut.
+            edge: Column left of the cut. -1 marks the date-line seam.
+        """
         if edge == -1:
             cuts.add_wrap(row)
         elif edge < width - 1:
@@ -142,8 +211,23 @@ def rasterize_barriers(paths, width, height):
     return cuts
 
 
-def split_eligible(intervals, blocked_edges, width):
-    """Split [x0,x1) eligible intervals wherever a horizontal neighbor is cut."""
+def split_eligible(
+    intervals: Iterable[tuple[int, int]], blocked_edges: list[int], width: int
+) -> list[tuple[int, int]]:
+    """Cut open intervals into pieces at blocked horizontal connections.
+
+    Args:
+        intervals: Eligible (start, end) column pairs.
+        blocked_edges: Sorted list of columns to the left of a cut.
+        width: Number of grid columns.
+
+    Returns:
+        Smaller (start, end) pairs. For example, (0, 5) cut after column 2
+        gives (0, 3) and (3, 5).
+
+    Raises:
+        ValueError: An input interval is outside the grid or empty.
+    """
     out = []
     for a, b in intervals:
         if not (0 <= a < b <= width):
@@ -154,32 +238,54 @@ def split_eligible(intervals, blocked_edges, width):
         for edge in blocked_edges[i:j]:
             out.append((start, edge + 1))
             start = edge + 1
-        if start < b:
-            out.append((start, b))
+        out.append((start, b))
     return out
 
 
 class _DSU:
-    def __init__(self):
+    """Group connected runs by a common root ID."""
+
+    def __init__(self) -> None:
+        """Start without any runs to connect."""
         self.parent = array("I")
         self.size = array("I")
 
-    def add(self):
+    def add(self) -> int:
+        """Add a run as its own connected set.
+
+        Returns:
+            New run ID.
+        """
         i = len(self.parent)
-        if i >= 0xFFFFFFFF:
+        # Reaching this limit requires materializing over four billion nodes.
+        if i >= 0xFFFFFFFF:  # pragma: no cover
             raise OverflowError("run-node count exceeds uint32 DSU capacity")
         self.parent.append(i)
         self.size.append(1)
         return i
 
-    def find(self, x):
+    def find(self, x: int) -> int:
+        """Find the root of a run's connected set.
+
+        Args:
+            x: Run ID.
+
+        Returns:
+            Current root ID. Shorten the parent chain along the way.
+        """
         p = self.parent
         while p[x] != x:
             p[x] = p[p[x]]
             x = p[x]
         return x
 
-    def union(self, a, b):
+    def union(self, a: int, b: int) -> None:
+        """Join the connected sets of two runs if they are distinct.
+
+        Args:
+            a: ID of the first run.
+            b: ID of the second run.
+        """
         ra = self.find(a)
         rb = self.find(b)
         if ra == rb:
@@ -190,12 +296,30 @@ class _DSU:
         self.size[ra] += self.size[rb]
 
 
-def _blocked_count(sorted_x, lo, hi):
+def _blocked_count(sorted_x: Sequence[int], lo: int, hi: int) -> int:
+    """Count blocked columns within an interval.
+
+    Args:
+        sorted_x: Sorted columns with a blocked vertical edge.
+        lo: First column in the interval.
+        hi: Exclusive end column.
+
+    Returns:
+        Number of blocked columns in [lo, hi).
+    """
     return bisect_left(sorted_x, hi) - bisect_left(sorted_x, lo)
 
 
-def geographic_cuts(geometries, grid):
-    """Use source lines as graph cuts, including periodic longitude neighbours."""
+def geographic_cuts(geometries: Iterable[dict], grid: Grid) -> CutEdges:
+    """Translate WGS84 lines into cuts in the cell grid.
+
+    Args:
+        geometries: GeoJSON LineString and MultiLineString objects.
+        grid: Grid on which to block connections.
+
+    Returns:
+        Cuts between cells, including across the longitude seam.
+    """
     paths = []
     west, north, step = map(Fraction, (grid.west, grid.north, grid.step))
     for geometry in geometries:
@@ -236,19 +360,24 @@ def geographic_cuts(geometries, grid):
     return rasterize_barriers(copies, grid.width, grid.height)
 
 
-def continuous_face_links(path, offsets, paths, dsu, grid):
-    """Preserve continuous face identity where a cell-centre graph fragments it.
+def continuous_face_links(
+    path: Path,
+    offsets: Sequence[int],
+    paths: Iterable[Sequence[tuple[Fraction, Fraction]]],
+    dsu: _DSU,
+    grid: Grid,
+) -> None:
+    """Join parts of the same geometric face separated by a narrow grid gap.
 
-    A fine curve can leave a narrow strip between itself and physical water.
-    Its cell centres may have no same-face four-neighbour path to a label, even
-    though the strip is continuously on that face. Noded source geometry joins
-    those graph roots by their actual side, without adding labels or choosing
-    a nearest owner. Unlabelled geometric faces remain unlabelled.
+    A narrow passage can contain too few cell centres to link two pieces.
+    The actual source lines determine whether those pieces share one face.
 
-    The small envelope is computational context, never an ownership geometry.
-    Only its envelope is simplified; the source lines used to separate faces
-    retain every supplied coordinate. End rays cut the envelope's caps and do
-    not participate in the original scope cuts or assign additional cells.
+    Args:
+        path: Binary file of (first_column, end_column, node_id) records.
+        offsets: Run-record offsets for each row.
+        paths: Boundary paths in grid coordinates.
+        dsu: Sets of connected runs to update.
+        grid: Grid occupied by the runs.
     """
     if not paths:
         return
@@ -266,7 +395,16 @@ def continuous_face_links(path, offsets, paths, dsu, grid):
         if not np.linalg.norm(first) or not np.linalg.norm(last):
             raise ValueError("boundary endpoint has a repeated coordinate")
 
-        def cap(endpoint, direction):
+        def cap(endpoint: np.ndarray, direction: np.ndarray) -> np.ndarray:
+            """Extend a line endpoint past the first edge of the local envelope.
+
+            Args:
+                endpoint: Two coordinates for the endpoint.
+                direction: Two components of the outward direction.
+
+            Returns:
+                Length-two array of grid coordinates outside the first envelope edge.
+            """
             x0, y0, x1, y1 = envelope.bounds
             extent = 2 * math.hypot(x1 - x0, y1 - y0)
             ray = LineString(
@@ -299,7 +437,8 @@ def continuous_face_links(path, offsets, paths, dsu, grid):
         if envelope.covers(face.representative_point())
     ]
     with path.open("rb") as stream:
-        nodes = np.memmap(stream, dtype="<u4", mode="r").reshape(-1, 3)
+        mapping = np.memmap(stream, dtype="<u4", mode="r")
+        nodes = mapping.reshape(-1, 3)
         try:
             for face in faces:
                 xmin, ymin, xmax, ymax = face.bounds
@@ -326,15 +465,35 @@ def continuous_face_links(path, offsets, paths, dsu, grid):
                     for root in roots:
                         dsu.union(representative, root)
         finally:
-            nodes._mmap.close()
+            close_memmap(mapping)
 
 
-def divide_regions(eligible_rows, grid, cuts, labels, directory, *, rows=None):
-    """Build labelled faces without expanding the domain into individual cells.
+def divide_regions(
+    eligible_rows: Callable[[int], Iterable[tuple[int, int]]],
+    grid: Grid,
+    cuts: CutEdges,
+    labels: Sequence[tuple[int, int, int]],
+    directory: Path | str,
+    *,
+    rows: Collection[int] | None = None,
+) -> dict[int, int]:
+    """Build and label connected regions without expanding runs into cells.
 
-    Labels are (entity_id, x, y); several labels may identify the same owner or
-    different disconnected faces. Missing labels remain explicit in root_owners
-    so the caller can reject faces containing eligible output cells.
+    Args:
+        eligible_rows: For each row, gives the sorted eligible column intervals.
+        grid: Grid to divide.
+        cuts: Connections blocked by boundaries.
+        labels: (entity_id, column, row) for each label cell.
+        directory: New directory for node records and row offsets.
+        rows: Optional subset of grid rows to consider.
+
+    Returns:
+        Dictionary that maps a connected region's root ID to its owner ID.
+        Unlabelled regions are absent from the dictionary.
+
+    Raises:
+        ValueError: A label falls outside the scope, labels disagree within
+            a region, or an interval is invalid.
     """
     directory = Path(directory)
     directory.mkdir()
@@ -400,7 +559,7 @@ def divide_regions(eligible_rows, grid, cuts, labels, directory, *, rows=None):
         (dsu.find(i) for i in range(len(dsu.parent))), dtype=np.uint32
     )
     distinct, inverse = np.unique(initial_roots, return_inverse=True)
-    # Reconcile fragmented faces before considering their labels.
+    # Join pieces in the same geometric face before checking its labels.
     if len(distinct) > 1:
         continuous_face_links(directory / "nodes.u32le", offsets, cuts.paths, dsu, grid)
     roots = np.fromiter((dsu.find(int(root)) for root in distinct), dtype=np.uint32)[
@@ -415,10 +574,11 @@ def divide_regions(eligible_rows, grid, cuts, labels, directory, *, rows=None):
             )
         owners[root] = entity
     np.asarray(offsets, dtype="<u8").tofile(directory / "rows.u64le")
-    # Resolve roots once; later consumers use mapped rows without union-find work.
+    # Save the final component ID in each run so readers can use it directly.
     with (directory / "nodes.u32le").open("r+b") as stream:
-        records = np.memmap(stream, dtype="<u4", mode="r+").reshape(-1, 3)
+        mapping = np.memmap(stream, dtype="<u4", mode="r+")
+        records = mapping.reshape(-1, 3)
         records[:, 2] = roots[records[:, 2]]
-        records.flush()
-        records._mmap.close()
+        mapping.flush()
+        close_memmap(mapping)
     return owners

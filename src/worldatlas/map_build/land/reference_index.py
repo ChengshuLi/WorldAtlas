@@ -2,18 +2,39 @@
 
 import hashlib
 import json
-from pathlib import Path
 import time
+from collections.abc import Iterable
+from pathlib import Path
+from typing import Any
 
 import numpy as np
 
-from worldatlas.map_build.core.layers import file_hash
+from worldatlas.map_build.core.grid import Grid
+from worldatlas.shared.files import sha256_file
 
 
 def build_reference_index(
-    grid, rows, directory, *, tile_cells=1024, samples_per_category=32
-):
-    """Index ordered (row, [start,end,owner] array) inputs without an intermediate map."""
+    grid: Grid,
+    rows: Iterable[tuple[int, np.ndarray]],
+    directory: Path | str,
+    *,
+    tile_cells: int = 1024,
+    samples_per_category: int = 32,
+) -> dict[str, Any]:
+    """Store reference shore runs in tiles for distance lookups.
+
+    Args:
+        grid: Dimensions and coordinates of the reference grid.
+        rows: Ordered (row, runs) records, each with an N-by-3 array of (start,
+            end, owner).
+        directory: New directory for tile files, sample cells and report.
+        tile_cells: Number of cells along each side of a tile.
+        samples_per_category: Maximum representative samples per category in a
+            tile.
+
+    Returns:
+        Dictionary with grid, tile checksums, and the sampled cells' checksum.
+    """
     if (
         type(tile_cells) is not int
         or tile_cells <= 0
@@ -28,7 +49,8 @@ def build_reference_index(
     current_tile = None
     previous_row = -1
 
-    def flush():
+    def flush() -> None:
+        """Write the current tile row's pending runs to disk."""
         if not buffers:
             return
         values = np.concatenate(buffers)
@@ -120,7 +142,7 @@ def build_reference_index(
         tile_cells=tile_cells,
         tiles=tiles,
         representatives=len(representatives),
-        representatives_sha256=file_hash(directory / "representatives.u32le"),
+        representatives_sha256=sha256_file(directory / "representatives.u32le"),
         processing_seconds=time.monotonic() - started,
     )
     (directory / "report.json").write_text(json.dumps(result, indent=2) + "\n")

@@ -5,28 +5,35 @@ from __future__ import annotations
 
 import argparse
 import copy
-from contextlib import closing
-from datetime import datetime, timezone
 import gzip
 import hashlib
 import json
 import math
 import os
-from pathlib import Path
-import signal
 import shutil
+import signal
 import sys
 import threading
 import time
 import uuid
 import zipfile
+from collections.abc import Iterator
+from contextlib import closing
+from datetime import datetime, timezone
+from pathlib import Path
+from types import FrameType
+from typing import Any, cast
 
 import numpy
-from osgeo import gdal
 import psycopg
 import pyarrow
 import pyproj
 import scipy
+from osgeo import gdal
+from pyproj import datadir
+
+# pyproj.network exposes these functions from its compiled module.
+from pyproj.network import is_network_enabled, set_network_enabled  # pyright: ignore[reportPrivateImportUsage]
 
 from worldatlas.map_build.core.comparison import compare
 from worldatlas.map_build.core.grid import Grid
@@ -35,15 +42,12 @@ from worldatlas.map_build.division.hierarchy import HierarchyDivision
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
-    Timing,
     Checkpoints,
     RunLock,
+    Timing,
     code_identity,
     repository_identity,
-    json_bytes,
-    verify_pins,
     verify_anchor,
-    write,
 )
 from worldatlas.map_build.inputs.releases import read_release_assets
 from worldatlas.map_build.inputs.selection import (
@@ -52,60 +56,68 @@ from worldatlas.map_build.inputs.selection import (
     read_selection,
 )
 from worldatlas.map_build.physical import build as physical_build
-from worldatlas.map_build.physical.crop import crop_physical
 from worldatlas.map_releases.catalog import release_endpoint
+from worldatlas.shared.files import (
+    json_bytes,
+    pin_file,
+    read_json,
+    sha256_file,
+    verify_pins,
+    write_json,
+)
 from worldatlas.source_assets.catalog import download_source
 
 HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
 
 
-def validate_runtime():
-    """Disable implicit downloads of coordinate transformation grids."""
+def validate_runtime() -> None:
+    """Disable PROJ network access for this process.
+
+    Coordinate conversions use the installed PROJ database and grids.
+
+    Raises:
+        ValueError: PROJ network access could not be disabled.
+    """
     # All selected coordinate operations use the pinned local database. Never
     # fetch a grid implicitly, including when pyproj was imported by a caller.
     os.environ["PROJ_NETWORK"] = "OFF"
-    pyproj.network.set_network_enabled(False)
-    if pyproj.network.is_network_enabled():
+    set_network_enabled(False)
+    if is_network_enabled():
         raise ValueError("PROJ network must be disabled")
 
 
-def runtime_identity():
+def runtime_identity() -> dict[str, Any]:
+    """Record the Python and geographic libraries used by this run.
+
+    Returns:
+        Dictionary with version strings, the Python executable's SHA-256,
+        the PROJ database path and SHA-256, and the PROJ network setting.
+    """
     return {
         "executable": sys.executable,
         "version": sys.version,
-        "binary_sha256": sha(Path(sys.executable).resolve()),
+        "binary_sha256": sha256_file(Path(sys.executable).resolve()),
         "numpy": numpy.__version__,
         "scipy": scipy.__version__,
         "pyproj": pyproj.__version__,
         "proj": pyproj.proj_version_str,
-        "proj_database": pin(Path(pyproj.datadir.get_data_dir()) / "proj.db"),
-        "proj_network_enabled": pyproj.network.is_network_enabled(),
+        "proj_database": pin_file(Path(datadir.get_data_dir()) / "proj.db"),
+        "proj_network_enabled": is_network_enabled(),
         "gdal": gdal.VersionInfo("RELEASE_NAME"),
         "pyarrow": pyarrow.__version__,
     }
 
 
-def sha(path):
-    h = hashlib.sha256()
-    with Path(path).open("rb") as f:
-        for block in iter(lambda: f.read(1 << 20), b""):
-            h.update(block)
-    return h.hexdigest()
+def catalog_references(value: object) -> Iterator[dict[str, Any]]:
+    """Find R2 catalog references in a nested configuration.
 
+    Args:
+        value: A configuration value, which may contain lists and dictionaries.
 
-def pin(path):
-    path = Path(path).resolve(strict=True)
-    if not path.is_file():
-        raise ValueError(f"not a file: {path}")
-    return {"path": str(path), "sha256": sha(path)}
-
-
-def read(path):
-    return json.loads(Path(path).read_bytes())
-
-
-def catalog_references(value):
+    Yields:
+        Each dictionary containing an "r2_source" selector, in traversal order.
+    """
     if isinstance(value, list):
         for item in value:
             yield from catalog_references(item)
@@ -117,8 +129,20 @@ def catalog_references(value):
                 yield from catalog_references(item)
 
 
-def catalog_keys(value):
-    """Validate exact catalog selectors once for freezing and resolving inputs."""
+def catalog_keys(value: object) -> set[tuple[str, str | None]]:
+    """Collect the distinct raw source IDs requested by a build.
+
+    Args:
+        value: Configuration containing dictionaries with "r2_source" selectors.
+
+    Returns:
+        Set of (source_id, version) pairs. Version is None for selectors
+        without an explicit version.
+
+    Raises:
+        ValueError: A reference has invalid keys or mixes catalog selection
+            with direct object metadata.
+    """
     requested = set()
     for spec in catalog_references(value):
         identity = spec["r2_source"]
@@ -142,33 +166,54 @@ def catalog_keys(value):
     return requested
 
 
-def physical_reference(run, sources):
-    """Reuse completed physical outputs only for identical raw-source requests.
+def physical_reference(run: Path | str, sources: dict[str, Path]) -> dict[str, Any]:
+    """Find reusable physical outputs for the same grid and raw inputs.
 
-    The producer's reports stay intact. This receipt records which existing
-    outputs the new run must verify; it does not create a replacement checkpoint.
+    Args:
+        run: Earlier completed run directory.
+        sources: Paths to the current land, water and raw source settings.
+
+    Returns:
+        Dictionary with the original run path and SHA-256 pins for its
+        reports and physical grid files.
+
+    Raises:
+        ValueError: The earlier output is incomplete, its saved settings
+            changed, or the new grid or source settings differ.
     """
     run = Path(run).resolve(strict=True)
     saved = run / "run-identity.json"
     if saved.is_file():
-        reuse = read(saved).get("physical_reuse")
+        reuse = read_json(saved).get("physical_reuse")
         if reuse is not None:
             run = Path(reuse["source_run"]).resolve(strict=True)
     root = run / "physical"
-    identity = read(root / "pipeline-identity.json")
-    report = read(root / "report.json")
+    identity = read_json(root / "pipeline-identity.json")
+    report = read_json(root / "report.json")
     if report.get("status") != "candidate-only":
         raise ValueError("physical source run is incomplete")
+    output = root / "physical"
+    produced = read_json(output / "report.json")
+    if Grid(**produced["grid"]) != Grid(**read_json(sources["land_config"])["grid"]):
+        raise ValueError("physical reuse requires the same grid as the source run")
     for key, selected in [
         ("land_config", "land_config"),
         ("water_config", "water_config"),
         ("source_manifest", "raw_manifest"),
     ]:
         previous = Path(identity[key]["path"])
-        if sha(previous) != identity[key]["sha256"]:
+        if sha256_file(previous) != identity[key]["sha256"]:
             raise ValueError("physical source configuration changed: " + key)
 
-        def data(value):
+        def data(value: object) -> Any:
+            """Keep only settings that affect physical rasterization.
+
+            Args:
+                value: Value in a saved physical request.
+
+            Returns:
+                A copy without notes and legacy catalog version labels.
+            """
             if isinstance(value, list):
                 return [data(item) for item in value]
             if isinstance(value, dict):
@@ -181,26 +226,14 @@ def physical_reference(run, sources):
                 }
             return value
 
-        old_request, new_request = data(read(previous)), data(read(sources[selected]))
-        if key in ("land_config", "water_config"):
-            old_request.pop("grid", None)
-            new_request.pop("grid", None)
+        old_request, new_request = (
+            data(read_json(previous)),
+            data(read_json(sources[selected])),
+        )
         if old_request != new_request:
             raise ValueError("physical input differs from the source run: " + key)
-    output = root / "physical"
-    produced = read(output / "report.json")
-    old_grid = Grid(**produced["grid"])
-    grid = Grid(**read(sources["land_config"])["grid"])
-    if (
-        any(
-            getattr(old_grid, name) != getattr(grid, name)
-            for name in ("width", "step", "west", "north")
-        )
-        or grid.height > old_grid.height
-    ):
-        raise ValueError("physical reuse requires an aligned northern prefix")
     pins = [
-        pin(root / "report.json"),
+        pin_file(root / "report.json"),
         {
             "path": str(root / "pipeline-identity.json"),
             "sha256": report["pipeline_identity_sha256"],
@@ -223,27 +256,69 @@ def physical_reference(run, sources):
 
 
 class Pipeline:
+    """Build a map from pinned raw files and saved geographic rules.
+
+    One instance owns the run lock and timing log until the run closes.
+    """
+
     def __init__(
         self,
-        config,
-        output=None,
+        config: Path | str,
+        output: Path | str | None = None,
         *,
-        resume=False,
-        work_dir=None,
-        compare_release=None,
-        physical_from=None,
-        selection=None,
-        divide=None,
-        reuse_from=None,
-    ):
+        resume: bool = False,
+        work_dir: Path | str | None = None,
+        compare_release: str | None = None,
+        selection: Path | str | None = None,
+        divide: list[int] | None = None,
+        reuse_from: Path | str | None = None,
+        recompute_division: bool = False,
+    ) -> None:
+        """Prepare the work directory, pinned inputs, and run journal.
+
+        Args:
+            config: Path to the JSON build settings.
+            output: Run directory. Defaults to the run folder in the work directory.
+            resume: Continue a run that already has an identity file.
+            work_dir: Directory for raw file caches and runs.
+            compare_release: Release name to compare with the finished map.
+            selection: Frozen geographic selection JSON file. Otherwise read the
+                working selection.
+            divide: Parent entity IDs to divide, including their necessary
+                ancestors. Defaults to all configured divisions.
+            reuse_from: Earlier run whose matching outputs may be reused.
+            recompute_division: Reuse the physical grid and recompute ownership.
+
+        Raises:
+            ValueError: Settings, pinned inputs, or resume options are incompatible.
+        """
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
         self.config_path = Path(config).resolve(strict=True)
-        self.config_pin = pin(self.config_path)
-        self.cfg = read(self.config_path)
-        if self.cfg.get("schema") != "worldatlas-end-to-end-pipeline-v2":
+        self.config_pin = pin_file(self.config_path)
+        self.cfg = read_json(self.config_path)
+        if self.cfg.get("schema") != "worldatlas-end-to-end-pipeline-v3":
             raise ValueError("unsupported end-to-end configuration")
         self.grid = Grid(**self.cfg["grid"])
+        selections = self.cfg.get("sources")
+        required = {"land_config", "inland_water"}
+        if (
+            not isinstance(selections, dict)
+            or not required <= selections.keys()
+            or set(selections) - required - {"reference_rows", "reference_runs"}
+        ):
+            raise ValueError("select land_config and inland_water")
+        coastline, water = selections["land_config"], selections["inland_water"]
+        if not isinstance(coastline, dict) or not isinstance(
+            coastline.get("land"), list
+        ):
+            raise ValueError("land_config must provide its land datasets inline")
+        if (
+            not isinstance(water, dict)
+            or not isinstance(water.get("rasterization"), dict)
+            or not isinstance(water.get("files"), list)
+        ):
+            raise ValueError("inland_water must provide rasterization and files inline")
         if work_dir is None and "input_root" not in self.cfg:
             raise ValueError("choose a local input/run directory with --work-dir")
         root = Path(work_dir) if work_dir is not None else Path(self.cfg["input_root"])
@@ -270,38 +345,35 @@ class Pipeline:
             raise ValueError(
                 "run has no supported checkpoint identity; preserve it and start a fresh run"
             )
-        previous = read(identity_path) if resume else None
+        previous = read_json(identity_path) if resume else None
+        reuse = str(Path(reuse_from).resolve()) if reuse_from is not None else None
         if previous is not None:
             if divide is not None and divide != previous.get("divide"):
                 raise ValueError("resume uses a different --divide selection")
-            if (
-                compare_release is not None
-                and compare_release != previous.get("compare_release")
+            if compare_release is not None and compare_release != previous.get(
+                "compare_release"
             ):
                 raise ValueError("resume uses a different --compare-release selection")
             divide = previous.get("divide")
             compare_release = previous.get("compare_release")
-        if physical_from is not None and reuse_from is not None:
-            raise ValueError("choose either --physical-from or --reuse-from")
-        reuse = str(Path(reuse_from).resolve()) if reuse_from is not None else None
-        physical_only = (
-            str(Path(physical_from).resolve()) if physical_from is not None else None
-        )
-        if previous is not None:
-            if (
-                physical_only is not None
-                and physical_only != previous.get("physical_from")
-            ):
-                raise ValueError("resume uses a different --physical-from run")
-            physical_only = previous.get("physical_from")
-            if "reuse_from" in previous:
-                if reuse is not None and reuse != previous["reuse_from"]:
-                    raise ValueError("resume uses a different --reuse-from run")
-                reuse = previous["reuse_from"]
-            elif reuse is None:
-                # Older identities recorded only the underlying physical producer.
-                reuse = previous.get("physical_reuse", {}).get("source_run")
+            # Translate older saved options in memory so interrupted runs can resume.
+            physical_only = previous.pop("physical_from", None)
+            if physical_only is not None:
+                previous["reuse_from"] = physical_only
+            previous.setdefault(
+                "reuse_from", previous.get("physical_reuse", {}).get("source_run")
+            )
+            previous.setdefault("recompute_division", physical_only is not None)
+            if reuse is not None and reuse != previous["reuse_from"]:
+                raise ValueError("resume uses a different --reuse-from run")
+            if recompute_division and not previous["recompute_division"]:
+                raise ValueError("resume uses a different --recompute-division setting")
+            reuse = previous["reuse_from"]
+            recompute_division = previous["recompute_division"]
+        if recompute_division and reuse is None:
+            raise ValueError("--recompute-division requires --reuse-from")
         self.reuse_from = Path(reuse) if reuse is not None else None
+        self.recompute_division = recompute_division
         validate_runtime()
         self.runtime = runtime_identity()
         self.resume = resume
@@ -309,9 +381,8 @@ class Pipeline:
         self.source_pins = []
         self.input_cache = {}
         self.acquisition_intervals = []
-        self.selection = None
         selected_path = self.out / "input-selection.json"
-        if resume and selected_path.is_file():
+        if resume:
             self.selection = read_saved(selected_path)
             if selection is not None and canonical_bytes(
                 read_saved(selection)
@@ -326,38 +397,27 @@ class Pipeline:
                     "set NEON_DATABASE_URL to freeze working geography, or supply --selection"
                 )
             with psycopg.connect(connection, connect_timeout=15) as database:
-                references = {
-                    key[0] for key in catalog_keys(self.cfg.get("sources", {}))
-                }
+                references = {key[0] for key in catalog_keys(selections)}
                 self.selection = read_selection(
                     database, raw_sources=references, parents=divide
                 )
-        required = {"land_config", "water_config", "raw_manifest"}
-        selections = self.cfg.get("sources", {})
-        if (
-            not isinstance(selections, dict)
-            or not required <= selections.keys()
-            or set(selections) - required - {"reference_rows", "reference_runs"}
-        ):
-            raise ValueError("select land_config, water_config and raw_manifest")
         resolved = self.resolve_raw_catalog(selections)
-        # Physical producers share the one grid selected for this build.
-        for name in ("land_config", "water_config"):
-            if "json" in resolved[name]:
-                resolved[name]["json"]["grid"] = vars(self.grid)
+        coastline = resolved.pop("land_config")
+        water = resolved.pop("inland_water")
+        rasterization = water.pop("rasterization")
+        for settings in (coastline, rasterization):
+            settings["grid"] = vars(self.grid)
+        # Each shard receives its own file and the shared rasterization settings.
         self.sources = {
-            name: self.resolve_source(name, spec) for name, spec in resolved.items()
+            "land_config": self.save_source_document(self.coastline_request(coastline)),
+            "water_config": self.save_source_document(rasterization),
+            "raw_manifest": self.save_source_document(water),
         }
-        # Pinned physical request documents can be reused with a new grid without
-        # editing their archived bytes. Producers receive the frozen build grid.
-        for name in ("land_config", "water_config"):
-            document = read(self.sources[name])
-            if document.get("schema") in (
-                "land-raster-candidate-v1",
-                "water-shard-candidate-v2",
-            ):
-                document["grid"] = vars(self.grid)
-                self.sources[name] = self.save_source_document(document)
+        for name, spec in resolved.items():
+            if isinstance(spec, dict) and ("r2_bucket" in spec or "archive" in spec):
+                self.sources[name] = self.cloud_file(spec)
+            else:
+                self.sources[name] = cast(Path, self.resolve_pins(spec))
         comparison_inputs = None
         if compare_release is not None:
             if {"reference_rows", "reference_runs"} & self.sources.keys():
@@ -366,27 +426,30 @@ class Pipeline:
                 )
             if previous is not None:
                 comparison_inputs = previous.get("comparison_inputs")
-            if comparison_inputs is not None:
-                self.sources.update(self.resolve_pins(comparison_inputs))
+                if comparison_inputs is None:
+                    raise ValueError("resume is missing saved comparison files")
+                self.sources.update(
+                    cast(dict[str, Path], self.resolve_pins(comparison_inputs))
+                )
             else:
                 start = len(self.source_pins)
                 files = self.release_reference(compare_release)
                 self.sources.update(files)
-                if previous is None:
-                    # Once decoded, the streams and mapping suffice for comparison.
-                    by_path = {p["path"]: p for p in self.source_pins}
-                    comparison_inputs = {
-                        name: by_path[str(files[name])] for name in sorted(files)
-                    }
-                    self.source_pins[start:] = list(comparison_inputs.values())
+                # Once decoded, the streams and mapping suffice for comparison.
+                by_path = {p["path"]: p for p in self.source_pins}
+                comparison_inputs = {
+                    name: by_path[str(files[name])] for name in sorted(files)
+                }
+                self.source_pins[start:] = list(comparison_inputs.values())
         if bool("reference_rows" in self.sources) != bool(
             "reference_runs" in self.sources
         ):
             raise ValueError("both reference stream pins are required")
         self.collect_source_files()
-        physical_run = physical_only or self.reuse_from
         self.physical_reuse = (
-            physical_reference(physical_run, self.sources) if physical_run else None
+            physical_reference(self.reuse_from, self.sources)
+            if self.reuse_from is not None
+            else None
         )
         if self.physical_reuse is not None:
             self.source_pins.extend(
@@ -404,29 +467,25 @@ class Pipeline:
             "output": str(self.out),
             "runtime": self.runtime,
             "divide": divide,
+            "reuse_from": reuse,
+            "recompute_division": recompute_division,
             "runtime_paths": {
                 key: os.environ.get(key)
                 for key in ("PROJ_DATA", "PROJ_LIB", "PROJ_NETWORK")
             },
         }
-        if self.selection is not None:
-            self.identity["input_selection_sha256"] = hashlib.sha256(
-                canonical_bytes(self.selection)
-            ).hexdigest()
+        self.identity["input_selection_sha256"] = hashlib.sha256(
+            canonical_bytes(self.selection)
+        ).hexdigest()
         if compare_release is not None:
             self.identity["compare_release"] = compare_release
         if comparison_inputs is not None:
             self.identity["comparison_inputs"] = comparison_inputs
-        if previous is None or "reuse_from" in previous:
-            self.identity["reuse_from"] = reuse
-        if physical_only is not None:
-            self.identity["physical_from"] = physical_only
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
         if not resume:
             self.out.mkdir(mode=0o700)
-            if self.selection is not None:
-                write(selected_path, self.selection)
+            write_json(selected_path, self.selection)
         self.run_lock = RunLock(self.out / "run.lock")
         try:
             if resume:
@@ -437,36 +496,36 @@ class Pipeline:
                     "runtime_paths",
                     "scripts_root",
                 }
-                selection = lambda value: {
+                comparable_identity = lambda value: {
                     k: v for k, v in value.items() if k not in provenance
                 }
-                if selection(previous) != selection(self.identity):
+                if comparable_identity(previous) != comparable_identity(self.identity):
                     raise ValueError(
                         "resume request, input selection or output identity changed"
                     )
             else:
-                write(identity_path, self.identity)
-            for name in ("configs", "logs", "attempts"):
-                (self.out / name).mkdir(mode=0o700, exist_ok=resume)
+                write_json(identity_path, self.identity)
+            attempts = self.out / "attempts"
+            attempts.mkdir(mode=0o700, exist_ok=resume)
             self.attempt = uuid.uuid4().hex
-            self.attempt_dir = self.out / "attempts" / self.attempt
+            self.attempt_dir = attempts / self.attempt
             self.attempt_dir.mkdir()
             source_archive = self.attempt_dir / "source-code.json.gz"
             write_source(source_archive, capture_source(PACKAGE_ROOT))
-            write(
+            write_json(
                 self.attempt_dir / "producer.json",
                 {
                     "code": self.code,
                     "repository": self.repository,
                     "runtime": self.runtime,
                     "scripts_root": str(PACKAGE_ROOT),
-                    "source_archive": pin(source_archive),
+                    "source_archive": pin_file(source_archive),
                 },
             )
             self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
             self.checkpoints.verify_all()
             for marker in (self.out / "attempts").glob("*/setup-timing.json"):
-                verify_anchor(read(marker), self.out / "timing-events.jsonl")
+                verify_anchor(read_json(marker), self.out / "timing-events.jsonl")
         except BaseException:
             self.run_lock.close()
             raise
@@ -479,10 +538,11 @@ class Pipeline:
                 heartbeat_seconds=1.0,
             )
             self.cancelled = threading.Event()
+            saved_config = self.out / "build-config.json"
             if not resume:
-                write(self.out / "request.json", self.cfg)
-            elif (self.out / "request.json").read_bytes() != json_bytes(self.cfg):
-                raise ValueError("saved request changed")
+                write_json(saved_config, self.cfg)
+            elif saved_config.read_bytes() != json_bytes(self.cfg):
+                raise ValueError("saved build configuration changed")
             self.checkpoints.preserve("failure", [self.out / "failure.json"])
             cursor = setup_started
             for start, end in [*self.acquisition_intervals, (time.monotonic(), None)]:
@@ -523,23 +583,33 @@ class Pipeline:
                             }
                         )
             self.timing.mark_complete("setup")
-            write(self.attempt_dir / "setup-timing.json", self.timing.anchor())
+            write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
         except BaseException:
             if hasattr(self, "timing"):
                 self.timing.close()
             self.run_lock.close()
             raise
 
-    def resolve_raw_catalog(self, selections):
-        """Expand exact raw source versions before any raw objects are acquired."""
+    def resolve_raw_catalog(self, selections: dict[str, Any]) -> dict[str, Any]:
+        """Expand raw source selectors using the frozen catalog.
+
+        Args:
+            selections: Inline source settings with optional "r2_source" selectors.
+
+        Returns:
+            Copy of the settings with selected object keys, byte sizes and hashes.
+
+        Raises:
+            ValueError: A selector is invalid or its catalog row is missing.
+        """
         resolved = copy.deepcopy(selections)
         references = [
-            (spec, "size" if name == "raw_manifest" else "size_bytes")
+            (spec, "size" if name == "inland_water" else "size_bytes")
             for name, value in resolved.items()
             for spec in catalog_references(value)
         ]
         if not references:
-            return selections
+            return resolved
 
         requested = catalog_keys(resolved)
 
@@ -565,15 +635,18 @@ class Pipeline:
             spec[size_field] = source["size_bytes"]
         return resolved
 
-    def cloud_file(self, spec, *, endpoint=None):
-        """Resolve one pinned R2 file or ZIP member locally.
+    def cloud_file(self, spec: dict[str, Any], *, endpoint: str | None = None) -> Path:
+        """Find or acquire a verified R2 object or ZIP member.
 
         Args:
-            spec: Object metadata or a pinned member within an archive.
-            endpoint: R2 account URL. Defaults to the build's physical-source endpoint.
+            spec: Object location or archive and member, plus byte size and SHA-256.
+            endpoint: R2 account URL. Defaults to the physical-source endpoint.
 
         Returns:
-            The local path to the verified bytes.
+            Local path to the verified bytes in the work directory.
+
+        Raises:
+            ValueError: The reference is invalid or the bytes fail verification.
         """
         expected = spec.get("sha256")
         size = spec.get("size_bytes")
@@ -585,6 +658,7 @@ class Pipeline:
             or size < 0
         ):
             raise ValueError("cloud inputs require explicit SHA-256 and byte size")
+        archive_member: tuple[Path, str] | None = None
         if "archive" in spec:
             archive = self.cloud_file(spec["archive"], endpoint=endpoint)
             member = spec["member"]
@@ -600,6 +674,7 @@ class Pipeline:
                 raise ValueError("unsafe ZIP member")
             path = self.root / "inputs" / spec["archive"]["sha256"] / rel
             identity = ("member", str(archive), member, expected, size)
+            archive_member = archive, member
         else:
             bucket, key = spec.get("r2_bucket"), spec.get("r2_key")
             if (
@@ -623,44 +698,56 @@ class Pipeline:
             if (
                 not path.is_file()
                 or path.stat().st_size != size
-                or sha(path) != expected
+                or sha256_file(path) != expected
             ):
                 raise ValueError(
                     "cached cloud input size/SHA-256 mismatch: " + str(path)
                 )
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
-            if "archive" in spec:
+            if archive_member is not None:
+                archive, member = archive_member
                 partial = path.with_name(
                     path.name + "." + uuid.uuid4().hex + ".partial"
                 )
-                with zipfile.ZipFile(archive) as packed:
-                    members = [
-                        item for item in packed.infolist() if item.filename == member
-                    ]
-                    if (
-                        len(members) != 1
-                        or members[0].is_dir()
-                        or ((members[0].external_attr >> 16) & 0o170000) == 0o120000
-                    ):
-                        raise ValueError("ZIP member must be one regular file")
-                    with packed.open(members[0]) as src, partial.open("xb") as dst:
-                        shutil.copyfileobj(src, dst, 1 << 20)
-                if partial.stat().st_size != size or sha(partial) != expected:
-                    raise ValueError("cloud input size/SHA-256 mismatch: " + str(path))
                 try:
-                    os.link(partial, path)
-                except FileExistsError:
+                    with zipfile.ZipFile(archive) as packed:
+                        members = [
+                            item
+                            for item in packed.infolist()
+                            if item.filename == member
+                        ]
+                        if (
+                            len(members) != 1
+                            or members[0].is_dir()
+                            or ((members[0].external_attr >> 16) & 0o170000) == 0o120000
+                        ):
+                            raise ValueError("ZIP member must be one regular file")
+                        with packed.open(members[0]) as src, partial.open("xb") as dst:
+                            shutil.copyfileobj(src, dst, 1 << 20)
                     if (
-                        not path.is_file()
-                        or path.stat().st_size != size
-                        or sha(path) != expected
+                        partial.stat().st_size != size
+                        or sha256_file(partial) != expected
                     ):
-                        raise ValueError("concurrent cloud input changed") from None
-                partial.unlink()
+                        raise ValueError(
+                            "cloud input size/SHA-256 mismatch: " + str(path)
+                        )
+                    try:
+                        os.link(partial, path)
+                    except FileExistsError:
+                        if (
+                            not path.is_file()
+                            or path.stat().st_size != size
+                            or sha256_file(path) != expected
+                        ):
+                            raise ValueError("concurrent cloud input changed") from None
+                finally:
+                    partial.unlink(missing_ok=True)
             else:
                 if endpoint is None:
-                    staging = self.cfg.get("physical_controls", {}).get("source_staging", {})
+                    staging = self.cfg.get("physical_controls", {}).get(
+                        "source_staging", {}
+                    )
                     endpoint = staging.get("endpoint_url")
                 transfer = {}
                 try:
@@ -680,45 +767,48 @@ class Pipeline:
                     self.acquisition_intervals.extend(
                         transfer.get("download_intervals", [])
                     )
-        result = pin(path)
+        result = pin_file(path)
         if result not in self.source_pins:
             self.source_pins.append(result)
         self.input_cache[identity] = path
         return path
 
-    def source_document(self, value, *, raw_manifest=False, field=None):
-        """Resolve physical vector files; leave water shards for on-demand staging."""
-        if isinstance(value, list):
-            return [
-                self.source_document(item, raw_manifest=raw_manifest, field=field)
-                for item in value
+    def coastline_request(self, settings: dict[str, Any]) -> dict[str, Any]:
+        """Prepare coastline rasterization settings using cached local files.
+
+        Args:
+            settings: Coastline settings with selected datasets and their file pins.
+
+        Returns:
+            Copy of the settings with cloud references replaced by local paths
+            and file pins.
+        """
+        layers = []
+        for layer in settings["land"]:
+            dataset = layer["dataset"]
+            if isinstance(dataset, dict):
+                dataset = str(self.cloud_file(dataset))
+            files = [
+                dict(pin_file(self.cloud_file(spec)), size_bytes=spec["size_bytes"])
+                if "r2_bucket" in spec or "archive" in spec
+                else spec
+                for spec in layer["files"]
             ]
-        if not isinstance(value, dict):
-            return value
-        if set(value) == {"json"} and isinstance(value["json"], (dict, list)):
-            path = self.json_source(value["json"])
-            return str(path) if field == "dataset" else pin(path)
-        if (
-            not raw_manifest
-            and field in ("dataset", "files")
-            and any(key in value for key in ("r2_bucket", "archive"))
-        ):
-            path = self.cloud_file(value)
-            return (
-                str(path)
-                if field == "dataset"
-                else dict(pin(path), size_bytes=value["size_bytes"])
-            )
-        return {
-            key: self.source_document(item, raw_manifest=raw_manifest, field=key)
-            for key, item in value.items()
-        }
+            layers.append(dict(layer, dataset=dataset, files=files))
+        return dict(settings, land=layers)
 
-    def json_source(self, value, *, raw_manifest=False):
-        document = self.source_document(value, raw_manifest=raw_manifest)
-        return self.save_source_document(document)
+    def save_source_document(self, document: dict[str, Any]) -> Path:
+        """Cache a generated input document and record its SHA-256.
 
-    def save_source_document(self, document):
+        Args:
+            document: Build input to write as JSON.
+
+        Returns:
+            Local path whose filename includes the digest of the JSON bytes.
+
+        Raises:
+            ValueError: The path overlaps the run or the cached bytes differ.
+        """
         data = json_bytes(document)
         path = (
             self.root / "inputs" / (hashlib.sha256(data).hexdigest() + ".json")
@@ -728,18 +818,27 @@ class Pipeline:
         path.parent.mkdir(parents=True, exist_ok=True)
         if not path.exists():
             try:
-                write(path, document)
+                write_json(path, document)
             except FileExistsError:
                 # Another build may have published this same cache entry.
                 pass
         if path.read_bytes() != data:
             raise ValueError("generated input changed")
-        result = pin(path)
+        result = pin_file(path)
         if result not in self.source_pins:
             self.source_pins.append(result)
         return path
 
-    def release_reference(self, version):
+    def release_reference(self, version: str) -> dict[str, Path]:
+        """Cache and verify a published map's comparison files.
+
+        Args:
+            version: Official version or numbered preview.
+
+        Returns:
+            Paths keyed by "reference_rows", "reference_runs", and, when
+            available, "reference_config". The map streams are decompressed.
+        """
         streams, config = read_release_assets(version)
         endpoint = release_endpoint()
         digest = hashlib.sha256(json_bytes(streams)).hexdigest()
@@ -770,7 +869,7 @@ class Pipeline:
                 try:
                     with gzip.open(compressed, "rb") as src, partial.open("xb") as dst:
                         shutil.copyfileobj(src, dst, 1 << 20)
-                    if sha(partial) != decoded_hash:
+                    if sha256_file(partial) != decoded_hash:
                         raise ValueError("decoded reference stream hash mismatch")
                     try:
                         os.link(partial, path)
@@ -778,27 +877,26 @@ class Pipeline:
                         pass
                 finally:
                     partial.unlink(missing_ok=True)
-            reference["reference_" + stream] = self.resolve_pins(
-                {"path": str(path), "sha256": decoded_hash}
+            reference["reference_" + stream] = cast(
+                Path, self.resolve_pins({"path": str(path), "sha256": decoded_hash})
             )
         if config is not None:
             reference["reference_config"] = self.cloud_file(config, endpoint=endpoint)
         return reference
 
-    def resolve_source(self, name, spec):
-        if (
-            isinstance(spec, dict)
-            and set(spec) == {"json"}
-            and isinstance(spec["json"], (dict, list))
-        ):
-            return self.json_source(spec["json"], raw_manifest=name == "raw_manifest")
-        if isinstance(spec, dict) and any(
-            key in spec for key in ("r2_bucket", "archive")
-        ):
-            return self.cloud_file(spec)
-        return self.resolve_pins(spec)
+    def resolve_pins(self, value: dict[str, Any]) -> Path | dict[str, Any]:
+        """Verify a file pin or a tree of file pins.
 
-    def resolve_pins(self, value):
+        Args:
+            value: A {"path": ..., "sha256": ...} pin or a dictionary of pins.
+
+        Returns:
+            Resolved file path or a dictionary with the same keys and resolved leaves.
+
+        Raises:
+            ValueError: A pin is invalid, outside the input directory, or has a
+                different SHA-256.
+        """
         if isinstance(value, dict) and set(value) == {"path", "sha256"}:
             path = Path(value["path"])
             if not path.is_absolute():
@@ -807,7 +905,7 @@ class Pipeline:
             if (
                 not path.is_relative_to(self.root)
                 or path.is_relative_to(self.out)
-                or sha(path) != value["sha256"]
+                or sha256_file(path) != value["sha256"]
             ):
                 raise ValueError(f"source pin mismatch or outside input root: {path}")
             self.source_pins.append({"path": str(path), "sha256": value["sha256"]})
@@ -816,11 +914,15 @@ class Pipeline:
             return {key: self.resolve_pins(item) for key, item in value.items()}
         raise ValueError("all source selections must be explicit path/SHA-256 pins")
 
-    def collect_source_files(self):
-        """Verify the selected local coastline files once during setup."""
-        for layer in read(self.sources["land_config"]).get("land", []):
+    def collect_source_files(self) -> None:
+        """Verify local coastline files and record their pins for this run.
+
+        Raises:
+            ValueError: A file is outside the work directory or has changed.
+        """
+        for layer in read_json(self.sources["land_config"]).get("land", []):
             for spec in layer["files"]:
-                expected = pin(spec["path"])
+                expected = pin_file(spec["path"])
                 if expected["sha256"] != spec["sha256"] or not Path(
                     expected["path"]
                 ).is_relative_to(self.root):
@@ -830,15 +932,13 @@ class Pipeline:
                 if expected not in self.source_pins:
                     self.source_pins.append(expected)
 
-    def document(self, name, value):
-        path = self.out / "configs" / (name + ".json")
-        if path.exists():
-            if path.read_bytes() != json_bytes(value):
-                raise ValueError("generated request changed on resume: " + name)
-            return path
-        return write(path, value)
+    def physical_attempts(self) -> list[dict[str, Any]]:
+        """Read complete events from the physical build's timing log.
 
-    def physical_attempts(self):
+        Returns:
+            Event dictionaries in file order. Stop at an incomplete or invalid
+            entry, and return an empty list when the log is absent.
+        """
         path = self.out / "physical/processing-events.jsonl"
         if not path.exists():
             return []
@@ -854,7 +954,19 @@ class Pipeline:
                 break
         return records
 
-    def record_physical_invocation(self, measurement, previous):
+    def record_physical_invocation(
+        self, measurement: dict[str, Any], previous: list[dict[str, Any]]
+    ) -> None:
+        """Record how much of a physical build call was processing or verification.
+
+        Args:
+            measurement: Start and end times for the call, from the timing journal.
+            previous: Physical build events recorded before the call.
+
+        Raises:
+            ValueError: A recorded duration is invalid or the total exceeds
+                the measured call time.
+        """
         before = {
             record.get("attempt")
             for record in previous
@@ -889,17 +1001,21 @@ class Pipeline:
             downloads = ends[0].get("source_download_elapsed_seconds")
             if (
                 not all(
-                    type(value) in (int, float) and math.isfinite(value) and value >= 0
+                    type(value) in (int, float)
+                    and math.isfinite(cast(float, value))
+                    and cast(float, value) >= 0
                     for value in (processing, downloads)
                 )
-                or processing + downloads > elapsed
+                or cast(float, processing) + cast(float, downloads) > elapsed
             ):
                 raise ValueError("invalid physical invocation timing")
             self.timing.event(
                 {
                     "event": "physical-command-overhead",
                     "id": "physical",
-                    "seconds": elapsed - processing - downloads,
+                    "seconds": elapsed
+                    - cast(float, processing)
+                    - cast(float, downloads),
                 }
             )
             self.timing.event(
@@ -912,37 +1028,30 @@ class Pipeline:
         # A killed producer with no durable attempt end supplies no exact tail.
         # Its own report will retain timing_complete=false after shard resume.
 
-    def close(self):
+    def close(self) -> None:
+        """Close the timing journal and release the run lock."""
         self.timing.close()
         self.run_lock.close()
 
-    def cancel(self):
+    def cancel(self) -> None:
+        """Signal the current workers to stop at their next cancellation check."""
         self.cancelled.set()
 
-    def physical(self):
+    def physical(self) -> Path:
+        """Build, resume, or reuse the physical land and water grid.
+
+        Returns:
+            Directory containing the physical raster, row-run files and report.
+        """
         if self.physical_reuse is not None:
             verify_pins(self.physical_reuse["pins"])
-            source = Path(self.physical_reuse["source_run"]) / "physical" / "physical"
-            grid = Grid(**self.cfg["grid"])
-            if Grid(**read(source / "report.json")["grid"]) == grid:
-                return source
-            output = self.out / "physical-prefix"
-            self.checkpoints.run_function(
-                "physical-prefix",
-                "physical",
-                crop_physical,
-                (source, grid, output),
-                timing=self.timing,
-                inputs=self.physical_reuse["pins"],
-                outputs=[output],
-            )
-            return output
+            return Path(self.physical_reuse["source_run"]) / "physical" / "physical"
         cfg = {
             "schema": "raw-physical-pipeline-v1",
             "selection_notes": self.cfg["selection_notes"],
             **self.cfg.get("physical_controls", {}),
             **{
-                key: pin(self.sources[source])
+                key: pin_file(self.sources[source])
                 for key, source in [
                     ("land_config", "land_config"),
                     ("water_config", "water_config"),
@@ -950,7 +1059,12 @@ class Pipeline:
                 ]
             },
         }
-        request = self.document("physical", cfg)
+        request = self.out / "physical-build-config.json"
+        if request.exists():
+            if request.read_bytes() != json_bytes(cfg):
+                raise ValueError("saved physical build configuration changed")
+        else:
+            write_json(request, cfg)
         marker = self.out / "physical/pipeline-identity.json"
         previous = self.physical_attempts()
         measurement = None
@@ -968,19 +1082,33 @@ class Pipeline:
                     (request, self.out / "physical"),
                     kwargs={"resume": marker.is_file()},
                     timing=self.timing,
-                    inputs=[pin(request)],
+                    inputs=[pin_file(request)],
                     outputs=[self.out / "physical"],
                     resume_marker=marker,
                 )
         finally:
-            if measurement and "end_monotonic_seconds" in measurement:
+            # A normal return always has an end time. Only an interruption
+            # or timing error can bypass accounting and propagate an exception.
+            if (
+                measurement and "end_monotonic_seconds" in measurement
+            ):  # pragma: no branch
                 self.record_physical_invocation(measurement, previous)
         return self.out / "physical" / "physical"
 
-    def divide(self, physical):
-        previous = self.reuse_from / "division" if self.reuse_from is not None else None
-        if previous is not None and not (previous / "report.json").exists():
-            previous = None
+    def divide(self, physical: Path) -> Path:
+        """Assign cells to geographic entities using the saved rules.
+
+        Args:
+            physical: Directory with the physical row-run grid.
+
+        Returns:
+            Directory with the completed ownership row-run grid.
+        """
+        previous = None
+        if self.reuse_from is not None and not self.recompute_division:
+            division = self.reuse_from / "division"
+            if (division / "report.json").is_file():
+                previous = division
         operation = HierarchyDivision(
             self.selection["geography"],
             Grid(**self.cfg["grid"]),
@@ -994,11 +1122,20 @@ class Pipeline:
         )
         return Path(operation.run()["directory"])
 
-    def package(self, physical, ownership):
+    def package(self, physical: Path, ownership: Path) -> Path:
+        """Encode each cell's owner and land or water class as a map code.
+
+        Args:
+            physical: Directory containing the physical grid.
+            ownership: Directory containing the ownership grid.
+
+        Returns:
+            Directory containing the final row-run files and count report.
+        """
         output = self.out / "final"
-        inputs = [pin(self.out / "input-selection.json")]
+        inputs = [pin_file(self.out / "input-selection.json")]
         inputs += [
-            pin(root / name)
+            pin_file(root / name)
             for root in (physical, ownership)
             for name in ("rows.u32le", "runs.u32le")
         ]
@@ -1019,12 +1156,23 @@ class Pipeline:
         )
         return Path(result["directory"])
 
-    def compare(self, final, physical):
-        if not ({"reference_rows", "reference_runs"} & self.sources.keys()):
+    def compare(self, final: Path, physical: Path) -> dict[str, str] | None:
+        """Record changed assignments against the chosen reference grid.
+
+        Args:
+            final: Directory containing the final row-run grid.
+            physical: Physical grid directory, used for its dimensions.
+
+        Returns:
+            Comparison report's path and SHA-256, or None if no reference was selected.
+
+        Raises:
+            ValueError: The paired reference streams do not use the expected paths.
+        """
+        rows = self.sources.get("reference_rows")
+        if rows is None:
             return None
-        if not {"reference_rows", "reference_runs"} <= self.sources.keys():
-            raise ValueError("both reference streams are required")
-        rows, runs = self.sources["reference_rows"], self.sources["reference_runs"]
+        runs = self.sources["reference_runs"]
         if (
             rows.name != "rows.u32le"
             or runs.name != "runs.u32le"
@@ -1033,15 +1181,15 @@ class Pipeline:
             raise ValueError(
                 "reference must use rows.u32le and runs.u32le in one directory"
             )
-        grid = Grid(**read(physical / "report.json")["grid"])
+        grid = Grid(**read_json(physical / "report.json")["grid"])
         inputs = [
-            pin(root / name)
+            pin_file(root / name)
             for root in (final, rows.parent)
             for name in ("rows.u32le", "runs.u32le")
         ]
         bindings = {}
         if config := self.sources.get("reference_config"):
-            inputs += [pin(config), pin(self.out / "input-selection.json")]
+            inputs += [pin_file(config), pin_file(self.out / "input-selection.json")]
             bindings = dict(
                 reference_bindings=[
                     dict(
@@ -1049,7 +1197,7 @@ class Pipeline:
                         entity_id=category["entity_id"],
                         physical_class=category["physical_class"],
                     )
-                    for category in read(config)["categories"]
+                    for category in read_json(config)["categories"]
                 ],
                 candidate_bindings=self.selection["geography"]["category_bindings"],
             )
@@ -1062,34 +1210,38 @@ class Pipeline:
                 rows.parent,
                 grid,
                 self.out / "comparison",
-                {"rows.u32le": sha(rows), "runs.u32le": sha(runs)},
+                {"rows.u32le": sha256_file(rows), "runs.u32le": sha256_file(runs)},
             ),
             timing=self.timing,
             inputs=inputs,
             outputs=[self.out / "comparison"],
             kwargs=bindings,
         )
-        return pin(self.out / "comparison" / "report.json")
+        return pin_file(self.out / "comparison" / "report.json")
 
-    def run(self):
+    def run(self) -> dict[str, Any]:
+        """Run the build through physical grid, ownership, and final encoding.
+
+        Write a success or failure report and close the run even if a stage fails.
+
+        Returns:
+            Build report with pinned inputs and outputs, stage timings, and
+            an optional comparison report pin.
+        """
         physical = None
         try:
             if (self.out / "report.json").exists():
-                report = read(self.out / "report.json")
+                report = read_json(self.out / "report.json")
                 verify_pins(report["final"].values())
                 verify_anchor(report["timing_anchor"], self.timing.path)
                 return report
-            if self.selection is None:
-                raise ValueError(
-                    "a complete saved or working geographic selection is required"
-                )
             with self.timing.measure("physical", "stage-total"):
                 physical = self.physical()
             physical_inputs = [
-                pin(physical / name)
+                pin_file(physical / name)
                 for name in ("rows.u32le", "runs.u32le", "report.json")
             ]
-            physical_report = self.physical_reuse or read(
+            physical_report = self.physical_reuse or read_json(
                 self.out / "physical/report.json"
             )
             self.timing.mark_complete("physical", physical_report=physical_report)
@@ -1105,12 +1257,12 @@ class Pipeline:
             with self.timing.measure("verification", "stage-total"):
                 comparison = self.compare(final, physical)
                 verify_pins(physical_inputs)
-                if pin(self.config_path) != self.config_pin or any(
-                    pin(p["path"]) != p for p in self.source_pins
+                if pin_file(self.config_path) != self.config_pin or any(
+                    pin_file(p["path"]) != p for p in self.source_pins
                 ):
                     raise ValueError("source configuration changed during pipeline")
                 final_pins = {
-                    key: pin(final / name)
+                    key: pin_file(final / name)
                     for key, name in [
                         ("rows", "rows.u32le"),
                         ("runs", "runs.u32le"),
@@ -1125,9 +1277,9 @@ class Pipeline:
                 "schema": "worldatlas-end-to-end-report-v2",
                 "status": "complete",
                 "request": self.config_pin,
-                "runner": pin(__file__),
+                "runner": pin_file(__file__),
                 "comparison": comparison,
-                "original_run_identity": pin(self.out / "run-identity.json"),
+                "original_run_identity": pin_file(self.out / "run-identity.json"),
                 "stages": stages,
                 "timing_complete": all(
                     stage["timing_complete"] for stage in stages.values()
@@ -1139,18 +1291,18 @@ class Pipeline:
             }
             if self.physical_reuse is not None:
                 result["physical_reuse"] = self.physical_reuse
-            write(self.out / "report.json", result)
+            write_json(self.out / "report.json", result)
             return result
         except BaseException:
             self.cancel()
             report = self.out / "physical/report.json"
             try:
                 physical_report = self.physical_reuse or (
-                    read(report) if report.exists() else None
+                    read_json(report) if report.exists() else None
                 )
             except (ValueError, OSError):
                 physical_report = None
-            write(
+            write_json(
                 self.out / "failure.json",
                 {
                     "schema": "worldatlas-end-to-end-failure-v1",
@@ -1164,7 +1316,8 @@ class Pipeline:
             self.close()
 
 
-def main():
+def main() -> None:
+    """Read command-line options, run the map build, and print its report."""
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("config", type=Path)
     p.add_argument(
@@ -1196,18 +1349,19 @@ def main():
         action="append",
         help="divide this parent and its necessary ancestors; repeatable",
     )
-    reuse = p.add_mutually_exclusive_group()
-    reuse.add_argument(
+    p.add_argument(
         "--reuse-from",
         type=Path,
         help="reuse verified physical outputs and compatible geographic calculations",
     )
-    reuse.add_argument(
-        "--physical-from",
-        type=Path,
-        help="reuse verified physical outputs and recalculate geographic assignments",
+    p.add_argument(
+        "--recompute-division",
+        action="store_true",
+        help="recalculate geographic assignments while reusing the physical grid",
     )
     a = p.parse_args()
+    if a.recompute_division and a.reuse_from is None and not a.resume:
+        p.error("--recompute-division requires --reuse-from")
     pipeline = Pipeline(
         a.config,
         a.output,
@@ -1215,12 +1369,21 @@ def main():
         work_dir=a.work_dir,
         compare_release=a.compare_release,
         reuse_from=a.reuse_from,
-        physical_from=a.physical_from,
+        recompute_division=a.recompute_division,
         divide=a.divide,
         selection=a.selection,
     )
 
-    def stop(signum, frame):
+    def stop(signum: int, frame: FrameType | None) -> None:
+        """Request cancellation when the process receives a stop signal.
+
+        Args:
+            signum: Number of the received signal.
+            frame: Python frame supplied by the signal handler.
+
+        Raises:
+            KeyboardInterrupt: Unwind the running build so it can save failure details.
+        """
         pipeline.cancel()
         raise KeyboardInterrupt(f"interrupted by signal {signum}")
 

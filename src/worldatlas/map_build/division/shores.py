@@ -1,19 +1,43 @@
 """Extract physical shores once; attach owners and select reference views."""
 
+from __future__ import annotations
+
 import threading
+from collections.abc import Collection, Iterator, Sequence
+
 import numpy as np
 
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.division.scope import selected
-from worldatlas.map_build.water.shore_spans import ShoreSpans
+from worldatlas.map_build.land.components import ComponentGrid
+from worldatlas.map_build.water.shared_nearest import ShoreIndexes, make_indexes
 from worldatlas.map_build.water.shore_index import ShoreIndex
-from worldatlas.map_build.water.shared_nearest import make_indexes
+from worldatlas.map_build.water.shore_spans import ShoreSpans
 
 
 class ReferenceCells(ShoreSpans):
-    """Labelled physical shore spans with reusable complete point indexes."""
+    """Store shore runs labelled with the owners of the adjacent land."""
 
-    def __init__(self, grid, offsets, starts, ends, owners, order):
+    def __init__(
+        self,
+        grid: Grid,
+        offsets: np.ndarray,
+        starts: np.ndarray,
+        ends: np.ndarray,
+        owners: np.ndarray,
+        order: Sequence[int],
+    ) -> None:
+        """Keep labelled runs and prepare the search order.
+
+        Args:
+            grid: Dimensions and coordinates of the source grid.
+            offsets: First shore-run index per row, plus the final offset.
+            starts: First column of each run.
+            ends: Exclusive end column of each run.
+            owners: Child entity ID of each run.
+            order: Child IDs in the order used for exact ties.
+        """
         self.grid = grid
         self.width = grid.width
         self.height = grid.height
@@ -29,7 +53,15 @@ class ReferenceCells(ShoreSpans):
         self._index_lock = threading.Lock()
 
     @property
-    def indexes(self):
+    def indexes(self) -> ShoreIndexes:
+        """Build or read the complete shore indexes for the participating owners.
+
+        Returns:
+            Owner ID mapped to its shore coordinates and complete spatial index.
+
+        Raises:
+            ValueError: There are no eligible shores.
+        """
         with self._index_lock:
             if self._indexes is None:
                 if not self.pairs:
@@ -40,7 +72,13 @@ class ReferenceCells(ShoreSpans):
                 self._indexes = make_indexes(centers, self.pairs)
             return self._indexes
 
-    def layer_rows(self):
+    def layer_rows(self) -> Iterator[tuple[int, np.ndarray]]:
+        """Read labelled runs in row order without expanding the cells.
+
+        Yields:
+            (row, records), where records is an N-by-3 array of
+            (start_column, end_column, owner_id).
+        """
         for y in range(self.height):
             lo, hi = map(int, self.offsets[y : y + 2])
             if lo != hi:
@@ -51,24 +89,56 @@ class ReferenceCells(ShoreSpans):
                     ),
                 )
 
-    def filtered(self, owners):
+    def filtered(self, owners: Collection[int]) -> ReferenceSubset:
+        """Use only the shore indexes for a given set of owners.
+
+        Args:
+            owners: IDs allowed to receive the assignments.
+
+        Returns:
+            View of the reference cells for those owners.
+        """
         return ReferenceSubset(self, owners)
 
 
 class ReferenceSubset:
-    def __init__(self, source, owners):
+    """Expose selected owners' shore indexes without copying their cells."""
+
+    def __init__(self, source: ReferenceCells, owners: Collection[int]) -> None:
+        """Select the participating owner records.
+
+        Args:
+            source: Complete shore run and index data.
+            owners: Allowed owner IDs.
+
+        Raises:
+            ValueError: An allowed owner has no eligible shore.
+        """
         self.source = source
         self.pairs = [p for p in source.pairs if p[0] in owners]
         if set(owners) - {p[0] for p in self.pairs}:
             raise ValueError("basin participant lacks an eligible physical shore")
 
     @property
-    def indexes(self):
+    def indexes(self) -> ShoreIndexes:
+        """Find the shared indexes for the selected owners.
+
+        Returns:
+            Owner IDs mapped to their complete spatial indexes and shore coordinates.
+        """
         return {p[0]: self.source.indexes[p[0]] for p in self.pairs}
 
 
 class ShoreGeometry:
-    def __init__(self, physical, grid):
+    """Keep one copy of the physical shores for all divisions of this grid."""
+
+    def __init__(self, physical: tuple[np.ndarray, np.ndarray], grid: Grid) -> None:
+        """Find land cells touching water along a grid edge.
+
+        Args:
+            physical: Physical row offsets and run data.
+            grid: Dimensions and coordinates of the physical grid.
+        """
         self.grid = grid
         self.spans = ShoreIndex(
             physical, physical, grid.width, grid.height, land_codes=[17]
@@ -76,17 +146,27 @@ class ShoreGeometry:
 
     def attach(
         self,
-        ownership,
-        order,
+        ownership: tuple[np.ndarray, np.ndarray],
+        order: Sequence[int],
         *,
-        components=None,
-        reference_components=None,
-        reference_owners=None,
-    ):
-        """Overlay child ownership; optionally select physical reference components.
+        components: ComponentGrid | None = None,
+        reference_components: Collection[int] | None = None,
+        reference_owners: Collection[int] | None = None,
+    ) -> ReferenceCells:
+        """Label physical shores with their current owners.
 
-        Geometry remains fixed. Reattaching island labels never scans neighbours
-        or creates shores along ownership lines or the parent's artificial edge.
+        Keep the same physical shore when ownership changes.
+
+        Args:
+            ownership: Row-run streams of current owners.
+            order: Owner IDs in exact tie order.
+            components: Physical component grid when selecting reference components.
+            reference_components: Optional IDs of land components eligible as
+                references.
+            reference_owners: Optional filter for eligible owners.
+
+        Returns:
+            Labelled shore runs for the eligible owners and components.
         """
         grid = self.grid
         source = self.spans
@@ -149,7 +229,15 @@ class ShoreGeometry:
             else:
                 offsets.append(offsets[-1])
 
-        def combine(parts):
+        def combine(parts: Sequence[np.ndarray]) -> np.ndarray:
+            """Join the nonempty arrays collected from each row.
+
+            Args:
+                parts: Arrays of columns or owner IDs.
+
+            Returns:
+                One uint32 array in row order, empty when there are no parts.
+            """
             return (
                 np.concatenate(parts, dtype=np.uint32)
                 if parts

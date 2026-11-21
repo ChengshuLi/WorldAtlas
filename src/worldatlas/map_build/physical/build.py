@@ -1,42 +1,50 @@
 #!/usr/bin/env python3
 """Wire pinned raw land and water sources into a candidate physical grid."""
 
-import hashlib
 import argparse
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import closing
-from contextvars import copy_context
 import fcntl
+import hashlib
 import json
 import math
 import os
 import re
-from pathlib import Path
 import shutil
 import sys
 import threading
 import time
 import uuid
+from collections.abc import Callable, Sequence
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import closing
+from contextvars import copy_context
+from pathlib import Path
+from typing import Any
 
 import boto3
+from botocore.client import BaseClient
 
 import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.execution import control
-from worldatlas.map_build.physical import land, water, union as water_union, composition
+from worldatlas.map_build.physical import composition, land, water
+from worldatlas.map_build.physical import union as water_union
+from worldatlas.shared.files import read_json, sha256_file, sync_directory, write_json
 from worldatlas.source_assets.catalog import stream_source
 
 HERE = Path(__file__).resolve().parent
 
 
-def sha(path):
-    h = hashlib.sha256()
-    with Path(path).open('rb') as f:
-        for chunk in iter(lambda: f.read(4 << 20), b''):
-            h.update(chunk)
-    return h.hexdigest()
+def read_pin(spec: dict[str, str]) -> tuple[Path, bytes, dict[str, Any]]:
+    """Verify and read a pinned JSON file.
 
+    Args:
+        spec: Record containing "path" and expected "sha256".
 
-def read_pin(spec):
+    Returns:
+        (resolved_path, original_bytes, decoded_settings).
+
+    Raises:
+        ValueError: The file differs from the expected hash or is invalid JSON.
+    """
     path = Path(spec['path']).resolve()
     data = path.read_bytes()
     if hashlib.sha256(data).hexdigest() != spec['sha256']:
@@ -44,23 +52,53 @@ def read_pin(spec):
     return path, data, json.loads(data)
 
 
-def run_stage(function, *args):
+def run_stage(function: Callable[..., Any], *args: Any) -> Any:
+    """Call a physical build stage using the current progress logger.
+
+    Args:
+        function: Stage that takes an emit callback.
+        args: Other positional arguments to the stage.
+
+    Returns:
+        The stage's result, typically a report dictionary.
+    """
     return function(*args, emit=control.emit)
 
 
-def validate_r2_endpoint(endpoint):
+def validate_r2_endpoint(endpoint: object) -> None:
+    """Require an HTTPS account endpoint for an R2 download.
+
+    Args:
+        endpoint: Candidate account URL.
+
+    Raises:
+        ValueError: The URL is absent or is not a valid R2 account endpoint.
+    """
     if not isinstance(endpoint, str) or not re.fullmatch(
-        r'https://[0-9a-f]{32}(?:\.(?:eu|us|fedramp))?\.r2\.cloudflarestorage\.com', endpoint
+        r'https://[0-9a-f]{32}(?:\.(?:eu|us|fedramp))?\.r2\.cloudflarestorage\.com',
+        endpoint,
     ):
-        raise ValueError('R2 endpoint must be an HTTPS Cloudflare R2 S3 account endpoint')
+        raise ValueError(
+            'R2 endpoint must be an HTTPS Cloudflare R2 S3 account endpoint'
+        )
 
 
-def make_r2_client(endpoint):
+def make_r2_client(endpoint: str | None) -> BaseClient:
+    """Create an S3-compatible client for the R2 account.
+
+    Args:
+        endpoint: HTTPS account URL.
+
+    Returns:
+        Open client using the caller's configured credentials.
+    """
     validate_r2_endpoint(endpoint)
     return boto3.client('s3', endpoint_url=endpoint, region_name='auto')
 
 
-def validate_shard_staging(configuration, *, require_r2=False):
+def validate_shard_staging(
+    configuration: dict[str, Any], *, require_r2: bool = False
+) -> tuple[int, dict[str, str] | None]:
     """Check the water-shard worker count and how the shards are supplied.
 
     Args:
@@ -89,12 +127,14 @@ def validate_shard_staging(configuration, *, require_r2=False):
             or staging['mode'] != 'r2-s3'
             or workers != 1
         ):
-            raise ValueError('R2 staging requires r2-s3 mode, endpoint_url and one shard worker')
+            raise ValueError(
+                'R2 staging requires r2-s3 mode, endpoint_url and one shard worker'
+            )
         validate_r2_endpoint(staging['endpoint_url'])
     return workers, staging
 
 
-def validate_r2_shard_location(entry):
+def validate_r2_shard_location(entry: dict[str, Any]) -> None:
     """Check whether a frozen raw-water shard can be downloaded from R2.
 
     Args:
@@ -114,8 +154,20 @@ def validate_r2_shard_location(entry):
         raise ValueError('missing or invalid pinned R2 source metadata')
 
 
-def download_r2(endpoint, entry, destination):
-    """Write a streamed response exclusively. Keep partial files for inspection."""
+def download_r2(endpoint: str, entry: dict[str, Any], destination: Path) -> None:
+    """Download one water shard to a new local file.
+
+    Keep an interrupted file for inspection.
+
+    Args:
+        endpoint: R2 account URL.
+        entry: Shard's bucket, key and byte count.
+        destination: Local path that must not exist.
+
+    Raises:
+        ValueError: The transfer size or object location is invalid.
+        InterruptedError: The stage was cancelled.
+    """
     control.check_cancelled()
     with closing(make_r2_client(endpoint)) as client, destination.open('xb') as stream:
         try:
@@ -126,39 +178,22 @@ def download_r2(endpoint, entry, destination):
                 check_cancelled=control.check_cancelled,
             )
         except ValueError as exc:
-            raise ValueError('staged source size/hash mismatch: ' + str(destination)) from exc
-
-
-def sync_directory(path):
-    fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
-
-
-def write_bytes_atomic(path, data):
-    """Publish exclusively after fsync; leave interrupted pending data intact."""
-    path = Path(path)
-    pending = path.parent / ('.' + path.name + '.' + uuid.uuid4().hex + '.pending')
-    with pending.open('xb') as f:
-        f.write(data)
-        f.flush()
-        os.fsync(f.fileno())
-    os.link(pending, path)
-    sync_directory(path.parent)
-    pending.unlink()
-    sync_directory(path.parent)
-
-
-def write_json(path, value):
-    write_bytes_atomic(path, (json.dumps(value, indent=2, allow_nan=False) + '\n').encode())
+            raise ValueError(
+                'staged source size/hash mismatch: ' + str(destination)
+            ) from exc
 
 
 class ProcessingJournal:
-    """Durable attempt/unit records; never infer duration across a crash."""
+    """Record physical work that survives a restart."""
 
-    def __init__(self, output, started, resume):
+    def __init__(self, output: Path, started: float, resume: bool) -> None:
+        """Open the journal and record the start of this attempt.
+
+        Args:
+            output: Physical run directory.
+            started: Start time from the monotonic performance clock.
+            resume: Continue an existing journal, saving any partial final entry.
+        """
         self.path = output / 'processing-events.jsonl'
         self.started = started
         self.attempt = uuid.uuid4().hex
@@ -195,7 +230,12 @@ class ProcessingJournal:
             sync_directory(output)
         self.add({'event': 'attempt_start', 'attempt': self.attempt})
 
-    def add(self, event):
+    def add(self, event: dict[str, Any]) -> None:
+        """Append an event to disk and the in-memory journal.
+
+        Args:
+            event: JSON-compatible event fields.
+        """
         with self.lock:
             with self.path.open('a') as f:
                 f.write(json.dumps(event, sort_keys=True, allow_nan=False) + '\n')
@@ -203,7 +243,15 @@ class ProcessingJournal:
                 os.fsync(f.fileno())
             self.events.append(event)
 
-    def unit(self, name, started, report, output):
+    def unit(self, name: str, started: float, report: Path, output: Path) -> None:
+        """Record one completed output and its measured work.
+
+        Args:
+            name: Name of the task that produced the files.
+            started: Clock reading when the task began.
+            report: Saved report to hash.
+            output: Produced file to hash.
+        """
         ended = time.perf_counter()
         self.add(
             {
@@ -213,17 +261,29 @@ class ProcessingJournal:
                 'start_monotonic_seconds': started,
                 'end_monotonic_seconds': ended,
                 'processing_elapsed_seconds': ended - started,
-                'report_sha256': sha(report),
-                'output_sha256': sha(output),
+                'report_sha256': sha256_file(report),
+                'output_sha256': sha256_file(output),
             }
         )
 
-    def download_done(self, started):
+    def download_done(self, started: float) -> None:
+        """Add a download's duration to the current attempt's transfer time.
+
+        Args:
+            started: Clock reading before the transfer.
+        """
         elapsed = time.perf_counter() - started
         self.download += elapsed
-        self.add({'event': 'download_complete', 'attempt': self.attempt, 'seconds': elapsed})
+        self.add(
+            {'event': 'download_complete', 'attempt': self.attempt, 'seconds': elapsed}
+        )
 
-    def finish(self, status):
+    def finish(self, status: str) -> None:
+        """Record the attempt's final duration and status.
+
+        Args:
+            status: Outcome such as complete or failed.
+        """
         if self.finished:
             raise ValueError('attempt already ended')
         elapsed = time.perf_counter() - self.started
@@ -240,14 +300,27 @@ class ProcessingJournal:
         )
         self.finished = True
 
-    def summary(self):
+    def summary(self) -> dict[str, Any]:
+        """Summarize work across physical build attempts.
+
+        Returns:
+            Dictionary with known processing and download seconds. A missing
+            end time leaves processing as a lower bound.
+        """
         if any(
             e.get('event')
-            not in ('attempt_start', 'attempt_end', 'unit_complete', 'download_complete')
+            not in (
+                'attempt_start',
+                'attempt_end',
+                'unit_complete',
+                'download_complete',
+            )
             for e in self.events
         ):
             raise ValueError('unknown processing journal event')
-        starts = {e['attempt'] for e in self.events if e.get('event') == 'attempt_start'}
+        starts = {
+            e['attempt'] for e in self.events if e.get('event') == 'attempt_start'
+        }
         ends = {e['attempt']: e for e in self.events if e.get('event') == 'attempt_end'}
         if (
             len(starts) != sum(e.get('event') == 'attempt_start' for e in self.events)
@@ -301,7 +374,9 @@ class ProcessingJournal:
             'processing_elapsed_seconds': lower if not missing else None,
             'recorded_processing_elapsed_seconds': lower,
             'source_download_elapsed_seconds': download,
-            'source_download_elapsed_scope': 'complete' if not missing else 'recorded-lower-bound',
+            'source_download_elapsed_scope': 'complete'
+            if not missing
+            else 'recorded-lower-bound',
             'invocation_processing_elapsed_seconds': ends[self.attempt][
                 'processing_elapsed_seconds'
             ],
@@ -311,7 +386,23 @@ class ProcessingJournal:
         }
 
 
-def run(manifest_path, output, *, resume=False):
+def run(
+    manifest_path: Path | str, output: Path | str, *, resume: bool = False
+) -> dict[str, Any]:
+    """Build or resume the physical grid under an exclusive run lock.
+
+    Args:
+        manifest_path: JSON configuration with pins for land and water sources.
+        output: Directory that holds this physical run.
+        resume: Whether to continue a run already started.
+
+    Returns:
+        Report dictionary with the land, water and physical layer outputs
+        and recorded processing and download times.
+
+    Raises:
+        ValueError: Settings, saved files, or the run lock are incompatible.
+    """
     started = time.perf_counter()
     output = Path(output).resolve()
     if not output.parent.is_dir():
@@ -322,7 +413,7 @@ def run(manifest_path, output, *, resume=False):
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             raise ValueError('physical pipeline already running') from None
-        journal = [None]
+        journal: list[ProcessingJournal | None] = [None]
         try:
             return _run(manifest_path, output, started, resume, journal)
         except BaseException:
@@ -331,11 +422,32 @@ def run(manifest_path, output, *, resume=False):
             raise
 
 
-def _run(manifest_path, output, processing_started, resume, journal_slot):
+def _run(
+    manifest_path: Path | str,
+    output: Path,
+    processing_started: float,
+    resume: bool,
+    journal_slot: list[ProcessingJournal | None],
+) -> dict[str, Any]:
+    """Rasterize the sources, union water masks, and compose the physical grid.
+
+    Args:
+        manifest_path: Physical build settings.
+        output: Locked physical run directory.
+        processing_started: Clock reading from the start of the attempt.
+        resume: Whether to look for completed outputs before rasterizing.
+        journal_slot: Single slot for the active journal so the caller can
+            record failures.
+
+    Returns:
+        Physical build report, including the completed output file pins.
+    """
     manifest_path = Path(manifest_path).resolve()
     data = manifest_path.read_bytes()
     cfg = json.loads(data)
-    if cfg.get('schema') != 'raw-physical-pipeline-v1' or not cfg.get('selection_notes'):
+    if cfg.get('schema') != 'raw-physical-pipeline-v1' or not cfg.get(
+        'selection_notes'
+    ):
         raise ValueError('explicit pipeline schema and selection notes required')
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     # Keep the worker count configurable; use complete-source profiles to
@@ -367,7 +479,11 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         if stage.get('minimum_free_bytes', 2 * (1 << 30)) < reserve:
             raise ValueError('stage free-space reserve is below pipeline reserve')
     files = source.get('files')
-    if not isinstance(files, list) or not files or source.get('file_count') != len(files):
+    if (
+        not isinstance(files, list)
+        or not files
+        or source.get('file_count') != len(files)
+    ):
         raise ValueError('source manifest must list every raw shard')
     raw = []
     for entry in files:
@@ -390,7 +506,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     if len({x[0] for x in raw}) != len(raw) or len({x[1] for x in raw}) != len(raw):
         raise ValueError('raw source paths and hashes must be unique')
     scripts = {
-        name: sha(HERE / name)
+        name: sha256_file(HERE / name)
         for name in (
             'build.py',
             'sources.py',
@@ -401,25 +517,39 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             'composition.py',
         )
     }
-    scripts['geodesy/ogr.py'] = sha(geometry_io.__file__)
+    scripts['geodesy/ogr.py'] = sha256_file(geometry_io.__file__)
     output = Path(output).resolve()
-    inputs = [manifest_path, land_path, water_path, source_path] + [x[0] for x in raw]
-    inputs += [Path(item['path']).resolve() for spec in land_cfg['land'] for item in spec['files']]
+    inputs = [land_path, water_path, source_path] + [x[0] for x in raw]
+    inputs += [
+        Path(item['path']).resolve()
+        for spec in land_cfg['land']
+        for item in spec['files']
+    ]
     for key in ('water_reference', 'physical_reference_mask'):
         if cfg.get(key):
             inputs.append(Path(cfg[key]['path']).resolve())
     if cfg.get('physical_reference_streams'):
         inputs += [
-            Path(cfg['physical_reference_streams'][k]['path']).resolve() for k in ('rows', 'runs')
+            Path(cfg['physical_reference_streams'][k]['path']).resolve()
+            for k in ('rows', 'runs')
         ]
-    if bool(cfg.get('physical_reference_mask')) != bool(cfg.get('physical_reference_streams')):
-        raise ValueError('physical reference mask and streams must be supplied together')
-    if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs):
-        raise ValueError('output must be outside all input directories and must not contain inputs')
+    if bool(cfg.get('physical_reference_mask')) != bool(
+        cfg.get('physical_reference_streams')
+    ):
+        raise ValueError(
+            'physical reference mask and streams must be supplied together'
+        )
+    # The build configuration can sit beside the output directory.
+    if manifest_path.is_relative_to(output) or any(
+        p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs
+    ):
+        raise ValueError(
+            'output must be outside all input directories and must not contain inputs'
+        )
     if shutil.disk_usage(output.parent).free < reserve:
         raise ValueError('free disk below pipeline reserve')
     source_pins = [item for spec in land_cfg['land'] for item in spec['files']]
-    if any(sha(p['path']) != p['sha256'] for p in source_pins):
+    if any(sha256_file(p['path']) != p['sha256'] for p in source_pins):
         raise ValueError('land source hash mismatch')
     identity = {
         'schema': 'raw-physical-resume-identity-v1',
@@ -432,37 +562,40 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     }
     identity_path = output / 'pipeline-identity.json'
     if resume:
-        previous = json.loads(identity_path.read_bytes()) if identity_path.is_file() else {}
-        data_identity = lambda value: {k: v for k, v in value.items() if k != 'script_sha256'}
+        previous = read_json(identity_path) if identity_path.is_file() else {}
+        data_identity = lambda value: {
+            k: v for k, v in value.items() if k != 'script_sha256'
+        }
         if not output.is_dir() or data_identity(previous) != data_identity(identity):
             raise ValueError('physical resume identity mismatch')
         if (output / 'report.json').exists():
-            report = json.loads((output / 'report.json').read_bytes())
+            report = read_json(output / 'report.json')
             stages = report.get('stage_reports', {})
             if (
                 report.get('status') != 'candidate-only'
-                or report.get('configuration_sha256') != identity['configuration_sha256']
-                or report.get('pipeline_identity_sha256') != sha(identity_path)
+                or report.get('configuration_sha256')
+                != identity['configuration_sha256']
+                or report.get('pipeline_identity_sha256') != sha256_file(identity_path)
                 or report.get('processing_journal_sha256')
-                != sha(output / 'processing-events.jsonl')
+                != sha256_file(output / 'processing-events.jsonl')
                 or set(stages) != {'land', 'union', 'physical'}
                 or any(
                     Path(stages[k]['path']).resolve() != output / k / 'report.json'
-                    or sha(stages[k]['path']) != stages[k]['sha256']
+                    or sha256_file(stages[k]['path']) != stages[k]['sha256']
                     for k in stages
                 )
             ):
                 raise ValueError('completed physical report mismatch')
             for key, name in (('land', 'land.tif'), ('union', 'water-union.tif')):
-                stage = json.loads((output / key / 'report.json').read_bytes())
+                stage = read_json(output / key / 'report.json')
                 digest = stage['land_sha256' if key == 'land' else 'union_sha256']
-                if sha(output / key / name) != digest:
+                if sha256_file(output / key / name) != digest:
                     raise ValueError('completed stage output mismatch: ' + key)
-            union = json.loads((output / 'union/report.json').read_bytes())
-            shards = union.get('shards')
-            if not isinstance(shards, list) or len(shards) != len(raw):
+            union = read_json(output / 'union/report.json')
+            saved_shards = union.get('shards')
+            if not isinstance(saved_shards, list) or len(saved_shards) != len(raw):
                 raise ValueError('completed shard inventory mismatch')
-            for i, (entry, (source, digest, _)) in enumerate(zip(shards, raw)):
+            for i, (entry, (source, digest, _)) in enumerate(zip(saved_shards, raw)):
                 directory = output / 'shards' / f'{i:05d}'
                 rp = directory / 'report.json'
                 tif = directory / 'water.tif'
@@ -470,12 +603,12 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
                 if (
                     Path(entry.get('path', '')).resolve() != tif
                     or Path(sp.get('path', '')).resolve() != rp
-                    or sha(rp) != sp.get('sha256')
-                    or sha(tif) != entry.get('sha256')
+                    or sha256_file(rp) != sp.get('sha256')
+                    or sha256_file(tif) != entry.get('sha256')
                     or entry.get('status') != 'candidate-only'
                 ):
                     raise ValueError(f'completed shard checkpoint mismatch: {i}')
-                item = json.loads(rp.read_bytes())
+                item = read_json(rp)
                 if (
                     item.get('source_sha256') != digest
                     or Path(item.get('source', '')).name != source.name
@@ -486,10 +619,10 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
                     or item.get('output_sha256') != entry['sha256']
                 ):
                     raise ValueError(f'completed shard report mismatch: {i}')
-            physical = json.loads((output / 'physical/report.json').read_bytes())
+            physical = read_json(output / 'physical/report.json')
             outputs = physical.get('output_sha256', {})
             if outputs != report.get('physical_output_sha256') or any(
-                sha(output / 'physical' / name) != outputs.get(name)
+                sha256_file(output / 'physical' / name) != outputs.get(name)
                 for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
             ):
                 raise ValueError('completed physical output mismatch')
@@ -499,7 +632,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         sync_directory(output.parent)
         (output / 'configs').mkdir()
         (output / 'shards').mkdir()
-        write_json(identity_path, identity)
+        write_json(identity_path, identity, sort_keys=False)
     journal_exists = (output / 'processing-events.jsonl').exists()
     if resume and not journal_exists:
         if (
@@ -514,16 +647,34 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     journal_slot[0] = journal
     if resume and not journal_exists:
         journal.add(
-            {'event': 'attempt_start', 'attempt': 'unrecorded-before-journal-' + uuid.uuid4().hex}
+            {
+                'event': 'attempt_start',
+                'attempt': 'unrecorded-before-journal-' + uuid.uuid4().hex,
+            }
         )
 
-    def prior(name):
+    def prior(name: str) -> dict[str, Any] | None:
+        """Find the last completed checkpoint for a named task.
+
+        Args:
+            name: Physical task or shard name.
+
+        Returns:
+            Saved event dictionary, or None if the task has not completed.
+        """
         matches = [
-            e for e in journal.events if e.get('event') == 'unit_complete' and e.get('unit') == name
+            e
+            for e in journal.events
+            if e.get('event') == 'unit_complete' and e.get('unit') == name
         ]
         return matches[-1] if matches else None
 
-    def quarantine(path):
+    def quarantine(path: Path) -> None:
+        """Move existing partial output aside for inspection.
+
+        Args:
+            path: Output to move when present.
+        """
         if path.exists():
             target = output / 'interrupted'
             target.mkdir(mode=0o700, exist_ok=True)
@@ -535,10 +686,10 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     land_dir = output / 'land'
     land_checkpoint = prior('land') if resume else None
     if land_checkpoint:
-        land_report = json.loads((land_dir / 'report.json').read_bytes())
+        land_report = read_json(land_dir / 'report.json')
         if (
-            sha(land_dir / 'report.json') != land_checkpoint['report_sha256']
-            or sha(land_dir / 'land.tif') != land_checkpoint['output_sha256']
+            sha256_file(land_dir / 'report.json') != land_checkpoint['report_sha256']
+            or sha256_file(land_dir / 'land.tif') != land_checkpoint['output_sha256']
             or land_report.get('status') != 'candidate-only'
             or land_report.get('configuration_sha256') != cfg['land_config']['sha256']
             or land_report.get('grid') != grid
@@ -550,15 +701,27 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             quarantine(land_dir)
         unit_start = time.perf_counter()
         run_stage(land.run, land_path, land_dir)
-        land_report = json.loads((land_dir / 'report.json').read_bytes())
-        if land_report.get('status') != 'candidate-only' or land_report.get('land_sha256') != sha(
-            land_dir / 'land.tif'
-        ):
+        land_report = read_json(land_dir / 'report.json')
+        if land_report.get('status') != 'candidate-only' or land_report.get(
+            'land_sha256'
+        ) != sha256_file(land_dir / 'land.tif'):
             raise ValueError('land raster is incomplete')
-        journal.unit('land', unit_start, land_dir / 'report.json', land_dir / 'land.tif')
+        journal.unit(
+            'land', unit_start, land_dir / 'report.json', land_dir / 'land.tif'
+        )
     staged_count = 0
 
-    def build_shard(item):
+    def build_shard(
+        item: tuple[int, tuple[Path, str, dict[str, Any]]],
+    ) -> dict[str, Any]:
+        """Validate or build a single water shard's raster.
+
+        Args:
+            item: Shard index and its (path, expected_hash, source_record).
+
+        Returns:
+            Dictionary with verified raster and report paths and digests.
+        """
         control.check_cancelled()
         nonlocal staged_count
         i, (path, digest, entry) = item
@@ -566,10 +729,10 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         checkpoint = prior(f'shard-{i:05d}') if resume else None
         if checkpoint:
             report_path = destination / 'report.json'
-            report = json.loads(report_path.read_bytes())
+            report = read_json(report_path)
             if (
-                sha(report_path) != checkpoint['report_sha256']
-                or sha(destination / 'water.tif') != checkpoint['output_sha256']
+                sha256_file(report_path) != checkpoint['report_sha256']
+                or sha256_file(destination / 'water.tif') != checkpoint['output_sha256']
                 or report.get('status') != 'candidate-only'
                 or report.get('source_sha256') != digest
                 or Path(report.get('source', '')).name != path.name
@@ -584,14 +747,17 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             if (
                 staged.is_file()
                 and staged.stat().st_size == entry.get('size')
-                and sha(staged) == digest
+                and sha256_file(staged) == digest
             ):
                 staged.unlink()
             return {
                 'path': str(destination / 'water.tif'),
                 'sha256': checkpoint['output_sha256'],
                 'status': 'candidate-only',
-                'report': {'path': str(report_path), 'sha256': checkpoint['report_sha256']},
+                'report': {
+                    'path': str(report_path),
+                    'sha256': checkpoint['report_sha256'],
+                },
             }
         if resume:
             quarantine(destination)
@@ -603,7 +769,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             if staged.exists() and (
                 not staged.is_file()
                 or staged.stat().st_size != entry['size']
-                or sha(staged) != digest
+                or sha256_file(staged) != digest
             ):
                 quarantine(staged)
             if not staged.exists():
@@ -616,7 +782,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             if (
                 not staged.is_file()
                 or staged.stat().st_size != entry['size']
-                or sha(staged) != digest
+                or sha256_file(staged) != digest
             ):
                 raise ValueError(f'staged source size/hash mismatch: {path}')
             path = staged
@@ -624,30 +790,33 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         unit_start = time.perf_counter()
         run_stage(water.run, path, digest, destination, water_path, batch_size)
         report_path = destination / 'report.json'
-        report = json.loads(report_path.read_bytes())
+        report = read_json(report_path)
         if (
             report.get('status') != 'candidate-only'
             or report.get('source_sha256') != digest
             or report.get('configuration_sha256') != cfg['water_config']['sha256']
-            or report.get('output_sha256') != sha(destination / 'water.tif')
+            or report.get('output_sha256') != sha256_file(destination / 'water.tif')
         ):
             raise ValueError(f'incomplete water shard: {path}')
-        journal.unit(f'shard-{i:05d}', unit_start, report_path, destination / 'water.tif')
+        journal.unit(
+            f'shard-{i:05d}', unit_start, report_path, destination / 'water.tif'
+        )
         if owned:
             path.unlink()
         return {
             'path': str(destination / 'water.tif'),
             'sha256': report['output_sha256'],
             'status': report['status'],
-            'report': {'path': str(report_path), 'sha256': sha(report_path)},
+            'report': {'path': str(report_path), 'sha256': sha256_file(report_path)},
         }
 
     # Independent child outputs are kept in manifest order. On failure,
     # cancel work not yet started; running children finish and remain auditable.
-    shards = [None] * len(raw)
+    shards: list[dict[str, Any] | None] = [None] * len(raw)
     with ThreadPoolExecutor(max_workers=min(workers, len(raw))) as pool:
         futures = {
-            pool.submit(copy_context().run, build_shard, item): item[0] for item in enumerate(raw)
+            pool.submit(copy_context().run, build_shard, item): item[0]
+            for item in enumerate(raw)
         }
         try:
             for future in as_completed(futures):
@@ -656,7 +825,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             for future in futures:
                 future.cancel()
             raise
-    union_cfg = {
+    union_cfg: dict[str, Any] = {
         'schema': 'water-union-comparison-v1',
         'grid': grid,
         'selection_notes': cfg['selection_notes'],
@@ -669,24 +838,34 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     if cfg.get('water_reference'):
         union_cfg['reference'] = cfg['water_reference']
 
-    def bind_config(path, value):
+    def bind_config(path: Path, value: dict[str, Any]) -> None:
+        """Save the generated settings or check they match the previous attempt.
+
+        Args:
+            path: Configuration file in the current run.
+            value: Expected JSON settings.
+
+        Raises:
+            ValueError: An existing file differs or belongs to a fresh run.
+        """
         if path.exists():
-            if not resume or json.loads(path.read_bytes()) != value:
+            if not resume or read_json(path) != value:
                 raise ValueError('resumed stage config mismatch')
         else:
-            write_json(path, value)
+            write_json(path, value, sort_keys=False)
 
     union_config = output / 'configs/union.json'
     bind_config(union_config, union_cfg)
     union_dir = output / 'union'
     union_checkpoint = prior('union') if resume else None
     if union_checkpoint:
-        union_report = json.loads((union_dir / 'report.json').read_bytes())
+        union_report = read_json(union_dir / 'report.json')
         if (
-            sha(union_dir / 'report.json') != union_checkpoint['report_sha256']
-            or sha(union_dir / 'water-union.tif') != union_checkpoint['output_sha256']
+            sha256_file(union_dir / 'report.json') != union_checkpoint['report_sha256']
+            or sha256_file(union_dir / 'water-union.tif')
+            != union_checkpoint['output_sha256']
             or union_report.get('status') != 'candidate-only'
-            or union_report.get('configuration_sha256') != sha(union_config)
+            or union_report.get('configuration_sha256') != sha256_file(union_config)
             or union_report.get('grid') != grid
             or union_report.get('union_sha256') != union_checkpoint['output_sha256']
         ):
@@ -696,19 +875,27 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             quarantine(union_dir)
         unit_start = time.perf_counter()
         run_stage(water_union.run, union_config, union_dir)
-        union_report = json.loads((union_dir / 'report.json').read_bytes())
+        union_report = read_json(union_dir / 'report.json')
         if union_report.get('status') != 'candidate-only' or union_report.get(
             'union_sha256'
-        ) != sha(union_dir / 'water-union.tif'):
+        ) != sha256_file(union_dir / 'water-union.tif'):
             raise ValueError('water union is incomplete')
-        journal.unit('union', unit_start, union_dir / 'report.json', union_dir / 'water-union.tif')
+        journal.unit(
+            'union',
+            unit_start,
+            union_dir / 'report.json',
+            union_dir / 'water-union.tif',
+        )
     compose_cfg = {
         'schema': 'candidate-physical-composition-v1',
         'grid': grid,
         'selection_notes': cfg['selection_notes'],
         'minimum_free_bytes': reserve,
         'rows_per_block': physical_rows_per_block,
-        'land': {'path': str(output / 'land/land.tif'), 'sha256': land_report['land_sha256']},
+        'land': {
+            'path': str(output / 'land/land.tif'),
+            'sha256': land_report['land_sha256'],
+        },
         'water': {
             'path': str(output / 'union/water-union.tif'),
             'sha256': union_report['union_sha256'],
@@ -722,16 +909,18 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     physical_dir = output / 'physical'
     physical_checkpoint = prior('physical') if resume else None
     if physical_checkpoint:
-        physical = json.loads((physical_dir / 'report.json').read_bytes())
+        physical = read_json(physical_dir / 'report.json')
         outputs = physical.get('output_sha256', {})
         if (
-            sha(physical_dir / 'report.json') != physical_checkpoint['report_sha256']
-            or sha(physical_dir / 'rows.u32le') != physical_checkpoint['output_sha256']
+            sha256_file(physical_dir / 'report.json')
+            != physical_checkpoint['report_sha256']
+            or sha256_file(physical_dir / 'rows.u32le')
+            != physical_checkpoint['output_sha256']
             or physical.get('status') != 'candidate-only'
-            or physical.get('configuration_sha256') != sha(compose_config)
+            or physical.get('configuration_sha256') != sha256_file(compose_config)
             or physical.get('grid') != grid
             or any(
-                sha(physical_dir / name) != outputs.get(name)
+                sha256_file(physical_dir / name) != outputs.get(name)
                 for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
             )
         ):
@@ -741,14 +930,18 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
             quarantine(physical_dir)
         unit_start = time.perf_counter()
         run_stage(composition.main, compose_config, physical_dir)
-        physical = json.loads((physical_dir / 'report.json').read_bytes())
+        physical = read_json(physical_dir / 'report.json')
         if physical.get('status') != 'candidate-only' or any(
-            sha(physical_dir / name) != physical.get('output_sha256', {}).get(name)
+            sha256_file(physical_dir / name)
+            != physical.get('output_sha256', {}).get(name)
             for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
         ):
             raise ValueError('physical composition is incomplete')
         journal.unit(
-            'physical', unit_start, physical_dir / 'report.json', physical_dir / 'rows.u32le'
+            'physical',
+            unit_start,
+            physical_dir / 'report.json',
+            physical_dir / 'rows.u32le',
         )
     for p, original in (
         (manifest_path, data),
@@ -758,7 +951,7 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
     ):
         if p.read_bytes() != original:
             raise ValueError(f'pipeline input changed during processing: {p}')
-    if any(sha(p['path']) != p['sha256'] for p in source_pins):
+    if any(sha256_file(p['path']) != p['sha256'] for p in source_pins):
         raise ValueError('land source changed during processing')
     report = {
         'status': 'candidate-only',
@@ -776,37 +969,42 @@ def _run(manifest_path, output, processing_started, resume, journal_slot):
         'stage_reports': {
             key: {
                 'path': str(output / key / 'report.json'),
-                'sha256': sha(output / key / 'report.json'),
+                'sha256': sha256_file(output / key / 'report.json'),
             }
             for key in ('land', 'union', 'physical')
         },
         'physical_output_sha256': physical['output_sha256'],
         'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
     }
-    pipeline_config = output / 'pipeline-config.json'
-    if pipeline_config.exists():
-        if not resume or pipeline_config.read_bytes() != data:
-            raise ValueError('resumed pipeline config mismatch')
-    else:
-        write_bytes_atomic(pipeline_config, data)
     report['staged_shard_count'] = staged_count
     report['staged_shard_count_scope'] = 'current invocation'
     journal.finish('complete')
     report.update(journal.summary())
-    report['pipeline_identity_sha256'] = sha(identity_path)
-    report['processing_journal_sha256'] = sha(journal.path)
-    write_json(output / 'report.json', report)
+    report['pipeline_identity_sha256'] = sha256_file(identity_path)
+    report['processing_journal_sha256'] = sha256_file(journal.path)
+    write_json(output / 'report.json', report, sort_keys=False)
     return report
 
 
-def main(argv=None, *, emit=print):
+def main(
+    argv: Sequence[str] | None = None, *, emit: Callable[..., None] = print
+) -> None:
+    """Run the physical build command and print its report.
+
+    Args:
+        argv: Command arguments, or None to read them from the process.
+        emit: Function that prints the resulting report.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('pipeline_config')
     parser.add_argument('output')
     parser.add_argument('--resume', action='store_true')
     args = parser.parse_args(argv)
     emit(
-        json.dumps(run(args.pipeline_config, args.output, resume=args.resume), indent=2), flush=True
+        json.dumps(
+            run(args.pipeline_config, args.output, resume=args.resume), indent=2
+        ),
+        flush=True,
     )
 
 

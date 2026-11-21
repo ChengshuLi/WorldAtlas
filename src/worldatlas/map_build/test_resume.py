@@ -6,6 +6,7 @@ import unittest
 from unittest.mock import patch
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.test_support import selection
+from worldatlas.shared.files import pin_file, read_json, write_json
 
 
 class ExecutorResumeTests(unittest.TestCase):
@@ -15,19 +16,24 @@ class ExecutorResumeTests(unittest.TestCase):
         self.root = Path(self.temp.name).resolve()
         inputs = self.root / "inputs"
         inputs.mkdir()
-        sentinel = pipeline.write(inputs / "sentinel.json", {})
-        required = ("land_config", "water_config", "raw_manifest")
+        self.source = inputs / "source.bin"
+        self.source.write_bytes(b"final-output\x00\x01\x02")
         cfg = {
-            "schema": "worldatlas-end-to-end-pipeline-v2",
+            "schema": "worldatlas-end-to-end-pipeline-v3",
             "input_root": str(self.root),
             "grid": dict(width=36, height=18, step=10),
-            "sources": {key: pipeline.pin(sentinel) for key in required},
+            "sources": {
+                "land_config": {
+                    "land": [
+                        {"dataset": str(self.source), "files": [pin_file(self.source)]}
+                    ]
+                },
+                "inland_water": {"rasterization": {}, "files": []},
+            },
         }
-        cfg["sources"]["raw_manifest"] = pipeline.pin(self.source_path(inputs))
-        self.config = pipeline.write(inputs / "request.json", cfg)
-        self.saved_selection = pipeline.write(inputs / "selection.json", selection())
+        self.config = write_json(inputs / "request.json", cfg)
+        self.saved_selection = write_json(inputs / "selection.json", selection())
         self.out = self.root / "run"
-        self.source = inputs / "source.bin"
 
     def runner(self, resume=False):
         runner = pipeline.Pipeline(
@@ -49,7 +55,7 @@ class ExecutorResumeTests(unittest.TestCase):
         self.execute(first)
         first.close()
         self.source.write_bytes(b"changed input")
-        with self.assertRaisesRegex(ValueError, "source pin mismatch"):
+        with self.assertRaisesRegex(ValueError, "selected source file differs"):
             self.runner(resume=True)
 
     def test_lost_timing_prefix_is_rejected_before_checkpoint_reuse(self):
@@ -62,7 +68,10 @@ class ExecutorResumeTests(unittest.TestCase):
 
     def test_changed_code_is_recorded_and_resume_keeps_the_original_identity(self):
         first = self.runner()
-        original = pipeline.pin(self.out / "run-identity.json")
+        self.assertEqual(
+            read_json(self.out / "build-config.json"), read_json(self.config)
+        )
+        original = pin_file(self.out / "run-identity.json")
         first.close()
         with (
             patch.object(
@@ -73,9 +82,9 @@ class ExecutorResumeTests(unittest.TestCase):
             ),
         ):
             resumed = self.runner(resume=True)
-            self.assertEqual(pipeline.pin(self.out / "run-identity.json"), original)
+            self.assertEqual(pin_file(self.out / "run-identity.json"), original)
             self.assertEqual(
-                pipeline.read(resumed.attempt_dir / "producer.json")["code"],
+                read_json(resumed.attempt_dir / "producer.json")["code"],
                 {"changed.py": "0" * 64},
             )
 
@@ -84,19 +93,35 @@ class ExecutorResumeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "another pipeline runner"):
             self.runner(resume=True)
 
-    def test_generated_document_must_match_on_resume(self):
+    def test_saved_build_configuration_must_match_on_resume(self):
         first = self.runner()
-        path = first.document("handoff", {"input": "fixed"})
         first.close()
-        second = self.runner(resume=True)
-        self.assertEqual(second.document("handoff", {"input": "fixed"}), path)
-        with self.assertRaisesRegex(ValueError, "generated request changed"):
-            second.document("handoff", {"input": "different"})
+        (self.out / "build-config.json").write_bytes(b"{}")
+        with self.assertRaisesRegex(ValueError, "saved build configuration changed"):
+            self.runner(resume=True)
 
-    def source_path(self, inputs):
-        path = inputs / "source.bin"
-        path.write_bytes(b"final-output\x00\x01\x02")
-        return path
+    def test_resume_marks_an_interrupted_setup_with_no_sealed_timing(self):
+        runner = self.runner()
+        runner.close()
+        interrupted = self.out / "attempts" / "interrupted"
+        interrupted.mkdir()
+        resumed = self.runner(resume=True)
+        incomplete = [
+            event for event in resumed.timing.records
+            if event["event"] == "unmeasured-initialization"
+        ]
+        self.assertEqual([event["attempt"] for event in incomplete], ["interrupted"])
+
+    def test_corrupt_unsealed_timing_releases_the_run_lock(self):
+        runner = self.runner()
+        runner.close()
+        journal = self.out / "timing-events.jsonl"
+        prior = journal.read_bytes()
+        journal.write_bytes(prior + b'bad JSON\n{"event": "attempt"}\n')
+        with self.assertRaisesRegex(ValueError, "invalid timing journal before final"):
+            self.runner(resume=True)
+        journal.write_bytes(prior)
+        self.runner(resume=True)
 
     def execute(self, runner):
         output = self.out / "result"
@@ -112,6 +137,6 @@ class ExecutorResumeTests(unittest.TestCase):
             calculate,
             (),
             timing=runner.timing,
-            inputs=[pipeline.pin(self.source)],
+            inputs=[pin_file(self.source)],
             outputs=[output],
         )

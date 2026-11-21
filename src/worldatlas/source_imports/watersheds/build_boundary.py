@@ -1,18 +1,20 @@
 """Build and save a boundary from the files and choices named in a recipe."""
+
 import hashlib
-from importlib.metadata import version
-from itertools import pairwise
 import logging
-from pathlib import Path
 import platform
 import time
-from typing import Any, NotRequired, TypedDict
+from collections.abc import Mapping, Sequence
+from importlib.metadata import version
+from itertools import pairwise
+from pathlib import Path
+from typing import Any, NotRequired, TypedDict, cast
 
 import numpy as np
-from osgeo import gdal, osr
 import pyproj
-from pyproj import Transformer
 import shapely
+from osgeo import gdal, osr
+from pyproj import Transformer, datadir
 from shapely.geometry import LineString
 
 from worldatlas.geodesy.wgs84 import geodesic, geodesic_distance
@@ -23,6 +25,7 @@ from worldatlas.source_imports.shared.storage import save_features
 from worldatlas.source_imports.watersheds.basins import Basins
 from worldatlas.source_imports.watersheds.boundary import (
     Divide,
+    Join,
     assemble_boundary_line,
     cell_containing_point,
     choose_intersection_join,
@@ -33,9 +36,18 @@ from worldatlas.source_imports.watersheds.drainage import (
     trace_destination_masks,
     unique_destination_labels,
 )
-from worldatlas.source_imports.watersheds.sources import FileSelection, SourceLine, Sources
-from worldatlas.source_imports.watersheds.terrain import align_raster_to_grid, prepare_elevation_grid
-from worldatlas.source_imports.watersheds.waterways import rasterize_waterway_destinations
+from worldatlas.source_imports.watersheds.sources import (
+    FileSelection,
+    SourceLine,
+    Sources,
+)
+from worldatlas.source_imports.watersheds.terrain import (
+    align_raster_to_grid,
+    prepare_elevation_grid,
+)
+from worldatlas.source_imports.watersheds.waterways import (
+    rasterize_waterway_destinations,
+)
 
 LOGGER = logging.getLogger(__name__)
 
@@ -89,26 +101,59 @@ class TerrainSettings(TypedDict):
     ocean_mask: NotRequired[dict[str, Any]]
 
 
-def runtime_versions():
+def runtime_versions() -> dict[str, Any]:
     """Record which software and coordinate data produced this boundary.
 
     Returns:
         Versions of the Python and native libraries and the PROJ database checksum.
     """
-    database = Path(pyproj.datadir.get_data_dir()) / 'proj.db'
+    database = Path(datadir.get_data_dir()) / 'proj.db'
     with database.open('rb') as stream:
         database_sha256 = hashlib.file_digest(stream, 'sha256').hexdigest()
-    return {'python': platform.python_version(),
-            'packages': {name: version(name) for name in (
-                'numpy', 'pyproj', 'shapely', 'scipy', 'numba', 'llvmlite', 'osmium', 'boto3', 'psycopg')},
-            'gdal': gdal.VersionInfo('RELEASE_NAME'), 'pyproj_proj': pyproj.proj_version_str,
-            'gdal_proj': '.'.join(map(str, (osr.GetPROJVersionMajor(), osr.GetPROJVersionMinor(),
-                                          osr.GetPROJVersionMicro()))),
-            'shapely_geos': shapely.geos_version_string,
-            'proj_database_sha256': database_sha256}
+    return {
+        'python': platform.python_version(),
+        'packages': {
+            name: version(name)
+            for name in (
+                'numpy',
+                'pyproj',
+                'shapely',
+                'scipy',
+                'numba',
+                'llvmlite',
+                'osmium',
+                'boto3',
+                'psycopg',
+            )
+        },
+        'gdal': gdal.VersionInfo('RELEASE_NAME'),
+        'pyproj_proj': pyproj.proj_version_str,
+        'gdal_proj': '.'.join(
+            map(
+                str,
+                (
+                    osr.GetPROJVersionMajor(),
+                    osr.GetPROJVersionMinor(),
+                    osr.GetPROJVersionMicro(),
+                ),
+            )
+        ),
+        'shapely_geos': shapely.geos_version_string,
+        'proj_database_sha256': database_sha256,
+    }
 
 
-def construct_boundary(files, *, line_selections, sections, joins, start, end, terrains=None, drainage=None):
+def construct_boundary(
+    files: Mapping[str, Path],
+    *,
+    line_selections: Mapping[str, SourceLine],
+    sections: Sequence[dict[str, Any]],
+    joins: Sequence[dict[str, Any]],
+    start: dict[str, Any],
+    end: dict[str, Any],
+    terrains: Mapping[str, TerrainSettings] | None = None,
+    drainage: Mapping[str, DrainageSettings] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     """Trace drainage, find the divide, and join the boundary sections.
 
     For a recipe with a coastline, a calculated divide, and a river,
@@ -133,10 +178,13 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
         ValueError: The evidence or recipe does not produce a valid connected boundary.
     """
     started = time.monotonic()
-    report = {'terrain': {}, 'connections': {}}
+    report: dict[str, Any] = {'terrain': {}, 'connections': {}}
     sources = Sources(files)
     # A recipe can name one line "river" and reuse that name in a section or join.
-    lines = {name: sources.read_source_line(selection) for name, selection in line_selections.items()}
+    lines = {
+        name: sources.read_source_line(selection)
+        for name, selection in line_selections.items()
+    }
     report['source_geometry_seconds'] = time.monotonic() - started
     divides, connections, networks = {}, {}, {}
     drainage_by_name = drainage or {}
@@ -144,38 +192,63 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
         phase = time.monotonic()
         drainage_name = settings['drainage']
         if drainage_name not in drainage_by_name:
-            raise ValueError(f'terrain {name!r} refers to unknown drainage settings {drainage_name!r}')
+            raise ValueError(
+                f'terrain {name!r} refers to unknown drainage settings {drainage_name!r}'
+            )
         destination_settings = drainage_by_name[drainage_name]
         domains = settings['domains']
         if not domains:
             raise ValueError('terrain requires at least one analysis domain')
         raster_paths = lambda selected: [
-            sources.resolve_raster_path({'source': item} if isinstance(item, str) else item)
+            sources.resolve_raster_path(
+                {'source': item} if isinstance(item, str) else item
+            )
             for item in selected
         ]
-        geographic_bounds = [Transformer.from_crs(domain.get('crs', 4326), 4326, always_xy=True)
-                             .transform_bounds(*domain['bounds'], densify_pts=21, errcheck=True)
-                             for domain in domains]
-        bounds = [min(b[0] for b in geographic_bounds), min(b[1] for b in geographic_bounds),
-                  max(b[2] for b in geographic_bounds), max(b[3] for b in geographic_bounds)]
-        reversed_ways = [str(ident) for ident in destination_settings.get('reverse_waterways', [])]
+        geographic_bounds = [
+            Transformer.from_crs(
+                domain.get('crs', 4326), 4326, always_xy=True
+            ).transform_bounds(*domain['bounds'], densify_pts=21, errcheck=True)
+            for domain in domains
+        ]
+        bounds = [
+            min(b[0] for b in geographic_bounds),
+            min(b[1] for b in geographic_bounds),
+            max(b[2] for b in geographic_bounds),
+            max(b[3] for b in geographic_bounds),
+        ]
+        reversed_ways = [
+            str(ident) for ident in destination_settings.get('reverse_waterways', [])
+        ]
         network = sources.read_osm_network(
-            destination_settings.get('waterways', []), rivers_and_streams_only=True, reverse=reversed_ways,
+            destination_settings.get('waterways', []),
+            rivers_and_streams_only=True,
+            reverse=reversed_ways,
         )
         if network.nodes:
             # A stream can cross our terrain crop and reach its outlet
             # farther away. Read the basin map far enough to find that outlet.
-            bounds = [min(bounds[0], min(p[0] for p in network.nodes.values())),
-                      min(bounds[1], min(p[1] for p in network.nodes.values())),
-                      max(bounds[2], max(p[0] for p in network.nodes.values())),
-                      max(bounds[3], max(p[1] for p in network.nodes.values()))]
+            bounds = [
+                min(bounds[0], min(p[0] for p in network.nodes.values())),
+                min(bounds[1], min(p[1] for p in network.nodes.values())),
+                max(bounds[2], max(p[0] for p in network.nodes.values())),
+                max(bounds[3], max(p[1] for p in network.nodes.values())),
+            ]
         basins = Basins(
-            [sources.resolve_vector_path(source) for source in destination_settings['basins']],
-            destination_settings['basin_attribute'], destination_settings['groups'], bounds,
+            [
+                sources.resolve_vector_path(source)
+                for source in destination_settings['basins']
+            ],
+            destination_settings['basin_attribute'],
+            destination_settings['groups'],
+            bounds,
         )
         assigned, network_report = (
-            network.trace_destinations_from_ways(destination_settings['waterway_groups'])
-            if 'waterway_groups' in destination_settings else network.trace_destinations_from_basins(basins)
+            network.trace_destinations_from_ways(
+                destination_settings['waterway_groups']
+            )
+            if 'waterway_groups' in destination_settings
+            else network.trace_destinations_from_basins(basins)
         )
         network.require_known_drainage_in_bounds(geographic_bounds, network_report)
         shared_forks = networks.setdefault(network, {})
@@ -190,19 +263,30 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
                 node = str(waypoint['node'])
                 destinations = network.drainage_groups_by_outgoing_node(node, assigned)
                 groups = set(destinations.values())
-                if (len(groups) == 2 and any(groups == set(map(int, pair)) for pair in settings['interfaces'])
-                        and network.nodes[node] == sources.resolve_recipe_point(waypoint, lines)):
+                if (
+                    len(groups) == 2
+                    and any(
+                        groups == set(map(int, pair)) for pair in settings['interfaces']
+                    )
+                    and network.nodes[node]
+                    == sources.resolve_recipe_point(waypoint, lines)
+                ):
                     shared_forks[node] = destinations
         network_seconds = time.monotonic() - phase
         stream_head_sections = [
-            (i, section['flow']) for i, section in enumerate(sections)
+            (i, section['flow'])
+            for i, section in enumerate(sections)
             if 'flow' in section and section['flow']['terrain'] == name
         ]
         if stream_head_sections and len(domains) != 1:
-            raise ValueError('a stream-head connection requires one continuous terrain domain')
+            raise ValueError(
+                'a stream-head connection requires one continuous terrain domain'
+            )
         divide, domain_reports, relevant_ways = Divide(), [], set()
-        sinks = [(sources.resolve_recipe_point(sink['point'], lines), int(sink['group']))
-                 for sink in settings.get('closed_sinks', [])]
+        sinks = [
+            (sources.resolve_recipe_point(sink['point'], lines), int(sink['group']))
+            for sink in settings.get('closed_sinks', [])
+        ]
         if any(group < 0 for _, group in sinks):
             raise ValueError('closed drainage destinations require known group IDs')
         covered_sinks = set()
@@ -214,17 +298,33 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
             bounds_crs = domain.get('crs', 4326)
             tick = time.monotonic()
             grid = prepare_elevation_grid(
-                raster_paths(settings['primary']), bounds, raster_paths(settings.get('secondary', [])),
+                raster_paths(settings['primary']),
+                bounds,
+                raster_paths(settings.get('secondary', [])),
                 sources.resolve_raster_path({'source': settings['height_offset']})
-                if 'height_offset' in settings else None,
+                if 'height_offset' in settings
+                else None,
                 bounds_crs=bounds_crs,
             )
             terrain_seconds = time.monotonic() - tick
             step = time.monotonic()
-            seeds, seed_report = rasterize_waterway_destinations(network, assigned, grid)
+            seeds, seed_report = rasterize_waterway_destinations(
+                network, assigned, grid
+            )
             relevant_ways.update(network.way_ids_intersecting_grid_bounds(grid))
 
-            def seed_point(row, column, group, message):
+            def seed_point(row: int, column: int, group: int, message: str) -> None:
+                """Mark a cell as draining to the specified group.
+
+                Args:
+                    row: Terrain row of the selected point.
+                    column: Terrain column of the selected point.
+                    group: Known destination ID.
+                    message: Error message if a mapped stream disagrees.
+
+                Raises:
+                    ValueError: The cell already has a different known destination.
+                """
                 present = {g for g, cells in seeds.items() if cells[row, column]}
                 # If the river at this cell says group 3, an explicit point
                 # cannot overwrite it with group 7.
@@ -233,42 +333,65 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
                 if group not in seeds:
                     seeds[group] = np.zeros(grid.elevation.shape, dtype=bool)
                 seeds[group][row, column] = True
+
             for _, flow_settings in stream_head_sections:
                 point = sources.resolve_recipe_point(flow_settings['point'], lines)
-                row, column = cell_containing_point(grid, point)
+                row, column = cast(tuple[int, int], cell_containing_point(grid, point))
                 group = int(flow_settings['inside_group'])
-                seed_point(row, column, group, 'source stream head conflicts with a mapped drainage group')
+                seed_point(
+                    row,
+                    column,
+                    group,
+                    'source stream head conflicts with a mapped drainage group',
+                )
             closed_cells = []
             for index, (point, group) in enumerate(sinks):
                 cell = cell_containing_point(grid, point, required=False)
                 if cell is None:
                     continue
                 row, column = cell
-                seed_point(row, column, group, 'closed drainage destination conflicts with a mapped group')
+                seed_point(
+                    row,
+                    column,
+                    group,
+                    'closed drainage destination conflicts with a mapped group',
+                )
                 closed_cells.append((row, column))
                 covered_sinks.add(index)
-            outlets, coastal_labels, coast_report = None, None, None
+            outlets, coastal_labels, ocean = None, None, None
+            coast_report: dict[str, Any] | None = None
             if 'ocean_mask' in settings:
                 selection = settings['ocean_mask']
-                water = align_raster_to_grid(raster_paths(selection['sources']), grid, resampling='near')
+                water = align_raster_to_grid(
+                    raster_paths(selection['sources']), grid, resampling='near'
+                )
                 ocean = np.isin(water, selection['values'])
                 outlets, coastal_labels = basins.classify_coastal_outlets(grid, ocean)
                 unique_seeds = unique_destination_labels(seeds, grid.elevation.shape)
-                conflict = ((unique_seeds >= 0) & (coastal_labels >= 0) &
-                            (unique_seeds != coastal_labels))
+                conflict = (
+                    (unique_seeds >= 0)
+                    & (coastal_labels >= 0)
+                    & (unique_seeds != coastal_labels)
+                )
                 # At the shore, a river with a known route can give a
                 # better answer than the basin outline. Count disagreements.
                 coastal_labels[unique_seeds >= 0] = unique_seeds[unique_seeds >= 0]
-                coast_report = {'ocean_cells': int(ocean.sum()),
-                                'land_outlet_cells': int((outlets & ~ocean).sum()),
-                                'river_basin_conflicts': int(conflict.sum())}
+                coast_report = {
+                    'ocean_cells': int(ocean.sum()),
+                    'land_outlet_cells': int((outlets & ~ocean).sum()),
+                    'river_basin_conflicts': int(conflict.sum()),
+                }
             seed_seconds = time.monotonic() - step
             step = time.monotonic()
-            filled_elevation, flow = compute_cell_flow(grid, closed_cells, outlets=outlets)
+            filled_elevation, flow = compute_cell_flow(
+                grid, closed_cells, outlets=outlets
+            )
             terminals = basins.classify_crop_exits(grid, flow)
-            if coastal_labels is not None:
+            if coastal_labels is not None and coast_report is not None:
+                assert outlets is not None and ocean is not None
                 coastal_labels, coverage_report = basins.classify_uncovered_outlets(
-                    grid, flow, outlets & ~ocean, coastal_labels, seeds)
+                    grid, flow, outlets & ~ocean, coastal_labels, seeds
+                )
                 coast_report['source_coverage'] = coverage_report
                 # At ocean and shore stops, use the shoreline results in
                 # place of the crop-edge lookup, even if the group is unknown.
@@ -277,60 +400,104 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
             drainage_seconds = time.monotonic() - step
             step = time.monotonic()
             divide.add_catchment_edges(
-                grid, labels, settings['interfaces'], output_bounds, bounds_crs=bounds_crs,
+                grid,
+                labels,
+                settings['interfaces'],
+                output_bounds,
+                bounds_crs=bounds_crs,
             )
             for index, flow_settings in stream_head_sections:
                 curve, receipt = connect_divide_to_stream_head(
-                    grid, flow, unique_destination_labels(labels, flow.shape),
+                    grid,
+                    flow,
+                    unique_destination_labels(labels, flow.shape),
                     sources.resolve_recipe_point(flow_settings['point'], lines),
-                    int(flow_settings['inside_group']), flow_settings['outside_groups'],
-                    flow_settings['max_step_m'])
+                    int(flow_settings['inside_group']),
+                    flow_settings['outside_groups'],
+                    flow_settings['max_step_m'],
+                )
                 connections[index] = curve
                 report['connections'][str(index)] = receipt
             destination_count = np.zeros(flow.shape, dtype='int64')
             for cells in labels.values():
                 destination_count += cells
-            domain_reports.append({
-                'bounds': bounds, 'output_bounds': output_bounds, 'shape': list(flow.shape),
-                'bounds_crs': bounds_crs,
-                'secondary_cells': grid.secondary_cells,
-                'unknown_cells': int((destination_count == 0).sum()),
-                'shared_drainage_cells': int((destination_count > 1).sum()),
-                'raised_cells': int((filled_elevation > grid.elevation).sum()),
-                'max_raise_m': float((filled_elevation - grid.elevation).max()),
-                'seeds': seed_report, 'terrain_seconds': terrain_seconds,
-                'coast': coast_report,
-                'seed_seconds': seed_seconds, 'drainage_seconds': drainage_seconds,
-                'divide_seconds': time.monotonic() - step,
-                'seconds': time.monotonic() - tick,
-            })
-            LOGGER.info('%s: %s cells, %.2f seconds', name, flow.shape,
-                        domain_reports[-1]['seconds'])
+            domain_reports.append(
+                {
+                    'bounds': bounds,
+                    'output_bounds': output_bounds,
+                    'shape': list(flow.shape),
+                    'bounds_crs': bounds_crs,
+                    'secondary_cells': grid.secondary_cells,
+                    'unknown_cells': int((destination_count == 0).sum()),
+                    'shared_drainage_cells': int((destination_count > 1).sum()),
+                    'raised_cells': int((filled_elevation > grid.elevation).sum()),
+                    'max_raise_m': float((filled_elevation - grid.elevation).max()),
+                    'seeds': seed_report,
+                    'terrain_seconds': terrain_seconds,
+                    'coast': coast_report,
+                    'seed_seconds': seed_seconds,
+                    'drainage_seconds': drainage_seconds,
+                    'divide_seconds': time.monotonic() - step,
+                    'seconds': time.monotonic() - tick,
+                }
+            )
+            LOGGER.info(
+                '%s: %s cells, %.2f seconds',
+                name,
+                flow.shape,
+                domain_reports[-1]['seconds'],
+            )
         if len(covered_sinks) != len(sinks):
-            raise ValueError('closed drainage destination is outside every analysis domain')
+            raise ValueError(
+                'closed drainage destination is outside every analysis domain'
+            )
         divides[name] = divide
         network_report = dict(network_report)
         for category in ('ambiguous', 'unassigned'):
-            network_report[category] = [way for way in network_report[category] if way in relevant_ways]
+            network_report[category] = [
+                way for way in network_report[category] if way in relevant_ways
+            ]
         network_report['shared_sections'] = [
-            section for section in network_report['shared_sections']
-            if any(way in relevant_ways for way, _, _ in section['source_segments'])]
+            section
+            for section in network_report['shared_sections']
+            if any(way in relevant_ways for way, _, _ in section['source_segments'])
+        ]
         # The check before reading terrain already rejects unknown river
         # routes that affect a crop. Leave those outside it out of this report.
         network_report.pop('unresolved_sections')
         network_report['river_and_stream_ways_in_domains'] = len(relevant_ways)
-        network_report['river_and_stream_ways_in_sources'] = len(network.river_and_stream_ids)
+        network_report['river_and_stream_ways_in_sources'] = len(
+            network.river_and_stream_ids
+        )
         network_report['reversed_waterways'] = {
-            ident: network.ways[ident].version for ident in reversed_ways}
-        report['terrain'][name] = {'domains': domain_reports, 'network': network_report,
-                                   'network_seconds': network_seconds,
-                                   'seconds': time.monotonic() - phase}
+            ident: network.ways[ident].version for ident in reversed_ways
+        }
+        report['terrain'][name] = {
+            'domains': domain_reports,
+            'network': network_report,
+            'network_seconds': network_seconds,
+            'seconds': time.monotonic() - phase,
+        }
     phase = time.monotonic()
 
-    def resolve_section_point(specification, *, retain_join=False):
+    def resolve_section_point(
+        specification: dict[str, Any], *, retain_join: bool = False
+    ) -> Join | tuple[float, float]:
+        """Find the point at which to start or end a boundary section.
+
+        Args:
+            specification: Source point or a request to find the nearest divide
+                corner.
+            retain_join: Keep the edge needed to route along the divide.
+
+        Returns:
+            (longitude, latitude), or a Join with the supporting divide edge.
+        """
         if 'nearest_divide' in specification:
             target = sources.resolve_recipe_point(specification['near'], lines)
-            join = divides[specification['nearest_divide']].join_at_nearest_corner(target)
+            join = divides[specification['nearest_divide']].join_at_nearest_corner(
+                target
+            )
         else:
             return sources.resolve_recipe_point(specification, lines)
         # A connector needs only the coordinate. Routing along the divide
@@ -344,34 +511,56 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
         elif 'divide' in section:
             section_lines.append(divides[section['divide']])
             if section.get('via'):
-                waypoints[index] = {'points': [sources.resolve_recipe_point(p, lines) for p in section['via']],
-                                    'max_step_m': section['max_step_m']}
+                waypoints[index] = {
+                    'points': [
+                        sources.resolve_recipe_point(p, lines) for p in section['via']
+                    ],
+                    'max_step_m': section['max_step_m'],
+                }
         elif 'flow' in section:
             section_lines.append(connections[index])
         elif 'geodesic' in section:
             choice = section['geodesic']
-            first, last = resolve_section_point(choice['start']), resolve_section_point(choice['end'])
-            section_lines.append(LineString(geodesic(first, last, choice['max_step_m'])))
+            first = cast(tuple[float, float], resolve_section_point(choice['start']))
+            last = cast(tuple[float, float], resolve_section_point(choice['end']))
+            section_lines.append(
+                LineString(geodesic(first, last, choice['max_step_m']))
+            )
             report.setdefault('connectors', {})[str(index)] = {
-                'start': list(first), 'end': list(last), 'length_m': geodesic_distance(first, last)}
+                'start': list(first),
+                'end': list(last),
+                'length_m': geodesic_distance(first, last),
+            }
         else:
             raise ValueError('unknown boundary section type')
     if len(joins) != len(section_lines) - 1:
-        raise ValueError('one geographic join selection is required between adjacent sections')
+        raise ValueError(
+            'one geographic join selection is required between adjacent sections'
+        )
     # Turn each nearby hint into a real intersection before trimming the lines.
-    chosen_joins = [choose_intersection_join(a, b, choice['near'])
-                     for (a, b), choice in zip(pairwise(section_lines), joins, strict=True)]
+    chosen_joins = [
+        choose_intersection_join(a, b, choice['near'])
+        for (a, b), choice in zip(pairwise(section_lines), joins, strict=True)
+    ]
     geometry, followed_sources = assemble_boundary_line(
-        section_lines, chosen_joins, resolve_section_point(start, retain_join=True),
+        section_lines,
+        chosen_joins,
+        resolve_section_point(start, retain_join=True),
         resolve_section_point(end, retain_join=True),
-        waypoints=waypoints, connections=report['connections'],
-        source_sections={index for index, section in enumerate(sections) if 'line' in section},
+        waypoints=waypoints,
+        connections=report['connections'],
+        source_sections={
+            index for index, section in enumerate(sections) if 'line' in section
+        },
     )
     final_line = LineString(geometry['coordinates'])
-    followed_source_line = shapely.union_all(followed_sources) if followed_sources else None
+    followed_source_line = (
+        shapely.union_all(followed_sources) if followed_sources else None
+    )
     report['river_checks'] = [
-        network.check_boundary_crossings(final_line, shared_forks=forks,
-                                         followed_source_line=followed_source_line)
+        network.check_boundary_crossings(
+            final_line, shared_forks=forks, followed_source_line=followed_source_line
+        )
         for network, forks in networks.items()
     ]
     report['joins'] = [list(join.point) for join in chosen_joins]
@@ -380,14 +569,20 @@ def construct_boundary(files, *, line_selections, sections, joins, start, end, t
     return geometry, report
 
 
-def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
-                       sources: dict[NonEmptyText, SourceId | MultipartSource],
-                       lines: dict[NonEmptyText, SourceLine],
-                       sections: list[dict[str, Any]], joins: list[dict[str, Any]],
-                       start: dict[str, Any], end: dict[str, Any],
-                       terrains: dict[NonEmptyText, TerrainSettings] | None = None,
-                       drainage: dict[NonEmptyText, DrainageSettings] | None = None,
-                       evidence_sources: list[SourceId] | None = None):
+def watershed_boundary(
+    runtime: Runtime,
+    *,
+    feature_id: NonEmptyText,
+    sources: dict[NonEmptyText, SourceId | MultipartSource],
+    lines: dict[NonEmptyText, SourceLine],
+    sections: list[dict[str, Any]],
+    joins: list[dict[str, Any]],
+    start: dict[str, Any],
+    end: dict[str, Any],
+    terrains: dict[NonEmptyText, TerrainSettings] | None = None,
+    drainage: dict[NonEmptyText, DrainageSettings] | None = None,
+    evidence_sources: list[SourceId] | None = None,
+) -> dict[str, Any]:
     """Read the recipe's files, build the boundary, and save it to Neon.
 
     Args:
@@ -411,24 +606,38 @@ def watershed_boundary(runtime: Runtime, *, feature_id: NonEmptyText,
         ValueError: Source acquisition, boundary construction, or save validation fails.
     """
     acquisition = {}
-    paths = acquire_sources(runtime, list(sources.values()), evidence_source_ids=evidence_sources or (),
-                            timing=acquisition)
+    paths = acquire_sources(
+        runtime,
+        list(sources.values()),
+        evidence_source_ids=evidence_sources or (),
+        timing=acquisition,
+    )
     # Turn the downloaded paths back into the file names the recipe uses.
     files = dict(zip(sources, paths, strict=True))
     geometry, report = construct_boundary(
-        files, line_selections=lines, sections=sections,
-        joins=joins, start=start, end=end, terrains=terrains, drainage=drainage,
+        files,
+        line_selections=lines,
+        sections=sections,
+        joins=joins,
+        start=start,
+        end=end,
+        terrains=terrains,
+        drainage=drainage,
     )
     versions = runtime_versions()
     started = time.monotonic()
     # Save only after the complete line passes the drainage and crossing checks.
     save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
     staging_seconds = acquisition['source_staging_seconds']
-    report.update(feature_id=feature_id,
-                  vertices=len(geometry['coordinates']), catalog_seconds=acquisition['catalog_seconds'],
-                  source_staging_seconds=staging_seconds,
-                  download_seconds=acquisition.get('download_seconds', 0.),
-                  source_processing_seconds=staging_seconds - acquisition.get('download_seconds', 0.),
-                  save_seconds=time.monotonic() - started)
+    report.update(
+        feature_id=feature_id,
+        vertices=len(geometry['coordinates']),
+        catalog_seconds=acquisition['catalog_seconds'],
+        source_staging_seconds=staging_seconds,
+        download_seconds=acquisition.get('download_seconds', 0.0),
+        source_processing_seconds=staging_seconds
+        - acquisition.get('download_seconds', 0.0),
+        save_seconds=time.monotonic() - started,
+    )
     report['runtime'] = versions
     return report

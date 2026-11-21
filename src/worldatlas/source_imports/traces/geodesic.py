@@ -1,6 +1,8 @@
 """Connect reviewed source-figure points with WGS84 geodesics."""
 
 import math
+from collections.abc import Sequence
+from typing import Any
 
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.geodesy.wgs84 import geodesic
@@ -10,7 +12,9 @@ from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import save_features
 
 
-def construct(points, max_step_metres):
+def construct(
+    points: Sequence[Sequence[float]], max_step_metres: float
+) -> dict[str, Any]:
     """Sample the geodesic segments connecting consecutive control points.
 
     Args:
@@ -23,8 +27,11 @@ def construct(points, max_step_metres):
     Raises:
         ValueError: The points or spacing do not define a valid simple trace.
     """
-    if (type(max_step_metres) not in (int, float)
-            or not math.isfinite(max_step_metres) or max_step_metres <= 0):
+    if (
+        type(max_step_metres) not in (int, float)
+        or not math.isfinite(max_step_metres)
+        or max_step_metres <= 0
+    ):
         raise ValueError("max_step_metres must be a finite positive number")
     if not isinstance(points, list) or len(points) < 2:
         raise ValueError("at least two control points are required")
@@ -58,7 +65,7 @@ def geodesic_trace(
     feature_id: NonEmptyText,
     points: list[tuple[float, float]],
     max_step_metres: float,
-):
+) -> dict[str, str | int]:
     """Save the WGS84 trace of reviewed source-figure control points.
 
     Args:

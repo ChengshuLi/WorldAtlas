@@ -1,24 +1,46 @@
 """Compare complete grids and retain the exact locations of changed cells."""
 
-from collections import Counter
-from dataclasses import replace
 import json
-from pathlib import Path
 import time
+from collections import Counter
+from collections.abc import Iterable
+from pathlib import Path
+from typing import Any
 
 import numpy as np
 
-from worldatlas.map_build.core.layers import file_hash
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.shared.files import sha256_file
 
 
-def reference_lookup(reference_bindings, candidate_bindings):
-    """Translate reference codes to candidate codes by entity and physical class."""
+def reference_lookup(
+    reference_bindings: Iterable[dict[str, Any]],
+    candidate_bindings: Iterable[dict[str, Any]],
+) -> tuple[np.ndarray, np.ndarray] | None:
+    """Match reference codes to candidate codes by owner and physical class.
 
-    def by_code(bindings):
-        return {
-            b["code"]: (b["entity_id"], b["physical_class"]) for b in bindings
-        }
+    Args:
+        reference_bindings: Reference records with code, entity_id and
+            physical_class.
+        candidate_bindings: Candidate records with the same fields.
+
+    Returns:
+        None when the code meanings already match. Otherwise, return
+        (old_codes, new_codes) as sorted uint32 keys and int64 values.
+        A missing match has value -1.
+    """
+
+    def by_code(bindings: Iterable[dict[str, Any]]) -> dict[int, tuple[int, str]]:
+        """Index the meaning of every code.
+
+        Args:
+            bindings: Code, entity ID and class records.
+
+        Returns:
+            Map from each code to (entity_id, physical_class).
+        """
+        return {b["code"]: (b["entity_id"], b["physical_class"]) for b in bindings}
 
     reference = by_code(reference_bindings)
     candidate = by_code(candidate_bindings)
@@ -35,7 +57,21 @@ def reference_lookup(reference_bindings, candidate_bindings):
     )
 
 
-def comparable_codes(codes, lookup):
+def comparable_codes(
+    codes: np.ndarray, lookup: tuple[np.ndarray, np.ndarray] | None
+) -> np.ndarray:
+    """Translate one array of reference codes into candidate codes.
+
+    Args:
+        codes: Codes to look up.
+        lookup: Lookup from reference_lookup.
+
+    Returns:
+        Array of the same shape, returning codes itself if lookup is None.
+
+    Raises:
+        ValueError: A reference code is missing from the lookup.
+    """
     if lookup is None:
         return codes
     keys, translated = lookup
@@ -46,36 +82,59 @@ def comparable_codes(codes, lookup):
 
 
 def compare(
-    candidate, reference, grid, directory, reference_sha256, *,
-    reference_bindings=None, candidate_bindings=None,
-):
+    candidate: Path | str,
+    reference: Path | str,
+    grid: Grid,
+    directory: Path | str,
+    reference_sha256: dict[str, str],
+    *,
+    reference_bindings: Iterable[dict[str, Any]] | None = None,
+    candidate_bindings: Iterable[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Compare every cell in two grids and write the changed spans.
+
+    Args:
+        candidate: Directory with the new grid.
+        reference: Directory with the baseline grid.
+        grid: Shared grid dimensions.
+        directory: New directory for the comparison files.
+        reference_sha256: Expected digest for each reference stream.
+        reference_bindings: Optional code meanings for the reference.
+        candidate_bindings: Code meanings for the candidate, required when
+            reference meanings are supplied.
+
+    Returns:
+        Report dictionary with counts by transition, changed bounds, input
+        hashes and elapsed seconds. The binary change file stores uint32
+        (row, first_column, end_column, old_code, new_code) records.
+
+    Raises:
+        ValueError: A grid or lookup is invalid or a file changes.
+    """
     candidate, reference, directory = map(Path, (candidate, reference, directory))
     if (reference_bindings is None) != (candidate_bindings is None):
         raise ValueError("both category mappings are required to compare assignments")
     lookup = None
-    if reference_bindings is not None:
+    if reference_bindings is not None and candidate_bindings is not None:
         lookup = reference_lookup(reference_bindings, candidate_bindings)
     names = ("rows.u32le", "runs.u32le")
     if set(reference_sha256) != set(names):
         raise ValueError("both reference stream checksums are required")
+    if (reference / "rows.u32le").stat().st_size != 4 * (grid.height + 1):
+        raise ValueError("reference grid must have the same row count as the candidate")
     start = time.monotonic()
     before = {
-        label: {name: file_hash(root / name) for name in names}
+        label: {name: sha256_file(root / name) for name in names}
         for label, root in (("reference", reference), ("candidate", candidate))
     }
     if before["reference"] != reference_sha256:
         raise ValueError("reference stream checksum differs")
     directory.mkdir()
-    reference_bytes = (reference / "rows.u32le").stat().st_size
-    if reference_bytes % 4 or reference_bytes // 4 - 1 < grid.height:
-        raise ValueError("reference must cover the complete candidate northern prefix")
-    reference_grid = replace(grid, height=reference_bytes // 4 - 1)
-    removed = Counter()
     changed, transitions, offsets = 0, Counter(), [0]
     bounds = None
     with (
         open_grid(candidate, grid) as new,
-        open_grid(reference, reference_grid) as old,
+        open_grid(reference, grid) as old,
         (directory / "changes.u32le").open("xb") as stream,
     ):
         for y in range(grid.height):
@@ -107,25 +166,19 @@ def compare(
                         ]
             np.asarray(records, dtype="<u4").tofile(stream)
             offsets.append(offsets[-1] + len(records))
-        for y in range(grid.height, reference_grid.height):
-            ends, codes = row(old, y, grid.width)
-            for length, code in zip(np.diff(np.r_[0, ends]), codes):
-                removed[str(int(code))] += int(length)
     np.asarray(offsets, dtype="<u8").tofile(directory / "change-rows.u64le")
     after = {
-        label: {name: file_hash(root / name) for name in names}
+        label: {name: sha256_file(root / name) for name in names}
         for label, root in (("reference", reference), ("candidate", candidate))
     }
     if after != before:
         raise ValueError("grid input changed during comparison")
     result = {
-        "grid": {"width": grid.width, "height": grid.height, "step": grid.step},
+        "grid": vars(grid),
         "changed_cells": changed,
-        "reference_grid": vars(reference_grid),
-        "compared_by": "map_code" if reference_bindings is None else "entity_and_physical_class",
-        "removed_cells": sum(removed.values()),
-        "removed_cells_by_code": dict(sorted(removed.items())),
-        "assignments_identical_on_retained_grid": changed == 0,
+        "compared_by": "map_code"
+        if reference_bindings is None
+        else "entity_and_physical_class",
         "pair_counts": dict(sorted(transitions.items())),
         "changed_bounds": bounds,
         "byte_identical": before["reference"] == before["candidate"],

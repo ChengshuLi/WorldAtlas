@@ -1,7 +1,6 @@
 """Check that archived map inputs can be restored and used on another machine."""
 
 import gzip
-import hashlib
 import json
 from pathlib import Path
 import tempfile
@@ -18,9 +17,8 @@ class ReplaySourcesTests(unittest.TestCase):
         self.shape = {"archive": {"r2_source": {"source_id": "coast"}}, "member": "shore.shp"}
         self.shard = {"path": "shard.parquet", "r2_source": {"source_id": "inland"}}
         self.sources = {
-            "land_config": {"json": {"land": [{"dataset": self.shape, "files": [self.shape]}]}},
-            "water_config": {"json": {}},
-            "raw_manifest": {"json": {"files": [self.shard]}},
+            "land_config": {"land": [{"dataset": self.shape, "files": [self.shape]}]},
+            "inland_water": {"rasterization": {}, "files": [self.shard]},
         }
         self.configuration = dict(sources=self.sources, physical_controls={
             "max_parallel_shards": 1,
@@ -29,31 +27,29 @@ class ReplaySourcesTests(unittest.TestCase):
         self.selection = {"raw_sources": [{"source_id": "coast"}, {"source_id": "inland"}]}
 
     def test_inline_documents_resolve_catalog_references_and_archive_members(self):
-        validate_replay_sources(self.configuration, self.selection, [])
+        validate_replay_sources(self.configuration, self.selection)
 
-    def test_local_only_configurations_and_raw_inputs_are_rejected(self):
-        land = self.sources["land_config"]["json"]["land"][0]
-        raw = self.sources["raw_manifest"]["json"]["files"]
+    def test_local_only_raw_inputs_are_rejected(self):
+        land = self.sources["land_config"]["land"][0]
+        water = self.sources["inland_water"]
         local = {"path": "/other-machine/file", "sha256": "a" * 64}
         for settings, key, value, field in (
-            (self.sources, "water_config", local, r"water_config"),
-            (self.sources, "raw_manifest", local, r"raw_manifest"),
             (land, "dataset", local["path"], r"land_config\.land\[0\]\.dataset"),
             (land, "files", [local], r"land_config\.land\[0\]\.files\[0\]"),
-            (self.sources["raw_manifest"]["json"], "files", [local], r"raw_manifest\.files\[0\]"),
+            (water, "files", [local], r"inland_water\.files\[0\]"),
         ):
             with self.subTest(field=field):
                 original = settings[key]
                 settings[key] = value
                 with self.assertRaisesRegex(ValueError, field):
-                    validate_replay_sources(self.configuration, self.selection, [])
+                    validate_replay_sources(self.configuration, self.selection)
                 settings[key] = original
-        self.assertEqual(raw, [self.shard])
+        self.assertEqual(water["files"], [self.shard])
 
     def test_uncached_water_shards_need_r2_staging(self):
         self.configuration.pop("physical_controls")
         with self.assertRaisesRegex(ValueError, "requires R2 staging"):
-            validate_replay_sources(self.configuration, self.selection, [])
+            validate_replay_sources(self.configuration, self.selection)
 
     def test_replay_requires_a_valid_r2_endpoint_and_one_shard_worker(self):
         controls = self.configuration["physical_controls"]
@@ -66,51 +62,19 @@ class ReplaySourcesTests(unittest.TestCase):
         for overrides, message in cases:
             with self.subTest(overrides=overrides), self.assertRaisesRegex(ValueError, message):
                 configuration = dict(self.configuration, physical_controls=controls | overrides)
-                validate_replay_sources(configuration, self.selection, [])
+                validate_replay_sources(configuration, self.selection)
 
     def test_direct_water_shard_pin_requires_a_byte_size(self):
-        self.sources["raw_manifest"]["json"]["files"] = [dict(
+        self.sources["inland_water"]["files"] = [dict(
             path="old.parquet", r2_bucket="test", r2_key="sources/old.parquet", sha256="a" * 64,
         )]
         with self.assertRaisesRegex(ValueError, "requires an R2 object and byte size"):
-            validate_replay_sources(self.configuration, self.selection, [])
+            validate_replay_sources(self.configuration, self.selection)
 
-    def test_fetched_water_manifest_requires_direct_shard_locations(self):
-        with tempfile.TemporaryDirectory() as temp:
-            path = Path(temp) / "raw-manifest.json"
-            # This ID exists in the saved catalog, but the physical stage sees
-            # only the shard metadata inside this downloaded manifest.
-            document = {"files": [dict(self.shard, sha256="a" * 64)]}
-            path.write_text(json.dumps(document))
-            checksum = hashlib.sha256(path.read_bytes()).hexdigest()
-            self.sources["raw_manifest"] = dict(
-                r2_bucket="test", r2_key="raw-manifest.json", sha256=checksum,
-                size_bytes=path.stat().st_size,
-            )
-            with self.assertRaisesRegex(ValueError, r"requires an R2 object and byte size for raw_manifest\.files\[0\]"):
-                validate_replay_sources(self.configuration, self.selection, [{"path": str(path), "sha256": checksum}])
-
-    def test_cataloged_manifest_is_read_from_the_verified_build_cache(self):
-        with tempfile.TemporaryDirectory() as temp:
-            path = Path(temp) / "manifest.json"
-            document = {"files": [dict(path="one.parquet", r2_bucket="test", r2_key="one.parquet",
-                                       sha256="a" * 64, size=10)]}
-            path.write_text(json.dumps(document))
-            checksum = hashlib.sha256(path.read_bytes()).hexdigest()
-            pin = {"path": str(path), "sha256": checksum}
-            self.selection["raw_sources"].append({"source_id": "manifest", "version": "original", "sha256": checksum})
-            for spec in ({"r2_source": {"source_id": "manifest", "version": "original"}},
-                         {"r2_bucket": "test", "r2_key": "manifest.json", "sha256": checksum}):
-                with self.subTest(spec=spec):
-                    self.sources["raw_manifest"] = spec
-                    validate_replay_sources(self.configuration, self.selection, [pin])
-            # Staging inspects the copy the build used. The replay can fetch
-            # that document by its pinned R2 location.
-            with self.assertRaisesRegex(ValueError, "cached R2 document for raw_manifest"):
-                validate_replay_sources(self.configuration, self.selection, [])
-            path.write_text("changed")
-            with self.assertRaisesRegex(ValueError, "cached R2 document changed"):
-                validate_replay_sources(self.configuration, self.selection, [pin])
+    def test_water_file_requires_its_catalog_entry(self):
+        self.selection["raw_sources"].pop()
+        with self.assertRaisesRegex(ValueError, r"requires an R2 pin for inland_water\.files\[0\]"):
+            validate_replay_sources(self.configuration, self.selection)
 
 
 class ReplayConfiguration(unittest.TestCase):

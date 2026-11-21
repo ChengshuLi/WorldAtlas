@@ -1,8 +1,12 @@
 import json, tempfile, unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 import numpy as np
 from osgeo import gdal, osr
 from worldatlas.map_build.physical import union as c
+from worldatlas.map_build.physical.sources import open_mask
+from worldatlas.shared.files import sha256_file
 
 
 class AggregateTests(unittest.TestCase):
@@ -30,7 +34,7 @@ class AggregateTests(unittest.TestCase):
         manifest = {'file_count': 2, 'files': [{'sha256': '1' * 64}, {'sha256': '2' * 64}]}
         mp = self.inputs / 'manifest.json'
         mp.write_text(json.dumps(manifest))
-        self.cfg['source_manifest'] = {'path': str(mp), 'sha256': c.sha(mp)}
+        self.cfg['source_manifest'] = {'path': str(mp), 'sha256': sha256_file(mp)}
         for i, shard in enumerate(self.cfg['shards']):
             shard['status'] = 'candidate-only'
             doc = {
@@ -46,7 +50,7 @@ class AggregateTests(unittest.TestCase):
             }
             rp = self.inputs / ('report' + str(i) + '.json')
             rp.write_text(json.dumps(doc))
-            shard['report'] = {'path': str(rp), 'sha256': c.sha(rp)}
+            shard['report'] = {'path': str(rp), 'sha256': sha256_file(rp)}
         self.config = self.inputs / 'config.json'
         self.config.write_text(json.dumps(self.cfg))
 
@@ -62,7 +66,7 @@ class AggregateTests(unittest.TestCase):
         ds.SetSpatialRef(s)
         ds.GetRasterBand(1).WriteArray(array)
         ds = None
-        return {'path': str(p), 'sha256': c.sha(p)}
+        return {'path': str(p), 'sha256': sha256_file(p)}
 
     def test_sparse_union_matches_full_read_across_block_boundaries(self):
         path = self.inputs / 'sparse.tif'
@@ -150,6 +154,141 @@ class AggregateTests(unittest.TestCase):
         self.assertEqual(r['grid'], self.cfg['grid'])
         self.assertEqual(r['shard_count'], 2)
 
+    def test_multiband_mask_is_not_a_candidate_water_grid(self):
+        ds = gdal.GetDriverByName('MEM').Create('', 8, 4, 2, gdal.GDT_Byte)
+        with self.assertRaisesRegex(ValueError, 'must have one band'):
+            c.union_mask(ds, np.zeros((4, 8), dtype=np.uint8), 0)
+
+    def test_union_keeps_partial_output_when_disk_space_drops_mid_run(self):
+        self.cfg["minimum_free_bytes"] = 1
+        self.config.write_text(json.dumps(self.cfg))
+        out = self.d / "low-space"
+
+        def disk_usage(path):
+            free = 0 if Path(path) == out.resolve() else 1024
+            return SimpleNamespace(free=free)
+
+        with patch.object(c.shutil, "disk_usage", side_effect=disk_usage):
+            with self.assertRaisesRegex(ValueError, "partial output preserved"):
+                c.run(self.config, out)
+        self.assertTrue((out / "water-union.tif").exists())
+        self.assertFalse((out / "report.json").exists())
+
+    def test_union_refuses_to_publish_when_an_input_changes(self):
+        for filename, message in (
+            (self.config, 'configuration changed during comparison'),
+            (Path(self.cfg['reference']['path']), 'input changed during comparison'),
+        ):
+            with self.subTest(filename=filename):
+                original = filename.read_bytes()
+                out = self.d / (filename.stem + '-changed')
+
+                def change_input(*_, **__):
+                    filename.write_bytes(original + b'\n')
+
+                with self.assertRaisesRegex(ValueError, message):
+                    c.run(self.config, out, emit=change_input)
+                self.assertFalse((out / 'report.json').exists())
+                filename.write_bytes(original)
+
+    def test_rasterizers_must_be_known_and_agree_across_shards(self):
+        first, second = (shard['report'] for shard in self.cfg['shards'])
+        first_path, second_path = Path(first['path']), Path(second['path'])
+        first_doc = json.loads(first_path.read_bytes())
+        second_doc = json.loads(second_path.read_bytes())
+        kernel = dict(implementation='python-gdal-api-v2', method='tiled', binding_sha256='f' * 64)
+        for metadata, message in (
+            (dict(rasterizer='unknown'), 'unknown water rasterizer'),
+            (dict(rasterizer='gdal'), 'invalid in-process GDAL water kernel'),
+            (dict(rasterizer='python', native_kernel={'method': 'vector'}), 'unexpected native water kernel'),
+            (dict(rasterizer='gdal', gdal_kernel=kernel), 'inconsistent native water kernels'),
+            (dict(source_sha256='e' * 64), 'do not cover the pinned source manifest'),
+        ):
+            with self.subTest(message=message):
+                first_path.write_text(json.dumps(first_doc | metadata))
+                second_path.write_text(json.dumps(second_doc))
+                first['sha256'], second['sha256'] = sha256_file(first_path), sha256_file(second_path)
+                self.config.write_text(json.dumps(self.cfg))
+                with self.assertRaisesRegex(ValueError, message):
+                    c.run(self.config, self.d / 'invalid')
+
+    def test_retained_native_shard_report_requires_its_pinned_kernel(self):
+        binary = self.inputs / 'water-native.so'
+        binary.write_bytes(b'pinned legacy kernel')
+        kernel = dict(
+            method='hybrid', source_sha256='d' * 64, binding_sha256='e' * 64,
+            binary_sha256=sha256_file(binary), gdal='3.10.3',
+        )
+        for shard in self.cfg['shards']:
+            report = shard['report']
+            path = Path(report['path'])
+            metadata = json.loads(path.read_bytes())
+            path.write_text(json.dumps(dict(metadata, rasterizer='native', native_kernel=kernel)))
+            report['sha256'] = sha256_file(path)
+        self.config.write_text(json.dumps(self.cfg))
+        c.run(self.config, self.d / 'reused')
+        binary.write_bytes(b'changed kernel')
+        with self.assertRaisesRegex(ValueError, 'invalid native water kernel'):
+            c.run(self.config, self.d / 'invalid')
+
+    def test_raster_pin_requires_matching_bytes_grid_and_crs(self):
+        grid = self.cfg['grid']
+        spec = self.cfg['reference']
+        path = spec['path']
+        with self.assertRaisesRegex(ValueError, 'input hash mismatch'):
+            open_mask(dict(spec, sha256='0' * 64), grid)
+        with self.assertRaisesRegex(ValueError, 'grid mismatch'):
+            open_mask(spec, dict(grid, width=7))
+        for epsg, message in ((None, 'missing CRS'), (3857, 'CRS mismatch')):
+            with self.subTest(epsg=epsg):
+                with gdal.Open(path, gdal.GA_Update) as raster:
+                    if epsg is None:
+                        raster.SetProjection('')
+                    else:
+                        crs = osr.SpatialReference()
+                        crs.ImportFromEPSG(epsg)
+                        raster.SetSpatialRef(crs)
+                with self.assertRaisesRegex(ValueError, message):
+                    open_mask(dict(spec, sha256=sha256_file(path)), grid)
+
+    def test_union_requires_consistent_configuration(self):
+        for changes, error in (
+            ({'schema': 'unknown'}, 'schema and selection notes'),
+            ({'grid': dict(self.cfg['grid'], step=0)}, 'invalid grid'),
+            ({'shard_count': 1}, 'complete explicit shard list'),
+            ({'minimum_free_bytes': True}, 'invalid free-space reserve'),
+            ({'rows_per_block': 0}, 'invalid rows_per_block'),
+            ({'source_manifest': None}, 'pinned source manifest required'),
+            ({'reference': self.cfg['shards'][0]}, 'input paths must be unique'),
+        ):
+            with self.subTest(error=error):
+                self.config.write_text(json.dumps(dict(self.cfg, **changes)))
+                out = self.d / 'invalid'
+                with self.assertRaisesRegex(ValueError, error):
+                    c.run(self.config, out)
+                self.assertFalse(out.exists())
+
+    def test_source_manifest_requires_unique_pinned_complete_list(self):
+        pin = self.cfg['source_manifest']
+        path = Path(pin['path'])
+        original = json.loads(path.read_text())
+        for content, error in (
+            (dict(original, file_count=1), 'must list every raw shard'),
+            (dict(original, files=[original['files'][0]] * 2), 'hashes must be unique'),
+        ):
+            with self.subTest(error=error):
+                path.write_text(json.dumps(content))
+                pin['sha256'] = sha256_file(path)
+                self.config.write_text(json.dumps(self.cfg))
+                with self.assertRaisesRegex(ValueError, error):
+                    c.run(self.config, self.d / 'invalid')
+        path.write_text(json.dumps(original))
+        pin['sha256'] = sha256_file(path)
+        self.cfg['shards'][0]['report'] = None
+        self.config.write_text(json.dumps(self.cfg))
+        with self.assertRaisesRegex(ValueError, 'pinned shard report required'):
+            c.run(self.config, self.d / 'invalid')
+
     def test_fails_closed_on_incomplete_or_changed(self):
         self.cfg['shards'][0]['status'] = 'incomplete'
         self.config.write_text(json.dumps(self.cfg))
@@ -174,14 +313,14 @@ class AggregateTests(unittest.TestCase):
         doc = json.loads(rp.read_text())
         doc['status'] = 'incomplete-input-issues'
         rp.write_text(json.dumps(doc))
-        original['sha256'] = c.sha(rp)
+        original['sha256'] = sha256_file(rp)
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'incomplete or inconsistent'):
             c.run(self.config, self.d / 'incomplete')
         doc['status'] = 'candidate-only'
         doc['policy'] = 'different'
         rp.write_text(json.dumps(doc))
-        original['sha256'] = c.sha(rp)
+        original['sha256'] = sha256_file(rp)
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'inconsistent shard selection policy'):
             c.run(self.config, self.d / 'policy')
@@ -189,7 +328,7 @@ class AggregateTests(unittest.TestCase):
         doc['policy'] = 'synthetic'
         doc['script_sha256'] = 'd' * 64
         rp.write_text(json.dumps(doc))
-        original['sha256'] = c.sha(rp)
+        original['sha256'] = sha256_file(rp)
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'inconsistent shard rasterizer'):
             c.run(self.config, self.d / 'script')
@@ -197,7 +336,7 @@ class AggregateTests(unittest.TestCase):
         doc.pop('rows_in_source')
         doc['counts'].pop('rows')
         rp.write_text(json.dumps(doc))
-        original['sha256'] = c.sha(rp)
+        original['sha256'] = sha256_file(rp)
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'incomplete or inconsistent'):
             c.run(self.config, self.d / 'missing-counts')
@@ -209,12 +348,12 @@ class AggregateTests(unittest.TestCase):
         a[0, 0] = 2
         ds.GetRasterBand(1).WriteArray(a)
         ds = None
-        self.cfg['shards'][0]['sha256'] = c.sha(p)
+        self.cfg['shards'][0]['sha256'] = sha256_file(p)
         rp = Path(self.cfg['shards'][0]['report']['path'])
         doc = json.loads(rp.read_text())
-        doc['output_sha256'] = c.sha(p)
+        doc['output_sha256'] = sha256_file(p)
         rp.write_text(json.dumps(doc))
-        self.cfg['shards'][0]['report']['sha256'] = c.sha(rp)
+        self.cfg['shards'][0]['report']['sha256'] = sha256_file(rp)
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'nonbinary'):
             c.run(self.config, self.d / 'bad')
@@ -232,15 +371,15 @@ class AggregateTests(unittest.TestCase):
             values[1, 1] = -1
             ds.GetRasterBand(1).WriteArray(values)
             ds = None
-            item = {'path': str(p), 'sha256': c.sha(p)}
+            item = {'path': str(p), 'sha256': sha256_file(p)}
             if name == 'candidate':
                 item['status'] = 'candidate-only'
                 item['report'] = self.cfg['shards'][0]['report']
                 rp = Path(item['report']['path'])
                 doc = json.loads(rp.read_text())
-                doc['output_sha256'] = c.sha(p)
+                doc['output_sha256'] = sha256_file(p)
                 rp.write_text(json.dumps(doc))
-                item['report']['sha256'] = c.sha(rp)
+                item['report']['sha256'] = sha256_file(rp)
                 self.cfg['shards'][0] = item
             else:
                 self.cfg['reference'] = item
@@ -256,7 +395,7 @@ class AggregateTests(unittest.TestCase):
                 doc = json.loads(rp.read_text())
                 doc['output_sha256'] = self.cfg['shards'][0]['sha256']
                 rp.write_text(json.dumps(doc))
-                report['sha256'] = c.sha(rp)
+                report['sha256'] = sha256_file(rp)
 
 
 if __name__ == '__main__':

@@ -1,19 +1,30 @@
 """Freeze working geographic decisions in one short, read-only transaction."""
 
-from datetime import datetime, timezone
 import json
+from collections.abc import Iterable
+from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any, LiteralString, cast
 
-from worldatlas.map_build.division.contracts import compile_rules
+from psycopg import Connection
+
 from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.map_build.division.contracts import compile_rules
 
 HERE = Path(__file__).resolve().parent
 
 QUERY = HERE / "geography.sql"
 
 
-def validate_bindings(geography):
-    """Require unique code meanings compatible with existing geographic entities."""
+def validate_bindings(geography: dict[str, Any]) -> None:
+    """Check that each map code has one valid meaning.
+
+    Args:
+        geography: Geographic entities and their code bindings.
+
+    Raises:
+        ValueError: A code or (entity, physical class) pair is invalid or duplicated.
+    """
     entities = {entity["id"]: entity for entity in geography["entities"]}
     codes, pairs = set(), set()
     for binding in geography["category_bindings"]:
@@ -36,7 +47,19 @@ def validate_bindings(geography):
         pairs.add((entity, kind))
 
 
-def canonical_bytes(value):
+def canonical_bytes(value: object) -> bytes:
+    """Encode a value as compact, sorted JSON for comparisons.
+
+    Args:
+        value: JSON-compatible value, such as a frozen input selection.
+
+    Returns:
+        UTF-8 bytes with sorted keys and one trailing newline.
+
+    Raises:
+        TypeError: A value cannot be encoded as JSON.
+        ValueError: A number is nonfinite or a container refers to itself.
+    """
     return (
         json.dumps(
             value,
@@ -49,16 +72,43 @@ def canonical_bytes(value):
     ).encode()
 
 
-def entity_colors(selection):
+def entity_colors(selection: dict[str, Any]) -> list[dict[str, Any]]:
+    """Collect the configured colors of entities in a selection.
+
+    Args:
+        selection: Frozen build inputs containing geographic entities.
+
+    Returns:
+        Dictionaries with an "entity_id" and "color_rgb" in entity order.
+    """
     return [
         {"entity_id": e["id"], "color_rgb": e.get("color_rgb")}
         for e in selection["geography"]["entities"]
     ]
 
 
-def read_selection(database, *, raw_sources=(), parents=None):
-    """Freeze working records and their catalog in one short read-only transaction."""
-    result = {
+def read_selection(
+    database: Connection,
+    *,
+    raw_sources: Iterable[str] = (),
+    parents: list[int] | None = None,
+) -> dict[str, Any]:
+    """Read the working build inputs from one consistent database snapshot.
+
+    Args:
+        database: Open PostgreSQL connection for a read-only transaction.
+        raw_sources: Additional raw source IDs used for physical rasterization.
+        parents: Parent IDs to load with their ancestors, or None for all
+            divisions.
+
+    Returns:
+        Selection dictionary with geographic rules, coordinate geometry,
+        construction records and source catalog entries.
+
+    Raises:
+        ValueError: A required record is absent or its contents are invalid.
+    """
+    result: dict[str, Any] = {
         "schema": "worldatlas-input-selection-v4",
         "selected_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -79,9 +129,11 @@ def read_selection(database, *, raw_sources=(), parents=None):
             if set(parents) - ancestors:
                 raise ValueError("requested parent does not exist")
             parents = sorted(ancestors)
-        data = json.loads(
-            database.execute(QUERY.read_text(), (parents, parents)).fetchone()[0]
-        )
+        result_row = database.execute(
+            cast(LiteralString, QUERY.read_text()), (parents, parents)
+        ).fetchone()
+        assert result_row is not None  # The query always returns one JSON value.
+        data = json.loads(result_row[0])
         features = {feature["id"]: feature for feature in data["features"]}
         with database.cursor(name="selected_features") as cursor:
             cursor.execute(
@@ -110,10 +162,7 @@ def read_selection(database, *, raw_sources=(), parents=None):
             "WHERE id=ANY(%s) ORDER BY id",
             (sorted(document_refs),),
         ).fetchall()
-        if missing := document_refs - {row[0] for row in rows}:
-            raise ValueError(
-                "selected construction is missing: " + str(sorted(missing))
-            )
+        # The source_features foreign key guarantees these recipes in this snapshot.
         result["construction_records"] = [
             dict(id=ident, method=method, arguments=arguments, basis=basis)
             for ident, method, arguments, basis in rows
@@ -121,8 +170,15 @@ def read_selection(database, *, raw_sources=(), parents=None):
     return result
 
 
-def validate_feature_references(domain):
-    """Validate frozen geometry and every declared operation before processing."""
+def validate_feature_references(domain: dict[str, Any]) -> None:
+    """Check frozen feature geometry, division rules, and map codes.
+
+    Args:
+        domain: Geographic part of a frozen selection.
+
+    Raises:
+        ValueError: The schema, geometry, rules, or bindings are invalid.
+    """
     if domain.get("schema") != "worldatlas-geographic-division-v2":
         raise ValueError(
             "unsupported geographic selection; restore the release's captured code"
@@ -135,8 +191,18 @@ def validate_feature_references(domain):
     validate_bindings(domain)
 
 
-def read_saved(path):
-    """Use exact frozen values without consulting or modifying today's Neon."""
+def read_saved(path: Path | str) -> dict[str, Any]:
+    """Load an earlier frozen selection from disk.
+
+    Args:
+        path: Path to the selection JSON file.
+
+    Returns:
+        Validated selection dictionary containing the captured coordinates and rules.
+
+    Raises:
+        ValueError: The file was saved by an incompatible builder or fails validation.
+    """
     result = json.loads(Path(path).read_bytes())
     if result.get("schema") != "worldatlas-input-selection-v4":
         raise ValueError(

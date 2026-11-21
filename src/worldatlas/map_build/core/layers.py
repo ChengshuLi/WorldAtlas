@@ -1,22 +1,33 @@
 """Merge sparse assignment rows and write complete row-run layers."""
 
-from collections import Counter
-import hashlib
 import heapq
 import itertools
 import json
+from collections import Counter
+from collections.abc import Iterable, Iterator
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
-
-def file_hash(path):
-    with Path(path).open("rb") as source:
-        return hashlib.file_digest(source, "sha256").hexdigest()
+from worldatlas.map_build.core.grid import Grid
 
 
-def merge_rows(streams):
-    """Merge disjoint row streams, including the two sides of a wrapped window."""
+def merge_rows(
+    streams: list[Iterable[tuple[int, list[tuple[int, int, int]]]]],
+) -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+    """Merge row streams from disjoint tiles, including across ±180°.
+
+    Args:
+        streams: Streams sorted by row. Each row contains (first_column,
+            end_column, code) spans.
+
+    Yields:
+        (row, spans) in row order, with each row's spans sorted by column.
+
+    Raises:
+        ValueError: Spans from different tiles overlap.
+    """
     if len(streams) == 1:
         yield from streams[0]
         return
@@ -28,8 +39,26 @@ def merge_rows(streams):
         yield y, spans
 
 
-def write_layer(directory, grid, rows):
-    """Write sparse assigned spans as a complete layer, using zero elsewhere."""
+def write_layer(
+    directory: Path | str,
+    grid: Grid,
+    rows: Iterable[tuple[int, list[tuple[int, int, int]]]],
+) -> dict[str, Any]:
+    """Write row-run files and a report to a new directory.
+
+    Args:
+        directory: Path for the layer files. The directory must not exist.
+        grid: Dimensions of the complete output.
+        rows: Ordered (row, spans) records. Each span is (first_column,
+            end_column, code). Write zero where there is no span.
+
+    Returns:
+        Report dictionary with the path, grid dimensions, run count, bounds of
+        assigned cells and counts keyed by code as a string.
+
+    Raises:
+        ValueError: A row or span is invalid, or the run offsets exceed uint32.
+    """
     directory = Path(directory)
     directory.mkdir()
     iterator = iter(rows)
@@ -68,7 +97,13 @@ def write_layer(directory, grid, rows):
             pairs = []
             stop = 0
 
-            def append(end, code):
+            def append(end: int, code: int) -> None:
+                """Extend the last run or append a run with a new code.
+
+                Args:
+                    end: Exclusive end column.
+                    code: Value of this run.
+                """
                 if pairs and pairs[-1][1] == code:
                     pairs[-1] = (end, code)
                 else:
@@ -90,7 +125,8 @@ def write_layer(directory, grid, rows):
                 append(grid.width, 0)
             np.asarray(pairs, dtype="<u4").tofile(output)
             offsets.append(offsets[-1] + len(pairs))
-            if offsets[-1] >= 2**32:
+            # Testing this limit would require writing over four billion runs.
+            if offsets[-1] >= 2**32:  # pragma: no cover
                 raise ValueError("run offsets exceed the u32 representation")
             current = next(iterator, None)
             y += 1
@@ -108,8 +144,23 @@ def write_layer(directory, grid, rows):
     return report
 
 
-def patch_rows(values, bounds, grid):
-    """Emit a possibly wrapped rectangular assignment without expanding the globe."""
+def patch_rows(
+    values: np.ndarray, bounds: tuple[int, int, int, int], grid: Grid
+) -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+    """Convert a rectangular block of codes to sparse row spans.
+
+    Args:
+        values: Two-dimensional array of codes. Omit cells with code zero.
+        bounds: (first_column, end_column, first_row, end_row). An end column
+            past the grid width wraps to column zero.
+        grid: Complete grid containing the patch.
+
+    Yields:
+        (row, spans) in row order. Each span is (first_column, end_column, code).
+
+    Raises:
+        ValueError: Array dimensions differ from the window dimensions.
+    """
     x0, x1, y0, y1 = bounds
     if values.shape != (y1 - y0, x1 - x0):
         raise ValueError("assignment dimensions differ from its bounds")

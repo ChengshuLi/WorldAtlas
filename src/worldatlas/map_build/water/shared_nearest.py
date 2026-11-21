@@ -6,20 +6,58 @@ or an insufficient crop are reported instead of assuming a distance.
 """
 
 from __future__ import annotations
+
 import math
+from collections.abc import Sequence
+from typing import Any, cast
+
 import numpy as np
-from scipy.spatial import cKDTree
+from numpy.typing import ArrayLike
+
+# SciPy publishes the compiled tree without type information.
+from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
+
 from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances
 
+# Shore code maps to prepared coordinates and the corresponding search tree.
+type ShoreIndexes = dict[int, tuple[dict[str, Any], cKDTree]]
 
-def unit(lat, lon):
+
+def unit(lat: ArrayLike, lon: ArrayLike) -> np.ndarray:
+    """Convert paired geographic coordinates to points on a unit sphere.
+
+    Args:
+        lat: Latitudes in degrees.
+        lon: Longitudes in degrees.
+
+    Returns:
+        N-by-3 float array of Cartesian coordinates.
+    """
     lat = np.deg2rad(lat)
     lon = np.deg2rad(lon)
     c = np.cos(lat)
     return np.column_stack((c * np.cos(lon), c * np.sin(lon), np.sin(lat)))
 
 
-def crop(rows, runs, y, x0, x1, width):
+def crop(
+    rows: np.ndarray, runs: np.ndarray, y: int, x0: int, x1: int, width: int
+) -> np.ndarray:
+    """Expand part of one row-run row to a code per cell.
+
+    Args:
+        rows: Row offsets into the run array.
+        runs: Flattened (end_column, code) pairs.
+        y: Row to read.
+        x0: First unwrapped column.
+        x1: Exclusive end column. It may cross the longitude seam.
+        width: Number of columns in the full grid.
+
+    Returns:
+        A uint32 array with x1 - x0 codes in column order.
+
+    Raises:
+        ValueError: The window or row-run records are invalid.
+    """
     if not (0 <= y < len(rows) - 1 and 0 < x1 - x0 <= width):
         raise ValueError("invalid crop")
     first, last = int(rows[y]), int(rows[y + 1])
@@ -52,8 +90,28 @@ def crop(rows, runs, y, x0, x1, width):
     return result
 
 
-def boundary_lower(lat, lon, bounds, width, height, step):
-    """Conservative distance to any shoreline omitted outside the crop."""
+def boundary_lower(
+    lat: np.ndarray,
+    lon: np.ndarray,
+    bounds: tuple[int, int, int, int],
+    width: int,
+    height: int,
+    step: float,
+) -> np.ndarray:
+    """Bound the distance to any shore outside the current crop.
+
+    Args:
+        lat: Query latitudes in degrees.
+        lon: Matching query longitudes in degrees.
+        bounds: Crop as (first_column, end_column, first_row, end_row).
+        width: Number of grid columns.
+        height: Number of grid rows.
+        step: Cell size in degrees.
+
+    Returns:
+        One conservative lower bound per query, in metres. A full-grid
+        crop has no omitted shores and gives infinity.
+    """
     x0, x1, y0, y1 = bounds
     latr = np.deg2rad(lat)
     lonr = np.deg2rad(lon)
@@ -73,7 +131,22 @@ def boundary_lower(lat, lon, bounds, width, height, step):
     return np.maximum(0.0, d - 0.001)
 
 
-def make_indexes(centers, pairs):
+def make_indexes(
+    centers: dict[str, np.ndarray], pairs: Sequence[tuple[int, int, int]]
+) -> ShoreIndexes:
+    """Index the full list of shore cells for each participating owner.
+
+    Args:
+        centers: Matching latitude, longitude, category, and unit-sphere arrays.
+        pairs: Category tuples whose second field selects the shore code.
+
+    Returns:
+        Shore code mapped to (shore_data, tree). The data includes a small
+        sample index for finding a nearby starting point quickly.
+
+    Raises:
+        ValueError: A participating category has no shore in the crop.
+    """
     indexes = {}
     for _, land_code, _ in pairs:
         mask = centers["category"] == land_code
@@ -82,8 +155,8 @@ def make_indexes(centers, pairs):
                 f"crop has no shoreline for participant land code {land_code}"
             )
         part = {k: centers[k][mask] for k in ("mids", "lat", "lon", "category")}
-        # Actual points from occupied degree tiles provide inexpensive upper
-        # witnesses. They narrow searches, never replace the complete tree.
+        # Keep one real shore cell per occupied degree tile. A measured
+        # distance to any real cell gives a safe starting limit for the search.
         tiles = np.floor(part["lat"] + 90).astype(np.int64) * 360 + np.floor(
             (part["lon"] + 180) % 360
         ).astype(np.int64)
@@ -94,13 +167,32 @@ def make_indexes(centers, pairs):
     return indexes
 
 
-def nearest_class_bounds(lat, lon, points, pairs, indexes, *, upper_limit=None):
-    """Lower bounds for all classes, one exact candidate upper bound per query.
+def nearest_class_bounds(
+    lat: np.ndarray,
+    lon: np.ndarray,
+    points: np.ndarray,
+    pairs: Sequence[tuple[int, int, int]],
+    indexes: ShoreIndexes,
+    *,
+    upper_limit: float | np.ndarray | None = None,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Bound the shortest distances from queries to each category.
 
-    The spherical-nearest class need not win on WGS84. It is only a candidate:
-    callers must prove its exact upper bound beats every competing lower bound
-    or fall back to complete exact minima. No inverse call is needed for a
-    competing class that has already been excluded by its lower bound.
+    The nearest on the sphere supplies a candidate. The WGS84 distance
+    decides which category wins when the bounds cannot separate them.
+
+    Args:
+        lat: Query latitudes in degrees.
+        lon: Matching longitudes in degrees.
+        points: N-by-3 unit-sphere query points.
+        pairs: Category tuples in search order.
+        indexes: Complete indexes by shore code.
+        upper_limit: Optional distance cutoff in metres.
+
+    Returns:
+        (lower, best, upper). Lower is an N-by-category array of bounds
+        in metres. Best and upper give the candidate category column and
+        its measured upper bound for each query.
     """
     count = len(points)
     lower = np.empty((count, len(pairs)), dtype=np.float64)
@@ -109,10 +201,9 @@ def nearest_class_bounds(lat, lon, points, pairs, indexes, *, upper_limit=None):
     query_options = {}
     search_limit = None
     if upper_limit is None and count:
-        # Without a cutoff, an unbounded query against a distant class can
-        # traverse much of its tree. First obtain any real WGS84 upper witness;
-        # no class farther than that witness can win. A generous shared bound
-        # lets scipy perform the batch query without per-point Python calls.
+        # A search with no distance limit can scan a distant shore needlessly.
+        # Find a real candidate for each point first, then use the largest
+        # measured distance as a shared limit for the whole batch.
         witness_upper = np.full(count, np.inf)
         for _, code, _ in pairs:
             data, _ = indexes[code]
@@ -170,13 +261,30 @@ def nearest_class_bounds(lat, lon, points, pairs, indexes, *, upper_limit=None):
     return lower, best, upper
 
 
-def scan_exact_minimum(point, lon, lat, data, best):
-    """Finish a wide search in blocks using its already measured upper bound."""
+def scan_exact_minimum(
+    point: np.ndarray,
+    lon: float | np.floating,
+    lat: float | np.floating,
+    data: dict[str, Any],
+    best: float | np.floating,
+) -> float:
+    """Search one shore in blocks for a closer cell.
+
+    Args:
+        point: Query point on the unit sphere.
+        lon: Query longitude in degrees.
+        lat: Query latitude in degrees.
+        data: Indexed shore coordinates.
+        best: Already measured distance in metres.
+
+    Returns:
+        Smallest exact distance found, in metres.
+    """
     for first in range(0, len(data["mids"]), 4096):
         last = first + 4096
-        # MIN_RADIUS times the central angle is a distance lower bound. Express
-        # the upper witness as a unit-sphere chord so each block needs only
-        # squared distances. The margins expand the search, never decide a tie.
+        # Compare straight-line distances on the unit sphere to skip cells
+        # that cannot beat the best WGS84 distance. The margins keep extra
+        # candidates in the search. Exact distances decide the winner.
         angle = min(math.pi, (best + 0.01) / MIN_RADIUS)
         chord = 2 * math.sin(angle / 2) + 1e-12
         delta = data["mids"][first:last] - point
@@ -192,15 +300,30 @@ def scan_exact_minimum(point, lon, lat, data, best):
             if np.any(~np.isfinite(distances)):
                 raise ValueError("invalid inverse geodesic")
             best = min(best, float(distances.min()))
-    return best
+    return float(best)
 
 
-def exact_minima_by_ordered_chord(points, lon, lat, data, tree):
-    """Batch exact WGS84 minima, proving that every omitted center is farther.
+def exact_minima_by_ordered_chord(
+    points: np.ndarray,
+    lon: np.ndarray,
+    lat: np.ndarray,
+    data: dict[str, Any],
+    tree: cKDTree,
+) -> np.ndarray:
+    """Find the exact WGS84 distance to the same shore for many points.
 
-    Neighbor prefixes grow only for queries whose conservative lower bound
-    cannot prove the minimum. Wide unresolved searches still visit the entire
-    shore in ordinary blocks, using the best distance already measured.
+    Try a few nearby cells first. Expand the search only when a farther
+    cell could still be closer on WGS84.
+
+    Args:
+        points: N-by-3 unit-sphere points.
+        lon: Query longitudes in degrees.
+        lat: Query latitudes in degrees.
+        data: Shore coordinates indexed by the tree.
+        tree: Full shore cell index.
+
+    Returns:
+        Float array of minimum WGS84 distances in metres.
     """
     count = len(points)
     result = np.full(count, np.inf)
@@ -235,18 +358,49 @@ def exact_minima_by_ordered_chord(points, lon, lat, data, tree):
         if take >= 4096:
             for q in active:
                 result[q] = scan_exact_minimum(
-                    points[q], lon[q], lat[q], data, result[q]
+                    points[q],
+                    cast(float, lon[q]),
+                    cast(float, lat[q]),
+                    data,
+                    cast(float, result[q]),
                 )
             break
         take = min(n, take * 2)
     return result
 
 
-def classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes, *, band=None):
-    """Certify WGS84 nearest coastal-cell-center assignments or fail closed.
+def classify_wgs84(
+    lat: np.ndarray,
+    lon: np.ndarray,
+    bounds: tuple[int, int, int, int],
+    width: int,
+    height: int,
+    step: float,
+    pairs: Sequence[tuple[int, int, int]],
+    indexes: ShoreIndexes,
+    *,
+    band: float | None = None,
+) -> tuple[np.ndarray, dict[str, int]]:
+    """Find the nearest participating shore for each query cell centre.
 
-    Spherical unit vectors only narrow the search using a conservative WGS84
-    lower bound. All returned classifications use ellipsoidal distances.
+    Args:
+        lat: Query latitudes in degrees.
+        lon: Query longitudes in degrees.
+        bounds: Window covered by these shore indexes.
+        width: Number of grid columns.
+        height: Number of grid rows.
+        step: Cell size in degrees.
+        pairs: (category, shore_code, output_code) records in tie order.
+        indexes: Shore indexes by code.
+        band: Optional distance limit in metres.
+
+    Returns:
+        (output_codes, counts). Codes are uint32, with zero beyond the
+        distance limit. Counts distinguish bounded and exact queries.
+
+    Raises:
+        ValueError: The inputs are invalid or a shore outside the crop
+            might change an assignment.
     """
     lat = np.asarray(lat, dtype=np.float64)
     lon = np.asarray(lon, dtype=np.float64)
@@ -281,12 +435,7 @@ def classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes, *, ban
     y = (90 - lat) / step
     x = (lon + 180) / step
     x = x + np.ceil((x0 - x) / width) * width
-    if (
-        np.any(y < y0)
-        or np.any(y > y1)
-        or np.any(x < x0)
-        or np.any(x > x1)
-    ):
+    if np.any(y < y0) or np.any(y > y1) or np.any(x < x0) or np.any(x > x1):
         raise ValueError("query lies outside crop")
     points = unit(lat, lon)
     boundary = boundary_lower(lat, lon, bounds, width, height, step)
@@ -305,21 +454,21 @@ def classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes, *, ban
     unique = (upper < others.min(axis=1)) & (upper < boundary)
     out = np.zeros(len(lat), dtype=np.uint32)
     if band is None:
+        inside = unique
         fast = unique
     else:
-        threshold = band
-        outside = (lows.min(axis=1) > threshold) & (boundary > threshold)
-        inside = unique & (upper <= threshold)
+        outside = (lows.min(axis=1) > band) & (boundary > band)
+        inside = unique & (upper <= band)
         fast = outside | inside
     for i, (_, _, code) in enumerate(available):
-        out[fast & (best == i) & (True if band is None else inside)] = code
+        out[inside & (best == i)] = code
     pending = np.flatnonzero(~fast)
     if len(pending):
         # Conservative lower bounds exclude classes that cannot beat the
         # candidate. Retain its class so exact distances decide the threshold.
         limit = upper[pending] + 0.000001
         if band is not None:
-            limit = np.minimum(limit, threshold + 0.000001)
+            limit = np.minimum(limit, band + 0.000001)
         distances = np.full((len(pending), len(available)), np.inf)
         for col, (_, lc, _) in enumerate(available):
             relevant = (lows[pending, col] <= limit) | (best[pending] == col)
@@ -333,8 +482,8 @@ def classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes, *, ban
             raise RuntimeError("no provable candidate shore")
         inside = np.ones(len(pending), dtype=bool)
         if band is not None:
-            inside = minimum <= threshold
-            if np.any(~inside & (boundary[pending] <= threshold)):
+            inside = minimum <= band
+            if np.any(~inside & (boundary[pending] <= band)):
                 raise ValueError("crop cannot certify coastal band; increase halo")
         if np.any(inside & (minimum + 0.000001 >= boundary[pending])):
             raise ValueError("crop cannot certify nearest shore; increase halo")
@@ -347,6 +496,30 @@ def classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes, *, ban
     return out, {"bounded": int(fast.sum()), "exact": int(len(pending))}
 
 
-def classify(lat, lon, bounds, width, height, step, pairs, indexes):
+def classify(
+    lat: np.ndarray,
+    lon: np.ndarray,
+    bounds: tuple[int, int, int, int],
+    width: int,
+    height: int,
+    step: float,
+    pairs: Sequence[tuple[int, int, int]],
+    indexes: ShoreIndexes,
+) -> tuple[np.ndarray, int, int]:
+    """Classify query cells with unrestricted distance to participating shores.
+
+    Args:
+        lat: Latitudes in degrees.
+        lon: Matching longitudes in degrees.
+        bounds: Grid window covered by the indexes.
+        width: Number of grid columns.
+        height: Number of grid rows.
+        step: Cell size in degrees.
+        pairs: Category tuples in tie order.
+        indexes: Complete indexes by shore code.
+
+    Returns:
+        (output_codes, bounded_count, exact_count).
+    """
     out, stats = classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes)
     return out, stats["bounded"], stats["exact"]

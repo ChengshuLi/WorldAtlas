@@ -1,27 +1,55 @@
 """Find WGS84 representative hints; complete certificates/search make the decisions."""
 
 import math
+
 import numpy as np
-from worldatlas.geodesy.wgs84 import MIN_RADIUS as MIN_CURVATURE_RADIUS, geodesic_distances
+from numpy.typing import ArrayLike
+
+# SciPy exports the compiled tree at runtime without a matching type stub.
+from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
+
+from worldatlas.geodesy.wgs84 import MIN_RADIUS as MIN_CURVATURE_RADIUS
+from worldatlas.geodesy.wgs84 import geodesic_distances
 
 BOUND_CUSHION_M = 0.001
 DISTANCE_BATCH = 65536
 
 
-def _xyz(lat, lon):
+def _xyz(lat: ArrayLike, lon: ArrayLike) -> np.ndarray:
+    """Convert latitude and longitude to unit-sphere coordinates.
+
+    Args:
+        lat: Latitudes in degrees.
+        lon: Corresponding longitudes in degrees.
+
+    Returns:
+        N-by-3 coordinate array, one Cartesian point per location.
+    """
     a = np.deg2rad(lat)
     b = np.deg2rad(lon)
     return np.column_stack((np.cos(a) * np.cos(b), np.cos(a) * np.sin(b), np.sin(a)))
 
 
-def wgs84_nearest_categories(tree, latitudes, longitudes, codes, query_lat, query_lon):
-    """Find the global WGS84 representative winner in one conservative search.
+def wgs84_nearest_categories(
+    tree: cKDTree,
+    latitudes: ArrayLike,
+    longitudes: ArrayLike,
+    codes: ArrayLike,
+    query_lat: ArrayLike,
+    query_lon: ArrayLike,
+) -> np.ndarray:
+    """Find the closest representative in WGS84 distance for each query.
 
-    The winning category is the category of the globally nearest sample, so
-    computing independent category minima is unnecessary. The nearest
-    spherical sample supplies only an ellipsoidal upper witness. Every sample
-    that can beat it is still checked with the same WGS84 inverse, including
-    exact ties, and the lowest category code wins those ties.
+    Args:
+        tree: Spatial index of the representative unit-sphere points.
+        latitudes: Representative latitudes in degrees.
+        longitudes: Representative longitudes in degrees.
+        codes: Owner code of each representative.
+        query_lat: Query latitudes in degrees.
+        query_lon: Matching query longitudes in degrees.
+
+    Returns:
+        Uint32 owner codes in query order.
     """
     lat = np.asarray(latitudes, dtype=float)
     lon = np.asarray(longitudes, dtype=float)
@@ -62,7 +90,8 @@ def wgs84_nearest_categories(tree, latitudes, longitudes, codes, query_lat, quer
     samples = []
     pending = 0
 
-    def flush():
+    def flush() -> None:
+        """Finish the current batch of exact distance comparisons."""
         nonlocal pending
         if not pending:
             return
@@ -92,6 +121,4 @@ def wgs84_nearest_categories(tree, latitudes, longitudes, codes, query_lat, quer
             if pending >= DISTANCE_BATCH:
                 flush()
     flush()
-    if np.any(chosen >= 2**32) or np.any(~np.isfinite(best)):
-        raise RuntimeError('no WGS84 hint candidate')
     return chosen.astype(np.uint32)

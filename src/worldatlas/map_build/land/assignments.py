@@ -1,31 +1,50 @@
 """Assign non-mainland components by complete WGS84 minimum-distance search."""
 
 import json
-from pathlib import Path
 import time
+from collections.abc import Collection, Sequence
+from pathlib import Path
+from typing import Any
 
 import numpy as np
-from scipy.spatial import cKDTree
 
-from worldatlas.map_build.core.layers import file_hash
+# SciPy publishes the compiled tree without type information.
+from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
+
+from worldatlas.map_build.land import search_engine as engine
 from worldatlas.map_build.land.certificates import CertificateIndex
+from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.exact_search import ExactIndex
 from worldatlas.map_build.land.hints import _xyz, wgs84_nearest_categories
-from worldatlas.map_build.land import search_engine as engine
+from worldatlas.shared.files import sha256_file
 
 
 def assign_components(
-    components,
-    index_directory,
-    bindings,
-    directory,
+    components: ComponentGrid,
+    index_directory: Path | str,
+    bindings: Sequence[dict[str, Any]],
+    directory: Path | str,
     *,
-    roots,
-    priority_codes=None,
-    guard_metres=1000.0,
-    chunk_columns=1024,
-):
-    """Return stable entity assignments; component IDs remain run-local data."""
+    roots: Collection[int],
+    priority_codes: Sequence[int] | None = None,
+    guard_metres: float = 1000.0,
+    chunk_columns: int = 1024,
+) -> dict[str, Any]:
+    """Assign each selected component to the owner of its nearest shore.
+
+    Args:
+        components: Physical component runs.
+        index_directory: Verified reference runs and sampled reference cells.
+        bindings: Code-to-entity mappings.
+        directory: New directory for assignments and search statistics.
+        roots: Component IDs to assign.
+        priority_codes: Optional order for exact distance ties.
+        guard_metres: Conservative margin when excluding search candidates.
+        chunk_columns: Group size when evaluating long query runs.
+
+    Returns:
+        Report with search counts, elapsed time and binary assignment pins.
+    """
     started = time.monotonic()
     grid, index_directory, directory = (
         components.grid,
@@ -36,7 +55,7 @@ def assign_components(
     if metadata["grid"] != vars(grid):
         raise ValueError("seed index grid differs")
     representatives_path = index_directory / "representatives.u32le"
-    if file_hash(representatives_path) != metadata["representatives_sha256"]:
+    if sha256_file(representatives_path) != metadata["representatives_sha256"]:
         raise ValueError("representative seed cells differ from their index")
     representatives = np.fromfile(representatives_path, dtype="<u4").reshape(-1, 3)
     tiles = metadata["tiles"]
@@ -167,7 +186,7 @@ def assign_components(
         processing_seconds=time.monotonic() - started,
         download_seconds=0.0,
         output_sha256={
-            name: file_hash(directory / name)
+            name: sha256_file(directory / name)
             for name in ("roots.u32le", "entities.i64le")
         },
     )
@@ -175,10 +194,21 @@ def assign_components(
     return result
 
 
-def read_assignments(report):
+def read_assignments(report: dict[str, Any]) -> dict[int, int]:
+    """Read the component and entity ID arrays from an assignment report.
+
+    Args:
+        report: Report containing the two output paths and digests.
+
+    Returns:
+        Component ID mapped to its assigned entity ID.
+
+    Raises:
+        ValueError: The file digests or array lengths differ.
+    """
     roots, entities = Path(report["roots"]), Path(report["entities"])
     for path in (roots, entities):
-        if file_hash(path) != report["output_sha256"][path.name]:
+        if sha256_file(path) != report["output_sha256"][path.name]:
             raise ValueError("component assignment file differs")
     a, b = np.fromfile(roots, dtype="<u4"), np.fromfile(entities, dtype="<i8")
     if (

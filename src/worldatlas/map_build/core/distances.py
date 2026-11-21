@@ -1,68 +1,50 @@
-"""Exact WGS84 minimum between two discrete horizontal grid runs.
+"""Find the shortest WGS84 distance between horizontal runs of cells.
 
-No land policy. Enumerate attainable *longitude gaps*, not all cell pairs.
+The calculation compares possible column gaps, which avoids walking every
+pair of cells. Longitude wraps at the edges of the grid.
 """
 
-import math, numpy as np
+import math
+
+import numpy as np
+from numpy.typing import ArrayLike
+
 from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances
 
 # Keep more candidates for the exact calculation when pruning by lower bounds.
 CUSHION_M = 1000.0
 
 
-def inverse(lat1, lat2, gaps, step):
-    gaps = np.asarray(gaps, dtype=np.float64)
-    return geodesic_distances(0.0, lat1, gaps * step, lat2)
+def run_pairs_batch(
+    y: int,
+    a: int,
+    b: int,
+    records: ArrayLike,
+    width: int,
+    north: float = 90.0,
+    incumbent: float = math.inf,
+) -> tuple[dict[int, float], int]:
+    """Compare one run of cells with many reference runs.
 
+    For fixed latitudes, reducing the wrapped longitude gap cannot lengthen
+    the shortest path. Each reference run therefore needs only its smallest
+    possible gap. A lower bound skips runs that cannot improve the result.
 
-def run_pair(y, a, b, yy, c, d, width, north=90.0, incumbent=math.inf):
-    if not (
-        type(width) is int
-        and width >= 2
-        and all(type(x) is int for x in (y, a, b, yy, c, d))
-        and 0 <= a < b <= width
-        and 0 <= c < d <= width
-        and y >= 0
-        and yy >= 0
-        and incumbent >= 0
-    ):
-        raise ValueError("invalid runs")
-    step = 360 / width
-    lat1 = north - (y + 0.5) * step
-    lat2 = north - (yy + 0.5) * step
-    if abs(lat1) > 90 or abs(lat2) > 90:
-        raise ValueError("invalid latitude")
-    diffs = np.arange(c - (b - 1), (d - 1) - a + 1, dtype=np.int64)
-    mod = diffs % width
-    gaps = np.unique(np.minimum(mod, width - mod))
-    dl = np.deg2rad(gaps * step)
-    p1 = math.radians(lat1)
-    p2 = math.radians(lat2)
-    xx = math.cos(p2) * np.sin(dl)
-    yy0 = math.cos(p1) * math.sin(p2) - math.sin(p1) * math.cos(p2) * np.cos(dl)
-    dot = math.sin(p1) * math.sin(p2) + math.cos(p1) * math.cos(p2) * np.cos(dl)
-    angles = np.arctan2(np.hypot(xx, yy0), dot)
-    if not math.isfinite(incumbent):
-        j = int(np.argmin(angles))
-        incumbent = float(inverse(lat1, lat2, [gaps[j]], step)[0])
-    keep = np.flatnonzero(angles * MIN_RADIUS <= incumbent + CUSHION_M)
-    if not len(keep):
-        return None, {"attainable_gaps": len(gaps), "exact_gaps": 0}
-    ds = inverse(lat1, lat2, gaps[keep], step)
-    return float(ds.min()), {"attainable_gaps": len(gaps), "exact_gaps": len(keep)}
+    Args:
+        y: Row of the query run.
+        a: First column of the query run.
+        b: Exclusive end column of the query run.
+        records: N-by-4 array of (row, first_column, end_column, code) values.
+        width: Number of columns in one full turn.
+        north: Latitude of the grid's top edge in degrees.
+        incumbent: Finite distance bound in metres used for pruning.
 
+    Returns:
+        (closest_by_code, count). The dictionary gives the minimum tested
+        distance in metres per reference code. Count is the number of records.
 
-def run_pairs_batch(y, a, b, records, width, north=90.0, incumbent=math.inf):
-    """Evaluate each seed run at its smallest attainable wrapped longitude gap.
-
-    On an ellipsoid of revolution the surface metric is E(lat)dlat² +
-    G(lat)dlon². Scale the unwrapped longitude excursion of any pole-avoiding
-    path to a smaller endpoint separation; its length cannot increase. Winding
-    paths have absolute unwrapped separation at least the wrapped separation;
-    pole-touching paths are limits of pole-avoiding paths. Taking shortest-path
-    infima proves that distance is nondecreasing with wrapped separation. The
-    smallest attainable integer gap therefore suffices, including seam wraps.
-    The original spherical lower bound and numerical cushion are unchanged.
+    Raises:
+        ValueError: A run, record shape, latitude, or distance bound is invalid.
     """
     if not (
         type(width) is int

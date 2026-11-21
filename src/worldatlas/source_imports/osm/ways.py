@@ -1,6 +1,9 @@
 """Assemble boundary geometry from individual OpenStreetMap way responses."""
 
 import json
+from collections.abc import Iterable
+from pathlib import Path
+from typing import Any
 
 from shapely import line_merge
 from shapely.geometry import MultiLineString
@@ -11,7 +14,9 @@ from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import save_features
 
 
-def _read_way_sources(paths):
+def _read_way_sources(
+    paths: Iterable[Path],
+) -> tuple[dict[int, tuple[float, ...]], dict[int, list[int]]]:
     """Read the nodes and ways from a set of archived OSM responses.
 
     Args:
@@ -31,7 +36,7 @@ def _read_way_sources(paths):
         source_ways = [element for element in elements if element['type'] == 'way']
         if len(source_ways) != 1:
             raise ValueError('each source must contain exactly one OSM way')
-        way, = source_ways
+        (way,) = source_ways
         way_id, node_ids = way['id'], way['nodes']
         if (
             type(way_id) is not int
@@ -48,9 +53,8 @@ def _read_way_sources(paths):
             node_id = element['id']
             longitude, latitude = element['lon'], element['lat']
             point = longitude, latitude
-            if (
-                any(type(value) not in (int, float) for value in point)
-                or not (-180 <= longitude <= 180 and -90 <= latitude <= 90)
+            if any(type(value) not in (int, float) for value in point) or not (
+                -180 <= longitude <= 180 and -90 <= latitude <= 90
             ):
                 raise ValueError('invalid node coordinates')
             if node_id in nodes and nodes[node_id] != point:
@@ -59,7 +63,7 @@ def _read_way_sources(paths):
     return nodes, ways
 
 
-def assemble(paths):
+def assemble(paths: Iterable[Path]) -> dict[str, Any]:
     """Merge selected ways into one open boundary.
 
     Args:
@@ -104,10 +108,12 @@ def assemble(paths):
 
 
 def osm_way_chain(
-    runtime: Runtime, *, way_source_ids: list[SourceId],
+    runtime: Runtime,
+    *,
+    way_source_ids: list[SourceId],
     feature_id: NonEmptyText,
     evidence_source_ids: list[SourceId] | None = None,
-):
+) -> dict[str, str | int]:
     """Join archived OSM ways into one boundary and save their coordinates.
 
     Args:
@@ -122,7 +128,9 @@ def osm_way_chain(
     Raises:
         ValueError: The source files, assembled line, or save fails validation.
     """
-    paths = acquire_sources(runtime, way_source_ids, evidence_source_ids=evidence_source_ids or ())
+    paths = acquire_sources(
+        runtime, way_source_ids, evidence_source_ids=evidence_source_ids or ()
+    )
     geometry = assemble(paths)
     save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
     return dict(feature_id=feature_id, vertices=len(geometry['coordinates']))

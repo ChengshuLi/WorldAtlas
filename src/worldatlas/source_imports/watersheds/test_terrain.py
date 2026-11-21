@@ -3,11 +3,13 @@
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 from osgeo import gdal
 from pyproj import CRS
 
+from worldatlas.source_imports.watersheds import terrain
 from worldatlas.source_imports.watersheds.terrain import align_raster_to_grid, prepare_elevation_grid, read_native_elevation_crop
 
 
@@ -18,6 +20,13 @@ class TerrainTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
+
+    def test_failed_array_wrapper_reports_the_terrain_error(self):
+        cells = np.zeros((2, 2), dtype=np.float32)
+        grid = terrain.Grid(cells, (0, 1, 0, 2, 0, -1), "EPSG:4326")
+        with patch.object(terrain.gdal_array, 'OpenArray', return_value=None):
+            with self.assertRaisesRegex(ValueError, 'could not open the terrain array'):
+                terrain.wrap_array_as_raster(cells, grid)
 
     def raster(self, name, values, transform=(0., 1., 0., 2., 0., -1.), crs=4326):
         """Write a georeferenced test raster.

@@ -1,12 +1,39 @@
 """The four explicit distance policies share scope, shores and nearest kernels."""
 
+from __future__ import annotations
+
+from pathlib import Path
+from typing import TYPE_CHECKING, Any, cast
+
+import numpy as np
+
+from worldatlas.map_build.division.scope import Scope
+
+if TYPE_CHECKING:
+    from worldatlas.map_build.division.engine import ParentDivision
+
 from worldatlas.map_build.core.geometry import rasterize
-from worldatlas.map_build.division.nearest import nearest, query_roots
 from worldatlas.map_build.core.layers import write_layer
+from worldatlas.map_build.division.nearest import nearest, query_roots
 from worldatlas.map_build.water.basins import participants, physical_water
 
 
-def nearest_land(context, scope, directory):
+def nearest_land(
+    context: ParentDivision, scope: Scope, directory: Path | str
+) -> dict[str, Any]:
+    """Assign land components using the shores of selected reference components.
+
+    Args:
+        context: Parent's land components and physical shores.
+        scope: Scope and distance reference points for the rule.
+        directory: New output directory.
+
+    Returns:
+        Claim layer report.
+
+    Raises:
+        ValueError: A reference point does not identify parent land.
+    """
     if not query_roots(scope):
         return write_layer(directory, scope.grid, ())
     roots = set()
@@ -25,12 +52,38 @@ def nearest_land(context, scope, directory):
     return nearest(scope, references, "component", directory=directory)
 
 
-def nearest_coastal_water(context, scope, directory):
+def nearest_coastal_water(
+    context: ParentDivision, scope: Scope, directory: Path | str
+) -> dict[str, Any]:
+    """Assign coastal water within the configured distance from shore.
+
+    Args:
+        context: Parent's ownership and coastal distance settings.
+        scope: Prepared eligible water cells.
+        directory: New output directory.
+
+    Returns:
+        Claim layer report. Cells past the distance limit remain available
+        to later rules.
+    """
     limit = context.configuration["coastal_band_metres"]
     return nearest(scope, context.water_shores(), "cell", limit, directory=directory)
 
 
-def nearest_basin_water(context, scope, directory):
+def nearest_basin_water(
+    context: ParentDivision, scope: Scope, directory: Path | str
+) -> dict[str, Any]:
+    """Assign basin water using the shores of owners that border the basin.
+
+    Args:
+        context: Parent's physical water, land owners and shores.
+        scope: Rule scope with one basin polygon.
+        directory: New output directory.
+
+    Returns:
+        Claim layer report. When cells are eligible, include physical-water
+        cell counts and bordering shore-edge counts by owner.
+    """
     feature = scope.rule["features"]["scope_area"][0]
     bounds, mask = rasterize(feature["geometry"], scope.grid)
     water = physical_water(mask, bounds, context.parent_physical, scope.grid)
@@ -42,7 +95,7 @@ def nearest_basin_water(context, scope, directory):
         water,
         bounds,
         context.parent_physical,
-        context.land_ownership,
+        cast(tuple[np.ndarray, np.ndarray], context.land_ownership),
         scope.grid,
         [
             (e, e, e)
@@ -63,5 +116,17 @@ def nearest_basin_water(context, scope, directory):
     return result
 
 
-def nearest_water(context, scope, directory):
+def nearest_water(
+    context: ParentDivision, scope: Scope, directory: Path | str
+) -> dict[str, Any]:
+    """Assign remaining eligible water to the nearest participating shore.
+
+    Args:
+        context: Parent's land owners and their shores.
+        scope: Water cells eligible for completion.
+        directory: New output directory.
+
+    Returns:
+        Claim layer report with counts by owner.
+    """
     return nearest(scope, context.water_shores(), "cell", directory=directory)

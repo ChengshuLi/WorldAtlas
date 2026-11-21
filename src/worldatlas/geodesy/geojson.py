@@ -3,16 +3,18 @@
 import math
 
 from shapely.geometry import shape
+from shapely.geometry.base import BaseGeometry
 
 
-def validate_geometry(geometry):
-    """Check the supported GeoJSON shape and its finite WGS84 coordinates.
+def validate_geometry(geometry: dict[str, object]) -> BaseGeometry:
+    """Check that a GeoJSON geometry is valid in two-dimensional WGS84.
 
     Args:
-        geometry: A point, line, polygon, or corresponding multi-geometry.
+        geometry: Dictionary with "type" and "coordinates". Each coordinate pair
+            is (longitude, latitude) in degrees.
 
     Returns:
-        The validated two-dimensional Shapely geometry.
+        A Shapely point, line, polygon, or corresponding multi-geometry.
 
     Raises:
         ValueError: The geometry is empty, malformed, invalid, or out of range.
@@ -32,7 +34,15 @@ def validate_geometry(geometry):
     ):
         raise ValueError("expected a point, line or polygon geometry")
 
-    def coordinates(values):
+    def coordinates(values: object) -> None:
+        """Check nested coordinate arrays down to each longitude and latitude pair.
+
+        Args:
+            values: Coordinates belonging to a GeoJSON geometry.
+
+        Raises:
+            ValueError: A coordinate is missing, nonfinite, or outside WGS84.
+        """
         if not isinstance(values, (tuple, list)) or not values:
             raise ValueError("geometry coordinates must be nonempty arrays")
         if isinstance(values[0], (tuple, list)):

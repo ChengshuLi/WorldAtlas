@@ -10,7 +10,7 @@ from unittest.mock import Mock, patch
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.layers import write_layer, patch_rows, file_hash
+from worldatlas.map_build.core.layers import write_layer, patch_rows
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.hierarchy import (
     definition,
@@ -20,7 +20,9 @@ from worldatlas.map_build.division.hierarchy import (
 )
 from worldatlas.map_build.division.engine import ParentDivision
 from worldatlas.map_build.execution.control import check_cancelled, stage
+from worldatlas.map_build.execution.runtime import Checkpoints, Timing
 from worldatlas.map_build.test_support import selection
+from worldatlas.shared.files import sha256_file
 
 
 class HierarchyTests(unittest.TestCase):
@@ -36,6 +38,10 @@ class HierarchyTests(unittest.TestCase):
         )
         rules = [{"id": ident} for ident in ("first", "second", "third")]
         with self.assertRaisesRegex(ValueError, "invalid geography"):
+            ParentDivision.calculate(context, rules, None)
+        self.assertEqual(calculate.call_count, 1)
+        context.configuration["division_workers"] = 0
+        with self.assertRaisesRegex(ValueError, "division_workers must be positive"):
             ParentDivision.calculate(context, rules, None)
         self.assertEqual(calculate.call_count, 1)
 
@@ -102,6 +108,16 @@ class HierarchyTests(unittest.TestCase):
                 ends, ids = row(owners, 0, grid.width)
                 self.assertEqual(ends.tolist(), [12, 24])
                 self.assertEqual(ids.tolist(), [101, 202])
+
+            write_layer(
+                root / "all-land", grid,
+                ((y, [(0, grid.width, 17)]) for y in range(grid.height)),
+            )
+            all_land = HierarchyDivision(
+                geography, grid, root / "all-land", root / "all-land-division", configuration,
+            ).run()
+            with open_grid(all_land["directory"], grid) as owners:
+                self.assertEqual(row(owners, 0, grid.width)[1].tolist(), [101])
 
             geography["rules"][1]["operation"] = "nearest_water"
             geography["rules"].pop()
@@ -204,8 +220,8 @@ class HierarchyTests(unittest.TestCase):
             self.assertTrue(second["parents"]["0"]["land"]["reused"])
             for name in ("rows.u32le", "runs.u32le"):
                 self.assertEqual(
-                    file_hash(Path(first["directory"]) / name),
-                    file_hash(Path(second["directory"]) / name),
+                    sha256_file(Path(first["directory"]) / name),
+                    sha256_file(Path(second["directory"]) / name),
                 )
             geo["rules"][0]["unassigned_only"] = True
             third = HierarchyDivision(
@@ -223,10 +239,126 @@ class HierarchyTests(unittest.TestCase):
             ],
             rules=[dict(parent_id=p) for p in (0, 101, 807, 503)],
         )
-        self.assertEqual(selected_parents(geo, [503]), [0, 101, 503])
+        self.assertEqual(selected_parents(geo, [503, 101]), [0, 101, 503])
+        with self.assertRaisesRegex(ValueError, "requested parent has no selected"):
+            selected_parents(geo, [999])
         geo["rules"] = [r for r in geo["rules"] if r["parent_id"] != 101]
         with self.assertRaisesRegex(ValueError, "ancestor has no selected"):
             selected_parents(geo, [503])
+
+    def test_invalid_ancestor_graph_cannot_be_divided(self):
+        for parent, message in ((999, "missing ancestor"), (0, "contains a cycle")):
+            with self.subTest(parent=parent):
+                geography = dict(entities=[dict(id=0, parent_id=parent)], rules=[dict(parent_id=0)])
+                with self.assertRaisesRegex(ValueError, message):
+                    selected_parents(geography, [0])
+
+    def test_child_division_changes_only_its_parent_cells_and_can_resume(self):
+        grid = Grid(24, 12, 15)
+        geography = selection()["geography"]
+        geography["entities"] += [
+            dict(id=101, parent_id=0, physical_class="land"),
+            dict(id=202, parent_id=0, physical_class="water"),
+            dict(id=303, parent_id=101, physical_class="land"),
+            dict(id=404, parent_id=101, physical_class="land"),
+        ]
+        for ident, parent, kind, owner in (
+            ("land", 0, "land", 101),
+            ("water", 0, "water", 202),
+        ):
+            geography["rules"].append(
+                dict(id=ident, parent_id=parent, operation="assign_area",
+                     physical_class=kind, unit="cell", unassigned_only=False)
+            )
+            geography["rule_targets"].append(
+                dict(rule_id=ident, entity_id=owner, label_point_id=None)
+            )
+            geography["category_bindings"].append(
+                dict(code=owner, entity_id=owner, physical_class=kind)
+            )
+        geography["rules"].append(
+            dict(id="split", parent_id=101, operation="divide_area",
+                 physical_class="land", unit="cell", unassigned_only=False)
+        )
+        geography["features"].append(
+            dict(id="boundary", geometry=dict(type="LineString", coordinates=[[0, 55], [0, 5]]))
+        )
+        geography["rule_features"].append(
+            dict(rule_id="split", feature_id="boundary", role="boundary_line")
+        )
+        for name, longitude, owner in (("west", -15, 303), ("east", 15, 404)):
+            geography["features"].append(
+                dict(id=name, geometry=dict(type="Point", coordinates=[longitude, 30]))
+            )
+            geography["rule_targets"].append(
+                dict(rule_id="split", entity_id=owner, label_point_id=name)
+            )
+            geography["category_bindings"].append(
+                dict(code=owner, entity_id=owner, physical_class="land")
+            )
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            physical = np.ones((grid.height, grid.width), dtype=np.uint32)
+            physical[3:5, 10:14] = 17
+            write_layer(root / "physical", grid, patch_rows(physical, grid.bounds, grid))
+            with self.assertRaisesRegex(ValueError, "requires inherited parent membership"):
+                ParentDivision(
+                    geography, 101, grid, root / "physical", root / "no-membership", {},
+                )
+            parent = ParentDivision(
+                geography, 0, grid, root / "physical", root / "parent", {},
+            )
+            try:
+                with self.assertRaisesRegex(ValueError, "land ownership must be complete"):
+                    parent.water_shores()
+                with self.assertRaisesRegex(ValueError, "prepare land ownership"):
+                    parent.water()
+                previous = parent.current
+                parent.consolidate("empty-group", previous, [])
+                self.assertEqual(parent.current, previous)
+            finally:
+                parent.close()
+            direct = HierarchyDivision(
+                geography, grid, root / "physical", root / "direct", {},
+                requested=[101],
+            )
+            self.assertIs(direct.shores(), direct.shores())
+            completed = direct.run()
+            timing = Timing(root / "timing-events.jsonl")
+            try:
+                build = HierarchyDivision(
+                    geography, grid, root / "physical", root / "division", {},
+                    requested=[101], checkpoints=Checkpoints(root / "checkpoints", "attempt"),
+                    timing=timing,
+                )
+                result = build.run()
+                for name in ("rows.u32le", "runs.u32le"):
+                    self.assertEqual(
+                        sha256_file(Path(completed["directory"]) / name),
+                        sha256_file(Path(result["directory"]) / name),
+                    )
+                with open_grid(result["directory"], grid) as owners:
+                    ends, ids = row(owners, 3, grid.width)
+                    self.assertEqual(ends.tolist(), [10, 12, 14, 24])
+                    self.assertEqual(ids.tolist(), [202, 303, 404, 202])
+                    self.assertEqual(row(owners, 0, grid.width)[1].tolist(), [202])
+                resumed = build.run()
+                self.assertEqual(resumed["directory"], result["directory"])
+                self.assertTrue(all(p["reused"] for p in resumed["parents"].values()))
+                geography["features"][0]["geometry"]["coordinates"] = [[1, 55], [1, 5]]
+                with self.assertRaisesRegex(ValueError, "parent definition changed"):
+                    build.run()
+            finally:
+                timing.close()
+
+    def test_division_without_selected_rules_fails(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            with self.assertRaisesRegex(ValueError, "no geographic division selected"):
+                HierarchyDivision(
+                    selection()["geography"], Grid(24, 12, 15), root / "physical",
+                    root / "division", {},
+                ).run()
 
     def test_reuse_ignores_display_and_notes_but_tracks_operative_rules(self):
         geo = selection()["geography"]

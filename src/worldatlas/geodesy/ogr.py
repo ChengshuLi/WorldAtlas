@@ -1,26 +1,34 @@
 """Share GDAL's batch geometry writer across geographic pipelines."""
 
-from osgeo import ogr
 import pyarrow as pa
+from osgeo import gdal, ogr, osr
 
 
-def geometry_layer(geometry, srs):
-    """Populate an in-memory GDAL layer from an Arrow WKB column.
+def geometry_layer(
+    geometry: pa.Array, srs: osr.SpatialReference | None
+) -> tuple[gdal.Dataset, ogr.Layer]:
+    """Write an Arrow geometry column to an in-memory GDAL layer.
 
     Args:
-        geometry: Arrow array of Well-Known Binary geometries.
-        srs: Coordinate reference of those geometries.
+        geometry: Column of binary WKB geometry values.
+        srs: Coordinate reference for the column.
 
     Returns:
-        The owning dataset and its layer. Keep the dataset alive while using the layer.
+        (dataset, layer). Keep the dataset alive while using the layer.
 
     Raises:
-        ValueError: GDAL failed to write the complete batch.
+        ValueError: The layer could not write the full batch.
     """
     dataset = ogr.GetDriverByName('Memory').CreateDataSource('')
     layer = dataset.CreateLayer('geometry', srs, ogr.wkbUnknown)
     schema = pa.schema(
-        [pa.field('wkb_geometry', geometry.type, metadata={b'ARROW:extension:name': b'ogc.wkb'})]
+        [
+            pa.field(
+                'wkb_geometry',
+                geometry.type,
+                metadata={b'ARROW:extension:name': b'ogc.wkb'},
+            )
+        ]
     )
     if layer.WriteArrow(pa.record_batch([geometry], schema=schema)):
         raise ValueError('GDAL Arrow layer write failed')

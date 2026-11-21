@@ -14,15 +14,16 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 from worldatlas.map_build.physical import build as b
+from worldatlas.shared.files import sha256_file, write_bytes_atomic, write_json
 
 
 class PipelineTests(unittest.TestCase):
     def test_atomic_publish_preserves_pending_on_link_failure(self):
         with tempfile.TemporaryDirectory() as d:
             path = Path(d) / 'report.json'
-            with mock.patch.object(b.os, 'link', side_effect=OSError('link failure')):
+            with mock.patch.object(os, 'link', side_effect=OSError('link failure')):
                 with self.assertRaisesRegex(OSError, 'link failure'):
-                    b.write_bytes_atomic(path, b'payload')
+                    write_bytes_atomic(path, b'payload')
             self.assertFalse(path.exists())
             self.assertEqual(
                 [p.read_bytes() for p in Path(d).glob('.report.json.*.pending')], [b'payload']
@@ -33,7 +34,7 @@ class PipelineTests(unittest.TestCase):
             path = Path(d) / 'report.json'
             path.write_bytes(b'existing')
             with self.assertRaises(FileExistsError):
-                b.write_bytes_atomic(path, b'new')
+                write_bytes_atomic(path, b'new')
             self.assertEqual(path.read_bytes(), b'existing')
 
     def test_interrupted_parallel_units_use_wall_time_union(self):
@@ -58,6 +59,49 @@ class PipelineTests(unittest.TestCase):
             self.assertIsNone(r['processing_elapsed_seconds'])
             self.assertGreaterEqual(r['recorded_processing_elapsed_seconds'], 15)
             self.assertLess(r['recorded_processing_elapsed_seconds'], 20)
+
+    def test_corrupt_processing_journal_is_rejected(self):
+        for change, message in (
+            ([dict(event='unknown', attempt='current')], 'unknown processing journal event'),
+            ([dict(event='attempt_start', attempt='current')], 'invalid processing journal attempts'),
+            ([dict(event='download_complete', attempt='missing', seconds=1)], 'event without attempt'),
+            ([dict(event='download_complete', attempt='current', seconds=-1)], 'invalid processing journal download duration'),
+            ([
+                dict(event='attempt_start', attempt='interrupted'),
+                dict(event='unit_complete', attempt='interrupted',
+                     start_monotonic_seconds=2, end_monotonic_seconds=1),
+            ], 'invalid processing journal interval'),
+        ):
+            with self.subTest(message=message), tempfile.TemporaryDirectory() as temp:
+                journal = b.ProcessingJournal(Path(temp), time.perf_counter(), False)
+                for record in change:
+                    journal.add(dict(record, attempt=journal.attempt if record['attempt'] == 'current' else record['attempt']))
+                journal.finish('complete')
+                with self.assertRaisesRegex(ValueError, message):
+                    journal.summary()
+
+    def test_closing_attempt_twice_or_with_bad_duration_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            journal = b.ProcessingJournal(Path(temp), time.perf_counter() + 1_000_000, False)
+            with self.assertRaisesRegex(ValueError, 'invalid attempt timing'):
+                journal.finish('complete')
+            journal.started = time.perf_counter()
+            journal.finish('complete')
+            with self.assertRaisesRegex(ValueError, 'attempt already ended'):
+                journal.finish('failed')
+
+    def test_invalid_attempt_end_record_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            journal = b.ProcessingJournal(Path(temp), time.perf_counter(), False)
+            journal.finish('complete')
+            entry = journal.events[-1]
+            entry['status'] = 'unknown'
+            with self.assertRaisesRegex(ValueError, 'invalid processing journal status'):
+                journal.summary()
+            entry['status'] = 'complete'
+            entry['processing_elapsed_seconds'] = -1
+            with self.assertRaisesRegex(ValueError, 'invalid processing journal duration'):
+                journal.summary()
 
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -99,7 +143,7 @@ class PipelineTests(unittest.TestCase):
                 {
                     'dataset': str(land),
                     'where': None,
-                    'files': [{'path': str(land), 'sha256': b.sha(land)}],
+                    'files': [{'path': str(land), 'sha256': sha256_file(land)}],
                 }
             ],
         }
@@ -141,16 +185,16 @@ class PipelineTests(unittest.TestCase):
         source = self.raw / 'manifest.json'
         source.write_text(
             json.dumps(
-                {'file_count': 1, 'files': [{'path': 'water.parquet', 'sha256': b.sha(shard)}]}
+                {'file_count': 1, 'files': [{'path': 'water.parquet', 'sha256': sha256_file(shard)}]}
             )
         )
         self.cfg = {
             'schema': 'raw-physical-pipeline-v1',
             'selection_notes': 'synthetic',
             'minimum_free_bytes': 0,
-            'land_config': {'path': str(self.land_cfg), 'sha256': b.sha(self.land_cfg)},
-            'water_config': {'path': str(self.water_cfg), 'sha256': b.sha(self.water_cfg)},
-            'source_manifest': {'path': str(source), 'sha256': b.sha(source)},
+            'land_config': {'path': str(self.land_cfg), 'sha256': sha256_file(self.land_cfg)},
+            'water_config': {'path': str(self.water_cfg), 'sha256': sha256_file(self.water_cfg)},
+            'source_manifest': {'path': str(source), 'sha256': sha256_file(source)},
         }
         self.config = self.config_dir / 'pipeline.json'
         self.config.write_text(json.dumps(self.cfg))
@@ -267,7 +311,7 @@ class PipelineTests(unittest.TestCase):
     def test_resume_trusts_changed_code_and_retains_completed_data(self):
         out = self.root / 'changed-code'
         self.interrupt_before_union(out)
-        original = b.sha
+        original = sha256_file
 
         def changed(path):
             path = Path(path)
@@ -279,7 +323,7 @@ class PipelineTests(unittest.TestCase):
                 else original(path)
             )
 
-        with mock.patch.object(b, 'sha', side_effect=changed):
+        with mock.patch.object(b, 'sha256_file', side_effect=changed):
             report = b.run(self.config, out, resume=True)
         self.assertEqual(report['status'], 'candidate-only')
         scripts = report['script_sha256']
@@ -291,6 +335,50 @@ class PipelineTests(unittest.TestCase):
         b.run(self.config, out)
         (out / 'shards/00000/water.tif').write_bytes(b'tampered')
         with self.assertRaisesRegex(ValueError, 'completed shard checkpoint mismatch'):
+            b.run(self.config, out, resume=True)
+
+    def test_completed_resume_validates_the_report_masks_and_final_streams(self):
+        out = self.root / 'finished'
+        original = b.run(self.config, out)
+        for name, message in (
+            ('report.json', 'completed physical report mismatch'),
+            ('land/land.tif', 'completed stage output mismatch: land'),
+            ('union/water-union.tif', 'completed stage output mismatch: union'),
+            ('physical/runs.u32le', 'completed physical output mismatch'),
+        ):
+            with self.subTest(name=name):
+                path = out / name
+                content = path.read_bytes()
+                path.write_bytes(b'{}')
+                with self.assertRaisesRegex(ValueError, message):
+                    b.run(self.config, out, resume=True)
+                path.write_bytes(content)
+        self.assertEqual(b.run(self.config, out, resume=True), original)
+
+    def test_completed_resume_requires_shard_reports_for_the_actual_settings(self):
+        out = self.root / 'finished'
+        b.run(self.config, out)
+        pipeline_path = out / 'report.json'
+        union_path = out / 'union' / 'report.json'
+        pipeline = json.loads(pipeline_path.read_bytes())
+        union = json.loads(union_path.read_bytes())
+
+        def save_union(report):
+            union_path.write_text(json.dumps(report))
+            pipeline['stage_reports']['union']['sha256'] = sha256_file(union_path)
+            pipeline_path.write_text(json.dumps(pipeline))
+
+        save_union(dict(union, shards=[]))
+        with self.assertRaisesRegex(ValueError, 'completed shard inventory mismatch'):
+            b.run(self.config, out, resume=True)
+
+        pin = union['shards'][0]['report']
+        path = Path(pin['path'])
+        shard = json.loads(path.read_bytes())
+        path.write_text(json.dumps(dict(shard, policy={'method': 'unexpected'})))
+        pin['sha256'] = sha256_file(path)
+        save_union(union)
+        with self.assertRaisesRegex(ValueError, 'completed shard report mismatch: 0'):
             b.run(self.config, out, resume=True)
 
     def test_completed_resume_revalidates_gdal_kernel_report(self):
@@ -355,24 +443,59 @@ class PipelineTests(unittest.TestCase):
 
     def test_resume_after_report_write_failure_reuses_composition(self):
         out = self.root / 'report-resume'
-        actual_write = b.write_json
 
-        def fail_report(path, value):
+        def fail_report(path, value, *, sort_keys):
             if Path(path) == out / 'report.json':
                 raise ValueError('report interrupted')
-            return actual_write(path, value)
+            return write_json(path, value, sort_keys=sort_keys)
 
         with mock.patch.object(b, 'write_json', side_effect=fail_report):
             with self.assertRaisesRegex(ValueError, 'report interrupted'):
                 b.run(self.config, out)
         with mock.patch.object(b, 'run_stage', side_effect=AssertionError('unexpected rebuild')):
+            for name, message in (
+                ('land/report.json', 'land checkpoint mismatch'),
+                ('configs/union.json', 'resumed stage config mismatch'),
+                ('union/report.json', 'union checkpoint mismatch'),
+                ('physical/runs.u32le', 'physical checkpoint mismatch'),
+            ):
+                with self.subTest(name=name):
+                    path = out / name
+                    content = path.read_bytes()
+                    path.write_bytes(b'{}')
+                    with self.assertRaisesRegex(ValueError, message):
+                        b.run(self.config, out, resume=True)
+                    path.write_bytes(content)
             b.run(self.config, out, resume=True)
         self.assertTrue((out / 'report.json').is_file())
+
+    def test_config_or_coastline_changes_during_processing_leave_run_incomplete(self):
+        coast = Path(json.loads(self.land_cfg.read_text())['land'][0]['dataset'])
+        original_run_stage = b.run_stage
+        for path, message in (
+            (self.config, 'pipeline input changed during processing'),
+            (coast, 'land source changed during processing'),
+        ):
+            with self.subTest(path=path):
+                content = path.read_bytes()
+
+                def mutate_after_composing(function, *args):
+                    result = original_run_stage(function, *args)
+                    if function == b.composition.main:
+                        path.write_bytes(content + b'\n')
+                    return result
+
+                output = self.root / ('changed-' + path.name)
+                with mock.patch.object(b, 'run_stage', side_effect=mutate_after_composing):
+                    with self.assertRaisesRegex(ValueError, message):
+                        b.run(self.config, output)
+                self.assertFalse((output / 'report.json').exists())
+                path.write_bytes(content)
 
     def test_r2_staging_is_serial_verified_timed_and_owned(self):
         shard = self.raw / 'water.parquet'
         content = shard.read_bytes()
-        digest = b.sha(shard)
+        digest = sha256_file(shard)
         source = Path(self.cfg['source_manifest']['path'])
         source.write_text(
             json.dumps(
@@ -390,7 +513,7 @@ class PipelineTests(unittest.TestCase):
                 }
             )
         )
-        self.cfg['source_manifest']['sha256'] = b.sha(source)
+        self.cfg['source_manifest']['sha256'] = sha256_file(source)
         self.cfg['max_parallel_shards'] = 1
         endpoint = 'https://' + 'a' * 32 + '.r2.cloudflarestorage.com'
         self.cfg['source_staging'] = {'mode': 'r2-s3', 'endpoint_url': endpoint}
@@ -417,7 +540,7 @@ class PipelineTests(unittest.TestCase):
         self.assertFalse((out / 'source-staging' / shard.name).exists())
         self.assertFalse(shard.exists())
         self.assertEqual(
-            report['physical_output_sha256']['runs.u32le'], b.sha(out / 'physical/runs.u32le')
+            report['physical_output_sha256']['runs.u32le'], sha256_file(out / 'physical/runs.u32le')
         )
         shard.write_bytes(content)
         local = self.root / 'already-local'
@@ -427,7 +550,7 @@ class PipelineTests(unittest.TestCase):
             b.run(self.config, local)
         self.assertEqual(shard.read_bytes(), content)
         self.assertEqual(json.loads((local / 'report.json').read_text())['staged_shard_count'], 0)
-        self.assertEqual(b.sha(local / 'physical/runs.u32le'), b.sha(out / 'physical/runs.u32le'))
+        self.assertEqual(sha256_file(local / 'physical/runs.u32le'), sha256_file(out / 'physical/runs.u32le'))
         self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'one shard worker'):
@@ -444,7 +567,7 @@ class PipelineTests(unittest.TestCase):
                     'files': [
                         {
                             'path': shard.name,
-                            'sha256': b.sha(shard),
+                            'sha256': sha256_file(shard),
                             'size': len(content),
                             'r2_bucket': 'test-bucket',
                             'r2_key': 'source/water.parquet',
@@ -453,7 +576,7 @@ class PipelineTests(unittest.TestCase):
                 }
             )
         )
-        self.cfg['source_manifest']['sha256'] = b.sha(source)
+        self.cfg['source_manifest']['sha256'] = sha256_file(source)
         self.cfg['max_parallel_shards'] = 1
         self.cfg['source_staging'] = {
             'mode': 'r2-s3',
@@ -483,13 +606,21 @@ class PipelineTests(unittest.TestCase):
 
     def test_end_to_end_without_reference(self):
         out = self.root / 'out'
-        b.run(self.config, out)
+        subprocess.run(
+            [
+                sys.executable, '-m', 'worldatlas.map_build.physical.build',
+                str(self.config), str(out),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
         report = json.loads((out / 'report.json').read_text())
         self.assertEqual(report['status'], 'candidate-only')
         self.assertEqual(report['shard_count'], 1)
         self.assertGreaterEqual(report['processing_elapsed_seconds'], 0)
         self.assertEqual(
-            report['physical_output_sha256']['rows.u32le'], b.sha(out / 'physical/rows.u32le')
+            report['physical_output_sha256']['rows.u32le'], sha256_file(out / 'physical/rows.u32le')
         )
         expected = np.zeros((4, 8), dtype=np.uint8)
         expected[:2, :3] = 1
@@ -509,7 +640,7 @@ class PipelineTests(unittest.TestCase):
         rowpath = out / 'physical/rows.u32le'
         runpath = out / 'physical/runs.u32le'
         water = out / 'union/water-union.tif'
-        pin = lambda p: {'path': str(p), 'sha256': b.sha(p)}
+        pin = lambda p: {'path': str(p), 'sha256': sha256_file(p)}
         self.cfg['water_reference'] = pin(water)
         self.cfg['physical_reference_mask'] = pin(mask)
         self.cfg['physical_reference_streams'] = {'rows': pin(rowpath), 'runs': pin(runpath)}
@@ -522,7 +653,7 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(
             json.loads((out_ref / 'physical/report.json').read_text())['mismatch_spans'], 0
         )
-        self.assertEqual(b.sha(out_ref / 'physical/runs.u32le'), b.sha(runpath))
+        self.assertEqual(sha256_file(out_ref / 'physical/runs.u32le'), sha256_file(runpath))
 
     def test_parallel_shards_match_serial_and_bad_worker_count_fails(self):
         first = self.raw / 'water.parquet'
@@ -539,13 +670,13 @@ class PipelineTests(unittest.TestCase):
                 {
                     'file_count': 2,
                     'files': [
-                        {'path': first.name, 'sha256': b.sha(first)},
-                        {'path': second.name, 'sha256': b.sha(second)},
+                        {'path': first.name, 'sha256': sha256_file(first)},
+                        {'path': second.name, 'sha256': sha256_file(second)},
                     ],
                 }
             )
         )
-        self.cfg['source_manifest']['sha256'] = b.sha(source)
+        self.cfg['source_manifest']['sha256'] = sha256_file(source)
         self.cfg['max_parallel_shards'] = 0
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'max_parallel_shards'):
@@ -560,17 +691,17 @@ class PipelineTests(unittest.TestCase):
         parallel = self.root / 'parallel'
         b.run(self.config, parallel)
         self.assertEqual(
-            b.sha(serial / 'physical/physical-dry.tif'),
-            b.sha(parallel / 'physical/physical-dry.tif'),
+            sha256_file(serial / 'physical/physical-dry.tif'),
+            sha256_file(parallel / 'physical/physical-dry.tif'),
         )
         self.assertEqual(
-            b.sha(serial / 'physical/rows.u32le'), b.sha(parallel / 'physical/rows.u32le')
+            sha256_file(serial / 'physical/rows.u32le'), sha256_file(parallel / 'physical/rows.u32le')
         )
         self.assertEqual(
-            b.sha(serial / 'physical/runs.u32le'), b.sha(parallel / 'physical/runs.u32le')
+            sha256_file(serial / 'physical/runs.u32le'), sha256_file(parallel / 'physical/runs.u32le')
         )
         self.assertEqual(
-            b.sha(serial / 'union/water-union.tif'), b.sha(parallel / 'union/water-union.tif')
+            sha256_file(serial / 'union/water-union.tif'), sha256_file(parallel / 'union/water-union.tif')
         )
         self.assertEqual(
             json.loads((parallel / 'report.json').read_text())['max_parallel_shards'], 2
@@ -580,17 +711,17 @@ class PipelineTests(unittest.TestCase):
         defaulted = self.root / 'default-parallel'
         b.run(self.config, defaulted)
         self.assertEqual(
-            b.sha(serial / 'physical/physical-dry.tif'),
-            b.sha(defaulted / 'physical/physical-dry.tif'),
+            sha256_file(serial / 'physical/physical-dry.tif'),
+            sha256_file(defaulted / 'physical/physical-dry.tif'),
         )
         self.assertEqual(
-            b.sha(serial / 'physical/rows.u32le'), b.sha(defaulted / 'physical/rows.u32le')
+            sha256_file(serial / 'physical/rows.u32le'), sha256_file(defaulted / 'physical/rows.u32le')
         )
         self.assertEqual(
-            b.sha(serial / 'physical/runs.u32le'), b.sha(defaulted / 'physical/runs.u32le')
+            sha256_file(serial / 'physical/runs.u32le'), sha256_file(defaulted / 'physical/runs.u32le')
         )
         self.assertEqual(
-            b.sha(serial / 'union/water-union.tif'), b.sha(defaulted / 'union/water-union.tif')
+            sha256_file(serial / 'union/water-union.tif'), sha256_file(defaulted / 'union/water-union.tif')
         )
         self.assertEqual(
             json.loads((defaulted / 'report.json').read_text())['max_parallel_shards'], 2
@@ -602,17 +733,17 @@ class PipelineTests(unittest.TestCase):
         oversized = self.root / 'oversized-worker-setting'
         b.run(self.config, oversized)
         self.assertEqual(
-            b.sha(serial / 'physical/physical-dry.tif'),
-            b.sha(oversized / 'physical/physical-dry.tif'),
+            sha256_file(serial / 'physical/physical-dry.tif'),
+            sha256_file(oversized / 'physical/physical-dry.tif'),
         )
         self.assertEqual(
-            b.sha(serial / 'physical/rows.u32le'), b.sha(oversized / 'physical/rows.u32le')
+            sha256_file(serial / 'physical/rows.u32le'), sha256_file(oversized / 'physical/rows.u32le')
         )
         self.assertEqual(
-            b.sha(serial / 'physical/runs.u32le'), b.sha(oversized / 'physical/runs.u32le')
+            sha256_file(serial / 'physical/runs.u32le'), sha256_file(oversized / 'physical/runs.u32le')
         )
         self.assertEqual(
-            b.sha(serial / 'union/water-union.tif'), b.sha(oversized / 'union/water-union.tif')
+            sha256_file(serial / 'union/water-union.tif'), sha256_file(oversized / 'union/water-union.tif')
         )
         self.assertEqual(
             json.loads((oversized / 'report.json').read_text())['max_parallel_shards'], 10000
@@ -634,13 +765,13 @@ class PipelineTests(unittest.TestCase):
                 {
                     'file_count': 2,
                     'files': [
-                        {'path': first.name, 'sha256': b.sha(first)},
-                        {'path': bad.name, 'sha256': b.sha(bad)},
+                        {'path': first.name, 'sha256': sha256_file(first)},
+                        {'path': bad.name, 'sha256': sha256_file(bad)},
                     ],
                 }
             )
         )
-        self.cfg['source_manifest']['sha256'] = b.sha(source)
+        self.cfg['source_manifest']['sha256'] = sha256_file(source)
         self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'parallel-incomplete'
@@ -662,10 +793,10 @@ class PipelineTests(unittest.TestCase):
         source = Path(self.cfg['source_manifest']['path'])
         source.write_text(
             json.dumps(
-                {'file_count': 1, 'files': [{'path': 'water.parquet', 'sha256': b.sha(shard)}]}
+                {'file_count': 1, 'files': [{'path': 'water.parquet', 'sha256': sha256_file(shard)}]}
             )
         )
-        self.cfg['source_manifest']['sha256'] = b.sha(source)
+        self.cfg['source_manifest']['sha256'] = sha256_file(source)
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'incomplete'
         with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
@@ -679,12 +810,151 @@ class PipelineTests(unittest.TestCase):
         source.write_text(
             json.dumps({'file_count': 1, 'files': [{'path': '../bad.parquet', 'sha256': '1' * 64}]})
         )
-        self.cfg['source_manifest']['sha256'] = b.sha(source)
+        self.cfg['source_manifest']['sha256'] = sha256_file(source)
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'traversal'
         with self.assertRaisesRegex(ValueError, 'relative to manifest directory'):
             b.run(self.config, out)
         self.assertFalse(out.exists())
+
+    def test_rejects_a_raw_file_symlink_to_outside_the_manifest_directory(self):
+        source = self.raw / 'water.parquet'
+        relocated = self.root / source.name
+        source.rename(relocated)
+        source.symlink_to(relocated)
+        out = self.root / 'escaped-source'
+        with self.assertRaisesRegex(ValueError, 'raw source escapes manifest directory'):
+            b.run(self.config, out)
+        self.assertFalse(out.exists())
+
+    def test_requires_a_valid_output_location_and_current_land_input(self):
+        with self.assertRaisesRegex(ValueError, 'output parent must exist'):
+            b.run(self.config, self.root / 'missing' / 'output')
+        with self.assertRaisesRegex(ValueError, 'output must be outside all input directories'):
+            b.run(self.config, self.raw / 'output')
+        land = Path(json.loads(self.land_cfg.read_text())['land'][0]['dataset'])
+        land.write_text('{}')
+        out = self.root / 'changed-input'
+        with self.assertRaisesRegex(ValueError, 'land source hash mismatch'):
+            b.run(self.config, out)
+        self.assertFalse(out.exists())
+
+    def test_physical_preflight_checks_available_disk_and_reports_cli_errors(self):
+        for key, path in (('land_config', self.land_cfg), ('water_config', self.water_cfg)):
+            data = json.loads(path.read_bytes())
+            path.write_text(json.dumps(dict(data, minimum_free_bytes=1)))
+            self.cfg[key]['sha256'] = sha256_file(path)
+        self.cfg['minimum_free_bytes'] = 1
+        self.config.write_text(json.dumps(self.cfg))
+        out = self.root / 'low-disk'
+        with mock.patch.object(b.shutil, 'disk_usage', return_value=mock.Mock(free=0)):
+            with self.assertRaisesRegex(ValueError, 'free disk below pipeline reserve'):
+                b.run(self.config, out)
+        self.assertFalse(out.exists())
+
+        self.config.write_text('{}')
+        result = subprocess.run(
+            [
+                sys.executable, '-m', 'worldatlas.map_build.physical.build',
+                str(self.config), str(out),
+            ],
+            capture_output=True, text=True,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('failed: explicit pipeline schema', result.stderr)
+        self.assertFalse(out.exists())
+
+    def test_interrupted_physical_checkpoints_require_their_journal(self):
+        out = self.root / 'interrupted'
+        self.interrupt_before_union(out)
+        (out / 'processing-events.jsonl').unlink()
+        with self.assertRaisesRegex(ValueError, 'missing processing journal for existing checkpoints'):
+            b.run(self.config, out, resume=True)
+        self.assertFalse((out / 'report.json').exists())
+
+    def test_stage_with_incomplete_report_never_publishes_physical_result(self):
+        run_stage = b.run_stage
+        for stage, message in (
+            (b.land.run, 'land raster is incomplete'),
+            (b.water_union.run, 'water union is incomplete'),
+            (b.composition.main, 'physical composition is incomplete'),
+        ):
+            with self.subTest(message=message):
+                out = self.root / stage.__module__.split('.')[-1]
+
+                def call(function, *args):
+                    result = run_stage(function, *args)
+                    if function == stage:
+                        report = Path(args[1]) / 'report.json'
+                        data = json.loads(report.read_bytes())
+                        report.write_text(json.dumps(dict(data, status='incomplete')))
+                    return result
+
+                with mock.patch.object(b, 'run_stage', side_effect=call):
+                    with self.assertRaisesRegex(ValueError, message):
+                        b.run(self.config, out)
+                self.assertFalse((out / 'report.json').exists())
+
+    def test_r2_transfer_rejects_a_short_shard_and_closes_the_client(self):
+        endpoint = 'https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.r2.cloudflarestorage.com'
+        body = io.BytesIO(b'partial')
+        client = mock.Mock()
+        client.get_object.return_value = {'Body': body, 'ContentLength': 20}
+        entry = dict(r2_bucket='atlas', r2_key='water.parquet', size=20)
+        staged = self.root / 'raw-shard.parquet'
+        with mock.patch.object(b.boto3, 'client', return_value=client) as connect:
+            with self.assertRaisesRegex(ValueError, 'staged source size/hash mismatch'):
+                b.download_r2(endpoint, entry, staged)
+        connect.assert_called_once_with('s3', endpoint_url=endpoint, region_name='auto')
+        client.get_object.assert_called_once_with(Bucket='atlas', Key='water.parquet')
+        client.close.assert_called_once_with()
+        self.assertTrue(body.closed)
+        self.assertEqual(staged.read_bytes(), b'partial')
+
+    def test_resume_uses_a_verified_staged_shard_and_cleans_up_after_reuse(self):
+        endpoint = 'https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.r2.cloudflarestorage.com'
+        shard = self.raw / 'water.parquet'
+        payload = shard.read_bytes()
+        source = Path(self.cfg['source_manifest']['path'])
+        manifest = json.loads(source.read_bytes())
+        manifest['files'][0].update(r2_bucket='atlas', r2_key=shard.name, size=len(payload))
+        source.write_text(json.dumps(manifest))
+        self.cfg['source_manifest']['sha256'] = sha256_file(source)
+        self.cfg['source_staging'] = dict(mode='r2-s3', endpoint_url=endpoint)
+        self.cfg['max_parallel_shards'] = 1
+        self.config.write_text(json.dumps(self.cfg))
+        shard.unlink()
+        out = self.root / 'restart-r2'
+        staged = out / 'source-staging' / shard.name
+        run_stage = b.run_stage
+
+        def interrupt_before_burn(function, *args):
+            if function == b.water.run:
+                raise InterruptedError('before burning the shard')
+            return run_stage(function, *args)
+
+        with (
+            mock.patch.object(b, 'download_r2', side_effect=lambda _, __, path: path.write_bytes(payload)),
+            mock.patch.object(b, 'run_stage', side_effect=interrupt_before_burn),
+        ):
+            with self.assertRaisesRegex(InterruptedError, 'before burning'):
+                b.run(self.config, out)
+        self.assertEqual(staged.read_bytes(), payload)
+
+        unlink = Path.unlink
+
+        def interrupt_delete(path, *args, **kwargs):
+            if path == staged:
+                raise InterruptedError('before removing the staged shard')
+            return unlink(path, *args, **kwargs)
+
+        with mock.patch.object(b, 'download_r2', side_effect=AssertionError('unexpected download')):
+            with mock.patch.object(Path, 'unlink', new=interrupt_delete):
+                with self.assertRaisesRegex(InterruptedError, 'before removing'):
+                    b.run(self.config, out, resume=True)
+            self.assertTrue((out / 'shards/00000/report.json').exists())
+            self.assertEqual(b.run(self.config, out, resume=True)['status'], 'candidate-only')
+        self.assertFalse(staged.exists())
 
     def test_preflight_rejects_changed_pin_and_partial_reference(self):
         self.cfg['land_config']['sha256'] = '0' * 64
@@ -693,15 +963,57 @@ class PipelineTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'hash mismatch'):
             b.run(self.config, out)
         self.assertFalse(out.exists())
-        self.cfg['land_config']['sha256'] = b.sha(self.land_cfg)
+        self.cfg['land_config']['sha256'] = sha256_file(self.land_cfg)
         self.cfg['physical_reference_mask'] = {
             'path': str(self.land_cfg),
-            'sha256': b.sha(self.land_cfg),
+            'sha256': sha256_file(self.land_cfg),
         }
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'supplied together'):
             b.run(self.config, out)
         self.assertFalse(out.exists())
+
+    def test_preflight_rejects_invalid_grid_sources_and_controls(self):
+        valid_water = json.loads(self.water_cfg.read_text())
+        source_path = Path(self.cfg['source_manifest']['path'])
+        valid_manifest = json.loads(source_path.read_text())
+        shard = valid_manifest['files'][0]
+        cases = [
+            ('pipeline', {'selection_notes': ''}, 'schema and selection notes'),
+            ('pipeline', {'minimum_free_bytes': True}, 'invalid free-space reserve'),
+            ('pipeline', {'minimum_free_bytes': 1}, 'below pipeline reserve'),
+            ('pipeline', {'union_rows_per_block': 0}, 'rows_per_block'),
+            ('water', {'rasterizer': 'unknown'}, 'rasterizer must be gdal or python'),
+            ('water', {'native_method': 'old'}, 'retired native_method'),
+            ('water', {'grid': dict(self.grid, width=4)}, 'land and water grids differ'),
+            ('water', {'batch_size': 0}, 'batch_size'),
+            ('manifest', {'file_count': 2}, 'must list every raw shard'),
+            ('manifest', {'files': [dict(shard, sha256='not-a-digest')]}, 'invalid raw source digest'),
+            (
+                'manifest',
+                {'file_count': 2, 'files': [shard, dict(shard, path='another.parquet')]},
+                'paths and hashes must be unique',
+            ),
+        ]
+        out = self.root / 'invalid'
+        for section, changes, error in cases:
+            with self.subTest(section=section, changes=changes):
+                water = dict(valid_water)
+                manifest = dict(valid_manifest)
+                configuration = dict(self.cfg)
+                {'pipeline': configuration, 'water': water, 'manifest': manifest}[section].update(changes)
+                self.water_cfg.write_text(json.dumps(water))
+                source_path.write_text(json.dumps(manifest))
+                configuration['water_config'] = dict(
+                    self.cfg['water_config'], sha256=sha256_file(self.water_cfg)
+                )
+                configuration['source_manifest'] = dict(
+                    self.cfg['source_manifest'], sha256=sha256_file(source_path)
+                )
+                self.config.write_text(json.dumps(configuration))
+                with self.assertRaisesRegex(ValueError, error):
+                    b.run(self.config, out)
+                self.assertFalse(out.exists())
 
 
 if __name__ == '__main__':

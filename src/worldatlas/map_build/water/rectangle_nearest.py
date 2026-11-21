@@ -5,17 +5,28 @@ share proofs across rows; uncertain cells use the complete point classifier.
 """
 
 import math
+from collections.abc import Callable, Sequence
+
 import numpy as np
+
 from worldatlas.geodesy.wgs84 import MAX_RADIUS, MIN_RADIUS
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.water import shared_nearest as s
+from worldatlas.map_build.water.shared_nearest import ShoreIndexes
 
 
-def rectangle_counts(mask, block):
-    """Count rectangles within root blocks using compact local prefix tables.
+def rectangle_counts(
+    mask: np.ndarray, block: int
+) -> Callable[[int, int, int, int], np.integer]:
+    """Prepare a fast count of selected cells in the rectangles of each tile.
 
-    Subdivision never crosses a root-block edge. Block-local tables avoid
-    strided whole-width scans and require only block-sized integer counts.
+    Args:
+        mask: Two-dimensional bool grid of selected cells.
+        block: Maximum width and height of a tile.
+
+    Returns:
+        Function taking (first_row, end_row, first_column, end_column)
+        for a window inside one tile and returning its selected cell count.
     """
     nr, nc = mask.shape
     h, w = min(block, nr), min(block, nc)
@@ -28,7 +39,18 @@ def rectangle_counts(mask, block):
         ((0, 0), (0, 0), (1, 0), (1, 0)),
     )
 
-    def count(a, b, c, d):
+    def count(a: int, b: int, c: int, d: int) -> np.integer:
+        """Count selected cells within one tile.
+
+        Args:
+            a: First row, in mask coordinates.
+            b: Exclusive end row.
+            c: First column, in mask coordinates.
+            d: Exclusive end column.
+
+        Returns:
+            Integer count from the tile's precomputed sums.
+        """
         ty, tx = a // h, c // w
         a, b, c, d = a - ty * h, b - ty * h, c - tx * w, d - tx * w
         return (
@@ -41,14 +63,28 @@ def rectangle_counts(mask, block):
     return count
 
 
-def exact_certificate_possible(lower, best, upper, radius, boundary):
-    """Skip expensive exact probes when even optimistic class gaps cannot win.
+def exact_certificate_possible(
+    lower: np.ndarray,
+    best: np.ndarray,
+    upper: np.ndarray,
+    radius: np.ndarray,
+    boundary: np.ndarray,
+) -> np.ndarray:
+    """Check whether exact distances could prove one owner for a rectangle.
 
-    The same spherical minimum giving a lower bound also gives an upper bound:
-    ellipsoid distance is at most MAX_RADIUS times its spherical angle. The
-    chord-only antipodal branch is detected conservatively and uses half the
-    maximum ellipsoid circumference instead. This is an exclusion proof, never
-    a replacement for exact minima or the final interval certificate.
+    The distance from the rectangle's centre to any of its cells is at most
+    its radius. If even the most favourable bounds fall short of the
+    needed gap, split the rectangle without measuring exact distances.
+
+    Args:
+        lower: Rectangle-by-category array of shore lower bounds in metres.
+        best: Candidate category column for each rectangle.
+        upper: Measured upper distance bound for each candidate.
+        radius: Distance in metres from the centre to cover each rectangle.
+        boundary: Lower bound in metres to shores outside the crop.
+
+    Returns:
+        Bool array marking rectangles that might have one provable owner.
     """
     maximum = np.where(
         lower < MIN_RADIUS * 1.98,
@@ -68,20 +104,41 @@ def exact_certificate_possible(lower, best, upper, radius, boundary):
 
 
 def classify(
-    water,
-    x0,
-    y0,
-    bounds,
-    width,
-    height,
-    step,
-    pairs,
-    indexes,
-    point_classifier,
-    block=64,
+    water: np.ndarray,
+    x0: int,
+    y0: int,
+    bounds: tuple[int, int, int, int],
+    width: int,
+    height: int,
+    step: float,
+    pairs: Sequence[tuple[int, int, int]],
+    indexes: ShoreIndexes,
+    point_classifier: Callable[[np.ndarray, np.ndarray], tuple[np.ndarray, int, int]],
+    block: int = 64,
     *,
-    band=None,
-):
+    band: float | None = None,
+) -> tuple[np.ndarray, dict[str, int]]:
+    """Assign selected water cells to the nearest shore.
+
+    Args:
+        water: Two-dimensional bool mask of cells to assign.
+        x0: First column of the mask.
+        y0: First row of the mask.
+        bounds: Grid window represented by the shore indexes.
+        width: Full grid width in columns.
+        height: Full grid height in rows.
+        step: Cell size in degrees.
+        pairs: Category, shore code and output code in tie order.
+        indexes: Spatial indexes by shore code.
+        point_classifier: Function for unresolved points. Takes latitude and
+            longitude arrays and returns codes and bounded and exact counts.
+        block: Tile side length in cells.
+        band: Optional maximum distance to shore in metres.
+
+    Returns:
+        (codes, counts). Codes are a uint32 grid shaped like water, with
+        zero where no cell was assigned. Counts describe bounded and exact work.
+    """
     water = np.asarray(water)
     if water.ndim != 2 or water.dtype != np.bool_:
         raise ValueError("boolean selection grid required")

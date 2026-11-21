@@ -1,9 +1,9 @@
 """Read selected vector features through GDAL's Python API."""
 
 import json
-from pathlib import Path
 import time
-from typing import NotRequired
+from pathlib import Path
+from typing import Any, NotRequired
 from zipfile import ZipFile
 
 from osgeo import gdal, ogr, osr
@@ -11,7 +11,11 @@ from shapely import union_all
 from shapely.geometry import Polygon, mapping
 
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.source_imports.shared.recipe_types import FeatureIdentity, NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import (
+    FeatureIdentity,
+    NonEmptyText,
+    SourceId,
+)
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources, gdal_dataset_path
 from worldatlas.source_imports.shared.storage import feature_result, save_features
@@ -24,7 +28,9 @@ class VectorSelection(FeatureIdentity):
     fill_holes: NotRequired[bool]
 
 
-def native_geojson_geometry(feature, path, member):
+def native_geojson_geometry(
+    feature: ogr.Feature, path: Path | str, member: str | None
+) -> dict[str, Any]:
     """Read original coordinates for the feature GDAL selected.
 
     Args:
@@ -48,7 +54,9 @@ def native_geojson_geometry(feature, path, member):
     return json.loads(path.read_bytes())
 
 
-def polygon_containing(geometry, coordinates):
+def polygon_containing(
+    geometry: dict[str, Any], coordinates: list[float] | tuple[float, float]
+) -> dict[str, Any]:
     """Select an original polygon part by an interior WGS84 point.
 
     Args:
@@ -78,7 +86,14 @@ def polygon_containing(geometry, coordinates):
     return {"type": "Polygon", "coordinates": selected[0]}
 
 
-def read_features(path, *, id_field, selections, member=None, layer=None):
+def read_features(
+    path: Path | str,
+    *,
+    id_field: str,
+    selections: list[VectorSelection],
+    member: str | None = None,
+    layer: str | None = None,
+) -> list[dict[str, Any]]:
     """Extract selected vector records and convert their geometry to WGS84.
 
     Args:
@@ -104,35 +119,39 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
     # Use return codes here regardless of GDAL's exception setting elsewhere.
     with gdal.ExceptionMgr(useExceptions=False):
         source = gdal.OpenEx(
-            gdal_dataset_path(path, member), gdal.OF_VECTOR, open_options=["@NATIVE_DATA=YES"]
+            gdal_dataset_path(path, member),
+            gdal.OF_VECTOR,
+            open_options=["@NATIVE_DATA=YES"],
         )
     if source is None:
         raise ValueError("source vector dataset cannot be opened")
     layer_name = layer
     if layer_name is None and source.GetLayerCount() != 1:
         raise ValueError("select one source vector layer")
-    layer = source.GetLayerByName(layer_name) if layer_name else source.GetLayer(0)
-    if layer is None:
+    source_layer = (
+        source.GetLayerByName(layer_name) if layer_name else source.GetLayer(0)
+    )
+    if source_layer is None:
         raise ValueError("selected vector layer is missing")
     if id_field == "@fid":
         fids = {key: int(key) for key in wanted}
     else:
-        if layer.GetLayerDefn().GetFieldIndex(id_field) < 0:
+        if source_layer.GetLayerDefn().GetFieldIndex(id_field) < 0:
             raise ValueError("selected provider ID field is missing")
         # Match the requested attribute values exactly, then ask GDAL for
         # geometry only when fetching the matched records by their native IDs.
-        layer.SetIgnoredFields(["OGR_GEOMETRY"])
+        source_layer.SetIgnoredFields(["OGR_GEOMETRY"])
         fids = {}
-        for row in layer:
+        for row in source_layer:
             key = str(row.GetField(id_field))
             if key in wanted:
                 if key in fids:
                     raise ValueError("selected provider feature is duplicated")
                 fids[key] = row.GetFID()
-        layer.SetIgnoredFields([])
+        source_layer.SetIgnoredFields([])
     if fids.keys() != wanted:
         raise ValueError("selected provider feature is missing")
-    original = layer.GetSpatialRef()
+    original = source_layer.GetSpatialRef()
     if original is None:
         raise ValueError("vector source has no coordinate reference")
     original = original.Clone()
@@ -147,10 +166,10 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
     target.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
     is_geojson = source.GetDriver().ShortName == "GeoJSON"
     # Skip coordinate conversion when the source already has the required values.
-    use_native_coordinates = (
-        is_geojson
-        and original.IsSame(target, ["IGNORE_DATA_AXIS_TO_SRS_AXIS_MAPPING=YES"])
+    use_native_coordinates = is_geojson and original.IsSame(
+        target, ["IGNORE_DATA_AXIS_TO_SRS_AXIS_MAPPING=YES"]
     )
+    conversion = None
     if not use_native_coordinates:
         with osr.ExceptionMgr(useExceptions=False):
             conversion = osr.CreateCoordinateTransformation(original, target)
@@ -161,13 +180,13 @@ def read_features(path, *, id_field, selections, member=None, layer=None):
     result = []
     for selection in selections:
         key = str(selection["source_feature_id"])
-        row = layer.GetFeature(fids[key])
+        row = source_layer.GetFeature(fids[key])
         if row is None:
             raise ValueError("selected provider feature is missing")
         geometry = row.GetGeometryRef()
         if geometry is None:
             raise ValueError("source feature has no geometry")
-        if use_native_coordinates:
+        if conversion is None:
             value = native_geojson_geometry(row, path, member)
         else:
             geometry = geometry.Clone()
@@ -210,7 +229,7 @@ def selected_vector_features(
     selections: list[VectorSelection],
     member: NonEmptyText | None = None,
     layer: NonEmptyText | None = None,
-):
+) -> dict[str, Any]:
     """Import selected vector features as WGS84 GeoJSON.
 
     Args:
@@ -225,9 +244,14 @@ def selected_vector_features(
         Saved feature IDs, the local source path, and timings.
     """
     started, timing = time.monotonic(), {}
-    path, = acquire_sources(runtime, [source_id], timing=timing)
-    features = read_features(path, id_field=id_field, selections=selections,
-                             member=member, layer=layer)
+    (path,) = acquire_sources(runtime, [source_id], timing=timing)
+    features = read_features(
+        path, id_field=id_field, selections=selections, member=member, layer=layer
+    )
     feature_ids = save_features(runtime, features)
-    return feature_result(feature_ids, time.monotonic() - started, source=path,
-                          download_seconds=timing.get("download_seconds", 0.0))
+    return feature_result(
+        feature_ids,
+        time.monotonic() - started,
+        source=path,
+        download_seconds=timing.get("download_seconds", 0.0),
+    )
