@@ -2,7 +2,25 @@
 
 Neon stores editable geography and construction settings, raw-file identities, and release pointers. Each build freezes its selected records and coordinates before computation. The website reads published files in R2.
 
-## Schema
+## Use
+
+Apply [`schema.sql`](schema.sql) with `psql` to a new PostgreSQL database that has `pg_jsonschema` available. Use the editing workflow below for the existing working database.
+
+### Editing and replay
+
+Raw identity, storage location, size, checksum and capture time are immutable; correctable descriptive metadata remains editable. Changed source bytes require a new source ID. Construction settings, geometry and geographic rules are editable. Released input archives retain their exact earlier values and code.
+
+`construction_records.method` selects the importer, `basis` stores the required explanation, and `arguments` stores the method's named inputs as JSONB. Each construction must cite at least one raw source through those arguments. The database maintains `construction_sources` from them. The importer registry and typed Python signatures define the argument and source-reference checks. Regenerate those checks after changing a constructor:
+
+```bash
+python -m worldatlas.source_imports.shared.contracts database/schema/construction_contracts.sql
+```
+
+For an existing database, back up its data, rehearse the transition locally, then apply the tested change in one transaction. Keep one-off transition scripts with the maintenance backup. Keep the authoritative schema in the files above.
+
+## How it works
+
+### Schema
 
 [`schema.sql`](schema.sql) creates an empty database in dependency order:
 
@@ -31,19 +49,9 @@ Add a rule citation when it helps a reviewer understand a current decision beyon
 
 `map_releases` records a bundle's R2 bucket and pins `manifest.json` by SHA-256. The folder path comes from the bundle ID, and the manifest pins each release file. Each version can have one permanent official bundle, and at most one official bundle is current. Publication changes flags and the fixed R2 homepage separately from map calculation. See [release commands](../src/worldatlas/map_releases/README.md).
 
-## Editing and replay
+## Code and tests
 
-Raw identity, storage location, size, checksum and capture time are immutable; correctable descriptive metadata remains editable. Changed source bytes require a new source ID. Construction settings, geometry and geographic rules are editable. Released input archives retain their exact earlier values and code.
-
-`construction_records.method` selects the importer, `basis` stores the required explanation, and `arguments` stores the method's named inputs as JSONB. Each construction must cite at least one raw source through those arguments. The database maintains `construction_sources` from them. The importer registry and typed Python signatures define the argument and source-reference checks. Regenerate those checks after changing a constructor:
-
-```bash
-python -m worldatlas.source_imports.shared.contracts database/schema/construction_contracts.sql
-```
-
-For an existing database, back up its data, rehearse the transition locally, then apply the tested change in one transaction. Keep one-off transition scripts with the maintenance backup. Keep the authoritative schema in the files above.
-
-## Tests
+### Tests
 
 Put PostgreSQL 17 or 18 tools on your path. Install `pg_jsonschema` once for that PostgreSQL installation. On macOS, the install command builds the native extension using the Xcode command-line tools and Rust's `cargo`. On Debian and Ubuntu, it extracts the matching upstream package using `dpkg-deb`. You can also pass the path to a different installation's `pg_config`. If that installation already has a different `pg_jsonschema` version, use the project PostgreSQL environment.
 

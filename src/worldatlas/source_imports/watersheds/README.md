@@ -2,23 +2,7 @@
 
 The watershed importer uses elevation maps and rivers to find where water drains in different directions. For example, where one cell drains to group 3 and the cell next to it drains to group 7, the edge between them can become part of the boundary. The construction record in Neon names the files, groups, and places to join. The importer reads the verified files from R2 and saves the finished line in Neon.
 
-## Code
-
-| File | Responsibility |
-| --- | --- |
-| [`build_boundary.py`](build_boundary.py) | Read settings, call the functions, and save the result. |
-| [`terrain.py`](terrain.py) | Read just the needed rows and columns of a height map and fill gaps from another map. |
-| [`drainage.py`](drainage.py) | Pick which neighboring cell water flows to and follow it to a known destination. |
-| [`waterways.py`](waterways.py) | Read OSM rivers and streams and trace where they drain. |
-| [`basins.py`](basins.py) | Use basin outlines to tell where water goes when it leaves a terrain crop or reaches the shore. |
-| [`sources.py`](sources.py) | Select source lines and points and resolve the files needed by each reader. |
-| [`boundary.py`](boundary.py) | Choose a connected route along cell edges and join it to the other boundary sections. |
-| [`worldatlas.source_assets`](../../source_assets/README.md) | Resolve catalog IDs and verify downloaded or multipart files. |
-| [`../shared/storage.py`](../shared/storage.py) | Validate and save geometry with its construction reference. |
-
-Start with `watershed_boundary()` in `build_boundary.py` to follow the work in code. It reads the files, prepares the terrain, works out where water goes, and joins the boundary sections. Its typed arguments describe the construction fields that Neon checks. `__init__.py` marks the Python package so the test runner can find its tests.
-
-## Run
+## Use
 
 Use the shared [project environment](../../../../environment.yml) for Python, GDAL and PostgreSQL. Set `NEON_DATABASE_URL` and configure R2 credentials as described in the [source-import instructions](../README.md). Then run:
 
@@ -35,7 +19,9 @@ The importer checks the joins and river crossings before saving the finished lin
 
 The current construction IDs are `caucasus-boundary-construction` and `ural-boundary-construction`. Their editable geographic choices and exact source selections are in `atlas.construction_records`.
 
-## Construction settings
+## How it works
+
+### Construction settings
 
 Set the record's method to `watershed_boundary`. Put the geographic reasoning and supporting measurements in its `basis` column. The construction arguments specify inputs to the calculation and catalog links for supporting evidence.
 
@@ -72,7 +58,7 @@ The mapped river can continue out into an estuary after the basin outline ends. 
 
 Pyosmium reads both OSM XML and PBF. ZIP members are unpacked to temporary files for the same streaming reader. For drainage tracing, the reader uses ways tagged `waterway=river` or `waterway=stream`. It merges way versions across all files before loading the referenced node coordinates. This lets a way use points supplied by another file. Shared nodes and way endpoints preserve downstream connections without turning every shape vertex into a separate graph junction. Raster seeding selects intersecting ways without clipping their geometry or downstream relationships. The shared GDAL writer passes all lines in one Arrow batch, and GDAL marks each terrain cell they touch.
 
-## Terrain and flow
+### Terrain and flow
 
 Use the provider's 10 m ArcticDEM mosaics where available and Copernicus GLO-30 elsewhere. Copernicus also fills missing ArcticDEM heights after height conversion. Construction records select exact catalog assets and coverage.
 
@@ -88,7 +74,7 @@ Check the chosen boundary against larger terrain domains when sources or constru
 
 Each item in a terrain's `domains` is an object with `bounds` in `[west, south, east, north]` order, such as `{"bounds": [37.2, 44.5, 38.1, 45.1]}`. An optional `output_bounds` rectangle limits which edges the crop contributes. Both rectangles use WGS84 unless the domain sets `crs`. Use adjoining output areas and overlapping context to keep calculation-edge artifacts out of the assembled graph. Larger-crop validation expands the context while retaining those output areas and the native grid. Projected bounds avoid changing the extent through a round trip to longitude and latitude. Source lookups and final coordinates still use WGS84.
 
-## Boundary assembly and tests
+### Boundary assembly
 
 Construct the complete interface between selected drainage groups. Shapely finds intersections in batches and retains the original grid-edge IDs. SciPy finds the shortest connected route between the selected intersections using WGS84 edge lengths. The search includes branches and loops. Disconnected joins fail the construction. For shared drainage, both outer catchment edges remain possible routes. A catchment with identical destinations on both sides contributes no interior divide. The declared joins select the route without forcing the upstream area into one group. Repeated consecutive source coordinates appear once in the final line.
 
@@ -99,6 +85,22 @@ Before saving, the constructor checks the complete line against the mapped river
 Where source grids have different native resolutions, a connector endpoint can select the nearest divide corner to a geographic anchor: `{"nearest_divide": "TERRAIN_NAME", "near": {"point": [longitude, latitude]}}`. The constructor measures the connector and retains both native grids. The same `nearest_divide` selection can start or end a boundary directly on a divide; its grid-edge identity is retained for routing.
 
 An explicit point endpoint cuts its source line at the nearest position and retains the exact chosen endpoint coordinate. Use a geodesic section for a deliberate connection between separated source sections.
+
+## Code and tests
+
+| File | Responsibility |
+| --- | --- |
+| [`build_boundary.py`](build_boundary.py) | Read settings, call the functions, and save the result. |
+| [`terrain.py`](terrain.py) | Read just the needed rows and columns of a height map and fill gaps from another map. |
+| [`drainage.py`](drainage.py) | Pick which neighboring cell water flows to and follow it to a known destination. |
+| [`waterways.py`](waterways.py) | Read OSM rivers and streams and trace where they drain. |
+| [`basins.py`](basins.py) | Use basin outlines to tell where water goes when it leaves a terrain crop or reaches the shore. |
+| [`sources.py`](sources.py) | Select source lines and points and resolve the files needed by each reader. |
+| [`boundary.py`](boundary.py) | Choose a connected route along cell edges and join it to the other boundary sections. |
+| [`worldatlas.source_assets`](../../source_assets/README.md) | Resolve catalog IDs and verify downloaded or multipart files. |
+| [`../shared/storage.py`](../shared/storage.py) | Validate and save geometry with its construction reference. |
+
+Start with `watershed_boundary()` in `build_boundary.py` to follow the work in code. It reads the files, prepares the terrain, works out where water goes, and joins the boundary sections. Its typed arguments describe the construction fields that Neon checks.
 
 Each test file covers a distinct responsibility:
 

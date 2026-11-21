@@ -1,8 +1,14 @@
 # OpenStreetMap imports
 
+Import points and polygons from archived OpenStreetMap objects, or join archived ways into one boundary line.
+
+## Use
+
 Both methods use the [common import command](../README.md#run-one-construction) with the construction ID, R2 endpoint, and work directory.
 
-## Points and polygons
+## How it works
+
+### Points and polygons
 
 [`features.py`](features.py) contains `selected_osm_features`. It returns a `Point` for an OSM node and a `MultiPolygon` for a closed way or polygon relation. Use [`osm_way_chain`](#boundary-lines) for a `LineString`.
 
@@ -10,7 +16,7 @@ Each selection identifies an output `feature_id`, provider `source_feature_id`, 
 
 Select a closed way or a relation tagged `type=multipolygon` or `type=boundary`. The archived extract must contain the ways and nodes that form the outline. Osmium assembles rings, uses their geometry to identify holes, and skips relation label nodes. An inconsistent `inner` role can therefore yield a separate polygon when its ring lies outside the other rings.
 
-## Boundary lines
+### Boundary lines
 
 Use `osm_way_chain` to join individual archived `/api/0.6/way/{id}/full.json` responses. Each file contains one OSM way and its nodes and has its own record in `atlas.source_assets`. Store the explanation in the construction row's `basis` column and list the selected ways in `arguments`.
 
@@ -27,7 +33,7 @@ The typed source list generates the database links to each way file. Checked loc
 
 Use `evidence_source_ids` to cite additional sources that explain the selection.
 
-## Tests
+## Code and tests
 
 [`test_features.py`](test_features.py) covers selected points, closed ways, multipolygons with holes, source identity, invalid geometry, and saving a selected relation with its source link. [`test_ways.py`](test_ways.py) checks chain assembly, direction, and invalid geometry. [`test_way_import.py`](test_way_import.py) checks cache reuse, recipe edits, source links, and preservation of existing geometry on failed imports.
 

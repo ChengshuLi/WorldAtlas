@@ -4,11 +4,9 @@ WorldAtlas builds and publishes versioned maps from raw source data and editable
 
 [Open the live map](https://worldatlas.chengshu-li-web.workers.dev/) · [Read the data strategy](docs/data-strategy.md)
 
-## Map viewer
+## Use
 
-The [map viewer](web/viewer/README.md) renders a published release from two checksum-verified row-run streams. The Cloudflare Worker serves the viewer and streams from the `worldatlas` R2 bucket.
-
-## Pipeline code
+### Pipeline code
 
 The root [`environment.yml`](environment.yml) defines the shared Python environment. It covers source imports, map building and their tests. The root [`pyproject.toml`](pyproject.toml) installs the `worldatlas` package and its three commands. Website dependencies are managed separately in [`package.json`](package.json).
 
@@ -42,7 +40,7 @@ export NEON_DATABASE_URL="$(cat "$HOME/.config/worldatlas/neon-connection")"
 
 Neon records the sources and reasoning for individual geographic decisions. The code guides explain how to produce and use those records.
 
-## Build a map
+### Build a map
 
 Run the [pipeline](src/worldatlas/map_build/README.md) from the repository root.
 
@@ -53,7 +51,7 @@ worldatlas-build src/worldatlas/map_build/config.json \
 
 The pipeline freezes working geographic decisions and exact source records from Neon. The pipeline downloads the raw bytes from R2 and builds the physical grid, then assigns land and water categories. The final grid has 131,072 columns and 54,613 rows. The pipeline guide covers credentials, the GDAL and PROJ versions for exact reproduction, and stage timings.
 
-## Preview and publish
+### Preview and publish
 
 Stage a completed build as a numbered candidate.
 
@@ -70,13 +68,21 @@ worldatlas-release publish v9.0-rc.1
 
 Publishing serves that bundle at the homepage and retires superseded candidates for the same version. The [release guide](src/worldatlas/map_releases/README.md) covers bundle contents and reproduction. Deploy changes to the Worker code or configuration with `npx wrangler deploy`.
 
-## Entity registry
+## How it works
+
+### Map viewer
+
+The [map viewer](web/viewer/README.md) renders a published release from two checksum-verified row-run streams. The Cloudflare Worker serves the viewer and streams from the `worldatlas` R2 bucket.
+
+### Entity registry
 
 The [initial schema](database/schema.sql) defines stable entity IDs and colors, editable names and parent relationships, and the bindings from map category codes to entities. Each build freezes the working records before computation.
 
 Apply the [initial schema](database/schema.sql) only to an empty PostgreSQL database with `pg_jsonschema` available. The working database is already initialized. The [database guide](database/README.md) covers existing-database upgrades and native test setup. Run the [database tests](database/tests) with `python .github/scripts/run_tests.py --suite database`.
 
-## Viewer tools and tests
+## Code and tests
+
+### Viewer tools and tests
 
 Use the Node version in [`.node-version`](.node-version), which CI also reads. From the repository root, install the locked dependencies and run the Node tests.
 
@@ -87,7 +93,7 @@ npm test
 
 The [viewer guide](web/viewer/README.md) covers the browser tests and renderer.
 
-## Continuous integration
+### Continuous integration
 
 [Checks](.github/workflows/ci.yml) runs every fast automated suite on each PR update and on manual runs:
 
