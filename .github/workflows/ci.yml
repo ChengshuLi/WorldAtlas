@@ -67,10 +67,14 @@ jobs:
             python -m coverage combine
             python -m coverage report
           ) & coverage_tests=$!
-          status=0
-          wait "$code_checks" || status=1
-          wait "$coverage_tests" || status=1
-          exit "$status"
+          code_status=0
+          test_status=0
+          wait "$code_checks" || code_status=$?
+          wait "$coverage_tests" || test_status=$?
+          if (( code_status || test_status )); then
+            echo "Python code checks exited with $code_status. Coverage tests exited with $test_status."
+            exit 1
+          fi
   website:
     runs-on: ubuntu-latest
     steps:
