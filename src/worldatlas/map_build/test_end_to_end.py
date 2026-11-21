@@ -295,6 +295,36 @@ class EndToEndTests(unittest.TestCase):
                         resume=True,
                         reuse_from=root / "run",
                     )
+
+                reference = Path(report["final"]["rows"]["path"]).parent
+                compare_cfg = json.loads(cfg.read_bytes())
+                compare_cfg["sources"].update(
+                    reference_rows=pin(reference / "rows.u32le"),
+                    reference_runs=pin(reference / "runs.u32le"),
+                )
+                compare_path = write(raw / "compare.json", compare_cfg)
+                physical_only = Pipeline(
+                    compare_path,
+                    root / "physical-only",
+                    work_dir=root,
+                    selection=selected,
+                    physical_from=root / "reused",
+                )
+                physical_only.close()
+                resumed = Pipeline(
+                    compare_path, root / "physical-only", work_dir=root, resume=True
+                )
+                result = resumed.run()
+                self.assertEqual(result["physical_outputs"], report["physical_outputs"])
+                division = json.loads(
+                    (root / "physical-only/division/report.json").read_text()
+                )
+                self.assertFalse(division["parents"]["0"]["reused"])
+                self.assertFalse(division["parents"]["0"]["land"]["reused"])
+                comparison = root / "physical-only/comparison/report.json"
+                self.assertEqual(result["comparison"], pin(comparison))
+                self.assertEqual(json.loads(comparison.read_bytes())["changed_cells"], 0)
+                self.assertFalse((root / "physical-only/comparison.json").exists())
             finally:
                 with psycopg.connect(url) as db:
                     db.execute(

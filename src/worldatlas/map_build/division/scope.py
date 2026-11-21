@@ -251,6 +251,9 @@ class Scope:
             if self.rule["physical_class"] == "mixed"
             else (self.rule["physical_class"],)
         )
+        if not self.context_rows():
+            self.populations = {kind: np.empty(0, dtype=np.uint32) for kind in kinds}
+            return self.populations
         for kind in kinds:
             components = self.components(kind)
             totals = components.totals()

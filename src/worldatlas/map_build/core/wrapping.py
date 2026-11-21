@@ -27,7 +27,18 @@ def _pairs(x):
 
 
 def wrapped_grid_bounds(feature, width, height, step):
-    """Return a conservative unwrapped grid rectangle and canonical x windows."""
+    """Bound a geographic polygon on the retained grid.
+
+    Args:
+        feature: Polygon or MultiPolygon geometry in longitude and latitude.
+        width: Number of grid columns.
+        height: Number of retained rows from the north.
+        step: Angular cell size in degrees.
+
+    Returns:
+        Unwrapped column and row bounds, followed by canonical column windows.
+        A polygon south of the retained grid has an empty row interval.
+    """
     if (
         type(width) is not int
         or type(height) is not int
@@ -82,9 +93,9 @@ def wrapped_grid_bounds(feature, width, height, step):
         x1 = math.ceil(end / step)
         if x1 - x0 >= width:
             x0, x1 = 0, width
-    y0 = max(0, math.floor((90 - maxlat) / step))
+    y0 = min(height, max(0, math.floor((90 - maxlat) / step)))
     y1 = min(height, math.ceil((90 - minlat) / step))
-    if not 0 < x1 - x0 <= width or not 0 <= y0 < y1 <= height:
-        raise ValueError('empty grid intersection')
+    if not 0 < x1 - x0 <= width or not 0 <= y0 <= y1 <= height:
+        raise ValueError('invalid polygon grid bounds')
     windows = [(x0, x1)] if x1 <= width else [(0, x1 - width), (x0, width)]
     return (x0, x1, y0, y1), tuple(windows)

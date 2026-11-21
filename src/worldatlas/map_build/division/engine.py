@@ -20,7 +20,7 @@ from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.division.connectivity import build_domain
 from worldatlas.map_build.division.shores import ShoreGeometry
 from worldatlas.map_build.division import policies
-from worldatlas.map_build.execution.control import check_cancelled
+from worldatlas.map_build.execution.control import check_cancelled, stage
 from worldatlas.map_build.execution.runtime import pin
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
@@ -363,25 +363,48 @@ class ParentDivision:
             self.input_pins + self.pins(snapshot) + self.pins(self.parent_directory)
         )
 
-        def run(rule):
-            check_cancelled()
-            key = hashlib.sha256(rule["id"].encode()).hexdigest()
-            directory = self.directory / ("rule-" + key)
-            result = self.task(
-                "rule-" + key,
-                execute_rule,
-                (self, rule, snapshot, directory),
-                [directory],
-                inputs=inputs,
-            )
-            return rule["id"], result
-
         workers = self.configuration.get("division_workers", os.cpu_count() or 1)
         if type(workers) is not int or workers < 1:
             raise ValueError("division_workers must be positive")
-        with ThreadPoolExecutor(max_workers=workers) as executor:
+        failure = None
+        failure_lock = threading.Lock()
+        with stage() as cancelled, ThreadPoolExecutor(max_workers=workers) as executor:
+
+            def run(rule):
+                nonlocal failure
+                check_cancelled()
+                key = hashlib.sha256(rule["id"].encode()).hexdigest()
+                directory = self.directory / ("rule-" + key)
+                try:
+                    result = self.task(
+                        "rule-" + key,
+                        execute_rule,
+                        (self, rule, snapshot, directory),
+                        [directory],
+                        inputs=inputs,
+                    )
+                except Exception as error:
+                    with failure_lock:
+                        if failure is None:
+                            failure = error
+                            cancelled.set()
+                    raise
+                return rule["id"], result
+
             futures = [executor.submit(copy_context().run, run, r) for r in rules]
-            return [future.result() for future in futures]
+            try:
+                return [future.result() for future in futures]
+            except BaseException as error:
+                cancelled.set()
+                for future in futures:
+                    future.cancel()
+                if (
+                    isinstance(error, InterruptedError)
+                    and failure is not None
+                    and error is not failure
+                ):
+                    raise failure from None
+                raise
 
     def consolidate(self, name, snapshot, claims):
         if not claims:

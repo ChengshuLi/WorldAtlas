@@ -111,6 +111,9 @@ def component_owners(scope, faces):
 
 def divide_area(scope, boundaries, targets, directory):
     """Split context first; physical/ownership filters affect emitted cells only."""
+    context_rows = scope.context_rows()
+    if not context_rows:
+        return write_layer(directory, scope.grid, ())
     directory = Path(directory)
     directory.mkdir()
     grid = scope.grid
@@ -131,7 +134,7 @@ def divide_area(scope, boundaries, targets, directory):
         cuts,
         labels,
         directory / "faces",
-        rows=scope.context_rows(),
+        rows=context_rows,
     )
     faces = Faces(directory / "faces", owners, grid)
     try:

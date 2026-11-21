@@ -20,6 +20,7 @@ The work directory holds the shared `inputs/` cache. Each new build needs a new 
 | --- | --- |
 | `--divide PARENT_ID` | Select a parent and its required ancestors. Repeat for several parents. By default, divide all parents with rules in the frozen selection. |
 | `--reuse-from PREVIOUS_RUN` | Start a new build using verified physical outputs. The builder can reuse a shorter, aligned northern grid, an unchanged parent division, or an unchanged land calculation after a water-only edit. |
+| `--physical-from PREVIOUS_RUN` | Reuse the verified physical grid and calculate every geographic assignment with the current code. Use this when testing a rule-engine change. |
 | `--resume` | Continue the same output directory with its saved selection, checkpoints, parent choices, comparison and reuse source. Resume accepts the saved options when repeated and rejects different choices. |
 | `--selection INPUT_SELECTION.json` | Rebuild using saved geographic values. For a retained release, first [restore its inputs](../map_releases/README.md#restore-inputs) and use its configuration and captured code. |
 | `--compare-release VERSION_OR_RC` | Compare with an official version or numbered candidate from the release catalog. This option also needs database and R2 access for the comparison. |
@@ -93,14 +94,14 @@ The physical, ownership and final layers use row-run streams. `rows.u32le` gives
 | `configs/`, `physical/` | Generated physical requests and local physical-stage products. The run report points to any reused physical grid. |
 | `division/parent-ID/` | Parent definition, result receipt and any local calculation layers. Reused results can point to an earlier run. |
 | `report.json` | Final file paths, hashes and stage timings. Follow `final.report.path` to the counts by map code. |
-| `comparison.json`, `comparison/` | Optional comparison summary and changed spans. Comparisons use entity ID and physical class when both mappings are available. Bare streams compare numeric codes. Removed southern rows are counted separately. |
+| `comparison/` | Optional comparison summary in `report.json` and exact changed spans. Comparisons use entity ID and physical class when both mappings are available. Bare streams compare numeric codes. Removed southern rows are counted separately. |
 | `checkpoints/`, `logs/`, `failure.json` | Completed receipts, logs and failure details for interrupted runs. |
 
 `timing-events.jsonl` records stage, rule and checkpoint events. The build report summarizes wall time by stage and measures downloads separately. Concurrent work contributes overlapping time once to each stage total. When an interruption loses an endpoint, the report marks that time incomplete and records a lower bound. Time between attempts is excluded.
 
 Each attempt saves its WorldAtlas source and setup files in `attempts/ATTEMPT_ID/source-code.json.gz` and pins the archive in its producer record. Keep the code stable within each attempt. Resume records the code for the new attempt and verifies the saved inputs and completed outputs. [Release staging](../map_releases/README.md#archived-code) includes those snapshots in the release archive.
 
-To stop a build, interrupt it with Ctrl+C. Division workers check for cancellation between processing batches. Completed checkpoints remain available to resume.
+To stop a build, interrupt it with Ctrl+C. A failed rule also requests cancellation for its group. Queued rules skip computation and running workers check for cancellation between batches. Completed checkpoints remain available to resume.
 
 ## Code and tests
 

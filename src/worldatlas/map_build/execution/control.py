@@ -8,10 +8,25 @@ _current = ContextVar('map_build_stage', default=None)
 
 
 @contextmanager
-def stage(cancelled, log=None):
+def stage(cancelled=None, log=None):
+    """Expose the cancellation event to code in the current stage.
+
+    Args:
+        cancelled: Optional event. Reuse the active stage when omitted.
+        log: Optional stream for progress messages.
+
+    Yields:
+        The event used to request cancellation.
+    """
+    active = _current.get()
+    if cancelled is None and log is None and active is not None:
+        yield active[0]
+        return
+    if cancelled is None:
+        cancelled = active[0] if active is not None else threading.Event()
     token = _current.set((cancelled, log, threading.Lock()))
     try:
-        yield
+        yield cancelled
     finally:
         _current.reset(token)
 

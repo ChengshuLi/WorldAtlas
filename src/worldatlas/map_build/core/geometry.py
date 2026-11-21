@@ -45,13 +45,15 @@ class PolygonRasterizer:
         if not (
             0 <= x0 < grid.width
             and 0 < x1 - x0 <= grid.width
-            and 0 <= y0 < y1 <= grid.height
+            and 0 <= y0 <= y1 <= grid.height
         ):
             raise ValueError("invalid rasterization window")
+        mask = np.zeros((y1 - y0, x1 - x0), dtype=bool)
+        if y0 == y1:
+            return bounds, mask
         windows = ((x0, min(x1, grid.width)),)
         if x1 > grid.width:
             windows += ((0, x1 - grid.width),)
-        mask = np.zeros((y1 - y0, x1 - x0), dtype=bool)
         with ogr.ExceptionMgr(), gdal.ExceptionMgr():
             for first, last in windows:
                 raster = gdal.GetDriverByName("MEM").Create(

@@ -3,12 +3,14 @@
 from contextlib import ExitStack
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.areas import assign_area
+from worldatlas.map_build.division.areas import assign_area, divide_area
+from worldatlas.map_build.division.policies import nearest_basin_water
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.land.components import ComponentGrid
@@ -18,6 +20,39 @@ from worldatlas.map_build.water.shared_nearest import crop
 
 
 class ScopeRows(unittest.TestCase):
+    def test_polygon_south_of_retained_grid_has_no_claims(self):
+        grid = Grid(24, 6, 15)
+        geometry = dict(
+            type="Polygon",
+            coordinates=[[[10, -30], [20, -30], [20, -10], [10, -10], [10, -30]]],
+        )
+        with tempfile.TemporaryDirectory() as temp, ExitStack() as stack:
+            root = Path(temp)
+            for name, code in (("physical", 1), ("parent", 1), ("snapshot", 0)):
+                rows = ((y, [(0, grid.width, code)]) for y in range(grid.height))
+                write_layer(root / name, grid, rows if code else ())
+            data = [
+                stack.enter_context(open_grid(root / name, grid))
+                for name in ("physical", "parent", "snapshot")
+            ]
+            rule = dict(
+                id="south",
+                physical_class="water",
+                unit="cell",
+                unassigned_only=False,
+                features=dict(scope_area=[dict(geometry=geometry)]),
+            )
+            scope = Scope(
+                rule, grid, *data, lambda kind: self.fail("no components needed")
+            )
+            self.assertEqual(assign_area(scope, 101, root / "area")["counts"], {})
+            self.assertEqual(divide_area(scope, (), (), root / "divide")["counts"], {})
+            context = SimpleNamespace(parent_physical=data[0])
+            basin = nearest_basin_water(context, scope, root / "basin")
+            self.assertEqual(basin["counts"], {})
+            components = Scope(dict(rule, unit="component"), grid, *data, scope.components)
+            self.assertEqual(assign_area(components, 101, root / "components")["counts"], {})
+
     def test_prepared_wrapped_queries_preserve_ownership_filters_and_context(self):
         grid = Grid(36, 18, 10)
         physical = np.ones((18, 36), dtype=np.uint32)

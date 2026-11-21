@@ -3,8 +3,10 @@
 import copy
 from pathlib import Path
 import tempfile
+import threading
+from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
@@ -17,10 +19,49 @@ from worldatlas.map_build.division.hierarchy import (
     HierarchyDivision,
 )
 from worldatlas.map_build.division.engine import ParentDivision
+from worldatlas.map_build.execution.control import check_cancelled, stage
 from worldatlas.map_build.test_support import selection
 
 
 class HierarchyTests(unittest.TestCase):
+    def test_failed_rule_skips_queued_rules(self):
+        calculate = Mock(side_effect=ValueError("invalid geography"))
+        context = SimpleNamespace(
+            input_pins=[],
+            pins=lambda _: [],
+            parent_directory=None,
+            directory=Path("."),
+            configuration={"division_workers": 1},
+            task=calculate,
+        )
+        rules = [{"id": ident} for ident in ("first", "second", "third")]
+        with self.assertRaisesRegex(ValueError, "invalid geography"):
+            ParentDivision.calculate(context, rules, None)
+        self.assertEqual(calculate.call_count, 1)
+
+    def test_failed_rule_preserves_cause_when_a_peer_stops(self):
+        peer_started = threading.Event()
+        cancelled = threading.Event()
+
+        def calculate(_name, _function, args, _outputs, **kwargs):
+            if args[1]["id"] == "first":
+                peer_started.set()
+                self.assertTrue(cancelled.wait(timeout=5))
+                check_cancelled()
+            self.assertTrue(peer_started.wait(timeout=5))
+            raise ValueError("invalid geography")
+
+        context = SimpleNamespace(
+            input_pins=[],
+            pins=lambda _: [],
+            parent_directory=None,
+            directory=Path("."),
+            configuration={"division_workers": 2},
+            task=calculate,
+        )
+        with stage(cancelled), self.assertRaisesRegex(ValueError, "invalid geography"):
+            ParentDivision.calculate(context, [{"id": "first"}, {"id": "second"}], None)
+
     def test_finished_division_rejects_unassigned_parent_water(self):
         grid = Grid(24, 12, 15)
         geo = selection()["geography"]

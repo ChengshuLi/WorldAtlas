@@ -282,11 +282,18 @@ class Pipeline:
             divide = previous.get("divide")
             compare_release = previous.get("compare_release")
         if physical_from is not None and reuse_from is not None:
-            raise ValueError("choose --reuse-from once")
-        reuse = reuse_from or physical_from
-        if reuse is not None:
-            reuse = str(Path(reuse).resolve())
+            raise ValueError("choose either --physical-from or --reuse-from")
+        reuse = str(Path(reuse_from).resolve()) if reuse_from is not None else None
+        physical_only = (
+            str(Path(physical_from).resolve()) if physical_from is not None else None
+        )
         if previous is not None:
+            if (
+                physical_only is not None
+                and physical_only != previous.get("physical_from")
+            ):
+                raise ValueError("resume uses a different --physical-from run")
+            physical_only = previous.get("physical_from")
             if "reuse_from" in previous:
                 if reuse is not None and reuse != previous["reuse_from"]:
                     raise ValueError("resume uses a different --reuse-from run")
@@ -377,8 +384,9 @@ class Pipeline:
         ):
             raise ValueError("both reference stream pins are required")
         self.collect_source_files()
+        physical_run = physical_only or self.reuse_from
         self.physical_reuse = (
-            physical_reference(self.reuse_from, self.sources) if self.reuse_from else None
+            physical_reference(physical_run, self.sources) if physical_run else None
         )
         if self.physical_reuse is not None:
             self.source_pins.extend(
@@ -411,6 +419,8 @@ class Pipeline:
             self.identity["comparison_inputs"] = comparison_inputs
         if previous is None or "reuse_from" in previous:
             self.identity["reuse_from"] = reuse
+        if physical_only is not None:
+            self.identity["physical_from"] = physical_only
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
         if not resume:
@@ -1043,7 +1053,7 @@ class Pipeline:
                 ],
                 candidate_bindings=self.selection["geography"]["category_bindings"],
             )
-        result = self.checkpoints.run_function(
+        self.checkpoints.run_function(
             "compare",
             "verification",
             compare,
@@ -1059,10 +1069,7 @@ class Pipeline:
             outputs=[self.out / "comparison"],
             kwargs=bindings,
         )
-        report = self.out / "comparison.json"
-        if not report.exists():
-            write(report, result)
-        return pin(report)
+        return pin(self.out / "comparison" / "report.json")
 
     def run(self):
         physical = None
@@ -1189,12 +1196,16 @@ def main():
         action="append",
         help="divide this parent and its necessary ancestors; repeatable",
     )
-    p.add_argument(
+    reuse = p.add_mutually_exclusive_group()
+    reuse.add_argument(
         "--reuse-from",
-        "--physical-from",
-        dest="reuse_from",
         type=Path,
-        help="reuse verified physical outputs from a previous run with identical physical inputs",
+        help="reuse verified physical outputs and compatible geographic calculations",
+    )
+    reuse.add_argument(
+        "--physical-from",
+        type=Path,
+        help="reuse verified physical outputs and recalculate geographic assignments",
     )
     a = p.parse_args()
     pipeline = Pipeline(
@@ -1204,6 +1215,7 @@ def main():
         work_dir=a.work_dir,
         compare_release=a.compare_release,
         reuse_from=a.reuse_from,
+        physical_from=a.physical_from,
         divide=a.divide,
         selection=a.selection,
     )
