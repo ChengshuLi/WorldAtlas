@@ -88,6 +88,8 @@ def nearest(scope, reference_cells, unit, distance_limit=None, *, directory):
         return component_queries(scope, reference_cells, directory)
     grid = scope.grid
     pairs = reference_cells.pairs
+    if not pairs and distance_limit is not None:
+        return write_layer(directory, grid, ())
     if len(pairs) == 1 and distance_limit is None:
         return assign_area(scope, pairs[0][0], directory)
 

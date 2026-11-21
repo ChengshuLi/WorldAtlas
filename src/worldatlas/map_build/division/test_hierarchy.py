@@ -62,6 +62,55 @@ class HierarchyTests(unittest.TestCase):
         with stage(cancelled), self.assertRaisesRegex(ValueError, "invalid geography"):
             ParentDivision.calculate(context, [{"id": "first"}, {"id": "second"}], None)
 
+    def test_coastal_rule_leaves_water_for_later_rules_when_no_shore_can_own_it(self):
+        grid = Grid(24, 12, 15)
+        geography = selection()["geography"]
+        geography["entities"] += [
+            dict(id=101, parent_id=0, physical_class="land"),
+            dict(id=202, parent_id=0, physical_class="water"),
+        ]
+        geography["category_bindings"] = [
+            dict(code=1, entity_id=101, physical_class="land"),
+            dict(code=2, entity_id=202, physical_class="water"),
+        ]
+        geography["rules"] = [
+            dict(
+                id=ident, parent_id=0, operation=operation,
+                physical_class=kind, unit="cell", unassigned_only=unassigned,
+            )
+            for ident, operation, kind, unassigned in (
+                ("land", "assign_area", "land", False),
+                ("coastal", "nearest_coastal_water", "water", False),
+                ("water", "assign_area", "water", True),
+            )
+        ]
+        geography["rule_targets"] = [
+            dict(rule_id=ident, entity_id=owner, label_point_id=None)
+            for ident, owner in (("land", 101), ("water", 202))
+        ]
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            write_layer(
+                root / "physical", grid,
+                ((y, [(0, 12, 17), (12, 24, 1)]) for y in range(grid.height)),
+            )
+            configuration = {"coastal_band_metres": 22224}
+            built = HierarchyDivision(
+                geography, grid, root / "physical", root / "division", configuration,
+            ).run()
+            with open_grid(built["directory"], grid) as owners:
+                ends, ids = row(owners, 0, grid.width)
+                self.assertEqual(ends.tolist(), [12, 24])
+                self.assertEqual(ids.tolist(), [101, 202])
+
+            geography["rules"][1]["operation"] = "nearest_water"
+            geography["rules"].pop()
+            geography["rule_targets"].pop()
+            with self.assertRaisesRegex(ValueError, "no eligible reference shores"):
+                HierarchyDivision(
+                    geography, grid, root / "physical", root / "unbounded", configuration,
+                ).run()
+
     def test_finished_division_rejects_unassigned_parent_water(self):
         grid = Grid(24, 12, 15)
         geo = selection()["geography"]

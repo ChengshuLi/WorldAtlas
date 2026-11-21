@@ -13,7 +13,7 @@ Run the [map builder](../README.md#use). It calls this engine for each selected 
 | `assign_area` | Give eligible scope cells or components to one child. |
 | `divide_area` | Split along the imported `boundary_line` features; imported label points identify child owners. |
 | `nearest_land` | Assign each remaining whole component by its minimum WGS84 distance to selected reference shores. |
-| `nearest_coastal_water` | Assign water within the configured coastal distance to its nearest assigned physical shore. |
+| `nearest_coastal_water` | Assign water within the configured coastal distance to its nearest eligible physical shore. With no eligible shores, leave all water available to subsequent rules. |
 | `nearest_basin_water` | Discover bordering owners from the full basin, then assign its water by their nearest shores. |
 | `nearest_water` | Assign eligible water using all assigned physical shores. |
 
