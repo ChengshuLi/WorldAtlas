@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "worldatlas"
+version = "0.1.0"
+description = "Construct geographic records and versioned maps from cataloged sources"
+requires-python = ">=3.13"
+
+[project.optional-dependencies]
+checks = ["coverage==7.17.4", "ruff==0.17.6"]
+
+[project.scripts]
+worldatlas-import = "worldatlas.source_imports.run_import:main"
+worldatlas-build = "worldatlas.map_build.build:main"
+worldatlas-release = "worldatlas.map_releases.manage_release:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["worldatlas*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"*" = ["*.md"]
+"worldatlas.map_build" = ["config.json"]
+"worldatlas.map_build.inputs" = ["geography.sql"]
+
+# Ship the same setup definitions used from a checkout; no duplicate copies to maintain.
+[tool.setuptools.data-files]
+"share/worldatlas" = ["environment.yml", "pyproject.toml", "README.md"]
+
+"share/worldatlas/database" = ["database/schema.sql"]
+"share/worldatlas/database/schema" = ["database/schema/*.sql"]
+
+[tool.ruff]
+extend-exclude = ["test_*.py", "**/tests/**"]
+
+[tool.ruff.format]
+quote-style = "preserve"
+
+[tool.ruff.lint]
+preview = true
+select = [
+    "ANN001", "ANN002", "ANN003", "ANN201", "ANN202", "ANN204", "ANN205", "ANN206",
+    "D100", "D101", "D102", "D103", "D105", "D106", "D107", "D205", "D400", "D417",
+    "DOC201", "DOC402", "F401", "F821", "I",
+]
+
+[tool.pyright]
+include = ["src/worldatlas", ".github/scripts/run_tests.py"]
+exclude = ["**/test_*.py", "**/tests/**"]
+pythonVersion = "3.13"
+
+[tool.coverage.run]
+branch = true
+parallel = true
+patch = ["subprocess"]
+source = ["worldatlas"]
+omit = ["*/test_*.py", "*/tests/*"]
+
+[tool.coverage.report]
+fail_under = 100
+precision = 2
+show_missing = true
+skip_covered = true

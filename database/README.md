@@ -1,0 +1,63 @@
+# Database
+
+Neon stores editable geography and construction settings, raw-file identities, and release pointers. Each build freezes its selected records and coordinates before computation. The website reads published files in R2.
+
+## Use
+
+Apply [`schema.sql`](schema.sql) with `psql` to a new PostgreSQL database that has `pg_jsonschema` available. Use the editing workflow below for the existing working database.
+
+### Editing and replay
+
+Raw identity, storage location, size, checksum and capture time are immutable; correctable descriptive metadata remains editable. Changed source bytes require a new source ID. Construction settings, geometry and geographic rules are editable. Released input archives retain their exact earlier values and code.
+
+`construction_records.method` selects the importer, `basis` stores the required explanation, and `arguments` stores the method's named inputs as JSONB. Each construction must cite at least one raw source through those arguments. The database maintains `construction_sources` from them. The importer registry and typed Python signatures define the argument and source-reference checks. Regenerate those checks after changing a constructor:
+
+```bash
+python -m worldatlas.source_imports.shared.contracts database/schema/construction_contracts.sql
+```
+
+For an existing database, back up its data, rehearse the transition locally, then apply the tested change in one transaction. Keep one-off transition scripts with the maintenance backup. Keep the authoritative schema in the files above.
+
+## How it works
+
+### Schema
+
+[`schema.sql`](schema.sql) creates an empty database in dependency order:
+
+| File | Tables and responsibilities |
+| --- | --- |
+| [`construction_contracts.sql`](schema/construction_contracts.sql) | Generated nonblank check, construction argument validation, and source-reference extraction. |
+| [`sources.sql`](schema/sources.sql) | `source_assets`: one immutable raw-file capture; `construction_records`: typed editable import settings; `construction_sources`: generated raw-source links. |
+| [`source_features.sql`](schema/source_features.sql) | Imported geometry and its producing construction. |
+| [`geographic_entities.sql`](schema/geographic_entities.sql) | Hierarchy levels, geographic entities, and entity/physical-class map codes. |
+| [`geographic_rules.sql`](schema/geographic_rules.sql) | Parent-division rules and their feature, child-target and supporting-source links. |
+| [`releases.sql`](schema/releases.sql) | Immutable R2 bundle identity and publication-state flags. |
+
+These twelve tables have distinct purposes. A feature stores geometry; its construction describes how raw sources produce it. A rule explains how geometry assigns parent cells to children. Category bindings encode the resulting owner and physical class; display colors do not determine ownership.
+
+Required nonblank text must contain at least one character outside Unicode's `White_Space` set, which includes tabs, nonbreaking spaces and ideographic spaces. Ordinary text columns and typed construction arguments use the same pattern from [`shared/contracts.py`](../src/worldatlas/source_imports/shared/contracts.py).
+
+`source_features` has three required columns: `id`, `geometry`, `construction_id`. Geometry is GeoJSON using WGS84 longitude first, latitude second, in degrees. Database checks validate types, nesting, coordinate ranges and polygon closure. Importers also check geometric validity. Provider feature selectors remain in construction settings rather than being copied into output rows.
+
+`geographic_levels` describes the hierarchy; `geographic_entities` links each entity to its level and parent, records its physical eligibility, and stores its color. World has ID zero. Deferred constraints validate the final state of a transaction, including edits involving a parent and its children. Independent families do not require a database-wide entity lock.
+
+Edit the entity to change the land or water classes it supports. The database maintains one map code for each supported class, preserves the codes for classes that still apply, and removes an entity's codes when it is deleted. Release bundles keep the mappings used by their grids.
+
+`geographic_rules` selects one of six operations. `geographic_rule_features` provides source areas, component-identifying points, boundaries or distance references. Optional `connected_to` links retain cells connected to any of the linked points. `geographic_rule_targets` identifies direct-child owners and, for divisions, their label points. Each rule stores its rationale. `geographic_rule_sources` links supporting raw sources and records the cited section and interpretation for each one. Ordinary foreign keys and deferred checks reject missing/forbidden roles, incorrect geometry types and invalid targets. See the [division guide](../src/worldatlas/map_build/division/README.md).
+
+Add a rule citation when it helps a reviewer understand a current decision beyond what the feature's construction already documents. Keep the decision in `rationale` and use each citation's `interpretation` to state what that source establishes. Review the citations alongside the rule when changing its scope.
+
+`map_releases` records a bundle's R2 bucket and pins `manifest.json` by SHA-256. The folder path comes from the bundle ID, and the manifest pins each release file. Each version can have one permanent official bundle, and at most one official bundle is current. Publication changes flags and the fixed R2 homepage separately from map calculation. See [release commands](../src/worldatlas/map_releases/README.md).
+
+## Code and tests
+
+### Tests
+
+Put PostgreSQL 17 or 18 tools on your path. Install `pg_jsonschema` once for that PostgreSQL installation. On macOS, the install command builds the native extension using the Xcode command-line tools and Rust's `cargo`. On Debian and Ubuntu, it extracts the matching upstream package using `dpkg-deb`. You can also pass the path to a different installation's `pg_config`. If that installation already has a different `pg_jsonschema` version, use the project PostgreSQL environment.
+
+```bash
+bash database/tests/install_pg_jsonschema.sh
+python .github/scripts/run_tests.py --suite database
+```
+
+The runner starts a disposable native PostgreSQL server and gives each database-using suite its own database. SQL checks cover raw immutability, generated construction contracts, geometry, hierarchy, geographic rule relationships and release-state constraints. Python integration tests cover atomic imports, consistent snapshots, concurrent edits, run reuse and release file verification. Tests never use the working Neon database.
