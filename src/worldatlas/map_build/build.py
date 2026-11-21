@@ -1296,7 +1296,6 @@ class Pipeline:
             write_json(self.out / "report.json", result)
             return result
         except BaseException:
-            self.cancel()
             report = self.out / "physical/report.json"
             try:
                 physical_report = self.physical_reuse or (
