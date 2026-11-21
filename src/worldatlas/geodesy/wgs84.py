@@ -49,11 +49,7 @@ def geodesic_distances(lon1, lat1, lon2, lat2):
         ValueError: The input shapes cannot be broadcast together.
     """
     lon1, lat1, lon2, lat2 = np.broadcast_arrays(lon1, lat1, lon2, lat2)
-    if lon1.size == 1:
-        # Pass scalar coordinates to pyproj, then keep the caller's array shape.
-        distance = _GEOD.inv(lon1.item(), lat1.item(), lon2.item(), lat2.item())[2]
-        return np.asarray(distance, dtype=np.float64).reshape(lon1.shape)
-    return _GEOD.inv(lon1, lat1, lon2, lat2)[2]
+    return np.asarray(_GEOD.inv(lon1, lat1, lon2, lat2)[2], dtype=np.float64)
 
 
 def geodesic(first, last, max_step_m):
