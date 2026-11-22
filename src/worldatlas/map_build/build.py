@@ -255,6 +255,41 @@ def physical_reference(run: Path | str, sources: dict[str, Path]) -> dict[str, A
     }
 
 
+def _source_settings(config: dict[str, Any]) -> dict[str, Any]:
+    """Check which physical inputs the build configuration supplies.
+
+    Args:
+        config: Parsed build configuration.
+
+    Returns:
+        Source settings with inline coastline and inland-water inputs.
+
+    Raises:
+        ValueError: The source settings have missing or invalid entries.
+    """
+    sources = config.get("sources")
+    if not isinstance(sources, dict):
+        raise ValueError("sources must be a JSON object")
+    required_sources = {"land_config", "inland_water"}
+    allowed_sources = required_sources | {"reference_rows", "reference_runs"}
+    missing = required_sources.difference(sources)
+    if missing:
+        raise ValueError(f"sources is missing {', '.join(sorted(missing))}")
+    unexpected = set(sources).difference(allowed_sources)
+    if unexpected:
+        raise ValueError(f"sources has unexpected keys {', '.join(sorted(unexpected))}")
+    coastline, water = sources["land_config"], sources["inland_water"]
+    if not isinstance(coastline, dict) or not isinstance(coastline.get("land"), list):
+        raise ValueError("land_config must provide its land datasets inline")
+    if (
+        not isinstance(water, dict)
+        or not isinstance(water.get("rasterization"), dict)
+        or not isinstance(water.get("files"), list)
+    ):
+        raise ValueError("inland_water must provide rasterization and files inline")
+    return sources
+
+
 class Pipeline:
     """Build a map from pinned raw files and saved geographic rules.
 
@@ -302,30 +337,60 @@ class Pipeline:
         if self.cfg.get("schema") != "worldatlas-end-to-end-pipeline-v3":
             raise ValueError("unsupported end-to-end configuration")
         self.grid = Grid(**self.cfg["grid"])
-        sources = self.cfg.get("sources")
-        if not isinstance(sources, dict):
-            raise ValueError("sources must be a JSON object")
-        required_sources = {"land_config", "inland_water"}
-        allowed_sources = required_sources | {"reference_rows", "reference_runs"}
-        missing = required_sources.difference(sources)
-        if missing:
-            raise ValueError(f"sources is missing {', '.join(sorted(missing))}")
-        unexpected = set(sources).difference(allowed_sources)
-        if unexpected:
-            raise ValueError(
-                f"sources has unexpected keys {', '.join(sorted(unexpected))}"
+        sources = _source_settings(self.cfg)
+
+        self.resume = resume
+        self._prepare_workspace(output, work_dir)
+        previous, compare_release, reuse = self._load_run_options(
+            divide, compare_release, reuse_from, recompute_division
+        )
+        validate_runtime()
+        self.runtime = runtime_identity()
+
+        self.source_pins = []
+        self.input_cache = {}
+        self.acquisition_intervals = []
+        self.selection = self._load_selection(sources, selection)
+        self._prepare_source_files(sources)
+        comparison_inputs = self._prepare_comparison(compare_release, previous)
+        self.collect_source_files()
+        self.physical_reuse = (
+            physical_reference(self.reuse_from, self.sources)
+            if self.reuse_from is not None
+            else None
+        )
+        if self.physical_reuse is not None:
+            self.source_pins.extend(
+                p for p in self.physical_reuse["pins"] if p not in self.source_pins
             )
-        coastline, water = sources["land_config"], sources["inland_water"]
-        if not isinstance(coastline, dict) or not isinstance(
-            coastline.get("land"), list
-        ):
-            raise ValueError("land_config must provide its land datasets inline")
-        if (
-            not isinstance(water, dict)
-            or not isinstance(water.get("rasterization"), dict)
-            or not isinstance(water.get("files"), list)
-        ):
-            raise ValueError("inland_water must provide rasterization and files inline")
+        self._prepare_run_identity(reuse, compare_release, comparison_inputs)
+
+        if not resume:
+            self.out.mkdir(mode=0o700)
+            write_json(self.out / "input-selection.json", self.selection)
+        self.run_lock = RunLock(self.out / "run.lock")
+        try:
+            self._start_attempt(previous)
+            self._record_setup_timing(setup_started, setup_utc)
+        except BaseException:
+            if hasattr(self, "timing"):
+                self.timing.close()
+            self.run_lock.close()
+            raise
+
+    def _prepare_workspace(
+        self, output: Path | str, work_dir: Path | str | None
+    ) -> None:
+        """Resolve the workspace and require a usable run directory within it.
+
+        Args:
+            output: Run directory supplied by the caller.
+            work_dir: Explicit workspace to create if needed. Otherwise use
+                the directory named in the build configuration.
+
+        Raises:
+            ValueError: The workspace or run directory is invalid for this mode.
+        """
         if work_dir is None and "input_root" not in self.cfg:
             raise ValueError("choose a local input/run directory with --work-dir")
         root = Path(work_dir) if work_dir is not None else Path(self.cfg["input_root"])
@@ -339,7 +404,7 @@ class Pipeline:
         self.out = Path(output).resolve()
         if (
             not self.root.is_dir()
-            or (self.out.exists() != resume)
+            or (self.out.exists() != self.resume)
             or not self.out.parent.is_dir()
             or not self.out.is_relative_to(self.root)
             or self.config_path.is_relative_to(self.out)
@@ -347,12 +412,35 @@ class Pipeline:
             raise ValueError(
                 "new output inside input_root, outside its input files, required"
             )
+
+    def _load_run_options(
+        self,
+        divide: list[int] | None,
+        compare_release: str | None,
+        reuse_from: Path | str | None,
+        recompute_division: bool,
+    ) -> tuple[dict[str, Any] | None, str | None, str | None]:
+        """Apply the requested options or restore them from an interrupted run.
+
+        Args:
+            divide: Parent entity IDs to divide, or None for the default.
+            compare_release: Release name to compare against, if supplied.
+            reuse_from: Earlier run to reuse, if supplied.
+            recompute_division: Whether to reuse only the physical grid.
+
+        Returns:
+            Previous run identity, comparison release name, and reuse directory
+            as text. Each is None when absent.
+
+        Raises:
+            ValueError: The checkpoint is missing or the options are incompatible.
+        """
         identity_path = self.out / "run-identity.json"
-        if resume and not identity_path.is_file():
+        if self.resume and not identity_path.is_file():
             raise ValueError(
                 "run has no supported checkpoint identity; preserve it and start a fresh run"
             )
-        previous = read_json(identity_path) if resume else None
+        previous = read_json(identity_path) if self.resume else None
         reuse = str(Path(reuse_from).resolve()) if reuse_from is not None else None
         if previous is not None:
             if divide is not None and divide != previous.get("divide"):
@@ -381,33 +469,52 @@ class Pipeline:
             raise ValueError("--recompute-division requires --reuse-from")
         self.reuse_from = Path(reuse) if reuse is not None else None
         self.recompute_division = recompute_division
-        validate_runtime()
-        self.runtime = runtime_identity()
-        self.resume = resume
         self.requested_parents = divide
-        self.source_pins = []
-        self.input_cache = {}
-        self.acquisition_intervals = []
+        return previous, compare_release, reuse
+
+    def _load_selection(
+        self, sources: dict[str, Any], selection: Path | str | None
+    ) -> dict[str, Any]:
+        """Load the geographic records that this run will use.
+
+        Args:
+            sources: Physical inputs that may refer to cataloged raw files.
+            selection: Caller-supplied file with already saved geographic records.
+
+        Returns:
+            Saved records from the run, the supplied file, or the working database.
+
+        Raises:
+            ValueError: A supplied selection differs from the saved run, or no
+                database connection is configured for a new selection.
+        """
         selected_path = self.out / "input-selection.json"
-        if resume:
-            self.selection = read_saved(selected_path)
+        if self.resume:
+            saved = read_saved(selected_path)
             if selection is not None and canonical_bytes(
                 read_saved(selection)
-            ) != canonical_bytes(self.selection):
+            ) != canonical_bytes(saved):
                 raise ValueError("resume uses a different saved geographic selection")
-        elif selection is not None:
-            self.selection = read_saved(selection)
-        else:
-            connection = os.environ.get("NEON_DATABASE_URL")
-            if not connection:
-                raise ValueError(
-                    "set NEON_DATABASE_URL to freeze working geography, or supply --selection"
-                )
-            with psycopg.connect(connection, connect_timeout=15) as database:
-                references = {key[0] for key in catalog_keys(sources)}
-                self.selection = read_selection(
-                    database, raw_sources=references, parents=divide
-                )
+            return saved
+        if selection is not None:
+            return read_saved(selection)
+        connection = os.environ.get("NEON_DATABASE_URL")
+        if not connection:
+            raise ValueError(
+                "set NEON_DATABASE_URL to freeze working geography, or supply --selection"
+            )
+        with psycopg.connect(connection, connect_timeout=15) as database:
+            references = {key[0] for key in catalog_keys(sources)}
+            return read_selection(
+                database, raw_sources=references, parents=self.requested_parents
+            )
+
+    def _prepare_source_files(self, sources: dict[str, Any]) -> None:
+        """Resolve the physical inputs and any local reference files.
+
+        Args:
+            sources: Validated source settings from the build configuration.
+        """
         resolved = self.resolve_raw_catalog(sources)
         coastline = resolved.pop("land_config")
         water = resolved.pop("inland_water")
@@ -425,6 +532,22 @@ class Pipeline:
                 self.sources[name] = self.cloud_file(spec)
             else:
                 self.sources[name] = cast(Path, self.resolve_pins(spec))
+
+    def _prepare_comparison(
+        self, compare_release: str | None, previous: dict[str, Any] | None
+    ) -> dict[str, Any] | None:
+        """Prepare the pinned files for a comparison with a release.
+
+        Args:
+            compare_release: Release name, if the caller requested one.
+            previous: Saved run identity on resume.
+
+        Returns:
+            File pins keyed by input name, or None without a comparison release.
+
+        Raises:
+            ValueError: Comparison inputs are incomplete or use conflicting options.
+        """
         comparison_inputs = None
         if compare_release is not None:
             if {"reference_rows", "reference_runs"} & self.sources.keys():
@@ -448,20 +571,23 @@ class Pipeline:
                     name: by_path[str(files[name])] for name in sorted(files)
                 }
                 self.source_pins[start:] = list(comparison_inputs.values())
-        if bool("reference_rows" in self.sources) != bool(
-            "reference_runs" in self.sources
-        ):
+        if ("reference_rows" in self.sources) != ("reference_runs" in self.sources):
             raise ValueError("both reference stream pins are required")
-        self.collect_source_files()
-        self.physical_reuse = (
-            physical_reference(self.reuse_from, self.sources)
-            if self.reuse_from is not None
-            else None
-        )
-        if self.physical_reuse is not None:
-            self.source_pins.extend(
-                p for p in self.physical_reuse["pins"] if p not in self.source_pins
-            )
+        return comparison_inputs
+
+    def _prepare_run_identity(
+        self,
+        reuse: str | None,
+        compare_release: str | None,
+        comparison_inputs: dict[str, Any] | None,
+    ) -> None:
+        """Collect the inputs, code and options to save for the run.
+
+        Args:
+            reuse: Path of the reused run as recorded in its saved options.
+            compare_release: Release name used for comparison, if supplied.
+            comparison_inputs: Pinned comparison files keyed by input name.
+        """
         self.code = code_identity(PACKAGE_ROOT)
         self.repository = repository_identity(PACKAGE_ROOT)
         self.identity = {
@@ -473,9 +599,9 @@ class Pipeline:
             "scripts_root": str(PACKAGE_ROOT),
             "output": str(self.out),
             "runtime": self.runtime,
-            "divide": divide,
+            "divide": self.requested_parents,
             "reuse_from": reuse,
-            "recompute_division": recompute_division,
+            "recompute_division": self.recompute_division,
             "runtime_paths": {
                 key: os.environ.get(key)
                 for key in ("PROJ_DATA", "PROJ_LIB", "PROJ_NETWORK")
@@ -490,112 +616,120 @@ class Pipeline:
             self.identity["comparison_inputs"] = comparison_inputs
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
-        if not resume:
-            self.out.mkdir(mode=0o700)
-            write_json(selected_path, self.selection)
-        self.run_lock = RunLock(self.out / "run.lock")
-        try:
-            if resume:
-                provenance = {
-                    "code",
-                    "repository",
-                    "runtime",
-                    "runtime_paths",
-                    "scripts_root",
-                }
-                comparable_identity = lambda value: {
-                    k: v for k, v in value.items() if k not in provenance
-                }
-                if comparable_identity(previous) != comparable_identity(self.identity):
-                    raise ValueError(
-                        "resume request, input selection or output identity changed"
-                    )
-            else:
-                write_json(identity_path, self.identity)
-            attempts = self.out / "attempts"
-            attempts.mkdir(mode=0o700, exist_ok=resume)
-            self.attempt = uuid.uuid4().hex
-            self.attempt_dir = attempts / self.attempt
-            self.attempt_dir.mkdir()
-            source_archive = self.attempt_dir / "source-code.json.gz"
-            write_source(source_archive, capture_source(PACKAGE_ROOT))
-            write_json(
-                self.attempt_dir / "producer.json",
-                {
-                    "code": self.code,
-                    "repository": self.repository,
-                    "runtime": self.runtime,
-                    "scripts_root": str(PACKAGE_ROOT),
-                    "source_archive": pin_file(source_archive),
-                },
-            )
-            self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
-            self.checkpoints.verify_all()
-            for marker in (self.out / "attempts").glob("*/setup-timing.json"):
-                verify_anchor(read_json(marker), self.out / "timing-events.jsonl")
-        except BaseException:
-            self.run_lock.close()
-            raise
 
-        try:
-            self.timing = Timing(
-                self.out / "timing-events.jsonl",
-                resume=resume,
-                attempt=self.attempt,
-                heartbeat_seconds=1.0,
+    def _start_attempt(self, previous: dict[str, Any] | None) -> None:
+        """Verify the run identity and save the code for this attempt.
+
+        Args:
+            previous: Saved run identity on resume.
+
+        Raises:
+            ValueError: The saved identity, checkpoints or timing records changed.
+        """
+        if self.resume:
+            saved = cast(dict[str, Any], previous).copy()
+            current = self.identity.copy()
+            # A new attempt can use different code and installed libraries.
+            for key in (
+                "code",
+                "repository",
+                "runtime",
+                "runtime_paths",
+                "scripts_root",
+            ):
+                saved.pop(key, None)
+                current.pop(key, None)
+            if saved != current:
+                raise ValueError(
+                    "resume request, input selection or output identity changed"
+                )
+        else:
+            write_json(self.out / "run-identity.json", self.identity)
+        attempts = self.out / "attempts"
+        attempts.mkdir(mode=0o700, exist_ok=self.resume)
+        self.attempt = uuid.uuid4().hex
+        self.attempt_dir = attempts / self.attempt
+        self.attempt_dir.mkdir()
+        source_archive = self.attempt_dir / "source-code.json.gz"
+        write_source(source_archive, capture_source(PACKAGE_ROOT))
+        write_json(
+            self.attempt_dir / "producer.json",
+            {
+                "code": self.code,
+                "repository": self.repository,
+                "runtime": self.runtime,
+                "scripts_root": str(PACKAGE_ROOT),
+                "source_archive": pin_file(source_archive),
+            },
+        )
+        self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
+        self.checkpoints.verify_all()
+        for marker in (self.out / "attempts").glob("*/setup-timing.json"):
+            verify_anchor(read_json(marker), self.out / "timing-events.jsonl")
+
+    def _record_setup_timing(self, setup_started: float, setup_utc: str) -> None:
+        """Open the timing log and record the completed setup.
+
+        Args:
+            setup_started: Setup start time from the monotonic clock, in seconds.
+            setup_utc: Setup start time as an ISO 8601 UTC string.
+
+        Raises:
+            ValueError: The saved build configuration changed.
+        """
+        self.timing = Timing(
+            self.out / "timing-events.jsonl",
+            resume=self.resume,
+            attempt=self.attempt,
+            heartbeat_seconds=1.0,
+        )
+        self.cancelled = threading.Event()
+        saved_config = self.out / "build-config.json"
+        if not self.resume:
+            write_json(saved_config, self.cfg)
+        elif saved_config.read_bytes() != json_bytes(self.cfg):
+            raise ValueError("saved build configuration changed")
+        self.checkpoints.preserve("failure", [self.out / "failure.json"])
+        cursor = setup_started
+        for start, end in [*self.acquisition_intervals, (time.monotonic(), None)]:
+            token = uuid.uuid4().hex
+            self.timing.event(
+                {
+                    "event": "start",
+                    "token": token,
+                    "id": "setup/source-validation",
+                    "group": "setup",
+                    "monotonic_seconds": cursor,
+                    "utc": setup_utc,
+                }
             )
-            self.cancelled = threading.Event()
-            saved_config = self.out / "build-config.json"
-            if not resume:
-                write_json(saved_config, self.cfg)
-            elif saved_config.read_bytes() != json_bytes(self.cfg):
-                raise ValueError("saved build configuration changed")
-            self.checkpoints.preserve("failure", [self.out / "failure.json"])
-            cursor = setup_started
-            for start, end in [*self.acquisition_intervals, (time.monotonic(), None)]:
-                token = uuid.uuid4().hex
-                self.timing.event(
-                    {
-                        "event": "start",
-                        "token": token,
-                        "id": "setup/source-validation",
-                        "group": "setup",
-                        "monotonic_seconds": cursor,
-                        "utc": setup_utc,
-                    }
-                )
-                self.timing.event(
-                    {
-                        "event": "complete",
-                        "token": token,
-                        "id": "setup/source-validation",
-                        "group": "setup",
-                        "start_monotonic_seconds": cursor,
-                        "monotonic_seconds": start,
-                    }
-                )
-                cursor = end
-            if resume:
-                for previous in (self.out / "attempts").iterdir():
-                    if (
-                        previous != self.attempt_dir
-                        and not (previous / "setup-timing.json").exists()
-                    ):
-                        self.timing.event(
-                            {
-                                "event": "unmeasured-initialization",
-                                "attempt": previous.name,
-                                "id": "setup/interrupted-initialization",
-                                "group": "setup",
-                            }
-                        )
-            self.timing.mark_complete("setup")
-            write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
-        except BaseException:
-            if hasattr(self, "timing"):
-                self.timing.close()
-            self.run_lock.close()
-            raise
+            self.timing.event(
+                {
+                    "event": "complete",
+                    "token": token,
+                    "id": "setup/source-validation",
+                    "group": "setup",
+                    "start_monotonic_seconds": cursor,
+                    "monotonic_seconds": start,
+                }
+            )
+            cursor = end
+        if self.resume:
+            for earlier_attempt in (self.out / "attempts").iterdir():
+                if (
+                    earlier_attempt != self.attempt_dir
+                    and not (earlier_attempt / "setup-timing.json").exists()
+                ):
+                    self.timing.event(
+                        {
+                            "event": "unmeasured-initialization",
+                            "attempt": earlier_attempt.name,
+                            "id": "setup/interrupted-initialization",
+                            "group": "setup",
+                        }
+                    )
+        self.timing.mark_complete("setup")
+        write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
 
     def resolve_raw_catalog(self, selections: dict[str, Any]) -> dict[str, Any]:
         """Expand raw source selectors using the frozen catalog.
