@@ -326,8 +326,11 @@ class Pipeline:
         )
         self.runtime = runtime_identity()
 
+        # Save input paths and hashes so the builder can detect changes.
         self.source_pins = []
+        # Reuse verified cloud files within this run without hashing them again.
         self.input_cache = {}
+        # Track download start and end times separately from the rest of setup.
         self.acquisition_intervals = []
         self.selection = self._load_selection(sources, selection)
         self._prepare_source_files(sources)
