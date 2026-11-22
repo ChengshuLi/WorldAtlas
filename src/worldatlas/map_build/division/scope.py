@@ -1,7 +1,6 @@
 """Resolve geographic selectors independently of ownership and distance policy."""
 
 from collections.abc import Callable, Iterator, Sequence
-from typing import Any
 
 import numpy as np
 from shapely import union_all
@@ -11,6 +10,7 @@ from worldatlas.map_build.core.geometry import PolygonRasterizer
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
+from worldatlas.map_build.division.contracts import CompiledRule, point_coordinates
 from worldatlas.map_build.division.intervals import overlay, prepare
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.land.components import ComponentGrid
@@ -90,7 +90,7 @@ class Scope:
 
     def __init__(
         self,
-        rule: dict[str, Any],
+        rule: CompiledRule,
         grid: Grid,
         physical: tuple[np.ndarray, np.ndarray],
         parent: tuple[np.ndarray, np.ndarray],
@@ -126,7 +126,7 @@ class Scope:
         self.restricted = bool(
             inputs.get("scope_area") or inputs.get("scope_component")
         )
-        areas = [shape(f["geometry"]) for f in inputs.get("scope_area", ())]
+        areas = [shape(dict(f["geometry"])) for f in inputs.get("scope_area", ())]
         self.geometry = mapping(union_all(areas)) if areas else None
         self.bounds = (
             wrapped_grid_bounds(self.geometry, grid.width, grid.height, grid.step)[0]
@@ -148,7 +148,7 @@ class Scope:
         self._context_rows: tuple[int, int] | None = None
         self._query_rows: tuple[int, int] | None = None
         for point in inputs.get("scope_component", ()):
-            lon, lat = point["geometry"]["coordinates"]
+            lon, lat = point_coordinates(point)
             cell = grid.cell_at(lon, lat)
             if cell is None:
                 raise ValueError("scope component point is outside the grid")
@@ -433,7 +433,7 @@ class Scope:
         if self.connected is None:
             roots = set()
             for feature in references:
-                lon, lat = feature["geometry"]["coordinates"]
+                lon, lat = point_coordinates(feature)
                 root = data.component_at(lon, lat)
                 if root is None:
                     raise ValueError(

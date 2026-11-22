@@ -21,7 +21,7 @@ from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division import policies
 from worldatlas.map_build.division.areas import assign_area, divide_area
 from worldatlas.map_build.division.connectivity import build_domain
-from worldatlas.map_build.division.contracts import CompiledRules
+from worldatlas.map_build.division.contracts import CompiledDivision, CompiledRule
 from worldatlas.map_build.division.intervals import Eligibility, combine, overlay, spans
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.division.shores import ReferenceCells, ShoreGeometry
@@ -48,8 +48,8 @@ def rule_directory(calculation: Path | str, rule_id: str) -> Path:
 
 
 def land_groups(
-    rules: Sequence[dict[str, Any]],
-) -> tuple[tuple[str, list[dict[str, Any]]], ...]:
+    rules: Sequence[CompiledRule],
+) -> tuple[tuple[str, list[CompiledRule]], ...]:
     """Group explicit assignments, geographic land fills, and nearest-land rules.
 
     Args:
@@ -143,7 +143,7 @@ def merge_claims(
 
 def execute_rule(
     context: ParentDivision,
-    rule: dict[str, Any],
+    rule: CompiledRule,
     snapshot_directory: Path | str,
     directory: Path | str,
 ) -> dict[str, Any]:
@@ -216,7 +216,7 @@ class ParentDivision:
         directory: Path | str,
         configuration: dict[str, Any],
         *,
-        compiled: CompiledRules,
+        compiled: CompiledDivision,
         parent_directory: Path | str | None = None,
         checkpoints: Checkpoints | None = None,
         timing: Timing | None = None,
@@ -246,7 +246,8 @@ class ParentDivision:
         self.geography = geography
         self.parent_id = parent_id
         self.grid = grid
-        self.children, self.rules = compiled
+        self.children = compiled.children_by_id
+        self.rules = compiled.rules
         self.allowed = Eligibility(
             {e: v["physical_class"] for e, v in self.children.items()}
         )
@@ -525,7 +526,7 @@ class ParentDivision:
             return self.scope_component_grids[key]
 
     def calculate(
-        self, rules: Sequence[dict[str, Any]], snapshot: Path
+        self, rules: Sequence[CompiledRule], snapshot: Path
     ) -> list[tuple[str, dict[str, Any]]]:
         """Calculate a group of rules against the same ownership grid.
 
@@ -550,7 +551,7 @@ class ParentDivision:
         failure_lock = threading.Lock()
         with stage() as cancelled, ThreadPoolExecutor(max_workers=workers) as executor:
 
-            def run(rule: dict[str, Any]) -> tuple[str, dict[str, Any]]:
+            def run(rule: CompiledRule) -> tuple[str, dict[str, Any]]:
                 """Calculate one rule and request cancellation if it fails.
 
                 Args:
@@ -627,7 +628,7 @@ class ParentDivision:
         )
         self.current = Path(result["directory"])
 
-    def group(self, name: str, rules: Sequence[dict[str, Any]]) -> None:
+    def group(self, name: str, rules: Sequence[CompiledRule]) -> None:
         """Calculate and merge one group of rules.
 
         Args:

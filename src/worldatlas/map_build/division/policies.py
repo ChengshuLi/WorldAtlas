@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
 
+from worldatlas.map_build.division.contracts import point_coordinates
 from worldatlas.map_build.division.scope import Scope
 
 if TYPE_CHECKING:
@@ -39,7 +40,7 @@ def nearest_land(
     roots = set()
     components = context.components("land")
     for feature in scope.rule["features"]["distance_reference"]:
-        root = components.component_at(*feature["geometry"]["coordinates"])
+        root = components.component_at(*point_coordinates(feature))
         if root is None:
             raise ValueError("a distance reference does not identify parent land")
         roots.add(root)
@@ -85,7 +86,7 @@ def nearest_basin_water(
         cell counts and bordering shore-edge counts by owner.
     """
     feature = scope.rule["features"]["scope_area"][0]
-    bounds, mask = rasterize(feature["geometry"], scope.grid)
+    bounds, mask = rasterize(dict(feature["geometry"]), scope.grid)
     water = physical_water(mask, bounds, context.parent_physical, scope.grid)
     scope.set_eligible_area(water, bounds)
     if not scope.has_output():

@@ -9,7 +9,7 @@ from typing import LiteralString, cast
 from psycopg import Connection
 
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.map_build.division.contracts import CompiledRules, compile_rules
+from worldatlas.map_build.division.contracts import CompiledDivision, compile_rules
 from worldatlas.map_build.inputs.selection_types import (
     BuildSelection,
     ConstructionRecord,
@@ -196,7 +196,7 @@ def read_selection(
     }
 
 
-def prepare_geography(domain: GeographicSelection) -> dict[int, CompiledRules]:
+def prepare_geography(domain: GeographicSelection) -> dict[int, CompiledDivision]:
     """Check frozen geometry and map codes and assemble the rules for each parent.
 
     Args:

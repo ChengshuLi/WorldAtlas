@@ -3,7 +3,7 @@
 from collections import defaultdict
 from collections.abc import Iterator, Sequence
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 
@@ -11,8 +11,10 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.partition import divide_regions, geographic_cuts
 from worldatlas.map_build.core.rle import close_memmap
+from worldatlas.map_build.division.contracts import CompiledTarget, point_coordinates
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.scope import Scope, complete_row, selected
+from worldatlas.map_build.inputs.selection_types import GeographicFeature
 
 
 def assign_area(scope: Scope, target: int, directory: Path | str) -> dict[str, Any]:
@@ -153,8 +155,8 @@ def component_owners(scope: Scope, faces: Faces) -> dict[str, dict[int, int]]:
 
 def divide_area(
     scope: Scope,
-    boundaries: Sequence[dict[str, Any]],
-    targets: Sequence[dict[str, Any]],
+    boundaries: Sequence[GeographicFeature],
+    targets: Sequence[CompiledTarget],
     directory: Path | str,
 ) -> dict[str, Any]:
     """Cut the geographic scope along lines and assign each labelled region.
@@ -184,12 +186,13 @@ def divide_area(
     grid = scope.grid
     labels = []
     for target in targets:
-        lon, lat = target["point"]["geometry"]["coordinates"]
+        # Compilation requires a point for every divide_area target.
+        lon, lat = point_coordinates(cast(GeographicFeature, target["point"]))
         cell = grid.cell_at(lon, lat)
         if cell is None:
             raise ValueError("divided-face label is outside the grid")
         labels.append((target["entity_id"], *cell))
-    cuts = geographic_cuts([f["geometry"] for f in boundaries], grid)
+    cuts = geographic_cuts([dict(f["geometry"]) for f in boundaries], grid)
     owners = divide_regions(
         scope.context_intervals,
         grid,

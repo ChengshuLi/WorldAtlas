@@ -11,7 +11,7 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.contracts import CompiledRules, compile_rules
+from worldatlas.map_build.division.contracts import CompiledDivision, compile_rules
 from worldatlas.map_build.division.engine import ParentDivision, land_groups
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.shores import ShoreGeometry
@@ -89,7 +89,7 @@ def definition(
     membership: Path | str | None,
     configuration: dict[str, Any],
     *,
-    compiled: CompiledRules,
+    compiled: CompiledDivision,
     land_only: bool = False,
 ) -> dict[str, Any]:
     """Record only the inputs that affect the parent's assignment.
@@ -109,7 +109,7 @@ def definition(
         Dictionary of operative rule settings, geometry, binding order
         and input file checksums. A wording or color edit leaves it unchanged.
     """
-    children, rules = compiled
+    children, rules = compiled.children_by_id, compiled.rules
     if land_only:
         rules = [rule for _, group in land_groups(rules) for rule in group]
     operative = []
@@ -262,7 +262,7 @@ class HierarchyDivision:
         directory: Path | str,
         configuration: dict[str, Any],
         *,
-        compiled_divisions: dict[int, CompiledRules] | None = None,
+        compiled_divisions: dict[int, CompiledDivision] | None = None,
         requested: Iterable[int] | None = None,
         reuse: Path | str | None = None,
         checkpoints: Checkpoints | None = None,

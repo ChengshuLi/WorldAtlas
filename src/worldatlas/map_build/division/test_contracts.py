@@ -29,7 +29,11 @@ class PhysicalEligibility(unittest.TestCase):
     def test_links_for_other_parents_are_outside_this_division(self):
         self.geo["rule_features"].extend([dict(self.link, rule_id="elsewhere"), self.link])
         self.geo["rule_targets"].append(dict(self.target, rule_id="elsewhere"))
-        self.assertEqual(compile_rules(self.geo, 0)[1][0]["features"]["scope_component"], self.geo["features"])
+        compiled = compile_rules(self.geo, 0)
+        self.assertEqual(compiled.children_by_id[807], self.geo["entities"][-1])
+        self.assertEqual(
+            compiled.rules[0]["features"]["scope_component"], self.geo["features"]
+        )
 
     def test_feature_roles_and_target_points_are_checked(self):
         for link, error in (
@@ -99,7 +103,7 @@ class PhysicalEligibility(unittest.TestCase):
         geo["rule_targets"].append(
             dict(rule_id="area", entity_id=807, label_point_id=None)
         )
-        self.assertEqual(compile_rules(geo, 0)[1][0]["targets"][0]["entity_id"], 807)
+        self.assertEqual(compile_rules(geo, 0).rules[0]["targets"][0]["entity_id"], 807)
         geo["rules"][0]["physical_class"] = "land"
         with self.assertRaisesRegex(ValueError, "incompatible with its target"):
             compile_rules(geo, 0)

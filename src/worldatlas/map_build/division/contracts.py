@@ -1,14 +1,39 @@
 """Compile the six geographic operations and their relational input contracts."""
 
 from collections import defaultdict
-from typing import Any
+from dataclasses import dataclass
+from typing import cast
 
 from worldatlas.map_build.inputs.selection_types import (
     GeographicEntity,
+    GeographicFeature,
+    GeographicRule,
     GeographicSelection,
+    RuleFeatureRole,
+    RuleTarget,
 )
 
-type CompiledRules = tuple[dict[int, GeographicEntity], list[dict[str, Any]]]
+
+class CompiledTarget(RuleTarget):
+    """A rule target with its label point record attached, when it uses one."""
+
+    point: GeographicFeature | None
+
+
+class CompiledRule(GeographicRule):
+    """A geographic rule with its feature records and targets attached."""
+
+    features: dict[RuleFeatureRole, list[GeographicFeature]]
+    targets: list[CompiledTarget]
+
+
+@dataclass(frozen=True)
+class CompiledDivision:
+    """The child entities and prepared rules for one parent."""
+
+    children_by_id: dict[int, GeographicEntity]
+    rules: list[CompiledRule]
+
 
 OPERATIONS = frozenset(
     (
@@ -29,7 +54,7 @@ ROLE_TYPES = {
 }
 
 
-def compile_rules(geography: GeographicSelection, parent_id: int) -> CompiledRules:
+def compile_rules(geography: GeographicSelection, parent_id: int) -> CompiledDivision:
     """Resolve and validate the rules for one geographic parent.
 
     Args:
@@ -37,8 +62,8 @@ def compile_rules(geography: GeographicSelection, parent_id: int) -> CompiledRul
         parent_id: Entity ID to divide.
 
     Returns:
-        (children_by_id, rules). The rules have their source features and
-        target label points attached, in rule-ID order.
+        Child entities keyed by ID, and compiled rules in rule-ID order.
+        Each rule has its source features and target label points attached.
 
     Raises:
         ValueError: A required record is missing, duplicated or invalid.
@@ -58,7 +83,10 @@ def compile_rules(geography: GeographicSelection, parent_id: int) -> CompiledRul
     selected = {ident: r for ident, r in rules.items() if r["parent_id"] == parent_id}
     if not children or not selected:
         raise ValueError("a division needs child entities and rules")
-    links, targets = defaultdict(lambda: defaultdict(list)), defaultdict(list)
+    links: defaultdict[str, defaultdict[RuleFeatureRole, list[GeographicFeature]]] = (
+        defaultdict(lambda: defaultdict(list))
+    )
+    targets: defaultdict[str, list[CompiledTarget]] = defaultdict(list)
     seen = set()
     for link in geography["rule_features"]:
         if link["rule_id"] not in selected:
@@ -83,9 +111,9 @@ def compile_rules(geography: GeographicSelection, parent_id: int) -> CompiledRul
         ):
             raise ValueError("a divided-face label must reference a Point")
         targets[target["rule_id"]].append(
-            dict(target, point=features[label] if label else None)
+            {**target, "point": features[label] if label else None}
         )
-    result = []
+    result: list[CompiledRule] = []
     for ident, rule in sorted(selected.items()):
         operation = rule["operation"]
         inputs = links[ident]
@@ -140,5 +168,18 @@ def compile_rules(geography: GeographicSelection, parent_id: int) -> CompiledRul
             for t in output
         ):
             raise ValueError("rule physical class is incompatible with its target")
-        result.append(dict(rule, features=dict(inputs), targets=output))
-    return children, result
+        result.append({**rule, "features": dict(inputs), "targets": output})
+    return CompiledDivision(children_by_id=children, rules=result)
+
+
+def point_coordinates(feature: GeographicFeature) -> tuple[float, float]:
+    """Read the coordinates of a feature already checked to be a point.
+
+    Args:
+        feature: A compiled point feature.
+
+    Returns:
+        Longitude and latitude in degrees.
+    """
+    lon, lat = cast(list[float], feature["geometry"]["coordinates"])
+    return lon, lat
