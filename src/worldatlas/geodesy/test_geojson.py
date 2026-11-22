@@ -12,12 +12,15 @@ class GeometryTests(unittest.TestCase):
         for geometry in (
             {"type": [], "coordinates": [1, 2]},
             {"type": "Point", "coordinates": []},
+            {"type": "Point", "coordinates": {1, 2}},
+            {"type": "Point", "coordinates": [1, 2], "extra": 3},
             {"type": "Point", "coordinates": [float("nan"), 1]},
             {"type": "Point", "coordinates": [1, 2, 3]},
             {"type": "Point", "coordinates": [True, 2]},
             {"type": "Point", "coordinates": ["1", 2]},
             {"type": "Point", "coordinates": [181, 2]},
             {"type": "Point", "coordinates": [1, -91]},
+            {"type": "LineString", "coordinates": [[0, 0], 2]},
         ):
             with self.subTest(geometry=geometry), self.assertRaises(ValueError):
                 validate_geometry(geometry)
@@ -30,7 +33,7 @@ class GeometryTests(unittest.TestCase):
                 [(3, 3), (4, 3), (4, 4), (3, 4), (3, 3)],
             ],
         ):
-            with self.subTest(rings=rings), self.assertRaisesRegex(ValueError, "valid"):
+            with self.subTest(rings=rings), self.assertRaisesRegex(ValueError, "^expected valid geometry$"):
                 validate_geometry({"type": "Polygon", "coordinates": rings})
 
     def test_line_simplicity_is_available_to_boundary_callers(self):

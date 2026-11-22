@@ -1,19 +1,42 @@
 """Validate the WGS84 GeoJSON used by source imports and map builds."""
 
-import math
 from collections.abc import Mapping
-from typing import Literal
+from typing import Annotated, Literal
 
+from pydantic import BeforeValidator, Field, TypeAdapter
 from shapely.geometry import shape
 from shapely.geometry.base import BaseGeometry
 from typing_extensions import TypedDict
 
 from worldatlas.shared.files import JSONValue
 
-# Each position holds two numbers, longitude then latitude in degrees.
-type Position = list[float]
-type LineCoordinates = list[Position]
-type PolygonCoordinates = list[LineCoordinates]
+
+def _coordinate_array(value: JSONValue) -> list[JSONValue] | tuple[JSONValue, ...]:
+    """Require an ordered array of coordinates.
+
+    Args:
+        value: Coordinate input. JSON arrays are lists, and Python importers
+            can also supply tuples.
+
+    Returns:
+        The input list or tuple.
+
+    Raises:
+        ValueError: The input is neither a list nor a tuple.
+    """
+    if not isinstance(value, (list, tuple)):
+        raise ValueError("expected a coordinate array")
+    return value
+
+
+type Coordinates[Item] = Annotated[
+    list[Item], BeforeValidator(_coordinate_array), Field(min_length=1)
+]
+type Longitude = Annotated[float, Field(strict=True, ge=-180, le=180)]
+type Latitude = Annotated[float, Field(strict=True, ge=-90, le=90)]
+type Position = Annotated[
+    tuple[Longitude, Latitude], BeforeValidator(_coordinate_array)
+]
 
 
 class Geometry[Kind: str, Coordinates](TypedDict, closed=True):
@@ -23,66 +46,36 @@ class Geometry[Kind: str, Coordinates](TypedDict, closed=True):
     coordinates: Coordinates
 
 
-type GeoJSONGeometry = (
-    Geometry[Literal["Point"], Position]
-    | Geometry[Literal["MultiPoint", "LineString"], LineCoordinates]
-    | Geometry[Literal["MultiLineString", "Polygon"], PolygonCoordinates]
-    | Geometry[Literal["MultiPolygon"], list[PolygonCoordinates]]
-)
+type GeoJSONGeometry[PointCoordinates = list[float]] = Annotated[
+    Geometry[Literal["Point"], PointCoordinates]
+    | Geometry[Literal["MultiPoint", "LineString"], Coordinates[PointCoordinates]]
+    | Geometry[
+        Literal["MultiLineString", "Polygon"],
+        Coordinates[Coordinates[PointCoordinates]],
+    ]
+    | Geometry[
+        Literal["MultiPolygon"], Coordinates[Coordinates[Coordinates[PointCoordinates]]]
+    ],
+    Field(discriminator="type"),
+]
+
+_GEOMETRY = TypeAdapter(GeoJSONGeometry[Position])
 
 
 def validate_geometry(geometry: Mapping[str, JSONValue]) -> BaseGeometry:
-    """Check that a GeoJSON geometry is valid in two-dimensional WGS84.
+    """Read two-dimensional WGS84 GeoJSON and check the resulting shape.
 
     Args:
         geometry: Dictionary with "type" and "coordinates". Each coordinate pair
             is (longitude, latitude) in degrees.
 
     Returns:
-        A Shapely point, line, polygon, or corresponding multi-geometry.
+        The validated Shapely geometry.
 
     Raises:
-        ValueError: The geometry is empty, malformed, invalid, or out of range.
+        ValueError: The input fields, coordinates, or geometry are invalid.
     """
-    if (
-        not isinstance(geometry, dict)
-        or set(geometry) != {"type", "coordinates"}
-        or geometry["type"]
-        not in (
-            "Point",
-            "MultiPoint",
-            "LineString",
-            "MultiLineString",
-            "Polygon",
-            "MultiPolygon",
-        )
-    ):
-        raise ValueError("expected a point, line or polygon geometry")
-
-    def coordinates(values: JSONValue) -> None:
-        """Check nested coordinate arrays down to each longitude and latitude pair.
-
-        Args:
-            values: Coordinates belonging to a GeoJSON geometry.
-
-        Raises:
-            ValueError: A coordinate is missing, nonfinite, or outside WGS84.
-        """
-        if not isinstance(values, (tuple, list)) or not values:
-            raise ValueError("geometry coordinates must be nonempty arrays")
-        if isinstance(values[0], (tuple, list)):
-            for child in values:
-                coordinates(child)
-        elif len(values) != 2 or any(
-            type(value) not in (int, float) or not math.isfinite(value)
-            for value in values
-        ):
-            raise ValueError("expected finite two-dimensional numeric coordinates")
-        elif not (-180 <= values[0] <= 180 and -90 <= values[1] <= 90):
-            raise ValueError("coordinates are outside WGS84 longitude/latitude ranges")
-
-    coordinates(geometry["coordinates"])
-    result = shape(geometry)
-    if result.is_empty or not result.is_valid or result.has_z:
-        raise ValueError("expected valid, nonempty two-dimensional geometry")
+    result = shape(dict(_GEOMETRY.validate_python(geometry)))
+    if not result.is_valid:
+        raise ValueError("expected valid geometry")
     return result
