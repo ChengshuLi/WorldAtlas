@@ -415,7 +415,7 @@ class BundleTests(unittest.TestCase):
 
     def test_release_rejects_a_code_bound_to_a_missing_entity(self):
         self.selection["geography"]["category_bindings"][0]["entity_id"] = 999
-        with self.assertRaisesRegex(ValueError, "category binding"):
+        with self.assertRaisesRegex(ValueError, "refers to invalid entity ID 999"):
             release_categories(self.selection)
 
     def test_missing_land_color_blocks_staging(self):

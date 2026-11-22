@@ -42,16 +42,32 @@ class BindingTests(unittest.TestCase):
             dict(code=2, entity_id=2, physical_class="water"),
         ]
 
-    def test_duplicate_code_or_entity_class_and_missing_entity_fail(self):
-        for bad in (
-            dict(code=18, entity_id=2, physical_class="water"),
-            dict(code=4, entity_id=2, physical_class="land"),
-            dict(code=4, entity_id=999, physical_class="land"),
+    def test_invalid_bindings_identify_the_problem(self):
+        for override, message in (
+            ({"code": 0}, "map code 0 must be an integer from 1 to 4294967295"),
+            ({"code": 2**32}, "map code 4294967296 must be an integer from 1 to 4294967295"),
+            ({"code": True}, "map code True must be an integer from 1 to 4294967295"),
+            ({"entity_id": True}, "map code 4 refers to invalid entity ID True"),
+            ({"entity_id": 0}, "map code 4 refers to invalid entity ID 0"),
+            ({"entity_id": 999}, "map code 4 refers to invalid entity ID 999"),
+            ({"physical_class": "mixed"}, "map code 4 has invalid physical class 'mixed'"),
+            ({"code": 18}, "map code 18 is used twice"),
+            ({}, "Asia has two land map codes"),
         ):
-            geography = deepcopy(self.geography)
-            geography["category_bindings"].append(bad)
-            with self.assertRaisesRegex(ValueError, "category binding"):
-                validate_map_code_bindings(geography)
+            with self.subTest(override=override):
+                geography = deepcopy(self.geography)
+                binding = dict(code=4, entity_id=2, physical_class="land") | override
+                geography["category_bindings"].append(binding)
+                with self.assertRaises(ValueError) as error:
+                    validate_map_code_bindings(geography)
+                self.assertEqual(str(error.exception), message)
+
+    def test_map_code_must_match_the_entity_physical_class(self):
+        self.geography["entities"][-1]["physical_class"] = "land"
+        with self.assertRaisesRegex(
+            ValueError, "map code 2 assigns water to Asia, whose physical class is land"
+        ):
+            validate_map_code_bindings(self.geography)
 
     def test_saved_values_are_read_without_querying_neon(self):
         with tempfile.TemporaryDirectory() as temp:

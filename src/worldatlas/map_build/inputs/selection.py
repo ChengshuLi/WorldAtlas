@@ -38,22 +38,33 @@ def validate_map_code_bindings(geography: GeographicSelection) -> None:
     codes, pairs = set(), set()
     for binding in geography["category_bindings"]:
         code = binding.get("code")
-        entity = binding.get("entity_id")
-        kind = binding.get("physical_class")
-        if (
-            type(code) is not int
-            or not 0 < code < 2**32
-            or type(entity) is not int
-            or entity not in entities
-            or entity == 0
-            or kind not in ("land", "water")
-            or code in codes
-            or (entity, kind) in pairs
-            or entities[entity]["physical_class"] not in ("mixed", kind)
-        ):
-            raise ValueError("invalid or duplicate category binding")
+        entity_id = binding.get("entity_id")
+        physical_class = binding.get("physical_class")
+        if type(code) is not int or not 0 < code < 2**32:
+            raise ValueError(
+                f"map code {code!r} must be an integer from 1 to {2**32 - 1}"
+            )
+        if type(entity_id) is not int or entity_id == 0 or entity_id not in entities:
+            raise ValueError(
+                f"map code {code} refers to invalid entity ID {entity_id!r}"
+            )
+        if physical_class not in ("land", "water"):
+            raise ValueError(
+                f"map code {code} has invalid physical class {physical_class!r}"
+            )
+        if code in codes:
+            raise ValueError(f"map code {code} is used twice")
+        entity = entities[entity_id]
+        pair = (entity_id, physical_class)
+        if pair in pairs:
+            raise ValueError(f"{entity['name']} has two {physical_class} map codes")
+        if entity["physical_class"] not in ("mixed", physical_class):
+            raise ValueError(
+                f"map code {code} assigns {physical_class} to {entity['name']}, "
+                f"whose physical class is {entity['physical_class']}"
+            )
         codes.add(code)
-        pairs.add((entity, kind))
+        pairs.add(pair)
 
 
 def canonical_bytes(selection: BuildSelection) -> bytes:
