@@ -969,13 +969,20 @@ class Fixture(unittest.TestCase):
         spec = self.cloud(payload)
         cached = self.root / "inputs" / spec["sha256"] / "input.json"
         cached.parent.mkdir(parents=True)
-        cached.write_bytes(b"xx")
         self.select_coastline(spec)
+        config = write_json(self.inputs / "request.json", self.cfg)
         with self.fake_r2({}, []) as download:
+            cached.mkdir()
             with self.assertRaisesRegex(
                 ValueError, "cached cloud input size/SHA-256 mismatch"
             ):
-                self.make()
+                pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
+            cached.rmdir()
+            cached.write_bytes(b"xx")
+            with self.assertRaisesRegex(
+                ValueError, "cached cloud input size/SHA-256 mismatch"
+            ):
+                pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
         download.assert_not_called()
         cached.write_bytes(payload)
         self.select_coastline(

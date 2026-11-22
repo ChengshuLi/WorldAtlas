@@ -63,7 +63,7 @@ from worldatlas.shared.files import (
     verify_pins,
     write_json,
 )
-from worldatlas.source_assets.catalog import download_source
+from worldatlas.source_assets.catalog import check_source, download_source
 
 HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
@@ -274,6 +274,63 @@ def _source_settings(config: dict[str, Any]) -> dict[str, Any]:
     ):
         raise ValueError("inland_water must provide rasterization and files inline")
     return sources
+
+
+def _cloud_file_matches(path: Path, spec: dict[str, Any]) -> bool:
+    """Check that a regular file has the expected bytes.
+
+    Args:
+        path: File to verify.
+        spec: Expected byte size and SHA-256.
+
+    Returns:
+        True if the file matches both values.
+    """
+    if not path.is_file():
+        return False
+    try:
+        check_source(path, spec)
+    except ValueError:
+        return False
+    return True
+
+
+def _extract_cloud_member(
+    archive: Path, member: str, path: Path, spec: dict[str, Any]
+) -> None:
+    """Extract and verify one ZIP member before publishing it to the shared cache.
+
+    Args:
+        archive: Local path to the verified ZIP.
+        member: Validated relative member name inside the ZIP.
+        path: Local cache destination.
+        spec: Expected byte size and SHA-256.
+
+    Raises:
+        ValueError: The member is missing, ambiguous, or fails verification.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    partial = path.with_name(path.name + "." + uuid.uuid4().hex + ".partial")
+    try:
+        with zipfile.ZipFile(archive) as packed:
+            members = [item for item in packed.infolist() if item.filename == member]
+            if (
+                len(members) != 1
+                or members[0].is_dir()
+                or ((members[0].external_attr >> 16) & 0o170000) == 0o120000
+            ):
+                raise ValueError("ZIP member must be one regular file")
+            with packed.open(members[0]) as src, partial.open("xb") as dst:
+                shutil.copyfileobj(src, dst, 1 << 20)
+        if not _cloud_file_matches(partial, spec):
+            raise ValueError("cloud input size/SHA-256 mismatch: " + str(path))
+        try:
+            os.link(partial, path)
+        except FileExistsError:
+            if not _cloud_file_matches(path, spec):
+                raise ValueError("concurrent cloud input changed") from None
+    finally:
+        partial.unlink(missing_ok=True)
 
 
 class Pipeline:
@@ -792,7 +849,6 @@ class Pipeline:
                 or not bucket
                 or not isinstance(key, str)
                 or not key
-                or key.endswith("/")
                 or "\\" in key
                 or any(p in ("", ".", "..") for p in key.split("/"))
             ):
@@ -805,83 +861,53 @@ class Pipeline:
         if not path.is_relative_to(self.root) or path.is_relative_to(self.out):
             raise ValueError("cloud input overlaps output or escapes work directory")
         if path.exists():
-            if (
-                not path.is_file()
-                or path.stat().st_size != size
-                or sha256_file(path) != expected
-            ):
+            if not _cloud_file_matches(path, spec):
                 raise ValueError(
                     "cached cloud input size/SHA-256 mismatch: " + str(path)
                 )
+        elif archive_member is not None:
+            archive, member = archive_member
+            _extract_cloud_member(archive, member, path, spec)
         else:
-            path.parent.mkdir(parents=True, exist_ok=True)
-            if archive_member is not None:
-                archive, member = archive_member
-                partial = path.with_name(
-                    path.name + "." + uuid.uuid4().hex + ".partial"
-                )
-                try:
-                    with zipfile.ZipFile(archive) as packed:
-                        members = [
-                            item
-                            for item in packed.infolist()
-                            if item.filename == member
-                        ]
-                        if (
-                            len(members) != 1
-                            or members[0].is_dir()
-                            or ((members[0].external_attr >> 16) & 0o170000) == 0o120000
-                        ):
-                            raise ValueError("ZIP member must be one regular file")
-                        with packed.open(members[0]) as src, partial.open("xb") as dst:
-                            shutil.copyfileobj(src, dst, 1 << 20)
-                    if (
-                        partial.stat().st_size != size
-                        or sha256_file(partial) != expected
-                    ):
-                        raise ValueError(
-                            "cloud input size/SHA-256 mismatch: " + str(path)
-                        )
-                    try:
-                        os.link(partial, path)
-                    except FileExistsError:
-                        if (
-                            not path.is_file()
-                            or path.stat().st_size != size
-                            or sha256_file(path) != expected
-                        ):
-                            raise ValueError("concurrent cloud input changed") from None
-                finally:
-                    partial.unlink(missing_ok=True)
-            else:
-                if endpoint is None:
-                    staging = self.cfg.get("physical_controls", {}).get(
-                        "source_staging", {}
-                    )
-                    endpoint = staging.get("endpoint_url")
-                transfer = {}
-                try:
-                    with closing(physical_build.make_r2_client(endpoint)) as client:
-                        download_source(
-                            client,
-                            spec,
-                            self.root / "inputs",
-                            filename=path.name,
-                            timing=transfer,
-                        )
-                except ValueError as exc:
-                    raise ValueError(
-                        "cloud input size/SHA-256 mismatch: " + str(path)
-                    ) from exc
-                finally:
-                    self.acquisition_intervals.extend(
-                        transfer.get("download_intervals", [])
-                    )
-        result = pin_file(path)
+            self._download_cloud_file(spec, path, endpoint)
+            path = path.resolve(strict=True)
+
+        result = {"path": str(path), "sha256": expected}
         if result not in self.source_pins:
             self.source_pins.append(result)
         self.input_cache[identity] = path
         return path
+
+    def _download_cloud_file(
+        self, spec: dict[str, Any], path: Path, endpoint: str | None
+    ) -> None:
+        """Download a verified R2 object and record its transfer time.
+
+        Args:
+            spec: Object location, SHA-256, and byte size.
+            path: Local cache destination.
+            endpoint: R2 account URL, or None to use the physical-source setting.
+
+        Raises:
+            ValueError: The download failed verification.
+        """
+        if endpoint is None:
+            staging = self.cfg.get("physical_controls", {}).get("source_staging", {})
+            endpoint = staging.get("endpoint_url")
+        transfer = {}
+        try:
+            with closing(physical_build.make_r2_client(endpoint)) as client:
+                download_source(
+                    client,
+                    spec,
+                    self.root / "inputs",
+                    filename=path.name,
+                    timing=transfer,
+                )
+        except ValueError as exc:
+            raise ValueError("cloud input size/SHA-256 mismatch: " + str(path)) from exc
+        finally:
+            self.acquisition_intervals.extend(transfer.get("download_intervals", []))
 
     def coastline_request(self, settings: dict[str, Any]) -> dict[str, Any]:
         """Prepare coastline rasterization settings using cached local files.
@@ -994,7 +1020,7 @@ class Pipeline:
             reference["reference_config"] = self.cloud_file(config, endpoint=endpoint)
         return reference
 
-    def resolve_pins(self, value: dict[str, Any]) -> Path | dict[str, Any]:
+    def resolve_pins(self, value: object) -> Path | dict[str, Any]:
         """Verify a file pin or a tree of file pins.
 
         Args:
