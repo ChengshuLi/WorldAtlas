@@ -265,7 +265,7 @@ class EndToEndTests(unittest.TestCase):
                     [
                         sys.executable, "-m", "worldatlas.map_build.build",
                         str(cfg), str(root / "run"), "--work-dir", str(root),
-                        "--selection", str(selected), "--resume",
+                        "--resume",
                     ],
                     check=True,
                     capture_output=True,

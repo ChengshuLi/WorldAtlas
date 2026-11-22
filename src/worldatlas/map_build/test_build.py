@@ -423,21 +423,18 @@ class Fixture(unittest.TestCase):
             self.assertEqual(resumed.identity["input_selection_sha256"], original)
             resumed.close()
 
-    def test_resume_requires_the_same_frozen_selection(self):
+    def test_resume_uses_only_the_run_selection(self):
         runner = self.make()
         runner.close()
         saved = runner.out / "input-selection.json"
-        changed = read_json(saved)
-        changed["geography"]["entities"][0]["name"] = "Different world"
-        alternative = write_json(self.inputs / "alternate-selection.json", changed)
         with patch.object(pipeline, "read_selection", side_effect=AssertionError("unexpected live read")):
-            with self.assertRaisesRegex(ValueError, "different saved geographic selection"):
+            with self.assertRaisesRegex(ValueError, "Omit --selection"):
                 pipeline.Pipeline(
                     runner.config_path,
                     runner.out,
                     work_dir=self.root,
                     resume=True,
-                    selection=alternative,
+                    selection=saved,
                 )
             saved.unlink()
             with self.assertRaises(FileNotFoundError) as error:

@@ -432,23 +432,19 @@ class Pipeline:
 
         Args:
             sources: Physical inputs that may refer to cataloged raw files.
-            selection: Caller-supplied file with already saved geographic records.
+            selection: Saved geographic records for a fresh build.
 
         Returns:
             Saved records from the run, the supplied file, or the working database.
 
         Raises:
-            ValueError: A supplied selection differs from the saved run, or no
+            ValueError: A selection was supplied with resume, or no
                 database connection is configured for a new selection.
         """
-        selected_path = self.out / "input-selection.json"
         if self.resume:
-            saved = read_saved(selected_path)
-            if selection is not None and canonical_bytes(
-                read_saved(selection)
-            ) != canonical_bytes(saved):
-                raise ValueError("resume uses a different saved geographic selection")
-            return saved
+            if selection is not None:
+                raise ValueError("--resume uses the saved selection. Omit --selection.")
+            return read_saved(self.out / "input-selection.json")
         if selection is not None:
             return read_saved(selection)
         connection = os.environ.get("NEON_DATABASE_URL")
@@ -1223,12 +1219,14 @@ def main() -> None:
         "--resume",
         action="store_true",
         help=(
-            "continue the saved run. Omit --divide, --compare-release, --reuse-from, "
-            "and --recompute-division"
+            "continue the saved run. Omit --selection, --divide, --compare-release, "
+            "--reuse-from, and --recompute-division"
         ),
     )
     p.add_argument(
-        "--selection", type=Path, help="replay a saved complete geographic selection"
+        "--selection",
+        type=Path,
+        help="start a new build from a saved geographic selection",
     )
     p.add_argument(
         "--compare-release",

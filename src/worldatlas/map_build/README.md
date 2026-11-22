@@ -21,8 +21,8 @@ Supply `--work-dir` and an output directory for every build. The builder creates
 | `--divide PARENT_ID` | Optional. By default, divide every parent with rules in the saved selection. Supply a parent entity ID to run only its division and the ancestor divisions it needs. For example, `--divide 0` divides World into continents. Repeat the option to select several parents. |
 | `--reuse-from PREVIOUS_RUN` | Start a new build using the physical grid from an earlier local run. The grid and physical inputs must match. By default, the builder tries to reuse all compatible geographic assignments. It checks each complete parent division first and can reuse the land assignments alone if only the water rules changed. |
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
-| `--resume` | Continue an interrupted build using its saved options. Pass the original config, output directory, and `--work-dir`. Omit `--divide`, `--compare-release`, `--reuse-from`, and `--recompute-division`. |
-| `--selection INPUT_SELECTION.json` | Use a saved geographic selection in place of reading working records from Neon. To rebuild a release, use its restored configuration, selection and captured code. |
+| `--resume` | Continue an interrupted build using its saved selection and options. Pass the original config, output directory, and `--work-dir`. Omit `--selection`, `--divide`, `--compare-release`, `--reuse-from`, and `--recompute-division`. |
+| `--selection INPUT_SELECTION.json` | Start a fresh build with a saved geographic selection. To rebuild a release, use its restored configuration, selection and captured code. |
 | `--compare-release VERSION_OR_RC` | Compare every cell with an official release or numbered candidate on the same grid. This needs Neon and R2 access. |
 
 To run a restored copy of the builder directly, use `python -m worldatlas.map_build.build` from the archive’s `src` directory in its recorded environment. [Restore a release for rebuilding](../map_releases/README.md#restore-inputs)

@@ -37,7 +37,7 @@ class ExecutorResumeTests(unittest.TestCase):
     def runner(self, resume=False):
         runner = pipeline.Pipeline(
             self.config, self.out, work_dir=self.root,
-            resume=resume, selection=self.saved_selection,
+            resume=resume, selection=None if resume else self.saved_selection,
         )
         self.addCleanup(runner.close)
         return runner
