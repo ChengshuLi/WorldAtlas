@@ -211,6 +211,11 @@ def physical_reference(run: Path | str, sources: dict[str, Path]) -> dict[str, A
             data(read_json(previous)),
             data(read_json(sources[selected])),
         )
+        if key == "source_manifest":
+            # Older manifests called the same byte count "size".
+            for entry in old_request["files"]:
+                if "size" in entry:
+                    entry["size_bytes"] = entry.pop("size")
         if old_request != new_request:
             raise ValueError("physical input differs from the source run: " + key)
     pins = [
@@ -707,11 +712,7 @@ class Pipeline:
             ValueError: A selector is invalid or its catalog row is missing.
         """
         resolved = copy.deepcopy(selections)
-        references = [
-            (spec, "size" if name == "inland_water" else "size_bytes")
-            for name, value in resolved.items()
-            for spec in catalog_references(value)
-        ]
+        references = list(catalog_references(resolved))
         if not references:
             return resolved
 
@@ -727,16 +728,21 @@ class Pipeline:
         }
         if catalog.keys() != requested:
             raise ValueError("raw catalog is missing selected sources")
-        for spec, size_field in references:
+        for spec in references:
             identity = spec.pop("r2_source")
             source = catalog[identity["source_id"], identity.get("version")]
             spec.update(
                 {
                     key: source[key]
-                    for key in ("source_id", "r2_bucket", "r2_key", "sha256")
+                    for key in (
+                        "source_id",
+                        "r2_bucket",
+                        "r2_key",
+                        "sha256",
+                        "size_bytes",
+                    )
                 }
             )
-            spec[size_field] = source["size_bytes"]
         return resolved
 
     def cloud_file(self, spec: dict[str, Any], *, endpoint: str | None = None) -> Path:

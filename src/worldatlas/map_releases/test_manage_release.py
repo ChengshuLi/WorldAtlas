@@ -87,7 +87,7 @@ class BundleTests(unittest.TestCase):
                             "rasterization": {},
                             "files": [dict(
                                 path="raw/shard.parquet", r2_bucket="test", r2_key="sources/shard.parquet",
-                                sha256="c" * 64, size=10,
+                                sha256="c" * 64, size_bytes=10,
                             )],
                         },
                     },

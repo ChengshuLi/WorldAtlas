@@ -682,13 +682,11 @@ class Fixture(unittest.TestCase):
         land = read_json(runner.sources["land_config"])["land"][0]
         self.assertEqual(Path(land["dataset"]).read_bytes(), payload)
         manifest = read_json(runner.sources["raw_manifest"])
-        size = raw.pop("size_bytes")
         self.assertEqual(
             manifest["files"],
             [
                 {
                     "path": "raw/fixture",
-                    "size": size,
                     "source_id": identity["source_id"],
                     **raw,
                 }
@@ -823,7 +821,7 @@ class Fixture(unittest.TestCase):
                     "sha256": "a" * 64,
                     "r2_bucket": "worldatlas",
                     "r2_key": "raw/part.parquet",
-                    "size": 123,
+                    "size_bytes": 123,
                 }
             ],
         }
@@ -1096,7 +1094,13 @@ class Fixture(unittest.TestCase):
             inland_water=dict(
                 rasterization=water,
                 file_count=1,
-                files=[{"path": "raw/water.parquet", "sha256": sha256_file(shard)}],
+                files=[
+                    {
+                        "path": "raw/water.parquet",
+                        "sha256": sha256_file(shard),
+                        "size_bytes": shard.stat().st_size,
+                    }
+                ],
             ),
         )
         self.cfg["physical_controls"] = {
@@ -1181,6 +1185,24 @@ class Fixture(unittest.TestCase):
             ],
             0,
         )
+        # Keep the saved file pin valid while simulating an older manifest.
+        old_manifest = read_json(runner.sources["raw_manifest"])
+        entry = old_manifest["files"][0]
+        entry["size"] = entry.pop("size_bytes")
+        old_path = write_json(self.inputs / "legacy-manifest.json", old_manifest)
+        identity_path = runner.out / "physical/pipeline-identity.json"
+        identity = read_json(identity_path)
+        identity["source_manifest"] = pin_file(old_path)
+        identity_path.write_bytes(json_bytes(identity))
+        report_path = runner.out / "physical/report.json"
+        report = read_json(report_path)
+        report["pipeline_identity_sha256"] = sha256_file(identity_path)
+        report_path.write_bytes(json_bytes(report))
+        reuse = pipeline.physical_reference(runner.out, runner.sources)
+        self.assertEqual(reuse["status"], "reused")
+        self.assertEqual(
+            reuse["pins"], [pin_file(pin["path"]) for pin in reuse["pins"]]
+        )
 
     def test_single_cloud_configuration_matches_local_raw_and_component_streams_in_another_root(
         self,
@@ -1204,7 +1226,7 @@ class Fixture(unittest.TestCase):
                 {
                     "path": "raw/water.parquet",
                     "sha256": water_source["sha256"],
-                    "size": water_source["size_bytes"],
+                    "size_bytes": water_source["size_bytes"],
                     "r2_bucket": water_source["r2_bucket"],
                     "r2_key": water_source["r2_key"],
                 }

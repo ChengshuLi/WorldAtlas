@@ -146,8 +146,8 @@ def validate_r2_shard_location(entry: dict[str, Any]) -> None:
         or not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,62}', entry['r2_bucket'])
         or not isinstance(entry.get('r2_key'), str)
         or not entry['r2_key']
-        or type(entry.get('size')) is not int
-        or entry['size'] < 0
+        or type(entry.get('size_bytes')) is not int
+        or entry['size_bytes'] < 0
     ):
         raise ValueError('missing or invalid pinned R2 source metadata')
 
@@ -171,7 +171,7 @@ def download_r2(endpoint: str, entry: dict[str, Any], destination: Path) -> None
         try:
             stream_source(
                 client,
-                dict(entry, size_bytes=entry['size']),
+                entry,
                 stream,
                 check_cancelled=control.check_cancelled,
             )
@@ -767,7 +767,7 @@ def _run(
                 raise ValueError(f'shard checkpoint mismatch: {i}')
             if (
                 staged.is_file()
-                and staged.stat().st_size == entry.get('size')
+                and staged.stat().st_size == entry.get('size_bytes')
                 and sha256_file(staged) == digest
             ):
                 staged.unlink()
@@ -787,7 +787,7 @@ def _run(
             staged.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
             if staged.exists() and (
                 not staged.is_file()
-                or staged.stat().st_size != entry['size']
+                or staged.stat().st_size != entry['size_bytes']
                 or sha256_file(staged) != digest
             ):
                 quarantine(staged)
@@ -800,7 +800,7 @@ def _run(
                         journal.download_done(started)
             if (
                 not staged.is_file()
-                or staged.stat().st_size != entry['size']
+                or staged.stat().st_size != entry['size_bytes']
                 or sha256_file(staged) != digest
             ):
                 raise ValueError(f'staged source size/hash mismatch: {path}')

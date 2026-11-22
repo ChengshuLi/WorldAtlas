@@ -36,7 +36,7 @@ To run a restored copy of the builder directly, use `python -m worldatlas.map_bu
 The build configuration sets the grid, physical inputs, coastal distance and processing options. The checked-in grid has 131,072 columns and 54,613 rows. The east and west edges meet at the antimeridian. [Build configuration](config.json)
 
 - `sources.land_config` selects the coastline dataset and the files to read inside its ZIP archive.
-- `sources.inland_water.files` lists the raw water files for the selected release of the water dataset.
+- `sources.inland_water.files` lists the raw water files for the selected dataset release. Catalog references supply `size_bytes` from Neon. Direct R2 references must supply it alongside the bucket, key, and SHA-256.
 - `sources.inland_water.rasterization` sets which water features to include and how to draw them on the grid.
 
 Neon’s source catalog gives the builder each raw file’s R2 location, expected size and checksum. The builder checks the files before using them. `physical_controls.source_staging` supplies the R2 endpoint.

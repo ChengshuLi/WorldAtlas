@@ -529,7 +529,7 @@ class PipelineTests(unittest.TestCase):
                         {
                             'path': shard.name,
                             'sha256': digest,
-                            'size': len(content),
+                            'size_bytes': len(content),
                             'r2_bucket': 'test-bucket',
                             'r2_key': 'source/water.parquet',
                         }
@@ -587,7 +587,7 @@ class PipelineTests(unittest.TestCase):
         )
         payloads = {p.relative_to(self.raw).as_posix(): p.read_bytes() for p in (first, second)}
         files = [
-            dict(path=key, sha256=sha256_file(self.raw / key), size=len(data),
+            dict(path=key, sha256=sha256_file(self.raw / key), size_bytes=len(data),
                  r2_bucket='atlas', r2_key=key)
             for key, data in payloads.items()
         ]
@@ -653,7 +653,7 @@ class PipelineTests(unittest.TestCase):
                         {
                             'path': shard.name,
                             'sha256': sha256_file(shard),
-                            'size': len(content),
+                            'size_bytes': len(content),
                             'r2_bucket': 'test-bucket',
                             'r2_key': 'source/water.parquet',
                         }
@@ -985,7 +985,7 @@ class PipelineTests(unittest.TestCase):
         body = io.BytesIO(b'partial')
         client = mock.Mock()
         client.get_object.return_value = {'Body': body, 'ContentLength': 20}
-        entry = dict(r2_bucket='atlas', r2_key='water.parquet', size=20)
+        entry = dict(r2_bucket='atlas', r2_key='water.parquet', size_bytes=20)
         staged = self.root / 'raw-shard.parquet'
         with mock.patch.object(b.boto3, 'client', return_value=client) as connect:
             with self.assertRaisesRegex(ValueError, 'staged source size/hash mismatch'):
@@ -1002,7 +1002,7 @@ class PipelineTests(unittest.TestCase):
         payload = shard.read_bytes()
         source = Path(self.cfg['source_manifest']['path'])
         manifest = json.loads(source.read_bytes())
-        manifest['files'][0].update(r2_bucket='atlas', r2_key=shard.name, size=len(payload))
+        manifest['files'][0].update(r2_bucket='atlas', r2_key=shard.name, size_bytes=len(payload))
         source.write_text(json.dumps(manifest))
         self.cfg['source_manifest']['sha256'] = sha256_file(source)
         self.cfg['source_staging'] = dict(mode='r2-s3', endpoint_url=endpoint)
