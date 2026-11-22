@@ -341,7 +341,7 @@ class Pipeline:
 
         self.resume = resume
         self._prepare_workspace(output, work_dir)
-        previous, compare_release, reuse = self._load_run_options(
+        previous, compare_release = self._load_run_options(
             divide, compare_release, reuse_from, recompute_division
         )
         validate_runtime()
@@ -363,7 +363,7 @@ class Pipeline:
             self.source_pins.extend(
                 p for p in self.physical_reuse["pins"] if p not in self.source_pins
             )
-        self._prepare_run_identity(reuse, compare_release, comparison_inputs)
+        self._prepare_run_identity(compare_release, comparison_inputs)
 
         if not resume:
             self.out.mkdir(mode=0o700)
@@ -408,7 +408,7 @@ class Pipeline:
         compare_release: str | None,
         reuse_from: Path | str | None,
         recompute_division: bool,
-    ) -> tuple[dict[str, Any] | None, str | None, str | None]:
+    ) -> tuple[dict[str, Any] | None, str | None]:
         """Apply the requested options or restore them from an interrupted run.
 
         Args:
@@ -418,8 +418,7 @@ class Pipeline:
             recompute_division: Whether to reuse only the physical grid.
 
         Returns:
-            Previous run identity, comparison release name, and reuse directory
-            as text. Each is None when absent.
+            Previous run identity and comparison release name. Each is None when absent.
 
         Raises:
             ValueError: The checkpoint is missing or the options are incompatible.
@@ -430,7 +429,7 @@ class Pipeline:
                 "run has no supported checkpoint identity; preserve it and start a fresh run"
             )
         previous = read_json(identity_path) if self.resume else None
-        reuse = str(Path(reuse_from).resolve()) if reuse_from is not None else None
+        reuse = Path(reuse_from).resolve() if reuse_from is not None else None
         if previous is not None:
             if divide is not None and divide != previous.get("divide"):
                 raise ValueError("resume uses a different --divide selection")
@@ -440,18 +439,20 @@ class Pipeline:
                 raise ValueError("resume uses a different --compare-release selection")
             divide = previous.get("divide")
             compare_release = previous.get("compare_release")
-            if reuse is not None and reuse != previous["reuse_from"]:
+            saved_reuse = previous["reuse_from"]
+            saved_path = Path(saved_reuse) if saved_reuse is not None else None
+            if reuse is not None and reuse != saved_path:
                 raise ValueError("resume uses a different --reuse-from run")
             if recompute_division and not previous["recompute_division"]:
                 raise ValueError("resume uses a different --recompute-division setting")
-            reuse = previous["reuse_from"]
+            reuse = saved_path
             recompute_division = previous["recompute_division"]
         if recompute_division and reuse is None:
             raise ValueError("--recompute-division requires --reuse-from")
-        self.reuse_from = Path(reuse) if reuse is not None else None
+        self.reuse_from = reuse
         self.recompute_division = recompute_division
         self.requested_parents = divide
-        return previous, compare_release, reuse
+        return previous, compare_release
 
     def _load_selection(
         self, sources: dict[str, Any], selection: Path | str | None
@@ -558,14 +559,12 @@ class Pipeline:
 
     def _prepare_run_identity(
         self,
-        reuse: str | None,
         compare_release: str | None,
         comparison_inputs: dict[str, Any] | None,
     ) -> None:
         """Collect the inputs, code and options to save for the run.
 
         Args:
-            reuse: Path of the reused run as recorded in its saved options.
             compare_release: Release name used for comparison, if supplied.
             comparison_inputs: Pinned comparison files keyed by input name.
         """
@@ -581,7 +580,7 @@ class Pipeline:
             "output": str(self.out),
             "runtime": self.runtime,
             "divide": self.requested_parents,
-            "reuse_from": reuse,
+            "reuse_from": str(self.reuse_from) if self.reuse_from is not None else None,
             "recompute_division": self.recompute_division,
             "runtime_paths": {
                 key: os.environ.get(key)
