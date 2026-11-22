@@ -347,7 +347,13 @@ class Fixture(unittest.TestCase):
         output = self.root / "run"
         cases = [
             (dict(self.cfg, schema="unknown"), {}, "unsupported end-to-end configuration"),
-            (dict(self.cfg, sources={}), {}, "select land_config and inland_water"),
+            (dict(self.cfg, sources=[]), {}, "sources must be a JSON object"),
+            (dict(self.cfg, sources={}), {}, "sources is missing inland_water, land_config"),
+            (
+                dict(self.cfg, sources=dict(self.cfg["sources"], inland_watre={})),
+                {},
+                "sources has unexpected keys inland_watre",
+            ),
             (
                 {key: value for key, value in self.cfg.items() if key != "input_root"},
                 {},

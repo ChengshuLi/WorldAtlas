@@ -302,15 +302,20 @@ class Pipeline:
         if self.cfg.get("schema") != "worldatlas-end-to-end-pipeline-v3":
             raise ValueError("unsupported end-to-end configuration")
         self.grid = Grid(**self.cfg["grid"])
-        selections = self.cfg.get("sources")
-        required = {"land_config", "inland_water"}
-        if (
-            not isinstance(selections, dict)
-            or not required <= selections.keys()
-            or set(selections) - required - {"reference_rows", "reference_runs"}
-        ):
-            raise ValueError("select land_config and inland_water")
-        coastline, water = selections["land_config"], selections["inland_water"]
+        sources = self.cfg.get("sources")
+        if not isinstance(sources, dict):
+            raise ValueError("sources must be a JSON object")
+        required_sources = {"land_config", "inland_water"}
+        allowed_sources = required_sources | {"reference_rows", "reference_runs"}
+        missing = required_sources.difference(sources)
+        if missing:
+            raise ValueError(f"sources is missing {', '.join(sorted(missing))}")
+        unexpected = set(sources).difference(allowed_sources)
+        if unexpected:
+            raise ValueError(
+                f"sources has unexpected keys {', '.join(sorted(unexpected))}"
+            )
+        coastline, water = sources["land_config"], sources["inland_water"]
         if not isinstance(coastline, dict) or not isinstance(
             coastline.get("land"), list
         ):
@@ -399,11 +404,11 @@ class Pipeline:
                     "set NEON_DATABASE_URL to freeze working geography, or supply --selection"
                 )
             with psycopg.connect(connection, connect_timeout=15) as database:
-                references = {key[0] for key in catalog_keys(selections)}
+                references = {key[0] for key in catalog_keys(sources)}
                 self.selection = read_selection(
                     database, raw_sources=references, parents=divide
                 )
-        resolved = self.resolve_raw_catalog(selections)
+        resolved = self.resolve_raw_catalog(sources)
         coastline = resolved.pop("land_config")
         water = resolved.pop("inland_water")
         rasterization = water.pop("rasterization")
