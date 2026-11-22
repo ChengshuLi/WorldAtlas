@@ -102,7 +102,6 @@ class BuildConfiguration(TypedDict):
 
     schema: Literal["worldatlas-end-to-end-pipeline-v3"]
     grid: GridSettings
-    r2_endpoint: NotRequired[NonemptyString]
     sources: BuildSources
     selection_notes: NotRequired[str]
     physical_controls: NotRequired[PhysicalControls]
@@ -135,7 +134,6 @@ class PhysicalConfiguration(PhysicalControls):
     selection_notes: NonemptyString
     source_directory: NonemptyString
     grid: GridSettings
-    r2_endpoint: NotRequired[NonemptyString]
     land_config: LandSettings
     inland_water: PinnedInlandWaterSettings
     water_reference: NotRequired[FilePin]

@@ -8,7 +8,6 @@ import argparse
 import json
 import logging
 from collections.abc import Callable
-from contextlib import closing, nullcontext
 from functools import partial
 from pathlib import Path
 from typing import Any
@@ -16,7 +15,6 @@ from typing import Any
 import psycopg
 
 from worldatlas.shared.database import connect_neon, neon_connection_url
-from worldatlas.shared.r2 import R2Client, make_r2_client
 from worldatlas.source_imports.iho.areas import s130_areas
 from worldatlas.source_imports.interpreted.geometry import interpreted_geometry
 from worldatlas.source_imports.osm.features import selected_osm_features
@@ -68,7 +66,6 @@ def run_import(
     connect: Callable[[], psycopg.Connection],
     recipe_id: str,
     *,
-    storage: R2Client | None = None,
     work_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Run a construction validated when it was saved in Neon.
@@ -79,7 +76,6 @@ def run_import(
     Args:
         connect: Callable that opens a PostgreSQL connection.
         recipe_id: Construction ID to read from Neon.
-        storage: Optional R2 client. Defaults to the project account.
         work_dir: Local cache directory, required when reading raw files.
 
     Returns:
@@ -97,7 +93,6 @@ def run_import(
     return importer(
         Runtime(
             connect=connect,
-            storage=storage,
             recipe_id=recipe_id,
             method=method,
             arguments=arguments,
@@ -114,7 +109,6 @@ def main() -> None:
     parser.add_argument(
         "--recipe", metavar="ID", required=True, help="construction ID in Neon"
     )
-    parser.add_argument("--r2-endpoint", help="override the project R2 endpoint")
     parser.add_argument(
         "--work-dir", type=Path, help="local cache for raw source files"
     )
@@ -124,14 +118,5 @@ def main() -> None:
     except ValueError as exc:
         parser.error(str(exc))
     connect = partial(connect_neon, url=url)
-    r2 = (
-        closing(make_r2_client(args.r2_endpoint)) if args.r2_endpoint else nullcontext()
-    )
-    with r2 as storage:
-        result = run_import(
-            connect,
-            args.recipe,
-            storage=storage,
-            work_dir=args.work_dir,
-        )
+    result = run_import(connect, args.recipe, work_dir=args.work_dir)
     print(json.dumps(result))

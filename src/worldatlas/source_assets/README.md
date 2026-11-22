@@ -4,7 +4,7 @@ Neon records the R2 location, byte size, and SHA-256 of each raw source. The sha
 
 ## Use
 
-Use `catalog_sources(database, source_ids)` to look up raw files by ID. Pass a returned file pin to `SourceCache(input_directory).acquire(pin)`. Use `assemble()` when a provider file is stored as ordered parts. A map build already has its catalog rows in the saved input selection and passes those same pins directly to the cache.
+Use `catalog_sources(database, source_ids)` to look up raw files by ID. Create a `SourceCache(input_directory)` and pass each returned file pin to `acquire()`. Use `assemble()` when a provider file is stored as ordered parts. Call `close()` after acquiring the files to close the cache's R2 client. A map build gets its pins from the saved input selection.
 
 ## How it works
 

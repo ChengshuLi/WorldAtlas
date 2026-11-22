@@ -52,12 +52,6 @@ class ReplaySourcesTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "must name exactly one entry in files"):
                     validate_replay_sources(self.configuration, self.selection)
 
-    def test_replay_checks_an_explicit_r2_endpoint(self):
-        with self.assertRaisesRegex(ValueError, "Cloudflare R2"):
-            validate_replay_sources(
-                dict(self.configuration, r2_endpoint="https://example.com"), self.selection
-            )
-
     def test_direct_water_shard_pin_requires_a_byte_size(self):
         self.sources["inland_water"]["files"] = [dict(
             path="old.parquet", r2_bucket="test", r2_key="sources/old.parquet", sha256="a" * 64,

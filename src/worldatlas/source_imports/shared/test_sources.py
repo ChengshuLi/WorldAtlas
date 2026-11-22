@@ -6,9 +6,8 @@ import io
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
-from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 
@@ -34,8 +33,9 @@ class SourceAcquisitionTests(unittest.TestCase):
         combined = b''.join(payloads[ident] for ident in parts)
         multipart = dict(parts=parts, sha256=hashlib.sha256(combined).hexdigest(),
                          size_bytes=len(combined), filename='terrain.tif')
-        with tempfile.TemporaryDirectory() as directory:
-            runtime = Runtime(connect=lambda: nullcontext(database), storage=R2Client(storage),
+        with (tempfile.TemporaryDirectory() as directory,
+              patch('boto3.client', return_value=storage)):
+            runtime = Runtime(connect=lambda: nullcontext(database),
                               recipe_id='test', method='watershed_boundary', arguments={},
                               work_dir=Path(directory))
             paths = acquire_sources(runtime, ['standalone', multipart],

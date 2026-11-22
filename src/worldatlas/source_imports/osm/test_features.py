@@ -7,13 +7,12 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import psycopg
 from psycopg.types.json import Jsonb
 from shapely.geometry import MultiPolygon, Polygon, shape
 
-from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.osm.features import read_features
 from worldatlas.source_imports.run_import import run_import
 
@@ -252,10 +251,10 @@ class OsmFeatureTests(unittest.TestCase):
                 "VALUES (%s,'selected_osm_features',%s,'Test OSM polygon selection')",
                 (recipe_id, Jsonb(dict(source_id=source_id, selections=[self.selection]))),
             )
-            result = run_import(
-                lambda: nullcontext(database), recipe_id,
-                storage=R2Client(storage), work_dir=self.path.parent,
-            )
+            with patch("boto3.client", return_value=storage):
+                result = run_import(
+                    lambda: nullcontext(database), recipe_id, work_dir=self.path.parent,
+                )
             self.assertEqual(result["feature_ids"], [feature_id])
             self.assertEqual(Path(result["source"]).read_bytes(), raw)
             self.assertEqual(database.execute(

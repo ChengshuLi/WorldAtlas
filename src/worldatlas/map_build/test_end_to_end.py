@@ -19,7 +19,6 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import ogr
 
-from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.run_import import run_import
 from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
@@ -144,12 +143,12 @@ class EndToEndTests(unittest.TestCase):
                 storage.get_object.side_effect = lambda **kw: dict(
                     Body=io.BytesIO(coast.read_bytes())
                 )
-                run_import(
-                    lambda: psycopg.connect(url),
-                    "__e2e_import",
-                    storage=R2Client(storage),
-                    work_dir=root / "inputs",
-                )
+                with patch("boto3.client", return_value=storage):
+                    run_import(
+                        lambda: psycopg.connect(url),
+                        "__e2e_import",
+                        work_dir=root / "inputs",
+                    )
                 with psycopg.connect(url) as db:
                     for ident, entity in (("first", 81), ("second", 42)):
                         db.execute(

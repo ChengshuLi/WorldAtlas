@@ -67,8 +67,8 @@ class ImportSelectionTests(unittest.TestCase):
     def setUp(self):
         """Supply stand-ins for the database connection and R2 cache options."""
         self.connect = lambda: nullcontext(object())
-        self.storage = Mock()
-        self.options = dict(storage=self.storage, work_dir=Path("/test/cache"))
+        self.make_client = self.enterContext(patch("boto3.client"))
+        self.options = dict(work_dir=Path("/test/cache"))
 
     def test_every_registered_signature_receives_arguments_and_separate_runtime(
         self,
@@ -94,7 +94,6 @@ class ImportSelectionTests(unittest.TestCase):
                 self.assertEqual(runtime.recipe_id, "arbitrary-record-name")
                 self.assertEqual(runtime.method, method)
                 self.assertEqual(runtime.arguments, ARGUMENTS[method])
-                self.assertIs(runtime.storage, self.storage)
                 self.assertEqual(runtime.work_dir, self.options["work_dir"])
 
     def test_trace_needs_no_storage_or_cache(self):
@@ -109,7 +108,7 @@ class ImportSelectionTests(unittest.TestCase):
             ),
         ):
             runtime = run_import(self.connect, "trace")
-        self.assertIsNone(runtime.storage)
+        self.make_client.assert_not_called()
         self.assertIsNone(runtime.work_dir)
 
     def test_unsupported_methods_stop_before_downloading(self):
@@ -125,14 +124,14 @@ class ImportSelectionTests(unittest.TestCase):
                     ValueError, "unsupported source construction method"
                 ):
                     run_import(self.connect, "record", **self.options)
-        self.storage.get_object.assert_not_called()
+        self.make_client.assert_not_called()
 
     def test_missing_recipe_stops_before_downloading(self):
         database = Mock()
         database.execute.return_value.fetchone.return_value = None
         with self.assertRaisesRegex(ValueError, "construction record is missing"):
             run_import(lambda: nullcontext(database), "absent", **self.options)
-        self.storage.get_object.assert_not_called()
+        self.make_client.assert_not_called()
 
     def test_command_reports_missing_database_setting(self):
         errors = io.StringIO()
@@ -152,5 +151,5 @@ class ImportSelectionTests(unittest.TestCase):
             return_value=("osm_way_chain", ARGUMENTS["osm_way_chain"]),
         ):
             with self.assertRaisesRegex(ValueError, "requires --work-dir"):
-                run_import(self.connect, "record", storage=self.storage)
-        self.storage.get_object.assert_not_called()
+                run_import(self.connect, "record")
+        self.make_client.assert_not_called()

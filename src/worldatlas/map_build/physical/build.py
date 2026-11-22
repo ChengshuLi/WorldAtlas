@@ -14,7 +14,7 @@ import time
 import uuid
 from collections.abc import Callable, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import nullcontext
+from contextlib import ExitStack, closing, nullcontext
 from contextvars import copy_context
 from pathlib import Path
 from typing import Any
@@ -356,14 +356,14 @@ def run(
     if not output.parent.is_dir():
         raise ValueError('output parent must exist')
     lock_path = output.parent / (output.name + '.lock')
-    with lock_path.open('a') as lock:
+    with lock_path.open('a') as lock, ExitStack() as resources:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             raise ValueError('physical pipeline already running') from None
         journal: list[ProcessingJournal | None] = [None]
         try:
-            return _run(config_path, output, grid, started, resume, journal)
+            return _run(config_path, output, grid, started, resume, journal, resources)
         except BaseException:
             if journal[0] is not None and not journal[0].finished:
                 journal[0].finish('failed')
@@ -377,6 +377,7 @@ def _run(
     processing_started: float,
     resume: bool,
     journal_slot: list[ProcessingJournal | None],
+    resources: ExitStack,
 ) -> dict[str, Any]:
     """Rasterize the sources, union water masks, and compose the physical grid.
 
@@ -388,6 +389,7 @@ def _run(
         resume: Whether to look for completed outputs before rasterizing.
         journal_slot: Single slot for the active journal so the caller can
             record failures.
+        resources: Closes the source cache as the run exits.
 
     Returns:
         Physical build report, including the completed output file pins.
@@ -404,9 +406,7 @@ def _run(
     workers = cfg.get('max_parallel_shards', 2)
     source_directory = Path(cfg['source_directory']).resolve()
     require_separate_cache_and_output(source_directory, output)
-    cache = SourceCache(
-        source_directory, endpoint=cfg.get('r2_endpoint', r2.DEFAULT_R2_ENDPOINT)
-    )
+    cache = resources.enter_context(closing(SourceCache(source_directory)))
     land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
     water_cfg = cfg['inland_water']
     if 'native_method' in water_cfg:

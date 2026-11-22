@@ -6,7 +6,6 @@ import shutil
 import time
 import zipfile
 from collections.abc import Callable, Mapping, Sequence
-from contextlib import closing
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import IO
@@ -141,26 +140,21 @@ class SourceCache:
     their original relative paths so readers can find companion files.
     """
 
-    def __init__(
-        self,
-        directory: Path,
-        *,
-        endpoint: str = r2.DEFAULT_R2_ENDPOINT,
-        client: r2.R2Client | None = None,
-    ) -> None:
-        """Configure a local cache and the R2 connection to use for misses.
+    def __init__(self, directory: Path) -> None:
+        """Set up a local cache with one R2 client.
 
         Args:
             directory: Root directory for cached files.
-            endpoint: R2 account URL used when opening a client.
-            client: Existing R2 client, kept open by its caller.
         """
         self.directory = directory.resolve()
-        self.endpoint = endpoint
-        self.client = client
+        self._client = r2.make_r2_client()
         self.pins: list[dict[str, str]] = []
         self.download_intervals: list[tuple[float, float]] = []
         self._verified: set[tuple[Path, str, int]] = set()
+
+    def close(self) -> None:
+        """Close the R2 client."""
+        self._client.close()
 
     def path(self, spec: FileSpec) -> Path:
         """Find where a pinned R2 object or ZIP member belongs locally.
@@ -241,14 +235,12 @@ class SourceCache:
         self,
         spec: FileSpec,
         *,
-        endpoint: str | None = None,
         check_cancelled: Callable[[], None] = lambda: None,
     ) -> Path:
         """Reuse or fetch one complete R2 object or requested ZIP member.
 
         Args:
             spec: Expected file bytes and their R2 or ZIP location.
-            endpoint: Account URL override for these bytes.
             check_cancelled: Optional callback that raises during cancelled work.
 
         Returns:
@@ -261,7 +253,7 @@ class SourceCache:
                 path,
                 digest,
                 size,
-                lambda output: self._extract(spec, output, endpoint, check_cancelled),
+                lambda output: self._extract(spec, output, check_cancelled),
             )
 
         bucket, key = _location(spec)
@@ -269,9 +261,7 @@ class SourceCache:
             path,
             digest,
             size,
-            lambda output: self._download(
-                bucket, key, size, output, endpoint or self.endpoint, check_cancelled
-            ),
+            lambda output: self._download(bucket, key, size, output, check_cancelled),
         )
 
     def _download(
@@ -280,7 +270,6 @@ class SourceCache:
         key: str,
         size: int,
         output: IO[bytes],
-        endpoint: str,
         check_cancelled: Callable[[], None],
     ) -> None:
         """Transfer one object and record the time spent on the transfer itself.
@@ -290,16 +279,11 @@ class SourceCache:
             key: R2 object key.
             size: Expected object byte count.
             output: Open temporary output file.
-            endpoint: Account URL if the caller did not supply a client.
             check_cancelled: Callback that raises if work should stop.
         """
         started = time.monotonic()
         try:
-            if self.client is not None:
-                _stream_object(self.client, bucket, key, size, output, check_cancelled)
-            else:
-                with closing(r2.make_r2_client(endpoint)) as client:
-                    _stream_object(client, bucket, key, size, output, check_cancelled)
+            _stream_object(self._client, bucket, key, size, output, check_cancelled)
         finally:
             self.download_intervals.append((started, time.monotonic()))
 
@@ -307,7 +291,6 @@ class SourceCache:
         self,
         spec: FileSpec,
         output: IO[bytes],
-        endpoint: str | None,
         check_cancelled: Callable[[], None],
     ) -> None:
         """Read a single regular ZIP member from its verified archive.
@@ -315,7 +298,6 @@ class SourceCache:
         Args:
             spec: Validated archive and member pin.
             output: Open temporary output file.
-            endpoint: Account URL override for the archive.
             check_cancelled: Callback that raises if work should stop.
 
         Raises:
@@ -323,9 +305,7 @@ class SourceCache:
         """
         archive, member = spec["archive"], spec["member"]
         assert isinstance(archive, dict) and isinstance(member, str)
-        local = self.acquire(
-            archive, endpoint=endpoint, check_cancelled=check_cancelled
-        )
+        local = self.acquire(archive, check_cancelled=check_cancelled)
         with zipfile.ZipFile(local) as packed:
             matches = [item for item in packed.infolist() if item.filename == member]
             if (

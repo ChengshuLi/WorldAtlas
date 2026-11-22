@@ -13,7 +13,6 @@ from unittest.mock import Mock, patch
 import psycopg
 from psycopg.types.json import Jsonb
 
-from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.osm.ways import assemble
 from worldatlas.source_imports.run_import import run_import
 
@@ -69,6 +68,7 @@ class DatabaseTests(unittest.TestCase):
         self.recipe = dict(way_source_ids=["osm-test-1"], feature_id="border")
         self.store(self.recipe)
         self.storage = Mock()
+        self.enterContext(patch("boto3.client", return_value=self.storage))
         self.storage.get_object.side_effect = lambda **kw: {
             "Body": io.BytesIO(self.responses[kw["Key"]])
         }
@@ -99,7 +99,6 @@ class DatabaseTests(unittest.TestCase):
         return run_import(
             lambda: nullcontext(self.database),
             recipe_id,
-            storage=R2Client(self.storage),
             work_dir=self.directory,
         )
 

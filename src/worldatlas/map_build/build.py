@@ -17,6 +17,7 @@ import threading
 import time
 import uuid
 from collections.abc import Iterator
+from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 from types import FrameType
@@ -73,7 +74,6 @@ from worldatlas.shared.files import (
     verify_pins,
     write_json,
 )
-from worldatlas.shared.r2 import DEFAULT_R2_ENDPOINT
 from worldatlas.source_assets.cache import SourceCache
 
 HERE = Path(__file__).resolve().parent
@@ -216,8 +216,8 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
     produced = read_json(output / "report.json")
     if Grid(**produced["grid"]) != Grid(**configuration["grid"]):
         raise ValueError("physical reuse requires the same grid as the source run")
-    cache = SourceCache(Path(configuration["source_directory"]))
-    land, _ = physical_build.plan_land_inputs(configuration["land_config"], cache)
+    with closing(SourceCache(Path(configuration["source_directory"]))) as cache:
+        land, _ = physical_build.plan_land_inputs(configuration["land_config"], cache)
 
     def saved_settings(key: str) -> dict[str, JSONValue]:
         """Read a stage configuration after checking its saved fingerprint.
@@ -335,14 +335,14 @@ class Pipeline:
         self.selection = self._load_selection(source_ids, selection)
         self.compiled_divisions = prepare_geography(self.selection["geography"])
         self._fill_catalog_entries(references)
-        r2_endpoint = self.cfg.get("r2_endpoint", DEFAULT_R2_ENDPOINT)
-        self.physical_config = self._physical_configuration(sources, r2_endpoint)
-        self.r2_inputs = SourceCache(self.root / "inputs", endpoint=r2_endpoint)
+        self.physical_config = self._physical_configuration(sources)
+        self.r2_inputs = SourceCache(self.root / "inputs")
         self.source_pins = self.r2_inputs.pins
         self.comparison_files: dict[str, Path] = {}
-        comparison_inputs = self._prepare_comparison(
-            sources, compare_release, saved_identity
-        )
+        with closing(self.r2_inputs):
+            comparison_inputs = self._prepare_comparison(
+                sources, compare_release, saved_identity
+            )
         self.physical_reuse = (
             physical_reference(self.reuse_from, self.physical_config)
             if self.reuse_from is not None
@@ -480,14 +480,11 @@ class Pipeline:
                 parents=self.requested_parents,
             )
 
-    def _physical_configuration(
-        self, sources: BuildSources, r2_endpoint: str
-    ) -> dict[str, Any]:
+    def _physical_configuration(self, sources: BuildSources) -> dict[str, Any]:
         """Record the grid and source settings for a standalone physical build.
 
         Args:
             sources: Source settings with catalog entries expanded to file pins.
-            r2_endpoint: Resolved R2 account URL for physical source files.
 
         Returns:
             A JSON-ready configuration with the grid, coastline and inland water.
@@ -498,7 +495,6 @@ class Pipeline:
             "selection_notes": self.cfg.get("selection_notes"),
             "source_directory": str(self.root / "inputs"),
             "grid": vars(self.grid),
-            "r2_endpoint": r2_endpoint,
             "land_config": sources["land_config"],
             "inland_water": sources["inland_water"],
         }
@@ -791,7 +787,6 @@ class Pipeline:
                     "size_bytes": size,
                     "sha256": stored_hash,
                 },
-                endpoint=DEFAULT_R2_ENDPOINT,
             )
             if not path.exists():
                 partial = path.with_name(
@@ -812,9 +807,7 @@ class Pipeline:
                 {"path": str(path), "sha256": decoded_hash}
             )
         if config is not None:
-            reference["reference_config"] = self.r2_inputs.acquire(
-                config, endpoint=DEFAULT_R2_ENDPOINT
-            )
+            reference["reference_config"] = self.r2_inputs.acquire(config)
         return reference
 
     def resolve_pin(self, pin: FilePin) -> Path:

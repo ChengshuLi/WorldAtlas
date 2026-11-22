@@ -51,7 +51,6 @@ from worldatlas.shared.files import (
     verify_pins,
 )
 from worldatlas.shared.r2 import (
-    DEFAULT_R2_ENDPOINT,
     R2Client,
     R2ObjectMissing,
     make_r2_client,
@@ -655,7 +654,7 @@ def main() -> None:
     if map_version is None:
         with connect_neon(url=url, autocommit=True) as db:
             release = lookup_release(db, args.candidate)
-        with closing(make_r2_client(DEFAULT_R2_ENDPOINT)) as storage:
+        with closing(make_r2_client()) as storage:
             saved = read_manifest(storage, release)
             asset = saved["objects"].get(INPUTS_FILE)
             if asset is None:
@@ -683,7 +682,7 @@ def main() -> None:
             )
         with (
             connect_neon(url=url, autocommit=True) as db,
-            closing(make_r2_client(DEFAULT_R2_ENDPOINT)) as storage,
+            closing(make_r2_client()) as storage,
         ):
             # Stage and publish share a lock so preview retirement cannot race an upload.
             db.execute("SELECT pg_advisory_lock(hashtext('atlas.release_publication'))")

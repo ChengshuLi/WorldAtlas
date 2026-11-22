@@ -14,7 +14,6 @@ from worldatlas.map_build.inputs.configuration import (
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.shared.files import JSONValue, json_bytes
-from worldatlas.shared.r2 import DEFAULT_R2_ENDPOINT, validate_r2_endpoint
 from worldatlas.source_assets.cache import validate_object_pin
 
 FILENAME = "inputs.json.gz"
@@ -73,7 +72,6 @@ def validate_replay_sources(
     PHYSICAL_CONTROLS.validate_python(
         configuration.get("physical_controls", {}), strict=True
     )
-    validate_r2_endpoint(configuration.get("r2_endpoint", DEFAULT_R2_ENDPOINT))
     for index, spec in enumerate(sources["inland_water"]["files"]):
         name = f"inland_water.files[{index}]"
         require_source(name, spec)

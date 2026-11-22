@@ -2,6 +2,7 @@
 
 import time
 from collections.abc import Iterable, Sequence
+from contextlib import closing
 from pathlib import Path, PurePosixPath
 from typing import Any, TypedDict
 from zipfile import ZipFile, ZipInfo, is_zipfile
@@ -93,7 +94,7 @@ def acquire_sources(
     checked in the catalog and don't need local files.
 
     Args:
-        runtime: The import's database connection factory and R2 settings.
+        runtime: The import's database connection factory and cache directory.
         requests: Ordered list of source IDs or multipart specifications.
         evidence_source_ids: Source IDs cited as supporting evidence.
         timing: Optional dictionary for catalog, staging, and transfer times.
@@ -121,18 +122,18 @@ def acquire_sources(
     paths: list[Path] = []
     if requests:
         assert runtime.work_dir is not None
-        cache = SourceCache(runtime.work_dir, client=runtime.storage)
-        for request in requests:
-            if isinstance(request, dict):
-                path = cache.assemble(
-                    [sources[ident] for ident in request['parts']],
-                    request['sha256'],
-                    request['size_bytes'],
-                    request['filename'],
-                )
-            else:
-                path = cache.acquire(sources[request])
-            paths.append(path)
+        with closing(SourceCache(runtime.work_dir)) as cache:
+            for request in requests:
+                if isinstance(request, dict):
+                    path = cache.assemble(
+                        [sources[ident] for ident in request['parts']],
+                        request['sha256'],
+                        request['size_bytes'],
+                        request['filename'],
+                    )
+                else:
+                    path = cache.acquire(sources[request])
+                paths.append(path)
         if timing is not None and cache.download_intervals:
             intervals = cache.download_intervals
             timing['download_intervals'] = intervals

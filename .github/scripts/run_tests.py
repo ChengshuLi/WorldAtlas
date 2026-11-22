@@ -58,8 +58,11 @@ def run_suite(
                         print('PASS', check.name, file=output)
                 code = 0
             else:
+                # The tests use local files and mock R2 requests.
                 env = dict(
-                    os.environ, WORLDATLAS_TEST_DATABASE_URL=databases.get(name, '')
+                    os.environ,
+                    WORLDATLAS_TEST_DATABASE_URL=databases.get(name, ''),
+                    AWS_EC2_METADATA_DISABLED='true',
                 )
                 code = subprocess.run(
                     [

@@ -18,7 +18,7 @@ from unittest.mock import Mock, patch
 
 from botocore.exceptions import ClientError
 
-from worldatlas.shared.r2 import DEFAULT_R2_ENDPOINT, R2Client, R2ObjectMissing
+from worldatlas.shared.r2 import R2Client, R2ObjectMissing
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.inputs.selection import canonical_bytes
 from worldatlas.map_build.test_support import selection
@@ -911,10 +911,9 @@ class CommandTests(unittest.TestCase):
                 main()
             self.assertIn(error, output.getvalue())
 
-    def test_write_commands_share_the_release_endpoint_and_lock(self):
+    def test_write_commands_share_the_release_lock(self):
         command = "worldatlas.map_releases.manage_release"
         candidate = "v9.0-rc.1"
-        endpoint = DEFAULT_R2_ENDPOINT
         for action, arguments, published, cleanup_error in (
             ("stage", ["run", "--viewer", "viewer"], False, False),
             ("publish", [], True, False),
@@ -939,7 +938,7 @@ class CommandTests(unittest.TestCase):
                   patch.dict(os.environ, NEON_DATABASE_URL="host=test"),
                   patch("psycopg.connect", return_value=nullcontext(db)),
                   patch(command + ".make_r2_client", return_value=R2Client(storage)) as client,
-                  patch(command + ".build_bundle", return_value={"inputs": {"r2_endpoint": "old-raw-endpoint"}}),
+                  patch(command + ".build_bundle", return_value={"inputs": {}}),
                   patch(f"{command}.{action}", side_effect=after_lock) as operation,
                   patch(command + ".retire_previews", side_effect=cleanup) as retire,
                   redirect_stdout(io.StringIO()) as output):
@@ -948,7 +947,7 @@ class CommandTests(unittest.TestCase):
                         main()
                 else:
                     main()
-            client.assert_called_once_with(endpoint)
+            client.assert_called_once_with()
             operation.assert_called_once()
             messages = output.getvalue()
             if action == "stage":
@@ -1004,6 +1003,6 @@ class CommandTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "no input archive"):
                     main()
             self.assertEqual(client.call_count, 2)
-            client.assert_called_with(DEFAULT_R2_ENDPOINT)
+            client.assert_called_with()
             db.execute.assert_not_called()
             self.assertEqual(json.loads((output / "selection.json").read_bytes()), {"coordinates": [0, 1]})

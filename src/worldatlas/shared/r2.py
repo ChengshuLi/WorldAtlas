@@ -1,6 +1,5 @@
 """Read and write R2 objects without exposing S3 request and response formats."""
 
-import re
 from collections.abc import Iterator
 from contextlib import closing, contextmanager
 from dataclasses import dataclass
@@ -202,32 +201,12 @@ class R2Client:
         self._client.delete_object(Bucket=bucket, Key=key)
 
 
-def validate_r2_endpoint(endpoint: str | None) -> None:
-    """Require an HTTPS account endpoint for R2.
-
-    Args:
-        endpoint: Candidate account URL.
-
-    Raises:
-        ValueError: The URL is absent or is not a valid R2 account endpoint.
-    """
-    if endpoint is None or not re.fullmatch(
-        r'https://[0-9a-f]{32}(?:\.(?:eu|us|fedramp))?\.r2\.cloudflarestorage\.com',
-        endpoint,
-    ):
-        raise ValueError(
-            'R2 endpoint must be an HTTPS Cloudflare R2 S3 account endpoint'
-        )
-
-
-def make_r2_client(endpoint: str | None) -> R2Client:
-    """Open an R2 client using the configured AWS credentials.
-
-    Args:
-        endpoint: HTTPS account URL.
+def make_r2_client() -> R2Client:
+    """Open a client for the project's R2 account using the configured credentials.
 
     Returns:
         Client whose network connections the caller closes after use.
     """
-    validate_r2_endpoint(endpoint)
-    return R2Client(boto3.client('s3', endpoint_url=endpoint, region_name='auto'))
+    return R2Client(
+        boto3.client('s3', endpoint_url=DEFAULT_R2_ENDPOINT, region_name='auto')
+    )

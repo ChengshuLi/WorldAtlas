@@ -27,8 +27,11 @@ class DownloadTest(unittest.TestCase):
             'size_bytes': len(self.raw),
         }
         self.storage = Mock()
-        self.client = R2Client(self.storage)
-        self.cache = SourceCache(self.directory, client=self.client)
+        self.make_client = self.enterContext(
+            patch.object(cache.r2, 'make_r2_client', return_value=R2Client(self.storage))
+        )
+        self.cache = SourceCache(self.directory)
+        self.addCleanup(self.cache.close)
         self.storage.get_object.return_value = {'Body': io.BytesIO(self.raw)}
 
     def test_download_and_reuse(self):
@@ -88,7 +91,7 @@ class DownloadTest(unittest.TestCase):
         path = self.cache.acquire(self.source)
         path.write_bytes(b'corrupt')
         with self.assertRaisesRegex(ValueError, 'size or hash'):
-            SourceCache(self.directory, client=self.client).acquire(self.source)
+            SourceCache(self.directory).acquire(self.source)
         self.assertEqual(self.storage.get_object.call_count, 1)
 
     def test_zip_member_requires_a_file_pin_for_its_archive(self):
@@ -100,7 +103,7 @@ class DownloadTest(unittest.TestCase):
         """Publish fixtures just before the caller tries to link the same path."""
         link = cache.os.link
         for valid, competing_bytes in ((True, expected), (False, b'x' * len(expected))):
-            self.cache = SourceCache(self.directory, client=self.client)
+            self.cache = SourceCache(self.directory)
 
             def competing_publish(partial, final):
                 if final == destination:
@@ -163,6 +166,7 @@ class DownloadTest(unittest.TestCase):
             path,
         )
         self.assertEqual(self.storage.get_object.call_count, 2)
+        self.make_client.assert_called_once_with()
 
     def test_verifies_complete_file_published_by_a_competing_assembly(self):
         parts, whole, digest = self.parts()

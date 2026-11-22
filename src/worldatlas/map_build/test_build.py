@@ -225,6 +225,11 @@ class Fixture(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name).resolve()
         self.frozen = selection()
+        self.r2_storage = Mock()
+        self.r2_storage.get_object.side_effect = AssertionError("unexpected R2 request")
+        self.enterContext(patch.object(
+            r2, "make_r2_client", side_effect=lambda: R2Client(self.r2_storage)
+        ))
         for mocking in (
             patch.dict("os.environ", {"NEON_DATABASE_URL": "fixture"}),
             patch(
@@ -450,11 +455,8 @@ class Fixture(unittest.TestCase):
             self.assertEqual(Path(error.exception.filename), saved)
 
     def test_release_comparison_downloads_and_verifies_streams_and_config(self):
-        raw_endpoint = "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.r2.cloudflarestorage.com"
-        release_endpoint = r2.DEFAULT_R2_ENDPOINT
         raw_key = "sources/coast.geojson"
         self.select_coastline(raw_key, [self.cloud(b"{}", raw_key)])
-        self.cfg["r2_endpoint"] = raw_endpoint
         config = write_json(self.inputs / "request.json", self.cfg)
         digest = lambda data: hashlib.sha256(data).hexdigest()
         decoded = {name: name.encode() for name in ("rows", "runs")}
@@ -521,10 +523,6 @@ class Fixture(unittest.TestCase):
             identity_path.write_text(json.dumps(identity))
             with self.assertRaisesRegex(ValueError, "resume is missing saved comparison files"):
                 pipeline.Pipeline(config, runner.out, work_dir=self.root, resume=True)
-            self.assertEqual(
-                [call.args[0] for call in r2.make_r2_client.call_args_list],
-                [release_endpoint] * len(stored),
-            )
         self.assertEqual(calls, list(stored))
 
     def test_release_comparison_reuses_decoded_stream_without_a_viewer_config(self):
@@ -584,10 +582,8 @@ class Fixture(unittest.TestCase):
             data = payloads[Key]
             return {"Body": io.BytesIO(data), "ContentLength": len(data)}
 
-        client = Mock()
-        client.get_object.side_effect = retrieve
-        with patch.object(r2, "make_r2_client", return_value=R2Client(client)):
-            yield client.get_object
+        with patch.object(self.r2_storage, "get_object", side_effect=retrieve) as get_object:
+            yield get_object
 
     def test_catalog_resolves_source_ids_before_r2_acquisition(self):
         payload = b"{}"
@@ -1176,7 +1172,6 @@ class Fixture(unittest.TestCase):
                 land_config=land,
                 inland_water=self.cfg["sources"]["inland_water"] | manifest,
             ),
-            "r2_endpoint": "https://" + "0" * 32 + ".r2.cloudflarestorage.com",
         }
         config = write_json(self.inputs / "single-cloud-config.json", cfg)
         calls = []

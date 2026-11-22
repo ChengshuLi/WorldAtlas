@@ -18,7 +18,6 @@ from psycopg.types.json import Jsonb
 from pyproj import CRS, Transformer
 from shapely.geometry import box
 
-from worldatlas.shared.r2 import R2Client
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.division.areas import divide_area
 from worldatlas.map_build.division.scope import complete_row
@@ -486,6 +485,7 @@ class StorageTests(unittest.TestCase):
             )
         self.store()
         self.client = Mock()
+        self.enterContext(patch("boto3.client", return_value=self.client))
         self.client.get_object.side_effect = lambda **kw: {
             "Body": io.BytesIO(self.data[kw["Key"]])
         }
@@ -508,7 +508,6 @@ class StorageTests(unittest.TestCase):
         return run_import(
             lambda: nullcontext(self.db),
             "watershed",
-            storage=R2Client(self.client),
             work_dir=self.directory / "cache",
         )
 

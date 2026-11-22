@@ -8,11 +8,10 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import psycopg
 from psycopg.types.json import Jsonb
-from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.shared.storage import _write_features
 from worldatlas.source_imports.run_import import run_import
 
@@ -29,6 +28,7 @@ class StorageTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         self.work = Path(temp.name)
         self.storage = Mock()
+        self.enterContext(patch("boto3.client", return_value=self.storage))
         self.raw = json.dumps(
             {
                 "type": "FeatureCollection",
@@ -70,7 +70,6 @@ class StorageTests(unittest.TestCase):
         return run_import(
             lambda: nullcontext(self.database),
             "__features",
-            storage=R2Client(self.storage),
             work_dir=self.work,
         )
 
@@ -164,6 +163,6 @@ class StorageTests(unittest.TestCase):
             (Jsonb(recipe),),
         )
         with self.assertRaisesRegex(ValueError, "feature ID already belongs to another construction"):
-            run_import(lambda: nullcontext(self.database), "__other", storage=R2Client(self.storage),
+            run_import(lambda: nullcontext(self.database), "__other",
                        work_dir=self.work)
         self.assertEqual(self.rows(), before)
