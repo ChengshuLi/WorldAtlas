@@ -315,26 +315,18 @@ class EndToEndTests(unittest.TestCase):
                     resumed.run()["final"]["runs"]["sha256"],
                     report["final"]["runs"]["sha256"],
                 )
-                with self.assertRaisesRegex(ValueError, "different --divide"):
-                    Pipeline(
-                        cfg, root / "continued", work_dir=root, resume=True, divide=[81]
-                    )
-                with self.assertRaisesRegex(ValueError, "different --reuse-from"):
-                    Pipeline(
-                        cfg,
-                        root / "continued",
-                        work_dir=root,
-                        resume=True,
-                        reuse_from=root / "run",
-                    )
-                with self.assertRaisesRegex(ValueError, "different --recompute-division"):
-                    Pipeline(
-                        cfg,
-                        root / "continued",
-                        work_dir=root,
-                        resume=True,
-                        recompute_division=True,
-                    )
+                for flags in (
+                    {"divide": [0]},
+                    {"reuse_from": root / "reused"},
+                    {"recompute_division": True},
+                ):
+                    with (
+                        self.subTest(flags=flags),
+                        self.assertRaisesRegex(ValueError, "--resume uses saved options"),
+                    ):
+                        Pipeline(
+                            cfg, root / "continued", work_dir=root, resume=True, **flags
+                        )
 
                 reference = Path(report["final"]["rows"]["path"]).parent
                 compare_cfg = json.loads(cfg.read_bytes())

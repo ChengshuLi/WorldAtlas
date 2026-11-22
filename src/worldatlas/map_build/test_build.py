@@ -507,12 +507,12 @@ class Fixture(unittest.TestCase):
                 self.assertEqual(resumed.comparison_files, runner.comparison_files)
             finally:
                 resumed.close()
-            with self.assertRaisesRegex(ValueError, "different --compare-release"):
+            with self.assertRaisesRegex(ValueError, "--resume uses saved options"):
                 pipeline.Pipeline(
                     config,
                     runner.out,
                     work_dir=self.root,
-                    compare_release="v8.1",
+                    compare_release="v8.0",
                     resume=True,
                 )
             runner.comparison_files["reference_rows"].write_bytes(b"changed comparison")

@@ -391,37 +391,33 @@ class Pipeline:
         Raises:
             ValueError: The checkpoint is missing or the options are incompatible.
         """
-        identity_path = self.out / "run-identity.json"
-        if self.resume and not identity_path.is_file():
-            raise ValueError(
-                "run has no supported checkpoint identity; preserve it and start a fresh run"
-            )
-        saved_identity = read_json(identity_path) if self.resume else None
-        reuse = Path(reuse_from).resolve() if reuse_from is not None else None
-        if saved_identity is not None:
-            saved_divide = saved_identity.get("divide")
-            saved_release = saved_identity.get("compare_release")
-            saved_reuse = saved_identity["reuse_from"]
-            saved_path = Path(saved_reuse) if saved_reuse is not None else None
-            saved_recompute = saved_identity["recompute_division"]
-            # An omitted switch keeps the value saved with the original run.
-            options = (
-                ("--divide", divide, saved_divide),
-                ("--compare-release", compare_release, saved_release),
-                ("--reuse-from", reuse, saved_path),
+        saved_identity = None
+        if self.resume:
+            if any(
                 (
-                    "--recompute-division",
-                    True if recompute_division else None,
-                    saved_recompute,
-                ),
-            )
-            for flag, supplied, saved in options:
-                if supplied is not None and supplied != saved:
-                    raise ValueError(f"resume uses a different {flag} setting")
-            divide = saved_divide
-            compare_release = saved_release
-            reuse = saved_path
-            recompute_division = saved_recompute
+                    divide is not None,
+                    compare_release is not None,
+                    reuse_from is not None,
+                    recompute_division,
+                )
+            ):
+                raise ValueError(
+                    "--resume uses saved options. Omit --divide, --compare-release, "
+                    "--reuse-from, and --recompute-division."
+                )
+            identity_path = self.out / "run-identity.json"
+            if not identity_path.is_file():
+                raise ValueError(
+                    "run has no supported checkpoint identity; preserve it and start a fresh run"
+                )
+            saved_identity = read_json(identity_path)
+            divide = saved_identity.get("divide")
+            compare_release = saved_identity.get("compare_release")
+            saved_reuse = saved_identity["reuse_from"]
+            reuse = Path(saved_reuse) if saved_reuse is not None else None
+            recompute_division = saved_identity["recompute_division"]
+        else:
+            reuse = Path(reuse_from).resolve() if reuse_from is not None else None
         if recompute_division and reuse is None:
             raise ValueError("--recompute-division requires --reuse-from")
         self.reuse_from = reuse
@@ -1226,7 +1222,10 @@ def main() -> None:
     p.add_argument(
         "--resume",
         action="store_true",
-        help="validate and continue the same checkpoint-enabled run",
+        help=(
+            "continue the saved run. Omit --divide, --compare-release, --reuse-from, "
+            "and --recompute-division"
+        ),
     )
     p.add_argument(
         "--selection", type=Path, help="replay a saved complete geographic selection"

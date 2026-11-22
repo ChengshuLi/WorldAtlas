@@ -21,7 +21,7 @@ Supply `--work-dir` and an output directory for every build. The builder creates
 | `--divide PARENT_ID` | Optional. By default, divide every parent with rules in the saved selection. Supply a parent entity ID to run only its division and the ancestor divisions it needs. For example, `--divide 0` divides World into continents. Repeat the option to select several parents. |
 | `--reuse-from PREVIOUS_RUN` | Start a new build using the physical grid from an earlier local run. The grid and physical inputs must match. By default, the builder tries to reuse all compatible geographic assignments. It checks each complete parent division first and can reuse the land assignments alone if only the water rules changed. |
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
-| `--resume` | Add to the original command to continue an interrupted build in the same output directory. |
+| `--resume` | Continue an interrupted build using its saved options. Pass the original config, output directory, and `--work-dir`. Omit `--divide`, `--compare-release`, `--reuse-from`, and `--recompute-division`. |
 | `--selection INPUT_SELECTION.json` | Use a saved geographic selection in place of reading working records from Neon. To rebuild a release, use its restored configuration, selection and captured code. |
 | `--compare-release VERSION_OR_RC` | Compare every cell with an official release or numbered candidate on the same grid. This needs Neon and R2 access. |
 
@@ -127,7 +127,7 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 
 **Code snapshots.** Each attempt saves its WorldAtlas code and setup files in `attempts/{ATTEMPT_ID}/source-code.json.gz`. Its `producer.json` records the checksum. If you edit the code between attempts, resume can reuse verified outputs from the old code and run the unfinished steps with the new code. Release staging keeps each snapshot. [Archived code](../map_releases/README.md#archived-code)
 
-**Stopping and resuming.** Press Ctrl+C to stop a build. Run the same command with `--resume` to continue from verified checkpoints. If a rule fails, the builder cancels queued rules in that group and asks running rules to stop between batches.
+**Stopping and resuming.** Press Ctrl+C to stop a build. Continue from verified checkpoints with the `--resume` command described above. If a rule fails, the builder cancels queued rules in that group and asks running rules to stop between batches.
 
 ## GDAL and release replays
 
