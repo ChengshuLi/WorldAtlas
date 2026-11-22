@@ -3,7 +3,6 @@
 import hashlib
 import json
 import re
-from importlib.resources import files
 from pathlib import PurePosixPath
 from typing import Any
 
@@ -12,18 +11,6 @@ from psycopg import Connection
 from worldatlas.shared.r2 import R2Client
 
 RELEASE_BUCKET = "worldatlas"
-
-
-def release_endpoint() -> str:
-    """Read the project's release endpoint from the installed configuration.
-
-    Returns:
-        The R2 account URL used by the release commands and map comparisons.
-    """
-    config = json.loads(
-        files("worldatlas.map_build").joinpath("config.json").read_bytes()
-    )
-    return config["physical_controls"]["source_staging"]["endpoint_url"]
 
 
 def release_prefix(release_id: str) -> str:

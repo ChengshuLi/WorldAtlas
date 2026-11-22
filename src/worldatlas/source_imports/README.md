@@ -6,11 +6,10 @@ These tools read raw geographic files from R2 and save geographic records in Neo
 
 ### Run one construction
 
-Follow the [project setup instructions](../../../README.md#pipeline-code) to install the package and set `NEON_DATABASE_URL`. Methods that download files also need R2 credentials, an endpoint, and a local work directory.
+Follow the [project setup instructions](../../../README.md#pipeline-code) to install the package and set `NEON_DATABASE_URL`. Methods that download files also need R2 credentials and a local work directory. Use `--r2-endpoint` only to override the project endpoint.
 
 ```bash
 worldatlas-import --recipe CONSTRUCTION_ID \
-  --r2-endpoint R2_ENDPOINT \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 

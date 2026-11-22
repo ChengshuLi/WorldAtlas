@@ -151,12 +151,6 @@ class ImportSelectionTests(unittest.TestCase):
             "worldatlas.source_imports.run_import.read_recipe",
             return_value=("osm_way_chain", ARGUMENTS["osm_way_chain"]),
         ):
-            for name in self.options:
-                with (
-                    self.subTest(missing=name),
-                    self.assertRaisesRegex(ValueError, "requires"),
-                ):
-                    run_import(
-                        self.connect, "record", **dict(self.options, **{name: None})
-                    )
+            with self.assertRaisesRegex(ValueError, "requires --work-dir"):
+                run_import(self.connect, "record", storage=self.storage)
         self.storage.get_object.assert_not_called()

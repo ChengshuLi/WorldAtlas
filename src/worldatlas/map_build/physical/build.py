@@ -7,15 +7,14 @@ import hashlib
 import json
 import math
 import os
-import re
 import shutil
 import sys
 import threading
 import time
 import uuid
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import closing, nullcontext
+from contextlib import nullcontext
 from contextvars import copy_context
 from pathlib import Path
 from typing import Any
@@ -27,8 +26,6 @@ from worldatlas.map_build.execution.runtime import elapsed_union
 from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
     LandSettings,
-    PhysicalControls,
-    R2Staging,
     land_dataset_index,
 )
 from worldatlas.map_build.physical import composition, land, water
@@ -43,14 +40,14 @@ from worldatlas.shared.files import (
     write_bytes_atomic,
     write_json,
 )
-from worldatlas.source_assets import r2 as source_cache
-from worldatlas.source_assets.catalog import stream_source
+from worldatlas.source_assets import cache as source_cache
+from worldatlas.source_assets.cache import FileSpec, SourceCache
 
 HERE = Path(__file__).resolve().parent
 
 
 def plan_land_inputs(
-    settings: LandSettings, cache: source_cache.R2InputCache
+    settings: LandSettings, cache: SourceCache
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
@@ -103,84 +100,6 @@ def run_stage[Result](
         The stage's result, typically a report dictionary.
     """
     return function(*args, emit=control.emit)
-
-
-def validate_shard_staging(
-    configuration: PhysicalControls, *, require_r2: bool = False
-) -> tuple[int, R2Staging | None]:
-    """Read the worker count and verify the R2 endpoint for water shards.
-
-    Args:
-        configuration: Physical settings with optional ``max_parallel_shards``
-            and ``source_staging`` fields.
-        require_r2: Require R2 staging for a replay that starts with an empty cache.
-
-    Returns:
-        The worker count and the R2 settings. The settings are None when the
-        build reads local shards.
-
-    Raises:
-        ValueError: R2 staging is required but missing, or its endpoint is invalid.
-    """
-    staging = configuration.get('source_staging')
-    if staging is None:
-        if require_r2:
-            raise ValueError('release replay requires R2 staging for raw-water shards')
-    else:
-        r2.validate_r2_endpoint(staging['endpoint_url'])
-    return configuration.get('max_parallel_shards', 2), staging
-
-
-def validate_r2_shard_location(entry: Mapping[str, Any]) -> None:
-    """Check whether a frozen raw-water shard can be downloaded from R2.
-
-    Args:
-        entry: Raw manifest entry after any catalog reference has been resolved.
-
-    Raises:
-        ValueError: The R2 bucket, object key, or byte size is missing or invalid.
-    """
-    if (
-        not isinstance(entry.get('r2_bucket'), str)
-        or not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,62}', entry['r2_bucket'])
-        or not isinstance(entry.get('r2_key'), str)
-        or not entry['r2_key']
-        or type(entry.get('size_bytes')) is not int
-        or entry['size_bytes'] < 0
-    ):
-        raise ValueError('missing or invalid pinned R2 source metadata')
-
-
-def download_r2(endpoint: str, entry: dict[str, Any], destination: Path) -> None:
-    """Download one water shard to a new local file.
-
-    Keep an interrupted file for inspection.
-
-    Args:
-        endpoint: R2 account URL.
-        entry: Shard's bucket, key and byte count.
-        destination: Local path that must not exist.
-
-    Raises:
-        ValueError: The transfer size or object location is invalid.
-        InterruptedError: The stage was cancelled.
-    """
-    control.check_cancelled()
-    with (
-        closing(r2.make_r2_client(endpoint)) as client,
-        destination.open('xb') as stream,
-    ):
-        try:
-            stream_source(
-                client,
-                entry,
-                stream,
-                check_cancelled=control.check_cancelled,
-            )
-        except ValueError as exc:
-            raise ValueError(
-                'staged source size/hash mismatch: ' + str(destination)
-            ) from exc
 
 
 class ProcessingJournal:
@@ -481,12 +400,10 @@ def _run(
         raise ValueError('physical configuration must match the build grid')
     grid_settings = vars(grid)
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    workers, staging = validate_shard_staging(cfg)
+    workers = cfg.get('max_parallel_shards', 2)
     source_directory = Path(cfg['source_directory']).resolve()
-    cache = source_cache.R2InputCache(
-        source_directory,
-        output,
-        staging['endpoint_url'] if staging else None,
+    cache = SourceCache(
+        source_directory, output, cfg.get('r2_endpoint', r2.DEFAULT_R2_ENDPOINT)
     )
     land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
     water_cfg = cfg['inland_water']
@@ -501,7 +418,7 @@ def _run(
     files = water_cfg['files']
     if water_cfg['file_count'] != len(files):
         raise ValueError('source manifest must list every raw shard')
-    raw = []
+    raw: list[tuple[Path, str, FileSpec | None]] = []
     for entry in files:
         rel = Path(entry['path'])
         if rel.is_absolute() or '..' in rel.parts:
@@ -511,10 +428,16 @@ def _run(
         path = (source_directory / rel).resolve()
         if not path.is_relative_to(source_directory):
             raise ValueError('raw source escapes the source directory')
-        digest = entry['sha256']
-        if staging is not None and not path.is_file():
-            validate_r2_shard_location(entry)
-        raw.append((path, digest, dict(entry)))
+        remote: FileSpec | None = None
+        if 'r2_bucket' in entry and not path.is_file():
+            remote = {
+                'r2_bucket': entry['r2_bucket'],
+                'r2_key': entry.get('r2_key'),
+                'size_bytes': entry.get('size_bytes'),
+                'sha256': entry['sha256'],
+            }
+            path = cache.path(remote)
+        raw.append((path, entry['sha256'], remote))
     if len({x[0] for x in raw}) != len(raw) or len({x[1] for x in raw}) != len(raw):
         raise ValueError('raw source paths and hashes must be unique')
     scripts = {
@@ -530,7 +453,7 @@ def _run(
         )
     }
     scripts['geodesy/ogr.py'] = sha256_file(geometry_io.__file__)
-    scripts['source_assets/r2.py'] = sha256_file(source_cache.__file__)
+    scripts['source_assets/cache.py'] = sha256_file(source_cache.__file__)
     scripts['shared/r2.py'] = sha256_file(r2.__file__)
     output = Path(output).resolve()
     inputs = [path for path, _, _ in raw]
@@ -621,7 +544,7 @@ def _run(
             saved_shards = union.get('shards')
             if not isinstance(saved_shards, list) or len(saved_shards) != len(raw):
                 raise ValueError('completed shard inventory mismatch')
-            for i, (entry, (source, digest, _)) in enumerate(zip(saved_shards, raw)):
+            for i, (entry, (_, digest, _)) in enumerate(zip(saved_shards, raw)):
                 directory = output / 'shards' / f'{i:05d}'
                 rp = directory / 'report.json'
                 tif = directory / 'water.tif'
@@ -637,7 +560,6 @@ def _run(
                 item = read_json(rp)
                 if (
                     item.get('source_sha256') != digest
-                    or Path(item.get('source', '')).name != source.name
                     or item.get('configuration_sha256')
                     != stage_pins['inland_water']['sha256']
                     or item.get('grid') != grid_settings
@@ -737,7 +659,7 @@ def _run(
         try:
             for spec in land_downloads:
                 control.check_cancelled()
-                cache.acquire_r2_input(spec)
+                cache.acquire(spec, check_cancelled=control.check_cancelled)
         finally:
             for start, end in cache.download_intervals:
                 journal.download_done(start, end, 'land')
@@ -753,24 +675,23 @@ def _run(
         )
 
     download_slot = threading.Lock()
-    raster_slot = threading.Lock() if staging is not None else nullcontext()
+    cold_cache = any(pin is not None and not path.is_file() for path, _, pin in raw)
+    raster_slot = threading.Lock() if cold_cache else nullcontext()
 
     def build_shard(
-        item: tuple[int, tuple[Path, str, dict[str, Any]]],
+        item: tuple[int, tuple[Path, str, FileSpec | None]],
     ) -> dict[str, Any]:
         """Validate or build a single water shard's raster.
 
         Args:
-            item: Shard index and its (path, expected_hash, source_record).
+            item: Shard index and its (local path, SHA-256, optional R2 pin).
 
         Returns:
             Dictionary with verified raster and report paths and digests.
         """
         control.check_cancelled()
-        i, (path, digest, entry) = item
+        i, (path, digest, remote) = item
         destination = output / 'shards' / f'{i:05d}'
-        # Keep the manifest's directory structure so equal basenames can run together.
-        staged = output / 'source-staging' / path.relative_to(source_directory)
         checkpoint = prior(f'shard-{i:05d}') if resume else None
         if checkpoint:
             report_path = destination / 'report.json'
@@ -780,7 +701,6 @@ def _run(
                 or sha256_file(destination / 'water.tif') != checkpoint['output_sha256']
                 or report.get('status') != 'candidate-only'
                 or report.get('source_sha256') != digest
-                or Path(report.get('source', '')).name != path.name
                 or report.get('configuration_sha256')
                 != stage_pins['inland_water']['sha256']
                 or report.get('grid') != grid_settings
@@ -789,12 +709,6 @@ def _run(
                 or report.get('output_sha256') != checkpoint['output_sha256']
             ):
                 raise ValueError(f'shard checkpoint mismatch: {i}')
-            if (
-                staged.is_file()
-                and staged.stat().st_size == entry.get('size_bytes')
-                and sha256_file(staged) == digest
-            ):
-                staged.unlink()
             return {
                 'path': str(destination / 'water.tif'),
                 'sha256': checkpoint['output_sha256'],
@@ -806,30 +720,16 @@ def _run(
             }
         if resume:
             quarantine(destination)
-        owned = False
-        if not path.is_file() and staging is not None:
-            staged.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-            if staged.exists() and (
-                not staged.is_file()
-                or staged.stat().st_size != entry['size_bytes']
-                or sha256_file(staged) != digest
-            ):
-                quarantine(staged)
-            if not staged.exists():
-                with download_slot:
-                    started = time.perf_counter()
-                    try:
-                        download_r2(staging['endpoint_url'], entry, staged)
-                    finally:
-                        journal.download_done(started, time.perf_counter(), 'water')
-            if (
-                not staged.is_file()
-                or staged.stat().st_size != entry['size_bytes']
-                or sha256_file(staged) != digest
-            ):
-                raise ValueError(f'staged source size/hash mismatch: {path}')
-            path = staged
-            owned = True
+        if remote is not None:
+            with download_slot:
+                before = len(cache.download_intervals)
+                try:
+                    path = cache.acquire(
+                        remote, check_cancelled=control.check_cancelled
+                    )
+                finally:
+                    for start, end in cache.download_intervals[before:]:
+                        journal.download_done(start, end, 'water')
         with raster_slot:
             control.check_cancelled()
             unit_start = time.perf_counter()
@@ -847,8 +747,6 @@ def _run(
         journal.unit(
             f'shard-{i:05d}', unit_start, report_path, destination / 'water.tif'
         )
-        if owned:
-            path.unlink()
         return {
             'path': str(destination / 'water.tif'),
             'sha256': report['output_sha256'],
@@ -856,8 +754,8 @@ def _run(
             'report': {'path': str(report_path), 'sha256': sha256_file(report_path)},
         }
 
-    # R2 staging overlaps one download with one rasterization. Local shards
-    # can rasterize concurrently without a download slot.
+    # With an empty cache, overlap one R2 download with one rasterization.
+    # When all files are local, workers can rasterize concurrently.
     # Keep masks in manifest order regardless of when each worker finishes.
     shards: list[dict[str, Any] | None] = [None] * len(raw)
     with (
@@ -1022,13 +920,13 @@ def _run(
         'physical_output_sha256': physical['output_sha256'],
         'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
     }
-    report['staged_shard_count'] = sum(
+    report['downloaded_shard_count'] = sum(
         event['event'] == 'download_complete'
         and event['attempt'] == journal.attempt
         and event['source'] == 'water'
         for event in journal.events
     )
-    report['staged_shard_count_scope'] = 'current invocation'
+    report['downloaded_shard_count_scope'] = 'current invocation'
     journal.finish('complete')
     report.update(journal.summary())
     report['pipeline_identity_sha256'] = sha256_file(identity_path)

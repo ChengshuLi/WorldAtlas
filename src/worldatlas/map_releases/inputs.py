@@ -13,11 +13,9 @@ from worldatlas.map_build.inputs.configuration import (
     land_dataset_index,
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
-from worldatlas.map_build.physical.build import (
-    validate_r2_shard_location,
-    validate_shard_staging,
-)
 from worldatlas.shared.files import JSONValue, json_bytes
+from worldatlas.shared.r2 import DEFAULT_R2_ENDPOINT, validate_r2_endpoint
+from worldatlas.source_assets.cache import validate_object_pin
 
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
@@ -72,18 +70,16 @@ def validate_replay_sources(
         for file_index, spec in enumerate(layer["files"]):
             require_source(f"land_config.land[{index}].files[{file_index}]", spec)
         land_dataset_index(layer)
-    controls = PHYSICAL_CONTROLS.validate_python(
+    PHYSICAL_CONTROLS.validate_python(
         configuration.get("physical_controls", {}), strict=True
     )
-    validate_shard_staging(controls, require_r2=True)
-    # Each shard's ``path`` names a place in the build's cache. The catalog
-    # reference or the direct R2 key and byte size tell a fresh build what to fetch.
+    validate_r2_endpoint(configuration.get("r2_endpoint", DEFAULT_R2_ENDPOINT))
     for index, spec in enumerate(sources["inland_water"]["files"]):
         name = f"inland_water.files[{index}]"
         require_source(name, spec)
         if "r2_source" not in spec:
             try:
-                validate_r2_shard_location(spec)
+                validate_object_pin(spec)
             except ValueError as error:
                 raise ValueError(
                     f"release replay requires an R2 object and byte size for {name}"

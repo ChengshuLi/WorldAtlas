@@ -85,14 +85,6 @@ class BuildSources(TypedDict):
     reference_runs: NotRequired[FileEntry]
 
 
-@with_config(extra="forbid")
-class R2Staging(TypedDict):
-    """Name the R2 account used to fetch raw inputs on demand."""
-
-    mode: Literal["r2-s3"]
-    endpoint_url: NonemptyString
-
-
 @with_config(extra="allow")
 class PhysicalControls(TypedDict):
     """Set physical-stage processing and download options."""
@@ -101,7 +93,6 @@ class PhysicalControls(TypedDict):
     max_parallel_shards: NotRequired[PositiveInt]
     union_rows_per_block: NotRequired[PositiveInt]
     physical_rows_per_block: NotRequired[PositiveInt]
-    source_staging: NotRequired[R2Staging | None]
 
 
 @with_config(extra="allow")
@@ -110,6 +101,7 @@ class BuildConfiguration(TypedDict):
 
     schema: Literal["worldatlas-end-to-end-pipeline-v3"]
     grid: GridSettings
+    r2_endpoint: NotRequired[NonemptyString]
     sources: BuildSources
     selection_notes: NotRequired[str]
     physical_controls: NotRequired[PhysicalControls]
@@ -142,6 +134,7 @@ class PhysicalConfiguration(PhysicalControls):
     selection_notes: NonemptyString
     source_directory: NonemptyString
     grid: GridSettings
+    r2_endpoint: NotRequired[NonemptyString]
     land_config: LandSettings
     inland_water: PinnedInlandWaterSettings
     water_reference: NotRequired[FilePin]

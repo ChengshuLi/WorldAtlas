@@ -210,11 +210,7 @@
     "minimum_free_bytes": 2147483648,
     "max_parallel_shards": 2,
     "union_rows_per_block": 512,
-    "physical_rows_per_block": 512,
-    "source_staging": {
-      "mode": "r2-s3",
-      "endpoint_url": "https://8551d6a44afbf7d8080fb67cefe241fc.r2.cloudflarestorage.com"
-    }
+    "physical_rows_per_block": 512
   },
   "grid": {
     "height": 54613,

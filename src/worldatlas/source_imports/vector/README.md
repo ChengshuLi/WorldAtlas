@@ -8,7 +8,7 @@ Run the `selected_vector_features` method with the common import command.
 
 ```bash
 worldatlas-import --recipe CONSTRUCTION_ID \
-  --r2-endpoint R2_ENDPOINT --work-dir /absolute/path/to/worldatlas-work/inputs
+  --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
 ## How it works

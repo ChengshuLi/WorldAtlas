@@ -15,8 +15,8 @@ class Runtime:
     """Give a constructor the resources and record snapshot for one import.
 
     ``connect`` opens a PostgreSQL connection. ``storage`` provides access
-    to raw objects in R2, and ``work_dir`` locates the download cache when
-    one is configured. The importer passes this object separately from the
+    to raw objects in R2 when a caller supplies a client. ``work_dir``
+    locates the download cache. The importer passes this object separately from the
     JSON arguments. ``recipe_id``, ``method``, and ``arguments`` identify
     the record and the settings it used, so shared storage can confirm the
     settings still match when the constructor writes its results.

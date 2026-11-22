@@ -20,10 +20,7 @@ class ReplaySourcesTests(unittest.TestCase):
             "land_config": {"land": [{"dataset": "shore.shp", "files": [self.shape]}]},
             "inland_water": {"files": [self.shard]},
         }
-        self.configuration = dict(sources=self.sources, physical_controls={
-            "max_parallel_shards": 1,
-            "source_staging": {"mode": "r2-s3", "endpoint_url": "https://" + "a" * 32 + ".r2.cloudflarestorage.com"},
-        })
+        self.configuration = dict(sources=self.sources)
         self.selection = {"raw_sources": [{"source_id": "coast"}, {"source_id": "inland"}]}
 
     def test_inline_documents_resolve_catalog_references_and_archive_members(self):
@@ -55,25 +52,11 @@ class ReplaySourcesTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "must name exactly one entry in files"):
                     validate_replay_sources(self.configuration, self.selection)
 
-    def test_uncached_water_shards_need_r2_staging(self):
-        self.configuration.pop("physical_controls")
-        with self.assertRaisesRegex(ValueError, "requires R2 staging"):
-            validate_replay_sources(self.configuration, self.selection)
-
-    def test_replay_checks_r2_endpoint_and_accepts_parallel_shard_workers(self):
-        controls = self.configuration["physical_controls"]
-        staging = controls["source_staging"]
-        cases = (
-            ({"source_staging": {"mode": "r2-s3"}}, "endpoint_url"),
-            ({"source_staging": dict(staging, endpoint_url="https://example.com")}, "Cloudflare R2"),
-            ({"max_parallel_shards": 0}, "max_parallel_shards"),
-        )
-        for overrides, message in cases:
-            with self.subTest(overrides=overrides), self.assertRaisesRegex(ValueError, message):
-                configuration = dict(self.configuration, physical_controls=controls | overrides)
-                validate_replay_sources(configuration, self.selection)
-        parallel = dict(self.configuration, physical_controls=controls | {"max_parallel_shards": 4})
-        validate_replay_sources(parallel, self.selection)
+    def test_replay_checks_an_explicit_r2_endpoint(self):
+        with self.assertRaisesRegex(ValueError, "Cloudflare R2"):
+            validate_replay_sources(
+                dict(self.configuration, r2_endpoint="https://example.com"), self.selection
+            )
 
     def test_direct_water_shard_pin_requires_a_byte_size(self):
         self.sources["inland_water"]["files"] = [dict(

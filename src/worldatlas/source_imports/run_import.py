@@ -1,8 +1,7 @@
 """Run a saved construction through its registered source importer.
 
 Set ``NEON_DATABASE_URL`` and run ``worldatlas-import --recipe ID``.
-For methods that read raw files, also supply ``--r2-endpoint`` and
-``--work-dir``.
+For methods that read raw files, also supply ``--work-dir``.
 """
 
 import argparse
@@ -80,8 +79,8 @@ def run_import(
     Args:
         connect: Callable that opens a PostgreSQL connection.
         recipe_id: Construction ID to read from Neon.
-        storage: R2 client, required for methods that read raw files.
-        work_dir: Local cache directory, required when ``storage`` is needed.
+        storage: Optional R2 client. Defaults to the project account.
+        work_dir: Local cache directory, required when reading raw files.
 
     Returns:
         The result reported by the selected importer.
@@ -115,7 +114,7 @@ def main() -> None:
     parser.add_argument(
         "--recipe", metavar="ID", required=True, help="construction ID in Neon"
     )
-    parser.add_argument("--r2-endpoint")
+    parser.add_argument("--r2-endpoint", help="override the project R2 endpoint")
     parser.add_argument(
         "--work-dir", type=Path, help="local cache for raw source files"
     )

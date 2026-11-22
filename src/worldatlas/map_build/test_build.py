@@ -449,12 +449,10 @@ class Fixture(unittest.TestCase):
 
     def test_release_comparison_downloads_and_verifies_streams_and_config(self):
         raw_endpoint = "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.r2.cloudflarestorage.com"
-        release_endpoint = "https://bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.r2.cloudflarestorage.com"
+        release_endpoint = r2.DEFAULT_R2_ENDPOINT
         raw_key = "sources/coast.geojson"
         self.select_coastline(raw_key, [self.cloud(b"{}", raw_key)])
-        self.cfg["physical_controls"] = {
-            "source_staging": {"mode": "r2-s3", "endpoint_url": raw_endpoint}
-        }
+        self.cfg["r2_endpoint"] = raw_endpoint
         config = write_json(self.inputs / "request.json", self.cfg)
         digest = lambda data: hashlib.sha256(data).hexdigest()
         decoded = {name: name.encode() for name in ("rows", "runs")}
@@ -474,7 +472,6 @@ class Fixture(unittest.TestCase):
             patch.object(
                 pipeline, "read_release_assets", return_value=(catalog, config_asset)
             ) as release_lookup,
-            patch.object(pipeline, "release_endpoint", return_value=release_endpoint),
             self.fake_r2(stored | {raw_key: b"{}"}, calls),
         ):
             runner = pipeline.Pipeline(
@@ -551,7 +548,6 @@ class Fixture(unittest.TestCase):
                 pipeline, "read_release_assets",
                 side_effect=[([good], None), ([bad], None), ([good], None), ([good], None)],
             ),
-            patch.object(pipeline, "release_endpoint", return_value="unused"),
             self.fake_r2({key: packed}, []) as download,
         ):
             with self.assertRaisesRegex(ValueError, "release reference overlaps output"):
@@ -581,10 +577,6 @@ class Fixture(unittest.TestCase):
 
     @contextmanager
     def fake_r2(self, payloads, calls):
-        def download(endpoint, entry, destination):
-            calls.append(entry["r2_key"])
-            destination.write_bytes(payloads[entry["r2_key"]])
-
         def retrieve(*, Bucket, Key):
             calls.append(Key)
             data = payloads[Key]
@@ -592,10 +584,7 @@ class Fixture(unittest.TestCase):
 
         client = Mock()
         client.get_object.side_effect = retrieve
-        with (
-            patch.object(physical_build, "download_r2", side_effect=download),
-            patch.object(r2, "make_r2_client", return_value=R2Client(client)),
-        ):
+        with patch.object(r2, "make_r2_client", return_value=R2Client(client)):
             yield client.get_object
 
     def test_catalog_resolves_source_ids_before_r2_acquisition(self):
@@ -653,7 +642,7 @@ class Fixture(unittest.TestCase):
                     planned, (pin,) = physical_build.plan_land_inputs(
                         runner.physical_config["land_config"], runner.r2_inputs
                     )
-                    source = runner.r2_inputs.acquire_r2_input(pin)
+                    source = runner.r2_inputs.acquire(pin)
                     self.assertEqual(planned["land"][0]["dataset"], str(source))
                     self.assertIn(pin_file(source), runner.source_pins)
                     self.assertTrue(source.is_relative_to(root))
@@ -690,7 +679,7 @@ class Fixture(unittest.TestCase):
             )
             self.assertEqual(calls, [])
             for request in requests:
-                runner.r2_inputs.acquire_r2_input(request)
+                runner.r2_inputs.acquire(request)
         land = planned["land"][0]
         self.assertEqual(calls, ["sources/land.zip"])
         self.assertEqual(len(requests), 2)
@@ -715,14 +704,14 @@ class Fixture(unittest.TestCase):
             for changes, reason in (
                 ({"member": 1}, "unsafe ZIP member"),
                 ({"member": "missing.shp"}, "must be one regular file"),
-                ({"sha256": "0" * 64}, "size/SHA-256 mismatch"),
+                ({"sha256": "0" * 64}, "size or hash mismatch"),
             ):
                 with self.subTest(changes=changes):
                     with self.assertRaisesRegex(ValueError, reason):
-                        runner.r2_inputs.acquire_r2_input(dict(pin, **changes))
+                        runner.r2_inputs.acquire(dict(pin, **changes))
                     self.assertFalse(output.exists())
                     self.assertEqual(list(output.parent.glob("*.partial")), [])
-            self.assertEqual(runner.r2_inputs.acquire_r2_input(pin).read_bytes(), payload)
+            self.assertEqual(runner.r2_inputs.acquire(pin).read_bytes(), payload)
             self.assertEqual(download.call_count, 1)
 
     def test_zip_cache_publication_checks_a_concurrent_writers_bytes(self):
@@ -751,10 +740,10 @@ class Fixture(unittest.TestCase):
                     patch.object(os, "link", side_effect=race),
                 ):
                     if content == payload:
-                        self.assertEqual(runner.r2_inputs.acquire_r2_input(pin).read_bytes(), payload)
+                        self.assertEqual(runner.r2_inputs.acquire(pin).read_bytes(), payload)
                     else:
-                        with self.assertRaisesRegex(ValueError, "concurrent cloud input changed"):
-                            runner.r2_inputs.acquire_r2_input(pin)
+                        with self.assertRaisesRegex(ValueError, "size or hash mismatch"):
+                            runner.r2_inputs.acquire(pin)
                 self.assertEqual(output.read_bytes(), content)
                 self.assertEqual(list(output.parent.glob("*.partial")), [])
 
@@ -782,9 +771,9 @@ class Fixture(unittest.TestCase):
         spec = self.cloud(b"{}")
         with self.fake_r2({"sources/input.json": b"wrong"}, []):
             with self.assertRaisesRegex(
-                ValueError, "cloud input size/SHA-256 mismatch"
+                ValueError, "size or hash mismatch"
             ):
-                runner.r2_inputs.acquire_r2_input(spec)
+                runner.r2_inputs.acquire(spec)
         self.assertFalse(runner.r2_inputs.path(spec).exists())
         self.assertEqual(len(list((self.root / "inputs").rglob("download-*"))), 0)
 
@@ -797,12 +786,12 @@ class Fixture(unittest.TestCase):
         ):
             with self.subTest(changes=changes):
                 with self.assertRaisesRegex(ValueError, message):
-                    runner.r2_inputs.acquire_r2_input(dict(spec, **changes))
+                    runner.r2_inputs.acquire(dict(spec, **changes))
         outside = self.root / "run"
         cached = self.inputs / spec["sha256"]
         cached.symlink_to(outside, target_is_directory=True)
         with self.assertRaisesRegex(ValueError, "cloud input overlaps output"):
-            runner.r2_inputs.acquire_r2_input(spec)
+            runner.r2_inputs.acquire(spec)
 
     def test_cache_reuses_same_bytes_without_duplicate_file_pins(self):
         runner = self.make()
@@ -811,7 +800,7 @@ class Fixture(unittest.TestCase):
         second = self.cloud(payload, "folder2/shared.bin")
         count = len(runner.source_pins)
         with self.fake_r2({first["r2_key"]: payload}, []) as download:
-            self.assertEqual(runner.r2_inputs.acquire_r2_input(first), runner.r2_inputs.acquire_r2_input(second))
+            self.assertEqual(runner.r2_inputs.acquire(first), runner.r2_inputs.acquire(second))
             download.assert_called_once()
         self.assertEqual(len(runner.source_pins), count + 1)
 
@@ -881,7 +870,7 @@ class Fixture(unittest.TestCase):
         cached.write_bytes(payload)
         runner = self.make()
         with self.fake_r2({}, []) as download:
-            self.assertEqual(runner.r2_inputs.acquire_r2_input(source), cached)
+            self.assertEqual(runner.r2_inputs.acquire(source), cached)
         download.assert_not_called()
         self.assertEqual(runner.r2_inputs.download_intervals, [])
 
@@ -902,19 +891,19 @@ class Fixture(unittest.TestCase):
         with self.fake_r2({}, []) as download:
             cached.mkdir()
             with self.assertRaisesRegex(
-                ValueError, "cached cloud input size/SHA-256 mismatch"
+                ValueError, "size or hash mismatch"
             ):
-                runner.r2_inputs.acquire_r2_input(spec)
+                runner.r2_inputs.acquire(spec)
             cached.rmdir()
             cached.write_bytes(b"xx")
             with self.assertRaisesRegex(
-                ValueError, "cached cloud input size/SHA-256 mismatch"
+                ValueError, "size or hash mismatch"
             ):
-                runner.r2_inputs.acquire_r2_input(spec)
+                runner.r2_inputs.acquire(spec)
         download.assert_not_called()
         cached.write_bytes(payload)
         with self.assertRaisesRegex(ValueError, "unsafe ZIP member"):
-            runner.r2_inputs.acquire_r2_input(
+            runner.r2_inputs.acquire(
                 dict(archive=spec, member="../outside", sha256="a" * 64, size_bytes=1)
             )
 
@@ -1190,13 +1179,7 @@ class Fixture(unittest.TestCase):
                 land_config=land,
                 inland_water=self.cfg["sources"]["inland_water"] | manifest,
             ),
-            "physical_controls": {
-                **self.cfg["physical_controls"],
-                "source_staging": {
-                    "mode": "r2-s3",
-                    "endpoint_url": "https://" + "0" * 32 + ".r2.cloudflarestorage.com",
-                },
-            },
+            "r2_endpoint": "https://" + "0" * 32 + ".r2.cloudflarestorage.com",
         }
         config = write_json(self.inputs / "single-cloud-config.json", cfg)
         calls = []
@@ -1208,7 +1191,7 @@ class Fixture(unittest.TestCase):
             self.assertFalse((other / "inputs").exists())
             physical = runner.physical()
         report = read_json(runner.out / "physical/report.json")
-        self.assertEqual(report["staged_shard_count"], 1)
+        self.assertEqual(report["downloaded_shard_count"], 1)
         self.assertGreater(report["source_download_elapsed_seconds"], 0)
         runner.r2_inputs.path(land_source).unlink()
         runner.r2_inputs.path(land_source["archive"]).unlink()

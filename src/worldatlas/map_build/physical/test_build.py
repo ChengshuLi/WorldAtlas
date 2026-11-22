@@ -516,7 +516,7 @@ class PipelineTests(unittest.TestCase):
                 self.assertFalse((output / 'report.json').exists())
                 path.write_bytes(content)
 
-    def test_r2_staging_is_verified_timed_and_owned(self):
+    def test_r2_download_is_verified_timed_and_reused_by_next_build(self):
         shard = self.raw / 'water.parquet'
         content = shard.read_bytes()
         digest = sha256_file(shard)
@@ -540,7 +540,7 @@ class PipelineTests(unittest.TestCase):
         self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 1
         endpoint = 'https://' + 'a' * 32 + '.r2.cloudflarestorage.com'
-        self.cfg['source_staging'] = {'mode': 'r2-s3', 'endpoint_url': endpoint}
+        self.cfg['r2_endpoint'] = endpoint
         self.config.write_text(json.dumps(self.cfg))
         shard.unlink()
         out = self.root / 'staged'
@@ -558,7 +558,7 @@ class PipelineTests(unittest.TestCase):
         client.get_object.assert_called_once()
         client.close.assert_called_once()
         report = json.loads((out / 'report.json').read_text())
-        self.assertEqual(report['staged_shard_count'], 1)
+        self.assertEqual(report['downloaded_shard_count'], 1)
         self.assertGreaterEqual(report['source_download_elapsed_seconds'], 0.05)
         self.assertGreaterEqual(report['processing_elapsed_seconds'], 0)
         self.assertFalse((out / 'source-staging' / shard.name).exists())
@@ -566,14 +566,15 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(
             report['physical_output_sha256']['runs.u32le'], sha256_file(out / 'physical/runs.u32le')
         )
-        shard.write_bytes(content)
-        local = self.root / 'already-local'
+        cached = self.raw / digest / shard.name
+        self.assertEqual(cached.read_bytes(), content)
+        local = self.root / 'warm-cache'
         with mock.patch.object(
             r2, 'make_r2_client', side_effect=AssertionError('unexpected R2 request')
         ):
             b.run(self.config, local)
-        self.assertEqual(shard.read_bytes(), content)
-        self.assertEqual(json.loads((local / 'report.json').read_text())['staged_shard_count'], 0)
+        self.assertEqual(cached.read_bytes(), content)
+        self.assertEqual(json.loads((local / 'report.json').read_text())['downloaded_shard_count'], 0)
         self.assertEqual(sha256_file(local / 'physical/runs.u32le'), sha256_file(out / 'physical/runs.u32le'))
 
     def test_r2_overlaps_download_and_rasterization_and_matches_serial(self):
@@ -600,10 +601,7 @@ class PipelineTests(unittest.TestCase):
         for path in (first, second):
             path.unlink()
 
-        self.cfg['source_staging'] = {
-            'mode': 'r2-s3',
-            'endpoint_url': 'https://' + 'a' * 32 + '.r2.cloudflarestorage.com',
-        }
+        self.cfg['r2_endpoint'] = 'https://' + 'a' * 32 + '.r2.cloudflarestorage.com'
         self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
         first_downloading = threading.Event()
@@ -637,11 +635,15 @@ class PipelineTests(unittest.TestCase):
             mock.patch.object(b, 'run_stage', side_effect=notify_after_first_raster),
         ):
             parallel = b.run(self.config, output)
-        self.assertEqual(parallel['staged_shard_count'], 2)
+        self.assertEqual(parallel['downloaded_shard_count'], 2)
         self.assertEqual(parallel['physical_output_sha256'], serial['physical_output_sha256'])
-        self.assertEqual(list((output / 'source-staging').rglob('*.parquet')), [])
+        for entry in files:
+            self.assertEqual(
+                (self.raw / entry['sha256'] / Path(entry['path']).name).read_bytes(),
+                payloads[entry['r2_key']],
+            )
 
-    def test_r2_bad_hash_retains_evidence_and_does_not_publish(self):
+    def test_r2_bad_hash_is_discarded_and_retry_can_resume(self):
         shard = self.raw / 'water.parquet'
         content = shard.read_bytes()
         source = self.source_manifest
@@ -663,10 +665,7 @@ class PipelineTests(unittest.TestCase):
         )
         self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 1
-        self.cfg['source_staging'] = {
-            'mode': 'r2-s3',
-            'endpoint_url': 'https://' + 'a' * 32 + '.r2.cloudflarestorage.com',
-        }
+        self.cfg['r2_endpoint'] = 'https://' + 'a' * 32 + '.r2.cloudflarestorage.com'
         self.config.write_text(json.dumps(self.cfg))
         shard.unlink()
         out = self.root / 'bad-staged'
@@ -676,9 +675,11 @@ class PipelineTests(unittest.TestCase):
             'ContentLength': len(content),
         }
         with mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)):
-            with self.assertRaisesRegex(ValueError, 'size/hash mismatch'):
+            with self.assertRaisesRegex(ValueError, 'size or hash mismatch'):
                 b.run(self.config, out)
-        self.assertTrue((out / 'source-staging' / shard.name).exists())
+        cached = self.raw / self.cfg['inland_water']['files'][0]['sha256'] / shard.name
+        self.assertFalse(cached.exists())
+        self.assertEqual(list(self.raw.rglob('download-*')), [])
         self.assertFalse((out / 'report.json').exists())
         client.get_object.return_value = {
             'Body': io.BytesIO(content),
@@ -686,8 +687,7 @@ class PipelineTests(unittest.TestCase):
         }
         with mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)):
             b.run(self.config, out, resume=True)
-        self.assertEqual(len(list((out / 'interrupted').glob(shard.name + '-*'))), 1)
-        self.assertFalse((out / 'source-staging' / shard.name).exists())
+        self.assertEqual(cached.read_bytes(), content)
 
     def test_end_to_end_without_reference(self):
         out = self.root / 'out'
@@ -978,38 +978,18 @@ class PipelineTests(unittest.TestCase):
                         b.run(self.config, out)
                 self.assertFalse((out / 'report.json').exists())
 
-    def test_r2_transfer_rejects_a_short_shard_and_closes_the_client(self):
-        endpoint = 'https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.r2.cloudflarestorage.com'
-        body = io.BytesIO(b'partial')
-        client = mock.Mock()
-        client.get_object.return_value = {'Body': body, 'ContentLength': 20}
-        entry = dict(r2_bucket='atlas', r2_key='water.parquet', size_bytes=20)
-        staged = self.root / 'raw-shard.parquet'
-        with mock.patch.object(r2.boto3, 'client', return_value=client) as connect:
-            with self.assertRaisesRegex(ValueError, 'staged source size/hash mismatch'):
-                b.download_r2(endpoint, entry, staged)
-        connect.assert_called_once_with('s3', endpoint_url=endpoint, region_name='auto')
-        client.get_object.assert_called_once_with(Bucket='atlas', Key='water.parquet')
-        client.close.assert_called_once_with()
-        self.assertTrue(body.closed)
-        self.assertEqual(staged.read_bytes(), b'partial')
-
-    def test_resume_uses_a_verified_staged_shard_and_cleans_up_after_reuse(self):
-        endpoint = 'https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.r2.cloudflarestorage.com'
+    def test_resume_reuses_the_verified_cache_after_interruption(self):
         shard = self.raw / 'water.parquet'
         payload = shard.read_bytes()
-        source = self.source_manifest
-        manifest = json.loads(source.read_bytes())
-        manifest['files'][0].update(r2_bucket='atlas', r2_key=shard.name, size_bytes=len(payload))
-        source.write_text(json.dumps(manifest))
-        self.cfg['inland_water'].update(json.loads(source.read_text()))
-        self.cfg['source_staging'] = dict(mode='r2-s3', endpoint_url=endpoint)
-        self.cfg['max_parallel_shards'] = 1
+        entry = self.cfg['inland_water']['files'][0]
+        entry.update(r2_bucket='atlas', r2_key=shard.name, size_bytes=len(payload))
         self.config.write_text(json.dumps(self.cfg))
         shard.unlink()
         out = self.root / 'restart-r2'
-        staged = out / 'source-staging' / shard.name
+        cached = self.raw / entry['sha256'] / shard.name
         run_stage = b.run_stage
+        client = mock.Mock()
+        client.get_object.return_value = {'Body': io.BytesIO(payload)}
 
         def interrupt_before_burn(function, *args):
             if function == b.water.run:
@@ -1017,27 +997,16 @@ class PipelineTests(unittest.TestCase):
             return run_stage(function, *args)
 
         with (
-            mock.patch.object(b, 'download_r2', side_effect=lambda _, __, path: path.write_bytes(payload)),
+            mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)),
             mock.patch.object(b, 'run_stage', side_effect=interrupt_before_burn),
         ):
             with self.assertRaisesRegex(InterruptedError, 'before burning'):
                 b.run(self.config, out)
-        self.assertEqual(staged.read_bytes(), payload)
+        self.assertEqual(cached.read_bytes(), payload)
 
-        unlink = Path.unlink
-
-        def interrupt_delete(path, *args, **kwargs):
-            if path == staged:
-                raise InterruptedError('before removing the staged shard')
-            return unlink(path, *args, **kwargs)
-
-        with mock.patch.object(b, 'download_r2', side_effect=AssertionError('unexpected download')):
-            with mock.patch.object(Path, 'unlink', new=interrupt_delete):
-                with self.assertRaisesRegex(InterruptedError, 'before removing'):
-                    b.run(self.config, out, resume=True)
-            self.assertTrue((out / 'shards/00000/report.json').exists())
+        with mock.patch.object(r2, 'make_r2_client', side_effect=AssertionError('unexpected download')):
             self.assertEqual(b.run(self.config, out, resume=True)['status'], 'candidate-only')
-        self.assertFalse(staged.exists())
+        self.assertEqual(cached.read_bytes(), payload)
 
     def test_preflight_rejects_partial_reference(self):
         out = self.root / 'bad'

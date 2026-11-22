@@ -18,7 +18,7 @@ from unittest.mock import Mock, patch
 
 from botocore.exceptions import ClientError
 
-from worldatlas.shared.r2 import R2Client, R2ObjectMissing
+from worldatlas.shared.r2 import DEFAULT_R2_ENDPOINT, R2Client, R2ObjectMissing
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.inputs.selection import canonical_bytes
 from worldatlas.map_build.test_support import selection
@@ -26,7 +26,6 @@ from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
     lookup_release,
     read_manifest,
-    release_endpoint,
     validate_manifest,
 )
 from worldatlas.map_releases.inputs import (
@@ -93,7 +92,6 @@ class BundleTests(unittest.TestCase):
                     },
                     "physical_controls": {
                         "max_parallel_shards": 1,
-                        "source_staging": {"mode": "r2-s3", "endpoint_url": release_endpoint()},
                     },
                 }
             )
@@ -921,7 +919,7 @@ class CommandTests(unittest.TestCase):
     def test_write_commands_share_the_release_endpoint_and_lock(self):
         command = "worldatlas.map_releases.manage_release"
         candidate = "v9.0-rc.1"
-        endpoint = release_endpoint()
+        endpoint = DEFAULT_R2_ENDPOINT
         for action, arguments, published, receipt in (
             ("stage", ["run", "--viewer", "viewer"], False, "Preview:"),
             ("publish", [], True, "Published"),
@@ -972,6 +970,6 @@ class CommandTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "no input archive"):
                     main()
             self.assertEqual(client.call_count, 2)
-            client.assert_called_with(release_endpoint())
+            client.assert_called_with(DEFAULT_R2_ENDPOINT)
             db.execute.assert_not_called()
             self.assertEqual(json.loads((output / "selection.json").read_bytes()), {"coordinates": [0, 1]})

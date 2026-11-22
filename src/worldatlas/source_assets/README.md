@@ -1,26 +1,24 @@
 # Cataloged source files
 
-Resolve and verify the raw files that source imports and map building read from R2.
+Neon records the R2 location, byte size, and SHA-256 of each raw source. The shared local cache gives source imports and map builds a verified file to read.
 
 ## Use
 
-Import storage helpers from `worldatlas.source_assets.catalog`. Pass the exact catalog source ID for lookup or the catalog metadata and a local work directory for file acquisition. Credentials come from the caller.
+Use `catalog_sources(database, source_ids)` to look up raw files by ID. Pass a returned file pin to `SourceCache(input_directory).acquire(pin)`. Use `assemble()` when a provider file is stored as ordered parts. A map build already has its catalog rows in the saved input selection and passes those same pins directly to the cache.
 
 ## How it works
 
-- Look up an exact raw source ID and its R2 location.
-- `stream_source()` checks the byte length of a complete R2 object and supports cooperative cancellation.
-- `download_source()` checks the byte length and SHA-256 before caching a download or reusing a local file. A corrupt cached file raises an error.
-- Join ordered, individually cataloged parts into a checked provider file.
+Whole files are kept at `inputs/<sha256>/<filename>`. A new cache instance checks the size and SHA-256 before reusing a file. Within that instance, it remembers verified paths. ZIP members retain their relative paths so GDAL can find files that belong together. Downloads and extractions become visible at their final paths after verification. Failed transfers leave no completed cache file.
 
-A ZIP normally goes into `<work-dir>/<sha256>/source.zip`. Source imports and map building reuse the verified bytes when they use the same work directory. If map building needs the original provider filename, both names can point to the same file on disk through a hard link. Downloads use a temporary file. The final cache path becomes available after verification. Download time excludes verification and processing.
+Source imports and the map builder use the same disk cache when the import's `--work-dir` is the build workspace's `inputs/` directory. This includes the inland-water files, so a new physical build can reuse them without downloading them again.
 
 ## Code and tests
 
-[`catalog.py`](catalog.py) implements raw-file lookup, verified downloads, caching and multipart assembly. Source-specific parsing and output persistence belong to the importers.
+| File | Responsibility |
+| --- | --- |
+| [`catalog.py`](catalog.py) | Read raw file pins from Neon in one query. |
+| [`cache.py`](cache.py) | Cache verified objects, ZIP members, and multipart files. |
+| [`shared/database.py`](../shared/database.py) | Open Neon connections. Callers own their queries and transactions. |
+| [`shared/r2.py`](../shared/r2.py) | Open the R2 client and read or write objects. The project endpoint is shared by imports, builds, and releases. |
 
-[`r2.py`](r2.py) opens R2 clients and supplies verified local files to the map builder. It can extract individual ZIP members and keep companion files together.
-
-[`test_source_assets.py`](test_source_assets.py) checks cache reuse, corrupt inputs, timing and multipart files.
-
-Run from the repository root with `python .github/scripts/run_tests.py --suite source_assets`.
+Run from the repository root with `python .github/scripts/run_tests.py --suite source_assets`. The tests check reuse, failed transfers, checksums, and multipart assembly.

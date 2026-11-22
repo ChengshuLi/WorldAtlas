@@ -8,10 +8,9 @@ import psycopg
 from worldatlas.map_releases.catalog import (
     lookup_release,
     read_manifest,
-    release_endpoint,
 )
 from worldatlas.shared.database import connect_neon
-from worldatlas.shared.r2 import make_r2_client
+from worldatlas.shared.r2 import DEFAULT_R2_ENDPOINT, make_r2_client
 
 
 def read_release_assets(
@@ -36,7 +35,7 @@ def read_release_assets(
             release = lookup_release(database, identity)
     except psycopg.Error:
         raise ValueError("Neon release lookup failed; check database access") from None
-    with closing(make_r2_client(release_endpoint())) as storage:
+    with closing(make_r2_client(DEFAULT_R2_ENDPOINT)) as storage:
         manifest = read_manifest(storage, release)
     result = []
     for stream in ("rows", "runs"):

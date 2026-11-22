@@ -40,7 +40,7 @@ The build configuration sets the grid, physical inputs, coastal distance and pro
 
 The builder creates one `Grid` and passes it to both rasterizers. It saves the grid once in `physical-build-config.json` so the [standalone physical command](physical/README.md#use) can build the same grid from that file.
 
-Set `r2_source` to the raw file’s Neon catalog ID, such as `"r2_source": "osm-land-polygons-split-4326"`. For a ZIP member, put the source ID inside its `archive` entry. The catalog gives the builder the R2 location, expected size and checksum. The builder checks the bytes before using them. `physical_controls.source_staging` supplies the R2 endpoint.
+Set `r2_source` to the raw file’s Neon catalog ID, such as `"r2_source": "osm-land-polygons-split-4326"`. For a ZIP member, put the source ID inside its `archive` entry. The catalog gives the builder the R2 location, expected size and checksum. The builder keeps verified downloads under the workspace’s `inputs/` directory for future builds. It uses the project R2 endpoint by default. Set top-level `r2_endpoint` to use another account for source files.
 
 `physical_controls.max_parallel_shards` sets how many water files can be in progress at once. With R2, two workers let one download run while the other file rasterizes. `division_workers` sets how many independent rules within a group can run at once.
 

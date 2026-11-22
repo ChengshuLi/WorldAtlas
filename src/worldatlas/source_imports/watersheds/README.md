@@ -9,7 +9,6 @@ Use the shared [project environment](../../../../environment.yml) for Python, GD
 ```bash
 worldatlas-import \
   --recipe CONSTRUCTION_ID \
-  --r2-endpoint R2_ENDPOINT \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 

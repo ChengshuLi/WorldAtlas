@@ -30,7 +30,6 @@ from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
     lookup_release,
     read_manifest,
-    release_endpoint,
     release_prefix,
     validate_manifest,
 )
@@ -51,7 +50,12 @@ from worldatlas.shared.files import (
     sha256_file,
     verify_pins,
 )
-from worldatlas.shared.r2 import R2Client, R2ObjectMissing, make_r2_client
+from worldatlas.shared.r2 import (
+    DEFAULT_R2_ENDPOINT,
+    R2Client,
+    R2ObjectMissing,
+    make_r2_client,
+)
 
 STREAMS = ("rows", "runs")
 CANDIDATE = re.compile(r"(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*")
@@ -658,7 +662,7 @@ def main() -> None:
             )
         with (
             connect_neon(url=url, autocommit=True) as db,
-            closing(make_r2_client(release_endpoint())) as storage,
+            closing(make_r2_client(DEFAULT_R2_ENDPOINT)) as storage,
         ):
             if args.action == "restore-inputs":
                 release = lookup_release(db, args.candidate)

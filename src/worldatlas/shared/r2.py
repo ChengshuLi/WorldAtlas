@@ -11,6 +11,10 @@ from botocore.client import BaseClient
 from botocore.exceptions import ClientError
 from botocore.response import StreamingBody
 
+DEFAULT_R2_ENDPOINT = (
+    "https://8551d6a44afbf7d8080fb67cefe241fc.r2.cloudflarestorage.com"
+)
+
 
 class R2ObjectMissing(FileNotFoundError):
     """An R2 object does not exist at the requested key."""

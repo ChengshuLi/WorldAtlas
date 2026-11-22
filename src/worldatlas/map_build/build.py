@@ -62,7 +62,6 @@ from worldatlas.map_build.inputs.selection import (
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical import build as physical_build
-from worldatlas.map_releases.catalog import release_endpoint
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
     JSONValue,
@@ -73,7 +72,8 @@ from worldatlas.shared.files import (
     verify_pins,
     write_json,
 )
-from worldatlas.source_assets.r2 import R2InputCache
+from worldatlas.shared.r2 import DEFAULT_R2_ENDPOINT
+from worldatlas.source_assets.cache import SourceCache
 
 HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
@@ -215,10 +215,9 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
     produced = read_json(output / "report.json")
     if Grid(**produced["grid"]) != Grid(**configuration["grid"]):
         raise ValueError("physical reuse requires the same grid as the source run")
-    cache = R2InputCache(
+    cache = SourceCache(
         Path(configuration["source_directory"]),
         root,
-        None,
     )
     land, _ = physical_build.plan_land_inputs(configuration["land_config"], cache)
 
@@ -339,9 +338,8 @@ class Pipeline:
         self.compiled_divisions = prepare_geography(self.selection["geography"])
         self._fill_catalog_entries(references)
         self.physical_config = self._physical_configuration(sources)
-        staging = self.physical_config.get("source_staging")
-        self.r2_inputs = R2InputCache(
-            self.root / "inputs", self.out, staging["endpoint_url"] if staging else None
+        self.r2_inputs = SourceCache(
+            self.root / "inputs", self.out, self.physical_config["r2_endpoint"]
         )
         self.source_pins = self.r2_inputs.pins
         self.comparison_files: dict[str, Path] = {}
@@ -499,6 +497,7 @@ class Pipeline:
             "selection_notes": self.cfg.get("selection_notes"),
             "source_directory": str(self.root / "inputs"),
             "grid": vars(self.grid),
+            "r2_endpoint": self.cfg.get("r2_endpoint", DEFAULT_R2_ENDPOINT),
             "land_config": sources["land_config"],
             "inland_water": sources["inland_water"],
         }
@@ -536,7 +535,7 @@ class Pipeline:
             )
         for name, spec in sorted(references.items()):
             if "r2_bucket" in spec or "archive" in spec:
-                self.comparison_files[name] = self.r2_inputs.acquire_r2_input(spec)
+                self.comparison_files[name] = self.r2_inputs.acquire(spec)
             else:
                 self.comparison_files[name] = self.resolve_pin(
                     FILE_PIN.validate_python(spec, strict=True)
@@ -772,7 +771,6 @@ class Pipeline:
             available, "reference_config". The map streams are decompressed.
         """
         streams, config = read_release_assets(version)
-        endpoint = release_endpoint()
         digest = hashlib.sha256(json_bytes(streams)).hexdigest()
         directory = (self.root / "inputs" / ("release-" + digest)).resolve()
         if not directory.is_relative_to(self.root) or directory.is_relative_to(
@@ -785,14 +783,14 @@ class Pipeline:
         reference = {}
         for stream, bucket, key, size, stored_hash, decoded_hash in streams:
             path = directory / (stream + ".u32le")
-            compressed = self.r2_inputs.acquire_r2_input(
+            compressed = self.r2_inputs.acquire(
                 {
                     "r2_bucket": bucket,
                     "r2_key": key,
                     "size_bytes": size,
                     "sha256": stored_hash,
                 },
-                endpoint=endpoint,
+                endpoint=DEFAULT_R2_ENDPOINT,
             )
             if not path.exists():
                 partial = path.with_name(
@@ -813,8 +811,8 @@ class Pipeline:
                 {"path": str(path), "sha256": decoded_hash}
             )
         if config is not None:
-            reference["reference_config"] = self.r2_inputs.acquire_r2_input(
-                config, endpoint=endpoint
+            reference["reference_config"] = self.r2_inputs.acquire(
+                config, endpoint=DEFAULT_R2_ENDPOINT
             )
         return reference
 

@@ -3,15 +3,11 @@
 import time
 from collections.abc import Iterable, Sequence
 from pathlib import Path, PurePosixPath
-from typing import Any, TypedDict, cast
+from typing import Any, TypedDict
 from zipfile import ZipFile, ZipInfo, is_zipfile
 
-from worldatlas.shared.r2 import R2Client
-from worldatlas.source_assets.catalog import (
-    assemble_parts,
-    catalog_sources,
-    download_source,
-)
+from worldatlas.source_assets.cache import SourceCache
+from worldatlas.source_assets.catalog import catalog_sources
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 
@@ -109,8 +105,8 @@ def acquire_sources(
         ValueError: Required download settings are missing, a source is
             missing from Neon, or a file fails verification.
     """
-    if requests and (runtime.storage is None or runtime.work_dir is None):
-        raise ValueError('this method requires --r2-endpoint and --work-dir')
+    if requests and runtime.work_dir is None:
+        raise ValueError('this method requires --work-dir for the source cache')
 
     started = time.monotonic()
     ids = list(evidence_source_ids)
@@ -122,23 +118,25 @@ def acquire_sources(
         timing['catalog_seconds'] = time.monotonic() - started
 
     started = time.monotonic()
-    paths = []
-    storage = cast(R2Client, runtime.storage)
-    work_dir = cast(Path, runtime.work_dir)
-    for request in requests:
-        if isinstance(request, dict):
-            path = assemble_parts(
-                storage,
-                [sources[ident] for ident in request['parts']],
-                request['sha256'],
-                request['size_bytes'],
-                request['filename'],
-                work_dir,
-                timing=timing,
-            )
-        else:
-            path = download_source(storage, sources[request], work_dir, timing=timing)
-        paths.append(path)
+    paths: list[Path] = []
+    if requests:
+        assert runtime.work_dir is not None
+        cache = SourceCache(runtime.work_dir, client=runtime.storage)
+        for request in requests:
+            if isinstance(request, dict):
+                path = cache.assemble(
+                    [sources[ident] for ident in request['parts']],
+                    request['sha256'],
+                    request['size_bytes'],
+                    request['filename'],
+                )
+            else:
+                path = cache.acquire(sources[request])
+            paths.append(path)
+        if timing is not None and cache.download_intervals:
+            intervals = cache.download_intervals
+            timing['download_intervals'] = intervals
+            timing['download_seconds'] = sum(end - start for start, end in intervals)
     if timing is not None:
         timing['source_staging_seconds'] = time.monotonic() - started
     return paths

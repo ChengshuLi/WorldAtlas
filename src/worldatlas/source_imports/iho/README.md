@@ -8,7 +8,7 @@ Run the [common import command](../README.md#run-one-construction) with `s130-se
 
 ```bash
 worldatlas-import --recipe CONSTRUCTION_ID \
-  --r2-endpoint R2_ENDPOINT --work-dir /absolute/path/to/worldatlas-work/inputs
+  --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
 ## How it works
