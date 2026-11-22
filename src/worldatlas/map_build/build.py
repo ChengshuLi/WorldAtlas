@@ -60,6 +60,7 @@ from worldatlas.map_build.inputs.selection import (
     read_saved,
     read_selection,
 )
+from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical import build as physical_build
 from worldatlas.map_releases.catalog import release_endpoint
 from worldatlas.shared.database import connect_neon, neon_connection_url
@@ -433,7 +434,7 @@ class Pipeline:
 
     def _load_selection(
         self, sources: BuildSources, selection: Path | str | None
-    ) -> dict[str, Any]:
+    ) -> BuildSelection:
         """Load the geographic records that this run will use.
 
         Args:

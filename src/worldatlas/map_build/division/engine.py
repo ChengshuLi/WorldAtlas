@@ -27,6 +27,7 @@ from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.division.shores import ReferenceCells, ShoreGeometry
 from worldatlas.map_build.execution.control import check_cancelled, stage
 from worldatlas.map_build.execution.runtime import Checkpoints, Timing
+from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.shared.files import pin_file
@@ -208,7 +209,7 @@ class ParentDivision:
 
     def __init__(
         self,
-        geography: dict[str, Any],
+        geography: GeographicSelection,
         parent_id: int,
         grid: Grid,
         physical_directory: Path | str,

@@ -16,6 +16,7 @@ from worldatlas.map_build.division.engine import ParentDivision, land_groups
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.shores import ShoreGeometry
 from worldatlas.map_build.execution.runtime import Checkpoints, Timing
+from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.shared.files import (
     json_bytes,
     pin_file,
@@ -26,7 +27,7 @@ from worldatlas.shared.files import (
 
 
 def selected_parents(
-    geography: dict[str, Any], requested: Iterable[int] | None
+    geography: GeographicSelection, requested: Iterable[int] | None
 ) -> list[int]:
     """Find the requested divisions and include their ancestors.
 
@@ -81,7 +82,7 @@ def selected_parents(
 
 
 def definition(
-    geography: dict[str, Any],
+    geography: GeographicSelection,
     parent: int,
     grid: Grid,
     physical: Path | str,
@@ -255,7 +256,7 @@ class HierarchyDivision:
 
     def __init__(
         self,
-        geography: dict[str, Any],
+        geography: GeographicSelection,
         grid: Grid,
         physical: Path | str,
         directory: Path | str,

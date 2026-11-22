@@ -11,12 +11,13 @@ import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.map_build.inputs.selection_types import MapCodeBinding
 from worldatlas.shared.files import sha256_file
 
 
 def reference_lookup(
-    reference_bindings: Iterable[dict[str, Any]],
-    candidate_bindings: Iterable[dict[str, Any]],
+    reference_bindings: Iterable[MapCodeBinding],
+    candidate_bindings: Iterable[MapCodeBinding],
 ) -> tuple[np.ndarray, np.ndarray] | None:
     """Match reference codes to candidate codes by owner and physical class.
 
@@ -31,7 +32,7 @@ def reference_lookup(
         A missing match has value -1.
     """
 
-    def by_code(bindings: Iterable[dict[str, Any]]) -> dict[int, tuple[int, str]]:
+    def by_code(bindings: Iterable[MapCodeBinding]) -> dict[int, tuple[int, str]]:
         """Index the meaning of every code.
 
         Args:
@@ -88,8 +89,8 @@ def compare(
     directory: Path | str,
     reference_sha256: dict[str, str],
     *,
-    reference_bindings: Iterable[dict[str, Any]] | None = None,
-    candidate_bindings: Iterable[dict[str, Any]] | None = None,
+    reference_bindings: Iterable[MapCodeBinding] | None = None,
+    candidate_bindings: Iterable[MapCodeBinding] | None = None,
 ) -> dict[str, Any]:
     """Compare every cell in two grids and write the changed spans.
 

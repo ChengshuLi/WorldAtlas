@@ -3,7 +3,12 @@
 from collections import defaultdict
 from typing import Any
 
-type CompiledRules = tuple[dict[int, dict[str, Any]], list[dict[str, Any]]]
+from worldatlas.map_build.inputs.selection_types import (
+    GeographicEntity,
+    GeographicSelection,
+)
+
+type CompiledRules = tuple[dict[int, GeographicEntity], list[dict[str, Any]]]
 
 OPERATIONS = frozenset(
     (
@@ -24,7 +29,7 @@ ROLE_TYPES = {
 }
 
 
-def compile_rules(geography: dict[str, Any], parent_id: int) -> CompiledRules:
+def compile_rules(geography: GeographicSelection, parent_id: int) -> CompiledRules:
     """Resolve and validate the rules for one geographic parent.
 
     Args:

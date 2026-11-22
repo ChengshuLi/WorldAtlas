@@ -12,6 +12,7 @@ from worldatlas.map_build.inputs.configuration import (
     catalog_source_id,
     land_dataset_index,
 )
+from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical.build import (
     validate_r2_shard_location,
     validate_shard_staging,
@@ -23,7 +24,7 @@ SCHEMA = "worldatlas-release-inputs-v1"
 
 
 def validate_replay_sources(
-    configuration: dict[str, Any], selection: dict[str, Any]
+    configuration: dict[str, Any], selection: BuildSelection
 ) -> None:
     """Check that physical inputs can be read again on a fresh machine.
 
@@ -94,7 +95,7 @@ def write_inputs(
     *,
     release_id: str,
     configuration: dict[str, Any],
-    selection: dict[str, Any],
+    selection: BuildSelection | dict[str, JSONValue] | None,
     run: dict[str, Any],
     report: dict[str, Any],
     records: Sequence[dict[str, Any]] = (),

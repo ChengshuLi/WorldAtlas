@@ -4,19 +4,28 @@ import json
 from collections.abc import Iterable
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, LiteralString, cast
+from typing import LiteralString, cast
 
 from psycopg import Connection
 
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.map_build.division.contracts import CompiledRules, compile_rules
+from worldatlas.map_build.inputs.selection_types import (
+    BuildSelection,
+    ConstructionRecord,
+    EntityColor,
+    FeatureReference,
+    GeographicFeature,
+    GeographicSelection,
+    SourceAsset,
+)
 
 HERE = Path(__file__).resolve().parent
 
 QUERY = HERE / "geography.sql"
 
 
-def validate_map_code_bindings(geography: dict[str, Any]) -> None:
+def validate_map_code_bindings(geography: GeographicSelection) -> None:
     """Check the mappings between map codes and (entity, land or water) pairs.
 
     Args:
@@ -28,9 +37,9 @@ def validate_map_code_bindings(geography: dict[str, Any]) -> None:
     entities = {entity["id"]: entity for entity in geography["entities"]}
     codes, pairs = set(), set()
     for binding in geography["category_bindings"]:
-        code, entity, kind = (
-            binding.get(k) for k in ("code", "entity_id", "physical_class")
-        )
+        code = binding.get("code")
+        entity = binding.get("entity_id")
+        kind = binding.get("physical_class")
         if (
             type(code) is not int
             or not 0 < code < 2**32
@@ -47,7 +56,7 @@ def validate_map_code_bindings(geography: dict[str, Any]) -> None:
         pairs.add((entity, kind))
 
 
-def canonical_bytes(selection: dict[str, Any]) -> bytes:
+def canonical_bytes(selection: BuildSelection) -> bytes:
     """Encode a frozen selection as compact, sorted JSON for comparisons.
 
     Args:
@@ -72,7 +81,7 @@ def canonical_bytes(selection: dict[str, Any]) -> bytes:
     ).encode()
 
 
-def entity_colors(selection: dict[str, Any]) -> list[dict[str, Any]]:
+def entity_colors(selection: BuildSelection) -> list[EntityColor]:
     """Collect the configured colors of entities in a selection.
 
     Args:
@@ -92,7 +101,7 @@ def read_selection(
     *,
     raw_sources: Iterable[str] = (),
     parents: list[int] | None = None,
-) -> dict[str, Any]:
+) -> BuildSelection:
     """Read the working build inputs from one consistent database snapshot.
 
     Args:
@@ -109,10 +118,7 @@ def read_selection(
     Raises:
         ValueError: A requested parent or raw source record is missing.
     """
-    result: dict[str, Any] = {
-        "schema": "worldatlas-input-selection-v4",
-        "selected_at": datetime.now(timezone.utc).isoformat(),
-    }
+    selected_at = datetime.now(timezone.utc).isoformat()
     with database.transaction():
         database.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
         if parents is not None:
@@ -139,43 +145,56 @@ def read_selection(
             cast(LiteralString, QUERY.read_text()), (parents, parents)
         ).fetchone()
         assert result_row is not None
-        data = json.loads(result_row[0])
-        features = {feature["id"]: feature for feature in data["features"]}
+        data: GeographicSelection[FeatureReference] = json.loads(result_row[0])
+        feature_refs = {feature["id"]: feature for feature in data["features"]}
+        features: list[GeographicFeature] = []
         with database.cursor(name="selected_features") as cursor:
             cursor.execute(
                 "SELECT id,geometry::text FROM atlas.source_features "
                 "WHERE id=ANY(%s) ORDER BY id",
-                (sorted(features),),
+                (sorted(feature_refs),),
             )
             for feature_id, geometry in cursor:
-                features[feature_id]["geometry"] = json.loads(geometry)
-        result["geography"] = data
+                features.append(
+                    {**feature_refs[feature_id], "geometry": json.loads(geometry)}
+                )
+
+        # Geography supplies the source IDs behind the selected features and the
+        # rules' citations. Save their catalog details so the release can trace
+        # both. Only files requested as physical or comparison inputs are fetched.
+        # Together these IDs cover the catalog entries needed in the snapshot.
         references = set(raw_sources) | {
             source["source_id"] for source in data["sources"]
         }
-        document_refs = {feature["construction_id"] for feature in features.values()}
+        construction_ids = {feature["construction_id"] for feature in features}
         rows = database.execute(
             "SELECT (to_jsonb(a)-'created_at'-'id') || jsonb_build_object('source_id',a.id) "
             "FROM atlas.source_assets a WHERE id=ANY(%s) ORDER BY id",
             (sorted(references),),
         ).fetchall()
-        result["raw_sources"] = [row[0] for row in rows]
-        if missing := references - {row["source_id"] for row in result["raw_sources"]}:
+        source_assets: list[SourceAsset] = [row[0] for row in rows]
+        if missing := references - {source["source_id"] for source in source_assets}:
             raise ValueError("selected raw source is missing: " + str(sorted(missing)))
         rows = database.execute(
             "SELECT id,method,arguments,basis FROM atlas.construction_records "
             "WHERE id=ANY(%s) ORDER BY id",
-            (sorted(document_refs),),
+            (sorted(construction_ids),),
         ).fetchall()
         # The source_features foreign key guarantees these recipes in this snapshot.
-        result["construction_records"] = [
-            dict(id=ident, method=method, arguments=arguments, basis=basis)
+        constructions: list[ConstructionRecord] = [
+            {"id": ident, "method": method, "arguments": arguments, "basis": basis}
             for ident, method, arguments, basis in rows
         ]
-    return result
+    return {
+        "schema": "worldatlas-input-selection-v4",
+        "selected_at": selected_at,
+        "geography": {**data, "features": features},
+        "construction_records": constructions,
+        "raw_sources": source_assets,
+    }
 
 
-def prepare_geography(domain: dict[str, Any]) -> dict[int, CompiledRules]:
+def prepare_geography(domain: GeographicSelection) -> dict[int, CompiledRules]:
     """Check frozen geometry and map codes and assemble the rules for each parent.
 
     Args:
@@ -199,7 +218,7 @@ def prepare_geography(domain: dict[str, Any]) -> dict[int, CompiledRules]:
     return compiled
 
 
-def read_saved(path: Path | str) -> dict[str, Any]:
+def read_saved(path: Path | str) -> BuildSelection:
     """Load an earlier frozen selection from disk.
 
     Args:
@@ -211,7 +230,7 @@ def read_saved(path: Path | str) -> dict[str, Any]:
     Raises:
         ValueError: The file has an incompatible schema.
     """
-    result = json.loads(Path(path).read_bytes())
+    result: BuildSelection = json.loads(Path(path).read_bytes())
     if result.get("schema") != "worldatlas-input-selection-v4":
         raise ValueError(
             "this selection requires its release archive's captured implementation"

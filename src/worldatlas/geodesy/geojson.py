@@ -2,11 +2,33 @@
 
 import math
 from collections.abc import Mapping
+from typing import Literal
 
 from shapely.geometry import shape
 from shapely.geometry.base import BaseGeometry
+from typing_extensions import TypedDict
 
 from worldatlas.shared.files import JSONValue
+
+# Each position holds two numbers, longitude then latitude in degrees.
+type Position = list[float]
+type LineCoordinates = list[Position]
+type PolygonCoordinates = list[LineCoordinates]
+
+
+class Geometry[Kind: str, Coordinates](TypedDict, closed=True):
+    """Record the GeoJSON type and coordinate arrays for one geometry."""
+
+    type: Kind
+    coordinates: Coordinates
+
+
+type GeoJSONGeometry = (
+    Geometry[Literal["Point"], Position]
+    | Geometry[Literal["MultiPoint", "LineString"], LineCoordinates]
+    | Geometry[Literal["MultiLineString", "Polygon"], PolygonCoordinates]
+    | Geometry[Literal["MultiPolygon"], list[PolygonCoordinates]]
+)
 
 
 def validate_geometry(geometry: Mapping[str, JSONValue]) -> BaseGeometry:

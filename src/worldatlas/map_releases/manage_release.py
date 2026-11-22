@@ -25,6 +25,7 @@ from worldatlas.map_build.inputs.selection import (
     entity_colors,
     validate_map_code_bindings,
 )
+from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
     lookup_release,
@@ -77,7 +78,7 @@ def version(candidate: str) -> str:
     return match["version"]
 
 
-def release_categories(selection: dict[str, Any]) -> list[dict[str, Any]]:
+def release_categories(selection: BuildSelection) -> list[dict[str, Any]]:
     """Build the viewer's category records from the build's frozen geography.
 
     Args:
@@ -170,7 +171,7 @@ def build_bundle(
             )
     # The build already validated the rules. Packaging uses the frozen selection
     # as provenance and reads the category bindings needed by the viewer.
-    selection = read_json(run / "input-selection.json")
+    selection: BuildSelection = read_json(run / "input-selection.json")
     if (
         hashlib.sha256(canonical_bytes(selection)).hexdigest()
         != identity["input_selection_sha256"]

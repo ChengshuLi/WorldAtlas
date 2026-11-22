@@ -11,13 +11,14 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.intervals import overlay, spans
+from worldatlas.map_build.inputs.selection_types import MapCodeBinding
 
 
 def encode(
     grid: Grid,
     physical_directory: Path | str,
     ownership_directory: Path | str,
-    bindings: Sequence[dict[str, Any]],
+    bindings: Sequence[MapCodeBinding],
     directory: Path | str,
 ) -> dict[str, Any]:
     """Write the final grid of map codes from ownership and physical class.
