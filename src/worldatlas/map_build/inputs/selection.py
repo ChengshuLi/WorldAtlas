@@ -159,10 +159,11 @@ def read_selection(
                     {**feature_refs[feature_id], "geometry": json.loads(geometry)}
                 )
 
-        # Geography supplies the source IDs behind the selected features and the
-        # rules' citations. Save their catalog details so the release can trace
-        # both. Only files requested as physical or comparison inputs are fetched.
-        # Together these IDs cover the catalog entries needed in the snapshot.
+        # data["sources"] names the files behind the saved geometry and rule
+        # citations. Keep their catalog rows so we can trace those records.
+        # raw_sources adds IDs for files the builder may need to download later,
+        # such as inland-water data or a comparison map. Here we save the Neon
+        # catalog rows for both groups.
         references = set(raw_sources) | {
             source["source_id"] for source in data["sources"]
         }
