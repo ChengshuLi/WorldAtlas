@@ -76,7 +76,19 @@ class ReleaseLookupTests(unittest.TestCase):
                     candidate = read_release_assets(identity)
                     streams, config = candidate
                     self.assertEqual(
-                        streams[0][1:4], ("test", folder + "rows.u32le.gz", 12)
+                        streams,
+                        [
+                            (
+                                "rows",
+                                dict(objects["rows.u32le.gz"], r2_bucket="test"),
+                                "b" * 64,
+                            ),
+                            (
+                                "runs",
+                                dict(objects["runs.u32le.gz"], r2_bucket="test"),
+                                "c" * 64,
+                            ),
+                        ],
                     )
                     self.assertEqual(config, dict(objects["config.json"], r2_bucket="test"))
                     self.assertEqual(storage.key, folder + "manifest.json")

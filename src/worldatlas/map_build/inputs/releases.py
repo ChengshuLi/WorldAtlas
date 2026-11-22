@@ -3,9 +3,10 @@
 import gzip
 import hashlib
 import shutil
-import uuid
 from contextlib import closing
-from typing import Any
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from typing import cast
 
 import psycopg
 
@@ -16,23 +17,24 @@ from worldatlas.map_releases.catalog import (
 from worldatlas.shared.database import connect_neon
 from worldatlas.shared.files import json_bytes, sha256_file, verify_pins
 from worldatlas.shared.r2 import make_r2_client
-from worldatlas.source_assets.cache import SourceCache
+from worldatlas.source_assets.cache import FileSpec, SourceCache
 
 type ComparisonPins = dict[str, dict[str, str]]
+type ReleaseStream = tuple[str, FileSpec, str]
 
 
 def read_release_assets(
     identity: str,
-) -> tuple[list[tuple[str, str, str, int, str, str]], dict[str, Any] | None]:
+) -> tuple[list[ReleaseStream], FileSpec | None]:
     """Read the map stream locations from a verified release manifest.
 
     Args:
         identity: Exact release ID or official map version.
 
     Returns:
-        (streams, config). Each stream record holds its name, R2 bucket,
-        object key, byte count, stored SHA-256, and decompressed SHA-256.
-        Config is the viewer config's R2 metadata, or None if absent.
+        (streams, config). Each stream contains its name, a ready-to-use R2
+        file reference for the gzip file, and the SHA-256 of its decoded bytes.
+        Config is the viewer config's R2 file reference, or None if absent.
 
     Raises:
         ValueError: Database access is missing, or the release or manifest is invalid.
@@ -45,23 +47,18 @@ def read_release_assets(
         raise ValueError("Neon release lookup failed; check database access") from None
     with closing(make_r2_client()) as storage:
         manifest = read_manifest(storage, release)
-    result = []
-    for stream in ("rows", "runs"):
-        asset = manifest["objects"][stream + ".u32le.gz"]
-        result.append(
-            (
-                stream,
-                release["r2_bucket"],
-                asset["r2_key"],
-                asset["size_bytes"],
-                asset["sha256"],
-                manifest["decoded_sha256"][stream],
-            )
+    bucket = release["r2_bucket"]
+    objects = manifest["objects"]
+    streams: list[ReleaseStream] = [
+        (
+            name,
+            dict(objects[f"{name}.u32le.gz"], r2_bucket=bucket),
+            manifest["decoded_sha256"][name],
         )
-    config = manifest["objects"].get("config.json")
-    if config is not None:
-        config = dict(config, r2_bucket=release["r2_bucket"])
-    return result, config
+        for name in ("rows", "runs")
+    ]
+    config = objects.get("config.json")
+    return streams, dict(config, r2_bucket=bucket) if config is not None else None
 
 
 def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
@@ -79,38 +76,31 @@ def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
         ValueError: The manifest is invalid or a file fails checksum verification.
     """
     streams, config = read_release_assets(version)
-    digest = hashlib.sha256(json_bytes(streams)).hexdigest()
+    # Releases with the same decoded streams can share the comparison files.
+    decoded_hashes = {name: decoded_hash for name, _, decoded_hash in streams}
+    digest = hashlib.sha256(json_bytes(decoded_hashes)).hexdigest()
     directory = cache.directory / ("release-" + digest)
     directory.mkdir(parents=True, exist_ok=True)
     reference: ComparisonPins = {}
-    for stream, bucket, key, size, stored_hash, decoded_hash in streams:
-        path = directory / (stream + ".u32le")
+    for name, source, decoded_hash in streams:
+        path = directory / f"{name}.u32le"
         pin = {"path": str(path), "sha256": decoded_hash}
         if path.exists():
             verify_pins([pin])
         else:
-            compressed = cache.acquire(
-                {
-                    "r2_bucket": bucket,
-                    "r2_key": key,
-                    "size_bytes": size,
-                    "sha256": stored_hash,
-                }
-            )
-            partial = path.with_name(path.name + "." + uuid.uuid4().hex + ".partial")
-            try:
-                with gzip.open(compressed, "rb") as src, partial.open("xb") as dst:
+            compressed = cache.acquire(source)
+            # Publish under the final name only after verifying the full file.
+            with TemporaryDirectory(dir=directory) as staging:
+                pending = Path(staging) / path.name
+                with gzip.open(compressed, "rb") as src, pending.open("wb") as dst:
                     shutil.copyfileobj(src, dst, 1 << 20)
-                if sha256_file(partial) != decoded_hash:
+                if sha256_file(pending) != decoded_hash:
                     raise ValueError("decoded reference stream hash mismatch")
-                # Concurrent builds for this manifest publish the same bytes.
-                partial.replace(path)
-            finally:
-                partial.unlink(missing_ok=True)
-        reference["reference_" + stream] = pin
+                pending.replace(path)
+        reference[f"reference_{name}"] = pin
     if config is not None:
         reference["reference_config"] = {
             "path": str(cache.acquire(config)),
-            "sha256": config["sha256"],
+            "sha256": cast(str, config["sha256"]),
         }
     return reference

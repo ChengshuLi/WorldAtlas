@@ -423,7 +423,7 @@ class Fixture(unittest.TestCase):
             for name, data in decoded.items()
         }
         catalog = [
-            (name, "worldatlas", key, len(data), digest(data), digest(decoded[name]))
+            (name, self.cloud(data, key), digest(decoded[name]))
             for name, (key, data) in zip(decoded, stored.items())
         ]
         release_config = b'{"categories":[]}'
@@ -451,8 +451,8 @@ class Fixture(unittest.TestCase):
             finally:
                 runner.close()
             release_lookup.side_effect = AssertionError("preview is no longer cataloged")
-            for _, _, key, _, checksum, _ in catalog:
-                (self.inputs / checksum / Path(key).name).unlink()
+            for _, source, _ in catalog:
+                (self.inputs / source["sha256"] / Path(source["r2_key"]).name).unlink()
             with patch.object(pipeline, "SourceCache") as cache:
                 resumed = pipeline.Pipeline(
                     config,
@@ -491,22 +491,30 @@ class Fixture(unittest.TestCase):
         stored_hash = hashlib.sha256(packed).hexdigest()
         decoded_hash = hashlib.sha256(decoded).hexdigest()
         key = "releases/fixture/rows.u32le.gz"
-        good = ("rows", "worldatlas", key, len(packed), stored_hash, decoded_hash)
-        bad = (*good[:-1], "0" * 64)
+        source = self.cloud(packed, key)
+        good = ("rows", source, decoded_hash)
+        bad = ("rows", source, "0" * 64)
+        reissued = (
+            "rows",
+            self.cloud(gzip.compress(decoded, mtime=1), "releases/another/rows.u32le.gz"),
+            decoded_hash,
+        )
         with (
             patch.object(
                 release_inputs, "read_release_assets",
-                side_effect=[([bad], None), ([good], None), ([good], None)],
+                side_effect=[([bad], None), ([good], None), ([reissued], None)],
             ),
             self.fake_r2({key: packed}, []) as download,
         ):
             source_cache = self.make_cache()
             with self.assertRaisesRegex(ValueError, "decoded reference stream hash mismatch"):
                 release_inputs.cache_release_reference("fixture", source_cache)
-            self.assertFalse(list(self.inputs.rglob("*.partial")))
+            self.assertEqual(list(self.inputs.glob("release-*/*")), [])
             expected = release_inputs.cache_release_reference("fixture", source_cache)
             self.assertEqual(list(expected), ["reference_rows"])
-            self.assertEqual(Path(expected["reference_rows"]["path"]).read_bytes(), decoded)
+            cached = Path(expected["reference_rows"]["path"])
+            self.assertEqual(cached.read_bytes(), decoded)
+            self.assertEqual(list(cached.parent.iterdir()), [cached])
             (self.inputs / stored_hash / Path(key).name).unlink()
             self.assertEqual(
                 release_inputs.cache_release_reference("fixture", self.make_cache()),
