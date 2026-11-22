@@ -11,7 +11,7 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.contracts import compile_rules
+from worldatlas.map_build.division.contracts import CompiledRules, compile_rules
 from worldatlas.map_build.division.engine import ParentDivision, land_groups
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.shores import ShoreGeometry
@@ -88,6 +88,7 @@ def definition(
     membership: Path | str | None,
     configuration: dict[str, Any],
     *,
+    compiled: CompiledRules,
     land_only: bool = False,
 ) -> dict[str, Any]:
     """Record only the inputs that affect the parent's assignment.
@@ -100,13 +101,14 @@ def definition(
         membership: Directory marking the parent's cells, or None for the whole
             grid.
         configuration: Build settings used by the selected rules.
+        compiled: This parent's child entities and assembled rules.
         land_only: Whether to record the land calculation separately.
 
     Returns:
         Dictionary of operative rule settings, geometry, binding order
         and input file checksums. A wording or color edit leaves it unchanged.
     """
-    children, rules = compile_rules(geography, parent)
+    children, rules = compiled
     if land_only:
         rules = [rule for _, group in land_groups(rules) for rule in group]
     operative = []
@@ -259,6 +261,7 @@ class HierarchyDivision:
         directory: Path | str,
         configuration: dict[str, Any],
         *,
+        compiled_divisions: dict[int, CompiledRules] | None = None,
         requested: Iterable[int] | None = None,
         reuse: Path | str | None = None,
         checkpoints: Checkpoints | None = None,
@@ -272,6 +275,8 @@ class HierarchyDivision:
             physical: Directory containing physical row-run files.
             directory: Output directory for division results.
             configuration: Build settings used by the rules.
+            compiled_divisions: Child entities and assembled rules keyed by parent
+                ID. When omitted, compile the rules here for a standalone division.
             requested: Parent IDs to divide, or None for all.
             reuse: Directory containing earlier division results.
             checkpoints: Optional store for completed work.
@@ -283,6 +288,7 @@ class HierarchyDivision:
         self.configuration = configuration
         self.checkpoints, self.timing = checkpoints, timing
         self.parents = selected_parents(geography, requested)
+        self.compiled_divisions = compiled_divisions
         self.reuse = (
             {} if reuse is None else read_json(Path(reuse) / "report.json")["parents"]
         )
@@ -341,6 +347,11 @@ class HierarchyDivision:
         ownership = None
         receipts = {}
         for parent in self.parents:
+            compiled = (
+                compile_rules(self.geography, parent)
+                if self.compiled_divisions is None
+                else self.compiled_divisions[parent]
+            )
             directory = self.directory / ("parent-" + str(parent))
             directory.mkdir(exist_ok=True)
             parent_directory = None
@@ -363,6 +374,7 @@ class HierarchyDivision:
                 self.physical,
                 parent_directory,
                 self.configuration,
+                compiled=compiled,
             )
             data = json_bytes(settings)
             identity = hashlib.sha256(data).hexdigest()
@@ -390,6 +402,7 @@ class HierarchyDivision:
                     self.physical,
                     parent_directory,
                     self.configuration,
+                    compiled=compiled,
                     land_only=True,
                 )
                 land_identity = hashlib.sha256(json_bytes(land_settings)).hexdigest()
@@ -401,6 +414,7 @@ class HierarchyDivision:
                     self.physical,
                     directory / "calculation",
                     self.configuration,
+                    compiled=compiled,
                     parent_directory=parent_directory,
                     checkpoints=self.checkpoints,
                     timing=cast(Timing, self.timing),

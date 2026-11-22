@@ -56,7 +56,9 @@ class BindingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "selection.json"
             path.write_bytes(canonical_bytes(self.frozen))
-            self.assertEqual(read_saved(path), self.frozen)
+            saved, compiled = read_saved(path)
+            self.assertEqual(saved, self.frozen)
+            self.assertEqual(compiled, {})
             other_geography = dict(self.geography, schema="obsolete")
             path.write_text(json.dumps(dict(self.frozen, geography=other_geography)))
             with self.assertRaisesRegex(ValueError, "unsupported geographic selection"):
@@ -140,7 +142,7 @@ class SelectionTests(unittest.TestCase):
 
     def read(self, **kwargs):
         with psycopg.connect(self.url) as database:
-            result = read_selection(database, **kwargs)
+            result, _ = read_selection(database, **kwargs)
             self.assertEqual(
                 database.info.transaction_status, psycopg.pq.TransactionStatus.IDLE
             )
@@ -197,7 +199,7 @@ class SelectionTests(unittest.TestCase):
                 return cursor
 
         with psycopg.connect(self.url) as database:
-            frozen = read_selection(Interleave(database))
+            frozen, _ = read_selection(Interleave(database))
         self.assertEqual(frozen["geography"]["features"][0]["geometry"], self.geometry)
         self.assertEqual(frozen["raw_sources"][0]["title"], "First")
         self.assertEqual(

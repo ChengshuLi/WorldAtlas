@@ -232,7 +232,7 @@ class Fixture(unittest.TestCase):
             patch.object(
                 pipeline,
                 "read_selection",
-                side_effect=lambda *a, **kw: json.loads(json.dumps(self.frozen)),
+                side_effect=lambda *a, **kw: (json.loads(json.dumps(self.frozen)), {}),
             ),
         ):
             mocking.start()

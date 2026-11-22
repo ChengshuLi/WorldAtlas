@@ -21,7 +21,7 @@ from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division import policies
 from worldatlas.map_build.division.areas import assign_area, divide_area
 from worldatlas.map_build.division.connectivity import build_domain
-from worldatlas.map_build.division.contracts import compile_rules
+from worldatlas.map_build.division.contracts import CompiledRules
 from worldatlas.map_build.division.intervals import Eligibility, combine, overlay, spans
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.division.shores import ReferenceCells, ShoreGeometry
@@ -215,6 +215,7 @@ class ParentDivision:
         directory: Path | str,
         configuration: dict[str, Any],
         *,
+        compiled: CompiledRules,
         parent_directory: Path | str | None = None,
         checkpoints: Checkpoints | None = None,
         timing: Timing | None = None,
@@ -230,6 +231,7 @@ class ParentDivision:
             physical_directory: Physical row-run grid directory.
             directory: Directory for this division's outputs.
             configuration: Build settings used by the rules.
+            compiled: This parent's child entities and assembled rules.
             parent_directory: Inherited mask of the parent's cells. Omit only for
                 the root.
             checkpoints: Optional store for completed work.
@@ -238,12 +240,12 @@ class ParentDivision:
             shore_provider: Optional shared physical shore calculation.
 
         Raises:
-            ValueError: The parent's rules are invalid or its required mask is missing.
+            ValueError: A non-root division is missing its parent mask.
         """
         self.geography = geography
         self.parent_id = parent_id
         self.grid = grid
-        self.children, self.rules = compile_rules(geography, parent_id)
+        self.children, self.rules = compiled
         self.allowed = Eligibility(
             {e: v["physical_class"] for e, v in self.children.items()}
         )

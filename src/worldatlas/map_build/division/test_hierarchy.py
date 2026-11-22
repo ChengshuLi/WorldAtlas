@@ -12,6 +12,7 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer, patch_rows
 from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.map_build.division.contracts import compile_rules
 from worldatlas.map_build.division.hierarchy import (
     definition,
     selected_parents,
@@ -304,9 +305,11 @@ class HierarchyTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "requires inherited parent membership"):
                 ParentDivision(
                     geography, 101, grid, root / "physical", root / "no-membership", {},
+                    compiled=compile_rules(geography, 101),
                 )
             parent = ParentDivision(
                 geography, 0, grid, root / "physical", root / "parent", {},
+                compiled=compile_rules(geography, 0),
             )
             try:
                 with self.assertRaisesRegex(ValueError, "land ownership must be complete"):
@@ -383,14 +386,26 @@ class HierarchyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             physical = Path(temp) / "physical"
             write_layer(physical, grid, [(0, [(0, 24, 17)])])
-            original = definition(geo, 0, grid, physical, None, {})
+            original = definition(
+                geo, 0, grid, physical, None, {}, compiled=compile_rules(geo, 0)
+            )
             changed = copy.deepcopy(geo)
             changed["entities"][1]["color_rgb"] = "#998877"
             changed["rules"][0]["rationale"] = "Clearer explanation"
-            self.assertEqual(definition(changed, 0, grid, physical, None, {}), original)
+            self.assertEqual(
+                definition(
+                    changed, 0, grid, physical, None, {},
+                    compiled=compile_rules(changed, 0),
+                ),
+                original,
+            )
             changed["rules"][0]["unassigned_only"] = True
             self.assertNotEqual(
-                definition(changed, 0, grid, physical, None, {}), original
+                definition(
+                    changed, 0, grid, physical, None, {},
+                    compiled=compile_rules(changed, 0),
+                ),
+                original,
             )
 
     def test_descendant_substitution_preserves_every_other_parent(self):

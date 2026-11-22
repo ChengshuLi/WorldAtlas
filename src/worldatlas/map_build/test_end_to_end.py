@@ -22,6 +22,7 @@ from osgeo import ogr
 from worldatlas.source_imports.run_import import run_import
 from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
+from worldatlas.map_build.inputs import selection as selection_inputs
 from worldatlas.map_build.inputs.selection import read_selection, canonical_bytes
 from worldatlas.shared.files import pin_file, write_json
 
@@ -174,7 +175,7 @@ class EndToEndTests(unittest.TestCase):
                         "('__e2e_island','__e2e_second','distance_reference')"
                     )
                 with psycopg.connect(url) as db:
-                    frozen = read_selection(db)
+                    frozen, _ = read_selection(db)
                 selected = raw / "selection.json"
                 selected.write_bytes(canonical_bytes(frozen))
                 land_config = dict(
@@ -236,8 +237,19 @@ class EndToEndTests(unittest.TestCase):
                 errors = list((root / "run/checkpoints").glob("*/attempt-*/error.log"))
                 self.assertTrue(any("InterruptedError" in path.read_text() for path in errors))
                 self.assertFalse((root / "run/logs").exists())
-                runner = Pipeline(cfg, root / "run", work_dir=root, resume=True)
-                report = runner.run()
+                with (
+                    patch.object(
+                        selection_inputs, "compile_rules",
+                        wraps=selection_inputs.compile_rules,
+                    ) as compile_parent,
+                    patch(
+                        "worldatlas.map_build.division.hierarchy.compile_rules",
+                        side_effect=AssertionError("prepared rules must be reused"),
+                    ),
+                ):
+                    runner = Pipeline(cfg, root / "run", work_dir=root, resume=True)
+                    report = runner.run()
+                compile_parent.assert_called_once_with(frozen["geography"], 0)
                 self.assertEqual(report["status"], "complete")
                 self.assertTrue(
                     all(r["outputs_complete"] for r in report["stages"].values())

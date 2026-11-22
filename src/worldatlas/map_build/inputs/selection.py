@@ -9,7 +9,7 @@ from typing import Any, LiteralString, cast
 from psycopg import Connection
 
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.map_build.division.contracts import compile_rules
+from worldatlas.map_build.division.contracts import CompiledRules, compile_rules
 
 HERE = Path(__file__).resolve().parent
 
@@ -92,7 +92,7 @@ def read_selection(
     *,
     raw_sources: Iterable[str] = (),
     parents: list[int] | None = None,
-) -> dict[str, Any]:
+) -> tuple[dict[str, Any], dict[int, CompiledRules]]:
     """Read the working build inputs from one consistent database snapshot.
 
     Args:
@@ -102,8 +102,9 @@ def read_selection(
             divisions.
 
     Returns:
-        Selection dictionary with geographic rules, coordinate geometry,
-        construction records and source catalog entries.
+        (selection, compiled_divisions). The selection contains geographic rules,
+        coordinates, construction records and source catalog entries. The compiled
+        divisions are keyed by parent entity ID.
 
     Raises:
         ValueError: A required record is absent or its contents are invalid.
@@ -148,7 +149,6 @@ def read_selection(
             )
             for feature_id, geometry in cursor:
                 features[feature_id]["geometry"] = json.loads(geometry)
-        validate_feature_references(data)
         result["geography"] = data
         references = set(raw_sources) | {
             source["source_id"] for source in data["sources"]
@@ -172,14 +172,17 @@ def read_selection(
             dict(id=ident, method=method, arguments=arguments, basis=basis)
             for ident, method, arguments, basis in rows
         ]
-    return result
+    return result, prepare_geography(data)
 
 
-def validate_feature_references(domain: dict[str, Any]) -> None:
-    """Check frozen feature geometry, division rules, and map codes.
+def prepare_geography(domain: dict[str, Any]) -> dict[int, CompiledRules]:
+    """Check frozen geometry and map codes and assemble the rules for each parent.
 
     Args:
         domain: Geographic part of a frozen selection.
+
+    Returns:
+        Child entities and assembled rules keyed by parent entity ID.
 
     Raises:
         ValueError: The schema, geometry, rules, or bindings are invalid.
@@ -191,19 +194,20 @@ def validate_feature_references(domain: dict[str, Any]) -> None:
     for feature in domain["features"]:
         validate_geometry(feature["geometry"])
     parents = {r["parent_id"] for r in domain["rules"]}
-    for parent in parents:
-        compile_rules(domain, parent)
+    compiled = {parent: compile_rules(domain, parent) for parent in parents}
     validate_map_code_bindings(domain)
+    return compiled
 
 
-def read_saved(path: Path | str) -> dict[str, Any]:
+def read_saved(path: Path | str) -> tuple[dict[str, Any], dict[int, CompiledRules]]:
     """Load an earlier frozen selection from disk.
 
     Args:
         path: Path to the selection JSON file.
 
     Returns:
-        Validated selection dictionary containing the captured coordinates and rules.
+        (selection, compiled_divisions). The selection contains the saved
+        coordinates and rules. The compiled divisions are keyed by parent ID.
 
     Raises:
         ValueError: The file was saved by an incompatible builder or fails validation.
@@ -213,5 +217,4 @@ def read_saved(path: Path | str) -> dict[str, Any]:
         raise ValueError(
             "this selection requires its release archive's captured implementation"
         )
-    validate_feature_references(result["geography"])
-    return result
+    return result, prepare_geography(result["geography"])

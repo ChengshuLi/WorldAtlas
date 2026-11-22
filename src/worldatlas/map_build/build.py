@@ -34,6 +34,7 @@ from pyproj import datadir
 
 from worldatlas.map_build.core.comparison import compare
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.division.contracts import CompiledRules
 from worldatlas.map_build.division.encoding import encode
 from worldatlas.map_build.division.hierarchy import HierarchyDivision
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
@@ -332,7 +333,9 @@ class Pipeline:
         self.input_cache = {}
         # Track download start and end times separately from the rest of setup.
         self.acquisition_intervals = []
-        self.selection = self._load_selection(sources, selection)
+        self.selection, self.compiled_divisions = self._load_selection(
+            sources, selection
+        )
         self._prepare_source_files(sources)
         comparison_inputs = self._prepare_comparison(compare_release, saved_identity)
         self.collect_source_files()
@@ -438,15 +441,16 @@ class Pipeline:
 
     def _load_selection(
         self, sources: dict[str, Any], selection: Path | str | None
-    ) -> dict[str, Any]:
-        """Load the geographic records that this run will use.
+    ) -> tuple[dict[str, Any], dict[int, CompiledRules]]:
+        """Load the geographic records and prepare each parent's rules.
 
         Args:
             sources: Physical inputs that may refer to cataloged raw files.
             selection: Caller-supplied file with already saved geographic records.
 
         Returns:
-            Saved records from the run, the supplied file, or the working database.
+            (selection, compiled_divisions). The selection contains the original
+            records. The compiled divisions are keyed by parent ID.
 
         Raises:
             ValueError: A supplied selection differs from the saved run, or no
@@ -454,12 +458,12 @@ class Pipeline:
         """
         selected_path = self.out / "input-selection.json"
         if self.resume:
-            saved = read_saved(selected_path)
+            saved, compiled = read_saved(selected_path)
             if selection is not None and canonical_bytes(
-                read_saved(selection)
+                read_json(selection)
             ) != canonical_bytes(saved):
                 raise ValueError("resume uses a different saved geographic selection")
-            return saved
+            return saved, compiled
         if selection is not None:
             return read_saved(selection)
         connection = os.environ.get("NEON_DATABASE_URL")
@@ -1219,6 +1223,7 @@ class Pipeline:
             physical,
             self.out / "division",
             self.cfg,
+            compiled_divisions=self.compiled_divisions,
             requested=self.requested_parents,
             reuse=previous,
             checkpoints=self.checkpoints,

@@ -3,6 +3,8 @@
 from collections import defaultdict
 from typing import Any
 
+type CompiledRules = tuple[dict[int, dict[str, Any]], list[dict[str, Any]]]
+
 OPERATIONS = frozenset(
     (
         "assign_area",
@@ -22,9 +24,7 @@ ROLE_TYPES = {
 }
 
 
-def compile_rules(
-    geography: dict[str, Any], parent_id: int
-) -> tuple[dict[int, dict[str, Any]], list[dict[str, Any]]]:
+def compile_rules(geography: dict[str, Any], parent_id: int) -> CompiledRules:
     """Resolve and validate the rules for one geographic parent.
 
     Args:

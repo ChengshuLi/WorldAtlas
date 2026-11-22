@@ -10,6 +10,7 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
 from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.map_build.division.contracts import compile_rules
 from worldatlas.map_build.division.engine import ParentDivision, execute_rule
 from worldatlas.map_build.test_support import selection
 
@@ -76,6 +77,7 @@ class ConnectedScopes(unittest.TestCase):
             root / "physical",
             root / "calculation",
             {},
+            compiled=compile_rules(geo, 0),
             parent_directory=parent_directory,
         )
         stack.callback(context.close)
