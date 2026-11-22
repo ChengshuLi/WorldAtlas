@@ -20,7 +20,7 @@ from shapely.geometry import LineString
 from worldatlas.geodesy.wgs84 import geodesic, geodesic_distance
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
-from worldatlas.source_imports.shared.sources import MultipartSource, acquire_sources
+from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import save_features
 from worldatlas.source_imports.watersheds.basins import Basins
 from worldatlas.source_imports.watersheds.boundary import (
@@ -573,7 +573,7 @@ def watershed_boundary(
     runtime: Runtime,
     *,
     feature_id: NonEmptyText,
-    sources: dict[NonEmptyText, SourceId | MultipartSource],
+    sources: dict[NonEmptyText, SourceId],
     lines: dict[NonEmptyText, SourceLine],
     sections: list[dict[str, Any]],
     joins: list[dict[str, Any]],
@@ -588,7 +588,7 @@ def watershed_boundary(
     Args:
         runtime: Import resources and saved recipe snapshot.
         feature_id: Output boundary ID in Neon.
-        sources: Source aliases mapped to catalog IDs or multipart files.
+        sources: File names used in the recipe, mapped to catalog source IDs.
         lines: Provider feature selections keyed by line name.
         sections: Ordered source lines, divides, flow paths, or connectors.
         joins: Geographic anchors for intersections between adjacent sections.

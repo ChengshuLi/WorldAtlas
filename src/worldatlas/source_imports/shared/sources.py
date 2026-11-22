@@ -4,22 +4,13 @@ import time
 from collections.abc import Iterable, Sequence
 from contextlib import closing
 from pathlib import Path, PurePosixPath
-from typing import Any, TypedDict
+from typing import Any
 from zipfile import ZipFile, ZipInfo, is_zipfile
 
 from worldatlas.source_assets.cache import SourceCache
 from worldatlas.source_assets.catalog import catalog_sources
-from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
+from worldatlas.source_imports.shared.recipe_types import SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
-
-
-class MultipartSource(TypedDict):
-    """Describe one provider file stored as ordered R2 byte parts."""
-
-    parts: list[SourceId]
-    sha256: NonEmptyText
-    size_bytes: int
-    filename: NonEmptyText
 
 
 def archive_member(archive: ZipFile, name: str | None) -> ZipInfo:
@@ -83,7 +74,7 @@ def gdal_dataset_path(path: Path | str, member: str | None = None) -> str:
 
 def acquire_sources(
     runtime: Runtime,
-    requests: Sequence[SourceId | MultipartSource],
+    requests: Sequence[SourceId],
     *,
     evidence_source_ids: Iterable[SourceId] = (),
     timing: dict[str, Any] | None = None,
@@ -95,7 +86,7 @@ def acquire_sources(
 
     Args:
         runtime: The import's database connection factory and cache directory.
-        requests: Ordered list of source IDs or multipart specifications.
+        requests: Source IDs for the files to acquire, in caller order.
         evidence_source_ids: Source IDs cited as supporting evidence.
         timing: Optional dictionary for catalog, staging, and transfer times.
 
@@ -110,11 +101,8 @@ def acquire_sources(
         raise ValueError('this method requires --work-dir for the source cache')
 
     started = time.monotonic()
-    ids = list(evidence_source_ids)
-    for request in requests:
-        ids.extend(request['parts'] if isinstance(request, dict) else [request])
     with runtime.connect() as database:
-        sources = catalog_sources(database, ids)
+        sources = catalog_sources(database, [*requests, *evidence_source_ids])
     if timing is not None:
         timing['catalog_seconds'] = time.monotonic() - started
 
@@ -123,17 +111,7 @@ def acquire_sources(
     if requests:
         assert runtime.work_dir is not None
         with closing(SourceCache(runtime.work_dir)) as cache:
-            for request in requests:
-                if isinstance(request, dict):
-                    path = cache.assemble(
-                        [sources[ident] for ident in request['parts']],
-                        request['sha256'],
-                        request['size_bytes'],
-                        request['filename'],
-                    )
-                else:
-                    path = cache.acquire(sources[request])
-                paths.append(path)
+            paths = [cache.acquire(sources[source_id]) for source_id in requests]
         if timing is not None and cache.download_intervals:
             intervals = cache.download_intervals
             timing['download_intervals'] = intervals

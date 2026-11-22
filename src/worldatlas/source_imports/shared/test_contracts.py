@@ -149,7 +149,7 @@ class DatabaseContractTests(unittest.TestCase):
             "SELECT source_id FROM atlas.construction_sources WHERE construction_id='__evidence_required'"
         ).fetchall(), [("raw",)])
 
-    def test_nested_multipart_and_evidence_sources_are_linked_once(self):
+    def test_file_and_evidence_sources_are_linked_once(self):
         for ident in ("other", "evidence"):
             self.database.execute(
                 "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) "
@@ -161,12 +161,7 @@ class DatabaseContractTests(unittest.TestCase):
             sources={
                 "single": "raw",
                 "same": "raw",
-                "multipart": dict(
-                    parts=["raw", "other"],
-                    sha256="a" * 64,
-                    size_bytes=2,
-                    filename="terrain.tif",
-                ),
+                "terrain.tif": "other",
             },
             evidence_sources=["evidence", "raw"],
             lines={"boundary": {"source": "single", "way": 1}},
@@ -222,6 +217,13 @@ class DatabaseContractTests(unittest.TestCase):
             "DELETE FROM atlas.construction_records WHERE id='__links'"
         )
         self.assertEqual(links(), [])
+
+    def test_watershed_source_requires_a_catalog_id(self):
+        method = "watershed_boundary"
+        split_file = dict(
+            parts=["raw"], sha256="a" * 64, size_bytes=1, filename="terrain.tif"
+        )
+        self.check(method, dict(ARGUMENTS[method], sources={"terrain.tif": split_file}), False)
 
     def test_every_method_rejects_missing_required_fields_wrong_types_and_unknown_keys(
         self,

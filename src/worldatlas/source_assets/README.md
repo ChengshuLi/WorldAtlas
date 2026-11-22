@@ -17,8 +17,8 @@ Source imports and the map builder use the same disk cache when the import's `--
 | File | Responsibility |
 | --- | --- |
 | [`catalog.py`](catalog.py) | Read raw file pins from Neon in one query. |
-| [`cache.py`](cache.py) | Cache verified objects, ZIP members, and multipart files. |
+| [`cache.py`](cache.py) | Cache verified R2 objects and ZIP members. |
 | [`shared/database.py`](../shared/database.py) | Open Neon connections. Callers own their queries and transactions. |
 | [`shared/r2.py`](../shared/r2.py) | Open the R2 client and read or write objects. The project endpoint is shared by imports, builds, and releases. |
 
-Run from the repository root with `python .github/scripts/run_tests.py --suite source_assets`. The tests check reuse, failed transfers, checksums, and multipart assembly.
+Run from the repository root with `python .github/scripts/run_tests.py --suite source_assets`. The tests check cache reuse, failed transfers, and file verification.

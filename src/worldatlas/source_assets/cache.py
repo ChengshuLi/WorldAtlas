@@ -5,7 +5,7 @@ import os
 import shutil
 import time
 import zipfile
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Mapping
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import IO
@@ -295,44 +295,3 @@ class SourceCache:
                 raise ValueError("ZIP member must be one regular file")
             with packed.open(matches[0]) as source:
                 shutil.copyfileobj(source, output, 1 << 20)
-
-    def assemble(
-        self, parts: Sequence[FileSpec], digest: str, size: int, filename: str
-    ) -> Path:
-        """Reuse or assemble a provider file stored as several R2 objects.
-
-        Args:
-            parts: File pins in byte order.
-            digest: SHA-256 of the complete file.
-            size: Byte count of the complete file.
-            filename: Plain filename for the assembled file.
-
-        Returns:
-            The verified local path to the complete file.
-
-        Raises:
-            ValueError: The parts, filename, or resulting bytes are invalid.
-        """
-        if (
-            not parts
-            or not filename
-            or Path(filename).name != filename
-            or filename in (".", "..")
-        ):
-            raise ValueError("ordered source parts and a plain filename are required")
-        digest, size = _fingerprint({"sha256": digest, "size_bytes": size})
-        if sum(_fingerprint(part)[1] for part in parts) != size:
-            raise ValueError("source part sizes do not match the complete file")
-
-        def join(output: IO[bytes]) -> None:
-            """Copy the verified local parts to the assembly in byte order.
-
-            Args:
-                output: Open temporary output file.
-            """
-            for part in parts:
-                with self.acquire(part).open("rb") as source:
-                    shutil.copyfileobj(source, output, 1 << 20)
-
-        path = self.directory / digest / filename
-        return self._verified_file(path, digest, size, join)

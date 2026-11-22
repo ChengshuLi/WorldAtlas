@@ -15,11 +15,10 @@ from worldatlas.source_imports.shared.sources import acquire_sources
 class SourceAcquisitionTests(unittest.TestCase):
     """Exercise verified file staging with catalog rows and in-memory R2 objects."""
 
-    def test_mixed_requests_preserve_file_and_part_order_without_downloading_evidence(self):
+    def test_files_arrive_in_request_order_without_downloading_evidence(self):
         payloads = {
             'first': b'first bytes',
             'second': b'second bytes',
-            'standalone': b'one whole file',
             'evidence': b'supporting document',
         }
         database = Mock()
@@ -29,22 +28,17 @@ class SourceAcquisitionTests(unittest.TestCase):
         ]
         storage = Mock()
         storage.get_object.side_effect = lambda **args: {'Body': io.BytesIO(payloads[args['Key']])}
-        parts = ['second', 'first']
-        combined = b''.join(payloads[ident] for ident in parts)
-        multipart = dict(parts=parts, sha256=hashlib.sha256(combined).hexdigest(),
-                         size_bytes=len(combined), filename='terrain.tif')
         with (tempfile.TemporaryDirectory() as directory,
               patch('boto3.client', return_value=storage)):
             runtime = Runtime(connect=lambda: nullcontext(database),
                               recipe_id='test', method='watershed_boundary', arguments={},
                               work_dir=Path(directory))
-            paths = acquire_sources(runtime, ['standalone', multipart],
+            paths = acquire_sources(runtime, ['second', 'first'],
                                     evidence_source_ids=['evidence'])
             self.assertEqual([path.read_bytes() for path in paths],
-                             [payloads['standalone'], combined])
-            self.assertEqual(paths[1].name, 'terrain.tif')
+                             [payloads['second'], payloads['first']])
 
         database.execute.assert_called_once()
         self.assertCountEqual(database.execute.call_args.args[1][0], payloads)
-        self.assertCountEqual([call.kwargs['Key'] for call in storage.get_object.call_args_list],
-                              ['standalone', 'first', 'second'])
+        self.assertEqual([call.kwargs['Key'] for call in storage.get_object.call_args_list],
+                         ['second', 'first'])

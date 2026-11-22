@@ -12,9 +12,9 @@ worldatlas-import \
   --work-dir /absolute/path/to/worldatlas-work/inputs
 ```
 
-The command reads `atlas.construction_records` and resolves exact source IDs through `atlas.source_assets`. A large provider file can reference ordered, individually cataloged byte parts. Each download and the assembled file are checked against their sizes and SHA-256 hashes.
+The command reads `atlas.construction_records` and looks up each source ID in `atlas.source_assets`. It verifies each input file against the cataloged size and SHA-256.
 
-The importer checks the joins and river crossings before saving the finished line to `atlas.source_features` in one transaction. The construction links to the raw inputs through `atlas.construction_sources`. A failed calculation or invalid geometry leaves the existing boundary unchanged. Map building uses the saved line when it divides the rule's scope. The JSON result reports catalog lookup, source verification, construction phases and database-write times. R2 transfer time is reported separately from cached verification and multipart reassembly.
+The importer checks the joins and river crossings before saving the finished line to `atlas.source_features` in one transaction. The construction links to the raw inputs through `atlas.construction_sources`. A failed calculation or invalid geometry leaves the existing boundary unchanged. Map building uses the saved line when it divides the rule's scope. The JSON result reports catalog lookup, source verification, construction phases and database-write times. R2 transfer time is reported separately from local file verification.
 
 The current construction IDs are `caucasus-boundary-construction` and `ural-boundary-construction`. Their editable geographic choices and exact source selections are in `atlas.construction_records`.
 
@@ -25,7 +25,7 @@ The current construction IDs are `caucasus-boundary-construction` and `ural-boun
 Set the record's method to `watershed_boundary`. Put the geographic reasoning and supporting measurements in its `basis` column. The construction arguments specify inputs to the calculation and catalog links for supporting evidence.
 
 - `feature_id`: the ID of the editable boundary.
-- `sources`: local file names mapped directly to catalog source-ID strings. Multipart inputs instead specify ordered source-ID strings in `parts`, the complete file's checksum, size and filename. There are no one-field wrappers.
+- `sources`: file names used in the recipe, mapped to catalog source IDs.
 - `lines`: one selector object per named line, such as `{"coast": {"source": "anapa", "way": 396539058}}`. Each selector identifies a complete GeoJSON feature, OSM way or river relation. Joining different source features belongs in `sections` with explicit joins.
 - `terrains`: primary and secondary elevation sources, height conversion, analysis domains, the name of a drainage definition and the group pairs whose divides are needed.
 - `drainage`: named definitions of basin sources, the provider field that identifies each basin, and how to group basins by destination. Each definition can also select waterways, correct their directions and supply known stream destinations.
@@ -96,7 +96,7 @@ An explicit point endpoint cuts its source line at the nearest position and reta
 | [`basins.py`](basins.py) | Use basin outlines to tell where water goes when it leaves a terrain crop or reaches the shore. |
 | [`sources.py`](sources.py) | Select source lines and points and resolve the files needed by each reader. |
 | [`boundary.py`](boundary.py) | Choose a connected route along cell edges and join it to the other boundary sections. |
-| [`worldatlas.source_assets`](../../source_assets/README.md) | Resolve catalog IDs and verify downloaded or multipart files. |
+| [`worldatlas.source_assets`](../../source_assets/README.md) | Look up catalog IDs and verify input files. |
 | [`../shared/storage.py`](../shared/storage.py) | Validate and save geometry with its construction reference. |
 
 Start with `watershed_boundary()` in `build_boundary.py` to follow the work in code. It reads the files, prepares the terrain, works out where water goes, and joins the boundary sections. Its typed arguments describe the construction fields that Neon checks.
