@@ -27,6 +27,7 @@ from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
     LandSettings,
     land_dataset_index,
+    require_separate_cache_and_output,
 )
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
@@ -402,8 +403,9 @@ def _run(
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     workers = cfg.get('max_parallel_shards', 2)
     source_directory = Path(cfg['source_directory']).resolve()
+    require_separate_cache_and_output(source_directory, output)
     cache = SourceCache(
-        source_directory, output, cfg.get('r2_endpoint', r2.DEFAULT_R2_ENDPOINT)
+        source_directory, endpoint=cfg.get('r2_endpoint', r2.DEFAULT_R2_ENDPOINT)
     )
     land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
     water_cfg = cfg['inland_water']

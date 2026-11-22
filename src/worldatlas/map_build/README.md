@@ -14,7 +14,7 @@ worldatlas-build \
   --work-dir /absolute/path/to/worldatlas-work
 ```
 
-Supply `--work-dir` and an output directory for every build. The builder creates the work directory if needed and shares its `inputs/` cache across runs. Choose a new output directory inside the workspace for a fresh run and the existing run directory when resuming. Open the finished run’s `report.json` for the map file paths and timings.
+Supply `--work-dir` and an output directory for every build. The builder creates the work directory if needed and shares its `inputs/` cache across runs. Choose a new output directory inside the workspace and outside `inputs/` for a fresh run. Use the existing run directory when resuming. Open the finished run’s `report.json` for the map file paths and timings.
 
 | Option | When to use it |
 | --- | --- |

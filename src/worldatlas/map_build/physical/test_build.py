@@ -915,8 +915,12 @@ class PipelineTests(unittest.TestCase):
     def test_requires_a_valid_output_location_and_current_land_input(self):
         with self.assertRaisesRegex(ValueError, 'output parent must exist'):
             b.run(self.config, self.root / 'missing' / 'output')
+        for output in (self.raw / 'output', self.root):
+            with self.subTest(output=output):
+                with self.assertRaisesRegex(ValueError, 'input cache must use separate directories'):
+                    b.run(self.config, output)
         with self.assertRaisesRegex(ValueError, 'output must be outside all input directories'):
-            b.run(self.config, self.raw / 'output')
+            b.run(self.config, self.land_dir / 'output')
         land = Path(json.loads(self.land_cfg.read_text())['land'][0]['dataset'])
         land.write_text('{}')
         out = self.root / 'changed-input'

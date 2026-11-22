@@ -293,6 +293,8 @@ class Fixture(unittest.TestCase):
             (self.cfg, {"output": existing}, "fresh build requires a new output"),
             (self.cfg, {"resume": True}, "resume requires an existing output directory"),
             (self.cfg, {"output": self.root.parent / "elsewhere"}, "output must be inside --work-dir"),
+            (self.cfg, {"output": self.inputs / "run"}, "input cache must use separate directories"),
+            (self.cfg, {"output": self.root}, "input cache must use separate directories"),
             (self.cfg, {"recompute_division": True}, "requires --reuse-from"),
         ]
         for definition, options, error in cases:
@@ -790,7 +792,7 @@ class Fixture(unittest.TestCase):
         outside = self.root / "run"
         cached = self.inputs / spec["sha256"]
         cached.symlink_to(outside, target_is_directory=True)
-        with self.assertRaisesRegex(ValueError, "cloud input overlaps output"):
+        with self.assertRaisesRegex(ValueError, "cloud input escapes the cache directory"):
             runner.r2_inputs.acquire(spec)
 
     def test_cache_reuses_same_bytes_without_duplicate_file_pins(self):

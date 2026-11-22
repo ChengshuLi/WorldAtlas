@@ -4,7 +4,7 @@ Rasterize the selected global coastline polygons and inland-water shards on the 
 
 ## Use
 
-The map builder passes the same `Grid` to the coastline and inland-water rasterizers. To run just the physical build, pass the generated `RUN/physical-build-config.json`. This file contains one top-level grid, the coastline inputs and settings, and the inland-water inputs and settings. The command creates the grid once from the file. Use the recorded source directory for local inputs and supply R2 credentials for uncached remote inputs.
+The map builder passes the same `Grid` to the coastline and inland-water rasterizers. To run just the physical build, pass the generated `RUN/physical-build-config.json`. This file contains one top-level grid, the coastline inputs and settings, and the inland-water inputs and settings. The command creates the grid once from the file. Choose an output directory separate from the recorded source directory and supply R2 credentials for uncached remote inputs.
 
 ```bash
 python3 -m worldatlas.map_build.physical.build \

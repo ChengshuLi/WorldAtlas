@@ -144,21 +144,18 @@ class SourceCache:
     def __init__(
         self,
         directory: Path,
-        output: Path | None = None,
-        endpoint: str = r2.DEFAULT_R2_ENDPOINT,
         *,
+        endpoint: str = r2.DEFAULT_R2_ENDPOINT,
         client: r2.R2Client | None = None,
     ) -> None:
         """Configure a local cache and the R2 connection to use for misses.
 
         Args:
             directory: Root directory for cached files.
-            output: Optional run directory that cached inputs must stay outside.
             endpoint: R2 account URL used when opening a client.
             client: Existing R2 client, kept open by its caller.
         """
         self.directory = directory.resolve()
-        self.output = output
         self.endpoint = endpoint
         self.client = client
         self.pins: list[dict[str, str]] = []
@@ -172,16 +169,14 @@ class SourceCache:
             path: Cache destination to resolve.
 
         Returns:
-            An absolute path within the cache and outside the run output.
+            An absolute path within the cache.
 
         Raises:
-            ValueError: The resolved path escapes the cache or overlaps the output.
+            ValueError: The resolved path escapes the cache.
         """
         path = path.resolve()
-        if not path.is_relative_to(self.directory) or (
-            self.output is not None and path.is_relative_to(self.output)
-        ):
-            raise ValueError("cloud input overlaps output or escapes work directory")
+        if not path.is_relative_to(self.directory):
+            raise ValueError("cloud input escapes the cache directory")
         return path
 
     def path(self, spec: FileSpec) -> Path:

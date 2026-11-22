@@ -52,6 +52,7 @@ from worldatlas.map_build.inputs.configuration import (
     FileEntry,
     FilePin,
     catalog_source_id,
+    require_separate_cache_and_output,
 )
 from worldatlas.map_build.inputs.releases import read_release_assets
 from worldatlas.map_build.inputs.selection import (
@@ -215,10 +216,7 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
     produced = read_json(output / "report.json")
     if Grid(**produced["grid"]) != Grid(**configuration["grid"]):
         raise ValueError("physical reuse requires the same grid as the source run")
-    cache = SourceCache(
-        Path(configuration["source_directory"]),
-        root,
-    )
+    cache = SourceCache(Path(configuration["source_directory"]))
     land, _ = physical_build.plan_land_inputs(configuration["land_config"], cache)
 
     def saved_settings(key: str) -> dict[str, JSONValue]:
@@ -339,7 +337,7 @@ class Pipeline:
         self._fill_catalog_entries(references)
         r2_endpoint = self.cfg.get("r2_endpoint", DEFAULT_R2_ENDPOINT)
         self.physical_config = self._physical_configuration(sources, r2_endpoint)
-        self.r2_inputs = SourceCache(self.root / "inputs", self.out, r2_endpoint)
+        self.r2_inputs = SourceCache(self.root / "inputs", endpoint=r2_endpoint)
         self.source_pins = self.r2_inputs.pins
         self.comparison_files: dict[str, Path] = {}
         comparison_inputs = self._prepare_comparison(
@@ -384,6 +382,7 @@ class Pipeline:
         self.out = Path(output).resolve()
         if not self.out.is_relative_to(self.root):
             raise ValueError("output must be inside --work-dir")
+        require_separate_cache_and_output((self.root / "inputs").resolve(), self.out)
         if not self.out.parent.is_dir():
             raise ValueError("output parent directory must exist")
         if self.resume:

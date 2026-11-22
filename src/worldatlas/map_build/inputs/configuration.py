@@ -1,5 +1,6 @@
 """Types and parsers for build requests and saved file pins."""
 
+from pathlib import Path
 from typing import Annotated, Literal, NotRequired, TypedDict
 
 from pydantic import (
@@ -147,6 +148,20 @@ PHYSICAL_CONFIGURATION = TypeAdapter(PhysicalConfiguration)
 PHYSICAL_CONTROLS = TypeAdapter(PhysicalControls)
 FILE_PIN = TypeAdapter(FilePin)
 COMPARISON_PINS = TypeAdapter(dict[str, FilePin])
+
+
+def require_separate_cache_and_output(cache: Path, output: Path) -> None:
+    """Require the input cache and the build output to use separate directories.
+
+    Args:
+        cache: Resolved input cache directory.
+        output: Resolved build output directory.
+
+    Raises:
+        ValueError: Either directory contains or equals the other.
+    """
+    if output.is_relative_to(cache) or cache.is_relative_to(output):
+        raise ValueError("output and the input cache must use separate directories")
 
 
 def land_dataset_index(layer: LandLayer) -> int:
