@@ -341,7 +341,7 @@ class Pipeline:
 
         self.resume = resume
         self._prepare_workspace(output, work_dir)
-        previous, compare_release = self._load_run_options(
+        saved_identity, compare_release = self._load_run_options(
             divide, compare_release, reuse_from, recompute_division
         )
         validate_runtime()
@@ -352,7 +352,7 @@ class Pipeline:
         self.acquisition_intervals = []
         self.selection = self._load_selection(sources, selection)
         self._prepare_source_files(sources)
-        comparison_inputs = self._prepare_comparison(compare_release, previous)
+        comparison_inputs = self._prepare_comparison(compare_release, saved_identity)
         self.collect_source_files()
         self.physical_reuse = (
             physical_reference(self.reuse_from, self.sources)
@@ -370,7 +370,7 @@ class Pipeline:
             write_json(self.out / "input-selection.json", self.selection)
         self.run_lock = RunLock(self.out / "run.lock")
         try:
-            self._start_attempt(previous)
+            self._start_attempt(saved_identity)
             self._record_setup_timing(setup_started, setup_utc)
         except BaseException:
             if hasattr(self, "timing"):
@@ -428,31 +428,31 @@ class Pipeline:
             raise ValueError(
                 "run has no supported checkpoint identity; preserve it and start a fresh run"
             )
-        previous = read_json(identity_path) if self.resume else None
+        saved_identity = read_json(identity_path) if self.resume else None
         reuse = Path(reuse_from).resolve() if reuse_from is not None else None
-        if previous is not None:
-            if divide is not None and divide != previous.get("divide"):
+        if saved_identity is not None:
+            if divide is not None and divide != saved_identity.get("divide"):
                 raise ValueError("resume uses a different --divide selection")
-            if compare_release is not None and compare_release != previous.get(
+            if compare_release is not None and compare_release != saved_identity.get(
                 "compare_release"
             ):
                 raise ValueError("resume uses a different --compare-release selection")
-            divide = previous.get("divide")
-            compare_release = previous.get("compare_release")
-            saved_reuse = previous["reuse_from"]
+            divide = saved_identity.get("divide")
+            compare_release = saved_identity.get("compare_release")
+            saved_reuse = saved_identity["reuse_from"]
             saved_path = Path(saved_reuse) if saved_reuse is not None else None
             if reuse is not None and reuse != saved_path:
                 raise ValueError("resume uses a different --reuse-from run")
-            if recompute_division and not previous["recompute_division"]:
+            if recompute_division and not saved_identity["recompute_division"]:
                 raise ValueError("resume uses a different --recompute-division setting")
             reuse = saved_path
-            recompute_division = previous["recompute_division"]
+            recompute_division = saved_identity["recompute_division"]
         if recompute_division and reuse is None:
             raise ValueError("--recompute-division requires --reuse-from")
         self.reuse_from = reuse
         self.recompute_division = recompute_division
         self.requested_parents = divide
-        return previous, compare_release
+        return saved_identity, compare_release
 
     def _load_selection(
         self, sources: dict[str, Any], selection: Path | str | None
@@ -516,13 +516,13 @@ class Pipeline:
                 self.sources[name] = cast(Path, self.resolve_pins(spec))
 
     def _prepare_comparison(
-        self, compare_release: str | None, previous: dict[str, Any] | None
+        self, compare_release: str | None, saved_identity: dict[str, Any] | None
     ) -> dict[str, Any] | None:
         """Prepare the pinned files for a comparison with a release.
 
         Args:
             compare_release: Release name, if the caller requested one.
-            previous: Saved run identity on resume.
+            saved_identity: Saved run identity on resume.
 
         Returns:
             File pins keyed by input name, or None without a comparison release.
@@ -536,8 +536,8 @@ class Pipeline:
                 raise ValueError(
                     "choose a published comparison release or local reference streams"
                 )
-            if previous is not None:
-                comparison_inputs = previous.get("comparison_inputs")
+            if saved_identity is not None:
+                comparison_inputs = saved_identity.get("comparison_inputs")
                 if comparison_inputs is None:
                     raise ValueError("resume is missing saved comparison files")
                 self.sources.update(
@@ -597,17 +597,17 @@ class Pipeline:
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
 
-    def _start_attempt(self, previous: dict[str, Any] | None) -> None:
+    def _start_attempt(self, saved_identity: dict[str, Any] | None) -> None:
         """Verify the run identity and save the code for this attempt.
 
         Args:
-            previous: Saved run identity on resume.
+            saved_identity: Saved run identity on resume.
 
         Raises:
             ValueError: The saved identity, checkpoints or timing records changed.
         """
         if self.resume:
-            saved = cast(dict[str, Any], previous).copy()
+            saved = cast(dict[str, Any], saved_identity).copy()
             current = self.identity.copy()
             # A new attempt can use different code and installed libraries.
             for key in (
