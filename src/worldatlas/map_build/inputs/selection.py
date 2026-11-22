@@ -129,10 +129,12 @@ def read_selection(
             if set(parents) - ancestors:
                 raise ValueError("requested parent does not exist")
             parents = sorted(ancestors)
+        # The query returns one row with one column, the selected geography as
+        # JSON text. Feature coordinates are fetched separately below.
         result_row = database.execute(
             cast(LiteralString, QUERY.read_text()), (parents, parents)
         ).fetchone()
-        assert result_row is not None  # The query always returns one JSON value.
+        assert result_row is not None
         data = json.loads(result_row[0])
         features = {feature["id"]: feature for feature in data["features"]}
         with database.cursor(name="selected_features") as cursor:
