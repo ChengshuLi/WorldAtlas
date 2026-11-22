@@ -129,8 +129,11 @@ def read_selection(
             if set(parents) - ancestors:
                 raise ValueError("requested parent does not exist")
             parents = sorted(ancestors)
-        # The query returns one row with one column, the selected geography as
-        # JSON text. Feature coordinates are fetched separately below.
+        # The query returns one row with one JSON text column. It includes rules
+        # for the requested parents and their ancestors, or all rules if parents
+        # is None. The object contains lists of levels, entities, map codes, rules
+        # and their links, features (ID and construction ID), and source references.
+        # Feature coordinates are fetched separately below.
         result_row = database.execute(
             cast(LiteralString, QUERY.read_text()), (parents, parents)
         ).fetchone()
