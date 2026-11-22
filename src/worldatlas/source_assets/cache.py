@@ -129,8 +129,14 @@ class SourceCache:
     def path(self, spec: FileSpec) -> Path:
         """Find where a pinned R2 object or ZIP member belongs locally.
 
+        A whole R2 object uses its own SHA-256 as the directory name and the
+        filename from its R2 key. A ZIP member uses the ZIP's SHA-256 and its
+        path inside the ZIP. That keeps ``land_polygons.shp`` beside its
+        ``.dbf`` and ``.shx`` files so GDAL can open the Shapefile.
+
         Args:
-            spec: File pin with a direct location or an archive and member name.
+            spec: A whole object's R2 pin, or a member pin with an ``archive``
+                pin and the exact ``member`` name inside that ZIP.
 
         Returns:
             The absolute cache path, whether or not the file exists yet.
@@ -152,6 +158,7 @@ class SourceCache:
             or any(part in ("", ".", "..") for part in member.split("/"))
         ):
             raise ValueError("unsafe ZIP member")
+        # Validate the archive pin before using its checksum as the directory name.
         self.path(archive)
         archive_digest, _ = _fingerprint(archive)
         return self.directory / archive_digest / member
@@ -261,11 +268,16 @@ class SourceCache:
             self.download_intervals.append((started, time.monotonic()))
 
     def _extract(self, spec: FileSpec, output: IO[bytes]) -> None:
-        """Read a single regular ZIP member from its verified archive.
+        """Copy one regular file out of a cached ZIP.
+
+        Acquire and verify the whole ZIP using the size and SHA-256 in
+        ``spec["archive"]``. Then copy the named member. The caller verifies
+        the extracted bytes using the size and SHA-256 at the top of ``spec``
+        before saving them at the final cache path.
 
         Args:
-            spec: Validated archive and member pin.
-            output: Open temporary output file.
+            spec: Pin for an extracted member, including the pin for its ZIP.
+            output: Open temporary file that receives the member's bytes.
 
         Raises:
             ValueError: The member is missing, ambiguous, or not a regular file.
