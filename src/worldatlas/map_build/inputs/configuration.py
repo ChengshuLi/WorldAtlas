@@ -40,11 +40,11 @@ class GridSettings(TypedDict):
 class LandLayer(TypedDict):
     """Choose the main coastline file and pin every file GDAL will read.
 
-    For a Shapefile, ``dataset`` identifies the .shp. The ``files`` list includes
-    the .shp and its companions, such as .shx, .dbf, and .prj.
+    The ``dataset`` names an entry in ``files``. For a Shapefile, it identifies
+    the .shp, and ``files`` also lists its companions such as .shx, .dbf, and .prj.
     """
 
-    dataset: str | FileEntry
+    dataset: NonemptyString
     files: list[FileEntry]
 
 
@@ -171,8 +171,41 @@ FILE_PIN = TypeAdapter(FilePin)
 COMPARISON_PINS = TypeAdapter(dict[str, FilePin])
 
 
-def parse_catalog_source_id(entry: FileEntry) -> str:
-    """Read a Neon source selector from one file or ZIP archive entry.
+def land_dataset_index(layer: LandLayer) -> int:
+    """Find which pinned coastline file GDAL should open.
+
+    Args:
+        layer: Coastline file pins and the dataset's member path, local path,
+            R2 key, or Neon source ID.
+
+    Returns:
+        Index of the matching entry in the layer's ``files`` list.
+
+    Raises:
+        ValueError: The dataset identifies zero or multiple file entries.
+    """
+    dataset = layer["dataset"]
+    matches = [
+        index
+        for index, file in enumerate(layer["files"])
+        if dataset
+        in (
+            file.get("member"),
+            file.get("path"),
+            file.get("r2_key"),
+            file.get("r2_source"),
+            file.get("source_id"),
+        )
+    ]
+    if len(matches) != 1:
+        raise ValueError(
+            f"coastline dataset {dataset!r} must name exactly one entry in files"
+        )
+    return matches[0]
+
+
+def catalog_source_id(entry: FileEntry) -> str:
+    """Validate and return the Neon source ID in a file or ZIP archive entry.
 
     Args:
         entry: File or archive settings containing an ``r2_source`` selector.

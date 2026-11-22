@@ -17,7 +17,7 @@ class ReplaySourcesTests(unittest.TestCase):
         self.shape = {"archive": {"r2_source": "coast"}, "member": "shore.shp"}
         self.shard = {"path": "shard.parquet", "r2_source": "inland"}
         self.sources = {
-            "land_config": {"land": [{"dataset": self.shape, "files": [self.shape]}]},
+            "land_config": {"land": [{"dataset": "shore.shp", "files": [self.shape]}]},
             "inland_water": {"rasterization": {}, "files": [self.shard]},
         }
         self.configuration = dict(sources=self.sources, physical_controls={
@@ -34,8 +34,9 @@ class ReplaySourcesTests(unittest.TestCase):
         water = self.sources["inland_water"]
         local = {"path": "/other-machine/file", "sha256": "a" * 64}
         for settings, key, value, field in (
-            (land, "dataset", local["path"], r"land_config\.land\[0\]\.dataset"),
             (land, "files", [local], r"land_config\.land\[0\]\.files\[0\]"),
+            (land, "files", [dict(self.shape, archive=local["path"])],
+             r"land_config\.land\[0\]\.files\[0\]"),
             (water, "files", [local], r"inland_water\.files\[0\]"),
         ):
             with self.subTest(field=field):
@@ -45,6 +46,14 @@ class ReplaySourcesTests(unittest.TestCase):
                     validate_replay_sources(self.configuration, self.selection)
                 settings[key] = original
         self.assertEqual(water["files"], [self.shard])
+
+    def test_dataset_must_name_one_pinned_file(self):
+        land = self.sources["land_config"]["land"][0]
+        for dataset, files in (("missing.shp", [self.shape]), ("shore.shp", [self.shape] * 2)):
+            with self.subTest(dataset=dataset):
+                land.update(dataset=dataset, files=files)
+                with self.assertRaisesRegex(ValueError, "must name exactly one entry in files"):
+                    validate_replay_sources(self.configuration, self.selection)
 
     def test_uncached_water_shards_need_r2_staging(self):
         self.configuration.pop("physical_controls")

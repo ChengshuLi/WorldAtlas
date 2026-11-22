@@ -9,7 +9,8 @@ from typing import Any
 from worldatlas.map_build.execution.code_archive import restore_source, source_files
 from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONTROLS,
-    parse_catalog_source_id,
+    catalog_source_id,
+    land_dataset_index,
 )
 from worldatlas.map_build.physical.build import (
     validate_r2_shard_location,
@@ -48,7 +49,7 @@ def validate_replay_sources(
         if not isinstance(spec, dict):
             return False
         if "r2_source" in spec:
-            return parse_catalog_source_id(spec) in source_ids
+            return catalog_source_id(spec) in source_ids
         if "archive" in spec:
             return r2_source(spec["archive"])
         return all(spec.get(key) for key in ("r2_bucket", "r2_key", "sha256"))
@@ -67,9 +68,9 @@ def validate_replay_sources(
             raise ValueError(f"release replay requires an R2 pin for {name}")
 
     for index, layer in enumerate(sources["land_config"]["land"]):
-        require_source(f"land_config.land[{index}].dataset", layer["dataset"])
         for file_index, spec in enumerate(layer["files"]):
             require_source(f"land_config.land[{index}].files[{file_index}]", spec)
+        land_dataset_index(layer)
     controls = PHYSICAL_CONTROLS.validate_python(
         configuration.get("physical_controls", {}), strict=True
     )

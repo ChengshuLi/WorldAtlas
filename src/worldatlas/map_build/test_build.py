@@ -387,7 +387,7 @@ class Fixture(unittest.TestCase):
             ),
         ):
             with self.subTest(spec=spec):
-                self.select_coastline(spec)
+                self.select_coastline("fixture", [spec])
                 config = self.inputs / "catalog.json"
                 config.write_text(json.dumps(self.cfg))
                 with self.fake_r2({}, []) as download:
@@ -451,7 +451,7 @@ class Fixture(unittest.TestCase):
         raw_endpoint = "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.r2.cloudflarestorage.com"
         release_endpoint = "https://bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.r2.cloudflarestorage.com"
         raw_key = "sources/coast.geojson"
-        self.select_coastline(self.cloud(b"{}", raw_key))
+        self.select_coastline(raw_key, [self.cloud(b"{}", raw_key)])
         self.cfg["physical_controls"] = {
             "source_staging": {"mode": "r2-s3", "endpoint_url": raw_endpoint}
         }
@@ -574,9 +574,9 @@ class Fixture(unittest.TestCase):
             "size_bytes": len(payload),
         }
 
-    def select_coastline(self, dataset, *, files=None):
+    def select_coastline(self, dataset, files):
         self.cfg["sources"]["land_config"]["land"] = [
-            {"dataset": dataset, "files": [dataset] if files is None else files}
+            {"dataset": dataset, "files": files}
         ]
 
     @contextmanager
@@ -607,7 +607,7 @@ class Fixture(unittest.TestCase):
             dict(source_id="fixture", **raw),
             dict(source_id="unrelated", **self.cloud(b"other")),
         ]
-        self.select_coastline(reference)
+        self.select_coastline(source_id, [reference])
         self.cfg["sources"]["inland_water"]["files"] = [
             {"path": "raw/fixture", **reference}
         ]
@@ -615,9 +615,14 @@ class Fixture(unittest.TestCase):
             runner = self.make()
         download.assert_not_called()
         resolved = {"source_id": source_id, **raw}
-        self.assertEqual(
-            runner.physical_config["land_config"]["land"][0]["dataset"], resolved
+        land = runner.physical_config["land_config"]["land"][0]
+        self.assertEqual(land["dataset"], source_id)
+        self.assertEqual(land["files"], [resolved])
+        planned, requests = physical_build.plan_land_inputs(
+            runner.physical_config["land_config"], runner.r2_inputs
         )
+        self.assertEqual(requests, [resolved])
+        self.assertEqual(planned["land"][0]["dataset"], str(runner.r2_inputs.path(resolved)))
         self.assertEqual(
             runner.physical_config["source_manifest"]["files"],
             [{"path": "raw/fixture", **resolved}],
@@ -625,7 +630,8 @@ class Fixture(unittest.TestCase):
 
     def test_coastline_download_uses_each_builds_work_directory(self):
         payload = b"{}"
-        self.select_coastline(self.cloud(payload))
+        source = self.cloud(payload)
+        self.select_coastline(source["r2_key"], [source])
         config = write_json(self.inputs / "cloud-config.json", self.cfg)
         calls, results = [], []
         with self.fake_r2({"sources/input.json": payload}, calls):
@@ -634,8 +640,11 @@ class Fixture(unittest.TestCase):
                 runner = pipeline.Pipeline(config, root / "run", work_dir=root)
                 try:
                     self.assertEqual(runner.out, root / "run")
-                    pin = runner.physical_config["land_config"]["land"][0]["dataset"]
+                    planned, (pin,) = physical_build.plan_land_inputs(
+                        runner.physical_config["land_config"], runner.r2_inputs
+                    )
                     source = runner.r2_inputs.acquire_r2_input(pin)
+                    self.assertEqual(planned["land"][0]["dataset"], str(source))
                     self.assertIn(pin_file(source), runner.source_pins)
                     self.assertTrue(source.is_relative_to(root))
                     self.assertEqual(source.read_bytes(), payload)
@@ -662,7 +671,7 @@ class Fixture(unittest.TestCase):
             }
             for name, value in members.items()
         ]
-        self.select_coastline(files[0], files=files)
+        self.select_coastline("land/land.shp", list(reversed(files)))
         calls = []
         with self.fake_r2({"sources/land.zip": buffer.getvalue()}, calls):
             runner = self.make()
@@ -674,6 +683,9 @@ class Fixture(unittest.TestCase):
                 runner.r2_inputs.acquire_r2_input(request)
         land = planned["land"][0]
         self.assertEqual(calls, ["sources/land.zip"])
+        self.assertEqual(len(requests), 2)
+        self.assertEqual(land["dataset"], land["files"][1]["path"])
+        self.assertEqual(Path(land["dataset"]).read_bytes(), b"geometry")
         self.assertEqual(
             Path(land["files"][0]["path"]).parent, Path(land["files"][1]["path"]).parent
         )
@@ -1123,7 +1135,9 @@ class Fixture(unittest.TestCase):
             size_bytes=len(coastline),
         )
         land = dict(self.cfg["sources"]["land_config"])
-        land["land"] = [{"dataset": land_source, "where": None, "files": [land_source]}]
+        land["land"] = [
+            {"dataset": land_source["member"], "where": None, "files": [land_source]}
+        ]
         water_source = self.cloud(
             payloads["sources/water.parquet"], "sources/water.parquet"
         )

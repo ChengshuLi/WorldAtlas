@@ -10,14 +10,7 @@
       "minimum_free_bytes": 2147483648,
       "land": [
         {
-          "dataset": {
-            "archive": {
-              "r2_source": "osm-land-polygons-split-4326"
-            },
-            "member": "land-polygons-split-4326/land_polygons.shp",
-            "sha256": "e2258f3e849f8101cd44cea0f7c6e1ae5b476ef11f84e053af8a29f6cb82ffc3",
-            "size_bytes": 1321197196
-          },
+          "dataset": "land-polygons-split-4326/land_polygons.shp",
           "layer": null,
           "where": null,
           "files": [

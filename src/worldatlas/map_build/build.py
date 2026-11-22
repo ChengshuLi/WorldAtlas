@@ -51,7 +51,7 @@ from worldatlas.map_build.inputs.configuration import (
     BuildSources,
     FileEntry,
     FilePin,
-    parse_catalog_source_id,
+    catalog_source_id,
 )
 from worldatlas.map_build.inputs.releases import read_release_assets
 from worldatlas.map_build.inputs.selection import (
@@ -150,9 +150,6 @@ def catalog_references(
     """
     files = list(sources["inland_water"]["files"])
     for layer in sources["land_config"]["land"]:
-        dataset = layer["dataset"]
-        if isinstance(dataset, dict):
-            files.append(dataset)
         files.extend(layer["files"])
     for comparison in (sources.get("reference_rows"), sources.get("reference_runs")):
         if comparison is not None:
@@ -163,7 +160,7 @@ def catalog_references(
         entry = file
         while isinstance(entry, dict):
             if "r2_source" in entry:
-                yield entry, parse_catalog_source_id(entry)
+                yield entry, catalog_source_id(entry)
             entry = entry.get("archive")
 
 

@@ -26,7 +26,9 @@ from worldatlas.map_build.execution.runtime import elapsed_union
 from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
     PhysicalControls,
+    PhysicalLandSettings,
     R2Staging,
+    land_dataset_index,
 )
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
@@ -47,7 +49,7 @@ HERE = Path(__file__).resolve().parent
 
 
 def plan_land_inputs(
-    settings: Mapping[str, Any], cache: source_cache.R2InputCache
+    settings: PhysicalLandSettings, cache: source_cache.R2InputCache
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
@@ -81,11 +83,9 @@ def plan_land_inputs(
 
     layers = []
     for layer in settings["land"]:
-        dataset = layer["dataset"]
-        if isinstance(dataset, dict):
-            dataset = local_file(dataset)["path"]
+        dataset_index = land_dataset_index(layer)
         files = [local_file(spec) for spec in layer["files"]]
-        layers.append(dict(layer, dataset=dataset, files=files))
+        layers.append(dict(layer, dataset=files[dataset_index]["path"], files=files))
     return dict(settings, land=layers), requests
 
 
