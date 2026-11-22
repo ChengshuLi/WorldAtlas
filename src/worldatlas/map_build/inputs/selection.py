@@ -92,7 +92,7 @@ def read_selection(
     *,
     raw_sources: Iterable[str] = (),
     parents: list[int] | None = None,
-) -> tuple[dict[str, Any], dict[int, CompiledRules]]:
+) -> dict[str, Any]:
     """Read the working build inputs from one consistent database snapshot.
 
     Args:
@@ -102,12 +102,11 @@ def read_selection(
             divisions.
 
     Returns:
-        (selection, compiled_divisions). The selection contains geographic rules,
-        coordinates, construction records and source catalog entries. The compiled
-        divisions are keyed by parent entity ID.
+        Selection dictionary with geographic rules, coordinates, construction
+        records and source catalog entries.
 
     Raises:
-        ValueError: A required record is absent or its contents are invalid.
+        ValueError: A requested parent or raw source record is missing.
     """
     result: dict[str, Any] = {
         "schema": "worldatlas-input-selection-v4",
@@ -172,7 +171,7 @@ def read_selection(
             dict(id=ident, method=method, arguments=arguments, basis=basis)
             for ident, method, arguments, basis in rows
         ]
-    return result, prepare_geography(data)
+    return result
 
 
 def prepare_geography(domain: dict[str, Any]) -> dict[int, CompiledRules]:
@@ -199,22 +198,21 @@ def prepare_geography(domain: dict[str, Any]) -> dict[int, CompiledRules]:
     return compiled
 
 
-def read_saved(path: Path | str) -> tuple[dict[str, Any], dict[int, CompiledRules]]:
+def read_saved(path: Path | str) -> dict[str, Any]:
     """Load an earlier frozen selection from disk.
 
     Args:
         path: Path to the selection JSON file.
 
     Returns:
-        (selection, compiled_divisions). The selection contains the saved
-        coordinates and rules. The compiled divisions are keyed by parent ID.
+        Selection dictionary containing the saved coordinates and rules.
 
     Raises:
-        ValueError: The file was saved by an incompatible builder or fails validation.
+        ValueError: The file has an incompatible schema.
     """
     result = json.loads(Path(path).read_bytes())
     if result.get("schema") != "worldatlas-input-selection-v4":
         raise ValueError(
             "this selection requires its release archive's captured implementation"
         )
-    return result, prepare_geography(result["geography"])
+    return result

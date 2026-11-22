@@ -175,7 +175,7 @@ class EndToEndTests(unittest.TestCase):
                         "('__e2e_island','__e2e_second','distance_reference')"
                     )
                 with psycopg.connect(url) as db:
-                    frozen, _ = read_selection(db)
+                    frozen = read_selection(db)
                 selected = raw / "selection.json"
                 selected.write_bytes(canonical_bytes(frozen))
                 land_config = dict(
