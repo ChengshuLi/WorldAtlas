@@ -89,7 +89,9 @@ def plan_land_inputs(
     return dict(settings, land=layers), requests
 
 
-def run_stage(function: Callable[..., Any], *args: Any) -> Any:
+def run_stage[Result](
+    function: Callable[..., Result], *args: Path | str | int
+) -> Result:
     """Call a physical build stage using the current progress logger.
 
     Args:

@@ -33,12 +33,16 @@ from psycopg.sql import quote
 from pydantic import TypeAdapter
 from pydantic.json_schema import GenerateJsonSchema, JsonSchemaValue
 from pydantic_core.core_schema import DictSchema, TypedDictSchema
+from typing_extensions import TypeForm
 
+from worldatlas.shared.files import JSONValue
 from worldatlas.source_imports.run_import import IMPORTERS
 from worldatlas.source_imports.shared.recipe_types import NONBLANK_PATTERN
 
 
-def parameters(constructor: Callable[..., Any]) -> dict[str, tuple[Any, bool]]:
+def parameters(
+    constructor: Callable[..., JSONValue],
+) -> dict[str, tuple[TypeForm[object], bool]]:
     """Return the argument types and presence requirements of a constructor.
 
     The importer supplies ``runtime`` separately. A parameter's default
@@ -123,7 +127,9 @@ class RecipeSchema(GenerateJsonSchema):
         return result
 
 
-def recipe_schema(method: str, fields: dict[str, tuple[Any, bool]]) -> JsonSchemaValue:
+def recipe_schema(
+    method: str, fields: dict[str, tuple[TypeForm[object], bool]]
+) -> JsonSchemaValue:
     """Return the Draft 2020-12 JSON Schema for one method's arguments.
 
     Build a temporary ``TypedDict`` with ``NotRequired`` for fields with
@@ -151,7 +157,7 @@ def recipe_schema(method: str, fields: dict[str, tuple[Any, bool]]) -> JsonSchem
     }
 
 
-def source_paths(annotation: Any, path: str = "$") -> list[str]:
+def source_paths(annotation: TypeForm[object], path: str = "$") -> list[str]:
     """Return the PostgreSQL JSON paths to values declared as ``SourceId``.
 
     For example, ``list[SourceId]`` at ``$."way_source_ids"`` yields

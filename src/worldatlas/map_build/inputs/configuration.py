@@ -1,13 +1,28 @@
 """Types and parsers for build requests and saved file pins."""
 
-from typing import Annotated, Any, Literal, NotRequired, TypedDict
+from typing import Annotated, Literal, NotRequired, TypedDict
 
-from pydantic import Field, StringConstraints, TypeAdapter, with_config
+from pydantic import (
+    Field,
+    JsonValue,
+    StringConstraints,
+    TypeAdapter,
+    ValidationError,
+    with_config,
+)
 
 type PositiveInt = Annotated[int, Field(gt=0)]
 type ByteCount = Annotated[int, Field(ge=0)]
 type NonemptyString = Annotated[str, StringConstraints(min_length=1)]
 type Digest = Annotated[str, StringConstraints(pattern=r"^[0-9a-f]{64}$")]
+type FileEntry = dict[str, JsonValue]
+
+
+@with_config(extra="forbid")
+class CatalogSelector(TypedDict):
+    """Name the raw file by its Neon catalog ID."""
+
+    source_id: str
 
 
 @with_config(extra="forbid")
@@ -30,10 +45,22 @@ class GridSettings(TypedDict):
 
 
 @with_config(extra="allow")
+class LandLayer(TypedDict):
+    """Choose the main coastline file and pin every file GDAL will read.
+
+    For a Shapefile, ``dataset`` identifies the .shp. The ``files`` list includes
+    the .shp and its companions, such as .shx, .dbf, and .prj.
+    """
+
+    dataset: str | FileEntry
+    files: list[FileEntry]
+
+
+@with_config(extra="allow")
 class LandSettings(TypedDict):
     """Specify coastline layers and how to rasterize them."""
 
-    land: list[dict[str, Any]]
+    land: list[LandLayer]
     strip_rows: NotRequired[PositiveInt]
     minimum_free_bytes: NotRequired[ByteCount]
 
@@ -52,7 +79,7 @@ class WaterSettings(TypedDict):
 class InlandWaterSettings(TypedDict):
     """Select the inland-water files and their shared rasterization settings."""
 
-    files: list[dict[str, Any]]
+    files: list[FileEntry]
     rasterization: WaterSettings
     file_count: NotRequired[PositiveInt]
 
@@ -63,8 +90,8 @@ class BuildSources(TypedDict):
 
     land_config: LandSettings
     inland_water: InlandWaterSettings
-    reference_rows: NotRequired[dict[str, Any]]
-    reference_runs: NotRequired[dict[str, Any]]
+    reference_rows: NotRequired[FileEntry]
+    reference_runs: NotRequired[FileEntry]
 
 
 @with_config(extra="forbid")
@@ -145,8 +172,40 @@ class PhysicalConfiguration(PhysicalControls):
     physical_reference_streams: NotRequired[dict[str, FilePin]]
 
 
+CATALOG_SELECTOR = TypeAdapter(CatalogSelector)
 BUILD_CONFIGURATION = TypeAdapter(BuildConfiguration)
 PHYSICAL_CONFIGURATION = TypeAdapter(PhysicalConfiguration)
 PHYSICAL_CONTROLS = TypeAdapter(PhysicalControls)
 FILE_PIN = TypeAdapter(FilePin)
 COMPARISON_PINS = TypeAdapter(dict[str, FilePin])
+
+
+def parse_catalog_source_id(entry: FileEntry) -> str:
+    """Read a Neon source selector from one file or ZIP archive entry.
+
+    Args:
+        entry: File or archive settings containing an ``r2_source`` selector.
+
+    Returns:
+        The source ID from the catalog.
+
+    Raises:
+        ValueError: The selector is invalid or the same entry also pins its R2 bytes.
+    """
+    try:
+        selector = CATALOG_SELECTOR.validate_python(entry["r2_source"], strict=True)
+    except ValidationError as exc:
+        raise ValueError("invalid raw catalog reference") from exc
+    if not selector["source_id"].strip():
+        raise ValueError("invalid raw catalog reference")
+    pinned_fields = {
+        "r2_bucket",
+        "r2_key",
+        "source_id",
+        "sha256",
+        "size_bytes",
+        "size",
+    }
+    if pinned_fields.intersection(entry):
+        raise ValueError("invalid raw catalog reference: remove explicit file metadata")
+    return selector["source_id"]

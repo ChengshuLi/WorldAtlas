@@ -381,6 +381,7 @@ class Fixture(unittest.TestCase):
             (dict(r2_source={"source_id": "absent"}), "missing selected sources"),
             (dict(r2_source="id"), "invalid raw catalog reference"),
             (dict(r2_source={"source_id": " "}), "invalid raw catalog reference"),
+            (dict(r2_source={"source_id": "fixture", "version": "v1"}), "invalid raw catalog reference"),
             (
                 dict(r2_source={"source_id": "fixture"}, r2_bucket="test"),
                 "invalid raw catalog reference",
@@ -598,14 +599,14 @@ class Fixture(unittest.TestCase):
         ):
             yield client.get_object
 
-    def test_catalog_resolves_exact_versions_before_r2_acquisition(self):
+    def test_catalog_resolves_source_ids_before_r2_acquisition(self):
         payload = b"{}"
         raw = self.cloud(payload)
-        identity = {"source_id": "fixture", "version": "v1"}
+        identity = {"source_id": "fixture"}
         reference = {"r2_source": identity}
         self.frozen["raw_sources"] = [
-            dict(source_id="fixture", version="v1", **raw),
-            dict(source_id="fixture", version="v2", **self.cloud(b"other")),
+            dict(source_id="fixture", **raw),
+            dict(source_id="unrelated", **self.cloud(b"other")),
         ]
         self.select_coastline(reference)
         self.cfg["sources"]["inland_water"]["files"] = [

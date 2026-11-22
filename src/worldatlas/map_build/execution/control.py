@@ -4,7 +4,7 @@ import threading
 from collections.abc import Iterator
 from contextlib import contextmanager
 from contextvars import ContextVar
-from typing import Any, TextIO
+from typing import TextIO
 
 _current: ContextVar[tuple[threading.Event, TextIO | None, threading.Lock] | None] = (
     ContextVar('map_build_stage', default=None)
@@ -38,22 +38,20 @@ def stage(
         _current.reset(token)
 
 
-def emit(*values: str, **options: Any) -> None:
+def emit(message: str, *, flush: bool = False) -> None:
     """Print progress, keeping messages from stage workers separate.
 
     Args:
-        values: Messages to print together.
-        options: Keyword arguments accepted by print.
+        message: Progress message to print.
+        flush: Write the message to the output stream immediately.
     """
     active = _current.get()
     if active is None:
-        print(*values, **options)
+        print(message, flush=flush)
         return
     _, log, lock = active
-    if log is not None:
-        options.setdefault('file', log)
     with lock:
-        print(*values, **options)
+        print(message, file=log, flush=flush)
 
 
 def check_cancelled() -> None:

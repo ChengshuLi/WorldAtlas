@@ -4,7 +4,7 @@ These rules apply to every agent working in this repository. Keep code, document
 
 ## Python
 
-- Annotate parameters and return types in all production function and method signatures. Leave `self` and `cls` unannotated and use `-> None` for functions that return no value. Use the concrete type expected from callers. Check changed annotations against real callers with Pyright in the project Python environment.
+- Annotate parameters and return types in all production function and method signatures. Leave `self` and `cls` unannotated and use `-> None` for functions that return no value. Use the concrete type expected from callers. Avoid bare `Any` and `object` parameters in production code. Check changed annotations against real callers with Pyright in the project Python environment.
 - Follow [PEP 257](https://peps.python.org/pep-0257/) for docstrings. Give production modules, classes, functions, and methods a short summary, including private helpers. Use `Args`, `Returns`, and `Yields` where they apply. Explain units, array shapes, tuple order, errors callers need to handle, and effects such as writing a file or changing an input array.
 - Follow [PEP 8](https://peps.python.org/pep-0008/#comments) for comments. Use complete sentences and explain decisions or constraints that the code alone does not show.
 - Use plain, precise language in docstrings and comments. Give simple code a short explanation and use a concrete example when it helps explain complex code.

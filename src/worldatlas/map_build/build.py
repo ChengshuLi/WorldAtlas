@@ -20,7 +20,7 @@ from collections.abc import Iterator
 from datetime import datetime, timezone
 from pathlib import Path
 from types import FrameType
-from typing import Any, cast
+from typing import Any, NotRequired, TypedDict, cast
 
 import numpy
 import pyarrow
@@ -37,6 +37,7 @@ from worldatlas.map_build.execution.code_archive import capture_source, write_so
 from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
     Checkpoints,
+    RepositoryIdentity,
     RunLock,
     Timing,
     code_identity,
@@ -48,7 +49,9 @@ from worldatlas.map_build.inputs.configuration import (
     COMPARISON_PINS,
     FILE_PIN,
     BuildSources,
+    FileEntry,
     FilePin,
+    parse_catalog_source_id,
 )
 from worldatlas.map_build.inputs.releases import read_release_assets
 from worldatlas.map_build.inputs.selection import (
@@ -75,7 +78,41 @@ HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
 
 
-def runtime_identity() -> dict[str, Any]:
+type RuntimeIdentity = dict[str, str | dict[str, str]]
+type ComparisonPins = dict[str, dict[str, str]]
+
+
+class PhysicalReuse(TypedDict):
+    """Identify the completed physical grid and files reused by a build."""
+
+    schema: str
+    status: str
+    source_run: str
+    pins: list[dict[str, str]]
+
+
+class RunIdentity(TypedDict):
+    """Store the pinned inputs and options required to resume a build."""
+
+    schema: str
+    request: dict[str, str]
+    source_pins: list[dict[str, str]]
+    code: dict[str, str]
+    repository: RepositoryIdentity | None
+    scripts_root: str
+    output: str
+    runtime: RuntimeIdentity
+    divide: list[int] | None
+    reuse_from: str | None
+    recompute_division: bool
+    runtime_paths: dict[str, str | None]
+    input_selection_sha256: str
+    compare_release: NotRequired[str]
+    comparison_inputs: NotRequired[ComparisonPins]
+    physical_reuse: NotRequired[PhysicalReuse]
+
+
+def runtime_identity() -> RuntimeIdentity:
     """Record the Python and geographic libraries used by this run.
 
     Returns:
@@ -98,91 +135,39 @@ def runtime_identity() -> dict[str, Any]:
 
 def catalog_references(
     sources: BuildSources,
-) -> Iterator[tuple[dict[str, Any], tuple[str, str | None]]]:
-    """Find file entries that name an R2 source in the Neon catalog.
+) -> Iterator[tuple[FileEntry, str]]:
+    """Find the file entries that name a raw source in Neon.
 
     Args:
-        sources: Coastline files, inland-water files, and optional comparison files.
+        sources: Coastline, inland-water, and comparison file settings.
 
     Yields:
-        The file entry to update and its (source ID, version) lookup key.
-        For a ZIP member, the source selector belongs to its archive entry.
+        Pairs of the file entry to update and its source ID. A ZIP member
+        uses the selector on its archive, not on the member itself.
 
     Raises:
-        ValueError: A catalog selector is malformed or also gives direct R2 metadata.
+        ValueError: A selector is invalid or the entry also pins its R2 bytes.
     """
     files = list(sources["inland_water"]["files"])
     for layer in sources["land_config"]["land"]:
-        if isinstance(layer["dataset"], dict):
-            files.append(layer["dataset"])
+        dataset = layer["dataset"]
+        if isinstance(dataset, dict):
+            files.append(dataset)
         files.extend(layer["files"])
-    for comparison_file in (
-        sources.get("reference_rows"),
-        sources.get("reference_runs"),
-    ):
-        if comparison_file is not None:
-            files.append(comparison_file)
+    for comparison in (sources.get("reference_rows"), sources.get("reference_runs")):
+        if comparison is not None:
+            files.append(comparison)
 
+    # Walk only the file entries and their archives. The other settings do not name files.
     for file in files:
-        # A ZIP member pins its own bytes and names the archive separately.
         entry = file
         while isinstance(entry, dict):
             if "r2_source" in entry:
-                yield entry, catalog_key(entry)
+                yield entry, parse_catalog_source_id(entry)
             entry = entry.get("archive")
 
 
-def catalog_key(entry: dict[str, Any]) -> tuple[str, str | None]:
-    """Read the source ID and optional catalog version from one file entry.
-
-    Args:
-        entry: File or ZIP archive entry with an ``r2_source`` selector.
-
-    Returns:
-        (source ID, version). Version is None when the selector omits it.
-
-    Raises:
-        ValueError: The selector is invalid or the entry also pins R2 bytes directly.
-    """
-    selector = entry["r2_source"]
-    if (
-        not isinstance(selector, dict)
-        or not {"source_id"} <= selector.keys() <= {"source_id", "version"}
-        or any(
-            not isinstance(value, str) or not value.strip()
-            for value in selector.values()
-        )
-    ):
-        raise ValueError("invalid raw catalog reference")
-    pinned_fields = {
-        "r2_bucket",
-        "r2_key",
-        "source_id",
-        "version",
-        "sha256",
-        "size_bytes",
-        "size",
-    }
-    if pinned_fields.intersection(entry):
-        raise ValueError("invalid raw catalog reference: remove explicit file metadata")
-    return selector["source_id"], selector.get("version")
-
-
-def catalog_source_ids(sources: BuildSources) -> set[str]:
-    """Collect the raw source IDs to include in the Neon snapshot.
-
-    Args:
-        sources: Validated physical and comparison source settings.
-
-    Returns:
-        The distinct IDs named by the file entries.
-    """
-    return {source_id for _, (source_id, _version) in catalog_references(sources)}
-
-
-def physical_reference(
-    run: Path | str, configuration: dict[str, Any]
-) -> dict[str, Any]:
+def physical_reference(run: Path | str, configuration: dict[str, Any]) -> PhysicalReuse:
     """Find reusable physical outputs for the same grid and raw inputs.
 
     Args:
@@ -234,17 +219,15 @@ def physical_reference(
                 value: Value in a saved physical request.
 
             Returns:
-                A copy without notes and legacy catalog version labels.
+                A copy without selection notes.
             """
             if isinstance(value, list):
                 return [data(item) for item in value]
             if isinstance(value, dict):
-                # Old catalog labels do not change pinned bytes or rasterization.
                 return {
                     key: data(item)
                     for key, item in value.items()
                     if key != "selection_notes"
-                    and not (key == "version" and "source_id" in value)
                 }
             return value
 
@@ -401,7 +384,7 @@ class Pipeline:
         compare_release: str | None,
         reuse_from: Path | str | None,
         recompute_division: bool,
-    ) -> tuple[dict[str, Any] | None, str | None]:
+    ) -> tuple[RunIdentity | None, str | None]:
         """Apply the requested options or restore them from an interrupted run.
 
         Args:
@@ -435,11 +418,12 @@ class Pipeline:
                 raise ValueError(
                     "run has no supported checkpoint identity; preserve it and start a fresh run"
                 )
-            saved_identity = read_json(identity_path)
-            divide = saved_identity.get("divide")
-            compare_release = saved_identity.get("compare_release")
-            reuse_from = saved_identity["reuse_from"]
-            recompute_division = saved_identity["recompute_division"]
+            identity: RunIdentity = read_json(identity_path)
+            saved_identity = identity
+            divide = identity.get("divide")
+            compare_release = identity.get("compare_release")
+            reuse_from = identity["reuse_from"]
+            recompute_division = identity["recompute_division"]
         reuse = Path(reuse_from) if reuse_from is not None else None
         if reuse is not None and not self.resume:
             reuse = reuse.resolve()
@@ -476,10 +460,11 @@ class Pipeline:
             url = neon_connection_url()
         except ValueError as exc:
             raise ValueError(f"{exc}, or supply --selection") from None
+        source_ids = {source_id for _, source_id in catalog_references(sources)}
         with connect_neon(url=url) as database:
             return read_selection(
                 database,
-                raw_sources=catalog_source_ids(sources),
+                raw_sources=source_ids,
                 parents=self.requested_parents,
             )
 
@@ -509,8 +494,8 @@ class Pipeline:
         self,
         sources: BuildSources,
         compare_release: str | None,
-        saved_identity: dict[str, Any] | None,
-    ) -> dict[str, Any] | None:
+        saved_identity: RunIdentity | None,
+    ) -> ComparisonPins | None:
         """Prepare the pinned files for a comparison with a release.
 
         Args:
@@ -572,7 +557,7 @@ class Pipeline:
     def _prepare_run_identity(
         self,
         compare_release: str | None,
-        comparison_inputs: dict[str, Any] | None,
+        comparison_inputs: ComparisonPins | None,
     ) -> None:
         """Collect the inputs, code and options to save for the run.
 
@@ -582,7 +567,7 @@ class Pipeline:
         """
         self.code = code_identity(PACKAGE_ROOT)
         self.repository = repository_identity(PACKAGE_ROOT)
-        self.identity = {
+        self.identity: RunIdentity = {
             "schema": "worldatlas-end-to-end-run-identity-v1",
             "request": self.config_pin,
             "source_pins": self.source_pins,
@@ -597,10 +582,10 @@ class Pipeline:
             "runtime_paths": {
                 key: os.environ.get(key) for key in ("PROJ_DATA", "PROJ_LIB")
             },
+            "input_selection_sha256": hashlib.sha256(
+                canonical_bytes(self.selection)
+            ).hexdigest(),
         }
-        self.identity["input_selection_sha256"] = hashlib.sha256(
-            canonical_bytes(self.selection)
-        ).hexdigest()
         if compare_release is not None:
             self.identity["compare_release"] = compare_release
         if comparison_inputs is not None:
@@ -608,7 +593,7 @@ class Pipeline:
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
 
-    def _start_attempt(self, saved_identity: dict[str, Any] | None) -> None:
+    def _start_attempt(self, saved_identity: RunIdentity | None) -> None:
         """Verify the run identity and save the code for this attempt.
 
         Args:
@@ -617,9 +602,9 @@ class Pipeline:
         Raises:
             ValueError: The saved identity, checkpoints or timing records changed.
         """
-        if self.resume:
-            saved = cast(dict[str, Any], saved_identity).copy()
-            current = self.identity.copy()
+        if saved_identity is not None:
+            saved = dict(saved_identity)
+            current = dict(self.identity)
             # A new attempt can use different code and installed libraries.
             for key in (
                 "code",
@@ -742,21 +727,14 @@ class Pipeline:
         if not references:
             return resolved
 
-        requested = {key for _, key in references}
-
-        # Older snapshots can contain multiple captures under one source ID.
         catalog = {
-            key: source
-            for key in requested
-            for source in self.selection["raw_sources"]
-            if source["source_id"] == key[0]
-            and (key[1] is None or source.get("version") == key[1])
+            source["source_id"]: source for source in self.selection["raw_sources"]
         }
-        if catalog.keys() != requested:
+        if any(source_id not in catalog for _, source_id in references):
             raise ValueError("raw catalog is missing selected sources")
-        for spec, key in references:
+        for spec, source_id in references:
             del spec["r2_source"]
-            source = catalog[key]
+            source = catalog[source_id]
             spec.update(
                 {
                     key: source[key]

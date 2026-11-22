@@ -12,10 +12,10 @@ import threading
 import time
 import traceback
 import uuid
-from collections.abc import Callable, Iterable, Iterator
+from collections.abc import Callable, Iterable, Iterator, Mapping
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, TypedDict, cast
 
 from worldatlas.shared.files import (
     pin_file,
@@ -137,7 +137,15 @@ def code_identity(scripts: Path | str) -> dict[str, str]:
     }
 
 
-def repository_identity(package: Path | str) -> dict[str, Any] | None:
+class RepositoryIdentity(TypedDict):
+    """Record the Git commit, local changes, and setup files for a build."""
+
+    commit: str
+    working_changes: str | None
+    setup: dict[str, str]
+
+
+def repository_identity(package: Path | str) -> RepositoryIdentity | None:
     """Record the Git checkout and setup files used for this build.
 
     Args:
@@ -167,16 +175,15 @@ def repository_identity(package: Path | str) -> dict[str, Any] | None:
         )
         return result.stdout if result.returncode == 0 else None
 
-    result = {
+    return {
         "commit": (git("rev-parse", "HEAD") or "").strip(),
         "working_changes": git("diff", "--binary", "HEAD"),
+        "setup": {
+            name: (root / name).read_text()
+            for name in ("environment.yml", "pyproject.toml")
+            if (root / name).is_file()
+        },
     }
-    result["setup"] = {
-        name: (root / name).read_text()
-        for name in ("environment.yml", "pyproject.toml")
-        if (root / name).is_file()
-    }
-    return result
 
 
 def elapsed_union(intervals: Iterable[tuple[float, float]]) -> float:
@@ -735,7 +742,7 @@ class Timing:
             return journal_anchor(self.path)
 
     def mark_complete(
-        self, group: str, *, physical_report: dict[str, Any] | None = None
+        self, group: str, *, physical_report: Mapping[str, Any] | None = None
     ) -> None:
         # Publish the cumulative stage result with completion, rather than
         # making a reader mistake the last resumed interval for the full total.
@@ -853,7 +860,7 @@ class Timing:
         return by_attempt, incomplete, details
 
     def summary(
-        self, physical_report: dict[str, Any] | None
+        self, physical_report: Mapping[str, Any] | None
     ) -> dict[str, dict[str, Any]]:
         """Summarize wall-clock time for each stage without counting overlap twice.
 
