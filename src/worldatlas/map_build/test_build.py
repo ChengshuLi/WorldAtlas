@@ -22,7 +22,6 @@ import pyarrow.parquet as pq
 
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.execution.runtime import elapsed_union
 from worldatlas.map_build.inputs import releases as release_inputs
 from worldatlas.shared import r2
@@ -485,7 +484,7 @@ class Fixture(unittest.TestCase):
                 pipeline.Pipeline(config, runner.out, work_dir=self.root, resume=True)
         self.assertEqual(calls, list(stored))
 
-    def test_release_comparison_reuses_decoded_stream_without_a_viewer_config(self):
+    def test_release_comparison_reuses_decoded_stream_from_another_release(self):
         decoded = b"map bytes"
         packed = gzip.compress(decoded)
         stored_hash = hashlib.sha256(packed).hexdigest()
@@ -499,19 +498,22 @@ class Fixture(unittest.TestCase):
             self.cloud(gzip.compress(decoded, mtime=1), "releases/another/rows.u32le.gz"),
             decoded_hash,
         )
+        config_data = b'{"categories":[]}'
+        config = self.cloud(config_data, "releases/fixture/config.json")
+        calls = []
         with (
             patch.object(
                 release_inputs, "read_release_assets",
-                side_effect=[([bad], None), ([good], None), ([reissued], None)],
+                side_effect=[([bad], config), ([good], config), ([reissued], config)],
             ),
-            self.fake_r2({key: packed}, []) as download,
+            self.fake_r2({key: packed, config["r2_key"]: config_data}, calls),
         ):
             source_cache = self.make_cache()
             with self.assertRaisesRegex(ValueError, "decoded reference stream hash mismatch"):
                 release_inputs.cache_release_reference("fixture", source_cache)
             self.assertEqual(list(self.inputs.glob("release-*/*")), [])
             expected = release_inputs.cache_release_reference("fixture", source_cache)
-            self.assertEqual(list(expected), ["reference_rows"])
+            self.assertEqual(set(expected), {"reference_rows", "reference_config"})
             cached = Path(expected["reference_rows"]["path"])
             self.assertEqual(cached.read_bytes(), decoded)
             self.assertEqual(list(cached.parent.iterdir()), [cached])
@@ -520,28 +522,7 @@ class Fixture(unittest.TestCase):
                 release_inputs.cache_release_reference("fixture", self.make_cache()),
                 expected,
             )
-            download.assert_called_once()
-
-    def test_release_without_a_category_mapping_compares_map_codes(self):
-        grid = Grid(4, 1, 90)
-        baseline = self.inputs / "baseline"
-        write_layer(baseline, grid, [(0, [(0, 4, 1)])])
-        pins = {f"reference_{name}": pin_file(baseline / f"{name}.u32le")
-                for name in ("rows", "runs")}
-        config = write_json(self.inputs / "request.json", self.cfg)
-        with patch.object(pipeline, "cache_release_reference", return_value=pins):
-            runner = pipeline.Pipeline(
-                config, self.root / "run", work_dir=self.root, compare_release="v8.0"
-            )
-        self.addCleanup(runner.close)
-        final = runner.out / "final"
-        write_layer(final, grid, [(0, [(0, 4, 2)])])
-        physical = runner.out / "physical"
-        physical.mkdir()
-        write_json(physical / "report.json", {"grid": vars(grid)})
-        report = read_json(runner.compare(final, physical)["path"])
-        self.assertEqual(report["compared_by"], "map_code")
-        self.assertEqual(report["pair_counts"], {"1->2": 4})
+        self.assertEqual(calls, [key, config["r2_key"]])
 
     def cloud(self, payload, key="sources/input.json"):
         return {

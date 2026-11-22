@@ -98,7 +98,8 @@ class ReleaseLookupTests(unittest.TestCase):
                         "worldatlas.map_build.inputs.releases.read_manifest",
                         return_value=without_config,
                     ):
-                        self.assertEqual(read_release_assets(identity), (streams, None))
+                        with self.assertRaisesRegex(ValueError, "missing config.json"):
+                            read_release_assets(identity)
                     with self.assertRaisesRegex(ValueError, "no unique release"):
                         read_release_assets("v97.0")
                 with database.transaction(force_rollback=True):

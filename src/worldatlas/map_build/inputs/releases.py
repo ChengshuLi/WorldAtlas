@@ -25,7 +25,7 @@ type ReleaseStream = tuple[str, FileSpec, str]
 
 def read_release_assets(
     identity: str,
-) -> tuple[list[ReleaseStream], FileSpec | None]:
+) -> tuple[list[ReleaseStream], FileSpec]:
     """Read the map stream locations from a verified release manifest.
 
     Args:
@@ -34,10 +34,10 @@ def read_release_assets(
     Returns:
         (streams, config). Each stream contains its name, a ready-to-use R2
         file reference for the gzip file, and the SHA-256 of its decoded bytes.
-        Config is the viewer config's R2 file reference, or None if absent.
+        Config is the R2 file reference for the viewer's category mapping.
 
     Raises:
-        ValueError: Database access is missing, or the release or manifest is invalid.
+        ValueError: The release cannot be found or its inputs are invalid or incomplete.
     """
     try:
         with connect_neon() as database:
@@ -49,6 +49,9 @@ def read_release_assets(
         manifest = read_manifest(storage, release)
     bucket = release["r2_bucket"]
     objects = manifest["objects"]
+    config = objects.get("config.json")
+    if config is None:
+        raise ValueError(f"comparison release {release['id']} is missing config.json")
     streams: list[ReleaseStream] = [
         (
             name,
@@ -57,8 +60,7 @@ def read_release_assets(
         )
         for name in ("rows", "runs")
     ]
-    config = objects.get("config.json")
-    return streams, dict(config, r2_bucket=bucket) if config is not None else None
+    return streams, dict(config, r2_bucket=bucket)
 
 
 def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
@@ -70,7 +72,7 @@ def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
 
     Returns:
         Path and SHA-256 pins for ``reference_rows``, ``reference_runs``,
-        and any ``reference_config``. The stream pins describe decoded bytes.
+        and ``reference_config``. The stream pins describe decoded bytes.
 
     Raises:
         ValueError: The manifest is invalid or a file fails checksum verification.
@@ -98,9 +100,8 @@ def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
                     raise ValueError("decoded reference stream hash mismatch")
                 pending.replace(path)
         reference[f"reference_{name}"] = pin
-    if config is not None:
-        reference["reference_config"] = {
-            "path": str(cache.acquire(config)),
-            "sha256": cast(str, config["sha256"]),
-        }
+    reference["reference_config"] = {
+        "path": str(cache.acquire(config)),
+        "sha256": cast(str, config["sha256"]),
+    }
     return reference

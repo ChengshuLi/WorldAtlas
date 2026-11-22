@@ -934,27 +934,24 @@ class Pipeline:
             return None
         rows = self.comparison_inputs["reference_rows"]
         runs = self.comparison_inputs["reference_runs"]
+        config = self.comparison_inputs["reference_config"]
         grid = Grid(**read_json(physical / "report.json")["grid"])
         inputs = [
             pin_file(final / "rows.u32le"),
             pin_file(final / "runs.u32le"),
             rows,
             runs,
+            config,
+            pin_file(self.out / "input-selection.json"),
         ]
-        bindings = {}
-        if config := self.comparison_inputs.get("reference_config"):
-            inputs += [config, pin_file(self.out / "input-selection.json")]
-            bindings = dict(
-                reference_bindings=[
-                    dict(
-                        code=category["id"],
-                        entity_id=category["entity_id"],
-                        physical_class=category["physical_class"],
-                    )
-                    for category in read_json(config["path"])["categories"]
-                ],
-                candidate_bindings=self.selection["geography"]["category_bindings"],
+        reference_bindings = [
+            dict(
+                code=category["id"],
+                entity_id=category["entity_id"],
+                physical_class=category["physical_class"],
             )
+            for category in read_json(config["path"])["categories"]
+        ]
         self.checkpoints.run_function(
             "compare",
             "verification",
@@ -969,7 +966,10 @@ class Pipeline:
             timing=self.timing,
             inputs=inputs,
             outputs=[self.out / "comparison"],
-            kwargs=bindings,
+            kwargs={
+                "reference_bindings": reference_bindings,
+                "candidate_bindings": self.selection["geography"]["category_bindings"],
+            },
         )
         return pin_file(self.out / "comparison" / "report.json")
 
