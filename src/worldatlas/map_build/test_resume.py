@@ -20,7 +20,6 @@ class ExecutorResumeTests(unittest.TestCase):
         self.source.write_bytes(b"final-output\x00\x01\x02")
         cfg = {
             "schema": "worldatlas-end-to-end-pipeline-v3",
-            "input_root": str(self.root),
             "grid": dict(width=36, height=18, step=10),
             "sources": {
                 "land_config": {
@@ -37,7 +36,8 @@ class ExecutorResumeTests(unittest.TestCase):
 
     def runner(self, resume=False):
         runner = pipeline.Pipeline(
-            self.config, self.out, resume=resume, selection=self.saved_selection
+            self.config, self.out, work_dir=self.root,
+            resume=resume, selection=self.saved_selection,
         )
         self.addCleanup(runner.close)
         return runner

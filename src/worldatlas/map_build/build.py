@@ -301,8 +301,8 @@ class Pipeline:
         config: Path | str,
         output: Path | str,
         *,
+        work_dir: Path | str,
         resume: bool = False,
-        work_dir: Path | str | None = None,
         compare_release: str | None = None,
         selection: Path | str | None = None,
         divide: list[int] | None = None,
@@ -315,7 +315,7 @@ class Pipeline:
             config: Path to the JSON build settings.
             output: Directory inside the workspace for this build's results.
             resume: Continue a run that already has an identity file.
-            work_dir: Directory for raw file caches and runs.
+            work_dir: Workspace holding the shared inputs cache and run directories.
             compare_release: Release name to compare with the finished map.
             selection: Frozen geographic selection JSON file. Otherwise read the
                 working selection.
@@ -378,39 +378,28 @@ class Pipeline:
             self.run_lock.close()
             raise
 
-    def _prepare_workspace(
-        self, output: Path | str, work_dir: Path | str | None
-    ) -> None:
+    def _prepare_workspace(self, output: Path | str, work_dir: Path | str) -> None:
         """Resolve the workspace and require a usable run directory within it.
 
         Args:
             output: Run directory supplied by the caller.
-            work_dir: Explicit workspace to create if needed. Otherwise use
-                the directory named in the build configuration.
+            work_dir: Workspace to create if needed.
 
         Raises:
             ValueError: The workspace or run directory is invalid for this mode.
         """
-        if work_dir is None and "input_root" not in self.cfg:
-            raise ValueError("choose a local input/run directory with --work-dir")
-        root = Path(work_dir) if work_dir is not None else Path(self.cfg["input_root"])
-        if not root.is_absolute():
-            root = (
-                Path.cwd() if work_dir is not None else self.config_path.parent
-            ) / root
-        self.root = root.resolve()
-        if work_dir is not None:
-            self.root.mkdir(parents=True, exist_ok=True)
+        self.root = Path(work_dir).resolve()
+        self.root.mkdir(parents=True, exist_ok=True)
         self.out = Path(output).resolve()
         if (
-            not self.root.is_dir()
-            or (self.out.exists() != self.resume)
+            (self.out.exists() != self.resume)
             or not self.out.parent.is_dir()
             or not self.out.is_relative_to(self.root)
             or self.config_path.is_relative_to(self.out)
         ):
             raise ValueError(
-                "new output inside input_root, outside its input files, required"
+                "output must be inside --work-dir with an existing parent and "
+                "exist only when resuming. Keep the configuration outside output."
             )
 
     def _load_run_options(
@@ -1048,7 +1037,9 @@ class Pipeline:
                 or path.is_relative_to(self.out)
                 or sha256_file(path) != value["sha256"]
             ):
-                raise ValueError(f"source pin mismatch or outside input root: {path}")
+                raise ValueError(
+                    f"source pin mismatch or outside the work directory: {path}"
+                )
             self.source_pins.append({"path": str(path), "sha256": value["sha256"]})
             return path
         if isinstance(value, dict):
@@ -1468,7 +1459,8 @@ def main() -> None:
     p.add_argument(
         "--work-dir",
         type=Path,
-        help="local input/run directory, overriding input_root; created if absent",
+        required=True,
+        help="workspace holding the shared inputs cache and run directories",
     )
     p.add_argument(
         "--resume",

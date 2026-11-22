@@ -62,7 +62,6 @@ class TimingTests(unittest.TestCase):
         cfg = read_json(path)
         self.assertNotIn("/workspace/", path.read_text())
         self.assertNotIn("/tmp/", path.read_text())
-        self.assertNotIn("input_root", cfg)
         self.assertEqual(len(cfg["sources"]["inland_water"]["files"]), 32)
         self.assertNotIn("decision_revisions", cfg)
         self.assertEqual(
@@ -176,8 +175,12 @@ class CommandTests(unittest.TestCase):
             disable.assert_called_once_with(False)
             self.assertEqual(os.environ["PROJ_NETWORK"], "OFF")
 
-    def test_build_requires_an_explicit_output(self):
-        for options in ([], ["--resume"]):
+    def test_build_requires_an_explicit_workspace_and_output(self):
+        for options, missing in (
+            (["--work-dir", "workspace"], "output"),
+            (["--work-dir", "workspace", "--resume"], "output"),
+            (["run"], "--work-dir"),
+        ):
             args = ["worldatlas-build", "config.json", *options]
             with (
                 self.subTest(options=options),
@@ -188,11 +191,14 @@ class CommandTests(unittest.TestCase):
                 with self.assertRaises(SystemExit) as stop:
                     pipeline.main()
                 self.assertEqual(stop.exception.code, 2)
-                self.assertIn("the following arguments are required: output", error.getvalue())
+                self.assertIn(f"the following arguments are required: {missing}", error.getvalue())
                 builder.assert_not_called()
 
     def test_recompute_requires_a_prior_run(self):
-        args = ["worldatlas-build", "config.json", "run", "--recompute-division"]
+        args = [
+            "worldatlas-build", "config.json", "run",
+            "--work-dir", "workspace", "--recompute-division",
+        ]
         with patch("sys.argv", args), redirect_stderr(io.StringIO()) as error:
             with self.assertRaises(SystemExit) as stop:
                 pipeline.main()
@@ -211,7 +217,10 @@ class CommandTests(unittest.TestCase):
 
                 runner.run.side_effect = interrupt_running_build
                 with (
-                    patch("sys.argv", ["worldatlas-build", "config.json", "run"]),
+                    patch(
+                        "sys.argv",
+                        ["worldatlas-build", "config.json", "run", "--work-dir", "workspace"],
+                    ),
                     patch.object(pipeline, "Pipeline", return_value=runner),
                     patch.object(pipeline.signal, "signal", install),
                 ):
@@ -244,7 +253,6 @@ class Fixture(unittest.TestCase):
         self.cfg = {
             "schema": "worldatlas-end-to-end-pipeline-v3",
             "selection_notes": "Synthetic processor integration fixture",
-            "input_root": str(self.root),
             "sources": {
                 "land_config": {"land": []},
                 "inland_water": {"rasterization": {}, "files": []},
@@ -254,13 +262,17 @@ class Fixture(unittest.TestCase):
 
     def make(self):
         config = write_json(self.inputs / "request.json", self.cfg)
-        runner = pipeline.Pipeline(config, self.root / "run")
+        runner = pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
         self.addCleanup(runner.close)
         return runner
 
     def test_parallel_builds_can_publish_the_same_generated_input(self):
         first = self.make()
-        second = pipeline.Pipeline(first.config_path, self.root / "other-run")
+        second = pipeline.Pipeline(
+            first.config_path,
+            self.root / "other-run",
+            work_dir=self.root,
+        )
         self.addCleanup(second.close)
         document = {"source": "shared"}
         data = json_bytes(document)
@@ -340,7 +352,7 @@ class Fixture(unittest.TestCase):
                     dict(self.cfg, sources=sources),
                 )
                 with self.assertRaisesRegex(ValueError, f"{name} .* inline"):
-                    pipeline.Pipeline(config, self.root / "run")
+                    pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
 
     def test_rejects_invalid_run_options_before_creating_output(self):
         config = self.inputs / "build.json"
@@ -354,31 +366,26 @@ class Fixture(unittest.TestCase):
                 {},
                 "sources has unexpected keys inland_watre",
             ),
-            (
-                {key: value for key, value in self.cfg.items() if key != "input_root"},
-                {},
-                "choose a local input/run directory",
-            ),
-            (self.cfg, {"output": self.root.parent / "elsewhere"}, "new output inside input_root"),
+            (self.cfg, {"output": self.root.parent / "elsewhere"}, "output must be inside --work-dir"),
             (self.cfg, {"recompute_division": True}, "requires --reuse-from"),
         ]
         for definition, options, error in cases:
             with self.subTest(error=error):
                 config.write_text(json.dumps(definition))
                 with self.assertRaisesRegex(ValueError, error):
-                    pipeline.Pipeline(config, **({"output": output} | options))
+                    pipeline.Pipeline(config, work_dir=self.root, **({"output": output} | options))
                 self.assertFalse(output.exists())
 
         config.write_text(json.dumps(self.cfg))
         output.mkdir()
         with self.assertRaisesRegex(ValueError, "no supported checkpoint identity"):
-            pipeline.Pipeline(config, output, resume=True)
+            pipeline.Pipeline(config, output, work_dir=self.root, resume=True)
 
     def test_fresh_run_requires_a_working_database_or_selection(self):
         config = write_json(self.inputs / "build.json", self.cfg)
         with patch.dict(os.environ, {"NEON_DATABASE_URL": ""}):
             with self.assertRaisesRegex(ValueError, "supply --selection"):
-                pipeline.Pipeline(config, self.root / "run")
+                pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
         self.assertFalse((self.root / "run").exists())
 
     def test_compare_requires_two_streams_and_a_single_reference_source(self):
@@ -395,7 +402,12 @@ class Fixture(unittest.TestCase):
         ):
             with self.subTest(options=options):
                 with self.assertRaisesRegex(ValueError, message):
-                    pipeline.Pipeline(config, self.root / "run", **options)
+                    pipeline.Pipeline(
+                        config,
+                        self.root / "run",
+                        work_dir=self.root,
+                        **options,
+                    )
 
     def test_source_pin_requires_a_file(self):
         with self.assertRaisesRegex(ValueError, "not a file"):
@@ -424,7 +436,7 @@ class Fixture(unittest.TestCase):
         self.cfg["sources"]["reference_rows"] = "rows.u32le"
         config = write_json(self.inputs / "build.json", self.cfg)
         with self.assertRaisesRegex(ValueError, "explicit path/SHA-256 pins"):
-            pipeline.Pipeline(config, self.root / "run")
+            pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
 
     def test_local_comparison_requires_both_named_streams_in_one_directory(self):
         second = self.inputs / "unrelated"
@@ -454,7 +466,7 @@ class Fixture(unittest.TestCase):
                 config.write_text(json.dumps(self.cfg))
                 with self.fake_r2({}, []) as download:
                     with self.assertRaisesRegex(ValueError, message):
-                        pipeline.Pipeline(config, self.root / "run")
+                        pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
                 download.assert_not_called()
 
     def test_saved_complete_selection_is_used_for_initialization_and_resume(self):
@@ -466,13 +478,23 @@ class Fixture(unittest.TestCase):
             "read_selection",
             side_effect=AssertionError("unexpected live database read"),
         ):
-            runner = pipeline.Pipeline(config, self.root / "run", selection=selection_path)
+            runner = pipeline.Pipeline(
+                config,
+                self.root / "run",
+                work_dir=self.root,
+                selection=selection_path,
+            )
             original = runner.identity["input_selection_sha256"]
             self.assertEqual(
                 read_json(runner.out / "input-selection.json"), selected
             )
             runner.close()
-            resumed = pipeline.Pipeline(config, runner.out, resume=True)
+            resumed = pipeline.Pipeline(
+                config,
+                runner.out,
+                work_dir=self.root,
+                resume=True,
+            )
             self.assertEqual(resumed.identity["input_selection_sha256"], original)
             resumed.close()
 
@@ -485,10 +507,21 @@ class Fixture(unittest.TestCase):
         alternative = write_json(self.inputs / "alternate-selection.json", changed)
         with patch.object(pipeline, "read_selection", side_effect=AssertionError("unexpected live read")):
             with self.assertRaisesRegex(ValueError, "different saved geographic selection"):
-                pipeline.Pipeline(runner.config_path, runner.out, resume=True, selection=alternative)
+                pipeline.Pipeline(
+                    runner.config_path,
+                    runner.out,
+                    work_dir=self.root,
+                    resume=True,
+                    selection=alternative,
+                )
             saved.unlink()
             with self.assertRaises(FileNotFoundError) as error:
-                pipeline.Pipeline(runner.config_path, runner.out, resume=True)
+                pipeline.Pipeline(
+                    runner.config_path,
+                    runner.out,
+                    work_dir=self.root,
+                    resume=True,
+                )
             self.assertEqual(Path(error.exception.filename), saved)
 
     def test_release_comparison_downloads_and_verifies_streams_and_config(self):
@@ -519,7 +552,12 @@ class Fixture(unittest.TestCase):
             patch.object(pipeline, "release_endpoint", return_value=release_endpoint),
             self.fake_r2(stored | {raw_key: b"{}"}, calls),
         ):
-            runner = pipeline.Pipeline(config, self.root / "run", compare_release="v8.0")
+            runner = pipeline.Pipeline(
+                config,
+                self.root / "run",
+                work_dir=self.root,
+                compare_release="v8.0",
+            )
             try:
                 for name, data in decoded.items():
                     self.assertEqual(
@@ -531,23 +569,34 @@ class Fixture(unittest.TestCase):
             release_lookup.side_effect = AssertionError("preview is no longer cataloged")
             for _, _, key, _, checksum, _ in catalog:
                 (self.inputs / checksum / Path(key).name).unlink()
-            resumed = pipeline.Pipeline(config, runner.out, resume=True)
+            resumed = pipeline.Pipeline(
+                config,
+                runner.out,
+                work_dir=self.root,
+                resume=True,
+            )
             try:
                 self.assertEqual(resumed.identity["compare_release"], "v8.0")
                 self.assertEqual(resumed.sources, runner.sources)
             finally:
                 resumed.close()
             with self.assertRaisesRegex(ValueError, "different --compare-release"):
-                pipeline.Pipeline(config, runner.out, compare_release="v8.1", resume=True)
+                pipeline.Pipeline(
+                    config,
+                    runner.out,
+                    work_dir=self.root,
+                    compare_release="v8.1",
+                    resume=True,
+                )
             runner.sources["reference_rows"].write_bytes(b"changed comparison")
             with self.assertRaisesRegex(ValueError, "source pin mismatch"):
-                pipeline.Pipeline(config, runner.out, resume=True)
+                pipeline.Pipeline(config, runner.out, work_dir=self.root, resume=True)
             identity_path = runner.out / "run-identity.json"
             identity = read_json(identity_path)
             identity.pop("comparison_inputs")
             identity_path.write_text(json.dumps(identity))
             with self.assertRaisesRegex(ValueError, "resume is missing saved comparison files"):
-                pipeline.Pipeline(config, runner.out, resume=True)
+                pipeline.Pipeline(config, runner.out, work_dir=self.root, resume=True)
             self.assertEqual(
                 [call.args[0] for call in physical_build.make_r2_client.call_args_list],
                 [raw_endpoint] + [release_endpoint] * len(stored),
@@ -660,7 +709,6 @@ class Fixture(unittest.TestCase):
     def test_coastline_download_uses_each_builds_work_directory(self):
         payload = b"{}"
         self.select_coastline(self.cloud(payload))
-        self.cfg["input_root"] = "/not-this-computer"
         config = write_json(self.inputs / "cloud-config.json", self.cfg)
         calls, results = [], []
         with self.fake_r2({"sources/input.json": payload}, calls):
@@ -856,7 +904,12 @@ class Fixture(unittest.TestCase):
         config["selection_notes"] = "changed after starting"
         first.config_path.write_text(json.dumps(config))
         with self.assertRaisesRegex(ValueError, "resume request, input selection or output identity changed"):
-            pipeline.Pipeline(first.config_path, first.out, resume=True)
+            pipeline.Pipeline(
+                first.config_path,
+                first.out,
+                work_dir=self.root,
+                resume=True,
+            )
 
     def test_physical_timing_reads_only_complete_records(self):
         runner = self.make()
@@ -916,9 +969,12 @@ class Fixture(unittest.TestCase):
         self.assertEqual(Path(land["dataset"]), cached)
         self.assertEqual(runner.acquisition_intervals, [])
 
-    def test_relative_input_root_is_relative_to_the_configuration(self):
-        self.cfg["input_root"] = ".."
-        runner = self.make()
+    def test_relative_work_directory_is_relative_to_the_current_directory(self):
+        config = write_json(self.inputs / "build.json", self.cfg)
+        runner = pipeline.Pipeline(
+            config, self.root / "run", work_dir=os.path.relpath(self.root)
+        )
+        self.addCleanup(runner.close)
         self.assertEqual(runner.root, self.root)
 
     def test_cached_cloud_corruption_and_zip_path_escapes_fail_closed(self):
@@ -945,7 +1001,7 @@ class Fixture(unittest.TestCase):
         )
         config = write_json(self.inputs / "request2.json", self.cfg)
         with self.assertRaisesRegex(ValueError, "unsafe ZIP member"):
-            pipeline.Pipeline(config, self.root / "run")
+            pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
 
     def test_failure_report_is_not_a_completed_stage(self):
         runner = self.make()
@@ -1071,7 +1127,7 @@ class Fixture(unittest.TestCase):
             runner.physical()
         config_path.write_bytes(original_config)
         reused = pipeline.Pipeline(
-            runner.config_path, self.root / "reused", reuse_from=runner.out
+            runner.config_path, self.root / "reused", work_dir=self.root, reuse_from=runner.out
         )
         self.addCleanup(reused.close)
         producer_report = (physical / "report.json").read_bytes()
@@ -1167,7 +1223,6 @@ class Fixture(unittest.TestCase):
         }
         cfg = {
             **self.cfg,
-            "input_root": "./unused-on-another-computer",
             "sources": dict(
                 land_config=land,
                 inland_water=dict(

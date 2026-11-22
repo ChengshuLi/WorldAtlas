@@ -45,7 +45,9 @@ Neon records the sources and reasoning for individual geographic decisions. The 
 Run the [pipeline](src/worldatlas/map_build/README.md) from the repository root.
 
 ```bash
+mkdir -p /absolute/path/to/worldatlas-work/runs
 worldatlas-build src/worldatlas/map_build/config.json \
+  /absolute/path/to/worldatlas-work/runs/preview \
   --work-dir /absolute/path/to/worldatlas-work
 ```
 
