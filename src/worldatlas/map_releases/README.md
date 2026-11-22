@@ -21,7 +21,7 @@ After the user reviews and approves the candidate:
 worldatlas-release publish v9.0-rc.1
 ```
 
-Publication verifies the files, commits the approved release in Neon and updates the homepage. Once the homepage update succeeds, it removes the other candidate folders and rows for that version, including partial uploads that stopped before registration. Candidates of a version still under development stay available. Shared raw sources under `sources/` require a separate dependency check.
+Publication verifies the files, commits the approved release in Neon and updates the homepage. The command prints `Published` as soon as the homepage update succeeds. It then removes the other candidate folders and rows for that version, including partial uploads that stopped before registration, and reports when cleanup finishes. Candidates of a version still under development stay available. Shared raw sources under `sources/` require a separate dependency check.
 
 Publishing serves the existing grid and legend. Retry an interrupted publication or candidate cleanup with the same command. If Neon has since selected a different release for the homepage, retrying the older official release only cleans up its remaining previews. Published versions remain available at their original candidate URLs. The Worker serves `/`, `/index.html` and `/releases/RELEASE_ID/...`. Use `npx wrangler deploy` to deploy changes to the Worker itself.
 

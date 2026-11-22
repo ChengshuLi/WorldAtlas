@@ -717,16 +717,11 @@ class PublicationTests(unittest.TestCase):
         self.assertEqual(self.storage.put_object.call_count, 2)
 
     def test_retry_for_older_official_release_never_rewrites_homepage(self):
-        preview = "v9.0-rc.2"
-        self.set_release(official=True, previews=[(preview, RELEASE_BUCKET, "a" * 64)])
-        with patch("worldatlas.map_releases.manage_release.read_manifest", return_value={"objects": {}}):
-            self.assertFalse(publish(self.db, R2Client(self.storage), self.candidate))
+        self.set_release(official=True)
+        self.assertFalse(publish(self.db, R2Client(self.storage), self.candidate))
         self.storage.head_object.assert_not_called()
         self.storage.put_object.assert_not_called()
         self.db.transaction.assert_not_called()
-        self.storage.delete_object.assert_called_once_with(
-            Bucket=RELEASE_BUCKET, Key=f"releases/{preview}/manifest.json",
-        )
 
     def test_publish_refuses_a_different_candidate_for_an_official_version(self):
         self.db.execute.return_value.fetchone.return_value = ("v9.0-rc.2",)
@@ -920,10 +915,11 @@ class CommandTests(unittest.TestCase):
         command = "worldatlas.map_releases.manage_release"
         candidate = "v9.0-rc.1"
         endpoint = DEFAULT_R2_ENDPOINT
-        for action, arguments, published, receipt in (
-            ("stage", ["run", "--viewer", "viewer"], False, "Preview:"),
-            ("publish", [], True, "Published"),
-            ("publish", [], False, "Finished preview cleanup"),
+        for action, arguments, published, cleanup_error in (
+            ("stage", ["run", "--viewer", "viewer"], False, False),
+            ("publish", [], True, False),
+            ("publish", [], True, True),
+            ("publish", [], False, False),
         ):
             db, storage = Mock(), Mock()
             lock = "SELECT pg_advisory_lock(hashtext('atlas.release_publication'))"
@@ -932,23 +928,61 @@ class CommandTests(unittest.TestCase):
                 db.execute.assert_called_once_with(lock)
                 return published
 
-            with (self.subTest(action=action, published=published),
+            def cleanup(*_):
+                db.execute.assert_called_once_with(lock)
+                self.assertEqual("Published" in output.getvalue(), published)
+                if cleanup_error:
+                    raise OSError("preview cleanup interrupted")
+
+            with (self.subTest(action=action, published=published, cleanup_error=cleanup_error),
                   patch.object(sys, "argv", ["worldatlas-release", action, candidate, *arguments]),
                   patch.dict(os.environ, NEON_DATABASE_URL="host=test"),
                   patch("psycopg.connect", return_value=nullcontext(db)),
                   patch(command + ".make_r2_client", return_value=R2Client(storage)) as client,
                   patch(command + ".build_bundle", return_value={"inputs": {"r2_endpoint": "old-raw-endpoint"}}),
                   patch(f"{command}.{action}", side_effect=after_lock) as operation,
+                  patch(command + ".retire_previews", side_effect=cleanup) as retire,
                   redirect_stdout(io.StringIO()) as output):
-                main()
+                if cleanup_error:
+                    with self.assertRaisesRegex(OSError, "preview cleanup interrupted"):
+                        main()
+                else:
+                    main()
             client.assert_called_once_with(endpoint)
             operation.assert_called_once()
-            self.assertIn(receipt, output.getvalue())
+            messages = output.getvalue()
+            if action == "stage":
+                retire.assert_not_called()
+                self.assertIn("Preview:", messages)
+            else:
+                retire.assert_called_once()
+                self.assertEqual(retire.call_args.args[2], "v9.0")
+                self.assertEqual("Published" in messages, published)
+                self.assertEqual("Finished preview cleanup" in messages, not cleanup_error)
 
     def test_restore_extracts_pinned_files_without_taking_a_write_lock(self):
         command = "worldatlas.map_releases.manage_release"
         candidate = "v9.0-rc.1"
         db, storage = Mock(), Mock()
+        connection_open = False
+
+        @contextmanager
+        def connection():
+            nonlocal connection_open
+            connection_open = True
+            try:
+                yield db
+            finally:
+                connection_open = False
+
+        def lookup(*_):
+            self.assertTrue(connection_open)
+            return release
+
+        def open_storage(*_):
+            self.assertFalse(connection_open)
+            return R2Client(storage)
+
         with tempfile.TemporaryDirectory() as temp:
             archive, output = Path(temp) / FILENAME, Path(temp) / "restored"
             write_inputs(archive, release_id=candidate, configuration={}, selection={"coordinates": [0, 1]},
@@ -961,9 +995,9 @@ class CommandTests(unittest.TestCase):
             manifest = dict(inputs={}, objects={FILENAME: asset})
             with (patch.object(sys, "argv", ["worldatlas-release", "restore-inputs", candidate, str(output)]),
                   patch.dict(os.environ, NEON_DATABASE_URL="host=atlas-pooler.example.org"),
-                  patch("psycopg.connect", return_value=nullcontext(db)),
-                  patch(command + ".make_r2_client", return_value=R2Client(storage)) as client,
-                  patch(command + ".lookup_release", return_value=release),
+                  patch("psycopg.connect", side_effect=lambda *_args, **_kwargs: connection()),
+                  patch(command + ".make_r2_client", side_effect=open_storage) as client,
+                  patch(command + ".lookup_release", side_effect=lookup),
                   patch(command + ".read_manifest", return_value=manifest), redirect_stdout(io.StringIO())):
                 main()
                 manifest["objects"].clear()

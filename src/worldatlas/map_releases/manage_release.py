@@ -565,7 +565,7 @@ def stage(
 
 
 def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
-    """Publish an approved candidate or finish cleanup for an older release.
+    """Switch the homepage to an approved candidate.
 
     Args:
         db: Connection holding the release write lock.
@@ -573,7 +573,8 @@ def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
         candidate: Exact numbered candidate ID approved for publication.
 
     Returns:
-        True if the homepage was written, or False for a cleanup-only retry.
+        True if the homepage was written, or False if this release is already
+        official and another release is selected for the homepage.
 
     Raises:
         ValueError: The candidate cannot be published or an asset fails verification.
@@ -581,7 +582,6 @@ def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
     release = lookup_release(db, candidate)
     map_version = release["map_version"]
     if release["is_official"] and not release["is_current"]:
-        retire_previews(db, storage, map_version)
         return False
     selected = official_candidate(db, map_version)
     if selected is not None and selected != candidate:
@@ -623,7 +623,6 @@ def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
         cache_control="no-cache",
         expected_etag=etag,
     )
-    retire_previews(db, storage, map_version)
     return True
 
 
@@ -646,12 +645,34 @@ def main() -> None:
     restore_args.add_argument("candidate")
     restore_args.add_argument("output", type=Path)
     args = parser.parse_args()
-    if args.action != "restore-inputs":
-        version(args.candidate)
+    restoring = args.action == "restore-inputs"
+    map_version = None if restoring else version(args.candidate)
     try:
-        url = neon_connection_url(direct=args.action != "restore-inputs")
+        url = neon_connection_url(direct=not restoring)
     except ValueError as exc:
         parser.error(str(exc))
+
+    if map_version is None:
+        with connect_neon(url=url, autocommit=True) as db:
+            release = lookup_release(db, args.candidate)
+        with closing(make_r2_client(DEFAULT_R2_ENDPOINT)) as storage:
+            saved = read_manifest(storage, release)
+            asset = saved["objects"].get(INPUTS_FILE)
+            if asset is None:
+                raise ValueError("release has no input archive")
+            raw = verify_object(
+                storage,
+                release["r2_bucket"],
+                asset["r2_key"],
+                asset,
+                return_bytes=True,
+            )
+        restore_inputs(
+            read_inputs(raw, saved["inputs"].get("release_id", release["id"])),
+            args.output,
+        )
+        print(f"Restored inputs to {args.output}")
+        return
 
     with tempfile.TemporaryDirectory() as temp:
         bundle = Path(temp)
@@ -664,31 +685,13 @@ def main() -> None:
             connect_neon(url=url, autocommit=True) as db,
             closing(make_r2_client(DEFAULT_R2_ENDPOINT)) as storage,
         ):
-            if args.action == "restore-inputs":
-                release = lookup_release(db, args.candidate)
-                saved = read_manifest(storage, release)
-                asset = saved["objects"].get(INPUTS_FILE)
-                if asset is None:
-                    raise ValueError("release has no input archive")
-                raw = verify_object(
-                    storage,
-                    release["r2_bucket"],
-                    asset["r2_key"],
-                    asset,
-                    return_bytes=True,
-                )
-                restore_inputs(
-                    read_inputs(raw, saved["inputs"].get("release_id", release["id"])),
-                    args.output,
-                )
-                print(f"Restored inputs to {args.output}")
-                return
             # Stage and publish share a lock so preview retirement cannot race an upload.
             db.execute("SELECT pg_advisory_lock(hashtext('atlas.release_publication'))")
             if manifest is not None:
                 stage(db, storage, args.candidate, bundle, manifest)
                 print(f"Preview: /{release_prefix(args.candidate)}index.html")
-            elif publish(db, storage, args.candidate):
-                print(f"Published {args.candidate} at /")
-            else:
-                print(f"Finished preview cleanup for {args.candidate}")
+                return
+            if publish(db, storage, args.candidate):
+                print(f"Published {args.candidate} at /", flush=True)
+            retire_previews(db, storage, map_version)
+            print(f"Finished preview cleanup for {args.candidate}")
