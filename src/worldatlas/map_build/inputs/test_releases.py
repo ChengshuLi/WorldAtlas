@@ -68,7 +68,7 @@ class ReleaseLookupTests(unittest.TestCase):
                 with (
                     patch.dict(os.environ, NEON_DATABASE_URL=url),
                     patch(
-                        "worldatlas.map_build.physical.build.make_r2_client",
+                        "worldatlas.map_build.inputs.releases.make_r2_client",
                         return_value=storage,
                     ),
                 ):

@@ -938,7 +938,7 @@ class CommandTests(unittest.TestCase):
                   patch.object(sys, "argv", ["worldatlas-release", action, candidate, *arguments]),
                   patch.dict(os.environ, NEON_DATABASE_URL="host=test"),
                   patch(command + ".psycopg.connect", return_value=nullcontext(db)),
-                  patch(command + ".physical.make_r2_client", return_value=storage) as client,
+                  patch(command + ".make_r2_client", return_value=storage) as client,
                   patch(command + ".build_bundle", return_value={"inputs": {"r2_endpoint": "old-raw-endpoint"}}),
                   patch(f"{command}.{action}", side_effect=after_lock) as operation,
                   redirect_stdout(io.StringIO()) as output):
@@ -964,7 +964,7 @@ class CommandTests(unittest.TestCase):
             with (patch.object(sys, "argv", ["worldatlas-release", "restore-inputs", candidate, str(output)]),
                   patch.dict(os.environ, NEON_DATABASE_URL="host=atlas-pooler.example.org"),
                   patch(command + ".psycopg.connect", return_value=nullcontext(db)),
-                  patch(command + ".physical.make_r2_client", return_value=storage) as client,
+                  patch(command + ".make_r2_client", return_value=storage) as client,
                   patch(command + ".lookup_release", return_value=release),
                   patch(command + ".read_manifest", return_value=manifest), redirect_stdout(io.StringIO())):
                 main()

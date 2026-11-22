@@ -19,6 +19,8 @@ A ZIP normally goes into `<work-dir>/<sha256>/source.zip`. Source imports and ma
 
 [`catalog.py`](catalog.py) implements raw-file lookup, verified downloads, caching and multipart assembly. Source-specific parsing and output persistence belong to the importers.
 
+[`r2.py`](r2.py) opens R2 clients and supplies verified local files to the map builder. It can extract individual ZIP members and keep companion files together.
+
 [`test_source_assets.py`](test_source_assets.py) checks cache reuse, corrupt inputs, timing and multipart files.
 
 Run from the repository root with `python .github/scripts/run_tests.py --suite source_assets`.

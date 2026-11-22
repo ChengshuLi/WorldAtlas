@@ -425,12 +425,12 @@ class EndToEndTests(unittest.TestCase):
                 original = physical_report.read_bytes()
                 physical_report.write_text(json.dumps(dict(json.loads(original), status="incomplete")))
                 with self.assertRaisesRegex(ValueError, "physical source run is incomplete"):
-                    physical_reference(root / "run", runner.sources)
+                    physical_reference(root / "run", runner.physical_config)
                 physical_report.write_bytes(original)
-                settings = runner.sources["land_config"]
+                settings = root / "run/physical/configs/land.json"
                 settings.write_bytes(settings.read_bytes() + b"\n")
                 with self.assertRaisesRegex(ValueError, "physical source configuration changed"):
-                    physical_reference(root / "run", runner.sources)
+                    physical_reference(root / "run", runner.physical_config)
             finally:
                 with psycopg.connect(url) as db:
                     db.execute(

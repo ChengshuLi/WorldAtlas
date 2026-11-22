@@ -29,7 +29,6 @@ from worldatlas.map_build.inputs.selection import (
     entity_colors,
     validate_map_code_bindings,
 )
-from worldatlas.map_build.physical import build as physical
 from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
     lookup_release,
@@ -54,6 +53,7 @@ from worldatlas.shared.files import (
     sha256_file,
     verify_pins,
 )
+from worldatlas.source_assets.r2 import make_r2_client
 
 STREAMS = ("rows", "runs")
 CANDIDATE = re.compile(r"(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*")
@@ -741,7 +741,7 @@ def main() -> None:
             )
         with (
             psycopg.connect(connection, autocommit=True) as db,
-            closing(physical.make_r2_client(release_endpoint())) as storage,
+            closing(make_r2_client(release_endpoint())) as storage,
         ):
             if args.action == "restore-inputs":
                 release = lookup_release(db, args.candidate)

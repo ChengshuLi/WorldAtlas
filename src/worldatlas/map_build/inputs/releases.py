@@ -6,12 +6,12 @@ from typing import Any
 
 import psycopg
 
-from worldatlas.map_build.physical import build as physical_build
 from worldatlas.map_releases.catalog import (
     lookup_release,
     read_manifest,
     release_endpoint,
 )
+from worldatlas.source_assets.r2 import make_r2_client
 
 
 def read_release_assets(
@@ -39,7 +39,7 @@ def read_release_assets(
             release = lookup_release(database, identity)
     except psycopg.Error:
         raise ValueError("Neon release lookup failed; check database access") from None
-    with closing(physical_build.make_r2_client(release_endpoint())) as storage:
+    with closing(make_r2_client(release_endpoint())) as storage:
         manifest = read_manifest(storage, release)
     result = []
     for stream in ("rows", "runs"):

@@ -55,7 +55,7 @@ class ExecutorResumeTests(unittest.TestCase):
         self.execute(first)
         first.close()
         self.source.write_bytes(b"changed input")
-        with self.assertRaisesRegex(ValueError, "selected source file differs"):
+        with self.assertRaisesRegex(ValueError, "checkpoint/input hash mismatch"):
             self.runner(resume=True)
 
     def test_lost_timing_prefix_is_rejected_before_checkpoint_reuse(self):

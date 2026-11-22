@@ -20,37 +20,67 @@ from contextvars import copy_context
 from pathlib import Path
 from typing import Any
 
-import boto3
-from botocore.client import BaseClient
-
 import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.execution import control
 from worldatlas.map_build.execution.runtime import elapsed_union
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
-from worldatlas.shared.files import read_json, sha256_file, sync_directory, write_json
+from worldatlas.shared.files import (
+    json_bytes,
+    read_json,
+    sha256_file,
+    sync_directory,
+    verify_pins,
+    write_bytes_atomic,
+    write_json,
+)
+from worldatlas.source_assets import r2
 from worldatlas.source_assets.catalog import stream_source
 
 HERE = Path(__file__).resolve().parent
 
 
-def read_pin(spec: dict[str, str]) -> tuple[Path, bytes, dict[str, Any]]:
-    """Verify and read a pinned JSON file.
+def plan_land_inputs(
+    settings: dict[str, Any], cache: r2.R2InputCache
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Prepare local coastline paths without acquiring any R2 files.
 
     Args:
-        spec: Record containing "path" and expected "sha256".
+        settings: Land rasterization settings with local and R2 file pins.
+        cache: Shared cache used to derive each R2 destination.
 
     Returns:
-        (resolved_path, original_bytes, decoded_settings).
-
-    Raises:
-        ValueError: The file differs from the expected hash or is invalid JSON.
+        Land settings with local file paths, and the R2 requests needed to
+        populate the cache before rasterization.
     """
-    path = Path(spec['path']).resolve()
-    data = path.read_bytes()
-    if hashlib.sha256(data).hexdigest() != spec['sha256']:
-        raise ValueError(f'input hash mismatch: {path}')
-    return path, data, json.loads(data)
+    requests = []
+
+    def local_file(spec: dict[str, Any]) -> dict[str, Any]:
+        """Turn a pinned file specification into a pin with a local path.
+
+        Args:
+            spec: Local file pin, R2 object, or ZIP member.
+
+        Returns:
+            File pin for the land rasterizer. R2 files are queued for acquisition.
+        """
+        if "r2_bucket" not in spec and "archive" not in spec:
+            return spec
+        requests.append(spec)
+        return {
+            "path": str(cache.path(spec)),
+            "sha256": spec["sha256"],
+            "size_bytes": spec["size_bytes"],
+        }
+
+    layers = []
+    for layer in settings["land"]:
+        dataset = layer["dataset"]
+        if isinstance(dataset, dict):
+            dataset = local_file(dataset)["path"]
+        files = [local_file(spec) for spec in layer["files"]]
+        layers.append(dict(layer, dataset=dataset, files=files))
+    return dict(settings, land=layers), requests
 
 
 def run_stage(function: Callable[..., Any], *args: Any) -> Any:
@@ -64,37 +94,6 @@ def run_stage(function: Callable[..., Any], *args: Any) -> Any:
         The stage's result, typically a report dictionary.
     """
     return function(*args, emit=control.emit)
-
-
-def validate_r2_endpoint(endpoint: object) -> None:
-    """Require an HTTPS account endpoint for an R2 download.
-
-    Args:
-        endpoint: Candidate account URL.
-
-    Raises:
-        ValueError: The URL is absent or is not a valid R2 account endpoint.
-    """
-    if not isinstance(endpoint, str) or not re.fullmatch(
-        r'https://[0-9a-f]{32}(?:\.(?:eu|us|fedramp))?\.r2\.cloudflarestorage\.com',
-        endpoint,
-    ):
-        raise ValueError(
-            'R2 endpoint must be an HTTPS Cloudflare R2 S3 account endpoint'
-        )
-
-
-def make_r2_client(endpoint: str | None) -> BaseClient:
-    """Create an S3-compatible client for the R2 account.
-
-    Args:
-        endpoint: HTTPS account URL.
-
-    Returns:
-        Open client using the caller's configured credentials.
-    """
-    validate_r2_endpoint(endpoint)
-    return boto3.client('s3', endpoint_url=endpoint, region_name='auto')
 
 
 def validate_shard_staging(
@@ -128,7 +127,7 @@ def validate_shard_staging(
             or staging['mode'] != 'r2-s3'
         ):
             raise ValueError('R2 staging requires r2-s3 mode and endpoint_url')
-        validate_r2_endpoint(staging['endpoint_url'])
+        r2.validate_r2_endpoint(staging['endpoint_url'])
     return workers, staging
 
 
@@ -167,7 +166,10 @@ def download_r2(endpoint: str, entry: dict[str, Any], destination: Path) -> None
         InterruptedError: The stage was cancelled.
     """
     control.check_cancelled()
-    with closing(make_r2_client(endpoint)) as client, destination.open('xb') as stream:
+    with (
+        closing(r2.make_r2_client(endpoint)) as client,
+        destination.open('xb') as stream,
+    ):
         try:
             stream_source(
                 client,
@@ -263,17 +265,19 @@ class ProcessingJournal:
             }
         )
 
-    def download_done(self, started: float) -> None:
-        """Record when a shard download began and ended.
+    def download_done(self, started: float, ended: float, source: str) -> None:
+        """Record the time spent transferring one coastline ZIP or water shard.
 
         Args:
             started: Clock reading before the transfer.
+            ended: Clock reading after the transfer.
+            source: Input type, either "land" or "water".
         """
-        ended = time.perf_counter()
         self.add(
             {
                 'event': 'download_complete',
                 'attempt': self.attempt,
+                'source': source,
                 'start_monotonic_seconds': started,
                 'end_monotonic_seconds': ended,
                 'seconds': ended - started,
@@ -411,7 +415,7 @@ def run(
     """Build or resume the physical grid under an exclusive run lock.
 
     Args:
-        manifest_path: JSON configuration with pins for land and water sources.
+        manifest_path: JSON request with inline land and water settings and pins.
         output: Directory that holds this physical run.
         resume: Whether to continue a run already started.
 
@@ -464,7 +468,7 @@ def _run(
     manifest_path = Path(manifest_path).resolve()
     data = manifest_path.read_bytes()
     cfg = json.loads(data)
-    if cfg.get('schema') != 'raw-physical-pipeline-v1' or not cfg.get(
+    if cfg.get('schema') != 'raw-physical-pipeline-v2' or not cfg.get(
         'selection_notes'
     ):
         raise ValueError('explicit pipeline schema and selection notes required')
@@ -474,15 +478,21 @@ def _run(
     workers, staging = validate_shard_staging(cfg)
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
-    land_path, land_bytes, land_cfg = read_pin(cfg['land_config'])
-    water_path, water_bytes, water_cfg = read_pin(cfg['water_config'])
+    source_directory = Path(cfg['source_directory']).resolve()
+    cache = r2.R2InputCache(
+        source_directory,
+        output,
+        staging['endpoint_url'] if staging else None,
+    )
+    land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
+    water_cfg = cfg['water_config']
     if water_cfg.get('rasterizer', 'gdal') not in ('gdal', 'python'):
         raise ValueError(
             'water rasterizer must be gdal or python; runtime native compilation is retired'
         )
     if 'native_method' in water_cfg:
         raise ValueError('retired native_method; use batch_method')
-    source_path, source_bytes, source = read_pin(cfg['source_manifest'])
+    source = cfg['source_manifest']
     grid = land_cfg['grid']
     if grid != water_cfg['grid']:
         raise ValueError('land and water grids differ')
@@ -508,10 +518,12 @@ def _run(
     for entry in files:
         rel = Path(entry['path'])
         if rel.is_absolute() or '..' in rel.parts:
-            raise ValueError('raw source paths must be relative to manifest directory')
-        path = (source_path.parent / rel).resolve()
-        if not path.is_relative_to(source_path.parent):
-            raise ValueError('raw source escapes manifest directory')
+            raise ValueError(
+                'raw source paths must be relative to the source directory'
+            )
+        path = (source_directory / rel).resolve()
+        if not path.is_relative_to(source_directory):
+            raise ValueError('raw source escapes the source directory')
         digest = entry['sha256']
         if (
             not isinstance(digest, str)
@@ -537,8 +549,9 @@ def _run(
         )
     }
     scripts['geodesy/ogr.py'] = sha256_file(geometry_io.__file__)
+    scripts['source_assets/r2.py'] = sha256_file(r2.__file__)
     output = Path(output).resolve()
-    inputs = [land_path, water_path, source_path] + [x[0] for x in raw]
+    inputs = [path for path, _, _ in raw]
     inputs += [
         Path(item['path']).resolve()
         for spec in land_cfg['land']
@@ -568,14 +581,26 @@ def _run(
     if shutil.disk_usage(output.parent).free < reserve:
         raise ValueError('free disk below pipeline reserve')
     source_pins = [item for spec in land_cfg['land'] for item in spec['files']]
-    if any(sha256_file(p['path']) != p['sha256'] for p in source_pins):
+    if not land_downloads and any(
+        sha256_file(p['path']) != p['sha256'] for p in source_pins
+    ):
         raise ValueError('land source hash mismatch')
+    config_dir = output / 'configs'
+    stage_documents = {
+        'land_config': (config_dir / 'land.json', json_bytes(land_cfg)),
+        'water_config': (config_dir / 'water.json', json_bytes(water_cfg)),
+        'source_manifest': (config_dir / 'water-sources.json', json_bytes(source)),
+    }
+    stage_pins = {
+        key: {'path': str(path), 'sha256': hashlib.sha256(content).hexdigest()}
+        for key, (path, content) in stage_documents.items()
+    }
+    land_path = stage_documents['land_config'][0]
+    water_path = stage_documents['water_config'][0]
     identity = {
         'schema': 'raw-physical-resume-identity-v1',
         'configuration_sha256': hashlib.sha256(data).hexdigest(),
-        'land_config': cfg['land_config'],
-        'water_config': cfg['water_config'],
-        'source_manifest': cfg['source_manifest'],
+        **stage_pins,
         'script_sha256': scripts,
         'land_source_pins': source_pins,
     }
@@ -588,6 +613,7 @@ def _run(
         if not output.is_dir() or data_identity(previous) != data_identity(identity):
             raise ValueError('physical resume identity mismatch')
         if (output / 'report.json').exists():
+            verify_pins(stage_pins.values())
             report = read_json(output / 'report.json')
             stages = report.get('stage_reports', {})
             if (
@@ -631,7 +657,8 @@ def _run(
                 if (
                     item.get('source_sha256') != digest
                     or Path(item.get('source', '')).name != source.name
-                    or item.get('configuration_sha256') != cfg['water_config']['sha256']
+                    or item.get('configuration_sha256')
+                    != stage_pins['water_config']['sha256']
                     or item.get('grid') != grid
                     or item.get('policy') != water_cfg.get('policy')
                     or item.get('batch_size') != batch_size
@@ -672,6 +699,13 @@ def _run(
             }
         )
 
+    for path, content in stage_documents.values():
+        if path.exists():
+            if path.read_bytes() != content:
+                raise ValueError('resumed stage config mismatch')
+        else:
+            write_bytes_atomic(path, content)
+
     def prior(name: str) -> dict[str, Any] | None:
         """Find the last completed checkpoint for a named task.
 
@@ -710,7 +744,8 @@ def _run(
             sha256_file(land_dir / 'report.json') != land_checkpoint['report_sha256']
             or sha256_file(land_dir / 'land.tif') != land_checkpoint['output_sha256']
             or land_report.get('status') != 'candidate-only'
-            or land_report.get('configuration_sha256') != cfg['land_config']['sha256']
+            or land_report.get('configuration_sha256')
+            != stage_pins['land_config']['sha256']
             or land_report.get('grid') != grid
             or land_report.get('land_sha256') != land_checkpoint['output_sha256']
         ):
@@ -718,6 +753,13 @@ def _run(
     else:
         if resume:
             quarantine(land_dir)
+        try:
+            for spec in land_downloads:
+                control.check_cancelled()
+                cache.acquire_r2_input(spec)
+        finally:
+            for start, end in cache.download_intervals:
+                journal.download_done(start, end, 'land')
         unit_start = time.perf_counter()
         run_stage(land.run, land_path, land_dir)
         land_report = read_json(land_dir / 'report.json')
@@ -747,7 +789,7 @@ def _run(
         i, (path, digest, entry) = item
         destination = output / 'shards' / f'{i:05d}'
         # Keep the manifest's directory structure so equal basenames can run together.
-        staged = output / 'source-staging' / path.relative_to(source_path.parent)
+        staged = output / 'source-staging' / path.relative_to(source_directory)
         checkpoint = prior(f'shard-{i:05d}') if resume else None
         if checkpoint:
             report_path = destination / 'report.json'
@@ -758,7 +800,8 @@ def _run(
                 or report.get('status') != 'candidate-only'
                 or report.get('source_sha256') != digest
                 or Path(report.get('source', '')).name != path.name
-                or report.get('configuration_sha256') != cfg['water_config']['sha256']
+                or report.get('configuration_sha256')
+                != stage_pins['water_config']['sha256']
                 or report.get('grid') != grid
                 or report.get('policy') != water_cfg.get('policy')
                 or report.get('batch_size') != batch_size
@@ -797,7 +840,7 @@ def _run(
                     try:
                         download_r2(staging['endpoint_url'], entry, staged)
                     finally:
-                        journal.download_done(started)
+                        journal.download_done(started, time.perf_counter(), 'water')
             if (
                 not staged.is_file()
                 or staged.stat().st_size != entry['size_bytes']
@@ -815,7 +858,8 @@ def _run(
         if (
             report.get('status') != 'candidate-only'
             or report.get('source_sha256') != digest
-            or report.get('configuration_sha256') != cfg['water_config']['sha256']
+            or report.get('configuration_sha256')
+            != stage_pins['water_config']['sha256']
             or report.get('output_sha256') != sha256_file(destination / 'water.tif')
         ):
             raise ValueError(f'incomplete water shard: {path}')
@@ -856,7 +900,7 @@ def _run(
         'grid': grid,
         'selection_notes': cfg['selection_notes'],
         'minimum_free_bytes': reserve,
-        'source_manifest': cfg['source_manifest'],
+        'source_manifest': stage_pins['source_manifest'],
         'shard_count': len(shards),
         'rows_per_block': union_rows_per_block,
         'shards': shards,
@@ -969,23 +1013,18 @@ def _run(
             physical_dir / 'report.json',
             physical_dir / 'rows.u32le',
         )
-    for p, original in (
-        (manifest_path, data),
-        (land_path, land_bytes),
-        (water_path, water_bytes),
-        (source_path, source_bytes),
-    ):
+    for p, original in ((manifest_path, data), *stage_documents.values()):
         if p.read_bytes() != original:
             raise ValueError(f'pipeline input changed during processing: {p}')
-    if any(sha256_file(p['path']) != p['sha256'] for p in source_pins):
+    if (not land_downloads or land_checkpoint is None) and any(
+        sha256_file(p['path']) != p['sha256'] for p in source_pins
+    ):
         raise ValueError('land source changed during processing')
     report = {
         'status': 'candidate-only',
         'configuration_sha256': hashlib.sha256(data).hexdigest(),
         'grid': grid,
-        'source_manifest': cfg['source_manifest'],
-        'land_config': cfg['land_config'],
-        'water_config': cfg['water_config'],
+        **stage_pins,
         'water_batch_size': batch_size,
         'union_rows_per_block': union_rows_per_block,
         'physical_rows_per_block': physical_rows_per_block,
@@ -1003,7 +1042,9 @@ def _run(
         'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
     }
     report['staged_shard_count'] = sum(
-        event['event'] == 'download_complete' and event['attempt'] == journal.attempt
+        event['event'] == 'download_complete'
+        and event['attempt'] == journal.attempt
+        and event['source'] == 'water'
         for event in journal.events
     )
     report['staged_shard_count_scope'] = 'current invocation'

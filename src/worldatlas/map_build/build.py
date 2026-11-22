@@ -16,9 +16,7 @@ import sys
 import threading
 import time
 import uuid
-import zipfile
 from collections.abc import Iterator
-from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 from types import FrameType
@@ -63,7 +61,7 @@ from worldatlas.shared.files import (
     verify_pins,
     write_json,
 )
-from worldatlas.source_assets.catalog import check_source, download_source
+from worldatlas.source_assets.r2 import R2InputCache
 
 HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
@@ -147,12 +145,14 @@ def catalog_keys(value: object) -> set[tuple[str, str | None]]:
     return requested
 
 
-def physical_reference(run: Path | str, sources: dict[str, Path]) -> dict[str, Any]:
+def physical_reference(
+    run: Path | str, configuration: dict[str, Any]
+) -> dict[str, Any]:
     """Find reusable physical outputs for the same grid and raw inputs.
 
     Args:
         run: Earlier completed run directory.
-        sources: Paths to the current land, water and raw source settings.
+        configuration: Current physical build request with pinned sources.
 
     Returns:
         Dictionary with the original run path and SHA-256 pins for its
@@ -175,13 +175,19 @@ def physical_reference(run: Path | str, sources: dict[str, Path]) -> dict[str, A
         raise ValueError("physical source run is incomplete")
     output = root / "physical"
     produced = read_json(output / "report.json")
-    if Grid(**produced["grid"]) != Grid(**read_json(sources["land_config"])["grid"]):
+    if Grid(**produced["grid"]) != Grid(**configuration["land_config"]["grid"]):
         raise ValueError("physical reuse requires the same grid as the source run")
-    for key, selected in [
-        ("land_config", "land_config"),
-        ("water_config", "water_config"),
-        ("source_manifest", "raw_manifest"),
-    ]:
+    cache = R2InputCache(
+        Path(configuration["source_directory"]),
+        root,
+        None,
+    )
+    land, _ = physical_build.plan_land_inputs(configuration["land_config"], cache)
+    for key, selected in (
+        ("land_config", land),
+        ("water_config", configuration["water_config"]),
+        ("source_manifest", configuration["source_manifest"]),
+    ):
         previous = Path(identity[key]["path"])
         if sha256_file(previous) != identity[key]["sha256"]:
             raise ValueError("physical source configuration changed: " + key)
@@ -209,7 +215,7 @@ def physical_reference(run: Path | str, sources: dict[str, Path]) -> dict[str, A
 
         old_request, new_request = (
             data(read_json(previous)),
-            data(read_json(sources[selected])),
+            data(selected),
         )
         if key == "source_manifest":
             # Older manifests called the same byte count "size".
@@ -276,63 +282,6 @@ def _source_settings(config: dict[str, Any]) -> dict[str, Any]:
     return sources
 
 
-def _cloud_file_matches(path: Path, spec: dict[str, Any]) -> bool:
-    """Check that a regular file has the expected bytes.
-
-    Args:
-        path: File to verify.
-        spec: Expected byte size and SHA-256.
-
-    Returns:
-        True if the file matches both values.
-    """
-    if not path.is_file():
-        return False
-    try:
-        check_source(path, spec)
-    except ValueError:
-        return False
-    return True
-
-
-def _extract_cloud_member(
-    archive: Path, member: str, path: Path, spec: dict[str, Any]
-) -> None:
-    """Extract and verify one ZIP member before publishing it to the shared cache.
-
-    Args:
-        archive: Local path to the verified ZIP.
-        member: Validated relative member name inside the ZIP.
-        path: Local cache destination.
-        spec: Expected byte size and SHA-256.
-
-    Raises:
-        ValueError: The member is missing, ambiguous, or fails verification.
-    """
-    path.parent.mkdir(parents=True, exist_ok=True)
-    partial = path.with_name(path.name + "." + uuid.uuid4().hex + ".partial")
-    try:
-        with zipfile.ZipFile(archive) as packed:
-            members = [item for item in packed.infolist() if item.filename == member]
-            if (
-                len(members) != 1
-                or members[0].is_dir()
-                or ((members[0].external_attr >> 16) & 0o170000) == 0o120000
-            ):
-                raise ValueError("ZIP member must be one regular file")
-            with packed.open(members[0]) as src, partial.open("xb") as dst:
-                shutil.copyfileobj(src, dst, 1 << 20)
-        if not _cloud_file_matches(partial, spec):
-            raise ValueError("cloud input size/SHA-256 mismatch: " + str(path))
-        try:
-            os.link(partial, path)
-        except FileExistsError:
-            if not _cloud_file_matches(path, spec):
-                raise ValueError("concurrent cloud input changed") from None
-    finally:
-        partial.unlink(missing_ok=True)
-
-
 class Pipeline:
     """Build a map from pinned raw files and saved geographic rules.
 
@@ -389,19 +338,23 @@ class Pipeline:
         )
         self.runtime = runtime_identity()
 
-        # Save input paths and hashes so the builder can detect changes.
-        self.source_pins = []
-        # Reuse verified cloud files within this run without hashing them again.
-        self.input_cache = {}
-        # Track download start and end times separately from the rest of setup.
-        self.acquisition_intervals = []
         self.selection = self._load_selection(sources, selection)
         self.compiled_divisions = prepare_geography(self.selection["geography"])
-        self._prepare_source_files(sources)
-        comparison_inputs = self._prepare_comparison(compare_release, saved_identity)
-        self.collect_source_files()
+        sources = self.resolve_raw_catalog(sources)
+        self.physical_config = self._physical_configuration(sources)
+        staging = self.physical_config.get("source_staging", {})
+        self.r2_inputs = R2InputCache(
+            self.root / "inputs",
+            self.out,
+            staging.get("endpoint_url"),
+        )
+        self.source_pins = self.r2_inputs.pins
+        self.comparison_files: dict[str, Path] = {}
+        comparison_inputs = self._prepare_comparison(
+            sources, compare_release, saved_identity
+        )
         self.physical_reuse = (
-            physical_reference(self.reuse_from, self.sources)
+            physical_reference(self.reuse_from, self.physical_config)
             if self.reuse_from is not None
             else None
         )
@@ -537,36 +490,37 @@ class Pipeline:
                 database, raw_sources=references, parents=self.requested_parents
             )
 
-    def _prepare_source_files(self, sources: dict[str, Any]) -> None:
-        """Resolve the physical inputs and any local reference files.
+    def _physical_configuration(self, sources: dict[str, Any]) -> dict[str, Any]:
+        """Put the coastline, water settings, and water file list in one request.
 
         Args:
-            sources: Validated source settings from the build configuration.
+            sources: Source settings with catalog entries expanded to file pins.
+
+        Returns:
+            Physical runner settings with all three input groups inline.
         """
-        resolved = self.resolve_raw_catalog(sources)
-        coastline = resolved.pop("land_config")
-        water = resolved.pop("inland_water")
+        water = sources["inland_water"].copy()
         rasterization = water.pop("rasterization")
-        for settings in (coastline, rasterization):
-            settings["grid"] = vars(self.grid)
-        # Each shard receives its own file and the shared rasterization settings.
-        self.sources = {
-            "land_config": self.save_source_document(self.coastline_request(coastline)),
-            "water_config": self.save_source_document(rasterization),
-            "raw_manifest": self.save_source_document(water),
+        return {
+            **self.cfg.get("physical_controls", {}),
+            "schema": "raw-physical-pipeline-v2",
+            "selection_notes": self.cfg.get("selection_notes"),
+            "source_directory": str(self.root / "inputs"),
+            "land_config": dict(sources["land_config"], grid=vars(self.grid)),
+            "water_config": dict(rasterization, grid=vars(self.grid)),
+            "source_manifest": water,
         }
-        for name, spec in resolved.items():
-            if isinstance(spec, dict) and ("r2_bucket" in spec or "archive" in spec):
-                self.sources[name] = self.acquire_r2_input(spec)
-            else:
-                self.sources[name] = cast(Path, self.resolve_pins(spec))
 
     def _prepare_comparison(
-        self, compare_release: str | None, saved_identity: dict[str, Any] | None
+        self,
+        sources: dict[str, Any],
+        compare_release: str | None,
+        saved_identity: dict[str, Any] | None,
     ) -> dict[str, Any] | None:
         """Prepare the pinned files for a comparison with a release.
 
         Args:
+            sources: Source settings that may specify comparison stream pins.
             compare_release: Release name, if the caller requested one.
             saved_identity: Saved run identity on resume.
 
@@ -576,30 +530,39 @@ class Pipeline:
         Raises:
             ValueError: Comparison inputs are incomplete or use conflicting options.
         """
+        references = {"reference_rows", "reference_runs"} & sources.keys()
+        if compare_release is not None and references:
+            raise ValueError(
+                "choose a published comparison release or local reference streams"
+            )
+        for name in sorted(references):
+            spec = sources[name]
+            if isinstance(spec, dict) and ("r2_bucket" in spec or "archive" in spec):
+                self.comparison_files[name] = self.r2_inputs.acquire_r2_input(spec)
+            else:
+                self.comparison_files[name] = cast(Path, self.resolve_pins(spec))
         comparison_inputs = None
         if compare_release is not None:
-            if {"reference_rows", "reference_runs"} & self.sources.keys():
-                raise ValueError(
-                    "choose a published comparison release or local reference streams"
-                )
             if saved_identity is not None:
                 comparison_inputs = saved_identity.get("comparison_inputs")
                 if comparison_inputs is None:
                     raise ValueError("resume is missing saved comparison files")
-                self.sources.update(
+                self.comparison_files.update(
                     cast(dict[str, Path], self.resolve_pins(comparison_inputs))
                 )
             else:
                 start = len(self.source_pins)
                 files = self.release_reference(compare_release)
-                self.sources.update(files)
+                self.comparison_files.update(files)
                 # Once decoded, the streams and mapping suffice for comparison.
                 by_path = {p["path"]: p for p in self.source_pins}
                 comparison_inputs = {
                     name: by_path[str(files[name])] for name in sorted(files)
                 }
                 self.source_pins[start:] = list(comparison_inputs.values())
-        if ("reference_rows" in self.sources) != ("reference_runs" in self.sources):
+        if ("reference_rows" in self.comparison_files) != (
+            "reference_runs" in self.comparison_files
+        ):
             raise ValueError("both reference stream pins are required")
         return comparison_inputs
 
@@ -716,7 +679,10 @@ class Pipeline:
             raise ValueError("saved build configuration changed")
         self.checkpoints.preserve("failure", [self.out / "failure.json"])
         cursor = setup_started
-        for start, end in [*self.acquisition_intervals, (time.monotonic(), None)]:
+        for start, end in [
+            *self.r2_inputs.download_intervals,
+            (time.monotonic(), None),
+        ]:
             token = uuid.uuid4().hex
             self.timing.event(
                 {
@@ -802,173 +768,6 @@ class Pipeline:
             )
         return resolved
 
-    def acquire_r2_input(
-        self, spec: dict[str, Any], *, endpoint: str | None = None
-    ) -> Path:
-        """Get a verified local copy of an R2 object or ZIP member.
-
-        Args:
-            spec: Object location or archive and member, plus byte size and SHA-256.
-            endpoint: R2 account URL. Defaults to the physical-source endpoint.
-
-        Returns:
-            Local path to the verified bytes in the work directory.
-
-        Raises:
-            ValueError: The reference is invalid or the bytes fail verification.
-        """
-        expected = spec.get("sha256")
-        size = spec.get("size_bytes")
-        if (
-            not isinstance(expected, str)
-            or len(expected) != 64
-            or any(c not in "0123456789abcdef" for c in expected)
-            or type(size) is not int
-            or size < 0
-        ):
-            raise ValueError("cloud inputs require explicit SHA-256 and byte size")
-        archive_member: tuple[Path, str] | None = None
-        if "archive" in spec:
-            archive = self.acquire_r2_input(spec["archive"], endpoint=endpoint)
-            member = spec["member"]
-            if not isinstance(member, str):
-                raise ValueError("unsafe ZIP member")
-            rel = Path(member)
-            if (
-                not member
-                or rel.is_absolute()
-                or "\\" in member
-                or any(part in ("", ".", "..") for part in member.split("/"))
-            ):
-                raise ValueError("unsafe ZIP member")
-            path = self.root / "inputs" / spec["archive"]["sha256"] / rel
-            identity = ("member", str(archive), member, expected, size)
-            archive_member = archive, member
-        else:
-            bucket, key = spec.get("r2_bucket"), spec.get("r2_key")
-            if (
-                not isinstance(bucket, str)
-                or not bucket
-                or not isinstance(key, str)
-                or not key
-                or "\\" in key
-                or any(p in ("", ".", "..") for p in key.split("/"))
-            ):
-                raise ValueError("invalid pinned R2 location")
-            path = self.root / "inputs" / expected / Path(key).name
-            identity = ("r2", bucket, key, expected, size)
-        if identity in self.input_cache:
-            return self.input_cache[identity]
-        path = path.resolve()
-        if not path.is_relative_to(self.root) or path.is_relative_to(self.out):
-            raise ValueError("cloud input overlaps output or escapes work directory")
-        if path.exists():
-            if not _cloud_file_matches(path, spec):
-                raise ValueError(
-                    "cached cloud input size/SHA-256 mismatch: " + str(path)
-                )
-        elif archive_member is not None:
-            archive, member = archive_member
-            _extract_cloud_member(archive, member, path, spec)
-        else:
-            self._download_r2_object(spec, path, endpoint)
-            path = path.resolve(strict=True)
-
-        result = {"path": str(path), "sha256": expected}
-        if result not in self.source_pins:
-            self.source_pins.append(result)
-        self.input_cache[identity] = path
-        return path
-
-    def _download_r2_object(
-        self, spec: dict[str, Any], path: Path, endpoint: str | None
-    ) -> None:
-        """Download a verified R2 object and record its transfer time.
-
-        Args:
-            spec: Object location, SHA-256, and byte size.
-            path: Local cache destination.
-            endpoint: R2 account URL, or None to use the physical-source setting.
-
-        Raises:
-            ValueError: The download failed verification.
-        """
-        if endpoint is None:
-            staging = self.cfg.get("physical_controls", {}).get("source_staging", {})
-            endpoint = staging.get("endpoint_url")
-        transfer = {}
-        try:
-            with closing(physical_build.make_r2_client(endpoint)) as client:
-                download_source(
-                    client,
-                    spec,
-                    self.root / "inputs",
-                    filename=path.name,
-                    timing=transfer,
-                )
-        except ValueError as exc:
-            raise ValueError("cloud input size/SHA-256 mismatch: " + str(path)) from exc
-        finally:
-            self.acquisition_intervals.extend(transfer.get("download_intervals", []))
-
-    def coastline_request(self, settings: dict[str, Any]) -> dict[str, Any]:
-        """Prepare coastline rasterization settings using cached local files.
-
-        Args:
-            settings: Coastline settings with selected datasets and their file pins.
-
-        Returns:
-            Copy of the settings with cloud references replaced by local paths
-            and file pins.
-        """
-        layers = []
-        for layer in settings["land"]:
-            dataset = layer["dataset"]
-            if isinstance(dataset, dict):
-                dataset = str(self.acquire_r2_input(dataset))
-            files = [
-                dict(
-                    pin_file(self.acquire_r2_input(spec)), size_bytes=spec["size_bytes"]
-                )
-                if "r2_bucket" in spec or "archive" in spec
-                else spec
-                for spec in layer["files"]
-            ]
-            layers.append(dict(layer, dataset=dataset, files=files))
-        return dict(settings, land=layers)
-
-    def save_source_document(self, document: dict[str, Any]) -> Path:
-        """Cache a generated input document and record its SHA-256.
-
-        Args:
-            document: Build input to write as JSON.
-
-        Returns:
-            Local path whose filename includes the digest of the JSON bytes.
-
-        Raises:
-            ValueError: The path overlaps the run or the cached bytes differ.
-        """
-        data = json_bytes(document)
-        path = (
-            self.root / "inputs" / (hashlib.sha256(data).hexdigest() + ".json")
-        ).resolve()
-        if not path.is_relative_to(self.root) or path.is_relative_to(self.out):
-            raise ValueError("generated input overlaps output")
-        path.parent.mkdir(parents=True, exist_ok=True)
-        if not path.exists():
-            try:
-                write_json(path, document)
-            except FileExistsError:
-                # Another build may have published this same cache entry.
-                pass
-        if path.read_bytes() != data:
-            raise ValueError("generated input changed")
-        result = pin_file(path)
-        if result not in self.source_pins:
-            self.source_pins.append(result)
-        return path
-
     def release_reference(self, version: str) -> dict[str, Path]:
         """Cache and verify a published map's comparison files.
 
@@ -993,7 +792,7 @@ class Pipeline:
         reference = {}
         for stream, bucket, key, size, stored_hash, decoded_hash in streams:
             path = directory / (stream + ".u32le")
-            compressed = self.acquire_r2_input(
+            compressed = self.r2_inputs.acquire_r2_input(
                 {
                     "r2_bucket": bucket,
                     "r2_key": key,
@@ -1021,7 +820,7 @@ class Pipeline:
                 Path, self.resolve_pins({"path": str(path), "sha256": decoded_hash})
             )
         if config is not None:
-            reference["reference_config"] = self.acquire_r2_input(
+            reference["reference_config"] = self.r2_inputs.acquire_r2_input(
                 config, endpoint=endpoint
             )
         return reference
@@ -1057,24 +856,6 @@ class Pipeline:
         if isinstance(value, dict):
             return {key: self.resolve_pins(item) for key, item in value.items()}
         raise ValueError("all source selections must be explicit path/SHA-256 pins")
-
-    def collect_source_files(self) -> None:
-        """Verify local coastline files and record their pins for this run.
-
-        Raises:
-            ValueError: A file is outside the work directory or has changed.
-        """
-        for layer in read_json(self.sources["land_config"]).get("land", []):
-            for spec in layer["files"]:
-                expected = pin_file(spec["path"])
-                if expected["sha256"] != spec["sha256"] or not Path(
-                    expected["path"]
-                ).is_relative_to(self.root):
-                    raise ValueError(
-                        "selected source file differs or is outside the work directory"
-                    )
-                if expected not in self.source_pins:
-                    self.source_pins.append(expected)
 
     def physical_attempts(self) -> list[dict[str, Any]]:
         """Read complete events from the physical build's timing log.
@@ -1187,28 +968,15 @@ class Pipeline:
         Returns:
             Directory containing the physical raster, row-run files and report.
         """
+        request = self.out / "physical-build-config.json"
+        if request.exists():
+            if request.read_bytes() != json_bytes(self.physical_config):
+                raise ValueError("saved physical build configuration changed")
+        else:
+            write_json(request, self.physical_config)
         if self.physical_reuse is not None:
             verify_pins(self.physical_reuse["pins"])
             return Path(self.physical_reuse["source_run"]) / "physical" / "physical"
-        cfg = {
-            "schema": "raw-physical-pipeline-v1",
-            "selection_notes": self.cfg["selection_notes"],
-            **self.cfg.get("physical_controls", {}),
-            **{
-                key: pin_file(self.sources[source])
-                for key, source in [
-                    ("land_config", "land_config"),
-                    ("water_config", "water_config"),
-                    ("source_manifest", "raw_manifest"),
-                ]
-            },
-        }
-        request = self.out / "physical-build-config.json"
-        if request.exists():
-            if request.read_bytes() != json_bytes(cfg):
-                raise ValueError("saved physical build configuration changed")
-        else:
-            write_json(request, cfg)
         marker = self.out / "physical/pipeline-identity.json"
         previous = self.physical_attempts()
         measurement = None
@@ -1314,10 +1082,10 @@ class Pipeline:
         Raises:
             ValueError: The paired reference streams do not use the expected paths.
         """
-        rows = self.sources.get("reference_rows")
+        rows = self.comparison_files.get("reference_rows")
         if rows is None:
             return None
-        runs = self.sources["reference_runs"]
+        runs = self.comparison_files["reference_runs"]
         if (
             rows.name != "rows.u32le"
             or runs.name != "runs.u32le"
@@ -1333,7 +1101,7 @@ class Pipeline:
             for name in ("rows.u32le", "runs.u32le")
         ]
         bindings = {}
-        if config := self.sources.get("reference_config"):
+        if config := self.comparison_files.get("reference_config"):
             inputs += [pin_file(config), pin_file(self.out / "input-selection.json")]
             bindings = dict(
                 reference_bindings=[

@@ -4,7 +4,7 @@ Rasterize the selected global coastline polygons and inland-water shards on the 
 
 ## Use
 
-The map builder calls these Python functions directly. For a focused physical build, pass the generated `RUN/physical-build-config.json` with its input files available at their recorded paths.
+The map builder calls these Python functions directly. For a focused physical build, pass the generated `RUN/physical-build-config.json`. It contains the coastline settings, inland-water settings, and water file list. Use the recorded source directory for any local files and supply R2 credentials for uncached remote files.
 
 ```bash
 python3 -m worldatlas.map_build.physical.build \
@@ -17,7 +17,7 @@ Use `--resume` after interruption. Completed land, water shards, union and compo
 
 The final `physical/` directory contains `physical-dry.tif`, `rows.u32le`, `runs.u32le` and `report.json`. Physical streams use code 17 for land and code 1 for water. Entity assignments are calculated later using registry bindings.
 
-R2 uses the normal boto3 credential chain, with credentials outside the code. The builder can download the next water file while it rasterizes the current file. It removes each temporary copy after recording the completed output. The timing report counts time spent rasterizing as processing, even during a download. Missing inputs, invalid source classification and inconsistent output coverage stop the build.
+R2 uses the normal boto3 credential chain, with credentials outside the code. The physical stage caches the coastline ZIP and extracts its required files before drawing land. It can download the next water file while rasterizing the current file and removes each temporary water copy after recording its output. The timing report includes both kinds of downloads and counts overlapping rasterization as processing. A build that reuses a completed physical grid skips both downloads.
 
 ## Code and tests
 

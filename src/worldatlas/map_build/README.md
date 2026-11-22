@@ -106,7 +106,7 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `build-config.json` | Preserves the settings passed to the builder for inspection after the original configuration changes. |
 | `input-selection.json` | Preserves the rules, geometry and catalog entries for resume and replay without rereading working records in Neon. |
 | `run-identity.json` | Records the options and input checksums required to resume the same run. |
-| `physical-build-config.json` | Lets the physical stage run on its own using the resolved source and rasterization settings. Created when calculating a physical grid. |
+| `physical-build-config.json` | Holds the coastline settings, inland-water settings, and water file list with their checksums. The physical runner can use this request on its own. |
 | `physical/` | Keeps the coastline mask, inland-water masks and combined physical grid so rasterization can resume and later builds can reuse the grid. |
 | `division/parent-{ID}/` | Keeps calculations together for each parent. For example, World uses `division/parent-0/`. |
 | `division/parent-{ID}/result.json` | Records where the parent’s ownership grid lives so the builder can resume after a completed division. A reused result can point to an earlier run. |
