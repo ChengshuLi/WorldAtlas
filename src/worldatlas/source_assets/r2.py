@@ -1,7 +1,6 @@
 """Acquire pinned R2 input files into the shared build cache."""
 
 import os
-import re
 import shutil
 import uuid
 import zipfile
@@ -9,41 +8,8 @@ from contextlib import closing
 from pathlib import Path
 from typing import Any
 
-import boto3
-from botocore.client import BaseClient
-
+from worldatlas.shared import r2
 from worldatlas.source_assets.catalog import check_source, download_source
-
-
-def validate_r2_endpoint(endpoint: object) -> None:
-    """Require an HTTPS account endpoint for an R2 download.
-
-    Args:
-        endpoint: Candidate account URL.
-
-    Raises:
-        ValueError: The URL is absent or is not a valid R2 account endpoint.
-    """
-    if not isinstance(endpoint, str) or not re.fullmatch(
-        r'https://[0-9a-f]{32}(?:\.(?:eu|us|fedramp))?\.r2\.cloudflarestorage\.com',
-        endpoint,
-    ):
-        raise ValueError(
-            'R2 endpoint must be an HTTPS Cloudflare R2 S3 account endpoint'
-        )
-
-
-def make_r2_client(endpoint: str | None) -> BaseClient:
-    """Create an S3-compatible client for the R2 account.
-
-    Args:
-        endpoint: HTTPS account URL.
-
-    Returns:
-        Open client using the caller's configured credentials.
-    """
-    validate_r2_endpoint(endpoint)
-    return boto3.client('s3', endpoint_url=endpoint, region_name='auto')
 
 
 def _cloud_file_matches(path: Path, spec: dict[str, Any]) -> bool:
@@ -233,7 +199,7 @@ class R2InputCache:
             endpoint = self.endpoint
         transfer = {}
         try:
-            with closing(make_r2_client(endpoint)) as client:
+            with closing(r2.make_r2_client(endpoint)) as client:
                 download_source(
                     client,
                     spec,

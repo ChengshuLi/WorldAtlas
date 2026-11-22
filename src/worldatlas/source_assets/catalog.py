@@ -5,13 +5,13 @@ import os
 import shutil
 import time
 from collections.abc import Callable, Iterable, Sequence
-from contextlib import closing
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import IO, Any
 
-from botocore.client import BaseClient
 from psycopg import Connection
+
+from worldatlas.shared.r2 import R2Client
 
 
 def catalog_sources(
@@ -74,7 +74,7 @@ def check_source(path: Path, source: dict[str, Any]) -> None:
 
 
 def stream_source(
-    client: BaseClient,
+    client: R2Client,
     source: dict[str, Any],
     output: IO[bytes],
     *,
@@ -86,7 +86,7 @@ def stream_source(
     output and performs SHA-256 verification separately.
 
     Args:
-        client: R2 client with an S3-compatible ``get_object`` method.
+        client: Open R2 client.
         source: Catalog entry with bucket, object key, and expected byte size.
         output: Open binary output that receives the object's bytes.
         check_cancelled: Optional callback before the request and each chunk.
@@ -95,25 +95,24 @@ def stream_source(
         ValueError: The response length differs from the expected size.
     """
     check_cancelled()
-    response = client.get_object(Bucket=source['r2_bucket'], Key=source['r2_key'])
     expected = source['size_bytes']
-    with closing(response['Body']) as body:
-        if response.get('ContentLength', expected) != expected:
+    with client.open(source['r2_bucket'], source['r2_key']) as remote:
+        if remote.size_bytes is not None and remote.size_bytes != expected:
             raise ValueError('source file size or hash differs from the Neon catalog')
         remaining = expected
         while remaining:
             check_cancelled()
-            chunk = body.read(min(4 << 20, remaining))
+            chunk = remote.body.read(min(4 << 20, remaining))
             if not chunk:
                 break
             output.write(chunk)
             remaining -= len(chunk)
-        if remaining or body.read(1):
+        if remaining or remote.body.read(1):
             raise ValueError('source file size or hash differs from the Neon catalog')
 
 
 def download_source(
-    client: BaseClient,
+    client: R2Client,
     source: dict[str, Any],
     work_dir: Path | str,
     *,
@@ -127,7 +126,7 @@ def download_source(
     new download before making the final cache path available.
 
     Args:
-        client: R2 client with an S3-compatible ``get_object`` method.
+        client: Open R2 client.
         source: Catalog entry with R2 location, byte size, and SHA-256.
         work_dir: Local cache root.
         timing: Optional dictionary that accumulates transfer durations and
@@ -186,7 +185,7 @@ def download_source(
 
 
 def assemble_parts(
-    client: BaseClient,
+    client: R2Client,
     parts: Sequence[dict[str, Any]],
     sha256: str,
     size_bytes: int,
@@ -201,7 +200,7 @@ def assemble_parts(
     verified parts in byte order and check the complete file before caching it.
 
     Args:
-        client: R2 client with an S3-compatible ``get_object`` method.
+        client: Open R2 client.
         parts: Catalog entries in the order of their bytes in the full file.
         sha256: Expected SHA-256 of the complete file.
         size_bytes: Expected size of the complete file in bytes.

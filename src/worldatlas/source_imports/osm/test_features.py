@@ -13,6 +13,7 @@ import psycopg
 from psycopg.types.json import Jsonb
 from shapely.geometry import MultiPolygon, Polygon, shape
 
+from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.osm.features import read_features
 from worldatlas.source_imports.run_import import run_import
 
@@ -253,7 +254,7 @@ class OsmFeatureTests(unittest.TestCase):
             )
             result = run_import(
                 lambda: nullcontext(database), recipe_id,
-                storage=storage, work_dir=self.path.parent,
+                storage=R2Client(storage), work_dir=self.path.parent,
             )
             self.assertEqual(result["feature_ids"], [feature_id])
             self.assertEqual(Path(result["source"]).read_bytes(), raw)

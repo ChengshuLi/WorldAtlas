@@ -6,8 +6,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, TypedDict, cast
 from zipfile import ZipFile, ZipInfo, is_zipfile
 
-from botocore.client import BaseClient
-
+from worldatlas.shared.r2 import R2Client
 from worldatlas.source_assets.catalog import (
     assemble_parts,
     catalog_sources,
@@ -124,7 +123,7 @@ def acquire_sources(
 
     started = time.monotonic()
     paths = []
-    storage = cast(BaseClient, runtime.storage)
+    storage = cast(R2Client, runtime.storage)
     work_dir = cast(Path, runtime.work_dir)
     for request in requests:
         if isinstance(request, dict):

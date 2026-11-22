@@ -38,11 +38,11 @@ def stage(
         _current.reset(token)
 
 
-def emit(*values: object, **options: Any) -> None:
+def emit(*values: str, **options: Any) -> None:
     """Print progress, keeping messages from stage workers separate.
 
     Args:
-        values: Values to print together.
+        values: Messages to print together.
         options: Keyword arguments accepted by print.
     """
     active = _current.get()

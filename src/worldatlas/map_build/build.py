@@ -23,7 +23,6 @@ from types import FrameType
 from typing import Any, cast
 
 import numpy
-import psycopg
 import pyarrow
 import pyproj
 import scipy
@@ -60,7 +59,9 @@ from worldatlas.map_build.inputs.selection import (
 )
 from worldatlas.map_build.physical import build as physical_build
 from worldatlas.map_releases.catalog import release_endpoint
+from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
+    JSONValue,
     json_bytes,
     pin_file,
     read_json,
@@ -95,61 +96,88 @@ def runtime_identity() -> dict[str, Any]:
     }
 
 
-def catalog_references(value: object) -> Iterator[dict[str, Any]]:
-    """Find R2 catalog references in a nested configuration.
+def catalog_references(
+    sources: BuildSources,
+) -> Iterator[tuple[dict[str, Any], tuple[str, str | None]]]:
+    """Find file entries that name an R2 source in the Neon catalog.
 
     Args:
-        value: A configuration value, which may contain lists and dictionaries.
+        sources: Coastline files, inland-water files, and optional comparison files.
 
     Yields:
-        Each dictionary containing an "r2_source" selector, in traversal order.
-    """
-    if isinstance(value, list):
-        for item in value:
-            yield from catalog_references(item)
-    elif isinstance(value, dict):
-        if "r2_source" in value:
-            yield value
-        for key, item in value.items():
-            if key != "r2_source":
-                yield from catalog_references(item)
-
-
-def catalog_keys(value: object) -> set[tuple[str, str | None]]:
-    """Collect the distinct raw source IDs requested by a build.
-
-    Args:
-        value: Configuration containing dictionaries with "r2_source" selectors.
-
-    Returns:
-        Set of (source_id, version) pairs. Version is None for selectors
-        without an explicit version.
+        The file entry to update and its (source ID, version) lookup key.
+        For a ZIP member, the source selector belongs to its archive entry.
 
     Raises:
-        ValueError: A reference has invalid keys or mixes catalog selection
-            with direct object metadata.
+        ValueError: A catalog selector is malformed or also gives direct R2 metadata.
     """
-    requested = set()
-    for spec in catalog_references(value):
-        identity = spec["r2_source"]
-        if (
-            not isinstance(identity, dict)
-            or not {"source_id"} <= set(identity) <= {"source_id", "version"}
-            or any(not isinstance(v, str) or not v.strip() for v in identity.values())
-            or {
-                "r2_bucket",
-                "r2_key",
-                "source_id",
-                "version",
-                "sha256",
-                "size_bytes",
-                "size",
-            }
-            & spec.keys()
-        ):
-            raise ValueError("invalid raw catalog reference")
-        requested.add((identity["source_id"], identity.get("version")))
-    return requested
+    files = list(sources["inland_water"]["files"])
+    for layer in sources["land_config"]["land"]:
+        if isinstance(layer["dataset"], dict):
+            files.append(layer["dataset"])
+        files.extend(layer["files"])
+    for comparison_file in (
+        sources.get("reference_rows"),
+        sources.get("reference_runs"),
+    ):
+        if comparison_file is not None:
+            files.append(comparison_file)
+
+    for file in files:
+        # A ZIP member pins its own bytes and names the archive separately.
+        entry = file
+        while isinstance(entry, dict):
+            if "r2_source" in entry:
+                yield entry, catalog_key(entry)
+            entry = entry.get("archive")
+
+
+def catalog_key(entry: dict[str, Any]) -> tuple[str, str | None]:
+    """Read the source ID and optional catalog version from one file entry.
+
+    Args:
+        entry: File or ZIP archive entry with an ``r2_source`` selector.
+
+    Returns:
+        (source ID, version). Version is None when the selector omits it.
+
+    Raises:
+        ValueError: The selector is invalid or the entry also pins R2 bytes directly.
+    """
+    selector = entry["r2_source"]
+    if (
+        not isinstance(selector, dict)
+        or not {"source_id"} <= selector.keys() <= {"source_id", "version"}
+        or any(
+            not isinstance(value, str) or not value.strip()
+            for value in selector.values()
+        )
+    ):
+        raise ValueError("invalid raw catalog reference")
+    pinned_fields = {
+        "r2_bucket",
+        "r2_key",
+        "source_id",
+        "version",
+        "sha256",
+        "size_bytes",
+        "size",
+    }
+    if pinned_fields.intersection(entry):
+        raise ValueError("invalid raw catalog reference: remove explicit file metadata")
+    return selector["source_id"], selector.get("version")
+
+
+def catalog_source_ids(sources: BuildSources) -> set[str]:
+    """Collect the raw source IDs to include in the Neon snapshot.
+
+    Args:
+        sources: Validated physical and comparison source settings.
+
+    Returns:
+        The distinct IDs named by the file entries.
+    """
+    return {source_id for _, (source_id, _version) in catalog_references(sources)}
 
 
 def physical_reference(
@@ -199,7 +227,7 @@ def physical_reference(
         if sha256_file(previous) != identity[key]["sha256"]:
             raise ValueError("physical source configuration changed: " + key)
 
-        def data(value: object) -> Any:
+        def data(value: JSONValue) -> JSONValue:
             """Keep only settings that affect physical rasterization.
 
             Args:
@@ -220,16 +248,13 @@ def physical_reference(
                 }
             return value
 
-        old_request, new_request = (
-            data(read_json(previous)),
-            data(selected),
-        )
+        old_request = read_json(previous)
         if key == "source_manifest":
             # Older manifests called the same byte count "size".
             for entry in old_request["files"]:
                 if "size" in entry:
                     entry["size_bytes"] = entry.pop("size")
-        if old_request != new_request:
+        if data(old_request) != data(selected):
             raise ValueError("physical input differs from the source run: " + key)
     pins = [
         pin_file(root / "report.json"),
@@ -447,15 +472,15 @@ class Pipeline:
             return read_saved(self.out / "input-selection.json")
         if selection is not None:
             return read_saved(selection)
-        connection = os.environ.get("NEON_DATABASE_URL")
-        if not connection:
-            raise ValueError(
-                "set NEON_DATABASE_URL to freeze working geography, or supply --selection"
-            )
-        with psycopg.connect(connection, connect_timeout=15) as database:
-            references = {key[0] for key in catalog_keys(sources)}
+        try:
+            url = neon_connection_url()
+        except ValueError as exc:
+            raise ValueError(f"{exc}, or supply --selection") from None
+        with connect_neon(url=url) as database:
             return read_selection(
-                database, raw_sources=references, parents=self.requested_parents
+                database,
+                raw_sources=catalog_source_ids(sources),
+                parents=self.requested_parents,
             )
 
     def _physical_configuration(self, sources: BuildSources) -> dict[str, Any]:
@@ -717,7 +742,7 @@ class Pipeline:
         if not references:
             return resolved
 
-        requested = catalog_keys(resolved)
+        requested = {key for _, key in references}
 
         # Older snapshots can contain multiple captures under one source ID.
         catalog = {
@@ -729,9 +754,9 @@ class Pipeline:
         }
         if catalog.keys() != requested:
             raise ValueError("raw catalog is missing selected sources")
-        for spec in references:
-            identity = spec.pop("r2_source")
-            source = catalog[identity["source_id"], identity.get("version")]
+        for spec, key in references:
+            del spec["r2_source"]
+            source = catalog[key]
             spec.update(
                 {
                     key: source[key]

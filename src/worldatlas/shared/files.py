@@ -8,6 +8,11 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 from typing import Any
 
+# JSON arrays are accepted as lists or tuples when writing.
+type JSONValue = (
+    Mapping[str, Any] | list[Any] | tuple[Any, ...] | str | int | float | bool | None
+)
+
 
 def read_json(path: Path | str) -> Any:
     """Read a JSON value from a local file.
@@ -76,7 +81,7 @@ def verify_pins(pins: Iterable[Mapping[str, str]]) -> None:
             raise ValueError("checkpoint/input hash mismatch: " + expected["path"])
 
 
-def json_bytes(value: object, *, sort_keys: bool = True) -> bytes:
+def json_bytes(value: JSONValue, *, sort_keys: bool = True) -> bytes:
     """Encode JSON with two-space indentation and a final newline.
 
     Args:
@@ -137,7 +142,7 @@ def write_bytes_atomic(path: Path | str, data: bytes) -> Path:
     return path
 
 
-def write_json(path: Path | str, value: object, *, sort_keys: bool = True) -> Path:
+def write_json(path: Path | str, value: JSONValue, *, sort_keys: bool = True) -> Path:
     """Encode JSON and write it to a new file atomically.
 
     Args:

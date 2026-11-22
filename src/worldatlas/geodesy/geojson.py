@@ -1,12 +1,15 @@
 """Validate the WGS84 GeoJSON used by source imports and map builds."""
 
 import math
+from collections.abc import Mapping
 
 from shapely.geometry import shape
 from shapely.geometry.base import BaseGeometry
 
+from worldatlas.shared.files import JSONValue
 
-def validate_geometry(geometry: dict[str, object]) -> BaseGeometry:
+
+def validate_geometry(geometry: Mapping[str, JSONValue]) -> BaseGeometry:
     """Check that a GeoJSON geometry is valid in two-dimensional WGS84.
 
     Args:
@@ -34,7 +37,7 @@ def validate_geometry(geometry: dict[str, object]) -> BaseGeometry:
     ):
         raise ValueError("expected a point, line or polygon geometry")
 
-    def coordinates(values: object) -> None:
+    def coordinates(values: JSONValue) -> None:
         """Check nested coordinate arrays down to each longitude and latitude pair.
 
         Args:

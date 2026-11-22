@@ -12,6 +12,7 @@ from unittest.mock import Mock
 
 import psycopg
 from psycopg.types.json import Jsonb
+from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.shared.storage import _write_features
 from worldatlas.source_imports.run_import import run_import
 
@@ -69,7 +70,7 @@ class StorageTests(unittest.TestCase):
         return run_import(
             lambda: nullcontext(self.database),
             "__features",
-            storage=self.storage,
+            storage=R2Client(self.storage),
             work_dir=self.work,
         )
 
@@ -163,6 +164,6 @@ class StorageTests(unittest.TestCase):
             (Jsonb(recipe),),
         )
         with self.assertRaisesRegex(ValueError, "feature ID already belongs to another construction"):
-            run_import(lambda: nullcontext(self.database), "__other", storage=self.storage,
+            run_import(lambda: nullcontext(self.database), "__other", storage=R2Client(self.storage),
                        work_dir=self.work)
         self.assertEqual(self.rows(), before)

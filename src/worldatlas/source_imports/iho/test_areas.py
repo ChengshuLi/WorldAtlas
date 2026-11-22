@@ -134,7 +134,7 @@ class ImportTests(unittest.TestCase):
                     (Jsonb(recipe),),
                 )
                 argv = ["worldatlas-import", "--recipe", "iho-recipe", "--r2-endpoint",
-                        "https://example.test", "--work-dir", work]
+                        "https://" + "a" * 32 + ".r2.cloudflarestorage.com", "--work-dir", work]
                 output = StringIO()
                 with (
                     mock_patch.dict(os.environ, NEON_DATABASE_URL=url),

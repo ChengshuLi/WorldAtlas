@@ -8,6 +8,7 @@ import unittest
 from unittest.mock import patch
 import psycopg
 
+from worldatlas.shared.r2 import R2Client
 from worldatlas.map_build.inputs.releases import read_release_assets
 from worldatlas.map_releases.catalog import lookup_release
 
@@ -69,7 +70,7 @@ class ReleaseLookupTests(unittest.TestCase):
                     patch.dict(os.environ, NEON_DATABASE_URL=url),
                     patch(
                         "worldatlas.map_build.inputs.releases.make_r2_client",
-                        return_value=storage,
+                        return_value=R2Client(storage),
                     ),
                 ):
                     candidate = read_release_assets(identity)

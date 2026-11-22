@@ -18,6 +18,7 @@ from unittest.mock import Mock, patch
 
 from botocore.exceptions import ClientError
 
+from worldatlas.shared.r2 import R2Client, R2ObjectMissing
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.inputs.selection import canonical_bytes
 from worldatlas.map_build.test_support import selection
@@ -498,7 +499,7 @@ class R2VerificationTests(unittest.TestCase):
             db.execute.return_value.fetchone.return_value = None
             storage = Storage()
             candidate = "v9.0-rc.1"
-            stage(db, storage, candidate, bundle, manifest)
+            stage(db, R2Client(storage), candidate, bundle, manifest)
             self.assertEqual(storage.objects["index.html"], b"published")
             self.assertEqual(list(storage.objects)[-1], folder + "manifest.json")
             self.assertEqual(
@@ -508,15 +509,15 @@ class R2VerificationTests(unittest.TestCase):
             record = (RELEASE_BUCKET, checksum)
             db.execute.reset_mock()
             db.execute.return_value.fetchone.side_effect = [(candidate,), record]
-            stage(db, storage, candidate, bundle, manifest)
+            stage(db, R2Client(storage), candidate, bundle, manifest)
             self.assertEqual(len(db.execute.call_args_list), 2)
             db.execute.return_value.fetchone.side_effect = [None, record]
             with self.assertRaisesRegex(ValueError, "already exists with different contents"):
-                stage(db, storage, candidate, bundle, dict(manifest, new_field=True))
+                stage(db, R2Client(storage), candidate, bundle, dict(manifest, new_field=True))
             inputs = objects.pop(FILENAME)
             db.execute.return_value.fetchone.side_effect = [None]
             with self.assertRaisesRegex(ValueError, "no frozen input archive"):
-                stage(db, storage, candidate, bundle, manifest)
+                stage(db, R2Client(storage), candidate, bundle, manifest)
             objects[FILENAME] = inputs
             class FailingStorage(Storage):
                 def put_object(self, **options):
@@ -530,14 +531,14 @@ class R2VerificationTests(unittest.TestCase):
                 failed.failure = name
                 db.execute.return_value.fetchone.side_effect = [None, None]
                 with self.subTest(name=name), self.assertRaises(ClientError):
-                    stage(db, failed, candidate, bundle, manifest)
+                    stage(db, R2Client(failed), candidate, bundle, manifest)
                 self.assertNotIn(folder + "manifest.json", failed.objects)
 
     def test_no_new_candidate_can_be_staged_after_its_version_is_official(self):
         db, storage = Mock(), Mock()
         db.execute.return_value.fetchone.return_value = ("v9.0-rc.1",)
         with self.assertRaisesRegex(ValueError, "v9.0-rc.1 is already official"):
-            stage(db, storage, "v9.0-rc.2", None, {})
+            stage(db, R2Client(storage), "v9.0-rc.2", None, {})
         storage.put_object.assert_not_called()
 
     def test_matching_size_cannot_pass_checksum_verification(self):
@@ -549,7 +550,7 @@ class R2VerificationTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "published bytes differ"):
             verify_object(
-                Storage(),
+                R2Client(Storage()),
                 "test",
                 "index.html",
                 dict(
@@ -571,7 +572,7 @@ class R2VerificationTests(unittest.TestCase):
             response = dict(ContentLength=len(body), ContentType="text/html", Body=io.BytesIO(body))
             storage.get_object.return_value = response | metadata
             with self.subTest(metadata=metadata), self.assertRaisesRegex(ValueError, error):
-                verify_object(storage, RELEASE_BUCKET, "index.html", asset)
+                verify_object(R2Client(storage), RELEASE_BUCKET, "index.html", asset)
             self.assertTrue(response["Body"].closed)
 
 
@@ -589,7 +590,7 @@ class CatalogTests(unittest.TestCase):
         storage.get_object.return_value = {"Body": io.BytesIO(b"{}")}
         release = dict(id="v9.0-rc.1", r2_bucket=RELEASE_BUCKET, manifest_sha256="0" * 64)
         with self.assertRaisesRegex(ValueError, "Neon checksum"):
-            read_manifest(storage, release)
+            read_manifest(R2Client(storage), release)
 
     def test_manifest_requires_file_identities_within_its_release_folder(self):
         candidate = "v9.0-rc.1"
@@ -684,7 +685,7 @@ class PublicationTests(unittest.TestCase):
         self.db.transaction.side_effect = catalog_transaction
         self.storage.put_object.side_effect = write_homepage
         self.db.execute.return_value.fetchone.side_effect = [None, (self.candidate,)]
-        self.assertTrue(publish(self.db, self.storage, self.candidate))
+        self.assertTrue(publish(self.db, R2Client(self.storage), self.candidate))
         self.storage.put_object.assert_called_once_with(
             Bucket=RELEASE_BUCKET, Key="index.html", Body=self.files["index.html"],
             ContentType="text/html", CacheControl="no-cache", IfMatch='"current"',
@@ -703,26 +704,26 @@ class PublicationTests(unittest.TestCase):
 
         self.db.transaction.side_effect = catalog_transaction
         with self.assertRaisesRegex(OSError, "catalog commit interrupted"):
-            publish(self.db, self.storage, self.candidate)
+            publish(self.db, R2Client(self.storage), self.candidate)
         self.storage.put_object.assert_not_called()
         self.storage.get_paginator.assert_not_called()
 
     def test_failed_homepage_update_can_retry_while_release_is_current(self):
         self.storage.put_object.side_effect = OSError("homepage write interrupted")
         with self.assertRaisesRegex(OSError, "homepage write interrupted"):
-            publish(self.db, self.storage, self.candidate)
+            publish(self.db, R2Client(self.storage), self.candidate)
         self.assertIn("SET is_official=true,is_current=true", self.db.execute.call_args.args[0])
         self.storage.get_paginator.assert_not_called()
         self.set_release(official=True, current=True)
         self.storage.put_object.side_effect = None
-        self.assertTrue(publish(self.db, self.storage, self.candidate))
+        self.assertTrue(publish(self.db, R2Client(self.storage), self.candidate))
         self.assertEqual(self.storage.put_object.call_count, 2)
 
     def test_retry_for_older_official_release_never_rewrites_homepage(self):
         preview = "v9.0-rc.2"
         self.set_release(official=True, previews=[(preview, RELEASE_BUCKET, "a" * 64)])
         with patch("worldatlas.map_releases.manage_release.read_manifest", return_value={"objects": {}}):
-            self.assertFalse(publish(self.db, self.storage, self.candidate))
+            self.assertFalse(publish(self.db, R2Client(self.storage), self.candidate))
         self.storage.head_object.assert_not_called()
         self.storage.put_object.assert_not_called()
         self.db.transaction.assert_not_called()
@@ -733,14 +734,14 @@ class PublicationTests(unittest.TestCase):
     def test_publish_refuses_a_different_candidate_for_an_official_version(self):
         self.db.execute.return_value.fetchone.return_value = ("v9.0-rc.2",)
         with self.assertRaisesRegex(ValueError, "different official candidate"):
-            publish(self.db, self.storage, self.candidate)
+            publish(self.db, R2Client(self.storage), self.candidate)
         self.storage.get_object.assert_not_called()
         self.storage.put_object.assert_not_called()
 
     def test_publish_requires_the_website_bucket(self):
         self.set_release(bucket="other")
         with self.assertRaisesRegex(ValueError, "website serves releases"):
-            publish(self.db, self.storage, self.candidate)
+            publish(self.db, R2Client(self.storage), self.candidate)
         self.storage.put_object.assert_not_called()
 
     def test_publish_requires_replay_inputs_and_a_homepage(self):
@@ -749,19 +750,19 @@ class PublicationTests(unittest.TestCase):
                 asset = self.manifest["objects"].pop(name)
                 self.set_release()
                 with self.assertRaisesRegex(ValueError, error):
-                    publish(self.db, self.storage, self.candidate)
+                    publish(self.db, R2Client(self.storage), self.candidate)
                 self.manifest["objects"][name] = asset
         self.storage.put_object.assert_not_called()
 
     def test_first_publication_creates_homepage_and_unexpected_errors_stop(self):
         self.storage.head_object.side_effect = ClientError({"ResponseMetadata": {"HTTPStatusCode": 403}}, "HeadObject")
         with self.assertRaises(ClientError):
-            publish(self.db, self.storage, self.candidate)
+            publish(self.db, R2Client(self.storage), self.candidate)
         self.storage.put_object.assert_not_called()
         self.storage.head_object.side_effect = ClientError({"ResponseMetadata": {"HTTPStatusCode": 404}}, "HeadObject")
         self.set_release()
         self.db.execute.return_value.fetchone.side_effect = [None, (self.candidate,)]
-        self.assertTrue(publish(self.db, self.storage, self.candidate))
+        self.assertTrue(publish(self.db, R2Client(self.storage), self.candidate))
         self.assertEqual(self.storage.put_object.call_args.kwargs["IfNoneMatch"], "*")
 
 
@@ -795,7 +796,7 @@ class PreviewRetirementTests(unittest.TestCase):
             "worldatlas.map_releases.manage_release.read_manifest",
             return_value=self.manifest("v9.0-rc.1"),
         ):
-            self.assertEqual(retire_previews(db, storage, "v9.0"), ["v9.0-rc.1"])
+            self.assertEqual(retire_previews(db, R2Client(storage), "v9.0"), ["v9.0-rc.1"])
         self.assertEqual(
             [c.kwargs["Key"] for c in storage.delete_object.call_args_list],
             [
@@ -832,7 +833,7 @@ class PreviewRetirementTests(unittest.TestCase):
             return [{"Contents": [{"Key": key}]} for key in (keys if Prefix == abandoned else second_keys)]
 
         paginate.side_effect = list_pages
-        self.assertEqual(retire_previews(db, storage, "v9.0"), ["v9.0-rc.10", "v9.0-rc.2"])
+        self.assertEqual(retire_previews(db, R2Client(storage), "v9.0"), ["v9.0-rc.10", "v9.0-rc.2"])
         self.assertEqual([call.kwargs["Key"] for call in storage.delete_object.call_args_list], second_keys + keys)
         storage.get_object.assert_not_called()
         self.assertEqual(db.execute.call_count, 2)
@@ -841,7 +842,7 @@ class PreviewRetirementTests(unittest.TestCase):
         db, storage = Mock(), Mock()
         db.execute.return_value.fetchone.return_value = None
         with self.assertRaisesRegex(ValueError, "publish a final"):
-            retire_previews(db, storage, "v9.0")
+            retire_previews(db, R2Client(storage), "v9.0")
         storage.delete_object.assert_not_called()
 
     def test_failed_deletion_keeps_manifest_and_catalog_row_for_retry(self):
@@ -856,7 +857,7 @@ class PreviewRetirementTests(unittest.TestCase):
             return_value=self.manifest("v9.0-rc.1"),
         ):
             with self.assertRaises(OSError):
-                retire_previews(db, storage, "v9.0")
+                retire_previews(db, R2Client(storage), "v9.0")
         self.assertFalse(
             any("DELETE FROM" in c.args[0] for c in db.execute.call_args_list)
         )
@@ -876,13 +877,13 @@ class PreviewRetirementTests(unittest.TestCase):
                 )
                 storage.list_objects_v2.return_value = {"Contents": remaining}
                 if remaining:
-                    with self.assertRaises(ClientError):
-                        retire_previews(db, storage, "v9.0")
+                    with self.assertRaises(R2ObjectMissing):
+                        retire_previews(db, R2Client(storage), "v9.0")
                     self.assertFalse(
                         any("DELETE FROM" in c.args[0] for c in db.execute.call_args_list)
                     )
                 else:
-                    self.assertEqual(retire_previews(db, storage, "v9.0"), [candidate])
+                    self.assertEqual(retire_previews(db, R2Client(storage), "v9.0"), [candidate])
                     self.assertIn("DELETE FROM", db.execute.call_args.args[0])
                 storage.list_objects_v2.assert_called_once_with(
                     Bucket="test", Prefix=folder, MaxKeys=1
@@ -895,7 +896,7 @@ class PreviewRetirementTests(unittest.TestCase):
         db.execute.return_value.fetchall.return_value = [("v9.0-rc.1", "test", "a" * 64)]
         storage.get_object.side_effect = ClientError({"Error": {"Code": "AccessDenied"}}, "GetObject")
         with self.assertRaises(ClientError):
-            retire_previews(db, storage, "v9.0")
+            retire_previews(db, R2Client(storage), "v9.0")
         storage.delete_object.assert_not_called()
         storage.list_objects_v2.assert_not_called()
 
@@ -937,8 +938,8 @@ class CommandTests(unittest.TestCase):
             with (self.subTest(action=action, published=published),
                   patch.object(sys, "argv", ["worldatlas-release", action, candidate, *arguments]),
                   patch.dict(os.environ, NEON_DATABASE_URL="host=test"),
-                  patch(command + ".psycopg.connect", return_value=nullcontext(db)),
-                  patch(command + ".make_r2_client", return_value=storage) as client,
+                  patch("psycopg.connect", return_value=nullcontext(db)),
+                  patch(command + ".make_r2_client", return_value=R2Client(storage)) as client,
                   patch(command + ".build_bundle", return_value={"inputs": {"r2_endpoint": "old-raw-endpoint"}}),
                   patch(f"{command}.{action}", side_effect=after_lock) as operation,
                   redirect_stdout(io.StringIO()) as output):
@@ -963,8 +964,8 @@ class CommandTests(unittest.TestCase):
             manifest = dict(inputs={}, objects={FILENAME: asset})
             with (patch.object(sys, "argv", ["worldatlas-release", "restore-inputs", candidate, str(output)]),
                   patch.dict(os.environ, NEON_DATABASE_URL="host=atlas-pooler.example.org"),
-                  patch(command + ".psycopg.connect", return_value=nullcontext(db)),
-                  patch(command + ".make_r2_client", return_value=storage) as client,
+                  patch("psycopg.connect", return_value=nullcontext(db)),
+                  patch(command + ".make_r2_client", return_value=R2Client(storage)) as client,
                   patch(command + ".lookup_release", return_value=release),
                   patch(command + ".read_manifest", return_value=manifest), redirect_stdout(io.StringIO())):
                 main()

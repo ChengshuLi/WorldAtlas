@@ -5,8 +5,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from botocore.client import BaseClient
 from psycopg import Connection
+
+from worldatlas.shared.r2 import R2Client
 
 
 @dataclass(frozen=True)
@@ -22,7 +23,7 @@ class Runtime:
     """
 
     connect: Callable[[], Connection]
-    storage: BaseClient | None
+    storage: R2Client | None
     recipe_id: str
     method: str
     arguments: dict[str, Any]

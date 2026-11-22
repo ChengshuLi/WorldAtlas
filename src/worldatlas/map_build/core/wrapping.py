@@ -4,8 +4,10 @@ import math
 from collections.abc import Iterator
 from typing import Any
 
+from worldatlas.shared.files import JSONValue
 
-def _pairs(x: object) -> Iterator[tuple[float, float]]:
+
+def _pairs(x: JSONValue) -> Iterator[tuple[float, float]]:
     """Read all coordinate pairs in a nested GeoJSON array.
 
     Args:

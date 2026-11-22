@@ -1,6 +1,5 @@
 """Resolve official releases and candidates through their pinned R2 manifests."""
 
-import os
 from contextlib import closing
 from typing import Any
 
@@ -11,7 +10,8 @@ from worldatlas.map_releases.catalog import (
     read_manifest,
     release_endpoint,
 )
-from worldatlas.source_assets.r2 import make_r2_client
+from worldatlas.shared.database import connect_neon
+from worldatlas.shared.r2 import make_r2_client
 
 
 def read_release_assets(
@@ -30,11 +30,8 @@ def read_release_assets(
     Raises:
         ValueError: Database access is missing, or the release or manifest is invalid.
     """
-    connection = os.environ.get("NEON_DATABASE_URL")
-    if not connection:
-        raise ValueError("set NEON_DATABASE_URL to the release catalog database")
     try:
-        with psycopg.connect(connection) as database:
+        with connect_neon() as database:
             database.execute("SET TRANSACTION READ ONLY")
             release = lookup_release(database, identity)
     except psycopg.Error:

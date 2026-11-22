@@ -14,7 +14,8 @@ import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
-from worldatlas.source_assets import r2
+from worldatlas.shared import r2
+from worldatlas.shared.r2 import R2Client
 from worldatlas.map_build.physical import build as b
 from worldatlas.shared.files import sha256_file, write_bytes_atomic, write_json
 
@@ -345,7 +346,7 @@ class PipelineTests(unittest.TestCase):
                 return 'd' * 64
             return (
                 'c' * 64
-                if path == Path(r2.__file__) or (path.is_relative_to(b.HERE.parent) and path.suffix == '.py')
+                if path in {Path(r2.__file__), Path(b.source_cache.__file__)} or (path.is_relative_to(b.HERE.parent) and path.suffix == '.py')
                 else original(path)
             )
 
@@ -555,7 +556,7 @@ class PipelineTests(unittest.TestCase):
             return {'Body': io.BytesIO(content), 'ContentLength': len(content)}
 
         client.get_object.side_effect = download
-        with mock.patch.object(r2, 'make_r2_client', return_value=client) as make_client:
+        with mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)) as make_client:
             b.run(self.config, out)
             make_client.assert_called_once_with(endpoint)
         client.get_object.assert_called_once()
@@ -636,7 +637,7 @@ class PipelineTests(unittest.TestCase):
         client.get_object.side_effect = get_object
         output = self.root / 'parallel'
         with (
-            mock.patch.object(r2, 'make_r2_client', return_value=client),
+            mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)),
             mock.patch.object(b, 'run_stage', side_effect=notify_after_first_raster),
         ):
             parallel = b.run(self.config, output)
@@ -678,7 +679,7 @@ class PipelineTests(unittest.TestCase):
             'Body': io.BytesIO(b'X' + content[1:]),
             'ContentLength': len(content),
         }
-        with mock.patch.object(r2, 'make_r2_client', return_value=client):
+        with mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)):
             with self.assertRaisesRegex(ValueError, 'size/hash mismatch'):
                 b.run(self.config, out)
         self.assertTrue((out / 'source-staging' / shard.name).exists())
@@ -687,7 +688,7 @@ class PipelineTests(unittest.TestCase):
             'Body': io.BytesIO(content),
             'ContentLength': len(content),
         }
-        with mock.patch.object(r2, 'make_r2_client', return_value=client):
+        with mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)):
             b.run(self.config, out, resume=True)
         self.assertEqual(len(list((out / 'interrupted').glob(shard.name + '-*'))), 1)
         self.assertFalse((out / 'source-staging' / shard.name).exists())

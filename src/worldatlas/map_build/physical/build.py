@@ -30,6 +30,7 @@ from worldatlas.map_build.inputs.configuration import (
 )
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
+from worldatlas.shared import r2
 from worldatlas.shared.files import (
     json_bytes,
     read_json,
@@ -39,14 +40,14 @@ from worldatlas.shared.files import (
     write_bytes_atomic,
     write_json,
 )
-from worldatlas.source_assets import r2
+from worldatlas.source_assets import r2 as source_cache
 from worldatlas.source_assets.catalog import stream_source
 
 HERE = Path(__file__).resolve().parent
 
 
 def plan_land_inputs(
-    settings: Mapping[str, Any], cache: r2.R2InputCache
+    settings: Mapping[str, Any], cache: source_cache.R2InputCache
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
@@ -467,7 +468,7 @@ def _run(
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     workers, staging = validate_shard_staging(cfg)
     source_directory = Path(cfg['source_directory']).resolve()
-    cache = r2.R2InputCache(
+    cache = source_cache.R2InputCache(
         source_directory,
         output,
         staging['endpoint_url'] if staging else None,
@@ -518,7 +519,8 @@ def _run(
         )
     }
     scripts['geodesy/ogr.py'] = sha256_file(geometry_io.__file__)
-    scripts['source_assets/r2.py'] = sha256_file(r2.__file__)
+    scripts['source_assets/r2.py'] = sha256_file(source_cache.__file__)
+    scripts['shared/r2.py'] = sha256_file(r2.__file__)
     output = Path(output).resolve()
     inputs = [path for path, _, _ in raw]
     inputs += [

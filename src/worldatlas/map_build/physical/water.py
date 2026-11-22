@@ -51,7 +51,7 @@ PYTHON_WHITESPACE = ''.join(
 )
 
 
-def selected(subtype: object) -> str | None:
+def selected(subtype: str | None) -> str | None:
     """Decide whether an Overture subtype belongs in the inland-water mask.
 
     Args:

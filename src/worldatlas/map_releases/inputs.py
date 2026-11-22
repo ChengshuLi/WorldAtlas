@@ -12,7 +12,7 @@ from worldatlas.map_build.physical.build import (
     validate_r2_shard_location,
     validate_shard_staging,
 )
-from worldatlas.shared.files import json_bytes
+from worldatlas.shared.files import JSONValue, json_bytes
 
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
@@ -51,7 +51,7 @@ def validate_replay_sources(
         reference = spec["r2_source"]
         return catalog.get((reference["source_id"], reference.get("version")))
 
-    def r2_source(spec: object) -> bool:
+    def r2_source(spec: JSONValue) -> bool:
         """Check whether a specification can be downloaded using the frozen inputs.
 
         Args:
@@ -68,7 +68,7 @@ def validate_replay_sources(
             return r2_source(spec["archive"])
         return all(spec.get(key) for key in ("r2_bucket", "r2_key", "sha256"))
 
-    def require_source(name: str, spec: object) -> None:
+    def require_source(name: str, spec: JSONValue) -> None:
         """Reject an input that a new machine could not download.
 
         Args:
@@ -210,7 +210,7 @@ def restore_inputs(content: dict[str, Any], output: Path | str) -> None:
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
 
-    def relocated(value: object) -> Any:
+    def relocated(value: JSONValue) -> Any:
         """Copy a JSON value and update source locations.
 
         Args:

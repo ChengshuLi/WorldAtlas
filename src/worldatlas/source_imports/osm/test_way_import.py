@@ -13,6 +13,7 @@ from unittest.mock import Mock, patch
 import psycopg
 from psycopg.types.json import Jsonb
 
+from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.osm.ways import assemble
 from worldatlas.source_imports.run_import import run_import
 
@@ -98,7 +99,7 @@ class DatabaseTests(unittest.TestCase):
         return run_import(
             lambda: nullcontext(self.database),
             recipe_id,
-            storage=self.storage,
+            storage=R2Client(self.storage),
             work_dir=self.directory,
         )
 

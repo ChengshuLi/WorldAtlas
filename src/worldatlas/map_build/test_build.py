@@ -23,7 +23,8 @@ import pyarrow.parquet as pq
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.runtime import elapsed_union
-from worldatlas.source_assets import r2
+from worldatlas.shared import r2
+from worldatlas.shared.r2 import R2Client
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.physical import build as physical_build
 from worldatlas.map_build.test_support import selection
@@ -593,7 +594,7 @@ class Fixture(unittest.TestCase):
         client.get_object.side_effect = retrieve
         with (
             patch.object(physical_build, "download_r2", side_effect=download),
-            patch.object(r2, "make_r2_client", return_value=client),
+            patch.object(r2, "make_r2_client", return_value=R2Client(client)),
         ):
             yield client.get_object
 

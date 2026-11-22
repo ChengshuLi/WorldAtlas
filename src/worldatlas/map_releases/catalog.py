@@ -3,13 +3,13 @@
 import hashlib
 import json
 import re
-from contextlib import closing
 from importlib.resources import files
 from pathlib import PurePosixPath
 from typing import Any
 
-from botocore.client import BaseClient
 from psycopg import Connection
+
+from worldatlas.shared.r2 import R2Client
 
 RELEASE_BUCKET = "worldatlas"
 
@@ -74,7 +74,7 @@ def lookup_release(database: Connection, identity: str) -> dict[str, Any]:
     )
 
 
-def read_manifest(storage: BaseClient, release: dict[str, Any]) -> dict[str, Any]:
+def read_manifest(storage: R2Client, release: dict[str, Any]) -> dict[str, Any]:
     """Fetch the manifest from R2 and check it against the catalog.
 
     Args:
@@ -86,13 +86,11 @@ def read_manifest(storage: BaseClient, release: dict[str, Any]) -> dict[str, Any
 
     Raises:
         ValueError: The bytes differ from the catalog checksum or the manifest is invalid.
-        ClientError: R2 could not return the manifest.
+        R2ObjectMissing: The manifest key does not exist.
     """
-    response = storage.get_object(
-        Bucket=release["r2_bucket"], Key=release_prefix(release["id"]) + "manifest.json"
-    )
-    with closing(response["Body"]) as stream:
-        raw = stream.read()
+    key = release_prefix(release["id"]) + "manifest.json"
+    with storage.open(release["r2_bucket"], key) as remote:
+        raw = remote.body.read()
     if hashlib.sha256(raw).hexdigest() != release["manifest_sha256"]:
         raise ValueError("release manifest does not match its Neon checksum")
     manifest = json.loads(raw)

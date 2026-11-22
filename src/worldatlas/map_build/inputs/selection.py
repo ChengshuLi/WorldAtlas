@@ -47,11 +47,11 @@ def validate_map_code_bindings(geography: dict[str, Any]) -> None:
         pairs.add((entity, kind))
 
 
-def canonical_bytes(value: object) -> bytes:
-    """Encode a value as compact, sorted JSON for comparisons.
+def canonical_bytes(selection: dict[str, Any]) -> bytes:
+    """Encode a frozen selection as compact, sorted JSON for comparisons.
 
     Args:
-        value: JSON-compatible value, such as a frozen input selection.
+        selection: Frozen input selection to encode.
 
     Returns:
         UTF-8 bytes with sorted keys and one trailing newline.
@@ -62,7 +62,7 @@ def canonical_bytes(value: object) -> bytes:
     """
     return (
         json.dumps(
-            value,
+            selection,
             sort_keys=True,
             separators=(",", ":"),
             ensure_ascii=False,

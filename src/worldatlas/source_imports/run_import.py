@@ -8,16 +8,16 @@ For methods that read raw files, also supply ``--r2-endpoint`` and
 import argparse
 import json
 import logging
-import os
 from collections.abc import Callable
-from contextlib import ExitStack, closing
+from contextlib import closing, nullcontext
+from functools import partial
 from pathlib import Path
 from typing import Any
 
-import boto3
 import psycopg
-from botocore.client import BaseClient
 
+from worldatlas.shared.database import connect_neon, neon_connection_url
+from worldatlas.shared.r2 import R2Client, make_r2_client
 from worldatlas.source_imports.iho.areas import s130_areas
 from worldatlas.source_imports.interpreted.geometry import interpreted_geometry
 from worldatlas.source_imports.osm.features import selected_osm_features
@@ -69,7 +69,7 @@ def run_import(
     connect: Callable[[], psycopg.Connection],
     recipe_id: str,
     *,
-    storage: BaseClient | None = None,
+    storage: R2Client | None = None,
     work_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Run a construction validated when it was saved in Neon.
@@ -120,19 +120,15 @@ def main() -> None:
         "--work-dir", type=Path, help="local cache for raw source files"
     )
     args = parser.parse_args()
-    if not (connection := os.environ.get("NEON_DATABASE_URL")):
-        parser.error("set NEON_DATABASE_URL to the working database")
-    connect = lambda: psycopg.connect(connection, connect_timeout=15)
-    with ExitStack() as stack:
-        storage = None
-        if args.r2_endpoint:
-            storage = stack.enter_context(
-                closing(
-                    boto3.client(
-                        "s3", endpoint_url=args.r2_endpoint, region_name="auto"
-                    )
-                )
-            )
+    try:
+        url = neon_connection_url()
+    except ValueError as exc:
+        parser.error(str(exc))
+    connect = partial(connect_neon, url=url)
+    r2 = (
+        closing(make_r2_client(args.r2_endpoint)) if args.r2_endpoint else nullcontext()
+    )
+    with r2 as storage:
         result = run_import(
             connect,
             args.recipe,

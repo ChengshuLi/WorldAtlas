@@ -9,7 +9,6 @@ import argparse
 import gzip
 import hashlib
 import mimetypes
-import os
 import re
 import shutil
 import tempfile
@@ -18,9 +17,6 @@ from pathlib import Path
 from typing import Any, Literal, overload
 
 import psycopg
-from botocore.client import BaseClient
-from botocore.exceptions import ClientError
-from psycopg.conninfo import conninfo_to_dict
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.code_archive import read_source
@@ -46,6 +42,7 @@ from worldatlas.map_releases.inputs import (
     validate_replay_sources,
     write_inputs,
 )
+from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
     json_bytes,
     pin_file,
@@ -53,7 +50,7 @@ from worldatlas.shared.files import (
     sha256_file,
     verify_pins,
 )
-from worldatlas.source_assets.r2 import make_r2_client
+from worldatlas.shared.r2 import R2Client, R2ObjectMissing, make_r2_client
 
 STREAMS = ("rows", "runs")
 CANDIDATE = re.compile(r"(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*")
@@ -343,7 +340,7 @@ def build_bundle(
 
 @overload
 def verify_object(
-    storage: BaseClient,
+    storage: R2Client,
     bucket: str,
     key: str,
     expected: dict[str, Any],
@@ -355,7 +352,7 @@ def verify_object(
 
 @overload
 def verify_object(
-    storage: BaseClient,
+    storage: R2Client,
     bucket: str,
     key: str,
     expected: dict[str, Any],
@@ -366,7 +363,7 @@ def verify_object(
 
 
 def verify_object(
-    storage: BaseClient,
+    storage: R2Client,
     bucket: str,
     key: str,
     expected: dict[str, Any],
@@ -387,21 +384,18 @@ def verify_object(
 
     Raises:
         ValueError: The object's metadata or bytes differ from the manifest.
-        ClientError: R2 could not return the object.
+        R2ObjectMissing: The requested asset is missing.
     """
-    response = storage.get_object(Bucket=bucket, Key=key)
-    with closing(response["Body"]) as body:
-        if response["ContentLength"] != expected["size_bytes"] or response.get(
-            "ContentEncoding"
-        ):
+    with storage.open(bucket, key) as remote:
+        if remote.size_bytes != expected["size_bytes"] or remote.content_encoding:
             raise ValueError(f"wrong size or encoding for {key}")
-        if response.get("ContentType") != expected["content_type"]:
+        if remote.content_type != expected["content_type"]:
             raise ValueError(f"wrong content type for {key}")
-        data = body.read() if return_bytes else None
+        data = remote.body.read() if return_bytes else None
         checksum = (
             hashlib.sha256(data)
             if data is not None
-            else hashlib.file_digest(body, "sha256")
+            else hashlib.file_digest(remote.body, "sha256")
         )
     if checksum.hexdigest() != expected["sha256"]:
         raise ValueError(f"published bytes differ from the candidate: {key}")
@@ -409,7 +403,7 @@ def verify_object(
 
 
 def upload_bundle(
-    storage: BaseClient, bucket: str, bundle: Path, manifest: dict[str, Any]
+    storage: R2Client, bucket: str, bundle: Path, manifest: dict[str, Any]
 ) -> None:
     """Upload and verify the release assets listed in a prepared manifest.
 
@@ -421,29 +415,18 @@ def upload_bundle(
 
     Raises:
         ValueError: A stored asset differs from the manifest.
-        ClientError: An upload or verification request fails.
     """
     for name, asset in manifest["objects"].items():
         key = asset["r2_key"]
         with (bundle / name).open("rb") as body:
-            try:
-                storage.put_object(
-                    Bucket=bucket,
-                    Key=key,
-                    Body=body,
-                    IfNoneMatch="*",
-                    ContentType=asset["content_type"],
-                )
-            except ClientError as exc:
-                # On a staging retry this key may already exist. Leave those
-                # bytes in place and verify them against the same manifest.
-                if exc.response["ResponseMetadata"]["HTTPStatusCode"] != 412:
-                    raise
+            storage.put_if_missing(
+                bucket, key, body, content_type=asset["content_type"]
+            )
         verify_object(storage, bucket, key, asset)
 
 
 def retire_previews(
-    db: psycopg.Connection, storage: BaseClient, map_version: str
+    db: psycopg.Connection, storage: R2Client, map_version: str
 ) -> list[str]:
     """Remove previews, including partial uploads, after a version is official.
 
@@ -457,7 +440,7 @@ def retire_previews(
 
     Raises:
         ValueError: The version has no official release or a preview manifest is invalid.
-        ClientError: R2 listing, verification, or deletion fails.
+        R2ObjectMissing: A preview has objects but no manifest.
     """
     official = official_candidate(db, map_version)
     if official is None:
@@ -472,19 +455,16 @@ def retire_previews(
         release = dict(id=candidate, r2_bucket=bucket, manifest_sha256=checksum)
         try:
             manifest = read_manifest(storage, release)
-        except ClientError as exc:
-            if exc.response["Error"]["Code"] != "NoSuchKey":
-                raise
+        except R2ObjectMissing:
             # An interrupted cleanup can leave the Neon row after the last
             # object was deleted. A nonempty folder still needs its manifest.
-            remaining = storage.list_objects_v2(Bucket=bucket, Prefix=folder, MaxKeys=1)
-            if remaining.get("Contents") or remaining.get("IsTruncated"):
+            if storage.has_objects(bucket, folder):
                 raise
         else:
             # Keep the list of assets available until every asset is deleted.
             for asset in manifest["objects"].values():
-                storage.delete_object(Bucket=bucket, Key=asset["r2_key"])
-            storage.delete_object(Bucket=bucket, Key=folder + "manifest.json")
+                storage.delete(bucket, asset["r2_key"])
+            storage.delete(bucket, folder + "manifest.json")
         db.execute(
             "DELETE FROM atlas.map_releases WHERE id=%s AND NOT is_official",
             (candidate,),
@@ -494,73 +474,15 @@ def retire_previews(
     # An interrupted stage can leave objects before the catalog row exists.
     # Finish listing each prefix before deleting objects from it.
     family = f"releases/{map_version}-rc."
-    pages = storage.get_paginator("list_objects_v2")
-    folders = sorted(
-        item["Prefix"]
-        for page in pages.paginate(Bucket=RELEASE_BUCKET, Prefix=family, Delimiter="/")
-        for item in page.get("CommonPrefixes", ())
-    )
-    for folder in folders:
+    for folder in sorted(storage.list_folders(RELEASE_BUCKET, family)):
         candidate = folder.removeprefix("releases/").removesuffix("/")
         match = CANDIDATE.fullmatch(candidate)
         if not match or match["version"] != map_version or candidate == official:
             continue
-        keys = [
-            item["Key"]
-            for page in pages.paginate(Bucket=RELEASE_BUCKET, Prefix=folder)
-            for item in page.get("Contents", ())
-        ]
-        for key in keys:
-            storage.delete_object(Bucket=RELEASE_BUCKET, Key=key)
+        for key in storage.list_keys(RELEASE_BUCKET, folder):
+            storage.delete(RELEASE_BUCKET, key)
         retired.add(candidate)
     return sorted(retired)
-
-
-def put_homepage(
-    storage: BaseClient, bucket: str, key: str, html: bytes, **condition: str
-) -> None:
-    """Serve the released HTML at the homepage key with cache revalidation.
-
-    Args:
-        storage: Open R2 client.
-        bucket: Bucket read by the website Worker.
-        key: Homepage object key, normally ``index.html``.
-        html: Verified HTML bytes from the candidate bundle.
-        **condition: R2 precondition from ``homepage_condition``.
-
-    Raises:
-        ClientError: The write fails or its precondition no longer holds.
-    """
-    storage.put_object(
-        Bucket=bucket,
-        Key=key,
-        Body=html,
-        ContentType="text/html",
-        CacheControl="no-cache",
-        **condition,
-    )
-
-
-def homepage_condition(storage: BaseClient, bucket: str) -> dict[str, str]:
-    """Get the precondition for replacing or creating the homepage object.
-
-    Args:
-        storage: Open R2 client.
-        bucket: Bucket containing the homepage.
-
-    Returns:
-        An ``IfMatch`` condition for the observed ETag, or ``IfNoneMatch``
-        to create the homepage only if the key is still empty.
-
-    Raises:
-        ClientError: R2 returned an error other than a missing homepage.
-    """
-    try:
-        return {"IfMatch": storage.head_object(Bucket=bucket, Key=HOMEPAGE)["ETag"]}
-    except ClientError as exc:
-        if exc.response["ResponseMetadata"]["HTTPStatusCode"] != 404:
-            raise
-        return {"IfNoneMatch": "*"}
 
 
 def official_candidate(db: psycopg.Connection, map_version: str) -> str | None:
@@ -582,7 +504,7 @@ def official_candidate(db: psycopg.Connection, map_version: str) -> str | None:
 
 def stage(
     db: psycopg.Connection,
-    storage: BaseClient,
+    storage: R2Client,
     candidate: str,
     bundle: Path,
     manifest: dict[str, Any],
@@ -599,7 +521,6 @@ def stage(
     Raises:
         ValueError: The version has a different official candidate, the saved
             candidate differs from the bundle, or an asset fails verification.
-        ClientError: A required R2 operation fails.
     """
     selected = official_candidate(db, version(candidate))
     if selected is not None and selected != candidate:
@@ -627,17 +548,9 @@ def stage(
     )
     # Upload the manifest after verifying its assets. The Neon row is added
     # last so a catalog lookup can immediately follow its manifest pin.
-    try:
-        storage.put_object(
-            Bucket=RELEASE_BUCKET,
-            Key=asset["r2_key"],
-            Body=data,
-            ContentType="application/json",
-            IfNoneMatch="*",
-        )
-    except ClientError as exc:
-        if exc.response["ResponseMetadata"]["HTTPStatusCode"] != 412:
-            raise
+    storage.put_if_missing(
+        RELEASE_BUCKET, asset["r2_key"], data, content_type="application/json"
+    )
     verify_object(storage, RELEASE_BUCKET, asset["r2_key"], asset)
     if row is None:
         db.execute(
@@ -646,7 +559,7 @@ def stage(
         )
 
 
-def publish(db: psycopg.Connection, storage: BaseClient, candidate: str) -> bool:
+def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
     """Publish an approved candidate or finish cleanup for an older release.
 
     Args:
@@ -659,7 +572,6 @@ def publish(db: psycopg.Connection, storage: BaseClient, candidate: str) -> bool
 
     Raises:
         ValueError: The candidate cannot be published or an asset fails verification.
-        ClientError: A required R2 operation fails.
     """
     release = lookup_release(db, candidate)
     map_version = release["map_version"]
@@ -677,7 +589,7 @@ def publish(db: psycopg.Connection, storage: BaseClient, candidate: str) -> bool
     manifest = read_manifest(storage, release)
     if INPUTS_FILE not in manifest["objects"]:
         raise ValueError("release has no frozen input archive")
-    condition = homepage_condition(storage, bucket)
+    etag = storage.etag(bucket, HOMEPAGE)
     html = None
     for name, asset in manifest["objects"].items():
         data = verify_object(
@@ -698,7 +610,14 @@ def publish(db: psycopg.Connection, storage: BaseClient, candidate: str) -> bool
             "UPDATE atlas.map_releases SET is_official=true,is_current=true WHERE id=%s",
             (candidate,),
         )
-    put_homepage(storage, bucket, HOMEPAGE, html, **condition)
+    storage.put(
+        bucket,
+        HOMEPAGE,
+        html,
+        content_type="text/html",
+        cache_control="no-cache",
+        expected_etag=etag,
+    )
     retire_previews(db, storage, map_version)
     return True
 
@@ -724,13 +643,10 @@ def main() -> None:
     args = parser.parse_args()
     if args.action != "restore-inputs":
         version(args.candidate)
-    if not (connection := os.environ.get("NEON_DATABASE_URL")):
-        parser.error("set NEON_DATABASE_URL to the release catalog database")
-
-    if args.action != "restore-inputs" and "-pooler." in str(
-        conninfo_to_dict(connection).get("host", "")
-    ):
-        parser.error("use a direct Neon connection for the release lock")
+    try:
+        url = neon_connection_url(direct=args.action != "restore-inputs")
+    except ValueError as exc:
+        parser.error(str(exc))
 
     with tempfile.TemporaryDirectory() as temp:
         bundle = Path(temp)
@@ -740,7 +656,7 @@ def main() -> None:
                 args.candidate, args.run.resolve(), args.viewer.resolve(), bundle
             )
         with (
-            psycopg.connect(connection, autocommit=True) as db,
+            connect_neon(url=url, autocommit=True) as db,
             closing(make_r2_client(release_endpoint())) as storage,
         ):
             if args.action == "restore-inputs":

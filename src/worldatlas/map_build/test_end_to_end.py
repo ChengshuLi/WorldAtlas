@@ -19,6 +19,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import ogr
 
+from worldatlas.shared.r2 import R2Client
 from worldatlas.source_imports.run_import import run_import
 from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
@@ -146,7 +147,7 @@ class EndToEndTests(unittest.TestCase):
                 run_import(
                     lambda: psycopg.connect(url),
                     "__e2e_import",
-                    storage=storage,
+                    storage=R2Client(storage),
                     work_dir=root / "inputs",
                 )
                 with psycopg.connect(url) as db:

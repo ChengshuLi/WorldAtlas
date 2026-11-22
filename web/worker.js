@@ -1,3 +1,20 @@
+// Adapt the Worker's native R2 binding to the data the routes need.
+async function readAsset(bucket, key, { head, etag, includeMetadata = false }) {
+  const options = etag ? { onlyIf: new Headers({ "If-None-Match": etag }) } : undefined;
+  const object = await (head ? bucket.head(key) : bucket.get(key, options));
+  if (!object) return null;
+  const headers = includeMetadata ? new Headers() : null;
+  if (headers) {
+    object.writeHttpMetadata(headers);
+    headers.set("ETag", object.httpEtag);
+  }
+  return {
+    body: head ? null : object.body,
+    notModified: !head && !("body" in object),
+    headers,
+  };
+}
+
 // Serve release files only. Raw sources remain private.
 export default {
   async fetch(request, env) {
@@ -18,9 +35,8 @@ export default {
         status: "ready",
       });
     }
-    const readAsset = (key, options) => (head ? env.ATLAS.head(key) : env.ATLAS.get(key, options));
     if (["/", "/index.html"].includes(url.pathname)) {
-      const index = await readAsset("index.html");
+      const index = await readAsset(env.ATLAS, "index.html", { head });
       if (!index) {
         return new Response(
           head ? null : "WorldAtlas has no published map yet.",
@@ -32,7 +48,7 @@ export default {
           },
         );
       }
-      return new Response(head ? null : index.body, {
+      return new Response(index.body, {
         headers: {
           "Content-Type": "text/html; charset=utf-8",
           "Cache-Control": "no-cache",
@@ -45,16 +61,13 @@ export default {
       return new Response(head ? null : "Not found", { status: 404 });
     }
     const etag = request.headers.get("If-None-Match");
-    const options = etag ? { onlyIf: new Headers({ "If-None-Match": etag }) } : undefined;
-    const object = await readAsset(key, options);
-    if (!object) return new Response(head ? null : "Not found", { status: 404 });
-    const headers = new Headers();
-    object.writeHttpMetadata(headers);
-    headers.set("ETag", object.httpEtag);
-    headers.set("X-Content-Type-Options", "nosniff");
-    headers.set("Cache-Control", "public, max-age=300");
-    // A failed R2 condition returns metadata without the object body.
-    if (!head && !("body" in object)) return new Response(null, { status: 304, headers });
-    return new Response(head ? null : object.body, { headers });
+    const asset = await readAsset(env.ATLAS, key, { head, etag, includeMetadata: true });
+    if (!asset) return new Response("Not found", { status: 404 });
+    asset.headers.set("X-Content-Type-Options", "nosniff");
+    asset.headers.set("Cache-Control", "public, max-age=300");
+    return new Response(asset.body, {
+      status: asset.notModified ? 304 : 200,
+      headers: asset.headers,
+    });
   },
 };
