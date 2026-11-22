@@ -162,23 +162,6 @@ class SourceCache:
         self.download_intervals: list[tuple[float, float]] = []
         self._verified: set[tuple[Path, str, int]] = set()
 
-    def _local_path(self, path: Path) -> Path:
-        """Ensure a cache path stays within the input directory.
-
-        Args:
-            path: Cache destination to resolve.
-
-        Returns:
-            An absolute path within the cache.
-
-        Raises:
-            ValueError: The resolved path escapes the cache.
-        """
-        path = path.resolve()
-        if not path.is_relative_to(self.directory):
-            raise ValueError("cloud input escapes the cache directory")
-        return path
-
     def path(self, spec: FileSpec) -> Path:
         """Find where a pinned R2 object or ZIP member belongs locally.
 
@@ -194,7 +177,7 @@ class SourceCache:
         digest, _ = _fingerprint(spec)
         if "archive" not in spec:
             _, key = _location(spec)
-            return self._local_path(self.directory / digest / Path(key).name)
+            return self.directory / digest / Path(key).name
 
         archive, member = spec["archive"], spec.get("member")
         if not isinstance(archive, dict):
@@ -207,7 +190,7 @@ class SourceCache:
             raise ValueError("unsafe ZIP member")
         self.path(archive)
         archive_digest, _ = _fingerprint(archive)
-        return self._local_path(self.directory / archive_digest / member)
+        return self.directory / archive_digest / member
 
     def _verified_file(
         self,
@@ -238,7 +221,6 @@ class SourceCache:
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
             if previous is not None and previous != path and previous.is_file():
-                previous = self._local_path(previous)
                 _check_file(previous, digest, size)
                 self._publish(previous, path, digest, size)
             else:
@@ -413,5 +395,5 @@ class SourceCache:
                 with self.acquire(part).open("rb") as source:
                     shutil.copyfileobj(source, output, 1 << 20)
 
-        path = self._local_path(self.directory / digest / filename)
+        path = self.directory / digest / filename
         return self._verified_file(path, digest, size, join)

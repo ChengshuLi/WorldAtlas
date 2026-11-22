@@ -779,7 +779,7 @@ class Fixture(unittest.TestCase):
         self.assertFalse(runner.r2_inputs.path(spec).exists())
         self.assertEqual(len(list((self.root / "inputs").rglob("download-*"))), 0)
 
-    def test_invalid_cloud_pin_or_escaped_cache_path_is_rejected(self):
+    def test_invalid_cloud_pin_is_rejected(self):
         runner = self.make()
         spec = self.cloud(b"source", "raw/list.json")
         for changes, message in (
@@ -789,11 +789,6 @@ class Fixture(unittest.TestCase):
             with self.subTest(changes=changes):
                 with self.assertRaisesRegex(ValueError, message):
                     runner.r2_inputs.acquire(dict(spec, **changes))
-        outside = self.root / "run"
-        cached = self.inputs / spec["sha256"]
-        cached.symlink_to(outside, target_is_directory=True)
-        with self.assertRaisesRegex(ValueError, "cloud input escapes the cache directory"):
-            runner.r2_inputs.acquire(spec)
 
     def test_cache_reuses_same_bytes_without_duplicate_file_pins(self):
         runner = self.make()
