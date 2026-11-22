@@ -440,14 +440,6 @@ class Pipeline:
                 raise ValueError("resume uses a different --compare-release selection")
             divide = previous.get("divide")
             compare_release = previous.get("compare_release")
-            # Translate older saved options in memory so interrupted runs can resume.
-            physical_only = previous.pop("physical_from", None)
-            if physical_only is not None:
-                previous["reuse_from"] = physical_only
-            previous.setdefault(
-                "reuse_from", previous.get("physical_reuse", {}).get("source_run")
-            )
-            previous.setdefault("recompute_division", physical_only is not None)
             if reuse is not None and reuse != previous["reuse_from"]:
                 raise ValueError("resume uses a different --reuse-from run")
             if recompute_division and not previous["recompute_division"]:

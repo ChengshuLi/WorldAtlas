@@ -340,13 +340,6 @@ class EndToEndTests(unittest.TestCase):
                     recompute_division=True,
                 )
                 physical_only.close()
-                # A run started with the old physical-only flag can still
-                # resume using the same earlier physical grid.
-                path = physical_only.out / "run-identity.json"
-                earlier = json.loads(path.read_bytes())
-                earlier["physical_from"] = earlier.pop("reuse_from")
-                earlier.pop("recompute_division")
-                path.write_text(json.dumps(earlier))
                 resumed = Pipeline(
                     compare_path, root / "physical-only", work_dir=root, resume=True
                 )
