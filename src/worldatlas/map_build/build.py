@@ -337,10 +337,9 @@ class Pipeline:
         self.selection = self._load_selection(source_ids, selection)
         self.compiled_divisions = prepare_geography(self.selection["geography"])
         self._fill_catalog_entries(references)
-        self.physical_config = self._physical_configuration(sources)
-        self.r2_inputs = SourceCache(
-            self.root / "inputs", self.out, self.physical_config["r2_endpoint"]
-        )
+        r2_endpoint = self.cfg.get("r2_endpoint", DEFAULT_R2_ENDPOINT)
+        self.physical_config = self._physical_configuration(sources, r2_endpoint)
+        self.r2_inputs = SourceCache(self.root / "inputs", self.out, r2_endpoint)
         self.source_pins = self.r2_inputs.pins
         self.comparison_files: dict[str, Path] = {}
         comparison_inputs = self._prepare_comparison(
@@ -482,11 +481,14 @@ class Pipeline:
                 parents=self.requested_parents,
             )
 
-    def _physical_configuration(self, sources: BuildSources) -> dict[str, Any]:
+    def _physical_configuration(
+        self, sources: BuildSources, r2_endpoint: str
+    ) -> dict[str, Any]:
         """Record the grid and source settings for a standalone physical build.
 
         Args:
             sources: Source settings with catalog entries expanded to file pins.
+            r2_endpoint: Resolved R2 account URL for physical source files.
 
         Returns:
             A JSON-ready configuration with the grid, coastline and inland water.
@@ -497,7 +499,7 @@ class Pipeline:
             "selection_notes": self.cfg.get("selection_notes"),
             "source_directory": str(self.root / "inputs"),
             "grid": vars(self.grid),
-            "r2_endpoint": self.cfg.get("r2_endpoint", DEFAULT_R2_ENDPOINT),
+            "r2_endpoint": r2_endpoint,
             "land_config": sources["land_config"],
             "inland_water": sources["inland_water"],
         }
