@@ -97,7 +97,8 @@ def read_selection(
 
     Args:
         database: Open PostgreSQL connection for a read-only transaction.
-        raw_sources: Additional raw source IDs used for physical rasterization.
+        raw_sources: Additional Neon source IDs from the build config, including
+            physical inputs and any comparison files specified with ``r2_source``.
         parents: Parent IDs to load with their ancestors, or None for all
             divisions.
 
