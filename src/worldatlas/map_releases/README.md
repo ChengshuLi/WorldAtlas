@@ -42,7 +42,7 @@ micromamba activate worldatlas
 python -m pip install --no-deps .
 ```
 
-**3. Run map building to recalculate the cells.** The builder uses the saved selection, including the geographic records and coordinates captured from Neon. It fetches the pinned raw coastline and inland-water inputs from R2 as needed. Compare the new map streams with the released manifest's `decoded_sha256` values, or pass `--compare-release v9.0-rc.1` to compare cell assignments.
+**3. Run map building to recalculate the cells.** The builder uses the saved selection, including the geographic records and coordinates captured from Neon. It fetches the pinned raw coastline and inland-water inputs from R2 as needed. After the build finishes, check the map streams against the release manifest's `decoded_sha256` values or run [`worldatlas-compare`](../map_build/README.md#compare-a-finished-build) to see which assignments changed.
 
 ```bash
 worldatlas-build /absolute/path/to/restored-inputs/configuration.json \

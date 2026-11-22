@@ -5,7 +5,6 @@ from contextlib import redirect_stderr
 import os
 import signal
 from contextlib import contextmanager, nullcontext
-import gzip
 import hashlib
 import io
 from pathlib import Path
@@ -23,7 +22,6 @@ import pyarrow.parquet as pq
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.runtime import elapsed_union
-from worldatlas.map_build.inputs import releases as release_inputs
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
 from worldatlas.source_assets.cache import SourceCache
@@ -410,119 +408,6 @@ class Fixture(unittest.TestCase):
                     resume=True,
                 )
             self.assertEqual(Path(error.exception.filename), saved)
-
-    def test_release_comparison_downloads_and_verifies_streams_and_config(self):
-        raw_key = "sources/coast.geojson"
-        self.select_coastline(raw_key, [self.cloud(b"{}", raw_key)])
-        config = write_json(self.inputs / "request.json", self.cfg)
-        digest = lambda data: hashlib.sha256(data).hexdigest()
-        decoded = {name: name.encode() for name in ("rows", "runs")}
-        stored = {
-            f"review/{name}.u32le.gz": gzip.compress(data)
-            for name, data in decoded.items()
-        }
-        catalog = [
-            (name, self.cloud(data, key), digest(decoded[name]))
-            for name, (key, data) in zip(decoded, stored.items())
-        ]
-        release_config = b'{"categories":[]}'
-        config_asset = self.cloud(release_config, "review/config.json")
-        stored[config_asset["r2_key"]] = release_config
-        calls = []
-        with (
-            patch.object(
-                release_inputs, "read_release_assets", return_value=(catalog, config_asset)
-            ) as release_lookup,
-            self.fake_r2(stored | {raw_key: b"{}"}, calls),
-        ):
-            runner = pipeline.Pipeline(
-                config,
-                self.root / "run",
-                work_dir=self.root,
-                compare_release="v8.0",
-            )
-            try:
-                for name, data in decoded.items():
-                    self.assertEqual(
-                        Path(runner.comparison_inputs["reference_" + name]["path"]).read_bytes(), data
-                    )
-                self.assertEqual(Path(runner.comparison_inputs["reference_config"]["path"]).read_bytes(), release_config)
-            finally:
-                runner.close()
-            release_lookup.side_effect = AssertionError("preview is no longer cataloged")
-            for _, source, _ in catalog:
-                (self.inputs / source["sha256"] / Path(source["r2_key"]).name).unlink()
-            with patch.object(pipeline, "SourceCache") as cache:
-                resumed = pipeline.Pipeline(
-                    config,
-                    runner.out,
-                    work_dir=self.root,
-                    resume=True,
-                )
-            cache.assert_not_called()
-            try:
-                self.assertEqual(resumed.identity["compare_release"], "v8.0")
-                self.assertEqual(resumed.comparison_inputs, runner.comparison_inputs)
-            finally:
-                resumed.close()
-            with self.assertRaisesRegex(ValueError, "--resume uses saved options"):
-                pipeline.Pipeline(
-                    config,
-                    runner.out,
-                    work_dir=self.root,
-                    compare_release="v8.0",
-                    resume=True,
-                )
-            Path(runner.comparison_inputs["reference_rows"]["path"]).write_bytes(b"changed comparison")
-            with self.assertRaisesRegex(ValueError, "checkpoint/input hash mismatch"):
-                pipeline.Pipeline(config, runner.out, work_dir=self.root, resume=True)
-            identity_path = runner.out / "run-identity.json"
-            identity = read_json(identity_path)
-            identity.pop("comparison_inputs")
-            identity_path.write_text(json.dumps(identity))
-            with self.assertRaisesRegex(ValueError, "resume is missing saved comparison files"):
-                pipeline.Pipeline(config, runner.out, work_dir=self.root, resume=True)
-        self.assertEqual(calls, list(stored))
-
-    def test_release_comparison_reuses_decoded_stream_from_another_release(self):
-        decoded = b"map bytes"
-        packed = gzip.compress(decoded)
-        stored_hash = hashlib.sha256(packed).hexdigest()
-        decoded_hash = hashlib.sha256(decoded).hexdigest()
-        key = "releases/fixture/rows.u32le.gz"
-        source = self.cloud(packed, key)
-        good = ("rows", source, decoded_hash)
-        bad = ("rows", source, "0" * 64)
-        reissued = (
-            "rows",
-            self.cloud(gzip.compress(decoded, mtime=1), "releases/another/rows.u32le.gz"),
-            decoded_hash,
-        )
-        config_data = b'{"categories":[]}'
-        config = self.cloud(config_data, "releases/fixture/config.json")
-        calls = []
-        with (
-            patch.object(
-                release_inputs, "read_release_assets",
-                side_effect=[([bad], config), ([good], config), ([reissued], config)],
-            ),
-            self.fake_r2({key: packed, config["r2_key"]: config_data}, calls),
-        ):
-            source_cache = self.make_cache()
-            with self.assertRaisesRegex(ValueError, "decoded reference stream hash mismatch"):
-                release_inputs.cache_release_reference("fixture", source_cache)
-            self.assertEqual(list(self.inputs.glob("release-*/*")), [])
-            expected = release_inputs.cache_release_reference("fixture", source_cache)
-            self.assertEqual(set(expected), {"reference_rows", "reference_config"})
-            cached = Path(expected["reference_rows"]["path"])
-            self.assertEqual(cached.read_bytes(), decoded)
-            self.assertEqual(list(cached.parent.iterdir()), [cached])
-            (self.inputs / stored_hash / Path(key).name).unlink()
-            self.assertEqual(
-                release_inputs.cache_release_reference("fixture", self.make_cache()),
-                expected,
-            )
-        self.assertEqual(calls, [key, config["r2_key"]])
 
     def cloud(self, payload, key="sources/input.json"):
         return {

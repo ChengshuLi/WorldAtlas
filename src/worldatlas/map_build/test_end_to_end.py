@@ -20,12 +20,12 @@ import pyarrow.parquet as pq
 from osgeo import ogr
 
 from worldatlas.source_imports.run_import import run_import
-from worldatlas.map_build import build as pipeline
+from worldatlas.map_build import compare as comparison_command
 from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
 from worldatlas.map_build.inputs import selection as selection_inputs
 from worldatlas.map_build.inputs.selection import read_selection, canonical_bytes
-from worldatlas.shared.files import pin_file, write_json
+from worldatlas.shared.files import pin_file, read_json, write_json
 
 
 @unittest.skipUnless(
@@ -340,7 +340,7 @@ class EndToEndTests(unittest.TestCase):
                 runs.tofile(release_runs)
                 release_config = write_json(
                     release_folder / "config.json",
-                    {"categories": [
+                    {**grid, "categories": [
                         dict(id=binding["code"] + 100, entity_id=binding["entity_id"],
                              physical_class=binding["physical_class"])
                         for binding in frozen["geography"]["category_bindings"]
@@ -352,11 +352,10 @@ class EndToEndTests(unittest.TestCase):
                         ("rows", release_rows), ("runs", release_runs), ("config", release_config)
                     )
                 }
-                with patch.object(pipeline, "cache_release_reference", return_value=comparison_pins):
-                    physical_only = Pipeline(
-                        cfg, root / "physical-only", work_dir=root, selection=selected,
-                        reuse_from=root / "reused", recompute_division=True, compare_release="v9.0",
-                    )
+                physical_only = Pipeline(
+                    cfg, root / "physical-only", work_dir=root, selection=selected,
+                    reuse_from=root / "reused", recompute_division=True,
+                )
                 physical_only.close()
                 resumed = Pipeline(
                     cfg, root / "physical-only", work_dir=root, resume=True
@@ -369,10 +368,18 @@ class EndToEndTests(unittest.TestCase):
                 )
                 self.assertFalse(division["parents"]["0"]["reused"])
                 self.assertFalse(division["parents"]["0"]["land"]["reused"])
-                comparison = root / "physical-only/comparison/report.json"
-                self.assertEqual(result["comparison"], pin_file(comparison))
-                self.assertEqual(json.loads(comparison.read_bytes())["changed_cells"], 0)
-                self.assertFalse((root / "physical-only/comparison.json").exists())
+                run_path = root / "physical-only"
+                report_pin = pin_file(run_path / "report.json")
+                comparison_path = root / "comparison"
+                with patch.object(comparison_command, "cache_release_reference", return_value=comparison_pins):
+                    compared = comparison_command.compare_release(
+                        run_path, "v9.0", comparison_path, work_dir=root
+                    )
+                self.assertEqual(compared["compared_by"], "entity_and_physical_class")
+                self.assertEqual(compared["changed_cells"], 0)
+                self.assertEqual(read_json(comparison_path / "report.json"), compared)
+                self.assertFalse((run_path / "comparison").exists())
+                self.assertEqual(pin_file(run_path / "report.json"), report_pin)
 
                 changed = Pipeline(
                     cfg, root / "changed-config", work_dir=root, selection=selected,

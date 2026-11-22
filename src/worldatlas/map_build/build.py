@@ -28,7 +28,6 @@ import scipy
 from osgeo import gdal
 from pyproj import datadir
 
-from worldatlas.map_build.core.comparison import compare
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.division.encoding import encode
 from worldatlas.map_build.division.hierarchy import HierarchyDivision
@@ -50,7 +49,6 @@ from worldatlas.map_build.inputs.configuration import (
     catalog_source_id,
     require_separate_cache_and_output,
 )
-from worldatlas.map_build.inputs.releases import ComparisonPins, cache_release_reference
 from worldatlas.map_build.inputs.selection import (
     canonical_bytes,
     prepare_geography,
@@ -103,8 +101,6 @@ class RunIdentity(TypedDict):
     recompute_division: bool
     runtime_paths: dict[str, str | None]
     input_selection_sha256: str
-    compare_release: NotRequired[str]
-    comparison_inputs: NotRequired[ComparisonPins]
     physical_reuse: NotRequired[PhysicalReuse]
 
 
@@ -277,7 +273,6 @@ class Pipeline:
         *,
         work_dir: Path | str,
         resume: bool = False,
-        compare_release: str | None = None,
         selection: Path | str | None = None,
         divide: list[int] | None = None,
         reuse_from: Path | str | None = None,
@@ -290,7 +285,6 @@ class Pipeline:
             output: Directory inside the workspace for this build's results.
             resume: Continue a run that already has an identity file.
             work_dir: Workspace holding the shared inputs cache and run directories.
-            compare_release: Release name to compare with the finished map.
             selection: Frozen geographic selection JSON file. Otherwise read the
                 working selection.
             divide: Parent entity IDs to divide, including their necessary
@@ -314,8 +308,8 @@ class Pipeline:
 
         self.resume = resume
         self._prepare_workspace(output, work_dir)
-        saved_identity, compare_release = self._resolve_run_options(
-            divide, compare_release, reuse_from, recompute_division
+        saved_identity = self._resolve_run_options(
+            divide, reuse_from, recompute_division
         )
         self.runtime = runtime_identity()
 
@@ -326,23 +320,12 @@ class Pipeline:
         self.compiled_divisions = prepare_geography(self.selection["geography"])
         self._fill_catalog_entries(references)
         self.physical_config = self._physical_configuration(sources)
-        self.comparison_downloads: list[tuple[float, float]] = []
-        self.comparison_inputs = self._prepare_comparison(
-            compare_release, saved_identity
-        )
-        self.source_pins = [
-            pin for _, pin in sorted((self.comparison_inputs or {}).items())
-        ]
         self.physical_reuse = (
             physical_reference(self.reuse_from, self.physical_config)
             if self.reuse_from is not None
             else None
         )
-        if self.physical_reuse is not None:
-            self.source_pins.extend(
-                p for p in self.physical_reuse["pins"] if p not in self.source_pins
-            )
-        self._prepare_run_identity(compare_release)
+        self._prepare_run_identity()
 
         if not resume:
             self.out.mkdir(mode=0o700)
@@ -384,20 +367,18 @@ class Pipeline:
     def _resolve_run_options(
         self,
         divide: list[int] | None,
-        compare_release: str | None,
         reuse_from: Path | str | None,
         recompute_division: bool,
-    ) -> tuple[RunIdentity | None, str | None]:
+    ) -> RunIdentity | None:
         """Apply the requested options or restore them from an interrupted run.
 
         Args:
             divide: Parent entity IDs to divide, or None for the default.
-            compare_release: Release name to compare against, if supplied.
             reuse_from: Earlier run to reuse, if supplied.
             recompute_division: Whether to reuse only the physical grid.
 
         Returns:
-            Previous run identity and comparison release name. Each is None when absent.
+            The saved run identity on resume, or None for a fresh build.
 
         Raises:
             ValueError: The checkpoint is missing or the options are incompatible.
@@ -407,14 +388,13 @@ class Pipeline:
             if any(
                 (
                     divide is not None,
-                    compare_release is not None,
                     reuse_from is not None,
                     recompute_division,
                 )
             ):
                 raise ValueError(
-                    "--resume uses saved options. Omit --divide, --compare-release, "
-                    "--reuse-from, and --recompute-division."
+                    "--resume uses saved options. Omit --divide, --reuse-from, "
+                    "and --recompute-division."
                 )
             identity_path = self.out / "run-identity.json"
             if not identity_path.is_file():
@@ -424,7 +404,6 @@ class Pipeline:
             identity: RunIdentity = read_json(identity_path)
             saved_identity = identity
             divide = identity.get("divide")
-            compare_release = identity.get("compare_release")
             reuse_from = identity["reuse_from"]
             recompute_division = identity["recompute_division"]
         reuse = Path(reuse_from) if reuse_from is not None else None
@@ -435,7 +414,7 @@ class Pipeline:
         self.reuse_from = reuse
         self.recompute_division = recompute_division
         self.requested_parents = divide
-        return saved_identity, compare_release
+        return saved_identity
 
     def _load_selection(
         self, source_ids: set[str], selection: Path | str | None
@@ -443,7 +422,7 @@ class Pipeline:
         """Load the geographic records that this run will use.
 
         Args:
-            source_ids: Catalog IDs for physical and comparison inputs.
+            source_ids: Catalog IDs for physical inputs.
             selection: Saved geographic records for a fresh build.
 
         Returns:
@@ -489,48 +468,14 @@ class Pipeline:
             "inland_water": sources["inland_water"],
         }
 
-    def _prepare_comparison(
-        self,
-        compare_release: str | None,
-        saved_identity: RunIdentity | None,
-    ) -> ComparisonPins | None:
-        """Prepare the pinned files for a comparison with a release.
-
-        Args:
-            compare_release: Release name, if the caller requested one.
-            saved_identity: Saved run identity on resume.
-
-        Returns:
-            File pins keyed by input name, or None without a comparison release.
-
-        Raises:
-            ValueError: Saved comparison inputs are missing or have changed.
-        """
-        if compare_release is None:
-            return None
-        if saved_identity is not None:
-            pins = saved_identity.get("comparison_inputs")
-            if pins is None:
-                raise ValueError("resume is missing saved comparison files")
-            verify_pins(pins.values())
-            return pins
-        with closing(SourceCache(self.root / "inputs")) as cache:
-            pins = cache_release_reference(compare_release, cache)
-        self.comparison_downloads = cache.download_intervals
-        return pins
-
-    def _prepare_run_identity(self, compare_release: str | None) -> None:
-        """Collect the inputs, code and options to save for the run.
-
-        Args:
-            compare_release: Release name used for comparison, if supplied.
-        """
+    def _prepare_run_identity(self) -> None:
+        """Collect the inputs, code and options to save for the run."""
         self.code = code_identity(PACKAGE_ROOT)
         self.repository = repository_identity(PACKAGE_ROOT)
         self.identity: RunIdentity = {
             "schema": "worldatlas-end-to-end-run-identity-v1",
             "request": self.config_pin,
-            "source_pins": self.source_pins,
+            "source_pins": self.physical_reuse["pins"] if self.physical_reuse else [],
             "code": self.code,
             "repository": self.repository,
             "scripts_root": str(PACKAGE_ROOT),
@@ -546,10 +491,6 @@ class Pipeline:
                 canonical_bytes(self.selection)
             ).hexdigest(),
         }
-        if compare_release is not None:
-            self.identity["compare_release"] = compare_release
-        if self.comparison_inputs is not None:
-            self.identity["comparison_inputs"] = self.comparison_inputs
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
 
@@ -626,33 +567,28 @@ class Pipeline:
         elif saved_config.read_bytes() != json_bytes(self.cfg):
             raise ValueError("saved build configuration changed")
         self.checkpoints.preserve("failure", [self.out / "failure.json"])
-        cursor = setup_started
-        for start, end in [
-            *self.comparison_downloads,
-            (time.monotonic(), None),
-        ]:
-            token = uuid.uuid4().hex
-            self.timing.event(
-                {
-                    "event": "start",
-                    "token": token,
-                    "id": "setup/source-validation",
-                    "group": "setup",
-                    "monotonic_seconds": cursor,
-                    "utc": setup_utc,
-                }
-            )
-            self.timing.event(
-                {
-                    "event": "complete",
-                    "token": token,
-                    "id": "setup/source-validation",
-                    "group": "setup",
-                    "start_monotonic_seconds": cursor,
-                    "monotonic_seconds": start,
-                }
-            )
-            cursor = end
+        setup_finished = time.monotonic()
+        token = uuid.uuid4().hex
+        self.timing.event(
+            {
+                "event": "start",
+                "token": token,
+                "id": "setup/source-validation",
+                "group": "setup",
+                "monotonic_seconds": setup_started,
+                "utc": setup_utc,
+            }
+        )
+        self.timing.event(
+            {
+                "event": "complete",
+                "token": token,
+                "id": "setup/source-validation",
+                "group": "setup",
+                "start_monotonic_seconds": setup_started,
+                "monotonic_seconds": setup_finished,
+            }
+        )
         if self.resume:
             for earlier_attempt in (self.out / "attempts").iterdir():
                 if (
@@ -920,67 +856,13 @@ class Pipeline:
         )
         return Path(result["directory"])
 
-    def compare(self, final: Path, physical: Path) -> dict[str, str] | None:
-        """Record changed assignments against the chosen reference grid.
-
-        Args:
-            final: Directory containing the final row-run grid.
-            physical: Physical grid directory, used for its dimensions.
-
-        Returns:
-            Comparison report's path and SHA-256, or None if no reference was selected.
-        """
-        if self.comparison_inputs is None:
-            return None
-        rows = self.comparison_inputs["reference_rows"]
-        runs = self.comparison_inputs["reference_runs"]
-        config = self.comparison_inputs["reference_config"]
-        grid = Grid(**read_json(physical / "report.json")["grid"])
-        inputs = [
-            pin_file(final / "rows.u32le"),
-            pin_file(final / "runs.u32le"),
-            rows,
-            runs,
-            config,
-            pin_file(self.out / "input-selection.json"),
-        ]
-        reference_bindings = [
-            dict(
-                code=category["id"],
-                entity_id=category["entity_id"],
-                physical_class=category["physical_class"],
-            )
-            for category in read_json(config["path"])["categories"]
-        ]
-        self.checkpoints.run_function(
-            "compare",
-            "verification",
-            compare,
-            (
-                final,
-                Path(rows["path"]).parent,
-                grid,
-                self.out / "comparison",
-                {"rows.u32le": rows["sha256"], "runs.u32le": runs["sha256"]},
-            ),
-            timing=self.timing,
-            inputs=inputs,
-            outputs=[self.out / "comparison"],
-            kwargs={
-                "reference_bindings": reference_bindings,
-                "candidate_bindings": self.selection["geography"]["category_bindings"],
-            },
-        )
-        return pin_file(self.out / "comparison" / "report.json")
-
     def run(self) -> dict[str, Any]:
         """Run the build through physical grid, ownership, and final encoding.
 
         Write a success or failure report and close the run even if a stage fails.
 
         Returns:
-            Build report with pinned inputs and outputs, stage timings, and
-            an optional comparison report pin.
+            Build report with pinned inputs and outputs and stage timings.
         """
         physical = None
         try:
@@ -1009,10 +891,9 @@ class Pipeline:
                 final = self.package(physical, ownership)
             self.timing.mark_complete("package")
             with self.timing.measure("verification", "stage-total"):
-                comparison = self.compare(final, physical)
                 verify_pins(physical_inputs)
                 if pin_file(self.config_path) != self.config_pin or any(
-                    pin_file(p["path"]) != p for p in self.source_pins
+                    pin_file(p["path"]) != p for p in self.identity["source_pins"]
                 ):
                     raise ValueError("source configuration changed during pipeline")
                 final_pins = {
@@ -1032,7 +913,6 @@ class Pipeline:
                 "status": "complete",
                 "request": self.config_pin,
                 "runner": pin_file(__file__),
-                "comparison": comparison,
                 "original_run_identity": pin_file(self.out / "run-identity.json"),
                 "stages": stages,
                 "timing_complete": all(
@@ -1088,18 +968,14 @@ def main() -> None:
         "--resume",
         action="store_true",
         help=(
-            "continue the saved run. Omit --selection, --divide, --compare-release, "
-            "--reuse-from, and --recompute-division"
+            "continue the saved run. Omit --selection, --divide, --reuse-from, "
+            "and --recompute-division"
         ),
     )
     p.add_argument(
         "--selection",
         type=Path,
         help="start a new build from a saved geographic selection",
-    )
-    p.add_argument(
-        "--compare-release",
-        help="compare with an official version or numbered candidate in Neon",
     )
     p.add_argument(
         "--divide",
@@ -1135,7 +1011,6 @@ def main() -> None:
         a.output,
         resume=a.resume,
         work_dir=a.work_dir,
-        compare_release=a.compare_release,
         reuse_from=a.reuse_from,
         recompute_division=a.recompute_division,
         divide=a.divide,

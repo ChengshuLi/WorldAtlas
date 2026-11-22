@@ -21,11 +21,22 @@ Supply `--work-dir` and an output directory for every build. The builder creates
 | `--divide PARENT_ID` | Optional. By default, divide every parent with rules in the saved selection. Supply a parent entity ID to run only its division and the ancestor divisions it needs. For example, `--divide 0` divides World into continents. Repeat the option to select several parents. |
 | `--reuse-from PREVIOUS_RUN` | Start a new build using the physical grid from an earlier local run. The grid and physical inputs must match. By default, the builder tries to reuse all compatible geographic assignments. It checks each complete parent division first and can reuse the land assignments alone if only the water rules changed. |
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
-| `--resume` | Continue an interrupted build using its saved selection and options. Pass the original config, output directory, and `--work-dir`. Omit `--selection`, `--divide`, `--compare-release`, `--reuse-from`, and `--recompute-division`. |
+| `--resume` | Continue an interrupted build using its saved selection and options. Pass the original config, output directory, and `--work-dir`. Omit `--selection`, `--divide`, `--reuse-from`, and `--recompute-division`. |
 | `--selection INPUT_SELECTION.json` | Start a fresh build with a saved geographic selection. To rebuild a release, use its restored configuration, selection and captured code. |
-| `--compare-release VERSION_OR_RC` | Compare every cell with an official release or numbered candidate on the same grid. The release must include `config.json` with its category mapping. The first attempt downloads missing files from R2. Resume uses the saved comparison files. |
 
 To run a restored copy of the builder directly, use `python -m worldatlas.map_build.build` from the archive’s `src` directory in its recorded environment. [Restore a release for rebuilding](../map_releases/README.md#restore-inputs)
+
+### Compare a finished build
+
+Run `worldatlas-compare` after the build finishes. Pick an official release or a numbered candidate with the same grid, and give the comparison a new output directory whose parent already exists.
+
+```bash
+workspace=/absolute/path/to/worldatlas-work
+worldatlas-compare "$workspace/runs/preview" v8.3 "$workspace/v8.3-diff" \
+  --work-dir "$workspace"
+```
+
+The command looks up the release in Neon and reuses its files from the workspace’s `inputs/` cache when available. It compares cells by entity and land or water class, so renumbering map codes alone does not count as a change. The output contains `report.json` with totals and `changes.u32le` and `change-rows.u64le` with the exact changed spans. [Comparison command](compare.py)
 
 ## How it works
 
@@ -56,7 +67,7 @@ Source imports save the coordinates of boundaries, areas and reference points in
 | Build the physical grid | Coastline polygons, inland-water polygons and grid settings | A land/water grid. A cell is land if it falls inside the coastline mask and outside the inland-water mask. |
 | Divide each parent | The land/water grid, the parent’s cells and its rules | An entity ID for each cell, using the most detailed division that was built. |
 | Encode | The owner and cell type for each cell | Final map codes and the number of cells using each code. |
-| Verify and compare | Final map files, input checksums and an optional reference map | The run report and, when requested, the locations and counts of changed cells. |
+| Verify | Final map files and input checksums | The completed run report with final file checksums and timings. |
 
 ### Dividing the hierarchy
 
@@ -114,7 +125,6 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `final/` | The finished map grid, encoded as map codes. |
 | `final/report.json` | Counts the cells using each map code. Release staging uses the counts to check coverage and build the legend. |
 | `report.json` | Marks the run complete and records final file paths, checksums and stage timings. Its `physical_directory` field locates the physical grid, including a grid reused from an earlier run. |
-| `comparison/` | Locations and counts of cells whose entity or physical class changed compared with the selected release. |
 | `attempts/` | Records the code and runtime for each run attempt. Release staging uses these records to package the code needed for replay. |
 | `checkpoints/` | Records inputs and outputs for completed steps so resume can verify and reuse them. |
 | `checkpoints/{STEP}/attempt-{ID}/error.log` | The traceback for a failed step, kept beside that attempt’s checkpoint. |
@@ -144,13 +154,14 @@ Start with `build.py`. Its `main()` reads the command options, and `Pipeline.run
 
 | Code | What it does |
 | --- | --- |
-| [`inputs/`](inputs/README.md) | Reads rules, coordinates and source records from Neon. Also looks up a release chosen for comparison. |
+| [`inputs/`](inputs/README.md) | Reads rules, coordinates and source records from Neon. |
 | [`physical/`](physical/README.md) | Turns coastline and inland-water polygons into the land/water grid. |
 | [`division/hierarchy.py`](division/hierarchy.py) | Chooses which parents to divide, starting at World. Reuses earlier divisions when their inputs match. |
 | [`division/`](division/README.md) | Runs the rules for one parent, merges the assignments and checks that each cell has an owner. |
 | [`land/`](land/README.md) | Finds connected pieces of land and supplies the tools for assigning islands by distance. |
 | [`water/`](water/README.md) | Finds shores and identifies which land owners border a basin. |
 | [`division/encoding.py`](division/encoding.py) | Combines ownership and land/water to write the final map codes. |
+| [`compare.py`](compare.py) | Compares a completed build with a release and writes the results to a separate directory. |
 | [`core/comparison.py`](core/comparison.py) | Compares every cell in two finished maps and records the locations and counts of changed assignments. |
 | [`core/`](core/) | Shared code for cell coordinates, shapes and row-run files. |
 | [`execution/`](execution/) | Saves progress for resume, records timing and captures the code used for each attempt. |
