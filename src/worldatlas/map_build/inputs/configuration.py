@@ -7,7 +7,6 @@ from pydantic import (
     JsonValue,
     StringConstraints,
     TypeAdapter,
-    ValidationError,
     with_config,
 )
 
@@ -16,13 +15,6 @@ type ByteCount = Annotated[int, Field(ge=0)]
 type NonemptyString = Annotated[str, StringConstraints(min_length=1)]
 type Digest = Annotated[str, StringConstraints(pattern=r"^[0-9a-f]{64}$")]
 type FileEntry = dict[str, JsonValue]
-
-
-@with_config(extra="forbid")
-class CatalogSelector(TypedDict):
-    """Name the raw file by its Neon catalog ID."""
-
-    source_id: str
 
 
 @with_config(extra="forbid")
@@ -172,7 +164,6 @@ class PhysicalConfiguration(PhysicalControls):
     physical_reference_streams: NotRequired[dict[str, FilePin]]
 
 
-CATALOG_SELECTOR = TypeAdapter(CatalogSelector)
 BUILD_CONFIGURATION = TypeAdapter(BuildConfiguration)
 PHYSICAL_CONFIGURATION = TypeAdapter(PhysicalConfiguration)
 PHYSICAL_CONTROLS = TypeAdapter(PhysicalControls)
@@ -192,12 +183,9 @@ def parse_catalog_source_id(entry: FileEntry) -> str:
     Raises:
         ValueError: The selector is invalid or the same entry also pins its R2 bytes.
     """
-    try:
-        selector = CATALOG_SELECTOR.validate_python(entry["r2_source"], strict=True)
-    except ValidationError as exc:
-        raise ValueError("invalid raw catalog reference") from exc
-    if not selector["source_id"].strip():
-        raise ValueError("invalid raw catalog reference")
+    source_id = entry["r2_source"]
+    if not isinstance(source_id, str) or not source_id.strip():
+        raise ValueError("r2_source must be a nonblank Neon source ID")
     pinned_fields = {
         "r2_bucket",
         "r2_key",
@@ -208,4 +196,4 @@ def parse_catalog_source_id(entry: FileEntry) -> str:
     }
     if pinned_fields.intersection(entry):
         raise ValueError("invalid raw catalog reference: remove explicit file metadata")
-    return selector["source_id"]
+    return source_id

@@ -39,7 +39,7 @@ The build configuration sets the grid, physical inputs, coastal distance and pro
 - `sources.inland_water.files` lists the raw water files for the selected dataset release. Catalog references supply `size_bytes` from Neon. Direct R2 references must supply it alongside the bucket, key, and SHA-256.
 - `sources.inland_water.rasterization` sets which water features to include and how to draw them on the grid.
 
-Neon’s source catalog gives the builder each raw file’s R2 location, expected size and checksum. The builder checks the files before using them. `physical_controls.source_staging` supplies the R2 endpoint.
+Set `r2_source` to the raw file’s Neon catalog ID, such as `"r2_source": "osm-land-polygons-split-4326"`. For a ZIP member, put the source ID inside its `archive` entry. The catalog gives the builder the R2 location, expected size and checksum. The builder checks the bytes before using them. `physical_controls.source_staging` supplies the R2 endpoint.
 
 `physical_controls.max_parallel_shards` sets how many water files can be in progress at once. With R2, two workers let one download run while the other file rasterizes. `division_workers` sets how many independent rules within a group can run at once.
 

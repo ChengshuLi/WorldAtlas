@@ -378,12 +378,11 @@ class Fixture(unittest.TestCase):
 
     def test_invalid_catalog_selector_fails_before_file_acquisition(self):
         for spec, message in (
-            (dict(r2_source={"source_id": "absent"}), "missing selected sources"),
-            (dict(r2_source="id"), "invalid raw catalog reference"),
-            (dict(r2_source={"source_id": " "}), "invalid raw catalog reference"),
-            (dict(r2_source={"source_id": "fixture", "version": "v1"}), "invalid raw catalog reference"),
+            (dict(r2_source="absent"), "missing selected sources"),
+            (dict(r2_source=" "), "r2_source must be a nonblank Neon source ID"),
+            (dict(r2_source={"source_id": "fixture"}), "r2_source must be a nonblank Neon source ID"),
             (
-                dict(r2_source={"source_id": "fixture"}, r2_bucket="test"),
+                dict(r2_source="fixture", r2_bucket="test"),
                 "invalid raw catalog reference",
             ),
         ):
@@ -602,8 +601,8 @@ class Fixture(unittest.TestCase):
     def test_catalog_resolves_source_ids_before_r2_acquisition(self):
         payload = b"{}"
         raw = self.cloud(payload)
-        identity = {"source_id": "fixture"}
-        reference = {"r2_source": identity}
+        source_id = "fixture"
+        reference = {"r2_source": source_id}
         self.frozen["raw_sources"] = [
             dict(source_id="fixture", **raw),
             dict(source_id="unrelated", **self.cloud(b"other")),
@@ -615,7 +614,7 @@ class Fixture(unittest.TestCase):
         with self.fake_r2({}, []) as download:
             runner = self.make()
         download.assert_not_called()
-        resolved = {"source_id": identity["source_id"], **raw}
+        resolved = {"source_id": source_id, **raw}
         self.assertEqual(
             runner.physical_config["land_config"]["land"][0]["dataset"], resolved
         )

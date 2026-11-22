@@ -14,8 +14,8 @@ class ReplaySourcesTests(unittest.TestCase):
 
     def setUp(self):
         """Prepare an inline request with a cataloged coastline and water shard."""
-        self.shape = {"archive": {"r2_source": {"source_id": "coast"}}, "member": "shore.shp"}
-        self.shard = {"path": "shard.parquet", "r2_source": {"source_id": "inland"}}
+        self.shape = {"archive": {"r2_source": "coast"}, "member": "shore.shp"}
+        self.shard = {"path": "shard.parquet", "r2_source": "inland"}
         self.sources = {
             "land_config": {"land": [{"dataset": self.shape, "files": [self.shape]}]},
             "inland_water": {"rasterization": {}, "files": [self.shard]},
