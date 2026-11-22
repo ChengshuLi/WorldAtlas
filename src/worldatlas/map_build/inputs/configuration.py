@@ -186,6 +186,8 @@ def parse_catalog_source_id(entry: FileEntry) -> str:
     source_id = entry["r2_source"]
     if not isinstance(source_id, str) or not source_id.strip():
         raise ValueError("r2_source must be a nonblank Neon source ID")
+    # With r2_source, Neon supplies the file details. Reject those keys in the
+    # same entry so the lookup cannot silently overwrite them.
     pinned_fields = {
         "r2_bucket",
         "r2_key",
