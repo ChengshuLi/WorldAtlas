@@ -6,6 +6,7 @@ from types import SimpleNamespace
 from unittest.mock import patch
 import numpy as np
 from osgeo import gdal, ogr, osr
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.physical import land as b
 from worldatlas.map_build.physical.sources import checked_files
 from worldatlas.shared.files import sha256_file
@@ -37,9 +38,9 @@ class RasterizeLandTests(unittest.TestCase):
                 }
             )
         )
+        self.grid = Grid(8, 4, 45)
         self.cfg = {
             'schema': 'land-raster-candidate-v1',
-            'grid': {'width': 8, 'height': 4, 'west': -180, 'north': 90, 'step': 45},
             'selection_notes': 'synthetic',
             'strip_rows': 1,
             'minimum_free_bytes': 0,
@@ -59,7 +60,7 @@ class RasterizeLandTests(unittest.TestCase):
 
     def test_polygon_and_strip_invariance(self):
         a = self.d / 'a'
-        b.run(self.config, a)
+        b.run(self.config, a, self.grid)
         expected = np.zeros((4, 8), dtype=np.uint8)
         expected[:2, :3] = 1
         np.testing.assert_array_equal(gdal.Open(str(a / 'land.tif')).ReadAsArray(), expected)
@@ -69,19 +70,19 @@ class RasterizeLandTests(unittest.TestCase):
         self.cfg['strip_rows'] = 4096
         self.config.write_text(json.dumps(self.cfg))
         out = self.d / 'all-rows'
-        b.run(self.config, out)
+        b.run(self.config, out, self.grid)
         np.testing.assert_array_equal(gdal.Open(str(out / 'land.tif')).ReadAsArray(), expected)
         self.cfg['strip_rows'] = 1
         self.cfg['feature_index'] = 'scan'
         self.config.write_text(json.dumps(self.cfg))
         out = self.d / 'scan'
-        b.run(self.config, out)
+        b.run(self.config, out, self.grid)
         self.assertEqual(sha256_file(a / 'land.tif'), sha256_file(out / 'land.tif'))
         self.cfg['feature_index'] = 'row-fids'
         self.config.write_text(json.dumps(self.cfg))
         fallback = self.d / 'no-feature-ids'
         with patch.object(ogr.Feature, 'GetFID', return_value=-1):
-            b.run(self.config, fallback)
+            b.run(self.config, fallback, self.grid)
         self.assertEqual(sha256_file(a / 'land.tif'), sha256_file(fallback / 'land.tif'))
 
     def test_invalid_rasterization_settings_leave_no_output(self):
@@ -89,7 +90,6 @@ class RasterizeLandTests(unittest.TestCase):
         out = self.d / 'invalid'
         for changes, error in (
             ({'schema': 'unknown'}, 'schema and selection notes'),
-            ({'grid': dict(self.cfg['grid'], height=0)}, 'invalid grid'),
             ({'land': []}, 'nonempty explicitly pinned land inputs'),
             ({'strip_rows': False}, 'invalid strip_rows'),
             ({'minimum_free_bytes': -1}, 'invalid free-space reserve'),
@@ -99,7 +99,7 @@ class RasterizeLandTests(unittest.TestCase):
             with self.subTest(changes=changes):
                 self.config.write_text(json.dumps(dict(self.cfg, **changes)))
                 with self.assertRaisesRegex(ValueError, error):
-                    b.run(self.config, out)
+                    b.run(self.config, out, self.grid)
                 self.assertFalse(out.exists())
 
     def test_layer_requires_explicit_polygon_selection(self):
@@ -125,7 +125,7 @@ class RasterizeLandTests(unittest.TestCase):
                 )
                 self.config.write_text(json.dumps(dict(self.cfg, land=[spec])))
                 with self.assertRaisesRegex(ValueError, error):
-                    b.run(self.config, self.d / 'invalid')
+                    b.run(self.config, self.d / 'invalid', self.grid)
 
     def test_unreadable_layer_or_missing_coordinate_reference_is_rejected(self):
         for binding, method, message in (
@@ -134,7 +134,7 @@ class RasterizeLandTests(unittest.TestCase):
         ):
             with self.subTest(method=method), patch.object(binding, method, return_value=None):
                 with self.assertRaisesRegex(ValueError, message):
-                    b.run(self.config, self.d / 'invalid')
+                    b.run(self.config, self.d / 'invalid', self.grid)
 
     def test_shapefile_companions_must_all_be_pinned(self):
         path = self.inputs / 'coast.shp'
@@ -168,13 +168,13 @@ class RasterizeLandTests(unittest.TestCase):
             self.config.write_bytes(original + b'\n')
 
         with self.assertRaisesRegex(ValueError, 'configuration changed during processing'):
-            b.run(self.config, output, emit=change_config)
+            b.run(self.config, output, self.grid, emit=change_config)
         self.assertFalse((output / 'report.json').exists())
         self.config.write_bytes(original)
 
         with patch.object(ogr.Layer, 'GetFeature', return_value=None):
             with self.assertRaisesRegex(ValueError, 'indexed land feature missing'):
-                b.run(self.config, self.d / 'missing')
+                b.run(self.config, self.d / 'missing', self.grid)
         self.assertFalse((self.d / 'missing' / 'report.json').exists())
 
     def test_land_source_with_a_different_crs_cannot_be_rasterized_as_longitude_latitude(self):
@@ -185,7 +185,7 @@ class RasterizeLandTests(unittest.TestCase):
         self.config.write_text(json.dumps(self.cfg))
         out = self.d / 'wrong-crs'
         with self.assertRaisesRegex(ValueError, 'must explicitly declare EPSG:4326'):
-            b.run(self.config, out)
+            b.run(self.config, out, self.grid)
         self.assertFalse(out.exists())
 
     def test_land_does_not_publish_if_disk_space_runs_out(self):
@@ -197,7 +197,7 @@ class RasterizeLandTests(unittest.TestCase):
             side_effect=lambda path: SimpleNamespace(free=0 if Path(path) == output.resolve() else 1024),
         ):
             with self.assertRaisesRegex(ValueError, 'partial output preserved'):
-                b.run(self.config, output)
+                b.run(self.config, output, self.grid)
         self.assertFalse((output / 'report.json').exists())
 
     def test_index_keeps_selection_and_exact_strip_boundary_polygons(self):
@@ -246,13 +246,13 @@ class RasterizeLandTests(unittest.TestCase):
         self.cfg['land'][0].update(
             {'where': 'keep = 0', 'files': [{'path': str(self.p), 'sha256': sha256_file(self.p)}]}
         )
-        self.cfg['grid']['height'] = 3
+        self.grid = Grid(8, 3, 45)
         masks = []
         for engine in ('scan', 'row-fids'):
             self.cfg['feature_index'] = engine
             self.config.write_text(json.dumps(self.cfg))
             out = self.d / engine
-            b.run(self.config, out)
+            b.run(self.config, out, self.grid)
             masks.append(gdal.Open(str(out / 'land.tif')).ReadAsArray())
         np.testing.assert_array_equal(*masks)
 
@@ -260,15 +260,15 @@ class RasterizeLandTests(unittest.TestCase):
         self.cfg['land'][0]['files'][0]['sha256'] = '0' * 64
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'digest mismatch'):
-            b.run(self.config, self.d / 'bad')
+            b.run(self.config, self.d / 'bad', self.grid)
         self.assertFalse((self.d / 'bad').exists())
         self.cfg['land'][0]['files'][0]['sha256'] = sha256_file(self.p)
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'outside input'):
-            b.run(self.config, self.inputs / 'bad')
+            b.run(self.config, self.inputs / 'bad', self.grid)
         (self.d / 'exists').mkdir()
         with self.assertRaises(FileExistsError):
-            b.run(self.config, self.d / 'exists')
+            b.run(self.config, self.d / 'exists', self.grid)
 
     def test_rejects_invalid_geometry(self):
         self.p.write_text(
@@ -293,14 +293,14 @@ class RasterizeLandTests(unittest.TestCase):
         self.cfg['land'][0]['files'][0]['sha256'] = sha256_file(self.p)
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'invalid geometry'):
-            b.run(self.config, self.d / 'bad')
+            b.run(self.config, self.d / 'bad', self.grid)
         self.assertFalse((self.d / 'bad').exists())
 
     def test_invalid_filter_fails_even_when_ogr_exceptions_are_disabled(self):
         self.cfg['land'][0]['where'] = 'missing_field = 1'
         self.config.write_text(json.dumps(self.cfg))
         with ogr.ExceptionMgr(useExceptions=False), self.assertRaisesRegex(ValueError, 'invalid source selection'):
-            b.run(self.config, self.d / 'bad-filter')
+            b.run(self.config, self.d / 'bad-filter', self.grid)
         self.assertFalse((self.d / 'bad-filter').exists())
 
 

@@ -4,11 +4,11 @@ Rasterize the selected global coastline polygons and inland-water shards on the 
 
 ## Use
 
-The map builder calls these Python functions directly. For a focused physical build, pass the generated `RUN/physical-build-config.json`. It contains the coastline settings, inland-water settings, and water file list. Use the recorded source directory for any local files and supply R2 credentials for uncached remote files.
+The map builder passes the same `Grid` to the coastline and inland-water rasterizers. To run just the physical build, pass the generated `RUN/physical-build-config.json`. This file contains one top-level grid, the coastline inputs and settings, and the inland-water inputs and settings. The command creates the grid once from the file. Use the recorded source directory for local inputs and supply R2 credentials for uncached remote inputs.
 
 ```bash
 python3 -m worldatlas.map_build.physical.build \
-  PIPELINE_CONFIG.json /absolute/path/to/new-physical-output
+  RUN/physical-build-config.json /absolute/path/to/new-physical-output
 ```
 
 Use `--resume` after interruption. Completed land, water shards, union and composition are checked against their actual inputs and output hashes. Code changes are recorded as provenance and do not block resume. Partial outputs and failed downloads are retained for inspection.

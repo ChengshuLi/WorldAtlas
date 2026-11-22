@@ -36,8 +36,9 @@ To run a restored copy of the builder directly, use `python -m worldatlas.map_bu
 The build configuration sets the grid, physical inputs, coastal distance and processing options. The checked-in grid has 131,072 columns and 54,613 rows. The east and west edges meet at the antimeridian. [Build configuration](config.json)
 
 - Each layer in `sources.land_config.land` lists all required coastline files once in `files`. Set `dataset` to the member path, local path, R2 key, or Neon source ID of the entry GDAL opens. For a Shapefile, select the `.shp` and include its companion files in the list.
-- `sources.inland_water.files` lists the raw water files for the selected dataset release. Catalog references supply `size_bytes` from Neon. Direct R2 references must supply it alongside the bucket, key, and SHA-256.
-- `sources.inland_water.rasterization` sets which water features to include and how to draw them on the grid.
+- `sources.inland_water` holds the water policy, rasterizer settings, and raw file list together. Catalog references supply `size_bytes` from Neon. Direct R2 references must supply it alongside the bucket, key, and SHA-256.
+
+The builder creates one `Grid` and passes it to both rasterizers. It saves the grid once in `physical-build-config.json` so the [standalone physical command](physical/README.md#use) can build the same grid from that file.
 
 Set `r2_source` to the raw file’s Neon catalog ID, such as `"r2_source": "osm-land-polygons-split-4326"`. For a ZIP member, put the source ID inside its `archive` entry. The catalog gives the builder the R2 location, expected size and checksum. The builder checks the bytes before using them. `physical_controls.source_staging` supplies the R2 endpoint.
 
@@ -106,7 +107,7 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `build-config.json` | Preserves the settings passed to the builder for inspection after the original configuration changes. |
 | `input-selection.json` | Preserves the rules, geometry and catalog entries for resume and replay without rereading working records in Neon. |
 | `run-identity.json` | Records the options and input checksums required to resume the same run. |
-| `physical-build-config.json` | Holds the coastline settings, inland-water settings, and water file list with their checksums. The physical runner can use this request on its own. |
+| `physical-build-config.json` | Lets the standalone physical command read the grid, coastline settings, and inland-water settings and file pins from one file. |
 | `physical/` | Keeps the coastline mask, inland-water masks and combined physical grid so rasterization can resume and later builds can reuse the grid. |
 | `division/parent-{ID}/` | Keeps calculations together for each parent. For example, World uses `division/parent-0/`. |
 | `division/parent-{ID}/result.json` | Records where the parent’s ownership grid lives so the builder can resume after a completed division. A reused result can point to an earlier run. |

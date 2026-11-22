@@ -18,7 +18,7 @@ class ReplaySourcesTests(unittest.TestCase):
         self.shard = {"path": "shard.parquet", "r2_source": "inland"}
         self.sources = {
             "land_config": {"land": [{"dataset": "shore.shp", "files": [self.shape]}]},
-            "inland_water": {"rasterization": {}, "files": [self.shard]},
+            "inland_water": {"files": [self.shard]},
         }
         self.configuration = dict(sources=self.sources, physical_controls={
             "max_parallel_shards": 1,

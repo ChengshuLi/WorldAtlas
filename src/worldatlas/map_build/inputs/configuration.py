@@ -68,11 +68,10 @@ class WaterSettings(TypedDict):
 
 
 @with_config(extra="allow")
-class InlandWaterSettings(TypedDict):
+class InlandWaterSettings(WaterSettings):
     """Select the inland-water files and their shared rasterization settings."""
 
     files: list[FileEntry]
-    rasterization: WaterSettings
     file_count: NotRequired[PositiveInt]
 
 
@@ -128,37 +127,23 @@ class WaterFile(FilePin):
 
 
 @with_config(extra="allow")
-class WaterManifest(TypedDict):
-    """List all water files selected for physical rasterization."""
+class PinnedInlandWaterSettings(WaterSettings):
+    """Specify the water rasterizer and every file it will read."""
 
     file_count: PositiveInt
     files: Annotated[list[WaterFile], Field(min_length=1)]
 
 
 @with_config(extra="allow")
-class PhysicalLandSettings(LandSettings):
-    """Attach the build grid to the coastline settings."""
-
-    grid: GridSettings
-
-
-@with_config(extra="allow")
-class PhysicalWaterSettings(WaterSettings):
-    """Attach the build grid to the inland-water settings."""
-
-    grid: GridSettings
-
-
-@with_config(extra="allow")
 class PhysicalConfiguration(PhysicalControls):
     """Describe the saved request consumed by the standalone physical runner."""
 
-    schema: Literal["raw-physical-pipeline-v2"]
+    schema: Literal["raw-physical-pipeline-v3"]
     selection_notes: NonemptyString
     source_directory: NonemptyString
-    land_config: PhysicalLandSettings
-    water_config: PhysicalWaterSettings
-    source_manifest: WaterManifest
+    grid: GridSettings
+    land_config: LandSettings
+    inland_water: PinnedInlandWaterSettings
     water_reference: NotRequired[FilePin]
     physical_reference_mask: NotRequired[FilePin]
     physical_reference_streams: NotRequired[dict[str, FilePin]]

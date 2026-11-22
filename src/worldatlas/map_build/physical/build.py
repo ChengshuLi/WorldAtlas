@@ -21,12 +21,13 @@ from pathlib import Path
 from typing import Any
 
 import worldatlas.geodesy.ogr as geometry_io
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution import control
 from worldatlas.map_build.execution.runtime import elapsed_union
 from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
+    LandSettings,
     PhysicalControls,
-    PhysicalLandSettings,
     R2Staging,
     land_dataset_index,
 )
@@ -49,7 +50,7 @@ HERE = Path(__file__).resolve().parent
 
 
 def plan_land_inputs(
-    settings: PhysicalLandSettings, cache: source_cache.R2InputCache
+    settings: LandSettings, cache: source_cache.R2InputCache
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
@@ -90,7 +91,7 @@ def plan_land_inputs(
 
 
 def run_stage[Result](
-    function: Callable[..., Result], *args: Path | str | int
+    function: Callable[..., Result], *args: Path | str | Grid
 ) -> Result:
     """Call a physical build stage using the current progress logger.
 
@@ -409,13 +410,18 @@ class ProcessingJournal:
 
 
 def run(
-    manifest_path: Path | str, output: Path | str, *, resume: bool = False
+    config_path: Path | str,
+    output: Path | str,
+    *,
+    grid: Grid | None = None,
+    resume: bool = False,
 ) -> dict[str, Any]:
     """Build or resume the physical grid under an exclusive run lock.
 
     Args:
-        manifest_path: JSON request with inline land and water settings and pins.
+        config_path: JSON configuration with the grid, settings and file pins.
         output: Directory that holds this physical run.
+        grid: Grid already created by the map builder, if available.
         resume: Whether to continue a run already started.
 
     Returns:
@@ -437,7 +443,7 @@ def run(
             raise ValueError('physical pipeline already running') from None
         journal: list[ProcessingJournal | None] = [None]
         try:
-            return _run(manifest_path, output, started, resume, journal)
+            return _run(config_path, output, grid, started, resume, journal)
         except BaseException:
             if journal[0] is not None and not journal[0].finished:
                 journal[0].finish('failed')
@@ -445,8 +451,9 @@ def run(
 
 
 def _run(
-    manifest_path: Path | str,
+    config_path: Path | str,
     output: Path,
+    grid: Grid | None,
     processing_started: float,
     resume: bool,
     journal_slot: list[ProcessingJournal | None],
@@ -454,8 +461,9 @@ def _run(
     """Rasterize the sources, union water masks, and compose the physical grid.
 
     Args:
-        manifest_path: Physical build settings.
+        config_path: Physical build settings.
         output: Locked physical run directory.
+        grid: Existing grid, or None for a standalone build.
         processing_started: Clock reading from the start of the attempt.
         resume: Whether to look for completed outputs before rasterizing.
         journal_slot: Single slot for the active journal so the caller can
@@ -464,9 +472,14 @@ def _run(
     Returns:
         Physical build report, including the completed output file pins.
     """
-    manifest_path = Path(manifest_path).resolve()
-    data = manifest_path.read_bytes()
+    config_path = Path(config_path).resolve()
+    data = config_path.read_bytes()
     cfg = PHYSICAL_CONFIGURATION.validate_json(data, strict=True)
+    if grid is None:
+        grid = Grid(**cfg['grid'])
+    elif any(vars(grid)[key] != value for key, value in cfg['grid'].items()):
+        raise ValueError('physical configuration must match the build grid')
+    grid_settings = vars(grid)
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     workers, staging = validate_shard_staging(cfg)
     source_directory = Path(cfg['source_directory']).resolve()
@@ -476,21 +489,17 @@ def _run(
         staging['endpoint_url'] if staging else None,
     )
     land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
-    water_cfg = cfg['water_config']
+    water_cfg = cfg['inland_water']
     if 'native_method' in water_cfg:
         raise ValueError('retired native_method; use batch_method')
-    source = cfg['source_manifest']
-    grid = land_cfg['grid']
-    if grid != water_cfg['grid']:
-        raise ValueError('land and water grids differ')
     batch_size = water_cfg.get('batch_size', 8192)
     union_rows_per_block = cfg.get('union_rows_per_block', 128)
     physical_rows_per_block = cfg.get('physical_rows_per_block', 128)
     for stage in (land_cfg, water_cfg):
         if stage.get('minimum_free_bytes', 2 * (1 << 30)) < reserve:
             raise ValueError('stage free-space reserve is below pipeline reserve')
-    files = source['files']
-    if source['file_count'] != len(files):
+    files = water_cfg['files']
+    if water_cfg['file_count'] != len(files):
         raise ValueError('source manifest must list every raw shard')
     raw = []
     for entry in files:
@@ -545,7 +554,7 @@ def _run(
             'physical reference mask and streams must be supplied together'
         )
     # The build configuration can sit beside the output directory.
-    if manifest_path.is_relative_to(output) or any(
+    if config_path.is_relative_to(output) or any(
         p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs
     ):
         raise ValueError(
@@ -561,15 +570,14 @@ def _run(
     config_dir = output / 'configs'
     stage_documents = {
         'land_config': (config_dir / 'land.json', json_bytes(land_cfg)),
-        'water_config': (config_dir / 'water.json', json_bytes(water_cfg)),
-        'source_manifest': (config_dir / 'water-sources.json', json_bytes(source)),
+        'inland_water': (config_dir / 'inland-water.json', json_bytes(water_cfg)),
     }
     stage_pins = {
         key: {'path': str(path), 'sha256': hashlib.sha256(content).hexdigest()}
         for key, (path, content) in stage_documents.items()
     }
     land_path = stage_documents['land_config'][0]
-    water_path = stage_documents['water_config'][0]
+    water_path = stage_documents['inland_water'][0]
     identity = {
         'schema': 'raw-physical-resume-identity-v1',
         'configuration_sha256': hashlib.sha256(data).hexdigest(),
@@ -631,8 +639,8 @@ def _run(
                     item.get('source_sha256') != digest
                     or Path(item.get('source', '')).name != source.name
                     or item.get('configuration_sha256')
-                    != stage_pins['water_config']['sha256']
-                    or item.get('grid') != grid
+                    != stage_pins['inland_water']['sha256']
+                    or item.get('grid') != grid_settings
                     or item.get('policy') != water_cfg.get('policy')
                     or item.get('batch_size') != batch_size
                     or item.get('output_sha256') != entry['sha256']
@@ -719,7 +727,7 @@ def _run(
             or land_report.get('status') != 'candidate-only'
             or land_report.get('configuration_sha256')
             != stage_pins['land_config']['sha256']
-            or land_report.get('grid') != grid
+            or land_report.get('grid') != grid_settings
             or land_report.get('land_sha256') != land_checkpoint['output_sha256']
         ):
             raise ValueError('land checkpoint mismatch')
@@ -734,7 +742,7 @@ def _run(
             for start, end in cache.download_intervals:
                 journal.download_done(start, end, 'land')
         unit_start = time.perf_counter()
-        run_stage(land.run, land_path, land_dir)
+        run_stage(land.run, land_path, land_dir, grid)
         land_report = read_json(land_dir / 'report.json')
         if land_report.get('status') != 'candidate-only' or land_report.get(
             'land_sha256'
@@ -774,8 +782,8 @@ def _run(
                 or report.get('source_sha256') != digest
                 or Path(report.get('source', '')).name != path.name
                 or report.get('configuration_sha256')
-                != stage_pins['water_config']['sha256']
-                or report.get('grid') != grid
+                != stage_pins['inland_water']['sha256']
+                or report.get('grid') != grid_settings
                 or report.get('policy') != water_cfg.get('policy')
                 or report.get('batch_size') != batch_size
                 or report.get('output_sha256') != checkpoint['output_sha256']
@@ -825,14 +833,14 @@ def _run(
         with raster_slot:
             control.check_cancelled()
             unit_start = time.perf_counter()
-            run_stage(water.run, path, digest, destination, water_path, batch_size)
+            run_stage(water.run, path, digest, destination, water_path, grid)
         report_path = destination / 'report.json'
         report = read_json(report_path)
         if (
             report.get('status') != 'candidate-only'
             or report.get('source_sha256') != digest
             or report.get('configuration_sha256')
-            != stage_pins['water_config']['sha256']
+            != stage_pins['inland_water']['sha256']
             or report.get('output_sha256') != sha256_file(destination / 'water.tif')
         ):
             raise ValueError(f'incomplete water shard: {path}')
@@ -870,10 +878,10 @@ def _run(
             raise
     union_cfg: dict[str, Any] = {
         'schema': 'water-union-comparison-v1',
-        'grid': grid,
+        'grid': grid_settings,
         'selection_notes': cfg['selection_notes'],
         'minimum_free_bytes': reserve,
-        'source_manifest': stage_pins['source_manifest'],
+        'source_manifest': stage_pins['inland_water'],
         'shard_count': len(shards),
         'rows_per_block': union_rows_per_block,
         'shards': shards,
@@ -909,7 +917,7 @@ def _run(
             != union_checkpoint['output_sha256']
             or union_report.get('status') != 'candidate-only'
             or union_report.get('configuration_sha256') != sha256_file(union_config)
-            or union_report.get('grid') != grid
+            or union_report.get('grid') != grid_settings
             or union_report.get('union_sha256') != union_checkpoint['output_sha256']
         ):
             raise ValueError('union checkpoint mismatch')
@@ -931,7 +939,7 @@ def _run(
         )
     compose_cfg = {
         'schema': 'candidate-physical-composition-v1',
-        'grid': grid,
+        'grid': grid_settings,
         'selection_notes': cfg['selection_notes'],
         'minimum_free_bytes': reserve,
         'rows_per_block': physical_rows_per_block,
@@ -961,7 +969,7 @@ def _run(
             != physical_checkpoint['output_sha256']
             or physical.get('status') != 'candidate-only'
             or physical.get('configuration_sha256') != sha256_file(compose_config)
-            or physical.get('grid') != grid
+            or physical.get('grid') != grid_settings
             or any(
                 sha256_file(physical_dir / name) != outputs.get(name)
                 for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
@@ -986,7 +994,7 @@ def _run(
             physical_dir / 'report.json',
             physical_dir / 'rows.u32le',
         )
-    for p, original in ((manifest_path, data), *stage_documents.values()):
+    for p, original in ((config_path, data), *stage_documents.values()):
         if p.read_bytes() != original:
             raise ValueError(f'pipeline input changed during processing: {p}')
     if (not land_downloads or land_checkpoint is None) and any(
@@ -996,7 +1004,7 @@ def _run(
     report = {
         'status': 'candidate-only',
         'configuration_sha256': hashlib.sha256(data).hexdigest(),
-        'grid': grid,
+        'grid': grid_settings,
         **stage_pins,
         'water_batch_size': batch_size,
         'union_rows_per_block': union_rows_per_block,
@@ -1039,13 +1047,13 @@ def main(
         emit: Function that prints the resulting report.
     """
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('pipeline_config')
+    parser.add_argument('physical_config')
     parser.add_argument('output')
     parser.add_argument('--resume', action='store_true')
     args = parser.parse_args(argv)
     emit(
         json.dumps(
-            run(args.pipeline_config, args.output, resume=args.resume), indent=2
+            run(args.physical_config, args.output, resume=args.resume), indent=2
         ),
         flush=True,
     )

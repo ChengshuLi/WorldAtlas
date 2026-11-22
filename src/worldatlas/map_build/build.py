@@ -165,6 +165,26 @@ def catalog_references(
             entry = entry.get("archive")
 
 
+def _physical_input_data(value: JSONValue) -> JSONValue:
+    """Remove descriptive selection notes from a physical input comparison.
+
+    Args:
+        value: A JSON value in the physical configuration.
+
+    Returns:
+        Equivalent JSON without any selection notes.
+    """
+    if isinstance(value, list):
+        return [_physical_input_data(item) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: _physical_input_data(item)
+            for key, item in value.items()
+            if key != "selection_notes"
+        }
+    return value
+
+
 def physical_reference(run: Path | str, configuration: dict[str, Any]) -> PhysicalReuse:
     """Find reusable physical outputs for the same grid and raw inputs.
 
@@ -193,7 +213,7 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
         raise ValueError("physical source run is incomplete")
     output = root / "physical"
     produced = read_json(output / "report.json")
-    if Grid(**produced["grid"]) != Grid(**configuration["land_config"]["grid"]):
+    if Grid(**produced["grid"]) != Grid(**configuration["grid"]):
         raise ValueError("physical reuse requires the same grid as the source run")
     cache = R2InputCache(
         Path(configuration["source_directory"]),
@@ -201,41 +221,38 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
         None,
     )
     land, _ = physical_build.plan_land_inputs(configuration["land_config"], cache)
-    for key, selected in (
-        ("land_config", land),
-        ("water_config", configuration["water_config"]),
-        ("source_manifest", configuration["source_manifest"]),
-    ):
-        previous = Path(identity[key]["path"])
-        if sha256_file(previous) != identity[key]["sha256"]:
+
+    def saved_settings(key: str) -> dict[str, JSONValue]:
+        """Read a stage configuration after checking its saved fingerprint.
+
+        Args:
+            key: Stage configuration name in the saved identity.
+
+        Returns:
+            Verified settings from the completed run.
+        """
+        pin = identity[key]
+        previous = Path(pin["path"])
+        if sha256_file(previous) != pin["sha256"]:
             raise ValueError("physical source configuration changed: " + key)
+        return read_json(previous)
 
-        def data(value: JSONValue) -> JSONValue:
-            """Keep only settings that affect physical rasterization.
-
-            Args:
-                value: Value in a saved physical request.
-
-            Returns:
-                A copy without selection notes.
-            """
-            if isinstance(value, list):
-                return [data(item) for item in value]
-            if isinstance(value, dict):
-                return {
-                    key: data(item)
-                    for key, item in value.items()
-                    if key != "selection_notes"
-                }
-            return value
-
-        old_request = read_json(previous)
-        if key == "source_manifest":
-            # Older manifests called the same byte count "size".
-            for entry in old_request["files"]:
-                if "size" in entry:
-                    entry["size_bytes"] = entry.pop("size")
-        if data(old_request) != data(selected):
+    saved_land = saved_settings("land_config")
+    if "inland_water" in identity:
+        saved_water = saved_settings("inland_water")
+    else:
+        # Completed runs from the split configuration can still supply their grid.
+        saved_land.pop("grid")
+        saved_water = saved_settings("water_config") | saved_settings("source_manifest")
+        saved_water.pop("grid")
+        for entry in cast(list[FileEntry], saved_water["files"]):
+            if "size" in entry:
+                entry["size_bytes"] = entry.pop("size")
+    for key, previous, selected in (
+        ("land_config", saved_land, land),
+        ("inland_water", saved_water, configuration["inland_water"]),
+    ):
+        if _physical_input_data(previous) != _physical_input_data(selected):
             raise ValueError("physical input differs from the source run: " + key)
     pins = [
         pin_file(root / "report.json"),
@@ -468,25 +485,22 @@ class Pipeline:
             )
 
     def _physical_configuration(self, sources: BuildSources) -> dict[str, Any]:
-        """Put the coastline, water settings, and water file list in one request.
+        """Record the grid and source settings for a standalone physical build.
 
         Args:
             sources: Source settings with catalog entries expanded to file pins.
 
         Returns:
-            Physical runner settings with all three input groups inline.
+            A JSON-ready configuration with the grid, coastline and inland water.
         """
-        water = sources["inland_water"]
         return {
             **self.cfg.get("physical_controls", {}),
-            "schema": "raw-physical-pipeline-v2",
+            "schema": "raw-physical-pipeline-v3",
             "selection_notes": self.cfg.get("selection_notes"),
             "source_directory": str(self.root / "inputs"),
-            "land_config": dict(sources["land_config"], grid=vars(self.grid)),
-            "water_config": dict(water["rasterization"], grid=vars(self.grid)),
-            "source_manifest": {
-                key: value for key, value in water.items() if key != "rasterization"
-            },
+            "grid": vars(self.grid),
+            "land_config": sources["land_config"],
+            "inland_water": sources["inland_water"],
         }
 
     def _prepare_comparison(
@@ -965,7 +979,7 @@ class Pipeline:
                     "physical",
                     physical_build.run,
                     (request, self.out / "physical"),
-                    kwargs={"resume": marker.is_file()},
+                    kwargs={"grid": self.grid, "resume": marker.is_file()},
                     timing=self.timing,
                     inputs=[pin_file(request)],
                     outputs=[self.out / "physical"],

@@ -13,6 +13,7 @@ import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.physical import water as build
 from worldatlas.map_build.physical import water_batch
 from worldatlas.map_build.physical.water_batch import WaterBatch
@@ -55,9 +56,9 @@ class WaterShardTests(unittest.TestCase):
         self.path = Path(self.tmp.name)
         self.inputs = self.path / 'inputs'
         self.inputs.mkdir()
+        self.grid = Grid(32, 16, 11.25)
         cfg = {
             'schema': 'water-shard-candidate-v2',
-            'grid': {'width': 32, 'height': 16, 'west': -180, 'north': 90, 'step': 11.25},
             'tile_size': 4,
             'selection_notes': 'synthetic test',
             'policy': {'method': 'overture-inland-subtype-v1'},
@@ -122,7 +123,7 @@ class WaterShardTests(unittest.TestCase):
         p, digest = self.fixture()
         for n in (1, 10):
             out = self.path / f'o{n}'
-            build.run(p, digest, out, self.config, n)
+            build.run(p, digest, out, self.config, self.grid, n)
             report = json.loads((out / 'report.json').read_text())
             self.assertEqual(report['counts']['polygons'], 3)
             self.assertEqual(report['counts']['excluded_classification'], 2)
@@ -185,7 +186,7 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
-            build.run(p, digest, out, self.config, 17, engine)
+            build.run(p, digest, out, self.config, self.grid, 17, engine)
             reports.append(json.loads((out / 'report.json').read_text()))
         self.assertEqual(reports[0]['counts'], reports[1]['counts'])
         np.testing.assert_array_equal(
@@ -226,7 +227,7 @@ class WaterShardTests(unittest.TestCase):
         ):
             first = WaterBatch()
             second = WaterBatch()
-            build.run(p, digest, self.path / 'python-api', self.config)
+            build.run(p, digest, self.path / 'python-api', self.config, self.grid)
         self.assertEqual(first.provenance, second.provenance)
         first.timings['tile_burn_seconds'] = 1
         self.assertEqual(second.timings['tile_burn_seconds'], 0)
@@ -263,7 +264,7 @@ class WaterShardTests(unittest.TestCase):
             rows.append({'id': str(len(rows)), 'subtype': 'lake', 'geometry': value + b'extra'})
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
         for engine in ('python', 'gdal'):
-            build.run(p, sha256_file(p), self.path / engine, self.config, engine=engine)
+            build.run(p, sha256_file(p), self.path / engine, self.config, self.grid, engine=engine)
         self.assertEqual(
             sha256_file(self.path / 'python/water.tif'), sha256_file(self.path / 'gdal/water.tif')
         )
@@ -432,14 +433,14 @@ class WaterShardTests(unittest.TestCase):
         p, _ = self.fixture()
         metadata = pq.read_schema(p).metadata
         cfg = json.loads(self.config.read_text())
-        cfg['grid'] = {'width': 64, 'height': 24, 'west': -3.17, 'north': 2.13, 'step': 0.1}
+        self.grid = Grid(3600, 24, 0.1)
         cfg['tile_size'] = 4
         self.config.write_text(json.dumps(cfg))
         rows = []
         for column in (0, 3, 4, 7, 8, 31, 60):
-            x = -3.17 + (column + 0.5) * 0.1
+            x = self.grid.longitude(column)
             for edge in (np.nextafter(x, -np.inf), x, np.nextafter(x, np.inf)):
-                for y in (2.08, 1.78, 1.73):
+                for y in (89.95, 89.65, 89.60):
                     geom = ogr.CreateGeometryFromWkt(
                         f'POLYGON (({edge} {y},{edge+.8} {y},{edge+.8} {y-1.6},{edge} {y-1.6},{edge} {y}))'
                     )
@@ -452,7 +453,7 @@ class WaterShardTests(unittest.TestCase):
                     )
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
         for engine in ('python', 'gdal'):
-            build.run(p, sha256_file(p), self.path / engine, self.config, 19, engine)
+            build.run(p, sha256_file(p), self.path / engine, self.config, self.grid, 19, engine)
         np.testing.assert_array_equal(
             gdal.Open(str(self.path / 'python/water.tif')).ReadAsArray(),
             gdal.Open(str(self.path / 'gdal/water.tif')).ReadAsArray(),
@@ -548,19 +549,13 @@ class WaterShardTests(unittest.TestCase):
             )
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
         cfg = json.loads(self.config.read_text())
-        cfg['grid'] = {
-            'width': 131072,
-            'height': 54614,
-            'west': -180,
-            'north': 90,
-            'step': 360 / 131072,
-        }
+        self.grid = Grid(131072, 54614, 360 / 131072)
         cfg['tile_size'] = 1024
         self.config.write_text(json.dumps(cfg))
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
-            build.run(p, sha256_file(p), out, self.config, engine=engine)
+            build.run(p, sha256_file(p), out, self.config, self.grid, engine=engine)
             reports.append(json.loads((out / 'report.json').read_text()))
             raster = gdal.Open(str(out / 'water.tif'))
             self.assertEqual(int(raster.ReadAsArray(75722, 8650, 1, 1)[0, 0]), 1)
@@ -600,13 +595,13 @@ class WaterShardTests(unittest.TestCase):
         ]
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
         cfg = json.loads(self.config.read_text())
-        cfg['grid'] = {'width': 64, 'height': 32, 'west': -180, 'north': 90, 'step': 5.625}
+        self.grid = Grid(64, 32, 5.625)
         cfg['tile_size'] = 4
         self.config.write_text(json.dumps(cfg))
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
-            build.run(p, sha256_file(p), out, self.config, engine=engine)
+            build.run(p, sha256_file(p), out, self.config, self.grid, engine=engine)
             reports.append(json.loads((out / 'report.json').read_text()))
         self.assertEqual(reports[0]['output_sha256'], reports[1]['output_sha256'])
 
@@ -617,12 +612,12 @@ class WaterShardTests(unittest.TestCase):
         self.config.write_text(json.dumps(cfg))
         for name, override, expected in [('config', None, 2), ('override', 3, 3)]:
             out = self.path / name
-            build.run(p, digest, out, self.config, override)
+            build.run(p, digest, out, self.config, self.grid, override)
             self.assertEqual(json.loads((out / 'report.json').read_text())['batch_size'], expected)
         cfg['batch_size'] = True
         self.config.write_text(json.dumps(cfg))
         with self.assertRaisesRegex(ValueError, 'positive integer'):
-            build.run(p, digest, self.path / 'invalid-batch', self.config)
+            build.run(p, digest, self.path / 'invalid-batch', self.config, self.grid)
         self.assertFalse((self.path / 'invalid-batch').exists())
 
     def test_subtype_only_accepts_without_sources_or_class(self):
@@ -646,7 +641,7 @@ class WaterShardTests(unittest.TestCase):
         p = self.inputs / 'minimal.parquet'
         pq.write_table(table, p)
         out = self.path / 'minimal-output'
-        build.run(p, hashlib.sha256(p.read_bytes()).hexdigest(), out, self.config)
+        build.run(p, hashlib.sha256(p.read_bytes()).hexdigest(), out, self.config, self.grid)
         report = json.loads((out / 'report.json').read_text())
         self.assertEqual(report['counts']['polygons'], 1)
         self.assertEqual(report['counts']['excluded_classification'], 2)
@@ -661,7 +656,7 @@ class WaterShardTests(unittest.TestCase):
         self.config.write_text(json.dumps(cfg))
         out = self.path / 'old-policy'
         with self.assertRaisesRegex(ValueError, 'supported configuration'):
-            build.run(p, digest, out, self.config)
+            build.run(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
 
     def test_compiled_engine_configuration_is_rejected_before_output(self):
@@ -671,7 +666,7 @@ class WaterShardTests(unittest.TestCase):
         self.config.write_text(json.dumps(cfg))
         out = self.path / 'retired-engine'
         with self.assertRaisesRegex(ValueError, 'runtime native compilation is retired'):
-            build.run(p, digest, out, self.config)
+            build.run(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
 
     def test_free_space_guard(self):
@@ -681,7 +676,7 @@ class WaterShardTests(unittest.TestCase):
         self.config.write_text(json.dumps(cfg))
         out = self.path / 'no-space'
         with self.assertRaisesRegex(ValueError, 'free disk below configured reserve'):
-            build.run(p, digest, out, self.config)
+            build.run(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
 
     def test_progress_can_report_rss_on_platforms_with_or_without_proc(self):
@@ -701,7 +696,7 @@ class WaterShardTests(unittest.TestCase):
 
                 with mock.patch.object(Path, 'read_text', new=read):
                     build.run(
-                        source, digest, self.path / f'proc-{available}', self.config,
+                        source, digest, self.path / f'proc-{available}', self.config, self.grid,
                         emit=lambda line, **_: progress.append(json.loads(line)),
                     )
                 expected = 'VmRSS:\t128 kB' if available else 'unavailable'
@@ -718,7 +713,7 @@ class WaterShardTests(unittest.TestCase):
             side_effect=lambda path: SimpleNamespace(free=0 if Path(path) == out.resolve() else 1024),
         ):
             with self.assertRaisesRegex(ValueError, 'partial output preserved'):
-                build.run(source, digest, out, self.config)
+                build.run(source, digest, out, self.config, self.grid)
         self.assertFalse((out / 'report.json').exists())
 
     def test_water_report_requires_unchanged_source_and_config(self):
@@ -735,7 +730,7 @@ class WaterShardTests(unittest.TestCase):
                     path.write_bytes(original + b'\n')
 
                 with self.assertRaisesRegex(ValueError, message):
-                    build.run(source, digest, out, self.config, emit=change)
+                    build.run(source, digest, out, self.config, self.grid, emit=change)
                 self.assertFalse((out / 'report.json').exists())
                 path.write_bytes(original)
 
@@ -754,7 +749,7 @@ class WaterShardTests(unittest.TestCase):
                 with self.subTest(engine=engine, message=message):
                     out = self.path / f'{engine}-{replacement is None}'
                     with self.assertRaisesRegex(ValueError, message):
-                        build.run(source, sha256_file(source), out, self.config, engine=engine)
+                        build.run(source, sha256_file(source), out, self.config, self.grid, engine=engine)
                     self.assertFalse((out / 'report.json').exists())
 
     def test_python_rasterizer_reports_invalid_polygon_with_same_id_as_gdal(self):
@@ -770,7 +765,7 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('gdal', 'python'):
             out = self.path / engine
-            reports.append(build.run(source, sha256_file(source), out, self.config, engine=engine))
+            reports.append(build.run(source, sha256_file(source), out, self.config, self.grid, engine=engine))
             self.assertEqual(json.loads((out / 'invalid-feature-ids.json').read_text()), ['lake'])
         self.assertEqual(reports[0]['counts'], reports[1]['counts'])
         self.assertTrue(all(r['status'] == 'incomplete-input-issues' for r in reports))
@@ -781,14 +776,14 @@ class WaterShardTests(unittest.TestCase):
         out = self.path / 'invalid'
         for setting, value, message in (
             ('minimum_free_bytes', -1, 'invalid free-space reserve'),
-            ('tile_size', 0, 'invalid grid or tile size'),
+            ('tile_size', 0, 'invalid tile size'),
             ('policy', {}, 'explicit Overture inland subtype policy'),
             ('native_method', 'old', 'retired native_method'),
         ):
             with self.subTest(setting=setting):
                 self.config.write_text(json.dumps(dict(cfg, **{setting: value})))
                 with self.assertRaisesRegex(ValueError, message):
-                    build.run(source, digest, out, self.config)
+                    build.run(source, digest, out, self.config, self.grid)
                 self.assertFalse(out.exists())
         self.config.write_text(json.dumps(cfg))
         table = pq.read_table(source)
@@ -803,25 +798,25 @@ class WaterShardTests(unittest.TestCase):
                     source,
                 )
                 with self.assertRaisesRegex(ValueError, message):
-                    build.run(source, sha256_file(source), out, self.config)
+                    build.run(source, sha256_file(source), out, self.config, self.grid)
                 self.assertFalse(out.exists())
 
     def test_integrity_and_collision(self):
         p, digest = self.fixture()
         with self.assertRaises(ValueError):
-            build.run(p, '0' * 64, self.path / 'bad', self.config)
+            build.run(p, '0' * 64, self.path / 'bad', self.config, self.grid)
         self.assertFalse((self.path / 'bad').exists())
         existing = self.path / 'existing'
         existing.mkdir()
         with self.assertRaises(FileExistsError):
-            build.run(p, digest, existing, self.config)
+            build.run(p, digest, existing, self.config, self.grid)
         with self.assertRaises(ValueError):
-            build.run(p, digest, self.path, self.config)
+            build.run(p, digest, self.path, self.config, self.grid)
         with self.assertRaises(ValueError):
-            build.run(p, digest, self.inputs / 'nested-output', self.config)
+            build.run(p, digest, self.inputs / 'nested-output', self.config, self.grid)
         self.config.write_text('{}')
         with self.assertRaises(ValueError):
-            build.run(p, digest, self.path / 'badconfig', self.config)
+            build.run(p, digest, self.path / 'badconfig', self.config, self.grid)
         self.assertFalse((self.path / 'badconfig').exists())
 
 

@@ -12,6 +12,7 @@ from typing import Any
 
 from osgeo import gdal, ogr, osr
 
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.physical.sources import checked_files, open_layer
 from worldatlas.shared.files import sha256_file
 
@@ -19,13 +20,18 @@ gdal.UseExceptions()
 
 
 def run(
-    config_path: Path | str, output: Path | str, *, emit: Callable[..., None] = print
+    config_path: Path | str,
+    output: Path | str,
+    grid: Grid,
+    *,
+    emit: Callable[..., None] = print,
 ) -> dict[str, Any]:
     """Mark each grid cell whose centre lies in a selected coastline polygon.
 
     Args:
-        config_path: JSON settings with the grid and pinned coastline layers.
+        config_path: JSON settings with pinned coastline layers.
         output: New directory for the land raster and report.
+        grid: Shared physical build grid.
         emit: Progress callback.
 
     Returns:
@@ -38,28 +44,8 @@ def run(
         'selection_notes'
     ):
         raise ValueError('explicit schema and selection notes required')
-    grid = cfg['grid']
-    width, height, west, north, step = (
-        grid[k] for k in ('width', 'height', 'west', 'north', 'step')
-    )
-    if (
-        not isinstance(width, int)
-        or isinstance(width, bool)
-        or width <= 0
-        or not isinstance(height, int)
-        or isinstance(height, bool)
-        or height <= 0
-        or not all(
-            isinstance(x, (int, float)) and not isinstance(x, bool) and math.isfinite(x)
-            for x in (west, north, step)
-        )
-        or step <= 0
-        or west < -180
-        or west + width * step > 180
-        or north > 90
-        or north - height * step < -90
-    ):
-        raise ValueError('invalid grid')
+    width, height = grid.width, grid.height
+    west, north, step = grid.west, grid.north, grid.step
     specs = cfg['land']
     if not isinstance(specs, list) or not specs:
         raise ValueError('nonempty explicitly pinned land inputs required')
@@ -196,7 +182,7 @@ def run(
     report = {
         'status': 'candidate-only',
         'configuration_sha256': hashlib.sha256(data).hexdigest(),
-        'grid': grid,
+        'grid': vars(grid),
         'feature_counts': feature_counts,
         'feature_index': feature_index,
         'indexed_layers': [index is not None for index in indexes],

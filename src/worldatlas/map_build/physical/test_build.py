@@ -161,7 +161,6 @@ class PipelineTests(unittest.TestCase):
         )
         land_cfg = {
             'schema': 'land-raster-candidate-v1',
-            'grid': self.grid,
             'selection_notes': 'synthetic',
             'strip_rows': 2,
             'minimum_free_bytes': 0,
@@ -177,14 +176,11 @@ class PipelineTests(unittest.TestCase):
         self.land_cfg.write_text(json.dumps(land_cfg))
         water_cfg = {
             'schema': 'water-shard-candidate-v2',
-            'grid': self.grid,
             'tile_size': 4,
             'minimum_free_bytes': 0,
             'selection_notes': 'synthetic',
             'policy': {'method': 'overture-inland-subtype-v1'},
         }
-        self.water_cfg = self.config_dir / 'water.json'
-        self.water_cfg.write_text(json.dumps(water_cfg))
         geom = bytes(
             ogr.CreateGeometryFromWkt(
                 'POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))'
@@ -215,13 +211,13 @@ class PipelineTests(unittest.TestCase):
             )
         )
         self.cfg = {
-            'schema': 'raw-physical-pipeline-v2',
+            'schema': 'raw-physical-pipeline-v3',
             'selection_notes': 'synthetic',
             'minimum_free_bytes': 0,
             'source_directory': str(self.raw),
             'land_config': land_cfg,
-            'water_config': water_cfg,
-            'source_manifest': json.loads(source.read_text()),
+            'grid': self.grid,
+            'inland_water': {**water_cfg, **json.loads(source.read_text())},
         }
         self.config = self.config_dir / 'pipeline.json'
         self.config.write_text(json.dumps(self.cfg))
@@ -541,7 +537,7 @@ class PipelineTests(unittest.TestCase):
                 }
             )
         )
-        self.cfg['source_manifest'] = json.loads(source.read_text())
+        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 1
         endpoint = 'https://' + 'a' * 32 + '.r2.cloudflarestorage.com'
         self.cfg['source_staging'] = {'mode': 'r2-s3', 'endpoint_url': endpoint}
@@ -597,7 +593,7 @@ class PipelineTests(unittest.TestCase):
         ]
         source = self.source_manifest
         source.write_text(json.dumps(dict(file_count=len(files), files=files)))
-        self.cfg['source_manifest'] = json.loads(source.read_text())
+        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 1
         self.config.write_text(json.dumps(self.cfg))
         serial = b.run(self.config, self.root / 'serial')
@@ -665,7 +661,7 @@ class PipelineTests(unittest.TestCase):
                 }
             )
         )
-        self.cfg['source_manifest'] = json.loads(source.read_text())
+        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 1
         self.cfg['source_staging'] = {
             'mode': 'r2-s3',
@@ -765,7 +761,7 @@ class PipelineTests(unittest.TestCase):
                 }
             )
         )
-        self.cfg['source_manifest'] = json.loads(source.read_text())
+        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 0
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'max_parallel_shards'):
@@ -860,7 +856,7 @@ class PipelineTests(unittest.TestCase):
                 }
             )
         )
-        self.cfg['source_manifest'] = json.loads(source.read_text())
+        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'parallel-incomplete'
@@ -885,7 +881,7 @@ class PipelineTests(unittest.TestCase):
                 {'file_count': 1, 'files': [{'path': 'water.parquet', 'sha256': sha256_file(shard)}]}
             )
         )
-        self.cfg['source_manifest'] = json.loads(source.read_text())
+        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'incomplete'
         with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
@@ -899,7 +895,7 @@ class PipelineTests(unittest.TestCase):
         source.write_text(
             json.dumps({'file_count': 1, 'files': [{'path': '../bad.parquet', 'sha256': '1' * 64}]})
         )
-        self.cfg['source_manifest'] = json.loads(source.read_text())
+        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'traversal'
         with self.assertRaisesRegex(ValueError, 'relative to the source directory'):
@@ -929,10 +925,8 @@ class PipelineTests(unittest.TestCase):
         self.assertFalse(out.exists())
 
     def test_physical_preflight_checks_available_disk_and_reports_cli_errors(self):
-        for key, path in (('land_config', self.land_cfg), ('water_config', self.water_cfg)):
-            data = json.loads(path.read_bytes())
-            path.write_text(json.dumps(dict(data, minimum_free_bytes=1)))
-            self.cfg[key] = json.loads(path.read_text())
+        for key in ('land_config', 'inland_water'):
+            self.cfg[key]['minimum_free_bytes'] = 1
         self.cfg['minimum_free_bytes'] = 1
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'low-disk'
@@ -1008,7 +1002,7 @@ class PipelineTests(unittest.TestCase):
         manifest = json.loads(source.read_bytes())
         manifest['files'][0].update(r2_bucket='atlas', r2_key=shard.name, size_bytes=len(payload))
         source.write_text(json.dumps(manifest))
-        self.cfg['source_manifest'] = json.loads(source.read_text())
+        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['source_staging'] = dict(mode='r2-s3', endpoint_url=endpoint)
         self.cfg['max_parallel_shards'] = 1
         self.config.write_text(json.dumps(self.cfg))
@@ -1057,23 +1051,21 @@ class PipelineTests(unittest.TestCase):
         self.assertFalse(out.exists())
 
     def test_preflight_rejects_invalid_grid_sources_and_controls(self):
-        valid_water = json.loads(self.water_cfg.read_text())
-        source_path = self.source_manifest
-        valid_manifest = json.loads(source_path.read_text())
-        shard = valid_manifest['files'][0]
+        valid_water = self.cfg['inland_water']
+        shard = valid_water['files'][0]
         cases = [
             ('pipeline', {'selection_notes': ''}, 'selection_notes'),
             ('pipeline', {'minimum_free_bytes': True}, 'minimum_free_bytes'),
             ('pipeline', {'minimum_free_bytes': 1}, 'below pipeline reserve'),
             ('pipeline', {'union_rows_per_block': 0}, 'rows_per_block'),
-            ('water', {'rasterizer': 'unknown'}, 'water_config.rasterizer'),
+            ('water', {'rasterizer': 'unknown'}, 'inland_water.rasterizer'),
             ('water', {'native_method': 'old'}, 'retired native_method'),
-            ('water', {'grid': dict(self.grid, width=4)}, 'land and water grids differ'),
+            ('pipeline', {'grid': dict(self.grid, width=4)}, 'expected an aligned global'),
             ('water', {'batch_size': 0}, 'batch_size'),
-            ('manifest', {'file_count': 2}, 'must list every raw shard'),
-            ('manifest', {'files': [dict(shard, sha256='not-a-digest')]}, 'source_manifest.files.0.sha256'),
+            ('water', {'file_count': 2}, 'must list every raw shard'),
+            ('water', {'files': [dict(shard, sha256='not-a-digest')]}, 'inland_water.files.0.sha256'),
             (
-                'manifest',
+                'water',
                 {'file_count': 2, 'files': [shard, dict(shard, path='another.parquet')]},
                 'paths and hashes must be unique',
             ),
@@ -1082,15 +1074,18 @@ class PipelineTests(unittest.TestCase):
         for section, changes, error in cases:
             with self.subTest(section=section, changes=changes):
                 water = dict(valid_water)
-                manifest = dict(valid_manifest)
                 configuration = dict(self.cfg)
-                {'pipeline': configuration, 'water': water, 'manifest': manifest}[section].update(changes)
-                configuration['water_config'] = water
-                configuration['source_manifest'] = manifest
+                {'pipeline': configuration, 'water': water}[section].update(changes)
+                configuration['inland_water'] = water
                 self.config.write_text(json.dumps(configuration))
                 with self.assertRaisesRegex(ValueError, error):
                     b.run(self.config, out)
                 self.assertFalse(out.exists())
+
+        with self.assertRaisesRegex(ValueError, 'must match the build grid'):
+            self.config.write_text(json.dumps(self.cfg))
+            b.run(self.config, out, grid=b.Grid(8, 3, 45))
+        self.assertFalse(out.exists())
 
 
 if __name__ == '__main__':

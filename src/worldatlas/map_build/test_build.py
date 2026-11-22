@@ -245,7 +245,7 @@ class Fixture(unittest.TestCase):
             "selection_notes": "Synthetic processor integration fixture",
             "sources": {
                 "land_config": {"land": []},
-                "inland_water": {"rasterization": {}, "files": []},
+                "inland_water": {"files": []},
             },
             "grid": dict(width=36, height=18, step=10),
         }
@@ -634,7 +634,7 @@ class Fixture(unittest.TestCase):
         self.assertEqual(requests, [resolved])
         self.assertEqual(planned["land"][0]["dataset"], str(runner.r2_inputs.path(resolved)))
         self.assertEqual(
-            runner.physical_config["source_manifest"]["files"],
+            runner.physical_config["inland_water"]["files"],
             [{"path": "raw/fixture", **resolved}],
         )
 
@@ -775,7 +775,7 @@ class Fixture(unittest.TestCase):
         with self.fake_r2({}, []) as download:
             runner = self.make()
         download.assert_not_called()
-        self.assertEqual(runner.physical_config["source_manifest"], raw)
+        self.assertEqual(runner.physical_config["inland_water"], raw)
 
     def test_wrong_download_is_never_published(self):
         runner = self.make()
@@ -1020,7 +1020,7 @@ class Fixture(unittest.TestCase):
         self.cfg["sources"] = dict(
             land_config=land,
             inland_water=dict(
-                rasterization=water,
+                **water,
                 file_count=1,
                 files=[
                     {
@@ -1036,7 +1036,13 @@ class Fixture(unittest.TestCase):
             "max_parallel_shards": 1,
         }
         runner = self.make()
-        physical = runner.physical()
+        with (
+            patch.object(physical_build.land, "run", wraps=physical_build.land.run) as land_run,
+            patch.object(physical_build.water, "run", wraps=physical_build.water.run) as water_run,
+        ):
+            physical = runner.physical()
+        self.assertIs(land_run.call_args.args[-1], runner.grid)
+        self.assertIs(water_run.call_args.args[-1], runner.grid)
         config_path = runner.out / "physical-build-config.json"
         original_config = config_path.read_bytes()
         self.assertEqual(
@@ -1066,7 +1072,7 @@ class Fixture(unittest.TestCase):
             str(runner.out),
         )
         self.assertEqual((physical / "report.json").read_bytes(), producer_report)
-        notes = dict(land, grid=grid)
+        notes = dict(land)
         notes["selection_notes"] = "Reworded description of the same selected sources"
         self.assertEqual(
             pipeline.physical_reference(
@@ -1079,10 +1085,9 @@ class Fixture(unittest.TestCase):
             pipeline.physical_reference(
                 runner.out, {**runner.physical_config, "land_config": changed}
             )
-        shorter_grid = {**grid, "height": grid["height"] - 1}
-        shorter_sources = dict(runner.physical_config)
-        for key in ("land_config", "water_config"):
-            shorter_sources[key] = dict(runner.physical_config[key], grid=shorter_grid)
+        shorter_sources = dict(
+            runner.physical_config, grid={**grid, "height": grid["height"] - 1}
+        )
         with self.assertRaisesRegex(ValueError, "physical reuse requires the same grid"):
             pipeline.physical_reference(runner.out, shorter_sources)
         mask = physical / "physical-dry.tif"
@@ -1107,24 +1112,40 @@ class Fixture(unittest.TestCase):
             ],
             0,
         )
-        # Keep the saved file pin valid while simulating an older manifest.
-        old_manifest = json.loads(json_bytes(runner.physical_config["source_manifest"]))
+        # An earlier completed run saved separate settings and source list pins.
+        old_manifest = {
+            key: runner.physical_config["inland_water"][key]
+            for key in ("file_count", "files")
+        }
+        old_manifest = json.loads(json_bytes(old_manifest))
         entry = old_manifest["files"][0]
-        entry["size"] = entry.pop("size_bytes")
-        old_path = write_json(self.inputs / "legacy-manifest.json", old_manifest)
         identity_path = runner.out / "physical/pipeline-identity.json"
         identity = read_json(identity_path)
-        identity["source_manifest"] = pin_file(old_path)
-        identity_path.write_bytes(json_bytes(identity))
+        del identity["inland_water"]
+        for name, settings in (
+            ("land_config", dict(land, grid=grid)),
+            ("water_config", dict(water, grid=grid)),
+        ):
+            old_path = write_json(self.inputs / f"legacy-{name}.json", settings)
+            identity[name] = pin_file(old_path)
         report_path = runner.out / "physical/report.json"
         report = read_json(report_path)
-        report["pipeline_identity_sha256"] = sha256_file(identity_path)
-        report_path.write_bytes(json_bytes(report))
-        reuse = pipeline.physical_reference(runner.out, runner.physical_config)
-        self.assertEqual(reuse["status"], "reused")
-        self.assertEqual(
-            reuse["pins"], [pin_file(pin["path"]) for pin in reuse["pins"]]
-        )
+        size = entry.pop("size_bytes")
+        for size_key in ("size_bytes", "size"):
+            with self.subTest(old_water_size_key=size_key):
+                old_manifest["files"] = [{**entry, size_key: size}]
+                old_path = write_json(
+                    self.inputs / f"legacy-manifest-{size_key}.json", old_manifest
+                )
+                identity["source_manifest"] = pin_file(old_path)
+                identity_path.write_bytes(json_bytes(identity))
+                report["pipeline_identity_sha256"] = sha256_file(identity_path)
+                report_path.write_bytes(json_bytes(report))
+                reuse = pipeline.physical_reference(runner.out, runner.physical_config)
+                self.assertEqual(reuse["status"], "reused")
+                self.assertEqual(
+                    reuse["pins"], [pin_file(pin["path"]) for pin in reuse["pins"]]
+                )
 
     def test_single_cloud_configuration_matches_local_raw_and_component_streams_in_another_root(
         self,
@@ -1167,10 +1188,7 @@ class Fixture(unittest.TestCase):
             **self.cfg,
             "sources": dict(
                 land_config=land,
-                inland_water=dict(
-                    rasterization=self.cfg["sources"]["inland_water"]["rasterization"],
-                    **manifest,
-                ),
+                inland_water=self.cfg["sources"]["inland_water"] | manifest,
             ),
             "physical_controls": {
                 **self.cfg["physical_controls"],

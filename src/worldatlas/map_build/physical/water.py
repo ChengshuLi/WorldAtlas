@@ -22,6 +22,7 @@ import pyarrow.compute as pc
 import pyarrow.parquet as pq
 from osgeo import gdal, ogr, osr
 
+from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.physical.water_batch import WaterBatch
 from worldatlas.shared.files import sha256_file
 
@@ -267,6 +268,7 @@ def run(
     expected: str,
     output: Path | str,
     config_path: Path | str,
+    grid: Grid,
     batch_size: int | None = None,
     engine: str | None = None,
     *,
@@ -278,7 +280,8 @@ def run(
         source: Local source GeoParquet file.
         expected: SHA-256 digest for the source file.
         output: New directory for the shard mask and report.
-        config_path: Rasterization settings and grid.
+        config_path: Inland-water rasterization settings and file list.
+        grid: Shared physical build grid.
         batch_size: Optional number of features to read per Arrow batch.
         engine: Optional rasterizer choice, "gdal" or "python".
         emit: Progress callback.
@@ -307,36 +310,15 @@ def run(
         raise ValueError(
             'explicit supported configuration and selection notes required'
         )
-    grid = cfg['grid']
     policy = cfg['policy']
-    width, height, west, north, step = (
-        grid[k] for k in ('width', 'height', 'west', 'north', 'step')
-    )
+    width, height = grid.width, grid.height
+    west, north, step = grid.west, grid.north, grid.step
     tile = cfg.get('tile_size', 1024)
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
         raise ValueError('invalid free-space reserve')
-    if (
-        not isinstance(width, int)
-        or isinstance(width, bool)
-        or width <= 0
-        or not isinstance(height, int)
-        or isinstance(height, bool)
-        or height <= 0
-        or not isinstance(tile, int)
-        or isinstance(tile, bool)
-        or not 1 <= tile <= 4096
-        or not all(
-            isinstance(x, (int, float)) and math.isfinite(x)
-            for x in (west, north, step)
-        )
-        or step <= 0
-        or west < -180
-        or west + width * step > 180
-        or north > 90
-        or north - height * step < -90
-    ):
-        raise ValueError('invalid grid or tile size')
+    if not isinstance(tile, int) or isinstance(tile, bool) or not 1 <= tile <= 4096:
+        raise ValueError('invalid tile size')
     if policy != {'method': 'overture-inland-subtype-v1'}:
         raise ValueError('explicit Overture inland subtype policy required')
     if batch_size is None:
@@ -487,13 +469,7 @@ def run(
         'selection_notes': cfg['selection_notes'],
         'configuration_sha256': hashlib.sha256(config_bytes).hexdigest(),
         'geometry_policy': 'GEOS validity checked; invalid geometries excluded and IDs reported; no repair',
-        'grid': {
-            'width': width,
-            'height': height,
-            'west': west,
-            'north': north,
-            'step': step,
-        },
+        'grid': vars(grid),
         'rasterization': f'GDAL default polygon rasterization, ALL_TOUCHED off; values unioned per batch on {tile}-cell tiles',
         'runtime': {
             'python': sys.version,

@@ -85,7 +85,6 @@ class BundleTests(unittest.TestCase):
                     "sources": {
                         "land_config": {"land": []},
                         "inland_water": {
-                            "rasterization": {},
                             "files": [dict(
                                 path="raw/shard.parquet", r2_bucket="test", r2_key="sources/shard.parquet",
                                 sha256="c" * 64, size_bytes=10,

@@ -215,7 +215,7 @@ class EndToEndTests(unittest.TestCase):
                         sources=dict(
                             land_config=land_config,
                             inland_water=dict(
-                                rasterization=water_config,
+                                **water_config,
                                 file_count=1,
                                 files=[dict(path=shard.name, sha256=pin_file(shard)["sha256"])],
                             ),

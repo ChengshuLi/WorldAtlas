@@ -27,7 +27,7 @@ class ExecutorResumeTests(unittest.TestCase):
                         {"dataset": str(self.source), "files": [pin_file(self.source)]}
                     ]
                 },
-                "inland_water": {"rasterization": {}, "files": []},
+                "inland_water": {"files": []},
             },
         }
         self.config = write_json(inputs / "request.json", cfg)
