@@ -773,10 +773,10 @@ class Fixture(unittest.TestCase):
             ):
                 with self.subTest(changes=changes):
                     with self.assertRaisesRegex(ValueError, reason):
-                        runner.cloud_file(dict(pin, **changes))
+                        runner.acquire_r2_input(dict(pin, **changes))
                     self.assertFalse(output.exists())
                     self.assertEqual(list(output.parent.glob("*.partial")), [])
-            self.assertEqual(runner.cloud_file(pin).read_bytes(), payload)
+            self.assertEqual(runner.acquire_r2_input(pin).read_bytes(), payload)
             self.assertEqual(download.call_count, 1)
 
     def test_zip_cache_publication_checks_a_concurrent_writers_bytes(self):
@@ -805,10 +805,10 @@ class Fixture(unittest.TestCase):
                     patch.object(os, "link", side_effect=race),
                 ):
                     if content == payload:
-                        self.assertEqual(runner.cloud_file(pin).read_bytes(), payload)
+                        self.assertEqual(runner.acquire_r2_input(pin).read_bytes(), payload)
                     else:
                         with self.assertRaisesRegex(ValueError, "concurrent cloud input changed"):
-                            runner.cloud_file(pin)
+                            runner.acquire_r2_input(pin)
                 self.assertEqual(output.read_bytes(), content)
                 self.assertEqual(list(output.parent.glob("*.partial")), [])
 
@@ -852,12 +852,12 @@ class Fixture(unittest.TestCase):
         ):
             with self.subTest(changes=changes):
                 with self.assertRaisesRegex(ValueError, message):
-                    runner.cloud_file(dict(spec, **changes))
+                    runner.acquire_r2_input(dict(spec, **changes))
         outside = self.root / "run"
         cached = self.inputs / spec["sha256"]
         cached.symlink_to(outside, target_is_directory=True)
         with self.assertRaisesRegex(ValueError, "cloud input overlaps output"):
-            runner.cloud_file(spec)
+            runner.acquire_r2_input(spec)
 
     def test_cache_reuses_same_bytes_without_duplicate_file_pins(self):
         runner = self.make()
@@ -866,7 +866,7 @@ class Fixture(unittest.TestCase):
         second = self.cloud(payload, "folder2/shared.bin")
         count = len(runner.source_pins)
         with self.fake_r2({first["r2_key"]: payload}, []) as download:
-            self.assertEqual(runner.cloud_file(first), runner.cloud_file(second))
+            self.assertEqual(runner.acquire_r2_input(first), runner.acquire_r2_input(second))
             download.assert_called_once()
         self.assertEqual(len(runner.source_pins), count + 1)
         saved_count = len(runner.source_pins)

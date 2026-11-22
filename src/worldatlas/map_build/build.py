@@ -557,7 +557,7 @@ class Pipeline:
         }
         for name, spec in resolved.items():
             if isinstance(spec, dict) and ("r2_bucket" in spec or "archive" in spec):
-                self.sources[name] = self.cloud_file(spec)
+                self.sources[name] = self.acquire_r2_input(spec)
             else:
                 self.sources[name] = cast(Path, self.resolve_pins(spec))
 
@@ -802,8 +802,10 @@ class Pipeline:
             )
         return resolved
 
-    def cloud_file(self, spec: dict[str, Any], *, endpoint: str | None = None) -> Path:
-        """Find or acquire a verified R2 object or ZIP member.
+    def acquire_r2_input(
+        self, spec: dict[str, Any], *, endpoint: str | None = None
+    ) -> Path:
+        """Get a verified local copy of an R2 object or ZIP member.
 
         Args:
             spec: Object location or archive and member, plus byte size and SHA-256.
@@ -827,7 +829,7 @@ class Pipeline:
             raise ValueError("cloud inputs require explicit SHA-256 and byte size")
         archive_member: tuple[Path, str] | None = None
         if "archive" in spec:
-            archive = self.cloud_file(spec["archive"], endpoint=endpoint)
+            archive = self.acquire_r2_input(spec["archive"], endpoint=endpoint)
             member = spec["member"]
             if not isinstance(member, str):
                 raise ValueError("unsafe ZIP member")
@@ -869,7 +871,7 @@ class Pipeline:
             archive, member = archive_member
             _extract_cloud_member(archive, member, path, spec)
         else:
-            self._download_cloud_file(spec, path, endpoint)
+            self._download_r2_object(spec, path, endpoint)
             path = path.resolve(strict=True)
 
         result = {"path": str(path), "sha256": expected}
@@ -878,7 +880,7 @@ class Pipeline:
         self.input_cache[identity] = path
         return path
 
-    def _download_cloud_file(
+    def _download_r2_object(
         self, spec: dict[str, Any], path: Path, endpoint: str | None
     ) -> None:
         """Download a verified R2 object and record its transfer time.
@@ -923,9 +925,11 @@ class Pipeline:
         for layer in settings["land"]:
             dataset = layer["dataset"]
             if isinstance(dataset, dict):
-                dataset = str(self.cloud_file(dataset))
+                dataset = str(self.acquire_r2_input(dataset))
             files = [
-                dict(pin_file(self.cloud_file(spec)), size_bytes=spec["size_bytes"])
+                dict(
+                    pin_file(self.acquire_r2_input(spec)), size_bytes=spec["size_bytes"]
+                )
                 if "r2_bucket" in spec or "archive" in spec
                 else spec
                 for spec in layer["files"]
@@ -989,7 +993,7 @@ class Pipeline:
         reference = {}
         for stream, bucket, key, size, stored_hash, decoded_hash in streams:
             path = directory / (stream + ".u32le")
-            compressed = self.cloud_file(
+            compressed = self.acquire_r2_input(
                 {
                     "r2_bucket": bucket,
                     "r2_key": key,
@@ -1017,7 +1021,9 @@ class Pipeline:
                 Path, self.resolve_pins({"path": str(path), "sha256": decoded_hash})
             )
         if config is not None:
-            reference["reference_config"] = self.cloud_file(config, endpoint=endpoint)
+            reference["reference_config"] = self.acquire_r2_input(
+                config, endpoint=endpoint
+            )
         return reference
 
     def resolve_pins(self, value: object) -> Path | dict[str, Any]:
