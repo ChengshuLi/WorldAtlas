@@ -41,6 +41,25 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(self.cache.acquire(self.source), path)
         self.assertEqual(self.storage.get_object.call_count, 1)
 
+    def test_cache_cancellation_stops_a_zip_archive_download(self):
+        body = io.BytesIO(self.raw)
+        self.storage.get_object.return_value = {'Body': body}
+        check = Mock(side_effect=[None, InterruptedError('cancelled during transfer')])
+        source_cache = SourceCache(self.directory, check_cancelled=check)
+        self.addCleanup(source_cache.close)
+        member = {
+            'archive': self.source,
+            'member': 'coast.shp',
+            'sha256': 'a' * 64,
+            'size_bytes': 10,
+        }
+        with self.assertRaisesRegex(InterruptedError, 'cancelled during transfer'):
+            source_cache.acquire(member)
+        self.assertTrue(body.closed)
+        self.assertFalse(source_cache.path(self.source).exists())
+        self.assertFalse(source_cache.path(member).exists())
+        self.assertFalse(list(self.directory.rglob('download-*')))
+
     def test_download_time_excludes_verification_and_cached_reuse(self):
         clock = [0.0]
         original = cache._check_file

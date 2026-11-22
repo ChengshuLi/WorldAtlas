@@ -96,43 +96,6 @@ def _check_file(path: Path, digest: str, size: int) -> None:
     raise ValueError(f"source file size or hash mismatch: {path}")
 
 
-def _stream_object(
-    client: r2.R2Client,
-    bucket: str,
-    key: str,
-    size: int,
-    output: IO[bytes],
-    check_cancelled: Callable[[], None],
-) -> None:
-    """Copy an entire R2 object, checking its length and stopping on cancellation.
-
-    Args:
-        client: Open R2 client.
-        bucket: Object's bucket name.
-        key: Object's key within the bucket.
-        size: Expected object byte count.
-        output: Open local file receiving the bytes.
-        check_cancelled: Callback that raises if work should stop.
-
-    Raises:
-        ValueError: The object's length differs from the expected byte count.
-    """
-    check_cancelled()
-    with client.open(bucket, key) as remote:
-        if remote.size_bytes is not None and remote.size_bytes != size:
-            raise ValueError("R2 source file size or hash mismatch")
-        remaining = size
-        while remaining:
-            check_cancelled()
-            chunk = remote.body.read(min(4 << 20, remaining))
-            if not chunk:
-                break
-            output.write(chunk)
-            remaining -= len(chunk)
-        if remaining or remote.body.read(1):
-            raise ValueError("R2 source file size or hash mismatch")
-
-
 class SourceCache:
     """Reuse verified files across runs and skip repeat verification within one run.
 
@@ -140,14 +103,21 @@ class SourceCache:
     their original relative paths so readers can find companion files.
     """
 
-    def __init__(self, directory: Path) -> None:
+    def __init__(
+        self,
+        directory: Path,
+        *,
+        check_cancelled: Callable[[], None] = lambda: None,
+    ) -> None:
         """Set up a local cache with one R2 client.
 
         Args:
             directory: Root directory for cached files.
+            check_cancelled: Callback that raises if a download should stop.
         """
         self.directory = directory.resolve()
         self._client = r2.make_r2_client()
+        self._check_cancelled = check_cancelled
         self.pins: list[dict[str, str]] = []
         self.download_intervals: list[tuple[float, float]] = []
         self._verified: set[tuple[Path, str, int]] = set()
@@ -231,17 +201,11 @@ class SourceCache:
         self.pins.append({"path": str(path), "sha256": digest})
         return path
 
-    def acquire(
-        self,
-        spec: FileSpec,
-        *,
-        check_cancelled: Callable[[], None] = lambda: None,
-    ) -> Path:
+    def acquire(self, spec: FileSpec) -> Path:
         """Reuse or fetch one complete R2 object or requested ZIP member.
 
         Args:
             spec: Expected file bytes and their R2 or ZIP location.
-            check_cancelled: Optional callback that raises during cancelled work.
 
         Returns:
             The verified local file path.
@@ -253,7 +217,7 @@ class SourceCache:
                 path,
                 digest,
                 size,
-                lambda output: self._extract(spec, output, check_cancelled),
+                lambda output: self._extract(spec, output),
             )
 
         bucket, key = _location(spec)
@@ -261,51 +225,54 @@ class SourceCache:
             path,
             digest,
             size,
-            lambda output: self._download(bucket, key, size, output, check_cancelled),
+            lambda output: self._download(bucket, key, size, output),
         )
 
-    def _download(
-        self,
-        bucket: str,
-        key: str,
-        size: int,
-        output: IO[bytes],
-        check_cancelled: Callable[[], None],
-    ) -> None:
-        """Transfer one object and record the time spent on the transfer itself.
+    def _download(self, bucket: str, key: str, size: int, output: IO[bytes]) -> None:
+        """Stream one R2 object, check its byte count, and record the transfer time.
 
         Args:
             bucket: R2 bucket.
             key: R2 object key.
             size: Expected object byte count.
             output: Open temporary output file.
-            check_cancelled: Callback that raises if work should stop.
+
+        Raises:
+            ValueError: The object's length differs from the expected byte count.
+            InterruptedError: The cancellation callback requested a stop.
         """
         started = time.monotonic()
         try:
-            _stream_object(self._client, bucket, key, size, output, check_cancelled)
+            self._check_cancelled()
+            with self._client.open(bucket, key) as remote:
+                if remote.size_bytes is not None and remote.size_bytes != size:
+                    raise ValueError("R2 source file size or hash mismatch")
+                remaining = size
+                while remaining:
+                    self._check_cancelled()
+                    chunk = remote.body.read(min(4 << 20, remaining))
+                    if not chunk:
+                        break
+                    output.write(chunk)
+                    remaining -= len(chunk)
+                if remaining or remote.body.read(1):
+                    raise ValueError("R2 source file size or hash mismatch")
         finally:
             self.download_intervals.append((started, time.monotonic()))
 
-    def _extract(
-        self,
-        spec: FileSpec,
-        output: IO[bytes],
-        check_cancelled: Callable[[], None],
-    ) -> None:
+    def _extract(self, spec: FileSpec, output: IO[bytes]) -> None:
         """Read a single regular ZIP member from its verified archive.
 
         Args:
             spec: Validated archive and member pin.
             output: Open temporary output file.
-            check_cancelled: Callback that raises if work should stop.
 
         Raises:
             ValueError: The member is missing, ambiguous, or not a regular file.
         """
         archive, member = spec["archive"], spec["member"]
         assert isinstance(archive, dict) and isinstance(member, str)
-        local = self.acquire(archive, check_cancelled=check_cancelled)
+        local = self.acquire(archive)
         with zipfile.ZipFile(local) as packed:
             matches = [item for item in packed.infolist() if item.filename == member]
             if (

@@ -406,7 +406,9 @@ def _run(
     workers = cfg.get('max_parallel_shards', 2)
     source_directory = Path(cfg['source_directory']).resolve()
     require_separate_cache_and_output(source_directory, output)
-    cache = resources.enter_context(closing(SourceCache(source_directory)))
+    cache = resources.enter_context(
+        closing(SourceCache(source_directory, check_cancelled=control.check_cancelled))
+    )
     land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
     water_cfg = cfg['inland_water']
     if 'native_method' in water_cfg:
@@ -661,7 +663,7 @@ def _run(
         try:
             for spec in land_downloads:
                 control.check_cancelled()
-                cache.acquire(spec, check_cancelled=control.check_cancelled)
+                cache.acquire(spec)
         finally:
             for start, end in cache.download_intervals:
                 journal.download_done(start, end, 'land')
@@ -726,9 +728,7 @@ def _run(
             with download_slot:
                 before = len(cache.download_intervals)
                 try:
-                    path = cache.acquire(
-                        remote, check_cancelled=control.check_cancelled
-                    )
+                    path = cache.acquire(remote)
                 finally:
                     for start, end in cache.download_intervals[before:]:
                         journal.download_done(start, end, 'water')
