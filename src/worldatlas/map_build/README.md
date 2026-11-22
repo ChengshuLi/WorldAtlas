@@ -23,7 +23,7 @@ Supply `--work-dir` and an output directory for every build. The builder creates
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
 | `--resume` | Continue an interrupted build using its saved selection and options. Pass the original config, output directory, and `--work-dir`. Omit `--selection`, `--divide`, `--compare-release`, `--reuse-from`, and `--recompute-division`. |
 | `--selection INPUT_SELECTION.json` | Start a fresh build with a saved geographic selection. To rebuild a release, use its restored configuration, selection and captured code. |
-| `--compare-release VERSION_OR_RC` | Compare every cell with an official release or numbered candidate on the same grid. This needs Neon and R2 access. |
+| `--compare-release VERSION_OR_RC` | Compare every cell with an official release or numbered candidate on the same grid. The first attempt looks up the release in Neon and downloads any missing files from R2. Resume uses the saved comparison files. |
 
 To run a restored copy of the builder directly, use `python -m worldatlas.map_build.build` from the archive’s `src` directory in its recorded environment. [Restore a release for rebuilding](../map_releases/README.md#restore-inputs)
 
@@ -114,7 +114,7 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `final/` | The finished map grid, encoded as map codes. |
 | `final/report.json` | Counts the cells using each map code. Release staging uses the counts to check coverage and build the legend. |
 | `report.json` | Marks the run complete and records final file paths, checksums and stage timings. Its `physical_directory` field locates the physical grid, including a grid reused from an earlier run. |
-| `comparison/` | Changed cells and assignment totals when comparing two grids with matching dimensions. With both category mappings, the builder compares entity and cell type. With bare map files, it compares numeric codes. |
+| `comparison/` | Changed cell locations and counts when using `--compare-release`. The builder compares entity and cell type when the release includes a category mapping. Older releases without a mapping are compared by map code. |
 | `attempts/` | Records the code and runtime for each run attempt. Release staging uses these records to package the code needed for replay. |
 | `checkpoints/` | Records inputs and outputs for completed steps so resume can verify and reuse them. |
 | `checkpoints/{STEP}/attempt-{ID}/error.log` | The traceback for a failed step, kept beside that attempt’s checkpoint. |

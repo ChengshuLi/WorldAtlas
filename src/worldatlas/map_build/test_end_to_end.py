@@ -20,6 +20,7 @@ import pyarrow.parquet as pq
 from osgeo import ogr
 
 from worldatlas.source_imports.run_import import run_import
+from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
 from worldatlas.map_build.inputs import selection as selection_inputs
@@ -329,37 +330,6 @@ class EndToEndTests(unittest.TestCase):
                         )
 
                 reference = Path(report["final"]["rows"]["path"]).parent
-                compare_cfg = json.loads(cfg.read_bytes())
-                compare_cfg["sources"].update(
-                    reference_rows=pin_file(reference / "rows.u32le"),
-                    reference_runs=pin_file(reference / "runs.u32le"),
-                )
-                compare_path = write_json(raw / "compare.json", compare_cfg)
-                physical_only = Pipeline(
-                    compare_path,
-                    root / "physical-only",
-                    work_dir=root,
-                    selection=selected,
-                    reuse_from=root / "reused",
-                    recompute_division=True,
-                )
-                physical_only.close()
-                resumed = Pipeline(
-                    compare_path, root / "physical-only", work_dir=root, resume=True
-                )
-                self.assertTrue(resumed.recompute_division)
-                result = resumed.run()
-                self.assertEqual(result["physical_outputs"], report["physical_outputs"])
-                division = json.loads(
-                    (root / "physical-only/division/report.json").read_text()
-                )
-                self.assertFalse(division["parents"]["0"]["reused"])
-                self.assertFalse(division["parents"]["0"]["land"]["reused"])
-                comparison = root / "physical-only/comparison/report.json"
-                self.assertEqual(result["comparison"], pin_file(comparison))
-                self.assertEqual(json.loads(comparison.read_bytes())["changed_cells"], 0)
-                self.assertFalse((root / "physical-only/comparison.json").exists())
-
                 release_folder = raw / "comparison-release"
                 release_folder.mkdir()
                 release_rows = release_folder / "rows.u32le"
@@ -376,25 +346,34 @@ class EndToEndTests(unittest.TestCase):
                         for binding in frozen["geography"]["category_bindings"]
                     ]},
                 )
-                def cached_release(runner, version):
-                    self.assertEqual(version, "v9.0")
-                    return {
-                        name: runner.resolve_pin(pin_file(path))
-                        for name, path in (
-                            ("reference_rows", release_rows),
-                            ("reference_runs", release_runs),
-                            ("reference_config", release_config),
-                        )
-                    }
-
-                with patch.object(Pipeline, "release_reference", new=cached_release):
-                    compared = Pipeline(
-                        cfg, root / "semantic-compare", work_dir=root, selection=selected,
-                        reuse_from=root / "run", compare_release="v9.0",
-                    ).run()
-                self.assertEqual(
-                    json.loads(Path(compared["comparison"]["path"]).read_bytes())["changed_cells"], 0
+                comparison_pins = {
+                    f"reference_{name}": pin_file(path)
+                    for name, path in (
+                        ("rows", release_rows), ("runs", release_runs), ("config", release_config)
+                    )
+                }
+                with patch.object(pipeline, "cache_release_reference", return_value=comparison_pins):
+                    physical_only = Pipeline(
+                        cfg, root / "physical-only", work_dir=root, selection=selected,
+                        reuse_from=root / "reused", recompute_division=True, compare_release="v9.0",
+                    )
+                physical_only.close()
+                resumed = Pipeline(
+                    cfg, root / "physical-only", work_dir=root, resume=True
                 )
+                self.assertTrue(resumed.recompute_division)
+                result = resumed.run()
+                self.assertEqual(result["physical_outputs"], report["physical_outputs"])
+                division = json.loads(
+                    (root / "physical-only/division/report.json").read_text()
+                )
+                self.assertFalse(division["parents"]["0"]["reused"])
+                self.assertFalse(division["parents"]["0"]["land"]["reused"])
+                comparison = root / "physical-only/comparison/report.json"
+                self.assertEqual(result["comparison"], pin_file(comparison))
+                self.assertEqual(json.loads(comparison.read_bytes())["changed_cells"], 0)
+                self.assertFalse((root / "physical-only/comparison.json").exists())
+
                 changed = Pipeline(
                     cfg, root / "changed-config", work_dir=root, selection=selected,
                     reuse_from=root / "run",

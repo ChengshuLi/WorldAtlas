@@ -22,9 +22,12 @@ import pyarrow.parquet as pq
 
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.execution.runtime import elapsed_union
+from worldatlas.map_build.inputs import releases as release_inputs
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
+from worldatlas.source_assets.cache import SourceCache
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.physical import build as physical_build
 from worldatlas.map_build.test_support import selection
@@ -261,6 +264,11 @@ class Fixture(unittest.TestCase):
         self.addCleanup(runner.close)
         return runner
 
+    def make_cache(self, directory=None):
+        cache = SourceCache(self.inputs if directory is None else directory)
+        self.addCleanup(cache.close)
+        return cache
+
     def test_physical_settings_require_inline_values(self):
         path = write_json(self.inputs / "settings.json", {})
         for name in ("land_config", "inland_water"):
@@ -321,67 +329,17 @@ class Fixture(unittest.TestCase):
                 pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
         self.assertFalse((self.root / "run").exists())
 
-    def test_compare_requires_two_streams_and_a_single_reference_source(self):
-        reference = self.inputs / "rows.u32le"
-        reference.write_bytes(b"fixture rows")
-        config = self.inputs / "comparison.json"
-        self.cfg["sources"]["reference_rows"] = {
-            "path": reference.name, "sha256": sha256_file(reference),
-        }
-        config.write_text(json.dumps(self.cfg))
-        for options, message in (
-            ({}, "both reference stream pins are required"),
-            ({"compare_release": "v9.0"}, "choose a published comparison release or local"),
-        ):
-            with self.subTest(options=options):
-                with self.assertRaisesRegex(ValueError, message):
-                    pipeline.Pipeline(
-                        config,
-                        self.root / "run",
-                        work_dir=self.root,
-                        **options,
-                    )
+    def test_build_config_rejects_comparison_stream_settings(self):
+        for name in ("reference_rows", "reference_runs"):
+            with self.subTest(name=name):
+                sources = dict(self.cfg["sources"], **{name: {"path": "reference.u32le"}})
+                config = write_json(self.inputs / f"{name}.json", dict(self.cfg, sources=sources))
+                with self.assertRaisesRegex(ValueError, rf"sources\.{name}"):
+                    pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
 
     def test_source_pin_requires_a_file(self):
         with self.assertRaisesRegex(ValueError, "not a file"):
             pin_file(self.inputs)
-
-    def test_compare_can_load_pinned_streams_from_one_zip(self):
-        packed = io.BytesIO()
-        streams = {"rows": b"row offsets", "runs": b"cell runs"}
-        with zipfile.ZipFile(packed, "w") as archive:
-            for kind, data in streams.items():
-                archive.writestr(kind + ".u32le", data)
-        archive = self.cloud(packed.getvalue(), "sources/map.zip")
-        for kind, data in streams.items():
-            self.cfg["sources"]["reference_" + kind] = dict(
-                archive=archive, member=kind + ".u32le", size_bytes=len(data),
-                sha256=hashlib.sha256(data).hexdigest(),
-            )
-        with self.fake_r2({"sources/map.zip": packed.getvalue()}, []) as download:
-            runner = self.make()
-        rows, runs = (runner.comparison_files["reference_" + kind] for kind in ("rows", "runs"))
-        self.assertEqual(rows.parent, runs.parent)
-        self.assertEqual((rows.read_bytes(), runs.read_bytes()), tuple(streams.values()))
-        download.assert_called_once()
-
-    def test_invalid_reference_pin_has_a_clear_error(self):
-        self.cfg["sources"]["reference_rows"] = "rows.u32le"
-        config = write_json(self.inputs / "build.json", self.cfg)
-        with self.assertRaisesRegex(ValueError, r"sources\.reference_rows"):
-            pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
-
-    def test_local_comparison_requires_both_named_streams_in_one_directory(self):
-        second = self.inputs / "unrelated"
-        second.mkdir()
-        rows = self.inputs / "rows.u32le"
-        runs = second / "runs.u32le"
-        rows.write_bytes(b"first reference")
-        runs.write_bytes(b"other reference")
-        self.cfg["sources"].update(reference_rows=pin_file(rows), reference_runs=pin_file(runs))
-        runner = self.make()
-        with self.assertRaisesRegex(ValueError, "reference must use .* in one directory"):
-            runner.compare(runner.out / "final", runner.out / "physical")
 
     def test_invalid_catalog_selector_fails_before_file_acquisition(self):
         for spec, message in (
@@ -474,7 +432,7 @@ class Fixture(unittest.TestCase):
         calls = []
         with (
             patch.object(
-                pipeline, "read_release_assets", return_value=(catalog, config_asset)
+                release_inputs, "read_release_assets", return_value=(catalog, config_asset)
             ) as release_lookup,
             self.fake_r2(stored | {raw_key: b"{}"}, calls),
         ):
@@ -487,23 +445,25 @@ class Fixture(unittest.TestCase):
             try:
                 for name, data in decoded.items():
                     self.assertEqual(
-                        runner.comparison_files["reference_" + name].read_bytes(), data
+                        Path(runner.comparison_inputs["reference_" + name]["path"]).read_bytes(), data
                     )
-                self.assertEqual(runner.comparison_files["reference_config"].read_bytes(), release_config)
+                self.assertEqual(Path(runner.comparison_inputs["reference_config"]["path"]).read_bytes(), release_config)
             finally:
                 runner.close()
             release_lookup.side_effect = AssertionError("preview is no longer cataloged")
             for _, _, key, _, checksum, _ in catalog:
                 (self.inputs / checksum / Path(key).name).unlink()
-            resumed = pipeline.Pipeline(
-                config,
-                runner.out,
-                work_dir=self.root,
-                resume=True,
-            )
+            with patch.object(pipeline, "SourceCache") as cache:
+                resumed = pipeline.Pipeline(
+                    config,
+                    runner.out,
+                    work_dir=self.root,
+                    resume=True,
+                )
+            cache.assert_not_called()
             try:
                 self.assertEqual(resumed.identity["compare_release"], "v8.0")
-                self.assertEqual(resumed.comparison_files, runner.comparison_files)
+                self.assertEqual(resumed.comparison_inputs, runner.comparison_inputs)
             finally:
                 resumed.close()
             with self.assertRaisesRegex(ValueError, "--resume uses saved options"):
@@ -514,8 +474,8 @@ class Fixture(unittest.TestCase):
                     compare_release="v8.0",
                     resume=True,
                 )
-            runner.comparison_files["reference_rows"].write_bytes(b"changed comparison")
-            with self.assertRaisesRegex(ValueError, "source pin mismatch"):
+            Path(runner.comparison_inputs["reference_rows"]["path"]).write_bytes(b"changed comparison")
+            with self.assertRaisesRegex(ValueError, "checkpoint/input hash mismatch"):
                 pipeline.Pipeline(config, runner.out, work_dir=self.root, resume=True)
             identity_path = runner.out / "run-identity.json"
             identity = read_json(identity_path)
@@ -526,7 +486,6 @@ class Fixture(unittest.TestCase):
         self.assertEqual(calls, list(stored))
 
     def test_release_comparison_reuses_decoded_stream_without_a_viewer_config(self):
-        runner = self.make()
         decoded = b"map bytes"
         packed = gzip.compress(decoded)
         stored_hash = hashlib.sha256(packed).hexdigest()
@@ -534,33 +493,47 @@ class Fixture(unittest.TestCase):
         key = "releases/fixture/rows.u32le.gz"
         good = ("rows", "worldatlas", key, len(packed), stored_hash, decoded_hash)
         bad = (*good[:-1], "0" * 64)
-        directory = self.inputs / ("release-" + hashlib.sha256(json_bytes([good])).hexdigest())
-        directory.symlink_to(runner.out, target_is_directory=True)
-        link = os.link
-
-        def publish_together(source, destination):
-            if destination.name == "rows.u32le":
-                destination.write_bytes(decoded)
-            return link(source, destination)
-
         with (
             patch.object(
-                pipeline, "read_release_assets",
-                side_effect=[([good], None), ([bad], None), ([good], None), ([good], None)],
+                release_inputs, "read_release_assets",
+                side_effect=[([bad], None), ([good], None), ([good], None)],
             ),
             self.fake_r2({key: packed}, []) as download,
         ):
-            with self.assertRaisesRegex(ValueError, "release reference overlaps output"):
-                runner.release_reference("fixture")
-            directory.unlink()
+            source_cache = self.make_cache()
             with self.assertRaisesRegex(ValueError, "decoded reference stream hash mismatch"):
-                runner.release_reference("fixture")
-            with patch.object(os, "link", side_effect=publish_together):
-                expected = runner.release_reference("fixture")
+                release_inputs.cache_release_reference("fixture", source_cache)
+            self.assertFalse(list(self.inputs.rglob("*.partial")))
+            expected = release_inputs.cache_release_reference("fixture", source_cache)
             self.assertEqual(list(expected), ["reference_rows"])
-            self.assertEqual(expected["reference_rows"].read_bytes(), decoded)
-            self.assertEqual(runner.release_reference("fixture"), expected)
+            self.assertEqual(Path(expected["reference_rows"]["path"]).read_bytes(), decoded)
+            (self.inputs / stored_hash / Path(key).name).unlink()
+            self.assertEqual(
+                release_inputs.cache_release_reference("fixture", self.make_cache()),
+                expected,
+            )
             download.assert_called_once()
+
+    def test_release_without_a_category_mapping_compares_map_codes(self):
+        grid = Grid(4, 1, 90)
+        baseline = self.inputs / "baseline"
+        write_layer(baseline, grid, [(0, [(0, 4, 1)])])
+        pins = {f"reference_{name}": pin_file(baseline / f"{name}.u32le")
+                for name in ("rows", "runs")}
+        config = write_json(self.inputs / "request.json", self.cfg)
+        with patch.object(pipeline, "cache_release_reference", return_value=pins):
+            runner = pipeline.Pipeline(
+                config, self.root / "run", work_dir=self.root, compare_release="v8.0"
+            )
+        self.addCleanup(runner.close)
+        final = runner.out / "final"
+        write_layer(final, grid, [(0, [(0, 4, 2)])])
+        physical = runner.out / "physical"
+        physical.mkdir()
+        write_json(physical / "report.json", {"grid": vars(grid)})
+        report = read_json(runner.compare(final, physical)["path"])
+        self.assertEqual(report["compared_by"], "map_code")
+        self.assertEqual(report["pair_counts"], {"1->2": 4})
 
     def cloud(self, payload, key="sources/input.json"):
         return {
@@ -615,11 +588,12 @@ class Fixture(unittest.TestCase):
         land = runner.physical_config["land_config"]["land"][0]
         self.assertEqual(land["dataset"], source_id)
         self.assertEqual(land["files"], [resolved])
+        source_cache = self.make_cache()
         planned, requests = physical_build.plan_land_inputs(
-            runner.physical_config["land_config"], runner.r2_inputs
+            runner.physical_config["land_config"], source_cache
         )
         self.assertEqual(requests, [resolved])
-        self.assertEqual(planned["land"][0]["dataset"], str(runner.r2_inputs.path(resolved)))
+        self.assertEqual(planned["land"][0]["dataset"], str(source_cache.path(resolved)))
         self.assertEqual(
             runner.physical_config["inland_water"]["files"],
             [{"path": "raw/fixture", **resolved}],
@@ -637,15 +611,16 @@ class Fixture(unittest.TestCase):
                 runner = pipeline.Pipeline(config, root / "run", work_dir=root)
                 try:
                     self.assertEqual(runner.out, root / "run")
+                    source_cache = self.make_cache(root / "inputs")
                     planned, (pin,) = physical_build.plan_land_inputs(
-                        runner.physical_config["land_config"], runner.r2_inputs
+                        runner.physical_config["land_config"], source_cache
                     )
-                    source = runner.r2_inputs.acquire(pin)
+                    source = source_cache.acquire(pin)
                     self.assertEqual(planned["land"][0]["dataset"], str(source))
-                    self.assertIn(pin_file(source), runner.source_pins)
+                    self.assertIn(pin_file(source), source_cache.pins)
                     self.assertTrue(source.is_relative_to(root))
                     self.assertEqual(source.read_bytes(), payload)
-                    self.assertEqual(len(runner.r2_inputs.download_intervals), 1)
+                    self.assertEqual(len(source_cache.download_intervals), 1)
                     results.append(sha256_file(source))
                 finally:
                     runner.close()
@@ -672,12 +647,13 @@ class Fixture(unittest.TestCase):
         calls = []
         with self.fake_r2({"sources/land.zip": buffer.getvalue()}, calls):
             runner = self.make()
+            source_cache = self.make_cache()
             planned, requests = physical_build.plan_land_inputs(
-                runner.physical_config["land_config"], runner.r2_inputs
+                runner.physical_config["land_config"], source_cache
             )
             self.assertEqual(calls, [])
             for request in requests:
-                runner.r2_inputs.acquire(request)
+                source_cache.acquire(request)
         land = planned["land"][0]
         self.assertEqual(calls, ["sources/land.zip"])
         self.assertEqual(len(requests), 2)
@@ -686,10 +662,10 @@ class Fixture(unittest.TestCase):
         self.assertEqual(
             Path(land["files"][0]["path"]).parent, Path(land["files"][1]["path"]).parent
         )
-        self.assertEqual(len({item["path"] for item in runner.source_pins}), 3)
+        self.assertEqual(len({item["path"] for item in source_cache.pins}), 3)
 
     def test_invalid_zip_members_are_never_published_to_cache(self):
-        runner = self.make()
+        source_cache = self.make_cache()
         packed = io.BytesIO()
         payload = b"geometry"
         with zipfile.ZipFile(packed, "w") as archive:
@@ -706,14 +682,14 @@ class Fixture(unittest.TestCase):
             ):
                 with self.subTest(changes=changes):
                     with self.assertRaisesRegex(ValueError, reason):
-                        runner.r2_inputs.acquire(dict(pin, **changes))
+                        source_cache.acquire(dict(pin, **changes))
                     self.assertFalse(output.exists())
                     self.assertEqual(list(output.parent.glob("*.partial")), [])
-            self.assertEqual(runner.r2_inputs.acquire(pin).read_bytes(), payload)
+            self.assertEqual(source_cache.acquire(pin).read_bytes(), payload)
             self.assertEqual(download.call_count, 1)
 
     def test_zip_cache_publication_checks_a_concurrent_writers_bytes(self):
-        runner = self.make()
+        source_cache = self.make_cache()
         packed = io.BytesIO()
         payload = b"geometry"
         with zipfile.ZipFile(packed, "w") as archive:
@@ -738,10 +714,10 @@ class Fixture(unittest.TestCase):
                     patch.object(os, "link", side_effect=race),
                 ):
                     if content == payload:
-                        self.assertEqual(runner.r2_inputs.acquire(pin).read_bytes(), payload)
+                        self.assertEqual(source_cache.acquire(pin).read_bytes(), payload)
                     else:
                         with self.assertRaisesRegex(ValueError, "size or hash mismatch"):
-                            runner.r2_inputs.acquire(pin)
+                            source_cache.acquire(pin)
                 self.assertEqual(output.read_bytes(), content)
                 self.assertEqual(list(output.parent.glob("*.partial")), [])
 
@@ -759,24 +735,25 @@ class Fixture(unittest.TestCase):
             ],
         }
         self.cfg["sources"]["inland_water"].update(raw)
-        with self.fake_r2({}, []) as download:
+        with patch.object(pipeline, "SourceCache") as cache, self.fake_r2({}, []) as download:
             runner = self.make()
+        cache.assert_not_called()
         download.assert_not_called()
         self.assertEqual(runner.physical_config["inland_water"], raw)
 
     def test_wrong_download_is_never_published(self):
-        runner = self.make()
+        source_cache = self.make_cache()
         spec = self.cloud(b"{}")
         with self.fake_r2({"sources/input.json": b"wrong"}, []):
             with self.assertRaisesRegex(
                 ValueError, "size or hash mismatch"
             ):
-                runner.r2_inputs.acquire(spec)
-        self.assertFalse(runner.r2_inputs.path(spec).exists())
+                source_cache.acquire(spec)
+        self.assertFalse(source_cache.path(spec).exists())
         self.assertEqual(len(list((self.root / "inputs").rglob("download-*"))), 0)
 
     def test_invalid_cloud_pin_is_rejected(self):
-        runner = self.make()
+        source_cache = self.make_cache()
         spec = self.cloud(b"source", "raw/list.json")
         for changes, message in (
             ({"size_bytes": None}, "explicit SHA-256 and byte size"),
@@ -784,18 +761,18 @@ class Fixture(unittest.TestCase):
         ):
             with self.subTest(changes=changes):
                 with self.assertRaisesRegex(ValueError, message):
-                    runner.r2_inputs.acquire(dict(spec, **changes))
+                    source_cache.acquire(dict(spec, **changes))
 
     def test_cache_reuses_same_bytes_without_duplicate_file_pins(self):
-        runner = self.make()
+        source_cache = self.make_cache()
         payload = b"archive byte sequence"
         first = self.cloud(payload, "folder1/shared.bin")
         second = self.cloud(payload, "folder2/shared.bin")
-        count = len(runner.source_pins)
+        count = len(source_cache.pins)
         with self.fake_r2({first["r2_key"]: payload}, []) as download:
-            self.assertEqual(runner.r2_inputs.acquire(first), runner.r2_inputs.acquire(second))
+            self.assertEqual(source_cache.acquire(first), source_cache.acquire(second))
             download.assert_called_once()
-        self.assertEqual(len(runner.source_pins), count + 1)
+        self.assertEqual(len(source_cache.pins), count + 1)
 
     def test_resume_rejects_changed_build_configuration(self):
         first = self.make()
@@ -861,11 +838,11 @@ class Fixture(unittest.TestCase):
         cached = self.inputs / source["sha256"] / "input.json"
         cached.parent.mkdir()
         cached.write_bytes(payload)
-        runner = self.make()
+        source_cache = self.make_cache()
         with self.fake_r2({}, []) as download:
-            self.assertEqual(runner.r2_inputs.acquire(source), cached)
+            self.assertEqual(source_cache.acquire(source), cached)
         download.assert_not_called()
-        self.assertEqual(runner.r2_inputs.download_intervals, [])
+        self.assertEqual(source_cache.download_intervals, [])
 
     def test_relative_work_directory_is_relative_to_the_current_directory(self):
         config = write_json(self.inputs / "build.json", self.cfg)
@@ -880,23 +857,23 @@ class Fixture(unittest.TestCase):
         spec = self.cloud(payload)
         cached = self.root / "inputs" / spec["sha256"] / "input.json"
         cached.parent.mkdir(parents=True)
-        runner = self.make()
+        source_cache = self.make_cache()
         with self.fake_r2({}, []) as download:
             cached.mkdir()
             with self.assertRaisesRegex(
                 ValueError, "size or hash mismatch"
             ):
-                runner.r2_inputs.acquire(spec)
+                source_cache.acquire(spec)
             cached.rmdir()
             cached.write_bytes(b"xx")
             with self.assertRaisesRegex(
                 ValueError, "size or hash mismatch"
             ):
-                runner.r2_inputs.acquire(spec)
+                source_cache.acquire(spec)
         download.assert_not_called()
         cached.write_bytes(payload)
         with self.assertRaisesRegex(ValueError, "unsafe ZIP member"):
-            runner.r2_inputs.acquire(
+            source_cache.acquire(
                 dict(archive=spec, member="../outside", sha256="a" * 64, size_bytes=1)
             )
 
@@ -1185,8 +1162,9 @@ class Fixture(unittest.TestCase):
         report = read_json(runner.out / "physical/report.json")
         self.assertEqual(report["downloaded_shard_count"], 1)
         self.assertGreater(report["source_download_elapsed_seconds"], 0)
-        runner.r2_inputs.path(land_source).unlink()
-        runner.r2_inputs.path(land_source["archive"]).unlink()
+        source_cache = self.make_cache(other / "inputs")
+        source_cache.path(land_source).unlink()
+        source_cache.path(land_source["archive"]).unlink()
         with self.fake_r2({}, []) as download:
             reused = pipeline.Pipeline(
                 config, other / "reused", work_dir=other, reuse_from=runner.out

@@ -1,6 +1,7 @@
 """Runtime identity requires Python bindings, not an obsolete build compiler."""
 
 import os
+import shutil
 import unittest
 from unittest.mock import patch
 
@@ -10,7 +11,7 @@ from worldatlas.map_build import build as pipeline
 class RuntimePrerequisiteTests(unittest.TestCase):
     def test_identity_works_without_executable_search_path(self):
         with patch.dict(os.environ, {'PATH': ''}), patch.object(
-            pipeline.shutil, 'which', side_effect=AssertionError('no external tool lookup')
+            shutil, 'which', side_effect=AssertionError('no external tool lookup')
         ):
             identity = pipeline.runtime_identity()
         self.assertNotIn('tools', identity)

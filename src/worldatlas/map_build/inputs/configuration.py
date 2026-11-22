@@ -78,12 +78,10 @@ class InlandWaterSettings(WaterSettings):
 
 @with_config(extra="forbid")
 class BuildSources(TypedDict):
-    """Select the physical inputs and optional map comparison inputs."""
+    """Select the physical coastline and inland-water inputs."""
 
     land_config: LandSettings
     inland_water: InlandWaterSettings
-    reference_rows: NotRequired[FileEntry]
-    reference_runs: NotRequired[FileEntry]
 
 
 @with_config(extra="allow")
@@ -144,8 +142,6 @@ class PhysicalConfiguration(PhysicalControls):
 BUILD_CONFIGURATION = TypeAdapter(BuildConfiguration)
 PHYSICAL_CONFIGURATION = TypeAdapter(PhysicalConfiguration)
 PHYSICAL_CONTROLS = TypeAdapter(PhysicalControls)
-FILE_PIN = TypeAdapter(FilePin)
-COMPARISON_PINS = TypeAdapter(dict[str, FilePin])
 
 
 def require_separate_cache_and_output(cache: Path, output: Path) -> None:

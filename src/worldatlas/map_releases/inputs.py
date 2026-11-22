@@ -227,8 +227,8 @@ def restore_inputs(content: dict[str, Any], output: Path | str) -> None:
                 else content[key]
             )
             if key == "configuration" and isinstance(value.get("sources"), dict):
-                # Comparisons validate an earlier run; they do not produce map
-                # cells. Their local paths need not exist on the replay machine.
+                # Older releases may have local comparison paths. Replay only
+                # needs the inputs that produce the map cells.
                 value["sources"].pop("reference_rows", None)
                 value["sources"].pop("reference_runs", None)
             (output / (key + ".json")).write_bytes(json_bytes(value))

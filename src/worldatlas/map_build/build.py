@@ -5,12 +5,10 @@ from __future__ import annotations
 
 import argparse
 import copy
-import gzip
 import hashlib
 import json
 import math
 import os
-import shutil
 import signal
 import sys
 import threading
@@ -47,15 +45,12 @@ from worldatlas.map_build.execution.runtime import (
 )
 from worldatlas.map_build.inputs.configuration import (
     BUILD_CONFIGURATION,
-    COMPARISON_PINS,
-    FILE_PIN,
     BuildSources,
     FileEntry,
-    FilePin,
     catalog_source_id,
     require_separate_cache_and_output,
 )
-from worldatlas.map_build.inputs.releases import read_release_assets
+from worldatlas.map_build.inputs.releases import ComparisonPins, cache_release_reference
 from worldatlas.map_build.inputs.selection import (
     canonical_bytes,
     prepare_geography,
@@ -81,7 +76,6 @@ PACKAGE_ROOT = HERE.parent
 
 
 type RuntimeIdentity = dict[str, str | dict[str, str]]
-type ComparisonPins = dict[str, dict[str, str]]
 
 
 class PhysicalReuse(TypedDict):
@@ -141,7 +135,7 @@ def catalog_references(
     """Find the file entries that name a raw source in Neon.
 
     Args:
-        sources: Coastline, inland-water, and comparison file settings.
+        sources: Coastline and inland-water file settings.
 
     Yields:
         Pairs of the file entry to update and its source ID. A ZIP member
@@ -153,10 +147,6 @@ def catalog_references(
     files = list(sources["inland_water"]["files"])
     for layer in sources["land_config"]["land"]:
         files.extend(layer["files"])
-    for comparison in (sources.get("reference_rows"), sources.get("reference_runs")):
-        if comparison is not None:
-            files.append(comparison)
-
     # Walk only the file entries and their archives. The other settings do not name files.
     for file in files:
         entry = file
@@ -336,13 +326,13 @@ class Pipeline:
         self.compiled_divisions = prepare_geography(self.selection["geography"])
         self._fill_catalog_entries(references)
         self.physical_config = self._physical_configuration(sources)
-        self.r2_inputs = SourceCache(self.root / "inputs")
-        self.source_pins = self.r2_inputs.pins
-        self.comparison_files: dict[str, Path] = {}
-        with closing(self.r2_inputs):
-            comparison_inputs = self._prepare_comparison(
-                sources, compare_release, saved_identity
-            )
+        self.comparison_downloads: list[tuple[float, float]] = []
+        self.comparison_inputs = self._prepare_comparison(
+            compare_release, saved_identity
+        )
+        self.source_pins = [
+            pin for _, pin in sorted((self.comparison_inputs or {}).items())
+        ]
         self.physical_reuse = (
             physical_reference(self.reuse_from, self.physical_config)
             if self.reuse_from is not None
@@ -352,7 +342,7 @@ class Pipeline:
             self.source_pins.extend(
                 p for p in self.physical_reuse["pins"] if p not in self.source_pins
             )
-        self._prepare_run_identity(compare_release, comparison_inputs)
+        self._prepare_run_identity(compare_release)
 
         if not resume:
             self.out.mkdir(mode=0o700)
@@ -501,14 +491,12 @@ class Pipeline:
 
     def _prepare_comparison(
         self,
-        sources: BuildSources,
         compare_release: str | None,
         saved_identity: RunIdentity | None,
     ) -> ComparisonPins | None:
         """Prepare the pinned files for a comparison with a release.
 
         Args:
-            sources: Source settings that may specify comparison stream pins.
             compare_release: Release name, if the caller requested one.
             saved_identity: Saved run identity on resume.
 
@@ -516,63 +504,26 @@ class Pipeline:
             File pins keyed by input name, or None without a comparison release.
 
         Raises:
-            ValueError: Comparison inputs are incomplete or use conflicting options.
+            ValueError: Saved comparison inputs are missing or have changed.
         """
-        references = {
-            name: spec
-            for name, spec in (
-                ("reference_rows", sources.get("reference_rows")),
-                ("reference_runs", sources.get("reference_runs")),
-            )
-            if spec is not None
-        }
-        if compare_release is not None and references:
-            raise ValueError(
-                "choose a published comparison release or local reference streams"
-            )
-        for name, spec in sorted(references.items()):
-            if "r2_bucket" in spec or "archive" in spec:
-                self.comparison_files[name] = self.r2_inputs.acquire(spec)
-            else:
-                self.comparison_files[name] = self.resolve_pin(
-                    FILE_PIN.validate_python(spec, strict=True)
-                )
-        comparison_inputs = None
-        if compare_release is not None:
-            if saved_identity is not None:
-                comparison_inputs = saved_identity.get("comparison_inputs")
-                if comparison_inputs is None:
-                    raise ValueError("resume is missing saved comparison files")
-                pins = COMPARISON_PINS.validate_python(comparison_inputs, strict=True)
-                self.comparison_files.update(
-                    (name, self.resolve_pin(pin)) for name, pin in pins.items()
-                )
-            else:
-                start = len(self.source_pins)
-                files = self.release_reference(compare_release)
-                self.comparison_files.update(files)
-                # Once decoded, the streams and mapping suffice for comparison.
-                by_path = {p["path"]: p for p in self.source_pins}
-                comparison_inputs = {
-                    name: by_path[str(files[name])] for name in sorted(files)
-                }
-                self.source_pins[start:] = list(comparison_inputs.values())
-        if ("reference_rows" in self.comparison_files) != (
-            "reference_runs" in self.comparison_files
-        ):
-            raise ValueError("both reference stream pins are required")
-        return comparison_inputs
+        if compare_release is None:
+            return None
+        if saved_identity is not None:
+            pins = saved_identity.get("comparison_inputs")
+            if pins is None:
+                raise ValueError("resume is missing saved comparison files")
+            verify_pins(pins.values())
+            return pins
+        with closing(SourceCache(self.root / "inputs")) as cache:
+            pins = cache_release_reference(compare_release, cache)
+        self.comparison_downloads = cache.download_intervals
+        return pins
 
-    def _prepare_run_identity(
-        self,
-        compare_release: str | None,
-        comparison_inputs: ComparisonPins | None,
-    ) -> None:
+    def _prepare_run_identity(self, compare_release: str | None) -> None:
         """Collect the inputs, code and options to save for the run.
 
         Args:
             compare_release: Release name used for comparison, if supplied.
-            comparison_inputs: Pinned comparison files keyed by input name.
         """
         self.code = code_identity(PACKAGE_ROOT)
         self.repository = repository_identity(PACKAGE_ROOT)
@@ -597,8 +548,8 @@ class Pipeline:
         }
         if compare_release is not None:
             self.identity["compare_release"] = compare_release
-        if comparison_inputs is not None:
-            self.identity["comparison_inputs"] = comparison_inputs
+        if self.comparison_inputs is not None:
+            self.identity["comparison_inputs"] = self.comparison_inputs
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
 
@@ -677,7 +628,7 @@ class Pipeline:
         self.checkpoints.preserve("failure", [self.out / "failure.json"])
         cursor = setup_started
         for start, end in [
-            *self.r2_inputs.download_intervals,
+            *self.comparison_downloads,
             (time.monotonic(), None),
         ]:
             token = uuid.uuid4().hex
@@ -756,85 +707,6 @@ class Pipeline:
                     )
                 }
             )
-
-    def release_reference(self, version: str) -> dict[str, Path]:
-        """Cache and verify a published map's comparison files.
-
-        Args:
-            version: Official version or numbered preview.
-
-        Returns:
-            Paths keyed by "reference_rows", "reference_runs", and, when
-            available, "reference_config". The map streams are decompressed.
-        """
-        streams, config = read_release_assets(version)
-        digest = hashlib.sha256(json_bytes(streams)).hexdigest()
-        directory = (self.root / "inputs" / ("release-" + digest)).resolve()
-        if not directory.is_relative_to(self.root) or directory.is_relative_to(
-            self.out
-        ):
-            raise ValueError(
-                "release reference overlaps output or escapes the work directory"
-            )
-        directory.mkdir(parents=True, exist_ok=True)
-        reference = {}
-        for stream, bucket, key, size, stored_hash, decoded_hash in streams:
-            path = directory / (stream + ".u32le")
-            compressed = self.r2_inputs.acquire(
-                {
-                    "r2_bucket": bucket,
-                    "r2_key": key,
-                    "size_bytes": size,
-                    "sha256": stored_hash,
-                },
-            )
-            if not path.exists():
-                partial = path.with_name(
-                    path.name + "." + uuid.uuid4().hex + ".partial"
-                )
-                try:
-                    with gzip.open(compressed, "rb") as src, partial.open("xb") as dst:
-                        shutil.copyfileobj(src, dst, 1 << 20)
-                    if sha256_file(partial) != decoded_hash:
-                        raise ValueError("decoded reference stream hash mismatch")
-                    try:
-                        os.link(partial, path)
-                    except FileExistsError:
-                        pass
-                finally:
-                    partial.unlink(missing_ok=True)
-            reference["reference_" + stream] = self.resolve_pin(
-                {"path": str(path), "sha256": decoded_hash}
-            )
-        if config is not None:
-            reference["reference_config"] = self.r2_inputs.acquire(config)
-        return reference
-
-    def resolve_pin(self, pin: FilePin) -> Path:
-        """Find a pinned local file and verify its checksum before use.
-
-        Args:
-            pin: Validated file path and expected SHA-256. Relative paths start
-                from the build config's directory.
-
-        Returns:
-            Absolute path to the verified file.
-
-        Raises:
-            ValueError: The file is outside the workspace, overlaps the output,
-                or has a different SHA-256.
-        """
-        path = (self.config_path.parent / pin["path"]).resolve(strict=True)
-        if (
-            not path.is_relative_to(self.root)
-            or path.is_relative_to(self.out)
-            or sha256_file(path) != pin["sha256"]
-        ):
-            raise ValueError(
-                f"source pin mismatch or outside the work directory: {path}"
-            )
-        self.source_pins.append({"path": str(path), "sha256": pin["sha256"]})
-        return path
 
     def physical_attempts(self) -> list[dict[str, Any]]:
         """Read complete events from the physical build's timing log.
@@ -1057,31 +929,21 @@ class Pipeline:
 
         Returns:
             Comparison report's path and SHA-256, or None if no reference was selected.
-
-        Raises:
-            ValueError: The paired reference streams do not use the expected paths.
         """
-        rows = self.comparison_files.get("reference_rows")
-        if rows is None:
+        if self.comparison_inputs is None:
             return None
-        runs = self.comparison_files["reference_runs"]
-        if (
-            rows.name != "rows.u32le"
-            or runs.name != "runs.u32le"
-            or rows.parent != runs.parent
-        ):
-            raise ValueError(
-                "reference must use rows.u32le and runs.u32le in one directory"
-            )
+        rows = self.comparison_inputs["reference_rows"]
+        runs = self.comparison_inputs["reference_runs"]
         grid = Grid(**read_json(physical / "report.json")["grid"])
         inputs = [
-            pin_file(root / name)
-            for root in (final, rows.parent)
-            for name in ("rows.u32le", "runs.u32le")
+            pin_file(final / "rows.u32le"),
+            pin_file(final / "runs.u32le"),
+            rows,
+            runs,
         ]
         bindings = {}
-        if config := self.comparison_files.get("reference_config"):
-            inputs += [pin_file(config), pin_file(self.out / "input-selection.json")]
+        if config := self.comparison_inputs.get("reference_config"):
+            inputs += [config, pin_file(self.out / "input-selection.json")]
             bindings = dict(
                 reference_bindings=[
                     dict(
@@ -1089,7 +951,7 @@ class Pipeline:
                         entity_id=category["entity_id"],
                         physical_class=category["physical_class"],
                     )
-                    for category in read_json(config)["categories"]
+                    for category in read_json(config["path"])["categories"]
                 ],
                 candidate_bindings=self.selection["geography"]["category_bindings"],
             )
@@ -1099,10 +961,10 @@ class Pipeline:
             compare,
             (
                 final,
-                rows.parent,
+                Path(rows["path"]).parent,
                 grid,
                 self.out / "comparison",
-                {"rows.u32le": sha256_file(rows), "runs.u32le": sha256_file(runs)},
+                {"rows.u32le": rows["sha256"], "runs.u32le": runs["sha256"]},
             ),
             timing=self.timing,
             inputs=inputs,

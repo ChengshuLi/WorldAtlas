@@ -29,7 +29,7 @@ Water and ocean calculations use the same frozen working selection.
 
 ## Code and tests
 
-[`selection.py`](selection.py) freezes working records and validates saved inputs. [`selection_types.py`](selection_types.py) defines the keys and types of the saved records. [`geography.sql`](geography.sql) selects the records, and [`releases.py`](releases.py) resolves release assets for optional comparisons.
+[`selection.py`](selection.py) freezes working records and validates saved inputs. [`selection_types.py`](selection_types.py) defines the keys and types of the saved records. [`geography.sql`](geography.sql) selects the records. [`releases.py`](releases.py) looks up and caches the files for `--compare-release`.
 
 [`configuration.py`](configuration.py) defines what the build and physical requests accept. The loaders check the JSON fields and types before passing settings to the build. File checksums are verified when files are opened.
 
