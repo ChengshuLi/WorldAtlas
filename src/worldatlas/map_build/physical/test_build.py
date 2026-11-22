@@ -949,7 +949,7 @@ class PipelineTests(unittest.TestCase):
             capture_output=True, text=True,
         )
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn('failed: explicit pipeline schema', result.stderr)
+        self.assertIn('validation errors for PhysicalConfiguration', result.stderr)
         self.assertFalse(out.exists())
 
     def test_interrupted_physical_checkpoints_require_their_journal(self):
@@ -1061,16 +1061,16 @@ class PipelineTests(unittest.TestCase):
         valid_manifest = json.loads(source_path.read_text())
         shard = valid_manifest['files'][0]
         cases = [
-            ('pipeline', {'selection_notes': ''}, 'schema and selection notes'),
-            ('pipeline', {'minimum_free_bytes': True}, 'invalid free-space reserve'),
+            ('pipeline', {'selection_notes': ''}, 'selection_notes'),
+            ('pipeline', {'minimum_free_bytes': True}, 'minimum_free_bytes'),
             ('pipeline', {'minimum_free_bytes': 1}, 'below pipeline reserve'),
             ('pipeline', {'union_rows_per_block': 0}, 'rows_per_block'),
-            ('water', {'rasterizer': 'unknown'}, 'rasterizer must be gdal or python'),
+            ('water', {'rasterizer': 'unknown'}, 'water_config.rasterizer'),
             ('water', {'native_method': 'old'}, 'retired native_method'),
             ('water', {'grid': dict(self.grid, width=4)}, 'land and water grids differ'),
             ('water', {'batch_size': 0}, 'batch_size'),
             ('manifest', {'file_count': 2}, 'must list every raw shard'),
-            ('manifest', {'files': [dict(shard, sha256='not-a-digest')]}, 'invalid raw source digest'),
+            ('manifest', {'files': [dict(shard, sha256='not-a-digest')]}, 'source_manifest.files.0.sha256'),
             (
                 'manifest',
                 {'file_count': 2, 'files': [shard, dict(shard, path='another.parquet')]},

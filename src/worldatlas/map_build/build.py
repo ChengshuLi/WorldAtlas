@@ -44,6 +44,13 @@ from worldatlas.map_build.execution.runtime import (
     repository_identity,
     verify_anchor,
 )
+from worldatlas.map_build.inputs.configuration import (
+    BUILD_CONFIGURATION,
+    COMPARISON_PINS,
+    FILE_PIN,
+    BuildSources,
+    FilePin,
+)
 from worldatlas.map_build.inputs.releases import read_release_assets
 from worldatlas.map_build.inputs.selection import (
     canonical_bytes,
@@ -247,41 +254,6 @@ def physical_reference(
     }
 
 
-def _source_settings(config: dict[str, Any]) -> dict[str, Any]:
-    """Check which physical inputs the build configuration supplies.
-
-    Args:
-        config: Parsed build configuration.
-
-    Returns:
-        Source settings with inline coastline and inland-water inputs.
-
-    Raises:
-        ValueError: The source settings have missing or invalid entries.
-    """
-    sources = config.get("sources")
-    if not isinstance(sources, dict):
-        raise ValueError("sources must be a JSON object")
-    required_sources = {"land_config", "inland_water"}
-    allowed_sources = required_sources | {"reference_rows", "reference_runs"}
-    missing = required_sources.difference(sources)
-    if missing:
-        raise ValueError(f"sources is missing {', '.join(sorted(missing))}")
-    unexpected = set(sources).difference(allowed_sources)
-    if unexpected:
-        raise ValueError(f"sources has unexpected keys {', '.join(sorted(unexpected))}")
-    coastline, water = sources["land_config"], sources["inland_water"]
-    if not isinstance(coastline, dict) or not isinstance(coastline.get("land"), list):
-        raise ValueError("land_config must provide its land datasets inline")
-    if (
-        not isinstance(water, dict)
-        or not isinstance(water.get("rasterization"), dict)
-        or not isinstance(water.get("files"), list)
-    ):
-        raise ValueError("inland_water must provide rasterization and files inline")
-    return sources
-
-
 class Pipeline:
     """Build a map from pinned raw files and saved geographic rules.
 
@@ -325,15 +297,15 @@ class Pipeline:
         setup_utc = datetime.now(timezone.utc).isoformat()
         self.config_path = Path(config).resolve(strict=True)
         self.config_pin = pin_file(self.config_path)
-        self.cfg = read_json(self.config_path)
-        if self.cfg.get("schema") != "worldatlas-end-to-end-pipeline-v3":
-            raise ValueError("unsupported end-to-end configuration")
+        self.cfg = BUILD_CONFIGURATION.validate_json(
+            self.config_path.read_bytes(), strict=True
+        )
         self.grid = Grid(**self.cfg["grid"])
-        sources = _source_settings(self.cfg)
+        sources = self.cfg["sources"]
 
         self.resume = resume
         self._prepare_workspace(output, work_dir)
-        saved_identity, compare_release = self._load_run_options(
+        saved_identity, compare_release = self._resolve_run_options(
             divide, compare_release, reuse_from, recompute_division
         )
         self.runtime = runtime_identity()
@@ -342,11 +314,9 @@ class Pipeline:
         self.compiled_divisions = prepare_geography(self.selection["geography"])
         sources = self.resolve_raw_catalog(sources)
         self.physical_config = self._physical_configuration(sources)
-        staging = self.physical_config.get("source_staging", {})
+        staging = self.physical_config.get("source_staging")
         self.r2_inputs = R2InputCache(
-            self.root / "inputs",
-            self.out,
-            staging.get("endpoint_url"),
+            self.root / "inputs", self.out, staging["endpoint_url"] if staging else None
         )
         self.source_pins = self.r2_inputs.pins
         self.comparison_files: dict[str, Path] = {}
@@ -390,18 +360,17 @@ class Pipeline:
         self.root = Path(work_dir).resolve()
         self.root.mkdir(parents=True, exist_ok=True)
         self.out = Path(output).resolve()
-        if (
-            (self.out.exists() != self.resume)
-            or not self.out.parent.is_dir()
-            or not self.out.is_relative_to(self.root)
-            or self.config_path.is_relative_to(self.out)
-        ):
-            raise ValueError(
-                "output must be inside --work-dir with an existing parent and "
-                "exist only when resuming. Keep the configuration outside output."
-            )
+        if not self.out.is_relative_to(self.root):
+            raise ValueError("output must be inside --work-dir")
+        if not self.out.parent.is_dir():
+            raise ValueError("output parent directory must exist")
+        if self.resume:
+            if not self.out.is_dir():
+                raise ValueError("resume requires an existing output directory")
+        elif self.out.exists():
+            raise ValueError("a fresh build requires a new output directory")
 
-    def _load_run_options(
+    def _resolve_run_options(
         self,
         divide: list[int] | None,
         compare_release: str | None,
@@ -430,22 +399,29 @@ class Pipeline:
         saved_identity = read_json(identity_path) if self.resume else None
         reuse = Path(reuse_from).resolve() if reuse_from is not None else None
         if saved_identity is not None:
-            if divide is not None and divide != saved_identity.get("divide"):
-                raise ValueError("resume uses a different --divide selection")
-            if compare_release is not None and compare_release != saved_identity.get(
-                "compare_release"
-            ):
-                raise ValueError("resume uses a different --compare-release selection")
-            divide = saved_identity.get("divide")
-            compare_release = saved_identity.get("compare_release")
+            saved_divide = saved_identity.get("divide")
+            saved_release = saved_identity.get("compare_release")
             saved_reuse = saved_identity["reuse_from"]
             saved_path = Path(saved_reuse) if saved_reuse is not None else None
-            if reuse is not None and reuse != saved_path:
-                raise ValueError("resume uses a different --reuse-from run")
-            if recompute_division and not saved_identity["recompute_division"]:
-                raise ValueError("resume uses a different --recompute-division setting")
+            saved_recompute = saved_identity["recompute_division"]
+            # An omitted switch keeps the value saved with the original run.
+            options = (
+                ("--divide", divide, saved_divide),
+                ("--compare-release", compare_release, saved_release),
+                ("--reuse-from", reuse, saved_path),
+                (
+                    "--recompute-division",
+                    True if recompute_division else None,
+                    saved_recompute,
+                ),
+            )
+            for flag, supplied, saved in options:
+                if supplied is not None and supplied != saved:
+                    raise ValueError(f"resume uses a different {flag} setting")
+            divide = saved_divide
+            compare_release = saved_release
             reuse = saved_path
-            recompute_division = saved_identity["recompute_division"]
+            recompute_division = saved_recompute
         if recompute_division and reuse is None:
             raise ValueError("--recompute-division requires --reuse-from")
         self.reuse_from = reuse
@@ -454,7 +430,7 @@ class Pipeline:
         return saved_identity, compare_release
 
     def _load_selection(
-        self, sources: dict[str, Any], selection: Path | str | None
+        self, sources: BuildSources, selection: Path | str | None
     ) -> dict[str, Any]:
         """Load the geographic records that this run will use.
 
@@ -490,7 +466,7 @@ class Pipeline:
                 database, raw_sources=references, parents=self.requested_parents
             )
 
-    def _physical_configuration(self, sources: dict[str, Any]) -> dict[str, Any]:
+    def _physical_configuration(self, sources: BuildSources) -> dict[str, Any]:
         """Put the coastline, water settings, and water file list in one request.
 
         Args:
@@ -499,21 +475,22 @@ class Pipeline:
         Returns:
             Physical runner settings with all three input groups inline.
         """
-        water = sources["inland_water"].copy()
-        rasterization = water.pop("rasterization")
+        water = sources["inland_water"]
         return {
             **self.cfg.get("physical_controls", {}),
             "schema": "raw-physical-pipeline-v2",
             "selection_notes": self.cfg.get("selection_notes"),
             "source_directory": str(self.root / "inputs"),
             "land_config": dict(sources["land_config"], grid=vars(self.grid)),
-            "water_config": dict(rasterization, grid=vars(self.grid)),
-            "source_manifest": water,
+            "water_config": dict(water["rasterization"], grid=vars(self.grid)),
+            "source_manifest": {
+                key: value for key, value in water.items() if key != "rasterization"
+            },
         }
 
     def _prepare_comparison(
         self,
-        sources: dict[str, Any],
+        sources: BuildSources,
         compare_release: str | None,
         saved_identity: dict[str, Any] | None,
     ) -> dict[str, Any] | None:
@@ -530,25 +507,34 @@ class Pipeline:
         Raises:
             ValueError: Comparison inputs are incomplete or use conflicting options.
         """
-        references = {"reference_rows", "reference_runs"} & sources.keys()
+        references = {
+            name: spec
+            for name, spec in (
+                ("reference_rows", sources.get("reference_rows")),
+                ("reference_runs", sources.get("reference_runs")),
+            )
+            if spec is not None
+        }
         if compare_release is not None and references:
             raise ValueError(
                 "choose a published comparison release or local reference streams"
             )
-        for name in sorted(references):
-            spec = sources[name]
-            if isinstance(spec, dict) and ("r2_bucket" in spec or "archive" in spec):
+        for name, spec in sorted(references.items()):
+            if "r2_bucket" in spec or "archive" in spec:
                 self.comparison_files[name] = self.r2_inputs.acquire_r2_input(spec)
             else:
-                self.comparison_files[name] = cast(Path, self.resolve_pins(spec))
+                self.comparison_files[name] = self.resolve_pin(
+                    FILE_PIN.validate_python(spec, strict=True)
+                )
         comparison_inputs = None
         if compare_release is not None:
             if saved_identity is not None:
                 comparison_inputs = saved_identity.get("comparison_inputs")
                 if comparison_inputs is None:
                     raise ValueError("resume is missing saved comparison files")
+                pins = COMPARISON_PINS.validate_python(comparison_inputs, strict=True)
                 self.comparison_files.update(
-                    cast(dict[str, Path], self.resolve_pins(comparison_inputs))
+                    (name, self.resolve_pin(pin)) for name, pin in pins.items()
                 )
             else:
                 start = len(self.source_pins)
@@ -722,7 +708,7 @@ class Pipeline:
         self.timing.mark_complete("setup")
         write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
 
-    def resolve_raw_catalog(self, selections: dict[str, Any]) -> dict[str, Any]:
+    def resolve_raw_catalog(self, selections: BuildSources) -> BuildSources:
         """Expand raw source selectors using the frozen catalog.
 
         Args:
@@ -816,8 +802,8 @@ class Pipeline:
                         pass
                 finally:
                     partial.unlink(missing_ok=True)
-            reference["reference_" + stream] = cast(
-                Path, self.resolve_pins({"path": str(path), "sha256": decoded_hash})
+            reference["reference_" + stream] = self.resolve_pin(
+                {"path": str(path), "sha256": decoded_hash}
             )
         if config is not None:
             reference["reference_config"] = self.r2_inputs.acquire_r2_input(
@@ -825,37 +811,31 @@ class Pipeline:
             )
         return reference
 
-    def resolve_pins(self, value: object) -> Path | dict[str, Any]:
-        """Verify a file pin or a tree of file pins.
+    def resolve_pin(self, pin: FilePin) -> Path:
+        """Find a pinned local file and verify its checksum before use.
 
         Args:
-            value: A {"path": ..., "sha256": ...} pin or a dictionary of pins.
+            pin: Validated file path and expected SHA-256. Relative paths start
+                from the build config's directory.
 
         Returns:
-            Resolved file path or a dictionary with the same keys and resolved leaves.
+            Absolute path to the verified file.
 
         Raises:
-            ValueError: A pin is invalid, outside the input directory, or has a
-                different SHA-256.
+            ValueError: The file is outside the workspace, overlaps the output,
+                or has a different SHA-256.
         """
-        if isinstance(value, dict) and set(value) == {"path", "sha256"}:
-            path = Path(value["path"])
-            if not path.is_absolute():
-                path = self.config_path.parent / path
-            path = path.resolve(strict=True)
-            if (
-                not path.is_relative_to(self.root)
-                or path.is_relative_to(self.out)
-                or sha256_file(path) != value["sha256"]
-            ):
-                raise ValueError(
-                    f"source pin mismatch or outside the work directory: {path}"
-                )
-            self.source_pins.append({"path": str(path), "sha256": value["sha256"]})
-            return path
-        if isinstance(value, dict):
-            return {key: self.resolve_pins(item) for key, item in value.items()}
-        raise ValueError("all source selections must be explicit path/SHA-256 pins")
+        path = (self.config_path.parent / pin["path"]).resolve(strict=True)
+        if (
+            not path.is_relative_to(self.root)
+            or path.is_relative_to(self.out)
+            or sha256_file(path) != pin["sha256"]
+        ):
+            raise ValueError(
+                f"source pin mismatch or outside the work directory: {path}"
+            )
+        self.source_pins.append({"path": str(path), "sha256": pin["sha256"]})
+        return path
 
     def physical_attempts(self) -> list[dict[str, Any]]:
         """Read complete events from the physical build's timing log.
@@ -1023,10 +1003,10 @@ class Pipeline:
                 previous = division
         operation = HierarchyDivision(
             self.selection["geography"],
-            Grid(**self.cfg["grid"]),
+            self.grid,
             physical,
             self.out / "division",
-            self.cfg,
+            dict(self.cfg),
             compiled_divisions=self.compiled_divisions,
             requested=self.requested_parents,
             reuse=previous,
@@ -1057,7 +1037,7 @@ class Pipeline:
             "package",
             encode,
             (
-                Grid(**self.cfg["grid"]),
+                self.grid,
                 physical,
                 ownership,
                 self.selection["geography"]["category_bindings"],

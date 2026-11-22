@@ -1,0 +1,152 @@
+"""Types and parsers for build requests and saved file pins."""
+
+from typing import Annotated, Any, Literal, NotRequired, TypedDict
+
+from pydantic import Field, StringConstraints, TypeAdapter, with_config
+
+type PositiveInt = Annotated[int, Field(gt=0)]
+type ByteCount = Annotated[int, Field(ge=0)]
+type NonemptyString = Annotated[str, StringConstraints(min_length=1)]
+type Digest = Annotated[str, StringConstraints(pattern=r"^[0-9a-f]{64}$")]
+
+
+@with_config(extra="forbid")
+class FilePin(TypedDict):
+    """Identify a local file by path and expected SHA-256."""
+
+    path: NonemptyString
+    sha256: Digest
+
+
+@with_config(extra="forbid")
+class GridSettings(TypedDict):
+    """Describe the dimensions, origin, and cell size of the map grid."""
+
+    width: PositiveInt
+    height: PositiveInt
+    step: int | float
+    west: NotRequired[int | float]
+    north: NotRequired[int | float]
+
+
+@with_config(extra="allow")
+class LandSettings(TypedDict):
+    """Specify coastline layers and how to rasterize them."""
+
+    land: list[dict[str, Any]]
+    strip_rows: NotRequired[PositiveInt]
+    minimum_free_bytes: NotRequired[ByteCount]
+
+
+@with_config(extra="allow")
+class WaterSettings(TypedDict):
+    """Specify how to rasterize each inland-water file."""
+
+    rasterizer: NotRequired[Literal["gdal", "python"]]
+    batch_size: NotRequired[PositiveInt]
+    tile_size: NotRequired[PositiveInt]
+    minimum_free_bytes: NotRequired[ByteCount]
+
+
+@with_config(extra="allow")
+class InlandWaterSettings(TypedDict):
+    """Select the inland-water files and their shared rasterization settings."""
+
+    files: list[dict[str, Any]]
+    rasterization: WaterSettings
+    file_count: NotRequired[PositiveInt]
+
+
+@with_config(extra="forbid")
+class BuildSources(TypedDict):
+    """Select the physical inputs and optional map comparison inputs."""
+
+    land_config: LandSettings
+    inland_water: InlandWaterSettings
+    reference_rows: NotRequired[dict[str, Any]]
+    reference_runs: NotRequired[dict[str, Any]]
+
+
+@with_config(extra="forbid")
+class R2Staging(TypedDict):
+    """Name the R2 account used to fetch raw inputs on demand."""
+
+    mode: Literal["r2-s3"]
+    endpoint_url: NonemptyString
+
+
+@with_config(extra="allow")
+class PhysicalControls(TypedDict):
+    """Set physical-stage processing and download options."""
+
+    minimum_free_bytes: NotRequired[ByteCount]
+    max_parallel_shards: NotRequired[PositiveInt]
+    union_rows_per_block: NotRequired[PositiveInt]
+    physical_rows_per_block: NotRequired[PositiveInt]
+    source_staging: NotRequired[R2Staging | None]
+
+
+@with_config(extra="allow")
+class BuildConfiguration(TypedDict):
+    """Describe the editable request for an end-to-end map build."""
+
+    schema: Literal["worldatlas-end-to-end-pipeline-v3"]
+    grid: GridSettings
+    sources: BuildSources
+    selection_notes: NotRequired[str]
+    physical_controls: NotRequired[PhysicalControls]
+    coastal_band_metres: NotRequired[int | float]
+    division_workers: NotRequired[PositiveInt]
+
+
+@with_config(extra="allow")
+class WaterFile(FilePin):
+    """Describe a water file available locally or pinned to an R2 object."""
+
+    r2_bucket: NotRequired[str]
+    r2_key: NotRequired[str]
+    size_bytes: NotRequired[ByteCount]
+
+
+@with_config(extra="allow")
+class WaterManifest(TypedDict):
+    """List all water files selected for physical rasterization."""
+
+    file_count: PositiveInt
+    files: Annotated[list[WaterFile], Field(min_length=1)]
+
+
+@with_config(extra="allow")
+class PhysicalLandSettings(LandSettings):
+    """Attach the build grid to the coastline settings."""
+
+    grid: GridSettings
+
+
+@with_config(extra="allow")
+class PhysicalWaterSettings(WaterSettings):
+    """Attach the build grid to the inland-water settings."""
+
+    grid: GridSettings
+
+
+@with_config(extra="allow")
+class PhysicalConfiguration(PhysicalControls):
+    """Describe the saved request consumed by the standalone physical runner."""
+
+    schema: Literal["raw-physical-pipeline-v2"]
+    selection_notes: NonemptyString
+    source_directory: NonemptyString
+    land_config: PhysicalLandSettings
+    water_config: PhysicalWaterSettings
+    source_manifest: WaterManifest
+    water_reference: NotRequired[FilePin]
+    physical_reference_mask: NotRequired[FilePin]
+    physical_reference_streams: NotRequired[dict[str, FilePin]]
+
+
+BUILD_CONFIGURATION = TypeAdapter(BuildConfiguration)
+PHYSICAL_CONFIGURATION = TypeAdapter(PhysicalConfiguration)
+PHYSICAL_CONTROLS = TypeAdapter(PhysicalControls)
+FILE_PIN = TypeAdapter(FilePin)
+COMPARISON_PINS = TypeAdapter(dict[str, FilePin])

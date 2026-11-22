@@ -386,11 +386,14 @@ class EndToEndTests(unittest.TestCase):
                 )
                 def cached_release(runner, version):
                     self.assertEqual(version, "v9.0")
-                    return runner.resolve_pins({
-                        "reference_rows": pin_file(release_rows),
-                        "reference_runs": pin_file(release_runs),
-                        "reference_config": pin_file(release_config),
-                    })
+                    return {
+                        name: runner.resolve_pin(pin_file(path))
+                        for name, path in (
+                            ("reference_rows", release_rows),
+                            ("reference_runs", release_runs),
+                            ("reference_config", release_config),
+                        )
+                    }
 
                 with patch.object(Pipeline, "release_reference", new=cached_release):
                     compared = Pipeline(

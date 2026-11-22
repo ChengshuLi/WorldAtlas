@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from worldatlas.map_build.execution.code_archive import restore_source, source_files
+from worldatlas.map_build.inputs.configuration import PHYSICAL_CONTROLS
 from worldatlas.map_build.physical.build import (
     validate_r2_shard_location,
     validate_shard_staging,
@@ -84,7 +85,10 @@ def validate_replay_sources(
         require_source(f"land_config.land[{index}].dataset", layer["dataset"])
         for file_index, spec in enumerate(layer["files"]):
             require_source(f"land_config.land[{index}].files[{file_index}]", spec)
-    validate_shard_staging(configuration.get("physical_controls", {}), require_r2=True)
+    controls = PHYSICAL_CONTROLS.validate_python(
+        configuration.get("physical_controls", {}), strict=True
+    )
+    validate_shard_staging(controls, require_r2=True)
     # Each shard's ``path`` names a place in the build's cache. The catalog
     # reference or the direct R2 key and byte size tell a fresh build what to fetch.
     for index, spec in enumerate(sources["inland_water"]["files"]):

@@ -264,21 +264,33 @@ class Fixture(unittest.TestCase):
                     self.inputs / f"{name}-request.json",
                     dict(self.cfg, sources=sources),
                 )
-                with self.assertRaisesRegex(ValueError, f"{name} .* inline"):
+                with self.assertRaisesRegex(ValueError, rf"sources\.{name}\."):
                     pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
 
     def test_rejects_invalid_run_options_before_creating_output(self):
         config = self.inputs / "build.json"
         output = self.root / "run"
+        existing = self.root / "existing"
+        existing.mkdir()
         cases = [
-            (dict(self.cfg, schema="unknown"), {}, "unsupported end-to-end configuration"),
-            (dict(self.cfg, sources=[]), {}, "sources must be a JSON object"),
-            (dict(self.cfg, sources={}), {}, "sources is missing inland_water, land_config"),
+            (dict(self.cfg, schema="unknown"), {}, "literal_error"),
+            (dict(self.cfg, sources=[]), {}, "dict_type"),
+            (dict(self.cfg, sources={}), {}, r"sources\.land_config"),
+            (
+                dict(self.cfg, sources=dict(
+                    self.cfg["sources"], land_config={"land": [], "strip_rows": "512"}
+                )),
+                {},
+                r"sources\.land_config\.strip_rows",
+            ),
             (
                 dict(self.cfg, sources=dict(self.cfg["sources"], inland_watre={})),
                 {},
-                "sources has unexpected keys inland_watre",
+                r"sources\.inland_watre",
             ),
+            (self.cfg, {"output": self.root / "missing" / "run"}, "parent directory must exist"),
+            (self.cfg, {"output": existing}, "fresh build requires a new output"),
+            (self.cfg, {"resume": True}, "resume requires an existing output directory"),
             (self.cfg, {"output": self.root.parent / "elsewhere"}, "output must be inside --work-dir"),
             (self.cfg, {"recompute_division": True}, "requires --reuse-from"),
         ]
@@ -348,7 +360,7 @@ class Fixture(unittest.TestCase):
     def test_invalid_reference_pin_has_a_clear_error(self):
         self.cfg["sources"]["reference_rows"] = "rows.u32le"
         config = write_json(self.inputs / "build.json", self.cfg)
-        with self.assertRaisesRegex(ValueError, "explicit path/SHA-256 pins"):
+        with self.assertRaisesRegex(ValueError, r"sources\.reference_rows"):
             pipeline.Pipeline(config, self.root / "run", work_dir=self.root)
 
     def test_local_comparison_requires_both_named_streams_in_one_directory(self):
@@ -442,7 +454,9 @@ class Fixture(unittest.TestCase):
         release_endpoint = "https://bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.r2.cloudflarestorage.com"
         raw_key = "sources/coast.geojson"
         self.select_coastline(self.cloud(b"{}", raw_key))
-        self.cfg["physical_controls"] = {"source_staging": {"endpoint_url": raw_endpoint}}
+        self.cfg["physical_controls"] = {
+            "source_staging": {"mode": "r2-s3", "endpoint_url": raw_endpoint}
+        }
         config = write_json(self.inputs / "request.json", self.cfg)
         digest = lambda data: hashlib.sha256(data).hexdigest()
         decoded = {name: name.encode() for name in ("rows", "runs")}

@@ -31,6 +31,8 @@ Water and ocean calculations use the same frozen working selection.
 
 [`selection.py`](selection.py) freezes working records and validates saved inputs. [`geography.sql`](geography.sql) selects the records, and [`releases.py`](releases.py) resolves release assets for optional comparisons.
 
+[`configuration.py`](configuration.py) defines what the build and physical requests accept. The loaders check the JSON fields and types before passing settings to the build. File checksums are verified when files are opened.
+
 `test_selection.py` uses disposable PostgreSQL to check concurrent edits, saved replay and missing selections. Source-import integration tests also exercise the real geography queries against newly imported records.
 
 Run the [map-building suite](../README.md#code-and-tests).

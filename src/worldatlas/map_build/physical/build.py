@@ -13,7 +13,7 @@ import sys
 import threading
 import time
 import uuid
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import closing, nullcontext
 from contextvars import copy_context
@@ -23,6 +23,11 @@ from typing import Any
 import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.execution import control
 from worldatlas.map_build.execution.runtime import elapsed_union
+from worldatlas.map_build.inputs.configuration import (
+    PHYSICAL_CONFIGURATION,
+    PhysicalControls,
+    R2Staging,
+)
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
 from worldatlas.shared.files import (
@@ -41,7 +46,7 @@ HERE = Path(__file__).resolve().parent
 
 
 def plan_land_inputs(
-    settings: dict[str, Any], cache: r2.R2InputCache
+    settings: Mapping[str, Any], cache: r2.R2InputCache
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
@@ -97,9 +102,9 @@ def run_stage(function: Callable[..., Any], *args: Any) -> Any:
 
 
 def validate_shard_staging(
-    configuration: dict[str, Any], *, require_r2: bool = False
-) -> tuple[int, dict[str, str] | None]:
-    """Check the water-shard worker count and how the shards are supplied.
+    configuration: PhysicalControls, *, require_r2: bool = False
+) -> tuple[int, R2Staging | None]:
+    """Read the worker count and verify the R2 endpoint for water shards.
 
     Args:
         configuration: Physical settings with optional ``max_parallel_shards``
@@ -111,27 +116,18 @@ def validate_shard_staging(
         build reads local shards.
 
     Raises:
-        ValueError: The worker count or R2 staging configuration is invalid.
+        ValueError: R2 staging is required but missing, or its endpoint is invalid.
     """
-    workers = configuration.get('max_parallel_shards', 2)
-    if type(workers) is not int or workers < 1:
-        raise ValueError('max_parallel_shards must be a positive integer')
     staging = configuration.get('source_staging')
     if staging is None:
         if require_r2:
             raise ValueError('release replay requires R2 staging for raw-water shards')
     else:
-        if (
-            not isinstance(staging, dict)
-            or set(staging) != {'mode', 'endpoint_url'}
-            or staging['mode'] != 'r2-s3'
-        ):
-            raise ValueError('R2 staging requires r2-s3 mode and endpoint_url')
         r2.validate_r2_endpoint(staging['endpoint_url'])
-    return workers, staging
+    return configuration.get('max_parallel_shards', 2), staging
 
 
-def validate_r2_shard_location(entry: dict[str, Any]) -> None:
+def validate_r2_shard_location(entry: Mapping[str, Any]) -> None:
     """Check whether a frozen raw-water shard can be downloaded from R2.
 
     Args:
@@ -467,17 +463,9 @@ def _run(
     """
     manifest_path = Path(manifest_path).resolve()
     data = manifest_path.read_bytes()
-    cfg = json.loads(data)
-    if cfg.get('schema') != 'raw-physical-pipeline-v2' or not cfg.get(
-        'selection_notes'
-    ):
-        raise ValueError('explicit pipeline schema and selection notes required')
+    cfg = PHYSICAL_CONFIGURATION.validate_json(data, strict=True)
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    # Keep the worker count configurable; use complete-source profiles to
-    # balance CPU throughput against disk headroom for on-demand shard staging.
     workers, staging = validate_shard_staging(cfg)
-    if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
-        raise ValueError('invalid free-space reserve')
     source_directory = Path(cfg['source_directory']).resolve()
     cache = r2.R2InputCache(
         source_directory,
@@ -486,10 +474,6 @@ def _run(
     )
     land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
     water_cfg = cfg['water_config']
-    if water_cfg.get('rasterizer', 'gdal') not in ('gdal', 'python'):
-        raise ValueError(
-            'water rasterizer must be gdal or python; runtime native compilation is retired'
-        )
     if 'native_method' in water_cfg:
         raise ValueError('retired native_method; use batch_method')
     source = cfg['source_manifest']
@@ -497,22 +481,13 @@ def _run(
     if grid != water_cfg['grid']:
         raise ValueError('land and water grids differ')
     batch_size = water_cfg.get('batch_size', 8192)
-    if type(batch_size) is not int or batch_size < 1:
-        raise ValueError('water batch_size must be a positive integer')
     union_rows_per_block = cfg.get('union_rows_per_block', 128)
     physical_rows_per_block = cfg.get('physical_rows_per_block', 128)
-    for value in (union_rows_per_block, physical_rows_per_block):
-        if type(value) is not int or value < 1:
-            raise ValueError('rows_per_block must be a positive integer')
     for stage in (land_cfg, water_cfg):
         if stage.get('minimum_free_bytes', 2 * (1 << 30)) < reserve:
             raise ValueError('stage free-space reserve is below pipeline reserve')
-    files = source.get('files')
-    if (
-        not isinstance(files, list)
-        or not files
-        or source.get('file_count') != len(files)
-    ):
+    files = source['files']
+    if source['file_count'] != len(files):
         raise ValueError('source manifest must list every raw shard')
     raw = []
     for entry in files:
@@ -525,15 +500,9 @@ def _run(
         if not path.is_relative_to(source_directory):
             raise ValueError('raw source escapes the source directory')
         digest = entry['sha256']
-        if (
-            not isinstance(digest, str)
-            or len(digest) != 64
-            or any(c not in '0123456789abcdef' for c in digest)
-        ):
-            raise ValueError('invalid raw source digest')
         if staging is not None and not path.is_file():
             validate_r2_shard_location(entry)
-        raw.append((path, digest, entry))
+        raw.append((path, digest, dict(entry)))
     if len({x[0] for x in raw}) != len(raw) or len({x[1] for x in raw}) != len(raw):
         raise ValueError('raw source paths and hashes must be unique')
     scripts = {
@@ -557,17 +526,17 @@ def _run(
         for spec in land_cfg['land']
         for item in spec['files']
     ]
-    for key in ('water_reference', 'physical_reference_mask'):
-        if cfg.get(key):
-            inputs.append(Path(cfg[key]['path']).resolve())
-    if cfg.get('physical_reference_streams'):
+    water_reference = cfg.get('water_reference')
+    reference_mask = cfg.get('physical_reference_mask')
+    reference_streams = cfg.get('physical_reference_streams')
+    for pin in (water_reference, reference_mask):
+        if pin:
+            inputs.append(Path(pin['path']).resolve())
+    if reference_streams:
         inputs += [
-            Path(cfg['physical_reference_streams'][k]['path']).resolve()
-            for k in ('rows', 'runs')
+            Path(reference_streams[k]['path']).resolve() for k in ('rows', 'runs')
         ]
-    if bool(cfg.get('physical_reference_mask')) != bool(
-        cfg.get('physical_reference_streams')
-    ):
+    if bool(reference_mask) != bool(reference_streams):
         raise ValueError(
             'physical reference mask and streams must be supplied together'
         )
@@ -905,8 +874,8 @@ def _run(
         'rows_per_block': union_rows_per_block,
         'shards': shards,
     }
-    if cfg.get('water_reference'):
-        union_cfg['reference'] = cfg['water_reference']
+    if water_reference:
+        union_cfg['reference'] = water_reference
 
     def bind_config(path: Path, value: dict[str, Any]) -> None:
         """Save the generated settings or check they match the previous attempt.
@@ -971,9 +940,9 @@ def _run(
             'sha256': union_report['union_sha256'],
         },
     }
-    if cfg.get('physical_reference_mask'):
-        compose_cfg['reference_mask'] = cfg['physical_reference_mask']
-        compose_cfg['reference_streams'] = cfg['physical_reference_streams']
+    if reference_mask:
+        compose_cfg['reference_mask'] = reference_mask
+        compose_cfg['reference_streams'] = reference_streams
     compose_config = output / 'configs/compose.json'
     bind_config(compose_config, compose_cfg)
     physical_dir = output / 'physical'
