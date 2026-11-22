@@ -38,16 +38,6 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(self.cache.acquire(self.source), path)
         self.assertEqual(self.storage.get_object.call_count, 1)
 
-    def test_cache_reuses_legacy_import_filename_without_downloading(self):
-        source = dict(self.source, r2_key='provider/archived.zip')
-        legacy_path = self.directory / source['sha256'] / 'source.zip'
-        legacy_path.parent.mkdir()
-        legacy_path.write_bytes(self.raw)
-        canonical = self.cache.acquire(source)
-        self.assertEqual(canonical.name, 'archived.zip')
-        self.assertEqual(canonical.stat().st_ino, legacy_path.stat().st_ino)
-        self.storage.get_object.assert_not_called()
-
     def test_download_time_excludes_verification_and_cached_reuse(self):
         clock = [0.0]
         original = cache._check_file

@@ -198,8 +198,6 @@ class SourceCache:
         digest: str,
         size: int,
         write: Callable[[IO[bytes]], None],
-        *,
-        previous: Path | None = None,
     ) -> Path:
         """Return a verified file, publishing new bytes only after they pass checks.
 
@@ -208,7 +206,6 @@ class SourceCache:
             digest: Expected SHA-256.
             size: Expected byte count.
             write: Callback that writes the complete file to a temporary destination.
-            previous: Alternate filename used by earlier imports, if applicable.
 
         Returns:
             The verified cache path.
@@ -220,39 +217,25 @@ class SourceCache:
             _check_file(path, digest, size)
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
-            if previous is not None and previous != path and previous.is_file():
-                _check_file(previous, digest, size)
-                self._publish(previous, path, digest, size)
-            else:
-                output = NamedTemporaryFile(
-                    dir=path.parent, prefix="download-", delete=False
-                )
-                pending = Path(output.name)
+            output = NamedTemporaryFile(
+                dir=path.parent, prefix="download-", delete=False
+            )
+            pending = Path(output.name)
+            try:
+                with output:
+                    write(output.file)
+                _check_file(pending, digest, size)
                 try:
-                    with output:
-                        write(output.file)
-                    _check_file(pending, digest, size)
-                    self._publish(pending, path, digest, size)
-                finally:
-                    pending.unlink(missing_ok=True)
+                    os.link(pending, path)
+                except FileExistsError:
+                    # Another process created the final file first. Check its
+                    # size and checksum before returning that file.
+                    _check_file(path, digest, size)
+            finally:
+                pending.unlink(missing_ok=True)
         self._verified.add(identity)
         self.pins.append({"path": str(path), "sha256": digest})
         return path
-
-    @staticmethod
-    def _publish(source: Path, path: Path, digest: str, size: int) -> None:
-        """Link verified bytes to the final name or check a competing writer's bytes.
-
-        Args:
-            source: Verified local bytes.
-            path: Final cache path.
-            digest: Expected SHA-256.
-            size: Expected byte count.
-        """
-        try:
-            os.link(source, path)
-        except FileExistsError:
-            _check_file(path, digest, size)
 
     def acquire(
         self,
@@ -282,8 +265,6 @@ class SourceCache:
             )
 
         bucket, key = _location(spec)
-        # Older imports used source.ext even when the provider supplied a name.
-        previous = path.with_name("source" + (Path(key).suffix or ".bin"))
         return self._verified_file(
             path,
             digest,
@@ -291,7 +272,6 @@ class SourceCache:
             lambda output: self._download(
                 bucket, key, size, output, endpoint or self.endpoint, check_cancelled
             ),
-            previous=previous,
         )
 
     def _download(
