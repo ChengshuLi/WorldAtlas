@@ -709,13 +709,17 @@ class Pipeline:
         write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
 
     def resolve_raw_catalog(self, selections: BuildSources) -> BuildSources:
-        """Expand raw source selectors using the frozen catalog.
+        """Fill in R2 file details from the catalog saved with the build.
+
+        For each ``r2_source``, look up the ID in ``self.selection["raw_sources"]``.
+        Keep that same ID as ``source_id`` and add the R2 bucket, object key, byte
+        size, and SHA-256. Later stages use these details to fetch and verify files.
 
         Args:
-            selections: Inline source settings with optional "r2_source" selectors.
+            selections: Coastline, inland-water, and optional comparison file settings.
 
         Returns:
-            Copy of the settings with selected object keys, byte sizes and hashes.
+            A copy of the settings with each catalog reference filled in.
 
         Raises:
             ValueError: A selector is invalid or its catalog row is missing.
@@ -730,6 +734,8 @@ class Pipeline:
         }
         if any(source_id not in catalog for _, source_id in references):
             raise ValueError("raw catalog is missing selected sources")
+        # Each spec is a dictionary inside the copied settings. For a ZIP member,
+        # the spec holds the archive's details.
         for spec, source_id in references:
             del spec["r2_source"]
             source = catalog[source_id]
