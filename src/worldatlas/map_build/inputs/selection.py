@@ -16,8 +16,8 @@ HERE = Path(__file__).resolve().parent
 QUERY = HERE / "geography.sql"
 
 
-def validate_bindings(geography: dict[str, Any]) -> None:
-    """Check that each map code has one valid meaning.
+def validate_map_code_bindings(geography: dict[str, Any]) -> None:
+    """Check the mappings between map codes and (entity, land or water) pairs.
 
     Args:
         geography: Geographic entities and their code bindings.
@@ -193,7 +193,7 @@ def validate_feature_references(domain: dict[str, Any]) -> None:
     parents = {r["parent_id"] for r in domain["rules"]}
     for parent in parents:
         compile_rules(domain, parent)
-    validate_bindings(domain)
+    validate_map_code_bindings(domain)
 
 
 def read_saved(path: Path | str) -> dict[str, Any]:

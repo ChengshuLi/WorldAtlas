@@ -16,7 +16,7 @@ from worldatlas.map_build.inputs.selection import (
     canonical_bytes,
     read_saved,
     read_selection,
-    validate_bindings,
+    validate_map_code_bindings,
 )
 from worldatlas.map_build.test_support import selection
 from worldatlas.source_assets.catalog import catalog_sources
@@ -50,7 +50,7 @@ class BindingTests(unittest.TestCase):
             geography = deepcopy(self.geography)
             geography["category_bindings"].append(bad)
             with self.assertRaisesRegex(ValueError, "category binding"):
-                validate_bindings(geography)
+                validate_map_code_bindings(geography)
 
     def test_saved_values_are_read_without_querying_neon(self):
         with tempfile.TemporaryDirectory() as temp:

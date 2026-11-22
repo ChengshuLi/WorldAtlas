@@ -27,7 +27,7 @@ from worldatlas.map_build.execution.code_archive import read_source
 from worldatlas.map_build.inputs.selection import (
     canonical_bytes,
     entity_colors,
-    validate_bindings,
+    validate_map_code_bindings,
 )
 from worldatlas.map_build.physical import build as physical
 from worldatlas.map_releases.catalog import (
@@ -93,7 +93,7 @@ def release_categories(selection: dict[str, Any]) -> list[dict[str, Any]]:
     Raises:
         ValueError: A category binding is invalid or a land entity lacks a color.
     """
-    validate_bindings(selection["geography"])
+    validate_map_code_bindings(selection["geography"])
     snapshot = selection["geography"]
     names = {entity["id"]: entity["name"] for entity in snapshot["entities"]}
     bindings = snapshot["category_bindings"]
