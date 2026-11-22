@@ -171,7 +171,7 @@ class CommandTests(unittest.TestCase):
             patch.dict(os.environ),
         ):
             with self.assertRaisesRegex(ValueError, "PROJ network must be disabled"):
-                pipeline.validate_runtime()
+                pipeline.disable_proj_network()
             disable.assert_called_once_with(False)
             self.assertEqual(os.environ["PROJ_NETWORK"], "OFF")
 

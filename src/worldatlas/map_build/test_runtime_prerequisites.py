@@ -12,7 +12,7 @@ class RuntimePrerequisiteTests(unittest.TestCase):
         with patch.dict(os.environ, {'PATH': '', 'PROJ_NETWORK': 'OFF'}), patch.object(
             pipeline.shutil, 'which', side_effect=AssertionError('no external tool lookup')
         ):
-            pipeline.validate_runtime()
+            pipeline.disable_proj_network()
             identity = pipeline.runtime_identity()
         self.assertNotIn('tools', identity)
         self.assertFalse(identity['proj_network_enabled'])

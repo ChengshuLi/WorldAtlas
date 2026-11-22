@@ -71,7 +71,7 @@ HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
 
 
-def validate_runtime() -> None:
+def disable_proj_network() -> None:
     """Disable PROJ network access for this process.
 
     Coordinate conversions use the installed PROJ database and grids.
@@ -344,7 +344,7 @@ class Pipeline:
         saved_identity, compare_release = self._load_run_options(
             divide, compare_release, reuse_from, recompute_division
         )
-        validate_runtime()
+        disable_proj_network()
         self.runtime = runtime_identity()
 
         self.source_pins = []
