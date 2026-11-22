@@ -32,9 +32,6 @@ import scipy
 from osgeo import gdal
 from pyproj import datadir
 
-# pyproj.network exposes these functions from its compiled module.
-from pyproj.network import is_network_enabled, set_network_enabled  # pyright: ignore[reportPrivateImportUsage]
-
 from worldatlas.map_build.core.comparison import compare
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.division.encoding import encode
@@ -71,28 +68,12 @@ HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
 
 
-def disable_proj_network() -> None:
-    """Disable PROJ network access for this process.
-
-    Coordinate conversions use the installed PROJ database and grids.
-
-    Raises:
-        ValueError: PROJ network access could not be disabled.
-    """
-    # All selected coordinate operations use the pinned local database. Never
-    # fetch a grid implicitly, including when pyproj was imported by a caller.
-    os.environ["PROJ_NETWORK"] = "OFF"
-    set_network_enabled(False)
-    if is_network_enabled():
-        raise ValueError("PROJ network must be disabled")
-
-
 def runtime_identity() -> dict[str, Any]:
     """Record the Python and geographic libraries used by this run.
 
     Returns:
         Dictionary with version strings, the Python executable's SHA-256,
-        the PROJ database path and SHA-256, and the PROJ network setting.
+        and the PROJ database path and SHA-256.
     """
     return {
         "executable": sys.executable,
@@ -103,7 +84,6 @@ def runtime_identity() -> dict[str, Any]:
         "pyproj": pyproj.__version__,
         "proj": pyproj.proj_version_str,
         "proj_database": pin_file(Path(datadir.get_data_dir()) / "proj.db"),
-        "proj_network_enabled": is_network_enabled(),
         "gdal": gdal.VersionInfo("RELEASE_NAME"),
         "pyarrow": pyarrow.__version__,
     }
@@ -344,7 +324,6 @@ class Pipeline:
         saved_identity, compare_release = self._load_run_options(
             divide, compare_release, reuse_from, recompute_division
         )
-        disable_proj_network()
         self.runtime = runtime_identity()
 
         self.source_pins = []
@@ -583,8 +562,7 @@ class Pipeline:
             "reuse_from": str(self.reuse_from) if self.reuse_from is not None else None,
             "recompute_division": self.recompute_division,
             "runtime_paths": {
-                key: os.environ.get(key)
-                for key in ("PROJ_DATA", "PROJ_LIB", "PROJ_NETWORK")
+                key: os.environ.get(key) for key in ("PROJ_DATA", "PROJ_LIB")
             },
         }
         self.identity["input_selection_sha256"] = hashlib.sha256(

@@ -8,14 +8,12 @@ from worldatlas.map_build import build as pipeline
 
 
 class RuntimePrerequisiteTests(unittest.TestCase):
-    def test_validation_and_identity_work_without_executable_search_path(self):
-        with patch.dict(os.environ, {'PATH': '', 'PROJ_NETWORK': 'OFF'}), patch.object(
+    def test_identity_works_without_executable_search_path(self):
+        with patch.dict(os.environ, {'PATH': ''}), patch.object(
             pipeline.shutil, 'which', side_effect=AssertionError('no external tool lookup')
         ):
-            pipeline.disable_proj_network()
             identity = pipeline.runtime_identity()
         self.assertNotIn('tools', identity)
-        self.assertFalse(identity['proj_network_enabled'])
         for field in (
             'numpy',
             'scipy',

@@ -164,17 +164,6 @@ class TimingTests(unittest.TestCase):
 
 
 class CommandTests(unittest.TestCase):
-    def test_build_requires_proj_offline(self):
-        with (
-            patch.object(pipeline, "set_network_enabled") as disable,
-            patch.object(pipeline, "is_network_enabled", return_value=True),
-            patch.dict(os.environ),
-        ):
-            with self.assertRaisesRegex(ValueError, "PROJ network must be disabled"):
-                pipeline.disable_proj_network()
-            disable.assert_called_once_with(False)
-            self.assertEqual(os.environ["PROJ_NETWORK"], "OFF")
-
     def test_build_requires_an_explicit_workspace_and_output(self):
         for options, missing in (
             (["--work-dir", "workspace"], "output"),
