@@ -413,11 +413,11 @@ class Pipeline:
             saved_identity = read_json(identity_path)
             divide = saved_identity.get("divide")
             compare_release = saved_identity.get("compare_release")
-            saved_reuse = saved_identity["reuse_from"]
-            reuse = Path(saved_reuse) if saved_reuse is not None else None
+            reuse_from = saved_identity["reuse_from"]
             recompute_division = saved_identity["recompute_division"]
-        else:
-            reuse = Path(reuse_from).resolve() if reuse_from is not None else None
+        reuse = Path(reuse_from) if reuse_from is not None else None
+        if reuse is not None and not self.resume:
+            reuse = reuse.resolve()
         if recompute_division and reuse is None:
             raise ValueError("--recompute-division requires --reuse-from")
         self.reuse_from = reuse
