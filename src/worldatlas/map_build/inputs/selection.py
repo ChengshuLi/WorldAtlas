@@ -161,10 +161,10 @@ def read_selection(
 
         # data["sources"] names the files behind the saved geometry and rule
         # citations. Keep their catalog rows so we can trace those records.
-        # raw_sources adds catalog IDs for files the build may download later:
-        # the coastline polygon ZIP, the inland-water files, and any comparison
-        # files referenced by source ID. Here we save the catalog rows for both
-        # groups.
+        # raw_sources adds catalog IDs for files the map-building pipeline may
+        # download in a later stage. These include the coastline polygon ZIP,
+        # inland-water files, and any comparison files referenced by source ID.
+        # Here we save the catalog rows for both groups.
         references = set(raw_sources) | {
             source["source_id"] for source in data["sources"]
         }
