@@ -611,8 +611,18 @@ class Fixture(unittest.TestCase):
         self.cfg["sources"]["inland_water"]["files"] = [
             {"path": "raw/fixture", **reference}
         ]
-        with self.fake_r2({}, []) as download:
+        with (
+            self.fake_r2({}, []) as download,
+            patch.object(
+                pipeline, "catalog_references", wraps=pipeline.catalog_references
+            ) as scan,
+        ):
             runner = self.make()
+        scan.assert_called_once()
+        self.assertEqual(
+            pipeline.read_selection.call_args.kwargs["raw_sources"], {source_id}
+        )
+        self.assertEqual(runner.cfg["sources"], self.cfg["sources"])
         download.assert_not_called()
         resolved = {"source_id": source_id, **raw}
         land = runner.physical_config["land_config"]["land"][0]

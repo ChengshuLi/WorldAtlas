@@ -307,7 +307,6 @@ class Pipeline:
             self.config_path.read_bytes(), strict=True
         )
         self.grid = Grid(**self.cfg["grid"])
-        sources = self.cfg["sources"]
 
         self.resume = resume
         self._prepare_workspace(output, work_dir)
@@ -316,9 +315,12 @@ class Pipeline:
         )
         self.runtime = runtime_identity()
 
-        self.selection = self._load_selection(sources, selection)
+        sources = copy.deepcopy(self.cfg["sources"])
+        references = list(catalog_references(sources))
+        source_ids = {source_id for _, source_id in references}
+        self.selection = self._load_selection(source_ids, selection)
         self.compiled_divisions = prepare_geography(self.selection["geography"])
-        sources = self.resolve_raw_catalog(sources)
+        self._fill_catalog_entries(references)
         self.physical_config = self._physical_configuration(sources)
         staging = self.physical_config.get("source_staging")
         self.r2_inputs = R2InputCache(
@@ -433,12 +435,12 @@ class Pipeline:
         return saved_identity, compare_release
 
     def _load_selection(
-        self, sources: BuildSources, selection: Path | str | None
+        self, source_ids: set[str], selection: Path | str | None
     ) -> BuildSelection:
         """Load the geographic records that this run will use.
 
         Args:
-            sources: Physical inputs that may refer to cataloged raw files.
+            source_ids: Catalog IDs for physical and comparison inputs.
             selection: Saved geographic records for a fresh build.
 
         Returns:
@@ -458,7 +460,6 @@ class Pipeline:
             url = neon_connection_url()
         except ValueError as exc:
             raise ValueError(f"{exc}, or supply --selection") from None
-        source_ids = {source_id for _, source_id in catalog_references(sources)}
         with connect_neon(url=url) as database:
             return read_selection(
                 database,
@@ -708,38 +709,32 @@ class Pipeline:
         self.timing.mark_complete("setup")
         write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
 
-    def resolve_raw_catalog(self, selections: BuildSources) -> BuildSources:
-        """Fill in R2 file details from the catalog saved with the build.
+    def _fill_catalog_entries(self, references: list[tuple[FileEntry, str]]) -> None:
+        """Fill in R2 file details in place from the catalog saved with the build.
 
         For each ``r2_source``, look up the ID in ``self.selection["raw_sources"]``.
         Keep that same ID as ``source_id`` and add the R2 bucket, object key, byte
         size, and SHA-256. Later stages use these details to fetch and verify files.
 
         Args:
-            selections: Coastline, inland-water, and optional comparison file settings.
-
-        Returns:
-            A copy of the settings with each catalog reference filled in.
+            references: Pairs of file or ZIP archive dictionaries from the copied
+                settings and their source IDs.
 
         Raises:
-            ValueError: A selector is invalid or its catalog row is missing.
+            ValueError: A source ID has no catalog row in the saved selection.
         """
-        resolved = copy.deepcopy(selections)
-        references = list(catalog_references(resolved))
         if not references:
-            return resolved
+            return
 
         catalog = {
             source["source_id"]: source for source in self.selection["raw_sources"]
         }
         if any(source_id not in catalog for _, source_id in references):
             raise ValueError("raw catalog is missing selected sources")
-        # Each spec is a dictionary inside the copied settings. For a ZIP member,
-        # the spec holds the archive's details.
-        for spec, source_id in references:
-            del spec["r2_source"]
+        for entry, source_id in references:
+            del entry["r2_source"]
             source = catalog[source_id]
-            spec.update(
+            entry.update(
                 {
                     key: source[key]
                     for key in (
@@ -751,7 +746,6 @@ class Pipeline:
                     )
                 }
             )
-        return resolved
 
     def release_reference(self, version: str) -> dict[str, Path]:
         """Cache and verify a published map's comparison files.
