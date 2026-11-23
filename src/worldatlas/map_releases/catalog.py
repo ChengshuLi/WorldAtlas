@@ -3,7 +3,6 @@
 import hashlib
 import json
 import re
-from pathlib import PurePosixPath
 from typing import Any
 
 from psycopg import Connection
@@ -85,7 +84,7 @@ def read_manifest(storage: R2Client, release: dict[str, Any]) -> dict[str, Any]:
 
 
 def validate_manifest(manifest: dict[str, Any], release_id: str) -> dict[str, Any]:
-    """Check the manifest paths and file metadata before using its asset keys.
+    """Check where the release files belong and how to verify their bytes.
 
     Args:
         manifest: Parsed JSON with an ``objects`` mapping keyed by file name.
@@ -102,30 +101,27 @@ def validate_manifest(manifest: dict[str, Any], release_id: str) -> dict[str, An
         raise ValueError("invalid release manifest")
     folder = release_prefix(release_id)
     for name, asset in manifest["objects"].items():
-        if not isinstance(name, str) or not isinstance(asset, dict):
-            raise ValueError("invalid release object")
-        # Cleanup uses these keys for deletion. Each must match its own folder
-        # and the relative filename, such as ``legend/entities.json``.
-        path = PurePosixPath(name)
-        if (
-            not name
-            or "\\" in name
-            or path.is_absolute()
-            or ".." in path.parts
-            or path.as_posix() != name
-            or name == "manifest.json"
-            or asset.get("r2_key") != folder + name
-        ):
-            raise ValueError("release object escapes its own immutable folder")
-        if (
-            type(asset.get("size_bytes")) is not int
-            or asset["size_bytes"] < 0
-            or not isinstance(asset.get("sha256"), str)
-            or not re.fullmatch("[0-9a-f]{64}", asset["sha256"])
-            or not isinstance(asset.get("content_type"), str)
-            or not asset["content_type"].strip()
-        ):
-            raise ValueError("invalid release object byte identity")
+        if not isinstance(asset, dict):
+            raise ValueError(f"invalid release object for {name!r}")
+        # Asset names are relative paths such as legend/entities.json.
+        if "\\" in name or any(part in ("", ".", "..") for part in name.split("/")):
+            raise ValueError(f"invalid release asset path: {name!r}")
+        # Cleanup deletes the manifest last so it can retry with the same list.
+        if name == "manifest.json":
+            raise ValueError("manifest.json must stay outside the asset list")
+        # Derive the expected key so cleanup stays inside this release's folder.
+        if asset.get("r2_key") != folder + name:
+            raise ValueError(f"release asset has the wrong R2 key: {name!r}")
+
+        size_bytes = asset.get("size_bytes")
+        if type(size_bytes) is not int or size_bytes < 0:
+            raise ValueError(f"invalid byte count for release asset {name!r}")
+        sha256 = asset.get("sha256")
+        if not isinstance(sha256, str) or not re.fullmatch("[0-9a-f]{64}", sha256):
+            raise ValueError(f"invalid SHA-256 for release asset {name!r}")
+        content_type = asset.get("content_type")
+        if not isinstance(content_type, str) or not content_type.strip():
+            raise ValueError(f"missing content type for release asset {name!r}")
     if not {"rows.u32le.gz", "runs.u32le.gz"} <= manifest["objects"].keys():
         raise ValueError("release manifest lacks map streams")
     return manifest

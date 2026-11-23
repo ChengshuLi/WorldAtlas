@@ -637,13 +637,33 @@ class CatalogTests(unittest.TestCase):
         for manifest, error in (
             ({}, "invalid release manifest"),
             ({"objects": {"rows.u32le.gz": None}}, "invalid release object"),
-            ({"objects": {"../rows.u32le.gz": asset}}, "escapes its own immutable folder"),
-            ({"objects": {"rows.u32le.gz": dict(asset, r2_key="other/rows.u32le.gz")}}, "escapes"),
-            ({"objects": {"rows.u32le.gz": dict(asset, sha256="z" * 64)}}, "invalid release object byte identity"),
+            ({"objects": {"rows.u32le.gz": dict(asset, r2_key="other/rows.u32le.gz")}}, "wrong R2 key"),
             ({"objects": {"rows.u32le.gz": asset}}, "lacks map streams"),
         ):
             with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
                 validate_manifest(manifest, candidate)
+        for name, error in (
+            ("", "invalid release asset path"),
+            (".", "invalid release asset path"),
+            ("../rows.u32le.gz", "invalid release asset path"),
+            ("/rows.u32le.gz", "invalid release asset path"),
+            ("legend//entities.json", "invalid release asset path"),
+            ("legend\\entities.json", "invalid release asset path"),
+            ("manifest.json", "outside the asset list"),
+        ):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, error):
+                validate_manifest(
+                    {"objects": {name: dict(asset, r2_key=f"releases/{candidate}/{name}")}},
+                    candidate,
+                )
+        for changes, error in (
+            (dict(size_bytes=True), "invalid byte count"),
+            (dict(size_bytes=-1), "invalid byte count"),
+            (dict(sha256="z" * 64), "invalid SHA-256"),
+            (dict(content_type=" "), "missing content type"),
+        ):
+            with self.subTest(changes=changes), self.assertRaisesRegex(ValueError, error):
+                validate_manifest({"objects": {"rows.u32le.gz": asset | changes}}, candidate)
 
 
 class PublicationTests(unittest.TestCase):
