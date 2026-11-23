@@ -42,6 +42,29 @@ class BindingTests(unittest.TestCase):
             dict(code=2, entity_id=2, physical_class="water"),
         ]
 
+    def test_saved_selection_compiles_only_the_requested_branch_and_ancestors(self):
+        self.geography['entities'].extend(
+            [
+                dict(id=3, parent_id=0, physical_class='land'),
+                dict(id=4, parent_id=2, physical_class='land'),
+                dict(id=5, parent_id=3, physical_class='land'),
+            ]
+        )
+        self.geography['rules'] = [
+            dict(
+                id=str(parent), parent_id=parent, operation='assign_area',
+                physical_class='land', unit='cell', unassigned_only=False,
+            )
+            for parent in (0, 2, 3)
+        ]
+        self.geography['rule_targets'] = [
+            dict(rule_id=str(parent), entity_id=child, label_point_id=None)
+            for parent, child in ((0, 2), (2, 4))
+        ]
+        self.assertEqual(list(prepare_geography(self.geography, [2])), [0, 2])
+        with self.assertRaisesRegex(ValueError, 'target'):
+            prepare_geography(self.geography)
+
     def test_edited_selection_keeps_polygon_rings_strict(self):
         self.geography["features"] = [dict(
             id="edited", geometry=dict(type="Polygon", coordinates=[[[0, 0], [1, 0], [1, 1], [0, 1]]]),

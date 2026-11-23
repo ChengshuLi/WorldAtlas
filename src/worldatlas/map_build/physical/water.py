@@ -5,7 +5,6 @@ The output directory must not already exist.
 """
 
 import gc
-import hashlib
 import json
 import math
 import os
@@ -276,7 +275,7 @@ def run(
     source: Path | str,
     expected: str,
     output: Path | str,
-    config_path: Path | str,
+    configuration_sha256: str,
     grid: Grid,
     *,
     settings: WaterSettings,
@@ -290,7 +289,7 @@ def run(
         source: Local source GeoParquet file.
         expected: SHA-256 digest for the source file.
         output: New directory for the shard mask and report.
-        config_path: Saved settings and file list used for the report checksum.
+        configuration_sha256: Checksum of the saved stage settings.
         grid: Shared physical build grid.
         settings: Validated inland-water rasterizer options.
         minimum_free_bytes: Shared physical build disk reserve in bytes.
@@ -301,19 +300,11 @@ def run(
         Shard report with counts, input and output digests, and timing.
     """
     source = Path(source).resolve()
-    config_path = Path(config_path).resolve()
     output = Path(output).resolve()
-    if (
-        source == config_path
-        or source.is_relative_to(output)
-        or config_path.is_relative_to(output)
-        or output.is_relative_to(source.parent)
-        or output.is_relative_to(config_path.parent)
-    ):
+    if source.is_relative_to(output) or output.is_relative_to(source.parent):
         raise ValueError(
             'output must be outside input directories and must not contain inputs'
         )
-    config_bytes = config_path.read_bytes()
     policy = settings.get('policy', {'method': 'overture-inland-subtype-v1'})
     width, height = grid.width, grid.height
     west, north, step = grid.west, grid.north, grid.step
@@ -411,8 +402,6 @@ def run(
     raster = None
     if files.pin(source)['sha256'] != expected.lower():
         raise ValueError('source changed during processing')
-    if config_path.read_bytes() != config_bytes:
-        raise ValueError('configuration changed during processing')
     if invalid:
         with (out / 'invalid-feature-ids.json').open('x') as f:
             f.write(json.dumps(invalid, indent=2) + '\n')
@@ -434,7 +423,7 @@ def run(
         'invalid_feature_ids': 'invalid-feature-ids.json' if invalid else None,
         'policy': policy,
         'selection_notes': settings.get('selection_notes'),
-        'configuration_sha256': hashlib.sha256(config_bytes).hexdigest(),
+        'configuration_sha256': configuration_sha256,
         'geometry_policy': 'GEOS validity checked; invalid geometries excluded and IDs reported; no repair',
         'grid': vars(grid),
         'rasterization': f'GDAL default polygon rasterization, ALL_TOUCHED off; values unioned per batch on {tile}-cell tiles',

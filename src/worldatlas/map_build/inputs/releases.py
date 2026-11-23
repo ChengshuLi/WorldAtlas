@@ -6,7 +6,6 @@ import re
 import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import cast
 
 import psycopg
 from typing_extensions import TypedDict
@@ -33,7 +32,7 @@ class ComparisonPins(TypedDict):
 
     reference_rows: StreamPin
     reference_runs: StreamPin
-    reference_config: StreamPin
+    reference_config: Path
 
 
 type ReleaseStream = tuple[str, FileSpec, str]
@@ -94,8 +93,8 @@ def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
         cache: Open cache for downloading release files.
 
     Returns:
-        Path and SHA-256 pins for ``reference_rows``, ``reference_runs``,
-        and ``reference_config``. The stream pins describe decoded bytes.
+        Pins for the decoded row and run streams, and the verified local path to
+        the reference release configuration.
 
     Raises:
         ValueError: The manifest is invalid or a file fails checksum verification.
@@ -126,8 +125,5 @@ def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
     return {
         "reference_rows": reference["rows"],
         "reference_runs": reference["runs"],
-        "reference_config": {
-            "path": str(cache.acquire(config)),
-            "sha256": cast(str, config["sha256"]),
-        },
+        "reference_config": cache.acquire(config),
     }

@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Compose the physical land and water grid from verified rasters."""
 
-import hashlib
 import json
 import os
 import shutil
@@ -70,7 +69,7 @@ def write_run_block(
 
 
 def main(
-    config_path: Path | str,
+    configuration_sha256: str,
     output: Path | str,
     grid: Grid,
     *,
@@ -84,7 +83,7 @@ def main(
     """Combine the coastline land mask and inland water mask.
 
     Args:
-        config_path: Saved composition request used for the report checksum.
+        configuration_sha256: Checksum of the saved stage settings.
         output: New directory for the GeoTIFF and row-run files.
         grid: Shared, validated physical grid.
         land: Pin for the binary coastline land mask.
@@ -97,15 +96,10 @@ def main(
     Returns:
         Report with output digests and physical cell counts.
     """
-    config_path = Path(config_path).resolve()
-    data = config_path.read_bytes()
     w, h = grid.width, grid.height
     output = Path(output).resolve()
     source_masks = {'land': land, 'water': water}
-    inputs = [
-        config_path,
-        *(Path(pin['path']).resolve() for pin in source_masks.values()),
-    ]
+    inputs = [Path(pin['path']).resolve() for pin in source_masks.values()]
     if len(set(inputs)) != len(inputs):
         raise ValueError('inputs must be distinct')
     if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs):
@@ -164,11 +158,9 @@ def main(
     for key, pin in source_masks.items():
         if files.pin(pin['path'])['sha256'] != pin['sha256']:
             raise ValueError(f'{key} changed during processing')
-    if config_path.read_bytes() != data:
-        raise ValueError('config changed during processing')
     report = {
         'status': 'candidate-only',
-        'configuration_sha256': hashlib.sha256(data).hexdigest(),
+        'configuration_sha256': configuration_sha256,
         'grid': vars(grid),
         'rows_per_block': rows_per_block,
         'inputs': source_masks,
@@ -178,8 +170,6 @@ def main(
             for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
         },
     }
-    with (out / 'config.json').open('xb') as f:
-        f.write(data)
     with (out / 'report.json').open('x') as f:
         json.dump(report, f, indent=2)
         f.write('\n')

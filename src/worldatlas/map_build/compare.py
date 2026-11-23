@@ -75,7 +75,7 @@ def compare_release(
     with closing(SourceCache(work_dir / "inputs")) as cache:
         pins = cache_release_reference(release, cache)
     rows, runs = pins["reference_rows"], pins["reference_runs"]
-    config = read_json(pins["reference_config"]["path"])
+    config = read_json(pins["reference_config"])
     if grid != Grid(
         width=config["width"], height=config["height"], step=config["step"]
     ):

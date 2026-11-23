@@ -28,7 +28,6 @@ from worldatlas.map_build.execution.journal import (
 from worldatlas.map_build.inputs.configuration import FilePin
 from worldatlas.shared.files import (
     JSONValue,
-    pin_file,
     read_json,
     sha256_file,
     sync_directory,
@@ -158,43 +157,41 @@ class RunFilePins:
             self.pin(Path(directory) / name) for name in ("rows.u32le", "runs.u32le")
         ]
 
-
-def inventory(
-    paths: Iterable[Path | str], pin: Callable[[Path], dict[str, str]] = pin_file
-) -> list[dict[str, str]]:
-    """List and hash the regular files in the supplied outputs.
-
-    Args:
-        paths: Files or directories to scan in order.
-        pin: Checksum operation for each regular file.
-
-    Returns:
-        File pins in traversal order, with each directory sorted by filename.
-
-    Raises:
-        ValueError: A path is missing, a symlink, or not a regular file or directory.
-    """
-    result = []
-
-    def visit(path: Path) -> None:
-        """Collect file pins beneath one path.
+    def inventory(self, paths: Iterable[Path | str]) -> list[dict[str, str]]:
+        """List and hash the regular files in the supplied outputs.
 
         Args:
-            path: File or directory to visit.
-        """
-        if path.is_symlink():
-            raise ValueError("symlink checkpoint output: " + str(path))
-        elif path.is_file():
-            result.append(pin(path))
-        elif path.is_dir():
-            for child in sorted(path.iterdir()):
-                visit(child)
-        else:
-            raise ValueError("missing or non-regular checkpoint output: " + str(path))
+            paths: Files or directories to scan in order.
 
-    for value in paths:
-        visit(Path(value))
-    return result
+        Returns:
+            File pins in traversal order, with each directory sorted by filename.
+
+        Raises:
+            ValueError: A path is missing, a symlink, or not a regular file or directory.
+        """
+        result = []
+
+        def visit(path: Path) -> None:
+            """Collect file pins beneath one path.
+
+            Args:
+                path: File or directory to visit.
+            """
+            if path.is_symlink():
+                raise ValueError("symlink checkpoint output: " + str(path))
+            elif path.is_file():
+                result.append(self.pin(path))
+            elif path.is_dir():
+                for child in sorted(path.iterdir()):
+                    visit(child)
+            else:
+                raise ValueError(
+                    "missing or non-regular checkpoint output: " + str(path)
+                )
+
+        for value in paths:
+            visit(Path(value))
+        return result
 
 
 def code_identity(scripts: Path | str) -> dict[str, str]:
@@ -410,7 +407,7 @@ class Checkpoints:
         ) != request(invocation):
             raise ValueError("completed command identity changed: " + name)
         self.files.verify(self.data_pins(receipt))
-        if inventory(outputs, self.files.pin) != receipt["outputs"]:
+        if self.files.inventory(outputs) != receipt["outputs"]:
             raise ValueError("completed stage output changed: " + name)
         return True
 
@@ -487,7 +484,7 @@ class Checkpoints:
                 receipt["timing_anchor"], self.root.parent / "timing-events.jsonl"
             )
             self.files.verify(self.data_pins(receipt))
-            if inventory(receipt["output_roots"], self.files.pin) != receipt["outputs"]:
+            if self.files.inventory(receipt["output_roots"]) != receipt["outputs"]:
                 raise ValueError("completed stage output changed: " + path.parent.name)
 
     def begin(self, name: str) -> Path:
@@ -509,7 +506,7 @@ class Checkpoints:
         name: str,
         invocation: dict[str, Any],
         outputs: list[Path],
-        inputs: list[dict[str, str]],
+        inputs: list[dict[str, str]] | list[FilePin],
         timing_anchor: dict[str, str | int],
     ) -> None:
         """Write a stage's completion record after verifying its saved outputs.
@@ -531,7 +528,7 @@ class Checkpoints:
                 "invocation": invocation,
                 "inputs": inputs,
                 "output_roots": [os.path.abspath(p) for p in outputs],
-                "outputs": inventory(outputs, self.files.pin),
+                "outputs": self.files.inventory(outputs),
             },
         )
 
@@ -542,7 +539,7 @@ class Checkpoints:
         operation: Callable[[], Result],
         *,
         timing: Timing,
-        inputs: list[dict[str, str]],
+        inputs: list[dict[str, str]] | list[FilePin],
         outputs: Iterable[Path | str],
         resume_marker: Path | str | None = None,
     ) -> Result:
@@ -660,6 +657,7 @@ class Timing:
         resume: bool = False,
         attempt: str | None = None,
         heartbeat_seconds: float = 0,
+        earlier_attempts: Iterable[str] = (),
     ) -> None:
         """Open a timing log and optionally start recording ongoing work.
 
@@ -669,12 +667,14 @@ class Timing:
             attempt: Attempt ID. Generate one if omitted.
             heartbeat_seconds: Seconds between progress entries for active work.
                 Zero disables them.
+            earlier_attempts: IDs of existing attempt directories in this run.
 
         Raises:
             ValueError: A line before the last one is incomplete or invalid.
         """
         self.path = Path(path)
         self.attempt = attempt or uuid.uuid4().hex
+        self.earlier_attempts = tuple(sorted(earlier_attempts))
         self.lock = threading.RLock()
         self.records = []
         self.active = {}
@@ -720,32 +720,6 @@ class Timing:
             value: JSON-compatible event fields.
         """
         self.events([value])
-
-    def record_interrupted_setup(self, attempts: Iterable[str]) -> None:
-        """Record attempts that stopped before writing a setup start event.
-
-        A recorded start without an end already contributes a lower bound.
-        The saved prefix marker is independent of whether the interval is known.
-
-        Args:
-            attempts: IDs of earlier attempts in this run.
-        """
-        recorded = {
-            record["attempt"]
-            for record in self.records
-            if record.get("group") == "setup"
-            and record["event"] in ("start", "unmeasured-initialization")
-        }
-        self.events(
-            {
-                "event": "unmeasured-initialization",
-                "attempt": attempt,
-                "id": "setup/interrupted-initialization",
-                "group": "setup",
-            }
-            for attempt in attempts
-            if attempt not in recorded
-        )
 
     def events(self, values: Iterable[dict[str, Any]]) -> None:
         """Append a batch of events and flush them to disk.
@@ -934,18 +908,14 @@ class Timing:
                     beats.get(token, float("-inf")), record["monotonic_seconds"]
                 )
         by_attempt = {}
-        measured_attempts = {attempt for attempt, _ in starts}
-        unknown_setup = {
-            record["attempt"]: record["id"]
-            for record in self.records
-            if record["event"] == "unmeasured-initialization"
-            and record.get("group") == group
-            and record["attempt"] not in measured_attempts
-        }
-        incomplete = [
-            {"attempt": attempt, "id": ident}
-            for attempt, ident in unknown_setup.items()
-        ]
+        incomplete = []
+        if group == "setup":
+            measured_attempts = {attempt for attempt, _ in starts}
+            incomplete = [
+                {"attempt": attempt, "id": "setup/interrupted-initialization"}
+                for attempt in self.earlier_attempts
+                if attempt not in measured_attempts
+            ]
         details = [
             {
                 **record,

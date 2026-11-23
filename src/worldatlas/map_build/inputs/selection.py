@@ -9,7 +9,11 @@ from typing import LiteralString, cast
 from psycopg import Connection
 
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.map_build.division.contracts import CompiledDivision, RuleIndex
+from worldatlas.map_build.division.contracts import (
+    CompiledDivision,
+    RuleIndex,
+    selected_parents,
+)
 from worldatlas.map_build.inputs.selection_types import (
     BuildSelection,
     ConstructionRecord,
@@ -180,14 +184,17 @@ def read_selection(
     }
 
 
-def prepare_geography(domain: GeographicSelection) -> dict[int, CompiledDivision]:
+def prepare_geography(
+    domain: GeographicSelection, requested: Iterable[int] | None = None
+) -> dict[int, CompiledDivision]:
     """Check frozen geometry and map codes and assemble the rules for each parent.
 
     Args:
         domain: Geographic part of a frozen selection.
+        requested: Parent IDs to divide, or None for all saved divisions.
 
     Returns:
-        Child entities and assembled rules keyed by parent entity ID.
+        Compiled divisions keyed by parent ID, with ancestors before descendants.
 
     Raises:
         ValueError: The schema, geometry, rules, or bindings are invalid.
@@ -199,7 +206,9 @@ def prepare_geography(domain: GeographicSelection) -> dict[int, CompiledDivision
     for feature in domain["features"]:
         validate_geometry(feature["geometry"])
     index = RuleIndex(domain)
-    compiled = {parent: index.compile(parent) for parent in index.rules}
+    compiled = {
+        parent: index.compile(parent) for parent in selected_parents(domain, requested)
+    }
     validate_map_code_bindings(domain)
     return compiled
 

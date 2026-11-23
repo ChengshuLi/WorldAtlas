@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Rasterize hash-pinned EPSG:4326 polygon land into a one-bit candidate mask."""
 
-import hashlib
 import json
 import math
 import os
@@ -22,7 +21,7 @@ gdal.UseExceptions()
 
 
 def run(
-    config_path: Path | str,
+    configuration_sha256: str,
     output: Path | str,
     grid: Grid,
     *,
@@ -34,7 +33,7 @@ def run(
     """Mark each grid cell whose centre lies in a selected coastline polygon.
 
     Args:
-        config_path: Saved coastline request used for the report checksum.
+        configuration_sha256: Checksum of the saved stage settings.
         output: New directory for the land raster and report.
         grid: Shared physical build grid.
         settings: Local coastline files, selection, and rasterization options.
@@ -45,8 +44,6 @@ def run(
     Returns:
         Report with selected layer counts, the grid, and the land raster's SHA-256.
     """
-    config_path = Path(config_path).resolve()
-    data = config_path.read_bytes()
     width, height = grid.width, grid.height
     west, north, step = grid.west, grid.north, grid.step
     specs = settings['land']
@@ -56,9 +53,7 @@ def run(
     reserve = minimum_free_bytes
     feature_index = settings.get('feature_index', 'row-fids')
     output = Path(output).resolve()
-    paths = [config_path] + [
-        Path(f['path']).resolve() for spec in specs for f in spec['files']
-    ]
+    paths = [Path(f['path']).resolve() for spec in specs for f in spec['files']]
     if len(set(paths)) != len(paths):
         raise ValueError('input paths must be unique')
     if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in paths):
@@ -156,11 +151,9 @@ def run(
     opened = []
     for spec in specs:
         checked_files(spec, files)
-    if config_path.read_bytes() != data:
-        raise ValueError('configuration changed during processing')
     report = {
         'status': 'candidate-only',
-        'configuration_sha256': hashlib.sha256(data).hexdigest(),
+        'configuration_sha256': configuration_sha256,
         'grid': vars(grid),
         'feature_counts': feature_counts,
         'feature_index': feature_index,
@@ -171,8 +164,6 @@ def run(
         'rasterization': 'GDAL default polygon rasterization, ALL_TOUCHED off',
         'limitations': 'Candidate mask only; source decisions and geographic correctness require review.',
     }
-    with (output / 'config.json').open('xb') as f:
-        f.write(data)
     with (output / 'report.json').open('x') as f:
         json.dump(report, f, indent=2)
         f.write('\n')

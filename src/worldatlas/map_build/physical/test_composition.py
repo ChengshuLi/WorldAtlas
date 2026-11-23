@@ -42,7 +42,7 @@ class ComposeTests(unittest.TestCase):
     def build(self, output, **options):
         settings = json.loads(self.p.read_bytes())
         return b.main(
-            self.p, output, Grid(**settings['grid']), land=settings['land'], water=settings['water'],
+            sha256_file(self.p), output, Grid(**settings['grid']), land=settings['land'], water=settings['water'],
             minimum_free_bytes=settings['minimum_free_bytes'],
             rows_per_block=settings.get('rows_per_block', 128), files=RunFilePins(), **options,
         )
@@ -124,22 +124,17 @@ class ComposeTests(unittest.TestCase):
         self.assertEqual(offsets, [2**32 - 1])
         self.assertEqual(path.read_bytes(), b'')
 
-    def test_report_is_withheld_if_an_input_changes_during_composition(self):
-        for path, message in (
-            (self.p, 'config changed during processing'),
-            (Path(self.cfg['land']['path']), 'land changed during processing'),
-        ):
-            with self.subTest(path=path):
-                original = path.read_bytes()
-                output = self.d / (path.stem + '-changed')
+    def test_report_is_withheld_if_a_mask_changes_during_composition(self):
+        path = Path(self.cfg['land']['path'])
+        original = path.read_bytes()
+        output = self.d / 'changed-land'
 
-                def change(*_, **__):
-                    path.write_bytes(original + b'\n')
+        def change(*_, **__):
+            path.write_bytes(original + b'\n')
 
-                with self.assertRaisesRegex(ValueError, message):
-                    self.build(output, emit=change)
-                self.assertFalse((output / 'report.json').exists())
-                path.write_bytes(original)
+        with self.assertRaisesRegex(ValueError, 'land changed during processing'):
+            self.build(output, emit=change)
+        self.assertFalse((output / 'report.json').exists())
 
     def test_low_disk_space_or_failed_mask_read_leaves_composition_incomplete(self):
         self.cfg['minimum_free_bytes'] = 1

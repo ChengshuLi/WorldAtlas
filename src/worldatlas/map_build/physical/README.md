@@ -4,7 +4,7 @@ Rasterize the selected global coastline polygons and inland-water shards on the 
 
 ## Use
 
-The map builder passes the same `Grid` to the coastline and inland-water rasterizers. To run just the physical build, pass the generated `RUN/physical-build-config.json`. This file contains one top-level grid, the coastline inputs and settings, and the inland-water inputs and settings. The command creates the grid once from the file. Choose an output directory separate from the recorded source directory and supply R2 credentials for uncached remote inputs.
+The map builder passes its grid and resolved settings directly to the physical stages. It saves those settings in `RUN/physical-build-config.json` so you can run just the physical build. The standalone command reads that file and creates the grid once. Choose an output directory separate from the recorded source directory and supply R2 credentials for uncached remote inputs.
 
 ```bash
 python3 -m worldatlas.map_build.physical.build \
@@ -14,6 +14,8 @@ python3 -m worldatlas.map_build.physical.build \
 Use `--resume` after interruption. Completed land, water shards, union and composition are checked against their actual inputs and output hashes. Code changes are recorded as provenance and do not block resume. Partial calculation outputs are retained for inspection. The cache discards incomplete downloads.
 
 ## How it works
+
+The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Before combining water masks, the builder checks each shard report against the expected source, settings and grid. After combining them, it verifies that the input files still match their checksums.
 
 The final `physical/` directory contains `physical-dry.tif`, `rows.u32le`, `runs.u32le` and `report.json`. Physical streams use code 17 for land and code 1 for water. Entity assignments are calculated later using registry bindings.
 

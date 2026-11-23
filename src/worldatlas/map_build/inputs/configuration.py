@@ -23,7 +23,6 @@ type Digest = Annotated[str, StringConstraints(pattern=r"^[0-9a-f]{64}$")]
 type SourceName = Annotated[str, StringConstraints(pattern=r"\S")]
 
 
-@with_config(extra="forbid")
 class FilePin(TypedDict):
     """Identify a local file by path and expected SHA-256."""
 
@@ -31,21 +30,18 @@ class FilePin(TypedDict):
     sha256: Digest
 
 
-@with_config(extra="forbid")
 class LocalFile(FilePin, closed=True):
     """Pin a local source without requiring access to R2."""
 
     size_bytes: NotRequired[ByteCount]
 
 
-@with_config(extra="forbid")
 class CatalogFile(TypedDict, closed=True):
     """Select a raw source by its ID in the frozen catalog."""
 
     r2_source: SourceName
 
 
-@with_config(extra="forbid")
 class ObjectFile(TypedDict, closed=True):
     """Pin a complete R2 object's identity and transfer location."""
 
@@ -56,7 +52,6 @@ class ObjectFile(TypedDict, closed=True):
     source_id: NotRequired[SourceName]
 
 
-@with_config(extra="forbid")
 class ArchiveMember[Archive](TypedDict, closed=True):
     """Pin a local extraction of one member of a remote ZIP file."""
 

@@ -182,15 +182,8 @@ def build_bundle(
     ):
         raise ValueError("the saved geographic selection changed after the build")
 
-    if "saved_configuration_sha256" in report:
-        configuration_path = run / "build-config.json"
-        expected_configuration = report["saved_configuration_sha256"]
-    else:
-        # Older reports pinned only the original request.
-        configuration_path = Path(request_pin["path"])
-        expected_configuration = request_pin["sha256"]
-    configuration_bytes = configuration_path.read_bytes()
-    if hashlib.sha256(configuration_bytes).hexdigest() != expected_configuration:
+    configuration_bytes = (run / "build-config.json").read_bytes()
+    if hashlib.sha256(configuration_bytes).hexdigest() != request_pin["sha256"]:
         raise ValueError("build configuration checksum does not match the report")
     request = json.loads(configuration_bytes)
     validate_replay_sources(request, selection)

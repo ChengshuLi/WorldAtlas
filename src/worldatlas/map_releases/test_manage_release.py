@@ -102,9 +102,7 @@ class BundleTests(unittest.TestCase):
             )
         )
         self.saved_configuration = self.run / "build-config.json"
-        self.saved_configuration.write_text(
-            json.dumps(json.loads(request.read_text()), indent=2) + "\n"
-        )
+        self.saved_configuration.write_bytes(request.read_bytes())
         identity = self.run / "run-identity.json"
         identity.write_text(
             json.dumps(
@@ -156,9 +154,6 @@ class BundleTests(unittest.TestCase):
                     "status": "complete",
                     "original_run_identity": pin_file(identity),
                     "request": pin_file(request),
-                    "saved_configuration_sha256": pin_file(self.saved_configuration)[
-                        "sha256"
-                    ],
                     "comparison": None,
                     "final": {
                         name: pin_file(final / filename)
@@ -221,7 +216,12 @@ class BundleTests(unittest.TestCase):
         del request["sources"]["inland_water"]["release"]
         self.saved_configuration.write_text(json.dumps(request))
         report = json.loads(self.report.read_bytes())
-        report["saved_configuration_sha256"] = pin_file(self.saved_configuration)["sha256"]
+        report["request"]["sha256"] = pin_file(self.saved_configuration)["sha256"]
+        identity_path = self.run / "run-identity.json"
+        identity = json.loads(identity_path.read_bytes())
+        identity["request"] = report["request"]
+        identity_path.write_text(json.dumps(identity))
+        report["original_run_identity"] = pin_file(identity_path)
         self.report.write_text(json.dumps(report))
         build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         self.assertNotIn("inland_water_release", json.loads((self.output / "config.json").read_bytes()))
@@ -247,16 +247,6 @@ class BundleTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "configuration checksum"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
-
-    def test_older_report_can_stage_with_original_request(self):
-        report = json.loads(self.report.read_bytes())
-        del report["saved_configuration_sha256"]
-        self.report.write_text(json.dumps(report))
-        build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
-        archived = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc.1")
-        self.assertEqual(
-            archived["configuration"], json.loads(self.request.read_bytes())
-        )
 
     def test_stage_checks_map_stream_size_when_checksum_matches(self):
         rows = self.run / "final/rows.u32le"

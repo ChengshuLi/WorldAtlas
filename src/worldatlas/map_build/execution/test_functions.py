@@ -10,7 +10,6 @@ from worldatlas.map_build.execution.runtime import (
     Checkpoints,
     RunFilePins,
     Timing,
-    inventory,
     journal_anchor,
     repository_identity,
     verify_anchor,
@@ -174,7 +173,7 @@ class FunctionCheckpointTests(unittest.TestCase):
         ):
             with self.subTest(path=path):
                 with self.assertRaisesRegex(ValueError, message):
-                    inventory([path])
+                    RunFilePins().inventory([path])
 
     def test_preservation_cannot_move_a_file_outside_the_run(self):
         with tempfile.TemporaryDirectory() as temp:

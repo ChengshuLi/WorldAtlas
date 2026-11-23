@@ -4,6 +4,7 @@ import json
 import time
 from collections import Counter
 from collections.abc import Iterable
+from contextlib import ExitStack
 from pathlib import Path
 from typing import Any
 
@@ -123,18 +124,15 @@ def compare(
     names = ("rows.u32le", "runs.u32le")
     if set(reference_sha256) != set(names) or set(candidate_sha256) != set(names):
         raise ValueError("both stream checksums are required for each grid")
-    if (reference / "rows.u32le").stat().st_size != 4 * (grid.height + 1):
-        raise ValueError("reference grid must have the same row count as the candidate")
     start = time.monotonic()
     before = {"reference": reference_sha256, "candidate": candidate_sha256}
-    directory.mkdir()
     changed, transitions, offsets = 0, Counter(), [0]
     bounds = None
-    with (
-        open_grid(candidate, grid) as new,
-        open_grid(reference, grid) as old,
-        (directory / "changes.u32le").open("xb") as stream,
-    ):
+    with ExitStack() as files:
+        new = files.enter_context(open_grid(candidate, grid))
+        old = files.enter_context(open_grid(reference, grid))
+        directory.mkdir()
+        stream = files.enter_context((directory / "changes.u32le").open("xb"))
         for y in range(grid.height):
             a, b = row(old, y, grid.width), row(new, y, grid.width)
             translated = comparable_codes(a[1], lookup)

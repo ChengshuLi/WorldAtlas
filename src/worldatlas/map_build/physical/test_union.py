@@ -59,7 +59,7 @@ class AggregateTests(unittest.TestCase):
     def build(self, output, **options):
         settings = json.loads(self.config.read_bytes())
         return c.run(
-            self.config, output, Grid(**settings['grid']),
+            sha256_file(self.config), output, Grid(**settings['grid']),
             source_manifest=settings['source_manifest'], shards=settings['shards'],
             minimum_free_bytes=settings['minimum_free_bytes'],
             rows_per_block=settings.get('rows_per_block', 128), files=RunFilePins(), **options,
@@ -138,7 +138,7 @@ class AggregateTests(unittest.TestCase):
         self.assertEqual(r['candidate_water_cells'], 4)
         self.assertEqual(
             set(p.name for p in out.iterdir()),
-            {'water-union.tif', 'config.json', 'report.json'},
+            {'water-union.tif', 'report.json'},
         )
         with self.assertRaises(FileExistsError):
             self.build(out)
@@ -170,8 +170,8 @@ class AggregateTests(unittest.TestCase):
 
     def test_union_refuses_to_publish_when_an_input_changes(self):
         for filename, message in (
-            (self.config, 'configuration changed during union'),
-            (Path(self.cfg['shards'][0]['path']), 'input changed during union'),
+            (Path(self.cfg['shards'][0]['report']['path']), 'checkpoint/input hash mismatch'),
+            (Path(self.cfg['shards'][0]['path']), 'checkpoint/input hash mismatch'),
         ):
             with self.subTest(filename=filename):
                 original = filename.read_bytes()
@@ -184,40 +184,6 @@ class AggregateTests(unittest.TestCase):
                     self.build(out, emit=change_input)
                 self.assertFalse((out / 'report.json').exists())
                 filename.write_bytes(original)
-
-    def test_rasterizers_must_be_known_and_agree_across_shards(self):
-        first, second = (shard['report'] for shard in self.cfg['shards'])
-        first_path, second_path = Path(first['path']), Path(second['path'])
-        first_doc = json.loads(first_path.read_bytes())
-        second_doc = json.loads(second_path.read_bytes())
-        kernel = dict(
-            implementation='python-gdal-api-v2', method='tiled', binding_sha256='f' * 64
-        )
-        for metadata, message in (
-            (dict(rasterizer='unknown'), 'unknown water rasterizer'),
-            (dict(rasterizer='gdal'), 'invalid in-process GDAL water kernel'),
-            (dict(rasterizer='native'), 'unknown water rasterizer'),
-            (dict(rasterizer=None), 'unknown water rasterizer'),
-            (
-                dict(
-                    rasterizer='gdal',
-                    gdal_kernel={**kernel, 'implementation': 'python-gdal-c-api-v1'},
-                ),
-                'invalid in-process GDAL water kernel',
-            ),
-            (dict(rasterizer='gdal', gdal_kernel=kernel), 'inconsistent water kernels'),
-            (dict(source_sha256='e' * 64), 'do not cover the pinned source manifest'),
-        ):
-            with self.subTest(message=message):
-                first_path.write_text(json.dumps(first_doc | metadata))
-                second_path.write_text(json.dumps(second_doc))
-                first['sha256'], second['sha256'] = (
-                    sha256_file(first_path),
-                    sha256_file(second_path),
-                )
-                self.config.write_text(json.dumps(self.cfg))
-                with self.assertRaisesRegex(ValueError, message):
-                    self.build(self.d / 'invalid')
 
     def test_raster_pin_requires_matching_bytes_grid_and_crs(self):
         grid = self.cfg['grid']
@@ -239,40 +205,13 @@ class AggregateTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, message):
                     open_mask(dict(spec, sha256=sha256_file(path)), Grid(**grid), RunFilePins())
 
-    def test_union_requires_distinct_pinned_inputs(self):
-        for changes, error in (
-            ({'source_manifest': dict(self.cfg['source_manifest'], sha256='0' * 64)},
-             'pinned source manifest required'),
-            ({'shards': [self.cfg['shards'][0], dict(self.cfg['shards'][1], path=self.cfg['shards'][0]['path'])]},
-             'input paths must be unique'),
-        ):
-            with self.subTest(error=error):
-                self.config.write_text(json.dumps(dict(self.cfg, **changes)))
-                out = self.d / 'invalid'
-                with self.assertRaisesRegex(ValueError, error):
-                    self.build(out)
-                self.assertFalse(out.exists())
-
-    def test_source_manifest_requires_unique_pinned_complete_list(self):
-        pin = self.cfg['source_manifest']
-        path = Path(pin['path'])
-        original = json.loads(path.read_text())
-        for content, error in (
-            (dict(original, file_count=1), 'must list every raw shard'),
-            (dict(original, files=[original['files'][0]] * 2), 'hashes must be unique'),
-        ):
-            with self.subTest(error=error):
-                path.write_text(json.dumps(content))
-                pin['sha256'] = sha256_file(path)
-                self.config.write_text(json.dumps(self.cfg))
-                with self.assertRaisesRegex(ValueError, error):
-                    self.build(self.d / 'invalid')
-        path.write_text(json.dumps(original))
-        pin['sha256'] = sha256_file(path)
-        self.cfg['shards'][0]['report']['sha256'] = '0' * 64
+    def test_union_requires_distinct_masks(self):
+        self.cfg['shards'][1]['path'] = self.cfg['shards'][0]['path']
         self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'pinned shard report required'):
-            self.build(self.d / 'invalid')
+        out = self.d / 'duplicate'
+        with self.assertRaisesRegex(ValueError, 'input paths must be unique'):
+            self.build(out)
+        self.assertFalse(out.exists())
 
     def test_fails_closed_on_incomplete_or_changed(self):
         self.cfg['shards'][0]['sha256'] = '0' * 64
@@ -280,46 +219,6 @@ class AggregateTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.build(self.d / 'bad')
         self.assertFalse((self.d / 'bad').exists())
-
-    def test_requires_complete_pinned_lineage(self):
-        # Duplicate source records, absent reports, and incomplete reports must fail closed.
-        original = self.cfg['shards'][1]['report']
-        self.cfg['shards'][1]['report'] = self.cfg['shards'][0]['report']
-        self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'inconsistent shard report|cover'):
-            self.build(self.d / 'duplicate')
-        self.cfg['shards'][1]['report'] = original
-        rp = Path(original['path'])
-        doc = json.loads(rp.read_text())
-        doc['status'] = 'incomplete-input-issues'
-        rp.write_text(json.dumps(doc))
-        original['sha256'] = sha256_file(rp)
-        self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'incomplete or inconsistent'):
-            self.build(self.d / 'incomplete')
-        doc['status'] = 'candidate-only'
-        doc['policy'] = 'different'
-        rp.write_text(json.dumps(doc))
-        original['sha256'] = sha256_file(rp)
-        self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'inconsistent shard selection policy'):
-            self.build(self.d / 'policy')
-        self.assertFalse((self.d / 'policy').exists())
-        doc['policy'] = 'synthetic'
-        doc['script_sha256'] = 'd' * 64
-        rp.write_text(json.dumps(doc))
-        original['sha256'] = sha256_file(rp)
-        self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'inconsistent shard rasterizer'):
-            self.build(self.d / 'script')
-        doc['script_sha256'] = 'c' * 64
-        doc.pop('rows_in_source')
-        doc['counts'].pop('rows')
-        rp.write_text(json.dumps(doc))
-        original['sha256'] = sha256_file(rp)
-        self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'incomplete or inconsistent'):
-            self.build(self.d / 'missing-counts')
 
     def test_rejects_nonbinary(self):
         p = Path(self.cfg['shards'][0]['path'])

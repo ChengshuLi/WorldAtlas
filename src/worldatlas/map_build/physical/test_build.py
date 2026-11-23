@@ -458,11 +458,53 @@ b.run(sys.argv[1], sys.argv[2])
         pin = union['shards'][0]['report']
         path = Path(pin['path'])
         shard = json.loads(path.read_bytes())
-        path.write_text(json.dumps(dict(shard, policy={'method': 'unexpected'})))
-        pin['sha256'] = sha256_file(path)
-        save_union(union)
-        with self.assertRaisesRegex(ValueError, 'mismatched report: 0'):
-            b.run(self.config, out, resume=True)
+        for changes, message in (
+            (dict(policy={'method': 'unexpected'}), 'mismatched report: 0'),
+            (dict(source_sha256='f' * 64), 'mismatched report: 0'),
+            (dict(rows_in_source=0), 'mismatched report: 0'),
+            (dict(rasterizer='unknown'), 'unknown water rasterizer for shard: 0'),
+            (dict(gdal_kernel={}), 'invalid in-process GDAL water kernel for shard: 0'),
+        ):
+            with self.subTest(changes=changes):
+                path.write_text(json.dumps(dict(shard, **changes)))
+                pin['sha256'] = sha256_file(path)
+                save_union(union)
+                with self.assertRaisesRegex(ValueError, message):
+                    b.run(self.config, out, resume=True)
+
+    def test_shard_rasterizers_must_match_before_union_and_on_resume(self):
+        first = self.raw / 'water.parquet'
+        second = self.raw / 'second.parquet'
+        table = pq.read_table(first).replace_schema_metadata(
+            pq.read_schema(first).metadata | {b'edition': b'second'}
+        )
+        pq.write_table(table, second)
+        self.cfg['inland_water'].update(file_count=2, rasterizer='python')
+        self.cfg['inland_water']['files'].append(
+            dict(path=second.name, sha256=sha256_file(second))
+        )
+        self.config.write_text(json.dumps(self.cfg))
+        message = 'inconsistent water shard rasterizers or kernels'
+
+        def change_producer(path):
+            doc = json.loads(path.read_bytes())
+            path.write_text(json.dumps(dict(doc, script_sha256='f' * 64)))
+
+        def run_mixed(function, *args, **kwargs):
+            result = function(*args, **kwargs)
+            if function is WATER and Path(args[0]) == second:
+                change_producer(Path(args[2]) / 'report.json')
+            return result
+
+        mixed = self.root / 'mixed'
+        with intercept_stages(run_mixed):
+            with self.assertRaisesRegex(ValueError, message):
+                b.run(self.config, mixed)
+        self.assertFalse((mixed / 'union').exists())
+
+        with intercept_stages(AssertionError('unexpected rebuild')):
+            with self.assertRaisesRegex(ValueError, message):
+                b.run(self.config, mixed, resume=True)
 
     def test_completed_resume_revalidates_gdal_kernel_report(self):
         out = self.root / 'finished-gdal'
@@ -554,24 +596,26 @@ b.run(sys.argv[1], sys.argv[2])
     def test_config_or_coastline_changes_during_processing_leave_run_incomplete(self):
         coast = Path(json.loads(self.land_cfg.read_text())['land'][0]['dataset'])
         for path, message in (
-            (self.config, 'pipeline input changed during processing'),
+            (self.config, 'checkpoint/input hash mismatch'),
+            (Path('configs/land.json'), 'checkpoint/input hash mismatch'),
             (coast, 'land source changed during processing'),
         ):
             with self.subTest(path=path):
-                content = path.read_bytes()
+                output = self.root / ('changed-' + path.name)
+                target = path if path.is_absolute() else output / path
+                content = path.read_bytes() if path.is_absolute() else None
 
                 def mutate_after_composing(function, *args, **kwargs):
                     result = function(*args, **kwargs)
                     if function == COMPOSE:
-                        path.write_bytes(content + b'\n')
+                        target.write_bytes(target.read_bytes() + b'\n')
                     return result
-
-                output = self.root / ('changed-' + path.name)
                 with intercept_stages(mutate_after_composing):
                     with self.assertRaisesRegex(ValueError, message):
                         b.run(self.config, output)
                 self.assertFalse((output / 'report.json').exists())
-                path.write_bytes(content)
+                if content is not None:
+                    path.write_bytes(content)
 
     def test_r2_download_is_verified_timed_and_reused_by_next_build(self):
         shard = self.raw / 'water.parquet'
@@ -1186,10 +1230,6 @@ b.run(sys.argv[1], sys.argv[2])
                     b.run(self.config, out)
                 self.assertFalse(out.exists())
 
-        with self.assertRaisesRegex(ValueError, 'must match the build grid'):
-            self.config.write_text(json.dumps(self.cfg))
-            b.run(self.config, out, grid=b.Grid(8, 3, 45))
-        self.assertFalse(out.exists())
 
 
 if __name__ == '__main__':

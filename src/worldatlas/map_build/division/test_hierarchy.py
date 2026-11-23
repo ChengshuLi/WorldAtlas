@@ -12,10 +12,9 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer, patch_rows
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.contracts import RuleIndex
+from worldatlas.map_build.division.contracts import RuleIndex, selected_parents
 from worldatlas.map_build.division.hierarchy import (
     definition,
-    selected_parents,
     substitute,
     HierarchyDivision,
 )
@@ -31,9 +30,9 @@ from worldatlas.map_build.test_support import selection
 from worldatlas.shared.files import sha256_file
 
 
-def compile_divisions(geography):
+def compile_divisions(geography, requested=None):
     index = RuleIndex(geography)
-    return {parent: index.compile(parent) for parent in index.rules}
+    return {parent: index.compile(parent) for parent in selected_parents(geography, requested)}
 
 
 class HierarchyTests(unittest.TestCase):
@@ -367,8 +366,7 @@ class HierarchyTests(unittest.TestCase):
                 grid,
                 root / "physical",
                 root / "direct",
-                {}, compiled_divisions=compile_divisions(geography),
-                requested=[101],
+                {}, compiled_divisions=compile_divisions(geography, [101]),
             )
             self.assertIs(direct.shores(), direct.shores())
             completed = direct.run()
@@ -379,8 +377,7 @@ class HierarchyTests(unittest.TestCase):
                     grid,
                     root / "physical",
                     root / "division",
-                    {}, compiled_divisions=compile_divisions(geography),
-                    requested=[101],
+                    {}, compiled_divisions=compile_divisions(geography, [101]),
                     executor=StageExecutor(
                         Checkpoints(root / "checkpoints", "attempt"), timing
                     ),

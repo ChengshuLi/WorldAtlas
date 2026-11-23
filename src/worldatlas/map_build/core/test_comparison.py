@@ -148,7 +148,7 @@ class ComparisonTests(unittest.TestCase):
                         name: sha256_file(root / reference / name)
                         for name in ("rows.u32le", "runs.u32le")
                     }
-                    with self.assertRaisesRegex(ValueError, "same row count"):
+                    with self.assertRaisesRegex(ValueError, "row count does not match"):
                         compare(
                             root / candidate,
                             root / reference,

@@ -197,13 +197,8 @@ class ActiveTimingTests(unittest.TestCase):
 
     def test_missing_initialization_does_not_invent_a_zero_length_interval(self):
         with tempfile.TemporaryDirectory() as td:
-            timing = Timing(Path(td) / "timing.jsonl", attempt="first")
-            timing.event(
-                {
-                    "event": "unmeasured-initialization",
-                    "id": "setup/interrupted",
-                    "group": "setup",
-                }
+            timing = Timing(
+                Path(td) / "timing.jsonl", attempt="second", earlier_attempts=["first"]
             )
             result = timing.summary(None)["setup"]
             (detail,) = result["interrupted_interval_details"]

@@ -6,6 +6,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import shutil
 import sys
 import threading
@@ -33,6 +34,7 @@ from worldatlas.map_build.inputs.configuration import (
     LandLayer,
     LandSettings,
     LocalFile,
+    PhysicalConfiguration,
     ResolvedLandFile,
     land_dataset_index,
     require_separate_cache_and_output,
@@ -311,26 +313,44 @@ class ProcessingJournal:
 
 
 def run(
-    config_path: Path | str,
+    config_path: Path | str, output: Path | str, *, resume: bool = False
+) -> dict[str, Any]:
+    """Read the standalone physical configuration and build its grid.
+
+    Args:
+        config_path: JSON configuration with the grid, settings and file pins.
+        output: Physical build directory.
+        resume: Whether to continue a run already started.
+
+    Returns:
+        Physical build report with completed outputs and timings.
+    """
+    path = Path(config_path).resolve()
+    data = path.read_bytes()
+    settings = PHYSICAL_CONFIGURATION.validate_json(data, strict=True)
+    request = FilePin(path=str(path), sha256=hashlib.sha256(data).hexdigest())
+    return build(settings, Grid(**settings['grid']), request, output, resume=resume)
+
+
+def build(
+    settings: PhysicalConfiguration,
+    grid: Grid,
+    request: FilePin,
     output: Path | str,
     *,
-    grid: Grid | None = None,
     resume: bool = False,
 ) -> dict[str, Any]:
     """Build or resume the physical grid under an exclusive run lock.
 
     Args:
-        config_path: JSON configuration with the grid, settings and file pins.
+        settings: Resolved file pins and physical stage settings.
+        grid: The grid shared with the map builder.
+        request: Path and checksum of the saved physical configuration.
         output: Directory that holds this physical run.
-        grid: Grid already created by the map builder, if available.
         resume: Whether to continue a run already started.
 
     Returns:
-        Report dictionary with the land, water and physical layer outputs
-        and recorded processing and download times.
-
-    Raises:
-        ValueError: Settings, saved files, or the run lock are incompatible.
+        Physical build report with completed outputs and timings.
     """
     started = time.monotonic()
     output = Path(output).resolve()
@@ -340,7 +360,9 @@ def run(
     with closing(RunLock(lock_path)), ExitStack() as resources:
         journal: list[ProcessingJournal | None] = [None]
         try:
-            return _run(config_path, output, grid, started, resume, journal, resources)
+            return _run(
+                settings, grid, request, output, started, resume, journal, resources
+            )
         except BaseException:
             if journal[0] is not None and not journal[0].finished:
                 journal[0].finish('failed')
@@ -348,9 +370,10 @@ def run(
 
 
 def _run(
-    config_path: Path | str,
+    cfg: PhysicalConfiguration,
+    grid: Grid,
+    request: FilePin,
     output: Path,
-    grid: Grid | None,
     processing_started: float,
     resume: bool,
     journal_slot: list[ProcessingJournal | None],
@@ -359,9 +382,10 @@ def _run(
     """Rasterize the sources, union water masks, and compose the physical grid.
 
     Args:
-        config_path: Physical build settings.
+        cfg: Resolved physical settings used by this run.
+        grid: Shared physical grid.
+        request: File pin for the saved physical configuration.
         output: Locked physical run directory.
-        grid: Existing grid, or None for a standalone build.
         processing_started: Clock reading from the start of the attempt.
         resume: Whether to look for completed outputs before rasterizing.
         journal_slot: Single slot for the active journal so the caller can
@@ -371,14 +395,8 @@ def _run(
     Returns:
         Physical build report, including the completed output file pins.
     """
-    config_path = Path(config_path).resolve()
-    data = config_path.read_bytes()
-    config_digest = hashlib.sha256(data).hexdigest()
-    cfg = PHYSICAL_CONFIGURATION.validate_json(data, strict=True)
-    if grid is None:
-        grid = Grid(**cfg['grid'])
-    elif any(vars(grid)[key] != value for key, value in cfg['grid'].items()):
-        raise ValueError('physical configuration must match the build grid')
+    config_path = Path(request['path'])
+    config_digest = request['sha256']
     grid_settings = vars(grid)
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     workers = cfg.get('max_parallel_shards', 2)
@@ -474,8 +492,6 @@ def _run(
         key: {'path': str(path), 'sha256': hashlib.sha256(content).hexdigest()}
         for key, (path, content) in stage_documents.items()
     }
-    land_path = stage_documents['land_config'][0]
-    water_path = stage_documents['inland_water'][0]
     identity = {
         'schema': 'raw-physical-resume-identity-v1',
         'configuration_sha256': config_digest,
@@ -487,7 +503,7 @@ def _run(
 
     def verify_shard(
         index: int, source_digest: str, saved: ShardMask | None = None
-    ) -> ShardMask:
+    ) -> tuple[ShardMask, tuple[str, ...]]:
         """Read one shard's verified output pins and validate its reported inputs.
 
         Args:
@@ -496,7 +512,7 @@ def _run(
             saved: Verified receipt from an earlier attempt, if applicable.
 
         Returns:
-            Mask and report pins for a completed shard.
+            Verified mask and report pins, followed by the rasterizer identity.
 
         Raises:
             ValueError: The saved pins, actual bytes, or report disagree.
@@ -513,6 +529,9 @@ def _run(
         if saved is not None and saved != receipt:
             raise ValueError(f'water shard checkpoint mismatch: {index}')
         item = read_json(report_path)
+        row_count = item.get('rows_in_source')
+        counts = item.get('counts', {})
+        script = item.get('script_sha256')
         if (
             item.get('status') != 'candidate-only'
             or item.get('source_sha256') != source_digest
@@ -521,9 +540,37 @@ def _run(
             or item.get('policy') != water_cfg['policy']
             or item.get('batch_size') != batch_size
             or item.get('output_sha256') != receipt['sha256']
+            or item.get('invalid_feature_ids')
+            or counts.get('missing_classification', 0)
+            or counts.get('invalid_polygon', 0)
+            or type(row_count) is not int
+            or row_count < 0
+            or row_count != counts.get('rows')
+            or not isinstance(script, str)
+            or not re.fullmatch('[0-9a-f]{64}', script)
         ):
             raise ValueError(f'incomplete water shard or mismatched report: {index}')
-        return receipt
+        rasterizer = item.get('rasterizer')
+        if rasterizer == 'python':
+            return receipt, (script, rasterizer)
+        if rasterizer != 'gdal':
+            raise ValueError(f'unknown water rasterizer for shard: {index}')
+        kernel = item.get('gdal_kernel')
+        if (
+            not isinstance(kernel, dict)
+            or kernel.get('implementation') != 'python-gdal-api-v2'
+            or kernel.get('method') not in ('hybrid', 'tiled')
+            or not isinstance(kernel.get('binding_sha256'), str)
+            or not re.fullmatch('[0-9a-f]{64}', kernel['binding_sha256'])
+        ):
+            raise ValueError(f'invalid in-process GDAL water kernel for shard: {index}')
+        return receipt, (
+            script,
+            rasterizer,
+            kernel['method'],
+            kernel['binding_sha256'],
+            kernel['gdal'],
+        )
 
     if resume:
         previous = read_json(identity_path) if identity_path.is_file() else {}
@@ -550,18 +597,32 @@ def _run(
                 )
             ):
                 raise ValueError('completed physical report mismatch')
-            for key, name in (('land', 'land.tif'), ('union', 'water-union.tif')):
-                stage = read_json(output / key / 'report.json')
+            union = read_json(output / 'union/report.json')
+            for key, name, stage in (
+                ('land', 'land.tif', read_json(output / 'land/report.json')),
+                ('union', 'water-union.tif', union),
+            ):
                 digest = stage['land_sha256' if key == 'land' else 'union_sha256']
                 if checksum(output / key / name) != digest:
                     raise ValueError('completed stage output mismatch: ' + key)
-            union = read_json(output / 'union/report.json')
             saved_shards = union.get('shards')
             if not isinstance(saved_shards, list) or len(saved_shards) != len(raw):
                 raise ValueError('completed shard inventory mismatch')
             for i, (entry, (_, digest, _)) in enumerate(zip(saved_shards, raw)):
                 verify_shard(i, digest, entry)
             physical = read_json(output / 'physical/report.json')
+            files.verify(
+                [
+                    FilePin(
+                        path=str(config_dir / 'union.json'),
+                        sha256=union['configuration_sha256'],
+                    ),
+                    FilePin(
+                        path=str(config_dir / 'compose.json'),
+                        sha256=physical['configuration_sha256'],
+                    ),
+                ]
+            )
             outputs = physical.get('output_sha256', {})
             if outputs != report.get('physical_output_sha256') or any(
                 checksum(output / 'physical' / name) != outputs.get(name)
@@ -658,7 +719,7 @@ def _run(
                 journal.record_download(transfer, 'land')
         unit_start = time.monotonic()
         land.run(
-            land_path,
+            stage_pins['land_config']['sha256'],
             land_dir,
             grid,
             settings=land_cfg,
@@ -684,14 +745,14 @@ def _run(
 
     def build_shard(
         item: tuple[int, tuple[Path, str, FileSpec | None]],
-    ) -> ShardMask:
+    ) -> tuple[ShardMask, tuple[str, ...]]:
         """Validate or build a single water shard's raster.
 
         Args:
             item: Shard index and its (local path, SHA-256, optional R2 pin).
 
         Returns:
-            Dictionary with verified raster and report paths and digests.
+            Verified mask and report pins, followed by the rasterizer identity.
         """
         control.check_cancelled()
         i, (path, digest, remote) = item
@@ -728,23 +789,23 @@ def _run(
                 path,
                 digest,
                 destination,
-                water_path,
+                stage_pins['inland_water']['sha256'],
                 grid,
                 settings=cfg['inland_water'],
                 minimum_free_bytes=reserve,
                 files=files,
                 emit=control.emit,
             )
-        receipt = verify_shard(i, digest)
+        receipt, producer = verify_shard(i, digest)
         journal.unit(
             f'shard-{i:05d}', unit_start, receipt['report']['sha256'], receipt['sha256']
         )
-        return receipt
+        return receipt, producer
 
     # With an empty cache, overlap one R2 download with one rasterization.
     # When all files are local, workers can rasterize concurrently.
     # Keep masks in manifest order regardless of when each worker finishes.
-    completed_shards: dict[int, ShardMask] = {}
+    completed_shards: dict[int, tuple[ShardMask, tuple[str, ...]]] = {}
     with (
         control.stage() as cancelled,
         ThreadPoolExecutor(max_workers=min(workers, len(raw))) as pool,
@@ -761,7 +822,9 @@ def _run(
             for future in futures:
                 future.cancel()
             raise
-    shards = [completed_shards[i] for i in range(len(raw))]
+    if len({producer for _, producer in completed_shards.values()}) != 1:
+        raise ValueError('inconsistent water shard rasterizers or kernels')
+    shards = [completed_shards[i][0] for i in range(len(raw))]
     water_manifest: FilePin = stage_pins['inland_water']
     union_cfg: dict[str, Any] = {
         'schema': 'water-union-v1',
@@ -778,24 +841,28 @@ def _run(
         'shards': shards,
     }
 
-    def bind_config(path: Path, value: dict[str, Any]) -> None:
+    def bind_config(path: Path, value: dict[str, Any]) -> FilePin:
         """Save the generated settings or check they match the previous attempt.
 
         Args:
             path: Configuration file in the current run.
             value: Expected JSON settings.
 
+        Returns:
+            File pin for the saved stage settings.
+
         Raises:
             ValueError: An existing file differs or belongs to a fresh run.
         """
+        data = json_bytes(value, sort_keys=False)
         if path.exists():
-            if not resume or read_json(path) != value:
+            if not resume or path.read_bytes() != data:
                 raise ValueError('resumed stage config mismatch')
         else:
-            write_json(path, value, sort_keys=False)
+            write_bytes_atomic(path, data)
+        return FilePin(path=str(path), sha256=hashlib.sha256(data).hexdigest())
 
-    union_config = output / 'configs/union.json'
-    bind_config(union_config, union_cfg)
+    union_config = bind_config(config_dir / 'union.json', union_cfg)
     union_dir = output / 'union'
     union_checkpoint = prior('union') if resume else None
     if union_checkpoint:
@@ -805,7 +872,7 @@ def _run(
             or checksum(union_dir / 'water-union.tif')
             != union_checkpoint['output_sha256']
             or union_report.get('status') != 'candidate-only'
-            or union_report.get('configuration_sha256') != checksum(union_config)
+            or union_report.get('configuration_sha256') != union_config['sha256']
             or union_report.get('grid') != grid_settings
             or union_report.get('union_sha256') != union_checkpoint['output_sha256']
         ):
@@ -815,7 +882,7 @@ def _run(
             quarantine(union_dir)
         unit_start = time.monotonic()
         water_union.run(
-            union_config,
+            union_config['sha256'],
             union_dir,
             grid,
             source_manifest=water_manifest,
@@ -855,8 +922,7 @@ def _run(
         'land': land_mask,
         'water': water_mask,
     }
-    compose_config = output / 'configs/compose.json'
-    bind_config(compose_config, compose_cfg)
+    compose_config = bind_config(config_dir / 'compose.json', compose_cfg)
     physical_dir = output / 'physical'
     physical_checkpoint = prior('physical') if resume else None
     if physical_checkpoint:
@@ -868,7 +934,7 @@ def _run(
             or checksum(physical_dir / 'rows.u32le')
             != physical_checkpoint['output_sha256']
             or physical.get('status') != 'candidate-only'
-            or physical.get('configuration_sha256') != checksum(compose_config)
+            or physical.get('configuration_sha256') != compose_config['sha256']
             or physical.get('grid') != grid_settings
             or any(
                 checksum(physical_dir / name) != outputs.get(name)
@@ -881,7 +947,7 @@ def _run(
             quarantine(physical_dir)
         unit_start = time.monotonic()
         composition.main(
-            compose_config,
+            compose_config['sha256'],
             physical_dir,
             grid,
             land=land_mask,
@@ -903,16 +969,14 @@ def _run(
             checksum(physical_dir / 'report.json'),
             physical['output_sha256']['rows.u32le'],
         )
-    for p, original in ((config_path, data), *stage_documents.values()):
-        if p.read_bytes() != original:
-            raise ValueError(f'pipeline input changed during processing: {p}')
+    files.verify([request, *stage_pins.values(), union_config, compose_config])
     if (not land_downloads or land_checkpoint is None) and any(
         checksum(p['path']) != p['sha256'] for p in source_pins
     ):
         raise ValueError('land source changed during processing')
     report = {
         'status': 'candidate-only',
-        'configuration': {'path': str(config_path), 'sha256': config_digest},
+        'configuration': request,
         'grid': grid_settings,
         **stage_pins,
         'water_batch_size': batch_size,

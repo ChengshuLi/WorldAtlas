@@ -41,6 +41,7 @@ from worldatlas.map_build.execution.runtime import (
 )
 from worldatlas.map_build.inputs.configuration import (
     BUILD_CONFIGURATION,
+    FilePin,
     PhysicalConfiguration,
     catalog_source_ids,
     physical_configuration,
@@ -210,10 +211,10 @@ class Pipeline:
         """
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
-        self.config_path = Path(config).resolve(strict=True)
-        config_bytes = self.config_path.read_bytes()
+        config_path = Path(config).resolve(strict=True)
+        config_bytes = config_path.read_bytes()
         self.config_pin = {
-            "path": str(self.config_path),
+            "path": str(config_path),
             "sha256": hashlib.sha256(config_bytes).hexdigest(),
         }
         self.cfg = BUILD_CONFIGURATION.validate_json(config_bytes, strict=True)
@@ -229,7 +230,9 @@ class Pipeline:
         self.selection = self._load_selection(
             catalog_source_ids(self.cfg["sources"]), selection
         )
-        self.compiled_divisions = prepare_geography(self.selection["geography"])
+        self.compiled_divisions = prepare_geography(
+            self.selection["geography"], self.requested_parents
+        )
         if "coastal_band_metres" not in self.cfg and any(
             rule["operation"] == "nearest_coastal_water"
             for division in self.compiled_divisions.values()
@@ -251,7 +254,7 @@ class Pipeline:
             write_json(self.out / "input-selection.json", self.selection)
         self.run_lock = RunLock(self.out / "run.lock")
         try:
-            self._start_attempt(saved_identity)
+            self._start_attempt(saved_identity, config_bytes)
             self._record_setup_timing(setup_started, setup_utc)
             self.checkpoints.preserve("failure", [self.out / "failure.json"])
         except BaseException:
@@ -385,18 +388,19 @@ class Pipeline:
         if self.physical_reuse is not None:
             self.identity["physical_reuse"] = self.physical_reuse
 
-    def _start_attempt(self, saved_identity: RunIdentity | None) -> None:
+    def _start_attempt(
+        self, saved_identity: RunIdentity | None, config_bytes: bytes
+    ) -> None:
         """Prepare the run's saved inputs and capture the code for this attempt.
 
         Args:
             saved_identity: Saved run identity on resume.
+            config_bytes: Original request bytes used to load the settings.
 
         Raises:
             ValueError: Saved settings, identity, checkpoints or timing records changed.
         """
         self.saved_config = self.out / "build-config.json"
-        config_bytes = json_bytes(self.cfg)
-        self.saved_config_sha256 = hashlib.sha256(config_bytes).hexdigest()
         if saved_identity is not None:
             saved = dict(saved_identity)
             # Earlier run identities also recorded the first attempt's provenance.
@@ -455,6 +459,11 @@ class Pipeline:
             resume=self.resume,
             attempt=self.attempt,
             heartbeat_seconds=1.0,
+            earlier_attempts=(
+                path.name
+                for path in self.attempt_dir.parent.iterdir()
+                if path.is_dir() and path != self.attempt_dir
+            ),
         )
         setup_finished = time.monotonic()
         token = uuid.uuid4().hex
@@ -478,12 +487,6 @@ class Pipeline:
                 "monotonic_seconds": setup_finished,
             }
         )
-        if self.resume:
-            self.timing.record_interrupted_setup(
-                earlier_attempt.name
-                for earlier_attempt in self.attempt_dir.parent.iterdir()
-                if earlier_attempt != self.attempt_dir
-            )
         self.timing.mark_complete("setup")
         write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
 
@@ -599,11 +602,15 @@ class Pipeline:
             Directory containing the physical row-run files and report.
         """
         request = self.out / "physical-build-config.json"
+        data = json_bytes(self.physical_config)
         if request.exists():
-            if request.read_bytes() != json_bytes(self.physical_config):
+            if request.read_bytes() != data:
                 raise ValueError("saved physical build configuration changed")
         else:
-            write_json(request, self.physical_config)
+            write_bytes_atomic(request, data)
+        request_pin = FilePin(
+            path=str(request), sha256=hashlib.sha256(data).hexdigest()
+        )
         if self.physical_reuse is not None:
             verify_pins(self.physical_reuse["pins"])
             return Path(self.physical_reuse["source_run"]) / "physical" / "physical"
@@ -621,14 +628,15 @@ class Pipeline:
                     "physical",
                     "physical",
                     partial(
-                        physical_build.run,
-                        request,
+                        physical_build.build,
+                        self.physical_config,
+                        self.grid,
+                        request_pin,
                         self.out / 'physical',
-                        grid=self.grid,
                         resume=marker.is_file(),
                     ),
                     timing=self.timing,
-                    inputs=[pin_file(request)],
+                    inputs=[request_pin],
                     outputs=[self.out / "physical"],
                     resume_marker=marker,
                 )
@@ -662,7 +670,6 @@ class Pipeline:
             self.out / "division",
             dict(self.cfg),
             compiled_divisions=self.compiled_divisions,
-            requested=self.requested_parents,
             reuse=previous,
             executor=StageExecutor(self.checkpoints, self.timing),
         )
@@ -742,9 +749,7 @@ class Pipeline:
             self.timing.mark_complete("package")
             with self.timing.measure("verification", "stage-total"):
                 verify_pins(physical_inputs)
-                if pin_file(self.config_path) != self.config_pin:
-                    raise ValueError("source configuration changed during pipeline")
-                if sha256_file(self.saved_config) != self.saved_config_sha256:
+                if sha256_file(self.saved_config) != self.config_pin["sha256"]:
                     raise ValueError(
                         "saved build configuration changed during pipeline"
                     )
@@ -764,7 +769,6 @@ class Pipeline:
                 "schema": "worldatlas-end-to-end-report-v2",
                 "status": "complete",
                 "request": self.config_pin,
-                "saved_configuration_sha256": self.saved_config_sha256,
                 "runner": pin_file(__file__),
                 "original_run_identity": pin_file(self.out / "run-identity.json"),
                 "stages": stages,

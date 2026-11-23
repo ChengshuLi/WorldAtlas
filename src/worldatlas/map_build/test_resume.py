@@ -75,7 +75,7 @@ class ExecutorResumeTests(unittest.TestCase):
     def test_changed_code_is_recorded_and_resume_keeps_the_original_identity(self):
         first = self.runner()
         self.assertEqual(
-            read_json(self.out / "build-config.json"), read_json(self.config)
+            (self.out / "build-config.json").read_bytes(), self.config.read_bytes()
         )
         first.close()
         identity_path = self.out / "run-identity.json"
@@ -122,12 +122,14 @@ class ExecutorResumeTests(unittest.TestCase):
         interrupted = self.out / "attempts" / "interrupted"
         interrupted.mkdir()
         resumed = self.runner(resume=True)
-        incomplete = [
-            event
-            for event in resumed.timing.records
-            if event["event"] == "unmeasured-initialization"
-        ]
-        self.assertEqual([event["attempt"] for event in incomplete], ["interrupted"])
+        summary = resumed.timing.summary(None)["setup"]
+        self.assertEqual(
+            [event["attempt"] for event in summary["unmeasured_interrupted_attempts"]],
+            ["interrupted"],
+        )
+        self.assertNotIn(
+            "unmeasured-initialization", (self.out / "timing-events.jsonl").read_text()
+        )
         resumed.close()
         resumed_again = self.runner(resume=True)
         summary = resumed_again.timing.summary(None)["setup"]

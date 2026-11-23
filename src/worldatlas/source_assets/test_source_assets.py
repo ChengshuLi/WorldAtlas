@@ -161,9 +161,13 @@ class DownloadTest(unittest.TestCase):
             SourceCache(self.directory).acquire(self.source)
         self.assertEqual(self.storage.get_object.call_count, 1)
 
-    def test_zip_member_requires_a_file_pin_for_its_archive(self):
-        with self.assertRaisesRegex(ValueError, 'archive must be a pinned file'):
-            self.cache.acquire(dict(self.source, archive='coast.zip', member='coast.shp'))
+    def test_zip_member_requires_a_direct_object_pin_for_its_archive(self):
+        nested = dict(self.source, archive=self.source, member='inner.zip')
+        for archive in ('coast.zip', nested):
+            with self.subTest(archive=archive):
+                spec = dict(self.source, archive=archive, member='coast.shp')
+                with self.assertRaisesRegex(ValueError, 'archive must be a pinned R2 object'):
+                    self.cache.acquire(spec)
         self.storage.get_object.assert_not_called()
 
     def test_verifies_cache_file_published_by_a_competing_download(self):

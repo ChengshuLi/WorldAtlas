@@ -1,6 +1,7 @@
 """Compile the six geographic operations and their relational input contracts."""
 
 from collections import defaultdict
+from collections.abc import Iterable
 from dataclasses import dataclass
 from itertools import chain
 from typing import cast
@@ -14,6 +15,61 @@ from worldatlas.map_build.inputs.selection_types import (
     RuleFeatureRole,
     RuleTarget,
 )
+
+
+def selected_parents(
+    geography: GeographicSelection, requested: Iterable[int] | None
+) -> list[int]:
+    """Find the requested divisions and include their ancestors.
+
+    Args:
+        geography: Frozen entities and subdivision rules.
+        requested: Parent IDs to divide, or None for all configured parents.
+
+    Returns:
+        Entity IDs ordered with ancestors before descendants.
+
+    Raises:
+        ValueError: A parent needs missing rules or the hierarchy has a cycle.
+    """
+    entities = {e["id"]: e for e in geography["entities"]}
+    available = {r["parent_id"] for r in geography["rules"]}
+    chosen = available if requested is None else set(requested)
+    if chosen - available:
+        raise ValueError("requested parent has no selected subdivision rules")
+    selected = set()
+    for ident in chosen:
+        while ident is not None:
+            if ident not in entities:
+                raise ValueError("geographic hierarchy has a missing ancestor")
+            if ident in selected:
+                break
+            selected.add(ident)
+            ident = entities[ident]["parent_id"]
+    if selected - available:
+        raise ValueError("a required ancestor has no selected subdivision rules")
+
+    def depth(ident: int | None) -> int:
+        """Count the path from an entity to the top of the hierarchy.
+
+        Args:
+            ident: Starting entity, or None above the root.
+
+        Returns:
+            Number of entities on the path, including the starting entity.
+
+        Raises:
+            ValueError: The path visits the same entity twice.
+        """
+        seen = set()
+        while ident is not None:
+            if ident in seen:
+                raise ValueError("geographic hierarchy contains a cycle")
+            seen.add(ident)
+            ident = entities[ident]["parent_id"]
+        return len(seen)
+
+    return sorted(selected, key=lambda ident: (depth(ident), ident))
 
 
 class CompiledTarget(RuleTarget):

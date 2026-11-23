@@ -400,7 +400,7 @@ class Fixture(unittest.TestCase):
         with patch.object(pipeline, "read_selection", side_effect=AssertionError("unexpected live read")):
             with self.assertRaisesRegex(ValueError, "Omit --selection"):
                 pipeline.Pipeline(
-                    runner.config_path,
+                    Path(runner.config_pin["path"]),
                     runner.out,
                     work_dir=self.root,
                     resume=True,
@@ -409,7 +409,7 @@ class Fixture(unittest.TestCase):
             saved.unlink()
             with self.assertRaises(FileNotFoundError) as error:
                 pipeline.Pipeline(
-                    runner.config_path,
+                    Path(runner.config_pin["path"]),
                     runner.out,
                     work_dir=self.root,
                     resume=True,
@@ -563,13 +563,13 @@ class Fixture(unittest.TestCase):
 
     def test_resume_rejects_changed_build_configuration(self):
         first = self.make()
-        config = read_json(first.config_path)
+        config = read_json(Path(first.config_pin["path"]))
         first.close()
         config["selection_notes"] = "changed after starting"
-        first.config_path.write_text(json.dumps(config))
+        Path(first.config_pin["path"]).write_text(json.dumps(config))
         with self.assertRaisesRegex(ValueError, "resume request, input selection or output identity changed"):
             pipeline.Pipeline(
-                first.config_path,
+                Path(first.config_pin["path"]),
                 first.out,
                 work_dir=self.root,
                 resume=True,
@@ -771,7 +771,7 @@ class Fixture(unittest.TestCase):
             runner.physical()
         config_path.write_bytes(original_config)
         reused = pipeline.Pipeline(
-            runner.config_path,
+            Path(runner.config_pin["path"]),
             self.root / "reused",
             work_dir=self.root,
             reuse_from=runner.out,

@@ -114,9 +114,10 @@ def open_grid(
                 raise ValueError('incomplete u32 stream')
             arrays.append(np.memmap(path, dtype='<u4', mode='r'))
         rows, runs = arrays
+        if len(rows) != grid.height + 1:
+            raise ValueError('row-run stream row count does not match the grid')
         if (
-            len(rows) != grid.height + 1
-            or len(runs) % 2
+            len(runs) % 2
             or rows[0] != 0
             or int(rows[-1]) != len(runs) // 2
             or np.any(rows[1:] <= rows[:-1])

@@ -25,7 +25,7 @@ from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
 from worldatlas.map_build.inputs import selection as selection_inputs
 from worldatlas.map_build.inputs.selection import read_selection
-from worldatlas.shared.files import compact_json_bytes, pin_file, read_json, write_json
+from worldatlas.shared.files import compact_json_bytes, pin_file, read_json, sha256_file, write_json
 
 
 @unittest.skipUnless(
@@ -372,12 +372,9 @@ class EndToEndTests(unittest.TestCase):
                     },
                 )
                 comparison_pins = {
-                    f"reference_{name}": pin_file(path)
-                    for name, path in (
-                        ("rows", release_rows),
-                        ("runs", release_runs),
-                        ("config", release_config),
-                    )
+                    "reference_rows": pin_file(release_rows),
+                    "reference_runs": pin_file(release_runs),
+                    "reference_config": release_config,
                 }
                 physical_only = Pipeline(
                     cfg,
@@ -425,11 +422,14 @@ class EndToEndTests(unittest.TestCase):
                 )
                 original_config = cfg.read_bytes()
                 cfg.write_bytes(original_config + b"\n")
-                with self.assertRaisesRegex(
-                    ValueError, "source configuration changed during pipeline"
-                ):
-                    changed.run()
-                self.assertFalse((changed.out / "report.json").exists())
+                changed_report = changed.run()
+                self.assertEqual(
+                    changed_report["request"]["sha256"],
+                    sha256_file(changed.out / "build-config.json"),
+                )
+                self.assertEqual(
+                    (changed.out / "build-config.json").read_bytes(), original_config
+                )
                 cfg.write_bytes(original_config)
 
                 changed_snapshot = Pipeline(

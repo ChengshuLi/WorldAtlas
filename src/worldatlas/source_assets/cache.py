@@ -74,6 +74,30 @@ def _location(spec: FileSpec) -> tuple[str, str]:
     return bucket, key
 
 
+def _zip_member(spec: FileSpec) -> tuple[FileSpec, str]:
+    """Read the direct archive pin and safe relative member name.
+
+    Args:
+        spec: ZIP member pin.
+
+    Returns:
+        The archive pin and the path of the member inside it.
+
+    Raises:
+        ValueError: The archive pin or member name is invalid.
+    """
+    archive, member = spec["archive"], spec.get("member")
+    if not isinstance(archive, dict) or "archive" in archive:
+        raise ValueError("ZIP archive must be a pinned R2 object")
+    if (
+        not isinstance(member, str)
+        or "\\" in member
+        or any(part in ("", ".", "..") for part in member.split("/"))
+    ):
+        raise ValueError("unsafe ZIP member")
+    return archive, member
+
+
 def validate_object_pin(spec: FileSpec) -> None:
     """Validate a complete, direct R2 object reference.
 
@@ -153,77 +177,59 @@ class SourceCache:
         Raises:
             ValueError: A pin or member path is invalid.
         """
-        path, _, _, _ = self._plan(spec)
+        path, _, _ = self._entry(spec)
         return path
 
-    def _plan(
-        self, spec: FileSpec
-    ) -> tuple[Path, str, int, Callable[[IO[bytes]], None]]:
-        """Resolve the local name, byte pin, and acquisition for one input.
+    def _entry(self, spec: FileSpec) -> tuple[Path, str, int]:
+        """Locate a pinned object or member without preparing a download.
 
         Args:
-            spec: A direct R2 object or a ZIP member and its archive pin.
+            spec: A direct R2 pin or a ZIP member with its archive pin.
 
         Returns:
-            (path, SHA-256, byte count, writer). The writer fetches the bytes
-            into an open file when the cache does not already have them.
+            The cache path, expected SHA-256, and expected byte count.
         """
         digest, size = _fingerprint(spec)
-        if "archive" not in spec:
-            bucket, key = _location(spec)
+        if "archive" in spec:
+            archive, member = _zip_member(spec)
+            archive_digest, _ = _fingerprint(archive)
+            _location(archive)
+            path = self.directory / "zip-members" / archive_digest / member
+        else:
+            _, key = _location(spec)
             path = self.directory / digest / Path(key).name
-            return (
-                path,
-                digest,
-                size,
-                lambda output: self._download(bucket, key, size, output),
-            )
+        return path, digest, size
 
-        archive, member = spec["archive"], spec.get("member")
-        if not isinstance(archive, dict):
-            raise ValueError("ZIP archive must be a pinned file")
-        if (
-            not isinstance(member, str)
-            or "\\" in member
-            or any(part in ("", ".", "..") for part in member.split("/"))
-        ):
-            raise ValueError("unsafe ZIP member")
-        archive_path, archive_digest, archive_size, fetch = self._plan(archive)
-        path = self.directory / "zip-members" / archive_digest / member
-
-        def extract(output: IO[bytes]) -> None:
-            """Copy the selected member of the verified local ZIP.
-
-            Args:
-                output: Open temporary file for the extracted member.
-            """
-            local = self._verified_file(
-                archive_path, archive_digest, archive_size, fetch
-            )
-            with zipfile.ZipFile(local) as packed:
-                with packed.open(archive_member(packed, member)) as source:
-                    shutil.copyfileobj(source, output, 1 << 20)
-
-        return path, digest, size, extract
-
-    def _verified_file(
-        self,
-        path: Path,
-        digest: str,
-        size: int,
-        write: Callable[[IO[bytes]], None],
-    ) -> Path:
-        """Return a verified file, publishing new bytes only after they pass checks.
+    def _write(self, spec: FileSpec, size: int, output: IO[bytes]) -> None:
+        """Write a whole R2 object or extract one member of a verified ZIP.
 
         Args:
-            path: Final cache path.
-            digest: Expected SHA-256.
+            spec: The requested object's or member's pin.
             size: Expected byte count.
-            write: Callback that writes the complete file to a temporary destination.
+            output: Open temporary file to receive the bytes.
+        """
+        if "archive" not in spec:
+            bucket, key = _location(spec)
+            self._download(bucket, key, size, output)
+            return
+
+        archive, member = _zip_member(spec)
+        with zipfile.ZipFile(self.acquire(archive)) as packed:
+            with packed.open(archive_member(packed, member)) as source:
+                shutil.copyfileobj(source, output, 1 << 20)
+
+    def acquire(self, spec: FileSpec) -> Path:
+        """Reuse or fetch one complete R2 object or requested ZIP member.
+
+        Publish a new file only after its size and checksum pass verification.
+
+        Args:
+            spec: Expected file bytes and their R2 or ZIP location.
 
         Returns:
-            The verified cache path.
+            The verified local file path.
         """
+        path, digest, size = self._entry(spec)
         identity = (path, digest, size)
         if identity in self._verified:
             return path
@@ -237,7 +243,7 @@ class SourceCache:
             pending = Path(output.name)
             try:
                 with output:
-                    write(output.file)
+                    self._write(spec, size, output.file)
                 _check_file(pending, digest, size)
                 try:
                     os.link(pending, path)
@@ -249,17 +255,6 @@ class SourceCache:
                 pending.unlink(missing_ok=True)
         self._verified.add(identity)
         return path
-
-    def acquire(self, spec: FileSpec) -> Path:
-        """Reuse or fetch one complete R2 object or requested ZIP member.
-
-        Args:
-            spec: Expected file bytes and their R2 or ZIP location.
-
-        Returns:
-            The verified local file path.
-        """
-        return self._verified_file(*self._plan(spec))
 
     def _download(self, bucket: str, key: str, size: int, output: IO[bytes]) -> None:
         """Stream one R2 object, check its byte count, and record the transfer time.

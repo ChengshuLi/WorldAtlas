@@ -67,7 +67,7 @@ class RasterizeLandTests(unittest.TestCase):
             {'minimum_free_bytes': settings.pop('minimum_free_bytes', 0)}, strict=True,
         )
         return b.run(
-            config, output, grid,
+            sha256_file(config), output, grid,
             settings=TypeAdapter(LandSettings[LocalFile]).validate_python(settings, strict=True),
             minimum_free_bytes=controls['minimum_free_bytes'], files=RunFilePins(), **kwargs,
         )
@@ -190,18 +190,7 @@ class RasterizeLandTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'unpinned shapefile companion'):
             checked_files(spec, RunFilePins())
 
-    def test_land_raster_requires_current_inputs_through_to_publication(self):
-        original = self.config.read_bytes()
-        output = self.d / 'changed'
-
-        def change_config(*_, **__):
-            self.config.write_bytes(original + b'\n')
-
-        with self.assertRaisesRegex(ValueError, 'configuration changed during processing'):
-            self.rasterize(self.config, output, self.grid, emit=change_config)
-        self.assertFalse((output / 'report.json').exists())
-        self.config.write_bytes(original)
-
+    def test_missing_indexed_feature_leaves_no_report(self):
         with patch.object(ogr.Layer, 'GetFeature', return_value=None):
             with self.assertRaisesRegex(ValueError, 'indexed land feature missing'):
                 self.rasterize(self.config, self.d / 'missing', self.grid)

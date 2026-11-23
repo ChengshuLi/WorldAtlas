@@ -80,7 +80,7 @@ class WaterShardTests(unittest.TestCase):
         if engine is not None:
             settings['rasterizer'] = engine
         return build.run(
-            source, digest, output, config, grid,
+            source, digest, output, sha256_file(config), grid,
             settings=TypeAdapter(WaterSettings).validate_python(settings, strict=True),
             minimum_free_bytes=reserve, files=RunFilePins(), **kwargs,
         )
@@ -742,23 +742,17 @@ class WaterShardTests(unittest.TestCase):
                 self.rasterize(source, digest, out, self.config, self.grid)
         self.assertFalse((out / 'report.json').exists())
 
-    def test_water_report_requires_unchanged_source_and_config(self):
+    def test_water_report_requires_unchanged_source(self):
         source, digest = self.fixture()
-        for path, message in (
-            (source, 'source changed during processing'),
-            (self.config, 'configuration changed during processing'),
-        ):
-            with self.subTest(path=path):
-                original = path.read_bytes()
-                out = self.path / (path.stem + '-changed')
+        original = source.read_bytes()
+        out = self.path / 'changed-source'
 
-                def change(*_, **__):
-                    path.write_bytes(original + b'\n')
+        def change(*_, **__):
+            source.write_bytes(original + b'\n')
 
-                with self.assertRaisesRegex(ValueError, message):
-                    self.rasterize(source, digest, out, self.config, self.grid, emit=change)
-                self.assertFalse((out / 'report.json').exists())
-                path.write_bytes(original)
+        with self.assertRaisesRegex(ValueError, 'source changed during processing'):
+            self.rasterize(source, digest, out, self.config, self.grid, emit=change)
+        self.assertFalse((out / 'report.json').exists())
 
     def test_reports_source_id_for_missing_and_empty_selected_geometry(self):
         source, _ = self.fixture()

@@ -115,7 +115,7 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 
 | File or directory | Purpose |
 | --- | --- |
-| `build-config.json` | Saves the settings used by the build. The completed report pins its checksum for release staging. |
+| `build-config.json` | Keeps the exact input configuration bytes. Release staging verifies this copy using the original request checksum. |
 | `input-selection.json` | Preserves the rules, geometry, entity IDs, map-code bindings and catalog entries the builder checked. Resume and replay use this snapshot. |
 | `run-identity.json` | Records the options and input checksums required to resume the same run. |
 | `physical-build-config.json` | Lets the standalone physical command read the grid, coastline settings, and inland-water settings and file pins from one file. |
@@ -157,7 +157,7 @@ Start with `build.py`. Its `main()` reads the command options, and `Pipeline.run
 | --- | --- |
 | [`inputs/`](inputs/README.md) | Reads rules, coordinates and source records from Neon. |
 | [`physical/`](physical/README.md) | Turns coastline and inland-water polygons into the land/water grid. |
-| [`division/hierarchy.py`](division/hierarchy.py) | Chooses which parents to divide, starting at World. Reuses earlier divisions when their inputs match. |
+| [`division/hierarchy.py`](division/hierarchy.py) | Runs the selected parent divisions in order, starting at World. Reuses earlier divisions when their inputs match. |
 | [`division/`](division/README.md) | Runs the rules for one parent, merges the assignments and checks that each cell has an owner. |
 | [`land/`](land/README.md) | Finds connected pieces of land and supplies the tools for assigning islands by distance. |
 | [`water/`](water/README.md) | Finds shores and identifies which land owners border a basin. |
